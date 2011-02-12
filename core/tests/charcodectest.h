@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KCHARCODECTEST_H
-#define KCHARCODECTEST_H
+#ifndef CHARCODECTEST_H
+#define CHARCODECTEST_H
 
 // Qt
 #include <QtCore/QObject>
@@ -30,14 +30,16 @@
 namespace Okteta
 {
 
-class KCharCodecTest : public QObject
+class CharCodecTest : public QObject
 {
   Q_OBJECT
 
   private Q_SLOTS: // test functions
     void initTestCase();
     void cleanupTestCase();
-    void testCodecNames();
+
+    void testCreateCodec_data();
+    void testCreateCodec();
 };
 
 }

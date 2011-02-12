@@ -134,14 +134,14 @@ target_link_libraries( piecetablebytearraymodelversionableiftest
 )
 
 
-########### kcharcodectest ###############
+########### charcodectest ###############
 
-set( kcharcodectest_SRCS
-  kcharcodectest.cpp
+set( charcodectest_SRCS
+  charcodectest.cpp
 )
 
-kde4_add_unit_test( kcharcodectest  TESTNAME libokteta-core-kcharcodectest  ${kcharcodectest_SRCS})
-target_link_libraries( kcharcodectest
+kde4_add_unit_test( charcodectest  TESTNAME libokteta-core-charcodectest  ${charcodectest_SRCS})
+target_link_libraries( charcodectest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 

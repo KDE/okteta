@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcharcodectest.h"
+#include "charcodectest.h"
 
 // test object
 #include <charcodec.h>
@@ -38,31 +38,37 @@ namespace Okteta
 KComponentData* componentData;
 
 
-void KCharCodecTest::initTestCase()
+void CharCodecTest::initTestCase()
 {
     componentData = new KComponentData( "KTextCharCodecTest" );
 }
 
-void KCharCodecTest::cleanupTestCase()
+void CharCodecTest::cleanupTestCase()
 {
     delete componentData;
 }
 
 //---------------------------------------------------------------------------- Tests -----
 
-
-void KCharCodecTest::testCodecNames()
+void CharCodecTest::testCreateCodec_data()
 {
-    const QStringList list( CharCodec::codecNames() );
+    QTest::addColumn<QString>("codecName");
 
-    foreach( const QString& name, list )
-    {
-        CharCodec* codec = CharCodec::createCodec( name );
-        QCOMPARE( codec->name(), name );
-        delete codec;
-    }
+    foreach( const QString& codecName, CharCodec::codecNames() )
+        QTest::newRow(codecName.toLatin1().constData()) << codecName;
+
+}
+
+void CharCodecTest::testCreateCodec()
+{
+    QFETCH(QString, codecName);
+
+    CharCodec* codec = CharCodec::createCodec( codecName );
+    QVERIFY( codec != 0);
+    QCOMPARE( codec->name(), codecName );
+    delete codec;
 }
 
 }
 
-QTEST_MAIN( Okteta::KCharCodecTest )
+QTEST_MAIN( Okteta::CharCodecTest )
