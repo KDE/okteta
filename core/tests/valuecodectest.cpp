@@ -84,7 +84,7 @@ void ValueCodecTest::testEncodeDecode()
 
     QString digits;
     codec->encode( digits, 0, byte );
-    QVERIFY( ! digits.isEmpty() );
+    QCOMPARE( digits.length(), (int)codec->encodingWidth() );
 
     Byte decodedByte;
     const int usedDigits = codec->decode( &decodedByte, digits, 0 );
@@ -117,6 +117,7 @@ void ValueCodecTest::testEncodeShortDecode()
     QString digits;
     codec->encodeShort( digits, 0, byte );
     QVERIFY( ! digits.isEmpty() );
+    QVERIFY( digits.length() <= (int)codec->encodingWidth() );
 
     Byte decodedByte;
     const int usedDigits = codec->decode( &decodedByte, digits, 0 );
