@@ -25,23 +25,11 @@
 // test object
 #include <codecs/textcharcodec.h>
 // KDE
-#include <kcomponentdata.h>
-// Qt
-#include <QtTest/QtTest>
+#include <qtest_kde.h>
 
 
 namespace Okteta
 {
-
-void TextCharCodecTest::initTestCase()
-{
-    Instance = new KComponentData( "TextCharCodecTest" );
-}
-
-void TextCharCodecTest::cleanupTestCase()
-{
-    delete Instance;
-}
 
 //---------------------------------------------------------------------------- Tests -----
 
@@ -77,4 +65,4 @@ void TextCharCodecTest::testCreateCodec()
 
 }
 
-QTEST_MAIN( Okteta::TextCharCodecTest )
+QTEST_KDEMAIN_CORE( Okteta::TextCharCodecTest )
