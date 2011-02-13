@@ -36,7 +36,7 @@ namespace Kasten
 PODTableModel::PODTableModel( PODDecoderTool* tool, QObject *parent )
  : QAbstractTableModel( parent ),
    mTool( tool ),
-   mEmptyNote( '-' )
+   mEmptyNote( QLatin1Char('-') )
 {
     connect( mTool, SIGNAL(dataChanged()), SLOT(onDataChanged()) );
 }
