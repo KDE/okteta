@@ -158,27 +158,27 @@ target_link_libraries( charcodectest
 )
 
 
-########### ktextcharcodectest ###############
+########### textcharcodectest ###############
 
-set( ktextcharcodectest_SRCS
-  ktextcharcodectest.cpp
+set( textcharcodectest_SRCS
+  textcharcodectest.cpp
 )
 
-kde4_add_unit_test( ktextcharcodectest  TESTNAME libokteta-core-ktextcharcodectest  ${ktextcharcodectest_SRCS} )
-target_link_libraries( ktextcharcodectest
+kde4_add_unit_test( textcharcodectest  TESTNAME libokteta-core-textcharcodectest  ${textcharcodectest_SRCS} )
+target_link_libraries( textcharcodectest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 
 
-########### ktextcharcodeckcharcodeciftest ###############
+########### textcharcodeckcharcodeciftest ###############
 
-set( ktextcharcodeckcharcodeciftest_SRCS
+set( textcharcodeckcharcodeciftest_SRCS
   kcharcodeciftest.cpp
-  ktextcharcodeckcharcodeciftest.cpp
+  textcharcodeckcharcodeciftest.cpp
 )
 
-kde4_add_unit_test( ktextcharcodeckcharcodeciftest TESTNAME libokteta-core-ktextcharcodeckcharcodeciftest  ${ktextcharcodeckcharcodeciftest_SRCS} )
-target_link_libraries( ktextcharcodeckcharcodeciftest
+kde4_add_unit_test( textcharcodeckcharcodeciftest TESTNAME libokteta-core-textcharcodeckcharcodeciftest  ${textcharcodeckcharcodeciftest_SRCS} )
+target_link_libraries( textcharcodeckcharcodeciftest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 

@@ -19,7 +19,7 @@ set(libcodecs_SRCS
   codecs/kebcdic1047charcodec.cpp
   codecs/hexadecimalbytecodec.cpp
   codecs/octalbytecodec.cpp
-  codecs/ktextcharcodec.cpp
+  codecs/textcharcodec.cpp
 )
 
 set( libpiecetable_SRCS

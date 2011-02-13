@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KTEXTCHARCODEC_H
-#define OKTETA_KTEXTCHARCODEC_H
+#ifndef OKTETA_TEXTCHARCODEC_H
+#define OKTETA_TEXTCHARCODEC_H
 
 // lib
 #include <charcodec.h>
@@ -37,19 +37,19 @@ namespace Okteta
 {
 
 // used by all codecs with full char coping, i.e. there are no undefined chars
-class KTextCharCodec : public CharCodec
+class TextCharCodec : public CharCodec
 {
   public:
-    static KTextCharCodec* createCodec( const QString& codeName );
-    static KTextCharCodec* createCodec( CharCoding charCoding );
-    static KTextCharCodec* createLocalCodec();
+    static TextCharCodec* createCodec( const QString& codeName );
+    static TextCharCodec* createCodec( CharCoding charCoding );
+    static TextCharCodec* createLocalCodec();
 
     static const QStringList& codecNames();
 
   protected:
-    KTextCharCodec( QTextCodec* textCodec );
+    TextCharCodec( QTextCodec* textCodec );
   public:
-    virtual ~KTextCharCodec();
+    virtual ~TextCharCodec();
 
   public: // CharCodec API
     virtual Character decode( Byte byte ) const;

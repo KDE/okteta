@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KTEXTCHARCODECKCHARCODECIFTEST_H
-#define KTEXTCHARCODECKCHARCODECIFTEST_H
+#ifndef TEXTCHARCODECKCHARCODECIFTEST_H
+#define TEXTCHARCODECKCHARCODECIFTEST_H
 
 // test
 #include "kcharcodeciftest.h"
@@ -30,7 +30,7 @@
 namespace Okteta
 {
 
-class KTextCharCodecKCharCodecIfTest : public KCharCodecIfTest
+class TextCharCodecKCharCodecIfTest : public KCharCodecIfTest
 {
   protected: // KCharCodecIfTest API
     virtual CharCodec* createCodec();

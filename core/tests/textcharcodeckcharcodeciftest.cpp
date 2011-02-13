@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,10 +20,10 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ktextcharcodeckcharcodeciftest.h"
+#include "textcharcodeckcharcodeciftest.h"
 
 // lib
-#include <codecs/ktextcharcodec.h>
+#include <codecs/textcharcodec.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -31,17 +31,18 @@
 namespace Okteta
 {
 
-CharCodec* KTextCharCodecKCharCodecIfTest::createCodec()
+CharCodec* TextCharCodecKCharCodecIfTest::createCodec()
 {
-    return KTextCharCodec::createCodec("ISO8859-1"); // TODO: test for some more, e.g. KOI8-R
+    return TextCharCodec::createCodec( QLatin1String("ISO8859-1") );
+    // TODO: test for some more, e.g. KOI8-R
 }
 
 
-void KTextCharCodecKCharCodecIfTest::deleteCodec( CharCodec* codec )
+void TextCharCodecKCharCodecIfTest::deleteCodec( CharCodec* codec )
 {
     delete codec;
 }
 
 }
 
-QTEST_MAIN( Okteta::KTextCharCodecKCharCodecIfTest )
+QTEST_MAIN( Okteta::TextCharCodecKCharCodecIfTest )

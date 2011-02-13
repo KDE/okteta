@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,15 +20,18 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KTEXTCHARCODECTEST_H
-#define KTEXTCHARCODECTEST_H
+#ifndef TEXTCHARCODECTEST_H
+#define TEXTCHARCODECTEST_H
 
 class KComponentData;
 
 // Qt
 #include <QtCore/QObject>
 
-class KTextCharCodecTest : public QObject
+namespace Okteta
+{
+
+class TextCharCodecTest : public QObject
 {
   Q_OBJECT
 
@@ -40,5 +43,7 @@ class KTextCharCodecTest : public QObject
     void testCreateLocalCodec();
     void testCreateCodec();
 };
+
+}
 
 #endif

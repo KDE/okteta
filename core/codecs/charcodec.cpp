@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,7 @@
 #include "charcodec.h"
 
 // lib
-#include "ktextcharcodec.h"
+#include "textcharcodec.h"
 #include "kebcdic1047charcodec.h"
 // Qt
 #include <QtCore/QStringList>
@@ -34,52 +34,54 @@ namespace Okteta
 
 const QStringList& CharCodec::codecNames()
 {
-    static QStringList CodecNames;
+    static QStringList codecNames;
     // first call?
-    if( CodecNames.isEmpty() )
+    if( codecNames.isEmpty() )
     {
-        CodecNames = KTextCharCodec::codecNames();
-        CodecNames.append( KEBCDIC1047CharCodec::codecName() );
+        codecNames = TextCharCodec::codecNames();
+        codecNames.append( KEBCDIC1047CharCodec::codecName() );
     }
 
-    return CodecNames;
+    return codecNames;
 }
 
 
 CharCodec* CharCodec::createCodec( const QString& name )
 {
-    CharCodec* result = 0;
+    CharCodec* result;
 
-    if( KTextCharCodec::codecNames().indexOf(name) != -1 )
-        result = KTextCharCodec::createCodec( name );
+    if( TextCharCodec::codecNames().indexOf(name) != -1 )
+        result = TextCharCodec::createCodec( name );
     else if( KEBCDIC1047CharCodec::codecName() == name )
         result = KEBCDIC1047CharCodec::create();
+    else
+        result = 0;
 
     // ensure at least a codec
     if( result == 0 )
-        result = KTextCharCodec::createLocalCodec();
+        result = TextCharCodec::createLocalCodec();
 
     return result;
 }
 
 
-CharCodec *CharCodec::createCodec( CharCoding charCoding )
+CharCodec* CharCodec::createCodec( CharCoding charCoding )
 {
-  CharCodec* result;
+    CharCodec* result;
 
     if( charCoding == EBCDIC1047Encoding )
         result = KEBCDIC1047CharCodec::create();
     else if( charCoding == ISO8859_1Encoding )
-        result = KTextCharCodec::createCodec( "ISO-8859-1" );
+        result = TextCharCodec::createCodec( QLatin1String("ISO-8859-1") );
     // LocalEncoding
     else
         result = 0;
 
     // ensure at least a codec
     if( result == 0 )
-        result = KTextCharCodec::createLocalCodec();
+        result = TextCharCodec::createLocalCodec();
 
-  return result;
+    return result;
 }
 
 }
