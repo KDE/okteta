@@ -245,9 +245,13 @@ bool TextCharCodec::encode( Byte* byte, const QChar& _char ) const
 
 Character TextCharCodec::decode( Byte byte ) const
 {
+    // QTextCodecs "use this codepoint when input data cannot be represented in Unicode." (Qt docs)
+    static const QChar replacementChar = QChar( QChar::ReplacementCharacter );
     const QString string =
         mDecoder->toUnicode( reinterpret_cast<const char*>(&byte), 1 );
-    return Character( string.at(0) );
+    const QChar qchar = string.at( 0 );
+    const bool isDecoded = (qchar != replacementChar);
+    return Character( qchar, ! isDecoded );
 }
 
 
