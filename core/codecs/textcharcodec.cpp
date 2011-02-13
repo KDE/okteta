@@ -70,6 +70,7 @@ const encodingDataList[] =
     { CP1258Encoding, "windows-1258" },
     { IBM850Encoding, "IBM850" },
     { IBM866Encoding, "IBM866" },
+    { IBM874Encoding, "IBM874" },
     { KOI8_REncoding, "KOI8-R" },
     { KOI8_UEncoding, "KOI8-U" }
 };

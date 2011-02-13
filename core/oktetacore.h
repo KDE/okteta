@@ -93,6 +93,8 @@ namespace Okteta
     /**  */
     IBM866Encoding,
     /**  */
+    IBM874Encoding,
+    /**  */
     KOI8_REncoding,
     /**  */
     KOI8_UEncoding,
