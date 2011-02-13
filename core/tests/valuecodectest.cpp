@@ -26,6 +26,8 @@
 #include <valuecodec.h>
 // KDE
 #include <qtest_kde.h>
+// Qt
+#include <QtCore/QBitArray>
 
 
 namespace Okteta
@@ -194,6 +196,67 @@ void ValueCodecTest::testAppendDigit()
         codec->appendDigit( &decodedByte, digits[i].toLatin1() );
 
     QCOMPARE( decodedByte, byte );
+
+    delete codec;
+}
+
+// keep in order with ValueCoding
+static const char * const validDigitsPerCodec[] =
+{
+    "0123456789ABCDEFabcdef",
+    "0123456789",
+    "01234567",
+    "01"
+};
+static const int validDigitsPerCodecCount =
+    sizeof(validDigitsPerCodec)/sizeof(validDigitsPerCodec[0]);
+
+void ValueCodecTest::testIsValidDigit_data()
+{
+    QTest::addColumn<int>("codecId");
+    QTest::addColumn<uchar>("digit");
+    QTest::addColumn<bool>("isValid");
+
+    static const int digitCount = 256;
+
+    for( int c = 0; c < valueCodecDescriptionCount; ++c )
+    {
+        const ValueCodecDescription& valueCodecDescription =
+            valueCodecDescriptions[c];
+
+        QBitArray validnessPerDigitField = QBitArray( digitCount, false );
+        const QByteArray validDigits =
+            QByteArray(validDigitsPerCodec[c]);
+
+        for( int j = 0; j < validDigits.count(); ++j )
+            validnessPerDigitField.setBit( validDigits[j], true );
+
+        for( int j = 0; j < validnessPerDigitField.count(); ++j )
+        {
+            const uchar digit = uchar( j );
+            const bool isValid = validnessPerDigitField.testBit( j );
+            const QString rowTitle =
+                valueCodecDescription.name +
+                QString::fromLatin1(" - \"%1\" is ").arg(QLatin1Char(digit)) +
+                QLatin1String(isValid ? "valid" : "invalid");
+
+            QTest::newRow(rowTitle.toLatin1().constData())
+                << valueCodecDescription.id
+                << digit
+                << isValid;
+        }
+    }
+}
+
+void ValueCodecTest::testIsValidDigit()
+{
+    QFETCH(int, codecId);
+    QFETCH(uchar, digit);
+    QFETCH(bool, isValid);
+
+    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+
+    QCOMPARE( codec->isValidDigit(digit), isValid );
 
     delete codec;
 }
