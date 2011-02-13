@@ -23,6 +23,8 @@
 #ifndef CHAR8_H
 #define CHAR8_H
 
+// Okteta gui
+#include <oktetagui.h>
 // Okteta core
 #include <character.h>
 // Qt
@@ -49,8 +51,7 @@ inline Char8::Char8( Okteta::Character c ) : character( c ) {}
 
 inline QString Char8::toString() const
 {
-    static const unsigned char DefaultUndefinedChar = '?';
-    return QString( character.isUndefined() ? QChar(DefaultUndefinedChar) : (QChar)character );
+    return QString( character.isUndefined() ? Okteta::DefaultUndefinedChar : (QChar)character );
 }
 
 Q_DECLARE_METATYPE( Char8 )
