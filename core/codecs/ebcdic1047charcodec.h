@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OKTETA_KEBCDIC1047CHARCODEC_H
-#define OKTETA_KEBCDIC1047CHARCODEC_H
+#ifndef OKTETA_EBCDIC1047CHARCODEC_H
+#define OKTETA_EBCDIC1047CHARCODEC_H
 
 // lib
 #include <charcodec.h>
@@ -31,10 +31,10 @@ namespace Okteta
 {
 
 //
-class KEBCDIC1047CharCodec : public CharCodec
+class EBCDIC1047CharCodec : public CharCodec
 {
   protected:
-    KEBCDIC1047CharCodec();
+    EBCDIC1047CharCodec();
 
   public: // CharCodec API
     virtual Character decode( Byte byte ) const;
@@ -43,14 +43,14 @@ class KEBCDIC1047CharCodec : public CharCodec
     virtual const QString& name() const;
 
   public:
-    static KEBCDIC1047CharCodec* create();
+    static EBCDIC1047CharCodec* create();
     static const QString& codecName();
 };
 
 
-inline KEBCDIC1047CharCodec::KEBCDIC1047CharCodec() {}
+inline EBCDIC1047CharCodec::EBCDIC1047CharCodec() {}
 
-inline KEBCDIC1047CharCodec* KEBCDIC1047CharCodec::create() { return new KEBCDIC1047CharCodec(); }
+inline EBCDIC1047CharCodec* EBCDIC1047CharCodec::create() { return new EBCDIC1047CharCodec(); }
 
 }
 

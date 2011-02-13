@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2004 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2004,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,7 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kebcdic1047charcodec.h"
+#include "ebcdic1047charcodec.h"
 
 // lib
 #include <character.h>
@@ -103,10 +103,10 @@ static unsigned char EBCDICChars[256] =
   0x70, 0xDD, 0xDE, 0xDB, 0xDC, 0x8D, 0x8E, 0xDF
 };
 
-static const char KEBCDIC1047CharCodecName[] = "EBCDIC 1047";
+static const char EBCDIC1047CharCodecName[] = "EBCDIC 1047";
 
 
-bool KEBCDIC1047CharCodec::encode( Byte* byte, const QChar& _char ) const
+bool EBCDIC1047CharCodec::encode( Byte* byte, const QChar& _char ) const
 {
     const int unicodeValue = _char.unicode();
     // not in range?
@@ -118,26 +118,26 @@ bool KEBCDIC1047CharCodec::encode( Byte* byte, const QChar& _char ) const
     return true;
 }
 
-Character KEBCDIC1047CharCodec::decode( Byte byte ) const
+Character EBCDIC1047CharCodec::decode( Byte byte ) const
 {
     return QChar(UnicodeChars[byte]);
 }
 
-bool KEBCDIC1047CharCodec::canEncode( const QChar& _char ) const
+bool EBCDIC1047CharCodec::canEncode( const QChar& _char ) const
 {
     return ( _char.unicode() <= 0x00FF );
 }
 
 
-const QString& KEBCDIC1047CharCodec::name() const
+const QString& EBCDIC1047CharCodec::name() const
 {
     return codecName();
 }
 
-const QString& KEBCDIC1047CharCodec::codecName()
+const QString& EBCDIC1047CharCodec::codecName()
 {
-    static const QString Name( QString::fromLatin1(KEBCDIC1047CharCodecName) );
-    return Name;
+    static const QString name = QString::fromLatin1( EBCDIC1047CharCodecName );
+    return name;
 }
 
 }

@@ -23,7 +23,7 @@
 #include "kebcdic1047charcodeckcharcodeciftest.h"
 
 // test object
-#include <codecs/kebcdic1047charcodec.h>
+#include <codecs/ebcdic1047charcodec.h>
 // Qt
 #include <QtTest/QtTest>
 
@@ -33,7 +33,7 @@ namespace Okteta
 
 CharCodec* KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
 {
-    return KEBCDIC1047CharCodec::create();
+    return EBCDIC1047CharCodec::create();
 }
 
 

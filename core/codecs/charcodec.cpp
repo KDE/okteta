@@ -24,7 +24,7 @@
 
 // lib
 #include "textcharcodec.h"
-#include "kebcdic1047charcodec.h"
+#include "ebcdic1047charcodec.h"
 // Qt
 #include <QtCore/QStringList>
 
@@ -39,7 +39,7 @@ const QStringList& CharCodec::codecNames()
     if( codecNames.isEmpty() )
     {
         codecNames = TextCharCodec::codecNames();
-        codecNames.append( KEBCDIC1047CharCodec::codecName() );
+        codecNames.append( EBCDIC1047CharCodec::codecName() );
     }
 
     return codecNames;
@@ -52,8 +52,8 @@ CharCodec* CharCodec::createCodec( const QString& name )
 
     if( TextCharCodec::codecNames().indexOf(name) != -1 )
         result = TextCharCodec::createCodec( name );
-    else if( KEBCDIC1047CharCodec::codecName() == name )
-        result = KEBCDIC1047CharCodec::create();
+    else if( EBCDIC1047CharCodec::codecName() == name )
+        result = EBCDIC1047CharCodec::create();
     else
         result = 0;
 
@@ -70,7 +70,7 @@ CharCodec* CharCodec::createCodec( CharCoding charCoding )
     CharCodec* result;
 
     if( charCoding == EBCDIC1047Encoding )
-        result = KEBCDIC1047CharCodec::create();
+        result = EBCDIC1047CharCodec::create();
     else if( charCoding == ISO8859_1Encoding )
         result = TextCharCodec::createCodec( QLatin1String("ISO-8859-1") );
     // LocalEncoding
