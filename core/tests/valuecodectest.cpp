@@ -36,14 +36,19 @@ namespace Okteta
 //---------------------------------------------------------------------------- Tests -----
 
 // keep in order with ValueCoding
-struct ValueCodecDescription {const char* name; int id; };
+struct ValueCodecDescription
+{
+    const char* name;
+    int id;
+    int encodingWidth;
+};
 
 static const ValueCodecDescription valueCodecDescriptions[] =
 {
-    {"HexadecimalByteCodec", HexadecimalCoding},
-    {"DecimalByteCodec", DecimalCoding},
-    {"OctalByteCodec", OctalCoding},
-    {"BinaryByteCodec", BinaryCoding}
+    {"HexadecimalByteCodec", HexadecimalCoding, 2},
+    {"DecimalByteCodec", DecimalCoding, 3},
+    {"OctalByteCodec", OctalCoding, 3},
+    {"BinaryByteCodec", BinaryCoding, 8}
 };
 static const int valueCodecDescriptionCount =
     sizeof(valueCodecDescriptions)/sizeof(valueCodecDescriptions[0]);
@@ -196,6 +201,58 @@ void ValueCodecTest::testAppendDigit()
         codec->appendDigit( &decodedByte, digits[i].toLatin1() );
 
     QCOMPARE( decodedByte, byte );
+
+    delete codec;
+}
+
+void ValueCodecTest::testRemoveLastDigit_data()
+{
+    QTest::addColumn<int>("codecId");
+    QTest::addColumn<Byte>("byte");
+    QTest::addColumn<int>("removedDigitCount");
+
+    for( int c = 0; c < valueCodecDescriptionCount; ++c )
+    {
+        const ValueCodecDescription& valueCodecDescription =
+            valueCodecDescriptions[c];
+
+        for( int b = 0; b < 256; ++b )
+        {
+            for( int r = 1; r <= valueCodecDescription.encodingWidth; ++r )
+            {
+                const QString rowTitle =
+                    valueCodecDescription.name +
+                    QString::fromLatin1(" - %1 - removed last %2").arg(b).arg(r);
+
+                QTest::newRow(rowTitle.toLatin1().constData())
+                    << valueCodecDescription.id
+                    << Byte(b)
+                    << r;
+            }
+        }
+    }
+}
+
+void ValueCodecTest::testRemoveLastDigit()
+{
+    QFETCH(int, codecId);
+    QFETCH(Byte, byte);
+    QFETCH(int, removedDigitCount);
+
+    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+
+    QString digits;
+    codec->encode( digits, 0, byte );
+
+    Byte modifiedByte = byte;
+    for( int i = 0; i < removedDigitCount; ++i )
+        codec->removeLastDigit( &modifiedByte );
+
+    QString modifiedDigits;
+    codec->encode( modifiedDigits, 0, modifiedByte );
+
+    QVERIFY( digits.startsWith(modifiedDigits.mid(removedDigitCount)) );
+    QVERIFY( modifiedDigits.startsWith(QString(removedDigitCount,QLatin1Char('0'))) );
 
     delete codec;
 }

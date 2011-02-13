@@ -45,6 +45,8 @@ class ValueCodecTest : public QObject
     void testAppendDigit();
     void testIsValidDigit_data();
     void testIsValidDigit();
+    void testRemoveLastDigit_data();
+    void testRemoveLastDigit();
 };
 
 }
