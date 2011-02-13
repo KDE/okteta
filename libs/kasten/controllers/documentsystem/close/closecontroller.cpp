@@ -49,14 +49,14 @@ CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClien
 
     mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
 
-    mCloseAllAction = actionCollection->addAction( "file_close_all" );
+    mCloseAllAction = actionCollection->addAction( QLatin1String("file_close_all") );
     mCloseAllAction->setText( i18nc("@title:menu","Close All") );
-    mCloseAllAction->setIcon( KIcon("window-close") );
+    mCloseAllAction->setIcon( KIcon( QLatin1String("window-close") ) );
     connect( mCloseAllAction, SIGNAL(triggered( bool )), SLOT(closeAll()) );
 
-    mCloseAllOtherAction = actionCollection->addAction( "file_close_all_other" );
+    mCloseAllOtherAction = actionCollection->addAction( QLatin1String("file_close_all_other") );
     mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
-    mCloseAllOtherAction->setIcon( KIcon("window-close") );
+    mCloseAllOtherAction->setIcon( KIcon( QLatin1String("window-close") ) );
     connect( mCloseAllOtherAction, SIGNAL(triggered( bool )), SLOT(closeAllOther()) );
 
     mCloseAction->setEnabled( false );

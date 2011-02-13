@@ -63,13 +63,13 @@ CreatorController::CreatorController( ViewManager* viewManager, DocumentManager*
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    KActionMenu* newMenuAction = actionCollection->add<KActionMenu>( "file_new", this, SLOT(onNewActionTriggered()) );
+    KActionMenu* newMenuAction = actionCollection->add<KActionMenu>( QLatin1String("file_new"), this, SLOT(onNewActionTriggered()) );
     newMenuAction->setText( i18nc("@title:menu create new byte arrays from different sources", "New" ) );
-    newMenuAction->setIcon( KIcon("document-new") );
+    newMenuAction->setIcon( KIcon( QLatin1String("document-new") ) );
     newMenuAction->setShortcut( KStandardShortcut::openNew() );
 
     QAction* newEmptyDocumentAction =
-        new QAction( KIcon("document-new"), i18nc("@title:menu create a new empty document", "Empty" ), this );
+        new QAction( KIcon( QLatin1String("document-new") ), i18nc("@title:menu create a new empty document", "Empty" ), this );
 //     newEmptyDocumentAction->setToolTip( factory-toolTip() );
 //         i18nc( "@info:tooltip", "Create an empty document" ) );
 //     newEmptyDocumentAction->setHelpText( factory->helpText() );
@@ -79,7 +79,7 @@ CreatorController::CreatorController( ViewManager* viewManager, DocumentManager*
     connect( newEmptyDocumentAction, SIGNAL(triggered( bool )), SLOT(onNewActionTriggered()) );
 
     QAction* newFromClipboardDocumentAction =
-        new QAction( KIcon("edit-paste"), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard" ), this );
+        new QAction( KIcon( QLatin1String("edit-paste") ), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard" ), this );
     connect( newFromClipboardDocumentAction, SIGNAL(triggered( bool )), SLOT(onNewFromClipboardActionTriggered()) );
 
     newMenuAction->addAction( newEmptyDocumentAction );

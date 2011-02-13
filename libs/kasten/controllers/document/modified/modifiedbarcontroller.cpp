@@ -83,7 +83,7 @@ void ModifiedBarController::onLocalSyncStateChanged( Kasten::LocalSyncState loca
     const bool isModified = (localSyncState == LocalHasChanges );
 
     // TODO: depend an statusbar height
-    mLocalStateLabel->setPixmap( isModified ? KIcon("document-save").pixmap(16) : QPixmap() );
+    mLocalStateLabel->setPixmap( isModified ? KIcon( QLatin1String("document-save") ).pixmap(16) : QPixmap() );
 
     mLocalStateLabel->setToolTip( isModified ?
         i18nc( "@tooltip the document is modified", "Modified." ) :
@@ -102,7 +102,7 @@ void ModifiedBarController::onRemoteSyncStateChanged( Kasten::RemoteSyncState re
         /* else */                                 0;
 
     // TODO: depend an statusbar height
-    mRemoteStateLabel->setPixmap( iconName ? KIcon(iconName).pixmap(16) : QPixmap() );
+    mRemoteStateLabel->setPixmap( iconName ? KIcon( QLatin1String(iconName) ).pixmap(16) : QPixmap() );
 
     // TODO: tooltips
 }

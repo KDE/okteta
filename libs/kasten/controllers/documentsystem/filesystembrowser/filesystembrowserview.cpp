@@ -83,14 +83,14 @@ void FileSystemBrowserView::init()
     const KActionCollection* dirOperatorActionCollection = mDirOperator->actionCollection();
     for( int i = 0; i<ToolbarActionNamesCount; ++i )
     {
-        QAction* action = dirOperatorActionCollection->action( ToolbarActionNames[i] );
+        QAction* action = dirOperatorActionCollection->action( QLatin1String(ToolbarActionNames[i]) );
         if( action )
             mToolbar->addAction( action );
     }
 
     mActionCollection = new KActionCollection( this );
-    QAction* syncDirAction = mActionCollection->addAction( "sync_dir" );
-    syncDirAction->setIcon( KIcon("go-parent-folder") );
+    QAction* syncDirAction = mActionCollection->addAction( QLatin1String("sync_dir") );
+    syncDirAction->setIcon( KIcon( QLatin1String("go-parent-folder") ) );
     syncDirAction->setText( i18nc("@action:intoolbar", "Folder of Current Document") );
     connect( syncDirAction, SIGNAL(triggered()), SLOT(syncCurrentDocumentDirectory()) );
     connect( mTool, SIGNAL(hasCurrentUrlChanged( bool )), syncDirAction, SLOT(setEnabled( bool )) );

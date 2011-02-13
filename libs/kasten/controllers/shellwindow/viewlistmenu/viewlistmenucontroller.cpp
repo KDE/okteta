@@ -71,7 +71,7 @@ Q_UNUSED(model)
 
 void ViewListMenuController::updateActions()
 {
-    mGuiClient->unplugActionList( WindowsListActionListId );
+    mGuiClient->unplugActionList( QLatin1String(WindowsListActionListId) );
 
     qDeleteAll( mWindowsActionGroup->actions() );
 
@@ -101,7 +101,7 @@ void ViewListMenuController::updateActions()
     }
     mWindowsActionGroup->setEnabled( hasViews );
 
-    mGuiClient->plugActionList( WindowsListActionListId, mWindowsActionGroup->actions() );
+    mGuiClient->plugActionList( QLatin1String(WindowsListActionListId), mWindowsActionGroup->actions() );
 }
 
 

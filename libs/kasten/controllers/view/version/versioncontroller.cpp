@@ -46,8 +46,8 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSetToOlderVersionAction = new KToolBarPopupAction( KIcon("edit-undo"), i18nc("@action:inmenu","Undo"), this );
-    actionCollection->addAction( "edit_undo", mSetToOlderVersionAction );
+    mSetToOlderVersionAction = new KToolBarPopupAction( KIcon( QLatin1String("edit-undo") ), i18nc("@action:inmenu","Undo"), this );
+    actionCollection->addAction( QLatin1String("edit_undo"), mSetToOlderVersionAction );
     mSetToOlderVersionAction->setShortcuts( KStandardShortcut::undo() );
 
     connect( mSetToOlderVersionAction, SIGNAL(triggered( bool )),
@@ -57,8 +57,8 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
     connect( mSetToOlderVersionAction->menu(), SIGNAL(triggered( QAction* )),
              SLOT(onOlderVersionMenuTriggered( QAction* )) );
 
-    mSetToNewerVersionAction = new KToolBarPopupAction( KIcon("edit-redo"), i18nc("@action:inmenu","Redo"), this );
-    actionCollection->addAction( "edit_redo", mSetToNewerVersionAction );
+    mSetToNewerVersionAction = new KToolBarPopupAction( KIcon( QLatin1String("edit-redo") ), i18nc("@action:inmenu","Redo"), this );
+    actionCollection->addAction( QLatin1String("edit_redo"), mSetToNewerVersionAction );
     mSetToNewerVersionAction->setShortcuts( KStandardShortcut::redo() );
 
     connect( mSetToNewerVersionAction, SIGNAL(triggered( bool )),

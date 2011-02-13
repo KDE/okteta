@@ -53,9 +53,9 @@ ExportController::ExportController( ViewManager* viewManager, DocumentManager* d
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mExportSelectAction = actionCollection->add<KSelectAction>( "export" );
+    mExportSelectAction = actionCollection->add<KSelectAction>( QLatin1String("export") );
     mExportSelectAction->setText( i18nc("@title:menu","Export") );
-    mExportSelectAction->setIcon( KIcon("document-export") );
+    mExportSelectAction->setIcon( KIcon( QLatin1String("document-export") ) );
     mExportSelectAction->setToolBarMode( KSelectAction::MenuMode );
     connect( mExportSelectAction, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
 

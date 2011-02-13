@@ -1,6 +1,6 @@
 project( kastencontrollers )
 
-add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1805 )
+add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1805 -DQT_NO_CAST_TO_ASCII -DQT_NO_CAST_FROM_ASCII )
 
 include_directories(
   ../core

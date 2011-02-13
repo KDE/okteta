@@ -107,7 +107,7 @@ QVariant VersionTableModel::data( const QModelIndex &index, int role ) const
         {
             const int versionIndex = index.row();
             if( mVersionControl->versionIndex() == versionIndex )
-                result = KIcon( "arrow-right" );
+                result = KIcon( QLatin1String("arrow-right") );
         }
     }
 

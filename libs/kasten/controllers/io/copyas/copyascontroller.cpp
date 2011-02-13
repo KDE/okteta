@@ -58,9 +58,9 @@ CopyAsController::CopyAsController( ViewManager* viewManager, DocumentManager* d
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mCopyAsSelectAction = actionCollection->add<KSelectAction>( "copy_as" );
+    mCopyAsSelectAction = actionCollection->add<KSelectAction>( QLatin1String("copy_as") );
     mCopyAsSelectAction->setText( i18nc("@title:menu","Copy As") );
-    mCopyAsSelectAction->setIcon( KIcon("edit-copy") );
+    mCopyAsSelectAction->setIcon( KIcon( QLatin1String("edit-copy") ) );
     mCopyAsSelectAction->setToolBarMode( KSelectAction::MenuMode );
     connect( mCopyAsSelectAction, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
 

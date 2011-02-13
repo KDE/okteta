@@ -41,7 +41,7 @@ CreateDialog::CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor
 {
     setCaption( i18nc("@title:window","Create") );
     setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button create the new document","&Create"), "document-new",
+    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button create the new document","&Create"), QLatin1String("document-new"),
                       i18nc("@info:tooltip",
                             "Create a new document with the generated data."),
                       i18nc("@info:whatsthis",

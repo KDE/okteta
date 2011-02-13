@@ -40,8 +40,8 @@ SwitchViewController::SwitchViewController( AbstractGroupedViews* groupedViews, 
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mForwardAction = actionCollection->addAction( KStandardAction::Forward, "window_next", this, SLOT(forward()) );
-    mBackwardAction = actionCollection->addAction( KStandardAction::Back, "window_previous", this, SLOT(backward()) );
+    mForwardAction = actionCollection->addAction( KStandardAction::Forward, QLatin1String("window_next"), this, SLOT(forward()) );
+    mBackwardAction = actionCollection->addAction( KStandardAction::Back, QLatin1String("window_previous"), this, SLOT(backward()) );
 
     connect( groupedViews, SIGNAL(added( const QList<Kasten::AbstractView*>& )),  SLOT(updateActions()) );
     connect( groupedViews, SIGNAL(removing( const QList<Kasten::AbstractView*>& )), SLOT(updateActions()) );

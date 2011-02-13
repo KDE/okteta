@@ -47,7 +47,7 @@ CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,
 {
     setCaption( i18nc("@title:window","Copy As") );
     setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Copy to clipboard"), "edit-copy",
+    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Copy to clipboard"), QLatin1String("edit-copy"),
                       i18nc("@info:tooltip","Copy the selected data to the clipboard."),
                       i18nc("@info:whatsthis","If you press the <interface>Copy to clipboard</interface> "
                             "button, the selected data will be copied to the clipboard "

@@ -46,7 +46,7 @@ ExportDialog::ExportDialog( const QString& remoteTypeName,
 {
     setCaption( i18nc("@title:window","Export") );
     setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Export to File..."), "document-export",
+    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Export to File..."), QLatin1String("document-export"),
                       i18nc("@info:tooltip","Export the selected data to a file."),
                       i18nc("@info:whatsthis","If you press the <interface>Export to file</interface> "
                             "button, the selected data will be copied to a file "

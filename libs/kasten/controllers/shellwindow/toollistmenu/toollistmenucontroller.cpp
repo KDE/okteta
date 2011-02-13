@@ -52,7 +52,7 @@ Q_UNUSED(model)
 
 void ToolListMenuController::updateActions()
 {
-    mGuiClient->unplugActionList( ToolListActionListId );
+    mGuiClient->unplugActionList( QLatin1String(ToolListActionListId) );
 
     qDeleteAll( mToolActionList );
     mToolActionList.clear();
@@ -66,7 +66,7 @@ void ToolListMenuController::updateActions()
 //         action->setText( mToolView->title() );
         mToolActionList.append( action );
     }
-    mGuiClient->plugActionList( ToolListActionListId, mToolActionList );
+    mGuiClient->plugActionList( QLatin1String(ToolListActionListId), mToolActionList );
 }
 
 }

@@ -41,7 +41,7 @@ InsertDialog::InsertDialog( AbstractModelDataGeneratorConfigEditor* configEditor
 {
     setCaption( i18nc("@title:window","Insert") );
     setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Insert"), 0,//"insert-text",
+    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Insert"), QString(),//"insert-text",
                       i18nc("@info:tooltip",
                             "Insert the generated data into the document."),
                       i18nc("@info:whatsthis",

@@ -85,26 +85,26 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
         {
             case CurrentColumnId:
                 if( document == mDocumentsTool->focussedDocument() )
-                    result = KIcon( "arrow-right" );
+                    result = KIcon( QLatin1String("arrow-right") );
                 break;
             case LocalStateColumnId:
                 if( document->localSyncState() == LocalHasChanges )
-                    result = KIcon( "document-save" );
+                    result = KIcon( QLatin1String("document-save") );
                 break;
             case RemoteStateColumnId:
             {
                 // TODO: use static map, syncState int -> iconname
                 const RemoteSyncState remoteSyncState = document->remoteSyncState();
                 if( remoteSyncState == RemoteHasChanges )
-                    result = KIcon( "document-save" );
+                    result = KIcon( QLatin1String("document-save") );
                 else if( remoteSyncState == RemoteNotSet )
-                    result = KIcon( "document-new" );
+                    result = KIcon( QLatin1String("document-new") );
                 else if( remoteSyncState == RemoteDeleted )
-                    result = KIcon( "edit-delete" );
+                    result = KIcon( QLatin1String("edit-delete") );
                 else if( remoteSyncState == RemoteUnknown )
-                    result = KIcon( "flag-yellow" );
+                    result = KIcon( QLatin1String("flag-yellow") );
                 else if( remoteSyncState == RemoteUnreachable )
-                    result = KIcon( "network-disconnect" );
+                    result = KIcon( QLatin1String("network-disconnect") );
                 break;
             }
             default:

@@ -59,7 +59,7 @@ InsertController::InsertController( ViewManager* viewManager, DocumentManager* d
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mInsertSelectAction = actionCollection->add<KSelectAction>( "insert" ); //TODO: find better id
+    mInsertSelectAction = actionCollection->add<KSelectAction>( QLatin1String("insert") ); //TODO: find better id
     mInsertSelectAction->setText( i18nc("@title:menu","Insert") );
 //     mInsertSelectAction->setIcon( KIcon("insert-text") );
     mInsertSelectAction->setToolBarMode( KSelectAction::MenuMode );
