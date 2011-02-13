@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,43 +20,29 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KCHARCODECIFTEST_H
-#define KCHARCODECIFTEST_H
+#include "textcharcodeccharcodeciftest.h"
 
+// lib
+#include <codecs/textcharcodec.h>
 // Qt
-#include <QtCore/QObject>
+#include <QtTest/QtTest>
 
 
 namespace Okteta
 {
-class CharCodec;
 
-
-class KCharCodecIfTest : public QObject
+CharCodec* TextCharCodecCharCodecIfTest::createCodec()
 {
-  Q_OBJECT
-
-  protected:
-    KCharCodecIfTest();
-
-  protected: // our API
-    virtual CharCodec* createCodec() = 0;
-    virtual void deleteCodec( CharCodec* codec ) = 0;
-
-  private Q_SLOTS: // test functions
-    void init();
-    void cleanup();
-
-    void testEncodeDecode();
-
-  private:
-    /** pointer to the buffer to test */
-    CharCodec* mCharCodec;
-};
+    return TextCharCodec::createCodec( QLatin1String("ISO8859-1") );
+    // TODO: test for some more, e.g. KOI8-R
+}
 
 
-inline KCharCodecIfTest::KCharCodecIfTest() : mCharCodec( 0 ) {}
+void TextCharCodecCharCodecIfTest::deleteCodec( CharCodec* codec )
+{
+    delete codec;
+}
 
 }
 
-#endif
+QTEST_MAIN( Okteta::TextCharCodecCharCodecIfTest )

@@ -20,28 +20,23 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kebcdic1047charcodeckcharcodeciftest.h"
+#ifndef EBCDIC1047CHARCODECCHARCODECIFTEST_H
+#define EBCDIC1047CHARCODECCHARCODECIFTEST_H
 
-// test object
-#include <codecs/ebcdic1047charcodec.h>
-// Qt
-#include <QtTest/QtTest>
+// test
+#include "charcodeciftest.h"
 
 
 namespace Okteta
 {
 
-CharCodec* KEBCDIC1047CharCodecKCharCodecIfTest::createCodec()
+class EBCDIC1047CharCodecCharCodecIfTest : public CharCodecIfTest
 {
-    return EBCDIC1047CharCodec::create();
-}
-
-
-void KEBCDIC1047CharCodecKCharCodecIfTest::deleteCodec( CharCodec* codec )
-{
-    delete codec;
-}
+  protected: // CharCodecIfTest API
+    virtual CharCodec* createCodec();
+    virtual void deleteCodec( CharCodec* codec );
+};
 
 }
 
-QTEST_MAIN( Okteta::KEBCDIC1047CharCodecKCharCodecIfTest )
+#endif

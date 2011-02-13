@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, made within the KDE community.
+    This file is part of the Okteta Core library, part of the KDE project.
 
-    Copyright 2006,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,23 +20,28 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TEXTCHARCODECKCHARCODECIFTEST_H
-#define TEXTCHARCODECKCHARCODECIFTEST_H
+#include "ebcdic1047charcodeccharcodeciftest.h"
 
-// test
-#include "kcharcodeciftest.h"
+// test object
+#include <codecs/ebcdic1047charcodec.h>
+// Qt
+#include <QtTest/QtTest>
 
 
 namespace Okteta
 {
 
-class TextCharCodecKCharCodecIfTest : public KCharCodecIfTest
+CharCodec* EBCDIC1047CharCodecCharCodecIfTest::createCodec()
 {
-  protected: // KCharCodecIfTest API
-    virtual CharCodec* createCodec();
-    virtual void deleteCodec( CharCodec* codec );
-};
+    return EBCDIC1047CharCodec::create();
+}
+
+
+void EBCDIC1047CharCodecCharCodecIfTest::deleteCodec( CharCodec* codec )
+{
+    delete codec;
+}
 
 }
 
-#endif
+QTEST_MAIN( Okteta::EBCDIC1047CharCodecCharCodecIfTest )

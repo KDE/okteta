@@ -170,27 +170,27 @@ target_link_libraries( textcharcodectest
 )
 
 
-########### textcharcodeckcharcodeciftest ###############
+########### textcharcodeccharcodeciftest ###############
 
-set( textcharcodeckcharcodeciftest_SRCS
-  kcharcodeciftest.cpp
-  textcharcodeckcharcodeciftest.cpp
+set( textcharcodeccharcodeciftest_SRCS
+  charcodeciftest.cpp
+  textcharcodeccharcodeciftest.cpp
 )
 
-kde4_add_unit_test( textcharcodeckcharcodeciftest TESTNAME libokteta-core-textcharcodeckcharcodeciftest  ${textcharcodeckcharcodeciftest_SRCS} )
-target_link_libraries( textcharcodeckcharcodeciftest
+kde4_add_unit_test( textcharcodeccharcodeciftest TESTNAME libokteta-core-textcharcodeccharcodeciftest  ${textcharcodeccharcodeciftest_SRCS} )
+target_link_libraries( textcharcodeccharcodeciftest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 
 
-########### kebcdic1047charcodeckcharcodeciftest ###############
+########### ebcdic1047charcodeccharcodeciftest ###############
 
-set( kebcdic1047charcodeckcharcodeciftest_SRCS
-  kcharcodeciftest.cpp kebcdic1047charcodeckcharcodeciftest.cpp
+set( ebcdic1047charcodeccharcodeciftest_SRCS
+  charcodeciftest.cpp ebcdic1047charcodeccharcodeciftest.cpp
 )
 
-kde4_add_unit_test( kebcdic1047charcodeckcharcodeciftest  TESTNAME libokteta-core-kebcdic1047charcodeckcharcodeciftest  ${kebcdic1047charcodeckcharcodeciftest_SRCS} )
-target_link_libraries( kebcdic1047charcodeckcharcodeciftest
+kde4_add_unit_test( ebcdic1047charcodeccharcodeciftest  TESTNAME libokteta-core-ebcdic1047charcodeccharcodeciftest  ${ebcdic1047charcodeccharcodeciftest_SRCS} )
+target_link_libraries( ebcdic1047charcodeccharcodeciftest
   testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
 )
 

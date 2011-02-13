@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,46 +20,23 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kcharcodeciftest.h"
+#ifndef TEXTCHARCODECCHARCODECIFTEST_H
+#define TEXTCHARCODECCHARCODECIFTEST_H
 
-// test object
-#include <charcodec.h>
-// lib
-#include <character.h>
-// Qt
-#include <QtTest/QtTest>
+// test
+#include "charcodeciftest.h"
 
 
 namespace Okteta
 {
 
-static const char QTextCodecWhiteSpace = 63;
-
-
-void KCharCodecIfTest::init()
+class TextCharCodecCharCodecIfTest : public CharCodecIfTest
 {
-    mCharCodec = createCodec();
-}
-
-void KCharCodecIfTest::cleanup()
-{
-    deleteCodec( mCharCodec );
-}
-
-
-void KCharCodecIfTest::testEncodeDecode()
-{
-    Byte c = 0;
-    do
-    {
-        ++c;
-        Character UTF8 = mCharCodec->decode( c );
-        Byte r = 0;
-        bool success = mCharCodec->encode( &r, UTF8 );
-        QCOMPARE( r, c );
-        QVERIFY( success );
-    }
-    while( c < 255 );
-}
+  protected: // CharCodecIfTest API
+    virtual CharCodec* createCodec();
+    virtual void deleteCodec( CharCodec* codec );
+};
 
 }
+
+#endif

@@ -20,29 +20,44 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "textcharcodeckcharcodeciftest.h"
+#ifndef CHARCODECIFTEST_H
+#define CHARCODECIFTEST_H
 
-// lib
-#include <codecs/textcharcodec.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QtCore/QObject>
 
 
 namespace Okteta
 {
+class CharCodec;
 
-CharCodec* TextCharCodecKCharCodecIfTest::createCodec()
+
+class CharCodecIfTest : public QObject
 {
-    return TextCharCodec::createCodec( QLatin1String("ISO8859-1") );
-    // TODO: test for some more, e.g. KOI8-R
+  Q_OBJECT
+
+  protected:
+    CharCodecIfTest();
+
+  protected: // API to be implemented
+    virtual CharCodec* createCodec() = 0;
+    virtual void deleteCodec( CharCodec* codec ) = 0;
+
+  private Q_SLOTS: // test functions
+    void init();
+    void cleanup();
+
+    void testEncodeDecode_data();
+    void testEncodeDecode();
+
+  private:
+    /** pointer to the buffer to test */
+    CharCodec* mCharCodec;
+};
+
+
+inline CharCodecIfTest::CharCodecIfTest() : mCharCodec( 0 ) {}
+
 }
 
-
-void TextCharCodecKCharCodecIfTest::deleteCodec( CharCodec* codec )
-{
-    delete codec;
-}
-
-}
-
-QTEST_MAIN( Okteta::TextCharCodecKCharCodecIfTest )
+#endif
