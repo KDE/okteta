@@ -33,22 +33,32 @@ namespace Okteta
 
 //---------------------------------------------------------------------------- Tests -----
 
-static const struct {const char* name; int id; } valueCodecs[] =
+// keep in order with ValueCoding
+struct ValueCodecDescription {const char* name; int id; };
+
+static const ValueCodecDescription valueCodecDescriptions[] =
 {
     {"HexadecimalByteCodec", HexadecimalCoding},
     {"DecimalByteCodec", DecimalCoding},
     {"OctalByteCodec", OctalCoding},
     {"BinaryByteCodec", BinaryCoding}
 };
-static const int valueCodecCount = sizeof(valueCodecs)/sizeof(valueCodecs[0]);
+static const int valueCodecDescriptionCount =
+    sizeof(valueCodecDescriptions)/sizeof(valueCodecDescriptions[0]);
 
 
 void ValueCodecTest::testCreateCodec_data()
 {
     QTest::addColumn<int>("codecId");
 
-    for( int i = 0; i < valueCodecCount; ++i )
-        QTest::newRow(valueCodecs[i].name) << valueCodecs[i].id;
+    for( int c = 0; c < valueCodecDescriptionCount; ++c )
+    {
+        const ValueCodecDescription& valueCodecDescription =
+            valueCodecDescriptions[c];
+
+        QTest::newRow(valueCodecDescription.name)
+            << valueCodecDescription.id;
+    }
 }
 
 void ValueCodecTest::testCreateCodec()
@@ -67,12 +77,21 @@ void ValueCodecTest::testEncodeDecode_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for( int i = 0; i < valueCodecCount; ++i )
+    for( int c = 0; c < valueCodecDescriptionCount; ++c )
+    {
+        const ValueCodecDescription& valueCodecDescription =
+            valueCodecDescriptions[c];
         for( int j = 0; j < 256; ++j )
         {
-            const QString rowTitle = valueCodecs[i].name+QString::fromLatin1(" - %1").arg(j);
-            QTest::newRow(rowTitle.toLatin1().constData()) << valueCodecs[i].id << Byte(j);
+            const QString rowTitle =
+                valueCodecDescription.name +
+                QString::fromLatin1(" - %1").arg( j );
+
+            QTest::newRow(rowTitle.toLatin1().constData())
+                << valueCodecDescription.id
+                << Byte(j);
         }
+    }
 }
 
 void ValueCodecTest::testEncodeDecode()
@@ -99,12 +118,22 @@ void ValueCodecTest::testEncodeShortDecode_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for( int i = 0; i < valueCodecCount; ++i )
+    for( int c = 0; c < valueCodecDescriptionCount; ++c )
+    {
+        const ValueCodecDescription& valueCodecDescription =
+            valueCodecDescriptions[c];
+
         for( int j = 0; j < 256; ++j )
         {
-            const QString rowTitle = valueCodecs[i].name+QString::fromLatin1(" - %1").arg(j);
-            QTest::newRow(rowTitle.toLatin1().constData()) << valueCodecs[i].id << Byte(j);
+            const QString rowTitle =
+                valueCodecDescription.name +
+                QString::fromLatin1(" - %1").arg(j);
+
+            QTest::newRow(rowTitle.toLatin1().constData())
+                << valueCodecDescription.id
+                << Byte(j);
         }
+    }
 }
 
 void ValueCodecTest::testEncodeShortDecode()
@@ -132,12 +161,22 @@ void ValueCodecTest::testAppendDigit_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for( int i = 0; i < valueCodecCount; ++i )
+    for( int c = 0; c < valueCodecDescriptionCount; ++c )
+    {
+        const ValueCodecDescription& valueCodecDescription =
+            valueCodecDescriptions[c];
+
         for( int j = 0; j < 256; ++j )
         {
-            const QString rowTitle = valueCodecs[i].name+QString::fromLatin1(" - %1").arg(j);
-            QTest::newRow(rowTitle.toLatin1().constData()) << valueCodecs[i].id << Byte(j);
+            const QString rowTitle =
+                valueCodecDescription.name +
+                QString::fromLatin1(" - %1").arg(j);
+
+            QTest::newRow(rowTitle.toLatin1().constData())
+                << valueCodecDescription.id
+                << Byte(j);
         }
+    }
 }
 
 void ValueCodecTest::testAppendDigit()
