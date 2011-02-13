@@ -46,17 +46,17 @@ void DecimalByteCodec::encode( QString& digits, unsigned int pos, Byte byte ) co
 
 void DecimalByteCodec::encodeShort( QString& digits, unsigned int pos, Byte byte ) const
 {
-    unsigned char digitValue = byte / 100;
-    if( digitValue > 0 )
+    const unsigned char firstDigitValue = byte / 100;
+    if( firstDigitValue > 0 )
     {
-        digits[pos++] = QLatin1Char( '0'+digitValue );
-        byte -= digitValue * 100;
+        digits[pos++] = QLatin1Char( '0'+firstDigitValue );
+        byte -= firstDigitValue * 100;
     }
-    digitValue = byte / 10;
-    if( digitValue > 0 )
+    const unsigned char secondDigitValue = byte / 10;
+    if( secondDigitValue > 0 || firstDigitValue > 0 )
     {
-        digits[pos++] = QLatin1Char( '0'+digitValue );
-        byte -= digitValue * 10;
+        digits[pos++] = QLatin1Char( '0'+secondDigitValue );
+        byte -= secondDigitValue * 10;
     }
     digits[pos] = QLatin1Char( '0'+byte );
 }
