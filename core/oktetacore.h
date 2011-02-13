@@ -65,7 +65,11 @@ namespace Okteta
     /**  */
     ISO8859_13Encoding,
     /**  */
+    ISO8859_14Encoding,
+    /**  */
     ISO8859_15Encoding,
+    /**  */
+    ISO8859_16Encoding,
     /**  */
     CP1250Encoding,
     /**  */

@@ -56,7 +56,9 @@ const encodingDataList[] =
     { ISO8859_9Encoding, "ISO-8859-9" },
     { ISO8859_11Encoding, "TIS-620" }, // was: ISO-8859-11
     { ISO8859_13Encoding, "ISO-8859-13" },
+    { ISO8859_14Encoding, "ISO-8859-14" },
     { ISO8859_15Encoding, "ISO-8859-15" },
+    { ISO8859_16Encoding, "ISO-8859-16" },
     { CP1250Encoding, "windows-1250" },
     { CP1251Encoding, "windows-1251" },
     { CP1252Encoding, "windows-1252" },
