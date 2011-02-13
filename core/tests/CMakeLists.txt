@@ -134,6 +134,18 @@ target_link_libraries( piecetablebytearraymodelversionableiftest
 )
 
 
+########### valuecodectest ###############
+
+set( valuecodectest_SRCS
+  valuecodectest.cpp
+)
+
+kde4_add_unit_test( valuecodectest  TESTNAME libokteta-core-valuecodectest  ${valuecodectest_SRCS})
+target_link_libraries( valuecodectest
+  testoktetacore ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY}
+)
+
+
 ########### charcodectest ###############
 
 set( charcodectest_SRCS
