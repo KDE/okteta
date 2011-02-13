@@ -38,7 +38,6 @@
 #include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
-#include <KComponentData>
 #include <qtest_kde.h>
 // Qt
 #include <QtTest/QtTest>
