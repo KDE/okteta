@@ -41,8 +41,9 @@ void KOctalByteCodec::encodeShort( QString &Digits, unsigned int Pos, Byte Char 
   unsigned char C;
   if( (C = (Char>>6)&0x07) )
     Digits[Pos++] = '0'+C;
-  if( (C = (Char>>3)&0x07) )
-    Digits[Pos++] = '0'+C;
+  unsigned char C2;
+  if( (C2 = (Char>>3)&0x07) || C )
+    Digits[Pos++] = '0'+C2;
   Digits[Pos] = '0'+((Char)&0x07);
 }
 
