@@ -44,14 +44,14 @@ void OctalByteCodec::encode( QString& digits, unsigned int pos, Byte byte ) cons
 
 void OctalByteCodec::encodeShort( QString& digits, unsigned int pos, Byte byte ) const
 {
-    unsigned char digitValue = byte>>6;
-    if( digitValue > 0 )
-        digits[pos++] = QLatin1Char( '0'+digitValue );
-    digitValue = (byte>>3) & 0x07;
-    if( digitValue > 0 )
-        digits[pos++] = QLatin1Char( '0'+digitValue );
-    digitValue = byte & 0x07;
-    digits[pos] = QLatin1Char( '0'+digitValue );
+    const unsigned char firstDigitValue = byte>>6;
+    if( firstDigitValue > 0 )
+        digits[pos++] = QLatin1Char( '0'+firstDigitValue );
+    const unsigned char secondDigitValue = (byte>>3) & 0x07;
+    if( secondDigitValue > 0 || firstDigitValue > 0 )
+        digits[pos++] = QLatin1Char( '0'+secondDigitValue );
+    const unsigned char lastDigitValue = byte & 0x07;
+    digits[pos] = QLatin1Char( '0'+lastDigitValue );
 }
 
 
