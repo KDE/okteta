@@ -37,8 +37,8 @@ void KBinaryByteCodec::encode( QString &Digits, unsigned int Pos, Byte Char ) co
 void KBinaryByteCodec::encodeShort( QString &Digits, unsigned int Pos, Byte Char ) const
 {
   unsigned char M = 1<<7;
-  // find first set bit
-  for( ; M>0; M>>=1 )
+  // find first set bit, at last break on LSB
+  for( ; M > 1; M >>= 1 )
     if( Char & M )
       break;
   // now set the
