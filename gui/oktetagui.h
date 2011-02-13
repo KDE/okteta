@@ -23,10 +23,15 @@
 #ifndef OKTETAGUI_H
 #define OKTETAGUI_H
 
+// this
+#include "lineposition.h"
 // ColumnsView
 #include "kadds.h"
 // Okteta core
+#include "byte.h"
 #include "oktetacore.h"
+// Qt
+#include <QtCore/QChar>
 
 namespace Okteta
 {
