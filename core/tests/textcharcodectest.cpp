@@ -33,6 +33,26 @@ namespace Okteta
 
 //---------------------------------------------------------------------------- Tests -----
 
+void TextCharCodecTest::testCreateCodec_data()
+{
+    QTest::addColumn<QString>("codecName");
+
+    foreach( const QString& codecName, TextCharCodec::codecNames() )
+        QTest::newRow(codecName.toLatin1().constData()) << codecName;
+}
+
+void TextCharCodecTest::testCreateCodec()
+{
+    QFETCH(QString, codecName);
+
+    CharCodec* codec = TextCharCodec::createCodec( codecName );
+
+    QVERIFY( codec != 0 );
+    QCOMPARE( codec->name(), codecName );
+
+    delete codec;
+}
+
 void TextCharCodecTest::testCreateLocalCodec()
 {
     TextCharCodec* codec = TextCharCodec::createLocalCodec();
@@ -41,25 +61,9 @@ void TextCharCodecTest::testCreateLocalCodec()
 }
 
 
-void TextCharCodecTest::testCreateCodec()
+void TextCharCodecTest::testCreateNonexistingCodec()
 {
-    // create ISO8859-1
-    TextCharCodec* codec = TextCharCodec::createCodec( QLatin1String("ISO8859-1") );
-    QVERIFY( codec != 0 );
-    delete codec;
-    // create KOI8-R
-    codec = TextCharCodec::createCodec( QLatin1String("KOI8-R") );
-    QVERIFY( codec != 0 );
-    delete codec;
-    // create ISO8859-15
-    codec = TextCharCodec::createCodec( QLatin1String("ISO8859-15") );
-    QVERIFY( codec != 0 );
-    delete codec;
-    // create utf8
-    codec = TextCharCodec::createCodec( QLatin1String("utf8") );
-    QVERIFY( codec == 0 );
-    // create Latin1
-    codec = TextCharCodec::createCodec( QLatin1String("NonexistingCode") );
+    TextCharCodec* codec = TextCharCodec::createCodec( QLatin1String("NonexistingCode") );
     QVERIFY( codec == 0 );
 }
 

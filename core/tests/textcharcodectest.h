@@ -34,8 +34,10 @@ class TextCharCodecTest : public QObject
   Q_OBJECT
 
   private Q_SLOTS: // test functions
-    void testCreateLocalCodec();
+    void testCreateCodec_data();
     void testCreateCodec();
+    void testCreateLocalCodec();
+    void testCreateNonexistingCodec();
 };
 
 }
