@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Core library, part of the KDE project.
+    This file is part of the Okteta Gui library, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,6 +27,8 @@
 #include "kadds.h"
 // Okteta core
 #include "oktetacore.h"
+// Qt
+#include <QtCore/QChar>
 
 namespace Okteta
 {
@@ -47,9 +49,9 @@ static const int DefaultBinaryGapWidth = 1;
 
 static const int InsertCursorWidth = 2;
 
-static const bool      DefaultShowingNonprinting = false;
-static const QChar     DefaultSubstituteChar =  (char)'.';
-static const QChar     DefaultUndefinedChar =   (char)'?';
+static const bool  DefaultShowingNonprinting = false;
+static const QChar DefaultSubstituteChar =  QLatin1Char( '.' );
+static const QChar DefaultUndefinedChar =   QChar( QChar::ReplacementCharacter );
 
 }
 
