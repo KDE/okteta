@@ -48,10 +48,11 @@ void KDecimalByteCodec::encodeShort( QString &Digits, unsigned int Pos, Byte Cha
     Digits[Pos++] = '0'+C;
     Char -= C * 100;
   }
-  if( (C = Char / 10) )
+  unsigned char C2;
+  if( (C2 = Char / 10) || C )
   {
-    Digits[Pos++] = '0'+C;
-    Char -= C * 10;
+    Digits[Pos++] = '0'+C2;
+    Char -= C2 * 10;
   }
   Digits[Pos] = '0'+Char;
 }
