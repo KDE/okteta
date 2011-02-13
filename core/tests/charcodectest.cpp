@@ -55,6 +55,42 @@ void CharCodecTest::testCreateCodec()
     delete codec;
 }
 
+void CharCodecTest::testEncodeDecode_data()
+{
+    QTest::addColumn<QString>("codecName");
+    QTest::addColumn<int>("byteValue");
+
+    foreach( const QString& codecName, CharCodec::codecNames() )
+        for( int i = 0; i < 256; ++i )
+        {
+            const QString rowTitle = codecName+QString::fromLatin1(" - %1").arg(i);
+            QTest::newRow(rowTitle.toLatin1().constData()) << codecName << i;
+        }
+}
+
+void CharCodecTest::testEncodeDecode()
+{
+    QFETCH(QString, codecName);
+    QFETCH(int, byteValue);
+
+    CharCodec* codec = CharCodec::createCodec( codecName );
+
+    // current assumption: the mapping of chars to byte values is biunique for all used charsets
+    const Byte byte = Byte( byteValue );
+    Character character = codec->decode( byte );
+    if( ! character.isUndefined() )
+    {
+        QVERIFY( codec->canEncode(character) );
+
+        Byte encodedByte;
+        const bool encodeSuccess = codec->encode( &encodedByte, character );
+        QVERIFY( encodeSuccess );
+        QCOMPARE( encodedByte, byte );
+    }
+
+    delete codec;
+}
+
 }
 
 QTEST_KDEMAIN_CORE( Okteta::CharCodecTest )
