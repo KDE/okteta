@@ -42,8 +42,8 @@ void BinaryByteCodec::encode( QString& digits, unsigned int pos, Byte byte ) con
 void BinaryByteCodec::encodeShort( QString& digits, unsigned int pos, Byte byte ) const
 {
     Byte mask = 1<<7;
-    // find first set bit
-    for( ; mask > 0; mask >>= 1 )
+    // find first set bit, at last break on LSB
+    for( ; mask > 1; mask >>= 1 )
         if( byte & mask )
             break;
     // now set the
