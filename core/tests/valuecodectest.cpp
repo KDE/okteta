@@ -40,7 +40,7 @@ struct ValueCodecDescription
 {
     const char* name;
     int id;
-    int encodingWidth;
+    uint encodingWidth;
 };
 
 static const ValueCodecDescription valueCodecDescriptions[] =
@@ -57,6 +57,7 @@ static const int valueCodecDescriptionCount =
 void ValueCodecTest::testCreateCodec_data()
 {
     QTest::addColumn<int>("codecId");
+    QTest::addColumn<uint>("encodingWidth");
 
     for( int c = 0; c < valueCodecDescriptionCount; ++c )
     {
@@ -64,17 +65,20 @@ void ValueCodecTest::testCreateCodec_data()
             valueCodecDescriptions[c];
 
         QTest::newRow(valueCodecDescription.name)
-            << valueCodecDescription.id;
+            << valueCodecDescription.id
+            << valueCodecDescription.encodingWidth;
     }
 }
 
 void ValueCodecTest::testCreateCodec()
 {
     QFETCH(int, codecId);
+    QFETCH(uint, encodingWidth);
 
     ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
 
     QVERIFY( codec != 0 );
+    QCOMPARE( codec->encodingWidth(), encodingWidth );
 
     delete codec;
 }
@@ -209,7 +213,7 @@ void ValueCodecTest::testRemoveLastDigit_data()
 {
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
-    QTest::addColumn<int>("removedDigitCount");
+    QTest::addColumn<uint>("removedDigitCount");
 
     for( int c = 0; c < valueCodecDescriptionCount; ++c )
     {
@@ -218,7 +222,7 @@ void ValueCodecTest::testRemoveLastDigit_data()
 
         for( int b = 0; b < 256; ++b )
         {
-            for( int r = 1; r <= valueCodecDescription.encodingWidth; ++r )
+            for( uint r = 1; r <= valueCodecDescription.encodingWidth; ++r )
             {
                 const QString rowTitle =
                     valueCodecDescription.name +
@@ -237,7 +241,7 @@ void ValueCodecTest::testRemoveLastDigit()
 {
     QFETCH(int, codecId);
     QFETCH(Byte, byte);
-    QFETCH(int, removedDigitCount);
+    QFETCH(uint, removedDigitCount);
 
     ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
 
@@ -245,7 +249,7 @@ void ValueCodecTest::testRemoveLastDigit()
     codec->encode( digits, 0, byte );
 
     Byte modifiedByte = byte;
-    for( int i = 0; i < removedDigitCount; ++i )
+    for( uint i = 0; i < removedDigitCount; ++i )
         codec->removeLastDigit( &modifiedByte );
 
     QString modifiedDigits;
