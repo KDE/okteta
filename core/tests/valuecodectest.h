@@ -41,6 +41,8 @@ class ValueCodecTest : public QObject
     void testEncodeDecode();
     void testEncodeShortDecode_data();
     void testEncodeShortDecode();
+    void testAppendDigit_data();
+    void testAppendDigit();
 };
 
 }

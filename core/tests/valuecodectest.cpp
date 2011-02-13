@@ -127,6 +127,38 @@ void ValueCodecTest::testEncodeShortDecode()
     delete codec;
 }
 
+void ValueCodecTest::testAppendDigit_data()
+{
+    QTest::addColumn<int>("codecId");
+    QTest::addColumn<Byte>("byte");
+
+    for( int i = 0; i < valueCodecCount; ++i )
+        for( int j = 0; j < 256; ++j )
+        {
+            const QString rowTitle = valueCodecs[i].name+QString::fromLatin1(" - %1").arg(j);
+            QTest::newRow(rowTitle.toLatin1().constData()) << valueCodecs[i].id << Byte(j);
+        }
+}
+
+void ValueCodecTest::testAppendDigit()
+{
+    QFETCH(int, codecId);
+    QFETCH(Byte, byte);
+
+    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+
+    QString digits;
+    codec->encode( digits, 0, byte );
+
+    Byte decodedByte = 0;
+    for( int i = 0; i < digits.length(); ++i )
+        codec->appendDigit( &decodedByte, digits[i].toLatin1() );
+
+    QCOMPARE( decodedByte, byte );
+
+    delete codec;
+}
+
 }
 
 QTEST_KDEMAIN_CORE( Okteta::ValueCodecTest )
