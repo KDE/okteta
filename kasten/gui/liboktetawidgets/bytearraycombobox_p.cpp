@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Kasten module, part of the KDE project.
+    This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -115,9 +115,53 @@ void ByteArrayComboBoxPrivate::setCharCodec( const QString& charCodecName )
     }
 }
 
+void ByteArrayComboBoxPrivate::setMaxLength( int maxLength )
+{
+    const int oldMaxLength = mValidator->maxLength();
+    if( oldMaxLength == maxLength )
+        return;
+
+    mValidator->setMaxLength( maxLength );
+
+    if( oldMaxLength > maxLength )
+    {
+        QString currentText = mValueComboBox->currentText();
+        int dummyPos;
+        mValidator->validate( currentText, dummyPos );
+        mValueComboBox->setEditText( currentText );
+    }
+}
+
+void ByteArrayComboBoxPrivate::setMinLength( int minLength )
+{
+    const int oldMinLength = mValidator->minLength();
+    if( oldMinLength == minLength )
+        return;
+
+    mValidator->setMinLength( minLength );
+
+    if( oldMinLength < minLength )
+    {
+        QString currentText = mValueComboBox->currentText();
+        int dummyPos;
+        mValidator->validate( currentText, dummyPos );
+        mValueComboBox->setEditText( currentText );
+    }
+}
+
 void ByteArrayComboBoxPrivate::rememberCurrentByteArray()
 {
     mValueComboBox->insertItem( -1, mValueComboBox->currentText(), mFormatComboBox->currentIndex() );
+}
+
+int ByteArrayComboBoxPrivate::maxLength() const
+{
+    return mValidator->maxLength();
+}
+
+int ByteArrayComboBoxPrivate::minLength() const
+{
+    return mValidator->minLength();
 }
 
 

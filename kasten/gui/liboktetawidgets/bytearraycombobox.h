@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Kasten module, part of the KDE project.
+    This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -53,11 +53,15 @@ class OKTETAKASTENGUI_EXPORT ByteArrayComboBox : public QWidget
   public: // set
     void setByteArray( const QByteArray& byteArray );
     void setCharCodec( const QString& charCodecName );
+    void setMaxLength( int maxLength );
+    void setMinLength( int minLength );
     void rememberCurrentByteArray();
 
   public: // get
     QByteArray byteArray() const;
     int format() const;
+    int maxLength() const;
+    int minLength() const;
 
   Q_SIGNALS:
     void byteArrayChanged( const QByteArray& byteArray );

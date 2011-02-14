@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Kasten module, part of the KDE project.
+    This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -51,6 +51,20 @@ void ByteArrayComboBox::setCharCodec( const QString& charCodecName )
     d->setCharCodec( charCodecName );
 }
 
+void ByteArrayComboBox::setMaxLength( int maxLength )
+{
+    Q_D( ByteArrayComboBox );
+
+    d->setMaxLength( maxLength );
+}
+
+void ByteArrayComboBox::setMinLength( int minLength )
+{
+    Q_D( ByteArrayComboBox );
+
+    d->setMinLength( minLength );
+}
+
 void ByteArrayComboBox::rememberCurrentByteArray()
 {
     Q_D( ByteArrayComboBox );
@@ -71,6 +85,20 @@ int ByteArrayComboBox::format() const
     Q_D( const ByteArrayComboBox );
 
     return d->format();
+}
+
+int ByteArrayComboBox::maxLength() const
+{
+    Q_D( const ByteArrayComboBox );
+
+    return d->maxLength();
+}
+
+int ByteArrayComboBox::minLength() const
+{
+    Q_D( const ByteArrayComboBox );
+
+    return d->minLength();
 }
 
 ByteArrayComboBox::~ByteArrayComboBox()
