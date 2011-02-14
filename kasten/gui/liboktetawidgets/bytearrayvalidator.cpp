@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta Kasten module, part of the KDE project.
+    This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,9 @@ ByteArrayValidator::ByteArrayValidator( QObject* parent, Coding codecId, int cha
   : QValidator( parent ),
     mCodecId( InvalidCoding ),
     mValueCodec( 0 ),
-    mCharCodec( CharCodec::createCodec(Okteta::LocalEncoding) )
+    mCharCodec( CharCodec::createCodec(Okteta::LocalEncoding) ),
+    mMaxLength( 32767 ),
+    mMinLength( 0 )
 {
 Q_UNUSED(charCodecId)
     setCodec( codecId );
@@ -66,16 +68,36 @@ void ByteArrayValidator::setCodec( Coding codecId )
     }
 }
 
+void ByteArrayValidator::setMaxLength( int maxLength )
+{
+    mMaxLength = maxLength;
+    if( maxLength < mMinLength )
+        mMinLength = maxLength;
+}
+
+void ByteArrayValidator::setMinLength( int minLength )
+{
+    mMinLength = minLength;
+    if( minLength > mMaxLength )
+        mMaxLength = minLength;
+}
+
 QValidator::State ByteArrayValidator::validate( QString& string, int& pos ) const
 {
     Q_UNUSED( pos )
 
     State result = QValidator::Acceptable;
 
-    const int stringLength = string.length();
+    int stringLength = string.length();
 
     if( mCodecId == CharCoding )
     {
+        if( stringLength > mMaxLength )
+        {
+            string.truncate( mMaxLength );
+            stringLength = mMaxLength;
+        }
+
         for( int i=0; i<stringLength; ++i )
         {
             const QChar c = string.at( i );
@@ -88,14 +110,32 @@ QValidator::State ByteArrayValidator::validate( QString& string, int& pos ) cons
     }
     else if( mCodecId != Utf8Coding )
     {
-        for( int i=0; i<stringLength; ++i )
+        const int encodingWidth = mValueCodec->encodingWidth();
+        int byteCount = 0;
+        for( int i = 0; i < stringLength; )
         {
-            const QChar c = string.at( i );
-            if( !mValueCodec->isValidDigit(c.toLatin1()) && !c.isSpace() )
+            Okteta::Byte dummyByte;
+            const int usedCharCount = mValueCodec->decode( &dummyByte, string, i );
+
+            // could not decode?
+            if( usedCharCount == 0 )
             {
                 result = QValidator::Invalid;
                 break;
             }
+            i += usedCharCount;
+            ++byteCount;
+
+            if( byteCount >= mMaxLength )
+            {
+                string.truncate( i );
+                break;
+            }
+        }
+        if( byteCount < mMinLength )
+        {
+            const int paddingCount = (mMinLength-byteCount) * encodingWidth;
+            string += QString( paddingCount, QLatin1Char('0') );
         }
     }
 
