@@ -1,7 +1,7 @@
 /*
-    This file is part of the Okteta program, part of the KDE project.
+    This file is part of the Okteta program, made within the KDE community.
 
-    Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -31,6 +31,8 @@
 #include <info/infotool.h>
 #include <filter/filtertoolview.h>
 #include <filter/filtertool.h>
+#include <charsetconversion/charsetconversiontoolview.h>
+#include <charsetconversion/charsetconversiontool.h>
 #include <checksum/checksumtoolview.h>
 #include <checksum/checksumtool.h>
 #include <info/documentinfotoolview.h>
@@ -185,6 +187,7 @@ void OktetaMainWindow::setupControllers()
     addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
     addTool( new ChecksumToolView(new ChecksumTool()) );
     addTool( new FilterToolView(new FilterTool()) );
+    addTool( new CharsetConversionToolView(new CharsetConversionTool()) );
     addTool( new StringsExtractToolView(new StringsExtractTool()) );
     addTool( new ByteTableToolView(new ByteTableTool()) );
     addTool( new InfoToolView(new InfoTool()) );
