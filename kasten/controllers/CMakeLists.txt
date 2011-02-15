@@ -221,6 +221,14 @@ set( FILTERCONTROLLER_SRCS
   view/filter/filtertoolfactory.cpp
   view/filter/filtertoolviewfactory.cpp
 )
+set( CHARSETCONVERSIONTOOL_SRCS
+  view/charsetconversion/charsetconversionjob.cpp
+  view/charsetconversion/charsetconversiontool.cpp
+  view/charsetconversion/charsetconversionview.cpp
+  view/charsetconversion/charsetconversiontoolview.cpp
+  view/charsetconversion/charsetconversiontoolfactory.cpp
+  view/charsetconversion/charsetconversiontoolviewfactory.cpp
+)
 set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/gotooffsettool.cpp
   view/gotooffset/gotooffsetview.cpp
@@ -351,6 +359,7 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${REPLACECONTROLLER_SRCS}
   ${LIBFILTER_SRCS}
   ${FILTERCONTROLLER_SRCS}
+  ${CHARSETCONVERSIONTOOL_SRCS}
   ${GOTOOFFSETCONTROLLER_SRCS}
   ${SELECTRANGECONTROLLER_SRCS}
   ${PRINTCONTROLLER_SRCS}
@@ -396,6 +405,8 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/filter/filtertoolview.h
   view/filter/filtertoolfactory.h
   view/filter/filtertoolviewfactory.h
+  view/charsetconversion/charsetconversiontoolfactory.h
+  view/charsetconversion/charsetconversiontoolviewfactory.h
   view/selectrange/selectrangecontroller.h
   view/libfinddialog/kfinddirection.h
   view/replace/replacecontroller.h
