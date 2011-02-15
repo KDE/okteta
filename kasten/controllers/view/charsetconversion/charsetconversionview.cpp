@@ -205,7 +205,7 @@ void CharsetConversionView::onConversionDone( bool success, int convertedBytesCo
     if( success )
     {
         QString conversionReport = (convertedBytesCount==0) ?
-                i18nc( "@info", "No bytes converted, .") :
+                i18nc( "@info", "No bytes converted.") :
                 i18ncp( "@info", "1 byte converted.", "%1 bytes converted.", convertedBytesCount );
         if( mTool->isSubstitutingMissingChars() )
         {
