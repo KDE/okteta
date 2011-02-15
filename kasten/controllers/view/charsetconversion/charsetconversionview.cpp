@@ -134,7 +134,6 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
     mSubstituteByteEdit = new Okteta::ByteArrayComboBox( this );
     mSubstituteByteEdit->setMinLength( 1 );
     mSubstituteByteEdit->setMaxLength( 1 );
-    mSubstituteByteEdit->setEnabled( false ); // TODO: fix char entering and enable again
     const QString substituteByteToolTip =
         i18nc( "@info:tooltip",
                "The byte to use for chars which are not part of the target charset." );
@@ -143,11 +142,12 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
                "Define the byte to use for chars which are not part of the target charset." );
     mSubstituteByteEdit->setToolTip( substituteByteToolTip );
     mSubstituteByteEdit->setWhatsThis( substituteByteWhatsThis );
-    mSubstituteByteEdit->setEnabled( mTool->isSubstitutingMissingChars() );
+//     mSubstituteByteEdit->setEnabled( mTool->isSubstitutingMissingChars() );
+    mSubstituteByteEdit->setEnabled( false ); // TODO: fix char entering and enable again
     connect( mSubstituteByteEdit, SIGNAL(byteArrayChanged(const QByteArray&)),
                                SLOT(onDefaultByteEditChanged(const QByteArray&)) );
-    connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
-             mSubstituteByteEdit, SLOT(setEnabled(bool)) );
+//     connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
+//              mSubstituteByteEdit, SLOT(setEnabled(bool)) );
     mSubstituteByteEdit->setByteArray( QByteArray(1, mTool->substituteByte()) );
     settingsLayout->addRow( substituteByteLabelText, mSubstituteByteEdit );
 
