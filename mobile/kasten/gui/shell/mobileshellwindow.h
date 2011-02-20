@@ -33,9 +33,9 @@
 
 namespace Kasten
 {
+class AbstractView;
 class DocumentManager;
 class AbstractActionController;
-class AbstractDocument;
 
 
 class MOBILEKASTENGUI_EXPORT MobileShellWindow : public KMainWindow
@@ -46,6 +46,9 @@ class MOBILEKASTENGUI_EXPORT MobileShellWindow : public KMainWindow
     explicit MobileShellWindow( DocumentManager* documentManager/*, ViewManager *viewManager*/ );
     virtual ~MobileShellWindow();
 
+  public:
+    void setView( AbstractView* view );
+
   protected:
     void addActionController( AbstractActionController* controller );
 
@@ -55,8 +58,8 @@ class MOBILEKASTENGUI_EXPORT MobileShellWindow : public KMainWindow
   protected:
     DocumentManager* mDocumentManager;
 
-    AbstractDocument* mDocument;
-    
+    AbstractView* mView;
+
     QList<AbstractActionController*> mControllers;
 };
 

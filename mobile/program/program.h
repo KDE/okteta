@@ -25,20 +25,25 @@
 
 // program
 #include "about.h"
+// Qt
+#include <QtCore/QObject>
 
 
 namespace Kasten
 {
-
+class OktetaMainWindow;
 class DocumentManager;
-// class ViewManager;
+class ViewManager;
+class AbstractView;
 
 
-class OktetaProgram
+class OktetaProgram : public QObject
 {
+  Q_OBJECT
+
   public:
     OktetaProgram( int argc, char *argv[] );
-    ~OktetaProgram();
+    virtual ~OktetaProgram();
 
   public:
     int execute();
@@ -48,11 +53,16 @@ class OktetaProgram
     DocumentManager* documentManager();
 //     ViewManager* viewManager();
 
+  protected Q_SLOTS:
+    void onViewsOpened( const QList<Kasten::AbstractView*>& views );
+
   protected:
     OktetaAboutData mAboutData;
 
     DocumentManager* mDocumentManager;
-//     ViewManager* mViewManager;
+    ViewManager* mViewManager;
+
+    OktetaMainWindow* mUnusedMainWindow;
 };
 
 

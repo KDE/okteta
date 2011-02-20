@@ -3,12 +3,13 @@ add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1804 )
 set( KASTEN_REL_DIR ../../../libs/kasten )
 
 include_directories(
-  ${KASTEN_REL_DIR}/core
-  ${KASTEN_REL_DIR}/core/document
-  ${KASTEN_REL_DIR}/core/io
-  ${KASTEN_REL_DIR}/core/system
   ${KASTEN_REL_DIR}/gui
   ${KASTEN_REL_DIR}/gui/controller
+  ${KASTEN_REL_DIR}/gui/view
+  ${KASTEN_REL_DIR}/core
+  ${KASTEN_REL_DIR}/core/system
+  ${KASTEN_REL_DIR}/core/io
+  ${KASTEN_REL_DIR}/core/document
 #   view
 #   io
 #   system

@@ -23,7 +23,10 @@
 #include "mobileshellwindow.h"
 
 // Kasten core
+#include <abstractview.h>
 #include <documentmanager.h>
+// Qt
+#include <QtGui/QToolBar>
 
 
 namespace Kasten
@@ -32,9 +35,21 @@ namespace Kasten
 MobileShellWindow::MobileShellWindow( DocumentManager* documentManager/*, ViewManager *viewManager*/ )
   : KMainWindow(),
     mDocumentManager( documentManager ),
-    mDocument( 0 )
+    mView( 0 )
 {
+    QToolBar* toolBar = new QToolBar( this );
+    toolBar->setMovable( false );
+    addToolBar( Qt::BottomToolBarArea, toolBar );
 }
+
+void MobileShellWindow::setView( AbstractView* view )
+{
+    // TODO: what to do with the old one if existing?
+    mView = view;
+    QWidget* widget = mView->widget();
+    setCentralWidget( widget );
+}
+
 
 #if 0
 void ShellWindow::updateControllers( AbstractView* view )
@@ -57,8 +72,9 @@ void MobileShellWindow::addActionController( AbstractActionController* controlle
 
 bool MobileShellWindow::queryClose()
 {
+    AbstractDocument* document = mView ? mView->findBaseModel<AbstractDocument*>() : 0;
     // TODO: query the document manager or query the view manager?
-    return (! mDocument) || mDocumentManager->canClose(mDocument);
+    return (! document) || mDocumentManager->canClose( document );
 }
 
 

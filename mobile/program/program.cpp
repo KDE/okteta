@@ -26,14 +26,14 @@
 #include "mainwindow.h"
 // Okteta Kasten
 #include <bytearraydocumentfactory.h>
-// #include <bytearrayviewfactory.h>
+#include <bytearrayviewfactory.h>
 #include <filesystem/bytearrayrawfilesynchronizerfactory.h>
 // #include <bytearraystreamencoderconfigeditorfactoryfactory.h>
 // #include <bytearraydatageneratorconfigeditorfactoryfactory.h>
 // #include <bytearraystreamencoderfactory.h>
 // #include <bytearraydatageneratorfactory.h>
 // Kasten gui
-// #include <viewmanager.h>
+#include <viewmanager.h>
 // #include <modelcodecviewmanager.h>
 // Kasten core
 #include <documentmanager.h>
@@ -57,8 +57,9 @@ namespace Kasten
 
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
- : mDocumentManager( new DocumentManager() )//,
-//    mViewManager( new ViewManager() )
+  : mDocumentManager( new DocumentManager() ),
+    mViewManager( new ViewManager() ),
+    mUnusedMainWindow( 0 )
 {
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );
@@ -78,6 +79,15 @@ int OktetaProgram::execute()
     KGlobal::locale()->insertCatalog( "libkasten" );
     KGlobal::locale()->insertCatalog( "liboktetakasten" );
 
+    connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
+             mViewManager, SLOT(createViewsFor( const QList<Kasten::AbstractDocument*>& )) );
+    connect( mDocumentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )),
+             mViewManager, SLOT(removeViewsFor( const QList<Kasten::AbstractDocument*>& )) );
+    connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
+             SLOT(onViewsOpened(QList<Kasten::AbstractView*>)) );
+    connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
+             SLOT(onViewsClosing(QList<Kasten::AbstractView*>)) );
+
 //     const QList<AbstractModelStreamEncoder*> encoderList =
 //         ByteArrayStreamEncoderFactory::createStreamEncoders();
 
@@ -95,7 +105,7 @@ int OktetaProgram::execute()
     mDocumentManager->createManager()->setDocumentFactory( new ByteArrayDocumentFactory() );
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new ByteArrayRawFileSynchronizerFactory() );
 
-//     mViewManager->setViewFactory( new ByteArrayViewFactory() );
+    mViewManager->setViewFactory( new ByteArrayViewFactory() );
 //     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
 //     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
 
@@ -107,9 +117,10 @@ int OktetaProgram::execute()
     else
     {
         // no session.. just start up normally
-        OktetaMainWindow *mainWindow = new OktetaMainWindow( this );
+        OktetaMainWindow* mainWindow = new OktetaMainWindow( this );
+        mUnusedMainWindow = mainWindow;
 
-        KCmdLineArgs *arguments = KCmdLineArgs::parsedArgs();
+        KCmdLineArgs* arguments = KCmdLineArgs::parsedArgs();
 
         // take arguments
         if( arguments->count() > 0 )
@@ -130,6 +141,7 @@ int OktetaProgram::execute()
             }
         }
 
+        // TODO: what to do with multiple mainWindows?
         mDocumentManager->setWidget( mainWindow );
         mainWindow->show();
 
@@ -141,18 +153,34 @@ int OktetaProgram::execute()
 
 
 
-// shell is not a window, but unvisible, has one view window in reserve at start, quits if last viewwindow is closed
-// problem: how to do tool/controller sharing between viewwindows? 
 void OktetaProgram::quit()
 {
     kapp->quit();
+}
+
+void OktetaProgram::onViewsOpened( const QList<Kasten::AbstractView*>& views )
+{
+    foreach( AbstractView* view, views )
+    {
+        if( mUnusedMainWindow ) {
+            mUnusedMainWindow->setView( view );
+            mUnusedMainWindow = 0;
+        }
+        else
+        {
+            OktetaMainWindow* mainWindow = new OktetaMainWindow( this );
+            mainWindow->setView( view );
+            mainWindow->show();
+        }
+    }
+
 }
 
 
 OktetaProgram::~OktetaProgram()
 {
     delete mDocumentManager;
-//     delete mViewManager;
+    delete mViewManager;
 }
 
 }

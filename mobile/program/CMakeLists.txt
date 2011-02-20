@@ -11,9 +11,9 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/controllers/document
 #   ${OKTETAKASTEN_REL_DIR}/controllers/view
 #   ${OKTETAKASTEN_REL_DIR}/controllers/view/libfinddialog
-#   ${OKTETAKASTEN_REL_DIR}/gui
+  ${OKTETAKASTEN_REL_DIR}/gui
 #   ${OKTETAKASTEN_REL_DIR}/gui/io
-#   ${OKTETAKASTEN_REL_DIR}/gui/view
+  ${OKTETAKASTEN_REL_DIR}/gui/view
   ${OKTETAKASTEN_REL_DIR}/core
   ${OKTETAKASTEN_REL_DIR}/core/io
   ${OKTETAKASTEN_REL_DIR}/core/document
@@ -23,9 +23,9 @@ include_directories(
   ${MOBILEKASTEN_REL_DIR}/gui/controller
 #   ${KASTEN_REL_DIR}/controllers
   ${KASTEN_REL_DIR}/gui
-#   ${KASTEN_REL_DIR}/gui/view
+  ${KASTEN_REL_DIR}/gui/view
 #   ${KASTEN_REL_DIR}/gui/io
-#   ${KASTEN_REL_DIR}/gui/system
+  ${KASTEN_REL_DIR}/gui/system
 #   ${KASTEN_REL_DIR}/gui/shell
   ${KASTEN_REL_DIR}/gui/controller
   ${KASTEN_REL_DIR}/core
