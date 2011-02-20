@@ -76,7 +76,7 @@
 // #include <shellwindow/switchview/switchviewcontroller.h>
 // #include <shellwindow/viewlistmenu/viewlistmenucontroller.h>
 // #include <shellwindow/viewareasplit/viewareasplitcontroller.h>
-// #include <shellwindow/toollistmenu/toollistmenucontroller.h>
+#include <shellwindow/toollistmenu/toollistmenucontroller.h>
 // #include <shellwindow/fullscreen/fullscreencontroller.h>
 /*#include <viewsystem/close/closecontroller.h>*/
 // Kasten gui
@@ -111,7 +111,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
-//     addXmlGuiController( new ToolListMenuController(this,this) );
+    addActionController( new ToolListMenuController(/*this,this*/) );
 //     addXmlGuiController( new ViewListMenuController(mProgram->viewManager(),mGroupedViews,this) );
 }
 
