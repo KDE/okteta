@@ -70,7 +70,7 @@ set( exportcontroller_SRCS
 #   io/export/exportcontroller.cpp
 )
 set( toollistmenucontroller_SRCS
-#   shellwindow/toollistmenu/toollistmenucontroller.cpp
+  shellwindow/toollistmenu/toollistmenucontroller.cpp
 )
 set( fullscreencontroller_SRCS
 #   shellwindow/fullscreen/fullscreencontroller.cpp
