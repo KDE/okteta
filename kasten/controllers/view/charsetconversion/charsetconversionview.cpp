@@ -54,7 +54,7 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
     baseLayout->setMargin( 0 );
 
     // source/target charset
-    QHBoxLayout* directionCharsetLayout = new QHBoxLayout( this );
+    QHBoxLayout* directionCharsetLayout = new QHBoxLayout();
 
     mDirectionComboBox = new KComboBox( this );
     const QStringList directionList = QStringList()
@@ -101,7 +101,7 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
     // settings
     QGroupBox* settingsBox = new QGroupBox( i18nc("@title:group","Parameters"), this );
 
-    QFormLayout* settingsLayout = new QFormLayout( this );
+    QFormLayout* settingsLayout = new QFormLayout();
 
     const QString substituteMissingCharLabelText =
         i18nc( "@option:check substitute bytes whose char is not part of the target charset",
