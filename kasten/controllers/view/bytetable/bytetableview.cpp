@@ -2,6 +2,7 @@
     This file is part of the Okteta Kasten module, part of the KDE project.
 
     Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2011 Alex Richardson <alex.richardson@gmx.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,18 +26,20 @@
 // tool
 #include "bytetabletool.h"
 #include "bytetablemodel.h"
+#include "bytetableviewsettings.h"
 // KDE
 #include <KPushButton>
 #include <KLocale>
 #include <KStandardGuiItem>
 #include <KGlobalSettings>
+//#include <KDebug>
+#include <KApplication>
+#include <KIntNumInput>
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
-#include <KIntNumInput>
 #include <QtGui/QHeaderView>
 #include <QtGui/QTreeView>
-#include <QtGui/QFontMetrics>
 
 
 namespace Kasten
@@ -52,6 +55,10 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mByteTableView = new QTreeView( this );
     connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
              SLOT(setFixedFontByGlobalSettings()) );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(resizeColumnsWidth()) );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayStyleChanged()),
+             SLOT(resizeColumnsWidth()) );
     setFixedFontByGlobalSettings(); //do this before setting model
     mByteTableView->setObjectName( QLatin1String( "ByteTable" ) );
     mByteTableView->setRootIsDecorated( false );
@@ -101,15 +108,45 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
     baseLayout->addLayout( insertLayout );
     
-    //resize to fit width of contents
-    //this is much (!) faster than using setResizeMode(QHeaderView::ResizeToContents)
-    QFontMetrics metrics( KGlobalSettings::fixedFont() );
-    header->resizeSection( 0, metrics.width( QLatin1String( "0000" ) ) + 5 ); //Dec
-    header->resizeSection( 1, metrics.width( QLatin1String( "0000" ) ) ); //Hex
-    header->resizeSection( 2, metrics.width( QLatin1String( "0000" ) ) + 5 ); //Oct
-    header->resizeSection( 3, metrics.width( QLatin1String( "000000000" ) ) + 5 );
-    header->resizeSection( 4, metrics.width( QLatin1String( "0000" ) ) + 5 );
+    //if nothing has changed reuse the old values. This means the bytetable is fully constructed
+    //after ~3ms and not 800 as it was before. If the saved values can not be reused it takes ~100ms
+    const QList<int> columnsWidth = ByteTableViewSettings::columnsWidth();
+    const QString styleName = KApplication::style()->objectName();
+    const QString fixedFontData = KGlobalSettings::fixedFont().toString();
+    if ( columnsWidth.size() < ByteTableModel::NoOfIds || styleName != ByteTableViewSettings::style()
+            || fixedFontData != ByteTableViewSettings::fixedFont() )
+    {
+        resizeColumnsWidth();
+    }
+    else 
+    {
+        for (int i = 0; i < ByteTableModel::NoOfIds; ++i) 
+        {
+            header->resizeSection( i, columnsWidth.at( i ) );
+        }
+    }
 }
+
+void ByteTableView::resizeColumnsWidth()
+{
+    //kDebug() << "recalculating header width";
+    QHeaderView* header = mByteTableView->header();
+    for (int i = 0; i < ByteTableModel::NoOfIds; ++i) 
+    {
+        if ( i == ByteTableModel::CharacterId )
+        {
+            mByteTableView->resizeColumnToContents( i );
+            continue;
+        }
+        //since all indexes in one row have same number of chars it is enough to calculate one row 
+        //this speeds up calculating the width from 800ms to 100ms
+        const QModelIndex index = mTool->byteTableModel()->index( 0, i );
+        const int indexWidthHint = mByteTableView->sizeHintForIndex( index ).width();
+        const int headerWidthHint = header->sectionSizeHint( i );
+        header->resizeSection(i, qMax( indexWidthHint, headerWidthHint) );
+    }
+}
+
 
 void ByteTableView::setFixedFontByGlobalSettings()
 {
@@ -131,6 +168,18 @@ void ByteTableView::onInsertClicked()
     mTool->insert( byte, mInsertCountEdit->value() );
 }
 
-ByteTableView::~ByteTableView() {}
+ByteTableView::~ByteTableView()
+{
+    QList<int> columnsWidth;
+    const QHeaderView* header = mByteTableView->header();
+    for (int i = 0 ; i < ByteTableModel::NoOfIds; ++i)
+    {
+        columnsWidth.append( header->sectionSize( i ) );
+    }
+    ByteTableViewSettings::setColumnsWidth( columnsWidth );
+    ByteTableViewSettings::setStyle( KApplication::style()->objectName() );
+    ByteTableViewSettings::setFixedFont( KGlobalSettings::fixedFont().toString() );
+    ByteTableViewSettings::self()->writeConfig();
+}
 
 }

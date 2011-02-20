@@ -55,6 +55,7 @@ class ByteTableView : public AbstractToolWidget
 
   protected Q_SLOTS:
     void setFixedFontByGlobalSettings();
+    void resizeColumnsWidth();
 
   private:
     ByteTableTool *mTool;
