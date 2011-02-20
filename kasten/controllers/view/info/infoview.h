@@ -54,6 +54,7 @@ class InfoView : public QWidget
 
   protected Q_SLOTS:
     void setFixedFontByGlobalSettings();
+    void resizeColumnsWidth();
 
   private:
     InfoTool *mTool;

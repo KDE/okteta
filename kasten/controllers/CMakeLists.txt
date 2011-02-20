@@ -56,6 +56,8 @@ set( INFOCONTROLLER_SRCS
   view/info/infotoolfactory.cpp
   view/info/infotoolviewfactory.cpp
 )
+kde4_add_kcfg_files( INFOCONTROLLER_SRCS GENERATE_MOC view/info/infoviewsettings.kcfgc )
+
 set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/extractstringsjob.cpp
   view/stringsextract/stringsextracttool.cpp

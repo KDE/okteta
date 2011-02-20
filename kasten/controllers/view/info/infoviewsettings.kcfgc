@@ -1,0 +1,9 @@
+# Code generation options for kconfig_compiler
+File=infoviewsettings.kcfg
+ClassName=InfoViewSettings
+Namespace=Kasten
+Singleton=true
+Mutators=true
+ItemAccessors=false
+SetUserTexts=true
+UseEnumTypes=true

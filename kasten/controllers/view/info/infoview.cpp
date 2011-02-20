@@ -25,11 +25,13 @@
 // tool
 #include "infotool.h"
 #include "statistictablemodel.h"
+#include "infoviewsettings.h"
 // KDE
 #include <KPushButton>
 #include <KGuiItem>
 #include <KLocale>
 #include <KGlobal>
+#include <KApplication>
 #include <KGlobalSettings>
 // Qt
 #include <QtGui/QSortFilterProxyModel>
@@ -83,6 +85,10 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mStatisticTableView = new QTreeView( this );
     connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
              SLOT(setFixedFontByGlobalSettings()) );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
+             SLOT(resizeColumnsWidth()) );
+    connect( KGlobalSettings::self(), SIGNAL(kdisplayStyleChanged()),
+             SLOT(resizeColumnsWidth()) );
     setFixedFontByGlobalSettings(); //do this before setting model
     mStatisticTableView->setObjectName( QLatin1String( "StatisticTable" ) );
     mStatisticTableView->setRootIsDecorated( false );
@@ -106,13 +112,22 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
 
     setByteArraySize( mTool->size() );
     
-    //resize to fit width of contents
-    //this is much (!) faster than using setResizeMode(QHeaderView::ResizeToContents)
-    QFontMetrics metrics( KGlobalSettings::fixedFont() );
-    header->resizeSection( 0, metrics.width( QLatin1String( "0000" ) ) + 5 ); //Hex
-    header->resizeSection( 1, metrics.width( QLatin1String( "00000" ) ) + 5); //Char
-    header->resizeSection( 2, metrics.width( QLatin1String( "0123456789" ) ) + 5 ); //Count
-    header->resizeSection( 3, metrics.width( QLatin1String( "0,123456789" ) ) + 5 ); //Percent
+    //if nothing has changed reuse the old values. This means the info view is fully constructed much quicker.
+    const QList<int> columnsWidth = InfoViewSettings::columnsWidth();
+    const QString styleName = KApplication::style()->objectName();
+    const QString fixedFontData = KGlobalSettings::fixedFont().toString();
+    if ( columnsWidth.size() < StatisticTableModel::NoOfIds || styleName != InfoViewSettings::style()
+            || fixedFontData != InfoViewSettings::fixedFont() )
+    {
+        resizeColumnsWidth();
+    }
+    else 
+    {
+        for (int i = 0; i < StatisticTableModel::NoOfIds; ++i) 
+        {
+            header->resizeSection( i, columnsWidth.at( i ) );
+        }
+    }
 }
 
 void InfoView::updateHeader()
@@ -120,6 +135,16 @@ void InfoView::updateHeader()
     mStatisticTableView->resizeColumnToContents( StatisticTableModel::ValueId );
     mStatisticTableView->header()->headerDataChanged( Qt::Horizontal,
         StatisticTableModel::ValueId, StatisticTableModel::ValueId );
+}
+
+void InfoView::resizeColumnsWidth()
+{
+    //kDebug() << "recalculating header width";
+    QHeaderView* header = mStatisticTableView->header();
+    for (int i = 0; i < StatisticTableModel::NoOfIds; ++i) 
+    {
+        mStatisticTableView->resizeColumnToContents( i );
+    }
 }
 
 void InfoView::setByteArraySize( int size )
@@ -136,6 +161,18 @@ void InfoView::setFixedFontByGlobalSettings()
     mStatisticTableView->setFont( KGlobalSettings::fixedFont() );
 }
 
-InfoView::~InfoView() {}
+InfoView::~InfoView() 
+{
+    QList<int> columnsWidth;
+    const QHeaderView* header = mStatisticTableView->header();
+    for (int i = 0 ; i < StatisticTableModel::NoOfIds; ++i)
+    {
+        columnsWidth.append( header->sectionSize( i ) );
+    }
+    InfoViewSettings::setColumnsWidth( columnsWidth );
+    InfoViewSettings::setStyle( KApplication::style()->objectName() );
+    InfoViewSettings::setFixedFont( KGlobalSettings::fixedFont().toString() );
+    InfoViewSettings::self()->writeConfig();
+}
 
 }
