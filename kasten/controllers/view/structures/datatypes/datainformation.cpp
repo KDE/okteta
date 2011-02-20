@@ -171,6 +171,10 @@ int DataInformation::indexOf(const DataInformation* const data) const
 
 QVariant DataInformation::childData(int row, int column, int role) const
 {
+    kDebug() << "invalid call!";
+    Q_UNUSED(row)
+    Q_UNUSED(column)
+    Q_UNUSED(role)
     return QVariant(); //no children -> no child data
 }
 

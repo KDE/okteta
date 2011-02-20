@@ -56,7 +56,7 @@ set( INFOCONTROLLER_SRCS
   view/info/infotoolfactory.cpp
   view/info/infotoolviewfactory.cpp
 )
-kde4_add_kcfg_files( INFOCONTROLLER_SRCS GENERATE_MOC view/info/infoviewsettings.kcfgc )
+kde4_add_kcfg_files( INFOCONTROLLER_SRCS view/info/infoviewsettings.kcfgc )
 
 set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/extractstringsjob.cpp
@@ -166,7 +166,7 @@ set( BYTETABLECONTROLLER_SRCS
   view/bytetable/bytetabletoolfactory.cpp
   view/bytetable/bytetabletoolviewfactory.cpp
 )
-kde4_add_kcfg_files( BYTETABLECONTROLLER_SRCS GENERATE_MOC view/bytetable/bytetableviewsettings.kcfgc )
+kde4_add_kcfg_files( BYTETABLECONTROLLER_SRCS view/bytetable/bytetableviewsettings.kcfgc )
 
 set( SEARCHCONTROLLER_SRCS
   view/search/ksearchdialog.cpp
@@ -320,7 +320,7 @@ if ( OKTETA_DEBUG_SCRIPT )
 else( OKTETA_DEBUG_SCRIPT )
     message( STATUS "Okteta will be compiled without script debugging. (-DOKTETA_DEBUG_SCRIPT=1 to enable)" )
 endif( OKTETA_DEBUG_SCRIPT )
-kde4_add_kcfg_files( STRUCTVIEW_SRCS GENERATE_MOC view/structures/settings/structviewpreferences.kcfgc )
+kde4_add_kcfg_files( STRUCTVIEW_SRCS view/structures/settings/structviewpreferences.kcfgc )
 kde4_add_ui_files( STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
 
 set( LIBFRAMESPRINT_SRCS

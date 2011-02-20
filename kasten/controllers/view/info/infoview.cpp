@@ -140,7 +140,6 @@ void InfoView::updateHeader()
 void InfoView::resizeColumnsWidth()
 {
     //kDebug() << "recalculating header width";
-    QHeaderView* header = mStatisticTableView->header();
     for (int i = 0; i < StatisticTableModel::NoOfIds; ++i) 
     {
         mStatisticTableView->resizeColumnToContents( i );
