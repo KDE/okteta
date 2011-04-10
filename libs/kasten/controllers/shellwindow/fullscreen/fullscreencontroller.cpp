@@ -26,21 +26,19 @@
 #include <KToggleFullScreenAction>
 #include <KXmlGuiWindow>
 #include <KActionCollection>
+#include <KStandardAction>
 
 
 namespace Kasten
 {
 
-FullScreenController::FullScreenController( KXmlGuiWindow *window )
-: mMainWindow( window )
+FullScreenController::FullScreenController( KXmlGuiWindow* window )
+  : mMainWindow( window )
 {
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
+    KActionCollection* actionCollection = mMainWindow->actionCollection();
 
-    KToggleFullScreenAction *fullScreenAction = new KToggleFullScreenAction( actionCollection );
-    fullScreenAction->setWindow( window );
-    fullScreenAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_F11 );
-    actionCollection->addAction( QLatin1String("view_fullscreen"), fullScreenAction );
-    connect( fullScreenAction , SIGNAL(toggled(bool)) , SLOT(switchFullScreen(bool)) ); 
+    KStandardAction::fullScreen( this, SLOT(switchFullScreen(bool)),
+                                 window, actionCollection );
 }
 
 void FullScreenController::setTargetModel( AbstractModel* model )

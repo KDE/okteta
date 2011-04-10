@@ -48,8 +48,6 @@
     <Action name="view_area_close"/>
     <Separator/>
     <Action name="view_profiles_manage"/>
-    <Separator/>
-    <Action name="view_fullscreen"/>
   </Menu>
   <Menu name="bookmarks">
     <Action name="bookmark_add" />
