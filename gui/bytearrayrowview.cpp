@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Gui library, part of the KDE project.
+    This file is part of the Okteta Gui library, made within the KDE community.
 
     Copyright 2008-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 

@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta KByteArrayEdit module, part of the KDE project.
+    This file is part of the Okteta KByteArrayEdit module, made within the KDE community.
 
     Copyright 2006 Friedrich W. H. Kossebau <kossebau@kde.org>
 

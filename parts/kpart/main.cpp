@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta KPart module, part of the KDE project.
+    This file is part of the Okteta KPart module, made within the KDE community.
 
     Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 

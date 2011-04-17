@@ -1,5 +1,5 @@
 /*
-    This file is part of the Kasten Framework, part of the KDE project.
+    This file is part of the Kasten Framework, made within the KDE community.
 
     Copyright 2007,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 

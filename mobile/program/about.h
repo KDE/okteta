@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Mobile program, part of the KDE project.
+    This file is part of the Okteta Mobile program, made within the KDE community.
 
     Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
 

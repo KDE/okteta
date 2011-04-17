@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta project, part of the KDE project.
+    This file is part of the Okteta project, made within the KDE community.
 
     Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 

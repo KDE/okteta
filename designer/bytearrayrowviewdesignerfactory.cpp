@@ -1,5 +1,5 @@
 /*
-    This file is part of the Okteta Designer plugin, part of the KDE project.
+    This file is part of the Okteta Designer plugin, made within the KDE community.
 
     Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
 

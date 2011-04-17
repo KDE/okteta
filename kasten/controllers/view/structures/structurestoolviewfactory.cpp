@@ -1,5 +1,5 @@
 /*
- *   This file is part of the Okteta Kasten Framework, part of the KDE project.
+ *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
  *   Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
  *
