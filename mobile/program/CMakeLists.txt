@@ -48,14 +48,14 @@ set( okteta_SRCS
 kde4_add_executable( okteta-mobile  ${okteta_SRCS} )
 
 target_link_libraries( okteta-mobile
-  oktetakastencontrollers
+  oktetakastencontrollers1
 #   oktetakastengui
-  oktetakastencore
+  oktetakastencore1
   mobilekastencontrollers
   mobilekastengui
-  kastencontrollers
-#   kastengui
-  kastencore
+  kastencontrollers1
+#   kastengui1
+  kastencore1
   ${KDE4_KDEUI_LIBS}
 )
 

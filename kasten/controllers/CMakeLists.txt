@@ -431,31 +431,37 @@ set( okteta_kastencontrollers_LIB_HDRS
   document/overwriteonly/overwriteonlycontroller.h
 )
 
-kde4_add_library( oktetakastencontrollers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+kde4_add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
 
-target_link_libraries( oktetakastencontrollers
-  oktetakastengui
-  oktetakastencore
-  kastengui
-  kastencore
-  oktetagui
-  oktetacore
+target_link_libraries( ${oktetakastencontrollers_LIB}
+  ${oktetakastengui_LIB}
+  ${oktetakastencore_LIB}
+  ${KASTENGUI_LIBS}
+  ${KASTENCORE_LIBS}
+  ${oktetagui_LIB}
+  ${oktetacore_LIB}
   ${KDE4_KIO_LIBS}
   ${KDE4_KDEUI_LIBS}
+  ${KDE4_KNEWSTUFF3_LIBS}
   ${KDE4_KCMUTILS_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSCRIPTTOOLS_LIBRARY}
-  ${KDE4_KNEWSTUFF3_LIBS}
 )
 if( QCA2_FOUND )
-  target_link_libraries( oktetakastencontrollers ${QCA2_LIBRARIES} )
+  target_link_libraries( ${oktetakastencontrollers_LIB} ${QCA2_LIBRARIES} )
 endif( QCA2_FOUND )
 
-set_target_properties( oktetakastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( ${oktetakastencontrollers_LIB}  PROPERTIES
+  VERSION   ${OKTETAKASTEN_LIB_VERSION}
+  SOVERSION ${OKTETAKASTEN_LIB_SOVERSION}
+)
 
-install( TARGETS oktetakastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${oktetakastencontrollers_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${okteta_kastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${okteta_kastencontrollers_LIB_HDRS}
+  DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
 install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 set( elf_structure_FILES

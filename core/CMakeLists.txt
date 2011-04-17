@@ -81,13 +81,21 @@ set( oktetacore_LIB_HDRS
   wordbytearrayservice.h
 )
 
-kde4_add_library( oktetacore SHARED ${oktetacore_LIB_SRCS} )
-target_link_libraries( oktetacore  ${KDE4_KDECORE_LIBS} )
-set_target_properties( oktetacore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+kde4_add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_SRCS} )
+target_link_libraries( ${oktetacore_LIB}
+  ${KDE4_KDECORE_LIBS}
+)
+set_target_properties( ${oktetacore_LIB}  PROPERTIES
+  VERSION ${OKTETALIBS_LIB_VERSION}
+  SOVERSION ${OKTETALIBS_LIB_SOVERSION}
+)
 
-install( TARGETS oktetacore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${oktetacore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${oktetacore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/okteta  COMPONENT Devel )
+install( FILES ${oktetacore_LIB_HDRS}
+  DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
 
 
 add_subdirectory( piecetable/tests )

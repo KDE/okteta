@@ -46,8 +46,8 @@ set( mobilekastengui_LIB_HDRS
 
 kde4_add_library( mobilekastengui SHARED ${mobilekastengui_LIB_SRCS} )
 target_link_libraries( mobilekastengui
-  kastengui
-  kastencore
+  kastengui1
+  kastencore1
   ${KDE4_KDEUI_LIBS}
 )
 set_target_properties( mobilekastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )

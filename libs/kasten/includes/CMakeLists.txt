@@ -117,4 +117,7 @@ set( kasten_CamelCase_HDRS
   ${kastencontrollers_CamelCase_HDRS}
 )
 
-install( FILES ${kasten_CamelCase_HDRS}  DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/Kasten COMPONENT Devel)
+install( FILES ${kasten_CamelCase_HDRS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/Kasten${KASTEN_ABI_VERSION}
+  COMPONENT   Devel
+)

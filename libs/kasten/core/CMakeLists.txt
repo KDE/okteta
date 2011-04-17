@@ -10,11 +10,6 @@ include_directories(
   system
 )
 
-if(KDE4_BUILD_TESTS)
-  add_subdirectory( tests )
-endif(KDE4_BUILD_TESTS)
-
-
 set( KASTEN_CORE_ENTITY_SRCS
 #   entity/group.cpp
   entity/person.cpp
@@ -126,13 +121,23 @@ set( kastencore_LIB_HDRS
   system/modelcodecmanager.h
 )
 
-kde4_add_library( kastencore SHARED ${kastencore_LIB_SRCS} )
-target_link_libraries( kastencore
+kde4_add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
+target_link_libraries( ${kastencore_LIB}
   ${KDE4_KIO_LIBS}
   ${KDE4_SOLID_LIBS}
 )
-set_target_properties( kastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( ${kastencore_LIB}  PROPERTIES
+  VERSION   ${KASTEN_LIB_VERSION}
+  SOVERSION ${KASTEN_LIB_SOVERSION}
+)
 
-install( TARGETS kastencore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${kastencore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${kastencore_LIB_HDRS}
+  DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT   Devel
+)
+
+if(KDE4_BUILD_TESTS)
+  add_subdirectory( tests )
+endif(KDE4_BUILD_TESTS)

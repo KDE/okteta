@@ -20,8 +20,8 @@ set( oktetadesignerplugin_SRCS
 kde4_add_plugin( oktetadesignerplugin  ${oktetadesignerplugin_SRCS} )
 
 target_link_libraries( oktetadesignerplugin
-  oktetagui
-  oktetacore
+  ${oktetagui_LIB}
+  ${oktetacore_LIB}
   ${QT_QTGUI_LIBRARY}
   ${QT_QTCORE_LIBRARY}
 )

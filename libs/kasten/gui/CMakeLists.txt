@@ -137,14 +137,19 @@ set( kastengui_LIB_HDRS
   ${kastengui_controller_HDRS}
 )
 
-
-kde4_add_library( kastengui SHARED ${kastengui_LIB_SRCS} )
-target_link_libraries( kastengui
-  kastencore
+kde4_add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
+target_link_libraries( ${kastengui_LIB}
+  ${kastencore_LIB}
   ${KDE4_KDEUI_LIBS}
 )
-set_target_properties( kastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( ${kastengui_LIB}  PROPERTIES
+  VERSION   ${KASTEN_LIB_VERSION}
+  SOVERSION ${KASTEN_LIB_SOVERSION}
+)
 
-install( TARGETS kastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${kastengui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${kastengui_LIB_HDRS}
+  DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT   Devel
+)

@@ -97,16 +97,23 @@ set( oktetagui_LIB_HDRS
   offsetformat.h
 )
 
-kde4_add_library( oktetagui  SHARED ${oktetagui_LIB_SRCS} )
-target_link_libraries( oktetagui  oktetacore ${KDE4_KDEUI_LIBS} )
-set_target_properties( oktetagui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} 
-                                             SOVERSION ${GENERIC_LIB_SOVERSION} 
-                                             LABELS OktetaLabel
-                     )
+kde4_add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
+target_link_libraries( ${oktetagui_LIB}
+  ${oktetacore_LIB}
+  ${KDE4_KDEUI_LIBS}
+)
+set_target_properties( ${oktetagui_LIB}  PROPERTIES
+  VERSION ${OKTETALIBS_LIB_VERSION}
+  SOVERSION ${OKTETALIBS_LIB_SOVERSION}
+  LABELS OktetaLabel
+)
 
-install( TARGETS oktetagui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${oktetagui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${oktetagui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/okteta  COMPONENT Devel )
+install( FILES ${oktetagui_LIB_HDRS}
+  DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
 
 
 add_subdirectory( test )

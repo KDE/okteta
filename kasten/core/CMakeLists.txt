@@ -41,7 +41,7 @@ set( okteta_kastencore_LIB_SRCS
   ${okteta_kastencore_io_SRCS}
 )
 
-set( oktete_kastencore_LIB_HDRS
+set( okteta_kastencore_LIB_HDRS
   oktetakastencore_export.h
   document/bytearrayselection.h
   document/bytearraydocument.h
@@ -50,18 +50,24 @@ set( oktete_kastencore_LIB_HDRS
   io/filesystem/bytearrayrawfilesynchronizerfactory.h
 )
 
-kde4_add_library( oktetakastencore  SHARED ${okteta_kastencore_LIB_SRCS} )
+kde4_add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
 
-target_link_libraries( oktetakastencore
-  kastencore
-  oktetacore
+target_link_libraries( ${oktetakastencore_LIB}
+  ${KASTENCORE_LIBS}
+  ${oktetacore_LIB}
   ${KDE4_KIO_LIBS}
 )
-set_target_properties( oktetakastencore  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( ${oktetakastencore_LIB} PROPERTIES
+  VERSION   ${OKTETAKASTEN_LIB_VERSION}
+  SOVERSION ${OKTETAKASTEN_LIB_SOVERSION}
+)
 
-install( TARGETS oktetakastencore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${oktetakastencore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${oktete_kastencore_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${okteta_kastencore_LIB_HDRS}
+  DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
 
 
 if(KDE4_BUILD_TESTS)

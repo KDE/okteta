@@ -44,12 +44,12 @@ kde4_add_plugin( oktetapart  ${oktetapart_SRCS})
 
 
 target_link_libraries( oktetapart
-  oktetakastencontrollers
-  oktetakastengui
-  oktetakastencore
-  kastencontrollers
-  kastengui
-  kastencore
+  oktetakastencontrollers1
+  oktetakastengui1
+  oktetakastencore1
+  kastencontrollers1
+  kastengui1
+  kastencore1
   ${KDE4_KPARTS_LIBS}
 )
 

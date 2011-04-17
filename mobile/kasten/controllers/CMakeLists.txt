@@ -118,9 +118,9 @@ set( mobilekastencontrollers_LIB_HDRS
 kde4_add_library( mobilekastencontrollers SHARED ${mobilekastencontroller_LIB_SRCS} )
 target_link_libraries( mobilekastencontrollers
   mobilekastengui
-  kastencontrollers
-  kastengui
-  kastencore
+  kastencontrollers1
+  kastengui1
+  kastencore1
   ${KDE4_KIO_LIBS}
   ${KDE4_KPARTS_LIBS}
   ${KDE4_KFILE_LIBS}

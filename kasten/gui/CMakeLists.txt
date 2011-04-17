@@ -162,26 +162,32 @@ set( okteta_kastengui_io_HDRS
   io/streamencoder/bytearraytextstreamencoderpreview.h
 )
 
-set( oktete_kastengui_LIB_HDRS
+set( okteta_kastengui_LIB_HDRS
   oktetakastengui_export.h
   ${okteta_kastengui_view_HDRS}
   ${okteta_kastengui_io_HDRS}
 )
 
-kde4_add_library( oktetakastengui  SHARED ${okteta_kastengui_LIB_SRCS} )
+kde4_add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
 
-target_link_libraries( oktetakastengui
-  oktetakastencore
-  kastengui
-  kastencore
-  oktetagui
-  oktetacore
+target_link_libraries( ${oktetakastengui_LIB}
+  ${oktetakastencore_LIB}
+  ${KASTENGUI_LIBS}
+  ${KASTENCORE_LIBS}
+  ${oktetagui_LIB}
+  ${oktetacore_LIB}
   ${KDE4_KDEUI_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
 )
 #TODO should probably first check if QtScript is available??
-set_target_properties( oktetakastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( ${oktetakastengui_LIB}  PROPERTIES
+  VERSION   ${OKTETAKASTEN_LIB_VERSION}
+  SOVERSION ${OKTETAKASTEN_LIB_SOVERSION}
+)
 
-install( TARGETS oktetakastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${oktetakastengui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${oktete_kastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${okteta_kastengui_LIB_HDRS}
+  DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)

@@ -180,17 +180,22 @@ set( kastencontrollers_LIB_HDRS
   program/quit/quitcontroller.h
 )
 
-
-kde4_add_library( kastencontrollers SHARED ${kastencontroller_LIB_SRCS} )
-target_link_libraries( kastencontrollers
-  kastengui
-  kastencore
+kde4_add_library( ${kastencontrollers_LIB} SHARED ${kastencontroller_LIB_SRCS} )
+target_link_libraries( ${kastencontrollers_LIB}
+  ${kastengui_LIB}
+  ${kastencore_LIB}
   ${KDE4_KIO_LIBS}
   ${KDE4_KPARTS_LIBS}
   ${KDE4_KFILE_LIBS}
 )
-set_target_properties( kastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( ${kastencontrollers_LIB}  PROPERTIES
+  VERSION   ${KASTEN_LIB_VERSION}
+  SOVERSION ${KASTEN_LIB_SOVERSION}
+)
 
-install( TARGETS kastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${kastencontrollers_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${kastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+install( FILES ${kastencontrollers_LIB_HDRS}
+  DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT   Devel
+)
