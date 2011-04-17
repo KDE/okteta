@@ -83,8 +83,8 @@ public:
     bool isStructureLocked(QModelIndex idx) const;
     /** check if there is any ByteArrayModel available to lock the structure */
     bool canStructureBeLocked(QModelIndex idx) const;
-Q_SIGNALS: // changes to the settings currently not signaled, because only controlled by view
-    void dataChanged();
+Q_SIGNALS:
+    void dataChanged(int row, void* data); //actually a DataInformation*
     void dataCleared();
     void byteOrderChanged();
     void cursorIndexChanged();
@@ -104,10 +104,7 @@ protected Q_SLOTS:
     void onCursorPositionChange(Okteta::Address pos);
     void onContentsChange(const Okteta::ArrayChangeMetricsList&);
     //	void onCharCodecChange(const QString& codecName);
-    void onChildItemDataChanged()
-    {
-        emit dataChanged();
-    }
+    void onChildItemDataChanged();
 
 protected:
     // source
@@ -120,7 +117,8 @@ protected:
     StructViewPreferences::EnumByteOrder::type mByteOrder;
     StructuresManager* mManager;
     QList<TopLevelDataInformation*> mData;
-    bool mWritingData;
+    bool mWritingData : 1;
+    bool mCurrentItemDataChanged : 1;
 public:
     //interface for model
     QVariant headerData(int column, int role);

@@ -31,7 +31,7 @@ namespace Kasten
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
     QAbstractItemModel(parent), mTool(tool)
 {
-    connect(mTool, SIGNAL(dataChanged()), this, SLOT(onToolDataChange()));
+    connect(mTool, SIGNAL(dataChanged(int, void*)), this, SLOT(onToolDataChange(int, void*)));
     connect(mTool, SIGNAL(dataCleared()), this, SLOT(onToolDataClear()));
 }
 
@@ -281,62 +281,16 @@ void StructTreeModel::removeItemFromSignalsList(QObject* obj)
 QModelIndex StructTreeModel::findItemInModel(QObject* obj) const
 {
     DataInformation* data = dynamic_cast<DataInformation*> (obj);
+    Q_CHECK_PTR(data);
     if (!data)
         return QModelIndex(); //invalid object
-    //first check if is one of the top level items
-    DataInformation* mainStructure = data->mainStructure();
-
-    QModelIndex currentIndex;
-    //find the top level QModelIndex one of the top level items:
-    for (int i = 0; i < mTool->childCount(); ++i)
-    {
-        if (mainStructure == mTool->childAt(i))
-        {
-            currentIndex = index(i, 0, QModelIndex()); //QModelIndex() since is top level item
-            break;
-        }
-    }
-    Q_ASSERT(currentIndex.isValid());
-    if (data == mainStructure) //this is the topLevel index
-        return currentIndex;
-
-    QList<DataInformation*> parents;
-    parents << mainStructure;
-    DataInformation* currentParent = data;
-
-    //populate parents list first
-    while (currentParent && currentParent != mainStructure)
-    {
-        parents.insert(1, currentParent);
-        currentParent = dynamic_cast<DataInformation*> (currentParent->parent());
-        // in case currentParent is not a DataInformation,loop will end too
-    }
-
-    currentParent = mainStructure;
-    //iterate over the list now
-    //start at one since currentIndex points to mainStructure already
-    for (int i = 1; i < parents.length(); ++i)
-    {
-        DataInformation* parentToFind = parents.at(i);
-        bool found = false;
-        for (uint j = 0; j < currentParent->childCount(); ++j)
-        {
-            if (parentToFind == currentParent->childAt(j))
-            {
-                QModelIndex parentIndex(currentIndex);
-                currentIndex = index(j, 0, parentIndex);
-                Q_ASSERT(currentIndex.isValid());
-                found = true;
-                break;
-            }
-        }
-        Q_ASSERT(found);
-        if (parentToFind == data)
-            return currentIndex;
-        currentParent = parentToFind;
-    }
-    //not found
-    return QModelIndex();
+    return createIndex(data->row(), 0, obj);
 }
+
+void StructTreeModel::onToolDataChange(int row, void* data)
+{
+    emit dataChanged(createIndex(row, 0, data), createIndex(row, 2, data));
+}
+
 
 }

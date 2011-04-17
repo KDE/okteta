@@ -54,10 +54,7 @@ public:
 private:
     QModelIndex findItemInModel(QObject* obj) const;
 public Q_SLOTS:
-    void onToolDataChange()
-    {
-        emit dataChanged(QModelIndex(), QModelIndex()); //FIXME emit correct ranges
-    }
+    void onToolDataChange(int row, void* data);
     void onToolDataClear()
     {
         reset();

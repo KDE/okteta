@@ -48,7 +48,7 @@ namespace Kasten
 StructTool::StructTool() :
     mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0), mByteOrder(
             StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
-            mWritingData(false)
+            mWritingData(false), mCurrentItemDataChanged(false)
 {
     //leave mLoadedFiles empty for now, since otherwise loading slot will not work
     setObjectName( QLatin1String("StructTool" ));
@@ -183,6 +183,9 @@ void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
     {
         TopLevelDataInformation* dat = mData.at(i);
         dat->read(mByteArrayModel, mCursorIndex, list);
+        if (mCurrentItemDataChanged)
+            emit dataChanged(i, mData.at(i)->actualDataInformation());
+        mCurrentItemDataChanged = false;
     }
 }
 
@@ -251,7 +254,7 @@ void StructTool::setSelectedStructuresInView()
             {
                 QString pluginName = regex.cap(1);
                 QString name = regex.cap(2);
-                //                kDebug() << "pluginName=" << path << " structureName=" << name;
+                //kDebug() << "pluginName=" << path << " structureName=" << name;
                 StructureDefinitionFile* def = mManager->definition(pluginName);
                 if (!def)
                     continue;
@@ -262,8 +265,10 @@ void StructTool::setSelectedStructuresInView()
                 if (data)
                     addChildItem(data);
             }
-        }emit
-    dataChanged();
+        }
+    for (int i = 0; i < mData.count(); ++i) {
+        emit dataChanged(i, mData.at(i)->actualDataInformation());
+    }
     updateData();
 
 }
@@ -390,5 +395,11 @@ bool StructTool::canStructureBeLocked(QModelIndex idx) const
         return true;
     return false;
 }
+
+void StructTool::onChildItemDataChanged()
+{
+    mCurrentItemDataChanged = true;
+}
+
 
 }
