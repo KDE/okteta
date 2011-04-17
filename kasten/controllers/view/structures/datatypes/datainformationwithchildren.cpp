@@ -106,7 +106,9 @@ DataInformationWithChildren::DataInformationWithChildren(
         const DataInformationWithChildren& d) :
     DataInformation(d)
 {
-    for (int i = 0; i < d.mChildren.size(); ++i)
+    int count = d.mChildren.count();
+    mChildren.reserve(count);
+    for (int i = 0; i < count; ++i)
     {
         const DataInformation* dat = d.mChildren.at(i);
         DataInformation* child = dat->clone();
@@ -344,15 +346,15 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
     else
     {
         emit childrenAboutToBeInserted(this, 0, convertedVal->childCount() - 1);
-        for (uint i = 0; i < convertedVal->childCount(); ++i)
+        const uint count = convertedVal->childCount();
+        mChildren.reserve(count);
+        for (uint i = 0; i < count; ++i)
         {
             DataInformation* child = convertedVal->childAt(i);
             appendChild(child);
         }
         emit childrenInserted(this, 0, convertedVal->childCount() - 1);
     }
-    kDebug()
-        << "setting children of " + name();
     delete convertedVal;
 }
 
