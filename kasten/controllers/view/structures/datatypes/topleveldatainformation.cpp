@@ -34,7 +34,7 @@
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         QFileInfo structureFile, bool dynamic, QString name) :
     QObject(), mData(data), mScriptHandler(NULL), mStructureFile(structureFile),
-            mWasAbleToParse(true), mIndex(-1)
+            mWasAbleToParse(true), mIndex(-1), mChildDataChanged(false)
 {
 
     if (dynamic)
@@ -111,6 +111,7 @@ void TopLevelDataInformation::updateElement(DataInformation* elem)
 void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
         Okteta::Address address, const Okteta::ArrayChangeMetricsList& changesList)
 {
+    mChildDataChanged = false;
     //first of all check if start offset is locked
     if (mLockedPositions.contains(input))
     {
@@ -130,7 +131,13 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
     mData->readData(input, address, remainingBits, bitOffset);
     delete bitOffset;
 
+    if (mChildDataChanged)
+    {
+        emit dataChanged();
+        mChildDataChanged = false;
+    }
 }
+
 bool TopLevelDataInformation::isReadingNecessary(
         const Okteta::ArrayChangeMetricsList& changesList, Okteta::Address address)
 {

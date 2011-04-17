@@ -33,7 +33,6 @@ void DataInformationWithChildren::appendChild(DataInformation* child)
     {
         child->setParent(this);
         mChildren.append(child);
-        connect(child, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
     }
 }
 
@@ -113,7 +112,6 @@ DataInformationWithChildren::DataInformationWithChildren(
         const DataInformation* dat = d.mChildren.at(i);
         DataInformation* child = dat->clone();
         child->setParent(this);
-        QObject::connect(child, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
         mChildren.append(child);
     }
 }

@@ -37,7 +37,6 @@ EnumDataInformation::EnumDataInformation(QString name, PrimitiveDataInformation*
         kWarning() << "incompatible types in definition and value: "
                 << enumDef->type() << "and " << type->type();
     mValue->setParent(this);
-    connect(mValue, SIGNAL(dataChanged()), SIGNAL(dataChanged()));
 }
 
 EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
@@ -45,7 +44,6 @@ EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
 {
     mValue = static_cast<PrimitiveDataInformation*> (e.mValue->clone());
     mValue->setParent(this);
-    connect(mValue, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
 }
 
 EnumDataInformation::~EnumDataInformation()

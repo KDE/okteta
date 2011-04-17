@@ -230,9 +230,7 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
         child->setIndex(mData.size());
         child->setParent(this);
         mData.append(child);
-        connect(child->actualDataInformation(), SIGNAL(dataChanged()), this,
-                SLOT(onChildItemDataChanged()));
-
+        connect(child, SIGNAL(dataChanged()), this, SLOT(onChildItemDataChanged()));
     }
 }
 

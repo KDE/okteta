@@ -50,8 +50,6 @@ AbstractArrayDataInformation::AbstractArrayDataInformation(QString name,
     for (unsigned int i = 0; i < length; i++)
     {
         DataInformation* arrayElem = childType.clone();
-        QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
-                SIGNAL(dataChanged()));
         appendChild(arrayElem);
     }
 }
@@ -95,8 +93,6 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
         for (int i = oldLength; i < newLength; ++i)
         {
             DataInformation* arrayElem = mChildType->clone();
-            QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
-                    SIGNAL(dataChanged()));
             appendChild(arrayElem);
         }
         emit childrenInserted(this, oldLength, newLength - 1);
@@ -157,8 +153,6 @@ QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type)
     for (uint i = 0; i < len; i++)
     {
         DataInformation* arrayElem = newChildType->clone();
-        QObject::connect(arrayElem, SIGNAL(dataChanged()), this,
-                SIGNAL(dataChanged()));
         appendChild(arrayElem);
     }emit
     childrenInserted(this, 0, len - 1);

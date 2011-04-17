@@ -182,7 +182,6 @@ protected:
      */ 
     virtual int indexOf(const DataInformation* const data) const;
 Q_SIGNALS:
-    void dataChanged();
     // sender as parameter, so no cast is needed, also makes it safer since QObject::sender() may be risky
     /** items are inserted before @p startIndex */
     void childrenAboutToBeInserted(QObject* sender, uint startIndex, uint endIndex);

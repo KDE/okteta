@@ -88,15 +88,13 @@ bool PrimitiveDataInformation::setData(const QVariant& valueVariant, DataInforma
         return false;
     }
     AllPrimitiveTypes oldVal(value());
-    bool wasValid = mWasAbleToRead;
     // this is implemented in the subclasses
     AllPrimitiveTypes valToWrite = qVariantToAllPrimitiveTypes(valueVariant);
     AllPrimitiveTypes newVal(oldVal);
     //this handles remaining < size() for us
     mWasAbleToRead = newVal.writeBits(size(), valToWrite, out, byteOrder(), address, bitsRemaining, bitOffset);
 
-    if (oldVal != newVal || wasValid != mWasAbleToRead)
-        emit dataChanged();
+    //no need for dataChanged, since structtool ensures that the model emits dataChanged when items are set
     return true;
 }
 
@@ -111,7 +109,7 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
-    if (bitsRemaining < size()) //TODO make size() unsigned
+    if (bitsRemaining < (unsigned)size())
     {
         mWasAbleToRead = false;
         setValue(0);
@@ -124,7 +122,7 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     mWasAbleToRead = newVal.readBits(size(), input, byteOrder(), address, bitsRemaining, bitOffset);
 
     if (oldVal != newVal || wasValid != mWasAbleToRead) {
-        emit dataChanged();
+        topLevelDataInformation()->setChildDataChanged();
         setValue(newVal);
     }
 

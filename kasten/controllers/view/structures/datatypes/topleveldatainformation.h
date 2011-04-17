@@ -75,12 +75,15 @@ public:
     int indexOf(const DataInformation* const data) const;
     int index() const;
     void setIndex(int newIndex);
+    void setChildDataChanged();
 private:
     bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
             Okteta::Address address);
 public Q_SLOTS:
     void resetValidationState();
     void removeByteArrayModelFromList(QObject* model);
+Q_SIGNALS:
+    void dataChanged();
 private:
     DataInformation* mData;
     QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
@@ -92,6 +95,7 @@ private:
      */
     QMap<const Okteta::AbstractByteArrayModel*, quint64*> mLockedPositions;
     bool mWasAbleToParse :1;
+    bool mChildDataChanged :1;
     int mIndex;
 };
 
@@ -118,6 +122,11 @@ inline int TopLevelDataInformation::index() const
 inline void TopLevelDataInformation::setIndex(int newIndex)
 {
     mIndex = newIndex;
+}
+
+inline void TopLevelDataInformation::setChildDataChanged()
+{
+    mChildDataChanged = true;
 }
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */
