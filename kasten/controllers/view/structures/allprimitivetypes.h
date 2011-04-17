@@ -48,15 +48,34 @@ enum PrimitiveDataType
     Type_Bool16,
     Type_Int16,
     Type_UInt16,
+    Type_Bool32,
     Type_Int32,
     Type_UInt32,
-    Type_Bool32,
+    Type_Bool64,
     Type_Int64,
     Type_UInt64,
-    Type_Bool64,
     Type_Float,
     Type_Double,
     Type_Bitfield
+};
+
+const QLatin1String primitiveTypeNames[] = {
+    QLatin1String("bool8"),
+    QLatin1String("int8"),
+    QLatin1String("uint8"),
+    QLatin1String("char"),
+    QLatin1String("bool16"),
+    QLatin1String("int16"),
+    QLatin1String("uint16"),
+    QLatin1String("bool32"),
+    QLatin1String("int32"),
+    QLatin1String("uint32"),
+    QLatin1String("bool64"),
+    QLatin1String("int64"),
+    QLatin1String("uint64"),
+    QLatin1String("float"),
+    QLatin1String("double"),
+    QLatin1String("bitfield"),
 };
 
 /** This union holds the value of one primitive datatype. Maximum size of a datatype is currently 64 bits.
