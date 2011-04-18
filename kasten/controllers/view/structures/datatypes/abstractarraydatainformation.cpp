@@ -71,21 +71,20 @@ bool AbstractArrayDataInformation::isDynamicArray() const
     return mAdditionalData->updateFunction() != NULL;
 }
 
-QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
+QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength, QScriptContext* context)
 {
     //kDebug() << "old child count: " << childCount();
 
     //arrays with length zero are useless -> minimum is 1 (prevents integer underflow later
     if (newLength < 0)
-        return context() ? context()->throwError(
-                "new Array length is less than zero: " + QString::number(newLength))
-                : QScriptValue();
+        return context ? context->throwError("new Array length is less than zero: "
+            + QString::number(newLength)) : QScriptValue();
     if (newLength > 100000)
     {
         kWarning() << "attempting to set the length of the array" << name() << "to "
                 << newLength << " which would use too much memory";
 
-        return context() ? context()->throwError("new Array length is to large: "
+        return context ? context->throwError("new Array length is to large: "
                 + QString::number(newLength)) : QScriptValue();
     }
     int oldLength = childCount();
@@ -111,7 +110,7 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
     return true; //success
 }
 
-QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type)
+QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type, QScriptContext* context)
 {
     DataInformation* newChildType = NULL;
 
@@ -130,8 +129,8 @@ QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type)
     //return if conversion failed
     if (!newChildType)
     {
-        if (context())
-            return context()->throwError("String '" + type.toString()
+        if (context)
+            return context->throwError("String '" + type.toString()
                     + "' is not a valid identifier for a primitive data type");
         else
             return QScriptValue();

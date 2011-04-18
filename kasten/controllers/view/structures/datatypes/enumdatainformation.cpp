@@ -114,26 +114,6 @@ AllPrimitiveTypes EnumDataInformation::qVariantToAllPrimitiveTypes(
     return mValue->qVariantToAllPrimitiveTypes(value);
 }
 
-QScriptValue EnumDataInformation::scriptValue() const
-{
-    //XXX for some reason forwarding to mValue does not work, instead just copy the code
-    QScriptEngine* eng = engine();
-    if (!eng)
-        return QScriptValue();
-    if (!mWasAbleToRead)
-    {
-        if (context())
-            return context()->throwError("Attempting to read value from element"
-                " that has not been read yet: " + name());
-        else
-            return QScriptValue("fail");
-    }
-    QScriptValue wrapObj = eng->newObject();
-    ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, mValue->value(),
-            mValue->type());
-    return wrapObj;
-}
-
 AllPrimitiveTypes EnumDataInformation::value() const
 {
     return mValue->value();

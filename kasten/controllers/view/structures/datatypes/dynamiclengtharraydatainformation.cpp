@@ -28,7 +28,7 @@ void DynamicLengthArrayDataInformation::resizeChildren()
     //kDebug() << "old childcount: " << childCount();
     int l = qMax(0, calculateLength());
     unsigned int len = (unsigned) (l);
-    setArrayLength(len);
+    setArrayLength(len, 0);
 }
 
 qint64 DynamicLengthArrayDataInformation::readData(Okteta::AbstractByteArrayModel *input,

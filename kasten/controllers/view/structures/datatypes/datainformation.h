@@ -60,16 +60,9 @@ typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
 /** Interface that must be implemented by all datatypes */
-class DataInformation: public QObject, public QScriptable
+class DataInformation: public QObject
 {
 Q_OBJECT
-public:
-    //    Q_PROPERTY(bool hasBeenValidated READ hasBeenValidated() WRITE setHasBeenValidated)
-Q_PROPERTY(bool valid READ validationSuccessful WRITE setValidationSuccessful)
-Q_PROPERTY(bool wasAbleToRead READ wasAbleToRead)
-Q_PROPERTY(QString validationError READ validationError WRITE setValidationError)
-Q_PROPERTY(QObject* parent READ parent)
-
 protected:
     DataInformation(const DataInformation&);
 public:

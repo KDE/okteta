@@ -29,9 +29,6 @@
 class PrimitiveDataInformation: public DataInformation
 {
 Q_OBJECT
-
-Q_PROPERTY(QScriptValue value READ scriptValue)
-
 public:
     explicit PrimitiveDataInformation(QString name, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
@@ -54,7 +51,6 @@ public:
     virtual AllPrimitiveTypes
     qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     QVariant data(int column, int role) const;
-    virtual QScriptValue scriptValue() const; //TODO remove
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 protected:

@@ -33,7 +33,7 @@ DataInformation::DataInformation(const QString& name, DataInformation* parent) :
 }
 
 DataInformation::DataInformation(const DataInformation& d) :
-    QObject(NULL), QScriptable(), mValidationSuccessful(d.mValidationSuccessful),
+    QObject(NULL), mValidationSuccessful(d.mValidationSuccessful),
             mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead), 
             mByteOrder(d.mByteOrder), mAdditionalData(NULL)            
 {

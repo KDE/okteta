@@ -28,21 +28,18 @@
 class DataInformationWithChildren: public DataInformation
 {
 Q_OBJECT
-    Q_PROPERTY(int childCount READ childCount)
-    Q_PROPERTY(QScriptValue children READ childrenAsScriptValue)
 protected:
     QList<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
     void appendChild(DataInformation* child); //not part of public API (no adding to array)
     virtual int indexOf(const DataInformation* const data) const;
 public:
-
-    QList<DataInformation*> children() const;
     explicit DataInformationWithChildren(QString& name, DataInformation* parent = NULL);
     virtual ~DataInformationWithChildren();
 
     virtual QVariant data(int, int) const;
     virtual QVariant childData(int row, int column, int role) const;
+    QList<DataInformation*> children() const;
 
     virtual int size() const;
     /** this is valid for structs and arrays, union has an own implementation */
@@ -67,13 +64,7 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     virtual void resetValidationState();
     virtual void calculateValidationState(); //only in DataInformationWithChildren
-    //for QtScript
-    Q_INVOKABLE void setChildren(QScriptValue children);
-    /** returns an object that holds the children, accessable as obj["childName"] */
-    virtual QScriptValue childrenAsScriptValue() const;
-    /** alternate way to access children: obj.child("childName") */
-    Q_INVOKABLE QScriptValue child(QString name) const;
-    Q_INVOKABLE QScriptValue at(uint index) const;
+    void setChildren(QScriptValue children);
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 };
 

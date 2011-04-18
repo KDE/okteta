@@ -29,9 +29,6 @@
 class AbstractArrayDataInformation: public DataInformationWithChildren
 {
 Q_OBJECT
-
-Q_PROPERTY(int length READ length WRITE setArrayLength)
-Q_PROPERTY(QScriptValue childType READ childType)
 protected:
     explicit AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
 public:
@@ -51,8 +48,8 @@ public:
     
     virtual QVariant childData(int row, int column, int role) const;
 
-    Q_INVOKABLE QScriptValue setArrayLength(int newLength);
-    Q_INVOKABLE QScriptValue setArrayType(QScriptValue type);
+    QScriptValue setArrayLength(int newLength, QScriptContext* context);
+    QScriptValue setArrayType(QScriptValue type, QScriptContext* context);
     virtual QScriptValue childType() const;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 

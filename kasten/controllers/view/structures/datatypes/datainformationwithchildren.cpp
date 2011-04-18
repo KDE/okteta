@@ -242,43 +242,6 @@ void DataInformationWithChildren::resetValidationState()
         }
 }
 
-QScriptValue DataInformationWithChildren::childrenAsScriptValue() const
-{
-    QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
-    QScriptValue childrenScriptVal = engine->newArray(childCount());
-    for (uint i = 0; i < childCount(); ++i)
-    {
-        //just append all children as a property
-        DataInformation* data = mChildren.at(i);
-        QScriptValue childObj = engine->newQObject(data, QScriptEngine::QtOwnership,
-                QScriptEngine::ExcludeDeleteLater);
-        childrenScriptVal.setProperty(data->name(), childObj, QScriptValue::ReadOnly
-                | QScriptValue::Undeletable);
-        //allow array access
-        childrenScriptVal.setProperty(i, childObj, QScriptValue::ReadOnly
-                | QScriptValue::Undeletable);
-    }
-    return childrenScriptVal;
-}
-
-QScriptValue DataInformationWithChildren::child(QString name) const
-{
-    for (uint i = 0; i < childCount(); ++i)
-    {
-        //just append all children as a property
-        DataInformation* data = mChildren.at(i);
-        QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
-        if (data->name() == name)
-        {
-            QScriptValue childObj = engine->newQObject(data,
-                    QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-            return childObj;
-        }
-    }
-    //not found -> return invalid value
-    return QScriptValue(QScriptValue::NullValue);
-}
-
 void DataInformationWithChildren::calculateValidationState()
 {
     if (hasChildren())
@@ -308,16 +271,6 @@ void DataInformationWithChildren::calculateValidationState()
             setValidationSuccessful(allChildrenValid);
         }
     }
-}
-
-QScriptValue DataInformationWithChildren::at(uint index) const
-{
-    if (index >= childCount())
-        return QScriptValue();
-    QScriptEngine* engine = topLevelDataInformation()->scriptEngine();
-    QScriptValue childObj = engine->newQObject(childAt(index),
-            QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-    return childObj;
 }
 
 void DataInformationWithChildren::setChildren(QScriptValue children)
