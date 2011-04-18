@@ -145,26 +145,26 @@ template<typename N,typename S>
 inline N NumberRange<N,S>::nextBehindEnd()   const { return Range<N>::end()+1; }
 
 template<typename N,typename S>
-inline void NumberRange<N,S>::setByWidth( N other, S width )  { setStart( other ); setEnd( other+width-1 ); }
+inline void NumberRange<N,S>::setByWidth( N other, S width )  { Range<N>::setStart( other ); Range<N>::setEnd( other+width-1 ); }
 template<typename N,typename S>
-inline void NumberRange<N,S>::setStartByWidth( S width )  { setStart( Range<N>::end()-width+1 ); }
+inline void NumberRange<N,S>::setStartByWidth( S width )  { Range<N>::setStart( Range<N>::end()-width+1 ); }
 template<typename N,typename S>
-inline void NumberRange<N,S>::setEndByWidth( S width )    { setEnd( Range<N>::start()+width-1 ); }
+inline void NumberRange<N,S>::setEndByWidth( S width )    { Range<N>::setEnd( Range<N>::start()+width-1 ); }
 template<typename N,typename S>
-inline void NumberRange<N,S>::setStartNextBehind( const NumberRange<N,S>& other )  { setStart( other.nextBehindEnd() ); }
+inline void NumberRange<N,S>::setStartNextBehind( const NumberRange<N,S>& other )  { Range<N>::setStart( other.nextBehindEnd() ); }
 template<typename N,typename S>
-inline void NumberRange<N,S>::setStartNextBehind( N index )  { setStart( index+1 ); }
+inline void NumberRange<N,S>::setStartNextBehind( N index )  { Range<N>::setStart( index+1 ); }
 template<typename N,typename S>
-inline void NumberRange<N,S>::setEndNextBefore( const NumberRange<N,S>& other )    { setEnd( other.nextBeforeStart() ); }
+inline void NumberRange<N,S>::setEndNextBefore( const NumberRange<N,S>& other )    { Range<N>::setEnd( other.nextBeforeStart() ); }
 template<typename N,typename S>
-inline void NumberRange<N,S>::setEndNextBefore( N index )    { setEnd( index-1 ); }
+inline void NumberRange<N,S>::setEndNextBefore( N index )    { Range<N>::setEnd( index-1 ); }
 template<typename N,typename S>
-inline void NumberRange<N,S>::restrictEndByWidth( S width ) { restrictEndTo( Range<N>::start()+width-1 ); }
+inline void NumberRange<N,S>::restrictEndByWidth( S width ) { Range<N>::restrictEndTo( Range<N>::start()+width-1 ); }
 
 template<typename N,typename S>
-inline void NumberRange<N,S>::moveToStart( N other ) { setEnd( other+width()-1 ); setStart( other ); }
+inline void NumberRange<N,S>::moveToStart( N other ) { Range<N>::setEnd( other+width()-1 ); Range<N>::setStart( other ); }
 template<typename N,typename S>
-inline void NumberRange<N,S>::moveToEnd( N end )   { setStart( end-width()+1 ); setEnd( end ); }
+inline void NumberRange<N,S>::moveToEnd( N end )   { Range<N>::setStart( end-width()+1 ); Range<N>::setEnd( end ); }
 
 template<typename N,typename S>
 inline NumberRange<N,S> NumberRange<N,S>::splitAt( N index )
@@ -207,8 +207,8 @@ inline NumberRange<N,S> NumberRange<N,S>::subRange( const NumberRange<N,S>& loca
 template<typename N,typename S>
 inline N NumberRange<N,S>::startForInclude( const NumberRange<N,S>& other ) const
 {
-  return startsBehind(other.start()) ? other.start() :
-         endsBefore(other.end()) ?     other.end()-width()+1 :
+  return Range<N>::startsBehind(other.start()) ? other.start() :
+         Range<N>::endsBefore(other.end()) ?     other.end()-width()+1 :
          Range<N>::start();
 }
 template<typename N,typename S>
@@ -217,22 +217,22 @@ inline bool NumberRange<N,S>::isJoinable( const NumberRange<N,S>& other ) const
 
 template<typename N,typename S>
 inline bool NumberRange<N,S>::prepend( const NumberRange<N,S>& other )
-{ const bool mergeable = ( other.nextBehindEnd() == Range<N>::start() ); if( mergeable ) setStart( other.start() ); return mergeable; }
+{ const bool mergeable = ( other.nextBehindEnd() == Range<N>::start() ); if( mergeable ) Range<N>::setStart( other.start() ); return mergeable; }
 template<typename N,typename S>
 inline bool NumberRange<N,S>::append( const NumberRange<N,S>& other )
-{ const bool mergeable = ( nextBehindEnd() == other.start() ); if( mergeable ) setEnd( other.end() ); return mergeable; }
+{ const bool mergeable = ( nextBehindEnd() == other.start() ); if( mergeable ) Range<N>::setEnd( other.end() ); return mergeable; }
 
 template<typename N,typename S>
 inline void NumberRange<N,S>::adaptToReplacement( N offset, S removedLength, S insertedLength )
 {
     // nothing to adapt or not affected at all??
-    if( ! Range<N>::isValid() || endsBefore(offset-1) )
+    if( ! Range<N>::isValid() || Range<N>::endsBefore(offset-1) )
         return;
 
     // indirectly affected?
-    if( !startsBefore(offset+removedLength) )
+    if( !Range<N>::startsBefore(offset+removedLength) )
     {
-        moveBy( insertedLength-removedLength );
+        Range<N>::moveBy( insertedLength-removedLength );
     }
     // changes overlap, oh well
     else
@@ -240,25 +240,25 @@ inline void NumberRange<N,S>::adaptToReplacement( N offset, S removedLength, S i
         // only inserted?
         if( removedLength==0 )
         {
-            if( startsBefore(offset) && !endsBefore(offset-1) )
-                moveEndBy( insertedLength );
+            if( Range<N>::startsBefore(offset) && !Range<N>::endsBefore(offset-1) )
+                Range<N>::moveEndBy( insertedLength );
         }
         // only removed?
         else if( insertedLength==0 )
         {
-            extendStartTo(offset);
-            moveEndBy( -removedLength );
-            extendEndTo(offset-1);
+            Range<N>::extendStartTo(offset);
+            Range<N>::moveEndBy( -removedLength );
+            Range<N>::extendEndTo(offset-1);
             // equals "if( End>offset+removedLength ) End -= removedLength; else End = offset-1;"
         }
         else
         {
-            if( startsBehind(offset) )
-                setStart( offset+insertedLength );
-            if( endsBefore(offset+removedLength-1) )
-                setEnd( offset-1 );
+            if( Range<N>::startsBehind(offset) )
+                Range<N>::setStart( offset+insertedLength );
+            if( Range<N>::endsBefore(offset+removedLength-1) )
+                Range<N>::setEnd( offset-1 );
             else
-                moveEndBy( insertedLength-removedLength );
+                Range<N>::moveEndBy( insertedLength-removedLength );
         }
     }
 }
