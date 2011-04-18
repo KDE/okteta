@@ -91,22 +91,22 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength)
     int oldLength = childCount();
     if (newLength > oldLength)
     {
-        emit childrenAboutToBeInserted(this, oldLength, newLength - 1);
+        topLevelDataInformation()->_childrenAboutToBeInserted(this, oldLength, newLength - 1);
         for (int i = oldLength; i < newLength; ++i)
         {
             DataInformation* arrayElem = mChildType->clone();
             appendChild(arrayElem);
         }
-        emit childrenInserted(this, oldLength, newLength - 1);
+        topLevelDataInformation()->_childrenInserted(this, oldLength, newLength - 1);
     }
     else if (newLength < oldLength) //XXX maybe keep some cached
     {
-        emit childrenAboutToBeRemoved(this, newLength, oldLength - 1);
+        topLevelDataInformation()->_childrenAboutToBeRemoved(this, newLength, oldLength - 1);
         for (int i = newLength; i != mChildren.length();)
         {
             delete mChildren.takeAt(i);
         }
-        emit childrenRemoved(this, newLength, oldLength - 1);
+        topLevelDataInformation()->_childrenRemoved(this, newLength, oldLength - 1);
     }
     return true; //success
 }
@@ -141,23 +141,21 @@ QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type)
     uint len = childCount();
     if (len == 0)
         return true; //do nothing, prevent integer underflow
-    emit
-    childrenAboutToBeRemoved(this, 0, len - 1);
+    topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, len - 1);
     qDeleteAll(mChildren);
     mChildren.clear(); //qDeleteAll only uses delete operator, we have to remove from list manually
-    childrenRemoved(this, 0, len - 1);
+    topLevelDataInformation()->_childrenRemoved(this, 0, len - 1);
 
     mChildType = newChildType;
     mChildType->setParent(this);
 
-    emit
-    childrenAboutToBeInserted(this, 0, len - 1);
+    topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, len - 1);
     for (uint i = 0; i < len; i++)
     {
         DataInformation* arrayElem = newChildType->clone();
         appendChild(arrayElem);
-    }emit
-    childrenInserted(this, 0, len - 1);
+    }
+    topLevelDataInformation()->_childrenInserted(this, 0, len - 1);
     return true; //success
 }
 

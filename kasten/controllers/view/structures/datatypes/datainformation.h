@@ -185,16 +185,6 @@ protected:
      * Find the index of a DataInformation in this object, needed to calculate the row
      */ 
     virtual int indexOf(const DataInformation* const data) const;
-Q_SIGNALS:
-    // sender as parameter, so no cast is needed, also makes it safer since QObject::sender() may be risky
-    /** items are inserted before @p startIndex */
-    void childrenAboutToBeInserted(QObject* sender, uint startIndex, uint endIndex);
-    /** items are inserted before @p startIndex */
-    void childrenInserted(const QObject* sender, uint startIndex, uint endIndex);
-    /** items are removed before @p startIndex */
-    void childrenAboutToBeRemoved(QObject* sender, uint startIndex, uint endIndex);
-    /** items are inserted before @p startIndex */
-    void childrenRemoved(const QObject* sender, uint startIndex, uint endIndex);
 protected:
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;

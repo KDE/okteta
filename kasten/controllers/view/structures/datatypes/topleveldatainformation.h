@@ -78,6 +78,12 @@ public:
     void setIndex(int newIndex);
     ScriptHandlerInfo* scriptHandlerInfo() const;
     void setChildDataChanged();
+
+    //only public so that DataInformation can call them
+    void _childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
+    void _childrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
+    void _childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
+    void _childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
     bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
             Okteta::Address address);
@@ -86,6 +92,14 @@ public Q_SLOTS:
     void removeByteArrayModelFromList(QObject* model);
 Q_SIGNALS:
     void dataChanged();
+    /** items are inserted before @p startIndex */
+    void childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
+    /** items are inserted before @p startIndex */
+    void childrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
+    /** items are removed before @p startIndex */
+    void childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
+    /** items are inserted before @p startIndex */
+    void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
     DataInformation* mData;
     QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
@@ -130,5 +144,26 @@ inline void TopLevelDataInformation::setChildDataChanged()
 {
     mChildDataChanged = true;
 }
+
+inline void TopLevelDataInformation::_childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex)
+{
+    emit childrenAboutToBeInserted(sender, startIndex, endIndex);
+}
+
+inline void TopLevelDataInformation::_childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex)
+{
+    emit childrenAboutToBeRemoved(sender, startIndex, endIndex);
+}
+
+inline void TopLevelDataInformation::_childrenInserted(const DataInformation* sender, uint startIndex, uint endIndex)
+{
+    emit childrenInserted(sender, startIndex, endIndex);
+}
+
+inline void TopLevelDataInformation::_childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex)
+{
+    emit childrenRemoved(sender, startIndex, endIndex);
+}
+
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */

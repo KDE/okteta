@@ -89,7 +89,14 @@ Q_SIGNALS:
     void byteOrderChanged();
     void cursorIndexChanged();
     void byteArrayModelChanged(bool modelIsValid);
-
+    /** items are inserted before @p startIndex */
+    void childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
+    /** items are inserted before @p startIndex */
+    void childrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
+    /** items are removed before @p startIndex */
+    void childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
+    /** items are inserted before @p startIndex */
+    void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 public Q_SLOTS:
     void setByteOrder(int order);
     void mark(const QModelIndex& idx);

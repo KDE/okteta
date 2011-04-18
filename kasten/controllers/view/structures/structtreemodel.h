@@ -55,23 +55,13 @@ private:
     QModelIndex findItemInModel(QObject* obj) const;
 public Q_SLOTS:
     void onToolDataChange(int row, void* data);
-    void onToolDataClear()
-    {
-        reset();
-    }
-private Q_SLOTS:
-    void onChildrenAboutToBeRemoved(QObject* sender, uint startIndex,
-            uint endIndex);
-    void onChildrenAboutToBeInserted(QObject* sender, uint startIndex,
-            uint endIndex);
-    void onChildrenRemoved(const QObject* sender, uint startIndex, uint endIndex);
-    void onChildrenInserted(const QObject* sender, uint startIndex, uint endIndex);
-    void removeItemFromSignalsList(QObject* obj);
+    void onToolDataClear();
+    void onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
+    void onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
+    void onChildrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
+    void onChildrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
     StructTool* mTool;
-    mutable /* very ugly hack! */ QSet<DataInformationWithChildren*> mItemsWithSignalConnected;
-public:
-
 };
 }
 #endif /* STRUCTTREEMODEL_H_ */

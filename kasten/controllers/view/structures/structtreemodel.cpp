@@ -33,47 +33,52 @@ StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
 {
     connect(mTool, SIGNAL(dataChanged(int, void*)), this, SLOT(onToolDataChange(int, void*)));
     connect(mTool, SIGNAL(dataCleared()), this, SLOT(onToolDataClear()));
+    connect(mTool, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)),
+            this, SLOT(onChildrenAboutToBeInserted(DataInformation*,uint,uint)));
+    connect(mTool, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)),
+            this, SLOT(onChildrenAboutToBeRemoved(DataInformation*,uint,uint)));
+    connect(mTool, SIGNAL(childrenInserted(const DataInformation*,uint,uint)),
+            this, SLOT(onChildrenInserted(const DataInformation*,uint,uint)));
+    connect(mTool, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)),
+            this, SLOT(onChildrenRemoved(const DataInformation*,uint,uint)));
+
 }
 
 StructTreeModel::~StructTreeModel()
 {
 }
 
-void StructTreeModel::onChildrenRemoved(const QObject* sender, uint startIndex,
+void StructTreeModel::onChildrenRemoved(const DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    kDebug()
-        << "data information " << sender->objectName() << ": removed " << (endIndex
-                - startIndex + 1) << " children starting at offset " << startIndex;
+    kDebug() << "data information " << sender->objectName() << ": removed "
+        << (endIndex - startIndex + 1) << " children starting at offset " << startIndex;
     emit endRemoveRows();
 }
 
-void StructTreeModel::onChildrenInserted(const QObject* sender, uint startIndex,
+void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    kDebug()
-        << "data information " << sender->objectName() << ": inserted " << (endIndex
-                - startIndex + 1) << " children at offset " << startIndex;
+    kDebug() << "data information " << sender->objectName() << ": inserted "
+        << (endIndex - startIndex + 1) << " children at offset " << startIndex;
     emit endInsertRows();
 }
 
-void StructTreeModel::onChildrenAboutToBeRemoved(QObject* sender, uint startIndex,
+void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    kDebug()
-        << "data information " << sender->objectName()
-                << ": about to remove children:" << startIndex << " to " << endIndex;
+    //kDebug() << "data information " << sender->objectName()
+    //    << ": about to remove children:" << startIndex << " to " << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
     emit beginRemoveRows(idx, startIndex, endIndex);
 }
 
-void StructTreeModel::onChildrenAboutToBeInserted(QObject* sender, uint startIndex,
+void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    kDebug()
-        << "data information " << sender->objectName()
-                << ": about to insert children:" << startIndex << " to " << endIndex;
+    //kDebug() << "data information " << sender->objectName()
+    //    << ": about to insert children:" << startIndex << " to " << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
     emit beginInsertRows(idx, startIndex, endIndex);
@@ -179,37 +184,6 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     }
     if (childItem)
     {
-        if (dynamic_cast<DataInformationWithChildren*> (childItem))
-        {
-            DataInformationWithChildren* chldItm =
-                    static_cast<DataInformationWithChildren*> (childItem);
-            //assume that all items with children can change their childCount
-            if (!mItemsWithSignalConnected.contains(chldItm))
-            {
-                //                kDebug()
-                //                    << "connecting '" << childItem->name()
-                //                            << "'s childCountChanged signal to model";
-                //only connect once
-                mItemsWithSignalConnected.insert(chldItm);
-                connect(childItem, SIGNAL(destroyed(QObject*)),
-                        SLOT(removeItemFromSignalsList(QObject*))); //remove after was deleted
-
-                connect(childItem,
-                        SIGNAL(childrenAboutToBeRemoved(QObject*, uint, uint)),
-                        this, SLOT(onChildrenAboutToBeRemoved(QObject*, uint, uint)));
-                connect(childItem,
-                        SIGNAL(childrenAboutToBeInserted(QObject*, uint, uint)),
-                        this,
-                        SLOT(onChildrenAboutToBeInserted(QObject*, uint, uint)));
-                //also connect the done signals
-                connect(childItem,
-                        SIGNAL(childrenRemoved(const QObject*, uint, uint)), this,
-                        SLOT(onChildrenRemoved(const QObject*, uint, uint)));
-                connect(childItem,
-                        SIGNAL(childrenInserted(const QObject*, uint, uint)), this,
-                        SLOT(onChildrenInserted(const QObject*, uint, uint)));
-            }
-        }
         return createIndex(row, column, childItem);
     }
     else
@@ -237,7 +211,7 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
         return QModelIndex();
     }
 
-    // not null, not topleveldatainformation-> must be dataninformation
+    // not null, not topleveldatainformation-> must be datainformation
     DataInformation* parent = static_cast<DataInformation*> (parentObj);
     return createIndex(parent->row(), 0, parent);
 }
@@ -271,13 +245,6 @@ bool StructTreeModel::hasChildren(const QModelIndex& parent) const
         return parentItem->childCount() > 0;
 }
 
-void StructTreeModel::removeItemFromSignalsList(QObject* obj)
-{
-    //obj has been deleted -> remove from list
-    mItemsWithSignalConnected.remove(
-            dynamic_cast<DataInformationWithChildren*> (obj));
-}
-
 QModelIndex StructTreeModel::findItemInModel(QObject* obj) const
 {
     DataInformation* data = dynamic_cast<DataInformation*> (obj);
@@ -290,6 +257,11 @@ QModelIndex StructTreeModel::findItemInModel(QObject* obj) const
 void StructTreeModel::onToolDataChange(int row, void* data)
 {
     emit dataChanged(createIndex(row, 0, data), createIndex(row, 2, data));
+}
+
+void StructTreeModel::onToolDataClear()
+{
+    emit reset();
 }
 
 

@@ -104,8 +104,8 @@ void StructTool::setTargetModel(AbstractModel* model)
         //		onCharCodecChange(mByteArrayView->charCodingName());
         //         connect(mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
         //                 SLOT(onCharCodecChange( const QString& )));
-    }emit
-    byteArrayModelChanged(mByteArrayModel != NULL);
+    }
+    emit byteArrayModelChanged(mByteArrayModel != NULL);
     updateData();
 }
 //void StructTool::onCharCodecChange(const QString& codecName)
@@ -231,6 +231,15 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
         child->setParent(this);
         mData.append(child);
         connect(child, SIGNAL(dataChanged()), this, SLOT(onChildItemDataChanged()));
+
+        connect(child, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)),
+                this, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)));
+        connect(child, SIGNAL(childrenInserted(const DataInformation*,uint,uint)),
+                this, SIGNAL(childrenInserted(const DataInformation*,uint,uint)));
+        connect(child, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)),
+                this, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)));
+        connect(child, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)),
+                this, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)));
     }
 }
 
@@ -238,13 +247,11 @@ void StructTool::setSelectedStructuresInView()
 {
     qDeleteAll(mData);
     mData.clear();
-    emit
-    dataCleared();
+    emit dataCleared();
 
     QRegExp regex("'(.+)':'(.+)'");
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
-    kDebug()
-        << "loadedStructs " << loadedStructs;
+    kDebug() << "loadedStructs " << loadedStructs;
     foreach(const QString& s,loadedStructs)
         {
             int pos = regex.indexIn(s);
@@ -320,9 +327,9 @@ void StructTool::validateAllStructures()
         return; //no point validating
     //TODO it would be nicer if the button was grayed out while no model exists
     foreach(TopLevelDataInformation* data, mData)
-        {
-            data->validate();
-        }
+    {
+        data->validate();
+    }
 }
 
 int StructTool::columnCount() const

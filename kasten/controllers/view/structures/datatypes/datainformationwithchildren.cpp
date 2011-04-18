@@ -336,16 +336,16 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
     }
     //is valid now
     //childcount changed to 0
-    emit childrenAboutToBeRemoved(this, 0, childCount() - 1);
+    topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, childCount() - 1);
     qDeleteAll(mChildren);
     mChildren.clear();
-    emit childrenRemoved(this, 0, childCount() - 1);
+    topLevelDataInformation()->_childrenRemoved(this, 0, childCount() - 1);
     if (convertedVal->childCount() < 1)
         ScriptUtils::object()->logScriptError("Value from setChildren for " + name()
                 + " has no children, please check script for errors");
     else
     {
-        emit childrenAboutToBeInserted(this, 0, convertedVal->childCount() - 1);
+        topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, convertedVal->childCount() - 1);
         const uint count = convertedVal->childCount();
         mChildren.reserve(count);
         for (uint i = 0; i < count; ++i)
@@ -353,7 +353,7 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
             DataInformation* child = convertedVal->childAt(i);
             appendChild(child);
         }
-        emit childrenInserted(this, 0, convertedVal->childCount() - 1);
+        topLevelDataInformation()->_childrenInserted(this, 0, convertedVal->childCount() - 1);
     }
     delete convertedVal;
 }
