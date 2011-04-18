@@ -75,3 +75,8 @@ void DoubleDataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.doubleValue;
 }
+
+QScriptValue DoubleDataInformation::valueAsQScriptValue() const
+{
+    return mValue;
+}

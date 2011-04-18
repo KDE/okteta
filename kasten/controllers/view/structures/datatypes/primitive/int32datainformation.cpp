@@ -62,3 +62,8 @@ void Int32DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.intValue;
 }
+
+QScriptValue Int32DataInformation::valueAsQScriptValue() const
+{
+    return mValue;
+}

@@ -54,6 +54,7 @@ class AbstractByteArrayModel;
 }
 
 class TopLevelDataInformation;
+class ScriptHandlerInfo;
 
 typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
@@ -85,8 +86,9 @@ public:
     };
 
     //methods for children:
-    /** true for unions and structs and arrays*/
     virtual bool hasChildren() const;
+    /** true for unions and structs and arrays*/
+    virtual bool canHaveChildren() const;
     virtual unsigned int childCount() const;
     virtual DataInformation* childAt(unsigned int) const;
     virtual quint64 positionRelativeToParent() const;
@@ -169,6 +171,8 @@ public:
 
     virtual void resetValidationState(); //virtual for datainformationwithchildren
     bool wasAbleToRead() const;
+    
+    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) = 0;
 protected:
     /**
      *  the offset of child number @p index compared to the beginning of the structure
@@ -198,6 +202,9 @@ protected:
     DataInformationEndianess mByteOrder : 2;
     AdditionalData* mAdditionalData;
 };
+
+Q_DECLARE_METATYPE(DataInformation*)
+Q_DECLARE_METATYPE(const DataInformation*)
 
 //inline functions
 inline int DataInformation::row() const
@@ -230,6 +237,11 @@ inline DataInformation* DataInformation::childAt(unsigned int) const
 }
 
 inline bool DataInformation::hasChildren() const
+{
+    return false;
+}
+
+inline bool DataInformation::canHaveChildren() const
 {
     return false;
 }

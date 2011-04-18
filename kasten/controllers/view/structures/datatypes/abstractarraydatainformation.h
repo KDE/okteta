@@ -53,7 +53,8 @@ public:
 
     Q_INVOKABLE QScriptValue setArrayLength(int newLength);
     Q_INVOKABLE QScriptValue setArrayType(QScriptValue type);
-    QScriptValue childType() const;
+    virtual QScriptValue childType() const;
+    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
 protected:
     DataInformation* mChildType;

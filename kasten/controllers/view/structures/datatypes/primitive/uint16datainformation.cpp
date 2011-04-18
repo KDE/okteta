@@ -50,3 +50,8 @@ void UInt16DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.ushortValue;
 }
+
+QScriptValue UInt16DataInformation::valueAsQScriptValue() const
+{
+    return mValue;
+}

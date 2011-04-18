@@ -58,3 +58,8 @@ void Bool32DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.uintValue;
 }
+
+QScriptValue Bool32DataInformation::valueAsQScriptValue() const
+{
+    return mValue != 0;
+}

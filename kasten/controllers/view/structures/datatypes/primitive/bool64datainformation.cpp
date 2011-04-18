@@ -58,3 +58,8 @@ void Bool64DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.ulongValue;
 }
+
+QScriptValue Bool64DataInformation::valueAsQScriptValue() const
+{
+    return mValue != 0;
+}

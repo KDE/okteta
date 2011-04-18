@@ -22,6 +22,8 @@
 #include "abstractarraydatainformation.h"
 #include "primitivefactory.h"
 #include "../script/scriptvalueconverter.h"
+#include "../script/classes/arrayscriptclass.h"
+#include "../script/scripthandlerinfo.h"
 
 #include <QtScript/QScriptContext>
 
@@ -183,4 +185,11 @@ QVariant AbstractArrayDataInformation::childData(int row, int column, int role) 
         //just delegate to child
         return mChildren.at(row)->data(column, role);
     }
+}
+
+QScriptValue AbstractArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+{
+    QScriptValue ret = engine->newObject(handlerInfo->mArrayClass);
+    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
+    return ret;
 }

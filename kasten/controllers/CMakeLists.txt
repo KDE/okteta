@@ -308,8 +308,13 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/primitivefactory.cpp
   view/structures/script/scriptengineinitializer.cpp
   view/structures/script/scripthandler.cpp
+  view/structures/script/scripthandlerinfo.cpp
   view/structures/script/scriptvalueconverter.cpp
   view/structures/script/scriptutils.cpp
+  view/structures/script/classes/defaultscriptclass.cpp
+  view/structures/script/classes/arrayscriptclass.cpp
+  view/structures/script/classes/primitivescriptclass.cpp
+  view/structures/script/classes/structunionscriptclass.cpp
   view/structures/parsers/abstractstructureparser.cpp
   view/structures/parsers/osdparser.cpp
   view/structures/parsers/scriptfileparser.cpp

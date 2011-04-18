@@ -47,7 +47,7 @@ public:
 
     QString typeName() const;
     virtual QString valueString() const;
-
+    virtual QScriptValue valueAsQScriptValue() const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;

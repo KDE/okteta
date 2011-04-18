@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,8 @@
 #include "topleveldatainformation.h"
 #include "../script/scriptvalueconverter.h"
 #include "../script/scriptutils.h"
+#include "../script/classes/structunionscriptclass.h"
+
 #include <KLineEdit>
 #include <KIcon>
 #include <QtScript/QScriptEngine>
@@ -374,4 +376,11 @@ QVariant DataInformationWithChildren::childData(int row, int column, int role) c
     Q_ASSERT(row >= 0 && row < mChildren.size());
     //just delegate to child
     return mChildren.at(row)->data(column, role);
+}
+
+QScriptValue DataInformationWithChildren::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+{
+    QScriptValue ret = engine->newObject(handlerInfo->mStructUnionClass);
+    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
+    return ret;
 }

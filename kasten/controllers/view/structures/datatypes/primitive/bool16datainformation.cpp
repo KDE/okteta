@@ -58,3 +58,8 @@ void Bool16DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.ushortValue;
 }
+
+QScriptValue Bool16DataInformation::valueAsQScriptValue() const
+{
+    return mValue != 0;
+}

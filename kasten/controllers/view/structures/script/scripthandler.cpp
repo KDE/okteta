@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,10 @@
 #include "scriptutils.h"
 #include "../datatypes/datainformation.h"
 #include "../datatypes/topleveldatainformation.h"
+#include "classes/defaultscriptclass.h"
+#include "classes/arrayscriptclass.h"
+#include "classes/primitivescriptclass.h"
+#include "classes/structunionscriptclass.h"
 
 #include <QtGui/QAction>
 #include <QtCore/QFile>
@@ -43,6 +47,12 @@ ScriptHandler::ScriptHandler(QString scriptFile, QString name) :
 #endif
 {
     init();
+    ArrayScriptClass* arr = new ArrayScriptClass(&mEngine, &mHandlerInfo);
+    mHandlerInfo.mArrayClass = arr;
+    PrimitiveScriptClass* prim = new PrimitiveScriptClass(&mEngine, &mHandlerInfo);
+    mHandlerInfo.mPrimitiveClass = prim;
+    StructUnionScriptClass* strUn = new StructUnionScriptClass(&mEngine, &mHandlerInfo);
+    mHandlerInfo.mStructUnionClass = strUn;
 }
 
 ScriptHandler::~ScriptHandler()
@@ -50,7 +60,6 @@ ScriptHandler::~ScriptHandler()
 #ifdef OKTETA_DEBUG_SCRIPT
     delete mDebugger;
 #endif
-
 }
 
 bool ScriptHandler::init()
@@ -121,14 +130,15 @@ void ScriptHandler::validateData(DataInformation* data)
         << "validating element: " << data->name();
 #endif
 
-        QScriptValue thisObject = mEngine.newQObject(data,
-                QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-        QScriptValue mainStruct = mEngine.newQObject(data->mainStructure(),
-                QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+//         QScriptValue thisObject = mEngine.newQObject(data,
+//                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+//         QScriptValue mainStruct = mEngine.newQObject(data->mainStructure(),
+//                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+        QScriptValue thisObject = data->toScriptValue(&mEngine, &mHandlerInfo);
+        QScriptValue mainStruct = data->mainStructure()->toScriptValue(&mEngine, &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
-        QScriptValue result = additionalData->validationFunction()->call(thisObject,
-                args);
+        QScriptValue result = additionalData->validationFunction()->call(thisObject, args);
         if (result.isError())
         {
             ScriptUtils::object()->logScriptError("error occurred while "
@@ -160,20 +170,21 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
-        mDebugger->attachTo(&mEngine);
-        mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
-        kDebug()
-        << "updating element: " << data->name();
+//         mDebugger->attachTo(&mEngine);
+//         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
+//         kDebug()
+//         << "updating element: " << data->name();
 #endif
 
-        QScriptValue thisObject = mEngine.newQObject(data,
-                QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-        QScriptValue mainStruct = mEngine.newQObject(data->mainStructure(),
-                QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+//         QScriptValue thisObject = mEngine.newQObject(data,
+//                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+//         QScriptValue mainStruct = mEngine.newQObject(data->mainStructure(),
+//                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
+        QScriptValue thisObject = data->toScriptValue(&mEngine, &mHandlerInfo);
+        QScriptValue mainStruct = data->mainStructure()->toScriptValue(&mEngine, &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
-        QScriptValue result = additionalData->updateFunction()->call(thisObject,
-                args);
+        QScriptValue result = additionalData->updateFunction()->call(thisObject, args);
         if (result.isError())
         {
             ScriptUtils::object()->logScriptError("error occurred while "
@@ -194,3 +205,7 @@ QScriptEngine* ScriptHandler::engine()
     return &mEngine;
 }
 
+ScriptHandlerInfo* ScriptHandler::handlerInfo()
+{
+    return &mHandlerInfo;
+}

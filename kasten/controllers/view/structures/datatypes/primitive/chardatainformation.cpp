@@ -51,6 +51,7 @@ QWidget* CharDataInformation::createEditWidget(QWidget* parent) const
 
 QVariant CharDataInformation::dataFromWidget(const QWidget* w) const
 {
+    //TODO fix this code!!
     const KLineEdit* edit = dynamic_cast<const KLineEdit*> (w);
     if (edit)
     {
@@ -155,4 +156,9 @@ AllPrimitiveTypes CharDataInformation::value() const
 void CharDataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.ubyteValue;
+}
+
+QScriptValue CharDataInformation::valueAsQScriptValue() const
+{
+    return QString(mValue > 127 ? QChar::ReplacementCharacter : QChar(mValue, 0));
 }

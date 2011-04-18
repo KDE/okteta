@@ -58,3 +58,8 @@ void Int8DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.byteValue;
 }
+
+QScriptValue Int8DataInformation::valueAsQScriptValue() const
+{
+    return mValue;
+}

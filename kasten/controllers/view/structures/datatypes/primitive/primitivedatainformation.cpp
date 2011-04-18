@@ -23,6 +23,8 @@
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
 #include "../../script/scriptutils.h"
+#include "../../script/classes/primitivescriptclass.h"
+
 
 #include <QtScript/QScriptEngine>
 #include <KIcon>
@@ -159,4 +161,11 @@ QScriptValue PrimitiveDataInformation::scriptValue() const
     QScriptValue wrapObj = eng->newObject();
     ScriptUtils::object()->wrapAllPrimitiveTypes(wrapObj, value(), type());
     return wrapObj;
+}
+
+QScriptValue PrimitiveDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+{
+    QScriptValue ret = engine->newObject(handlerInfo->mPrimitiveClass);
+    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
+    return ret;
 }

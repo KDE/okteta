@@ -38,7 +38,7 @@ public:
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
-    
+    virtual QScriptValue valueAsQScriptValue() const;
     QWidget* createEditWidget(QWidget* parent) const;
 private:
     quint8 mValue;

@@ -57,3 +57,8 @@ void Int64DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.longValue;
 }
+
+QScriptValue Int64DataInformation::valueAsQScriptValue() const
+{
+    return QString::number(mValue);
+}

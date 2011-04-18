@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -55,6 +55,7 @@ public:
 
     virtual DataInformation* childAt(unsigned int index) const;
     virtual bool hasChildren() const;
+    virtual bool canHaveChildren() const;
     virtual unsigned int childCount() const;
     virtual QList<const DataInformation*> findChildrenWithName(const QString& name,
             const DataInformation* const upTo) const;
@@ -73,6 +74,7 @@ public:
     /** alternate way to access children: obj.child("childName") */
     Q_INVOKABLE QScriptValue child(QString name) const;
     Q_INVOKABLE QScriptValue at(uint index) const;
+    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 };
 
 inline QList<DataInformation*> DataInformationWithChildren::children() const
@@ -87,6 +89,11 @@ inline bool DataInformationWithChildren::hasChildren() const
 inline unsigned int DataInformationWithChildren::childCount() const
 {
     return mChildren.size();
+}
+
+inline bool DataInformationWithChildren::canHaveChildren() const
+{
+    return true;
 }
 
 #endif /* DATAINFORMATIONWITHCHILDREN_H_ */

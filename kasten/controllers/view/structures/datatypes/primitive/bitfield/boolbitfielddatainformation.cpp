@@ -101,3 +101,8 @@ void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
         spin->setValue(mValue.ulongValue & mask()); //& mask() not really necessary, just be on the safe side
 }
 
+QScriptValue BoolBitfieldDataInformation::valueAsQScriptValue() const
+{
+    return (mValue.ulongValue & mask()) != 0;
+}
+

@@ -177,4 +177,3 @@ QVariant DataInformation::childData(int row, int column, int role) const
     Q_UNUSED(role)
     return QVariant(); //no children -> no child data
 }
-

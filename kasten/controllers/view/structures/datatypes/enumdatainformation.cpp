@@ -143,3 +143,8 @@ void EnumDataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue->setValue(newVal);
 }
+
+QScriptValue EnumDataInformation::valueAsQScriptValue() const
+{
+    return mValue->valueAsQScriptValue();
+}

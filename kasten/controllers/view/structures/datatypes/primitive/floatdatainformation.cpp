@@ -84,3 +84,8 @@ void FloatDataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.floatValue;
 }
+
+QScriptValue FloatDataInformation::valueAsQScriptValue() const
+{
+    return mValue;
+}

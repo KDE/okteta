@@ -58,3 +58,8 @@ void Int16DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.shortValue;
 }
+
+QScriptValue Int16DataInformation::valueAsQScriptValue() const
+{
+    return mValue;
+}

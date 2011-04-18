@@ -28,6 +28,7 @@
 
 #include <arraychangemetricslist.h>
 
+class ScriptHandlerInfo;
 namespace Okteta
 {
 class AbstractByteArrayModel;
@@ -75,6 +76,7 @@ public:
     int indexOf(const DataInformation* const data) const;
     int index() const;
     void setIndex(int newIndex);
+    ScriptHandlerInfo* scriptHandlerInfo() const;
     void setChildDataChanged();
 private:
     bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,

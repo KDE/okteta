@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -20,43 +20,20 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTHANDLER_H_
-#define SCRIPTHANDLER_H_
-
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QSharedData>
-
-#include <QtScript/QScriptEngine>
-#include <QtScriptTools/QScriptEngineDebugger>
-
-#include <config-structtool.h>
 #include "scripthandlerinfo.h"
+#include "classes/arrayscriptclass.h"
+#include "classes/primitivescriptclass.h"
+#include "classes/structunionscriptclass.h"
 
-class DataInformation;
-
-class ScriptHandler : public QObject, public QSharedData
+ScriptHandlerInfo::ScriptHandlerInfo() 
+    : mArrayClass(0), mPrimitiveClass(0), mStructUnionClass(0)
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(ScriptHandler)
-public:
-    ScriptHandler(QString scriptFile, QString name);
-    virtual ~ScriptHandler();
-    DataInformation* initialDataInformationFromScript();
-    void validateData(DataInformation* data);
-    void updateDataInformation(DataInformation* data);
-    QScriptEngine* engine();
-    ScriptHandlerInfo* handlerInfo();
-protected:
-    bool init();
-    QScriptEngine mEngine;
-    QString mFile;
-    QString mName;
-#ifdef OKTETA_DEBUG_SCRIPT
-    QScriptEngineDebugger* mDebugger;
-#endif
-    ScriptHandlerInfo mHandlerInfo;
-};
+}
 
+ScriptHandlerInfo::~ScriptHandlerInfo()
+{
+    delete mArrayClass;
+    delete mPrimitiveClass;
+    delete mStructUnionClass;
+}
 
-#endif /* SCRIPTHANDLER_H_ */

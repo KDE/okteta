@@ -54,10 +54,11 @@ public:
     virtual AllPrimitiveTypes
     qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     QVariant data(int column, int role) const;
-    virtual QScriptValue scriptValue() const;
+    virtual QScriptValue scriptValue() const; //TODO remove
+    virtual QScriptValue valueAsQScriptValue() const = 0;
+    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 protected:
     virtual quint64 offset(unsigned int index) const;
-protected:
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 

@@ -50,3 +50,8 @@ void UInt8DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.ubyteValue;
 }
+
+QScriptValue UInt8DataInformation::valueAsQScriptValue() const
+{
+    return mValue;
+}

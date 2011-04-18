@@ -77,3 +77,10 @@ void UnsignedBitfieldDataInformation::setWidgetData(QWidget* w) const
         spin->setValue(mValue.ulongValue & mask()); //& mask() not really necessary, just be on the safe side
 }
 
+QScriptValue UnsignedBitfieldDataInformation::valueAsQScriptValue() const
+{
+    if (width() <= 32)
+        return  mValue.uintValue & quint32(mask()); //32 bit or less -> can be put in as value
+    else
+        return QString::number(mValue.ulongValue & mask());
+}

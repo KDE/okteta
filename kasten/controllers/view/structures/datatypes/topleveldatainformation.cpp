@@ -34,7 +34,7 @@
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         QFileInfo structureFile, bool dynamic, QString name) :
     QObject(), mData(data), mScriptHandler(NULL), mStructureFile(structureFile),
-            mWasAbleToParse(true), mIndex(-1), mChildDataChanged(false)
+            mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
 {
 
     if (dynamic)
@@ -236,3 +236,7 @@ int TopLevelDataInformation::indexOf(const DataInformation* const data) const
     return mIndex;
 }
 
+ScriptHandlerInfo* TopLevelDataInformation::scriptHandlerInfo() const
+{
+    return mScriptHandler->handlerInfo();
+}

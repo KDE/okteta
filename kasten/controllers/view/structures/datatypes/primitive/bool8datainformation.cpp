@@ -58,3 +58,8 @@ void Bool8DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.ubyteValue;
 }
+
+QScriptValue Bool8DataInformation::valueAsQScriptValue() const
+{
+    return mValue != 0;
+}

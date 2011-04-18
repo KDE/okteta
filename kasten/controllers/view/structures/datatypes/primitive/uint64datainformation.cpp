@@ -50,3 +50,8 @@ void UInt64DataInformation::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.ulongValue;
 }
+
+QScriptValue UInt64DataInformation::valueAsQScriptValue() const
+{
+    return QString::number(mValue);
+}

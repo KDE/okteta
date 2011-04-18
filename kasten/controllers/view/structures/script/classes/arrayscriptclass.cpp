@@ -1,0 +1,121 @@
+/*
+ *   This file is part of the Okteta Kasten Framework, made within the KDE community.
+ *
+ *   Copyright 2011 Alex Richardson <alex.richardson@gmx.de>
+ *
+ *   This library is free software; you can redistribute it and/or
+ *   modify it under the terms of the GNU Lesser General Public
+ *   License as published by the Free Software Foundation; either
+ *   version 2.1 of the License, or (at your option) version 3, or any
+ *   later version accepted by the membership of KDE e.V. (or its
+ *   successor approved by the membership of KDE e.V.), which shall
+ *   act as a proxy defined in Section 6 of version 3 of the license.
+ *
+ *   This library is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *   Lesser General Public License for more details.
+ *
+ *   You should have received a copy of the GNU Lesser General Public
+ *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
+#include "arrayscriptclass.h"
+#include "../../datatypes/abstractarraydatainformation.h"
+
+ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+    : DefaultScriptClass(engine, handlerInfo)
+{
+    length = engine->toStringHandle(QLatin1String("length"));
+    childType = engine->toStringHandle(QLatin1String("childType"));
+
+    mArrayPrototype = engine->newObject();
+    mArrayPrototype.setProperty("toString", engine->newFunction(Array_proto_toString));
+}
+
+ArrayScriptClass::~ArrayScriptClass()
+{
+}
+
+bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint*)
+{
+    Q_UNUSED(flags)
+    Q_UNUSED(data)
+    //no need to modify flags since both read and write are handled
+    if (name == length)
+        return true;
+    else if (name == childType)
+        return true;
+    return false;
+}
+
+bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags)
+{
+    Q_UNUSED(flags)
+    Q_UNUSED(data)
+    //no need to modify flags since both read and write are handled
+    if (name == length)
+        return true;
+    else if (name == childType)
+        return true;
+    return false;
+}
+
+
+QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint)
+{
+    const AbstractArrayDataInformation* aData = static_cast<const AbstractArrayDataInformation*>(data);
+    //do a dynamic cast in debug mode to ensure the static cast was valid
+    Q_CHECK_PTR(dynamic_cast<const AbstractArrayDataInformation*>(data));
+
+    if (name == length)
+        return aData->length();
+    else if (name == childType)
+        return aData->childType();
+    return QScriptValue();
+}
+
+bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
+{
+    AbstractArrayDataInformation* aData = static_cast<AbstractArrayDataInformation*>(data);
+    //do a dynamic cast in debug mode to ensure the static cast was valid
+    Q_CHECK_PTR(dynamic_cast<AbstractArrayDataInformation*>(data));
+
+    if (name == length)
+    {
+        if (!value.isNumber())
+        {
+            engine()->currentContext()->throwError(QScriptContext::TypeError,
+                QLatin1String("Value is not a number: ") + value.toString());
+        }
+        else
+        {
+            aData->setArrayLength(value.toInt32());
+        }
+        return true;
+    }
+    else if (name == childType)
+    {
+        aData->setArrayType(value);
+        return true;
+    }
+    return false;
+}
+
+QScriptValue ArrayScriptClass::prototype() const
+{
+    return mArrayPrototype;
+}
+
+QScriptValue ArrayScriptClass::Array_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
+{
+    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    if (!data)
+    {
+        kDebug() << "could not cast data";
+        return eng->undefinedValue();
+    }
+    return data->typeName();
+}
+

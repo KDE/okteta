@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -19,39 +19,25 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "uint32datainformation.h"
 
-QString UInt32DataInformation::valueString() const
-{
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "<invalid>");
-    int base = displayBase();
-    QString num = QString::number(mValue, base);
-    if (base == 16)
-        num = "0x" + num;
-    if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
-        num = KGlobal::locale()->formatNumber(num, false, 0);
-    return num;
-}
+#ifndef SCRIPTHANDLERINFO_H
+#define SCRIPTHANDLERINFO_H
 
-QWidget* UInt32DataInformation::createEditWidget(QWidget* parent) const
-{
-    UInt32Editor* ret = new UInt32Editor(parent);
-    ret->setBase(displayBase());
-    return ret;
-}
+#include <QtCore/QtGlobal>
 
-AllPrimitiveTypes UInt32DataInformation::value() const
-{
-    return AllPrimitiveTypes(mValue);
-}
+class StructUnionScriptClass;
+class ArrayScriptClass;
+class PrimitiveScriptClass;
 
-void UInt32DataInformation::setValue(AllPrimitiveTypes newVal)
-{
-    mValue = newVal.uintValue;
-}
+class ScriptHandlerInfo {
+public:
+    ScriptHandlerInfo();
+    ~ScriptHandlerInfo();
+    ArrayScriptClass* mArrayClass;
+    PrimitiveScriptClass* mPrimitiveClass;
+    StructUnionScriptClass* mStructUnionClass;
+private:
+    Q_DISABLE_COPY(ScriptHandlerInfo)
+};
 
-QScriptValue UInt32DataInformation::valueAsQScriptValue() const
-{
-    return mValue;
-}
+#endif // SCRIPTHANDLERINFO_H
