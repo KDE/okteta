@@ -25,7 +25,6 @@
 
 class StaticLengthArrayDataInformation: public AbstractArrayDataInformation
 {
-Q_OBJECT
 protected:
     StaticLengthArrayDataInformation(const StaticLengthArrayDataInformation& d);
 public:

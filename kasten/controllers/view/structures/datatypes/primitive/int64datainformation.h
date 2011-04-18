@@ -27,7 +27,6 @@
 
 class Int64DataInformation: public SignedPrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int64,SignedPrimitive)
 
 public:

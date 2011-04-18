@@ -27,7 +27,6 @@
 /** A class holding the data of a struct for Okteta*/
 class StructureDataInformation: public DataInformationWithChildren
 {
-Q_OBJECT
 protected:
     explicit StructureDataInformation(const StructureDataInformation& d);
 public:

@@ -27,7 +27,6 @@
 
 class UInt64DataInformation: public UnsignedPrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt64,UnsignedPrimitive)
 public:
     DATAINFORMATION_CLONE(UInt64)

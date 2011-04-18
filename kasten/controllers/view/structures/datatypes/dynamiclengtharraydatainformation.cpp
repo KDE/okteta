@@ -70,7 +70,7 @@ DynamicLengthArrayDataInformation::~DynamicLengthArrayDataInformation()
 }
 int DynamicLengthArrayDataInformation::calculateLength()
 {
-    if (!parent())
+    if (!mParent)
     {
         kWarning() << "dynamic length array without parent ->"
             " length will always be 0";

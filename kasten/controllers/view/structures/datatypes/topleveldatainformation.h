@@ -27,6 +27,7 @@
 #include <QtCore/QExplicitlySharedDataPointer>
 
 #include <arraychangemetricslist.h>
+#include "datainformationbase.h"
 
 class ScriptHandlerInfo;
 namespace Okteta
@@ -38,9 +39,9 @@ class QScriptEngine;
 class ScriptHandler;
 class DataInformation;
 
-class TopLevelDataInformation: public QObject
+class TopLevelDataInformation: public QObject, public DataInformationBase
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     /** creates a new TopLevelDataInformation object wrapping the existing DataInformation @p data.
      *  @param data the object to wrap (ownership is taken)
@@ -78,6 +79,8 @@ public:
     void setIndex(int newIndex);
     ScriptHandlerInfo* scriptHandlerInfo() const;
     void setChildDataChanged();
+
+    virtual bool isTopLevel();
 
     //only public so that DataInformation can call them
     void _childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
@@ -165,5 +168,9 @@ inline void TopLevelDataInformation::_childrenRemoved(const DataInformation* sen
     emit childrenRemoved(sender, startIndex, endIndex);
 }
 
+inline bool TopLevelDataInformation::isTopLevel()
+{
+    return true;
+}
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */

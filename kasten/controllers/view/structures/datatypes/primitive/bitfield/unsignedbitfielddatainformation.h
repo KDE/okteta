@@ -27,7 +27,6 @@
 
 class UnsignedBitfieldDataInformation: public AbstractBitfieldDataInformation
 {
-Q_OBJECT
 public:
     UnsignedBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0) :
         AbstractBitfieldDataInformation(name, width, parent)

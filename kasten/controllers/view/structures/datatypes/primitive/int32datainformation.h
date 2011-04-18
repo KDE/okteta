@@ -27,7 +27,6 @@
 
 class Int32DataInformation: public SignedPrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int32,SignedPrimitive)
 
 public:

@@ -147,7 +147,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     else if (name == parent) 
     {
         //parent() cannot be null
-        if (dynamic_cast<TopLevelDataInformation*>(data->parent())) 
+        if (data->parent()->isTopLevel())
             return QScriptValue::NullValue;
         return static_cast<DataInformation*>(data->parent())->toScriptValue(engine(), mHandlerInfo);
     }

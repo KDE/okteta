@@ -27,7 +27,6 @@
 
 class Bool16DataInformation: public UnsignedPrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool16,UnsignedPrimitive)
 
 public:

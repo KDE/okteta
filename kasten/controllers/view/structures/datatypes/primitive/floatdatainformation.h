@@ -26,7 +26,6 @@
 
 class FloatDataInformation: public PrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Float,Primitive)
 public:
     DATAINFORMATION_CLONE(Float)

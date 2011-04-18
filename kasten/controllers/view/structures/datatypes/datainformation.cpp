@@ -25,19 +25,17 @@
 #include <KLineEdit>
 
 
-DataInformation::DataInformation(const QString& name, DataInformation* parent) :
-    QObject(parent), mValidationSuccessful(false), mHasBeenValidated(
-            false), mWasAbleToRead(false), mByteOrder(EndianessInherit), mAdditionalData(NULL)
+DataInformation::DataInformation(const QString& name, DataInformationBase* parent) :
+    mValidationSuccessful(false), mHasBeenValidated(false), mWasAbleToRead(false),
+    mByteOrder(EndianessInherit), mAdditionalData(0), mParent(parent), mName(name)
 {
-    setObjectName(name);
 }
 
 DataInformation::DataInformation(const DataInformation& d) :
-    QObject(NULL), mValidationSuccessful(d.mValidationSuccessful),
+            mValidationSuccessful(d.mValidationSuccessful),
             mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead), 
-            mByteOrder(d.mByteOrder), mAdditionalData(NULL)            
+            mByteOrder(d.mByteOrder), mAdditionalData(0), mParent(0), mName(d.mName)
 {
-    setObjectName(d.objectName());
     if (d.mAdditionalData)
         mAdditionalData = new AdditionalData(*(d.mAdditionalData));
 }
@@ -68,40 +66,33 @@ QString DataInformation::sizeString() const
 
 quint64 DataInformation::positionRelativeToParent() const
 {
+    Q_CHECK_PTR(mParent);
     //FIXME this needs updating to support bitfield marking
-    DataInformation* par = dynamic_cast<DataInformation*> (parent());
-    if (!par)
-    {
+    if (mParent->isTopLevel())
         return 0;
-    }
+    
     //TODO add a method offset(const DataInformation* const) for efficiency
+    DataInformation* par = static_cast<DataInformation*>(mParent);
     return par->offset(row()) + par->positionRelativeToParent();
 }
 
-TopLevelDataInformation* DataInformation::topLevelDataInformation() const
+TopLevelDataInformation* DataInformation::topLevelDataInformation()
 {
-    DataInformation* par = dynamic_cast<DataInformation*> (parent());
-    if (par)
-        return par->topLevelDataInformation();
-    else
-    {
-        TopLevelDataInformation* top =
-                dynamic_cast<TopLevelDataInformation*> (parent());
-        if (top)
-            return top;
-    }
-    return NULL;
+    Q_CHECK_PTR(mParent);
+    if (mParent->isTopLevel())
+        return static_cast<TopLevelDataInformation*>(mParent);
+
+    return static_cast<DataInformation*>(mParent)->topLevelDataInformation();
 }
 
 DataInformation* DataInformation::mainStructure()
 {
-    DataInformation* par = dynamic_cast<DataInformation*> (parent());
-    //the cast fails if the parent is a TopLevelDataInformation
-    //, so we can tell when the top has been reached
-    if (par)
-        return par->mainStructure();
-    else
+    Q_CHECK_PTR(mParent);
+
+    if (mParent->isTopLevel())
         return this;
+    else
+        return static_cast<DataInformation*>(mParent)->mainStructure();
 
 }
 

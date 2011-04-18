@@ -27,7 +27,6 @@
 
 class Int8DataInformation: public SignedPrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Int8,SignedPrimitive)
 public:
     DATAINFORMATION_CLONE(Int8)

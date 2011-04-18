@@ -28,7 +28,6 @@
 
 class PrimitiveDataInformation: public DataInformation
 {
-Q_OBJECT
 public:
     explicit PrimitiveDataInformation(QString name, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();

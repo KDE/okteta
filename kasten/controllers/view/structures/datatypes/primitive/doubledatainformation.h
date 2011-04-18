@@ -26,7 +26,6 @@
 
 class DoubleDataInformation: public PrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Double,Primitive)
 public:
     DATAINFORMATION_CLONE(Double)

@@ -26,8 +26,8 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QSet>
 
+class DataInformationBase;
 class DataInformation;
-class DataInformationWithChildren;
 
 namespace Kasten
 {
@@ -42,8 +42,7 @@ public:
     virtual ~StructTreeModel();
     QVariant data(const QModelIndex& index, int role) const;
     Qt::ItemFlags flags(const QModelIndex& index) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role =
-            Qt::DisplayRole) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     QModelIndex
     index(int row, int column, const QModelIndex& parent = QModelIndex()) const;
     QModelIndex parent(const QModelIndex& index) const;
@@ -52,7 +51,7 @@ public:
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
     virtual bool hasChildren(const QModelIndex& parent = QModelIndex()) const;
 private:
-    QModelIndex findItemInModel(QObject* obj) const;
+    QModelIndex findItemInModel(DataInformationBase* data) const;
 public Q_SLOTS:
     void onToolDataChange(int row, void* data);
     void onToolDataClear();

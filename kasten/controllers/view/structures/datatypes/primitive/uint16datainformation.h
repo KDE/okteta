@@ -27,7 +27,6 @@
 
 class UInt16DataInformation: public UnsignedPrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UInt16,UnsignedPrimitive)
 public:
     DATAINFORMATION_CLONE(UInt16)

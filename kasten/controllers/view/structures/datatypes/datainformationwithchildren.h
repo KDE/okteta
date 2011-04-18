@@ -27,7 +27,6 @@
 
 class DataInformationWithChildren: public DataInformation
 {
-Q_OBJECT
 protected:
     QList<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);

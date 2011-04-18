@@ -25,8 +25,6 @@
 //Qt core
 #include <QString>
 #include <QList>
-#include <QObject>
-#include <QWidget>
 
 //Okteta
 #include <size.h>
@@ -43,6 +41,7 @@
 #include <QtScript/QScriptValue>
 #include <QtScript/QScriptable>
 #include "topleveldatainformation.h"
+#include "datainformationbase.h"
 
 #define DATAINFORMATION_CLONE(type) virtual inline DataInformation* clone() const {\
         return new type##DataInformation(*this); \
@@ -60,14 +59,13 @@ typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
 /** Interface that must be implemented by all datatypes */
-class DataInformation: public QObject
+class DataInformation: public DataInformationBase
 {
-Q_OBJECT
 protected:
     DataInformation(const DataInformation&);
 public:
     virtual DataInformation* clone() const = 0;
-    DataInformation(const QString& name, DataInformation* parent = NULL);
+    DataInformation(const QString& name, DataInformationBase* parent = NULL);
     virtual ~DataInformation();
 
     enum Columns
@@ -146,7 +144,7 @@ public:
             quint64 bitsRemaining, quint8* bitOffset) = 0;
 
     virtual bool isDynamicArray() const;
-    TopLevelDataInformation* topLevelDataInformation() const;
+    TopLevelDataInformation* topLevelDataInformation();
     DataInformation* mainStructure();
 
     void setAdditionalData(AdditionalData* data);
@@ -164,8 +162,10 @@ public:
 
     virtual void resetValidationState(); //virtual for datainformationwithchildren
     bool wasAbleToRead() const;
-    
+    virtual bool isTopLevel();
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) = 0;
+    void setParent(DataInformationBase* newParent);
+    DataInformationBase* parent() const;
 protected:
     /**
      *  the offset of child number @p index compared to the beginning of the structure
@@ -176,7 +176,7 @@ protected:
     virtual quint64 offset(unsigned int index) const = 0;
     /**
      * Find the index of a DataInformation in this object, needed to calculate the row
-     */ 
+     */
     virtual int indexOf(const DataInformation* const data) const;
 protected:
     bool mValidationSuccessful :1;
@@ -184,6 +184,8 @@ protected:
     bool mWasAbleToRead :1;
     DataInformationEndianess mByteOrder : 2;
     AdditionalData* mAdditionalData;
+    DataInformationBase* mParent;
+    QString mName;
 };
 
 Q_DECLARE_METATYPE(DataInformation*)
@@ -192,14 +194,11 @@ Q_DECLARE_METATYPE(const DataInformation*)
 //inline functions
 inline int DataInformation::row() const
 {
-    Q_CHECK_PTR(parent());
-    const TopLevelDataInformation* top = dynamic_cast<const TopLevelDataInformation*>(parent());
-    if (top) {
-        return top->indexOf(this);
-    }
-    else {
-        return static_cast<const DataInformation*>(parent())->indexOf(this);
-    }
+    Q_CHECK_PTR(mParent);
+    if (mParent->isTopLevel())
+        return static_cast<TopLevelDataInformation*>(mParent)->indexOf(this);
+    else 
+        return static_cast<const DataInformation*>(mParent)->indexOf(this);
 }
 
 inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
@@ -211,7 +210,7 @@ inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
 
 inline QString DataInformation::name() const
 {
-    return objectName();
+    return mName;
 }
 
 inline DataInformation* DataInformation::childAt(unsigned int) const
@@ -259,8 +258,8 @@ inline ByteOrder DataInformation::byteOrder() const
         case EndianessFromSettings:
             return Kasten::StructViewPreferences::byteOrder();
         case EndianessInherit:
-            return parent() ? Kasten::StructViewPreferences::byteOrder() : 
-                static_cast<DataInformation*>(parent())->byteOrder();
+            return mParent ? Kasten::StructViewPreferences::byteOrder() :
+                static_cast<DataInformation*>(mParent)->byteOrder();
     }
     
     // here must be a return... I guess this is correct
@@ -276,6 +275,22 @@ inline void DataInformation::setByteOrder(ByteOrder newByteOrder)
 {
     //XXX is this method needed?
     mByteOrder = newByteOrder == ByteOrderEnumClass::BigEndian ? EndiannessBig : EndianessLittle;
+}
+
+inline bool DataInformation::isTopLevel()
+{
+    return false;
+}
+
+inline void DataInformation::setParent(DataInformationBase* newParent)
+{
+    Q_CHECK_PTR(newParent);
+    mParent = newParent;
+}
+
+inline DataInformationBase* DataInformation::parent() const
+{
+    return mParent;
 }
 
 #endif /* DATAINFORMATION_H_ */

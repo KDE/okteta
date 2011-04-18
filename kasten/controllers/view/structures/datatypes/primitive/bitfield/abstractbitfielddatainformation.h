@@ -26,8 +26,6 @@
 
 class AbstractBitfieldDataInformation: public PrimitiveDataInformation
 {
-Q_OBJECT
-Q_PROPERTY(uint width READ width WRITE setWidth)
 public:
     AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0);
     virtual ~AbstractBitfieldDataInformation();

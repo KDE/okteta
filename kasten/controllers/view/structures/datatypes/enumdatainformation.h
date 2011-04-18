@@ -28,7 +28,6 @@
 
 class EnumDataInformation: public PrimitiveDataInformation
 {
-Q_OBJECT
 public:
     /** this object takes ownership of @p type */
     EnumDataInformation(QString name, PrimitiveDataInformation* type,

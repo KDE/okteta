@@ -26,7 +26,6 @@
 
 class UnsignedPrimitiveDataInformation: public PrimitiveDataInformation
 {
-Q_OBJECT
 NO_VALUE_PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(UnsignedPrimitive,Primitive)
 public:
     virtual int displayBase() const;

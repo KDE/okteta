@@ -29,7 +29,6 @@
 //TODO merge dynamic and static length
 class DynamicLengthArrayDataInformation: public AbstractArrayDataInformation
 {
-Q_OBJECT
 protected:
     DynamicLengthArrayDataInformation(const DynamicLengthArrayDataInformation& d);
 public:

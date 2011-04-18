@@ -27,7 +27,6 @@
 
 class Bool32DataInformation: public UnsignedPrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool32,UnsignedPrimitive)
 public:
     DATAINFORMATION_CLONE(Bool32)

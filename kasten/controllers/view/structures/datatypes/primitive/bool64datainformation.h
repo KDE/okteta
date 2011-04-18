@@ -27,7 +27,6 @@
 
 class Bool64DataInformation: public UnsignedPrimitiveDataInformation
 {
-Q_OBJECT
 PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Bool64,UnsignedPrimitive)
 
 public:

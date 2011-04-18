@@ -27,7 +27,6 @@
 
 class BoolBitfieldDataInformation: public AbstractBitfieldDataInformation
 {
-Q_OBJECT
 public:
     BoolBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0) :
         AbstractBitfieldDataInformation(name, width, parent)

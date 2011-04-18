@@ -122,12 +122,11 @@ QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
         const QString& name, const DataInformation* const upTo) const
 {
     QList<const DataInformation*> retList;
-    if (parent() && !dynamic_cast<TopLevelDataInformation*> (parent()))
+    if (mParent && !mParent->isTopLevel())
     {
         DataInformationWithChildren* par =
-                dynamic_cast<DataInformationWithChildren*> (parent());
-        if (par)
-            retList.append(par->findChildrenWithName(name, this));
+                static_cast<DataInformationWithChildren*> (parent());
+        retList.append(par->findChildrenWithName(name, this));
     }
     for (uint i = 0; i < childCount(); ++i)
     {

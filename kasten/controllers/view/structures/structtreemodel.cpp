@@ -51,7 +51,7 @@ StructTreeModel::~StructTreeModel()
 void StructTreeModel::onChildrenRemoved(const DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    kDebug() << "data information " << sender->objectName() << ": removed "
+    kDebug() << "data information " << sender->name() << ": removed "
         << (endIndex - startIndex + 1) << " children starting at offset " << startIndex;
     emit endRemoveRows();
 }
@@ -59,7 +59,7 @@ void StructTreeModel::onChildrenRemoved(const DataInformation* sender, uint star
 void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    kDebug() << "data information " << sender->objectName() << ": inserted "
+    kDebug() << "data information " << sender->name() << ": inserted "
         << (endIndex - startIndex + 1) << " children at offset " << startIndex;
     emit endInsertRows();
 }
@@ -67,7 +67,7 @@ void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint sta
 void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    //kDebug() << "data information " << sender->objectName()
+    //kDebug() << "data information " << sender->name()
     //    << ": about to remove children:" << startIndex << " to " << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
@@ -77,7 +77,7 @@ void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint s
 void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    //kDebug() << "data information " << sender->objectName()
+    //kDebug() << "data information " << sender->name()
     //    << ": about to insert children:" << startIndex << " to " << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
@@ -99,8 +99,7 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
     const int column = index.column();
     if (role == Qt::FontRole)
     {
-        if (column == 0 && (item->parent() == 0
-                || dynamic_cast<TopLevelDataInformation*> (item->parent())))
+        if (column == 0 && (item->parent() == 0 || item->parent()->isTopLevel()))
         {
             // TODO: ideally here we would not take the default application font
             // (as given by QFont()) but the default of the view
@@ -201,15 +200,10 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
     if (!childItem->parent())
         return QModelIndex();
 
-    QObject* parentObj = static_cast<QObject*> (childItem->parent());
+    DataInformationBase* parentObj = childItem->parent();
 
-    if (!parentObj)
+    if (!parentObj || parentObj->isTopLevel())
         return QModelIndex();
-    if (dynamic_cast<TopLevelDataInformation*> (parentObj))
-    {
-        //parent is a TopLevelDataInformation -> not valid
-        return QModelIndex();
-    }
 
     // not null, not topleveldatainformation-> must be datainformation
     DataInformation* parent = static_cast<DataInformation*> (parentObj);
@@ -245,13 +239,12 @@ bool StructTreeModel::hasChildren(const QModelIndex& parent) const
         return parentItem->childCount() > 0;
 }
 
-QModelIndex StructTreeModel::findItemInModel(QObject* obj) const
+QModelIndex StructTreeModel::findItemInModel(DataInformationBase* data) const
 {
-    DataInformation* data = dynamic_cast<DataInformation*> (obj);
     Q_CHECK_PTR(data);
-    if (!data)
+    if (!data || data->isTopLevel())
         return QModelIndex(); //invalid object
-    return createIndex(data->row(), 0, obj);
+    return createIndex(static_cast<DataInformation*>(data)->row(), 0, data);
 }
 
 void StructTreeModel::onToolDataChange(int row, void* data)

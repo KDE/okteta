@@ -28,7 +28,6 @@
 
 class AbstractArrayDataInformation: public DataInformationWithChildren
 {
-Q_OBJECT
 protected:
     explicit AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
 public:

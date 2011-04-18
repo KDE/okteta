@@ -26,7 +26,6 @@
 /** A class holding the data of a union for Okteta*/
 class UnionDataInformation: public DataInformationWithChildren
 {
-Q_OBJECT
 protected:
     explicit UnionDataInformation(const UnionDataInformation& d);
 public:
