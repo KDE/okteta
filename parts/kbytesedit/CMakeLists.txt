@@ -16,7 +16,7 @@ kde4_add_plugin( kbytearrayedit WITH_PREFIX ${kbytearrayedit_PART_SRCS} )
 
 target_link_libraries( kbytearrayedit
   ${oktetagui_LIB}
-  oktetacore
+  ${oktetacore_LIB}
   ${KDE4_KPARTS_LIBS}
 )
 
