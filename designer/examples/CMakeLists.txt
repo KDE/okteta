@@ -11,8 +11,8 @@ kde4_add_ui_files( oktetadesignerexamplewidget_SRCS example_widget.ui )
 kde4_add_executable( oktetadesignerexample  ${oktetadesignerexamplewidget_SRCS} )
 
 target_link_libraries( oktetadesignerexample
-  oktetagui
-  oktetacore
+  ${oktetagui_LIB}
+  ${oktetacore_LIB}
   ${QT_QTGUI_LIBRARY}
   ${QT_QTCORE_LIBRARY}
 )
