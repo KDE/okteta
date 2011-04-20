@@ -259,8 +259,9 @@ inline ByteOrder DataInformation::byteOrder() const
         case EndianessFromSettings:
             return Kasten::StructViewPreferences::byteOrder();
         case EndianessInherit:
-            return mParent ? Kasten::StructViewPreferences::byteOrder() :
-                static_cast<DataInformation*>(mParent)->byteOrder();
+            return (mParent && !mParent->isTopLevel()) ?
+                static_cast<DataInformation*>(mParent)->byteOrder()
+                : Kasten::StructViewPreferences::byteOrder();
     }
     
     // here must be a return... I guess this is correct
