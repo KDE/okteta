@@ -159,53 +159,6 @@ void DataInformationWithChildren::setWidgetData(QWidget* w) const
     Q_UNUSED(w)
 }
 
-QVariant DataInformationWithChildren::data(int column, int role) const
-{
-    if (role == Qt::DisplayRole)
-    {
-        if (column == ColumnName)
-            return name();
-        else if (column == ColumnType)
-            return typeName();
-        else if (column == ColumnValue)
-            return valueString(); //empty QString
-        else
-            return QVariant();
-    }
-    else if (role == Qt::ToolTipRole)
-    {
-        if (mHasBeenValidated && !mValidationSuccessful)
-        {
-            QString validationError;
-            if (additionalData() && !additionalData()->validationError().isEmpty())
-                validationError = i18nc("not all values in this structure"
-                    " are as they should be", "Validation failed: \"%1\"",
-                        additionalData()->validationError());
-            else
-                validationError = i18nc("not all values in this structure"
-                    " are as they should be", "Validation failed.");
-
-            return i18np(
-                    "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)\n\n %6",
-                    "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
-                    childCount(), name(), valueString(), typeName(), sizeString(),
-                    validationError);
-        }
-        else
-            return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
-                    "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                    childCount(), name(), valueString(), typeName(), sizeString());
-    }
-    else if (role == Qt::DecorationRole && column == ColumnName)
-    {
-        //XXX better icons?
-        if (mHasBeenValidated)
-            return mValidationSuccessful ? KIcon("task-complete") : KIcon(
-                    "dialog-warning");
-    }
-    return QVariant();
-}
-
 int DataInformationWithChildren::size() const
 {
     int size = 0;
@@ -335,4 +288,32 @@ QScriptValue DataInformationWithChildren::toScriptValue(QScriptEngine* engine, S
     QScriptValue ret = engine->newObject(handlerInfo->mStructUnionClass);
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
+}
+
+QString DataInformationWithChildren::tooltipString() const
+{
+    if (mHasBeenValidated && !mValidationSuccessful)
+    {
+        QString validationError;
+        if (additionalData() && !additionalData()->validationError().isEmpty())
+        {
+            validationError = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed: \"%1\"",
+                    additionalData()->validationError());
+        }
+        else
+        {
+            validationError = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed.");
+        }
+        return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)\n\n %6",
+                "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
+                childCount(), name(), valueString(), typeName(), sizeString(), validationError);
+    }
+    else
+    {
+        return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
+                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
+                     childCount(), name(), valueString(), typeName(), sizeString());
+    }
 }

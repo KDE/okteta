@@ -168,3 +168,55 @@ QVariant DataInformation::childData(int row, int column, int role) const
     Q_UNUSED(role)
     return QVariant(); //no children -> no child data
 }
+
+QVariant DataInformation::data(int column, int role) const
+{
+    if (role == Qt::DisplayRole)
+    {
+        if (column == ColumnName)
+            return name();
+        if (column == ColumnType)
+            return typeName();
+        if (column == ColumnValue)
+            return valueString();
+    }
+    else if (role == Qt::ToolTipRole)
+    {
+        return tooltipString();
+    }
+    else if (role == Qt::DecorationRole && column == ColumnName)
+    {
+        //XXX better icons?
+        if (mHasBeenValidated)
+            return mValidationSuccessful ? KIcon("task-complete") : KIcon(
+                    "dialog-warning");
+    }
+    return QVariant();
+}
+
+
+QString DataInformation::tooltipString() const
+{
+    if (mHasBeenValidated && !mValidationSuccessful)
+    {
+        QString validationError;
+        if (additionalData() && !additionalData()->validationError().isEmpty())
+        {
+            validationError = i18nc("not all values in this structure"
+                " are as they should be", "Validation failed: \"%1\"",
+                additionalData()->validationError());
+        }
+        else
+        {
+            validationError = i18nc("not all values in this structure"
+                " are as they should be", "Validation failed.");
+        }
+        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
+                valueString(), typeName(), sizeString(), validationError);
+    }
+    else
+    {
+        return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
+                    valueString(), typeName(), sizeString());
+    }
+}

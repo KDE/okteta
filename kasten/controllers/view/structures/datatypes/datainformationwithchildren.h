@@ -36,7 +36,6 @@ public:
     explicit DataInformationWithChildren(QString& name, DataInformation* parent = NULL);
     virtual ~DataInformationWithChildren();
 
-    virtual QVariant data(int, int) const;
     virtual QVariant childData(int row, int column, int role) const;
     QList<DataInformation*> children() const;
 
@@ -56,6 +55,7 @@ public:
     virtual QList<const DataInformation*> findChildrenWithName(const QString& name,
             const DataInformation* const upTo) const;
     quint64 offset(unsigned int index) const;
+    virtual QString tooltipString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     /** get the needed data from the widget */

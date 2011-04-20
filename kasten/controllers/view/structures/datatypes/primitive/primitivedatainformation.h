@@ -47,9 +47,7 @@ public:
     virtual AllPrimitiveTypes value() const = 0;
     virtual void setValue(AllPrimitiveTypes newVal) = 0;
 
-    virtual AllPrimitiveTypes
-    qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
-    QVariant data(int column, int role) const;
+    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 protected:

@@ -88,7 +88,7 @@ public:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     int row() const;
     /** get the necessary data (for the model) */
-    virtual QVariant data(int column, int role) const = 0;
+    virtual QVariant data(int column, int role) const;
     /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
     virtual QVariant childData(int row, int column, int role) const;
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
@@ -96,6 +96,7 @@ public:
     /** by default just returns an empty QString */
     virtual QString valueString() const;
     virtual QString name() const;
+    virtual QString tooltipString() const;
     /** needs to be virtual for bitfields */
     virtual QString sizeString() const;
 

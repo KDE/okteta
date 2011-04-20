@@ -29,56 +29,6 @@
 #include <QtScript/QScriptEngine>
 #include <KIcon>
 
-QVariant PrimitiveDataInformation::data(int column, int role) const
-{
-    if (role == Qt::DisplayRole)
-    {
-        if (column == ColumnName)
-            return name();
-        else if (column == ColumnType)
-            return typeName();
-        else if (column == ColumnValue)
-            return valueString();
-        else
-            return QVariant();
-    }
-    else if (role == Qt::ToolTipRole)
-    {
-        if (mHasBeenValidated && !mValidationSuccessful)
-        {
-            QString validationError;
-            if (additionalData() && !additionalData()->validationError().isEmpty())
-                validationError = i18nc("not all values in this structure"
-                    " are as they should be", "Validation failed: \"%1\"",
-                        additionalData()->validationError());
-            else
-                validationError = i18nc("not all values in this structure"
-                    " are as they should be", "Validation failed.");
-
-            return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
-                    valueString(), typeName(), sizeString(), validationError);
-        }
-        else
-            return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
-                    valueString(), typeName(), sizeString());
-    }
-    //TODO status tip is not displayed ??
-    //    else if (role == Qt::StatusTipRole)
-    //    {
-    //        if (mHasBeenValidated && !mValidationSuccessful)
-    //            return i18nc("not all values in this structure are as they should be",
-    //                    "Validation failed.");
-    //    }
-    else if (role == Qt::DecorationRole && column == ColumnName)
-    {
-        //XXX better icons?
-        if (mHasBeenValidated)
-            return mValidationSuccessful ? KIcon("task-complete") : KIcon(
-                    "dialog-warning");
-    }
-    return QVariant();
-}
-
 bool PrimitiveDataInformation::setData(const QVariant& valueVariant, DataInformation* inf,
         Okteta::AbstractByteArrayModel *out, Okteta::Address address,
         quint64 bitsRemaining, quint8* bitOffset)
