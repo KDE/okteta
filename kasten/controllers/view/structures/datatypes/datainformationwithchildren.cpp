@@ -26,7 +26,6 @@
 #include "../script/classes/structunionscriptclass.h"
 
 #include <KLineEdit>
-#include <KIcon>
 #include <QtScript/QScriptEngine>
 
 void DataInformationWithChildren::appendChild(DataInformation* child)

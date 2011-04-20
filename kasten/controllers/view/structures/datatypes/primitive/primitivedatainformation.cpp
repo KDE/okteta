@@ -27,7 +27,6 @@
 
 
 #include <QtScript/QScriptEngine>
-#include <KIcon>
 
 bool PrimitiveDataInformation::setData(const QVariant& valueVariant, DataInformation* inf,
         Okteta::AbstractByteArrayModel *out, Okteta::Address address,

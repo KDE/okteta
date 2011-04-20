@@ -23,6 +23,7 @@
 
 #include <KLocale>
 #include <KLineEdit>
+#include <KIcon>
 
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent) :
