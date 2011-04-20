@@ -52,7 +52,7 @@ kde4_add_unit_test( bytearrayrawfilesynchronizertest
 )
 target_link_libraries( bytearrayrawfilesynchronizertest
   oktetakastenio
-  kastencore
+  ${KASTENCORE_LIBS}
   kastencoretestutil
   oktetacoretestutil
   testoktetacore
@@ -76,7 +76,7 @@ kde4_add_unit_test( bytearrayrawfilesynchronizerfactorytest
 )
 target_link_libraries( bytearrayrawfilesynchronizerfactorytest
   oktetakastenio
-  kastencore
+  ${KASTENCORE_LIBS}
   kastencoretestutil
   oktetacoretestutil
   testoktetacore

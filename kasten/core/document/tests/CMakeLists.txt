@@ -30,7 +30,7 @@ kde4_add_unit_test( bytearraydocumenttest
   ${bytearraydocumenttest_SRCS}
 )
 target_link_libraries( bytearraydocumenttest
-  kastencore
+  ${KASTENCORE_LIBS}
   testoktetacore
   ${KDE4_KIO_LIBS}
   ${QT_QTTEST_LIBRARY}
@@ -50,7 +50,7 @@ kde4_add_unit_test( bytearraydocumentfactorytest
   ${bytearraydocumentfactorytest_SRCS}
 )
 target_link_libraries( bytearraydocumentfactorytest
-  kastencore
+  ${KASTENCORE_LIBS}
   oktetacoretestutil
   testoktetacore
   ${KDE4_KIO_LIBS}
