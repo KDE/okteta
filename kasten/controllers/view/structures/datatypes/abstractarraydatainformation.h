@@ -47,6 +47,8 @@ public:
     
     virtual QVariant childData(int row, int column, int role) const;
 
+    virtual bool isArray();
+
     QScriptValue setArrayLength(int newLength, QScriptContext* context);
     QScriptValue setArrayType(QScriptValue type, QScriptContext* context);
     virtual QScriptValue childType() const;
@@ -64,6 +66,11 @@ inline int AbstractArrayDataInformation::length() const
 inline const DataInformation* AbstractArrayDataInformation::newChildType() const
 {
     return mChildType;
+}
+
+inline bool AbstractArrayDataInformation::isArray()
+{
+    return true;
 }
 
 #endif /* ABSTRACTARRAYDATAINFORMATION_H_ */

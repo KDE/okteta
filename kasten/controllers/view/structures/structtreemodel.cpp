@@ -99,7 +99,7 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
     const int column = index.column();
     if (role == Qt::FontRole)
     {
-        if (column == 0 && (item->parent() == 0 || item->parent()->isTopLevel()))
+        if (column == 0 && item->parent()->isTopLevel())
         {
             // TODO: ideally here we would not take the default application font
             // (as given by QFont()) but the default of the view
@@ -110,20 +110,16 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
         else
             return QVariant();
     }
-    
-    //const QModelIndex& parent = index.parent();
-    //if (parent.isValid())
-    //{
-    const AbstractArrayDataInformation* array =
-        dynamic_cast<const AbstractArrayDataInformation*>(item->parent());
-    if (array)
+    if (item->parent()->isArray())
     {
+        AbstractArrayDataInformation* array = static_cast<AbstractArrayDataInformation*>(item->parent());
+        Q_CHECK_PTR(dynamic_cast<AbstractArrayDataInformation*>(item->parent()));
         return array->childData(index.row(), column, role);
     }
-    //}
     else
         return item->data(column, role);
 }
+
 bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
         int role)
 {

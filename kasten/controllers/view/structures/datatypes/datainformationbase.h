@@ -28,6 +28,7 @@ public:
     DataInformationBase();
     virtual ~DataInformationBase();
     virtual bool isTopLevel() = 0;
+    virtual bool isArray();
 };
 
 #endif // DATAINFORMATIONBASE_H

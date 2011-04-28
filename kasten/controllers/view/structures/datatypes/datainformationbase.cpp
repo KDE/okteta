@@ -30,3 +30,8 @@ DataInformationBase::~DataInformationBase()
 {
 
 }
+
+bool DataInformationBase::isArray()
+{
+    return false;
+}
