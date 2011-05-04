@@ -155,7 +155,7 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
 
 QString StringDataInformation::valueString() const
 {
-    return DataInformation::valueString();
+    return mData->completeString();
 }
 
 QString StringDataInformation::name() const
