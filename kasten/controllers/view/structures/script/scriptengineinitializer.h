@@ -131,6 +131,8 @@ private:
      *  -the second is the length of the array<br>
      */
     static QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng);
+    /** this constructor takes one argument, the encoding of the string (as a string) */
+    static QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
 
     /** A toString() implementation for primitive types.
      * <br>
@@ -140,7 +142,6 @@ private:
      *  <br>
      *  Otherwise just returns the primitive type, i.e. @code "int64" @endcode
      */
-
 private:
     //the toString functions
     static QScriptValue primitiveToString(QScriptContext* ctx, QScriptEngine* eng);
@@ -188,8 +189,7 @@ private:
      */
     static QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng);
     static QScriptValue enumToString(QScriptContext* ctx, QScriptEngine* eng);
-    static QScriptValue unionOrStructToCPPString(QScriptContext* ctx,
-            QScriptEngine* eng);
+    static QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng);
 private:
     static QScriptValue primitiveConstructor(QScriptContext* ctx,
             QScriptEngine* eng, const QLatin1String type);
@@ -197,6 +197,9 @@ private:
             QScriptValue& val, int argIndex);
     static void addUpdateFunction(QScriptContext* ctx, QScriptEngine* eng,
             QScriptValue& val, int argIndex);
+
+    static QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
+
     static const QString typePropertyString;
     static const QString toStringPropertyString;
 };

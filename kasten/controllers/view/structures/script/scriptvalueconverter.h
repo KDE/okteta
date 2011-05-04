@@ -34,6 +34,7 @@ class AbstractBitfieldDataInformation;
 class StructureDataInformation;
 class UnionDataInformation;
 class EnumDataInformation;
+class StringDataInformation;
 
 class ScriptValueConverter
 {
@@ -46,16 +47,14 @@ private:
     QScriptValue& mValue;
     const QString mName;
 private:
-    DataInformation*
-    toDataInformation(QScriptValue& value, QString name) const;
+    DataInformation* toDataInformation(QScriptValue& value, QString name) const;
 
     AbstractArrayDataInformation* toArray(QScriptValue& value, QString& name) const;
-    AbstractBitfieldDataInformation*
-    toBitfield(QScriptValue& value, QString& name) const;
+    AbstractBitfieldDataInformation* toBitfield(QScriptValue& value, QString& name) const;
     PrimitiveDataInformation* toPrimitive(QScriptValue& value, QString& name) const;
     StructureDataInformation* toStruct(QScriptValue& value, QString& name) const;
     UnionDataInformation* toUnion(QScriptValue& value, QString& name) const;
-
+    StringDataInformation* toString(QScriptValue& value, QString& name) const;
     EnumDataInformation* toEnum(QScriptValue& value, QString& name) const;
 };
 

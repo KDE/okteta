@@ -32,6 +32,8 @@
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/enumdatainformation.h"
 #include "../datatypes/enumdefinition.h"
+#include "../datatypes/strings/stringdata.h"
+#include "../datatypes/strings/stringdatainformation.h"
 #include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"
 #include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
 #include "../datatypes/primitive/bitfield/signedbitfielddatainformation.h"
@@ -95,6 +97,9 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue& value,
 
     else if (type == QLatin1String("enum"))
         returnVal = toEnum(value, name);
+
+    else if (type == QLatin1String("string"))
+        returnVal = toString(value, name);
 
     //now it can only be a primitive type or something invalid
     else
@@ -279,5 +284,49 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
         return new EnumDataInformation(name, primData, def);
     else
         return NULL;
+}
+
+StringDataInformation* ScriptValueConverter::toString(QScriptValue& value, QString& name) const
+{
+    const QScriptValue terminatedBy = value.property("terminatedBy");
+    const QScriptValue charCount = value.property("charCount");
+    const QScriptValue byteCount = value.property("byteCount");
+    const QScriptValue encoding = value.property("encoding");
+
+    StringData::TerminationModes mode = StringData::None;
+    if (terminatedBy.isNumber())
+        mode |= StringData::Sequence;
+    if (charCount.isNumber())
+        mode |= StringData::CharCount;
+    if (byteCount.isNumber())
+        mode |= StringData::ByteCount;
+
+    if ((mode & StringData::CharCount) && (mode & StringData::ByteCount))
+        mode &= ~StringData::ByteCount; //when both exists charcount wins
+
+    StringDataInformation* data = new StringDataInformation(name, encoding.toString());
+    //if mode is None, we assume zero terminated strings
+    bool ok;
+    if (mode == StringData::None)
+    {
+        mode = StringData::Sequence;
+        data->setTerminationCodePoint(0);
+    }
+    else if (mode & StringData::Sequence)
+    {
+        const uint term = terminatedBy.toUInt32();
+        data->setTerminationCodePoint(term);
+    }
+    if (mode & StringData::CharCount)
+    {
+        const int count = charCount.toInt32();
+        data->setMaxCharCount(qMax(count, 0));
+    }
+    if (mode & StringData::ByteCount)
+    {
+        const int count = byteCount.toInt32();
+        data->setMaxByteCount(qMax(count, 0));
+    }
+    return data;
 }
 

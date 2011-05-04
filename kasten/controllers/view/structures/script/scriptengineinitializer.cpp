@@ -192,6 +192,7 @@ QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
     object.setProperty(typePropertyString, "struct");
     object.setProperty("children", children);
     object.setProperty(toStringPropertyString, eng->newFunction(structToString));
+    object.setProperty("child", eng->newFunction(getChild));
 
     //add validation and update function
     if (ctx->argumentCount() > 1)
@@ -223,6 +224,7 @@ QScriptValue ScriptEngineInitializer::scriptNewUnion(QScriptContext* ctx,
     object.setProperty(typePropertyString, "union");
     object.setProperty("children", children);
     object.setProperty(toStringPropertyString, eng->newFunction(unionToString));
+    object.setProperty("child", eng->newFunction(getChild));
 
     //add validation and update function
     if (ctx->argumentCount() > 1)
@@ -322,6 +324,24 @@ QScriptValue ScriptEngineInitializer::scriptNewEnum(QScriptContext* ctx,
     return object;
 }
 
+QScriptValue ScriptEngineInitializer::scriptNewString(QScriptContext* ctx, QScriptEngine* eng)
+{
+    QString encoding;
+    if (ctx->argumentCount() < 1)
+        encoding = QLatin1String("ascii");
+    else
+        encoding = ctx->argument(0).toString();
+    QScriptValue object;
+    if (ctx->isCalledAsConstructor())
+        object = ctx->thisObject();
+    else
+        object = eng->newObject();
+    
+    object.setProperty(typePropertyString, "string");
+    object.setProperty("encoding", encoding);
+    return object;
+}
+
 //toString functions
 
 
@@ -395,6 +415,9 @@ QScriptValue ScriptEngineInitializer::arrayToString(QScriptContext* ctx,
     else
         return QString::fromLatin1("%1[%2];").arg(type, length);
 }
+
+static QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
+
 
 QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* ctx,
         QScriptEngine* eng)
@@ -531,9 +554,21 @@ void ScriptEngineInitializer::addUpdateFunction(QScriptContext* ctx,
     addFunctionAsMemberProperty(ctx, eng, val, argIndex, "updateFunc");
 }
 
+QScriptValue ScriptEngineInitializer::getChild(QScriptContext* ctx, QScriptEngine* eng)
+{
+    if (ctx->argumentCount() < 1)
+        return ctx->throwError("child(): name of child must be passed as first parameter");
+    QScriptValue name = ctx->argument(0);
+    QScriptValue ret = ctx->thisObject().property("children"). property(name.toString());
+    if (ret.isValid())
+        return ret;
+    else
+        return eng->undefinedValue();
+}
+
+
 void ScriptEngineInitializer::addFuctionsToScriptEngine(QScriptEngine& engine)
 {
-
     //TODO use the  prototype to set the toString function
     engine.globalObject().setProperty("uint8", engine.newFunction(scriptNewUInt8));
     engine.globalObject().setProperty("uint16", engine.newFunction(scriptNewUInt16));
@@ -555,12 +590,12 @@ void ScriptEngineInitializer::addFuctionsToScriptEngine(QScriptEngine& engine)
 
     engine.globalObject().setProperty("char", engine.newFunction(scriptNewChar));
 
-    engine.globalObject().setProperty("bitfield", engine.newFunction(
-            scriptNewBitfield));
+    engine.globalObject().setProperty("bitfield", engine.newFunction(scriptNewBitfield));
 
     engine.globalObject().setProperty("array", engine.newFunction(scriptNewArray));
     engine.globalObject().setProperty("struct", engine.newFunction(scriptNewStruct));
     engine.globalObject().setProperty("union", engine.newFunction(scriptNewUnion));
     //XXX: if I use enunm QtScript gives me syntax errors, I thought enum was not a keyword in JS
     engine.globalObject().setProperty("enumeration", engine.newFunction(scriptNewEnum));
+    engine.globalObject().setProperty("string", engine.newFunction(scriptNewString));
 }
