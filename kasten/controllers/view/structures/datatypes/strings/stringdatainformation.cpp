@@ -220,23 +220,27 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
     }
     else
     {
-        delete mData;
+        StringData* data = 0;
         switch (encoding) {
             case ASCII:
-                mData = new AsciiStringData(this);
+                data = new AsciiStringData(this);
                 break;
             case UTF16_LE:
-                mData = new Utf16StringData(this);
-                mData->setEndianess(true);
+                data = new Utf16StringData(this);
+                data->setEndianess(true);
                 break;
             case UTF16_BE:
-                mData = new Utf16StringData(this);
-                mData->setEndianess(false);
+                data = new Utf16StringData(this);
+                data->setEndianess(false);
                 break;
             default:
-                mData = new AsciiStringData(this); //TODO add the other classes
+                data = new AsciiStringData(this); //TODO add the other classes
                 break;
         }
+        if (mData)
+            data->copyTerminationFrom(mData);
+        delete mData;
+        mData = data;
     }
     mEncoding = encoding;
 }

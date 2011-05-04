@@ -40,6 +40,8 @@ namespace Okteta {
 
 class StringData
 {
+private:
+    Q_DISABLE_COPY(StringData)
 public:
     enum TerminationMode {
         None = 0x0,
