@@ -19,17 +19,36 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DATAINFORMATIONBASE_H
-#define DATAINFORMATIONBASE_H
 
-class DataInformationBase
+
+#ifndef DUMMYDATAINFORMATION_H
+#define DUMMYDATAINFORMATION_H
+
+#include "datainformation.h"
+
+
+class DummyDataInformation : public DataInformation
 {
 public:
-    DataInformationBase();
-    virtual ~DataInformationBase();
-    virtual bool isTopLevel() const = 0;
-    virtual bool isArray() const;
+    DummyDataInformation(DataInformationBase* parent);
+    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+    virtual bool setData(const QVariant& value, DataInformation* inf, Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            quint64 bitsRemaining, quint8* bitOffset);
+    virtual int size() const;
+    virtual void setWidgetData(QWidget* w) const;
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+    virtual QString typeName() const;
+    virtual DataInformation* clone() const;
     virtual bool isDummy() const;
+protected:
+    virtual quint64 offset(unsigned int index) const;
 };
 
-#endif // DATAINFORMATIONBASE_H
+inline bool DummyDataInformation::isDummy() const
+{
+    return true;
+}
+
+#endif // DUMMYDATAINFORMATION_H

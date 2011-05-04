@@ -31,7 +31,12 @@ DataInformationBase::~DataInformationBase()
 
 }
 
-bool DataInformationBase::isArray()
+bool DataInformationBase::isArray() const
+{
+    return false;
+}
+
+bool DataInformationBase::isDummy() const
 {
     return false;
 }

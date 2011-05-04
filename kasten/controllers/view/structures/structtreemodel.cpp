@@ -116,6 +116,8 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
         Q_CHECK_PTR(dynamic_cast<AbstractArrayDataInformation*>(item->parent()));
         return array->childData(index.row(), column, role);
     }
+    else if (item->isDummy())
+        return static_cast<DataInformation*>(item->parent())->childData(index.row(), column, role);
     else
         return item->data(column, role);
 }
@@ -147,6 +149,7 @@ Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
     if (!index.isValid())
         return 0;
     DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
+    //TODO child flags
     return mTool->flags(index.column(), item);
 }
 

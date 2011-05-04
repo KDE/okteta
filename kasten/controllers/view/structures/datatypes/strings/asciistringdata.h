@@ -19,17 +19,31 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DATAINFORMATIONBASE_H
-#define DATAINFORMATIONBASE_H
 
-class DataInformationBase
+
+
+#ifndef ASCIISTRINGDATA_H
+#define ASCIISTRINGDATA_H
+
+#include "stringdata.h"
+
+
+class AsciiStringData : public StringData
 {
 public:
-    DataInformationBase();
-    virtual ~DataInformationBase();
-    virtual bool isTopLevel() const = 0;
-    virtual bool isArray() const;
-    virtual bool isDummy() const;
+    explicit AsciiStringData(StringDataInformation* parent);
+
+    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining);
+    virtual quint64 sizeAt(int i) const;
+    virtual unsigned int size() const;
+    virtual QString completeString(bool skipInvalid = false) const;
+    virtual QString stringValue(int row) const;
+    virtual QString charType() const;
+    virtual int count() const;
+    virtual QString typeName() const;
+    AsciiStringData();
+private:
+    QVector<quint8> mData;
 };
 
-#endif // DATAINFORMATIONBASE_H
+#endif // ASCIISTRINGDATA_H

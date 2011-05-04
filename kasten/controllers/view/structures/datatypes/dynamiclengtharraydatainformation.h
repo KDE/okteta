@@ -44,15 +44,10 @@ public:
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
             quint64 bitsRemaining, quint8* bitOffset);
-    virtual bool isDynamicArray() const;
 private:
     int calculateLength();
     void resizeChildren();
     QString mLengthString;
 };
 
-inline bool DynamicLengthArrayDataInformation::isDynamicArray() const
-{
-    return true;
-}
 #endif /* DYNAMICLENGTHARRAYDATAINFORMATION_H_ */

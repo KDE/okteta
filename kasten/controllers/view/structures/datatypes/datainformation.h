@@ -82,7 +82,7 @@ public:
     virtual bool canHaveChildren() const;
     virtual unsigned int childCount() const;
     virtual DataInformation* childAt(unsigned int) const;
-    virtual quint64 positionRelativeToParent() const;
+    virtual quint64 positionRelativeToParent(int row = -1) const;
 
     //for the model:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
@@ -91,6 +91,10 @@ public:
     virtual QVariant data(int column, int role) const;
     /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
     virtual QVariant childData(int row, int column, int role) const;
+    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
+    virtual int childSize(int index) const;
+
+
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
     virtual QString typeName() const = 0;
     /** by default just returns an empty QString */
@@ -144,8 +148,11 @@ public:
             Okteta::AbstractByteArrayModel *input, Okteta::Address address,
             quint64 bitsRemaining, quint8* bitOffset) = 0;
 
-    virtual bool isDynamicArray() const;
-    TopLevelDataInformation* topLevelDataInformation();
+    virtual bool setChildData(int row, const QVariant& value, DataInformation* inf,
+            Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+            quint64 bitsRemaining, quint8* bitOffset);
+    virtual bool isTopLevel() const;
+    TopLevelDataInformation* topLevelDataInformation() const;
     DataInformation* mainStructure();
 
     void setAdditionalData(AdditionalData* data);
@@ -163,7 +170,6 @@ public:
 
     virtual void resetValidationState(); //virtual for datainformationwithchildren
     bool wasAbleToRead() const;
-    virtual bool isTopLevel();
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) = 0;
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
@@ -234,15 +240,11 @@ inline unsigned int DataInformation::childCount() const
     return 0;
 }
 
-inline bool DataInformation::isDynamicArray() const
-{
-    return false;
-}
-
 inline AdditionalData* DataInformation::additionalData() const
 {
     return mAdditionalData;
 }
+
 inline bool DataInformation::wasAbleToRead() const
 {
     return mWasAbleToRead;
@@ -279,7 +281,7 @@ inline void DataInformation::setByteOrder(ByteOrder newByteOrder)
     mByteOrder = newByteOrder == ByteOrderEnumClass::BigEndian ? EndiannessBig : EndianessLittle;
 }
 
-inline bool DataInformation::isTopLevel()
+inline bool DataInformation::isTopLevel() const
 {
     return false;
 }
@@ -293,6 +295,15 @@ inline void DataInformation::setParent(DataInformationBase* newParent)
 inline DataInformationBase* DataInformation::parent() const
 {
     return mParent;
+}
+
+inline TopLevelDataInformation* DataInformation::topLevelDataInformation() const
+{
+    Q_CHECK_PTR(mParent);
+    if (mParent->isTopLevel())
+        return static_cast<TopLevelDataInformation*>(mParent);
+
+    return static_cast<const DataInformation*>(mParent)->topLevelDataInformation();
 }
 
 #endif /* DATAINFORMATION_H_ */

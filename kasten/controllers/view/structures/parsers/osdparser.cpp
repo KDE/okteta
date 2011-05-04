@@ -27,6 +27,8 @@
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/enumdatainformation.h"
+#include "../datatypes/strings/stringdatainformation.h"
+#include "../datatypes/strings/stringdata.h"
 #include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"
 #include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
 #include "../datatypes/primitive/bitfield/signedbitfielddatainformation.h"
@@ -195,9 +197,8 @@ OsdParser::arrayFromXML(const QDomElement& xmlElem)
     int length = lengthStr.toInt(&okay, 10); //TODO dynamic length
     if (!okay)
     {
-        kDebug()
-                    << "error parsing length string -> is dynamic length array. Length string="
-                    << lengthStr;
+        kDebug() << "error parsing length string -> is dynamic length array. Length string="
+            << lengthStr;
         retVal = new DynamicLengthArrayDataInformation(name, lengthStr, *subElem);
     }
     else if (length >= 0)
@@ -323,6 +324,80 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem)
     return enumd;
 }
 
+StringDataInformation* OsdParser::stringFromXML(const QDomElement& node)
+{
+    const QString name = node.attribute("name", i18n("<invalid name>"));
+    const QString terminatedBy = node.attribute("terminatedBy");
+    const QString charCount = node.attribute("charCount");
+    const QString byteCount = node.attribute("byteCount");
+    const QString encoding = node.attribute("encoding");
+
+    StringData::TerminationModes mode = StringData::None;
+    if (!terminatedBy.isEmpty())
+        mode |= StringData::Sequence;
+    if (!charCount.isEmpty())
+        mode |= StringData::CharCount;
+    if (!byteCount.isEmpty())
+        mode |= StringData::ByteCount;
+
+    if ((mode & StringData::CharCount) && (mode & StringData::ByteCount))
+        mode &= ~StringData::ByteCount; //when both exists charcount wins
+
+    StringDataInformation* data = new StringDataInformation(name, encoding);
+    //if mode is None, we assume zero terminated strings
+    bool ok;
+    if (mode == StringData::None)
+    {
+        mode = StringData::Sequence;
+        data->setTerminationCodePoint(0);
+    }
+    else if (mode & StringData::Sequence)
+    {
+        uint term;
+        if (terminatedBy.startsWith(QLatin1String("0x")))
+            term = terminatedBy.mid(2).toUInt(&ok, 16);
+        else
+            term = terminatedBy.toUInt(&ok, 16); // always a hex value, never okay as normal val
+
+        if (!ok)
+            kDebug() << "invalid termination codepoint specified " << terminatedBy
+                << " (should be a hex number). Defaulting to 0";
+        data->setTerminationCodePoint(term);
+    }
+    if (mode & StringData::CharCount)
+    {
+        uint count;
+        if (charCount.startsWith(QLatin1String("0x")))
+            count = charCount.mid(2).toUInt(&ok, 16);
+        else
+            count = charCount.toUInt(&ok, 10);
+
+        if (!ok)
+        {
+            kDebug() << "unparseable char count: " << charCount << ", defaulting to 1";
+            count = 1;
+        }
+        data->setMaxCharCount(count);
+    }
+    if (mode & StringData::ByteCount)
+    {
+        uint count;
+        if (byteCount.startsWith(QLatin1String("0x")))
+            count = byteCount.mid(2).toUInt(&ok, 16);
+        else
+            count = byteCount.toUInt(&ok, 10);
+
+        if (!ok)
+        {
+            kDebug() << "unparseable char count: " << byteCount << ", defaulting to 1";
+            count = 1;
+        }
+        data->setMaxByteCount(count);
+    }
+    data->setEncoding(encoding);
+    return data;
+}
+
 DataInformation* OsdParser::parseNode(const QDomNode& n)
 {
     QDomElement elem = n.toElement(); // try to convert the node to an element.
@@ -331,18 +406,21 @@ DataInformation* OsdParser::parseNode(const QDomNode& n)
     {
         //      kDebug() << "element tag: " << elem.tagName();
         //e is element
-        if (elem.tagName() == "struct")
+        const QString tag = elem.tagName();
+        if (tag == "struct")
             data = structFromXML(elem);
-        else if (elem.tagName() == "array")
+        else if (tag == "array")
             data = arrayFromXML(elem);
-        else if (elem.tagName() == "bitfield")
+        else if (tag == "bitfield")
             data = bitfieldFromXML(elem);
-        else if (elem.tagName() == "primitive")
+        else if (tag == "primitive")
             data = primitiveFromXML(elem);
-        else if (elem.tagName() == "union")
+        else if (tag == "union")
             data = unionFromXML(elem);
-        else if (elem.tagName() == "enum")
+        else if (tag == "enum")
             data = enumFromXML(elem);
+        else if (tag == "string")
+            data = stringFromXML(elem);
     }
     if (data) {
         QString byteOrder = elem.attribute("byteOrder", "inherit");

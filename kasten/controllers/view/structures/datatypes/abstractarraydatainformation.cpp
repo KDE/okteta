@@ -65,12 +65,6 @@ AbstractArrayDataInformation::AbstractArrayDataInformation(
     mChildType->setParent(this);
 }
 
-bool AbstractArrayDataInformation::isDynamicArray() const
-{
-    //if this array has an update function it must be dynamic
-    return mAdditionalData->updateFunction() != NULL;
-}
-
 QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength, QScriptContext* context)
 {
     //kDebug() << "old child count: " << childCount();

@@ -29,6 +29,7 @@
 #include "../datatypes/enumdefinition.h"
 #include "abstractstructureparser.h"
 
+class StringDataInformation;
 class AbstractArrayDataInformation;
 class AbstractBitfieldDataInformation;
 class EnumDataInformation;
@@ -52,16 +53,16 @@ private:
 
     AbstractArrayDataInformation* arrayFromXML(const QDomElement& node);
     PrimitiveDataInformation* primitiveFromXML(const QDomElement& node);
-    AbstractBitfieldDataInformation
-    * bitfieldFromXML(const QDomElement& xmlElem);
+    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem);
     UnionDataInformation* unionFromXML(const QDomElement& node);
     StructureDataInformation* structFromXML(const QDomElement& node);
     EnumDataInformation* enumFromXML(const QDomElement& node);
+    StringDataInformation* stringFromXML(const QDomElement& node);
 
     DataInformation* parseNode(const QDomNode& node);
     EnumDefinition::Ptr findEnum(const QString& defName);
 
-    //    void parseIncludeNodes(QDomNodeList& elems);
+    //void parseIncludeNodes(QDomNodeList& elems);
     void parseEnumDefNodes(QDomNodeList& elems);
     QDomDocument openFile();
 private:

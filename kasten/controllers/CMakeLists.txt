@@ -276,6 +276,8 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/additionaldata.cpp
   view/structures/datatypes/topleveldatainformation.cpp
   view/structures/datatypes/datainformation.cpp
+  view/structures/datatypes/datainformationbase.cpp
+  view/structures/datatypes/dummydatainformation.cpp
   view/structures/datatypes/datainformationwithchildren.cpp
   view/structures/datatypes/abstractarraydatainformation.cpp
   view/structures/datatypes/staticlengtharraydatainformation.cpp
@@ -307,6 +309,10 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/enumdatainformation.cpp
   view/structures/datatypes/enumdefinition.cpp
   view/structures/datatypes/primitivefactory.cpp
+  view/structures/datatypes/strings/stringdatainformation.cpp
+  view/structures/datatypes/strings/stringdata.cpp
+  view/structures/datatypes/strings/asciistringdata.cpp
+  view/structures/datatypes/strings/utf16stringdata.cpp
   view/structures/script/scriptengineinitializer.cpp
   view/structures/script/scripthandler.cpp
   view/structures/script/scripthandlerinfo.cpp

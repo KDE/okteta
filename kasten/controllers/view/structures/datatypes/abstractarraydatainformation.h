@@ -41,13 +41,12 @@ public:
     virtual ~AbstractArrayDataInformation();
 public:
     virtual QString typeName() const;
-    virtual bool isDynamicArray() const;
     int length() const;
     const DataInformation* newChildType() const;
     
     virtual QVariant childData(int row, int column, int role) const;
 
-    virtual bool isArray();
+    virtual bool isArray() const;
 
     QScriptValue setArrayLength(int newLength, QScriptContext* context);
     QScriptValue setArrayType(QScriptValue type, QScriptContext* context);
@@ -68,7 +67,7 @@ inline const DataInformation* AbstractArrayDataInformation::newChildType() const
     return mChildType;
 }
 
-inline bool AbstractArrayDataInformation::isArray()
+inline bool AbstractArrayDataInformation::isArray() const
 {
     return true;
 }

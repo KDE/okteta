@@ -80,7 +80,7 @@ public:
     ScriptHandlerInfo* scriptHandlerInfo() const;
     void setChildDataChanged();
 
-    virtual bool isTopLevel();
+    virtual bool isTopLevel() const;
 
     //only public so that DataInformation can call them
     void _childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
@@ -168,7 +168,7 @@ inline void TopLevelDataInformation::_childrenRemoved(const DataInformation* sen
     emit childrenRemoved(sender, startIndex, endIndex);
 }
 
-inline bool TopLevelDataInformation::isTopLevel()
+inline bool TopLevelDataInformation::isTopLevel() const
 {
     return true;
 }

@@ -282,22 +282,24 @@ void StructTool::mark(const QModelIndex& idx)
 {
     if (!mByteArrayModel || !mByteArrayView)
     {
-        kDebug()
-            << "model or view == NULL";
+        kDebug() << "model or view == NULL";
         return;
     }
-    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    const DataInformation* data = static_cast<const DataInformation*> (idx.internalPointer());
     if (!data)
         return;
-    int length = data->size() / 8;
+    int length;
+    if (data->isDummy())
+        length = static_cast<const DataInformation*>(data->parent())->childSize(idx.row()) / 8;
+    else
+        length = data->size() / 8;
     int maxLen = mByteArrayModel->size() - mCursorIndex;
     length = qMin(length, maxLen);
     Q_CHECK_PTR(data->topLevelDataInformation());
     Okteta::Address baseAddress;
     if (data->topLevelDataInformation()->isLockedFor(mByteArrayModel))
     {
-        baseAddress = data->topLevelDataInformation()->lockPositionFor(
-                mByteArrayModel);
+        baseAddress = data->topLevelDataInformation()->lockPositionFor(mByteArrayModel);
     }
     else
     {
@@ -306,10 +308,9 @@ void StructTool::mark(const QModelIndex& idx)
     }
 
     //FIXME support marking of partial bytes
-    Okteta::Address startOffset = baseAddress + data->positionRelativeToParent()
-            / 8;
-    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(
-            startOffset, length);
+    const Okteta::Address startOffset = baseAddress + data->positionRelativeToParent(idx.row()) / 8;
+    const Okteta::AddressRange markingRange =
+        Okteta::AddressRange::fromWidth(startOffset, length);
     mByteArrayView->setMarking(markingRange, true);
     //    kDebug()
     //        << "marking range " << markingRange.start() << " to  " << markingRange.end();

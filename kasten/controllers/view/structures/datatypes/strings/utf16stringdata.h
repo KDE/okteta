@@ -19,17 +19,35 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DATAINFORMATIONBASE_H
-#define DATAINFORMATIONBASE_H
 
-class DataInformationBase
+
+
+#ifndef UTF16STRINGDATA_H
+#define UTF16STRINGDATA_H
+
+#include "stringdata.h"
+#include "structviewpreferences.h"
+
+#include <KLocale>
+
+class Utf16StringData : public StringData
 {
 public:
-    DataInformationBase();
-    virtual ~DataInformationBase();
-    virtual bool isTopLevel() const = 0;
-    virtual bool isArray() const;
-    virtual bool isDummy() const;
+    explicit Utf16StringData(StringDataInformation* parent);
+    virtual ~Utf16StringData();
+
+    virtual QString charType() const;
+    virtual QString completeString(bool skipInvalid = false) const;
+    int count() const;
+    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining);
+    virtual unsigned int size() const;
+    virtual quint64 sizeAt(int i) const;
+    virtual QString stringValue(int row) const;
+    virtual QString typeName() const;
+private:
+    QVector<quint32> mCodePoints;
+    int mNonBMPCount;
+    bool mLittleEndian;
 };
 
-#endif // DATAINFORMATIONBASE_H
+#endif // UTF16STRINGDATA_H

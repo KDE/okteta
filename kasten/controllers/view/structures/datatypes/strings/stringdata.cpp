@@ -19,17 +19,24 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DATAINFORMATIONBASE_H
-#define DATAINFORMATIONBASE_H
 
-class DataInformationBase
+
+#include "stringdata.h"
+#include "stringdatainformation.h"
+
+StringData::StringData(StringDataInformation* parent)
+    : mParent(parent), mTerminationCodePoint(0), mMode(Sequence), mLittleEndian(true), mEofReached(false)
 {
-public:
-    DataInformationBase();
-    virtual ~DataInformationBase();
-    virtual bool isTopLevel() const = 0;
-    virtual bool isArray() const;
-    virtual bool isDummy() const;
-};
+    //default to zero terminated strings
+    mLength.maxBytes = 0;
+}
 
-#endif // DATAINFORMATIONBASE_H
+StringData::~StringData()
+{
+
+}
+
+void StringData::setEndianess(bool littleEndian)
+{
+    mLittleEndian = littleEndian;
+}

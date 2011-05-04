@@ -65,25 +65,17 @@ QString DataInformation::sizeString() const
     }
 }
 
-quint64 DataInformation::positionRelativeToParent() const
+quint64 DataInformation::positionRelativeToParent(int index) const
 {
     Q_CHECK_PTR(mParent);
     //FIXME this needs updating to support bitfield marking
     if (mParent->isTopLevel())
         return 0;
-    
+
     //TODO add a method offset(const DataInformation* const) for efficiency
     DataInformation* par = static_cast<DataInformation*>(mParent);
-    return par->offset(row()) + par->positionRelativeToParent();
-}
-
-TopLevelDataInformation* DataInformation::topLevelDataInformation()
-{
-    Q_CHECK_PTR(mParent);
-    if (mParent->isTopLevel())
-        return static_cast<TopLevelDataInformation*>(mParent);
-
-    return static_cast<DataInformation*>(mParent)->topLevelDataInformation();
+    //row defaults to -1
+    return par->offset(index < 0 ? row() : index) + par->positionRelativeToParent();
 }
 
 DataInformation* DataInformation::mainStructure()
@@ -221,3 +213,22 @@ QString DataInformation::tooltipString() const
                     valueString(), typeName(), sizeString());
     }
 }
+
+Qt::ItemFlags DataInformation::childFlags(int row, int column, bool fileLoaded) const
+{
+    kDebug() << "this should not be called, must be error in code!"; //only overridden methods are okay
+    return childAt(row)->flags(column, fileLoaded);
+}
+
+bool DataInformation::setChildData(int row, const QVariant& value, DataInformation* inf, Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+{
+    kDebug() << "this should not be called, must be error in code!"; //only overridden methods are okay
+    return childAt(row)->setData(value, inf, input, address, bitsRemaining, bitOffset);
+}
+
+int DataInformation::childSize(int index) const
+{
+    kDebug() << "this should not be called, must be error in code!"; //only overridden methods are okay
+    return childAt(index)->size();
+}
+
