@@ -54,14 +54,13 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     Okteta::Address addr = address;
     int count = 0;
     mEofReached = false;
+    const int oldMax = mData.size();
     if (((mMode & CharCount) && mLength.maxChars == 0) || ((mMode & ByteCount) && mLength.maxBytes == 0))
         return 0; //nothing to read
 
+    bool eofAtStart = false;
     if (bitsRemaining < 8)
-    {
-        mEofReached = true;
-        return -1;
-    }
+        eofAtStart = true;
 
     while (true)
     {
@@ -73,7 +72,7 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         uchar val = input->byte(addr);
         bool terminate = false;
 
-        if (count < oldSize)
+        if (count < oldMax)
             mData[count] = val;
         else
             mData.append(val);
@@ -105,6 +104,9 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         _childrenAboutToBeInserted(mParent, 0, qMax(mEofReached ? count : count - 1, 0));
     emit mParent->topLevelDataInformation()->
         _childrenInserted(mParent, 0, qMax(mEofReached ? count : count - 1, 0));
+
+    if (eofAtStart)
+        return -1;
     return (addr - address) * 8;
 }
 

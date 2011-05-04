@@ -126,7 +126,7 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             _childrenRemoved(mParent, 0, oldSize);
     }
 
-
+    const int oldMax = mCodePoints.size();
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
     int count = 0;
@@ -135,11 +135,9 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             || ((mMode & ByteCount) && mLength.maxBytes < 2))
         return 0;
 
+    bool eofAtStart = false;
     if (bitsRemaining < 16)
-    {
-        return -1;
-        mEofReached = true;
-    }
+        eofAtStart = true;
 
     while (true)
     {
@@ -189,7 +187,7 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             codePoint = val;
         }
 
-        if (count < oldSize)
+        if (count < oldMax)
             mCodePoints[count] = val;
         else
             mCodePoints.append(val);
@@ -227,6 +225,9 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         _childrenAboutToBeInserted(mParent, 0, qMax(mEofReached ? count : count - 1, 0));
     emit mParent->topLevelDataInformation()->
         _childrenInserted(mParent, 0, qMax(mEofReached ? count : count - 1, 0));
+
+    if (eofAtStart)
+        return -1;
     return (addr - address) * 8;
 }
 

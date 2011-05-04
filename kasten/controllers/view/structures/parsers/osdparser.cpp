@@ -394,7 +394,6 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& node)
         }
         data->setMaxByteCount(count);
     }
-    data->setEncoding(encoding);
     return data;
 }
 
