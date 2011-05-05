@@ -42,12 +42,15 @@ class ScriptValueConverter
 public:
     ScriptValueConverter(QScriptValue& value, QString name);
     virtual ~ScriptValueConverter();
+    /** If the value is on element */
     DataInformation* convert();
+    /** If the value is a list of elements or an object with many elements */
+    QList<DataInformation*> convertValues();
 private:
     QScriptValue& mValue;
     const QString mName;
 private:
-    DataInformation* toDataInformation(QScriptValue& value, QString name) const;
+    DataInformation* toDataInformation(QScriptValue value, QString name) const;
 
     AbstractArrayDataInformation* toArray(QScriptValue& value, QString& name) const;
     AbstractBitfieldDataInformation* toBitfield(QScriptValue& value, QString& name) const;

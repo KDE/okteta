@@ -71,8 +71,8 @@ DataInformation* ScriptValueConverter::convert()
     //    ScriptUtils::object()->dumpQScriptValue(evaluatedVal,__FILE__,__LINE__);
     return toDataInformation(evaluatedVal, mName); //could be NULL
 }
-DataInformation* ScriptValueConverter::toDataInformation(QScriptValue& value,
-        QString name) const
+
+DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QString name) const
 {
     DataInformation* returnVal;
     if (!value.isObject())
@@ -330,3 +330,18 @@ StringDataInformation* ScriptValueConverter::toString(QScriptValue& value, QStri
     return data;
 }
 
+QList<DataInformation*> ScriptValueConverter::convertValues()
+{
+    QList<DataInformation*> ret;
+    QScriptValueIterator it(mValue);
+    while (it.hasNext())
+    {
+        it.next();
+        DataInformation* inf = toDataInformation(it.value(), it.name());
+        if (inf)
+            ret.append(inf);
+        else
+            kDebug() << "could not convert " << it.name();
+    }
+    return ret;
+}

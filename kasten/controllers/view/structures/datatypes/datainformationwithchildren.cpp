@@ -230,36 +230,24 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
         ScriptUtils::object()->logScriptError("attempting to set children of "
                 + name() + "to null. This must be and error in the script.");
     ScriptValueConverter conv(children, name());
-    DataInformation* convertedVal = conv.convert();
+    QList<DataInformation*> convertedVals = conv.convertValues();
 
-    if (!convertedVal)
-    {
-        ScriptUtils::object()->logScriptError("Parsing of children failed"
-            " in setChildren(), please check script for errors");
-        return;
-    }
     //is valid now
     //childcount changed to 0
     topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, childCount() - 1);
     qDeleteAll(mChildren);
     mChildren.clear();
     topLevelDataInformation()->_childrenRemoved(this, 0, childCount() - 1);
-    if (convertedVal->childCount() < 1)
-        ScriptUtils::object()->logScriptError("Value from setChildren for " + name()
-                + " has no children, please check script for errors");
-    else
+
+    const uint count = convertedVals.size();
+    topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, count - 1);
+    mChildren.reserve(count);
+    for (uint i = 0; i < count; ++i)
     {
-        topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, convertedVal->childCount() - 1);
-        const uint count = convertedVal->childCount();
-        mChildren.reserve(count);
-        for (uint i = 0; i < count; ++i)
-        {
-            DataInformation* child = convertedVal->childAt(i);
-            appendChild(child);
-        }
-        topLevelDataInformation()->_childrenInserted(this, 0, convertedVal->childCount() - 1);
+        DataInformation* child = convertedVals.at(i);
+        appendChild(child);
     }
-    delete convertedVal;
+    topLevelDataInformation()->_childrenInserted(this, 0, count - 1);
 }
 
 int DataInformationWithChildren::indexOf(const DataInformation* const data) const
