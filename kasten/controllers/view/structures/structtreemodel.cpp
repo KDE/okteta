@@ -51,16 +51,28 @@ StructTreeModel::~StructTreeModel()
 void StructTreeModel::onChildrenRemoved(const DataInformation* sender, uint startIndex,
         uint endIndex)
 {
+#ifdef OKTETA_DEBUG_SCRIPT
     kDebug() << "data information " << sender->name() << ": removed "
         << (endIndex - startIndex + 1) << " children starting at offset " << startIndex;
+#else
+        Q_UNUSED(sender);
+        Q_UNUSED(startIndex);
+        Q_UNUSED(endIndex);
+#endif
     emit endRemoveRows();
 }
 
 void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint startIndex,
         uint endIndex)
 {
+#ifdef OKTETA_DEBUG_SCRIPT
     kDebug() << "data information " << sender->name() << ": inserted "
         << (endIndex - startIndex + 1) << " children at offset " << startIndex;
+#else
+        Q_UNUSED(sender);
+        Q_UNUSED(startIndex);
+        Q_UNUSED(endIndex);
+#endif
     emit endInsertRows();
 }
 
