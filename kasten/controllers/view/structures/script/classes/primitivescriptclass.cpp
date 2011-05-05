@@ -167,6 +167,7 @@ QScriptValue PrimitiveScriptClass::Primitive_proto_toString(QScriptContext* ctx,
         kDebug() << "could not cast data";
         return eng->undefinedValue();
     }
-    return i18n("%1, value=%2",data->typeName(), data->valueString());
+    //this might allow proper comparison between values without having to call .value
+    return data->valueString();
 }
 
