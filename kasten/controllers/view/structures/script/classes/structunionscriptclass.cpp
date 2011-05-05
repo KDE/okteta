@@ -40,7 +40,7 @@ StructUnionScriptClass::~StructUnionScriptClass()
 {
 }
 
-bool StructUnionScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint*)
+bool StructUnionScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
     Q_UNUSED(data)
     //no need to modify flags since both read and write are handled
@@ -54,37 +54,122 @@ bool StructUnionScriptClass::queryAdditionalProperty(const DataInformation* data
         *flags &= ~HandlesReadAccess;
         return true;
     }
-    return false;
+    else
+    {
+        bool isArrayIndex;
+        quint32 pos = name.toArrayIndex(&isArrayIndex);
+        uint count = data->childCount();
+        bool isValidChild = false;
+        if (isArrayIndex && pos < count)
+        {
+            isValidChild = true;
+        }
+        else
+        {
+            //compare name, names that match special properties/functions will be
+            //hidden since these were checked before
+            QString objName = name.toString();
+            for (uint i = 0 ; i < count; ++i)
+            {
+                if (objName == data->childAt(i)->name())
+                {
+                    isValidChild = true;
+                    pos = i;
+                    break;
+                }
+            }
+        }
+        if (isValidChild)
+        {
+            *id = pos + 1; //add 1 to distinguish from the default value of 0
+            *flags &= ~HandlesWriteAccess; //writing is not yet supported
+            return true;
+        }
+    }
+    return false; //not found
 }
 
-bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags)
+bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
 {
     Q_UNUSED(data)
     //no need to modify flags since both read and write are handled
-    if (name == s_childCount)
+    if (id != 0)
+    {
+        *flags |= QScriptValue::ReadOnly;
+        return true;
+    }
+    else if (name == s_childCount)
     {
         *flags |= QScriptValue::ReadOnly;
         return true;
     }
     else if (name == s_children)
     {
-        //there is no write-only property
+        //there is no way to set a write-only property
         return true;
+    }
+    else
+    {
+        //TODO is this necessary, will there be any way a child has no id set?
+        //check named children
+        QString objName = name.toString();
+        uint count = data->childCount();
+        for (uint i = 0 ; i < count; ++i)
+        {
+            DataInformation* child = data->childAt(i);
+            Q_CHECK_PTR(child);
+            if (objName == child->name())
+            {
+                *flags |= QScriptValue::ReadOnly;
+                return true;
+            }
+        }
     }
     return false;
 }
 
 
-QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint)
+QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
     const DataInformationWithChildren* dataW = static_cast<const DataInformationWithChildren*>(data);
     //do a dynamic cast in debug mode to ensure the static cast was valid
     Q_CHECK_PTR(dynamic_cast<const DataInformationWithChildren*>(dataW));
 
-    if (name == s_childCount)
+    if (id != 0)
+    {
+        quint32 pos = id - 1;
+#ifdef OKTETA_DEBUG_SCRIPT
+        kDebug() << "accessing property with id=" << id << "and name=" << name.toString();
+#endif
+        if (pos >= data->childCount())
+            return engine()->undefinedValue();
+        else
+        {
+            Q_CHECK_PTR(data->childAt(pos));
+            return data->childAt(pos)->toScriptValue(engine(), mHandlerInfo);
+        }
+    }
+    else if (name == s_childCount)
         return dataW->childCount();
     else if (name == s_children)
         return engine()->undefinedValue();
+    else
+    {
+        //TODO is this necessary, will there be any way a child has no id set?
+        //TODO testing seems to indicate this is not necessary, will leave it thought until I'm sure
+        //check named children
+        QString objName = name.toString();
+        uint count = data->childCount();
+        for (uint i = 0 ; i < count; ++i)
+        {
+            DataInformation* child = data->childAt(i);
+            Q_CHECK_PTR(child);
+            if (objName == child->name())
+            {
+                return child->toScriptValue(engine(), mHandlerInfo);
+            }
+        }
+    }
     return QScriptValue();
 }
 
@@ -99,6 +184,7 @@ bool StructUnionScriptClass::setAdditionalProperty(DataInformation* data, const 
         dataW->setChildren(value);
         return true;
     }
+    //TODO set children!!
     return false;
 }
 

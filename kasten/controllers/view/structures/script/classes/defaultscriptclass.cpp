@@ -79,40 +79,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
         return flags;
     }
     else {
-        if (!data->canHaveChildren())
-            return 0;
-        bool isArrayIndex;
-        quint32 pos = name.toArrayIndex(&isArrayIndex);
-        uint count = data->childCount();
-        bool isValidChild = false;
-        if (isArrayIndex)
-        {
-            if (pos >= count)
-                flags = 0;
-            else
-                isValidChild = true;
-        }
-        else
-        {
-            //compare name, names that match special functions will be
-            //hidden since they were checked before
-            bool found = false;
-            QString objName = name.toString();
-            for (uint i = 0 ; i < count; ++i)
-            {
-                 if (objName == data->childAt(i)->name())
-                 {
-                    isValidChild = true;
-                    found = true;
-                    break;
-                 }
-            }
-            if (!found)
-                flags = 0;
-        }
-        if (isValidChild)
-            *id = pos + 1; //add 1 to distinguish from the default value of 0
-        return flags;
+        return 0;
      }
 }
 
@@ -124,19 +91,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
         kDebug() << "could not cast data";
         return QScriptValue();
     }
-    if (id != 0)
-    {
-        quint32 pos = id - 1;
-        kDebug() << "accessing property with id=" << id << "and name=" << name.toString();
-        if (pos >= data->childCount())
-            return QScriptValue::UndefinedValue;
-        else 
-        {
-            Q_CHECK_PTR(data->childAt(pos));
-            return engine()->toScriptValue(data->childAt(pos));
-        }
-    }
-    else if (name == valid) 
+    if (name == valid)
     {
         return data->validationSuccessful();
     }
@@ -158,22 +113,8 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     QScriptValue other = additionalProperty(data, name, id);
     if (other.isValid())
         return other;
-    else {
-        if (!data->canHaveChildren())
-            return QScriptValue::UndefinedValue;
-        QString objName = name.toString();
-        uint count = data->childCount();
-        for (uint i = 0 ; i < count; ++i)
-        {
-            DataInformation* child = data->childAt(i);
-            Q_CHECK_PTR(child);
-            if (objName == child->name())
-            {
-                return child->toScriptValue(engine(), mHandlerInfo);
-            }
-        }
-    }
-    return engine()->undefinedValue();
+    else
+        return engine()->undefinedValue();
 }
 
 void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value)
@@ -184,9 +125,8 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         kDebug() << "could not cast data";
         return;
     }
-    
-    //TODO set!!
-    if (name == valid) 
+
+    if (name == valid)
     {
         data->setValidationSuccessful(value.toBool());
     }
@@ -204,18 +144,9 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         bool setAdditional = setAdditionalProperty(data, name, id, value);
         if (setAdditional)
             return;
-        else {
-            if (!data->canHaveChildren())
-                return;
-            quint32 pos = id;
-            if (pos >= data->childCount())
-                return;
-            else 
-            {
-                //TODO access by name
-                Q_CHECK_PTR(data->childAt(pos));
-                //TODO change value
-            }
+        else
+        {
+            kDebug() << "cannot set unknown property: " << name.toString();
         }
     }
 }

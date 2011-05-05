@@ -38,7 +38,7 @@ ArrayScriptClass::~ArrayScriptClass()
 {
 }
 
-bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint*)
+bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
     Q_UNUSED(flags)
     Q_UNUSED(data)
@@ -47,14 +47,29 @@ bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, cons
         return true;
     else if (name == childType)
         return true;
-    return false;
+    else
+    {
+        bool isArrayIndex;
+        quint32 pos = name.toArrayIndex(&isArrayIndex);
+        if (isArrayIndex && pos <= data->childCount())
+        {
+            *id = pos + 1; //add 1 to distinguish from the default value of 0
+            *flags &= ~HandlesWriteAccess; //writing is not yet supported
+            return true;
+        }
+    }
+    return false; //not found
 }
 
-bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags)
+bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
 {
-    Q_UNUSED(flags)
     Q_UNUSED(data)
     //no need to modify flags since both read and write are handled
+    if (id != 0)
+    {
+        *flags |= QScriptValue::ReadOnly;
+        return true;
+    }
     if (name == length)
         return true;
     else if (name == childType)
@@ -63,13 +78,27 @@ bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, cons
 }
 
 
-QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint)
+QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
     const AbstractArrayDataInformation* aData = static_cast<const AbstractArrayDataInformation*>(data);
     //do a dynamic cast in debug mode to ensure the static cast was valid
     Q_CHECK_PTR(dynamic_cast<const AbstractArrayDataInformation*>(data));
 
-    if (name == length)
+    if (id != 0)
+    {
+        quint32 pos = id - 1;
+#ifdef OKTETA_DEBUG_SCRIPT
+        kDebug() << "accessing property with id=" << id << "and name=" << name.toString();
+#endif
+        if (pos >= data->childCount())
+            return engine()->undefinedValue();
+        else
+        {
+            Q_CHECK_PTR(data->childAt(pos));
+            return data->childAt(pos)->toScriptValue(engine(), mHandlerInfo);
+        }
+    }
+    else if (name == length)
         return aData->length();
     else if (name == childType)
         return aData->childType();
