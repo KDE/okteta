@@ -300,10 +300,6 @@ void AllPrimitiveTypes::writeDataBigEndian(const quint8 bitCount,
     }
 }
 
-#if Q_BYTE_ORDER != Q_LITTLE_ENDIAN
-#error "This code only works on little endian systems"
-#endif
-
 void AllPrimitiveTypes::readFullBytes(const quint8 byteCount,
         const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
         const Okteta::Address address)

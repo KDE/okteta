@@ -21,6 +21,12 @@ if (OKTETA_MOBILE_UI)
   add_definitions( -DOKTETA_MOBILE_UI )
 endif (OKTETA_MOBILE_UI)
 
+# temporary check for broken code in the Structures tool with bigendianness
+include(TestBigEndian)
+test_big_endian(BIG_ENDIAN)
+if (BIG_ENDIAN)
+  set( NO_STRUCTURES_TOOL TRUE )
+endif (BIG_ENDIAN)
 
 # helper libs
 add_subdirectory( libs )

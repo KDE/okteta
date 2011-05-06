@@ -257,6 +257,8 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarkstoolfactory.cpp
   view/bookmarks/bookmarkstoolviewfactory.cpp
 )
+
+if( NOT NO_STRUCTURES_TOOL )
 set( STRUCTVIEW_SRCS
   view/structures/allprimitivetypes.cpp
   view/structures/structurestoolfactory.cpp
@@ -334,6 +336,7 @@ else( OKTETA_DEBUG_SCRIPT )
 endif( OKTETA_DEBUG_SCRIPT )
 kde4_add_kcfg_files( STRUCTVIEW_SRCS view/structures/settings/structviewpreferences.kcfgc )
 kde4_add_ui_files( STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
+endif( NOT NO_STRUCTURES_TOOL )
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
