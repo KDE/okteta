@@ -94,6 +94,7 @@ union AllPrimitiveTypes
     quint8 ubyteValue;
     float floatValue;
     double doubleValue;
+    qint8 allBytes[8];
     inline AllPrimitiveTypes() :
         ulongValue(0)
     {

@@ -300,6 +300,10 @@ void AllPrimitiveTypes::writeDataBigEndian(const quint8 bitCount,
     }
 }
 
+#if Q_BYTE_ORDER != Q_LITTLE_ENDIAN
+#error "This code only works on little endian systems"
+#endif
+
 void AllPrimitiveTypes::readFullBytes(const quint8 byteCount,
         const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
         const Okteta::Address address)
@@ -310,9 +314,8 @@ void AllPrimitiveTypes::readFullBytes(const quint8 byteCount,
     {
         int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
                 : ((byteCount - 1) - i);
-        index *= 8;
         Okteta::Byte readByte = input->byte(address + i);
-        ulongValue |= quint64(readByte << index);
+        allBytes[index] = readByte;
     }
 }
 
@@ -325,7 +328,6 @@ void AllPrimitiveTypes::writeFullBytes(const quint8 byteCount,
     {
         int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
                 : ((byteCount - 1) - i);
-        index *= 8;
-        out->setByte(address + i, (newValue.ulongValue & (quint64(0xff) << index)) >> index);
+        out->setByte(address + i, newValue.allBytes[index]);
     }
 }
