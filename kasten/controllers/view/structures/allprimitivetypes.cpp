@@ -23,6 +23,10 @@
 #include "allprimitivetypes.h"
 #include <abstractbytearraymodel.h>
 
+compile_time_assert(sizeof(double) == 8);
+compile_time_assert(sizeof(float) == 4);
+compile_time_assert(sizeof(AllPrimitiveTypes) == 8);
+
 //FIXME this code really needs unit tests!
 //TODO optimised methods for *bitOffset == 0 && bitCount % 8 == 0
 
@@ -300,13 +304,15 @@ void AllPrimitiveTypes::readFullBytes(const quint8 byteCount,
         const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
         const Okteta::Address address)
 {
+    Q_ASSERT(byteCount <= 8);
     //always use unsigned value
     for (int i = 0; i < byteCount; i++)
     {
         int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
                 : ((byteCount - 1) - i);
+        index *= 8;
         Okteta::Byte readByte = input->byte(address + i);
-        allBytes[index] = readByte;
+        ulongValue |= quint64(readByte << index);
     }
 }
 
@@ -314,10 +320,12 @@ void AllPrimitiveTypes::writeFullBytes(const quint8 byteCount,
         const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel* out,
         const ByteOrder byteOrder, const Okteta::Address address)
 {
+    Q_ASSERT(byteCount <= 8);
     for (int i = 0; i < byteCount; ++i)
     {
         int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
                 : ((byteCount - 1) - i);
-        out->setByte(address + i, newValue.allBytes[index]);
+        index *= 8;
+        out->setByte(address + i, (newValue.ulongValue & (quint64(0xff) << index)) >> index);
     }
 }
