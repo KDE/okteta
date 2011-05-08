@@ -289,8 +289,8 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
 StringDataInformation* ScriptValueConverter::toString(QScriptValue& value, QString& name) const
 {
     const QScriptValue terminatedBy = value.property("terminatedBy");
-    const QScriptValue charCount = value.property("charCount");
-    const QScriptValue byteCount = value.property("byteCount");
+    const QScriptValue charCount = value.property("maxCharCount");
+    const QScriptValue byteCount = value.property("maxByteCount");
     const QScriptValue encoding = value.property("encoding");
 
     StringData::TerminationModes mode = StringData::None;

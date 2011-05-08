@@ -328,8 +328,8 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& node)
 {
     const QString name = node.attribute("name", i18n("<invalid name>"));
     const QString terminatedBy = node.attribute("terminatedBy");
-    const QString charCount = node.attribute("charCount");
-    const QString byteCount = node.attribute("byteCount");
+    const QString charCount = node.attribute("maxCharCount");
+    const QString byteCount = node.attribute("maxByteCount");
     const QString encoding = node.attribute("encoding");
 
     StringData::TerminationModes mode = StringData::None;
