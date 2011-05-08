@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=PNG file header
+Name[bs]=Zaglavlje PNG datoteke
 Name[ca]=Capçalera de fitxer PNG
 Name[ca@valencia]=Capçalera de fitxer PNG
 Name[da]=PNG-fil-header
@@ -33,6 +34,7 @@ Name[x-test]=xxPNG file headerxx
 Name[zh_CN]=PNG 文件头
 Name[zh_TW]=PNG 檔案標頭
 Comment=A test structure containing the PNG file header (file must be set to big-endian)
+Comment[bs]=Probna struktura koja sadrži zaglavlje PNG datoteke big endian)
 Comment[ca]=Una estructura de proves que conté la capçalera d'un fitxer PNG (el fitxer s'ha de definir com a «big-endian»)
 Comment[ca@valencia]=Una estructura de proves que conté la capçalera d'un fitxer PNG (el fitxer s'ha de definir com a «big-endian»)
 Comment[da]=En teststruktur som indeholder PNG-fil-headeren (filen skal være sat til big-endian)

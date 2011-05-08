@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Okteta
 Name[ast]=Okteta
+Name[bs]=Okteta
 Name[ca]=Okteta
 Name[ca@valencia]=Okteta
 Name[cs]=Okteta
@@ -31,6 +32,7 @@ Name[zh_TW]=Okteta
 GenericName=Hex Editor
 GenericName[ast]=Editor Hexadecimal
 GenericName[bg]=Шестнадесетичен редактор
+GenericName[bs]=Heksadekadni uređivač
 GenericName[ca]=Editor hexadecimal
 GenericName[ca@valencia]=Editor hexadecimal
 GenericName[da]=Hex-redigering
