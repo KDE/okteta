@@ -113,12 +113,20 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QSt
         QScriptValue byteOrder = value.property("byteOrder");
         //TODO allow int values too
         returnVal->setByteOrder(AbstractStructureParser::byteOrderFromString(byteOrder.toString()));
-        AdditionalData* aData = new AdditionalData();
+        AdditionalData* aData = 0;
         if (updateFunc.isFunction())
+        {
+            aData = new AdditionalData();
             aData->setUpdateFunction(new QScriptValue(updateFunc));
+        }
         if (validationFunc.isFunction())
+        {
+            if (!aData)
+                aData = new AdditionalData();
             aData->setValidationFunction(new QScriptValue(validationFunc));
-        returnVal->setAdditionalData(aData);
+        }
+        if (aData)
+            returnVal->setAdditionalData(aData);
     }
     return returnVal;
 }
@@ -306,7 +314,6 @@ StringDataInformation* ScriptValueConverter::toString(QScriptValue& value, QStri
 
     StringDataInformation* data = new StringDataInformation(name, encoding.toString());
     //if mode is None, we assume zero terminated strings
-    bool ok;
     if (mode == StringData::None)
     {
         mode = StringData::Sequence;

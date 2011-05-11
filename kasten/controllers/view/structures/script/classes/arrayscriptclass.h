@@ -33,13 +33,13 @@ public:
     ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual ~ArrayScriptClass();
     virtual QScriptValue prototype() const;
-    
+
 protected:
     virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id);
     virtual bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags);
     virtual QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id);
     virtual bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value);
-    
+
     static QScriptValue Array_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 protected:
     QScriptString length;
