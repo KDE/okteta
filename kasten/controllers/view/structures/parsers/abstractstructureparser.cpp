@@ -34,11 +34,11 @@ AbstractStructureParser::~AbstractStructureParser() {}
 DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(const QString& string)
 {
     const QString lower = string.toLower();
-    if (lower == "bigendian")
+    if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))
         return DataInformation::EndiannessBig;
-    else if (lower == "littleendian")
+    else if (lower == QLatin1String("littleendian") || lower == QLatin1String("little-endian"))
         return DataInformation::EndianessLittle;
-    else if (lower == "fromsettings")
+    else if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings"))
         return DataInformation::EndianessFromSettings;
     else 
         return DataInformation::EndianessInherit;
