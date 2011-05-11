@@ -67,9 +67,9 @@ inline quint64 PrimitiveDataInformation::offset(unsigned int index) const
         virtual ~type##DataInformation() {} \
     protected: \
         type##DataInformation(const type##DataInformation& d) : \
-        superType##DataInformation(d) {} \
+        superType##DataInformation(d), mValue(d.mValue) {} \
     private:
-        
+
 #define NO_VALUE_PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
         type##DataInformation(QString name, DataInformation* parent = NULL) :\
                 superType##DataInformation(name, parent) {}\

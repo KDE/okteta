@@ -59,7 +59,7 @@ PrimitiveDataType AbstractBitfieldDataInformation::type() const
 }
 
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent) :
-    PrimitiveDataInformation(name, parent), mWidth(width)
+    PrimitiveDataInformation(name, parent), mWidth(width), mValue(0)
 {
     if (width > 64) 
     {
@@ -73,6 +73,6 @@ AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation()
 }
 
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d) :
-    PrimitiveDataInformation(d), mWidth(d.mWidth)
+    PrimitiveDataInformation(d), mWidth(d.mWidth), mValue(d.mValue)
 {
 }
