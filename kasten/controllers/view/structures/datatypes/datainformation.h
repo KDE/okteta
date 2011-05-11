@@ -39,7 +39,8 @@
 
 //Qt
 #include <QtScript/QScriptValue>
-#include <QtScript/QScriptable>
+
+
 #include "topleveldatainformation.h"
 #include "datainformationbase.h"
 
@@ -54,6 +55,8 @@ class AbstractByteArrayModel;
 
 class TopLevelDataInformation;
 class ScriptHandlerInfo;
+class QScriptContext;
+class QScriptEngine;
 
 typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;

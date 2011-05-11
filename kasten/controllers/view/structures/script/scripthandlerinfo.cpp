@@ -24,9 +24,10 @@
 #include "classes/arrayscriptclass.h"
 #include "classes/primitivescriptclass.h"
 #include "classes/structunionscriptclass.h"
+#include "classes/stringscriptclass.h"
 
 ScriptHandlerInfo::ScriptHandlerInfo() 
-    : mArrayClass(0), mPrimitiveClass(0), mStructUnionClass(0)
+    : mArrayClass(0), mPrimitiveClass(0), mStructUnionClass(0), mStringScriptClass(0)
 {
 }
 
@@ -35,5 +36,6 @@ ScriptHandlerInfo::~ScriptHandlerInfo()
     delete mArrayClass;
     delete mPrimitiveClass;
     delete mStructUnionClass;
+    delete mStringScriptClass;
 }
 

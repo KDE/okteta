@@ -52,8 +52,6 @@ QString Utf16StringData::typeName() const
 
 int Utf16StringData::count() const
 {
-    if (mEofReached)
-        return mCodePoints.size() + 1;
     return mCodePoints.size();
 }
 
@@ -61,8 +59,6 @@ QString Utf16StringData::stringValue(int row) const
 {
     //TODO details 
     Q_ASSERT(row >= 0 && row < count());
-    if (mEofReached && row == mCodePoints.size())
-        return i18n("End of file reached prematurely");
     uint val = mCodePoints.at(row);
     if (val > UNICODE_MAX)
         return QString(QChar::ReplacementCharacter);
@@ -91,9 +87,9 @@ QString Utf16StringData::completeString(bool skipInvalid) const
                 data[i] = QChar::ReplacementCharacter;
         }
         else if (val > BMP_MAX) {
-            data[i] = QChar::lowSurrogate(val);
-            i++;
             data[i] = QChar::highSurrogate(val);
+            i++;
+            data[i] = QChar::lowSurrogate(val);
         }
         else
         {
@@ -109,6 +105,7 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
 {
     const int oldSize = count();
     bool haveToEmit = true;
+    mNonBMPCount = 0;
     if (mMode == CharCount)
     {
         mCodePoints.reserve(mLength.maxChars);
@@ -221,10 +218,8 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             break;
     }
     mCodePoints.resize(count);
-    emit mParent->topLevelDataInformation()->
-        _childrenAboutToBeInserted(mParent, 0, qMax(mEofReached ? count : count - 1, 0));
-    emit mParent->topLevelDataInformation()->
-        _childrenInserted(mParent, 0, qMax(mEofReached ? count : count - 1, 0));
+    emit mParent->topLevelDataInformation()->_childrenAboutToBeInserted(mParent, 0, count);
+    emit mParent->topLevelDataInformation()->_childrenInserted(mParent, 0, count);
 
     if (eofAtStart)
         return -1;

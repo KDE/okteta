@@ -323,6 +323,7 @@ set( STRUCTVIEW_SRCS
   view/structures/script/classes/defaultscriptclass.cpp
   view/structures/script/classes/arrayscriptclass.cpp
   view/structures/script/classes/primitivescriptclass.cpp
+  view/structures/script/classes/stringscriptclass.cpp
   view/structures/script/classes/structunionscriptclass.cpp
   view/structures/parsers/abstractstructureparser.cpp
   view/structures/parsers/osdparser.cpp

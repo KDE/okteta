@@ -66,6 +66,10 @@ public:
     virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining) = 0;
     /** by default just sets value, if more logic is needed can be overridden */
     virtual void setEndianess(bool littleEndian);
+    uint terminationMode() const;
+    void setTerminationMode(uint mode);
+
+    bool wasEof() const;
 
     uint maxByteCount() const;
     void setMaxByteCount(uint count);
@@ -75,6 +79,10 @@ public:
     void setTerminationCodePoint(quint32 term);
 
     void copyTerminationFrom(const StringData* data);
+
+    static const uint UNICODE_MAX = 0x10ffff;
+    static const uint BMP_MAX = 0xffff;
+    static const char ASCII_MAX = 0x7f;
 protected:
     StringDataInformation* mParent;
     union {
@@ -86,9 +94,6 @@ protected:
     bool mLittleEndian : 1;
     bool mEofReached : 1;
 
-    static const uint UNICODE_MAX = 0x10ffff;
-    static const uint BMP_MAX = 0xffff;
-    static const char ASCII_MAX = 0x7f;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(StringData::TerminationModes)
@@ -134,6 +139,21 @@ inline void StringData::copyTerminationFrom(const StringData* data)
     mMode = data->mMode;
     mTerminationCodePoint = data->mTerminationCodePoint;
     mLength = data->mLength;
+}
+
+inline uint StringData::terminationMode() const
+{
+    return mMode;
+}
+
+inline void StringData::setTerminationMode(uint mode)
+{
+    mMode = mode;
+}
+
+inline bool StringData::wasEof() const
+{
+    return mEofReached;
 }
 
 

@@ -41,6 +41,7 @@ public:
     virtual QString charType() const;
     virtual int count() const;
     virtual QString typeName() const;
+
     AsciiStringData();
 private:
     QVector<quint8> mData;

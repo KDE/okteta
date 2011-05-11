@@ -30,6 +30,7 @@
 #include "classes/arrayscriptclass.h"
 #include "classes/primitivescriptclass.h"
 #include "classes/structunionscriptclass.h"
+#include "classes/stringscriptclass.h"
 
 #include <QtGui/QAction>
 #include <QtCore/QFile>
@@ -53,6 +54,8 @@ ScriptHandler::ScriptHandler(QString scriptFile, QString name) :
     mHandlerInfo.mPrimitiveClass = prim;
     StructUnionScriptClass* strUn = new StructUnionScriptClass(&mEngine, &mHandlerInfo);
     mHandlerInfo.mStructUnionClass = strUn;
+    StringScriptClass* str = new StringScriptClass(&mEngine, &mHandlerInfo);
+    mHandlerInfo.mStringScriptClass = str;
 }
 
 ScriptHandler::~ScriptHandler()
@@ -97,8 +100,7 @@ DataInformation* ScriptHandler::initialDataInformationFromScript()
     ScriptValueConverter conv(initMethod, mName);
     DataInformation* ret = conv.convert();
     if (!ret)
-        ScriptUtils::object()->logScriptError("failed to parse object from file "
-                + mFile);
+        ScriptUtils::object()->logScriptError("failed to parse object from file " + mFile);
     return ret;
 }
 

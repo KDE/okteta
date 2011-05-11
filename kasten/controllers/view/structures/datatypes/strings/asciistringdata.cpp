@@ -89,7 +89,7 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         }
         if ((mMode & CharCount)  || (mMode & ByteCount))
         {
-            if (count >= mLength.maxChars)
+            if ((unsigned)count >= mLength.maxChars)
                 terminate = true;
         }
         if (mMode == None) {
@@ -100,10 +100,8 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             break;
     }
     mData.resize(count);
-    emit mParent->topLevelDataInformation()->
-        _childrenAboutToBeInserted(mParent, 0, qMax(mEofReached ? count : count - 1, 0));
-    emit mParent->topLevelDataInformation()->
-        _childrenInserted(mParent, 0, qMax(mEofReached ? count : count - 1, 0));
+    emit mParent->topLevelDataInformation()->_childrenAboutToBeInserted(mParent, 0, count);
+    emit mParent->topLevelDataInformation()->_childrenInserted(mParent, 0, count);
 
     if (eofAtStart)
         return -1;
@@ -112,9 +110,7 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
 
 quint64 AsciiStringData::sizeAt(int i) const
 {
-    Q_ASSERT(i >= 0 && i < count());
-    if (mEofReached && i == mData.size())
-        return 0;
+    Q_ASSERT(i >= 0 && i < mData.size());
     return 8;
 }
 
@@ -133,6 +129,7 @@ QString AsciiStringData::completeString(bool skipInvalid) const
         {
             if (skipInvalid) {
                 max--;
+                i--;
                 continue;
             }
             else
@@ -150,10 +147,7 @@ QString AsciiStringData::completeString(bool skipInvalid) const
 
 QString AsciiStringData::stringValue(int row) const
 {
-    Q_ASSERT(row >= 0 && row < count());
-    if (mEofReached && row == mData.size())
-        return i18n("End of file reached prematurely");
-
+    Q_ASSERT(row >= 0 && row < mData.size());
     uchar val = mData.at(row);
     if (val > ASCII_MAX)
         return i18n("Non-ASCII char: 0x%1", val);
@@ -168,10 +162,7 @@ QString AsciiStringData::charType() const
 
 int AsciiStringData::count() const
 {
-    if (mEofReached)
-        return mData.size() + 1;
-    else
-        return mData.size();
+    return mData.size();
 }
 
 QString AsciiStringData::typeName() const

@@ -32,7 +32,7 @@
 
 class DummyDataInformation;
 
-static const QLatin1String stringEncodings[] = {
+const QLatin1String stringEncodings[] = {
     QLatin1String("ascii"), QLatin1String("latin1"), QLatin1String("utf-8"), QLatin1String("utf-16le"),
     QLatin1String("utf-16-be"), QLatin1String("utf32-le"), QLatin1String("utf32-be")
 };
@@ -64,6 +64,7 @@ public:
     virtual unsigned int childCount() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 
+    virtual QVariant data(int column, int role) const;
     virtual QVariant childData(int row, int column, int role) const;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
     virtual int childSize(int index) const;
@@ -78,10 +79,17 @@ public:
     DummyDataInformation* dummy() const;
     uint terminationCodePoint() const;
     void setTerminationCodePoint(uint term);
+    void setTerminationCodePoint(const QScriptValue& value, QScriptEngine* engine);
     uint maxCharCount() const;
     void setMaxCharCount(uint count);
+    void setMaxCharCount(const QScriptValue& value, QScriptEngine* engine);
     uint maxByteCount() const;
     void setMaxByteCount(uint count);
+    void setMaxByteCount(const QScriptValue& value, QScriptEngine* engine);
+    int stringLength() const;
+    int stringByteLength() const;
+    uint terminationMode() const;
+    QString valueAt(int index) const;
 private:
     DummyDataInformation* mDummy;
     StringData* mData;
@@ -131,6 +139,27 @@ inline uint StringDataInformation::terminationCodePoint() const
 inline void StringDataInformation::setTerminationCodePoint(uint term)
 {
     mData->setTerminationCodePoint(term);
+}
+
+inline int StringDataInformation::stringLength() const
+{
+    return mData->count();
+}
+
+inline int StringDataInformation::stringByteLength() const
+{
+    return mData->size() / 8;
+}
+
+inline uint StringDataInformation::terminationMode() const
+{
+    return mData->terminationMode();
+}
+
+inline QString StringDataInformation::valueAt(int index) const
+{
+    Q_ASSERT(index >= 0 && index < mData->count());
+    return mData->stringValue(index);
 }
 
 #endif // STRINGDATAINFORMATION_H

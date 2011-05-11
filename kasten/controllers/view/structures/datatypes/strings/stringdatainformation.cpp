@@ -26,6 +26,11 @@
 #include "../dummydatainformation.h"
 #include "utf16stringdata.h"
 #include "asciistringdata.h"
+#include "../../script/classes/stringscriptclass.h"
+#include "../../script/scripthandlerinfo.h"
+
+#include <QtScript/QScriptEngine>
+#include <QtGui/QBrush>
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
     : DataInformation(name, parent), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
@@ -59,7 +64,7 @@ DataInformation* StringDataInformation::childAt(unsigned int ) const
 
 quint64 StringDataInformation::offset(unsigned int index) const
 {
-    Q_ASSERT(index < mData->count());
+    Q_ASSERT(index < (unsigned)mData->count());
     quint64 offs = 0;
     for (uint i = 0; i < index; ++i)
     {
@@ -79,6 +84,7 @@ bool StringDataInformation::setData(const QVariant& value, DataInformation* inf,
 qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         quint64 bitsRemaining, quint8* bitOffset)
 {
+
     if (*bitOffset != 0)
     {
         kDebug() << "while reading string bit offset was: " << *bitOffset
@@ -88,6 +94,9 @@ qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Ok
         address += 1;
         Q_ASSERT((bitsRemaining % 8) == 0); //must be mod 8
     }
+
+    topLevelDataInformation()->updateElement(this); //update before reading!
+
     return mData->read(input, address, bitsRemaining);
 }
 
@@ -247,11 +256,89 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
 
 QScriptValue StringDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    //TODO
-    return QScriptValue();
+    QScriptValue ret = engine->newObject(handlerInfo->mStringScriptClass);
+    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
+    return ret;
 }
 
 int StringDataInformation::childSize(int index) const
 {
     return mData->sizeAt(index);
+}
+
+void StringDataInformation::setMaxByteCount(const QScriptValue& value, QScriptEngine* engine)
+{
+    if (value.isNull())
+    {
+        //clear the mode and set to null terminated of none is left
+        mData->setTerminationMode(mData->terminationMode() & ~StringData::ByteCount);
+        if (mData->terminationMode() == StringData::None)
+            mData->setTerminationCodePoint(0);
+    }
+    else if (value.isNumber())
+    {
+        mData->setMaxByteCount(value.toUInt32());
+    }
+    else
+    {
+        engine->currentContext()->throwError(QScriptContext::TypeError,
+            QLatin1String("Setting max byte count: value was not a number."));
+    }
+}
+
+void StringDataInformation::setMaxCharCount(const QScriptValue& value, QScriptEngine* engine)
+{
+    if (value.isNull())
+    {
+        //clear the mode and set to null terminated of none is left
+        mData->setTerminationMode(mData->terminationMode() & ~StringData::CharCount);
+        if (mData->terminationMode() == StringData::None)
+            mData->setTerminationCodePoint(0);
+    }
+    else if (value.isNumber())
+    {
+        mData->setMaxCharCount(value.toUInt32());
+    }
+    else
+    {
+        engine->currentContext()->throwError(QScriptContext::TypeError,
+            QLatin1String("Setting max char count: value was not a number."));
+    }
+}
+
+void StringDataInformation::setTerminationCodePoint(const QScriptValue& value, QScriptEngine* engine)
+{
+    if (value.isNull())
+    {
+        //clear the mode and set to null terminated of none is left
+        mData->setTerminationMode(mData->terminationMode() & ~StringData::Sequence);
+        if (mData->terminationMode() == StringData::None)
+            mData->setTerminationCodePoint(0);
+    }
+    else if (value.isNumber())
+    {
+        uint cp = value.toUInt32();
+        if (cp > StringData::UNICODE_MAX)
+            engine->currentContext()->throwError(QLatin1String("Setting termination char: U+")
+                + QString::number(cp, 16) + QLatin1String("is out of unicode range!"));
+        else
+            mData->setTerminationCodePoint(cp);
+    }
+    else
+    {
+        engine->currentContext()->throwError(QScriptContext::TypeError,
+            QLatin1String("Setting termination char: value was not a number."));
+    }
+}
+
+QVariant StringDataInformation::data(int column, int role) const
+{
+    if (mData->wasEof())
+    {
+        if (role == Qt::BackgroundRole)
+            return QBrush(Qt::yellow);
+        else if (role == Qt::ToolTipRole)
+            return i18n("End of file reached prematurely");
+    }
+    return DataInformation::data(column, role);
 }

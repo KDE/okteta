@@ -28,6 +28,7 @@
 class StructUnionScriptClass;
 class ArrayScriptClass;
 class PrimitiveScriptClass;
+class StringScriptClass;
 
 class ScriptHandlerInfo {
 public:
@@ -36,6 +37,7 @@ public:
     ArrayScriptClass* mArrayClass;
     PrimitiveScriptClass* mPrimitiveClass;
     StructUnionScriptClass* mStructUnionClass;
+    StringScriptClass* mStringScriptClass;
 private:
     Q_DISABLE_COPY(ScriptHandlerInfo)
 };
