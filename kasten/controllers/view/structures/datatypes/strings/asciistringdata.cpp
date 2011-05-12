@@ -33,6 +33,11 @@ AsciiStringData::AsciiStringData(StringDataInformation* parent): StringData(pare
 {
 }
 
+AsciiStringData::~AsciiStringData()
+{
+}
+
+
 
 qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining)
 {

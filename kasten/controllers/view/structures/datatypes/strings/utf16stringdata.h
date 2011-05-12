@@ -28,8 +28,6 @@
 #include "stringdata.h"
 #include "structviewpreferences.h"
 
-#include <KLocale>
-
 class Utf16StringData : public StringData
 {
 public:

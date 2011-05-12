@@ -32,6 +32,7 @@ class AsciiStringData : public StringData
 {
 public:
     explicit AsciiStringData(StringDataInformation* parent);
+    virtual ~AsciiStringData();
 
     virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining);
     virtual quint64 sizeAt(int i) const;
@@ -42,7 +43,6 @@ public:
     virtual int count() const;
     virtual QString typeName() const;
 
-    AsciiStringData();
 private:
     QVector<quint8> mData;
 };
