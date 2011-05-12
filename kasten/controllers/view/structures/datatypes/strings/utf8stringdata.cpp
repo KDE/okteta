@@ -82,7 +82,8 @@ QString Utf8StringData::completeString(bool skipInvalid) const
     int i = 0;
     for (int idx = 0; idx < codePointCount; ++idx) {
         uint val = mCodePoints.at(idx);
-        if (val > UNICODE_MAX)
+        //if error at idx is set also skip
+        if (val > UNICODE_MAX || mErrorIndices.value(idx))
         {
             if (skipInvalid)
                 continue;
