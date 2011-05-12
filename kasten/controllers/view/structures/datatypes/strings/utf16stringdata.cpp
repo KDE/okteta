@@ -32,7 +32,7 @@
 #include "stringdatainformation.h"
 
 Utf16StringData::Utf16StringData(StringDataInformation* parent)
-    : StringData(parent), mNonBMPCount(0), mLittleEndian(true)
+    : StringData(parent), mNonBMPCount(0)
 {
 }
 
@@ -64,8 +64,8 @@ QString Utf16StringData::stringValue(int row) const
         return QString(QChar::ReplacementCharacter);
     else if (val > BMP_MAX) {
         QString ret(2, Qt::Uninitialized);
-        ret[0] = QChar::lowSurrogate(val);
-        ret[1] = QChar::highSurrogate(val);
+        ret[0] = QChar::highSurrogate(val);
+        ret[1] = QChar::lowSurrogate(val);
         return ret;
     }
     else
