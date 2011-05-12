@@ -235,8 +235,6 @@ unsigned int Utf16StringData::size() const
 quint64 Utf16StringData::sizeAt(int i) const
 {
     Q_ASSERT(i >= 0 && i <= count());
-    if (mEofReached && i == mCodePoints.size() )
-        return 0;
     uint val = mCodePoints.at(i);
     return val > 0xffff ? 32 : 16;
 }
