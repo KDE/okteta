@@ -188,9 +188,9 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         }
 
         if (count < oldMax)
-            mCodePoints[count] = val;
+            mCodePoints[count] = codePoint;
         else
-            mCodePoints.append(val);
+            mCodePoints.append(codePoint);
 
         remaining -= 16;
         addr += 2;
@@ -199,7 +199,7 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         //now check if we have to terminate
         if (mMode & Sequence)
         {
-            if (val == mTerminationCodePoint)
+            if (codePoint == mTerminationCodePoint)
                 terminate = true;
         }
         if (mMode & ByteCount)
