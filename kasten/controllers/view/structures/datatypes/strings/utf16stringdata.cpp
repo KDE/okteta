@@ -59,17 +59,21 @@ QString Utf16StringData::stringValue(int row) const
 {
     //TODO details 
     Q_ASSERT(row >= 0 && row < count());
+    //TODO show invalid values
     uint val = mCodePoints.at(row);
+    QString number = QString::number(val, 16).toUpper();
+    if (number.length() == 1)
+        number = QLatin1String("0") + number;
     if (val > UNICODE_MAX)
-        return QString(QChar::ReplacementCharacter);
+        return i18n("Value too big: 0x%1", number);
     else if (val > BMP_MAX) {
         QString ret(2, Qt::Uninitialized);
         ret[0] = QChar::highSurrogate(val);
         ret[1] = QChar::lowSurrogate(val);
-        return ret;
+        return i18n("%1 (U+%1)", ret, number);
     }
     else
-        return QString(QChar(mCodePoints.at(row)));
+        return i18n("%1 (U+%2)", QString(QChar(mCodePoints.at(row))), number);
 }
 
 QString Utf16StringData::completeString(bool skipInvalid) const
@@ -104,7 +108,6 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             quint64 bitsRemaining)
 {
     const int oldSize = count();
-    bool haveToEmit = true;
     mNonBMPCount = 0;
     if (mMode == CharCount)
     {
