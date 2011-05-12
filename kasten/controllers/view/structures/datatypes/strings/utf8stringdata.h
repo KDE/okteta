@@ -20,23 +20,34 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef UTF8STRINGDATA_H
+#define UTF8STRINGDATA_H
 
 #include "stringdata.h"
-#include "stringdatainformation.h"
 
-StringData::StringData(StringDataInformation* parent)
-    : mParent(parent), mTerminationCodePoint(0), mMode(None), mLittleEndian(true), mEofReached(false)
+
+class Utf8StringData : public StringData
 {
-    //default to zero terminated strings
-    mLength.maxBytes = 0;
-}
+public:
+    explicit Utf8StringData(StringDataInformation* parent);
+    virtual ~Utf8StringData();
 
-StringData::~StringData()
-{
+    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining);
+    virtual quint64 sizeAt(int i) const;
+    virtual unsigned int size() const;
+    virtual QString completeString(bool skipInvalid = false) const;
+    virtual QString stringValue(int row) const;
+    virtual QString charType() const;
+    virtual int count() const;
+    virtual QString typeName() const;
+private:
+    QHash<int, quint8> mErrorIndices;
+    QVector<quint32> mCodePoints;
+    uint mOneByteCount;
+    uint mTwoByteCount;
+    uint mThreeByteCount;
+    uint mFourByteCount;
+    uint mNonBMPCount;
+};
 
-}
-
-void StringData::setEndianess(bool littleEndian)
-{
-    mLittleEndian = littleEndian;
-}
+#endif // UTF8STRINGDATA_H

@@ -25,6 +25,7 @@
 #include "stringdatainformation.h"
 #include "../dummydatainformation.h"
 #include "utf16stringdata.h"
+#include "utf8stringdata.h"
 #include "asciistringdata.h"
 #include "../../script/classes/stringscriptclass.h"
 #include "../../script/scripthandlerinfo.h"
@@ -233,6 +234,9 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
         switch (encoding) {
             case ASCII:
                 data = new AsciiStringData(this);
+                break;
+            case UTF8:
+                data = new Utf8StringData(this);
                 break;
             case UTF16_LE:
                 data = new Utf16StringData(this);
