@@ -314,6 +314,7 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/strings/stringdatainformation.cpp
   view/structures/datatypes/strings/stringdata.cpp
   view/structures/datatypes/strings/asciistringdata.cpp
+  view/structures/datatypes/strings/latin1stringdata.cpp
   view/structures/datatypes/strings/utf8stringdata.cpp
   view/structures/datatypes/strings/utf16stringdata.cpp
   view/structures/datatypes/strings/utf32stringdata.cpp
