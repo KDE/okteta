@@ -24,6 +24,7 @@
 
 #include "stringdatainformation.h"
 #include "../dummydatainformation.h"
+#include "utf32stringdata.h"
 #include "utf16stringdata.h"
 #include "utf8stringdata.h"
 #include "asciistringdata.h"
@@ -244,6 +245,14 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
                 break;
             case UTF16_BE:
                 data = new Utf16StringData(this);
+                data->setEndianess(false);
+                break;
+            case UTF32_LE:
+                data = new Utf32StringData(this);
+                data->setEndianess(true);
+                break;
+            case UTF32_BE:
+                data = new Utf32StringData(this);
                 data->setEndianess(false);
                 break;
             default:
