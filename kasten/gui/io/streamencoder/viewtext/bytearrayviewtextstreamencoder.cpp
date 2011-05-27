@@ -47,8 +47,12 @@ namespace Kasten
 static const Okteta::OffsetFormat::Format DefaultOffsetFormat = Okteta::OffsetFormat::Hexadecimal;
 
 ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
- : /*offsetFormat(DefaultOffsetFormat),*/ valueCoding( Okteta::HexadecimalCoding), codecName(), undefinedChar('?'), substituteChar( '.' ),
-   separation( QLatin1String(" ") )
+  : /*offsetFormat(DefaultOffsetFormat),*/
+  valueCoding( Okteta::HexadecimalCoding),
+  codecName(),
+  undefinedChar( QLatin1Char('?') ),
+  substituteChar( QLatin1Char('.') ),
+  separation( QLatin1String(" ") )
 {}
 
 ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()

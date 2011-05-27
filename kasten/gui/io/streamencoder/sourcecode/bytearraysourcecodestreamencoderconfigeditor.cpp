@@ -77,7 +77,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     const int dataTypesCount = mEncoder->dataTypesCount();
     QStringList dataTypeNameStrings;
     for( int i=0; i<dataTypesCount; ++i )
-        dataTypeNameStrings << dataTypeNames[i];
+        dataTypeNameStrings << QLatin1String(dataTypeNames[i]);
     mDataTypeSelect->addItems( dataTypeNameStrings );
     mDataTypeSelect->setCurrentIndex( mSettings.dataType );
     connect( mDataTypeSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );

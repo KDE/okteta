@@ -103,7 +103,7 @@ QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const
     const bool success = encodeDataToStream( &dataBuffer, byteArrayView, byteArray, range );
     dataBuffer.close();
 
-    return success ? QString(data) : QString();
+    return success ? QString::fromLatin1(data) : QString();
 }
 
 AbstractByteArrayStreamEncoder::~AbstractByteArrayStreamEncoder() {}

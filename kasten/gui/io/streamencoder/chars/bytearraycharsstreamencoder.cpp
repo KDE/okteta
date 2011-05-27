@@ -39,8 +39,8 @@ namespace Kasten
 
 CharsStreamEncoderSettings::CharsStreamEncoderSettings()
   : codecName(),
-    undefinedChar('?'),
-    substituteChar( '.' )
+    undefinedChar( QLatin1Char('?') ),
+    substituteChar( QLatin1Char('.') )
 {}
 
 ByteArrayCharsStreamEncoder::ByteArrayCharsStreamEncoder()
@@ -64,8 +64,8 @@ bool ByteArrayCharsStreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     Okteta::CharCodec *charCodec = Okteta::CharCodec::createCodec( mSettings.codecName );
-    const QChar tabChar( '\t' );
-    const QChar returnChar( '\n' );
+    const QChar tabChar = QLatin1Char( '\t' );
+    const QChar returnChar = QLatin1Char( '\n' );
 
     for( Okteta::Address i=range.start(); i<=range.end(); ++i )
     {

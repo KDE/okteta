@@ -195,7 +195,7 @@ QString ByteArrayValidator::toString( const QByteArray& byteArray ) const
         for( int i=0; i<byteArraySize; ++i )
         {
             Character c = mCharCodec->decode( byteArray[i] );
-            result[i] = c.isUndefined() ? QChar('?') : c; // TODO: define unknown symbol
+            result[i] = c.isUndefined() ? QChar::fromLatin1('?') : c; // TODO: define unknown symbol
         }
     }
     else

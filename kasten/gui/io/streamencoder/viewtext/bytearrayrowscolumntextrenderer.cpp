@@ -124,8 +124,8 @@ void ByteArrayRowsColumnTextRenderer::renderLine( QTextStream* stream, bool isSu
     uint e = 0;
     if( isSubline || mVisibleCodings == 2 )
     {
-        const QChar tabChar( '\t' );
-        const QChar returnChar( '\n' );
+        const QChar tabChar = QLatin1Char( '\t' );
+        const QChar returnChar = QLatin1Char( '\n' );
 
         // draw individual chars
         for( ; p<pEnd; ++p, ++mOffset )

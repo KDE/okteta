@@ -56,7 +56,8 @@ void AddressValidator::setCodec( Coding codecId )
     mValueCodec = ValueCodec::createCodec( (Okteta::ValueCoding)mCodecId );
 }
 
-const QRegExp AddressValidator::expressionRegex = QRegExp("[0-9a-fx\\+/\\s\\-\\*]+",
+const QRegExp AddressValidator::expressionRegex =
+    QRegExp(QLatin1String("[0-9a-fx\\+/\\s\\-\\*]+"),
         Qt::CaseInsensitive, QRegExp::RegExp2); //FIXME this is way too simple, only there to test
 
 QValidator::State AddressValidator::validate( QString& string, int& pos ) const
@@ -72,7 +73,7 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
         //only prefix has been typed:
         if( string == QLatin1String("+")
             || string == QLatin1String("-")
-            || string.endsWith('x') ) // 0x at end
+            || string.endsWith(QLatin1Char('x')) ) // 0x at end
             result = QValidator::Intermediate;
     }
     else
@@ -102,8 +103,8 @@ Address AddressValidator::toAddress( const QString& string, AddressType* address
     if( addressType )
     {
         const AddressType type =
-            expression.startsWith('+') ? RelativeForwards :
-            expression.startsWith('-') ? RelativeBackwards :
+            expression.startsWith(QLatin1Char('+')) ? RelativeForwards :
+            expression.startsWith(QLatin1Char('-')) ? RelativeBackwards :
             /* else */                   AbsoluteAddress;
 
         if( type != AbsoluteAddress )
@@ -147,9 +148,9 @@ QString AddressValidator::toString( Address address, AddressType addressType ) c
     QString string = QString::number( address, base );
 
     if( addressType == RelativeForwards )
-        string.prepend( '+' );
+        string.prepend( QLatin1Char('+') );
     else if( addressType == RelativeBackwards )
-        string.prepend( '-' );
+        string.prepend( QLatin1Char('-') );
 
     return string;
 }

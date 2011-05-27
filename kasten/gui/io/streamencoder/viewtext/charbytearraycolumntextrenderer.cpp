@@ -60,8 +60,8 @@ Q_UNUSED( isSubline )
     if( mRenderLine == mCoordRange.end().line() )
         pEnd = mCoordRange.end().pos()+1;
 
-    const QChar tabChar( '\t' );
-    const QChar returnChar( '\n' );
+    const QChar tabChar = QLatin1Char( '\t' );
+    const QChar returnChar = QLatin1Char( '\n' );
 
     // draw individual chars
     uint e = 0;

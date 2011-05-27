@@ -34,7 +34,7 @@ static const int DefaultNoOfSublines = 1;
 
 QString AbstractColumnTextRenderer::whiteSpace( unsigned int length )
 {
-    return QString().fill( ' ', length );
+    return QString().fill( QLatin1Char(' '), length );
 }
 
 int AbstractColumnTextRenderer::noOfSublinesNeeded() const { return DefaultNoOfSublines; }
