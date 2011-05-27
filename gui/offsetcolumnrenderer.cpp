@@ -57,7 +57,7 @@ void OffsetColumnRenderer::renderLine( QPainter* painter, Line lineIndex )
 
     const QColor& buttonColor = stylist()->palette().buttonText().color();
     painter->setPen( buttonColor );
-    painter->drawText( leftOffsetMargin, mDigitBaseLine, QString().append(mCodedOffset) );
+    painter->drawText( leftOffsetMargin, mDigitBaseLine, QLatin1String(mCodedOffset) );
 }
 
 void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const PixelXRange& _Xs, const PixelYRange& Ys )

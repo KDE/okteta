@@ -183,7 +183,8 @@ void Dropper::handleInternalDrag( QDropEvent* dropEvent, AbstractByteArrayView* 
         // TODO: should this be a method of AbstractByteArrayModel, to reuse piece data?
 
         // get data
-        const QByteArray data = dropEvent->mimeData()->data( DropperOctetStreamFormatName );
+        const QByteArray data =
+            dropEvent->mimeData()->data( QLatin1String(DropperOctetStreamFormatName) );
 
         if( !data.isEmpty() )
         {

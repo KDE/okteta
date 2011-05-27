@@ -712,7 +712,7 @@ QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
         return 0;
 
     QMimeData* mimeData = new QMimeData;
-    mimeData->setData( OctetStreamFormatName, selectedData() );
+    mimeData->setData( QLatin1String(OctetStreamFormatName), selectedData() );
     return mimeData;
 }
 
