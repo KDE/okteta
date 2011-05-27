@@ -43,9 +43,9 @@ GotoOffsetController::GotoOffsetController( If::ToolInlineViewable* toolInlineVi
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mGotoOffsetAction = actionCollection->addAction( "goto_offset" );
+    mGotoOffsetAction = actionCollection->addAction( QLatin1String("goto_offset") );
     mGotoOffsetAction->setText( i18nc("@action:inmenu","&Go to Offset...") );
-    mGotoOffsetAction->setIcon( KIcon("go-jump") );
+    mGotoOffsetAction->setIcon( KIcon(QLatin1String("go-jump")) );
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
     connect( mGotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
 

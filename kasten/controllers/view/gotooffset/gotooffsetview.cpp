@@ -101,11 +101,15 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     baseLayout->addLayout( optionsLayout );
 
     // Goto button
-    const KGuiItem gotoGuiItem( i18nc("@action:button","&Go"), "go-jump",
-                      i18nc("@info:tooltip","Go to the Offset"),
-                      i18nc("@info:whatsthis","If you press the <interface>Go</interface> "
-                            "button, the cursor will be moved in the document to or, "
-                            "on your option, by the offset you entered above.") );
+    const KGuiItem gotoGuiItem =
+        KGuiItem( i18nc("@action:button","&Go"),
+                  QLatin1String("go-jump"),
+                  i18nc("@info:tooltip",
+                        "Go to the Offset"),
+                  i18nc("@info:whatsthis",
+                        "If you press the <interface>Go</interface> "
+                        "button, the cursor will be moved in the document to or, "
+                        "on your option, by the offset you entered above.") );
     mGotoButton = new KPushButton( gotoGuiItem, this );
     connect( mGotoButton, SIGNAL(clicked(bool)), SLOT(onGotoButtonClicked()) );
     addButton( mGotoButton, AbstractToolWidget::Default );
