@@ -40,7 +40,7 @@ static const int ByteSetSize = 256;
 ByteTableModel::ByteTableModel( QObject *parent )
  : QAbstractTableModel( parent ),
    mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
-   mUndefinedChar( ByteTableDefaultUndefinedChar )
+   mUndefinedChar( QLatin1Char(ByteTableDefaultUndefinedChar) )
 {
     static const Okteta::ValueCoding CodingIds[NofOfValueCodings] =
     {

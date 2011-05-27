@@ -69,12 +69,15 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     label->setBuddy( mMinLengthSpinBox );
     updateLayout->addWidget( mMinLengthSpinBox );
 
-    const KGuiItem updateGuiItem( i18nc("@action:button extract the strings from the byte array","&Extract"), "document-export",
-                      i18nc("@info:tooltip","Finds the strings contained in the selected range and lists them in the view below."),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Extract</interface> button, "
-                            "the selected range is searched for all strings which have the set minimum length. "
-                            "This strings found will be listed in the view below.") );
+    const KGuiItem updateGuiItem =
+        KGuiItem( i18nc("@action:button extract the strings from the byte array","&Extract"),
+                  QLatin1String("document-export"),
+                  i18nc("@info:tooltip",
+                        "Finds the strings contained in the selected range and lists them in the view below."),
+                  i18nc("@info:whatsthis",
+                        "If you press the <interface>Extract</interface> button, "
+                        "the selected range is searched for all strings which have the set minimum length. "
+                        "This strings found will be listed in the view below.") );
     mUpdateButton = new KPushButton( updateGuiItem, this );
     mUpdateButton->setEnabled( mTool->isApplyable() );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(extractStrings()) );
@@ -135,22 +138,28 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     // actions
     QHBoxLayout *actionsLayout = new QHBoxLayout();
 
-    const KGuiItem copyGuiItem( i18n("C&opy"), "edit-copy",
-                      i18nc("@info:tooltip","Copies the selected strings to the clipboard."),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Copy</interface> button, all strings you selected "
-                            "in the list are copied to the clipboard.") );
+    const KGuiItem copyGuiItem =
+        KGuiItem( i18n("C&opy"),
+                  QLatin1String("edit-copy"),
+                  i18nc("@info:tooltip",
+                        "Copies the selected strings to the clipboard."),
+                  i18nc("@info:whatsthis",
+                        "If you press the <interface>Copy</interface> button, all strings you selected "
+                        "in the list are copied to the clipboard.") );
     mCopyButton = new KPushButton( copyGuiItem, this );
     connect( mCopyButton, SIGNAL(clicked(bool)), SLOT(onCopyButtonClicked()) );
     actionsLayout->addWidget( mCopyButton );
 
     actionsLayout->addStretch();
 
-    const KGuiItem gotoGuiItem( i18n("&Show"), "go-jump",
-                      i18nc("@info:tooltip","Shows the selected string in the view."),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Go to</interface> button, the string which was last "
-                            "selected is marked and shown in the view.") );
+    const KGuiItem gotoGuiItem =
+        KGuiItem( i18n("&Show"),
+                  QLatin1String("go-jump"),
+                  i18nc("@info:tooltip",
+                        "Shows the selected string in the view."),
+                  i18nc("@info:whatsthis",
+                        "If you press the <interface>Go to</interface> button, the string which was last "
+                        "selected is marked and shown in the view.") );
     mGotoButton = new KPushButton( gotoGuiItem, this );
     connect( mGotoButton, SIGNAL(clicked(bool)), SLOT(onGotoButtonClicked()) );
     actionsLayout->addWidget( mGotoButton );

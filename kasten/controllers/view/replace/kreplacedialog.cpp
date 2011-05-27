@@ -43,7 +43,8 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
     mTool( tool )
 {
     setCaption( i18nc("@title:window","Replace Bytes") );
-    setButtonGuiItem( Ok, KGuiItem( i18nc("@action;button", "&Replace"), "edit-find-replace",
+    setButtonGuiItem( Ok, KGuiItem( i18nc("@action;button", "&Replace"),
+                      QLatin1String("edit-find-replace"),
                       i18nc("@info:tooltip","Start replace"),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Replace</interface> button, "

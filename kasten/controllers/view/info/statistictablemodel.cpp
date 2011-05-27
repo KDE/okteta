@@ -46,7 +46,7 @@ StatisticTableModel::StatisticTableModel( int *byteCount, QObject *parent )
    mValueCoding( DefaultValueCoding ),
    mValueCodec( Okteta::ValueCodec::createCodec(DefaultValueCoding) ),
    mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
-   mUndefinedChar( StatisticsDefaultUndefinedChar )
+   mUndefinedChar( QLatin1Char(StatisticsDefaultUndefinedChar) )
 {
 }
 
@@ -128,7 +128,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
             }
             case CountId:
                 result =  ( mSize == -1 ) ?
-                    QVariant( QString('-') ) :
+                    QVariant( QLatin1String("-") ) :
                     QVariant( mByteCount[byte] );
                 break;
             case PercentId:
@@ -136,7 +136,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
                           // TODO: before we printed only a string (which killed sorting) with QString::number( x, 'f', 6 )
                           // Qt now cuts trailing 0s, results in unaligned numbers, not so beautiful.
                           QVariant( 100.0*(double)mByteCount[byte]/mSize ) :
-                          QVariant( QString('-') );
+                          QVariant( QLatin1String("-") );
                 break;
             default:
                 ;

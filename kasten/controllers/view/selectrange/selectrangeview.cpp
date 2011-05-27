@@ -112,11 +112,16 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
     baseLayout->addLayout( optionsLayout );
 
     // Select button
-    const KGuiItem selectGuiItem( i18nc("@action:button","&Select"), 0,
-                      i18nc("@info:tooltip","Select the range."),
-                      i18nc("@info:whatsthis","If you press the <interface>Select</interface> "
-                            "button, the cursor will be moved in the document to or, "
-                            "on your option, by the offset you entered above.") );
+    const KGuiItem selectGuiItem =
+        KGuiItem( i18nc("@action:button",
+                        "&Select"),
+                  QString(),
+                  i18nc("@info:tooltip",
+                        "Select the range."),
+                  i18nc("@info:whatsthis",
+                        "If you press the <interface>Select</interface> "
+                        "button, the cursor will be moved in the document to or, "
+                        "on your option, by the offset you entered above.") );
     mSelectButton = new KPushButton( selectGuiItem, this );
     connect( mSelectButton, SIGNAL(clicked(bool)), SLOT(onSelectButtonClicked()) );
     addButton( mSelectButton, AbstractToolWidget::Default );

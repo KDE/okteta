@@ -160,13 +160,16 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
 
     actionsLayout->addStretch();
 
-    const KGuiItem convertGuiItem( i18n("Con&vert"), "run-build",
-                      i18nc("@info:tooltip","Converts the bytes in the selected range."),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Convert</interface> button, "
-                            "all bytes in the selected range "
-                            "will be replaced by bytes which represent the same character "
-                            "in the selected target charset.") );
+    const KGuiItem convertGuiItem =
+        KGuiItem( i18n("Con&vert"),
+                  QLatin1String("run-build"),
+                  i18nc("@info:tooltip",
+                        "Converts the bytes in the selected range."),
+                  i18nc("@info:whatsthis",
+                        "If you press the <interface>Convert</interface> button, "
+                        "all bytes in the selected range "
+                        "will be replaced by bytes which represent the same character "
+                        "in the selected target charset.") );
     mConvertButton = new KPushButton( convertGuiItem, this );
     connect( mConvertButton, SIGNAL(clicked(bool)), SLOT(onConvertButtonClicked()) );
     actionsLayout->addWidget( mConvertButton );

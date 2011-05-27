@@ -40,7 +40,7 @@ ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     // view style
-    mViewModeAction = actionCollection->add<KSelectAction>( "viewmode" );
+    mViewModeAction = actionCollection->add<KSelectAction>( QLatin1String("viewmode") );
     mViewModeAction->setText( i18nc("@title:menu","&View Mode") );
     QStringList list;
     list.append( i18nc("@item:inmenu","&Columns") );

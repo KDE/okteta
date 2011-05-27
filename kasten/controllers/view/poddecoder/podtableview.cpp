@@ -135,9 +135,12 @@ Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
                     "The new value needs <emphasis>fewer</emphasis> bytes (%1 instead of %2).<nl/>"
                     "Keep the unused bytes or remove them?", newValueSize, oldValueSize );
 
-        const KGuiItem keepGuiItem( i18nc("@action:button keep the unused bytes","&Keep"), 0,
-                                    i18nc("@info:tooltip",
-                                          "Keep the unused bytes with their old values.") );
+        const KGuiItem keepGuiItem =
+            KGuiItem( i18nc("@action:button keep the unused bytes",
+                            "&Keep"),
+                      QString(),
+                      i18nc("@info:tooltip",
+                            "Keep the unused bytes with their old values.") );
 
         messageBoxAnswer = KMessageBox::warningYesNoCancel( this, message, mTool->title(),
                                                             keepGuiItem,

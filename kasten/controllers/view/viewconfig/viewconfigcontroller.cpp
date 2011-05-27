@@ -45,38 +45,42 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     // value valueCoding
-    mCodingAction = actionCollection->add<KSelectAction>( "view_valuecoding" );
+    mCodingAction = actionCollection->add<KSelectAction>( QLatin1String("view_valuecoding") );
     mCodingAction->setText( i18nc("@title:menu","&Value Coding") );
     QStringList list;
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","&Hexadecimal") );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "&Decimal")     );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "&Octal")       );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "&Binary")      );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format",
+                       "&Hexadecimal") );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",
+                       "&Decimal") );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",
+                       "&Octal") );
+    list.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",
+                       "&Binary") );
     mCodingAction->setItems( list );
     connect( mCodingAction, SIGNAL(triggered(int)), SLOT(setValueCoding(int)) );
 
     // char valueCoding
-    mEncodingAction = actionCollection->add<KSelectAction>( "view_charencoding" );
+    mEncodingAction = actionCollection->add<KSelectAction>( QLatin1String("view_charencoding") );
     mEncodingAction->setText( i18nc("@title:menu","&Char Coding") );
     mEncodingAction->setItems( Okteta::CharCodec::codecNames() );
     connect( mEncodingAction, SIGNAL(triggered(int)), SLOT(setCharCoding(int)) );
 
-    mShowsNonprintingAction = actionCollection->add<KToggleAction>( "view_showsnonprinting" );
+    mShowsNonprintingAction = actionCollection->add<KToggleAction>( QLatin1String("view_showsnonprinting") );
     mShowsNonprintingAction->setText( i18nc("@option:check","Show &Non-printing Chars") );
     connect( mShowsNonprintingAction, SIGNAL(triggered(bool)), SLOT(setShowsNonprinting(bool)) );
 
     // bytes per line
-    mSetBytesPerLineAction = actionCollection->addAction( "view_bytesperline" );
+    mSetBytesPerLineAction = actionCollection->addAction( QLatin1String("view_bytesperline") );
     mSetBytesPerLineAction->setText( i18nc("@action:inmenu","Set Bytes per Line...") );
     connect( mSetBytesPerLineAction, SIGNAL(triggered(bool) ), SLOT(setBytesPerLine()) );
 
     // byte groups size
-    mSetBytesPerGroupAction = actionCollection->addAction( "view_bytespergroup" );
+    mSetBytesPerGroupAction = actionCollection->addAction( QLatin1String("view_bytespergroup") );
     mSetBytesPerGroupAction->setText( i18nc("@action:inmenu","Set Bytes per Group...") );
     connect( mSetBytesPerGroupAction, SIGNAL(triggered(bool) ), SLOT(setBytesPerGroup()) );
 
     // resize style
-    mResizeStyleAction = actionCollection->add<KSelectAction>( "resizestyle" );
+    mResizeStyleAction = actionCollection->add<KSelectAction>( QLatin1String("resizestyle") );
     mResizeStyleAction->setText( i18nc("@title:menu","&Dynamic Layout") );
     list.clear();
     list.append( i18nc("@item:inmenu  The layout will not change on size changes.",
@@ -88,13 +92,13 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     mResizeStyleAction->setItems( list );
     connect( mResizeStyleAction, SIGNAL(triggered(int)), SLOT(setLayoutStyle(int)) );
 
-    mShowOffsetColumnAction = actionCollection->add<KToggleAction>( "view_lineoffset" );
+    mShowOffsetColumnAction = actionCollection->add<KToggleAction>( QLatin1String("view_lineoffset") );
     mShowOffsetColumnAction->setText( i18nc("@option:check","Show &Line Offset") );
     mShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
     connect( mShowOffsetColumnAction, SIGNAL(triggered(bool)), SLOT(toggleOffsetColumn(bool)) );
 
     // show buffer columns
-    mToggleColumnsAction = actionCollection->add<KSelectAction>( "togglecolumns" );
+    mToggleColumnsAction = actionCollection->add<KSelectAction>( QLatin1String("togglecolumns") );
     mToggleColumnsAction->setText( i18nc("@title:menu","&Show Values or Chars") );
     list.clear();
     list.append( i18nc("@item:inmenu","&Values") );

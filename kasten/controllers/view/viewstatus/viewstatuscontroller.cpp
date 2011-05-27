@@ -112,7 +112,7 @@ void ViewStatusController::fixWidths()
     int widestDigitIndex = 0;
     for( int i=0; i<HexDigitsCount; ++i )
     {
-        QString offset = QString( 9, HexDigits[i] );
+        QString offset = QString( 9, QLatin1Char(HexDigits[i]) );
         offset[4] = ':';
         const QString offsetText = i18n( "Offset: %1", offset );
         const int offsetWidth = metrics.boundingRect( offsetText ).width();
@@ -120,7 +120,8 @@ void ViewStatusController::fixWidths()
             largestOffsetWidth = offsetWidth;
 
         const char countDigit = (i<FirstLetterIndex) ? HexDigits[i] : widestDigitIndex;
-        const QString bytesCount = i18np( "1 byte", "%1 bytes", ('1'+QString(9,countDigit)).toInt() );
+        const int maxNumber = QByteArray('1'+QByteArray(9,countDigit)).toInt();
+        const QString bytesCount = i18n( "%1 bytes", maxNumber );
         const QString selectionString = i18nc( "@info:status selection: start offset - end offset ()",
                         "Selection: %1 - %2 (%3)", offset, offset, bytesCount );
 
@@ -169,7 +170,7 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
     }
     else
     {
-        const QString emptyString( '-' );
+        const QString emptyString = QLatin1String( "-" );
 
         mOffsetLabel->setText( i18nc("@info:status offset value not available", "Offset: -") );
         mSelectionLabel->setText( i18nc("@info:status offset value not available", "Selection: -") );

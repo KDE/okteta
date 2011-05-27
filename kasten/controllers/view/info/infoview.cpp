@@ -67,13 +67,15 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
 
     topLineLayout->addStretch();
 
-    const KGuiItem updateGuiItem(
-        i18nc("@action:button build the statistic of the byte frequency","&Build"),
-        "run-build",
-        i18nc("@info:tooltip","Builds the byte frequency statistic for the bytes in the selected range."),
-        i18nc("@info:whatsthis",
-              "If you press the <interface>Build</interface> button,"
-              " the byte frequency statistic is built for the bytes in the selected range.") );
+    const KGuiItem updateGuiItem =
+        KGuiItem(i18nc("@action:button build the statistic of the byte frequency",
+                       "&Build"),
+                 QLatin1String("run-build"),
+                 i18nc("@info:tooltip",
+                       "Builds the byte frequency statistic for the bytes in the selected range."),
+                 i18nc("@info:whatsthis",
+                       "If you press the <interface>Build</interface> button,"
+                       " the byte frequency statistic is built for the bytes in the selected range.") );
     mUpdateButton = new KPushButton( updateGuiItem, this );
     mUpdateButton->setEnabled( mTool->isApplyable() );
     connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
@@ -149,7 +151,7 @@ void InfoView::resizeColumnsWidth()
 void InfoView::setByteArraySize( int size )
 {
     const QString sizeText = ( size < 1 ) ? // -1 is default, 0 should not happen
-        QString( '-' ) :
+        QString::fromLatin1( "-" ) :
         i18np( "1 byte", "%1 bytes", size );
 
     mSizeLabel->setText( sizeText );

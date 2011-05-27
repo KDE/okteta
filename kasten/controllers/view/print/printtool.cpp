@@ -98,8 +98,8 @@ void PrintTool::print()
         const int width = pageRect.width();
 
         HeaderFooterFrameRenderer *headerFrameRenderer = new HeaderFooterFrameRenderer( &info );
-        headerFrameRenderer->setTexts( QString("%d"),
-                                       QString("%f"),
+        headerFrameRenderer->setTexts( QLatin1String("%d"),
+                                       QLatin1String("%f"),
                                        i18nc("in the header of the printed page, e.g. Page 2 of 20","Page %p of %P") );
         headerFrameRenderer->setWidth( width );
         headerFrameRenderer->setPos( pageRect.topLeft() );
@@ -108,7 +108,7 @@ void PrintTool::print()
         footerFrameRenderer->setTexts( i18nc("in the footer of the printed page, e.g. Printed by: Joe User",
                                              "Printed by: %U"),
                                        i18nc("advertizer in the footer of the printed page","Okteta, built on KDE4"),
-                                       QString("%F") );
+                                       QLatin1String("%F") );
         footerFrameRenderer->setWidth( width );
         const int footerTop = pageRect.bottom() - footerFrameRenderer->height();
         footerFrameRenderer->setPos( left, footerTop );

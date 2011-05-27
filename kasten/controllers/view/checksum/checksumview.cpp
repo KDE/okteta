@@ -86,11 +86,14 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     QHBoxLayout* calculateLayout = new QHBoxLayout();
 
     calculateLayout->addStretch();
-    const KGuiItem updateGuiItem( i18nc("@action:button calculate the checksum","&Calculate"), "run-build",
-                      i18nc("@info:tooltip","Calculate the checksum for the bytes in the selected range."),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Calculate</interface> button, the list will be updated "
-                            "to all strings which are contained in the selected range and have the set minimum length.") );
+    const KGuiItem updateGuiItem = 
+        KGuiItem( i18nc("@action:button calculate the checksum","&Calculate"),
+                  QLatin1String("run-build"),
+                  i18nc("@info:tooltip",
+                        "Calculate the checksum for the bytes in the selected range."),
+                  i18nc("@info:whatsthis",
+                        "If you press the <interface>Calculate</interface> button, the list will be updated "
+                        "to all strings which are contained in the selected range and have the set minimum length.") );
     mCalculateButton = new KPushButton( updateGuiItem, this );
     mCalculateButton->setEnabled( mTool->isApplyable() );
     connect( mCalculateButton, SIGNAL(clicked(bool)), SLOT(onCalculateClicked()) );

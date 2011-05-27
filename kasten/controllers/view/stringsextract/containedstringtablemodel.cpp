@@ -70,7 +70,7 @@ QVariant ContainedStringTableModel::data( const QModelIndex &index, int role ) c
                     {
                         mPrintFunction( mCodedOffset, string.offset() );
 
-                        result = QString().append( mCodedOffset );
+                        result = QString::fromLatin1( mCodedOffset );
                     }
                     break;
                 }
