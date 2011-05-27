@@ -69,7 +69,7 @@ int main( int argc, char* argv[] )
     if( CharColumn )
     {
       CharColumn->setShowUnprintable( false );
-      CharColumn->setSubstituteChar( '*' );
+      CharColumn->setSubstituteChar( QLatin1Char('*') );
     }
 
     // Finally insert the widget into the layout of its parent

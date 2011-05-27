@@ -85,7 +85,7 @@ OktetaPart::OktetaPart( QObject* parent,
 
     setWidget( widget );
 
-    setXMLFile( UIFileName[modus] );
+    setXMLFile( QLatin1String(UIFileName[modus]) );
 
     if( modus == ReadWriteModus )
         mControllers.append( new Kasten::VersionController(this) );
