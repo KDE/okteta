@@ -161,7 +161,7 @@ void DocumentInfoView::onMimeTypeChanged( KMimeType::Ptr mimeTypePtr )
 
     if( mimeTypePtr.isNull() )
     {
-        mimeTypeComment = QString( '-' );
+        mimeTypeComment = QLatin1String( "-" );
 //         mimeTypeIcon = ?
     }
     else
@@ -185,10 +185,10 @@ void DocumentInfoView::onLocationChanged( const QString& location )
 void DocumentInfoView::onDocumentSizeChanged( int newSize )
 {
     const QString size = ( newSize != -1 ) ?
-        QString( "%1 (%2)" )
+        QString::fromLatin1( "%1 (%2)" )
         .arg( KIO::convertSize(newSize) )
         .arg( KGlobal::locale()->formatNumber(newSize, 0) ) :
-        QString( '-' );
+        QString::fromLatin1( "-" );
     mSizeLabel->setText( size );
 }
 
