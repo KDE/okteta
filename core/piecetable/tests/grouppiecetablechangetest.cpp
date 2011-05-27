@@ -42,27 +42,27 @@ static const char Description[] = "description";
 
 void GroupPieceTableChangeTest::testConstructor()
 {
-    GroupPieceTableChange groupPieceTableChange( 0, QString(Description) );
+    GroupPieceTableChange groupPieceTableChange( 0, QLatin1String(Description) );
 
 //     QCOMPARE( groupPieceTableChange.count(), 0 );
     QCOMPARE( groupPieceTableChange.appliedChangesCount(), 0 );
     QCOMPARE( groupPieceTableChange.parent(), (GroupPieceTableChange*)0 );
     QCOMPARE( groupPieceTableChange.dataSize(), 0 );
-    QCOMPARE( groupPieceTableChange.description(), QString(Description) );
+    QCOMPARE( groupPieceTableChange.description(), QLatin1String(Description) );
 }
 
 void GroupPieceTableChangeTest::testAppendChange()
 {
-    GroupPieceTableChange groupPieceTableChange( 0, QString(Description) );
+    GroupPieceTableChange groupPieceTableChange( 0, QLatin1String(Description) );
 
     const int type1Id = 1;
     const int type2Id = 2;
     const int type3Id = type2Id;
     const int type4Id = 4;
-    const QString description1( "1" );
-    const QString description2( "2" );
-    const QString description3( "3" );
-    const QString description4( "4" );
+    const QString description1 = QLatin1String( "1" );
+    const QString description2 = QLatin1String( "2" );
+    const QString description3 = QLatin1String( "3" );
+    const QString description4 = QLatin1String( "4" );
     TestPieceTableChange *change1 = new TestPieceTableChange( type1Id, description1 );
     TestPieceTableChange *change2 = new TestPieceTableChange( type2Id, description2 );
     TestPieceTableChange *change3 = new TestPieceTableChange( type3Id, description3 );
@@ -93,9 +93,9 @@ void GroupPieceTableChangeTest::testAppendChange()
     QVERIFY( !result );
     QCOMPARE( groupPieceTableChange.count(), 2 );
     QCOMPARE( groupPieceTableChange.appliedChangesCount(), 2 );
-    QCOMPARE( groupPieceTableChange.headChangeDescription(), description2+description3 );
+    QCOMPARE( groupPieceTableChange.headChangeDescription(), QString(description2+description3) );
     QCOMPARE( groupPieceTableChange.changeDescription(0), description1 );
-    QCOMPARE( groupPieceTableChange.changeDescription(1), description2+description3 );
+    QCOMPARE( groupPieceTableChange.changeDescription(1), QString(description2+description3) );
 
     // adding third which should not be merged as we call finishChange before
     groupPieceTableChange.finishChange();
@@ -106,7 +106,7 @@ void GroupPieceTableChangeTest::testAppendChange()
     QCOMPARE( groupPieceTableChange.appliedChangesCount(), 3 );
     QCOMPARE( groupPieceTableChange.headChangeDescription(), description4 );
     QCOMPARE( groupPieceTableChange.changeDescription(0), description1 );
-    QCOMPARE( groupPieceTableChange.changeDescription(1), description2+description3 );
+    QCOMPARE( groupPieceTableChange.changeDescription(1), QString(description2+description3) );
     QCOMPARE( groupPieceTableChange.changeDescription(2), description4 );
 }
 

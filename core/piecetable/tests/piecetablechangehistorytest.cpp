@@ -63,10 +63,10 @@ void PieceTableChangeHistoryTest::testAppendChange()
     const int type2Id = 2;
     const int type3Id = type2Id;
     const int type4Id = 4;
-    const QString description1( "1" );
-    const QString description2( "2" );
-    const QString description3( "3" );
-    const QString description4( "4" );
+    const QString description1 = QLatin1String( "1" );
+    const QString description2 = QLatin1String( "2" );
+    const QString description3 = QLatin1String( "3" );
+    const QString description4 = QLatin1String( "4" );
     TestPieceTableChange *change1 = new TestPieceTableChange( type1Id, description1 );
     TestPieceTableChange *change2 = new TestPieceTableChange( type2Id, description2 );
     TestPieceTableChange *change3 = new TestPieceTableChange( type3Id, description3 );
@@ -97,9 +97,9 @@ void PieceTableChangeHistoryTest::testAppendChange()
     QVERIFY( !result );
     QCOMPARE( pieceTableChangeHistory.count(), 2 );
     QCOMPARE( pieceTableChangeHistory.appliedChangesCount(), 2 );
-    QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description2+description3 );
+    QCOMPARE( pieceTableChangeHistory.headChangeDescription(), QString(description2+description3) );
     QCOMPARE( pieceTableChangeHistory.changeDescription(0), description1 );
-    QCOMPARE( pieceTableChangeHistory.changeDescription(1), description2+description3 );
+    QCOMPARE( pieceTableChangeHistory.changeDescription(1), QString(description2+description3) );
 
     // adding third which should not be merged as we call finishChange before
     pieceTableChangeHistory.finishChange();
@@ -110,7 +110,7 @@ void PieceTableChangeHistoryTest::testAppendChange()
     QCOMPARE( pieceTableChangeHistory.appliedChangesCount(), 3 );
     QCOMPARE( pieceTableChangeHistory.headChangeDescription(), description4 );
     QCOMPARE( pieceTableChangeHistory.changeDescription(0), description1 );
-    QCOMPARE( pieceTableChangeHistory.changeDescription(1), description2+description3 );
+    QCOMPARE( pieceTableChangeHistory.changeDescription(1), QString(description2+description3) );
     QCOMPARE( pieceTableChangeHistory.changeDescription(2), description4 );
 }
 
@@ -125,10 +125,10 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
     const int type2Id = 2;
     const int type3Id = 3;
     const int type4Id = 4;
-    const QString description1( "1" );
-    const QString description2( "2" );
-    const QString description3( "3" );
-    const QString description4( "4" );
+    const QString description1 = QLatin1String( "1" );
+    const QString description2 = QLatin1String( "2" );
+    const QString description3 = QLatin1String( "3" );
+    const QString description4 = QLatin1String( "4" );
     TestPieceTableChange *change1 = new TestPieceTableChange( type1Id, description1, 1 );
     TestPieceTableChange *change2 = new TestPieceTableChange( type2Id, description2, 2 );
     TestPieceTableChange *change3 = new TestPieceTableChange( type3Id, description3, 3 );
