@@ -88,7 +88,7 @@ void HeaderFooterFrameRenderer::prepare()
     const KUrl url = mInfo->url();
 
     // create list of replacements
-    QHash<QChar,QString> tagReplacements;
+    QHash<char,QString> tagReplacements;
 
     tagReplacements['d'] = KGlobal::locale()->formatDateTime( dateTime, KLocale::ShortDate );
     tagReplacements['D'] = KGlobal::locale()->formatDateTime( dateTime, KLocale::LongDate );
@@ -104,7 +104,7 @@ void HeaderFooterFrameRenderer::prepare()
 
     // create text with globally replaced tags
     const int sizeOfTag = 2;
-    QRegExp tagsPattern( "%([dDhyYuUfFP])" );
+    QRegExp tagsPattern( QLatin1String("%([dDhyYuUfFP])") );
 
     mGloballyReplacedTextList.clear();
 
@@ -117,7 +117,7 @@ void HeaderFooterFrameRenderer::prepare()
             pos = tagsPattern.indexIn( text, pos );
             if( pos < 0 )
                 break;
-            QString replacement = tagReplacements[text[pos+1]];
+            QString replacement = tagReplacements[text[pos+1].toLatin1()];
             text.replace( (uint)pos, sizeOfTag, replacement );
             pos += replacement.length();
         }
@@ -145,7 +145,7 @@ void HeaderFooterFrameRenderer::renderFrame( QPainter *painter, int frameIndex )
     {
         QString text = mGloballyReplacedTextList[i];
         // substitute locally
-        const char pageNumberTag[] = "%p";
+        const QString pageNumberTag = QLatin1String( "%p" );
         if( text.indexOf(pageNumberTag) != -1 )
             text.replace( pageNumberTag, QString::number(frameIndex+1) ); //TODO: frameIndex != pageNumber in general
         int align = verticalAlign | horizontalAlign[i];
