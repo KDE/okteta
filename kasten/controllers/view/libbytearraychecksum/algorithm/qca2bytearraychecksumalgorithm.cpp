@@ -20,12 +20,21 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+// QCA
+// need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when 
+#include <config-qca2.h>
+#ifdef HAVE_QCA2
+// disable QT_NO_CAST_FROM_ASCII
+#ifdef QT_NO_CAST_FROM_ASCII
+#undef QT_NO_CAST_FROM_ASCII
+#endif
+#include <QtCrypto>
+#endif
+
 #include "qca2bytearraychecksumalgorithm.h"
 
 // Okteta core
 #include <abstractbytearraymodel.h>
-// QCA
-#include <QtCrypto>
 // Qt
 #include <QtCore/QByteArray>
 

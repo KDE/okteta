@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,10 +20,20 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+// QCA
+// need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when 
+#include <config-qca2.h>
+#ifdef HAVE_QCA2
+// disable QT_NO_CAST_FROM_ASCII
+#ifdef QT_NO_CAST_FROM_ASCII
+#undef QT_NO_CAST_FROM_ASCII
+#endif
+#include <QtCrypto>
+#endif
+
+
 #include "bytearraychecksumalgorithmfactory.h"
 
-//
-#include <config-qca2.h>
 // lib
 #include "algorithm/crc32bytearraychecksumalgorithm.h"
 #include "algorithm/adler32bytearraychecksumalgorithm.h"
@@ -41,10 +51,6 @@
 // NEWCHECKSUM(end)
 // KDE
 #include <KLocale>
-#ifdef HAVE_QCA2
-// QCA
-#include <QtCrypto>
-#endif
 
 
 #ifdef HAVE_QCA2
