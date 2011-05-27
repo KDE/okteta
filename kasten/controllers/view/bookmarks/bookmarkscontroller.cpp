@@ -62,22 +62,22 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 
     mCreateAction = KStandardAction::addBookmark( this, SLOT(createBookmark()), actionCollection );
 
-    mDeleteAction = actionCollection->addAction( "bookmark_remove" );
+    mDeleteAction = actionCollection->addAction( QLatin1String("bookmark_remove") );
     mDeleteAction->setText( i18nc("@action:inmenu","Remove Bookmark") );
     connect( mDeleteAction, SIGNAL(triggered(bool) ), SLOT(deleteBookmark()) );
     mDeleteAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_B );
 
-    mDeleteAllAction = actionCollection->addAction( "bookmark_remove_all" );
+    mDeleteAllAction = actionCollection->addAction( QLatin1String("bookmark_remove_all") );
     mDeleteAllAction->setText( i18nc("@action:inmenu","Remove All Bookmarks") );
     connect( mDeleteAllAction, SIGNAL(triggered(bool) ), SLOT(deleteAllBookmarks()) );
 //     mDeleteAllAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
-    mGotoNextBookmarkAction = actionCollection->addAction( "bookmark_next" );
+    mGotoNextBookmarkAction = actionCollection->addAction( QLatin1String("bookmark_next") );
     mGotoNextBookmarkAction->setText( i18nc("@action:inmenu","Go to Next Bookmark") );
     connect( mGotoNextBookmarkAction, SIGNAL(triggered(bool) ), SLOT(gotoNextBookmark()) );
     mGotoNextBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Down );
 
-    mGotoPreviousBookmarkAction = actionCollection->addAction( "bookmark_previous" );
+    mGotoPreviousBookmarkAction = actionCollection->addAction( QLatin1String("bookmark_previous") );
     mGotoPreviousBookmarkAction->setText( i18nc("@action:inmenu","Go to Previous Bookmark") );
     connect( mGotoPreviousBookmarkAction, SIGNAL(triggered(bool) ), SLOT(gotoPreviousBookmark()) );
     mGotoPreviousBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Up );
@@ -132,7 +132,7 @@ void BookmarksController::setTargetModel( AbstractModel* model )
 
 void BookmarksController::updateBookmarks()
 {
-    mGuiClient->unplugActionList( BookmarkListActionListId );
+    mGuiClient->unplugActionList( QLatin1String(BookmarkListActionListId) );
 
     qDeleteAll( mBookmarksActionGroup->actions() );
 
@@ -165,7 +165,8 @@ void BookmarksController::updateBookmarks()
         action->setData( bookmark.offset() );
         mBookmarksActionGroup->addAction( action );
     }
-    mGuiClient->plugActionList( BookmarkListActionListId, mBookmarksActionGroup->actions() );
+    mGuiClient->plugActionList( QLatin1String(BookmarkListActionListId),
+                                mBookmarksActionGroup->actions() );
 }
 
 void BookmarksController::onBookmarksAdded( const QList<Okteta::Bookmark> &bookmarks )

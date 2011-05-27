@@ -84,42 +84,54 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
     QHBoxLayout* actionsLayout = new QHBoxLayout();
 
-    const KGuiItem createBookmarkGuiItem( QString()/*i18n("C&opy")*/, "bookmark-new",
-                      i18nc("@info:tooltip","Creates a new bookmark for the current cursor position."),
-                      i18nc("@info:whatsthis",
-                            "If you press this button, a new bookmark will be created "
-                            "for the current cursor position.") );
+    const KGuiItem createBookmarkGuiItem =
+        KGuiItem( QString()/*i18n("C&opy")*/,
+                  QLatin1String("bookmark-new"),
+                  i18nc("@info:tooltip",
+                        "Creates a new bookmark for the current cursor position."),
+                  i18nc("@info:whatsthis",
+                        "If you press this button, a new bookmark will be created "
+                        "for the current cursor position.") );
     mCreateBookmarkButton = new KPushButton( createBookmarkGuiItem, this );
     mCreateBookmarkButton->setEnabled( mTool->canCreateBookmark() );
     connect( mCreateBookmarkButton, SIGNAL(clicked(bool)), SLOT(onCreateBookmarkButtonClicked()) );
     connect( mTool, SIGNAL(canCreateBookmarkChanged( bool )), mCreateBookmarkButton, SLOT(setEnabled( bool )) );
     actionsLayout->addWidget( mCreateBookmarkButton );
 
-    const KGuiItem deleteBookmarkGuiItem( QString()/*i18n("&Go to")*/, "edit-delete",
-                      i18nc("@info:tooltip","Deletes all the selected bookmarks."),
-                      i18nc("@info:whatsthis",
-                            "If you press this button, all bookmarks which are "
-                            "selected will be deleted.") );
+    const KGuiItem deleteBookmarkGuiItem =
+        KGuiItem( QString()/*i18n("&Go to")*/,
+                  QLatin1String("edit-delete"),
+                  i18nc("@info:tooltip",
+                        "Deletes all the selected bookmarks."),
+                  i18nc("@info:whatsthis",
+                        "If you press this button, all bookmarks which are "
+                        "selected will be deleted.") );
     mDeleteBookmarksButton = new KPushButton( deleteBookmarkGuiItem, this );
     connect( mDeleteBookmarksButton, SIGNAL(clicked(bool)), SLOT(onDeleteBookmarkButtonClicked()) );
     actionsLayout->addWidget( mDeleteBookmarksButton );
 
     actionsLayout->addStretch();
 
-    const KGuiItem gotoGuiItem( QString()/*i18n("&Go to")*/, "go-jump",
-                      i18nc("@info:tooltip","Moves the cursor to the selected bookmark."),
-                      i18nc("@info:whatsthis",
-                            "If you press this button, the cursor is moved to the position "
-                            "of the bookmark which has been last selected.") );
+    const KGuiItem gotoGuiItem =
+        KGuiItem( QString()/*i18n("&Go to")*/,
+                  QLatin1String("go-jump"),
+                  i18nc("@info:tooltip",
+                        "Moves the cursor to the selected bookmark."),
+                  i18nc("@info:whatsthis",
+                        "If you press this button, the cursor is moved to the position "
+                        "of the bookmark which has been last selected.") );
     mGotoBookmarkButton = new KPushButton( gotoGuiItem, this );
     connect( mGotoBookmarkButton, SIGNAL(clicked(bool)), SLOT(onGotoBookmarkButtonClicked()) );
     actionsLayout->addWidget( mGotoBookmarkButton );
 
-    const KGuiItem renameGuiItem( QString()/*i18n("&Go to")*/, "edit-rename",
-                      i18nc("@info:tooltip","Enables renaming of the selected bookmark."),
-                      i18nc("@info:whatsthis",
-                            "If you press this button, the name of the bookmark "
-                            "which was last selected can be edited.") );
+    const KGuiItem renameGuiItem =
+        KGuiItem( QString()/*i18n("&Go to")*/,
+                  QLatin1String("edit-rename"),
+                  i18nc("@info:tooltip",
+                        "Enables renaming of the selected bookmark."),
+                  i18nc("@info:whatsthis",
+                        "If you press this button, the name of the bookmark "
+                        "which was last selected can be edited.") );
     mRenameBookmarkButton = new KPushButton( renameGuiItem, this );
     connect( mRenameBookmarkButton, SIGNAL(clicked(bool)), SLOT(onRenameBookmarkButtonClicked()) );
     actionsLayout->addWidget( mRenameBookmarkButton );

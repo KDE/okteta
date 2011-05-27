@@ -77,7 +77,7 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
             {
                 mPrintFunction( mCodedOffset, bookmark.offset() );
 
-                result = QString().append( mCodedOffset );
+                result = QString::fromLatin1( mCodedOffset );
                 break;
             }
             case TitleColumnId:

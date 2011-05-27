@@ -35,7 +35,7 @@ namespace Kasten
 BookmarkEditPopup::BookmarkEditPopup( QWidget* parent )
   : AbstractLinePopup( parent )
 {
-    setIcon( KIcon("bookmark-new") );
+    setIcon( KIcon(QLatin1String("bookmark-new")) );
 
     mBookmarkNameLineEdit = new KLineEdit( this );
     connect( mBookmarkNameLineEdit, SIGNAL(returnPressed()), SLOT(onReturnPressed()) );
