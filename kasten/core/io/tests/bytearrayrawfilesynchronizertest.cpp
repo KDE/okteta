@@ -99,7 +99,7 @@ void ByteArrayRawFileSynchronizerTest::init()
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
+    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) );
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
     AbstractDocument* document = synchronizer->document();
@@ -131,9 +131,10 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 
 void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
+    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) );
 
-    ByteArrayDocument* document = new Kasten::ByteArrayDocument("New created for test.");
+    ByteArrayDocument* document =
+        new Kasten::ByteArrayDocument(QLatin1String("New created for test."));
     Okteta::PieceTableByteArrayModel* byteArray =
         qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
 
