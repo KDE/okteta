@@ -249,7 +249,7 @@ void StructTool::setSelectedStructuresInView()
     mData.clear();
     emit dataCleared();
 
-    QRegExp regex("'(.+)':'(.+)'");
+    QRegExp regex( QLatin1String("'(.+)':'(.+)'") );
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
     kDebug() << "loadedStructs " << loadedStructs;
     foreach(const QString& s,loadedStructs)

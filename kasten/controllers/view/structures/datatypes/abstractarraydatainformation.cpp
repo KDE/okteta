@@ -71,14 +71,14 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength, QScript
 
     //arrays with length zero are useless -> minimum is 1 (prevents integer underflow later
     if (newLength < 0)
-        return context ? context->throwError("new Array length is less than zero: "
+        return context ? context->throwError(QLatin1String("new Array length is less than zero: ")
             + QString::number(newLength)) : QScriptValue();
     if (newLength > 100000)
     {
         kWarning() << "attempting to set the length of the array" << name() << "to "
                 << newLength << " which would use too much memory";
 
-        return context ? context->throwError("new Array length is to large: "
+        return context ? context->throwError(QLatin1String("new Array length is to large: ")
                 + QString::number(newLength)) : QScriptValue();
     }
     int oldLength = childCount();
@@ -111,21 +111,21 @@ QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type, QScri
     //allow type just being a string (it must be a primitive type string)
     if (type.isString())
     {
-        newChildType = PrimitiveFactory::newInstance("dummy", type.toString());
+        newChildType = PrimitiveFactory::newInstance(QLatin1String("dummy"), type.toString());
     }
 
     //now just use ScriptValueConverter to see if type is a valid object
     else
     {
-        ScriptValueConverter conv(type, "dummy");
+        ScriptValueConverter conv(type, QLatin1String("dummy"));
         newChildType = conv.convert();
     }
     //return if conversion failed
     if (!newChildType)
     {
         if (context)
-            return context->throwError("String '" + type.toString()
-                    + "' is not a valid identifier for a primitive data type");
+            return context->throwError(QLatin1String("String '") + type.toString()
+                    + QLatin1String("' is not a valid identifier for a primitive data type"));
         else
             return QScriptValue();
     }
@@ -169,7 +169,7 @@ QVariant AbstractArrayDataInformation::childData(int row, int column, int role) 
     if (column == 0 && role == Qt::DisplayRole)
     {
         //name is asked for 
-        return '[' + QString::number(row) + ']';
+        return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
     }
     else 
     {

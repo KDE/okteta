@@ -43,9 +43,9 @@ StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
     mDir = tmp.dir();
 
     QString category = info.category();
-    if (category == "structure/js")
+    if (category == QLatin1String("structure/js"))
         mParser = new ScriptFileParser(this);
-    else if (category == "structure")
+    else if (category == QLatin1String("structure"))
         mParser = new OsdParser(this);
     else
     {

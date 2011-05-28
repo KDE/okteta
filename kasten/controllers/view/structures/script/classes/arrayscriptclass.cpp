@@ -31,7 +31,8 @@ ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* han
     childType = engine->toStringHandle(QLatin1String("childType"));
 
     mArrayPrototype = engine->newObject();
-    mArrayPrototype.setProperty("toString", engine->newFunction(Array_proto_toString));
+    mArrayPrototype.setProperty(QLatin1String("toString"),
+                                engine->newFunction(Array_proto_toString));
 }
 
 ArrayScriptClass::~ArrayScriptClass()

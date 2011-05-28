@@ -105,7 +105,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     settingsLayout->addWidget(mByteOrderSelection);
     baseLayout->addLayout(settingsLayout);
 
-    KIcon validateIcon = KIcon("document-sign");
+    KIcon validateIcon = KIcon(QLatin1String("document-sign"));
     mValidateButton = new KPushButton(validateIcon, i18n("Validate"), this);
     const QString validationToolTip = i18nc("@info:tooltip",
             "Validate all structures.");
@@ -128,7 +128,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     settingsLayout->addWidget(mLockStructureButton);
 
     settingsLayout->addStretch(); //stretch before the settings button
-    KIcon settings = KIcon("configure");
+    KIcon settings = KIcon(QLatin1String("configure"));
     mSettingsButton = new KPushButton(settings, i18n("Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
     mSettingsButton->setToolTip(settingsTooltip);
@@ -162,17 +162,17 @@ void StructView::openSettingsDlg(int page)
     //An instance of your dialog could be already created and could be cached,
     //in which case you want to display the cached dialog instead of creating
     //another one
-    if (KConfigDialog::showDialog("Structures Tool Settings"))
+    if (KConfigDialog::showDialog(QLatin1String("Structures Tool Settings")))
         return;
 
     //KConfigDialog didn't find an instance of this dialog, so lets create it :
-    KConfigDialog* dialog = new KConfigDialog(this, "Structures Tool Settings",
+    KConfigDialog* dialog = new KConfigDialog(this, QLatin1String("Structures Tool Settings"),
             StructViewPreferences::self());
     QWidget* displaySettings = new StructViewDisplaySettingsWidget();
     QWidget* structureSettings = new StructuresManagerView(mTool->manager(), this);
     QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
-            QString("configure"));
+            QLatin1String("configure"));
     //wrapper QWidget needed so that preferences are saved
     QWidget* structsWidget = new QWidget();
     {
@@ -182,9 +182,9 @@ void StructView::openSettingsDlg(int page)
         structsWidget->setLayout(layout);
     }
     KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n("Structures"),
-            "configure");
+            QLatin1String("configure"));
     KPageWidgetItem* management = dialog->addPage(structureSettings, i18n(
-            "Structures management"), "preferences-plugin");
+            "Structures management"), QLatin1String("preferences-plugin"));
     //User edited the configuration - update your local copies of the
     //configuration data
     connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(update()));
@@ -305,7 +305,7 @@ void StructView::setLockButtonStated(bool structureLocked)
 {
 if (structureLocked)
 {
-    mLockStructureButton->setIcon(KIcon("object-unlocked"));
+    mLockStructureButton->setIcon(KIcon(QLatin1String("object-unlocked")));
     mLockStructureButton->setText(i18nc("@action:pushbutton"
                     " unlock the starting offset of the current structure", "Unlock"));
     mLockStructureButton->setToolTip(i18nc("@info:tooltip",
@@ -314,7 +314,7 @@ if (structureLocked)
 }
 else
 {
-    mLockStructureButton->setIcon(KIcon("object-locked"));
+    mLockStructureButton->setIcon(KIcon(QLatin1String("object-locked")));
     mLockStructureButton->setText(i18nc("@action:pushbutton"
                     " unlock the starting offset of the current structure", "Lock"));
     mLockStructureButton->setToolTip(i18nc("@info:tooltip",

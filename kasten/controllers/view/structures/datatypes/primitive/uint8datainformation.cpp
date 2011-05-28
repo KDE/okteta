@@ -28,7 +28,7 @@ QString UInt8DataInformation::valueString() const
     int base = displayBase();
     QString num = QString::number(mValue, base);
     if (base == 16)
-        num = "0x" + num;
+        num.prepend(QLatin1String("0x"));
     if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
         num = KGlobal::locale()->formatNumber(num, false, 0);
     return num;

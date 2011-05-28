@@ -48,7 +48,8 @@ PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerI
     s_value = engine->toStringHandle(QLatin1String("value"));
 
     mPrimitivePrototype = engine->newObject();
-    mPrimitivePrototype.setProperty("toString", engine->newFunction(Primitive_proto_toString));
+    mPrimitivePrototype.setProperty(QLatin1String("toString"),
+                                    engine->newFunction(Primitive_proto_toString));
 }
 
 PrimitiveScriptClass::~PrimitiveScriptClass()

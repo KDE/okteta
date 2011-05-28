@@ -65,7 +65,7 @@ QString EnumDataInformation::valueString() const
 }
 QString EnumDataInformation::typeName() const
 {
-    return "enum";
+    return QLatin1String("enum");
 }
 QString EnumDataInformation::getTypeString() const
 {

@@ -181,8 +181,7 @@ QVariant DataInformation::data(int column, int role) const
     {
         //XXX better icons?
         if (mHasBeenValidated)
-            return mValidationSuccessful ? KIcon("task-complete") : KIcon(
-                    "dialog-warning");
+            return KIcon(QLatin1String(mValidationSuccessful ? "task-complete":"dialog-warning"));
     }
     return QVariant();
 }

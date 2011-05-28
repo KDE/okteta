@@ -63,7 +63,7 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresManager* manager,
     //    buttonsLayout->addWidget(mApplyChangesButton, 0, Qt::AlignCenter);
 
     mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
-            "okteta-structures.knsrc", this);
+            QLatin1String("okteta-structures.knsrc"), this);
     connect(mGetNewStructuresButton,
             SIGNAL(dialogFinished(const KNS3::Entry::List&)),
             SLOT(onGetNewStructuresClicked(const KNS3::Entry::List&)));
@@ -248,9 +248,9 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
 
 
     mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
-            "Structure Definitions"), QString("structure"), mManager->config());
+            "Structure Definitions"), QLatin1String("structure"), mManager->config());
     mStructuresSelector->addPlugins(dynamicPlugins, KPluginSelector::ReadConfigFile,
-            i18n("Dynamic Structure Definitions"), QString("structure/js"),
+            i18n("Dynamic Structure Definitions"), QLatin1String("structure/js"),
             mManager->config());
     mStructuresSelector->load();
     mStructuresSelector->updatePluginsState();

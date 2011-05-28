@@ -45,7 +45,7 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         if (!mData)
         {
             //just a dummy, this object should be deleted anyway
-            mData = PrimitiveFactory::newInstance("failed_to_load__this_is_a_dummy",
+            mData = PrimitiveFactory::newInstance(QLatin1String("failed_to_load__this_is_a_dummy"),
                     Type_Int32, 0);
             mWasAbleToParse = false;
         }

@@ -227,8 +227,9 @@ void DataInformationWithChildren::calculateValidationState()
 void DataInformationWithChildren::setChildren(QScriptValue children)
 {
     if (children.isNull() || children.isUndefined())
-        ScriptUtils::object()->logScriptError("attempting to set children of "
-                + name() + "to null. This must be and error in the script.");
+        ScriptUtils::object()->logScriptError(
+            QLatin1String("attempting to set children of ")
+            + name() + QLatin1String(" to null. This must be and error in the script."));
     ScriptValueConverter conv(children, name());
     QList<DataInformation*> convertedVals = conv.convertValues();
 

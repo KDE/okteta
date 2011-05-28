@@ -41,35 +41,35 @@
 PrimitiveDataType PrimitiveFactory::typeStringToType(QString& string)
 {
     QString typeStr = string.trimmed().toLower();
-    if (typeStr == "bool8")
+    if (typeStr == QLatin1String("bool8"))
         return Type_Bool8;
-    if (typeStr == "bool16")
+    if (typeStr == QLatin1String("bool16"))
         return Type_Bool16;
-    if (typeStr == "bool32")
+    if (typeStr == QLatin1String("bool32"))
         return Type_Bool32;
-    if (typeStr == "bool64")
+    if (typeStr == QLatin1String("bool64"))
         return Type_Bool64;
-    if (typeStr == "int8")
+    if (typeStr == QLatin1String("int8"))
         return Type_Int8;
-    if (typeStr == "uint8")
+    if (typeStr == QLatin1String("uint8"))
         return Type_UInt8;
-    if (typeStr == "int16")
+    if (typeStr == QLatin1String("int16"))
         return Type_Int16;
-    if (typeStr == "uint16")
+    if (typeStr == QLatin1String("uint16"))
         return Type_UInt16;
-    if (typeStr == "int32")
+    if (typeStr == QLatin1String("int32"))
         return Type_Int32;
-    if (typeStr == "uint32")
+    if (typeStr == QLatin1String("uint32"))
         return Type_UInt32;
-    if (typeStr == "int64")
+    if (typeStr == QLatin1String("int64"))
         return Type_Int64;
-    if (typeStr == "uint64")
+    if (typeStr == QLatin1String("uint64"))
         return Type_UInt64;
-    if (typeStr == "char")
+    if (typeStr == QLatin1String("char"))
         return Type_Char;
-    if (typeStr == "float")
+    if (typeStr == QLatin1String("float"))
         return Type_Float;
-    if (typeStr == "double")
+    if (typeStr == QLatin1String("double"))
         return Type_Double;
 
     kWarning() << "PrimitiveDataInformation::typeStringToType(): could not find"

@@ -29,7 +29,7 @@ QString Int16DataInformation::valueString() const
     QString num = QString::number(mValue, base);
     num = correctSignedValue(num, base);
     if (base == 16)
-        num = "0x" + num;
+        num.prepend(QLatin1String("0x"));
     if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
         num = KGlobal::locale()->formatNumber(num, false, 0);
     return num;

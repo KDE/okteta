@@ -29,17 +29,17 @@ QString CharDataInformation::valueString() const
     //TODO char codec
     QChar qchar = QChar::fromLatin1(mValue);
     qchar = qchar.isPrint() ? qchar : QChar(QChar::ReplacementCharacter);
-    QString charStr = '\'' + qchar + '\'';
+    QString charStr = QLatin1Char('\'') + qchar + QLatin1Char('\'');
     if (Kasten::StructViewPreferences::showCharNumericalValue())
     {
         int base = displayBase();
         QString num = QString::number(mValue, base);
         if (base == 16)
-            num = "0x" + num;
+            num.prepend(QLatin1String("0x"));
         if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base
                 == 10)
             num = KGlobal::locale()->formatNumber(num, false, 0);
-        charStr += " (" + num + ')';
+        charStr += QLatin1String(" (") + num + QLatin1Char(')');
     }
     return charStr;
 }
@@ -65,10 +65,10 @@ QVariant CharDataInformation::dataFromWidget(const QWidget* w) const
             //TODO char codec
             return (unsigned char) text.at(0).toLatin1();
         }
-        if (text.at(0) == '\\')
+        if (text.at(0) == QLatin1Char('\\'))
         {
             //escape sequence
-            if (text.at(1) == 'x')
+            if (text.at(1) == QLatin1Char('x'))
             {
                 //hex escape:
                 bool okay;
@@ -79,15 +79,15 @@ QVariant CharDataInformation::dataFromWidget(const QWidget* w) const
                 else
                     return QVariant();
             }
-            else if (text.at(1) == 'n')
+            else if (text.at(1) == QLatin1Char('n'))
             {
                 return (quint8) '\n'; //newline
             }
-            else if (text.at(1) == 't')
+            else if (text.at(1) == QLatin1Char('t'))
             {
                 return (quint8) '\t'; //tab
             }
-            else if (text.at(1) == 'r')
+            else if (text.at(1) == QLatin1Char('r'))
             {
                 return (quint8) '\r'; //cr
             }

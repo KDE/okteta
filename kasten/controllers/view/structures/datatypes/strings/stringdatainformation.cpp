@@ -150,7 +150,7 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
         if (column == ColumnName)
         {
             //TODO termination char
-            return '[' + QString::number(row) + ']';
+            return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
         }
         else if (column == ColumnType)
         {

@@ -43,7 +43,7 @@ QList<const TopLevelDataInformation*> ScriptFileParser::parseStructures()
 {
     QList<const TopLevelDataInformation*> ret;
     TopLevelDataInformation* topData = new TopLevelDataInformation(NULL, QFileInfo(
-            mDef->dir().absoluteFilePath("main.js")), true,
+            mDef->dir().absoluteFilePath(QLatin1String("main.js"))), true,
             mDef->pluginInfo().pluginName());
     if (topData->wasAbleToParse())
         ret << topData;

@@ -37,7 +37,8 @@ StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* hand
     s_termMode = eng->toStringHandle(QLatin1String("termMod"));
 
     mStringPrototype = eng->newObject();
-    mStringPrototype.setProperty("toString", eng->newFunction(String_proto_toString));
+    mStringPrototype.setProperty(QLatin1String("toString"),
+                                 eng->newFunction(String_proto_toString));
 }
 
 StringScriptClass::~StringScriptClass()

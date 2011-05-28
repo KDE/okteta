@@ -41,7 +41,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
         QWidget* parent) :
     QWidget(parent), mTool(tool)
 {
-    KConfigDialogManager::changedMap()->insert("StructureAddRemoveWidget",
+    KConfigDialogManager::changedMap()->insert(QLatin1String("StructureAddRemoveWidget"),
             SIGNAL(changed(const QStringList&)));
     QHBoxLayout* baseLayout;
     QVBoxLayout* tree1Layout;
@@ -73,17 +73,17 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
 
     leftRightLayout = new QVBoxLayout();
     leftRightLayout->addStretch();
-    mRightButton = new KPushButton(KIcon("arrow-right"), 0, this);
+    mRightButton = new KPushButton(KIcon(QLatin1String("arrow-right")), QString(), this);
     leftRightLayout->addWidget(mRightButton);
-    mLeftButton = new KPushButton(KIcon("arrow-left"), 0, this);
+    mLeftButton = new KPushButton(KIcon(QLatin1String("arrow-left")), QString(), this);
     leftRightLayout->addWidget(mLeftButton);
     leftRightLayout->addStretch();
 
     upDownLayout = new QVBoxLayout();
     upDownLayout->addStretch();
-    mUpButton = new KPushButton(KIcon("arrow-up"), 0, this);
+    mUpButton = new KPushButton(KIcon(QLatin1String("arrow-up")), QString(), this);
     upDownLayout->addWidget(mUpButton);
-    mDownButton = new KPushButton(KIcon("arrow-down"), 0, this);
+    mDownButton = new KPushButton(KIcon(QLatin1String("arrow-down")), QString(), this);
     upDownLayout->addWidget(mDownButton);
     upDownLayout->addStretch();
 
@@ -101,7 +101,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     buildAvailableList();
 
     //already loaded defs:
-    QRegExp regex("'(.+)':'(.+)'");
+    QRegExp regex(QLatin1String("'(.+)':'(.+)'"));
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
     foreach(const QString& s, loadedStructs)
         {
@@ -224,7 +224,7 @@ void StructureAddRemoveWidget::syncData()
     for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i)
     {
         QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
-        QString dataStr = QString("\'%1\':\'%2\'").arg(item->text(1)).arg(
+        QString dataStr = QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1)).arg(
                 item->text(0));
         strings.append(dataStr);
     }
@@ -264,7 +264,7 @@ void StructureAddRemoveWidget::updateAvailable()
         if (!plugins.contains(item->text(1)))
         {
             kDebug()
-                << "removed item: " << QString("\'%1\':\'%2\'").arg(item->text(1),
+                << "removed item: " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
                         item->text(0));
 
             changed = true;
@@ -273,14 +273,14 @@ void StructureAddRemoveWidget::updateAvailable()
         else
         {
             kDebug()
-                << "item " << QString("\'%1\':\'%2\'").arg(item->text(1),
+                << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
                         item->text(0)) << "still loaded -> keep";
         }
     }
     foreach(QTreeWidgetItem* itm,toRemove)
         {
             kDebug()
-                << "item " << QString("\'%1\':\'%2\'").arg(itm->text(1),
+                << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(itm->text(1),
                         itm->text(0)) << "removed";
             delete mTreeSelected->takeTopLevelItem(
                     mTreeSelected->indexOfTopLevelItem(itm));

@@ -33,7 +33,8 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
 
     //TODO remove, every subclass should have proto
     mDefaultPrototype = engine->newObject();
-    mDefaultPrototype.setProperty("toString", engine->newFunction(Default_proto_toString));
+    mDefaultPrototype.setProperty(QLatin1String("toString"),
+                                  engine->newFunction(Default_proto_toString));
 }
 
 DefaultScriptClass::~DefaultScriptClass()
@@ -191,5 +192,5 @@ QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QSc
         kDebug() << "could not cast data";
         return eng->undefinedValue();
     }
-    return data->typeName() + ' ' + data->name();
+    return QString(data->typeName() + QLatin1Char(' ') + data->name());
 }

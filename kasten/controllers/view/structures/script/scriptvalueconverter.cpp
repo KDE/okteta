@@ -64,7 +64,7 @@ DataInformation* ScriptValueConverter::convert()
         evaluatedVal = mValue;
     else
     {
-        ScriptUtils::object()->logScriptError("value is neither function nor object");
+        ScriptUtils::object()->logScriptError(QLatin1String("value is neither function nor object"));
         return NULL;
     }
         //FIXME evaluate all -> make this return QLIst<DataInformation*>
@@ -81,7 +81,7 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QSt
     if (name.isEmpty())
         name = i18n("<no name specified>");
 
-    QString type = value.property("type").toString().toLower(); //to lower just to be safe
+    QString type = value.property(QLatin1String("type")).toString().toLower(); //to lower just to be safe
 
     if (type == QLatin1String("array"))
         returnVal = toArray(value, name);
@@ -108,9 +108,9 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QSt
     if (returnVal)
     {
         //successfully parsed -> add the validate and update functions to the additional data
-        QScriptValue updateFunc = value.property("updateFunc");
-        QScriptValue validationFunc = value.property("validationFunc");
-        QScriptValue byteOrder = value.property("byteOrder");
+        QScriptValue updateFunc = value.property(QLatin1String("updateFunc"));
+        QScriptValue validationFunc = value.property(QLatin1String("validationFunc"));
+        QScriptValue byteOrder = value.property(QLatin1String("byteOrder"));
         //TODO allow int values too
         returnVal->setByteOrder(AbstractStructureParser::byteOrderFromString(byteOrder.toString()));
         AdditionalData* aData = 0;
@@ -135,19 +135,19 @@ AbstractArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value
         QString& name) const
 {
     //we can safely assume that type == "array"
-    int length = value.property("length").toInt32();
+    int length = value.property(QLatin1String("length")).toInt32();
     if (length <= 0)
     {
-        ScriptUtils::object()->logScriptError("array length <= 0 -> return NULL");
+        ScriptUtils::object()->logScriptError(QLatin1String("array length <= 0 -> return NULL"));
         return NULL;
     }
-    QScriptValue childType = value.property("childType");
+    QScriptValue childType = value.property(QLatin1String("childType"));
     QScopedPointer<DataInformation> arrayType(toDataInformation(childType,
-            childType.property("type").toString()));
+            childType.property(QLatin1String("type")).toString()));
     if (!arrayType)
     {
         ScriptUtils::object()->logScriptError(
-                "could not parse array type -> return NULL");
+                QLatin1String("could not parse array type -> return NULL"));
         return NULL;
     }
 
@@ -159,14 +159,14 @@ AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
         QScriptValue& value, QString& name) const
 {
     //we can safely assume that type == "bitfield"
-    int width = value.property("width").toInt32();
+    int width = value.property(QLatin1String("width")).toInt32();
     if (width <= 0)
     {
         ScriptUtils::object()->logScriptError(
-                "bitfield has a length of <= 0 -> return NULL");
+                QLatin1String("bitfield has a length of <= 0 -> return NULL"));
         return NULL;
     }
-    QString bitfieldType = value.property("bitfieldType").toString();
+    QString bitfieldType = value.property(QLatin1String("bitfieldType")).toString();
     if (bitfieldType.toLower() == QLatin1String("bool"))
         return new BoolBitfieldDataInformation(name, width);
 
@@ -176,7 +176,7 @@ AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
     else if (bitfieldType.toLower() == QLatin1String("bool"))
         return new BoolBitfieldDataInformation(name, width);
 
-    ScriptUtils::object()->logScriptError("invalid bitfield type specified:"
+    ScriptUtils::object()->logScriptError(QLatin1String("invalid bitfield type specified:")
             + bitfieldType);
     return NULL;
 }
@@ -184,13 +184,13 @@ AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
 PrimitiveDataInformation * ScriptValueConverter::toPrimitive(QScriptValue& value,
         QString& name) const
 {
-    QString typeString = value.property("type").toString();
+    QString typeString = value.property(QLatin1String("type")).toString();
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(
             typeString);
     if (primitiveType == Type_NotPrimitive)
     {
-        ScriptUtils::object()->logScriptError("unrecognised type: '" + typeString
-                + "' -> return NULL");
+        ScriptUtils::object()->logScriptError(QLatin1String("unrecognised type: '") + typeString
+                + QLatin1String("' -> return NULL"));
         return NULL;
     }
     return PrimitiveFactory::newInstance(name, primitiveType);
@@ -201,7 +201,7 @@ StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value,
 {
     QList<DataInformation*> fields;
 
-    QScriptValue valueChildren = value.property("children");
+    QScriptValue valueChildren = value.property(QLatin1String("children"));
     QScriptValueIterator it(valueChildren);
     while (it.hasNext())
     {
@@ -215,8 +215,8 @@ StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value,
     }
     if (fields.length() == 0)
     {
-        ScriptUtils::object()->logScriptError("no children were found in element '"
-                + name + "' -> return NULL");
+        ScriptUtils::object()->logScriptError(QLatin1String("no children were found in element '")
+                + name + QLatin1String("' -> return NULL"));
         return NULL;
     }
 
@@ -234,7 +234,7 @@ UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value,
 {
     QList<DataInformation*> fields;
 
-    QScriptValue valueChildren = value.property("children");
+    QScriptValue valueChildren = value.property(QLatin1String("children"));
     QScriptValueIterator it(valueChildren);
     while (it.hasNext())
     {
@@ -248,8 +248,8 @@ UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value,
     }
     if (fields.length() == 0)
     {
-        ScriptUtils::object()->logScriptError("no children were found in element '"
-                + name + "' -> return NULL");
+        ScriptUtils::object()->logScriptError(QLatin1String("no children were found in element '")
+                + name + QLatin1String("' -> return NULL"));
         return NULL;
     }
 
@@ -265,7 +265,7 @@ UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value,
 EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& name) const
 {
     QMap<AllPrimitiveTypes, QString> enumValues;
-    QScriptValueIterator it(value.property("enumValues"));
+    QScriptValueIterator it(value.property(QLatin1String("enumValues")));
     while (it.hasNext())
     {
         it.next();
@@ -275,16 +275,16 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
             enumValues.insert(val.toUInt32(), it.name());
         }
     }
-    QString typeString = value.property("enumType").toString();
+    QString typeString = value.property(QLatin1String("enumType")).toString();
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(
             typeString);
     if (primitiveType == Type_NotPrimitive)
     {
-        ScriptUtils::object()->logScriptError("unrecognised enum type: '"
-                + typeString + "' -> return NULL");
+        ScriptUtils::object()->logScriptError(QLatin1String("unrecognised enum type: '")
+                + typeString + QLatin1String("' -> return NULL"));
         return NULL;
     }
-    QString enumName = value.property("enumName").toString();
+    QString enumName = value.property(QLatin1String("enumName")).toString();
     EnumDefinition::Ptr def(new EnumDefinition(enumValues, enumName, primitiveType));
     PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(name,
             primitiveType);
@@ -296,10 +296,10 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
 
 StringDataInformation* ScriptValueConverter::toString(QScriptValue& value, QString& name) const
 {
-    const QScriptValue terminatedBy = value.property("terminatedBy");
-    const QScriptValue charCount = value.property("maxCharCount");
-    const QScriptValue byteCount = value.property("maxByteCount");
-    const QScriptValue encoding = value.property("encoding");
+    const QScriptValue terminatedBy = value.property(QLatin1String("terminatedBy"));
+    const QScriptValue charCount = value.property(QLatin1String("maxCharCount"));
+    const QScriptValue byteCount = value.property(QLatin1String("maxByteCount"));
+    const QScriptValue encoding = value.property(QLatin1String("encoding"));
 
     StringData::TerminationModes mode = StringData::None;
     if (terminatedBy.isNumber())

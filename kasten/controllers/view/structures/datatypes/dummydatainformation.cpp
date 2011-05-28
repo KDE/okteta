@@ -80,7 +80,7 @@ QWidget* DummyDataInformation::createEditWidget(QWidget*) const
 QString DummyDataInformation::typeName() const
 {
     Q_ASSERT(false);
-    return "dummy";
+    return QLatin1String("dummy");
 }
 
 DataInformation* DummyDataInformation::clone() const

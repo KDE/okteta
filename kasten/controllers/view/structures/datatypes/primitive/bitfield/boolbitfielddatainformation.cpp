@@ -55,7 +55,7 @@ QString BoolBitfieldDataInformation::valueString() const
     {
         QString num = QString::number(val, base);
         if (base == 16)
-            num = "0x" + num;
+            num.prepend(QLatin1String("0x"));
         if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base
                 == 10)
             num = KGlobal::locale()->formatNumber(num, false, 0);

@@ -59,7 +59,7 @@ void ScriptUtils::dumpQScriptValue(QScriptValue& val, const char* file, int line
 void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& val,
         AllPrimitiveTypes allPrim, PrimitiveDataType actualType)
 {
-    QString type;
+    const char* type;
     switch (actualType)
     {
     case Type_Bool64:
@@ -101,32 +101,33 @@ void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& val,
         type = "int64";
         break;
     default:
+        type = 0;
         break;
     }
-    val.setProperty("type", type);
-    val.setProperty("char", QString(QLatin1Char(allPrim.ubyteValue)));
-    val.setProperty("int8", allPrim.byteValue);
-    val.setProperty("uint8", allPrim.ubyteValue);
-    val.setProperty("int16", allPrim.shortValue);
-    val.setProperty("uint16", allPrim.ushortValue);
-    val.setProperty("int32", allPrim.intValue);
-    val.setProperty("uint32", allPrim.uintValue);
+    val.setProperty(QLatin1String("type"), QLatin1String(type));
+    val.setProperty(QLatin1String("char"), QString(QLatin1Char(allPrim.ubyteValue)));
+    val.setProperty(QLatin1String("int8"), allPrim.byteValue);
+    val.setProperty(QLatin1String("uint8"), allPrim.ubyteValue);
+    val.setProperty(QLatin1String("int16"), allPrim.shortValue);
+    val.setProperty(QLatin1String("uint16"), allPrim.ushortValue);
+    val.setProperty(QLatin1String("int32"), allPrim.intValue);
+    val.setProperty(QLatin1String("uint32"), allPrim.uintValue);
     //QtScript has no support for 64 bit ints, add another value which contains the higher 32 bits
     //XXX any better solution for this?
-    val.setProperty("int64high32bits", qint32(allPrim.ulongValue >> 32));
-    val.setProperty("uint64high32bits", quint32(allPrim.ulongValue >> 32));
+    val.setProperty(QLatin1String("int64high32bits"), qint32(allPrim.ulongValue >> 32));
+    val.setProperty(QLatin1String("uint64high32bits"), quint32(allPrim.ulongValue >> 32));
 
-    val.setProperty("float", allPrim.floatValue);
-    val.setProperty("double", allPrim.doubleValue);
+    val.setProperty(QLatin1String("float"), allPrim.floatValue);
+    val.setProperty(QLatin1String("double"), allPrim.doubleValue);
     QScriptValue toStringFunc = val.engine()->newFunction(allPrimitivesToString);
-    val.setProperty("toString", toStringFunc);
+    val.setProperty(QLatin1String("toString"), toStringFunc);
 }
 
 QScriptValue ScriptUtils::allPrimitivesToString(QScriptContext* ctx,
         QScriptEngine* eng)
 {
     Q_UNUSED(eng)
-    QString type = ctx->thisObject().property("type").toString();
+    QString type = ctx->thisObject().property(QLatin1String("type")).toString();
     return ctx->thisObject().property(type).toString();
 }
 
