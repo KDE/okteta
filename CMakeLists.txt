@@ -28,9 +28,15 @@ if (BIG_ENDIAN)
   set( NO_STRUCTURES_TOOL TRUE )
 endif (BIG_ENDIAN)
 
+add_definitions(
+    -DQT_USE_FAST_CONCATENATION
+    -DQT_USE_FAST_OPERATOR_PLUS
+    -DQT_NO_CAST_TO_ASCII
+    -DQT_NO_CAST_FROM_ASCII
+)
+
 # helper libs
 add_subdirectory( libs )
-
 
 set( OKTETALIBS_MAJOR_VERSION 0 )
 set( OKTETALIBS_MINOR_VERSION 7 )
