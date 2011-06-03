@@ -236,7 +236,8 @@ void StringsExtractView::onCopyButtonClicked()
     foreach( const QModelIndex &index, selectedRows )
     {
         const int i = mSortFilterProxyModel->mapToSource(index).row();
-        strings += ( containedStringList->at( i ).string() + '\n' ); //TODO: specific linefeed for platforms
+        strings += containedStringList->at( i ).string();
+        strings += QLatin1Char('\n'); //TODO: specific linefeed for platforms
     }
     QApplication::clipboard()->setText( strings );
 }
