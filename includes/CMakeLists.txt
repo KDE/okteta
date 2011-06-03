@@ -62,6 +62,6 @@ set( okteta_CamelCase_HDRS
 )
 
 install( FILES ${okteta_CamelCase_HDRS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/Okteta1
+  DESTINATION ${INCLUDE_INSTALL_DIR}/KDE/Okteta
   COMPONENT Devel
 )
