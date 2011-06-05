@@ -11,8 +11,8 @@ set( kastencore_LIB  kastencore ) # ${KASTEN_ABI_VERSION} )
 set( kastengui_LIB  kastengui ) #${KASTEN_ABI_VERSION} )
 set( kastencontrollers_LIB  kastencontrollers ) #${KASTEN_ABI_VERSION} )
 
-set( KASTEN_LIB_SOVERSION ${KASTEN_ABI_VERSION} )
-set( KASTEN_LIB_VERSION ${KASTEN_VERSION} )
+set( KASTEN_LIB_SOVERSION ${GENERIC_LIB_SOVERSION} ) #${KASTEN_ABI_VERSION} )
+set( KASTEN_LIB_VERSION ${GENERIC_LIB_VERSION} ) #${KASTEN_VERSION} )
 
 add_subdirectory( core )
 add_subdirectory( gui )
