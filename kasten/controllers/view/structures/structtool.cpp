@@ -407,5 +407,4 @@ void StructTool::onChildItemDataChanged()
     mCurrentItemDataChanged = true;
 }
 
-
 }

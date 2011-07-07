@@ -38,6 +38,8 @@
 #include <QFileInfo>
 #include <QStringList>
 
+#include <kdemacros.h>
+
 class DataInformation;
 class TopLevelDataInformation;
 namespace Okteta
@@ -85,6 +87,7 @@ public:
     bool canStructureBeLocked(QModelIndex idx) const;
 Q_SIGNALS:
     void dataChanged(int row, void* data); //actually a DataInformation*
+    KDE_DEPRECATED void dataChanged(); //only needed for binary compatibility, never used
     void dataCleared();
     void byteOrderChanged();
     void cursorIndexChanged();
