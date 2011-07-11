@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,8 @@
 // Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
+// C++
+#include <limits>
 
 
 namespace Kasten
@@ -45,21 +47,32 @@ void ByteArrayRawFileReloadThread::run()
 {
     const qint64 fileSize = mFile->size();
 
-    mData.resize( fileSize );
-    mSuccess = ( mData.size() == fileSize );
+    // check if the file content can be addressed with int
+    const qint32 maxInt32 = std::numeric_limits<qint32>::max();
+    const int maxInt = std::numeric_limits<int>::max();
+
+    mSuccess = ( maxInt > maxInt32 || fileSize <= maxInt32 );
 
     if( mSuccess )
     {
-        QDataStream inStream( mFile );
-        inStream.readRawData( mData.data(), fileSize );
+        mData.resize( fileSize );
+        mSuccess = ( mData.size() == fileSize );
 
-        mSuccess = ( inStream.status() == QDataStream::Ok );
+        if( mSuccess )
+        {
+            QDataStream inStream( mFile );
+            inStream.readRawData( mData.data(), fileSize );
 
-        if( ! mSuccess )
-            mErrorString = mFile->errorString();
+            mSuccess = ( inStream.status() == QDataStream::Ok );
+
+            if( ! mSuccess )
+                mErrorString = mFile->errorString();
+        }
+        else
+            mErrorString = i18n( "There is not enough free working memory to load this file." );
     }
     else
-        mErrorString = i18n( "There is not enough working memory to load this file." );
+        mErrorString = i18n( "Support to load files larger than 2 GiB on 32-bit systems has not yet been implemented." );
 
     emit documentReloaded( mSuccess );
 }

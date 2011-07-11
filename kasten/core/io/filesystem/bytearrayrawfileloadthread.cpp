@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,6 +34,8 @@
 #include <QtGui/QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
+// C++
+#include <limits>
 
 
 namespace Kasten
@@ -43,34 +45,45 @@ void ByteArrayRawFileLoadThread::run()
 {
     const qint64 fileSize = mFile->size();
 
-    // allocate working memory
-    QByteArray data;
-    data.resize( fileSize );
-    bool success = ( data.size() == fileSize );
+    // check if the file content can be addressed with int
+    const qint32 maxInt32 = std::numeric_limits<qint32>::max();
+    const int maxInt = std::numeric_limits<int>::max();
+
+    bool success = ( maxInt > maxInt32 || fileSize <= maxInt32 );
 
     if( success )
     {
-        QDataStream inStream( mFile );
-        inStream.readRawData( data.data(), fileSize );
-
-        success = ( inStream.status() == QDataStream::Ok );
+        // allocate working memory
+        QByteArray data;
+        data.resize( fileSize );
+        bool success = ( data.size() == fileSize );
 
         if( success )
         {
-            Okteta::PieceTableByteArrayModel* byteArray = new Okteta::PieceTableByteArrayModel( data );
-            byteArray->setModified( false );
+            QDataStream inStream( mFile );
+            inStream.readRawData( data.data(), fileSize );
 
-            mDocument = new ByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
-            mDocument->setOwner( Person::createEgo() );
-            // TODO: make PieceTableByteArrayModel a child by constructor argument parent
-            byteArray->moveToThread( QApplication::instance()->thread() );
-            mDocument->moveToThread( QApplication::instance()->thread() );
+            success = ( inStream.status() == QDataStream::Ok );
+
+            if( success )
+            {
+                Okteta::PieceTableByteArrayModel* byteArray = new Okteta::PieceTableByteArrayModel( data );
+                byteArray->setModified( false );
+
+                mDocument = new ByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
+                mDocument->setOwner( Person::createEgo() );
+                // TODO: make PieceTableByteArrayModel a child by constructor argument parent
+                byteArray->moveToThread( QApplication::instance()->thread() );
+                mDocument->moveToThread( QApplication::instance()->thread() );
+            }
+            else
+                mErrorString = mFile->errorString();
         }
         else
-            mErrorString = mFile->errorString();
+            mErrorString = i18n( "There is not enough free working memory to load this file." );
     }
     else
-        mErrorString = i18n( "There is not enough working memory to load this file." );
+        mErrorString = i18n( "Support to load files larger than 2 GiB on 32-bit systems has not yet been implemented." );
 
     if( ! success )
         mDocument = 0;
