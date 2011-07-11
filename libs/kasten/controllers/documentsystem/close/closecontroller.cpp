@@ -24,6 +24,7 @@
 
 // Kasten core
 #include <documentmanager.h>
+#include <abstractdocument.h>
 // KDE
 #include <KActionCollection>
 #include <KAction>
