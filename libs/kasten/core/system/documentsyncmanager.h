@@ -53,7 +53,6 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
 
   public:
     void load( const KUrl &url );
-    void load();
 // TODO: better name
     bool setSynchronizer( AbstractDocument* document );
     bool canClose( AbstractDocument* document );

@@ -26,6 +26,7 @@
 #include <documentsyncmanager.h>
 // KDE
 #include <KUrl>
+#include <KFileDialog>
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include <KStandardAction>
@@ -64,7 +65,12 @@ Q_UNUSED( model )
 
 void LoaderController::load()
 {
-    mSyncManager->load();
+    static const QString allFileNamesFilter = QLatin1String(AllFileNamesFilter);
+    const KUrl::List urls =
+        KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, allFileNamesFilter, /*mWidget*/0 );
+
+    foreach( const KUrl& url, urls )
+        mSyncManager->load( url );
 }
 
 void LoaderController::loadRecent( const KUrl &url )

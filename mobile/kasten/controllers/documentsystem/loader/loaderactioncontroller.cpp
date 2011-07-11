@@ -26,6 +26,7 @@
 #include <documentsyncmanager.h>
 // KDE
 #include <KLocale>
+#include <KFileDialog>
 // Qt
 #include <QtGui/QMenuBar>
 
@@ -50,7 +51,12 @@ Q_UNUSED( model )
 
 void LoaderActionController::load()
 {
-    mSyncManager->load();
+    static const QString allFileNamesFilter = QLatin1String(AllFileNamesFilter);
+    const KUrl::List urls =
+        KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, allFileNamesFilter, /*mWidget*/0 );
+
+    foreach( const KUrl& url, urls )
+        mSyncManager->load( url );
 }
 
 LoaderActionController::~LoaderActionController()

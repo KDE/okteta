@@ -44,8 +44,6 @@
 namespace Kasten
 {
 
-static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_chars
-
 
 DocumentSyncManager::DocumentSyncManager( DocumentManager* manager )
   : mManager( manager ),
@@ -86,15 +84,6 @@ KUrl DocumentSyncManager::urlOf( AbstractDocument* document ) const
 void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory )
 {
     mSynchronizerFactory = synchronizerFactory;
-}
-
-void DocumentSyncManager::load()
-{
-    static const QString allFileNamesFilter = QLatin1String(AllFileNamesFilter);
-    KUrl::List urls = KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, allFileNamesFilter, mWidget );
-
-    foreach( const KUrl& url, urls )
-        load( url );
 }
 
 void DocumentSyncManager::load( const KUrl &url )
