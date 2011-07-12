@@ -67,11 +67,6 @@ Q_UNUSED( selection )
     return model ? mExporterList : QList<AbstractModelExporter*>();
 }
 
-void ModelCodecManager::setWidget( QWidget* widget )
-{
-    mWidget = widget;
-}
-
 void ModelCodecManager::setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog )
 {
     mOverwriteDialog = overwriteDialog;
@@ -118,7 +113,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         i18nc( "@title:window", "Export" );
     do
     {
-        KFileDialog exportFileDialog( /*mWorkingUrl.url()*/KUrl(), QString(), mWidget );
+        KFileDialog exportFileDialog( /*mWorkingUrl.url()*/KUrl(), QString(), /*mWidget*/0 );
 
         exportFileDialog.setOperationMode( KFileDialog::Saving );
         exportFileDialog.setMode( KFile::File );
@@ -138,7 +133,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
 
         if( !exportUrl.isEmpty() )
         {
-            const bool isUrlInUse = KIO::NetAccess::exists( exportUrl, KIO::NetAccess::DestinationSide, mWidget );
+            const bool isUrlInUse = KIO::NetAccess::exists( exportUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
 
             if( isUrlInUse )
             {
@@ -155,7 +150,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
             }
 
             AbstractExportJob* exportJob = exporter->startExport( model, selection, exportUrl );
-            exportDone = JobManager::executeJob( exportJob, mWidget );
+            exportDone = JobManager::executeJob( exportJob );
 
 //                 if( exportDone )
 //                     emit urlUsed( exportUrl );

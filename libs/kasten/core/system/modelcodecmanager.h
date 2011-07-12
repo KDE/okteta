@@ -73,14 +73,12 @@ class KASTENCORE_EXPORT ModelCodecManager : public QObject
     void setEncoders( const QList<AbstractModelStreamEncoder*>& encoderList );
     void setDecoders( const QList<AbstractModelStreamDecoder*>& decoderList );
     void setGenerators( const QList<AbstractModelDataGenerator*>& generatorList );
-    void setWidget( QWidget* widget );
     void setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog );
 
   protected:
     // unless there is a singleton
     DocumentManager* mManager;
     // used for dialogs, TODO: create (or use?) global instance for this
-    QWidget* mWidget;
     AbstractOverwriteDialog* mOverwriteDialog;
 
     // temporary hack: hard coded codecs for byte arrays
