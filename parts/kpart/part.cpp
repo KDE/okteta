@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta KPart module, made within the KDE community.
 
-    Copyright 2003,2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2003,2007,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -153,7 +153,7 @@ bool OktetaPart::openFile()
 
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad( localFilePath() );
     connect( loadJob, SIGNAL(documentLoaded( Kasten::AbstractDocument* )), SLOT(onDocumentLoaded( Kasten::AbstractDocument* )) );
-    Kasten::JobManager::executeJob( loadJob, widget() );
+    Kasten::JobManager::executeJob( loadJob );
 
     delete synchronizerFactory;
 
@@ -166,7 +166,7 @@ bool OktetaPart::saveFile()
 
     Kasten::AbstractSyncWithRemoteJob *syncJob =
         synchronizer->startSyncWithRemote( localFilePath(), Kasten::AbstractModelSynchronizer::ReplaceRemote );
-    const bool syncSucceeded = Kasten::JobManager::executeJob( syncJob, widget() );
+    const bool syncSucceeded = Kasten::JobManager::executeJob( syncJob );
 
     return syncSucceeded;
 }

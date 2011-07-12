@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,6 @@
 #include "kastencore_export.h"
 
 class KJob;
-class QWidget;
 
 
 namespace Kasten
@@ -37,7 +36,7 @@ class KASTENCORE_EXPORT JobManager
 {
   public:
     // temporary, remove quickly
-    static bool executeJob( KJob* job, QWidget* widget = 0 );
+    static bool executeJob( KJob* job );
 
   public:
 };

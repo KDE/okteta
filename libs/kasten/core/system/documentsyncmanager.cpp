@@ -95,7 +95,7 @@ void DocumentSyncManager::load( const KUrl &url )
     AbstractLoadJob *loadJob = synchronizer->startLoad( url );
     connect( loadJob, SIGNAL(documentLoaded( Kasten::AbstractDocument* )), SLOT(onDocumentLoaded( Kasten::AbstractDocument* )) );
 
-    JobManager::executeJob( loadJob, /*mWidget*/0 ); // TODO: pass a ui handler to jobmanager
+    JobManager::executeJob( loadJob ); // TODO: pass a ui handler to jobmanager
 
     // store path
 //     mWorkingUrl = url.upUrl();
@@ -147,7 +147,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                     //TODO: overwrite for now
                     AbstractSyncWithRemoteJob *syncJob = currentSynchronizer->startSyncWithRemote( newUrl,
                                                                AbstractModelSynchronizer::ReplaceRemote );
-                    const bool syncSucceeded = JobManager::executeJob( syncJob, /*mWidget*/0 );
+                    const bool syncSucceeded = JobManager::executeJob( syncJob );
 //                     currentSynchronizer->unpauseSynchronization(); also pause above
                     storingDone = syncSucceeded;
                 }
@@ -157,7 +157,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
                     AbstractConnectJob *connectJob = synchronizer->startConnect( document, newUrl,
                                                                AbstractModelSynchronizer::ReplaceRemote );
-                    const bool connectSucceeded = JobManager::executeJob( connectJob, /*mWidget*/0 );
+                    const bool connectSucceeded = JobManager::executeJob( connectJob );
 
                     storingDone = connectSucceeded;
                 }
@@ -177,7 +177,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                 // synchTo might be the intention, after all the user wanted a new storage
                 // 
                 AbstractSyncToRemoteJob *syncJob = document->synchronizer()->startSyncToRemote();
-                const bool syncFailed = JobManager::executeJob( syncJob, /*mWidget*/0 );
+                const bool syncFailed = JobManager::executeJob( syncJob );
 
                 storingDone = !syncFailed;
             }
@@ -211,7 +211,7 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
                 if( synchronizer )
                 {
                     AbstractSyncToRemoteJob *syncJob = synchronizer->startSyncToRemote();
-                    const bool isSynced = JobManager::executeJob( syncJob, /*mWidget*/0 );
+                    const bool isSynced = JobManager::executeJob( syncJob );
 
                     canClose = isSynced;
                 }
@@ -249,7 +249,7 @@ void DocumentSyncManager::reload( AbstractDocument* document )
     }
 
     AbstractSyncFromRemoteJob* syncJob = synchronizer->startSyncFromRemote();
-    JobManager::executeJob( syncJob, /*mWidget*/0 );
+    JobManager::executeJob( syncJob );
 }
 
 void DocumentSyncManager::save( AbstractDocument* document )
