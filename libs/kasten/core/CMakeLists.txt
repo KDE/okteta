@@ -62,7 +62,6 @@ set( KASTEN_CORE_IO_FILESYSTEM_SRCS
 )
 
 set( KASTEN_CORE_SYSTEM_SRCS
-  system/dialoghandler.cpp
   system/jobmanager.cpp
   system/documentmanager.cpp
   system/documentcreatemanager.cpp
@@ -114,6 +113,8 @@ set( kastencore_LIB_HDRS
   io/modeldatageneratethread.h
   io/abstractloadjob.h
   io/abstractmodelsynchronizerfactory.h
+  system/abstractoverwritedialog.h
+  system/abstractsavediscarddialog.h
   system/jobmanager.h
   system/documentmanager.h
   system/documentcreatemanager.h

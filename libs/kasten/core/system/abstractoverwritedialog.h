@@ -24,6 +24,7 @@
 #define ABSTRACTOVERWRITEDIALOG_H
 
 // lib
+#include <kastencore_export.h>
 #include <kastencore.h>
 
 class KUrl;
@@ -33,7 +34,7 @@ class QString;
 namespace Kasten
 {
 
-class AbstractOverwriteDialog
+class KASTENCORE_EXPORT AbstractOverwriteDialog
 {
   public:
     virtual ~AbstractOverwriteDialog();

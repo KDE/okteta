@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,7 @@
 
 #include "dialoghandler.h"
 
-// lib
+// Kasten core
 #include <abstractdocument.h>
 // KDE
 #include <KMessageBox>
@@ -32,6 +32,11 @@
 
 namespace Kasten
 {
+
+
+DialogHandler::DialogHandler( QWidget* widget ) : mWidget( widget ) {}
+
+void DialogHandler::setWidget( QWidget* widget ) { mWidget = widget; }
 
 Answer DialogHandler::queryOverwrite( const KUrl& url, const QString& title ) const
 {
@@ -87,5 +92,7 @@ Answer DialogHandler::queryDiscard( const AbstractDocument* document, const QStr
 
     return (answer == KMessageBox::Cancel) ? Cancel : Discard;
 }
+
+DialogHandler::~DialogHandler() {}
 
 }

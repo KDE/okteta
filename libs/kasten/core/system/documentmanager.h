@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,7 +25,6 @@
 
 // lib
 #include "kastencore_export.h"
-#include <abstractdocument.h>
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QObject>
@@ -36,11 +35,11 @@ class QStringList;
 
 namespace Kasten
 {
+class AbstractDocument;
 
 class DocumentCreateManager; //TODO: temporary
 class DocumentSyncManager; //TODO: temporary
 class ModelCodecManager; //TODO: temporary
-class DialogHandler; //TODO: temporary
 
 
 class KASTENCORE_EXPORT DocumentManager : public QObject
@@ -69,8 +68,6 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
     bool canCloseAllOther( AbstractDocument* document );
 
     void requestFocus( AbstractDocument* document );
-
-    void setWidget( QWidget* widget );
 
   public:
     QList<AbstractDocument*> documents() const;
@@ -108,7 +105,6 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
     DocumentCreateManager* mCreateManager;
     DocumentSyncManager* mSyncManager;
     ModelCodecManager* mCodecManager;
-    DialogHandler* mDialogHandler;
 };
 
 

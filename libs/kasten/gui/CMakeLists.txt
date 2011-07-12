@@ -56,11 +56,13 @@ set( kastengui_io_HDRS
 
 
 set( kastengui_system_SRCS
+  system/dialoghandler.cpp
   system/dummyview.cpp
   system/modelcodecviewmanager.cpp
   system/viewmanager.cpp
 )
 set( kastengui_system_HDRS
+  system/dialoghandler.h
   system/dummyview.h
   system/modelcodecviewmanager.h
   system/viewmanager.h

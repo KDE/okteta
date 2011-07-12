@@ -33,6 +33,7 @@
 #include <bytearraystreamencoderfactory.h>
 #include <bytearraydatageneratorfactory.h>
 // Kasten gui
+#include <dialoghandler.h>
 #include <viewmanager.h>
 #include <modelcodecviewmanager.h>
 // Kasten core
@@ -58,7 +59,8 @@ namespace Kasten
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
  : mDocumentManager( new DocumentManager() ),
-   mViewManager( new ViewManager() )
+   mViewManager( new ViewManager() ),
+   mDialogHandler( new DialogHandler() )
 {
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );
@@ -92,8 +94,11 @@ int OktetaProgram::execute()
 
     mDocumentManager->codecManager()->setEncoders( encoderList );
     mDocumentManager->codecManager()->setGenerators( generatorList );
+    mDocumentManager->codecManager()->setOverwriteDialog( mDialogHandler );
     mDocumentManager->createManager()->setDocumentFactory( new ByteArrayDocumentFactory() );
     mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new ByteArrayRawFileSynchronizerFactory() );
+    mDocumentManager->syncManager()->setOverwriteDialog( mDialogHandler );
+    mDocumentManager->syncManager()->setSaveDiscardDialog( mDialogHandler );
 
     mViewManager->setViewFactory( new ByteArrayViewFactory() );
     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
@@ -130,7 +135,7 @@ int OktetaProgram::execute()
             }
         }
 
-        mDocumentManager->setWidget( mainWindow );
+        mDialogHandler->setWidget( mainWindow );
         mainWindow->show();
 
         arguments->clear();
@@ -150,6 +155,7 @@ OktetaProgram::~OktetaProgram()
 {
     delete mDocumentManager;
     delete mViewManager;
+    delete mDialogHandler;
 }
 
 }

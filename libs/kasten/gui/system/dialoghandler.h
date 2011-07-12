@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,8 @@
 #ifndef DIALOGHANDLER_H
 #define DIALOGHANDLER_H
 
+// lib
+#include "kastengui_export.h"
 // Kasten core
 #include <abstractoverwritedialog.h>
 #include <abstractsavediscarddialog.h>
@@ -33,7 +35,8 @@ class QWidget;
 namespace Kasten
 {
 
-class DialogHandler : public AbstractOverwriteDialog, public AbstractSaveDiscardDialog
+class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog,
+                                       public AbstractSaveDiscardDialog
 {
   public:
     explicit DialogHandler( QWidget* widget = 0 );
@@ -54,12 +57,6 @@ class DialogHandler : public AbstractOverwriteDialog, public AbstractSaveDiscard
   protected:
     QWidget* mWidget;
 };
-
-
-inline DialogHandler::DialogHandler( QWidget* widget ) : mWidget( widget ) {}
-inline DialogHandler::~DialogHandler() {}
-
-inline void DialogHandler::setWidget( QWidget* widget ) { mWidget = widget; }
 
 }
 

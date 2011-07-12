@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,8 @@
 
 #include "documentmanager.h"
 
+// lib
+#include <abstractdocument.h>
 // KDE
 #include <KUrl>
 // Qt
@@ -32,7 +34,6 @@
 #include "documentcreatemanager.h"
 #include "documentsyncmanager.h"
 #include "modelcodecmanager.h"
-#include "dialoghandler.h"
 
 
 namespace Kasten
@@ -44,13 +45,8 @@ static int lastDocumentId = 0;
 DocumentManager::DocumentManager()
   : mCreateManager( new DocumentCreateManager(this) ),
     mSyncManager( new DocumentSyncManager(this) ),
-    mCodecManager( new ModelCodecManager(this) ),
-    mDialogHandler( new DialogHandler() )
+    mCodecManager( new ModelCodecManager(this) )
 {
-
-    mSyncManager->setOverwriteDialog( mDialogHandler );
-    mSyncManager->setSaveDiscardDialog( mDialogHandler );
-    mCodecManager->setOverwriteDialog( mDialogHandler );
 }
 
 QList<AbstractDocument*> DocumentManager::documents() const { return mList; }
@@ -212,14 +208,6 @@ void DocumentManager::requestFocus( AbstractDocument* document )
     emit focusRequested( document );
 }
 
-void DocumentManager::setWidget( QWidget* widget )
-{
-    mDialogHandler->setWidget( widget );
-    mCreateManager->setWidget( widget );
-    mSyncManager->setWidget( widget );
-    mCodecManager->setWidget( widget );
-}
-
 DocumentManager::~DocumentManager()
 {
     // TODO: emit signal here, too?
@@ -228,7 +216,6 @@ DocumentManager::~DocumentManager()
     delete mCreateManager;
     delete mSyncManager;
     delete mCodecManager;
-    delete mDialogHandler;
 } //TODO: destroy all documents?
 
 }

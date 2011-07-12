@@ -24,6 +24,7 @@
 #define ABSTRACTSAVEDISCARDDIALOG_H
 
 // lib
+#include <kastencore_export.h>
 #include <kastencore.h>
 
 class QString;
@@ -34,7 +35,7 @@ namespace Kasten
 class AbstractDocument;
 
 
-class AbstractSaveDiscardDialog
+class KASTENCORE_EXPORT AbstractSaveDiscardDialog
 {
   public:
     virtual ~AbstractSaveDiscardDialog();

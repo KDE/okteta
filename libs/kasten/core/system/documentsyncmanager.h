@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,6 @@
 
 class KUrl;
 class QString;
-class QWidget;
 
 
 namespace Kasten
@@ -65,7 +64,6 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
 
   public:
     void setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory );
-    void setWidget( QWidget* widget );
     void setSaveDiscardDialog( AbstractSaveDiscardDialog* saveDiscardDialog );
     void setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog );
 
@@ -81,8 +79,6 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
   protected:
     // unless there is a singleton
     DocumentManager* mManager;
-    // used for dialogs, TODO: create (or use?) global instance for this
-    QWidget* mWidget;
 
     // temporary hack: hard coded factories for byte arrays
     AbstractModelSynchronizerFactory* mSynchronizerFactory;

@@ -30,6 +30,7 @@
 namespace Kasten
 {
 
+class DialogHandler;
 class DocumentManager;
 class ViewManager;
 
@@ -53,6 +54,8 @@ class OktetaProgram
 
     DocumentManager* mDocumentManager;
     ViewManager* mViewManager;
+
+    DialogHandler* mDialogHandler;
 };
 
 

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,6 @@
 // Qt
 #include <QtCore/QObject>
 
-class QWidget;
 class QMimeData;
 
 
@@ -56,13 +55,10 @@ class KASTENCORE_EXPORT DocumentCreateManager : public QObject
 
   public:
     void setDocumentFactory( AbstractDocumentFactory* factory );
-    void setWidget( QWidget* widget );
 
   protected:
     // unless there is a singleton
     DocumentManager* mManager;
-    // used for dialogs, TODO: create (or use?) global instance for this
-    QWidget* mWidget;
 
     // temporary hack: hard coded factory for byte arrays
     AbstractDocumentFactory* mFactory;

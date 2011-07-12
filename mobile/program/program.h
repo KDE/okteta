@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Mobile program, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -35,6 +35,7 @@ class OktetaMainWindow;
 class DocumentManager;
 class ViewManager;
 class AbstractView;
+class DialogHandler;
 
 
 class OktetaProgram : public QObject
@@ -63,6 +64,8 @@ class OktetaProgram : public QObject
     ViewManager* mViewManager;
 
     OktetaMainWindow* mUnusedMainWindow;
+
+    DialogHandler* mDialogHandler;
 };
 
 

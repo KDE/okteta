@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,8 @@
 #include "documentsyncmanager.h"
 
 // lib
+#include "abstractoverwritedialog.h"
+#include "abstractsavediscarddialog.h"
 #include "jobmanager.h"
 #include "documentmanager.h"
 #include <abstractloadjob.h>
@@ -31,8 +33,7 @@
 #include <abstractsyncwithremotejob.h>
 #include <abstractsyncfromremotejob.h>
 #include <abstractmodelsynchronizerfactory.h>
-#include "abstractoverwritedialog.h"
-#include "abstractsavediscarddialog.h"
+#include <abstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
@@ -47,16 +48,10 @@ namespace Kasten
 
 DocumentSyncManager::DocumentSyncManager( DocumentManager* manager )
   : mManager( manager ),
-    mWidget( 0 ),
     mSynchronizerFactory( 0 ),
     mSaveDiscardDialog( 0 ),
     mOverwriteDialog( 0 )
 {}
-
-void DocumentSyncManager::setWidget( QWidget* widget )
-{
-    mWidget = widget;
-}
 
 void DocumentSyncManager::setSaveDiscardDialog( AbstractSaveDiscardDialog* saveDiscardDialog )
 {
@@ -100,7 +95,7 @@ void DocumentSyncManager::load( const KUrl &url )
     AbstractLoadJob *loadJob = synchronizer->startLoad( url );
     connect( loadJob, SIGNAL(documentLoaded( Kasten::AbstractDocument* )), SLOT(onDocumentLoaded( Kasten::AbstractDocument* )) );
 
-    JobManager::executeJob( loadJob, mWidget );
+    JobManager::executeJob( loadJob, /*mWidget*/0 ); // TODO: pass a ui handler to jobmanager
 
     // store path
 //     mWorkingUrl = url.upUrl();
@@ -119,7 +114,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
         i18nc( "@title:window", "Save As" );
     do
     {
-        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), mWidget, processTitle );
+        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), /*mWidget*/0, processTitle );
 
         if( !newUrl.isEmpty() )
         {
@@ -128,7 +123,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 
             if( isNewUrl )
             {
-                const bool isUrlInUse = KIO::NetAccess::exists( newUrl, KIO::NetAccess::DestinationSide, mWidget );
+                const bool isUrlInUse = KIO::NetAccess::exists( newUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
 
                 if( isUrlInUse )
                 {
@@ -152,7 +147,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                     //TODO: overwrite for now
                     AbstractSyncWithRemoteJob *syncJob = currentSynchronizer->startSyncWithRemote( newUrl,
                                                                AbstractModelSynchronizer::ReplaceRemote );
-                    const bool syncSucceeded = JobManager::executeJob( syncJob, mWidget );
+                    const bool syncSucceeded = JobManager::executeJob( syncJob, /*mWidget*/0 );
 //                     currentSynchronizer->unpauseSynchronization(); also pause above
                     storingDone = syncSucceeded;
                 }
@@ -162,7 +157,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
                     AbstractConnectJob *connectJob = synchronizer->startConnect( document, newUrl,
                                                                AbstractModelSynchronizer::ReplaceRemote );
-                    const bool connectSucceeded = JobManager::executeJob( connectJob, mWidget );
+                    const bool connectSucceeded = JobManager::executeJob( connectJob, /*mWidget*/0 );
 
                     storingDone = connectSucceeded;
                 }
@@ -182,7 +177,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                 // synchTo might be the intention, after all the user wanted a new storage
                 // 
                 AbstractSyncToRemoteJob *syncJob = document->synchronizer()->startSyncToRemote();
-                const bool syncFailed = JobManager::executeJob( syncJob, mWidget );
+                const bool syncFailed = JobManager::executeJob( syncJob, /*mWidget*/0 );
 
                 storingDone = !syncFailed;
             }
@@ -216,7 +211,7 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
                 if( synchronizer )
                 {
                     AbstractSyncToRemoteJob *syncJob = synchronizer->startSyncToRemote();
-                    const bool isSynced = JobManager::executeJob( syncJob, mWidget );
+                    const bool isSynced = JobManager::executeJob( syncJob, /*mWidget*/0 );
 
                     canClose = isSynced;
                 }
@@ -254,7 +249,7 @@ void DocumentSyncManager::reload( AbstractDocument* document )
     }
 
     AbstractSyncFromRemoteJob* syncJob = synchronizer->startSyncFromRemote();
-    JobManager::executeJob( syncJob, mWidget );
+    JobManager::executeJob( syncJob, /*mWidget*/0 );
 }
 
 void DocumentSyncManager::save( AbstractDocument* document )
