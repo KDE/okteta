@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -57,13 +57,6 @@ QFile* AbstractFileSystemExportJob::file() const
 
     return d->file();
 }
-QWidget* AbstractFileSystemExportJob::widget() const
-{
-    Q_D( const AbstractFileSystemExportJob );
-
-    return d->widget();
-}
-
 
 void AbstractFileSystemExportJob::start()
 {

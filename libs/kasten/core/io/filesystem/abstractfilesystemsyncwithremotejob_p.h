@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -50,7 +50,6 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJobPrivate : public Abst
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QFile* file() const;
-    QWidget* widget() const;
 
   protected:
     void completeSync( bool success );
@@ -84,7 +83,6 @@ inline AbstractFileSystemSyncWithRemoteJobPrivate::~AbstractFileSystemSyncWithRe
 
 inline QFile* AbstractFileSystemSyncWithRemoteJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system
-inline QWidget* AbstractFileSystemSyncWithRemoteJobPrivate::widget() const { return 0; }
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJobPrivate::synchronizer() const
 {
     return mSynchronizer;

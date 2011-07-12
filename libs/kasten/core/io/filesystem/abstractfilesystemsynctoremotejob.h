@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,6 @@
 // library
 #include <abstractsynctoremotejob.h>
 
-class QWidget;
 class QFile;
 
 
@@ -56,7 +55,6 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncToRemoteJob : public AbstractSyncT
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QFile* file() const;
-    QWidget* widget() const;
 
   protected:
     void completeWrite( bool success );

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -65,7 +65,6 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
     AbstractModel* model() const;
     const AbstractModelSelection* selection() const;
     QFile* file() const;
-    QWidget* widget() const;
 
   protected:
     Q_PRIVATE_SLOT( d_func(), void exportToFile() )

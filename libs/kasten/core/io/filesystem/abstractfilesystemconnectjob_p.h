@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -55,7 +55,6 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractCon
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     AbstractDocument* document() const;
     QFile* file() const;
-    QWidget* widget() const;
 
   public:
     void connectWithFile();
@@ -93,7 +92,6 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJobPrivate:
 inline AbstractDocument* AbstractFileSystemConnectJobPrivate::document()   const { return mDocument; }
 inline QFile* AbstractFileSystemConnectJobPrivate::file()                  const { return mFile; }
 // TODO: setup a notification system
-inline QWidget* AbstractFileSystemConnectJobPrivate::widget()              const { return 0; }
 
 inline void AbstractFileSystemConnectJobPrivate::start()
 {

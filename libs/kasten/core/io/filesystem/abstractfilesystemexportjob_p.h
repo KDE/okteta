@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -53,7 +53,6 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
     AbstractModel* model() const;
     const AbstractModelSelection* selection() const;
     QFile* file() const;
-    QWidget* widget() const;
 
   public: // slot
     void exportToFile();
@@ -67,7 +66,6 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
     const KUrl mUrl;
     QFile* mFile;
     QString mWorkFilePath;
-    QWidget* mWidget;
 };
 
 
@@ -78,8 +76,7 @@ inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate( A
     mModel( model ),
     mSelection( selection ),
     mUrl( url ),
-    mFile( 0 ),
-    mWidget( 0 )
+    mFile( 0 )
 {}
 
 inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate() {}
@@ -87,7 +84,6 @@ inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate()
 inline AbstractModel* AbstractFileSystemExportJobPrivate::model()                    const { return mModel; }
 inline const AbstractModelSelection* AbstractFileSystemExportJobPrivate::selection() const { return mSelection; }
 inline QFile* AbstractFileSystemExportJobPrivate::file()                             const { return mFile; }
-inline QWidget* AbstractFileSystemExportJobPrivate::widget()                         const { return mWidget; }
 
 
 inline void AbstractFileSystemExportJobPrivate::start()

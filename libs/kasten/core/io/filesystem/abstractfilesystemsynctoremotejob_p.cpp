@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -81,7 +81,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
 
         if( ! isLocalFile )
         {
-            success = KIO::NetAccess::upload( mWorkFilePath, url, widget() );
+            success = KIO::NetAccess::upload( mWorkFilePath, url, 0 );
             if( ! success )
             {
                 q->setError( KJob::KilledJobError );
