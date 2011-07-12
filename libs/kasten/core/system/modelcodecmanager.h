@@ -29,7 +29,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
-class QWidget;
 class QString;
 
 
