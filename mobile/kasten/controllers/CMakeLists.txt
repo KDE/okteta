@@ -115,18 +115,18 @@ set( mobilekastencontrollers_LIB_HDRS
 )
 
 
-kde4_add_library( mobilekastencontrollers SHARED ${mobilekastencontroller_LIB_SRCS} )
-target_link_libraries( mobilekastencontrollers
-  mobilekastengui
-  kastencontrollers1
-  kastengui1
-  kastencore1
+kde4_add_library( kasten1mobilecontrollers SHARED ${mobilekastencontroller_LIB_SRCS} )
+target_link_libraries( kasten1mobilecontrollers
+  kasten1mobilegui
+  kasten1controllers
+  kasten1gui
+  kasten1core
   ${KDE4_KIO_LIBS}
   ${KDE4_KPARTS_LIBS}
   ${KDE4_KFILE_LIBS}
 )
-set_target_properties( mobilekastencontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( kasten1mobilecontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install( TARGETS mobilekastencontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS kasten1mobilecontrollers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # install( FILES ${mobilekastencontrollers_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )

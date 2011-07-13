@@ -39,17 +39,17 @@ add_definitions(
 add_subdirectory( libs )
 
 set( OKTETALIBS_MAJOR_VERSION 0 )
-set( OKTETALIBS_MINOR_VERSION 7 )
+set( OKTETALIBS_MINOR_VERSION 8 )
 set( OKTETALIBS_PATCHLEVEL_VERSION 0 )
 set( OKTETALIBS_VERSION "${OKTETALIBS_MAJOR_VERSION}.${OKTETALIBS_MINOR_VERSION}.${OKTETALIBS_PATCHLEVEL_VERSION}" )
 set( OKTETALIBS_ABI_VERSION 1 )
-set( OKTETALIBS_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/okteta )#${OKTETAKASTEN_ABI_VERSION} )
+set( OKTETALIBS_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/okteta${OKTETALIBS_ABI_VERSION} )
 
-set( oktetacore_LIB  oktetacore ) # ${OKTETALIBS_ABI_VERSION} )
-set( oktetagui_LIB  oktetagui ) #${OKTETALIBS_ABI_VERSION} )
+set( oktetacore_LIB  okteta${OKTETALIBS_ABI_VERSION}core )
+set( oktetagui_LIB  okteta${OKTETALIBS_ABI_VERSION}gui )
 
-set( OKTETALIBS_LIB_SOVERSION ${GENERIC_LIB_SOVERSION} ) #${OKTETALIBS_ABI_VERSION} )
-set( OKTETALIBS_LIB_VERSION ${GENERIC_LIB_VERSION} ) #${OKTETALIBS_VERSION} )
+set( OKTETALIBS_LIB_SOVERSION ${OKTETALIBS_ABI_VERSION} )
+set( OKTETALIBS_LIB_VERSION ${OKTETALIBS_VERSION} )
 
 # Okteta libs
 add_subdirectory( core )
@@ -62,7 +62,7 @@ add_subdirectory( kasten )
 # special mimetypes
 add_subdirectory( mimetypes )
 
-# programs and parts for desktop 
+# programs and parts for desktop
 add_subdirectory( parts )
 add_subdirectory( program )
 

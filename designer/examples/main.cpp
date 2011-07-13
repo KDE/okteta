@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta project, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     Public domain.
 */
@@ -11,9 +11,9 @@
 #include "ui_example_widget.h"
 //// include the header of the bytearray model you want to use
 // Okteta core
-#include <okteta/piecetablebytearraymodel.h>
+#include <okteta1/piecetablebytearraymodel.h>
 //// or
-#include <Okteta/PieceTableByteArrayModel>
+#include <Okteta1/PieceTableByteArrayModel>
 
 //// only needed for the example
 // KDE

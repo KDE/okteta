@@ -34,12 +34,12 @@
   <customwidget>
    <class>Okteta::ByteArrayColumnView</class>
    <extends>QFrame</extends>
-   <header>KDE/Okteta/ByteArrayColumnView</header>
+   <header>KDE/Okteta1/ByteArrayColumnView</header>
   </customwidget>
   <customwidget>
    <class>Okteta::ByteArrayRowView</class>
    <extends>QFrame</extends>
-   <header>KDE/Okteta/ByteArrayRowView</header>
+   <header>KDE/Okteta1/ByteArrayRowView</header>
   </customwidget>
  </customwidgets>
  <resources/>

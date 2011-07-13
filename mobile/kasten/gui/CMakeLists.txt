@@ -44,14 +44,14 @@ set( mobilekastengui_LIB_HDRS
 )
 
 
-kde4_add_library( mobilekastengui SHARED ${mobilekastengui_LIB_SRCS} )
-target_link_libraries( mobilekastengui
-  kastengui
-  kastencore
+kde4_add_library( kasten1mobilegui SHARED ${mobilekastengui_LIB_SRCS} )
+target_link_libraries( kasten1mobilegui
+  kasten1gui
+  kasten1core
   ${KDE4_KDEUI_LIBS}
 )
-set_target_properties( mobilekastengui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+set_target_properties( kasten1mobilegui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 
-install( TARGETS mobilekastengui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS kasten1mobilegui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${mobilekastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
+# install( FILES ${mobilekastengui_LIB_HDRS}  DESTINATION  ${INCLUDE_INSTALL_DIR}/kasten  COMPONENT Devel )
