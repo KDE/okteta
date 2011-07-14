@@ -35,7 +35,6 @@
 // Qt
 #include <QtGui/QLayout>
 #include <QtCore/QDir>
-#include <QtCore/QTimer>
 
 
 namespace Kasten
@@ -45,7 +44,7 @@ FileSystemBrowserView::FileSystemBrowserView( FileSystemBrowserTool* tool, QWidg
   : QWidget( parent ),
     mTool( tool )
 {
-    QTimer::singleShot( 0, this, SLOT(init()) );
+    QMetaObject::invokeMethod( this, "init", Qt::QueuedConnection );
 }
 
 void FileSystemBrowserView::init()

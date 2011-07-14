@@ -31,8 +31,6 @@
 // KDE
 #include <KTemporaryFile>
 #include <KUrl>
-// Qt
-#include <QtCore/QTimer>
 
 
 namespace Kasten
@@ -85,7 +83,7 @@ inline void AbstractFileSystemSyncToRemoteJobPrivate::start()
 {
     Q_Q( AbstractFileSystemSyncToRemoteJob );
 
-    QTimer::singleShot( 0, q, SLOT(syncToRemote()) );
+    QMetaObject::invokeMethod( q, "syncToRemote", Qt::QueuedConnection );
 }
 
 

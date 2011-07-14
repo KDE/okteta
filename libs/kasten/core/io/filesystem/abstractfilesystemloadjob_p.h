@@ -28,8 +28,6 @@
 #include <abstractloadjob_p.h>
 // KDE
 #include <KUrl>
-// Qt
-#include <QtCore/QTimer>
 
 
 namespace Kasten
@@ -90,7 +88,7 @@ inline void AbstractFileSystemLoadJobPrivate::start()
 {
     Q_Q( AbstractFileSystemLoadJob );
 
-    QTimer::singleShot( 0, q, SLOT(load()) );
+    QMetaObject::invokeMethod( q, "load", Qt::QueuedConnection );
 }
 
 }

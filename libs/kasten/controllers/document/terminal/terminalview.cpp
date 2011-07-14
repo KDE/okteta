@@ -33,7 +33,6 @@
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QFrame>
-#include <QtCore/QTimer>
 #include <QtCore/QDir>
 
 
@@ -50,7 +49,7 @@ TerminalView::TerminalView( TerminalTool* tool, QWidget* parent )
     layout->setMargin( 0 );
 
     connect( mTool, SIGNAL(currentUrlChanged( const KUrl& )), SLOT(onCurrentUrlChanged( const KUrl& )) );
-    QTimer::singleShot( 0, this, SLOT(createTerminalPart()) );
+    QMetaObject::invokeMethod( this, "createTerminalPart", Qt::QueuedConnection );
 }
 
 void TerminalView::createTerminalPart()

@@ -29,8 +29,6 @@
 // KDE
 #include <KUrl>
 #include <KTemporaryFile>
-// Qt
-#include <QtCore/QTimer>
 
 
 namespace Kasten
@@ -97,7 +95,7 @@ inline void AbstractFileSystemConnectJobPrivate::start()
 {
     Q_Q( AbstractFileSystemConnectJob );
 
-    QTimer::singleShot( 0, q, SLOT(connectWithFile()) );
+    QMetaObject::invokeMethod( q, "connectWithFile", Qt::QueuedConnection );
 }
 
 }

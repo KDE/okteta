@@ -28,8 +28,6 @@
 #include <abstractexportjob_p.h>
 // KDE
 #include <KUrl>
-// Qt
-#include <QtCore/QTimer>
 
 
 namespace Kasten
@@ -90,7 +88,7 @@ inline void AbstractFileSystemExportJobPrivate::start()
 {
     Q_Q( AbstractFileSystemExportJob );
 
-    QTimer::singleShot( 0, q, SLOT(exportToFile()) );
+    QMetaObject::invokeMethod( q, "exportToFile", Qt::QueuedConnection );
 }
 
 }
