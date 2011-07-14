@@ -68,8 +68,6 @@ set( kastengui_CamelCase_HDRS
   ToolInlineViewable
   WidgetsDockable
 
-  SingleViewArea
-  SingleViewWindow
   TabbedViews
   MultiViewAreas
   ShellWindow
