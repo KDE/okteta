@@ -165,7 +165,7 @@ void OktetaMainWindow::setupControllers()
 
     addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager()->syncManager() )) );
     addTool( new DocumentsToolView(new DocumentsTool( mProgram->documentManager() )) );
-    addTool( new TerminalToolView(new TerminalTool( mProgram->documentManager() )) );
+    addTool( new TerminalToolView(new TerminalTool( mProgram->documentManager()->syncManager() )) );
 #ifndef NDEBUG
     addTool( new VersionViewToolView(new VersionViewTool()) );
 #endif

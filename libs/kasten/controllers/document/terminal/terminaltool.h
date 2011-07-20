@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,7 @@ class KUrl;
 namespace Kasten
 {
 
-class DocumentManager;
+class DocumentSyncManager;
 class AbstractDocument;
 
 
@@ -43,7 +43,7 @@ class KASTENCONTROLLERS_EXPORT TerminalTool : public AbstractTool
   Q_OBJECT
 
   public:
-    explicit TerminalTool( DocumentManager* documentManager );
+    explicit TerminalTool( DocumentSyncManager* documentSyncManager );
     virtual ~TerminalTool();
 
   public:
@@ -59,9 +59,9 @@ class KASTENCONTROLLERS_EXPORT TerminalTool : public AbstractTool
     void currentUrlChanged( const KUrl& currentUrl );
 
   protected: // sources
-    AbstractDocument* mDocument;
+    DocumentSyncManager* mDocumentSyncManager;
 
-    DocumentManager* mDocumentManager;
+    AbstractDocument* mDocument;
 };
 
 }

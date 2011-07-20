@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,6 @@
 #include "terminaltool.h"
 
 // Kasten core
-#include <documentmanager.h>
 #include <documentsyncmanager.h>
 #include <abstractdocument.h>
 #include <abstractmodelsynchronizer.h>
@@ -35,9 +34,10 @@
 namespace Kasten
 {
 
-TerminalTool::TerminalTool( DocumentManager* documentManager )
-  : mDocument( 0 ),
-    mDocumentManager( documentManager )
+TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )
+  : AbstractTool(),
+    mDocumentSyncManager( documentSyncManager ),
+    mDocument( 0 )
 {
     setObjectName( QLatin1String( "Terminal" ) );
 }
@@ -51,7 +51,7 @@ KUrl TerminalTool::currentUrl() const
     KUrl result;
 
     if( mDocument )
-        result = mDocumentManager->syncManager()->urlOf( mDocument ).upUrl();
+        result = mDocumentSyncManager->urlOf( mDocument ).upUrl();
 
     return result;
 }
