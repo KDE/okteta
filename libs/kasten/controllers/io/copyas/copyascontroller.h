@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -36,8 +36,8 @@ class QAction;
 namespace Kasten
 {
 
-class ViewManager;
-class DocumentManager;
+class ModelCodecViewManager;
+class ModelCodecManager;
 namespace If {
 class DataSelectable;
 }
@@ -48,18 +48,20 @@ class KASTENCONTROLLERS_EXPORT CopyAsController : public AbstractXmlGuiControlle
   Q_OBJECT
 
   public:
-    CopyAsController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient );
+    CopyAsController( ModelCodecViewManager* codecViewManager,
+                      ModelCodecManager* modelCodecManager,
+                      KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
   private Q_SLOTS:
     void updateActions();
-    void onActionTriggered( QAction *action );
+    void onActionTriggered( QAction* action );
 
   protected:
-    ViewManager* mViewManager;
-    DocumentManager* mDocumentManager;
+    ModelCodecViewManager* mCodecViewManager;
+    ModelCodecManager* mModelCodecManager;
 
     AbstractModel* mModel;
     If::DataSelectable *mSelectionControl;

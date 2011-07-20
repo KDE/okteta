@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,13 +26,11 @@
 #include "insertdialog.h"
 // Kasten gui
 #include <modelcodecviewmanager.h>
-#include <viewmanager.h>
 #include <selecteddatawriteable.h>
 #include <abstractmodeldatageneratorconfigeditor.h>
 // Kasten core
 #include <modeldatageneratethread.h>
 #include <modelcodecmanager.h>
-#include <documentmanager.h>
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
 // KDE
@@ -54,8 +52,13 @@ Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
 namespace Kasten
 {
 
-InsertController::InsertController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient )
- : mViewManager( viewManager ), mDocumentManager( documentManager ), mModel( 0 )
+InsertController::InsertController( ModelCodecViewManager* codecViewManager,
+                                    ModelCodecManager* modelCodecManager,
+                                    KXMLGUIClient* guiClient )
+  : AbstractXmlGuiController(),
+    mCodecViewManager( codecViewManager ),
+    mModelCodecManager( modelCodecManager ),
+    mModel( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -93,7 +96,7 @@ void InsertController::updateActions()
     // mSelectedDataWriteableControl->canReadData( QMimeData() ) needs already data
     // TODO: it this depend on the current selection/focus? So it needs to be updated on every change?
     const QList<AbstractModelDataGenerator*> generatorList =
-        mDocumentManager->codecManager()->generatorList();
+        mModelCodecManager->generatorList();
     const bool hasGenerators = ( generatorList.size() > 0 );
 
     if( hasGenerators )
@@ -124,7 +127,7 @@ void InsertController::onActionTriggered( QAction *action )
     AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator* >();
 
     AbstractModelDataGeneratorConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor( generator );
+        mCodecViewManager->createConfigEditor( generator );
 
     if( configEditor )
     {

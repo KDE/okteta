@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,13 +26,11 @@
 #include "copyasdialog.h"
 // Kasten gui
 #include <modelcodecviewmanager.h>
-#include <viewmanager.h>
 #include <dataselectable.h>
 #include <abstractmodelstreamencoderconfigeditor.h>
 // Kasten core
 #include <modelstreamencodethread.h>
 #include <modelcodecmanager.h>
-#include <documentmanager.h>
 #include <abstractmodelstreamencoder.h>
 #include <abstractmodel.h>
 // KDE
@@ -53,8 +51,13 @@ Q_DECLARE_METATYPE(Kasten::AbstractModelStreamEncoder*)
 namespace Kasten
 {
 
-CopyAsController::CopyAsController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient )
- : mViewManager( viewManager ), mDocumentManager( documentManager ), mModel( 0 )
+CopyAsController::CopyAsController( ModelCodecViewManager* codecViewManager,
+                                    ModelCodecManager* modelCodecManager,
+                                    KXMLGUIClient* guiClient )
+  : AbstractXmlGuiController(),
+    mCodecViewManager( codecViewManager ),
+    mModelCodecManager( modelCodecManager ),
+    mModel( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -91,7 +94,7 @@ void CopyAsController::updateActions()
     const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
     const QList<AbstractModelStreamEncoder*> encoderList =
-        mDocumentManager->codecManager()->encoderList( mModel, selection );
+        mModelCodecManager->encoderList( mModel, selection );
     const bool hasEncoders = ( encoderList.size() > 0 );
 
     if( hasEncoders )
@@ -124,7 +127,7 @@ void CopyAsController::onActionTriggered( QAction *action )
     const AbstractModelSelection* selection = mSelectionControl->modelSelection();
 
     AbstractModelStreamEncoderConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor( encoder );
+        mCodecViewManager->createConfigEditor( encoder );
 
     if( configEditor )
     {

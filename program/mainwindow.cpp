@@ -91,11 +91,13 @@
 /*#include <viewsystem/close/closecontroller.h>*/
 #include <program/quit/quitcontroller.h>
 // Kasten gui
+#include <modelcodecviewmanager.h>
 #include <viewmanager.h>
 #include <tabbedviews.h>
 #include <multiviewareas.h>
 #include <statusbar.h>
 // Kasten core
+#include <modelcodecmanager.h>
 #include <documentcreatemanager.h>
 #include <documentsyncmanager.h>
 #include <documentmanager.h>
@@ -156,8 +158,10 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ZoomController(this) );
     addXmlGuiController( new SelectController(this) );
     addXmlGuiController( new ClipboardController(this) );
-    addXmlGuiController( new InsertController(mProgram->viewManager(),mProgram->documentManager(),this) );
-    addXmlGuiController( new CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
+    addXmlGuiController( new InsertController(mProgram->viewManager()->codecViewManager(),
+                                              mProgram->documentManager()->codecManager(),this) );
+    addXmlGuiController( new CopyAsController(mProgram->viewManager()->codecViewManager(),
+                                              mProgram->documentManager()->codecManager(),this) );
 
     addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager() )) );
     addTool( new DocumentsToolView(new DocumentsTool( mProgram->documentManager() )) );

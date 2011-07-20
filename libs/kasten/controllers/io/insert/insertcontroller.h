@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -36,8 +36,8 @@ class QAction;
 namespace Kasten
 {
 
-class ViewManager;
-class DocumentManager;
+class ModelCodecViewManager;
+class ModelCodecManager;
 namespace If {
 class SelectedDataWriteable;
 }
@@ -48,7 +48,9 @@ class KASTENCONTROLLERS_EXPORT InsertController : public AbstractXmlGuiControlle
   Q_OBJECT
 
   public:
-    InsertController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient );
+    InsertController( ModelCodecViewManager* codecViewManager,
+                      ModelCodecManager* modelCodecManager,
+                      KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -58,11 +60,11 @@ class KASTENCONTROLLERS_EXPORT InsertController : public AbstractXmlGuiControlle
 
   protected Q_SLOTS:
     void onReadOnlyChanged( bool isReadOnly );
-    void onActionTriggered( QAction *action );
+    void onActionTriggered( QAction* action );
 
   protected:
-    ViewManager* mViewManager;
-    DocumentManager* mDocumentManager;
+    ModelCodecViewManager* mCodecViewManager;
+    ModelCodecManager* mModelCodecManager;
 
     AbstractModel* mModel;
     If::SelectedDataWriteable* mSelectedDataWriteableControl;
