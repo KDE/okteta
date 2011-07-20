@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,14 +26,12 @@
 #include "createdialog.h"
 // Kasten gui
 #include <modelcodecviewmanager.h>
-#include <viewmanager.h>
 #include <selecteddatawriteable.h>
 #include <abstractmodeldatageneratorconfigeditor.h>
 // Kasten core
 #include <modeldatageneratethread.h>
 #include <modelcodecmanager.h>
 #include <documentcreatemanager.h>
-#include <documentmanager.h>
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
 // KDE
@@ -57,9 +55,14 @@ Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
 namespace Kasten
 {
 
-CreatorController::CreatorController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient )
-  : mViewManager( viewManager ),
-    mDocumentManager( documentManager )
+CreatorController::CreatorController( ModelCodecViewManager* modelCodecViewManager,
+                                      ModelCodecManager* modelCodecManager,
+                                      DocumentCreateManager* documentCreateManager,
+                                      KXMLGUIClient* guiClient )
+  : AbstractXmlGuiController(),
+    mModelCodecViewManager( modelCodecViewManager ),
+    mModelCodecManager( modelCodecManager ),
+    mDocumentCreateManager( documentCreateManager )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -88,7 +91,7 @@ CreatorController::CreatorController( ViewManager* viewManager, DocumentManager*
 
     // generators
     const QList<AbstractModelDataGenerator*> generatorList =
-        mDocumentManager->codecManager()->generatorList();
+        mModelCodecManager->generatorList();
 
     const bool hasGenerators = ( generatorList.size() > 0 );
 
@@ -120,14 +123,14 @@ Q_UNUSED( model )
 
 void CreatorController::onNewActionTriggered()
 {
-    mDocumentManager->createManager()->createNew();
+    mDocumentCreateManager->createNew();
 }
 
 void CreatorController::onNewFromClipboardActionTriggered()
 {
     const QMimeData* mimeData = QApplication::clipboard()->mimeData( QClipboard::Clipboard );
 
-    mDocumentManager->createManager()->createNewFromData( mimeData, true );
+    mDocumentCreateManager->createNewFromData( mimeData, true );
 }
 
 void CreatorController::onNewFromGeneratorActionTriggered()
@@ -137,7 +140,7 @@ void CreatorController::onNewFromGeneratorActionTriggered()
     AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator* >();
 
     AbstractModelDataGeneratorConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor( generator );
+        mModelCodecViewManager->createConfigEditor( generator );
 
     if( configEditor )
     {
@@ -160,7 +163,7 @@ void CreatorController::onNewFromGeneratorActionTriggered()
     delete generateThread;
 
     const bool setModified = ( generator->flags() & AbstractModelDataGenerator::DynamicGeneration );
-    mDocumentManager->createManager()->createNewFromData( mimeData, setModified );
+    mDocumentCreateManager->createNewFromData( mimeData, setModified );
 
     QApplication::restoreOverrideCursor();
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,8 +34,9 @@ class KXMLGUIClient;
 namespace Kasten
 {
 
-class ViewManager;
-class DocumentManager;
+class ModelCodecViewManager;
+class ModelCodecManager;
+class DocumentCreateManager;
 
 
 class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiController
@@ -43,7 +44,10 @@ class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiControll
   Q_OBJECT
 
   public:
-    CreatorController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient );
+    CreatorController( ModelCodecViewManager* modelCodecViewManager,
+                       ModelCodecManager* modelCodecManager,
+                       DocumentCreateManager* documentCreateManager,
+                       KXMLGUIClient* guiClient );
     ~CreatorController();
 
   public: // AbstractXmlGuiController API
@@ -55,8 +59,9 @@ class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiControll
     void onNewFromGeneratorActionTriggered();
 
   protected:
-    ViewManager* mViewManager;
-    DocumentManager* mDocumentManager;
+    ModelCodecViewManager* mModelCodecViewManager;
+    ModelCodecManager* mModelCodecManager;
+    DocumentCreateManager* mDocumentCreateManager;
 };
 
 }

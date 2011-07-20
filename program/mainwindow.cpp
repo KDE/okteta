@@ -142,7 +142,9 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 void OktetaMainWindow::setupControllers()
 {
     // general, part of Kasten
-    addXmlGuiController( new CreatorController(mProgram->viewManager(),mProgram->documentManager(),this) );
+    addXmlGuiController( new CreatorController(mProgram->viewManager()->codecViewManager(),
+                                               mProgram->documentManager()->codecManager(),
+                                               mProgram->documentManager()->createManager(),this) );
     addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SynchronizeController(mProgram->documentManager()->syncManager(),this) );
