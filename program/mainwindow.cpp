@@ -141,34 +141,39 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 
 void OktetaMainWindow::setupControllers()
 {
+    ModelCodecViewManager* const codecViewManager = mViewManager->codecViewManager();
+    ModelCodecManager* const codecManager = mDocumentManager->codecManager();
+    DocumentCreateManager* const createManager = mDocumentManager->createManager();
+    DocumentSyncManager* const syncManager = mDocumentManager->syncManager();
+
     // general, part of Kasten
-    addXmlGuiController( new CreatorController(mProgram->viewManager()->codecViewManager(),
-                                               mProgram->documentManager()->codecManager(),
-                                               mProgram->documentManager()->createManager(),this) );
-    addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
-    addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
-    addXmlGuiController( new SynchronizeController(mProgram->documentManager()->syncManager(),this) );
-    addXmlGuiController( new ExportController(mProgram->viewManager()->codecViewManager(),
-                                              mProgram->documentManager()->codecManager(),this) );
-    addXmlGuiController( new CloseController(mProgram->documentManager(),this) );
+    addXmlGuiController( new CreatorController(codecViewManager,
+                                               codecManager,
+                                               createManager,this) );
+    addXmlGuiController( new LoaderController(syncManager,this) );
+    addXmlGuiController( new SetRemoteController(syncManager,this) );
+    addXmlGuiController( new SynchronizeController(syncManager,this) );
+    addXmlGuiController( new ExportController(codecViewManager,
+                                              codecManager,this) );
+    addXmlGuiController( new CloseController(mDocumentManager,this) );
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );
     addXmlGuiController( new SwitchViewController(mGroupedViews,this) );
-    addXmlGuiController( new ViewAreaSplitController(mProgram->viewManager(),mGroupedViews,this) );
+    addXmlGuiController( new ViewAreaSplitController(mViewManager,mGroupedViews,this) );
     addXmlGuiController( new FullScreenController(this) );
     addXmlGuiController( new QuitController(0,this) );
 
     addXmlGuiController( new ZoomController(this) );
     addXmlGuiController( new SelectController(this) );
     addXmlGuiController( new ClipboardController(this) );
-    addXmlGuiController( new InsertController(mProgram->viewManager()->codecViewManager(),
-                                              mProgram->documentManager()->codecManager(),this) );
-    addXmlGuiController( new CopyAsController(mProgram->viewManager()->codecViewManager(),
-                                              mProgram->documentManager()->codecManager(),this) );
+    addXmlGuiController( new InsertController(codecViewManager,
+                                              codecManager,this) );
+    addXmlGuiController( new CopyAsController(codecViewManager,
+                                              codecManager,this) );
 
-    addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager()->syncManager() )) );
-    addTool( new DocumentsToolView(new DocumentsTool( mProgram->documentManager() )) );
-    addTool( new TerminalToolView(new TerminalTool( mProgram->documentManager()->syncManager() )) );
+    addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( syncManager )) );
+    addTool( new DocumentsToolView(new DocumentsTool( mDocumentManager )) );
+    addTool( new TerminalToolView(new TerminalTool( syncManager )) );
 #ifndef NDEBUG
     addTool( new VersionViewToolView(new VersionViewTool()) );
 #endif
@@ -191,7 +196,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ReadOnlyBarController(bottomBar) );
     addXmlGuiController( new ZoomBarController(bottomBar) );
 
-    addTool( new DocumentInfoToolView(new DocumentInfoTool(mProgram->documentManager()->syncManager())) );
+    addTool( new DocumentInfoToolView(new DocumentInfoTool(syncManager)) );
     addTool( new ChecksumToolView(new ChecksumTool()) );
     addTool( new FilterToolView(new FilterTool()) );
     addTool( new CharsetConversionToolView(new CharsetConversionTool()) );
