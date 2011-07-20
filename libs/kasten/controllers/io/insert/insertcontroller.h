@@ -48,7 +48,7 @@ class KASTENCONTROLLERS_EXPORT InsertController : public AbstractXmlGuiControlle
   Q_OBJECT
 
   public:
-    InsertController( ModelCodecViewManager* codecViewManager,
+    InsertController( ModelCodecViewManager* modelCodecViewManager,
                       ModelCodecManager* modelCodecManager,
                       KXMLGUIClient* guiClient );
 
@@ -63,7 +63,7 @@ class KASTENCONTROLLERS_EXPORT InsertController : public AbstractXmlGuiControlle
     void onActionTriggered( QAction* action );
 
   protected:
-    ModelCodecViewManager* mCodecViewManager;
+    ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
 
     AbstractModel* mModel;

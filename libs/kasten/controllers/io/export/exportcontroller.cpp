@@ -46,11 +46,11 @@ Q_DECLARE_METATYPE( Kasten::AbstractModelExporter* )
 namespace Kasten
 {
 
-ExportController::ExportController( ModelCodecViewManager* codecViewManager,
+ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager,
                                     ModelCodecManager* modelCodecManager,
                                     KXMLGUIClient* guiClient )
   : AbstractXmlGuiController(),
-    mCodecViewManager( codecViewManager ),
+    mModelCodecViewManager( modelCodecViewManager ),
     mModelCodecManager( modelCodecManager ),
     mModel( 0 )
 {
@@ -121,7 +121,7 @@ void ExportController::onActionTriggered( QAction *action )
     const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
     AbstractModelExporterConfigEditor* configEditor =
-        mCodecViewManager->createConfigEditor( exporter );
+        mModelCodecViewManager->createConfigEditor( exporter );
 
     if( configEditor )
     {

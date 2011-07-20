@@ -52,11 +52,11 @@ Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
 namespace Kasten
 {
 
-InsertController::InsertController( ModelCodecViewManager* codecViewManager,
+InsertController::InsertController( ModelCodecViewManager* modelCodecViewManager,
                                     ModelCodecManager* modelCodecManager,
                                     KXMLGUIClient* guiClient )
   : AbstractXmlGuiController(),
-    mCodecViewManager( codecViewManager ),
+    mModelCodecViewManager( modelCodecViewManager ),
     mModelCodecManager( modelCodecManager ),
     mModel( 0 )
 {
@@ -127,7 +127,7 @@ void InsertController::onActionTriggered( QAction *action )
     AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator* >();
 
     AbstractModelDataGeneratorConfigEditor* configEditor =
-        mCodecViewManager->createConfigEditor( generator );
+        mModelCodecViewManager->createConfigEditor( generator );
 
     if( configEditor )
     {

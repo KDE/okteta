@@ -51,11 +51,11 @@ Q_DECLARE_METATYPE(Kasten::AbstractModelStreamEncoder*)
 namespace Kasten
 {
 
-CopyAsController::CopyAsController( ModelCodecViewManager* codecViewManager,
+CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager,
                                     ModelCodecManager* modelCodecManager,
                                     KXMLGUIClient* guiClient )
   : AbstractXmlGuiController(),
-    mCodecViewManager( codecViewManager ),
+    mModelCodecViewManager( modelCodecViewManager ),
     mModelCodecManager( modelCodecManager ),
     mModel( 0 )
 {
@@ -127,7 +127,7 @@ void CopyAsController::onActionTriggered( QAction *action )
     const AbstractModelSelection* selection = mSelectionControl->modelSelection();
 
     AbstractModelStreamEncoderConfigEditor* configEditor =
-        mCodecViewManager->createConfigEditor( encoder );
+        mModelCodecViewManager->createConfigEditor( encoder );
 
     if( configEditor )
     {

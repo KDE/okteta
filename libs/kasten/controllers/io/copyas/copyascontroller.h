@@ -48,7 +48,7 @@ class KASTENCONTROLLERS_EXPORT CopyAsController : public AbstractXmlGuiControlle
   Q_OBJECT
 
   public:
-    CopyAsController( ModelCodecViewManager* codecViewManager,
+    CopyAsController( ModelCodecViewManager* modelCodecViewManager,
                       ModelCodecManager* modelCodecManager,
                       KXMLGUIClient* guiClient );
 
@@ -60,7 +60,7 @@ class KASTENCONTROLLERS_EXPORT CopyAsController : public AbstractXmlGuiControlle
     void onActionTriggered( QAction* action );
 
   protected:
-    ModelCodecViewManager* mCodecViewManager;
+    ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
 
     AbstractModel* mModel;
