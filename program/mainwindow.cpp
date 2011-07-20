@@ -111,8 +111,9 @@ namespace Kasten
 
 static const char LoadedUrlsKey[] = "LoadedUrls";
 
-OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
- : ShellWindow( program->documentManager(), program->viewManager() ), mProgram( program )
+OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
+  : ShellWindow( program->documentManager(), program->viewManager() ),
+    mProgram( program )
 {
     setObjectName( QLatin1String("Shell") );
 
@@ -136,7 +137,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
     addXmlGuiController( new ToolListMenuController(this,this) );
-    addXmlGuiController( new ViewListMenuController(mProgram->viewManager(),mGroupedViews,this) );
+    addXmlGuiController( new ViewListMenuController(mViewManager,mGroupedViews,this) );
 }
 
 void OktetaMainWindow::setupControllers()
@@ -190,7 +191,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewModeController(this) );
 
-    Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
+    Kasten::StatusBar* const bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
     addXmlGuiController( new ViewStatusController(bottomBar) );
     addXmlGuiController( new ModifiedBarController(bottomBar) );
     addXmlGuiController( new ReadOnlyBarController(bottomBar) );
@@ -210,24 +211,24 @@ void OktetaMainWindow::setupControllers()
     addTool( new BookmarksToolView(new BookmarksTool()) );
 }
 
-void OktetaMainWindow::saveProperties( KConfigGroup &configGroup )
+void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
 {
     const QStringList urls = mDocumentManager->urls();
     configGroup.writePathEntry( LoadedUrlsKey, urls );
 }
 
-void OktetaMainWindow::readProperties( const KConfigGroup &configGroup )
+void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
 {
     const QStringList urls = configGroup.readPathEntry( LoadedUrlsKey, QStringList() );
 
-    DocumentSyncManager* syncManager = mDocumentManager->syncManager();
-    DocumentCreateManager* createManager = mDocumentManager->createManager();
-    for( int i=0; i<urls.count(); ++i )
+    DocumentSyncManager* const syncManager = mDocumentManager->syncManager();
+    DocumentCreateManager* const createManager = mDocumentManager->createManager();
+    foreach( const KUrl& url, urls )
     {
-        if( urls[i].isEmpty() )
+        if( url.isEmpty() )
             createManager->createNew();
         else
-            syncManager->load( urls[i] );
+            syncManager->load( url );
         // TODO: set view to offset
         // if( offset != -1 )
     }
