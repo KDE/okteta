@@ -146,7 +146,8 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new LoaderController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SetRemoteController(mProgram->documentManager()->syncManager(),this) );
     addXmlGuiController( new SynchronizeController(mProgram->documentManager()->syncManager(),this) );
-    addXmlGuiController( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
+    addXmlGuiController( new ExportController(mProgram->viewManager()->codecViewManager(),
+                                              mProgram->documentManager()->codecManager(),this) );
     addXmlGuiController( new CloseController(mProgram->documentManager(),this) );
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,10 +28,8 @@
 // Kasten gui
 #include <modelcodecviewmanager.h>
 #include <dataselectable.h>
-#include <viewmanager.h>
 #include <abstractmodelexporterconfigeditor.h>
 // Kasten core
-#include <documentmanager.h>
 #include <modelcodecmanager.h>
 #include <abstractdocument.h>
 #include <abstractmodelexporter.h>
@@ -48,8 +46,13 @@ Q_DECLARE_METATYPE( Kasten::AbstractModelExporter* )
 namespace Kasten
 {
 
-ExportController::ExportController( ViewManager* viewManager, DocumentManager* documentManager, KXMLGUIClient* guiClient )
- : mViewManager( viewManager ), mDocumentManager( documentManager ), mModel( 0 )
+ExportController::ExportController( ModelCodecViewManager* codecViewManager,
+                                    ModelCodecManager* modelCodecManager,
+                                    KXMLGUIClient* guiClient )
+  : AbstractXmlGuiController(),
+    mCodecViewManager( codecViewManager ),
+    mModelCodecManager( modelCodecManager ),
+    mModel( 0 )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -86,7 +89,7 @@ void ExportController::updateActions()
     const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
     const QList<AbstractModelExporter*> exporterList =
-        mDocumentManager->codecManager()->exporterList( mModel, selection );
+        mModelCodecManager->exporterList( mModel, selection );
     const bool hasExporters = ( exporterList.size() > 0 );
 
     if( hasExporters )
@@ -118,7 +121,7 @@ void ExportController::onActionTriggered( QAction *action )
     const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
 
     AbstractModelExporterConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor( exporter );
+        mCodecViewManager->createConfigEditor( exporter );
 
     if( configEditor )
     {
@@ -128,7 +131,7 @@ void ExportController::onActionTriggered( QAction *action )
             return;
     }
 
-    mDocumentManager->codecManager()->exportDocument( exporter, mModel, selection );
+    mModelCodecManager->exportDocument( exporter, mModel, selection );
 }
 
 }
