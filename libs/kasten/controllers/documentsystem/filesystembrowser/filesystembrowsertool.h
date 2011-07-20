@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,7 @@ class KUrl;
 namespace Kasten
 {
 
-class DocumentManager;
+class DocumentSyncManager;
 class AbstractDocument;
 
 
@@ -43,7 +43,7 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
   Q_OBJECT
 
   public:
-    explicit FileSystemBrowserTool( DocumentManager* documentManager );
+    explicit FileSystemBrowserTool( DocumentSyncManager* documentSyncManager );
     virtual ~FileSystemBrowserTool();
 
   public:
@@ -63,9 +63,9 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
     void hasCurrentUrlChanged( bool hasCurrentUrl );
 
   protected: // sources
-    AbstractDocument* mDocument;
+    DocumentSyncManager* mDocumentSyncManager;
 
-    DocumentManager* mDocumentManager;
+    AbstractDocument* mDocument;
 };
 
 }

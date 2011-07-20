@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,6 @@
 #include "filesystembrowsertool.h"
 
 // Kasten core
-#include <documentmanager.h>
 #include <documentsyncmanager.h>
 #include <versionable.h>
 #include <abstractdocument.h>
@@ -36,8 +35,10 @@
 namespace Kasten
 {
 
-FileSystemBrowserTool::FileSystemBrowserTool( DocumentManager* documentManager )
- : mDocument( 0 ), mDocumentManager( documentManager )
+FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncManager )
+  : AbstractTool(),
+    mDocumentSyncManager( documentSyncManager ),
+    mDocument( 0 )
 {
     setObjectName( QLatin1String( "FileSystemBrowser" ) );
 }
@@ -51,7 +52,7 @@ KUrl FileSystemBrowserTool::currentUrl() const
     KUrl result;
 
     if( mDocument )
-        result = mDocumentManager->syncManager()->urlOf( mDocument ).upUrl();
+        result = mDocumentSyncManager->urlOf( mDocument ).upUrl();
 
     return result;
 }
@@ -75,7 +76,7 @@ void FileSystemBrowserTool::setTargetModel( AbstractModel* model )
 
 void FileSystemBrowserTool::open( const KUrl& url )
 {
-    mDocumentManager->syncManager()->load( url );
+    mDocumentSyncManager->load( url );
 }
 
 FileSystemBrowserTool::~FileSystemBrowserTool() {}

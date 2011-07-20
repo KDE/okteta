@@ -163,7 +163,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new CopyAsController(mProgram->viewManager()->codecViewManager(),
                                               mProgram->documentManager()->codecManager(),this) );
 
-    addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager() )) );
+    addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( mProgram->documentManager()->syncManager() )) );
     addTool( new DocumentsToolView(new DocumentsTool( mProgram->documentManager() )) );
     addTool( new TerminalToolView(new TerminalTool( mProgram->documentManager() )) );
 #ifndef NDEBUG
