@@ -134,14 +134,14 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
     baseLayout->addLayout( propertyGrid );
     baseLayout->addStretch( 10 );
 
-    connect( mTool, SIGNAL(documentTitleChanged( const QString& )),
-             SLOT(onDocumentTitleChanged( const QString& )) );
-    connect( mTool, SIGNAL(documentMimeTypeChanged( KMimeType::Ptr )),
-             SLOT(onMimeTypeChanged( KMimeType::Ptr )) );
-    connect( mTool, SIGNAL(locationChanged( const QString& )),
-             SLOT(onLocationChanged( const QString& )) );
-    connect( mTool, SIGNAL(documentSizeChanged( int )),
-             SLOT(onDocumentSizeChanged( int )) );
+    connect( mTool, SIGNAL(documentTitleChanged(QString)),
+             SLOT(onDocumentTitleChanged(QString)) );
+    connect( mTool, SIGNAL(documentMimeTypeChanged(KMimeType::Ptr)),
+             SLOT(onMimeTypeChanged(KMimeType::Ptr)) );
+    connect( mTool, SIGNAL(locationChanged(QString)),
+             SLOT(onLocationChanged(QString)) );
+    connect( mTool, SIGNAL(documentSizeChanged(int)),
+             SLOT(onDocumentSizeChanged(int)) );
     onDocumentTitleChanged( mTool->documentTitle() );
     onMimeTypeChanged( mTool->mimeType() );
     onLocationChanged( mTool->location() );

@@ -46,7 +46,8 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( 
         i18nc( "@label:textbox operand to the arithmetic filter function",
                "Operand:" );
     mOperandEdit = new Okteta::ByteArrayComboBox( this );
-    connect( mOperandEdit, SIGNAL(byteArrayChanged(const QByteArray&)), SLOT(onInputChanged(const QByteArray&)) );
+    connect( mOperandEdit, SIGNAL(byteArrayChanged(QByteArray)),
+             SLOT(onInputChanged(QByteArray)) );
     const QString operandToolTip =
         i18nc( "@info:tooltip",
                "The operand to do the operation with." );

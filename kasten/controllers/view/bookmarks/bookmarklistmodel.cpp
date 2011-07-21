@@ -40,12 +40,14 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
 
-    connect( mTool, SIGNAL(hasBookmarksChanged( bool )), SLOT(onHasBookmarksChanged( bool )) );
-    connect( mTool, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
+    connect( mTool, SIGNAL(hasBookmarksChanged(bool)),
+             SLOT(onHasBookmarksChanged(bool)) );
+    connect( mTool, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
              SLOT(onBookmarksChanged()) );
-    connect( mTool, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
+    connect( mTool, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
              SLOT(onBookmarksChanged()) );
-    connect( mTool, SIGNAL(bookmarksModified( const QList<int>& )), SLOT(onBookmarksChanged( const QList<int>& )) );
+    connect( mTool, SIGNAL(bookmarksModified(QList<int>)),
+             SLOT(onBookmarksChanged(QList<int>)) );
 }
 
 int BookmarkListModel::rowCount( const QModelIndex& parent ) const

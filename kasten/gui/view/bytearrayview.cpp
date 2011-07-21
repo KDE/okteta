@@ -99,19 +99,19 @@ void ByteArrayView::init()
     mWidget->setOverwriteMode( useOverwriteAsDefault );
 
     // propagate signals
-    connect( mDocument, SIGNAL(titleChanged( QString )), SIGNAL(titleChanged( QString )) );
-    connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
-                        SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )) );
-    connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
-                        SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )) );
-    connect( mWidget, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
-    connect( mWidget, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
-    connect( mWidget, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
-    connect( mWidget, SIGNAL(selectionChanged( const Okteta::AddressRange& )), SLOT(onSelectionChanged( const Okteta::AddressRange& )) );
-    connect( mWidget, SIGNAL(cursorPositionChanged( Okteta::Address )), SIGNAL(cursorPositionChanged( Okteta::Address )) );
-    connect( mWidget, SIGNAL(valueCodingChanged( int )), SIGNAL(valueCodingChanged( int )) );
-    connect( mWidget, SIGNAL(charCodecChanged( const QString& )), SIGNAL(charCodecChanged( const QString& )) );
-    connect( mWidget, SIGNAL(focusChanged( bool )), SIGNAL(focusChanged( bool )) );
+    connect( mDocument, SIGNAL(titleChanged(QString)), SIGNAL(titleChanged(QString)) );
+    connect( mDocument, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+                        SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)) );
+    connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
+                        SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)) );
+    connect( mWidget, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );
+    connect( mWidget, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
+    connect( mWidget, SIGNAL(overwriteModeChanged(bool)), SIGNAL(overwriteModeChanged(bool)) );
+    connect( mWidget, SIGNAL(selectionChanged(Okteta::AddressRange)), SLOT(onSelectionChanged(Okteta::AddressRange)) );
+    connect( mWidget, SIGNAL(cursorPositionChanged(Okteta::Address)), SIGNAL(cursorPositionChanged(Okteta::Address)) );
+    connect( mWidget, SIGNAL(valueCodingChanged(int)), SIGNAL(valueCodingChanged(int)) );
+    connect( mWidget, SIGNAL(charCodecChanged(QString)), SIGNAL(charCodecChanged(QString)) );
+    connect( mWidget, SIGNAL(focusChanged(bool)), SIGNAL(focusChanged(bool)) );
 }
 
 const AbstractModelSelection* ByteArrayView::modelSelection() const { return &mSelection; }

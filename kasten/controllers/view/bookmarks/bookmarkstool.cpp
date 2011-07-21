@@ -92,17 +92,17 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
     {
         onCursorPositionChanged( mByteArrayView->cursorPosition() );
 
-        connect( mByteArray, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
-                 SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
-                 SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )) );
-        connect( mByteArray, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
+        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+                 SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)) );
+        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+                 SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)) );
+        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
                  SLOT(onBookmarksModified()) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
+        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
                  SLOT(onBookmarksModified()) );
-        connect( mByteArray, SIGNAL(bookmarksModified( const QList<int>& )),
-                 SIGNAL(bookmarksModified( const QList<int>& )) );
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChanged( Okteta::Address )) );
+        connect( mByteArray, SIGNAL(bookmarksModified(QList<int>)),
+                 SIGNAL(bookmarksModified(QList<int>)) );
+        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)), SLOT(onCursorPositionChanged(Okteta::Address)) );
     }
     else
     {

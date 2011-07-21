@@ -53,7 +53,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
 
     mVariableNameEdit = new KLineEdit( this );
     mVariableNameEdit->setText( mSettings.variableName );
-    connect( mVariableNameEdit, SIGNAL(textChanged( const QString& )), SLOT(onSettingsChanged()) );
+    connect( mVariableNameEdit, SIGNAL(textChanged(QString)), SLOT(onSettingsChanged()) );
     pageLayout->addRow( variableNameLabel, mVariableNameEdit );
 
     // items per line
@@ -64,7 +64,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     mItemsPerLineEdit = new KIntNumInput( this );
     mItemsPerLineEdit->setMinimum( 1 );
     mItemsPerLineEdit->setValue( mSettings.elementsPerLine );
-    connect( mItemsPerLineEdit, SIGNAL(valueChanged( int )), SLOT(onSettingsChanged()) );
+    connect( mItemsPerLineEdit, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );
     pageLayout->addRow( itemsPerLineLabel, mItemsPerLineEdit );
 
     // data type
@@ -91,7 +91,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
 
     mUnsignedAsHexadecimalCheck = new QCheckBox( this );
     mUnsignedAsHexadecimalCheck->setChecked( mSettings.unsignedAsHexadecimal );
-    connect( mUnsignedAsHexadecimalCheck, SIGNAL(toggled( bool )), SLOT(onSettingsChanged()) );
+    connect( mUnsignedAsHexadecimalCheck, SIGNAL(toggled(bool)), SLOT(onSettingsChanged()) );
     pageLayout->addRow( unsignedAsHexadecimalLabel, mUnsignedAsHexadecimalCheck );
 }
 

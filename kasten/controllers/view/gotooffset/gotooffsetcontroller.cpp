@@ -50,8 +50,8 @@ GotoOffsetController::GotoOffsetController( If::ToolInlineViewable* toolInlineVi
     connect( mGotoOffsetAction, SIGNAL(triggered(bool) ), SLOT(gotoOffset()) );
 
     mTool = new GotoOffsetTool();
-    connect( mTool, SIGNAL(isUsableChanged( bool )),
-             mGotoOffsetAction, SLOT(setEnabled( bool )) );
+    connect( mTool, SIGNAL(isUsableChanged(bool)),
+             mGotoOffsetAction, SLOT(setEnabled(bool)) );
     mGotoOffsetAction->setEnabled( mTool->isUsable() );
 
     mView = new GotoOffsetToolView( mTool );

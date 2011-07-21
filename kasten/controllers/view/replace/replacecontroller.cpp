@@ -53,10 +53,10 @@ ReplaceController::ReplaceController( KXMLGUIClient* guiClient, QWidget* parentW
     mTool = new ReplaceTool();
     mTool->setUserQueryAgent( this );
 
-    connect( mTool, SIGNAL(isApplyableChanged( bool )),
-             mReplaceAction, SLOT(setEnabled( bool )) );
+    connect( mTool, SIGNAL(isApplyableChanged(bool)),
+             mReplaceAction, SLOT(setEnabled(bool)) );
 
-    connect( mTool, SIGNAL(finished( bool, int )), SLOT(onFinished( bool, int )) );
+    connect( mTool, SIGNAL(finished(bool,int)), SLOT(onFinished(bool,int)) );
 
     mReplaceAction->setEnabled( false );
 }

@@ -94,9 +94,9 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
                             "If you press the <interface>Filter</interface> button, the operation you selected "
                             "above is executed for the bytes in the selected range with the given options.")), this );
     mFilterButton->setEnabled( mTool->hasWriteable() );
-    connect( mTool, SIGNAL(hasWriteableChanged( bool )), SLOT(onHasWriteableChanged( bool )) );
-    connect( mTool, SIGNAL(charCodecChanged( const QString & )), SLOT(onCharCodecChanged( const QString & )) );
-    connect( mFilterButton, SIGNAL(clicked( bool )), SLOT(onFilterClicked()) );
+    connect( mTool, SIGNAL(hasWriteableChanged(bool)), SLOT(onHasWriteableChanged(bool)) );
+    connect( mTool, SIGNAL(charCodecChanged(QString)), SLOT(onCharCodecChanged(QString)) );
+    connect( mFilterButton, SIGNAL(clicked(bool)), SLOT(onFilterClicked()) );
     addButton( mFilterButton, AbstractToolWidget::Default );
     buttonLayout->addWidget( mFilterButton );
     baseLayout->addLayout( buttonLayout );
@@ -104,10 +104,10 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
 
     // automatically set focus to the parameters if a operation has been selected
     QAbstractItemView* operationComboBoxListView = mOperationComboBox->view();
-    QObject::connect( operationComboBoxListView, SIGNAL(activated( const QModelIndex& )),
+    QObject::connect( operationComboBoxListView, SIGNAL(activated(QModelIndex)),
              mParameterSetEditStack, SLOT(setFocus()) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    QObject::connect( operationComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
+    QObject::connect( operationComboBoxListView, SIGNAL(pressed(QModelIndex)),
              mParameterSetEditStack, SLOT(setFocus()) );
     // TODO: goto filter button if there are no parameters
 
@@ -169,8 +169,8 @@ void FilterView::onOperationChange( int index )
         qobject_cast<AbstractByteArrayFilterParameterSetEdit *>( mParameterSetEditStack->currentWidget() );
     if( parametersetEdit )
     {
-        connect( parametersetEdit, SIGNAL(validityChanged( bool )),
-                 SLOT(onValidityChanged( bool )) );
+        connect( parametersetEdit, SIGNAL(validityChanged(bool)),
+                 SLOT(onValidityChanged(bool)) );
         onValidityChanged( parametersetEdit->isValid() );
     }
 }

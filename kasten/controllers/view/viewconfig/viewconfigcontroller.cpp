@@ -129,9 +129,9 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
 
         mToggleColumnsAction->setCurrentItem( mByteArrayView->visibleByteArrayCodings()-1 );
 
-        connect( mByteArrayView, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
-            SLOT(onCharCodecChanged( const QString& )) );
+        connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
+        connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
+            SLOT(onCharCodecChanged(QString)) );
     }
     mCodingAction->setEnabled( hasView );
     mEncodingAction->setEnabled( hasView );

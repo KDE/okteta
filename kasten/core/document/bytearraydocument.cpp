@@ -38,24 +38,24 @@ ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
   : mByteArray( new Okteta::PieceTableByteArrayModel() ),
     mInitDescription( initDescription )
 {
-    connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
-    connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
-    connect( mByteArray, SIGNAL(revertedToVersionIndex( int )), SIGNAL(revertedToVersionIndex( int )) );
-    connect( mByteArray, SIGNAL(headVersionChanged( int )), SIGNAL(headVersionChanged( int )) );
-    connect( mByteArray, SIGNAL(headVersionDescriptionChanged( const QString& )),
-             SLOT(onHeadVersionDescriptionChanged( const QString& )) );
+    connect( mByteArray, SIGNAL(modifiedChanged(bool)), SLOT(onModelModified(bool)) );
+    connect( mByteArray, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
+    connect( mByteArray, SIGNAL(revertedToVersionIndex(int)), SIGNAL(revertedToVersionIndex(int)) );
+    connect( mByteArray, SIGNAL(headVersionChanged(int)), SIGNAL(headVersionChanged(int)) );
+    connect( mByteArray, SIGNAL(headVersionDescriptionChanged(QString)),
+             SLOT(onHeadVersionDescriptionChanged(QString)) );
 }
 
 ByteArrayDocument::ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
   : mByteArray( byteArray ),
     mInitDescription( initDescription )
 {
-    connect( mByteArray, SIGNAL(modifiedChanged( bool )), SLOT(onModelModified( bool )) );
-    connect( mByteArray, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
-    connect( mByteArray, SIGNAL(revertedToVersionIndex( int )), SIGNAL(revertedToVersionIndex( int )) );
-    connect( mByteArray, SIGNAL(headVersionChanged( int )), SIGNAL(headVersionChanged( int )) );
-    connect( mByteArray, SIGNAL(headVersionDescriptionChanged( const QString& )),
-             SLOT(onHeadVersionDescriptionChanged( const QString& )) );
+    connect( mByteArray, SIGNAL(modifiedChanged(bool)), SLOT(onModelModified(bool)) );
+    connect( mByteArray, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
+    connect( mByteArray, SIGNAL(revertedToVersionIndex(int)), SIGNAL(revertedToVersionIndex(int)) );
+    connect( mByteArray, SIGNAL(headVersionChanged(int)), SIGNAL(headVersionChanged(int)) );
+    connect( mByteArray, SIGNAL(headVersionDescriptionChanged(QString)),
+             SLOT(onHeadVersionDescriptionChanged(QString)) );
 }
 
 Okteta::AbstractByteArrayModel* ByteArrayDocument::content() const { return mByteArray; }

@@ -84,7 +84,8 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 
     mBookmarksActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
 //     mBookmarksActionGroup->setExclusive( true );
-    connect( mBookmarksActionGroup, SIGNAL(triggered( QAction* )), SLOT(onBookmarkTriggered( QAction* )) );
+    connect( mBookmarksActionGroup, SIGNAL(triggered(QAction*)),
+             SLOT(onBookmarkTriggered(QAction*)) );
 
     setTargetModel( 0 );
 }
@@ -106,13 +107,14 @@ void BookmarksController::setTargetModel( AbstractModel* model )
     if( hasViewWithBookmarks )
     {
         bookmarksCount = mBookmarks->bookmarksCount();
-        connect( mByteArray, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
-                 SLOT(onBookmarksAdded( const QList<Okteta::Bookmark>& )) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
-                 SLOT(onBookmarksRemoved( const QList<Okteta::Bookmark>& )) );
-        connect( mByteArray, SIGNAL(bookmarksModified( const QList<int>& )),
+        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+                 SLOT(onBookmarksAdded(QList<Okteta::Bookmark>)) );
+        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+                 SLOT(onBookmarksRemoved(QList<Okteta::Bookmark>)) );
+        connect( mByteArray, SIGNAL(bookmarksModified(QList<int>)),
                  SLOT(updateBookmarks()) );
-        connect( mByteArrayView, SIGNAL( cursorPositionChanged( Okteta::Address )), SLOT( onCursorPositionChanged( Okteta::Address )) );
+        connect( mByteArrayView, SIGNAL( cursorPositionChanged(Okteta::Address)),
+                 SLOT( onCursorPositionChanged(Okteta::Address)) );
     }
 
     updateBookmarks();

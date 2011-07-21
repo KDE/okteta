@@ -64,8 +64,10 @@ void KAbstractFindDialog::setupFindBox()
     QVBoxLayout *findBoxLayout = new QVBoxLayout;
 
     SearchDataEdit = new Okteta::ByteArrayComboBox( findBox );
-    connect( SearchDataEdit, SIGNAL(byteArrayChanged(const QByteArray&)), SLOT(onSearchDataChanged(const QByteArray&)) );
-    connect( SearchDataEdit, SIGNAL(formatChanged(int)), SLOT(onSearchDataFormatChanged(int)) );
+    connect( SearchDataEdit, SIGNAL(byteArrayChanged(QByteArray)),
+             SLOT(onSearchDataChanged(QByteArray)) );
+    connect( SearchDataEdit, SIGNAL(formatChanged(int)),
+             SLOT(onSearchDataFormatChanged(int)) );
     const QString toolTip =
         i18nc("@info:tooltip",
               "Enter the bytes to search for, or select bytes previously searched for from the list.");

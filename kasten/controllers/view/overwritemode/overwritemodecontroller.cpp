@@ -65,8 +65,8 @@ void OverwriteModeController::setTargetModel( AbstractModel* model )
     {
         mSetOverWriteAction->setChecked( mByteArrayView->isOverwriteMode() );
 
-        connect( mByteArrayView, SIGNAL(overwriteModeChanged( bool )),
-                 mSetOverWriteAction, SLOT(setChecked( bool )) );
+        connect( mByteArrayView, SIGNAL(overwriteModeChanged(bool)),
+                 mSetOverWriteAction, SLOT(setChecked(bool)) );
         // TODO: catch if isOverwriteOnly changes
     }
 

@@ -104,7 +104,7 @@ void ChecksumTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten::AbstractModelSelection*)),
                  SLOT(onSelectionChanged()) );
     }
 
@@ -147,7 +147,7 @@ void ChecksumTool::calculateChecksum()
         mSourceAlgorithmId = mAlgorithmId;
         mSourceByteArrayModel = mByteArrayModel;
         mSourceSelection = mByteArrayView->selection();
-        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
+        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
                  SLOT(onSourceChanged()) );
         connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
                  SLOT(onSourceDestroyed()) );

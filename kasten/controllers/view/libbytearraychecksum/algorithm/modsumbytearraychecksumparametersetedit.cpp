@@ -43,7 +43,7 @@ ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit
     mByteOrderComboBox = new KComboBox( this );
     mByteOrderComboBox->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
     mByteOrderComboBox->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
-    connect( mByteOrderComboBox, SIGNAL(activated( int )),
+    connect( mByteOrderComboBox, SIGNAL(activated(int)),
              SIGNAL(valuesChanged()) );
 
     const QString byteOrderLabelText =

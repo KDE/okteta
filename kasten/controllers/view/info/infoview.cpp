@@ -63,7 +63,8 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     label->setToolTip( sizeToolTip );
     mSizeLabel->setToolTip( sizeToolTip );
     topLineLayout->addWidget( mSizeLabel, 10 );
-    connect( mTool->statisticTableModel(), SIGNAL(sizeChanged( int )), SLOT(setByteArraySize( int )) );
+    connect( mTool->statisticTableModel(), SIGNAL(sizeChanged(int)),
+             SLOT(setByteArraySize(int)) );
 
     topLineLayout->addStretch();
 

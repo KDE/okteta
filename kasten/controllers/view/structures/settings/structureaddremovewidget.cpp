@@ -42,7 +42,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten::StructTool* tool,
     QWidget(parent), mTool(tool)
 {
     KConfigDialogManager::changedMap()->insert(QLatin1String("StructureAddRemoveWidget"),
-            SIGNAL(changed(const QStringList&)));
+            SIGNAL(changed(QStringList)));
     QHBoxLayout* baseLayout;
     QVBoxLayout* tree1Layout;
     QVBoxLayout* tree2Layout;

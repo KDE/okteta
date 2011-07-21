@@ -84,9 +84,9 @@ void StringsExtractTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString& )),
-                 SLOT(setCharCodec( const QString &)) );
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
+                 SLOT(setCharCodec(QString)) );
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten::AbstractModelSelection*)),
                  SLOT(onSelectionChanged()) );
 
         setCharCodec( mByteArrayView->charCodingName() );
@@ -195,7 +195,7 @@ void StringsExtractTool::extractStrings()
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = mByteArrayView->selection();
     mSourceMinLength = mMinLength;
-    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList & )),
+    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
              SLOT(onSourceChanged()) );
     connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
              SLOT(onSourceDestroyed()) );

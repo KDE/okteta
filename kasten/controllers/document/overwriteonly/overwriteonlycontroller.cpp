@@ -57,10 +57,10 @@ Q_UNUSED( model )
     {
 //         mSetOverwriteOnlyAction->setChecked( mByteArrayModel->isOverwriteOnly() );
 
-//         connect( mByteArrayModel, SIGNAL(overwriteOnlyChanged( bool )),
-//                  mSetOverwriteOnlyAction, SLOT(setChecked( bool )) );
-//         connect( mByteArrayModel, SIGNAL(modifiableChanged( bool )),
-//                  mSetOverwriteOnlyAction, SLOT(setEnabled( bool )) );
+//         connect( mByteArrayModel, SIGNAL(overwriteOnlyChanged(bool)),
+//                  mSetOverwriteOnlyAction, SLOT(setChecked(bool)) );
+//         connect( mByteArrayModel, SIGNAL(modifiableChanged(bool)),
+//                  mSetOverwriteOnlyAction, SLOT(setEnabled(bool)) );
     }
 
     mSetOverwriteOnlyAction->setEnabled( false );//mByteArrayModel ? mByteArrayModel->isModifiable() : false );

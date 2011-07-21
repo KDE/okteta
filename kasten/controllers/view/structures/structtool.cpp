@@ -99,11 +99,11 @@ void StructTool::setTargetModel(AbstractModel* model)
         connect(mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
                 SLOT(onCursorPositionChange(Okteta::Address)));
         connect(mByteArrayModel,
-                SIGNAL(contentsChanged(const Okteta::ArrayChangeMetricsList&)),
-                SLOT(onContentsChange(const Okteta::ArrayChangeMetricsList&)));
+                SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
+                SLOT(onContentsChange(Okteta::ArrayChangeMetricsList)));
         //		onCharCodecChange(mByteArrayView->charCodingName());
-        //         connect(mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
-        //                 SLOT(onCharCodecChange( const QString& )));
+        //         connect(mByteArrayView, SIGNAL(charCodecChanged(QString)),
+        //                 SLOT(onCharCodecChange(QString)));
     }
     emit byteArrayModelChanged(mByteArrayModel != NULL);
     updateData();

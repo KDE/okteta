@@ -53,12 +53,12 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
 
     QLabel* label = new QLabel( i18nc("@label:listbox","O&ffset:"), this );
     mAddressEdit = new Okteta::AddressComboBox( this );
-    connect( mAddressEdit, SIGNAL(addressChanged( Okteta::Address )),
-             mTool, SLOT(setTargetOffset( Okteta::Address )) );
-    connect( mAddressEdit, SIGNAL(formatChanged( int )),
-             SLOT(onFormatChanged( int )) );
-    connect( mAddressEdit, SIGNAL(addressTypeChanged( int )),
-             SLOT(onAddressTypeChanged( int )) );
+    connect( mAddressEdit, SIGNAL(addressChanged(Okteta::Address)),
+             mTool, SLOT(setTargetOffset(Okteta::Address)) );
+    connect( mAddressEdit, SIGNAL(formatChanged(int)),
+             SLOT(onFormatChanged(int)) );
+    connect( mAddressEdit, SIGNAL(addressTypeChanged(int)),
+             SLOT(onAddressTypeChanged(int)) );
     label->setBuddy( mAddressEdit );
     const QString inputWhatsThis =
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
@@ -80,15 +80,17 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     mAtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), this );
     mAtCursorCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go relative from the current cursor location and not absolute.") );
-    connect( mAtCursorCheckBox, SIGNAL(toggled( bool )), mTool, SLOT(setIsRelative( bool )) );
+    connect( mAtCursorCheckBox, SIGNAL(toggled(bool)),
+             mTool, SLOT(setIsRelative(bool)) );
     mExtendSelectionCheckBox = new QCheckBox( i18nc("@option:check","&Extend selection"), this );
     mExtendSelectionCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
-    connect( mExtendSelectionCheckBox, SIGNAL(toggled( bool )), mTool, SLOT(setIsSelectionToExtent( bool )) );
+    connect( mExtendSelectionCheckBox, SIGNAL(toggled(bool)),
+             mTool, SLOT(setIsSelectionToExtent(bool)) );
     mBackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), this );
     mBackwardsCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
-    connect( mBackwardsCheckBox, SIGNAL(toggled( bool )), mTool, SLOT(setIsBackwards( bool )) );
+    connect( mBackwardsCheckBox, SIGNAL(toggled(bool)), mTool, SLOT(setIsBackwards(bool)) );
 
     QHBoxLayout* upperOptionsLayout = new QHBoxLayout();
     upperOptionsLayout->setMargin( 0 );
@@ -121,7 +123,8 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     setTabOrder( mBackwardsCheckBox, mExtendSelectionCheckBox );
     setTabOrder( mExtendSelectionCheckBox, mGotoButton );
 
-    connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
+    connect( mTool, SIGNAL(isApplyableChanged(bool)),
+             SLOT(onApplyableChanged(bool)) );
 
     onApplyableChanged( mTool->isApplyable() );
 }

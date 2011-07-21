@@ -159,14 +159,14 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         onValueCodingChanged( (int)mByteArrayView->valueCoding() );
         onCharCodecChanged( mByteArrayView->charCodingName() );
 
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChanged( Okteta::Address )) );
-        connect( mByteArrayView, SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
-            SLOT(onSelectedDataChanged( const Kasten::AbstractModelSelection* )) );
-        connect( mByteArrayView, SIGNAL(overwriteModeChanged( bool )),
-                 mOverwriteModeToggleButton, SLOT(setChecked( bool )) );
-        connect( mByteArrayView, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
-            SLOT(onCharCodecChanged( const QString& )) );
+        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)), SLOT(onCursorPositionChanged(Okteta::Address)) );
+        connect( mByteArrayView, SIGNAL(selectedDataChanged(const Kasten::AbstractModelSelection*)),
+            SLOT(onSelectedDataChanged(const Kasten::AbstractModelSelection*)) );
+        connect( mByteArrayView, SIGNAL(overwriteModeChanged(bool)),
+                 mOverwriteModeToggleButton, SLOT(setChecked(bool)) );
+        connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
+        connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
+            SLOT(onCharCodecChanged(QString)) );
     }
     else
     {

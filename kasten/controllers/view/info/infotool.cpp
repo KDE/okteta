@@ -77,11 +77,11 @@ void InfoTool::setTargetModel( AbstractModel* model )
     {
         mStatisticTableModel->setCharCodec( mByteArrayView->charCodingName() );
         mStatisticTableModel->setValueCoding( mByteArrayView->valueCoding() );
-        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString & )),
-                 mStatisticTableModel, SLOT(setCharCodec( const QString &)) );
-        connect( mByteArrayView,  SIGNAL(valueCodingChanged( int )),
-                 mStatisticTableModel, SLOT(setValueCoding( int )) );
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged( const Kasten::AbstractModelSelection* )),
+        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
+                 mStatisticTableModel, SLOT(setCharCodec(QString)) );
+        connect( mByteArrayView,  SIGNAL(valueCodingChanged(int)),
+                 mStatisticTableModel, SLOT(setValueCoding(int)) );
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten::AbstractModelSelection*)),
                  SLOT(onSelectionChanged()) );
     }
 
@@ -130,7 +130,7 @@ void InfoTool::updateStatistic()
     mSourceSelection = selection;
     if( mSourceByteArrayModel )
     {
-        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
+        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
                  SLOT(onSourceChanged()) );
         connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
                  SLOT(onSourceDestroyed()) );

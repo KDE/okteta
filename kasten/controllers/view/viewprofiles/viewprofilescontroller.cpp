@@ -59,17 +59,17 @@ ViewProfilesController::ViewProfilesController( KXMLGUIClient* guiClient,
     mCreateNewAction =
         new QAction( KIcon("document-new"),
                      i18nc("@title:menu create a new view profile", "Create new..." ), this );
-    connect( mCreateNewAction, SIGNAL(triggered( bool )), SLOT(onCreateNewActionTriggered()) );
+    connect( mCreateNewAction, SIGNAL(triggered(bool)), SLOT(onCreateNewActionTriggered()) );
 
     mResetChangesAction =
         new QAction( KIcon("document-revert"),
                      i18nc("@title:menu ", "Reset changes" ), this );
-    connect( mResetChangesAction, SIGNAL(triggered( bool )), SLOT(onResetChangesActionTriggered()) );
+    connect( mResetChangesAction, SIGNAL(triggered(bool)), SLOT(onResetChangesActionTriggered()) );
 
     mSaveChangesAction =
         new QAction( KIcon("document-save"),
                      i18nc("@title:menu ", "Save changes" ), this );
-    connect( mSaveChangesAction, SIGNAL(triggered( bool )), SLOT(onSaveChangesActionTriggered()) );
+    connect( mSaveChangesAction, SIGNAL(triggered(bool)), SLOT(onSaveChangesActionTriggered()) );
 
     mViewProfileMenuAction->addAction( mCreateNewAction );
     mViewProfileMenuAction->addSeparator();
@@ -79,8 +79,8 @@ ViewProfilesController::ViewProfilesController( KXMLGUIClient* guiClient,
 
     mViewProfilesActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
 //     mBookmarksActionGroup->setExclusive( true );
-    connect( mViewProfilesActionGroup, SIGNAL(triggered( QAction* )),
-             SLOT(onViewProfileTriggered( QAction* )) );
+    connect( mViewProfilesActionGroup, SIGNAL(triggered(QAction*)),
+             SLOT(onViewProfileTriggered(QAction*)) );
 
     updateViewProfileActions();
 
@@ -107,11 +107,11 @@ void ViewProfilesController::setTargetModel( AbstractModel* model )
 
         mToggleColumnsAction->setCurrentItem( mByteArrayView->visibleByteArrayCodings()-1 );
 
-        connect( mByteArrayView, SIGNAL(valueCodingChanged( int )), SLOT(onValueCodingChanged( int )) );
+        connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
 #endif
-        connect( mByteArrayView, SIGNAL(valueCodingChanged( int )),
+        connect( mByteArrayView, SIGNAL(valueCodingChanged(int)),
                  SLOT(onViewSettingsChanged()) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged( const QString& )),
+        connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
                  SLOT(onViewSettingsChanged()) );
     }
 

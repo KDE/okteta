@@ -80,7 +80,7 @@ void ReplaceTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+        connect( mByteArrayView, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
         // TODO: update isApplyable on cursor movement and size changes
     }
 

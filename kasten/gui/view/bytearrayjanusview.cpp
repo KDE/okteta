@@ -91,14 +91,14 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         mView->setFocus();
     mViewModus = viewModus;
 
-    connect( mView, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
-    connect( mView, SIGNAL(selectionChanged( const Okteta::AddressRange& )), SIGNAL(selectionChanged( const Okteta::AddressRange& )) );
-    connect( mView, SIGNAL(readOnlyChanged( bool )), SIGNAL(readOnlyChanged( bool )) );
-    connect( mView, SIGNAL(overwriteModeChanged( bool )), SIGNAL(overwriteModeChanged( bool )) );
-    connect( mView, SIGNAL(cursorPositionChanged( Okteta::Address )), SIGNAL(cursorPositionChanged( Okteta::Address )) );
-    connect( mView, SIGNAL(valueCodingChanged( int )), SIGNAL(valueCodingChanged( int )) );
-    connect( mView, SIGNAL(charCodecChanged( const QString& )), SIGNAL(charCodecChanged( const QString& )) );
-    connect( mView, SIGNAL(focusChanged( bool )), SIGNAL(focusChanged( bool )) );
+    connect( mView, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );
+    connect( mView, SIGNAL(selectionChanged(Okteta::AddressRange)), SIGNAL(selectionChanged(Okteta::AddressRange)) );
+    connect( mView, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
+    connect( mView, SIGNAL(overwriteModeChanged(bool)), SIGNAL(overwriteModeChanged(bool)) );
+    connect( mView, SIGNAL(cursorPositionChanged(Okteta::Address)), SIGNAL(cursorPositionChanged(Okteta::Address)) );
+    connect( mView, SIGNAL(valueCodingChanged(int)), SIGNAL(valueCodingChanged(int)) );
+    connect( mView, SIGNAL(charCodecChanged(QString)), SIGNAL(charCodecChanged(QString)) );
+    connect( mView, SIGNAL(focusChanged(bool)), SIGNAL(focusChanged(bool)) );
 }
 
 

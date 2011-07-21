@@ -65,7 +65,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     mMinLengthSpinBox = new QSpinBox( this );
     mMinLengthSpinBox->setValue( mTool->minLength() );
     mMinLengthSpinBox->setMinimum( MinimumStringLength );
-    connect( mMinLengthSpinBox, SIGNAL(valueChanged( int )), mTool, SLOT(setMinLength( int )) );
+    connect( mMinLengthSpinBox, SIGNAL(valueChanged(int)), mTool, SLOT(setMinLength(int)) );
     label->setBuddy( mMinLengthSpinBox );
     updateLayout->addWidget( mMinLengthSpinBox );
 
@@ -107,8 +107,8 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     mSortFilterProxyModel->setSourceModel( mContainedStringTableModel );
     mSortFilterProxyModel->setFilterKeyColumn( ContainedStringTableModel::StringColumnId );
     mSortFilterProxyModel->setFilterCaseSensitivity( Qt::CaseInsensitive );
-    connect( mFilterEdit, SIGNAL(textChanged( const QString & )),
-             mSortFilterProxyModel, SLOT(setFilterFixedString( const QString & )) );
+    connect( mFilterEdit, SIGNAL(textChanged(QString)),
+             mSortFilterProxyModel, SLOT(setFilterFixedString(QString)) );
 
     mContainedStringTableView = new QTreeView( this );
     connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
@@ -127,10 +127,10 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     header->setResizeMode( QHeaderView::Interactive );
     mContainedStringTableView->setModel( mSortFilterProxyModel );
     mContainedStringTableView->sortByColumn( ContainedStringTableModel::OffsetColumnId, Qt::AscendingOrder );
-    connect( mContainedStringTableView, SIGNAL(doubleClicked( const QModelIndex& )),
-             SLOT(onStringDoubleClicked( const QModelIndex& )) );
+    connect( mContainedStringTableView, SIGNAL(doubleClicked(QModelIndex)),
+             SLOT(onStringDoubleClicked(QModelIndex)) );
     connect( mContainedStringTableView->selectionModel(),
-             SIGNAL(selectionChanged( const QItemSelection &, const QItemSelection & )),
+             SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
              SLOT(onStringSelectionChanged()) );
 
     baseLayout->addWidget( mContainedStringTableView, 10 );
@@ -166,9 +166,9 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
 
     baseLayout->addLayout( actionsLayout );
 
-    connect( mTool, SIGNAL(uptodateChanged( bool )), SLOT(onStringsUptodateChanged( bool )) );
-    connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT( onApplyableChanged( bool )) );
-    connect( mTool, SIGNAL(canHighlightStringChanged( bool )), SLOT(onCanHighlightStringChanged( bool )) );
+    connect( mTool, SIGNAL(uptodateChanged(bool)), SLOT(onStringsUptodateChanged(bool)) );
+    connect( mTool, SIGNAL(isApplyableChanged(bool)), SLOT( onApplyableChanged(bool)) );
+    connect( mTool, SIGNAL(canHighlightStringChanged(bool)), SLOT(onCanHighlightStringChanged(bool)) );
 
     onStringSelectionChanged();
 }

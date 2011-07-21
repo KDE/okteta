@@ -67,7 +67,7 @@ PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )
     qRegisterMetaType<Char8>();
     qRegisterMetaType<Utf8>();
 
-    connect( mTool, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+    connect( mTool, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
 }
 
 // make sure only editors are created which have a readOnly property

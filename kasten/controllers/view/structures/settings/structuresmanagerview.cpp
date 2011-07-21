@@ -65,8 +65,8 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresManager* manager,
     mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
             QLatin1String("okteta-structures.knsrc"), this);
     connect(mGetNewStructuresButton,
-            SIGNAL(dialogFinished(const KNS3::Entry::List&)),
-            SLOT(onGetNewStructuresClicked(const KNS3::Entry::List&)));
+            SIGNAL(dialogFinished(KNS3::Entry::List)),
+            SLOT(onGetNewStructuresClicked(KNS3::Entry::List)));
 
     buttonsLayout->addWidget(mGetNewStructuresButton);
 

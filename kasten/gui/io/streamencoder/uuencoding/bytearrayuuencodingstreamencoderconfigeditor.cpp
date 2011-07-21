@@ -52,7 +52,7 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
 
     mFileNameEdit = new KLineEdit( this );
     mFileNameEdit->setText( mSettings.fileName );
-    connect( mFileNameEdit, SIGNAL(textChanged( const QString& )), SLOT(onSettingsChanged()) );
+    connect( mFileNameEdit, SIGNAL(textChanged(QString)), SLOT(onSettingsChanged()) );
     pageLayout->addRow( fileNameLabel, mFileNameEdit );
 
     // data type

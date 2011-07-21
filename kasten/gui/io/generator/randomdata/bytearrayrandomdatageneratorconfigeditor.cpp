@@ -49,7 +49,7 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
     mSizeInput->setRange( 1, INT_MAX );
     mSizeInput->setValue( mSettings.size );
     mSizeInput->setSuffix( ki18np(" byte"," bytes") );
-    connect( mSizeInput, SIGNAL(valueChanged( int )), SLOT(onSettingsChanged()) );
+    connect( mSizeInput, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter the size of the byte to generate." );

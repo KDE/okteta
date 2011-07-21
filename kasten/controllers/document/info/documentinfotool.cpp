@@ -104,11 +104,11 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
         documentSize = mByteArrayModel->size();
         synchronizer = mDocument->synchronizer();
 
-        connect( mDocument, SIGNAL(titleChanged( const QString & )),
-                 SIGNAL(documentTitleChanged( const QString & )) );
-        connect( mDocument, SIGNAL(synchronizerChanged( Kasten::AbstractModelSynchronizer* )),
-                 SLOT(onSynchronizerChanged( Kasten::AbstractModelSynchronizer* )) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
+        connect( mDocument, SIGNAL(titleChanged(QString)),
+                 SIGNAL(documentTitleChanged(QString)) );
+        connect( mDocument, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
+                 SLOT(onSynchronizerChanged(Kasten::AbstractModelSynchronizer*)) );
+        connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
                  SLOT(onContentsChanged()) );
     }
 
@@ -158,8 +158,8 @@ void DocumentInfoTool::onSynchronizerChanged( AbstractModelSynchronizer* synchro
 
     if( mSynchronizer )
     {
-        connect( mSynchronizer, SIGNAL(urlChanged( const KUrl& )),
-                 SLOT(onUrlChanged( const KUrl& )) );
+        connect( mSynchronizer, SIGNAL(urlChanged(KUrl)),
+                 SLOT(onUrlChanged(KUrl)) );
         connect( mSynchronizer, SIGNAL(synchronized()),
                  SLOT(onSynchronized()) );
         //

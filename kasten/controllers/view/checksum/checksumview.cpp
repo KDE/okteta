@@ -104,20 +104,20 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     mChecksumLabel = new KLineEdit( this );
     mChecksumLabel->setReadOnly( true );
     mChecksumLabel->setText( mTool->checkSum() );
-    connect( mTool, SIGNAL(checksumChanged( const QString& )), mChecksumLabel, SLOT(setText( const QString& )) );
+    connect( mTool, SIGNAL(checksumChanged(QString)), mChecksumLabel, SLOT(setText(QString)) );
     baseLayout->addWidget( mChecksumLabel, 10 );
 
     baseLayout->addStretch( 10 );
 
-    connect( mTool, SIGNAL(uptodateChanged( bool )), SLOT(onChecksumUptodateChanged( bool )) );
-    connect( mTool, SIGNAL(isApplyableChanged( bool )), SLOT(onApplyableChanged( bool )) );
+    connect( mTool, SIGNAL(uptodateChanged(bool)), SLOT(onChecksumUptodateChanged(bool)) );
+    connect( mTool, SIGNAL(isApplyableChanged(bool)), SLOT(onApplyableChanged(bool)) );
 
     // automatically set focus to the parameters if a operation has been selected
     QAbstractItemView* algorithmComboBoxListView = mAlgorithmComboBox->view();
-    QObject::connect( algorithmComboBoxListView, SIGNAL(activated( const QModelIndex& )),
+    QObject::connect( algorithmComboBoxListView, SIGNAL(activated(QModelIndex)),
              mParameterSetEditStack, SLOT(setFocus()) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    QObject::connect( algorithmComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
+    QObject::connect( algorithmComboBoxListView, SIGNAL(pressed(QModelIndex)),
              mParameterSetEditStack, SLOT(setFocus()) );
     // TODO: goto filter button if there are no parameters
 
@@ -175,8 +175,8 @@ void ChecksumView::onOperationChange( int index )
         qobject_cast<AbstractByteArrayChecksumParameterSetEdit*>( mParameterSetEditStack->currentWidget() );
     if( parametersetEdit )
     {
-        connect( parametersetEdit, SIGNAL(validityChanged( bool )),
-                 SLOT(onValidityChanged( bool )) );
+        connect( parametersetEdit, SIGNAL(validityChanged(bool)),
+                 SLOT(onValidityChanged(bool)) );
         // TODO: hack, see checksum source
         connect( parametersetEdit, SIGNAL(valuesChanged()),
                  mTool, SLOT(resetSourceTool()) );

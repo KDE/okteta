@@ -51,8 +51,8 @@ SelectRangeController::SelectRangeController( If::ToolInlineViewable* toolInline
     connect( mSelectAction, SIGNAL(triggered(bool) ), SLOT(select()) );
 
     mTool = new SelectRangeTool();
-    connect( mTool, SIGNAL(isUsableChanged( bool )),
-             mSelectAction, SLOT(setEnabled( bool )) );
+    connect( mTool, SIGNAL(isUsableChanged(bool)),
+             mSelectAction, SLOT(setEnabled(bool)) );
     mSelectAction->setEnabled( mTool->isUsable() );
 
     mView = new SelectRangeToolView( mTool );

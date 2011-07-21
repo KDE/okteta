@@ -71,8 +71,8 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     header->setResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     mByteTableView->setModel( mTool->byteTableModel() );
-    connect( mByteTableView, SIGNAL(doubleClicked( const QModelIndex& )),
-             SLOT(onDoubleClicked( const QModelIndex& )) );
+    connect( mByteTableView, SIGNAL(doubleClicked(QModelIndex)),
+             SLOT(onDoubleClicked(QModelIndex)) );
 
     baseLayout->addWidget( mByteTableView, 10 );
 
@@ -97,7 +97,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
     mInsertButton = new KPushButton( KStandardGuiItem::insert(), this );
     mInsertButton->setEnabled( mTool->hasWriteable() );
-    connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT( setEnabled(bool )) );
+    connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT( setEnabled(bool)) );
     connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) );
     const QString insertButtonToolTip =
         i18nc( "@info:tooltip",

@@ -70,10 +70,10 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     mBookmarkListView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mBookmarkListView->setModel( mBookmarkListModel );
     mBookmarkListView->header()->setResizeMode( QHeaderView::Interactive );
-    connect( mBookmarkListView, SIGNAL(doubleClicked( const QModelIndex& )),
-             SLOT(onBookmarkDoubleClicked( const QModelIndex& )) );
+    connect( mBookmarkListView, SIGNAL(doubleClicked(QModelIndex)),
+             SLOT(onBookmarkDoubleClicked(QModelIndex)) );
     connect( mBookmarkListView->selectionModel(),
-             SIGNAL(selectionChanged( const QItemSelection&, const QItemSelection& )),
+             SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
              SLOT(onBookmarkSelectionChanged()) );
 
     baseLayout->addWidget( mBookmarkListView, 10 );
@@ -94,8 +94,10 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
                         "for the current cursor position.") );
     mCreateBookmarkButton = new KPushButton( createBookmarkGuiItem, this );
     mCreateBookmarkButton->setEnabled( mTool->canCreateBookmark() );
-    connect( mCreateBookmarkButton, SIGNAL(clicked(bool)), SLOT(onCreateBookmarkButtonClicked()) );
-    connect( mTool, SIGNAL(canCreateBookmarkChanged( bool )), mCreateBookmarkButton, SLOT(setEnabled( bool )) );
+    connect( mCreateBookmarkButton, SIGNAL(clicked(bool)),
+             SLOT(onCreateBookmarkButtonClicked()) );
+    connect( mTool, SIGNAL(canCreateBookmarkChanged(bool)),
+             mCreateBookmarkButton, SLOT(setEnabled(bool)) );
     actionsLayout->addWidget( mCreateBookmarkButton );
 
     const KGuiItem deleteBookmarkGuiItem =

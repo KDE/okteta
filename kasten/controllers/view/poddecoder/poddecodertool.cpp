@@ -114,12 +114,13 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
     if( mByteArrayModel && mByteArrayView )
     {
         mCursorIndex = mByteArrayView->cursorPosition();
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged( Okteta::Address )), SLOT(onCursorPositionChange( Okteta::Address )) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
+        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
+                 SLOT(onCursorPositionChange(Okteta::Address)) );
+        connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
                  SLOT(onContentsChange()) );
-        connect( mByteArrayView,  SIGNAL(charCodecChanged( const QString& )),
-                 SLOT(onCharCodecChange( const QString& )) );
-        connect( mByteArrayView, SIGNAL(readOnlyChanged( bool )),
+        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
+                 SLOT(onCharCodecChange(QString)) );
+        connect( mByteArrayView, SIGNAL(readOnlyChanged(bool)),
                  SLOT(onReadOnlyChanged()) );
         onCharCodecChange( mByteArrayView->charCodingName() );
     }

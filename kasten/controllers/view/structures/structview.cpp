@@ -97,7 +97,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Little-endian")); // add first for index
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian")); // add second for index
     mByteOrderSelection->setCurrentIndex(mTool->byteOrder());
-    connect(mByteOrderSelection, SIGNAL(activated( int )), mTool,
+    connect(mByteOrderSelection, SIGNAL(activated(int)), mTool,
             SLOT(setByteOrder(int)));
     const QString byteOrderToolTip = i18nc("@info:tooltip",
             "The byte order used to decode the values.");
@@ -136,8 +136,8 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     settingsLayout->addWidget(mSettingsButton);
 
     connect(mStructTreeView->selectionModel(),
-            SIGNAL(currentRowChanged( const QModelIndex&, const QModelIndex& )),
-            SLOT(onCurrentRowChanged( const QModelIndex&, const QModelIndex& )));
+            SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+            SLOT(onCurrentRowChanged(QModelIndex,QModelIndex)));
 
     connect(mTool, SIGNAL(cursorIndexChanged()), SLOT(onCursorIndexChange()));
 
@@ -187,12 +187,12 @@ void StructView::openSettingsDlg(int page)
             "Structures management"), QLatin1String("preferences-plugin"));
     //User edited the configuration - update your local copies of the
     //configuration data
-    connect(dialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(update()));
+    connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(update()));
     connect(structureSettings, SIGNAL(selectedPluginsChanged()),
             loadedStructuresSettings, SLOT(updateAvailable()));
-    connect(dialog, SIGNAL(settingsChanged(const QString&)), mTool,
+    connect(dialog, SIGNAL(settingsChanged(QString)), mTool,
             SLOT(setSelectedStructuresInView()));
-    connect(dialog, SIGNAL(settingsChanged(const QString&)),
+    connect(dialog, SIGNAL(settingsChanged(QString)),
             loadedStructuresSettings, SLOT(updateAvailable()));
     //TODO kconfig_compiler signals not working (or am I doing it wrong?)
     if (page == 0)

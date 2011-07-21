@@ -62,7 +62,7 @@ void AddressComboBoxPrivate::init()
 
     mFormatComboBox = new KComboBox( q );
     mFormatComboBox->addItems( formatStrings() );
-    q->connect( mFormatComboBox, SIGNAL(activated( int )), SLOT(onFormatChanged( int )) );
+    q->connect( mFormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
 
     mValueComboBox = new KComboBox( q );
     mValueComboBox->setEditable( true );
@@ -70,19 +70,19 @@ void AddressComboBoxPrivate::init()
     mValueComboBox->setInsertPolicy( QComboBox::NoInsert );
     mValueComboBox->setDuplicatesEnabled( false );
     q->setFocusProxy( mValueComboBox );
-    q->connect( mValueComboBox->lineEdit(), SIGNAL(textEdited( const QString& )), SLOT(onValueEdited( const QString& )) );
+    q->connect( mValueComboBox->lineEdit(), SIGNAL(textEdited(QString)), SLOT(onValueEdited(QString)) );
     QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
-    QObject::connect( formatComboBoxListView, SIGNAL(activated( const QModelIndex& )),
+    QObject::connect( formatComboBoxListView, SIGNAL(activated(QModelIndex)),
              mValueComboBox, SLOT(setFocus()) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    QObject::connect( formatComboBoxListView, SIGNAL(pressed( const QModelIndex& )),
+    QObject::connect( formatComboBoxListView, SIGNAL(pressed(QModelIndex)),
              mValueComboBox, SLOT(setFocus()) );
     mValidator = new AddressValidator( mValueComboBox, AddressValidator::HexadecimalCoding );
     const AddressValidator::Coding coding =
         static_cast<AddressValidator::Coding>( mFormatComboBox->currentIndex() );
     mValidator->setCodec( coding );
     mValueComboBox->setValidator( mValidator );
-    q->connect( mValueComboBox, SIGNAL(activated( int )), SLOT(onValueActivated( int )) );
+    q->connect( mValueComboBox, SIGNAL(activated(int)), SLOT(onValueActivated(int)) );
     baseLayout->addWidget( mFormatComboBox );
     baseLayout->addWidget( mValueComboBox, 1 );
     q->setTabOrder( mFormatComboBox, mValueComboBox );

@@ -144,8 +144,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
     mSubstituteByteEdit->setWhatsThis( substituteByteWhatsThis );
 //     mSubstituteByteEdit->setEnabled( mTool->isSubstitutingMissingChars() );
     mSubstituteByteEdit->setEnabled( false ); // TODO: fix char entering and enable again
-    connect( mSubstituteByteEdit, SIGNAL(byteArrayChanged(const QByteArray&)),
-                               SLOT(onDefaultByteEditChanged(const QByteArray&)) );
+    connect( mSubstituteByteEdit, SIGNAL(byteArrayChanged(QByteArray)),
+             SLOT(onDefaultByteEditChanged(QByteArray)) );
 //     connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
 //              mSubstituteByteEdit, SLOT(setEnabled(bool)) );
     mSubstituteByteEdit->setByteArray( QByteArray(1, mTool->substituteByte()) );

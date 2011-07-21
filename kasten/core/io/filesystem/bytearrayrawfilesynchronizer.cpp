@@ -41,7 +41,7 @@ namespace Kasten
 ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()
  : mDocument( 0 )
 {
-    connect( this, SIGNAL(urlChanged(const KUrl&)), SLOT(onUrlChange( const KUrl & )) );
+    connect( this, SIGNAL(urlChanged(KUrl)), SLOT(onUrlChange(KUrl)) );
 }
 
 AbstractDocument* ByteArrayRawFileSynchronizer::document() const { return mDocument; }
