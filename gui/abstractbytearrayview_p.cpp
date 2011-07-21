@@ -200,24 +200,24 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* by
     if( mByteArrayModel->isReadOnly() )
         setReadOnly( true );
 
-    q->connect( mByteArrayModel, SIGNAL(readOnlyChanged( bool )),
-                q, SLOT(onByteArrayReadOnlyChange( bool )) );
-    q->connect( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )),
-                q, SLOT(onContentsChanged( const Okteta::ArrayChangeMetricsList& )) );
+    q->connect( mByteArrayModel, SIGNAL(readOnlyChanged(bool)),
+                q, SLOT(onByteArrayReadOnlyChange(bool)) );
+    q->connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
+                q, SLOT(onContentsChanged(Okteta::ArrayChangeMetricsList)) );
 
     Bookmarkable *bookmarks = qobject_cast<Bookmarkable*>( mByteArrayModel );
     if( bookmarks )
     {
-        q->connect( mByteArrayModel, SIGNAL(bookmarksAdded( const QList<Okteta::Bookmark>& )),
-                    q, SLOT(onBookmarksChange(const QList<Okteta::Bookmark>&)) );
-        q->connect( mByteArrayModel, SIGNAL(bookmarksRemoved( const QList<Okteta::Bookmark>& )),
-                    q, SLOT(onBookmarksChange(const QList<Okteta::Bookmark>&)) );
+        q->connect( mByteArrayModel, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+                    q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)) );
+        q->connect( mByteArrayModel, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+                    q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)) );
     }
     Versionable* versionControl = qobject_cast<Versionable*>( mByteArrayModel );
     if( versionControl )
     {
-        q->connect( mByteArrayModel, SIGNAL(revertedToVersionIndex( int )),
-                    q, SLOT(onRevertedToVersionIndex( int )) );
+        q->connect( mByteArrayModel, SIGNAL(revertedToVersionIndex(int)),
+                    q, SLOT(onRevertedToVersionIndex(int)) );
     }
 
     q->viewport()->update();

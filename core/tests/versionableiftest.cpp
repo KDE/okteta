@@ -42,9 +42,9 @@ void VersionableIfTest::init()
     mRevertedToVersionIndexSpy =
         new QSignalSpy( mObject, SIGNAL(revertedToVersionIndex(int)) );
     mHeadVersionDescriptionChangedSpy =
-        new QSignalSpy( mObject, SIGNAL(headVersionDescriptionChanged( const QString & )) );
+        new QSignalSpy( mObject, SIGNAL(headVersionDescriptionChanged(QString)) );
     mHeadVersionChangedSpy =
-        new QSignalSpy( mObject, SIGNAL(headVersionChanged( int )) );
+        new QSignalSpy( mObject, SIGNAL(headVersionChanged(int)) );
 }
 
 void VersionableIfTest::cleanup()

@@ -46,7 +46,7 @@ void AbstractByteArrayModelIfTest::init()
     mByteArrayModel = createByteArrayModel();
 
     qRegisterMetaType<ArrayChangeMetricsList>( "Okteta::ArrayChangeMetricsList" );
-    ContentsChangeListSpy = new QSignalSpy( mByteArrayModel, SIGNAL(contentsChanged( const Okteta::ArrayChangeMetricsList& )) );
+    ContentsChangeListSpy = new QSignalSpy( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)) );
 }
 
 void AbstractByteArrayModelIfTest::cleanup()
