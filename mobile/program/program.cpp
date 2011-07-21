@@ -81,10 +81,10 @@ int OktetaProgram::execute()
     KGlobal::locale()->insertCatalog( QLatin1String("libkasten") );
     KGlobal::locale()->insertCatalog( QLatin1String("liboktetakasten") );
 
-    connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
-             mViewManager, SLOT(createViewsFor( const QList<Kasten::AbstractDocument*>& )) );
-    connect( mDocumentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )),
-             mViewManager, SLOT(removeViewsFor( const QList<Kasten::AbstractDocument*>& )) );
+    connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
+             mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
+    connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
+             mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
     connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
              SLOT(onViewsOpened(QList<Kasten::AbstractView*>)) );
     connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
