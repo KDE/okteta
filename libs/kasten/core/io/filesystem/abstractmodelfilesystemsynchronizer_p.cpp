@@ -38,14 +38,14 @@ void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
     if( ! mDirWatch )
     {
         mDirWatch = new KDirWatch( q );
-        QObject::connect( mDirWatch, SIGNAL(dirty( const QString& )),
-            q, SLOT(onFileDirty( const QString& )) );
+        QObject::connect( mDirWatch, SIGNAL(dirty(QString)),
+            q, SLOT(onFileDirty(QString)) );
 
-        QObject::connect( mDirWatch, SIGNAL(created( const QString& )),
-            q, SLOT(onFileCreated( const QString& )) );
+        QObject::connect( mDirWatch, SIGNAL(created(QString)),
+            q, SLOT(onFileCreated(QString)) );
 
-        QObject::connect( mDirWatch, SIGNAL(deleted( const QString& )),
-            q, SLOT(onFileDeleted( const QString& )) );
+        QObject::connect( mDirWatch, SIGNAL(deleted(QString)),
+            q, SLOT(onFileDeleted(QString)) );
     }
 
     mDirWatch->addFile( mUrl.path() );

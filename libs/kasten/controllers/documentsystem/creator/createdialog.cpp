@@ -65,7 +65,7 @@ CreateDialog::CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor
     layout->addStretch();
 
     enableButtonOk( configEditor->isValid() );
-    connect( configEditor, SIGNAL(validityChanged( bool )), SLOT(enableButtonOk( bool )) );
+    connect( configEditor, SIGNAL(validityChanged(bool)), SLOT(enableButtonOk(bool)) );
 }
 
 CreateDialog::~CreateDialog()

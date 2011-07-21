@@ -65,7 +65,7 @@ CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager
     mCopyAsSelectAction->setText( i18nc("@title:menu","Copy As") );
     mCopyAsSelectAction->setIcon( KIcon( QLatin1String("edit-copy") ) );
     mCopyAsSelectAction->setToolBarMode( KSelectAction::MenuMode );
-    connect( mCopyAsSelectAction, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
+    connect( mCopyAsSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
 
     setTargetModel( 0 );
 }
@@ -80,7 +80,7 @@ void CopyAsController::setTargetModel( AbstractModel* model )
     if( mSelectionControl )
     {
         // TODO: only fill the list on menu call...
-        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(updateActions()) );
+        connect( mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(updateActions()) );
     }
 
     updateActions();

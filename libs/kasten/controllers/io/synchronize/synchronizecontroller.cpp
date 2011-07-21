@@ -50,7 +50,7 @@ SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, 
     mReloadAction->setText( i18nc("@title:menu","Reloa&d") );
     mReloadAction->setIcon( KIcon( QLatin1String("view-refresh") ) );
     mReloadAction->setShortcuts( KStandardShortcut::reload() );
-    connect( mReloadAction, SIGNAL(triggered( bool )), SLOT(reload()) );
+    connect( mReloadAction, SIGNAL(triggered(bool)), SLOT(reload()) );
 
     setTargetModel( 0 );
 }
@@ -63,8 +63,8 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged( Kasten::AbstractModelSynchronizer* )),
-                            SLOT(onSynchronizerChange( Kasten::AbstractModelSynchronizer* )) );
+        connect( mDocument, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
+                            SLOT(onSynchronizerChange(Kasten::AbstractModelSynchronizer*)) );
     }
     onSynchronizerChange( mDocument ? mDocument->synchronizer() : 0 );
 }
@@ -94,9 +94,9 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
                   || ( remoteSyncState == RemoteHasChanges )
                   || ( remoteSyncState == RemoteUnknown );
 
-        connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
+        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
                             SLOT(onSyncStateChanged()) );
-        connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
+        connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
                             SLOT(onSyncStateChanged()) );
     }
 

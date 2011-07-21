@@ -37,10 +37,10 @@ DocumentsTool::DocumentsTool( DocumentManager* documentManager )
 {
     setObjectName( QLatin1String( "Documents" ) );
 
-    connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
-             SIGNAL(documentsAdded( const QList<Kasten::AbstractDocument*>& )) );
-    connect( mDocumentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )),
-             SIGNAL(documentsClosing( const QList<Kasten::AbstractDocument*>& )) );
+    connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
+             SIGNAL(documentsAdded(QList<Kasten::AbstractDocument*>)) );
+    connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
+             SIGNAL(documentsClosing(QList<Kasten::AbstractDocument*>)) );
 }
 
 QList<AbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }

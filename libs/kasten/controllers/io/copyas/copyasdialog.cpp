@@ -85,7 +85,7 @@ CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,
     }
 
     enableButtonOk( configEditor->isValid() );
-    connect( configEditor, SIGNAL(validityChanged( bool )), SLOT(enableButtonOk( bool )) );
+    connect( configEditor, SIGNAL(validityChanged(bool)), SLOT(enableButtonOk(bool)) );
 }
 
 void CopyAsDialog::setData( AbstractModel* model, const AbstractModelSelection* selection )

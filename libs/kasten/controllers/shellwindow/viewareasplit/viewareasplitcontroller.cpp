@@ -46,11 +46,11 @@ ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, Abst
     mViewAreaSplitable = mGroupedViews ? qobject_cast<If::ViewAreaSplitable*>( mGroupedViews ) : 0;
     if( mViewAreaSplitable )
     {
-        connect( mGroupedViews, SIGNAL(viewAreaFocusChanged( Kasten::AbstractViewArea* )),
-                 SLOT(onViewAreaFocusChanged( Kasten::AbstractViewArea* )) );
-        connect( mGroupedViews, SIGNAL(viewAreasAdded( const QList<Kasten::AbstractViewArea*>& )),
+        connect( mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten::AbstractViewArea*)),
+                 SLOT(onViewAreaFocusChanged(Kasten::AbstractViewArea*)) );
+        connect( mGroupedViews, SIGNAL(viewAreasAdded(QList<Kasten::AbstractViewArea*>)),
                  SLOT(onViewAreasChanged()) );
-        connect( mGroupedViews, SIGNAL(viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& )),
+        connect( mGroupedViews, SIGNAL(viewAreasRemoved(QList<Kasten::AbstractViewArea*>)),
                  SLOT(onViewAreasChanged()) );
     }
 
@@ -122,9 +122,9 @@ void ViewAreaSplitController::onViewAreaFocusChanged( AbstractViewArea* viewArea
 
     if( mCurrentViewArea )
     {
-        connect( mCurrentViewArea, SIGNAL(added( const QList<Kasten::AbstractView*>& )),
+        connect( mCurrentViewArea, SIGNAL(added(QList<Kasten::AbstractView*>)),
                  SLOT(onViewsChanged()) );
-        connect( mCurrentViewArea, SIGNAL(removing( const QList<Kasten::AbstractView*>& )),
+        connect( mCurrentViewArea, SIGNAL(removing(QList<Kasten::AbstractView*>)),
                  SLOT(onViewsChanged()) );
     }
     onViewsChanged();

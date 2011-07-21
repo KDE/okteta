@@ -61,7 +61,7 @@ ZoomController::ZoomController( KXMLGUIClient* guiClient )
     }
     ZoomToAction->setItems( translated );
     ZoomToAction->setCurrentItem( idx );
-    connect( ZoomToAction, SIGNAL(triggered(  const QString & ) ), SLOT(zoomTo( const QString& ) ) );
+    connect( ZoomToAction, SIGNAL(triggered(QString) ), SLOT(zoomTo(QString) ) );
 
     // TODO: name size relative to object or view? name object(variable) or view?
     // TODO: is this a sticking parameter?
@@ -85,7 +85,7 @@ void ZoomController::setTargetModel( AbstractModel* model )
     if( mZoomControl )
     {
         mZoomLevel = mZoomControl->zoomLevel();
-        connect( mModel, SIGNAL(zoomLevelChanged( double )), SLOT(onZoomLevelChange( double )) );
+        connect( mModel, SIGNAL(zoomLevelChanged(double)), SLOT(onZoomLevelChange(double)) );
     }
 
     const bool hasView = ( mZoomControl != 0 );

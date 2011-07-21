@@ -64,14 +64,14 @@ void FileSystemBrowserView::init()
     // url bar
     KFilePlacesModel* filePlacesModel = new KFilePlacesModel( this );
     mUrlNavigator = new KUrlNavigator( filePlacesModel , KUrl( QDir::homePath() ), this );
-    connect( mUrlNavigator, SIGNAL(urlChanged( const KUrl& )), SLOT(setDirOperatorUrl( const KUrl& )) );
+    connect( mUrlNavigator, SIGNAL(urlChanged(KUrl)), SLOT(setDirOperatorUrl(KUrl)) );
     layout->addWidget( mUrlNavigator );
 
     // view
     mDirOperator = new KDirOperator( QDir::homePath(), this );
     mDirOperator->setView( KFile::Detail );
-    connect( mDirOperator, SIGNAL(urlEntered( const KUrl& )), SLOT(setNavigatorUrl( const KUrl& )));
-    connect( mDirOperator, SIGNAL(fileSelected( const KFileItem& )), SLOT(openFile( const KFileItem& )) );
+    connect( mDirOperator, SIGNAL(urlEntered(KUrl)), SLOT(setNavigatorUrl(KUrl)));
+    connect( mDirOperator, SIGNAL(fileSelected(KFileItem)), SLOT(openFile(KFileItem)) );
     layout->addWidget( mDirOperator );
 
     // fill toolbar
@@ -92,7 +92,7 @@ void FileSystemBrowserView::init()
     syncDirAction->setIcon( KIcon( QLatin1String("go-parent-folder") ) );
     syncDirAction->setText( i18nc("@action:intoolbar", "Folder of Current Document") );
     connect( syncDirAction, SIGNAL(triggered()), SLOT(syncCurrentDocumentDirectory()) );
-    connect( mTool, SIGNAL(hasCurrentUrlChanged( bool )), syncDirAction, SLOT(setEnabled( bool )) );
+    connect( mTool, SIGNAL(hasCurrentUrlChanged(bool)), syncDirAction, SLOT(setEnabled(bool)) );
     syncDirAction->setEnabled( mTool->hasCurrentUrl() );
     mToolbar->addAction( syncDirAction );
 }

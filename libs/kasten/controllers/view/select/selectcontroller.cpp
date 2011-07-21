@@ -57,7 +57,7 @@ void SelectController::setTargetModel( AbstractModel* model )
     const bool hasSelectionControl = ( mSelectControl != 0 );
     if( hasSelectionControl )
     {
-        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
+        connect( mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(onHasSelectedDataChanged(bool)) );
     }
 
     mSelectAllAction->setEnabled( hasSelectionControl );

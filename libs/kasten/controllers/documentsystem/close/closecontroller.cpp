@@ -41,9 +41,9 @@ CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClien
   : mDocumentManager( documentManager ),
     mDocument( 0 )
 {
-    connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
+    connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
              SLOT(onDocumentsChanged()) );
-    connect( mDocumentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )),
+    connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
              SLOT(onDocumentsChanged()) );
 
     KActionCollection* actionCollection = guiClient->actionCollection();
@@ -53,12 +53,12 @@ CloseController::CloseController( DocumentManager* documentManager, KXMLGUIClien
     mCloseAllAction = actionCollection->addAction( QLatin1String("file_close_all") );
     mCloseAllAction->setText( i18nc("@title:menu","Close All") );
     mCloseAllAction->setIcon( KIcon( QLatin1String("window-close") ) );
-    connect( mCloseAllAction, SIGNAL(triggered( bool )), SLOT(closeAll()) );
+    connect( mCloseAllAction, SIGNAL(triggered(bool)), SLOT(closeAll()) );
 
     mCloseAllOtherAction = actionCollection->addAction( QLatin1String("file_close_all_other") );
     mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
     mCloseAllOtherAction->setIcon( KIcon( QLatin1String("window-close") ) );
-    connect( mCloseAllOtherAction, SIGNAL(triggered( bool )), SLOT(closeAllOther()) );
+    connect( mCloseAllOtherAction, SIGNAL(triggered(bool)), SLOT(closeAllOther()) );
 
     mCloseAction->setEnabled( false );
     mCloseAllAction->setEnabled( false );

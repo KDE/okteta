@@ -65,11 +65,11 @@ void ClipboardController::setTargetModel( AbstractModel* model )
 
     if( mSelectionControl )
     {
-        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(onHasSelectedDataChanged( bool )) );
+        connect( mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(onHasSelectedDataChanged(bool)) );
 
         mMimeDataControl = qobject_cast<If::SelectedDataWriteable*>( mModel );
         if( mMimeDataControl )
-            connect( mModel, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+            connect( mModel, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
     }
     else
         mMimeDataControl = 0;

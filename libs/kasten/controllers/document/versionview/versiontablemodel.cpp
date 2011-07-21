@@ -41,10 +41,10 @@ VersionTableModel::VersionTableModel( AbstractModel* model, If::Versionable* ver
 {
     if( mModel )
     {
-        connect( mModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
-        connect( mModel, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
-        connect( mModel, SIGNAL(headVersionDataChanged( const Kasten::DocumentVersionData & )),
-                 SLOT(onHeadVersionDataChanged( const Kasten::DocumentVersionData & )) );
+        connect( mModel, SIGNAL(revertedToVersionIndex(int)), SLOT(onRevertedToVersionIndex(int)) );
+        connect( mModel, SIGNAL(headVersionChanged(int)), SLOT(onHeadVersionChanged(int)) );
+        connect( mModel, SIGNAL(headVersionDataChanged(Kasten::DocumentVersionData)),
+                 SLOT(onHeadVersionDataChanged(Kasten::DocumentVersionData)) );
     }
 }
 
@@ -57,10 +57,10 @@ void VersionTableModel::setModel( AbstractModel* model, If::Versionable* version
 
     if( mModel )
     {
-        connect( mModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onRevertedToVersionIndex( int )) );
-        connect( mModel, SIGNAL(headVersionChanged( int )), SLOT(onHeadVersionChanged( int )) );
-        connect( mModel, SIGNAL(headVersionDataChanged( const Kasten::DocumentVersionData & )),
-                 SLOT(onHeadVersionDataChanged( const Kasten::DocumentVersionData & )) );
+        connect( mModel, SIGNAL(revertedToVersionIndex(int)), SLOT(onRevertedToVersionIndex(int)) );
+        connect( mModel, SIGNAL(headVersionChanged(int)), SLOT(onHeadVersionChanged(int)) );
+        connect( mModel, SIGNAL(headVersionDataChanged(Kasten::DocumentVersionData)),
+                 SLOT(onHeadVersionDataChanged(Kasten::DocumentVersionData)) );
     }
     mVersionIndex = versionControl ? versionControl->versionIndex() : 0;
 

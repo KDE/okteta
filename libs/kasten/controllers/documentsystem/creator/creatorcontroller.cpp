@@ -79,11 +79,11 @@ CreatorController::CreatorController( ModelCodecViewManager* modelCodecViewManag
 //         i18nc( "@info:status", "Create an new, empty document" ) );
 //     newEmptyDocumentAction->setWhatsThis( factory->whatsThis() );
 //         i18nc( "@info:whatsthis", "." ) );
-    connect( newEmptyDocumentAction, SIGNAL(triggered( bool )), SLOT(onNewActionTriggered()) );
+    connect( newEmptyDocumentAction, SIGNAL(triggered(bool)), SLOT(onNewActionTriggered()) );
 
     QAction* newFromClipboardDocumentAction =
         new QAction( KIcon( QLatin1String("edit-paste") ), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard" ), this );
-    connect( newFromClipboardDocumentAction, SIGNAL(triggered( bool )), SLOT(onNewFromClipboardActionTriggered()) );
+    connect( newFromClipboardDocumentAction, SIGNAL(triggered(bool)), SLOT(onNewFromClipboardActionTriggered()) );
 
     newMenuAction->addAction( newEmptyDocumentAction );
     newMenuAction->addSeparator();
@@ -109,7 +109,7 @@ CreatorController::CreatorController( ModelCodecViewManager* modelCodecViewManag
 
             QAction* action = new QAction( KIcon(iconName), title, this );
             action->setData( QVariant::fromValue(generator) );
-            connect( action, SIGNAL(triggered( bool )), SLOT(onNewFromGeneratorActionTriggered()) );
+            connect( action, SIGNAL(triggered(bool)), SLOT(onNewFromGeneratorActionTriggered()) );
 
             newMenuAction->addAction( action );
         }

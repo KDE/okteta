@@ -84,7 +84,7 @@ ExportDialog::ExportDialog( const QString& remoteTypeName,
     }
 
     enableButtonOk( configEditor->isValid() );
-    connect( configEditor, SIGNAL(validityChanged( bool )), SLOT(enableButtonOk( bool )) );
+    connect( configEditor, SIGNAL(validityChanged(bool)), SLOT(enableButtonOk(bool)) );
 }
 
 void ExportDialog::setData( AbstractModel* model, const AbstractModelSelection* selection )

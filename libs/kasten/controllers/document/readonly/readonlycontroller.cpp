@@ -61,10 +61,10 @@ void ReadOnlyController::setTargetModel( AbstractModel* model )
     {
         mSetReadOnlyAction->setChecked( mDocument->isReadOnly() );
 
-        connect( mDocument, SIGNAL(readOnlyChanged( bool )),
-                 mSetReadOnlyAction, SLOT(setChecked( bool )) );
-        connect( mDocument, SIGNAL(modifiableChanged( bool )),
-                 mSetReadOnlyAction, SLOT(setEnabled( bool )) );
+        connect( mDocument, SIGNAL(readOnlyChanged(bool)),
+                 mSetReadOnlyAction, SLOT(setChecked(bool)) );
+        connect( mDocument, SIGNAL(modifiableChanged(bool)),
+                 mSetReadOnlyAction, SLOT(setEnabled(bool)) );
     }
 
     mSetReadOnlyAction->setEnabled( mDocument ? mDocument->isModifiable() : false );

@@ -60,7 +60,7 @@ ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager
     mExportSelectAction->setText( i18nc("@title:menu","Export") );
     mExportSelectAction->setIcon( KIcon( QLatin1String("document-export") ) );
     mExportSelectAction->setToolBarMode( KSelectAction::MenuMode );
-    connect( mExportSelectAction, SIGNAL(triggered( QAction* )), SLOT(onActionTriggered( QAction* )) );
+    connect( mExportSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
 
     setTargetModel( 0 );
 }
@@ -75,7 +75,7 @@ void ExportController::setTargetModel( AbstractModel* model )
     if( mSelectionControl )
     {
         // TODO: only fill the list on menu call...
-        connect( mModel, SIGNAL(hasSelectedDataChanged( bool )), SLOT(updateActions()) );
+        connect( mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(updateActions()) );
     }
 
     updateActions();

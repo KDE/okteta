@@ -48,7 +48,7 @@ TerminalView::TerminalView( TerminalTool* tool, QWidget* parent )
     QVBoxLayout* layout = new QVBoxLayout( this );
     layout->setMargin( 0 );
 
-    connect( mTool, SIGNAL(currentUrlChanged( const KUrl& )), SLOT(onCurrentUrlChanged( const KUrl& )) );
+    connect( mTool, SIGNAL(currentUrlChanged(KUrl)), SLOT(onCurrentUrlChanged(KUrl)) );
     QMetaObject::invokeMethod( this, "createTerminalPart", Qt::QueuedConnection );
 }
 

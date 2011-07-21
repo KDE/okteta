@@ -54,8 +54,8 @@ VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
 
     baseLayout->addWidget( mVersionTableView, 10 );
 
-    connect( mTool, SIGNAL(modelChanged( Kasten::AbstractModel* )),
-             SLOT(setModel( Kasten::AbstractModel* )) );
+    connect( mTool, SIGNAL(modelChanged(Kasten::AbstractModel*)),
+             SLOT(setModel(Kasten::AbstractModel*)) );
 
     setModel( mTool->model() );
 }

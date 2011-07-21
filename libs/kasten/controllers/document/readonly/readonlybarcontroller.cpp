@@ -59,10 +59,10 @@ void ReadOnlyBarController::setTargetModel( AbstractModel* model )
     {
         mReadOnlyButton->setChecked( mDocument->isReadOnly() );
 
-        connect( mDocument, SIGNAL(readOnlyChanged( bool )),
-                 mReadOnlyButton, SLOT(setChecked( bool )) );
-        connect( mDocument, SIGNAL(modifiableChanged( bool )),
-                 mReadOnlyButton, SLOT(setEnabled( bool )) );
+        connect( mDocument, SIGNAL(readOnlyChanged(bool)),
+                 mReadOnlyButton, SLOT(setChecked(bool)) );
+        connect( mDocument, SIGNAL(modifiableChanged(bool)),
+                 mReadOnlyButton, SLOT(setEnabled(bool)) );
     }
     else
     {

@@ -49,12 +49,12 @@ LoaderController::LoaderController( DocumentSyncManager* syncManager, KXMLGUICli
 
     KStandardAction::open(       this, SLOT(load()),      actionCollection );
     mOpenRecentAction =
-        KStandardAction::openRecent( this, SLOT(loadRecent( const KUrl& )), actionCollection );
+        KStandardAction::openRecent( this, SLOT(loadRecent(KUrl)), actionCollection );
 
     KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
     mOpenRecentAction->loadEntries( configGroup );
 
-    connect( mSyncManager, SIGNAL(urlUsed( const KUrl& )), SLOT(onUrlUsed( const KUrl& )) );
+    connect( mSyncManager, SIGNAL(urlUsed(KUrl)), SLOT(onUrlUsed(KUrl)) );
 }
 
 

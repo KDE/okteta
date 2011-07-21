@@ -61,10 +61,10 @@ void ModifiedBarController::setTargetModel( AbstractModel* model )
     {
         localState = mDocument->localSyncState();
         remoteState = mDocument->remoteSyncState();
-        connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
-                 SLOT(onLocalSyncStateChanged( Kasten::LocalSyncState )) );
-        connect( mDocument, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
-                 SLOT(onRemoteSyncStateChanged( Kasten::RemoteSyncState )) );
+        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+                 SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
+        connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
+                 SLOT(onRemoteSyncStateChanged(Kasten::RemoteSyncState)) );
     }
     else
     {

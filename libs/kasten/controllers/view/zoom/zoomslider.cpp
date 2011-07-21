@@ -69,8 +69,8 @@ ZoomSlider::ZoomSlider( QWidget* parent )
 
     connect( mZoomOutButton, SIGNAL(clicked()), SLOT(zoomOut()) );
     connect( mZoomInButton, SIGNAL(clicked()), SLOT(zoomIn()) );
-    connect( mSlider, SIGNAL(valueChanged( int )), SLOT(onSliderValueChanged( int )) );
-    connect( mSlider, SIGNAL(sliderMoved( int )), SLOT(onSliderMoved( int )) );
+    connect( mSlider, SIGNAL(valueChanged(int)), SLOT(onSliderValueChanged(int)) );
+    connect( mSlider, SIGNAL(sliderMoved(int)), SLOT(onSliderMoved(int)) );
 
     setFixedWidth( ZoomSliderWidth );
 
@@ -99,7 +99,7 @@ void ZoomSlider::setTargetModel( AbstractModel* model )
         const int sliderValue = mSlider->value();
         mZoomOutButton->setEnabled( sliderValue > mSlider->minimum() );
         mZoomInButton->setEnabled( sliderValue < mSlider->maximum() );
-        connect( mModel, SIGNAL(zoomLevelChanged( double )), SLOT(onZoomLevelChange( double )) );
+        connect( mModel, SIGNAL(zoomLevelChanged(double)), SLOT(onZoomLevelChange(double)) );
     }
     else
     {
@@ -166,10 +166,10 @@ void ZoomSlider::onZoomLevelChange( double level )
     const int newSliderValue = 100-static_cast<int>( 50.0 / mZoomLevel + 0.5 );
     if( newSliderValue != mSlider->value() )
     {
-        disconnect( mSlider, SIGNAL(valueChanged( int )), this, 0 );
+        disconnect( mSlider, SIGNAL(valueChanged(int)), this, 0 );
         mSlider->setSliderPosition( newSliderValue );
         updateToolTip( mSlider->value() );
-        connect( mSlider, SIGNAL(valueChanged( int )), SLOT(onSliderValueChanged( int )) );
+        connect( mSlider, SIGNAL(valueChanged(int)), SLOT(onSliderValueChanged(int)) );
     }
 }
 

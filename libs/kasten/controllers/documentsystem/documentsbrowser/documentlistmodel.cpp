@@ -38,12 +38,12 @@ DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* par
  : QAbstractTableModel( parent ),
    mDocumentsTool( documentsTool )
 {
-    connect( mDocumentsTool, SIGNAL(documentsAdded( const QList<Kasten::AbstractDocument*>& )),
-             SLOT(onDocumentsAdded( const QList<Kasten::AbstractDocument*>& )) );
-    connect( mDocumentsTool, SIGNAL(documentsClosing( const QList<Kasten::AbstractDocument*>& )),
-             SLOT(onDocumentsClosing( const QList<Kasten::AbstractDocument*>& )) );
-    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged( Kasten::AbstractDocument* )),
-             SLOT(onFocussedDocumentChanged( Kasten::AbstractDocument* )) );
+    connect( mDocumentsTool, SIGNAL(documentsAdded(QList<Kasten::AbstractDocument*>)),
+             SLOT(onDocumentsAdded(QList<Kasten::AbstractDocument*>)) );
+    connect( mDocumentsTool, SIGNAL(documentsClosing(QList<Kasten::AbstractDocument*>)),
+             SLOT(onDocumentsClosing(QList<Kasten::AbstractDocument*>)) );
+    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged(Kasten::AbstractDocument*)),
+             SLOT(onFocussedDocumentChanged(Kasten::AbstractDocument*)) );
 }
 
 int DocumentListModel::rowCount( const QModelIndex& parent ) const
@@ -160,9 +160,9 @@ void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>
 {
     foreach( AbstractDocument* document, documents )
     {
-        connect( document, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
+        connect( document, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
                  SLOT(onSyncStatesChanged()) );
-        connect( document, SIGNAL(remoteSyncStateChanged( Kasten::RemoteSyncState )),
+        connect( document, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
                  SLOT(onSyncStatesChanged()) );
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns

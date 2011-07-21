@@ -50,23 +50,23 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
     actionCollection->addAction( QLatin1String("edit_undo"), mSetToOlderVersionAction );
     mSetToOlderVersionAction->setShortcuts( KStandardShortcut::undo() );
 
-    connect( mSetToOlderVersionAction, SIGNAL(triggered( bool )),
+    connect( mSetToOlderVersionAction, SIGNAL(triggered(bool)),
              SLOT(onSetToOlderVersionTriggered()) );
     connect( mSetToOlderVersionAction->menu(), SIGNAL(aboutToShow()),
              SLOT(onOlderVersionMenuAboutToShow()) );
-    connect( mSetToOlderVersionAction->menu(), SIGNAL(triggered( QAction* )),
-             SLOT(onOlderVersionMenuTriggered( QAction* )) );
+    connect( mSetToOlderVersionAction->menu(), SIGNAL(triggered(QAction*)),
+             SLOT(onOlderVersionMenuTriggered(QAction*)) );
 
     mSetToNewerVersionAction = new KToolBarPopupAction( KIcon( QLatin1String("edit-redo") ), i18nc("@action:inmenu","Redo"), this );
     actionCollection->addAction( QLatin1String("edit_redo"), mSetToNewerVersionAction );
     mSetToNewerVersionAction->setShortcuts( KStandardShortcut::redo() );
 
-    connect( mSetToNewerVersionAction, SIGNAL(triggered( bool )),
+    connect( mSetToNewerVersionAction, SIGNAL(triggered(bool)),
              SLOT(onSetToNewerVersionTriggered()) );
     connect( mSetToNewerVersionAction->menu(), SIGNAL( aboutToShow() ),
              SLOT(onNewerVersionMenuAboutToShow()) );
-    connect( mSetToNewerVersionAction->menu(), SIGNAL(triggered( QAction* )),
-             SLOT(onNewerVersionMenuTriggered( QAction* )) );
+    connect( mSetToNewerVersionAction->menu(), SIGNAL(triggered(QAction*)),
+             SLOT(onNewerVersionMenuTriggered(QAction*)) );
 
     setTargetModel( 0 );
 }
@@ -86,9 +86,9 @@ void VersionController::setTargetModel( AbstractModel* model )
 
     if( mVersionControl )
     {
-        connect( versionedModel, SIGNAL(revertedToVersionIndex( int )), SLOT(onVersionIndexChanged( int )) );
-        connect( versionedModel, SIGNAL(headVersionChanged( int )),     SLOT(onVersionIndexChanged( int )) );
-        connect( mModel, SIGNAL(readOnlyChanged( bool )), SLOT(onReadOnlyChanged( bool )) );
+        connect( versionedModel, SIGNAL(revertedToVersionIndex(int)), SLOT(onVersionIndexChanged(int)) );
+        connect( versionedModel, SIGNAL(headVersionChanged(int)),     SLOT(onVersionIndexChanged(int)) );
+        connect( mModel, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
     }
     else
         mModel = 0;
