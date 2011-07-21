@@ -51,14 +51,14 @@ void TabbedViewsPrivate::init()
     mTabWidget->setDocumentMode( true );
     mViewAreaBox = new ViewAreaBox( mTabWidget );
 
-    q->connect( mTabWidget, SIGNAL(closeRequest( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
-    q->connect( mTabWidget, SIGNAL(mouseMiddleClick( QWidget* )), SLOT(onCloseRequest( QWidget* )) );
+    q->connect( mTabWidget, SIGNAL(closeRequest(QWidget*)), SLOT(onCloseRequest(QWidget*)) );
+    q->connect( mTabWidget, SIGNAL(mouseMiddleClick(QWidget*)), SLOT(onCloseRequest(QWidget*)) );
     q->connect( mTabWidget, SIGNAL(mouseMiddleClick()), SLOT(onMouseMiddleClick()) );
-    q->connect( mTabWidget, SIGNAL(currentChanged( int )), SLOT(onCurrentChanged( int )) );
-    q->connect( mTabWidget, SIGNAL(testCanDecode( const QDragMoveEvent*, bool& )),
-                SLOT(onDragMoveEvent( const QDragMoveEvent*, bool& )) );
-    q->connect( mTabWidget, SIGNAL(receivedDropEvent( QDropEvent* )),
-                SLOT(onDropEvent( QDropEvent* )) );
+    q->connect( mTabWidget, SIGNAL(currentChanged(int)), SLOT(onCurrentChanged(int)) );
+    q->connect( mTabWidget, SIGNAL(testCanDecode(const QDragMoveEvent*,bool&)),
+                SLOT(onDragMoveEvent(const QDragMoveEvent*,bool&)) );
+    q->connect( mTabWidget, SIGNAL(receivedDropEvent(QDropEvent*)),
+                SLOT(onDropEvent(QDropEvent*)) );
 }
 
 QList<AbstractView*> TabbedViewsPrivate::viewList() const
@@ -105,7 +105,7 @@ void TabbedViewsPrivate::addViews( const QList<AbstractView*>& views )
     int insertIndex = mTabWidget->currentIndex() + 1;
     foreach( AbstractView* view, views )
     {
-        q->connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
+        q->connect( view, SIGNAL(titleChanged(QString)), SLOT(onTitleChanged(QString)) );
 
         ViewBox* viewBox = new ViewBox( view, mTabWidget );
         mTabWidget->insertTab( insertIndex, viewBox, view->title() );
@@ -194,7 +194,7 @@ void TabbedViewsPrivate::onCurrentChanged( int index )
 
     if( view )
     {
-        q->connect( view, SIGNAL(focusChanged( bool )), SLOT(onViewFocusChanged( bool )) );
+        q->connect( view, SIGNAL(focusChanged(bool)), SLOT(onViewFocusChanged(bool)) );
         view->widget()->setFocus();
     }
 

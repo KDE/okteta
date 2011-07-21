@@ -54,27 +54,27 @@ ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager* viewMan
 {
     setCentralWidget( mGroupedViews->widget() );
 
-    connect( mDocumentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )),
-             mViewManager, SLOT(createViewsFor( const QList<Kasten::AbstractDocument*>& )) );
-    connect( mDocumentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )),
-             mViewManager, SLOT(removeViewsFor( const QList<Kasten::AbstractDocument*>& )) );
+    connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
+             mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
+    connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
+             mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
 
-    connect( mViewManager, SIGNAL(opened( const QList<Kasten::AbstractView*>& )),
-             mGroupedViews, SLOT(addViews( const QList<Kasten::AbstractView*>& )) );
-    connect( mViewManager, SIGNAL(closing( const QList<Kasten::AbstractView*>& )),
-             mGroupedViews, SLOT(removeViews( const QList<Kasten::AbstractView*>& )) );
+    connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
+             mGroupedViews, SLOT(addViews(QList<Kasten::AbstractView*>)) );
+    connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
+             mGroupedViews, SLOT(removeViews(QList<Kasten::AbstractView*>)) );
 
-    connect( mDocumentManager, SIGNAL(focusRequested( Kasten::AbstractDocument* )),
-             SLOT(onFocusRequested( Kasten::AbstractDocument* )) );
+    connect( mDocumentManager, SIGNAL(focusRequested(Kasten::AbstractDocument*)),
+             SLOT(onFocusRequested(Kasten::AbstractDocument*)) );
 
-    connect( mGroupedViews, SIGNAL(viewFocusChanged( Kasten::AbstractView* )),
-             SLOT(onViewFocusChanged( Kasten::AbstractView* )) );
-    connect( mGroupedViews, SIGNAL(closeRequest( const QList<Kasten::AbstractView*>& )),
-             SLOT(onCloseRequest( const QList<Kasten::AbstractView*>& )) );
-    connect( mGroupedViews, SIGNAL(dataOffered( const QMimeData*, bool& )),
-             SLOT(onDataOffered( const QMimeData*, bool& )) );
-    connect( mGroupedViews, SIGNAL(dataDropped( const QMimeData* )),
-             SLOT(onDataDropped( const QMimeData* )) );
+    connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
+             SLOT(onViewFocusChanged(Kasten::AbstractView*)) );
+    connect( mGroupedViews, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
+             SLOT(onCloseRequest(QList<Kasten::AbstractView*>)) );
+    connect( mGroupedViews, SIGNAL(dataOffered(const QMimeData*,bool&)),
+             SLOT(onDataOffered(const QMimeData*,bool&)) );
+    connect( mGroupedViews, SIGNAL(dataDropped(const QMimeData*)),
+             SLOT(onDataDropped(const QMimeData*)) );
 }
 
 QList<ToolViewDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
@@ -96,7 +96,8 @@ void ShellWindow::addTool( AbstractToolView* toolView )
     if( dockWidget->isVisible() && mCurrentView )
         toolView->tool()->setTargetModel( mCurrentView );
 
-    connect( dockWidget, SIGNAL(visibilityChanged( bool )), SLOT(onToolVisibilityChanged( bool )) );
+    connect( dockWidget, SIGNAL(visibilityChanged(bool)),
+             SLOT(onToolVisibilityChanged(bool)) );
 }
 
 void ShellWindow::updateControllers( AbstractView* view )
@@ -150,9 +151,10 @@ void ShellWindow::onViewFocusChanged( AbstractView *view )
 
     if( view )
     {
-        connect( view, SIGNAL(titleChanged( QString )), SLOT(onTitleChanged( QString )) );
-        connect( view, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
-                       SLOT(onLocalSyncStateChanged( Kasten::LocalSyncState )) );
+        connect( view, SIGNAL(titleChanged(QString)),
+                 SLOT(onTitleChanged(QString)) );
+        connect( view, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+                 SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
     }
 }
 

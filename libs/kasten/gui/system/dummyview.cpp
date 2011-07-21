@@ -38,7 +38,8 @@ DummyView::DummyView( AbstractDocument* document )
 {
     mLabel->setText( mDocument->title() );
 
-    connect( document, SIGNAL(titleChanged( const QString & )), SLOT(onTitleChange( const QString & )) );
+    connect( document, SIGNAL(titleChanged(QString)),
+             SLOT(onTitleChange(QString)) );
 }
 
 

@@ -31,7 +31,7 @@ ToggleButtonPrivate::ToggleButtonPrivate( ToggleButton* parent ) : p( parent )
 {
     p->setCheckable( true );
     p->setAutoRaise( true );
-    p->connect( p, SIGNAL(toggled( bool )), SLOT(onToggled( bool )) );
+    p->connect( p, SIGNAL(toggled(bool)), SLOT(onToggled(bool)) );
 }
 
 void ToggleButtonPrivate::setOtherState( const KIcon& icon, const QString& text, const QString& toolTip )
