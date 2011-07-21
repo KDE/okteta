@@ -48,7 +48,7 @@ class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiControll
                        ModelCodecManager* modelCodecManager,
                        DocumentCreateManager* documentCreateManager,
                        KXMLGUIClient* guiClient );
-    ~CreatorController();
+    virtual ~CreatorController();
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );

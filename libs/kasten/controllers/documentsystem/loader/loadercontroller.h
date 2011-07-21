@@ -45,21 +45,21 @@ class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiControlle
 
   public:
     LoaderController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
-    ~LoaderController();
+    virtual ~LoaderController();
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
   public Q_SLOTS:
     void load();
-    void loadRecent( const KUrl &url );
+    void loadRecent( const KUrl& url );
 
-    void onUrlUsed( const KUrl &url );
+    void onUrlUsed( const KUrl& url );
 
   protected:
     DocumentSyncManager* mSyncManager;
 
-    KRecentFilesAction *mOpenRecentAction;
+    KRecentFilesAction* mOpenRecentAction;
 };
 
 }
