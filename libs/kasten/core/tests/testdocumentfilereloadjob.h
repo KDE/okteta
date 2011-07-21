@@ -38,7 +38,7 @@ class TestDocumentFileReloadJob : public AbstractFileSystemSyncFromRemoteJob
   Q_OBJECT
 
   public:
-    TestDocumentFileReloadJob( TestDocumentFileSynchronizer *synchronizer );
+    explicit TestDocumentFileReloadJob( TestDocumentFileSynchronizer* synchronizer );
     virtual ~TestDocumentFileReloadJob();
 
   protected: // AbstractFileSystemSyncFromRemoteJob API
@@ -48,7 +48,7 @@ class TestDocumentFileReloadJob : public AbstractFileSystemSyncFromRemoteJob
 //     void onDataPulled();
 
   protected:
-    TestDocumentFileReloadThread *mLoadThread;
+    TestDocumentFileReloadThread* mLoadThread;
 };
 
 }

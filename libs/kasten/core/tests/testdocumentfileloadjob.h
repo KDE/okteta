@@ -38,7 +38,7 @@ class TestDocumentFileLoadJob : public AbstractFileSystemLoadJob
   Q_OBJECT
 
   public:
-    TestDocumentFileLoadJob( TestDocumentFileSynchronizer *synchronizer, const KUrl &url );
+    TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const KUrl& url );
     virtual ~TestDocumentFileLoadJob();
 
   protected: // AbstractFileSystemLoadJob API
@@ -48,7 +48,7 @@ class TestDocumentFileLoadJob : public AbstractFileSystemLoadJob
 //     void onDataPulled();
 
   protected:
-    TestDocumentFileLoadThread *mLoadThread;
+    TestDocumentFileLoadThread* mLoadThread;
 };
 
 }

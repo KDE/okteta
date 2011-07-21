@@ -34,16 +34,16 @@
 namespace Kasten
 {
 
-TestDocumentFileWriteToJob::TestDocumentFileWriteToJob( TestDocumentFileSynchronizer *synchronizer,
+TestDocumentFileWriteToJob::TestDocumentFileWriteToJob( TestDocumentFileSynchronizer* synchronizer,
                                          const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
 {}
 
 void TestDocumentFileWriteToJob::startSyncWithRemote()
 {
-    TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
+    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
     TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
-    TestDocumentFileWriteThread *writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(), document, file() );
+    TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(), document, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
         QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );

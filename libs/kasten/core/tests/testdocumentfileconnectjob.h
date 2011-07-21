@@ -39,7 +39,7 @@ class TestDocumentFileConnectJob : public AbstractFileSystemConnectJob
   Q_OBJECT
 
   public:
-    TestDocumentFileConnectJob( TestDocumentFileSynchronizer *synchronizer, AbstractDocument* document,
+    TestDocumentFileConnectJob( TestDocumentFileSynchronizer* synchronizer, AbstractDocument* document,
                                 const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~TestDocumentFileConnectJob();
 
@@ -50,7 +50,7 @@ class TestDocumentFileConnectJob : public AbstractFileSystemConnectJob
 //     void onDataPulled();
 
   protected:
-//     TestDocumentFileWriteThread *mWriteThread;
+//     TestDocumentFileWriteThread* mWriteThread;
 };
 
 }

@@ -31,7 +31,7 @@
 static const char TestData[] = "TestData";
 
 
-void TestDocumentTest::checkTitleChanged( QSignalSpy* titleChangedSpy, const QString &title )
+void TestDocumentTest::checkTitleChanged( QSignalSpy* titleChangedSpy, const QString& title )
 {
    QVERIFY( titleChangedSpy->isValid() );
    QCOMPARE( titleChangedSpy->count(), 1 );

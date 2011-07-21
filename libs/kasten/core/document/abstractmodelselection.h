@@ -44,7 +44,7 @@ class KASTENCORE_EXPORT AbstractModelSelection
 
   protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 }

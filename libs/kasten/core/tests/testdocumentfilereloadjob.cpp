@@ -34,15 +34,15 @@
 namespace Kasten
 {
 
-TestDocumentFileReloadJob::TestDocumentFileReloadJob( TestDocumentFileSynchronizer *synchronizer )
+TestDocumentFileReloadJob::TestDocumentFileReloadJob( TestDocumentFileSynchronizer* synchronizer )
  : AbstractFileSystemSyncFromRemoteJob( synchronizer )
 {}
 
 void TestDocumentFileReloadJob::startReadFromFile()
 {
-    TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
+    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
     TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
-    TestDocumentFileReloadThread *reloadThread =
+    TestDocumentFileReloadThread* reloadThread =
         new TestDocumentFileReloadThread( this, testSynchronizer->header(), /*document, */file() );
     reloadThread->start();
     while( !reloadThread->wait(100) )

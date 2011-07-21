@@ -38,7 +38,7 @@ class TestDocumentFileLoadThread : public QThread
 {
   Q_OBJECT
   public:
-    TestDocumentFileLoadThread( QObject *parent, const QByteArray &header,
+    TestDocumentFileLoadThread( QObject* parent, const QByteArray& header,
                                 QFile* file );
     virtual ~TestDocumentFileLoadThread();
 
@@ -59,7 +59,7 @@ class TestDocumentFileLoadThread : public QThread
 };
 
 
-inline TestDocumentFileLoadThread::TestDocumentFileLoadThread( QObject *parent, const QByteArray &header, QFile* file )
+inline TestDocumentFileLoadThread::TestDocumentFileLoadThread( QObject* parent, const QByteArray& header, QFile* file )
  : QThread( parent ), mFile( file ), mHeader( header ), mDocument( 0 )
 {}
 

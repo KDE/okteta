@@ -36,8 +36,8 @@ class TestDocumentFileSynchronizerTest : public QObject
   Q_OBJECT
 
   private:
-    void writeToFile( const QString &filePath, const QByteArray &data, const QByteArray &header = QByteArray() );
-    void checkFileContent( const KUrl &fileUrl, const QByteArray &data, const QByteArray &header = QByteArray() );
+    void writeToFile( const QString& filePath, const QByteArray& data, const QByteArray& header = QByteArray() );
+    void checkFileContent( const KUrl& fileUrl, const QByteArray& data, const QByteArray& header = QByteArray() );
 
   private Q_SLOTS:
     void initTestCase();
@@ -57,7 +57,7 @@ class TestDocumentFileSynchronizerTest : public QObject
     void testLoadFromNotExistingFile();
 
   private:
-    TestFileSystem *mFileSystem;
+    TestFileSystem* mFileSystem;
 };
 
 #endif

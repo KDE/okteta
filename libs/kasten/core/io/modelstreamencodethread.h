@@ -43,10 +43,10 @@ class KASTENCORE_EXPORT ModelStreamEncodeThread : public QThread
 {
   Q_OBJECT
   public:
-    ModelStreamEncodeThread( QObject *parent,
-                                        QIODevice *ioDevice,
-                                        AbstractModel* model, const AbstractModelSelection* selection,
-                                        AbstractModelStreamEncoder* encoder );
+    ModelStreamEncodeThread( QObject* parent,
+                             QIODevice* ioDevice,
+                             AbstractModel* model, const AbstractModelSelection* selection,
+                             AbstractModelStreamEncoder* encoder );
     virtual ~ModelStreamEncodeThread();
 
   public: // QThread API
@@ -59,7 +59,7 @@ class KASTENCORE_EXPORT ModelStreamEncodeThread : public QThread
     void modelExported( bool success );
 
   protected:
-    QIODevice *mIODevice;
+    QIODevice* mIODevice;
     AbstractModel* mModel;
     const AbstractModelSelection* mSelection;
     AbstractModelStreamEncoder* mEncoder;
@@ -68,8 +68,8 @@ class KASTENCORE_EXPORT ModelStreamEncodeThread : public QThread
 };
 
 
-inline ModelStreamEncodeThread::ModelStreamEncodeThread( QObject *parent,
-    QIODevice *ioDevice,
+inline ModelStreamEncodeThread::ModelStreamEncodeThread( QObject* parent,
+    QIODevice* ioDevice,
     AbstractModel* model, const AbstractModelSelection* selection,
     AbstractModelStreamEncoder* encoder )
  : QThread( parent ),

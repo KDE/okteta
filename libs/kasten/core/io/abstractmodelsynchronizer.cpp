@@ -44,7 +44,7 @@ KUrl AbstractModelSynchronizer::url() const
     return d->url();
 }
 
-void AbstractModelSynchronizer::setUrl( const KUrl &url )
+void AbstractModelSynchronizer::setUrl( const KUrl& url )
 {
     Q_D( AbstractModelSynchronizer );
 

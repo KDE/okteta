@@ -34,7 +34,7 @@ namespace Kasten
 
 void TestDocumentFileWriteThread::run()
 {
-    const QByteArray *byteArray = mDocument->data();
+    const QByteArray* byteArray = mDocument->data();
 
     QDataStream outStream( mFile );
     outStream.writeRawData( mHeader.data(), mHeader.size() );

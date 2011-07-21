@@ -78,7 +78,7 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
     // TODO: readonly and modifiable should be turned into flags, also get/set methods
     void readOnlyChanged( bool isReadOnly );
     void modifiableChanged( bool isModifiable );
-    void titleChanged( const QString &newTitle );
+    void titleChanged( const QString& newTitle );
 
   protected:
     void setBaseModel( AbstractModel* baseModel );

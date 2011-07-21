@@ -32,7 +32,7 @@
 namespace Kasten
 {
 
-TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const QByteArray &header )
+TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const QByteArray& header )
  : mHeader( header ) {}
 
 // could be set to base class as value, is only one object per factory at runtime

@@ -86,25 +86,25 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
 //     virtual void startOffering( AbstractDocument* document ) = 0;
     // TODO: once the synchronizer is attached to a document, this function should not be called
     // is there a way to ensure this?
-    virtual AbstractLoadJob *startLoad( const KUrl &url ) = 0;
+    virtual AbstractLoadJob* startLoad( const KUrl& url ) = 0;
     /** */
     // TODO: not in constructor? cannot be called twice, each synchronizer is attached to its document
-//     virtual AbstractDocument* createWorkingCopy( const KUrl &originUrl, int *success ) const = 0;
+//     virtual AbstractDocument* createWorkingCopy( const KUrl& originUrl, int* success ) const = 0;
 
     /** */
     // TODO: static? or by function? or another class? but 
-//     virtual void copyTo( const KUrl &url, AbstractDocument* document, int *success ) const = 0;
+//     virtual void copyTo( const KUrl& url, AbstractDocument* document, int* success ) const = 0;
 
     /** overwrite remote with local (save) */
-    virtual AbstractSyncToRemoteJob *startSyncToRemote() = 0;
+    virtual AbstractSyncToRemoteJob* startSyncToRemote() = 0;
     /** overwrite local with remote (reload) */
-    virtual AbstractSyncFromRemoteJob *startSyncFromRemote() = 0;
+    virtual AbstractSyncFromRemoteJob* startSyncFromRemote() = 0;
 
     /** changes the  */ // TODO: better name for replace: overwrite?
-    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option ) = 0;
+    virtual AbstractSyncWithRemoteJob* startSyncWithRemote( const KUrl& url, AbstractModelSynchronizer::ConnectOption option ) = 0;
 
-    virtual AbstractConnectJob *startConnect( AbstractDocument* document,
-                                              const KUrl &url, AbstractModelSynchronizer::ConnectOption option ) = 0;
+    virtual AbstractConnectJob* startConnect( AbstractDocument* document,
+                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option ) = 0;
 //     virtual bool syncBiDirectly() = 0;
 //     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();
@@ -113,14 +113,14 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     virtual RemoteSyncState remoteSyncState() const = 0;
 
   Q_SIGNALS:
-    void urlChanged( const KUrl &url );
+    void urlChanged( const KUrl& url );
     void dataPulled( int ) const;
     void dataPushed( int ) const;
     void synchronized();
     void remoteSyncStateChanged( Kasten::RemoteSyncState newState );
 
   protected: // get
-    void setUrl( const KUrl &url );
+    void setUrl( const KUrl& url );
 
   protected:
     Q_DECLARE_PRIVATE( AbstractModelSynchronizer )

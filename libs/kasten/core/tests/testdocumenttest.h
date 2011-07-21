@@ -37,7 +37,7 @@ class TestDocumentTest : public QObject
   Q_OBJECT
 
   private:
-    void checkTitleChanged( QSignalSpy* titleChangedSpy, const QString &title );
+    void checkTitleChanged( QSignalSpy* titleChangedSpy, const QString& title );
     void checkLocalSyncStateChanged( QSignalSpy* changedSpy, Kasten::LocalSyncState localSyncState );
 
   private Q_SLOTS: // test functions

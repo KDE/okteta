@@ -78,7 +78,7 @@ class Versionable
 //     virtual KDocumentVersionIterator rootVersion() const = 0;
 //     virtual KDocumentVersionIterator headVersion() const = 0;
 // for those with multiple branches:
-//     virtual KDocumentVersionIterator headVersion( const KDocumentVersionBranchId &id) const = 0;
+//     virtual KDocumentVersionIterator headVersion( const KDocumentVersionBranchId& id) const = 0;
 //     virtual QList<KDocumentVersionBranchId> heads() const = 0;
     virtual int versionCount() const = 0;
 

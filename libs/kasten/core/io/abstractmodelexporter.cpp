@@ -32,7 +32,7 @@ AbstractModelExporter::AbstractModelExporter( AbstractModelExporterPrivate* d )
 {
 }
 
-AbstractModelExporter::AbstractModelExporter( const QString &remoteTypeName, const QString &remoteMimeType )
+AbstractModelExporter::AbstractModelExporter( const QString& remoteTypeName, const QString& remoteMimeType )
   : d_ptr( new AbstractModelExporterPrivate(this,remoteTypeName,remoteMimeType) )
 {
 }

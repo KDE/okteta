@@ -37,7 +37,7 @@ class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFact
   Q_OBJECT
 
   public:
-    TestDocumentFileSynchronizerFactory( const QByteArray &header = QByteArray() );
+    TestDocumentFileSynchronizerFactory( const QByteArray& header = QByteArray() );
     virtual ~TestDocumentFileSynchronizerFactory();
 
   public: // AbstractModelSynchronizerFactory API

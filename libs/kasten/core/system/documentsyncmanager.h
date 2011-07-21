@@ -51,7 +51,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
     virtual ~DocumentSyncManager();
 
   public:
-    void load( const KUrl &url );
+    void load( const KUrl& url );
 // TODO: better name
     bool setSynchronizer( AbstractDocument* document );
     bool canClose( AbstractDocument* document );
@@ -59,7 +59,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
     void save( AbstractDocument* document );
 
   public:
-    bool hasSynchronizerForLocal( const QString &mimeType ) const;
+    bool hasSynchronizerForLocal( const QString& mimeType ) const;
     KUrl urlOf( AbstractDocument* document ) const;
 
   public:
@@ -68,7 +68,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
     void setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog );
 
   Q_SIGNALS:
-    void urlUsed( const KUrl &url );
+    void urlUsed( const KUrl& url );
 
   protected Q_SLOTS:
     void onDocumentLoaded( Kasten::AbstractDocument* document );

@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject *parent, const QByteArray &header,
+TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject* parent, const QByteArray& header,
     /*TestDocument* document,*/ QFile* file )
  : QThread( parent ), /*mDocument( document ),*/ mHeader( header), mFile( file ), mSuccess( false )
 {

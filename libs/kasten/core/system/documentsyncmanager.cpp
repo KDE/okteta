@@ -63,7 +63,7 @@ void DocumentSyncManager::setOverwriteDialog( AbstractOverwriteDialog* overwrite
     mOverwriteDialog = overwriteDialog;
 }
 
-bool DocumentSyncManager::hasSynchronizerForLocal( const QString &workDocumentType ) const
+bool DocumentSyncManager::hasSynchronizerForLocal( const QString& workDocumentType ) const
 {
     // TODO: need synchronizerfactory classes to query for this or a local datastructure
     return ( mSynchronizerFactory->supportedWorkType() == workDocumentType );
@@ -81,7 +81,7 @@ void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchroni
     mSynchronizerFactory = synchronizerFactory;
 }
 
-void DocumentSyncManager::load( const KUrl &url )
+void DocumentSyncManager::load( const KUrl& url )
 {
     AbstractDocument* document = mManager->documentOfUrl( url );
     if( document )
@@ -92,8 +92,9 @@ void DocumentSyncManager::load( const KUrl &url )
     }
 
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
-    AbstractLoadJob *loadJob = synchronizer->startLoad( url );
-    connect( loadJob, SIGNAL(documentLoaded( Kasten::AbstractDocument* )), SLOT(onDocumentLoaded( Kasten::AbstractDocument* )) );
+    AbstractLoadJob* loadJob = synchronizer->startLoad( url );
+    connect( loadJob, SIGNAL(documentLoaded(Kasten::AbstractDocument*)),
+             SLOT(onDocumentLoaded(Kasten::AbstractDocument*)) );
 
     JobManager::executeJob( loadJob ); // TODO: pass a ui handler to jobmanager
 
@@ -123,7 +124,8 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 
             if( isNewUrl )
             {
-                const bool isUrlInUse = KIO::NetAccess::exists( newUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
+                const bool isUrlInUse =
+                    KIO::NetAccess::exists( newUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
 
                 if( isUrlInUse )
                 {
@@ -145,7 +147,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                 if( currentSynchronizer && true )//TODO: same remote mimetype
                 {
                     //TODO: overwrite for now
-                    AbstractSyncWithRemoteJob *syncJob = currentSynchronizer->startSyncWithRemote( newUrl,
+                    AbstractSyncWithRemoteJob* syncJob = currentSynchronizer->startSyncWithRemote( newUrl,
                                                                AbstractModelSynchronizer::ReplaceRemote );
                     const bool syncSucceeded = JobManager::executeJob( syncJob );
 //                     currentSynchronizer->unpauseSynchronization(); also pause above
@@ -155,7 +157,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                 {
                     //TODO: is overwrite for now, is this useful?
                     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
-                    AbstractConnectJob *connectJob = synchronizer->startConnect( document, newUrl,
+                    AbstractConnectJob* connectJob = synchronizer->startConnect( document, newUrl,
                                                                AbstractModelSynchronizer::ReplaceRemote );
                     const bool connectSucceeded = JobManager::executeJob( connectJob );
 
@@ -176,7 +178,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
                 // By e.g. warning that we might be overwriting something?
                 // synchTo might be the intention, after all the user wanted a new storage
                 // 
-                AbstractSyncToRemoteJob *syncJob = document->synchronizer()->startSyncToRemote();
+                AbstractSyncToRemoteJob* syncJob = document->synchronizer()->startSyncToRemote();
                 const bool syncFailed = JobManager::executeJob( syncJob );
 
                 storingDone = !syncFailed;
@@ -210,7 +212,7 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
             {
                 if( synchronizer )
                 {
-                    AbstractSyncToRemoteJob *syncJob = synchronizer->startSyncToRemote();
+                    AbstractSyncToRemoteJob* syncJob = synchronizer->startSyncToRemote();
                     const bool isSynced = JobManager::executeJob( syncJob );
 
                     canClose = isSynced;

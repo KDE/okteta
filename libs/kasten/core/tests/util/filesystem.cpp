@@ -25,7 +25,7 @@
 static const char basePath[] = "/.kde-unit-test/";
 
 
-TestFileSystem::TestFileSystem( const QString &name )
+TestFileSystem::TestFileSystem( const QString& name )
  : mBasePath( QDir::homePath() + QLatin1Char('/')
               + QLatin1String(basePath) + QLatin1Char('/') + name )
 {
@@ -36,25 +36,25 @@ TestFileSystem::TestFileSystem( const QString &name )
 }
 
 
-void TestFileSystem::removeDir( const QString &subPath )
+void TestFileSystem::removeDir( const QString& subPath )
 {
     _removeDir( mBasePath + QLatin1Char('/') + subPath );
 }
 
-void TestFileSystem::createDir( const QString &subPath )
+void TestFileSystem::createDir( const QString& subPath )
 {
     _createDir( mBasePath + QLatin1Char('/') + subPath );
 }
 
-QString TestFileSystem::createFilePath( const QString &fileName, const QString &subPath )
+QString TestFileSystem::createFilePath( const QString& fileName, const QString& subPath )
 {
     return mBasePath + QLatin1Char('/') + subPath + QLatin1Char('/') + fileName;
 }
 
-void TestFileSystem::_removeDir( const QString &path )
+void TestFileSystem::_removeDir( const QString& path )
 {
     QDir localDir( path );
-    foreach( const QString &fileName, localDir.entryList(QDir::Files) )
+    foreach( const QString& fileName, localDir.entryList(QDir::Files) )
     {
         if( !localDir.remove(fileName) )
             qWarning("%s: removing failed", qPrintable( fileName ));
@@ -66,7 +66,7 @@ void TestFileSystem::_removeDir( const QString &path )
     localDir.rmpath( subDirectory );
 }
 
-void TestFileSystem::_createDir( const QString &path )
+void TestFileSystem::_createDir( const QString& path )
 {
     QVERIFY( QDir().mkpath(path) );
 }

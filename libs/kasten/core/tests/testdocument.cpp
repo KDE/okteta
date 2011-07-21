@@ -30,7 +30,7 @@ TestDocument::TestDocument()
   : mLocalSyncState( LocalInSync )
 {
 }
-TestDocument::TestDocument( const QByteArray &data )
+TestDocument::TestDocument( const QByteArray& data )
   : mData( data ),
     mLocalSyncState( LocalInSync )
 {
@@ -53,7 +53,7 @@ void TestDocument::setData( const QByteArray& data )
         emit localSyncStateChanged( mLocalSyncState );
 }
 
-void TestDocument::setTitle( const QString &title )
+void TestDocument::setTitle( const QString& title )
 {
     if( mTitle != title )
     {

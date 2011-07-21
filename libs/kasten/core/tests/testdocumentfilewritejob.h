@@ -38,7 +38,7 @@ class TestDocumentFileWriteJob : public AbstractFileSystemSyncToRemoteJob
   Q_OBJECT
 
   public:
-    TestDocumentFileWriteJob( TestDocumentFileSynchronizer *synchronizer );
+    TestDocumentFileWriteJob( TestDocumentFileSynchronizer* synchronizer );
     virtual ~TestDocumentFileWriteJob();
 
   protected: // AbstractFileSystemSyncToRemoteJob API
@@ -48,7 +48,7 @@ class TestDocumentFileWriteJob : public AbstractFileSystemSyncToRemoteJob
 //     void onDataPulled();
 
   protected:
-    TestDocumentFileWriteThread *mWriteThread;
+    TestDocumentFileWriteThread* mWriteThread;
 };
 
 }

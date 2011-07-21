@@ -48,7 +48,7 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
 
   public:
     AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
-                                 const KUrl &url );
+                                 const KUrl& url );
 
     virtual ~AbstractFileSystemExportJob();
 

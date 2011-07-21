@@ -34,15 +34,15 @@
 namespace Kasten
 {
 
-TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer *synchronizer, const KUrl &url )
+TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const KUrl& url )
  : AbstractFileSystemLoadJob( synchronizer, url )
 {}
 
 void TestDocumentFileLoadJob::startLoadFromFile()
 {
-    TestDocumentFileSynchronizer *testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
+    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
 
-    TestDocumentFileLoadThread *loadThread =
+    TestDocumentFileLoadThread* loadThread =
         new TestDocumentFileLoadThread( this, testSynchronizer->header(), file() );
     loadThread->start();
     while( !loadThread->wait(100) )

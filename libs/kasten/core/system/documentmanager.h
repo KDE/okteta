@@ -87,7 +87,7 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
     /// documents are about to be closed, cannot be stopped
     void closing( const QList<Kasten::AbstractDocument*>& documents );
 
-//     void closing( KCloseEvent *event );
+//     void closing( KCloseEvent* event );
 // TODO: other than QObject event gets modified by observers, take care of unsetting a close cancel
 // problem with a signal is that all(!) observers get notified, even if event is already cancelled
 // better a visitor pattern?

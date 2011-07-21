@@ -38,7 +38,7 @@ class TestDocumentFileWriteToJob : public AbstractFileSystemSyncWithRemoteJob
   Q_OBJECT
 
   public:
-    TestDocumentFileWriteToJob( TestDocumentFileSynchronizer *synchronizer,
+    TestDocumentFileWriteToJob( TestDocumentFileSynchronizer* synchronizer,
                                 const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~TestDocumentFileWriteToJob();
 
@@ -49,7 +49,7 @@ class TestDocumentFileWriteToJob : public AbstractFileSystemSyncWithRemoteJob
 //     void onDataPulled();
 
   protected:
-    TestDocumentFileWriteThread *mWriteThread;
+    TestDocumentFileWriteThread* mWriteThread;
 };
 
 }

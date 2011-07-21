@@ -43,20 +43,20 @@ class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
   friend class TestDocumentFileConnectJob;
 
   public:
-    explicit TestDocumentFileSynchronizer( const QByteArray &header = QByteArray() );
+    explicit TestDocumentFileSynchronizer( const QByteArray& header = QByteArray() );
 
   public: // AbstractModelSynchronizer API
-    virtual AbstractLoadJob *startLoad( const KUrl &url );
-    virtual AbstractSyncToRemoteJob *startSyncToRemote();
-    virtual AbstractSyncFromRemoteJob *startSyncFromRemote();
-    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
-    virtual AbstractConnectJob *startConnect( AbstractDocument* document,
-                                              const KUrl &url, AbstractModelSynchronizer::ConnectOption option );
+    virtual AbstractLoadJob* startLoad( const KUrl& url );
+    virtual AbstractSyncToRemoteJob* startSyncToRemote();
+    virtual AbstractSyncFromRemoteJob* startSyncFromRemote();
+    virtual AbstractSyncWithRemoteJob* startSyncWithRemote( const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+    virtual AbstractConnectJob* startConnect( AbstractDocument* document,
+                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
     virtual AbstractDocument* document() const;
 
   public:
-    const QByteArray &header() const;
+    const QByteArray& header() const;
 
   protected:
     void setDocument( TestDocument* document );
@@ -67,7 +67,7 @@ class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
 };
 
 
-inline  const QByteArray &TestDocumentFileSynchronizer::header() const { return mHeader; }
+inline  const QByteArray& TestDocumentFileSynchronizer::header() const { return mHeader; }
 inline void TestDocumentFileSynchronizer::setDocument( TestDocument* document ) { mDocument = document; }
 
 }

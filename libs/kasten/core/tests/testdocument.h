@@ -39,7 +39,7 @@ class TestDocument : public AbstractDocument
 
   public:
     TestDocument();
-    explicit TestDocument( const QByteArray &data );
+    explicit TestDocument( const QByteArray& data );
     virtual ~TestDocument();
 
   public: // API to be implemented
@@ -49,11 +49,11 @@ class TestDocument : public AbstractDocument
     virtual LocalSyncState localSyncState() const;
 
   public:
-    const QByteArray *data() const;
-    void setData( const QByteArray &data );
+    const QByteArray* data() const;
+    void setData( const QByteArray& data );
 
   public: // instruction functions
-    void setTitle( const QString &title );
+    void setTitle( const QString& title );
     void setLocalSyncState( LocalSyncState syncState );
 
   protected:

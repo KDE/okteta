@@ -36,7 +36,7 @@
 namespace Kasten
 {
 
-TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray &header )
+TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray& header )
  : mHeader( header )
 {
     // TODO: where to catch this? who decides about this?
@@ -46,28 +46,28 @@ TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray &he
 AbstractDocument* TestDocumentFileSynchronizer::document() const { return mDocument; }
 
 
-AbstractLoadJob *TestDocumentFileSynchronizer::startLoad( const KUrl &url )
+AbstractLoadJob* TestDocumentFileSynchronizer::startLoad( const KUrl& url )
 {
     return new TestDocumentFileLoadJob( this, url );
 }
 
-AbstractSyncToRemoteJob *TestDocumentFileSynchronizer::startSyncToRemote()
+AbstractSyncToRemoteJob* TestDocumentFileSynchronizer::startSyncToRemote()
 {
     return new TestDocumentFileWriteJob( this );
 }
 
-AbstractSyncFromRemoteJob *TestDocumentFileSynchronizer::startSyncFromRemote()
+AbstractSyncFromRemoteJob* TestDocumentFileSynchronizer::startSyncFromRemote()
 {
     return new TestDocumentFileReloadJob( this );
 }
 
-AbstractSyncWithRemoteJob *TestDocumentFileSynchronizer::startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob* TestDocumentFileSynchronizer::startSyncWithRemote( const KUrl& url, AbstractModelSynchronizer::ConnectOption option  )
 {
     return new TestDocumentFileWriteToJob( this, url, option );
 }
 
-AbstractConnectJob *TestDocumentFileSynchronizer::startConnect( AbstractDocument* document,
-                                              const KUrl &url, AbstractModelSynchronizer::ConnectOption option )
+AbstractConnectJob* TestDocumentFileSynchronizer::startConnect( AbstractDocument* document,
+                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new TestDocumentFileConnectJob( this, document, url, option );
 }
