@@ -152,7 +152,8 @@ bool OktetaPart::openFile()
     Kasten::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
 
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad( localFilePath() );
-    connect( loadJob, SIGNAL(documentLoaded( Kasten::AbstractDocument* )), SLOT(onDocumentLoaded( Kasten::AbstractDocument* )) );
+    connect( loadJob, SIGNAL(documentLoaded(Kasten::AbstractDocument*)),
+             SLOT(onDocumentLoaded(Kasten::AbstractDocument*)) );
     Kasten::JobManager::executeJob( loadJob );
 
     delete synchronizerFactory;
@@ -181,13 +182,13 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
 
         mDocument = static_cast<Kasten::ByteArrayDocument*>( document );
         mDocument->setReadOnly( mModus != ReadWriteModus );
-        connect( mDocument, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )),
-                 SLOT(onModified( Kasten::LocalSyncState )) );
+        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+                 SLOT(onModified(Kasten::LocalSyncState)) );
 
         mByteArrayView = new Kasten::ByteArrayView( mDocument );
 //     mByteArrayView->setNoOfBytesPerLine( 16 );
         mByteArrayView->setShowsNonprinting( false );
-        connect( mByteArrayView, SIGNAL(hasSelectedDataChanged( bool )), SIGNAL(hasSelectedDataChanged( bool )) );
+        connect( mByteArrayView, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );
 
         QWidget* displayWidget = mByteArrayView->widget();
         mLayout->addWidget( displayWidget );

@@ -42,7 +42,7 @@ KByteArrayEdit::KByteArrayEdit( QWidget* parent, const QList<QVariant>& )
     QHBoxLayout* Layout = new QHBoxLayout( this );
     Layout->addWidget( View );
 
-    connect( View, SIGNAL(copyAvailable( bool )), SIGNAL(copyAvailable( bool )) );
+    connect( View, SIGNAL(copyAvailable(bool)), SIGNAL(copyAvailable(bool)) );
 }
 
 
