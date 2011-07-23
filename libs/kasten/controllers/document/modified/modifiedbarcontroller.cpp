@@ -33,16 +33,23 @@
 
 namespace Kasten
 {
+static const int modifiedPixmapWidth = 16;
+
 
 ModifiedBarController::ModifiedBarController( StatusBar* statusBar )
   : mDocument( 0 )
 {
+    // TODO: depend an statusbar height
+    const QSize modifiedPixmapSize = QSize(modifiedPixmapWidth, modifiedPixmapWidth);
+
     mLocalStateLabel = new QLabel( statusBar );
     mLocalStateLabel->setAlignment( Qt::AlignCenter );
+    mLocalStateLabel->setFixedSize( modifiedPixmapSize );
     statusBar->addWidget( mLocalStateLabel );
 
     mRemoteStateLabel = new QLabel( statusBar );
     mRemoteStateLabel->setAlignment( Qt::AlignCenter );
+    mRemoteStateLabel->setFixedSize( modifiedPixmapSize );
     statusBar->addWidget( mRemoteStateLabel );
 
     setTargetModel( 0 );
@@ -83,7 +90,10 @@ void ModifiedBarController::onLocalSyncStateChanged( Kasten::LocalSyncState loca
     const bool isModified = (localSyncState == LocalHasChanges );
 
     // TODO: depend an statusbar height
-    mLocalStateLabel->setPixmap( isModified ? KIcon( QLatin1String("document-save") ).pixmap(16) : QPixmap() );
+    const QPixmap pixmap = isModified ?
+        KIcon( QLatin1String("document-save") ).pixmap(modifiedPixmapWidth) :
+        QPixmap();
+    mLocalStateLabel->setPixmap( pixmap );
 
     mLocalStateLabel->setToolTip( isModified ?
         i18nc( "@tooltip the document is modified", "Modified." ) :
@@ -102,7 +112,10 @@ void ModifiedBarController::onRemoteSyncStateChanged( Kasten::RemoteSyncState re
         /* else */                                 0;
 
     // TODO: depend an statusbar height
-    mRemoteStateLabel->setPixmap( iconName ? KIcon( QLatin1String(iconName) ).pixmap(16) : QPixmap() );
+    const QPixmap pixmap = iconName ?
+        KIcon( QLatin1String(iconName) ).pixmap(modifiedPixmapWidth) :
+        QPixmap();
+    mRemoteStateLabel->setPixmap( pixmap );
 
     // TODO: tooltips
 }
