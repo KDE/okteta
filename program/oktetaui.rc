@@ -63,8 +63,6 @@
     <ActionList name="bookmark_list" />
   </Menu>
   <Menu name="tools">
-    <Action name="converter" />
-    <Separator/>
     <ActionList name="tools_list" />
   </Menu>
   <Menu name="windows"><text>&amp;Windows</text>
