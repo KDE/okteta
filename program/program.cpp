@@ -56,6 +56,7 @@ namespace Kasten
 // static const char OffsetOptionId[] = "offset";
 // static const char OffsetOptionShortId[] = "o";
 
+#define CmdLineOptionName(STRING) QByteArray::fromRawData( STRING, sizeof(STRING)-1 )
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
  : mDocumentManager( new DocumentManager() ),
@@ -65,7 +66,7 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );
 //     programOptions.add( OffsetOptionId, ki18n("Offset to set the cursor to"), 0 );
-    programOptions.add( "+[URL(s)]", ki18n("File(s) to load"), 0 );
+    programOptions.add( CmdLineOptionName("+[URL(s)]"), ki18n("File(s) to load") );
 
     KCmdLineArgs::init( argc, argv, &mAboutData );
     KCmdLineArgs::addCmdLineOptions( programOptions );
