@@ -29,7 +29,6 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 
-class KUrl;
 class QStringList;
 
 
