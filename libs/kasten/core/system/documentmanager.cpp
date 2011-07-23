@@ -51,22 +51,6 @@ DocumentManager::DocumentManager()
 
 QList<AbstractDocument*> DocumentManager::documents() const { return mList; }
 
-AbstractDocument* DocumentManager::documentOfUrl( const KUrl& url ) const
-{
-    AbstractDocument* result = 0;
-
-    foreach( AbstractDocument* document, mList )
-    {
-        if( url == mSyncManager->urlOf(document) )
-        {
-            result = document;
-            break;
-        }
-    }
-
-    return result;
-}
-
 void DocumentManager::addDocument( AbstractDocument* document )
 {
     // TODO: check for double insert

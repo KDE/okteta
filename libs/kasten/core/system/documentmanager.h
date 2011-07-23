@@ -73,9 +73,6 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
     QList<AbstractDocument*> documents() const;
 
   public:
-    AbstractDocument* documentOfUrl( const KUrl& url ) const;
-
-  public:
     DocumentCreateManager* createManager();
     DocumentSyncManager* syncManager();
     ModelCodecManager* codecManager();

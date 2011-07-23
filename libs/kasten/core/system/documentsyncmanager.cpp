@@ -83,12 +83,14 @@ void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchroni
 
 void DocumentSyncManager::load( const KUrl& url )
 {
-    AbstractDocument* document = mManager->documentOfUrl( url );
-    if( document )
+    foreach( AbstractDocument* document, mManager->documents() )
     {
-        // TODO: query if file should be reloaded/synched from disk
-        emit mManager->focusRequested( document );
-        return;
+        if( url == urlOf(document) )
+        {
+            // TODO: query if file should be reloaded/synched from disk
+            emit mManager->focusRequested( document );
+            return;
+        }
     }
 
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
