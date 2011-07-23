@@ -51,16 +51,6 @@ DocumentManager::DocumentManager()
 
 QList<AbstractDocument*> DocumentManager::documents() const { return mList; }
 
-QStringList DocumentManager::urls() const
-{
-    QStringList result;
-
-    foreach( AbstractDocument* document, mList )
-        result.append( mSyncManager->urlOf(document).url() );
-
-    return result;
-}
-
 AbstractDocument* DocumentManager::documentOfUrl( const KUrl& url ) const
 {
     AbstractDocument* result = 0;

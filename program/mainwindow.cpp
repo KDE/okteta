@@ -213,7 +213,13 @@ void OktetaMainWindow::setupControllers()
 
 void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
 {
-    const QStringList urls = mDocumentManager->urls();
+    DocumentSyncManager* const syncManager = mDocumentManager->syncManager();
+    const QList<AbstractDocument*> documents = mDocumentManager->documents();
+
+    QStringList urls;
+    foreach( AbstractDocument* document, documents )
+        urls.append( syncManager->urlOf(document).url() );
+
     configGroup.writePathEntry( LoadedUrlsKey, urls );
 }
 

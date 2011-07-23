@@ -72,8 +72,7 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
   public:
     QList<AbstractDocument*> documents() const;
 
-  public: //TODO: see is this can be removed out of this api, hack for now to MainWindow::saveProperties
-    QStringList urls() const;
+  public:
     AbstractDocument* documentOfUrl( const KUrl& url ) const;
 
   public:
