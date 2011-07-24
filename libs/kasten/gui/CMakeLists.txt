@@ -79,6 +79,7 @@ set( kastengui_shell_SRCS
   shell/tabbedviews.cpp
   shell/multiviewareas_p.cpp
   shell/multiviewareas.cpp
+  shell/shellwindow_p.cpp
   shell/shellwindow.cpp
   shell/statusbar.cpp
   shell/statusbarlayout.cpp

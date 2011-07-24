@@ -40,6 +40,7 @@ class ViewAreaBox : public QWidget
     enum Area { TopArea, BottomArea };
 
   public:
+    /// does not take ownership of @p centralWidget, can be 0.
     explicit ViewAreaBox( QWidget* centralWidget, QWidget* parent = 0 );
     virtual ~ViewAreaBox();
 
@@ -48,6 +49,9 @@ class ViewAreaBox : public QWidget
     QWidget* bottomWidget() const;
 
   public:
+    /// does not take ownership of @p centralWidget, can be 0.
+    void setCentralWidget( QWidget* centralWidget );
+    /// takes ownership of @p bottomWidget, deletes current bottom widget. Can be 0.
     void setBottomWidget( QWidget* bottomWidget );
 
   protected Q_SLOTS:

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -40,7 +40,8 @@ ViewAreaBox::ViewAreaBox( QWidget* centralWidget, QWidget* parent )
     QVBoxLayout* layout = new QVBoxLayout( this );
     layout->setMargin( 0 );
     layout->setSpacing( 0 );
-    layout->addWidget( mCentralWidget );
+    if( mCentralWidget )
+        layout->addWidget( mCentralWidget );
 
     mEscapeShortcut = new QShortcut( Qt::Key_Escape, this );
     mEscapeShortcut->setEnabled( false );
@@ -51,6 +52,32 @@ ViewAreaBox::ViewAreaBox( QWidget* centralWidget, QWidget* parent )
 QWidget* ViewAreaBox::centralWidget() const { return mCentralWidget; }
 QWidget* ViewAreaBox::bottomWidget()  const { return mBottomWidget; }
 
+void ViewAreaBox::setCentralWidget( QWidget* centralWidget )
+{
+    if( mCentralWidget == centralWidget )
+        return;
+
+    QVBoxLayout* layout = static_cast<QVBoxLayout*>( this->layout() );
+    const bool centralWidgetIsFocusProxy =
+        mCentralWidget ? ( focusProxy() == mCentralWidget ) : false;
+    // TODO: works if focus is on childwidget?
+    const bool centralWidgetHasFocus =
+        mCentralWidget ? mCentralWidget->hasFocus() : false;
+    if( mCentralWidget )
+        layout->removeWidget( mCentralWidget );
+
+    mCentralWidget = centralWidget;
+
+    if( mCentralWidget )
+    {
+        layout->insertWidget( 0, mCentralWidget );
+        mCentralWidget->show(); // TODO: needed?
+        if( centralWidgetHasFocus )
+            mCentralWidget->setFocus();
+        if( centralWidgetIsFocusProxy )
+            setFocusProxy( mCentralWidget );
+    }
+}
 
 void ViewAreaBox::setBottomWidget( QWidget* bottomWidget )
 {
@@ -86,7 +113,8 @@ void ViewAreaBox::onDone()
 ViewAreaBox::~ViewAreaBox()
 {
     delete mBottomWidget;
-    mCentralWidget->setParent( 0 );
+    if( mCentralWidget )
+        mCentralWidget->setParent( 0 );
 }
 
 }

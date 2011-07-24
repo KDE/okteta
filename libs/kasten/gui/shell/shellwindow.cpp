@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -21,250 +21,78 @@
 */
 
 #include "shellwindow.h"
-
-// lib
-#include <multiviewareas.h>
-#include <tabbedviews.h>
-#include <viewmanager.h>
-#include <abstractview.h>
-#include <abstracttoolview.h>
-#include <abstracttool.h>
-#include <abstractxmlguicontroller.h>
-#include <toolviewdockwidget.h>
-// Kasten core
-#include <documentmanager.h>
-#include <documentcreatemanager.h>
-#include <documentsyncmanager.h>
-#include <abstractdocument.h>
-// KDE
-#include <KUrl>
-// Qt
-#include <QtGui/QDockWidget>
-#include <QtCore/QHash>
+#include "shellwindow_p.h"
+#include "shellwindow.moc"
 
 
 namespace Kasten
 {
 
 ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager* viewManager )
-  : mGroupedViews( new MultiViewAreas() ),// TabbedViews() ),
-    mCurrentView( 0 ),
-    mDocumentManager( documentManager ),
-    mViewManager( viewManager )
+  : KXmlGuiWindow(),
+    d_ptr( new ShellWindowPrivate(this, documentManager, viewManager) )
 {
-    setCentralWidget( mGroupedViews->widget() );
-
-    connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
-             mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
-             mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
-
-    connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
-             mGroupedViews, SLOT(addViews(QList<Kasten::AbstractView*>)) );
-    connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
-             mGroupedViews, SLOT(removeViews(QList<Kasten::AbstractView*>)) );
-
-    connect( mDocumentManager, SIGNAL(focusRequested(Kasten::AbstractDocument*)),
-             SLOT(onFocusRequested(Kasten::AbstractDocument*)) );
-
-    connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
-             SLOT(onViewFocusChanged(Kasten::AbstractView*)) );
-    connect( mGroupedViews, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
-             SLOT(onCloseRequest(QList<Kasten::AbstractView*>)) );
-    connect( mGroupedViews, SIGNAL(dataOffered(const QMimeData*,bool&)),
-             SLOT(onDataOffered(const QMimeData*,bool&)) );
-    connect( mGroupedViews, SIGNAL(dataDropped(const QMimeData*)),
-             SLOT(onDataDropped(const QMimeData*)) );
 }
 
-QList<ToolViewDockWidget*> ShellWindow::dockWidgets() const { return mDockWidgets; }
+ViewManager* ShellWindow::viewManager() const
+{
+    Q_D( const ShellWindow );
+
+    return d->viewManager();
+}
+
+DocumentManager* ShellWindow::documentManager() const
+{
+    Q_D( const ShellWindow );
+
+    return d->documentManager();
+}
+
+MultiViewAreas* ShellWindow::viewArea() const
+{
+    Q_D( const ShellWindow );
+
+    return d->viewArea();
+}
+
+QList<ToolViewDockWidget*> ShellWindow::dockWidgets() const
+{
+    Q_D( const ShellWindow );
+
+    return d->dockWidgets();
+}
 
 void ShellWindow::addXmlGuiController( AbstractXmlGuiController* controller )
 {
-    mControllers.append( controller );
+    Q_D( ShellWindow );
+
+    d->addXmlGuiController( controller );
 }
 
 void ShellWindow::addTool( AbstractToolView* toolView )
 {
-    ToolViewDockWidget* dockWidget = new ToolViewDockWidget( toolView, this );
-    // TODO: where to set the initial area?
-    addDockWidget( Qt::RightDockWidgetArea, dockWidget );
+    Q_D( ShellWindow );
 
-    mTools.append( toolView->tool() );
-    mDockWidgets.append( dockWidget );
-
-    if( dockWidget->isVisible() && mCurrentView )
-        toolView->tool()->setTargetModel( mCurrentView );
-
-    connect( dockWidget, SIGNAL(visibilityChanged(bool)),
-             SLOT(onToolVisibilityChanged(bool)) );
+    d->addTool( toolView );
 }
 
 void ShellWindow::updateControllers( AbstractView* view )
 {
-    foreach( AbstractXmlGuiController* controller, mControllers )
-        controller->setTargetModel( view );
+    Q_D( ShellWindow );
 
-    foreach( ToolViewDockWidget* dockWidget, mDockWidgets )
-    {
-        if( dockWidget->isShown() )
-            dockWidget->toolView()->tool()->setTargetModel( view );
-    }
+    d->updateControllers( view );
 }
 
 bool ShellWindow::queryClose()
 {
-    // TODO: query the document manager or query the view manager?
-    return mDocumentManager->canCloseAll();
-}
+    Q_D( ShellWindow );
 
-void ShellWindow::onTitleChanged( const QString &newTitle )
-{
-    AbstractView* view = qobject_cast<AbstractView *>( sender() );
-    if( view )
-    {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        setCaption( newTitle, document->localSyncState() == LocalHasChanges );
-    }
-}
-
-void ShellWindow::onLocalSyncStateChanged( LocalSyncState newState )
-{
-Q_UNUSED( newState )
-    AbstractView* view = qobject_cast<AbstractView *>( sender() );
-    if( view )
-        setCaption( view->title(), newState == LocalHasChanges );
-}
-
-void ShellWindow::onViewFocusChanged( AbstractView *view )
-{
-    if( mCurrentView ) mCurrentView->disconnect( this );
-
-    mCurrentView = view;
-
-    updateControllers( view );
-    const QString title = view ? view->title() : QString();
-    AbstractDocument* document = view ? view->findBaseModel<AbstractDocument*>() : 0;
-
-    const bool changes = document ? document->localSyncState() == LocalHasChanges : false;
-    setCaption( title, changes );
-
-    if( view )
-    {
-        connect( view, SIGNAL(titleChanged(QString)),
-                 SLOT(onTitleChanged(QString)) );
-        connect( view, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                 SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
-    }
-}
-
-void ShellWindow::onFocusRequested( AbstractDocument* document )
-{
-    AbstractGroupedViews* currentGroupedViews = static_cast<AbstractGroupedViews*>( mGroupedViews->viewAreaFocus() );
-    const QList<AbstractView*> viewList = currentGroupedViews->viewList();
-
-    AbstractView* viewOfDocument = 0;
-    foreach( AbstractView* view, viewList )
-    {
-        if( view->findBaseModel<AbstractDocument*>() == document )
-        {
-            viewOfDocument = view;
-            break;
-        }
-    }
-
-    if( viewOfDocument )
-        mGroupedViews->setViewFocus( viewOfDocument );
-    else
-    {
-        QList<Kasten::AbstractDocument*> documents;
-        documents.append( document );
-        mViewManager->createViewsFor( documents );
-    }
-}
-
-void ShellWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
-{
-    // group views per document
-    QHash<AbstractDocument*,QList<AbstractView*> > viewsToClosePerDocument;
-    foreach( AbstractView* view, views )
-    {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        viewsToClosePerDocument[document].append( view );
-    }
-
-    // find documents which lose all views
-    const QList<AbstractView*> allViews = mViewManager->views();
-    foreach( AbstractView* view, allViews )
-    {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        QHash<AbstractDocument*,QList<AbstractView*> >::Iterator it =
-            viewsToClosePerDocument.find( document );
-
-        if( it != viewsToClosePerDocument.end() )
-        {
-            const QList<AbstractView*>& viewsOfDocument = it.value();
-            const bool isAnotherView = ! viewsOfDocument.contains( view );
-            if( isAnotherView )
-                viewsToClosePerDocument.erase( it );
-        }
-    }
-
-    const QList<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys();
-
-    if( mDocumentManager->canClose(documentsWithoutViews) )
-    {
-        mViewManager->removeViews( views );
-        mDocumentManager->closeDocuments( documentsWithoutViews );
-    }
-}
-
-void ShellWindow::onDataOffered( const QMimeData* mimeData, bool& accept )
-{
-    accept = KUrl::List::canDecode( mimeData )
-             || mDocumentManager->createManager()->canCreateNewFromData( mimeData );
-}
-
-void ShellWindow::onDataDropped( const QMimeData* mimeData )
-{
-    const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
-
-    if( ! urls.isEmpty() )
-    {
-        DocumentSyncManager* syncManager = mDocumentManager->syncManager();
-
-        foreach( const KUrl& url, urls )
-            syncManager->load( url );
-    }
-    else
-        mDocumentManager->createManager()->createNewFromData( mimeData, true );
-}
-
-void ShellWindow::onToolVisibilityChanged( bool isVisible )
-{
-    ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget *>( sender() );
-    if( dockWidget )
-    {
-        AbstractView* view = isVisible ? mCurrentView : 0;
-        dockWidget->toolView()->tool()->setTargetModel( view );
-    }
+    return d->queryClose();
 }
 
 ShellWindow::~ShellWindow()
 {
-    // we have to explicitly reset any inline tool view before first deleting all tools
-    // and then the grouped views, because on destruction of the inline tool view it
-    // operates on the tool, which then has been no longer ->crash
-    // The other option would be to first delete the view, but for reasons if do not
-    // remember currently I prefer the destruction in this order
-    // TODO: make this call unneeded
-    mGroupedViews->setCurrentToolInlineView( 0 );
-
-    qDeleteAll( mControllers );
-    qDeleteAll( mDockWidgets );
-    qDeleteAll( mTools );
-
-    delete mGroupedViews;
+    delete d_ptr;
 }
 
 }

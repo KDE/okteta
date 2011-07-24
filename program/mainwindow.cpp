@@ -136,15 +136,18 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
     addXmlGuiController( new ToolListMenuController(this,this) );
-    addXmlGuiController( new ViewListMenuController(mViewManager,mGroupedViews,this) );
+    addXmlGuiController( new ViewListMenuController(viewManager(),viewArea(),this) );
 }
 
 void OktetaMainWindow::setupControllers()
 {
-    ModelCodecViewManager* const codecViewManager = mViewManager->codecViewManager();
-    ModelCodecManager* const codecManager = mDocumentManager->codecManager();
-    DocumentCreateManager* const createManager = mDocumentManager->createManager();
-    DocumentSyncManager* const syncManager = mDocumentManager->syncManager();
+    ViewManager* viewManager = this->viewManager();
+    MultiViewAreas* viewArea = this->viewArea();
+    ModelCodecViewManager* const codecViewManager = viewManager->codecViewManager();
+    DocumentManager* const documentManager = this->documentManager();
+    ModelCodecManager* const codecManager = documentManager->codecManager();
+    DocumentCreateManager* const createManager = documentManager->createManager();
+    DocumentSyncManager* const syncManager = documentManager->syncManager();
 
     // general, part of Kasten
     addXmlGuiController( new CreatorController(codecViewManager,
@@ -155,11 +158,11 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new SynchronizeController(syncManager,this) );
     addXmlGuiController( new ExportController(codecViewManager,
                                               codecManager,this) );
-    addXmlGuiController( new CloseController(mDocumentManager,this) );
+    addXmlGuiController( new CloseController(documentManager,this) );
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );
-    addXmlGuiController( new SwitchViewController(mGroupedViews,this) );
-    addXmlGuiController( new ViewAreaSplitController(mViewManager,mGroupedViews,this) );
+    addXmlGuiController( new SwitchViewController(viewArea,this) );
+    addXmlGuiController( new ViewAreaSplitController(viewManager,viewArea,this) );
     addXmlGuiController( new FullScreenController(this) );
     addXmlGuiController( new QuitController(0,this) );
 
@@ -172,7 +175,7 @@ void OktetaMainWindow::setupControllers()
                                               codecManager,this) );
 
     addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( syncManager )) );
-    addTool( new DocumentsToolView(new DocumentsTool( mDocumentManager )) );
+    addTool( new DocumentsToolView(new DocumentsTool( documentManager )) );
     addTool( new TerminalToolView(new TerminalTool( syncManager )) );
 #ifndef NDEBUG
     addTool( new VersionViewToolView(new VersionViewTool()) );
@@ -183,8 +186,8 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new OverwriteModeController(this) );
     addXmlGuiController( new SearchController(this,this) );
     addXmlGuiController( new ReplaceController(this,this) );
-    addXmlGuiController( new GotoOffsetController(mGroupedViews,this) );
-    addXmlGuiController( new SelectRangeController(mGroupedViews,this) );
+    addXmlGuiController( new GotoOffsetController(viewArea,this) );
+    addXmlGuiController( new SelectRangeController(viewArea,this) );
     addXmlGuiController( new BookmarksController(this) );
     addXmlGuiController( new PrintController(this) );
     addXmlGuiController( new ViewConfigController(this) );
@@ -212,8 +215,9 @@ void OktetaMainWindow::setupControllers()
 
 void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
 {
-    DocumentSyncManager* const syncManager = mDocumentManager->syncManager();
-    const QList<AbstractDocument*> documents = mDocumentManager->documents();
+    DocumentManager* const documentManager = this->documentManager();
+    DocumentSyncManager* const syncManager = documentManager->syncManager();
+    const QList<AbstractDocument*> documents = documentManager->documents();
 
     QStringList urls;
     foreach( AbstractDocument* document, documents )
@@ -226,8 +230,9 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
 {
     const QStringList urls = configGroup.readPathEntry( LoadedUrlsKey, QStringList() );
 
-    DocumentSyncManager* const syncManager = mDocumentManager->syncManager();
-    DocumentCreateManager* const createManager = mDocumentManager->createManager();
+    DocumentManager* const documentManager = this->documentManager();
+    DocumentSyncManager* const syncManager = documentManager->syncManager();
+    DocumentCreateManager* const createManager = documentManager->createManager();
     foreach( const KUrl& url, urls )
     {
         if( url.isEmpty() )

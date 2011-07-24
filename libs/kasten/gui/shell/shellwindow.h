@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,26 +26,23 @@
 // Kasten gui
 #include "kastengui_export.h"
 #include "widgetsdockable.h"
-// Kasten core
-#include <abstractdocument.h>
 // KDE
 #include <KXmlGuiWindow>
-// Qt
-#include <QtCore/QList>
 
+template<class T> class QList;
 class QMimeData;
 
 
 namespace Kasten
 {
+class ShellWindowPrivate;
 
-class DocumentManager;
-class AbstractView;
 class ViewManager;
 class MultiViewAreas;
 class AbstractXmlGuiController;
 class AbstractToolView;
-class AbstractTool;
+class AbstractView;
+class DocumentManager;
 
 
 class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
@@ -55,11 +52,11 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
    Q_INTERFACES( Kasten::If::WidgetsDockable )
 
   public:
-    ShellWindow( DocumentManager* documentManager, ViewManager *viewManager );
+    ShellWindow( DocumentManager* documentManager, ViewManager* viewManager );
     virtual ~ShellWindow();
 
   public:
-    void updateControllers( AbstractView *view );
+    void updateControllers( AbstractView* view );
     void addXmlGuiController( AbstractXmlGuiController* controller );
     void addTool( AbstractToolView* toolView );
 
@@ -69,28 +66,24 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
   protected: // KMainWindow API
     virtual bool queryClose();
 
-  private Q_SLOTS:
-    void onTitleChanged( const QString &newTitle );
-    void onLocalSyncStateChanged( Kasten::LocalSyncState newState );
-    void onViewFocusChanged( Kasten::AbstractView* view );
-    void onFocusRequested( Kasten::AbstractDocument* document );
-    void onToolVisibilityChanged( bool isVisible );
-    void onCloseRequest( const QList<Kasten::AbstractView*>& views );
-    void onDataOffered( const QMimeData* mimeData, bool& accept );
-    void onDataDropped( const QMimeData* mimeData );
+  protected:
+    MultiViewAreas* viewArea() const;
+    ViewManager* viewManager() const;
+    DocumentManager* documentManager() const;
+
+  private:
+    Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& newTitle ) )
+    Q_PRIVATE_SLOT( d_func(), void onLocalSyncStateChanged( Kasten::LocalSyncState newState ) )
+    Q_PRIVATE_SLOT( d_func(), void onViewFocusChanged( Kasten::AbstractView* view ) )
+    Q_PRIVATE_SLOT( d_func(), void onFocusRequested( Kasten::AbstractDocument* document ) )
+    Q_PRIVATE_SLOT( d_func(), void onToolVisibilityChanged( bool isVisible ) )
+    Q_PRIVATE_SLOT( d_func(), void onCloseRequest( const QList<Kasten::AbstractView*>& views ) )
+    Q_PRIVATE_SLOT( d_func(), void onDataOffered( const QMimeData* mimeData, bool& accept ) )
+    Q_PRIVATE_SLOT( d_func(), void onDataDropped( const QMimeData* mimeData ) )
 
   protected:
-    MultiViewAreas* mGroupedViews;
-    // hack:
-    // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
-    AbstractView *mCurrentView;
-
-    DocumentManager* mDocumentManager;
-    ViewManager *mViewManager;
-    QList<AbstractXmlGuiController*> mControllers;
-
-    QList<ToolViewDockWidget*> mDockWidgets;
-    QList<AbstractTool*> mTools;
+    ShellWindowPrivate* const d_ptr;
+    Q_DECLARE_PRIVATE( ShellWindow )
 };
 
 }
