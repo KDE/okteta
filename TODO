@@ -1,20 +1,19 @@
 Unimplemented Feature of KHexEdit:
 ----------------------------------
 
+Missing:
 + <Action name="insert_file" />
-
 + Zugriffsrechte (Größe)
-+ Transcoder
 + bitstream (navigating on bit-level)
 
-Nicht so wichtig:
+Not so important:
 * Einstellung Anzeige voller Pfad in Titel
 * Einstellung Anzeige a-f/A-F
 * Einstellung Anzeige Offset Hex/Dez
 * Suchleiste
 * <Action name="paste_into_new_window" />
 
-Erledigt:
+Done:
 - Zugriffsrechte (Verändern)
 - Rückgängig/Wiederherstellen
 - Speichern
@@ -27,6 +26,7 @@ Erledigt:
 - Zeichenkettenextraktion
 - Exportieren
 - copy_as_text
+- Transcoder
 
 
 Next to work on:
