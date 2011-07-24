@@ -93,7 +93,6 @@
 // Kasten gui
 #include <modelcodecviewmanager.h>
 #include <viewmanager.h>
-#include <tabbedviews.h>
 #include <multiviewareas.h>
 #include <statusbar.h>
 // Kasten core
