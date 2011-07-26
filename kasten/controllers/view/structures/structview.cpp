@@ -141,8 +141,8 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
 
     connect(mTool, SIGNAL(cursorIndexChanged()), SLOT(onCursorIndexChange()));
 
-    connect(ScriptUtils::object(), SIGNAL(scriptError(QString, QString)), this,
-            SLOT(logScriptError(QString, QString)));
+    connect(ScriptUtils::object(), SIGNAL(scriptError(QString,QString)), this,
+            SLOT(logScriptError(QString,QString)));
 #ifdef OKTETA_DEBUG_SCRIPT
     //TODO maybe not compile-time option but runtime option
     mScriptErrors = new KTextEdit(this);

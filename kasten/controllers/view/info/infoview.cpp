@@ -79,7 +79,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
                        " the byte frequency statistic is built for the bytes in the selected range.") );
     mUpdateButton = new KPushButton( updateGuiItem, this );
     mUpdateButton->setEnabled( mTool->isApplyable() );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT( setEnabled(bool )) );
+    connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT(setEnabled(bool)) );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
     topLineLayout->addWidget( mUpdateButton );
 

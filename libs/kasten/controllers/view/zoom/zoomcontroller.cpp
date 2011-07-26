@@ -66,11 +66,11 @@ ZoomController::ZoomController( KXMLGUIClient* guiClient )
     // TODO: name size relative to object or view? name object(variable) or view?
     // TODO: is this a sticking parameter?
     FitToWidthAction = new KAction( i18n( "&Fit to Width" ), ActionCollection, "fit_to_width" );
-    connect( FitWidthAction, SIGNAL(triggered(bool) ), SLOT( fitToWidth() ));
+    connect( FitWidthAction, SIGNAL(triggered(bool) ), SLOT(fitToWidth()));
     FitToHeightAction = new KAction( i18n( "&Fit to Height" ), ActionCollection, "fit_to_height" );
-    connect( FitWidthAction, SIGNAL(triggered(bool) ), SLOT( fitToHeight() ));
+    connect( FitWidthAction, SIGNAL(triggered(bool) ), SLOT(fitToHeight()));
     FitToSizeAction = new KAction( i18n( "&Fit to Size" ), ActionCollection, "fit_to_size" );
-    connect( FitToSizeAction, SIGNAL(triggered(bool) ), SLOT( fitToSize() ));
+    connect( FitToSizeAction, SIGNAL(triggered(bool) ), SLOT(fitToSize()));
 #endif
     setTargetModel( 0 );
 }

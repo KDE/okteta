@@ -76,8 +76,8 @@ void DocumentManagerTest::testAddRemove()
     Kasten::TestDocument* doc3 = new Kasten::TestDocument();
 
     Kasten::DocumentManager* documentManager = new Kasten::DocumentManager();
-    QSignalSpy* addedSpy = new QSignalSpy( documentManager, SIGNAL(added( const QList<Kasten::AbstractDocument*>& )) );
-    QSignalSpy* closingSpy = new QSignalSpy( documentManager, SIGNAL(closing( const QList<Kasten::AbstractDocument*>& )) );
+    QSignalSpy* addedSpy = new QSignalSpy( documentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)) );
+    QSignalSpy* closingSpy = new QSignalSpy( documentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)) );
 
     documentManager->addDocument( doc1 );
     checkAdded( addedSpy, doc1 );

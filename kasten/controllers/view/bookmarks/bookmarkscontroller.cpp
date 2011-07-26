@@ -113,8 +113,8 @@ void BookmarksController::setTargetModel( AbstractModel* model )
                  SLOT(onBookmarksRemoved(QList<Okteta::Bookmark>)) );
         connect( mByteArray, SIGNAL(bookmarksModified(QList<int>)),
                  SLOT(updateBookmarks()) );
-        connect( mByteArrayView, SIGNAL( cursorPositionChanged(Okteta::Address)),
-                 SLOT( onCursorPositionChanged(Okteta::Address)) );
+        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
+                 SLOT(onCursorPositionChanged(Okteta::Address)) );
     }
 
     updateBookmarks();

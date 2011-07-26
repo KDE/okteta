@@ -97,7 +97,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
     mInsertButton = new KPushButton( KStandardGuiItem::insert(), this );
     mInsertButton->setEnabled( mTool->hasWriteable() );
-    connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT( setEnabled(bool)) );
+    connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT(setEnabled(bool)) );
     connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) );
     const QString insertButtonToolTip =
         i18nc( "@info:tooltip",

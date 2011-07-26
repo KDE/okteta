@@ -84,7 +84,7 @@ void TestDocumentTest::testChangeData()
 
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(localSyncStateChanged( Kasten::LocalSyncState )) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)) );
 
     QCOMPARE( *document->data(), QByteArray() );
     QCOMPARE( document->localSyncState(), Kasten::LocalInSync );

@@ -63,7 +63,7 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
 
     connect( mSetToNewerVersionAction, SIGNAL(triggered(bool)),
              SLOT(onSetToNewerVersionTriggered()) );
-    connect( mSetToNewerVersionAction->menu(), SIGNAL( aboutToShow() ),
+    connect( mSetToNewerVersionAction->menu(), SIGNAL(aboutToShow()),
              SLOT(onNewerVersionMenuAboutToShow()) );
     connect( mSetToNewerVersionAction->menu(), SIGNAL(triggered(QAction*)),
              SLOT(onNewerVersionMenuTriggered(QAction*)) );

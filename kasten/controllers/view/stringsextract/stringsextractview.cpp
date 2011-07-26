@@ -167,7 +167,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     baseLayout->addLayout( actionsLayout );
 
     connect( mTool, SIGNAL(uptodateChanged(bool)), SLOT(onStringsUptodateChanged(bool)) );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)), SLOT( onApplyableChanged(bool)) );
+    connect( mTool, SIGNAL(isApplyableChanged(bool)), SLOT(onApplyableChanged(bool)));
     connect( mTool, SIGNAL(canHighlightStringChanged(bool)), SLOT(onCanHighlightStringChanged(bool)) );
 
     onStringSelectionChanged();

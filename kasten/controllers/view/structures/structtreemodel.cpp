@@ -31,7 +31,7 @@ namespace Kasten
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
     QAbstractItemModel(parent), mTool(tool)
 {
-    connect(mTool, SIGNAL(dataChanged(int, void*)), this, SLOT(onToolDataChange(int, void*)));
+    connect(mTool, SIGNAL(dataChanged(int,void*)), this, SLOT(onToolDataChange(int,void*)));
     connect(mTool, SIGNAL(dataCleared()), this, SLOT(onToolDataClear()));
     connect(mTool, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)),
             this, SLOT(onChildrenAboutToBeInserted(DataInformation*,uint,uint)));
