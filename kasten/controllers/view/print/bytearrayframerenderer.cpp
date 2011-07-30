@@ -49,9 +49,9 @@
 static const Okteta::Address DefaultStartOffset = 0;
 static const Okteta::Address DefaultFirstLineOffset = 0;
 static const int DefaultNoOfBytesPerLine =  16;
-static const LayoutStyle DefaultResizeStyle = FullSizeLayoutStyle;
-static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
-static const Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding;
+static const LayoutStyle DefaultResizeStyle = FullSizeLayoutStyle; //krazy:exclude=staticobjects
+static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; //krazy:exclude=staticobjects
+static const Okteta::CharCoding DefaultCharCoding = Okteta::LocalEncoding; //krazy:exclude=staticobjects
 
 
 static const int BAFInitialHeight = 50;
