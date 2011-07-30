@@ -123,7 +123,7 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
     settingsLayout->addRow( substituteMissingCharLabelText, mSubstituteMissingCharCheckBox );
     // TODO: control what happens on conflicts or unmatched chars in the target set
     // option to try only if no conflicts or unmatched chars are hit
-    // chosing substitute for unmatched and resolve conflicts (general/case-by-case)
+    // choosing substitute for unmatched and resolve conflicts (general/case-by-case)
     // TODO: extra button to request check if all chars are matched, shows state
     // TODO: option to switch view to target charset, once done, if "to" other charset
 

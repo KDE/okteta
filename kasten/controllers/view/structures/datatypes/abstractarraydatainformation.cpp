@@ -129,7 +129,7 @@ QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type, QScri
         else
             return QScriptValue();
     }
-    //TODO optimise by checking if newChildType is the same as old child type (only for primitives)
+    //TODO optimize by checking if newChildType is the same as old child type (only for primitives)
     //childType is valid -> begin changing the children to the new type
     uint len = childCount();
     if (len == 0)
