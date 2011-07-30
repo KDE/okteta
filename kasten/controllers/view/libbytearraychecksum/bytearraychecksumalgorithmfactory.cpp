@@ -21,8 +21,8 @@
 */
 
 // QCA
-// need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when 
-#include <config-qca2.h>
+// need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
+#include <config-qca2.h> //krazy:exclude=includes
 #ifdef HAVE_QCA2
 // disable QT_NO_CAST_FROM_ASCII
 #ifdef QT_NO_CAST_FROM_ASCII
