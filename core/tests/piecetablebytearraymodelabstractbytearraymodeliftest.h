@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PIECETABLEBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
-#define PIECETABLEBYTEARRAYMODELKABSTRACTBYTEARRAYMODELIFTEST_H
+#ifndef PIECETABLEBYTEARRAYMODELABSTRACTBYTEARRAYMODELIFTEST_H
+#define PIECETABLEBYTEARRAYMODELABSTRACTBYTEARRAYMODELIFTEST_H
 
 // test
 #include "abstractbytearraymodeliftest.h"
@@ -30,7 +30,7 @@
 namespace Okteta
 {
 
-class PieceTableByteArrayModelKAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
+class PieceTableByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
 {
   protected: // AbstractByteArrayModelIfTest API
     AbstractByteArrayModel* createByteArrayModel();

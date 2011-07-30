@@ -34,7 +34,7 @@ namespace Okteta
 static const Size ByteArrayModelSize = 60;
 
 
-AbstractByteArrayModel* PieceTableByteArrayModelKAbstractByteArrayModelIfTest::createByteArrayModel()
+AbstractByteArrayModel* PieceTableByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
     PieceTableByteArrayModel* byteArrayModel = new PieceTableByteArrayModel( ByteArrayModelSize );
     byteArrayModel->setReadOnly( false );
@@ -42,11 +42,11 @@ AbstractByteArrayModel* PieceTableByteArrayModelKAbstractByteArrayModelIfTest::c
     return byteArrayModel;
 }
 
-void PieceTableByteArrayModelKAbstractByteArrayModelIfTest::deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel )
+void PieceTableByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel )
 {
     delete byteArrayModel;
 }
 
 }
 
-QTEST_MAIN( Okteta::PieceTableByteArrayModelKAbstractByteArrayModelIfTest )
+QTEST_MAIN( Okteta::PieceTableByteArrayModelAbstractByteArrayModelIfTest )
