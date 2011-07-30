@@ -24,7 +24,7 @@
 
 // this
 #include "viewprofileeditdialog.h"
-#include "viewprofiletabelmodel.h"
+#include "viewprofiletablemodel.h"
 // KDE
 #include <KPushButton>
 #include <KLocale>
