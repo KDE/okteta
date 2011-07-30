@@ -69,7 +69,7 @@ QString Utf8StringData::stringValue(int row) const
         QString ret(2, Qt::Uninitialized);
         ret[0] = QChar::highSurrogate(val);
         ret[1] = QChar::lowSurrogate(val);
-        return i18n("%1 (U+%1)", ret, number);
+        return i18n("%1 (U+%2)", ret, number);
     }
     else
         return i18n("%1 (U+%2)", QString(QChar(mCodePoints.at(row))), number);
