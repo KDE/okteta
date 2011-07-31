@@ -39,7 +39,6 @@
 // KDE
 #include <KUrl>
 // Qt
-#include <QtGui/QDockWidget>
 #include <QtCore/QHash>
 
 
@@ -63,7 +62,7 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
                       mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
 
     QObject::connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
-             mGroupedViews, SLOT(addViews(QList<Kasten::AbstractView*>)) );
+                      mGroupedViews, SLOT(addViews(QList<Kasten::AbstractView*>)) );
     QObject::connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
                       mGroupedViews, SLOT(removeViews(QList<Kasten::AbstractView*>)) );
 
