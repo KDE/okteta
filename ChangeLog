@@ -1,6 +1,20 @@
-Upcoming Version 0.7
+Upcoming Version 0.8
 -----------------------
-*
+
+Version 0.7.1
+-----------------------
+* fixed: show modifed icons in status bar completely
+
+Version 0.7.0
+-----------------------
+* added charset converter tool
+* added support for more encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+* speed-up on starting
+* properly support strings (various Unicode encodings) in structures tool
+
+Version 0.6.3
+-----------------------
+* fixed: show undefined chars as undefined
 
 Version 0.6.0
 -----------------------
@@ -10,7 +24,7 @@ Version 0.5.3
 -----------------------
 * calculation of offset column and byte width were wrong:
   QFontSettings::maxWidth() is rounded to int, so multiplying that value also multiplies the error
-* fonts in views of document and tools are updated on changed of default fixed font in System Settings
+* fonts in views of document and tools are updated on change of default fixed font in System Settings
 
 Version 0.5.1
 -----------------------
@@ -21,7 +35,7 @@ Version 0.5.0
 * moved mouse input handling into own controller classes
 * added streamencoder for Base32 (classic, Base32Hex, z-base-32)
 * added streamencoder for Base85 (Ascii85 for now)
-* added streamencoder for Uuencoding (historical, Xxencoding)
+* added streamencoder for Uuencoding (historical, Base64)
 * added streamencoder for Xxencoding
 * added streamencoder for S-Record (16,24,32-bit address size)
 * added streamencoder for Intel Hex (8,16,32-bit address size)
@@ -29,7 +43,9 @@ Version 0.5.0
 * added property remoteClipboardMimeType to AbstractModelStreamEncoder (clipboard does not know inheritance)
 * export dialog uses remoteMimeType for selecting the file to export to
 * file info tool estimates the mimetype also for the unstored/edited data in the working memory (and delayed now)
-* loads of stuff in the Structure Tool
+* added menu entries to set count of bytes per line/group
+* added KNewStuff support to the structures tool
+* allow pinning structure beginning to a specific offset
 
 Version 0.4.0
 -----------------------
