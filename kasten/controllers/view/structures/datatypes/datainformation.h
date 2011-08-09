@@ -68,7 +68,7 @@ protected:
     DataInformation(const DataInformation&);
 public:
     virtual DataInformation* clone() const = 0;
-    explicit DataInformation(const QString& name, DataInformationBase* parent = NULL);
+    DataInformation(const QString& name, DataInformationBase* parent = NULL);
     virtual ~DataInformation();
 
     enum Columns
@@ -85,6 +85,11 @@ public:
     virtual bool canHaveChildren() const;
     virtual unsigned int childCount() const;
     virtual DataInformation* childAt(unsigned int) const;
+    /** @brief Looks for a child of this object with given name
+     *  @param name The name of the child to find
+     *  @return the child with given @p name or @c NULL if none found with that name
+     */
+    virtual DataInformation* child(QString name) const;
     virtual quint64 positionRelativeToParent(int row = -1) const;
 
     //for the model:
@@ -118,7 +123,7 @@ public:
     //reading and writing
     /** the size in bits of this element */
     virtual int size() const = 0;
-    
+
     /** Reads the necessary data from @p input and returns the number of bytes read
      *
      * @param input the byte array to read from

@@ -231,3 +231,15 @@ int DataInformation::childSize(int index) const
     return childAt(index)->size();
 }
 
+DataInformation* DataInformation::child(QString name) const
+{
+    int size = childCount();
+    for (int i = 0; i < size; ++i)
+    {
+        DataInformation* child = childAt(i);
+        if (child->name() == name)
+            return child;
+    }
+    return 0;
+}
+
