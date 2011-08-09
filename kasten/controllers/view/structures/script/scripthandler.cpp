@@ -122,7 +122,7 @@ void ScriptHandler::validateData(DataInformation* data)
 
     //check if has a validation function:
     AdditionalData* additionalData = data->additionalData();
-    if (additionalData && additionalData->validationFunction())
+    if (additionalData && additionalData->validationFunction().isValid())
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
@@ -140,7 +140,7 @@ void ScriptHandler::validateData(DataInformation* data)
         QScriptValue mainStruct = data->mainStructure()->toScriptValue(&mEngine, &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
-        QScriptValue result = additionalData->validationFunction()->call(thisObject, args);
+        QScriptValue result = additionalData->validationFunction().call(thisObject, args);
         if (result.isError())
         {
             ScriptUtils::object()->logScriptError(QLatin1String("error occurred while "
@@ -168,7 +168,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
 
     //check if has a validation function:
     AdditionalData* additionalData = data->additionalData();
-    if (additionalData && additionalData->updateFunction())
+    if (additionalData && additionalData->updateFunction().isValid())
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
@@ -186,7 +186,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         QScriptValue mainStruct = data->mainStructure()->toScriptValue(&mEngine, &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
-        QScriptValue result = additionalData->updateFunction()->call(thisObject, args);
+        QScriptValue result = additionalData->updateFunction().call(thisObject, args);
         if (result.isError())
         {
             ScriptUtils::object()->logScriptError(QLatin1String("error occurred while "

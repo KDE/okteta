@@ -117,13 +117,13 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QSt
         if (updateFunc.isFunction())
         {
             aData = new AdditionalData();
-            aData->setUpdateFunction(new QScriptValue(updateFunc));
+            aData->setUpdateFunction(updateFunc);
         }
         if (validationFunc.isFunction())
         {
             if (!aData)
                 aData = new AdditionalData();
-            aData->setValidationFunction(new QScriptValue(validationFunc));
+            aData->setValidationFunction(validationFunc);
         }
         if (aData)
             returnVal->setAdditionalData(aData);

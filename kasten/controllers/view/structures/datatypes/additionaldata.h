@@ -30,22 +30,53 @@
 class AdditionalData
 {
 public:
-    explicit AdditionalData(QScriptValue* validate = NULL, QScriptValue* update = NULL);
+    explicit AdditionalData(const QScriptValue& validate = QScriptValue(),
+                            const QScriptValue& update = QScriptValue());
     AdditionalData(const AdditionalData& data);
-    virtual ~AdditionalData();
-private:
-    /** the function called when new data is read, to update the structure */
-    QScriptValue* mUpdateFunction;
-    /** this function is called after all data has been read to validate the structure */
-    QScriptValue* mValidationFunction;
-    QString mValidationError;
-public:
-    QScriptValue* updateFunction() const;
-    void setUpdateFunction(QScriptValue* func);
-    QScriptValue* validationFunction() const;
-    void setValidationFunction(QScriptValue* func);
+    ~AdditionalData();
+
+    QScriptValue& updateFunction();
+    void setUpdateFunction(const QScriptValue& func);
+    QScriptValue& validationFunction();
+    void setValidationFunction(const QScriptValue& func);
     QString validationError() const;
     void setValidationError(QString error);
+private:
+    /** the function called when new data is read, to update the structure */
+    QScriptValue mUpdateFunction;
+    /** this function is called after all data has been read to validate the structure */
+    QScriptValue mValidationFunction;
+    QString mValidationError;
 };
+
+inline QScriptValue& AdditionalData::updateFunction()
+{
+    return mUpdateFunction;
+}
+
+inline void AdditionalData::setUpdateFunction(const QScriptValue& func)
+{
+    mUpdateFunction = func;
+}
+
+inline QScriptValue& AdditionalData::validationFunction()
+{
+    return mValidationFunction;
+}
+
+inline void AdditionalData::setValidationFunction(const QScriptValue& func)
+{
+    mValidationFunction = func;
+}
+
+inline QString AdditionalData::validationError() const
+{
+    return mValidationError;
+}
+
+inline void AdditionalData::setValidationError(QString error)
+{
+    mValidationError = error;
+}
 
 #endif /* ADDITIONALDATA_H_ */
