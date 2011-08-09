@@ -417,9 +417,6 @@ QScriptValue ScriptEngineInitializer::arrayToString(QScriptContext* ctx,
         return QString::fromLatin1("%1[%2];").arg(type, length);
 }
 
-static QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
-
-
 QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* ctx,
         QScriptEngine* eng)
 {
@@ -483,7 +480,7 @@ QScriptValue ScriptEngineInitializer::unionToString(QScriptContext* ctx,
     if (ctx->argumentCount() == 1 || ctx->argumentCount() == 2)
         return unionOrStructToCPPString(ctx, eng);
     else
-        return "union";
+        return QLatin1String("union");
 }
 
 QScriptValue ScriptEngineInitializer::structToString(QScriptContext* ctx,
@@ -493,7 +490,7 @@ QScriptValue ScriptEngineInitializer::structToString(QScriptContext* ctx,
     if (ctx->argumentCount() == 1 || ctx->argumentCount() == 2)
         return unionOrStructToCPPString(ctx, eng);
     else
-        return "struct";
+        return QLatin1String("struct");
 }
 
 QScriptValue ScriptEngineInitializer::enumToString(QScriptContext* ctx,
