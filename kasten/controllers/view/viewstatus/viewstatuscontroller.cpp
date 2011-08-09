@@ -113,7 +113,7 @@ void ViewStatusController::fixWidths()
     for( int i=0; i<HexDigitsCount; ++i )
     {
         QString offset = QString( 9, QLatin1Char(HexDigits[i]) );
-        offset[4] = ':';
+        offset[4] = QLatin1Char(':');
         const QString offsetText = i18n( "Offset: %1", offset );
         const int offsetWidth = metrics.boundingRect( offsetText ).width();
         if( largestOffsetWidth < offsetWidth )
