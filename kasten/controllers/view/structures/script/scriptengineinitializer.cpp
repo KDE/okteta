@@ -155,10 +155,10 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
     else
         object = eng->newObject();
 
-    object.setProperty(typePropertyString, "bitfield");
+    object.setProperty(typePropertyString, QLatin1String("bitfield"));
     //has been validated, so it must contain valid values
     object.setProperty(QLatin1String("bitfieldType"),
-                       typeArg.isEmpty() ? QString::fromLatin1("signed") : typeArg);
+                       typeArg.isEmpty() ? QLatin1String("signed") : typeArg);
     object.setProperty(QLatin1String("width"), ctx->argument(1));
     object.setProperty(toStringPropertyString, eng->newFunction(bitfieldToString));
 
@@ -190,7 +190,7 @@ QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
     else
         object = eng->newObject();
 
-    object.setProperty(typePropertyString, "struct");
+    object.setProperty(typePropertyString, QLatin1String("struct"));
     object.setProperty(QLatin1String("children"), children);
     object.setProperty(toStringPropertyString, eng->newFunction(structToString));
     object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
