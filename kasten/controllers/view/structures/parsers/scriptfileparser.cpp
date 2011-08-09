@@ -57,7 +57,7 @@ QList<const TopLevelDataInformation*> ScriptFileParser::parseStructures()
     return ret;
 }
 
-bool ScriptFileParser::isFullyParsed()
+bool ScriptFileParser::isFullyParsed() const
 {
     return mParsedCompletely;
 }

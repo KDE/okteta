@@ -33,7 +33,7 @@ public:
 
     virtual QStringList parseStructureNames();
     virtual QList<const TopLevelDataInformation*> parseStructures();
-    virtual bool isFullyParsed();
+    virtual bool isFullyParsed() const;
 private:
     bool mParsedCompletely :1;
 };

@@ -43,7 +43,7 @@ public:
 
     virtual QStringList parseStructureNames() = 0;
     virtual QList<const TopLevelDataInformation*> parseStructures() = 0;
-    virtual bool isFullyParsed() = 0;
+    virtual bool isFullyParsed() const = 0;
     static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string);
 
 protected:

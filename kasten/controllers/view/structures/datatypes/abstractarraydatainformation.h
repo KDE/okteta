@@ -43,7 +43,7 @@ public:
     virtual QString typeName() const;
     int length() const;
     const DataInformation* newChildType() const;
-    
+
     virtual QVariant childData(int row, int column, int role) const;
 
     virtual bool isArray() const;

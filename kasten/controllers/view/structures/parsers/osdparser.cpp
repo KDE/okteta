@@ -159,7 +159,7 @@ QList<const TopLevelDataInformation*> OsdParser::parseStructures()
     return structures;
 }
 
-bool OsdParser::isFullyParsed()
+bool OsdParser::isFullyParsed() const
 {
     return mFullyParsed;
 }
