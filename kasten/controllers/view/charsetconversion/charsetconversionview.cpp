@@ -216,7 +216,7 @@ void CharsetConversionView::onConversionDone( bool success, int convertedBytesCo
             foreach( int failedByteCount, failedPerByteCount )
                 totalFailedByteCount += failedByteCount;
             //TODO: show table with failed bytes and their number.
-            conversionReport += QLatin1String( "<nl/>" );
+            conversionReport += QLatin1String( "<br />" );
             conversionReport += (totalFailedByteCount==0) ?
                 i18nc( "@info", "No bytes substituted.") :
                 i18ncp( "@info", "1 byte substituted.", "%1 bytes substituted.", totalFailedByteCount );
