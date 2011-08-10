@@ -31,9 +31,18 @@ endif (BIG_ENDIAN)
 add_definitions(
     -DQT_USE_FAST_CONCATENATION
     -DQT_USE_FAST_OPERATOR_PLUS
+)
+# switch between no cast to/from ascii and a warning about it
+if (KDE4_ASCII_CAST)
+add_definitions(
+    -DQT_ASCII_CAST_WARNINGS
+)
+else (KDE4_ASCII_CAST)
+add_definitions(
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_CAST_FROM_ASCII
 )
+endif (KDE4_ASCII_CAST)
 
 # helper libs
 add_subdirectory( libs )
