@@ -40,7 +40,8 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
     if (dynamic)
     {
         //dynamic object -> data is a dummy and must be calculated by the script engine.
-        mScriptHandler = new ScriptHandler(structureFile.absoluteFilePath(), name);
+        //TODO temporary
+        mScriptHandler = new ScriptHandler(new QScriptEngine(), structureFile.absoluteFilePath(), name);
         mData = mScriptHandler->initialDataInformationFromScript();
         if (!mData)
         {

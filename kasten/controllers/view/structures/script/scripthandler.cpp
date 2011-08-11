@@ -41,25 +41,26 @@
 
 #include <KDebug>
 
-ScriptHandler::ScriptHandler(QString scriptFile, QString name) :
-    mFile(scriptFile), mName(name)
+ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString name) :
+    mEngine(engine), mFile(scriptFile), mName(name)
 #ifdef OKTETA_DEBUG_SCRIPT
 , mDebugger(new QScriptEngineDebugger())
 #endif
 {
     init();
-    ArrayScriptClass* arr = new ArrayScriptClass(&mEngine, &mHandlerInfo);
+    ArrayScriptClass* arr = new ArrayScriptClass(mEngine, &mHandlerInfo);
     mHandlerInfo.mArrayClass = arr;
-    PrimitiveScriptClass* prim = new PrimitiveScriptClass(&mEngine, &mHandlerInfo);
+    PrimitiveScriptClass* prim = new PrimitiveScriptClass(mEngine, &mHandlerInfo);
     mHandlerInfo.mPrimitiveClass = prim;
-    StructUnionScriptClass* strUn = new StructUnionScriptClass(&mEngine, &mHandlerInfo);
+    StructUnionScriptClass* strUn = new StructUnionScriptClass(mEngine, &mHandlerInfo);
     mHandlerInfo.mStructUnionClass = strUn;
-    StringScriptClass* str = new StringScriptClass(&mEngine, &mHandlerInfo);
+    StringScriptClass* str = new StringScriptClass(mEngine, &mHandlerInfo);
     mHandlerInfo.mStringScriptClass = str;
 }
 
 ScriptHandler::~ScriptHandler()
 {
+    delete mEngine;
 #ifdef OKTETA_DEBUG_SCRIPT
     delete mDebugger;
 #endif
@@ -67,7 +68,7 @@ ScriptHandler::~ScriptHandler()
 
 bool ScriptHandler::init()
 {
-    ScriptEngineInitializer::addFuctionsToScriptEngine(mEngine);
+    ScriptEngineInitializer::addFuctionsToScriptEngine(*mEngine);
 
     QFile scriptFile(mFile);
     if (!scriptFile.open(QIODevice::ReadOnly))
@@ -79,14 +80,14 @@ bool ScriptHandler::init()
     QString contents = stream.readAll();
     scriptFile.close();
 #ifdef OKTETA_DEBUG_SCRIPT
-    mDebugger->attachTo(&mEngine);
+    mDebugger->attachTo(mEngine);
     mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
 #endif
-    mEngine.evaluate(contents, mFile);
+    mEngine->evaluate(contents, mFile);
 
-    if (mEngine.hasUncaughtException())
+    if (mEngine->hasUncaughtException())
     {
-        ScriptUtils::object()->logScriptError(mEngine.uncaughtExceptionBacktrace());
+        ScriptUtils::object()->logScriptError(mEngine->uncaughtExceptionBacktrace());
         return false;
     }
     return true;
@@ -94,7 +95,7 @@ bool ScriptHandler::init()
 
 DataInformation* ScriptHandler::initialDataInformationFromScript()
 {
-    QScriptValue obj = mEngine.globalObject();
+    QScriptValue obj = mEngine->globalObject();
     QScriptValue initMethod = obj.property(QLatin1String("init"));
 
     ScriptValueConverter conv(initMethod, mName);
@@ -126,18 +127,18 @@ void ScriptHandler::validateData(DataInformation* data)
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
-        mDebugger->attachTo(&mEngine);
+        mDebugger->attachTo(mEngine);
         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
         kDebug()
         << "validating element: " << data->name();
 #endif
 
-//         QScriptValue thisObject = mEngine.newQObject(data,
+//         QScriptValue thisObject = mEngine->newQObject(data,
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-//         QScriptValue mainStruct = mEngine.newQObject(data->mainStructure(),
+//         QScriptValue mainStruct = mEngine->newQObject(data->mainStructure(),
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-        QScriptValue thisObject = data->toScriptValue(&mEngine, &mHandlerInfo);
-        QScriptValue mainStruct = data->mainStructure()->toScriptValue(&mEngine, &mHandlerInfo);
+        QScriptValue thisObject = data->toScriptValue(mEngine, &mHandlerInfo);
+        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine, &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
         QScriptValue result = additionalData->validationFunction().call(thisObject, args);
@@ -148,10 +149,10 @@ void ScriptHandler::validateData(DataInformation* data)
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
-        if (mEngine.hasUncaughtException())
+        if (mEngine->hasUncaughtException())
         {
             ScriptUtils::object()->logScriptError(
-                    mEngine.uncaughtExceptionBacktrace());
+                    mEngine->uncaughtExceptionBacktrace());
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
@@ -172,18 +173,18 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
-//         mDebugger->attachTo(&mEngine);
+//         mDebugger->attachTo(mEngine);
 //         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
 //         kDebug()
 //         << "updating element: " << data->name();
 #endif
 
-//         QScriptValue thisObject = mEngine.newQObject(data,
+//         QScriptValue thisObject = mEngine->newQObject(data,
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-//         QScriptValue mainStruct = mEngine.newQObject(data->mainStructure(),
+//         QScriptValue mainStruct = mEngine->newQObject(data->mainStructure(),
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-        QScriptValue thisObject = data->toScriptValue(&mEngine, &mHandlerInfo);
-        QScriptValue mainStruct = data->mainStructure()->toScriptValue(&mEngine, &mHandlerInfo);
+        QScriptValue thisObject = data->toScriptValue(mEngine, &mHandlerInfo);
+        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine, &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
         QScriptValue result = additionalData->updateFunction().call(thisObject, args);
@@ -192,10 +193,10 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
             ScriptUtils::object()->logScriptError(QLatin1String("error occurred while "
                 "updating element ") + data->name(), result);
         }
-        if (mEngine.hasUncaughtException())
+        if (mEngine->hasUncaughtException())
         {
             ScriptUtils::object()->logScriptError(
-                    mEngine.uncaughtExceptionBacktrace());
+                    mEngine->uncaughtExceptionBacktrace());
             ScriptUtils::object()->logScriptError(QLatin1String("error occurred while "
                 "updating element ") + data->name(), result);
         }
@@ -204,7 +205,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
 
 QScriptEngine* ScriptHandler::engine()
 {
-    return &mEngine;
+    return mEngine;
 }
 
 ScriptHandlerInfo* ScriptHandler::handlerInfo()

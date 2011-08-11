@@ -24,7 +24,6 @@
 
 #include <QtCore/QMap>
 #include <QtCore/QFileInfo>
-#include <QtCore/QExplicitlySharedDataPointer>
 
 #include <arraychangemetricslist.h>
 #include "datainformationbase.h"
@@ -105,7 +104,7 @@ Q_SIGNALS:
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
     DataInformation* mData;
-    QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
+    ScriptHandler* mScriptHandler;
     QFileInfo mStructureFile;
     /** Save the position this structure is locked to for each ByteArrayModel
      * QObject::destroyed() has to be connected to slot removeByteArrayModel()

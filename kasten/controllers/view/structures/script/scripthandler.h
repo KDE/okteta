@@ -40,7 +40,7 @@ class ScriptHandler : public QObject, public QSharedData
     Q_OBJECT
     Q_DISABLE_COPY(ScriptHandler)
 public:
-    ScriptHandler(QString scriptFile, QString name);
+    ScriptHandler(QScriptEngine* engine, QString scriptFile, QString name);
     virtual ~ScriptHandler();
     DataInformation* initialDataInformationFromScript();
     void validateData(DataInformation* data);
@@ -49,7 +49,7 @@ public:
     ScriptHandlerInfo* handlerInfo();
 protected:
     bool init();
-    QScriptEngine mEngine;
+    QScriptEngine* mEngine;
     QString mFile;
     QString mName;
 #ifdef OKTETA_DEBUG_SCRIPT
