@@ -66,8 +66,6 @@ class ShellWindowPrivate
     void onViewFocusChanged( Kasten::AbstractView* view );
     void onToolVisibilityChanged( bool isVisible );
     void onCloseRequest( const QList<Kasten::AbstractView*>& views );
-    void onDataOffered( const QMimeData* mimeData, bool& accept );
-    void onDataDropped( const QMimeData* mimeData );
 
   protected:
     Q_DECLARE_PUBLIC( ShellWindow )

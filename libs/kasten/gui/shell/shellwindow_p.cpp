@@ -33,11 +33,7 @@
 #include <toolviewdockwidget.h>
 // Kasten core
 #include <documentmanager.h>
-#include <documentcreatemanager.h>
-#include <documentsyncmanager.h>
 #include <abstractdocument.h>
-// KDE
-#include <KUrl>
 // Qt
 #include <QtCore/QHash>
 
@@ -65,10 +61,6 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
                       parent, SLOT(onViewFocusChanged(Kasten::AbstractView*)) );
     QObject::connect( mGroupedViews, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
                       parent, SLOT(onCloseRequest(QList<Kasten::AbstractView*>)) );
-    QObject::connect( mGroupedViews, SIGNAL(dataOffered(const QMimeData*,bool&)),
-                      parent, SLOT(onDataOffered(const QMimeData*,bool&)) );
-    QObject::connect( mGroupedViews, SIGNAL(dataDropped(const QMimeData*)),
-                      parent, SLOT(onDataDropped(const QMimeData*)) );
 }
 
 void ShellWindowPrivate::addTool( AbstractToolView* toolView )
@@ -212,27 +204,6 @@ void ShellWindowPrivate::onCloseRequest( const QList<Kasten::AbstractView*>& vie
         mViewManager->removeViews( views );
         mDocumentManager->closeDocuments( documentsWithoutViews );
     }
-}
-
-void ShellWindowPrivate::onDataOffered( const QMimeData* mimeData, bool& accept )
-{
-    accept = KUrl::List::canDecode( mimeData )
-             || mDocumentManager->createManager()->canCreateNewFromData( mimeData );
-}
-
-void ShellWindowPrivate::onDataDropped( const QMimeData* mimeData )
-{
-    const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
-
-    if( ! urls.isEmpty() )
-    {
-        DocumentSyncManager* syncManager = mDocumentManager->syncManager();
-
-        foreach( const KUrl& url, urls )
-            syncManager->load( url );
-    }
-    else
-        mDocumentManager->createManager()->createNewFromData( mimeData, true );
 }
 
 void ShellWindowPrivate::onToolVisibilityChanged( bool isVisible )

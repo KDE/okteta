@@ -30,7 +30,6 @@
 #include <KXmlGuiWindow>
 
 template<class T> class QList;
-class QMimeData;
 
 
 namespace Kasten
@@ -81,8 +80,6 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
     Q_PRIVATE_SLOT( d_func(), void onViewFocusChanged( Kasten::AbstractView* view ) )
     Q_PRIVATE_SLOT( d_func(), void onToolVisibilityChanged( bool isVisible ) )
     Q_PRIVATE_SLOT( d_func(), void onCloseRequest( const QList<Kasten::AbstractView*>& views ) )
-    Q_PRIVATE_SLOT( d_func(), void onDataOffered( const QMimeData* mimeData, bool& accept ) )
-    Q_PRIVATE_SLOT( d_func(), void onDataDropped( const QMimeData* mimeData ) )
 
   protected:
     ShellWindowPrivate* const d_ptr;

@@ -101,6 +101,7 @@
 #include <documentsyncmanager.h>
 #include <documentmanager.h>
 // KDE
+#include <KUrl>
 #include <KGlobal>
 #include <KConfigGroup>
 
@@ -119,7 +120,10 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     // there is only one mainwindow, so have this show the document if requested
     connect( documentManager(), SIGNAL(focusRequested(Kasten::AbstractDocument*)),
              SLOT(showDocument(Kasten::AbstractDocument*)) );
-
+    connect( viewArea(), SIGNAL(dataOffered(const QMimeData*,bool&)),
+             SLOT(onDataOffered(const QMimeData*,bool&)) );
+    connect( viewArea(), SIGNAL(dataDropped(const QMimeData*)),
+             SLOT(onDataDropped(const QMimeData*)) );
 
     // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
     //      This state is taken from an oktetarc where the docker constellation was configured by hand.
@@ -249,6 +253,26 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
     }
 }
 
+void OktetaMainWindow::onDataOffered( const QMimeData* mimeData, bool& accept )
+{
+    accept = KUrl::List::canDecode( mimeData )
+             || documentManager()->createManager()->canCreateNewFromData( mimeData );
+}
+
+void OktetaMainWindow::onDataDropped( const QMimeData* mimeData )
+{
+    const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
+
+    if( ! urls.isEmpty() )
+    {
+        DocumentSyncManager* const syncManager = documentManager()->syncManager();
+
+        foreach( const KUrl& url, urls )
+            syncManager->load( url );
+    }
+    else
+        documentManager()->createManager()->createNewFromData( mimeData, true );
+}
 
 OktetaMainWindow::~OktetaMainWindow() {}
 
