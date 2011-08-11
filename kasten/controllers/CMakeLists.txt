@@ -340,6 +340,33 @@ else( OKTETA_DEBUG_SCRIPT )
 endif( OKTETA_DEBUG_SCRIPT )
 kde4_add_kcfg_files( STRUCTVIEW_SRCS view/structures/settings/structviewpreferences.kcfgc )
 kde4_add_ui_files( STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
+
+if ( KDE4_BUILD_TESTS )
+#static lib for unit tests:
+kde4_add_library ( structures-static STATIC ${STRUCTVIEW_SRCS} ${PODDECODERCONTROLLER_SRCS} )
+target_link_libraries ( structures-static
+  ${oktetakastengui_LIB}
+  ${oktetakastencore_LIB}
+  ${KASTENGUI_LIBS}
+  ${KASTENCORE_LIBS}
+  ${oktetagui_LIB}
+  ${oktetacore_LIB}
+  ${KDE4_KIO_LIBS}
+  ${KDE4_KDEUI_LIBS}
+  ${KDE4_KNEWSTUFF3_LIBS}
+  ${KDE4_KCMUTILS_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
+  ${QT_QTSCRIPTTOOLS_LIBRARY}
+)
+
+kde4_add_unit_test( scriptvalueconvertertest
+  TESTNAME scriptvalue-converter-test
+  test/scriptvalueconvertertest.cpp
+)
+target_link_libraries(scriptvalueconvertertest structures-static ${QT_QTTEST_LIBRARY})
+
+endif ( KDE4_BUILD_TESTS )
+
 endif( NOT NO_STRUCTURES_TOOL )
 
 set( LIBFRAMESPRINT_SRCS
