@@ -70,6 +70,7 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
 
   public:
     QList<AbstractDocument*> documents() const;
+    bool isEmpty() const;
 
   public:
     DocumentCreateManager* createManager();

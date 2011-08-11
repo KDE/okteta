@@ -50,6 +50,7 @@ DocumentManager::DocumentManager()
 }
 
 QList<AbstractDocument*> DocumentManager::documents() const { return mList; }
+bool DocumentManager::isEmpty() const { return mList.isEmpty(); }
 
 void DocumentManager::addDocument( AbstractDocument* document )
 {
