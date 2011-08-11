@@ -61,9 +61,6 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
     QObject::connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
                       mGroupedViews, SLOT(removeViews(QList<Kasten::AbstractView*>)) );
 
-    QObject::connect( mDocumentManager, SIGNAL(focusRequested(Kasten::AbstractDocument*)),
-                      parent, SLOT(onFocusRequested(Kasten::AbstractDocument*)) );
-
     QObject::connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
                       parent, SLOT(onViewFocusChanged(Kasten::AbstractView*)) );
     QObject::connect( mGroupedViews, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
@@ -90,6 +87,31 @@ void ShellWindowPrivate::addTool( AbstractToolView* toolView )
 
     QObject::connect( dockWidget, SIGNAL(visibilityChanged(bool)),
                       q, SLOT(onToolVisibilityChanged(bool)) );
+}
+
+void ShellWindowPrivate::showDocument( AbstractDocument* document )
+{
+    AbstractGroupedViews* currentGroupedViews = static_cast<AbstractGroupedViews*>( mGroupedViews->viewAreaFocus() );
+    const QList<AbstractView*> viewList = currentGroupedViews->viewList();
+
+    AbstractView* viewOfDocument = 0;
+    foreach( AbstractView* view, viewList )
+    {
+        if( view->findBaseModel<AbstractDocument*>() == document )
+        {
+            viewOfDocument = view;
+            break;
+        }
+    }
+
+    if( viewOfDocument )
+        mGroupedViews->setViewFocus( viewOfDocument );
+    else
+    {
+        QList<Kasten::AbstractDocument*> documents;
+        documents.append( document );
+        mViewManager->createViewsFor( documents );
+    }
 }
 
 void ShellWindowPrivate::updateControllers( AbstractView* view )
@@ -153,31 +175,6 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView *view )
                           q, SLOT(onTitleChanged(QString)) );
         QObject::connect( view, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
                           q, SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
-    }
-}
-
-void ShellWindowPrivate::onFocusRequested( AbstractDocument* document )
-{
-    AbstractGroupedViews* currentGroupedViews = static_cast<AbstractGroupedViews*>( mGroupedViews->viewAreaFocus() );
-    const QList<AbstractView*> viewList = currentGroupedViews->viewList();
-
-    AbstractView* viewOfDocument = 0;
-    foreach( AbstractView* view, viewList )
-    {
-        if( view->findBaseModel<AbstractDocument*>() == document )
-        {
-            viewOfDocument = view;
-            break;
-        }
-    }
-
-    if( viewOfDocument )
-        mGroupedViews->setViewFocus( viewOfDocument );
-    else
-    {
-        QList<Kasten::AbstractDocument*> documents;
-        documents.append( document );
-        mViewManager->createViewsFor( documents );
     }
 }
 

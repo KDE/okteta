@@ -42,6 +42,7 @@ class MultiViewAreas;
 class AbstractXmlGuiController;
 class AbstractToolView;
 class AbstractView;
+class AbstractDocument;
 class DocumentManager;
 
 
@@ -54,6 +55,9 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
   public:
     ShellWindow( DocumentManager* documentManager, ViewManager* viewManager );
     virtual ~ShellWindow();
+
+  public Q_SLOTS:
+    void showDocument( Kasten::AbstractDocument* document ); // TODO: better name
 
   public:
     void updateControllers( AbstractView* view );
@@ -75,7 +79,6 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
     Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& newTitle ) )
     Q_PRIVATE_SLOT( d_func(), void onLocalSyncStateChanged( Kasten::LocalSyncState newState ) )
     Q_PRIVATE_SLOT( d_func(), void onViewFocusChanged( Kasten::AbstractView* view ) )
-    Q_PRIVATE_SLOT( d_func(), void onFocusRequested( Kasten::AbstractDocument* document ) )
     Q_PRIVATE_SLOT( d_func(), void onToolVisibilityChanged( bool isVisible ) )
     Q_PRIVATE_SLOT( d_func(), void onCloseRequest( const QList<Kasten::AbstractView*>& views ) )
     Q_PRIVATE_SLOT( d_func(), void onDataOffered( const QMimeData* mimeData, bool& accept ) )

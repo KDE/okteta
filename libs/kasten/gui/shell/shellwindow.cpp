@@ -76,6 +76,13 @@ void ShellWindow::addTool( AbstractToolView* toolView )
     d->addTool( toolView );
 }
 
+void ShellWindow::showDocument( AbstractDocument* document )
+{
+    Q_D( ShellWindow );
+
+    d->showDocument( document );
+}
+
 void ShellWindow::updateControllers( AbstractView* view )
 {
     Q_D( ShellWindow );

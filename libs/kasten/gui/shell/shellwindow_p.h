@@ -52,6 +52,7 @@ class ShellWindowPrivate
     void updateControllers( AbstractView* view );
     void addXmlGuiController( AbstractXmlGuiController* controller );
     void addTool( AbstractToolView* toolView );
+    void showDocument( AbstractDocument* document );
 
   public: // If::WidgetsDockable API
     QList<ToolViewDockWidget*> dockWidgets() const;
@@ -63,7 +64,6 @@ class ShellWindowPrivate
     void onTitleChanged( const QString& newTitle );
     void onLocalSyncStateChanged( Kasten::LocalSyncState newState );
     void onViewFocusChanged( Kasten::AbstractView* view );
-    void onFocusRequested( Kasten::AbstractDocument* document );
     void onToolVisibilityChanged( bool isVisible );
     void onCloseRequest( const QList<Kasten::AbstractView*>& views );
     void onDataOffered( const QMimeData* mimeData, bool& accept );

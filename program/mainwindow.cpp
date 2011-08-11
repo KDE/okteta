@@ -116,6 +116,11 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
 {
     setObjectName( QLatin1String("Shell") );
 
+    // there is only one mainwindow, so have this show the document if requested
+    connect( documentManager(), SIGNAL(focusRequested(Kasten::AbstractDocument*)),
+             SLOT(showDocument(Kasten::AbstractDocument*)) );
+
+
     // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
     //      This state is taken from an oktetarc where the docker constellation was configured by hand.
     //      Setting this state if none is present seems to work, but there's
