@@ -365,6 +365,12 @@ kde4_add_unit_test( scriptvalueconvertertest
 )
 target_link_libraries(scriptvalueconvertertest structures-static ${QT_QTTEST_LIBRARY})
 
+kde4_add_unit_test( osdparsertest
+  TESTNAME osd-parser-test
+  test/osdparsertest.cpp
+)
+target_link_libraries(osdparsertest structures-static ${QT_QTTEST_LIBRARY})
+
 endif ( KDE4_BUILD_TESTS )
 
 endif( NOT NO_STRUCTURES_TOOL )

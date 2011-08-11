@@ -41,8 +41,17 @@ private Q_SLOTS:
     void testPrimitives();
     void testPrimitives_data();
 private:
+    DataInformation* evaluate(QString code);
     QScriptEngine engine;
 };
+
+DataInformation* ScriptValueConverterTest::evaluate(QString code)
+{
+    QScriptValue value = engine.evaluate(code);
+    ScriptValueConverter conv(value, "value");
+    return conv.convert();
+}
+
 
 void ScriptValueConverterTest::initTestCase()
 {
@@ -106,10 +115,7 @@ void ScriptValueConverterTest::testPrimitives()
     QCOMPARE(p2->type(), type);
     if (type == Type_Bitfield)
         return; //the following tests don't work with bitfields
-    QScriptValue val3 = engine.evaluate('\"' + typeString + '\"');
-    QVERIFY(val3.isString());
-    ScriptValueConverter c3(val3, "val3");
-    DataInformation* data3 = c3.convert();
+    DataInformation* data3 = evaluate('\"' + typeString + '\"');
     QVERIFY(data3);
     PrimitiveDataInformation* p3 = dynamic_cast<PrimitiveDataInformation*>(data3);
     QVERIFY(p3);

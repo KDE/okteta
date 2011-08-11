@@ -26,7 +26,7 @@
 AbstractStructureParser::AbstractStructureParser(const Kasten::StructureDefinitionFile* const def) :
     mDef(def)
 {
-    Q_CHECK_PTR(def);
+    //Q_CHECK_PTR(def);
 }
 
 AbstractStructureParser::~AbstractStructureParser() {}
