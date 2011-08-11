@@ -75,10 +75,14 @@ set( kastengui_shell_SRCS
   shell/abstractviewarea.cpp
   shell/abstractgroupedviews.cpp
   shell/viewareabox.cpp
+  shell/singleviewarea_p.cpp
+  shell/singleviewarea.cpp
   shell/tabbedviews_p.cpp
   shell/tabbedviews.cpp
   shell/multiviewareas_p.cpp
   shell/multiviewareas.cpp
+  shell/singleviewwindow_p.cpp
+  shell/singleviewwindow.cpp
   shell/shellwindow_p.cpp
   shell/shellwindow.cpp
   shell/statusbar.cpp
@@ -91,6 +95,8 @@ set( kastengui_shell_HDRS
   shell/statusbar.h
   shell/viewareabox.h
   shell/viewbox.h
+  shell/singleviewarea.h
+  shell/singleviewwindow.h
   shell/tabbedviews.h
   shell/multiviewareas.h
   shell/toolinlineviewwidget.h
