@@ -60,10 +60,11 @@ DataInformation* ScriptValueConverter::convert()
         QScriptValueList args;
         evaluatedVal = mValue.call(thisObj, args);
     }
-    else if (mValue.isObject()) //this must be checked second since any function is also an object
+    else if (mValue.isObject() || mValue.isString()) //this must be checked second since any function is also an object
         evaluatedVal = mValue;
     else
     {
+        kDebug() << "value is not an object or function or string";
         ScriptUtils::object()->logScriptError(QLatin1String("value is neither function nor object"));
         return NULL;
     }
@@ -75,6 +76,9 @@ DataInformation* ScriptValueConverter::convert()
 DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QString name) const
 {
     DataInformation* returnVal;
+    if (value.isString())
+        return toPrimitive(value, name); //a type string is also okay
+
     if (!value.isObject())
         return NULL; //no point trying to convert
 
@@ -181,16 +185,19 @@ AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
     return NULL;
 }
 
-PrimitiveDataInformation * ScriptValueConverter::toPrimitive(QScriptValue& value,
-        QString& name) const
+PrimitiveDataInformation* ScriptValueConverter::toPrimitive(QScriptValue& value, QString& name) const
 {
-    QString typeString = value.property(QLatin1String("type")).toString();
-    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(
-            typeString);
-    if (primitiveType == Type_NotPrimitive)
+    QString typeString = value.isString() ? value.toString() : value.property(QLatin1String("type")).toString();
+    if (typeString.isEmpty()) {
+        kDebug() << "empty type string passed (or type property not set) -> cannot convert to primitive";
+        return NULL;
+    }
+    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
+    if (primitiveType == Type_NotPrimitive || primitiveType == Type_Bitfield)
     {
         ScriptUtils::object()->logScriptError(QLatin1String("unrecognised type: '") + typeString
                 + QLatin1String("' -> return NULL"));
+        kDebug() << "unrecognised type: '" << typeString;
         return NULL;
     }
     return PrimitiveFactory::newInstance(name, primitiveType);
