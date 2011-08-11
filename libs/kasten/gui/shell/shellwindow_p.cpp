@@ -116,12 +116,6 @@ void ShellWindowPrivate::updateControllers( AbstractView* view )
     }
 }
 
-bool ShellWindowPrivate::queryClose()
-{
-    // TODO: query the document manager or query the view manager?
-    return mDocumentManager->canCloseAll();
-}
-
 void ShellWindowPrivate::onTitleChanged( const QString& newTitle )
 {
     Q_Q( ShellWindow );

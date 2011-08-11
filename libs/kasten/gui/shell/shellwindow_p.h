@@ -57,9 +57,6 @@ class ShellWindowPrivate
   public: // If::WidgetsDockable API
     QList<ToolViewDockWidget*> dockWidgets() const;
 
-  protected: // KMainWindow API
-    bool queryClose();
-
   private: // Q_SLOTS
     void onTitleChanged( const QString& newTitle );
     void onLocalSyncStateChanged( Kasten::LocalSyncState newState );

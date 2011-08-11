@@ -224,6 +224,12 @@ void OktetaMainWindow::setupControllers()
     addTool( new BookmarksToolView(new BookmarksTool()) );
 }
 
+bool OktetaMainWindow::queryClose()
+{
+    // TODO: query the document manager or query the view manager?
+    return documentManager()->canCloseAll();
+}
+
 void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
 {
     DocumentManager* const documentManager = this->documentManager();

@@ -66,9 +66,6 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
   public: // If::WidgetsDockable API
     virtual QList<ToolViewDockWidget*> dockWidgets() const;
 
-  protected: // KMainWindow API
-    virtual bool queryClose();
-
   protected:
     MultiViewAreas* viewArea() const;
     ViewManager* viewManager() const;

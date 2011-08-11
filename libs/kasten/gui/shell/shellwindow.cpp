@@ -90,13 +90,6 @@ void ShellWindow::updateControllers( AbstractView* view )
     d->updateControllers( view );
 }
 
-bool ShellWindow::queryClose()
-{
-    Q_D( ShellWindow );
-
-    return d->queryClose();
-}
-
 ShellWindow::~ShellWindow()
 {
     delete d_ptr;

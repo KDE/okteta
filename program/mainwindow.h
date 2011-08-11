@@ -45,6 +45,8 @@ class OktetaMainWindow : public ShellWindow
     virtual ~OktetaMainWindow();
 
   protected: // KMainWindow API
+    virtual bool queryClose();
+
     virtual void saveProperties( KConfigGroup& configGroup );
     virtual void readProperties( const KConfigGroup& configGroup );
 
