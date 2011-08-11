@@ -23,6 +23,7 @@
 #ifndef OSDPARSER_H_
 #define OSDPARSER_H_
 
+#include <QtCore/QDir>
 #include <QtXml/QDomNode>
 #include <QtXml/QDomNodeList>
 
@@ -41,7 +42,12 @@ class PrimitiveDataInformation;
 class OsdParser: public AbstractStructureParser
 {
 public:
+    //TODO remove this from both osdparser and abstractstructureparser
     OsdParser(const Kasten::StructureDefinitionFile* const def);
+    /** construct a parser which opens @p file in @p dir */
+    OsdParser(const QString dir, const QString file);
+    /** construct a parser from an in-memory string */
+    OsdParser(const QString xml);
     virtual ~OsdParser();
 
     virtual QStringList parseStructureNames();
@@ -64,8 +70,11 @@ private:
 
     //void parseIncludeNodes(QDomNodeList& elems);
     void parseEnumDefNodes(QDomNodeList& elems);
-    QDomDocument openFile();
+    void openDocFromFile();
 private:
+    QDomDocument mDocument;
+    QDir mDir;
+    QString mFile;
     QList<EnumDefinition::Ptr> mEnums;
     bool mEnumsParsed :1;
     bool mFullyParsed :1;

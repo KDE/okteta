@@ -46,8 +46,29 @@
 #include <QtXml/QDomNodeList>
 
 OsdParser::OsdParser(const Kasten::StructureDefinitionFile* const def) :
-    AbstractStructureParser(def), mEnumsParsed(false), mFullyParsed(false)
+    AbstractStructureParser(def), mDir(def->dir()), mEnumsParsed(false), mFullyParsed(false)
 {
+    mFile = QString(def->pluginInfo().pluginName() + QLatin1String(".osd"));
+    openDocFromFile();
+}
+
+OsdParser::OsdParser(const QString dir, const QString file) :
+    AbstractStructureParser(0), mDir(dir), mFile(file), mEnumsParsed(false), mFullyParsed(false)
+{
+    openDocFromFile();
+}
+
+OsdParser::OsdParser(const QString xml) :
+    AbstractStructureParser(0), mEnumsParsed(false), mFullyParsed(false)
+{
+    int errorLine, errorColumn;
+    QString errorMsg;
+    if (!mDocument.setContent(xml, false, &errorMsg, &errorLine, &errorColumn))
+    {
+        kWarning() << "error reading xml:\n" << errorMsg << "\n error line="
+            << errorLine << " error column=" << errorColumn;
+        kDebug() << "XML was: " << xml;
+    }
 }
 
 OsdParser::~OsdParser()
@@ -57,8 +78,7 @@ OsdParser::~OsdParser()
 QStringList OsdParser::parseStructureNames()
 {
     QStringList ret;
-    QDomDocument doc = openFile();
-    QDomNode rootElem = doc.firstChildElement(QLatin1String("data"));
+    QDomNode rootElem = mDocument.firstChildElement(QLatin1String("data"));
     QDomNodeList nodes = rootElem.childNodes();
     for (uint i = 0; i < nodes.length(); ++i)
     {
@@ -80,54 +100,37 @@ QStringList OsdParser::parseStructureNames()
     return ret;
 }
 
-QDomDocument OsdParser::openFile()
+void OsdParser::openDocFromFile()
 {
-    QFileInfo fileInfo(mDef->dir(), mDef->pluginInfo().pluginName() + QLatin1String(
-            ".osd"));
+    QFileInfo fileInfo(mDir, mFile);
     if (!fileInfo.exists())
     {
-        kWarning() << "Structure definition " << fileInfo.absoluteFilePath()
-                << " does not exist";
+        kWarning() << "Structure definition " << fileInfo.absoluteFilePath() << " does not exist";
+        return;
     }
     QFile file(fileInfo.absoluteFilePath());
-    QDomDocument doc;
     if (!file.open(QIODevice::ReadOnly))
     {
         kWarning() << "could not open file " << fileInfo.absoluteFilePath();
-        return QDomDocument();
+        return;
     }
     int errorLine, errorColumn;
     QString errorMsg;
-    if (!doc.setContent(&file, false, &errorMsg, &errorLine, &errorColumn))
+    if (!mDocument.setContent(&file, false, &errorMsg, &errorLine, &errorColumn))
     {
-        file.close();
-        kWarning()
-                << "TopLevelDataInformation::loadFromXML(): error reading file:\n"
-                << errorMsg << "\n error line=" << errorLine << " error column="
-                << errorColumn;
-        return QDomDocument();
+        kWarning() << "error reading file " << mFile << ":\n" << errorMsg << "\n error line="
+            << errorLine << " error column=" << errorColumn;
     }
     file.close();
-    return doc;
-
 }
+
 QList<const TopLevelDataInformation*> OsdParser::parseStructures()
 {
-    QFileInfo fileInfo(mDef->dir(), mDef->pluginInfo().pluginName() + QLatin1String(
-            ".osd"));
-    if (!fileInfo.exists())
-    {
-        kWarning() << "file " << fileInfo.absoluteFilePath() << " doesn't exist";
-        return QList<const TopLevelDataInformation*> ();
-    }
-    QDomDocument doc = openFile();
-    QDomElement rootElem = doc.firstChildElement(QLatin1String("data"));
-    if (!mEnumsParsed)
-    {
-        QDomNodeList enumDefs = rootElem.elementsByTagName(QLatin1String("enumDef"));
-        parseEnumDefNodes(enumDefs);
-        mEnumsParsed = true;
-    }
+    QFileInfo fileInfo(mDir, mFile);
+    QDomElement rootElem = mDocument.firstChildElement(QLatin1String("data"));
+
+    parseEnums();
+
     QList<const TopLevelDataInformation*> structures;
     QDomNodeList list = rootElem.childNodes();
     for (uint i = 0; i < list.length(); ++i)
@@ -144,8 +147,7 @@ QList<const TopLevelDataInformation*> OsdParser::parseStructures()
         DataInformation* data = parseNode(elem);
         if (data)
         {
-            TopLevelDataInformation* topData = new TopLevelDataInformation(data,
-                    fileInfo);
+            TopLevelDataInformation* topData = new TopLevelDataInformation(data, fileInfo);
             structures.append(topData);
         }
         else
@@ -168,17 +170,16 @@ void OsdParser::parseEnums()
 {
     if (mEnumsParsed)
         return;
-    QDomDocument doc = openFile();
-    QDomNodeList enumDefs = doc.firstChildElement(QLatin1String("data")).elementsByTagName(
-            QLatin1String("enumDef"));
+    QDomElement rootElem = mDocument.firstChildElement(QLatin1String("data"));
+    QDomNodeList enumDefs = rootElem.firstChildElement(QLatin1String("data")).elementsByTagName(
+        QLatin1String("enumDef"));
     parseEnumDefNodes(enumDefs);
     mEnumsParsed = true;
 }
 
 //Datatypes
 
-AbstractArrayDataInformation*
-OsdParser::arrayFromXML(const QDomElement& xmlElem)
+AbstractArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem)
 {
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     QDomNode node = xmlElem.firstChild();
@@ -230,8 +231,7 @@ PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem
     return PrimitiveFactory::newInstance(name, typeStr);
 }
 
-AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(
-        const QDomElement& xmlElem)
+AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& xmlElem)
 {
     kDebug()
         << "loading bitfield";
