@@ -32,7 +32,6 @@
 #include <abstractxmlguicontroller.h>
 #include <toolviewdockwidget.h>
 // Kasten core
-#include <documentmanager.h>
 #include <abstractdocument.h>
 // Qt
 #include <QtCore/QHash>
@@ -42,12 +41,10 @@ namespace Kasten
 {
 
 ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
-                                        DocumentManager* documentManager,
                                         ViewManager* viewManager )
   : q_ptr( parent ),
     mGroupedViews( new MultiViewAreas() ),// TabbedViews() ),
     mCurrentView( 0 ),
-    mDocumentManager( documentManager ),
     mViewManager( viewManager )
 {
     parent->setCentralWidget( mGroupedViews->widget() );

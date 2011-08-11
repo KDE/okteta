@@ -40,13 +40,12 @@ class ShellWindowPrivate
 {
   public:
     ShellWindowPrivate( ShellWindow* parent,
-                        DocumentManager* documentManager, ViewManager* viewManager );
+                        ViewManager* viewManager );
     ~ShellWindowPrivate();
 
   public:
     MultiViewAreas* viewArea() const;
     ViewManager* viewManager() const;
-    DocumentManager* documentManager() const;
 
   public:
     void updateControllers( AbstractView* view );
@@ -74,7 +73,6 @@ class ShellWindowPrivate
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
     AbstractView* mCurrentView;
 
-    DocumentManager* mDocumentManager;
     ViewManager* mViewManager;
     QList<AbstractXmlGuiController*> mControllers;
 
@@ -85,7 +83,6 @@ class ShellWindowPrivate
 
 inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews; }
 inline ViewManager* ShellWindowPrivate::viewManager() const { return mViewManager; }
-inline DocumentManager* ShellWindowPrivate::documentManager() const { return mDocumentManager; }
 inline QList<ToolViewDockWidget*> ShellWindowPrivate::dockWidgets() const { return mDockWidgets; }
 
 inline void ShellWindowPrivate::addXmlGuiController( AbstractXmlGuiController* controller )

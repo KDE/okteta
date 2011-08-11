@@ -112,7 +112,7 @@ namespace Kasten
 static const char LoadedUrlsKey[] = "LoadedUrls";
 
 OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
-  : ShellWindow( program->documentManager(), program->viewManager() ),
+  : ShellWindow( program->viewManager() ),
     mProgram( program )
 {
     setObjectName( QLatin1String("Shell") );
@@ -260,6 +260,8 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
         // if( offset != -1 )
     }
 }
+
+DocumentManager* OktetaMainWindow::documentManager() const { return mProgram->documentManager(); }
 
 void OktetaMainWindow::onDataOffered( const QMimeData* mimeData, bool& accept )
 {

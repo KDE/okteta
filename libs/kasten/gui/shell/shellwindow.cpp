@@ -28,9 +28,9 @@
 namespace Kasten
 {
 
-ShellWindow::ShellWindow( DocumentManager* documentManager, ViewManager* viewManager )
+ShellWindow::ShellWindow( ViewManager* viewManager )
   : KXmlGuiWindow(),
-    d_ptr( new ShellWindowPrivate(this, documentManager, viewManager) )
+    d_ptr( new ShellWindowPrivate(this, viewManager) )
 {
 }
 
@@ -39,13 +39,6 @@ ViewManager* ShellWindow::viewManager() const
     Q_D( const ShellWindow );
 
     return d->viewManager();
-}
-
-DocumentManager* ShellWindow::documentManager() const
-{
-    Q_D( const ShellWindow );
-
-    return d->documentManager();
 }
 
 MultiViewAreas* ShellWindow::viewArea() const

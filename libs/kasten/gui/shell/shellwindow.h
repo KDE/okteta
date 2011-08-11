@@ -42,7 +42,6 @@ class AbstractXmlGuiController;
 class AbstractToolView;
 class AbstractView;
 class AbstractDocument;
-class DocumentManager;
 
 
 class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
@@ -52,7 +51,7 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
    Q_INTERFACES( Kasten::If::WidgetsDockable )
 
   public:
-    ShellWindow( DocumentManager* documentManager, ViewManager* viewManager );
+    explicit ShellWindow( ViewManager* viewManager );
     virtual ~ShellWindow();
 
   public Q_SLOTS:
@@ -69,7 +68,6 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
   protected:
     MultiViewAreas* viewArea() const;
     ViewManager* viewManager() const;
-    DocumentManager* documentManager() const;
 
   private:
     Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& newTitle ) )

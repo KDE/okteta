@@ -34,6 +34,7 @@ namespace Kasten
 {
 
 class OktetaProgram;
+class DocumentManager;
 
 
 class OktetaMainWindow : public ShellWindow
@@ -52,6 +53,9 @@ class OktetaMainWindow : public ShellWindow
 
   protected:
     void setupControllers();
+
+  protected:
+    DocumentManager* documentManager() const;
 
   protected Q_SLOTS:
     void onDataOffered( const QMimeData* mimeData, bool& accept );
