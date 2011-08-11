@@ -164,21 +164,21 @@ AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
 {
     //we can safely assume that type == "bitfield"
     int width = value.property(QLatin1String("width")).toInt32();
-    if (width <= 0)
+    if (width < 0)
     {
         ScriptUtils::object()->logScriptError(
-                QLatin1String("bitfield has a length of <= 0 -> return NULL"));
+                QLatin1String("bitfield has a length of < 0 -> return NULL"));
         return NULL;
     }
     QString bitfieldType = value.property(QLatin1String("bitfieldType")).toString();
     if (bitfieldType.toLower() == QLatin1String("bool"))
         return new BoolBitfieldDataInformation(name, width);
 
-    else if (bitfieldType.toLower() == QLatin1String("bool"))
-        return new BoolBitfieldDataInformation(name, width);
+    else if (bitfieldType.toLower() == QLatin1String("signed"))
+        return new SignedBitfieldDataInformation(name, width);
 
-    else if (bitfieldType.toLower() == QLatin1String("bool"))
-        return new BoolBitfieldDataInformation(name, width);
+    else if (bitfieldType.toLower() == QLatin1String("unsigned"))
+        return new UnsignedBitfieldDataInformation(name, width);
 
     ScriptUtils::object()->logScriptError(QLatin1String("invalid bitfield type specified:")
             + bitfieldType);
