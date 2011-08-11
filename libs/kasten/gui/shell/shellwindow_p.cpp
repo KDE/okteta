@@ -56,11 +56,6 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
 {
     parent->setCentralWidget( mGroupedViews->widget() );
 
-    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
-                      mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
-                      mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
-
     QObject::connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
                       mGroupedViews, SLOT(addViews(QList<Kasten::AbstractView*>)) );
     QObject::connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),

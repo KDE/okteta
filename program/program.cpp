@@ -77,6 +77,12 @@ int OktetaProgram::execute()
 {
     KApplication programCore;
 
+    // setup
+    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
+                      mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
+    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
+                      mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
+
     KGlobal::locale()->insertCatalog( QLatin1String("liboktetacore") );
     KGlobal::locale()->insertCatalog( QLatin1String("libkasten") );
     KGlobal::locale()->insertCatalog( QLatin1String("liboktetakasten") );
