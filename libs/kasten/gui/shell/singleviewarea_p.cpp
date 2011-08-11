@@ -66,13 +66,14 @@ void SingleViewAreaPrivate::setCurrentToolInlineView( AbstractToolInlineView* vi
 
     if( view )
         view->widget()->setFocus();
-//     else
-//         if( mCurrentView )
-//             mCurrentView->setFocus();
+    else
+        if( mCurrentView )
+            mCurrentView->setFocus();
 }
 
 void SingleViewAreaPrivate::setView( AbstractView* view )
 {
+    mCurrentView = view;
     mViewAreaBox->setCentralWidget( view ? view->widget() : 0 );
 }
 
