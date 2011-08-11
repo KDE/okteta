@@ -59,8 +59,6 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
 
     QObject::connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
                       parent, SLOT(onViewFocusChanged(Kasten::AbstractView*)) );
-    QObject::connect( mGroupedViews, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
-                      parent, SLOT(onCloseRequest(QList<Kasten::AbstractView*>)) );
 }
 
 void ShellWindowPrivate::addTool( AbstractToolView* toolView )
@@ -167,42 +165,6 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView *view )
                           q, SLOT(onTitleChanged(QString)) );
         QObject::connect( view, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
                           q, SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
-    }
-}
-
-void ShellWindowPrivate::onCloseRequest( const QList<Kasten::AbstractView*>& views )
-{
-    // group views per document
-    QHash<AbstractDocument*,QList<AbstractView*> > viewsToClosePerDocument;
-    foreach( AbstractView* view, views )
-    {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        viewsToClosePerDocument[document].append( view );
-    }
-
-    // find documents which lose all views
-    const QList<AbstractView*> allViews = mViewManager->views();
-    foreach( AbstractView* view, allViews )
-    {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        QHash<AbstractDocument*,QList<AbstractView*> >::Iterator it =
-            viewsToClosePerDocument.find( document );
-
-        if( it != viewsToClosePerDocument.end() )
-        {
-            const QList<AbstractView*>& viewsOfDocument = it.value();
-            const bool isAnotherView = ! viewsOfDocument.contains( view );
-            if( isAnotherView )
-                viewsToClosePerDocument.erase( it );
-        }
-    }
-
-    const QList<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys();
-
-    if( mDocumentManager->canClose(documentsWithoutViews) )
-    {
-        mViewManager->removeViews( views );
-        mDocumentManager->closeDocuments( documentsWithoutViews );
     }
 }
 

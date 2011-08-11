@@ -124,6 +124,8 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
              SLOT(onDataOffered(const QMimeData*,bool&)) );
     connect( viewArea(), SIGNAL(dataDropped(const QMimeData*)),
              SLOT(onDataDropped(const QMimeData*)) );
+    connect( viewArea(), SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
+             SLOT(onCloseRequest(QList<Kasten::AbstractView*>)) );
 
     // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
     //      This state is taken from an oktetarc where the docker constellation was configured by hand.
@@ -273,6 +275,43 @@ void OktetaMainWindow::onDataDropped( const QMimeData* mimeData )
     else
         documentManager()->createManager()->createNewFromData( mimeData, true );
 }
+
+void OktetaMainWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
+{
+    // group views per document
+    QHash<AbstractDocument*,QList<AbstractView*> > viewsToClosePerDocument;
+    foreach( AbstractView* view, views )
+    {
+        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        viewsToClosePerDocument[document].append( view );
+    }
+
+    // find documents which lose all views
+    const QList<AbstractView*> allViews = viewManager()->views();
+    foreach( AbstractView* view, allViews )
+    {
+        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
+        QHash<AbstractDocument*,QList<AbstractView*> >::Iterator it =
+            viewsToClosePerDocument.find( document );
+
+        if( it != viewsToClosePerDocument.end() )
+        {
+            const QList<AbstractView*>& viewsOfDocument = it.value();
+            const bool isAnotherView = ! viewsOfDocument.contains( view );
+            if( isAnotherView )
+                viewsToClosePerDocument.erase( it );
+        }
+    }
+
+    const QList<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys();
+
+    if( documentManager()->canClose(documentsWithoutViews) )
+    {
+        viewManager()->removeViews( views );
+        documentManager()->closeDocuments( documentsWithoutViews );
+    }
+}
+
 
 OktetaMainWindow::~OktetaMainWindow() {}
 

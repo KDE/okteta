@@ -65,7 +65,6 @@ class ShellWindowPrivate
     void onLocalSyncStateChanged( Kasten::LocalSyncState newState );
     void onViewFocusChanged( Kasten::AbstractView* view );
     void onToolVisibilityChanged( bool isVisible );
-    void onCloseRequest( const QList<Kasten::AbstractView*>& views );
 
   protected:
     Q_DECLARE_PUBLIC( ShellWindow )

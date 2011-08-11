@@ -26,6 +26,7 @@
 // Kasten gui
 #include <shellwindow.h>
 
+template<class T> class QList;
 class QMimeData;
 
 
@@ -53,6 +54,7 @@ class OktetaMainWindow : public ShellWindow
   protected Q_SLOTS:
     void onDataOffered( const QMimeData* mimeData, bool& accept );
     void onDataDropped( const QMimeData* mimeData );
+    void onCloseRequest( const QList<Kasten::AbstractView*>& views );
 
   protected:
     OktetaProgram* mProgram;
