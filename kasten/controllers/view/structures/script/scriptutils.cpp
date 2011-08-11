@@ -28,30 +28,25 @@
 
 void ScriptUtils::dumpQScriptValue(QScriptValue& val, const char* file, int line)
 {
-    kDebug()
-        << "dumping called from: " << file << ":" << line;
+    kDebug() << "dumping called from: " << file << ":" << line;
     if (!val.isValid())
     {
-        kDebug()
-            << "val is invalid";
+        kDebug() << "val is invalid";
         return;
     }
 
     if (val.isUndefined())
     {
-        kDebug()
-            << "val is undefined";
+        kDebug() << "val is undefined";
         return;
     }
-    kDebug()
-        << "val=" << val.toString();
+    kDebug() << "val=" << val.toString();
 
     QScriptValueIterator it(val);
     while (it.hasNext())
     {
         it.next();
-        kDebug()
-            << "name=" << it.name() << "scriptName=" << it.scriptName() << "val="
+        kDebug()<< "name=" << it.name() << "scriptName=" << it.scriptName() << "val="
                     << it.value().toString();
     }
 }
@@ -140,6 +135,7 @@ void ScriptUtils::logScriptError(const QString& message, QScriptValue errorObjec
     }
     else
         emit scriptError(message, errorObject.toString());
+    kDebug() << message;
 }
 K_GLOBAL_STATIC(ScriptUtils, scrObj)
 

@@ -120,7 +120,9 @@ PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
         QString typeName, DataInformation* parent)
 {
     PrimitiveDataType type = typeStringToType(typeName);
-    if (type == Type_NotPrimitive)
+    if (type == Type_NotPrimitive) {
+        kDebug() << "could not convert " << typeName << " to a primitive type";
         return NULL; //invalid type
+    }
     return newInstance(name, type, parent);
 }
