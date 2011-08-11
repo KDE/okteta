@@ -30,31 +30,19 @@
 #include <abstractview.h>
 // Kasten core
 #include <abstracttool.h>
-#include <documentmanager.h>
-#include <documentcreatemanager.h>
-#include <documentsyncmanager.h>
-// KDE
-#include <KUrl>
 
 
 namespace Kasten
 {
 
 SingleViewWindowPrivate::SingleViewWindowPrivate( SingleViewWindow* parent,
-                                                  DocumentManager* documentManager,
                                                   AbstractView* view )
   : q_ptr( parent ),
-    mDocumentManager( documentManager ),
     mView( view ),
     mViewArea( new SingleViewArea() )
 {
     parent->setCentralWidget( mViewArea->widget() );
     mViewArea->setView( mView );
-
-    QObject::connect( mViewArea, SIGNAL(dataOffered(const QMimeData*,bool&)),
-                      parent, SLOT(onDataOffered(const QMimeData*,bool&)) );
-    QObject::connect( mViewArea, SIGNAL(dataDropped(const QMimeData*)),
-                      parent, SLOT(onDataDropped(const QMimeData*)) );
 }
 
 void SingleViewWindowPrivate::setView( AbstractView* view )
@@ -116,13 +104,6 @@ void SingleViewWindowPrivate::addTool( AbstractToolView* toolView )
                 SLOT(onToolVisibilityChanged(bool)) );
 }
 
-bool SingleViewWindowPrivate::queryClose()
-{
-    AbstractDocument* document = mView ? mView->findBaseModel<AbstractDocument*>() : 0;
-    // TODO: query the document manager or query the view manager?
-    return (! document) || mDocumentManager->canClose( document );
-}
-
 void SingleViewWindowPrivate::onTitleChanged( const QString& newTitle )
 {
     Q_Q( SingleViewWindow );
@@ -143,29 +124,6 @@ Q_UNUSED( newState )
     AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
     if( view )
         q->setCaption( view->title(), newState == LocalHasChanges );
-}
-
-void SingleViewWindowPrivate::onDataOffered( const QMimeData* mimeData, bool& accept )
-{
-    // TODO: this all should be forwarded to some client object
-    accept = KUrl::List::canDecode( mimeData )
-             || mDocumentManager->createManager()->canCreateNewFromData( mimeData );
-}
-
-void SingleViewWindowPrivate::onDataDropped( const QMimeData* mimeData )
-{
-    // TODO: this all should be forwarded to some client object
-    const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
-
-    if( ! urls.isEmpty() )
-    {
-        DocumentSyncManager* syncManager = mDocumentManager->syncManager();
-
-        foreach( const KUrl& url, urls )
-            syncManager->load( url );
-    }
-    else
-        mDocumentManager->createManager()->createNewFromData( mimeData, true );
 }
 
 

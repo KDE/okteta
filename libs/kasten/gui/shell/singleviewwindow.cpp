@@ -28,17 +28,10 @@
 namespace Kasten
 {
 
-SingleViewWindow::SingleViewWindow( DocumentManager* documentManager, AbstractView* view )
+SingleViewWindow::SingleViewWindow( AbstractView* view )
   : KXmlGuiWindow(),
-    d_ptr( new SingleViewWindowPrivate(this, documentManager, view) )
+    d_ptr( new SingleViewWindowPrivate(this, view) )
 {
-}
-
-DocumentManager* SingleViewWindow::documentManager() const
-{
-    Q_D( const SingleViewWindow );
-
-    return d->documentManager();
 }
 
 AbstractView* SingleViewWindow::view() const
@@ -82,13 +75,6 @@ void SingleViewWindow::addTool( AbstractToolView* toolView )
     Q_D( SingleViewWindow );
 
     d->addTool( toolView );
-}
-
-bool SingleViewWindow::queryClose()
-{
-    Q_D( SingleViewWindow );
-
-    return d->queryClose();
 }
 
 

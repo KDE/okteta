@@ -39,7 +39,6 @@ namespace Kasten
 class SingleViewWindowPrivate;
 
 class AbstractView;
-class DocumentManager;
 class AbstractToolView;
 class AbstractXmlGuiController;
 class SingleViewArea;
@@ -52,7 +51,7 @@ class KASTENGUI_EXPORT SingleViewWindow : public KXmlGuiWindow,
    Q_INTERFACES( Kasten::If::WidgetsDockable )
 
   public:
-    explicit SingleViewWindow( DocumentManager* documentManager, AbstractView* view );
+    explicit SingleViewWindow( AbstractView* view );
     virtual ~SingleViewWindow();
 
   public:
@@ -64,23 +63,15 @@ class KASTENGUI_EXPORT SingleViewWindow : public KXmlGuiWindow,
   public: // If::WidgetsDockable API
     virtual QList<ToolViewDockWidget*> dockWidgets() const;
 
-  protected: // KMainWindow API
-    virtual bool queryClose();
-
   protected:
     AbstractView* view() const;
     SingleViewArea* viewArea() const;
-    DocumentManager* documentManager() const;
 
   private:
     Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& newTitle ) )
     Q_PRIVATE_SLOT( d_func(), void onLocalSyncStateChanged( Kasten::LocalSyncState newState ) )
 //     void onViewFocusChanged( Kasten::AbstractView* view );
-//     void onFocusRequested( Kasten::AbstractDocument* document );
     Q_PRIVATE_SLOT( d_func(), void onToolVisibilityChanged( bool isVisible ) )
-//     Q_PRIVATE_SLOT( d_func(), void onCloseRequest( const QList<Kasten::AbstractView*>& views ) )
-    Q_PRIVATE_SLOT( d_func(), void onDataOffered( const QMimeData* mimeData, bool& accept ) )
-    Q_PRIVATE_SLOT( d_func(), void onDataDropped( const QMimeData* mimeData ) )
 
   protected:
     SingleViewWindowPrivate* const d_ptr;

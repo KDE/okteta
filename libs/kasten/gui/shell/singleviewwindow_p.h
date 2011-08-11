@@ -43,7 +43,7 @@ class SingleViewWindowPrivate
 {
   public:
     SingleViewWindowPrivate( SingleViewWindow* parent,
-                             DocumentManager* documentManager, AbstractView* view );
+                             AbstractView* view );
 
     ~SingleViewWindowPrivate();
 
@@ -58,28 +58,20 @@ class SingleViewWindowPrivate
   public: // If::WidgetsDockable API
     QList<ToolViewDockWidget*> dockWidgets() const;
 
-  protected: // KMainWindow API
-    bool queryClose();
-
   protected:
     AbstractView* view() const;
     SingleViewArea* viewArea() const;
-    DocumentManager* documentManager() const;
 
   private: // Q_SLOTS
     void onTitleChanged( const QString& newTitle );
     void onLocalSyncStateChanged( Kasten::LocalSyncState newState );
     void onToolVisibilityChanged( bool isVisible );
-    void onDataOffered( const QMimeData* mimeData, bool& accept );
-    void onDataDropped( const QMimeData* mimeData );
 
   protected:
     Q_DECLARE_PUBLIC( SingleViewWindow )
 
   protected:
     SingleViewWindow* const q_ptr;
-
-    DocumentManager* const mDocumentManager;
 
     AbstractView* mView;
 
@@ -93,7 +85,6 @@ class SingleViewWindowPrivate
 inline QList<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
 inline AbstractView* SingleViewWindowPrivate::view() const { return mView; }
 inline SingleViewArea* SingleViewWindowPrivate::viewArea() const { return mViewArea; }
-inline DocumentManager* SingleViewWindowPrivate::documentManager() const { return mDocumentManager; }
 
 }
 
