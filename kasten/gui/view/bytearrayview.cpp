@@ -95,6 +95,8 @@ void ByteArrayView::init()
              SLOT(setFontByGlobalSettings()) );
     setFontByGlobalSettings();
 
+    mWidget->setNoOfBytesPerLine( 16 );
+
     const bool useOverwriteAsDefault = ( content->size() > 0 );
     mWidget->setOverwriteMode( useOverwriteAsDefault );
 
