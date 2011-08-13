@@ -70,37 +70,29 @@ DynamicLengthArrayDataInformation::~DynamicLengthArrayDataInformation()
 }
 int DynamicLengthArrayDataInformation::calculateLength()
 {
-    if (!mParent)
+    if (!mParent || mParent->isTopLevel())
     {
         kWarning() << "dynamic length array without parent ->"
             " length will always be 0";
         return 0;
     }
-    QList<const DataInformation*> refs = findChildrenWithName(mLengthString, this);
-    if (refs.length() == 0)
+    QPair<DataInformation*, QString> val =
+        static_cast<DataInformation*>(mParent)->findChildForDynamicArrayLength(mLengthString, row());
+    const DataInformation* data = val.first;
+    const QString path = QLatin1String("this.parent.") + val.second; //this is so I can finally remove this class soon
+    const PrimitiveDataInformation* prim = dynamic_cast<const PrimitiveDataInformation*>(data);
+    if (!prim)
     {
-        kDebug()
-            << "referenced size field not found";
-        return 0;
+        kDebug() << "referenced value (" << mLengthString << ") was not a primitive value";
     }
-    for (int i = 0; i < refs.length(); ++i)
+    else if (!prim->wasAbleToRead())
     {
-        const DataInformation* data = refs.at(i);
-        const PrimitiveDataInformation* prim =
-                dynamic_cast<const PrimitiveDataInformation*> (data);
-        if (prim)
-        {
-            if (!prim->wasAbleToRead())
-            {
-                kDebug()
-                    << "primitive type is not valid";
-                continue;
-            }
-            else
-            {
-                return prim->value().ulongValue;
-            }
-        }
+        kDebug() << "was not able to read new array length for " << name()
+            << "referenced value (" << mLengthString << ") was not valid";
+    }
+    else
+    {
+        return prim->value().ulongValue;
     }
     return 0;
 }

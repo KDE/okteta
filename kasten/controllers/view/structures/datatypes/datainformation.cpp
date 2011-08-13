@@ -243,3 +243,33 @@ DataInformation* DataInformation::child(QString name) const
     return 0;
 }
 
+QPair<DataInformation*, QString> DataInformation::findChildForDynamicArrayLength(const QString& name, int upTo) const
+{
+    Q_ASSERT(upTo >= 0 && upTo <= childCount());
+    for (int i = upTo - 1; i >= 0; --i) {
+        DataInformation* current = childAt(i);
+        QString start = name;
+        if (current->canHaveChildren()) {
+            QPair<DataInformation*, QString> tmp = findChildForDynamicArrayLength(name, current->childCount());
+            current = tmp.first;
+            if (current)
+                start = start + tmp.second;
+        }
+        if (current && current->name() == name) {
+            return qMakePair(current, QString(start + QLatin1String(".value")));
+        }
+    }
+    if (!parent() || parent()->isTopLevel())
+        return QPair<DataInformation*, QString>(0, QString());
+
+    QPair<DataInformation*, QString> ret =
+        static_cast<DataInformation*>(parent())->findChildForDynamicArrayLength(name, row());
+    if (ret.first)
+    {
+        //found one
+        return qMakePair(ret.first, QString(QLatin1String("parent.") + ret.second));
+    }
+    else
+        return QPair<DataInformation*, QString>(0, QString());
+}
+

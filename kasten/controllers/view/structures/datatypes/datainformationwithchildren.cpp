@@ -117,31 +117,6 @@ DataInformationWithChildren::DataInformationWithChildren(
     }
 }
 
-QList<const DataInformation*> DataInformationWithChildren::findChildrenWithName(
-        const QString& name, const DataInformation* const upTo) const
-{
-    QList<const DataInformation*> retList;
-    if (mParent && !mParent->isTopLevel())
-    {
-        DataInformationWithChildren* par =
-                static_cast<DataInformationWithChildren*> (parent());
-        retList.append(par->findChildrenWithName(name, this));
-    }
-    for (uint i = 0; i < childCount(); ++i)
-    {
-        DataInformation* data = childAt(i);
-        if (data == upTo)
-            break;
-        if (data->name() == name)
-            retList.append(data);
-        DataInformationWithChildren* dataWithChildren =
-                dynamic_cast<DataInformationWithChildren*> (data);
-        if (dataWithChildren)
-            retList.append(dataWithChildren->findChildrenWithName(name, NULL));
-    }
-    return retList;
-}
-
 QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const
 {
     return new KLineEdit(parent);
