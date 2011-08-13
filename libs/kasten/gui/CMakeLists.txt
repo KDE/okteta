@@ -56,15 +56,22 @@ set( kastengui_io_HDRS
 
 
 set( kastengui_system_SRCS
+  system/abstractdocumentstrategy.cpp
+  system/createdialog.cpp
   system/dialoghandler.cpp
   system/dummyview.cpp
   system/modelcodecviewmanager.cpp
+  system/multidocumentstrategy.cpp
+  system/singledocumentstrategy.cpp
   system/viewmanager.cpp
 )
 set( kastengui_system_HDRS
+  system/abstractdocumentstrategy.h
   system/dialoghandler.h
   system/dummyview.h
   system/modelcodecviewmanager.h
+  system/multidocumentstrategy.h
+  system/singledocumentstrategy.h
   system/viewmanager.h
 )
 
