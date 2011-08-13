@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ class KUrl;
 namespace Kasten
 {
 
-class DocumentSyncManager;
+class AbstractDocumentStrategy;
 
 
 class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiController
@@ -44,7 +44,8 @@ class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiControlle
   Q_OBJECT
 
   public:
-    LoaderController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
+    LoaderController( AbstractDocumentStrategy* documentStrategy,
+                      KXMLGUIClient* guiClient );
     virtual ~LoaderController();
 
   public: // AbstractXmlGuiController API
@@ -57,7 +58,7 @@ class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiControlle
     void onUrlUsed( const KUrl& url );
 
   protected:
-    DocumentSyncManager* mSyncManager;
+    AbstractDocumentStrategy* mDocumentStrategy;
 
     KRecentFilesAction* mOpenRecentAction;
 };

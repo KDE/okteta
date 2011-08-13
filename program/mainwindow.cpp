@@ -91,6 +91,7 @@
 /*#include <viewsystem/close/closecontroller.h>*/
 #include <program/quit/quitcontroller.h>
 // Kasten gui
+#include <multidocumentstrategy.h>
 #include <modelcodecviewmanager.h>
 #include <viewmanager.h>
 #include <multiviewareas.h>
@@ -152,24 +153,23 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
 
 void OktetaMainWindow::setupControllers()
 {
-    ViewManager* viewManager = this->viewManager();
-    MultiViewAreas* viewArea = this->viewArea();
+    MultiDocumentStrategy* const documentStrategy = mProgram->documentStrategy();
+    ViewManager* const viewManager = this->viewManager();
+    MultiViewAreas* const viewArea = this->viewArea();
     ModelCodecViewManager* const codecViewManager = viewManager->codecViewManager();
     DocumentManager* const documentManager = this->documentManager();
     ModelCodecManager* const codecManager = documentManager->codecManager();
-    DocumentCreateManager* const createManager = documentManager->createManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
 
     // general, part of Kasten
-    addXmlGuiController( new CreatorController(codecViewManager,
-                                               codecManager,
-                                               createManager,this) );
-    addXmlGuiController( new LoaderController(syncManager,this) );
+    addXmlGuiController( new CreatorController(codecManager,
+                                               documentStrategy,this) );
+    addXmlGuiController( new LoaderController(documentStrategy,this) );
     addXmlGuiController( new SetRemoteController(syncManager,this) );
     addXmlGuiController( new SynchronizeController(syncManager,this) );
     addXmlGuiController( new ExportController(codecViewManager,
                                               codecManager,this) );
-    addXmlGuiController( new CloseController(documentManager,this) );
+    addXmlGuiController( new CloseController(documentStrategy,this) );
     addXmlGuiController( new VersionController(this) );
     addXmlGuiController( new ReadOnlyController(this) );
     addXmlGuiController( new SwitchViewController(viewArea,this) );

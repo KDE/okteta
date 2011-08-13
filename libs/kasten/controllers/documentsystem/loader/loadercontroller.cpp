@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,7 @@
 #include "loadercontroller.h"
 
 // Kasten core
-#include <documentsyncmanager.h>
+#include <abstractdocumentstrategy.h>
 // KDE
 #include <KUrl>
 #include <KFileDialog>
@@ -42,8 +42,10 @@ static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_char
 static const char CreatorConfigGroupId[] = "Recent Files";
 
 
-LoaderController::LoaderController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
-: mSyncManager( syncManager )
+LoaderController::LoaderController( AbstractDocumentStrategy* documentStrategy,
+                                    KXMLGUIClient* guiClient )
+  : AbstractXmlGuiController()
+  , mDocumentStrategy( documentStrategy )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -54,7 +56,7 @@ LoaderController::LoaderController( DocumentSyncManager* syncManager, KXMLGUICli
     KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
     mOpenRecentAction->loadEntries( configGroup );
 
-    connect( mSyncManager, SIGNAL(urlUsed(KUrl)), SLOT(onUrlUsed(KUrl)) );
+    connect( mDocumentStrategy, SIGNAL(urlUsed(KUrl)), SLOT(onUrlUsed(KUrl)) );
 }
 
 
@@ -70,16 +72,15 @@ void LoaderController::load()
         KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, allFileNamesFilter, /*mWidget*/0 );
 
     foreach( const KUrl& url, urls )
-        mSyncManager->load( url );
+        mDocumentStrategy->load( url );
 }
 
-void LoaderController::loadRecent( const KUrl &url )
+void LoaderController::loadRecent( const KUrl& url )
 {
-    // TODO: 
-    mSyncManager->load( url );
+    mDocumentStrategy->load( url );
 }
 
-void LoaderController::onUrlUsed( const KUrl &url )
+void LoaderController::onUrlUsed( const KUrl& url )
 {
     mOpenRecentAction->addUrl( url );
 }

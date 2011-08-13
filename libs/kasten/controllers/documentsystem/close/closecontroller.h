@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -35,7 +35,7 @@ class KXMLGUIClient;
 namespace Kasten
 {
 
-class DocumentManager;
+class AbstractDocumentStrategy;
 class AbstractDocument;
 
 
@@ -44,7 +44,10 @@ class KASTENCONTROLLERS_EXPORT CloseController : public AbstractXmlGuiController
   Q_OBJECT
 
   public:
-    CloseController( DocumentManager* documentManager, KXMLGUIClient* guiClient );
+    CloseController( AbstractDocumentStrategy* documentStrategy,
+                     KXMLGUIClient* guiClient,
+                     bool supportMultiple = true );
+    virtual ~CloseController();
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -57,7 +60,7 @@ class KASTENCONTROLLERS_EXPORT CloseController : public AbstractXmlGuiController
     void onDocumentsChanged();
 
   protected:
-    DocumentManager* mDocumentManager;
+    AbstractDocumentStrategy* mDocumentStrategy;
 
     AbstractDocument* mDocument;
     KAction* mCloseAction;

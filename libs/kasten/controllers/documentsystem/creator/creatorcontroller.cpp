@@ -25,15 +25,11 @@
 // lib
 #include "createdialog.h"
 // Kasten gui
-#include <modelcodecviewmanager.h>
+#include <abstractdocumentstrategy.h>
 #include <selecteddatawriteable.h>
-#include <abstractmodeldatageneratorconfigeditor.h>
 // Kasten core
-#include <modeldatageneratethread.h>
 #include <modelcodecmanager.h>
-#include <documentcreatemanager.h>
 #include <abstractmodeldatagenerator.h>
-#include <abstractmodel.h>
 // KDE
 #include <KIcon>
 #include <KLocale>
@@ -42,7 +38,6 @@
 #include <KStandardAction>
 #include <KXMLGUIClient>
 // Qt
-#include <QtGui/QClipboard>
 #include <QtGui/QApplication>
 #include <QtCore/QMimeData>
 
@@ -55,14 +50,12 @@ Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
 namespace Kasten
 {
 
-CreatorController::CreatorController( ModelCodecViewManager* modelCodecViewManager,
-                                      ModelCodecManager* modelCodecManager,
-                                      DocumentCreateManager* documentCreateManager,
+CreatorController::CreatorController( ModelCodecManager* modelCodecManager,
+                                      AbstractDocumentStrategy* documentStrategy,
                                       KXMLGUIClient* guiClient )
   : AbstractXmlGuiController(),
-    mModelCodecViewManager( modelCodecViewManager ),
     mModelCodecManager( modelCodecManager ),
-    mDocumentCreateManager( documentCreateManager )
+    mDocumentStrategy( documentStrategy )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -97,7 +90,6 @@ CreatorController::CreatorController( ModelCodecViewManager* modelCodecViewManag
 
     if( hasGenerators )
     {
-
         newMenuAction->addSeparator();
 
         // TODO: ask factory which mimetypes it can read
@@ -123,14 +115,12 @@ Q_UNUSED( model )
 
 void CreatorController::onNewActionTriggered()
 {
-    mDocumentCreateManager->createNew();
+    mDocumentStrategy->createNew();
 }
 
 void CreatorController::onNewFromClipboardActionTriggered()
 {
-    const QMimeData* mimeData = QApplication::clipboard()->mimeData( QClipboard::Clipboard );
-
-    mDocumentCreateManager->createNewFromData( mimeData, true );
+    mDocumentStrategy->createNewFromClipboard();
 }
 
 void CreatorController::onNewFromGeneratorActionTriggered()
@@ -139,33 +129,7 @@ void CreatorController::onNewFromGeneratorActionTriggered()
 
     AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator* >();
 
-    AbstractModelDataGeneratorConfigEditor* configEditor =
-        mModelCodecViewManager->createConfigEditor( generator );
-
-    if( configEditor )
-    {
-        CreateDialog* dialog = new CreateDialog( configEditor );
-//         dialog->setData( mModel, selection ); TODO
-        if( ! dialog->exec() )
-            return;
-    }
-
-    QApplication::setOverrideCursor( Qt::WaitCursor );
-
-    ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread( this, generator );
-    generateThread->start();
-    while( !generateThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
-
-    QMimeData* mimeData = generateThread->data();
-
-    delete generateThread;
-
-    const bool setModified = ( generator->flags() & AbstractModelDataGenerator::DynamicGeneration );
-    mDocumentCreateManager->createNewFromData( mimeData, setModified );
-
-    QApplication::restoreOverrideCursor();
+    mDocumentStrategy->createNewWithGenerator( generator );
 }
 
 CreatorController::~CreatorController() {}

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, made within the KDE community.
 
-    Copyright 2006-2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -33,6 +33,7 @@ namespace Kasten
 class DialogHandler;
 class DocumentManager;
 class ViewManager;
+class MultiDocumentStrategy;
 
 
 class OktetaProgram
@@ -48,12 +49,14 @@ class OktetaProgram
   public:
     DocumentManager* documentManager();
     ViewManager* viewManager();
+    MultiDocumentStrategy* documentStrategy();
 
   protected:
     OktetaAboutData mAboutData;
 
     DocumentManager* mDocumentManager;
     ViewManager* mViewManager;
+    MultiDocumentStrategy* mDocumentStrategy;
 
     DialogHandler* mDialogHandler;
 };
@@ -61,6 +64,7 @@ class OktetaProgram
 
 inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager; }
 inline ViewManager* OktetaProgram::viewManager()         { return mViewManager; }
+inline MultiDocumentStrategy* OktetaProgram::documentStrategy() { return mDocumentStrategy; }
 
 }
 

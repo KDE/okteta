@@ -34,9 +34,8 @@ class KXMLGUIClient;
 namespace Kasten
 {
 
-class ModelCodecViewManager;
 class ModelCodecManager;
-class DocumentCreateManager;
+class AbstractDocumentStrategy;
 
 
 class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiController
@@ -44,9 +43,8 @@ class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiControll
   Q_OBJECT
 
   public:
-    CreatorController( ModelCodecViewManager* modelCodecViewManager,
-                       ModelCodecManager* modelCodecManager,
-                       DocumentCreateManager* documentCreateManager,
+    CreatorController( ModelCodecManager* modelCodecManager,
+                       AbstractDocumentStrategy* documentStrategy,
                        KXMLGUIClient* guiClient );
     virtual ~CreatorController();
 
@@ -59,9 +57,8 @@ class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiControll
     void onNewFromGeneratorActionTriggered();
 
   protected:
-    ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
-    DocumentCreateManager* mDocumentCreateManager;
+    AbstractDocumentStrategy* mDocumentStrategy;
 };
 
 }

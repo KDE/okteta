@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, made within the KDE community.
 
-    Copyright 2006-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -33,6 +33,7 @@
 #include <bytearraystreamencoderfactory.h>
 #include <bytearraydatageneratorfactory.h>
 // Kasten gui
+#include <multidocumentstrategy.h>
 #include <dialoghandler.h>
 #include <viewmanager.h>
 #include <modelcodecviewmanager.h>
@@ -59,9 +60,10 @@ namespace Kasten
 #define CmdLineOptionName(STRING) QByteArray::fromRawData( STRING, sizeof(STRING)-1 )
 
 OktetaProgram::OktetaProgram( int argc, char *argv[] )
- : mDocumentManager( new DocumentManager() ),
-   mViewManager( new ViewManager() ),
-   mDialogHandler( new DialogHandler() )
+  : mDocumentManager( new DocumentManager() ),
+    mViewManager( new ViewManager() ),
+    mDocumentStrategy( new MultiDocumentStrategy(mDocumentManager, mViewManager) ),
+    mDialogHandler( new DialogHandler() )
 {
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );
@@ -76,12 +78,6 @@ OktetaProgram::OktetaProgram( int argc, char *argv[] )
 int OktetaProgram::execute()
 {
     KApplication programCore;
-
-    // setup
-    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
-                      mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
-                      mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
 
     KGlobal::locale()->insertCatalog( QLatin1String("liboktetacore") );
     KGlobal::locale()->insertCatalog( QLatin1String("libkasten") );
@@ -111,38 +107,26 @@ int OktetaProgram::execute()
     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
 
+    OktetaMainWindow* mainWindow = new OktetaMainWindow( this );
+    mDialogHandler->setWidget( mainWindow );
+
     // started by session management?
-    if( programCore.isSessionRestored() )
+    if( programCore.isSessionRestored() && KMainWindow::canBeRestored(1) )
     {
-        RESTORE( OktetaMainWindow(this) );
+        mainWindow->restore( 1 );
     }
     else
     {
         // no session.. just start up normally
-        OktetaMainWindow *mainWindow = new OktetaMainWindow( this );
-
-        KCmdLineArgs *arguments = KCmdLineArgs::parsedArgs();
+        KCmdLineArgs* arguments = KCmdLineArgs::parsedArgs();
 
         // take arguments
         if( arguments->count() > 0 )
         {
-//             int offset = -1;
-//             if( arguments->isSet(OffsetOptionId) )
-//             {
-//                 const QString offsetOptionArgument = arguments->getOption( OffsetOptionId );
-//                 offset = readOut( offsetOptionArgument );
-//             }
-
-            DocumentSyncManager* syncManager = mDocumentManager->syncManager();
             for( int i=0; i<arguments->count(); ++i )
-            {
-                syncManager->load( arguments->url(i) );
-                // TODO: set view to offset
-                // if( offset != -1 )
-            }
+                mDocumentStrategy->load( arguments->url(i) );
         }
 
-        mDialogHandler->setWidget( mainWindow );
         mainWindow->show();
 
         arguments->clear();
@@ -160,6 +144,7 @@ void OktetaProgram::quit()
 
 OktetaProgram::~OktetaProgram()
 {
+    delete mDocumentStrategy;
     delete mDocumentManager;
     delete mViewManager;
     delete mDialogHandler;
