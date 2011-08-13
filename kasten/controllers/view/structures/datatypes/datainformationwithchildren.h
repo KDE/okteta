@@ -52,8 +52,6 @@ public:
     virtual bool hasChildren() const;
     virtual bool canHaveChildren() const;
     virtual unsigned int childCount() const;
-    virtual QList<const DataInformation*> findChildrenWithName(const QString& name,
-            const DataInformation* const upTo) const;
     quint64 offset(unsigned int index) const;
     virtual QString tooltipString() const;
 
