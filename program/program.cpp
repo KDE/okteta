@@ -59,7 +59,7 @@ namespace Kasten
 
 #define CmdLineOptionName(STRING) QByteArray::fromRawData( STRING, sizeof(STRING)-1 )
 
-OktetaProgram::OktetaProgram( int argc, char *argv[] )
+OktetaProgram::OktetaProgram( int argc, char* argv[] )
   : mDocumentManager( new DocumentManager() ),
     mViewManager( new ViewManager() ),
     mDocumentStrategy( new MultiDocumentStrategy(mDocumentManager, mViewManager) ),
