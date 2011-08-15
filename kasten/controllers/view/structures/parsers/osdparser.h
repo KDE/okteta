@@ -57,15 +57,15 @@ public:
 private:
     void parseEnums();
 
-    AbstractArrayDataInformation* arrayFromXML(const QDomElement& node);
     PrimitiveDataInformation* primitiveFromXML(const QDomElement& node);
-    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem);
-    UnionDataInformation* unionFromXML(const QDomElement& node);
-    StructureDataInformation* structFromXML(const QDomElement& node);
+    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& node);
     EnumDataInformation* enumFromXML(const QDomElement& node);
     StringDataInformation* stringFromXML(const QDomElement& node);
+    UnionDataInformation* unionFromXML(const QDomElement& xmlElem);
+    StructureDataInformation* structFromXML(const QDomElement& xmlElem);
+    AbstractArrayDataInformation* arrayFromXML(const QDomElement& node, const DataInformation* parent);
 
-    DataInformation* parseNode(const QDomNode& node);
+    DataInformation* parseNode(const QDomNode& node, const DataInformation* parent);
     EnumDefinition::Ptr findEnum(const QString& defName);
 
     //void parseIncludeNodes(QDomNodeList& elems);
@@ -75,6 +75,7 @@ private:
     QDomDocument mDocument;
     QDir mDir;
     QString mFile;
+    QScriptEngine* mEngine; //maybe needed for dynamic arrays
     QList<EnumDefinition::Ptr> mEnums;
     bool mEnumsParsed :1;
     bool mFullyParsed :1;

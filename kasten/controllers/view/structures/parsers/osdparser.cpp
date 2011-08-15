@@ -44,22 +44,23 @@
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomNode>
 #include <QtXml/QDomNodeList>
+#include <QScriptEngine>
 
 OsdParser::OsdParser(const Kasten::StructureDefinitionFile* const def) :
-    AbstractStructureParser(def), mDir(def->dir()), mEnumsParsed(false), mFullyParsed(false)
+    AbstractStructureParser(def), mDir(def->dir()), mEngine(0), mEnumsParsed(false), mFullyParsed(false)
 {
     mFile = QString(def->pluginInfo().pluginName() + QLatin1String(".osd"));
     openDocFromFile();
 }
 
 OsdParser::OsdParser(const QString dir, const QString file) :
-    AbstractStructureParser(0), mDir(dir), mFile(file), mEnumsParsed(false), mFullyParsed(false)
+    AbstractStructureParser(0), mDir(dir), mFile(file), mEngine(0), mEnumsParsed(false), mFullyParsed(false)
 {
     openDocFromFile();
 }
 
 OsdParser::OsdParser(const QString xml) :
-    AbstractStructureParser(0), mEnumsParsed(false), mFullyParsed(false)
+    AbstractStructureParser(0), mEngine(0), mEnumsParsed(false), mFullyParsed(false)
 {
     int errorLine, errorColumn;
     QString errorMsg;
@@ -73,6 +74,7 @@ OsdParser::OsdParser(const QString xml) :
 
 OsdParser::~OsdParser()
 {
+    //don't delete mEngine, ownership gets taken over
 }
 
 QStringList OsdParser::parseStructureNames()
@@ -141,13 +143,12 @@ QList<const TopLevelDataInformation*> OsdParser::parseStructures()
             continue;
 
         //e is element
-        kDebug()
-            << "element tag: " << elem.tagName();
+        //kDebug() << "element tag: " << elem.tagName();
         QString tag = elem.tagName();
-        DataInformation* data = parseNode(elem);
+        DataInformation* data = parseNode(elem, 0);
         if (data)
         {
-            TopLevelDataInformation* topData = new TopLevelDataInformation(data, fileInfo);
+            TopLevelDataInformation* topData = new TopLevelDataInformation(data, fileInfo, mEngine, false);
             structures.append(topData);
         }
         else
@@ -179,32 +180,72 @@ void OsdParser::parseEnums()
 
 //Datatypes
 
-AbstractArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem)
+AbstractArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const DataInformation* parent)
 {
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     QDomNode node = xmlElem.firstChild();
-    QScopedPointer<DataInformation> subElem(parseNode(node));
+    QScopedPointer<DataInformation> subElem(parseNode(node, parent));
     if (!subElem)
     {
-        kWarning() << "AbstractArrayDataInformation::fromXML():"
-            " could not parse subelement type";
+        kWarning() << name << ": could not parse subelement type";
         return NULL;
     }
     QString lengthStr = xmlElem.attribute(QLatin1String("length"));
     if (lengthStr.isNull())
     {
-        kWarning() << "StaticLengthPrimitiveArrayDataInformation::fromXML():"
-            " no length attribute defined";
-        return NULL;
+        kWarning() << name << ": no length attribute defined";
+        return 0;
     }
     AbstractArrayDataInformation* retVal;
     bool okay = true;
-    int length = lengthStr.toInt(&okay, 10); //TODO dynamic length
+    int length = lengthStr.toInt(&okay, 10);
     if (!okay)
     {
-        kDebug() << "error parsing length string -> is dynamic length array. Length string="
-            << lengthStr;
-        retVal = new DynamicLengthArrayDataInformation(name, lengthStr, *subElem);
+        QString access;
+        kDebug() << "error parsing length string -> is dynamic length array. Length string=" << lengthStr;
+        //we have to find an element that matches the element passed in lengthStr
+        const DataInformation* currElem = parent;
+        if (!currElem) {
+            kWarning() << name << ": array without length/length depending on other member given as root element of .osd";
+            return 0;
+        }
+        if (lengthStr.contains(QLatin1Char('.')))
+        {
+            //absolute 'path' to element given, i.e. data.elem1.arr_length
+            QStringList elements = lengthStr.split(QLatin1Char('.'), QString::SkipEmptyParts);
+            for (int i = 0; i < elements.size(); ++i) {
+                DataInformation* child = currElem->child(elements.at(i));
+                if (child)
+                    currElem = child;
+                else
+                {
+                    kDebug() << name << ": could not find a child with name " << lengthStr;
+                    return 0;
+                }
+            }
+            access = QLatin1String("this.parent.") + lengthStr + QLatin1String(".value"); //was valid
+        }
+        else
+        {
+            QPair<DataInformation*, QString> tmp
+                = parent->findChildForDynamicArrayLength(lengthStr, parent->childCount());
+            if (!tmp.first)
+            {
+                kDebug() << "array " << name << ": could not find referenced element " << lengthStr;
+                return 0;
+            }
+            kDebug() << name << ": update var = " << tmp.second;
+            access = tmp.second;
+        }
+        retVal = new StaticLengthArrayDataInformation(name, 0, *subElem);
+        if (!mEngine)
+            mEngine = new QScriptEngine();
+        QString script(QLatin1String("x = function() { this.length = this.parent.")
+            + access + QLatin1String(";}"));
+        QScriptValue updateFunc = mEngine->evaluate(script);
+        kDebug() << "update func = :" << script;
+        Q_ASSERT(updateFunc.isFunction());
+        retVal->setAdditionalData(new AdditionalData(QScriptValue(), updateFunc));
     }
     else if (length >= 0)
     {
@@ -212,8 +253,8 @@ AbstractArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem
     }
     else
     {
-        kWarning() << "could not parse length string:" << lengthStr;
-        return NULL;
+        kWarning() << "invalid length string:" << lengthStr;
+        return 0;
     }
     return retVal;
 }
@@ -224,9 +265,8 @@ PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem
     QString typeStr = xmlElem.attribute(QLatin1String("type"), QString());
     if (typeStr.isEmpty())
     {
-        kWarning()
-                << "PrimitiveDataInformation::fromXML(): no type attribute defined";
-        return NULL;
+        kWarning() << "no type attribute defined for primitive type" << name;
+        return 0;
     }
     return PrimitiveFactory::newInstance(name, typeStr);
 }
@@ -268,7 +308,7 @@ UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem)
     QDomNode node = xmlElem.firstChild();
     while (!node.isNull())
     {
-        DataInformation* data = parseNode(node);
+        DataInformation* data = parseNode(node, un);
         if (data)
             un->addDataTypeToUnion(data);
         node = node.nextSibling();
@@ -283,7 +323,7 @@ StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem)
     QDomNode node = xmlElem.firstChild();
     while (!node.isNull())
     {
-        DataInformation* data = parseNode(node);
+        DataInformation* data = parseNode(node, stru);
         if (data)
             stru->addDataTypeToStruct(data);
         node = node.nextSibling();
@@ -401,9 +441,9 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& node)
     return data;
 }
 
-DataInformation* OsdParser::parseNode(const QDomNode& n)
+DataInformation* OsdParser::parseNode(const QDomNode& node, const DataInformation* parent)
 {
-    QDomElement elem = n.toElement(); // try to convert the node to an element.
+    QDomElement elem = node.toElement(); // try to convert the node to an element.
     DataInformation* data = NULL;
     if (!elem.isNull())
     {
@@ -413,7 +453,7 @@ DataInformation* OsdParser::parseNode(const QDomNode& n)
         if (tag == QLatin1String("struct"))
             data = structFromXML(elem);
         else if (tag == QLatin1String("array"))
-            data = arrayFromXML(elem);
+            data = arrayFromXML(elem, parent);
         else if (tag == QLatin1String("bitfield"))
             data = bitfieldFromXML(elem);
         else if (tag == QLatin1String("primitive"))

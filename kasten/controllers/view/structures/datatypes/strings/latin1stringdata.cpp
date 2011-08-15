@@ -22,6 +22,7 @@
 
 
 #include "latin1stringdata.h"
+#include "../topleveldatainformation.h"
 #include "stringdatainformation.h"
 
 #include <abstractbytearraymodel.h>
@@ -37,8 +38,6 @@ Latin1StringData::~Latin1StringData()
 {
 }
 
-
-
 qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining)
 {
     const int oldSize = count();
@@ -48,10 +47,8 @@ qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Add
     }
     if (oldSize != 0)
     {
-        emit mParent->topLevelDataInformation()->
-            _childrenAboutToBeRemoved(mParent, 0, oldSize);
-        emit mParent->topLevelDataInformation()->
-            _childrenRemoved(mParent, 0, oldSize);
+        emit mParent->topLevelDataInformation()->_childrenAboutToBeRemoved(mParent, 0, oldSize);
+        emit mParent->topLevelDataInformation()->_childrenRemoved(mParent, 0, oldSize);
     }
 
     quint64 remaining = bitsRemaining;

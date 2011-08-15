@@ -24,6 +24,7 @@
 
 #include "../structuredefinitionfile.h"
 #include "../datatypes/topleveldatainformation.h"
+#include <QScriptEngine>
 
 ScriptFileParser::ScriptFileParser(const Kasten::StructureDefinitionFile* const def) :
     AbstractStructureParser(def), mParsedCompletely(false)
@@ -42,9 +43,9 @@ QStringList ScriptFileParser::parseStructureNames()
 QList<const TopLevelDataInformation*> ScriptFileParser::parseStructures()
 {
     QList<const TopLevelDataInformation*> ret;
-    TopLevelDataInformation* topData = new TopLevelDataInformation(NULL, QFileInfo(
-            mDef->dir().absoluteFilePath(QLatin1String("main.js"))), true,
-            mDef->pluginInfo().pluginName());
+    TopLevelDataInformation* topData = new TopLevelDataInformation(0,
+            QFileInfo(mDef->dir().absoluteFilePath(QLatin1String("main.js"))),
+            new QScriptEngine(), true, mDef->pluginInfo().pluginName());
     if (topData->wasAbleToParse())
         ret << topData;
     else

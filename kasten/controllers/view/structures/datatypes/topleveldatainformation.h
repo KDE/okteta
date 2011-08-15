@@ -24,6 +24,7 @@
 
 #include <QtCore/QMap>
 #include <QtCore/QFileInfo>
+#include <QtCore/QExplicitlySharedDataPointer>
 
 #include <arraychangemetricslist.h>
 #include "datainformationbase.h"
@@ -47,8 +48,8 @@ public:
      *  @param scriptFile the file which contains the file this object was initialized from
      *  @param dynamic whether the wrapped object is a dynamic structure definition (i.e. one using QtScript)
      */
-    TopLevelDataInformation(DataInformation* data, QFileInfo structureFile,
-            bool dynamic = false, QString name = QString());
+    TopLevelDataInformation(DataInformation* data, QFileInfo structureFile, QScriptEngine* engine,
+            bool needsEval, QString name = QString());
     TopLevelDataInformation(const TopLevelDataInformation& d);
     virtual ~TopLevelDataInformation();
     TopLevelDataInformation* clone() const;
@@ -104,7 +105,7 @@ Q_SIGNALS:
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
     DataInformation* mData;
-    ScriptHandler* mScriptHandler;
+    QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
     QFileInfo mStructureFile;
     /** Save the position this structure is locked to for each ByteArrayModel
      * QObject::destroyed() has to be connected to slot removeByteArrayModel()

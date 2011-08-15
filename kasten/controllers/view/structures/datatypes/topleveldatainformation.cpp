@@ -32,23 +32,24 @@
 #include <QtScript/QScriptEngine>
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
-        QFileInfo structureFile, bool dynamic, QString name) :
+        QFileInfo structureFile, QScriptEngine* engine, bool needsEval, QString name) :
     QObject(), mData(data), mScriptHandler(NULL), mStructureFile(structureFile),
             mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
 {
 
-    if (dynamic)
+    if (engine)
     {
-        //dynamic object -> data is a dummy and must be calculated by the script engine.
-        //TODO temporary
-        mScriptHandler = new ScriptHandler(new QScriptEngine(), structureFile.absoluteFilePath(), name);
-        mData = mScriptHandler->initialDataInformationFromScript();
-        if (!mData)
+        mScriptHandler = new ScriptHandler(engine, structureFile.absoluteFilePath(), name);
+        if (needsEval)
         {
-            //just a dummy, this object should be deleted anyway
-            mData = PrimitiveFactory::newInstance(QLatin1String("failed_to_load__this_is_a_dummy"),
+            mData = mScriptHandler->initialDataInformationFromScript();
+            if (!mData)
+            {
+                //just a dummy, this object should be deleted anyway
+                mData = PrimitiveFactory::newInstance(QLatin1String("failed_to_load__this_is_a_dummy"),
                     Type_Int32, 0);
-            mWasAbleToParse = false;
+                mWasAbleToParse = false;
+            }
         }
     }
     if (!mData)
@@ -57,6 +58,7 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
     setObjectName(mData->name());
     mData->setParent(this);
 }
+
 TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d) :
     QObject(), mData(d.mData->clone()), mScriptHandler(d.mScriptHandler),
             mStructureFile(d.mStructureFile), mWasAbleToParse(d.mWasAbleToParse), mIndex(-1)
@@ -67,12 +69,12 @@ TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& 
 
 TopLevelDataInformation::~TopLevelDataInformation()
 {
+    delete mData;
 }
 
 void TopLevelDataInformation::validate()
 {
-    kDebug()
-        << "validation of structure " << mData->name() << "requested";
+    kDebug() << "validation of structure " << mData->name() << "requested";
     if (mScriptHandler)
     {
         mScriptHandler->validateData(mData);
@@ -83,8 +85,7 @@ void TopLevelDataInformation::validate()
     }
     else
     {
-        kDebug()
-            << "no handler available -> cannot validate structure " << mData->name();
+        kDebug() << "no handler available -> cannot validate structure " << mData->name();
     }
 
 }

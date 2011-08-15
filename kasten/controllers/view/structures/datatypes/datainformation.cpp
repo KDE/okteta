@@ -20,6 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "datainformation.h"
+#include "topleveldatainformation.h"
 
 #include <KLocale>
 #include <KLineEdit>
@@ -243,9 +244,9 @@ DataInformation* DataInformation::child(QString name) const
     return 0;
 }
 
-QPair<DataInformation*, QString> DataInformation::findChildForDynamicArrayLength(const QString& name, int upTo) const
+QPair<DataInformation*, QString> DataInformation::findChildForDynamicArrayLength(const QString& name, uint upTo) const
 {
-    Q_ASSERT(upTo >= 0 && upTo <= childCount());
+    Q_ASSERT(upTo <= childCount());
     for (int i = upTo - 1; i >= 0; --i) {
         DataInformation* current = childAt(i);
         QString start = name;
@@ -273,3 +274,20 @@ QPair<DataInformation*, QString> DataInformation::findChildForDynamicArrayLength
         return QPair<DataInformation*, QString>(0, QString());
 }
 
+TopLevelDataInformation* DataInformation::topLevelDataInformation() const
+{
+    Q_CHECK_PTR(mParent);
+    if (mParent->isTopLevel())
+        return static_cast<TopLevelDataInformation*>(mParent);
+
+    return static_cast<const DataInformation*>(mParent)->topLevelDataInformation();
+}
+
+int DataInformation::row() const
+{
+    Q_CHECK_PTR(mParent);
+    if (mParent->isTopLevel())
+        return static_cast<TopLevelDataInformation*>(mParent)->indexOf(this);
+    else
+        return static_cast<const DataInformation*>(mParent)->indexOf(this);
+}

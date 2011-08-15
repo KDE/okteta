@@ -23,6 +23,7 @@
 
 #include "asciistringdata.h"
 #include "stringdatainformation.h"
+#include "../topleveldatainformation.h"
 
 #include <abstractbytearraymodel.h>
 
@@ -37,8 +38,6 @@ AsciiStringData::~AsciiStringData()
 {
 }
 
-
-
 qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining)
 {
     const int oldSize = count();
@@ -48,10 +47,8 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     }
     if (oldSize != 0)
     {
-        emit mParent->topLevelDataInformation()->
-            _childrenAboutToBeRemoved(mParent, 0, oldSize);
-        emit mParent->topLevelDataInformation()->
-            _childrenRemoved(mParent, 0, oldSize);
+        emit mParent->topLevelDataInformation()->_childrenAboutToBeRemoved(mParent, 0, oldSize);
+        emit mParent->topLevelDataInformation()->_childrenRemoved(mParent, 0, oldSize);
     }
 
 

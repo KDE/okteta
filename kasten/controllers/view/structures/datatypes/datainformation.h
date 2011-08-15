@@ -40,8 +40,6 @@
 //Qt
 #include <QtScript/QScriptValue>
 
-
-#include "topleveldatainformation.h"
 #include "datainformationbase.h"
 
 #define DATAINFORMATION_CLONE(type) virtual inline DataInformation* clone() const {\
@@ -181,7 +179,7 @@ public:
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) = 0;
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
-    QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name, int upTo) const;
+    QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name, uint upTo) const;
 protected:
     /**
      *  the offset of child number @p index compared to the beginning of the structure
@@ -206,16 +204,6 @@ protected:
 
 Q_DECLARE_METATYPE(DataInformation*)
 Q_DECLARE_METATYPE(const DataInformation*)
-
-//inline functions
-inline int DataInformation::row() const
-{
-    Q_CHECK_PTR(mParent);
-    if (mParent->isTopLevel())
-        return static_cast<TopLevelDataInformation*>(mParent)->indexOf(this);
-    else 
-        return static_cast<const DataInformation*>(mParent)->indexOf(this);
-}
 
 inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
 {
@@ -304,15 +292,6 @@ inline void DataInformation::setParent(DataInformationBase* newParent)
 inline DataInformationBase* DataInformation::parent() const
 {
     return mParent;
-}
-
-inline TopLevelDataInformation* DataInformation::topLevelDataInformation() const
-{
-    Q_CHECK_PTR(mParent);
-    if (mParent->isTopLevel())
-        return static_cast<TopLevelDataInformation*>(mParent);
-
-    return static_cast<const DataInformation*>(mParent)->topLevelDataInformation();
 }
 
 #endif /* DATAINFORMATION_H_ */
