@@ -24,7 +24,7 @@
 #include "structtool.h"
 #include "datatypes/datainformationwithchildren.h"
 #include "datatypes/topleveldatainformation.h"
-#include "datatypes/arraydatainformation.h"
+#include "datatypes/array/arraydatainformation.h"
 
 namespace Kasten
 {

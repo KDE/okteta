@@ -22,7 +22,7 @@
 
 #include "osdparser.h"
 
-#include "../datatypes/arraydatainformation.h"
+#include "../datatypes/array/arraydatainformation.h"
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/enumdatainformation.h"

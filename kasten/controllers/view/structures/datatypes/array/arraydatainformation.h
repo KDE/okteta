@@ -22,10 +22,11 @@
 
 #ifndef ARRAYDATAINFORMATION_H_
 #define ARRAYDATAINFORMATION_H_
-#include "datainformationwithchildren.h"
+#include "../datainformationwithchildren.h"
 
 #include <QtScript/QScriptValue>
 
+class AbstractArrayData;
 class ArrayDataInformation : public DataInformationWithChildren
 {
 protected:
@@ -43,7 +44,6 @@ public:
 public:
     virtual QString typeName() const;
     int length() const;
-    const DataInformation* newChildType() const;
 
     virtual QVariant childData(int row, int column, int role) const;
 
@@ -61,11 +61,6 @@ protected:
 inline int ArrayDataInformation::length() const
 {
     return childCount();
-}
-
-inline const DataInformation* ArrayDataInformation::newChildType() const
-{
-    return mChildType;
 }
 
 inline bool ArrayDataInformation::isArray() const

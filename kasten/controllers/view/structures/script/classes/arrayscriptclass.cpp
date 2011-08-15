@@ -22,7 +22,7 @@
 
 
 #include "arrayscriptclass.h"
-#include "../../datatypes/arraydatainformation.h"
+#include "../../datatypes/array/arraydatainformation.h"
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)

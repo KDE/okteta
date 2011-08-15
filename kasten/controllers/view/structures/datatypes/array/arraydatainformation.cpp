@@ -20,10 +20,10 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "arraydatainformation.h"
-#include "primitivefactory.h"
-#include "../script/scriptvalueconverter.h"
-#include "../script/classes/arrayscriptclass.h"
-#include "../script/scripthandlerinfo.h"
+#include "../primitivefactory.h"
+#include "../../script/scriptvalueconverter.h"
+#include "../../script/classes/arrayscriptclass.h"
+#include "../../script/scripthandlerinfo.h"
 
 #include <QtScript/QScriptContext>
 
