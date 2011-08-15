@@ -79,7 +79,6 @@ int OktetaProgram::execute()
 {
     KApplication programCore;
 
-    KGlobal::locale()->insertCatalog( QLatin1String("liboktetacore") );
     KGlobal::locale()->insertCatalog( QLatin1String("libkasten") );
     KGlobal::locale()->insertCatalog( QLatin1String("liboktetakasten") );
 

@@ -39,6 +39,7 @@ set( libpiecetable_SRCS
 set( oktetacore_LIB_SRCS
   ${libcodecs_SRCS}
   ${libpiecetable_SRCS}
+  oktetacore.cpp
   abstractbytearraymodel.cpp
   bytearraymodel_p.cpp
   bytearraymodel.cpp
