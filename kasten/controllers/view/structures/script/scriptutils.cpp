@@ -135,7 +135,7 @@ void ScriptUtils::logScriptError(const QString& message, QScriptValue errorObjec
     }
     else
         emit scriptError(message, errorObject.toString());
-    kDebug() << message;
+    kDebug() << message << ": " << errorObject.toString();
 }
 K_GLOBAL_STATIC(ScriptUtils, scrObj)
 

@@ -135,14 +135,13 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QSt
     return returnVal;
 }
 
-AbstractArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value,
-        QString& name) const
+AbstractArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value, QString& name) const
 {
     //we can safely assume that type == "array"
     int length = value.property(QLatin1String("length")).toInt32();
-    if (length <= 0)
+    if (length < 0)
     {
-        ScriptUtils::object()->logScriptError(QLatin1String("array length <= 0 -> return NULL"));
+        ScriptUtils::object()->logScriptError(QLatin1String("array length < 0 -> return NULL"));
         return NULL;
     }
     QScriptValue childType = value.property(QLatin1String("childType"));
@@ -150,13 +149,10 @@ AbstractArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value
             childType.property(QLatin1String("type")).toString()));
     if (!arrayType)
     {
-        ScriptUtils::object()->logScriptError(
-                QLatin1String("could not parse array type -> return NULL"));
+        ScriptUtils::object()->logScriptError(QLatin1String("could not parse array type -> return NULL"));
         return NULL;
     }
-
     return new StaticLengthArrayDataInformation(name, length, *arrayType);
-
 }
 
 AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
