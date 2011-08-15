@@ -283,7 +283,6 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/datainformationwithchildren.cpp
   view/structures/datatypes/abstractarraydatainformation.cpp
   view/structures/datatypes/staticlengtharraydatainformation.cpp
-  view/structures/datatypes/dynamiclengtharraydatainformation.cpp
   view/structures/datatypes/structuredatainformation.cpp
   view/structures/datatypes/uniondatainformation.cpp
   view/structures/datatypes/primitive/chardatainformation.cpp

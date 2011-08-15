@@ -23,7 +23,6 @@
 #include "osdparser.h"
 
 #include "../datatypes/staticlengtharraydatainformation.h"
-#include "../datatypes/dynamiclengtharraydatainformation.h"
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/enumdatainformation.h"
