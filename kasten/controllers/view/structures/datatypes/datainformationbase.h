@@ -29,6 +29,7 @@ public:
     virtual ~DataInformationBase();
     virtual bool isTopLevel() const = 0;
     virtual bool isArray() const;
+    virtual bool isPrimitive() const;
     virtual bool isDummy() const;
 };
 

@@ -50,6 +50,8 @@ public:
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+
+    virtual bool isPrimitive() const;
 protected:
     virtual quint64 offset(unsigned int index) const;
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
@@ -59,6 +61,11 @@ inline quint64 PrimitiveDataInformation::offset(unsigned int index) const
 {
     Q_UNUSED(index)
     return 0;
+}
+
+inline bool PrimitiveDataInformation::isPrimitive() const
+{
+    return true;
 }
 
 #define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \

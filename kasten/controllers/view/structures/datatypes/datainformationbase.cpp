@@ -40,3 +40,8 @@ bool DataInformationBase::isDummy() const
 {
     return false;
 }
+
+bool DataInformationBase::isPrimitive() const
+{
+    return false;
+}
