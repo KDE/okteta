@@ -22,7 +22,7 @@
 
 #include "osdparser.h"
 
-#include "../datatypes/staticlengtharraydatainformation.h"
+#include "../datatypes/arraydatainformation.h"
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/enumdatainformation.h"
@@ -179,7 +179,7 @@ void OsdParser::parseEnums()
 
 //Datatypes
 
-AbstractArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const DataInformation* parent)
+ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const DataInformation* parent)
 {
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     QDomNode node = xmlElem.firstChild();
@@ -195,7 +195,7 @@ AbstractArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem
         kWarning() << name << ": no length attribute defined";
         return 0;
     }
-    AbstractArrayDataInformation* retVal;
+    ArrayDataInformation* retVal;
     bool okay = true;
     int length = lengthStr.toInt(&okay, 10);
     if (!okay)
@@ -236,7 +236,7 @@ AbstractArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem
             kDebug() << name << ": update var = " << tmp.second;
             access = tmp.second;
         }
-        retVal = new StaticLengthArrayDataInformation(name, 0, *subElem);
+        retVal = new ArrayDataInformation(name, 0, *subElem);
         if (!mEngine)
             mEngine = new QScriptEngine();
         QString script(QLatin1String("x = function() { this.length = this.parent.")
@@ -248,7 +248,7 @@ AbstractArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem
     }
     else if (length >= 0)
     {
-        retVal = new StaticLengthArrayDataInformation(name, length, *subElem);
+        retVal = new ArrayDataInformation(name, length, *subElem);
     }
     else
     {
@@ -272,8 +272,7 @@ PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem
 
 AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& xmlElem)
 {
-    kDebug()
-        << "loading bitfield";
+    kDebug() << "loading bitfield";
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     QString typeStr = xmlElem.attribute(QLatin1String("type"), QString());
     QString widthStr = xmlElem.attribute(QLatin1String("width"), QString());

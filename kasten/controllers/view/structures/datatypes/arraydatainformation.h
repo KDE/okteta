@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -20,25 +20,26 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ABSTRACTARRAYDATAINFORMATION_H_
-#define ABSTRACTARRAYDATAINFORMATION_H_
+#ifndef ARRAYDATAINFORMATION_H_
+#define ARRAYDATAINFORMATION_H_
 #include "datainformationwithchildren.h"
 
 #include <QtScript/QScriptValue>
 
-class AbstractArrayDataInformation: public DataInformationWithChildren
+class ArrayDataInformation : public DataInformationWithChildren
 {
 protected:
-    explicit AbstractArrayDataInformation(const AbstractArrayDataInformation& d);
+    explicit ArrayDataInformation(const ArrayDataInformation& d);
 public:
     /** creates a new array with static length.
      *  children is used as the base type of the array and is cloned length times.
      *
      *  length should be > 0
      */
-    explicit AbstractArrayDataInformation(QString name,
-            const DataInformation& childType, uint length, DataInformation* parent = NULL);
-    virtual ~AbstractArrayDataInformation();
+    ArrayDataInformation(QString name, uint length, const DataInformation& childType, DataInformation* parent = 0);
+    virtual ~ArrayDataInformation();
+    DATAINFORMATION_CLONE(Array)
+
 public:
     virtual QString typeName() const;
     int length() const;
@@ -57,19 +58,19 @@ protected:
     DataInformation* mChildType;
 };
 
-inline int AbstractArrayDataInformation::length() const
+inline int ArrayDataInformation::length() const
 {
     return childCount();
 }
 
-inline const DataInformation* AbstractArrayDataInformation::newChildType() const
+inline const DataInformation* ArrayDataInformation::newChildType() const
 {
     return mChildType;
 }
 
-inline bool AbstractArrayDataInformation::isArray() const
+inline bool ArrayDataInformation::isArray() const
 {
     return true;
 }
 
-#endif /* ABSTRACTARRAYDATAINFORMATION_H_ */
+#endif /* ARRAYDATAINFORMATION_H_ */

@@ -28,7 +28,7 @@
 #include <QtCore/QString>
 
 class DataInformation;
-class AbstractArrayDataInformation;
+class ArrayDataInformation;
 class PrimitiveDataInformation;
 class AbstractBitfieldDataInformation;
 class StructureDataInformation;
@@ -52,7 +52,7 @@ private:
 private:
     DataInformation* toDataInformation(QScriptValue value, QString name) const;
 
-    AbstractArrayDataInformation* toArray(QScriptValue& value, QString& name) const;
+    ArrayDataInformation* toArray(QScriptValue& value, QString& name) const;
     AbstractBitfieldDataInformation* toBitfield(QScriptValue& value, QString& name) const;
     PrimitiveDataInformation* toPrimitive(QScriptValue& value, QString& name) const;
     StructureDataInformation* toStruct(QScriptValue& value, QString& name) const;

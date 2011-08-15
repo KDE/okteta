@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -27,7 +27,7 @@
 #include <QtScript/QScriptValueIterator>
 #include <QtCore/QScopedPointer>
 
-#include "../datatypes/staticlengtharraydatainformation.h"
+#include "../datatypes/arraydatainformation.h"
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/enumdatainformation.h"
@@ -135,7 +135,7 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QSt
     return returnVal;
 }
 
-AbstractArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value, QString& name) const
+ArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value, QString& name) const
 {
     //we can safely assume that type == "array"
     int length = value.property(QLatin1String("length")).toInt32();
@@ -152,7 +152,7 @@ AbstractArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value
         ScriptUtils::object()->logScriptError(QLatin1String("could not parse array type -> return NULL"));
         return NULL;
     }
-    return new StaticLengthArrayDataInformation(name, length, *arrayType);
+    return new ArrayDataInformation(name, length, *arrayType);
 }
 
 AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(

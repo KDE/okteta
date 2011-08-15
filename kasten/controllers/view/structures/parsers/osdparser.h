@@ -31,7 +31,7 @@
 #include "abstractstructureparser.h"
 
 class StringDataInformation;
-class AbstractArrayDataInformation;
+class ArrayDataInformation;
 class AbstractBitfieldDataInformation;
 class EnumDataInformation;
 class DataInformation;
@@ -63,7 +63,7 @@ private:
     StringDataInformation* stringFromXML(const QDomElement& node);
     UnionDataInformation* unionFromXML(const QDomElement& xmlElem);
     StructureDataInformation* structFromXML(const QDomElement& xmlElem);
-    AbstractArrayDataInformation* arrayFromXML(const QDomElement& node, const DataInformation* parent);
+    ArrayDataInformation* arrayFromXML(const QDomElement& node, const DataInformation* parent);
 
     DataInformation* parseNode(const QDomNode& node, const DataInformation* parent);
     EnumDefinition::Ptr findEnum(const QString& defName);

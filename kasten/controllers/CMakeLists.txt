@@ -281,8 +281,7 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/datainformationbase.cpp
   view/structures/datatypes/dummydatainformation.cpp
   view/structures/datatypes/datainformationwithchildren.cpp
-  view/structures/datatypes/abstractarraydatainformation.cpp
-  view/structures/datatypes/staticlengtharraydatainformation.cpp
+  view/structures/datatypes/arraydatainformation.cpp
   view/structures/datatypes/structuredatainformation.cpp
   view/structures/datatypes/uniondatainformation.cpp
   view/structures/datatypes/primitive/chardatainformation.cpp

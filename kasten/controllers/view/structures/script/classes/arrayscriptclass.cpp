@@ -22,7 +22,7 @@
 
 
 #include "arrayscriptclass.h"
-#include "../../datatypes/abstractarraydatainformation.h"
+#include "../../datatypes/arraydatainformation.h"
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
@@ -80,9 +80,9 @@ bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, cons
 
 QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
-    const AbstractArrayDataInformation* aData = static_cast<const AbstractArrayDataInformation*>(data);
+    const ArrayDataInformation* aData = static_cast<const ArrayDataInformation*>(data);
     //do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<const AbstractArrayDataInformation*>(data));
+    Q_CHECK_PTR(dynamic_cast<const ArrayDataInformation*>(data));
 
     if (id != 0)
     {
@@ -107,9 +107,9 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
 
 bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
-    AbstractArrayDataInformation* aData = static_cast<AbstractArrayDataInformation*>(data);
+    ArrayDataInformation* aData = static_cast<ArrayDataInformation*>(data);
     //do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<AbstractArrayDataInformation*>(data));
+    Q_CHECK_PTR(dynamic_cast<ArrayDataInformation*>(data));
 
     if (name == length)
     {

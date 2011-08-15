@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -24,7 +24,7 @@
 #include "structtool.h"
 #include "datatypes/datainformationwithchildren.h"
 #include "datatypes/topleveldatainformation.h"
-#include "datatypes/abstractarraydatainformation.h"
+#include "datatypes/arraydatainformation.h"
 
 namespace Kasten
 {
@@ -124,8 +124,8 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
     }
     if (item->parent()->isArray())
     {
-        AbstractArrayDataInformation* array = static_cast<AbstractArrayDataInformation*>(item->parent());
-        Q_CHECK_PTR(dynamic_cast<AbstractArrayDataInformation*>(item->parent()));
+        ArrayDataInformation* array = static_cast<ArrayDataInformation*>(item->parent());
+        Q_CHECK_PTR(dynamic_cast<ArrayDataInformation*>(item->parent()));
         return array->childData(index.row(), column, role);
     }
     else if (item->isDummy())

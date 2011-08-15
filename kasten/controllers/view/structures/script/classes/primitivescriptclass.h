@@ -26,13 +26,13 @@
 
 #include "defaultscriptclass.h"
 
-class AbstractArrayDataInformation;
+class ArrayDataInformation;
 
 class PrimitiveScriptClass : public DefaultScriptClass
 {
     Q_DISABLE_COPY(PrimitiveScriptClass)
 public:
-    typedef AbstractArrayDataInformation* ArrayDataInfPtr;
+    typedef ArrayDataInformation* ArrayDataInfPtr;
 
     PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual ~PrimitiveScriptClass();

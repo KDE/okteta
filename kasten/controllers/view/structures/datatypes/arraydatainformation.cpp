@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#include "abstractarraydatainformation.h"
+#include "arraydatainformation.h"
 #include "primitivefactory.h"
 #include "../script/scriptvalueconverter.h"
 #include "../script/classes/arrayscriptclass.h"
@@ -27,7 +27,7 @@
 
 #include <QtScript/QScriptContext>
 
-QString AbstractArrayDataInformation::typeName() const
+QString ArrayDataInformation::typeName() const
 {
     if (!hasChildren())
         return i18n("Empty array");
@@ -43,9 +43,8 @@ QString AbstractArrayDataInformation::typeName() const
             data->name(), childCount(), data->typeName());
 }
 
-AbstractArrayDataInformation::AbstractArrayDataInformation(QString name,
-        const DataInformation& childType, uint length, DataInformation* parent) :
-    DataInformationWithChildren(name, parent), mChildType(0)
+ArrayDataInformation::ArrayDataInformation(QString name, uint length, const DataInformation& childType,
+        DataInformation* parent) : DataInformationWithChildren(name, parent), mChildType(0)
 {
     mChildType = childType.clone();
     mChildType->setParent(this);
@@ -56,8 +55,8 @@ AbstractArrayDataInformation::AbstractArrayDataInformation(QString name,
     }
 }
 
-AbstractArrayDataInformation::AbstractArrayDataInformation(
-        const AbstractArrayDataInformation& d) :
+ArrayDataInformation::ArrayDataInformation(
+        const ArrayDataInformation& d) :
     DataInformationWithChildren(d), mChildType(0)
 {
     if (d.mChildType)
@@ -65,7 +64,7 @@ AbstractArrayDataInformation::AbstractArrayDataInformation(
     mChildType->setParent(this);
 }
 
-QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength, QScriptContext* context)
+QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext* context)
 {
     //kDebug() << "old child count: " << childCount();
 
@@ -104,7 +103,7 @@ QScriptValue AbstractArrayDataInformation::setArrayLength(int newLength, QScript
     return true; //success
 }
 
-QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type, QScriptContext* context)
+QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContext* context)
 {
     DataInformation* newChildType = NULL;
 
@@ -152,18 +151,18 @@ QScriptValue AbstractArrayDataInformation::setArrayType(QScriptValue type, QScri
     return true; //success
 }
 
-QScriptValue AbstractArrayDataInformation::childType() const
+QScriptValue ArrayDataInformation::childType() const
 {
     if (mChildType)
         return mChildType->typeName().toLower();
     return QString();
 }
 
-AbstractArrayDataInformation::~AbstractArrayDataInformation()
+ArrayDataInformation::~ArrayDataInformation()
 {
 }
 
-QVariant AbstractArrayDataInformation::childData(int row, int column, int role) const
+QVariant ArrayDataInformation::childData(int row, int column, int role) const
 {
     Q_ASSERT(row >= 0 && row < mChildren.size());
     if (column == 0 && role == Qt::DisplayRole)
@@ -178,7 +177,7 @@ QVariant AbstractArrayDataInformation::childData(int row, int column, int role) 
     }
 }
 
-QScriptValue AbstractArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+QScriptValue ArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
     QScriptValue ret = engine->newObject(handlerInfo->mArrayClass);
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
