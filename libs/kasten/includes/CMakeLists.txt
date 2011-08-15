@@ -83,6 +83,8 @@ set( kastengui_CamelCase_HDRS
   ViewManager
   ModelCodecViewManager
 
+  DialogHandler
+
   AbstractDocumentStrategy
   MultiDocumentStrategy
   SingleDocumentStrategy
