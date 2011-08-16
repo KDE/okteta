@@ -22,10 +22,6 @@
 
 #include "primitivefactory.h"
 
-#include "primitive/bool8datainformation.h"
-#include "primitive/bool16datainformation.h"
-#include "primitive/bool32datainformation.h"
-#include "primitive/bool64datainformation.h"
 #include "primitive/chardatainformation.h"
 #include "primitive/doubledatainformation.h"
 #include "primitive/floatdatainformation.h"
@@ -34,6 +30,7 @@
 #include "primitive/int32datainformation.h"
 #include "primitive/int64datainformation.h"
 #include "primitive/uintdatainformation.h"
+#include "primitive/booldatainformation.h"
 
 PrimitiveDataType PrimitiveFactory::typeStringToType(QString& string)
 {
@@ -98,13 +95,13 @@ PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
     case Type_UInt64:
         return new UIntDataInformation<quint64, Type_UInt64>(name, parent);
     case Type_Bool8:
-        return new Bool8DataInformation(name, parent);
+        return new BoolDataInformation<quint8, Type_Bool8>(name, parent);
     case Type_Bool16:
-        return new Bool16DataInformation(name, parent);
+        return new BoolDataInformation<quint16, Type_Bool16>(name, parent);
     case Type_Bool32:
-        return new Bool32DataInformation(name, parent);
+        return new BoolDataInformation<quint32, Type_Bool32>(name, parent);
     case Type_Bool64:
-        return new Bool64DataInformation(name, parent);
+        return new BoolDataInformation<quint64, Type_Bool64>(name, parent);
     case Type_Float:
         return new FloatDataInformation(name, parent);
     case Type_Double:
