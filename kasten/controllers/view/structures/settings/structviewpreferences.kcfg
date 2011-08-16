@@ -40,6 +40,10 @@
       <tooltip context="@info:tooltip">Whether to format floating point values according to the current locale</tooltip>
       <default>false</default>
     </entry>
+    <entry name="ShortTypeNames" type="Bool">
+      <tooltip context="@info:tooltip">Whether to use short type names (i.e. uint32 instead of unsigned int)</tooltip>
+      <default>true</default>
+    </entry>
     <entry name="LocaleAwareDecimalFormatting" type="Bool">
       <tooltip context="@info:tooltip">If true, integers being displayed in decimal format will be formatted according to the current locale settings</tooltip>
       <whatsthis>Whether to format integer values according to the current locale</whatsthis>
