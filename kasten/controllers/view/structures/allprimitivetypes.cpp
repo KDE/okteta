@@ -27,6 +27,45 @@ compile_time_assert(sizeof(double) == 8);
 compile_time_assert(sizeof(float) == 4);
 compile_time_assert(sizeof(AllPrimitiveTypes) == 8);
 
+const char* PrimitiveType::longTypeNames[] = {
+    I18N_NOOP2("data type", "bool (1 byte)"),
+    I18N_NOOP2("data type", "signed byte"),
+    I18N_NOOP2("data type", "unsigned byte"),
+    I18N_NOOP2("data type", "char"),
+    I18N_NOOP2("data type", "bool (2 bytes)"),
+    I18N_NOOP2("data type", "signed short"),
+    I18N_NOOP2("data type", "unsigned short"),
+    I18N_NOOP2("data type", "bool (4 bytes)"),
+    I18N_NOOP2("data type", "signed int"),
+    I18N_NOOP2("data type", "unsigned int"),
+    I18N_NOOP2("data type", "bool (8 bytes)"),
+    I18N_NOOP2("data type", "signed long"),
+    I18N_NOOP2("data type", "unsigned long"),
+    I18N_NOOP2("data type", "float"),
+    I18N_NOOP2("data type", "double"),
+    I18N_NOOP2("data type", "bitfield"),
+};
+
+//TODO add i18n_noop? probably not necessary, since these are not really translatable
+const QLatin1String PrimitiveType::typeNames[] = {
+    QLatin1String("bool8"),
+    QLatin1String("int8"),
+    QLatin1String("uint8"),
+    QLatin1String("char"),
+    QLatin1String("bool16"),
+    QLatin1String("int16"),
+    QLatin1String("uint16"),
+    QLatin1String("bool32"),
+    QLatin1String("int32"),
+    QLatin1String("uint32"),
+    QLatin1String("bool64"),
+    QLatin1String("int64"),
+    QLatin1String("uint64"),
+    QLatin1String("float"),
+    QLatin1String("double"),
+    QLatin1String("bitfield"),
+};
+
 //FIXME this code really needs unit tests!
 //TODO optimised methods for *bitOffset == 0 && bitCount % 8 == 0
 

@@ -104,5 +104,8 @@ QScriptValue PrimitiveDataInformation::toScriptValue(QScriptEngine* engine, Scri
 QString PrimitiveDataInformation::typeName(PrimitiveDataType type) const
 {
     Q_ASSERT(type >= Type_START && type <= Type_END);
-    return i18n(primitiveTypeNames[type].latin1());
+
+    return i18n(PrimitiveType::longTypeNames[type]);
+    //TODO add option to chose this
+    //return PrimitiveType::typeNames[type];
 }

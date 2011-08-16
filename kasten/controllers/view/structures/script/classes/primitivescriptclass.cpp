@@ -109,7 +109,7 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
     {
         //bitfields are handled by own scriptclass and NotPrimitive indicates an error
         Q_ASSERT(pData->type() != Type_Bitfield && pData->type() != Type_NotPrimitive);
-        return primitiveTypeNames[pData->type()];
+        return PrimitiveType::typeNames[pData->type()];
     }
     else {
         AllPrimitiveTypes value = pData->value();

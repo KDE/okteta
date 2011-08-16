@@ -40,9 +40,9 @@ typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
 #define compile_time_assert(e) extern char (*ct_assert(void)) [sizeof(char[1 - 2*!(e)])]
 
-//TODO remove sometime
 enum PrimitiveDataType
 {
+//!!! DO NOT CHANGE ORDER OF ITEMS !!!
     Type_NotPrimitive = -1,
     Type_START = 0,
     Type_Bool8 = 0,
@@ -64,24 +64,9 @@ enum PrimitiveDataType
     Type_END = Type_Bitfield
 };
 
-//TODO add i18n_noop? probably not necessary, since these are not really translatable
-const QLatin1String primitiveTypeNames[] = {
-    QLatin1String("bool8"),
-    QLatin1String("int8"),
-    QLatin1String("uint8"),
-    QLatin1String("char"),
-    QLatin1String("bool16"),
-    QLatin1String("int16"),
-    QLatin1String("uint16"),
-    QLatin1String("bool32"),
-    QLatin1String("int32"),
-    QLatin1String("uint32"),
-    QLatin1String("bool64"),
-    QLatin1String("int64"),
-    QLatin1String("uint64"),
-    QLatin1String("float"),
-    QLatin1String("double"),
-    QLatin1String("bitfield"),
+struct PrimitiveType {
+    static const QLatin1String typeNames[Type_END + 1];
+    static const char* longTypeNames[Type_END + 1];
 };
 
 /** This union holds the value of one primitive datatype. Maximum size of a datatype is currently 64 bits.
