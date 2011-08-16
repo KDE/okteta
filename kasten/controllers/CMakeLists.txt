@@ -295,10 +295,6 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/primitive/int16datainformation.cpp
   view/structures/datatypes/primitive/int32datainformation.cpp
   view/structures/datatypes/primitive/int64datainformation.cpp
-  view/structures/datatypes/primitive/uint8datainformation.cpp
-  view/structures/datatypes/primitive/uint16datainformation.cpp
-  view/structures/datatypes/primitive/uint32datainformation.cpp
-  view/structures/datatypes/primitive/uint64datainformation.cpp
   view/structures/datatypes/primitive/primitivedatainformation.cpp
   view/structures/datatypes/primitive/signedprimitivedatainformation.cpp
   view/structures/datatypes/primitive/unsignedprimitivedatainformation.cpp
