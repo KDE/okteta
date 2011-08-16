@@ -21,58 +21,50 @@
  */
 #include "arraydatainformation.h"
 #include "../primitivefactory.h"
+#include "../dummydatainformation.h"
 #include "../../script/scriptvalueconverter.h"
 #include "../../script/classes/arrayscriptclass.h"
 #include "../../script/scripthandlerinfo.h"
 
 #include <QtScript/QScriptContext>
+#include "complexarraydata.h"
 
-QString ArrayDataInformation::typeName() const
+ArrayDataInformation::ArrayDataInformation(QString name, uint length, DataInformation* childType,
+        DataInformation* parent) : DataInformation(name, parent), mData(0)
 {
-    if (!hasChildren())
-        return i18n("Empty array");
-
-    DataInformation* data = childAt(0);
-    if (dynamic_cast<PrimitiveDataInformation*> (data))
+    if (length > MAX_LEN)
     {
-        //don't show name of child
-        return i18nc("array type then length", "%1[%2]", data->typeName(),
-                childCount());
+        kWarning() << "array " << name << ": " << length << "exceeds maximum length of " << MAX_LEN;
+        length = MAX_LEN;
     }
-    return i18nc("subelem type then array name and length", "%1[%2] (%3)",
-            data->name(), childCount(), data->typeName());
+    childType->setParent(this);
+    mData = new ComplexArrayData(length, childType, this);
 }
 
-ArrayDataInformation::ArrayDataInformation(QString name, uint length, const DataInformation& childType,
-        DataInformation* parent) : DataInformationWithChildren(name, parent), mChildType(0)
+ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d) :
+    DataInformation(d), mData(0)
 {
-    mChildType = childType.clone();
-    mChildType->setParent(this);
-    for (unsigned int i = 0; i < length; i++)
+    if (d.mData)
     {
-        DataInformation* arrayElem = childType.clone();
-        appendChild(arrayElem);
+        mData = d.mData->clone();
+        mData->setParent(this);
     }
 }
 
-ArrayDataInformation::ArrayDataInformation(
-        const ArrayDataInformation& d) :
-    DataInformationWithChildren(d), mChildType(0)
+ArrayDataInformation::~ArrayDataInformation()
 {
-    if (d.mChildType)
-        mChildType = d.mChildType->clone();
-    mChildType->setParent(this);
+    delete mData;
 }
 
 QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext* context)
 {
-    //kDebug() << "old child count: " << childCount();
+    kDebug() << "old child count: " << childCount();
 
-    //arrays with length zero are useless -> minimum is 1 (prevents integer underflow later
+    //arrays with length zero are useless -> minimum is 0
     if (newLength < 0)
         return context ? context->throwError(QLatin1String("new Array length is less than zero: ")
             + QString::number(newLength)) : QScriptValue();
-    if (newLength > 100000)
+    if (uint(newLength) > MAX_LEN)
     {
         kWarning() << "attempting to set the length of the array" << name() << "to "
                 << newLength << " which would use too much memory";
@@ -80,45 +72,14 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
         return context ? context->throwError(QLatin1String("new Array length is to large: ")
                 + QString::number(newLength)) : QScriptValue();
     }
-    int oldLength = childCount();
-    if (newLength > oldLength)
-    {
-        topLevelDataInformation()->_childrenAboutToBeInserted(this, oldLength, newLength - 1);
-        for (int i = oldLength; i < newLength; ++i)
-        {
-            DataInformation* arrayElem = mChildType->clone();
-            appendChild(arrayElem);
-        }
-        topLevelDataInformation()->_childrenInserted(this, oldLength, newLength - 1);
-    }
-    else if (newLength < oldLength) //XXX maybe keep some cached
-    {
-        topLevelDataInformation()->_childrenAboutToBeRemoved(this, newLength, oldLength - 1);
-        for (int i = newLength; i != mChildren.length();)
-        {
-            delete mChildren.takeAt(i);
-        }
-        topLevelDataInformation()->_childrenRemoved(this, newLength, oldLength - 1);
-    }
-    return true; //success
+    mData->setLength(newLength);
+    return true;
 }
 
 QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContext* context)
 {
-    DataInformation* newChildType = NULL;
-
-    //allow type just being a string (it must be a primitive type string)
-    if (type.isString())
-    {
-        newChildType = PrimitiveFactory::newInstance(QLatin1String("dummy"), type.toString());
-    }
-
-    //now just use ScriptValueConverter to see if type is a valid object
-    else
-    {
-        ScriptValueConverter conv(type, QLatin1String("dummy"));
-        newChildType = conv.convert();
-    }
+    ScriptValueConverter conv(type, QLatin1String("dummy"));
+    DataInformation* newChildType = conv.convert();
     //return if conversion failed
     if (!newChildType)
     {
@@ -128,52 +89,30 @@ QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContex
         else
             return QScriptValue();
     }
-    //TODO optimize by checking if newChildType is the same as old child type (only for primitives)
     //childType is valid -> begin changing the children to the new type
-    uint len = childCount();
-    if (len == 0)
-        return true; //do nothing, prevent integer underflow
-    topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, len - 1);
-    qDeleteAll(mChildren);
-    mChildren.clear(); //qDeleteAll only uses delete operator, we have to remove from list manually
-    topLevelDataInformation()->_childrenRemoved(this, 0, len - 1);
-
-    mChildType = newChildType;
-    mChildType->setParent(this);
-
-    topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, len - 1);
-    for (uint i = 0; i < len; i++)
-    {
-        DataInformation* arrayElem = newChildType->clone();
-        appendChild(arrayElem);
-    }
-    topLevelDataInformation()->_childrenInserted(this, 0, len - 1);
+    mData->setChildType(newChildType);
     return true; //success
 }
 
 QScriptValue ArrayDataInformation::childType() const
 {
-    if (mChildType)
-        return mChildType->typeName().toLower();
+    if (mData)
+        return mData->strictTypeName().toLower();
     return QString();
-}
-
-ArrayDataInformation::~ArrayDataInformation()
-{
 }
 
 QVariant ArrayDataInformation::childData(int row, int column, int role) const
 {
-    Q_ASSERT(row >= 0 && row < mChildren.size());
+    Q_ASSERT(uint(row) < mData->length());
     if (column == 0 && role == Qt::DisplayRole)
     {
-        //name is asked for 
+        //name is being asked for 
         return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
     }
     else 
     {
         //just delegate to child
-        return mChildren.at(row)->data(column, role);
+        return mData->dataAt(row, column, role);
     }
 }
 
@@ -182,4 +121,38 @@ QScriptValue ArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHa
     QScriptValue ret = engine->newObject(handlerInfo->mArrayClass);
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
+}
+
+QWidget* ArrayDataInformation::createEditWidget(QWidget* parent) const
+{
+    Q_ASSERT_X(false, "ArrayDataInformation::createEditWidget", "this should never happen!");
+    return 0;
+}
+
+QVariant ArrayDataInformation::dataFromWidget(const QWidget* w) const
+{
+    Q_ASSERT_X(false, "ArrayDataInformation::dataFromWidget", "this should never happen!");
+    return QVariant();
+}
+
+void ArrayDataInformation::setWidgetData(QWidget* w) const
+{
+    Q_ASSERT_X(false, "ArrayDataInformation::setWidgetData", "this should never happen!");
+}
+
+quint64 ArrayDataInformation::offset(unsigned int index) const
+{
+    return mData->offset(index);
+}
+
+qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+{
+    qint64 ret = mData->readData(input, address, bitsRemaining, bitOffset);
+    mWasAbleToRead = ret > 0; //if ret is -1 reading failed
+    return ret;
+}
+
+bool ArrayDataInformation::setData(const QVariant& value, DataInformation* inf, Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+{
+    return mData->setData(value, inf, input, address, bitsRemaining, bitOffset);
 }

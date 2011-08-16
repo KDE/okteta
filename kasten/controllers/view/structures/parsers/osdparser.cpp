@@ -183,12 +183,6 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
 {
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     QDomNode node = xmlElem.firstChild();
-    QScopedPointer<DataInformation> subElem(parseNode(node, parent));
-    if (!subElem)
-    {
-        kWarning() << name << ": could not parse subelement type";
-        return NULL;
-    }
     QString lengthStr = xmlElem.attribute(QLatin1String("length"));
     if (lengthStr.isNull())
     {
@@ -196,10 +190,17 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
         return 0;
     }
     ArrayDataInformation* retVal;
+    QScriptValue updateFunc;
     bool okay = true;
     int length = lengthStr.toInt(&okay, 10);
+    if (length < 0)
+    {
+        kWarning() << "parsing "<< name << ": length is < 0 (" << length << ")";
+        return 0;
+    }
     if (!okay)
     {
+        length = 0;
         QString access;
         kDebug() << "error parsing length string -> is dynamic length array. Length string=" << lengthStr;
         //we have to find an element that matches the element passed in lengthStr
@@ -236,25 +237,24 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
             kDebug() << name << ": update var = " << tmp.second;
             access = tmp.second;
         }
-        retVal = new ArrayDataInformation(name, 0, *subElem);
         if (!mEngine)
             mEngine = new QScriptEngine();
         QString script(QLatin1String("x = function() { this.length = this.parent.")
             + access + QLatin1String(";}"));
-        QScriptValue updateFunc = mEngine->evaluate(script);
-        kDebug() << "update func = :" << script;
+        updateFunc = mEngine->evaluate(script);
+        //kDebug() << "update func = :" << script;
         Q_ASSERT(updateFunc.isFunction());
-        retVal->setAdditionalData(new AdditionalData(QScriptValue(), updateFunc));
+        //parse subelement
     }
-    else if (length >= 0)
+    DataInformation* subElem = parseNode(node, parent);
+    if (!subElem)
     {
-        retVal = new ArrayDataInformation(name, length, *subElem);
-    }
-    else
-    {
-        kWarning() << "invalid length string:" << lengthStr;
+        kWarning() << name << ": could not parse subelement type";
         return 0;
     }
+    retVal = new ArrayDataInformation(name, length, subElem);
+    if (updateFunc.isValid())
+        retVal->setAdditionalData(new AdditionalData(QScriptValue(), updateFunc));
     return retVal;
 }
 

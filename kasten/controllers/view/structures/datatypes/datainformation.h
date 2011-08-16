@@ -191,7 +191,7 @@ protected:
     /**
      * Find the index of a DataInformation in this object, needed to calculate the row
      */
-    virtual int indexOf(const DataInformation* const data) const;
+    virtual int indexOf(const DataInformation* const data) const; //TODO make this pure virtual
 protected:
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;

@@ -56,7 +56,6 @@ bool DataInformationWithChildren::setData(const QVariant& value,
     uint readBytes = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
-
         if (mChildren[i]->setData(value, inf, out, address + readBytes,
                 bitsRemaining - readBits, bitOffset))
             return true; //found -> done job
@@ -97,14 +96,13 @@ DataInformationWithChildren::~DataInformationWithChildren()
     qDeleteAll(mChildren);
 }
 
-DataInformationWithChildren::DataInformationWithChildren(QString& name, DataInformation* parent) :
-    DataInformation(name, parent)
+DataInformationWithChildren::DataInformationWithChildren(QString& name, DataInformation* parent)
+    : DataInformation(name, parent)
 {
 }
 
-DataInformationWithChildren::DataInformationWithChildren(
-        const DataInformationWithChildren& d) :
-    DataInformation(d)
+DataInformationWithChildren::DataInformationWithChildren(const DataInformationWithChildren& d)
+        : DataInformation(d)
 {
     int count = d.mChildren.count();
     mChildren.reserve(count);
@@ -280,3 +278,4 @@ QString DataInformationWithChildren::tooltipString() const
                      childCount(), name(), valueString(), typeName(), sizeString());
     }
 }
+

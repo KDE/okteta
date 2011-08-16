@@ -145,14 +145,14 @@ ArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value, QStrin
         return NULL;
     }
     QScriptValue childType = value.property(QLatin1String("childType"));
-    QScopedPointer<DataInformation> arrayType(toDataInformation(childType,
-            childType.property(QLatin1String("type")).toString()));
+    DataInformation* arrayType = toDataInformation(childType,
+            childType.property(QLatin1String("name")).toString());
     if (!arrayType)
     {
         ScriptUtils::object()->logScriptError(QLatin1String("could not parse array type -> return NULL"));
-        return NULL;
+        return 0;
     }
-    return new ArrayDataInformation(name, length, *arrayType);
+    return new ArrayDataInformation(name, length, arrayType);
 }
 
 AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(

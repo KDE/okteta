@@ -94,8 +94,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
             return engine()->undefinedValue();
         else
         {
-            Q_CHECK_PTR(data->childAt(pos));
-            return data->childAt(pos)->toScriptValue(engine(), mHandlerInfo);
+            return aData->childToScriptValue(pos, engine(), mHandlerInfo);
         }
     }
     else if (name == length)

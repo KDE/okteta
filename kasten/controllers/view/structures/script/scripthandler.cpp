@@ -195,8 +195,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         }
         if (mEngine->hasUncaughtException())
         {
-            ScriptUtils::object()->logScriptError(
-                    mEngine->uncaughtExceptionBacktrace());
+            ScriptUtils::object()->logScriptError(mEngine->uncaughtExceptionBacktrace());
             ScriptUtils::object()->logScriptError(QLatin1String("error occurred while "
                 "updating element ") + data->name(), result);
         }

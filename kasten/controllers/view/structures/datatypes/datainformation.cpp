@@ -150,7 +150,7 @@ void DataInformation::beginRead()
 int DataInformation::indexOf(const DataInformation* const data) const
 {
     Q_UNUSED(data)
-    Q_ASSERT(false); //this should never happen!
+    Q_ASSERT_X(false, "indexOf", "this should never happen!");
     return 0;
 }
 

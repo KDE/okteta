@@ -22,50 +22,107 @@
 
 #ifndef ARRAYDATAINFORMATION_H_
 #define ARRAYDATAINFORMATION_H_
-#include "../datainformationwithchildren.h"
+#include "../datainformation.h"
+#include "abstractarraydata.h"
 
 #include <QtScript/QScriptValue>
 
+class DummyDataInformation;
 class AbstractArrayData;
-class ArrayDataInformation : public DataInformationWithChildren
+class ArrayDataInformation : public DataInformation
 {
 protected:
     explicit ArrayDataInformation(const ArrayDataInformation& d);
 public:
-    /** creates a new array with static length.
-     *  children is used as the base type of the array and is cloned length times.
-     *
+    /** creates a new array with initial length @p length.
+     *  takes ownership over @p childType
      *  length should be > 0
      */
-    ArrayDataInformation(QString name, uint length, const DataInformation& childType, DataInformation* parent = 0);
+    ArrayDataInformation(QString name, uint length, DataInformation* childType,
+            DataInformation* parent = 0);
     virtual ~ArrayDataInformation();
     DATAINFORMATION_CLONE(Array)
 
 public:
     virtual QString typeName() const;
     int length() const;
+    virtual QWidget* createEditWidget(QWidget* parent) const;
+    virtual QVariant dataFromWidget(const QWidget* w) const;
+    virtual void setWidgetData(QWidget* w) const;
+    virtual quint64 offset(unsigned int index) const;
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            quint64 bitsRemaining, quint8* bitOffset);
+    virtual bool setData(const QVariant& value, DataInformation* inf, Okteta::AbstractByteArrayModel* input,
+            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+    virtual int size() const;
 
     virtual QVariant childData(int row, int column, int role) const;
+    virtual DataInformation* childAt(unsigned int idx) const;
+    virtual unsigned int childCount() const;
+    virtual bool canHaveChildren() const;
+    virtual int indexOf(const DataInformation* const data) const;
 
     virtual bool isArray() const;
 
     QScriptValue setArrayLength(int newLength, QScriptContext* context);
     QScriptValue setArrayType(QScriptValue type, QScriptContext* context);
+
     virtual QScriptValue childType() const;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+    QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
 
 protected:
-    DataInformation* mChildType;
+    AbstractArrayData* mData;
+    static const uint MAX_LEN = 10000;
 };
 
 inline int ArrayDataInformation::length() const
 {
-    return childCount();
+    return mData->length();
+}
+
+inline QString ArrayDataInformation::typeName() const
+{
+    return mData->typeName();
+    //don't show name of child
+    //return i18nc("array type then length", "%1[%2]", data->typeName(), childCount()); //TODO
+}
+
+inline int ArrayDataInformation::size() const
+{
+    return mData->size();
 }
 
 inline bool ArrayDataInformation::isArray() const
 {
     return true;
 }
+
+inline DataInformation* ArrayDataInformation::childAt(unsigned int idx) const
+{
+    return mData->childAt(idx);
+}
+
+inline unsigned int ArrayDataInformation::childCount() const
+{
+    return mData->length();
+}
+
+inline bool ArrayDataInformation::canHaveChildren() const
+{
+    return true;
+}
+
+inline int ArrayDataInformation::indexOf(const DataInformation*const data) const
+{
+    return mData->indexOf(data);
+}
+
+inline QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
+{
+    return mData->toScriptValue(index, engine, handlerInfo);
+}
+
+
 
 #endif /* ARRAYDATAINFORMATION_H_ */
