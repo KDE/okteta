@@ -98,7 +98,7 @@ union AllPrimitiveTypes
     }
     //set all to zero first with smaller data types
     inline AllPrimitiveTypes(qint32 val) :
-        ulongValue(0)
+        longValue(val < 0 ? -1 : 0)
     {
         intValue = val;
     }
@@ -109,7 +109,7 @@ union AllPrimitiveTypes
 
     }
     inline AllPrimitiveTypes(qint16 val) :
-        ulongValue(0)
+        longValue(val < 0 ? -1 : 0)
     {
         shortValue = val;
 
@@ -121,7 +121,7 @@ union AllPrimitiveTypes
 
     }
     inline AllPrimitiveTypes(qint8 val) :
-        ulongValue(0)
+        longValue(val < 0 ? -1 : 0)
     {
         byteValue = val;
     }

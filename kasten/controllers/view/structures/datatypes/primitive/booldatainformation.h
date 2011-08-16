@@ -45,7 +45,7 @@ protected:
 template<typename T, PrimitiveDataType typeValue>
 QScriptValue BoolDataInformation<T, typeValue>::valueAsQScriptValue() const
 {
-    return bool(UnsignedDataInformation<T, typeValue>::mValue);
+    return QScriptValue(bool(UnsignedDataInformation<T, typeValue>::mValue));
 }
 
 template<typename T, PrimitiveDataType typeValue>

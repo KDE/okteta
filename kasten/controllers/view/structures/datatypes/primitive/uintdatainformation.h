@@ -88,7 +88,7 @@ QScriptValue UIntDataInformation<T, typeValue>::valueAsQScriptValue() const
 template<>
 inline QScriptValue UIntDataInformation<quint64, Type_UInt64>::valueAsQScriptValue() const
 {
-    return QString::number(mValue, 10);
+    return QScriptValue(QString::number(mValue, 10));
 }
 
 #endif // UINTDATAINFORMATION_H
