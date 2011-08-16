@@ -262,7 +262,7 @@ inline ByteOrder DataInformation::byteOrder() const
                 static_cast<DataInformation*>(mParent)->byteOrder()
                 : Kasten::StructViewPreferences::byteOrder();
     }
-    
+
     // here must be a return... I guess this is correct
     return Kasten::StructViewPreferences::byteOrder();
 }

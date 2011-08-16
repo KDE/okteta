@@ -45,3 +45,18 @@ bool DataInformationBase::isPrimitive() const
 {
     return false;
 }
+
+bool DataInformationBase::isEnum() const
+{
+    return false;
+}
+
+bool DataInformationBase::isStruct() const
+{
+    return false;
+}
+
+bool DataInformationBase::isUnion() const
+{
+    return false;
+}

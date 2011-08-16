@@ -33,9 +33,10 @@ public:
     virtual ~UnionDataInformation();
     DATAINFORMATION_CLONE(Union)
 
-public Q_SLOTS:
+public:
     void addDataTypeToUnion(DataInformation* dataInformation);
 public:
+    virtual bool isUnion() const;
     //implement the DataInformation pure virtual functions
     QString typeName() const;
     virtual int size() const;
@@ -55,6 +56,11 @@ inline quint64 UnionDataInformation::offset(unsigned int index) const
 {
     Q_UNUSED(index)
     return 0;
+}
+
+inline bool UnionDataInformation::isUnion() const
+{
+    return true;
 }
 
 #endif /* UNIONDATAINFORMATION_H_ */

@@ -33,13 +33,19 @@ public:
     explicit StructureDataInformation(QString name, DataInformation* parent = NULL);
     virtual ~StructureDataInformation();
     DATAINFORMATION_CLONE(Structure)
-public Q_SLOTS:
+public:
     void addDataTypeToStruct(DataInformation* dataInformation);
 public:
+    virtual bool isStruct() const;
     //implement the DataInformation pure virtual functions
     QString typeName() const;
     /** add another field to this struct */
     StructureDataInformation& operator<<(DataInformation* field);
 };
+
+inline bool StructureDataInformation::isStruct() const
+{
+    return true;
+}
 
 #endif /* STRUCTUREDATAINFORMATION_H_ */

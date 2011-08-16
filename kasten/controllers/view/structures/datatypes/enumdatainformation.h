@@ -39,13 +39,14 @@ public:
     virtual QString valueString() const;
     virtual QString getTypeString() const;
     virtual QString typeName() const;
+    virtual bool isEnum() const;
 
     virtual int size() const;
     virtual int displayBase() const;
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
-    
+
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
             Okteta::Address address, quint64 remaining, quint8* bitOffset);
     virtual bool setData(const QVariant& value, DataInformation* inf,
@@ -76,6 +77,11 @@ inline int EnumDataInformation::size() const
 inline int EnumDataInformation::displayBase() const
 {
     return mValue->displayBase();
+}
+
+inline bool EnumDataInformation::isEnum() const
+{
+    return true;
 }
 
 #endif /* ENUMDATAINFORMATION_H_ */
