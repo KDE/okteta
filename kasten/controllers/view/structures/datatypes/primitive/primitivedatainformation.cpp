@@ -100,3 +100,9 @@ QScriptValue PrimitiveDataInformation::toScriptValue(QScriptEngine* engine, Scri
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
 }
+
+QString PrimitiveDataInformation::typeName(PrimitiveDataType type) const
+{
+    Q_ASSERT(type >= Type_START && type <= Type_END);
+    return i18n(primitiveTypeNames[type].latin1());
+}

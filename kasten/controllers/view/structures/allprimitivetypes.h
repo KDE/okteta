@@ -24,6 +24,7 @@
 
 #include <QtGlobal>
 #include <QByteArray>
+#include <KLocale>
 
 #include <size.h>
 #include <address.h>
@@ -43,6 +44,7 @@ typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 enum PrimitiveDataType
 {
     Type_NotPrimitive = -1,
+    Type_START = 0,
     Type_Bool8 = 0,
     Type_Int8,
     Type_UInt8,
@@ -58,9 +60,11 @@ enum PrimitiveDataType
     Type_UInt64,
     Type_Float,
     Type_Double,
-    Type_Bitfield
+    Type_Bitfield,
+    Type_END = Type_Bitfield
 };
 
+//TODO add i18n_noop? probably not necessary, since these are not really translatable
 const QLatin1String primitiveTypeNames[] = {
     QLatin1String("bool8"),
     QLatin1String("int8"),
