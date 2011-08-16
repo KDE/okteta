@@ -94,7 +94,7 @@ qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *inp
 
 DataInformationWithChildren::~DataInformationWithChildren()
 {
-    //    qDeleteAll(mChildren); // no need since this is set to their parent
+    qDeleteAll(mChildren);
 }
 
 DataInformationWithChildren::DataInformationWithChildren(QString& name, DataInformation* parent) :
