@@ -119,7 +119,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     setObjectName( QLatin1String("Shell") );
 
     // there is only one mainwindow, so have this show the document if requested
-    connect( documentManager(), SIGNAL(focusRequested(Kasten::AbstractDocument*)),
+    connect( mProgram->documentManager(), SIGNAL(focusRequested(Kasten::AbstractDocument*)),
              SLOT(showDocument(Kasten::AbstractDocument*)) );
     connect( viewArea(), SIGNAL(dataOffered(const QMimeData*,bool&)),
              SLOT(onDataOffered(const QMimeData*,bool&)) );
@@ -157,7 +157,7 @@ void OktetaMainWindow::setupControllers()
     ViewManager* const viewManager = this->viewManager();
     MultiViewAreas* const viewArea = this->viewArea();
     ModelCodecViewManager* const codecViewManager = viewManager->codecViewManager();
-    DocumentManager* const documentManager = this->documentManager();
+    DocumentManager* const documentManager = mProgram->documentManager();
     ModelCodecManager* const codecManager = documentManager->codecManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
 
@@ -227,12 +227,12 @@ void OktetaMainWindow::setupControllers()
 bool OktetaMainWindow::queryClose()
 {
     // TODO: query the document manager or query the view manager?
-    return documentManager()->canCloseAll();
+    return mProgram->documentManager()->canCloseAll();
 }
 
 void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
 {
-    DocumentManager* const documentManager = this->documentManager();
+    DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
     const QList<AbstractDocument*> documents = documentManager->documents();
 
@@ -247,7 +247,7 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
 {
     const QStringList urls = configGroup.readPathEntry( LoadedUrlsKey, QStringList() );
 
-    DocumentManager* const documentManager = this->documentManager();
+    DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
     DocumentCreateManager* const createManager = documentManager->createManager();
     foreach( const KUrl& url, urls )
@@ -261,27 +261,26 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
     }
 }
 
-DocumentManager* OktetaMainWindow::documentManager() const { return mProgram->documentManager(); }
-
 void OktetaMainWindow::onDataOffered( const QMimeData* mimeData, bool& accept )
 {
     accept = KUrl::List::canDecode( mimeData )
-             || documentManager()->createManager()->canCreateNewFromData( mimeData );
+             || mProgram->documentManager()->createManager()->canCreateNewFromData( mimeData );
 }
 
 void OktetaMainWindow::onDataDropped( const QMimeData* mimeData )
 {
     const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
 
+    DocumentManager* const documentManager = mProgram->documentManager();
     if( ! urls.isEmpty() )
     {
-        DocumentSyncManager* const syncManager = documentManager()->syncManager();
+        DocumentSyncManager* const syncManager = documentManager->syncManager();
 
         foreach( const KUrl& url, urls )
             syncManager->load( url );
     }
     else
-        documentManager()->createManager()->createNewFromData( mimeData, true );
+        documentManager->createManager()->createNewFromData( mimeData, true );
 }
 
 void OktetaMainWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
@@ -313,10 +312,11 @@ void OktetaMainWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views
 
     const QList<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys();
 
-    if( documentManager()->canClose(documentsWithoutViews) )
+    DocumentManager* const documentManager = mProgram->documentManager();
+    if( documentManager->canClose(documentsWithoutViews) )
     {
         viewManager()->removeViews( views );
-        documentManager()->closeDocuments( documentsWithoutViews );
+        documentManager->closeDocuments( documentsWithoutViews );
     }
 }
 
