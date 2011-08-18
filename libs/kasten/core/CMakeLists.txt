@@ -70,6 +70,7 @@ set( KASTEN_CORE_SYSTEM_SRCS
 )
 
 set( kastencore_LIB_SRCS
+  kastencore.cpp
   ${KASTEN_CORE_ENTITY_SRCS}
   ${KASTEN_CORE_DOCUMENT_SRCS}
   ${KASTEN_CORE_IO_SRCS}
