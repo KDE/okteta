@@ -37,6 +37,7 @@ set( okteta_kastencore_io_SRCS
 )
 
 set( okteta_kastencore_LIB_SRCS
+  oktetakastencore.cpp
   ${okteta_kastencore_document_SRCS}
   ${okteta_kastencore_io_SRCS}
 )

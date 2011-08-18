@@ -59,9 +59,6 @@ OktetaPartFactory::OktetaPartFactory()
     _aboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
     _componentData = new KComponentData( _aboutData );
 
-    KLocale* globalLocale = KGlobal::locale();
-    globalLocale->insertCatalog( QString::fromLatin1("liboktetakasten") );
-
 //     const QList<AbstractModelStreamEncoder*> encoderList =
 //         ByteArrayStreamEncoderFactory::createStreamEncoders();
 

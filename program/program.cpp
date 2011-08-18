@@ -43,7 +43,6 @@
 #include <documentsyncmanager.h>
 #include <modelcodecmanager.h>
 // KDE
-#include <KLocale>
 #include <KUrl>
 #include <KCmdLineArgs>
 #include <KApplication>
@@ -78,8 +77,6 @@ OktetaProgram::OktetaProgram( int argc, char* argv[] )
 int OktetaProgram::execute()
 {
     KApplication programCore;
-
-    KGlobal::locale()->insertCatalog( QLatin1String("liboktetakasten") );
 
     const QList<AbstractModelStreamEncoder*> encoderList =
         ByteArrayStreamEncoderFactory::createStreamEncoders();

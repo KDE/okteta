@@ -77,8 +77,6 @@ int OktetaProgram::execute()
 {
     KApplication programCore;
 
-    KGlobal::locale()->insertCatalog( QLatin1String("liboktetakasten") );
-
     connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
              mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
     connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
