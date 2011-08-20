@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2008-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -60,6 +60,8 @@ void ByteArrayJanusView::setViewModus( int viewModus )
     const bool hasFocus = mView ? mView->hasFocus() : false;
     if( mView )
     {
+        newView->setFont( mView->font() );
+
         newView->setByteArrayModel( mView->byteArrayModel() );
         newView->setReadOnly( mView->isReadOnly() );
         newView->setOverwriteMode( mView->isOverwriteMode() );
