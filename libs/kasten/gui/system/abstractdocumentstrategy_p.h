@@ -20,29 +20,35 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef ABSTRACTDOCUMENTSTRATEGY_P_H
+#define ABSTRACTDOCUMENTSTRATEGY_P_H
+
 #include "abstractdocumentstrategy.h"
-#include "abstractdocumentstrategy_p.h"
 
 
 namespace Kasten
 {
 
-AbstractDocumentStrategy::AbstractDocumentStrategy()
-  : QObject()
-  , d_ptr( new AbstractDocumentStrategyPrivate(this) )
-
+class AbstractDocumentStrategyPrivate
 {
+  public:
+      explicit AbstractDocumentStrategyPrivate( AbstractDocumentStrategy* parent );
+
+      virtual ~AbstractDocumentStrategyPrivate();
+
+  protected:
+    AbstractDocumentStrategy* const q_ptr;
+    Q_DECLARE_PUBLIC( AbstractDocumentStrategy )
+};
+
+
+inline AbstractDocumentStrategyPrivate::AbstractDocumentStrategyPrivate( AbstractDocumentStrategy* parent )
+  : q_ptr( parent )
+{}
+
+
+inline AbstractDocumentStrategyPrivate::~AbstractDocumentStrategyPrivate() {}
+
 }
 
-AbstractDocumentStrategy::AbstractDocumentStrategy( AbstractDocumentStrategyPrivate* d )
-  : QObject()
-  , d_ptr( d )
-
-{
-}
-
-AbstractDocumentStrategy::~AbstractDocumentStrategy()
-{
-}
-
-}
+#endif

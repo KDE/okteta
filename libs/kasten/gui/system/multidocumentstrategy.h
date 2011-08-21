@@ -31,6 +31,7 @@ namespace Kasten
 {
 class ViewManager;
 class DocumentManager;
+class MultiDocumentStrategyPrivate;
 
 
 class KASTENCORE_EXPORT MultiDocumentStrategy : public AbstractDocumentStrategy
@@ -38,7 +39,8 @@ class KASTENCORE_EXPORT MultiDocumentStrategy : public AbstractDocumentStrategy
   Q_OBJECT
 
   public:
-    MultiDocumentStrategy( DocumentManager* documentManager, ViewManager* viewManager );
+    MultiDocumentStrategy( DocumentManager* documentManager,
+                           ViewManager* viewManager );
     virtual ~MultiDocumentStrategy();
 
   public: // AbstractDocumentStrategy API
@@ -60,8 +62,7 @@ class KASTENCORE_EXPORT MultiDocumentStrategy : public AbstractDocumentStrategy
     virtual bool canCloseAllOther( AbstractDocument* document ) const;
 
   protected:
-    DocumentManager* mDocumentManager;
-    ViewManager* mViewManager;
+    Q_DECLARE_PRIVATE( MultiDocumentStrategy )
 };
 
 }

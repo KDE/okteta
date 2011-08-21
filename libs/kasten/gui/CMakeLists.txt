@@ -61,7 +61,9 @@ set( kastengui_system_SRCS
   system/dialoghandler.cpp
   system/dummyview.cpp
   system/modelcodecviewmanager.cpp
+  system/multidocumentstrategy_p.cpp
   system/multidocumentstrategy.cpp
+  system/singledocumentstrategy_p.cpp
   system/singledocumentstrategy.cpp
   system/viewmanager.cpp
 )

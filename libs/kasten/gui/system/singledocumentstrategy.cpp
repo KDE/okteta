@@ -21,30 +21,7 @@
 */
 
 #include "singledocumentstrategy.h"
-
-// lib
-#include "createdialog.h"
-// Kasten gui
-#include <abstractmodeldatageneratorconfigeditor.h>
-#include <modelcodecviewmanager.h>
-#include <viewmanager.h>
-// Kasten core
-#include <modeldatageneratethread.h>
-#include <multidocumentstrategy.h>
-#include <documentsyncmanager.h>
-#include <documentcreatemanager.h>
-#include <documentmanager.h>
-#include <abstractmodeldatagenerator.h>
-#include <abstractmodel.h>
-// KDE
-#include <KApplication>
-#include <KUrl>
-#include <KProcess>
-// QtGui
-#include <QtGui/QClipboard>
-#include <QtGui/QApplication>
-// QtCore
-#include <QtCore/QMimeData>
+#include "singledocumentstrategy_p.h"
 
 
 namespace Kasten
@@ -52,150 +29,90 @@ namespace Kasten
 
 SingleDocumentStrategy::SingleDocumentStrategy( DocumentManager* documentManager,
                                                 ViewManager* viewManager )
-  : AbstractDocumentStrategy( 0 )
-  , mDocumentManager( documentManager )
-  , mViewManager( viewManager )
+  : AbstractDocumentStrategy( new SingleDocumentStrategyPrivate(this,
+                                                                documentManager,
+                                                                viewManager) )
 {
-    // setup
-    connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
-             mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
-             mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentManager->syncManager(), SIGNAL(urlUsed(KUrl)),
-             SIGNAL(urlUsed(KUrl)) );
+    Q_D( SingleDocumentStrategy );
+
+    d->init();
 }
 
 QList<AbstractDocument*> SingleDocumentStrategy::documents() const
 {
-    return mDocumentManager->documents();
+    Q_D( const SingleDocumentStrategy );
+
+    return d->documents();
 }
 
 bool SingleDocumentStrategy::canClose( AbstractDocument* document ) const
 {
-    return mDocumentManager->canClose( document );
+    Q_D( const SingleDocumentStrategy );
+
+    return d->canClose( document );
 }
 
 bool SingleDocumentStrategy::canCloseAllOther( AbstractDocument* document ) const
 {
-    return mDocumentManager->canCloseAllOther( document );
+    Q_D( const SingleDocumentStrategy );
+
+    return d->canCloseAllOther( document );
 }
 
 bool SingleDocumentStrategy::canCloseAll() const
 {
-    return mDocumentManager->canCloseAll();
+    Q_D( const SingleDocumentStrategy );
+
+    return d->canCloseAll();
 }
 
 void SingleDocumentStrategy::createNew()
 {
-    if( mDocumentManager->isEmpty() )
-        mDocumentManager->createManager()->createNew();
-    else
-    {
-        const QString executable = QCoreApplication::applicationFilePath();
-        // TODO: get parameters from common place with KCmdLineOptions
-        // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters = QStringList() << QLatin1String( "-c" );
-        KProcess::startDetached( executable, parameters );
-    }
+    Q_D( SingleDocumentStrategy );
+
+    d->createNew();
 }
 
 void SingleDocumentStrategy::createNewFromClipboard()
 {
-    if( mDocumentManager->isEmpty() )
-    {
-        const QMimeData* mimeData =
-            QApplication::clipboard()->mimeData( QClipboard::Clipboard );
+    Q_D( SingleDocumentStrategy );
 
-        mDocumentManager->createManager()->createNewFromData( mimeData, true );
-    }
-    else
-    {
-        const QString executable = QCoreApplication::applicationFilePath();
-        // TODO: get parameters from common place with KCmdLineOptions
-        // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters = QStringList()
-            << QLatin1String( "-c" )
-            << QLatin1String( "-g" )
-            << QLatin1String( "FromClipboard" );
-        KProcess::startDetached( executable, parameters );
-    }
+    d->createNewFromClipboard();
 }
 
 void SingleDocumentStrategy::createNewWithGenerator( AbstractModelDataGenerator* generator )
 {
-    // TODO: show dialog in this process, meanwhile start other process, but hidden,
-    // on result of dialog pass on the paramaters
-    if( ! mDocumentManager->isEmpty() )
-    {
-        const QString executable = QCoreApplication::applicationFilePath();
-        // TODO: get parameters from common place with KCmdLineOptions
-        // TODO: forward also interesting parameters passed to this program
-        // TODO: add id to AbstractModelDataGenerator, to use instead of className
-        const QStringList parameters = QStringList()
-            << QLatin1String( "-c" )
-            << QLatin1String( "-g" )
-            << QLatin1String(generator->metaObject()->className());
-        KProcess::startDetached( executable, parameters );
-        return;
-    }
+    Q_D( SingleDocumentStrategy );
 
-    AbstractModelDataGeneratorConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor( generator );
-
-    if( configEditor )
-    {
-        // TODO: make dialog abstract for different UIs
-        CreateDialog* dialog = new CreateDialog( configEditor );
-//         dialog->setData( mModel, selection ); TODO
-        if( ! dialog->exec() )
-            return;
-    }
-
-    QApplication::setOverrideCursor( Qt::WaitCursor );
-
-    ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread( this, generator );
-    generateThread->start();
-    while( !generateThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
-
-    QMimeData* mimeData = generateThread->data();
-
-    delete generateThread;
-
-    const bool setModified = ( generator->flags() & AbstractModelDataGenerator::DynamicGeneration );
-    mDocumentManager->createManager()->createNewFromData( mimeData, setModified );
-
-    QApplication::restoreOverrideCursor();
+    d->createNewWithGenerator( generator );
 }
 
 void SingleDocumentStrategy::load( const KUrl& url )
 {
-    if( mDocumentManager->isEmpty() )
-        mDocumentManager->syncManager()->load( url );
-    else
-    {
-        const QString executable = QCoreApplication::applicationFilePath();
-        // TODO: get parameters from common place with KCmdLineOptions
-        // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters = QStringList() << url.url();
-        KProcess::startDetached( executable, parameters );
-    }
+    Q_D( SingleDocumentStrategy );
+
+    d->load( url );
 }
 
 void SingleDocumentStrategy::closeAll()
 {
-    mDocumentManager->closeAll();
+    Q_D( SingleDocumentStrategy );
+
+    d->closeAll();
 }
 
 void SingleDocumentStrategy::closeAllOther( AbstractDocument* document )
 {
-    mDocumentManager->closeAllOther( document );
+    Q_D( SingleDocumentStrategy );
+
+    d->closeAllOther( document );
 }
 
 void SingleDocumentStrategy::closeDocument( AbstractDocument* document )
 {
-    mDocumentManager->closeDocument( document );
+    Q_D( SingleDocumentStrategy );
+
+    d->closeDocument( document );
 }
 
 SingleDocumentStrategy::~SingleDocumentStrategy()

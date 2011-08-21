@@ -21,25 +21,7 @@
 */
 
 #include "multidocumentstrategy.h"
-
-// lib
-#include "createdialog.h"
-// Kasten gui
-#include <abstractmodeldatageneratorconfigeditor.h>
-#include <modelcodecviewmanager.h>
-#include <viewmanager.h>
-// Kasten core
-#include <modeldatageneratethread.h>
-#include <multidocumentstrategy.h>
-#include <documentsyncmanager.h>
-#include <documentcreatemanager.h>
-#include <documentmanager.h>
-#include <abstractmodeldatagenerator.h>
-#include <abstractmodel.h>
-// Qt
-#include <QtGui/QClipboard>
-#include <QtGui/QApplication>
-#include <QtCore/QMimeData>
+#include "multidocumentstrategy_p.h"
 
 
 namespace Kasten
@@ -47,100 +29,90 @@ namespace Kasten
 
 MultiDocumentStrategy::MultiDocumentStrategy( DocumentManager* documentManager,
                                               ViewManager* viewManager )
-  : AbstractDocumentStrategy( 0 )
-  , mDocumentManager( documentManager )
-  , mViewManager( viewManager )
+  : AbstractDocumentStrategy( new MultiDocumentStrategyPrivate(this,
+                                                               documentManager,
+                                                               viewManager) )
 {
-    // setup
-    connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
-             mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
-             mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentManager->syncManager(), SIGNAL(urlUsed(KUrl)),
-             SIGNAL(urlUsed(KUrl)) );
+    Q_D( MultiDocumentStrategy );
+
+    d->init();
 }
 
 QList<AbstractDocument*> MultiDocumentStrategy::documents() const
 {
-    return mDocumentManager->documents();
+    Q_D( const MultiDocumentStrategy );
+
+    return d->documents();
 }
 
 bool MultiDocumentStrategy::canClose( AbstractDocument* document ) const
 {
-    return mDocumentManager->canClose( document );
+    Q_D( const MultiDocumentStrategy );
+
+    return d->canClose( document );
 }
 
 bool MultiDocumentStrategy::canCloseAllOther( AbstractDocument* document ) const
 {
-    return mDocumentManager->canCloseAllOther( document );
+     Q_D( const MultiDocumentStrategy );
+
+   return d->canCloseAllOther( document );
 }
 
 bool MultiDocumentStrategy::canCloseAll() const
 {
-    return mDocumentManager->canCloseAll();
+    Q_D( const MultiDocumentStrategy );
+
+    return d->canCloseAll();
 }
 
 void MultiDocumentStrategy::createNew()
 {
-    mDocumentManager->createManager()->createNew();
+    Q_D( MultiDocumentStrategy );
+
+    d->createNew();
 }
 
 void MultiDocumentStrategy::createNewFromClipboard()
 {
-    const QMimeData* mimeData = QApplication::clipboard()->mimeData( QClipboard::Clipboard );
+    Q_D( MultiDocumentStrategy );
 
-    mDocumentManager->createManager()->createNewFromData( mimeData, true );
+    d->createNewFromClipboard();
 }
 
 void MultiDocumentStrategy::createNewWithGenerator( AbstractModelDataGenerator* generator )
 {
-    AbstractModelDataGeneratorConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor( generator );
+    Q_D( MultiDocumentStrategy );
 
-    if( configEditor )
-    {
-        CreateDialog* dialog = new CreateDialog( configEditor );
-//         dialog->setData( mModel, selection ); TODO
-        if( ! dialog->exec() )
-            return;
-    }
-
-    QApplication::setOverrideCursor( Qt::WaitCursor );
-
-    ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread( this, generator );
-    generateThread->start();
-    while( !generateThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
-
-    QMimeData* mimeData = generateThread->data();
-
-    delete generateThread;
-
-    const bool setModified = ( generator->flags() & AbstractModelDataGenerator::DynamicGeneration );
-    mDocumentManager->createManager()->createNewFromData( mimeData, setModified );
-
-    QApplication::restoreOverrideCursor();
+    d->createNewWithGenerator( generator );
 }
 
 void MultiDocumentStrategy::load( const KUrl& url )
 {
-    mDocumentManager->syncManager()->load( url );
+    Q_D( MultiDocumentStrategy );
+
+    d->load( url );
 }
 
 void MultiDocumentStrategy::closeAll()
 {
-    mDocumentManager->closeAll();
+    Q_D( MultiDocumentStrategy );
+
+    d->closeAll();
 }
 
 void MultiDocumentStrategy::closeAllOther( AbstractDocument* document )
 {
-    mDocumentManager->closeAllOther( document );
+    Q_D( MultiDocumentStrategy );
+
+    d->closeAllOther( document );
 }
 
 void MultiDocumentStrategy::closeDocument( AbstractDocument* document )
 {
-    mDocumentManager->closeDocument( document );
+    Q_D( MultiDocumentStrategy );
+
+    d->closeDocument( document );
 }
 
 

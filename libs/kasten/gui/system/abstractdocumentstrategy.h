@@ -28,7 +28,7 @@
 // Qt
 #include <QtCore/QObject>
 
-template<class C> class QList;
+template<typename C> class QList;
 class KUrl;
 
 
@@ -44,7 +44,8 @@ class KASTENCORE_EXPORT AbstractDocumentStrategy : public QObject
   Q_OBJECT
 
   protected:
-    AbstractDocumentStrategy( AbstractDocumentStrategyPrivate* d );
+    AbstractDocumentStrategy();
+    explicit AbstractDocumentStrategy( AbstractDocumentStrategyPrivate* d );
   public:
     virtual ~AbstractDocumentStrategy();
 
@@ -86,7 +87,8 @@ class KASTENCORE_EXPORT AbstractDocumentStrategy : public QObject
     void urlUsed( const KUrl& url );
 
   protected:
-    AbstractDocumentStrategyPrivate* d;
+    AbstractDocumentStrategyPrivate* const d_ptr;
+    Q_DECLARE_PRIVATE( AbstractDocumentStrategy )
 };
 
 }
