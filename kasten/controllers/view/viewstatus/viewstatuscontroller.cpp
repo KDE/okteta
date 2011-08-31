@@ -170,8 +170,6 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
     }
     else
     {
-        const QString emptyString = QLatin1String( "-" );
-
         mOffsetLabel->setText( i18nc("@info:status offset value not available", "Offset: -") );
         mSelectionLabel->setText( i18nc("@info:status offset value not available", "Selection: -") );
         mOverwriteModeToggleButton->setChecked( false );
