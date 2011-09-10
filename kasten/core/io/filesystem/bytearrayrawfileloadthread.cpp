@@ -31,7 +31,7 @@
 // KDE
 #include <KLocale>
 // Qt
-#include <QtGui/QApplication>
+#include <QtCore/QCoreApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
 // C++
@@ -73,8 +73,8 @@ void ByteArrayRawFileLoadThread::run()
                 mDocument = new ByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
                 mDocument->setOwner( Person::createEgo() );
                 // TODO: make PieceTableByteArrayModel a child by constructor argument parent
-                byteArray->moveToThread( QApplication::instance()->thread() );
-                mDocument->moveToThread( QApplication::instance()->thread() );
+                byteArray->moveToThread( QCoreApplication::instance()->thread() );
+                mDocument->moveToThread( QCoreApplication::instance()->thread() );
             }
             else
                 mErrorString = mFile->errorString();

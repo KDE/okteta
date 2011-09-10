@@ -32,7 +32,7 @@
 // KDE
 #include <KUrl>
 // Qt
-#include <QtGui/QApplication>
+#include <QtCore/QCoreApplication>
 
 
 namespace Kasten
@@ -48,7 +48,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     ByteArrayRawFileReloadThread* reloadThread = new ByteArrayRawFileReloadThread( this, /*document, */file() );
     reloadThread->start();
     while( !reloadThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     bool success = reloadThread->success();
     // TODO: moved this here to avoid marshalling the change signals out of the thread. Good idea?

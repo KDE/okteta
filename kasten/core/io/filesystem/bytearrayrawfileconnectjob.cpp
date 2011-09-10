@@ -30,7 +30,7 @@
 // KDE
 #include <KUrl>
 // Qt
-#include <QtGui/QApplication>
+#include <QtCore/QCoreApplication>
 
 
 namespace Kasten
@@ -50,7 +50,7 @@ void ByteArrayRawFileConnectJob::startConnectWithFile()
     ByteArrayRawFileWriteThread *writeThread = new ByteArrayRawFileWriteThread( this, byteArrayDocument, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( byteArrayDocument );
     const bool success = writeThread->success();

@@ -30,7 +30,7 @@
 // KDE
 #include <KUrl>
 // Qt
-#include <QtGui/QApplication>
+#include <QtCore/QCoreApplication>
 
 
 namespace Kasten
@@ -45,7 +45,7 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
     ByteArrayRawFileLoadThread *loadThread = new ByteArrayRawFileLoadThread( this, file() );
     loadThread->start();
     while( !loadThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     ByteArrayDocument* document = loadThread->document();
     qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( document );

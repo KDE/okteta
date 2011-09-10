@@ -30,7 +30,7 @@
 // KDE
 #include <KUrl>
 // Qt
-#include <QtGui/QApplication>
+#include <QtCore/QCoreApplication>
 
 
 namespace Kasten
@@ -46,7 +46,7 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
     ByteArrayRawFileWriteThread* writeThread = new ByteArrayRawFileWriteThread( this, document, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     const bool success = writeThread->success();
     delete writeThread;
