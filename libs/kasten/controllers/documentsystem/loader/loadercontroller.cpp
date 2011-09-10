@@ -69,7 +69,7 @@ void LoaderController::load()
 {
     static const QString allFileNamesFilter = QLatin1String(AllFileNamesFilter);
     const KUrl::List urls =
-        KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, allFileNamesFilter, /*mWidget*/0 );
+        KFileDialog::getOpenUrls( KUrl()/*mWorkingUrl.url()*/, allFileNamesFilter, /*mWidget*/0 );
 
     foreach( const KUrl& url, urls )
         mDocumentStrategy->load( url );
