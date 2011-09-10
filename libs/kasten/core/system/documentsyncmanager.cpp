@@ -117,7 +117,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
         i18nc( "@title:window", "Save As" );
     do
     {
-        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QString(), QString(), /*mWidget*/0, processTitle );
+        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/KUrl(), QString(), /*mWidget*/0, processTitle );
 
         if( !newUrl.isEmpty() )
         {
