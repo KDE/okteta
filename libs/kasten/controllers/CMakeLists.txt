@@ -183,7 +183,6 @@ kde4_add_library( ${kastencontrollers_LIB} SHARED ${kastencontroller_LIB_SRCS} )
 target_link_libraries( ${kastencontrollers_LIB}
   ${kastengui_LIB}
   ${kastencore_LIB}
-  ${KDE4_KIO_LIBS}
   ${KDE4_KPARTS_LIBS}
   ${KDE4_KFILE_LIBS}
 )
