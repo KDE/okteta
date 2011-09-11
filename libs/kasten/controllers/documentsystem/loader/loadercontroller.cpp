@@ -38,7 +38,6 @@
 namespace Kasten
 {
 
-static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_chars
 static const char CreatorConfigGroupId[] = "Recent Files";
 
 
