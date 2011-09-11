@@ -45,6 +45,13 @@ QList<AbstractDocument*> MultiDocumentStrategy::documents() const
     return d->documents();
 }
 
+QStringList MultiDocumentStrategy::supportedRemoteTypes() const
+{
+    Q_D( const MultiDocumentStrategy );
+
+    return d->supportedRemoteTypes();
+}
+
 bool MultiDocumentStrategy::canClose( AbstractDocument* document ) const
 {
     Q_D( const MultiDocumentStrategy );

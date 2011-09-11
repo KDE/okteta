@@ -56,6 +56,7 @@ class KASTENCORE_EXPORT SingleDocumentStrategy : public AbstractDocumentStrategy
 
   public: // const AbstractDocumentStrategy API
     virtual QList<AbstractDocument*> documents() const;
+    virtual QStringList supportedRemoteTypes() const;
 
     virtual bool canClose( AbstractDocument* document ) const;
     virtual bool canCloseAll() const;

@@ -28,6 +28,9 @@
 #include "singledocumentstrategy.h"
 // Kasten core
 #include <documentmanager.h>
+#include <documentsyncmanager.h>
+// Qt Core
+#include <QtCore/QStringList>
 
 
 namespace Kasten
@@ -59,6 +62,7 @@ class SingleDocumentStrategyPrivate : public AbstractDocumentStrategyPrivate
 
   public: // const AbstractDocumentStrategy API
     QList<AbstractDocument*> documents() const;
+    QStringList supportedRemoteTypes() const;
 
     bool canClose( AbstractDocument* document ) const;
     bool canCloseAll() const;
@@ -86,6 +90,11 @@ SingleDocumentStrategyPrivate::SingleDocumentStrategyPrivate( SingleDocumentStra
 inline QList<AbstractDocument*> SingleDocumentStrategyPrivate::documents() const
 {
     return mDocumentManager->documents();
+}
+
+inline QStringList SingleDocumentStrategyPrivate::supportedRemoteTypes() const
+{
+    return mDocumentManager->syncManager()->supportedRemoteTypes();
 }
 
 inline bool SingleDocumentStrategyPrivate::canClose( AbstractDocument* document ) const

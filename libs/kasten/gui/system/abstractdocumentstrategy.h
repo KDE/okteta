@@ -68,6 +68,7 @@ class KASTENCORE_EXPORT AbstractDocumentStrategy : public QObject
     /// Returns \c true if there 
 //     virtual bool allowsMultipleDocuments() const = 0;
     virtual QList<AbstractDocument*> documents() const = 0;
+    virtual QStringList supportedRemoteTypes() const = 0;
 
     // TODO: what to do for documents not added?
     virtual bool canClose( AbstractDocument* document ) const = 0;

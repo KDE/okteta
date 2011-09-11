@@ -45,6 +45,13 @@ QList<AbstractDocument*> SingleDocumentStrategy::documents() const
     return d->documents();
 }
 
+QStringList SingleDocumentStrategy::supportedRemoteTypes() const
+{
+    Q_D( const SingleDocumentStrategy );
+
+    return d->supportedRemoteTypes();
+}
+
 bool SingleDocumentStrategy::canClose( AbstractDocument* document ) const
 {
     Q_D( const SingleDocumentStrategy );
