@@ -46,9 +46,9 @@ LoaderController::LoaderController( AbstractDocumentStrategy* documentStrategy,
   : AbstractXmlGuiController()
   , mDocumentStrategy( documentStrategy )
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
-    KStandardAction::open(       this, SLOT(load()),      actionCollection );
+    KStandardAction::open( this, SLOT(load()), actionCollection );
     mOpenRecentAction =
         KStandardAction::openRecent( this, SLOT(loadRecent(KUrl)), actionCollection );
 
