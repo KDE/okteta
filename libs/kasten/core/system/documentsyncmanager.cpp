@@ -121,9 +121,10 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 //         currentSynchronizer->pauseSynchronization(); also unpause below
     const QString processTitle =
         i18nc( "@title:window", "Save As" );
+    const QString filterString = supportedRemoteTypes().join( QLatin1String(" ") );
     do
     {
-        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/KUrl(), QString(), /*mWidget*/0, processTitle );
+        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/KUrl(), filterString, /*mWidget*/0, processTitle );
 
         if( !newUrl.isEmpty() )
         {
