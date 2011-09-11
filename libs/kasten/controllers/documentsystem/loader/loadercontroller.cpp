@@ -67,9 +67,10 @@ Q_UNUSED( model )
 
 void LoaderController::load()
 {
-    static const QString allFileNamesFilter = QLatin1String(AllFileNamesFilter);
+    const QString filterString = mDocumentStrategy->supportedRemoteTypes().join( QLatin1String(" ") );
+
     const KUrl::List urls =
-        KFileDialog::getOpenUrls( KUrl()/*mWorkingUrl.url()*/, allFileNamesFilter, /*mWidget*/0 );
+        KFileDialog::getOpenUrls( KUrl()/*mWorkingUrl.url()*/, filterString, /*mWidget*/0 );
 
     foreach( const KUrl& url, urls )
         mDocumentStrategy->load( url );
