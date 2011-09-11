@@ -59,6 +59,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
     void save( AbstractDocument* document );
 
   public:
+    QStringList supportedRemoteTypes() const;
     bool hasSynchronizerForLocal( const QString& mimeType ) const;
     KUrl urlOf( AbstractDocument* document ) const;
 
