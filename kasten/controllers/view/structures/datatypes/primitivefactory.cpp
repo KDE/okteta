@@ -21,13 +21,7 @@
  */
 
 #include "primitivefactory.h"
-
-#include "primitive/chardatainformation.h"
-#include "primitive/doubledatainformation.h"
-#include "primitive/floatdatainformation.h"
-#include "primitive/uintdatainformation.h"
-#include "primitive/sintdatainformation.h"
-#include "primitive/booldatainformation.h"
+#include "primitive/primitivetemplateinfo.h"
 
 PrimitiveDataType PrimitiveFactory::typeStringToType(QString& string)
 {
@@ -74,35 +68,35 @@ PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
     switch (type)
     {
     case Type_Char:
-        return new CharDataInformation(name, parent);
+        return new PrimitiveInfo<Type_Char>::Class(name, parent);
     case Type_Int8:
-        return new SIntDataInformation<qint8, Type_Int8>(name, parent);
+        return new PrimitiveInfo<Type_Int8>::Class(name, parent);
     case Type_Int16:
-        return new SIntDataInformation<qint16, Type_Int16>(name, parent);
+        return new PrimitiveInfo<Type_Int16>::Class(name, parent);
     case Type_Int32:
-        return new SIntDataInformation<qint32, Type_Int32>(name, parent);
+        return new PrimitiveInfo<Type_Int32>::Class(name, parent);
     case Type_Int64:
-        return new SIntDataInformation<qint64, Type_Int64>(name, parent);
+        return new PrimitiveInfo<Type_Int64>::Class(name, parent);
     case Type_UInt8:
-        return new UIntDataInformation<quint8, Type_UInt8>(name, parent);
+        return new PrimitiveInfo<Type_UInt8>::Class(name, parent);
     case Type_UInt16:
-        return new UIntDataInformation<quint16, Type_UInt16>(name, parent);
+        return new PrimitiveInfo<Type_UInt16>::Class(name, parent);
     case Type_UInt32:
-        return new UIntDataInformation<quint32, Type_UInt32>(name, parent);
+        return new PrimitiveInfo<Type_UInt32>::Class(name, parent);
     case Type_UInt64:
-        return new UIntDataInformation<quint64, Type_UInt64>(name, parent);
+        return new PrimitiveInfo<Type_UInt64>::Class(name, parent);
     case Type_Bool8:
-        return new BoolDataInformation<quint8, Type_Bool8>(name, parent);
+        return new PrimitiveInfo<Type_Bool8>::Class(name, parent);
     case Type_Bool16:
-        return new BoolDataInformation<quint16, Type_Bool16>(name, parent);
+        return new PrimitiveInfo<Type_Bool16>::Class(name, parent);
     case Type_Bool32:
-        return new BoolDataInformation<quint32, Type_Bool32>(name, parent);
+        return new PrimitiveInfo<Type_Bool32>::Class(name, parent);
     case Type_Bool64:
-        return new BoolDataInformation<quint64, Type_Bool64>(name, parent);
+        return new PrimitiveInfo<Type_Bool64>::Class(name, parent);
     case Type_Float:
-        return new FloatDataInformation(name, parent);
+        return new PrimitiveInfo<Type_Float>::Class(name, parent);
     case Type_Double:
-        return new DoubleDataInformation(name, parent);
+        return new PrimitiveInfo<Type_Double>::Class(name, parent);
     default:
         return NULL;
     }
