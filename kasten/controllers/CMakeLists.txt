@@ -289,6 +289,9 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/primitive/chardatainformation.cpp
   view/structures/datatypes/primitive/doubledatainformation.cpp
   view/structures/datatypes/primitive/floatdatainformation.cpp
+  view/structures/datatypes/primitive/sintdatainformation.cpp
+  view/structures/datatypes/primitive/uintdatainformation.cpp
+  view/structures/datatypes/primitive/booldatainformation.cpp
   view/structures/datatypes/primitive/primitivedatainformation.cpp
   view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp
   view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp

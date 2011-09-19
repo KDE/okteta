@@ -49,31 +49,6 @@ QScriptValue BoolDataInformation<T, typeValue>::valueAsQScriptValue() const
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QString BoolDataInformation<T, typeValue>::valueString() const
-{
-    if (!DataInformation::mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    int base = UnsignedDataInformation<T, typeValue>::displayBase();
-    if (UnsignedDataInformation<T, typeValue>::mValue == 0)
-        return i18nc("boolean value", "false");
-    else if (UnsignedDataInformation<T, typeValue>::mValue == 1)
-        return i18nc("boolean value", "true");
-    else
-    {
-        QString num = QString::number(UnsignedDataInformation<T, typeValue>::mValue, base);
-        if (base == 16)
-            num.prepend(QLatin1String("0x"));
-        else if (base == 2)
-            num.prepend(QLatin1String("0b"));
-        else if (base == 8)
-            num.prepend(QLatin1String("0o"));
-        else if (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
-        return i18nc("boolean value with actual value", "true (%1)", num);
-    }
-}
-
-template<typename T, PrimitiveDataType typeValue>
 BoolDataInformation<T, typeValue>::BoolDataInformation(QString name, DataInformation* parent)
         : UnsignedDataInformation<T, typeValue>(name, parent)
 {

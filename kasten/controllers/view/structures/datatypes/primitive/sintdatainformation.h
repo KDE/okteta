@@ -19,8 +19,6 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 #ifndef SINTDATAINFORMATION_H
 #define SINTDATAINFORMATION_H
 
@@ -72,19 +70,6 @@ QWidget* SIntDataInformation<T, typeValue>::createEditWidget(QWidget* parent) co
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QVariant SIntDataInformation<T, typeValue>::dataFromWidget(const QWidget* w) const
-{
-    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*> (w);
-    if (spin)
-        return spin->value();
-    else
-    {
-        kWarning() << "could not cast widget";
-        return QVariant();
-    }
-}
-
-template<typename T, PrimitiveDataType typeValue>
 void SIntDataInformation<T, typeValue>::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
@@ -115,9 +100,7 @@ DataInformation* SIntDataInformation<T, typeValue>::clone() const
 template<typename T, PrimitiveDataType typeValue>
 AllPrimitiveTypes SIntDataInformation<T, typeValue>::qVariantToAllPrimitiveTypes(const QVariant& value) const
 {
-    if (!value.isValid())
-        kDebug() << "invalid QVariant passed.";
-
+    Q_ASSERT(value.isValid());
     return AllPrimitiveTypes(value.toLongLong());
 }
 
@@ -155,62 +138,6 @@ template<typename T, PrimitiveDataType typeValue>
 QString SIntDataInformation<T, typeValue>::typeName() const
 {
     return PrimitiveDataInformation::typeName(typeValue);
-}
-
-template<typename T, PrimitiveDataType typeValue>
-QScriptValue SIntDataInformation<T, typeValue>::valueAsQScriptValue() const
-{
-    return QScriptValue(mValue);
-}
-
-template<>
-QScriptValue SIntDataInformation<qint64, Type_Int64>::valueAsQScriptValue() const
-{
-    return QScriptValue(QString::number(mValue, 10));
-}
-
-template<typename T, PrimitiveDataType typeValue>
-QString SIntDataInformation<T, typeValue>::valueString() const
-{
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "<invalid>");
-    int base = displayBase();
-    QString num;
-    if (mValue >= 0)
-    {
-        //no need to do anything special
-        num = QString::number(mValue, base);
-        if (base == 16)
-            num.prepend(QLatin1String("0x"));
-        else if (base == 8)
-            num.prepend(QLatin1String("0o"));
-        else if (base == 2)
-            num.prepend(QLatin1String("0b"));
-        else if (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
-        return num;
-    }
-    //value is less than zero, now the tricky bit starts
-    //TODO non decimal negative values as unsigned? probably add option
-    if (base == 10) {
-        num = QString::number(mValue, base);
-        if (Kasten::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
-        return num;
-    }
-    if (mValue == std::numeric_limits<T>::min())
-        num = QString::number(quint64(mValue) & ((quint64(std::numeric_limits<T>::max()) << 1) + 1), base);
-    else
-        num = QString::number(qAbs(mValue), base);
-
-    if (base == 16)
-        num.prepend(QLatin1String("-0x"));
-    else if (base == 8)
-        num.prepend(QLatin1String("-0o"));
-    else if (base == 2)
-        num.prepend(QLatin1String("-0b"));
-
-    return num;
 }
 
 #endif // SINTDATAINFORMATION_H

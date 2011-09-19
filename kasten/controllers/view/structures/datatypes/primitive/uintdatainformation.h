@@ -19,14 +19,10 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 #ifndef UINTDATAINFORMATION_H
 #define UINTDATAINFORMATION_H
 
 #include "unsigneddatainformation.h"
-#include <KDebug>
-
 
 template<typename T, PrimitiveDataType typeValue>
 class UIntDataInformation : public UnsignedDataInformation<T, typeValue>
@@ -58,37 +54,6 @@ template<typename T, PrimitiveDataType typeValue>
 DataInformation* UIntDataInformation<T, typeValue>::clone() const
 {
     return new UIntDataInformation<T, typeValue>(*this);
-}
-
-
-template<typename T, PrimitiveDataType typeValue>
-QString UIntDataInformation<T, typeValue>::valueString() const
-{
-    if (!DataInformation::mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    int base = UnsignedDataInformation<T, typeValue>::displayBase();
-    QString num = QString::number(UnsignedDataInformation<T, typeValue>::mValue, base);
-    if (base == 16)
-        num.prepend(QLatin1String("0x"));
-    else if (base == 2)
-        num.prepend(QLatin1String("0b"));
-    else if (base == 8)
-        num.prepend(QLatin1String("0o"));
-    else if (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
-        num = KGlobal::locale()->formatNumber(num, false, 0);
-    return num;
-}
-
-template<typename T, PrimitiveDataType typeValue>
-QScriptValue UIntDataInformation<T, typeValue>::valueAsQScriptValue() const
-{
-    return QScriptValue(UnsignedDataInformation<T, typeValue>::mValue);
-}
-
-template<>
-inline QScriptValue UIntDataInformation<quint64, Type_UInt64>::valueAsQScriptValue() const
-{
-    return QScriptValue(QString::number(mValue, 10));
 }
 
 #endif // UINTDATAINFORMATION_H
