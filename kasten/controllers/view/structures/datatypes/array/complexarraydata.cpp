@@ -127,7 +127,7 @@ QString ComplexArrayData::typeName() const
 
 void ComplexArrayData::setParent(DataInformation* parent)
 {
-    AbstractArrayData::setParent(parent);
+    mParent = parent;
     mChildType->setParent(parent);
     for (int i = 0; i < mChildren.size(); ++i)
         mChildren.at(i)->setParent(parent);

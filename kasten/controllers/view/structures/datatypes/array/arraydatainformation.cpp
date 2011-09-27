@@ -223,7 +223,7 @@ AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInfo
     }
     //it is primitive -> create a PrimitiveArrayData
     PrimitiveDataType type = static_cast<PrimitiveDataInformation*>(data)->type();
-    //we no longer need data now that we have to type
+    //we no longer need data now that we have the type
     delete data;
     switch (type)
     {

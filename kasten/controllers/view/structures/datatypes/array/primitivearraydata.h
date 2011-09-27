@@ -52,6 +52,7 @@ public:
     virtual void setLength(int newLength);
     virtual BitCount32 size() const;
     virtual PrimitiveDataType primitiveType() const;
+    virtual void setParent(DataInformation* parent);
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual QString typeName() const;
@@ -71,7 +72,7 @@ protected:
 //constructors
 template<PrimitiveDataType type>
 inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, DataInformation* parent)
-        : AbstractArrayData(parent), mNumReadValues(0), mDummy(new DummyDataInformation(mParent))
+        : AbstractArrayData(parent), mNumReadValues(0), mDummy(new DummyDataInformation(parent))
 {
     mData.reserve(initialLength);
     mData.resize(initialLength);
@@ -79,7 +80,7 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, 
 
 template<PrimitiveDataType type>
 inline PrimitiveArrayData<type>::PrimitiveArrayData(const PrimitiveArrayData& a)
-    : AbstractArrayData(a), mData(a.mData), mNumReadValues(a.mNumReadValues), mDummy(new DummyDataInformation(mParent))
+    : AbstractArrayData(a), mData(a.mData), mNumReadValues(a.mNumReadValues), mDummy(new DummyDataInformation(a.mParent))
 {
 }
 
@@ -87,6 +88,13 @@ template<PrimitiveDataType type>
 inline PrimitiveArrayData<type>::~PrimitiveArrayData()
 {
     delete mDummy;
+}
+
+template<PrimitiveDataType type>
+inline void PrimitiveArrayData<type>::setParent(DataInformation* parent)
+{
+    mParent = parent;
+    mDummy->setParent(parent);
 }
 
 template<PrimitiveDataType type>

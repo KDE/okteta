@@ -61,7 +61,7 @@ public:
             ScriptHandlerInfo* handlerInfo) const = 0;
     /** the primitive type or Type_NotPrimitive for structs etc */
     virtual PrimitiveDataType primitiveType() const = 0;
-    virtual void setParent(DataInformation* parent);
+    virtual void setParent(DataInformation* parent) = 0;
 
     virtual int indexOf(const DataInformation* data) const = 0;
     virtual BitCount32 offset(uint row) const = 0;
@@ -72,11 +72,6 @@ protected:
     AbstractArrayData(const AbstractArrayData& a);
     DataInformation* mParent;
 };
-
-inline void AbstractArrayData::setParent(DataInformation* parent)
-{
-    mParent = parent;
-}
 
 
 #endif // ABSTRACTARRAYDATA_H
