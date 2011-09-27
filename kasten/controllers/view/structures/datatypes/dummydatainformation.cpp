@@ -96,3 +96,8 @@ DataInformation* DummyDataInformation::clone() const
     return 0;
 }
 
+BitCount32 DummyDataInformation::childSize(int) const
+{
+    Q_ASSERT(false);
+    return 0;
+}

@@ -285,7 +285,7 @@ QScriptValue StringDataInformation::toScriptValue(QScriptEngine* engine, ScriptH
     return ret;
 }
 
-int StringDataInformation::childSize(int index) const
+BitCount32 StringDataInformation::childSize(int index) const
 {
     return mData->sizeAt(index);
 }

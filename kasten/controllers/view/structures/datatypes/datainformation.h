@@ -95,7 +95,7 @@ public:
     /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
     virtual QVariant childData(int row, int column, int role) const;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
-    virtual int childSize(int index) const;
+    virtual BitCount32 childSize(int index) const = 0;
 
 
     /** The size of this DataInformation type in bits (to allow bitfields in future) */

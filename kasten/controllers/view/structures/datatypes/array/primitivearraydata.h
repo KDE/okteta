@@ -53,9 +53,12 @@ public:
     virtual BitCount32 size() const;
     virtual PrimitiveDataType primitiveType() const;
     virtual void setParent(DataInformation* parent);
+    virtual BitCount32 sizeAt(int index);
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual QString typeName() const;
+
+    static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, bool littleEndian);
 protected:
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
     void readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
@@ -141,6 +144,15 @@ inline PrimitiveDataType PrimitiveArrayData<type>::primitiveType() const
 {
     return type;
 }
+
+template<PrimitiveDataType type>
+inline BitCount32 PrimitiveArrayData<type>::sizeAt(int index)
+{
+    Q_ASSERT(index >= 0 && uint(index) < length());
+    Q_UNUSED(index)
+    return sizeof(T) * 8;
+}
+
 
 
 #endif // PRIMITIVEARRAYDATA_H

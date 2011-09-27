@@ -157,6 +157,7 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
     if (role != Qt::EditRole)
         return false;
     Q_CHECK_PTR(item);
+    //TODO add support for locking
     mWritingData = true;
     quint64 remainingBits = qMax(mByteArrayModel->size() - mCursorIndex, 0) * 8;
     bool ret = false;
@@ -171,7 +172,6 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
                 remainingBits - offs, bitOffs);
     }
     else {
-        quint8 bitOffset;
         quint64 offs = item->positionRelativeToRoot(row);
         quint8 bitOffs = offs % 8;
         ret = item->setData(value, mByteArrayModel, mCursorIndex + (offs / 8), remainingBits - offs, bitOffs);

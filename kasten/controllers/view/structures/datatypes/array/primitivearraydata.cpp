@@ -80,7 +80,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::Abs
     const uint numBytes = numItems * sizeof(T);
     Q_ASSERT(uint(input->size()) >= numBytes + address);
     Okteta::Byte* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
-    for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += 4)
+    for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T))
     {
         //the compiler should unroll this loop
         for (uint byte = 0; byte < sizeof(T); byte++)
@@ -115,7 +115,7 @@ void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
         Okteta::AbstractByteArrayModel* out, bool littleEndian)
 {
     if (littleEndian)
-    {
+   {
         for (uint i = 0; i < sizeof(T); ++i)
         {
             //compiler should be smart enough not to create a loop
@@ -132,6 +132,26 @@ void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
             out->setByte(addr + i, val);
         }
     }
+}
+
+template<>
+void PrimitiveArrayData<Type_Float>::writeOneItem(float value, Okteta::Address addr,
+        Okteta::AbstractByteArrayModel* out, bool littleEndian)
+{
+    Q_ASSERT(sizeof(float) == sizeof(quint32));
+    union { quint32 intVal; float floatVal; } un;
+    un.floatVal = value;
+    PrimitiveArrayData<Type_UInt32>::writeOneItem(un.intVal, addr, out, littleEndian);
+}
+
+template<>
+void PrimitiveArrayData<Type_Double>::writeOneItem(double value, Okteta::Address addr,
+        Okteta::AbstractByteArrayModel* out, bool littleEndian)
+{
+    Q_ASSERT(sizeof(double) == sizeof(quint64));
+    union { quint64 intVal; double doubleVal; } un;
+    un.doubleVal = value;
+    PrimitiveArrayData<Type_UInt64>::writeOneItem(un.intVal, addr, out, littleEndian);
 }
 
 template<PrimitiveDataType type>

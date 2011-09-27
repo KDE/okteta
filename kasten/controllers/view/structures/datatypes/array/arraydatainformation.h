@@ -65,6 +65,7 @@ public:
     virtual unsigned int childCount() const;
     virtual bool canHaveChildren() const;
     virtual int indexOf(const DataInformation* const data) const;
+    BitCount32 childSize(int index) const;
 
     virtual bool isArray() const;
 
@@ -129,6 +130,11 @@ inline int ArrayDataInformation::indexOf(const DataInformation*const data) const
 inline QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
 {
     return mData->toScriptValue(index, engine, handlerInfo);
+}
+
+inline BitCount32 ArrayDataInformation::childSize(int index) const
+{
+    return mData->sizeAt(index);
 }
 
 

@@ -68,6 +68,7 @@ public:
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining) = 0;
+    virtual BitCount32 sizeAt(int index) = 0;
 protected:
     AbstractArrayData(const AbstractArrayData& a);
     DataInformation* mParent;

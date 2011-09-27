@@ -150,13 +150,13 @@ void DataInformation::beginRead()
 int DataInformation::indexOf(const DataInformation* const data) const
 {
     Q_UNUSED(data)
-    Q_ASSERT_X(false, "indexOf", "this should never happen!");
+    Q_ASSERT_X(false, "DataInformation::indexOf", "this should never happen!");
     return 0;
 }
 
 QVariant DataInformation::childData(int row, int column, int role) const
 {
-    kDebug() << "invalid call!";
+    Q_ASSERT_X(false, "DataInformation::childData", "this should never happen!");
     Q_UNUSED(row)
     Q_UNUSED(column)
     Q_UNUSED(role)
@@ -218,12 +218,6 @@ Qt::ItemFlags DataInformation::childFlags(int row, int column, bool fileLoaded) 
 {
     Q_ASSERT_X(false, "DataInformation::childFlags()", "Only subclass versions of this should be called");
     return childAt(row)->flags(column, fileLoaded);
-}
-
-int DataInformation::childSize(int index) const
-{
-    Q_ASSERT_X(false, "DataInformation::childSize()", "Only subclass versions of this should be called");
-    return childAt(index)->size();
 }
 
 DataInformation* DataInformation::child(QString name) const

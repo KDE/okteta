@@ -204,11 +204,7 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
     if (!index.isValid())
         return QModelIndex();
 
-    DataInformation *childItem =
-            static_cast<DataInformation*> (index.internalPointer());
-
-    if (!childItem->parent())
-        return QModelIndex();
+    DataInformation* childItem = static_cast<DataInformation*> (index.internalPointer());
 
     DataInformationBase* parentObj = childItem->parent();
 

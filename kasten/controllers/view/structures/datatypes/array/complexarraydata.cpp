@@ -203,3 +203,9 @@ PrimitiveDataType ComplexArrayData::primitiveType() const
     else
         return Type_NotPrimitive;
 }
+
+BitCount32 ComplexArrayData::sizeAt(int index)
+{
+    Q_ASSERT(index >= 0 && uint(index) < length());
+    return mChildren.at(index)->size();
+}
