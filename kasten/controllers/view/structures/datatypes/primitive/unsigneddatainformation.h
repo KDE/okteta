@@ -27,21 +27,18 @@
 #include "primitivedatainformation.h"
 #include "../poddecoder/typeeditors/uintspinbox.h"
 
-template<typename T, PrimitiveDataType typeValue>
+template<typename T>
 class UnsignedDataInformation : public PrimitiveDataInformation
 {
 public:
     explicit UnsignedDataInformation(QString name, DataInformation* parent = 0);
     virtual ~UnsignedDataInformation() {}
 
-    virtual PrimitiveDataType type() const;
     virtual int size() const;
     static int displayBase();
 
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
-
-    virtual QString typeName() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
@@ -56,22 +53,16 @@ protected:
     T mValue;
 };
 
-template<typename T, PrimitiveDataType typeValue>
-PrimitiveDataType UnsignedDataInformation<T, typeValue>::type() const
-{
-    return typeValue;
-}
-
-template<typename T, PrimitiveDataType typeValue>
-QWidget* UnsignedDataInformation<T, typeValue>::createEditWidget(QWidget* parent) const
+template<typename T>
+QWidget* UnsignedDataInformation<T>::createEditWidget(QWidget* parent) const
 {
     UIntSpinBox* ret = new UIntSpinBox(parent, displayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QVariant UnsignedDataInformation<T, typeValue>::dataFromWidget(const QWidget* w) const
+template<typename T>
+QVariant UnsignedDataInformation<T>::dataFromWidget(const QWidget* w) const
 {
     const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
     if (spin)
@@ -83,28 +74,28 @@ QVariant UnsignedDataInformation<T, typeValue>::dataFromWidget(const QWidget* w)
     }
 }
 
-template<typename T, PrimitiveDataType typeValue>
-void UnsignedDataInformation<T, typeValue>::setWidgetData(QWidget* w) const
+template<typename T>
+void UnsignedDataInformation<T>::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     if (spin)
         spin->setValue(mValue);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-UnsignedDataInformation<T, typeValue>::UnsignedDataInformation(QString name, DataInformation* parent)
+template<typename T>
+UnsignedDataInformation<T>::UnsignedDataInformation(QString name, DataInformation* parent)
         : PrimitiveDataInformation(name, parent), mValue(0)
 {
 }
 
-template<typename T, PrimitiveDataType typeValue>
-UnsignedDataInformation<T, typeValue>::UnsignedDataInformation(const UnsignedDataInformation& d)
+template<typename T>
+UnsignedDataInformation<T>::UnsignedDataInformation(const UnsignedDataInformation& d)
         : PrimitiveDataInformation(d), mValue(d.mValue)
 {
 }
 
-template<typename T, PrimitiveDataType typeValue>
-AllPrimitiveTypes UnsignedDataInformation<T, typeValue>::qVariantToAllPrimitiveTypes(const QVariant& value) const
+template<typename T>
+AllPrimitiveTypes UnsignedDataInformation<T>::qVariantToAllPrimitiveTypes(const QVariant& value) const
 {
     if (!value.isValid())
         kDebug() << "invalid QVariant passed.";
@@ -113,8 +104,8 @@ AllPrimitiveTypes UnsignedDataInformation<T, typeValue>::qVariantToAllPrimitiveT
     return AllPrimitiveTypes(value.toULongLong());
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline int UnsignedDataInformation<T, typeValue>::displayBase()
+template<typename T>
+inline int UnsignedDataInformation<T>::displayBase()
 {
     int base = Kasten::StructViewPreferences::unsignedDisplayBase();
     if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
@@ -125,28 +116,22 @@ inline int UnsignedDataInformation<T, typeValue>::displayBase()
         return 10; //safe default value
 }
 
-template<typename T, PrimitiveDataType typeValue>
-AllPrimitiveTypes UnsignedDataInformation<T, typeValue>::value() const
+template<typename T>
+AllPrimitiveTypes UnsignedDataInformation<T>::value() const
 {
     return AllPrimitiveTypes(mValue);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-void UnsignedDataInformation<T, typeValue>::setValue(AllPrimitiveTypes newVal)
+template<typename T>
+void UnsignedDataInformation<T>::setValue(AllPrimitiveTypes newVal)
 {
     mValue = newVal.ulongValue; //This is safe since the value is unsigned
 }
 
-template<typename T, PrimitiveDataType typeValue>
-int UnsignedDataInformation<T, typeValue>::size() const
+template<typename T>
+int UnsignedDataInformation<T>::size() const
 {
     return sizeof(T) * 8;
-}
-
-template<typename T, PrimitiveDataType typeValue>
-QString UnsignedDataInformation<T, typeValue>::typeName() const
-{
-    return PrimitiveDataInformation::typeName(typeValue);
 }
 
 #endif // UNSIGNEDDATAINFORMATION_H

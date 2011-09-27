@@ -26,12 +26,12 @@ QString BoolDataInformation<T, typeValue>::valueString() const
 {
     if (!DataInformation::mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return BoolDataInformation<T, typeValue>::valueString(UnsignedDataInformation<T, typeValue>::mValue);
+    return BoolDataInformation<T, typeValue>::valueString(UnsignedDataInformation<T>::mValue);
 }
 
 template<typename T, PrimitiveDataType typeValue>
 QString BoolDataInformation<T, typeValue>::valueString(T value) {
-    int base = UnsignedDataInformation<T, typeValue>::displayBase();
+    int base = UnsignedDataInformation<T>::displayBase();
     if (value == 0)
         return i18nc("boolean value", "false");
     else if (value == 1)

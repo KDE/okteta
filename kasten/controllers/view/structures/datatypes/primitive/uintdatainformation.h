@@ -25,7 +25,7 @@
 #include "unsigneddatainformation.h"
 
 template<typename T, PrimitiveDataType typeValue>
-class UIntDataInformation : public UnsignedDataInformation<T, typeValue>
+class UIntDataInformation : public UnsignedDataInformation<T>
 {
 public:
     explicit UIntDataInformation(QString name, DataInformation* parent = 0);
@@ -35,19 +35,33 @@ public:
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QString valueString() const;
     static QString valueString(T val);
+    virtual PrimitiveDataType type() const;
+    virtual QString typeName() const;
 protected:
     explicit UIntDataInformation(const UIntDataInformation& d);
 };
 
 template<typename T, PrimitiveDataType typeValue>
+PrimitiveDataType UIntDataInformation<T, typeValue>::type() const
+{
+    return typeValue;
+}
+
+template<typename T, PrimitiveDataType typeValue>
+QString UIntDataInformation<T, typeValue>::typeName() const
+{
+    return PrimitiveDataInformation::typeName(typeValue);
+}
+
+template<typename T, PrimitiveDataType typeValue>
 UIntDataInformation<T, typeValue>::UIntDataInformation(QString name, DataInformation* parent)
-        : UnsignedDataInformation<T, typeValue>(name, parent)
+        : UnsignedDataInformation<T>(name, parent)
 {
 }
 
 template<typename T, PrimitiveDataType typeValue>
 UIntDataInformation<T, typeValue>::UIntDataInformation(const UIntDataInformation& d)
-        : UnsignedDataInformation<T, typeValue>(d)
+        : UnsignedDataInformation<T>(d)
 {
 }
 

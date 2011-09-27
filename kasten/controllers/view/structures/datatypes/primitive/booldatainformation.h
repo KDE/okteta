@@ -29,7 +29,7 @@
 
 
 template<typename T, PrimitiveDataType typeValue>
-class BoolDataInformation : public UnsignedDataInformation<T, typeValue>
+class BoolDataInformation : public UnsignedDataInformation<T>
 {
 public:
     explicit BoolDataInformation(QString name, DataInformation* parent = 0);
@@ -39,25 +39,39 @@ public:
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QString valueString() const;
     static QString valueString(T val);
+    virtual PrimitiveDataType type() const;
+    virtual QString typeName() const;
 protected:
     explicit BoolDataInformation(const BoolDataInformation& d);
 };
 
 template<typename T, PrimitiveDataType typeValue>
+PrimitiveDataType BoolDataInformation<T, typeValue>::type() const
+{
+    return typeValue;
+}
+
+template<typename T, PrimitiveDataType typeValue>
+QString BoolDataInformation<T, typeValue>::typeName() const
+{
+    return PrimitiveDataInformation::typeName(typeValue);
+}
+
+template<typename T, PrimitiveDataType typeValue>
 QScriptValue BoolDataInformation<T, typeValue>::valueAsQScriptValue() const
 {
-    return QScriptValue(bool(UnsignedDataInformation<T, typeValue>::mValue));
+    return QScriptValue(bool(UnsignedDataInformation<T>::mValue));
 }
 
 template<typename T, PrimitiveDataType typeValue>
 BoolDataInformation<T, typeValue>::BoolDataInformation(QString name, DataInformation* parent)
-        : UnsignedDataInformation<T, typeValue>(name, parent)
+        : UnsignedDataInformation<T>(name, parent)
 {
 }
 
 template<typename T, PrimitiveDataType typeValue>
 BoolDataInformation<T, typeValue>::BoolDataInformation(const BoolDataInformation& d)
-        : UnsignedDataInformation<T, typeValue>(d)
+        : UnsignedDataInformation<T>(d)
 {
 }
 
