@@ -40,10 +40,11 @@ public:
     QList<DataInformation*> children() const;
 
     virtual int size() const;
-    /** this is valid for structs and arrays, union has an own implementation */
-    virtual bool setData(const QVariant& value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
-            quint64 bitsRemaining, quint8* bitOffset);
+    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+
     /** this is valid for structs and arrays, union has an own implementation */
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);

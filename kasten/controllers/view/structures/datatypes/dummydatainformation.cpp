@@ -25,7 +25,6 @@
 DummyDataInformation::DummyDataInformation(DataInformationBase* parent)
     : DataInformation(QLatin1String("dummy"), parent)
 {
-    
 }
 
 
@@ -42,7 +41,15 @@ QScriptValue DummyDataInformation::toScriptValue(QScriptEngine*, ScriptHandlerIn
     return QScriptValue();
 }
 
-bool DummyDataInformation::setData(const QVariant&, DataInformation*, Okteta::AbstractByteArrayModel*, Okteta::Address, quint64, quint8*)
+bool DummyDataInformation::setChildData(uint, const QVariant&, Okteta::AbstractByteArrayModel*,
+        Okteta::Address, quint64, quint8)
+{
+    Q_ASSERT(false);
+    return false;
+}
+
+bool DummyDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
+        Okteta::Address, quint64, quint8)
 {
     Q_ASSERT(false);
     return false;

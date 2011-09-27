@@ -89,8 +89,18 @@ void SignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 QScriptValue SignedBitfieldDataInformation::valueAsQScriptValue() const
 {
     // (|~mask()) makes first bits ones
-    if (width() <= 32)
-        return  qint32(mValue.intValue | quint32(~mask())); //32 bit or less -> can be put in as value
-    else //have to save it as string since 64 bit values are not supported
-        return QString::number(mValue.longValue | (~mask()));
+    if (mValue.ulongValue & (1 << (size() - 1)))
+    {
+        //less than zero
+        if (width() <= 32)
+            return  qint32(mValue.intValue | quint32(~mask())); //32 bit or less -> can be put in as value
+        else //have to save it as string since 64 bit values are not supported
+            return QString::number(mValue.longValue | (~mask()));
+    }
+    else {
+        if (width() <= 32)
+            return  qint32(mValue.intValue & mask()); //32 bit or less -> can be put in as value
+        else //have to save it as string since 64 bit values are not supported
+            return QString::number(mValue.longValue & mask());
+    }
 }

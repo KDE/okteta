@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2011, 2010 Alex Richardson <alex.richardson@gmx.de>
  *   Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  *   This library is free software; you can redistribute it and/or
@@ -40,6 +40,7 @@
 
 #include <kdemacros.h>
 
+class DataInformationBase;
 class DataInformation;
 class TopLevelDataInformation;
 namespace Okteta
@@ -74,7 +75,8 @@ public:
     }
     void setByteOrder(StructViewPreferences::EnumByteOrder::type order);
     int columnCount() const;
-    bool setData(const QVariant& value, int role, DataInformation* item);
+    KDE_DEPRECATED bool setData(const QVariant& value, int role, DataInformation* item);
+    bool setData(const QVariant& value, int role, DataInformation* item, uint row);
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
     inline StructuresManager* manager() const
     {

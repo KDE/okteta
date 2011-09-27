@@ -88,7 +88,7 @@ public:
      *  @return the child with given @p name or @c NULL if none found with that name
      */
     virtual DataInformation* child(QString name) const;
-    virtual quint64 positionRelativeToParent(int row = -1) const;
+    virtual quint64 positionRelativeToRoot(int row = -1) const;
 
     //for the model:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
@@ -139,24 +139,19 @@ public:
     void beginRead();
     /** Writes the current data contained in this object to out.
      *
-     *  If @code @p inf != this @endcode this method must do nothing and return false.
-     *
      *  @param value a @link QVariant object holding the new data to write
-     *  @param inf the object that should currently write the data
-     *  @param out the byte array the value is read from
+     *  @param out the byte array the value is written to
      *  @param address the address in @p out
-     *  @param bitsRemaining number of bits remaining in @p input
+     *  @param bitsRemaining number of bits remaining in @p out
      *  @param bitOffset the bit to start at in the first byte
      *
      *  @return @c true on success, @c false otherwise
      */
-    virtual bool setData(const QVariant& value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *input, Okteta::Address address,
-            quint64 bitsRemaining, quint8* bitOffset) = 0;
+    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset) = 0;
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset) = 0;
 
-    virtual bool setChildData(int row, const QVariant& value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *input, Okteta::Address address,
-            quint64 bitsRemaining, quint8* bitOffset);
     virtual bool isTopLevel() const;
     TopLevelDataInformation* topLevelDataInformation() const;
     DataInformation* mainStructure();

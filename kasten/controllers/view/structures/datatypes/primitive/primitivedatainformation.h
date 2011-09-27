@@ -38,11 +38,13 @@ public:
 
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 
-    virtual bool setData(const QVariant& value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
-            quint64 bitsRemaining, quint8* bitOffset);
+    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
             Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+
     virtual QString valueString() const = 0;
     virtual PrimitiveDataType type() const = 0;
     virtual AllPrimitiveTypes value() const = 0;

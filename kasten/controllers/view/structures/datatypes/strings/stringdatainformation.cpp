@@ -76,13 +76,20 @@ quint64 StringDataInformation::offset(unsigned int index) const
     return offs;
 }
 
-bool StringDataInformation::setData(const QVariant& value, DataInformation* inf,
-        Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+
+bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
+        Okteta::Address, quint64, quint8)
 {
-    //TODO
-    Q_ASSERT(false);
+    Q_ASSERT_X(false, "StringDataInformation::setData()", "this should never be called!");
     return false;
 }
+
+bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
+{
+    kDebug() << "not implemented yet!";
+    return false;
+}
+
 
 qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         quint64 bitsRemaining, quint8* bitOffset)

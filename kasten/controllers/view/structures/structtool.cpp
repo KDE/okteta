@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *   Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  *   This library is free software; you can redistribute it and/or
@@ -146,27 +146,40 @@ void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
 
 bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
 {
+    kWarning() << "should not be called";
+    return setData(value, role, item, item->row());
+}
+
+bool StructTool::setData(const QVariant& value, int role, DataInformation* item, uint row)
+{
     if (!mByteArrayModel)
         return false;
     if (role != Qt::EditRole)
         return false;
+    Q_CHECK_PTR(item);
     mWritingData = true;
-    bool found = false;
-    QScopedPointer<quint8> bitOffset(new quint8(0));
-    int remaining = qMax(mByteArrayModel->size() - mCursorIndex, 0);
-    for (int i = 0; i < mData.size(); ++i)
+    quint64 remainingBits = qMax(mByteArrayModel->size() - mCursorIndex, 0) * 8;
+    bool ret = false;
+    DataInformationBase* par = item->parent();
+    if (item->isDummy())
     {
-        if (mData[i]->actualDataInformation()->setData(value, item, mByteArrayModel,
-                mCursorIndex, remaining, bitOffset.data()))
-        {
-            found = true;
-            break;
-        }
+        //we have to use setChildData() since this item is not valid
+        DataInformation* parent = static_cast<DataInformation*>(par);
+        quint64 offs = parent->positionRelativeToRoot();
+        quint8 bitOffs = offs % 8;
+        ret = parent->setChildData(row, value, mByteArrayModel, mCursorIndex + (offs / 8),
+                remainingBits - offs, bitOffs);
+    }
+    else {
+        quint8 bitOffset;
+        quint64 offs = item->positionRelativeToRoot(row);
+        quint8 bitOffs = offs % 8;
+        ret = item->setData(value, mByteArrayModel, mCursorIndex + (offs / 8), remainingBits - offs, bitOffs);
     }
     mWritingData = false; //finished
     //XXX: this is inefficient, best would be to only update the changed value
     updateData(); //update once after writing
-    return found;
+    return ret;
 }
 
 void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
@@ -308,7 +321,7 @@ void StructTool::mark(const QModelIndex& idx)
     }
 
     //FIXME support marking of partial bytes
-    const Okteta::Address startOffset = baseAddress + data->positionRelativeToParent(idx.row()) / 8;
+    const Okteta::Address startOffset = baseAddress + data->positionRelativeToRoot(idx.row()) / 8;
     const Okteta::AddressRange markingRange =
         Okteta::AddressRange::fromWidth(startOffset, length);
     mByteArrayView->setMarking(markingRange, true);

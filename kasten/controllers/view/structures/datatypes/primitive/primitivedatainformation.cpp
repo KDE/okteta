@@ -28,26 +28,25 @@
 
 #include <QtScript/QScriptEngine>
 
-bool PrimitiveDataInformation::setData(const QVariant& valueVariant, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, Okteta::Address address,
-        quint64 bitsRemaining, quint8* bitOffset)
+bool PrimitiveDataInformation::setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel *out,
+        Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
 {
-    if (this != inf)
-    {
-        //make sure bitOffset is always incremented, so that next item starts at correct offset
-        *bitOffset = (*bitOffset + size()) % 8;
-        return false;
-    }
     AllPrimitiveTypes oldVal(value());
     // this is implemented in the subclasses
     AllPrimitiveTypes valToWrite = qVariantToAllPrimitiveTypes(valueVariant);
     AllPrimitiveTypes newVal(oldVal);
     //this handles remaining < size() for us
-    mWasAbleToRead = newVal.writeBits(size(), valToWrite, out, byteOrder(), address, bitsRemaining, bitOffset);
-
-    //no need for dataChanged, since structtool ensures that the model emits dataChanged when items are set
-    return true;
+    bool wasAbleToWrite = newVal.writeBits(size(), valToWrite, out, byteOrder(), address, bitsRemaining, &bitOffset);
+    return wasAbleToWrite;
 }
+
+bool PrimitiveDataInformation::setChildData(uint, const QVariant&, Okteta::AbstractByteArrayModel*,
+        Okteta::Address, quint64, quint8)
+{
+    Q_ASSERT_X(false, "PrimitiveDataInformation::setChildData()", "this should never be called!!");
+    return false;
+}
+
 
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {

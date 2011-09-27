@@ -222,20 +222,15 @@ qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta:
     return readBits;
 }
 
-bool ComplexArrayData::setData(QVariant value, DataInformation* inf, Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+bool ComplexArrayData::setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
+        Okteta::Address address, quint64 bitsRemaining)
 {
-    if (inf == mParent)
-        return true; //do nothing, this is not editable
-    quint64 readBits = 0;
-    uint readBytes = 0;
-    for (int i = 0; i < mChildren.size(); i++)
+    Q_ASSERT(row < unsigned(mChildren.size()));
+    unsigned int bits = 0;
+    for (uint i = 0; i < row; ++i)
     {
-        if (mChildren[i]->setData(value, inf, out, address + readBytes,
-                bitsRemaining - readBits, bitOffset))
-            return true; //found -> done job
-        readBits += mChildren[i]->size();
-        readBytes = (readBits + *bitOffset) / 8;
-
+        bits += mChildren.at(i)->size();
     }
-    return false;
+    return mChildren.at(row)->setData(value, out, address + (bits / 8), bitsRemaining - bits, bits % 8);
 }
+

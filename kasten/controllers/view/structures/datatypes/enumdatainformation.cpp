@@ -72,17 +72,14 @@ QString EnumDataInformation::getTypeString() const
     return i18n("enum (%1)", mValue->typeName());
 }
 
-bool EnumDataInformation::setData(const QVariant& value, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, Okteta::Address address,
-        quint64 bitsRemaining, quint8* bitOffset)
+
+bool EnumDataInformation::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+        Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
 {
-    if (this != inf)
-        return false;
-    //correct object -> use mValue as parameter so that PrimitiveDataInformation::setData() returns true
-    //endianess will also be correct since it is initialized to Inherit and will then use this endianess
-    bool ret = mValue->setData(value, mValue, out, address, bitsRemaining, bitOffset);
-    return ret;
+    return mValue->setData(value, out, address, bitsRemaining, bitOffset);
 }
+
+
 qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
         Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {

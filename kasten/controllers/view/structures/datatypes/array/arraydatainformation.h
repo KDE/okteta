@@ -50,11 +50,14 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual quint64 offset(unsigned int index) const;
+    virtual int size() const;
+
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
             quint64 bitsRemaining, quint8* bitOffset);
-    virtual bool setData(const QVariant& value, DataInformation* inf, Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
-    virtual int size() const;
+    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
 
     virtual QVariant childData(int row, int column, int role) const;
     virtual DataInformation* childAt(unsigned int idx) const;

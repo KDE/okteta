@@ -152,7 +152,22 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
     return ret;
 }
 
-bool ArrayDataInformation::setData(const QVariant& value, DataInformation* inf, Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+
+bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+        Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
 {
-    return mData->setData(value, inf, input, address, bitsRemaining, bitOffset);
+    if (bitOffset != 0)
+    {
+        kWarning() << "in array " << name() << ": bit offset != 0 (" << bitOffset << "), adding padding,"
+                " arrays always start at full bytes";
+        bitsRemaining -= bitOffset;
+    }
+    return mData->setChildData(row, value, out, address, bitsRemaining);
+}
+
+bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
+        Okteta::Address, quint64, quint8)
+{
+    Q_ASSERT_X(false, "ArrayDataInformation::setData()", "this should never be called");
+    return false;
 }

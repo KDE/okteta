@@ -46,25 +46,21 @@ DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
     return mChildren[idx];
 }
 
-bool DataInformationWithChildren::setData(const QVariant& value,
-        DataInformation* inf, Okteta::AbstractByteArrayModel *out,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+bool DataInformationWithChildren::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
 {
-    if (this == inf)
-        return true; //do nothing since this is not editable
-    quint64 readBits = 0;
-    uint readBytes = 0;
-    for (int i = 0; i < mChildren.size(); i++)
-    {
-        if (mChildren[i]->setData(value, inf, out, address + readBytes,
-                bitsRemaining - readBits, bitOffset))
-            return true; //found -> done job
-        readBits += mChildren[i]->size();
-        readBytes = (readBits + *bitOffset) / 8;
+    kWarning() << "this should not be called";
+    Q_ASSERT(row < childCount());
+    int offs = offset(row);
+    quint8 bitOffs = (offs + bitOffset) & 7; //mod 8
+    return mChildren.at(row)->setData(value, out, address + (offs / 8), bitsRemaining - offs, bitOffs);
+}
 
-    }
+bool DataInformationWithChildren::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
+{
+    Q_ASSERT_X(false, "DataInformationWithChildren::setData()", "this should never be called");
     return false;
 }
+
 
 qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)

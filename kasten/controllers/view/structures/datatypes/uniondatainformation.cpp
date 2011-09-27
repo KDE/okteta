@@ -68,28 +68,6 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     return readBits;
 }
 
-bool UnionDataInformation::setData(const QVariant& value, DataInformation* inf,
-        Okteta::AbstractByteArrayModel *out, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
-{
-    if (this == inf)
-        return true; //do nothing since this is not editable
-        
-    bool success = false;
-    quint8 originalBitOffset = *bitOffset;
-    for (int i = 0; i < mChildren.size(); i++)
-    {
-        //only the value where inf is one of the children or contained in one of them will be written
-        success = mChildren.at(i)->setData(value, inf, out,
-            address, bitsRemaining, bitOffset);
-        if (success)
-            break;
-        *bitOffset = originalBitOffset; // start at beginning
-    }
-    //after having set the value, some elements may have changed size -> update
-    topLevelDataInformation()->updateElement(this);
-    return success;
-}
-
 void UnionDataInformation::addDataTypeToUnion(DataInformation* field)
 {
     appendChild(field);

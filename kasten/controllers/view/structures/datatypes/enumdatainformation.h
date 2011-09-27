@@ -48,9 +48,8 @@ public:
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
             Okteta::Address address, quint64 remaining, quint8* bitOffset);
-    virtual bool setData(const QVariant& value, DataInformation* inf,
-            Okteta::AbstractByteArrayModel *out, Okteta::Address address,
-            quint64 bitsRemaining, quint8* bitOffset);
+    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;

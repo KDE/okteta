@@ -54,8 +54,14 @@ public:
 
     virtual bool canHaveChildren() const;
     virtual DataInformation* childAt(unsigned int) const;
-    virtual bool setData(const QVariant& value, DataInformation* inf, Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+
+    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* input,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            quint64 bitsRemaining, quint8* bitOffset);
+
     virtual int size() const;
     virtual void setWidgetData(QWidget* w) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;

@@ -142,13 +142,12 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
 
     if (!index.internalPointer())
     {
-        kDebug()
-            << "item == NULL";
+        kDebug() << "item == NULL";
         return false;
     }
 
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
-    bool change = mTool->setData(value, role, item);
+    bool change = mTool->setData(value, role, item, index.row());
     if (change)
     {
         emit dataChanged(index, index);
