@@ -30,7 +30,7 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Float,Primitive)
 public:
     DATAINFORMATION_CLONE(Float)
 
-    virtual int size() const;
+    virtual BitCount32 size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
     static QString valueString(float value);
@@ -52,9 +52,9 @@ inline PrimitiveDataType FloatDataInformation::type() const
     return Type_Float;
 }
 
-inline int FloatDataInformation::size() const
+inline BitCount32 FloatDataInformation::size() const
 {
-    return 32;
+    return sizeof(float) * 8;
 }
 
 inline QString FloatDataInformation::typeName() const

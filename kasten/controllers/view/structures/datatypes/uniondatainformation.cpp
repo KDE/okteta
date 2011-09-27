@@ -27,10 +27,10 @@ QString UnionDataInformation::typeName() const
     return i18nc("data type in C/C++", "union");
 }
 
-int UnionDataInformation::size() const
+BitCount32 UnionDataInformation::size() const
 {
-    //since this is a union retur size of biggest element
-    int size = 0;
+    //since this is a union return size of biggest element
+    BitCount32 size = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
         size = qMax(size, mChildren.at(i)->size());
@@ -39,7 +39,7 @@ int UnionDataInformation::size() const
 }
 
 qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     //first of all update the structure:
     topLevelDataInformation()->updateElement(this);
@@ -71,15 +71,6 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
 void UnionDataInformation::addDataTypeToUnion(DataInformation* field)
 {
     appendChild(field);
-}
-
-UnionDataInformation& UnionDataInformation::operator<<(DataInformation* field)
-{
-    if (field)
-    {
-        addDataTypeToUnion(field);
-    }
-    return *this;
 }
 
 UnionDataInformation::~UnionDataInformation()

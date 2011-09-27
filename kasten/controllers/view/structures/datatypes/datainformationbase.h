@@ -22,6 +22,14 @@
 #ifndef DATAINFORMATIONBASE_H
 #define DATAINFORMATIONBASE_H
 
+#include "structviewpreferences.h"
+
+typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
+typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
+/** To indicate that it is a number of bits not bytes */
+typedef quint32 BitCount32;
+typedef quint64 BitCount64;
+
 class DataInformationBase
 {
 public:

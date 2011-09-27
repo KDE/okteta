@@ -21,6 +21,7 @@
  */
 
 #include "allprimitivetypes.h"
+
 #include <abstractbytearraymodel.h>
 
 compile_time_assert(sizeof(double) == 8);
@@ -72,7 +73,7 @@ const QLatin1String PrimitiveType::typeNames[] = {
 bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
         const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel* out,
         const ByteOrder byteOrder, const Okteta::Address address,
-        const quint64 bitsRemaining, quint8* const bitOffset)
+        const BitCount64 bitsRemaining, quint8* const bitOffset)
 {
     Q_ASSERT(*bitOffset < 8);
     Q_ASSERT(bitCount <= 64);
@@ -114,7 +115,7 @@ bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
 
 bool AllPrimitiveTypes::readBits(const quint8 bitCount,
         const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
-        const Okteta::Address address, const quint64 bitsRemaining,
+        const Okteta::Address address, const BitCount64 bitsRemaining,
         quint8* const bitOffset)
 {
     Q_ASSERT(bitCount <= 64);

@@ -93,7 +93,7 @@ DataInformation* ComplexArrayData::childAt(unsigned int idx)
     return mChildren.at(idx);
 }
 
-AbstractArrayData* ComplexArrayData::clone()
+ComplexArrayData* ComplexArrayData::clone()
 {
     return new ComplexArrayData(*this);
 }
@@ -109,7 +109,7 @@ unsigned int ComplexArrayData::length() const
     return mChildren.size();
 }
 
-unsigned int ComplexArrayData::size() const
+BitCount32 ComplexArrayData::size() const
 {
     int max = mChildren.size();
     uint total = 0;
@@ -139,10 +139,10 @@ void ComplexArrayData::setParent(DataInformation* parent)
         mChildren.at(i)->setParent(parent);
 }
 
-quint64 ComplexArrayData::offset(unsigned int index) const
+BitCount32 ComplexArrayData::offset(unsigned int index) const
 {
     Q_ASSERT(index < length());
-    quint64 offset = 0;
+    BitCount32 offset = 0;
     //sum size of elements up to index
     for (unsigned int i = 0; i < index; ++i)
     {
@@ -200,7 +200,7 @@ QScriptValue ComplexArrayData::toScriptValue(uint index, QScriptEngine* engine,
     return mChildren.at(index)->toScriptValue(engine, handlerInfo);
 }
 
-qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining)
+qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {
     uint readBytes = 0;
     qint64 readBits = 0;
@@ -221,7 +221,7 @@ qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta:
 }
 
 bool ComplexArrayData::setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
-        Okteta::Address address, quint64 bitsRemaining)
+        Okteta::Address address, BitCount64 bitsRemaining)
 {
     Q_ASSERT(row < unsigned(mChildren.size()));
     unsigned int bits = 0;

@@ -105,7 +105,7 @@ QString Utf8StringData::completeString(bool skipInvalid) const
 }
 
 qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            quint64 bitsRemaining)
+            BitCount64 bitsRemaining)
 {
     const int oldSize = count();
     mNonBMPCount = 0;
@@ -128,10 +128,10 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
         emit mParent->topLevelDataInformation()->_childrenRemoved(mParent, 0, oldSize);
     }
 
-    const int oldMax = mCodePoints.size();
+    const uint oldMax = mCodePoints.size();
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
-    int count = 0;
+    uint count = 0;
     mEofReached = false;
     if (((mMode & CharCount) && mLength.maxChars == 0)
             || ((mMode & ByteCount) && mLength.maxBytes < 2))
@@ -325,13 +325,13 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
     return (addr - address) * 8;
 }
 
-unsigned int Utf8StringData::size() const
+BitCount32 Utf8StringData::size() const
 {
     //add 16 for every non BMP char, since they use 32 bits
     return (mOneByteCount + mTwoByteCount * 2 + mThreeByteCount * 3 + mFourByteCount * 4) * 8;
 }
 
-quint64 Utf8StringData::sizeAt(int i) const
+BitCount32 Utf8StringData::sizeAt(int i) const
 {
     Q_ASSERT(i >= 0 && i <= count());
     quint8 isError = mErrorIndices[i];

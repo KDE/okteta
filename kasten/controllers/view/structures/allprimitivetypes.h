@@ -30,6 +30,7 @@
 #include <address.h>
 
 #include "structviewpreferences.h"
+#include "datatypes/datainformationbase.h"
 
 namespace Okteta
 {
@@ -175,7 +176,7 @@ union AllPrimitiveTypes
      */
     bool writeBits(const quint8 bitCount, const AllPrimitiveTypes newValue,
             Okteta::AbstractByteArrayModel* out, const ByteOrder byteOrder,
-            const Okteta::Address address, const quint64 bitsRemaining,
+            const Okteta::Address address, const BitCount64 bitsRemaining,
             quint8* const bitOffset);
     /** Reads given number of bits from @p input and sets value of this union to
      *  the new value.
@@ -195,7 +196,7 @@ union AllPrimitiveTypes
      */
     bool readBits(const quint8 bitCount,
             const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
-            const Okteta::Address address, const quint64 bitsRemaining,
+            const Okteta::Address address, const BitCount64 bitsRemaining,
             quint8* const bitOffset);
 
     template<typename T> T value() const;

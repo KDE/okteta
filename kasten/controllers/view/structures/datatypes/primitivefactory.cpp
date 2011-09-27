@@ -61,7 +61,6 @@ PrimitiveDataType PrimitiveFactory::typeStringToType(QString& string)
         " correct value (typeStr=" << typeStr << ")";
     return Type_NotPrimitive; //just return a default value
 }
-
 PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
         PrimitiveDataType type, DataInformation* parent)
 {

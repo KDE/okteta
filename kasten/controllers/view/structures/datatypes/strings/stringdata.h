@@ -27,12 +27,9 @@
 #include <QtCore/QString>
 
 #include <address.h>
-#include "structviewpreferences.h"
+#include "../datainformationbase.h"
 
 class StringDataInformation;
-
-typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
-typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnum;
 
 namespace Okteta {
     class AbstractByteArrayModel;
@@ -61,9 +58,9 @@ public:
     virtual QString charType() const = 0;
     virtual QString stringValue(int row) const = 0;
     virtual QString completeString(bool skipInvalid = false) const = 0;
-    virtual unsigned int size() const = 0;
-    virtual quint64 sizeAt(int i) const = 0;
-    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining) = 0;
+    virtual BitCount32 size() const = 0;
+    virtual BitCount32 sizeAt(int i) const = 0;
+    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     /** by default just sets value, if more logic is needed can be overridden */
     virtual void setEndianess(bool littleEndian);
     uint terminationMode() const;

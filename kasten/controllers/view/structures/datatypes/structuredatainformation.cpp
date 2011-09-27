@@ -31,16 +31,6 @@ void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
     appendChild(field);
 }
 
-StructureDataInformation& StructureDataInformation::operator<<(
-        DataInformation* field)
-{
-    if (field)
-    {
-        addDataTypeToStruct(field);
-    }
-    return *this;
-}
-
 StructureDataInformation::~StructureDataInformation()
 {
 }

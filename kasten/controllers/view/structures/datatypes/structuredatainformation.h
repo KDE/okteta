@@ -39,8 +39,6 @@ public:
     virtual bool isStruct() const;
     //implement the DataInformation pure virtual functions
     QString typeName() const;
-    /** add another field to this struct */
-    StructureDataInformation& operator<<(DataInformation* field);
 };
 
 inline bool StructureDataInformation::isStruct() const

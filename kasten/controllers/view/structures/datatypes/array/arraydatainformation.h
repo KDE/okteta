@@ -49,15 +49,14 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
-    virtual quint64 offset(unsigned int index) const;
-    virtual int size() const;
+    virtual BitCount32 size() const;
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            quint64 bitsRemaining, quint8* bitOffset);
+            BitCount64 bitsRemaining, quint8* bitOffset);
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
     virtual QVariant childData(int row, int column, int role) const;
     virtual DataInformation* childAt(unsigned int idx) const;
@@ -75,6 +74,8 @@ public:
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
 
 protected:
+    virtual BitCount32 offset(unsigned int index) const;
+
     AbstractArrayData* mData;
     static const uint MAX_LEN = 10000;
 };
@@ -91,7 +92,7 @@ inline QString ArrayDataInformation::typeName() const
     //return i18nc("array type then length", "%1[%2]", data->typeName(), childCount()); //TODO
 }
 
-inline int ArrayDataInformation::size() const
+inline BitCount32 ArrayDataInformation::size() const
 {
     return mData->size();
 }

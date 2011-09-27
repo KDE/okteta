@@ -31,7 +31,7 @@ public:
     DATAINFORMATION_CLONE(Char)
 
     static int displayBase();
-    virtual int size() const;
+    virtual BitCount32 size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
     static QString valueString(quint8 value);
@@ -53,9 +53,9 @@ inline PrimitiveDataType CharDataInformation::type() const
     return Type_Char;
 }
 
-inline int CharDataInformation::size() const
+inline BitCount32 CharDataInformation::size() const
 {
-    return 8;
+    return sizeof(quint8) * 8;
 }
 
 inline QString CharDataInformation::typeName() const

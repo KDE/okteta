@@ -46,7 +46,7 @@ DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
     return mChildren[idx];
 }
 
-bool DataInformationWithChildren::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
+bool DataInformationWithChildren::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     kWarning() << "this should not be called";
     Q_ASSERT(row < childCount());
@@ -55,7 +55,7 @@ bool DataInformationWithChildren::setChildData(uint row, const QVariant& value, 
     return mChildren.at(row)->setData(value, out, address + (offs / 8), bitsRemaining - offs, bitOffs);
 }
 
-bool DataInformationWithChildren::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
+bool DataInformationWithChildren::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     Q_ASSERT_X(false, "DataInformationWithChildren::setData()", "this should never be called");
     return false;
@@ -63,7 +63,7 @@ bool DataInformationWithChildren::setData(const QVariant& value, Okteta::Abstrac
 
 
 qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *input,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     //first of all update the structure:
     topLevelDataInformation()->updateElement(this);
@@ -127,9 +127,9 @@ void DataInformationWithChildren::setWidgetData(QWidget* w) const
     Q_UNUSED(w)
 }
 
-int DataInformationWithChildren::size() const
+BitCount32 DataInformationWithChildren::size() const
 {
-    int size = 0;
+    BitCount32 size = 0;
     for (unsigned int i = 0; i < childCount(); ++i)
     {
         size += childAt(i)->size();
@@ -137,7 +137,7 @@ int DataInformationWithChildren::size() const
     return size;
 }
 
-quint64 DataInformationWithChildren::offset(unsigned int index) const
+BitCount32 DataInformationWithChildren::offset(unsigned int index) const
 {
     if (index >= childCount())
         return 0;

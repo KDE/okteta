@@ -30,7 +30,7 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Double,Primitive)
 public:
     DATAINFORMATION_CLONE(Double)
 
-    virtual int size() const;
+    virtual BitCount32 size() const;
     virtual QString typeName() const;
 
     virtual QString valueString() const;
@@ -53,9 +53,9 @@ inline PrimitiveDataType DoubleDataInformation::type() const
     return Type_Double;
 }
 
-inline int DoubleDataInformation::size() const
+inline BitCount32 DoubleDataInformation::size() const
 {
-    return 64;
+    return sizeof(double) * 8;
 }
 
 inline QString DoubleDataInformation::typeName() const

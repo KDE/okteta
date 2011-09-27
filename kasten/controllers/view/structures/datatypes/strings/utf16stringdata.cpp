@@ -57,7 +57,7 @@ int Utf16StringData::count() const
 
 QString Utf16StringData::stringValue(int row) const
 {
-    //TODO details 
+    //TODO details
     Q_ASSERT(row >= 0 && row < count());
     //TODO show invalid values
     uint val = mCodePoints.at(row);
@@ -105,7 +105,7 @@ QString Utf16StringData::completeString(bool skipInvalid) const
 }
 
 qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            quint64 bitsRemaining)
+            BitCount64 bitsRemaining)
 {
     const int oldSize = count();
     mNonBMPCount = 0;
@@ -229,13 +229,13 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     return (addr - address) * 8;
 }
 
-unsigned int Utf16StringData::size() const
+BitCount32 Utf16StringData::size() const
 {
     //add 16 for every non BMP char, since they use 32 bits
     return (mCodePoints.size() + mNonBMPCount) * 16;
 }
 
-quint64 Utf16StringData::sizeAt(int i) const
+BitCount32 Utf16StringData::sizeAt(int i) const
 {
     Q_ASSERT(i >= 0 && i <= count());
     uint val = mCodePoints.at(i);

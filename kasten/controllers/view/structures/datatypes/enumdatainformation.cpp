@@ -74,14 +74,14 @@ QString EnumDataInformation::getTypeString() const
 
 
 bool EnumDataInformation::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-        Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
+        Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     return mValue->setData(value, out, address, bitsRemaining, bitOffset);
 }
 
 
 qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     //update enum first (it is possible to change the enum definition this enum uses
     topLevelDataInformation()->updateElement(this);

@@ -40,19 +40,19 @@ public:
 
     virtual void setLength(int newLength);
 
-    virtual AbstractArrayData* clone();
+    virtual ComplexArrayData* clone();
 
     virtual QVariant dataAt(int index, int column, int role);
 
     virtual unsigned int length() const;
-    virtual unsigned int size() const;
+    virtual BitCount32 size() const;
 
     virtual QString typeName() const;
     virtual QString strictTypeName() const;
 
     virtual DataInformation* childAt(unsigned int idx);
     virtual int indexOf(const DataInformation* data) const;
-    virtual quint64 offset(uint row) const;
+    virtual BitCount32 offset(uint row) const;
     void setChildType(DataInformation* newChildType);
 
     QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
@@ -60,9 +60,9 @@ public:
     /** have to override this, to set correct parent of mChildType -> crash otherwise */
     virtual void setParent(DataInformation* parent);
 
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining);
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
     virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining);
+            Okteta::Address address, BitCount64 bitsRemaining);
 
 protected:
     explicit ComplexArrayData(const ComplexArrayData& c);

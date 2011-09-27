@@ -56,9 +56,6 @@ class ScriptHandlerInfo;
 class QScriptContext;
 class QScriptEngine;
 
-typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
-typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
-
 /** Interface that must be implemented by all datatypes */
 class DataInformation: public DataInformationBase
 {
@@ -88,7 +85,7 @@ public:
      *  @return the child with given @p name or @c NULL if none found with that name
      */
     virtual DataInformation* child(QString name) const;
-    virtual quint64 positionRelativeToRoot(int row = -1) const;
+    virtual BitCount32 positionRelativeToRoot(int row = -1) const;
 
     //for the model:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
@@ -120,7 +117,7 @@ public:
 
     //reading and writing
     /** the size in bits of this element */
-    virtual int size() const = 0;
+    virtual BitCount32 size() const = 0;
 
     /** Reads the necessary data from @p input and returns the number of bytes read
      *
@@ -133,7 +130,7 @@ public:
      * @return the number of bits read or @c -1 if none were read
      */
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
-             quint64 bitsRemaining, quint8* bitOffset) = 0;
+             BitCount64 bitsRemaining, quint8* bitOffset) = 0;
     /** sets mWasAbleToRead to false for all children and this object.
      *  Gets called once before the reading of the whole structure starts. */
     void beginRead();
@@ -148,9 +145,9 @@ public:
      *  @return @c true on success, @c false otherwise
      */
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset) = 0;
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset) = 0;
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
 
     virtual bool isTopLevel() const;
     TopLevelDataInformation* topLevelDataInformation() const;
@@ -177,12 +174,11 @@ public:
     QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name, uint upTo) const;
 protected:
     /**
-     *  the offset of child number @p index compared to the beginning of the structure
-     *  in bits.
+     *  the offset of child number @p index compared to the beginning of the structure in bits.
      *  @param index the index of the child
      *  @return 0 unless this DataInformation has children
      */
-    virtual quint64 offset(unsigned int index) const = 0;
+    virtual BitCount32 offset(unsigned int index) const = 0;
     /**
      * Find the index of a DataInformation in this object, needed to calculate the row
      */
@@ -246,9 +242,9 @@ inline ByteOrder DataInformation::byteOrder() const
 {
     switch (mByteOrder)
     {
-        case EndiannessBig: 
+        case EndiannessBig:
             return ByteOrderEnumClass::BigEndian;
-        case EndianessLittle: 
+        case EndianessLittle:
             return ByteOrderEnumClass::LittleEndian;
         case EndianessFromSettings:
             return Kasten::StructViewPreferences::byteOrder();

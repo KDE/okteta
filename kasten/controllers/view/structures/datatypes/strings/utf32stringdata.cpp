@@ -105,7 +105,7 @@ QString Utf32StringData::completeString(bool skipInvalid) const
 }
 
 qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            quint64 bitsRemaining)
+            BitCount64 bitsRemaining)
 {
     const int oldSize = count();
     mNonBMPCount = 0;
@@ -199,12 +199,12 @@ qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     return (addr - address) * 8;
 }
 
-unsigned int Utf32StringData::size() const
+BitCount32 Utf32StringData::size() const
 {
     return mCodePoints.size() * 32;
 }
 
-quint64 Utf32StringData::sizeAt(int i) const
+BitCount32 Utf32StringData::sizeAt(int i) const
 {
     Q_ASSERT(i >= 0 && i <= count());
     return 32;

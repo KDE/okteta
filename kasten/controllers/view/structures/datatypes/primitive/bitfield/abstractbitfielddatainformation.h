@@ -32,9 +32,9 @@ public:
 protected:
     AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
 public:
-    uint width() const;
-    void setWidth(uint newWidth);
-    virtual int size() const;
+    BitCount32 width() const;
+    void setWidth(BitCount32 newWidth);
+    virtual BitCount32 size() const;
     quint64 mask() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
@@ -71,19 +71,19 @@ inline quint64 AbstractBitfieldDataInformation::mask() const
     return (1 << mWidth) - 1;
 }
 
-inline int AbstractBitfieldDataInformation::size() const
+inline BitCount32 AbstractBitfieldDataInformation::size() const
 {
     return width();
 }
 
-inline uint AbstractBitfieldDataInformation::width() const
+inline BitCount32 AbstractBitfieldDataInformation::width() const
 {
     return mWidth;
 }
 
-inline void AbstractBitfieldDataInformation::setWidth(uint newWidth)
+inline void AbstractBitfieldDataInformation::setWidth(BitCount32 newWidth)
 {
-    mWidth = qMin(newWidth, 64u);
+    mWidth = qMin(newWidth, BitCount32(64u)); //maximum width is 64 bits
 }
 
 inline bool AbstractBitfieldDataInformation::isBitfield() const

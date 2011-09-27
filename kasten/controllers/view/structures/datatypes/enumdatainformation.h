@@ -41,15 +41,15 @@ public:
     virtual QString typeName() const;
     virtual bool isEnum() const;
 
-    virtual int size() const;
+    virtual BitCount32 size() const;
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, quint64 remaining, quint8* bitOffset);
+            Okteta::Address address, BitCount64 remaining, quint8* bitOffset);
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
@@ -67,7 +67,7 @@ inline PrimitiveDataType EnumDataInformation::type() const
     return mValue->type();
 }
 
-inline int EnumDataInformation::size() const
+inline BitCount32 EnumDataInformation::size() const
 {
     return mValue->size();
 }

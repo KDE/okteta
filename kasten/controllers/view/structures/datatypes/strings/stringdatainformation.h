@@ -40,7 +40,7 @@ const QLatin1String stringEncodings[] = {
 class StringDataInformation : public DataInformation
 {
 protected:
-    virtual quint64 offset(unsigned int index) const;
+    virtual BitCount32 offset(unsigned int index) const;
     StringDataInformation(const StringDataInformation&);
 public:
     enum StringType {
@@ -56,13 +56,13 @@ public:
     virtual DataInformation* childAt(unsigned int) const;
 
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            quint64 bitsRemaining, quint8* bitOffset);
+            BitCount64 bitsRemaining, quint8* bitOffset);
 
-    virtual int size() const;
+    virtual BitCount32 size() const;
     virtual void setWidgetData(QWidget* w) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual QWidget* createEditWidget(QWidget* parent) const;

@@ -35,7 +35,7 @@ DataInformation::DataInformation(const QString& name, DataInformationBase* paren
 
 DataInformation::DataInformation(const DataInformation& d) :
             mValidationSuccessful(d.mValidationSuccessful),
-            mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead), 
+            mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead),
             mByteOrder(d.mByteOrder), mAdditionalData(0), mParent(0), mName(d.mName)
 {
     if (d.mAdditionalData)
@@ -66,7 +66,7 @@ QString DataInformation::sizeString() const
     }
 }
 
-quint64 DataInformation::positionRelativeToRoot(int index) const
+BitCount32 DataInformation::positionRelativeToRoot(int index) const
 {
     Q_CHECK_PTR(mParent);
     //FIXME this needs updating to support bitfield marking

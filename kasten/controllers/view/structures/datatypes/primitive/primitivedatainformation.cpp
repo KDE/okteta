@@ -29,7 +29,7 @@
 #include <QtScript/QScriptEngine>
 
 bool PrimitiveDataInformation::setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel *out,
-        Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
+        Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     AllPrimitiveTypes oldVal(value());
     // this is implemented in the subclasses
@@ -41,7 +41,7 @@ bool PrimitiveDataInformation::setData(const QVariant& valueVariant, Okteta::Abs
 }
 
 bool PrimitiveDataInformation::setChildData(uint, const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, quint64, quint8)
+        Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT_X(false, "PrimitiveDataInformation::setChildData()", "this should never be called!!");
     return false;
@@ -57,9 +57,9 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 }
 
 qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
-        Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    if (bitsRemaining < (unsigned)size())
+    if (bitsRemaining < BitCount64(size()))
     {
         mWasAbleToRead = false;
         setValue(0);

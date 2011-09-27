@@ -29,7 +29,7 @@ DummyDataInformation::DummyDataInformation(DataInformationBase* parent)
 
 
 //NONE OF THESE SHOULD EVER BE CALLED
-quint64 DummyDataInformation::offset(unsigned int) const
+BitCount32 DummyDataInformation::offset(unsigned int) const
 {
     Q_ASSERT(false);
     return 0;
@@ -42,29 +42,29 @@ QScriptValue DummyDataInformation::toScriptValue(QScriptEngine*, ScriptHandlerIn
 }
 
 bool DummyDataInformation::setChildData(uint, const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, quint64, quint8)
+        Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT(false);
     return false;
 }
 
 bool DummyDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, quint64, quint8)
+        Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT(false);
     return false;
 }
 
-qint64 DummyDataInformation::readData(Okteta::AbstractByteArrayModel*, Okteta::Address, quint64, quint8*)
+qint64 DummyDataInformation::readData(Okteta::AbstractByteArrayModel*, Okteta::Address, BitCount64, quint8*)
 {
     Q_ASSERT(false);
     return -1;
 }
 
-int DummyDataInformation::size() const
+BitCount32 DummyDataInformation::size() const
 {
     Q_ASSERT(false);
-    return false;
+    return 0;
 }
 
 void DummyDataInformation::setWidgetData(QWidget*) const

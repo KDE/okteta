@@ -39,17 +39,14 @@ public:
     virtual bool isUnion() const;
     //implement the DataInformation pure virtual functions
     QString typeName() const;
-    virtual int size() const;
+    virtual BitCount32 size() const;
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
-    /** add another field to this union */
-    UnionDataInformation& operator<<(DataInformation* field);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
 protected:
-    quint64 offset(unsigned int index) const;
+    BitCount32 offset(unsigned int index) const;
 };
 
-
-inline quint64 UnionDataInformation::offset(unsigned int index) const
+inline BitCount32 UnionDataInformation::offset(unsigned int index) const
 {
     Q_UNUSED(index)
     return 0;

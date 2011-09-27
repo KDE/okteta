@@ -34,9 +34,9 @@ public:
     explicit AsciiStringData(StringDataInformation* parent);
     virtual ~AsciiStringData();
 
-    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining);
-    virtual quint64 sizeAt(int i) const;
-    virtual unsigned int size() const;
+    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
+    virtual BitCount32 sizeAt(int i) const;
+    virtual BitCount32 size() const;
     virtual QString completeString(bool skipInvalid = false) const;
     virtual QString stringValue(int row) const;
     virtual QString charType() const;

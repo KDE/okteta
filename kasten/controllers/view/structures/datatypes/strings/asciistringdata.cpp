@@ -38,7 +38,7 @@ AsciiStringData::~AsciiStringData()
 {
 }
 
-qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining)
+qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {
     const int oldSize = count();
     if (mMode == CharCount || mMode == ByteCount) //same for ascii
@@ -110,13 +110,13 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     return (addr - address) * 8;
 }
 
-quint64 AsciiStringData::sizeAt(int i) const
+BitCount32 AsciiStringData::sizeAt(int i) const
 {
     Q_ASSERT(i >= 0 && i < mData.size());
     return 8;
 }
 
-unsigned int AsciiStringData::size() const
+BitCount32 AsciiStringData::size() const
 {
     return mData.size() * 8;
 }

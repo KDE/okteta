@@ -34,7 +34,7 @@ public:
     virtual DataInformation* clone() const;
 
     virtual PrimitiveDataType type() const;
-    virtual int size() const;
+    virtual BitCount32 size() const;
     static int displayBase();
 
     virtual AllPrimitiveTypes value() const;
@@ -127,7 +127,7 @@ inline void SIntDataInformation<T, typeValue>::setValue(AllPrimitiveTypes newVal
 }
 
 template<typename T, PrimitiveDataType typeValue>
-inline int SIntDataInformation<T, typeValue>::size() const
+inline BitCount32 SIntDataInformation<T, typeValue>::size() const
 {
     return sizeof(T) * 8;
 }

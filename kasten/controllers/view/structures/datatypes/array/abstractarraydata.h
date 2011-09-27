@@ -25,6 +25,7 @@
 #define ABSTRACTARRAYDATA_H
 
 #include <address.h>
+#include "../datainformationbase.h"
 
 #include <QtCore/QVariant>
 #include <QtCore/QString>
@@ -52,7 +53,7 @@ public:
     virtual QString typeName() const = 0;
     virtual QString strictTypeName() const = 0;
 
-    virtual unsigned int size() const = 0;
+    virtual BitCount32 size() const = 0;
 
     virtual DataInformation* childAt(unsigned int idx) = 0;
     virtual void setChildType(DataInformation* newChildType) = 0;
@@ -63,10 +64,10 @@ public:
     virtual void setParent(DataInformation* parent);
 
     virtual int indexOf(const DataInformation* data) const = 0;
-    virtual quint64 offset(uint row) const = 0;
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining) = 0;
+    virtual BitCount32 offset(uint row) const = 0;
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining) = 0;
+            Okteta::Address address, BitCount64 bitsRemaining) = 0;
 protected:
     AbstractArrayData(const AbstractArrayData& a);
     DataInformation* mParent;

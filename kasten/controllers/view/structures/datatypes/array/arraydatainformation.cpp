@@ -140,12 +140,13 @@ void ArrayDataInformation::setWidgetData(QWidget* w) const
     Q_ASSERT_X(false, "ArrayDataInformation::setWidgetData", "this should never happen!");
 }
 
-quint64 ArrayDataInformation::offset(unsigned int index) const
+BitCount32 ArrayDataInformation::offset(unsigned int index) const
 {
     return mData->offset(index);
 }
 
-qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+        BitCount64 bitsRemaining, quint8* bitOffset)
 {
     if (*bitOffset != 0)
     {
@@ -162,7 +163,7 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
 
 
 bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-        Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
+        Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     if (bitOffset != 0)
     {
@@ -174,7 +175,7 @@ bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta:
 }
 
 bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, quint64, quint8)
+        Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT_X(false, "ArrayDataInformation::setData()", "this should never be called");
     return false;

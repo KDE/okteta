@@ -65,10 +65,10 @@ DataInformation* StringDataInformation::childAt(unsigned int ) const
     return mDummy;
 }
 
-quint64 StringDataInformation::offset(unsigned int index) const
+BitCount32 StringDataInformation::offset(unsigned int index) const
 {
     Q_ASSERT(index < (unsigned)mData->count());
-    quint64 offs = 0;
+    BitCount32 offs = 0;
     for (uint i = 0; i < index; ++i)
     {
         offs += mData->sizeAt(i);
@@ -78,13 +78,13 @@ quint64 StringDataInformation::offset(unsigned int index) const
 
 
 bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, quint64, quint8)
+        Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT_X(false, "StringDataInformation::setData()", "this should never be called!");
     return false;
 }
 
-bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset)
+bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     kDebug() << "not implemented yet!";
     return false;
@@ -92,7 +92,7 @@ bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta
 
 
 qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-        quint64 bitsRemaining, quint8* bitOffset)
+        BitCount64 bitsRemaining, quint8* bitOffset)
 {
 
     if (*bitOffset != 0)
@@ -110,7 +110,7 @@ qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Ok
     return mData->read(input, address, bitsRemaining);
 }
 
-int StringDataInformation::size() const
+BitCount32 StringDataInformation::size() const
 {
     return mData->size();
 }
@@ -152,7 +152,7 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
 {
     Q_ASSERT(row >= 0 && (unsigned)row < childCount());
     Q_ASSERT(column < COLUMN_COUNT);
-    if (role == Qt::DisplayRole) 
+    if (role == Qt::DisplayRole)
     {
         if (column == ColumnName)
         {

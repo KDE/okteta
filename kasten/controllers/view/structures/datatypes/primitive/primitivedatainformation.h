@@ -32,18 +32,18 @@ public:
     explicit PrimitiveDataInformation(QString name, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
     virtual DataInformation* clone() const = 0;
-    virtual int size() const = 0;
+    virtual BitCount32 size() const = 0;
     virtual QString typeName() const = 0;
     QString typeName(PrimitiveDataType type) const;
 
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, quint64 bitsRemaining, quint8 bitOffset);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
-            Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset);
+            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
 
     virtual QString valueString() const = 0;
     virtual PrimitiveDataType type() const = 0;
@@ -56,13 +56,14 @@ public:
 
     virtual bool isPrimitive() const;
 protected:
-    virtual quint64 offset(unsigned int index) const;
+    virtual BitCount32 offset(unsigned int index) const;
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 
-inline quint64 PrimitiveDataInformation::offset(unsigned int index) const
+inline BitCount32 PrimitiveDataInformation::offset(unsigned int index) const
 {
     Q_UNUSED(index)
+    Q_ASSERT_X(false, "PrimitiveDataInformation::offset", "This should never be called");
     return 0;
 }
 

@@ -33,9 +33,9 @@ public:
     virtual QString charType() const;
     virtual QString completeString(bool skipInvalid = false) const;
     int count() const;
-    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining);
-    virtual unsigned int size() const;
-    virtual quint64 sizeAt(int i) const;
+    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
+    virtual BitCount32 size() const;
+    virtual BitCount32 sizeAt(int i) const;
     virtual QString stringValue(int row) const;
     virtual QString typeName() const;
 private:

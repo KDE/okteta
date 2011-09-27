@@ -34,7 +34,7 @@ public:
     explicit UnsignedDataInformation(QString name, DataInformation* parent = 0);
     virtual ~UnsignedDataInformation() {}
 
-    virtual int size() const;
+    virtual BitCount32 size() const;
     static int displayBase();
 
     virtual AllPrimitiveTypes value() const;
@@ -130,7 +130,7 @@ inline void UnsignedDataInformation<T>::setValue(AllPrimitiveTypes newVal)
 }
 
 template<typename T>
-inline int UnsignedDataInformation<T>::size() const
+inline BitCount32 UnsignedDataInformation<T>::size() const
 {
     return sizeof(T) * 8;
 }
