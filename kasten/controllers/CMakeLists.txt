@@ -286,6 +286,7 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/array/arraydatainformation.cpp
   view/structures/datatypes/array/abstractarraydata.cpp
   view/structures/datatypes/array/complexarraydata.cpp
+  view/structures/datatypes/array/primitivearraydata.cpp
   view/structures/datatypes/primitive/chardatainformation.cpp
   view/structures/datatypes/primitive/doubledatainformation.cpp
   view/structures/datatypes/primitive/floatdatainformation.cpp

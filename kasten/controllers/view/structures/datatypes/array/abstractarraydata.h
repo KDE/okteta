@@ -26,6 +26,7 @@
 
 #include <address.h>
 #include "../datainformationbase.h"
+#include "../../allprimitivetypes.h"
 
 #include <QtCore/QVariant>
 #include <QtCore/QString>
@@ -51,16 +52,15 @@ public:
     virtual void setLength(int newLength) = 0;
 
     virtual QString typeName() const = 0;
-    virtual QString strictTypeName() const = 0;
 
     virtual BitCount32 size() const = 0;
 
     virtual DataInformation* childAt(unsigned int idx) = 0;
-    virtual void setChildType(DataInformation* newChildType) = 0;
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine,
             ScriptHandlerInfo* handlerInfo) const = 0;
-
+    /** the primitive type or Type_NotPrimitive for structs etc */
+    virtual PrimitiveDataType primitiveType() const = 0;
     virtual void setParent(DataInformation* parent);
 
     virtual int indexOf(const DataInformation* data) const = 0;

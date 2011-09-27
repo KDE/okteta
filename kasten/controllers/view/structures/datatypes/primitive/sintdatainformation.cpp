@@ -26,12 +26,18 @@ QString SIntDataInformation<T, typeValue>::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
+    return valueString(mValue);
+}
+
+template<typename T, PrimitiveDataType typeValue>
+QString SIntDataInformation<T, typeValue>::valueString(T val)
+{
     int base = displayBase();
     QString num;
-    if (mValue >= 0)
+    if (val >= 0)
     {
         //no need to do anything special
-        num = QString::number(mValue, base);
+        num = QString::number(val, base);
         if (base == 16)
             num.prepend(QLatin1String("0x"));
         else if (base == 8)
@@ -45,15 +51,15 @@ QString SIntDataInformation<T, typeValue>::valueString() const
     //value is less than zero, now the tricky bit starts
     //TODO non decimal negative values as unsigned? probably add option
     if (base == 10) {
-        num = QString::number(mValue, base);
+        num = QString::number(val, base);
         if (Kasten::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return num;
     }
-    if (mValue == std::numeric_limits<T>::min())
-        num = QString::number(quint64(mValue) & ((quint64(std::numeric_limits<T>::max()) << 1) + 1), base);
+    if (val == std::numeric_limits<T>::min())
+        num = QString::number(quint64(val), base); //since qAbs will not work
     else
-        num = QString::number(qAbs(mValue), base);
+        num = QString::number(qAbs(val), base);
 
     if (base == 16)
         num.prepend(QLatin1String("-0x"));
@@ -61,6 +67,8 @@ QString SIntDataInformation<T, typeValue>::valueString() const
         num.prepend(QLatin1String("-0o"));
     else if (base == 2)
         num.prepend(QLatin1String("-0b"));
+    else
+        num.prepend(QLatin1String("-"));
 
     return num;
 }

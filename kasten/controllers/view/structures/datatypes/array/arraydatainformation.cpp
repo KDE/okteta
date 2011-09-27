@@ -28,6 +28,7 @@
 
 #include <QtScript/QScriptContext>
 #include "complexarraydata.h"
+#include "primitivearraydata.h"
 
 ArrayDataInformation::ArrayDataInformation(QString name, uint length, DataInformation* childType,
         DataInformation* parent) : DataInformation(name, parent), mData(0)
@@ -38,7 +39,7 @@ ArrayDataInformation::ArrayDataInformation(QString name, uint length, DataInform
         length = MAX_LEN;
     }
     childType->setParent(this);
-    mData = new ComplexArrayData(length, childType, this);
+    mData = arrayDataFromType(length, childType);
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d) :
@@ -89,15 +90,47 @@ QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContex
         else
             return QScriptValue();
     }
-    //childType is valid -> begin changing the children to the new type
-    mData->setChildType(newChildType);
+    if (newChildType->isPrimitive() &&
+            static_cast<PrimitiveDataInformation*>(newChildType)->type() == mData->primitiveType())
+    {
+        //there is no need to change the type
+        kDebug() << "New and old child type are identical, aborting: " << mData->primitiveType();
+        delete newChildType;
+        return true;
+    }
+    uint len = mData->length();
+    TopLevelDataInformation* topLevel = topLevelDataInformation();
+    if (len > 0)
+    {
+        topLevel->_childrenAboutToBeRemoved(this, 0, len - 1);
+        delete mData;
+        topLevel->_childrenRemoved(this, 0, len - 1);
+    }
+    else
+    {
+        //no need to emit the signals, which cause expensive model update
+        delete mData; //don't emit the signals
+    }
+
+
+    if (len > 0)
+    {
+        topLevel->_childrenAboutToBeInserted(this, 0, len - 1);
+        mData = arrayDataFromType(len, newChildType);
+        topLevel->_childrenInserted(this, 0, len - 1);
+    }
+    else
+    {
+        //no need to emit the signals, which cause expensive model update
+        mData = arrayDataFromType(len, newChildType);
+    }
     return true; //success
 }
 
 QScriptValue ArrayDataInformation::childType() const
 {
     if (mData)
-        return mData->strictTypeName().toLower();
+        return mData->typeName().toLower();
     return QString();
 }
 
@@ -123,19 +156,19 @@ QScriptValue ArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHa
     return ret;
 }
 
-QWidget* ArrayDataInformation::createEditWidget(QWidget* parent) const
+QWidget* ArrayDataInformation::createEditWidget(QWidget*) const
 {
     Q_ASSERT_X(false, "ArrayDataInformation::createEditWidget", "this should never happen!");
     return 0;
 }
 
-QVariant ArrayDataInformation::dataFromWidget(const QWidget* w) const
+QVariant ArrayDataInformation::dataFromWidget(const QWidget*) const
 {
     Q_ASSERT_X(false, "ArrayDataInformation::dataFromWidget", "this should never happen!");
     return QVariant();
 }
 
-void ArrayDataInformation::setWidgetData(QWidget* w) const
+void ArrayDataInformation::setWidgetData(QWidget*) const
 {
     Q_ASSERT_X(false, "ArrayDataInformation::setWidgetData", "this should never happen!");
 }
@@ -179,4 +212,53 @@ bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMod
 {
     Q_ASSERT_X(false, "ArrayDataInformation::setData()", "this should never be called");
     return false;
+}
+
+AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInformation* data)
+{
+    if (!data->isPrimitive() || data->isBitfield() || data->isEnum())
+    {
+        //we cant use primitiveArrayData for bitfields/enums or any complex data type
+        return new ComplexArrayData(length, data, this);
+    }
+    //it is primitive -> create a PrimitiveArrayData
+    PrimitiveDataType type = static_cast<PrimitiveDataInformation*>(data)->type();
+    //we no longer need data now that we have to type
+    delete data;
+    switch (type)
+    {
+    case Type_Char:
+        return new PrimitiveArrayData<Type_Char>(length, this);
+    case Type_Int8:
+        return new PrimitiveArrayData<Type_Int8>(length, this);
+    case Type_Int16:
+        return new PrimitiveArrayData<Type_Int16>(length, this);
+    case Type_Int32:
+        return new PrimitiveArrayData<Type_Int32>(length, this);
+    case Type_Int64:
+        return new PrimitiveArrayData<Type_Int64>(length, this);
+    case Type_UInt8:
+        return new PrimitiveArrayData<Type_UInt8>(length, this);
+    case Type_UInt16:
+        return new PrimitiveArrayData<Type_UInt16>(length, this);
+    case Type_UInt32:
+        return new PrimitiveArrayData<Type_UInt32>(length, this);
+    case Type_UInt64:
+        return new PrimitiveArrayData<Type_UInt64>(length, this);
+    case Type_Bool8:
+        return new PrimitiveArrayData<Type_Bool8>(length, this);
+    case Type_Bool16:
+        return new PrimitiveArrayData<Type_Bool16>(length, this);
+    case Type_Bool32:
+        return new PrimitiveArrayData<Type_Bool32>(length, this);
+    case Type_Bool64:
+        return new PrimitiveArrayData<Type_Bool64>(length, this);
+    case Type_Float:
+        return new PrimitiveArrayData<Type_Float>(length, this);
+    case Type_Double:
+        return new PrimitiveArrayData<Type_Double>(length, this);
+    default:
+        kWarning() << "none of the cases matched, probably an error";
+        return NULL;
+    }
 }

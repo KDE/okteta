@@ -121,13 +121,7 @@ BitCount32 ComplexArrayData::size() const
 
 QString ComplexArrayData::typeName() const
 {
-    QString type;
-    if (mChildType->isStruct())
-        type = QLatin1String("struct ") + mChildType->name();
-    else if (mChildType->isUnion())
-        type = QLatin1String("union ") + mChildType->name();
-    else
-        type = mChildType->typeName();
+    QString type = mChildType->typeName();
     return i18nc("type name, then array length", "%1[%2]", type, QString::number(length()));
 }
 
@@ -161,36 +155,6 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
     }
     kWarning() << data << "is not child of " << this;
     return -1;
-}
-
-void ComplexArrayData::setChildType(DataInformation* newChildType)
-{
-    uint len = mChildren.count();
-
-    delete mChildType;
-    mChildType = newChildType;
-    mChildType->setParent(mParent);
-
-    if (len == 0)
-        return; //do nothing, prevent integer underflow when calling len - 1
-
-    mParent->topLevelDataInformation()->_childrenAboutToBeRemoved(mParent, 0, len - 1);
-    qDeleteAll(mChildren);
-    //no need to clear, we overwrite all elements
-    mParent->topLevelDataInformation()->_childrenRemoved(mParent, 0, len - 1);
-
-    mParent->topLevelDataInformation()->_childrenAboutToBeInserted(mParent, 0, len - 1);
-    for (uint i = 0; i < len; i++)
-    {
-        DataInformation* arrayElem = newChildType->clone();
-        mChildren[i] = arrayElem;
-    }
-    mParent->topLevelDataInformation()->_childrenInserted(mParent, 0, len - 1);
-}
-
-QString ComplexArrayData::strictTypeName() const
-{
-    return mChildType->typeName();
 }
 
 QScriptValue ComplexArrayData::toScriptValue(uint index, QScriptEngine* engine,
@@ -232,3 +196,10 @@ bool ComplexArrayData::setChildData(uint row, QVariant value, Okteta::AbstractBy
     return mChildren.at(row)->setData(value, out, address + (bits / 8), bitsRemaining - bits, bits % 8);
 }
 
+PrimitiveDataType ComplexArrayData::primitiveType() const
+{
+    if (mChildType->isBitfield())
+        return Type_Bitfield;
+    else
+        return Type_NotPrimitive;
+}

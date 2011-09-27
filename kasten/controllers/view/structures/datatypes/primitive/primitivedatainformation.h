@@ -34,7 +34,7 @@ public:
     virtual DataInformation* clone() const = 0;
     virtual BitCount32 size() const = 0;
     virtual QString typeName() const = 0;
-    QString typeName(PrimitiveDataType type) const;
+    static QString typeName(PrimitiveDataType type);
 
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 

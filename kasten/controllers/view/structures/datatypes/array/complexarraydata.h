@@ -35,6 +35,7 @@ class ScriptHandlerInfo;
 class ComplexArrayData : public AbstractArrayData
 {
 public:
+    /** Takes ownership of @p data !*/
     ComplexArrayData(unsigned int initialLength, DataInformation* data, DataInformation* parent);
     virtual ~ComplexArrayData();
 
@@ -48,12 +49,12 @@ public:
     virtual BitCount32 size() const;
 
     virtual QString typeName() const;
-    virtual QString strictTypeName() const;
 
     virtual DataInformation* childAt(unsigned int idx);
     virtual int indexOf(const DataInformation* data) const;
     virtual BitCount32 offset(uint row) const;
-    void setChildType(DataInformation* newChildType);
+
+    virtual PrimitiveDataType primitiveType() const;
 
     QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
 

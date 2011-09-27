@@ -22,6 +22,8 @@
 
 #ifndef ARRAYDATAINFORMATION_H_
 #define ARRAYDATAINFORMATION_H_
+
+#include "../../allprimitivetypes.h"
 #include "../datainformation.h"
 #include "abstractarraydata.h"
 
@@ -72,7 +74,9 @@ public:
     virtual QScriptValue childType() const;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
-
+private:
+    /** Takes ownership of @p data ! */
+    AbstractArrayData* arrayDataFromType(uint length, DataInformation* data);
 protected:
     virtual BitCount32 offset(unsigned int index) const;
 

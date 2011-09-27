@@ -49,6 +49,7 @@ public:
     static T fromVariant(const QVariant& value);
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QString valueString() const;
+    static QString valueString(T val);
 protected:
     explicit SIntDataInformation(const SIntDataInformation& d);
 protected:

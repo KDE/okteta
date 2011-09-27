@@ -100,7 +100,7 @@ QScriptValue PrimitiveDataInformation::toScriptValue(QScriptEngine* engine, Scri
     return ret;
 }
 
-QString PrimitiveDataInformation::typeName(PrimitiveDataType type) const
+QString PrimitiveDataInformation::typeName(PrimitiveDataType type)
 {
     Q_ASSERT(type >= Type_START && type <= Type_END);
 
