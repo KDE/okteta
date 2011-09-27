@@ -35,6 +35,7 @@ public:
     virtual QString typeName() const;
     virtual QString valueString() const;
     static QString valueString(quint8 value);
+    static quint8 fromVariant(const QVariant& value);
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
@@ -61,5 +62,11 @@ inline QString CharDataInformation::typeName() const
 {
     return i18nc("Data type", "char");
 }
+
+inline quint8 CharDataInformation::fromVariant(const QVariant& value)
+{
+    return quint8(value.toUInt());
+}
+
 
 #endif /* CHARDATAINFORMATION_H_ */

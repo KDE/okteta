@@ -43,6 +43,7 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
+    static double fromVariant(const QVariant& value);
 private:
     double mValue;
 };
@@ -68,6 +69,11 @@ inline QString DoubleDataInformation::valueString(double value)
         return KGlobal::locale()->formatNumber(value, Kasten::StructViewPreferences::floatPrecision());
     else
         return QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
+}
+
+inline double DoubleDataInformation::fromVariant(const QVariant& value)
+{
+    return value.toDouble();
 }
 
 

@@ -46,7 +46,7 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
-
+    static T fromVariant(const QVariant& value);
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QString valueString() const;
 protected:
@@ -56,13 +56,13 @@ protected:
 };
 
 template<typename T, PrimitiveDataType typeValue>
-PrimitiveDataType SIntDataInformation<T, typeValue>::type() const
+inline PrimitiveDataType SIntDataInformation<T, typeValue>::type() const
 {
     return typeValue;
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QWidget* SIntDataInformation<T, typeValue>::createEditWidget(QWidget* parent) const
+inline QWidget* SIntDataInformation<T, typeValue>::createEditWidget(QWidget* parent) const
 {
     SIntSpinBox* ret = new SIntSpinBox(parent, displayBase());
     ret->setRange(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
@@ -70,7 +70,7 @@ QWidget* SIntDataInformation<T, typeValue>::createEditWidget(QWidget* parent) co
 }
 
 template<typename T, PrimitiveDataType typeValue>
-void SIntDataInformation<T, typeValue>::setWidgetData(QWidget* w) const
+inline void SIntDataInformation<T, typeValue>::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
     if (spin)
@@ -78,34 +78,32 @@ void SIntDataInformation<T, typeValue>::setWidgetData(QWidget* w) const
 }
 
 template<typename T, PrimitiveDataType typeValue>
-SIntDataInformation<T, typeValue>::SIntDataInformation(QString name, DataInformation* parent)
+inline SIntDataInformation<T, typeValue>::SIntDataInformation(QString name, DataInformation* parent)
         : PrimitiveDataInformation(name, parent), mValue(0)
 {
 }
 
 template<typename T, PrimitiveDataType typeValue>
-SIntDataInformation<T, typeValue>::SIntDataInformation(const SIntDataInformation& d)
+inline SIntDataInformation<T, typeValue>::SIntDataInformation(const SIntDataInformation& d)
         : PrimitiveDataInformation(d), mValue(d.mValue)
 {
 }
 
 template<typename T, PrimitiveDataType typeValue>
-DataInformation* SIntDataInformation<T, typeValue>::clone() const
+inline DataInformation* SIntDataInformation<T, typeValue>::clone() const
 {
     return new SIntDataInformation<T, typeValue>(*this);
 }
 
-
-
 template<typename T, PrimitiveDataType typeValue>
-AllPrimitiveTypes SIntDataInformation<T, typeValue>::qVariantToAllPrimitiveTypes(const QVariant& value) const
+inline AllPrimitiveTypes SIntDataInformation<T, typeValue>::qVariantToAllPrimitiveTypes(const QVariant& value) const
 {
     Q_ASSERT(value.isValid());
     return AllPrimitiveTypes(value.toLongLong());
 }
 
 template<typename T, PrimitiveDataType typeValue>
-int SIntDataInformation<T, typeValue>::displayBase()
+inline int SIntDataInformation<T, typeValue>::displayBase()
 {
     int base = Kasten::StructViewPreferences::signedDisplayBase();
     if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
@@ -117,27 +115,39 @@ int SIntDataInformation<T, typeValue>::displayBase()
 }
 
 template<typename T, PrimitiveDataType typeValue>
-AllPrimitiveTypes SIntDataInformation<T, typeValue>::value() const
+inline AllPrimitiveTypes SIntDataInformation<T, typeValue>::value() const
 {
     return AllPrimitiveTypes(mValue);
 }
 
 template<typename T, PrimitiveDataType typeValue>
-void SIntDataInformation<T, typeValue>::setValue(AllPrimitiveTypes newVal)
+inline void SIntDataInformation<T, typeValue>::setValue(AllPrimitiveTypes newVal)
 {
-    mValue = newVal.ulongValue; //This is safe since the value is unsigned
+    mValue = newVal.value<T>();
 }
 
 template<typename T, PrimitiveDataType typeValue>
-int SIntDataInformation<T, typeValue>::size() const
+inline int SIntDataInformation<T, typeValue>::size() const
 {
     return sizeof(T) * 8;
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QString SIntDataInformation<T, typeValue>::typeName() const
+inline QString SIntDataInformation<T, typeValue>::typeName() const
 {
     return PrimitiveDataInformation::typeName(typeValue);
+}
+
+template<typename T, PrimitiveDataType typeValue>
+inline T SIntDataInformation<T, typeValue>::fromVariant(const QVariant& value)
+{
+    return T(value.toInt());
+}
+
+template<>
+inline qint64 SIntDataInformation<qint64, Type_Int64>::fromVariant(const QVariant& value)
+{
+    return value.toLongLong();
 }
 
 #endif // SINTDATAINFORMATION_H

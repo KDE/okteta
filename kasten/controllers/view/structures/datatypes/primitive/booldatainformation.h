@@ -46,36 +46,37 @@ protected:
 };
 
 template<typename T, PrimitiveDataType typeValue>
-PrimitiveDataType BoolDataInformation<T, typeValue>::type() const
+inline PrimitiveDataType BoolDataInformation<T, typeValue>::type() const
 {
     return typeValue;
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QString BoolDataInformation<T, typeValue>::typeName() const
+inline QString BoolDataInformation<T, typeValue>::typeName() const
 {
     return PrimitiveDataInformation::typeName(typeValue);
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QScriptValue BoolDataInformation<T, typeValue>::valueAsQScriptValue() const
+inline QScriptValue BoolDataInformation<T, typeValue>::valueAsQScriptValue() const
 {
     return QScriptValue(bool(UnsignedDataInformation<T>::mValue));
 }
 
-BoolDataInformation<T, typeValue>::BoolDataInformation(QString name, DataInformation* parent)
+template<typename T, PrimitiveDataType typeValue>
+inline BoolDataInformation<T, typeValue>::BoolDataInformation(QString name, DataInformation* parent)
         : UnsignedDataInformation<T>(name, parent)
 {
 }
 
 template<typename T, PrimitiveDataType typeValue>
-BoolDataInformation<T, typeValue>::BoolDataInformation(const BoolDataInformation& d)
+inline BoolDataInformation<T, typeValue>::BoolDataInformation(const BoolDataInformation& d)
         : UnsignedDataInformation<T>(d)
 {
 }
 
 template<typename T, PrimitiveDataType typeValue>
-DataInformation* BoolDataInformation<T, typeValue>::clone() const
+inline DataInformation* BoolDataInformation<T, typeValue>::clone() const
 {
     return new BoolDataInformation<T, typeValue>(*this);
 }

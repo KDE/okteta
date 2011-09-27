@@ -198,6 +198,8 @@ union AllPrimitiveTypes
             const Okteta::Address address, const quint64 bitsRemaining,
             quint8* const bitOffset);
 
+    template<typename T> T value() const;
+
 private:
     void readDataLittleEndian(const quint8 bitCount,
             const Okteta::AbstractByteArrayModel* input,
@@ -221,4 +223,17 @@ private:
             Okteta::AbstractByteArrayModel* out, const ByteOrder byteOrder,
             const Okteta::Address address);
 };
+
+template<> inline quint8 AllPrimitiveTypes::value<quint8>() const { return ubyteValue; }
+template<> inline quint16 AllPrimitiveTypes::value<quint16>() const { return ushortValue; }
+template<> inline quint32 AllPrimitiveTypes::value<quint32>() const { return uintValue; }
+template<> inline quint64 AllPrimitiveTypes::value<quint64>() const { return ulongValue; }
+template<> inline qint8 AllPrimitiveTypes::value<qint8>() const { return byteValue; }
+template<> inline qint16 AllPrimitiveTypes::value<qint16>() const { return shortValue; }
+template<> inline qint32 AllPrimitiveTypes::value<qint32>() const { return intValue; }
+template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return longValue; }
+template<> inline float AllPrimitiveTypes::value<float>() const { return floatValue; }
+template<> inline double AllPrimitiveTypes::value<double>() const { return doubleValue; }
+
+
 #endif /* ALLPRIMITIVETYPES_H_ */

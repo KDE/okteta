@@ -42,31 +42,31 @@ protected:
 };
 
 template<typename T, PrimitiveDataType typeValue>
-PrimitiveDataType UIntDataInformation<T, typeValue>::type() const
+inline PrimitiveDataType UIntDataInformation<T, typeValue>::type() const
 {
     return typeValue;
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QString UIntDataInformation<T, typeValue>::typeName() const
+inline QString UIntDataInformation<T, typeValue>::typeName() const
 {
     return PrimitiveDataInformation::typeName(typeValue);
 }
 
 template<typename T, PrimitiveDataType typeValue>
-UIntDataInformation<T, typeValue>::UIntDataInformation(QString name, DataInformation* parent)
+inline UIntDataInformation<T, typeValue>::UIntDataInformation(QString name, DataInformation* parent)
         : UnsignedDataInformation<T>(name, parent)
 {
 }
 
 template<typename T, PrimitiveDataType typeValue>
-UIntDataInformation<T, typeValue>::UIntDataInformation(const UIntDataInformation& d)
+inline UIntDataInformation<T, typeValue>::UIntDataInformation(const UIntDataInformation& d)
         : UnsignedDataInformation<T>(d)
 {
 }
 
 template<typename T, PrimitiveDataType typeValue>
-DataInformation* UIntDataInformation<T, typeValue>::clone() const
+inline DataInformation* UIntDataInformation<T, typeValue>::clone() const
 {
     return new UIntDataInformation<T, typeValue>(*this);
 }

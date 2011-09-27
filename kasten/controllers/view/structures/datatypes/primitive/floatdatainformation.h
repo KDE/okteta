@@ -42,6 +42,7 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
+    static float fromVariant(const QVariant& value);
 private:
     float mValue;
 };
@@ -69,5 +70,9 @@ inline QString FloatDataInformation::valueString(float value)
         return QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
 }
 
+inline float FloatDataInformation::fromVariant(const QVariant& value)
+{
+    return value.toFloat();
+}
 
 #endif /* FLOATDATAINFORMATION_H_ */

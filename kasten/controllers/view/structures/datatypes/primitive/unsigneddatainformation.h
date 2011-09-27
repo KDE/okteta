@@ -44,6 +44,7 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
+    static T fromVariant(const QVariant& value);
 
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual QString valueString() const = 0;
@@ -54,7 +55,7 @@ protected:
 };
 
 template<typename T>
-QWidget* UnsignedDataInformation<T>::createEditWidget(QWidget* parent) const
+inline QWidget* UnsignedDataInformation<T>::createEditWidget(QWidget* parent) const
 {
     UIntSpinBox* ret = new UIntSpinBox(parent, displayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
@@ -62,7 +63,7 @@ QWidget* UnsignedDataInformation<T>::createEditWidget(QWidget* parent) const
 }
 
 template<typename T>
-QVariant UnsignedDataInformation<T>::dataFromWidget(const QWidget* w) const
+inline QVariant UnsignedDataInformation<T>::dataFromWidget(const QWidget* w) const
 {
     const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
     if (spin)
@@ -75,7 +76,7 @@ QVariant UnsignedDataInformation<T>::dataFromWidget(const QWidget* w) const
 }
 
 template<typename T>
-void UnsignedDataInformation<T>::setWidgetData(QWidget* w) const
+inline void UnsignedDataInformation<T>::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     if (spin)
@@ -83,19 +84,19 @@ void UnsignedDataInformation<T>::setWidgetData(QWidget* w) const
 }
 
 template<typename T>
-UnsignedDataInformation<T>::UnsignedDataInformation(QString name, DataInformation* parent)
+inline UnsignedDataInformation<T>::UnsignedDataInformation(QString name, DataInformation* parent)
         : PrimitiveDataInformation(name, parent), mValue(0)
 {
 }
 
 template<typename T>
-UnsignedDataInformation<T>::UnsignedDataInformation(const UnsignedDataInformation& d)
+inline UnsignedDataInformation<T>::UnsignedDataInformation(const UnsignedDataInformation& d)
         : PrimitiveDataInformation(d), mValue(d.mValue)
 {
 }
 
 template<typename T>
-AllPrimitiveTypes UnsignedDataInformation<T>::qVariantToAllPrimitiveTypes(const QVariant& value) const
+inline AllPrimitiveTypes UnsignedDataInformation<T>::qVariantToAllPrimitiveTypes(const QVariant& value) const
 {
     if (!value.isValid())
         kDebug() << "invalid QVariant passed.";
@@ -117,21 +118,35 @@ inline int UnsignedDataInformation<T>::displayBase()
 }
 
 template<typename T>
-AllPrimitiveTypes UnsignedDataInformation<T>::value() const
+inline AllPrimitiveTypes UnsignedDataInformation<T>::value() const
 {
     return AllPrimitiveTypes(mValue);
 }
 
 template<typename T>
-void UnsignedDataInformation<T>::setValue(AllPrimitiveTypes newVal)
+inline void UnsignedDataInformation<T>::setValue(AllPrimitiveTypes newVal)
 {
-    mValue = newVal.ulongValue; //This is safe since the value is unsigned
+    mValue = newVal.value<T>();
 }
 
 template<typename T>
-int UnsignedDataInformation<T>::size() const
+inline int UnsignedDataInformation<T>::size() const
 {
     return sizeof(T) * 8;
 }
+
+template<typename T>
+inline T UnsignedDataInformation<T>::fromVariant(const QVariant& value)
+{
+    return T(value.toUInt());
+}
+
+//specialise for 64 bit
+template<>
+inline quint64 UnsignedDataInformation<quint64>::fromVariant(const QVariant& value)
+{
+    return value.toULongLong();
+}
+
 
 #endif // UNSIGNEDDATAINFORMATION_H
