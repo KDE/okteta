@@ -63,7 +63,6 @@ QScriptValue BoolDataInformation<T, typeValue>::valueAsQScriptValue() const
     return QScriptValue(bool(UnsignedDataInformation<T>::mValue));
 }
 
-template<typename T, PrimitiveDataType typeValue>
 BoolDataInformation<T, typeValue>::BoolDataInformation(QString name, DataInformation* parent)
         : UnsignedDataInformation<T>(name, parent)
 {
