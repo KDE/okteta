@@ -38,8 +38,14 @@ QString UIntDataInformation<T, typeValue>::valueString() const
 {
     if (!DataInformation::mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
+    return UIntDataInformation<T, typeValue>::valueString(UnsignedDataInformation<T, typeValue>::mValue);
+}
+
+template<typename T, PrimitiveDataType typeValue>
+QString UIntDataInformation<T, typeValue>::valueString(T value)
+{
     int base = UnsignedDataInformation<T, typeValue>::displayBase();
-    QString num = QString::number(UnsignedDataInformation<T, typeValue>::mValue, base);
+    QString num = QString::number(value, base);
     if (base == 16)
         num.prepend(QLatin1String("0x"));
     else if (base == 2)

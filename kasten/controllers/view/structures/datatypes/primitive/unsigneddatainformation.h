@@ -36,7 +36,7 @@ public:
 
     virtual PrimitiveDataType type() const;
     virtual int size() const;
-    virtual int displayBase() const;
+    static int displayBase();
 
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
@@ -114,7 +114,7 @@ AllPrimitiveTypes UnsignedDataInformation<T, typeValue>::qVariantToAllPrimitiveT
 }
 
 template<typename T, PrimitiveDataType typeValue>
-int UnsignedDataInformation<T, typeValue>::displayBase() const
+inline int UnsignedDataInformation<T, typeValue>::displayBase()
 {
     int base = Kasten::StructViewPreferences::unsignedDisplayBase();
     if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Binary)

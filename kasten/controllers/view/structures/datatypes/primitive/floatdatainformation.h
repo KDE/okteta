@@ -30,10 +30,10 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Float,Primitive)
 public:
     DATAINFORMATION_CLONE(Float)
 
-    virtual int displayBase() const;
     virtual int size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
+    static QString valueString(float value);
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
@@ -51,11 +51,6 @@ inline PrimitiveDataType FloatDataInformation::type() const
     return Type_Float;
 }
 
-inline int FloatDataInformation::displayBase() const
-{
-    return 10;
-}
-
 inline int FloatDataInformation::size() const
 {
     return 32;
@@ -65,5 +60,14 @@ inline QString FloatDataInformation::typeName() const
 {
     return i18nc("Data type", "float");
 }
+
+inline QString FloatDataInformation::valueString(float value)
+{
+    if (Kasten::StructViewPreferences::localeAwareFloatFormatting())
+        return KGlobal::locale()->formatNumber(value, Kasten::StructViewPreferences::floatPrecision());
+    else
+        return QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
+}
+
 
 #endif /* FLOATDATAINFORMATION_H_ */

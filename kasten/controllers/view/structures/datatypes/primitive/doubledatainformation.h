@@ -30,11 +30,11 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Double,Primitive)
 public:
     DATAINFORMATION_CLONE(Double)
 
-    int displayBase() const;
     virtual int size() const;
     virtual QString typeName() const;
 
     virtual QString valueString() const;
+    static QString valueString(double value);
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
@@ -52,11 +52,6 @@ inline PrimitiveDataType DoubleDataInformation::type() const
     return Type_Double;
 }
 
-inline int DoubleDataInformation::displayBase() const
-{
-    return 10;
-}
-
 inline int DoubleDataInformation::size() const
 {
     return 64;
@@ -65,6 +60,14 @@ inline int DoubleDataInformation::size() const
 inline QString DoubleDataInformation::typeName() const
 {
     return i18nc("Data type", "double");
+}
+
+inline QString DoubleDataInformation::valueString(double value)
+{
+    if (Kasten::StructViewPreferences::localeAwareFloatFormatting())
+        return KGlobal::locale()->formatNumber(value, Kasten::StructViewPreferences::floatPrecision());
+    else
+        return QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
 }
 
 

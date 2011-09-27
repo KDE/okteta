@@ -26,18 +26,7 @@ QString DoubleDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
-    QString number;
-    if (Kasten::StructViewPreferences::localeAwareFloatFormatting())
-    {
-        number = KGlobal::locale()->formatNumber(mValue,
-                Kasten::StructViewPreferences::floatPrecision());
-    }
-    else
-    {
-        number = QString::number(mValue, 'g',
-                Kasten::StructViewPreferences::floatPrecision());
-    }
-    return number;
+    return valueString(mValue);
 }
 
 QWidget* DoubleDataInformation::createEditWidget(QWidget* parent) const
@@ -67,7 +56,7 @@ AllPrimitiveTypes DoubleDataInformation::qVariantToAllPrimitiveTypes(const QVari
 }
 
 AllPrimitiveTypes DoubleDataInformation::value() const
-{ 
+{
     return AllPrimitiveTypes(mValue);
 }
 

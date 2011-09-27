@@ -42,7 +42,6 @@ public:
     virtual bool isEnum() const;
 
     virtual int size() const;
-    virtual int displayBase() const;
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
@@ -72,11 +71,6 @@ inline PrimitiveDataType EnumDataInformation::type() const
 inline int EnumDataInformation::size() const
 {
     return mValue->size();
-}
-
-inline int EnumDataInformation::displayBase() const
-{
-    return mValue->displayBase();
 }
 
 inline bool EnumDataInformation::isEnum() const

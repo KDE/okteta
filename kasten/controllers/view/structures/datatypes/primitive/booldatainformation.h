@@ -38,6 +38,7 @@ public:
 
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QString valueString() const;
+    static QString valueString(T val);
 protected:
     explicit BoolDataInformation(const BoolDataInformation& d);
 };
@@ -65,5 +66,7 @@ DataInformation* BoolDataInformation<T, typeValue>::clone() const
 {
     return new BoolDataInformation<T, typeValue>(*this);
 }
+
+
 
 #endif // BOOLDATAINFORMATION_H

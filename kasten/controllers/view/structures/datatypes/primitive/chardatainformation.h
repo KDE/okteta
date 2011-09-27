@@ -30,12 +30,12 @@ PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Char,Primitive)
 public:
     DATAINFORMATION_CLONE(Char)
 
-    virtual int displayBase() const;
+    static int displayBase();
     virtual int size() const;
     virtual QString typeName() const;
     virtual QString valueString() const;
-    virtual AllPrimitiveTypes
-            qVariantToAllPrimitiveTypes(const QVariant& value) const;
+    static QString valueString(quint8 value);
+    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);

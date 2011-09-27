@@ -34,6 +34,7 @@ public:
 
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QString valueString() const;
+    static QString valueString(T val);
 protected:
     explicit UIntDataInformation(const UIntDataInformation& d);
 };

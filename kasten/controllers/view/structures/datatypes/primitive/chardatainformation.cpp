@@ -27,22 +27,27 @@ QString CharDataInformation::valueString() const
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     //TODO char codec
-    QChar qchar = QChar::fromLatin1(mValue);
+    return valueString(mValue);
+}
+
+QString CharDataInformation::valueString(quint8 value)
+{
+    QChar qchar = QChar::fromLatin1(value);
     qchar = qchar.isPrint() ? qchar : QChar(QChar::ReplacementCharacter);
     QString charStr = QLatin1Char('\'') + qchar + QLatin1Char('\'');
     if (Kasten::StructViewPreferences::showCharNumericalValue())
     {
         int base = displayBase();
-        QString num = QString::number(mValue, base);
+        QString num = QString::number(value, base);
         if (base == 16)
             num.prepend(QLatin1String("0x"));
-        if (Kasten::StructViewPreferences::localeAwareDecimalFormatting() && base
-                == 10)
+        if (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         charStr += QLatin1String(" (") + num + QLatin1Char(')');
     }
     return charStr;
 }
+
 
 QWidget* CharDataInformation::createEditWidget(QWidget* parent) const
 {
@@ -129,26 +134,20 @@ AllPrimitiveTypes CharDataInformation::qVariantToAllPrimitiveTypes(
     return AllPrimitiveTypes(value.toUInt());
 }
 
-int CharDataInformation::displayBase() const
+int CharDataInformation::displayBase()
 {
     int base = Kasten::StructViewPreferences::charDisplayBase();
     if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Binary)
-    {
         return 2;
-    }
     if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Decimal)
-    {
         return 10;
-    }
     if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
-    {
         return 16;
-    }
     return 10; //safe default value
 }
 
 AllPrimitiveTypes CharDataInformation::value() const
-{ 
+{
     return AllPrimitiveTypes(mValue);
 }
 
