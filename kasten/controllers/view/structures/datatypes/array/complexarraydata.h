@@ -60,8 +60,7 @@ public:
     /** have to override this, to set correct parent of mChildType -> crash otherwise */
     virtual void setParent(DataInformation* parent);
 
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            quint64 bitsRemaining, quint8* bitOffset);
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining);
     virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, quint64 bitsRemaining);
 

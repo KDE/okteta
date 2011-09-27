@@ -147,7 +147,13 @@ quint64 ArrayDataInformation::offset(unsigned int index) const
 
 qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
 {
-    qint64 ret = mData->readData(input, address, bitsRemaining, bitOffset);
+    if (*bitOffset != 0)
+    {
+        kWarning() << "in array " << name() << ": bit offset != 0 (" << *bitOffset << "), adding padding,"
+                " arrays always start at full bytes";
+        bitsRemaining -= *bitOffset;
+    }
+    qint64 ret = mData->readData(input, address, bitsRemaining);
     mWasAbleToRead = ret > 0; //if ret is -1 reading failed
     return ret;
 }

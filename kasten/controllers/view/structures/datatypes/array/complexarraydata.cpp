@@ -200,24 +200,25 @@ QScriptValue ComplexArrayData::toScriptValue(uint index, QScriptEngine* engine,
     return mChildren.at(index)->toScriptValue(engine, handlerInfo);
 }
 
-qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining, quint8* bitOffset)
+qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining)
 {
     //first of all update the structure:
     mParent->topLevelDataInformation()->updateElement(mParent);
 
     uint readBytes = 0;
     qint64 readBits = 0;
+    quint8 bitOffset = 0;
     for (int i = 0; i < mChildren.size(); i++)
     {
         qint64 currentReadBits = mChildren[i]->readData(input, address + readBytes,
-                bitsRemaining - readBits, bitOffset);
+                bitsRemaining - readBits, &bitOffset);
         if (currentReadBits == -1)
         {
             //could not read one element -> whole structure could not be read
             return -1;
         }
         readBits += currentReadBits;
-        readBytes = (readBits + *bitOffset) / 8;
+        readBytes = (readBits + bitOffset) / 8;
     }
     return readBits;
 }
