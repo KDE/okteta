@@ -60,3 +60,8 @@ bool DataInformationBase::isUnion() const
 {
     return false;
 }
+
+bool DataInformationBase::isBitfield() const
+{
+    return false;
+}

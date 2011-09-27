@@ -42,7 +42,7 @@ public:
     virtual QString sizeString() const;
     virtual QString typeName() const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
-
+    virtual bool isBitfield() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded) const;
 protected:
     unsigned mWidth :7; //cannot be more than 64 since a quint64 is used for storage
@@ -85,5 +85,11 @@ inline void AbstractBitfieldDataInformation::setWidth(uint newWidth)
 {
     mWidth = qMin(newWidth, 64u);
 }
+
+inline bool AbstractBitfieldDataInformation::isBitfield() const
+{
+    return true;
+}
+
 
 #endif /* ABSTRACTBITFIELDDATAINFORMATION_H_ */

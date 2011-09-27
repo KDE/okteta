@@ -31,6 +31,7 @@ public:
     virtual bool isArray() const;
     virtual bool isPrimitive() const;
     virtual bool isEnum() const;
+    virtual bool isBitfield() const;
     virtual bool isStruct() const;
     virtual bool isUnion() const;
     virtual bool isDummy() const;
