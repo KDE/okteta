@@ -202,9 +202,6 @@ QScriptValue ComplexArrayData::toScriptValue(uint index, QScriptEngine* engine,
 
 qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining)
 {
-    //first of all update the structure:
-    mParent->topLevelDataInformation()->updateElement(mParent);
-
     uint readBytes = 0;
     qint64 readBits = 0;
     quint8 bitOffset = 0;

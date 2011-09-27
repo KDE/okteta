@@ -106,10 +106,10 @@ QVariant ArrayDataInformation::childData(int row, int column, int role) const
     Q_ASSERT(uint(row) < mData->length());
     if (column == 0 && role == Qt::DisplayRole)
     {
-        //name is being asked for 
+        //name is being asked for
         return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
     }
-    else 
+    else
     {
         //just delegate to child
         return mData->dataAt(row, column, role);
@@ -153,8 +153,10 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
                 " arrays always start at full bytes";
         bitsRemaining -= *bitOffset;
     }
+    //first of all update the structure:
+    topLevelDataInformation()->updateElement(this);
     qint64 ret = mData->readData(input, address, bitsRemaining);
-    mWasAbleToRead = ret > 0; //if ret is -1 reading failed
+    mWasAbleToRead = ret >= 0; //if ret is -1 reading failed
     return ret;
 }
 
