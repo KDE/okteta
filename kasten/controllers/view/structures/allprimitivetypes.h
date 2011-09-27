@@ -88,6 +88,10 @@ union AllPrimitiveTypes
         ulongValue(0)
     {
     }
+    inline AllPrimitiveTypes(const AllPrimitiveTypes& a)
+        : ulongValue(a.ulongValue)
+    {
+    }
     inline AllPrimitiveTypes(quint64 val) :
         ulongValue(val)
     {
