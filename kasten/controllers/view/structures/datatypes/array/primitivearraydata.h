@@ -56,13 +56,11 @@ public:
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual QString typeName() const;
-
-    //has to be public so PrimitiveArrayData<Type_Float | Type_Double> can call it
-    /** reads exactly one item at specified address, it must have been verified that enough data is remaining*/
-    static T readOneItem(Okteta::Address addr, Okteta::AbstractByteArrayModel* input, bool littleEndian);
-    /** reads exactly one item at specified address, it must have been verified that enough space is remaining*/
-    static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, bool littleEndian);
 protected:
+    /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
+    void readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
+    /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
+    void readDataNonNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
 
     QVector<T> mData;
     uint mNumReadValues; //the number of values read before EOF

@@ -27,30 +27,67 @@
 
 
 template<PrimitiveDataType type>
-qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint64 bitsRemaining)
+qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    BitCount64 bitsRemaining)
 {
     Q_ASSERT(bitsRemaining % 8 == 0);
-    //vector has been resized to hold all elements
-    uint maxReadCount = (bitsRemaining / 8) / sizeof(T);
-    if (maxReadCount == 0)
-        return -1;
-    uint max = qMin(length(), maxReadCount);
-    uint currAddr = address;
-    ByteOrder byteOrder = AbstractArrayData::mParent->byteOrder();
-    bool littleEndian = byteOrder == ByteOrderEnumClass::LittleEndian;
-    for (uint i = 0; i < max; ++i)
-    {
-        mData[i] = readOneItem(address, input, littleEndian);
-        currAddr += sizeof(T);
-    }
-    mNumReadValues = maxReadCount; //could not read any more
-    if (maxReadCount < length())
-    {
-        //could not read all values -> all bits have been read
-        return bitsRemaining;
-    }
+    //integer division -> gives us the desired result, limited by the number of items in this array
+    const quint64 maxRemaining = (bitsRemaining / 8) / sizeof(T);
+    //since its 64 bits may be larger than a 32 bit value and have all lower 32 bits as zero
+    //therefore we use std::numeric_limits::max()
+    const quint32 maxRemaining32 = (maxRemaining > std::numeric_limits<quint32>::max())
+            ? std::numeric_limits<quint32>::max() : quint32(maxRemaining);
+    const quint32 maxNumItems = qMin(this->length(), maxRemaining32);
+    if (maxNumItems == 0)
+        return -1; //reached EOF
+    const ByteOrder byteOrder = AbstractArrayData::mParent->byteOrder();
+    const bool littleEndian = byteOrder == ByteOrderEnumClass::LittleEndian;
+#if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
+    if (littleEndian)
+        this->readDataNativeOrder(maxNumItems, input, address);
     else
-        return maxReadCount * 8 * sizeof(T);
+        this->readDataNonNativeOrder(maxNumItems, input, address);
+#elif Q_BYTE_ORDER == Q_BIG_ENDIAN
+    if (littleEndian)
+        this->readDataNonNativeOrder(maxNumItems, input, address);
+    else
+        this->readDataNativeOrder(maxNumItems, input, address);
+#else
+#warning Unknown byte order, doing nothing!
+#endif
+    this->mNumReadValues = maxNumItems;
+    return maxNumItems * sizeof(T) * 8;
+}
+
+template<PrimitiveDataType type>
+void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input,
+        Okteta::Address address)
+{
+    Q_ASSERT(numItems <= length());
+    const Okteta::Size numBytes = numItems * sizeof(T);
+    Q_ASSERT(input->size() >= numBytes + address);
+    Okteta::Byte* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
+    const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
+    Q_ASSERT(numCopied == numBytes);
+    Q_UNUSED(numCopied);
+}
+
+template<PrimitiveDataType type>
+void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input,
+        Okteta::Address address)
+{
+    Q_ASSERT(numItems <= length());
+    const uint numBytes = numItems * sizeof(T);
+    Q_ASSERT(uint(input->size()) >= numBytes + address);
+    Okteta::Byte* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
+    for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += 4)
+    {
+        //the compiler should unroll this loop
+        for (uint byte = 0; byte < sizeof(T); byte++)
+        {
+            vectorBytes[itemOffs + byte] = input->byte(address + itemOffs + (sizeof(T) - byte - 1));
+        }
+    }
 }
 
 template<PrimitiveDataType type>
@@ -72,30 +109,6 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
 }
 
 
-
-template<PrimitiveDataType type>
-typename PrimitiveArrayData<type>::T PrimitiveArrayData<type>::readOneItem(Okteta::Address addr,
-        Okteta::AbstractByteArrayModel* input, bool littleEndian)
-{
-    T result = 0;
-    if (littleEndian)
-    {
-        for (uint i = 0; i < sizeof(T); ++i)
-        {
-            //compiler should be smart enough not to create a loop
-            result |= T(input->byte(addr + i)) << (8 * i);
-        }
-    }
-    else
-    {
-        for (uint i = 0; i < sizeof(T); ++i)
-        {
-            //compiler should be smart enough not to create a loop
-            result |= T(input->byte(addr + i)) << (8 * (sizeof(T) - i));
-        }
-    }
-    return result;
-}
 
 template<PrimitiveDataType type>
 void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
@@ -121,46 +134,6 @@ void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
     }
 }
 
-template<>
-void PrimitiveArrayData<Type_Float>::writeOneItem(float value, Okteta::Address addr,
-        Okteta::AbstractByteArrayModel* out, bool littleEndian)
-{
-    Q_ASSERT(sizeof(float) == sizeof(quint32));
-    union { quint32 intVal; float floatVal; } un;
-    un.floatVal = value;
-    PrimitiveArrayData<Type_UInt32>::writeOneItem(un.intVal, addr, out, littleEndian);
-}
-
-template<>
-void PrimitiveArrayData<Type_Double>::writeOneItem(double value, Okteta::Address addr,
-        Okteta::AbstractByteArrayModel* out, bool littleEndian)
-{
-    Q_ASSERT(sizeof(double) == sizeof(quint64));
-    union { quint64 intVal; double doubleVal; } un;
-    un.doubleVal = value;
-    PrimitiveArrayData<Type_UInt64>::writeOneItem(un.intVal, addr, out, littleEndian);
-}
-
-template<>
-float PrimitiveArrayData<Type_Float>::readOneItem(Okteta::Address addr,
-        Okteta::AbstractByteArrayModel* input, bool littleEndian)
-{
-    Q_ASSERT(sizeof(float) == sizeof(quint32));
-    union { quint32 intVal; float floatVal; } un;
-    un.intVal = PrimitiveArrayData<Type_UInt32>::readOneItem(addr, input, littleEndian);
-    return un.floatVal;
-}
-
-template<>
-double PrimitiveArrayData<Type_Double>::readOneItem(Okteta::Address addr,
-        Okteta::AbstractByteArrayModel* input, bool littleEndian)
-{
-    Q_ASSERT(sizeof(double) == sizeof(quint64));
-    union { quint64 intVal; double doubleVal; } un;
-    un.intVal = PrimitiveArrayData<Type_UInt64>::readOneItem(addr, input, littleEndian);
-    return un.doubleVal;
-}
-
 template<PrimitiveDataType type>
 QVariant PrimitiveArrayData<type>::dataAt(int index, int column, int role)
 {
@@ -174,7 +147,7 @@ QVariant PrimitiveArrayData<type>::dataAt(int index, int column, int role)
             return PrimitiveDataInformation::typeName(type);
         if (column == DataInformation::ColumnValue)
         {
-            if (uint(index) >= mNumReadValues)
+            if (uint(index) >= this->mNumReadValues)
             {
                 //we are outside the valid range
                 return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
@@ -189,7 +162,7 @@ template<PrimitiveDataType type>
 QString PrimitiveArrayData<type>::typeName() const
 {
     return QString(PrimitiveDataInformation::typeName(type) + QLatin1Char('[')
-            + QString::number(length()) + QLatin1Char(']'));
+            + QString::number(this->length()) + QLatin1Char(']'));
 }
 
 template<PrimitiveDataType type>
@@ -211,10 +184,6 @@ QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* 
     return false;
 
 }
-
-
-
-
 
 //now instantiate all the template instances
 template class PrimitiveArrayData<Type_Bool8>;
