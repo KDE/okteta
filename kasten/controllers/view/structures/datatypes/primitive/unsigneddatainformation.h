@@ -35,7 +35,6 @@ public:
     virtual ~UnsignedDataInformation() {}
 
     virtual BitCount32 size() const;
-    static int displayBase();
 
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
@@ -45,6 +44,10 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     static T fromVariant(const QVariant& value);
+    static QWidget* staticCreateEditWidget(QWidget* parent);
+    static QVariant staticDataFromWidget(const QWidget* w);
+    static void staticSetWidgetData(T value, QWidget* w);
+    static int displayBase();
 
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual QString valueString() const = 0;
@@ -57,30 +60,47 @@ protected:
 template<typename T>
 inline QWidget* UnsignedDataInformation<T>::createEditWidget(QWidget* parent) const
 {
+    return staticCreateEditWidget(parent);
+}
+
+template<typename T>
+inline QVariant UnsignedDataInformation<T>::dataFromWidget(const QWidget* w) const
+{
+    return staticDataFromWidget(w);
+}
+
+template<typename T>
+inline void UnsignedDataInformation<T>::setWidgetData(QWidget* w) const
+{
+    staticSetWidgetData(mValue, w);
+}
+
+template<typename T>
+inline QWidget* UnsignedDataInformation<T>::staticCreateEditWidget(QWidget* parent)
+{
     UIntSpinBox* ret = new UIntSpinBox(parent, displayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }
 
 template<typename T>
-inline QVariant UnsignedDataInformation<T>::dataFromWidget(const QWidget* w) const
+inline QVariant UnsignedDataInformation<T>::staticDataFromWidget(const QWidget* w)
 {
     const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
+    Q_CHECK_PTR(spin);
     if (spin)
-        return spin->value();
-    else
-    {
-        kWarning() << "could not cast widget";
-        return QVariant();
-    }
+        return QVariant(spin->value());
+    kWarning() << "could not cast widget";
+    return QVariant();
 }
 
 template<typename T>
-inline void UnsignedDataInformation<T>::setWidgetData(QWidget* w) const
+inline void UnsignedDataInformation<T>::staticSetWidgetData(T value, QWidget* w)
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
+    Q_CHECK_PTR(spin);
     if (spin)
-        spin->setValue(mValue);
+        spin->setValue(value);
 }
 
 template<typename T>

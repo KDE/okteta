@@ -41,6 +41,10 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+    static QWidget* staticCreateEditWidget(QWidget* parent);
+    static QVariant staticDataFromWidget(const QWidget* w);
+    static void staticSetWidgetData(float value, QWidget* w);
+
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     static float fromVariant(const QVariant& value);
 private:

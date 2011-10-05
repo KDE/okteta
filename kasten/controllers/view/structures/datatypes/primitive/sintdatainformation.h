@@ -45,6 +45,10 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+    static QWidget* staticCreateEditWidget(QWidget* parent);
+    static QVariant staticDataFromWidget(const QWidget* w);
+    static void staticSetWidgetData(T value, QWidget* w);
+
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     static T fromVariant(const QVariant& value);
     virtual QScriptValue valueAsQScriptValue() const;
@@ -63,7 +67,7 @@ inline PrimitiveDataType SIntDataInformation<T, typeValue>::type() const
 }
 
 template<typename T, PrimitiveDataType typeValue>
-inline QWidget* SIntDataInformation<T, typeValue>::createEditWidget(QWidget* parent) const
+inline QWidget* SIntDataInformation<T, typeValue>::staticCreateEditWidget(QWidget* parent)
 {
     SIntSpinBox* ret = new SIntSpinBox(parent, displayBase());
     ret->setRange(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
@@ -71,11 +75,24 @@ inline QWidget* SIntDataInformation<T, typeValue>::createEditWidget(QWidget* par
 }
 
 template<typename T, PrimitiveDataType typeValue>
-inline void SIntDataInformation<T, typeValue>::setWidgetData(QWidget* w) const
+QVariant SIntDataInformation<T, typeValue>::staticDataFromWidget(const QWidget* w)
+{
+    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*> (w);
+    Q_CHECK_PTR(spin);
+    if (spin)
+        return spin->value();
+
+    kWarning() << "could not cast widget";
+    return QVariant();
+}
+
+template<typename T, PrimitiveDataType typeValue>
+inline void SIntDataInformation<T, typeValue>::staticSetWidgetData(T value, QWidget* w)
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
+    Q_CHECK_PTR(spin);
     if (spin)
-        spin->setValue(mValue);
+        spin->setValue(value);
 }
 
 template<typename T, PrimitiveDataType typeValue>

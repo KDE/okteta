@@ -48,13 +48,22 @@ QString CharDataInformation::valueString(quint8 value)
     return charStr;
 }
 
-
-QWidget* CharDataInformation::createEditWidget(QWidget* parent) const
+QWidget* CharDataInformation::staticCreateEditWidget(QWidget* parent)
 {
     return new KLineEdit(parent);
 }
 
+QWidget* CharDataInformation::createEditWidget(QWidget* parent) const
+{
+    return staticCreateEditWidget(parent);
+}
+
 QVariant CharDataInformation::dataFromWidget(const QWidget* w) const
+{
+    return staticDataFromWidget(w);
+}
+
+QVariant CharDataInformation::staticDataFromWidget(const QWidget* w)
 {
     //TODO fix this code!!
     const KLineEdit* edit = dynamic_cast<const KLineEdit*> (w);
@@ -114,10 +123,16 @@ QVariant CharDataInformation::dataFromWidget(const QWidget* w) const
 
 void CharDataInformation::setWidgetData(QWidget* w) const
 {
+    return staticSetWidgetData(mValue, w);
+}
+
+
+void CharDataInformation::staticSetWidgetData(quint8 value, QWidget* w)
+{
     KLineEdit* edit = dynamic_cast<KLineEdit*> (w);
     if (edit)
     {
-        QChar qchar(mValue, 0);
+        QChar qchar(value, 0);
         if (! qchar.isPrint())
             qchar = QChar(QChar::ReplacementCharacter);
         edit->setText( qchar );

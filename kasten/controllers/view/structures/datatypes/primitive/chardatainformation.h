@@ -44,6 +44,9 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+    static QWidget* staticCreateEditWidget(QWidget* parent);
+    static QVariant staticDataFromWidget(const QWidget* w);
+    static void staticSetWidgetData(quint8 value, QWidget* w);
 private:
     quint8 mValue;
 };
@@ -67,6 +70,5 @@ inline quint8 CharDataInformation::fromVariant(const QVariant& value)
 {
     return quint8(value.toUInt());
 }
-
 
 #endif /* CHARDATAINFORMATION_H_ */

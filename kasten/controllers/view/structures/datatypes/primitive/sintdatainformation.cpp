@@ -74,20 +74,6 @@ QString SIntDataInformation<T, typeValue>::valueString(T val)
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QVariant SIntDataInformation<T, typeValue>::dataFromWidget(const QWidget* w) const
-{
-    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*> (w);
-    Q_CHECK_PTR(spin);
-    if (spin)
-        return spin->value();
-    else
-    {
-        kWarning() << "could not cast widget";
-        return QVariant();
-    }
-}
-
-template<typename T, PrimitiveDataType typeValue>
 QScriptValue SIntDataInformation<T, typeValue>::valueAsQScriptValue() const
 {
     return QScriptValue(mValue);
@@ -97,6 +83,24 @@ template<>
 QScriptValue SIntDataInformation<qint64, Type_Int64>::valueAsQScriptValue() const
 {
     return QScriptValue(QString::number(mValue, 10));
+}
+
+template<typename T, PrimitiveDataType typeValue>
+inline QWidget* SIntDataInformation<T, typeValue>::createEditWidget(QWidget* parent) const
+{
+    return staticCreateEditWidget(parent);
+}
+
+template<typename T, PrimitiveDataType typeValue>
+QVariant SIntDataInformation<T, typeValue>::dataFromWidget(const QWidget* w) const
+{
+    return staticDataFromWidget(w);
+}
+
+template<typename T, PrimitiveDataType typeValue>
+inline void SIntDataInformation<T, typeValue>::setWidgetData(QWidget* w) const
+{
+    staticSetWidgetData(mValue, w);
 }
 
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)

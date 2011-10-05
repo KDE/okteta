@@ -32,6 +32,11 @@ QString FloatDataInformation::valueString() const
 
 QWidget* FloatDataInformation::createEditWidget(QWidget* parent) const
 {
+    return staticCreateEditWidget(parent);
+}
+
+QWidget* FloatDataInformation::staticCreateEditWidget(QWidget* parent)
+{
     KDoubleNumInput* ret = new KDoubleNumInput(parent);
     ret->setMinimum(std::numeric_limits<float>::min());
     ret->setMaximum(std::numeric_limits<float>::max());
@@ -40,7 +45,13 @@ QWidget* FloatDataInformation::createEditWidget(QWidget* parent) const
 
 QVariant FloatDataInformation::dataFromWidget(const QWidget* w) const
 {
+    return staticDataFromWidget(w);
+}
+
+QVariant FloatDataInformation::staticDataFromWidget(const QWidget* w)
+{
     const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
+    Q_CHECK_PTR(spin);
     if (spin)
     {
 #if QT_VERSION >= 0x040600
@@ -54,9 +65,15 @@ QVariant FloatDataInformation::dataFromWidget(const QWidget* w) const
 
 void FloatDataInformation::setWidgetData(QWidget* w) const
 {
+    staticSetWidgetData(mValue, w);
+}
+
+void FloatDataInformation::staticSetWidgetData(float value, QWidget* w)
+{
     KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
+    Q_CHECK_PTR(spin);
     if (spin)
-        spin->setValue(mValue);
+        spin->setValue(value);
 }
 
 AllPrimitiveTypes FloatDataInformation::qVariantToAllPrimitiveTypes(const QVariant& value) const

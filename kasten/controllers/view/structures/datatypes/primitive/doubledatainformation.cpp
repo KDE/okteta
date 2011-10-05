@@ -31,13 +31,24 @@ QString DoubleDataInformation::valueString() const
 
 QWidget* DoubleDataInformation::createEditWidget(QWidget* parent) const
 {
+    return staticCreateEditWidget(parent);
+}
+
+QWidget* DoubleDataInformation::staticCreateEditWidget(QWidget* parent)
+{
     KDoubleNumInput* ret = new KDoubleNumInput(parent);
     return ret;
 }
 
 QVariant DoubleDataInformation::dataFromWidget(const QWidget* w) const
 {
+    return staticDataFromWidget(w);
+}
+
+QVariant DoubleDataInformation::staticDataFromWidget(const QWidget* w)
+{
     const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
+    Q_CHECK_PTR(spin);
     if (spin)
         return spin->value();
     return QVariant();
@@ -45,9 +56,15 @@ QVariant DoubleDataInformation::dataFromWidget(const QWidget* w) const
 
 void DoubleDataInformation::setWidgetData(QWidget* w) const
 {
+    staticSetWidgetData(mValue, w);
+}
+
+void DoubleDataInformation::staticSetWidgetData(double value, QWidget* w)
+{
     KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
+    Q_CHECK_PTR(spin);
     if (spin)
-        spin->setValue(mValue);
+        spin->setValue(value);
 }
 
 AllPrimitiveTypes DoubleDataInformation::qVariantToAllPrimitiveTypes(const QVariant& value) const
