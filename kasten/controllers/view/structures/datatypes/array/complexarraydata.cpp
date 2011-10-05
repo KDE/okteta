@@ -38,21 +38,6 @@ ComplexArrayData::ComplexArrayData(unsigned int initialLength, DataInformation* 
         mChildren.append(child);    }
 }
 
-ComplexArrayData::ComplexArrayData(const ComplexArrayData& c): AbstractArrayData(c), mChildType(0)
-{
-    Q_CHECK_PTR(c.mChildType);
-    mChildType = c.mChildType->clone();
-    mChildType->setParent(mParent);
-    uint initialLength = c.length();
-    mChildren.reserve(initialLength);
-    for (unsigned int i = 0; i < initialLength; ++i) {
-        DataInformation* child = mChildType->clone();
-        child->setParent(mParent);
-        mChildren.append(child);
-    }
-}
-
-
 ComplexArrayData::~ComplexArrayData()
 {
     qDeleteAll(mChildren);
@@ -91,11 +76,6 @@ DataInformation* ComplexArrayData::childAt(unsigned int idx)
 {
     Q_ASSERT(idx < uint(mChildren.size()));
     return mChildren.at(idx);
-}
-
-ComplexArrayData* ComplexArrayData::clone()
-{
-    return new ComplexArrayData(*this);
 }
 
 QVariant ComplexArrayData::dataAt(int index, int column, int role)
@@ -214,4 +194,9 @@ Qt::ItemFlags ComplexArrayData::childFlags(int index, int column, bool fileLoade
 {
     Q_ASSERT(index >= 0 && uint(index) < length());
     return mChildren.at(index)->flags(column, fileLoaded);
+}
+
+DataInformation* ComplexArrayData::childType() const
+{
+    return mChildType->clone();
 }

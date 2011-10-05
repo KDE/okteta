@@ -47,8 +47,18 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d) :
 {
     if (d.mData)
     {
-        mData = d.mData->clone();
-        mData->setParent(this);
+        uint length = d.mData->length();
+        if (d.mData->isComplex())
+        {
+            //childtype creates a copy, so this is safe
+            DataInformation* childType = static_cast<ComplexArrayData*>(d.mData)->childType();
+            mData = new ComplexArrayData(length, childType, this);
+        }
+        else
+        {
+            mData = primitiveArrayFromType(length, d.mData->primitiveType());
+        }
+        Q_CHECK_PTR(mData);
     }
 }
 
@@ -214,17 +224,8 @@ bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMod
     return false;
 }
 
-AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInformation* data)
+AbstractArrayData* ArrayDataInformation::primitiveArrayFromType(uint length, PrimitiveDataType type)
 {
-    if (!data->isPrimitive() || data->isBitfield() || data->isEnum())
-    {
-        //we cant use primitiveArrayData for bitfields/enums or any complex data type
-        return new ComplexArrayData(length, data, this);
-    }
-    //it is primitive -> create a PrimitiveArrayData
-    PrimitiveDataType type = static_cast<PrimitiveDataInformation*>(data)->type();
-    //we no longer need data now that we have the type
-    delete data;
     switch (type)
     {
     case Type_Char:
@@ -261,4 +262,18 @@ AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInfo
         kWarning() << "none of the cases matched, probably an error";
         return NULL;
     }
+}
+
+AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInformation* data)
+{
+    if (!data->isPrimitive() || data->isBitfield() || data->isEnum())
+    {
+        //we cant use primitiveArrayData for bitfields/enums or any complex data type
+        return new ComplexArrayData(length, data, this);
+    }
+    //it is primitive -> create a PrimitiveArrayData
+    PrimitiveDataType type = static_cast<PrimitiveDataInformation*>(data)->type();
+    //we no longer need data now that we have the type
+    delete data;
+    return primitiveArrayFromType(length, type);
 }

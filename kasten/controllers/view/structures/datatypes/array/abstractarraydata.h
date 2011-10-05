@@ -40,11 +40,10 @@ namespace Okteta {
 
 class AbstractArrayData
 {
+    Q_DISABLE_COPY(AbstractArrayData)
 public:
     explicit AbstractArrayData(DataInformation* parent);
     virtual ~AbstractArrayData();
-
-    virtual AbstractArrayData* clone() = 0;
 
     virtual QVariant dataAt(int index, int column, int role) = 0;
 
@@ -70,8 +69,8 @@ public:
             Okteta::Address address, BitCount64 bitsRemaining) = 0;
     virtual BitCount32 sizeAt(int index) = 0;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) = 0;
+    virtual bool isComplex() const = 0;
 protected:
-    AbstractArrayData(const AbstractArrayData& a);
     DataInformation* mParent;
 };
 

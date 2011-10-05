@@ -34,14 +34,13 @@ class ScriptHandlerInfo;
 
 class ComplexArrayData : public AbstractArrayData
 {
+    Q_DISABLE_COPY(ComplexArrayData)
 public:
     /** Takes ownership of @p data !*/
     ComplexArrayData(unsigned int initialLength, DataInformation* data, DataInformation* parent);
     virtual ~ComplexArrayData();
 
     virtual void setLength(int newLength);
-
-    virtual ComplexArrayData* clone();
 
     virtual QVariant dataAt(int index, int column, int role);
 
@@ -57,6 +56,7 @@ public:
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded);
 
     virtual PrimitiveDataType primitiveType() const;
+    virtual bool isComplex() const;
 
     QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
 
@@ -66,12 +66,16 @@ public:
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
     virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining);
-
-protected:
-    explicit ComplexArrayData(const ComplexArrayData& c);
+    /** returns a COPY of the currently stored child type */
+    DataInformation* childType() const;
 private:
     DataInformation* mChildType;
     QVector<DataInformation*> mChildren;
 };
+
+inline bool ComplexArrayData::isComplex() const
+{
+    return true;
+}
 
 #endif // COMPLEXARRAYDATA_H

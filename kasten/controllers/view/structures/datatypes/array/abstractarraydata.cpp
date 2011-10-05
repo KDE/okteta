@@ -31,9 +31,3 @@ AbstractArrayData::AbstractArrayData(DataInformation* parent)
 AbstractArrayData::~AbstractArrayData()
 {
 }
-
-AbstractArrayData::AbstractArrayData(const AbstractArrayData& a)
-        : mParent(a.mParent)
-{
-}
-

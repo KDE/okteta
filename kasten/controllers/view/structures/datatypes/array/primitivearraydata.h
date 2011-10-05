@@ -31,13 +31,13 @@
 template<PrimitiveDataType type>
 class PrimitiveArrayData : public AbstractArrayData
 {
+    Q_DISABLE_COPY(PrimitiveArrayData)
 public:
     typedef typename PrimitiveInfo<type>::valueType T;
     typedef typename PrimitiveInfo<type>::Class DisplayClass;
+
     explicit PrimitiveArrayData(unsigned int initialLength, DataInformation* parent);
-    PrimitiveArrayData(const PrimitiveArrayData& a);
     virtual ~PrimitiveArrayData();
-    virtual PrimitiveArrayData* clone();
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
             BitCount64 bitsRemaining);
@@ -58,6 +58,8 @@ public:
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual QString typeName() const;
+
+    virtual bool isComplex() const;
 
     static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, bool littleEndian);
 protected:
@@ -81,12 +83,6 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, 
 }
 
 template<PrimitiveDataType type>
-inline PrimitiveArrayData<type>::PrimitiveArrayData(const PrimitiveArrayData& a)
-    : AbstractArrayData(a), mData(a.mData), mNumReadValues(a.mNumReadValues), mDummy(new DummyDataInformation(a.mParent))
-{
-}
-
-template<PrimitiveDataType type>
 inline PrimitiveArrayData<type>::~PrimitiveArrayData()
 {
     delete mDummy;
@@ -97,12 +93,6 @@ inline void PrimitiveArrayData<type>::setParent(DataInformation* parent)
 {
     mParent = parent;
     mDummy->setParent(parent);
-}
-
-template<PrimitiveDataType type>
-inline PrimitiveArrayData<type>* PrimitiveArrayData<type>::clone()
-{
-    return new PrimitiveArrayData<type>(*this);
 }
 
 template<PrimitiveDataType type>
@@ -163,6 +153,12 @@ inline Qt::ItemFlags PrimitiveArrayData<type>::childFlags(int row, int column, b
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
     else
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
+template<PrimitiveDataType type>
+bool PrimitiveArrayData<type>::isComplex() const
+{
+    return false;
 }
 
 

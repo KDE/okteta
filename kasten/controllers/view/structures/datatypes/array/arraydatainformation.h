@@ -79,6 +79,7 @@ public:
 private:
     /** Takes ownership of @p data ! */
     AbstractArrayData* arrayDataFromType(uint length, DataInformation* data);
+    AbstractArrayData* primitiveArrayFromType(uint length, PrimitiveDataType type);
 protected:
     virtual BitCount32 offset(unsigned int index) const;
 
