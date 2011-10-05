@@ -209,3 +209,9 @@ BitCount32 ComplexArrayData::sizeAt(int index)
     Q_ASSERT(index >= 0 && uint(index) < length());
     return mChildren.at(index)->size();
 }
+
+Qt::ItemFlags ComplexArrayData::childFlags(int index, int column, bool fileLoaded)
+{
+    Q_ASSERT(index >= 0 && uint(index) < length());
+    return mChildren.at(index)->flags(column, fileLoaded);
+}

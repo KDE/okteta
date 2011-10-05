@@ -60,6 +60,7 @@ public:
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
+    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
     virtual QVariant childData(int row, int column, int role) const;
     virtual DataInformation* childAt(unsigned int idx) const;
     virtual unsigned int childCount() const;
@@ -135,6 +136,11 @@ inline QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScript
 inline BitCount32 ArrayDataInformation::childSize(int index) const
 {
     return mData->sizeAt(index);
+}
+
+inline Qt::ItemFlags ArrayDataInformation::childFlags(int row, int column, bool fileLoaded) const
+{
+    return mData->childFlags(row, column, fileLoaded);
 }
 
 

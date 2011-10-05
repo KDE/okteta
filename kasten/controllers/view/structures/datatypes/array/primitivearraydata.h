@@ -54,6 +54,7 @@ public:
     virtual PrimitiveDataType primitiveType() const;
     virtual void setParent(DataInformation* parent);
     virtual BitCount32 sizeAt(int index);
+    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded);
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual QString typeName() const;
@@ -152,6 +153,18 @@ inline BitCount32 PrimitiveArrayData<type>::sizeAt(int index)
     Q_UNUSED(index)
     return sizeof(T) * 8;
 }
+
+template<PrimitiveDataType type>
+inline Qt::ItemFlags PrimitiveArrayData<type>::childFlags(int row, int column, bool fileLoaded)
+{
+    Q_ASSERT(row >= 0 && uint(row) < length());
+    Q_UNUSED(row)
+    if (column == 2 && fileLoaded)
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
+    else
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}
+
 
 
 
