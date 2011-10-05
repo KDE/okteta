@@ -159,9 +159,17 @@ Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
 {
     if (!index.isValid())
         return 0;
-    DataInformation *item = static_cast<DataInformation*> (index.internalPointer());
-    //TODO child flags
-    return mTool->flags(index.column(), item);
+    DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
+    if (item->isDummy())
+    {
+        Q_ASSERT(!item->parent()->isTopLevel()); //parent of a dummy cannot be top level
+        DataInformation* parent = static_cast<DataInformation*>(item->parent());
+        return parent->childFlags(index.row(), index.column(), mTool->isFileLoaded());
+    }
+    else
+    {
+        return item->flags(index.column(), mTool->isFileLoaded());
+    }
 }
 
 QVariant StructTreeModel::headerData(int section, Qt::Orientation orientation,

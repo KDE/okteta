@@ -351,14 +351,13 @@ int StructTool::columnCount() const
     return DataInformation::COLUMN_COUNT;
 }
 
-Qt::ItemFlags StructTool::flags(int column, DataInformation* data) const
+bool StructTool::isFileLoaded() const
 {
-    if (!data)
-        return 0; // just return something in case data is null
-    return data->flags(column, mByteArrayModel != NULL);
+    return mByteArrayModel != NULL;
 }
 
-void StructTool::lockStructure(QModelIndex idx)
+
+void StructTool::lockStructure(const QModelIndex& idx)
 {
     if (!mByteArrayModel) //no point without ByteArrayModel
         return;
@@ -370,7 +369,7 @@ void StructTool::lockStructure(QModelIndex idx)
     if (top)
         top->lockPositionToOffset(mCursorIndex, mByteArrayModel);
 }
-void StructTool::unlockStructure(QModelIndex idx)
+void StructTool::unlockStructure(const QModelIndex& idx)
 {
     if (!mByteArrayModel) //no point without ByteArrayModel
         return;
@@ -387,7 +386,7 @@ void StructTool::unlockStructure(QModelIndex idx)
     }
 }
 
-bool StructTool::isStructureLocked(QModelIndex idx) const
+bool StructTool::isStructureLocked(const QModelIndex& idx) const
 {
     if (!mByteArrayModel) //no point without ByteArrayModel
         return false;
@@ -401,7 +400,7 @@ bool StructTool::isStructureLocked(QModelIndex idx) const
     return false;
 }
 
-bool StructTool::canStructureBeLocked(QModelIndex idx) const
+bool StructTool::canStructureBeLocked(const QModelIndex& idx) const
 {
     if (!mByteArrayModel) //no point without ByteArrayModel
         return false;
@@ -418,6 +417,21 @@ bool StructTool::canStructureBeLocked(QModelIndex idx) const
 void StructTool::onChildItemDataChanged()
 {
     mCurrentItemDataChanged = true;
+}
+
+Okteta::AbstractByteArrayModel* StructTool::byteArrayModel() const
+{
+    return mByteArrayModel;
+}
+
+StructuresManager* StructTool::manager() const
+{
+    return mManager;
+}
+
+StructViewPreferences::EnumByteOrder::type StructTool::byteOrder() const
+{
+    return mByteOrder;
 }
 
 }

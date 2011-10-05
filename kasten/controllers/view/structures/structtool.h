@@ -69,27 +69,21 @@ public:
     virtual void setTargetModel(AbstractModel* model);
 
 public:
-    StructViewPreferences::EnumByteOrder::type byteOrder() const
-    {
-        return mByteOrder;
-    }
+    StructViewPreferences::EnumByteOrder::type byteOrder() const;
     void setByteOrder(StructViewPreferences::EnumByteOrder::type order);
     int columnCount() const;
     KDE_DEPRECATED bool setData(const QVariant& value, int role, DataInformation* item);
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
-    inline StructuresManager* manager() const
-    {
-        return mManager;
-    }
-    void lockStructure(QModelIndex idx);
-    void unlockStructure(QModelIndex idx);
-    bool isStructureLocked(QModelIndex idx) const;
+    StructuresManager* manager() const;
+    void lockStructure(const QModelIndex& idx);
+    void unlockStructure(const QModelIndex& idx);
+    bool isStructureLocked(const QModelIndex& idx) const;
     /** check if there is any ByteArrayModel available to lock the structure */
-    bool canStructureBeLocked(QModelIndex idx) const;
+    bool canStructureBeLocked(const QModelIndex& idx) const;
+    bool isFileLoaded() const;
 Q_SIGNALS:
     void dataChanged(int row, void* data); //actually a DataInformation*
-    KDE_DEPRECATED void dataChanged(); //only needed for binary compatibility, never used
     void dataCleared();
     void byteOrderChanged();
     void cursorIndexChanged();
@@ -136,14 +130,7 @@ public:
     QVariant headerData(int column, int role);
     int childCount() const;
     DataInformation* childAt(int idx) const;
-    Qt::ItemFlags flags(int column, DataInformation* data) const;
     //	QTextCodec* mUtf8Codec; //XXX add utf8 strings sometime
 };
-
-inline Okteta::AbstractByteArrayModel* StructTool::byteArrayModel() const
-{
-    return mByteArrayModel;
-}
-
 }
 #endif /* STRUCTTOOL_H_ */
