@@ -105,7 +105,9 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
     }
     ByteOrder byteOrder =  AbstractArrayData::mParent->byteOrder();
     bool littleEndian = byteOrder == ByteOrderEnumClass::LittleEndian;
-    writeOneItem(DisplayClass::fromVariant(value), address + (row * sizeof(T)), out, littleEndian);
+    T convertedVal = DisplayClass::fromVariant(value);
+    this->mData[row] = convertedVal;
+    this->writeOneItem(convertedVal, address + (row * sizeof(T)), out, littleEndian);
     return true;
 }
 
