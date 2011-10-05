@@ -66,6 +66,7 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::Abstra
     Q_ASSERT(numItems <= length());
     const Okteta::Size numBytes = numItems * sizeof(T);
     Q_ASSERT(input->size() >= numBytes + address);
+    Q_UNUSED(numBytes);
     Okteta::Byte* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
     const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
     Q_ASSERT(numCopied == numBytes);
