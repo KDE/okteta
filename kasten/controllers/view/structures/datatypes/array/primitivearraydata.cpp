@@ -208,6 +208,28 @@ QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* 
 
 }
 
+template<PrimitiveDataType type>
+QWidget* PrimitiveArrayData<type>::createChildEditWidget(uint index, QWidget* parent) const
+{
+    Q_ASSERT(index < length());
+    return DisplayClass::staticCreateEditWidget(parent);
+}
+
+template<PrimitiveDataType type>
+QVariant PrimitiveArrayData<type>::dataFromChildWidget(uint index, const QWidget* w) const
+{
+    Q_ASSERT(index < length());
+    return DisplayClass::staticDataFromWidget(w);
+}
+
+template<PrimitiveDataType type>
+void PrimitiveArrayData<type>::setChildWidgetData(uint index, QWidget* w) const
+{
+    Q_ASSERT(index < length());
+    DisplayClass::staticSetWidgetData(mData.at(index), w);
+}
+
+
 //now instantiate all the template instances
 template class PrimitiveArrayData<Type_Bool8>;
 template class PrimitiveArrayData<Type_Bool16>;

@@ -200,3 +200,22 @@ DataInformation* ComplexArrayData::childType() const
 {
     return mChildType->clone();
 }
+
+QWidget* ComplexArrayData::createChildEditWidget(uint index, QWidget* parent) const
+{
+    Q_ASSERT(index < length());
+    return mChildren.at(index)->createEditWidget(parent);
+}
+
+QVariant ComplexArrayData::dataFromChildWidget(uint index, const QWidget* w) const
+{
+    Q_ASSERT(index < length());
+    return mChildren.at(index)->dataFromWidget(w);
+
+}
+
+void ComplexArrayData::setChildWidgetData(uint index, QWidget* w) const
+{
+    Q_ASSERT(index < length());
+    mChildren.at(index)->setWidgetData(w);
+}

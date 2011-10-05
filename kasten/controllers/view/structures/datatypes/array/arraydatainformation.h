@@ -51,6 +51,11 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+
+    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
+    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
+    virtual void setChildWidgetData(uint index, QWidget* w) const;
+
     virtual BitCount32 size() const;
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -144,6 +149,19 @@ inline Qt::ItemFlags ArrayDataInformation::childFlags(int row, int column, bool 
     return mData->childFlags(row, column, fileLoaded);
 }
 
+inline QWidget* ArrayDataInformation::createChildEditWidget(uint index, QWidget* parent) const
+{
+    return mData->createChildEditWidget(index, parent);
+}
 
+inline QVariant ArrayDataInformation::dataFromChildWidget(uint index, const QWidget* w) const
+{
+    return mData->dataFromChildWidget(index, w);
+}
+
+inline void ArrayDataInformation::setChildWidgetData(uint index, QWidget* w) const
+{
+    mData->setChildWidgetData(index, w);
+}
 
 #endif /* ARRAYDATAINFORMATION_H_ */

@@ -115,6 +115,13 @@ public:
     /** initialize the delegate widget with the correct data */
     virtual void setWidgetData(QWidget* w) const = 0;
 
+    /** create a QWidget for the QItemDelegate */
+    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
+    /** get the needed data from the widget */
+    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
+    /** initialize the delegate widget with the correct data */
+    virtual void setChildWidgetData(uint index, QWidget* w) const;
+
     //reading and writing
     /** the size in bits of this element */
     virtual BitCount32 size() const = 0;

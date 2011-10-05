@@ -68,6 +68,10 @@ public:
             Okteta::Address address, BitCount64 bitsRemaining);
     /** returns a COPY of the currently stored child type */
     DataInformation* childType() const;
+
+    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
+    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
+    virtual void setChildWidgetData(uint index, QWidget* w) const;
 private:
     DataInformation* mChildType;
     QVector<DataInformation*> mChildren;

@@ -61,6 +61,11 @@ public:
 
     virtual bool isComplex() const;
 
+
+    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
+    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
+    virtual void setChildWidgetData(uint index, QWidget* w) const;
+
     static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, bool littleEndian);
 protected:
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */

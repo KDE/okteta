@@ -32,6 +32,8 @@
 #include <QtCore/QString>
 #include <QtScript/QScriptValue>
 
+
+class QWidget;
 class DataInformation;
 class ScriptHandlerInfo;
 namespace Okteta {
@@ -70,6 +72,10 @@ public:
     virtual BitCount32 sizeAt(int index) = 0;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) = 0;
     virtual bool isComplex() const = 0;
+
+    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const = 0;
+    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const = 0;
+    virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
 protected:
     DataInformation* mParent;
 };
