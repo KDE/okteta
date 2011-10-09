@@ -24,6 +24,17 @@
 
 #include "structviewpreferences.h"
 
+class DataInformationBase;
+class DataInformation;
+class DummyDataInformation;
+class UnionDataInformation;
+class StructureDataInformation;
+class AbstractBitfieldDataInformation;
+class EnumDataInformation;
+class PrimitiveDataInformation;
+class ArrayDataInformation;
+class TopLevelDataInformation;
+
 typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 /** To indicate that it is a number of bits not bytes */
@@ -36,13 +47,79 @@ public:
     DataInformationBase();
     virtual ~DataInformationBase();
     virtual bool isTopLevel() const = 0;
+    TopLevelDataInformation* asTopLevel();
+    DataInformation* asDataInformation();
     virtual bool isArray() const;
+    ArrayDataInformation* asArray();
     virtual bool isPrimitive() const;
+    PrimitiveDataInformation* asPrimitive();
     virtual bool isEnum() const;
+    EnumDataInformation* asEnum();
     virtual bool isBitfield() const;
+    AbstractBitfieldDataInformation* asBitfield();
     virtual bool isStruct() const;
+    StructureDataInformation* asStruct();
     virtual bool isUnion() const;
+    UnionDataInformation* asUnion();
     virtual bool isDummy() const;
+    DummyDataInformation* asDummy();
 };
+
+//TODO we have to use reinterpret_cast<> since I don't know how to forward declare inheritance
+//and including other headers would be overkill
+
+inline ArrayDataInformation* DataInformationBase::asArray()
+{
+    Q_ASSERT(isArray());
+    return reinterpret_cast<ArrayDataInformation*>(this);
+}
+
+inline AbstractBitfieldDataInformation* DataInformationBase::asBitfield()
+{
+    Q_ASSERT(isBitfield());
+    return reinterpret_cast<AbstractBitfieldDataInformation*>(this);
+}
+
+inline DummyDataInformation* DataInformationBase::asDummy()
+{
+    Q_ASSERT(isDummy());
+    return reinterpret_cast<DummyDataInformation*>(this);
+}
+
+inline EnumDataInformation* DataInformationBase::asEnum()
+{
+    Q_ASSERT(isEnum());
+    return reinterpret_cast<EnumDataInformation*>(this);
+}
+
+inline PrimitiveDataInformation* DataInformationBase::asPrimitive()
+{
+    Q_ASSERT(isPrimitive());
+    return reinterpret_cast<PrimitiveDataInformation*>(this);
+}
+
+inline StructureDataInformation* DataInformationBase::asStruct()
+{
+    Q_ASSERT(isStruct());
+    return reinterpret_cast<StructureDataInformation*>(this);
+}
+
+inline TopLevelDataInformation* DataInformationBase::asTopLevel()
+{
+    Q_ASSERT(isTopLevel());
+    return reinterpret_cast<TopLevelDataInformation*>(this);
+}
+
+inline DataInformation* DataInformationBase::asDataInformation()
+{
+    Q_ASSERT(!isTopLevel());
+    return reinterpret_cast<DataInformation*>(this);
+}
+
+inline UnionDataInformation* DataInformationBase::asUnion()
+{
+    Q_ASSERT(isUnion());
+    return reinterpret_cast<UnionDataInformation*>(this);
+}
 
 #endif // DATAINFORMATIONBASE_H
