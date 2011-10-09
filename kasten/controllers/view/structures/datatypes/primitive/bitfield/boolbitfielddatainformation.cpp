@@ -84,10 +84,12 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
     if (width() == 1)
     {
-        const KComboBox* box = static_cast<const KComboBox*> (w);
+        const KComboBox* box = dynamic_cast<const KComboBox*>(w);
+        Q_CHECK_PTR(box);
         return box->currentIndex();
     }
-    const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
+    const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*>(w);
+    Q_CHECK_PTR(spin);
     if (spin)
         return spin->value();
     else

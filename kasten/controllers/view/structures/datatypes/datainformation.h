@@ -257,7 +257,7 @@ inline ByteOrder DataInformation::byteOrder() const
             return Kasten::StructViewPreferences::byteOrder();
         case EndianessInherit:
             return (mParent && !mParent->isTopLevel()) ?
-                static_cast<DataInformation*>(mParent)->byteOrder()
+                mParent->asDataInformation()->byteOrder()
                 : Kasten::StructViewPreferences::byteOrder();
     }
 

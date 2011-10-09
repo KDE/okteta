@@ -74,7 +74,7 @@ BitCount32 DataInformation::positionRelativeToRoot(int index) const
         return 0;
 
     //TODO add a method offset(const DataInformation* const) for efficiency
-    DataInformation* par = static_cast<DataInformation*>(mParent);
+    DataInformation* par = mParent->asDataInformation();
     //row defaults to -1
     return par->offset(index < 0 ? row() : index) + par->positionRelativeToRoot();
 }
@@ -86,7 +86,7 @@ DataInformation* DataInformation::mainStructure()
     if (mParent->isTopLevel())
         return this;
     else
-        return static_cast<DataInformation*>(mParent)->mainStructure();
+        return mParent->asDataInformation()->mainStructure();
 
 }
 
@@ -266,18 +266,18 @@ TopLevelDataInformation* DataInformation::topLevelDataInformation() const
 {
     Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel())
-        return static_cast<TopLevelDataInformation*>(mParent);
+        return mParent->asTopLevel();
 
-    return static_cast<const DataInformation*>(mParent)->topLevelDataInformation();
+    return mParent->asDataInformation()->topLevelDataInformation();
 }
 
 int DataInformation::row() const
 {
     Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel())
-        return static_cast<TopLevelDataInformation*>(mParent)->indexOf(this);
+        return mParent->asTopLevel()->indexOf(this);
     else
-        return static_cast<const DataInformation*>(mParent)->indexOf(this);
+        return mParent->asDataInformation()->indexOf(this);
 }
 
 QWidget* DataInformation::createChildEditWidget(uint index, QWidget* parent) const
