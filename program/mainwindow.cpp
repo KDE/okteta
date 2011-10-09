@@ -43,8 +43,12 @@
 #include <bytetable/bytetabletool.h>
 #include <bookmarks/bookmarkstoolview.h>
 #include <bookmarks/bookmarkstool.h>
+
+#ifndef NO_STRUCTURES_TOOL
 #include <structures/structtoolview.h>
 #include <structures/structtool.h>
+#endif
+
 // Kasten tools
 #include <document/versionview/versionviewtoolview.h>
 #include <document/versionview/versionviewtool.h>
