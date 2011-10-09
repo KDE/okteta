@@ -49,77 +49,62 @@ public:
     virtual bool isTopLevel() const = 0;
     TopLevelDataInformation* asTopLevel();
     DataInformation* asDataInformation();
+    const TopLevelDataInformation* asTopLevel() const;
+    const DataInformation* asDataInformation() const;
     virtual bool isArray() const;
     ArrayDataInformation* asArray();
+    const ArrayDataInformation* asArray() const;
     virtual bool isPrimitive() const;
     PrimitiveDataInformation* asPrimitive();
+    const PrimitiveDataInformation* asPrimitive() const;
     virtual bool isEnum() const;
     EnumDataInformation* asEnum();
+    const EnumDataInformation* asEnum() const;
     virtual bool isBitfield() const;
     AbstractBitfieldDataInformation* asBitfield();
+    const AbstractBitfieldDataInformation* asBitfield() const;
     virtual bool isStruct() const;
     StructureDataInformation* asStruct();
+    const StructureDataInformation* asStruct() const;
     virtual bool isUnion() const;
     UnionDataInformation* asUnion();
+    const UnionDataInformation* asUnion() const;
     virtual bool isDummy() const;
     DummyDataInformation* asDummy();
+    const DummyDataInformation* asDummy() const;
 };
 
-//TODO we have to use reinterpret_cast<> since I don't know how to forward declare inheritance
+#define CAST_FUNCS_2(typename, name) inline typename* DataInformationBase::as##name() {\
+    Q_ASSERT(is##name()); return reinterpret_cast<typename*>(this); }\
+    inline const typename* DataInformationBase::as##name() const {\
+    Q_ASSERT(is##name()); return reinterpret_cast<const typename*>(this); }
+#define CAST_FUNCS(type) CAST_FUNCS_2(type##DataInformation, type)
+//we have to use reinterpret_cast<> since it does not seem to be possible to declare inheritance
 //and including other headers would be overkill
 
-inline ArrayDataInformation* DataInformationBase::asArray()
-{
-    Q_ASSERT(isArray());
-    return reinterpret_cast<ArrayDataInformation*>(this);
-}
+CAST_FUNCS(Array)
+CAST_FUNCS(Union)
+CAST_FUNCS_2(StructureDataInformation, Struct)
+CAST_FUNCS(Enum)
+CAST_FUNCS(Primitive)
+CAST_FUNCS(Dummy)
+CAST_FUNCS_2(AbstractBitfieldDataInformation, Bitfield)
+CAST_FUNCS(TopLevel)
 
-inline AbstractBitfieldDataInformation* DataInformationBase::asBitfield()
-{
-    Q_ASSERT(isBitfield());
-    return reinterpret_cast<AbstractBitfieldDataInformation*>(this);
-}
-
-inline DummyDataInformation* DataInformationBase::asDummy()
-{
-    Q_ASSERT(isDummy());
-    return reinterpret_cast<DummyDataInformation*>(this);
-}
-
-inline EnumDataInformation* DataInformationBase::asEnum()
-{
-    Q_ASSERT(isEnum());
-    return reinterpret_cast<EnumDataInformation*>(this);
-}
-
-inline PrimitiveDataInformation* DataInformationBase::asPrimitive()
-{
-    Q_ASSERT(isPrimitive());
-    return reinterpret_cast<PrimitiveDataInformation*>(this);
-}
-
-inline StructureDataInformation* DataInformationBase::asStruct()
-{
-    Q_ASSERT(isStruct());
-    return reinterpret_cast<StructureDataInformation*>(this);
-}
-
-inline TopLevelDataInformation* DataInformationBase::asTopLevel()
-{
-    Q_ASSERT(isTopLevel());
-    return reinterpret_cast<TopLevelDataInformation*>(this);
-}
-
+//this is not handled by the macro
 inline DataInformation* DataInformationBase::asDataInformation()
 {
     Q_ASSERT(!isTopLevel());
     return reinterpret_cast<DataInformation*>(this);
 }
 
-inline UnionDataInformation* DataInformationBase::asUnion()
+inline const DataInformation* DataInformationBase::asDataInformation() const
 {
-    Q_ASSERT(isUnion());
-    return reinterpret_cast<UnionDataInformation*>(this);
+    Q_ASSERT(!isTopLevel());
+    return reinterpret_cast<const DataInformation*>(this);
 }
+
+#undef CAST_FUNCS_2
+#undef CAST_FUNCS
 
 #endif // DATAINFORMATIONBASE_H
