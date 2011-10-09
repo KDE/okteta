@@ -31,7 +31,7 @@ class SIntDataInformation : public PrimitiveDataInformation
 public:
     explicit SIntDataInformation(QString name, DataInformation* parent = 0);
     virtual ~SIntDataInformation() {}
-    virtual DataInformation* clone() const;
+    virtual SIntDataInformation<T, typeValue>* clone() const;
 
     virtual PrimitiveDataType type() const;
     virtual BitCount32 size() const;
@@ -108,7 +108,7 @@ inline SIntDataInformation<T, typeValue>::SIntDataInformation(const SIntDataInfo
 }
 
 template<typename T, PrimitiveDataType typeValue>
-inline DataInformation* SIntDataInformation<T, typeValue>::clone() const
+inline SIntDataInformation<T, typeValue>* SIntDataInformation<T, typeValue>::clone() const
 {
     return new SIntDataInformation<T, typeValue>(*this);
 }

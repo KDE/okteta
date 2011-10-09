@@ -46,7 +46,7 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QString typeName() const;
-    virtual DataInformation* clone() const;
+    virtual DummyDataInformation* clone() const;
     virtual bool isDummy() const;
 protected:
     virtual BitCount32 offset(unsigned int index) const;

@@ -42,7 +42,7 @@ EnumDataInformation::EnumDataInformation(QString name, PrimitiveDataInformation*
 EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
     PrimitiveDataInformation(e), mEnum(e.mEnum)
 {
-    mValue = static_cast<PrimitiveDataInformation*> (e.mValue->clone());
+    mValue = e.mValue->clone();
     mValue->setParent(this);
 }
 

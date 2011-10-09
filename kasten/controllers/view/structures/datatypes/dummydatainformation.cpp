@@ -90,7 +90,7 @@ QString DummyDataInformation::typeName() const
     return QLatin1String("dummy");
 }
 
-DataInformation* DummyDataInformation::clone() const
+DummyDataInformation* DummyDataInformation::clone() const
 {
     Q_ASSERT(false);
     return 0;

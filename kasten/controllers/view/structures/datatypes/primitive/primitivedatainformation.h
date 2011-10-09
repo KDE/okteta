@@ -31,7 +31,7 @@ class PrimitiveDataInformation: public DataInformation
 public:
     explicit PrimitiveDataInformation(QString name, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();
-    virtual DataInformation* clone() const = 0;
+    virtual PrimitiveDataInformation* clone() const = 0;
     virtual BitCount32 size() const = 0;
     virtual QString typeName() const = 0;
     static QString typeName(PrimitiveDataType type);
@@ -86,15 +86,6 @@ inline bool PrimitiveDataInformation::isPrimitive() const
     protected: \
         type##DataInformation(const type##DataInformation& d) : \
         superType##DataInformation(d), mValue(d.mValue) {} \
-    private:
-
-#define NO_VALUE_PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
-        type##DataInformation(QString name, DataInformation* parent = NULL) :\
-                superType##DataInformation(name, parent) {}\
-        virtual ~type##DataInformation() {} \
-    protected: \
-        type##DataInformation(const type##DataInformation& d) : \
-        superType##DataInformation(d) {} \
     private:
 
 #endif /* PRIMITIVEDATAINFORMATION_H_ */

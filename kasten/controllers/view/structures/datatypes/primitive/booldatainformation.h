@@ -34,7 +34,7 @@ class BoolDataInformation : public UnsignedDataInformation<T>
 public:
     explicit BoolDataInformation(QString name, DataInformation* parent = 0);
     virtual ~BoolDataInformation() {}
-    virtual DataInformation* clone() const;
+    virtual BoolDataInformation<T, typeValue>* clone() const;
 
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QString valueString() const;
@@ -76,7 +76,7 @@ inline BoolDataInformation<T, typeValue>::BoolDataInformation(const BoolDataInfo
 }
 
 template<typename T, PrimitiveDataType typeValue>
-inline DataInformation* BoolDataInformation<T, typeValue>::clone() const
+inline BoolDataInformation<T, typeValue>* BoolDataInformation<T, typeValue>::clone() const
 {
     return new BoolDataInformation<T, typeValue>(*this);
 }

@@ -42,7 +42,7 @@
 
 #include "datainformationbase.h"
 
-#define DATAINFORMATION_CLONE(type) virtual inline DataInformation* clone() const {\
+#define DATAINFORMATION_CLONE(type) virtual inline type##DataInformation* clone() const {\
         return new type##DataInformation(*this); \
     }
 

@@ -30,7 +30,7 @@ class UIntDataInformation : public UnsignedDataInformation<T>
 public:
     explicit UIntDataInformation(QString name, DataInformation* parent = 0);
     virtual ~UIntDataInformation() {}
-    virtual DataInformation* clone() const;
+    virtual UIntDataInformation<T, typeValue>* clone() const;
 
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QString valueString() const;
@@ -66,7 +66,7 @@ inline UIntDataInformation<T, typeValue>::UIntDataInformation(const UIntDataInfo
 }
 
 template<typename T, PrimitiveDataType typeValue>
-inline DataInformation* UIntDataInformation<T, typeValue>::clone() const
+inline UIntDataInformation<T, typeValue>* UIntDataInformation<T, typeValue>::clone() const
 {
     return new UIntDataInformation<T, typeValue>(*this);
 }
