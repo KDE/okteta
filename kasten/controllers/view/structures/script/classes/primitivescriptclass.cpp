@@ -85,7 +85,7 @@ bool PrimitiveScriptClass::additionalPropertyFlags(const DataInformation* data, 
         *flags |= QScriptValue::ReadOnly;
         return true;
     }
-    else if (name == s_bool || name == s_char || name == s_int || name == s_uint || name == s_float 
+    else if (name == s_bool || name == s_char || name == s_int || name == s_uint || name == s_float
             || name == s_double || name == s_int64 || name == s_uint64 || name == s_int64low32
             || name == s_int64high32 || name == s_uint64low32 || name == s_uint64high32 || name == s_int8
             || name == s_int16 || name == s_int32 || name == s_uint8 || name == s_uint16 || name == s_uint32)
@@ -99,9 +99,7 @@ bool PrimitiveScriptClass::additionalPropertyFlags(const DataInformation* data, 
 
 QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint)
 {
-    const PrimitiveDataInformation* pData = static_cast<const PrimitiveDataInformation*>(data);
-    //do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<const PrimitiveDataInformation*>(data)); 
+    const PrimitiveDataInformation* pData = data->asPrimitive();
 
     if (name == s_value)
         return pData->valueAsQScriptValue();

@@ -61,7 +61,7 @@ bool StringScriptClass::queryAdditionalProperty(const DataInformation* data, con
     {
         bool isArrayIndex;
         quint32 pos = name.toArrayIndex(&isArrayIndex);
-        if (isArrayIndex && pos <= uint(static_cast<const StringDataInformation*>(data)->stringLength()))
+        if (isArrayIndex && pos <= uint(data->asString()->stringLength()))
         {
             *id = pos + 1; //add 1 to distinguish from the default value of 0
             *flags &= ~HandlesWriteAccess; //writing is not yet supported
@@ -89,9 +89,7 @@ bool StringScriptClass::additionalPropertyFlags(const DataInformation* data, con
 
 QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
-    const StringDataInformation* sData = static_cast<const StringDataInformation*>(data);
-    //do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<const StringDataInformation*>(data));
+    const StringDataInformation* sData = data->asString();
 
     if (id != 0)
     {
@@ -125,9 +123,7 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
 
 bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
-    StringDataInformation* sData = static_cast<StringDataInformation*>(data);
-    //do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<StringDataInformation*>(data));
+    StringDataInformation* sData = data->asString();
 
     if (name == s_maxCharCount)
     {

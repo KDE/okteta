@@ -59,19 +59,19 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
         return 0;
-    if (name == valid) 
+    if (name == valid)
     {
         return flags;
     }
-    else if (name == wasAbleToRead) 
+    else if (name == wasAbleToRead)
     {
         return flags &= ~HandlesWriteAccess;
     }
-    else if (name == parent) 
+    else if (name == parent)
     {
         return flags &= ~HandlesWriteAccess;
     }
-    else if (name == validationError) 
+    else if (name == validationError)
     {
         return flags;
     }
@@ -96,18 +96,18 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     {
         return data->validationSuccessful();
     }
-    else if (name == wasAbleToRead) 
+    else if (name == wasAbleToRead)
     {
         return data->wasAbleToRead();
     }
-    else if (name == parent) 
+    else if (name == parent)
     {
         //parent() cannot be null
         if (data->parent()->isTopLevel())
             return QScriptValue::NullValue;
-        return static_cast<DataInformation*>(data->parent())->toScriptValue(engine(), mHandlerInfo);
+        return data->parent()->asDataInformation()->toScriptValue(engine(), mHandlerInfo);
     }
-    else if (name == validationError) 
+    else if (name == validationError)
     {
         return data->validationError();
     }
@@ -131,11 +131,11 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     {
         data->setValidationSuccessful(value.toBool());
     }
-    else if (name == validationError) 
+    else if (name == validationError)
     {
         data->setValidationError(value.toString());
     }
-    else if (name == wasAbleToRead) 
+    else if (name == wasAbleToRead)
     {
         return; //can't write
     }

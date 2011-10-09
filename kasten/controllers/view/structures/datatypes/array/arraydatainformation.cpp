@@ -100,8 +100,7 @@ QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContex
         else
             return QScriptValue();
     }
-    if (newChildType->isPrimitive() &&
-            static_cast<PrimitiveDataInformation*>(newChildType)->type() == mData->primitiveType())
+    if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType())
     {
         //there is no need to change the type
         kDebug() << "New and old child type are identical, aborting: " << mData->primitiveType();
@@ -272,7 +271,7 @@ AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInfo
         return new ComplexArrayData(length, data, this);
     }
     //it is primitive -> create a PrimitiveArrayData
-    PrimitiveDataType type = static_cast<PrimitiveDataInformation*>(data)->type();
+    PrimitiveDataType type = data->asPrimitive()->type();
     //we no longer need data now that we have the type
     delete data;
     return primitiveArrayFromType(length, type);

@@ -252,7 +252,7 @@ QPair<DataInformation*, QString> DataInformation::findChildForDynamicArrayLength
         return QPair<DataInformation*, QString>(0, QString());
 
     QPair<DataInformation*, QString> ret =
-        static_cast<DataInformation*>(parent())->findChildForDynamicArrayLength(name, row());
+            parent()->asDataInformation()->findChildForDynamicArrayLength(name, row());
     if (ret.first)
     {
         //found one

@@ -124,12 +124,11 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
     }
     if (item->parent()->isArray())
     {
-        ArrayDataInformation* array = static_cast<ArrayDataInformation*>(item->parent());
-        Q_CHECK_PTR(dynamic_cast<ArrayDataInformation*>(item->parent()));
+        ArrayDataInformation* array = item->parent()->asArray();
         return array->childData(index.row(), column, role);
     }
     else if (item->isDummy())
-        return static_cast<DataInformation*>(item->parent())->childData(index.row(), column, role);
+        return item->parent()->asDataInformation()->childData(index.row(), column, role);
     else
         return item->data(column, role);
 }
@@ -163,7 +162,7 @@ Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
     if (item->isDummy())
     {
         Q_ASSERT(!item->parent()->isTopLevel()); //parent of a dummy cannot be top level
-        DataInformation* parent = static_cast<DataInformation*>(item->parent());
+        DataInformation* parent = item->parent()->asDataInformation();
         return parent->childFlags(index.row(), index.column(), mTool->isFileLoaded());
     }
     else
@@ -195,8 +194,7 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     {
         if (parent.column() != 0)
             return QModelIndex();
-        DataInformation* parentItem =
-                static_cast<DataInformation*> (parent.internalPointer());
+        DataInformation* parentItem = static_cast<DataInformation*> (parent.internalPointer());
         childItem = parentItem->childAt(row);
     }
     if (childItem)
@@ -220,7 +218,7 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
         return QModelIndex();
 
     // not null, not topleveldatainformation-> must be datainformation
-    DataInformation* parent = static_cast<DataInformation*> (parentObj);
+    DataInformation* parent = parentObj->asDataInformation();
     return createIndex(parent->row(), 0, parent);
 }
 
@@ -258,7 +256,7 @@ QModelIndex StructTreeModel::findItemInModel(DataInformationBase* data) const
     Q_CHECK_PTR(data);
     if (!data || data->isTopLevel())
         return QModelIndex(); //invalid object
-    return createIndex(static_cast<DataInformation*>(data)->row(), 0, data);
+    return createIndex(data->asDataInformation()->row(), 0, data);
 }
 
 void StructTreeModel::onToolDataChange(int row, void* data)

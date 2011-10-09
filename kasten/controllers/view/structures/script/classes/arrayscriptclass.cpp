@@ -80,10 +80,7 @@ bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, cons
 
 QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
-    const ArrayDataInformation* aData = static_cast<const ArrayDataInformation*>(data);
-    //do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<const ArrayDataInformation*>(data));
-
+    const ArrayDataInformation* aData = data->asArray();
     if (id != 0)
     {
         quint32 pos = id - 1;
@@ -106,10 +103,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
 
 bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
-    ArrayDataInformation* aData = static_cast<ArrayDataInformation*>(data);
-    //do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<ArrayDataInformation*>(data));
-
+    ArrayDataInformation* aData = data->asArray();
     if (name == length)
     {
         if (!value.isNumber())

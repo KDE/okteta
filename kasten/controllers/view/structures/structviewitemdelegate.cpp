@@ -44,11 +44,11 @@ QWidget* StructViewItemDelegate::createEditor(QWidget* parent, const QStyleOptio
     DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
     if (!dataB || dataB->isTopLevel())
         return 0;
-    DataInformation* data = static_cast<DataInformation*>(dataB);
+    DataInformation* data = dataB->asDataInformation();
     QWidget* ret;
     //following static cast always okay since parent of a dummy cannot be DataInformationBase
     if (data->isDummy())
-        ret = static_cast<DataInformation*>(data->parent())->createChildEditWidget(index.row(), parent);
+        ret = data->parent()->asDataInformation()->createChildEditWidget(index.row(), parent);
     else
         ret = data->createEditWidget(parent);
     ret->setFocusPolicy(Qt::WheelFocus);
@@ -63,11 +63,11 @@ void StructViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* m
     DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
     if (!dataB || dataB->isTopLevel())
         return;
-    DataInformation* data = static_cast<DataInformation*>(dataB);
+    DataInformation* data = dataB->asDataInformation();
     QVariant value;
     //following static cast always okay since parent of a dummy cannot be DataInformationBase
     if (data->isDummy())
-        value = static_cast<DataInformation*>(data->parent())->dataFromChildWidget(index.row(), editor);
+        value = data->parent()->asDataInformation()->dataFromChildWidget(index.row(), editor);
     else
         value = data->dataFromWidget(editor);
     model->setData(index, value, Qt::EditRole);
@@ -81,10 +81,10 @@ void StructViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex& i
     DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
     if (!dataB || dataB->isTopLevel())
         return;
-    DataInformation* data = static_cast<DataInformation*>(dataB);
+    DataInformation* data = dataB->asDataInformation();
     //following static cast always okay since parent of a dummy cannot be DataInformationBase
     if (data->isDummy())
-        static_cast<DataInformation*>(data->parent())->setChildWidgetData(index.row(), editor);
+        data->parent()->asDataInformation()->setChildWidgetData(index.row(), editor);
     else
         data->setWidgetData(editor);
 }
