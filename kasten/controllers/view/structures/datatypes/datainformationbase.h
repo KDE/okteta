@@ -24,6 +24,7 @@
 
 #include "structviewpreferences.h"
 
+class StringDataInformation;
 class DataInformationBase;
 class DataInformation;
 class DummyDataInformation;
@@ -69,6 +70,9 @@ public:
     virtual bool isUnion() const;
     UnionDataInformation* asUnion();
     const UnionDataInformation* asUnion() const;
+    virtual bool isString() const;
+    StringDataInformation* asString();
+    const StringDataInformation* asString() const;
     virtual bool isDummy() const;
     DummyDataInformation* asDummy();
     const DummyDataInformation* asDummy() const;
@@ -90,6 +94,7 @@ CAST_FUNCS(Primitive)
 CAST_FUNCS(Dummy)
 CAST_FUNCS_2(AbstractBitfieldDataInformation, Bitfield)
 CAST_FUNCS(TopLevel)
+CAST_FUNCS(String)
 
 //this is not handled by the macro
 inline DataInformation* DataInformationBase::asDataInformation()

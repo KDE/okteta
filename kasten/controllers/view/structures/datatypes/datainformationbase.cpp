@@ -65,3 +65,8 @@ bool DataInformationBase::isBitfield() const
 {
     return false;
 }
+
+bool DataInformationBase::isString() const
+{
+    return false;
+}

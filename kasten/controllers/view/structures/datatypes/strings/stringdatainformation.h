@@ -69,6 +69,7 @@ public:
     virtual QString typeName() const;
     virtual unsigned int childCount() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
+    virtual bool isString() const;
 
     virtual QVariant data(int column, int role) const;
     virtual QVariant childData(int row, int column, int role) const;
@@ -121,6 +122,12 @@ inline uint StringDataInformation::maxByteCount() const
 {
     return mData->maxByteCount();
 }
+
+bool StringDataInformation::isString() const
+{
+    return true;
+}
+
 
 inline void StringDataInformation::setMaxByteCount(uint count)
 {
