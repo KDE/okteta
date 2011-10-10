@@ -37,6 +37,7 @@ public:
     virtual BoolDataInformation<T, typeValue>* clone() const;
 
     virtual QScriptValue valueAsQScriptValue() const;
+    static QScriptValue toScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     virtual QString valueString() const;
     static QString valueString(T val);
     virtual PrimitiveDataType type() const;
@@ -60,7 +61,16 @@ inline QString BoolDataInformation<T, typeValue>::typeName() const
 template<typename T, PrimitiveDataType typeValue>
 inline QScriptValue BoolDataInformation<T, typeValue>::valueAsQScriptValue() const
 {
-    return QScriptValue(bool(UnsignedDataInformation<T>::mValue));
+    return BoolDataInformation<T, typeValue>::toScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
+}
+
+template<typename T, PrimitiveDataType typeValue>
+inline QScriptValue BoolDataInformation<T, typeValue>::toScriptValue(T value, QScriptEngine* engine,
+        ScriptHandlerInfo* handler)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(handler);
+    return QScriptValue(bool(value));
 }
 
 template<typename T, PrimitiveDataType typeValue>

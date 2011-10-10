@@ -52,6 +52,7 @@ public:
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     static T fromVariant(const QVariant& value);
     virtual QScriptValue valueAsQScriptValue() const;
+    static QScriptValue toScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     virtual QString valueString() const;
     static QString valueString(T val);
 protected:

@@ -174,5 +174,12 @@ void CharDataInformation::setValue(AllPrimitiveTypes newVal)
 
 QScriptValue CharDataInformation::valueAsQScriptValue() const
 {
-    return QString(mValue > 127 ? QChar::ReplacementCharacter : QChar(mValue, 0));
+    return toScriptValue(mValue, 0, 0);
+}
+
+QScriptValue CharDataInformation::toScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(handler);
+    return QScriptValue(QString(value > 127 ? QChar::ReplacementCharacter : QChar(value, 0)));
 }

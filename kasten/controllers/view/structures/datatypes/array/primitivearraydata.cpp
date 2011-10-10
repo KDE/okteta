@@ -200,12 +200,8 @@ int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
 template<PrimitiveDataType type>
 QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
 {
-    //TODO fix this
-    Q_UNUSED(index);
-    Q_UNUSED(engine);
-    Q_UNUSED(handlerInfo);
-    Q_ASSERT_X(false, "PrimitiveArrayData::toScriptValue", "Not implemented yet");
-    return false;
+    Q_ASSERT(index < length());
+    return DisplayClass::toScriptValue(mData.at(index), engine, handlerInfo);
 
 }
 

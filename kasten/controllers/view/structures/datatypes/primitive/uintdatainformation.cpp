@@ -21,16 +21,31 @@
  */
 #include "uintdatainformation.h"
 
+#include <QtScript/QScriptEngine>
+
+
 template<typename T, PrimitiveDataType typeValue>
 QScriptValue UIntDataInformation<T, typeValue>::valueAsQScriptValue() const
 {
-    return QScriptValue(UnsignedDataInformation<T>::mValue);
+    return UIntDataInformation<T, typeValue>::toScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
+}
+
+template<typename T, PrimitiveDataType typeValue>
+QScriptValue UIntDataInformation<T, typeValue>::toScriptValue(T value, QScriptEngine* engine,
+        ScriptHandlerInfo* handlerInfo)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(handlerInfo);
+    return QScriptValue(value);
 }
 
 template<>
-inline QScriptValue UIntDataInformation<quint64, Type_UInt64>::valueAsQScriptValue() const
+inline QScriptValue UIntDataInformation<quint64, Type_UInt64>::toScriptValue(quint64 value, QScriptEngine* engine,
+        ScriptHandlerInfo* handlerInfo)
 {
-    return QScriptValue(QString::number(mValue, 10));
+    Q_UNUSED(engine);
+    Q_UNUSED(handlerInfo);
+    return QScriptValue(QString::number(value, 10));
 }
 
 template<typename T, PrimitiveDataType typeValue>

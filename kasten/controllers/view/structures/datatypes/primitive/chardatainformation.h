@@ -40,6 +40,7 @@ public:
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
+    static QScriptValue toScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
