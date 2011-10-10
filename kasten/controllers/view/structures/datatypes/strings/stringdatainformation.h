@@ -123,12 +123,6 @@ inline uint StringDataInformation::maxByteCount() const
     return mData->maxByteCount();
 }
 
-bool StringDataInformation::isString() const
-{
-    return true;
-}
-
-
 inline void StringDataInformation::setMaxByteCount(uint count)
 {
     mData->setMaxByteCount(count);

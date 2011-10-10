@@ -366,3 +366,8 @@ QVariant StringDataInformation::data(int column, int role) const
     }
     return DataInformation::data(column, role);
 }
+
+bool StringDataInformation::isString() const
+{
+    return true;
+}
