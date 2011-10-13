@@ -36,7 +36,7 @@ StringData::~StringData()
 
 }
 
-void StringData::setEndianess(bool littleEndian)
+void StringData::setLittleEndian(bool littleEndian)
 {
     mLittleEndian = littleEndian;
 }

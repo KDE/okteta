@@ -62,7 +62,7 @@ public:
     virtual BitCount32 sizeAt(int i) const = 0;
     virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     /** by default just sets value, if more logic is needed can be overridden */
-    virtual void setEndianess(bool littleEndian);
+    virtual void setLittleEndian(bool littleEndian);
     uint terminationMode() const;
     void setTerminationMode(uint mode);
 

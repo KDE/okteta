@@ -227,15 +227,15 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
 {
     if (mEncoding == encoding)
         return;
-    if ((encoding == UTF16_LE || encoding == UTF16_BE) && (mEncoding == UTF16_LE || mEncoding == UTF16_BE))
+    if ((mEncoding == UTF16_LE && encoding == UTF16_BE) || (mEncoding == UTF16_BE || encoding == UTF16_LE))
     {
-        //only set endianess
-        mData->setEndianess(encoding == UTF16_LE);
+        //only set endianess, since is already utf 16
+        mData->setLittleEndian(encoding == UTF16_LE);
     }
-    else if ((encoding == UTF32_LE || encoding == UTF32_BE) && (mEncoding == UTF32_LE || mEncoding == UTF32_BE))
+    else if ((mEncoding == UTF32_LE && encoding == UTF32_BE) || (mEncoding == UTF32_BE && encoding == UTF32_LE))
     {
-        //only set endianess
-        mData->setEndianess(encoding == UTF32_LE);
+        //only set endianess, since is already utf 32
+        mData->setLittleEndian(encoding == UTF32_LE);
     }
     else
     {
@@ -252,19 +252,19 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
                 break;
             case UTF16_LE:
                 data = new Utf16StringData(this);
-                data->setEndianess(true);
+                data->setLittleEndian(true);
                 break;
             case UTF16_BE:
                 data = new Utf16StringData(this);
-                data->setEndianess(false);
+                data->setLittleEndian(false);
                 break;
             case UTF32_LE:
                 data = new Utf32StringData(this);
-                data->setEndianess(true);
+                data->setLittleEndian(true);
                 break;
             case UTF32_BE:
                 data = new Utf32StringData(this);
-                data->setEndianess(false);
+                data->setLittleEndian(false);
                 break;
             default:
                 data = new AsciiStringData(this); //TODO add the other classes
