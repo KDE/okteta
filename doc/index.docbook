@@ -35,7 +35,7 @@
 </authorgroup>
 
 <copyright>
-<year>2008, 2010</year>
+<year>2008, 2010, 2011</year>
 <holder>&Friedrich.Kossebau; and &Alex.Richardson;</holder>
 </copyright>
 
@@ -314,6 +314,8 @@ just used for development, so no need to document it. -->
           <userinput><command>kde4-config</command> <option>--localprefix</option></userinput>).
           You may need to create this directory if there are no structure
           definitions installed yet.</para>
+          <para>Two files exist for every structure definition: One file for the actual definition and a
+          <literal role="extension">.desktop</literal> file for the metadata (author, version, etc.).</para>
           <para>In that directory there is a subdirectory for each structure
           definition, which contains both the <literal role="extension">.desktop</literal>
           file and the <literal role="extension">.osd</literal> or
@@ -349,19 +351,111 @@ just used for development, so no need to document it. -->
       requires no manual installation.</para>
     </sect2>
 
+
     <sect2>
-      <title>Creating your own structure definitions</title>
+      <title>Creating structure definitions</title>
       <para>There are two different ways of creating structure definitions. The first is writing the
       definition in &XML; the other is using JavaScript<!-- Markup??-->. The JavaScript approach allows you
-      to create more complex structures with features like validating the structure. Using &XML; gives you
-      less features but if a static structure is all you need this may be the easiest approach. </para>
+      to create more complex structures with features like e.g. validating the structure. Using &XML; gives you
+      less features but if a static structure is all you need this may be the easiest approach. If you need a dynamic
+      structure i.e. where array lengths depend on other values in the structure or the structure layout is different when
+      some member value changes, then you will have to write the structure definition in JavaScript.
+      There is one exception to that rule: if you have an array where the length is supposed to be
+      <emphasis role="bold">exactly</emphasis> the same as another value in the structure, then you can use &XML;.
+      But if it is something like <emphasis>length - 1</emphasis> it has to be JavaScript.</para>
+    </sect2>
 
+
+    <sect2>
+      <title>Structure definition &XML; file format</title>
+      <para>
+      <!-- TODO xml schema -->
+      The <literal role="extension">.osd</literal> &XML; file has one root tag: <emphasis>&lt;data&gt;</emphasis> with no
+      attributes. Inside this tag there must be one of the following tags:
+      <!-- TODO markup, though better than nothing this way-->
+      <variablelist>
+          <varlistentry>
+            <term><emphasis>&lt;primitive&gt;</emphasis></term>
+            <listitem><para>This element accepts no subelements and can have the following attributes:</para>
+              <variablelist>
+                <varlistentry>
+                <term><emphasis role="bold">type</emphasis></term>
+                <listitem>
+                  <para>The type of this primitive type. It must be one of the following:</para>
+                  <itemizedlist>
+                    <listitem><para><emphasis>char</emphasis> for a 8 bit ASCII character</para></listitem>
+                    <listitem><para><emphasis>int8, int16, int32, int64</emphasis> for a signed integer of that size</para></listitem>
+                    <listitem><para><emphasis>uint8, uint16, uint32, uint64</emphasis> for an unsigned integer of that size</para></listitem>
+                    <listitem><para><emphasis>bool8, bool16, bool32, bool64</emphasis> for an unsigned boolean (0 = false, any other value = true) of that size</para></listitem>
+                    <listitem><para><emphasis>float</emphasis> for a 32 bit IEEE754 floating point number</para></listitem>
+                    <listitem><para><emphasis>double</emphasis> for a 64 bit IEEE754 floating point number</para></listitem>
+                  </itemizedlist>
+                </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><emphasis role="bold-italic">&lt;bitfield&gt;</emphasis></term>
+            <listitem><para>This element accepts no subelements and can have the following attributes:</para>
+              <variablelist>
+                <varlistentry>
+                  <term><emphasis role="bold">width</emphasis></term>
+                  <listitem><para>The number of bits used by this bitfield. Must be between 1 and 64.</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term><emphasis role="bold">type</emphasis></term>
+                  <listitem>
+                    <para>The type of this bitfield. It must be one of the following:</para>
+                    <itemizedlist>
+                      <listitem><para><emphasis>unsigned</emphasis> for a bitfield where the value will be interpreted as
+                      an unsigned value (value range from 0 to 2<superscript>width</superscript> - 1)</para></listitem>
+                      <listitem><para><emphasis>signed</emphasis> for a bitfield where the value will be interpreted as a
+                      signed value (value range from -2<superscript>width - 1</superscript> to
+                      2<superscript>width - 1</superscript> - 1)</para></listitem>
+                      <listitem><para><emphasis>unsigned</emphasis> for a bitfield where the value will be interpreted as an unsigned value</para></listitem>
+                  </itemizedlist>
+                  <note><para>Always remember to add padding after a <emphasis>&lt;bitfield&gt;</emphasis>, since otherwise
+                  the next element (except for strings and arrays, since they add padding automatically) will start in the
+                  middle of a byte. Obviously padding is not necessary if you want this behavior.</para></note>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+          <!-- TODO finish these
+          <varlistentry>
+            <term><emphasis>&lt;enum&gt;</emphasis></term>
+            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><emphasis>&lt;struct&gt;</emphasis></term>
+            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><emphasis>&lt;union&gt;</emphasis></term>
+            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><emphasis>&lt;array&gt;</emphasis></term>
+            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><emphasis>&lt;string&gt;</emphasis></term>
+            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+          </varlistentry>
+          -->
+      </variablelist>
+      Every element accepts an attribute <emphasis>name</emphasis>.
+      </para>
+    </sect2>
+
+    <sect2>
+      <title>An example structure definition in both &XML; and JavaScript</title>
       <sect3>
         <title>The common step shared by both approaches</title>
         <para>
-        Two files must be created for every structure definition. One is a
-        <literal role="extension">.desktop</literal> file for the metadata.
-        A sample file could look like this:
+        Our metadata file looks like this:
         <screen>
         [Desktop Entry]
         Encoding=UTF-8
@@ -396,89 +490,6 @@ just used for development, so no need to document it. -->
         the directory would also contain a file named <filename>simplestruct.osd</filename>. Using JavaScript we would have a file named <filename>main.js</filename> instead.</para>
       </sect3>
       <sect3>
-        <title>Structure definition &XML; file format</title>
-        <para>
-        <!-- TODO xml schema -->
-        The <literal role="extension">.osd</literal> &XML; file has one root tag: <emphasis>&lt;data&gt;</emphasis> with no
-        attributes. Inside this tag there must be one of the following tags:
-        <!-- TODO markup, though better than nothing this way-->
-        <variablelist>
-            <varlistentry>
-              <term><emphasis>&lt;primitive&gt;</emphasis></term>
-              <listitem><para>This element accepts no subelements and can have the following attributes:</para>
-                <variablelist>
-                  <varlistentry>
-                  <term><emphasis role="bold">type</emphasis></term>
-                  <listitem>
-                    <para>The type of this primitive type. It must be one of the following:</para>
-                    <itemizedlist>
-                      <listitem><para><emphasis>char</emphasis> for a 8 bit ASCII character</para></listitem>
-                      <listitem><para><emphasis>int8, int16, int32, int64</emphasis> for a signed integer of that size</para></listitem>
-                      <listitem><para><emphasis>uint8, uint16, uint32, uint64</emphasis> for an unsigned integer of that size</para></listitem>
-                      <listitem><para><emphasis>bool8, bool16, bool32, bool64</emphasis> for an unsigned boolean (0 = false, any other value = true) of that size</para></listitem>
-                      <listitem><para><emphasis>float</emphasis> for a 32 bit IEEE754 floating point number</para></listitem>
-                      <listitem><para><emphasis>double</emphasis> for a 64 bit IEEE754 floating point number</para></listitem>
-                    </itemizedlist>
-                  </listitem>
-                  </varlistentry>
-                </variablelist>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><emphasis role="bold-italic">&lt;bitfield&gt;</emphasis></term>
-              <listitem><para>This element accepts no subelements and can have the following attributes:</para>
-                <variablelist>
-                  <varlistentry>
-                    <term><emphasis role="bold">width</emphasis></term>
-                    <listitem><para>The number of bits used by this bitfield. Must be between 1 and 64.</para></listitem>
-                  </varlistentry>
-                  <varlistentry>
-                    <term><emphasis role="bold">type</emphasis></term>
-                    <listitem>
-                      <para>The type of this bitfield. It must be one of the following:</para>
-                      <itemizedlist>
-                        <listitem><para><emphasis>unsigned</emphasis> for a bitfield where the value will be interpreted as
-                        an unsigned value (value range from 0 to 2<superscript>width</superscript> - 1)</para></listitem>
-                        <listitem><para><emphasis>signed</emphasis> for a bitfield where the value will be interpreted as a
-                        signed value (value range from -2<superscript>width - 1</superscript> to
-                        2<superscript>width - 1</superscript> - 1)</para></listitem>
-                        <listitem><para><emphasis>unsigned</emphasis> for a bitfield where the value will be interpreted as an unsigned value</para></listitem>
-                    </itemizedlist>
-                    <note><para>Always remember to add padding after a <emphasis>&lt;bitfield&gt;</emphasis>, since otherwise
-                    the next element (except for strings and arrays, since they add padding automatically) will start in the
-                    middle of a byte. Obviously padding is not necessary if you want this behavior.</para></note>
-                    </listitem>
-                  </varlistentry>
-                </variablelist>
-              </listitem>
-            </varlistentry>
-            <!-- TODO finish these
-            <varlistentry>
-              <term><emphasis>&lt;enum&gt;</emphasis></term>
-              <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><emphasis>&lt;struct&gt;</emphasis></term>
-              <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><emphasis>&lt;union&gt;</emphasis></term>
-              <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><emphasis>&lt;array&gt;</emphasis></term>
-              <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><emphasis>&lt;string&gt;</emphasis></term>
-              <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
-            </varlistentry>
-            -->
-        </variablelist>
-        Every element accepts an attribute <emphasis>name</emphasis>.
-        </para>
-      </sect3>
-      <sect3>
         <title>A simple &XML; structure definition</title>
         <para>
           To start we create a definition for a very simple test structure
@@ -506,6 +517,7 @@ just used for development, so no need to document it. -->
           &lt;/data&gt;
           </markup></screen>
           which is fairly similar to the C/C++ definition.
+          </para>
           <para>Now create a directory <filename class="directory">simplestruct</filename>
           inside the structure installation directory (see manually installing structure definitions) <!-- markup TODO-->
           and copy the two files to this directory. Now you can restart &okteta; and use the new structure.</para>
