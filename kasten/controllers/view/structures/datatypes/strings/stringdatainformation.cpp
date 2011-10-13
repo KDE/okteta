@@ -332,6 +332,7 @@ void StringDataInformation::setMaxCharCount(const QScriptValue& value, QScriptEn
 
 void StringDataInformation::setTerminationCodePoint(const QScriptValue& value, QScriptEngine* engine)
 {
+    uint cp = 0;
     if (value.isNull())
     {
         //clear the mode and set to null terminated of none is left
@@ -339,20 +340,31 @@ void StringDataInformation::setTerminationCodePoint(const QScriptValue& value, Q
         if (mData->terminationMode() == StringData::None)
             mData->setTerminationCodePoint(0);
     }
+    else if (value.isString()) {
+        QString str = value.toString();
+        if (str.length() != 1) {
+            engine->currentContext()->throwError(QScriptContext::RangeError,
+                QLatin1String("Setting termination char: expected one char or a number, got a string with length ")
+                + QString::number(str.length()));
+            return;
+        }
+        cp = str[0].unicode();
+    }
     else if (value.isNumber())
     {
-        uint cp = value.toUInt32();
-        if (cp > StringData::UNICODE_MAX)
-            engine->currentContext()->throwError(QLatin1String("Setting termination char: U+")
-                + QString::number(cp, 16) + QLatin1String("is out of unicode range!"));
-        else
-            mData->setTerminationCodePoint(cp);
+        cp = value.toUInt32();
     }
     else
     {
         engine->currentContext()->throwError(QScriptContext::TypeError,
             QLatin1String("Setting termination char: value was not a number."));
+        return;
     }
+    if (cp > StringData::UNICODE_MAX)
+            engine->currentContext()->throwError(QLatin1String("Setting termination char: U+")
+                + QString::number(cp, 16) + QLatin1String("is out of unicode range!"));
+    else
+        mData->setTerminationCodePoint(cp);
 }
 
 QVariant StringDataInformation::data(int column, int role) const
