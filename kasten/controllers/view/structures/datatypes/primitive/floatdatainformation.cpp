@@ -91,7 +91,7 @@ void FloatDataInformation::setValue(AllPrimitiveTypes newVal)
     mValue = newVal.floatValue;
 }
 
-QScriptValue FloatDataInformation::toScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler)
+QScriptValue FloatDataInformation::asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
@@ -101,5 +101,5 @@ QScriptValue FloatDataInformation::toScriptValue(float value, QScriptEngine* eng
 
 QScriptValue FloatDataInformation::valueAsQScriptValue() const
 {
-    return toScriptValue(mValue, 0, 0);
+    return asScriptValue(mValue, 0, 0);
 }

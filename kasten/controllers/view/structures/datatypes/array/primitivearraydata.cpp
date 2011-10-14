@@ -201,7 +201,7 @@ template<PrimitiveDataType type>
 QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
 {
     Q_ASSERT(index < length());
-    return DisplayClass::toScriptValue(mData.at(index), engine, handlerInfo);
+    return DisplayClass::asScriptValue(mData.at(index), engine, handlerInfo);
 
 }
 

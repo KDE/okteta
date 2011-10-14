@@ -25,13 +25,7 @@
 
 
 template<typename T, PrimitiveDataType typeValue>
-QScriptValue UIntDataInformation<T, typeValue>::valueAsQScriptValue() const
-{
-    return UIntDataInformation<T, typeValue>::toScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
-}
-
-template<typename T, PrimitiveDataType typeValue>
-QScriptValue UIntDataInformation<T, typeValue>::toScriptValue(T value, QScriptEngine* engine,
+QScriptValue UIntDataInformation<T, typeValue>::asScriptValue(T value, QScriptEngine* engine,
         ScriptHandlerInfo* handlerInfo)
 {
     Q_UNUSED(engine);
@@ -40,12 +34,18 @@ QScriptValue UIntDataInformation<T, typeValue>::toScriptValue(T value, QScriptEn
 }
 
 template<>
-inline QScriptValue UIntDataInformation<quint64, Type_UInt64>::toScriptValue(quint64 value, QScriptEngine* engine,
+QScriptValue UIntDataInformation<quint64, Type_UInt64>::asScriptValue(quint64 value, QScriptEngine* engine,
         ScriptHandlerInfo* handlerInfo)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handlerInfo);
     return QScriptValue(QString::number(value, 10));
+}
+
+template<typename T, PrimitiveDataType typeValue>
+QScriptValue UIntDataInformation<T, typeValue>::valueAsQScriptValue() const
+{
+    return UIntDataInformation<T, typeValue>::asScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
 }
 
 template<typename T, PrimitiveDataType typeValue>

@@ -33,7 +33,7 @@ public:
     virtual UIntDataInformation<T, typeValue>* clone() const;
 
     virtual QScriptValue valueAsQScriptValue() const;
-    static QScriptValue toScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
+    static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     virtual QString valueString() const;
     static QString valueString(T val);
     virtual PrimitiveDataType type() const;

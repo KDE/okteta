@@ -174,10 +174,10 @@ void CharDataInformation::setValue(AllPrimitiveTypes newVal)
 
 QScriptValue CharDataInformation::valueAsQScriptValue() const
 {
-    return toScriptValue(mValue, 0, 0);
+    return asScriptValue(mValue, 0, 0);
 }
 
-QScriptValue CharDataInformation::toScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler)
+QScriptValue CharDataInformation::asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);

@@ -76,11 +76,11 @@ QString SIntDataInformation<T, typeValue>::valueString(T val)
 template<typename T, PrimitiveDataType typeValue>
 QScriptValue SIntDataInformation<T, typeValue>::valueAsQScriptValue() const
 {
-    return toScriptValue(mValue, 0, 0);
+    return asScriptValue(mValue, 0, 0);
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QScriptValue SIntDataInformation<T, typeValue>::toScriptValue(T value, QScriptEngine* engine,
+QScriptValue SIntDataInformation<T, typeValue>::asScriptValue(T value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
@@ -89,7 +89,7 @@ QScriptValue SIntDataInformation<T, typeValue>::toScriptValue(T value, QScriptEn
 }
 
 template<>
-QScriptValue SIntDataInformation<qint64, Type_Int64>::toScriptValue(qint64 value, QScriptEngine* engine,
+QScriptValue SIntDataInformation<qint64, Type_Int64>::asScriptValue(qint64 value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);

@@ -82,7 +82,7 @@ void DoubleDataInformation::setValue(AllPrimitiveTypes newVal)
     mValue = newVal.doubleValue;
 }
 
-QScriptValue DoubleDataInformation::toScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler)
+QScriptValue DoubleDataInformation::asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
@@ -92,5 +92,5 @@ QScriptValue DoubleDataInformation::toScriptValue(double value, QScriptEngine* e
 
 QScriptValue DoubleDataInformation::valueAsQScriptValue() const
 {
-    return toScriptValue(mValue, 0, 0);
+    return asScriptValue(mValue, 0, 0);
 }
