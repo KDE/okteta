@@ -70,6 +70,7 @@ qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *inp
 
     uint readBytes = 0;
     qint64 readBits = 0;
+    const quint8 origBitOffset = *bitOffset;
     for (int i = 0; i < mChildren.size(); i++)
     {
         qint64 currentReadBits = mChildren[i]->readData(input, address + readBytes,
@@ -81,7 +82,7 @@ qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *inp
             return -1;
         }
         readBits += currentReadBits;
-        readBytes = (readBits + *bitOffset) / 8;
+        readBytes = (readBits + origBitOffset) / 8;
     }
     mWasAbleToRead = true;
     return readBits;
