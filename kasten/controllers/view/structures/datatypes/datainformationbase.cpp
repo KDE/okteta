@@ -20,6 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "datainformationbase.h"
+#include "topleveldatainformation.h"
 
 DataInformationBase::DataInformationBase()
 {
@@ -69,4 +70,18 @@ bool DataInformationBase::isBitfield() const
 bool DataInformationBase::isString() const
 {
     return false;
+}
+
+TopLevelDataInformation* DataInformationBase::asTopLevel()
+{
+    Q_ASSERT(isTopLevel());
+    //we need dynamic cast due to multiple inheritance, even it this class has no members
+    return dynamic_cast<TopLevelDataInformation*>(this);
+}
+
+const TopLevelDataInformation* DataInformationBase::asTopLevel() const
+{
+    Q_ASSERT(isTopLevel());
+    //we need dynamic cast due to multiple inheritance, even it this class has no members
+    return dynamic_cast<const TopLevelDataInformation*>(this);
 }

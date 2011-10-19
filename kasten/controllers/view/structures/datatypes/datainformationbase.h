@@ -93,7 +93,6 @@ CAST_FUNCS(Enum)
 CAST_FUNCS(Primitive)
 CAST_FUNCS(Dummy)
 CAST_FUNCS_2(AbstractBitfieldDataInformation, Bitfield)
-CAST_FUNCS(TopLevel)
 CAST_FUNCS(String)
 
 //this is not handled by the macro
