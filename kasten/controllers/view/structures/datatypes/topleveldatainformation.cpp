@@ -60,7 +60,6 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         setObjectName(mData->name());
         mData->setParent(this);
     }
-    kDebug() << "Toplevel created with data = " << (void*)mData.data() << ", this = " << (void*)this;
 }
 
 TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d) :
@@ -70,12 +69,10 @@ TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& 
     mData.reset(d.mData->clone());
     setObjectName(mData->name());
     mData->setParent(this);
-    kDebug() << "Toplevel cloned with data = " << (void*)mData.data() << ", d.data = " << (void*)d.mData.data()<< ", this = " << (void*)this;
 }
 
 TopLevelDataInformation::~TopLevelDataInformation()
 {
-    kDebug() << "toplevel deleted, this=" << (void*) this;
 }
 
 void TopLevelDataInformation::validate()

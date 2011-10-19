@@ -30,8 +30,7 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::qVariantToAllPrimitiveTypes(
         const QVariant& value) const
 {
     if (!value.isValid())
-        kDebug()
-            << "invalid QVariant passed.";
+        kDebug() << "invalid QVariant passed.";
 
     //This is fine since all the values are unsigned
     return AllPrimitiveTypes(value.toULongLong());
@@ -39,8 +38,7 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::qVariantToAllPrimitiveTypes(
 
 QString AbstractBitfieldDataInformation::typeName() const
 {
-    return i18ncp("Data type", "bitfield (%1 bit wide)", "bitfield (%1 bits wide)",
-            width());
+    return i18ncp("Data type", "bitfield (%1 bit wide)", "bitfield (%1 bits wide)", width());
 }
 
 AllPrimitiveTypes AbstractBitfieldDataInformation::value() const
@@ -61,7 +59,7 @@ PrimitiveDataType AbstractBitfieldDataInformation::type() const
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent) :
     PrimitiveDataInformation(name, parent), mWidth(width), mValue(0)
 {
-    if (width > 64) 
+    if (width > 64)
     {
         kDebug() << "bitfield (" << name << ") width is greater 64: " << width << " , setting to 64";
         mWidth = 64;
