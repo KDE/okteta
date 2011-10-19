@@ -50,7 +50,6 @@ public:
      */
     TopLevelDataInformation(DataInformation* data, QFileInfo structureFile, QScriptEngine* engine,
             bool needsEval, QString name = QString());
-    TopLevelDataInformation(const TopLevelDataInformation& d);
     virtual ~TopLevelDataInformation();
     TopLevelDataInformation* clone() const;
 public:
@@ -88,6 +87,7 @@ public:
     void _childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
     void _childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
+    TopLevelDataInformation(const TopLevelDataInformation& d);
     bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
             Okteta::Address address);
 public Q_SLOTS:
@@ -104,7 +104,7 @@ Q_SIGNALS:
     /** items are inserted before @p startIndex */
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
-    DataInformation* mData;
+    QScopedPointer<DataInformation> mData;
     QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
     QFileInfo mStructureFile;
     /** Save the position this structure is locked to for each ByteArrayModel
@@ -120,7 +120,7 @@ private:
 
 inline DataInformation* TopLevelDataInformation::actualDataInformation() const
 {
-    return mData;
+    return mData.data();
 }
 
 inline bool TopLevelDataInformation::wasAbleToParse() const

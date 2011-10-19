@@ -36,40 +36,46 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
     QObject(), mData(data), mScriptHandler(NULL), mStructureFile(structureFile),
             mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
 {
-
     if (engine)
     {
         mScriptHandler = new ScriptHandler(engine, structureFile.absoluteFilePath(), name);
         if (needsEval)
         {
-            mData = mScriptHandler->initialDataInformationFromScript();
-            if (!mData)
+            DataInformation* parsed = mScriptHandler->initialDataInformationFromScript();
+            if (parsed)
+                mData.reset(parsed);
+            else
             {
                 //just a dummy, this object should be deleted anyway
-                mData = PrimitiveFactory::newInstance(QLatin1String("failed_to_load__this_is_a_dummy"),
-                    Type_Int32, 0);
+                mData.reset(PrimitiveFactory::newInstance(QLatin1String("failed_to_load__this_is_a_dummy"),
+                    Type_Int32, 0));
                 mWasAbleToParse = false;
             }
         }
     }
     if (!mData)
         kError() << "mData == NULL!";
-
-    setObjectName(mData->name());
-    mData->setParent(this);
+    else
+    {
+        setObjectName(mData->name());
+        mData->setParent(this);
+    }
+    kDebug() << "Toplevel created with data = " << (void*)mData.data() << ", this = " << (void*)this;
 }
 
 TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d) :
-    QObject(), mData(d.mData->clone()), mScriptHandler(d.mScriptHandler),
+    QObject(), mData(0), mScriptHandler(d.mScriptHandler),
             mStructureFile(d.mStructureFile), mWasAbleToParse(d.mWasAbleToParse), mIndex(-1)
 {
+    mData.reset(d.mData->clone());
     setObjectName(mData->name());
     mData->setParent(this);
+    kDebug() << "Toplevel cloned with data = " << (void*)mData.data() << ", d.data = " << (void*)d.mData.data()<< ", this = " << (void*)this;
 }
 
 TopLevelDataInformation::~TopLevelDataInformation()
 {
-    delete mData;
+    kDebug() << "toplevel deleted, this=" << (void*) this;
 }
 
 void TopLevelDataInformation::validate()
@@ -77,11 +83,7 @@ void TopLevelDataInformation::validate()
     kDebug() << "validation of structure " << mData->name() << "requested";
     if (mScriptHandler)
     {
-        mScriptHandler->validateData(mData);
-        DataInformationWithChildren* data =
-                dynamic_cast<DataInformationWithChildren*> (mData);
-        if (data)
-            data->calculateValidationState(); //set validation state based on children
+        mScriptHandler->validateData(mData.data());
     }
     else
     {
@@ -204,8 +206,7 @@ void TopLevelDataInformation::unlockPosition(
         const Okteta::AbstractByteArrayModel* model)
 {
 
-    kDebug()
-        << "removing lock at position " << *(mLockedPositions.value(model))
+    kDebug() << "removing lock at position " << *(mLockedPositions.value(model))
                 << ", model =" << (void*) model;
     //just remove from map
     delete mLockedPositions.take(model);
@@ -220,8 +221,7 @@ void TopLevelDataInformation::removeByteArrayModelFromList(QObject* obj)
     mLockedPositions.remove(model);
 }
 
-bool TopLevelDataInformation::isLockedFor(
-        const Okteta::AbstractByteArrayModel* model) const
+bool TopLevelDataInformation::isLockedFor(const Okteta::AbstractByteArrayModel* model) const
 {
     return mLockedPositions.contains(model);
 }
@@ -234,7 +234,7 @@ quint64 TopLevelDataInformation::lockPositionFor(const Okteta::AbstractByteArray
 
 int TopLevelDataInformation::indexOf(const DataInformation* const data) const
 {
-    Q_ASSERT(data == mData);
+    Q_ASSERT(data == mData.data());
     return mIndex;
 }
 
