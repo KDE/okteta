@@ -64,9 +64,26 @@ void LoaderController::setTargetModel( AbstractModel* model )
 Q_UNUSED( model )
 }
 
+/// Creates a filter string as used by KFileDialog from @a _mimetypes
+/// Does a workaround for "application/octet-stream" because the mimetype system
+/// does not have a real entry for it ATM. It is replaced with "all/allfiles" in
+/// the created string which is instead used by Filedialog as fake mimetype for
+/// a type which is base type of all files.
+/// See also DocumentSyncManager.
+static QString mimetypeFilterString( const QStringList& _mimetypes )
+{
+    QStringList mimetypes = _mimetypes;
+
+    const int index = mimetypes.indexOf( QLatin1String("application/octet-stream") );
+    if( index != -1 )
+        mimetypes.replace( index, QLatin1String("all/allfiles") );
+
+    return mimetypes.join( QLatin1String(" ") );
+}
+
 void LoaderController::load()
 {
-    const QString filterString = mDocumentStrategy->supportedRemoteTypes().join( QLatin1String(" ") );
+    const QString filterString = mimetypeFilterString( mDocumentStrategy->supportedRemoteTypes() );
 
     const KUrl::List urls =
         KFileDialog::getOpenUrls( KUrl()/*mWorkingUrl.url()*/, filterString, /*mWidget*/0 );
