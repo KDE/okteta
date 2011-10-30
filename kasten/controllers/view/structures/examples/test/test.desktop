@@ -34,6 +34,7 @@ Name[sr@latin]=Jednostavna proba
 Name[sv]=Enkel test
 Name[uk]=Простий тест
 Name[x-test]=xxSimple testxx
+Name[zh_CN]=简单测试
 Name[zh_TW]=簡單測試
 Comment=A few test structures
 Comment[bs]=Nekoliko probnih struktura
@@ -63,6 +64,7 @@ Comment[sr@latin]=Nekoliko probnih struktura
 Comment[sv]=Några teststrukturer
 Comment[uk]=Декілька тестових структур
 Comment[x-test]=xxA few test structuresxx
+Comment[zh_CN]=一些测试结构
 Comment[zh_TW]=一些測試結構
 
 X-KDE-PluginInfo-Author=Alex Richardson
