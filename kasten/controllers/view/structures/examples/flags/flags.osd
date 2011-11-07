@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <enumDef name="AccessRights" type="UInt8">
+    <entry name="Read" value="4" />
+    <entry name="Write" value="2" />
+    <entry name="Execute" value="1" />
+    <entry name="RW" value="6" />
+    <entry name="RWX" value="7" />
+  </enumDef>
+  <array length="10" name="flags">
+    <flags name="rights" enum="AccessRights" type="UInt8" />
+  </array>
+</data>

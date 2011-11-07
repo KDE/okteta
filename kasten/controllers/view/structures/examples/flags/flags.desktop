@@ -1,0 +1,18 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=flag
+Type=Service
+ServiceTypes=KPluginInfo
+
+Name=Testing bitflags
+Comment=A test for bitflags
+
+
+X-KDE-PluginInfo-Author=Alex Richardson
+X-KDE-PluginInfo-Email=alex.richardson@gmx.de
+X-KDE-PluginInfo-Name=flags
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://www.test.org/
+X-KDE-PluginInfo-Category=structure
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false

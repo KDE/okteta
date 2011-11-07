@@ -64,18 +64,25 @@ QString FlagDataInformation::valueString() const
     //now we have all flags, check if some overlap
     for (int i = 0; i < arr.size(); ++i)
     {
-        const quint64 flag = arr.at(i).second;
-        for (int j = 0; j < arr.size(); ++j)
+        const quint64 firstFlag = arr.at(i).second;
+        for (int j = 0; j < arr.size();)
         {
             if (j == i)
+            {
+                j++;
                 continue;
+            }
             //check if they overlap
             quint64 secondFlag = arr.at(j).second;
-            if ((flag & secondFlag) == secondFlag)
+            if ((firstFlag & secondFlag) == secondFlag)
             {
                 //they overlap, remove the second flag
                 removeFromArray(arr, j);
+                if (j < i)
+                    i--; // i was pushed back by one as well
             }
+            else
+                j++;
         }
     }
 
@@ -103,7 +110,7 @@ QString FlagDataInformation::valueString() const
     if (usedBits != value)
     {
         quint64 missing = value & ~usedBits;
-        result += QLatin1String("| 0x") + QString::number(missing, 16);
+        result += QLatin1String(" | 0x") + QString::number(missing, 16);
     }
 
     return result;
