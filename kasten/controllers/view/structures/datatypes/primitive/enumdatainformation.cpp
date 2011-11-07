@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,7 @@
 
 EnumDataInformation::EnumDataInformation(QString name, PrimitiveDataInformation* type,
             EnumDefinition::Ptr enumDef, DataInformation* parent) :
-    PrimitiveDataInformation(name, parent), mEnum(enumDef), mValue(type)
+    AbstractEnumDataInformation(name, enumDef, parent), mValue(type)
 {
     Q_CHECK_PTR(type);
     if (enumDef->type() != type->type())
@@ -40,7 +40,7 @@ EnumDataInformation::EnumDataInformation(QString name, PrimitiveDataInformation*
 }
 
 EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
-    PrimitiveDataInformation(e), mEnum(e.mEnum)
+    AbstractEnumDataInformation(e), mValue(0)
 {
     mValue = e.mValue->clone();
     mValue->setParent(this);

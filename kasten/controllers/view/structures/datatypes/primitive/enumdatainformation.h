@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -25,8 +25,9 @@
 
 #include "primitivedatainformation.h"
 #include "enumdefinition.h"
+#include "abstractenumdatainformation.h"
 
-class EnumDataInformation: public PrimitiveDataInformation
+class EnumDataInformation: public AbstractEnumDataInformation
 {
 public:
     /** this object takes ownership of @p type */
@@ -39,7 +40,6 @@ public:
     virtual QString valueString() const;
     virtual QString getTypeString() const;
     virtual QString typeName() const;
-    virtual bool isEnum() const;
 
     virtual BitCount32 size() const;
     virtual PrimitiveDataType type() const;
@@ -58,7 +58,6 @@ public:
     virtual QScriptValue valueAsQScriptValue() const;
 
 protected:
-    EnumDefinition::Ptr mEnum;
     PrimitiveDataInformation* mValue; //to allow different enum sizes
 };
 
@@ -70,11 +69,6 @@ inline PrimitiveDataType EnumDataInformation::type() const
 inline BitCount32 EnumDataInformation::size() const
 {
     return mValue->size();
-}
-
-inline bool EnumDataInformation::isEnum() const
-{
-    return true;
 }
 
 #endif /* ENUMDATAINFORMATION_H_ */

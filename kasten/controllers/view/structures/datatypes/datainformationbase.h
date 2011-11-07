@@ -24,6 +24,7 @@
 
 #include "structviewpreferences.h"
 
+class AbstractEnumDataInformation;
 class StringDataInformation;
 class DataInformationBase;
 class DataInformation;
@@ -31,7 +32,6 @@ class DummyDataInformation;
 class UnionDataInformation;
 class StructureDataInformation;
 class AbstractBitfieldDataInformation;
-class EnumDataInformation;
 class PrimitiveDataInformation;
 class ArrayDataInformation;
 class TopLevelDataInformation;
@@ -59,8 +59,8 @@ public:
     PrimitiveDataInformation* asPrimitive();
     const PrimitiveDataInformation* asPrimitive() const;
     virtual bool isEnum() const;
-    EnumDataInformation* asEnum();
-    const EnumDataInformation* asEnum() const;
+    AbstractEnumDataInformation* asEnum();
+    const AbstractEnumDataInformation* asEnum() const;
     virtual bool isBitfield() const;
     AbstractBitfieldDataInformation* asBitfield();
     const AbstractBitfieldDataInformation* asBitfield() const;
@@ -89,7 +89,7 @@ public:
 CAST_FUNCS(Array)
 CAST_FUNCS(Union)
 CAST_FUNCS_2(StructureDataInformation, Struct)
-CAST_FUNCS(Enum)
+CAST_FUNCS_2(AbstractEnumDataInformation, Enum)
 CAST_FUNCS(Primitive)
 CAST_FUNCS(Dummy)
 CAST_FUNCS_2(AbstractBitfieldDataInformation, Bitfield)
