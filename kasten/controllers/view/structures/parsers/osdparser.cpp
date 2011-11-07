@@ -25,7 +25,7 @@
 #include "../datatypes/array/arraydatainformation.h"
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
-#include "../datatypes/enumdatainformation.h"
+#include "../datatypes/primitive/enumdatainformation.h"
 #include "../datatypes/strings/stringdatainformation.h"
 #include "../datatypes/strings/stringdata.h"
 #include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"

@@ -298,8 +298,8 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp
   view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp
   view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.cpp
-  view/structures/datatypes/enumdatainformation.cpp
-  view/structures/datatypes/enumdefinition.cpp
+  view/structures/datatypes/primitive/enumdatainformation.cpp
+  view/structures/datatypes/primitive/enumdefinition.cpp
   view/structures/datatypes/primitivefactory.cpp
   view/structures/datatypes/strings/stringdatainformation.cpp
   view/structures/datatypes/strings/stringdata.cpp

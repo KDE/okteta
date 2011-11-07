@@ -27,7 +27,7 @@
 #include <QtXml/QDomNode>
 #include <QtXml/QDomNodeList>
 
-#include "../datatypes/enumdefinition.h"
+#include "../datatypes/primitive/enumdefinition.h"
 #include "abstractstructureparser.h"
 
 class StringDataInformation;

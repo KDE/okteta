@@ -21,9 +21,9 @@
  */
 
 #include "enumdatainformation.h"
-#include "topleveldatainformation.h"
+#include "../topleveldatainformation.h"
 
-#include "../script/scriptutils.h"
+#include "../../script/scriptutils.h"
 #include <QtScript/QScriptContext>
 #include <QtScript/QScriptEngine>
 #include <KDebug>

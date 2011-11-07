@@ -30,7 +30,7 @@
 #include <QFileInfo>
 #include <KPluginInfo>
 
-#include "datatypes/enumdefinition.h"
+#include "datatypes/primitive/enumdefinition.h"
 
 class TopLevelDataInformation;
 class AbstractStructureParser;
