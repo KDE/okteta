@@ -63,10 +63,12 @@ QString EnumDataInformation::valueString() const
     else
         return i18n("%1 (value not in enum)", mValue->valueString());
 }
+
 QString EnumDataInformation::typeName() const
 {
     return QLatin1String("enum");
 }
+
 QString EnumDataInformation::getTypeString() const
 {
     return i18n("enum (%1)", mValue->typeName());

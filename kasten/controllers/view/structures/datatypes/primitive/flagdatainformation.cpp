@@ -78,7 +78,6 @@ QString FlagDataInformation::valueString() const
         }
     }
 
-
     //if array has zero elements just return the value in hexadecimal
     if (arr.size() == 0)
     {
@@ -107,4 +106,14 @@ QString FlagDataInformation::valueString() const
     }
 
     return result;
+}
+
+QString FlagDataInformation::typeName() const
+{
+    return QLatin1String("flags");
+}
+
+QString FlagDataInformation::getTypeString() const
+{
+    return i18nc("bit flags, i.e. 'R | W | X' with undelying type", "flags(%1)", mValue->typeName());
 }

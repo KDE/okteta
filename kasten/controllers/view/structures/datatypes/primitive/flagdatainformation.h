@@ -36,6 +36,8 @@ public:
             DataInformation* parent = 0);
     DATAINFORMATION_CLONE(Flag)
     virtual QString valueString() const;
+    virtual QString typeName() const;
+    virtual QString getTypeString() const;
 };
 
 inline FlagDataInformation::FlagDataInformation(const FlagDataInformation& e)
