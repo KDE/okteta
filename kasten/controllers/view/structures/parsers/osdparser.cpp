@@ -26,6 +26,7 @@
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/primitive/enumdatainformation.h"
+#include "../datatypes/primitive/flagdatainformation.h"
 #include "../datatypes/strings/stringdatainformation.h"
 #include "../datatypes/strings/stringdata.h"
 #include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"
@@ -94,7 +95,9 @@ QStringList OsdParser::parseStructureNames()
                 || tag == QLatin1String("bitfield")
                 || tag == QLatin1String("primitive")
                 || tag == QLatin1String("union")
-                || tag == QLatin1String("enum"))
+                || tag == QLatin1String("enum")
+                || tag == QLatin1String("flags")
+                || tag == QLatin1String("string"))
                 ret.append(elem.attribute(QLatin1String("name"), QLatin1String("<invalid name>")));
         }
     }
@@ -329,7 +332,7 @@ StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem)
     return stru;
 }
 
-EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem)
+AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags)
 {
     if (!mEnumsParsed) //not always needed
         parseEnums();
@@ -348,22 +351,22 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem)
         return NULL;
     }
     EnumDefinition::Ptr def = findEnum(enumName);
-    if (def.constData() == NULL)
+    if (!def)
     {
         kWarning() << "no enum with name " << enumName << "found.";
         return NULL;
     }
-    kDebug() << def->name();
     PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(name, typeStr);
     if (!prim)
     {
         kWarning() << "primitive type is null!!";
         return NULL;
     }
-    EnumDataInformation* enumd = new EnumDataInformation(name, prim, def);
-    if (!enumd)
-        kError() << "enum def is NULL!!!";
-    return enumd;
+
+    if (isFlags)
+       return new FlagDataInformation(name, prim, def);
+    else
+        return new EnumDataInformation(name, prim, def);
 }
 
 StringDataInformation* OsdParser::stringFromXML(const QDomElement& node)
@@ -459,7 +462,9 @@ DataInformation* OsdParser::parseNode(const QDomNode& node, const DataInformatio
         else if (tag == QLatin1String("union"))
             data = unionFromXML(elem);
         else if (tag == QLatin1String("enum"))
-            data = enumFromXML(elem);
+            data = enumFromXML(elem, false);
+        else if (tag == QLatin1String("flags"))
+            data = enumFromXML(elem, true);
         else if (tag == QLatin1String("string"))
             data = stringFromXML(elem);
     }

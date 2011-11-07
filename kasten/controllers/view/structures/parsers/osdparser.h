@@ -30,6 +30,7 @@
 #include "../datatypes/primitive/enumdefinition.h"
 #include "abstractstructureparser.h"
 
+class FlagDataInformation;
 class StringDataInformation;
 class ArrayDataInformation;
 class AbstractBitfieldDataInformation;
@@ -56,10 +57,9 @@ public:
 
 private:
     void parseEnums();
-
     PrimitiveDataInformation* primitiveFromXML(const QDomElement& node);
     AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& node);
-    EnumDataInformation* enumFromXML(const QDomElement& node);
+    AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags);
     StringDataInformation* stringFromXML(const QDomElement& node);
     UnionDataInformation* unionFromXML(const QDomElement& xmlElem);
     StructureDataInformation* structFromXML(const QDomElement& xmlElem);
