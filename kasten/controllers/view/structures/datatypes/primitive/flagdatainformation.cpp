@@ -47,11 +47,12 @@ static void removeFromArray(QVarLengthArray<T, len>& array, int index) {
 
 QString FlagDataInformation::valueString() const
 {
-    const QMapIterator<AllPrimitiveTypes, QString> iter(mEnum->values());
+    QMapIterator<AllPrimitiveTypes, QString> iter(mEnum->values());
     //I doubt more than 10 flags will be set very often -> only then do we need a malloc
     QVarLengthArray<FlagPair, 10> arr;
     const quint64 value = mValue->value().ulongValue;
     while(iter.hasNext()) {
+        iter.next();
         const quint64 flag = iter.key().ulongValue;
         if ((value & flag) == flag)
         {

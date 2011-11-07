@@ -155,8 +155,7 @@ QList<const TopLevelDataInformation*> OsdParser::parseStructures()
         }
         else
         {
-            kDebug()
-                << "data == NULL -> could not parse node " << elem.tagName();
+            kDebug() << "data == NULL -> could not parse node " << elem.tagName();
             delete data;
         }
     }
@@ -174,8 +173,7 @@ void OsdParser::parseEnums()
     if (mEnumsParsed)
         return;
     QDomElement rootElem = mDocument.firstChildElement(QLatin1String("data"));
-    QDomNodeList enumDefs = rootElem.firstChildElement(QLatin1String("data")).elementsByTagName(
-        QLatin1String("enumDef"));
+    QDomNodeList enumDefs = rootElem.elementsByTagName(QLatin1String("enumDef"));
     parseEnumDefNodes(enumDefs);
     mEnumsParsed = true;
 }
@@ -482,14 +480,12 @@ EnumDefinition::Ptr OsdParser::findEnum(const QString& defName)
         const EnumDefinition::Ptr def = mEnums.at(i);
         if (def->name() == defName)
         {
-            kDebug()
-                << "found at index: " << i;
+            kDebug() << "found at index: " << i;
             return def;
         }
     }
-    kDebug()
-        << "enum " << defName << "not found in enums list";
-    return EnumDefinition::Ptr(NULL);
+    kDebug() << "enum " << defName << "not found in enums list";
+    return EnumDefinition::Ptr(0);
 }
 
 void OsdParser::parseEnumDefNodes(QDomNodeList& elems)

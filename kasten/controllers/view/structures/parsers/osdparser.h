@@ -30,11 +30,10 @@
 #include "../datatypes/primitive/enumdefinition.h"
 #include "abstractstructureparser.h"
 
-class FlagDataInformation;
 class StringDataInformation;
 class ArrayDataInformation;
 class AbstractBitfieldDataInformation;
-class EnumDataInformation;
+class AbstractEnumDataInformation;
 class DataInformation;
 class StructureDataInformation;
 class UnionDataInformation;
