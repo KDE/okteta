@@ -5,7 +5,15 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Testing bitflags
+Name[pt]=Teste de campos de 'bits'
+Name[sv]=Testar bitflaggor
+Name[uk]=Тестування бітових прапорців
+Name[x-test]=xxTesting bitflagsxx
 Comment=A test for bitflags
+Comment[pt]=Um teste para os campos de 'bits'
+Comment[sv]=En test av bitflaggor
+Comment[uk]=Тест для бітових прапорців
+Comment[x-test]=xxA test for bitflagsxx
 
 
 X-KDE-PluginInfo-Author=Alex Richardson
