@@ -31,6 +31,7 @@
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/primitive/enumdatainformation.h"
+#include "../datatypes/primitive/flagdatainformation.h"
 #include "../datatypes/primitive/enumdefinition.h"
 #include "../datatypes/strings/stringdata.h"
 #include "../datatypes/strings/stringdatainformation.h"
@@ -100,7 +101,10 @@ DataInformation* ScriptValueConverter::toDataInformation(QScriptValue value, QSt
         returnVal = toBitfield(value, name);
 
     else if (type == QLatin1String("enum"))
-        returnVal = toEnum(value, name);
+        returnVal = toEnum(value, name, false);
+
+    else if (type == QLatin1String("flags"))
+        returnVal = toEnum(value, name, true);
 
     else if (type == QLatin1String("string"))
         returnVal = toString(value, name);
@@ -155,8 +159,7 @@ ArrayDataInformation * ScriptValueConverter::toArray(QScriptValue& value, QStrin
     return new ArrayDataInformation(name, length, arrayType);
 }
 
-AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(
-        QScriptValue& value, QString& name) const
+AbstractBitfieldDataInformation* ScriptValueConverter::toBitfield(QScriptValue& value, QString& name) const
 {
     //we can safely assume that type == "bitfield"
     int width = value.property(QLatin1String("width")).toInt32();
@@ -199,8 +202,7 @@ PrimitiveDataInformation* ScriptValueConverter::toPrimitive(QScriptValue& value,
     return PrimitiveFactory::newInstance(name, primitiveType);
 }
 
-StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value,
-        QString& name) const
+StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value, QString& name) const
 {
     QList<DataInformation*> fields;
 
@@ -232,8 +234,7 @@ StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value,
     return structure;
 }
 
-UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value,
-        QString& name) const
+UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value, QString& name) const
 {
     QList<DataInformation*> fields;
 
@@ -265,7 +266,7 @@ UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value,
     return unionInf;
 }
 
-EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& name) const
+EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& name, bool flags) const
 {
     QMap<AllPrimitiveTypes, QString> enumValues;
     QScriptValueIterator it(value.property(QLatin1String("enumValues")));
@@ -279,8 +280,7 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
         }
     }
     QString typeString = value.property(QLatin1String("enumType")).toString();
-    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(
-            typeString);
+    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
     if (primitiveType == Type_NotPrimitive)
     {
         ScriptUtils::object()->logScriptError(QLatin1String("unrecognised enum type: '")
@@ -289,12 +289,14 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
     }
     QString enumName = value.property(QLatin1String("enumName")).toString();
     EnumDefinition::Ptr def(new EnumDefinition(enumValues, enumName, primitiveType));
-    PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(name,
-            primitiveType);
-    if (primData)
-        return new EnumDataInformation(name, primData, def);
-    else
+    PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(name, primitiveType);
+    if (!primData)
         return NULL;
+
+    if (flags)
+        return new FlagDataInformation(name, primData, def);
+    else
+        return new EnumDataInformation(name, primData, def);
 }
 
 StringDataInformation* ScriptValueConverter::toString(QScriptValue& value, QString& name) const

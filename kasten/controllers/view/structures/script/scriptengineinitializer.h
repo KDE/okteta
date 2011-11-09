@@ -52,6 +52,10 @@ private:
     /** create a new enum:
      *  first parameter is the type, second parameter is a list of name - value pairs */
     static QScriptValue scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng);
+    /** create a new flag value:
+     *  first parameter is the type, second parameter is a list of name - value pairs */
+    static QScriptValue scriptNewFlags(QScriptContext* ctx, QScriptEngine* eng);
+    static QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags);
     /** this script constructors/initializer takes no parameters */
     static QScriptValue scriptNewUInt8(QScriptContext* ctx, QScriptEngine* eng);
     /** this script constructors/initializer takes no parameters */

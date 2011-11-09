@@ -272,8 +272,7 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
     return object;
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewEnum(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue ScriptEngineInitializer::createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags)
 {
     if (ctx->argumentCount() < 3)
         return ctx->throwError(QLatin1String("enum initializer takes at least three arguments."));
@@ -310,7 +309,11 @@ QScriptValue ScriptEngineInitializer::scriptNewEnum(QScriptContext* ctx,
     else
         object = eng->newObject();
 
-    object.setProperty(typePropertyString, QLatin1String("enum"));
+    if (flags)
+        object.setProperty(typePropertyString, QLatin1String("flags"));
+    else
+        object.setProperty(typePropertyString, QLatin1String("enum"));
+
     object.setProperty(QLatin1String("enumType"), enumType);
     object.setProperty(QLatin1String("enumValues"), enumValues);
     object.setProperty(QLatin1String("enumName"), name);
@@ -325,6 +328,16 @@ QScriptValue ScriptEngineInitializer::scriptNewEnum(QScriptContext* ctx,
     return object;
 }
 
+QScriptValue ScriptEngineInitializer::scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng)
+{
+    return createEnumObject(ctx, eng, false);
+}
+
+QScriptValue ScriptEngineInitializer::scriptNewFlags(QScriptContext* ctx, QScriptEngine* eng)
+{
+    return createEnumObject(ctx, eng, true);
+}
+
 QScriptValue ScriptEngineInitializer::scriptNewString(QScriptContext* ctx, QScriptEngine* eng)
 {
     QString encoding;
@@ -337,7 +350,7 @@ QScriptValue ScriptEngineInitializer::scriptNewString(QScriptContext* ctx, QScri
         object = ctx->thisObject();
     else
         object = eng->newObject();
-    
+
     object.setProperty(typePropertyString, QLatin1String("string"));
     object.setProperty(QLatin1String("encoding"), encoding);
     return object;
@@ -600,5 +613,6 @@ void ScriptEngineInitializer::addFuctionsToScriptEngine(QScriptEngine& engine)
     engine.globalObject().setProperty(QLatin1String("union"), engine.newFunction(scriptNewUnion));
     //XXX: if I use enunm QtScript gives me syntax errors, I thought enum was not a keyword in JS
     engine.globalObject().setProperty(QLatin1String("enumeration"), engine.newFunction(scriptNewEnum));
+    engine.globalObject().setProperty(QLatin1String("flags"), engine.newFunction(scriptNewFlags));
     engine.globalObject().setProperty(QLatin1String("string"), engine.newFunction(scriptNewString));
 }

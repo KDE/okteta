@@ -27,6 +27,7 @@
 #include <QtScript/QScriptEngine>
 #include <QtCore/QString>
 
+class FlagDataInformation;
 class DataInformation;
 class ArrayDataInformation;
 class PrimitiveDataInformation;
@@ -58,7 +59,7 @@ private:
     StructureDataInformation* toStruct(QScriptValue& value, QString& name) const;
     UnionDataInformation* toUnion(QScriptValue& value, QString& name) const;
     StringDataInformation* toString(QScriptValue& value, QString& name) const;
-    EnumDataInformation* toEnum(QScriptValue& value, QString& name) const;
+    EnumDataInformation* toEnum(QScriptValue& value, QString& name, bool flags) const;
 };
 
 #endif /* SCRIPTVALUECONVERTER_H_ */
