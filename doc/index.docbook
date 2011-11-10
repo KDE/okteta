@@ -413,7 +413,8 @@ just used for development, so no need to document it. -->
                       <listitem><para><emphasis>signed</emphasis> for a bitfield where the value will be interpreted as a
                       signed value (value range from -2<superscript>width - 1</superscript> to
                       2<superscript>width - 1</superscript> - 1)</para></listitem>
-                      <listitem><para><emphasis>unsigned</emphasis> for a bitfield where the value will be interpreted as an unsigned value</para></listitem>
+                      <listitem><para><emphasis>bool</emphasis> for a bitfield where the value will be interpreted as a
+                      boolean value</para></listitem>
                   </itemizedlist>
                   <note><para>Always remember to add padding after a <emphasis>&lt;bitfield&gt;</emphasis>, since otherwise
                   the next element (except for strings and arrays, since they add padding automatically) will start in the
