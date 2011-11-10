@@ -45,9 +45,6 @@ QScriptValue ScriptEngineInitializer::primitiveConstructor(QScriptContext* ctx,
     object.setProperty(typePropertyString, type);
     object.setProperty(toStringPropertyString, eng->newFunction(primitiveToString));
 
-    //add validation and update function
-    if (ctx->argumentCount() > 0)
-        addValidationFunction(ctx, eng, object, 0);
     return object;
 }
 
@@ -162,12 +159,6 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
     object.setProperty(QLatin1String("width"), ctx->argument(1));
     object.setProperty(toStringPropertyString, eng->newFunction(bitfieldToString));
 
-    //add validation and update function
-    if (ctx->argumentCount() > 2)
-        addValidationFunction(ctx, eng, object, 2);
-    if (ctx->argumentCount() > 3)
-        addUpdateFunction(ctx, eng, object, 3);
-
     return object;
 }
 
@@ -195,12 +186,6 @@ QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
     object.setProperty(toStringPropertyString, eng->newFunction(structToString));
     object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
 
-    //add validation and update function
-    if (ctx->argumentCount() > 1)
-        addValidationFunction(ctx, eng, object, 1);
-    if (ctx->argumentCount() > 2)
-        addUpdateFunction(ctx, eng, object, 2);
-
     return object;
 }
 
@@ -226,12 +211,6 @@ QScriptValue ScriptEngineInitializer::scriptNewUnion(QScriptContext* ctx,
     object.setProperty(QLatin1String("children"), children);
     object.setProperty(toStringPropertyString, eng->newFunction(unionToString));
     object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
-
-    //add validation and update function
-    if (ctx->argumentCount() > 1)
-        addValidationFunction(ctx, eng, object, 1);
-    if (ctx->argumentCount() > 2)
-        addUpdateFunction(ctx, eng, object, 2);
 
     return object;
 }
@@ -262,12 +241,6 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
     object.setProperty(QLatin1String("childType"), childType);
     object.setProperty(QLatin1String("length"), length);
     object.setProperty(toStringPropertyString, eng->newFunction(arrayToString));
-
-    //add validation and update function
-    if (ctx->argumentCount() > 2)
-        addValidationFunction(ctx, eng, object, 2);
-    if (ctx->argumentCount() > 3)
-        addUpdateFunction(ctx, eng, object, 3);
 
     return object;
 }
@@ -318,12 +291,6 @@ QScriptValue ScriptEngineInitializer::createEnumObject(QScriptContext* ctx, QScr
     object.setProperty(QLatin1String("enumValues"), enumValues);
     object.setProperty(QLatin1String("enumName"), name);
     object.setProperty(toStringPropertyString, eng->newFunction(enumToString));
-
-    //add validation and update function
-    if (ctx->argumentCount() > 3)
-        addValidationFunction(ctx, eng, object, 3);
-    if (ctx->argumentCount() > 4)
-        addUpdateFunction(ctx, eng, object, 4);
 
     return object;
 }
@@ -556,18 +523,6 @@ void addFunctionAsMemberProperty(QScriptContext* ctx, QScriptEngine* eng,
     }
     // argument is valid -> set the property
     val.setProperty(propertyName, func);
-}
-
-void ScriptEngineInitializer::addValidationFunction(QScriptContext* ctx,
-        QScriptEngine* eng, QScriptValue& val, int argIndex)
-{
-    addFunctionAsMemberProperty(ctx, eng, val, argIndex, QLatin1String("validationFunc"));
-}
-
-void ScriptEngineInitializer::addUpdateFunction(QScriptContext* ctx,
-        QScriptEngine* eng, QScriptValue& val, int argIndex)
-{
-    addFunctionAsMemberProperty(ctx, eng, val, argIndex, QLatin1String("updateFunc"));
 }
 
 QScriptValue ScriptEngineInitializer::getChild(QScriptContext* ctx, QScriptEngine* eng)

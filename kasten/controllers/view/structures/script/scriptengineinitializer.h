@@ -32,7 +32,6 @@ class QScriptContext;
  * For example this allows developers to write something like.
  * @code
  * var teststructure = struct({
- *      name : "teststructure", //TODO is this needed? should be possible to get name from c++
  *      // now the members
  *      member1 : uint8(),
  *      member2 : array(uint16(),12),
@@ -41,8 +40,6 @@ class QScriptContext;
  * })
  * @endcode
  * @note
- * All constructor functions may take additional 2 parameters,
- * the first being a validation function, the second an update function.
  */
 class ScriptEngineInitializer
 {
@@ -197,10 +194,6 @@ private:
 private:
     static QScriptValue primitiveConstructor(QScriptContext* ctx,
             QScriptEngine* eng, const QLatin1String type);
-    static void addValidationFunction(QScriptContext* ctx, QScriptEngine* eng,
-            QScriptValue& val, int argIndex);
-    static void addUpdateFunction(QScriptContext* ctx, QScriptEngine* eng,
-            QScriptValue& val, int argIndex);
 
     static QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
 
