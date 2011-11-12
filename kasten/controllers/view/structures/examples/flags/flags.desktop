@@ -5,12 +5,16 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Testing bitflags
+Name[nl]=Bitflags testen
 Name[pt]=Teste de campos de 'bits'
+Name[pt_BR]=Teste de bitflags
 Name[sv]=Testar bitflaggor
 Name[uk]=Тестування бітових прапорців
 Name[x-test]=xxTesting bitflagsxx
 Comment=A test for bitflags
+Comment[nl]=Een test voor bitflags
 Comment[pt]=Um teste para os campos de 'bits'
+Comment[pt_BR]=Um teste para bitflags
 Comment[sv]=En test av bitflaggor
 Comment[uk]=Тест для бітових прапорців
 Comment[x-test]=xxA test for bitflagsxx
