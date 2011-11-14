@@ -11,6 +11,7 @@ Name[pt_BR]=Teste de bitflags
 Name[sv]=Testar bitflaggor
 Name[uk]=Тестування бітових прапорців
 Name[x-test]=xxTesting bitflagsxx
+Name[zh_TW]=測試位元旗標
 Comment=A test for bitflags
 Comment[nl]=Een test voor bitflags
 Comment[pt]=Um teste para os campos de 'bits'
@@ -18,6 +19,7 @@ Comment[pt_BR]=Um teste para bitflags
 Comment[sv]=En test av bitflaggor
 Comment[uk]=Тест для бітових прапорців
 Comment[x-test]=xxA test for bitflagsxx
+Comment[zh_TW]=位元旗標測試
 
 
 X-KDE-PluginInfo-Author=Alex Richardson
