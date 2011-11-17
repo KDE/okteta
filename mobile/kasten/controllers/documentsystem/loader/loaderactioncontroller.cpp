@@ -31,7 +31,7 @@
 #include <QtGui/QMenuBar>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const char AllFileNamesFilter[] = "*";  // krazy:exclude=doublequote_chars

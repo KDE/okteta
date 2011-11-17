@@ -26,7 +26,7 @@
 #include "abstractconnectjob.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractConnectJobPrivate

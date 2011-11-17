@@ -41,7 +41,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const Okteta::OffsetFormat::Format DefaultOffsetFormat = Okteta::OffsetFormat::Hexadecimal;

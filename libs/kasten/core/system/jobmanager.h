@@ -29,7 +29,7 @@
 class KJob;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KASTENCORE_EXPORT JobManager

@@ -28,7 +28,7 @@
 #include "modelencoderfilesystemexportjob.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ModelEncoderFileSystemExportJobPrivate : public AbstractFileSystemExportJobPrivate

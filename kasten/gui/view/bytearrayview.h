@@ -41,7 +41,7 @@ class ByteArrayJanusView;
 class QRect;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayDocument;
@@ -55,9 +55,9 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
 {
   Q_OBJECT
   Q_INTERFACES(
-    Kasten::If::Zoomable
-    Kasten::If::DataSelectable
-    Kasten::If::SelectedDataWriteable
+    Kasten1::If::Zoomable
+    Kasten1::If::DataSelectable
+    Kasten1::If::SelectedDataWriteable
   )
 
   public:
@@ -97,7 +97,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
 //     virtual void setSelection();
   Q_SIGNALS:
     /*virtual*/ void hasSelectedDataChanged( bool hasSelectedData );
-    /*virtual*/ void selectedDataChanged( const Kasten::AbstractModelSelection* modelSelection );
+    /*virtual*/ void selectedDataChanged( const Kasten1::AbstractModelSelection* modelSelection );
 
   public: // If::SelectedDataWriteable API
     virtual void insertData( const QMimeData *data );

@@ -48,7 +48,7 @@
 #include <QtGui/QAction>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const char BookmarkListActionListId[] = "bookmark_list";

@@ -30,7 +30,7 @@
 class QLabel;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KASTENGUI_EXPORT DummyView : public AbstractView

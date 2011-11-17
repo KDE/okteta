@@ -35,7 +35,7 @@
 #include <KGlobal>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const char CreatorConfigGroupId[] = "Recent Files";

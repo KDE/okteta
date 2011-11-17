@@ -33,7 +33,7 @@
 #include <KTabWidget>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
@@ -70,7 +70,7 @@ class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
     void onCurrentChanged( int index );
     void onCloseRequest( QWidget* widget );
     void onTitleChanged( const QString &newTitle );
-//     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
+//     void onModifiedChanged( Kasten1::AbstractDocument::SyncStates newStates );
     void onViewFocusChanged( bool focusChanged );
     void onMouseMiddleClick();
     void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );

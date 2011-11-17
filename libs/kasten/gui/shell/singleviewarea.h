@@ -30,7 +30,7 @@
 class QMimeData;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class SingleViewAreaPrivate;
@@ -42,7 +42,7 @@ class KASTENGUI_EXPORT SingleViewArea : public AbstractViewArea,
 {
   Q_OBJECT
   Q_INTERFACES(
-    Kasten::If::ToolInlineViewable
+    Kasten1::If::ToolInlineViewable
   )
 
   public:

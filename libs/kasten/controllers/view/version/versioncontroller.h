@@ -33,7 +33,7 @@ class KToolBarPopupAction;
 class QAction;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 namespace If {

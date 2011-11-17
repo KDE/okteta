@@ -34,7 +34,7 @@ class KPushButton;
 class QCheckBox;
 template <class Key, class T> class QMap;
 
-namespace Kasten
+namespace Kasten1
 {
 
 class CharsetConversionTool;

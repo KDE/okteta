@@ -27,7 +27,7 @@
 #include "abstractloadjob.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractLoadJobPrivate

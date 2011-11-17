@@ -27,7 +27,7 @@
 #include <QtCore/QEvent>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractLinePopup::AbstractLinePopup( QWidget* parent )

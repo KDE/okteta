@@ -27,7 +27,7 @@ class KBookmarkManager;
 class KUrl;
 
 
-namespace Kasten
+namespace Kasten1
 {
 class ByteArrayDocument;
 

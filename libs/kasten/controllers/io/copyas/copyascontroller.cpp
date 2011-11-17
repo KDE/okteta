@@ -46,9 +46,9 @@
 #include <QtGui/QApplication>
 
 
-Q_DECLARE_METATYPE(Kasten::AbstractModelStreamEncoder*)
+Q_DECLARE_METATYPE(Kasten1::AbstractModelStreamEncoder*)
 
-namespace Kasten
+namespace Kasten1
 {
 
 CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager,

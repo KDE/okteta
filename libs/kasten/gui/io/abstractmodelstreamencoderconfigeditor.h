@@ -29,7 +29,7 @@
 #include <QtGui/QWidget>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractSelectionView;

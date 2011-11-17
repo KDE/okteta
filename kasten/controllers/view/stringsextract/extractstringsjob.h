@@ -37,7 +37,7 @@ class CharCodec;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ExtractStringsJob : public QObject // not yet: KJob

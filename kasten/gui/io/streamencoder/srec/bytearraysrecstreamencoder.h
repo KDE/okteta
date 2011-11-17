@@ -33,7 +33,7 @@
 class QTextStream;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class SRecStreamEncoderSettings

@@ -27,7 +27,7 @@
 #include <kabstractfinddialog.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ReplaceTool;

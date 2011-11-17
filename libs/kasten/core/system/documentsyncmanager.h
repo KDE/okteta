@@ -32,7 +32,7 @@ class KUrl;
 class QString;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractDocument;
@@ -72,10 +72,10 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
     void urlUsed( const KUrl& url );
 
   protected Q_SLOTS:
-    void onDocumentLoaded( Kasten::AbstractDocument* document );
+    void onDocumentLoaded( Kasten1::AbstractDocument* document );
 
-    void onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents );
-    void onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents );
+    void onDocumentsAdded( const QList<Kasten1::AbstractDocument*>& documents );
+    void onDocumentsClosing( const QList<Kasten1::AbstractDocument*>& documents );
 
   protected:
     // unless there is a singleton

@@ -28,7 +28,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const int StatisticBlockSize = 100000;

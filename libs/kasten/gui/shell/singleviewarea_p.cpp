@@ -27,7 +27,7 @@
 #include <abstracttoolinlineview.h>
 #include <abstractdocument.h>
 
-namespace Kasten
+namespace Kasten1
 {
 
 SingleViewAreaPrivate::SingleViewAreaPrivate( SingleViewArea* parent )
@@ -44,6 +44,7 @@ void SingleViewAreaPrivate::init()
 
     mViewAreaBox = new ViewAreaBox( 0 ); //TODO: atm cannot replace this
 
+//     TODO: get drag/drop events
 //     q->connect( mTabWidget, SIGNAL(testCanDecode(const QDragMoveEvent*,bool&)),
 //                 SLOT(onDragMoveEvent(const QDragMoveEvent*,bool&)) );
 //     q->connect( mTabWidget, SIGNAL(receivedDropEvent(QDropEvent*)),

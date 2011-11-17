@@ -34,7 +34,7 @@ class KIntNumInput;
 class QCheckBox;
 
 
-namespace Kasten
+namespace Kasten1
 {
 class ByteArrayViewProfile;
 

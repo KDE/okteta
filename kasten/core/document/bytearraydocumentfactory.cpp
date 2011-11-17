@@ -34,7 +34,7 @@
 #include <QtCore/QMimeData>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static int newByteArrayDocumentCounter = 0;

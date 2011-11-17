@@ -34,7 +34,7 @@ class QCheckBox;
 class QModelIndex;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class PODTableModel;

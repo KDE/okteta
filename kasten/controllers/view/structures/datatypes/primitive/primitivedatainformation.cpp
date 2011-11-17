@@ -104,7 +104,7 @@ QString PrimitiveDataInformation::typeName(PrimitiveDataType type)
 {
     Q_ASSERT(type >= Type_START && type <= Type_END);
 
-    if (Kasten::StructViewPreferences::shortTypeNames())
+    if (Kasten1::StructViewPreferences::shortTypeNames())
         return PrimitiveType::typeNames[type];
     else
         return i18n(PrimitiveType::longTypeNames[type]);

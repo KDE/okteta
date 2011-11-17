@@ -30,7 +30,7 @@
 #include <KLocale>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder )

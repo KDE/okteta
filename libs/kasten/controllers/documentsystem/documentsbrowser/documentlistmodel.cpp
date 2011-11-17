@@ -31,19 +31,19 @@
 #include <KIcon>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* parent )
  : QAbstractTableModel( parent ),
    mDocumentsTool( documentsTool )
 {
-    connect( mDocumentsTool, SIGNAL(documentsAdded(QList<Kasten::AbstractDocument*>)),
-             SLOT(onDocumentsAdded(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentsTool, SIGNAL(documentsClosing(QList<Kasten::AbstractDocument*>)),
-             SLOT(onDocumentsClosing(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged(Kasten::AbstractDocument*)),
-             SLOT(onFocussedDocumentChanged(Kasten::AbstractDocument*)) );
+    connect( mDocumentsTool, SIGNAL(documentsAdded(QList<Kasten1::AbstractDocument*>)),
+             SLOT(onDocumentsAdded(QList<Kasten1::AbstractDocument*>)) );
+    connect( mDocumentsTool, SIGNAL(documentsClosing(QList<Kasten1::AbstractDocument*>)),
+             SLOT(onDocumentsClosing(QList<Kasten1::AbstractDocument*>)) );
+    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged(Kasten1::AbstractDocument*)),
+             SLOT(onFocussedDocumentChanged(Kasten1::AbstractDocument*)) );
 }
 
 int DocumentListModel::rowCount( const QModelIndex& parent ) const
@@ -156,20 +156,20 @@ Q_UNUSED( document )
 #endif
 }
 
-void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
+void DocumentListModel::onDocumentsAdded( const QList<Kasten1::AbstractDocument*>& documents )
 {
     foreach( AbstractDocument* document, documents )
     {
-        connect( document, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+        connect( document, SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)),
                  SLOT(onSyncStatesChanged()) );
-        connect( document, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
+        connect( document, SIGNAL(remoteSyncStateChanged(Kasten1::RemoteSyncState)),
                  SLOT(onSyncStatesChanged()) );
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();
 }
 
-void DocumentListModel::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
+void DocumentListModel::onDocumentsClosing( const QList<Kasten1::AbstractDocument*>& documents )
 {
 Q_UNUSED( documents )
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns

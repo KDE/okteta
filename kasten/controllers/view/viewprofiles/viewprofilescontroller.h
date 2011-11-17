@@ -34,7 +34,7 @@ class QAction;
 class QActionGroup;
 
 
-namespace Kasten
+namespace Kasten1
 {
 class ByteArrayViewProfileManager;
 class ByteArrayView;

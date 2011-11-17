@@ -42,7 +42,7 @@ class Initializer;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayView;

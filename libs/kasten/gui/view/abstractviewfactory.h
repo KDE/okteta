@@ -27,7 +27,7 @@
 #include "abstractview.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KASTENGUI_EXPORT AbstractViewFactory

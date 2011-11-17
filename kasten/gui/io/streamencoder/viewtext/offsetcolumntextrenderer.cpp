@@ -27,7 +27,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 OffsetColumnTextRenderer::OffsetColumnTextRenderer( int offsetFormat, int firstLineOffset, int delta )

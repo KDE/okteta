@@ -30,7 +30,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const char xxencodeMap[64] =

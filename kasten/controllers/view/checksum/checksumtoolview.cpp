@@ -27,7 +27,7 @@
 #include "checksumtool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ChecksumToolView::ChecksumToolView( ChecksumTool* tool )

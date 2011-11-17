@@ -34,7 +34,7 @@
 #include <QtCore/QFile>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 void TestDocumentFileLoadThread::run()

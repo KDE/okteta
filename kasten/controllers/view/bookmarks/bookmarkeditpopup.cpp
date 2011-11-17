@@ -29,7 +29,7 @@
 #include <KLineEdit>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 BookmarkEditPopup::BookmarkEditPopup( QWidget* parent )

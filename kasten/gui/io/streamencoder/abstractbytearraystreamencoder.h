@@ -35,7 +35,7 @@ class AbstractByteArrayModel;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 // TODO: make display model an interface, so these encoders can stay in core

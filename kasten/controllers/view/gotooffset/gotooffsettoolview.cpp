@@ -27,7 +27,7 @@
 #include "gotooffsettool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 GotoOffsetToolView::GotoOffsetToolView( GotoOffsetTool* tool )

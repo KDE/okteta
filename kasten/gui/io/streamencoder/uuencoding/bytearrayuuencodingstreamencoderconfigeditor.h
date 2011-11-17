@@ -32,7 +32,7 @@ class KLineEdit;
 class KComboBox;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayUuencodingStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor

@@ -30,7 +30,7 @@
 class QTreeView;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class VersionTableModel;
@@ -50,7 +50,7 @@ class VersionView : public QWidget
     VersionViewTool* tool() const;
 
   public Q_SLOTS:
-    void setModel( Kasten::AbstractModel* model );
+    void setModel( Kasten1::AbstractModel* model );
 
   private:
     VersionViewTool* mTool;

@@ -31,7 +31,7 @@
 #include <QtGui/QLabel>
 
 
-namespace Kasten
+namespace Kasten1
 {
 static const int modifiedPixmapWidth = 16;
 
@@ -68,10 +68,10 @@ void ModifiedBarController::setTargetModel( AbstractModel* model )
     {
         localState = mDocument->localSyncState();
         remoteState = mDocument->remoteSyncState();
-        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                 SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
-        connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
-                 SLOT(onRemoteSyncStateChanged(Kasten::RemoteSyncState)) );
+        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)),
+                 SLOT(onLocalSyncStateChanged(Kasten1::LocalSyncState)) );
+        connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten1::RemoteSyncState)),
+                 SLOT(onRemoteSyncStateChanged(Kasten1::RemoteSyncState)) );
     }
     else
     {
@@ -85,7 +85,7 @@ void ModifiedBarController::setTargetModel( AbstractModel* model )
 }
 
 
-void ModifiedBarController::onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState )
+void ModifiedBarController::onLocalSyncStateChanged( Kasten1::LocalSyncState localSyncState )
 {
     const bool isModified = (localSyncState == LocalHasChanges );
 
@@ -101,7 +101,7 @@ void ModifiedBarController::onLocalSyncStateChanged( Kasten::LocalSyncState loca
 
 }
 
-void ModifiedBarController::onRemoteSyncStateChanged( Kasten::RemoteSyncState remoteSyncState )
+void ModifiedBarController::onRemoteSyncStateChanged( Kasten1::RemoteSyncState remoteSyncState )
 {
     const char* const iconName =
         ( remoteSyncState == RemoteHasChanges ) ?  "document-save" :

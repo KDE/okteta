@@ -31,7 +31,7 @@
 class QPushButton;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractToolWidgetPrivate;

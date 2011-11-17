@@ -30,7 +30,7 @@
 #include <KUrl>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJobPrivate : public AbstractSyncWithRemoteJobPrivate

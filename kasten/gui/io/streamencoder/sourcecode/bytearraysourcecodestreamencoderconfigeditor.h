@@ -34,7 +34,7 @@ class KComboBox;
 class QCheckBox;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor

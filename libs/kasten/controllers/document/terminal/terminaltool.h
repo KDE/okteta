@@ -31,7 +31,7 @@
 class KUrl;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class DocumentSyncManager;

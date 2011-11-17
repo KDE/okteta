@@ -36,7 +36,7 @@ class AbstractByteArrayModel;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class FilterJob : public QObject // not yet: KJob

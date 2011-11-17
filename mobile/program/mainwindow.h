@@ -27,7 +27,7 @@
 #include <mobileshellwindow.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class OktetaProgram;

@@ -38,7 +38,7 @@ class AbstractByteArrayModel;
 template <class T> class QList;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayView;

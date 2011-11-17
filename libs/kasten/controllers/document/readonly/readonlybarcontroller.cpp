@@ -32,7 +32,7 @@
 #include <KIcon>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ReadOnlyBarController::ReadOnlyBarController( StatusBar* statusBar )

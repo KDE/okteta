@@ -31,7 +31,7 @@
 #include <KAction>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 PrintController::PrintController( KXMLGUIClient* guiClient )

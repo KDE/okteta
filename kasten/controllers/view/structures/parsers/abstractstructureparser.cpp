@@ -23,7 +23,7 @@
 #include "abstractstructureparser.h"
 #include "../structuredefinitionfile.h"
 
-AbstractStructureParser::AbstractStructureParser(const Kasten::StructureDefinitionFile* const def) :
+AbstractStructureParser::AbstractStructureParser(const Kasten1::StructureDefinitionFile* const def) :
     mDef(def)
 {
     //Q_CHECK_PTR(def);

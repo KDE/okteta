@@ -32,7 +32,7 @@
 #include <KSharedConfig>
 #include <KPluginInfo>
 
-namespace Kasten
+namespace Kasten1
 {
 
 class StructuresManager: public QObject

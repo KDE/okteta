@@ -31,7 +31,7 @@
 #include <KXMLGUIClient>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 CloseController::CloseController( ViewManager* viewManager, KXMLGUIClient* guiClient )

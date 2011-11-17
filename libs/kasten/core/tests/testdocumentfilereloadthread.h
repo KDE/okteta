@@ -30,7 +30,7 @@
 class QFile;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class TestDocumentFileReloadThread : public QThread

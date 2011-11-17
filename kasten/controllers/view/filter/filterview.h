@@ -35,7 +35,7 @@ class QStackedWidget;
 class QString;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class FilterTool;

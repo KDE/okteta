@@ -28,7 +28,7 @@
 // Kasten
 #include <abstractcontroller.h>
 
-namespace Kasten
+namespace Kasten1
 {
 
 class MOBILEKASTENGUI_EXPORT AbstractActionController : public AbstractController

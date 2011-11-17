@@ -31,7 +31,7 @@
 class QWidget;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 // TODO: is there a common base for view and document?
@@ -52,8 +52,8 @@ class KASTENGUI_EXPORT AbstractView : public AbstractModel
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // TODO: this signal should be part of AbstractModel?
-    void localSyncStateChanged( Kasten::LocalSyncState newState );
-    void remoteSyncStateChanged( Kasten::RemoteSyncState newState );
+    void localSyncStateChanged( Kasten1::LocalSyncState newState );
+    void remoteSyncStateChanged( Kasten1::RemoteSyncState newState );
     // view has focus in the window
     void focusChanged( bool hasFocus );
 };

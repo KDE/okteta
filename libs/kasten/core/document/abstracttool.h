@@ -30,7 +30,7 @@
 
 class QString;
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModel;

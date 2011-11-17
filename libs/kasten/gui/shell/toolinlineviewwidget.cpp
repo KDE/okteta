@@ -31,7 +31,7 @@
 #include <QtGui/QToolButton>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ToolInlineViewWidget::ToolInlineViewWidget( AbstractToolInlineView* view, QWidget* parent )

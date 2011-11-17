@@ -32,7 +32,7 @@
 #include <QtCore/QByteArray>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const char Title[] = "title";
@@ -43,7 +43,7 @@ void ByteArrayDocumentTest::testCreateNew()
     ByteArrayDocument* document = new ByteArrayDocument(QLatin1String("New created for test."));
 
     QVERIFY( document != 0 );
-    QCOMPARE( document->localSyncState(), Kasten::LocalInSync );
+    QCOMPARE( document->localSyncState(), Kasten1::LocalInSync );
 
     Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
     QVERIFY( byteArray != 0 );
@@ -72,4 +72,4 @@ void ByteArrayDocumentTest::testSetTitle()
 
 }
 
-QTEST_MAIN( Kasten::ByteArrayDocumentTest )
+QTEST_MAIN( Kasten1::ByteArrayDocumentTest )

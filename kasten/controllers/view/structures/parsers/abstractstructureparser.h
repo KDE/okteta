@@ -30,7 +30,7 @@
 #include "../datatypes/datainformation.h"
 
 class TopLevelDataInformation;
-namespace Kasten
+namespace Kasten1
 {
 class StructureDefinitionFile;
 }
@@ -38,7 +38,7 @@ class StructureDefinitionFile;
 class AbstractStructureParser
 {
 public:
-    AbstractStructureParser(const Kasten::StructureDefinitionFile* const def);
+    AbstractStructureParser(const Kasten1::StructureDefinitionFile* const def);
     virtual ~AbstractStructureParser();
 
     virtual QStringList parseStructureNames() = 0;
@@ -47,7 +47,7 @@ public:
     static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string);
 
 protected:
-    const Kasten::StructureDefinitionFile* const mDef;
+    const Kasten1::StructureDefinitionFile* const mDef;
 private:
     Q_DISABLE_COPY(AbstractStructureParser)
 };

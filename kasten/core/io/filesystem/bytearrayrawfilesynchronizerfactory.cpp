@@ -31,7 +31,7 @@
 #include <QtCore/QLatin1String>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayRawFileSynchronizerFactory::ByteArrayRawFileSynchronizerFactory() {}

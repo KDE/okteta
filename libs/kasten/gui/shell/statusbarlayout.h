@@ -30,7 +30,7 @@
 class QWidgetItem;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class StatusBarLayout : public QLayout

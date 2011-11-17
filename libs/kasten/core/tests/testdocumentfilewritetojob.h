@@ -27,7 +27,7 @@
 #include <abstractfilesystemsyncwithremotejob.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class TestDocumentFileSynchronizer;

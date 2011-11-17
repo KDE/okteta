@@ -31,7 +31,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 void AbstractLinePopupPrivate::init()

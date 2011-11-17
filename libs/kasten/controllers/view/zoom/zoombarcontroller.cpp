@@ -28,7 +28,7 @@
 #include <statusbar.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ZoomBarController::ZoomBarController( StatusBar* statusBar )

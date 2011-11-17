@@ -35,7 +35,7 @@
 #include <QtGui/QLayout>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ExportDialog::ExportDialog( const QString& remoteTypeName,

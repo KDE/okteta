@@ -34,7 +34,7 @@ class KToggleAction;
 class KAction;
 
 
-namespace Kasten
+namespace Kasten1
 {
 class ByteArrayViewProfileManager;
 class ByteArrayView;

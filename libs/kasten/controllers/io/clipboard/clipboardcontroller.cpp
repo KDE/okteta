@@ -39,7 +39,7 @@
 #include <QtCore/QMimeData>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ClipboardController::ClipboardController( KXMLGUIClient* guiClient )

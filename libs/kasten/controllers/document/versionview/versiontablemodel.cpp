@@ -30,7 +30,7 @@
 #include <KIcon>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 VersionTableModel::VersionTableModel( AbstractModel* model, If::Versionable* versionControl, QObject* parent )
@@ -43,8 +43,8 @@ VersionTableModel::VersionTableModel( AbstractModel* model, If::Versionable* ver
     {
         connect( mModel, SIGNAL(revertedToVersionIndex(int)), SLOT(onRevertedToVersionIndex(int)) );
         connect( mModel, SIGNAL(headVersionChanged(int)), SLOT(onHeadVersionChanged(int)) );
-        connect( mModel, SIGNAL(headVersionDataChanged(Kasten::DocumentVersionData)),
-                 SLOT(onHeadVersionDataChanged(Kasten::DocumentVersionData)) );
+        connect( mModel, SIGNAL(headVersionDataChanged(Kasten1::DocumentVersionData)),
+                 SLOT(onHeadVersionDataChanged(Kasten1::DocumentVersionData)) );
     }
 }
 
@@ -59,8 +59,8 @@ void VersionTableModel::setModel( AbstractModel* model, If::Versionable* version
     {
         connect( mModel, SIGNAL(revertedToVersionIndex(int)), SLOT(onRevertedToVersionIndex(int)) );
         connect( mModel, SIGNAL(headVersionChanged(int)), SLOT(onHeadVersionChanged(int)) );
-        connect( mModel, SIGNAL(headVersionDataChanged(Kasten::DocumentVersionData)),
-                 SLOT(onHeadVersionDataChanged(Kasten::DocumentVersionData)) );
+        connect( mModel, SIGNAL(headVersionDataChanged(Kasten1::DocumentVersionData)),
+                 SLOT(onHeadVersionDataChanged(Kasten1::DocumentVersionData)) );
     }
     mVersionIndex = versionControl ? versionControl->versionIndex() : 0;
 

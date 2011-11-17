@@ -24,7 +24,7 @@
 #include "abstractdocument_p.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractDocument::AbstractDocument()

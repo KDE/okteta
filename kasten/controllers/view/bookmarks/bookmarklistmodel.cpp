@@ -31,7 +31,7 @@
 #include <KIcon>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )

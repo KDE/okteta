@@ -30,7 +30,7 @@ template<class T> class QList;
 class QMimeData;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class OktetaProgram;
@@ -57,7 +57,7 @@ class OktetaMainWindow : public ShellWindow
   protected Q_SLOTS:
     void onDataOffered( const QMimeData* mimeData, bool& accept );
     void onDataDropped( const QMimeData* mimeData );
-    void onCloseRequest( const QList<Kasten::AbstractView*>& views );
+    void onCloseRequest( const QList<Kasten1::AbstractView*>& views );
 
   protected:
     OktetaProgram* mProgram;

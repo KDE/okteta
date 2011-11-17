@@ -23,7 +23,7 @@
 #include "abstractdocumentfactory.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 bool AbstractDocumentFactory::canCreateFromData( const QMimeData* mimeData )

@@ -26,7 +26,7 @@
 // lib
 #include "abstractcontroller.h"
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KASTENGUI_EXPORT AbstractXmlGuiController : public AbstractController

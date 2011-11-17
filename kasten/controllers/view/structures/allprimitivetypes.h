@@ -36,8 +36,8 @@ namespace Okteta
 {
 class AbstractByteArrayModel;
 }
-typedef Kasten::StructViewPreferences::EnumByteOrder::type ByteOrder;
-typedef Kasten::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
+typedef Kasten1::StructViewPreferences::EnumByteOrder::type ByteOrder;
+typedef Kasten1::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
 #define compile_time_assert(e) extern char (*ct_assert(void)) [sizeof(char[1 - 2*!(e)])]
 

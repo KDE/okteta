@@ -37,7 +37,7 @@
 #include <QtGui/QHelpEvent>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const int ZoomSliderWidth = 150;

@@ -30,7 +30,7 @@ class KUrl;
 class QFile;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModel;

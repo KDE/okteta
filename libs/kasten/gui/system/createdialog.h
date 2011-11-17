@@ -27,7 +27,7 @@
 #include <KDialog>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModelDataGeneratorConfigEditor;

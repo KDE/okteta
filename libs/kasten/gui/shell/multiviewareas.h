@@ -31,7 +31,7 @@
 class QMimeData;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class TabbedViews;
@@ -45,8 +45,8 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
 {
   Q_OBJECT
   Q_INTERFACES(
-    Kasten::If::ToolInlineViewable
-    Kasten::If::ViewAreaSplitable
+    Kasten1::If::ToolInlineViewable
+    Kasten1::If::ViewAreaSplitable
   )
 
   public:
@@ -79,9 +79,9 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     virtual int viewAreasCount() const;
 
   Q_SIGNALS: // If::ViewAreaSplitable API
-    /*virtual*/ void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas );
-    /*virtual*/ void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas );
-    /*virtual*/ void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
+    /*virtual*/ void viewAreasAdded( const QList<Kasten1::AbstractViewArea*>& viewAreas );
+    /*virtual*/ void viewAreasRemoved( const QList<Kasten1::AbstractViewArea*>& viewAreas );
+    /*virtual*/ void viewAreaFocusChanged( Kasten1::AbstractViewArea* viewArea );
 
   Q_SIGNALS:
     void dataOffered( const QMimeData* mimeData, bool& accepted );

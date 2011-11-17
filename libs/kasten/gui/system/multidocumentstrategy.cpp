@@ -24,7 +24,7 @@
 #include "multidocumentstrategy_p.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 MultiDocumentStrategy::MultiDocumentStrategy( DocumentManager* documentManager,

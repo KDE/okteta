@@ -55,7 +55,7 @@
 #include <QFocusEvent>
 
 //TODO add bool parameter to read data to prevent frequent updating of treeview
-namespace Kasten
+namespace Kasten1
 {
 
 StructView::StructView(StructTool* tool, QWidget* parent) :

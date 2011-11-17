@@ -33,7 +33,7 @@
 #include <KUrl>
 
 
-namespace Kasten
+namespace Kasten1
 {
 class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobPrivate
 {

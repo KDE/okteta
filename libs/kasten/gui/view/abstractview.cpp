@@ -23,7 +23,7 @@
 #include "abstractview.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractView::AbstractView( AbstractModel* baseModel)

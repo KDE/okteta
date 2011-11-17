@@ -30,7 +30,7 @@
 #include <KUrl>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate

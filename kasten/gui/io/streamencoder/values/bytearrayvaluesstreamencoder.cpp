@@ -33,7 +33,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ValuesStreamEncoderSettings::ValuesStreamEncoderSettings()

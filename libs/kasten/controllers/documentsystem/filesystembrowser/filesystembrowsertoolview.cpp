@@ -27,7 +27,7 @@
 #include "filesystembrowsertool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 FileSystemBrowserToolView::FileSystemBrowserToolView( FileSystemBrowserTool *tool )

@@ -28,7 +28,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractViewArea;
@@ -56,13 +56,13 @@ class ViewAreaSplitable
 
   public: // get
     virtual AbstractViewArea* viewAreaFocus() const = 0;
-//     virtual QList<Kasten::AbstractViewArea*> viewAreas() const = 0;
+//     virtual QList<Kasten1::AbstractViewArea*> viewAreas() const = 0;
     virtual int viewAreasCount() const = 0;
 
   public: // signal
-    virtual void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas ) = 0;
-    virtual void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas ) = 0;
-    virtual void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea ) = 0;
+    virtual void viewAreasAdded( const QList<Kasten1::AbstractViewArea*>& viewAreas ) = 0;
+    virtual void viewAreasRemoved( const QList<Kasten1::AbstractViewArea*>& viewAreas ) = 0;
+    virtual void viewAreaFocusChanged( Kasten1::AbstractViewArea* viewArea ) = 0;
 };
 
 
@@ -71,6 +71,6 @@ inline ViewAreaSplitable::~ViewAreaSplitable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::ViewAreaSplitable, "org.kde.kasten.if.viewareasplitable/1.0" )
+Q_DECLARE_INTERFACE( Kasten1::If::ViewAreaSplitable, "org.kde.kasten1.if.viewareasplitable/1.0" )
 
 #endif

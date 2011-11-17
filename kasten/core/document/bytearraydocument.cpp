@@ -31,7 +31,7 @@
 #include <KIcon>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayDocument::ByteArrayDocument( const QString &initDescription )

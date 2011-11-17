@@ -71,7 +71,7 @@ void OktetaBrowserExtension::saveState( QDataStream& stream )
 {
     KParts::BrowserExtension::saveState( stream );
 
-    Kasten::ByteArrayView* view = mPart->byteArrayView();
+    Kasten1::ByteArrayView* view = mPart->byteArrayView();
 
     stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
         << (int)view->layoutStyle() << (int)view->valueCoding() 
@@ -106,7 +106,7 @@ void OktetaBrowserExtension::restoreState( QDataStream& stream )
 //            >> activeCoding
            ;
 
-    Kasten::ByteArrayView* view = mPart->byteArrayView();
+    Kasten1::ByteArrayView* view = mPart->byteArrayView();
 
     view->toggleOffsetColumn( offsetColumnVisible );
     view->setVisibleByteArrayCodings( visibleCodings );

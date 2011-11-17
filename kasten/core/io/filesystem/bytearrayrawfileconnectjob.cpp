@@ -33,7 +33,7 @@
 #include <QtCore/QCoreApplication>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer,

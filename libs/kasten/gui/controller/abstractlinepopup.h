@@ -31,7 +31,7 @@
 class KIcon;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractLinePopupPrivate;

@@ -29,7 +29,7 @@
 #include <QtCore/QObject>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KASTENCORE_EXPORT AbstractModelSelection

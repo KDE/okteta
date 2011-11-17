@@ -38,7 +38,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ReplaceTool::ReplaceTool()

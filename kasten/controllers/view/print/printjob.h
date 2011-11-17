@@ -33,7 +33,7 @@ class FramesToPaperPrinter;
 class QPrinter;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class PrintThread;

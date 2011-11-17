@@ -42,7 +42,7 @@ class AbstractByteArrayModel;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 class AbstractDifferentSizeDialog;
 class ByteArrayView;

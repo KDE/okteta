@@ -31,7 +31,7 @@ class QLabel;
 class QTreeView;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class InfoTool;

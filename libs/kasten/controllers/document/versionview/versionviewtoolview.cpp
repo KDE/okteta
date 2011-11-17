@@ -27,7 +27,7 @@
 #include "versionviewtool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 VersionViewToolView::VersionViewToolView( VersionViewTool *tool )

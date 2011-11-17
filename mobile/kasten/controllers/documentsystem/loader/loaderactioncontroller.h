@@ -30,7 +30,7 @@
 
 class QMenuBar;
 
-namespace Kasten
+namespace Kasten1
 {
 
 class DocumentSyncManager;

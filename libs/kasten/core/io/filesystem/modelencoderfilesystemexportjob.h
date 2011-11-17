@@ -26,7 +26,7 @@
 // lib
 #include "abstractfilesystemexportjob.h"
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModelStreamEncoder;

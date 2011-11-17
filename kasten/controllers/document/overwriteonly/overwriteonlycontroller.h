@@ -35,7 +35,7 @@ class KXMLGUIClient;
 class KToggleAction;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class OKTETAKASTENCONTROLLERS_EXPORT OverwriteOnlyController : public AbstractXmlGuiController

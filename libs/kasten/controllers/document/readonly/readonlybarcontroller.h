@@ -29,7 +29,7 @@
 #include <abstractxmlguicontroller.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ToggleButton;

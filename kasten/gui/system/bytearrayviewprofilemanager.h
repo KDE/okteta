@@ -30,7 +30,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject
@@ -48,9 +48,9 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject
     void addViewProfiles( const QList<ByteArrayViewProfile>& viewProfiles );
 
   Q_SIGNALS:
-    void viewProfilesAdded( const QList<Kasten::ByteArrayViewProfile>& viewProfiles );
-    void viewProfilesChanged( const QList<Kasten::ByteArrayViewProfile>& viewProfiles );
-    void viewProfilesRemoved( const QList<Kasten::ByteArrayViewProfile>& viewProfiles );
+    void viewProfilesAdded( const QList<Kasten1::ByteArrayViewProfile>& viewProfiles );
+    void viewProfilesChanged( const QList<Kasten1::ByteArrayViewProfile>& viewProfiles );
+    void viewProfilesRemoved( const QList<Kasten1::ByteArrayViewProfile>& viewProfiles );
 
 protected:
    QList<ByteArrayViewProfile> mViewProfiles;

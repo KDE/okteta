@@ -33,7 +33,7 @@ class QDragMoveEvent;
 class QDropEvent;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class SingleViewAreaPrivate : public AbstractViewAreaPrivate

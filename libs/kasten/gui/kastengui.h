@@ -27,7 +27,7 @@
 #include <QtCore/QFlags>
 
 
-namespace Kasten
+namespace Kasten1
 {
     // keep in sync with both DockWidgetAre a and ToolBarArea
     enum SidePosition

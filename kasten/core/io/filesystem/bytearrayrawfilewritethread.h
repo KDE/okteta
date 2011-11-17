@@ -29,7 +29,7 @@
 class QFile;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayDocument;

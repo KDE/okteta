@@ -31,7 +31,7 @@
 #include <KLocale>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 GotoOffsetTool::GotoOffsetTool()

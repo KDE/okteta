@@ -28,7 +28,7 @@
 #include <QtGui/QLabel>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 DummyView::DummyView( AbstractDocument* document )

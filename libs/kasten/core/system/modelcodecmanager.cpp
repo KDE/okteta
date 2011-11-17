@@ -38,7 +38,7 @@
 #include <KLocale>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ModelCodecManager::ModelCodecManager( DocumentManager* manager )

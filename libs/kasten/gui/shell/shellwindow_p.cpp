@@ -37,7 +37,7 @@
 #include <QtCore/QHash>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
@@ -49,13 +49,13 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
 {
     parent->setCentralWidget( mGroupedViews->widget() );
 
-    QObject::connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
-                      mGroupedViews, SLOT(addViews(QList<Kasten::AbstractView*>)) );
-    QObject::connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
-                      mGroupedViews, SLOT(removeViews(QList<Kasten::AbstractView*>)) );
+    QObject::connect( mViewManager, SIGNAL(opened(QList<Kasten1::AbstractView*>)),
+                      mGroupedViews, SLOT(addViews(QList<Kasten1::AbstractView*>)) );
+    QObject::connect( mViewManager, SIGNAL(closing(QList<Kasten1::AbstractView*>)),
+                      mGroupedViews, SLOT(removeViews(QList<Kasten1::AbstractView*>)) );
 
-    QObject::connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
-                      parent, SLOT(onViewFocusChanged(Kasten::AbstractView*)) );
+    QObject::connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten1::AbstractView*)),
+                      parent, SLOT(onViewFocusChanged(Kasten1::AbstractView*)) );
 }
 
 void ShellWindowPrivate::addTool( AbstractToolView* toolView )
@@ -95,7 +95,7 @@ void ShellWindowPrivate::showDocument( AbstractDocument* document )
         mGroupedViews->setViewFocus( viewOfDocument );
     else
     {
-        QList<Kasten::AbstractDocument*> documents;
+        QList<Kasten1::AbstractDocument*> documents;
         documents.append( document );
         mViewManager->createViewsFor( documents );
     }
@@ -154,8 +154,8 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView *view )
     {
         QObject::connect( view, SIGNAL(titleChanged(QString)),
                           q, SLOT(onTitleChanged(QString)) );
-        QObject::connect( view, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                          q, SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
+        QObject::connect( view, SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)),
+                          q, SLOT(onLocalSyncStateChanged(Kasten1::LocalSyncState)) );
     }
 }
 

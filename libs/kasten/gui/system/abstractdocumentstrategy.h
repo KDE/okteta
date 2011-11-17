@@ -32,7 +32,7 @@ template<typename C> class QList;
 class KUrl;
 
 
-namespace Kasten
+namespace Kasten1
 {
 class AbstractDocument;
 class AbstractModelDataGenerator;
@@ -78,12 +78,12 @@ class KASTENCORE_EXPORT AbstractDocumentStrategy : public QObject
 
   Q_SIGNALS:
     // documents got added
-    void added( const QList<Kasten::AbstractDocument*>& documents );
+    void added( const QList<Kasten1::AbstractDocument*>& documents );
     /// documents are about to be closed, cannot be stopped
-    void closing( const QList<Kasten::AbstractDocument*>& documents );
+    void closing( const QList<Kasten1::AbstractDocument*>& documents );
 
     // TODO: or should the document be able to emit this?
-    void focusRequested( Kasten::AbstractDocument* document );
+    void focusRequested( Kasten1::AbstractDocument* document );
 
     void urlUsed( const KUrl& url );
 

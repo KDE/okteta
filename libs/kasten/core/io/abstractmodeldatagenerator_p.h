@@ -26,7 +26,7 @@
 #include "abstractmodeldatagenerator.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModelDataGeneratorPrivate

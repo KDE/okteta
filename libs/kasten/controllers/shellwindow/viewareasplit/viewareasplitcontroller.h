@@ -32,7 +32,7 @@ class KXMLGUIClient;
 class KAction;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 namespace If {
@@ -61,7 +61,7 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiCo
     void splitHorizontally();
     void close();
 
-    void onViewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
+    void onViewAreaFocusChanged( Kasten1::AbstractViewArea* viewArea );
     void onViewAreasChanged();
     void onViewsChanged();
 

@@ -31,7 +31,7 @@
 class QIODevice;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModelStreamEncoder;

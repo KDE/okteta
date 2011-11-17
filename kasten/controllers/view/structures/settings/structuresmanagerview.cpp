@@ -44,7 +44,7 @@
 
 static const int FileNameRole = Qt::UserRole;
 
-StructuresManagerView::StructuresManagerView(Kasten::StructuresManager* manager,
+StructuresManagerView::StructuresManagerView(Kasten1::StructuresManager* manager,
         QWidget* parent) :
     QWidget(parent), mManager(manager), mRebuildingPluginsList(false)
 {
@@ -227,7 +227,7 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     mRebuildingPluginsList = true;
     KPluginInfo::List plugins;
     KPluginInfo::List dynamicPlugins;
-    foreach(const Kasten::StructureDefinitionFile* def, mManager->structureDefs())
+    foreach(const Kasten1::StructureDefinitionFile* def, mManager->structureDefs())
         {
             KPluginInfo info = def->pluginInfo();
             if (info.category() == QLatin1String("structure"))

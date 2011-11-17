@@ -26,7 +26,7 @@
 #include "abstractdocumentstrategy.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractDocumentStrategyPrivate

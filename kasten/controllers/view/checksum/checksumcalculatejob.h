@@ -35,7 +35,7 @@ class AbstractByteArrayModel;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ChecksumCalculateJob : public QObject // not yet: KJob

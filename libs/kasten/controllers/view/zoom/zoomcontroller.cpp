@@ -34,7 +34,7 @@
 #include <KStandardAction>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ZoomController::ZoomController( KXMLGUIClient* guiClient )

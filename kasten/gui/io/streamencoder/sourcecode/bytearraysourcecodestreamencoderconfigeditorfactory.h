@@ -29,7 +29,7 @@
 #include <abstractmodelstreamencoderconfigeditorfactory.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArraySourceCodeStreamEncoderConfigEditorFactory : public AbstractModelStreamEncoderConfigEditorFactory

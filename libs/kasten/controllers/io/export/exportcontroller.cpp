@@ -41,9 +41,9 @@
 #include <KSelectAction>
 
 
-Q_DECLARE_METATYPE( Kasten::AbstractModelExporter* )
+Q_DECLARE_METATYPE( Kasten1::AbstractModelExporter* )
 
-namespace Kasten
+namespace Kasten1
 {
 
 ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager,

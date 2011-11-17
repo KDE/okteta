@@ -32,7 +32,7 @@
 #include <QtGui/QFont>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 CreateDialog::CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent )

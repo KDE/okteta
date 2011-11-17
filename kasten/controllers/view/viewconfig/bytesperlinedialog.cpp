@@ -29,7 +29,7 @@
 #include <QtGui/QFormLayout>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 BytesPerLineDialog::BytesPerLineDialog( QWidget* parent )

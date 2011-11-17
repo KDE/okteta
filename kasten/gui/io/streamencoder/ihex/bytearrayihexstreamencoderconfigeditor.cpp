@@ -32,7 +32,7 @@
 #include <QtGui/QLabel>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor( ByteArrayIHexStreamEncoder* encoder, QWidget* parent )

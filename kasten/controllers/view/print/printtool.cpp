@@ -44,7 +44,7 @@
 #include <QtGui/QFontMetrics>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 PrintTool::PrintTool()

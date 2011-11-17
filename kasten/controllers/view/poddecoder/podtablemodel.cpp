@@ -30,7 +30,7 @@
 #include <KColorScheme>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 PODTableModel::PODTableModel( PODDecoderTool* tool, QObject *parent )

@@ -29,7 +29,7 @@
 #include <abstractmodelfilesystemsynchronizer.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayDocument;

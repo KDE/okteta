@@ -34,7 +34,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 CharsStreamEncoderSettings::CharsStreamEncoderSettings()

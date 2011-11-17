@@ -35,7 +35,7 @@ class KPushButton;
 class QCheckBox;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class SelectRangeTool;

@@ -26,7 +26,7 @@
 #include <Qt>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractSelectionView::Private

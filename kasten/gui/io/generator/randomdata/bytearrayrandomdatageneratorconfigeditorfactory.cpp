@@ -27,7 +27,7 @@
 #include "bytearrayrandomdatagenerator.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayRandomDataGeneratorConfigEditorFactory::ByteArrayRandomDataGeneratorConfigEditorFactory()

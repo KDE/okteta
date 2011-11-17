@@ -34,7 +34,7 @@
 #include <KMessageBox>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical

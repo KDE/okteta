@@ -28,7 +28,7 @@
 #include <bytearrayviewprofile.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ViewProfileEditDialog::ViewProfileEditDialog( QWidget* parent )

@@ -34,7 +34,7 @@
 #include <KLocale>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
@@ -63,8 +63,8 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
-                            SLOT(onSynchronizerChange(Kasten::AbstractModelSynchronizer*)) );
+        connect( mDocument, SIGNAL(synchronizerChanged(Kasten1::AbstractModelSynchronizer*)),
+                            SLOT(onSynchronizerChange(Kasten1::AbstractModelSynchronizer*)) );
     }
     onSynchronizerChange( mDocument ? mDocument->synchronizer() : 0 );
 }
@@ -94,9 +94,9 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
                   || ( remoteSyncState == RemoteHasChanges )
                   || ( remoteSyncState == RemoteUnknown );
 
-        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)),
                             SLOT(onSyncStateChanged()) );
-        connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
+        connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten1::RemoteSyncState)),
                             SLOT(onSyncStateChanged()) );
     }
 

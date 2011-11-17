@@ -42,7 +42,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 
@@ -101,8 +101,8 @@ void DocumentSyncManager::load( const KUrl& url )
 
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
     AbstractLoadJob* loadJob = synchronizer->startLoad( url );
-    connect( loadJob, SIGNAL(documentLoaded(Kasten::AbstractDocument*)),
-             SLOT(onDocumentLoaded(Kasten::AbstractDocument*)) );
+    connect( loadJob, SIGNAL(documentLoaded(Kasten1::AbstractDocument*)),
+             SLOT(onDocumentLoaded(Kasten1::AbstractDocument*)) );
 
     JobManager::executeJob( loadJob ); // TODO: pass a ui handler to jobmanager
 
@@ -293,12 +293,12 @@ void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
         mManager->addDocument( document );
 }
 
-void DocumentSyncManager::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
+void DocumentSyncManager::onDocumentsAdded( const QList<Kasten1::AbstractDocument*>& documents )
 {
     Q_UNUSED( documents )
 }
 
-void DocumentSyncManager::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
+void DocumentSyncManager::onDocumentsClosing( const QList<Kasten1::AbstractDocument*>& documents )
 {
     Q_UNUSED( documents )
 }

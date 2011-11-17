@@ -26,7 +26,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const int DefaultNoOfSublines = 1;

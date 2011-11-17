@@ -29,7 +29,7 @@
 class KIntNumInput;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class BytesPerGroupDialog : public KDialog

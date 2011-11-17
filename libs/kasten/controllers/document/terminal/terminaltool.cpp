@@ -31,7 +31,7 @@
 #include <KUrl>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )

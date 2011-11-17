@@ -24,7 +24,7 @@
 #include "abstractloadjob_p.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractLoadJob::AbstractLoadJob( AbstractLoadJobPrivate* d )

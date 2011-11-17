@@ -33,7 +33,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayViewTextStreamEncoderSettings

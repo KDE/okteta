@@ -32,7 +32,7 @@ class KIcon;
 class QString;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KASTENCORE_EXPORT Person

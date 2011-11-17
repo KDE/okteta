@@ -31,7 +31,7 @@
 #include <QtGui/QFormLayout>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( ByteArrayPatternGenerator* generator, QWidget* parent )

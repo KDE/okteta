@@ -47,17 +47,17 @@
 #include <QtCore/QMimeData>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 void SingleDocumentStrategyPrivate::init()
 {
     Q_Q( SingleDocumentStrategy );
     // setup
-    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
-                      mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
-                      mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
+    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten1::AbstractDocument*>)),
+                      mViewManager, SLOT(createViewsFor(QList<Kasten1::AbstractDocument*>)) );
+    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten1::AbstractDocument*>)),
+                      mViewManager, SLOT(removeViewsFor(QList<Kasten1::AbstractDocument*>)) );
     QObject::connect( mDocumentManager->syncManager(), SIGNAL(urlUsed(KUrl)),
                       q, SIGNAL(urlUsed(KUrl)) );
 }

@@ -29,7 +29,7 @@ class QLabel;
 class QTreeWidget;
 class KListWidget;
 
-namespace Kasten
+namespace Kasten1
 {
 class StructTool;
 }
@@ -52,7 +52,7 @@ Q_OBJECT
 
     QStringList mValues;
 public:
-    explicit StructureAddRemoveWidget(Kasten::StructTool* tool, QWidget* parent = 0);
+    explicit StructureAddRemoveWidget(Kasten1::StructTool* tool, QWidget* parent = 0);
     ~StructureAddRemoveWidget();
     QStringList values() const
     {
@@ -69,6 +69,6 @@ public Q_SLOTS:
 private:
     void buildAvailableList();
     void syncData();
-    const Kasten::StructTool* mTool;
+    const Kasten1::StructTool* mTool;
 };
 #endif // STRUCTUREADDREMOVEWIDGET_H

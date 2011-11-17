@@ -34,7 +34,7 @@ class QAction;
 class KXMLGUIClient;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ViewManager;

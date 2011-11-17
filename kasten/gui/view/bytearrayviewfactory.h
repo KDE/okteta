@@ -29,7 +29,7 @@
 #include <abstractviewfactory.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class OKTETAKASTENGUI_EXPORT ByteArrayViewFactory : public AbstractViewFactory

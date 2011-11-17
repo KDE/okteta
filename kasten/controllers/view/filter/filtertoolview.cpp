@@ -27,7 +27,7 @@
 #include "filtertool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 FilterToolView::FilterToolView( FilterTool* tool )

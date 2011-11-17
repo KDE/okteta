@@ -27,7 +27,7 @@
 #include "charsetconversiontool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 CharsetConversionToolView::CharsetConversionToolView( CharsetConversionTool* tool )

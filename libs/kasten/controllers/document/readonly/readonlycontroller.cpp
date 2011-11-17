@@ -31,7 +31,7 @@
 #include <KToggleAction>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )

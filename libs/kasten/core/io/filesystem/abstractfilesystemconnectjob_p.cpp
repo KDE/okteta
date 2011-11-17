@@ -32,7 +32,7 @@
 #include <QtCore/QDateTime>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 void AbstractFileSystemConnectJobPrivate::connectWithFile()

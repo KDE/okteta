@@ -23,7 +23,7 @@
 #include "abstractmodelexporterconfigeditor.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractModelExporterConfigEditor::AbstractModelExporterConfigEditor( QWidget* parent )

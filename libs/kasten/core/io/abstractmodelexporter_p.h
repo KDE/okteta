@@ -26,7 +26,7 @@
 #include "abstractmodelexporter.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModelExporterPrivate

@@ -94,7 +94,7 @@
 #include <KConfigGroup>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const char LoadedUrlsKey[] = "LoadedUrls";
@@ -104,7 +104,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
 {
     setObjectName( QLatin1String("Shell") );
 
-//     setStatusBar( new Kasten::StatusBar(this) );
+//     setStatusBar( new Kasten1::StatusBar(this) );
 
     setupControllers();
 //     setupGUI();
@@ -157,7 +157,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewModeController(this) );
 
-    Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
+    Kasten1::StatusBar* bottomBar = static_cast<Kasten1::StatusBar*>( statusBar() );
     addXmlGuiController( new ViewStatusController(bottomBar) );
     addXmlGuiController( new ModifiedBarController(bottomBar) );
     addXmlGuiController( new ReadOnlyBarController(bottomBar) );

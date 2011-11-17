@@ -29,7 +29,7 @@
 #include <QtGui/QToolBar>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 MobileShellWindow::MobileShellWindow( DocumentManager* documentManager/*, ViewManager *viewManager*/ )

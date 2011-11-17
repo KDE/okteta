@@ -28,7 +28,7 @@
 #include "abstractcolumntextrenderer.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class BorderColumnTextRenderer : public AbstractColumnTextRenderer

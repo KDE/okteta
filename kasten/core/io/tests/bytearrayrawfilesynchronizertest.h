@@ -31,7 +31,7 @@
 class TestFileSystem;
 // }
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayRawFileSynchronizerTest : public QObject

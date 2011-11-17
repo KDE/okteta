@@ -26,7 +26,7 @@
 #include "datatypes/topleveldatainformation.h"
 #include "datatypes/array/arraydatainformation.h"
 
-namespace Kasten
+namespace Kasten1
 {
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
     QAbstractItemModel(parent), mTool(tool)

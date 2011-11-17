@@ -1,7 +1,7 @@
 # Code generation options for kconfig_compiler
 File=infoviewsettings.kcfg
 ClassName=InfoViewSettings
-Namespace=Kasten
+Namespace=Kasten1
 Singleton=true
 Mutators=true
 ItemAccessors=false

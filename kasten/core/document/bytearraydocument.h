@@ -40,7 +40,7 @@ class PieceTableByteArrayModel;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
@@ -50,9 +50,9 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
 {
   Q_OBJECT
   Q_INTERFACES(
-    Kasten::If::Versionable
-    Kasten::If::UserListable
-//     Kasten::If::ByteArray
+    Kasten1::If::Versionable
+    Kasten1::If::UserListable
+//     Kasten1::If::ByteArray
   )
 
   public:
@@ -93,7 +93,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
 
   Q_SIGNALS: // If::Versionable
     /*virtual*/ void revertedToVersionIndex( int versionIndex );
-    /*virtual*/ void headVersionDataChanged( const Kasten::DocumentVersionData &versionData );
+    /*virtual*/ void headVersionDataChanged( const Kasten1::DocumentVersionData &versionData );
     /*virtual*/ void headVersionChanged( int newHeadVersionIndex );
 
   Q_SIGNALS: // If::UserListable

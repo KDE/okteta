@@ -40,7 +40,7 @@ class CharCodec;
 template <class Key, class T> class QMap;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayView;

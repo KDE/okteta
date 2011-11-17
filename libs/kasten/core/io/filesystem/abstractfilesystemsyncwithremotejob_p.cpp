@@ -33,7 +33,7 @@
 #include <QtCore/QDateTime>
 
 
-namespace Kasten
+namespace Kasten1
 {
 void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
 {

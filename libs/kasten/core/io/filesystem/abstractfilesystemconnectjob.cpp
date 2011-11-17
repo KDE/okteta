@@ -25,7 +25,7 @@
 #include "abstractfilesystemconnectjob.moc"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractFileSystemConnectJob::AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer,

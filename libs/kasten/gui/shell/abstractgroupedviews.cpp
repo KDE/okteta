@@ -25,7 +25,7 @@
 #include "abstractgroupedviews.moc"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractGroupedViews::AbstractGroupedViews()

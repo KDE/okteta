@@ -33,7 +33,7 @@
 #include <KAction>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ViewProfilesManageController::ViewProfilesManageController( KXMLGUIClient* guiClient,

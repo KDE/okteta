@@ -32,7 +32,7 @@
 #include <KColorScheme>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const unsigned char StatisticsDefaultUndefinedChar = '?';

@@ -31,7 +31,7 @@
 class KIntNumInput;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayRandomDataGeneratorConfigEditor : public AbstractModelDataGeneratorConfigEditor

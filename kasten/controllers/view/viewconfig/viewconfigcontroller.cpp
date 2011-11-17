@@ -36,7 +36,7 @@
 #include <KToggleAction>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )

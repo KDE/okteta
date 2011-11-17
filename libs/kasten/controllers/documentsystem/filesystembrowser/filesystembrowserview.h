@@ -34,7 +34,7 @@ class KActionCollection;
 class KToolBar;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class FileSystemBrowserTool;

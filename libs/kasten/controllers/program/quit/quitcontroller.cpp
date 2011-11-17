@@ -28,7 +28,7 @@
 #include <KStandardAction>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 QuitController::QuitController( KProgram *program, KXmlGuiWindow *window )

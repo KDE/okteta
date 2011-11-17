@@ -24,7 +24,7 @@
 #include "abstractmodeldatagenerator_p.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractModelDataGenerator::AbstractModelDataGenerator( AbstractModelDataGeneratorPrivate* d )

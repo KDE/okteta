@@ -32,7 +32,7 @@
 
 class QTreeView;
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ViewProfileTableModel;

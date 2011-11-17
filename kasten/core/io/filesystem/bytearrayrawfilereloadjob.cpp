@@ -35,7 +35,7 @@
 #include <QtCore/QCoreApplication>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayRawFileReloadJob::ByteArrayRawFileReloadJob( ByteArrayRawFileSynchronizer *synchronizer )

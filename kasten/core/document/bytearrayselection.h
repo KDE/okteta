@@ -31,7 +31,7 @@
 #include <addressrange.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class OKTETAKASTENCORE_EXPORT ByteArraySelection : public AbstractModelSelection

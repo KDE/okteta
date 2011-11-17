@@ -33,7 +33,7 @@ class KPushButton;
 class KTextEdit;
 //class ModelTest;
 
-namespace Kasten
+namespace Kasten1
 {
 class StructTool;
 class StructTreeModel;

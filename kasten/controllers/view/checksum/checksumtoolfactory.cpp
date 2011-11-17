@@ -25,7 +25,7 @@
 // lib
 #include "checksumtool.h"
 
-namespace Kasten
+namespace Kasten1
 {
 
 ChecksumToolFactory::ChecksumToolFactory() {}

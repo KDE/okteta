@@ -27,7 +27,7 @@
 #include <abstractfilesystemconnectjob.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class TestDocumentFileSynchronizer;

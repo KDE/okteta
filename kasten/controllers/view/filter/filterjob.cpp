@@ -28,7 +28,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const int FilterMaxEventProcessTimeInMS = 100;

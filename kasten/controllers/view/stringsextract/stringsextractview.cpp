@@ -43,7 +43,7 @@
 #include <QtGui/QFocusEvent>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const int MinimumStringLength = 1;

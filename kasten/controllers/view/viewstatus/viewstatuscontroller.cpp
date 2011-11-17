@@ -42,7 +42,7 @@
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation
 
-namespace Kasten
+namespace Kasten1
 {
 
 ViewStatusController::ViewStatusController( StatusBar* statusBar )
@@ -160,8 +160,8 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         onCharCodecChanged( mByteArrayView->charCodingName() );
 
         connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)), SLOT(onCursorPositionChanged(Okteta::Address)) );
-        connect( mByteArrayView, SIGNAL(selectedDataChanged(const Kasten::AbstractModelSelection*)),
-            SLOT(onSelectedDataChanged(const Kasten::AbstractModelSelection*)) );
+        connect( mByteArrayView, SIGNAL(selectedDataChanged(const Kasten1::AbstractModelSelection*)),
+            SLOT(onSelectedDataChanged(const Kasten1::AbstractModelSelection*)) );
         connect( mByteArrayView, SIGNAL(overwriteModeChanged(bool)),
                  mOverwriteModeToggleButton, SLOT(setChecked(bool)) );
         connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
@@ -213,7 +213,7 @@ void ViewStatusController::onCursorPositionChanged( Okteta::Address offset )
 }
 
 // TODO: fix selection by cursor not sending updates
-void ViewStatusController::onSelectedDataChanged( const Kasten::AbstractModelSelection* modelSelection )
+void ViewStatusController::onSelectedDataChanged( const Kasten1::AbstractModelSelection* modelSelection )
 {
     const ByteArraySelection* byteArraySelection = static_cast<const ByteArraySelection*>( modelSelection );
     const Okteta::AddressRange selection = byteArraySelection->range();

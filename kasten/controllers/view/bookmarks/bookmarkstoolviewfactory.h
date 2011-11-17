@@ -29,7 +29,7 @@
 #include <abstracttoolviewfactory.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class OKTETAKASTENCONTROLLERS_EXPORT BookmarksToolViewFactory : public AbstractToolViewFactory

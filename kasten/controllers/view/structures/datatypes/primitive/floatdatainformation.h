@@ -69,10 +69,10 @@ inline QString FloatDataInformation::typeName() const
 
 inline QString FloatDataInformation::valueString(float value)
 {
-    if (Kasten::StructViewPreferences::localeAwareFloatFormatting())
-        return KGlobal::locale()->formatNumber(value, Kasten::StructViewPreferences::floatPrecision());
+    if (Kasten1::StructViewPreferences::localeAwareFloatFormatting())
+        return KGlobal::locale()->formatNumber(value, Kasten1::StructViewPreferences::floatPrecision());
     else
-        return QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
+        return QString::number(value, 'g', Kasten1::StructViewPreferences::floatPrecision());
 }
 
 inline float FloatDataInformation::fromVariant(const QVariant& value)

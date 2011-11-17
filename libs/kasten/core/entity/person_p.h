@@ -32,7 +32,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class Person::Private : public KShared

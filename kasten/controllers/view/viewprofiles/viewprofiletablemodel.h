@@ -30,7 +30,7 @@
 template< class C > class QList;
 
 
-namespace Kasten
+namespace Kasten1
 {
 class ByteArrayViewProfile;
 

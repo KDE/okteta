@@ -27,7 +27,7 @@
 #include "bookmarkstool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 BookmarksToolView::BookmarksToolView( BookmarksTool* tool )

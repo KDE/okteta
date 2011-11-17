@@ -26,7 +26,7 @@
 
 int main( int argc, char *argv[] )
 {
-    Kasten::OktetaProgram program( argc, argv );
+    Kasten1::OktetaProgram program( argc, argv );
 
     const int result = program.execute();
 

@@ -30,7 +30,7 @@
 #include <QtGui/QStyle>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 StatusBarLayout::StatusBarLayout( QWidget* parent )

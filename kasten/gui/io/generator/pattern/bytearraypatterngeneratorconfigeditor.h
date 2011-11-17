@@ -34,7 +34,7 @@ class ByteArrayComboBox;
 class KIntNumInput;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayPatternGeneratorConfigEditor : public AbstractModelDataGeneratorConfigEditor

@@ -27,7 +27,7 @@
 #include "stringsextracttool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 StringsExtractToolView::StringsExtractToolView( StringsExtractTool *tool )

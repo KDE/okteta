@@ -31,7 +31,7 @@
 #include <QtCore/QFile>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 void ByteArrayRawFileWriteThread::run()

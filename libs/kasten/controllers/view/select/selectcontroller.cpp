@@ -33,7 +33,7 @@
 #include <KStandardAction>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 SelectController::SelectController( KXMLGUIClient* guiClient )

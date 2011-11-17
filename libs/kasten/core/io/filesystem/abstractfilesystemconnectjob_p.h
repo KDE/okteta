@@ -31,7 +31,7 @@
 #include <KTemporaryFile>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractConnectJobPrivate

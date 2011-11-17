@@ -32,7 +32,7 @@ class QDragMoveEvent;
 class QDropEvent;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class SingleViewArea;
@@ -64,7 +64,7 @@ class SingleViewWindowPrivate
 
   private: // Q_SLOTS
     void onTitleChanged( const QString& newTitle );
-    void onLocalSyncStateChanged( Kasten::LocalSyncState newState );
+    void onLocalSyncStateChanged( Kasten1::LocalSyncState newState );
     void onToolVisibilityChanged( bool isVisible );
 
   protected:

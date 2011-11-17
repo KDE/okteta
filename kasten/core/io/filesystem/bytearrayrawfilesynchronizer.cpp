@@ -35,7 +35,7 @@
 #include <KUrl>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()

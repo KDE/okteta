@@ -28,7 +28,7 @@
 // KDE
 #include <KLocale>
 
-namespace Kasten
+namespace Kasten1
 {
 
 StructuresToolViewFactory::StructuresToolViewFactory()

@@ -26,7 +26,7 @@
 class QTextStream;
 class QString;
 
-namespace Kasten
+namespace Kasten1
 {
 
 /**

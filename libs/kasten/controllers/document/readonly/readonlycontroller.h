@@ -32,7 +32,7 @@
 class KToggleAction;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractDocument;

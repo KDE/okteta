@@ -25,7 +25,7 @@
 #include "abstractfilesystemsyncfromremotejob.moc"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 AbstractFileSystemSyncFromRemoteJob::AbstractFileSystemSyncFromRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer )

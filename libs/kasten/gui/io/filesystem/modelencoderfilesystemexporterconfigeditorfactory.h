@@ -27,7 +27,7 @@
 #include <abstractmodelexporterconfigeditorfactory.h>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModelStreamEncoderConfigEditorFactory;

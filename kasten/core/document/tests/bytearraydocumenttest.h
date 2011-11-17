@@ -27,7 +27,7 @@
 #include <QtCore/QObject>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayDocumentTest : public QObject

@@ -25,7 +25,7 @@
 #include "structview.h"
 #include "structtool.h"
 
-namespace Kasten
+namespace Kasten1
 {
 
 StructToolView::StructToolView(StructTool *tool) :

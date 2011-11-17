@@ -39,7 +39,7 @@ class QGroupBox;
 class QCheckBox;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class KAbstractFindDialog : public KDialog

@@ -32,7 +32,7 @@
 class QMimeData;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class AbstractModelDataGeneratorPrivate;

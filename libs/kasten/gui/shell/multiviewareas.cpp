@@ -25,7 +25,7 @@
 #include "multiviewareas.moc"
 
 
-namespace Kasten
+namespace Kasten1
 {
 // TODO: catch area focues change!
 MultiViewAreas::MultiViewAreas()

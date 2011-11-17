@@ -27,7 +27,7 @@
 #include "about.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class DialogHandler;

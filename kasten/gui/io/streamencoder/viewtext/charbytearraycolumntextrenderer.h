@@ -33,7 +33,7 @@ class CharCodec;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer

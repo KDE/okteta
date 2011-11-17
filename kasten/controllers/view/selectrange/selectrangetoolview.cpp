@@ -27,7 +27,7 @@
 #include "selectrangetool.h"
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 SelectRangeToolView::SelectRangeToolView( SelectRangeTool* tool )

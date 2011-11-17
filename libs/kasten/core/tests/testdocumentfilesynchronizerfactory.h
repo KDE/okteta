@@ -29,7 +29,7 @@
 #include <QtCore/QByteArray>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFactory

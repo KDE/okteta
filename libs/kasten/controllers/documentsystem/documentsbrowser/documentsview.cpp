@@ -30,7 +30,7 @@
 #include <QtGui/QLayout>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 DocumentsView::DocumentsView( DocumentsTool* tool, QWidget* parent )

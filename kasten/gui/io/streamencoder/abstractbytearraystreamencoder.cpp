@@ -32,7 +32,7 @@
 #include <QtCore/QBuffer>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 static const int MaxPreviewSize = 100;

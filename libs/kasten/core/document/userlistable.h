@@ -29,7 +29,7 @@
 template <class T> class QList;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class Person;
@@ -63,6 +63,6 @@ inline UserListable::~UserListable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::UserListable, "org.kde.kasten.if.userlistable/1.0" )
+Q_DECLARE_INTERFACE( Kasten1::If::UserListable, "org.kde.kasten1.if.userlistable/1.0" )
 
 #endif

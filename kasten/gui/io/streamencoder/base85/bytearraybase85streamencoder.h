@@ -31,7 +31,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class ByteArrayBase85StreamEncoder : public AbstractByteArrayStreamEncoder

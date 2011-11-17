@@ -35,13 +35,13 @@ QString CharDataInformation::valueString(quint8 value)
     QChar qchar = QChar::fromLatin1(value);
     qchar = qchar.isPrint() ? qchar : QChar(QChar::ReplacementCharacter);
     QString charStr = QLatin1Char('\'') + qchar + QLatin1Char('\'');
-    if (Kasten::StructViewPreferences::showCharNumericalValue())
+    if (Kasten1::StructViewPreferences::showCharNumericalValue())
     {
         int base = displayBase();
         QString num = QString::number(value, base);
         if (base == 16)
             num.prepend(QLatin1String("0x"));
-        if (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
+        if (base == 10 && Kasten1::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         charStr += QLatin1String(" (") + num + QLatin1Char(')');
     }
@@ -151,12 +151,12 @@ AllPrimitiveTypes CharDataInformation::qVariantToAllPrimitiveTypes(
 
 int CharDataInformation::displayBase()
 {
-    int base = Kasten::StructViewPreferences::charDisplayBase();
-    if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Binary)
+    int base = Kasten1::StructViewPreferences::charDisplayBase();
+    if (base == Kasten1::StructViewPreferences::EnumCharDisplayBase::Binary)
         return 2;
-    if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Decimal)
+    if (base == Kasten1::StructViewPreferences::EnumCharDisplayBase::Decimal)
         return 10;
-    if (base == Kasten::StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
+    if (base == Kasten1::StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
         return 16;
     return 10; //safe default value
 }

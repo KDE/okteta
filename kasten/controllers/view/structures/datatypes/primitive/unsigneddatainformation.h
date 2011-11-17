@@ -128,10 +128,10 @@ inline AllPrimitiveTypes UnsignedDataInformation<T>::qVariantToAllPrimitiveTypes
 template<typename T>
 inline int UnsignedDataInformation<T>::displayBase()
 {
-    int base = Kasten::StructViewPreferences::unsignedDisplayBase();
-    if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
+    int base = Kasten1::StructViewPreferences::unsignedDisplayBase();
+    if (base == Kasten1::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
         return 2;
-    else if (base == Kasten::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
+    else if (base == Kasten1::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
         return 16;
     else
         return 10; //safe default value

@@ -34,7 +34,7 @@ class Bookmark;
 template <class T> class QList;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class BookmarksTool;

@@ -88,32 +88,32 @@ OktetaPart::OktetaPart( QObject* parent,
     setXMLFile( QLatin1String(UIFileName[modus]) );
 
     if( modus == ReadWriteModus )
-        mControllers.append( new Kasten::VersionController(this) );
+        mControllers.append( new Kasten1::VersionController(this) );
     if( modus == ReadWriteModus )
-        mControllers.append( new Kasten::ReadOnlyController(this) );
+        mControllers.append( new Kasten1::ReadOnlyController(this) );
     // TODO: save_as
 //     mControllers.append( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
-    mControllers.append( new Kasten::ZoomController(this) );
-    mControllers.append( new Kasten::SelectController(this) );
+    mControllers.append( new Kasten1::ZoomController(this) );
+    mControllers.append( new Kasten1::SelectController(this) );
     if( modus != BrowserViewModus )
-        mControllers.append( new Kasten::ClipboardController(this) );
+        mControllers.append( new Kasten1::ClipboardController(this) );
 //     if( modus != BrowserViewModus )
-//         mControllers.append( new Kasten::InsertController(mProgram->viewManager(),mProgram->documentManager(),this) );
-//     mControllers.append( new Kasten::CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
+//         mControllers.append( new Kasten1::InsertController(mProgram->viewManager(),mProgram->documentManager(),this) );
+//     mControllers.append( new Kasten1::CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
     if( modus == ReadWriteModus )
-        mControllers.append( new Kasten::OverwriteModeController(this) );
-    mControllers.append( new Kasten::SearchController(this,widget) );
+        mControllers.append( new Kasten1::OverwriteModeController(this) );
+    mControllers.append( new Kasten1::SearchController(this,widget) );
     if( modus == ReadWriteModus )
-        mControllers.append( new Kasten::ReplaceController(this,widget) );
-//     mControllers.append( new Kasten::GotoOffsetController(mGroupedViews,this) );
-//     mControllers.append( new Kasten::SelectRangeController(mGroupedViews,this) );
-//     mControllers.append( new Kasten::BookmarksController(this) );
-    mPrintController = new Kasten::PrintController( this );
+        mControllers.append( new Kasten1::ReplaceController(this,widget) );
+//     mControllers.append( new Kasten1::GotoOffsetController(mGroupedViews,this) );
+//     mControllers.append( new Kasten1::SelectRangeController(mGroupedViews,this) );
+//     mControllers.append( new Kasten1::BookmarksController(this) );
+    mPrintController = new Kasten1::PrintController( this );
     mControllers.append( mPrintController );
-    mControllers.append( new Kasten::ViewConfigController(this) );
-    mControllers.append( new Kasten::ViewModeController(this) );
+    mControllers.append( new Kasten1::ViewConfigController(this) );
+    mControllers.append( new Kasten1::ViewModeController(this) );
 
-//     Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
+//     Kasten1::StatusBar* bottomBar = static_cast<Kasten1::StatusBar*>( statusBar() );
 //     mControllers.append( new ViewStatusController(bottomBar) );
 //     mControllers.append( new ReadOnlyBarController(bottomBar) );
 //     mControllers.append( new ZoomBarController(bottomBar) );
@@ -129,14 +129,14 @@ OktetaPart::OktetaPart( QObject* parent,
 
     // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
     // so this hack just creates some dummies
-    mDocument = new Kasten::ByteArrayDocument( QString() );
-    mByteArrayView = new Kasten::ByteArrayView( mDocument );
+    mDocument = new Kasten1::ByteArrayDocument( QString() );
+    mByteArrayView = new Kasten1::ByteArrayView( mDocument );
 
     if( modus == BrowserViewModus )
         new OktetaBrowserExtension( this );
 }
 
-Kasten::PrintController* OktetaPart::printController() const { return mPrintController; }
+Kasten1::PrintController* OktetaPart::printController() const { return mPrintController; }
 
 
 void OktetaPart::setReadWrite( bool readWrite )
@@ -148,13 +148,13 @@ void OktetaPart::setReadWrite( bool readWrite )
 
 bool OktetaPart::openFile()
 {
-    Kasten::ByteArrayRawFileSynchronizerFactory* synchronizerFactory = new Kasten::ByteArrayRawFileSynchronizerFactory();
-    Kasten::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
+    Kasten1::ByteArrayRawFileSynchronizerFactory* synchronizerFactory = new Kasten1::ByteArrayRawFileSynchronizerFactory();
+    Kasten1::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
 
-    Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad( localFilePath() );
-    connect( loadJob, SIGNAL(documentLoaded(Kasten::AbstractDocument*)),
-             SLOT(onDocumentLoaded(Kasten::AbstractDocument*)) );
-    Kasten::JobManager::executeJob( loadJob );
+    Kasten1::AbstractLoadJob* loadJob = synchronizer->startLoad( localFilePath() );
+    connect( loadJob, SIGNAL(documentLoaded(Kasten1::AbstractDocument*)),
+             SLOT(onDocumentLoaded(Kasten1::AbstractDocument*)) );
+    Kasten1::JobManager::executeJob( loadJob );
 
     delete synchronizerFactory;
 
@@ -163,29 +163,29 @@ bool OktetaPart::openFile()
 
 bool OktetaPart::saveFile()
 {
-    Kasten::AbstractModelSynchronizer* synchronizer = mDocument->synchronizer();
+    Kasten1::AbstractModelSynchronizer* synchronizer = mDocument->synchronizer();
 
-    Kasten::AbstractSyncWithRemoteJob *syncJob =
-        synchronizer->startSyncWithRemote( localFilePath(), Kasten::AbstractModelSynchronizer::ReplaceRemote );
-    const bool syncSucceeded = Kasten::JobManager::executeJob( syncJob );
+    Kasten1::AbstractSyncWithRemoteJob *syncJob =
+        synchronizer->startSyncWithRemote( localFilePath(), Kasten1::AbstractModelSynchronizer::ReplaceRemote );
+    const bool syncSucceeded = Kasten1::JobManager::executeJob( syncJob );
 
     return syncSucceeded;
 }
 
 
-void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
+void OktetaPart::onDocumentLoaded( Kasten1::AbstractDocument* document )
 {
     if( document )
     {
         delete mByteArrayView;
         delete mDocument;
 
-        mDocument = static_cast<Kasten::ByteArrayDocument*>( document );
+        mDocument = static_cast<Kasten1::ByteArrayDocument*>( document );
         mDocument->setReadOnly( mModus != ReadWriteModus );
-        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                 SLOT(onModified(Kasten::LocalSyncState)) );
+        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)),
+                 SLOT(onModified(Kasten1::LocalSyncState)) );
 
-        mByteArrayView = new Kasten::ByteArrayView( mDocument );
+        mByteArrayView = new Kasten1::ByteArrayView( mDocument );
 //     mByteArrayView->setNoOfBytesPerLine( 16 );
         mByteArrayView->setShowsNonprinting( false );
         connect( mByteArrayView, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );
@@ -194,7 +194,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
         mLayout->addWidget( displayWidget );
         mLayout->parentWidget()->setFocusProxy( displayWidget );
 
-        foreach( Kasten::AbstractXmlGuiController* controller, mControllers )
+        foreach( Kasten1::AbstractXmlGuiController* controller, mControllers )
             controller->setTargetModel( mByteArrayView );
 
         setModified( false );
@@ -202,9 +202,9 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
 }
 
 
-void OktetaPart::onModified( Kasten::LocalSyncState state )
+void OktetaPart::onModified( Kasten1::LocalSyncState state )
 {
-    const bool isModified = ( state != Kasten::LocalInSync );
+    const bool isModified = ( state != Kasten1::LocalInSync );
     setModified( isModified );
 }
 

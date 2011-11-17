@@ -35,7 +35,7 @@
 #include <QtGui/QLayout>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 KAbstractFindDialog::KAbstractFindDialog( QWidget* parent )

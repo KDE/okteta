@@ -37,7 +37,7 @@
 #include <QtCore/QDir>
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 FileSystemBrowserView::FileSystemBrowserView( FileSystemBrowserTool* tool, QWidget* parent )

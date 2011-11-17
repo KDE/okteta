@@ -32,7 +32,7 @@ class KXMLGUIClient;
 class KAction;
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 namespace If {

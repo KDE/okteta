@@ -35,7 +35,7 @@ class CharCodec;
 }
 
 
-namespace Kasten
+namespace Kasten1
 {
 
 class SearchJob : public QObject // not yet: KJob
