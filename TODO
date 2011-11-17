@@ -156,6 +156,7 @@ See "Insert", is generated as well as from a source, so perhaps join there?
 * checksum calculation and insertion/appending
 * byte order swapping
 * splitting data files
+* have generators set name of new bytearray if created
 
 Future plans:
 -------------
