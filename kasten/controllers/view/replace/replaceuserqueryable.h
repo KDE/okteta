@@ -53,6 +53,6 @@ inline ReplaceUserQueryable::~ReplaceUserQueryable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten1::If::ReplaceUserQueryable, "org.kde.kasten.if.userlistable/1.0" )
+Q_DECLARE_INTERFACE( Kasten1::If::ReplaceUserQueryable, "org.kde.kasten1.if.userlistable/1.0" )
 
 #endif
