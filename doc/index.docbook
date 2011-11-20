@@ -370,13 +370,14 @@ just used for development, so no need to document it. -->
       <title>Structure definition &XML; file format</title>
       <para>
       <!-- TODO xml schema -->
-      The <literal role="extension">.osd</literal> &XML; file has one root tag: <emphasis>&lt;data&gt;</emphasis> with no
-      attributes. Inside this tag there must be one of the following tags:
+      The <literal role="extension">.osd</literal> &XML; file has one root element: <emphasis>&lt;data&gt;</emphasis> with no
+      attributes. Inside this element there must be one of the following elements:
       <!-- TODO markup, though better than nothing this way-->
       <variablelist>
           <varlistentry>
-            <term><emphasis>&lt;primitive&gt;</emphasis></term>
-            <listitem><para>This element accepts no subelements and can have the following attributes:</para>
+            <term><emphasis role="bold"><emphasis>&lt;primitive&gt;</emphasis></emphasis></term>
+            <listitem><para>To create a primitive data types like e.g. <emphasis>int</emphasis> and
+              <emphasis>float</emphasis>. This element accepts no subelements and can have the following attributes:</para>
               <variablelist>
                 <varlistentry>
                 <term><emphasis role="bold">type</emphasis></term>
@@ -395,9 +396,11 @@ just used for development, so no need to document it. -->
               </variablelist>
             </listitem>
           </varlistentry>
+
           <varlistentry>
-            <term><emphasis role="bold-italic">&lt;bitfield&gt;</emphasis></term>
-            <listitem><para>This element accepts no subelements and can have the following attributes:</para>
+            <term><emphasis role="bold"><emphasis>&lt;bitfield&gt;</emphasis></emphasis></term>
+            <listitem><para>To create a bitfield. This element accepts no subelements and can have the following
+              attributes:</para>
               <variablelist>
                 <varlistentry>
                   <term><emphasis role="bold">width</emphasis></term>
@@ -424,30 +427,116 @@ just used for development, so no need to document it. -->
               </variablelist>
             </listitem>
           </varlistentry>
-          <!-- TODO finish these
+
           <varlistentry>
-            <term><emphasis>&lt;enum&gt;</emphasis></term>
-            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+            <term><emphasis role="bold"><emphasis>&lt;enum&gt;</emphasis></emphasis></term>
+            <listitem><para>To create a primitive type, but where the values are displayed as members of an enumeration if
+              possible. This element accepts no subelements (however you will need an <emphasis>&lt;enumDef&gt;</emphasis>
+              tag in the file to reference it. It has the following attributes:</para>
+              <variablelist>
+                <varlistentry>
+                  <term><emphasis role="bold">enum</emphasis></term>
+                  <listitem><para>The underlying enum for this value. Must match the <emphasis>name</emphasis> attribute of
+                  one of the <emphasis>&lt;enumDef&gt;</emphasis> tags in this file.</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term><emphasis role="bold">type</emphasis></term>
+                  <listitem>
+                    <para>The type of this enum. See type attribute of <emphasis>&lt;primitive&gt;</emphasis>.
+                    Only difference is that <emphasis>Double</emphasis> and <emphasis>Float</emphasis> make no sense.</para>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
           </varlistentry>
+
+
           <varlistentry>
-            <term><emphasis>&lt;struct&gt;</emphasis></term>
-            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+            <term><emphasis role="bold"><emphasis>&lt;flags&gt;</emphasis></emphasis></term>
+            <listitem><para>This is the same as <emphasis>&lt;enum&gt;</emphasis> with the only difference being
+            That values are represented as a bitwise or of all the values of the enumeration.</para></listitem>
           </varlistentry>
+
           <varlistentry>
-            <term><emphasis>&lt;union&gt;</emphasis></term>
-            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+            <term><emphasis role="bold"><emphasis>&lt;struct&gt;</emphasis></emphasis></term>
+            <listitem><para>To create a structure. All other elements (including <emphasis>&lt;struct&gt;</emphasis> can
+            be a child of this and will then be part of the resultung structure</para></listitem>
           </varlistentry>
+
           <varlistentry>
-            <term><emphasis>&lt;array&gt;</emphasis></term>
-            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+            <term><emphasis role="bold"><emphasis>&lt;union&gt;</emphasis></emphasis></term>
+            <listitem><para>To create a union. Basically the same as <emphasis>&lt;struct&gt;</emphasis> except for the fact
+            that all child elements will start from the same offset. Useful for interpreting the same sequence of bytes in
+            various ways.</para></listitem>
           </varlistentry>
+
           <varlistentry>
-            <term><emphasis>&lt;string&gt;</emphasis></term>
-            <listitem><para>This element accepts no elements and can have the following attributes</para></listitem>
+            <term><emphasis role="bold"><emphasis>&lt;array&gt;</emphasis></emphasis></term>
+            <listitem><para>To create an array. This element accepts exactly one child (the underlying type of the array),
+            which can be any of the elements, even <emphasis>&lt;array&gt;</emphasis> itself. It also has the following
+            attributes:</para>
+              <variablelist>
+                <varlistentry>
+                  <term><emphasis role="bold">length</emphasis></term>
+                  <listitem><para>The number of elements in this array as a decimal number.
+                  Alternatively it can also be a string which matches the name attribute of a previously defined
+                  <emphasis>&lt;primitive&gt;</emphasis>, <emphasis>&lt;enum&gt;</emphasis> or <emphasis>&lt;flags&gt;</emphasis>
+                  element. Then the length will be the value of that element.
+                  Currently it is limited to 10000, because larger arrays would use too much memory and slow down the tool
+                  too much.
+                  </para></listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
           </varlistentry>
-          -->
+
+          <varlistentry>
+            <term><emphasis role="bold"><emphasis>&lt;string&gt;</emphasis></emphasis></term>
+            <listitem><para>To create a string in various encodings. By default you get a <emphasis>NULL</emphasis>-
+            terminated C-style string. However different types of string can be created with the following attributes:</para>
+              <variablelist>
+                <varlistentry>
+                  <term><emphasis role="bold">terminatedBy</emphasis></term>
+                  <listitem><para>This attribute determines what unicode codepoint the string is terminated by. It must be a
+                  hexadecimal number (optionally with leading <emphasis>0x</emphasis>). When encoding is ASCII, only values
+                  up to 0x7f are meaningful. If neither this nor <emphasis>maxCharCount</emphasis> nor <emphasis>maxByteCount</emphasis>
+                  are set, this is assumed to be set to be set to 0 (C-style string)
+                  </para></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term><emphasis role="bold">maxCharCount</emphasis></term>
+                  <listitem><para>The maximum number of chars this string can have. If <emphasis>terminatedBy</emphasis> is
+                  set too then whatever is reached first terminates the string. This is mutually exclusive with
+                  <emphasis>maxByteCount</emphasis></para></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term><emphasis role="bold">maxByteCount</emphasis></term>
+                  <listitem><para>The maximum number of bytes this string can be long. If <emphasis>terminatedBy</emphasis>
+                  is set too then whatever is reached first terminates the string. This is mutually exclusive with
+                  <emphasis>maxCharCount</emphasis>. With encodings like <emphasis>ASCII</emphasis> this is the same as
+                  <emphasis>maxCharCount</emphasis>.</para></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term><emphasis role="bold">type</emphasis></term>
+                  <listitem><para>The encoding of this string. Can be one of the following:</para>
+                    <itemizedlist>
+                      <listitem><para><emphasis>ASCII</emphasis></para></listitem>
+                      <listitem><para><emphasis>LATIN-1</emphasis></para></listitem>
+                      <listitem><para><emphasis>UTF-8</emphasis></para></listitem>
+                      <listitem><para><emphasis>UTF-16-LE</emphasis> or <emphasis>UTF-16-BE</emphasis>. If neither
+                      <emphasis>-LE</emphasis> or <emphasis>-BE</emphasis> suffix is given, little endian is assumed.
+                      </para></listitem>
+                      <listitem><para><emphasis>UTF-32-LE</emphasis> or <emphasis>UTF-32-BE</emphasis>. If neither
+                      <emphasis>-LE</emphasis> or <emphasis>-BE</emphasis> suffix is given, little endian is assumed.
+                      </para></listitem>
+                    </itemizedlist>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
       </variablelist>
-      Every element accepts an attribute <emphasis>name</emphasis>.
+      Every element also accepts an attribute <emphasis>name</emphasis> which is then visible in the structures view.
       </para>
     </sect2>
 
