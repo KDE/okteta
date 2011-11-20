@@ -454,12 +454,12 @@ just used for development, so no need to document it. -->
           <varlistentry>
             <term><emphasis role="bold"><emphasis>&lt;flags&gt;</emphasis></emphasis></term>
             <listitem><para>This is the same as <emphasis>&lt;enum&gt;</emphasis> with the only difference being
-            That values are represented as a bitwise or of all the values of the enumeration.</para></listitem>
+            that values are represented as a bitwise of all the values of the enumeration.</para></listitem>
           </varlistentry>
 
           <varlistentry>
             <term><emphasis role="bold"><emphasis>&lt;struct&gt;</emphasis></emphasis></term>
-            <listitem><para>To create a structure. All other elements (including <emphasis>&lt;struct&gt;</emphasis> can
+            <listitem><para>To create a structure. All other elements (including <emphasis>&lt;struct&gt;</emphasis>) can
             be a child of this and will then be part of the resultung structure</para></listitem>
           </varlistentry>
 
@@ -500,7 +500,7 @@ just used for development, so no need to document it. -->
                   <listitem><para>This attribute determines what unicode codepoint the string is terminated by. It must be a
                   hexadecimal number (optionally with leading <emphasis>0x</emphasis>). When encoding is ASCII, only values
                   up to 0x7f are meaningful. If neither this nor <emphasis>maxCharCount</emphasis> nor <emphasis>maxByteCount</emphasis>
-                  are set, this is assumed to be set to be set to 0 (C-style string)
+                  are set, this is assumed to be set to 0 (C-style string)
                   </para></listitem>
                 </varlistentry>
                 <varlistentry>
