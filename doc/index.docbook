@@ -371,7 +371,7 @@ just used for development, so no need to document it. -->
       <para>
       <!-- TODO xml schema -->
       The <literal role="extension">.osd</literal> &XML; file has one root element: <emphasis>&lt;data&gt;</emphasis> with no
-      attributes. Inside this element there must be one of the following elements:
+      attributes. Inside this element there must be one of the following elements:</para>
       <!-- TODO markup, though better than nothing this way-->
       <variablelist>
           <varlistentry>
@@ -432,7 +432,7 @@ just used for development, so no need to document it. -->
             <term><emphasis role="bold"><emphasis>&lt;enum&gt;</emphasis></emphasis></term>
             <listitem><para>To create a primitive type, but where the values are displayed as members of an enumeration if
               possible. This element accepts no subelements (however you will need an <emphasis>&lt;enumDef&gt;</emphasis>
-              tag in the file to reference it. It has the following attributes:</para>
+              tag in the file to reference it). It has the following attributes:</para>
               <variablelist>
                 <varlistentry>
                   <term><emphasis role="bold">enum</emphasis></term>
@@ -536,6 +536,7 @@ just used for development, so no need to document it. -->
             </listitem>
           </varlistentry>
       </variablelist>
+      <para>
       Every element also accepts an attribute <emphasis>name</emphasis> which is then visible in the structures view.
       </para>
     </sect2>
