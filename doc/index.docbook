@@ -454,7 +454,7 @@ just used for development, so no need to document it. -->
           <varlistentry>
             <term><emphasis role="bold"><emphasis>&lt;flags&gt;</emphasis></emphasis></term>
             <listitem><para>This is the same as <emphasis>&lt;enum&gt;</emphasis> with the only difference being
-            that values are represented as a bitwise of all the values of the enumeration.</para></listitem>
+            that values are represented as a <emphasis>bitwise-or</emphasis> of all the values of the enumeration.</para></listitem>
           </varlistentry>
 
           <varlistentry>
