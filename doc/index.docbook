@@ -460,7 +460,7 @@ just used for development, so no need to document it. -->
           <varlistentry>
             <term><emphasis role="bold"><emphasis>&lt;struct&gt;</emphasis></emphasis></term>
             <listitem><para>To create a structure. All other elements (including <emphasis>&lt;struct&gt;</emphasis>) can
-            be a child of this and will then be part of the resultung structure</para></listitem>
+            be a child of this and will then be part of the resulting structure</para></listitem>
           </varlistentry>
 
           <varlistentry>
