@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Testing bitflags
 Name[ca]=Proves de «bitflags»
+Name[kk]=Сынақ бит-жалаушалары
 Name[nl]=Bitflags testen
 Name[pt]=Teste de campos de 'bits'
 Name[pt_BR]=Teste de bitflags
@@ -15,6 +16,7 @@ Name[x-test]=xxTesting bitflagsxx
 Name[zh_TW]=測試位元旗標
 Comment=A test for bitflags
 Comment[ca]=Una prova per a «bitflags»
+Comment[kk]=Бит-жалаушаларыың сынағы
 Comment[nl]=Een test voor bitflags
 Comment[pt]=Um teste para os campos de 'bits'
 Comment[pt_BR]=Um teste para bitflags
