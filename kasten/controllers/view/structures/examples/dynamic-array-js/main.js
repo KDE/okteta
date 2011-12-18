@@ -10,11 +10,14 @@ function init() {
         len: uint8(),
         arrayType : enumeration("TypeEnum", uint8(), typeEnumValues),
         // length of this array is always equal to min(len.value, 100)
-        dynArray : array(uint8(), 10, null, updateLength),
-        
+        dynArray : array(uint8(), 10),
+
         //this array changes type depending on the value of arrayType
-        typeChangingArray : array(char(), 10, null, updateType),
-    },validateLength);
+        typeChangingArray : array(char(), 10),
+    });
+	object.validationFunc = validateLength;
+	object.child("dynArray").updateFunc = updateLength;
+	object.child("typeChangingArray").updateFunc = updateType;
     return object;
 }
 
@@ -41,7 +44,6 @@ function validateLength() {
         this.len.validationError = "len must be no bigger than 100";
     else
         this.len.valid = true;
-    
     var type = this.arrayType.value;
     if (type == 0 || type == 1 || type == 2)
         this.arrayType.valid = true;
