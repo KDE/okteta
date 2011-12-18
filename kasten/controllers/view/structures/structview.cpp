@@ -288,39 +288,39 @@ void StructView::lockCurrentStructure(bool lock)
     const QModelIndex current = mStructTreeView->selectionModel()->currentIndex();
     if (!current.isValid())
     {
-kWarning    () << "invalid index " << current << " -> returning";
-}
+        kWarning() << "invalid index " << current << " -> returning";
+        return;
+    }
 
-if (lock)
-{
-    mTool->lockStructure(current);
-}
-else
-{
-    mTool->unlockStructure(current);
-}
+    if (lock)
+    {
+        mTool->lockStructure(current);
+    }
+    else
+    {
+        mTool->unlockStructure(current);
+    }
 }
 
 void StructView::setLockButtonStated(bool structureLocked)
 {
-if (structureLocked)
-{
-    mLockStructureButton->setIcon(KIcon(QLatin1String("object-unlocked")));
-    mLockStructureButton->setText(i18nc("@action:pushbutton"
-                    " unlock the starting offset of the current structure", "Unlock"));
-    mLockStructureButton->setToolTip(i18nc("@info:tooltip",
-                    "Unlock selected structure, i.e. the starting offset is"
-                    " always set to the current cursor position."));
-}
-else
-{
-    mLockStructureButton->setIcon(KIcon(QLatin1String("object-locked")));
-    mLockStructureButton->setText(i18nc("@action:pushbutton"
-                    " unlock the starting offset of the current structure", "Lock"));
-    mLockStructureButton->setToolTip(i18nc("@info:tooltip",
-                    "Lock selected structure to current offset."));
-}
-
+    if (structureLocked)
+    {
+        mLockStructureButton->setIcon(KIcon(QLatin1String("object-unlocked")));
+        mLockStructureButton->setText(i18nc("@action:pushbutton"
+                        " unlock the starting offset of the current structure", "Unlock"));
+        mLockStructureButton->setToolTip(i18nc("@info:tooltip",
+                        "Unlock selected structure, i.e. the starting offset is"
+                        " always set to the current cursor position."));
+    }
+    else
+    {
+        mLockStructureButton->setIcon(KIcon(QLatin1String("object-locked")));
+        mLockStructureButton->setText(i18nc("@action:pushbutton"
+                        " unlock the starting offset of the current structure", "Lock"));
+        mLockStructureButton->setToolTip(i18nc("@info:tooltip",
+                        "Lock selected structure to current offset."));
+    }
 }
 
 }
