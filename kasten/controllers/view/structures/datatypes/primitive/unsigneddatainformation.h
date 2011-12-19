@@ -161,7 +161,7 @@ inline T UnsignedDataInformation<T>::fromVariant(const QVariant& value)
     return T(value.toUInt());
 }
 
-//specialise for 64 bit
+//specialize for 64 bit
 template<>
 inline quint64 UnsignedDataInformation<quint64>::fromVariant(const QVariant& value)
 {

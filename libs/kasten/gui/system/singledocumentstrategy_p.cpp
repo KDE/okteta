@@ -101,7 +101,7 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGen
     Q_Q( SingleDocumentStrategy );
 
     // TODO: show dialog in this process, meanwhile start other process, but hidden,
-    // on result of dialog pass on the paramaters
+    // on result of dialog pass on the parameters
     if( ! mDocumentManager->isEmpty() )
     {
         const QString executable = QCoreApplication::applicationFilePath();
