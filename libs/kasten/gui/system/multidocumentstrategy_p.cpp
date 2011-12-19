@@ -21,7 +21,6 @@
 */
 
 #include "multidocumentstrategy_p.h"
-#include "multidocumentstrategy.h"
 
 // lib
 #include "createdialog.h"
@@ -31,7 +30,6 @@
 #include <viewmanager.h>
 // Kasten core
 #include <modeldatageneratethread.h>
-#include <multidocumentstrategy.h>
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
 // Qt

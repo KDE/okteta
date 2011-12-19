@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "singledocumentstrategy.h"
 #include "singledocumentstrategy_p.h"
 
 // lib
@@ -31,7 +30,6 @@
 #include <viewmanager.h>
 // Kasten core
 #include <modeldatageneratethread.h>
-#include <multidocumentstrategy.h>
 #include <documentsyncmanager.h>
 #include <documentcreatemanager.h>
 #include <abstractmodeldatagenerator.h>
