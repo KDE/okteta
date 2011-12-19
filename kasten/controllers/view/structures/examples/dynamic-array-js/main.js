@@ -32,11 +32,11 @@ function updateLength(mainStruct) {
 function updateType(mainStruct) {
     var type = mainStruct.arrayType.value;
     if (type == typeEnumValues.char && this.childType != char())
-        this.setArrayType(char());
+		this.childType = char();
     else if (type == typeEnumValues.int16 && this.childType != int16())
-        this.setArrayType(int16());
+		this.childType = int16();
     else if (type == typeEnumValues.int32 && this.childType != int32())
-        this.setArrayType(int32());
+		this.childType = int32();
 }
 
 function validateLength() {
