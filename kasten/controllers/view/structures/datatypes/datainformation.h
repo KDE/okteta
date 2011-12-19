@@ -60,7 +60,7 @@ class QScriptEngine;
 class DataInformation: public DataInformationBase
 {
 protected:
-    DataInformation(const DataInformation&);
+    explicit DataInformation(const DataInformation&);
 public:
     virtual DataInformation* clone() const = 0;
     DataInformation(const QString& name, DataInformationBase* parent = NULL);
