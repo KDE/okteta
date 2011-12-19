@@ -94,11 +94,15 @@ protected:
 
 inline int ArrayDataInformation::length() const
 {
+    if (!mData)
+        return 0;
     return mData->length();
 }
 
 inline QString ArrayDataInformation::typeName() const
 {
+    if (!mData)
+        return QString();
     return mData->typeName();
     //don't show name of child
     //return i18nc("array type then length", "%1[%2]", data->typeName(), childCount()); //TODO
@@ -106,6 +110,8 @@ inline QString ArrayDataInformation::typeName() const
 
 inline BitCount32 ArrayDataInformation::size() const
 {
+    if (!mData)
+        return 0;
     return mData->size();
 }
 
@@ -116,11 +122,15 @@ inline bool ArrayDataInformation::isArray() const
 
 inline DataInformation* ArrayDataInformation::childAt(unsigned int idx) const
 {
+    if (!mData)
+        return 0;
     return mData->childAt(idx);
 }
 
 inline unsigned int ArrayDataInformation::childCount() const
 {
+    if (!mData)
+        return 0;
     return mData->length();
 }
 
@@ -131,36 +141,50 @@ inline bool ArrayDataInformation::canHaveChildren() const
 
 inline int ArrayDataInformation::indexOf(const DataInformation*const data) const
 {
+    if (!mData)
+        return 0;
     return mData->indexOf(data);
 }
 
 inline QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
 {
+    if (!mData)
+        return QScriptValue();
     return mData->toScriptValue(index, engine, handlerInfo);
 }
 
 inline BitCount32 ArrayDataInformation::childSize(int index) const
 {
+    if (!mData)
+        return 0;
     return mData->sizeAt(index);
 }
 
 inline Qt::ItemFlags ArrayDataInformation::childFlags(int row, int column, bool fileLoaded) const
 {
+    if (!mData)
+        return 0;
     return mData->childFlags(row, column, fileLoaded);
 }
 
 inline QWidget* ArrayDataInformation::createChildEditWidget(uint index, QWidget* parent) const
 {
+    if (!mData)
+        return 0;
     return mData->createChildEditWidget(index, parent);
 }
 
 inline QVariant ArrayDataInformation::dataFromChildWidget(uint index, const QWidget* w) const
 {
+    if (!mData)
+        return QVariant();
     return mData->dataFromChildWidget(index, w);
 }
 
 inline void ArrayDataInformation::setChildWidgetData(uint index, QWidget* w) const
 {
+    if (!mData)
+        return;
     mData->setChildWidgetData(index, w);
 }
 

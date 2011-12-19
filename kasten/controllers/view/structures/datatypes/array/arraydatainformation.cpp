@@ -71,6 +71,11 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
 {
     kDebug() << "old child count: " << childCount();
 
+    if (!mData)
+    {
+        kWarning() << "mData == null";
+        return QScriptValue();
+    }
     //arrays with length zero are useless -> minimum is 0
     if (newLength < 0)
         return context ? context->throwError(QLatin1String("new Array length is less than zero: ")
@@ -89,14 +94,19 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
 
 QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContext* context)
 {
+    if (!mData)
+    {
+        kWarning() << "mData == null";
+        return QScriptValue();
+    }
     ScriptValueConverter conv(type, QLatin1String("dummy"));
     DataInformation* newChildType = conv.convert();
     //return if conversion failed
     if (!newChildType)
     {
         if (context)
-            return context->throwError(QLatin1String("String '") + type.toString()
-                    + QLatin1String("' is not a valid identifier for a primitive data type"));
+            return context->throwError(QLatin1String("'") + type.toString()
+                    + QLatin1String("' is not a valid identifier for a data type"));
         else
             return QScriptValue();
     }
@@ -107,18 +117,21 @@ QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContex
         delete newChildType;
         return true;
     }
+    newChildType->setParent(this);
     uint len = mData->length();
     TopLevelDataInformation* topLevel = topLevelDataInformation();
     if (len > 0)
     {
         topLevel->_childrenAboutToBeRemoved(this, 0, len - 1);
         delete mData;
+        mData = 0;
         topLevel->_childrenRemoved(this, 0, len - 1);
     }
     else
     {
         //no need to emit the signals, which cause expensive model update
         delete mData; //don't emit the signals
+        mData = 0;
     }
 
 
@@ -145,6 +158,8 @@ QScriptValue ArrayDataInformation::childType() const
 
 QVariant ArrayDataInformation::childData(int row, int column, int role) const
 {
+    if (!mData)
+        return QVariant();
     Q_ASSERT(uint(row) < mData->length());
     if (column == 0 && role == Qt::DisplayRole)
     {
@@ -184,12 +199,22 @@ void ArrayDataInformation::setWidgetData(QWidget*) const
 
 BitCount32 ArrayDataInformation::offset(unsigned int index) const
 {
+    if (!mData)
+    {
+        kWarning() << "mData == null";
+        return 0;
+    }
     return mData->offset(index);
 }
 
 qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         BitCount64 bitsRemaining, quint8* bitOffset)
 {
+    if (!mData)
+    {
+        kWarning() << "mData == null";
+        return -1;
+    }
     if (*bitOffset != 0)
     {
         kWarning() << "in array " << name() << ": bit offset != 0 (" << *bitOffset << "), adding padding,"
@@ -207,6 +232,11 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
 bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
         Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
+    if (!mData)
+    {
+        kWarning() << "mData == null";
+        return false;
+    }
     if (bitOffset != 0)
     {
         kWarning() << "in array " << name() << ": bit offset != 0 (" << bitOffset << "), adding padding,"

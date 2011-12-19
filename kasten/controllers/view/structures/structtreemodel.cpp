@@ -232,8 +232,7 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
             static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem)
     {
-        kDebug()
-            << "parentItem is NULL";
+        kDebug() << "parentItem is NULL";
         return mTool->childCount();
     }
     return parentItem->childCount();
