@@ -139,7 +139,7 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
     setTabOrder( mRelativeCheckBox, mBackwardsCheckBox );
     setTabOrder( mBackwardsCheckBox, mSelectButton );
 
-    connect( mTool, SIGNAL(isApplyableChanged(bool)), SLOT( onApplyableChanged(bool)) );
+    connect( mTool, SIGNAL(isApplyableChanged(bool)), SLOT(onApplyableChanged(bool)) );
 
     onApplyableChanged( mTool->isApplyable() );
 }

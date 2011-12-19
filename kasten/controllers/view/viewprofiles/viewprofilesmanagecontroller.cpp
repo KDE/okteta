@@ -46,7 +46,7 @@ ViewProfilesManageController::ViewProfilesManageController( KXMLGUIClient* guiCl
 
     mManageAction = actionCollection->addAction( "settings_profiles_manage" );
     mManageAction->setText( i18nc("@action:inmenu","Manage View Profiles...") );
-    connect( mManageAction, SIGNAL(triggered(bool) ), SLOT(manageProfiles()) );
+    connect( mManageAction, SIGNAL(triggered(bool)), SLOT(manageProfiles()) );
 }
 
 void ViewProfilesManageController::setTargetModel( AbstractModel* model )

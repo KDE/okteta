@@ -72,12 +72,12 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     // bytes per line
     mSetBytesPerLineAction = actionCollection->addAction( QLatin1String("view_bytesperline") );
     mSetBytesPerLineAction->setText( i18nc("@action:inmenu","Set Bytes per Line...") );
-    connect( mSetBytesPerLineAction, SIGNAL(triggered(bool) ), SLOT(setBytesPerLine()) );
+    connect( mSetBytesPerLineAction, SIGNAL(triggered(bool)), SLOT(setBytesPerLine()) );
 
     // byte groups size
     mSetBytesPerGroupAction = actionCollection->addAction( QLatin1String("view_bytespergroup") );
     mSetBytesPerGroupAction->setText( i18nc("@action:inmenu","Set Bytes per Group...") );
-    connect( mSetBytesPerGroupAction, SIGNAL(triggered(bool) ), SLOT(setBytesPerGroup()) );
+    connect( mSetBytesPerGroupAction, SIGNAL(triggered(bool)), SLOT(setBytesPerGroup()) );
 
     // resize style
     mResizeStyleAction = actionCollection->add<KSelectAction>( QLatin1String("resizestyle") );

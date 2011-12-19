@@ -123,7 +123,7 @@ void TestDocumentTest::testSetLocalSyncState()
 
     Kasten1::TestDocument* document = new Kasten1::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(localSyncStateChanged( Kasten1::LocalSyncState )) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)) );
 
     const Kasten1::LocalSyncState localSyncState = Kasten1::LocalHasChanges;
     document->setLocalSyncState( localSyncState );
