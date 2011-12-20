@@ -51,7 +51,7 @@ QScriptValue UIntDataInformation<T, typeValue>::valueAsQScriptValue() const
 template<typename T, PrimitiveDataType typeValue>
 QString UIntDataInformation<T, typeValue>::valueString() const
 {
-    if (!DataInformation::mWasAbleToRead)
+    if (!UIntDataInformation::mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
     return UIntDataInformation<T, typeValue>::valueString(UnsignedDataInformation<T>::mValue);
 }

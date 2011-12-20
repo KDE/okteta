@@ -24,7 +24,7 @@
 template<typename T, PrimitiveDataType typeValue>
 QString BoolDataInformation<T, typeValue>::valueString() const
 {
-    if (!DataInformation::mWasAbleToRead)
+    if (!BoolDataInformation::mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
     return BoolDataInformation<T, typeValue>::valueString(UnsignedDataInformation<T>::mValue);
 }
