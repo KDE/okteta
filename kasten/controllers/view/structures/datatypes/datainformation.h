@@ -63,7 +63,7 @@ protected:
     explicit DataInformation(const DataInformation&);
 public:
     virtual DataInformation* clone() const = 0;
-    DataInformation(const QString& name, DataInformationBase* parent = NULL);
+    explicit DataInformation(const QString& name, DataInformationBase* parent = NULL);
     virtual ~DataInformation();
 
     enum Columns
