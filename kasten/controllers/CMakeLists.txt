@@ -274,7 +274,6 @@ set( STRUCTVIEW_SRCS
   view/structures/settings/structureaddremovewidget.cpp
   view/structures/settings/structviewdisplaysettingswidget.cpp
   view/structures/settings/structuresmanagerview.cpp
-  view/structures/datatypes/datainformationbase.cpp
   view/structures/datatypes/additionaldata.cpp
   view/structures/datatypes/topleveldatainformation.cpp
   view/structures/datatypes/datainformation.cpp
