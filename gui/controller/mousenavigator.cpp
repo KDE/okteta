@@ -207,7 +207,7 @@ bool MouseNavigator::handleMouseReleaseEvent( QMouseEvent* mouseEvent )
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
         const bool oldHasSelection = tableRanges->hasSelection();
-        const QPoint releasePoint = mView->viewportToColumns( mouseEvent->pos() );
+//         const QPoint releasePoint = mView->viewportToColumns( mouseEvent->pos() );
 
         // this is not the release of a doubleclick so we need to process it?
         if( ! mInLMBDoubleClick )
