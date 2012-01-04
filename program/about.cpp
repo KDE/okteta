@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, made within the KDE community.
 
-    Copyright 2006-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -40,7 +40,7 @@ OktetaAboutData::OktetaAboutData()
               ki18n("Okteta"), ProgramVersion, // name
               ki18n("Hex editor"), // description
               KAboutData::License_GPL_V2,
-              ki18n("Copyright 2006-2011 Friedrich W. H. Kossebau"), //copyright
+              ki18n("Copyright 2006-2012 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit the raw data of files"), // comment
               ProgramHomepage )
 {
