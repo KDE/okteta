@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -317,6 +317,16 @@ void ByteArrayView::setMarking( const Okteta::AddressRange& range, bool ensureVi
     mWidget->setMarking( range );
     if( ensureVisible )
         mWidget->ensureVisible( range );
+}
+
+void ByteArrayView::setSubstituteChar( const QChar& substituteChar )
+{
+    mWidget->setSubstituteChar( substituteChar );
+}
+
+void ByteArrayView::setUndefinedChar( const QChar& undefinedChar )
+{
+    mWidget->setUndefinedChar( undefinedChar );
 }
 
 

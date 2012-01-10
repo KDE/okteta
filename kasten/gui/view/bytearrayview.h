@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -153,6 +153,8 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
   public: // layout settings
     void setShowsNonprinting( bool showsNonprinting = true );
     void setNoOfGroupedBytes( int noOfGroupedBytes );
+    void setSubstituteChar( const QChar& substituteChar );
+    void setUndefinedChar( const QChar& undefinedChar );
     QChar substituteChar() const;
     QChar undefinedChar() const;
     bool showsNonprinting() const;
