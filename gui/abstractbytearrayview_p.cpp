@@ -64,7 +64,7 @@ static const int MaxFontPointSize = 128;
 static const AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
 static const AbstractByteArrayView::CharCoding DefaultCharCoding = AbstractByteArrayView::LocalEncoding;
 
-static const AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FullSizeLayoutStyle;
+static const AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
 
 static const char OctetStreamFormatName[] = "application/octet-stream";
 

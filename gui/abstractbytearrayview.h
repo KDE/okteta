@@ -235,7 +235,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     /** sets whether the data should be treated modified or not */
     void setModified( bool modified );
 
-    /** sets the resizestyle for the value column. Default is Okteta::FullSizeLayoutStyle */
+    /** sets the resizestyle for the value column. Default is Okteta::FixedLayoutStyle */
     void setLayoutStyle( LayoutStyle layoutStyle );
     /** sets whether the widget is readonly or not, Default is true.
       * If the databuffer which is worked on can't be written the widget stays readonly
