@@ -47,6 +47,7 @@ static const PixelX DefaultByteSpacingWidth = 3;
 static const PixelX DefaultGroupSpacingWidth = 9;
 static const PixelX DefaultRowSpacingHeight = 0;
 static const int DefaultNoOfGroupedBytes = 4;
+static const int DefaultNoOfBytesPerLine =  16;
 
 static const int DefaultBinaryGapWidth = 1;
 

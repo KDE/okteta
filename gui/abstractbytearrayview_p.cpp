@@ -32,6 +32,7 @@
 #include "widgetcolumnstylist.h"
 #include "kcursor.h"
 #include "bordercolumnrenderer.h"
+#include "oktetagui.h"
 // Okteta core
 #include <valuecodec.h>
 #include <bookmarkable.h>
@@ -54,7 +55,6 @@ namespace Okteta
 
 static const Address DefaultStartOffset = 0;//5;
 static const Address DefaultFirstLineOffset = 0;
-static const int DefaultNoOfBytesPerLine =  16;
 
 // zooming is done in steps of font size points
 static const int DefaultZoomStep = 1;
