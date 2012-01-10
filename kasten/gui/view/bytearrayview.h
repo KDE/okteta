@@ -92,7 +92,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
   public: // If::DataSelectable API
     virtual void selectAllData( bool selectAll );
     virtual bool hasSelectedData() const;
-    virtual QMimeData *copySelectedData() const;
+    virtual QMimeData* copySelectedData() const;
     virtual const AbstractModelSelection* modelSelection() const;
 //     virtual void setSelection();
   Q_SIGNALS:
@@ -100,10 +100,10 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     /*virtual*/ void selectedDataChanged( const Kasten1::AbstractModelSelection* modelSelection );
 
   public: // If::SelectedDataWriteable API
-    virtual void insertData( const QMimeData *data );
-    virtual QMimeData *cutSelectedData();
+    virtual void insertData( const QMimeData* data );
+    virtual QMimeData* cutSelectedData();
     virtual void deleteSelectedData();
-    virtual bool canReadData( const QMimeData *data ) const;
+    virtual bool canReadData( const QMimeData* data ) const;
 
   public: // cursor API
     void setCursorPosition( Okteta::Address cursorPosition );

@@ -87,7 +87,7 @@ ByteArrayView::ByteArrayView( ByteArrayView* other, Qt::Alignment alignment )
 
 void ByteArrayView::init()
 {
-    Okteta::AbstractByteArrayModel *content = mDocument->content();
+    Okteta::AbstractByteArrayModel* content = mDocument->content();
     mWidget = new Okteta::ByteArrayJanusView();
     mWidget->setByteArrayModel( content );
 
@@ -154,19 +154,19 @@ bool ByteArrayView::hasSelectedData() const
     return mWidget->hasSelectedData();
 }
 
-QMimeData *ByteArrayView::copySelectedData() const
+QMimeData* ByteArrayView::copySelectedData() const
 {
     return mWidget->selectionAsMimeData();
 }
 
-void ByteArrayView::insertData( const QMimeData *data )
+void ByteArrayView::insertData( const QMimeData* data )
 {
     mWidget->pasteData( data );
 }
 
-QMimeData *ByteArrayView::cutSelectedData()
+QMimeData* ByteArrayView::cutSelectedData()
 {
-    QMimeData *result = mWidget->selectionAsMimeData();
+    QMimeData* result = mWidget->selectionAsMimeData();
     mWidget->removeSelectedData();
     return result;
 }
@@ -176,7 +176,7 @@ void ByteArrayView::deleteSelectedData()
     mWidget->removeSelectedData();
 }
 
-bool ByteArrayView::canReadData( const QMimeData *data ) const
+bool ByteArrayView::canReadData( const QMimeData* data ) const
 {
     return mWidget->canReadData( data );
 }
