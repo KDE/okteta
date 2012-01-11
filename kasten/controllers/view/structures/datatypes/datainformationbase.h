@@ -36,8 +36,8 @@ class PrimitiveDataInformation;
 class ArrayDataInformation;
 class TopLevelDataInformation;
 
-typedef Kasten1::StructViewPreferences::EnumByteOrder::type ByteOrder;
-typedef Kasten1::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
+typedef Kasten2::StructViewPreferences::EnumByteOrder::type ByteOrder;
+typedef Kasten2::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 /** To indicate that it is a number of bits not bytes */
 typedef quint32 BitCount32;
 typedef quint64 BitCount64;

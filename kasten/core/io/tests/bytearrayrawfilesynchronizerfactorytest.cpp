@@ -87,7 +87,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::init()
 
 void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 {
-    Kasten1::ByteArrayRawFileSynchronizerFactory *factory = new Kasten1::ByteArrayRawFileSynchronizerFactory();
+    Kasten2::ByteArrayRawFileSynchronizerFactory *factory = new Kasten2::ByteArrayRawFileSynchronizerFactory();
 
     QVERIFY( factory != 0 );
 
@@ -97,7 +97,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
-    Kasten1::ByteArrayRawFileSynchronizerFactory *factory = new Kasten1::ByteArrayRawFileSynchronizerFactory();
+    Kasten2::ByteArrayRawFileSynchronizerFactory *factory = new Kasten2::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
     ByteArrayDocument *byteArrayDocument = qobject_cast<ByteArrayDocument *>( document );
@@ -118,7 +118,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
 
-    Kasten1::ByteArrayRawFileSynchronizerFactory *factory = new Kasten1::ByteArrayRawFileSynchronizerFactory();
+    Kasten2::ByteArrayRawFileSynchronizerFactory *factory = new Kasten2::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );

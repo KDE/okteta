@@ -42,7 +42,7 @@
 #include <QtGui/QWidget>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 BookmarksTool::BookmarksTool()

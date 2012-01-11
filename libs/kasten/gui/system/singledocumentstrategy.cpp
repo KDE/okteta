@@ -24,7 +24,7 @@
 #include "singledocumentstrategy_p.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 SingleDocumentStrategy::SingleDocumentStrategy( DocumentManager* documentManager,

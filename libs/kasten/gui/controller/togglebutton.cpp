@@ -25,7 +25,7 @@
 #include "togglebutton.moc"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ToggleButton::ToggleButton( const KIcon& icon, const QString& text, const QString& toolTip, QWidget* parent )

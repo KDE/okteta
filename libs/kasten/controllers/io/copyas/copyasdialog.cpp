@@ -36,7 +36,7 @@
 #include <QtGui/QFont>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,

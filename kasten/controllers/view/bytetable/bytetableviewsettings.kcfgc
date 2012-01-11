@@ -1,7 +1,7 @@
 # Code generation options for kconfig_compiler
 File=bytetableviewsettings.kcfg
 ClassName=ByteTableViewSettings
-Namespace=Kasten1
+Namespace=Kasten2
 Singleton=true
 Mutators=true
 ItemAccessors=false

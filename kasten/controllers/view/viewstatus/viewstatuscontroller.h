@@ -38,7 +38,7 @@ class QLabel;
 class QString;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ByteArrayView;
@@ -66,7 +66,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     void setCharCoding( int charCoding );
 
     void onCursorPositionChanged( Okteta::Address offset );
-    void onSelectedDataChanged( const Kasten1::AbstractModelSelection* modelSelection );
+    void onSelectedDataChanged( const Kasten2::AbstractModelSelection* modelSelection );
     void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
 

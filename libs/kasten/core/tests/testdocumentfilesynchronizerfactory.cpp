@@ -29,7 +29,7 @@
 #include <QtCore/QLatin1String>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const QByteArray& header )

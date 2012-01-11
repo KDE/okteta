@@ -27,7 +27,7 @@
 #include "bytearraysrecstreamencoder.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ByteArraySRecStreamEncoderConfigEditorFactory::ByteArraySRecStreamEncoderConfigEditorFactory()

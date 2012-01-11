@@ -28,7 +28,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
 
-namespace Kasten1
+namespace Kasten2
 {
 
 void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()

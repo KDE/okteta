@@ -36,8 +36,8 @@
 #include <KDebug>
 #include <KConfigDialogManager>
 
-using namespace Kasten1;
-StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten1::StructTool* tool,
+using namespace Kasten2;
+StructureAddRemoveWidget::StructureAddRemoveWidget(Kasten2::StructTool* tool,
         QWidget* parent) :
     QWidget(parent), mTool(tool)
 {

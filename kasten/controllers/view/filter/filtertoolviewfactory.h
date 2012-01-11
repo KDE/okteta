@@ -29,7 +29,7 @@
 #include <abstracttoolviewfactory.h>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class OKTETAKASTENCONTROLLERS_EXPORT FilterToolViewFactory : public AbstractToolViewFactory

@@ -29,7 +29,7 @@
 #include <QtCore/QFile>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 void ModelEncoderFileSystemExportJobPrivate::startExportToFile()

@@ -30,7 +30,7 @@
 #include <KTemporaryFile>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractModelFileSystemSynchronizer;

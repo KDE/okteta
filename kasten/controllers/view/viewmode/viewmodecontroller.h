@@ -32,7 +32,7 @@ class KXMLGUIClient;
 class KSelectAction;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ByteArrayView;

@@ -24,7 +24,7 @@
 #include "abstractmodel_p.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractModel::AbstractModel( AbstractModel* baseModel )

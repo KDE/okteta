@@ -28,7 +28,7 @@
 #include <QtGui/QLayout>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfigEditor( AbstractModelStreamEncoderConfigEditor* encoderConfigEditor )

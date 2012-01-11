@@ -28,7 +28,7 @@
 #include <QtCore/QEventLoop>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 KReplacePrompt::KReplacePrompt( QWidget* parent )

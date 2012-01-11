@@ -25,7 +25,7 @@
 #include "shellwindow.moc"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ShellWindow::ShellWindow( ViewManager* viewManager )

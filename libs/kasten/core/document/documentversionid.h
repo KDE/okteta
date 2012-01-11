@@ -23,7 +23,7 @@
 #ifndef DOCUMENTVERSIONID_H
 #define DOCUMENTVERSIONID_H
 
-namespace Kasten1
+namespace Kasten2
 {
 
 typedef int DocumentVersionId;

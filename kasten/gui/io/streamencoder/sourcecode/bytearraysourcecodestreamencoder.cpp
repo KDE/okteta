@@ -30,7 +30,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static const char* const PrimitiveDataTypeName[] =

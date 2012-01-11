@@ -27,7 +27,7 @@
 #include "abstractdocumentstrategy.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 class ViewManager;
 class DocumentManager;

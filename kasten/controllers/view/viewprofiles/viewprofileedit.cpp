@@ -37,7 +37,7 @@
 #include <QtGui/QCheckBox>
 #include <KLineEdit>
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static int

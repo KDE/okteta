@@ -29,7 +29,7 @@
 #include <KJob>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractDocument;
@@ -53,7 +53,7 @@ class KASTENCORE_EXPORT AbstractExportJob : public KJob
     AbstractDocument* document() const;
 
   Q_SIGNALS:
-    void documentLoaded( Kasten1::AbstractDocument* document );
+    void documentLoaded( Kasten2::AbstractDocument* document );
 
   protected:
     // emits documentLoaded()

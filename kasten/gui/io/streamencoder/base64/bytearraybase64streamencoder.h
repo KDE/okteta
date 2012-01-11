@@ -31,7 +31,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 extern const char base64EncodeMap[64];
 

@@ -36,7 +36,7 @@ class QModelIndex;
 class QSpinBox;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class StringsExtractTool;

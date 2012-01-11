@@ -70,10 +70,10 @@ inline QString DoubleDataInformation::typeName() const
 
 inline QString DoubleDataInformation::valueString(double value)
 {
-    if (Kasten1::StructViewPreferences::localeAwareFloatFormatting())
-        return KGlobal::locale()->formatNumber(value, Kasten1::StructViewPreferences::floatPrecision());
+    if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
+        return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());
     else
-        return QString::number(value, 'g', Kasten1::StructViewPreferences::floatPrecision());
+        return QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
 }
 
 inline double DoubleDataInformation::fromVariant(const QVariant& value)

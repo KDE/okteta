@@ -25,7 +25,7 @@
 
 #include "kastengui.h"
 
-namespace Kasten1
+namespace Kasten2
 {
 class AbstractToolView;
 class AbstractTool;

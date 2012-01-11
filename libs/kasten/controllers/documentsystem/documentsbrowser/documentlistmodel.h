@@ -27,7 +27,7 @@
 #include <QtCore/QAbstractTableModel>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class DocumentsTool;
@@ -59,9 +59,9 @@ class DocumentListModel : public QAbstractTableModel
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
 
   protected Q_SLOTS:
-    void onDocumentsAdded( const QList<Kasten1::AbstractDocument*>& documents );
-    void onDocumentsClosing( const QList<Kasten1::AbstractDocument*>& documents );
-    void onFocussedDocumentChanged( Kasten1::AbstractDocument* document );
+    void onDocumentsAdded( const QList<Kasten2::AbstractDocument*>& documents );
+    void onDocumentsClosing( const QList<Kasten2::AbstractDocument*>& documents );
+    void onFocussedDocumentChanged( Kasten2::AbstractDocument* document );
     void onSyncStatesChanged();
 
   protected:

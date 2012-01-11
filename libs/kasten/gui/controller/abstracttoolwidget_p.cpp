@@ -27,7 +27,7 @@
 #include <QtGui/QShortcut>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractToolWidgetPrivate::AbstractToolWidgetPrivate( AbstractToolWidget* parent )

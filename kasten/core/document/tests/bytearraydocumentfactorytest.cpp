@@ -30,7 +30,7 @@
 #include <qtest_kde.h>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 void ByteArrayDocumentFactoryTest::testCreate()
@@ -42,7 +42,7 @@ void ByteArrayDocumentFactoryTest::testCreate()
 
     QVERIFY( document != 0 );
     QVERIFY( byteArrayDocument != 0 );
-    QCOMPARE( document->localSyncState(), Kasten1::LocalInSync );
+    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
 
     delete document;
     delete factory;
@@ -50,4 +50,4 @@ void ByteArrayDocumentFactoryTest::testCreate()
 
 }
 
-QTEST_KDEMAIN_CORE( Kasten1::ByteArrayDocumentFactoryTest )
+QTEST_KDEMAIN_CORE( Kasten2::ByteArrayDocumentFactoryTest )

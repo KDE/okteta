@@ -47,7 +47,7 @@
 #include <QtCore/QDataStream>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
@@ -110,7 +110,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
     QVERIFY( byteArrayDocument != 0 );
     QVERIFY( document->synchronizer() != 0 );
     QCOMPARE( document->synchronizer()->document(), document );
-    QCOMPARE( document->localSyncState(), Kasten1::LocalInSync );
+    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
 
     QCOMPARE( document->synchronizer()->url(), fileUrl );
 
@@ -134,7 +134,7 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) );
 
     ByteArrayDocument* document =
-        new Kasten1::ByteArrayDocument(QLatin1String("New created for test."));
+        new Kasten2::ByteArrayDocument(QLatin1String("New created for test."));
     Okteta::PieceTableByteArrayModel* byteArray =
         qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
 
@@ -163,4 +163,4 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 
 }
 
-QTEST_KDEMAIN_CORE( Kasten1::ByteArrayRawFileSynchronizerTest )
+QTEST_KDEMAIN_CORE( Kasten2::ByteArrayRawFileSynchronizerTest )

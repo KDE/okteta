@@ -31,7 +31,7 @@
 #include <QtCore/QByteArray>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 static const char SequenceMimeType[] = "application/octet-stream";
 

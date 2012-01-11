@@ -50,7 +50,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 // static const char OffsetOptionId[] = "offset";
@@ -77,14 +77,14 @@ int OktetaProgram::execute()
 {
     KApplication programCore;
 
-    connect( mDocumentManager, SIGNAL(added(QList<Kasten1::AbstractDocument*>)),
-             mViewManager, SLOT(createViewsFor(QList<Kasten1::AbstractDocument*>)) );
-    connect( mDocumentManager, SIGNAL(closing(QList<Kasten1::AbstractDocument*>)),
-             mViewManager, SLOT(removeViewsFor(QList<Kasten1::AbstractDocument*>)) );
-    connect( mViewManager, SIGNAL(opened(QList<Kasten1::AbstractView*>)),
-             SLOT(onViewsOpened(QList<Kasten1::AbstractView*>)) );
-    connect( mViewManager, SIGNAL(closing(QList<Kasten1::AbstractView*>)),
-             SLOT(onViewsClosing(QList<Kasten1::AbstractView*>)) );
+    connect( mDocumentManager, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
+             mViewManager, SLOT(createViewsFor(QList<Kasten2::AbstractDocument*>)) );
+    connect( mDocumentManager, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
+             mViewManager, SLOT(removeViewsFor(QList<Kasten2::AbstractDocument*>)) );
+    connect( mViewManager, SIGNAL(opened(QList<Kasten2::AbstractView*>)),
+             SLOT(onViewsOpened(QList<Kasten2::AbstractView*>)) );
+    connect( mViewManager, SIGNAL(closing(QList<Kasten2::AbstractView*>)),
+             SLOT(onViewsClosing(QList<Kasten2::AbstractView*>)) );
 
 //     const QList<AbstractModelStreamEncoder*> encoderList =
 //         ByteArrayStreamEncoderFactory::createStreamEncoders();
@@ -159,7 +159,7 @@ void OktetaProgram::quit()
     kapp->quit();
 }
 
-void OktetaProgram::onViewsOpened( const QList<Kasten1::AbstractView*>& views )
+void OktetaProgram::onViewsOpened( const QList<Kasten2::AbstractView*>& views )
 {
     foreach( AbstractView* view, views )
     {

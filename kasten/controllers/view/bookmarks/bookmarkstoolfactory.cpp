@@ -25,7 +25,7 @@
 // lib
 #include "bookmarkstool.h"
 
-namespace Kasten1
+namespace Kasten2
 {
 
 BookmarksToolFactory::BookmarksToolFactory() {}

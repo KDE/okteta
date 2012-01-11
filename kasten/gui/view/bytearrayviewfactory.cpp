@@ -27,7 +27,7 @@
 #include <bytearraydocument.h>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractView* ByteArrayViewFactory::createViewFor( AbstractDocument* _document )

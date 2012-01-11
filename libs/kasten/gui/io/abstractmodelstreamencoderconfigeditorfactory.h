@@ -27,7 +27,7 @@
 #include "kastengui_export.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractModelStreamEncoderConfigEditor;

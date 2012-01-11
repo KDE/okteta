@@ -28,7 +28,7 @@
 #include <QtCore/QAbstractTableModel>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class DocumentVersionData;
@@ -67,7 +67,7 @@ class VersionTableModel : public QAbstractTableModel
   protected Q_SLOTS:
     void onRevertedToVersionIndex( int versionIndex );
     void onHeadVersionChanged( int newHeadVersionIndex );
-    void onHeadVersionDataChanged( const Kasten1::DocumentVersionData& newVersionData );
+    void onHeadVersionDataChanged( const Kasten2::DocumentVersionData& newVersionData );
 
   protected:
     AbstractModel* mModel;

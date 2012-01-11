@@ -29,7 +29,7 @@
 #include <KLocale>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 DocumentsTool::DocumentsTool( DocumentManager* documentManager )
@@ -37,10 +37,10 @@ DocumentsTool::DocumentsTool( DocumentManager* documentManager )
 {
     setObjectName( QLatin1String( "Documents" ) );
 
-    connect( mDocumentManager, SIGNAL(added(QList<Kasten1::AbstractDocument*>)),
-             SIGNAL(documentsAdded(QList<Kasten1::AbstractDocument*>)) );
-    connect( mDocumentManager, SIGNAL(closing(QList<Kasten1::AbstractDocument*>)),
-             SIGNAL(documentsClosing(QList<Kasten1::AbstractDocument*>)) );
+    connect( mDocumentManager, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
+             SIGNAL(documentsAdded(QList<Kasten2::AbstractDocument*>)) );
+    connect( mDocumentManager, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
+             SIGNAL(documentsClosing(QList<Kasten2::AbstractDocument*>)) );
 }
 
 QList<AbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }

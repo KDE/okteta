@@ -39,7 +39,7 @@
 #include <QtGui/QHeaderView>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )

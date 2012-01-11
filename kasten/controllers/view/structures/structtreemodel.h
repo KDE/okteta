@@ -29,7 +29,7 @@
 class DataInformationBase;
 class DataInformation;
 
-namespace Kasten1
+namespace Kasten2
 {
 class StructTool;
 

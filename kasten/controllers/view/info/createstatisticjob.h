@@ -33,7 +33,7 @@ class AbstractByteArrayModel;
 }
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class CreateStatisticJob : public QObject // not yet: KJob

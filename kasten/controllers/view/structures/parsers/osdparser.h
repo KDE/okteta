@@ -43,7 +43,7 @@ class OsdParser: public AbstractStructureParser
 {
 public:
     //TODO remove this from both osdparser and abstractstructureparser
-    OsdParser(const Kasten1::StructureDefinitionFile* const def);
+    OsdParser(const Kasten2::StructureDefinitionFile* const def);
     /** construct a parser which opens @p file in @p dir */
     OsdParser(const QString dir, const QString file);
     /** construct a parser from an in-memory string */

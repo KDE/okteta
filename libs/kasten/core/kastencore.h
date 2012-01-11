@@ -23,7 +23,7 @@
 #ifndef KASTENCORE_H
 #define KASTENCORE_H
 
-namespace Kasten1
+namespace Kasten2
 {
     //TODO: reuse terms from vcs
     enum LocalSyncState

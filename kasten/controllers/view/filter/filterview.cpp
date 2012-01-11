@@ -42,7 +42,7 @@
 #include <QtGui/QAbstractItemView>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 FilterView::FilterView( FilterTool *tool, QWidget* parent )

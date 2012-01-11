@@ -26,7 +26,7 @@
 #include "abstractmodeldatagenerator.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 void ModelDataGenerateThread::run()

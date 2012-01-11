@@ -29,7 +29,7 @@
 #include <QtCore/QObject>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 class OktetaMainWindow;
 class DocumentManager;
@@ -55,7 +55,7 @@ class OktetaProgram : public QObject
 //     ViewManager* viewManager();
 
   protected Q_SLOTS:
-    void onViewsOpened( const QList<Kasten1::AbstractView*>& views );
+    void onViewsOpened( const QList<Kasten2::AbstractView*>& views );
 
   protected:
     OktetaAboutData mAboutData;

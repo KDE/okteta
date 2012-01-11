@@ -25,7 +25,7 @@
 #include "singleviewwindow.moc"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 SingleViewWindow::SingleViewWindow( AbstractView* view )

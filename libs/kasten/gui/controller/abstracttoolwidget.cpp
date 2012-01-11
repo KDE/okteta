@@ -25,7 +25,7 @@
 #include "abstracttoolwidget.moc"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractToolWidget::AbstractToolWidget( QWidget* parent )

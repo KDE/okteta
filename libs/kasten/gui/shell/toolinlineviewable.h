@@ -27,7 +27,7 @@
 #include <QtCore/QtPlugin>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractToolInlineView;
@@ -54,6 +54,6 @@ inline ToolInlineViewable::~ToolInlineViewable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten1::If::ToolInlineViewable, "org.kde.kasten1.if.toolinlineviewable/1.0" )
+Q_DECLARE_INTERFACE( Kasten2::If::ToolInlineViewable, "org.kde.kasten2.if.toolinlineviewable/1.0" )
 
 #endif

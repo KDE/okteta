@@ -51,7 +51,7 @@
 #include <KDebug>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ChecksumTool::ChecksumTool()
@@ -104,7 +104,7 @@ void ChecksumTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten1::AbstractModelSelection*)),
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
                  SLOT(onSelectionChanged()) );
     }
 

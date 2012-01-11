@@ -24,7 +24,7 @@
 #include "abstractconnectjob_p.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractConnectJob::AbstractConnectJob( AbstractConnectJobPrivate* d )

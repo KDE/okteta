@@ -27,7 +27,7 @@
 #include "terminaltool.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TerminalToolView::TerminalToolView( TerminalTool* tool )

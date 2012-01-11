@@ -33,7 +33,7 @@ class QString;
 class QLabel;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class DocumentInfoTool;

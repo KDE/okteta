@@ -23,7 +23,7 @@
 #ifndef KFINDDIRECTION_H
 #define KFINDDIRECTION_H
 
-namespace Kasten1
+namespace Kasten2
 {
 
 enum KFindDirection {

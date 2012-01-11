@@ -26,7 +26,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ByteArrayViewProfilePrivate : public QSharedData

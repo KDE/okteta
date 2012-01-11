@@ -28,7 +28,7 @@
 #include <KDebug>
 #include <QDir>
 
-namespace Kasten1
+namespace Kasten2
 {
 
 StructuresManager::~StructuresManager()

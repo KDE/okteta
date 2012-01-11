@@ -124,10 +124,10 @@ inline AllPrimitiveTypes SIntDataInformation<T, typeValue>::qVariantToAllPrimiti
 template<typename T, PrimitiveDataType typeValue>
 inline int SIntDataInformation<T, typeValue>::displayBase()
 {
-    int base = Kasten1::StructViewPreferences::signedDisplayBase();
-    if (base == Kasten1::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
+    int base = Kasten2::StructViewPreferences::signedDisplayBase();
+    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
         return 2;
-    else if (base == Kasten1::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
+    else if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
         return 16;
     else
         return 10; //safe default value

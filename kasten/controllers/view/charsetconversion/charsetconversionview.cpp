@@ -43,7 +43,7 @@
 
 #include <KDebug>
 
-namespace Kasten1
+namespace Kasten2
 {
 
 CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidget* parent )

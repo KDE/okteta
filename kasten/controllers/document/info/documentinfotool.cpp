@@ -38,7 +38,7 @@
 #include <QtCore/QTimer>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 static const int mimeTypeUpdateTimeInterval = 500; // msec
 
@@ -106,8 +106,8 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
 
         connect( mDocument, SIGNAL(titleChanged(QString)),
                  SIGNAL(documentTitleChanged(QString)) );
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten1::AbstractModelSynchronizer*)),
-                 SLOT(onSynchronizerChanged(Kasten1::AbstractModelSynchronizer*)) );
+        connect( mDocument, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
+                 SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
         connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
                  SLOT(onContentsChanged()) );
     }

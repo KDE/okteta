@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstracttoolview.h>
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ByteTableView;

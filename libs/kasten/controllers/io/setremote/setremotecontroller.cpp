@@ -32,7 +32,7 @@
 #include <KXMLGUIClient>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 SetRemoteController::SetRemoteController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )

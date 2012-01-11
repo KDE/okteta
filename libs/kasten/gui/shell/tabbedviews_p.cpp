@@ -33,7 +33,7 @@
 #include <QtGui/QClipboard>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TabbedViewsPrivate::TabbedViewsPrivate( TabbedViews* parent )
@@ -208,7 +208,7 @@ void TabbedViewsPrivate::onCloseRequest( QWidget* widget )
     const ViewBox* viewBox = static_cast<const ViewBox*>( widget );
     AbstractView* view = viewBox->view();
 
-    QList<Kasten1::AbstractView*> views;
+    QList<Kasten2::AbstractView*> views;
     views.append( view );
 
     emit q->closeRequest( views );

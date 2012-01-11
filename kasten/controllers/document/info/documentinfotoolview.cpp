@@ -27,7 +27,7 @@
 #include "documentinfotool.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 DocumentInfoToolView::DocumentInfoToolView( DocumentInfoTool* tool )

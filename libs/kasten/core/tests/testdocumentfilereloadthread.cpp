@@ -33,7 +33,7 @@
 #include <QtCore/QFile>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject* parent, const QByteArray& header,

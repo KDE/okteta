@@ -34,7 +34,7 @@
 #include <QtGui/QCheckBox>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderConfigEditor( ByteArraySourceCodeStreamEncoder* encoder, QWidget* parent )

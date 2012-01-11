@@ -32,7 +32,7 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QTreeView>
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ViewProfilesManageDialog::ViewProfilesManageDialog( QWidget* parent )

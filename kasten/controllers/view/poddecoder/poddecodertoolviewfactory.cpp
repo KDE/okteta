@@ -29,7 +29,7 @@
 #include <KLocale>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 PodDecoderToolViewFactory::PodDecoderToolViewFactory() {}

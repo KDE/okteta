@@ -46,7 +46,7 @@
 #include <QtXml/QDomNodeList>
 #include <QScriptEngine>
 
-OsdParser::OsdParser(const Kasten1::StructureDefinitionFile* const def) :
+OsdParser::OsdParser(const Kasten2::StructureDefinitionFile* const def) :
     AbstractStructureParser(def), mDir(def->dir()), mEngine(0), mEnumsParsed(false), mFullyParsed(false)
 {
     mFile = QString(def->pluginInfo().pluginName() + QLatin1String(".osd"));

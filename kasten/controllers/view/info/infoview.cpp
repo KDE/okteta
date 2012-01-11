@@ -42,7 +42,7 @@
 #include <QtGui/QFontMetrics>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 InfoView::InfoView( InfoTool *tool, QWidget* parent )

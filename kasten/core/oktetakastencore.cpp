@@ -26,7 +26,7 @@
 #include <KGlobal>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static const KCatalogLoader catalogLoader( QLatin1String("liboktetakasten") );

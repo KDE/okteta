@@ -31,7 +31,7 @@
 class QEventLoop;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class KReplacePrompt : public KDialog

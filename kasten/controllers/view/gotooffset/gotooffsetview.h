@@ -35,7 +35,7 @@ class KPushButton;
 class QCheckBox;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class GotoOffsetTool;

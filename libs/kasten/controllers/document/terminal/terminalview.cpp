@@ -36,7 +36,7 @@
 #include <QtCore/QDir>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TerminalView::TerminalView( TerminalTool* tool, QWidget* parent )

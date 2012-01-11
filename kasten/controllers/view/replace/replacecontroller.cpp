@@ -37,7 +37,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical

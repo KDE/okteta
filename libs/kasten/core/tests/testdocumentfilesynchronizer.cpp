@@ -33,7 +33,7 @@
 #include <KUrl>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray& header )

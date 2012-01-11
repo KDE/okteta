@@ -30,7 +30,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 const char base64EncodeMap[64] =

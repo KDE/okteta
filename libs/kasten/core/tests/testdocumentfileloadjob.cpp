@@ -31,7 +31,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const KUrl& url )

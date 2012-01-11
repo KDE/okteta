@@ -29,7 +29,7 @@
 class QMimeData;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 namespace If
@@ -60,6 +60,6 @@ inline SelectedDataWriteable::~SelectedDataWriteable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten1::If::SelectedDataWriteable, "org.kde.kasten1.if.selecteddatawriteable/1.0" )
+Q_DECLARE_INTERFACE( Kasten2::If::SelectedDataWriteable, "org.kde.kasten2.if.selecteddatawriteable/1.0" )
 
 #endif

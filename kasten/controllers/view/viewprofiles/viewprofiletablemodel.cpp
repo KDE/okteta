@@ -31,7 +31,7 @@
 #include <QtCore/QVector>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ViewProfileTableModel::ViewProfileTableModel( const QList<ByteArrayViewProfile>* viewProfileList,

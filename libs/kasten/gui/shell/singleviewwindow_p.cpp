@@ -32,7 +32,7 @@
 #include <abstracttool.h>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 SingleViewWindowPrivate::SingleViewWindowPrivate( SingleViewWindow* parent,
@@ -76,8 +76,8 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
     if( view )
     {
         q->connect( view, SIGNAL(titleChanged(QString)), SLOT(onTitleChanged(QString)) );
-        q->connect( view, SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)),
-                          SLOT(onLocalSyncStateChanged(Kasten1::LocalSyncState)) );
+        q->connect( view, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                          SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
     }
 }
 

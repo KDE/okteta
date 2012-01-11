@@ -25,7 +25,7 @@
 #include "tabbedviews.moc"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TabbedViews::TabbedViews( TabbedViewsPrivate* _d )

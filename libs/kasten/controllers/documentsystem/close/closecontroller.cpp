@@ -34,7 +34,7 @@
 #include <KIcon>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
@@ -63,9 +63,9 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
         mCloseAllOtherAction->setEnabled( false );
         connect( mCloseAllOtherAction, SIGNAL(triggered(bool)), SLOT(closeAllOther()) );
 
-        connect( mDocumentStrategy, SIGNAL(added(QList<Kasten1::AbstractDocument*>)),
+        connect( mDocumentStrategy, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
                 SLOT(onDocumentsChanged()) );
-        connect( mDocumentStrategy, SIGNAL(closing(QList<Kasten1::AbstractDocument*>)),
+        connect( mDocumentStrategy, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
                 SLOT(onDocumentsChanged()) );
     }
 }

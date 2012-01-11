@@ -45,7 +45,7 @@ QString BoolDataInformation<T, typeValue>::valueString(T value) {
             num.prepend(QLatin1String("0b"));
         else if (base == 8)
             num.prepend(QLatin1String("0o"));
-        else if (base == 10 && Kasten1::StructViewPreferences::localeAwareDecimalFormatting())
+        else if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return i18nc("boolean value with actual value", "true (%1)", num);
     }

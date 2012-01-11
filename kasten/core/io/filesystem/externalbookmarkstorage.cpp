@@ -36,7 +36,7 @@
 #include <KBookmarkGroup>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ExternalBookmarkStorage::ExternalBookmarkStorage()

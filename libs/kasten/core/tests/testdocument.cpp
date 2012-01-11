@@ -23,7 +23,7 @@
 #include "testdocument.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 TestDocument::TestDocument()

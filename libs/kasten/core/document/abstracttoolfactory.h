@@ -24,7 +24,7 @@
 #define ABSTRACTTOOLFACTORY_H
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractTool;

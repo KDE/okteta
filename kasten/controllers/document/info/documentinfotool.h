@@ -38,7 +38,7 @@ class QString;
 class QTimer;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ByteArrayDocument;
@@ -76,7 +76,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     void updateMimeType();
 
     void onContentsChanged();
-    void onSynchronizerChanged( Kasten1::AbstractModelSynchronizer* synchronizer );
+    void onSynchronizerChanged( Kasten2::AbstractModelSynchronizer* synchronizer );
     void onUrlChanged( const KUrl& url );
     void onSynchronized();
 

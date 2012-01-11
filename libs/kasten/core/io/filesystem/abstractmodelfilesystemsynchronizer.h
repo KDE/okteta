@@ -30,7 +30,7 @@ class KDirWatch;
 class QDateTime;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 class AbstractModelFileSystemSynchronizerPrivate;
 

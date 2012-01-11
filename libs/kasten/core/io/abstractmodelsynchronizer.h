@@ -32,7 +32,7 @@
 class KUrl;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractLoadJob;
@@ -117,7 +117,7 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     void dataPulled( int ) const;
     void dataPushed( int ) const;
     void synchronized();
-    void remoteSyncStateChanged( Kasten1::RemoteSyncState newState );
+    void remoteSyncStateChanged( Kasten2::RemoteSyncState newState );
 
   protected: // get
     void setUrl( const KUrl& url );

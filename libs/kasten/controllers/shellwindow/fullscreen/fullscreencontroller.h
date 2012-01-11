@@ -31,7 +31,7 @@
 class KXmlGuiWindow;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class KASTENCONTROLLERS_EXPORT FullScreenController : public AbstractXmlGuiController

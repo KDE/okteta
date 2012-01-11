@@ -32,7 +32,7 @@
 class QStringList;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 class AbstractDocument;
 
@@ -79,9 +79,9 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
 
   Q_SIGNALS:
     // documents got added
-    void added( const QList<Kasten1::AbstractDocument*>& documents );
+    void added( const QList<Kasten2::AbstractDocument*>& documents );
     /// documents are about to be closed, cannot be stopped
-    void closing( const QList<Kasten1::AbstractDocument*>& documents );
+    void closing( const QList<Kasten2::AbstractDocument*>& documents );
 
 //     void closing( KCloseEvent* event );
 // TODO: other than QObject event gets modified by observers, take care of unsetting a close cancel
@@ -89,7 +89,7 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
 // better a visitor pattern?
 
     // TODO: or should the document be able to emit this?
-    void focusRequested( Kasten1::AbstractDocument* document );
+    void focusRequested( Kasten2::AbstractDocument* document );
 
 //  protected:
 //    virtual AbstractDocument* createDocument();

@@ -39,7 +39,7 @@
 #include <QtGui/QGridLayout>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )

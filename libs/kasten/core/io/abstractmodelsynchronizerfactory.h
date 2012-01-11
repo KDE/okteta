@@ -29,7 +29,7 @@
 #include <QtCore/QObject>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 // not really a classic factory, functions do some more, instead it is what?

@@ -32,7 +32,7 @@
 #include <QtGui/QAction>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static const char ToolListActionListId[] = "tools_list";

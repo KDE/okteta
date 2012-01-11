@@ -25,7 +25,7 @@
 #include "abstractfilesystemexportjob.moc"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,

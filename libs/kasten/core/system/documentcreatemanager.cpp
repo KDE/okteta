@@ -28,7 +28,7 @@
 #include <abstractdocument.h>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 DocumentCreateManager::DocumentCreateManager( DocumentManager* manager )

@@ -22,7 +22,7 @@
 
 #include "bytearrayviewprofilemanager.h"
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ByteArrayViewProfileManager::ByteArrayViewProfileManager()

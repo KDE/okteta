@@ -254,15 +254,15 @@ inline ByteOrder DataInformation::byteOrder() const
         case EndianessLittle:
             return ByteOrderEnumClass::LittleEndian;
         case EndianessFromSettings:
-            return Kasten1::StructViewPreferences::byteOrder();
+            return Kasten2::StructViewPreferences::byteOrder();
         case EndianessInherit:
             return (mParent && !mParent->isTopLevel()) ?
                 mParent->asDataInformation()->byteOrder()
-                : Kasten1::StructViewPreferences::byteOrder();
+                : Kasten2::StructViewPreferences::byteOrder();
     }
 
     // here must be a return... I guess this is correct
-    return Kasten1::StructViewPreferences::byteOrder();
+    return Kasten2::StructViewPreferences::byteOrder();
 }
 
 inline void DataInformation::setByteOrder(DataInformation::DataInformationEndianess newByteOrder)

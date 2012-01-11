@@ -29,7 +29,7 @@
 // #include <kstandardguiitem.h>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )

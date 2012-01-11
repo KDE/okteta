@@ -35,7 +35,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static const int DefaultMinLength = 3;
@@ -86,7 +86,7 @@ void StringsExtractTool::setTargetModel( AbstractModel* model )
     {
         connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
                  SLOT(setCharCodec(QString)) );
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten1::AbstractModelSelection*)),
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
                  SLOT(onSelectionChanged()) );
 
         setCharCodec( mByteArrayView->charCodingName() );

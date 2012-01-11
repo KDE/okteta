@@ -24,7 +24,7 @@
 #include "abstractsyncfromremotejob_p.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractSyncFromRemoteJob::AbstractSyncFromRemoteJob( AbstractSyncFromRemoteJobPrivate* parent )

@@ -34,7 +34,7 @@ class AbstractByteArrayModel;
 }
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 // TODO: offset should be set in renderFirstLine, calculated using coordRange,

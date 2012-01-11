@@ -36,7 +36,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 InfoTool::InfoTool()
@@ -81,7 +81,7 @@ void InfoTool::setTargetModel( AbstractModel* model )
                  mStatisticTableModel, SLOT(setCharCodec(QString)) );
         connect( mByteArrayView,  SIGNAL(valueCodingChanged(int)),
                  mStatisticTableModel, SLOT(setValueCoding(int)) );
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten1::AbstractModelSelection*)),
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
                  SLOT(onSelectionChanged()) );
     }
 

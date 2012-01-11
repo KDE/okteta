@@ -44,7 +44,7 @@ QString SIntDataInformation<T, typeValue>::valueString(T val)
             num.prepend(QLatin1String("0o"));
         else if (base == 2)
             num.prepend(QLatin1String("0b"));
-        else if (base == 10 && Kasten1::StructViewPreferences::localeAwareDecimalFormatting())
+        else if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return num;
     }
@@ -52,7 +52,7 @@ QString SIntDataInformation<T, typeValue>::valueString(T val)
     //TODO non decimal negative values as unsigned? probably add option
     if (base == 10) {
         num = QString::number(val, base);
-        if (Kasten1::StructViewPreferences::localeAwareDecimalFormatting())
+        if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return num;
     }

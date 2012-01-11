@@ -34,7 +34,7 @@
 #include <KActionCollection>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 // TODO: a tool(view) might perhaps be invoked indirectly by asking for a tool for the object, here select

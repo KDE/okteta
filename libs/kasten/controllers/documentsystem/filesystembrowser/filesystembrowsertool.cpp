@@ -32,7 +32,7 @@
 #include <KUrl>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncManager )

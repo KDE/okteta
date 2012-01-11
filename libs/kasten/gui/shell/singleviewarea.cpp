@@ -25,7 +25,7 @@
 #include "singleviewarea.moc"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 // TODO: catch area focues change!
 SingleViewArea::SingleViewArea()

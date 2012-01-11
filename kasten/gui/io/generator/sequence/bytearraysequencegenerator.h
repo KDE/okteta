@@ -30,7 +30,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 

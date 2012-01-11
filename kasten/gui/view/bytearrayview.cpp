@@ -33,7 +33,7 @@
 #include <KGlobalSettings>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ByteArrayView::ByteArrayView( ByteArrayDocument* document )
@@ -102,10 +102,10 @@ void ByteArrayView::init()
 
     // propagate signals
     connect( mDocument, SIGNAL(titleChanged(QString)), SIGNAL(titleChanged(QString)) );
-    connect( mDocument, SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)),
-                        SIGNAL(localSyncStateChanged(Kasten1::LocalSyncState)) );
-    connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten1::RemoteSyncState)),
-                        SIGNAL(remoteSyncStateChanged(Kasten1::RemoteSyncState)) );
+    connect( mDocument, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                        SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)) );
+    connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+                        SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)) );
     connect( mWidget, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );
     connect( mWidget, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
     connect( mWidget, SIGNAL(overwriteModeChanged(bool)), SIGNAL(overwriteModeChanged(bool)) );

@@ -31,7 +31,7 @@
 class KTextEdit;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractByteArrayStreamEncoder;

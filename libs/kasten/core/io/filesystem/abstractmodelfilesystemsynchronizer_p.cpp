@@ -28,7 +28,7 @@
 
 #include <KDebug>
 
-namespace Kasten1
+namespace Kasten2
 {
 
 void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()

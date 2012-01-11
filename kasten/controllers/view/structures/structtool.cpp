@@ -42,7 +42,7 @@
 #include "datatypes/topleveldatainformation.h"
 #include "datatypes/datainformation.h"
 
-namespace Kasten1
+namespace Kasten2
 {
 
 StructTool::StructTool() :

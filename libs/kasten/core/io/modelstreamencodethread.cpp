@@ -26,7 +26,7 @@
 #include "abstractmodelstreamencoder.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 void ModelStreamEncodeThread::run()

@@ -24,7 +24,7 @@
 #include "modelencoderfilesystemexportjob_p.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob( AbstractModel* model,

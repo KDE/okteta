@@ -42,7 +42,7 @@
 #include <QtGui/QTreeView>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )

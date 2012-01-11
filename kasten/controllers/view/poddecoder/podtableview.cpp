@@ -40,7 +40,7 @@
 #include <QtGui/QFontMetrics>
 
 #include <KDebug>
-namespace Kasten1
+namespace Kasten2
 {
 
 PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )

@@ -23,7 +23,7 @@
 #include "abstractmodeldatageneratorconfigeditor.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractModelDataGeneratorConfigEditor::AbstractModelDataGeneratorConfigEditor( QWidget* parent )

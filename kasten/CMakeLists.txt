@@ -2,7 +2,7 @@ project( oktetakasten )
 
 add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1806 )
 
-set( KASTEN_ABI_VERSION 1 )
+set( KASTEN_ABI_VERSION 2 )
 set( KASTENCORE_LIBS  kasten${KASTEN_ABI_VERSION}core )
 set( KASTENGUI_LIBS  kasten${KASTEN_ABI_VERSION}gui )
 set( KASTENCONTROLLERS_LIBS  kasten${KASTEN_ABI_VERSION}controllers )

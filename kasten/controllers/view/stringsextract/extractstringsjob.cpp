@@ -30,7 +30,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static const int ExtractStringBlockSize = 100000;

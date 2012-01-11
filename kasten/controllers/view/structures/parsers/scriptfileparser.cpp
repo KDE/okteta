@@ -26,7 +26,7 @@
 #include "../datatypes/topleveldatainformation.h"
 #include <QScriptEngine>
 
-ScriptFileParser::ScriptFileParser(const Kasten1::StructureDefinitionFile* const def) :
+ScriptFileParser::ScriptFileParser(const Kasten2::StructureDefinitionFile* const def) :
     AbstractStructureParser(def), mParsedCompletely(false)
 {
 }

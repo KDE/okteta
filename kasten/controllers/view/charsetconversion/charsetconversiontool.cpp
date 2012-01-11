@@ -38,7 +38,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 CharsetConversionTool::CharsetConversionTool()
@@ -100,7 +100,7 @@ void CharsetConversionTool::setTargetModel( AbstractModel* model )
     {
         connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
                  SLOT(onViewChanged()) );
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten1::AbstractModelSelection*)),
+        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
                  SLOT(onViewChanged()) );
     }
 

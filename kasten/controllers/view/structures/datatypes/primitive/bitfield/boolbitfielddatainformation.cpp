@@ -25,16 +25,16 @@
 
 int BoolBitfieldDataInformation::displayBase() const
 {
-    int base = Kasten1::StructViewPreferences::unsignedDisplayBase();
-    if (base == Kasten1::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
+    int base = Kasten2::StructViewPreferences::unsignedDisplayBase();
+    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
     {
         return 2;
     }
-    if (base == Kasten1::StructViewPreferences::EnumUnsignedDisplayBase::Decimal)
+    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Decimal)
     {
         return 10;
     }
-    if (base == Kasten1::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
+    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
     {
         return 16;
     }
@@ -56,7 +56,7 @@ QString BoolBitfieldDataInformation::valueString() const
         QString num = QString::number(val, base);
         if (base == 16)
             num.prepend(QLatin1String("0x"));
-        if (Kasten1::StructViewPreferences::localeAwareDecimalFormatting() && base
+        if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting() && base
                 == 10)
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return i18nc("boolean value with actual value", "true (%1)", num);

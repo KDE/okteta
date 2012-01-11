@@ -28,7 +28,7 @@
 class ScriptFileParser: public AbstractStructureParser
 {
 public:
-    ScriptFileParser(const Kasten1::StructureDefinitionFile* const def);
+    ScriptFileParser(const Kasten2::StructureDefinitionFile* const def);
     virtual ~ScriptFileParser();
 
     virtual QStringList parseStructureNames();

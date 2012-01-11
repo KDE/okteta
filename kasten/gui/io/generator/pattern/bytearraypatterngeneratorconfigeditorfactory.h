@@ -29,7 +29,7 @@
 #include <abstractmodeldatageneratorconfigeditorfactory.h>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ByteArrayPatternGeneratorConfigEditorFactory : public AbstractModelDataGeneratorConfigEditorFactory

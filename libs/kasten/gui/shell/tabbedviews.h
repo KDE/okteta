@@ -30,7 +30,7 @@
 class QMimeData;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ViewAreaBox;
@@ -43,7 +43,7 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
 {
   Q_OBJECT
   Q_INTERFACES(
-    Kasten1::If::ToolInlineViewable
+    Kasten2::If::ToolInlineViewable
   )
 
   protected:
@@ -82,7 +82,7 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
     Q_PRIVATE_SLOT( d_func(), void onCurrentChanged( int index ) )
     Q_PRIVATE_SLOT( d_func(), void onCloseRequest( QWidget* widget ) )
     Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& title ) )
-//     Q_PRIVATE_SLOT( d_func(), void onModifiedChanged( Kasten1::AbstractDocument::SyncStates newStates ) )
+//     Q_PRIVATE_SLOT( d_func(), void onModifiedChanged( Kasten2::AbstractDocument::SyncStates newStates ) )
     Q_PRIVATE_SLOT( d_func(), void onViewFocusChanged( bool focusChanged ) )
     Q_PRIVATE_SLOT( d_func(), void onMouseMiddleClick() )
     Q_PRIVATE_SLOT( d_func(), void onDragMoveEvent( const QDragMoveEvent*, bool& ) )

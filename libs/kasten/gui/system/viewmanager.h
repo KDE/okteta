@@ -30,7 +30,7 @@
 #include <QtCore/QObject>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ModelCodecViewManager;
@@ -60,14 +60,14 @@ class KASTENGUI_EXPORT ViewManager : public QObject
     ModelCodecViewManager* codecViewManager();
 
   public Q_SLOTS:
-    void createViewsFor( const QList<Kasten1::AbstractDocument*>& documents );
-    void removeViewsFor( const QList<Kasten1::AbstractDocument*>& documents );
+    void createViewsFor( const QList<Kasten2::AbstractDocument*>& documents );
+    void removeViewsFor( const QList<Kasten2::AbstractDocument*>& documents );
 
   Q_SIGNALS:
     // view was created and already added to the list
-    void opened( const QList<Kasten1::AbstractView*>& views );
+    void opened( const QList<Kasten2::AbstractView*>& views );
     // view will be closed, already removed from list
-    void closing( const QList<Kasten1::AbstractView*>& views );
+    void closing( const QList<Kasten2::AbstractView*>& views );
 
   protected:
     QList<AbstractView*> mViewList;

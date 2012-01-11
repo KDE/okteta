@@ -31,53 +31,53 @@
 #include <QtTest/QSignalSpy>
 
 
-Q_DECLARE_METATYPE( QList<Kasten1::AbstractDocument*> )
+Q_DECLARE_METATYPE( QList<Kasten2::AbstractDocument*> )
 
-void DocumentManagerTest::checkAdded( QSignalSpy* changedSpy, Kasten1::AbstractDocument* document )
+void DocumentManagerTest::checkAdded( QSignalSpy* changedSpy, Kasten2::AbstractDocument* document )
 {
     QVERIFY( changedSpy->isValid() );
     QCOMPARE( changedSpy->count(), 1 );
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE( arguments.count(), 1 );
     const QVariant firstArgument = arguments.at(0);
-    const QList<Kasten1::AbstractDocument*> documents =
-        arguments.at(0).value<QList<Kasten1::AbstractDocument*> >();
+    const QList<Kasten2::AbstractDocument*> documents =
+        arguments.at(0).value<QList<Kasten2::AbstractDocument*> >();
     QCOMPARE( documents.count(), 1 );
     QCOMPARE( documents.at(0), document );
 }
 
-void DocumentManagerTest::checkRemoving( QSignalSpy* changedSpy, Kasten1::AbstractDocument* document )
+void DocumentManagerTest::checkRemoving( QSignalSpy* changedSpy, Kasten2::AbstractDocument* document )
 {
     QVERIFY( changedSpy->isValid() );
     QCOMPARE( changedSpy->count(), 1 );
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE( arguments.count(), 1 );
-    const QList<Kasten1::AbstractDocument*> documents =
-        arguments.at(0).value<QList<Kasten1::AbstractDocument*> >();
+    const QList<Kasten2::AbstractDocument*> documents =
+        arguments.at(0).value<QList<Kasten2::AbstractDocument*> >();
     QCOMPARE( documents.count(), 1 );
     QCOMPARE( documents.at(0), document );
 }
 
 void DocumentManagerTest::initTestCase()
 {
-    qRegisterMetaType<QList<Kasten1::AbstractDocument*> >("QList<Kasten1::AbstractDocument*>");
+    qRegisterMetaType<QList<Kasten2::AbstractDocument*> >("QList<Kasten2::AbstractDocument*>");
 }
 
 void DocumentManagerTest::testConstructor()
 {
-    Kasten1::DocumentManager* documentManager = new Kasten1::DocumentManager();
+    Kasten2::DocumentManager* documentManager = new Kasten2::DocumentManager();
     delete documentManager;
 }
 
 void DocumentManagerTest::testAddRemove()
 {
-    Kasten1::TestDocument* doc1 = new Kasten1::TestDocument();
-    Kasten1::TestDocument* doc2 = new Kasten1::TestDocument();
-    Kasten1::TestDocument* doc3 = new Kasten1::TestDocument();
+    Kasten2::TestDocument* doc1 = new Kasten2::TestDocument();
+    Kasten2::TestDocument* doc2 = new Kasten2::TestDocument();
+    Kasten2::TestDocument* doc3 = new Kasten2::TestDocument();
 
-    Kasten1::DocumentManager* documentManager = new Kasten1::DocumentManager();
-    QSignalSpy* addedSpy = new QSignalSpy( documentManager, SIGNAL(added(QList<Kasten1::AbstractDocument*>)) );
-    QSignalSpy* closingSpy = new QSignalSpy( documentManager, SIGNAL(closing(QList<Kasten1::AbstractDocument*>)) );
+    Kasten2::DocumentManager* documentManager = new Kasten2::DocumentManager();
+    QSignalSpy* addedSpy = new QSignalSpy( documentManager, SIGNAL(added(QList<Kasten2::AbstractDocument*>)) );
+    QSignalSpy* closingSpy = new QSignalSpy( documentManager, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)) );
 
     documentManager->addDocument( doc1 );
     checkAdded( addedSpy, doc1 );
@@ -102,13 +102,13 @@ void DocumentManagerTest::testAddRemove()
 
 void DocumentManagerTest::testCanClose()
 {
-    Kasten1::TestDocument* doc = new Kasten1::TestDocument();
+    Kasten2::TestDocument* doc = new Kasten2::TestDocument();
 
-    Kasten1::DocumentManager* documentManager = new Kasten1::DocumentManager();
+    Kasten2::DocumentManager* documentManager = new Kasten2::DocumentManager();
     documentManager->addDocument( doc );
     QVERIFY( documentManager->canClose(doc) );
 
-//     doc->setSyncStates( Kasten1::LocalHasChanges );
+//     doc->setSyncStates( Kasten2::LocalHasChanges );
 //     QVERIFY( !documentManager->canClose(doc) );
 
     delete documentManager;

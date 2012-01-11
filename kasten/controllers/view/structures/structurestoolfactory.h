@@ -28,7 +28,7 @@
 // Kasten core
 #include <abstracttoolfactory.h>
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class OKTETAKASTENCONTROLLERS_EXPORT StructuresToolFactory: public AbstractToolFactory

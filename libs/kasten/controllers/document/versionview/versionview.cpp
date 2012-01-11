@@ -33,7 +33,7 @@
 #include <QtGui/QTreeView>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
@@ -54,8 +54,8 @@ VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
 
     baseLayout->addWidget( mVersionTableView, 10 );
 
-    connect( mTool, SIGNAL(modelChanged(Kasten1::AbstractModel*)),
-             SLOT(setModel(Kasten1::AbstractModel*)) );
+    connect( mTool, SIGNAL(modelChanged(Kasten2::AbstractModel*)),
+             SLOT(setModel(Kasten2::AbstractModel*)) );
 
     setModel( mTool->model() );
 }

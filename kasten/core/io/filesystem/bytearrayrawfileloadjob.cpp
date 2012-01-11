@@ -33,7 +33,7 @@
 #include <QtCore/QCoreApplication>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer *synchronizer, const KUrl &url )

@@ -31,7 +31,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 class AbstractView;
 class DocumentManager;

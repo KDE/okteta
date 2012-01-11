@@ -29,7 +29,7 @@
 #include <QtGui/QFormLayout>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEditor( ByteArrayRandomDataGenerator* generator, QWidget* parent )

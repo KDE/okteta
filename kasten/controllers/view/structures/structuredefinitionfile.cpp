@@ -33,7 +33,7 @@
 #include "parsers/osdparser.h"
 #include "parsers/scriptfileparser.h"
 
-namespace Kasten1
+namespace Kasten2
 {
 StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
     mPluginInfo(info), mValid(true), mStructureNamesParsed(false),

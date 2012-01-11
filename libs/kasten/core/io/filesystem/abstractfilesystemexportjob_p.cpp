@@ -27,7 +27,7 @@
 #include <KTemporaryFile>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 void AbstractFileSystemExportJobPrivate::exportToFile()

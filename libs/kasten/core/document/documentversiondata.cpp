@@ -23,7 +23,7 @@
 #include "documentversiondata.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 DocumentVersionData::DocumentVersionData( DocumentVersionId id, const QString& changeComment )

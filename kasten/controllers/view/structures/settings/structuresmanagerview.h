@@ -35,7 +35,7 @@ namespace KNS3
 {
 class Button;
 }
-namespace Kasten1
+namespace Kasten2
 {
 class StructuresManager;
 }
@@ -45,7 +45,7 @@ class StructuresManagerView: public QWidget
 Q_OBJECT
 
 public:
-    explicit StructuresManagerView(Kasten1::StructuresManager* manager,
+    explicit StructuresManagerView(Kasten2::StructuresManager* manager,
             QWidget* parent = 0);
 
     virtual ~StructuresManagerView();
@@ -63,7 +63,7 @@ Q_SIGNALS:
 private:
     void rebuildPluginSelectorEntries();
 private:
-    Kasten1::StructuresManager* mManager;
+    Kasten2::StructuresManager* mManager;
 
     KNS3::Button* mGetNewStructuresButton;
     //    KPushButton* mUpdateStructuresButton;

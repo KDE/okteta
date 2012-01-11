@@ -30,7 +30,7 @@
 #include "abstractmodelsynchronizer.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractDocumentPrivate : public AbstractModelPrivate
@@ -85,13 +85,13 @@ inline void AbstractDocumentPrivate::setSynchronizer( AbstractModelSynchronizer*
     if( mSynchronizer == synchronizer )
         return;
 
-    const Kasten1::RemoteSyncState oldRemoteState = remoteSyncState();
-    const Kasten1::RemoteSyncState newRemoteState = synchronizer->remoteSyncState();
+    const Kasten2::RemoteSyncState oldRemoteState = remoteSyncState();
+    const Kasten2::RemoteSyncState newRemoteState = synchronizer->remoteSyncState();
 
     delete mSynchronizer;
     mSynchronizer = synchronizer;
-    q->connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten1::RemoteSyncState)),
-                q, SIGNAL(remoteSyncStateChanged(Kasten1::RemoteSyncState)) );
+    q->connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+                q, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)) );
 
     emit q->synchronizerChanged( synchronizer );
     if( oldRemoteState != newRemoteState )

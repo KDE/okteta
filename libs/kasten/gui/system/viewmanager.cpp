@@ -33,7 +33,7 @@
 #include "modelcodecviewmanager.h"
 
 #include <KDebug>
-namespace Kasten1
+namespace Kasten2
 {
 
 ViewManager::ViewManager()
@@ -80,15 +80,15 @@ void ViewManager::createCopyOfView( AbstractView* view, Qt::Alignment alignment 
 
     mViewList.append( viewCopy );
 
-    QList<Kasten1::AbstractView*> views;
+    QList<Kasten2::AbstractView*> views;
     views.append( viewCopy );
 
     emit opened( views );
 }
 
-void ViewManager::createViewsFor( const QList<Kasten1::AbstractDocument*>& documents )
+void ViewManager::createViewsFor( const QList<Kasten2::AbstractDocument*>& documents )
 {
-    QList<Kasten1::AbstractView*> openedViews;
+    QList<Kasten2::AbstractView*> openedViews;
 
     foreach( AbstractDocument* document, documents )
     {
@@ -105,9 +105,9 @@ void ViewManager::createViewsFor( const QList<Kasten1::AbstractDocument*>& docum
 }
 
 
-void ViewManager::removeViewsFor( const QList<Kasten1::AbstractDocument*>& documents )
+void ViewManager::removeViewsFor( const QList<Kasten2::AbstractDocument*>& documents )
 {
-    QList<Kasten1::AbstractView*> closedViews;
+    QList<Kasten2::AbstractView*> closedViews;
 
     QMutableListIterator<AbstractView*> it( mViewList );
     foreach( AbstractDocument* document, documents )

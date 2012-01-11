@@ -49,13 +49,13 @@ kde4_add_app_icon(okteta_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/hi*-app-okteta.png")
 kde4_add_executable( okteta  ${okteta_SRCS} )
 
 target_link_libraries( okteta
+  kasten2okteta1controllers
+  kasten2okteta1gui
+  kasten2okteta1core
+  kasten2controllers
+  kasten2gui
+  kasten2core
   ${KDE4_KDEUI_LIBS}
-  kasten1okteta1controllers
-  kasten1okteta1gui
-  kasten1okteta1core
-  kasten1controllers
-  kasten1gui
-  kasten1core
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )

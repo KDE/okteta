@@ -28,7 +28,7 @@
 // KDE
 #include <KParts/ReadWritePart>
 
-namespace Kasten1 {
+namespace Kasten2 {
 class ByteArrayView;
 class ByteArrayDocument;
 class PrintController;
@@ -56,7 +56,7 @@ class OktetaPart : public KParts::ReadWritePart
     virtual ~OktetaPart();
 
   public:
-    Kasten1::PrintController* printController() const;
+    Kasten2::PrintController* printController() const;
 
   public: // KParts::ReadWritePart API
     virtual void setReadWrite( bool readWrite = true );
@@ -74,24 +74,24 @@ class OktetaPart : public KParts::ReadWritePart
     void setupActions( bool browserViewWanted );
 
   protected:
-    Kasten1::ByteArrayView* byteArrayView() const;
+    Kasten2::ByteArrayView* byteArrayView() const;
 
   protected Q_SLOTS:
-    void onDocumentLoaded( Kasten1::AbstractDocument* document );
-    void onModified( Kasten1::LocalSyncState state );
+    void onDocumentLoaded( Kasten2::AbstractDocument* document );
+    void onModified( Kasten2::LocalSyncState state );
 
   private:
     const Modus mModus;
     QVBoxLayout* mLayout;
 
-    Kasten1::ByteArrayDocument* mDocument;
-    Kasten1::ByteArrayView* mByteArrayView;
+    Kasten2::ByteArrayDocument* mDocument;
+    Kasten2::ByteArrayView* mByteArrayView;
 
-    Kasten1::PrintController* mPrintController;
-    QList<Kasten1::AbstractXmlGuiController*> mControllers;
+    Kasten2::PrintController* mPrintController;
+    QList<Kasten2::AbstractXmlGuiController*> mControllers;
 };
 
 
-inline Kasten1::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView; }
+inline Kasten2::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView; }
 
 #endif

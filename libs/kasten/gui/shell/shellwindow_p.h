@@ -31,7 +31,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 class AbstractTool;
 
@@ -58,8 +58,8 @@ class ShellWindowPrivate
 
   private: // Q_SLOTS
     void onTitleChanged( const QString& newTitle );
-    void onLocalSyncStateChanged( Kasten1::LocalSyncState newState );
-    void onViewFocusChanged( Kasten1::AbstractView* view );
+    void onLocalSyncStateChanged( Kasten2::LocalSyncState newState );
+    void onViewFocusChanged( Kasten2::AbstractView* view );
     void onToolVisibilityChanged( bool isVisible );
 
   protected:

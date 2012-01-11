@@ -36,7 +36,7 @@ class CharCodec;
 }
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class CharsetConversionJob : public QObject // not yet: KJob

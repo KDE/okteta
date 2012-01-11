@@ -23,7 +23,7 @@
 #include "abstractmodelstreamencoderconfigeditor.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 AbstractModelStreamEncoderConfigEditor::AbstractModelStreamEncoderConfigEditor( QWidget* parent )

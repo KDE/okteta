@@ -36,7 +36,7 @@
 #include "modelcodecmanager.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static int lastDocumentId = 0;

@@ -33,7 +33,7 @@
 class QLabel;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class AbstractDocument;
@@ -51,8 +51,8 @@ class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiCont
     virtual void setTargetModel( AbstractModel* model );
 
   protected Q_SLOTS: // action slots
-    void onLocalSyncStateChanged( Kasten1::LocalSyncState localSyncState );
-    void onRemoteSyncStateChanged( Kasten1::RemoteSyncState remoteSyncState );
+    void onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState );
+    void onRemoteSyncStateChanged( Kasten2::RemoteSyncState remoteSyncState );
 
   protected:
     AbstractDocument* mDocument;

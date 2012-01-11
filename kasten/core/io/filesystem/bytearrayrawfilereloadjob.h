@@ -27,7 +27,7 @@
 #include <abstractfilesystemsyncfromremotejob.h>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class ByteArrayRawFileSynchronizer;

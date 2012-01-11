@@ -34,7 +34,7 @@ class QDragMoveEvent;
 class QDropEvent;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class TabbedViews;

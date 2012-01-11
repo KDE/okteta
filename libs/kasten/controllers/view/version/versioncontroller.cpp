@@ -36,7 +36,7 @@
 #include <QtGui/QMenu>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 static const int MaxMenuEntries = 10;

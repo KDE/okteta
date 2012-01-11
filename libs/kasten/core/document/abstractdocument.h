@@ -30,7 +30,7 @@
 #include "abstractmodel.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 class AbstractModelSynchronizer;
 class AbstractDocumentPrivate;
@@ -73,10 +73,10 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
   Q_SIGNALS:
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
-    void localSyncStateChanged( Kasten1::LocalSyncState newState );
-    void remoteSyncStateChanged( Kasten1::RemoteSyncState newState );
-    void synchronizerChanged( Kasten1::AbstractModelSynchronizer* newSynchronizer );
-    void liveSynchronizerChanged( Kasten1::AbstractModelSynchronizer* newSynchronizer );
+    void localSyncStateChanged( Kasten2::LocalSyncState newState );
+    void remoteSyncStateChanged( Kasten2::RemoteSyncState newState );
+    void synchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
+    void liveSynchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
 
   protected:
     void setId( const QString& id );

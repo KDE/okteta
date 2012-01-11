@@ -36,7 +36,7 @@
 #include <KAction>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 // KSharedConfigPtr KSharedConfig::openConfig(profileName, KConfig::SimpleConfig, "data")
 

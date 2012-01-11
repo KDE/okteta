@@ -29,7 +29,7 @@
 #include <QtGui/QAction>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ToolListMenuController::ToolListMenuController( /*If::WidgetsDockable* widgetsDockable,

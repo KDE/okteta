@@ -30,7 +30,7 @@
 class KLineEdit;
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 class BookmarkEditPopup : public AbstractLinePopup

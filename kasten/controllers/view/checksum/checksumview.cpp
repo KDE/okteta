@@ -46,7 +46,7 @@
 #include <QtGui/QAbstractItemView>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )

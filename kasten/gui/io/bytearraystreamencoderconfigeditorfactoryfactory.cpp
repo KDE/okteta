@@ -39,7 +39,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 QList<AbstractModelStreamEncoderConfigEditorFactory*> ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys()

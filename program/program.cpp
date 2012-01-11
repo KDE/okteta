@@ -50,7 +50,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 // static const char OffsetOptionId[] = "offset";

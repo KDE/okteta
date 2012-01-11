@@ -24,7 +24,7 @@
 #include "togglebutton.h"
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ToggleButtonPrivate::ToggleButtonPrivate( ToggleButton* parent ) : p( parent )

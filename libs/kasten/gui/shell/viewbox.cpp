@@ -28,7 +28,7 @@
 #include <QtGui/QVBoxLayout>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 ViewBox::ViewBox( AbstractView* view, QWidget* parent )

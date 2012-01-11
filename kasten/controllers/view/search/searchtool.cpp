@@ -37,7 +37,7 @@
 #include <QtGui/QApplication>
 
 
-namespace Kasten1
+namespace Kasten2
 {
 
 SearchTool::SearchTool()
