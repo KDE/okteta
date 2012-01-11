@@ -151,12 +151,11 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView *view )
     q->setCaption( title, changes );
 
     if( view )
-    {
         QObject::connect( view, SIGNAL(titleChanged(QString)),
                           q, SLOT(onTitleChanged(QString)) );
-        QObject::connect( view, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+    if( document )
+        QObject::connect( document, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
                           q, SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
-    }
 }
 
 void ShellWindowPrivate::onToolVisibilityChanged( bool isVisible )

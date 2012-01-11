@@ -74,11 +74,10 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
     q->setCaption( title, changes );
 
     if( view )
-    {
         q->connect( view, SIGNAL(titleChanged(QString)), SLOT(onTitleChanged(QString)) );
-        q->connect( view, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                          SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
-    }
+    if( document )
+        q->connect( document, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                              SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
 }
 
 void SingleViewWindowPrivate::addXmlGuiController( AbstractXmlGuiController* controller )
