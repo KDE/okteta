@@ -57,7 +57,7 @@ void StatisticTableModel::update( int size )
     emit sizeChanged( mSize );
 }
 
-void StatisticTableModel::setUndefinedChar( const QChar &undefinedChar )
+void StatisticTableModel::setUndefinedChar( QChar undefinedChar )
 {
     mUndefinedChar = undefinedChar;
 

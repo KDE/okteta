@@ -63,11 +63,11 @@ class StatisticTableModel : public QAbstractTableModel
 
   public:
     void update( int size );
-    void setUndefinedChar( const QChar &undefinedChar );
 
   public Q_SLOTS:
     void setCharCodec( const QString &codecName );
     void setValueCoding( int valueCoding );
+    void setUndefinedChar( QChar undefinedChar );
 
   Q_SIGNALS:
     void headerChanged();

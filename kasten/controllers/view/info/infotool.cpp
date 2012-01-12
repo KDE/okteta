@@ -64,8 +64,11 @@ bool InfoTool::isStatisticUptodate() const
 
 void InfoTool::setTargetModel( AbstractModel* model )
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( mStatisticTableModel );
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if( mByteArrayView )
+    {
+        mByteArrayView->disconnect( mStatisticTableModel );
+        mByteArrayView->disconnect( this );
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
 
@@ -77,10 +80,14 @@ void InfoTool::setTargetModel( AbstractModel* model )
     {
         mStatisticTableModel->setCharCodec( mByteArrayView->charCodingName() );
         mStatisticTableModel->setValueCoding( mByteArrayView->valueCoding() );
+        mStatisticTableModel->setUndefinedChar( mByteArrayView->undefinedChar() );
         connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
                  mStatisticTableModel, SLOT(setCharCodec(QString)) );
         connect( mByteArrayView,  SIGNAL(valueCodingChanged(int)),
                  mStatisticTableModel, SLOT(setValueCoding(int)) );
+        connect( mByteArrayView,  SIGNAL(undefinedCharChanged(QChar)),
+                 mStatisticTableModel, SLOT(setUndefinedChar(QChar)) );
+
         connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
                  SLOT(onSelectionChanged()) );
     }
