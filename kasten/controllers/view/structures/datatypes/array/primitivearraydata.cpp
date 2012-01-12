@@ -31,6 +31,8 @@ qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input,
     BitCount64 bitsRemaining)
 {
     Q_ASSERT(bitsRemaining % 8 == 0);
+    if (this->length() == 0)
+        return 0; //no need to read anything
     //integer division -> gives us the desired result, limited by the number of items in this array
     const quint64 maxRemaining = (bitsRemaining / 8) / sizeof(T);
     //since its 64 bits may be larger than a 32 bit value and have all lower 32 bits as zero
