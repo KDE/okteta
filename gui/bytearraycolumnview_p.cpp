@@ -150,9 +150,13 @@ void ByteArrayColumnViewPrivate::setByteSpacingWidth( int/*PixelX*/ byteSpacingW
 
 void ByteArrayColumnViewPrivate::setNoOfGroupedBytes( int noOfGroupedBytes )
 {
+    Q_Q( ByteArrayColumnView );
+
     if( !mValueColumn->setNoOfGroupedBytes(noOfGroupedBytes) )
         return;
     updateViewByWidth();
+
+    emit q->noOfGroupedBytesChanged( noOfGroupedBytes );
 }
 
 
@@ -181,6 +185,8 @@ void ByteArrayColumnViewPrivate::setSubstituteChar( QChar substituteChar )
     pauseCursor();
     q->updateColumn( *mCharColumn );
     unpauseCursor();
+
+    emit q->substituteCharChanged( substituteChar );
 }
 
 void ByteArrayColumnViewPrivate::setUndefinedChar( QChar undefinedChar )
@@ -192,6 +198,8 @@ void ByteArrayColumnViewPrivate::setUndefinedChar( QChar undefinedChar )
     pauseCursor();
     q->updateColumn( *mCharColumn );
     unpauseCursor();
+
+    emit q->undefinedCharChanged( undefinedChar );
 }
 
 void ByteArrayColumnViewPrivate::setShowsNonprinting( bool showingNonprinting )
@@ -203,6 +211,8 @@ void ByteArrayColumnViewPrivate::setShowsNonprinting( bool showingNonprinting )
     pauseCursor();
     q->updateColumn( *mCharColumn );
     unpauseCursor();
+
+    emit q->showsNonprintingChanged( showingNonprinting );
 }
 
 
@@ -476,6 +486,8 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
 
 void ByteArrayColumnViewPrivate::setVisibleCodings( int newColumns )
 {
+    Q_Q( ByteArrayColumnView );
+
     const int oldColumns = visibleCodings();
 
     // no changes or no column selected?
@@ -496,6 +508,8 @@ void ByteArrayColumnViewPrivate::setVisibleCodings( int newColumns )
     }
 
     updateViewByWidth();
+
+    emit q->visibleByteArrayCodingsChanged( newColumns );
 }
 
 

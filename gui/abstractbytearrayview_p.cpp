@@ -232,6 +232,8 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* by
 
 void AbstractByteArrayViewPrivate::toggleOffsetColumn( bool showOffsetColumn )
 {
+    Q_Q( AbstractByteArrayView );
+
     const bool isVisible = mOffsetColumn->isVisible();
     // no change?
     if( isVisible == showOffsetColumn )
@@ -240,6 +242,8 @@ void AbstractByteArrayViewPrivate::toggleOffsetColumn( bool showOffsetColumn )
     mOffsetColumn->setVisible( showOffsetColumn );
 
     updateViewByWidth();
+
+    emit q->offsetColumnVisibleChanged( showOffsetColumn );
 }
 
 
@@ -384,6 +388,8 @@ void AbstractByteArrayViewPrivate::setFirstLineOffset( Address firstLineOffset )
 
 void AbstractByteArrayViewPrivate::setLayoutStyle( AbstractByteArrayView::LayoutStyle layoutStyle )
 {
+    Q_Q( AbstractByteArrayView );
+
     const bool isChanged = ( mResizeStyle != layoutStyle );
 
     if( !isChanged )
@@ -391,10 +397,14 @@ void AbstractByteArrayViewPrivate::setLayoutStyle( AbstractByteArrayView::Layout
 
     mResizeStyle = layoutStyle;
     updateViewByWidth();
+
+    emit q->layoutStyleChanged( mResizeStyle );
 }
 
 void AbstractByteArrayViewPrivate::setNoOfBytesPerLine( int noOfBytesPerLine )
 {
+    Q_Q( AbstractByteArrayView );
+
     // if the number is explicitly set we expect a wish for no automatic resize
     setLayoutStyle( AbstractByteArrayView::FixedLayoutStyle );
 
@@ -402,6 +412,8 @@ void AbstractByteArrayViewPrivate::setNoOfBytesPerLine( int noOfBytesPerLine )
         return;
 
     updateViewByWidth();
+
+    emit q->noOfBytesPerLineChanged( mTableLayout->noOfBytesPerLine() );
 }
 
 

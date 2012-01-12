@@ -132,9 +132,13 @@ void ByteArrayRowViewPrivate::setByteSpacingWidth( int/*PixelX*/ byteSpacingWidt
 
 void ByteArrayRowViewPrivate::setNoOfGroupedBytes( int noOfGroupedBytes )
 {
+    Q_Q( ByteArrayRowView );
+
     if( !mByteArrayColumn->setNoOfGroupedBytes(noOfGroupedBytes) )
         return;
     updateViewByWidth();
+
+    emit q->noOfGroupedBytesChanged( noOfGroupedBytes );
 }
 
 
@@ -163,6 +167,8 @@ void ByteArrayRowViewPrivate::setSubstituteChar( QChar substituteChar )
     pauseCursor();
     q->updateColumn( *mByteArrayColumn );
     unpauseCursor();
+
+    emit q->substituteCharChanged( substituteChar );
 }
 
 void ByteArrayRowViewPrivate::setUndefinedChar( QChar undefinedChar )
@@ -174,6 +180,8 @@ void ByteArrayRowViewPrivate::setUndefinedChar( QChar undefinedChar )
     pauseCursor();
     q->updateColumn( *mByteArrayColumn );
     unpauseCursor();
+
+    emit q->undefinedCharChanged( undefinedChar );
 }
 
 void ByteArrayRowViewPrivate::setShowsNonprinting( bool showingNonprinting )
@@ -185,6 +193,8 @@ void ByteArrayRowViewPrivate::setShowsNonprinting( bool showingNonprinting )
     pauseCursor();
     q->updateColumn( *mByteArrayColumn );
     unpauseCursor();
+
+    emit q->showsNonprintingChanged( showingNonprinting );
 }
 
 
@@ -469,6 +479,8 @@ void ByteArrayRowViewPrivate::setVisibleCodings( int newCodings )
     q->setLineHeight( rowHeight );
 
     updateViewByWidth();
+
+    emit q->visibleByteArrayCodingsChanged( newCodings );
 }
 
 

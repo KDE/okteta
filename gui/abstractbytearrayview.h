@@ -372,6 +372,15 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void valueCodingChanged( int valueCoding );
     void focusChanged( bool hasFocus );
 
+    void offsetColumnVisibleChanged( bool visible );
+    void visibleByteArrayCodingsChanged( int columns );
+    void layoutStyleChanged( int layoutStyle );
+    void noOfBytesPerLineChanged( int noOfBytesPerLine );
+    void showsNonprintingChanged( bool showsNonprinting );
+    void substituteCharChanged( QChar substituteChar );
+    void undefinedCharChanged( QChar undefinedChar );
+    void noOfGroupedBytesChanged( int noOfGroupedBytes );
+
   protected:
     void finishByteEdit();
     void emitSelectionSignals();
