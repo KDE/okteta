@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -119,20 +119,25 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
     const bool hasView = ( mByteArrayView != 0 );
     if( hasView )
     {
-        mShowOffsetColumnAction->setChecked( mByteArrayView->offsetColumnVisible() );
-        mShowsNonprintingAction->setChecked( mByteArrayView->showsNonprinting() );
+        onOffsetColumnVisibleChanged( mByteArrayView->offsetColumnVisible() );
+        onShowsNonprintingChanged( mByteArrayView->showsNonprinting() );
+        onValueCodingChanged( mByteArrayView->valueCoding() );
+        onCharCodecChanged( mByteArrayView->charCodingName() );
+        onLayoutStyleChanged( mByteArrayView->layoutStyle() );
+        onVisibleByteArrayCodingsChanged( mByteArrayView->visibleByteArrayCodings() );
 
-        mCodingAction->setCurrentItem( mByteArrayView->valueCoding() );
-        mEncodingAction->setCurrentItem( Okteta::CharCodec::codecNames().indexOf(mByteArrayView->charCodingName()) );
-
-        mResizeStyleAction->setCurrentItem( mByteArrayView->layoutStyle() );
-
-        mToggleColumnsAction->setCurrentItem( mByteArrayView->visibleByteArrayCodings()-1 );
-
+        connect( mByteArrayView, SIGNAL(offsetColumnVisibleChanged(bool)),
+                 SLOT(onOffsetColumnVisibleChanged(bool)) );
+        connect( mByteArrayView, SIGNAL(showsNonprintingChanged(bool)),
+                 SLOT(onShowsNonprintingChanged(bool)) );
         connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
         connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
             SLOT(onCharCodecChanged(QString)) );
+        connect( mByteArrayView, SIGNAL(layoutStyleChanged(int)), SLOT(onLayoutStyleChanged(int)) );
+        connect( mByteArrayView, SIGNAL(visibleByteArrayCodingsChanged(int)),
+                 SLOT(onVisibleByteArrayCodingsChanged(int)) );
     }
+
     mCodingAction->setEnabled( hasView );
     mEncodingAction->setEnabled( hasView );
     mShowsNonprintingAction->setEnabled( hasView );
@@ -195,6 +200,16 @@ void ViewConfigController::toggleValueCharColumns( int visibleColumns )
     mByteArrayView->setVisibleByteArrayCodings( visibleColumns+1 );
 }
 
+void ViewConfigController::onOffsetColumnVisibleChanged( bool offsetColumnVisible )
+{
+    mShowOffsetColumnAction->setChecked( offsetColumnVisible );
+}
+
+void ViewConfigController::onShowsNonprintingChanged( bool showsNonprinting )
+{
+    mShowsNonprintingAction->setChecked( showsNonprinting );
+}
+
 void ViewConfigController::onValueCodingChanged( int valueCoding )
 {
     mCodingAction->setCurrentItem( valueCoding );
@@ -205,6 +220,16 @@ void ViewConfigController::onCharCodecChanged( const QString& charCodecName )
     const int charCodingIndex = Okteta::CharCodec::codecNames().indexOf( charCodecName );
 
     mEncodingAction->setCurrentItem( charCodingIndex );
+}
+
+void ViewConfigController::onLayoutStyleChanged( int layoutStyle )
+{
+    mResizeStyleAction->setCurrentItem( layoutStyle );
+}
+
+void ViewConfigController::onVisibleByteArrayCodingsChanged( int visibleByteArrayCodings )
+{
+    mToggleColumnsAction->setCurrentItem( visibleByteArrayCodings-1 );
 }
 
 }
