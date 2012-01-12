@@ -141,6 +141,9 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     void setMarking( const Okteta::AddressRange& range, bool ensureVisible = false );
     bool offsetColumnVisible() const;
     int visibleByteArrayCodings() const;
+  Q_SIGNALS:
+    void offsetColumnVisibleChanged( bool visible );
+    void visibleByteArrayCodingsChanged( int columns );
 
   public: // table layout
     void setLayoutStyle( int layoutStyle );
@@ -149,12 +152,15 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     Okteta::Address firstLineOffset() const;
     int noOfBytesPerLine() const;
     int layoutStyle() const;
+  Q_SIGNALS:
+    void layoutStyleChanged( int layoutStyle );
+    void noOfBytesPerLineChanged( int noOfBytesPerLine );
 
   public: // layout settings
     void setShowsNonprinting( bool showsNonprinting = true );
     void setNoOfGroupedBytes( int noOfGroupedBytes );
-    void setSubstituteChar( const QChar& substituteChar );
-    void setUndefinedChar( const QChar& undefinedChar );
+    void setSubstituteChar( QChar substituteChar );
+    void setUndefinedChar( QChar undefinedChar );
     QChar substituteChar() const;
     QChar undefinedChar() const;
     bool showsNonprinting() const;
@@ -163,10 +169,17 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     int noOfGroupedBytes() const;
     int groupSpacingWidth() const;
     int binaryGapWidth() const;
+  Q_SIGNALS:
+    void showsNonprintingChanged( bool showsNonprinting );
+    void substituteCharChanged( QChar substituteChar );
+    void undefinedCharChanged( QChar undefinedChar );
+    void noOfGroupedBytesChanged( int noOfGroupedBytes );
 
   public:
     void setViewModus( int viewModus );
     int viewModus() const;
+  Q_SIGNALS:
+    void viewModusChanged( int viewModus );
 
   protected:
     void init();

@@ -110,6 +110,16 @@ void ByteArrayView::init()
     connect( mWidget, SIGNAL(valueCodingChanged(int)), SIGNAL(valueCodingChanged(int)) );
     connect( mWidget, SIGNAL(charCodecChanged(QString)), SIGNAL(charCodecChanged(QString)) );
     connect( mWidget, SIGNAL(focusChanged(bool)), SIGNAL(focusChanged(bool)) );
+
+    connect( mWidget, SIGNAL(offsetColumnVisibleChanged(bool)), SIGNAL(offsetColumnVisibleChanged(bool)) );
+    connect( mWidget, SIGNAL(visibleByteArrayCodingsChanged(int)), SIGNAL(visibleByteArrayCodingsChanged(int)) );
+    connect( mWidget, SIGNAL(layoutStyleChanged(int)), SIGNAL(layoutStyleChanged(int)) );
+    connect( mWidget, SIGNAL(noOfBytesPerLineChanged(int)), SIGNAL(noOfBytesPerLineChanged(int)) );
+    connect( mWidget, SIGNAL(showsNonprintingChanged(bool)), SIGNAL(showsNonprintingChanged(bool)) );
+    connect( mWidget, SIGNAL(substituteCharChanged(QChar)), SIGNAL(substituteCharChanged(QChar)) );
+    connect( mWidget, SIGNAL(undefinedCharChanged(QChar)), SIGNAL(undefinedCharChanged(QChar)) );
+    connect( mWidget, SIGNAL(noOfGroupedBytesChanged(int)), SIGNAL(noOfGroupedBytesChanged(int)) );
+    connect( mWidget, SIGNAL(viewModusChanged(int)), SIGNAL(viewModusChanged(int)) );
 }
 
 const AbstractModelSelection* ByteArrayView::modelSelection() const { return &mSelection; }
@@ -315,12 +325,12 @@ void ByteArrayView::setMarking( const Okteta::AddressRange& range, bool ensureVi
         mWidget->ensureVisible( range );
 }
 
-void ByteArrayView::setSubstituteChar( const QChar& substituteChar )
+void ByteArrayView::setSubstituteChar( QChar substituteChar )
 {
     mWidget->setSubstituteChar( substituteChar );
 }
 
-void ByteArrayView::setUndefinedChar( const QChar& undefinedChar )
+void ByteArrayView::setUndefinedChar( QChar undefinedChar )
 {
     mWidget->setUndefinedChar( undefinedChar );
 }

@@ -103,6 +103,17 @@ void ByteArrayJanusView::setViewModus( int viewModus )
     connect( mView, SIGNAL(valueCodingChanged(int)), SIGNAL(valueCodingChanged(int)) );
     connect( mView, SIGNAL(charCodecChanged(QString)), SIGNAL(charCodecChanged(QString)) );
     connect( mView, SIGNAL(focusChanged(bool)), SIGNAL(focusChanged(bool)) );
+
+    connect( mView, SIGNAL(offsetColumnVisibleChanged(bool)), SIGNAL(offsetColumnVisibleChanged(bool)) );
+    connect( mView, SIGNAL(visibleByteArrayCodingsChanged(int)), SIGNAL(visibleByteArrayCodingsChanged(int)) );
+    connect( mView, SIGNAL(layoutStyleChanged(int)), SIGNAL(layoutStyleChanged(int)) );
+    connect( mView, SIGNAL(noOfBytesPerLineChanged(int)), SIGNAL(noOfBytesPerLineChanged(int)) );
+    connect( mView, SIGNAL(showsNonprintingChanged(bool)), SIGNAL(showsNonprintingChanged(bool)) );
+    connect( mView, SIGNAL(substituteCharChanged(QChar)), SIGNAL(substituteCharChanged(QChar)) );
+    connect( mView, SIGNAL(undefinedCharChanged(QChar)), SIGNAL(undefinedCharChanged(QChar)) );
+    connect( mView, SIGNAL(noOfGroupedBytesChanged(int)), SIGNAL(noOfGroupedBytesChanged(int)) );
+
+    emit viewModusChanged( mViewModus );
 }
 
 
@@ -272,12 +283,12 @@ void ByteArrayJanusView::setNoOfGroupedBytes( int noOfGroupedBytes )
     mView->setNoOfGroupedBytes( noOfGroupedBytes );
 }
 
-void ByteArrayJanusView::setSubstituteChar( const QChar& substituteChar )
+void ByteArrayJanusView::setSubstituteChar( QChar substituteChar )
 {
     mView->setSubstituteChar( substituteChar );
 }
 
-void ByteArrayJanusView::setUndefinedChar( const QChar& undefinedChar )
+void ByteArrayJanusView::setUndefinedChar( QChar undefinedChar )
 {
     mView->setUndefinedChar( undefinedChar );
 }

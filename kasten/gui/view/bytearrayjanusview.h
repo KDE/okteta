@@ -109,8 +109,8 @@ class ByteArrayJanusView : public QWidget
   public: // layout settings
     void setShowsNonprinting( bool showsNonprinting = true );
     void setNoOfGroupedBytes( int noOfGroupedBytes );
-    void setSubstituteChar( const QChar& substituteChar );
-    void setUndefinedChar( const QChar& undefinedChar );
+    void setSubstituteChar( QChar substituteChar );
+    void setUndefinedChar( QChar undefinedChar );
     QChar substituteChar() const;
     QChar undefinedChar() const;
     bool showsNonprinting() const;
@@ -140,6 +140,15 @@ class ByteArrayJanusView : public QWidget
     void valueCodingChanged( int valueCoding );
     void charCodecChanged( const QString& charCodingName );
     void focusChanged( bool hasFocus );
+    void offsetColumnVisibleChanged( bool visible );
+    void visibleByteArrayCodingsChanged( int columns );
+    void layoutStyleChanged( int layoutStyle );
+    void noOfBytesPerLineChanged( int noOfBytesPerLine );
+    void showsNonprintingChanged( bool showsNonprinting );
+    void substituteCharChanged( QChar substituteChar );
+    void undefinedCharChanged( QChar undefinedChar );
+    void noOfGroupedBytesChanged( int noOfGroupedBytes );
+    void viewModusChanged( int viewModus );
 
   private:
     AbstractByteArrayView* mView;
