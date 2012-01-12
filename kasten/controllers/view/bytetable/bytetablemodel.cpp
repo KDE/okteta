@@ -53,7 +53,7 @@ ByteTableModel::ByteTableModel( QObject *parent )
         mValueCodec[i] = Okteta::ValueCodec::createCodec( CodingIds[i] );
 }
 
-void ByteTableModel::setUndefinedChar( const QChar &undefinedChar )
+void ByteTableModel::setUndefinedChar( QChar undefinedChar )
 {
     mUndefinedChar = undefinedChar;
 

@@ -60,11 +60,9 @@ class ByteTableModel : public QAbstractTableModel
     virtual QVariant data( const QModelIndex &index, int role ) const;
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
 
-  public:
-    void setUndefinedChar( const QChar &undefinedChar );
-
   public Q_SLOTS:
     void setCharCodec( const QString &codecName );
+    void setUndefinedChar( QChar undefinedChar );
 
   protected:
     static const int NofOfValueCodings = 4;

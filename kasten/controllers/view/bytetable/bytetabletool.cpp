@@ -72,8 +72,12 @@ void ByteTableTool::setTargetModel( AbstractModel* model )
     if( hasView )
     {
         mByteTableModel->setCharCodec( mByteArrayView->charCodingName() );
+        mByteTableModel->setUndefinedChar( mByteArrayView->undefinedChar() );
         connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
                  mByteTableModel, SLOT(setCharCodec(QString)) );
+        connect( mByteArrayView, SIGNAL(undefinedCharChanged(QChar)),
+                 mByteArrayModel, SLOT(setUndefinedChar(QChar)) );
+
         connect( mByteArrayView, SIGNAL(readOnlyChanged(bool)),
                  SLOT(onReadOnlyChanged(bool)) );
     }
