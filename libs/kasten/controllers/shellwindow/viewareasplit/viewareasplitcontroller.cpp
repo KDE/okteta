@@ -56,25 +56,25 @@ ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, Abst
 
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSplitVerticallyAction = actionCollection->addAction( QLatin1String("view_area_split_vertically") );
+    mSplitVerticallyAction = actionCollection->addAction( QLatin1String("view_area_split_vertically"),
+                                                          this, SLOT(splitVertically()) );
     mSplitVerticallyAction->setText( i18nc("@title:menu","Split Vertically") );
     mSplitVerticallyAction->setIcon( KIcon( QLatin1String("view-split-left-right") ) );
     mSplitVerticallyAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_L );
     mSplitVerticallyAction->setEnabled( mViewAreaSplitable != 0 );
-    connect( mSplitVerticallyAction, SIGNAL(triggered()), SLOT(splitVertically()) );
 
-    mSplitHorizontallyAction = actionCollection->addAction( QLatin1String("view_area_split_horizontally") );
+    mSplitHorizontallyAction = actionCollection->addAction( QLatin1String("view_area_split_horizontally"),
+                                                            this, SLOT(splitHorizontally()) );
     mSplitHorizontallyAction->setText( i18nc("@title:menu","Split Horizontal") );
     mSplitHorizontallyAction->setIcon( KIcon( QLatin1String("view-split-top-bottom") ) );
     mSplitHorizontallyAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_T );
     mSplitHorizontallyAction->setEnabled( mViewAreaSplitable != 0 );
-    connect( mSplitHorizontallyAction, SIGNAL(triggered()), SLOT(splitHorizontally()) );
 
-    mCloseAction = actionCollection->addAction( QLatin1String("view_area_close") );
+    mCloseAction = actionCollection->addAction( QLatin1String("view_area_close"),
+                                                this, SLOT(close()) );
     mCloseAction->setText( i18nc("@title:menu","Close View Area") );
     mCloseAction->setIcon( KIcon( QLatin1String("view-close") ) );
     mCloseAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_R );
-    connect( mCloseAction, SIGNAL(triggered()), SLOT(close()) );
 
     onViewAreaFocusChanged( mViewAreaSplitable ? mViewAreaSplitable->viewAreaFocus() : 0 );
     onViewAreasChanged();

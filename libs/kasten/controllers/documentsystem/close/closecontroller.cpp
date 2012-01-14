@@ -51,17 +51,17 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
 
     if( supportMultiple )
     {
-        mCloseAllAction = actionCollection->addAction( QLatin1String("file_close_all") );
+        mCloseAllAction = actionCollection->addAction( QLatin1String("file_close_all"),
+                                                       this, SLOT(closeAll()) );
         mCloseAllAction->setText( i18nc("@title:menu","Close All") );
         mCloseAllAction->setIcon( KIcon( QLatin1String("window-close") ) );
         mCloseAllAction->setEnabled( false );
-        connect( mCloseAllAction, SIGNAL(triggered(bool)), SLOT(closeAll()) );
 
-        mCloseAllOtherAction = actionCollection->addAction( QLatin1String("file_close_all_other") );
+        mCloseAllOtherAction = actionCollection->addAction( QLatin1String("file_close_all_other"),
+                                                            this, SLOT(closeAllOther()) );
         mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
         mCloseAllOtherAction->setIcon( KIcon( QLatin1String("window-close") ) );
         mCloseAllOtherAction->setEnabled( false );
-        connect( mCloseAllOtherAction, SIGNAL(triggered(bool)), SLOT(closeAllOther()) );
 
         connect( mDocumentStrategy, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
                 SLOT(onDocumentsChanged()) );

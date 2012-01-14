@@ -46,11 +46,11 @@ SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, 
 
     mSaveAction = KStandardAction::save( this, SLOT(save()), actionCollection );
 
-    mReloadAction = actionCollection->addAction( QLatin1String("file_reload") );
+    mReloadAction = actionCollection->addAction( QLatin1String("file_reload"),
+                                                 this, SLOT(reload()) );
     mReloadAction->setText( i18nc("@title:menu","Reloa&d") );
     mReloadAction->setIcon( KIcon( QLatin1String("view-refresh") ) );
     mReloadAction->setShortcuts( KStandardShortcut::reload() );
-    connect( mReloadAction, SIGNAL(triggered(bool)), SLOT(reload()) );
 
     setTargetModel( 0 );
 }
