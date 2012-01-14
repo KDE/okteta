@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="Okteta" version="2">
+<kpartgui name="Okteta" version="3">
 <MenuBar>
   <Menu name="file">
     <Action name="connect_to" append="open_merge" />
@@ -47,7 +47,15 @@
     <Action name="view_area_split_vertically"/>
     <Action name="view_area_close"/>
     <Separator/>
-    <Action name="view_profiles_manage"/>
+    <Menu name="view_profile">
+      <text context="@title:menu submenu to select the view profile or change it">View Profile</text>
+      <Action name="view_profile_new" />
+      <Separator/>
+      <Action name="view_profile_save" />
+      <Action name="view_profile_reload" />
+      <Separator/>
+      <ActionList name="view_profile_list" />
+    </Menu>
   </Menu>
   <Menu name="bookmarks">
     <Action name="bookmark_add" />
@@ -72,7 +80,7 @@
     <ActionList name="windows_list"/>
   </Menu>
   <Menu name="settings">
-    <Action name="show_full_path" append="show_merge" />
+    <Action name="settings_profiles_manage" />
   </Menu>
 </MenuBar>
 

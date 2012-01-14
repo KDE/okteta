@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -44,9 +44,10 @@ ViewProfilesManageController::ViewProfilesManageController( KXMLGUIClient* guiCl
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mManageAction = actionCollection->addAction( "settings_profiles_manage" );
-    mManageAction->setText( i18nc("@action:inmenu","Manage View Profiles...") );
-    connect( mManageAction, SIGNAL(triggered(bool)), SLOT(manageProfiles()) );
+    mManageAction = actionCollection->addAction( QLatin1String("settings_profiles_manage"),
+                                                 this, SLOT(manageProfiles()) );
+    mManageAction->setText( i18nc("@action:inmenu",
+                                  "Manage View Profiles...") );
 }
 
 void ViewProfilesManageController::setTargetModel( AbstractModel* model )
@@ -56,8 +57,7 @@ void ViewProfilesManageController::setTargetModel( AbstractModel* model )
 
 void ViewProfilesManageController::manageProfiles()
 {
-    ViewProfilesManageDialog* dialog = new ViewProfilesManageDialog( mParentWidget );
-    dialog->setViewProfiles( mViewProfileManager->viewProfiles() );
+    ViewProfilesManageDialog* dialog = new ViewProfilesManageDialog( mViewProfileManager, mParentWidget );
     dialog->exec();
 
     delete dialog;

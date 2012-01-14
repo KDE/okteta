@@ -5,7 +5,9 @@ set( OKTETA_REL_DIR ../.. )
 include_directories(
   ../gui
   ../gui/view
+  ../gui/io
   ../gui/liboktetawidgets
+  ../gui/system
   ../core
   ../core/io
   ../core/document
@@ -400,6 +402,20 @@ set( VIEWSTATUSCONTROLLER_SRCS
 set( VIEWMODECONTROLLER_SRCS
   view/viewmode/viewmodecontroller.cpp
 )
+
+set( VIEWPROFILESCONTROLLER_SRCS
+  view/viewprofiles/viewprofileedit.cpp
+  view/viewprofiles/viewprofileeditdialog.cpp
+  view/viewprofiles/viewprofiletablemodel.cpp
+  view/viewprofiles/viewprofilescontroller.cpp
+  view/viewprofiles/viewprofilesynccontroller.cpp
+)
+
+set( VIEWPROFILESMANAGECONTROLLER_SRCS
+  view/viewprofiles/viewprofilesmanagedialog.cpp
+  view/viewprofiles/viewprofilesmanagecontroller.cpp
+)
+
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
 #   ${OVERWRITEONLYCONTROLLER_SRCS}
   ${OVERWRITEMODECONTROLLER_SRCS}
@@ -424,6 +440,8 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWCONFIGCONTROLLER_SRCS}
   ${VIEWSTATUSCONTROLLER_SRCS}
   ${VIEWMODECONTROLLER_SRCS}
+  ${VIEWPROFILESCONTROLLER_SRCS}
+  ${VIEWPROFILESMANAGECONTROLLER_SRCS}
   ${STRUCTVIEW_SRCS}
 )
 
@@ -468,6 +486,8 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/replace/replacecontroller.h
   view/replace/replaceuserqueryable.h
   view/viewstatus/viewstatuscontroller.h
+  view/viewprofiles/viewprofilescontroller.h
+  view/viewprofiles/viewprofilesynccontroller.h
   view/stringsextract/stringsextracttool.h
   view/stringsextract/stringsextracttoolview.h
   view/stringsextract/stringsextracttoolfactory.h

@@ -24,11 +24,19 @@
 
 // lib
 #include "bytearrayview.h"
+#include <bytearrayviewprofilemanager.h>
+#include <bytearrayviewprofilesynchronizer.h>
 #include <bytearraydocument.h>
 
 
 namespace Kasten2
 {
+
+ByteArrayViewFactory::ByteArrayViewFactory( ByteArrayViewProfileManager* byteArrayViewProfileManager )
+  : AbstractViewFactory()
+  , mByteArrayViewProfileManager( byteArrayViewProfileManager )
+{
+}
 
 AbstractView* ByteArrayViewFactory::createViewFor( AbstractDocument* _document )
 {
@@ -36,7 +44,22 @@ AbstractView* ByteArrayViewFactory::createViewFor( AbstractDocument* _document )
 
     ByteArrayDocument* document = static_cast<ByteArrayDocument*>( _document );
     if( document )
+    {
         result = new ByteArrayView( document );
+
+        const ByteArrayViewProfile::Id defaultViewProfileId =
+            mByteArrayViewProfileManager->defaultViewProfileId();
+        if( ! defaultViewProfileId.isEmpty() )
+        {
+            ByteArrayViewProfileSynchronizer* synchronizer =
+                new ByteArrayViewProfileSynchronizer( mByteArrayViewProfileManager );
+            synchronizer->setViewProfileId( defaultViewProfileId );
+            synchronizer->setView( result );
+
+            result->setSynchronizer( synchronizer );
+        }
+
+    }
 
     return result;
 }

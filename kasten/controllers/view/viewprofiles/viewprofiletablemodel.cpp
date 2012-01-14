@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,10 @@
 #include "viewprofiletablemodel.h"
 
 // Okteta Gui Kasten
-#include <bytearrayviewprofile.h>
+#include <bytearrayviewprofilemanager.h>
 // KDE
+#include <KApplication>
+#include <KColorScheme>
 #include <KLocale>
 #include <KIcon>
 // Qt
@@ -34,18 +36,26 @@
 namespace Kasten2
 {
 
-ViewProfileTableModel::ViewProfileTableModel( const QList<ByteArrayViewProfile>* viewProfileList,
-                                              int defaultIndex,
+ViewProfileTableModel::ViewProfileTableModel( const ByteArrayViewProfileManager* viewProfileManager,
                                               QObject* parent )
- : QAbstractTableModel( parent ),
-   mViewProfileList( viewProfileList ),
-   mDefaultIndex( defaultIndex )
+  : QAbstractTableModel( parent )
+  , mViewProfileManager( viewProfileManager )
 {
+    connect( viewProfileManager, SIGNAL(viewProfilesChanged(QList<Kasten2::ByteArrayViewProfile>)),
+             SLOT(onViewProfilesChanged()) );
+    connect( viewProfileManager, SIGNAL(viewProfilesRemoved(QList<Kasten2::ByteArrayViewProfile::Id>)),
+             SLOT(onViewProfilesChanged()) );
+    connect( viewProfileManager, SIGNAL(defaultViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)),
+             SLOT(onDefaultIndexChanged()) );
+    connect( viewProfileManager, SIGNAL(viewProfilesLocked(QList<Kasten2::ByteArrayViewProfile::Id>)),
+             SLOT(onViewProfilesChanged()) );
+    connect( viewProfileManager, SIGNAL(viewProfilesUnlocked(QList<Kasten2::ByteArrayViewProfile::Id>)),
+             SLOT(onViewProfileLocksChanged(QList<Kasten2::ByteArrayViewProfile::Id>)) );
 }
 
 int ViewProfileTableModel::rowCount( const QModelIndex &parent ) const
 {
-    return (! parent.isValid() ) ? mViewProfileList->count() : 0;
+    return (! parent.isValid() ) ? mViewProfileManager->viewProfilesCount() : 0;
 }
 
 int ViewProfileTableModel::columnCount( const QModelIndex &parent ) const
@@ -56,7 +66,9 @@ int ViewProfileTableModel::columnCount( const QModelIndex &parent ) const
 QVariant ViewProfileTableModel::data( const QModelIndex &index, int role ) const
 {
     QVariant result;
-    if( role == Qt::DisplayRole )
+    switch( role )
+    {
+    case Qt::DisplayRole:
     {
         const int viewProfileIndex = index.row();
 
@@ -65,46 +77,101 @@ QVariant ViewProfileTableModel::data( const QModelIndex &index, int role ) const
         {
             case NameColumnId:
             {
-                result = mViewProfileList->at(viewProfileIndex).viewProfileTitle();
+                result = mViewProfileManager->viewProfiles().at(viewProfileIndex).viewProfileTitle();
                 break;
             }
             default:
                 ;
         }
+        break;
     }
-    else if( role == Qt::DecorationRole )
+    case Qt::DecorationRole:
     {
         const int tableColumn = index.column();
         if( tableColumn == CurrentColumnId )
         {
             const int viewProfileIndex = index.row();
-            if( mDefaultIndex == viewProfileIndex )
-                result = KIcon( "arrow-right" );
+            const ByteArrayViewProfile::Id viewProfileId =
+                mViewProfileManager->viewProfiles().at(viewProfileIndex).id();
+
+            if( mViewProfileManager->defaultViewProfileId() == viewProfileId )
+                result = KIcon( QLatin1String("arrow-right") );
+        }
+        break;
+    }
+    case Qt::ForegroundRole:
+    {
+        const int viewProfileIndex = index.row();
+        const ByteArrayViewProfile::Id viewProfileId =
+            mViewProfileManager->viewProfiles().at(viewProfileIndex).id();
+
+        if( mViewProfileManager->isViewProfileLocked(viewProfileId) )
+        {
+            const QPalette& palette = KApplication::kApplication()->palette();
+            const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
+            result = colorScheme.foreground( KColorScheme::InactiveText );
+        }
+        break;
+    }
+    }
+
+    return result;
+}
+
+ByteArrayViewProfile::Id
+ViewProfileTableModel::viewProfileId( const QModelIndex& index ) const
+{
+    const int viewProfileIndex = index.row();
+    const bool isValidIndex =
+        (0 <= viewProfileIndex) && (viewProfileIndex < mViewProfileManager->viewProfilesCount());
+
+    return isValidIndex ? mViewProfileManager->viewProfiles().at(viewProfileIndex).id() : ByteArrayViewProfile::Id();
+}
+
+int
+ViewProfileTableModel::row( const ByteArrayViewProfile::Id& viewProfileId ) const
+{
+    int result = -1;
+
+    const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
+    const int viewProfilesCount = viewProfiles.count();
+    for( int i = 0; i< viewProfilesCount; ++i )
+    {
+        if( viewProfileId == viewProfiles.at( i ).id() )
+        {
+            result = i;
+            break;
         }
     }
 
     return result;
 }
 
-void ViewProfileTableModel::setDefaultIndex( int defaultIndex )
-{
-    mDefaultIndex = defaultIndex;
 
+void ViewProfileTableModel::onDefaultIndexChanged()
+{
+    // simply reset the whole column, does not happen often and not worth to cache the old default
+    emit dataChanged( index(CurrentColumnId, 0),
+                      index(CurrentColumnId, mViewProfileManager->viewProfiles().count()-1) );
+}
+
+void ViewProfileTableModel::onViewProfilesChanged()
+{
     reset();
 }
 
-void ViewProfileTableModel::handleViewProfileAdded( int viewProfileIndex )
+void ViewProfileTableModel::onViewProfileLocksChanged(const QList<ByteArrayViewProfile::Id>& viewProfileIds )
 {
-    Q_UNUSED( viewProfileIndex );
-    // TODO: {begin,end}{Insert,Remove}Columns
-    reset();
-}
+    const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
+    const int viewProfilesCount = viewProfiles.count();
+    for( int i = 0; i< viewProfilesCount; ++i )
+    {
+        const ByteArrayViewProfile::Id viewProfileId = viewProfiles.at( i ).id();
 
-void ViewProfileTableModel::handleViewProfileRemoved( int viewProfileIndex )
-{
-    Q_UNUSED( viewProfileIndex );
-    // TODO: {begin,end}{Insert,Remove}Columns
-    reset();
+        if( viewProfileIds.contains(viewProfileId) )
+            emit dataChanged( index(CurrentColumnId, i),
+                              index(NameColumnId,    i) );
+    }
 }
 
 ViewProfileTableModel::~ViewProfileTableModel() {}

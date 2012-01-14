@@ -24,6 +24,7 @@
 
 // lib
 #include "bytearrayjanusview.h"
+#include <bytearrayviewprofilesynchronizer.h>
 #include <bytearraydocument.h>
 // Okteta gui
 #include <abstractbytearrayview.h>
@@ -37,15 +38,17 @@ namespace Kasten2
 {
 
 ByteArrayView::ByteArrayView( ByteArrayDocument* document )
-  : AbstractView( document ),
-    mDocument( document )
+  : AbstractView( document )
+  , mDocument( document )
+  , mByteArrayViewProfileSynchronizer( 0 )
 {
     init();
 }
 
 ByteArrayView::ByteArrayView( ByteArrayView* other, Qt::Alignment alignment )
-  : AbstractView( static_cast<ByteArrayDocument*>(other->baseModel()) ),
-    mDocument( static_cast<ByteArrayDocument*>(other->baseModel()) )
+  : AbstractView( static_cast<ByteArrayDocument*>(other->baseModel()) )
+  , mDocument( static_cast<ByteArrayDocument*>(other->baseModel()) )
+  , mByteArrayViewProfileSynchronizer( 0 )
 {
     init();
 
@@ -121,6 +124,14 @@ void ByteArrayView::init()
     connect( mWidget, SIGNAL(noOfGroupedBytesChanged(int)), SIGNAL(noOfGroupedBytesChanged(int)) );
     connect( mWidget, SIGNAL(viewModusChanged(int)), SIGNAL(viewModusChanged(int)) );
 }
+
+void ByteArrayView::setSynchronizer( ByteArrayViewProfileSynchronizer* synchronizer )
+{
+    delete mByteArrayViewProfileSynchronizer;
+    mByteArrayViewProfileSynchronizer = synchronizer;
+}
+
+ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer; }
 
 const AbstractModelSelection* ByteArrayView::modelSelection() const { return &mSelection; }
 
@@ -388,6 +399,7 @@ void ByteArrayView::setFontByGlobalSettings()
 
 ByteArrayView::~ByteArrayView()
 {
+    delete mByteArrayViewProfileSynchronizer;
     delete mWidget;
 }
 

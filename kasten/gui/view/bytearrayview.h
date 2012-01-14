@@ -43,7 +43,7 @@ class QRect;
 
 namespace Kasten2
 {
-
+class ByteArrayViewProfileSynchronizer;
 class ByteArrayDocument;
 class KCursorProxy;
 
@@ -181,6 +181,10 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
   Q_SIGNALS:
     void viewModusChanged( int viewModus );
 
+  public:
+    void setSynchronizer( ByteArrayViewProfileSynchronizer* synchronizer );
+    ByteArrayViewProfileSynchronizer* synchronizer() const;
+
   protected:
     void init();
 
@@ -194,6 +198,8 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     ByteArrayDocument* mDocument;
     ByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;
+
+    ByteArrayViewProfileSynchronizer* mByteArrayViewProfileSynchronizer;
 };
 
 }

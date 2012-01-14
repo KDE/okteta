@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWPROFILESCONTROLLER_H
-#define VIEWPROFILESCONTROLLER_H
+#ifndef VIEWPROFILESYNCCONTROLLER_H
+#define VIEWPROFILESYNCCONTROLLER_H
 
 // lib
 #include "oktetakastencontrollers_export.h"
@@ -43,25 +43,25 @@ class ByteArrayViewProfileSynchronizer;
 class ByteArrayView;
 
 
-class OKTETAKASTENCONTROLLERS_EXPORT ViewProfilesController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileSyncController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
-    explicit ViewProfilesController( KXMLGUIClient* guiClient,
-                                     ByteArrayViewProfileManager* viewProfileManager,
-                                     QWidget* parentWidget );
+    explicit ViewProfileSyncController( KXMLGUIClient* guiClient,
+                                        ByteArrayViewProfileManager* viewProfileManager,
+                                        QWidget* parentWidget );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
   private Q_SLOTS: // update slots
-    void onViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId );
-
-    void onViewProfilesChanged();
+    void onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState );
 
   private Q_SLOTS: // action slots
-    void onViewProfileTriggered( QAction* action );
+    void onCreateNewActionTriggered();
+    void onResetChangesActionTriggered();
+    void onSaveChangesActionTriggered();
 
   private:
     KXMLGUIClient* mGuiClient;
@@ -75,8 +75,6 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfilesController : public AbstractXml
     QAction* mCreateNewAction;
     QAction* mResetChangesAction;
     QAction* mSaveChangesAction;
-
-    QActionGroup* mViewProfilesActionGroup;
 };
 
 }

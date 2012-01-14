@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,8 @@
 #ifndef VIEWPROFILETABLEMODEL_H
 #define VIEWPROFILETABLEMODEL_H
 
-
+// Okteta Gui Kasten
+#include <bytearrayviewprofile.h>
 // Qt
 #include <QtCore/QAbstractTableModel>
 
@@ -32,7 +33,7 @@ template< class C > class QList;
 
 namespace Kasten2
 {
-class ByteArrayViewProfile;
+class ByteArrayViewProfileManager;
 
 
 class ViewProfileTableModel : public QAbstractTableModel
@@ -48,8 +49,8 @@ class ViewProfileTableModel : public QAbstractTableModel
     };
 
   public:
-    ViewProfileTableModel( const QList<ByteArrayViewProfile>* viewProfileList, int defaultIndex,
-                           QObject* parent = 0 );
+    explicit ViewProfileTableModel( const ByteArrayViewProfileManager* viewProfileManager,
+                                    QObject* parent = 0 );
     virtual ~ViewProfileTableModel();
 
   public: // QAbstractTableModel API
@@ -58,14 +59,16 @@ class ViewProfileTableModel : public QAbstractTableModel
     virtual QVariant data( const QModelIndex& index, int role ) const;
 
   public:
-    void setDefaultIndex( int defaultViewProfileIndex );
-    void handleViewProfileAdded( int viewProfileIndex );
-    void handleViewProfileRemoved( int viewProfileIndex );
+    ByteArrayViewProfile::Id viewProfileId( const QModelIndex& index ) const;
+    int row( const ByteArrayViewProfile::Id& viewProfileId ) const;
+
+  protected Q_SLOTS:
+    void onDefaultIndexChanged();
+    void onViewProfilesChanged();
+    void onViewProfileLocksChanged(const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
 
   protected:
-    const QList<ByteArrayViewProfile>* const mViewProfileList;
-    /// holds the current version index
-    int mDefaultIndex;
+    const ByteArrayViewProfileManager* mViewProfileManager;
 };
 
 }

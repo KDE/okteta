@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -82,7 +82,7 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     // display mode
     const QString displayModeLabel =
         i18nc( "@label:listbox ",
-               "Show with Rows or Columns::" );
+               "Show with Rows or Columns:" );
     mDisplayModeComboBox = new KComboBox( displayBox );
     QStringList displayModeList;
     displayModeList.append( i18nc("@item:","Columns") );
@@ -134,10 +134,14 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     // coding
     mValueCodingComboBox = new KComboBox( valuesBox );
     QStringList valueCodingList;
-    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","Hexadecimal") );
-    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "Decimal")     );
-    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "Octal")       );
-    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "Binary")      );
+    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format",
+                                  "Hexadecimal") );
+    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",
+                                  "Decimal")     );
+    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",
+                                  "Octal")       );
+    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",
+                                  "Binary")      );
     mValueCodingComboBox->addItems( valueCodingList );
     valuesBoxFormLayout->addRow( i18n("Coding:"), mValueCodingComboBox );
 
@@ -173,7 +177,7 @@ ByteArrayViewProfile ViewProfileEdit::viewProfile() const
     ByteArrayViewProfile viewProfile;
     viewProfile.setViewProfileTitle( mTitleEdit->text() );
 
-    viewProfile.toggleOffsetColumn( mLineOffsetShownCheckBox->isChecked() );
+    viewProfile.setOffsetColumnVisible( mLineOffsetShownCheckBox->isChecked() );
     const int visibleByteArrayCodings =
         byteArrayCodingsFlagsFromListIndex( mValuesCharsShownComboBox->currentIndex() );
     viewProfile.setVisibleByteArrayCodings( visibleByteArrayCodings );
@@ -187,8 +191,8 @@ ByteArrayViewProfile ViewProfileEdit::viewProfile() const
 
     viewProfile.setCharCoding( mCharCodingComboBox->currentText() );
     viewProfile.setShowsNonprinting( mNonPrintableShownCheckBox->isChecked() );
-    viewProfile.setSubstituteChar( mNonPrintableCharEdit->text()[0] ); // TODO: need make sure is one char
-    viewProfile.setUndefinedChar( mUndefinedCharEdit->text()[0] ); // TODO: need make sure is one char
+    viewProfile.setSubstituteChar( mNonPrintableCharEdit->text().at(0) ); // TODO: need make sure is one char
+    viewProfile.setUndefinedChar( mUndefinedCharEdit->text().at(0) ); // TODO: need make sure is one char
 
     return viewProfile;
 }

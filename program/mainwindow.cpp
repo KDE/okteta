@@ -24,6 +24,8 @@
 
 // program
 #include "program.h"
+// tmp
+#include <bytearrayviewprofilemanager.h>
 // tools
 #include <stringsextract/stringsextracttoolview.h>
 #include <stringsextract/stringsextracttool.h>
@@ -70,6 +72,9 @@
 #include <viewconfig/viewconfigcontroller.h>
 #include <viewmode/viewmodecontroller.h>
 #include <viewstatus/viewstatuscontroller.h>
+#include <viewprofiles/viewprofilescontroller.h>
+#include <viewprofiles/viewprofilesynccontroller.h>
+#include <viewprofiles/viewprofilesmanagecontroller.h>
 // Kasten controllers
 #include <document/modified/modifiedbarcontroller.h>
 #include <document/readonly/readonlycontroller.h>
@@ -151,8 +156,10 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
 
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
+    // tmp
     addXmlGuiController( new ToolListMenuController(this,this) );
     addXmlGuiController( new ViewListMenuController(viewManager(),viewArea(),this) );
+    addXmlGuiController( new ViewProfilesController(this,mProgram->byteArrayViewProfileManager(),this) );
 }
 
 void OktetaMainWindow::setupControllers()
@@ -164,6 +171,8 @@ void OktetaMainWindow::setupControllers()
     DocumentManager* const documentManager = mProgram->documentManager();
     ModelCodecManager* const codecManager = documentManager->codecManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
+    // tmp
+    ByteArrayViewProfileManager* const byteArrayViewProfileManager = mProgram->byteArrayViewProfileManager();
 
     // general, part of Kasten
     addXmlGuiController( new CreatorController(codecManager,
@@ -207,6 +216,8 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new PrintController(this) );
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewModeController(this) );
+    addXmlGuiController( new ViewProfileSyncController(this,byteArrayViewProfileManager,this) );
+    addXmlGuiController( new ViewProfilesManageController(this,byteArrayViewProfileManager,this) );
 
     Kasten2::StatusBar* const bottomBar = static_cast<Kasten2::StatusBar*>( statusBar() );
     addXmlGuiController( new ViewStatusController(bottomBar) );

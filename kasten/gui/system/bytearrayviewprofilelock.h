@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2011-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,34 +20,44 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWPROFILEEDITDIALOG_H
-#define VIEWPROFILEEDITDIALOG_H
+#ifndef BYTEARRAYVIEWPROFILELOCK_H
+#define BYTEARRAYVIEWPROFILELOCK_H
 
-// KDE
-#include <KDialog>
+// lib
+#include "bytearrayviewprofile.h"
+// Qt
+#include <QtCore/QSharedDataPointer>
+
+class QString;
 
 
 namespace Kasten2
 {
-class ViewProfileEdit;
-class ByteArrayViewProfile;
+class ByteArrayViewProfileLockPrivate;
 
-class ViewProfileEditDialog : public KDialog
+class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileLock
 {
-public:
-    explicit ViewProfileEditDialog( QWidget* parent = 0 );
+  friend class ByteArrayViewProfileManager;
 
-    virtual ~ViewProfileEditDialog();
+  protected:
+    ByteArrayViewProfileLock( const QString& fileName,
+                              const ByteArrayViewProfile::Id& viewProfileId );
 
-public:
-    ByteArrayViewProfile viewProfile() const;
+  public:
+    ByteArrayViewProfileLock( const ByteArrayViewProfileLock& other );
 
-public:
-    void setViewProfile( const ByteArrayViewProfile& viewProfile );
+    ~ByteArrayViewProfileLock();
 
-protected:
-    ViewProfileEdit* mViewProfileEdit;
-    QString mId;
+  public:
+    ByteArrayViewProfileLock& operator=( const ByteArrayViewProfileLock& other );
+
+  public:
+    void unlock();
+    bool isLocked() const;
+    ByteArrayViewProfile::Id viewProfileId() const;
+
+  protected:
+    QSharedDataPointer<ByteArrayViewProfileLockPrivate> d;
 };
 
 }

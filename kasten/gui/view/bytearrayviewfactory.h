@@ -31,12 +31,20 @@
 
 namespace Kasten2
 {
+class ByteArrayViewProfileManager;
+
 
 class OKTETAKASTENGUI_EXPORT ByteArrayViewFactory : public AbstractViewFactory
 {
   public:
+    explicit ByteArrayViewFactory( ByteArrayViewProfileManager* byteArrayViewProfileManager );
+
+  public:
     virtual AbstractView* createViewFor( AbstractDocument* document );
     virtual AbstractView* createCopyOfView( AbstractView* view, Qt::Alignment alignment );
+
+  private:
+    ByteArrayViewProfileManager* const mByteArrayViewProfileManager;
 };
 
 

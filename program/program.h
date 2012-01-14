@@ -34,6 +34,8 @@ class DialogHandler;
 class DocumentManager;
 class ViewManager;
 class MultiDocumentStrategy;
+// tmp
+class ByteArrayViewProfileManager;
 
 
 class OktetaProgram
@@ -50,6 +52,7 @@ class OktetaProgram
     DocumentManager* documentManager();
     ViewManager* viewManager();
     MultiDocumentStrategy* documentStrategy();
+    ByteArrayViewProfileManager* byteArrayViewProfileManager();
 
   protected:
     OktetaAboutData mAboutData;
@@ -59,12 +62,15 @@ class OktetaProgram
     MultiDocumentStrategy* mDocumentStrategy;
 
     DialogHandler* mDialogHandler;
+
+    ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };
 
 
 inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager; }
 inline ViewManager* OktetaProgram::viewManager()         { return mViewManager; }
 inline MultiDocumentStrategy* OktetaProgram::documentStrategy() { return mDocumentStrategy; }
+inline ByteArrayViewProfileManager* OktetaProgram::byteArrayViewProfileManager() { return mByteArrayViewProfileManager; }
 
 }
 

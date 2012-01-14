@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,8 @@
 
 #include "bytearrayviewprofile.h"
 
+// Okteta Gui
+#include <bytearraycolumnview.h>
 // Qt
 #include <QtCore/QString>
 
@@ -32,6 +34,11 @@ namespace Kasten2
 class ByteArrayViewProfilePrivate : public QSharedData
 {
 public:
+    ByteArrayViewProfilePrivate();
+
+public:
+    QString mId;
+
     QString mViewProfileTitle;
     QString mCharCodingName;
     int mValueCoding;
@@ -45,6 +52,36 @@ public:
     int mNoOfGroupedBytes;
     int mViewModus;
 };
+
+static const bool  DefaultViewProfileShowingNonprinting = false;
+static const QChar DefaultViewProfileSubstituteChar =  QLatin1Char( '.' );
+static const QChar DefaultViewProfileUndefinedChar =   QChar( QChar::ReplacementCharacter );
+static const int DefaultViewProfileNoOfGroupedBytes = 4;
+static const int DefaultViewProfileNoOfBytesPerLine =  16;
+static const Okteta::AbstractByteArrayView::ValueCoding DefaultViewProfileValueCoding =
+    Okteta::AbstractByteArrayView::HexadecimalCoding;
+static const Okteta::AbstractByteArrayView::LayoutStyle DefaultViewProfileResizeStyle =
+    Okteta::AbstractByteArrayView::FixedLayoutStyle;
+static const Okteta::AbstractByteArrayView::CodingTypes DefaultViewProfileVisibleByteArrayCodings =
+    Okteta::AbstractByteArrayView::ValueAndCharCodings;
+
+
+ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()
+  : QSharedData()
+  , mValueCoding( DefaultViewProfileValueCoding )
+  , mOffsetColumnVisible( true )
+  , mVisibleByteArrayCodings( DefaultViewProfileVisibleByteArrayCodings )
+  , mNoOfBytesPerLine( DefaultViewProfileNoOfBytesPerLine )
+  , mLayoutStyle( DefaultViewProfileResizeStyle )
+  , mSubstituteChar( DefaultViewProfileSubstituteChar )
+  , mUndefinedChar( DefaultViewProfileUndefinedChar )
+  , mShowsNonprinting( DefaultViewProfileShowingNonprinting )
+  , mNoOfGroupedBytes( DefaultViewProfileNoOfGroupedBytes )
+  , mViewModus( 0 )
+{
+}
+
+
 
 ByteArrayViewProfile::ByteArrayViewProfile()
   : d( new ByteArrayViewProfilePrivate )
@@ -62,6 +99,7 @@ ByteArrayViewProfile& ByteArrayViewProfile::operator=( const ByteArrayViewProfil
     return *this;
 }
 
+ByteArrayViewProfile::Id ByteArrayViewProfile::id() const { return d->mId; }
 QString ByteArrayViewProfile::viewProfileTitle()    const { return d->mViewProfileTitle; }
 QString ByteArrayViewProfile::charCodingName()      const { return d->mCharCodingName; }
 int ByteArrayViewProfile::valueCoding()             const { return d->mValueCoding; }
@@ -75,12 +113,13 @@ bool ByteArrayViewProfile::showsNonprinting()       const { return d->mShowsNonp
 int ByteArrayViewProfile::noOfGroupedBytes()        const { return d->mNoOfGroupedBytes; }
 int ByteArrayViewProfile::viewModus()               const { return d->mViewModus; }
 
+void ByteArrayViewProfile::setId( const Id& id ) { d->mId = id; }
 void ByteArrayViewProfile::setViewProfileTitle( const QString& title ) { d->mViewProfileTitle = title; }
 void ByteArrayViewProfile::setValueCoding( int valueCoding ) { d->mValueCoding = valueCoding; }
 void ByteArrayViewProfile::setCharCoding( const QString& charCodingName ) { d->mCharCodingName = charCodingName; }
 void ByteArrayViewProfile::setSubstituteChar( const QChar& substituteChar ) { d->mSubstituteChar = substituteChar; }
 void ByteArrayViewProfile::setUndefinedChar( const QChar& undefinedChar ) { d->mUndefinedChar = undefinedChar; }
-void ByteArrayViewProfile::toggleOffsetColumn( bool visible ) { d->mOffsetColumnVisible = visible; }
+void ByteArrayViewProfile::setOffsetColumnVisible( bool visible ) { d->mOffsetColumnVisible = visible; }
 void ByteArrayViewProfile::setVisibleByteArrayCodings( int columns ) { d->mVisibleByteArrayCodings = columns; }
 void ByteArrayViewProfile::setLayoutStyle( int layoutStyle ) { d->mLayoutStyle = layoutStyle; }
 void ByteArrayViewProfile::setNoOfBytesPerLine( int noOfBytesPerLine ) { d->mNoOfBytesPerLine = noOfBytesPerLine; }

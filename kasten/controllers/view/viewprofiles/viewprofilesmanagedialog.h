@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,18 +23,19 @@
 #ifndef VIEWPROFILESMANAGEDIALOG_H
 #define VIEWPROFILESMANAGEDIALOG_H
 
-// Okteta Gui Kasten
+// lib
 #include <bytearrayviewprofile.h>
 // KDE
 #include <KDialog>
-// Qt
-#include <QtCore/QList>
 
+template< class C > class QList;
 class QTreeView;
+
 
 namespace Kasten2
 {
 
+class ByteArrayViewProfileManager;
 class ViewProfileTableModel;
 
 
@@ -43,25 +44,33 @@ class ViewProfilesManageDialog : public KDialog
   Q_OBJECT
 
   public:
-    explicit ViewProfilesManageDialog( QWidget* parent = 0 );
+    explicit ViewProfilesManageDialog( ByteArrayViewProfileManager* viewProfileManager,
+                                       QWidget* parent = 0 );
 
     virtual ~ViewProfilesManageDialog();
 
-  public:
-    void setViewProfiles( const QList<ByteArrayViewProfile>& viewProfiles );
-
   protected Q_SLOTS:
+    void onViewProfileSelectionChanged();
+
     void onCreateNewButtonClicked();
     void onEditButtonClicked();
     void onSetDefaultButtonClicked();
     void onDeleteButtonClicked();
 
-  private:
-    QList<ByteArrayViewProfile> mViewProfiles;
+    void onModelReset();
+    void onViewProfilesLocked( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onViewProfilesUnlocked( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onDefaultViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId );
 
+  private:
+    ByteArrayViewProfileManager* mViewProfileManager;
     ViewProfileTableModel* mViewProfileTableModel;
+    ByteArrayViewProfile::Id mCurrentViewProfileId;
 
     QTreeView* mViewProfileTableView;
+    KPushButton* mEditButton;
+    KPushButton* mSetDefaultButton;
+    KPushButton* mDeleteButton;
 };
 
 }

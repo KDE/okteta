@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -39,6 +39,9 @@ class ByteArrayViewProfilePrivate;
 class OKTETAKASTENGUI_EXPORT ByteArrayViewProfile
 {
   public:
+    typedef QString Id;
+
+  public:
     explicit ByteArrayViewProfile();
     ByteArrayViewProfile( const ByteArrayViewProfile& other );
 
@@ -46,6 +49,10 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfile
 
   public:
     ByteArrayViewProfile& operator=( const ByteArrayViewProfile& other );
+
+  public:
+    void setId( const Id& id );
+    Id id() const;
 
   public: // AbstractModel API
     void setViewProfileTitle( const QString& title );
@@ -64,7 +71,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfile
     QChar undefinedChar() const;
 
   public: // elements
-    void toggleOffsetColumn( bool visible );
+    void setOffsetColumnVisible( bool visible );
     void setVisibleByteArrayCodings( int columns );
     bool offsetColumnVisible() const;
     int visibleByteArrayCodings() const;

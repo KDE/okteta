@@ -32,6 +32,8 @@
 #include <bytearraydatageneratorconfigeditorfactoryfactory.h>
 #include <bytearraystreamencoderfactory.h>
 #include <bytearraydatageneratorfactory.h>
+// tmp
+#include <bytearrayviewprofilemanager.h>
 // Kasten gui
 #include <multidocumentstrategy.h>
 #include <dialoghandler.h>
@@ -78,6 +80,12 @@ int OktetaProgram::execute()
 {
     KApplication programCore;
 
+    // TODO:
+    ByteArrayViewProfileManager* const byteArrayViewProfileManager =
+        new ByteArrayViewProfileManager();
+    mByteArrayViewProfileManager = byteArrayViewProfileManager;
+    //mModelManagerManager->addModelManager( byteArrayViewProfileManager );
+
     const QList<AbstractModelStreamEncoder*> encoderList =
         ByteArrayStreamEncoderFactory::createStreamEncoders();
 
@@ -98,7 +106,7 @@ int OktetaProgram::execute()
     mDocumentManager->syncManager()->setOverwriteDialog( mDialogHandler );
     mDocumentManager->syncManager()->setSaveDiscardDialog( mDialogHandler );
 
-    mViewManager->setViewFactory( new ByteArrayViewFactory() );
+    mViewManager->setViewFactory( new ByteArrayViewFactory(byteArrayViewProfileManager) );
     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
 

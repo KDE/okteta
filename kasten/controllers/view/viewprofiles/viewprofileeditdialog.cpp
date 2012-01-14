@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -40,12 +40,15 @@ ViewProfileEditDialog::ViewProfileEditDialog( QWidget* parent )
 
 ByteArrayViewProfile ViewProfileEditDialog::viewProfile() const
 {
-    return mViewProfileEdit->viewProfile();
+    ByteArrayViewProfile result = mViewProfileEdit->viewProfile();
+    result.setId( mId );
+    return result;
 }
 
 void ViewProfileEditDialog::setViewProfile( const ByteArrayViewProfile& viewProfile )
 {
     mViewProfileEdit->setViewProfile( viewProfile );
+    mId = viewProfile.id();
 }
 
 ViewProfileEditDialog::~ViewProfileEditDialog()

@@ -2,6 +2,8 @@ set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
 include_directories(
+  system
+  io
   view
   io/streamencoder
   liboktetawidgets
@@ -127,26 +129,39 @@ set( okteta_datagenerator_SRCS
   io/bytearraydatageneratorconfigeditorfactoryfactory.cpp
 )
 
+set( okteta_viewprofile_io_SRCS
+  io/bytearrayviewprofilesynchronizer.cpp
+)
+
 set( okteta_kastengui_io_SRCS
   ${okteta_streamencoder_SRCS}
   ${okteta_datagenerator_SRCS}
+  ${okteta_viewprofile_io_SRCS}
 )
 
 set( okteta_kastengui_view_SRCS
   view/bytearrayjanusview.cpp
   view/bytearrayviewfactory.cpp
   view/bytearrayview.cpp
+  view/bytearrayviewprofile.cpp
+)
+
+set( okteta_kastengui_system_SRCS
+  system/bytearrayviewprofilelock.cpp
+  system/bytearrayviewprofilemanager.cpp
 )
 
 set( okteta_kastengui_LIB_SRCS
   ${oktetawidgets_LIB_SRCS}
   ${okteta_kastengui_view_SRCS}
   ${okteta_kastengui_io_SRCS}
+  ${okteta_kastengui_system_SRCS}
 )
 
 set( okteta_kastengui_view_HDRS
   view/bytearrayviewfactory.h
   view/bytearrayview.h
+  view/bytearrayviewprofile.h
 )
 
 set( okteta_kastengui_io_HDRS
@@ -162,10 +177,16 @@ set( okteta_kastengui_io_HDRS
   io/streamencoder/bytearraytextstreamencoderpreview.h
 )
 
+set( okteta_kastengui_system_HDRS
+  system/bytearrayviewprofilelock.h
+  system/bytearrayviewprofilemanager.h
+)
+
 set( okteta_kastengui_LIB_HDRS
   oktetakastengui_export.h
   ${okteta_kastengui_view_HDRS}
   ${okteta_kastengui_io_HDRS}
+  ${okteta_kastengui_system_HDRS}
 )
 
 kde4_add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
