@@ -72,12 +72,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
     void isApplyableChanged( bool isApplyable );
     void statisticDirty( bool dirty );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onSelectionChanged();
     void onSourceChanged();
     void onSourceDestroyed();
 
-  protected:
+  private:
     int mByteCount[256]; // TODO: here or in statistic model?
 
     StatisticTableModel *mStatisticTableModel;

@@ -87,16 +87,16 @@ class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionTool : public AbstractTool
     void conversionDone( bool success, int convertedBytesCount,
                          const QMap<Okteta::Byte, int>& failedPerByteCount );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onViewChanged();
 
-  protected: // settings
+  private: // settings
     QString mOtherCharCodecName;
     ConversionDirection mConversionDirection;
     bool mSubstitutingMissingChars;
     Okteta::Byte mSubstituteByte;
 
-  protected: // sources
+  private: // sources
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };

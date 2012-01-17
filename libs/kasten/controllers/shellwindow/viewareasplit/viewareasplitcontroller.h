@@ -65,7 +65,7 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiCo
     void onViewAreasChanged();
     void onViewsChanged();
 
-  protected:
+  private:
     ViewManager* mViewManager;
     AbstractGroupedViews* mGroupedViews;
     If::ViewAreaSplitable* mViewAreaSplitable;

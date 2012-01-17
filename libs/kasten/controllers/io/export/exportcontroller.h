@@ -59,7 +59,7 @@ class KASTENCONTROLLERS_EXPORT ExportController : public AbstractXmlGuiControlle
     void updateActions();
     void onActionTriggered( QAction* action );
 
-  protected:
+  private:
     ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
 

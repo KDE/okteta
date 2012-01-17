@@ -47,7 +47,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT FilterToolView : public AbstractToolView
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     FilterView* mWidget;
 };
 

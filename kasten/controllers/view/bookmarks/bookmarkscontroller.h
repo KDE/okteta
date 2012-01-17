@@ -64,7 +64,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void createBookmark();
     void deleteBookmark();
     void deleteAllBookmarks();
@@ -79,7 +79,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
     void onBookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
     void onCursorPositionChanged( Okteta::Address newPosition );
 
-  protected:
+  private:
     KXMLGUIClient* mGuiClient;
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel *mByteArray;

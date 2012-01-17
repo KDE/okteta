@@ -69,14 +69,14 @@ class BookmarkListModel : public QAbstractTableModel
     QModelIndex index( const Okteta::Bookmark& bookmark, int column = BookmarkListModel::TitleColumnId ) const;
     using QAbstractTableModel::index;
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onHasBookmarksChanged( bool hasBookmarks );
     void onBookmarksChanged();
     void onBookmarksChanged( const QList<int>& bookmarkIndizes );
 //     void onHeadVersionChanged( int newHeadVersionIndex );
 //     void onHeadVersionDataChanged( const DocumentVersionData &newVersionData );
 
-  protected:
+  private:
     BookmarksTool* mTool;
 
     Okteta::OffsetFormat::print mPrintFunction;

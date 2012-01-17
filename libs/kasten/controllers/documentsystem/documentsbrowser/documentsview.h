@@ -48,7 +48,7 @@ class DocumentsView : public QWidget
   public:
     DocumentsTool* tool() const;
 
-  public Q_SLOTS:
+  private Q_SLOTS:
     void onDocumentActivated( const QModelIndex& index );
 
   private:

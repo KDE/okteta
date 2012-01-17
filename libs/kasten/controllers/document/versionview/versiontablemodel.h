@@ -64,12 +64,12 @@ class VersionTableModel : public QAbstractTableModel
   public:
     void setModel( AbstractModel* model, If::Versionable* versionControl );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onRevertedToVersionIndex( int versionIndex );
     void onHeadVersionChanged( int newHeadVersionIndex );
     void onHeadVersionDataChanged( const Kasten2::DocumentVersionData& newVersionData );
 
-  protected:
+  private:
     AbstractModel* mModel;
     If::Versionable *mVersionControl;
     /// holds the current version index

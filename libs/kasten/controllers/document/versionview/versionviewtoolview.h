@@ -45,10 +45,10 @@ class KASTENCONTROLLERS_EXPORT VersionViewToolView : public AbstractToolView
   public: // AbstractToolView API
     virtual QWidget* widget() const;
     virtual QString title() const;
-    virtual AbstractTool *tool() const;
+    virtual AbstractTool* tool() const;
 
-  protected:
-    VersionView *mWidget;
+  private:
+    VersionView* mWidget;
 };
 
 }

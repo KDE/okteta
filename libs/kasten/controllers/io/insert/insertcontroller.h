@@ -55,14 +55,14 @@ class KASTENCONTROLLERS_EXPORT InsertController : public AbstractXmlGuiControlle
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected:
+  private:
     void updateActions();
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onReadOnlyChanged( bool isReadOnly );
     void onActionTriggered( QAction* action );
 
-  protected:
+  private:
     ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
 

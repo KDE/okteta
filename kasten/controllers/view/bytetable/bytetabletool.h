@@ -65,10 +65,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableTool : public AbstractTool
   Q_SIGNALS:
     void hasWriteableChanged( bool hasWriteable );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onReadOnlyChanged( bool isReadOnly );
 
-  protected:
+  private:
     ByteTableModel *mByteTableModel;
 
     ByteArrayView* mByteArrayView;

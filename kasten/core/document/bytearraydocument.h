@@ -100,11 +100,11 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
     /*virtual*/ void usersAdded( const QList<Person>& newUserList );
     /*virtual*/ void usersRemoved( const QList<Person>& newUserList );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onModelModified( bool newState );
     void onHeadVersionDescriptionChanged( const QString &newDescription );
 
-  protected:
+  private:
     Okteta::PieceTableByteArrayModel *mByteArray;
 
     mutable QString mTitle;

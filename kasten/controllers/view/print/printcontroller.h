@@ -53,7 +53,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PrintController : public AbstractXmlGuiCont
     void print();
 
 
-  protected:
+  private:
     KAction *mPrintAction;
 
     PrintTool *mPrintTool;

@@ -85,27 +85,27 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
     void uptodateChanged( bool isUptodate );
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
 
-  protected:
+  private:
     void checkUptoDate();
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onSelectionChanged();
     void onSourceChanged();
     void onSourceDestroyed();
 
-  protected: // created data
+  private: // created data
     QString mCheckSum;
     bool mChecksumUptodate :1;
     bool mSourceByteArrayModelUptodate :1;
 
-  protected: // settings
+  private: // settings
     QList<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
 #ifdef HAVE_QCA2
     QCA::Initializer* mQcaInitializer;
 #endif
     int mAlgorithmId;
 
-  protected: // sources
+  private: // sources
     ByteArrayView* mByteArrayView;
     // current
     Okteta::AbstractByteArrayModel* mByteArrayModel;

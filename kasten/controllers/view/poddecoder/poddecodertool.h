@@ -95,11 +95,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     void readOnlyChanged( bool isReadOnly );
     void dataChanged();
 
-  protected:
+  private:
     void updateData();
     void setupDecoder();
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onCursorPositionChange( Okteta::Address pos );
     void onContentsChange();
     void onReadOnlyChanged();
@@ -107,7 +107,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     void onCharCodecChange( const QString& codecName );
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
 
-  protected: // source
+  private: // source
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
     Okteta::Address mCursorIndex;
@@ -119,10 +119,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
     Okteta::CharCodec* mCharCodec;
     AbstractDifferentSizeDialog* mDifferentSizeDialog;
 
-  protected: // settings
+  private: // settings
     bool mUnsignedAsHex :1;
 
-  protected: // decoded data
+  private: // decoded data
     Okteta::PODData mPODData;
     QVector<QVariant> mDecodedValueList;
     QVector<int> mDecodedValueByteCountList;

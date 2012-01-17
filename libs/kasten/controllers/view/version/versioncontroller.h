@@ -51,7 +51,7 @@ class KASTENCONTROLLERS_EXPORT VersionController : public AbstractXmlGuiControll
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void onSetToOlderVersionTriggered();
     void onSetToNewerVersionTriggered();
     void onOlderVersionMenuAboutToShow();
@@ -62,7 +62,7 @@ class KASTENCONTROLLERS_EXPORT VersionController : public AbstractXmlGuiControll
     void onVersionIndexChanged( int versionIndex );
     void onReadOnlyChanged( bool isReadOnly );
 
-  protected:
+  private:
     AbstractModel* mModel;
     If::Versionable *mVersionControl;
 

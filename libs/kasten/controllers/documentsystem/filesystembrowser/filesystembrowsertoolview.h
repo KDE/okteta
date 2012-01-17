@@ -47,7 +47,7 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserToolView : public AbstractToolVi
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     FileSystemBrowserView* mWidget;
 };
 

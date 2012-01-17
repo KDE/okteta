@@ -62,7 +62,7 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
   Q_SIGNALS:
     void hasCurrentUrlChanged( bool hasCurrentUrl );
 
-  protected: // sources
+  private: // sources
     DocumentSyncManager* mDocumentSyncManager;
 
     AbstractDocument* mDocument;

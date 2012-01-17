@@ -49,7 +49,7 @@ class BookmarksView : public QWidget
   public:
     BookmarksTool* tool() const;
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onBookmarkDoubleClicked( const QModelIndex& index );
     void onBookmarkSelectionChanged();
     void onCreateBookmarkButtonClicked();

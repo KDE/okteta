@@ -53,7 +53,7 @@ public:
     void setLastModified( const QDateTime& lastModified )  { mLastModified = lastModified; }
     void setLocked( bool isLocked ) { mLocked = isLocked; }
 
-protected:
+private:
     QDateTime mLastModified;
     bool mLocked;
 //     bool mUserOwned;

@@ -46,7 +46,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolView : public AbstractToolView
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     ByteTableView* mWidget;
 };
 

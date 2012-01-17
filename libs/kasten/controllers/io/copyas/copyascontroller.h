@@ -59,12 +59,12 @@ class KASTENCONTROLLERS_EXPORT CopyAsController : public AbstractXmlGuiControlle
     void updateActions();
     void onActionTriggered( QAction* action );
 
-  protected:
+  private:
     ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
 
     AbstractModel* mModel;
-    If::DataSelectable *mSelectionControl;
+    If::DataSelectable* mSelectionControl;
 
     KSelectAction* mCopyAsSelectAction;
 };

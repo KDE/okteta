@@ -59,14 +59,14 @@ class DocumentListModel : public QAbstractTableModel
     virtual QVariant data( const QModelIndex& index, int role ) const;
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onDocumentsAdded( const QList<Kasten2::AbstractDocument*>& documents );
     void onDocumentsClosing( const QList<Kasten2::AbstractDocument*>& documents );
     void onFocussedDocumentChanged( Kasten2::AbstractDocument* document );
     void onSyncStatesChanged();
     void onSynchronizerChanged( Kasten2::AbstractModelSynchronizer* synchronizer );
 
-  protected:
+  private:
     DocumentsTool* mDocumentsTool;
 };
 

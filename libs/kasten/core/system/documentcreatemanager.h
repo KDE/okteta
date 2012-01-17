@@ -56,7 +56,7 @@ class KASTENCORE_EXPORT DocumentCreateManager : public QObject
   public:
     void setDocumentFactory( AbstractDocumentFactory* factory );
 
-  protected:
+  private:
     // unless there is a singleton
     DocumentManager* mManager;
 

@@ -53,10 +53,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT SelectRangeController : public AbstractXmlG
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void select();
 
-  protected:
+  private:
     KAction* mSelectAction;
 
     If::ToolInlineViewable* mToolInlineViewable;

@@ -47,7 +47,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolView : public AbstractToo
     virtual QString title() const;
     virtual AbstractTool *tool() const;
 
-  protected:
+  private:
     StringsExtractView *mWidget;
 };
 

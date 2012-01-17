@@ -57,7 +57,7 @@ class KASTENCONTROLLERS_EXPORT ToolListMenuController : public AbstractXmlGuiCon
   private:
     void updateActions();
 
-  protected:
+  private:
     If::WidgetsDockable* mWidgetsDockable;
     KXMLGUIClient* mGuiClient;
 

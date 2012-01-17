@@ -185,15 +185,15 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     void setSynchronizer( ByteArrayViewProfileSynchronizer* synchronizer );
     ByteArrayViewProfileSynchronizer* synchronizer() const;
 
-  protected:
+  private:
     void init();
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void setFontByGlobalSettings();
 
     void onSelectionChanged( const Okteta::AddressRange& selection );
 
-  protected:
+  private:
     Okteta::ByteArrayJanusView* mWidget;
     ByteArrayDocument* mDocument;
     ByteArraySelection mSelection;

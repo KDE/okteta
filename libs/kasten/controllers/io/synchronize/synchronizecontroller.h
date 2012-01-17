@@ -52,7 +52,7 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void save();
     void reload();
 
@@ -61,7 +61,7 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
     void onSynchronizerDeleted( QObject* synchronizer );
     void onSyncStateChanged();
 
-  protected:
+  private:
     DocumentSyncManager* mSyncManager;
     AbstractDocument* mDocument;
     AbstractModelFileSystemSynchronizer* mSynchronizer;

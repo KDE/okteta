@@ -52,7 +52,7 @@ class InfoView : public QWidget
     void updateHeader();
     void setByteArraySize( int size );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void setFixedFontByGlobalSettings();
     void resizeColumnsWidth();
 

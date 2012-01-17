@@ -54,7 +54,7 @@ class KASTENCONTROLLERS_EXPORT SwitchViewController : public AbstractXmlGuiContr
 
     void updateActions();
 
-  protected:
+  private:
     AbstractGroupedViews* mGroupedViews;
 
     KAction* mForwardAction;

@@ -73,7 +73,7 @@ class StatisticTableModel : public QAbstractTableModel
     void headerChanged();
     void sizeChanged( int size );
 
-  protected:
+  private:
     int mSize;
     int *mByteCount;
 

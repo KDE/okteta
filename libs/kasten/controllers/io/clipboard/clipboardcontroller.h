@@ -51,7 +51,7 @@ class KASTENCONTROLLERS_EXPORT ClipboardController : public AbstractXmlGuiContro
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void cut();
     void copy();
     void paste();
@@ -61,7 +61,7 @@ class KASTENCONTROLLERS_EXPORT ClipboardController : public AbstractXmlGuiContro
     void onReadOnlyChanged( bool isReadOnly );
     void onClipboardDataChanged();
 
-  protected:
+  private:
     AbstractModel* mModel;
     If::DataSelectable *mSelectionControl;
     If::SelectedDataWriteable *mMimeDataControl;

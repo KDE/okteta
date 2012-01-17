@@ -53,10 +53,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT GotoOffsetController : public AbstractXmlGu
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void gotoOffset();
 
-  protected:
+  private:
     KAction* mGotoOffsetAction;
 
     If::ToolInlineViewable* mToolInlineViewable;

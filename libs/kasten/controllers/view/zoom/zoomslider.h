@@ -51,10 +51,10 @@ class ZoomSlider : public QWidget
   public:
     void setTargetModel( AbstractModel* model );
 
-  protected:
+  private:
     void updateToolTip( int sliderValue );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void zoomIn();
     void zoomOut();
     void onSliderValueChanged( int sliderValue );
@@ -63,7 +63,7 @@ class ZoomSlider : public QWidget
   private Q_SLOTS:
     void onZoomLevelChange( double level );
 
-  protected:
+  private:
     AbstractModel* mModel;
     If::Zoomable* mZoomControl;
 

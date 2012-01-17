@@ -65,7 +65,7 @@ class KASTENGUI_EXPORT ModelCodecViewManager : public QObject
     void setExporterConfigEditorFactories( const QList<AbstractModelExporterConfigEditorFactory*>& factoryList );
     void setGeneratorConfigEditorFactories( const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList );
 
-  protected:
+  private:
     QList<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
     QList<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
     QList<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;

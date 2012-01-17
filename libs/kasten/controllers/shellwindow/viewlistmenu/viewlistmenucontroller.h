@@ -54,7 +54,7 @@ class KASTENCONTROLLERS_EXPORT ViewListMenuController : public AbstractXmlGuiCon
     void updateActions();
     void onActionTriggered( QAction *action );
 
-  protected:
+  private:
     ViewManager *mViewManager;
     AbstractGroupedViews* mGroupedViews;
     KXMLGUIClient* mGuiClient;

@@ -51,14 +51,14 @@ class TerminalView : public QWidget
   public:
     TerminalTool* tool() const;
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void createTerminalPart();
 
     void onCurrentUrlChanged( const KUrl& currentUrl );
 
     void onTerminalPartDestroyed();
 
-  protected:
+  private:
     TerminalTool* const mTool;
 
     KParts::ReadOnlyPart* mTerminalPart;

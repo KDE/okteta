@@ -60,10 +60,10 @@ class PODTableModel : public QAbstractTableModel
 
     virtual bool setData(const QModelIndex& index, const QVariant& value, int role );
 
-  public Q_SLOTS:
+  private Q_SLOTS:
     void onDataChanged();
 
-  protected:
+  private:
     PODDecoderTool* mTool;
     const QString mEmptyNote;
 };

@@ -47,7 +47,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderToolView : public AbstractToolVie
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     PODTableView* mWidget;
 };
 

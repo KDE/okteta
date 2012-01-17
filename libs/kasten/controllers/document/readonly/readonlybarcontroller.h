@@ -47,10 +47,10 @@ class KASTENCONTROLLERS_EXPORT ReadOnlyBarController : public AbstractXmlGuiCont
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void setReadOnly( bool isReadOnly );
 
-  protected:
+  private:
     AbstractDocument* mDocument;
 
     ToggleButton* mReadOnlyButton;

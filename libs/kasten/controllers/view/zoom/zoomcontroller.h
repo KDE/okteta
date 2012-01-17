@@ -50,14 +50,14 @@ class KASTENCONTROLLERS_EXPORT ZoomController : public AbstractXmlGuiController
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void zoomIn();
     void zoomOut();
 
   private Q_SLOTS:
     void onZoomLevelChange( double level );
 
-  protected:
+  private:
     AbstractModel* mModel;
     If::Zoomable* mZoomControl;
 

@@ -47,7 +47,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionToolView : public Abstract
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     CharsetConversionView* mWidget;
 };
 

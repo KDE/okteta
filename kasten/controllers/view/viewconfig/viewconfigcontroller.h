@@ -50,7 +50,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void setValueCoding( int valueCoding );
     void setCharCoding( int valueCoding );
     void setShowsNonprinting( bool on );
@@ -67,7 +67,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     void onLayoutStyleChanged( int layoutStyle );
     void onVisibleByteArrayCodingsChanged( int visibleByteArrayCodings );
 
-  protected:
+  private:
     ByteArrayView* mByteArrayView;
 
     // view menu

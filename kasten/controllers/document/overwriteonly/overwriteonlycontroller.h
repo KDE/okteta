@@ -48,10 +48,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT OverwriteOnlyController : public AbstractXm
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void setOverwriteOnly( bool isOverwriteOnly );
 
-  protected:
+  private:
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 
     KToggleAction *mSetOverwriteOnlyAction;

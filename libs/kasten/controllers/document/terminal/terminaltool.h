@@ -58,7 +58,7 @@ class KASTENCONTROLLERS_EXPORT TerminalTool : public AbstractTool
   Q_SIGNALS:
     void currentUrlChanged( const KUrl& currentUrl );
 
-  protected: // sources
+  private: // sources
     DocumentSyncManager* mDocumentSyncManager;
 
     AbstractDocument* mDocument;

@@ -88,7 +88,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfile
     void setViewModus( int viewModus );
     int viewModus() const;
 
-  protected:
+  private:
     QSharedDataPointer<ByteArrayViewProfilePrivate> d;
 };
 

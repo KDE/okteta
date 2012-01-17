@@ -57,10 +57,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected:
+  private:
     void fixWidths();
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void setOverwriteMode( bool overwrite );
     void setValueCoding( int valueCoding );
     void setCharCoding( int charCoding );
@@ -70,7 +70,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
 
-  protected:
+  private:
     ByteArrayView* mByteArrayView;
 
     StatusBar* mStatusBar;

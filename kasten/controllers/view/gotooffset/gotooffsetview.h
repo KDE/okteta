@@ -52,12 +52,12 @@ class GotoOffsetView : public AbstractToolWidget
   public:
     GotoOffsetTool* tool() const;
 
-  public Q_SLOTS: // gui
+  private Q_SLOTS: // gui
     void onGotoButtonClicked();
     void onFormatChanged( int index );
     void onAddressTypeChanged( int newType );
 
-  public Q_SLOTS: // tool
+  private Q_SLOTS: // tool
     void onApplyableChanged( bool isApplyable );
 
   private:

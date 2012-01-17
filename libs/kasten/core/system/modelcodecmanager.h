@@ -74,7 +74,7 @@ class KASTENCORE_EXPORT ModelCodecManager : public QObject
     void setGenerators( const QList<AbstractModelDataGenerator*>& generatorList );
     void setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog );
 
-  protected:
+  private:
     // unless there is a singleton
     DocumentManager* mManager;
     // used for dialogs, TODO: create (or use?) global instance for this

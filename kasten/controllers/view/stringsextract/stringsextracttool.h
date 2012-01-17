@@ -83,25 +83,25 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
     void canHighlightStringChanged( bool canHighlightString );
 
-  protected:
+  private:
     void checkUptoDate();
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onSelectionChanged();
     void onSourceChanged();
     void onSourceDestroyed();
     void onSourceViewDestroyed();
 
-  protected: // created data
+  private: // created data
     QList<ContainedString> mContainedStringList;
     bool mExtractedStringsUptodate:1;
     bool mSourceByteArrayModelUptodate:1;
 
-  protected: // settings
+  private: // settings
     Okteta::CharCodec *mCharCodec;
     int mMinLength;
 
-  protected: // sources
+  private: // sources
     ByteArrayView* mByteArrayView;
     // current
     Okteta::AbstractByteArrayModel *mByteArrayModel;

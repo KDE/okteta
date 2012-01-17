@@ -72,7 +72,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     void locationChanged( const QString& location );
     void documentSizeChanged( int newSize );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void updateMimeType();
 
     void onContentsChanged();
@@ -80,7 +80,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     void onUrlChanged( const KUrl& url );
     void onSynchronized();
 
-  protected:
+  private:
     ByteArrayDocument* mDocument;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
 

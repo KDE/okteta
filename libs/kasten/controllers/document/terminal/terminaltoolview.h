@@ -47,7 +47,7 @@ class KASTENCONTROLLERS_EXPORT TerminalToolView : public AbstractToolView
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     TerminalView* mWidget;
 };
 

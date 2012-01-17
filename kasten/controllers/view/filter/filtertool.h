@@ -71,10 +71,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT FilterTool : public AbstractTool
     void hasWriteableChanged( bool hasWriteable );
     void charCodecChanged( const QString &charCodecName );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onApplyableChanged();
 
-  protected:
+  private:
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel *mByteArrayModel;
     bool mHasWritable;

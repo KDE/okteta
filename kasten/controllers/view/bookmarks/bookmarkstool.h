@@ -81,11 +81,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
     void bookmarksModified( const QList<int>& indizes );
     void canCreateBookmarkChanged( bool canCreateBookmark );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onCursorPositionChanged( Okteta::Address newPosition );
     void onBookmarksModified();
 
-  protected: // sources
+  private: // sources
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArray;
     Okteta::Bookmarkable* mBookmarks;

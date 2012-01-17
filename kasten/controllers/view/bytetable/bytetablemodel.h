@@ -64,10 +64,10 @@ class ByteTableModel : public QAbstractTableModel
     void setCharCodec( const QString &codecName );
     void setUndefinedChar( QChar undefinedChar );
 
-  protected:
+  private:
     static const int NofOfValueCodings = 4;
 
-  protected:
+  private:
     Okteta::ValueCodec *mValueCodec[NofOfValueCodings];
     Okteta::CharCodec *mCharCodec;
     QChar mUndefinedChar;

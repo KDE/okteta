@@ -56,18 +56,18 @@ class StringsExtractView : public QWidget
   public: // QObject API
     virtual bool eventFilter( QObject* object, QEvent* event );
 
-  public Q_SLOTS: // gui
+  private Q_SLOTS: // gui
     void onStringDoubleClicked( const QModelIndex &index );
     void onStringSelectionChanged();
     void onGotoButtonClicked();
     void onCopyButtonClicked();
 
-  public Q_SLOTS: // tool
+  private Q_SLOTS: // tool
     void onStringsUptodateChanged( bool stringUptodate );
     void onApplyableChanged( bool isApplyable );
     void onCanHighlightStringChanged( bool isSelectable );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void setFixedFontByGlobalSettings();
 
   private:

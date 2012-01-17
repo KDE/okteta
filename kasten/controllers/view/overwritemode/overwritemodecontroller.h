@@ -47,10 +47,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT OverwriteModeController : public AbstractXm
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void setOverWrite( bool isOverWrite );
 
-  protected:
+  private:
     ByteArrayView* mByteArrayView;
 
     KToggleAction *mSetOverWriteAction;

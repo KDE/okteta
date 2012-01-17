@@ -47,7 +47,7 @@ class KASTENCONTROLLERS_EXPORT DocumentsToolView : public AbstractToolView
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     DocumentsView* mWidget;
 };
 

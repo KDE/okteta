@@ -52,10 +52,10 @@ class SelectRangeView : public AbstractToolWidget
   public:
     SelectRangeTool* tool() const;
 
-  public Q_SLOTS: // gui
+  private Q_SLOTS: // gui
     void onSelectButtonClicked();
 
-  public Q_SLOTS: // tool
+  private Q_SLOTS: // tool
     void onApplyableChanged( bool isApplyable );
 
   private:

@@ -59,7 +59,7 @@ class KASTENCONTROLLERS_EXPORT DocumentsTool : public AbstractTool
     void documentsClosing( const QList<Kasten2::AbstractDocument*>& documents );
     void focussedDocumentChanged( Kasten2::AbstractDocument* document );
 
-  protected: // sources
+  private: // sources
     DocumentManager* mDocumentManager;
 
     AbstractDocument* mFocussedDocument;

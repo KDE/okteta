@@ -56,7 +56,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileLock
     bool isLocked() const;
     ByteArrayViewProfile::Id viewProfileId() const;
 
-  protected:
+  private:
     QSharedDataPointer<ByteArrayViewProfileLockPrivate> d;
 };
 

@@ -69,7 +69,7 @@ class KASTENGUI_EXPORT ViewManager : public QObject
     // view will be closed, already removed from list
     void closing( const QList<Kasten2::AbstractView*>& views );
 
-  protected:
+  private:
     QList<AbstractView*> mViewList;
     AbstractViewFactory* mFactory;
 

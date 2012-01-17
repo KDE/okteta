@@ -47,7 +47,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoToolView : public AbstractToolV
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     DocumentInfoView* mWidget;
 };
 

@@ -51,13 +51,13 @@ class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiControlle
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  public Q_SLOTS:
+  private Q_SLOTS:
     void load();
     void loadRecent( const KUrl& url );
 
     void onUrlUsed( const KUrl& url );
 
-  protected:
+  private:
     AbstractDocumentStrategy* mDocumentStrategy;
 
     KRecentFilesAction* mOpenRecentAction;

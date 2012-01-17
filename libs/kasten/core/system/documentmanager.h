@@ -94,7 +94,7 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
 //  protected:
 //    virtual AbstractDocument* createDocument();
 
-  protected:
+  private:
     QList<AbstractDocument*> mList;
 
     // TODO: remove into own singleton

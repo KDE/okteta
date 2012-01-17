@@ -53,10 +53,10 @@ class KASTENGUI_EXPORT DummyView : public AbstractView
     virtual QWidget* widget() const;
     virtual bool hasFocus() const;
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onTitleChange( const QString &newTitle );
 
-  protected:
+  private:
     QLabel *mLabel;
     AbstractDocument* mDocument;
 };

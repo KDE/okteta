@@ -48,10 +48,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewModeController : public AbstractXmlGuiC
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void setViewMode( int viewMode );
 
-  protected:
+  private:
     ByteArrayView* mByteArrayView;
 
     KSelectAction* mViewModeAction;

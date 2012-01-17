@@ -58,10 +58,10 @@ class PODTableView : public QWidget, public AbstractDifferentSizeDialog
   public: // AbstractDifferentSizeDialog API
     virtual Answer query( int newValueSize, int oldValueSize, int sizeLeft );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous );
 
-  protected:
+  private:
     PODDecoderTool* mTool;
 
     PODTableModel* mPODTableModel;

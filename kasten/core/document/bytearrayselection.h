@@ -47,7 +47,7 @@ class OKTETAKASTENCORE_EXPORT ByteArraySelection : public AbstractModelSelection
     Okteta::AddressRange range() const;
     bool isValid() const;
 
-  protected:
+  private:
     Okteta::AddressRange mRange;
 };
 

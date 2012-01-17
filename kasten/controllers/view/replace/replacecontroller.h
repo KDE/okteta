@@ -61,12 +61,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ReplaceController : public AbstractXmlGuiCo
     virtual bool queryContinue( KFindDirection direction, int noOfReplacements ) const;
     virtual ReplaceBehaviour queryReplaceCurrent() const;
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void replace();
 
     void onFinished( bool previousFound, int noOfReplacements );
 
-  protected:
+  private:
     QWidget* mParentWidget;
 
     KAction *mReplaceAction;

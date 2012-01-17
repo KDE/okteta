@@ -51,7 +51,7 @@ class FileSystemBrowserView : public QWidget
   public:
     FileSystemBrowserTool* tool() const;
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void init();
 
     void setDirOperatorUrl( const KUrl& url );
@@ -59,7 +59,7 @@ class FileSystemBrowserView : public QWidget
     void syncCurrentDocumentDirectory();
     void openFile( const KFileItem& fileItem );
 
-  protected:
+  private:
     FileSystemBrowserTool* const mTool;
 
     KActionCollection* mActionCollection;

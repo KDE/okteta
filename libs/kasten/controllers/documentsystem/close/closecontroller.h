@@ -52,14 +52,14 @@ class KASTENCONTROLLERS_EXPORT CloseController : public AbstractXmlGuiController
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void close();
     void closeAll();
     void closeAllOther();
 
     void onDocumentsChanged();
 
-  protected:
+  private:
     AbstractDocumentStrategy* mDocumentStrategy;
 
     AbstractDocument* mDocument;

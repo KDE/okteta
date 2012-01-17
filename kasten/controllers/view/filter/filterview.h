@@ -52,10 +52,10 @@ class FilterView : public AbstractToolWidget
   public:
     FilterTool* tool() const;
 
-  protected: // get 
+  private: // get 
     void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
 
-  protected: // separation
+  private: // separation
     void addFilters();
 
   private Q_SLOTS:

@@ -55,11 +55,11 @@ class PODDelegate : public QStyledItemDelegate
   public: // QStyledItemDelegate API
     virtual QString displayText( const QVariant& value, const QLocale& locale ) const;
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onEditorDone();
     void onReadOnlyChanged( bool isReadOnly ) const;
 
-  protected:
+  private:
     PODDecoderTool* mTool;
 
     mutable QPointer<QWidget> mEditor;

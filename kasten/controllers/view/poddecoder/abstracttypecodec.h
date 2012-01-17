@@ -52,7 +52,7 @@ class AbstractTypeCodec
   public:
     const QString& name() const;
 
-  protected:
+  private:
     QString mName;
 };
 

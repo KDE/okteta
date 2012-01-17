@@ -71,13 +71,13 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
   Q_SIGNALS:
     void urlUsed( const KUrl& url );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onDocumentLoaded( Kasten2::AbstractDocument* document );
 
     void onDocumentsAdded( const QList<Kasten2::AbstractDocument*>& documents );
     void onDocumentsClosing( const QList<Kasten2::AbstractDocument*>& documents );
 
-  protected:
+  private:
     // unless there is a singleton
     DocumentManager* mManager;
 

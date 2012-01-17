@@ -52,18 +52,18 @@ class ChecksumView : public AbstractToolWidget
   public:
     ChecksumTool* tool() const;
 
-  protected:
+  private:
     void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const;
 
-  protected:
+  private:
     void addAlgorithms();
 
-  protected Q_SLOTS: // gui
+  private Q_SLOTS: // gui
 //     void setDirty( bool dirty );
     void onOperationChange( int index );
     void onCalculateClicked();
 
-  protected Q_SLOTS: // tool
+  private Q_SLOTS: // tool
     void onChecksumUptodateChanged( bool checksumUptodate );
     void onApplyableChanged( bool isApplyable );
     void onValidityChanged( bool isValid );

@@ -50,14 +50,14 @@ class KASTENCONTROLLERS_EXPORT SelectController : public AbstractXmlGuiControlle
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void selectAll();
     void unselect();
 
   private Q_SLOTS:
     void onHasSelectedDataChanged( bool hasSelectedData );
 
-  protected:
+  private:
     AbstractModel* mModel;
     If::DataSelectable* mSelectControl;
 

@@ -51,12 +51,12 @@ class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiControll
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  public Q_SLOTS:
+  private Q_SLOTS:
     void onNewActionTriggered();
     void onNewFromClipboardActionTriggered();
     void onNewFromGeneratorActionTriggered();
 
-  protected:
+  private:
     ModelCodecManager* mModelCodecManager;
     AbstractDocumentStrategy* mDocumentStrategy;
 };

@@ -45,7 +45,7 @@ class SelectRangeToolView : public AbstractToolInlineView
     virtual QString title() const;
     virtual AbstractTool* tool() const;
 
-  protected:
+  private:
     SelectRangeView* mWidget;
 };
 

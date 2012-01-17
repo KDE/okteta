@@ -54,7 +54,7 @@ class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog,
   public:
     void setWidget( QWidget* widget );
 
-  protected:
+  private:
     QWidget* mWidget;
 };
 

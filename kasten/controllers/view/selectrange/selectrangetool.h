@@ -80,20 +80,20 @@ class SelectRangeTool : public AbstractTool
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
     // TODO: isAtLine useful, to prevent noop actions, or should they be allowed, too?
 
-  protected:
+  private:
     int finalTargetSelectionStart() const;
     int finalTargetSelectionEnd() const;
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onContentsChanged();
 
-  protected: // settings
+  private: // settings
     int mTargetStart;
     int mTargetEnd;
     bool mIsEndRelative :1;
     bool mIsEndBackwards :1;
 
-  protected: // target
+  private: // target
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };

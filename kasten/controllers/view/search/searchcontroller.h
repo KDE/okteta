@@ -58,17 +58,17 @@ class OKTETAKASTENCONTROLLERS_EXPORT SearchController : public AbstractXmlGuiCon
   public: // SearchUserQueryable API
     virtual bool queryContinue( KFindDirection direction ) const;
 
-  protected:
+  private:
     void showDialog( KFindDirection Direction );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS: // action slots
     void find();
     void findNext();
     void findPrevious();
 
     void onDataNotFound();
 
-  protected:
+  private:
     QWidget* mParentWidget;
 
     KAction* mFindAction;

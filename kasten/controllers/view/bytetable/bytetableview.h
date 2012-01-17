@@ -53,7 +53,7 @@ class ByteTableView : public AbstractToolWidget
     void onInsertClicked();
     void onDoubleClicked( const QModelIndex &index );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void setFixedFontByGlobalSettings();
     void resizeColumnsWidth();
 

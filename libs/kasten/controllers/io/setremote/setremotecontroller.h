@@ -49,11 +49,11 @@ class KASTENCONTROLLERS_EXPORT SetRemoteController : public AbstractXmlGuiContro
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void saveAs();
 
-  protected:
-    KAction *mSaveAsAction;
+  private:
+    KAction* mSaveAsAction;
 
     DocumentSyncManager* mSyncManager;
     AbstractDocument* mDocument;

@@ -79,19 +79,19 @@ class GotoOffsetTool : public AbstractTool
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
     // TODO: isAtLine useful, to prevent noop actions, or should they be allowed, too?
 
-  protected Q_SLOTS:
+  private Q_SLOTS:
     void onContentsChanged();
 
-  protected:
+  private:
     int finalTargetOffset() const;
 
-  protected: // settings
+  private: // settings
     int mTargetOffset;
     bool mIsRelative;
     bool mIsSelectionToExtent;
     bool mIsBackwards;
 
-  protected: // target
+  private: // target
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
