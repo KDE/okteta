@@ -28,14 +28,14 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Kasten core
-#include <abstractdocument.h>
+#include <kastencore.h>
 
 class QLabel;
 
 
 namespace Kasten2
 {
-
+class AbstractModelSynchronizer;
 class AbstractDocument;
 class StatusBar;
 
@@ -50,12 +50,16 @@ class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiCont
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
-  protected Q_SLOTS: // action slots
+  private Q_SLOTS:
+    void onContentFlagsChanged( Kasten2::ContentFlags contentFlags );
     void onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState );
     void onRemoteSyncStateChanged( Kasten2::RemoteSyncState remoteSyncState );
+    void onSynchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
+    void onSynchronizerDeleted( QObject* synchronizer );
 
-  protected:
+  private:
     AbstractDocument* mDocument;
+    AbstractModelSynchronizer* mSynchronizer;
 
     QLabel* mLocalStateLabel;
     QLabel* mRemoteStateLabel;

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2008,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008,2011-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,14 +25,16 @@
 
 // lib
 #include "shellwindow.h"
-// Kasten core
-#include <abstractdocument.h>
+// Okteta core
+#include <kastencore.h>
 // Qt
 #include <QtCore/QList>
 
 
 namespace Kasten2
 {
+class AbstractModelSynchronizer;
+class AbstractDocument;
 class AbstractTool;
 
 
@@ -58,9 +60,11 @@ class ShellWindowPrivate
 
   private: // Q_SLOTS
     void onTitleChanged( const QString& newTitle );
+    void onContentFlagsChanged( Kasten2::ContentFlags contentFlags );
     void onLocalSyncStateChanged( Kasten2::LocalSyncState newState );
     void onViewFocusChanged( Kasten2::AbstractView* view );
     void onToolVisibilityChanged( bool isVisible );
+    void onSynchronizerDeleted( QObject* synchronizer );
 
   protected:
     Q_DECLARE_PUBLIC( ShellWindow )
@@ -72,6 +76,8 @@ class ShellWindowPrivate
     // hack:
     // used to store a pointer to the current, so we can disconnect to its signals... well, not perfect
     AbstractView* mCurrentView;
+    AbstractDocument* mCurrentDocument;
+    AbstractModelSynchronizer* mCurrentSynchronizer;
 
     ViewManager* mViewManager;
     QList<AbstractXmlGuiController*> mControllers;

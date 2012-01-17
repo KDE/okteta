@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -46,7 +46,7 @@ class TestDocument : public AbstractDocument
     virtual QString title() const;
     virtual QString typeName() const;
     virtual QString mimeType() const;
-    virtual LocalSyncState localSyncState() const;
+    virtual ContentFlags contentFlags() const;
 
   public:
     const QByteArray* data() const;
@@ -54,12 +54,12 @@ class TestDocument : public AbstractDocument
 
   public: // instruction functions
     void setTitle( const QString& title );
-    void setLocalSyncState( LocalSyncState syncState );
+    void setContentFlags( ContentFlags contentFlags );
 
   protected:
     QString mTitle;
     QByteArray mData;
-    LocalSyncState mLocalSyncState;
+    ContentFlags mContentFlags;
 };
 
 }

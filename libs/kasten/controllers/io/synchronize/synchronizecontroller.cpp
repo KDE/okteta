@@ -64,9 +64,9 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
     if( mDocument )
     {
         connect( mDocument, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
-                            SLOT(onSynchronizerChange(Kasten2::AbstractModelSynchronizer*)) );
+                            SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
     }
-    onSynchronizerChange( mDocument ? mDocument->synchronizer() : 0 );
+    onSynchronizerChanged( mDocument ? mDocument->synchronizer() : 0 );
 }
 
 void SynchronizeController::save()
@@ -79,8 +79,10 @@ void SynchronizeController::reload()
     mSyncManager->reload( mDocument );
 }
 
-void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* newSynchronizer )
+void SynchronizeController::onSynchronizerChanged( AbstractModelSynchronizer* newSynchronizer )
 {
+    if( mSynchronizer ) mSynchronizer->disconnect( this );
+
     mSynchronizer = qobject_cast<AbstractModelFileSystemSynchronizer*>( newSynchronizer );
     // TODO: Storable interface should be used by Synchronizer 
     // synchronizer should report about possible activities
@@ -88,26 +90,39 @@ void SynchronizeController::onSynchronizerChange( AbstractModelSynchronizer* new
     bool canSync = false;
     if( mSynchronizer )
     {
-        const LocalSyncState localSyncState = mDocument->localSyncState();
-        const RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
+        const LocalSyncState localSyncState = mSynchronizer->localSyncState();
+        const RemoteSyncState remoteSyncState = mSynchronizer->remoteSyncState();
         canSync = ( localSyncState == LocalHasChanges )
                   || ( remoteSyncState == RemoteHasChanges )
                   || ( remoteSyncState == RemoteUnknown );
 
-        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                            SLOT(onSyncStateChanged()) );
-        connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
-                            SLOT(onSyncStateChanged()) );
+        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                                SLOT(onSyncStateChanged()) );
+        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+                                SLOT(onSyncStateChanged()) );
+        connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
+                                SLOT(onSynchronizerDeleted(QObject*)) );
     }
 
     mSaveAction->setEnabled( canSync );
     mReloadAction->setEnabled( canSync );
 }
 
+void SynchronizeController::onSynchronizerDeleted( QObject* synchronizer )
+{
+    if( synchronizer != mSynchronizer )
+        return;
+
+    mSynchronizer = 0;
+
+    mSaveAction->setEnabled( false );
+    mReloadAction->setEnabled( false );
+}
+
 void SynchronizeController::onSyncStateChanged()
 {
-    const LocalSyncState localSyncState = mDocument->localSyncState();
-    const RemoteSyncState remoteSyncState = mDocument->remoteSyncState();
+    const LocalSyncState localSyncState = mSynchronizer->localSyncState();
+    const RemoteSyncState remoteSyncState = mSynchronizer->remoteSyncState();
     const bool canSync = ( localSyncState == LocalHasChanges )
                   || ( remoteSyncState == RemoteHasChanges )
                   || ( remoteSyncState == RemoteUnknown );

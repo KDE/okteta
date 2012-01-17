@@ -41,17 +41,12 @@ class AbstractDocumentPrivate : public AbstractModelPrivate
       ~AbstractDocumentPrivate();
 
   public:
-    RemoteSyncState remoteSyncState() const;
-
-  public:
     const QString& id() const;
     AbstractModelSynchronizer* synchronizer() const;
-    AbstractModelSynchronizer* liveSynchronizer() const;
 
   public:
     void setId( const QString& id );
     void setSynchronizer( AbstractModelSynchronizer* synchronizer );
-    void setLiveSynchronizer( AbstractModelSynchronizer* synchronizer );
 
   protected:
     Q_DECLARE_PUBLIC( AbstractDocument )
@@ -59,19 +54,13 @@ class AbstractDocumentPrivate : public AbstractModelPrivate
   protected:
     QString mId;
     AbstractModelSynchronizer* mSynchronizer; // TODO: should this be here, with public setters and getters?
-    AbstractModelSynchronizer* mLiveSynchronizer; // TODO: should this be here, with public setters and getters?
 };
 
 
 inline AbstractDocumentPrivate::AbstractDocumentPrivate( AbstractDocument* parent )
   : AbstractModelPrivate( parent ),
-    mSynchronizer( 0 ),
-    mLiveSynchronizer( 0 )
+    mSynchronizer( 0 )
 {}
-inline RemoteSyncState AbstractDocumentPrivate::remoteSyncState() const
-{
-    return mSynchronizer ? mSynchronizer->remoteSyncState() : RemoteNotSet;
-}
 
 inline const QString& AbstractDocumentPrivate::id() const { return mId; }
 inline void AbstractDocumentPrivate::setId( const QString& id ) { mId = id; }
@@ -85,36 +74,15 @@ inline void AbstractDocumentPrivate::setSynchronizer( AbstractModelSynchronizer*
     if( mSynchronizer == synchronizer )
         return;
 
-    const Kasten2::RemoteSyncState oldRemoteState = remoteSyncState();
-    const Kasten2::RemoteSyncState newRemoteState = synchronizer->remoteSyncState();
-
     delete mSynchronizer;
     mSynchronizer = synchronizer;
-    q->connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
-                q, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)) );
 
     emit q->synchronizerChanged( synchronizer );
-    if( oldRemoteState != newRemoteState )
-        emit q->remoteSyncStateChanged( newRemoteState );
-}
-inline AbstractModelSynchronizer* AbstractDocumentPrivate::liveSynchronizer() const { return mLiveSynchronizer; }
-inline void AbstractDocumentPrivate::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
-{
-    Q_Q( AbstractDocument );
-
-    // plugging the same more than once?
-    if( mLiveSynchronizer == synchronizer )
-        return;
-
-    delete mLiveSynchronizer;
-    mLiveSynchronizer = synchronizer;
-    emit q->liveSynchronizerChanged( synchronizer );
 }
 
 inline AbstractDocumentPrivate::~AbstractDocumentPrivate()
 {
     delete mSynchronizer;
-    delete mLiveSynchronizer;
 }
 
 }

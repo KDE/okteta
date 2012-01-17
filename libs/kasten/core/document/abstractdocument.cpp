@@ -31,12 +31,6 @@ AbstractDocument::AbstractDocument()
   : AbstractModel( new AbstractDocumentPrivate(this) )
 {}
 
-RemoteSyncState AbstractDocument::remoteSyncState() const
-{
-    Q_D( const AbstractDocument );
-
-    return d->remoteSyncState();
-}
 QString AbstractDocument::id() const
 {
     Q_D( const AbstractDocument );
@@ -48,12 +42,6 @@ AbstractModelSynchronizer* AbstractDocument::synchronizer() const
     Q_D( const AbstractDocument );
 
     return d->synchronizer();
-}
-AbstractModelSynchronizer* AbstractDocument::liveSynchronizer() const
-{
-    Q_D( const AbstractDocument );
-
-    return d->liveSynchronizer();
 }
 
 void AbstractDocument::setId( const QString& id )
@@ -67,12 +55,6 @@ void AbstractDocument::setSynchronizer( AbstractModelSynchronizer* synchronizer 
     Q_D( AbstractDocument );
 
     d->setSynchronizer(synchronizer);
-}
-void AbstractDocument::setLiveSynchronizer( AbstractModelSynchronizer* synchronizer )
-{
-    Q_D( AbstractDocument );
-
-    d->setLiveSynchronizer(synchronizer);
 }
 
 AbstractDocument::~AbstractDocument()

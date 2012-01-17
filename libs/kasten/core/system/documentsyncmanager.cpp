@@ -222,14 +222,15 @@ bool DocumentSyncManager::canClose( AbstractDocument* document )
 {
     bool canClose = true;
 
-    if( document->localSyncState() == LocalHasChanges )
+    if( document->contentFlags() & ContentHasUnstoredChanges )
     {
         AbstractModelSynchronizer* synchronizer = document->synchronizer();
         const bool couldSynchronize = hasSynchronizerForLocal( document->mimeType() );
 
         const QString processTitle = i18nc( "@title:window", "Close" );
 
-        if( synchronizer || couldSynchronize )
+        if( (synchronizer && synchronizer->localSyncState() == LocalHasChanges) ||
+            couldSynchronize )
         {
             const Answer answer =
                 mSaveDiscardDialog ? mSaveDiscardDialog->querySaveDiscard( document, processTitle ) : Cancel;
@@ -265,7 +266,7 @@ void DocumentSyncManager::reload( AbstractDocument* document )
 {
     AbstractModelSynchronizer* synchronizer = document->synchronizer();
 
-    if( document->localSyncState() == LocalHasChanges )
+    if( synchronizer->localSyncState() == LocalHasChanges )
     {
         const QString processTitle = i18nc( "@title:window", "Reload" );
 

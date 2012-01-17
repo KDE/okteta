@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2011-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,7 @@
 #include <abstractview.h>
 // Kasten core
 #include <abstracttool.h>
+#include <abstractmodelsynchronizer.h>
 
 
 namespace Kasten2
@@ -37,12 +38,15 @@ namespace Kasten2
 
 SingleViewWindowPrivate::SingleViewWindowPrivate( SingleViewWindow* parent,
                                                   AbstractView* view )
-  : q_ptr( parent ),
-    mView( view ),
-    mViewArea( new SingleViewArea() )
+  : q_ptr( parent )
+  , mView( 0 )
+  , mDocument( 0 )
+  , mSynchronizer( 0 )
+  , mViewArea( new SingleViewArea() )
 {
     parent->setCentralWidget( mViewArea->widget() );
-    mViewArea->setView( mView );
+
+    setView( view );
 }
 
 void SingleViewWindowPrivate::setView( AbstractView* view )
@@ -67,17 +71,49 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
             dockWidget->toolView()->tool()->setTargetModel( view );
     }
 
-    const QString title = view ? view->title() : QString();
-    AbstractDocument* document = view ? view->findBaseModel<AbstractDocument*>() : 0;
+    AbstractDocument* oldDocument = mDocument;
+    mDocument = view ? view->findBaseModel<AbstractDocument*>() : 0;
+    const bool isNewDocument = (mDocument != oldDocument);
 
-    const bool changes = document ? document->localSyncState() == LocalHasChanges : false;
-    q->setCaption( title, changes );
+    AbstractModelSynchronizer* oldSynchronizer = mSynchronizer;
+    mSynchronizer = mDocument ? mDocument->synchronizer() : 0;
+    const bool isNewSynchronizer = (mSynchronizer != oldSynchronizer);
+
+    if( oldSynchronizer )
+    {
+        if( isNewSynchronizer ) oldSynchronizer->disconnect( q );
+    }
+    else
+    {
+        if( oldDocument && isNewDocument ) oldDocument->disconnect( q );
+    }
+
+    const QString title = view ? view->title() : QString();
+    const bool hasChanges =
+        mSynchronizer ? (mSynchronizer->localSyncState() == LocalHasChanges) :
+        mDocument ?     mDocument->contentFlags().testFlag(ContentHasUnstoredChanges) :
+                        false;
+    q->setCaption( title, hasChanges );
 
     if( view )
         q->connect( view, SIGNAL(titleChanged(QString)), SLOT(onTitleChanged(QString)) );
-    if( document )
-        q->connect( document, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                              SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+
+    if( mSynchronizer )
+    {
+        if( isNewSynchronizer )
+        {
+            q->connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                        SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+            q->connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
+                        SLOT(onSynchronizerDeleted(QObject*)) );
+        }
+    }
+    else if( mDocument )
+    {
+        if( isNewDocument )
+            q->connect( mDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
+                        SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+    }
 }
 
 void SingleViewWindowPrivate::addXmlGuiController( AbstractXmlGuiController* controller )
@@ -107,22 +143,54 @@ void SingleViewWindowPrivate::onTitleChanged( const QString& newTitle )
 {
     Q_Q( SingleViewWindow );
 
-    AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
-    if( view )
+    if( mView )
     {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        q->setCaption( newTitle, document->localSyncState() == LocalHasChanges );
+        AbstractDocument* document = mView->findBaseModel<AbstractDocument*>();
+        AbstractModelSynchronizer* synchronizer = document->synchronizer();
+        const bool hasChanges =
+            synchronizer ? (synchronizer->localSyncState() == LocalHasChanges) :
+            document ?     document->contentFlags().testFlag(ContentHasUnstoredChanges) :
+                           false;
+        q->setCaption( newTitle, hasChanges );
+    }
+}
+
+void SingleViewWindowPrivate::onContentFlagsChanged( ContentFlags contentFlags )
+{
+    Q_Q( SingleViewWindow );
+
+    if( mView )
+    {
+        const bool hasChanges = (contentFlags & ContentHasUnstoredChanges);
+        q->setCaption( mView->title(), hasChanges );
     }
 }
 
 void SingleViewWindowPrivate::onLocalSyncStateChanged( LocalSyncState newState )
 {
-Q_UNUSED( newState )
     Q_Q( SingleViewWindow );
 
-    AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
-    if( view )
-        q->setCaption( view->title(), newState == LocalHasChanges );
+    if( mView )
+    {
+        const bool hasChanges = (newState == LocalHasChanges);
+        q->setCaption( mView->title(), hasChanges );
+    }
+}
+
+void SingleViewWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
+{
+    Q_Q( SingleViewWindow );
+
+    if( synchronizer != mSynchronizer )
+        return;
+
+    mSynchronizer = 0;
+
+    // switch to document state
+    q->connect( mDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
+                SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+
+    onContentFlagsChanged( mDocument->contentFlags() );
 }
 
 

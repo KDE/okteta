@@ -24,7 +24,7 @@
 #define TESTDOCUMENTTEST_H
 
 // sut
-#include <abstractdocument.h>
+#include <kastencore.h>
 // Qt
 #include <QtCore/QObject>
 
@@ -38,14 +38,14 @@ class TestDocumentTest : public QObject
 
   private:
     void checkTitleChanged( QSignalSpy* titleChangedSpy, const QString& title );
-    void checkLocalSyncStateChanged( QSignalSpy* changedSpy, Kasten2::LocalSyncState localSyncState );
+    void checkContentFlagsChanged( QSignalSpy* changedSpy, Kasten2::ContentFlags contentFlags );
 
   private Q_SLOTS: // test functions
     void testPlainConstructor();
     void testDataConstructor();
     void testChangeData();
     void testSetTitle();
-    void testSetLocalSyncState();
+    void testSetContentFlags();
 
 };
 

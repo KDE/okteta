@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -44,6 +44,11 @@ TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray& he
 }
 
 AbstractDocument* TestDocumentFileSynchronizer::document() const { return mDocument; }
+LocalSyncState TestDocumentFileSynchronizer::localSyncState() const
+{
+    return mDocument ?
+        ((mDocument->contentFlags() & ContentHasUnstoredChanges) ? LocalHasChanges : LocalInSync) : LocalInSync;
+}
 
 
 AbstractLoadJob* TestDocumentFileSynchronizer::startLoad( const KUrl& url )

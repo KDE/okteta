@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -27,30 +27,31 @@ namespace Kasten2
 {
 
 TestDocument::TestDocument()
-  : mLocalSyncState( LocalInSync )
+  : mContentFlags( ContentStateNormal )
 {
 }
 TestDocument::TestDocument( const QByteArray& data )
   : mData( data ),
-    mLocalSyncState( LocalInSync )
+    mContentFlags( ContentStateNormal )
 {
 }
 
 QString TestDocument::mimeType() const { return QString::fromLatin1("TestDocument"); }
 QString TestDocument::typeName() const { return QString::fromLatin1("Test Document"); }
 QString TestDocument::title() const { return mTitle; }
-LocalSyncState TestDocument::localSyncState() const { return mLocalSyncState; }
+ContentFlags TestDocument::contentFlags() const { return mContentFlags; }
 const QByteArray* TestDocument::data() const { return &mData; }
 
 void TestDocument::setData( const QByteArray& data )
 {
-    const LocalSyncState oldLocalSyncState = mLocalSyncState;
+    const ContentFlags oldContentFlags = mContentFlags;
 
     mData = data;
 
-    mLocalSyncState = LocalHasChanges;
-    if( oldLocalSyncState != mLocalSyncState )
-        emit localSyncStateChanged( mLocalSyncState );
+    mContentFlags = mContentFlags | ContentHasUnstoredChanges;
+
+    if( oldContentFlags != mContentFlags )
+        emit contentFlagsChanged( mContentFlags );
 }
 
 void TestDocument::setTitle( const QString& title )
@@ -60,13 +61,15 @@ void TestDocument::setTitle( const QString& title )
         mTitle = title;
         emit titleChanged( title );
     }
- }
-void TestDocument::setLocalSyncState( LocalSyncState localSyncState )
+}
+
+void TestDocument::setContentFlags( ContentFlags contentFlags )
 {
-    if( mLocalSyncState != localSyncState )
+    if( mContentFlags != contentFlags )
     {
-        mLocalSyncState = localSyncState;
-        emit localSyncStateChanged( localSyncState );
+        mContentFlags = contentFlags;
+
+        emit contentFlagsChanged( contentFlags );
     }
 }
 

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2011-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,7 +26,7 @@
 // lib
 #include "singleviewwindow.h"
 // Kasten core
-#include <abstractdocument.h>
+#include <kastencore.h>
 
 class QDragMoveEvent;
 class QDropEvent;
@@ -37,6 +37,8 @@ namespace Kasten2
 
 class SingleViewArea;
 class AbstractTool;
+class AbstractModelSynchronizer;
+class AbstractDocument;
 
 
 class SingleViewWindowPrivate
@@ -64,8 +66,10 @@ class SingleViewWindowPrivate
 
   private: // Q_SLOTS
     void onTitleChanged( const QString& newTitle );
+    void onContentFlagsChanged( Kasten2::ContentFlags contentFlags );
     void onLocalSyncStateChanged( Kasten2::LocalSyncState newState );
     void onToolVisibilityChanged( bool isVisible );
+    void onSynchronizerDeleted( QObject* synchronizer );
 
   protected:
     Q_DECLARE_PUBLIC( SingleViewWindow )
@@ -74,6 +78,8 @@ class SingleViewWindowPrivate
     SingleViewWindow* const q_ptr;
 
     AbstractView* mView;
+    AbstractDocument* mDocument;
+    AbstractModelSynchronizer* mSynchronizer;
 
     SingleViewArea* const mViewArea;
     QList<AbstractXmlGuiController*> mControllers;

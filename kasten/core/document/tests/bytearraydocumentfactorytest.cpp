@@ -42,7 +42,7 @@ void ByteArrayDocumentFactoryTest::testCreate()
 
     QVERIFY( document != 0 );
     QVERIFY( byteArrayDocument != 0 );
-    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
 
     delete document;
     delete factory;

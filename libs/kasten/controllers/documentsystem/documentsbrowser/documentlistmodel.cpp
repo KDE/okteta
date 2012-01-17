@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,10 +25,12 @@
 // lib
 #include "documentstool.h"
 // Kasten core
+#include <abstractmodelsynchronizer.h>
 #include <abstractdocument.h>
 // KDE
 #include <KLocale>
 #include <KIcon>
+#include <unistd.h>
 
 
 namespace Kasten2
@@ -79,6 +81,7 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
     {
         const int documentIndex = index.row();
         const AbstractDocument* document = mDocumentsTool->documents().at( documentIndex );
+        const AbstractModelSynchronizer* synchronizer = document ? document->synchronizer() : 0;
 
         const int tableColumn = index.column();
         switch( tableColumn )
@@ -88,25 +91,26 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
                     result = KIcon( QLatin1String("arrow-right") );
                 break;
             case LocalStateColumnId:
-                if( document->localSyncState() == LocalHasChanges )
+                if( synchronizer && synchronizer->localSyncState() == LocalHasChanges )
                     result = KIcon( QLatin1String("document-save") );
                 break;
             case RemoteStateColumnId:
-            {
                 // TODO: use static map, syncState int -> iconname
-                const RemoteSyncState remoteSyncState = document->remoteSyncState();
-                if( remoteSyncState == RemoteHasChanges )
-                    result = KIcon( QLatin1String("document-save") );
-                else if( remoteSyncState == RemoteNotSet )
+                if( ! synchronizer )
                     result = KIcon( QLatin1String("document-new") );
-                else if( remoteSyncState == RemoteDeleted )
-                    result = KIcon( QLatin1String("edit-delete") );
-                else if( remoteSyncState == RemoteUnknown )
-                    result = KIcon( QLatin1String("flag-yellow") );
-                else if( remoteSyncState == RemoteUnreachable )
-                    result = KIcon( QLatin1String("network-disconnect") );
+                else
+                {
+                    const RemoteSyncState remoteSyncState = synchronizer->remoteSyncState();
+                    if( remoteSyncState == RemoteHasChanges )
+                        result = KIcon( QLatin1String("document-save") );
+                    else if( remoteSyncState == RemoteDeleted )
+                        result = KIcon( QLatin1String("edit-delete") );
+                    else if( remoteSyncState == RemoteUnknown )
+                        result = KIcon( QLatin1String("flag-yellow") );
+                    else if( remoteSyncState == RemoteUnreachable )
+                        result = KIcon( QLatin1String("network-disconnect") );
+                }
                 break;
-            }
             default:
                 ;
         }
@@ -160,10 +164,16 @@ void DocumentListModel::onDocumentsAdded( const QList<Kasten2::AbstractDocument*
 {
     foreach( AbstractDocument* document, documents )
     {
-        connect( document, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                 SLOT(onSyncStatesChanged()) );
-        connect( document, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
-                 SLOT(onSyncStatesChanged()) );
+        connect( document, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
+                 SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
+        AbstractModelSynchronizer* synchronizer = document->synchronizer();
+        if( synchronizer )
+        {
+            connect( synchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                    SLOT(onSyncStatesChanged()) );
+            connect( synchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+                    SLOT(onSyncStatesChanged()) );
+        }
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();
@@ -172,6 +182,21 @@ void DocumentListModel::onDocumentsAdded( const QList<Kasten2::AbstractDocument*
 void DocumentListModel::onDocumentsClosing( const QList<Kasten2::AbstractDocument*>& documents )
 {
 Q_UNUSED( documents )
+    // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
+    reset();
+}
+
+
+void DocumentListModel::onSynchronizerChanged( AbstractModelSynchronizer* synchronizer )
+{
+    // TODO: what about the old synchronizer? assume it is deleted and that way disconnects?
+    if( synchronizer )
+    {
+        connect( synchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                 SLOT(onSyncStatesChanged()) );
+        connect( synchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+                 SLOT(onSyncStatesChanged()) );
+    }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     reset();
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,6 +23,10 @@
 #ifndef KASTENCORE_H
 #define KASTENCORE_H
 
+// Qt core
+#include <QtCore/QFlags>
+
+
 namespace Kasten2
 {
     //TODO: reuse terms from vcs
@@ -36,13 +40,20 @@ namespace Kasten2
     {
         RemoteInSync = 0, //TODO: find better name
         RemoteHasChanges,
-        RemoteNotSet,
         RemoteDeleted,
         // TODO: which KIO slaves are not supported by kdirwatch?
         RemoteUnknown,
         /// unknown, e.g. because connection not available/lost
         RemoteUnreachable
     };
+
+    enum ContentFlag
+    {
+        ContentStateNormal = 0, // TODO: is "normal" a good description?
+        ContentHasUnstoredChanges = 1 << 0 // TODO: find better term for "changes not made persistent"
+    };
+    Q_DECLARE_FLAGS(ContentFlags, ContentFlag)
+    Q_DECLARE_OPERATORS_FOR_FLAGS( ContentFlags )
 
     enum Answer
     {

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -57,27 +57,18 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     // TODO: what about plurals?
     virtual QString typeName() const = 0;
     virtual QString mimeType() const = 0;
-
-    virtual LocalSyncState localSyncState() const = 0;
-    virtual RemoteSyncState remoteSyncState() const;
+    virtual ContentFlags contentFlags() const = 0;
 
   public:
     void setSynchronizer( AbstractModelSynchronizer* synchronizer );
-    void setLiveSynchronizer( AbstractModelSynchronizer* synchronizer );
 
   public: // helper or basic?
     AbstractModelSynchronizer* synchronizer() const;
-    AbstractModelSynchronizer* liveSynchronizer() const;
     QString id() const;
 
   Q_SIGNALS:
-    // TODO: should be signal the diff? how to say then remote is in synch again?
-    // could be done by pairs of flags instead of notset = isnot
-    // TODO: this signal should be part of AbstractModel?
-    void localSyncStateChanged( Kasten2::LocalSyncState newState );
-    void remoteSyncStateChanged( Kasten2::RemoteSyncState newState );
     void synchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
-    void liveSynchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
+    void contentFlagsChanged( Kasten2::ContentFlags contentFlags );
 
   protected:
     void setId( const QString& id );

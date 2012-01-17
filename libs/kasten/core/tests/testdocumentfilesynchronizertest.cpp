@@ -120,7 +120,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
     QVERIFY( testDocument != 0 );
     QVERIFY( document->synchronizer() != 0 );
     QCOMPARE( document->synchronizer()->document(), document );
-    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
     QCOMPARE( *testDocument->data(), testData );
     QCOMPARE( document->synchronizer()->url(), fileUrl );
 

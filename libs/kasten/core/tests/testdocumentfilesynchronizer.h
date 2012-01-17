@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2008,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -54,6 +54,8 @@ class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
                                               const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
     virtual AbstractDocument* document() const;
+
+    virtual LocalSyncState localSyncState() const;
 
   public:
     const QByteArray& header() const;

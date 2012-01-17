@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2009-2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009-2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,6 +24,9 @@
 
 // Kasten ui
 #include <statusbar.h>
+// Kasten core
+#include <abstractmodelsynchronizer.h>
+#include <abstractdocument.h>
 // KDE
 #include <KLocale>
 #include <KIcon>
@@ -38,6 +41,7 @@ static const int modifiedPixmapWidth = 16;
 
 ModifiedBarController::ModifiedBarController( StatusBar* statusBar )
   : mDocument( 0 )
+  , mSynchronizer( 0 )
 {
     // TODO: depend an statusbar height
     const QSize modifiedPixmapSize = QSize(modifiedPixmapWidth, modifiedPixmapWidth);
@@ -58,34 +62,35 @@ ModifiedBarController::ModifiedBarController( StatusBar* statusBar )
 
 void ModifiedBarController::setTargetModel( AbstractModel* model )
 {
+    AbstractDocument* newDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+
+    if( mDocument == newDocument )
+        return;
+
     if( mDocument ) mDocument->disconnect( this );
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    mDocument = newDocument;
 
-    LocalSyncState localState;
-    RemoteSyncState remoteState;
     if( mDocument )
     {
-        localState = mDocument->localSyncState();
-        remoteState = mDocument->remoteSyncState();
-        connect( mDocument, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                 SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
-        connect( mDocument, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
-                 SLOT(onRemoteSyncStateChanged(Kasten2::RemoteSyncState)) );
+        connect( mDocument, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
+                            SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
     }
-    else
-    {
-        localState = LocalInSync;
-        remoteState = RemoteInSync;
-    }
-    onLocalSyncStateChanged( localState );
-    onRemoteSyncStateChanged( remoteState );
+
     mLocalStateLabel->setEnabled( mDocument );
     mRemoteStateLabel->setEnabled( mDocument );
+
+    onSynchronizerChanged( mDocument ? mDocument->synchronizer() : 0 );
 }
 
 
-void ModifiedBarController::onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState )
+void ModifiedBarController::onContentFlagsChanged( ContentFlags contentFlags )
+{
+    const bool hasChanges = (contentFlags & ContentHasUnstoredChanges);
+    onLocalSyncStateChanged( hasChanges ? LocalHasChanges : LocalInSync );
+}
+
+void ModifiedBarController::onLocalSyncStateChanged( LocalSyncState localSyncState )
 {
     const bool isModified = (localSyncState == LocalHasChanges );
 
@@ -101,11 +106,11 @@ void ModifiedBarController::onLocalSyncStateChanged( Kasten2::LocalSyncState loc
 
 }
 
-void ModifiedBarController::onRemoteSyncStateChanged( Kasten2::RemoteSyncState remoteSyncState )
+void ModifiedBarController::onRemoteSyncStateChanged( RemoteSyncState remoteSyncState )
 {
     const char* const iconName =
+        ( mSynchronizer == 0 ) ?                   "document-new" :
         ( remoteSyncState == RemoteHasChanges ) ?  "document-save" :
-        ( remoteSyncState == RemoteNotSet ) ?      "document-new" :
         ( remoteSyncState == RemoteDeleted ) ?     "edit-delete" :
         ( remoteSyncState == RemoteUnknown ) ?     "flag-yellow" :
         ( remoteSyncState == RemoteUnreachable ) ? "network-disconnect" :
@@ -118,6 +123,67 @@ void ModifiedBarController::onRemoteSyncStateChanged( Kasten2::RemoteSyncState r
     mRemoteStateLabel->setPixmap( pixmap );
 
     // TODO: tooltips
+}
+
+void ModifiedBarController::onSynchronizerChanged( AbstractModelSynchronizer* newSynchronizer )
+{
+    if( mSynchronizer ) mSynchronizer->disconnect( this );
+
+    AbstractModelSynchronizer* oldSynchronizer = mSynchronizer;
+    mSynchronizer = newSynchronizer;
+
+    LocalSyncState localState;
+    RemoteSyncState remoteState;
+    if( mSynchronizer )
+    {
+        if( ! oldSynchronizer )
+            mDocument->disconnect( this, SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+
+        localState = mSynchronizer->localSyncState();
+        remoteState = mSynchronizer->remoteSyncState();
+
+        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                 SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+                 SLOT(onRemoteSyncStateChanged(Kasten2::RemoteSyncState)) );
+        connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
+                                SLOT(onSynchronizerDeleted(QObject*)) );
+    }
+    else if( mDocument )
+    {
+        const bool hasChanges = (mDocument->contentFlags() & ContentHasUnstoredChanges);
+        localState = ( hasChanges ? LocalHasChanges : LocalInSync );
+        // TODO: onRemoteSyncStateChanged(...) checks for mSynchronizer and ignores this
+        remoteState = RemoteInSync;
+
+        connect( mDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
+                 SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+    }
+    else
+    {
+        localState = LocalInSync;
+        // TODO: onRemoteSyncStateChanged(...) checks for mSynchronizer and ignores this
+        remoteState = RemoteInSync;
+    }
+
+    onLocalSyncStateChanged( localState );
+    onRemoteSyncStateChanged( remoteState );
+}
+
+void ModifiedBarController::onSynchronizerDeleted( QObject* synchronizer )
+{
+    if( synchronizer != mSynchronizer )
+        return;
+
+    mSynchronizer = 0;
+
+    // switch to document state
+    connect( mDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
+             SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+
+    onContentFlagsChanged( mDocument->contentFlags() );
+        // TODO: onRemoteSyncStateChanged(...) checks for mSynchronizer and ignores the parameter
+    onRemoteSyncStateChanged( RemoteInSync );
 }
 
 }

@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009,2011-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -32,6 +32,7 @@
 #include <abstractxmlguicontroller.h>
 #include <toolviewdockwidget.h>
 // Kasten core
+#include <abstractmodelsynchronizer.h>
 #include <abstractdocument.h>
 // Qt
 #include <QtCore/QHash>
@@ -42,10 +43,12 @@ namespace Kasten2
 
 ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
                                         ViewManager* viewManager )
-  : q_ptr( parent ),
-    mGroupedViews( new MultiViewAreas() ),// TabbedViews() ),
-    mCurrentView( 0 ),
-    mViewManager( viewManager )
+  : q_ptr( parent )
+  , mGroupedViews( new MultiViewAreas() )// TabbedViews() )
+  , mCurrentView( 0 )
+  , mCurrentDocument( 0 )
+  , mCurrentSynchronizer( 0 )
+  , mViewManager( viewManager )
 {
     parent->setCentralWidget( mGroupedViews->widget() );
 
@@ -117,25 +120,36 @@ void ShellWindowPrivate::onTitleChanged( const QString& newTitle )
 {
     Q_Q( ShellWindow );
 
-    AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
-    if( view )
+    const bool hasChanges =
+        mCurrentSynchronizer ? (mCurrentSynchronizer->localSyncState() == LocalHasChanges) :
+        mCurrentDocument ?     mCurrentDocument->contentFlags().testFlag(ContentHasUnstoredChanges) :
+                               false;
+    q->setCaption( newTitle, hasChanges );
+}
+
+void ShellWindowPrivate::onContentFlagsChanged( ContentFlags contentFlags )
+{
+    Q_Q( ShellWindow );
+
+    if( mCurrentView )
     {
-        AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        q->setCaption( newTitle, document->localSyncState() == LocalHasChanges );
+        const bool hasChanges = (contentFlags & ContentHasUnstoredChanges);
+        q->setCaption( mCurrentView->title(), hasChanges );
     }
 }
 
 void ShellWindowPrivate::onLocalSyncStateChanged( LocalSyncState newState )
 {
-    Q_UNUSED( newState )
     Q_Q( ShellWindow );
 
-    AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
-    if( view )
-        q->setCaption( view->title(), newState == LocalHasChanges );
+    if( mCurrentView )
+    {
+        const bool hasChanges = (newState == LocalHasChanges);
+        q->setCaption( mCurrentView->title(), hasChanges );
+    }
 }
 
-void ShellWindowPrivate::onViewFocusChanged( AbstractView *view )
+void ShellWindowPrivate::onViewFocusChanged( AbstractView* view )
 {
     Q_Q( ShellWindow );
 
@@ -144,18 +158,51 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView *view )
     mCurrentView = view;
 
     updateControllers( view );
-    const QString title = view ? view->title() : QString();
-    AbstractDocument* document = view ? view->findBaseModel<AbstractDocument*>() : 0;
 
-    const bool changes = document ? document->localSyncState() == LocalHasChanges : false;
-    q->setCaption( title, changes );
+    AbstractDocument* oldDocument = mCurrentDocument;
+    mCurrentDocument = view ? view->findBaseModel<AbstractDocument*>() : 0;
+    const bool isNewDocument = (mCurrentDocument != oldDocument);
+
+    AbstractModelSynchronizer* oldSynchronizer = mCurrentSynchronizer;
+    mCurrentSynchronizer = mCurrentDocument ? mCurrentDocument->synchronizer() : 0;
+    const bool isNewSynchronizer = (mCurrentSynchronizer != oldSynchronizer);
+
+    if( oldSynchronizer )
+    {
+        if( isNewSynchronizer ) oldSynchronizer->disconnect( q );
+    }
+    else
+    {
+        if( oldDocument && isNewDocument ) oldDocument->disconnect( q );
+    }
+
+    const QString title = view ? view->title() : QString();
+    const bool hasChanges =
+        mCurrentSynchronizer ? (mCurrentSynchronizer->localSyncState() == LocalHasChanges) :
+        mCurrentDocument ?     mCurrentDocument->contentFlags().testFlag(ContentHasUnstoredChanges) :
+                               false;
+    q->setCaption( title, hasChanges );
 
     if( view )
         QObject::connect( view, SIGNAL(titleChanged(QString)),
                           q, SLOT(onTitleChanged(QString)) );
-    if( document )
-        QObject::connect( document, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                          q, SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+
+    if( mCurrentSynchronizer )
+    {
+        if( isNewSynchronizer )
+        {
+            QObject::connect( mCurrentSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+                            q, SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+            QObject::connect( mCurrentSynchronizer, SIGNAL(destroyed(QObject*)),
+                            q, SLOT(onSynchronizerDeleted(QObject*)) );
+        }
+    }
+    else if( mCurrentDocument )
+    {
+        if( isNewDocument )
+            QObject::connect( mCurrentDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
+                              q, SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+    }
 }
 
 void ShellWindowPrivate::onToolVisibilityChanged( bool isVisible )
@@ -168,6 +215,22 @@ void ShellWindowPrivate::onToolVisibilityChanged( bool isVisible )
         AbstractView* view = isVisible ? mCurrentView : 0;
         dockWidget->toolView()->tool()->setTargetModel( view );
     }
+}
+
+void ShellWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
+{
+    Q_Q( ShellWindow );
+
+    if( synchronizer != mCurrentSynchronizer )
+        return;
+
+    mCurrentSynchronizer = 0;
+
+    // switch to document state
+    QObject::connect( mCurrentDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
+                      q, SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+
+    onContentFlagsChanged( mCurrentDocument->contentFlags() );
 }
 
 ShellWindowPrivate::~ShellWindowPrivate()

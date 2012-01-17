@@ -55,18 +55,18 @@ class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizer : public AbstractMode
 
     virtual AbstractDocument* document() const;
 
+    virtual LocalSyncState localSyncState() const;
+
   protected:
     void setDocument( ByteArrayDocument *document );
 
   protected Q_SLOTS:
     void onUrlChange( const KUrl &url );
+    void onModelModified( bool isModified );
 
   protected:
     ByteArrayDocument *mDocument;
 };
-
-
-inline void ByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument *document ) { mDocument = document; }
 
 }
 

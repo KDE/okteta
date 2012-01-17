@@ -39,14 +39,14 @@ void TestDocumentTest::checkTitleChanged( QSignalSpy* titleChangedSpy, const QSt
    QCOMPARE( arguments.at(0).toString(), title );
 }
 
-Q_DECLARE_METATYPE ( Kasten2::LocalSyncState )
+Q_DECLARE_METATYPE ( Kasten2::ContentFlags )
 
-void TestDocumentTest::checkLocalSyncStateChanged( QSignalSpy* changedSpy, Kasten2::LocalSyncState localSyncState )
+void TestDocumentTest::checkContentFlagsChanged( QSignalSpy* changedSpy, Kasten2::ContentFlags contentFlags )
 {
    QVERIFY( changedSpy->isValid() );
    QCOMPARE( changedSpy->count(), 1 );
    QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<Kasten2::LocalSyncState>(), localSyncState );
+   QCOMPARE( arguments.at(0).value<Kasten2::ContentFlags>(), contentFlags );
 }
 
 
@@ -59,7 +59,7 @@ void TestDocumentTest::testPlainConstructor()
     QVERIFY( document != 0 );
     QCOMPARE( *document->data(), QByteArray() );
     QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
 
     delete document;
 }
@@ -72,29 +72,29 @@ void TestDocumentTest::testDataConstructor()
     QVERIFY( document != 0 );
     QCOMPARE( *document->data(), testData );
     QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
 
     delete document;
 }
 
 void TestDocumentTest::testChangeData()
 {
-    qRegisterMetaType<Kasten2::LocalSyncState>("Kasten2::LocalSyncState");
+    qRegisterMetaType<Kasten2::ContentFlags>("Kasten2::ContentFlags");
     const QByteArray testData( TestData );
 
     Kasten2::TestDocument* document = new Kasten2::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)) );
 
     QCOMPARE( *document->data(), QByteArray() );
-    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
 
     document->setData( testData );
 
-    const Kasten2::LocalSyncState localSyncState = Kasten2::LocalHasChanges;
+    const Kasten2::ContentFlags contentFlags = Kasten2::ContentHasUnstoredChanges;
     QCOMPARE( *document->data(), testData );
-    QCOMPARE( document->localSyncState(), localSyncState );
-    checkLocalSyncStateChanged( changedSpy, localSyncState );
+    QCOMPARE( document->contentFlags(), contentFlags );
+    checkContentFlagsChanged( changedSpy, contentFlags );
 
     delete document;
     delete changedSpy;
@@ -110,27 +110,27 @@ void TestDocumentTest::testSetTitle()
     document->setTitle( title );
 
     QCOMPARE( document->title(), title );
-    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
     checkTitleChanged( titleChangedSpy, title );
 
     delete document;
     delete titleChangedSpy;
 }
 
-void TestDocumentTest::testSetLocalSyncState()
+void TestDocumentTest::testSetContentFlags()
 {
-    qRegisterMetaType<Kasten2::LocalSyncState>("Kasten2::LocalSyncState");
+    qRegisterMetaType<Kasten2::ContentFlags>("Kasten2::ContentFlags");
 
     Kasten2::TestDocument* document = new Kasten2::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)) );
+    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)) );
 
-    const Kasten2::LocalSyncState localSyncState = Kasten2::LocalHasChanges;
-    document->setLocalSyncState( localSyncState );
+    const Kasten2::ContentFlags contentFlags = Kasten2::ContentHasUnstoredChanges;
+    document->setContentFlags( contentFlags );
 
     QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->localSyncState(), localSyncState );
-    checkLocalSyncStateChanged( changedSpy, localSyncState );
+    QCOMPARE( document->contentFlags(), contentFlags );
+    checkContentFlagsChanged( changedSpy, contentFlags );
 
     delete document;
     delete changedSpy;

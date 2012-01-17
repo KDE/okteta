@@ -110,7 +110,9 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
     QVERIFY( byteArrayDocument != 0 );
     QVERIFY( document->synchronizer() != 0 );
     QCOMPARE( document->synchronizer()->document(), document );
-    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
+    QCOMPARE( document->synchronizer()->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->synchronizer()->remoteSyncState(), Kasten2::RemoteInSync );
 
     QCOMPARE( document->synchronizer()->url(), fileUrl );
 

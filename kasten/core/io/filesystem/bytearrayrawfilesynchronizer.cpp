@@ -46,6 +46,20 @@ ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()
 
 AbstractDocument* ByteArrayRawFileSynchronizer::document() const { return mDocument; }
 
+LocalSyncState ByteArrayRawFileSynchronizer::localSyncState() const
+{
+    return mDocument ?
+        (mDocument->content()->isModified() ? LocalHasChanges : LocalInSync) : LocalInSync;
+}
+
+void ByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument* document )
+{
+    mDocument = document;
+    if( mDocument )
+        connect( mDocument->content(), SIGNAL(modifiedChanged(bool)),
+                 SLOT(onModelModified(bool)) );
+}
+
 void ByteArrayRawFileSynchronizer::startOffering( AbstractDocument* document ) { Q_UNUSED(document) }
 
 AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const KUrl &url )
@@ -77,6 +91,11 @@ AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument
 void ByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
 {
     mDocument->setTitle( url.fileName() );
+}
+
+void ByteArrayRawFileSynchronizer::onModelModified( bool isModified )
+{
+    emit localSyncStateChanged( (isModified ? LocalHasChanges : LocalInSync) );
 }
 
 }

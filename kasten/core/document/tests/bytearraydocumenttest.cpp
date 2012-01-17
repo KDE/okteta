@@ -43,7 +43,7 @@ void ByteArrayDocumentTest::testCreateNew()
     ByteArrayDocument* document = new ByteArrayDocument(QLatin1String("New created for test."));
 
     QVERIFY( document != 0 );
-    QCOMPARE( document->localSyncState(), Kasten2::LocalInSync );
+    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
 
     Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
     QVERIFY( byteArray != 0 );

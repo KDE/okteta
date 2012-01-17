@@ -68,9 +68,9 @@ bool ByteArrayDocument::isModifiable() const { return true; }
 bool ByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
 void ByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
 
-LocalSyncState ByteArrayDocument::localSyncState() const
+ContentFlags ByteArrayDocument::contentFlags() const
 {
-    return (mByteArray->isModified() ? LocalHasChanges : LocalInSync);
+    return (mByteArray->isModified() ? ContentHasUnstoredChanges : ContentStateNormal);
 }
 
 void ByteArrayDocument::setTitle( const QString &title )
@@ -92,7 +92,7 @@ void ByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray-
 
 void ByteArrayDocument::onModelModified( bool isModified )
 {
-    emit localSyncStateChanged( (isModified ? LocalHasChanges : LocalInSync) );
+    emit contentFlagsChanged( (isModified ? ContentHasUnstoredChanges : ContentStateNormal) );
 }
 
 void ByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )

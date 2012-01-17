@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -110,13 +110,21 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
 //     virtual bool deleteDocument();
 
     virtual AbstractDocument* document() const = 0;
+    virtual LocalSyncState localSyncState() const = 0;
     virtual RemoteSyncState remoteSyncState() const = 0;
+
 
   Q_SIGNALS:
     void urlChanged( const KUrl& url );
+    // TODO: next two could be part of an interface? parameter quite specific
     void dataPulled( int ) const;
     void dataPushed( int ) const;
     void synchronized();
+
+    // TODO: should be signal the diff? how to say then remote is in synch again?
+    // could be done by pairs of flags instead of notset = isnot
+    // TODO: this signal should be part of AbstractModel?
+    void localSyncStateChanged( Kasten2::LocalSyncState newState );
     void remoteSyncStateChanged( Kasten2::RemoteSyncState newState );
 
   protected: // get
