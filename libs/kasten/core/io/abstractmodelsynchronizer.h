@@ -119,7 +119,6 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     // TODO: next two could be part of an interface? parameter quite specific
     void dataPulled( int ) const;
     void dataPushed( int ) const;
-    void synchronized();
 
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot

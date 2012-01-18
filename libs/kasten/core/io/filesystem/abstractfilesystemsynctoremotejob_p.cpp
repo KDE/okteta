@@ -95,10 +95,6 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
             mSynchronizer->unpauseFileWatching();
             mSynchronizer->setRemoteState( RemoteInSync );
         }
-
-        // TODO: right place? And we did only push, not synchronize! Is a hack to get DocumentInfoTool working
-        if( success )
-            emit mSynchronizer->synchronized();
     }
     else
     {

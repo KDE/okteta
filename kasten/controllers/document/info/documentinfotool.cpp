@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2008,2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -160,12 +160,8 @@ void DocumentInfoTool::onSynchronizerChanged( AbstractModelSynchronizer* synchro
     {
         connect( mSynchronizer, SIGNAL(urlChanged(KUrl)),
                  SLOT(onUrlChanged(KUrl)) );
-        connect( mSynchronizer, SIGNAL(synchronized()),
-                 SLOT(onSynchronized()) );
-        //
     }
     emit locationChanged( location() );
-    onSynchronized();
 }
 
 void DocumentInfoTool::onUrlChanged( const KUrl& url )
@@ -173,13 +169,6 @@ void DocumentInfoTool::onUrlChanged( const KUrl& url )
     Q_UNUSED( url );
 
     emit locationChanged( location() );
-    onSynchronized();
-}
-
-void DocumentInfoTool::onSynchronized()
-{
-    if( ! mMimeTypeUpdateTimer->isActive() )
-        mMimeTypeUpdateTimer->start();
 }
 
 DocumentInfoTool::~DocumentInfoTool() {}
