@@ -34,6 +34,9 @@ namespace Kasten2
 
 bool JobManager::executeJob( KJob* job )
 {
+    if( ! job )
+        return false;
+
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
     job->exec();
