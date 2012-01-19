@@ -97,10 +97,16 @@ updateLockStatus( ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup,
          it != end;
          ++it )
     {
+        bool isLocked;
+
         if( lockedViewProfileIds.contains(it.key()) )
-            it.value().setLocked( true );
+            isLocked = true;
         else if( unlockedViewProfileIds.contains(it.key()) )
-            it.value().setLocked( false );
+            isLocked = false;
+        else
+            continue;
+
+        it.value().setLocked( isLocked );
     }
 }
 
