@@ -26,6 +26,7 @@
 #include <limits>
 
 #include "../../script/classes/enumscriptclass.h"
+#include "../../script/scripthandlerinfo.h"
 
 AbstractEnumDataInformation::AbstractEnumDataInformation(QString name, EnumDefinition::Ptr enumDef, DataInformation* parent)
     : PrimitiveDataInformation(name, parent), mEnum(enumDef)

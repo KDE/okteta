@@ -24,6 +24,7 @@
 
 #include "stringdatainformation.h"
 #include "../dummydatainformation.h"
+#include "../topleveldatainformation.h"
 #include "utf32stringdata.h"
 #include "utf16stringdata.h"
 #include "utf8stringdata.h"

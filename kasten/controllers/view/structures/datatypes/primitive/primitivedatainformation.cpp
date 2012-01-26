@@ -23,6 +23,7 @@
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
 #include "../../script/scriptutils.h"
+#include "../../script/scripthandlerinfo.h"
 #include "../../script/classes/primitivescriptclass.h"
 
 

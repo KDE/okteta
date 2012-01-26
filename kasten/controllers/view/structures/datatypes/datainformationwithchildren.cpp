@@ -23,6 +23,7 @@
 #include "topleveldatainformation.h"
 #include "../script/scriptvalueconverter.h"
 #include "../script/scriptutils.h"
+#include "../script/scripthandlerinfo.h"
 #include "../script/classes/structunionscriptclass.h"
 
 #include <KLineEdit>

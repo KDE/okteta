@@ -23,6 +23,7 @@
 
 #include "structunionscriptclass.h"
 #include "../../datatypes/datainformationwithchildren.h"
+#include "../../datatypes/topleveldatainformation.h"
 
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
