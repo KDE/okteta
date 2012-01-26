@@ -62,6 +62,7 @@ protected:
     QScriptString wasAbleToRead;
     QScriptString validationError;
     QScriptString parent;
+    QScriptString byteOrder;
     QScriptValue mDefaultPrototype;
     ScriptHandlerInfo* mHandlerInfo;
 };

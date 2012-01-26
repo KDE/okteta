@@ -169,9 +169,9 @@ public:
     void setValidationSuccessful(bool validationSuccessful = true);
     bool hasBeenValidated() const;
     void setHasBeenValidated(bool hasBeen);
-    ByteOrder byteOrder() const;
+    DataInformationEndianess byteOrder() const;
+    ByteOrder effectiveByteOrder() const;
     void setByteOrder(DataInformationEndianess newEndianess);
-    void setByteOrder(ByteOrder newByteOrder);
 
     virtual void resetValidationState(); //virtual for datainformationwithchildren
     bool wasAbleToRead() const;
@@ -245,7 +245,7 @@ inline bool DataInformation::wasAbleToRead() const
     return mWasAbleToRead;
 }
 
-inline ByteOrder DataInformation::byteOrder() const
+inline ByteOrder DataInformation::effectiveByteOrder() const
 {
     switch (mByteOrder)
     {
@@ -257,7 +257,7 @@ inline ByteOrder DataInformation::byteOrder() const
             return Kasten2::StructViewPreferences::byteOrder();
         case EndianessInherit:
             return (mParent && !mParent->isTopLevel()) ?
-                mParent->asDataInformation()->byteOrder()
+                mParent->asDataInformation()->effectiveByteOrder()
                 : Kasten2::StructViewPreferences::byteOrder();
     }
 
@@ -265,15 +265,15 @@ inline ByteOrder DataInformation::byteOrder() const
     return Kasten2::StructViewPreferences::byteOrder();
 }
 
+inline DataInformation::DataInformationEndianess DataInformation::byteOrder() const
+{
+    return mByteOrder;
+}
+
+
 inline void DataInformation::setByteOrder(DataInformation::DataInformationEndianess newByteOrder)
 {
     mByteOrder = newByteOrder;
-}
-
-inline void DataInformation::setByteOrder(ByteOrder newByteOrder)
-{
-    //XXX is this method needed?
-    mByteOrder = newByteOrder == ByteOrderEnumClass::BigEndian ? EndiannessBig : EndianessLittle;
 }
 
 inline bool DataInformation::isTopLevel() const

@@ -45,6 +45,7 @@ public:
     virtual QList<const TopLevelDataInformation*> parseStructures() = 0;
     virtual bool isFullyParsed() const = 0;
     static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string);
+    static QString byteOrderToString(DataInformation::DataInformationEndianess order);
 
 protected:
     const Kasten2::StructureDefinitionFile* const mDef;

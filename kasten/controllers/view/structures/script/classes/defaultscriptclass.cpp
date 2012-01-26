@@ -21,6 +21,7 @@
  */
 
 #include "defaultscriptclass.h"
+#include "../../parsers/abstractstructureparser.h"
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine), mHandlerInfo(handlerInfo)
@@ -29,12 +30,12 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     wasAbleToRead = engine->toStringHandle(QLatin1String("wasAbleToRead"));
     validationError = engine->toStringHandle(QLatin1String("validationError"));
     parent = engine->toStringHandle(QLatin1String("parent"));
+    byteOrder = engine->toStringHandle(QLatin1String("byteOrder"));
     qScriptRegisterMetaType<DataInfPtr>(engine, DefaultScriptClass::toScriptValue, DefaultScriptClass::fromScriptValue);
 
     //TODO remove, every subclass should have proto
     mDefaultPrototype = engine->newObject();
-    mDefaultPrototype.setProperty(QLatin1String("toString"),
-                                  engine->newFunction(Default_proto_toString));
+    mDefaultPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Default_proto_toString));
 }
 
 DefaultScriptClass::~DefaultScriptClass()
@@ -59,7 +60,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
         return 0;
-    if (name == valid)
+    if (name == valid || name == validationError || name == byteOrder)
     {
         return flags;
     }
@@ -71,17 +72,14 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     {
         return flags &= ~HandlesWriteAccess;
     }
-    else if (name == validationError)
-    {
-        return flags;
-    }
     else if (queryAdditionalProperty(data, name, &flags, id))
     {
         return flags;
     }
-    else {
+    else
+    {
         return 0;
-     }
+    }
 }
 
 QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScriptString& name, uint id)
@@ -111,6 +109,10 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     {
         return data->validationError();
     }
+    else if (name == byteOrder)
+    {
+        return AbstractStructureParser::byteOrderToString(data->byteOrder());
+    }
     QScriptValue other = additionalProperty(data, name, id);
     if (other.isValid())
         return other;
@@ -134,6 +136,10 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     else if (name == validationError)
     {
         data->setValidationError(value.toString());
+    }
+    else if (name == byteOrder)
+    {
+        data->setByteOrder(AbstractStructureParser::byteOrderFromString(value.toString()));
     }
     else if (name == wasAbleToRead)
     {

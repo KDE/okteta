@@ -40,7 +40,17 @@ DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFrom
         return DataInformation::EndianessLittle;
     else if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings"))
         return DataInformation::EndianessFromSettings;
-    else 
+    else
         return DataInformation::EndianessInherit;
 }
 
+QString AbstractStructureParser::byteOrderToString(DataInformation::DataInformationEndianess order)
+{
+    if (order == DataInformation::EndianessLittle)
+        return QLatin1String("little-endian");
+    if (order == DataInformation::EndiannessBig)
+        return QLatin1String("big-endian");
+    if (order == DataInformation::EndianessFromSettings)
+        return QLatin1String("from-settings");
+    return QLatin1String("inherit");
+}

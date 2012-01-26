@@ -36,7 +36,7 @@ bool PrimitiveDataInformation::setData(const QVariant& valueVariant, Okteta::Abs
     AllPrimitiveTypes valToWrite = qVariantToAllPrimitiveTypes(valueVariant);
     AllPrimitiveTypes newVal(oldVal);
     //this handles remaining < size() for us
-    bool wasAbleToWrite = newVal.writeBits(size(), valToWrite, out, byteOrder(), address, bitsRemaining, &bitOffset);
+    bool wasAbleToWrite = newVal.writeBits(size(), valToWrite, out, effectiveByteOrder(), address, bitsRemaining, &bitOffset);
     return wasAbleToWrite;
 }
 
@@ -69,7 +69,7 @@ qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     AllPrimitiveTypes oldVal(value());
     AllPrimitiveTypes newVal(value());
 
-    mWasAbleToRead = newVal.readBits(size(), input, byteOrder(), address, bitsRemaining, bitOffset);
+    mWasAbleToRead = newVal.readBits(size(), input, effectiveByteOrder(), address, bitsRemaining, bitOffset);
 
     if (oldVal != newVal || wasValid != mWasAbleToRead) {
         topLevelDataInformation()->setChildDataChanged();
