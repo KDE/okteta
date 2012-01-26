@@ -60,6 +60,7 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
+    topLevelDataInformation()->updateElement(this);
     if (bitsRemaining < BitCount64(size()))
     {
         mWasAbleToRead = false;
