@@ -1,22 +1,22 @@
 /*
-    This file is part of the Okteta Kasten module, made within the KDE community.
-
-    Copyright 2011  Alex Richardson <alex.richardson@gmx.de>
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+ *  This file is part of the Okteta Kasten module, made within the KDE community.
+ *
+ *  Copyright 2011, 2012  Alex Richardson <alex.richardson@gmx.de>
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later version.
+ *
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *  Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 
 //I'm lazy
 #undef QT_NO_CAST_FROM_ASCII
@@ -32,6 +32,7 @@
 #include "view/structures/script/scriptvalueconverter.h"
 #include "view/structures/datatypes/datainformation.h"
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
+#include "view/structures/datatypes/primitive/enumdatainformation.h"
 
 class ScriptValueConverterTest : public QObject
 {
@@ -40,6 +41,8 @@ private Q_SLOTS:
     void initTestCase();
     void testPrimitives();
     void testPrimitives_data();
+    void testParseEnum();
+    void testParseEnum_data();
 private:
     DataInformation* evaluate(QString code);
     QScriptEngine engine;
@@ -93,7 +96,7 @@ void ScriptValueConverterTest::testPrimitives()
     QFETCH(QString, code2);
     QFETCH(QString, typeString);
     QFETCH(int, expectedType);
-    PrimitiveDataType type = (PrimitiveDataType)expectedType; 
+    PrimitiveDataType type = (PrimitiveDataType)expectedType;
 
     QScriptValue val1 = engine.evaluate(code);
     QScriptValue val2 = engine.evaluate(code2);
@@ -121,6 +124,69 @@ void ScriptValueConverterTest::testPrimitives()
     QVERIFY(p3);
     QCOMPARE(p3->type(), type);
 }
+
+
+void ScriptValueConverterTest::testParseEnum()
+{
+    //QFETCH(QString, name);
+    QFETCH(QString, code);
+    QFETCH(int, expectedCount);
+
+    QScriptValue val = engine.evaluate(code);
+    if (engine.hasUncaughtException())
+    {
+        qDebug() << engine.uncaughtExceptionBacktrace();
+        qDebug() << code;
+    }
+    QVERIFY(!engine.hasUncaughtException());
+    QVERIFY(val.isValid());
+    QVERIFY(!val.isNull());
+    QVERIFY(!val.isUndefined());
+    QCOMPARE(val.property("type").toString(), QString("enum"));
+
+    ScriptValueConverter c(val, "val");
+
+    DataInformation* data = c.convert();
+    QVERIFY(data);
+    EnumDataInformation* e = dynamic_cast<EnumDataInformation*>(data);
+    QVERIFY(e);
+
+    QMap<AllPrimitiveTypes, QString> enumVals = e->enumValues()->values();
+    QCOMPARE(enumVals.size(), expectedCount);
+
+    if (expectedCount != 0)
+    {
+        QFETCH(quint64, expectedValue);
+        //to ensure it does not match when value is not found add 1 to the default
+        AllPrimitiveTypes result = enumVals.key("value", expectedValue + 1);
+        QCOMPARE(result.ulongValue, expectedValue);
+    }
+}
+
+void ScriptValueConverterTest::testParseEnum_data() {
+    QString baseStr = "enumeration(\"someValues\", %1, { value : %2})";
+    QTest::addColumn<QString>("code");
+    QTest::addColumn<int>("expectedCount");
+    QTest::addColumn<quint64>("expectedValue");
+
+    //QTest::newRow("invalid_type_struct") << baseStr.arg("struct({ val : uint8() })", "1234.234") << 0;
+    //QTest::newRow("invalid_type_array") << baseStr.arg("array(uint8(), 1)", "1234.234") << 0;
+    //QTest::newRow("invalid_type_union") << baseStr.arg("union({ val : uint8() })", "1234.234") << 0;
+    QTest::newRow("invalid_type_double") << baseStr.arg("double()", "1234.234") << 0;
+    QTest::newRow("invalid_type_float") << baseStr.arg("float()", "1234.234") << 0;
+    //QTest::newRow("invalid_type_string") << baseStr.arg("string()", "1234.234") << 0;
+
+    QTest::newRow("float2int8") << baseStr.arg("uint8()", "1.234") << 1 << quint64(1);
+    QTest::newRow("float2int8_range") << baseStr.arg("uint8()", "1234.234") << 0;
+    QTest::newRow("float2int32") << baseStr.arg("uint32()", "1234.1234") << 1 << quint64(1234);
+    QTest::newRow("float2int32_range") << baseStr.arg("uint32()", "5294967296.234") << 0;
+    QTest::newRow("float2int64") << baseStr.arg("uint64()", "5294967296.234") << 1 << quint64(5294967296UL);
+    QTest::newRow("double_overflow") << baseStr.arg("uint64()", "9007199254740993.0") << 0 << quint64(9007199254740993UL); //only 992 and 994 can be represented as a double
+    QTest::newRow("uint64_max_hex") << baseStr.arg("uint64()", "new String(\"0xFFFFFFFFFFFFFFFF\")") << 1 << quint64(0xFFFFFFFFFFFFFFFFL);
+    QTest::newRow("uint64_max") << baseStr.arg("uint64()", "new String(\"18446744073709551615\")") << 1 << quint64(18446744073709551615UL);
+
+}
+
 
 QTEST_MAIN(ScriptValueConverterTest)
 
