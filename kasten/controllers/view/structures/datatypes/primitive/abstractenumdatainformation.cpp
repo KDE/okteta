@@ -60,10 +60,16 @@ QMap< AllPrimitiveTypes, QString > AbstractEnumDataInformation::parseEnumValues(
             num = qAbs(num);
             if (num <= std::numeric_limits<quint32>::max())
                 enumValues.insert(val.toUInt32(), it.name());
-            else
+            //this is the largest double which maps to an integer exactly, ...993 is not representable anymore
+            //...992 would still be representable, however it may be that ...993 was rounded down to that, be safe
+            //and force the user to write such large numbers as strings
+            else if (num <= 9007199254740991.0)
                 enumValues.insert(quint64(num), it.name());
+            else
+                kWarning() << "double value" << num << "is larger than the biggest double value that can represent any smaller integer exactly";
         }
-        else {
+        else
+        {
             QString numStr = val.toString();
             bool ok = false;
             quint64 num;
