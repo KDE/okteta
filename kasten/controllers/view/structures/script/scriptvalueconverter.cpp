@@ -268,17 +268,6 @@ UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value, QString
 
 EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& name, bool flags) const
 {
-    QMap<AllPrimitiveTypes, QString> enumValues;
-    QScriptValueIterator it(value.property(QLatin1String("enumValues")));
-    while (it.hasNext())
-    {
-        it.next();
-        QScriptValue val = it.value();
-        if (val.isNumber())
-        {
-            enumValues.insert(val.toUInt32(), it.name());
-        }
-    }
     QString typeString = value.property(QLatin1String("enumType")).toString();
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
     if (primitiveType == Type_NotPrimitive)
@@ -287,6 +276,15 @@ EnumDataInformation* ScriptValueConverter::toEnum(QScriptValue& value, QString& 
                 + typeString + QLatin1String("' -> return NULL"));
         return NULL;
     }
+
+    QScriptValue enumValuesObj = value.property(QLatin1String("enumValues"));
+    if (!enumValuesObj.isValid() || !enumValuesObj.isObject()) {
+        ScriptUtils::object()->logScriptError(QLatin1String("Could not parse enumValues as a number of enum values"));
+        ScriptUtils::dumpQScriptValue(value, __FILE__, __LINE__);
+        return NULL;
+    }
+    QMap<AllPrimitiveTypes, QString> enumValues = AbstractEnumDataInformation::parseEnumValues(enumValuesObj, primitiveType);
+
     QString enumName = value.property(QLatin1String("enumName")).toString();
     EnumDefinition::Ptr def(new EnumDefinition(enumValues, enumName, primitiveType));
     PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(name, primitiveType);

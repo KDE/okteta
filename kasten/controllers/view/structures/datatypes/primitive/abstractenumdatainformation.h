@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -36,6 +36,9 @@ public:
 
     virtual bool isEnum() const;
     EnumDefinition::Ptr enumValues();
+
+    static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val, PrimitiveDataType type = Type_UInt32);
+
 protected:
     EnumDefinition::Ptr mEnum;
 };
