@@ -35,9 +35,12 @@ public:
     virtual ~AbstractEnumDataInformation();
 
     virtual bool isEnum() const;
-    EnumDefinition::Ptr enumValues();
+    EnumDefinition::Ptr enumValues() const;
+    void setEnumValues(QMap<AllPrimitiveTypes, QString> newValues);
 
     static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val, PrimitiveDataType type = Type_UInt32);
+
+    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
 protected:
     EnumDefinition::Ptr mEnum;
@@ -48,7 +51,7 @@ inline bool AbstractEnumDataInformation::isEnum() const
     return true;
 }
 
-inline EnumDefinition::Ptr AbstractEnumDataInformation::enumValues()
+inline EnumDefinition::Ptr AbstractEnumDataInformation::enumValues() const
 {
     return mEnum;
 }

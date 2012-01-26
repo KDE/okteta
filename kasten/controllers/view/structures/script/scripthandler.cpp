@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2010, 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -29,6 +29,7 @@
 #include "classes/defaultscriptclass.h"
 #include "classes/arrayscriptclass.h"
 #include "classes/primitivescriptclass.h"
+#include "classes/enumscriptclass.h"
 #include "classes/structunionscriptclass.h"
 #include "classes/stringscriptclass.h"
 
@@ -48,14 +49,11 @@ ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString 
 #endif
 {
     init();
-    ArrayScriptClass* arr = new ArrayScriptClass(mEngine, &mHandlerInfo);
-    mHandlerInfo.mArrayClass = arr;
-    PrimitiveScriptClass* prim = new PrimitiveScriptClass(mEngine, &mHandlerInfo);
-    mHandlerInfo.mPrimitiveClass = prim;
-    StructUnionScriptClass* strUn = new StructUnionScriptClass(mEngine, &mHandlerInfo);
-    mHandlerInfo.mStructUnionClass = strUn;
-    StringScriptClass* str = new StringScriptClass(mEngine, &mHandlerInfo);
-    mHandlerInfo.mStringScriptClass = str;
+    mHandlerInfo.mArrayClass.reset(new ArrayScriptClass(mEngine, &mHandlerInfo));
+    mHandlerInfo.mPrimitiveClass.reset(new PrimitiveScriptClass(mEngine, &mHandlerInfo));
+    mHandlerInfo.mEnumClass.reset(new EnumScriptClass(mEngine, &mHandlerInfo));
+    mHandlerInfo.mStructUnionClass.reset(new StructUnionScriptClass(mEngine, &mHandlerInfo));
+    mHandlerInfo.mStringScriptClass.reset(new StringScriptClass(mEngine, &mHandlerInfo));
 }
 
 ScriptHandler::~ScriptHandler()

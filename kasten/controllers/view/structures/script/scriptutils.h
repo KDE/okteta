@@ -46,13 +46,13 @@ public:
     }
     static ScriptUtils* object();
 
-    void dumpQScriptValue(QScriptValue& val, const char* file, int line);
+    static void dumpQScriptValue(const QScriptValue& val, const char* file, int line);
+    static QString qScriptValueToString(const QScriptValue& val);
 
-    void wrapAllPrimitiveTypes(QScriptValue& val, AllPrimitiveTypes allPrim,
+    static void wrapAllPrimitiveTypes(QScriptValue& out, AllPrimitiveTypes allPrim,
             PrimitiveDataType actualType);
 
-    static QScriptValue allPrimitivesToString(QScriptContext* ctx,
-            QScriptEngine* eng);
+    static QScriptValue allPrimitivesToString(QScriptContext* ctx, QScriptEngine* eng);
 
     void logScriptError(const QString& message, QScriptValue errorObject);
     void logScriptError(const QString& message)

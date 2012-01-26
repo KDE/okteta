@@ -280,7 +280,7 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
 
 QScriptValue StringDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    QScriptValue ret = engine->newObject(handlerInfo->mStringScriptClass);
+    QScriptValue ret = engine->newObject(handlerInfo->mStringScriptClass.data());
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
 }

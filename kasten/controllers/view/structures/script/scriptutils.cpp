@@ -26,32 +26,54 @@
 #include <QtScript/QScriptString>
 #include <KDebug>
 
-void ScriptUtils::dumpQScriptValue(QScriptValue& val, const char* file, int line)
+
+QString ScriptUtils::qScriptValueToString(const QScriptValue& val)
 {
-    kDebug() << "dumping called from: " << file << ":" << line;
     if (!val.isValid())
-    {
-        kDebug() << "val is invalid";
-        return;
-    }
-
+        return QLatin1String("invalid");
     if (val.isUndefined())
-    {
-        kDebug() << "val is undefined";
-        return;
-    }
-    kDebug() << "val=" << val.toString();
+        return QLatin1String("undefined");
+    if (val.isNull())
+        return QLatin1String("null");
 
+
+    QString ret = val.toString();
+    if (!val.isQObject()) {
+        return ret;
+    }
+    ret += QLatin1String(" [");
     QScriptValueIterator it(val);
+    bool first = true;
     while (it.hasNext())
     {
+        if (it.name().startsWith(QLatin1String("_")))
+            continue; // skip all names starting with _ like e.g. __proto__
+
+        if (!first)
+            ret += QLatin1String(", ");
+        else
+            first = false;
+
         it.next();
-        kDebug()<< "name=" << it.name() << "scriptName=" << it.scriptName() << "val="
-                    << it.value().toString();
+        QScriptValue loopValue = it.value();
+        if (!loopValue.isObject()) {
+            ret += it.name() + QLatin1String("=") + loopValue.toString();
+        }
+        else {
+            ret += it.name() + QLatin1String("=") + qScriptValueToString(loopValue);
+        }
     }
+    return ret;
 }
 
-void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& val,
+
+void ScriptUtils::dumpQScriptValue(const QScriptValue& val, const char* file, int line)
+{
+    kDebug() << "dumping called from: " << file << ":" << line;
+    kDebug() << "value was: " << qScriptValueToString(val);
+}
+
+void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& out,
         AllPrimitiveTypes allPrim, PrimitiveDataType actualType)
 {
     const char* type;
@@ -99,23 +121,23 @@ void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& val,
         type = 0;
         break;
     }
-    val.setProperty(QLatin1String("type"), QLatin1String(type));
-    val.setProperty(QLatin1String("char"), QString(QLatin1Char(allPrim.ubyteValue)));
-    val.setProperty(QLatin1String("int8"), allPrim.byteValue);
-    val.setProperty(QLatin1String("uint8"), allPrim.ubyteValue);
-    val.setProperty(QLatin1String("int16"), allPrim.shortValue);
-    val.setProperty(QLatin1String("uint16"), allPrim.ushortValue);
-    val.setProperty(QLatin1String("int32"), allPrim.intValue);
-    val.setProperty(QLatin1String("uint32"), allPrim.uintValue);
+    out.setProperty(QLatin1String("type"), QLatin1String(type));
+    out.setProperty(QLatin1String("char"), QString(QLatin1Char(allPrim.ubyteValue)));
+    out.setProperty(QLatin1String("int8"), allPrim.byteValue);
+    out.setProperty(QLatin1String("uint8"), allPrim.ubyteValue);
+    out.setProperty(QLatin1String("int16"), allPrim.shortValue);
+    out.setProperty(QLatin1String("uint16"), allPrim.ushortValue);
+    out.setProperty(QLatin1String("int32"), allPrim.intValue);
+    out.setProperty(QLatin1String("uint32"), allPrim.uintValue);
     //QtScript has no support for 64 bit ints, add another value which contains the higher 32 bits
     //XXX any better solution for this?
-    val.setProperty(QLatin1String("int64high32bits"), qint32(allPrim.ulongValue >> 32));
-    val.setProperty(QLatin1String("uint64high32bits"), quint32(allPrim.ulongValue >> 32));
+    out.setProperty(QLatin1String("int64high32bits"), qint32(allPrim.ulongValue >> 32));
+    out.setProperty(QLatin1String("uint64high32bits"), quint32(allPrim.ulongValue >> 32));
 
-    val.setProperty(QLatin1String("float"), allPrim.floatValue);
-    val.setProperty(QLatin1String("double"), allPrim.doubleValue);
-    QScriptValue toStringFunc = val.engine()->newFunction(allPrimitivesToString);
-    val.setProperty(QLatin1String("toString"), toStringFunc);
+    out.setProperty(QLatin1String("float"), allPrim.floatValue);
+    out.setProperty(QLatin1String("double"), allPrim.doubleValue);
+    QScriptValue toStringFunc = out.engine()->newFunction(allPrimitivesToString);
+    out.setProperty(QLatin1String("toString"), toStringFunc);
 }
 
 QScriptValue ScriptUtils::allPrimitivesToString(QScriptContext* ctx,

@@ -175,7 +175,7 @@ QVariant ArrayDataInformation::childData(int row, int column, int role) const
 
 QScriptValue ArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    QScriptValue ret = engine->newObject(handlerInfo->mArrayClass);
+    QScriptValue ret = engine->newObject(handlerInfo->mArrayClass.data());
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
 }

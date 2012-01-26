@@ -33,7 +33,7 @@
 class EnumDefinition: public QSharedData
 {
 public:
-    typedef QSharedDataPointer<const EnumDefinition> Ptr;
+    typedef QSharedDataPointer<EnumDefinition> Ptr;
     EnumDefinition(const QMap<AllPrimitiveTypes, QString> values, QString name,
             PrimitiveDataType type) :
         QSharedData(), mName(name), mValues(values), mType(type)
@@ -49,9 +49,10 @@ public:
     const QString value(AllPrimitiveTypes key) const;
     PrimitiveDataType type() const;
     const QString& name() const;
+    void setValues(QMap< AllPrimitiveTypes, QString > newValues);
 protected:
     const QString mName;
-    const QMap<AllPrimitiveTypes, QString> mValues;
+    QMap<AllPrimitiveTypes, QString> mValues;
     const PrimitiveDataType mType;
 };
 
@@ -80,5 +81,11 @@ inline const QString& EnumDefinition::name() const
 {
     return mName;
 }
+
+inline void EnumDefinition::setValues(QMap<AllPrimitiveTypes, QString> newValues)
+{
+    mValues = newValues; //causes the QSharedPointer to detach and copy
+}
+
 
 #endif /* ENUMDEFINITION_H_ */

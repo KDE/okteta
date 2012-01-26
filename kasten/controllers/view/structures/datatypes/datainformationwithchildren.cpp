@@ -243,7 +243,7 @@ QVariant DataInformationWithChildren::childData(int row, int column, int role) c
 
 QScriptValue DataInformationWithChildren::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    QScriptValue ret = engine->newObject(handlerInfo->mStructUnionClass);
+    QScriptValue ret = engine->newObject(handlerInfo->mStructUnionClass.data());
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
 }

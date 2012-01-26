@@ -25,6 +25,8 @@
 
 #include <limits>
 
+#include "../../script/classes/enumscriptclass.h"
+
 AbstractEnumDataInformation::AbstractEnumDataInformation(QString name, EnumDefinition::Ptr enumDef, DataInformation* parent)
     : PrimitiveDataInformation(name, parent), mEnum(enumDef)
 {
@@ -89,3 +91,16 @@ QMap< AllPrimitiveTypes, QString > AbstractEnumDataInformation::parseEnumValues(
     }
     return enumValues;
 }
+
+void AbstractEnumDataInformation::setEnumValues(QMap< AllPrimitiveTypes, QString > newValues)
+{
+    mEnum->setValues(newValues);
+}
+
+QScriptValue AbstractEnumDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+{
+    QScriptValue ret = engine->newObject(handlerInfo->mEnumClass.data());
+    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
+    return ret;
+}
+

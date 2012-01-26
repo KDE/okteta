@@ -95,7 +95,7 @@ PrimitiveDataInformation::~PrimitiveDataInformation()
 
 QScriptValue PrimitiveDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    QScriptValue ret = engine->newObject(handlerInfo->mPrimitiveClass);
+    QScriptValue ret = engine->newObject(handlerInfo->mPrimitiveClass.data());
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
 }

@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -25,17 +25,12 @@
 #include "classes/primitivescriptclass.h"
 #include "classes/structunionscriptclass.h"
 #include "classes/stringscriptclass.h"
+#include "classes/enumscriptclass.h"
 
-ScriptHandlerInfo::ScriptHandlerInfo() 
-    : mArrayClass(0), mPrimitiveClass(0), mStructUnionClass(0), mStringScriptClass(0)
-{
+ScriptHandlerInfo::ScriptHandlerInfo() {
 }
 
 ScriptHandlerInfo::~ScriptHandlerInfo()
 {
-    delete mArrayClass;
-    delete mPrimitiveClass;
-    delete mStructUnionClass;
-    delete mStringScriptClass;
 }
 
