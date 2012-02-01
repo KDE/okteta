@@ -92,7 +92,7 @@ template<> struct PrimitiveInfo<Type_Int64> {
 
 
 template<> struct PrimitiveInfo<Type_Char> {
-    typedef char valueType;
+    typedef qint8 valueType;
     typedef CharDataInformation Class;
 };
 template<> struct PrimitiveInfo<Type_Float> {

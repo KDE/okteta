@@ -33,6 +33,7 @@ class DummyDataInformation;
 class AbstractArrayData;
 class ArrayDataInformation : public DataInformation
 {
+    friend class PrimitiveArrayTest;
 protected:
     explicit ArrayDataInformation(const ArrayDataInformation& d);
 public:

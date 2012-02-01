@@ -374,6 +374,12 @@ kde4_add_unit_test( osdparsertest
 )
 target_link_libraries(osdparsertest structures-static ${QT_QTTEST_LIBRARY})
 
+kde4_add_unit_test( primitivearraytest
+TESTNAME primitive-array-test
+test/primitivearraytest.cpp
+)
+target_link_libraries(primitivearraytest structures-static ${QT_QTTEST_LIBRARY})
+
 endif ( KDE4_BUILD_TESTS )
 
 endif( NOT NO_STRUCTURES_TOOL )

@@ -46,6 +46,7 @@ public:
 
     virtual DataInformation* childAt(unsigned int idx);
     virtual QVariant dataAt(int index, int column, int role);
+    AllPrimitiveTypes valueAt(int index) const;
     virtual int indexOf(const DataInformation* data) const;
     virtual unsigned int length() const;
     virtual BitCount32 offset(uint row) const;
@@ -165,6 +166,14 @@ bool PrimitiveArrayData<type>::isComplex() const
 {
     return false;
 }
+
+template<PrimitiveDataType type>
+AllPrimitiveTypes PrimitiveArrayData<type>::valueAt(int index) const
+{
+    Q_ASSERT(index >= 0 && index < mData.size());
+    return AllPrimitiveTypes(mData.at(index));
+}
+
 
 
 
