@@ -197,8 +197,13 @@ private:
 
     static QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
 
+    static QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);
+    static QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine* eng);
+
     static const QString typePropertyString;
     static const QString toStringPropertyString;
+    static const QString setValidationPropertyString;
+    static const QString setUpdatePropertyString;
 };
 
 #endif /* SCRIPTENGINEINITIALIZER_H_ */

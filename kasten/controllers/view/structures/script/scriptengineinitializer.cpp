@@ -32,6 +32,8 @@
 
 const QString ScriptEngineInitializer::typePropertyString = QLatin1String("type");
 const QString ScriptEngineInitializer::toStringPropertyString = QLatin1String("toString");
+const QString ScriptEngineInitializer::setUpdatePropertyString = QLatin1String("setUpdate");
+const QString ScriptEngineInitializer::setValidationPropertyString = QLatin1String("setValidation");
 
 /** create a new primitive of type @p type */
 QScriptValue ScriptEngineInitializer::primitiveConstructor(QScriptContext* ctx,
@@ -44,6 +46,8 @@ QScriptValue ScriptEngineInitializer::primitiveConstructor(QScriptContext* ctx,
         object = eng->newObject();
     object.setProperty(typePropertyString, type);
     object.setProperty(toStringPropertyString, eng->newFunction(primitiveToString));
+    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
+    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
 
     return object;
 }
@@ -158,6 +162,8 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
                        typeArg.isEmpty() ? QLatin1String("signed") : typeArg);
     object.setProperty(QLatin1String("width"), ctx->argument(1));
     object.setProperty(toStringPropertyString, eng->newFunction(bitfieldToString));
+    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
+    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
 
     return object;
 }
@@ -185,6 +191,8 @@ QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
     object.setProperty(QLatin1String("children"), children);
     object.setProperty(toStringPropertyString, eng->newFunction(structToString));
     object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
+    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
+    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
 
     return object;
 }
@@ -211,6 +219,8 @@ QScriptValue ScriptEngineInitializer::scriptNewUnion(QScriptContext* ctx,
     object.setProperty(QLatin1String("children"), children);
     object.setProperty(toStringPropertyString, eng->newFunction(unionToString));
     object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
+    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
+    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
 
     return object;
 }
@@ -241,6 +251,8 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
     object.setProperty(QLatin1String("childType"), childType);
     object.setProperty(QLatin1String("length"), length);
     object.setProperty(toStringPropertyString, eng->newFunction(arrayToString));
+    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
+    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
 
     return object;
 }
@@ -291,6 +303,8 @@ QScriptValue ScriptEngineInitializer::createEnumObject(QScriptContext* ctx, QScr
     object.setProperty(QLatin1String("enumValues"), enumValues);
     object.setProperty(QLatin1String("enumName"), name);
     object.setProperty(toStringPropertyString, eng->newFunction(enumToString));
+    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
+    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
 
     return object;
 }
@@ -320,6 +334,9 @@ QScriptValue ScriptEngineInitializer::scriptNewString(QScriptContext* ctx, QScri
 
     object.setProperty(typePropertyString, QLatin1String("string"));
     object.setProperty(QLatin1String("encoding"), encoding);
+    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
+    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
+
     return object;
 }
 
@@ -499,32 +516,6 @@ QScriptValue ScriptEngineInitializer::enumToString(QScriptContext* ctx,
     return result;
 }
 
-void addFunctionAsMemberProperty(QScriptContext* ctx, QScriptEngine* eng,
-        QScriptValue& val, int argIndex, QString propertyName)
-{
-    Q_UNUSED(eng)
-    if (ctx->argumentCount() <= argIndex)
-    {
-        val = ctx->throwError(QLatin1String("not enough arguments passed: needs at least ")
-                + QString::number(argIndex));
-        return;
-    }
-    QScriptValue func = ctx->argument(argIndex);
-    if (func.isNull())
-    {
-        //do not add it to the script value
-        return;
-    }
-    if (!func.isFunction())
-    {
-        val = ctx->throwError(QScriptContext::TypeError, QString::fromLatin1(
-                "argument %1 is not a function").arg(argIndex));
-        return;
-    }
-    // argument is valid -> set the property
-    val.setProperty(propertyName, func);
-}
-
 QScriptValue ScriptEngineInitializer::getChild(QScriptContext* ctx, QScriptEngine* eng)
 {
     if (ctx->argumentCount() < 1)
@@ -535,6 +526,34 @@ QScriptValue ScriptEngineInitializer::getChild(QScriptContext* ctx, QScriptEngin
         return ret;
     else
         return eng->undefinedValue();
+}
+
+QScriptValue ScriptEngineInitializer::addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng)
+{
+    if (ctx->argumentCount() != 1)
+        return ctx->throwError(QLatin1String("setUpdate(): needs one argument!"));
+    QScriptValue thisObj = ctx->thisObject();
+    Q_ASSERT(thisObj.isValid());
+    QScriptValue func = ctx->argument(0);
+    if (!func.isFunction()) {
+        return ctx->throwError(QScriptContext::TypeError, QLatin1String("setUpdate(): argument must be a function!"));
+    }
+    thisObj.setProperty(QLatin1String("updateFunc"), func);
+    return thisObj;
+}
+
+QScriptValue ScriptEngineInitializer::addValidationFunc(QScriptContext* ctx, QScriptEngine* eng)
+{
+    if (ctx->argumentCount() != 1)
+        return ctx->throwError(QLatin1String("setValidation(): needs one argument!"));
+    QScriptValue thisObj = ctx->thisObject();
+    Q_ASSERT(thisObj.isValid());
+    QScriptValue func = ctx->argument(0);
+    if (!func.isFunction()) {
+        return ctx->throwError(QScriptContext::TypeError, QLatin1String("setValidation(): argument must be a function!"));
+    }
+    thisObj.setProperty(QLatin1String("validationFunc"), func);
+    return thisObj;
 }
 
 
