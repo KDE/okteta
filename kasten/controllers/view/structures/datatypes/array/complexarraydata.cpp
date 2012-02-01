@@ -50,7 +50,6 @@ void ComplexArrayData::setLength(int newLength)
     kDebug() << "resizing" << mParent->name() << "from " << oldLength << " to " << newLength;
     if (newLength > oldLength)
     {
-        mParent->topLevelDataInformation()->_childrenAboutToBeInserted(mParent, oldLength, newLength - 1);
         mChildren.reserve(newLength);
         for (int i = oldLength; i < newLength; ++i)
         {
@@ -58,16 +57,11 @@ void ComplexArrayData::setLength(int newLength)
             arrayElem->setParent(mParent);
             mChildren.append(arrayElem);
         }
-        mParent->topLevelDataInformation()->_childrenInserted(mParent, oldLength, newLength - 1);
     }
     else if (newLength < oldLength) //XXX maybe keep some cached
     {
-        mParent->topLevelDataInformation()->_childrenAboutToBeRemoved(mParent, newLength, oldLength - 1);
-
         qDeleteAll(mChildren.begin() + newLength, mChildren.end());
         mChildren.resize(newLength);
-
-        mParent->topLevelDataInformation()->_childrenRemoved(mParent, newLength, oldLength - 1);
     }
     //else nothing to do, length stays the same
 }

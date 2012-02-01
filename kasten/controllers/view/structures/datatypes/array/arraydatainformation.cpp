@@ -71,8 +71,7 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
 {
     kDebug() << "old child count: " << childCount();
 
-    if (!mData)
-    {
+    if (!mData) {
         kWarning() << "mData == null";
         return QScriptValue();
     }
@@ -88,7 +87,21 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
         return context ? context->throwError(QLatin1String("new Array length is to large: ")
                 + QString::number(newLength)) : QScriptValue();
     }
-    mData->setLength(newLength);
+    int oldLength = mData->length();
+    if (newLength < oldLength)
+    {
+        topLevelDataInformation()->_childrenAboutToBeRemoved(this, newLength, oldLength - 1);
+        mData->setLength(newLength);
+        topLevelDataInformation()->_childrenRemoved(this, newLength, oldLength - 1);
+    }
+    else if (newLength > oldLength)
+    {
+        topLevelDataInformation()->_childrenAboutToBeInserted(this, oldLength, newLength - 1);
+        mData->setLength(newLength);
+        topLevelDataInformation()->_childrenInserted(this, oldLength, newLength - 1);
+    }
+    //else
+        //kDebug() << "oldLength == newLength";
     return true;
 }
 
