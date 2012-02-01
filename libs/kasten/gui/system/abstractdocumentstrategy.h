@@ -24,7 +24,7 @@
 #define ABSTRACTDOCUMENTSTRATEGY_H
 
 // lib
-#include "kastencore_export.h"
+#include "kastengui_export.h"
 // Qt
 #include <QtCore/QObject>
 
@@ -39,7 +39,7 @@ class AbstractModelDataGenerator;
 class AbstractDocumentStrategyPrivate;
 
 
-class KASTENCORE_EXPORT AbstractDocumentStrategy : public QObject
+class KASTENGUI_EXPORT AbstractDocumentStrategy : public QObject
 {
   Q_OBJECT
 

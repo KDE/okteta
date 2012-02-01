@@ -34,7 +34,7 @@ class DocumentManager;
 class MultiDocumentStrategyPrivate;
 
 
-class KASTENCORE_EXPORT MultiDocumentStrategy : public AbstractDocumentStrategy
+class KASTENGUI_EXPORT MultiDocumentStrategy : public AbstractDocumentStrategy
 {
   Q_OBJECT
 
