@@ -56,6 +56,12 @@ protected:
     static QScriptValue Default_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 
 protected:
+    QScriptString s_valid;
+    QScriptString s_wasAbleToRead;
+    QScriptString s_validationError;
+    QScriptString s_parent;
+    QScriptString s_byteOrder;
+    QScriptString s_name;
     QScriptString valid;
     QScriptString wasAbleToRead;
     QScriptString validationError;

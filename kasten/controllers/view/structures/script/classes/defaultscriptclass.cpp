@@ -28,11 +28,12 @@
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine), mHandlerInfo(handlerInfo)
 {
-    valid = engine->toStringHandle(QLatin1String("valid"));
-    wasAbleToRead = engine->toStringHandle(QLatin1String("wasAbleToRead"));
-    validationError = engine->toStringHandle(QLatin1String("validationError"));
-    parent = engine->toStringHandle(QLatin1String("parent"));
-    byteOrder = engine->toStringHandle(QLatin1String("byteOrder"));
+    s_valid = engine->toStringHandle(QLatin1String("valid"));
+    s_wasAbleToRead = engine->toStringHandle(QLatin1String("wasAbleToRead"));
+    s_validationError = engine->toStringHandle(QLatin1String("validationError"));
+    s_parent = engine->toStringHandle(QLatin1String("parent"));
+    s_byteOrder = engine->toStringHandle(QLatin1String("byteOrder"));
+    s_name = engine->toStringHandle(QLatin1String("name"));
     qScriptRegisterMetaType<DataInfPtr>(engine, DefaultScriptClass::toScriptValue, DefaultScriptClass::fromScriptValue);
 
     //TODO remove, every subclass should have proto
@@ -62,15 +63,15 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
         return 0;
-    if (name == valid || name == validationError || name == byteOrder)
+    if (name == s_valid || name == s_validationError || name == s_byteOrder)
     {
         return flags;
     }
-    else if (name == wasAbleToRead)
+    else if (name == s_wasAbleToRead || name == s_parent || name == s_name)
     {
         return flags &= ~HandlesWriteAccess;
     }
-    else if (name == parent)
+    else if (name == s_parent)
     {
         return flags &= ~HandlesWriteAccess;
     }
@@ -92,28 +93,32 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
         kDebug() << "could not cast data";
         return QScriptValue();
     }
-    if (name == valid)
+    if (name == s_valid)
     {
         return data->validationSuccessful();
     }
-    else if (name == wasAbleToRead)
+    else if (name == s_wasAbleToRead)
     {
         return data->wasAbleToRead();
     }
-    else if (name == parent)
+    else if (name == s_parent)
     {
         //parent() cannot be null
         if (data->parent()->isTopLevel())
             return QScriptValue::NullValue;
         return data->parent()->asDataInformation()->toScriptValue(engine(), mHandlerInfo);
     }
-    else if (name == validationError)
+    else if (name == s_validationError)
     {
         return data->validationError();
     }
-    else if (name == byteOrder)
+    else if (name == s_byteOrder)
     {
         return AbstractStructureParser::byteOrderToString(data->byteOrder());
+    }
+    else if (name == s_name)
+    {
+        return data->name();
     }
     QScriptValue other = additionalProperty(data, name, id);
     if (other.isValid())
@@ -131,19 +136,19 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         return;
     }
 
-    if (name == valid)
+    if (name == s_valid)
     {
         data->setValidationSuccessful(value.toBool());
     }
-    else if (name == validationError)
+    else if (name == s_validationError)
     {
         data->setValidationError(value.toString());
     }
-    else if (name == byteOrder)
+    else if (name == s_byteOrder)
     {
         data->setByteOrder(AbstractStructureParser::byteOrderFromString(value.toString()));
     }
-    else if (name == wasAbleToRead)
+    else if (name == s_wasAbleToRead || name == s_name)
     {
         return; //can't write
     }
@@ -171,11 +176,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     }
     //TODO allow removing of children, not just setting
     result |= QScriptValue::Undeletable; //no property is deleteable
-    if (name == wasAbleToRead)
-    {
-        result |= QScriptValue::ReadOnly;
-    }
-    else if (name == parent)
+    if (name == s_wasAbleToRead || name == s_parent || name == s_name)
     {
         result |= QScriptValue::ReadOnly;
     }
