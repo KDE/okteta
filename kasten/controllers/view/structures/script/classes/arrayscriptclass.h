@@ -42,8 +42,8 @@ protected:
 
     static QScriptValue Array_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 protected:
-    QScriptString length;
-    QScriptString childType;
+    QScriptString s_length;
+    QScriptString s_childType;
     QScriptValue mArrayPrototype;
 };
 

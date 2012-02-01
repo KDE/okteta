@@ -39,6 +39,14 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     //TODO remove, every subclass should have proto
     mDefaultPrototype = engine->newObject();
     mDefaultPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Default_proto_toString));
+    //add all our properties
+    //TODO make name writable
+    mIterableProperties.append(qMakePair(&s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(&s_name, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(&s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(&s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(&s_valid, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(&s_validationError, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
 DefaultScriptClass::~DefaultScriptClass()
@@ -174,18 +182,15 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         kDebug() << "could not cast data";
         return result;
     }
-    //TODO allow removing of children, not just setting
-    result |= QScriptValue::Undeletable; //no property is deleteable
-    if (name == s_wasAbleToRead || name == s_parent || name == s_name)
-    {
-        result |= QScriptValue::ReadOnly;
+    for (int i = 0, size = mIterableProperties.size(); i < size; ++i) {
+        if (*mIterableProperties.at(i).first == name) {
+            return mIterableProperties.at(i).second;
+        }
     }
-    else if (!additionalPropertyFlags(data, name, id, &result))
-    {
-        //is a child element
-        result |= QScriptValue::ReadOnly;
-    }
-    return result;
+    if (additionalPropertyFlags(data, name, id, &result))
+        return result; //is a child element
+    else
+        return 0;
 }
 
 QScriptValue DefaultScriptClass::prototype() const
@@ -203,3 +208,91 @@ QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QSc
     }
     return QString(data->typeName() + QLatin1Char(' ') + data->name());
 }
+
+
+QScriptClassPropertyIterator* DefaultScriptClass::newIterator(const QScriptValue& object)
+{
+    return new DefaultscriptClassIterator(object, mIterableProperties, engine());
+}
+
+DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& object, const DefaultScriptClass::PropertyInfoList& list,
+                                                       QScriptEngine* engine)
+    : QScriptClassPropertyIterator(object), mCurrent(-1), mList(list), mEngine(engine)
+{
+    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    if (!data)
+        kWarning() << "could not cast data";
+    Q_CHECK_PTR(data);
+    mData = data;
+}
+
+DefaultscriptClassIterator::~DefaultscriptClassIterator()
+{
+}
+
+bool DefaultscriptClassIterator::hasNext() const
+{
+    return mCurrent < mList.size() - 1;
+}
+
+bool DefaultscriptClassIterator::hasPrevious() const
+{
+    return mCurrent > 0;
+}
+
+QScriptString DefaultscriptClassIterator::name() const
+{
+    Q_ASSERT(mCurrent >= 0 && mCurrent < mList.size() + mData->childCount());
+    if (mCurrent < 0 || mCurrent >= mList.size() + mData->childCount())
+        return QScriptString();
+    if (mCurrent < mList.size())
+        return *(mList.at(mCurrent).first);
+    int index = mCurrent - mList.size();
+    Q_ASSERT(index >= 0);
+    DataInformation* child = mData->childAt(index);
+    return mEngine->toStringHandle(child->name());
+}
+
+QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
+{
+    Q_ASSERT(mCurrent >= 0 && mCurrent < mList.size() + mData->childCount());
+    if (mCurrent < 0 || mCurrent >= mList.size() + mData->childCount())
+        return 0;
+    if (mCurrent < mList.size())
+        return mList.at(mCurrent).second;
+    return QScriptValue::ReadOnly;
+}
+
+uint DefaultscriptClassIterator::id() const
+{
+    Q_ASSERT(mCurrent >= 0 && mCurrent < mList.size() + mData->childCount());
+    if (mCurrent < 0 || mCurrent >= mList.size() + mData->childCount())
+        return 0;
+    //only children have an id assigned
+    if (mCurrent < mList.size())
+        return 0;
+    return mCurrent - mList.size() + 1;
+}
+
+void DefaultscriptClassIterator::next()
+{
+    mCurrent++;
+}
+
+void DefaultscriptClassIterator::previous()
+{
+    mCurrent--;
+}
+
+void DefaultscriptClassIterator::toBack()
+{
+    mCurrent = mList.size() + mData->childCount();
+}
+
+void DefaultscriptClassIterator::toFront()
+{
+    mCurrent = -1;
+}
+
+
+

@@ -29,6 +29,7 @@ EnumScriptClass::EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handl
     : PrimitiveScriptClass(engine, handlerInfo)
 {
     s_values = engine->toStringHandle(QLatin1String("values"));
+    mIterableProperties.append(qMakePair(&s_values, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
 EnumScriptClass::~EnumScriptClass()
@@ -54,11 +55,6 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
 
 bool EnumScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
 {
-    if (name == s_values)
-    {
-        *flags |= QScriptValue::Undeletable;
-        return true;
-    }
     return PrimitiveScriptClass::additionalPropertyFlags(data, name, id, flags);
 }
 

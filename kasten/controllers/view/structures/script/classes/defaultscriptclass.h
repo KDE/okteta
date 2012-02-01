@@ -27,6 +27,7 @@
 #include <QtScript/QScriptValue>
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptString>
+#include <QtScript/QScriptClassPropertyIterator>
 #include <KDebug>
 
 class DataInformation;
@@ -37,6 +38,7 @@ class DefaultScriptClass : public QScriptClass
     Q_DISABLE_COPY(DefaultScriptClass)
 public:
     typedef DataInformation* DataInfPtr;
+    typedef QVector<QPair<QScriptString*, QScriptValue::PropertyFlags> > PropertyInfoList;
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual ~DefaultScriptClass();
     //TODO
@@ -46,6 +48,9 @@ public:
     virtual QScriptValue property(const QScriptValue& object, const QScriptString& name, uint id);
     virtual void setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value);
     virtual QScriptValue prototype() const;
+
+    virtual QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
+
     static QScriptValue toScriptValue(QScriptEngine* eng, const DataInfPtr& data);
     static void fromScriptValue(const QScriptValue& obj, DataInfPtr& data);
 protected:
@@ -62,13 +67,32 @@ protected:
     QScriptString s_parent;
     QScriptString s_byteOrder;
     QScriptString s_name;
-    QScriptString valid;
-    QScriptString wasAbleToRead;
-    QScriptString validationError;
-    QScriptString parent;
-    QScriptString byteOrder;
+    /** Contains all properties of this class, classes inheriting should add their own properties to this list */
+    PropertyInfoList mIterableProperties;
     QScriptValue mDefaultPrototype;
     ScriptHandlerInfo* mHandlerInfo;
+};
+
+/** Provide a default iterator for all properties. This should suffice for all classes that don't have children */
+class DefaultscriptClassIterator : public QScriptClassPropertyIterator {
+public:
+    DefaultscriptClassIterator(const QScriptValue& object, const DefaultScriptClass::PropertyInfoList& list,
+        QScriptEngine* engine);
+    virtual ~DefaultscriptClassIterator();
+    virtual bool hasNext() const;
+    virtual bool hasPrevious() const;
+    virtual QScriptString name() const;
+    virtual QScriptValue::PropertyFlags flags() const;
+    virtual uint id() const;
+    virtual void next();
+    virtual void previous();
+    virtual void toBack();
+    virtual void toFront();
+private:
+    int mCurrent;
+    const DefaultScriptClass::PropertyInfoList& mList;
+    QScriptEngine* mEngine;
+    DataInformation* mData;
 };
 
 #endif // DEFAULTSCRIPTCLASS_H

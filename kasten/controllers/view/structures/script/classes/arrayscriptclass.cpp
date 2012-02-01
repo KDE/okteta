@@ -27,12 +27,13 @@
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
-    length = engine->toStringHandle(QLatin1String("length"));
-    childType = engine->toStringHandle(QLatin1String("childType"));
+    s_length = engine->toStringHandle(QLatin1String("length"));
+    mIterableProperties.append(qMakePair(&s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    s_childType = engine->toStringHandle(QLatin1String("childType"));
+    mIterableProperties.append(qMakePair(&s_childType, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mArrayPrototype = engine->newObject();
-    mArrayPrototype.setProperty(QLatin1String("toString"),
-                                engine->newFunction(Array_proto_toString));
+    mArrayPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Array_proto_toString));
 }
 
 ArrayScriptClass::~ArrayScriptClass()
@@ -43,9 +44,9 @@ bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, cons
 {
     Q_UNUSED(data)
     //no need to modify flags since both read and write are handled
-    if (name == length)
+    if (name == s_length)
         return true;
-    else if (name == childType)
+    else if (name == s_childType)
         return true;
     else
     {
@@ -64,16 +65,12 @@ bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, cons
 bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
 {
     Q_UNUSED(data)
-    //no need to modify flags since both read and write are handled
+    Q_UNUSED(name)
     if (id != 0)
     {
         *flags |= QScriptValue::ReadOnly;
         return true;
     }
-    if (name == length)
-        return true;
-    else if (name == childType)
-        return true;
     return false;
 }
 
@@ -94,9 +91,9 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
             return aData->childToScriptValue(pos, engine(), mHandlerInfo);
         }
     }
-    else if (name == length)
+    else if (name == s_length)
         return aData->length();
-    else if (name == childType)
+    else if (name == s_childType)
         return aData->childType();
     return QScriptValue();
 }
@@ -104,7 +101,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
 bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
     ArrayDataInformation* aData = data->asArray();
-    if (name == length)
+    if (name == s_length)
     {
         if (!value.isNumber())
         {
@@ -117,7 +114,7 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
         }
         return true;
     }
-    else if (name == childType)
+    else if (name == s_childType)
     {
         aData->setArrayType(value, engine()->currentContext());
         return true;

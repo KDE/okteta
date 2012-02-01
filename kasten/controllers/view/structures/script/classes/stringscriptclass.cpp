@@ -28,17 +28,26 @@
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)
 {
+    //read-only properties
     s_length = eng->toStringHandle(QLatin1String("charCount"));
+    mIterableProperties.append(qMakePair(&s_length, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     s_lengthInBytes = eng->toStringHandle(QLatin1String("byteCount"));
+    mIterableProperties.append(qMakePair(&s_lengthInBytes, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+
+    //read-write properties
     s_maxByteCount = eng->toStringHandle(QLatin1String("maxByteCount"));
+    mIterableProperties.append(qMakePair(&s_maxByteCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_maxCharCount = eng->toStringHandle(QLatin1String("maxCharCount"));
+    mIterableProperties.append(qMakePair(&s_maxCharCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_terminatedBy = eng->toStringHandle(QLatin1String("terminatedBy"));
+    mIterableProperties.append(qMakePair(&s_terminatedBy, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_encoding = eng->toStringHandle(QLatin1String("encoding"));
+    mIterableProperties.append(qMakePair(&s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_termMode = eng->toStringHandle(QLatin1String("termMod"));
+    mIterableProperties.append(qMakePair(&s_termMode, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mStringPrototype = eng->newObject();
-    mStringPrototype.setProperty(QLatin1String("toString"),
-                                 eng->newFunction(String_proto_toString));
+    mStringPrototype.setProperty(QLatin1String("toString"), eng->newFunction(String_proto_toString));
 }
 
 StringScriptClass::~StringScriptClass()
@@ -74,15 +83,12 @@ bool StringScriptClass::queryAdditionalProperty(const DataInformation* data, con
 bool StringScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
 {
     Q_UNUSED(data)
-    //no need to modify flags since both read and write are handled
-    if (id != 0 || name == s_length || name == s_lengthInBytes)
+    Q_UNUSED(name)
+    if (id != 0 )
     {
         *flags |= QScriptValue::ReadOnly;
         return true;
     }
-    else if (name == s_maxByteCount || name == s_maxCharCount || name == s_terminatedBy
-            || name == s_encoding || name == s_termMode)
-        return true;
     return false;
 }
 
