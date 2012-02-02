@@ -358,18 +358,21 @@ target_link_libraries ( structures-static
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSCRIPTTOOLS_LIBRARY}
 )
+set_target_properties( structures-static PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT= )
 
 kde4_add_unit_test( scriptvalueconvertertest
   TESTNAME scriptvalue-converter-test
   test/scriptvalueconvertertest.cpp
 )
 target_link_libraries(scriptvalueconvertertest structures-static ${QT_QTTEST_LIBRARY})
+set_target_properties(scriptvalueconvertertest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 
 kde4_add_unit_test( osdparsertest
   TESTNAME osd-parser-test
   test/osdparsertest.cpp
 )
 target_link_libraries(osdparsertest structures-static ${QT_QTTEST_LIBRARY})
+set_target_properties(osdparsertest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 
 endif ( KDE4_BUILD_TESTS )
 
