@@ -266,24 +266,32 @@ void StructTool::setSelectedStructuresInView()
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
     kDebug() << "loadedStructs " << loadedStructs;
     foreach(const QString& s,loadedStructs)
+    {
+        int pos = regex.indexIn(s);
+        if (pos > -1)
         {
-            int pos = regex.indexIn(s);
-            if (pos > -1)
-            {
-                QString pluginName = regex.cap(1);
-                QString name = regex.cap(2);
-                //kDebug() << "pluginName=" << path << " structureName=" << name;
-                StructureDefinitionFile* def = mManager->definition(pluginName);
-                if (!def)
-                    continue;
-                if (!def->isValid())
-                    continue;
-                //should be valid now
+            QString pluginName = regex.cap(1);
+            QString name = regex.cap(2);
+            //kDebug() << "pluginName=" << path << " structureName=" << name;
+            StructureDefinitionFile* def = mManager->definition(pluginName);
+            if (!def)
+                continue;
+            if (!def->isValid())
+                continue;
+            //should be valid now
+            if (name == QLatin1String("*")) {
+                //add all of them
+                QVector<TopLevelDataInformation*> structs = def->structures();
+                for (int i = 0; i < structs.size(); ++i)
+                    addChildItem(structs.at(i));
+            }
+            else {
                 TopLevelDataInformation* data = def->structure(name);
                 if (data)
                     addChildItem(data);
             }
         }
+    }
     for (int i = 0; i < mData.count(); ++i) {
         emit dataChanged(i, mData.at(i)->actualDataInformation());
     }
