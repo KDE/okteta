@@ -43,68 +43,35 @@
 #include <QtGui/QListWidgetItem>
 #include <QtGui/QLayout>
 #include <QtGui/QSizePolicy>
-
 #include <KDebug>
 
 static const int FileNameRole = Qt::UserRole;
 
 StructuresManagerView::StructuresManagerView(Kasten2::StructTool* tool, QWidget* parent)
-    : QWidget(parent), mTool(tool), mRebuildingPluginsList(false)
+    : QWidget(parent), mTool(tool), mStructuresSelector(0), mRebuildingPluginsList(false)
 {
     KConfigDialogManager::changedMap()->insert(QLatin1String("StructuresManagerView"), SIGNAL(changed(QStringList)));
     setObjectName(QLatin1String("kcfg_LoadedStructures"));
     mSelectedStructures = Kasten2::StructViewPreferences::loadedStructures();
-    QVBoxLayout* pageLayout = new QVBoxLayout(this);
-    mStructuresSelector = new KPluginSelector(this);
-    connect(mStructuresSelector, SIGNAL(changed(bool)),
-            SLOT(onPluginSelectorChange(bool)));
-    pageLayout->addWidget(mStructuresSelector);
+
+    QVBoxLayout* pageLayout = new QVBoxLayout();
+    setLayout(pageLayout);
+
+    rebuildPluginSelectorEntries();
+
 
     QHBoxLayout* buttonsLayout = new QHBoxLayout();
+    pageLayout->addLayout(buttonsLayout);
 
     mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
-            QLatin1String("okteta-structures.knsrc"), this);
+                                               QLatin1String("okteta-structures.knsrc"), this);
     connect(mGetNewStructuresButton, SIGNAL(dialogFinished(KNS3::Entry::List)),
             SLOT(onGetNewStructuresClicked(KNS3::Entry::List)));
-
     buttonsLayout->addWidget(mGetNewStructuresButton);
 
-    mAdvancedSelectionButton = new KPushButton(KIcon(QLatin1String("configure")), i18n(
-            "Advanced Selection"), this);
+    mAdvancedSelectionButton = new KPushButton(KIcon(QLatin1String("configure")), i18n("Advanced Selection..."), this);
     connect(mAdvancedSelectionButton, SIGNAL(clicked()), SLOT(advancedSelection()));
     buttonsLayout->addWidget(mAdvancedSelectionButton);
-
-    //    mUpdateStructuresButton = new KPushButton(KIcon("system-software-update"), i18n(
-    //            "Check for updates"), this);
-    //    connect(mGetNewStructuresButton, SIGNAL(clicked()),
-    //            SLOT(onUpdateStructuresClicked()));
-    //
-    //    buttonsLayout->addWidget(mUpdateStructuresButton);
-
-    //
-    //    mImportStructuresButton = new KPushButton( i18n("Import Structures..."), this );
-    //    connect( mImportStructuresButton, SIGNAL(clicked()),
-    //             SLOT(onImportStructuresClicked()) );
-    //
-    //    buttonsLayout->addWidget( mImportStructuresButton );
-    //
-    //    mExportStructureButton = new KPushButton( i18n("Export Structure..."), this );
-    //    connect( mExportStructureButton, SIGNAL(clicked()),
-    //             SLOT(onExportStructureClicked()) );
-    //
-    //    buttonsLayout->addWidget( mExportStructureButton );
-    //
-    //    mRemoveStructureButton = new KPushButton( i18n("Remove Structure"), this );
-    //    connect( mRemoveStructureButton, SIGNAL(clicked()),
-    //             SLOT(onRemoveStructureClicked()) );
-    //
-    //    buttonsLayout->addWidget( mRemoveStructureButton );
-
-    //    buttonsLayout->addStretch();
-
-    pageLayout->addLayout(buttonsLayout);
-    rebuildPluginSelectorEntries();
-    setLayout(pageLayout);
 }
 
 void StructuresManagerView::onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries)
@@ -181,82 +148,6 @@ void StructuresManagerView::reloadSelectedItems() {
         kDebug() << "no change:" << mSelectedStructures;
     }
 }
-#if 0
-void StructuresManagerView::onUpdateStructuresClicked()
-{
-    //XXX: implement
-}
-void StructuresManagerView::onImportStructuresClicked()
-{
-    const KUrl::List urls = KFileDialog::getOpenUrls(KUrl(), i18n(
-                    "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
-                    "@title:window Do import the structure definitions",
-                    "Import Structure Definitions"));
-    foreach( const KUrl& url, urls )
-    {
-        // TODO: use Structure Manager
-        // TODO: possibly untar or uncompress it
-        // open it
-
-        // load the scheme
-        //         load url.path();
-        //         if okay
-        //             save
-    }
-}
-
-void StructuresManagerView::onExportStructureClicked()
-{
-    return;
-    //     TODO Not working ATM
-    //        if (currentItem != 0)
-
-    {
-        const KUrl saveUrl = KFileDialog::getSaveUrl(KUrl(), i18n(
-                        "*.osd|Okteta structure definition files (*.osd)"), this, i18nc(
-                        "@title:window Do export the structure definition",
-                        "Export Structure Definition"));
-
-        if (!saveUrl.isEmpty())
-        {
-            const QString fileName;// = currentItem->data(FileNameRole).toString();
-            const QString filePath = KGlobal::dirs()->findResource("data",
-                    "okteta/structures/" + fileName + ".osd");
-            kDebug() << fileName << filePath << saveUrl;
-            const bool success = KIO::NetAccess::upload(filePath, saveUrl, this);
-
-            if (!success)
-            KMessageBox::error(this, KIO::NetAccess::lastErrorString(), i18n(
-                            "Error"));
-        }
-    }
-}
-
-void StructuresManagerView::onRemoveStructureClicked()
-{
-    mStructuresSelector->save();
-    kDebug() << "saved";
-    return;
-    //     QListWidgetItem* currentItem = ui.structuresView->currentItem();
-    //     if (currentItem != 0)
-
-    {
-        const QString fileName;// = currentItem->data(FileNameRole).toString();
-        const QString filePath = KGlobal::dirs()->findResource("data",
-                "okteta/structures/" + fileName + ".osd");
-        const bool success = KIO::NetAccess::del(filePath, this); // TODO: why netaccess?
-        if (success)
-        //             delete schemeList->takeItem( schemeList->currentRow() );
-        ;
-        else
-        KMessageBox::error(
-                this,
-                i18n(
-                        "You do not have permission to delete that structure definition."),
-                i18n("Error"));
-    }
-}
-#endif
 
 void StructuresManagerView::rebuildPluginSelectorEntries()
 {
@@ -274,16 +165,17 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
         }
 
     //XXX is there any way to clear the plugins selector?
-    layout()->removeWidget(mStructuresSelector);
-    layout()->removeWidget(mGetNewStructuresButton);
-    layout()->removeWidget(mAdvancedSelectionButton);
-    delete mStructuresSelector;
+    QBoxLayout* layoutObj = qobject_cast<QBoxLayout*>(layout());
+    Q_CHECK_PTR(layoutObj);
+    if (mStructuresSelector)
+    {
+        layoutObj->removeWidget(mStructuresSelector);
+        delete mStructuresSelector;
+    }
     mStructuresSelector = new KPluginSelector(this);
     connect(mStructuresSelector, SIGNAL(changed(bool)),
             SLOT(onPluginSelectorChange(bool)));
-    layout()->addWidget(mStructuresSelector);
-    layout()->addWidget(mGetNewStructuresButton);
-    layout()->addWidget(mAdvancedSelectionButton);
+    layoutObj->insertWidget(0, mStructuresSelector);
 
     mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
             "Structure Definitions"), QLatin1String("structure"), mTool->manager()->config());

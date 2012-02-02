@@ -55,11 +55,6 @@ public:
 
 protected Q_SLOTS:
     void onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries);
-    //    void onUpdateStructuresClicked();
-    //TODO import
-    //     void onImportStructuresClicked();
-    //     void onExportStructureClicked();
-    //     void onRemoveStructureClicked();
     void onPluginSelectorChange(bool change);
     void advancedSelection();
 Q_SIGNALS:
@@ -73,10 +68,6 @@ private:
     QStringList mSelectedStructures;
     KNS3::Button* mGetNewStructuresButton;
     KPushButton* mAdvancedSelectionButton;
-    //    KPushButton* mUpdateStructuresButton;
-    //     KPushButton* mImportStructuresButton;
-    //     KPushButton* mExportStructureButton;
-    //     KPushButton* mRemoveStructureButton;
     KPluginSelector* mStructuresSelector;
     bool mRebuildingPluginsList :1;
 
