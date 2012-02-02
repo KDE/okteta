@@ -69,8 +69,7 @@ protected:
 
 protected Q_SLOTS:
     void openSettingsDlg(int page = 0);
-    void
-    onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
+    void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCursorIndexChange();
     void lockCurrentStructure(bool lock);
     void setLockButtonStated(bool structureLocked);

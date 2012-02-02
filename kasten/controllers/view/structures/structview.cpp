@@ -168,38 +168,26 @@ void StructView::openSettingsDlg(int page)
     //KConfigDialog didn't find an instance of this dialog, so lets create it :
     KConfigDialog* dialog = new KConfigDialog(this, QLatin1String("Structures Tool Settings"),
             StructViewPreferences::self());
-    QWidget* displaySettings = new StructViewDisplaySettingsWidget();
-    QWidget* structureSettings = new StructuresManagerView(mTool->manager(), this);
-    QWidget* loadedStructuresSettings = new StructureAddRemoveWidget(mTool, this);
+    StructViewDisplaySettingsWidget* displaySettings = new StructViewDisplaySettingsWidget();
+    QWidget* structSelectionWrapper = new QWidget();
+    StructuresManagerView* structureSettings = new StructuresManagerView(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
             QLatin1String("configure"));
-    //wrapper QWidget needed so that preferences are saved
-    QWidget* structsWidget = new QWidget();
-    {
-        QVBoxLayout* layout = new QVBoxLayout();
-        loadedStructuresSettings->setObjectName( QLatin1String("kcfg_LoadedStructures" ));
-        layout->addWidget(loadedStructuresSettings);
-        structsWidget->setLayout(layout);
-    }
-    KPageWidgetItem* structs = dialog->addPage(structsWidget, i18n("Structures"),
-            QLatin1String("configure"));
-    KPageWidgetItem* management = dialog->addPage(structureSettings, i18n(
-            "Structures management"), QLatin1String("preferences-plugin"));
-    //User edited the configuration - update your local copies of the
-    //configuration data
+    QHBoxLayout* hbox = new QHBoxLayout();
+    structSelectionWrapper->setLayout(hbox);
+    hbox->addWidget(structureSettings);
+    Q_ASSERT(structureSettings->objectName() == QLatin1String("kcfg_LoadedStructures"));
+    KPageWidgetItem* management = dialog->addPage(structSelectionWrapper, i18n("Structures management"),
+                                                  QLatin1String("preferences-plugin"));
+
+    //User edited the configuration - update your local copies of the configuration data
+    connect(dialog, SIGNAL(settingsChanged(QString)), mTool, SLOT(setSelectedStructuresInView()));
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(update()));
-    connect(structureSettings, SIGNAL(selectedPluginsChanged()),
-            loadedStructuresSettings, SLOT(updateAvailable()));
-    connect(dialog, SIGNAL(settingsChanged(QString)), mTool,
-            SLOT(setSelectedStructuresInView()));
-    connect(dialog, SIGNAL(settingsChanged(QString)),
-            loadedStructuresSettings, SLOT(updateAvailable()));
+
     //TODO kconfig_compiler signals not working (or am I doing it wrong?)
     if (page == 0)
         dialog->setCurrentPage(displ);
     else if (page == 1)
-        dialog->setCurrentPage(structs);
-    else if (page == 2)
         dialog->setCurrentPage(management);
 
     dialog->show();

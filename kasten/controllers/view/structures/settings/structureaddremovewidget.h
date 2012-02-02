@@ -37,7 +37,6 @@ class StructureAddRemoveWidget: public QWidget
 {
 Q_OBJECT
 
-    Q_PROPERTY(QStringList values READ values USER true)
     QLabel* mTree1Label;
     QTreeWidget* mTreeAvailable;
 
@@ -52,14 +51,9 @@ Q_OBJECT
 
     QStringList mValues;
 public:
-    explicit StructureAddRemoveWidget(Kasten2::StructTool* tool, QWidget* parent = 0);
+    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten2::StructTool* tool, QWidget* parent = 0);
     ~StructureAddRemoveWidget();
-    QStringList values() const
-    {
-        return mValues;
-    }
-Q_SIGNALS:
-    void changed(const QStringList& newValues);
+    QStringList values() const;
 public Q_SLOTS:
     void updateAvailable();
     void moveLeft();
@@ -71,4 +65,10 @@ private:
     void syncData();
     const Kasten2::StructTool* mTool;
 };
+
+inline QStringList StructureAddRemoveWidget::values() const
+{
+    return mValues;
+}
+
 #endif // STRUCTUREADDREMOVEWIDGET_H
