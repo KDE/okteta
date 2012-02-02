@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2012 Alex Richardson <alex.richardson@gmx.de>
  *   Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
  *
  *   This library is free software; you can redistribute it and/or
