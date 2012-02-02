@@ -42,6 +42,7 @@ namespace Kasten2
  */
 class StructureDefinitionFile
 {
+    Q_DISABLE_COPY(StructureDefinitionFile)
 public:
     /**
      * This class uses lazy parsing
@@ -52,35 +53,20 @@ public:
     StructureDefinitionFile(StructureDefinitionFile& f);
     virtual ~StructureDefinitionFile();
 
-    QList<TopLevelDataInformation*> structures();
-    /** this is all that is needed for the StructureAddRemoveWidget,
-     *  should allow improving performance compared to before.
-     *  This method is not const, since it may cause parsing when called the first time
-     */
-    QStringList structureNames();
-    uint structuresCount();
-    TopLevelDataInformation* structure(QString& name);
+    QVector<TopLevelDataInformation*> structures() const;
+    QStringList structureNames() const;
+    TopLevelDataInformation* structure(const QString& name) const;
 
     const KPluginInfo& pluginInfo() const;
     const QDir dir() const;
     /** @return the absolute path to the directory containing the structure definition */
     QString absolutePath() const;
-
     bool isValid() const;
 private:
     KPluginInfo mPluginInfo;
     /** the directory the plugin is saved in */
     QDir mDir;
-    QVector<const TopLevelDataInformation*> mTopLevelStructures;
-    QStringList mStructureNames;
-
-    AbstractStructureParser* mParser;
-    bool mValid :1;
-    /** when true basic parsing finished (names of structures found)
-     * , i.e. mStructureNames has been filled */
-    bool mStructureNamesParsed :1;
-    /** when true complete parsing finished, i.e. mTopLevelStructures has been filled */
-    bool mStructuresParsedCompletely :1;
+    QScopedPointer<AbstractStructureParser> mParser;
 };
 
 inline const KPluginInfo& StructureDefinitionFile::pluginInfo() const
@@ -95,7 +81,7 @@ inline const QDir StructureDefinitionFile::dir() const
 
 inline bool StructureDefinitionFile::isValid() const
 {
-    return mValid;
+    return !mParser.isNull();
 }
 
 } //namespace Kasten2

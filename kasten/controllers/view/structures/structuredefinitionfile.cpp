@@ -36,149 +36,60 @@
 namespace Kasten2
 {
 StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
-    mPluginInfo(info), mValid(true), mStructureNamesParsed(false),
-            mStructuresParsedCompletely(false)
+    mPluginInfo(info)
 {
     QFileInfo tmp(info.entryPath());
     mDir = tmp.dir();
 
     QString category = info.category();
     if (category == QLatin1String("structure/js"))
-        mParser = new ScriptFileParser(this);
+        mParser.reset(new ScriptFileParser(this));
     else if (category == QLatin1String("structure"))
-        mParser = new OsdParser(this);
+        mParser.reset(new OsdParser(this));
     else
-    {
-        //no valid parser found:
-        mValid = false;
-
-        mStructuresParsedCompletely = true;
-        mStructureNamesParsed = true;
-        //now all methods will just return an empty list
         kWarning() << "no valid parser found for plugin category '" << category << "'";
-    }
-
 }
 
 StructureDefinitionFile::~StructureDefinitionFile()
 {
-    qDeleteAll(mTopLevelStructures);
-    delete mParser;
 }
 
-StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
-    mPluginInfo(f.mPluginInfo), mDir(f.mDir), mStructureNames(f.mStructureNames),
-            mValid(f.mValid), mStructureNamesParsed(f.mStructureNamesParsed),
-            mStructuresParsedCompletely(f.mStructuresParsedCompletely)
+QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
 {
-    int len = f.mTopLevelStructures.size();
-    for (int i = 0; i < len; ++i)
-    {
-        mTopLevelStructures.append(f.mTopLevelStructures.at(i)->clone());
+    if (!mParser) {
+        kWarning() << "trying to get structures, but parser does not exist!";
+        return QVector<TopLevelDataInformation*>();
     }
+    return mParser->parseStructures();
 }
 
-QList<TopLevelDataInformation*> StructureDefinitionFile::structures()
+TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name) const
 {
-    if (!mStructuresParsedCompletely && mParser)
-    {
-        mTopLevelStructures = mParser->parseStructures();
-        if (!mStructureNamesParsed) //also parse the names, they should be there already anyway, so there is no overhead
-            mStructureNames = mParser->parseStructureNames();
-        //is parsed completely now -> delete parser
-        delete mParser;
-        mParser = 0;
-        mStructureNamesParsed = true;
-        mStructuresParsedCompletely = true;
+    if (!mParser) {
+        kWarning() << "trying to get structure with name =" << name << ", but parser does not exist!";
+        return 0;
     }
-    //return copy
-    QList<TopLevelDataInformation*> ret;
-    foreach(const TopLevelDataInformation* data, mTopLevelStructures)
+    QVector<TopLevelDataInformation*> list = mParser->parseStructures();
+    TopLevelDataInformation* ret = 0;
+    for (int i = 0; i <list.size(); ++i)
     {
-        ret.append(data->clone());
+        if (list.at(i)->actualDataInformation()->name() == name)
+            ret = list.at(i);
+        else
+            delete list.at(i); //we have no use for this element
     }
-    return ret;
+    if (!ret)
+        kWarning() << "could not find structure with name=" << name;
+    return ret; // not found
 }
 
-//TODO QSharedDataPointer instead?
-TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
+QStringList StructureDefinitionFile::structureNames() const
 {
-    if (!mValid)
-        kError() << "invalid file -> can't find structure";
-    else if (!mStructuresParsedCompletely)
-    {
-        if (mParser)
-        {
-            mTopLevelStructures = mParser->parseStructures();
-            if (!mStructureNamesParsed)
-            {
-                foreach(const TopLevelDataInformation* data, mTopLevelStructures)
-                {
-                        mStructureNames << data->actualDataInformation()->name();
-                }
-            }
-            mStructureNamesParsed = true;
-            mStructuresParsedCompletely = true;
-            delete mParser;
-            mParser = NULL;
-        }
+    if (!mParser) {
+        kWarning() << "trying to get structure names, but parser does not exist!";
+        return QStringList();
     }
-    foreach(const TopLevelDataInformation* data,mTopLevelStructures)
-    {
-        if (data->actualDataInformation()->name() == name)
-            return data->clone();
-    }
-    kWarning() << "could not find structure with name " << name;
-    return NULL; // not found
-}
-
-QStringList StructureDefinitionFile::structureNames()
-{
-    if (!mStructureNamesParsed)
-    {
-        //should be kept in sync with structuresCount()
-        if (mParser)
-        {
-            mStructureNames = mParser->parseStructureNames();
-            if (mParser->isFullyParsed()) //was it necessary to completely parse to get enums?
-
-            {
-                //no point retaining in memory, has been parsed, assign all values now
-                if (!mStructuresParsedCompletely)
-                    mTopLevelStructures = mParser->parseStructures();
-                mStructuresParsedCompletely = true;
-                delete mParser;
-                mParser = NULL; //so it can be safely deleted again later
-            }
-        }
-        mStructureNamesParsed = true;
-    }
-    return mStructureNames;
-}
-
-uint StructureDefinitionFile::structuresCount()
-{
-    //get structure names and then return name cound
-    if (!mStructureNamesParsed)
-    {
-        //should be kept in sync with structureNames()
-        if (mParser)
-        {
-            mStructureNames = mParser->parseStructureNames();
-            if (mParser->isFullyParsed()) //was it necessary to completely parse to get enums?
-
-            {
-                //no point retaining in memory, has been parsed, assign all values now
-                if (!mStructuresParsedCompletely)
-                    mTopLevelStructures = mParser->parseStructures();
-                mStructuresParsedCompletely = true;
-                delete mParser;
-                mParser = NULL; //so it can be safely deleted again later
-            }
-        }
-        mStructureNamesParsed = true;
-    }
-    return mStructureNames.length();
+    return mParser->parseStructureNames();
 }
 
 QString StructureDefinitionFile::absolutePath() const

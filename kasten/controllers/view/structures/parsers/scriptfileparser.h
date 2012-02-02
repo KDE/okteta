@@ -27,15 +27,13 @@
 
 class ScriptFileParser: public AbstractStructureParser
 {
+    Q_DISABLE_COPY(ScriptFileParser)
 public:
     ScriptFileParser(const Kasten2::StructureDefinitionFile* const def);
     virtual ~ScriptFileParser();
 
     virtual QStringList parseStructureNames();
-    virtual QVector<const TopLevelDataInformation*> parseStructures();
-    virtual bool isFullyParsed() const;
-private:
-    bool mParsedCompletely :1;
+    virtual QVector<TopLevelDataInformation*> parseStructures();
 };
 
 #endif /* SCRIPTFILEPARSER_H_ */

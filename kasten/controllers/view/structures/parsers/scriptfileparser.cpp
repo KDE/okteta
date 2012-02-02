@@ -27,7 +27,7 @@
 #include <QScriptEngine>
 
 ScriptFileParser::ScriptFileParser(const Kasten2::StructureDefinitionFile* const def) :
-    AbstractStructureParser(def), mParsedCompletely(false)
+    AbstractStructureParser(def)
 {
 }
 
@@ -40,9 +40,9 @@ QStringList ScriptFileParser::parseStructureNames()
     return QStringList() << mDef->pluginInfo().pluginName();
 }
 
-QVector<const TopLevelDataInformation*> ScriptFileParser::parseStructures()
+QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures()
 {
-    QVector<const TopLevelDataInformation*> ret;
+    QVector<TopLevelDataInformation*> ret;
     QScopedPointer<TopLevelDataInformation> topData(new TopLevelDataInformation(0,
             QFileInfo(mDef->dir().absoluteFilePath(QLatin1String("main.js"))),
             new QScriptEngine(), true, mDef->pluginInfo().pluginName()));
@@ -52,11 +52,5 @@ QVector<const TopLevelDataInformation*> ScriptFileParser::parseStructures()
     else
         kWarning() << "could not parse file " << mDef->absolutePath();
 
-    mParsedCompletely = true;
     return ret;
-}
-
-bool ScriptFileParser::isFullyParsed() const
-{
-    return mParsedCompletely;
 }

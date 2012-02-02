@@ -41,6 +41,7 @@ class PrimitiveDataInformation;
 
 class OsdParser: public AbstractStructureParser
 {
+    Q_DISABLE_COPY(OsdParser)
 public:
     //TODO remove this from both osdparser and abstractstructureparser
     OsdParser(const Kasten2::StructureDefinitionFile* const def);
@@ -51,33 +52,30 @@ public:
     virtual ~OsdParser();
 
     virtual QStringList parseStructureNames();
-    virtual QVector<const TopLevelDataInformation*> parseStructures();
-    virtual bool isFullyParsed() const;
-
+    virtual QVector<TopLevelDataInformation*> parseStructures();
 private:
-    void parseEnums();
-    PrimitiveDataInformation* primitiveFromXML(const QDomElement& node);
-    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& node);
-    AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags);
-    StringDataInformation* stringFromXML(const QDomElement& node);
-    UnionDataInformation* unionFromXML(const QDomElement& xmlElem);
-    StructureDataInformation* structFromXML(const QDomElement& xmlElem);
-    ArrayDataInformation* arrayFromXML(const QDomElement& node, const DataInformation* parent);
+    PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem) const;
+    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem) const;
+    AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags) const;
+    StringDataInformation* stringFromXML(const QDomElement& xmlElem) const;
+    UnionDataInformation* unionFromXML(const QDomElement& xmlElem, QScriptEngine* engine) const;
+    StructureDataInformation* structFromXML(const QDomElement& xmlElem, QScriptEngine* engine) const;
+    ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const DataInformation* parent, QScriptEngine* engine) const;
 
-    DataInformation* parseNode(const QDomNode& node, const DataInformation* parent);
-    EnumDefinition::Ptr findEnum(const QString& defName);
+    DataInformation* parseNode(const QDomNode& node, const DataInformation* parent, QScriptEngine* engine) const;
+    EnumDefinition::Ptr findEnum(const QString& defName) const;
 
     //void parseIncludeNodes(QDomNodeList& elems);
-    void parseEnumDefNodes(QDomNodeList& elems);
+    void parseEnumDefNodes(QDomNodeList& elems) const;
+    void parseEnums() const;
     void openDocFromFile();
 private:
     QDomDocument mDocument;
     QDir mDir;
     QString mFile;
-    QScriptEngine* mEngine; //maybe needed for dynamic arrays
-    QList<EnumDefinition::Ptr> mEnums;
-    bool mEnumsParsed :1;
-    bool mFullyParsed :1;
+    //mutable, since they are only used for caching
+    mutable QList<EnumDefinition::Ptr> mEnums;
+    mutable bool mEnumsParsed :1;
 };
 
 #endif /* OSDPARSER_H_ */
