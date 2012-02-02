@@ -57,7 +57,7 @@ public:
      *  should allow improving performance compared to before.
      *  This method is not const, since it may cause parsing when called the first time
      */
-    const QStringList structureNames();
+    QStringList structureNames();
     uint structuresCount();
     TopLevelDataInformation* structure(QString& name);
 
@@ -66,8 +66,6 @@ public:
     /** @return the absolute path to the directory containing the structure definition */
     QString absolutePath() const;
 
-    bool isParsed() const;
-    bool isParsedCompletely() const;
     bool isValid() const;
 private:
     KPluginInfo mPluginInfo;
@@ -98,16 +96,6 @@ inline const QDir StructureDefinitionFile::dir() const
 inline bool StructureDefinitionFile::isValid() const
 {
     return mValid;
-}
-
-inline bool StructureDefinitionFile::isParsed() const
-{
-    return mStructureNamesParsed;
-}
-
-inline bool StructureDefinitionFile::isParsedCompletely() const
-{
-    return mStructuresParsedCompletely;
 }
 
 } //namespace Kasten2

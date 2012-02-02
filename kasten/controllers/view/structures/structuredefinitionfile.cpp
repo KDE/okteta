@@ -132,7 +132,7 @@ TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
     return NULL; // not found
 }
 
-const QStringList StructureDefinitionFile::structureNames()
+QStringList StructureDefinitionFile::structureNames()
 {
     if (!mStructureNamesParsed)
     {
