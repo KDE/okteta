@@ -181,8 +181,9 @@ target_link_libraries( ${oktetakastengui_LIB}
 )
 #TODO should probably first check if QtScript is available??
 set_target_properties( ${oktetakastengui_LIB}  PROPERTIES
-  VERSION   ${OKTETAKASTEN_LIB_VERSION}
-  SOVERSION ${OKTETAKASTEN_LIB_SOVERSION}
+  OUTPUT_NAME ${oktetakastengui_LIB_NAME}
+  VERSION     ${OKTETAKASTEN_LIB_VERSION}
+  SOVERSION   ${OKTETAKASTEN_LIB_SOVERSION}
 )
 
 install( TARGETS ${oktetakastengui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )

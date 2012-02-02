@@ -187,8 +187,9 @@ target_link_libraries( ${kastencontrollers_LIB}
   ${KDE4_KFILE_LIBS}
 )
 set_target_properties( ${kastencontrollers_LIB}  PROPERTIES
-  VERSION   ${KASTEN_LIB_VERSION}
-  SOVERSION ${KASTEN_LIB_SOVERSION}
+  OUTPUT_NAME ${kastencontrollers_LIB_NAME}
+  VERSION     ${KASTEN_LIB_VERSION}
+  SOVERSION   ${KASTEN_LIB_SOVERSION}
 )
 
 install( TARGETS ${kastencontrollers_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )

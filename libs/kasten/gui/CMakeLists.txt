@@ -161,8 +161,9 @@ target_link_libraries( ${kastengui_LIB}
   ${KDE4_KDEUI_LIBS}
 )
 set_target_properties( ${kastengui_LIB}  PROPERTIES
-  VERSION   ${KASTEN_LIB_VERSION}
-  SOVERSION ${KASTEN_LIB_SOVERSION}
+  OUTPUT_NAME ${kastengui_LIB_NAME}
+  VERSION     ${KASTEN_LIB_VERSION}
+  SOVERSION   ${KASTEN_LIB_SOVERSION}
 )
 
 install( TARGETS ${kastengui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
