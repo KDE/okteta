@@ -103,8 +103,9 @@ target_link_libraries( ${oktetagui_LIB}
   ${KDE4_KDEUI_LIBS}
 )
 set_target_properties( ${oktetagui_LIB}  PROPERTIES
-  VERSION ${OKTETALIBS_LIB_VERSION}
-  SOVERSION ${OKTETALIBS_LIB_SOVERSION}
+  OUTPUT_NAME ${oktetagui_LIB_NAME}
+  VERSION     ${OKTETALIBS_LIB_VERSION}
+  SOVERSION   ${OKTETALIBS_LIB_SOVERSION}
   LABELS OktetaLabel
 )
 

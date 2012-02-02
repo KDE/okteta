@@ -7,9 +7,12 @@ set( KASTEN_VERSION "${KASTEN_MAJOR_VERSION}.${KASTEN_MINOR_VERSION}.${KASTEN_PA
 set( KASTEN_ABI_VERSION 2 )
 set( KASTEN_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/kasten${KASTEN_ABI_VERSION} )
 
-set( kastencore_LIB  kasten${KASTEN_ABI_VERSION}core )
-set( kastengui_LIB  kasten${KASTEN_ABI_VERSION}gui )
-set( kastencontrollers_LIB  kasten${KASTEN_ABI_VERSION}controllers )
+set( kastencore_LIB         kastencore )
+set( kastengui_LIB          kastengui )
+set( kastencontrollers_LIB  kastencontrollers )
+set( kastencore_LIB_NAME        kasten${KASTEN_ABI_VERSION}core )
+set( kastengui_LIB_NAME         kasten${KASTEN_ABI_VERSION}gui )
+set( kastencontrollers_LIB_NAME kasten${KASTEN_ABI_VERSION}controllers )
 
 set( KASTEN_LIB_SOVERSION ${KASTEN_ABI_VERSION} )
 set( KASTEN_LIB_VERSION ${KASTEN_VERSION} )

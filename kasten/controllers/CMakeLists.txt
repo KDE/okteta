@@ -531,8 +531,9 @@ if( QCA2_FOUND )
 endif( QCA2_FOUND )
 
 set_target_properties( ${oktetakastencontrollers_LIB}  PROPERTIES
-  VERSION   ${OKTETAKASTEN_LIB_VERSION}
-  SOVERSION ${OKTETAKASTEN_LIB_SOVERSION}
+  OUTPUT_NAME ${oktetakastencontrollers_LIB_NAME}
+  VERSION     ${OKTETAKASTEN_LIB_VERSION}
+  SOVERSION   ${OKTETAKASTEN_LIB_SOVERSION}
 )
 
 install( TARGETS ${oktetakastencontrollers_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )

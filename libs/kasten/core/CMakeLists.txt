@@ -129,8 +129,9 @@ target_link_libraries( ${kastencore_LIB}
   ${KDE4_SOLID_LIBS}
 )
 set_target_properties( ${kastencore_LIB}  PROPERTIES
-  VERSION   ${KASTEN_LIB_VERSION}
-  SOVERSION ${KASTEN_LIB_SOVERSION}
+  OUTPUT_NAME ${kastencore_LIB_NAME}
+  VERSION     ${KASTEN_LIB_VERSION}
+  SOVERSION   ${KASTEN_LIB_SOVERSION}
 )
 
 install( TARGETS ${kastencore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )

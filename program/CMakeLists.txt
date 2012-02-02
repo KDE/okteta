@@ -50,12 +50,12 @@ kde4_add_app_icon(okteta_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/hi*-app-okteta.png")
 kde4_add_executable( okteta  ${okteta_SRCS} )
 
 target_link_libraries( okteta
-  kasten2okteta1controllers
-  kasten2okteta1gui
-  kasten2okteta1core
-  kasten2controllers
-  kasten2gui
-  kasten2core
+  oktetakastencontrollers
+  oktetakastengui
+  oktetakastencore
+  kastencontrollers
+  kastengui
+  kastencore
   ${KDE4_KDEUI_LIBS}
 )
 

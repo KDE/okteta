@@ -87,8 +87,9 @@ target_link_libraries( ${oktetacore_LIB}
   ${KDE4_KDECORE_LIBS}
 )
 set_target_properties( ${oktetacore_LIB}  PROPERTIES
-  VERSION ${OKTETALIBS_LIB_VERSION}
-  SOVERSION ${OKTETALIBS_LIB_SOVERSION}
+  OUTPUT_NAME ${oktetacore_LIB_NAME}
+  VERSION     ${OKTETALIBS_LIB_VERSION}
+  SOVERSION   ${OKTETALIBS_LIB_SOVERSION}
 )
 
 install( TARGETS ${oktetacore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
