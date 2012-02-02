@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "structureaddremovewidget.h"
-#include "structviewpreferences.h"
 #include "../structtool.h"
 #include "../structuresmanager.h"
 #include "../structuredefinitionfile.h"

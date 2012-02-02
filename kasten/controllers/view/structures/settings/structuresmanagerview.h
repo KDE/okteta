@@ -67,6 +67,7 @@ Q_SIGNALS:
     void changed(QStringList newValues);
 private:
     void rebuildPluginSelectorEntries();
+    void reloadSelectedItems();
 private:
     Kasten2::StructTool* mTool;
     QStringList mSelectedStructures;
