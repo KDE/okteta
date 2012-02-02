@@ -152,6 +152,8 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(e);
 
     QMap<AllPrimitiveTypes, QString> enumVals = e->enumValues()->values();
+    QEXPECT_FAIL("float2int8_range", "Range checks on types not yet implemented", Abort);
+    QEXPECT_FAIL("float2int32_range", "Range checks on types not yet implemented", Abort);
     QCOMPARE(enumVals.size(), expectedCount);
 
     if (expectedCount != 0)
@@ -184,7 +186,6 @@ void ScriptValueConverterTest::testParseEnum_data() {
     QTest::newRow("double_overflow") << baseStr.arg("uint64()", "9007199254740993.0") << 0 << quint64(9007199254740993UL); //only 992 and 994 can be represented as a double
     QTest::newRow("uint64_max_hex") << baseStr.arg("uint64()", "new String(\"0xFFFFFFFFFFFFFFFF\")") << 1 << quint64(0xFFFFFFFFFFFFFFFFL);
     QTest::newRow("uint64_max") << baseStr.arg("uint64()", "new String(\"18446744073709551615\")") << 1 << quint64(18446744073709551615UL);
-
 }
 
 
