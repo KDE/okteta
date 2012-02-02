@@ -226,14 +226,14 @@ void StringDataInformation::setEncoding(QString encodingStr)
 
 void StringDataInformation::setEncoding(StringDataInformation::StringType encoding)
 {
-    if (mEncoding == encoding)
+    if (mData && mEncoding == encoding)
         return;
-    if ((mEncoding == UTF16_LE && encoding == UTF16_BE) || (mEncoding == UTF16_BE || encoding == UTF16_LE))
+    if (mData && ((mEncoding == UTF16_LE && encoding == UTF16_BE) || (mEncoding == UTF16_BE || encoding == UTF16_LE)))
     {
         //only set endianess, since is already utf 16
         mData->setLittleEndian(encoding == UTF16_LE);
     }
-    else if ((mEncoding == UTF32_LE && encoding == UTF32_BE) || (mEncoding == UTF32_BE && encoding == UTF32_LE))
+    else if (mData && ((mEncoding == UTF32_LE && encoding == UTF32_BE) || (mEncoding == UTF32_BE && encoding == UTF32_LE)))
     {
         //only set endianess, since is already utf 32
         mData->setLittleEndian(encoding == UTF32_LE);
