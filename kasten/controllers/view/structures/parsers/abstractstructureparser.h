@@ -40,9 +40,8 @@ class AbstractStructureParser
 public:
     AbstractStructureParser(const Kasten2::StructureDefinitionFile* const def);
     virtual ~AbstractStructureParser();
-
     virtual QStringList parseStructureNames() = 0;
-    virtual QList<const TopLevelDataInformation*> parseStructures() = 0;
+    virtual QVector<const TopLevelDataInformation*> parseStructures() = 0;
     virtual bool isFullyParsed() const = 0;
     static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string);
     static QString byteOrderToString(DataInformation::DataInformationEndianess order);

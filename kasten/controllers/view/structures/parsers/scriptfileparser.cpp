@@ -40,21 +40,19 @@ QStringList ScriptFileParser::parseStructureNames()
     return QStringList() << mDef->pluginInfo().pluginName();
 }
 
-QList<const TopLevelDataInformation*> ScriptFileParser::parseStructures()
+QVector<const TopLevelDataInformation*> ScriptFileParser::parseStructures()
 {
-    QList<const TopLevelDataInformation*> ret;
-    TopLevelDataInformation* topData = new TopLevelDataInformation(0,
+    QVector<const TopLevelDataInformation*> ret;
+    QScopedPointer<TopLevelDataInformation> topData(new TopLevelDataInformation(0,
             QFileInfo(mDef->dir().absoluteFilePath(QLatin1String("main.js"))),
-            new QScriptEngine(), true, mDef->pluginInfo().pluginName());
+            new QScriptEngine(), true, mDef->pluginInfo().pluginName()));
+    //TODO support more than one structure from one script
     if (topData->wasAbleToParse())
-        ret << topData;
+        ret.append(topData.take());
     else
-    {
         kWarning() << "could not parse file " << mDef->absolutePath();
-        delete topData;
-    }
-    mParsedCompletely = true;
 
+    mParsedCompletely = true;
     return ret;
 }
 

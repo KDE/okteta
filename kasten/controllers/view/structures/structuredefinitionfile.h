@@ -73,7 +73,7 @@ private:
     KPluginInfo mPluginInfo;
     /** the directory the plugin is saved in */
     QDir mDir;
-    QList<const TopLevelDataInformation*> mTopLevelStructures;
+    QVector<const TopLevelDataInformation*> mTopLevelStructures;
     QStringList mStructureNames;
 
     AbstractStructureParser* mParser;

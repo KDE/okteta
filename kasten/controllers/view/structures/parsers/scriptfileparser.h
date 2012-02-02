@@ -32,7 +32,7 @@ public:
     virtual ~ScriptFileParser();
 
     virtual QStringList parseStructureNames();
-    virtual QList<const TopLevelDataInformation*> parseStructures();
+    virtual QVector<const TopLevelDataInformation*> parseStructures();
     virtual bool isFullyParsed() const;
 private:
     bool mParsedCompletely :1;

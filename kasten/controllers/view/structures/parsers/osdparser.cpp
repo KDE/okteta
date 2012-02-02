@@ -128,14 +128,14 @@ void OsdParser::openDocFromFile()
     file.close();
 }
 
-QList<const TopLevelDataInformation*> OsdParser::parseStructures()
+QVector<const TopLevelDataInformation*> OsdParser::parseStructures()
 {
     QFileInfo fileInfo(mDir, mFile);
     QDomElement rootElem = mDocument.firstChildElement(QLatin1String("data"));
 
     parseEnums();
 
-    QList<const TopLevelDataInformation*> structures;
+    QVector<const TopLevelDataInformation*> structures;
     QDomNodeList list = rootElem.childNodes();
     for (uint i = 0; i < list.length(); ++i)
     {

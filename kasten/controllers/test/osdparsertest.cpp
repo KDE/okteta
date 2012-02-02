@@ -68,7 +68,7 @@ void OsdParserTest::testPrimitive()
     PrimitiveDataType type = (PrimitiveDataType)expectedType;
 
     OsdParser parser(xml);
-    QList<const TopLevelDataInformation*> tds = parser.parseStructures();
+    QVector<const TopLevelDataInformation*> tds = parser.parseStructures();
     QCOMPARE(tds.size(), 1);
     const TopLevelDataInformation* td = tds.at(0);
     DataInformation* data = td->actualDataInformation();
@@ -79,7 +79,7 @@ void OsdParserTest::testPrimitive()
 
     //just to ensure comparison is case insensitive
     OsdParser parser2(secondXml);
-    QList<const TopLevelDataInformation*> tds2 = parser2.parseStructures();
+    QVector<const TopLevelDataInformation*> tds2 = parser2.parseStructures();
     QCOMPARE(tds2.size(), 1);
     const TopLevelDataInformation* td2 = tds2.at(0);
     DataInformation* data2 = td2->actualDataInformation();

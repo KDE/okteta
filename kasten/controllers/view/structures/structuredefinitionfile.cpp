@@ -55,8 +55,7 @@ StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
         mStructuresParsedCompletely = true;
         mStructureNamesParsed = true;
         //now all methods will just return an empty list
-        kWarning() << "no valid parser found for plugin category '" << category
-                << "'";
+        kWarning() << "no valid parser found for plugin category '" << category << "'";
     }
 
 }
@@ -72,7 +71,7 @@ StructureDefinitionFile::StructureDefinitionFile(StructureDefinitionFile& f) :
             mValid(f.mValid), mStructureNamesParsed(f.mStructureNamesParsed),
             mStructuresParsedCompletely(f.mStructuresParsedCompletely)
 {
-    int len = f.mTopLevelStructures.length();
+    int len = f.mTopLevelStructures.size();
     for (int i = 0; i < len; ++i)
     {
         mTopLevelStructures.append(f.mTopLevelStructures.at(i)->clone());
@@ -95,9 +94,9 @@ QList<TopLevelDataInformation*> StructureDefinitionFile::structures()
     //return copy
     QList<TopLevelDataInformation*> ret;
     foreach(const TopLevelDataInformation* data, mTopLevelStructures)
-        {
-            ret.append(data->clone());
-        }
+    {
+        ret.append(data->clone());
+    }
     return ret;
 }
 
@@ -114,9 +113,9 @@ TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
             if (!mStructureNamesParsed)
             {
                 foreach(const TopLevelDataInformation* data, mTopLevelStructures)
-                    {
+                {
                         mStructureNames << data->actualDataInformation()->name();
-                    }
+                }
             }
             mStructureNamesParsed = true;
             mStructuresParsedCompletely = true;
@@ -125,12 +124,10 @@ TopLevelDataInformation* StructureDefinitionFile::structure(QString& name)
         }
     }
     foreach(const TopLevelDataInformation* data,mTopLevelStructures)
-        {
-            if (data->actualDataInformation()->name() == name)
-            {
-                return data->clone();
-            }
-        }
+    {
+        if (data->actualDataInformation()->name() == name)
+            return data->clone();
+    }
     kWarning() << "could not find structure with name " << name;
     return NULL; // not found
 }

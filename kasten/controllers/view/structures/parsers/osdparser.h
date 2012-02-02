@@ -51,7 +51,7 @@ public:
     virtual ~OsdParser();
 
     virtual QStringList parseStructureNames();
-    virtual QList<const TopLevelDataInformation*> parseStructures();
+    virtual QVector<const TopLevelDataInformation*> parseStructures();
     virtual bool isFullyParsed() const;
 
 private:

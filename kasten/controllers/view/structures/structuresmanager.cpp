@@ -52,13 +52,12 @@ void StructuresManager::reloadPaths()
             QLatin1String("okteta/structures/*/*.desktop"), KStandardDirs::Recursive
                     | KStandardDirs::NoDuplicates);
     kDebug() << "found structures: " << paths;
-    KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group(
-            "Plugins"));
+    KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));
     foreach(const KPluginInfo& info, plugins)
-        {
-            QFileInfo desktopPath = QFileInfo(info.entryPath());
-            addStructDef(info);
-        }
+    {
+        QFileInfo desktopPath = QFileInfo(info.entryPath());
+        addStructDef(info);
+    }
 }
 
 void StructuresManager::addStructDef(const KPluginInfo& info)
@@ -76,8 +75,7 @@ StructureDefinitionFile* StructuresManager::definition(QString& pluginName)
 {
     if (!mDefs.contains(pluginName))
     {
-        kWarning() << "could not find structuredefinitionFile with name="
-                << pluginName;
+        kWarning() << "could not find structuredefinitionFile with name=" << pluginName;
         return NULL;
     }
     return mDefs.value(pluginName);
