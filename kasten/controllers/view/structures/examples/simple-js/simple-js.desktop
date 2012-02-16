@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=JavaScript test
+Name[ar]=اختبار جافاسكربت
 Name[bs]=Proba javaskripta
 Name[ca]=Prova del JavaScript
 Name[ca@valencia]=Prova del JavaScript
