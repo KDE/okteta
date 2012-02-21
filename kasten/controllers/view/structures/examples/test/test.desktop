@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Simple test
+Name[ar]=اختبار بسيط
 Name[bs]=Jednostavna proba
 Name[ca]=Prova simple
 Name[ca@valencia]=Prova simple
