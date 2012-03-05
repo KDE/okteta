@@ -40,7 +40,7 @@ public:
     QList<DataInformation*> children() const;
 
     virtual BitCount32 size() const;
-    virtual BitCount32 childSize(int index) const;
+    virtual BitCount32 childSize(uint index) const;
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,

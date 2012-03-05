@@ -61,8 +61,9 @@ StringDataInformation::~StringDataInformation()
     delete mDummy;
 }
 
-DataInformation* StringDataInformation::childAt(unsigned int ) const
+DataInformation* StringDataInformation::childAt(unsigned int index) const
 {
+	Q_ASSERT(index < childCount());
     return mDummy;
 }
 
@@ -286,7 +287,7 @@ QScriptValue StringDataInformation::toScriptValue(QScriptEngine* engine, ScriptH
     return ret;
 }
 
-BitCount32 StringDataInformation::childSize(int index) const
+BitCount32 StringDataInformation::childSize(uint index) const
 {
     return mData->sizeAt(index);
 }

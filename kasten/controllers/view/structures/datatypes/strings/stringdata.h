@@ -54,12 +54,12 @@ public:
     virtual ~StringData();
 
     virtual QString typeName() const = 0;
-    virtual int count() const = 0;
+    virtual uint count() const = 0;
     virtual QString charType() const = 0;
     virtual QString stringValue(int row) const = 0;
     virtual QString completeString(bool skipInvalid = false) const = 0;
     virtual BitCount32 size() const = 0;
-    virtual BitCount32 sizeAt(int i) const = 0;
+    virtual BitCount32 sizeAt(uint index) const = 0;
     virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     /** by default just sets value, if more logic is needed can be overridden */
     virtual void setLittleEndian(bool littleEndian);

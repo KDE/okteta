@@ -50,7 +50,7 @@ QString Utf32StringData::typeName() const
     return mLittleEndian ? i18n("UTF32-LE string") : i18n("UTF32-BE string");
 }
 
-int Utf32StringData::count() const
+uint Utf32StringData::count() const
 {
     return mCodePoints.size();
 }
@@ -204,8 +204,8 @@ BitCount32 Utf32StringData::size() const
     return mCodePoints.size() * 32;
 }
 
-BitCount32 Utf32StringData::sizeAt(int i) const
+BitCount32 Utf32StringData::sizeAt(uint i) const
 {
-    Q_ASSERT(i >= 0 && i <= count());
+    Q_ASSERT(i <= count());
     return 32;
 }

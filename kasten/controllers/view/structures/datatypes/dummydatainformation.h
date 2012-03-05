@@ -41,7 +41,7 @@ public:
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
     virtual BitCount32 size() const;
-    virtual BitCount32 childSize(int index) const;
+    virtual BitCount32 childSize(uint index) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual QWidget* createEditWidget(QWidget* parent) const;

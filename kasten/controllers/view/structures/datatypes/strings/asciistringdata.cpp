@@ -110,9 +110,9 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     return (addr - address) * 8;
 }
 
-BitCount32 AsciiStringData::sizeAt(int i) const
+BitCount32 AsciiStringData::sizeAt(uint i) const
 {
-    Q_ASSERT(i >= 0 && i < mData.size());
+    Q_ASSERT(i < count());
     return 8;
 }
 
@@ -162,7 +162,7 @@ QString AsciiStringData::charType() const
     return i18n("ASCII char");
 }
 
-int AsciiStringData::count() const
+uint AsciiStringData::count() const
 {
     return mData.size();
 }

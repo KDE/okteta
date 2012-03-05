@@ -54,7 +54,7 @@ public:
     virtual BitCount32 size() const;
     virtual PrimitiveDataType primitiveType() const;
     virtual void setParent(DataInformation* parent);
-    virtual BitCount32 sizeAt(int index);
+    virtual BitCount32 sizeAt(uint index);
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded);
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
@@ -143,9 +143,9 @@ inline PrimitiveDataType PrimitiveArrayData<type>::primitiveType() const
 }
 
 template<PrimitiveDataType type>
-inline BitCount32 PrimitiveArrayData<type>::sizeAt(int index)
+inline BitCount32 PrimitiveArrayData<type>::sizeAt(uint index)
 {
-    Q_ASSERT(index >= 0 && uint(index) < length());
+    Q_ASSERT(index < length());
     Q_UNUSED(index)
     return sizeof(T) * 8;
 }

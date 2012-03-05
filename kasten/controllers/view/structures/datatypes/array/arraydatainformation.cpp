@@ -71,7 +71,7 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
 {
     kDebug() << "old child count: " << childCount();
 
-    if (!mData) {
+    if (Q_UNLIKELY(!mData)) {
         kWarning() << "mData == null";
         return QScriptValue();
     }
@@ -107,7 +107,7 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
 
 QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContext* context)
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
     {
         kWarning() << "mData == null";
         return QScriptValue();
@@ -171,7 +171,7 @@ QScriptValue ArrayDataInformation::childType() const
 
 QVariant ArrayDataInformation::childData(int row, int column, int role) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return QVariant();
     Q_ASSERT(uint(row) < mData->length());
     if (column == 0 && role == Qt::DisplayRole)
@@ -212,7 +212,7 @@ void ArrayDataInformation::setWidgetData(QWidget*) const
 
 BitCount32 ArrayDataInformation::offset(unsigned int index) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
     {
         kWarning() << "mData == null";
         return 0;
@@ -223,7 +223,7 @@ BitCount32 ArrayDataInformation::offset(unsigned int index) const
 qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
     {
         kWarning() << "mData == null";
         return -1;
@@ -245,7 +245,7 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
 bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
         Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
     {
         kWarning() << "mData == null";
         return false;

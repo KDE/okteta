@@ -33,12 +33,12 @@ public:
     virtual ~Utf8StringData();
 
     virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
-    virtual BitCount32 sizeAt(int i) const;
+    virtual BitCount32 sizeAt(uint i) const;
     virtual BitCount32 size() const;
     virtual QString completeString(bool skipInvalid = false) const;
     virtual QString stringValue(int row) const;
     virtual QString charType() const;
-    virtual int count() const;
+    virtual uint count() const;
     virtual QString typeName() const;
 private:
     QHash<int, quint8> mErrorIndices;

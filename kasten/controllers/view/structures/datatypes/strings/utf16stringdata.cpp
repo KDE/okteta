@@ -50,7 +50,7 @@ QString Utf16StringData::typeName() const
     return mLittleEndian ? i18n("UTF16-LE string") : i18n("UTF16-BE string");
 }
 
-int Utf16StringData::count() const
+uint Utf16StringData::count() const
 {
     return mCodePoints.size();
 }
@@ -126,10 +126,10 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             _childrenRemoved(mParent, 0, oldSize);
     }
 
-    const int oldMax = mCodePoints.size();
+    const uint oldMax = mCodePoints.size();
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
-    int count = 0;
+    uint count = 0;
     mEofReached = false;
     if (((mMode & CharCount) && mLength.maxChars == 0)
             || ((mMode & ByteCount) && mLength.maxBytes < 2))
@@ -157,7 +157,7 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         //high surrogate -> if is followed by low surrogate we have a 4 bit char
         if (QChar::isHighSurrogate(val))
         {
-            if (remaining < 32 || ((mMode & ByteCount) && (addr + 2 - address) / 2 >= mLength.maxBytes / 2))
+            if (remaining < 32 || ((mMode & ByteCount) && (addr + 2 - address) / 2 >= Okteta::Address(mLength.maxBytes / 2)))
             {
                 codePoint = val;
                 mEofReached = true;
@@ -205,7 +205,7 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         if (mMode & ByteCount)
         {
             // divide by two in case someone set length to an odd number of bytes
-            if ((addr - address) / 2 >= mLength.maxBytes / 2)
+            if ((addr - address) / 2 >= Okteta::Address(mLength.maxBytes / 2))
                 terminate = true;
         }
         if (mMode & CharCount)
@@ -235,9 +235,9 @@ BitCount32 Utf16StringData::size() const
     return (mCodePoints.size() + mNonBMPCount) * 16;
 }
 
-BitCount32 Utf16StringData::sizeAt(int i) const
+BitCount32 Utf16StringData::sizeAt(uint i) const
 {
-    Q_ASSERT(i >= 0 && i <= count());
+    Q_ASSERT(i <= count());
     uint val = mCodePoints.at(i);
     return val > 0xffff ? 32 : 16;
 }

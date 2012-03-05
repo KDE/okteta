@@ -50,7 +50,7 @@ QString Utf8StringData::typeName() const
     return i18n("UTF8 string");
 }
 
-int Utf8StringData::count() const
+uint Utf8StringData::count() const
 {
     return mCodePoints.size();
 }
@@ -331,9 +331,9 @@ BitCount32 Utf8StringData::size() const
     return (mOneByteCount + mTwoByteCount * 2 + mThreeByteCount * 3 + mFourByteCount * 4) * 8;
 }
 
-BitCount32 Utf8StringData::sizeAt(int i) const
+BitCount32 Utf8StringData::sizeAt(uint i) const
 {
-    Q_ASSERT(i >= 0 && i <= count());
+    Q_ASSERT(i <= count());
     quint8 isError = mErrorIndices[i];
     if (isError)
         return isError * 8; //error is number of bytes

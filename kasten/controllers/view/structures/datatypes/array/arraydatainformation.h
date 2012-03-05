@@ -72,7 +72,7 @@ public:
     virtual unsigned int childCount() const;
     virtual bool canHaveChildren() const;
     virtual int indexOf(const DataInformation* const data) const;
-    BitCount32 childSize(int index) const;
+    BitCount32 childSize(uint index) const;
 
     virtual bool isArray() const;
 
@@ -95,14 +95,14 @@ protected:
 
 inline int ArrayDataInformation::length() const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return 0;
     return mData->length();
 }
 
 inline QString ArrayDataInformation::typeName() const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return QString();
     return mData->typeName();
     //don't show name of child
@@ -111,7 +111,7 @@ inline QString ArrayDataInformation::typeName() const
 
 inline BitCount32 ArrayDataInformation::size() const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return 0;
     return mData->size();
 }
@@ -123,14 +123,14 @@ inline bool ArrayDataInformation::isArray() const
 
 inline DataInformation* ArrayDataInformation::childAt(unsigned int idx) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return 0;
     return mData->childAt(idx);
 }
 
 inline unsigned int ArrayDataInformation::childCount() const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return 0;
     return mData->length();
 }
@@ -142,49 +142,49 @@ inline bool ArrayDataInformation::canHaveChildren() const
 
 inline int ArrayDataInformation::indexOf(const DataInformation*const data) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return 0;
     return mData->indexOf(data);
 }
 
 inline QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return QScriptValue();
     return mData->toScriptValue(index, engine, handlerInfo);
 }
 
-inline BitCount32 ArrayDataInformation::childSize(int index) const
+inline BitCount32 ArrayDataInformation::childSize(uint index) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return 0;
     return mData->sizeAt(index);
 }
 
 inline Qt::ItemFlags ArrayDataInformation::childFlags(int row, int column, bool fileLoaded) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return 0;
     return mData->childFlags(row, column, fileLoaded);
 }
 
 inline QWidget* ArrayDataInformation::createChildEditWidget(uint index, QWidget* parent) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return 0;
     return mData->createChildEditWidget(index, parent);
 }
 
 inline QVariant ArrayDataInformation::dataFromChildWidget(uint index, const QWidget* w) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return QVariant();
     return mData->dataFromChildWidget(index, w);
 }
 
 inline void ArrayDataInformation::setChildWidgetData(uint index, QWidget* w) const
 {
-    if (!mData)
+    if (Q_UNLIKELY(!mData))
         return;
     mData->setChildWidgetData(index, w);
 }

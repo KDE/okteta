@@ -528,7 +528,7 @@ QScriptValue ScriptEngineInitializer::getChild(QScriptContext* ctx, QScriptEngin
         return eng->undefinedValue();
 }
 
-QScriptValue ScriptEngineInitializer::addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng)
+QScriptValue ScriptEngineInitializer::addUpdateFunc(QScriptContext* ctx, QScriptEngine*)
 {
     if (ctx->argumentCount() != 1)
         return ctx->throwError(QLatin1String("setUpdate(): needs one argument!"));
@@ -542,7 +542,7 @@ QScriptValue ScriptEngineInitializer::addUpdateFunc(QScriptContext* ctx, QScript
     return thisObj;
 }
 
-QScriptValue ScriptEngineInitializer::addValidationFunc(QScriptContext* ctx, QScriptEngine* eng)
+QScriptValue ScriptEngineInitializer::addValidationFunc(QScriptContext* ctx, QScriptEngine*)
 {
     if (ctx->argumentCount() != 1)
         return ctx->throwError(QLatin1String("setValidation(): needs one argument!"));

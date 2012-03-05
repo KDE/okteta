@@ -278,7 +278,7 @@ QString DataInformationWithChildren::tooltipString() const
 }
 
 
-BitCount32 DataInformationWithChildren::childSize(int index) const
+BitCount32 DataInformationWithChildren::childSize(uint index) const
 {
     Q_ASSERT(index >= 0 && index < childCount());
     return mChildren.at(index)->size();

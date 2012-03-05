@@ -24,7 +24,6 @@
 
 //Qt core
 #include <QString>
-#include <QList>
 
 //Okteta
 #include <size.h>
@@ -93,7 +92,7 @@ public:
     /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
     virtual QVariant childData(int row, int column, int role) const;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
-    virtual BitCount32 childSize(int index) const = 0;
+    virtual BitCount32 childSize(uint index) const = 0;
 
 
     /** The size of this DataInformation type in bits (to allow bitfields in future) */

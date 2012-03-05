@@ -51,7 +51,7 @@ bool PrimitiveDataInformation::setChildData(uint, const QVariant&, Okteta::Abstr
 
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {
-    if (column == 2 && fileLoaded)
+    if (column == (int)DataInformation::ColumnValue && fileLoaded)
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
     else
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;

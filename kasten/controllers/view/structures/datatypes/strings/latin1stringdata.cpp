@@ -109,9 +109,9 @@ qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Add
     return (addr - address) * 8;
 }
 
-BitCount32 Latin1StringData::sizeAt(int i) const
+BitCount32 Latin1StringData::sizeAt(uint i) const
 {
-    Q_ASSERT(i >= 0 && i < mData.size());
+    Q_ASSERT(i < count());
     return 8;
 }
 
@@ -144,7 +144,7 @@ QString Latin1StringData::charType() const
     return i18n("Latin1 char");
 }
 
-int Latin1StringData::count() const
+uint Latin1StringData::count() const
 {
     return mData.size();
 }

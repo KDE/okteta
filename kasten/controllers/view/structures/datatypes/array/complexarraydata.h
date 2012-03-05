@@ -52,7 +52,7 @@ public:
     virtual DataInformation* childAt(unsigned int idx);
     virtual int indexOf(const DataInformation* data) const;
     virtual BitCount32 offset(uint row) const;
-    virtual BitCount32 sizeAt(int index);
+    virtual BitCount32 sizeAt(uint index);
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded);
 
     virtual PrimitiveDataType primitiveType() const;

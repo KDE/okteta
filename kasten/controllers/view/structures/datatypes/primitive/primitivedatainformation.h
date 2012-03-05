@@ -49,7 +49,7 @@ public:
     virtual PrimitiveDataType type() const = 0;
     virtual AllPrimitiveTypes value() const = 0;
     virtual void setValue(AllPrimitiveTypes newVal) = 0;
-    virtual BitCount32 childSize(int index) const;
+    virtual BitCount32 childSize(uint index) const;
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
@@ -60,8 +60,9 @@ protected:
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 
-inline BitCount32 PrimitiveDataInformation::childSize(int) const
+inline BitCount32 PrimitiveDataInformation::childSize(uint index) const
 {
+	Q_UNUSED(index);
     Q_ASSERT_X(false, "PrimitiveDataInformation::childSize", "This should never be called");
     return 0;
 }
