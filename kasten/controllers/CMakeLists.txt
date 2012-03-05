@@ -392,6 +392,13 @@ kde4_add_unit_test( arraydatainformationtest
 target_link_libraries(arraydatainformationtest structures-static ${QT_QTTEST_LIBRARY})
 set_target_properties(arraydatainformationtest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 
+kde4_add_unit_test( basicdatainformationtest
+  TESTNAME basic-datainformation-test
+  test/basicdatainformationtest.cpp
+)
+target_link_libraries(basicdatainformationtest structures-static ${QT_QTTEST_LIBRARY})
+set_target_properties(basicdatainformationtest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
+
 endif ( KDE4_BUILD_TESTS )
 
 endif( NOT NO_STRUCTURES_TOOL )
