@@ -19,8 +19,6 @@
 */
 
 
-#undef QT_NO_CAST_FROM_ASCII //being lazy
-
 #include <QtTest>
 #include <QtCore/QString>
 #include <QtCore/QDate>
@@ -31,33 +29,37 @@
 class OsdParserTest : public QObject
 {
     Q_OBJECT
-public:
 private Q_SLOTS:
     void testPrimitive();
     void testPrimitive_data();
 };
 
+namespace {
+	inline QString arg(const QString& str, const char* argument) {
+		return str.arg(QLatin1String(argument));
+	}
+}
 void OsdParserTest::testPrimitive_data()
 {
     QTest::addColumn<QString>("xml");
     QTest::addColumn<QString>("secondXml");
     QTest::addColumn<int>("expectedType");
-    QString base ("<?xml version=\"1.0\" encoding=\"UTF-8\"?><data><primitive name=\"foo\" type=\"%1\" /></data>");
-    QTest::newRow("uint8") << base.arg("uint8") << base.arg("UInt8") << (int)Type_UInt8;
-    QTest::newRow("uint16") << base.arg("uint16") << base.arg("UInt16") << (int)Type_UInt16;
-    QTest::newRow("uint32") << base.arg("uint32") << base.arg("UInt32") << (int)Type_UInt32;
-    QTest::newRow("uint64") << base.arg("uint64") << base.arg("UInt64") << (int)Type_UInt64;
-    QTest::newRow("int8") << base.arg("int8") << base.arg("Int8") << (int)Type_Int8;
-    QTest::newRow("int16") << base.arg("int16") << base.arg("Int16") << (int)Type_Int16;
-    QTest::newRow("int32") << base.arg("int32") << base.arg("Int32") << (int)Type_Int32;
-    QTest::newRow("int64") << base.arg("int64") << base.arg("Int64") << (int)Type_Int64;
-    QTest::newRow("bool8") << base.arg("bool8") << base.arg("Bool8") << (int)Type_Bool8;
-    QTest::newRow("bool16") << base.arg("bool16") << base.arg("Bool16") << (int)Type_Bool16;
-    QTest::newRow("bool32") << base.arg("bool32") << base.arg("Bool32") << (int)Type_Bool32;
-    QTest::newRow("bool64") << base.arg("bool64") << base.arg("Bool64") << (int)Type_Bool64;
-    QTest::newRow("char") << base.arg("char") << base.arg("Char") << (int)Type_Char;
-    QTest::newRow("float") << base.arg("float") << base.arg("Float") << (int)Type_Float;
-    QTest::newRow("double") << base.arg("double") << base.arg("Double") << (int)Type_Double;
+    QString base(QLatin1String("<?xml version=\"1.0\" encoding=\"UTF-8\"?><data><primitive name=\"foo\" type=\"%1\" /></data>"));
+    QTest::newRow("uint8") << arg(base, "uint8") << arg(base, "UInt8") << (int)Type_UInt8;
+    QTest::newRow("uint16") << arg(base, "uint16") << arg(base, "UInt16") << (int)Type_UInt16;
+    QTest::newRow("uint32") << arg(base, "uint32") << arg(base, "UInt32") << (int)Type_UInt32;
+    QTest::newRow("uint64") << arg(base, "uint64") << arg(base, "UInt64") << (int)Type_UInt64;
+    QTest::newRow("int8") << arg(base, "int8") << arg(base, "Int8") << (int)Type_Int8;
+    QTest::newRow("int16") << arg(base, "int16") << arg(base, "Int16") << (int)Type_Int16;
+    QTest::newRow("int32") << arg(base, "int32") << arg(base, "Int32") << (int)Type_Int32;
+    QTest::newRow("int64") << arg(base, "int64") << arg(base, "Int64") << (int)Type_Int64;
+    QTest::newRow("bool8") << arg(base, "bool8") << arg(base, "Bool8") << (int)Type_Bool8;
+    QTest::newRow("bool16") << arg(base, "bool16") << arg(base, "Bool16") << (int)Type_Bool16;
+    QTest::newRow("bool32") << arg(base, "bool32") << arg(base, "Bool32") << (int)Type_Bool32;
+    QTest::newRow("bool64") << arg(base, "bool64") << arg(base, "Bool64") << (int)Type_Bool64;
+    QTest::newRow("char") << arg(base, "char") << arg(base, "Char") << (int)Type_Char;
+    QTest::newRow("float") << arg(base, "float") << arg(base, "Float") << (int)Type_Float;
+    QTest::newRow("double") << arg(base, "double") << arg(base, "Double") << (int)Type_Double;
 }
 
 void OsdParserTest::testPrimitive()
@@ -72,7 +74,7 @@ void OsdParserTest::testPrimitive()
     QCOMPARE(tds.size(), 1);
     const TopLevelDataInformation* td = tds.at(0);
     DataInformation* data = td->actualDataInformation();
-    QCOMPARE(data->name(), QString("foo"));
+    QCOMPARE(data->name(), QLatin1String("foo"));
     PrimitiveDataInformation* prim = dynamic_cast<PrimitiveDataInformation*>(data);
     QVERIFY(prim);
     QCOMPARE(prim->type(), type);
