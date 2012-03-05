@@ -39,7 +39,15 @@
 struct ExpectedResults {
 	ExpectedResults()
 	: parent(0), size(0),isTopLevel(false), isEnum(false), isStruct(false), isUnion(false),
-			isArray(false), isBitfield(false), isPrimitive(false), canHaveChildren(false), hasChildren(false) {}
+		isArray(false), isBitfield(false), isPrimitive(false), canHaveChildren(false), hasChildren(false)
+		{
+			columnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+			columnFlags[DataInformation::ColumnType] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+			columnFlags[DataInformation::ColumnValue] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+			noFileColumnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+			noFileColumnFlags[DataInformation::ColumnType] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+			noFileColumnFlags[DataInformation::ColumnValue] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+		}
 	DataInformationBase* parent;
 	BitCount32 size;
 	bool isTopLevel : 1;
@@ -52,6 +60,7 @@ struct ExpectedResults {
 	bool canHaveChildren : 1;
 	bool hasChildren : 1;
 	Qt::ItemFlags columnFlags[DataInformation::COLUMN_COUNT];
+	Qt::ItemFlags noFileColumnFlags[DataInformation::COLUMN_COUNT];
 };
 
 class BasicDataInformationTest : public QObject
@@ -102,6 +111,13 @@ void BasicDataInformationTest::basicTest(DataInformation* data, const ExpectedRe
 	QScopedPointer<DataInformation> clone2(clone1->clone());
 	QVERIFY(clone2->parent() == 0); //cloning should reset parent to NULL, else we get dangling pointers
 
+	QCOMPARE(data->flags(DataInformation::ColumnName, true), expected.columnFlags[DataInformation::ColumnName]);
+	QCOMPARE(data->flags(DataInformation::ColumnType, true), expected.columnFlags[DataInformation::ColumnType]);
+	QCOMPARE(data->flags(DataInformation::ColumnValue, true), expected.columnFlags[DataInformation::ColumnValue]);
+
+	QCOMPARE(data->flags(DataInformation::ColumnName, false), expected.noFileColumnFlags[DataInformation::ColumnName]);
+	QCOMPARE(data->flags(DataInformation::ColumnType, false), expected.noFileColumnFlags[DataInformation::ColumnType]);
+	QCOMPARE(data->flags(DataInformation::ColumnValue, false), expected.noFileColumnFlags[DataInformation::ColumnValue]);
 }
 
 
@@ -146,6 +162,7 @@ void BasicDataInformationTest::testBitfields()
 	exp.isPrimitive = true;
 	exp.isBitfield = true;
 	exp.size = 24;
+	exp.columnFlags[DataInformation::ColumnValue] = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 	for (int i = 0; i < bitfields.size(); ++i) {
 		basicTest(bitfields.at(i), exp);
 	}
@@ -155,6 +172,7 @@ void BasicDataInformationTest::testPrimitives()
 {
 	ExpectedResults exp;
 	exp.isPrimitive = true;
+	exp.columnFlags[DataInformation::ColumnValue] = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 	for (int i = 0; i < primitives.size(); ++i) {
 		PrimitiveDataInformation* data = primitives.at(i);
 		PrimitiveDataType t = data->type();
@@ -195,6 +213,7 @@ void BasicDataInformationTest::testEnums()
 	exp.isPrimitive = true;
 	exp.isEnum = true;
 	exp.size = 32;
+	exp.columnFlags[DataInformation::ColumnValue] = Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 	basicTest(enumData, exp);
 	basicTest(flagData, exp);
 }
