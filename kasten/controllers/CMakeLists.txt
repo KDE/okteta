@@ -378,11 +378,19 @@ target_link_libraries(osdparsertest structures-static ${QT_QTTEST_LIBRARY})
 set_target_properties(osdparsertest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 
 kde4_add_unit_test( primitivearraytest
-TESTNAME primitive-array-test
-test/primitivearraytest.cpp
+  TESTNAME primitive-array-test
+  test/primitivearraytest.cpp
 )
 target_link_libraries(primitivearraytest structures-static ${QT_QTTEST_LIBRARY})
 set_target_properties(primitivearraytest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
+
+
+kde4_add_unit_test( arraydatainformationtest
+  TESTNAME array-datainformation-test
+  test/arraydatainformationtest.cpp
+)
+target_link_libraries(arraydatainformationtest structures-static ${QT_QTTEST_LIBRARY})
+set_target_properties(arraydatainformationtest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 
 endif ( KDE4_BUILD_TESTS )
 
