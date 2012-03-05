@@ -72,7 +72,6 @@ public:
     StructViewPreferences::EnumByteOrder::type byteOrder() const;
     void setByteOrder(StructViewPreferences::EnumByteOrder::type order);
     int columnCount() const;
-    KDE_DEPRECATED bool setData(const QVariant& value, int role, DataInformation* item);
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
     StructuresManager* manager() const;

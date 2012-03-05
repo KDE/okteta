@@ -144,12 +144,6 @@ void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
     updateData(list);
 }
 
-bool StructTool::setData(const QVariant& value, int role, DataInformation* item)
-{
-    kWarning() << "should not be called";
-    return setData(value, role, item, item->row());
-}
-
 bool StructTool::setData(const QVariant& value, int role, DataInformation* item, uint row)
 {
     if (!mByteArrayModel)
