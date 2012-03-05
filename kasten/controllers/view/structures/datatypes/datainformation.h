@@ -32,10 +32,6 @@
 #include "structviewpreferences.h"
 #include "additionaldata.h"
 
-//KDE
-#include <KLocale>
-#include <KGlobal>
-
 #include "datainformationbase.h"
 
 #define DATAINFORMATION_CLONE(type) virtual inline type##DataInformation* clone() const {\

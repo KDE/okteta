@@ -23,7 +23,6 @@
 #define DATAINFORMATIONWITHCHILDREN_H_
 
 #include "datainformation.h"
-#include <QtScript/QScriptValue>
 
 class DataInformationWithChildren: public DataInformation
 {

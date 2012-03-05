@@ -26,7 +26,6 @@
 
 #include "datainformation.h"
 
-
 class DummyDataInformation : public DataInformation
 {
 public:

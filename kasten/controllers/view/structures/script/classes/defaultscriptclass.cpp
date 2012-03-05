@@ -242,8 +242,8 @@ bool DefaultscriptClassIterator::hasPrevious() const
 
 QScriptString DefaultscriptClassIterator::name() const
 {
-    Q_ASSERT(mCurrent >= 0 && mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
         return QScriptString();
     if (mCurrent < mList.size())
         return *(mList.at(mCurrent).first);
@@ -255,8 +255,8 @@ QScriptString DefaultscriptClassIterator::name() const
 
 QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
 {
-    Q_ASSERT(mCurrent >= 0 && mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
         return 0;
     if (mCurrent < mList.size())
         return mList.at(mCurrent).second;
@@ -265,8 +265,8 @@ QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
 
 uint DefaultscriptClassIterator::id() const
 {
-    Q_ASSERT(mCurrent >= 0 && mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
         return 0;
     //only children have an id assigned
     if (mCurrent < mList.size())
@@ -276,11 +276,13 @@ uint DefaultscriptClassIterator::id() const
 
 void DefaultscriptClassIterator::next()
 {
+    Q_ASSERT((uint)mCurrent < mList.size() + mData->childCount());
     mCurrent++;
 }
 
 void DefaultscriptClassIterator::previous()
 {
+    Q_ASSERT(mCurrent >= 0);
     mCurrent--;
 }
 

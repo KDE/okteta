@@ -21,6 +21,8 @@
  */
 #include "structuredatainformation.h"
 
+#include <KLocale>
+
 QString StructureDataInformation::typeName() const
 {
     return i18nc("data type in C/C++, then name", "struct %1", name());

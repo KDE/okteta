@@ -63,19 +63,6 @@ inline BitCount32 DoubleDataInformation::size() const
     return sizeof(double) * 8;
 }
 
-inline QString DoubleDataInformation::typeName() const
-{
-    return i18nc("Data type", "double");
-}
-
-inline QString DoubleDataInformation::valueString(double value)
-{
-    if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
-        return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());
-    else
-        return QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
-}
-
 inline double DoubleDataInformation::fromVariant(const QVariant& value)
 {
     return value.toDouble();

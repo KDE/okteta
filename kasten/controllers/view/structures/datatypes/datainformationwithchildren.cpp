@@ -56,7 +56,7 @@ bool DataInformationWithChildren::setChildData(uint row, const QVariant& value, 
     return mChildren.at(row)->setData(value, out, address + (offs / 8), bitsRemaining - offs, bitOffs);
 }
 
-bool DataInformationWithChildren::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
+bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*, Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT_X(false, "DataInformationWithChildren::setData()", "this should never be called");
     return false;
@@ -280,7 +280,7 @@ QString DataInformationWithChildren::tooltipString() const
 
 BitCount32 DataInformationWithChildren::childSize(uint index) const
 {
-    Q_ASSERT(index >= 0 && index < childCount());
+    Q_ASSERT(index < childCount());
     return mChildren.at(index)->size();
 }
 

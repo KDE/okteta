@@ -22,6 +22,8 @@
 #include "uniondatainformation.h"
 #include "topleveldatainformation.h"
 
+#include <KLocale>
+
 QString UnionDataInformation::typeName() const
 {
     return i18nc("data type in C/C++, then name", "union %1", name());

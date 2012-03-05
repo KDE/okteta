@@ -21,6 +21,7 @@
  */
 #ifndef UNIONDATAINFORMATION_H_
 #define UNIONDATAINFORMATION_H_
+
 #include "datainformationwithchildren.h"
 
 /** A class holding the data of a union for Okteta*/

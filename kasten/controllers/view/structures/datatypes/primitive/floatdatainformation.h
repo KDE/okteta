@@ -62,19 +62,6 @@ inline BitCount32 FloatDataInformation::size() const
     return sizeof(float) * 8;
 }
 
-inline QString FloatDataInformation::typeName() const
-{
-    return i18nc("Data type", "float");
-}
-
-inline QString FloatDataInformation::valueString(float value)
-{
-    if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
-        return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());
-    else
-        return QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
-}
-
 inline float FloatDataInformation::fromVariant(const QVariant& value)
 {
     return value.toFloat();

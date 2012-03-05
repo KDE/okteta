@@ -28,8 +28,6 @@
 #include "../datainformation.h"
 #include "stringdata.h"
 
-#include <QtCore/QFlags>
-
 class DummyDataInformation;
 
 const QLatin1String stringEncodings[] = {
@@ -165,7 +163,7 @@ inline uint StringDataInformation::terminationMode() const
 
 inline QString StringDataInformation::valueAt(int index) const
 {
-    Q_ASSERT(index >= 0 && index < mData->count());
+    Q_ASSERT((uint)index < mData->count());
     return mData->stringValue(index);
 }
 

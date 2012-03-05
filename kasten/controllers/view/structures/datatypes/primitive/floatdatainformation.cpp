@@ -20,8 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "floatdatainformation.h"
+
 #include <limits>
+
 #include <KDoubleNumInput>
+#include <KGlobal>
+
 
 QString FloatDataInformation::valueString() const
 {
@@ -98,8 +102,20 @@ QScriptValue FloatDataInformation::asScriptValue(float value, QScriptEngine* eng
     return QScriptValue(value);
 }
 
-
 QScriptValue FloatDataInformation::valueAsQScriptValue() const
 {
     return asScriptValue(mValue, 0, 0);
+}
+
+QString FloatDataInformation::typeName() const
+{
+	return i18nc("Data type", "float");
+}
+
+QString FloatDataInformation::valueString(float value)
+{
+	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
+		return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());
+	else
+		return QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
 }

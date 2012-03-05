@@ -21,6 +21,8 @@
  */
 #include "booldatainformation.h"
 
+#include <KGlobal>
+
 template<typename T, PrimitiveDataType typeValue>
 QString BoolDataInformation<T, typeValue>::valueString() const
 {

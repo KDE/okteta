@@ -19,8 +19,6 @@
  */
 
 
-#undef QT_NO_CAST_FROM_ASCII //being lazy
-
 #include <QtTest>
 #include <QtCore/QDate>
 
@@ -151,7 +149,8 @@ inline void PrimitiveArrayTest::testReadPrimitive() {
 template<PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
-    ArrayDataInformation* dataInf = new ArrayDataInformation("values", model->size() / sizeof(T), PrimitiveFactory::newInstance("value", primType));
+    ArrayDataInformation* dataInf = new ArrayDataInformation(QLatin1String("values"), model->size() / sizeof(T),
+                                                             PrimitiveFactory::newInstance(QLatin1String("value"), primType));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
     QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, QFileInfo(), 0, false));
     QCOMPARE(dataInf->childCount(), uint(SIZE / sizeof(T)));

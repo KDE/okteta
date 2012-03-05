@@ -21,6 +21,8 @@
  */
 #include "unsignedbitfielddatainformation.h"
 
+#include <KGlobal>
+
 int UnsignedBitfieldDataInformation::displayBase() const
 {
     int base = Kasten2::StructViewPreferences::unsignedDisplayBase();

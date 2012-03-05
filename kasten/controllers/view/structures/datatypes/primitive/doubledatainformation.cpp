@@ -20,7 +20,10 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "doubledatainformation.h"
+
 #include <KDoubleNumInput>
+#include <KGlobal>
+
 
 QString DoubleDataInformation::valueString() const
 {
@@ -93,4 +96,17 @@ QScriptValue DoubleDataInformation::asScriptValue(double value, QScriptEngine* e
 QScriptValue DoubleDataInformation::valueAsQScriptValue() const
 {
     return asScriptValue(mValue, 0, 0);
+}
+
+inline QString DoubleDataInformation::typeName() const
+{
+	return i18nc("Data type", "double");
+}
+
+inline QString DoubleDataInformation::valueString(double value)
+{
+	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
+		return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());
+	else
+		return QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
 }

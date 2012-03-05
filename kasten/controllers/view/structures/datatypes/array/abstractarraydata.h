@@ -28,14 +28,12 @@
 #include "../datainformationbase.h"
 #include "../../allprimitivetypes.h"
 
-#include <QtCore/QVariant>
-#include <QtCore/QString>
-#include <QtScript/QScriptValue>
-
-
 class QWidget;
+class QScriptEngine;
+class QScriptValue;
 class DataInformation;
 class ScriptHandlerInfo;
+
 namespace Okteta {
     class AbstractByteArrayModel;
 }

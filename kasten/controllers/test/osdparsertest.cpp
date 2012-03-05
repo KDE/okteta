@@ -85,7 +85,7 @@ void OsdParserTest::testPrimitive()
     QCOMPARE(tds2.size(), 1);
     const TopLevelDataInformation* td2 = tds2.at(0);
     DataInformation* data2 = td2->actualDataInformation();
-    QCOMPARE(data2->name(), QString("foo"));
+    QCOMPARE(data2->name(), QString(QLatin1String("foo")));
     PrimitiveDataInformation* prim2 = dynamic_cast<PrimitiveDataInformation*>(data2);
     QVERIFY(prim2);
     QCOMPARE(prim2->type(), type);

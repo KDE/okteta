@@ -24,7 +24,6 @@
 
 #include "../datainformation.h"
 #include "../../allprimitivetypes.h"
-#include <QtScript/QScriptValue>
 
 class PrimitiveDataInformation: public DataInformation
 {

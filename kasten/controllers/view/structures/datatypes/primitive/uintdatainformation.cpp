@@ -21,7 +21,9 @@
  */
 #include "uintdatainformation.h"
 
-#include <QtScript/QScriptEngine>
+#include <QtScript/QScriptValue>
+
+#include <KGlobal>
 
 
 template<typename T, PrimitiveDataType typeValue>

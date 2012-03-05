@@ -27,8 +27,6 @@
 #include "../datainformation.h"
 #include "abstractarraydata.h"
 
-#include <QtScript/QScriptValue>
-
 class DummyDataInformation;
 class AbstractArrayData;
 class ArrayDataInformation : public DataInformation

@@ -25,6 +25,9 @@
 #include "utf8stringdata.h"
 
 #include <QVarLengthArray>
+
+#include <KLocale>
+
 #include <abstractbytearraymodel.h>
 
 #include "../topleveldatainformation.h"
@@ -57,7 +60,7 @@ uint Utf8StringData::count() const
 
 QString Utf8StringData::stringValue(int row) const
 {
-    Q_ASSERT(row >= 0 && row < count());
+    Q_ASSERT((uint)row < count());
     //TODO show invalid values
     uint val = mCodePoints.at(row);
     QString number = QString::number(val, 16).toUpper();

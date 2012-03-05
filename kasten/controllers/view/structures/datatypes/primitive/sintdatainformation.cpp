@@ -21,6 +21,8 @@
  */
 #include "sintdatainformation.h"
 
+#include <KGlobal>
+
 template<typename T, PrimitiveDataType typeValue>
 QString SIntDataInformation<T, typeValue>::valueString() const
 {

@@ -279,7 +279,7 @@ int DataInformation::row() const
         return mParent->asDataInformation()->indexOf(this);
 }
 
-QWidget* DataInformation::createChildEditWidget(uint index, QWidget* parent) const
+QWidget* DataInformation::createChildEditWidget(uint, QWidget*) const
 {
     Q_ASSERT_X(false, "DataInformation::createChildEditWidget",
             "only implemented so not all subclasses have to, since it will never be called there. Error!");
@@ -287,13 +287,13 @@ QWidget* DataInformation::createChildEditWidget(uint index, QWidget* parent) con
 
 }
 
-void DataInformation::setChildWidgetData(uint index, QWidget* w) const
+void DataInformation::setChildWidgetData(uint, QWidget*) const
 {
     Q_ASSERT_X(false, "DataInformation::setChildWidgetData",
             "only implemented so not all subclasses have to, since it will never be called there. Error!");
 }
 
-QVariant DataInformation::dataFromChildWidget(uint index, const QWidget* w) const
+QVariant DataInformation::dataFromChildWidget(uint, const QWidget*) const
 {
     Q_ASSERT_X(false, "DataInformation::dataFromChildWidget",
             "only implemented so not all subclasses have to, since it will never be called there. Error!");

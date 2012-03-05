@@ -24,8 +24,6 @@
 #ifndef STRINGDATA_H
 #define STRINGDATA_H
 
-#include <QtCore/QString>
-
 #include <address.h>
 #include "../datainformationbase.h"
 

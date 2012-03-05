@@ -19,12 +19,12 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-
 #include "utf32stringdata.h"
 
 #include <QVarLengthArray>
+
+#include <KLocale>
+
 #include <abstractbytearraymodel.h>
 
 #include "../topleveldatainformation.h"
@@ -58,7 +58,7 @@ uint Utf32StringData::count() const
 QString Utf32StringData::stringValue(int row) const
 {
     //TODO details
-    Q_ASSERT(row >= 0 && row < count());
+    Q_ASSERT((uint)row < count());
     //TODO show invalid values
     uint val = mCodePoints.at(row);
     QString number = QString::number(val, 16).toUpper();
@@ -126,10 +126,10 @@ qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             _childrenRemoved(mParent, 0, oldSize);
     }
 
-    const int oldMax = mCodePoints.size();
+    const uint oldMax = mCodePoints.size();
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
-    int count = 0;
+    uint count = 0;
     mEofReached = false;
     if (((mMode & CharCount) && mLength.maxChars == 0)
             || ((mMode & ByteCount) && mLength.maxBytes < 2))
@@ -175,7 +175,7 @@ qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         if (mMode & ByteCount)
         {
             // divide by two in case someone set length to an odd number of bytes
-            if ((addr - address) / 4 >= mLength.maxBytes / 4)
+            if ((addr - address) / 4 >= Okteta::Address(mLength.maxBytes / 4))
                 terminate = true;
         }
         if (mMode & CharCount)

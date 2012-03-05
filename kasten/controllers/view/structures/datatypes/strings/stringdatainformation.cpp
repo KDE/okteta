@@ -36,6 +36,8 @@
 #include <QtScript/QScriptEngine>
 #include <QtGui/QBrush>
 
+#include <KLocale>
+
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
     : DataInformation(name, parent), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
 {
@@ -117,20 +119,21 @@ BitCount32 StringDataInformation::size() const
     return mData->size();
 }
 
-void StringDataInformation::setWidgetData(QWidget* w) const
+void StringDataInformation::setWidgetData(QWidget*) const
 {
     //TODO
 }
 
-QVariant StringDataInformation::dataFromWidget(const QWidget* w) const
+QVariant StringDataInformation::dataFromWidget(const QWidget*) const
 {
     //TODO
     Q_ASSERT(false);
     return QVariant();
 }
 
-QWidget* StringDataInformation::createEditWidget(QWidget* parent) const
+QWidget* StringDataInformation::createEditWidget(QWidget*) const
 {
+    //TODO
     Q_ASSERT(false);
     return 0;
 }

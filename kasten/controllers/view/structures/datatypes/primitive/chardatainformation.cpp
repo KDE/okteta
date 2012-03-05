@@ -20,7 +20,9 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "chardatainformation.h"
+
 #include <KLineEdit>
+#include <KGlobal>
 
 QString CharDataInformation::valueString() const
 {
