@@ -50,10 +50,9 @@ protected:
 };
 
 
-inline Qt::ItemFlags AbstractBitfieldDataInformation::flags(int column,
-        bool fileLoaded) const
+inline Qt::ItemFlags AbstractBitfieldDataInformation::flags(int column, bool fileLoaded) const
 {
-    if (column == 2 && fileLoaded)
+    if (column == (int)DataInformation::ColumnValue && fileLoaded)
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
     else
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;

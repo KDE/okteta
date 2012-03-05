@@ -36,15 +36,14 @@ DataInformation::DataInformation(const QString& name, DataInformationBase* paren
 DataInformation::DataInformation(const DataInformation& d) :
             mValidationSuccessful(d.mValidationSuccessful),
             mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead),
-            mByteOrder(d.mByteOrder), mAdditionalData(0), mParent(0), mName(d.mName)
+            mByteOrder(d.mByteOrder), mParent(0), mName(d.mName)
 {
     if (d.mAdditionalData)
-        mAdditionalData = new AdditionalData(*(d.mAdditionalData));
+        mAdditionalData.reset(new AdditionalData(*(d.mAdditionalData)));
 }
 
 DataInformation::~DataInformation()
 {
-    delete mAdditionalData;
 }
 
 QString DataInformation::valueString() const
@@ -92,7 +91,7 @@ DataInformation* DataInformation::mainStructure()
 
 void DataInformation::setAdditionalData(AdditionalData* data)
 {
-    mAdditionalData = data;
+    mAdditionalData.reset(data);
 }
 
 QString DataInformation::validationError() const
@@ -106,7 +105,7 @@ void DataInformation::setValidationError(QString errorMessage)
 {
     setValidationSuccessful(false);
     if (!mAdditionalData)
-        mAdditionalData = new AdditionalData();
+        mAdditionalData.reset(new AdditionalData());
     mAdditionalData->setValidationError(errorMessage);
 }
 

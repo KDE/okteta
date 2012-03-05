@@ -37,9 +37,6 @@
 #include <KLocale>
 #include <KGlobal>
 
-//Qt
-#include <QtScript/QScriptValue>
-
 #include "datainformationbase.h"
 
 #define DATAINFORMATION_CLONE(type) virtual inline type##DataInformation* clone() const {\
@@ -55,6 +52,7 @@ class TopLevelDataInformation;
 class ScriptHandlerInfo;
 class QScriptContext;
 class QScriptEngine;
+class QScriptValue;
 
 /** Interface that must be implemented by all datatypes */
 class DataInformation: public DataInformationBase
@@ -195,7 +193,7 @@ protected:
     bool mHasBeenValidated :1;
     bool mWasAbleToRead :1;
     DataInformationEndianess mByteOrder : 2;
-    AdditionalData* mAdditionalData;
+    QScopedPointer<AdditionalData> mAdditionalData;
     DataInformationBase* mParent;
     QString mName;
 };
@@ -237,7 +235,7 @@ inline unsigned int DataInformation::childCount() const
 
 inline AdditionalData* DataInformation::additionalData() const
 {
-    return mAdditionalData;
+    return mAdditionalData.data();
 }
 
 inline bool DataInformation::wasAbleToRead() const
