@@ -28,7 +28,7 @@
 QString SignedBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "<invalid>");
+        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
     return SIntDataInformation<qint64>::valueString(mValue.longValue);
 }
 

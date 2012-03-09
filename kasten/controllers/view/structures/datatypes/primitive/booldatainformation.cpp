@@ -41,7 +41,7 @@ QString BoolDataInformation<T>::valueString(T value, int base) {
     else
     {
         //we can reuse the valueString() here
-        QString num = UIntDataInformation<T>::valueString(value);
+        QString num = UIntDataInformation<T>::valueString(value, base);
         return i18nc("boolean value with actual value", "true (%1)", num);
     }
 }

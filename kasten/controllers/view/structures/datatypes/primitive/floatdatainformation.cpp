@@ -30,7 +30,7 @@
 QString FloatDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "<invalid>");
+        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
     return valueString(mValue);
 }
 
