@@ -177,6 +177,7 @@ void BasicDataInformationTest::testPrimitives()
 		PrimitiveDataInformation* data = primitives.at(i);
 		PrimitiveDataType t = data->type();
 		QCOMPARE(t, static_cast<PrimitiveDataType>(i));
+		QCOMPARE(data->type(), static_cast<PrimitiveDataType>(i));
 		if (t == Type_Bool8 || t ==  Type_Int8 || t == Type_UInt8 || t == Type_Char)
 			exp.size = 8;
 		else if (t == Type_Bool16 || t == Type_Int16 || t == Type_UInt16)
