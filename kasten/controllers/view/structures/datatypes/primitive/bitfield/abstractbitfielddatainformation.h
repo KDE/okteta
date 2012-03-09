@@ -72,7 +72,7 @@ inline quint64 AbstractBitfieldDataInformation::mask() const
 
 inline BitCount32 AbstractBitfieldDataInformation::size() const
 {
-    return width();
+    return mWidth;
 }
 
 inline BitCount32 AbstractBitfieldDataInformation::width() const

@@ -49,7 +49,6 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
-    int displayBase() const;
 };
 
 

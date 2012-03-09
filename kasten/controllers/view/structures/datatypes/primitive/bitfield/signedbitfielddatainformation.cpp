@@ -23,29 +23,11 @@
 
 #include <KGlobal>
 
-int SignedBitfieldDataInformation::displayBase() const
-{
-    int base = Kasten2::StructViewPreferences::unsignedDisplayBase();
-    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
-    {
-        return 2;
-    }
-    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Decimal)
-    {
-        return 10;
-    }
-    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
-    {
-        return 16;
-    }
-    return 10; //safe default value
-}
-
 QString SignedBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
-    int base = displayBase();
+    int base = PrimitiveDataInformation::signedDisplayBase();
     qint64 val = mValue.ulongValue & mask();
 
     //check if is negative (only when decimal):
@@ -67,7 +49,7 @@ QString SignedBitfieldDataInformation::valueString() const
 QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     SIntSpinBox* ret = new SIntSpinBox(parent);
-    ret->setBase(displayBase());
+    ret->setBase(PrimitiveDataInformation::signedDisplayBase());
     ret->setRange(mask(), mask() >> 1); //mask is unsigned, so shift will do the right thing
     return ret;
 }

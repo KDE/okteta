@@ -24,29 +24,11 @@
 #include <KComboBox>
 #include <KGlobal>
 
-int BoolBitfieldDataInformation::displayBase() const
-{
-    int base = Kasten2::StructViewPreferences::unsignedDisplayBase();
-    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
-    {
-        return 2;
-    }
-    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Decimal)
-    {
-        return 10;
-    }
-    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
-    {
-        return 16;
-    }
-    return 10; //safe default value
-}
-
 QString BoolBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
-    int base = displayBase();
+    int base = PrimitiveDataInformation::unsignedDisplayBase();
     quint64 val = mValue.ulongValue & mask();
     if (val == 0)
         return i18nc("boolean value", "false");
@@ -75,7 +57,7 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
         return box;
     }
     UIntSpinBox* ret = new UIntSpinBox(parent);
-    ret->setBase(displayBase());
+    ret->setBase(PrimitiveDataInformation::unsignedDisplayBase());
     ret->setMaximum(mask());
     return ret;
 }
