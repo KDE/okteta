@@ -58,8 +58,10 @@ QString SIntDataInformation<T, typeValue>::valueString(T val)
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return num;
     }
+    //the absolute value of negative minimum can not be represented as a signed integer
+    //casting it to an unsigned value yields the correct result
     if (val == std::numeric_limits<T>::min())
-        num = QString::number(quint64(val), base); //since qAbs will not work
+        num = QString::number(typename QIntegerForSizeof<T>::Unsigned(val), base);
     else
         num = QString::number(qAbs(val), base);
 
