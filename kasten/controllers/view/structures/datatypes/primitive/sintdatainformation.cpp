@@ -32,9 +32,8 @@ QString SIntDataInformation<T, typeValue>::valueString() const
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QString SIntDataInformation<T, typeValue>::valueString(T val)
+QString SIntDataInformation<T, typeValue>::valueString(T val, int base)
 {
-    int base = displayBase();
     QString num;
     if (base == 10) {
         num = QString::number(val, base);

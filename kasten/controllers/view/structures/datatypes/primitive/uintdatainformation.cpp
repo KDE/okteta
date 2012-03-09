@@ -59,9 +59,8 @@ QString UIntDataInformation<T, typeValue>::valueString() const
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QString UIntDataInformation<T, typeValue>::valueString(T value)
+QString UIntDataInformation<T, typeValue>::valueString(T value, int base)
 {
-    int base = UnsignedDataInformation<T>::displayBase();
     QString num = QString::number(value, base);
     if (base == 10)
     {

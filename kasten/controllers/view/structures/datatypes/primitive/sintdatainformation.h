@@ -55,6 +55,7 @@ public:
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     virtual QString valueString() const;
     static QString valueString(T val);
+    static QString valueString(T val, int base);
 protected:
     explicit SIntDataInformation(const SIntDataInformation& d);
 protected:
@@ -149,6 +150,12 @@ template<typename T, PrimitiveDataType typeValue>
 inline BitCount32 SIntDataInformation<T, typeValue>::size() const
 {
     return sizeof(T) * 8;
+}
+
+template<typename T, PrimitiveDataType typeValue>
+inline QString SIntDataInformation<T, typeValue>::valueString(T value)
+{
+    return SIntDataInformation<T, typeValue>::valueString(value, SIntDataInformation<T, typeValue>::displayBase());
 }
 
 template<typename T, PrimitiveDataType typeValue>

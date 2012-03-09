@@ -40,6 +40,7 @@ public:
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     virtual QString valueString() const;
     static QString valueString(T val);
+    static QString valueString(T val, int base);
     virtual PrimitiveDataType type() const;
     virtual QString typeName() const;
 protected:
@@ -91,6 +92,10 @@ inline BoolDataInformation<T, typeValue>* BoolDataInformation<T, typeValue>::clo
     return new BoolDataInformation<T, typeValue>(*this);
 }
 
-
+template<typename T, PrimitiveDataType typeValue>
+inline QString BoolDataInformation<T, typeValue>::valueString(T value)
+{
+    return BoolDataInformation<T, typeValue>::valueString(value, BoolDataInformation<T, typeValue>::displayBase());
+}
 
 #endif // BOOLDATAINFORMATION_H

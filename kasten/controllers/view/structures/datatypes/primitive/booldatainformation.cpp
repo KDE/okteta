@@ -32,8 +32,7 @@ QString BoolDataInformation<T, typeValue>::valueString() const
 }
 
 template<typename T, PrimitiveDataType typeValue>
-QString BoolDataInformation<T, typeValue>::valueString(T value) {
-    int base = UnsignedDataInformation<T>::displayBase();
+QString BoolDataInformation<T, typeValue>::valueString(T value, int base) {
     if (value == 0)
         return i18nc("boolean value", "false");
     else if (value == 1)

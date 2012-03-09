@@ -36,6 +36,7 @@ public:
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     virtual QString valueString() const;
     static QString valueString(T val);
+    static QString valueString(T val, int base);
     virtual PrimitiveDataType type() const;
     virtual QString typeName() const;
 protected:
@@ -70,6 +71,12 @@ template<typename T, PrimitiveDataType typeValue>
 inline UIntDataInformation<T, typeValue>* UIntDataInformation<T, typeValue>::clone() const
 {
     return new UIntDataInformation<T, typeValue>(*this);
+}
+
+template<typename T, PrimitiveDataType typeValue>
+inline QString UIntDataInformation<T, typeValue>::valueString(T value)
+{
+    return UIntDataInformation<T, typeValue>::valueString(value, UIntDataInformation<T, typeValue>::displayBase());
 }
 
 #endif // UINTDATAINFORMATION_H
