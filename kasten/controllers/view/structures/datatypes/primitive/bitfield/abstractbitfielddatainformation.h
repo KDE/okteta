@@ -67,7 +67,9 @@ inline quint64 AbstractBitfieldDataInformation::mask() const
      *     ret |= 1 << i;
      * return ret;
      */
-    return (1 << mWidth) - 1;
+    if (Q_UNLIKELY(mWidth == 64u))
+        return ~quint64(0);
+    return (quint64(1) << mWidth) - 1;
 }
 
 inline BitCount32 AbstractBitfieldDataInformation::size() const
