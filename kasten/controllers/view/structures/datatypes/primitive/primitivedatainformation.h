@@ -27,6 +27,7 @@
 
 class PrimitiveDataInformation: public DataInformation
 {
+    friend class PrimitiveDataInformationTest; //that unit test needs to change mWasAbleToRead
 public:
     explicit PrimitiveDataInformation(QString name, DataInformation* parent = NULL);
     virtual ~PrimitiveDataInformation();

@@ -27,6 +27,7 @@
 
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
+#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
 
 
 class PrimitiveDataInformationTest : public QObject
@@ -159,6 +160,20 @@ void PrimitiveDataInformationTest::testValueStringInt()
         QCOMPARE(SIntDataInformation<qint64>::valueString(qint64(value), 16), hexExpected);
         QCOMPARE(SIntDataInformation<qint64>::valueString(qint64(value), 10), decExpected);
         QCOMPARE(SIntDataInformation<qint64>::valueString(qint64(value), 8), octExpected);
+    }
+    //check bitfield now
+    SignedBitfieldDataInformation bitfield(QLatin1String("signed"), minSize);
+    bitfield.setValue(value);
+    for (uint width = minSize; width <= 64u; ++width) {
+        bitfield.setWidth(width);
+        bitfield.mWasAbleToRead = true;
+        Kasten2::StructViewPreferences::setSignedDisplayBase(Kasten2::StructViewPreferences::EnumSignedDisplayBase::Binary);
+        QCOMPARE(bitfield.valueString(), binExpected);
+        Kasten2::StructViewPreferences::setSignedDisplayBase(Kasten2::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal);
+        QCOMPARE(bitfield.valueString(), hexExpected);
+        Kasten2::StructViewPreferences::setSignedDisplayBase(Kasten2::StructViewPreferences::EnumSignedDisplayBase::Decimal);
+        QCOMPARE(bitfield.valueString(), decExpected);
+        //TODO add octal to the config
     }
 }
 
