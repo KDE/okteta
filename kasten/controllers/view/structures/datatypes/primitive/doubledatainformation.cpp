@@ -98,12 +98,12 @@ QScriptValue DoubleDataInformation::valueAsQScriptValue() const
     return asScriptValue(mValue, 0, 0);
 }
 
-inline QString DoubleDataInformation::typeName() const
+QString DoubleDataInformation::typeName() const
 {
 	return i18nc("Data type", "double");
 }
 
-inline QString DoubleDataInformation::valueString(double value)
+QString DoubleDataInformation::valueString(double value)
 {
 	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
 		return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());

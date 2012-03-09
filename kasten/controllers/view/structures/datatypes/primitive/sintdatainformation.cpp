@@ -116,7 +116,7 @@ QScriptValue SIntDataInformation<qint64>::asScriptValue(qint64 value, QScriptEng
 }
 
 template<typename T>
-inline QWidget* SIntDataInformation<T>::createEditWidget(QWidget* parent) const
+QWidget* SIntDataInformation<T>::createEditWidget(QWidget* parent) const
 {
     return staticCreateEditWidget(parent);
 }
@@ -128,7 +128,7 @@ QVariant SIntDataInformation<T>::dataFromWidget(const QWidget* w) const
 }
 
 template<typename T>
-inline void SIntDataInformation<T>::setWidgetData(QWidget* w) const
+void SIntDataInformation<T>::setWidgetData(QWidget* w) const
 {
     staticSetWidgetData(mValue, w);
 }
