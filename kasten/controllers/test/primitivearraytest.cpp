@@ -73,7 +73,22 @@ void PrimitiveArrayTest::initTestCase()
 {
     qsrand(QTime::currentTime().msec());
     data = new Okteta::Byte[SIZE];
-    for (uint i = 0; i < SIZE; ++i)
+    //ensure that we have at least one NaN (quiet + signalling)
+    AllPrimitiveTypes quietDouble(std::numeric_limits<double>::quiet_NaN());
+    AllPrimitiveTypes signallingDouble(std::numeric_limits<double>::signaling_NaN());
+    for (int i = 0; i < 8; ++i)
+    {
+        data[i] = quietDouble.allBytes[i];
+        data[8 + i] = signallingDouble.allBytes[i];
+    }
+    AllPrimitiveTypes quietFloat(std::numeric_limits<float>::quiet_NaN());
+    AllPrimitiveTypes signallingFloat(std::numeric_limits<float>::signaling_NaN());
+    for (int i = 0; i < 4; ++i)
+    {
+        data[16 + i] = quietFloat.allBytes[i];
+        data[20 + i] = signallingFloat.allBytes[i];
+    }
+    for (uint i = 24; i < SIZE; ++i)
     {
         data[i] = (char(qrand() & 0xff));
     }
