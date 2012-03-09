@@ -41,14 +41,26 @@ QString BoolDataInformation<T, typeValue>::valueString(T value) {
     else
     {
         QString num = QString::number(value, base);
-        if (base == 16)
-            num.prepend(QLatin1String("0x"));
-        else if (base == 2)
-            num.prepend(QLatin1String("0b"));
-        else if (base == 8)
-            num.prepend(QLatin1String("0o"));
-        else if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
+        if (base == 10)
+        {
+            if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
+                num = KGlobal::locale()->formatNumber(num, false, 0);
+        }
+        else
+        {
+            //add one space every 8 chars
+            for (int i = 8; i < num.length(); i += 9) {
+                num.insert(num.length() - i, QLatin1Char(' '));
+            }
+            if (base == 16)
+                num.prepend(QLatin1String("0x"));
+            else if (base == 2)
+                num.prepend(QLatin1String("0b"));
+            else if (base == 8)
+                num.prepend(QLatin1String("0o"));
+            else
+                kDebug() << "unsupported number base" << base;
+        }
         return i18nc("boolean value with actual value", "true (%1)", num);
     }
 }

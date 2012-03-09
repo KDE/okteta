@@ -36,28 +36,36 @@ QString SIntDataInformation<T, typeValue>::valueString(T val)
 {
     int base = displayBase();
     QString num;
-    if (val >= 0)
-    {
-        //no need to do anything special
-        num = QString::number(val, base);
-        if (base == 16)
-            num.prepend(QLatin1String("0x"));
-        else if (base == 8)
-            num.prepend(QLatin1String("0o"));
-        else if (base == 2)
-            num.prepend(QLatin1String("0b"));
-        else if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
-        return num;
-    }
-    //value is less than zero, now the tricky bit starts
-    //TODO non decimal negative values as unsigned? probably add option
     if (base == 10) {
         num = QString::number(val, base);
         if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return num;
     }
+    Q_ASSERT(base != 10); //base 10 must have been handeled by now!
+    if (val >= 0)
+    {
+        //no need to do anything special since value is positive
+        num = QString::number(val, base);
+        //add one space every 8 chars
+        for (int i = 8; i < num.length(); i += 9)
+        {
+            num.insert(num.length() - i, QLatin1Char(' '));
+        }
+        if (base == 16)
+            num.prepend(QLatin1String("0x"));
+        else if (base == 8)
+            num.prepend(QLatin1String("0o"));
+        else if (base == 2)
+        {
+
+            num.prepend(QLatin1String("0b"));
+        }
+        return num;
+    }
+    //value is less than zero, now the tricky bit starts
+    //TODO non decimal negative values as unsigned? probably add option
+
     //the absolute value of negative minimum can not be represented as a signed integer
     //casting it to an unsigned value yields the correct result
     if (val == std::numeric_limits<T>::min())
@@ -65,6 +73,11 @@ QString SIntDataInformation<T, typeValue>::valueString(T val)
     else
         num = QString::number(qAbs(val), base);
 
+    //add one space every 8 chars
+    for (int i = 8; i < num.length(); i += 9)
+    {
+        num.insert(num.length() - i, QLatin1Char(' '));
+    }
     if (base == 16)
         num.prepend(QLatin1String("-0x"));
     else if (base == 8)
@@ -72,8 +85,10 @@ QString SIntDataInformation<T, typeValue>::valueString(T val)
     else if (base == 2)
         num.prepend(QLatin1String("-0b"));
     else
+    {
         num.prepend(QLatin1String("-"));
-
+        kDebug() << "unsupported number base" << base;
+    }
     return num;
 }
 
