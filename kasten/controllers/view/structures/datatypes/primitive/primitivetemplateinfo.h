@@ -39,55 +39,55 @@ template<PrimitiveDataType T> struct PrimitiveInfo {
 
 template<> struct PrimitiveInfo<Type_Bool8> {
     typedef quint8 valueType;
-    typedef BoolDataInformation<valueType, Type_Bool8> Class;
+    typedef BoolDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_Bool16> {
     typedef quint16 valueType;
-    typedef BoolDataInformation<valueType, Type_Bool16> Class;
+    typedef BoolDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_Bool32> {
     typedef quint32 valueType;
-    typedef BoolDataInformation<valueType, Type_Bool32> Class;
+    typedef BoolDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_Bool64> {
     typedef quint64 valueType;
-    typedef BoolDataInformation<valueType, Type_Bool64> Class;
+    typedef BoolDataInformation<valueType> Class;
 };
 
 
 template<> struct PrimitiveInfo<Type_UInt8> {
     typedef quint8 valueType;
-    typedef UIntDataInformation<valueType, Type_UInt8> Class;
+    typedef UIntDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_UInt16> {
     typedef quint16 valueType;
-    typedef UIntDataInformation<valueType, Type_UInt16> Class;
+    typedef UIntDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_UInt32> {
     typedef quint32 valueType;
-    typedef UIntDataInformation<valueType, Type_UInt32> Class;
+    typedef UIntDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_UInt64> {
     typedef quint64 valueType;
-    typedef UIntDataInformation<valueType, Type_UInt64> Class;
+    typedef UIntDataInformation<valueType> Class;
 };
 
 
 template<> struct PrimitiveInfo<Type_Int8> {
     typedef qint8 valueType;
-    typedef SIntDataInformation<valueType, Type_Int8> Class;
+    typedef SIntDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_Int16> {
     typedef qint16 valueType;
-    typedef SIntDataInformation<valueType, Type_Int16> Class;
+    typedef SIntDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_Int32> {
     typedef qint32 valueType;
-    typedef SIntDataInformation<valueType, Type_Int32> Class;
+    typedef SIntDataInformation<valueType> Class;
 };
 template<> struct PrimitiveInfo<Type_Int64> {
     typedef qint64 valueType;
-    typedef SIntDataInformation<valueType, Type_Int64> Class;
+    typedef SIntDataInformation<valueType> Class;
 };
 
 

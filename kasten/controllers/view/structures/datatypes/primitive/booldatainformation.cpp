@@ -23,16 +23,16 @@
 
 #include <KGlobal>
 
-template<typename T, PrimitiveDataType typeValue>
-QString BoolDataInformation<T, typeValue>::valueString() const
+template<typename T>
+QString BoolDataInformation<T>::valueString() const
 {
-    if (!BoolDataInformation::mWasAbleToRead)
+    if (!this->mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return BoolDataInformation<T, typeValue>::valueString(UnsignedDataInformation<T>::mValue);
+    return BoolDataInformation<T>::valueString(UnsignedDataInformation<T>::mValue);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QString BoolDataInformation<T, typeValue>::valueString(T value, int base) {
+template<typename T>
+QString BoolDataInformation<T>::valueString(T value, int base) {
     if (value == 0)
         return i18nc("boolean value", "false");
     else if (value == 1)
@@ -65,7 +65,7 @@ QString BoolDataInformation<T, typeValue>::valueString(T value, int base) {
 }
 
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)
-template class BoolDataInformation<quint8, Type_Bool8>;
-template class BoolDataInformation<quint16, Type_Bool16>;
-template class BoolDataInformation<quint32, Type_Bool32>;
-template class BoolDataInformation<quint64, Type_Bool64>;
+template class BoolDataInformation<quint8>;
+template class BoolDataInformation<quint16>;
+template class BoolDataInformation<quint32>;
+template class BoolDataInformation<quint64>;

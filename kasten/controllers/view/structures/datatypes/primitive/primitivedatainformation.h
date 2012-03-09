@@ -54,6 +54,9 @@ public:
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     virtual bool isPrimitive() const;
+
+    static int unsignedDisplayBase();
+    static int signedDisplayBase();
 protected:
     virtual BitCount32 offset(unsigned int index) const;
     explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
@@ -77,6 +80,30 @@ inline BitCount32 PrimitiveDataInformation::offset(unsigned int index) const
 inline bool PrimitiveDataInformation::isPrimitive() const
 {
     return true;
+}
+
+inline int PrimitiveDataInformation::unsignedDisplayBase()
+{
+    Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::type base =
+        Kasten2::StructViewPreferences::unsignedDisplayBase();
+    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
+        return 2;
+    else if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
+        return 16;
+    else
+        return 10; //safe default value
+}
+
+inline int PrimitiveDataInformation::signedDisplayBase()
+{
+    Kasten2::StructViewPreferences::EnumSignedDisplayBase::type base =
+    Kasten2::StructViewPreferences::signedDisplayBase();
+    if (base == Kasten2::StructViewPreferences::EnumSignedDisplayBase::Binary)
+        return 2;
+    else if (base == Kasten2::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal)
+        return 16;
+    else
+        return 10; //safe default value
 }
 
 #define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \

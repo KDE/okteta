@@ -47,7 +47,6 @@ public:
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(T value, QWidget* w);
-    static int displayBase();
 
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual QString valueString() const = 0;
@@ -78,7 +77,7 @@ inline void UnsignedDataInformation<T>::setWidgetData(QWidget* w) const
 template<typename T>
 inline QWidget* UnsignedDataInformation<T>::staticCreateEditWidget(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox(parent, displayBase());
+    UIntSpinBox* ret = new UIntSpinBox(parent, PrimitiveDataInformation::unsignedDisplayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }
@@ -123,18 +122,6 @@ inline AllPrimitiveTypes UnsignedDataInformation<T>::qVariantToAllPrimitiveTypes
 
     //This is fine since all the values are unsigned
     return AllPrimitiveTypes(value.toULongLong());
-}
-
-template<typename T>
-inline int UnsignedDataInformation<T>::displayBase()
-{
-    int base = Kasten2::StructViewPreferences::unsignedDisplayBase();
-    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
-        return 2;
-    else if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
-        return 16;
-    else
-        return 10; //safe default value
 }
 
 template<typename T>

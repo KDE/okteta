@@ -23,16 +23,16 @@
 
 #include <KGlobal>
 
-template<typename T, PrimitiveDataType typeValue>
-QString SIntDataInformation<T, typeValue>::valueString() const
+template<typename T>
+QString SIntDataInformation<T>::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
     return valueString(mValue);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QString SIntDataInformation<T, typeValue>::valueString(T val, int base)
+template<typename T>
+QString SIntDataInformation<T>::valueString(T val, int base)
 {
     QString num;
     if (base == 10) {
@@ -91,14 +91,14 @@ QString SIntDataInformation<T, typeValue>::valueString(T val, int base)
     return num;
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QScriptValue SIntDataInformation<T, typeValue>::valueAsQScriptValue() const
+template<typename T>
+QScriptValue SIntDataInformation<T>::valueAsQScriptValue() const
 {
     return asScriptValue(mValue, 0, 0);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QScriptValue SIntDataInformation<T, typeValue>::asScriptValue(T value, QScriptEngine* engine,
+template<typename T>
+QScriptValue SIntDataInformation<T>::asScriptValue(T value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
@@ -107,7 +107,7 @@ QScriptValue SIntDataInformation<T, typeValue>::asScriptValue(T value, QScriptEn
 }
 
 template<>
-QScriptValue SIntDataInformation<qint64, Type_Int64>::asScriptValue(qint64 value, QScriptEngine* engine,
+QScriptValue SIntDataInformation<qint64>::asScriptValue(qint64 value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
@@ -115,26 +115,26 @@ QScriptValue SIntDataInformation<qint64, Type_Int64>::asScriptValue(qint64 value
     return QScriptValue(QString::number(value, 10));
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline QWidget* SIntDataInformation<T, typeValue>::createEditWidget(QWidget* parent) const
+template<typename T>
+inline QWidget* SIntDataInformation<T>::createEditWidget(QWidget* parent) const
 {
     return staticCreateEditWidget(parent);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QVariant SIntDataInformation<T, typeValue>::dataFromWidget(const QWidget* w) const
+template<typename T>
+QVariant SIntDataInformation<T>::dataFromWidget(const QWidget* w) const
 {
     return staticDataFromWidget(w);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline void SIntDataInformation<T, typeValue>::setWidgetData(QWidget* w) const
+template<typename T>
+inline void SIntDataInformation<T>::setWidgetData(QWidget* w) const
 {
     staticSetWidgetData(mValue, w);
 }
 
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)
-template class SIntDataInformation<qint8, Type_Int8>;
-template class SIntDataInformation<qint16, Type_Int16>;
-template class SIntDataInformation<qint32, Type_Int32>;
-template class SIntDataInformation<qint64, Type_Int64>;
+template class SIntDataInformation<qint8>;
+template class SIntDataInformation<qint16>;
+template class SIntDataInformation<qint32>;
+template class SIntDataInformation<qint64>;

@@ -24,13 +24,13 @@
 
 #include "unsigneddatainformation.h"
 
-template<typename T, PrimitiveDataType typeValue>
+template<typename T>
 class UIntDataInformation : public UnsignedDataInformation<T>
 {
 public:
     explicit UIntDataInformation(QString name, DataInformation* parent = 0);
     virtual ~UIntDataInformation() {}
-    virtual UIntDataInformation<T, typeValue>* clone() const;
+    virtual UIntDataInformation<T>* clone() const;
 
     virtual QScriptValue valueAsQScriptValue() const;
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
@@ -43,40 +43,43 @@ protected:
     explicit UIntDataInformation(const UIntDataInformation& d);
 };
 
-template<typename T, PrimitiveDataType typeValue>
-inline PrimitiveDataType UIntDataInformation<T, typeValue>::type() const
+template<>
+inline PrimitiveDataType UIntDataInformation<quint8>::type() const { return Type_UInt8; }
+template<>
+inline PrimitiveDataType UIntDataInformation<quint16>::type() const { return Type_UInt16; }
+template<>
+inline PrimitiveDataType UIntDataInformation<quint32>::type() const { return Type_UInt32; }
+template<>
+inline PrimitiveDataType UIntDataInformation<quint64>::type() const { return Type_UInt64; }
+
+template<typename T>
+inline QString UIntDataInformation<T>::typeName() const
 {
-    return typeValue;
+    return PrimitiveDataInformation::typeName(this->type());
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline QString UIntDataInformation<T, typeValue>::typeName() const
-{
-    return PrimitiveDataInformation::typeName(typeValue);
-}
-
-template<typename T, PrimitiveDataType typeValue>
-inline UIntDataInformation<T, typeValue>::UIntDataInformation(QString name, DataInformation* parent)
+template<typename T>
+inline UIntDataInformation<T>::UIntDataInformation(QString name, DataInformation* parent)
         : UnsignedDataInformation<T>(name, parent)
 {
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline UIntDataInformation<T, typeValue>::UIntDataInformation(const UIntDataInformation& d)
+template<typename T>
+inline UIntDataInformation<T>::UIntDataInformation(const UIntDataInformation& d)
         : UnsignedDataInformation<T>(d)
 {
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline UIntDataInformation<T, typeValue>* UIntDataInformation<T, typeValue>::clone() const
+template<typename T>
+inline UIntDataInformation<T>* UIntDataInformation<T>::clone() const
 {
-    return new UIntDataInformation<T, typeValue>(*this);
+    return new UIntDataInformation<T>(*this);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline QString UIntDataInformation<T, typeValue>::valueString(T value)
+template<typename T>
+inline QString UIntDataInformation<T>::valueString(T value)
 {
-    return UIntDataInformation<T, typeValue>::valueString(value, UIntDataInformation<T, typeValue>::displayBase());
+    return UIntDataInformation<T>::valueString(value, PrimitiveDataInformation::unsignedDisplayBase());
 }
 
 #endif // UINTDATAINFORMATION_H

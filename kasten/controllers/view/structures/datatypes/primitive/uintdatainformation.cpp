@@ -26,8 +26,8 @@
 #include <KGlobal>
 
 
-template<typename T, PrimitiveDataType typeValue>
-QScriptValue UIntDataInformation<T, typeValue>::asScriptValue(T value, QScriptEngine* engine,
+template<typename T>
+QScriptValue UIntDataInformation<T>::asScriptValue(T value, QScriptEngine* engine,
         ScriptHandlerInfo* handlerInfo)
 {
     Q_UNUSED(engine);
@@ -36,7 +36,7 @@ QScriptValue UIntDataInformation<T, typeValue>::asScriptValue(T value, QScriptEn
 }
 
 template<>
-QScriptValue UIntDataInformation<quint64, Type_UInt64>::asScriptValue(quint64 value, QScriptEngine* engine,
+QScriptValue UIntDataInformation<quint64>::asScriptValue(quint64 value, QScriptEngine* engine,
         ScriptHandlerInfo* handlerInfo)
 {
     Q_UNUSED(engine);
@@ -44,22 +44,22 @@ QScriptValue UIntDataInformation<quint64, Type_UInt64>::asScriptValue(quint64 va
     return QScriptValue(QString::number(value, 10));
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QScriptValue UIntDataInformation<T, typeValue>::valueAsQScriptValue() const
+template<typename T>
+QScriptValue UIntDataInformation<T>::valueAsQScriptValue() const
 {
-    return UIntDataInformation<T, typeValue>::asScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
+    return UIntDataInformation<T>::asScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QString UIntDataInformation<T, typeValue>::valueString() const
+template<typename T>
+QString UIntDataInformation<T>::valueString() const
 {
-    if (!UIntDataInformation::mWasAbleToRead)
+    if (!this->mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return UIntDataInformation<T, typeValue>::valueString(UnsignedDataInformation<T>::mValue);
+    return UIntDataInformation<T>::valueString(UnsignedDataInformation<T>::mValue);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-QString UIntDataInformation<T, typeValue>::valueString(T value, int base)
+template<typename T>
+QString UIntDataInformation<T>::valueString(T value, int base)
 {
     QString num = QString::number(value, base);
     if (base == 10)
@@ -86,7 +86,7 @@ QString UIntDataInformation<T, typeValue>::valueString(T value, int base)
 }
 
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)
-template class UIntDataInformation<quint8, Type_UInt8>;
-template class UIntDataInformation<quint16, Type_UInt16>;
-template class UIntDataInformation<quint32, Type_UInt32>;
-template class UIntDataInformation<quint64, Type_UInt64>;
+template class UIntDataInformation<quint8>;
+template class UIntDataInformation<quint16>;
+template class UIntDataInformation<quint32>;
+template class UIntDataInformation<quint64>;

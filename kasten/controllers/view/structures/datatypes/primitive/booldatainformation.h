@@ -28,13 +28,13 @@
 #include <KDebug>
 
 
-template<typename T, PrimitiveDataType typeValue>
+template<typename T>
 class BoolDataInformation : public UnsignedDataInformation<T>
 {
 public:
     explicit BoolDataInformation(QString name, DataInformation* parent = 0);
     virtual ~BoolDataInformation() {}
-    virtual BoolDataInformation<T, typeValue>* clone() const;
+    virtual BoolDataInformation<T>* clone() const;
 
     virtual QScriptValue valueAsQScriptValue() const;
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
@@ -47,26 +47,29 @@ protected:
     explicit BoolDataInformation(const BoolDataInformation& d);
 };
 
-template<typename T, PrimitiveDataType typeValue>
-inline PrimitiveDataType BoolDataInformation<T, typeValue>::type() const
+template<>
+inline PrimitiveDataType BoolDataInformation<quint8>::type() const { return Type_Bool8; }
+template<>
+inline PrimitiveDataType BoolDataInformation<quint16>::type() const { return Type_Bool16; }
+template<>
+inline PrimitiveDataType BoolDataInformation<quint32>::type() const { return Type_Bool32; }
+template<>
+inline PrimitiveDataType BoolDataInformation<quint64>::type() const { return Type_Bool64; }
+
+template<typename T>
+inline QString BoolDataInformation<T>::typeName() const
 {
-    return typeValue;
+    return PrimitiveDataInformation::typeName(this->type());
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline QString BoolDataInformation<T, typeValue>::typeName() const
+template<typename T>
+inline QScriptValue BoolDataInformation<T>::valueAsQScriptValue() const
 {
-    return PrimitiveDataInformation::typeName(typeValue);
+    return BoolDataInformation<T>::asScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline QScriptValue BoolDataInformation<T, typeValue>::valueAsQScriptValue() const
-{
-    return BoolDataInformation<T, typeValue>::asScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
-}
-
-template<typename T, PrimitiveDataType typeValue>
-inline QScriptValue BoolDataInformation<T, typeValue>::asScriptValue(T value, QScriptEngine* engine,
+template<typename T>
+inline QScriptValue BoolDataInformation<T>::asScriptValue(T value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
@@ -74,28 +77,28 @@ inline QScriptValue BoolDataInformation<T, typeValue>::asScriptValue(T value, QS
     return QScriptValue(bool(value));
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline BoolDataInformation<T, typeValue>::BoolDataInformation(QString name, DataInformation* parent)
+template<typename T>
+inline BoolDataInformation<T>::BoolDataInformation(QString name, DataInformation* parent)
         : UnsignedDataInformation<T>(name, parent)
 {
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline BoolDataInformation<T, typeValue>::BoolDataInformation(const BoolDataInformation& d)
+template<typename T>
+inline BoolDataInformation<T>::BoolDataInformation(const BoolDataInformation& d)
         : UnsignedDataInformation<T>(d)
 {
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline BoolDataInformation<T, typeValue>* BoolDataInformation<T, typeValue>::clone() const
+template<typename T>
+inline BoolDataInformation<T>* BoolDataInformation<T>::clone() const
 {
-    return new BoolDataInformation<T, typeValue>(*this);
+    return new BoolDataInformation<T>(*this);
 }
 
-template<typename T, PrimitiveDataType typeValue>
-inline QString BoolDataInformation<T, typeValue>::valueString(T value)
+template<typename T>
+inline QString BoolDataInformation<T>::valueString(T value)
 {
-    return BoolDataInformation<T, typeValue>::valueString(value, BoolDataInformation<T, typeValue>::displayBase());
+    return BoolDataInformation<T>::valueString(value, PrimitiveDataInformation::unsignedDisplayBase());
 }
 
 #endif // BOOLDATAINFORMATION_H
