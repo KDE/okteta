@@ -22,19 +22,14 @@
 #include "unsignedbitfielddatainformation.h"
 
 #include <KGlobal>
+#include "../poddecoder/typeeditors/uintspinbox.h"
+#include "../uintdatainformation.h"
 
 QString UnsignedBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
-    int base = PrimitiveDataInformation::unsignedDisplayBase();
-    quint64 val = mValue.ulongValue & mask();
-    QString num = QString::number(val, base);
-    if (base == 16)
-        num.prepend(QLatin1String("0x"));
-    if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
-        num = KGlobal::locale()->formatNumber(num, false, 0);
-    return num;
+    return UIntDataInformation<quint32>::valueString(mValue.ulongValue);
 }
 
 QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
@@ -58,7 +53,7 @@ void UnsignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     if (spin)
-        spin->setValue(mValue.ulongValue & mask()); //& mask() not really necessary, just be on the safe side
+        spin->setValue(mValue.ulongValue);
 }
 
 QScriptValue UnsignedBitfieldDataInformation::valueAsQScriptValue() const
@@ -66,5 +61,5 @@ QScriptValue UnsignedBitfieldDataInformation::valueAsQScriptValue() const
     if (width() <= 32)
         return  mValue.uintValue & quint32(mask()); //32 bit or less -> can be put in as value
     else
-        return QString::number(mValue.ulongValue & mask());
+        return QString::number(mValue.ulongValue);
 }

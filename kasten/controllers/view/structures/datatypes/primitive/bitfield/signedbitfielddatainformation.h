@@ -23,12 +23,11 @@
 #define SIGNEDBITFIELDDATAINFORMATION_H_
 
 #include "abstractbitfielddatainformation.h"
-#include "../poddecoder/typeeditors/sintspinbox.h"
 
 class SignedBitfieldDataInformation: public AbstractBitfieldDataInformation
 {
 public:
-    SignedBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0) :
+    SignedBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0) :
         AbstractBitfieldDataInformation(name, width, parent)
     {
     }
@@ -50,10 +49,13 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+    /** sign extend the value if it is negative, so it can always be treated as a plain qint64 */
+    virtual void setValue(AllPrimitiveTypes newVal);
 };
 
 inline QString SignedBitfieldDataInformation::typeName() const
 {
     return i18nc("Data type", "signed bitfield");
 }
+
 #endif /* SIGNEDBITFIELDDATAINFORMATION_H_ */

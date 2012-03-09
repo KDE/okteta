@@ -23,12 +23,11 @@
 #define UNSIGNEDBITFIELDDATAINFORMATION_H_
 
 #include "abstractbitfielddatainformation.h"
-#include "../poddecoder/typeeditors/uintspinbox.h"
 
 class UnsignedBitfieldDataInformation: public AbstractBitfieldDataInformation
 {
 public:
-    UnsignedBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0) :
+    UnsignedBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0) :
         AbstractBitfieldDataInformation(name, width, parent)
     {
     }

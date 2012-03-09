@@ -48,6 +48,7 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::value() const
 
 void AbstractBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 {
+    Q_ASSERT((newVal.ulongValue & mask()) == newVal.ulongValue);
     mValue.ulongValue = newVal.ulongValue & mask();
 }
 
@@ -56,14 +57,10 @@ PrimitiveDataType AbstractBitfieldDataInformation::type() const
     return Type_Bitfield;
 }
 
-AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent) :
-    PrimitiveDataInformation(name, parent), mWidth(width), mValue(0)
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent) :
+    PrimitiveDataInformation(name, parent), mWidth(qMin(width, 64u)), mValue(0)
 {
-    if (width > 64)
-    {
-        kDebug() << "bitfield (" << name << ") width is greater 64: " << width << " , setting to 64";
-        mWidth = 64;
-    }
+    Q_ASSERT(width <= 64);
 }
 
 AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation()

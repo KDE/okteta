@@ -20,6 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "boolbitfielddatainformation.h"
+#include "../booldatainformation.h"
 
 #include <KComboBox>
 #include <KGlobal>
@@ -28,21 +29,7 @@ QString BoolBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
-    int base = PrimitiveDataInformation::unsignedDisplayBase();
-    quint64 val = mValue.ulongValue & mask();
-    if (val == 0)
-        return i18nc("boolean value", "false");
-    else if (val == 1)
-        return i18nc("boolean value", "true");
-    else
-    {
-        QString num = QString::number(val, base);
-        if (base == 16)
-            num.prepend(QLatin1String("0x"));
-        if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
-            num = KGlobal::locale()->formatNumber(num, false, 0);
-        return i18nc("boolean value with actual value", "true (%1)", num);
-    }
+    return BoolDataInformation<quint64>::valueString(mValue.ulongValue);
 }
 
 QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
@@ -82,11 +69,11 @@ void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     if (spin)
-        spin->setValue(mValue.ulongValue & mask()); //& mask() not really necessary, just be on the safe side
+        spin->setValue(mValue.ulongValue);
 }
 
 QScriptValue BoolBitfieldDataInformation::valueAsQScriptValue() const
 {
-    return (mValue.ulongValue & mask()) != 0;
+    return (mValue.ulongValue) != 0;
 }
 

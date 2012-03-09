@@ -74,7 +74,7 @@ inline QScriptValue BoolDataInformation<T>::asScriptValue(T value, QScriptEngine
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
-    return QScriptValue(bool(value));
+    return QScriptValue(value != 0);
 }
 
 template<typename T>

@@ -20,6 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "signedbitfielddatainformation.h"
+#include "../poddecoder/typeeditors/sintspinbox.h"
+#include "../sintdatainformation.h"
 
 #include <KGlobal>
 
@@ -27,30 +29,14 @@ QString SignedBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "<invalid>");
-    int base = PrimitiveDataInformation::signedDisplayBase();
-    qint64 val = mValue.ulongValue & mask();
-
-    //check if is negative (only when decimal):
-    if (val & (1 << (width() - 1)) && base == 10)
-    {
-        //sign bit is set -> make value negative
-        quint64 fill = 0xffffffff;
-        fill <<= width();
-        val |= fill;
-    }
-    QString num = QString::number(val, base);
-    if (base == 16)
-        num.prepend(QLatin1String("0x"));
-    if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting() && base == 10)
-        num = KGlobal::locale()->formatNumber(num, false);
-    return num;
+    return SIntDataInformation<qint64>::valueString(mValue.longValue);
 }
 
 QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     SIntSpinBox* ret = new SIntSpinBox(parent);
     ret->setBase(PrimitiveDataInformation::signedDisplayBase());
-    ret->setRange(mask(), mask() >> 1); //mask is unsigned, so shift will do the right thing
+    ret->setRange(~mask(), mask() >> 1); //mask is unsigned, so shift will do the right thing
     return ret;
 }
 
@@ -67,24 +53,25 @@ void SignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
     if (spin)
-        spin->setValue(mValue.longValue & mask()); //& mask() not really necessary, just be on the safe side
+        spin->setValue(mValue.longValue);
 }
 
 QScriptValue SignedBitfieldDataInformation::valueAsQScriptValue() const
 {
-    // (|~mask()) makes first bits ones
-    if (mValue.ulongValue & (1 << (size() - 1)))
-    {
-        //less than zero
-        if (width() <= 32)
-            return  qint32(mValue.intValue | quint32(~mask())); //32 bit or less -> can be put in as value
-        else //have to save it as string since 64 bit values are not supported
-            return QString::number(mValue.longValue | (~mask()));
-    }
-    else {
-        if (width() <= 32)
-            return  qint32(mValue.intValue & mask()); //32 bit or less -> can be put in as value
-        else //have to save it as string since 64 bit values are not supported
-            return QString::number(mValue.longValue & mask());
+    if (width() <= 32)
+        return  qint32(mValue.intValue); //32 bit or less -> can be put in as value
+    else //have to save it as string since 64 bit values are not supported
+        return QString::number(mValue.longValue);
+}
+
+void SignedBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
+{
+    //check that values are not too large
+    Q_ASSERT((newVal.longValue < 0 && (newVal.longValue | ~mask()) == newVal.longValue)
+        || (newVal.ulongValue & mask()) == newVal.ulongValue);
+    mValue = newVal.ulongValue & mask();
+    //check if MSB is set -> negative -> sign extend
+    if (newVal.ulongValue & (quint64(1) << (width() - 1))) {
+        mValue = mValue.ulongValue | (~mask());
     }
 }

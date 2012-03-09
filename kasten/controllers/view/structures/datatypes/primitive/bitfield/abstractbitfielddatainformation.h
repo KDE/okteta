@@ -27,7 +27,7 @@
 class AbstractBitfieldDataInformation: public PrimitiveDataInformation
 {
 public:
-    AbstractBitfieldDataInformation(QString name, uint width, DataInformation* parent = 0);
+    AbstractBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0);
     virtual ~AbstractBitfieldDataInformation();
 protected:
     AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
