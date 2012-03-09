@@ -28,7 +28,6 @@
 #include <QSharedData>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QList>
 
 class EnumDefinition: public QSharedData
 {

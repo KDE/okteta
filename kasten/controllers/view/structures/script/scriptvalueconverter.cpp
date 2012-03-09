@@ -204,7 +204,7 @@ PrimitiveDataInformation* ScriptValueConverter::toPrimitive(QScriptValue& value,
 
 StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value, QString& name) const
 {
-    QList<DataInformation*> fields;
+    QVector<DataInformation*> fields;
 
     QScriptValue valueChildren = value.property(QLatin1String("children"));
     QScriptValueIterator it(valueChildren);
@@ -218,7 +218,7 @@ StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value, QS
         if (data)
             fields.append(data);
     }
-    if (fields.length() == 0)
+    if (fields.size() == 0)
     {
         ScriptUtils::object()->logScriptError(QLatin1String("no children were found in element '")
                 + name + QLatin1String("' -> return NULL"));
@@ -236,7 +236,7 @@ StructureDataInformation* ScriptValueConverter::toStruct(QScriptValue& value, QS
 
 UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value, QString& name) const
 {
-    QList<DataInformation*> fields;
+    QVector<DataInformation*> fields;
 
     QScriptValue valueChildren = value.property(QLatin1String("children"));
     QScriptValueIterator it(valueChildren);
@@ -250,7 +250,7 @@ UnionDataInformation* ScriptValueConverter::toUnion(QScriptValue& value, QString
         if (data)
             fields.append(data);
     }
-    if (fields.length() == 0)
+    if (fields.size() == 0)
     {
         ScriptUtils::object()->logScriptError(QLatin1String("no children were found in element '")
                 + name + QLatin1String("' -> return NULL"));
@@ -340,9 +340,9 @@ StringDataInformation* ScriptValueConverter::toString(QScriptValue& value, QStri
     return data;
 }
 
-QList<DataInformation*> ScriptValueConverter::convertValues()
+QVector<DataInformation*> ScriptValueConverter::convertValues()
 {
-    QList<DataInformation*> ret;
+    QVector<DataInformation*> ret;
     QScriptValueIterator it(mValue);
     while (it.hasNext())
     {

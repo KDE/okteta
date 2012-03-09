@@ -25,7 +25,7 @@
 
 #include "structuredefinitionfile.h"
 // Qt
-#include <QtCore/QList>
+#include <QList>
 #include <QStringList>
 #include <QDir>
 // KDE

@@ -121,7 +121,7 @@ protected:
     // settings
     StructViewPreferences::EnumByteOrder::type mByteOrder;
     StructuresManager* mManager;
-    QList<TopLevelDataInformation*> mData;
+    QVector<TopLevelDataInformation*> mData;
     bool mWritingData : 1;
     bool mCurrentItemDataChanged : 1;
 public:

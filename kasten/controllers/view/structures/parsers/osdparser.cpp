@@ -461,7 +461,7 @@ EnumDefinition::Ptr OsdParser::findEnum(const QString& defName) const
 {
     if (!mEnumsParsed)
         parseEnums();
-    for (int i = 0; i < mEnums.length(); ++i)
+    for (int i = 0; i < mEnums.size(); ++i)
     {
         const EnumDefinition::Ptr def = mEnums.at(i);
         if (def->name() == defName)

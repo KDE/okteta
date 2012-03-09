@@ -23,7 +23,7 @@
 #ifndef ABSTRACTSTRUCTUREPARSER_H_
 #define ABSTRACTSTRUCTUREPARSER_H_
 
-#include <QtCore/QList>
+#include <QtCore/QVector>
 #include <QtCore/QStringList>
 
 #include "../datatypes/primitive/enumdefinition.h"

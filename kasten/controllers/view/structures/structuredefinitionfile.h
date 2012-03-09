@@ -23,7 +23,7 @@
 #define STRUCTUREDEFINITIONFILE_H_
 
 #include <QString>
-#include <QList>
+#include <QVector>
 #include <QDir>
 #include <QStringList>
 #include <QDomNodeList>

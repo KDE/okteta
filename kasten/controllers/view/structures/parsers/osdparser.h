@@ -74,7 +74,7 @@ private:
     QDir mDir;
     QString mFile;
     //mutable, since they are only used for caching
-    mutable QList<EnumDefinition::Ptr> mEnums;
+    mutable QVector<EnumDefinition::Ptr> mEnums;
     mutable bool mEnumsParsed :1;
 };
 

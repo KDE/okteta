@@ -46,7 +46,7 @@ public:
     /** If the value is on element */
     DataInformation* convert();
     /** If the value is a list of elements or an object with many elements */
-    QList<DataInformation*> convertValues();
+    QVector<DataInformation*> convertValues();
 private:
     QScriptValue& mValue;
     const QString mName;

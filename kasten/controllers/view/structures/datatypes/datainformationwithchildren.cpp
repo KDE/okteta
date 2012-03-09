@@ -202,7 +202,7 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
             QLatin1String("attempting to set children of ")
             + name() + QLatin1String(" to null. This must be an error in the script."));
     ScriptValueConverter conv(children, name());
-    QList<DataInformation*> convertedVals = conv.convertValues();
+    QVector<DataInformation*> convertedVals = conv.convertValues();
 
     //is valid now
     //childcount changed to 0

@@ -27,7 +27,7 @@
 class DataInformationWithChildren: public DataInformation
 {
 protected:
-    QList<DataInformation*> mChildren;
+    QVector<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
     void appendChild(DataInformation* child); //not part of public API (no adding to array)
     virtual int indexOf(const DataInformation* const data) const;
@@ -36,7 +36,7 @@ public:
     virtual ~DataInformationWithChildren();
 
     virtual QVariant childData(int row, int column, int role) const;
-    QList<DataInformation*> children() const;
+    QVector<DataInformation*> children() const;
 
     virtual BitCount32 size() const;
     virtual BitCount32 childSize(uint index) const;
@@ -66,7 +66,7 @@ public:
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 };
 
-inline QList<DataInformation*> DataInformationWithChildren::children() const
+inline QVector<DataInformation*> DataInformationWithChildren::children() const
 {
     return mChildren;
 }
