@@ -114,9 +114,14 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
             case CharacterId:
             {
                 const Okteta::Character decodedChar = mCharCodec->decode( byte );
-                result = decodedChar.isUndefined() ?
-                    i18nc( "@item:intable character is not defined", "undef." ) :
-                    QString( (QChar)decodedChar );
+                result =
+                    decodedChar.isUndefined() ?
+                        i18nc( "@item:intable character is not defined", "undef." ) :
+                    (decodedChar.unicode() == 0x09) ? // tab only creates a wider column
+                        QString() :
+                        QString( static_cast<QChar>(decodedChar) );
+                // TODO: show proper descriptions for all control values, incl. space and delete
+                // cmp. KCharSelect
                 break;
             }
             case ValueId:
