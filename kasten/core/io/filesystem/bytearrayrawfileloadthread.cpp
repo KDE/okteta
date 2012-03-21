@@ -45,11 +45,10 @@ void ByteArrayRawFileLoadThread::run()
 {
     const qint64 fileSize = mFile->size();
 
-    // check if the file content can be addressed with int
-    const qint32 maxInt32 = std::numeric_limits<qint32>::max();
-    const int maxInt = std::numeric_limits<int>::max();
+    // check if the file content can be addressed with Okteta::Address
+    const Okteta::Address maxAddress = std::numeric_limits<Okteta::Address>::max();
 
-    bool success = ( maxInt > maxInt32 || fileSize <= maxInt32 );
+    bool success = ( fileSize <= maxAddress );
 
     if( success )
     {
@@ -83,7 +82,7 @@ void ByteArrayRawFileLoadThread::run()
             mErrorString = i18n( "There is not enough free working memory to load this file." );
     }
     else
-        mErrorString = i18n( "Support to load files larger than 2 GiB on 32-bit systems has not yet been implemented." );
+        mErrorString = i18n( "Support to load files larger than 2 GiB has not yet been implemented." );
 
     if( ! success )
         mDocument = 0;
