@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Core library, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,7 @@
 namespace Okteta
 {
 
+// Address needs to be <= int, as long as we use QByteArray and its int parameters
 typedef qint32 Address;
 
 }
