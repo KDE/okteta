@@ -93,9 +93,14 @@ QVariant ByteTableModel::data( const QModelIndex &index, int role ) const
         if( column == CharacterId )
         {
             const Okteta::Character decodedChar = mCharCodec->decode( byte );
-            content = decodedChar.isUndefined() ?
-                i18nc( "@item:intable character is not defined", "undef." ) :
-                QString( (QChar)decodedChar );
+            content =
+                decodedChar.isUndefined() ?
+                    i18nc( "@item:intable character is not defined", "undef." ) :
+                (decodedChar.unicode() == 0x09) ? // tab only creates a wider column
+                    QString() :
+                    QString( static_cast<QChar>(decodedChar) );
+             // TODO: show proper descriptions for all control values, incl. space and delete
+             // cmp. KCharSelect
         }
         else if( column < CharacterId )
             mValueCodec[column]->encode( content, 0, byte );
