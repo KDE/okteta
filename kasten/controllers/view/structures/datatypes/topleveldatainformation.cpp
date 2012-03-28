@@ -32,8 +32,8 @@
 #include <QtScript/QScriptEngine>
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
-        QFileInfo structureFile, QScriptEngine* engine, bool needsEval, QString name) :
-    QObject(), mData(data), mScriptHandler(NULL), mStructureFile(structureFile),
+        QFileInfo structureFile, QScriptEngine* engine, bool needsEval, QString name)
+    : QObject(0), mData(data), mScriptHandler(0), mStructureFile(structureFile),
             mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
 {
     if (engine)
@@ -46,6 +46,7 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
                 mData.reset(parsed);
             else
             {
+                kWarning() << "could not parse" << structureFile.absoluteFilePath();
                 //just a dummy, this object should be deleted anyway
                 mData.reset(PrimitiveFactory::newInstance(QLatin1String("failed_to_load__this_is_a_dummy"),
                     Type_Int32, 0));
@@ -61,6 +62,22 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         mData->setParent(this);
     }
 }
+
+TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, QScriptEngine* engine)
+    : QObject(0), mData(data), mScriptHandler(0), mStructureFile(QFileInfo()),
+            mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
+{
+    Q_CHECK_PTR(mData);
+    mData->setParent(this);
+    setObjectName(mData->name());
+    if (engine)
+    {
+        //pass emtpy string as second argument, there is nothing to
+        //evaluate if this constructor gets called
+        mScriptHandler = new ScriptHandler(engine, QString(), mData->name());
+    }
+}
+
 
 TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d) :
     QObject(), mData(0), mScriptHandler(d.mScriptHandler),

@@ -48,12 +48,16 @@ ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString 
 , mDebugger(new QScriptEngineDebugger())
 #endif
 {
-    init();
+    ScriptEngineInitializer::addFuctionsToScriptEngine(*mEngine);
+
     mHandlerInfo.mArrayClass.reset(new ArrayScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mPrimitiveClass.reset(new PrimitiveScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mEnumClass.reset(new EnumScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mStructUnionClass.reset(new StructUnionScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mStringScriptClass.reset(new StringScriptClass(mEngine, &mHandlerInfo));
+
+    if (!scriptFile.isEmpty())
+        loadFile();
 }
 
 ScriptHandler::~ScriptHandler()
@@ -64,10 +68,8 @@ ScriptHandler::~ScriptHandler()
 #endif
 }
 
-bool ScriptHandler::init()
+bool ScriptHandler::loadFile()
 {
-    ScriptEngineInitializer::addFuctionsToScriptEngine(*mEngine);
-
     QFile scriptFile(mFile);
     if (!scriptFile.open(QIODevice::ReadOnly))
     {

@@ -47,10 +47,16 @@ public:
     /** creates a new TopLevelDataInformation object wrapping the existing DataInformation @p data.
      *  @param data the object to wrap (ownership is taken)
      *  @param scriptFile the file which contains the file this object was initialized from
-     *  @param dynamic whether the wrapped object is a dynamic structure definition (i.e. one using QtScript)
+     *  @param needsEval whether the @p scriptFile needs evaluating
+     *  @param name the name. If empty @c data->name() is used.
      */
     TopLevelDataInformation(DataInformation* data, QFileInfo structureFile, QScriptEngine* engine,
             bool needsEval, QString name = QString());
+    /** create a new TopLevelDataInformation wrapping @p data
+     *  @param data the object to wrap (takes ownership)
+     *  @param engine the script engine to use or null if not needed (takes ownership)
+     */
+    explicit TopLevelDataInformation(DataInformation* data, QScriptEngine* engine = 0);
     virtual ~TopLevelDataInformation();
     TopLevelDataInformation* clone() const;
 public:

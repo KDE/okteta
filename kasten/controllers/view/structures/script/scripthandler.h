@@ -50,7 +50,7 @@ public:
     QScriptEngine* engine();
     ScriptHandlerInfo* handlerInfo();
 protected:
-    bool init();
+    bool loadFile();
     QScriptEngine* mEngine;
     QString mFile;
     QString mName;
