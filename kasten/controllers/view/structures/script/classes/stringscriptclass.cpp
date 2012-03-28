@@ -29,21 +29,21 @@ StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* hand
 {
     //read-only properties
     s_length = eng->toStringHandle(QLatin1String("charCount"));
-    mIterableProperties.append(qMakePair(&s_length, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_length, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     s_lengthInBytes = eng->toStringHandle(QLatin1String("byteCount"));
-    mIterableProperties.append(qMakePair(&s_lengthInBytes, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_lengthInBytes, QScriptValue::ReadOnly | QScriptValue::Undeletable));
 
     //read-write properties
     s_maxByteCount = eng->toStringHandle(QLatin1String("maxByteCount"));
-    mIterableProperties.append(qMakePair(&s_maxByteCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_maxByteCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_maxCharCount = eng->toStringHandle(QLatin1String("maxCharCount"));
-    mIterableProperties.append(qMakePair(&s_maxCharCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_maxCharCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_terminatedBy = eng->toStringHandle(QLatin1String("terminatedBy"));
-    mIterableProperties.append(qMakePair(&s_terminatedBy, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_terminatedBy, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_encoding = eng->toStringHandle(QLatin1String("encoding"));
-    mIterableProperties.append(qMakePair(&s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_termMode = eng->toStringHandle(QLatin1String("termMod"));
-    mIterableProperties.append(qMakePair(&s_termMode, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_termMode, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mStringPrototype = eng->newObject();
     mStringPrototype.setProperty(QLatin1String("toString"), eng->newFunction(String_proto_toString));

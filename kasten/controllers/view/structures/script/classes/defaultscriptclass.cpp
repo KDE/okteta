@@ -41,12 +41,12 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     mDefaultPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Default_proto_toString));
     //add all our properties
     //TODO make name writable
-    mIterableProperties.append(qMakePair(&s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    mIterableProperties.append(qMakePair(&s_name, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    mIterableProperties.append(qMakePair(&s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    mIterableProperties.append(qMakePair(&s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(&s_valid, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(&s_validationError, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_name, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_valid, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_validationError, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
 DefaultScriptClass::~DefaultScriptClass()
@@ -111,6 +111,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     }
     else if (name == s_parent)
     {
+        Q_CHECK_PTR(data->parent());
         //parent() cannot be null
         if (data->parent()->isTopLevel())
             return QScriptValue::NullValue;
@@ -183,9 +184,8 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         return result;
     }
     for (int i = 0, size = mIterableProperties.size(); i < size; ++i) {
-        if (*mIterableProperties.at(i).first == name) {
+        if (mIterableProperties.at(i).first == name)
             return mIterableProperties.at(i).second;
-        }
     }
     if (additionalPropertyFlags(data, name, id, &result))
         return result; //is a child element
@@ -246,7 +246,7 @@ QScriptString DefaultscriptClassIterator::name() const
     if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
         return QScriptString();
     if (mCurrent < mList.size())
-        return *(mList.at(mCurrent).first);
+        return mList.at(mCurrent).first;
     int index = mCurrent - mList.size();
     Q_ASSERT(index >= 0);
     DataInformation* child = mData->childAt(index);
@@ -276,7 +276,7 @@ uint DefaultscriptClassIterator::id() const
 
 void DefaultscriptClassIterator::next()
 {
-    Q_ASSERT((uint)mCurrent < mList.size() + mData->childCount());
+    Q_ASSERT(mCurrent == -1 || (uint)mCurrent < mList.size() + mData->childCount());
     mCurrent++;
 }
 

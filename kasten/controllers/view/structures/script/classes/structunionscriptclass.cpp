@@ -29,10 +29,10 @@ StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHand
     : DefaultScriptClass(engine, handlerInfo)
 {
     s_childCount = engine->toStringHandle(QLatin1String("childCount")); //read-only
-    mIterableProperties.append(qMakePair(&s_childCount, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_childCount, QScriptValue::ReadOnly | QScriptValue::Undeletable));
 
     s_children = engine->toStringHandle(QLatin1String("children")); //write-only
-    mIterableProperties.append(qMakePair(&s_children, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_children, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
 
     mStructUnionPrototype = engine->newObject();

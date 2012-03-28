@@ -71,7 +71,7 @@ bool ScriptHandler::init()
     QFile scriptFile(mFile);
     if (!scriptFile.open(QIODevice::ReadOnly))
     {
-        kError() << "could not open file" << mFile << " -> cannot evaluate script";
+        kWarning() << "could not open file" << mFile << " -> cannot evaluate script";
         return false;
     }
     QTextStream stream(&scriptFile);

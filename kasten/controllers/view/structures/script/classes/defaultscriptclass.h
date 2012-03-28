@@ -38,7 +38,7 @@ class DefaultScriptClass : public QScriptClass
     Q_DISABLE_COPY(DefaultScriptClass)
 public:
     typedef DataInformation* DataInfPtr;
-    typedef QVector<QPair<QScriptString*, QScriptValue::PropertyFlags> > PropertyInfoList;
+    typedef QVector<QPair<QScriptString, QScriptValue::PropertyFlags> > PropertyInfoList;
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual ~DefaultScriptClass();
     //TODO

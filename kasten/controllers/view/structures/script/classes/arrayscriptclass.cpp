@@ -28,9 +28,9 @@ ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* han
     : DefaultScriptClass(engine, handlerInfo)
 {
     s_length = engine->toStringHandle(QLatin1String("length"));
-    mIterableProperties.append(qMakePair(&s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_childType = engine->toStringHandle(QLatin1String("childType"));
-    mIterableProperties.append(qMakePair(&s_childType, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_childType, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mArrayPrototype = engine->newObject();
     mArrayPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Array_proto_toString));
