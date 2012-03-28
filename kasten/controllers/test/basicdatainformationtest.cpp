@@ -231,7 +231,7 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
     QCOMPARE(dataInf->parent(), expected.parent);
 
     DataInformation* clone1 = (dataInf->clone());
-    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(clone1, QFileInfo(), 0, false));
+    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(clone1));
     QCOMPARE(clone1->parent(), top.data()); //top takes ownership of clone1
     QCOMPARE(top->actualDataInformation(), clone1);
 
@@ -255,6 +255,8 @@ void BasicDataInformationTest::initTestCase()
 	for (int i = Type_START; i < Type_Bitfield; ++i) {
 		primitives.append(PrimitiveFactory::newInstance(QLatin1String("prim"), static_cast<PrimitiveDataType>(i)));
 	}
+	QCOMPARE(PrimitiveFactory::newInstance(QLatin1String("invalid"), Type_Bitfield), static_cast<PrimitiveDataInformation*>(0));
+	QCOMPARE(PrimitiveFactory::newInstance(QLatin1String("invalid"), QLatin1String("invalid_type")), static_cast<PrimitiveDataInformation*>(0));
 	bitfields.append(new BoolBitfieldDataInformation(QLatin1String("bitfield"), 24));
 	bitfields.append(new UnsignedBitfieldDataInformation(QLatin1String("bitfield"), 24));
 	bitfields.append(new SignedBitfieldDataInformation(QLatin1String("bitfield"), 24));
@@ -283,7 +285,7 @@ void BasicDataInformationTest::initTestCase()
 	enumData = new EnumDataInformation(QLatin1String("enumData"), PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32), edef);
     emptyString = new StringDataInformation(QLatin1String("string"), StringDataInformation::ASCII);
     dummy = new DummyDataInformation(0);
-    topLevel = new TopLevelDataInformation(new DummyDataInformation(0), QFileInfo(), 0, false);
+    topLevel = new TopLevelDataInformation(new DummyDataInformation(0));
 }
 
 void BasicDataInformationTest::testBitfields()

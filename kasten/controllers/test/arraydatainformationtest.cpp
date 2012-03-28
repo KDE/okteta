@@ -55,7 +55,7 @@ void ArrayDataInformationTest::initTestCase()
 
     primitive = new ArrayDataInformation(QLatin1String("primitives"), 0, PrimitiveFactory::newInstance(QLatin1String("child"), Type_UInt32));
     primitiveSize = 32;
-    primitiveTop = new TopLevelDataInformation(primitive, QFileInfo(), 0, false);
+    primitiveTop = new TopLevelDataInformation(primitive);
 
     QCOMPARE(primitive->isArray(), true);
     QCOMPARE(primitive->isBitfield(), false);
@@ -80,7 +80,7 @@ void ArrayDataInformationTest::initTestCase()
     structs->addDataTypeToStruct(PrimitiveFactory::newInstance(QLatin1String("second"), Type_Float));
     complexSize = 64;
     complex = new ArrayDataInformation(QLatin1String("complex"), 0, structs);
-    complexTop = new TopLevelDataInformation(complex, QFileInfo(), 0, false);
+    complexTop = new TopLevelDataInformation(complex);
 
     QCOMPARE(complex->isArray(), true);
     QCOMPARE(complex->isBitfield(), false);

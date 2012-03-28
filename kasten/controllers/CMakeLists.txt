@@ -407,6 +407,10 @@ test/primitivedatainformationtest.cpp
 target_link_libraries(primitivedatainformationtest structures-static ${QT_QTTEST_LIBRARY})
 set_target_properties(primitivedatainformationtest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 
+kde4_add_unit_test( scriptclassestest TESTNAME scriptclasses-test test/scriptclassestest.cpp)
+target_link_libraries(scriptclassestest structures-static ${QT_QTTEST_LIBRARY})
+set_target_properties(scriptclassestest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
+
 endif ( KDE4_BUILD_TESTS )
 
 endif( NOT NO_STRUCTURES_TOOL )

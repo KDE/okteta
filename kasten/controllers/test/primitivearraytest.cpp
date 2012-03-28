@@ -167,7 +167,7 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     ArrayDataInformation* dataInf = new ArrayDataInformation(QLatin1String("values"), model->size() / sizeof(T),
                                                              PrimitiveFactory::newInstance(QLatin1String("value"), primType));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
-    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, QFileInfo(), 0, false));
+    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf));
     QCOMPARE(dataInf->childCount(), uint(SIZE / sizeof(T)));
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(model.data(), 0, model->size() * 8, &bitOffs);

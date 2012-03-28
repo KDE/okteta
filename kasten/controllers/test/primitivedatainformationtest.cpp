@@ -39,6 +39,10 @@ class PrimitiveDataInformationTest : public QObject
 {
     Q_OBJECT
 private:
+    template<typename s, typename u>
+    void addRowsGetAndSetSigned(PrimitiveDataType type, const char* name);
+    template<typename T>
+    void addRowsGetAndSetUnsigned(PrimitiveDataType type, const char* name);
     void checkSignedDisplayBase(int expected);
     void checkUnsignedDisplayBase(int expected);
     int minimumSignedBits(qint64 value); //get the least number of bits this can be represented in
@@ -53,6 +57,8 @@ private Q_SLOTS:
     void testValueStringUIntAndBool();
     void testValueStringUIntAndBool_data();
     void testToAndFromVariant();
+    void testGetAndSetValue();
+    void testGetAndSetValue_data();
     void testDisplayBase();
     void cleanupTestCase();
 private:
@@ -65,7 +71,8 @@ private:
 //     QScopedPointer<Okteta::ByteArrayModel> model;
 };
 
-Q_DECLARE_METATYPE(const char*);
+Q_DECLARE_METATYPE(PrimitiveDataInformation*);
+Q_DECLARE_METATYPE(AllPrimitiveTypes);
 
 int PrimitiveDataInformationTest::minimumSignedBits(qint64 value)
 {
@@ -443,20 +450,89 @@ void PrimitiveDataInformationTest::testValueStringChar()
 
 void PrimitiveDataInformationTest::testValueStringDouble()
 {
-
+    //TODO implement
 }
 
 void PrimitiveDataInformationTest::testValueStringFloat()
 {
-
+    //TODO implement
 }
 
 void PrimitiveDataInformationTest::testToAndFromVariant()
 {
+    //TODO implement
+}
 
+void PrimitiveDataInformationTest::testGetAndSetValue()
+{
+    QFETCH(PrimitiveDataInformation*, data);
+    QFETCH(AllPrimitiveTypes, newVal);
+    QFETCH(AllPrimitiveTypes, expected);
+
+    QScopedPointer<PrimitiveDataInformation> clone(data->clone());
+    clone->setValue(newVal);
+    QCOMPARE(clone->value(), expected);
+}
+
+template<typename s, typename u>
+void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataType type, const char* name) {
+    QString msg = QLatin1String(name);
+    QTest::newRow(msg.arg(QLatin1String("-325")).toUtf8().constData())
+        << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(s(-325));
+    QTest::newRow(msg.arg(QLatin1String("0")).toUtf8().constData())
+        << basic[type] << AllPrimitiveTypes(0) << AllPrimitiveTypes(s(0));
+    QTest::newRow(msg.arg(QLatin1String("-1")).toUtf8().constData())
+        << basic[type] << AllPrimitiveTypes(-1) << AllPrimitiveTypes(s(-1));
+    QTest::newRow(msg.arg(QLatin1String("357891")).toUtf8().constData())
+        << basic[type] << AllPrimitiveTypes(357891) << AllPrimitiveTypes(s(357891));
+
+    QTest::newRow(msg.arg(QLatin1String("max")).toUtf8().constData())
+        << basic[type] << AllPrimitiveTypes(std::numeric_limits<s>::max())
+        << AllPrimitiveTypes(s(std::numeric_limits<s>::max()));
+    QTest::newRow(msg.arg(QLatin1String("min")).toUtf8().constData())
+        << basic[type] << AllPrimitiveTypes(std::numeric_limits<s>::min())
+        << AllPrimitiveTypes(s(std::numeric_limits<s>::min()));
+    QTest::newRow(msg.arg(QLatin1String("u_max")).toUtf8().constData())
+        << basic[type] << AllPrimitiveTypes(std::numeric_limits<u>::max())
+        << AllPrimitiveTypes(s(std::numeric_limits<u>::max()));
+    QTest::newRow(msg.arg(QLatin1String("u_min")).toUtf8().constData())
+        << basic[type] << AllPrimitiveTypes(std::numeric_limits<u>::min())
+        << AllPrimitiveTypes(s(std::numeric_limits<u>::min()));
+}
+
+template<typename s>
+void PrimitiveDataInformationTest::addRowsGetAndSetUnsigned(PrimitiveDataType type, const char* name)
+{
+    QString msg = QLatin1String(name);
+    QTest::newRow(msg.arg(QLatin1String("-325")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(s(-325));
+    QTest::newRow(msg.arg(QLatin1String("0")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(0) << AllPrimitiveTypes(s(0));
+    QTest::newRow(msg.arg(QLatin1String("-1")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(-1) << AllPrimitiveTypes(s(-1));
+    QTest::newRow(msg.arg(QLatin1String("357891")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(357891) << AllPrimitiveTypes(s(357891));
+
+    QTest::newRow(msg.arg(QLatin1String("max")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(std::numeric_limits<s>::max())
+    << AllPrimitiveTypes(s(std::numeric_limits<s>::max()));
+    QTest::newRow(msg.arg(QLatin1String("min")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(std::numeric_limits<s>::min())
+    << AllPrimitiveTypes(s(std::numeric_limits<s>::min()));
 }
 
 
+void PrimitiveDataInformationTest::testGetAndSetValue_data()
+{
+    QTest::addColumn<PrimitiveDataInformation*>("data");
+    QTest::addColumn<AllPrimitiveTypes>("newVal");
+    QTest::addColumn<AllPrimitiveTypes>("expected");
+
+    addRowsGetAndSetSigned<qint8, quint8>(Type_Int8, "int8: %1");
+    addRowsGetAndSetSigned<qint16, quint16>(Type_Int16, "int8: %1");
+    addRowsGetAndSetSigned<qint32, quint32>(Type_Int32, "int8: %1");
+    addRowsGetAndSetSigned<qint64, quint64>(Type_Int64, "int8: %1");
+}
 
 void PrimitiveDataInformationTest::cleanupTestCase()
 {
