@@ -56,7 +56,7 @@ ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString 
     mHandlerInfo.mEnumClass.reset(new EnumScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mBitfieldClass.reset(new BitfieldScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mStructUnionClass.reset(new StructUnionScriptClass(mEngine, &mHandlerInfo));
-    mHandlerInfo.mStringScriptClass.reset(new StringScriptClass(mEngine, &mHandlerInfo));
+    mHandlerInfo.mStringClass.reset(new StringScriptClass(mEngine, &mHandlerInfo));
 
     if (!scriptFile.isEmpty())
         loadFile();

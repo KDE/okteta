@@ -42,8 +42,6 @@ StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* hand
     mIterableProperties.append(qMakePair(s_terminatedBy, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_encoding = eng->toStringHandle(QLatin1String("encoding"));
     mIterableProperties.append(qMakePair(s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_termMode = eng->toStringHandle(QLatin1String("termMod"));
-    mIterableProperties.append(qMakePair(s_termMode, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mStringPrototype = eng->newObject();
     mStringPrototype.setProperty(QLatin1String("toString"), eng->newFunction(String_proto_toString));
@@ -58,7 +56,7 @@ bool StringScriptClass::queryAdditionalProperty(const DataInformation* data, con
     Q_UNUSED(data)
     //no need to modify flags since both read and write are handled
     if (name == s_maxByteCount || name == s_maxCharCount || name == s_terminatedBy
-            || name == s_encoding || name == s_termMode)
+            || name == s_encoding)
         return true;
     else if (name == s_length || name == s_lengthInBytes)
     {
@@ -121,8 +119,6 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
         return sData->maxByteCount();
     else if (name == s_terminatedBy)
         return sData->terminationCodePoint();
-    else if (name == s_termMode)
-        return sData->terminationMode();
     return QScriptValue();
 }
 
@@ -149,18 +145,6 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
     {
         sData->setEncoding(value.toString());
         return true;
-    }
-    else if (name == s_termMode)
-    {
-        if (!value.isNumber())
-        {
-            engine()->currentContext()->throwError(QScriptContext::TypeError,
-                QLatin1String("Value is not a number: ") + value.toString());
-        }
-        else
-        {
-            sData->setTerminationCodePoint(value.toUInt32());
-        }
     }
     return false;
 }

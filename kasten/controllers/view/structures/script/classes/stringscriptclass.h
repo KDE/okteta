@@ -47,7 +47,6 @@ protected:
     QScriptString s_terminatedBy;
     QScriptString s_maxCharCount;
     QScriptString s_maxByteCount;
-    QScriptString s_termMode;
     QScriptValue mStringPrototype;
 };
 

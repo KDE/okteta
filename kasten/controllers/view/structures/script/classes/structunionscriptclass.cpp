@@ -32,8 +32,6 @@ StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHand
     mIterableProperties.append(qMakePair(s_childCount, QScriptValue::ReadOnly | QScriptValue::Undeletable));
 
     s_children = engine->toStringHandle(QLatin1String("children")); //write-only
-    mIterableProperties.append(qMakePair(s_children, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-
 
     mStructUnionPrototype = engine->newObject();
     mStructUnionPrototype.setProperty(QLatin1String("toString"),
@@ -106,31 +104,18 @@ bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data
         *flags |= QScriptValue::ReadOnly;
         return true;
     }
-    else if (name == s_childCount)
+    //TODO is this necessary, will there be any way a child has no id set?
+    //check named children
+    QString objName = name.toString();
+    uint count = data->childCount();
+    for (uint i = 0 ; i < count; ++i)
     {
-        *flags |= QScriptValue::ReadOnly;
-        return true;
-    }
-    else if (name == s_children)
-    {
-        //there is no way to set a write-only property
-        return true;
-    }
-    else
-    {
-        //TODO is this necessary, will there be any way a child has no id set?
-        //check named children
-        QString objName = name.toString();
-        uint count = data->childCount();
-        for (uint i = 0 ; i < count; ++i)
+        DataInformation* child = data->childAt(i);
+        Q_CHECK_PTR(child);
+        if (objName == child->name())
         {
-            DataInformation* child = data->childAt(i);
-            Q_CHECK_PTR(child);
-            if (objName == child->name())
-            {
-                *flags |= QScriptValue::ReadOnly;
-                return true;
-            }
+            *flags |= QScriptValue::ReadOnly;
+            return true;
         }
     }
     return false;

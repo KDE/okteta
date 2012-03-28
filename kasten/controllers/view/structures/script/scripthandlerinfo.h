@@ -41,7 +41,7 @@ public:
     QScopedPointer<PrimitiveScriptClass> mPrimitiveClass;
     QScopedPointer<EnumScriptClass> mEnumClass;
     QScopedPointer<StructUnionScriptClass> mStructUnionClass;
-    QScopedPointer<StringScriptClass> mStringScriptClass;
+    QScopedPointer<StringScriptClass> mStringClass;
     QScopedPointer<BitfieldScriptClass> mBitfieldClass;
 private:
     Q_DISABLE_COPY(ScriptHandlerInfo)

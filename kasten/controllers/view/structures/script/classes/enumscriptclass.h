@@ -18,7 +18,7 @@
  *
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
- *//* */
+ */
 
 
 #ifndef ENUMSCRIPTCLASS_H
@@ -31,16 +31,13 @@ class EnumScriptClass : public PrimitiveScriptClass {
 public:
     EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual ~EnumScriptClass();
-    virtual QScriptValue prototype() const;
 protected:
     virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id);
-    virtual bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags);
     virtual QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id);
     virtual bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value);
 
 protected:
     QScriptString s_values;
-    QScriptValue mEmumPrototype;
 };
 
 #endif // ENUMSCRIPTCLASS_H

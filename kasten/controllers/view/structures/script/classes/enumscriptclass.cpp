@@ -28,7 +28,7 @@
 EnumScriptClass::EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)
 {
-    s_values = engine->toStringHandle(QLatin1String("values"));
+    s_values = engine->toStringHandle(QLatin1String("enumValues"));
     mIterableProperties.append(qMakePair(s_values, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
@@ -52,18 +52,11 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
     return PrimitiveScriptClass::additionalProperty(data, name, id);
 }
 
-
-bool EnumScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
-{
-    return PrimitiveScriptClass::additionalPropertyFlags(data, name, id, flags);
-}
-
-
 bool EnumScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
     if (name == s_values)
     {
-        *flags |= QScriptClass::HandlesReadAccess | QScriptClass::HandlesWriteAccess;
+        *flags = QScriptClass::HandlesReadAccess | QScriptClass::HandlesWriteAccess;
         return true;
     }
     return PrimitiveScriptClass::queryAdditionalProperty(data, name, flags, id);
@@ -83,8 +76,3 @@ bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScript
     return PrimitiveScriptClass::setAdditionalProperty(data, name, id, value);
 }
 
-
-QScriptValue EnumScriptClass::prototype() const
-{
-    return PrimitiveScriptClass::prototype();
-}

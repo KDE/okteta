@@ -99,22 +99,8 @@ bool PrimitiveScriptClass::queryAdditionalProperty(const DataInformation* data, 
     return false;
 }
 
-bool PrimitiveScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags)
+bool PrimitiveScriptClass::additionalPropertyFlags(const DataInformation*, const QScriptString&, uint, QScriptValue::PropertyFlags*)
 {
-    Q_UNUSED(data)
-    if (name == s_value || name == s_type)
-    {
-        *flags |= QScriptValue::ReadOnly;
-        return true;
-    }
-    else if (name == s_bool || name == s_char || name == s_int || name == s_uint || name == s_float
-            || name == s_double || name == s_int64 || name == s_uint64 || name == s_int64low32
-            || name == s_int64high32 || name == s_uint64low32 || name == s_uint64high32 || name == s_int8
-            || name == s_int16 || name == s_int32 || name == s_uint8 || name == s_uint16 || name == s_uint32)
-    {
-        *flags |= QScriptValue::ReadOnly;
-        return true;
-    }
     return false;
 }
 
@@ -128,7 +114,7 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
     else if (name == s_type)
     {
         //bitfields are handled by own scriptclass and NotPrimitive indicates an error
-        Q_ASSERT(pData->type() != Type_Bitfield && pData->type() != Type_NotPrimitive);
+        Q_ASSERT(!pData->isBitfield() && pData->type() != Type_NotPrimitive);
         return PrimitiveType::typeNames[pData->type()];
     }
     else {
