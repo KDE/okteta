@@ -74,14 +74,20 @@ bool DataInformationBase::isString() const
 
 TopLevelDataInformation* DataInformationBase::asTopLevel()
 {
-    Q_ASSERT(isTopLevel());
-    //we need dynamic cast due to multiple inheritance, even it this class has no members
-    return dynamic_cast<TopLevelDataInformation*>(this);
+    //multiple inheritance -> we can't use reinterpret_cast -> we have to include the file
+#ifndef QT_NO_DEBUG
+    return isTopLevel() ? static_cast<TopLevelDataInformation*>(this) : 0;
+#else
+    return static_cast<TopLevelDataInformation*>(this);
+#endif
 }
 
 const TopLevelDataInformation* DataInformationBase::asTopLevel() const
 {
-    Q_ASSERT(isTopLevel());
-    //we need dynamic cast due to multiple inheritance, even it this class has no members
-    return dynamic_cast<const TopLevelDataInformation*>(this);
+    //multiple inheritance -> we can't use reinterpret_cast -> we have to include the file
+#ifndef QT_NO_DEBUG
+    return isTopLevel() ? static_cast<const TopLevelDataInformation*>(this) : 0;
+#else
+    return static_cast<const TopLevelDataInformation*>(this);
+#endif
 }
