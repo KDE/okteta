@@ -44,6 +44,7 @@ public:
     virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     virtual bool isBitfield() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded) const;
+    virtual QScriptValue toScriptValue(QScriptEngine * engine, ScriptHandlerInfo * handlerInfo);
 protected:
     unsigned mWidth :7; //cannot be more than 64 since a quint64 is used for storage
     AllPrimitiveTypes mValue;
@@ -84,6 +85,7 @@ inline BitCount32 AbstractBitfieldDataInformation::width() const
 
 inline void AbstractBitfieldDataInformation::setWidth(BitCount32 newWidth)
 {
+    Q_ASSERT(newWidth > 0 && newWidth <= 64);
     mWidth = qMin(newWidth, BitCount32(64u)); //maximum width is 64 bits
 }
 

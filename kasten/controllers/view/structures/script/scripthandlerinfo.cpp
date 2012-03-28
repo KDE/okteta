@@ -26,6 +26,7 @@
 #include "classes/structunionscriptclass.h"
 #include "classes/stringscriptclass.h"
 #include "classes/enumscriptclass.h"
+#include "classes/bitfieldscriptclass.h"
 
 ScriptHandlerInfo::ScriptHandlerInfo() {
 }

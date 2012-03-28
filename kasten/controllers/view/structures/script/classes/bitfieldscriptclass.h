@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -20,31 +20,22 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCRIPTHANDLERINFO_H
-#define SCRIPTHANDLERINFO_H
+#ifndef BITFIELDSCRIPTCLASS_H
+#define BITFIELDSCRIPTCLASS_H
 
-#include <QtCore/QtGlobal>
-#include <QScopedPointer>
+#include "primitivescriptclass.h"
 
-class EnumScriptClass;
-class StructUnionScriptClass;
-class ArrayScriptClass;
-class PrimitiveScriptClass;
-class StringScriptClass;
-class BitfieldScriptClass;
-
-class ScriptHandlerInfo {
+class BitfieldScriptClass : public PrimitiveScriptClass {
+    Q_DISABLE_COPY(BitfieldScriptClass)
 public:
-    ScriptHandlerInfo();
-    ~ScriptHandlerInfo();
-    QScopedPointer<ArrayScriptClass> mArrayClass;
-    QScopedPointer<PrimitiveScriptClass> mPrimitiveClass;
-    QScopedPointer<EnumScriptClass> mEnumClass;
-    QScopedPointer<StructUnionScriptClass> mStructUnionClass;
-    QScopedPointer<StringScriptClass> mStringScriptClass;
-    QScopedPointer<BitfieldScriptClass> mBitfieldClass;
-private:
-    Q_DISABLE_COPY(ScriptHandlerInfo)
+    BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+    virtual ~BitfieldScriptClass();
+protected:
+    virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id);
+    virtual QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id);
+    virtual bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value);
+protected:
+    QScriptString s_width;
 };
 
-#endif // SCRIPTHANDLERINFO_H
+#endif				// BITFIELDSCRIPTCLASS_H

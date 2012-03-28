@@ -21,6 +21,9 @@
  */
 #include "abstractbitfielddatainformation.h"
 
+#include "../../../script/classes/bitfieldscriptclass.h"
+#include "../../../script/scripthandlerinfo.h"
+
 QString AbstractBitfieldDataInformation::sizeString() const
 {
     return i18np("%1 bit", "%1 bits", width());
@@ -70,4 +73,11 @@ AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation()
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d) :
     PrimitiveDataInformation(d), mWidth(d.mWidth), mValue(d.mValue)
 {
+}
+
+QScriptValue AbstractBitfieldDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+{
+    QScriptValue ret = engine->newObject(handlerInfo->mBitfieldClass.data());
+    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
+    return ret;
 }

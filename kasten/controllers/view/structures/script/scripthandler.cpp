@@ -32,6 +32,7 @@
 #include "classes/enumscriptclass.h"
 #include "classes/structunionscriptclass.h"
 #include "classes/stringscriptclass.h"
+#include "classes/bitfieldscriptclass.h"
 
 #include <QtGui/QAction>
 #include <QtCore/QFile>
@@ -53,6 +54,7 @@ ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString 
     mHandlerInfo.mArrayClass.reset(new ArrayScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mPrimitiveClass.reset(new PrimitiveScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mEnumClass.reset(new EnumScriptClass(mEngine, &mHandlerInfo));
+    mHandlerInfo.mBitfieldClass.reset(new BitfieldScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mStructUnionClass.reset(new StructUnionScriptClass(mEngine, &mHandlerInfo));
     mHandlerInfo.mStringScriptClass.reset(new StringScriptClass(mEngine, &mHandlerInfo));
 
