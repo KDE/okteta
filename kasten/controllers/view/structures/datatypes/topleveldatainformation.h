@@ -28,6 +28,7 @@
 
 #include <arraychangemetricslist.h>
 #include "datainformationbase.h"
+#include "../script/scripthandler.h"
 
 class ScriptHandlerInfo;
 namespace Okteta
@@ -105,7 +106,7 @@ Q_SIGNALS:
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
     QScopedPointer<DataInformation> mData;
-    QExplicitlySharedDataPointer<ScriptHandler> mScriptHandler;
+    ScriptHandler::Ptr mScriptHandler;
     QFileInfo mStructureFile;
     /** Save the position this structure is locked to for each ByteArrayModel
      * QObject::destroyed() has to be connected to slot removeByteArrayModel()

@@ -31,6 +31,8 @@
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
+#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
+#include "view/structures/datatypes/primitivefactory.h"
 
 
 class PrimitiveDataInformationTest : public QObject
@@ -50,8 +52,15 @@ private Q_SLOTS:
     void testValueStringInt_data();
     void testValueStringUIntAndBool();
     void testValueStringUIntAndBool_data();
+    void testToAndFromVariant();
     void testDisplayBase();
+    void cleanupTestCase();
 private:
+    QVector<PrimitiveDataInformation*> basic;
+    SignedBitfieldDataInformation* signedBitfield;
+    UnsignedBitfieldDataInformation* unsignedBitfield;
+    BoolBitfieldDataInformation* boolBitfield;
+    //TODO enum
 //     Okteta::Byte* data;
 //     QScopedPointer<Okteta::ByteArrayModel> model;
 };
@@ -67,7 +76,8 @@ int PrimitiveDataInformationTest::minimumSignedBits(qint64 value)
     if (value == -1) //has no zero in it -> can't determine size
         return 1;
     //find the first zero
-    for (int i = 63; i >= 0; --i) {
+    for (int i = 63; i >= 0; --i)
+    {
         if ((value & (qint64(1) << i)) == 0)
             return i + 2; //found first zero, we need one bit more
     }
@@ -79,7 +89,8 @@ int PrimitiveDataInformationTest::minimumUnsignedBits(quint64 value)
 {
     if (value == 0)
         return 1;
-    for (int i = 63; i >= 0; --i) {
+    for (int i = 63; i >= 0; --i)
+    {
         if ((value & (qint64(1) << i)) == (qint64(1) << i))
             return i + 1;
     }
@@ -93,6 +104,15 @@ void PrimitiveDataInformationTest::initTestCase()
     Kasten2::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
     KGlobal::locale()->setDecimalSymbol(QLatin1String("."));
     KGlobal::locale()->setThousandsSeparator(QLatin1String(""));
+
+    for (int i = Type_START; i < Type_Bitfield; ++i) {
+        basic.append(PrimitiveFactory::newInstance(QLatin1String("prim"), static_cast<PrimitiveDataType>(i)));
+    }
+    boolBitfield = new BoolBitfieldDataInformation(QLatin1String("bitfield"), 24);
+    unsignedBitfield = new UnsignedBitfieldDataInformation(QLatin1String("bitfield"), 24);
+    signedBitfield =  new SignedBitfieldDataInformation(QLatin1String("bitfield"), 24);
+    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+    QTextCodec::setCodecForCStrings(codec);
 }
 
 void PrimitiveDataInformationTest::checkSignedDisplayBase(int expected)
@@ -137,6 +157,25 @@ template<PrimitiveDataType Type> void valueCompareHelper(typename PrimitiveInfo<
     QCOMPARE(PrimitiveInfo<Type>::Class::valueString(value, 8), oct);
 }
 
+template<PrimitiveDataType first, PrimitiveDataType second >
+void valueCompareHelperUnsigned(typename PrimitiveInfo<first>::valueType value, QString bin,
+                                QString hex, QString dec, QString oct, QString boolBase)
+{
+    QCOMPARE(PrimitiveInfo<first>::Class::valueString(value, 2), bin);
+    QCOMPARE(PrimitiveInfo<first>::Class::valueString(value, 16), hex);
+    QCOMPARE(PrimitiveInfo<first>::Class::valueString(value, 10), dec);
+    QCOMPARE(PrimitiveInfo<first>::Class::valueString(value, 8), oct);
+
+    QCOMPARE(PrimitiveInfo<second>::Class::valueString(value, 2),
+             value > 1 ? boolBase.arg(bin) : boolBase);
+    QCOMPARE(PrimitiveInfo<second>::Class::valueString(value, 16),
+             value > 1 ? boolBase.arg(hex) : boolBase);
+    QCOMPARE(PrimitiveInfo<second>::Class::valueString(value, 10),
+             value > 1 ? boolBase.arg(dec) : boolBase);
+    QCOMPARE(PrimitiveInfo<second>::Class::valueString(value, 8),
+             value > 1 ? boolBase.arg(oct) : boolBase);
+}
+
 }
 
 void PrimitiveDataInformationTest::testValueStringInt()
@@ -150,7 +189,8 @@ void PrimitiveDataInformationTest::testValueStringInt()
     int minSize = minimumSignedBits(value);
     //qDebug() << "need" << minSize << "bit to represent" << value;
     //run once with locale aware, and once without
-    for (int i = 0; i <= 1; ++i) {
+    for (int i = 0; i <= 1; ++i)
+    {
         Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
@@ -165,7 +205,8 @@ void PrimitiveDataInformationTest::testValueStringInt()
         //check bitfield now
         SignedBitfieldDataInformation bitfield(QLatin1String("signed"), minSize);
         bitfield.setValue(value);
-        for (uint width = minSize; width <= 64u; ++width) {
+        for (uint width = minSize; width <= 64u; ++width)
+        {
             bitfield.setWidth(width);
             bitfield.mWasAbleToRead = true;
             Kasten2::StructViewPreferences::setUnsignedDisplayBase(Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal);
@@ -248,7 +289,7 @@ void PrimitiveDataInformationTest::testValueStringInt_data() {
 
 void PrimitiveDataInformationTest::testValueStringUIntAndBool()
 {
-    //TODO check bool once i figure out how to set a locale
+    //this test will fail if translations are loaded
     QFETCH(quint64, value);
     QFETCH(QString, binStr);
     QFETCH(QString, hexStr);
@@ -257,35 +298,49 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
 
     int minSize = minimumUnsignedBits(value);
     //qDebug() << "need" << minSize << "bit to represent" << value;
-
+    QString boolBase;
+    if (value == 0)
+        boolBase = QLatin1String("false");
+    else if (value == 1)
+        boolBase = QLatin1String("true");
+    else
+        boolBase = QLatin1String("true (%1)");
     //run once with locale aware, and once without
     for (int i = 0; i <= 1; ++i)
     {
         Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
-            valueCompareHelper<Type_UInt8>(quint8(value), binStr, hexStr, decStr, octStr);
+            valueCompareHelperUnsigned<Type_UInt8, Type_Bool8>(quint8(value), binStr, hexStr, decStr, octStr, boolBase);
         if (minSize <= 16)
-            valueCompareHelper<Type_UInt16>(quint16(value), binStr, hexStr, decStr, octStr);
+            valueCompareHelperUnsigned<Type_UInt16, Type_Bool16>(quint16(value), binStr, hexStr, decStr, octStr, boolBase);
         if (minSize <= 32)
-            valueCompareHelper<Type_UInt32>(quint32(value), binStr, hexStr, decStr, octStr);
+            valueCompareHelperUnsigned<Type_UInt32, Type_Bool32>(quint32(value), binStr, hexStr, decStr, octStr, boolBase);
         if (minSize <= 64)
-            valueCompareHelper<Type_UInt64>(quint64(value), binStr, hexStr, decStr, octStr);
+            valueCompareHelperUnsigned<Type_UInt64, Type_Bool64>(quint64(value), binStr, hexStr, decStr, octStr, boolBase);
 
         //check bitfield now
         UnsignedBitfieldDataInformation bitfield(QLatin1String("unsigned"), minSize);
+        BoolBitfieldDataInformation boolBitfield(QLatin1String("bool"), minSize);
         bitfield.setValue(value);
-        for (uint width = minSize; width <= 64u; ++width) {
+        boolBitfield.setValue(value);
+        bitfield.mWasAbleToRead = true;
+        boolBitfield.mWasAbleToRead = true;
+        for (uint width = minSize; width <= 64u; ++width)
+        {
             bitfield.setWidth(width);
-            bitfield.mWasAbleToRead = true;
+            bitfield.setWidth(width);
             Kasten2::StructViewPreferences::setSignedDisplayBase(Kasten2::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal);
             //unsigned display base was set to something else to ensure we use the right method in the code
             Kasten2::StructViewPreferences::setUnsignedDisplayBase(Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary);
             QCOMPARE(bitfield.valueString(), binStr);
+            QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(binStr) : boolBase);
             Kasten2::StructViewPreferences::setUnsignedDisplayBase(Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal);
             QCOMPARE(bitfield.valueString(), hexStr);
+            QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(hexStr) : boolBase);
             Kasten2::StructViewPreferences::setUnsignedDisplayBase(Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Decimal);
             QCOMPARE(bitfield.valueString(), decStr);
+            QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(decStr) : boolBase);
             //TODO add octal to the config
         }
     }
@@ -324,9 +379,66 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool_data()
     << "0xffffffff ffffffff" << "18446744073709551615" << "0o177777 77777777 77777777";
 }
 
+
+namespace {
+    static QString charString(quint32 i) {
+        QString charString;
+        if (i == '\n')
+            charString = QLatin1String("\\n");
+        else if (i == '\t')
+            charString = QLatin1String("\\t");
+        else if (i == '\r')
+            charString = QLatin1String("\\r");
+        else if (i == '\f')
+            charString = QLatin1String("\\f");
+        else if (i == '\0')
+            charString = QLatin1String("\\0");
+        else if (i == '\v')
+            charString = QLatin1String("\\v");
+        else if (i == '\b')
+            charString = QLatin1String("\\b");
+        else if (i == '\a')
+            charString = QLatin1String("\\a");
+        else
+        {
+            QChar unicode(i);
+            if (unicode.isPrint())
+                charString = QString(unicode);
+            else
+                charString = QString(QChar::ReplacementCharacter);
+        }
+        //qDebug doesn't output unicode!
+        //printf("The string for char %#x is: %s\n", i, charString.toUtf8().data());
+        return charString;
+    }
+}
+
 void PrimitiveDataInformationTest::testValueStringChar()
 {
-
+    Kasten2::StructViewPreferences::setShowCharNumericalValue(false);
+    Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(false);
+    //we don't want the numeric value now
+    for (int i = 0; i < 256; ++i) {
+        QString expected = QString(QLatin1String("'%1'")).arg(charString(i));
+        QCOMPARE(CharDataInformation::valueString(i), expected);
+    }
+    Kasten2::StructViewPreferences::setShowCharNumericalValue(true);
+    Kasten2::StructViewPreferences::setCharDisplayBase(Kasten2::StructViewPreferences::EnumCharDisplayBase::Hexadecimal);
+    for (int i = 0; i < 256; ++i) {
+        QString expected = QString(QLatin1String("'%1' (0x%2)")).arg(charString(i), QString::number(i, 16));
+        QCOMPARE(CharDataInformation::valueString(i), expected);
+    }
+    Kasten2::StructViewPreferences::setCharDisplayBase(Kasten2::StructViewPreferences::EnumCharDisplayBase::Decimal);
+    for (int i = 0; i < 256; ++i) {
+        QString expected = QString(QLatin1String("'%1' (%2)")).arg(charString(i), QString::number(i, 10));
+        QCOMPARE(CharDataInformation::valueString(i), expected);
+    }
+    Kasten2::StructViewPreferences::setCharDisplayBase(Kasten2::StructViewPreferences::EnumCharDisplayBase::Binary);
+    for (int i = 0; i < 256; ++i) {
+        QString expected = QString(QLatin1String("'%1' (0b%2)")).arg(charString(i), QString::number(i, 2));
+        QCOMPARE(CharDataInformation::valueString(i), expected);
+    }
+    //TODO octal
 }
 
 void PrimitiveDataInformationTest::testValueStringDouble()
@@ -337,6 +449,21 @@ void PrimitiveDataInformationTest::testValueStringDouble()
 void PrimitiveDataInformationTest::testValueStringFloat()
 {
 
+}
+
+void PrimitiveDataInformationTest::testToAndFromVariant()
+{
+
+}
+
+
+
+void PrimitiveDataInformationTest::cleanupTestCase()
+{
+    qDeleteAll(basic);
+    delete signedBitfield;
+    delete unsignedBitfield;
+    delete boolBitfield;
 }
 
 

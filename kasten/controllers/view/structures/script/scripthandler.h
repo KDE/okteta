@@ -35,13 +35,15 @@
 
 class DataInformation;
 
-class ScriptHandler : public QObject, public QSharedData
+class ScriptHandler : public QSharedData
 {
-    Q_OBJECT
     Q_DISABLE_COPY(ScriptHandler)
 public:
+    typedef QExplicitlySharedDataPointer<ScriptHandler> Ptr;
+
     ScriptHandler(QScriptEngine* engine, QString scriptFile, QString name);
     virtual ~ScriptHandler();
+
     DataInformation* initialDataInformationFromScript();
     void validateData(DataInformation* data);
     void updateDataInformation(DataInformation* data);

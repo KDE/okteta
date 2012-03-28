@@ -32,18 +32,42 @@ QString CharDataInformation::valueString() const
     return valueString(mValue);
 }
 
+namespace {
+    QString charString(quint8 value)
+    {
+        switch (value)
+        {
+            case '\0': return QLatin1String("'\\0'");
+            case '\a': return QLatin1String("'\\a'");
+            case '\b': return QLatin1String("'\\b'");
+            case '\f': return QLatin1String("'\\f'");
+            case '\n': return QLatin1String("'\\n'");
+            case '\r': return QLatin1String("'\\r'");
+            case '\t': return QLatin1String("'\\t'");
+            case '\v': return QLatin1String("'\\v'");
+            default: break;
+        }
+        QChar qchar = QChar(quint32(value));
+        if (!qchar.isPrint())
+            qchar = QChar::ReplacementCharacter;
+        return QString(QLatin1Char('\'') + qchar + QLatin1Char('\''));
+    }
+}
+
 QString CharDataInformation::valueString(quint8 value)
 {
-    QChar qchar = QChar::fromLatin1(value);
-    qchar = qchar.isPrint() ? qchar : QChar(QChar::ReplacementCharacter);
-    QString charStr = QLatin1Char('\'') + qchar + QLatin1Char('\'');
+    QString charStr = charString(value);
     if (Kasten2::StructViewPreferences::showCharNumericalValue())
     {
         int base = displayBase();
         QString num = QString::number(value, base);
         if (base == 16)
             num.prepend(QLatin1String("0x"));
-        if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
+        else if (base == 2)
+            num.prepend(QLatin1String("0b"));
+        else if (base == 8)
+            num.prepend(QLatin1String("0o"));
+        else if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         charStr += QLatin1String(" (") + num + QLatin1Char(')');
     }
@@ -156,8 +180,6 @@ int CharDataInformation::displayBase()
     int base = Kasten2::StructViewPreferences::charDisplayBase();
     if (base == Kasten2::StructViewPreferences::EnumCharDisplayBase::Binary)
         return 2;
-    if (base == Kasten2::StructViewPreferences::EnumCharDisplayBase::Decimal)
-        return 10;
     if (base == Kasten2::StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
         return 16;
     return 10; //safe default value
