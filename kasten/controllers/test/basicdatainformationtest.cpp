@@ -24,6 +24,7 @@
 
 #include "view/structures/datatypes/array/arraydatainformation.h"
 #include "view/structures/datatypes/array/primitivearraydata.h"
+#include "view/structures/datatypes/strings/stringdatainformation.h"
 #include "view/structures/datatypes/topleveldatainformation.h"
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
 #include "view/structures/datatypes/primitive/enumdatainformation.h"
@@ -38,8 +39,8 @@
 
 struct ExpectedResults {
 	ExpectedResults()
-	: parent(0), size(0),isTopLevel(false), isEnum(false), isStruct(false), isUnion(false),
-		isArray(false), isBitfield(false), isPrimitive(false), canHaveChildren(false), hasChildren(false)
+	: parent(0), size(0),isTopLevel(false), isEnum(false), isStruct(false), isUnion(false), isArray(false),
+        isBitfield(false), isPrimitive(false), isString(false), isDummy(false), canHaveChildren(false), hasChildren(false)
 		{
 			columnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 			columnFlags[DataInformation::ColumnType] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
@@ -57,6 +58,8 @@ struct ExpectedResults {
 	bool isArray : 1;
 	bool isBitfield : 1;
 	bool isPrimitive : 1;
+    bool isString : 1;
+    bool isDummy : 1;
 	bool canHaveChildren : 1;
 	bool hasChildren : 1;
 	Qt::ItemFlags columnFlags[DataInformation::COLUMN_COUNT];
@@ -65,59 +68,183 @@ struct ExpectedResults {
 
 class BasicDataInformationTest : public QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 private:
-	void basicTest(DataInformation* data, const ExpectedResults& expected) const;
+    void basicTest(DataInformationBase* data, const ExpectedResults& expected) const;
 private Q_SLOTS:
-	void initTestCase();
-	void testPrimitives();
-	void testBitfields();
-	void testStructs();
-	void testUnions();
-	void testArrays();
-	void testEnums();
-	void cleanupTestCase();
+    void initTestCase();
+    void testPrimitives();
+    void testBitfields();
+    void testStructs();
+    void testUnions();
+    void testArrays();
+    void testEnums();
+    void testString();
+    void testDummy();
+    void testTopLevel();
+    void cleanupTestCase();
 private:
-	QVector<PrimitiveDataInformation*> primitives;
-	QVector<AbstractBitfieldDataInformation*> bitfields;
-	StructureDataInformation* emptyStruct;
-	StructureDataInformation* structWithChildren;
-	UnionDataInformation* emptyUnion;
-	UnionDataInformation* unionWithChildren;
-	ArrayDataInformation* emptyPrimitiveArray;
-	ArrayDataInformation* emptyComplexArray;
-	ArrayDataInformation* primitiveArrayWithChildren;
-	ArrayDataInformation* complexArrayWithChildren;
-	FlagDataInformation* flagData;
-	EnumDataInformation* enumData;
+    QVector<PrimitiveDataInformation*> primitives;
+    QVector<AbstractBitfieldDataInformation*> bitfields;
+    TopLevelDataInformation* topLevel;
+    StructureDataInformation* emptyStruct;
+    StructureDataInformation* structWithChildren;
+    UnionDataInformation* emptyUnion;
+    UnionDataInformation* unionWithChildren;
+    ArrayDataInformation* emptyPrimitiveArray;
+    ArrayDataInformation* emptyComplexArray;
+    ArrayDataInformation* primitiveArrayWithChildren;
+    ArrayDataInformation* complexArrayWithChildren;
+    StringDataInformation* emptyString;
+    DummyDataInformation* dummy;
+    FlagDataInformation* flagData;
+    EnumDataInformation* enumData;
 };
 
-void BasicDataInformationTest::basicTest(DataInformation* data, const ExpectedResults& expected) const
+#ifdef NDEBUG
+#pragma message("NDEBUG defined")
+#else
+#pragma message("NDEBUG not defined")
+#endif
+
+
+#ifdef DEBUG
+#pragma message("DEBUG defined")
+#else
+#pragma message("DEBUG not defined")
+#endif
+
+#ifdef QT_NO_DEBUG
+#pragma message("QT_NO_DEBUG defined")
+#else
+#pragma message("QT_NO_DEBUG not defined")
+#endif
+
+
+#ifdef QT_DEBUG
+#pragma message("QT_DEBUG defined")
+#else
+#pragma message("QT_DEBUG not defined")
+#endif
+
+
+namespace {
+template<typename T> void castChecker(bool isValid, DataInformationBase* data, const T* constValue, T* nonConstValue) {
+    if (isValid)
+    {
+        QCOMPARE(constValue, static_cast<const T*>(data));
+        QCOMPARE(nonConstValue, static_cast<T*>(data));
+    }
+    else
+    {
+        QCOMPARE(constValue, static_cast<const T*>(0));
+        QCOMPARE(nonConstValue, static_cast<T*>(0));
+    }
+}
+#define CAST_CHECKER(isValid, value, func, type) do {\
+        const DataInformationBase* constData = data; \
+        const type* constVal = constData->func();\
+        type* nonConstVal = data->func();\
+        castChecker(isValid, value, constVal, nonConstVal); \
+    } while (0)
+
+}
+void BasicDataInformationTest::basicTest(DataInformationBase* data, const ExpectedResults& expected) const
 {
-	QCOMPARE(data->isTopLevel(), expected.isTopLevel);
-	QCOMPARE(data->isArray(), expected.isArray);
-	QCOMPARE(data->isBitfield(), expected.isBitfield);
-	QCOMPARE(data->isEnum(), expected.isEnum);
-	QCOMPARE(data->isPrimitive(), expected.isPrimitive);
-	QCOMPARE(data->isStruct(), expected.isStruct);
-	QCOMPARE(data->isUnion(), expected.isUnion);
-	QCOMPARE(data->size(), expected.size);
-	QCOMPARE(data->parent(), expected.parent);
-	DataInformation* clone1 = (data->clone());
-	QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(clone1, QFileInfo(), 0, false));
-	QCOMPARE(clone1->parent(), top.data()); //top takes ownership of clone1
-	QCOMPARE(top->actualDataInformation(), clone1);
+    QVERIFY(data);
+    QCOMPARE(data->isTopLevel(), expected.isTopLevel);
+    if (expected.isTopLevel)
+    {
+        CAST_CHECKER(true, data, asTopLevel, TopLevelDataInformation);
+        CAST_CHECKER(false, data, asArray, ArrayDataInformation);
+        CAST_CHECKER(false, data, asBitfield, AbstractBitfieldDataInformation);
+        CAST_CHECKER(false, data, asDataInformation, DataInformation);
+        CAST_CHECKER(false, data, asDummy, DummyDataInformation);
+        CAST_CHECKER(false, data, asEnum, AbstractEnumDataInformation);
+        CAST_CHECKER(false, data, asPrimitive, PrimitiveDataInformation);
+        CAST_CHECKER(false, data, asString, StringDataInformation);
+        CAST_CHECKER(false, data, asStruct, StructureDataInformation);
+        CAST_CHECKER(false, data, asUnion, UnionDataInformation);
+        return; //no more can be done with a TopLeveDataInformation
+    }
+    else
+    {
+        CAST_CHECKER(false, data, asTopLevel, TopLevelDataInformation);
+        CAST_CHECKER(true, data, asDataInformation, DataInformation);
+    }
 
-	QScopedPointer<DataInformation> clone2(clone1->clone());
-	QVERIFY(clone2->parent() == 0); //cloning should reset parent to NULL, else we get dangling pointers
+    QCOMPARE(data->isArray(), expected.isArray);
+    if (expected.isArray)
+        CAST_CHECKER(true, data, asArray, ArrayDataInformation);
+    else
+        CAST_CHECKER(false, data, asArray, ArrayDataInformation);
 
-	QCOMPARE(data->flags(DataInformation::ColumnName, true), expected.columnFlags[DataInformation::ColumnName]);
-	QCOMPARE(data->flags(DataInformation::ColumnType, true), expected.columnFlags[DataInformation::ColumnType]);
-	QCOMPARE(data->flags(DataInformation::ColumnValue, true), expected.columnFlags[DataInformation::ColumnValue]);
+    QCOMPARE(data->isBitfield(), expected.isBitfield);
+    if (expected.isBitfield)
+        CAST_CHECKER(true, data, asBitfield, AbstractBitfieldDataInformation);
+    else
+        CAST_CHECKER(false, data, asBitfield, AbstractBitfieldDataInformation);
 
-	QCOMPARE(data->flags(DataInformation::ColumnName, false), expected.noFileColumnFlags[DataInformation::ColumnName]);
-	QCOMPARE(data->flags(DataInformation::ColumnType, false), expected.noFileColumnFlags[DataInformation::ColumnType]);
-	QCOMPARE(data->flags(DataInformation::ColumnValue, false), expected.noFileColumnFlags[DataInformation::ColumnValue]);
+    QCOMPARE(data->isEnum(), expected.isEnum);
+    if (expected.isEnum)
+        CAST_CHECKER(true, data, asEnum, AbstractEnumDataInformation);
+    else
+        CAST_CHECKER(false, data, asEnum, AbstractEnumDataInformation);
+
+    QCOMPARE(data->isPrimitive(), expected.isPrimitive);
+    if (expected.isPrimitive)
+        CAST_CHECKER(true, data, asPrimitive, PrimitiveDataInformation);
+    else
+        CAST_CHECKER(false, data, asPrimitive, PrimitiveDataInformation);
+
+    QCOMPARE(data->isStruct(), expected.isStruct);
+    if (expected.isStruct)
+        CAST_CHECKER(true, data, asStruct, StructureDataInformation);
+    else
+        CAST_CHECKER(false, data, asStruct, StructureDataInformation);
+
+    QCOMPARE(data->isUnion(), expected.isUnion);
+    if (expected.isUnion)
+        CAST_CHECKER(true, data, asUnion, UnionDataInformation);
+    else
+        CAST_CHECKER(false, data, asUnion, UnionDataInformation);
+
+    QCOMPARE(data->isString(), expected.isString);
+    if (expected.isString)
+        CAST_CHECKER(true, data, asString, StringDataInformation);
+    else
+        CAST_CHECKER(false, data, asString, StringDataInformation);
+
+    QCOMPARE(data->isDummy(), expected.isDummy);
+    if (expected.isDummy)
+    {
+        CAST_CHECKER(true, data, asDummy, DummyDataInformation);
+        return; //the other checks cannot be done with a dummy
+    }
+    else
+        CAST_CHECKER(false, data, asDummy, DummyDataInformation);
+
+    DataInformation* dataInf = data->asDataInformation();
+    QVERIFY(dataInf);
+
+    QCOMPARE(dataInf->size(), expected.size);
+    QCOMPARE(dataInf->parent(), expected.parent);
+
+    DataInformation* clone1 = (dataInf->clone());
+    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(clone1, QFileInfo(), 0, false));
+    QCOMPARE(clone1->parent(), top.data()); //top takes ownership of clone1
+    QCOMPARE(top->actualDataInformation(), clone1);
+
+    QScopedPointer<DataInformation> clone2(clone1->clone());
+    QVERIFY(clone2->parent() == 0); //cloning should reset parent to NULL, else we get dangling pointers
+
+    QCOMPARE(dataInf->flags(DataInformation::ColumnName, true), expected.columnFlags[DataInformation::ColumnName]);
+    QCOMPARE(dataInf->flags(DataInformation::ColumnType, true), expected.columnFlags[DataInformation::ColumnType]);
+    QCOMPARE(dataInf->flags(DataInformation::ColumnValue, true), expected.columnFlags[DataInformation::ColumnValue]);
+
+    QCOMPARE(dataInf->flags(DataInformation::ColumnName, false), expected.noFileColumnFlags[DataInformation::ColumnName]);
+    QCOMPARE(dataInf->flags(DataInformation::ColumnType, false), expected.noFileColumnFlags[DataInformation::ColumnType]);
+    QCOMPARE(dataInf->flags(DataInformation::ColumnValue, false), expected.noFileColumnFlags[DataInformation::ColumnValue]);
 }
 
 
@@ -154,6 +281,9 @@ void BasicDataInformationTest::initTestCase()
 	EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QLatin1String("eDef"), Type_UInt32));
 	flagData = new FlagDataInformation(QLatin1String("flagData"), PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32), edef);
 	enumData = new EnumDataInformation(QLatin1String("enumData"), PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32), edef);
+    emptyString = new StringDataInformation(QLatin1String("string"), StringDataInformation::ASCII);
+    dummy = new DummyDataInformation(0);
+    topLevel = new TopLevelDataInformation(new DummyDataInformation(0), QFileInfo(), 0, false);
 }
 
 void BasicDataInformationTest::testBitfields()
@@ -243,6 +373,32 @@ void BasicDataInformationTest::testUnions()
 	basicTest(unionWithChildren, exp);
 }
 
+void BasicDataInformationTest::testDummy()
+{
+    ExpectedResults exp;
+    exp.isDummy = true;
+    exp.size = 0;
+    basicTest(dummy, exp);
+}
+
+void BasicDataInformationTest::testString()
+{
+    ExpectedResults exp;
+    exp.isString = true;
+    exp.canHaveChildren = true;
+    exp.size = 0;
+    basicTest(emptyString, exp);
+}
+
+void BasicDataInformationTest::testTopLevel()
+{
+    ExpectedResults exp;
+    exp.isTopLevel= true;
+    basicTest(topLevel, exp);
+}
+
+
+
 void BasicDataInformationTest::cleanupTestCase()
 {
 	qDeleteAll(primitives);
@@ -257,6 +413,9 @@ void BasicDataInformationTest::cleanupTestCase()
 	delete complexArrayWithChildren;
 	delete flagData;
 	delete enumData;
+    delete emptyString;
+    delete dummy;
+    delete topLevel;
 }
 
 QTEST_MAIN(BasicDataInformationTest)
