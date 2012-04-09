@@ -37,7 +37,6 @@ class StructTreeModel: public QAbstractItemModel
 {
 Q_OBJECT
 public:
-    //TODO add insertRow functionality
     explicit StructTreeModel(StructTool* tool, QObject* parent = NULL);
     virtual ~StructTreeModel();
     QVariant data(const QModelIndex& index, int role) const;
@@ -60,6 +59,10 @@ public Q_SLOTS:
     void onChildrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
     StructTool* mTool;
+    //just for checking in debug mode:
+    DataInformation* mLastSender;
+    uint mLastStartIndex;
+    uint mLastEndIndex;
 };
 }
 #endif /* STRUCTTREEMODEL_H_ */
