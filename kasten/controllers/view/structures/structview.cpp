@@ -90,25 +90,14 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     baseLayout->addWidget(mStructTreeView, 10);
 
     // settings
-    QBoxLayout *settingsLayout = new QHBoxLayout();
+    QBoxLayout* settingsLayout = new QHBoxLayout();
     settingsLayout->setMargin(0);
 
-    mByteOrderSelection = new KComboBox(this);
-    mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Little-endian")); // add first for index
-    mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian")); // add second for index
-    mByteOrderSelection->setCurrentIndex(mTool->byteOrder());
-    connect(mByteOrderSelection, SIGNAL(activated(int)), mTool,
-            SLOT(setByteOrder(int)));
-    const QString byteOrderToolTip = i18nc("@info:tooltip",
-            "The byte order used to decode the values.");
-    mByteOrderSelection->setToolTip(byteOrderToolTip);
-    settingsLayout->addWidget(mByteOrderSelection);
     baseLayout->addLayout(settingsLayout);
 
     KIcon validateIcon = KIcon(QLatin1String("document-sign"));
     mValidateButton = new KPushButton(validateIcon, i18n("Validate"), this);
-    const QString validationToolTip = i18nc("@info:tooltip",
-            "Validate all structures.");
+    const QString validationToolTip = i18nc("@info:tooltip", "Validate all structures.");
     mValidateButton->setToolTip(validationToolTip);
     mValidateButton->setEnabled(false); //no point validating without file open
     connect(mValidateButton, SIGNAL(clicked()), mTool, SLOT(validateAllStructures()));

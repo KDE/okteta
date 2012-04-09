@@ -57,7 +57,6 @@ protected:
 //    ModelTest* mModeltest;
 
     QTreeView* mStructTreeView;
-    KComboBox* mByteOrderSelection;
     KPushButton* mValidateButton;
     KPushButton* mSettingsButton;
     StructViewItemDelegate* mDelegate;
