@@ -37,6 +37,7 @@
 #include "../datatypes/dummydatainformation.h"
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
+#include "../script/scriptengineinitializer.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
@@ -139,7 +140,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures()
 
         //e is element
 
-        QScriptEngine* eng = new QScriptEngine(); //we need this for dynamic arrays
+        QScriptEngine* eng = ScriptEngineInitializer::newEngine(); //we need this for dynamic arrays
         ScriptLogger* logger = new ScriptLogger(); //FIXME log errors here and not to stdout
         DataInformation* data = parseNode(elem, 0, eng);
 

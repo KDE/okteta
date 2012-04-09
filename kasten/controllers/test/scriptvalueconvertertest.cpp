@@ -49,13 +49,13 @@ private:
     DataInformation* convert(const QScriptValue& value);
     QScriptValue evaluate(const char* code);
     void dumpLoggerOutput();
-    QScriptEngine engine;
+    QScopedPointer<QScriptEngine> engine;
     QScopedPointer<ScriptLogger> logger;
 };
 
 DataInformation* ScriptValueConverterTest::convert(const QString& code)
 {
-    QScriptValue value = engine.evaluate(code);
+    QScriptValue value = engine->evaluate(code);
     return ScriptValueConverter::convert(value, QLatin1String("value"), logger.data());
 }
 
@@ -66,12 +66,12 @@ DataInformation* ScriptValueConverterTest::convert(const QScriptValue& value)
 
 QScriptValue ScriptValueConverterTest::evaluate(const char* code)
 {
-    return engine.evaluate(QString::fromUtf8(code));
+    return engine->evaluate(QString::fromUtf8(code));
 }
 
 void ScriptValueConverterTest::initTestCase()
 {
-    ScriptEngineInitializer::addFuctionsToScriptEngine(engine);
+    engine.reset(ScriptEngineInitializer::newEngine());
     logger.reset(new ScriptLogger());
 }
 
@@ -164,7 +164,7 @@ void ScriptValueConverterTest::basicConverterTest()
     //first entry is invalid
     QCOMPARE(logger->rowCount(QModelIndex()), 11);
     //this should cause 2 error messages -> 11 now
-    qDebug() << logger->messages();
+    //qDebug() << logger->messages();
 
 }
 
@@ -206,8 +206,8 @@ void ScriptValueConverterTest::testPrimitives()
     logger->clear();
     PrimitiveDataType type = (PrimitiveDataType) expectedType;
 
-    QScriptValue val1 = engine.evaluate(code);
-    QScriptValue val2 = engine.evaluate(code2);
+    QScriptValue val1 = engine->evaluate(code);
+    QScriptValue val2 = engine->evaluate(code2);
     QCOMPARE(val1.property(QLatin1String("type")).toString(), typeString);
     QCOMPARE(val2.property(QLatin1String("type")).toString(), typeString);
     if (type == Type_NotPrimitive)
@@ -240,14 +240,14 @@ void ScriptValueConverterTest::testParseEnum()
     QFETCH(int, expectedCount);
     QFETCH(bool, isInvalidType);
 
-    QScriptValue val = engine.evaluate(code);
+    QScriptValue val = engine->evaluate(code);
 //    if (engine.hasUncaughtException())
 //    {
 //        qDebug() << engine.uncaughtExceptionBacktrace();
 //        qDebug() << code;
 //        qDebug() << engine.uncaughtException().toString();
 //    }
-    const bool hasException = engine.hasUncaughtException();
+    const bool hasException = engine->hasUncaughtException();
     QCOMPARE(hasException, isInvalidType);
     if (hasException)
         return;

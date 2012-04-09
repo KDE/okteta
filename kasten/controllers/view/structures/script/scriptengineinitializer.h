@@ -25,7 +25,7 @@
 
 class QScriptEngine;
 class QScriptContext;
-#include <QtScript/QScriptValue>
+class QScriptValue;
 
 /** This class adds all functions to the scriptengine that are needed for the scripts.
  *
@@ -44,7 +44,10 @@ class QScriptContext;
 namespace ScriptEngineInitializer
 {
 
-void addFuctionsToScriptEngine(QScriptEngine& engine);
+/** @return a new QScriptEngine with the functions added to the global object */
+QScriptEngine* newEngine();
+/** add the necessary functions to the QScriptEngine */
+void addFuctionsToScriptEngine(QScriptEngine* engine);
 
 namespace Private
 {
@@ -194,8 +197,7 @@ QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue enumToString(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng);
 
-QScriptValue primitiveConstructor(QScriptContext* ctx,
-        QScriptEngine* eng, const QLatin1String type);
+QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const char* type);
 
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
 

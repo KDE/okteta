@@ -25,6 +25,7 @@
 #include "datainformationwithchildren.h"
 #include "../script/scripthandler.h"
 #include "../script/scriptlogger.h"
+#include "../script/scriptengineinitializer.h"
 #include "primitivefactory.h"
 #include "../allprimitivetypes.h"
 
@@ -40,7 +41,7 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, QScriptE
     Q_CHECK_PTR(mData);
     mData->setParent(this);
     setObjectName(mData->name());
-    QScriptEngine* theEngine = engine ? engine : new QScriptEngine();
+    QScriptEngine* theEngine = engine ? engine : ScriptEngineInitializer::newEngine();
     ScriptLogger* theLogger = logger ? logger : new ScriptLogger();
     mScriptHandler = new ScriptHandler(theEngine, theLogger);
 }

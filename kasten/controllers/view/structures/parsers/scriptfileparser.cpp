@@ -50,8 +50,7 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures()
 {
     QVector<TopLevelDataInformation*> ret;
 
-    QScriptEngine* engine = new QScriptEngine();
-    ScriptEngineInitializer::addFuctionsToScriptEngine(*engine);
+    QScriptEngine* engine = ScriptEngineInitializer::newEngine();
     ScriptLogger* logger = new ScriptLogger();
     const QFileInfo fileInfo(mAbsolutePath);
     const QString objName = mPluginName;
