@@ -312,7 +312,12 @@ QString DataInformation::fullObjectPath() const
     {
         return name();
     }
-    QString result = QLatin1Char('.') + name();
+    QString result;
+    if (par->isArray())
+        result = QLatin1Char('[') + QString::number(par->asDataInformation()->indexOf(this))
+            + QLatin1Char(']');
+    else
+        result = QLatin1Char('.') + name();
     result.prepend(par->asDataInformation()->fullObjectPath());
     return result;
 }
