@@ -146,6 +146,11 @@ void DataInformation::beginRead()
     mWasAbleToRead = false;
 }
 
+ScriptLogger* DataInformation::logger() const
+{
+    return topLevelDataInformation()->logger();
+}
+
 int DataInformation::indexOf(const DataInformation* const data) const
 {
     Q_UNUSED(data)

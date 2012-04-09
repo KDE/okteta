@@ -85,8 +85,7 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
         kWarning() << "attempting to set the length of the array" << fullObjectPath() << "to "
                 << newLength << " which would use too much memory";
 
-        topLevelDataInformation()->logger()->warn(
-            QString(QLatin1String("%1: new array length is too large (%2), limiting to (%3)"))
+        logger()->warn(QString(QLatin1String("%1: new array length is too large (%2), limiting to (%3)"))
             .arg(fullObjectPath(), QString::number(newLength), QString::number(MAX_LEN)));
         newLength = MAX_LEN;
     }
@@ -116,7 +115,7 @@ QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContex
         return QScriptValue();
     }
 
-    DataInformation* newChildType = ScriptValueConverter::convert(type, QLatin1String("dummy"));
+    DataInformation* newChildType = ScriptValueConverter::convert(type, QLatin1String("dummy"), logger());
     //return if conversion failed
     if (!newChildType)
     {

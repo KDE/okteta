@@ -27,13 +27,17 @@
 #include <QVector>
 #include <QScriptValue>
 
-class ScriptLogger : public QAbstractListModel {
-    Q_OBJECT
+class ScriptLogger : public QAbstractListModel
+{
+Q_OBJECT
+
 public:
-    enum LogLevel {
+    enum LogLevel
+    {
         LogInfo, LogWarning, LogError
     };
-    struct Data {
+    struct Data
+    {
         ScriptLogger::LogLevel level;
         QString message;
         QScriptValue cause;
@@ -44,7 +48,10 @@ public:
     void info(const QString& message, const QScriptValue& cause = QScriptValue());
     void warn(const QString& message, const QScriptValue& cause = QScriptValue());
     void error(const QString& message, const QScriptValue& cause = QScriptValue());
+    void error(const QString& message, const QStringList& backtrace,
+            const QScriptValue& cause = QScriptValue());
     void log(LogLevel level, const QString& message, const QScriptValue& cause);
+
 private:
     QVector<Data> mData;
 };
@@ -63,7 +70,5 @@ inline void ScriptLogger::info(const QString& message, const QScriptValue& cause
 {
     log(LogInfo, message, cause);
 }
-
-
 
 #endif // SCRIPTLOGGER_H

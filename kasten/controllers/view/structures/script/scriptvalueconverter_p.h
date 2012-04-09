@@ -39,28 +39,28 @@ namespace ScriptValueConverter
 {
 
 DataInformation* toDataInformation(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger = 0);
+        ScriptLogger* logger);
 
 ArrayDataInformation* toArray(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger = 0);
+        ScriptLogger* logger);
 
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger = 0);
+        ScriptLogger* logger);
 
 PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger = 0);
+        ScriptLogger* logger);
 
 StructureDataInformation* toStruct(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger = 0);
+        ScriptLogger* logger);
 
 UnionDataInformation* toUnion(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger = 0);
+        ScriptLogger* logger);
 
 StringDataInformation* toString(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger = 0);
+        ScriptLogger* logger);
 
 AbstractEnumDataInformation* toEnum(const QScriptValue& value, const QString& name, bool isFlags,
-        ScriptLogger* logger = 0);
+        ScriptLogger* logger);
 
 }
 

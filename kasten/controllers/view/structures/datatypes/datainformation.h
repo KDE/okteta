@@ -48,6 +48,7 @@ class ScriptHandlerInfo;
 class QScriptContext;
 class QScriptEngine;
 class QScriptValue;
+class ScriptLogger;
 
 /** Interface that must be implemented by all datatypes */
 class DataInformation: public DataInformationBase
@@ -173,6 +174,7 @@ public:
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
     QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name, uint upTo) const;
+    ScriptLogger* logger() const;
 protected:
     /**
      *  the offset of child number @p index compared to the beginning of the structure in bits.

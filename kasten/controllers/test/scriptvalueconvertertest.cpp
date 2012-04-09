@@ -30,6 +30,7 @@
 #include "view/structures/datatypes/datainformation.h"
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
 #include "view/structures/datatypes/primitive/enumdatainformation.h"
+#include "view/structures/script/scriptlogger.h"
 
 class ScriptValueConverterTest : public QObject
 {
@@ -43,18 +44,20 @@ private Q_SLOTS:
 private:
     DataInformation* evaluate(QString code);
     QScriptEngine engine;
+    QScopedPointer<ScriptLogger> logger;
 };
 
 DataInformation* ScriptValueConverterTest::evaluate(QString code)
 {
     QScriptValue value = engine.evaluate(code);
-    return ScriptValueConverter::convert(value, QLatin1String("value"));
+    return ScriptValueConverter::convert(value, QLatin1String("value"), logger.data());
 }
 
 
 void ScriptValueConverterTest::initTestCase()
 {
     ScriptEngineInitializer::addFuctionsToScriptEngine(engine);
+    logger.reset(new ScriptLogger());
 }
 
 void ScriptValueConverterTest::testPrimitives_data()
@@ -101,8 +104,8 @@ void ScriptValueConverterTest::testPrimitives()
     QCOMPARE(val2.property(QLatin1String("type")).toString(), typeString);
     if (type == Type_NotPrimitive)
         return; //the cast will fail
-    DataInformation* data1 = ScriptValueConverter::convert(val1, QLatin1String("val1"));
-    DataInformation* data2 = ScriptValueConverter::convert(val2, QLatin1String("val2"));
+    DataInformation* data1 = ScriptValueConverter::convert(val1, QLatin1String("val1"), logger.data());
+    DataInformation* data2 = ScriptValueConverter::convert(val2, QLatin1String("val2"), logger.data());
     QVERIFY(data1);
     QVERIFY(data2);
     PrimitiveDataInformation* p1 = dynamic_cast<PrimitiveDataInformation*>(data1);
@@ -139,7 +142,7 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(!val.isUndefined());
     QCOMPARE(val.property(QLatin1String("type")).toString(), QString(QLatin1String("enum")));
 
-    DataInformation* data = ScriptValueConverter::convert(val, QLatin1String("val"));
+    DataInformation* data = ScriptValueConverter::convert(val, QLatin1String("val"), logger.data());
     QVERIFY(data);
     EnumDataInformation* e = dynamic_cast<EnumDataInformation*>(data);
     QVERIFY(e);

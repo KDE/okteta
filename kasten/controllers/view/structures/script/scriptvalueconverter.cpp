@@ -23,7 +23,6 @@
 #include "scriptvalueconverter.h"
 #include "scriptvalueconverter_p.h"
 #include "scriptlogger.h"
-#include "scriptutils.h"
 
 #include <KDebug>
 #include <QString>
@@ -51,12 +50,11 @@ DataInformation* convert(const QScriptValue& value, const QString& name, ScriptL
     }
     else
     {
-        if (logger)
-            logger->warn(QLatin1String("Value to convert is neither function, nor object nor string"
-                    " -> cannot convert it! Was: ") + ScriptUtils::qScriptValueToString(value));
+       logger->warn(QLatin1String("Value to convert is neither function, nor object nor string"
+               " -> cannot convert it!"), value);
         return 0;
     }
-    return toDataInformation(evaluatedVal, name); //could be NULL
+    return toDataInformation(evaluatedVal, name, logger); //could be NULL
 }
 
 QVector<DataInformation*> convertValues(QScriptValue& value, ScriptLogger* logger)
@@ -70,10 +68,8 @@ QVector<DataInformation*> convertValues(QScriptValue& value, ScriptLogger* logge
         if (inf)
             ret.append(inf);
         else
-            if (logger)
-                logger->info(QString(QLatin1String("Could not convert property '%1' of '%2'"))
-                        .arg(it.name(), ScriptUtils::qScriptValueToString(value)));
-            kDebug() << "could not convert " << it.name();
+           logger->info(QString(QLatin1String("Could not convert property '%1' of '%2'."))
+                        .arg(it.name(), it.value().toString()), it.value());
     }
     return ret;
 }

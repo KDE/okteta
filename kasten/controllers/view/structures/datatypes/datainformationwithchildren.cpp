@@ -25,6 +25,7 @@
 #include "../script/scriptutils.h"
 #include "../script/scripthandlerinfo.h"
 #include "../script/classes/structunionscriptclass.h"
+#include "../script/scriptlogger.h"
 
 #include <KLineEdit>
 #include <QtScript/QScriptEngine>
@@ -195,31 +196,28 @@ void DataInformationWithChildren::calculateValidationState()
     }
 }
 
+void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& newChildren)
+{
+        //childcount changed to 0
+        topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, childCount() - 1);
+        qDeleteAll(mChildren);
+        topLevelDataInformation()->_childrenRemoved(this, 0, childCount() - 1);
+
+        const uint count = newChildren.size();
+        topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, count - 1);
+        mChildren = newChildren;
+        topLevelDataInformation()->_childrenInserted(this, 0, count - 1);
+}
+
 void DataInformationWithChildren::setChildren(QScriptValue children)
 {
     if (children.isNull() || children.isUndefined())
-        ScriptUtils::object()->logScriptError(
-            QLatin1String("attempting to set children of ")
-            + name() + QLatin1String(" to null. This must be an error in the script."));
-    ScriptValueConverter conv(children, name());
-    QVector<DataInformation*> convertedVals = conv.convertValues();
-
-    //is valid now
-    //childcount changed to 0
-    topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, childCount() - 1);
-    qDeleteAll(mChildren);
-    mChildren.clear();
-    topLevelDataInformation()->_childrenRemoved(this, 0, childCount() - 1);
-
-    const uint count = convertedVals.size();
-    topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, count - 1);
-    mChildren.reserve(count);
-    for (uint i = 0; i < count; ++i)
-    {
-        DataInformation* child = convertedVals.at(i);
-        appendChild(child);
-    }
-    topLevelDataInformation()->_childrenInserted(this, 0, count - 1);
+        logger()->warn(QLatin1String("attempting to set children of ")
+            + fullObjectPath() + QLatin1String(" to null/undefined."
+                    " This must be an error in the script."));
+    QVector<DataInformation*> convertedVals =
+            ScriptValueConverter::convertValues(children, topLevelDataInformation()->logger());
+    setChildren(convertedVals);
 }
 
 int DataInformationWithChildren::indexOf(const DataInformation* const data) const

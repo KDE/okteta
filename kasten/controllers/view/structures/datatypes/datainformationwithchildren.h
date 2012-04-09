@@ -61,8 +61,9 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual void resetValidationState();
-    virtual void calculateValidationState(); //only in DataInformationWithChildren
-    void setChildren(QScriptValue children);
+    virtual void calculateValidationState();
+    void setChildren(const QVector<DataInformation*>& newChildren);
+    void setChildren(QScriptValue newChildren);
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 };
 

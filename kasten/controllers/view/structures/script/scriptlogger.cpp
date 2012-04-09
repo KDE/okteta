@@ -24,15 +24,17 @@
 #include <KIcon>
 
 QVariant ScriptLogger::data(const QModelIndex & index, int role) const
-{
+        {
     if (!index.isValid() || index.column() != 0)
         return QVariant();
     int row = index.row();
     Q_ASSERT(row < mData.size());
-    if (role == Qt::DisplayRole) {
+    if (role == Qt::DisplayRole)
+    {
         return mData.at(row).message;
     }
-    else if (role == Qt::DecorationRole) {
+    else if (role == Qt::DecorationRole)
+    {
         LogLevel level = mData.at(row).level;
         if (level == LogInfo)
             return KIcon(QLatin1String("dialog-info"));
@@ -45,11 +47,21 @@ QVariant ScriptLogger::data(const QModelIndex & index, int role) const
 }
 
 int ScriptLogger::rowCount(const QModelIndex& parent) const
-{
+        {
+    Q_UNUSED(parent)
     return mData.size();
 }
 
-void ScriptLogger::log(LogLevel level, const QString& message, const QScriptValue& cause = QScriptValue())
+void ScriptLogger::error(const QString& message, const QStringList& backtrace,
+        const QScriptValue& cause)
+{
+    QString finalMessage = message;
+    for (int i = 0; i < backtrace.size(); ++i)
+        finalMessage += backtrace.at(i) + QLatin1Char('\n');
+    error(finalMessage, cause);
+}
+
+void ScriptLogger::log(LogLevel level, const QString& message, const QScriptValue& cause)
 {
     Data data;
     data.message = message;
