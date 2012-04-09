@@ -71,8 +71,8 @@ private:
 //     QScopedPointer<Okteta::ByteArrayModel> model;
 };
 
-Q_DECLARE_METATYPE(PrimitiveDataInformation*);
-Q_DECLARE_METATYPE(AllPrimitiveTypes);
+Q_DECLARE_METATYPE(PrimitiveDataInformation*)
+Q_DECLARE_METATYPE(AllPrimitiveTypes)
 
 int PrimitiveDataInformationTest::minimumSignedBits(qint64 value)
 {

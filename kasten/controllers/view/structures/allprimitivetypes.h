@@ -39,7 +39,9 @@ class AbstractByteArrayModel;
 typedef Kasten2::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten2::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
-#define compile_time_assert(e) extern char (*ct_assert(void)) [sizeof(char[1 - 2*!(e)])]
+#define concat2_hidden(a, b) a ## b
+#define concat2(a, b) concat2_hidden(a, b)
+#define compile_time_assert(e) extern char (*concat2(ct_assert, __LINE__)(void)) [sizeof(char[1 - 2*!(e)])]
 
 enum PrimitiveDataType
 {

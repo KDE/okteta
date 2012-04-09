@@ -93,7 +93,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     baseLayout->addLayout(settingsLayout);
 
     KIcon validateIcon = KIcon(QLatin1String("document-sign"));
-    mValidateButton = new KPushButton(validateIcon, i18n("Validate"), this);
+    mValidateButton = new KPushButton(validateIcon, i18nc("@action:button", "Validate"), this);
     const QString validationToolTip = i18nc("@info:tooltip", "Validate all structures.");
     mValidateButton->setToolTip(validationToolTip);
     mValidateButton->setEnabled(false); //no point validating without file open
@@ -115,7 +115,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
 
     settingsLayout->addStretch(); //stretch before the settings button
     KIcon settings = KIcon(QLatin1String("configure"));
-    mSettingsButton = new KPushButton(settings, i18n("Settings"), this);
+    mSettingsButton = new KPushButton(settings, i18nc("@action:button", "Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
     mSettingsButton->setToolTip(settingsTooltip);
     connect(mSettingsButton, SIGNAL(pressed()), this, SLOT(openSettingsDlg()));
