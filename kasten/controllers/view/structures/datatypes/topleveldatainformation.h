@@ -97,8 +97,7 @@ public:
     void _childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 private:
     TopLevelDataInformation(const TopLevelDataInformation& d);
-    bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
-            Okteta::Address address);
+    bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList, Okteta::Address address);
 public Q_SLOTS:
     void resetValidationState();
     void removeByteArrayModelFromList(QObject* model);
@@ -121,7 +120,7 @@ private:
      *  so that no dangling pointers remain
      *  Keys are the models and values are a pointer so that NULL can indicate that it is not locked.
      */
-    QMap<const Okteta::AbstractByteArrayModel*, quint64*> mLockedPositions;
+    QMap<const Okteta::AbstractByteArrayModel*, quint64> mLockedPositions;
     bool mWasAbleToParse :1;
     bool mChildDataChanged :1;
     int mIndex;

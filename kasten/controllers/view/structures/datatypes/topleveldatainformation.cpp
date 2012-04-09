@@ -33,8 +33,8 @@
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
         QFileInfo structureFile, QScriptEngine* engine, bool needsEval, QString name)
-    : QObject(0), mData(data), mScriptHandler(0), mStructureFile(structureFile),
-            mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
+        : QObject(0), mData(data), mScriptHandler(0), mStructureFile(structureFile),
+                mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
 {
     if (engine)
     {
@@ -49,7 +49,7 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
                 kWarning() << "could not parse" << structureFile.absoluteFilePath();
                 //just a dummy, this object should be deleted anyway
                 mData.reset(PrimitiveFactory::newInstance(QLatin1String("failed_to_load__this_is_a_dummy"),
-                    Type_Int32, 0));
+                        Type_Int32, 0));
                 mWasAbleToParse = false;
             }
         }
@@ -64,8 +64,8 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
 }
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, QScriptEngine* engine)
-    : QObject(0), mData(data), mScriptHandler(0), mStructureFile(QFileInfo()),
-            mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
+        : QObject(0), mData(data), mScriptHandler(0), mStructureFile(QFileInfo()),
+                mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
 {
     Q_CHECK_PTR(mData);
     mData->setParent(this);
@@ -79,8 +79,8 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, QScriptE
 }
 
 TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d)
-    : QObject(), mData(0), mScriptHandler(d.mScriptHandler), mStructureFile(d.mStructureFile),
-    mWasAbleToParse(d.mWasAbleToParse), mChildDataChanged(false), mIndex(-1)
+        : QObject(), mData(0), mScriptHandler(d.mScriptHandler), mStructureFile(d.mStructureFile),
+                mWasAbleToParse(d.mWasAbleToParse), mChildDataChanged(false), mIndex(-1)
 {
     mData.reset(d.mData->clone());
     setObjectName(mData->name());
@@ -134,7 +134,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
     {
 
         //use the saved offset
-        address = *mLockedPositions.value(input);
+        address = mLockedPositions.value(input);
         //we read from the locked position, so now check whether it is necessary to update
         bool updateNeccessary = isReadingNecessary(changesList, address);
 
@@ -207,9 +207,9 @@ bool TopLevelDataInformation::isReadingNecessary(
 void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset,
         const Okteta::AbstractByteArrayModel* model)
 {
-    mLockedPositions.insert(model, new quint64(offset));
-    kDebug()
-        << "Locking start offset in model " << model << "to position " << offset;
+    mLockedPositions.insert(model, quint64(offset));
+    kDebug() << mData->name() << ": Locking start offset in model "
+            << model << "to position " << offset;
     //remove when deleted
     connect(model, SIGNAL(destroyed(QObject*)),
             SLOT(removeByteArrayModelFromList(QObject*)));
@@ -218,19 +218,16 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset,
 void TopLevelDataInformation::unlockPosition(
         const Okteta::AbstractByteArrayModel* model)
 {
-
-    kDebug() << "removing lock at position " << *(mLockedPositions.value(model))
-                << ", model =" << (void*) model;
+    kDebug() << "removing lock at position " << mLockedPositions.value(model) << ", model ="
+            << (void*) model;
     //just remove from map
-    delete mLockedPositions.take(model);
     mLockedPositions.remove(model);
 }
 
 void TopLevelDataInformation::removeByteArrayModelFromList(QObject* obj)
 {
     const Okteta::AbstractByteArrayModel* model =
-            static_cast<Okteta::AbstractByteArrayModel*> (obj);
-    delete mLockedPositions.take(model);
+            static_cast<Okteta::AbstractByteArrayModel*>(obj);
     mLockedPositions.remove(model);
 }
 
@@ -238,11 +235,11 @@ bool TopLevelDataInformation::isLockedFor(const Okteta::AbstractByteArrayModel* 
 {
     return mLockedPositions.contains(model);
 }
+
 quint64 TopLevelDataInformation::lockPositionFor(const Okteta::AbstractByteArrayModel* model) const
 {
-    if (!mLockedPositions.contains(model))
-        return 0; //XXX nullptr instead??
-    return *mLockedPositions.value(model);
+    Q_ASSERT(mLockedPositions.contains(model));
+    return mLockedPositions.value(model);
 }
 
 int TopLevelDataInformation::indexOf(const DataInformation* const data) const

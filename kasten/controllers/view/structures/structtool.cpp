@@ -45,13 +45,13 @@
 namespace Kasten2
 {
 
-StructTool::StructTool() :
-    mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0), mByteOrder(
-            StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
-            mWritingData(false), mCurrentItemDataChanged(false)
+StructTool::StructTool()
+        : mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0), mByteOrder(
+                StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
+                mWritingData(false), mCurrentItemDataChanged(false)
 {
     //leave mLoadedFiles empty for now, since otherwise loading slot will not work
-    setObjectName( QLatin1String("StructTool" ));
+    setObjectName(QLatin1String("StructTool"));
     mManager->reloadPaths();
     setSelectedStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
@@ -64,6 +64,7 @@ StructTool::~StructTool()
     //	delete mCharCodec;
     delete mManager;
 }
+
 void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
 {
     if (order != StructViewPreferences::byteOrder() || order != mByteOrder)
@@ -74,6 +75,7 @@ void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
         updateData();
     }
 }
+
 QString StructTool::title() const
 {
     return i18nc("@title:window", "Structures");
@@ -87,10 +89,9 @@ void StructTool::setTargetModel(AbstractModel* model)
     if (mByteArrayModel)
         mByteArrayModel->disconnect(this);
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*> () : 0;
-    ByteArrayDocument *document =
-            mByteArrayView ? qobject_cast<ByteArrayDocument*> (
-                    mByteArrayView->baseModel()) : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    ByteArrayDocument* document =
+            mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : 0;
     mByteArrayModel = document ? document->content() : 0;
 
     if (mByteArrayModel && mByteArrayView)
@@ -101,22 +102,11 @@ void StructTool::setTargetModel(AbstractModel* model)
         connect(mByteArrayModel,
                 SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
                 SLOT(onContentsChange(Okteta::ArrayChangeMetricsList)));
-        //		onCharCodecChange(mByteArrayView->charCodingName());
-        //         connect(mByteArrayView, SIGNAL(charCodecChanged(QString)),
-        //                 SLOT(onCharCodecChange(QString)));
     }
     emit byteArrayModelChanged(mByteArrayModel != NULL);
     updateData();
 }
-//void StructTool::onCharCodecChange(const QString& codecName)
-//{
-//	if (codecName == mCharCodec->name())
-//		return;
-//
-//	delete mCharCodec;
-//	mCharCodec = Okteta::CharCodec::createCodec(codecName);
-//	updateData();
-//}
+
 void StructTool::onCursorPositionChange(Okteta::Address pos)
 {
     if (mCursorIndex != pos)
@@ -151,9 +141,13 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
     if (role != Qt::EditRole)
         return false;
     Q_CHECK_PTR(item);
-    //TODO add support for locking
+
+    Okteta::Address structureStart = mCursorIndex;
+    TopLevelDataInformation* topLevel = item->topLevelDataInformation();
+    if (topLevel->isLockedFor(mByteArrayModel))
+        structureStart = topLevel->lockPositionFor(mByteArrayModel);
     mWritingData = true;
-    quint64 remainingBits = qMax(mByteArrayModel->size() - mCursorIndex, 0) * 8;
+    quint64 remainingBits = qMax(mByteArrayModel->size() - structureStart, 0) * 8;
     bool ret = false;
     DataInformationBase* par = item->parent();
     if (item->isDummy())
@@ -162,13 +156,15 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
         DataInformation* parent = static_cast<DataInformation*>(par);
         quint64 offs = parent->positionRelativeToRoot();
         quint8 bitOffs = offs % 8;
-        ret = parent->setChildData(row, value, mByteArrayModel, mCursorIndex + (offs / 8),
+        ret = parent->setChildData(row, value, mByteArrayModel, structureStart + (offs / 8),
                 remainingBits - offs, bitOffs);
     }
-    else {
+    else
+    {
         quint64 offs = item->positionRelativeToRoot(row);
         quint8 bitOffs = offs % 8;
-        ret = item->setData(value, mByteArrayModel, mCursorIndex + (offs / 8), remainingBits - offs, bitOffs);
+        ret = item->setData(value, mByteArrayModel, structureStart + (offs / 8),
+                remainingBits - offs, bitOffs);
     }
     mWritingData = false; //finished
     //XXX: this is inefficient, best would be to only update the changed value
@@ -215,6 +211,7 @@ QVariant StructTool::headerData(int column, int role)
     }
     return QVariant();
 }
+
 int StructTool::childCount() const
 {
     return mData.size();
@@ -256,11 +253,12 @@ void StructTool::setSelectedStructuresInView()
     mData.clear();
     emit dataCleared();
 
-    QRegExp regex( QLatin1String("'(.+)':'(.+)'") );
+    QRegExp regex(QLatin1String("'(.+)':'(.+)'"));
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
     kDebug() << "loadedStructs " << loadedStructs;
-    foreach(const QString& s,loadedStructs)
+    for (int i = 0; i < loadedStructs.size(); ++i)
     {
+        const QString& s = loadedStructs.at(i);
         int pos = regex.indexIn(s);
         if (pos > -1)
         {
@@ -273,20 +271,23 @@ void StructTool::setSelectedStructuresInView()
             if (!def->isValid())
                 continue;
             //should be valid now
-            if (name == QLatin1String("*")) {
+            if (name == QLatin1String("*"))
+            {
                 //add all of them
                 QVector<TopLevelDataInformation*> structs = def->structures();
                 for (int i = 0; i < structs.size(); ++i)
                     addChildItem(structs.at(i));
             }
-            else {
+            else
+            {
                 TopLevelDataInformation* data = def->structure(name);
                 if (data)
                     addChildItem(data);
             }
         }
     }
-    for (int i = 0; i < mData.count(); ++i) {
+    for (int i = 0; i < mData.count(); ++i)
+    {
         emit dataChanged(i, mData.at(i)->actualDataInformation());
     }
     updateData();
@@ -297,10 +298,11 @@ void StructTool::mark(const QModelIndex& idx)
 {
     if (!mByteArrayModel || !mByteArrayView)
     {
-        kDebug() << "model or view == NULL";
+        kDebug()
+        << "model or view == NULL";
         return;
     }
-    const DataInformation* data = static_cast<const DataInformation*> (idx.internalPointer());
+    const DataInformation* data = static_cast<const DataInformation*>(idx.internalPointer());
     if (!data)
         return;
     int length;
@@ -325,7 +327,7 @@ void StructTool::mark(const QModelIndex& idx)
     //FIXME support marking of partial bytes
     const Okteta::Address startOffset = baseAddress + data->positionRelativeToRoot(idx.row()) / 8;
     const Okteta::AddressRange markingRange =
-        Okteta::AddressRange::fromWidth(startOffset, length);
+            Okteta::AddressRange::fromWidth(startOffset, length);
     mByteArrayView->setMarking(markingRange, true);
     //    kDebug()
     //        << "marking range " << markingRange.start() << " to  " << markingRange.end();
@@ -342,9 +344,10 @@ void StructTool::validateAllStructures()
     if (!mByteArrayModel)
         return; //no point validating
     //TODO it would be nicer if the button was grayed out while no model exists
-    foreach(TopLevelDataInformation* data, mData)
+    const int size = mData.size();
+    for (int i = 0; i < size; ++i)
     {
-        data->validate();
+        mData.at(i)->validate();
     }
 }
 
@@ -358,26 +361,26 @@ bool StructTool::isFileLoaded() const
     return mByteArrayModel != NULL;
 }
 
-
 void StructTool::lockStructure(const QModelIndex& idx)
 {
     if (!mByteArrayModel) //no point without ByteArrayModel
         return;
     if (!idx.isValid() || !idx.internalPointer())
         return;
-    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top)
         top->lockPositionToOffset(mCursorIndex, mByteArrayModel);
 }
+
 void StructTool::unlockStructure(const QModelIndex& idx)
 {
     if (!mByteArrayModel) //no point without ByteArrayModel
         return;
     if (!idx.isValid() || !idx.internalPointer())
         return;
-    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top)
@@ -394,7 +397,7 @@ bool StructTool::isStructureLocked(const QModelIndex& idx) const
         return false;
     if (!idx.isValid() || !idx.internalPointer())
         return false;
-    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top)
@@ -408,7 +411,7 @@ bool StructTool::canStructureBeLocked(const QModelIndex& idx) const
         return false;
     if (!idx.isValid() || !idx.internalPointer())
         return false;
-    DataInformation* data = static_cast<DataInformation*> (idx.internalPointer());
+    DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top)

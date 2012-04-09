@@ -65,7 +65,7 @@ void ScriptValueConverterTest::testPrimitives_data()
 {
     QTest::addColumn<QString>("code");
     QTest::addColumn<QString>("code2");
-    QTest::addColumn<QString>("typeStringPtr");
+    QTest::addColumn<QString>("typeString");
     QTest::addColumn<int>("expectedType");
 
     QTest::newRow("uint8") << "uint8()" << "new uint8()" << "UInt8" << (int) Type_UInt8;
