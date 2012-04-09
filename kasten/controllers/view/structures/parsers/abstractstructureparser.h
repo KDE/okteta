@@ -26,7 +26,6 @@
 #include <QtCore/QVector>
 #include <QtCore/QStringList>
 
-#include "../datatypes/primitive/enumdefinition.h"
 #include "../datatypes/datainformation.h"
 
 class TopLevelDataInformation;
