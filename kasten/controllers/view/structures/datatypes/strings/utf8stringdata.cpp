@@ -176,16 +176,22 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
                 mErrorIndices[count] = 1;
                 codePoint = byte;
             }
-            mTwoByteCount++;
-            remaining -= 8;
-            addr++;
-            quint8 byte2 = input->byte(addr);
-            if ((byte2 & 0xc0) != 0x80)
+            else
             {
-                mErrorIndices[count] = 2;
-                codePoint = (byte << 8) | byte2; //just put the raw bytes in case of error
+                mTwoByteCount++;
+                remaining -= 8;
+                addr++;
+                quint8 byte2 = input->byte(addr);
+                if ((byte2 & 0xc0) != 0x80)
+                {
+                    mErrorIndices[count] = 2;
+                    codePoint = (byte << 8) | byte2; //just put the raw bytes in case of error
+                }
+                else
+                {
+                    codePoint = (byte2 & 0x3f) | ((byte & 0x1f) << 6);
+                }
             }
-            codePoint = (byte2 & 0x3f) | ((byte & 0x1f) << 6);
         }
         else if ((byte & 0xf0) == 0xe0)
         {
