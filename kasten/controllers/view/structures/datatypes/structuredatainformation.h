@@ -25,17 +25,17 @@
 #include "datainformationwithchildren.h"
 
 /** A class holding the data of a struct for Okteta*/
-class StructureDataInformation: public DataInformationWithChildren
+class StructureDataInformation : public DataInformationWithChildren
 {
 protected:
     explicit StructureDataInformation(const StructureDataInformation& d);
+
 public:
-    explicit StructureDataInformation(QString name, DataInformation* parent = NULL);
+    explicit StructureDataInformation(const QString& name, const QVector<DataInformation*>& children =
+            QVector<DataInformation*>(), DataInformation* parent = 0);
     virtual ~StructureDataInformation();
     DATAINFORMATION_CLONE(Structure)
-public:
-    void addDataTypeToStruct(DataInformation* dataInformation);
-public:
+
     virtual bool isStruct() const;
     //implement the DataInformation pure virtual functions
     QString typeName() const;

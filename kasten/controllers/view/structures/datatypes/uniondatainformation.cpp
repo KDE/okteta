@@ -70,21 +70,17 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     return readBits;
 }
 
-void UnionDataInformation::addDataTypeToUnion(DataInformation* field)
-{
-    appendChild(field);
-}
-
 UnionDataInformation::~UnionDataInformation()
 {
 }
 
-UnionDataInformation::UnionDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
+UnionDataInformation::UnionDataInformation(const QString& name, const QVector<DataInformation*>& children,
+        DataInformation* parent)
+        : DataInformationWithChildren(name, children, parent)
 {
 }
 
-UnionDataInformation::UnionDataInformation(const UnionDataInformation& d) :
-    DataInformationWithChildren(d)
+UnionDataInformation::UnionDataInformation(const UnionDataInformation& d)
+        : DataInformationWithChildren(d)
 {
 }

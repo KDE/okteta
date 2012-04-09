@@ -292,13 +292,15 @@ UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, QScrip
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     UnionDataInformation* un = new UnionDataInformation(name);
     QDomNode node = xmlElem.firstChild();
+    QVector<DataInformation*> children;
     while (!node.isNull())
     {
         DataInformation* data = parseNode(node, un, engine);
         if (data)
-            un->addDataTypeToUnion(data);
+            children.append(data);
         node = node.nextSibling();
     }
+    un->setInitialChildren(children);
     return un;
 }
 
@@ -307,13 +309,15 @@ StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, Q
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     StructureDataInformation* stru = new StructureDataInformation(name);
     QDomNode node = xmlElem.firstChild();
+    QVector<DataInformation*> children;
     while (!node.isNull())
     {
         DataInformation* data = parseNode(node, stru, engine);
         if (data)
-            stru->addDataTypeToStruct(data);
+            children.append(data);
         node = node.nextSibling();
     }
+    stru->setInitialChildren(children);
     return stru;
 }
 

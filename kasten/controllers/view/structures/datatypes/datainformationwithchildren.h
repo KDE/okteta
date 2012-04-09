@@ -29,10 +29,10 @@ class DataInformationWithChildren: public DataInformation
 protected:
     QVector<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
-    void appendChild(DataInformation* child); //not part of public API (no adding to array)
     virtual int indexOf(const DataInformation* const data) const;
 public:
-    explicit DataInformationWithChildren(QString& name, DataInformation* parent = NULL);
+    explicit DataInformationWithChildren(const QString& name, const QVector<DataInformation*>& children
+            = QVector<DataInformation*>(), DataInformation* parent = 0);
     virtual ~DataInformationWithChildren();
 
     virtual QVariant childData(int row, int column, int role) const;
@@ -62,8 +62,16 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     virtual void resetValidationState();
     virtual void calculateValidationState();
+
+    /** Takes ownership! */
+    void appendChild(DataInformation* child);
+    /** Takes ownership of all elements */
+    void appendChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(QScriptValue newChildren);
+    /** the same as setChildren, but without emitting size change signals, since otherwise it would crash */
+    void setInitialChildren(const QVector<DataInformation*>& children);
+
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 };
 

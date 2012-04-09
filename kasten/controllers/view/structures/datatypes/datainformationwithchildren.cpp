@@ -30,17 +30,8 @@
 #include <KLineEdit>
 #include <QtScript/QScriptEngine>
 
-void DataInformationWithChildren::appendChild(DataInformation* child)
-{
-    if (child != NULL)
-    {
-        child->setParent(this);
-        mChildren.append(child);
-    }
-}
-
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
-{
+        {
     if (idx >= (unsigned) mChildren.size())
     {
         return NULL;
@@ -48,21 +39,24 @@ DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
     return mChildren[idx];
 }
 
-bool DataInformationWithChildren::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
+bool DataInformationWithChildren::setChildData(uint row, const QVariant& value,
+        Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining,
+        quint8 bitOffset)
 {
     kWarning() << "this should not be called";
     Q_ASSERT(row < childCount());
     int offs = offset(row);
     quint8 bitOffs = (offs + bitOffset) & 7; //mod 8
-    return mChildren.at(row)->setData(value, out, address + (offs / 8), bitsRemaining - offs, bitOffs);
+    return mChildren.at(row)->setData(value, out, address + (offs / 8), bitsRemaining - offs,
+            bitOffs);
 }
 
-bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*, Okteta::Address, BitCount64, quint8)
+bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
+        Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT_X(false, "DataInformationWithChildren::setData()", "this should never be called");
     return false;
 }
-
 
 qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
@@ -95,9 +89,12 @@ DataInformationWithChildren::~DataInformationWithChildren()
     qDeleteAll(mChildren);
 }
 
-DataInformationWithChildren::DataInformationWithChildren(QString& name, DataInformation* parent)
-    : DataInformation(name, parent)
+DataInformationWithChildren::DataInformationWithChildren(const QString& name,
+        const QVector<DataInformation*>& children, DataInformation* parent)
+        : DataInformation(name, parent), mChildren(children)
 {
+    for (int i = 0; i < mChildren.size(); ++i)
+        mChildren.at(i)->setParent(this);
 }
 
 DataInformationWithChildren::DataInformationWithChildren(const DataInformationWithChildren& d)
@@ -115,18 +112,18 @@ DataInformationWithChildren::DataInformationWithChildren(const DataInformationWi
 }
 
 QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const
-{
+        {
     return new KLineEdit(parent);
 }
 
 QVariant DataInformationWithChildren::dataFromWidget(const QWidget* w) const
-{
+        {
     Q_UNUSED(w);
     return QVariant();
 }
 
 void DataInformationWithChildren::setWidgetData(QWidget* w) const
-{
+        {
     Q_UNUSED(w)
 }
 
@@ -141,7 +138,7 @@ BitCount32 DataInformationWithChildren::size() const
 }
 
 BitCount32 DataInformationWithChildren::offset(unsigned int index) const
-{
+        {
     if (index >= childCount())
         return 0;
     quint64 offset = 0;
@@ -160,9 +157,8 @@ void DataInformationWithChildren::resetValidationState()
     if (mAdditionalData)
         mAdditionalData->setValidationError(QString());
     foreach (DataInformation* child, mChildren)
-        {
-            child->resetValidationState();
-        }
+    {    child->resetValidationState();
+}
 }
 
 void DataInformationWithChildren::calculateValidationState()
@@ -175,7 +171,7 @@ void DataInformationWithChildren::calculateValidationState()
         {
             DataInformation* child = childAt(i);
             DataInformationWithChildren* childWithChildren =
-                    dynamic_cast<DataInformationWithChildren*> (child);
+                    dynamic_cast<DataInformationWithChildren*>(child);
             if (childWithChildren)
                 childWithChildren->calculateValidationState();
             //first make sure the child item validation state has been set
@@ -196,32 +192,44 @@ void DataInformationWithChildren::calculateValidationState()
     }
 }
 
+void DataInformationWithChildren::setInitialChildren(const QVector<DataInformation*>& children)
+{
+    Q_ASSERT(mChildren.isEmpty());
+    mChildren = children;
+    for (int i = 0; i < mChildren.size(); ++i)
+        mChildren.at(i)->setParent(this);
+}
+
 void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& newChildren)
 {
-        //childcount changed to 0
-        topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, childCount() - 1);
-        qDeleteAll(mChildren);
-        topLevelDataInformation()->_childrenRemoved(this, 0, childCount() - 1);
+    uint numChildren = childCount();
+    if (numChildren != 0)
+        topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, numChildren - 1);
+    qDeleteAll(mChildren);
+    if (numChildren != 0)
+        topLevelDataInformation()->_childrenRemoved(this, 0, numChildren - 1);
 
-        const uint count = newChildren.size();
-        topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, count - 1);
-        mChildren = newChildren;
-        topLevelDataInformation()->_childrenInserted(this, 0, count - 1);
+    const uint count = newChildren.size();
+    topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, count - 1);
+    mChildren = newChildren;
+    for (int i = 0; i < mChildren.size(); ++i)
+        mChildren.at(i)->setParent(this);
+    topLevelDataInformation()->_childrenInserted(this, 0, count - 1);
 }
 
 void DataInformationWithChildren::setChildren(QScriptValue children)
 {
     if (children.isNull() || children.isUndefined())
         logger()->warn(QLatin1String("attempting to set children of ")
-            + fullObjectPath() + QLatin1String(" to null/undefined."
-                    " This must be an error in the script."));
+                + fullObjectPath() + QLatin1String(" to null/undefined."
+                        " This must be an error in the script."));
     QVector<DataInformation*> convertedVals =
             ScriptValueConverter::convertValues(children, topLevelDataInformation()->logger());
     setChildren(convertedVals);
 }
 
 int DataInformationWithChildren::indexOf(const DataInformation* const data) const
-{
+        {
     const int size = mChildren.size();
     for (int i = 0; i < size; ++i)
     {
@@ -234,13 +242,36 @@ int DataInformationWithChildren::indexOf(const DataInformation* const data) cons
 }
 
 QVariant DataInformationWithChildren::childData(int row, int column, int role) const
-{
+        {
     Q_ASSERT(row >= 0 && row < mChildren.size());
     //just delegate to child
     return mChildren.at(row)->data(column, role);
 }
 
-QScriptValue DataInformationWithChildren::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+void DataInformationWithChildren::appendChild(DataInformation* newChild)
+{
+    topLevelDataInformation()->_childrenAboutToBeInserted(this, mChildren.size(), mChildren.size());
+    newChild->setParent(this);
+    mChildren.append(newChild);
+    topLevelDataInformation()->_childrenInserted(this, mChildren.size(), mChildren.size());
+}
+
+void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>& newChildren)
+{
+    if (newChildren.isEmpty())
+        return;
+    const int added = newChildren.size();
+    topLevelDataInformation()->_childrenAboutToBeInserted(this, mChildren.size(),
+            mChildren.size() + added - 1);
+    for (int i = 0; i < newChildren.size(); ++i)
+        newChildren.at(i)->setParent(this);
+    mChildren << newChildren;
+    topLevelDataInformation()->_childrenInserted(this, mChildren.size(),
+            mChildren.size() + added - 1);
+}
+
+QScriptValue DataInformationWithChildren::toScriptValue(QScriptEngine* engine,
+        ScriptHandlerInfo* handlerInfo)
 {
     QScriptValue ret = engine->newObject(handlerInfo->mStructUnionClass.data());
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
@@ -270,14 +301,13 @@ QString DataInformationWithChildren::tooltipString() const
     else
     {
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
-                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                     childCount(), name(), valueString(), typeName(), sizeString());
+                "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
+                childCount(), name(), valueString(), typeName(), sizeString());
     }
 }
 
-
 BitCount32 DataInformationWithChildren::childSize(uint index) const
-{
+        {
     Q_ASSERT(index < childCount());
     return mChildren.at(index)->size();
 }

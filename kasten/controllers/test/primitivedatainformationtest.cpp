@@ -98,7 +98,7 @@ int PrimitiveDataInformationTest::minimumUnsignedBits(quint64 value)
         return 1;
     for (int i = 63; i >= 0; --i)
     {
-        if ((value & (qint64(1) << i)) == (qint64(1) << i))
+        if ((value & (quint64(1) << i)) == (quint64(1) << i))
             return i + 1;
     }
     Q_ASSERT(false);

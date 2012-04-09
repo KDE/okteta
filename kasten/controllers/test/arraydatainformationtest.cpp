@@ -75,9 +75,12 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->topLevelDataInformation(), primitiveTop);
 
 
-    StructureDataInformation* structs = new StructureDataInformation(QLatin1String("vals"));
-    structs->addDataTypeToStruct(PrimitiveFactory::newInstance(QLatin1String("first"), Type_UInt32));
-    structs->addDataTypeToStruct(PrimitiveFactory::newInstance(QLatin1String("second"), Type_Float));
+    QVector<DataInformation*> structsChildren;
+    structsChildren << PrimitiveFactory::newInstance(QLatin1String("first"), Type_UInt32)
+            << PrimitiveFactory::newInstance(QLatin1String("second"), Type_UInt32);
+
+    StructureDataInformation* structs = new StructureDataInformation(QLatin1String("vals"), structsChildren);
+
     complexSize = 64;
     complex = new ArrayDataInformation(QLatin1String("complex"), 0, structs);
     complexTop = new TopLevelDataInformation(complex);

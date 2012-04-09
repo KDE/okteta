@@ -262,14 +262,16 @@ void BasicDataInformationTest::initTestCase()
 	bitfields.append(new SignedBitfieldDataInformation(QLatin1String("bitfield"), 24));
 
 	emptyStruct = new StructureDataInformation(QLatin1String("emptyStruct"));
-	structWithChildren = new StructureDataInformation(QLatin1String("structWithChildren"));
-	structWithChildren->addDataTypeToStruct(PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32));
-	structWithChildren->addDataTypeToStruct(PrimitiveFactory::newInstance(QLatin1String("prim2"), Type_UInt64));
+	QVector<DataInformation*> structChildren;
+	structChildren << PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32)
+	        << PrimitiveFactory::newInstance(QLatin1String("prim2"), Type_UInt64);
+	structWithChildren = new StructureDataInformation(QLatin1String("structWithChildren"), structChildren);
 
 	emptyUnion = new UnionDataInformation(QLatin1String("emptyUnion"));
-	unionWithChildren = new UnionDataInformation(QLatin1String("unionWithChildren"));
-	unionWithChildren->addDataTypeToUnion(PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32));
-	unionWithChildren->addDataTypeToUnion(PrimitiveFactory::newInstance(QLatin1String("prim2"), Type_UInt64));
+    QVector<DataInformation*> unionChildren;
+    unionChildren << PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32)
+            << PrimitiveFactory::newInstance(QLatin1String("prim2"), Type_UInt64);
+	unionWithChildren = new UnionDataInformation(QLatin1String("unionWithChildren"), unionChildren);
 
 	emptyPrimitiveArray = new ArrayDataInformation(QLatin1String("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32));
 	emptyComplexArray = new ArrayDataInformation(QLatin1String("emptyComplexArray"), 0, structWithChildren->clone());

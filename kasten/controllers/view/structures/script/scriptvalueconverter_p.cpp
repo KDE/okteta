@@ -178,8 +178,7 @@ StructureDataInformation* toStruct(const QScriptValue& value, const QString& nam
     if (fields.isEmpty())
         logger->info(QLatin1String("No children were found for struct, this is probably a mistake."), valueChildren);
 
-    StructureDataInformation* structData = new StructureDataInformation(name);
-    structData->setChildren(fields);
+    StructureDataInformation* structData = new StructureDataInformation(name, fields);
     return structData;
 }
 
@@ -191,8 +190,7 @@ UnionDataInformation* toUnion(const QScriptValue& value, const QString& name, Sc
     if (fields.isEmpty())
         logger->info(QLatin1String("No children were found for union, this is probably a mistake."), valueChildren);
 
-    UnionDataInformation* unionData = new UnionDataInformation(name);
-    unionData->setChildren(fields);
+    UnionDataInformation* unionData = new UnionDataInformation(name, fields);
     return unionData;
 }
 

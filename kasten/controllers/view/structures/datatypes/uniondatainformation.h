@@ -25,24 +25,24 @@
 #include "datainformationwithchildren.h"
 
 /** A class holding the data of a union for Okteta*/
-class UnionDataInformation: public DataInformationWithChildren
+class UnionDataInformation : public DataInformationWithChildren
 {
 protected:
     explicit UnionDataInformation(const UnionDataInformation& d);
+
 public:
-    explicit UnionDataInformation(QString name, DataInformation* parent = NULL);
+    explicit UnionDataInformation(const QString& name, const QVector<DataInformation*>& children
+            = QVector<DataInformation*>(), DataInformation* parent = 0);
     virtual ~UnionDataInformation();
     DATAINFORMATION_CLONE(Union)
 
-public:
-    void addDataTypeToUnion(DataInformation* dataInformation);
-public:
     virtual bool isUnion() const;
     //implement the DataInformation pure virtual functions
-    QString typeName() const;
+    virtual QString typeName() const;
     virtual BitCount32 size() const;
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
+
 protected:
     BitCount32 offset(unsigned int index) const;
 };

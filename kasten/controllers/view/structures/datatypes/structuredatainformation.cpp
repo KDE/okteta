@@ -28,21 +28,17 @@ QString StructureDataInformation::typeName() const
     return i18nc("data type in C/C++, then name", "struct %1", name());
 }
 
-void StructureDataInformation::addDataTypeToStruct(DataInformation* field)
-{
-    appendChild(field);
-}
-
 StructureDataInformation::~StructureDataInformation()
 {
 }
 
-StructureDataInformation::StructureDataInformation(QString name, DataInformation* parent) :
-    DataInformationWithChildren(name, parent)
+StructureDataInformation::StructureDataInformation(const QString& name,
+        const QVector<DataInformation*>& children, DataInformation* parent)
+        : DataInformationWithChildren(name, children, parent)
 {
 }
 
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d) :
-    DataInformationWithChildren(d)
+StructureDataInformation::StructureDataInformation(const StructureDataInformation& d)
+        : DataInformationWithChildren(d)
 {
 }
