@@ -35,6 +35,7 @@
 #include "settings/structureaddremovewidget.h"
 
 #include "script/scriptutils.h"
+#include "script/scriptloggerview.h"
 
 //#include "modeltest.h"
 
@@ -114,6 +115,13 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     settingsLayout->addWidget(mLockStructureButton);
 
     settingsLayout->addStretch(); //stretch before the settings button
+
+    KIcon console = KIcon(QLatin1String("utilities-terminal"));
+    mScriptConsoleButton = new KPushButton(console, i18nc("@action:button", "Script console"), this);
+    mScriptConsoleButton->setToolTip(i18nc("@info:tooltip", "Open script console."));
+    connect(mScriptConsoleButton, SIGNAL(pressed()), this, SLOT(openScriptConsole()));
+    settingsLayout->addWidget(mScriptConsoleButton);
+
     KIcon settings = KIcon(QLatin1String("configure"));
     mSettingsButton = new KPushButton(settings, i18nc("@action:button", "Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
@@ -274,6 +282,13 @@ void StructView::setLockButtonStated(bool structureLocked)
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
                         "Lock selected structure to current offset."));
     }
+}
+
+void StructView::openScriptConsole()
+{
+    KDialog* dialog = new KDialog(this);
+    dialog->setMainWidget(new ScriptLoggerView(mTool->allData()));
+    dialog->show();
 }
 
 }

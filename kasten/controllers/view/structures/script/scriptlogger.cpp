@@ -23,12 +23,13 @@
 #include "scriptlogger.h"
 #include <KIcon>
 
-QVariant ScriptLogger::data(const QModelIndex & index, int role) const
-        {
+QVariant ScriptLogger::data(const QModelIndex& index, int role) const
+{
     if (!index.isValid() || index.column() != 0)
         return QVariant();
     int row = index.row();
     Q_ASSERT(row < mData.size());
+    Q_ASSERT(!index.parent().isValid());
     if (role == Qt::DisplayRole)
     {
         return mData.at(row).message;
@@ -48,7 +49,8 @@ QVariant ScriptLogger::data(const QModelIndex & index, int role) const
 
 int ScriptLogger::rowCount(const QModelIndex& parent) const
 {
-    Q_UNUSED(parent)
+    if (parent.isValid())
+        return 0;
     return mData.size();
 }
 

@@ -27,6 +27,7 @@
 #include "oktetakastencontrollers_export.h"
 // tool
 #include "structviewpreferences.h"
+#include "datatypes/topleveldatainformation.h"
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
@@ -35,7 +36,6 @@
 class QModelIndex;
 
 class DataInformation;
-class TopLevelDataInformation;
 namespace Okteta
 {
 class ArrayChangeMetricsList;
@@ -78,6 +78,7 @@ public:
     QVariant headerData(int column, int role);
     int childCount() const;
     DataInformation* childAt(int idx) const;
+    TopLevelDataInformation::List allData() const;
 
 Q_SIGNALS:
     void dataChanged(int row, void* data); //actually a DataInformation*
@@ -104,6 +105,7 @@ public Q_SLOTS:
     void validateAllStructures();
 
 protected Q_SLOTS:
+    void onByteOrderChanged();
     void onCursorPositionChange(Okteta::Address pos);
     void onContentsChange(const Okteta::ArrayChangeMetricsList&);
     void onChildItemDataChanged();

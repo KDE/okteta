@@ -59,12 +59,14 @@ protected:
     QTreeView* mStructTreeView;
     KPushButton* mValidateButton;
     KPushButton* mSettingsButton;
+    KPushButton* mScriptConsoleButton;
     StructViewItemDelegate* mDelegate;
     KPushButton* mLockStructureButton;
     QWidget* mStructTreeViewFocusChild;
 
 protected Q_SLOTS:
     void openSettingsDlg(int page = 0);
+    void openScriptConsole();
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCursorIndexChange();
     void lockCurrentStructure(bool lock);

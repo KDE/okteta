@@ -41,8 +41,6 @@
 
 
 #include "script/scripthandler.h"
-
-#include "datatypes/topleveldatainformation.h"
 #include "datatypes/datainformation.h"
 
 namespace Kasten2
@@ -81,7 +79,12 @@ StructTool::StructTool()
     setSelectedStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
 
-    connect(this, SIGNAL(byteOrderChanged()), this, SLOT(updateData()));
+    connect(this, SIGNAL(byteOrderChanged()), this, SLOT(onByteOrderChanged()));
+}
+
+void StructTool::onByteOrderChanged()
+{
+    updateData(Okteta::ArrayChangeMetricsList());
 }
 
 StructTool::~StructTool()
@@ -465,6 +468,13 @@ StructuresManager* StructTool::manager() const
 StructViewPreferences::EnumByteOrder::type StructTool::byteOrder() const
 {
     return d->mByteOrder;
+}
+
+TopLevelDataInformation::List StructTool::allData() const
+{
+    TopLevelDataInformation::List ret;
+    ret << d->mData << d->mInvalidData;
+    return ret;
 }
 
 }
