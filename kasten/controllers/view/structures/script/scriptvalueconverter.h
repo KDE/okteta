@@ -23,43 +23,19 @@
 #ifndef SCRIPTVALUECONVERTER_H_
 #define SCRIPTVALUECONVERTER_H_
 
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptEngine>
-#include <QtCore/QString>
 
-class FlagDataInformation;
+class QString;
+class QScriptValue;
+class ScriptLogger;
+template<typename T> class QVector;
 class DataInformation;
-class ArrayDataInformation;
-class PrimitiveDataInformation;
-class AbstractBitfieldDataInformation;
-class StructureDataInformation;
-class UnionDataInformation;
-class EnumDataInformation;
-class StringDataInformation;
 
-class ScriptValueConverter
+namespace ScriptValueConverter
 {
-    Q_DISABLE_COPY(ScriptValueConverter)
-public:
-    ScriptValueConverter(QScriptValue& value, QString name);
-    virtual ~ScriptValueConverter();
-    /** If the value is on element */
-    DataInformation* convert();
+    /** If the value is one element */
+    DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger = 0);
     /** If the value is a list of elements or an object with many elements */
-    QVector<DataInformation*> convertValues();
-private:
-    QScriptValue& mValue;
-    const QString mName;
-private:
-    DataInformation* toDataInformation(QScriptValue value, QString name) const;
-
-    ArrayDataInformation* toArray(QScriptValue& value, QString& name) const;
-    AbstractBitfieldDataInformation* toBitfield(QScriptValue& value, QString& name) const;
-    PrimitiveDataInformation* toPrimitive(QScriptValue& value, QString& name) const;
-    StructureDataInformation* toStruct(QScriptValue& value, QString& name) const;
-    UnionDataInformation* toUnion(QScriptValue& value, QString& name) const;
-    StringDataInformation* toString(QScriptValue& value, QString& name) const;
-    EnumDataInformation* toEnum(QScriptValue& value, QString& name, bool flags) const;
+    QVector<DataInformation*> convertValues(QScriptValue& value, ScriptLogger* logger = 0);
 };
 
 #endif /* SCRIPTVALUECONVERTER_H_ */

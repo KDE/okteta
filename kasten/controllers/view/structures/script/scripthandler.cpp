@@ -97,8 +97,7 @@ DataInformation* ScriptHandler::initialDataInformationFromScript()
     QScriptValue obj = mEngine->globalObject();
     QScriptValue initMethod = obj.property(QLatin1String("init"));
 
-    ScriptValueConverter conv(initMethod, mName);
-    DataInformation* ret = conv.convert();
+    DataInformation* ret = ScriptValueConverter::convert(initMethod, mName, logger());
     if (!ret)
         ScriptUtils::object()->logScriptError(QLatin1String("failed to parse object from file ") + mFile);
     return ret;

@@ -48,8 +48,7 @@ private:
 DataInformation* ScriptValueConverterTest::evaluate(QString code)
 {
     QScriptValue value = engine.evaluate(code);
-    ScriptValueConverter conv(value, QLatin1String("value"));
-    return conv.convert();
+    return ScriptValueConverter::convert(value, QLatin1String("value"));
 }
 
 
@@ -100,12 +99,10 @@ void ScriptValueConverterTest::testPrimitives()
     QScriptValue val2 = engine.evaluate(code2);
     QCOMPARE(val1.property(QLatin1String("type")).toString(), typeString);
     QCOMPARE(val2.property(QLatin1String("type")).toString(), typeString);
-    ScriptValueConverter c1(val1, QLatin1String("val1"));
-    ScriptValueConverter c2(val1, QLatin1String("val2"));
     if (type == Type_NotPrimitive)
         return; //the cast will fail
-    DataInformation* data1 = c1.convert();
-    DataInformation* data2 = c2.convert();
+    DataInformation* data1 = ScriptValueConverter::convert(val1, QLatin1String("val1"));
+    DataInformation* data2 = ScriptValueConverter::convert(val2, QLatin1String("val2"));
     QVERIFY(data1);
     QVERIFY(data2);
     PrimitiveDataInformation* p1 = dynamic_cast<PrimitiveDataInformation*>(data1);
@@ -142,9 +139,7 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(!val.isUndefined());
     QCOMPARE(val.property(QLatin1String("type")).toString(), QString(QLatin1String("enum")));
 
-    ScriptValueConverter c(val, QLatin1String("val"));
-
-    DataInformation* data = c.convert();
+    DataInformation* data = ScriptValueConverter::convert(val, QLatin1String("val"));
     QVERIFY(data);
     EnumDataInformation* e = dynamic_cast<EnumDataInformation*>(data);
     QVERIFY(e);

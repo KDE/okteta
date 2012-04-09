@@ -115,14 +115,14 @@ QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContex
         kWarning() << "mData == null";
         return QScriptValue();
     }
-    ScriptValueConverter conv(type, QLatin1String("dummy"));
-    DataInformation* newChildType = conv.convert();
+
+    DataInformation* newChildType = ScriptValueConverter::convert(type, QLatin1String("dummy"));
     //return if conversion failed
     if (!newChildType)
     {
         if (context)
-            return context->throwError(QLatin1String("'") + type.toString()
-                    + QLatin1String("' is not a valid identifier for a data type"));
+            return context->throwError(QLatin1String("Failed to convert'") + type.toString()
+                    + QLatin1String("' to a valid DataInformation!"));
         else
             return QScriptValue();
     }
