@@ -18,7 +18,6 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-
 #include <QtTest>
 #include <QtCore/QDate>
 
@@ -29,15 +28,17 @@
 #include "view/structures/datatypes/topleveldatainformation.h"
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
 #include "view/structures/datatypes/primitivefactory.h"
+#include "view/structures/script/scriptengineinitializer.h"
 
 class PrimitiveArrayTest : public QObject
 {
-    Q_OBJECT
+Q_OBJECT
+
 private:
     template<PrimitiveDataType primType, typename T> void testReadPrimitiveInternal();
     template<PrimitiveDataType primType> void testReadPrimitive();
     template<typename T> bool compareItems(T first, T second, uint index);
-private Q_SLOTS:
+    private Q_SLOTS:
     void initTestCase();
     void testReadFloat();
     void testReadDouble();
@@ -54,17 +55,18 @@ private Q_SLOTS:
     void testReadBool16();
     void testReadBool32();
     void testReadBool64();
+
 private:
     Okteta::Byte* data;
     QScopedPointer<Okteta::ByteArrayModel> model;
 };
 
 #if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
-    #define CURRENT_BYTE_ORDER (DataInformation::EndianessLittle)
+#define CURRENT_BYTE_ORDER (DataInformation::EndianessLittle)
 #elif Q_BYTE_ORDER == Q_BIG_ENDIAN
-    #define CURRENT_BYTE_ORDER (DataInformation::EndianessBig)
+#define CURRENT_BYTE_ORDER (DataInformation::EndianessBig)
 #else
-    #error unknown byte order
+#error unknown byte order
 #endif
 
 static const uint SIZE = 8192;
@@ -92,7 +94,7 @@ void PrimitiveArrayTest::initTestCase()
     {
         data[i] = (char(qrand() & 0xff));
     }
-    Okteta::Byte* copy= new Okteta::Byte[SIZE];
+    Okteta::Byte* copy = new Okteta::Byte[SIZE];
     memcpy(copy, data, SIZE);
     model.reset(new Okteta::ByteArrayModel(copy, SIZE));
     model->setAutoDelete(true);
@@ -116,7 +118,8 @@ bool PrimitiveArrayTest::compareItems(float first, float second, uint index)
         if (second != second)
         {
             //second is NaN too;
-            union {
+            union
+            {
                 float floating;
                 QIntegerForSizeof<float>::Unsigned integer;
             } firstUn, secondUn;
@@ -124,7 +127,8 @@ bool PrimitiveArrayTest::compareItems(float first, float second, uint index)
             secondUn.floating = second;
             return firstUn.integer == secondUn.integer;
         }
-        else {
+        else
+        {
             return false;
         }
     }
@@ -141,7 +145,8 @@ bool PrimitiveArrayTest::compareItems(double first, double second, uint index)
         if (second != second)
         {
             //second is NaN too;
-            union {
+            union
+            {
                 double floating;
                 QIntegerForSizeof<double>::Unsigned integer;
             } firstUn, secondUn;
@@ -149,7 +154,8 @@ bool PrimitiveArrayTest::compareItems(double first, double second, uint index)
             secondUn.floating = second;
             return firstUn.integer == secondUn.integer;
         }
-        else {
+        else
+        {
             return false;
         }
     }
@@ -157,69 +163,119 @@ bool PrimitiveArrayTest::compareItems(double first, double second, uint index)
 }
 
 template<PrimitiveDataType primType>
-inline void PrimitiveArrayTest::testReadPrimitive() {
+inline void PrimitiveArrayTest::testReadPrimitive()
+{
     testReadPrimitiveInternal<primType, typename PrimitiveInfo<primType>::valueType>();
 }
 
 template<PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
-    ArrayDataInformation* dataInf = new ArrayDataInformation(QLatin1String("values"), model->size() / sizeof(T),
-                                                             PrimitiveFactory::newInstance(QLatin1String("value"), primType));
+    ArrayDataInformation* dataInf = new ArrayDataInformation(QLatin1String("values"),
+            model->size() / sizeof(T),
+            PrimitiveFactory::newInstance(QLatin1String("value"), primType));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
-    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf));
+    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, 0,
+            ScriptEngineInitializer::newEngine()));
     QCOMPARE(dataInf->childCount(), uint(SIZE / sizeof(T)));
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(model.data(), 0, model->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), model->size() * 8);
     T* dataAsT = reinterpret_cast<T*>(data);
-    PrimitiveArrayData<primType>* arrayData = dynamic_cast<PrimitiveArrayData<primType>*>(dataInf->mData);
+    PrimitiveArrayData<primType>* arrayData =
+            dynamic_cast<PrimitiveArrayData<primType>*>(dataInf->mData);
     QVERIFY(arrayData);
-    for (uint i = 0; i < dataInf->childCount(); ++i) {
+    for (uint i = 0; i < dataInf->childCount(); ++i)
+    {
         AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
         T childData = childDataAll.value<T>();
         T expected = dataAsT[i];
         //TODO comparison for float and double: nan != nan
-        if (!compareItems<T>(childData, expected, i)) {
-            QByteArray desc = "i=" + QByteArray::number(i) + ", model[i]=" + QByteArray::number(childData)
-            + ", data[i]=" +QByteArray::number(expected);
+        if (!compareItems<T>(childData, expected, i))
+        {
+            QByteArray desc = "i=" + QByteArray::number(i) + ", model[i]="
+                    + QByteArray::number(childData)
+                    + ", data[i]=" + QByteArray::number(expected);
             QVERIFY2(compareItems<T>(childData, expected, i), desc.constData());
         }
     }
 }
 
+void PrimitiveArrayTest::testReadFloat()
+{
+    testReadPrimitive<Type_Float>();
+}
 
-void PrimitiveArrayTest::testReadFloat() { testReadPrimitive<Type_Float>(); }
+void PrimitiveArrayTest::testReadDouble()
+{
+    testReadPrimitive<Type_Double>();
+}
 
-void PrimitiveArrayTest::testReadDouble() { testReadPrimitive<Type_Double>(); }
+void PrimitiveArrayTest::testReadChar()
+{
+    testReadPrimitive<Type_Char>();
+}
 
-void PrimitiveArrayTest::testReadChar() { testReadPrimitive<Type_Char>(); }
+void PrimitiveArrayTest::testReadInt8()
+{
+    testReadPrimitive<Type_Int8>();
+}
 
-void PrimitiveArrayTest::testReadInt8() { testReadPrimitive<Type_Int8>(); }
+void PrimitiveArrayTest::testReadInt16()
+{
+    testReadPrimitive<Type_Int16>();
+}
 
-void PrimitiveArrayTest::testReadInt16() { testReadPrimitive<Type_Int16>(); }
+void PrimitiveArrayTest::testReadInt32()
+{
+    testReadPrimitive<Type_Int32>();
+}
 
-void PrimitiveArrayTest::testReadInt32() { testReadPrimitive<Type_Int32>(); }
+void PrimitiveArrayTest::testReadInt64()
+{
+    testReadPrimitive<Type_Int64>();
+}
 
-void PrimitiveArrayTest::testReadInt64() { testReadPrimitive<Type_Int64>(); }
+void PrimitiveArrayTest::testReadUInt8()
+{
+    testReadPrimitive<Type_UInt8>();
+}
 
-void PrimitiveArrayTest::testReadUInt8() { testReadPrimitive<Type_UInt8>(); }
+void PrimitiveArrayTest::testReadUInt16()
+{
+    testReadPrimitive<Type_UInt16>();
+}
 
-void PrimitiveArrayTest::testReadUInt16() { testReadPrimitive<Type_UInt16>(); }
+void PrimitiveArrayTest::testReadUInt32()
+{
+    testReadPrimitive<Type_UInt32>();
+}
 
-void PrimitiveArrayTest::testReadUInt32() { testReadPrimitive<Type_UInt32>(); }
+void PrimitiveArrayTest::testReadUInt64()
+{
+    testReadPrimitive<Type_UInt64>();
+}
 
-void PrimitiveArrayTest::testReadUInt64() { testReadPrimitive<Type_UInt64>(); }
+void PrimitiveArrayTest::testReadBool8()
+{
+    testReadPrimitive<Type_Bool8>();
+}
 
-void PrimitiveArrayTest::testReadBool8() { testReadPrimitive<Type_Bool8>(); }
+void PrimitiveArrayTest::testReadBool16()
+{
+    testReadPrimitive<Type_Bool16>();
+}
 
-void PrimitiveArrayTest::testReadBool16() { testReadPrimitive<Type_Bool16>(); }
+void PrimitiveArrayTest::testReadBool32()
+{
+    testReadPrimitive<Type_Bool32>();
+}
 
-void PrimitiveArrayTest::testReadBool32() { testReadPrimitive<Type_Bool32>(); }
-
-void PrimitiveArrayTest::testReadBool64() { testReadPrimitive<Type_Bool64>(); }
+void PrimitiveArrayTest::testReadBool64()
+{
+    testReadPrimitive<Type_Bool64>();
+}
 
 QTEST_MAIN(PrimitiveArrayTest)
-
 
 #include "primitivearraytest.moc"
