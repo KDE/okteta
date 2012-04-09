@@ -67,7 +67,8 @@ bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScript
     if (name == s_values)
     {
         AbstractEnumDataInformation* pData = data->asEnum();
-        QMap<AllPrimitiveTypes, QString> newValues = AbstractEnumDataInformation::parseEnumValues(value, pData->type());
+        QMap<AllPrimitiveTypes, QString> newValues = AbstractEnumDataInformation::parseEnumValues(value,
+                pData->logger(), pData->type());
         if (newValues.isEmpty())
             kWarning() << "attempting to set empty list of enum values!";
         pData->setEnumValues(newValues);

@@ -260,11 +260,11 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
 QScriptValue ScriptEngineInitializer::createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags)
 {
     if (ctx->argumentCount() < 3)
-        return ctx->throwError(QLatin1String("enum initializer takes at least three arguments."));
+        return ctx->throwError(QLatin1String("enumeration initializer takes at least three arguments."));
     QScriptValue name = ctx->argument(0);
     if (!name.isString())
         return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("enum(): enum name (argument 1) is not a string"));
+                QLatin1String("enumeration(): enum name (argument 1) is not a string"));
 
     QScriptValue enumType = ctx->argument(1);
     if (enumType.isString())
@@ -273,19 +273,18 @@ QScriptValue ScriptEngineInitializer::createEnumObject(QScriptContext* ctx, QScr
         enumType = enumType.property(typePropertyString);
     else
         return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("enum(): enum type (argument 2) is not a valid string or object"));
+                QLatin1String("enumeration(): enum type (argument 2) is not a valid string or object"));
 
     QString enumTypeString = enumType.toString();
-    PrimitiveDataType pdt = PrimitiveFactory::typeStringToType(
-            enumTypeString);
-    if (pdt == Type_NotPrimitive)
-        return ctx->throwError(QLatin1String("enum(): enum type string'") + enumTypeString
+    PrimitiveDataType pdt = PrimitiveFactory::typeStringToType(enumTypeString);
+    if (pdt == Type_NotPrimitive || pdt == Type_Float || pdt == Type_Double)
+        return ctx->throwError(QLatin1String("enumeration(): enum type (argument 2) '") + enumTypeString
                 + QLatin1String("' is not a valid type"));
 
     QScriptValue enumValues = ctx->argument(2);
     if (!enumValues.isObject())
         return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("enum(): enum definition argument is not an object"));
+                QLatin1String("enumeration(): enum definition argument is not an object"));
 
     //all arguments are valid
     QScriptValue object;

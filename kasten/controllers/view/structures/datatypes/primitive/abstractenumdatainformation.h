@@ -26,19 +26,24 @@
 #include "primitivedatainformation.h"
 #include "enumdefinition.h"
 
+class ScriptLogger;
+
 class AbstractEnumDataInformation : public PrimitiveDataInformation
 {
 protected:
     AbstractEnumDataInformation(const AbstractEnumDataInformation& e);
+
 public:
-    AbstractEnumDataInformation(QString name, EnumDefinition::Ptr enumDef, DataInformation* parent = 0);
+    AbstractEnumDataInformation(QString name, EnumDefinition::Ptr enumDef, DataInformation* parent =
+            0);
     virtual ~AbstractEnumDataInformation();
 
     virtual bool isEnum() const;
     EnumDefinition::Ptr enumValues() const;
     void setEnumValues(QMap<AllPrimitiveTypes, QString> newValues);
 
-    static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val, PrimitiveDataType type = Type_UInt32);
+    static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
+            ScriptLogger* logger, PrimitiveDataType type = Type_UInt32);
 
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 

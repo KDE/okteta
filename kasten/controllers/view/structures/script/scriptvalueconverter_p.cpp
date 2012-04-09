@@ -39,7 +39,6 @@
 
 #include "../parsers/abstractstructureparser.h"
 
-#include "scriptutils.h"
 #include "scriptlogger.h"
 
 #include <QScriptValueIterator>
@@ -55,7 +54,10 @@ DataInformation* toDataInformation(const QScriptValue& value, const QString& pas
         return toPrimitive(value, name, logger); //a type string is also okay
 
     if (!value.isObject())
+    {
+        logger->error(QLatin1String("Cannot convert value since it is neither object nor string!"), value);
         return 0; //no point trying to convert
+    }
 
     QString type = value.property(QLatin1String("type")).toString().toLower(); //to lower just to be safe
 
@@ -156,8 +158,7 @@ PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const QString& 
 {
     QString typeString = value.isString() ? value.toString() : value.property(QLatin1String("type")).toString();
     if (typeString.isEmpty()) {
-        logger->error(QLatin1String("Invalid object passed, cannot convert it to primitive: ")
-                + ScriptUtils::qScriptValueToString(value));
+        logger->error(QLatin1String("Invalid object passed, cannot convert it to primitive"), value);
         return 0;
     }
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
@@ -212,7 +213,8 @@ AbstractEnumDataInformation* toEnum(const QScriptValue& value, const QString& na
                 "object was expected!"), enumValuesObj);
         return 0;
     }
-    QMap<AllPrimitiveTypes, QString> enumValues = AbstractEnumDataInformation::parseEnumValues(enumValuesObj, primitiveType);
+    QMap<AllPrimitiveTypes, QString> enumValues =
+            AbstractEnumDataInformation::parseEnumValues(enumValuesObj, logger, primitiveType);
 
     QString enumName = value.property(QLatin1String("enumName")).toString();
     EnumDefinition::Ptr def(new EnumDefinition(enumValues, enumName, primitiveType));
