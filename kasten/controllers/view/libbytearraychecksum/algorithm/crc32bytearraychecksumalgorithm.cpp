@@ -48,7 +48,7 @@ Crc32LookupTable::Crc32LookupTable()
     quint32 polynomial = 0x04c11db7;
 
       // 256 values representing ASCII character codes.
-    for( int i = 0; i <= 256; ++i )
+    for( int i = 0; i < 256; ++i )
     {
         int value = reverseBits( i, 8 ) << 24;
         for( int j = 0; j < 8; ++j )

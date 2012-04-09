@@ -78,10 +78,9 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, QScriptE
     }
 }
 
-
-TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d) :
-    QObject(), mData(0), mScriptHandler(d.mScriptHandler),
-            mStructureFile(d.mStructureFile), mWasAbleToParse(d.mWasAbleToParse), mIndex(-1)
+TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d)
+    : QObject(), mData(0), mScriptHandler(d.mScriptHandler), mStructureFile(d.mStructureFile),
+    mWasAbleToParse(d.mWasAbleToParse), mChildDataChanged(false), mIndex(-1)
 {
     mData.reset(d.mData->clone());
     setObjectName(mData->name());
