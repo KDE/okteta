@@ -22,8 +22,8 @@
 
 #include "dummydatainformation.h"
 
-DummyDataInformation::DummyDataInformation(DataInformationBase* parent)
-    : DataInformation(QLatin1String("dummy"), parent)
+DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QString& name)
+    : DataInformation(name, parent)
 {
 }
 

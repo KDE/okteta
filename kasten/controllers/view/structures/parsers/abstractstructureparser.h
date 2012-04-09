@@ -39,7 +39,7 @@ class AbstractStructureParser
 {
     Q_DISABLE_COPY(AbstractStructureParser)
 public:
-    AbstractStructureParser(const Kasten2::StructureDefinitionFile* const def);
+    AbstractStructureParser(const QString& pluginName, const QString& absolutePath);
     virtual ~AbstractStructureParser();
     virtual QStringList parseStructureNames() = 0;
     virtual QVector<TopLevelDataInformation*> parseStructures() = 0;
@@ -48,7 +48,8 @@ public:
     static QString byteOrderToString(DataInformation::DataInformationEndianess order);
 
 protected:
-    const Kasten2::StructureDefinitionFile* const mDef;
+    const QString mPluginName;
+    const QString mAbsolutePath;
 };
 
 #endif /* ABSTRACTSTRUCTUREPARSER_H_ */

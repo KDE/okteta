@@ -29,7 +29,7 @@
 class DummyDataInformation : public DataInformation
 {
 public:
-    DummyDataInformation(DataInformationBase* parent);
+    DummyDataInformation(DataInformationBase* parent, const QString& name = QString());
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,

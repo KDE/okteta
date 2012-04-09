@@ -116,12 +116,12 @@ protected:
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
     Okteta::Address mCursorIndex;
-    //	Okteta::CharCodec* mCharCodec;
 
     // settings
     StructViewPreferences::EnumByteOrder::type mByteOrder;
     StructuresManager* mManager;
     QVector<TopLevelDataInformation*> mData;
+    QVector<TopLevelDataInformation*> mInvalidData;
     bool mWritingData : 1;
     bool mCurrentItemDataChanged : 1;
 public:
@@ -129,7 +129,7 @@ public:
     QVariant headerData(int column, int role);
     int childCount() const;
     DataInformation* childAt(int idx) const;
-    //	QTextCodec* mUtf8Codec; //XXX add utf8 strings sometime
 };
+
 }
 #endif /* STRUCTTOOL_H_ */

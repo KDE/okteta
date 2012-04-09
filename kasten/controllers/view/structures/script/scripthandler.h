@@ -42,20 +42,16 @@ class ScriptHandler : public QSharedData
 public:
     typedef QExplicitlySharedDataPointer<ScriptHandler> Ptr;
 
-    ScriptHandler(QScriptEngine* engine, QString scriptFile, QString name);
+    ScriptHandler(QScriptEngine* engine, ScriptLogger* logger);
     virtual ~ScriptHandler();
 
-    DataInformation* initialDataInformationFromScript();
     void validateData(DataInformation* data);
     void updateDataInformation(DataInformation* data);
     QScriptEngine* engine() const;
     ScriptHandlerInfo* handlerInfo();
     ScriptLogger* logger() const;
 protected:
-    bool loadFile();
     QScopedPointer<QScriptEngine> mEngine;
-    QString mFile;
-    QString mName;
     QScopedPointer<ScriptLogger> mLogger;
 #ifdef OKTETA_DEBUG_SCRIPT
     QScopedPointer<QScriptEngineDebugger> mDebugger;

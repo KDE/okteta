@@ -229,13 +229,13 @@ DataInformation* StructTool::childAt(int idx) const
 
 void StructTool::addChildItem(TopLevelDataInformation* child)
 {
-    if (child)
+    Q_CHECK_PTR(child);
+    if (child->isValid())
     {
         child->setIndex(mData.size());
         child->setParent(this);
         mData.append(child);
         connect(child, SIGNAL(dataChanged()), this, SLOT(onChildItemDataChanged()));
-
         connect(child, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)),
                 this, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)));
         connect(child, SIGNAL(childrenInserted(const DataInformation*,uint,uint)),
@@ -244,6 +244,12 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
                 this, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)));
         connect(child, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)),
                 this, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)));
+    }
+    else
+    {
+        child->setIndex(mInvalidData.size());
+        child->setParent(this);
+        mInvalidData.append(child);
     }
 }
 
@@ -343,7 +349,6 @@ void StructTool::validateAllStructures()
 {
     if (!mByteArrayModel)
         return; //no point validating
-    //TODO it would be nicer if the button was grayed out while no model exists
     const int size = mData.size();
     for (int i = 0; i < size; ++i)
     {

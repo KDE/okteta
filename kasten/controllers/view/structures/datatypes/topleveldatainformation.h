@@ -41,25 +41,23 @@ class QScriptEngine;
 class ScriptHandler;
 class DataInformation;
 
-class TopLevelDataInformation: public QObject, public DataInformationBase
+class TopLevelDataInformation : public QObject, public DataInformationBase
 {
-    Q_OBJECT
+Q_OBJECT
+
 public:
-    /** creates a new TopLevelDataInformation object wrapping the existing DataInformation @p data.
-     *  @param data the object to wrap (ownership is taken)
-     *  @param scriptFile the file which contains the file this object was initialized from
-     *  @param needsEval whether the @p scriptFile needs evaluating
-     *  @param name the name. If empty @c data->name() is used.
-     */
-    TopLevelDataInformation(DataInformation* data, QFileInfo structureFile, QScriptEngine* engine,
-            bool needsEval, QString name = QString());
     /** create a new TopLevelDataInformation wrapping @p data
-     *  @param data the object to wrap (takes ownership)
-     *  @param engine the script engine to use or null if not needed (takes ownership)
+     *  @param data the object to wrap (takes ownership). If data is dummy then this object is invalid
+     *  @param logger the logger to use (takes ownership).  If null a new one is created.
+     *  @param engine the script engine to use. If null a new one is created.
+     *  @param name the name to use (only used if @p data is null)
+     *  @param structureFile the file which this was loaded from
      */
-    explicit TopLevelDataInformation(DataInformation* data, QScriptEngine* engine = 0);
+    explicit TopLevelDataInformation(DataInformation* data, QScriptEngine* engine = 0,
+            ScriptLogger* logger = 0, const QFileInfo& structureFile = QFileInfo());
     virtual ~TopLevelDataInformation();
     TopLevelDataInformation* clone() const;
+
 public:
     void validate();
     /** Reads the necessary data from @p input
@@ -76,7 +74,7 @@ public:
     QScriptEngine* scriptEngine() const;
 
     DataInformation* actualDataInformation() const;
-    bool wasAbleToParse() const;
+    bool isValid() const;
     void lockPositionToOffset(Okteta::Address offset, const Okteta::AbstractByteArrayModel* model);
     void unlockPosition(const Okteta::AbstractByteArrayModel* model);
     bool isLockedFor(const Okteta::AbstractByteArrayModel* model) const;
@@ -95,12 +93,16 @@ public:
     void _childrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
     void _childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
     void _childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
+
 private:
     TopLevelDataInformation(const TopLevelDataInformation& d);
-    bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList, Okteta::Address address);
+    bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
+            Okteta::Address address);
+
 public Q_SLOTS:
     void resetValidationState();
     void removeByteArrayModelFromList(QObject* model);
+
 Q_SIGNALS:
     void dataChanged();
     /** items are inserted before @p startIndex */
@@ -111,6 +113,7 @@ Q_SIGNALS:
     void childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
     /** items are inserted before @p startIndex */
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
+
 private:
     QScopedPointer<DataInformation> mData;
     ScriptHandler::Ptr mScriptHandler;
@@ -121,7 +124,7 @@ private:
      *  Keys are the models and values are a pointer so that NULL can indicate that it is not locked.
      */
     QMap<const Okteta::AbstractByteArrayModel*, quint64> mLockedPositions;
-    bool mWasAbleToParse :1;
+    bool mValid :1;
     bool mChildDataChanged :1;
     int mIndex;
 };
@@ -131,9 +134,9 @@ inline DataInformation* TopLevelDataInformation::actualDataInformation() const
     return mData.data();
 }
 
-inline bool TopLevelDataInformation::wasAbleToParse() const
+inline bool TopLevelDataInformation::isValid() const
 {
-    return mWasAbleToParse;
+    return mValid;
 }
 
 inline TopLevelDataInformation* TopLevelDataInformation::clone() const
@@ -156,22 +159,26 @@ inline void TopLevelDataInformation::setChildDataChanged()
     mChildDataChanged = true;
 }
 
-inline void TopLevelDataInformation::_childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex)
+inline void TopLevelDataInformation::_childrenAboutToBeInserted(DataInformation* sender,
+        uint startIndex, uint endIndex)
 {
     emit childrenAboutToBeInserted(sender, startIndex, endIndex);
 }
 
-inline void TopLevelDataInformation::_childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex)
+inline void TopLevelDataInformation::_childrenAboutToBeRemoved(DataInformation* sender,
+        uint startIndex, uint endIndex)
 {
     emit childrenAboutToBeRemoved(sender, startIndex, endIndex);
 }
 
-inline void TopLevelDataInformation::_childrenInserted(const DataInformation* sender, uint startIndex, uint endIndex)
+inline void TopLevelDataInformation::_childrenInserted(const DataInformation* sender,
+        uint startIndex, uint endIndex)
 {
     emit childrenInserted(sender, startIndex, endIndex);
 }
 
-inline void TopLevelDataInformation::_childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex)
+inline void TopLevelDataInformation::_childrenRemoved(const DataInformation* sender,
+        uint startIndex, uint endIndex)
 {
     emit childrenRemoved(sender, startIndex, endIndex);
 }
@@ -185,6 +192,5 @@ inline ScriptLogger* TopLevelDataInformation::logger() const
 {
     return mScriptHandler->logger();
 }
-
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */

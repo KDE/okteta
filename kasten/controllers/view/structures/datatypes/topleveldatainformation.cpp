@@ -24,6 +24,7 @@
 #include "datainformation.h"
 #include "datainformationwithchildren.h"
 #include "../script/scripthandler.h"
+#include "../script/scriptlogger.h"
 #include "primitivefactory.h"
 #include "../allprimitivetypes.h"
 
@@ -31,56 +32,22 @@
 //QtScript
 #include <QtScript/QScriptEngine>
 
-TopLevelDataInformation::TopLevelDataInformation(DataInformation* data,
-        QFileInfo structureFile, QScriptEngine* engine, bool needsEval, QString name)
+TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, QScriptEngine* engine,
+        ScriptLogger* logger, const QFileInfo& structureFile)
         : QObject(0), mData(data), mScriptHandler(0), mStructureFile(structureFile),
-                mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
-{
-    if (engine)
-    {
-        mScriptHandler = new ScriptHandler(engine, structureFile.absoluteFilePath(), name);
-        if (needsEval)
-        {
-            DataInformation* parsed = mScriptHandler->initialDataInformationFromScript();
-            if (parsed)
-                mData.reset(parsed);
-            else
-            {
-                kWarning() << "could not parse" << structureFile.absoluteFilePath();
-                //just a dummy, this object should be deleted anyway
-                mData.reset(PrimitiveFactory::newInstance(QLatin1String("failed_to_load__this_is_a_dummy"),
-                        Type_Int32, 0));
-                mWasAbleToParse = false;
-            }
-        }
-    }
-    if (!mData)
-        kError() << "mData == NULL!";
-    else
-    {
-        setObjectName(mData->name());
-        mData->setParent(this);
-    }
-}
-
-TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, QScriptEngine* engine)
-        : QObject(0), mData(data), mScriptHandler(0), mStructureFile(QFileInfo()),
-                mWasAbleToParse(true), mChildDataChanged(false), mIndex(-1)
+              mValid(!data->isDummy()), mChildDataChanged(false), mIndex(-1)
 {
     Q_CHECK_PTR(mData);
     mData->setParent(this);
     setObjectName(mData->name());
-    if (engine)
-    {
-        //pass emtpy string as second argument, there is nothing to
-        //evaluate if this constructor gets called
-        mScriptHandler = new ScriptHandler(engine, QString(), mData->name());
-    }
+    QScriptEngine* theEngine = engine ? engine : new QScriptEngine();
+    ScriptLogger* theLogger = logger ? logger : new ScriptLogger();
+    mScriptHandler = new ScriptHandler(theEngine, theLogger);
 }
 
 TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d)
         : QObject(), mData(0), mScriptHandler(d.mScriptHandler), mStructureFile(d.mStructureFile),
-                mWasAbleToParse(d.mWasAbleToParse), mChildDataChanged(false), mIndex(-1)
+                mValid(d.mValid), mChildDataChanged(false), mIndex(-1)
 {
     mData.reset(d.mData->clone());
     setObjectName(mData->name());
@@ -94,21 +61,11 @@ TopLevelDataInformation::~TopLevelDataInformation()
 void TopLevelDataInformation::validate()
 {
     kDebug() << "validation of structure " << mData->name() << "requested";
-    if (mScriptHandler)
-    {
-        mScriptHandler->validateData(mData.data());
-    }
-    else
-    {
-        kDebug() << "no handler available -> cannot validate structure " << mData->name();
-    }
-
+    mScriptHandler->validateData(mData.data());
 }
 
 QScriptEngine* TopLevelDataInformation::scriptEngine() const
 {
-    if (!mScriptHandler)
-        return NULL;
     return mScriptHandler->engine();
 }
 
@@ -119,8 +76,7 @@ void TopLevelDataInformation::resetValidationState()
 
 void TopLevelDataInformation::updateElement(DataInformation* elem)
 {
-    if (!elem || !mScriptHandler)
-        return;
+    Q_CHECK_PTR(elem);
     mScriptHandler->updateDataInformation(elem);
 
 }
@@ -132,7 +88,6 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
     //first of all check if start offset is locked
     if (mLockedPositions.contains(input))
     {
-
         //use the saved offset
         address = mLockedPositions.value(input);
         //we read from the locked position, so now check whether it is necessary to update
@@ -190,7 +145,8 @@ bool TopLevelDataInformation::isReadingNecessary(
             }
             else if (change.type() == Okteta::ArrayChangeMetrics::Swapping)
             {
-
+                //TODO
+                return true;
             }
             else
             {

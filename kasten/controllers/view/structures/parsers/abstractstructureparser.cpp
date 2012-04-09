@@ -23,15 +23,17 @@
 #include "abstractstructureparser.h"
 #include "../structuredefinitionfile.h"
 
-AbstractStructureParser::AbstractStructureParser(const Kasten2::StructureDefinitionFile* const def) :
-    mDef(def)
+AbstractStructureParser::AbstractStructureParser(const QString& pluginName, const QString& absolutePath)
+    : mPluginName(pluginName), mAbsolutePath(absolutePath)
 {
-    //Q_CHECK_PTR(def);
 }
 
-AbstractStructureParser::~AbstractStructureParser() {}
+AbstractStructureParser::~AbstractStructureParser()
+{
+}
 
-DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(const QString& string)
+DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(
+        const QString& string)
 {
     const QString lower = string.toLower();
     if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))

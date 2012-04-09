@@ -23,7 +23,6 @@
 
 #include <QFile>
 #include <QDir>
-#include <QDomNode>
 #include <QStringList>
 
 #include <KDebug>
@@ -35,17 +34,20 @@
 
 namespace Kasten2
 {
-StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info) :
-    mPluginInfo(info)
+StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info)
+        : mPluginInfo(info)
 {
     QFileInfo tmp(info.entryPath());
     mDir = tmp.dir();
 
     QString category = info.category();
     if (category == QLatin1String("structure/js"))
-        mParser.reset(new ScriptFileParser(this));
+        mParser.reset(new ScriptFileParser(mPluginInfo.pluginName(),
+                absolutePath() + QLatin1String("/main.js")));
     else if (category == QLatin1String("structure"))
-        mParser.reset(new OsdParser(this));
+        mParser.reset(new OsdParser(mPluginInfo.pluginName(),
+                absolutePath() + QLatin1Char('/') + mPluginInfo.pluginName()
+                        + QLatin1String(".osd")));
     else
         kWarning() << "no valid parser found for plugin category '" << category << "'";
 }
@@ -56,7 +58,8 @@ StructureDefinitionFile::~StructureDefinitionFile()
 
 QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
 {
-    if (!mParser) {
+    if (!mParser)
+    {
         kWarning() << "trying to get structures, but parser does not exist!";
         return QVector<TopLevelDataInformation*>();
     }
@@ -64,14 +67,16 @@ QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
 }
 
 TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name) const
-{
-    if (!mParser) {
-        kWarning() << "trying to get structure with name =" << name << ", but parser does not exist!";
+        {
+    if (!mParser)
+    {
+        kWarning() << "trying to get structure with name =" << name
+                << ", but parser does not exist!";
         return 0;
     }
     QVector<TopLevelDataInformation*> list = mParser->parseStructures();
     TopLevelDataInformation* ret = 0;
-    for (int i = 0; i <list.size(); ++i)
+    for (int i = 0; i < list.size(); ++i)
     {
         if (list.at(i)->actualDataInformation()->name() == name)
             ret = list.at(i);
@@ -85,7 +90,8 @@ TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name)
 
 QStringList StructureDefinitionFile::structureNames() const
 {
-    if (!mParser) {
+    if (!mParser)
+    {
         kWarning() << "trying to get structure names, but parser does not exist!";
         return QStringList();
     }

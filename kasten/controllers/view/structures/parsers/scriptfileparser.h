@@ -29,7 +29,7 @@ class ScriptFileParser: public AbstractStructureParser
 {
     Q_DISABLE_COPY(ScriptFileParser)
 public:
-    ScriptFileParser(const Kasten2::StructureDefinitionFile* const def);
+    ScriptFileParser(const QString& pluginName, const QString& absolutePath);
     virtual ~ScriptFileParser();
 
     virtual QStringList parseStructureNames();
