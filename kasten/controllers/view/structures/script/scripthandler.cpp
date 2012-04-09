@@ -27,25 +27,18 @@
 #include "scriptlogger.h"
 #include "../datatypes/datainformation.h"
 #include "../datatypes/topleveldatainformation.h"
-#include "classes/defaultscriptclass.h"
-#include "classes/arrayscriptclass.h"
-#include "classes/primitivescriptclass.h"
-#include "classes/enumscriptclass.h"
-#include "classes/structunionscriptclass.h"
-#include "classes/stringscriptclass.h"
-#include "classes/bitfieldscriptclass.h"
 
-#include <QtGui/QAction>
 #include <QtCore/QFile>
 #include <QtCore/QString>
-#include <QtCore/QTextStream>
 #include <QtScript/QScriptValue>
 #include <QtScript/QScriptValueIterator>
+#include <QtScript/QScriptEngine>
+#include <QtScriptTools/QScriptEngineDebugger>
 
 #include <KDebug>
 
-ScriptHandler::ScriptHandler(QScriptEngine* engine, ScriptLogger* logger)
-        : mEngine(engine), mLogger(logger), mHandlerInfo(engine)
+ScriptHandler::ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel)
+        : mEngine(engine), mTopLevel(topLevel), mHandlerInfo(engine)
 #ifdef OKTETA_DEBUG_SCRIPT
 , mDebugger(new QScriptEngineDebugger())
 #endif
@@ -92,14 +85,14 @@ void ScriptHandler::validateData(DataInformation* data)
         QScriptValue result = additionalData->validationFunction().call(thisObject, args);
         if (result.isError())
         {
-            mLogger->error(QLatin1String("error occurred while validating element ")
+            mTopLevel->logger()->error(QLatin1String("error occurred while validating element ")
                     + data->fullObjectPath(), result);
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
         else if (mEngine->hasUncaughtException())
         {
-            mLogger->error(QLatin1String("error occurred while validating element ")
+            mTopLevel->logger()->error(QLatin1String("error occurred while validating element ")
                     + data->fullObjectPath(), mEngine->uncaughtExceptionBacktrace(), result);
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
@@ -136,12 +129,12 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         QScriptValue result = additionalData->updateFunction().call(thisObject, args);
         if (result.isError())
         {
-            mLogger->error(QLatin1String("error occurred while updating element ")
+            mTopLevel->logger()->error(QLatin1String("error occurred while updating element ")
                     + data->fullObjectPath(), result);
         }
         if (mEngine->hasUncaughtException())
         {
-            mLogger->error(QLatin1String("error occurred while updating element ")
+            mTopLevel->logger()->error(QLatin1String("error occurred while updating element ")
                     + data->fullObjectPath(), mEngine->uncaughtExceptionBacktrace(), result);
         }
     }

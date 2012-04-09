@@ -25,6 +25,9 @@
 
 #include "abstractstructureparser.h"
 
+class ScriptLogger;
+class QScriptEngine;
+
 class ScriptFileParser: public AbstractStructureParser
 {
     Q_DISABLE_COPY(ScriptFileParser)
@@ -34,6 +37,9 @@ public:
 
     virtual QStringList parseStructureNames();
     virtual QVector<TopLevelDataInformation*> parseStructures();
+
+private:
+    DataInformation* convert(ScriptLogger* logger, QScriptEngine* engine) const;
 };
 
 #endif /* SCRIPTFILEPARSER_H_ */

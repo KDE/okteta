@@ -27,42 +27,33 @@
 #include <QtCore/QString>
 #include <QtCore/QSharedData>
 
-#include <QtScript/QScriptEngine>
-#include <QtScriptTools/QScriptEngineDebugger>
-
 #include <config-structtool.h>
 #include "scripthandlerinfo.h"
 
 class DataInformation;
 class ScriptLogger;
+class TopLevelDataInformation;
+class QScriptEngineDebugger;
 
-class ScriptHandler : public QSharedData
+class ScriptHandler
 {
     Q_DISABLE_COPY(ScriptHandler)
 public:
-    typedef QExplicitlySharedDataPointer<ScriptHandler> Ptr;
-
-    ScriptHandler(QScriptEngine* engine, ScriptLogger* logger);
+    ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel);
     virtual ~ScriptHandler();
 
     void validateData(DataInformation* data);
     void updateDataInformation(DataInformation* data);
     QScriptEngine* engine() const;
     ScriptHandlerInfo* handlerInfo();
-    ScriptLogger* logger() const;
 protected:
     QScopedPointer<QScriptEngine> mEngine;
-    QScopedPointer<ScriptLogger> mLogger;
+    TopLevelDataInformation* mTopLevel;
 #ifdef OKTETA_DEBUG_SCRIPT
     QScopedPointer<QScriptEngineDebugger> mDebugger;
 #endif
     ScriptHandlerInfo mHandlerInfo;
 };
-
-inline ScriptLogger* ScriptHandler::logger() const
-{
-    return mLogger.data();
-}
 
 inline QScriptEngine* ScriptHandler::engine() const
 {

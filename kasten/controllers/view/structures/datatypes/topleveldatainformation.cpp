@@ -33,26 +33,20 @@
 //QtScript
 #include <QtScript/QScriptEngine>
 
-TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, QScriptEngine* engine,
-        ScriptLogger* logger, const QFileInfo& structureFile)
-        : QObject(0), mData(data), mScriptHandler(0), mStructureFile(structureFile),
-              mValid(!data->isDummy()), mChildDataChanged(false), mIndex(-1)
+TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLogger* logger,
+        QScriptEngine* engine, const QFileInfo& structureFile)
+        : QObject(0), mData(data), mLogger(logger), mStructureFile(structureFile),
+                mIndex(-1), mValid(!data->isDummy()), mChildDataChanged(false)
 {
     Q_CHECK_PTR(mData);
     mData->setParent(this);
     setObjectName(mData->name());
-    QScriptEngine* theEngine = engine ? engine : ScriptEngineInitializer::newEngine();
-    ScriptLogger* theLogger = logger ? logger : new ScriptLogger();
-    mScriptHandler = new ScriptHandler(theEngine, theLogger);
-}
 
-TopLevelDataInformation::TopLevelDataInformation(const TopLevelDataInformation& d)
-        : QObject(), mData(0), mScriptHandler(d.mScriptHandler), mStructureFile(d.mStructureFile),
-                mValid(d.mValid), mChildDataChanged(false), mIndex(-1)
-{
-    mData.reset(d.mData->clone());
-    setObjectName(mData->name());
-    mData->setParent(this);
+    if (!mLogger)
+        mLogger.reset(new ScriptLogger());
+
+    if (engine)
+        mScriptHandler.reset(new ScriptHandler(engine, this));
 }
 
 TopLevelDataInformation::~TopLevelDataInformation()
@@ -61,7 +55,8 @@ TopLevelDataInformation::~TopLevelDataInformation()
 
 void TopLevelDataInformation::validate()
 {
-    kDebug() << "validation of structure " << mData->name() << "requested";
+    kDebug()
+    << "validation of structure " << mData->name() << "requested";
     mScriptHandler->validateData(mData.data());
 }
 
@@ -111,9 +106,11 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
     }
 }
 
-bool TopLevelDataInformation::isReadingNecessary(
-        const Okteta::ArrayChangeMetricsList& changesList, Okteta::Address address)
+bool TopLevelDataInformation::isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
+        Okteta::Address address)
 {
+    if (changesList.isEmpty())
+        return true; //default argument
     for (int i = 0; i < changesList.length(); ++i)
     {
         const Okteta::ArrayChangeMetrics& change = changesList.at(i);
@@ -165,7 +162,8 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset,
         const Okteta::AbstractByteArrayModel* model)
 {
     mLockedPositions.insert(model, quint64(offset));
-    kDebug() << mData->name() << ": Locking start offset in model "
+    kDebug()
+    << mData->name() << ": Locking start offset in model "
             << model << "to position " << offset;
     //remove when deleted
     connect(model, SIGNAL(destroyed(QObject*)),
@@ -175,7 +173,8 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset,
 void TopLevelDataInformation::unlockPosition(
         const Okteta::AbstractByteArrayModel* model)
 {
-    kDebug() << "removing lock at position " << mLockedPositions.value(model) << ", model ="
+    kDebug()
+    << "removing lock at position " << mLockedPositions.value(model) << ", model ="
             << (void*) model;
     //just remove from map
     mLockedPositions.remove(model);

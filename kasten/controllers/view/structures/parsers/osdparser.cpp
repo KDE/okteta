@@ -148,7 +148,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures()
             data = new DummyDataInformation(0,
                     fileInfo.absoluteFilePath() + QLatin1String("_element") + QString::number(i));
 
-        TopLevelDataInformation* topData = new TopLevelDataInformation(data, eng, logger, fileInfo);
+        TopLevelDataInformation* topData = new TopLevelDataInformation(data, logger, eng, fileInfo);
         structures.append(topData);
     }
     return structures;

@@ -44,19 +44,20 @@ class DataInformation;
 class TopLevelDataInformation : public QObject, public DataInformationBase
 {
 Q_OBJECT
-
+    Q_DISABLE_COPY(TopLevelDataInformation)
 public:
     /** create a new TopLevelDataInformation wrapping @p data
      *  @param data the object to wrap (takes ownership). If data is dummy then this object is invalid
-     *  @param logger the logger to use (takes ownership).  If null a new one is created.
-     *  @param engine the script engine to use. If null a new one is created.
-     *  @param name the name to use (only used if @p data is null)
+     *  @param logger the logger to use (takes ownership). If null a new one is created
+     *  @param engine the script engine to use. If null this object contains no dynamic elements
      *  @param structureFile the file which this was loaded from
      */
-    explicit TopLevelDataInformation(DataInformation* data, QScriptEngine* engine = 0,
-            ScriptLogger* logger = 0, const QFileInfo& structureFile = QFileInfo());
+    explicit TopLevelDataInformation(DataInformation* data, ScriptLogger* logger = 0,
+            QScriptEngine* engine = 0, const QFileInfo& structureFile = QFileInfo());
     virtual ~TopLevelDataInformation();
-    TopLevelDataInformation* clone() const;
+
+    typedef QSharedPointer<TopLevelDataInformation> Ptr;
+    typedef QVector<Ptr> List;
 
 public:
     void validate();
@@ -95,7 +96,6 @@ public:
     void _childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 
 private:
-    TopLevelDataInformation(const TopLevelDataInformation& d);
     bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
             Okteta::Address address);
 
@@ -116,7 +116,8 @@ Q_SIGNALS:
 
 private:
     QScopedPointer<DataInformation> mData;
-    ScriptHandler::Ptr mScriptHandler;
+    QScopedPointer<ScriptHandler> mScriptHandler;
+    QScopedPointer<ScriptLogger> mLogger;
     QFileInfo mStructureFile;
     /** Save the position this structure is locked to for each ByteArrayModel
      * QObject::destroyed() has to be connected to slot removeByteArrayModel()
@@ -124,9 +125,9 @@ private:
      *  Keys are the models and values are a pointer so that NULL can indicate that it is not locked.
      */
     QMap<const Okteta::AbstractByteArrayModel*, quint64> mLockedPositions;
+    int mIndex;
     bool mValid :1;
     bool mChildDataChanged :1;
-    int mIndex;
 };
 
 inline DataInformation* TopLevelDataInformation::actualDataInformation() const
@@ -137,11 +138,6 @@ inline DataInformation* TopLevelDataInformation::actualDataInformation() const
 inline bool TopLevelDataInformation::isValid() const
 {
     return mValid;
-}
-
-inline TopLevelDataInformation* TopLevelDataInformation::clone() const
-{
-    return new TopLevelDataInformation(*this);
 }
 
 inline int TopLevelDataInformation::index() const
@@ -190,7 +186,7 @@ inline bool TopLevelDataInformation::isTopLevel() const
 
 inline ScriptLogger* TopLevelDataInformation::logger() const
 {
-    return mScriptHandler->logger();
+    return mLogger.data();
 }
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */
