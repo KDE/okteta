@@ -28,7 +28,9 @@ compile_time_assert(sizeof(double) == 8);
 compile_time_assert(sizeof(float) == 4);
 compile_time_assert(sizeof(AllPrimitiveTypes) == 8);
 
-const char* PrimitiveType::longTypeNames[] = {
+
+namespace PrimitiveType {
+const char* longTypeNames[Type_END + 1] = {
     I18N_NOOP2("data type", "bool (1 byte)"),
     I18N_NOOP2("data type", "signed byte"),
     I18N_NOOP2("data type", "unsigned byte"),
@@ -48,25 +50,25 @@ const char* PrimitiveType::longTypeNames[] = {
 };
 
 //TODO add i18n_noop? probably not necessary, since these are not really translatable
-const QLatin1String PrimitiveType::typeNames[] = {
-    QLatin1String("bool8"),
-    QLatin1String("int8"),
-    QLatin1String("uint8"),
-    QLatin1String("char"),
-    QLatin1String("bool16"),
-    QLatin1String("int16"),
-    QLatin1String("uint16"),
-    QLatin1String("bool32"),
-    QLatin1String("int32"),
-    QLatin1String("uint32"),
-    QLatin1String("bool64"),
-    QLatin1String("int64"),
-    QLatin1String("uint64"),
-    QLatin1String("float"),
-    QLatin1String("double"),
-    QLatin1String("bitfield"),
+const char* typeNames[Type_END + 1] = {
+    "bool8",
+    "int8",
+    "uint8",
+    "char",
+    "bool16",
+    "int16",
+    "uint16",
+    "bool32",
+    "int32",
+    "uint32",
+    "bool64",
+    "int64",
+    "uint64",
+    "float",
+    "double",
+    "bitfield",
 };
-
+}
 //FIXME this code really needs unit tests!
 //TODO optimised methods for *bitOffset == 0 && bitCount % 8 == 0
 
@@ -367,3 +369,15 @@ void AllPrimitiveTypes::writeFullBytes(const quint8 byteCount,
         out->setByte(address + i, newValue.allBytes[index]);
     }
 }
+QDebug operator<<(QDebug dbg, const PrimitiveDataType type)
+{
+    if (type == -1)
+        dbg.nospace() << "primitive type(not primitive)";
+    else if (type < Type_END)
+        dbg.nospace() << "primitive type(" << PrimitiveType::typeNames[type] << ")";
+    else
+        dbg.nospace() << "primitive type(invalid: " << int(type) << ")";
+    return dbg.space();
+}
+
+

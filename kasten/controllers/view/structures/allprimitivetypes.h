@@ -67,10 +67,10 @@ enum PrimitiveDataType
     Type_END = Type_Bitfield
 };
 
-struct PrimitiveType {
-    static const QLatin1String typeNames[Type_END + 1];
-    static const char* longTypeNames[Type_END + 1];
-};
+namespace PrimitiveType {
+    extern const char* longTypeNames[Type_END + 1];
+    extern const char* typeNames[Type_END + 1];
+}
 
 /** This union holds the value of one primitive datatype. Maximum size of a datatype is currently 64 bits.
  *  It has methods for reading and writing from @c Okteta::AbstractByteArrayModel */
@@ -237,6 +237,8 @@ template<> inline qint32 AllPrimitiveTypes::value<qint32>() const { return intVa
 template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return longValue; }
 template<> inline float AllPrimitiveTypes::value<float>() const { return floatValue; }
 template<> inline double AllPrimitiveTypes::value<double>() const { return doubleValue; }
+
+QDebug operator<<(QDebug dbg, const PrimitiveDataType type);
 
 
 #endif /* ALLPRIMITIVETYPES_H_ */
