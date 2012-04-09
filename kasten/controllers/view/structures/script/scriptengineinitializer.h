@@ -41,169 +41,168 @@ class QScriptContext;
  * @endcode
  * @note
  */
-class ScriptEngineInitializer
+namespace ScriptEngineInitializer
 {
-public:
-    static void addFuctionsToScriptEngine(QScriptEngine& engine);
-private:
-    /** create a new enum:
-     *  first parameter is the type, second parameter is a list of name - value pairs */
-    static QScriptValue scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng);
-    /** create a new flag value:
-     *  first parameter is the type, second parameter is a list of name - value pairs */
-    static QScriptValue scriptNewFlags(QScriptContext* ctx, QScriptEngine* eng);
-    static QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewUInt8(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewUInt16(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewUInt32(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewUInt64(QScriptContext* ctx, QScriptEngine* eng);
 
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewInt8(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewInt16(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewInt32(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewInt64(QScriptContext* ctx, QScriptEngine* eng);
+void addFuctionsToScriptEngine(QScriptEngine& engine);
 
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewBool8(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewBool16(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewBool32(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewBool64(QScriptContext* ctx, QScriptEngine* eng);
+namespace Private
+{
+/** create a new enum:
+ *  first parameter is the type, second parameter is a list of name - value pairs */
+QScriptValue scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng);
+/** create a new flag value:
+ *  first parameter is the type, second parameter is a list of name - value pairs */
+QScriptValue scriptNewFlags(QScriptContext* ctx, QScriptEngine* eng);
+QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewUInt8(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewUInt16(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewUInt32(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewUInt64(QScriptContext* ctx, QScriptEngine* eng);
 
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewFloat(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewDouble(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewInt8(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewInt16(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewInt32(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewInt64(QScriptContext* ctx, QScriptEngine* eng);
 
-    /** this script constructors/initializer takes no parameters */
-    static QScriptValue scriptNewChar(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewBool8(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewBool16(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewBool32(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewBool64(QScriptContext* ctx, QScriptEngine* eng);
 
-    /** this script constructor/initializer function takes 2 arguments:
-     *  <br>
-     *  -the first is the type of the bitfield: "signed", "bool" or "unsigned"<br>
-     *  -the second is the width (in bits) of the bitfield)
-     */
-    static QScriptValue scriptNewBitfield(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewFloat(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewDouble(QScriptContext* ctx, QScriptEngine* eng);
 
-    /** this script constructor/initializer function takes 1 argument and returns a struct object:<br>
-     * an object (hierarchy), which represents the children.<br>
-     * An example would be:
-     * @code
-     * var obj = struct({
-     *      member1 : uint8(),
-     *      member2 : int32(),
-     *      member3 : union({
-     *          first : uint32(),
-     *          second: float(),
-     *          }),
-     *      member4 : double(),
-     *    })
-     * @endcode
-     */
-    static QScriptValue scriptNewStruct(QScriptContext* ctx, QScriptEngine* eng);
-    /** this script constructor/initializer function takes 1 argument and returns a union object:<br>
-     * an object (hierarchy), which represents the children.<br>
-     * An example would be:
-     * @code
-     * var obj = union({
-     *      member1 : uint8(),
-     *      member2 : int32(),
-     *      member3 : struct({
-     *          first : uint32(),
-     *          second: float(),
-     *          }),
-     *      member4 : double(),
-     *    })
-     * @endcode
-     */
-    static QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng);
-    /** this constructor/initializer function takes 2 arguments and returns an array:<br>
-     *  -the first is an object of the type of the array (can also be a struct or a union or even another array)<br>
-     *  -the second is the length of the array<br>
-     */
-    static QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng);
-    /** this constructor takes one argument, the encoding of the string (as a string) */
-    static QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructors/initializer takes no parameters */
+QScriptValue scriptNewChar(QScriptContext* ctx, QScriptEngine* eng);
 
-    /** A toString() implementation for primitive types.
-     * <br>
-     *  If called with 1 argument returns a string containing the way this would be defined in C/C++<br>
-     *  <br>
-     *  Example would be: @code "uint16 foo;" @endcode
-     *  <br>
-     *  Otherwise just returns the primitive type, i.e. @code "int64" @endcode
-     */
-private:
-    //the toString functions
-    static QScriptValue primitiveToString(QScriptContext* ctx, QScriptEngine* eng);
-    /** A toString() implementation for bitfields
-     *
-     *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
-     *  <br>
-     *  Example would be: @code "unsigned foo : 3;" @endcode <br>
-     *  <br>
-     *  Otherwise returns for example "unsigned : 2" or "bool : 1" or "signed : 12".
-     */
-    static QScriptValue bitfieldToString(QScriptContext* ctx, QScriptEngine* eng);
-    /** A toString() implementation for arrays
-     *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
-     *  <br>
-     *  Example would be: @code "char foo[24];" @endcode<br>
-     *  <br>
-     *  Otherwise just returns type and length of the array, e.g. @c "uint8[12]"
-     */
-    static QScriptValue arrayToString(QScriptContext* ctx, QScriptEngine* eng);
-    /** A toString implementation for unions.
-     *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
-     *  Example would be:
-     *  @code
-     *  union foo {
-     *      int16 member1;
-     *      char member2;
-     *   };
-     *   @endcode
-     *   <br>
-     *   Otherwise just returns the type, which is @c "union"
-     */
-    static QScriptValue unionToString(QScriptContext* ctx, QScriptEngine* eng);
-    /** A toString implementation for structs.
-     *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
-     *  Example would be:<br>
-     *  @code
-     *  "struct foo {
-     *      int16 member1;
-     *      char member2;
-     *   };"
-     *   @endcode
-     *   <br>
-     *   Otherwise just returns the type, which is @c "struct"
-     */
-    static QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng);
-    static QScriptValue enumToString(QScriptContext* ctx, QScriptEngine* eng);
-    static QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng);
-private:
-    static QScriptValue primitiveConstructor(QScriptContext* ctx,
-            QScriptEngine* eng, const QLatin1String type);
+/** this script constructor/initializer function takes 2 arguments:
+ *  <br>
+ *  -the first is the type of the bitfield: "signed", "bool" or "unsigned"<br>
+ *  -the second is the width (in bits) of the bitfield)
+ */
+QScriptValue scriptNewBitfield(QScriptContext* ctx, QScriptEngine* eng);
 
-    static QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructor/initializer function takes 1 argument and returns a struct object:<br>
+ * an object (hierarchy), which represents the children.<br>
+ * An example would be:
+ * @code
+ * var obj = struct({
+ *      member1 : uint8(),
+ *      member2 : int32(),
+ *      member3 : union({
+ *          first : uint32(),
+ *          second: float(),
+ *          }),
+ *      member4 : double(),
+ *    })
+ * @endcode
+ */
+QScriptValue scriptNewStruct(QScriptContext* ctx, QScriptEngine* eng);
+/** this script constructor/initializer function takes 1 argument and returns a union object:<br>
+ * an object (hierarchy), which represents the children.<br>
+ * An example would be:
+ * @code
+ * var obj = union({
+ *      member1 : uint8(),
+ *      member2 : int32(),
+ *      member3 : struct({
+ *          first : uint32(),
+ *          second: float(),
+ *          }),
+ *      member4 : double(),
+ *    })
+ * @endcode
+ */
+QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng);
+/** this constructor/initializer function takes 2 arguments and returns an array:<br>
+ *  -the first is an object of the type of the array (can also be a struct or a union or even another array)<br>
+ *  -the second is the length of the array<br>
+ */
+QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng);
+/** this constructor takes one argument, the encoding of the string (as a string) */
+QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
 
-    static QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);
-    static QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine* eng);
+/** A toString() implementation for primitive types.
+ * <br>
+ *  If called with 1 argument returns a string containing the way this would be defined in C/C++<br>
+ *  <br>
+ *  Example would be: @code "uint16 foo;" @endcode
+ *  <br>
+ *  Otherwise just returns the primitive type, i.e. @code "int64" @endcode
+ */
 
-    static const QString typePropertyString;
-    static const QString toStringPropertyString;
-    static const QString setValidationPropertyString;
-    static const QString setUpdatePropertyString;
-};
+//the toString functions
+QScriptValue primitiveToString(QScriptContext* ctx, QScriptEngine* eng);
+/** A toString() implementation for bitfields
+ *
+ *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
+ *  <br>
+ *  Example would be: @code "unsigned foo : 3;" @endcode <br>
+ *  <br>
+ *  Otherwise returns for example "unsigned : 2" or "bool : 1" or "signed : 12".
+ */
+QScriptValue bitfieldToString(QScriptContext* ctx, QScriptEngine* eng);
+/** A toString() implementation for arrays
+ *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
+ *  <br>
+ *  Example would be: @code "char foo[24];" @endcode<br>
+ *  <br>
+ *  Otherwise just returns type and length of the array, e.g. @c "uint8[12]"
+ */
+QScriptValue arrayToString(QScriptContext* ctx, QScriptEngine* eng);
+/** A toString implementation for unions.
+ *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
+ *  Example would be:
+ *  @code
+ *  union foo {
+ *      int16 member1;
+ *      char member2;
+ *   };
+ *   @endcode
+ *   <br>
+ *   Otherwise just returns the type, which is @c "union"
+ */
+QScriptValue unionToString(QScriptContext* ctx, QScriptEngine* eng);
+/** A toString implementation for structs.
+ *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
+ *  Example would be:<br>
+ *  @code
+ *  "struct foo {
+ *      int16 member1;
+ *      char member2;
+ *   };"
+ *   @endcode
+ *   <br>
+ *   Otherwise just returns the type, which is @c "struct"
+ */
+QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng);
+QScriptValue enumToString(QScriptContext* ctx, QScriptEngine* eng);
+QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng);
+
+QScriptValue primitiveConstructor(QScriptContext* ctx,
+        QScriptEngine* eng, const QLatin1String type);
+
+QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
+
+QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);
+QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine* eng);
+}
+
+}
 
 #endif /* SCRIPTENGINEINITIALIZER_H_ */

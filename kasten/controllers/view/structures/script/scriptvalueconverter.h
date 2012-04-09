@@ -36,6 +36,6 @@ namespace ScriptValueConverter
     DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger);
     /** If the value is a list of elements or an object with many elements */
     QVector<DataInformation*> convertValues(QScriptValue& value, ScriptLogger* logger);
-};
+}
 
 #endif /* SCRIPTVALUECONVERTER_H_ */

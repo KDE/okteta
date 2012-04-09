@@ -30,14 +30,75 @@
 
 #include <KDebug>
 
-const QString ScriptEngineInitializer::typePropertyString = QLatin1String("type");
-const QString ScriptEngineInitializer::toStringPropertyString = QLatin1String("toString");
-const QString ScriptEngineInitializer::setUpdatePropertyString = QLatin1String("setUpdate");
-const QString ScriptEngineInitializer::setValidationPropertyString = QLatin1String("setValidation");
+namespace ScriptEngineInitializer
+{
+
+void addFuctionsToScriptEngine(QScriptEngine& engine)
+{
+    engine.globalObject().setProperty(QLatin1String("uint8"),
+            engine.newFunction(Private::scriptNewUInt8));
+    engine.globalObject().setProperty(QLatin1String("uint16"),
+            engine.newFunction(Private::scriptNewUInt16));
+    engine.globalObject().setProperty(QLatin1String("uint32"),
+            engine.newFunction(Private::scriptNewUInt32));
+    engine.globalObject().setProperty(QLatin1String("uint64"),
+            engine.newFunction(Private::scriptNewUInt64));
+
+    engine.globalObject().setProperty(QLatin1String("int8"),
+            engine.newFunction(Private::scriptNewInt8));
+    engine.globalObject().setProperty(QLatin1String("int16"),
+            engine.newFunction(Private::scriptNewInt16));
+    engine.globalObject().setProperty(QLatin1String("int32"),
+            engine.newFunction(Private::scriptNewInt32));
+    engine.globalObject().setProperty(QLatin1String("int64"),
+            engine.newFunction(Private::scriptNewInt64));
+
+    engine.globalObject().setProperty(QLatin1String("bool8"),
+            engine.newFunction(Private::scriptNewBool8));
+    engine.globalObject().setProperty(QLatin1String("bool16"),
+            engine.newFunction(Private::scriptNewBool16));
+    engine.globalObject().setProperty(QLatin1String("bool32"),
+            engine.newFunction(Private::scriptNewBool32));
+    engine.globalObject().setProperty(QLatin1String("bool64"),
+            engine.newFunction(Private::scriptNewBool64));
+
+    engine.globalObject().setProperty(QLatin1String("float"),
+            engine.newFunction(Private::scriptNewFloat));
+    engine.globalObject().setProperty(QLatin1String("double"),
+            engine.newFunction(Private::scriptNewDouble));
+
+    engine.globalObject().setProperty(QLatin1String("char"),
+            engine.newFunction(Private::scriptNewChar));
+
+    engine.globalObject().setProperty(QLatin1String("bitfield"),
+            engine.newFunction(Private::scriptNewBitfield));
+
+    engine.globalObject().setProperty(QLatin1String("array"),
+            engine.newFunction(Private::scriptNewArray));
+    engine.globalObject().setProperty(QLatin1String("struct"),
+            engine.newFunction(Private::scriptNewStruct));
+    engine.globalObject().setProperty(QLatin1String("union"),
+            engine.newFunction(Private::scriptNewUnion));
+
+    //if I use enum QtScript gives me syntax errors, I thought enum was not a keyword in JS
+    engine.globalObject().setProperty(QLatin1String("enumeration"),
+            engine.newFunction(Private::scriptNewEnum));
+    engine.globalObject().setProperty(QLatin1String("flags"),
+            engine.newFunction(Private::scriptNewFlags));
+    engine.globalObject().setProperty(QLatin1String("string"),
+            engine.newFunction(Private::scriptNewString));
+}
+
+namespace Private
+{
+
+static const QString typePropertyString = QLatin1String("type");
+static const QString toStringPropertyString = QLatin1String("toString");
+static const QString setUpdatePropertyString = QLatin1String("setUpdate");
+static const QString setValidationPropertyString = QLatin1String("setValidation");
 
 /** create a new primitive of type @p type */
-QScriptValue ScriptEngineInitializer::primitiveConstructor(QScriptContext* ctx,
-        QScriptEngine* eng, const QLatin1String type)
+QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const QLatin1String type)
 {
     QScriptValue object;
     if (ctx->isCalledAsConstructor())
@@ -52,88 +113,82 @@ QScriptValue ScriptEngineInitializer::primitiveConstructor(QScriptContext* ctx,
     return object;
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewUInt8(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewUInt8(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("UInt8"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewUInt16(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewUInt16(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("UInt16"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewUInt32(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewUInt32(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("UInt32"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewUInt64(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewUInt64(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("UInt64"));
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewInt8(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewInt8(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Int8"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewInt16(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewInt16(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Int16"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewInt32(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewInt32(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Int32"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewInt64(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewInt64(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Int64"));
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewBool8(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewBool8(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Bool8"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewBool16(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewBool16(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Bool16"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewBool32(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewBool32(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Bool32"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewBool64(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewBool64(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Bool64"));
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewFloat(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewFloat(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Float"));
 }
-QScriptValue ScriptEngineInitializer::scriptNewDouble(QScriptContext* ctx,
-        QScriptEngine* eng)
+
+QScriptValue scriptNewDouble(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Double"));
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewChar(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewChar(QScriptContext* ctx, QScriptEngine* eng)
 {
     return primitiveConstructor(ctx, eng, QLatin1String("Char"));
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewBitfield(QScriptContext* ctx, QScriptEngine* eng)
 {
     //arg1 is type
     //arg2 is width
@@ -144,11 +199,12 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
         return ctx->throwError(QScriptContext::TypeError,
                 QLatin1String("bitfield(): second argument is not a number"));
     QString typeArg = ctx->argument(0).toString();
-    if (typeArg != QLatin1String("bool") && typeArg != QLatin1String("unsigned") && typeArg != QLatin1String("signed")
-            && !typeArg.isEmpty())
+    if (typeArg != QLatin1String("bool") && typeArg != QLatin1String("unsigned")
+            && typeArg != QLatin1String("signed"))
+    {
         return ctx->throwError(QLatin1String("type must be 'bool', 'unsigned' 'signed'"
-            " or '', actual value was '") + typeArg + QLatin1Char('\''));
-
+                " or '', actual value was '") + typeArg + QLatin1Char('\''));
+    }
     //all arguments are valid
     QScriptValue object;
     if (ctx->isCalledAsConstructor())
@@ -159,7 +215,7 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
     object.setProperty(typePropertyString, QLatin1String("bitfield"));
     //has been validated, so it must contain valid values
     object.setProperty(QLatin1String("bitfieldType"),
-                       typeArg.isEmpty() ? QLatin1String("signed") : typeArg);
+            typeArg.isEmpty() ? QLatin1String("signed") : typeArg);
     object.setProperty(QLatin1String("width"), ctx->argument(1));
     object.setProperty(toStringPropertyString, eng->newFunction(bitfieldToString));
     object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
@@ -169,8 +225,7 @@ QScriptValue ScriptEngineInitializer::scriptNewBitfield(QScriptContext* ctx,
 }
 
 //with children:
-QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewStruct(QScriptContext* ctx, QScriptEngine* eng)
 {
     //takes one argument, the children
     if (ctx->argumentCount() < 1)
@@ -197,8 +252,7 @@ QScriptValue ScriptEngineInitializer::scriptNewStruct(QScriptContext* ctx,
     return object;
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewUnion(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng)
 {
     //takes one argument, the children
     if (ctx->argumentCount() < 1)
@@ -225,8 +279,7 @@ QScriptValue ScriptEngineInitializer::scriptNewUnion(QScriptContext* ctx,
     return object;
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng)
 {
     //arg 1 is child type, arg2 is length
     if (ctx->argumentCount() < 2)
@@ -257,29 +310,30 @@ QScriptValue ScriptEngineInitializer::scriptNewArray(QScriptContext* ctx,
     return object;
 }
 
-QScriptValue ScriptEngineInitializer::createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags)
+QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags)
 {
     if (ctx->argumentCount() < 3)
-        return ctx->throwError(QLatin1String("enumeration initializer takes at least three arguments."));
+        return ctx->throwError(
+                QLatin1String("enumeration initializer takes at least three arguments."));
     QScriptValue name = ctx->argument(0);
     if (!name.isString())
         return ctx->throwError(QScriptContext::TypeError,
                 QLatin1String("enumeration(): enum name (argument 1) is not a string"));
 
     QScriptValue enumType = ctx->argument(1);
-    if (enumType.isString())
-        /* do nothing */;
-    else if (enumType.isObject())
+    if (!enumType.isString() && enumType.isObject())
         enumType = enumType.property(typePropertyString);
     else
         return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("enumeration(): enum type (argument 2) is not a valid string or object"));
+                QLatin1String(
+                        "enumeration(): enum type (argument 2) is not a valid string or object"));
 
     QString enumTypeString = enumType.toString();
     PrimitiveDataType pdt = PrimitiveFactory::typeStringToType(enumTypeString);
     if (pdt == Type_NotPrimitive || pdt == Type_Float || pdt == Type_Double)
-        return ctx->throwError(QLatin1String("enumeration(): enum type (argument 2) '") + enumTypeString
-                + QLatin1String("' is not a valid type"));
+        return ctx->throwError(
+                QLatin1String("enumeration(): enum type (argument 2) '") + enumTypeString
+                        + QLatin1String("' is not a valid type"));
 
     QScriptValue enumValues = ctx->argument(2);
     if (!enumValues.isObject())
@@ -308,17 +362,17 @@ QScriptValue ScriptEngineInitializer::createEnumObject(QScriptContext* ctx, QScr
     return object;
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng)
+QScriptValue scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng)
 {
     return createEnumObject(ctx, eng, false);
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewFlags(QScriptContext* ctx, QScriptEngine* eng)
+QScriptValue scriptNewFlags(QScriptContext* ctx, QScriptEngine* eng)
 {
     return createEnumObject(ctx, eng, true);
 }
 
-QScriptValue ScriptEngineInitializer::scriptNewString(QScriptContext* ctx, QScriptEngine* eng)
+QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng)
 {
     QString encoding;
     if (ctx->argumentCount() < 1)
@@ -341,9 +395,7 @@ QScriptValue ScriptEngineInitializer::scriptNewString(QScriptContext* ctx, QScri
 
 //toString functions
 
-
-QScriptValue ScriptEngineInitializer::primitiveToString(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue primitiveToString(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     QString type =
@@ -358,8 +410,7 @@ QScriptValue ScriptEngineInitializer::primitiveToString(QScriptContext* ctx,
         return type;
 }
 
-QScriptValue ScriptEngineInitializer::bitfieldToString(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue bitfieldToString(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     QString type = ctx->thisObject().property(QLatin1String("bitfieldType")).toString();
@@ -374,7 +425,7 @@ QScriptValue ScriptEngineInitializer::bitfieldToString(QScriptContext* ctx,
         return QString(type + QLatin1String(" : ") + width + QLatin1Char(';'));
 }
 
-QScriptValue ScriptEngineInitializer::arrayToString(QScriptContext* ctx, QScriptEngine* eng)
+QScriptValue arrayToString(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     QScriptValue thisObj = ctx->thisObject();
@@ -412,7 +463,7 @@ QScriptValue ScriptEngineInitializer::arrayToString(QScriptContext* ctx, QScript
         return QString::fromLatin1("%1[%2];").arg(type, length);
 }
 
-QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng)
+QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     QString type = ctx->thisObject().property(typePropertyString).toString(); // "union" or "struct"
@@ -451,8 +502,8 @@ QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* c
         //value is a union/struct  -> increase indentation level
         QString valType = val.property(typePropertyString).toString();
         if (valType == QLatin1String("union")
-            || valType == QLatin1String("struct")
-            || valType == QLatin1String("array"))
+                || valType == QLatin1String("struct")
+                || valType == QLatin1String("array"))
             arg << indentationLevel + 1;
 
         QString result = toString.call(val, arg).toString();
@@ -460,12 +511,11 @@ QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* c
     }
 
     completeString += QString(qMax(0, indentationLevel - 1), QLatin1Char('\t'))
-                              + QLatin1String("};");
+            + QLatin1String("};");
     return completeString;
 }
 
-QScriptValue ScriptEngineInitializer::unionToString(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue unionToString(QScriptContext* ctx, QScriptEngine* eng)
 {
     //arg1 is name, arg2 is indentation lvl (number of tabs needed)
     if (ctx->argumentCount() == 1 || ctx->argumentCount() == 2)
@@ -474,8 +524,7 @@ QScriptValue ScriptEngineInitializer::unionToString(QScriptContext* ctx,
         return QLatin1String("union");
 }
 
-QScriptValue ScriptEngineInitializer::structToString(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng)
 {
     //arg1 is name, arg2 is indentation lvl (number of tabs needed)
     if (ctx->argumentCount() == 1 || ctx->argumentCount() == 2)
@@ -484,8 +533,7 @@ QScriptValue ScriptEngineInitializer::structToString(QScriptContext* ctx,
         return QLatin1String("struct");
 }
 
-QScriptValue ScriptEngineInitializer::enumToString(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue enumToString(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     QString enumType = ctx->thisObject().property(QLatin1String("enumType")).toString();
@@ -495,7 +543,7 @@ QScriptValue ScriptEngineInitializer::enumToString(QScriptContext* ctx,
         //as c++
         QString name = ctx->argument(0).toString();
         return QString(enumName + QLatin1String(" /* ") + enumType + QLatin1String(" */ ")
-                       + name + QLatin1Char(';'));
+                + name + QLatin1Char(';'));
     }
     //otherwise we also list all values
     QString result = QLatin1String("enum ") + enumName + QLatin1String(":\n");
@@ -505,82 +553,57 @@ QScriptValue ScriptEngineInitializer::enumToString(QScriptContext* ctx,
     {
         iter.next();
         result.append(iter.name() + QLatin1String(" = ")
-                      + iter.value().toString() + QLatin1Char('\n'));
+                + iter.value().toString() + QLatin1Char('\n'));
     }
     return result;
 }
 
-QScriptValue ScriptEngineInitializer::getChild(QScriptContext* ctx, QScriptEngine* eng)
+QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng)
 {
     if (ctx->argumentCount() < 1)
-        return ctx->throwError(QLatin1String("child(): name of child must be passed as first parameter"));
+        return ctx->throwError(
+                QLatin1String("child(): name of child must be passed as first parameter"));
     QScriptValue name = ctx->argument(0);
-    QScriptValue ret = ctx->thisObject().property(QLatin1String("children")). property(name.toString());
+    QScriptValue ret = ctx->thisObject().property(QLatin1String("children")).property(
+            name.toString());
     if (ret.isValid())
         return ret;
     else
         return eng->undefinedValue();
 }
 
-QScriptValue ScriptEngineInitializer::addUpdateFunc(QScriptContext* ctx, QScriptEngine*)
+QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine*)
 {
     if (ctx->argumentCount() != 1)
         return ctx->throwError(QLatin1String("setUpdate(): needs one argument!"));
     QScriptValue thisObj = ctx->thisObject();
     Q_ASSERT(thisObj.isValid());
     QScriptValue func = ctx->argument(0);
-    if (!func.isFunction()) {
-        return ctx->throwError(QScriptContext::TypeError, QLatin1String("setUpdate(): argument must be a function!"));
+    if (!func.isFunction())
+    {
+        return ctx->throwError(QScriptContext::TypeError,
+                QLatin1String("setUpdate(): argument must be a function!"));
     }
     thisObj.setProperty(QLatin1String("updateFunc"), func);
     return thisObj;
 }
 
-QScriptValue ScriptEngineInitializer::addValidationFunc(QScriptContext* ctx, QScriptEngine*)
+QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine*)
 {
     if (ctx->argumentCount() != 1)
         return ctx->throwError(QLatin1String("setValidation(): needs one argument!"));
     QScriptValue thisObj = ctx->thisObject();
     Q_ASSERT(thisObj.isValid());
     QScriptValue func = ctx->argument(0);
-    if (!func.isFunction()) {
-        return ctx->throwError(QScriptContext::TypeError, QLatin1String("setValidation(): argument must be a function!"));
+    if (!func.isFunction())
+    {
+        return ctx->throwError(QScriptContext::TypeError,
+                QLatin1String("setValidation(): argument must be a function!"));
     }
     thisObj.setProperty(QLatin1String("validationFunc"), func);
     return thisObj;
 }
 
+} //namespace Private
 
-void ScriptEngineInitializer::addFuctionsToScriptEngine(QScriptEngine& engine)
-{
-    //TODO use the  prototype to set the toString function
-    engine.globalObject().setProperty(QLatin1String("uint8"), engine.newFunction(scriptNewUInt8));
-    engine.globalObject().setProperty(QLatin1String("uint16"), engine.newFunction(scriptNewUInt16));
-    engine.globalObject().setProperty(QLatin1String("uint32"), engine.newFunction(scriptNewUInt32));
-    engine.globalObject().setProperty(QLatin1String("uint64"), engine.newFunction(scriptNewUInt64));
-
-    engine.globalObject().setProperty(QLatin1String("int8"), engine.newFunction(scriptNewInt8));
-    engine.globalObject().setProperty(QLatin1String("int16"), engine.newFunction(scriptNewInt16));
-    engine.globalObject().setProperty(QLatin1String("int32"), engine.newFunction(scriptNewInt32));
-    engine.globalObject().setProperty(QLatin1String("int64"), engine.newFunction(scriptNewInt64));
-
-    engine.globalObject().setProperty(QLatin1String("bool8"), engine.newFunction(scriptNewBool8));
-    engine.globalObject().setProperty(QLatin1String("bool16"), engine.newFunction(scriptNewBool16));
-    engine.globalObject().setProperty(QLatin1String("bool32"), engine.newFunction(scriptNewBool32));
-    engine.globalObject().setProperty(QLatin1String("bool64"), engine.newFunction(scriptNewBool64));
-
-    engine.globalObject().setProperty(QLatin1String("float"), engine.newFunction(scriptNewFloat));
-    engine.globalObject().setProperty(QLatin1String("double"), engine.newFunction(scriptNewDouble));
-
-    engine.globalObject().setProperty(QLatin1String("char"), engine.newFunction(scriptNewChar));
-
-    engine.globalObject().setProperty(QLatin1String("bitfield"), engine.newFunction(scriptNewBitfield));
-
-    engine.globalObject().setProperty(QLatin1String("array"), engine.newFunction(scriptNewArray));
-    engine.globalObject().setProperty(QLatin1String("struct"), engine.newFunction(scriptNewStruct));
-    engine.globalObject().setProperty(QLatin1String("union"), engine.newFunction(scriptNewUnion));
-    //XXX: if I use enunm QtScript gives me syntax errors, I thought enum was not a keyword in JS
-    engine.globalObject().setProperty(QLatin1String("enumeration"), engine.newFunction(scriptNewEnum));
-    engine.globalObject().setProperty(QLatin1String("flags"), engine.newFunction(scriptNewFlags));
-    engine.globalObject().setProperty(QLatin1String("string"), engine.newFunction(scriptNewString));
-}
+} //namespace ScriptEngine Initializer
