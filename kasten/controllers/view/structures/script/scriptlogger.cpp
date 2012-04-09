@@ -47,7 +47,7 @@ QVariant ScriptLogger::data(const QModelIndex & index, int role) const
 }
 
 int ScriptLogger::rowCount(const QModelIndex& parent) const
-        {
+{
     Q_UNUSED(parent)
     return mData.size();
 }
@@ -70,4 +70,21 @@ void ScriptLogger::log(LogLevel level, const QString& message, const QScriptValu
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
     mData.append(data);
     endInsertRows();
+}
+
+void ScriptLogger::clear()
+{
+    beginRemoveRows(QModelIndex(), 0, qMax(0, mData.size() - 1));
+    mData.clear();
+    endRemoveRows();
+}
+
+QStringList ScriptLogger::messages() const
+{
+    QStringList ret;
+    for (int i = 0; i < mData.size(); ++i)
+    {
+        ret << mData.at(i).message;
+    }
+    return ret;
 }

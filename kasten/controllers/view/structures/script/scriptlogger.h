@@ -51,7 +51,9 @@ public:
     void error(const QString& message, const QStringList& backtrace,
             const QScriptValue& cause = QScriptValue());
     void log(LogLevel level, const QString& message, const QScriptValue& cause);
-
+    void clear();
+    /** @return all the messages, mainly used for testing */
+    QStringList messages() const;
 private:
     QVector<Data> mData;
 };

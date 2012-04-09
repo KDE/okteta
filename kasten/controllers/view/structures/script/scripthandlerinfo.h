@@ -32,10 +32,11 @@ class ArrayScriptClass;
 class PrimitiveScriptClass;
 class StringScriptClass;
 class BitfieldScriptClass;
+class QScriptEngine;
 
 class ScriptHandlerInfo {
 public:
-    ScriptHandlerInfo();
+    explicit ScriptHandlerInfo(QScriptEngine* engine);
     ~ScriptHandlerInfo();
     QScopedPointer<ArrayScriptClass> mArrayClass;
     QScopedPointer<PrimitiveScriptClass> mPrimitiveClass;

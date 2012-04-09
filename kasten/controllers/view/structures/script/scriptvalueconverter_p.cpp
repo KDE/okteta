@@ -46,21 +46,67 @@
 namespace ScriptValueConverter
 {
 
-DataInformation* toDataInformation(const QScriptValue& value, const QString& passedName, ScriptLogger* logger)
+DataInformation* toDataInformation(const QScriptValue& value, const QString& passedName,
+        ScriptLogger* logger)
 {
+    //check function array and date, since they are objects too
+    if (value.isRegExp())
+    {
+        //apparently regexp is a function
+        logger->error(QLatin1String("Cannot convert a RegExp object to DataInformation!"), value);
+        return 0;
+    }
+    if (value.isFunction())
+    {
+        logger->error(QLatin1String("Cannot convert a Function object to DataInformation!"), value);
+        return 0;
+    }
+    if (value.isArray())
+    {
+        logger->error(QLatin1String("Cannot convert an Array object to DataInformation!"), value);
+        return 0;
+    }
+    if (value.isDate())
+    {
+        logger->error(QLatin1String("Cannot convert a Date object to DataInformation!"), value);
+        return 0;
+    }
+    if (value.isError())
+    {
+        logger->error(QLatin1String("Cannot convert a Error object to DataInformation!"), value);
+        return 0;
+    }
+    //variant and qobject are also object types, however they cannot appear from user code, no need to check
+
     const QString name = passedName.isEmpty() ? i18n("<no name specified>") : passedName;
     DataInformation* returnVal;
+    //if it is a string, we convert to primitive type, if not it has to be an object
     if (value.isString())
         return toPrimitive(value, name, logger); //a type string is also okay
 
     if (!value.isObject())
     {
-        logger->error(QLatin1String("Cannot convert value since it is neither object nor string!"), value);
+        if (value.isBool())
+            logger->error(QLatin1String("Cannot convert Boolean to DataInformation!"), value);
+        else if (value.isNull())
+            logger->error(QLatin1String("Cannot convert null to DataInformation!"), value);
+        else if (value.isUndefined())
+            logger->error(QLatin1String("Cannot convert undefined to DataInformation!"), value);
+        else if (value.isNumber())
+            logger->error(QLatin1String("Cannot convert Number to DataInformation!"), value);
+        else
+            logger->error(QLatin1String("Cannot convert object of unknown type "
+                    "to DataInformation!"), value);
         return 0; //no point trying to convert
     }
 
     QString type = value.property(QLatin1String("type")).toString().toLower(); //to lower just to be safe
-
+    if (type.isEmpty())
+    {
+        logger->error(QLatin1String(
+                "Cannot convert a object since type of object could not be determined!"), value);
+        return 0;
+    }
     if (type == QLatin1String("array"))
         returnVal = toArray(value, name, logger);
 
@@ -111,13 +157,14 @@ DataInformation* toDataInformation(const QScriptValue& value, const QString& pas
     return returnVal;
 }
 
-ArrayDataInformation * toArray(const QScriptValue& value, const QString& name, ScriptLogger* logger)
+ArrayDataInformation* toArray(const QScriptValue& value, const QString& name, ScriptLogger* logger)
 {
     //we can safely assume that type == "array"
     int length = value.property(QLatin1String("length")).toInt32();
     if (length < 0)
     {
-        logger->error(QLatin1String("array length is less than 0: ") + QString::number(length), value);
+        logger->error(QLatin1String("array length is less than 0: ") + QString::number(length),
+                value);
         return 0;
     }
     QScriptValue childType = value.property(QLatin1String("childType"));
@@ -130,13 +177,16 @@ ArrayDataInformation * toArray(const QScriptValue& value, const QString& name, S
     return new ArrayDataInformation(name, length, arrayType);
 }
 
-AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const QString& name, ScriptLogger* logger)
+AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const QString& name,
+        ScriptLogger* logger)
 {
     //we can safely assume that type == "bitfield"
     int width = value.property(QLatin1String("width")).toInt32();
     if (width < 0 || width > 64)
     {
-        logger->error(QLatin1String("bitfield width is outside of range 1-64: ") + QString::number(width), value);
+        logger->error(
+                QLatin1String("bitfield width is outside of range 1-64: ") + QString::number(width),
+                value);
         return 0;
     }
     QString bitfieldType = value.property(QLatin1String("bitfieldType")).toString();
@@ -154,11 +204,15 @@ AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const QSt
     return 0;
 }
 
-PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const QString& name, ScriptLogger* logger)
+PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const QString& name,
+        ScriptLogger* logger)
 {
-    QString typeString = value.isString() ? value.toString() : value.property(QLatin1String("type")).toString();
-    if (typeString.isEmpty()) {
-        logger->error(QLatin1String("Invalid object passed, cannot convert it to primitive"), value);
+    QString typeString =
+            value.isString() ? value.toString() : value.property(QLatin1String("type")).toString();
+    if (typeString.isEmpty())
+    {
+        logger->error(QLatin1String("Invalid object passed, cannot convert it to primitive"),
+                value);
         return 0;
     }
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
@@ -171,13 +225,16 @@ PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const QString& 
     return PrimitiveFactory::newInstance(name, primitiveType);
 }
 
-StructureDataInformation* toStruct(const QScriptValue& value, const QString& name, ScriptLogger* logger)
+StructureDataInformation* toStruct(const QScriptValue& value, const QString& name,
+        ScriptLogger* logger)
 {
     QScriptValue valueChildren = value.property(QLatin1String("children"));
     QVector<DataInformation*> fields = convertValues(valueChildren, logger);
 
     if (fields.isEmpty())
-        logger->info(QLatin1String("No children were found for struct, this is probably a mistake."), valueChildren);
+        logger->info(
+                QLatin1String("No children were found for struct, this is probably a mistake."),
+                valueChildren);
 
     StructureDataInformation* structData = new StructureDataInformation(name, fields);
     return structData;
@@ -189,13 +246,15 @@ UnionDataInformation* toUnion(const QScriptValue& value, const QString& name, Sc
     QVector<DataInformation*> fields = convertValues(valueChildren, logger);
 
     if (fields.isEmpty())
-        logger->info(QLatin1String("No children were found for union, this is probably a mistake."), valueChildren);
+        logger->info(QLatin1String("No children were found for union, this is probably a mistake."),
+                valueChildren);
 
     UnionDataInformation* unionData = new UnionDataInformation(name, fields);
     return unionData;
 }
 
-AbstractEnumDataInformation* toEnum(const QScriptValue& value, const QString& name, bool flags, ScriptLogger* logger)
+AbstractEnumDataInformation* toEnum(const QScriptValue& value, const QString& name, bool flags,
+        ScriptLogger* logger)
 {
     //TODO also allow bitfields
     QScriptValue typeProperty = value.property(QLatin1String("enumType"));
@@ -203,7 +262,8 @@ AbstractEnumDataInformation* toEnum(const QScriptValue& value, const QString& na
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
     if (primitiveType == Type_NotPrimitive)
     {
-        logger->warn(QLatin1String("Could not convert variable to primitve type identifier!"), typeProperty);
+        logger->warn(QLatin1String("Could not convert variable to primitve type identifier!"),
+                typeProperty);
         return 0;
     }
     QScriptValue enumValuesObj = value.property(QLatin1String("enumValues"));
@@ -228,7 +288,8 @@ AbstractEnumDataInformation* toEnum(const QScriptValue& value, const QString& na
         return new EnumDataInformation(name, primData, def);
 }
 
-StringDataInformation* toString(const QScriptValue& value, const QString& name, ScriptLogger* logger)
+StringDataInformation* toString(const QScriptValue& value, const QString& name,
+        ScriptLogger* logger)
 {
     //TODO check for bad parameters
     const QScriptValue terminatedBy = value.property(QLatin1String("terminatedBy"));

@@ -28,7 +28,14 @@
 #include "classes/enumscriptclass.h"
 #include "classes/bitfieldscriptclass.h"
 
-ScriptHandlerInfo::ScriptHandlerInfo() {
+ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine)
+    : mArrayClass(new ArrayScriptClass(engine, this)),
+      mPrimitiveClass(new PrimitiveScriptClass(engine, this)),
+      mEnumClass(new EnumScriptClass(engine, this)),
+      mBitfieldClass(new BitfieldScriptClass(engine, this)),
+      mStructUnionClass(new StructUnionScriptClass(engine, this)),
+      mStringClass(new StringScriptClass(engine, this))
+{
 }
 
 ScriptHandlerInfo::~ScriptHandlerInfo()

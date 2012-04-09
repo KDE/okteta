@@ -41,24 +41,131 @@ private Q_SLOTS:
     void testPrimitives();
     void testPrimitives_data();
     void testParseEnum();
+    void basicConverterTest();
     void testParseEnum_data();
 
 private:
-    DataInformation* evaluate(QString code);
+    DataInformation* convert(const QString& code);
+    DataInformation* convert(const QScriptValue& value);
+    QScriptValue evaluate(const char* code);
+    void dumpLoggerOutput();
     QScriptEngine engine;
     QScopedPointer<ScriptLogger> logger;
 };
 
-DataInformation* ScriptValueConverterTest::evaluate(QString code)
+DataInformation* ScriptValueConverterTest::convert(const QString& code)
 {
     QScriptValue value = engine.evaluate(code);
     return ScriptValueConverter::convert(value, QLatin1String("value"), logger.data());
+}
+
+DataInformation* ScriptValueConverterTest::convert(const QScriptValue& value)
+{
+    return ScriptValueConverter::convert(value, QLatin1String("value"), logger.data());
+}
+
+QScriptValue ScriptValueConverterTest::evaluate(const char* code)
+{
+    return engine.evaluate(QString::fromUtf8(code));
 }
 
 void ScriptValueConverterTest::initTestCase()
 {
     ScriptEngineInitializer::addFuctionsToScriptEngine(engine);
     logger.reset(new ScriptLogger());
+}
+
+void ScriptValueConverterTest::basicConverterTest()
+{
+    logger->clear();
+    //check that passing functions works
+    QScriptValue sVal = evaluate("var foo = { value : uint8(),\n"
+            " str : struct({first : uint8(), second : uint16()}),\n"
+            " obj : array(uint32(), 10) \n}\n foo");
+    QVector<DataInformation*> converted = ScriptValueConverter::convertValues(sVal, logger.data());
+    QCOMPARE(converted.size(), 3);
+    QVERIFY(converted[0]->isPrimitive());
+    QCOMPARE(converted[0]->name(), QLatin1String("value"));
+    QVERIFY(converted[1]->isStruct());
+    QCOMPARE(converted[1]->name(), QLatin1String("str"));
+    QCOMPARE(converted[1]->childCount(), 2u);
+    QVERIFY(converted[2]->isArray());
+    QCOMPARE(converted[2]->name(), QLatin1String("obj"));
+    QCOMPARE(converted[2]->childCount(), 10u);
+
+    //test with an array now
+    sVal = evaluate("var foo = [uint8(), uint16(), uint32()]; foo");
+    converted = ScriptValueConverter::convertValues(sVal, logger.data());
+    QCOMPARE(converted.size(), 3);
+    QVERIFY(converted[0]->isPrimitive());
+    QVERIFY(converted[1]->isPrimitive());
+    QVERIFY(converted[2]->isPrimitive());
+    QVERIFY(converted[0]->asPrimitive()->type() == Type_UInt8);
+    QVERIFY(converted[1]->asPrimitive()->type() == Type_UInt16);
+    QVERIFY(converted[2]->asPrimitive()->type() == Type_UInt32);
+    QCOMPARE(converted[0]->name(), QLatin1String("0"));
+    QCOMPARE(converted[1]->name(), QLatin1String("1"));
+    QCOMPARE(converted[2]->name(), QLatin1String("2"));
+
+    //check number is not a valid object
+    sVal = evaluate("1 + 2");
+    QVERIFY(sVal.isNumber());
+    QVERIFY2(!convert(sVal), " numbers should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 1);
+
+    //should be exactly 1 error message
+    sVal = evaluate("function foo() { return uint8(); }; foo");
+    QVERIFY(sVal.isFunction());
+    QVERIFY2(!convert(sVal), "functions should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 2);
+
+    //should be exactly 2 error messages
+    sVal = evaluate("var x = /.*/; x");
+    QVERIFY(sVal.isRegExp());
+    QVERIFY2(!convert(sVal), " regexp should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 3);
+
+    sVal = evaluate("var obj = { x : 1 }; obj.x();");
+    QVERIFY(sVal.isError());
+    QVERIFY2(!convert(sVal), " error objects should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 4);
+
+    sVal = evaluate("var x = [1, 2, 3]; x");
+    QVERIFY(sVal.isArray());
+    QVERIFY2(!convert(sVal), " array objects should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 5);
+
+    sVal = evaluate("var x = new Date(); x");
+    QVERIFY(sVal.isDate());
+    QVERIFY2(!convert(sVal), " date objects should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 6);
+
+    sVal = evaluate("var x = true; x");
+    QVERIFY(sVal.isBool());
+    QVERIFY2(!convert(sVal), " bool objects should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 7);
+
+    sVal = evaluate("var x = null; x");
+    QVERIFY(sVal.isNull());
+    QVERIFY2(!convert(sVal), " null should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 8);
+
+    sVal = evaluate("var x = undefined; x");
+    QVERIFY(sVal.isUndefined());
+    QVERIFY2(!convert(sVal), " undefined should not be valid!");
+    QCOMPARE(logger->rowCount(QModelIndex()), 9);
+
+    //object with invalid entry
+    sVal = evaluate("var foo = { value : function() { return 1; },\n"
+            " str : struct({first : uint8(), second : uint16()}),\n"
+            " obj : array(uint32(), 10) \n}\n foo");
+    converted = ScriptValueConverter::convertValues(sVal, logger.data());
+    QCOMPARE(converted.size(), 2);
+    //first entry is invalid
+    QCOMPARE(logger->rowCount(QModelIndex()), 11);
+    //this should cause 2 error messages -> 11 now
+    qDebug() << logger->messages();
+
 }
 
 void ScriptValueConverterTest::testPrimitives_data()
@@ -96,6 +203,7 @@ void ScriptValueConverterTest::testPrimitives()
     QFETCH(QString, code2);
     QFETCH(QString, typeString);
     QFETCH(int, expectedType);
+    logger->clear();
     PrimitiveDataType type = (PrimitiveDataType) expectedType;
 
     QScriptValue val1 = engine.evaluate(code);
@@ -118,7 +226,7 @@ void ScriptValueConverterTest::testPrimitives()
     QCOMPARE(p2->type(), type);
     if (type == Type_Bitfield)
         return; //the following tests don't work with bitfields
-    DataInformation* data3 = evaluate(QString(QLatin1String("\"%1\"")).arg(typeString));
+    DataInformation* data3 = convert(QString(QLatin1String("\"%1\"")).arg(typeString));
     QVERIFY(data3);
     PrimitiveDataInformation* p3 = dynamic_cast<PrimitiveDataInformation*>(data3);
     QVERIFY(p3);

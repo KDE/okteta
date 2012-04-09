@@ -31,45 +31,34 @@
 #include <QScriptEngine>
 #include <QScriptValueIterator>
 
-namespace ScriptValueConverter {
+namespace ScriptValueConverter
+{
 
 DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger)
 {
-    QScriptValue evaluatedVal;
-    if (value.isFunction())
-    {
-        QScriptValue thisObj = value.engine()->newObject();
-        QScriptValueList args;
-        QScriptValue copy = value;
-        evaluatedVal = copy.call(thisObj, args);
-    }
-    else if (value.isObject() || value.isString())
-    {
-        //this must be checked second since any function is also an object
-        evaluatedVal = value;
-    }
-    else
-    {
-       logger->warn(QLatin1String("Value to convert is neither function, nor object nor string"
-               " -> cannot convert it!"), value);
-        return 0;
-    }
-    return toDataInformation(evaluatedVal, name, logger); //could be NULL
+    return toDataInformation(value, name, logger); //could be NULL
 }
 
-QVector<DataInformation*> convertValues(QScriptValue& value, ScriptLogger* logger)
+QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger)
 {
     QVector<DataInformation*> ret;
     QScriptValueIterator it(value);
+    const bool isArray = value.isArray();
     while (it.hasNext())
     {
         it.next();
+        if (isArray && it.name() == QLatin1String("length"))
+            continue; //skip the length property of arrays
         DataInformation* inf = toDataInformation(it.value(), it.name(), logger);
         if (inf)
+        {
             ret.append(inf);
+        }
         else
-           logger->info(QString(QLatin1String("Could not convert property '%1' of '%2'."))
-                        .arg(it.name(), it.value().toString()), it.value());
+        {
+            logger->info(QString(QLatin1String("Could not convert property '%1'."))
+                    .arg(it.name()), it.value());
+        }
     }
     return ret;
 }

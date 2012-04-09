@@ -44,20 +44,14 @@
 
 #include <KDebug>
 
-ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString name) :
-    mEngine(engine), mFile(scriptFile), mName(name), mLogger(new ScriptLogger())
+ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString name)
+        : mEngine(engine), mFile(scriptFile), mName(name), mLogger(new ScriptLogger()),
+                mHandlerInfo(engine)
 #ifdef OKTETA_DEBUG_SCRIPT
 , mDebugger(new QScriptEngineDebugger())
 #endif
 {
     ScriptEngineInitializer::addFuctionsToScriptEngine(*mEngine);
-
-    mHandlerInfo.mArrayClass.reset(new ArrayScriptClass(mEngine.data(), &mHandlerInfo));
-    mHandlerInfo.mPrimitiveClass.reset(new PrimitiveScriptClass(mEngine.data(), &mHandlerInfo));
-    mHandlerInfo.mEnumClass.reset(new EnumScriptClass(mEngine.data(), &mHandlerInfo));
-    mHandlerInfo.mBitfieldClass.reset(new BitfieldScriptClass(mEngine.data(), &mHandlerInfo));
-    mHandlerInfo.mStructUnionClass.reset(new StructUnionScriptClass(mEngine.data(), &mHandlerInfo));
-    mHandlerInfo.mStringClass.reset(new StringScriptClass(mEngine.data(), &mHandlerInfo));
 
     if (!scriptFile.isEmpty())
         loadFile();
@@ -86,7 +80,8 @@ bool ScriptHandler::loadFile()
 
     if (mEngine->hasUncaughtException())
     {
-        mLogger->error(QLatin1String("Intial evaluation caused exception!"), mEngine->uncaughtExceptionBacktrace());
+        mLogger->error(QLatin1String("Intial evaluation caused exception!"),
+                mEngine->uncaughtExceptionBacktrace());
         return false;
     }
     return true;
@@ -96,8 +91,20 @@ DataInformation* ScriptHandler::initialDataInformationFromScript()
 {
     QScriptValue obj = mEngine->globalObject();
     QScriptValue initMethod = obj.property(QLatin1String("init"));
-
-    DataInformation* ret = ScriptValueConverter::convert(initMethod, mName, logger());
+    if (!initMethod.isFunction())
+    {
+        mLogger->error(QLatin1String("Script has no init function! Cannot evaluate script!"));
+        return 0;
+    }
+    QScriptValue thisObj = mEngine->newObject();
+    QScriptValueList args;
+    QScriptValue result = initMethod.call(thisObj, args);
+    if (result.isError())
+    {
+        mLogger->error(QLatin1String("error occurred while calling init()"), result);
+        return 0;
+    }
+    DataInformation* ret = ScriptValueConverter::convert(result, mName, logger());
     return ret;
 }
 
@@ -134,7 +141,8 @@ void ScriptHandler::validateData(DataInformation* data)
 //         QScriptValue mainStruct = mEngine->newQObject(data->mainStructure(),
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
         QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
-        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(), &mHandlerInfo);
+        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(),
+                &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
         QScriptValue result = additionalData->validationFunction().call(thisObject, args);
@@ -181,7 +189,8 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
 //         QScriptValue mainStruct = mEngine->newQObject(data->mainStructure(),
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
         QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
-        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(), &mHandlerInfo);
+        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(),
+                &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
         QScriptValue result = additionalData->updateFunction().call(thisObject, args);
