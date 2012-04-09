@@ -86,7 +86,7 @@ bool ScriptHandler::loadFile()
 
     if (mEngine->hasUncaughtException())
     {
-        ScriptUtils::object()->logScriptError(mEngine->uncaughtExceptionBacktrace());
+        mLogger->error(QLatin1String("Intial evaluation caused exception!"), mEngine->uncaughtExceptionBacktrace());
         return false;
     }
     return true;
@@ -98,8 +98,6 @@ DataInformation* ScriptHandler::initialDataInformationFromScript()
     QScriptValue initMethod = obj.property(QLatin1String("init"));
 
     DataInformation* ret = ScriptValueConverter::convert(initMethod, mName, logger());
-    if (!ret)
-        ScriptUtils::object()->logScriptError(QLatin1String("failed to parse object from file ") + mFile);
     return ret;
 }
 
@@ -142,15 +140,15 @@ void ScriptHandler::validateData(DataInformation* data)
         QScriptValue result = additionalData->validationFunction().call(thisObject, args);
         if (result.isError())
         {
-            ScriptUtils::object()->logScriptError(QLatin1String("error occurred while "
-                "validating element ") + data->name(), result);
+            mLogger->error(QLatin1String("error occurred while validating element ")
+                    + data->fullObjectPath(), result);
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
-        if (mEngine->hasUncaughtException())
+        else if (mEngine->hasUncaughtException())
         {
-            ScriptUtils::object()->logScriptError(
-                    mEngine->uncaughtExceptionBacktrace());
+            mLogger->error(QLatin1String("error occurred while validating element ")
+                    + data->fullObjectPath(), mEngine->uncaughtExceptionBacktrace(), result);
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
@@ -189,14 +187,13 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         QScriptValue result = additionalData->updateFunction().call(thisObject, args);
         if (result.isError())
         {
-            ScriptUtils::object()->logScriptError(QLatin1String("error occurred while "
-                "updating element ") + data->name(), result);
+            mLogger->error(QLatin1String("error occurred while updating element ")
+                    + data->fullObjectPath(), result);
         }
         if (mEngine->hasUncaughtException())
         {
-            ScriptUtils::object()->logScriptError(mEngine->uncaughtExceptionBacktrace());
-            ScriptUtils::object()->logScriptError(QLatin1String("error occurred while "
-                "updating element ") + data->name(), result);
+            mLogger->error(QLatin1String("error occurred while updating element ")
+                    + data->fullObjectPath(), mEngine->uncaughtExceptionBacktrace(), result);
         }
     }
 }

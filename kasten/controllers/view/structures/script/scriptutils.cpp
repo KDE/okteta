@@ -21,11 +21,15 @@
  */
 #include "scriptutils.h"
 
-#include <QtScript/QScriptValueIterator>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptString>
+#include <QScriptValueIterator>
+#include <QScriptValue>
+#include <QScriptString>
+#include <QScriptContext>
+#include <QScriptEngine>
+
 #include <KDebug>
 
+#include "../allprimitivetypes.h"
 
 QString ScriptUtils::qScriptValueToString(const QScriptValue& val)
 {
@@ -64,13 +68,6 @@ QString ScriptUtils::qScriptValueToString(const QScriptValue& val)
         }
     }
     return ret;
-}
-
-
-void ScriptUtils::dumpQScriptValue(const QScriptValue& val, const char* file, int line)
-{
-    kDebug() << "dumping called from: " << file << ":" << line;
-    kDebug() << "value was: " << qScriptValueToString(val);
 }
 
 void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& out,
@@ -146,21 +143,4 @@ QScriptValue ScriptUtils::allPrimitivesToString(QScriptContext* ctx,
     Q_UNUSED(eng)
     QString type = ctx->thisObject().property(QLatin1String("type")).toString();
     return ctx->thisObject().property(type).toString();
-}
-
-void ScriptUtils::logScriptError(const QString& message, QScriptValue errorObject)
-{
-    if (!errorObject.isError())
-    {
-        if (!message.isEmpty())
-            emit scriptError(message);
-    }
-    else
-        emit scriptError(message, errorObject.toString());
-    kDebug() << message << ": " << errorObject.toString();
-}
-K_GLOBAL_STATIC(ScriptUtils, scrObj)
-
-ScriptUtils* ScriptUtils::object() {
-    return scrObj;
 }

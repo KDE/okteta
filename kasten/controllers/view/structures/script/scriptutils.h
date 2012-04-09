@@ -23,52 +23,21 @@
 #ifndef SCRIPTUTILS_H_
 #define SCRIPTUTILS_H_
 
-#include <QtCore/QObject>
-#include <QtCore/QAtomicPointer>
-
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptContext>
-#include <QtScript/QScriptEngine>
 #include "../allprimitivetypes.h"
 
-#include <KGlobal>
+class QScriptValue;
+class QScriptContext;
+class QScriptEngine;
 
-class ScriptUtils: public QObject
+namespace ScriptUtils
 {
-Q_OBJECT
-public:
-    ScriptUtils(QObject* parent = NULL) :
-        QObject(parent)
-    {
-    }
-    ~ScriptUtils()
-    {
-    }
-    static ScriptUtils* object();
+    QString qScriptValueToString(const QScriptValue& val);
 
-    static void dumpQScriptValue(const QScriptValue& val, const char* file, int line);
-    static QString qScriptValueToString(const QScriptValue& val);
-
-    static void wrapAllPrimitiveTypes(QScriptValue& out, AllPrimitiveTypes allPrim,
+    void wrapAllPrimitiveTypes(QScriptValue& out, AllPrimitiveTypes allPrim,
             PrimitiveDataType actualType);
 
-    static QScriptValue allPrimitivesToString(QScriptContext* ctx, QScriptEngine* eng);
+    QScriptValue allPrimitivesToString(QScriptContext* ctx, QScriptEngine* eng);
 
-    void logScriptError(const QString& message, QScriptValue errorObject);
-    void logScriptError(const QString& message)
-    {
-        logScriptError(message, QScriptValue());
-    }
-    void logScriptError(QStringList errorMessages)
-    {
-        foreach(const QString& msg, errorMessages)
-            {
-                logScriptError(msg);
-            }
-    }
-signals:
-    void scriptError(QString msg, QString errToString = QString());
-public:
-};
+}
 
 #endif /* SCRIPTUTILS_H_ */

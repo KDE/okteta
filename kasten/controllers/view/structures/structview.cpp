@@ -44,9 +44,6 @@
 #include <KConfigDialog>
 #include <KPushButton>
 
-#ifdef OKTETA_DEBUG_SCRIPT
-#include <KTextEdit>
-#endif
 // Qt
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
@@ -129,14 +126,6 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
             SLOT(onCurrentRowChanged(QModelIndex,QModelIndex)));
 
     connect(mTool, SIGNAL(cursorIndexChanged()), SLOT(onCursorIndexChange()));
-
-    connect(ScriptUtils::object(), SIGNAL(scriptError(QString,QString)), this,
-            SLOT(logScriptError(QString,QString)));
-#ifdef OKTETA_DEBUG_SCRIPT
-    //TODO maybe not compile-time option but runtime option
-    mScriptErrors = new KTextEdit(this);
-    baseLayout->addWidget(mScriptErrors);
-#endif
 }
 
 void StructView::onCursorIndexChange()
@@ -244,19 +233,6 @@ void StructView::onCurrentRowChanged(const QModelIndex& current,
 
 StructView::~StructView()
 {
-}
-
-void StructView::logScriptError(QString msg, QString err)
-{
-#ifdef OKTETA_DEBUG_SCRIPT
-#warning "Script debugging is enabled"
-    //FIXME add the preferences
-    kWarning() << "Script error occurred:" << msg << "  " << err;
-    mScriptErrors->append(QTime::currentTime().toString() + QLatin1Char(':') + msg + QLatin1Char(' ') + err);
-#else
-    Q_UNUSED(msg)
-    Q_UNUSED(err)
-#endif
 }
 
 void StructView::lockCurrentStructure(bool lock)

@@ -375,8 +375,7 @@ QScriptValue ScriptEngineInitializer::bitfieldToString(QScriptContext* ctx,
         return QString(type + QLatin1String(" : ") + width + QLatin1Char(';'));
 }
 
-QScriptValue ScriptEngineInitializer::arrayToString(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue ScriptEngineInitializer::arrayToString(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     QScriptValue thisObj = ctx->thisObject();
@@ -414,8 +413,7 @@ QScriptValue ScriptEngineInitializer::arrayToString(QScriptContext* ctx,
         return QString::fromLatin1("%1[%2];").arg(type, length);
 }
 
-QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* ctx,
-        QScriptEngine* eng)
+QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     QString type = ctx->thisObject().property(typePropertyString).toString(); // "union" or "struct"
@@ -441,8 +439,7 @@ QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* c
         iter.next();
         QString name = iter.name();
         QScriptValue val = iter.value();
-        if (!val.isObject() || children.propertyFlags(name)
-                & QScriptValue::SkipInEnumeration)
+        if (!val.isObject())
             continue;
 
         QScriptValue toString = val.property(toStringPropertyString);
@@ -465,8 +462,6 @@ QScriptValue ScriptEngineInitializer::unionOrStructToCPPString(QScriptContext* c
 
     completeString += QString(qMax(0, indentationLevel - 1), QLatin1Char('\t'))
                               + QLatin1String("};");
-    if (eng->hasUncaughtException())
-        ScriptUtils::object()->logScriptError(eng->uncaughtExceptionBacktrace());
     return completeString;
 }
 

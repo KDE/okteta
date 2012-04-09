@@ -62,9 +62,6 @@ protected:
     StructViewItemDelegate* mDelegate;
     KPushButton* mLockStructureButton;
     QWidget* mStructTreeViewFocusChild;
-#ifdef OKTETA_DEBUG_SCRIPT
-    KTextEdit* mScriptErrors;
-#endif
 
 protected Q_SLOTS:
     void openSettingsDlg(int page = 0);
@@ -72,7 +69,6 @@ protected Q_SLOTS:
     void onCursorIndexChange();
     void lockCurrentStructure(bool lock);
     void setLockButtonStated(bool structureLocked);
-    void logScriptError(QString msg, QString err);
 };
 
 inline StructTool* StructView::tool() const
