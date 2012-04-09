@@ -30,6 +30,7 @@
 #include "datainformationbase.h"
 #include "../script/scripthandler.h"
 
+class ScriptLogger;
 class ScriptHandlerInfo;
 namespace Okteta
 {
@@ -84,6 +85,7 @@ public:
     int index() const;
     void setIndex(int newIndex);
     ScriptHandlerInfo* scriptHandlerInfo() const;
+    ScriptLogger* logger() const;
     void setChildDataChanged();
 
     virtual bool isTopLevel() const;
@@ -179,5 +181,11 @@ inline bool TopLevelDataInformation::isTopLevel() const
 {
     return true;
 }
+
+inline ScriptLogger* TopLevelDataInformation::logger() const
+{
+    return mScriptHandler->logger();
+}
+
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */

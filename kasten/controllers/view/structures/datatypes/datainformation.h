@@ -165,6 +165,7 @@ public:
     DataInformationEndianess byteOrder() const;
     ByteOrder effectiveByteOrder() const;
     void setByteOrder(DataInformationEndianess newEndianess);
+    QString fullObjectPath() const;
 
     virtual void resetValidationState(); //virtual for datainformationwithchildren
     bool wasAbleToRead() const;

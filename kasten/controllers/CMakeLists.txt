@@ -325,6 +325,7 @@ set( STRUCTVIEW_SRCS
   view/structures/script/scripthandlerinfo.cpp
   view/structures/script/scriptvalueconverter.cpp
   view/structures/script/scriptutils.cpp
+  view/structures/script/scriptlogger.cpp
   view/structures/script/classes/defaultscriptclass.cpp
   view/structures/script/classes/arrayscriptclass.cpp
   view/structures/script/classes/primitivescriptclass.cpp

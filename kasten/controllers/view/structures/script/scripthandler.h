@@ -34,6 +34,7 @@
 #include "scripthandlerinfo.h"
 
 class DataInformation;
+class ScriptLogger;
 
 class ScriptHandler : public QSharedData
 {
@@ -47,18 +48,34 @@ public:
     DataInformation* initialDataInformationFromScript();
     void validateData(DataInformation* data);
     void updateDataInformation(DataInformation* data);
-    QScriptEngine* engine();
+    QScriptEngine* engine() const;
     ScriptHandlerInfo* handlerInfo();
+    ScriptLogger* logger() const;
 protected:
     bool loadFile();
-    QScriptEngine* mEngine;
+    QScopedPointer<QScriptEngine> mEngine;
     QString mFile;
     QString mName;
+    QScopedPointer<ScriptLogger> mLogger;
 #ifdef OKTETA_DEBUG_SCRIPT
-    QScriptEngineDebugger* mDebugger;
+    QScopedPointer<QScriptEngineDebugger> mDebugger;
 #endif
     ScriptHandlerInfo mHandlerInfo;
 };
 
+inline ScriptLogger* ScriptHandler::logger() const
+{
+    return mLogger.data();
+}
+
+inline QScriptEngine* ScriptHandler::engine() const
+{
+    return mEngine.data();
+}
+
+inline ScriptHandlerInfo* ScriptHandler::handlerInfo()
+{
+    return &mHandlerInfo;
+}
 
 #endif /* SCRIPTHANDLER_H_ */

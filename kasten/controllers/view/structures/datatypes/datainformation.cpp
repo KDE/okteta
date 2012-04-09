@@ -299,3 +299,15 @@ QVariant DataInformation::dataFromChildWidget(uint, const QWidget*) const
             "only implemented so not all subclasses have to, since it will never be called there. Error!");
     return QVariant();
 }
+
+QString DataInformation::fullObjectPath() const
+{
+    DataInformationBase* par = parent();
+    if (!par || par->isTopLevel())
+    {
+        return name();
+    }
+    QString result = QLatin1Char('.') + name();
+    result.prepend(par->asDataInformation()->fullObjectPath());
+    return result;
+}

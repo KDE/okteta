@@ -25,6 +25,7 @@
 #include "../../script/scriptvalueconverter.h"
 #include "../../script/classes/arrayscriptclass.h"
 #include "../../script/scripthandlerinfo.h"
+#include "../../script/scriptlogger.h"
 
 #include <QtScript/QScriptContext>
 #include "complexarraydata.h"
@@ -81,11 +82,13 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
             + QString::number(newLength)) : QScriptValue();
     if (uint(newLength) > MAX_LEN)
     {
-        kWarning() << "attempting to set the length of the array" << name() << "to "
+        kWarning() << "attempting to set the length of the array" << fullObjectPath() << "to "
                 << newLength << " which would use too much memory";
 
-        return context ? context->throwError(QLatin1String("new Array length is to large: ")
-                + QString::number(newLength)) : QScriptValue();
+        topLevelDataInformation()->logger()->warn(
+            QString(QLatin1String("%1: new array length is too large (%2), limiting to (%3)"))
+            .arg(fullObjectPath(), QString::number(newLength), QString::number(MAX_LEN)));
+        newLength = MAX_LEN;
     }
     int oldLength = mData->length();
     if (newLength < oldLength)

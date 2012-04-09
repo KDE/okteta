@@ -24,6 +24,7 @@
 #include "scriptengineinitializer.h"
 #include "scriptvalueconverter.h"
 #include "scriptutils.h"
+#include "scriptlogger.h"
 #include "../datatypes/datainformation.h"
 #include "../datatypes/topleveldatainformation.h"
 #include "classes/defaultscriptclass.h"
@@ -44,19 +45,19 @@
 #include <KDebug>
 
 ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString name) :
-    mEngine(engine), mFile(scriptFile), mName(name)
+    mEngine(engine), mFile(scriptFile), mName(name), mLogger(new ScriptLogger())
 #ifdef OKTETA_DEBUG_SCRIPT
 , mDebugger(new QScriptEngineDebugger())
 #endif
 {
     ScriptEngineInitializer::addFuctionsToScriptEngine(*mEngine);
 
-    mHandlerInfo.mArrayClass.reset(new ArrayScriptClass(mEngine, &mHandlerInfo));
-    mHandlerInfo.mPrimitiveClass.reset(new PrimitiveScriptClass(mEngine, &mHandlerInfo));
-    mHandlerInfo.mEnumClass.reset(new EnumScriptClass(mEngine, &mHandlerInfo));
-    mHandlerInfo.mBitfieldClass.reset(new BitfieldScriptClass(mEngine, &mHandlerInfo));
-    mHandlerInfo.mStructUnionClass.reset(new StructUnionScriptClass(mEngine, &mHandlerInfo));
-    mHandlerInfo.mStringClass.reset(new StringScriptClass(mEngine, &mHandlerInfo));
+    mHandlerInfo.mArrayClass.reset(new ArrayScriptClass(mEngine.data(), &mHandlerInfo));
+    mHandlerInfo.mPrimitiveClass.reset(new PrimitiveScriptClass(mEngine.data(), &mHandlerInfo));
+    mHandlerInfo.mEnumClass.reset(new EnumScriptClass(mEngine.data(), &mHandlerInfo));
+    mHandlerInfo.mBitfieldClass.reset(new BitfieldScriptClass(mEngine.data(), &mHandlerInfo));
+    mHandlerInfo.mStructUnionClass.reset(new StructUnionScriptClass(mEngine.data(), &mHandlerInfo));
+    mHandlerInfo.mStringClass.reset(new StringScriptClass(mEngine.data(), &mHandlerInfo));
 
     if (!scriptFile.isEmpty())
         loadFile();
@@ -64,10 +65,6 @@ ScriptHandler::ScriptHandler(QScriptEngine* engine, QString scriptFile, QString 
 
 ScriptHandler::~ScriptHandler()
 {
-    delete mEngine;
-#ifdef OKTETA_DEBUG_SCRIPT
-    delete mDebugger;
-#endif
 }
 
 bool ScriptHandler::loadFile()
@@ -82,7 +79,7 @@ bool ScriptHandler::loadFile()
     QString contents = stream.readAll();
     scriptFile.close();
 #ifdef OKTETA_DEBUG_SCRIPT
-    mDebugger->attachTo(mEngine);
+    mDebugger->attachTo(mEngine.data());
     mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
 #endif
     mEngine->evaluate(contents, mFile);
@@ -129,7 +126,7 @@ void ScriptHandler::validateData(DataInformation* data)
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
-        mDebugger->attachTo(mEngine);
+        mDebugger->attachTo(mEngine.data());
         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
         kDebug()
         << "validating element: " << data->name();
@@ -139,8 +136,8 @@ void ScriptHandler::validateData(DataInformation* data)
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
 //         QScriptValue mainStruct = mEngine->newQObject(data->mainStructure(),
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-        QScriptValue thisObject = data->toScriptValue(mEngine, &mHandlerInfo);
-        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine, &mHandlerInfo);
+        QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
+        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(), &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
         QScriptValue result = additionalData->validationFunction().call(thisObject, args);
@@ -164,6 +161,7 @@ void ScriptHandler::validateData(DataInformation* data)
         }
     }
 }
+
 void ScriptHandler::updateDataInformation(DataInformation* data)
 {
     if (!data)
@@ -185,8 +183,8 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
 //         QScriptValue mainStruct = mEngine->newQObject(data->mainStructure(),
 //                 QScriptEngine::QtOwnership, QScriptEngine::ExcludeDeleteLater);
-        QScriptValue thisObject = data->toScriptValue(mEngine, &mHandlerInfo);
-        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine, &mHandlerInfo);
+        QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
+        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(), &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
         QScriptValue result = additionalData->updateFunction().call(thisObject, args);
@@ -202,14 +200,4 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
                 "updating element ") + data->name(), result);
         }
     }
-}
-
-QScriptEngine* ScriptHandler::engine()
-{
-    return mEngine;
-}
-
-ScriptHandlerInfo* ScriptHandler::handlerInfo()
-{
-    return &mHandlerInfo;
 }
