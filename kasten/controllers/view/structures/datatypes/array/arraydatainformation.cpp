@@ -234,7 +234,7 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
     {
         kWarning() << "in array " << name() << ": bit offset != 0 (" << *bitOffset << "), adding padding,"
                 " arrays always start at full bytes";
-        bitsRemaining -= *bitOffset;
+        bitsRemaining &= BitCount64(~7); //unset lower 3 bits to make it divisible by 8
     }
     //first of all update the structure:
     topLevelDataInformation()->updateElement(this);
