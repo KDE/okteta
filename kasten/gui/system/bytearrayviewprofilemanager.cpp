@@ -50,7 +50,7 @@ static const int DefaultLayoutStyle = 0;
 static const int DefaultViewModus = 0;
 static const int DefaultVisibleByteArrayCodings = 3;
 static const int DefaultValueCoding = 0;
-static const QString DefaultCharCoding = QString();
+static const QString DefaultCharCoding;
 
 static QList<ByteArrayViewProfile::Id>
 viewProfileIds( const QList<ByteArrayViewProfile>& viewProfiles )
