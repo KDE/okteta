@@ -40,10 +40,11 @@ class AbstractStructureParser
 public:
     AbstractStructureParser(const QString& pluginName, const QString& absolutePath);
     virtual ~AbstractStructureParser();
-    virtual QStringList parseStructureNames() = 0;
-    virtual QVector<TopLevelDataInformation*> parseStructures() = 0;
+    virtual QStringList parseStructureNames() const = 0;
+    virtual QVector<TopLevelDataInformation*> parseStructures() const = 0;
 
-    static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string);
+    static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string,
+            ScriptLogger* logger);
     static QString byteOrderToString(DataInformation::DataInformationEndianess order);
 
 protected:

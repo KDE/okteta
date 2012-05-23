@@ -27,16 +27,16 @@
 #include "primitive/primitivedatainformation.h"
 
 class PrimitiveDataInformation;
+class ScriptLogger;
 
-class PrimitiveFactory
+namespace PrimitiveFactory
 {
-public:
-    static PrimitiveDataInformation* newInstance(QString name,
-            PrimitiveDataType type, DataInformation* parent = NULL);
-    static PrimitiveDataInformation* newInstance(QString name,
-            QString typeString, DataInformation* parent = NULL);
-    static PrimitiveDataType typeStringToType(QString& typeStr);
+PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
+        ScriptLogger* logger = 0);
+PrimitiveDataInformation* newInstance(const QString& name, const QString& typeString,
+        ScriptLogger* parent = 0);
+PrimitiveDataType typeStringToType(const QString& typeStr);
 
-};
+}
 
 #endif /* PRIMITIVEFACTORY_H_ */

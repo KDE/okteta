@@ -210,7 +210,7 @@ void ScriptValueConverterTest::testPrimitives()
     QScriptValue val2 = engine->evaluate(code2);
     QCOMPARE(val1.property(QLatin1String("type")).toString(), typeString);
     QCOMPARE(val2.property(QLatin1String("type")).toString(), typeString);
-    if (type == Type_NotPrimitive)
+    if (type == Type_Invalid)
         return; //the cast will fail
     DataInformation* data1 = ScriptValueConverter::convert(val1, QLatin1String("val1"),
             logger.data());

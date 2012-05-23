@@ -22,8 +22,12 @@
 
 #include "primitivefactory.h"
 #include "primitive/primitivetemplateinfo.h"
+#include "../script/scriptlogger.h"
 
-PrimitiveDataType PrimitiveFactory::typeStringToType(QString& string)
+namespace PrimitiveFactory
+{
+
+PrimitiveDataType typeStringToType(const QString& string)
 {
     QString typeStr = string.trimmed().toLower();
     if (typeStr == QLatin1String("bool8"))
@@ -58,55 +62,66 @@ PrimitiveDataType PrimitiveFactory::typeStringToType(QString& string)
         return Type_Double;
 
     kWarning() << "PrimitiveDataInformation::typeStringToType(): could not find"
-        " correct value (typeStr=" << typeStr << ")";
-    return Type_NotPrimitive; //just return a default value
+            " correct value (typeStr=" << typeStr << ")";
+    return Type_Invalid; //just return a default value
 }
-PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
-        PrimitiveDataType type, DataInformation* parent)
+PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type, ScriptLogger* logger)
 {
     switch (type)
     {
     case Type_Char:
-        return new PrimitiveInfo<Type_Char>::Class(name, parent);
+        return new PrimitiveInfo<Type_Char>::Class(name);
     case Type_Int8:
-        return new PrimitiveInfo<Type_Int8>::Class(name, parent);
+        return new PrimitiveInfo<Type_Int8>::Class(name);
     case Type_Int16:
-        return new PrimitiveInfo<Type_Int16>::Class(name, parent);
+        return new PrimitiveInfo<Type_Int16>::Class(name);
     case Type_Int32:
-        return new PrimitiveInfo<Type_Int32>::Class(name, parent);
+        return new PrimitiveInfo<Type_Int32>::Class(name);
     case Type_Int64:
-        return new PrimitiveInfo<Type_Int64>::Class(name, parent);
+        return new PrimitiveInfo<Type_Int64>::Class(name);
     case Type_UInt8:
-        return new PrimitiveInfo<Type_UInt8>::Class(name, parent);
+        return new PrimitiveInfo<Type_UInt8>::Class(name);
     case Type_UInt16:
-        return new PrimitiveInfo<Type_UInt16>::Class(name, parent);
+        return new PrimitiveInfo<Type_UInt16>::Class(name);
     case Type_UInt32:
-        return new PrimitiveInfo<Type_UInt32>::Class(name, parent);
+        return new PrimitiveInfo<Type_UInt32>::Class(name);
     case Type_UInt64:
-        return new PrimitiveInfo<Type_UInt64>::Class(name, parent);
+        return new PrimitiveInfo<Type_UInt64>::Class(name);
     case Type_Bool8:
-        return new PrimitiveInfo<Type_Bool8>::Class(name, parent);
+        return new PrimitiveInfo<Type_Bool8>::Class(name);
     case Type_Bool16:
-        return new PrimitiveInfo<Type_Bool16>::Class(name, parent);
+        return new PrimitiveInfo<Type_Bool16>::Class(name);
     case Type_Bool32:
-        return new PrimitiveInfo<Type_Bool32>::Class(name, parent);
+        return new PrimitiveInfo<Type_Bool32>::Class(name);
     case Type_Bool64:
-        return new PrimitiveInfo<Type_Bool64>::Class(name, parent);
+        return new PrimitiveInfo<Type_Bool64>::Class(name);
     case Type_Float:
-        return new PrimitiveInfo<Type_Float>::Class(name, parent);
+        return new PrimitiveInfo<Type_Float>::Class(name);
     case Type_Double:
-        return new PrimitiveInfo<Type_Double>::Class(name, parent);
+        return new PrimitiveInfo<Type_Double>::Class(name);
     default:
-        return NULL;
+        if (logger)
+            logger->error(QLatin1String("could not convert '") + PrimitiveDataInformation::typeName(type)
+                    + QLatin1String("' to a primitive type"));
+        else
+            kWarning() << "could not convert '" << type << "' to a primitive type";
+        return 0; //invalid type
     }
 }
-PrimitiveDataInformation* PrimitiveFactory::newInstance(QString name,
-        QString typeName, DataInformation* parent)
+PrimitiveDataInformation* newInstance(const QString& name, const QString& typeName, ScriptLogger* logger)
 {
     PrimitiveDataType type = typeStringToType(typeName);
-    if (type == Type_NotPrimitive) {
-        kDebug() << "could not convert " << typeName << " to a primitive type";
-        return NULL; //invalid type
+    if (type == Type_Invalid)
+    {
+        if (logger)
+            logger->error(QLatin1String("could not convert '") + typeName
+                    + QLatin1String("' to a primitive type"));
+        else
+            kWarning() << "could not convert '" << typeName << "' to a primitive type";
+        return 0; //invalid type
     }
-    return newInstance(name, type, parent);
+    return newInstance(name, type, logger);
 }
+
+}
+

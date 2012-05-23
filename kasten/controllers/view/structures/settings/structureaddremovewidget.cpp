@@ -149,7 +149,7 @@ void StructureAddRemoveWidget::buildAvailableList()
             continue;
         QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
                 QStringList() << def->pluginInfo().pluginName() << pluginName);
-        foreach(const QString& name,def->structureNames())
+        foreach(const QString& name, def->structureNames())
             {
                 QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
                         QStringList() << name << pluginName);

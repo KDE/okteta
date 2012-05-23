@@ -40,12 +40,12 @@ ScriptFileParser::~ScriptFileParser()
 {
 }
 
-QStringList ScriptFileParser::parseStructureNames()
+QStringList ScriptFileParser::parseStructureNames() const
 {
     return QStringList() << mPluginName;
 }
 
-QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures()
+QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
 {
     QVector<TopLevelDataInformation*> ret;
 

@@ -48,6 +48,40 @@ QMap<AllPrimitiveTypes, QString> AbstractEnumDataInformation::parseEnumValues(
         const QScriptValue& val, ScriptLogger* logger, PrimitiveDataType type)
 {
     QMap<AllPrimitiveTypes, QString> enumValues;
+
+    QScriptValueIterator it(val);
+    while (it.hasNext())
+    {
+        it.next();
+        QScriptValue val = it.value();
+        QPair<AllPrimitiveTypes, QString> conv;
+        if (val.isNumber())
+        {
+            double num = val.toNumber();
+            conv = convertToEnumEntry(it.name(), num, logger, type);
+        }
+        else
+        {
+            QString numStr = val.toString();
+            conv = convertToEnumEntry(it.name(), numStr, logger, type);
+        }
+        if (conv == QPair<AllPrimitiveTypes, QString>())
+            continue;
+        enumValues.insert(conv.first, conv.second);
+    }
+    return enumValues;
+}
+
+void AbstractEnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString> newValues)
+{
+    mEnum->setValues(newValues);
+}
+
+QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntry(
+        const QString& name, const QVariant& value, ScriptLogger* logger, PrimitiveDataType type)
+{
+    Q_ASSERT(!name.isEmpty());
+    //name must not be empty, else default constructed return would be valid!
     quint64 maxValue = 0.0;
     qint64 minValue;
     switch (type)
@@ -100,82 +134,71 @@ QMap<AllPrimitiveTypes, QString> AbstractEnumDataInformation::parseEnumValues(
     default:
         logger->warn(QLatin1String("Invalid type") + PrimitiveDataInformation::typeName(type)
                 + QLatin1String("for an enumeration, no values were parsed"));
-        return enumValues;
+        return QPair<AllPrimitiveTypes, QString>();
     }
-    QScriptValueIterator it(val);
-    while (it.hasNext())
+
+    AllPrimitiveTypes intValue;
+    if (value.type() == QVariant::Double)
     {
-        it.next();
-        QScriptValue val = it.value();
-        AllPrimitiveTypes value;
-        if (val.isNumber())
+        const double num = value.toDouble();
+        //this is the largest double which maps to an integer exactly, ...993 is not representable anymore
+        //...992 would still be representable, however it may be that ...993 was rounded down to that, be safe
+        //and force the user to write such large numbers as strings
+        if (num <= 9007199254740991.0)
         {
-            double num = val.toNumber();
-            //this is the largest double which maps to an integer exactly, ...993 is not representable anymore
-            //...992 would still be representable, however it may be that ...993 was rounded down to that, be safe
-            //and force the user to write such large numbers as strings
-            if (num <= 9007199254740991.0)
-            {
-                value = qint64(num);
-            }
-            else
-            {
-                logger->warn(QLatin1String("Value in enum ") + it.name() + QLatin1String(" (")
-                        + QString::number(num) + QLatin1String(" is larger than the biggest"
-                                " double value that can represent any smaller integer exactly,"
-                                "skipping it. Write the value as a string so it is exact."));
-                continue;
-            }
+            intValue = qint64(num);
         }
         else
         {
-            QString numStr = val.toString();
-            bool ok = false;
-            if (numStr.startsWith(QLatin1String("0x")))
-            {
-                value = numStr.mid(2).toULongLong(&ok, 16);
-            }
-            else
-            {
-                if (type == Type_UInt64 || type == Type_Bool64)
-                    value = numStr.toULongLong(&ok, 10);
-                else
-                    value = numStr.toLongLong(&ok, 10);
-            }
-            if (!ok)
-            {
-                logger->warn(QString(QLatin1String("Could not convert %1 to an enum "
-                        "constant, name was: %2")).arg(numStr, it.name()));
-                continue;
-            }
-
+            logger->warn(QLatin1String("Value in enum ") + name + QLatin1String(" (")
+                    + QString::number(num) + QLatin1String(" is larger than the biggest"
+                            " double value that can represent any smaller integer exactly,"
+                            "skipping it. Write the value as a string so it is exact."));
+            return QPair<AllPrimitiveTypes, QString>();
         }
-        quint64 asUnsigned = value.ulongValue;
-        if (asUnsigned > maxValue)
-        {
-            logger->warn(QString(QLatin1String("Enumerator %1: %2 is larger than the maximum "
-                    "possible for type %3 (%4)")).arg(it.name(),
-                    QString::number(asUnsigned), PrimitiveDataInformation::typeName(type),
-                    QString::number(maxValue)));
-            continue;
-        }
-        qint64 asSigned = value.longValue;
-        if (minValue != 0 && asSigned < minValue)
-        {
-            logger->warn(QString(QLatin1String("Enumerator %1: %2 is smaller than the minimum "
-                    "possible for type %3 (%4)")).arg(it.name(),
-                    QString::number(asSigned), PrimitiveDataInformation::typeName(type),
-                    QString::number(minValue)));
-            continue;
-        }
-        enumValues.insert(value, it.name());
     }
-    return enumValues;
-}
+    else
+    {
+        const QString valueString = value.toString();
+        bool ok = false;
+        if (valueString.startsWith(QLatin1String("0x")))
+        {
+            intValue = valueString.mid(2).toULongLong(&ok, 16);
+        }
+        else
+        {
+            if (type == Type_UInt64 || type == Type_Bool64)
+                intValue = valueString.toULongLong(&ok, 10);
+            else
+                intValue = valueString.toLongLong(&ok, 10);
+        }
+        if (!ok)
+        {
+            logger->warn(QString(QLatin1String("Could not convert '%1' to an enum "
+                    "constant, name was: %2")).arg(valueString, name));
+            return QPair<AllPrimitiveTypes, QString>();
+        }
+    }
+    quint64 asUnsigned = intValue.ulongValue;
+    if (asUnsigned > maxValue)
+    {
+        logger->warn(QString(QLatin1String("Enumerator %1: %2 is larger than the maximum "
+                "possible for type %3 (%4)")).arg(name,
+                QString::number(asUnsigned), PrimitiveDataInformation::typeName(type),
+                QString::number(maxValue)));
+        return QPair<AllPrimitiveTypes, QString>();
+    }
+    qint64 asSigned = intValue.longValue;
+    if (minValue != 0 && asSigned < minValue)
+    {
+        logger->warn(QString(QLatin1String("Enumerator %1: %2 is smaller than the minimum "
+                "possible for type %3 (%4)")).arg(name,
+                QString::number(asSigned), PrimitiveDataInformation::typeName(type),
+                QString::number(minValue)));
+        return QPair<AllPrimitiveTypes, QString>();
+    }
+    return QPair<AllPrimitiveTypes, QString>(intValue, name);
 
-void AbstractEnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString> newValues)
-{
-    mEnum->setValues(newValues);
 }
 
 QScriptValue AbstractEnumDataInformation::toScriptValue(QScriptEngine* engine,

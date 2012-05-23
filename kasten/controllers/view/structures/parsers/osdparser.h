@@ -38,6 +38,7 @@ class DataInformation;
 class StructureDataInformation;
 class UnionDataInformation;
 class PrimitiveDataInformation;
+class ScriptLogger;
 
 class OsdParser : public AbstractStructureParser
 {
@@ -49,32 +50,52 @@ public:
     OsdParser(const QString xml);
     virtual ~OsdParser();
 
-    virtual QStringList parseStructureNames();
-    virtual QVector<TopLevelDataInformation*> parseStructures();
+    virtual QStringList parseStructureNames() const;
+    virtual QVector<TopLevelDataInformation*> parseStructures() const;
 
 private:
-    PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem) const;
-    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem) const;
-    AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags);
-    StringDataInformation* stringFromXML(const QDomElement& xmlElem) const;
-    UnionDataInformation* unionFromXML(const QDomElement& xmlElem, QScriptEngine* engine);
-    StructureDataInformation* structFromXML(const QDomElement& xmlElem, QScriptEngine* engine);
-    ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const DataInformation* parent,
-            QScriptEngine* engine);
 
-    DataInformation* parseNode(const QDomNode& node, const DataInformation* parent,
-            QScriptEngine* engine);
-    EnumDefinition::Ptr findEnum(const QString& defName);
+    struct ParserInfo
+    {
+        QScriptEngine* engine;
+        ScriptLogger* logger;
+        DataInformation* parent;
+        QVector<EnumDefinition::Ptr> enums;
+        bool scriptEngineNeeded;
+    };
 
-    void parseEnumDefNodes(QDomNodeList& elems);
-    void parseEnums();
-    void openDocFromFile();
+    PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem,
+            const ParserInfo& info) const;
+    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem,
+            const ParserInfo& info) const;
+    AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags,
+            const ParserInfo& info) const;
+    StringDataInformation* stringFromXML(const QDomElement& xmlElem, const ParserInfo& info) const;
+    UnionDataInformation* unionFromXML(const QDomElement& xmlElem, ParserInfo& info) const;
+    StructureDataInformation* structFromXML(const QDomElement& xmlElem, ParserInfo& info) const;
+    ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, ParserInfo& info) const;
+
+    DataInformation* parseNode(const QDomNode& node, ParserInfo& info) const;
+    EnumDefinition::Ptr findEnum(const QString& defName, const ParserInfo& info) const;
+
+    QVector<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem,
+            ScriptLogger* logger) const;
+
+    QDomDocument openDoc(ScriptLogger* logger) const;
+    QDomDocument openDocFromFile(ScriptLogger* logger) const;
+    QDomDocument openDocFromString(ScriptLogger* logger) const;
 
 private:
-    QDomDocument mDocument;
-    //mutable, since they are only used for caching
-    QVector<EnumDefinition::Ptr> mEnums;
-    bool mEnumsParsed :1;
+    /** @return the element as an XML string (excluding children) */
+    QString toRawXML(const QDomElement& elem) const;
+
+    /** if not empty construct the document from this, instead of opening file */
+    const QString mXmlString;
 };
+
+inline QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
+        {
+    return mXmlString.isEmpty() ? openDocFromFile(logger) : openDocFromString(logger);
+}
 
 #endif /* OSDPARSER_H_ */

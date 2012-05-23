@@ -46,7 +46,7 @@ typedef Kasten2::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 enum PrimitiveDataType
 {
 //!!! DO NOT CHANGE ORDER OF ITEMS !!!
-    Type_NotPrimitive = -1,
+    Type_Invalid = -1,
     Type_START = 0,
     Type_Bool8 = 0,
     Type_Int8 = 1,
@@ -238,7 +238,7 @@ template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return longV
 template<> inline float AllPrimitiveTypes::value<float>() const { return floatValue; }
 template<> inline double AllPrimitiveTypes::value<double>() const { return doubleValue; }
 
-QDebug operator<<(QDebug dbg, const PrimitiveDataType type);
+QDebug operator<<(QDebug dbg, PrimitiveDataType type);
 
 
 #endif /* ALLPRIMITIVETYPES_H_ */

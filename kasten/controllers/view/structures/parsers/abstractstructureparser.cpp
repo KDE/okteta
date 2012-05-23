@@ -22,9 +22,11 @@
 
 #include "abstractstructureparser.h"
 #include "../structuredefinitionfile.h"
+#include "../script/scriptlogger.h"
 
-AbstractStructureParser::AbstractStructureParser(const QString& pluginName, const QString& absolutePath)
-    : mPluginName(pluginName), mAbsolutePath(absolutePath)
+AbstractStructureParser::AbstractStructureParser(const QString& pluginName,
+        const QString& absolutePath)
+        : mPluginName(pluginName), mAbsolutePath(absolutePath)
 {
 }
 
@@ -33,7 +35,7 @@ AbstractStructureParser::~AbstractStructureParser()
 }
 
 DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(
-        const QString& string)
+        const QString& string, ScriptLogger* logger)
 {
     const QString lower = string.toLower();
     if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))
@@ -42,8 +44,14 @@ DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFrom
         return DataInformation::EndianessLittle;
     else if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings"))
         return DataInformation::EndianessFromSettings;
-    else
+    else if (lower == QLatin1String("inherit"))
         return DataInformation::EndianessInherit;
+    else
+    {
+        logger->warn(QLatin1String("Unrecognized byte order '") + string
+                + QLatin1String("', defaulting to 'inherit'"));
+        return DataInformation::EndianessInherit;
+    }
 }
 
 QString AbstractStructureParser::byteOrderToString(DataInformation::DataInformationEndianess order)

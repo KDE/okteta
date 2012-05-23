@@ -21,6 +21,7 @@
  */
 
 #include "allprimitivetypes.h"
+#include "datatypes/primitive/primitivedatainformation.h"
 
 #include <abstractbytearraymodel.h>
 
@@ -369,14 +370,11 @@ void AllPrimitiveTypes::writeFullBytes(const quint8 byteCount,
         out->setByte(address + i, newValue.allBytes[index]);
     }
 }
-QDebug operator<<(QDebug dbg, const PrimitiveDataType type)
+QDebug operator<<(QDebug dbg, PrimitiveDataType type)
 {
-    if (type == -1)
-        dbg.nospace() << "primitive type(not primitive)";
-    else if (type < Type_END)
-        dbg.nospace() << "primitive type(" << PrimitiveType::typeNames[type] << ")";
-    else
-        dbg.nospace() << "primitive type(invalid: " << int(type) << ")";
+    if (type < Type_Invalid || type > Type_END)
+        type = Type_Invalid;
+    dbg.nospace() << "primitive type(" << PrimitiveDataInformation::typeName(type) << ")";
     return dbg.space();
 }
 

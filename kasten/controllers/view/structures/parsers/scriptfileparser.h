@@ -35,8 +35,8 @@ public:
     ScriptFileParser(const QString& pluginName, const QString& absolutePath);
     virtual ~ScriptFileParser();
 
-    virtual QStringList parseStructureNames();
-    virtual QVector<TopLevelDataInformation*> parseStructures();
+    virtual QStringList parseStructureNames() const;
+    virtual QVector<TopLevelDataInformation*> parseStructures() const;
 
 private:
     DataInformation* convert(ScriptLogger* logger, QScriptEngine* engine) const;

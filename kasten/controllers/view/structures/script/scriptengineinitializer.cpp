@@ -285,7 +285,7 @@ QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flag
 
     QString enumTypeString = enumType.toString();
     PrimitiveDataType pdt = PrimitiveFactory::typeStringToType(enumTypeString);
-    if (pdt == Type_NotPrimitive || pdt == Type_Float || pdt == Type_Double)
+    if (pdt == Type_Invalid || pdt == Type_Float || pdt == Type_Double)
         return ctx->throwError(
                 QLatin1String("enumeration(): enum type (argument 2) '") + enumTypeString
                         + QLatin1String("' is not a valid type"));

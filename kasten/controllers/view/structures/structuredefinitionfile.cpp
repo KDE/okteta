@@ -58,22 +58,13 @@ StructureDefinitionFile::~StructureDefinitionFile()
 
 QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
 {
-    if (!mParser)
-    {
-        kWarning() << "trying to get structures, but parser does not exist!";
-        return QVector<TopLevelDataInformation*>();
-    }
+    Q_CHECK_PTR(mParser);
     return mParser->parseStructures();
 }
 
 TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name) const
-        {
-    if (!mParser)
-    {
-        kWarning() << "trying to get structure with name =" << name
-                << ", but parser does not exist!";
-        return 0;
-    }
+{
+    Q_CHECK_PTR(mParser);
     QVector<TopLevelDataInformation*> list = mParser->parseStructures();
     TopLevelDataInformation* ret = 0;
     for (int i = 0; i < list.size(); ++i)
@@ -90,11 +81,7 @@ TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name)
 
 QStringList StructureDefinitionFile::structureNames() const
 {
-    if (!mParser)
-    {
-        kWarning() << "trying to get structure names, but parser does not exist!";
-        return QStringList();
-    }
+    Q_CHECK_PTR(mParser);
     return mParser->parseStructureNames();
 }
 

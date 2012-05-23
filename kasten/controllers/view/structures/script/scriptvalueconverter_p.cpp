@@ -138,7 +138,9 @@ DataInformation* toDataInformation(const QScriptValue& value, const QString& pas
         QScriptValue updateFunc = value.property(QLatin1String("updateFunc"));
         QScriptValue validationFunc = value.property(QLatin1String("validationFunc"));
         QScriptValue byteOrder = value.property(QLatin1String("byteOrder"));
-        returnVal->setByteOrder(AbstractStructureParser::byteOrderFromString(byteOrder.toString()));
+        if (byteOrder.isValid())
+            returnVal->setByteOrder(
+                    AbstractStructureParser::byteOrderFromString(byteOrder.toString(), logger));
         AdditionalData* aData = 0;
         if (updateFunc.isFunction())
         {
@@ -216,7 +218,7 @@ PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const QString& 
         return 0;
     }
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
-    if (primitiveType == Type_NotPrimitive || primitiveType == Type_Bitfield)
+    if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
     {
         logger->error(QLatin1String("unrecognised primitive type: '") + typeString
                 + QLatin1Char('\''));
@@ -260,7 +262,7 @@ AbstractEnumDataInformation* toEnum(const QScriptValue& value, const QString& na
     QScriptValue typeProperty = value.property(QLatin1String("enumType"));
     QString typeString = typeProperty.toString();
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
-    if (primitiveType == Type_NotPrimitive)
+    if (primitiveType == Type_Invalid)
     {
         logger->warn(QLatin1String("Could not convert variable to primitve type identifier!"),
                 typeProperty);

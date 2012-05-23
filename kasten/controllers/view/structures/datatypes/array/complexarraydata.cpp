@@ -175,7 +175,7 @@ PrimitiveDataType ComplexArrayData::primitiveType() const
     if (mChildType->isBitfield())
         return Type_Bitfield;
     else
-        return Type_NotPrimitive;
+        return Type_Invalid;
 }
 
 BitCount32 ComplexArrayData::sizeAt(uint index)
