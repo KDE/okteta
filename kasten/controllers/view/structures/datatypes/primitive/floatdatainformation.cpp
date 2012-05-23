@@ -107,11 +107,6 @@ QScriptValue FloatDataInformation::valueAsQScriptValue() const
     return asScriptValue(mValue, 0, 0);
 }
 
-QString FloatDataInformation::typeName() const
-{
-	return i18nc("Data type", "float");
-}
-
 QString FloatDataInformation::valueString(float value)
 {
 	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())

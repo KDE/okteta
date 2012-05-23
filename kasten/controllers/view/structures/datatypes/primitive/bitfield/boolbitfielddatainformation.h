@@ -25,19 +25,19 @@
 #include "abstractbitfielddatainformation.h"
 #include "../poddecoder/typeeditors/uintspinbox.h"
 
-class BoolBitfieldDataInformation: public AbstractBitfieldDataInformation
+class BoolBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
 public:
-    BoolBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0) :
-        AbstractBitfieldDataInformation(name, width, parent)
+    BoolBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0)
+            : AbstractBitfieldDataInformation(name, width, parent)
     {
     }
     virtual ~BoolBitfieldDataInformation()
     {
     }
 protected:
-    BoolBitfieldDataInformation(const BoolBitfieldDataInformation& d) :
-        AbstractBitfieldDataInformation(d)
+    BoolBitfieldDataInformation(const BoolBitfieldDataInformation& d)
+            : AbstractBitfieldDataInformation(d)
     {
     }
 public:
@@ -51,10 +51,10 @@ public:
     virtual void setWidgetData(QWidget* w) const;
 };
 
-
 inline QString BoolBitfieldDataInformation::typeName() const
 {
-    return i18nc("Data type", "boolean bitfield");
+    return i18ncp("Data type", "boolean bitfield (%1 bit wide)", "boolean bitfield (%1 bits wide)",
+            width());
 }
 
 #endif /* BOOLBITFIELDDATAINFORMATION_H_ */

@@ -102,12 +102,28 @@ QScriptValue PrimitiveDataInformation::toScriptValue(QScriptEngine* engine, Scri
     return ret;
 }
 
+QString PrimitiveDataInformation::typeName() const
+{
+    if (Kasten2::StructViewPreferences::shortTypeNames())
+        return typeName(type());
+    else
+        return longTypeName(type());
+}
+
 QString PrimitiveDataInformation::typeName(PrimitiveDataType type)
 {
+    if (type == Type_Invalid)
+        return i18n("invalid type");
     Q_ASSERT(type >= Type_START && type <= Type_END);
+    return QLatin1String(PrimitiveType::typeNames[type]);
 
-    if (Kasten2::StructViewPreferences::shortTypeNames())
-        return QLatin1String(PrimitiveType::typeNames[type]);
-    else
-        return i18n(PrimitiveType::longTypeNames[type]);
+}
+
+QString PrimitiveDataInformation::longTypeName(PrimitiveDataType type)
+{
+    if (type == Type_Invalid)
+        return i18n("invalid type");
+    Q_ASSERT(type >= Type_START && type <= Type_END);
+    return i18n(PrimitiveType::longTypeNames[type]);
+
 }

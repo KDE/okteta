@@ -24,19 +24,19 @@
 
 #include "abstractbitfielddatainformation.h"
 
-class UnsignedBitfieldDataInformation: public AbstractBitfieldDataInformation
+class UnsignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
 public:
-    UnsignedBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0) :
-        AbstractBitfieldDataInformation(name, width, parent)
+    UnsignedBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0)
+            : AbstractBitfieldDataInformation(name, width, parent)
     {
     }
     virtual ~UnsignedBitfieldDataInformation()
     {
     }
 protected:
-    UnsignedBitfieldDataInformation(const UnsignedBitfieldDataInformation& d) :
-        AbstractBitfieldDataInformation(d)
+    UnsignedBitfieldDataInformation(const UnsignedBitfieldDataInformation& d)
+            : AbstractBitfieldDataInformation(d)
     {
     }
 public:
@@ -52,7 +52,8 @@ public:
 
 inline QString UnsignedBitfieldDataInformation::typeName() const
 {
-    return i18nc("Data type", "unsigned bitfield");
+    return i18ncp("Data type", "unsigned bitfield (%1 bit wide)",
+            "unsigned bitfield (%1 bits wide)", width());
 }
 
 #endif /* UNSIGNEDBITFIELDDATAINFORMATION_H_ */

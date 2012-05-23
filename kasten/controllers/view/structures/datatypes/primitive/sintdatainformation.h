@@ -39,8 +39,6 @@ public:
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
 
-    virtual QString typeName() const;
-
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
@@ -146,12 +144,6 @@ template<typename T>
 inline QString SIntDataInformation<T>::valueString(T value)
 {
     return SIntDataInformation<T>::valueString(value, PrimitiveDataInformation::signedDisplayBase());
-}
-
-template<typename T>
-inline QString SIntDataInformation<T>::typeName() const
-{
-    return PrimitiveDataInformation::typeName(this->type());
 }
 
 template<typename T>

@@ -32,7 +32,6 @@ public:
 
     static int displayBase();
     virtual BitCount32 size() const;
-    virtual QString typeName() const;
     virtual QString valueString() const;
     static QString valueString(quint8 value);
     static quint8 fromVariant(const QVariant& value);
@@ -60,11 +59,6 @@ inline PrimitiveDataType CharDataInformation::type() const
 inline BitCount32 CharDataInformation::size() const
 {
     return sizeof(quint8) * 8;
-}
-
-inline QString CharDataInformation::typeName() const
-{
-    return i18nc("Data type", "char");
 }
 
 inline quint8 CharDataInformation::fromVariant(const QVariant& value)

@@ -42,7 +42,6 @@ public:
     static QString valueString(T val);
     static QString valueString(T val, int base);
     virtual PrimitiveDataType type() const;
-    virtual QString typeName() const;
 protected:
     explicit BoolDataInformation(const BoolDataInformation& d);
 };
@@ -55,12 +54,6 @@ template<>
 inline PrimitiveDataType BoolDataInformation<quint32>::type() const { return Type_Bool32; }
 template<>
 inline PrimitiveDataType BoolDataInformation<quint64>::type() const { return Type_Bool64; }
-
-template<typename T>
-inline QString BoolDataInformation<T>::typeName() const
-{
-    return PrimitiveDataInformation::typeName(this->type());
-}
 
 template<typename T>
 inline QScriptValue BoolDataInformation<T>::valueAsQScriptValue() const

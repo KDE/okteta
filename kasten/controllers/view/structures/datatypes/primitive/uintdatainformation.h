@@ -38,7 +38,6 @@ public:
     static QString valueString(T val);
     static QString valueString(T val, int base);
     virtual PrimitiveDataType type() const;
-    virtual QString typeName() const;
 protected:
     explicit UIntDataInformation(const UIntDataInformation& d);
 };
@@ -51,12 +50,6 @@ template<>
 inline PrimitiveDataType UIntDataInformation<quint32>::type() const { return Type_UInt32; }
 template<>
 inline PrimitiveDataType UIntDataInformation<quint64>::type() const { return Type_UInt64; }
-
-template<typename T>
-inline QString UIntDataInformation<T>::typeName() const
-{
-    return PrimitiveDataInformation::typeName(this->type());
-}
 
 template<typename T>
 inline UIntDataInformation<T>::UIntDataInformation(QString name, DataInformation* parent)

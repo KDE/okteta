@@ -31,7 +31,6 @@ public:
     DATAINFORMATION_CLONE(Float)
 
     virtual BitCount32 size() const;
-    virtual QString typeName() const;
     virtual QString valueString() const;
     static QString valueString(float value);
     virtual PrimitiveDataType type() const;

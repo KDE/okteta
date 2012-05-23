@@ -29,7 +29,7 @@ FlagDataInformation::FlagDataInformation(QString name, PrimitiveDataInformation*
         EnumDefinition::Ptr enumDef, DataInformation* parent)
     : EnumDataInformation(name, type, enumDef, parent)
 {
-    Q_ASSERT_X(type->type() != Type_Double && type->type() != Type_Float && type->type() != Type_NotPrimitive,
+    Q_ASSERT_X(type->type() != Type_Double && type->type() != Type_Float && type->type() != Type_Invalid,
         "FlagDataInformation::FlagDataInformation", "Bitflags only work with integers!");
 }
 
@@ -118,7 +118,7 @@ QString FlagDataInformation::valueString() const
 
 QString FlagDataInformation::typeName() const
 {
-    return QLatin1String("flags");
+    return i18n("flags (%1)", mValue->typeName());
 }
 
 QString FlagDataInformation::getTypeString() const

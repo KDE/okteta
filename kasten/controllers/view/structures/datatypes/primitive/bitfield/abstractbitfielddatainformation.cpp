@@ -39,11 +39,6 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::qVariantToAllPrimitiveTypes(
     return AllPrimitiveTypes(value.toULongLong());
 }
 
-QString AbstractBitfieldDataInformation::typeName() const
-{
-    return i18ncp("Data type", "bitfield (%1 bit wide)", "bitfield (%1 bits wide)", width());
-}
-
 AllPrimitiveTypes AbstractBitfieldDataInformation::value() const
 {
     return mValue;
