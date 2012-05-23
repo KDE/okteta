@@ -30,12 +30,12 @@
 #include <KLocale>
 #include <KIntNumInput>
 #include <KComboBox>
+#include <KLineEdit>
 // Qt
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QGroupBox>
 #include <QtGui/QFormLayout>
 #include <QtGui/QCheckBox>
-#include <KLineEdit>
 
 namespace Kasten2
 {
