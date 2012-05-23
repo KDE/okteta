@@ -101,6 +101,8 @@ private:
     EnumDataInformation* enumData;
 };
 
+#if 0
+
 #ifdef NDEBUG
 #pragma message("NDEBUG defined")
 #else
@@ -127,6 +129,7 @@ private:
 #pragma message("QT_DEBUG not defined")
 #endif
 
+#endif
 
 namespace {
 template<typename T> void castChecker(bool isValid, DataInformationBase* data, const T* constValue, T* nonConstValue) {

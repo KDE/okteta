@@ -75,19 +75,11 @@ bool DataInformationBase::isString() const
 TopLevelDataInformation* DataInformationBase::asTopLevel()
 {
     //multiple inheritance -> we can't use reinterpret_cast -> we have to include the file
-#ifndef QT_NO_DEBUG
     return isTopLevel() ? static_cast<TopLevelDataInformation*>(this) : 0;
-#else
-    return static_cast<TopLevelDataInformation*>(this);
-#endif
 }
 
 const TopLevelDataInformation* DataInformationBase::asTopLevel() const
 {
     //multiple inheritance -> we can't use reinterpret_cast -> we have to include the file
-#ifndef QT_NO_DEBUG
     return isTopLevel() ? static_cast<const TopLevelDataInformation*>(this) : 0;
-#else
-    return static_cast<const TopLevelDataInformation*>(this);
-#endif
 }

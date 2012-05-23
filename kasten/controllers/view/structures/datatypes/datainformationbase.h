@@ -78,18 +78,10 @@ public:
     const DummyDataInformation* asDummy() const;
 };
 
-#ifndef QT_NO_DEBUG
 #define CAST_FUNCS_2(typename, name) inline typename* DataInformationBase::as##name() {\
         return is##name() ? reinterpret_cast<typename*>(this) : 0; }\
     inline const typename* DataInformationBase::as##name() const {\
         return is##name() ? reinterpret_cast<const typename*>(this) : 0; }
-#else
-//no check in release mode
-#define CAST_FUNCS_2(typename, name) inline typename* DataInformationBase::as##name() {\
-        return reinterpret_cast<typename*>(this); }\
-    inline const typename* DataInformationBase::as##name() const {\
-        return reinterpret_cast<const typename*>(this); }
-#endif
 
 #define CAST_FUNCS(type) CAST_FUNCS_2(type##DataInformation, type)
 //we have to use reinterpret_cast<> since it does not seem to be possible to declare inheritance
@@ -107,20 +99,12 @@ CAST_FUNCS(String)
 //this is not handled by the macro
 inline DataInformation* DataInformationBase::asDataInformation()
 {
-#ifndef QT_NO_DEBUG
     return isTopLevel() ? 0 : reinterpret_cast<DataInformation*>(this);
-#else
-    return reinterpret_cast<DataInformation*>(this);
-#endif
 }
 
 inline const DataInformation* DataInformationBase::asDataInformation() const
 {
-#ifndef QT_NO_DEBUG
     return isTopLevel() ? 0 : reinterpret_cast<const DataInformation*>(this);
-#else
-    return reinterpret_cast<const DataInformation*>(this);
-#endif
 }
 
 #undef CAST_FUNCS_2
