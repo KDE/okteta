@@ -140,10 +140,16 @@ ByteArrayViewProfileSynchronizer::syncToRemote()
         return;
 
     ByteArrayViewProfile viewProfile = mViewProfileManager->viewProfile( mViewProfileId );
+    updateViewProfile( viewProfile );
+
+    mDirtyFlags = 0;
 
     QList<ByteArrayViewProfile> viewProfiles;
     viewProfiles << viewProfile;
     mViewProfileManager->saveViewProfiles( viewProfiles );
+
+    if( mView )
+        emit localSyncStateChanged( LocalInSync );
 }
 
 void
@@ -219,6 +225,45 @@ void ByteArrayViewProfileSynchronizer::updateView( const ByteArrayViewProfile& v
         mView->setViewModus( viewProfile.viewModus() );
 
     mUpdatingView = false;
+}
+
+void ByteArrayViewProfileSynchronizer::updateViewProfile( ByteArrayViewProfile& viewProfile )
+{
+    if( ! mView )
+        return;
+
+    if( (mDirtyFlags&ShowsNonprintingChanged) )
+        viewProfile.setShowsNonprinting( mView->showsNonprinting() );
+
+    if( (mDirtyFlags&ValueCodingChanged) )
+        viewProfile.setValueCoding( mView->valueCoding() );
+
+    if( (mDirtyFlags&CharCodecChanged) )
+        viewProfile.setCharCoding( mView->charCodingName() );
+
+    if( (mDirtyFlags&SubstituteCharChanged) )
+        viewProfile.setSubstituteChar( mView->substituteChar() );
+
+    if( (mDirtyFlags&UndefinedCharChanged) )
+        viewProfile.setUndefinedChar( mView->undefinedChar() );
+
+    if( (mDirtyFlags&VisibleByteArrayCodingsChanged) )
+        viewProfile.setVisibleByteArrayCodings( mView->visibleByteArrayCodings() );
+
+    if( (mDirtyFlags&OffsetColumnVisibleChanged) )
+        viewProfile.setOffsetColumnVisible( mView->offsetColumnVisible() );
+
+    if( (mDirtyFlags&NoOfBytesPerLineChanged) )
+        viewProfile.setNoOfBytesPerLine( mView->noOfBytesPerLine() );
+
+    if( (mDirtyFlags&NoOfGroupedBytesChanged) )
+        viewProfile.setNoOfGroupedBytes( mView->noOfGroupedBytes() );
+
+    if( (mDirtyFlags&LayoutStyleChanged) )
+        viewProfile.setLayoutStyle( mView->layoutStyle() );
+
+    if( (mDirtyFlags&ViewModusChanged) )
+        viewProfile.setViewModus( mView->viewModus() );
 }
 
 void ByteArrayViewProfileSynchronizer::onViewProfilesRemoved( const QList<ByteArrayViewProfile::Id>& viewProfileIds )

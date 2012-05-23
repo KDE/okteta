@@ -98,6 +98,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
 
   private:
     void updateView( const ByteArrayViewProfile& viewProfile );
+    void updateViewProfile( ByteArrayViewProfile& viewProfile );
     void setDirtyFlag( int dirtyFlag );
 
   private:
