@@ -82,6 +82,36 @@ set( oktetacore_LIB_HDRS
   wordbytearrayservice.h
 )
 
+set( oktetacore_LIB_CCHDRS
+  includes/Range
+  includes/NumberRange
+
+  includes/Address
+  includes/AddressRange
+  includes/Size
+  includes/Byte
+  includes/AbstractByteArrayModel
+  includes/Versionable
+  includes/Bookmarkable
+  includes/ChangesDescribable
+  includes/ChangeHistory
+
+  includes/ByteArrayModel
+  #includes/FileByteArrayModel
+  includes/PieceTableByteArrayModel
+
+  includes/Character
+  includes/ArrayChangeMetrics
+  includes/ByteArrayChange
+
+  includes/Bookmark
+  includes/BookmarksConstIterator
+
+  includes/WordByteArrayService
+  includes/ValueCodec
+  includes/CharCodec
+)
+
 kde4_add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_SRCS} )
 target_link_libraries( ${oktetacore_LIB}
   ${KDE4_KDECORE_LIBS}
@@ -96,6 +126,10 @@ install( TARGETS ${oktetacore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktetacore_LIB_HDRS}
   DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
+install( FILES ${oktetacore_LIB_CCHDRS}
+  DESTINATION ${OKTETALIBS_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
 )
 

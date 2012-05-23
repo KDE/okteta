@@ -53,6 +53,7 @@ set( OKTETALIBS_PATCHLEVEL_VERSION 0 )
 set( OKTETALIBS_VERSION "${OKTETALIBS_MAJOR_VERSION}.${OKTETALIBS_MINOR_VERSION}.${OKTETALIBS_PATCHLEVEL_VERSION}" )
 set( OKTETALIBS_ABI_VERSION 1 )
 set( OKTETALIBS_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/okteta${OKTETALIBS_ABI_VERSION} )
+set( OKTETALIBS_CCINCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/KDE/Okteta${OKTETALIBS_ABI_VERSION} )
 
 set( oktetacore_LIB  oktetacore )
 set( oktetagui_LIB   oktetagui )
@@ -65,7 +66,6 @@ set( OKTETALIBS_LIB_VERSION ${OKTETALIBS_VERSION} )
 # Okteta libs
 add_subdirectory( core )
 add_subdirectory( gui )
-add_subdirectory( includes )
 add_subdirectory( designer )
 
 # Okteta Kasten components

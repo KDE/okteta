@@ -97,6 +97,32 @@ set( oktetagui_LIB_HDRS
   offsetformat.h
 )
 
+set( oktetagui_LIB_CCHDRS
+  includes/LinePosition
+  includes/Line
+  includes/LinePositionRange
+  includes/LineRange
+
+  includes/AbstractColumnStylist
+  includes/AbstractColumnRenderer
+
+  includes/AbstractByteArrayColumnRenderer
+  includes/CharByteArrayColumnRenderer
+  includes/ValueByteArrayColumnRenderer
+  includes/ByteArrayRowColumnRenderer
+  includes/OffsetColumnRenderer
+  includes/BorderColumnRenderer
+
+  includes/AbstractByteArrayView
+  includes/ByteArrayColumnView
+
+  includes/OffsetFormat
+  includes/ByteArrayTableRanges
+  includes/ByteArrayRowView
+  includes/ByteArrayTableLayout
+  includes/WidgetColumnStylist
+)
+
 kde4_add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
 target_link_libraries( ${oktetagui_LIB}
   ${oktetacore_LIB}
@@ -113,6 +139,10 @@ install( TARGETS ${oktetagui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktetagui_LIB_HDRS}
   DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
+install( FILES ${oktetagui_LIB_CCHDRS}
+  DESTINATION ${OKTETALIBS_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
 )
 
