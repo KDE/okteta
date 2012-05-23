@@ -55,9 +55,11 @@ TopLevelDataInformation::~TopLevelDataInformation()
 
 void TopLevelDataInformation::validate()
 {
-    kDebug()
-    << "validation of structure " << mData->name() << "requested";
-    mScriptHandler->validateData(mData.data());
+    kDebug() << "validation of structure " << mData->name() << "requested";
+    if (mScriptHandler)
+        mScriptHandler->validateData(mData.data());
+    else
+        kDebug() << "cannot validate" << mData->name() << "since it has no validators!";
 }
 
 QScriptEngine* TopLevelDataInformation::scriptEngine() const
@@ -73,8 +75,8 @@ void TopLevelDataInformation::resetValidationState()
 void TopLevelDataInformation::updateElement(DataInformation* elem)
 {
     Q_CHECK_PTR(elem);
-    mScriptHandler->updateDataInformation(elem);
-
+    if (mScriptHandler)
+        mScriptHandler->updateDataInformation(elem);
 }
 
 void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
@@ -93,11 +95,10 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
             return;
     }
     quint64 remainingBits = (input->size() - address) * 8;
-    quint8* bitOffset = new quint8(0);
+    quint8 bitOffset = 0;
     mData->beginRead(); //before reading set wasAbleToRead to false
     mData->resetValidationState(); //reading new data -> validation state is old
-    mData->readData(input, address, remainingBits, bitOffset);
-    delete bitOffset;
+    mData->readData(input, address, remainingBits, &bitOffset);
 
     if (mChildDataChanged)
     {
@@ -202,9 +203,4 @@ int TopLevelDataInformation::indexOf(const DataInformation* const data) const
 {
     Q_ASSERT(data == mData.data());
     return mIndex;
-}
-
-ScriptHandlerInfo* TopLevelDataInformation::scriptHandlerInfo() const
-{
-    return mScriptHandler->handlerInfo();
 }

@@ -224,7 +224,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx
     {
         DataInformation* child = data->childAt(i);
         if (child->name() == name)
-            return child->toScriptValue(eng, data->topLevelDataInformation()->scriptHandlerInfo());
+            return child->toScriptValue(eng, data->topLevelDataInformation()->scriptHandler()->handlerInfo());
     }
     return eng->nullValue();
 }

@@ -190,7 +190,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
         DataInformation* data, const char* tag)
 {
     QScriptValue value = data->toScriptValue(data->topLevelDataInformation()->scriptEngine(),
-            data->topLevelDataInformation()->scriptHandlerInfo());
+            data->topLevelDataInformation()->scriptHandler()->handlerInfo());
 
     QScriptValueIterator it(value);
     QList<PropertyPair> foundProperties;

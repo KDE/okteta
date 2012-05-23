@@ -83,7 +83,7 @@ public:
     int indexOf(const DataInformation* const data) const;
     int index() const;
     void setIndex(int newIndex);
-    ScriptHandlerInfo* scriptHandlerInfo() const;
+    ScriptHandler* scriptHandler() const;
     ScriptLogger* logger() const;
     void setChildDataChanged();
 
@@ -187,6 +187,11 @@ inline bool TopLevelDataInformation::isTopLevel() const
 inline ScriptLogger* TopLevelDataInformation::logger() const
 {
     return mLogger.data();
+}
+
+inline ScriptHandler* TopLevelDataInformation::scriptHandler() const
+{
+    return mScriptHandler.data();
 }
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */
