@@ -2,7 +2,7 @@ Okteta project
 ===================
 made within the KDE community.
 
-Copyright: 2003-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2003-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
@@ -12,37 +12,38 @@ Overview
 This directory holds the files of the Okteta project. This project is about
 viewing and editing of data on the byte level.
 
-It is divided in three parts:
-* basic Okteta libraries
-* Okteta elements for Kasten
-* End-user products
+It is divided into three parts, the first two are for developing and the last
+one for users:
+* basic libraries offering Qt-based classes for viewing/editing bytearrays
+* Okteta elements for the Kasten framework
+* program Okteta and Okteta KPart
 
-The basic Okteta libraries, liboktetacore and liboktetagui, contain the classic
-simple Qt/KDE widgets/classes others want to reuse in their code by linking to
-these libraries. Additionally there is a Qt Designer plugin for the two
-Okteta widgets from liboktetagui. This part is spread over the subdirs
-core, gui, includes, and designer.
+The basic libraries, liboktetacore and liboktetagui, contain the classic simple
+Qt/KDE widgets/classes others want to reuse in their code by linking to these
+libraries. Additionally there is a Qt Designer plugin for the two Okteta widgets
+from liboktetagui. This part is spread over the subdirs core/, gui/, and
+designer/.
 
-The Okteta elements for Kasten are specific Okteta classes for building programs and parts
-with the Kasten framework. The elements are divided into the libraries liboktetakastencore,
-liboktetakastengui, and liboktetakastencontroller, all found in the subdir kasten.
-The basic framework Kasten itself is currently found at the subdirectory libs/kasten/.
+The Okteta elements for the Kasten framework are specific Okteta classes for
+building programs and plugins with the Kasten framework. The elements are
+divided into the libraries liboktetakastencore, liboktetakastengui, and
+liboktetakastencontroller, all found in the subdir kasten/.
+The foundation of the framework Kasten itself is currently found within the
+Okteta sources, in the subdirectory libs/kasten/.
 
-The end-user products are the stand-alone program also named Okteta, a KPart useable
-e.g. for Konqueror/KDevelop, and a module implementing the service type KHexEdit/KBytesEdit
-as defined by some kdelibs interfaces. These are in the subdirs program and parts.
+The end-user products are the stand-alone program also named Okteta, a KPart
+useable e.g. for Konqueror, and a module implementing the service type
+KHexEdit/KBytesEdit as defined by some kdelibs interfaces. These are in the
+subdirs program/ and parts/.
 
 
 What to find in which subdirectory:
 --------------------------------
 core:
-  sources of the basic core library of Okteta, liboktetacore
+  core library for Qt-based bytearray viewer/editor widgets, liboktetacore
 
 gui:
-  sources of the basic gui library of Okteta, liboktetagui
-
-includes:
-  CamelCase headers of the basic libraries of Okteta
+  gui library for QWidget-based bytearray viewer/editor widgets, liboktetagui
 
 designer:
   plugin for Qt Designer to add support for widgets from the Okteta gui library
@@ -51,16 +52,16 @@ kasten:
   Okteta elements for the Kasten framework (currently found in libs/kasten)
 
 parts:
-  collection of modules based on the Okteta libraries
+  collection of plugins based on the Okteta libraries
 
 parts/kbytesedit:
-  sources of the implementation for the service type KHexEdit/KBytesEdit
+  plugin for the service type KHexEdit/KBytesEdit
 
 parts/kpart:
-  sources of the implementation of a KPart::ReadWritePart
+  plugin of the type KPart::ReadWritePart, with BrowserExtension
 
 program:
-  a standalone hex editor program, based on Kasten and the Okteta Kasten elements
+  a standalone hex editor program, based on the Kasten framework
 
 libs:
-  neutral utility libs and frameworks, e.g. Kasten, useful outside Okteta
+  neutral utility libs and frameworks, useful outside Okteta, e.g. Kasten

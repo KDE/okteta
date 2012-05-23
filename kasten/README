@@ -1,18 +1,17 @@
-Okteta Core library
-===================
+Okteta Kasten Elements
+======================
 part of the Okteta project, made within the KDE community.
 
-Copyright: 2003-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2007-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
 
 description:
 -----------
-The lib offers an abstract byte array interface called "AbstractByteArrayModel".
-This interface can be subclassed to offer access to different byte arrays
-like paged gigabyte big files, video memory or whatever you can imagine
-(hopefully). Some example byte array models are included.
+Okteta Kasten Elements are libraries with elements for the Kasten framework
+(which is currently also located inside the Okteta sources, in libs/kasten/).
+They use the basic Okteta libraries liboktetacore and liboktetagui.
 
 As the API of these classes is still in active development there is no guarantee
 on the binary or source compatibility between 0.x releases. If there is a change
@@ -23,4 +22,4 @@ use different versions.
 
 installing:
 -----------
-Installs the lib and the public headers, incl. CamelCase variants.
+Installs the lib and the public headers.

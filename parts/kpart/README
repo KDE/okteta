@@ -2,17 +2,18 @@ Okteta KPart
 =======================
 part of the Okteta project, made within the KDE community.
 
-Copyright: 2003-2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+Copyright: 2003-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
 Author/Maintainer: Friedrich W. H. Kossebau <kossebau@kde.org>
 
 
 description:
 ------------
-This module delivers a KParts::ReadWritePart to display and edit files as byte arrays.
-It also implements the BrowserExtension.
+Delivers a plugin of the type KParts::ReadWritePart to display and
+edit the raw data of files as byte arrays.
+The plugin also implements the BrowserExtension.
 
 
 installing:
 -----------
-Installs the kpart module and the .desktop file describing the kpart.
+Installs the kpart pl and the .desktop file describing the kpart.
