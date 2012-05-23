@@ -22,6 +22,8 @@
 
 #include "dummydatainformation.h"
 
+#include <QScriptValue>
+
 DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QString& name)
     : DataInformation(name, parent)
 {

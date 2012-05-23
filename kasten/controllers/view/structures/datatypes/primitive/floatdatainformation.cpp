@@ -22,7 +22,7 @@
 #include "floatdatainformation.h"
 
 #include <limits>
-
+#include <QScriptValue>
 #include <KDoubleNumInput>
 #include <KGlobal>
 

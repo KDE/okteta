@@ -25,6 +25,7 @@
 #define BOOLDATAINFORMATION_H
 
 #include "unsigneddatainformation.h"
+#include <QScriptValue>
 #include <KDebug>
 
 

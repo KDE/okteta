@@ -145,13 +145,6 @@ inline int ArrayDataInformation::indexOf(const DataInformation*const data) const
     return mData->indexOf(data);
 }
 
-inline QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
-{
-    if (Q_UNLIKELY(!mData))
-        return QScriptValue();
-    return mData->toScriptValue(index, engine, handlerInfo);
-}
-
 inline BitCount32 ArrayDataInformation::childSize(uint index) const
 {
     if (Q_UNLIKELY(!mData))

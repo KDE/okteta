@@ -35,12 +35,12 @@ public:
     AdditionalData(const AdditionalData& data);
     ~AdditionalData();
 
-    QScriptValue& updateFunction();
+    const QScriptValue& updateFunction() const;
     void setUpdateFunction(const QScriptValue& func);
-    QScriptValue& validationFunction();
+    const QScriptValue& validationFunction() const;
     void setValidationFunction(const QScriptValue& func);
     QString validationError() const;
-    void setValidationError(QString error);
+    void setValidationError(const QString& error);
 private:
     /** the function called when new data is read, to update the structure */
     QScriptValue mUpdateFunction;
@@ -49,7 +49,7 @@ private:
     QString mValidationError;
 };
 
-inline QScriptValue& AdditionalData::updateFunction()
+inline const QScriptValue& AdditionalData::updateFunction() const
 {
     return mUpdateFunction;
 }
@@ -59,7 +59,7 @@ inline void AdditionalData::setUpdateFunction(const QScriptValue& func)
     mUpdateFunction = func;
 }
 
-inline QScriptValue& AdditionalData::validationFunction()
+inline const QScriptValue& AdditionalData::validationFunction() const
 {
     return mValidationFunction;
 }
@@ -74,7 +74,7 @@ inline QString AdditionalData::validationError() const
     return mValidationError;
 }
 
-inline void AdditionalData::setValidationError(QString error)
+inline void AdditionalData::setValidationError(const QString& error)
 {
     mValidationError = error;
 }

@@ -21,6 +21,7 @@
  */
 #include "sintdatainformation.h"
 
+#include <QScriptValue>
 #include <KGlobal>
 
 template<typename T>

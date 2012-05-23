@@ -20,9 +20,10 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #include "complexarraydata.h"
+
+#include <QScriptValue>
+
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
 #include "../../script/scripthandlerinfo.h"

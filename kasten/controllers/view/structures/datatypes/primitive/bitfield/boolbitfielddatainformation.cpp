@@ -20,10 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "boolbitfielddatainformation.h"
-#include "../booldatainformation.h"
 
 #include <KComboBox>
-#include <KGlobal>
+#include <QScriptValue>
+
+#include "../booldatainformation.h"
+
 
 QString BoolBitfieldDataInformation::valueString() const
 {

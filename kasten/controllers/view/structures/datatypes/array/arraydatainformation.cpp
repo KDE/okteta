@@ -304,7 +304,7 @@ AbstractArrayData* ArrayDataInformation::primitiveArrayFromType(uint length, Pri
         return new PrimitiveArrayData<Type_Double>(length, this);
     default:
         kWarning() << "none of the cases matched, probably an error";
-        return NULL;
+        return 0;
     }
 }
 
@@ -320,4 +320,11 @@ AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInfo
     //we no longer need data now that we have the type
     delete data;
     return primitiveArrayFromType(length, type);
+}
+
+QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
+{
+    if (Q_UNLIKELY(!mData))
+        return QScriptValue();
+    return mData->toScriptValue(index, engine, handlerInfo);
 }

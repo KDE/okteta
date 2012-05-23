@@ -30,8 +30,6 @@
 #include <address.h>
 
 #include "structviewpreferences.h"
-#include "additionaldata.h"
-
 #include "datainformationbase.h"
 
 #define DATAINFORMATION_CLONE(type) virtual inline type##DataInformation* clone() const {\
@@ -49,12 +47,14 @@ class QScriptContext;
 class QScriptEngine;
 class QScriptValue;
 class ScriptLogger;
+class AdditionalData;
 
 /** Interface that must be implemented by all datatypes */
-class DataInformation: public DataInformationBase
+class DataInformation : public DataInformationBase
 {
 protected:
     explicit DataInformation(const DataInformation&);
+
 public:
     virtual DataInformation* clone() const = 0;
     explicit DataInformation(const QString& name, DataInformationBase* parent = NULL);
@@ -64,7 +64,8 @@ public:
     {
         ColumnName = 0, ColumnType, ColumnValue, COLUMN_COUNT
     };
-    enum DataInformationEndianess {
+    enum DataInformationEndianess
+    {
         EndianessFromSettings = 0, EndianessInherit, EndianessLittle, EndiannessBig
     };
 
@@ -90,7 +91,6 @@ public:
     virtual QVariant childData(int row, int column, int role) const;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
     virtual BitCount32 childSize(uint index) const = 0;
-
 
     /** The size of this DataInformation type in bits (to allow bitfields in future) */
     virtual QString typeName() const = 0;
@@ -131,7 +131,7 @@ public:
      * @return the number of bits read or @c -1 if none were read
      */
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
-             BitCount64 bitsRemaining, quint8* bitOffset) = 0;
+            BitCount64 bitsRemaining, quint8* bitOffset) = 0;
     /** sets mWasAbleToRead to false for all children and this object.
      *  Gets called once before the reading of the whole structure starts. */
     void beginRead();
@@ -154,13 +154,15 @@ public:
     TopLevelDataInformation* topLevelDataInformation() const;
     DataInformation* mainStructure();
 
-    void setAdditionalData(AdditionalData* data);
-    AdditionalData* additionalData() const;
+    QScriptValue updateFunc() const;
+    void setUpdateFunc(const QScriptValue& func);
+    QScriptValue validationFunc() const;
+    void setValidationFunc(const QScriptValue& func);
     QString validationError() const;
     void setValidationError(QString errorMessage);
-
     bool validationSuccessful() const;
     void setValidationSuccessful(bool validationSuccessful = true);
+
     bool hasBeenValidated() const;
     void setHasBeenValidated(bool hasBeen);
     DataInformationEndianess byteOrder() const;
@@ -168,13 +170,15 @@ public:
     void setByteOrder(DataInformationEndianess newEndianess);
     QString fullObjectPath() const;
 
-    virtual void resetValidationState(); //virtual for datainformationwithchildren
+    virtual void resetValidationState(); //virtual for DataInformationWithChildren
     bool wasAbleToRead() const;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) = 0;
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
-    QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name, uint upTo) const;
+    QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name,
+            uint upTo) const;
     ScriptLogger* logger() const;
+
 protected:
     /**
      *  the offset of child number @p index compared to the beginning of the structure in bits.
@@ -186,11 +190,15 @@ protected:
      * Find the index of a DataInformation in this object, needed to calculate the row
      */
     virtual int indexOf(const DataInformation* const data) const; //TODO make this pure virtual
+    bool additionalDataNeeded(AdditionalData* data) const;
+    AdditionalData* additionalData() const;
+    void setAdditionalData(AdditionalData* data);
+
 protected:
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;
     bool mWasAbleToRead :1;
-    DataInformationEndianess mByteOrder : 2;
+    DataInformationEndianess mByteOrder :2;
     QScopedPointer<AdditionalData> mAdditionalData;
     DataInformationBase* mParent;
     QString mName;
@@ -200,7 +208,7 @@ Q_DECLARE_METATYPE(DataInformation*)
 Q_DECLARE_METATYPE(const DataInformation*)
 
 inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
-{
+        {
     Q_UNUSED(column)
     Q_UNUSED(fileLoaded);
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
@@ -212,7 +220,7 @@ inline QString DataInformation::name() const
 }
 
 inline DataInformation* DataInformation::childAt(unsigned int) const
-{
+        {
     return NULL;
 }
 
@@ -231,11 +239,6 @@ inline unsigned int DataInformation::childCount() const
     return 0;
 }
 
-inline AdditionalData* DataInformation::additionalData() const
-{
-    return mAdditionalData.data();
-}
-
 inline bool DataInformation::wasAbleToRead() const
 {
     return mWasAbleToRead;
@@ -245,16 +248,16 @@ inline ByteOrder DataInformation::effectiveByteOrder() const
 {
     switch (mByteOrder)
     {
-        case EndiannessBig:
-            return ByteOrderEnumClass::BigEndian;
-        case EndianessLittle:
-            return ByteOrderEnumClass::LittleEndian;
-        case EndianessFromSettings:
-            return Kasten2::StructViewPreferences::byteOrder();
-        case EndianessInherit:
-            return (mParent && !mParent->isTopLevel()) ?
-                mParent->asDataInformation()->effectiveByteOrder()
-                : Kasten2::StructViewPreferences::byteOrder();
+    case EndiannessBig:
+        return ByteOrderEnumClass::BigEndian;
+    case EndianessLittle:
+        return ByteOrderEnumClass::LittleEndian;
+    case EndianessFromSettings:
+        return Kasten2::StructViewPreferences::byteOrder();
+    case EndianessInherit:
+        return (mParent && !mParent->isTopLevel()) ?
+                mParent->asDataInformation()->effectiveByteOrder() :
+                Kasten2::StructViewPreferences::byteOrder();
     }
 
     // here must be a return... I guess this is correct
@@ -265,7 +268,6 @@ inline DataInformation::DataInformationEndianess DataInformation::byteOrder() co
 {
     return mByteOrder;
 }
-
 
 inline void DataInformation::setByteOrder(DataInformation::DataInformationEndianess newByteOrder)
 {
@@ -286,6 +288,11 @@ inline void DataInformation::setParent(DataInformationBase* newParent)
 inline DataInformationBase* DataInformation::parent() const
 {
     return mParent;
+}
+
+inline AdditionalData* DataInformation::additionalData() const
+{
+    return mAdditionalData.data();
 }
 
 #endif /* DATAINFORMATION_H_ */

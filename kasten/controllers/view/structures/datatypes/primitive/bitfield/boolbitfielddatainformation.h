@@ -23,7 +23,6 @@
 #define BOOLBITFIELDDATAINFORMATION_H_
 
 #include "abstractbitfielddatainformation.h"
-#include "../poddecoder/typeeditors/uintspinbox.h"
 
 class BoolBitfieldDataInformation : public AbstractBitfieldDataInformation
 {

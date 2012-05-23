@@ -154,11 +154,11 @@ void DataInformationWithChildren::resetValidationState()
 {
     mHasBeenValidated = false;
     mValidationSuccessful = false;
-    if (mAdditionalData)
-        mAdditionalData->setValidationError(QString());
-    foreach (DataInformation* child, mChildren)
-    {    child->resetValidationState();
-}
+    setValidationError(QString());
+    for (int i = 0; i < mChildren.size(); ++i)
+    {
+        mChildren.at(i)->resetValidationState();
+    }
 }
 
 void DataInformationWithChildren::calculateValidationState()
@@ -282,21 +282,20 @@ QString DataInformationWithChildren::tooltipString() const
 {
     if (mHasBeenValidated && !mValidationSuccessful)
     {
-        QString validationError;
-        if (additionalData() && !additionalData()->validationError().isEmpty())
+        QString validationMsg = validationError();
+        if (validationMsg.isEmpty())
         {
-            validationError = i18nc("not all values in this structure"
-                    " are as they should be", "Validation failed: \"%1\"",
-                    additionalData()->validationError());
+            validationMsg = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed.");
         }
         else
         {
-            validationError = i18nc("not all values in this structure"
-                    " are as they should be", "Validation failed.");
+            validationMsg = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed: \"%1\"", validationMsg);
         }
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)\n\n %6",
                 "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
-                childCount(), name(), valueString(), typeName(), sizeString(), validationError);
+                childCount(), name(), valueString(), typeName(), sizeString(), validationMsg);
     }
     else
     {

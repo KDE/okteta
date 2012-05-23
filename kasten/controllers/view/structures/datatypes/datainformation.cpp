@@ -21,22 +21,24 @@
  */
 #include "datainformation.h"
 #include "topleveldatainformation.h"
+#include "additionaldata.h"
+
+#include <QScriptValue>
 
 #include <KLocale>
 #include <KLineEdit>
 #include <KIcon>
 
-
-DataInformation::DataInformation(const QString& name, DataInformationBase* parent) :
-    mValidationSuccessful(false), mHasBeenValidated(false), mWasAbleToRead(false),
-    mByteOrder(EndianessInherit), mAdditionalData(0), mParent(parent), mName(name)
+DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
+        : mValidationSuccessful(false), mHasBeenValidated(false), mWasAbleToRead(false),
+                mByteOrder(EndianessInherit), mAdditionalData(0), mParent(parent), mName(name)
 {
 }
 
-DataInformation::DataInformation(const DataInformation& d) :
-            mValidationSuccessful(d.mValidationSuccessful),
-            mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead),
-            mByteOrder(d.mByteOrder), mParent(0), mName(d.mName)
+DataInformation::DataInformation(const DataInformation& d)
+        : mValidationSuccessful(d.mValidationSuccessful),
+                mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead),
+                mByteOrder(d.mByteOrder), mParent(0), mName(d.mName)
 {
     if (d.mAdditionalData)
         mAdditionalData.reset(new AdditionalData(*(d.mAdditionalData)));
@@ -66,7 +68,7 @@ QString DataInformation::sizeString() const
 }
 
 BitCount32 DataInformation::positionRelativeToRoot(int index) const
-{
+        {
     Q_CHECK_PTR(mParent);
     //FIXME this needs updating to support bitfield marking
     if (mParent->isTopLevel())
@@ -81,7 +83,6 @@ BitCount32 DataInformation::positionRelativeToRoot(int index) const
 DataInformation* DataInformation::mainStructure()
 {
     Q_CHECK_PTR(mParent);
-
     if (mParent->isTopLevel())
         return this;
     else
@@ -89,24 +90,33 @@ DataInformation* DataInformation::mainStructure()
 
 }
 
-void DataInformation::setAdditionalData(AdditionalData* data)
-{
-    mAdditionalData.reset(data);
-}
-
 QString DataInformation::validationError() const
 {
-    if (!mAdditionalData)
+    AdditionalData* data = additionalData();
+    if (!data)
         return QString();
-    return mAdditionalData->validationError();
+    return data->validationError();
 }
 
 void DataInformation::setValidationError(QString errorMessage)
 {
+    AdditionalData* data = additionalData();
+    if (errorMessage.isEmpty())
+    {
+        if (data)
+            data->setValidationError(errorMessage);
+        if (!additionalDataNeeded(data))
+            setAdditionalData(0);
+        return;
+    }
     setValidationSuccessful(false);
-    if (!mAdditionalData)
-        mAdditionalData.reset(new AdditionalData());
-    mAdditionalData->setValidationError(errorMessage);
+    if (data)
+        data->setValidationError(errorMessage);
+    else
+    {
+        AdditionalData* newData = new AdditionalData();
+        newData->setValidationError(errorMessage);
+    }
 }
 
 bool DataInformation::validationSuccessful() const
@@ -151,15 +161,99 @@ ScriptLogger* DataInformation::logger() const
     return topLevelDataInformation()->logger();
 }
 
-int DataInformation::indexOf(const DataInformation* const data) const
+bool DataInformation::additionalDataNeeded(AdditionalData* data) const
+        {
+    return data->updateFunction().isValid() && data->validationFunction().isValid()
+            && !data->validationError().isEmpty();
+}
+
+QScriptValue DataInformation::updateFunc() const
 {
+    const AdditionalData* data = additionalData();
+    if (data)
+        return data->updateFunction();
+    return QScriptValue();
+}
+
+void DataInformation::setUpdateFunc(const QScriptValue& func)
+{
+    AdditionalData* data = additionalData();
+    if (!func.isValid() || func.isNull() || func.isUndefined())
+    {
+        if (data)
+            data->setUpdateFunction(QScriptValue());
+        //otherwise don't allocate data object
+        if (!additionalDataNeeded(data))
+            setAdditionalData(0); //we don't need it anymore, just delete
+    }
+    else
+    {
+        if (!func.isFunction())
+        {
+            kWarning() << func.toString() << "is not a function!";
+            return;
+        }
+        if (data)
+        {
+            data->setUpdateFunction(func);
+        }
+        else
+        {
+            AdditionalData* newData = new AdditionalData();
+            newData->setUpdateFunction(func);
+            setAdditionalData(newData);
+        }
+    }
+}
+
+QScriptValue DataInformation::validationFunc() const
+{
+    const AdditionalData* data = additionalData();
+    if (data)
+        return data->validationFunction();
+    return QScriptValue();
+}
+
+void DataInformation::setValidationFunc(const QScriptValue& func)
+{
+    AdditionalData* data = additionalData();
+    if (!func.isValid() || func.isNull() || func.isUndefined())
+    {
+        if (data)
+            data->setValidationFunction(QScriptValue());
+        //otherwise don't allocate data object
+        if (!additionalDataNeeded(data))
+            setAdditionalData(0); //we don't need it anymore, just delete
+    }
+    else
+    {
+        if (!func.isFunction())
+        {
+            kWarning() << func.toString() << "is not a function!";
+            return;
+        }
+        if (data)
+        {
+            data->setValidationFunction(func);
+        }
+        else
+        {
+            AdditionalData* newData = new AdditionalData();
+            newData->setValidationFunction(func);
+            setAdditionalData(newData);
+        }
+    }
+}
+
+int DataInformation::indexOf(const DataInformation* const data) const
+        {
     Q_UNUSED(data)
     Q_ASSERT_X(false, "DataInformation::indexOf", "this should never happen!");
     return 0;
 }
 
 QVariant DataInformation::childData(int row, int column, int role) const
-{
+        {
     Q_ASSERT_X(false, "DataInformation::childData", "this should never happen!");
     Q_UNUSED(row)
     Q_UNUSED(column)
@@ -168,7 +262,7 @@ QVariant DataInformation::childData(int row, int column, int role) const
 }
 
 QVariant DataInformation::data(int column, int role) const
-{
+        {
     if (role == Qt::DisplayRole)
     {
         if (column == ColumnName)
@@ -186,46 +280,45 @@ QVariant DataInformation::data(int column, int role) const
     {
         //XXX better icons?
         if (mHasBeenValidated)
-            return KIcon(QLatin1String(mValidationSuccessful ? "task-complete":"dialog-warning"));
+            return KIcon(QLatin1String(mValidationSuccessful ? "task-complete" : "dialog-warning"));
     }
     return QVariant();
 }
-
 
 QString DataInformation::tooltipString() const
 {
     if (mHasBeenValidated && !mValidationSuccessful)
     {
-        QString validationError;
-        if (additionalData() && !additionalData()->validationError().isEmpty())
+        QString validationMsg = validationError();
+        if (validationMsg.isEmpty())
         {
-            validationError = i18nc("not all values in this structure"
-                " are as they should be", "Validation failed: \"%1\"",
-                additionalData()->validationError());
+            validationMsg = i18nc("not all values in this structure"
+                    " are as they should be", "Validation failed.");
         }
         else
         {
-            validationError = i18nc("not all values in this structure"
-                " are as they should be", "Validation failed.");
+            validationMsg = i18nc("not all values in this structure are as they should be",
+                    "Validation failed: \"%1\"", additionalData()->validationError());
         }
         return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
-                valueString(), typeName(), sizeString(), validationError);
+                valueString(), typeName(), sizeString(), validationMsg);
     }
     else
     {
         return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
-                    valueString(), typeName(), sizeString());
+                valueString(), typeName(), sizeString());
     }
 }
 
 Qt::ItemFlags DataInformation::childFlags(int row, int column, bool fileLoaded) const
-{
-    Q_ASSERT_X(false, "DataInformation::childFlags()", "Only subclass versions of this should be called");
+        {
+    Q_ASSERT_X(false, "DataInformation::childFlags()",
+            "Only subclass versions of this should be called");
     return childAt(row)->flags(column, fileLoaded);
 }
 
 DataInformation* DataInformation::child(QString name) const
-{
+        {
     int size = childCount();
     for (int i = 0; i < size; ++i)
     {
@@ -236,19 +329,24 @@ DataInformation* DataInformation::child(QString name) const
     return 0;
 }
 
-QPair<DataInformation*, QString> DataInformation::findChildForDynamicArrayLength(const QString& name, uint upTo) const
-{
+QPair<DataInformation*, QString> DataInformation::findChildForDynamicArrayLength(
+        const QString& name, uint upTo) const
+        {
     Q_ASSERT(upTo <= childCount());
-    for (int i = upTo - 1; i >= 0; --i) {
+    for (int i = upTo - 1; i >= 0; --i)
+    {
         DataInformation* current = childAt(i);
         QString start = name;
-        if (current->canHaveChildren()) {
-            QPair<DataInformation*, QString> tmp = findChildForDynamicArrayLength(name, current->childCount());
+        if (current->canHaveChildren())
+        {
+            QPair<DataInformation*, QString> tmp = findChildForDynamicArrayLength(name,
+                    current->childCount());
             current = tmp.first;
             if (current)
                 start = start + tmp.second;
         }
-        if (current && current->name() == name) {
+        if (current && current->name() == name)
+        {
             return qMakePair(current, QString(start + QLatin1String(".value")));
         }
     }
@@ -285,7 +383,7 @@ int DataInformation::row() const
 }
 
 QWidget* DataInformation::createChildEditWidget(uint, QWidget*) const
-{
+        {
     Q_ASSERT_X(false, "DataInformation::createChildEditWidget",
             "only implemented so not all subclasses have to, since it will never be called there. Error!");
     return 0;
@@ -293,13 +391,13 @@ QWidget* DataInformation::createChildEditWidget(uint, QWidget*) const
 }
 
 void DataInformation::setChildWidgetData(uint, QWidget*) const
-{
+        {
     Q_ASSERT_X(false, "DataInformation::setChildWidgetData",
             "only implemented so not all subclasses have to, since it will never be called there. Error!");
 }
 
 QVariant DataInformation::dataFromChildWidget(uint, const QWidget*) const
-{
+        {
     Q_ASSERT_X(false, "DataInformation::dataFromChildWidget",
             "only implemented so not all subclasses have to, since it will never be called there. Error!");
     return QVariant();
@@ -315,9 +413,14 @@ QString DataInformation::fullObjectPath() const
     QString result;
     if (par->isArray())
         result = QLatin1Char('[') + QString::number(par->asDataInformation()->indexOf(this))
-            + QLatin1Char(']');
+                + QLatin1Char(']');
     else
         result = QLatin1Char('.') + name();
     result.prepend(par->asDataInformation()->fullObjectPath());
     return result;
+}
+
+void DataInformation::setAdditionalData(AdditionalData* data)
+{
+    mAdditionalData.reset(data);
 }

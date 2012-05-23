@@ -21,6 +21,7 @@
  */
 #include "chardatainformation.h"
 
+#include <QScriptValue>
 #include <KLineEdit>
 #include <KGlobal>
 

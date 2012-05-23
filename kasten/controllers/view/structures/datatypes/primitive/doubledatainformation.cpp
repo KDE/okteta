@@ -21,6 +21,7 @@
  */
 #include "doubledatainformation.h"
 
+#include <QScriptValue>
 #include <KDoubleNumInput>
 #include <KGlobal>
 

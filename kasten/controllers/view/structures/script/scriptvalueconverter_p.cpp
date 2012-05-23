@@ -141,20 +141,12 @@ DataInformation* toDataInformation(const QScriptValue& value, const QString& pas
         if (byteOrder.isValid())
             returnVal->setByteOrder(
                     AbstractStructureParser::byteOrderFromString(byteOrder.toString(), logger));
-        AdditionalData* aData = 0;
+
         if (updateFunc.isFunction())
-        {
-            aData = new AdditionalData();
-            aData->setUpdateFunction(updateFunc);
-        }
+            returnVal->setUpdateFunc(updateFunc);
+
         if (validationFunc.isFunction())
-        {
-            if (!aData)
-                aData = new AdditionalData();
-            aData->setValidationFunction(validationFunc);
-        }
-        if (aData)
-            returnVal->setAdditionalData(aData);
+            returnVal->setValidationFunc(updateFunc);
     }
     return returnVal;
 }

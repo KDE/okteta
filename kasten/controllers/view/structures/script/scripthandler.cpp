@@ -51,8 +51,7 @@ ScriptHandler::~ScriptHandler()
 
 void ScriptHandler::validateData(DataInformation* data)
 {
-    if (!data)
-        return;
+    Q_CHECK_PTR(data);
 
     data->setHasBeenValidated(false); //not yet validated
 
@@ -66,15 +65,14 @@ void ScriptHandler::validateData(DataInformation* data)
     }
 
     //check if has a validation function:
-    AdditionalData* additionalData = data->additionalData();
-    if (additionalData && additionalData->validationFunction().isValid())
+    QScriptValue validationFunc = data->validationFunc();
+    if (validationFunc.isValid())
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
         mDebugger->attachTo(mEngine.data());
         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
-        kDebug()
-        << "validating element: " << data->name();
+        kDebug() << "validating element: " << data->name();
 #endif
 
         QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
@@ -82,7 +80,7 @@ void ScriptHandler::validateData(DataInformation* data)
                 &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
-        QScriptValue result = additionalData->validationFunction().call(thisObject, args);
+        QScriptValue result = validationFunc.call(thisObject, args);
         if (result.isError())
         {
             mTopLevel->logger()->error(QLatin1String("error occurred while validating element ")
@@ -106,12 +104,11 @@ void ScriptHandler::validateData(DataInformation* data)
 
 void ScriptHandler::updateDataInformation(DataInformation* data)
 {
-    if (!data)
-        return;
+    Q_CHECK_PTR(data);
 
-    //check if has a validation function:
-    AdditionalData* additionalData = data->additionalData();
-    if (additionalData && additionalData->updateFunction().isValid())
+    //check if has an update function:
+    QScriptValue updateFunc = data->updateFunc();
+    if (updateFunc.isValid())
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
@@ -126,7 +123,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
                 &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
-        QScriptValue result = additionalData->updateFunction().call(thisObject, args);
+        QScriptValue result = updateFunc.call(thisObject, args);
         if (result.isError())
         {
             mTopLevel->logger()->error(QLatin1String("error occurred while updating element ")

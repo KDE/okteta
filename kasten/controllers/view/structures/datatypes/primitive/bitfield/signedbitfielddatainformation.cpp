@@ -20,10 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "signedbitfielddatainformation.h"
+
+#include <QScriptValue>
+
 #include "../poddecoder/typeeditors/sintspinbox.h"
 #include "../sintdatainformation.h"
 
-#include <KGlobal>
 
 QString SignedBitfieldDataInformation::valueString() const
 {

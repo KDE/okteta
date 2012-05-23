@@ -360,7 +360,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, Parser
         return 0;
     }
     if (updateFunc.isValid())
-        retVal->setAdditionalData(new AdditionalData(QScriptValue(), updateFunc));
+        retVal->setUpdateFunc(updateFunc);
     if (newInfo.scriptEngineNeeded)
         info.scriptEngineNeeded = true; //we need it since child needs it
     return retVal;
