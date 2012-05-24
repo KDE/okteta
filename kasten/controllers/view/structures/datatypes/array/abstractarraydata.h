@@ -48,7 +48,7 @@ public:
     virtual QVariant dataAt(int index, int column, int role) = 0;
 
     virtual unsigned int length() const = 0;
-    virtual void setLength(int newLength) = 0;
+    virtual void setLength(uint newLength) = 0;
 
     virtual QString typeName() const = 0;
 

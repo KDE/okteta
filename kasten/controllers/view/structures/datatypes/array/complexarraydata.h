@@ -40,11 +40,11 @@ public:
     ComplexArrayData(unsigned int initialLength, DataInformation* data, DataInformation* parent);
     virtual ~ComplexArrayData();
 
-    virtual void setLength(int newLength);
 
     virtual QVariant dataAt(int index, int column, int role);
 
     virtual unsigned int length() const;
+    virtual void setLength(uint newLength);
     virtual BitCount32 size() const;
 
     virtual QString typeName() const;
@@ -72,6 +72,8 @@ public:
     virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
     virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
     virtual void setChildWidgetData(uint index, QWidget* w) const;
+private:
+    void appendChildren(uint from, uint to);
 private:
     DataInformation* mChildType;
     QVector<DataInformation*> mChildren;

@@ -33,10 +33,7 @@ ComplexArrayData::ComplexArrayData(unsigned int initialLength, DataInformation* 
 {
     mChildren.reserve(initialLength);
     mChildType->setParent(mParent);
-    for (unsigned int i = 0; i < initialLength; ++i) {
-        DataInformation* child = mChildType->clone();
-        child->setParent(mParent);
-        mChildren.append(child);    }
+    appendChildren(0, initialLength);
 }
 
 ComplexArrayData::~ComplexArrayData()
@@ -45,19 +42,24 @@ ComplexArrayData::~ComplexArrayData()
     delete mChildType;
 }
 
-void ComplexArrayData::setLength(int newLength)
+void ComplexArrayData::appendChildren(uint from, uint to)
 {
-    int oldLength = mChildren.count();
-    kDebug() << "resizing" << mParent->name() << "from " << oldLength << " to " << newLength;
+    for (uint i = from; i < to; ++i)
+    {
+        DataInformation* arrayElem = mChildType->clone();
+        arrayElem->setName(QString::number(i));
+        arrayElem->setParent(mParent);
+        mChildren.append(arrayElem);
+    }
+}
+
+void ComplexArrayData::setLength(uint newLength)
+{
+    uint oldLength = mChildren.count();
     if (newLength > oldLength)
     {
         mChildren.reserve(newLength);
-        for (int i = oldLength; i < newLength; ++i)
-        {
-            DataInformation* arrayElem = mChildType->clone();
-            arrayElem->setParent(mParent);
-            mChildren.append(arrayElem);
-        }
+        appendChildren(oldLength, newLength);
     }
     else if (newLength < oldLength) //XXX maybe keep some cached
     {

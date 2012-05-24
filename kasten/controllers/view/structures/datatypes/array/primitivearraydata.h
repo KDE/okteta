@@ -49,8 +49,8 @@ public:
     AllPrimitiveTypes valueAt(int index) const;
     virtual int indexOf(const DataInformation* data) const;
     virtual unsigned int length() const;
+    virtual void setLength(uint newLength);
     virtual BitCount32 offset(uint row) const;
-    virtual void setLength(int newLength);
     virtual BitCount32 size() const;
     virtual PrimitiveDataType primitiveType() const;
     virtual void setParent(DataInformation* parent);
@@ -129,7 +129,7 @@ inline BitCount32 PrimitiveArrayData<type>::size() const
 }
 
 template<PrimitiveDataTypeEnum type>
-void PrimitiveArrayData<type>::setLength(int newLength)
+void PrimitiveArrayData<type>::setLength(uint newLength)
 {
     Q_ASSERT(newLength >= 0);
     mData.resize(newLength);
