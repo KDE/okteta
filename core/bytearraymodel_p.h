@@ -74,6 +74,8 @@ class ByteArrayModelPrivate
     int maxSize() const;
     /** returns whether the memory of the byte array is kept on resize */
     bool keepsMemory() const;
+    // TODO 0.10: turn this bool flag into a real flag which also tells how to free the memory if "autodeleted"
+    // perhaps merge keepsMemory flag into that new flag as well
     bool autoDelete() const;
 
   public: // Bookmarkable API
