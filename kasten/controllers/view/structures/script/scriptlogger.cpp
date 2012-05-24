@@ -66,6 +66,7 @@ QDebug ScriptLogger::log(LogLevel level, const QScriptValue& cause)
 void ScriptLogger::clear()
 {
     beginRemoveRows(QModelIndex(), 0, qMax(0, mData.size() - 1));
+    qDeleteAll(mData);
     mData.clear();
     endRemoveRows();
 }
