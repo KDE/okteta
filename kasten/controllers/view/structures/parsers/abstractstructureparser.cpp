@@ -48,8 +48,8 @@ DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFrom
         return DataInformation::EndianessInherit;
     else
     {
-        logger->warn(QLatin1String("Unrecognized byte order '") + string
-                + QLatin1String("', defaulting to 'inherit'"));
+        logger->warn().nospace() << "Unrecognized byte order '" << string
+                << "', defaulting to 'inherit'";
         return DataInformation::EndianessInherit;
     }
 }

@@ -132,8 +132,7 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
         minValue = std::numeric_limits<qint64>::min();
         break;
     default:
-        logger->warn(QLatin1String("Invalid type") + PrimitiveDataInformation::typeName(type)
-                + QLatin1String("for an enumeration, no values were parsed"));
+        logger->warn() << type << "is an invalid type for an enumeration, no values were parsed";
         return QPair<AllPrimitiveTypes, QString>();
     }
 
@@ -150,10 +149,11 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
         }
         else
         {
-            logger->warn(QLatin1String("Value in enum ") + name + QLatin1String(" (")
-                    + QString::number(num) + QLatin1String(" is larger than the biggest"
-                            " double value that can represent any smaller integer exactly,"
-                            "skipping it. Write the value as a string so it is exact."));
+            logger->warn() << "The value" << num << "in enum" << name
+                    << " is larger than the biggest double value that can represent"
+                            " any smaller integer exactly, skipping it.\n"
+                            "Write the value as a string so it can be converted"
+                            "to an integer exactly.";
             return QPair<AllPrimitiveTypes, QString>();
         }
     }
@@ -174,27 +174,27 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
         }
         if (!ok)
         {
-            logger->warn(QString(QLatin1String("Could not convert '%1' to an enum "
-                    "constant, name was: %2")).arg(valueString, name));
+            logger->warn() << QString(QLatin1String("Could not convert '%1' to an enum "
+                    "constant, name was: %2")).arg(valueString, name);
             return QPair<AllPrimitiveTypes, QString>();
         }
     }
     quint64 asUnsigned = intValue.ulongValue;
     if (asUnsigned > maxValue)
     {
-        logger->warn(QString(QLatin1String("Enumerator %1: %2 is larger than the maximum "
+        logger->warn() << QString(QLatin1String("Enumerator %1: %2 is larger than the maximum "
                 "possible for type %3 (%4)")).arg(name,
                 QString::number(asUnsigned), PrimitiveDataInformation::typeName(type),
-                QString::number(maxValue)));
+                QString::number(maxValue));
         return QPair<AllPrimitiveTypes, QString>();
     }
     qint64 asSigned = intValue.longValue;
     if (minValue != 0 && asSigned < minValue)
     {
-        logger->warn(QString(QLatin1String("Enumerator %1: %2 is smaller than the minimum "
+        logger->warn() << QString(QLatin1String("Enumerator %1: %2 is smaller than the minimum "
                 "possible for type %3 (%4)")).arg(name,
                 QString::number(asSigned), PrimitiveDataInformation::typeName(type),
-                QString::number(minValue)));
+                QString::number(minValue));
         return QPair<AllPrimitiveTypes, QString>();
     }
     return QPair<AllPrimitiveTypes, QString>(intValue, name);

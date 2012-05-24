@@ -54,24 +54,15 @@ int ScriptLogger::rowCount(const QModelIndex& parent) const
     return mData.size();
 }
 
-void ScriptLogger::error(const QString& message, const QStringList& backtrace,
-        const QScriptValue& cause)
-{
-    QString finalMessage = message;
-    for (int i = 0; i < backtrace.size(); ++i)
-        finalMessage += backtrace.at(i) + QLatin1Char('\n');
-    error(finalMessage, cause);
-}
-
-void ScriptLogger::log(LogLevel level, const QString& message, const QScriptValue& cause)
+QDebug ScriptLogger::log(LogLevel level, const QScriptValue& cause)
 {
     Data data;
-    data.message = message;
     data.cause = cause;
     data.level = level;
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
     mData.append(data);
     endInsertRows();
+    return QDebug(&data.message);
 }
 
 void ScriptLogger::clear()

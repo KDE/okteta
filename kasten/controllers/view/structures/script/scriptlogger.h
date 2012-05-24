@@ -26,51 +26,40 @@
 #include <QAbstractListModel>
 #include <QVector>
 #include <QScriptValue>
+#include <QDebug>
 
-class ScriptLogger : public QAbstractListModel
-{
+class ScriptLogger: public QAbstractListModel {
 Q_OBJECT
 
 public:
-    enum LogLevel
-    {
-        LogInfo, LogWarning, LogError
-    };
-    struct Data
-    {
-        ScriptLogger::LogLevel level;
-        QString message;
-        QScriptValue cause;
-    };
-    virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-    virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
+	enum LogLevel {
+		LogInfo, LogWarning, LogError
+	};
+	struct Data {
+		ScriptLogger::LogLevel level;
+		QString message;
+		QScriptValue cause;
+	};
+	virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+	virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
-    void info(const QString& message, const QScriptValue& cause = QScriptValue());
-    void warn(const QString& message, const QScriptValue& cause = QScriptValue());
-    void error(const QString& message, const QScriptValue& cause = QScriptValue());
-    void error(const QString& message, const QStringList& backtrace,
-            const QScriptValue& cause = QScriptValue());
-    void log(LogLevel level, const QString& message, const QScriptValue& cause);
-    void clear();
-    /** @return all the messages, mainly used for testing */
-    QStringList messages() const;
+	QDebug info(const QScriptValue& cause) { return log(LogInfo, cause); }
+	QDebug warn(const QScriptValue& cause) { return log(LogWarning, cause); }
+	QDebug error(const QScriptValue& cause) { return log(LogError, cause); }
+	QDebug info() { return log(LogInfo, QScriptValue()); }
+	QDebug warn() { return log(LogWarning, QScriptValue()); }
+	QDebug error() { return log(LogError, QScriptValue()); }
+	/**
+	 * @return a QDebug to write the message to.
+	 * Do NOT save this, since the string it writes to may become invalid!
+	 * Just write the message using the << operators and do not touch it anymore after the line ends
+	 */
+	QDebug log(LogLevel level, const QScriptValue& cause);
+	void clear();
+	/** @return all the messages, mainly used for testing */
+	QStringList messages() const;
 private:
-    QVector<Data> mData;
+	QVector<Data> mData;
 };
-
-inline void ScriptLogger::error(const QString& message, const QScriptValue& cause)
-{
-    log(LogError, message, cause);
-}
-
-inline void ScriptLogger::warn(const QString& message, const QScriptValue& cause)
-{
-    log(LogWarning, message, cause);
-}
-
-inline void ScriptLogger::info(const QString& message, const QScriptValue& cause)
-{
-    log(LogInfo, message, cause);
-}
 
 #endif // SCRIPTLOGGER_H

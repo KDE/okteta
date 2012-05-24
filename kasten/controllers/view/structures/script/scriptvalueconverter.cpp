@@ -56,8 +56,8 @@ QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger*
         }
         else
         {
-            logger->info(QString(QLatin1String("Could not convert property '%1'."))
-                    .arg(it.name()), it.value());
+            logger->info(it.value()).nospace() << "Could not convert property '"
+                    << it.name() << "'.";
         }
     }
     return ret;

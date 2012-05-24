@@ -83,15 +83,16 @@ void ScriptHandler::validateData(DataInformation* data)
         QScriptValue result = validationFunc.call(thisObject, args);
         if (result.isError())
         {
-            mTopLevel->logger()->error(QLatin1String("error occurred while validating element ")
-                    + data->fullObjectPath(), result);
+            mTopLevel->logger()->error(result) << "Error occurred while validating element"
+                    << data->fullObjectPath();
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
         else if (mEngine->hasUncaughtException())
         {
-            mTopLevel->logger()->error(QLatin1String("error occurred while validating element ")
-                    + data->fullObjectPath(), mEngine->uncaughtExceptionBacktrace(), result);
+            mTopLevel->logger()->error(result) << "Error occurred while validating element "
+                    << data->fullObjectPath() << "\nBacktrace:"
+                    << mEngine->uncaughtExceptionBacktrace();
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
@@ -126,13 +127,14 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         QScriptValue result = updateFunc.call(thisObject, args);
         if (result.isError())
         {
-            mTopLevel->logger()->error(QLatin1String("error occurred while updating element ")
-                    + data->fullObjectPath(), result);
+            mTopLevel->logger()->error(result) << "error occurred while updating element "
+                    << data->fullObjectPath();
         }
         if (mEngine->hasUncaughtException())
         {
-            mTopLevel->logger()->error(QLatin1String("error occurred while updating element ")
-                    + data->fullObjectPath(), mEngine->uncaughtExceptionBacktrace(), result);
+            mTopLevel->logger()->error(result) << "error occurred while updating element "
+                    << data->fullObjectPath() << "\nBacktrace:"
+                    << mEngine->uncaughtExceptionBacktrace();
         }
     }
 }

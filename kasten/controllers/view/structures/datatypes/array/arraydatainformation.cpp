@@ -85,8 +85,8 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
         kWarning() << "attempting to set the length of the array" << fullObjectPath() << "to "
                 << newLength << " which would use too much memory";
 
-        logger()->warn(QString(QLatin1String("%1: new array length is too large (%2), limiting to (%3)"))
-            .arg(fullObjectPath(), QString::number(newLength), QString::number(MAX_LEN)));
+        logger()->warn() << QString(QLatin1String("%1: new array length is too large (%2), limiting to (%3)"))
+            .arg(fullObjectPath(), QString::number(newLength), QString::number(MAX_LEN));
         newLength = MAX_LEN;
     }
     int oldLength = mData->length();
