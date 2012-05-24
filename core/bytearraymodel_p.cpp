@@ -80,8 +80,9 @@ ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
 
 void ByteArrayModelPrivate::setData( Byte* data, int size, int rawSize, bool keepMemory )
 {
+    //use delete[], since usually mData should be allocated by calling new Byte[n]
     if( mAutoDelete )
-        delete mData;
+        delete[] mData;
     const int oldSize = mSize;
 
     mData = data;

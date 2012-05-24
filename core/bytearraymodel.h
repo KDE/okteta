@@ -34,7 +34,7 @@ namespace Okteta
 
 class ByteArrayModelPrivate;
 
-/** 
+/**
   *@author Friedrich W. H. Kossebau
   */
 
@@ -94,6 +94,9 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
     /** sets whether the memory given by setData or in the constructor should be kept on resize
       */
     void setKeepsMemory( bool keepsMemory = true );
+    /** sets whether the memory given by setData or in the constructor gets deleted in destructor
+     * or when new data is set. The data MUST have been allocated using new[] otherwise behaviour
+     * is undefined */
     void setAutoDelete( bool autoDelete = true );
     void setData( Byte* data, int size, int rawSize = -1, bool keepsMemory = true );
     void signalContentsChanged( int i1, int i2 );

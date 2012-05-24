@@ -29,7 +29,7 @@
 #include "bookmarksconstiterator.h"
 #include "bookmarklistconstiteratoradapter.h"
 #include "bookmarklist.h"
-// 
+//
 #include <arraychangemetricslist.h>
 
 
@@ -119,8 +119,8 @@ class ByteArrayModelPrivate
     BookmarkList m_bookmarks;
 };
 
-
-inline ByteArrayModelPrivate::~ByteArrayModelPrivate() { if( mAutoDelete ) delete mData; }
+//use delete[], since usually mData should be allocated by calling new Byte[n]
+inline ByteArrayModelPrivate::~ByteArrayModelPrivate() { if( mAutoDelete ) delete[] mData; }
 
 inline Byte ByteArrayModelPrivate::byte( Address offset ) const { return mData[offset]; }
 inline Size ByteArrayModelPrivate::size()                 const { return mSize; }
