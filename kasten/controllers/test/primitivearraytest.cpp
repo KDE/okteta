@@ -57,7 +57,7 @@ private:
     void testReadBool64();
 
 private:
-    Okteta::Byte* data;
+    QScopedArrayPointer<Okteta::Byte> data;
     QScopedPointer<Okteta::ByteArrayModel> model;
 };
 
@@ -74,7 +74,7 @@ static const uint SIZE = 8192;
 void PrimitiveArrayTest::initTestCase()
 {
     qsrand(QTime::currentTime().msec());
-    data = new Okteta::Byte[SIZE];
+    data.reset(new Okteta::Byte[SIZE]);
     //ensure that we have at least one NaN (quiet + signalling)
     AllPrimitiveTypes quietDouble(std::numeric_limits<double>::quiet_NaN());
     AllPrimitiveTypes signallingDouble(std::numeric_limits<double>::signaling_NaN());
@@ -95,7 +95,7 @@ void PrimitiveArrayTest::initTestCase()
         data[i] = (char(qrand() & 0xff));
     }
     Okteta::Byte* copy = new Okteta::Byte[SIZE];
-    memcpy(copy, data, SIZE);
+    memcpy(copy, data.data(), SIZE);
     model.reset(new Okteta::ByteArrayModel(copy, SIZE));
     model->setAutoDelete(true);
     QCOMPARE(model->size(), Okteta::Size(SIZE));
@@ -181,7 +181,7 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(model.data(), 0, model->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), model->size() * 8);
-    T* dataAsT = reinterpret_cast<T*>(data);
+    T* dataAsT = reinterpret_cast<T*>(data.data());
     PrimitiveArrayData<primType>* arrayData =
             dynamic_cast<PrimitiveArrayData<primType>*>(dataInf->mData);
     QVERIFY(arrayData);

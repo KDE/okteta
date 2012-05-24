@@ -75,9 +75,10 @@ void OsdParserTest::testPrimitive()
     const TopLevelDataInformation* td = tds.at(0);
     DataInformation* data = td->actualDataInformation();
     QCOMPARE(data->name(), QLatin1String("foo"));
-    PrimitiveDataInformation* prim = dynamic_cast<PrimitiveDataInformation*>(data);
+    PrimitiveDataInformation* prim = data->asPrimitive();
     QVERIFY(prim);
     QCOMPARE(prim->type(), type);
+    qDeleteAll(tds);
 
     //just to ensure comparison is case insensitive
     OsdParser parser2(secondXml);
@@ -86,9 +87,10 @@ void OsdParserTest::testPrimitive()
     const TopLevelDataInformation* td2 = tds2.at(0);
     DataInformation* data2 = td2->actualDataInformation();
     QCOMPARE(data2->name(), QString(QLatin1String("foo")));
-    PrimitiveDataInformation* prim2 = dynamic_cast<PrimitiveDataInformation*>(data2);
+    PrimitiveDataInformation* prim2 = data2->asPrimitive();
     QVERIFY(prim2);
     QCOMPARE(prim2->type(), type);
+    qDeleteAll(tds2);
 }
 
 

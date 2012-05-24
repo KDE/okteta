@@ -95,6 +95,7 @@ void ScriptValueConverterTest::basicConverterTest()
 
     //test with an array now
     sVal = evaluate("var foo = [uint8(), uint16(), uint32()]; foo");
+    qDeleteAll(converted);
     converted = ScriptValueConverter::convertValues(sVal, logger.data());
     QCOMPARE(converted.size(), 3);
     QVERIFY(converted[0]->isPrimitive());
@@ -159,13 +160,14 @@ void ScriptValueConverterTest::basicConverterTest()
     sVal = evaluate("var foo = { value : function() { return 1; },\n"
             " str : struct({first : uint8(), second : uint16()}),\n"
             " obj : array(uint32(), 10) \n}\n foo");
+    qDeleteAll(converted);
     converted = ScriptValueConverter::convertValues(sVal, logger.data());
     QCOMPARE(converted.size(), 2);
     //first entry is invalid
     QCOMPARE(logger->rowCount(QModelIndex()), 11);
     //this should cause 2 error messages -> 11 now
     //qDebug() << logger->messages();
-
+    qDeleteAll(converted);
 }
 
 void ScriptValueConverterTest::testPrimitives_data()
@@ -212,23 +214,23 @@ void ScriptValueConverterTest::testPrimitives()
     QCOMPARE(val2.property(QLatin1String("type")).toString(), typeString);
     if (type == Type_Invalid)
         return; //the cast will fail
-    DataInformation* data1 = ScriptValueConverter::convert(val1, QLatin1String("val1"),
-            logger.data());
-    DataInformation* data2 = ScriptValueConverter::convert(val2, QLatin1String("val2"),
-            logger.data());
+    QScopedPointer<DataInformation> data1(ScriptValueConverter::convert(val1, QLatin1String("val1"),
+            logger.data()));
+    QScopedPointer<DataInformation> data2(ScriptValueConverter::convert(val2, QLatin1String("val2"),
+            logger.data()));
     QVERIFY(data1);
     QVERIFY(data2);
-    PrimitiveDataInformation* p1 = dynamic_cast<PrimitiveDataInformation*>(data1);
-    PrimitiveDataInformation* p2 = dynamic_cast<PrimitiveDataInformation*>(data2);
+    PrimitiveDataInformation* p1 = data1->asPrimitive();
+    PrimitiveDataInformation* p2 = data2->asPrimitive();
     QVERIFY(p1);
     QVERIFY(p2);
     QCOMPARE(p1->type(), type);
     QCOMPARE(p2->type(), type);
     if (type == Type_Bitfield)
         return; //the following tests don't work with bitfields
-    DataInformation* data3 = convert(QString(QLatin1String("\"%1\"")).arg(typeString));
+    QScopedPointer<DataInformation> data3(convert(QString(QLatin1String("\"%1\"")).arg(typeString)));
     QVERIFY(data3);
-    PrimitiveDataInformation* p3 = dynamic_cast<PrimitiveDataInformation*>(data3);
+    PrimitiveDataInformation* p3 = data3->asPrimitive();
     QVERIFY(p3);
     QCOMPARE(p3->type(), type);
 }
@@ -256,9 +258,9 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(!val.isUndefined());
     QCOMPARE(val.property(QLatin1String("type")).toString(), QString(QLatin1String("enum")));
 
-    DataInformation* data = ScriptValueConverter::convert(val, QLatin1String("val"), logger.data());
+    QScopedPointer<DataInformation> data (ScriptValueConverter::convert(val, QLatin1String("val"), logger.data()));
     QVERIFY(data);
-    EnumDataInformation* e = dynamic_cast<EnumDataInformation*>(data);
+    AbstractEnumDataInformation* e = data->asEnum();
     QVERIFY(e);
 
     QMap<AllPrimitiveTypes, QString> enumVals = e->enumValues()->values();

@@ -194,6 +194,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
         ScriptLogger* logger = new ScriptLogger();
         ParserInfo info;
         info.engine = eng;
+        info.scriptEngineNeeded = false;
         info.enums = parseEnums(rootElem, logger);
         info.logger = logger;
         info.parent = 0;
