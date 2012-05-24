@@ -160,6 +160,7 @@ public:
     void setValidationFunc(const QScriptValue& func);
     QString validationError() const;
     void setValidationError(QString errorMessage);
+    void unsetValidationError();
     bool validationSuccessful() const;
     void setValidationSuccessful(bool validationSuccessful = true);
 

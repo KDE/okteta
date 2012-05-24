@@ -98,24 +98,36 @@ QString DataInformation::validationError() const
     return data->validationError();
 }
 
+void DataInformation::unsetValidationError()
+{
+    AdditionalData* data = additionalData();
+    if (data)
+    {
+        data->setValidationError(QString());
+        //check whether we still need the AdditionalData
+        if (!additionalDataNeeded(data))
+            setAdditionalData(0);
+    }
+}
+
 void DataInformation::setValidationError(QString errorMessage)
 {
     AdditionalData* data = additionalData();
     if (errorMessage.isEmpty())
     {
-        if (data)
-            data->setValidationError(errorMessage);
-        if (!additionalDataNeeded(data))
-            setAdditionalData(0);
+        unsetValidationError();
         return;
     }
-    setValidationSuccessful(false);
-    if (data)
-        data->setValidationError(errorMessage);
     else
     {
-        AdditionalData* newData = new AdditionalData();
-        newData->setValidationError(errorMessage);
+        setValidationSuccessful(false);
+        if (data)
+            data->setValidationError(errorMessage);
+        else
+        {
+            AdditionalData* newData = new AdditionalData();
+            newData->setValidationError(errorMessage);
+        }
     }
 }
 
@@ -142,10 +154,9 @@ void DataInformation::setHasBeenValidated(bool hasBeen)
 
 void DataInformation::resetValidationState()
 {
+    unsetValidationError();
     mHasBeenValidated = false;
     mValidationSuccessful = false;
-    if (mAdditionalData)
-        mAdditionalData->setValidationError(QString());
 }
 void DataInformation::beginRead()
 {
@@ -162,7 +173,8 @@ ScriptLogger* DataInformation::logger() const
 }
 
 bool DataInformation::additionalDataNeeded(AdditionalData* data) const
-        {
+{
+    Q_CHECK_PTR(data);
     return data->updateFunction().isValid() && data->validationFunction().isValid()
             && !data->validationError().isEmpty();
 }
@@ -180,11 +192,15 @@ void DataInformation::setUpdateFunc(const QScriptValue& func)
     AdditionalData* data = additionalData();
     if (!func.isValid() || func.isNull() || func.isUndefined())
     {
+        //reset update func to QScriptValue() and delete additionalData() if not needed anymore
         if (data)
+        {
             data->setUpdateFunction(QScriptValue());
-        //otherwise don't allocate data object
-        if (!additionalDataNeeded(data))
-            setAdditionalData(0); //we don't need it anymore, just delete
+            if (!additionalDataNeeded(data))
+                setAdditionalData(0); //we don't need it anymore, just delete
+        }
+        //if additionalData() is already null no need to do anything
+        return;
     }
     else
     {
@@ -220,10 +236,14 @@ void DataInformation::setValidationFunc(const QScriptValue& func)
     if (!func.isValid() || func.isNull() || func.isUndefined())
     {
         if (data)
+        {
+            //reset validationfunc func to QScriptValue() and delete additionalData() if not needed anymore
             data->setValidationFunction(QScriptValue());
-        //otherwise don't allocate data object
-        if (!additionalDataNeeded(data))
-            setAdditionalData(0); //we don't need it anymore, just delete
+            if (!additionalDataNeeded(data))
+                setAdditionalData(0);
+        }
+        //if additionalData() is already null no need to do anything
+        return;
     }
     else
     {

@@ -152,9 +152,9 @@ BitCount32 DataInformationWithChildren::offset(unsigned int index) const
 
 void DataInformationWithChildren::resetValidationState()
 {
+    unsetValidationError();
     mHasBeenValidated = false;
     mValidationSuccessful = false;
-    setValidationError(QString());
     for (int i = 0; i < mChildren.size(); ++i)
     {
         mChildren.at(i)->resetValidationState();
