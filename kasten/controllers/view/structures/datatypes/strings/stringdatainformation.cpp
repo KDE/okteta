@@ -182,11 +182,6 @@ QString StringDataInformation::valueString() const
     return mData->completeString();
 }
 
-QString StringDataInformation::name() const
-{
-    return DataInformation::name();
-}
-
 Qt::ItemFlags StringDataInformation::childFlags(int row, int column, bool fileLoaded) const
 {
     Q_UNUSED(fileLoaded);

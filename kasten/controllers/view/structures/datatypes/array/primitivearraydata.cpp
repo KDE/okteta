@@ -167,8 +167,7 @@ QVariant PrimitiveArrayData<type>::dataAt(int index, int column, int role)
     if (role == Qt::DisplayRole)
     {
         if (column == DataInformation::ColumnName)
-            return QString(AbstractArrayData::mParent->name() + QLatin1Char('[')
-                    + QString::number(index) + QLatin1Char(']'));
+            return QString(QLatin1Char('[') + QString::number(index) + QLatin1Char(']'));
         if (column == DataInformation::ColumnType)
             return PrimitiveType::typeName(type);
         if (column == DataInformation::ColumnValue)

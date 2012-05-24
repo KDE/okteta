@@ -96,7 +96,8 @@ public:
     virtual QString typeName() const = 0;
     /** by default just returns an empty QString */
     virtual QString valueString() const;
-    virtual QString name() const;
+    QString name() const;
+    void setName(const QString& newName);
     virtual QString tooltipString() const;
     /** needs to be virtual for bitfields */
     virtual QString sizeString() const;
@@ -218,6 +219,11 @@ inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
 inline QString DataInformation::name() const
 {
     return mName;
+}
+
+inline void DataInformation::setName(const QString& newName)
+{
+    mName = newName;
 }
 
 inline DataInformation* DataInformation::childAt(unsigned int) const

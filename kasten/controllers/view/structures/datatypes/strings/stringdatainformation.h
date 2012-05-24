@@ -75,7 +75,6 @@ public:
     virtual BitCount32 childSize(uint index) const;
 
     virtual QString valueString() const;
-    virtual QString name() const;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     StringType encoding() const;
