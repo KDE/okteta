@@ -183,7 +183,7 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     QCOMPARE(Okteta::Size(result), model->size() * 8);
     T* dataAsT = reinterpret_cast<T*>(data.data());
     PrimitiveArrayData<primType>* arrayData =
-            dynamic_cast<PrimitiveArrayData<primType>*>(dataInf->mData);
+            dynamic_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
     QVERIFY(arrayData);
     for (uint i = 0; i < dataInf->childCount(); ++i)
     {

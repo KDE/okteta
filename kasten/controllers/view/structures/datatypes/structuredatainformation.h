@@ -31,6 +31,7 @@ protected:
     explicit StructureDataInformation(const StructureDataInformation& d);
 
 public:
+    explicit StructureDataInformation(const QString& name, DataInformation* parent);
     explicit StructureDataInformation(const QString& name, const QVector<DataInformation*>& children =
             QVector<DataInformation*>(), DataInformation* parent = 0);
     virtual ~StructureDataInformation();

@@ -32,15 +32,16 @@
 #include "primitivearraydata.h"
 
 ArrayDataInformation::ArrayDataInformation(QString name, uint length, DataInformation* childType,
-        DataInformation* parent) : DataInformation(name, parent), mData(0)
+        DataInformation* parent) : DataInformation(name, parent)
 {
     if (length > MAX_LEN)
     {
         kWarning() << "array " << name << ": " << length << "exceeds maximum length of " << MAX_LEN;
         length = MAX_LEN;
     }
+    Q_CHECK_PTR(childType);
     childType->setParent(this);
-    mData = arrayDataFromType(length, childType);
+    mData.reset(arrayDataFromType(length, childType));
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d) :
@@ -52,12 +53,12 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d) :
         if (d.mData->isComplex())
         {
             //childtype creates a copy, so this is safe
-            DataInformation* childType = static_cast<ComplexArrayData*>(d.mData)->childType();
-            mData = new ComplexArrayData(length, childType, this);
+            DataInformation* childType = static_cast<ComplexArrayData*>(d.mData.data())->childType();
+            mData.reset(new ComplexArrayData(length, childType, this));
         }
         else
         {
-            mData = primitiveArrayFromType(length, d.mData->primitiveType());
+            mData.reset(primitiveArrayFromType(length, d.mData->primitiveType()));
         }
         Q_CHECK_PTR(mData);
     }
@@ -65,7 +66,6 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d) :
 
 ArrayDataInformation::~ArrayDataInformation()
 {
-    delete mData;
 }
 
 QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext* context)
@@ -137,28 +137,15 @@ QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContex
     if (len > 0)
     {
         topLevel->_childrenAboutToBeRemoved(this, 0, len - 1);
-        delete mData;
-        mData = 0;
+        mData.reset(0);
         topLevel->_childrenRemoved(this, 0, len - 1);
-    }
-    else
-    {
-        //no need to emit the signals, which cause expensive model update
-        delete mData; //don't emit the signals
-        mData = 0;
-    }
-
-
-    if (len > 0)
-    {
         topLevel->_childrenAboutToBeInserted(this, 0, len - 1);
-        mData = arrayDataFromType(len, newChildType);
+        mData.reset(arrayDataFromType(len, newChildType));
         topLevel->_childrenInserted(this, 0, len - 1);
     }
-    else
-    {
+    else {
         //no need to emit the signals, which cause expensive model update
-        mData = arrayDataFromType(len, newChildType);
+        mData.reset(arrayDataFromType(len, newChildType));
     }
     return true; //success
 }

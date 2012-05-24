@@ -31,6 +31,7 @@ protected:
     explicit UnionDataInformation(const UnionDataInformation& d);
 
 public:
+    explicit UnionDataInformation(const QString& name, DataInformation* parent);
     explicit UnionDataInformation(const QString& name, const QVector<DataInformation*>& children
             = QVector<DataInformation*>(), DataInformation* parent = 0);
     virtual ~UnionDataInformation();

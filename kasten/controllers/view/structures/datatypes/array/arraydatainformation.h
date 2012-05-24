@@ -87,7 +87,7 @@ private:
 protected:
     virtual BitCount32 offset(unsigned int index) const;
 
-    AbstractArrayData* mData;
+    QScopedPointer<AbstractArrayData> mData;
     static const uint MAX_LEN = 10000;
 };
 

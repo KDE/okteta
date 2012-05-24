@@ -76,7 +76,7 @@ protected:
 
     QVector<T> mData;
     uint mNumReadValues; //the number of values read before EOF
-    DummyDataInformation* mDummy;
+    QScopedPointer<DummyDataInformation> mDummy;
 };
 
 //constructors
@@ -91,7 +91,6 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, 
 template<PrimitiveDataTypeEnum type>
 inline PrimitiveArrayData<type>::~PrimitiveArrayData()
 {
-    delete mDummy;
 }
 
 template<PrimitiveDataTypeEnum type>
@@ -113,7 +112,7 @@ inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
 {
     Q_ASSERT(idx < length());
     Q_UNUSED(idx);
-    return mDummy;
+    return mDummy.data();
 }
 
 template<PrimitiveDataTypeEnum type>

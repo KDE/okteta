@@ -160,7 +160,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
     QFileInfo fileInfo(mAbsolutePath);
 
     QVector<TopLevelDataInformation*> structures;
-    QScopedPointer<ScriptLogger> rootLogger(new ScriptLogger); //only needed in we get an error right now
+    QScopedPointer<ScriptLogger> rootLogger(new ScriptLogger()); //only needed in we get an error right now
     QDomDocument document = openDoc(rootLogger.data());
     if (document.isNull())
     {
@@ -285,7 +285,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, Parser
     }
     QScriptValue updateFunc;
     bool okay = true;
-    const int length = lengthStr.toInt(&okay, 10);
+    int length = lengthStr.toInt(&okay, 10);
     if (okay)
     {
         if (length < 0)
@@ -298,6 +298,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, Parser
     }
     else
     {
+        length = 0; //just to be safe
         //could not parse as number -> must be a member (dynamic array)
         QString access;
         //we have to find an element that matches the element passed in lengthStr
@@ -320,7 +321,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, Parser
                 else
                 {
                     info.logger->error().nospace() << "could not find a child with name '"
-                            << length << "'.\nIn element " << toRawXML(xmlElem);
+                            << lengthStr << "'.\nIn element " << toRawXML(xmlElem);
                     return 0;
                 }
             }
@@ -349,20 +350,25 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, Parser
     }
     //parse subelement
     //use dummy until real type has been determined
-    ArrayDataInformation* retVal = new ArrayDataInformation(name, 0, new DummyDataInformation(0));
+    ArrayDataInformation* tmp = new ArrayDataInformation(name, 0,
+            new DummyDataInformation(0, QString()), info.parent);
     ParserInfo newInfo = info;
-    newInfo.parent = retVal;
+    newInfo.parent = tmp;
     DataInformation* subElem = parseNode(node, newInfo);
+    delete tmp;
+    if (newInfo.scriptEngineNeeded)
+        info.scriptEngineNeeded = true; //we need it since child needs it
+
     if (!subElem)
     {
         info.logger->error() << "could not parse subelement type of array:" << toRawXML(xmlElem);
-        delete retVal;
         return 0;
     }
+    Q_ASSERT(!subElem->isDummy());
+    ArrayDataInformation* retVal = new ArrayDataInformation(name, length, subElem, info.parent);
     if (updateFunc.isValid())
         retVal->setUpdateFunc(updateFunc);
-    if (newInfo.scriptEngineNeeded)
-        info.scriptEngineNeeded = true; //we need it since child needs it
+
     return retVal;
 }
 
@@ -399,14 +405,14 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
     {
         info.logger->info() << "no bitfield type specified, defaulting to unsigned.\nIn element:"
                 << toRawXML(xmlElem);
-        bitf = new UnsignedBitfieldDataInformation(name, width);
+        bitf = new UnsignedBitfieldDataInformation(name, width, info.parent);
     }
     else if (typeStr == QLatin1String("bool"))
-        bitf = new BoolBitfieldDataInformation(name, width);
+        bitf = new BoolBitfieldDataInformation(name, width, info.parent);
     else if (typeStr == QLatin1String("unsigned"))
-        bitf = new UnsignedBitfieldDataInformation(name, width);
+        bitf = new UnsignedBitfieldDataInformation(name, width, info.parent);
     else if (typeStr == QLatin1String("signed"))
-        bitf = new SignedBitfieldDataInformation(name, width);
+        bitf = new SignedBitfieldDataInformation(name, width, info.parent);
     else
     {
         info.logger->error() << "invalid bitfield type attribute given:" << typeStr
@@ -421,7 +427,7 @@ UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem,
 
 {
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
-    UnionDataInformation* un = new UnionDataInformation(name);
+    UnionDataInformation* un = new UnionDataInformation(name, info.parent);
     QDomNode node = xmlElem.firstChild();
     QVector<DataInformation*> children;
     ParserInfo newInfo = info;
@@ -443,7 +449,7 @@ StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem,
         ParserInfo& info) const
         {
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
-    StructureDataInformation* stru = new StructureDataInformation(name);
+    StructureDataInformation* stru = new StructureDataInformation(name, info.parent);
     QDomNode node = xmlElem.firstChild();
     QVector<DataInformation*> children;
     ParserInfo newInfo = info;
@@ -494,9 +500,9 @@ AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem,
     }
 
     if (isFlags)
-        return new FlagDataInformation(name, prim, def);
+        return new FlagDataInformation(name, prim, def, info.parent);
     else
-        return new EnumDataInformation(name, prim, def);
+        return new EnumDataInformation(name, prim, def, info.parent);
 }
 
 StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
@@ -519,7 +525,7 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
     if ((mode & StringData::CharCount) && (mode & StringData::ByteCount))
         mode &= ~StringData::ByteCount; //when both exists charcount wins
 
-    StringDataInformation* data = new StringDataInformation(name, encoding);
+    StringDataInformation* data = new StringDataInformation(name, encoding, info.parent);
 //if mode is None, we assume zero terminated strings
     bool ok;
     if (mode == StringData::None)
