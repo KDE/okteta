@@ -175,8 +175,9 @@ ScriptLogger* DataInformation::logger() const
 bool DataInformation::additionalDataNeeded(AdditionalData* data) const
 {
     Q_CHECK_PTR(data);
-    return data->updateFunction().isValid() && data->validationFunction().isValid()
-            && !data->validationError().isEmpty();
+    return data->updateFunction().isValid()
+            || data->validationFunction().isValid()
+            || !data->validationError().isEmpty();
 }
 
 QScriptValue DataInformation::updateFunc() const
