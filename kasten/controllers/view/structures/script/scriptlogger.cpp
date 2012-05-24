@@ -32,11 +32,11 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
     Q_ASSERT(!index.parent().isValid());
     if (role == Qt::DisplayRole)
     {
-        return mData.at(row).message;
+        return mData.at(row)->message;
     }
     else if (role == Qt::DecorationRole)
     {
-        LogLevel level = mData.at(row).level;
+        LogLevel level = mData.at(row)->level;
         if (level == LogInfo)
             return KIcon(QLatin1String("dialog-info"));
         else if (level == LogWarning)
@@ -56,13 +56,11 @@ int ScriptLogger::rowCount(const QModelIndex& parent) const
 
 QDebug ScriptLogger::log(LogLevel level, const QScriptValue& cause)
 {
-    Data data;
-    data.cause = cause;
-    data.level = level;
+    Data* data = new Data(level, cause);
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
     mData.append(data);
     endInsertRows();
-    return QDebug(&data.message);
+    return QDebug(&data->message);
 }
 
 void ScriptLogger::clear()
@@ -72,14 +70,23 @@ void ScriptLogger::clear()
     endRemoveRows();
 }
 
+ScriptLogger::ScriptLogger()
+{
+}
+
+ScriptLogger::~ScriptLogger()
+{
+    qDeleteAll(mData);
+}
+
 QStringList ScriptLogger::messages(LogLevel minLevel) const
 {
     QStringList ret;
     for (int i = 0; i < mData.size(); ++i)
     {
-        const Data& d = mData.at(i);
-        if (d.level >= minLevel)
-            ret << d.message;
+        const Data* d = mData.at(i);
+        if (d->level >= minLevel)
+            ret << d->message;
     }
     return ret;
 }

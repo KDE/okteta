@@ -30,15 +30,22 @@
 
 class ScriptLogger: public QAbstractListModel {
 Q_OBJECT
-
+Q_DISABLE_COPY(ScriptLogger)
 public:
+    ScriptLogger();
+    ~ScriptLogger();
+
 	enum LogLevel {
-		LogInfo = 1, LogWarning = 2, LogError = 3
+	    LogInvalid = 0, LogInfo = 1, LogWarning = 2, LogError = 3
 	};
 	struct Data {
+	    Data(LogLevel lvl, const QScriptValue& c) : level(lvl), cause(c) {}
+	    ~Data() {}
 		ScriptLogger::LogLevel level;
 		QString message;
 		QScriptValue cause;
+	private:
+		Q_DISABLE_COPY(Data)
 	};
 	virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 	virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
@@ -62,7 +69,7 @@ public:
 	 */
 	QStringList messages(LogLevel minLevel = LogInfo) const;
 private:
-	QVector<Data> mData;
+	QVector<const Data*> mData;
 };
 
 #endif // SCRIPTLOGGER_H
