@@ -70,12 +70,11 @@ ArrayDataInformation::~ArrayDataInformation()
 
 QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext* context)
 {
-    kDebug() << "old child count: " << childCount();
-
     if (Q_UNLIKELY(!mData)) {
         kWarning() << "mData == null";
         return QScriptValue();
     }
+    kDebug() << "resizing" << fullObjectPath() << "from" << mData->length() << "to" << newLength;
     //arrays with length zero are useless -> minimum is 0
     if (newLength < 0)
         return context ? context->throwError(QLatin1String("new Array length is less than zero: ")
@@ -232,9 +231,10 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
     }
     if (*bitOffset != 0)
     {
-        kWarning() << "in array " << name() << ": bit offset != 0 (" << *bitOffset << "), adding padding,"
+        kWarning() << "in array " << fullObjectPath() << ": bit offset != 0 (" << *bitOffset << "), adding padding,"
                 " arrays always start at full bytes";
         bitsRemaining &= BitCount64(~7); //unset lower 3 bits to make it divisible by 8
+        address++;
     }
     //first of all update the structure:
     topLevelDataInformation()->updateElement(this);
@@ -254,9 +254,10 @@ bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta:
     }
     if (bitOffset != 0)
     {
-        kWarning() << "in array " << name() << ": bit offset != 0 (" << bitOffset << "), adding padding,"
+        kWarning() << "in array " << fullObjectPath() << ": bit offset != 0 (" << bitOffset << "), adding padding,"
                 " arrays always start at full bytes";
         bitsRemaining -= bitOffset;
+        address++;
     }
     return mData->setChildData(row, value, out, address, bitsRemaining);
 }

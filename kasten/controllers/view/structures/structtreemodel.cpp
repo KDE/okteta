@@ -69,8 +69,8 @@ void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint sta
 void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    kDebug() << "data information" << sender->fullObjectPath() << ": removing "
-            "children from index" << startIndex << "to" << endIndex;
+    //kDebug() << "data information" << sender->fullObjectPath() << ": removing "
+    //        "children from index" << startIndex << "to" << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
     mLastSender = sender;
@@ -82,8 +82,8 @@ void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint s
 void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    kDebug() << "data information" << sender->fullObjectPath() << ": inserting "
-            "children from index" << startIndex << "to" << endIndex;
+    //kDebug() << "data information" << sender->fullObjectPath() << ": inserting "
+    //        "children from index" << startIndex << "to" << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
     mLastSender = sender;

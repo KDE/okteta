@@ -101,14 +101,14 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
     Q_ASSERT(bitsRemaining % 8 == 0);
     if ((row + 1) * sizeof(T) * 8 >= bitsRemaining)
     {
-        kDebug() << AbstractArrayData::mParent->name() << " not enough bits remaining ("
+        kDebug() << AbstractArrayData::mParent->fullObjectPath() << " not enough bits remaining ("
                 << bitsRemaining << ") need " << ((row + 1) * sizeof(T) * 8);
         return false;
     }
     ByteOrder byteOrder =  AbstractArrayData::mParent->effectiveByteOrder();
     bool littleEndian = byteOrder == ByteOrderEnumClass::LittleEndian;
     T convertedVal = DisplayClass::fromVariant(value);
-    kDebug() << AbstractArrayData::mParent->name() << "setting index" << row << "to" << value << "(= " << convertedVal << ")";
+    kDebug() << AbstractArrayData::mParent->fullObjectPath() << "setting index" << row << "to" << value << "(= " << convertedVal << ")";
     this->mData[row] = convertedVal;
     this->writeOneItem(convertedVal, address + (row * sizeof(T)), out, littleEndian);
     return true;
