@@ -121,7 +121,8 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
 QStringList OsdParser::parseStructureNames() const
 {
     QStringList ret;
-    QDomDocument document = openDoc(0);
+    QScopedPointer<ScriptLogger> rootLogger(new ScriptLogger); //only needed in we get an error right now
+    QDomDocument document = openDoc(rootLogger.data());
     if (document.isNull())
         return QStringList();
     QDomNode rootElem = document.firstChildElement(QLatin1String("data"));
@@ -143,10 +144,14 @@ QStringList OsdParser::parseStructureNames() const
             }
             else
             {
-                kWarning() << "unknown tag name:" << tag;
+                kWarning().nospace() << "Unknown tag name in plugin " << mPluginName << " :" << tag;
             }
         }
     }
+    //print the errors to stderr, since we the logger will not be visible in the script console
+    QStringList warnings = rootLogger->messages(ScriptLogger::LogWarning);
+    for (int i = 0; i < warnings.size(); ++i)
+        kWarning() << warnings.at(i);
     return ret;
 }
 
@@ -475,8 +480,8 @@ AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem,
     if (!def)
     {
         info.logger->error()
-                << QString(QLatin1String("Enum definition '%1' does not exist!\nIn element %2"))
-                        .arg(enumName, toRawXML(xmlElem));
+        << QString(QLatin1String("Enum definition '%1' does not exist!\nIn element %2"))
+                .arg(enumName, toRawXML(xmlElem));
         return 0;
     }
     PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(name, typeStr,
@@ -605,8 +610,7 @@ DataInformation* OsdParser::parseNode(const QDomNode& node, ParserInfo& info) co
     return data;
 }
 
-EnumDefinition::Ptr
-OsdParser::findEnum(const QString& defName, const ParserInfo& info) const
+EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const ParserInfo& info) const
         {
     for (int i = 0; i < info.enums.size(); ++i)
     {
@@ -620,8 +624,7 @@ OsdParser::findEnum(const QString& defName, const ParserInfo& info) const
 
 }
 
-QString
-OsdParser::toRawXML(const QDomElement& elem) const
+QString OsdParser::toRawXML(const QDomElement& elem) const
         {
     QString ret = QLatin1Char('<') + elem.tagName();
     QDomNamedNodeMap attrs = elem.attributes();

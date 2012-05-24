@@ -72,12 +72,14 @@ void ScriptLogger::clear()
     endRemoveRows();
 }
 
-QStringList ScriptLogger::messages() const
+QStringList ScriptLogger::messages(LogLevel minLevel) const
 {
     QStringList ret;
     for (int i = 0; i < mData.size(); ++i)
     {
-        ret << mData.at(i).message;
+        const Data& d = mData.at(i);
+        if (d.level >= minLevel)
+            ret << d.message;
     }
     return ret;
 }

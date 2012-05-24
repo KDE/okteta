@@ -33,7 +33,7 @@ Q_OBJECT
 
 public:
 	enum LogLevel {
-		LogInfo, LogWarning, LogError
+		LogInfo = 1, LogWarning = 2, LogError = 3
 	};
 	struct Data {
 		ScriptLogger::LogLevel level;
@@ -56,8 +56,11 @@ public:
 	 */
 	QDebug log(LogLevel level, const QScriptValue& cause);
 	void clear();
-	/** @return all the messages, mainly used for testing */
-	QStringList messages() const;
+	/**
+	 * @param info the minimum level that the messages must have
+	 * @return all the messages, mainly used for testing
+	 */
+	QStringList messages(LogLevel minLevel = LogInfo) const;
 private:
 	QVector<Data> mData;
 };
