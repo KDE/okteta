@@ -24,6 +24,7 @@
 #define SCRIPTUTILS_H_
 
 #include "../allprimitivetypes.h"
+#include "../datatypes/primitivedatatype.h"
 
 class QScriptValue;
 class QScriptContext;

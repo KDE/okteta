@@ -256,7 +256,8 @@ void BasicDataInformationTest::initTestCase()
 //	qRegisterMetaType<const DataInformation*>();
 //	qRegisterMetaType<DataInformation*>();
 	for (int i = Type_START; i < Type_Bitfield; ++i) {
-		primitives.append(PrimitiveFactory::newInstance(QLatin1String("prim"), static_cast<PrimitiveDataType>(i)));
+		primitives.append(PrimitiveFactory::newInstance(QLatin1String("prim"),
+		        PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i))));
 	}
 	QCOMPARE(PrimitiveFactory::newInstance(QLatin1String("invalid"), Type_Bitfield), static_cast<PrimitiveDataInformation*>(0));
 	QCOMPARE(PrimitiveFactory::newInstance(QLatin1String("invalid"), QLatin1String("invalid_type")), static_cast<PrimitiveDataInformation*>(0));
@@ -313,8 +314,8 @@ void BasicDataInformationTest::testPrimitives()
 	for (int i = 0; i < primitives.size(); ++i) {
 		PrimitiveDataInformation* data = primitives.at(i);
 		PrimitiveDataType t = data->type();
-		QCOMPARE(t, static_cast<PrimitiveDataType>(i));
-		QCOMPARE(data->type(), static_cast<PrimitiveDataType>(i));
+		QCOMPARE(t, PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i)));
+		QCOMPARE(data->type(), PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i)));
 		if (t == Type_Bool8 || t ==  Type_Int8 || t == Type_UInt8 || t == Type_Char)
 			exp.size = 8;
 		else if (t == Type_Bool16 || t == Type_Int16 || t == Type_UInt16)

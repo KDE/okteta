@@ -67,7 +67,7 @@ void OsdParserTest::testPrimitive()
     QFETCH(QString, xml);
     QFETCH(QString, secondXml);
     QFETCH(int, expectedType);
-    PrimitiveDataType type = (PrimitiveDataType)expectedType;
+    PrimitiveDataType type(static_cast<PrimitiveDataTypeEnum>(expectedType));
 
     OsdParser parser(xml);
     QVector<TopLevelDataInformation*> tds = parser.parseStructures();

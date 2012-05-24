@@ -24,6 +24,7 @@
 
 #include "../datainformation.h"
 #include "../../allprimitivetypes.h"
+#include "../primitivedatatype.h"
 
 class PrimitiveDataInformation: public DataInformation
 {
@@ -34,8 +35,6 @@ public:
     virtual PrimitiveDataInformation* clone() const = 0;
     virtual BitCount32 size() const = 0;
     virtual QString typeName() const;
-    static QString typeName(PrimitiveDataType type);
-    static QString longTypeName(PrimitiveDataType type);
 
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 

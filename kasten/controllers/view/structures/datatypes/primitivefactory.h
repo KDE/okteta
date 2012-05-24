@@ -23,11 +23,11 @@
 #ifndef PRIMITIVEFACTORY_H_
 #define PRIMITIVEFACTORY_H_
 
-#include "../allprimitivetypes.h"
-#include "primitive/primitivedatainformation.h"
+#include "primitivedatatype.h"
 
 class PrimitiveDataInformation;
 class ScriptLogger;
+class QString;
 
 namespace PrimitiveFactory
 {
@@ -35,6 +35,9 @@ PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType typ
         ScriptLogger* logger = 0);
 PrimitiveDataInformation* newInstance(const QString& name, const QString& typeString,
         ScriptLogger* parent = 0);
+/** Converts @p typeStr to a PrimitiveDataType case-insensitively
+ * @return The corresponding type or PrimitiveDataTypeEnum::Type_Invalid if string is not regcognized
+ */
 PrimitiveDataType typeStringToType(const QString& typeStr);
 
 }

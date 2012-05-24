@@ -35,8 +35,8 @@ class PrimitiveArrayTest : public QObject
 Q_OBJECT
 
 private:
-    template<PrimitiveDataType primType, typename T> void testReadPrimitiveInternal();
-    template<PrimitiveDataType primType> void testReadPrimitive();
+    template<PrimitiveDataTypeEnum primType, typename T> void testReadPrimitiveInternal();
+    template<PrimitiveDataTypeEnum primType> void testReadPrimitive();
     template<typename T> bool compareItems(T first, T second, uint index);
     private Q_SLOTS:
     void initTestCase();
@@ -162,13 +162,13 @@ bool PrimitiveArrayTest::compareItems(double first, double second, uint index)
     return first == second;
 }
 
-template<PrimitiveDataType primType>
+template<PrimitiveDataTypeEnum primType>
 inline void PrimitiveArrayTest::testReadPrimitive()
 {
     testReadPrimitiveInternal<primType, typename PrimitiveInfo<primType>::valueType>();
 }
 
-template<PrimitiveDataType primType, typename T>
+template<PrimitiveDataTypeEnum primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
     ArrayDataInformation* dataInf = new ArrayDataInformation(QLatin1String("values"),

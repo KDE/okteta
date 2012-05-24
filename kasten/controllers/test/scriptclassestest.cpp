@@ -120,7 +120,7 @@ void ScriptClassesTest::initTestCase()
     for (int i = Type_START; i < Type_Bitfield; ++i)
     {
         PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(
-                QLatin1String("prim"), static_cast<PrimitiveDataType>(i));
+                QLatin1String("prim"), static_cast<PrimitiveDataTypeEnum>(i));
         prim->setValue(10);
         primitives.append(
                 new TopLevelDataInformation(prim, 0, ScriptEngineInitializer::newEngine()));

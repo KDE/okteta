@@ -39,39 +39,6 @@ class AbstractByteArrayModel;
 typedef Kasten2::StructViewPreferences::EnumByteOrder::type ByteOrder;
 typedef Kasten2::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
-#define concat2_hidden(a, b) a ## b
-#define concat2(a, b) concat2_hidden(a, b)
-#define compile_time_assert(e) extern char (*concat2(ct_assert, __LINE__)(void)) [sizeof(char[1 - 2*!(e)])]
-
-enum PrimitiveDataType
-{
-//!!! DO NOT CHANGE ORDER OF ITEMS !!!
-    Type_Invalid = -1,
-    Type_START = 0,
-    Type_Bool8 = 0,
-    Type_Int8 = 1,
-    Type_UInt8 = 2,
-    Type_Char = 3,
-    Type_Bool16 = 4,
-    Type_Int16 = 5,
-    Type_UInt16 = 6,
-    Type_Bool32 = 7,
-    Type_Int32 = 8,
-    Type_UInt32 = 9,
-    Type_Bool64 = 10,
-    Type_Int64 = 11,
-    Type_UInt64 = 12,
-    Type_Float = 13,
-    Type_Double = 14,
-    Type_Bitfield = 15,
-    Type_END = Type_Bitfield
-};
-
-namespace PrimitiveType {
-    extern const char* longTypeNames[Type_END + 1];
-    extern const char* typeNames[Type_END + 1];
-}
-
 /** This union holds the value of one primitive datatype. Maximum size of a datatype is currently 64 bits.
  *  It has methods for reading and writing from @c Okteta::AbstractByteArrayModel */
 union AllPrimitiveTypes
@@ -237,8 +204,5 @@ template<> inline qint32 AllPrimitiveTypes::value<qint32>() const { return intVa
 template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return longValue; }
 template<> inline float AllPrimitiveTypes::value<float>() const { return floatValue; }
 template<> inline double AllPrimitiveTypes::value<double>() const { return doubleValue; }
-
-QDebug operator<<(QDebug dbg, PrimitiveDataType type);
-
 
 #endif /* ALLPRIMITIVETYPES_H_ */

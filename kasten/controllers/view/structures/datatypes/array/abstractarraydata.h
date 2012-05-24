@@ -26,7 +26,7 @@
 
 #include <address.h>
 #include "../datainformationbase.h"
-#include "../../allprimitivetypes.h"
+#include "../primitivedatatype.h"
 
 class QWidget;
 class QScriptEngine;

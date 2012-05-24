@@ -28,7 +28,7 @@
 #include "../topleveldatainformation.h"
 #include "../primitive/primitivetemplateinfo.h"
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 class PrimitiveArrayData : public AbstractArrayData
 {
     Q_DISABLE_COPY(PrimitiveArrayData)
@@ -80,7 +80,7 @@ protected:
 };
 
 //constructors
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, DataInformation* parent)
         : AbstractArrayData(parent), mNumReadValues(0), mDummy(new DummyDataInformation(parent))
 {
@@ -88,27 +88,27 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, 
     mData.resize(initialLength);
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline PrimitiveArrayData<type>::~PrimitiveArrayData()
 {
     delete mDummy;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline void PrimitiveArrayData<type>::setParent(DataInformation* parent)
 {
     mParent = parent;
     mDummy->setParent(parent);
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline BitCount32 PrimitiveArrayData<type>::offset(uint index) const
 {
     Q_ASSERT(index < length());
     return index * sizeof(T) * 8;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
 {
     Q_ASSERT(idx < length());
@@ -116,19 +116,19 @@ inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
     return mDummy;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline unsigned int PrimitiveArrayData<type>::length() const
 {
     return mData.size();
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline BitCount32 PrimitiveArrayData<type>::size() const
 {
     return mData.size() * sizeof(T) * 8;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 void PrimitiveArrayData<type>::setLength(int newLength)
 {
     Q_ASSERT(newLength >= 0);
@@ -136,13 +136,13 @@ void PrimitiveArrayData<type>::setLength(int newLength)
     mData.squeeze();
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline PrimitiveDataType PrimitiveArrayData<type>::primitiveType() const
 {
     return type;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline BitCount32 PrimitiveArrayData<type>::sizeAt(uint index)
 {
     Q_ASSERT(index < length());
@@ -150,7 +150,7 @@ inline BitCount32 PrimitiveArrayData<type>::sizeAt(uint index)
     return sizeof(T) * 8;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 inline Qt::ItemFlags PrimitiveArrayData<type>::childFlags(int row, int column, bool fileLoaded)
 {
     Q_ASSERT(row >= 0 && uint(row) < length());
@@ -161,13 +161,13 @@ inline Qt::ItemFlags PrimitiveArrayData<type>::childFlags(int row, int column, b
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 bool PrimitiveArrayData<type>::isComplex() const
 {
     return false;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 AllPrimitiveTypes PrimitiveArrayData<type>::valueAt(int index) const
 {
     Q_ASSERT(index >= 0 && index < mData.size());

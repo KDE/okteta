@@ -204,7 +204,7 @@ void ScriptValueConverterTest::testPrimitives()
     QFETCH(QString, typeString);
     QFETCH(int, expectedType);
     logger->clear();
-    PrimitiveDataType type = (PrimitiveDataType) expectedType;
+    PrimitiveDataType type = static_cast<PrimitiveDataTypeEnum>(expectedType);
 
     QScriptValue val1 = engine->evaluate(code);
     QScriptValue val2 = engine->evaluate(code2);

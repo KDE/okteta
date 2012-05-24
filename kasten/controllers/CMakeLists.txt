@@ -313,6 +313,7 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/primitive/enumdatainformation.cpp
   view/structures/datatypes/primitive/enumdefinition.cpp
   view/structures/datatypes/primitivefactory.cpp
+  view/structures/datatypes/primitivedatatype.cpp
   view/structures/datatypes/strings/stringdatainformation.cpp
   view/structures/datatypes/strings/stringdata.cpp
   view/structures/datatypes/strings/asciistringdata.cpp

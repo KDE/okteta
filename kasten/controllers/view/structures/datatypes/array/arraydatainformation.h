@@ -23,7 +23,7 @@
 #ifndef ARRAYDATAINFORMATION_H_
 #define ARRAYDATAINFORMATION_H_
 
-#include "../../allprimitivetypes.h"
+#include "../primitivedatatype.h" //TODO remove once primitiveArrayFromType is in subclass
 #include "../datainformation.h"
 #include "abstractarraydata.h"
 

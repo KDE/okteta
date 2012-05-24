@@ -40,9 +40,9 @@ class PrimitiveDataInformationTest : public QObject
     Q_OBJECT
 private:
     template<typename s, typename u>
-    void addRowsGetAndSetSigned(PrimitiveDataType type, const char* name);
+    void addRowsGetAndSetSigned(PrimitiveDataTypeEnum type, const char* name);
     template<typename T>
-    void addRowsGetAndSetUnsigned(PrimitiveDataType type, const char* name);
+    void addRowsGetAndSetUnsigned(PrimitiveDataTypeEnum type, const char* name);
     void checkSignedDisplayBase(int expected);
     void checkUnsignedDisplayBase(int expected);
     int minimumSignedBits(qint64 value); //get the least number of bits this can be represented in
@@ -113,7 +113,7 @@ void PrimitiveDataInformationTest::initTestCase()
     KGlobal::locale()->setThousandsSeparator(QLatin1String(""));
 
     for (int i = Type_START; i < Type_Bitfield; ++i) {
-        basic.append(PrimitiveFactory::newInstance(QLatin1String("prim"), static_cast<PrimitiveDataType>(i)));
+        basic.append(PrimitiveFactory::newInstance(QLatin1String("prim"), static_cast<PrimitiveDataTypeEnum>(i)));
     }
     boolBitfield = new BoolBitfieldDataInformation(QLatin1String("bitfield"), 24);
     unsignedBitfield = new UnsignedBitfieldDataInformation(QLatin1String("bitfield"), 24);
@@ -155,7 +155,7 @@ void PrimitiveDataInformationTest::testDisplayBase()
 }
 
 namespace {
-template<PrimitiveDataType Type> void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, QString bin,
+template<PrimitiveDataTypeEnum Type> void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, QString bin,
                                                     QString hex, QString dec, QString oct)
 {
     QCOMPARE(PrimitiveInfo<Type>::Class::valueString(value, 2), bin);
@@ -164,7 +164,7 @@ template<PrimitiveDataType Type> void valueCompareHelper(typename PrimitiveInfo<
     QCOMPARE(PrimitiveInfo<Type>::Class::valueString(value, 8), oct);
 }
 
-template<PrimitiveDataType first, PrimitiveDataType second >
+template<PrimitiveDataTypeEnum first, PrimitiveDataTypeEnum second >
 void valueCompareHelperUnsigned(typename PrimitiveInfo<first>::valueType value, QString bin,
                                 QString hex, QString dec, QString oct, QString boolBase)
 {
@@ -475,7 +475,7 @@ void PrimitiveDataInformationTest::testGetAndSetValue()
 }
 
 template<typename s, typename u>
-void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataType type, const char* name) {
+void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataTypeEnum type, const char* name) {
     QString msg = QLatin1String(name);
     QTest::newRow(msg.arg(QLatin1String("-325")).toUtf8().constData())
         << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(s(-325));
@@ -501,7 +501,7 @@ void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataType type
 }
 
 template<typename s>
-void PrimitiveDataInformationTest::addRowsGetAndSetUnsigned(PrimitiveDataType type, const char* name)
+void PrimitiveDataInformationTest::addRowsGetAndSetUnsigned(PrimitiveDataTypeEnum type, const char* name)
 {
     QString msg = QLatin1String(name);
     QTest::newRow(msg.arg(QLatin1String("-325")).toUtf8().constData())

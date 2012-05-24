@@ -22,7 +22,7 @@
 #ifndef PRIMITIVETEMPLATEINFO_H
 #define PRIMITIVETEMPLATEINFO_H
 
-#include "../../allprimitivetypes.h"
+#include "../primitivedatatype.h"
 #include "booldatainformation.h"
 #include "floatdatainformation.h"
 #include "doubledatainformation.h"
@@ -31,7 +31,7 @@
 #include "chardatainformation.h"
 
 //just to simplify usage of those classes (no need to specify two template parameters)
-template<PrimitiveDataType T> struct PrimitiveInfo {
+template<PrimitiveDataTypeEnum T> struct PrimitiveInfo {
     typedef void valueType;
     typedef void Class; //to cause compiler errors with e.g. Type_NotPrimitive
     typedef void ArrayClass; //to cause compiler errors with e.g. Type_NotPrimitive

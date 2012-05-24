@@ -23,6 +23,7 @@
 #ifndef ENUMDEFINITION_H_
 #define ENUMDEFINITION_H_
 #include "../../allprimitivetypes.h"
+#include "../primitivedatatype.h"
 //Qt core
 #include <QMap>
 #include <QSharedData>

@@ -23,7 +23,7 @@
 #include "complexarraydata.h"
 
 #include <QScriptValue>
-
+#include <KLocalizedString>
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
 #include "../../script/scripthandlerinfo.h"

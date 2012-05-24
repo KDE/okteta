@@ -26,7 +26,7 @@
 #include <abstractbytearraymodel.h>
 
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
     BitCount64 bitsRemaining)
 {
@@ -61,7 +61,7 @@ qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input,
     return maxNumItems * sizeof(T) * 8;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input,
         Okteta::Address address)
 {
@@ -75,7 +75,7 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::Abstra
     Q_UNUSED(numCopied);
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input,
         Okteta::Address address)
 {
@@ -93,7 +93,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::Abs
     }
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
         Okteta::Address address, BitCount64 bitsRemaining)
 {
@@ -116,7 +116,7 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
 
 
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
         Okteta::AbstractByteArrayModel* out, bool littleEndian)
 {
@@ -160,7 +160,7 @@ void PrimitiveArrayData<Type_Double>::writeOneItem(double value, Okteta::Address
     PrimitiveArrayData<Type_UInt64>::writeOneItem(un.intVal, addr, out, littleEndian);
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 QVariant PrimitiveArrayData<type>::dataAt(int index, int column, int role)
 {
     Q_ASSERT(index >= 0 && (unsigned)index < length());
@@ -170,7 +170,7 @@ QVariant PrimitiveArrayData<type>::dataAt(int index, int column, int role)
             return QString(AbstractArrayData::mParent->name() + QLatin1Char('[')
                     + QString::number(index) + QLatin1Char(']'));
         if (column == DataInformation::ColumnType)
-            return PrimitiveDataInformation::typeName(type);
+            return PrimitiveType::typeName(type);
         if (column == DataInformation::ColumnValue)
         {
             if (uint(index) >= this->mNumReadValues)
@@ -184,14 +184,14 @@ QVariant PrimitiveArrayData<type>::dataAt(int index, int column, int role)
     return QVariant();
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 QString PrimitiveArrayData<type>::typeName() const
 {
-    return QString(PrimitiveDataInformation::typeName(type) + QLatin1Char('[')
+    return QString(PrimitiveType::typeName(type) + QLatin1Char('[')
             + QString::number(this->length()) + QLatin1Char(']'));
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
 {
     Q_UNUSED(data);
@@ -199,7 +199,7 @@ int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
     return 0;
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
 {
     Q_ASSERT(index < length());
@@ -207,21 +207,21 @@ QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* 
 
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 QWidget* PrimitiveArrayData<type>::createChildEditWidget(uint index, QWidget* parent) const
 {
     Q_ASSERT(index < length());
     return DisplayClass::staticCreateEditWidget(parent);
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 QVariant PrimitiveArrayData<type>::dataFromChildWidget(uint index, const QWidget* w) const
 {
     Q_ASSERT(index < length());
     return DisplayClass::staticDataFromWidget(w);
 }
 
-template<PrimitiveDataType type>
+template<PrimitiveDataTypeEnum type>
 void PrimitiveArrayData<type>::setChildWidgetData(uint index, QWidget* w) const
 {
     Q_ASSERT(index < length());

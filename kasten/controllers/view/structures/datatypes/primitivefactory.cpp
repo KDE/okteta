@@ -68,7 +68,7 @@ PrimitiveDataType typeStringToType(const QString& string)
 PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
         ScriptLogger* logger)
 {
-    switch (type)
+    switch (type.value)
     {
     case Type_Char:
         return new PrimitiveInfo<Type_Char>::Class(name);
@@ -102,10 +102,9 @@ PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType typ
         return new PrimitiveInfo<Type_Double>::Class(name);
     default:
         if (logger)
-            logger->error().nospace() << "could not convert '"
-                    << PrimitiveDataInformation::typeName(type) << "' to a primitive type";
+            logger->error().nospace() << "could not convert '" << type << "' to a primitive type";
         else
-            kWarning() << "could not convert '" << type << "' to a primitive type";
+            kWarning().nospace() << "could not convert '" << type << "' to a primitive type";
         return 0; //invalid type
     }
 }

@@ -84,7 +84,7 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
     //name must not be empty, else default constructed return would be valid!
     quint64 maxValue = 0.0;
     qint64 minValue;
-    switch (type)
+    switch (type.value)
     {
     case Type_Bitfield:
         //assume all 64 bits are used, we do not have the necessary information here
@@ -174,27 +174,30 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
         }
         if (!ok)
         {
-            logger->warn() << QString(QLatin1String("Could not convert '%1' to an enum "
+            QString errMessage = QString(QLatin1String("Could not convert '%1' to an enum "
                     "constant, name was: %2")).arg(valueString, name);
+            logger->warn() << errMessage;
             return QPair<AllPrimitiveTypes, QString>();
         }
     }
     quint64 asUnsigned = intValue.ulongValue;
     if (asUnsigned > maxValue)
     {
-        logger->warn() << QString(QLatin1String("Enumerator %1: %2 is larger than the maximum "
-                "possible for type %3 (%4)")).arg(name,
-                QString::number(asUnsigned), PrimitiveDataInformation::typeName(type),
-                QString::number(maxValue));
+        QString errMessage = QLatin1String("Enumerator %1: %2 is larger than the maximum "
+                "possible for type %3 (%4)");
+        errMessage = errMessage.arg(name, QString::number(asUnsigned),
+                PrimitiveType::standardTypeName(type), QString::number(maxValue));
+        logger->warn() << errMessage;
         return QPair<AllPrimitiveTypes, QString>();
     }
     qint64 asSigned = intValue.longValue;
     if (minValue != 0 && asSigned < minValue)
     {
-        logger->warn() << QString(QLatin1String("Enumerator %1: %2 is smaller than the minimum "
-                "possible for type %3 (%4)")).arg(name,
-                QString::number(asSigned), PrimitiveDataInformation::typeName(type),
-                QString::number(minValue));
+        QString errMessage = QLatin1String("Enumerator %1: %2 is smaller than the minimum "
+                "possible for type %3 (%4)");
+        errMessage = errMessage.arg(name, QString::number(asSigned),
+                PrimitiveType::standardTypeName(type), QString::number(minValue));
+        logger->warn() << errMessage;
         return QPair<AllPrimitiveTypes, QString>();
     }
     return QPair<AllPrimitiveTypes, QString>(intValue, name);

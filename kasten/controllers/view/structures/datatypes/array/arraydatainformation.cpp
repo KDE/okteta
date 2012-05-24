@@ -270,7 +270,7 @@ bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMod
 
 AbstractArrayData* ArrayDataInformation::primitiveArrayFromType(uint length, PrimitiveDataType type)
 {
-    switch (type)
+    switch (type.value)
     {
     case Type_Char:
         return new PrimitiveArrayData<Type_Char>(length, this);

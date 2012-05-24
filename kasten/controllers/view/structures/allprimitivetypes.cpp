@@ -25,51 +25,16 @@
 
 #include <abstractbytearraymodel.h>
 
+//TODO replace with Q_STATIC_ASSERT (Qt5) or static_assert(C++11)
+#define concat2_hidden(a, b) a ## b
+#define concat2(a, b) concat2_hidden(a, b)
+#define compile_time_assert(e) extern char (*concat2(ct_assert, __LINE__)(void)) [sizeof(char[1 - 2*!(e)])]
+
 compile_time_assert(sizeof(double) == 8);
 compile_time_assert(sizeof(float) == 4);
 compile_time_assert(sizeof(AllPrimitiveTypes) == 8);
 
 
-namespace PrimitiveType {
-const char* longTypeNames[Type_END + 1] = {
-    I18N_NOOP2("data type", "bool (1 byte)"),
-    I18N_NOOP2("data type", "signed byte"),
-    I18N_NOOP2("data type", "unsigned byte"),
-    I18N_NOOP2("data type", "char"),
-    I18N_NOOP2("data type", "bool (2 bytes)"),
-    I18N_NOOP2("data type", "signed short"),
-    I18N_NOOP2("data type", "unsigned short"),
-    I18N_NOOP2("data type", "bool (4 bytes)"),
-    I18N_NOOP2("data type", "signed int"),
-    I18N_NOOP2("data type", "unsigned int"),
-    I18N_NOOP2("data type", "bool (8 bytes)"),
-    I18N_NOOP2("data type", "signed long"),
-    I18N_NOOP2("data type", "unsigned long"),
-    I18N_NOOP2("data type", "float"),
-    I18N_NOOP2("data type", "double"),
-    I18N_NOOP2("data type", "bitfield"),
-};
-
-//TODO add i18n_noop? probably not necessary, since these are not really translatable
-const char* typeNames[Type_END + 1] = {
-    "bool8",
-    "int8",
-    "uint8",
-    "char",
-    "bool16",
-    "int16",
-    "uint16",
-    "bool32",
-    "int32",
-    "uint32",
-    "bool64",
-    "int64",
-    "uint64",
-    "float",
-    "double",
-    "bitfield",
-};
-}
 //FIXME this code really needs unit tests!
 //TODO optimised methods for *bitOffset == 0 && bitCount % 8 == 0
 
@@ -370,12 +335,3 @@ void AllPrimitiveTypes::writeFullBytes(const quint8 byteCount,
         out->setByte(address + i, newValue.allBytes[index]);
     }
 }
-QDebug operator<<(QDebug dbg, PrimitiveDataType type)
-{
-    if (type < Type_Invalid || type > Type_END)
-        type = Type_Invalid;
-    dbg.nospace() << "primitive type(" << PrimitiveDataInformation::typeName(type) << ")";
-    return dbg.space();
-}
-
-
