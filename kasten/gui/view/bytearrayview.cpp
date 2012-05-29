@@ -52,24 +52,33 @@ ByteArrayView::ByteArrayView( ByteArrayView* other, Qt::Alignment alignment )
 {
     init();
 
-    setViewModus( other->viewModus() );
-    setShowsNonprinting( other->showsNonprinting() );
-    setVisibleByteArrayCodings( other->visibleByteArrayCodings() );
-    toggleOffsetColumn( other->offsetColumnVisible() );
-    setValueCoding( other->valueCoding() );
-    setCharCoding( other->charCodingName() );
-    setOverwriteMode( other->isOverwriteMode() );
-    setCursorPosition( other->cursorPosition() );
     mWidget->setStartOffset( other->startOffset() );
     mWidget->setFirstLineOffset( other->firstLineOffset() );
-    mWidget->setNoOfBytesPerLine( other->noOfBytesPerLine() );
+
+    setViewModus( other->viewModus() );
+    setVisibleByteArrayCodings( other->visibleByteArrayCodings() );
+    toggleOffsetColumn( other->offsetColumnVisible() );
+
+    setCharCoding( other->charCodingName() );
+    setShowsNonprinting( other->showsNonprinting() );
+    setSubstituteChar( other->substituteChar() );
+    setUndefinedChar( other->undefinedChar() );
+
+    setValueCoding( other->valueCoding() );
+
+    setNoOfGroupedBytes( other->noOfGroupedBytes() );
+    setNoOfBytesPerLine( other->noOfBytesPerLine() );
     // TODO: this can lead to different layouts due to possible one-pixel difference in width!
     setLayoutStyle( other->layoutStyle() );
+
     const Okteta::AddressRange selection = other->selection();
     setSelection( selection.start(), selection.end() );
     setZoomLevel( other->zoomLevel() );
+    setCursorPosition( other->cursorPosition() );
+
+    setOverwriteMode( other->isOverwriteMode() );
     setReadOnly( other->isReadOnly() );
-    // TODO: substituteChar, undefinedChar, all width, groupedBytes
+    // TODO: all width
 
     const QRect otherViewRect = other->mWidget->viewRect();
 
