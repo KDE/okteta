@@ -139,11 +139,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
              SLOT(onDefaultViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)) );
 
     // select first by default
-    const QItemSelection selection =
-        QItemSelection( mViewProfileTableModel->index(0,ViewProfileTableModel::CurrentColumnId),
-                        mViewProfileTableModel->index(0,ViewProfileTableModel::NameColumnId) );
-
-    mViewProfileTableView->selectionModel()->select( selection, QItemSelectionModel::Select );
+    onModelReset();
 }
 
 
@@ -265,7 +261,8 @@ ViewProfilesManageDialog::onModelReset()
     if( (row < 0) && (0 < mViewProfileManager->viewProfilesCount()) )
         row = 0;
 
-    if( 0 <= row )
+    const bool isViewProfileSelected = ( 0 <= row );
+    if( isViewProfileSelected )
     {
         const QItemSelection selection = QItemSelection( mViewProfileTableModel->index(row,ViewProfileTableModel::CurrentColumnId),
                                                         mViewProfileTableModel->index(row,ViewProfileTableModel::NameColumnId) );
@@ -275,6 +272,9 @@ ViewProfilesManageDialog::onModelReset()
     else
         mCurrentViewProfileId.clear();
     // TODO: show a ghost profile with the built-in parameters if there is none
+
+    mEditButton->setEnabled(isViewProfileSelected);
+    mSetDefaultButton->setEnabled(isViewProfileSelected);
 }
 
 void
