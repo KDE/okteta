@@ -25,6 +25,7 @@ Name[sr@latin]=Proba bitskih zastavica
 Name[sv]=Testar bitflaggor
 Name[uk]=Тестування бітових прапорців
 Name[x-test]=xxTesting bitflagsxx
+Name[zh_CN]=测试位标记
 Name[zh_TW]=測試位元旗標
 Comment=A test for bitflags
 Comment[ca]=Una prova per a «bitflags»
@@ -47,6 +48,7 @@ Comment[sr@latin]=Proba za bitske zastavice
 Comment[sv]=En test av bitflaggor
 Comment[uk]=Тест для бітових прапорців
 Comment[x-test]=xxA test for bitflagsxx
+Comment[zh_CN]=位标记测试
 Comment[zh_TW]=位元旗標測試
 
 
