@@ -538,6 +538,11 @@ kDebug() <<"going to load"<<viewProfileId;
 
     // add new viewprofiles
     mViewProfiles.append( newViewProfiles );
+    // if there was no default viewprofile before, set default to first
+    const bool isDefaultViewProfileChanged = ( mDefaultViewProfileId.isEmpty() && ! mViewProfiles.isEmpty() );
+    if( isDefaultViewProfileChanged )
+        mDefaultViewProfileId = mViewProfiles.at(0).id();
+
     // update lock info
     updateLockStatus( viewProfileFileInfoLookup, newLockedViewProfileIds, newUnlockedViewProfileIds );
 
@@ -557,6 +562,8 @@ kDebug() << "unlocked profiles" << newUnlockedViewProfileIds;
     if( ! newLockedViewProfileIds.isEmpty() )
         emit viewProfilesLocked( newLockedViewProfileIds );
 kDebug() << "locked profiles" << newLockedViewProfileIds;
+    if( isDefaultViewProfileChanged )
+        emit defaultViewProfileChanged( mDefaultViewProfileId );
 }
 
 
