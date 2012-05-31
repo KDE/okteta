@@ -29,6 +29,7 @@
 #include <KParts/ReadWritePart>
 
 namespace Kasten2 {
+class ByteArrayViewProfileManager;
 class ByteArrayView;
 class ByteArrayDocument;
 class PrintController;
@@ -51,7 +52,8 @@ class OktetaPart : public KParts::ReadWritePart
   public:
     OktetaPart( QObject* parent,
                 const KComponentData& componentData,
-                Modus modus );
+                Modus modus,
+                Kasten2::ByteArrayViewProfileManager* viewProfileManager );
 
     virtual ~OktetaPart();
 
@@ -89,6 +91,8 @@ class OktetaPart : public KParts::ReadWritePart
 
     Kasten2::PrintController* mPrintController;
     QList<Kasten2::AbstractXmlGuiController*> mControllers;
+
+    Kasten2::ByteArrayViewProfileManager* mViewProfileManager;
 };
 
 

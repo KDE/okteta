@@ -77,7 +77,6 @@ void ViewProfileSyncController::setTargetModel( AbstractModel* model )
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
     mByteArrayViewProfileSynchronizer = mByteArrayView ? mByteArrayView->synchronizer() : 0;
 
-    const bool hasView = ( mByteArrayView != 0 );
     const bool hasSynchronizer = ( mByteArrayViewProfileSynchronizer != 0 );
     if( hasSynchronizer )
     {
@@ -92,7 +91,7 @@ void ViewProfileSyncController::setTargetModel( AbstractModel* model )
         mResetChangesAction->setEnabled( false );
     }
 
-    mCreateNewAction->setEnabled( hasView );
+    mCreateNewAction->setEnabled( hasSynchronizer );
 }
 
 
@@ -144,14 +143,12 @@ void ViewProfileSyncController::onCreateNewActionTriggered()
 
 void ViewProfileSyncController::onResetChangesActionTriggered()
 {
-    if( mByteArrayViewProfileSynchronizer )
-        mByteArrayViewProfileSynchronizer->syncFromRemote();
+    mByteArrayViewProfileSynchronizer->syncFromRemote();
 }
 
 void ViewProfileSyncController::onSaveChangesActionTriggered()
 {
-    if( mByteArrayViewProfileSynchronizer )
-        mByteArrayViewProfileSynchronizer->syncToRemote();
+    mByteArrayViewProfileSynchronizer->syncToRemote();
 }
 
 }

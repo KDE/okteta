@@ -106,6 +106,7 @@ void ViewProfilesController::onViewProfilesChanged()
         mByteArrayViewProfileSynchronizer->viewProfileId() :
         ByteArrayViewProfile::Id();
 
+    bool isCurrentViewProfileExisting = false;
     foreach( const ByteArrayViewProfile& viewProfile, viewProfiles )
     {
         const QString title = viewProfile.viewProfileTitle();
@@ -113,19 +114,24 @@ void ViewProfilesController::onViewProfilesChanged()
         action->setCheckable( true );
         const ByteArrayViewProfile::Id viewProfileId = viewProfile.id();
         action->setData( viewProfileId );
-        if( viewProfileId == currentViewProfileId )
-            action->setChecked( true );
+        const bool isCurrentViewProfile = ( viewProfileId == currentViewProfileId );
+        action->setChecked( isCurrentViewProfile );
+        if( isCurrentViewProfile )
+            isCurrentViewProfileExisting = true;
 
         mViewProfilesActionGroup->addAction( action );
     }
+
+    // reset id if no longer existing
+    if( ! isCurrentViewProfileExisting && mByteArrayViewProfileSynchronizer )
+            mByteArrayViewProfileSynchronizer->setViewProfileId( ByteArrayViewProfile::Id() );
 
     mGuiClient->plugActionList( QLatin1String("view_profile_list"), mViewProfilesActionGroup->actions() );
 }
 
 void ViewProfilesController::onViewProfileTriggered( QAction* action )
 {
-    if( mByteArrayViewProfileSynchronizer )
-        mByteArrayViewProfileSynchronizer->setViewProfileId( action->data().toString() );
+    mByteArrayViewProfileSynchronizer->setViewProfileId( action->data().toString() );
 }
 
 }

@@ -64,8 +64,9 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     enum { ColumnViewId = 0, RowViewId };
 
   public:
-    explicit ByteArrayView( ByteArrayDocument* document );
-    explicit ByteArrayView( ByteArrayView* other, Qt::Alignment alignment = 0 );
+    ByteArrayView( ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer );
+    ByteArrayView( ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
+                   Qt::Alignment alignment = 0 );
 
     virtual ~ByteArrayView();
 
@@ -182,7 +183,6 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     void viewModusChanged( int viewModus );
 
   public:
-    void setSynchronizer( ByteArrayViewProfileSynchronizer* synchronizer );
     ByteArrayViewProfileSynchronizer* synchronizer() const;
 
   private:
@@ -199,7 +199,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     ByteArraySelection mSelection;
 //     KCursorProxy *mCursorProxy;
 
-    ByteArrayViewProfileSynchronizer* mByteArrayViewProfileSynchronizer;
+    ByteArrayViewProfileSynchronizer* const mByteArrayViewProfileSynchronizer;
 };
 
 }

@@ -37,18 +37,20 @@
 namespace Kasten2
 {
 
-ByteArrayView::ByteArrayView( ByteArrayDocument* document )
+ByteArrayView::ByteArrayView( ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer )
   : AbstractView( document )
   , mDocument( document )
-  , mByteArrayViewProfileSynchronizer( 0 )
+  , mByteArrayViewProfileSynchronizer( synchronizer )
 {
     init();
+    synchronizer->setView( this );
 }
 
-ByteArrayView::ByteArrayView( ByteArrayView* other, Qt::Alignment alignment )
+ByteArrayView::ByteArrayView( ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
+                              Qt::Alignment alignment )
   : AbstractView( static_cast<ByteArrayDocument*>(other->baseModel()) )
   , mDocument( static_cast<ByteArrayDocument*>(other->baseModel()) )
-  , mByteArrayViewProfileSynchronizer( 0 )
+  , mByteArrayViewProfileSynchronizer( synchronizer )
 {
     init();
 
@@ -95,6 +97,8 @@ ByteArrayView::ByteArrayView( ByteArrayView* other, Qt::Alignment alignment )
     // TODO: doesn't really work at this stage, because the widget will get resized when inserted
     // and then ensureCursorVisible destroys the fun
     mWidget->setViewPos( viewPos );
+
+    synchronizer->setView( this );
 }
 
 void ByteArrayView::init()
@@ -132,12 +136,6 @@ void ByteArrayView::init()
     connect( mWidget, SIGNAL(undefinedCharChanged(QChar)), SIGNAL(undefinedCharChanged(QChar)) );
     connect( mWidget, SIGNAL(noOfGroupedBytesChanged(int)), SIGNAL(noOfGroupedBytesChanged(int)) );
     connect( mWidget, SIGNAL(viewModusChanged(int)), SIGNAL(viewModusChanged(int)) );
-}
-
-void ByteArrayView::setSynchronizer( ByteArrayViewProfileSynchronizer* synchronizer )
-{
-    delete mByteArrayViewProfileSynchronizer;
-    mByteArrayViewProfileSynchronizer = synchronizer;
 }
 
 ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer; }

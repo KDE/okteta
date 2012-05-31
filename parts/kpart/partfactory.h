@@ -26,6 +26,12 @@
 // KDE
 #include <KParts/Factory>
 
+namespace Kasten2 {
+class ByteArrayViewProfileManager;
+}
+class KComponentData;
+class KAboutData;
+
 
 class OktetaPartFactory : public KParts::Factory
 {
@@ -40,6 +46,11 @@ class OktetaPartFactory : public KParts::Factory
     virtual KParts::Part* createPartObject( QWidget* parentWidget,
                                             QObject* parent,
                                             const char* className, const QStringList& args );
+
+  private:
+    KComponentData* mComponentData;
+    KAboutData* mAboutData;
+    Kasten2::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };
 
 #endif

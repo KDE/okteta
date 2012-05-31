@@ -28,6 +28,8 @@
 // Okteta Kasten
 #include <bytearraydocument.h>
 #include <bytearrayview.h>
+#include <bytearrayviewprofilesynchronizer.h>
+#include <bytearrayviewprofilemanager.h>
 #include <filesystem/bytearrayrawfilesynchronizerfactory.h>
 #include <overwriteonly/overwriteonlycontroller.h>
 #include <overwritemode/overwritemodecontroller.h>
@@ -73,9 +75,11 @@ static const char* const UIFileName[] =
 
 OktetaPart::OktetaPart( QObject* parent,
                         const KComponentData& componentData,
-                        Modus modus )
-  : KParts::ReadWritePart( parent ),
-    mModus( modus )
+                        Modus modus,
+                        Kasten2::ByteArrayViewProfileManager* viewProfileManager )
+  : KParts::ReadWritePart( parent )
+  , mModus( modus )
+  , mViewProfileManager( viewProfileManager )
 {
     setComponentData( componentData );
 
@@ -130,7 +134,9 @@ OktetaPart::OktetaPart( QObject* parent,
     // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
     // so this hack just creates some dummies
     mDocument = new Kasten2::ByteArrayDocument( QString() );
-    mByteArrayView = new Kasten2::ByteArrayView( mDocument );
+    Kasten2::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer =
+        new Kasten2::ByteArrayViewProfileSynchronizer( viewProfileManager );
+    mByteArrayView = new Kasten2::ByteArrayView( mDocument, viewProfileSynchronizer );
 
     if( modus == BrowserViewModus )
         new OktetaBrowserExtension( this );
@@ -185,7 +191,9 @@ void OktetaPart::onDocumentLoaded( Kasten2::AbstractDocument* document )
         connect( mDocument->synchronizer(), SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
                  SLOT(onModified(Kasten2::LocalSyncState)) );
 
-        mByteArrayView = new Kasten2::ByteArrayView( mDocument );
+        Kasten2::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer =
+            new Kasten2::ByteArrayViewProfileSynchronizer( mViewProfileManager );
+        mByteArrayView = new Kasten2::ByteArrayView( mDocument, viewProfileSynchronizer );
 //     mByteArrayView->setNoOfBytesPerLine( 16 );
         mByteArrayView->setShowsNonprinting( false );
         connect( mByteArrayView, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );

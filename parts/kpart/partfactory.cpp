@@ -25,6 +25,7 @@
 // part
 #include "part.h"
 // Okteta Kasten
+#include <bytearrayviewprofilemanager.h>
 #include <bytearraystreamencoderconfigeditorfactoryfactory.h>
 #include <bytearraydatageneratorconfigeditorfactoryfactory.h>
 #include <bytearraystreamencoderfactory.h>
@@ -47,17 +48,15 @@ static const char FWHKTask[] =         I18N_NOOP("Author");
 static const char FWHKEmailAddress[] = "kossebau@kde.org";
 
 
-static KComponentData* _componentData = 0;
-static KAboutData* _aboutData = 0;
-
-
 OktetaPartFactory::OktetaPartFactory()
 {
 // TODO: also load encoder and other plugins here
-    _aboutData = new KAboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
+    mAboutData = new KAboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
                                  KAboutData::License_GPL_V2, ki18n(PartCopyright), KLocalizedString(), 0, FWHKEmailAddress );
-    _aboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
-    _componentData = new KComponentData( _aboutData );
+    mAboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
+    mComponentData = new KComponentData( mAboutData );
+
+    mByteArrayViewProfileManager = new Kasten2::ByteArrayViewProfileManager();
 
 //     const QList<AbstractModelStreamEncoder*> encoderList =
 //         ByteArrayStreamEncoderFactory::createStreamEncoders();
@@ -93,7 +92,7 @@ Q_UNUSED( args )
         ( className == "Browser/View" ) ?         OktetaPart::BrowserViewModus :
         /* else */                                OktetaPart::ReadWriteModus;
 
-    OktetaPart* part = new OktetaPart( parent, *_componentData, modus );
+    OktetaPart* part = new OktetaPart( parent, *mComponentData, modus, mByteArrayViewProfileManager );
 
     return part;
 }
@@ -101,6 +100,6 @@ Q_UNUSED( args )
 
 OktetaPartFactory::~OktetaPartFactory()
 {
-    delete _componentData;
-    delete _aboutData;
+    delete mComponentData;
+    delete mAboutData;
 }

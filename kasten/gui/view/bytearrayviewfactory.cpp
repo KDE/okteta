@@ -45,20 +45,12 @@ AbstractView* ByteArrayViewFactory::createViewFor( AbstractDocument* _document )
     ByteArrayDocument* document = static_cast<ByteArrayDocument*>( _document );
     if( document )
     {
-        result = new ByteArrayView( document );
+        ByteArrayViewProfileSynchronizer* synchronizer =
+            new ByteArrayViewProfileSynchronizer( mByteArrayViewProfileManager );
 
-        const ByteArrayViewProfile::Id defaultViewProfileId =
-            mByteArrayViewProfileManager->defaultViewProfileId();
-        if( ! defaultViewProfileId.isEmpty() )
-        {
-            ByteArrayViewProfileSynchronizer* synchronizer =
-                new ByteArrayViewProfileSynchronizer( mByteArrayViewProfileManager );
-            synchronizer->setViewProfileId( defaultViewProfileId );
-            synchronizer->setView( result );
+        synchronizer->setViewProfileId( mByteArrayViewProfileManager->defaultViewProfileId() );
 
-            result->setSynchronizer( synchronizer );
-        }
-
+        result = new ByteArrayView( document, synchronizer );
     }
 
     return result;
@@ -70,7 +62,14 @@ AbstractView* ByteArrayViewFactory::createCopyOfView( AbstractView* _view, Qt::A
 
     ByteArrayView* view = qobject_cast<ByteArrayView*>( _view );
     if( view )
-        result = new ByteArrayView( view, alignment );
+    {
+        ByteArrayViewProfileSynchronizer* synchronizer =
+            new ByteArrayViewProfileSynchronizer( mByteArrayViewProfileManager );
+
+        synchronizer->setViewProfileId( view->synchronizer()->viewProfileId() );
+
+        result = new ByteArrayView( view, synchronizer, alignment );
+    }
 
     return result;
 }
