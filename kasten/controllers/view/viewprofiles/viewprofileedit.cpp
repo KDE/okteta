@@ -170,6 +170,8 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     layout->addWidget( layoutBox );
     layout->addWidget( valuesBox );
     layout->addWidget( charsBox );
+
+    mTitleEdit->setFocus();
 }
 
 ByteArrayViewProfile ViewProfileEdit::viewProfile() const
