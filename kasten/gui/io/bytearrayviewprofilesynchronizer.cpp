@@ -60,29 +60,7 @@ ByteArrayViewProfileSynchronizer::setView( ByteArrayView* view )
     {
         const ByteArrayViewProfile viewProfile = mViewProfileManager->viewProfile( mViewProfileId );
         updateView( viewProfile );
-
-        connect( mView, SIGNAL(showsNonprintingChanged(bool)),
-                 SLOT(onShowsNonprintingChanged()) );
-        connect( mView, SIGNAL(valueCodingChanged(int)),
-                 SLOT(onValueCodingChanged()) );
-        connect( mView, SIGNAL(charCodecChanged(QString)),
-                 SLOT(onCharCodecChanged()) );
-        connect( mView, SIGNAL(substituteCharChanged(QChar)),
-                 SLOT(onSubstituteCharChanged()) );
-        connect( mView, SIGNAL(undefinedCharChanged(QChar)),
-                 SLOT(onUndefinedCharChanged()) );
-        connect( mView, SIGNAL(visibleByteArrayCodingsChanged(int)),
-                 SLOT(onVisibleByteArrayCodingsChanged()) );
-        connect( mView, SIGNAL(offsetColumnVisibleChanged(bool)),
-                 SLOT(onOffsetColumnVisibleChanged()) );
-        connect( mView, SIGNAL(noOfBytesPerLineChanged(int)),
-                 SLOT(onNoOfBytesPerLineChanged()) );
-        connect( mView, SIGNAL(noOfGroupedBytesChanged(int)),
-                 SLOT(onNoOfGroupedBytesChanged()) );
-        connect( mView, SIGNAL(layoutStyleChanged(int)),
-                 SLOT(onLayoutStyleChanged()) );
-        connect( mView, SIGNAL(viewModusChanged(int)),
-                 SLOT(onViewModusChanged()) );
+        connectViewSignals();
     }
 }
 
@@ -114,10 +92,7 @@ void ByteArrayViewProfileSynchronizer::setViewProfileId( const ByteArrayViewProf
             connect( mViewProfileManager, SIGNAL(viewProfilesRemoved(QList<Kasten2::ByteArrayViewProfile::Id>)),
                      SLOT(onViewProfilesRemoved(QList<Kasten2::ByteArrayViewProfile::Id>)) );
             if( mView  )
-            {
-                connect( mView, SIGNAL(valueCodingChanged(int)), SIGNAL(valueCodingChanged(int)) );
-                connect( mView, SIGNAL(charCodecChanged(QString)), SIGNAL(charCodecChanged(QString)) );
-            }
+                connectViewSignals();
         }
     }
     else
@@ -264,6 +239,32 @@ void ByteArrayViewProfileSynchronizer::updateViewProfile( ByteArrayViewProfile& 
 
     if( (mDirtyFlags&ViewModusChanged) )
         viewProfile.setViewModus( mView->viewModus() );
+}
+
+void ByteArrayViewProfileSynchronizer::connectViewSignals()
+{
+    connect( mView, SIGNAL(showsNonprintingChanged(bool)),
+             SLOT(onShowsNonprintingChanged()) );
+    connect( mView, SIGNAL(valueCodingChanged(int)),
+             SLOT(onValueCodingChanged()) );
+    connect( mView, SIGNAL(charCodecChanged(QString)),
+             SLOT(onCharCodecChanged()) );
+    connect( mView, SIGNAL(substituteCharChanged(QChar)),
+             SLOT(onSubstituteCharChanged()) );
+    connect( mView, SIGNAL(undefinedCharChanged(QChar)),
+             SLOT(onUndefinedCharChanged()) );
+    connect( mView, SIGNAL(visibleByteArrayCodingsChanged(int)),
+             SLOT(onVisibleByteArrayCodingsChanged()) );
+    connect( mView, SIGNAL(offsetColumnVisibleChanged(bool)),
+             SLOT(onOffsetColumnVisibleChanged()) );
+    connect( mView, SIGNAL(noOfBytesPerLineChanged(int)),
+             SLOT(onNoOfBytesPerLineChanged()) );
+    connect( mView, SIGNAL(noOfGroupedBytesChanged(int)),
+             SLOT(onNoOfGroupedBytesChanged()) );
+    connect( mView, SIGNAL(layoutStyleChanged(int)),
+             SLOT(onLayoutStyleChanged()) );
+    connect( mView, SIGNAL(viewModusChanged(int)),
+             SLOT(onViewModusChanged()) );
 }
 
 void ByteArrayViewProfileSynchronizer::onViewProfilesRemoved( const QList<ByteArrayViewProfile::Id>& viewProfileIds )
