@@ -273,8 +273,9 @@ ViewProfilesManageDialog::onModelReset()
         mCurrentViewProfileId.clear();
     // TODO: show a ghost profile with the built-in parameters if there is none
 
-    mEditButton->setEnabled(isViewProfileSelected);
-    mSetDefaultButton->setEnabled(isViewProfileSelected);
+    mEditButton->setEnabled( isViewProfileSelected );
+    mSetDefaultButton->setEnabled( isViewProfileSelected );
+    mDeleteButton->setEnabled( isViewProfileSelected );
 }
 
 void
