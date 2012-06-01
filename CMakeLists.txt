@@ -1,4 +1,20 @@
+cmake_minimum_required(VERSION 2.6)
+
 project( okteta )
+
+find_package(KDE4 REQUIRED)
+include(KDE4Defaults)
+include(MacroLibrary)
+
+macro_optional_find_package( QCA2 )
+macro_log_feature( QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" FALSE "2.0.0" "Needed for most of the algorithms of the checksum tool." )
+
+add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+include_directories(
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_BINARY_DIR}
+    ${KDE4_INCLUDES}
+)
 
 # control build scope
 # TODO: examples and templates not internal need headers and libs as installed
@@ -81,3 +97,5 @@ add_subdirectory( program )
 if (QT_QTDECLARATIVE_FOUND AND OKTETA_MOBILE_UI)
     macro_optional_add_subdirectory(mobile)
 endif (QT_QTDECLARATIVE_FOUND AND OKTETA_MOBILE_UI)
+
+macro_display_feature_log()
