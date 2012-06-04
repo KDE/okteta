@@ -47,7 +47,7 @@ public:
     /** construct a parser which opens parses @p absolutePath */
     OsdParser(const QString& pluginName, const QString& absolutePath);
     /** construct a parser from an in-memory string */
-    OsdParser(const QString xml);
+    OsdParser(const QString& xml);
     virtual ~OsdParser();
 
     virtual QStringList parseStructureNames() const;

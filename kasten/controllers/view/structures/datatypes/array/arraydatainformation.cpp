@@ -223,8 +223,6 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
         bitsRemaining &= BitCount64(~7); //unset lower 3 bits to make it divisible by 8
         address++;
     }
-    //first of all update the structure:
-    topLevelDataInformation()->updateElement(this);
     qint64 ret = mData->readData(input, address, bitsRemaining);
     mWasAbleToRead = ret >= 0; //if ret is -1 reading failed
     return ret;

@@ -368,52 +368,37 @@ target_link_libraries ( structures-static
 )
 set_target_properties( structures-static PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT= )
 
-kde4_add_unit_test( scriptvalueconvertertest
-  TESTNAME scriptvalue-converter-test
-  test/scriptvalueconvertertest.cpp
+macro(structures_unit_test _testtarget _testname)
+    #message("ARGC='${ARGC}' ARGV='${ARGV}' ARGN='${ARGN}'")
+    kde4_add_unit_test(${_testtarget} TESTNAME ${_testname} ${ARGN})
+	target_link_libraries(${_testtarget} structures-static ${QT_QTTEST_LIBRARY})
+	set_target_properties(${_testtarget} PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
+endmacro()
+
+structures_unit_test( scriptvalueconvertertest "scriptvalue-converter-test"
+	test/scriptvalueconvertertest.cpp
 )
-target_link_libraries(scriptvalueconvertertest structures-static ${QT_QTTEST_LIBRARY})
-set_target_properties(scriptvalueconvertertest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
-
-kde4_add_unit_test( osdparsertest
-  TESTNAME osd-parser-test
-  test/osdparsertest.cpp
+structures_unit_test( osdparsertest "osd-parser-test"
+	test/osdparsertest.cpp
 )
-target_link_libraries(osdparsertest structures-static ${QT_QTTEST_LIBRARY})
-set_target_properties(osdparsertest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
-
-kde4_add_unit_test( primitivearraytest
-  TESTNAME primitive-array-test
-  test/primitivearraytest.cpp
+structures_unit_test( primitivearraytest "primitive-array-test"
+	test/primitivearraytest.cpp
 )
-target_link_libraries(primitivearraytest structures-static ${QT_QTTEST_LIBRARY})
-set_target_properties(primitivearraytest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
-
-
-kde4_add_unit_test( arraydatainformationtest
-  TESTNAME array-datainformation-test
-  test/arraydatainformationtest.cpp
+structures_unit_test( arraydatainformationtest "array-datainformation-test"
+	test/arraydatainformationtest.cpp
 )
-target_link_libraries(arraydatainformationtest structures-static ${QT_QTTEST_LIBRARY})
-set_target_properties(arraydatainformationtest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
-
-kde4_add_unit_test( basicdatainformationtest
-  TESTNAME basic-datainformation-test
-  test/basicdatainformationtest.cpp
+structures_unit_test( basicdatainformationtest "basic-datainformation-test"
+	test/basicdatainformationtest.cpp
 )
-target_link_libraries(basicdatainformationtest structures-static ${QT_QTTEST_LIBRARY})
-set_target_properties(basicdatainformationtest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
-
-kde4_add_unit_test( primitivedatainformationtest
-TESTNAME primitive-datainformationtest-test
-test/primitivedatainformationtest.cpp
+structures_unit_test( primitivedatainformationtest "primitive-datainformationtest-test"
+	test/primitivedatainformationtest.cpp
 )
-target_link_libraries(primitivedatainformationtest structures-static ${QT_QTTEST_LIBRARY})
-set_target_properties(primitivedatainformationtest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
-
-kde4_add_unit_test( scriptclassestest TESTNAME scriptclasses-test test/scriptclassestest.cpp)
-target_link_libraries(scriptclassestest structures-static ${QT_QTTEST_LIBRARY})
-set_target_properties(scriptclassestest PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
+structures_unit_test( scriptclassestest "scriptclasses-test"
+	test/scriptclassestest.cpp
+)
+structures_unit_test( uniondatainformationtest "union-datainformation-test"
+	test/uniondatainformationtest.cpp
+)
 
 endif ( KDE4_BUILD_TESTS )
 

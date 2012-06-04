@@ -37,6 +37,8 @@ public:
     virtual ~StructureDataInformation();
     DATAINFORMATION_CLONE(Structure)
 
+    virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
+            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
     virtual bool isStruct() const;
     //implement the DataInformation pure virtual functions
     QString typeName() const;

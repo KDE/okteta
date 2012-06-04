@@ -45,10 +45,6 @@ public:
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
-    /** this is valid for structs and arrays, union has an own implementation */
-    virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
-
     virtual DataInformation* childAt(unsigned int index) const;
     virtual bool hasChildren() const;
     virtual bool canHaveChildren() const;

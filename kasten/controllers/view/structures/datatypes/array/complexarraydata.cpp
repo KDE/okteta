@@ -146,9 +146,13 @@ qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta:
     uint readBytes = 0;
     qint64 readBits = 0;
     quint8 bitOffset = 0;
+    TopLevelDataInformation* top = mParent->topLevelDataInformation();
+    Q_CHECK_PTR(top);
     for (int i = 0; i < mChildren.size(); i++)
     {
-        qint64 currentReadBits = mChildren[i]->readData(input, address + readBytes,
+        DataInformation* next = mChildren.at(i);
+        top->updateElement(next);
+        qint64 currentReadBits = next->readData(input, address + readBytes,
                 bitsRemaining - readBits, &bitOffset);
         if (currentReadBits == -1)
         {

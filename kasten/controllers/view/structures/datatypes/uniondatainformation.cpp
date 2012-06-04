@@ -43,31 +43,36 @@ BitCount32 UnionDataInformation::size() const
 qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    //first of all update the structure:
-    topLevelDataInformation()->updateElement(this);
+    TopLevelDataInformation* top = topLevelDataInformation();
+    Q_CHECK_PTR(top);
 
     qint64 readBits = 0;
-    quint8 originalBitOffset = *bitOffset;
-    quint8 correctBitOffset = originalBitOffset;
+    const quint8 originalBitOffset = *bitOffset;
+    quint8 bitOffsetAfterUnion = originalBitOffset;
+    bool reachedEOF = false;
     for (int i = 0; i < mChildren.size(); i++)
     {
+        DataInformation* next = mChildren.at(i);
+        //first of all update the structure:
+        top->updateElement(next);
         //bit offset always has to be reset to original value
-        qint64 currentReadBits = mChildren[i]->readData(input, address, bitsRemaining, bitOffset);
+        qint64 currentReadBits = next->readData(input, address, bitsRemaining, bitOffset);
         if (currentReadBits == -1)
         {
-            //could not read one element -> whole structure could not be read
-            mWasAbleToRead = false;
-            return -1;
+            //since this is a union, try to read all values and not abort as soon as one is too large
+            reachedEOF = true;
         }
-        if (currentReadBits > readBits)
+        else if (currentReadBits > readBits)
         {
-            readBits = correctBitOffset;
-            correctBitOffset = *bitOffset;
+            //this is the largest element, so the bit offset after the union is the one after this element
+            readBits = currentReadBits;
+            bitOffsetAfterUnion = *bitOffset;
         }
         *bitOffset = originalBitOffset; // start at beginning
     }
-    mWasAbleToRead = false;
-    return readBits;
+    *bitOffset = bitOffsetAfterUnion;
+    mWasAbleToRead = !reachedEOF;
+    return reachedEOF ? -1 : readBits;
 }
 
 UnionDataInformation::~UnionDataInformation()

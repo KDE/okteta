@@ -58,32 +58,6 @@ bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteA
     return false;
 }
 
-qint64 DataInformationWithChildren::readData(Okteta::AbstractByteArrayModel *input,
-        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
-{
-    //first of all update the structure:
-    topLevelDataInformation()->updateElement(this);
-
-    uint readBytes = 0;
-    qint64 readBits = 0;
-    const quint8 origBitOffset = *bitOffset;
-    for (int i = 0; i < mChildren.size(); i++)
-    {
-        qint64 currentReadBits = mChildren[i]->readData(input, address + readBytes,
-                bitsRemaining - readBits, bitOffset);
-        if (currentReadBits == -1)
-        {
-            mWasAbleToRead = false;
-            //could not read one element -> whole structure could not be read
-            return -1;
-        }
-        readBits += currentReadBits;
-        readBytes = (readBits + origBitOffset) / 8;
-    }
-    mWasAbleToRead = true;
-    return readBits;
-}
-
 DataInformationWithChildren::~DataInformationWithChildren()
 {
     qDeleteAll(mChildren);

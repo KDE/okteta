@@ -108,9 +108,6 @@ qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Ok
         address += 1;
         Q_ASSERT((bitsRemaining % 8) == 0); //must be mod 8
     }
-
-    topLevelDataInformation()->updateElement(this); //update before reading!
-
     return mData->read(input, address, bitsRemaining);
 }
 

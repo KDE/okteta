@@ -98,6 +98,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
     quint8 bitOffset = 0;
     mData->beginRead(); //before reading set wasAbleToRead to false
     mData->resetValidationState(); //reading new data -> validation state is old
+    updateElement(mData.data()); //unlikely that this is useful, but maybe someone needs it
     mData->readData(input, address, remainingBits, &bitOffset);
 
     if (mChildDataChanged)

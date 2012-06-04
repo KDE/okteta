@@ -53,7 +53,7 @@ OsdParser::OsdParser(const QString& pluginName, const QString& absolutePath)
 {
 }
 
-OsdParser::OsdParser(const QString xml)
+OsdParser::OsdParser(const QString& xml)
         : AbstractStructureParser(QString(), QString()), mXmlString(xml)
 {
 }
