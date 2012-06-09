@@ -48,9 +48,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfilesController : public AbstractXml
   Q_OBJECT
 
   public:
-    explicit ViewProfilesController( KXMLGUIClient* guiClient,
-                                     ByteArrayViewProfileManager* viewProfileManager,
-                                     QWidget* parentWidget );
+    explicit ViewProfilesController( ByteArrayViewProfileManager* viewProfileManager,
+                                     KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
@@ -66,7 +65,6 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfilesController : public AbstractXml
   private:
     KXMLGUIClient* mGuiClient;
     ByteArrayViewProfileManager* mViewProfileManager;
-    QWidget* mParentWidget;
 
     ByteArrayView* mByteArrayView;
     ByteArrayViewProfileSynchronizer* mByteArrayViewProfileSynchronizer;

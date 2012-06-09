@@ -159,7 +159,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     // tmp
     addXmlGuiController( new ToolListMenuController(this,this) );
     addXmlGuiController( new ViewListMenuController(viewManager(),viewArea(),this) );
-    addXmlGuiController( new ViewProfilesController(this,mProgram->byteArrayViewProfileManager(),this) );
+    addXmlGuiController( new ViewProfilesController(mProgram->byteArrayViewProfileManager(),this) );
 }
 
 void OktetaMainWindow::setupControllers()
