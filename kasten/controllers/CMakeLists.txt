@@ -515,6 +515,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/viewstatus/viewstatuscontroller.h
   view/viewprofiles/viewprofilescontroller.h
   view/viewprofiles/viewprofilesynccontroller.h
+  view/viewprofiles/viewprofilesmanagecontroller.h
   view/stringsextract/stringsextracttool.h
   view/stringsextract/stringsextracttoolview.h
   view/stringsextract/stringsextracttoolfactory.h
