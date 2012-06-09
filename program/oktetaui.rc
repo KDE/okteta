@@ -80,7 +80,7 @@
     <ActionList name="windows_list"/>
   </Menu>
   <Menu name="settings">
-    <Action name="settings_profiles_manage" />
+    <Action name="settings_viewprofiles_manage" />
   </Menu>
 </MenuBar>
 
