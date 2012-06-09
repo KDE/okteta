@@ -175,6 +175,7 @@ set( okteta_kastengui_io_HDRS
   io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditorfactory.h
   io/streamencoder/abstractbytearraystreamencoder.h
   io/streamencoder/bytearraytextstreamencoderpreview.h
+  io/bytearrayviewprofilesynchronizer.h
 )
 
 set( okteta_kastengui_system_HDRS
