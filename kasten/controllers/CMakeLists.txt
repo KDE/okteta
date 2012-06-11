@@ -434,8 +434,7 @@ set( VIEWPROFILESCONTROLLER_SRCS
   view/viewprofiles/viewprofileedit.cpp
   view/viewprofiles/viewprofileeditdialog.cpp
   view/viewprofiles/viewprofiletablemodel.cpp
-  view/viewprofiles/viewprofilescontroller.cpp
-  view/viewprofiles/viewprofilesynccontroller.cpp
+  view/viewprofiles/viewprofilecontroller.cpp
 )
 
 set( VIEWPROFILESMANAGECONTROLLER_SRCS
@@ -513,8 +512,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/replace/replacecontroller.h
   view/replace/replaceuserqueryable.h
   view/viewstatus/viewstatuscontroller.h
-  view/viewprofiles/viewprofilescontroller.h
-  view/viewprofiles/viewprofilesynccontroller.h
+  view/viewprofiles/viewprofilecontroller.h
   view/viewprofiles/viewprofilesmanagecontroller.h
   view/stringsextract/stringsextracttool.h
   view/stringsextract/stringsextracttoolview.h

@@ -72,8 +72,7 @@
 #include <viewconfig/viewconfigcontroller.h>
 #include <viewmode/viewmodecontroller.h>
 #include <viewstatus/viewstatuscontroller.h>
-#include <viewprofiles/viewprofilescontroller.h>
-#include <viewprofiles/viewprofilesynccontroller.h>
+#include <viewprofiles/viewprofilecontroller.h>
 #include <viewprofiles/viewprofilesmanagecontroller.h>
 // Kasten controllers
 #include <document/modified/modifiedbarcontroller.h>
@@ -159,7 +158,6 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     // tmp
     addXmlGuiController( new ToolListMenuController(this,this) );
     addXmlGuiController( new ViewListMenuController(viewManager(),viewArea(),this) );
-    addXmlGuiController( new ViewProfilesController(mProgram->byteArrayViewProfileManager(),this) );
 }
 
 void OktetaMainWindow::setupControllers()
@@ -216,7 +214,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new PrintController(this) );
     addXmlGuiController( new ViewConfigController(this) );
     addXmlGuiController( new ViewModeController(this) );
-    addXmlGuiController( new ViewProfileSyncController(this,byteArrayViewProfileManager,this) );
+    addXmlGuiController( new ViewProfileController(byteArrayViewProfileManager,this,this) );
     addXmlGuiController( new ViewProfilesManageController(this,byteArrayViewProfileManager,this) );
 
     Kasten2::StatusBar* const bottomBar = static_cast<Kasten2::StatusBar*>( statusBar() );

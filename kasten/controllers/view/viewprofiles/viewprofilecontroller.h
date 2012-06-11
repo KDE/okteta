@@ -20,8 +20,8 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWPROFILESYNCCONTROLLER_H
-#define VIEWPROFILESYNCCONTROLLER_H
+#ifndef VIEWPROFILECONTROLLER_H
+#define VIEWPROFILECONTROLLER_H
 
 // lib
 #include "oktetakastencontrollers_export.h"
@@ -32,8 +32,9 @@
 #include <kastencore.h>
 
 class KXMLGUIClient;
-class QAction;
+class KActionMenu;
 class QActionGroup;
+class QAction;
 
 
 namespace Kasten2
@@ -43,25 +44,29 @@ class ByteArrayViewProfileSynchronizer;
 class ByteArrayView;
 
 
-class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileSyncController : public AbstractXmlGuiController
+class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileController : public AbstractXmlGuiController
 {
   Q_OBJECT
 
   public:
-    explicit ViewProfileSyncController( KXMLGUIClient* guiClient,
-                                        ByteArrayViewProfileManager* viewProfileManager,
-                                        QWidget* parentWidget );
+    ViewProfileController( ByteArrayViewProfileManager* viewProfileManager,
+                           QWidget* parentWidget,
+                           KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
 
   private Q_SLOTS: // update slots
+    void onViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId );
     void onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState );
+
+    void onViewProfilesChanged();
 
   private Q_SLOTS: // action slots
     void onCreateNewActionTriggered();
     void onResetChangesActionTriggered();
     void onSaveChangesActionTriggered();
+    void onViewProfileTriggered( QAction* action );
 
   private:
     KXMLGUIClient* mGuiClient;
@@ -71,10 +76,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileSyncController : public Abstract
     ByteArrayView* mByteArrayView;
     ByteArrayViewProfileSynchronizer* mByteArrayViewProfileSynchronizer;
 
-    // view menu
+    // menu
+    KActionMenu* mViewProfileActionMenu;
+
     QAction* mCreateNewAction;
     QAction* mResetChangesAction;
     QAction* mSaveChangesAction;
+    QActionGroup* mViewProfilesActionGroup;
 };
 
 }

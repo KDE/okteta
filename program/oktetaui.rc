@@ -47,15 +47,7 @@
     <Action name="view_area_split_vertically"/>
     <Action name="view_area_close"/>
     <Separator/>
-    <Menu name="view_profile">
-      <text context="@title:menu submenu to select the view profile or change it">View Profile</text>
-      <Action name="view_profile_new" />
-      <Separator/>
-      <Action name="view_profile_save" />
-      <Action name="view_profile_reload" />
-      <Separator/>
-      <ActionList name="view_profile_list" />
-    </Menu>
+    <Action name="view_profile" />
   </Menu>
   <Menu name="bookmarks">
     <Action name="bookmark_add" />
