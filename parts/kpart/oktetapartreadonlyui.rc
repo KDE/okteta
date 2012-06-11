@@ -38,6 +38,8 @@
     <Action name="view_bytespergroup" group="view_operations" />
     <Action name="resizestyle" group="view_operations" />
     <Action name="viewmode" group="view_operations" />
+    <Separator/>
+    <Action name="view_profile" />
   </Menu>
 </MenuBar>
 

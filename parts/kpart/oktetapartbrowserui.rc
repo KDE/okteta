@@ -34,6 +34,8 @@
     <Action name="view_bytespergroup" />
     <Action name="resizestyle" />
     <Action name="viewmode" />
+    <Separator/>
+    <Action name="view_profile" />
   </Menu>
 </MenuBar>
 

@@ -42,6 +42,7 @@
 #include <viewconfig/viewconfigcontroller.h>
 #include <viewmode/viewmodecontroller.h>
 #include <viewstatus/viewstatuscontroller.h>
+#include <viewprofiles/viewprofilecontroller.h>
 // Kasten
 #include <jobmanager.h>
 #include <abstractloadjob.h>
@@ -116,6 +117,7 @@ OktetaPart::OktetaPart( QObject* parent,
     mControllers.append( mPrintController );
     mControllers.append( new Kasten2::ViewConfigController(this) );
     mControllers.append( new Kasten2::ViewModeController(this) );
+    mControllers.append( new Kasten2::ViewProfileController(mViewProfileManager, widget, this) );
 
 //     Kasten2::StatusBar* bottomBar = static_cast<Kasten2::StatusBar*>( statusBar() );
 //     mControllers.append( new ViewStatusController(bottomBar) );
@@ -193,9 +195,9 @@ void OktetaPart::onDocumentLoaded( Kasten2::AbstractDocument* document )
 
         Kasten2::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer =
             new Kasten2::ByteArrayViewProfileSynchronizer( mViewProfileManager );
+        viewProfileSynchronizer->setViewProfileId( mViewProfileManager->defaultViewProfileId() );
+
         mByteArrayView = new Kasten2::ByteArrayView( mDocument, viewProfileSynchronizer );
-//     mByteArrayView->setNoOfBytesPerLine( 16 );
-        mByteArrayView->setShowsNonprinting( false );
         connect( mByteArrayView, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );
 
         QWidget* displayWidget = mByteArrayView->widget();
