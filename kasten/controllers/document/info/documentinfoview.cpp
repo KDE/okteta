@@ -96,7 +96,9 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
     // otherwise the text is on the wrong side of the dialog
     if( layoutDirection() == Qt::RightToLeft )
 	   mLocationLabel->setAlignment( Qt::AlignRight );
-    mLocationLabel->setTextInteractionFlags( Qt::TextSelectableByMouse|Qt::TextSelectableByKeyboard );
+    // TODO: for some reason if building with enable_final flag the compiler sees
+    // an ambiguous conversion without the explicit Qt::TextInteractionFlags(...)
+    mLocationLabel->setTextInteractionFlags( Qt::TextInteractionFlags(Qt::TextSelectableByMouse|Qt::TextSelectableByKeyboard) );
     propertyGrid->addWidget( mLocationLabel, currentPropertyRow++, 1 );
 
     // size property
