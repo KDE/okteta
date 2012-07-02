@@ -52,7 +52,6 @@
 #include <QtGui/QHeaderView>
 #include <QFocusEvent>
 
-//TODO add bool parameter to read data to prevent frequent updating of treeview
 namespace Kasten2
 {
 
@@ -170,7 +169,7 @@ void StructView::openSettingsDlg(int page)
     connect(dialog, SIGNAL(settingsChanged(QString)), mTool, SLOT(setSelectedStructuresInView()));
     connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(update()));
 
-    //TODO kconfig_compiler signals not working (or am I doing it wrong?)
+    //XXX once kconfig_compiler signals work with settings dialog, use that
     if (page == 0)
         dialog->setCurrentPage(displ);
     else if (page == 1)
@@ -233,8 +232,11 @@ void StructView::onCurrentRowChanged(const QModelIndex& current,
         const QModelIndex& previous)
 {
     Q_UNUSED( previous )
-    if (current.isValid())
+    if (current.isValid() && mTool->byteArrayModel())
+    {
         mTool->mark(current);
+        mLockStructureButton->setEnabled(true);
+    }
     else
         mTool->unmark();
 }

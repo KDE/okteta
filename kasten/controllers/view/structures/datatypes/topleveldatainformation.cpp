@@ -79,8 +79,8 @@ void TopLevelDataInformation::updateElement(DataInformation* elem)
         mScriptHandler->updateDataInformation(elem);
 }
 
-void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
-        Okteta::Address address, const Okteta::ArrayChangeMetricsList& changesList)
+void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+        const Okteta::ArrayChangeMetricsList& changesList, bool forceRead)
 {
     mChildDataChanged = false;
     //first of all check if start offset is locked
@@ -89,7 +89,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input,
         //use the saved offset
         address = mLockedPositions.value(input);
         //we read from the locked position, so now check whether it is necessary to update
-        bool updateNeccessary = isReadingNecessary(changesList, address);
+        bool updateNeccessary = forceRead || isReadingNecessary(changesList, address);
 
         if (!updateNeccessary)
             return;
@@ -112,52 +112,52 @@ bool TopLevelDataInformation::isReadingNecessary(const Okteta::ArrayChangeMetric
         Okteta::Address address)
 {
     if (changesList.isEmpty())
-        return true; //default argument
+        return false; //no changes
+    const Okteta::Address structureSizeInBytes = (mData->size() / 8) + (mData->size() % 8 == 0 ? 0 : 1);
+    const Okteta::Address end = address + structureSizeInBytes;
     for (int i = 0; i < changesList.length(); ++i)
     {
         const Okteta::ArrayChangeMetrics& change = changesList.at(i);
-        if (change.type() == Okteta::ArrayChangeMetrics::Replacement)
+        //this is valid for all types
+        if (change.offset() > end)
         {
-            Okteta::Address structureSizeInBytes = (mData->size() / 8)
-                    + (mData->size() % 8 == 0 ? 0 : 1);
-
+            //insertion/deletion/swapping is after end of structure, it doesn't interest us
+            continue;
+        }
+        //now handle special cases
+        else if (change.type() == Okteta::ArrayChangeMetrics::Replacement)
+        {
             //handle it for replacements
-            //TODO insertions and deletions: move structureStart?
-            if (change.lengthChange() == 0)
-            {
-                //only need to check if anything inside structure was changed
-                if (change.offset() > address + structureSizeInBytes)
-                {
-                    //change is after structure, no need to update anything
-                    continue;
-                }
-                //check if change is before structure
-                else if (change.offset() + change.insertLength() < address)
-                {
-                    //only values before start changed -> reading is unnecessary
-                    continue;
-                }
-                else
-                {
-                    //change affects this structure
-                    return true;
-                }
+            if (change.lengthChange() == 0 && change.offset() + change.removeLength() < address) {
+                //no length change and it doesn't affect structure since it is before
+                //could use insertLength() instead of removeLength() since they are the same
+                continue;
             }
-            else if (change.type() == Okteta::ArrayChangeMetrics::Swapping)
-            {
-                //TODO
+            else {
+                //something was removed/inserted before start of structure
+                //which means all bytes have moved forwards/backwards: reread all
                 return true;
             }
-            else
-            {
-                kFatal() << "logic error, this should never be reached";
+        }
+        else if (change.type() == Okteta::ArrayChangeMetrics::Swapping)
+        {
+            if (change.secondEnd() < address) {
+                //swapped ranges end before start, i.e. the range of interest does not change
+                continue;
+            }
+            else {
+                //Not sure what other possibilities there are, but rather waste CPU or I/O rereading
+                //than showing outdated values
+                return true;
             }
         }
+        else
+        {
+            kDebug() << "Invalid change";
+            continue;
+        }
     }
-    //    kDebug()
-    //        << "it was not necessary to update values";
-    return true; //just return true for all other cases
-    //TODO implement checks for other cases
+    return false; //nothing affected us
 }
 
 void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset,

@@ -51,6 +51,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructTool : public AbstractTool
 {
 Q_OBJECT
     Q_DISABLE_COPY(StructTool)
+
 public:
     StructTool();
     virtual ~StructTool();
@@ -109,6 +110,9 @@ protected Q_SLOTS:
     void onCursorPositionChange(Okteta::Address pos);
     void onContentsChange(const Okteta::ArrayChangeMetricsList&);
     void onChildItemDataChanged();
+
+private:
+    Okteta::Address startAddress(const DataInformation* data);
 
 protected:
     QScopedPointer<StructToolPrivate> d;

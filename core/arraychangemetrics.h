@@ -104,6 +104,7 @@ inline ArrayChangeMetrics ArrayChangeMetrics::asReplacement( Address offset, Siz
 
 inline ArrayChangeMetrics ArrayChangeMetrics::asSwapping( Address firstOffset, Address secondOffset, Size secondLength )
 {
+    Q_ASSERT(firstOffset < secondOffset);
     return ArrayChangeMetrics( Swapping, firstOffset, secondOffset, secondLength );
 }
 

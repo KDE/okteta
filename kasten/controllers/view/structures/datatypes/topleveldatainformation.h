@@ -68,9 +68,10 @@ public:
      * @param address the starting offset to read from, or if an offset is locked, the locked offset
      * @param changesList the list with changes to @input, so that it is possible to check whether reading is necessary
      *      This parameter is only useful if the structure was locked to a specific position.
+     * @param forceRead whether to always read data, ignoring the change list
      */
     void read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            const Okteta::ArrayChangeMetricsList& changesList = Okteta::ArrayChangeMetricsList());
+            const Okteta::ArrayChangeMetricsList& changesList, bool forceRead);
     void updateElement(DataInformation* elem);
     QScriptEngine* scriptEngine() const;
 
@@ -96,8 +97,7 @@ public:
     void _childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 
 private:
-    bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
-            Okteta::Address address);
+    bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList, Okteta::Address address);
 
 public Q_SLOTS:
     void resetValidationState();
