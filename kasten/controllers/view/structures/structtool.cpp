@@ -159,6 +159,11 @@ void StructTool::setByteOrder(int order)
 
 void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
 {
+    kDebug() << "contents changed";
+    for (int i = 0; i < list.size(); ++i) {
+        const Okteta::ArrayChangeMetrics& acm = list.at(i);
+        kDebug() << "change: t=" << acm.type() << "o=" << acm.offset() << "a2=" << acm.removeLength() << "a3=" << acm.insertLength();
+    }
     updateData(list);
 }
 
@@ -170,7 +175,7 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
         return false;
     Q_CHECK_PTR(item);
 
-    Okteta::Address structureStart = d->mCursorIndex;
+    Okteta::Address structureStart = startAddress(item);
     TopLevelDataInformation* topLevel = item->topLevelDataInformation();
     if (topLevel->isLockedFor(d->mByteArrayModel))
         structureStart = topLevel->lockPositionFor(d->mByteArrayModel);
@@ -213,7 +218,7 @@ void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
     for (int i = 0; i < d->mData.size(); i++)
     {
         const TopLevelDataInformation::Ptr& dat = d->mData.at(i);
-        dat->read(d->mByteArrayModel, d->mCursorIndex, list);
+        dat->read(d->mByteArrayModel, d->mCursorIndex, list, false);
         if (d->mCurrentItemDataChanged)
             emit dataChanged(i, d->mData.at(i)->actualDataInformation());
         d->mCurrentItemDataChanged = false;
@@ -327,6 +332,19 @@ void StructTool::setSelectedStructuresInView()
 
 }
 
+Okteta::Address StructTool::startAddress(const DataInformation* data)
+{
+    if (data->topLevelDataInformation()->isLockedFor(d->mByteArrayModel))
+    {
+        return data->topLevelDataInformation()->lockPositionFor(d->mByteArrayModel);
+    }
+    else
+    {
+        //not locked
+        return d->mCursorIndex;
+    }
+}
+
 void StructTool::mark(const QModelIndex& idx)
 {
     if (!d->mByteArrayModel || !d->mByteArrayView)
@@ -337,26 +355,16 @@ void StructTool::mark(const QModelIndex& idx)
     const DataInformation* data = static_cast<const DataInformation*>(idx.internalPointer());
     if (!data)
         return;
+    Q_CHECK_PTR(data->topLevelDataInformation());
+    const Okteta::Address baseAddress = startAddress(data);
+    //FIXME support marking of partial bytes
     int length;
     if (data->isDummy())
         length = static_cast<const DataInformation*>(data->parent())->childSize(idx.row()) / 8;
     else
         length = data->size() / 8;
-    int maxLen = d->mByteArrayModel->size() - d->mCursorIndex;
+    int maxLen = d->mByteArrayModel->size() - baseAddress;
     length = qMin(length, maxLen);
-    Q_CHECK_PTR(data->topLevelDataInformation());
-    Okteta::Address baseAddress;
-    if (data->topLevelDataInformation()->isLockedFor(d->mByteArrayModel))
-    {
-        baseAddress = data->topLevelDataInformation()->lockPositionFor(d->mByteArrayModel);
-    }
-    else
-    {
-        //not locked
-        baseAddress = d->mCursorIndex;
-    }
-
-    //FIXME support marking of partial bytes
     const Okteta::Address startOffset = baseAddress + data->positionRelativeToRoot(idx.row()) / 8;
     const Okteta::AddressRange markingRange =
             Okteta::AddressRange::fromWidth(startOffset, length);
@@ -413,13 +421,12 @@ void StructTool::unlockStructure(const QModelIndex& idx)
         return;
     DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
     TopLevelDataInformation* top = data->topLevelDataInformation();
-    Q_ASSERT(top);
-    if (top)
-    {
-        top->unlockPosition(d->mByteArrayModel);
-        //now read from the current position:
-        top->read(d->mByteArrayModel, d->mCursorIndex);
-    }
+    Q_CHECK_PTR(top);
+
+    unmark();
+    top->unlockPosition(d->mByteArrayModel);
+    //now read from the current position:
+    top->read(d->mByteArrayModel, d->mCursorIndex, Okteta::ArrayChangeMetricsList(), true);
 }
 
 bool StructTool::isStructureLocked(const QModelIndex& idx) const
