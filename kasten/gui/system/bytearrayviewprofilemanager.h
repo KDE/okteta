@@ -94,6 +94,8 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject
 
   private:
     QString filePathOfViewProfile( const ByteArrayViewProfile::Id& viewProfileId ) const;
+    // Returns the viewProfile as loaded from the file with the given fileName.
+    // If the loading fails the viewProfile has no id set.
     ByteArrayViewProfile loadViewProfile( const QString& fileName ) const;
     void saveViewProfile( const ByteArrayViewProfile& viewProfile ) const;
     void removeViewProfile( const ByteArrayViewProfile::Id& viewProfileId );

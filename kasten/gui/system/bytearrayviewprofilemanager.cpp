@@ -331,7 +331,15 @@ kDebug() << "Loading" << QFileInfo(absoluteFilePath).baseName() << absoluteFileP
     ByteArrayViewProfile result;
 
     KConfig configFile( absoluteFilePath, KConfig::SimpleConfig );
-    // TODO: version check
+
+    // check version
+    KConfigGroup formatConfigGroup = configFile.group( "OBAVP" );
+    const QString formatVersion = formatConfigGroup.readEntry( "Version" );
+    if( ! formatVersion.startsWith(QLatin1String( "1." )) )
+    {
+kDebug() << "ViewProfile file has an unsupported version:" << formatVersion;
+        return result;
+    }
 
     result.setId( QFileInfo(absoluteFilePath).baseName() );
 
@@ -369,6 +377,9 @@ kDebug() << "------------------ Saving"<<viewProfile.id();
 {
     const QString fileName = viewProfileFilePath( viewProfile.id() );
     KConfig configFile( fileName, KConfig::SimpleConfig );
+
+    KConfigGroup formatConfigGroup = configFile.group( "OBAVP" );
+    formatConfigGroup.writeEntry( "Version", "1.0" );
 
     KConfigGroup generalConfigGroup = configFile.group( "General" );
     generalConfigGroup.writeEntry( "Title", viewProfile.viewProfileTitle() );
@@ -470,12 +481,18 @@ kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
             continue;
 
        // all other files assumed to be viewProfile files
-       // TODO: check validness
-        const QDateTime fileInfoLastModified = viewProfileFileInfo.lastModified();
         const ByteArrayViewProfile::Id viewProfileId = viewProfileFileInfo.baseName();
-        ByteArrayViewProfileFileInfoLookup::Iterator infoIt =
+kDebug() <<"going to load"<<viewProfileId;
+        // load file
+        const ByteArrayViewProfile viewProfile = loadViewProfile( viewProfileFileInfo.absoluteFilePath() );
+        // loading failed? Treat as not existing
+        if( viewProfile.id().isEmpty() )
+            continue;
+
+        const ByteArrayViewProfileFileInfoLookup::Iterator infoIt =
             viewProfileFileInfoLookup.find( viewProfileId );
         const bool isKnown = ( infoIt != viewProfileFileInfoLookup.end() );
+        const QDateTime fileInfoLastModified = viewProfileFileInfo.lastModified();
         // is known?
         if( isKnown )
         {
@@ -494,10 +511,6 @@ kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
             viewProfileFileInfoLookup.insert( viewProfileId, info );
         }
 
-kDebug() <<"going to load"<<viewProfileId;
-        // load file
-        // TODO: check validness
-        const ByteArrayViewProfile viewProfile = loadViewProfile( viewProfileFileInfo.absoluteFilePath() );
         if( isKnown )
         {
             QList<ByteArrayViewProfile>::Iterator it = mViewProfiles.begin();
