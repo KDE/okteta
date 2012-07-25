@@ -34,14 +34,14 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
     Q_ASSERT(!index.parent().isValid());
     if (role == Qt::DisplayRole)
     {
-        const Data* data = mData.at(row);
-        if (!data->origin.isEmpty())
-            return QString(data->origin + QLatin1String(": ") + data->message);
-        return data->message;
+        const Data& data = mData.at(row);
+        if (!data.origin.isEmpty())
+            return QString(data.origin + QLatin1String(": ") + data.message);
+        return data.message;
     }
     else if (role == Qt::DecorationRole)
     {
-        LogLevel level = mData.at(row)->level;
+        LogLevel level = mData.at(row).level;
         if (level == LogInfo)
             return KIcon(QLatin1String("dialog-info"));
         else if (level == LogWarning)
@@ -61,29 +61,25 @@ int ScriptLogger::rowCount(const QModelIndex& parent) const
 
 QDebug ScriptLogger::log(LogLevel level, const QScriptValue& cause)
 {
-    //TODO origin from QScriptValue
-    Data* data = new Data(level, QString(), cause);
-    return log(data);
+    return log(level, QString(), cause);
 }
 
 QDebug ScriptLogger::log(LogLevel level, const DataInformation* origin)
 {
-    Data* data = new Data(level, origin->fullObjectPath(), QScriptValue());
-    return log(data);
+    return log(level, origin->fullObjectPath(), QScriptValue());
 }
 
-QDebug ScriptLogger::log(Data* data)
+QDebug ScriptLogger::log(LogLevel level, const QString& origin, const QScriptValue& cause)
 {
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
-    mData.append(data);
+    mData.append(Data(level, origin, cause));
     endInsertRows();
-    return QDebug(&data->message);
+    return QDebug(&mData.last().message);
 }
 
 void ScriptLogger::clear()
 {
     beginRemoveRows(QModelIndex(), 0, qMax(0, mData.size() - 1));
-    qDeleteAll(mData);
     mData.clear();
     endRemoveRows();
 }
@@ -94,7 +90,6 @@ ScriptLogger::ScriptLogger()
 
 ScriptLogger::~ScriptLogger()
 {
-    qDeleteAll(mData);
 }
 
 QStringList ScriptLogger::messages(LogLevel minLevel) const
@@ -102,9 +97,9 @@ QStringList ScriptLogger::messages(LogLevel minLevel) const
     QStringList ret;
     for (int i = 0; i < mData.size(); ++i)
     {
-        const Data* d = mData.at(i);
-        if (d->level >= minLevel)
-            ret << d->message;
+        const Data& d = mData.at(i);
+        if (d.level >= minLevel)
+            ret << d.message;
     }
     return ret;
 }

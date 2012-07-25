@@ -41,14 +41,14 @@ public:
 	    LogInvalid = 0, LogInfo = 1, LogWarning = 2, LogError = 3
 	};
 	struct Data {
+	    Data() : level(LogInvalid) {}
 	    Data(LogLevel lvl, const QString& o, const QScriptValue& c) : level(lvl), origin(o), cause(c) {}
+	    Data(const Data& d) : level(d.level), message(d.message), origin(d.origin), cause(d.cause) {}
 	    ~Data() {}
 		ScriptLogger::LogLevel level;
 		QString message;
 		QString origin;
 		QScriptValue cause;
-	private:
-		Q_DISABLE_COPY(Data)
 	};
 	virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 	virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
@@ -66,6 +66,7 @@ public:
 	 */
 	QDebug log(LogLevel level, const QScriptValue& cause);
 	QDebug log(LogLevel level, const DataInformation* cause);
+	QDebug log(LogLevel level, const QString& origin, const QScriptValue& cause);
 	void clear();
 	/**
 	 * @param info the minimum level that the messages must have
@@ -74,9 +75,7 @@ public:
 	QStringList messages(LogLevel minLevel = LogInfo) const;
 
 private:
-	QDebug log(Data* data);
-private:
-	QVector<const Data*> mData;
+	QVector<Data> mData;
 };
 
 #endif // SCRIPTLOGGER_H
