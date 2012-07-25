@@ -29,6 +29,7 @@
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
 #include "../../script/scripthandlerinfo.h"
+#include "../../script/scriptlogger.h"
 
 ComplexArrayData::ComplexArrayData(unsigned int initialLength, DataInformation* data,
         DataInformation* parent): AbstractArrayData(parent), mChildType(data)
@@ -132,7 +133,7 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
         if (mChildren.at(i) == data)
             return i;
     }
-    kWarning() << data << "is not child of " << mParent->fullObjectPath();
+    mParent->logger()->warn(mParent) << data->fullObjectPath() << "is not a valid child!";
     return -1;
 }
 

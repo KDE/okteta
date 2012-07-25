@@ -25,8 +25,10 @@
 
 #include <QAbstractListModel>
 #include <QVector>
-#include <QScriptValue>
 #include <QDebug>
+#include <QScriptValue>
+
+class DataInformation;
 
 class ScriptLogger: public QAbstractListModel {
 Q_OBJECT
@@ -39,10 +41,11 @@ public:
 	    LogInvalid = 0, LogInfo = 1, LogWarning = 2, LogError = 3
 	};
 	struct Data {
-	    Data(LogLevel lvl, const QScriptValue& c) : level(lvl), cause(c) {}
+	    Data(LogLevel lvl, const QString& o, const QScriptValue& c) : level(lvl), origin(o), cause(c) {}
 	    ~Data() {}
 		ScriptLogger::LogLevel level;
 		QString message;
+		QString origin;
 		QScriptValue cause;
 	private:
 		Q_DISABLE_COPY(Data)
@@ -50,24 +53,28 @@ public:
 	virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 	virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
-	QDebug info(const QScriptValue& cause) { return log(LogInfo, cause); }
-	QDebug warn(const QScriptValue& cause) { return log(LogWarning, cause); }
-	QDebug error(const QScriptValue& cause) { return log(LogError, cause); }
-	QDebug info() { return log(LogInfo, QScriptValue()); }
-	QDebug warn() { return log(LogWarning, QScriptValue()); }
-	QDebug error() { return log(LogError, QScriptValue()); }
+	QDebug info(const QScriptValue& cause = QScriptValue()) { return log(LogInfo, cause); }
+	QDebug warn(const QScriptValue& cause = QScriptValue()) { return log(LogWarning, cause); }
+	QDebug error(const QScriptValue& cause = QScriptValue()) { return log(LogError, cause); }
+	QDebug info(const DataInformation* origin) { return log(LogInfo, origin); }
+	QDebug warn(const DataInformation* origin) { return log(LogWarning, origin); }
+	QDebug error(const DataInformation* origin) { return log(LogError, origin); }
 	/**
 	 * @return a QDebug to write the message to.
-	 * Do NOT save this, since the string it writes to may become invalid!
+	 * Do NOT save this object, since the string it writes to may become invalid!
 	 * Just write the message using the << operators and do not touch it anymore after the line ends
 	 */
 	QDebug log(LogLevel level, const QScriptValue& cause);
+	QDebug log(LogLevel level, const DataInformation* cause);
 	void clear();
 	/**
 	 * @param info the minimum level that the messages must have
 	 * @return all the messages, mainly used for testing
 	 */
 	QStringList messages(LogLevel minLevel = LogInfo) const;
+
+private:
+	QDebug log(Data* data);
 private:
 	QVector<const Data*> mData;
 };

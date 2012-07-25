@@ -64,7 +64,7 @@ DataInformation* ScriptFileParser::convert(ScriptLogger* logger, QScriptEngine* 
     QFile scriptFile(mAbsolutePath);
     if (!scriptFile.open(QIODevice::ReadOnly))
     {
-        logger->error() << "Could not open file " << mAbsolutePath;
+        logger->error(QScriptValue()) << "Could not open file " << mAbsolutePath;
         return new DummyDataInformation(0, mPluginName);
     }
 
@@ -77,7 +77,7 @@ DataInformation* ScriptFileParser::convert(ScriptLogger* logger, QScriptEngine* 
     QScriptValue initMethod = obj.property(QLatin1String("init"));
     if (!initMethod.isFunction())
     {
-        logger->error() << "Script has no 'init' function! Cannot evaluate script!";
+        logger->error(obj) << "Script has no 'init' function! Cannot evaluate script!";
         return new DummyDataInformation(0, mPluginName);
     }
 

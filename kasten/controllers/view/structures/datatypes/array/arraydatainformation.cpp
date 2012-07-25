@@ -81,11 +81,8 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
             + QString::number(newLength)) : QScriptValue();
     if (uint(newLength) > MAX_LEN)
     {
-        kWarning() << "attempting to set the length of the array" << fullObjectPath() << "to "
-                << newLength << " which would use too much memory";
-
-        logger()->warn() << QString(QLatin1String("%1: new array length is too large (%2), limiting to (%3)"))
-            .arg(fullObjectPath(), QString::number(newLength), QString::number(MAX_LEN));
+        logger()->warn(this) << QString(QLatin1String("new array length is too large (%1), limiting to (%2)"))
+            .arg(QString::number(newLength), QString::number(MAX_LEN));
         newLength = MAX_LEN;
     }
     int oldLength = mData->length();
@@ -218,7 +215,7 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
     }
     if (*bitOffset != 0)
     {
-        kWarning() << "in array " << fullObjectPath() << ": bit offset != 0 (" << *bitOffset << "), adding padding,"
+        logger()->warn(this) << "bit offset != 0 (" << *bitOffset << "), adding padding,"
                 " arrays always start at full bytes";
         bitsRemaining &= BitCount64(~7); //unset lower 3 bits to make it divisible by 8
         address++;
@@ -239,7 +236,7 @@ bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta:
     }
     if (bitOffset != 0)
     {
-        kWarning() << "in array " << fullObjectPath() << ": bit offset != 0 (" << bitOffset << "), adding padding,"
+        logger()->warn(this) << "bit offset != 0 (" << bitOffset << "), adding padding,"
                 " arrays always start at full bytes";
         bitsRemaining -= bitOffset;
         address++;

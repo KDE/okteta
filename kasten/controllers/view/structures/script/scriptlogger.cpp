@@ -21,6 +21,8 @@
  */
 
 #include "scriptlogger.h"
+#include "../datatypes/datainformation.h"
+
 #include <KIcon>
 
 QVariant ScriptLogger::data(const QModelIndex& index, int role) const
@@ -32,7 +34,10 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
     Q_ASSERT(!index.parent().isValid());
     if (role == Qt::DisplayRole)
     {
-        return mData.at(row)->message;
+        const Data* data = mData.at(row);
+        if (!data->origin.isEmpty())
+            return QString(data->origin + QLatin1String(": ") + data->message);
+        return data->message;
     }
     else if (role == Qt::DecorationRole)
     {
@@ -56,7 +61,19 @@ int ScriptLogger::rowCount(const QModelIndex& parent) const
 
 QDebug ScriptLogger::log(LogLevel level, const QScriptValue& cause)
 {
-    Data* data = new Data(level, cause);
+    //TODO origin from QScriptValue
+    Data* data = new Data(level, QString(), cause);
+    return log(data);
+}
+
+QDebug ScriptLogger::log(LogLevel level, const DataInformation* origin)
+{
+    Data* data = new Data(level, origin->fullObjectPath(), QScriptValue());
+    return log(data);
+}
+
+QDebug ScriptLogger::log(Data* data)
+{
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
     mData.append(data);
     endInsertRows();
