@@ -22,24 +22,7 @@
 #include "primitivedatainformation.h"
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
-#include "../../script/scriptutils.h"
-#include "../../script/scripthandlerinfo.h"
-#include "../../script/classes/primitivescriptclass.h"
 
-
-#include <QtScript/QScriptEngine>
-
-bool PrimitiveDataInformation::setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel *out,
-        Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
-{
-    AllPrimitiveTypes oldVal(value());
-    // this is implemented in the subclasses
-    AllPrimitiveTypes valToWrite = qVariantToAllPrimitiveTypes(valueVariant);
-    AllPrimitiveTypes newVal(oldVal);
-    //this handles remaining < size() for us
-    bool wasAbleToWrite = newVal.writeBits(size(), valToWrite, out, effectiveByteOrder(), address, bitsRemaining, &bitOffset);
-    return wasAbleToWrite;
-}
 
 bool PrimitiveDataInformation::setChildData(uint, const QVariant&, Okteta::AbstractByteArrayModel*,
         Okteta::Address, BitCount64, quint8)
@@ -55,53 +38,4 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
     else
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-}
-
-qint64 PrimitiveDataInformation::readData(Okteta::AbstractByteArrayModel *input,
-        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
-{
-    if (bitsRemaining < BitCount64(size()))
-    {
-        mWasAbleToRead = false;
-        setValue(0);
-        return -1;
-    }
-    bool wasValid = mWasAbleToRead;
-    AllPrimitiveTypes oldVal(value());
-    AllPrimitiveTypes newVal(value());
-
-    mWasAbleToRead = newVal.readBits(size(), input, effectiveByteOrder(), address, bitsRemaining, bitOffset);
-
-    if (oldVal != newVal || wasValid != mWasAbleToRead) {
-        topLevelDataInformation()->setChildDataChanged();
-        setValue(newVal);
-    }
-
-    return size();
-}
-
-PrimitiveDataInformation::PrimitiveDataInformation(QString name, DataInformation* parent) :
-    DataInformation(name, parent)
-{
-}
-
-PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d) :
-    DataInformation(d)
-{
-}
-
-PrimitiveDataInformation::~PrimitiveDataInformation()
-{
-}
-
-QScriptValue PrimitiveDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-{
-    QScriptValue ret = engine->newObject(handlerInfo->mPrimitiveClass.data());
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
-}
-
-QString PrimitiveDataInformation::typeName() const
-{
-    return PrimitiveType::typeName(type());
 }

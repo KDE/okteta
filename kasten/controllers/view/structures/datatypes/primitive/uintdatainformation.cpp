@@ -25,6 +25,8 @@
 
 #include <KGlobal>
 
+#include "../../../poddecoder/typeeditors/uintspinbox.h"
+
 
 template<typename T>
 QScriptValue UIntDataInformation<T>::asScriptValue(T value, QScriptEngine* engine,
@@ -42,20 +44,6 @@ QScriptValue UIntDataInformation<quint64>::asScriptValue(quint64 value, QScriptE
     Q_UNUSED(engine);
     Q_UNUSED(handlerInfo);
     return QScriptValue(QString::number(value, 10));
-}
-
-template<typename T>
-QScriptValue UIntDataInformation<T>::valueAsQScriptValue() const
-{
-    return UIntDataInformation<T>::asScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
-}
-
-template<typename T>
-QString UIntDataInformation<T>::valueString() const
-{
-    if (!this->mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return UIntDataInformation<T>::valueString(UnsignedDataInformation<T>::mValue);
 }
 
 template<typename T>
@@ -83,6 +71,34 @@ QString UIntDataInformation<T>::valueString(T value, int base)
             kDebug() << "unsupported number base" << base;
     }
     return num;
+}
+
+template<typename T>
+inline QWidget* UIntDataInformation<T>::staticCreateEditWidget(QWidget* parent)
+{
+    UIntSpinBox* ret = new UIntSpinBox(parent, PrimitiveDataInformation::unsignedDisplayBase());
+    ret->setMaximum(std::numeric_limits<T>::max());
+    return ret;
+}
+
+template<typename T>
+inline QVariant UIntDataInformation<T>::staticDataFromWidget(const QWidget* w)
+{
+    const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
+    Q_CHECK_PTR(spin);
+    if (spin)
+        return QVariant(spin->value());
+    kWarning() << "could not cast widget";
+    return QVariant();
+}
+
+template<typename T>
+inline void UIntDataInformation<T>::staticSetWidgetData(T value, QWidget* w)
+{
+    UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
+    Q_CHECK_PTR(spin);
+    if (spin)
+        spin->setValue(value);
 }
 
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)

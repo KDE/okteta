@@ -22,48 +22,57 @@
 #ifndef CHARDATAINFORMATION_H_
 #define CHARDATAINFORMATION_H_
 
-#include "primitivedatainformation.h"
+#include "basicprimitivedatainformation.h"
 
-class CharDataInformation: public PrimitiveDataInformation
+class CharDataInformation : public BasicPrimitiveDataInformation<quint8, CharDataInformation>
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Char,Primitive)
 public:
+    explicit CharDataInformation(const QString& name, DataInformation* parent = 0);
+    virtual ~CharDataInformation();
     DATAINFORMATION_CLONE(Char)
 
     static int displayBase();
-    virtual BitCount32 size() const;
-    virtual QString valueString() const;
     static QString valueString(quint8 value);
-    static quint8 fromVariant(const QVariant& value);
-    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
-    virtual PrimitiveDataType type() const;
-    virtual AllPrimitiveTypes value() const;
-    virtual void setValue(AllPrimitiveTypes newVal);
-    static QScriptValue asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    virtual QScriptValue valueAsQScriptValue() const;
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
+    static quint8 fromVariant(const QVariant& value, bool* ok);
+    static PrimitiveDataType staticType();
+    static QScriptValue asScriptValue(quint8 value, QScriptEngine* engine,
+            ScriptHandlerInfo* handler);
+
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(quint8 value, QWidget* w);
-private:
-    quint8 mValue;
+
+protected:
+    CharDataInformation(const CharDataInformation& d);
 };
 
-inline PrimitiveDataType CharDataInformation::type() const
+inline PrimitiveDataType CharDataInformation::staticType()
 {
     return Type_Char;
 }
 
-inline BitCount32 CharDataInformation::size() const
+inline quint8 CharDataInformation::fromVariant(const QVariant& value, bool* ok)
 {
-    return sizeof(quint8) * 8;
+    Q_CHECK_PTR(ok);
+    quint32 tmp = value.toUInt(ok);
+    quint8 result = quint8(tmp);
+    if (tmp != quint32(result))
+        *ok = false; //out of bounds
+    return result;
 }
 
-inline quint8 CharDataInformation::fromVariant(const QVariant& value)
+inline CharDataInformation::CharDataInformation(const QString& name, DataInformation* parent)
+        : BasicPrimitiveDataInformation<quint8, CharDataInformation>(name, parent)
 {
-    return quint8(value.toUInt());
+}
+
+inline CharDataInformation::~CharDataInformation()
+{
+}
+
+inline CharDataInformation::CharDataInformation(const CharDataInformation& d)
+        : BasicPrimitiveDataInformation<quint8, CharDataInformation>(d)
+{
 }
 
 #endif /* CHARDATAINFORMATION_H_ */

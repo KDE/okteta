@@ -26,50 +26,44 @@
 #include "../../allprimitivetypes.h"
 #include "../primitivedatatype.h"
 
-class PrimitiveDataInformation: public DataInformation
+union AllPrimitiveTypes;
+
+class PrimitiveDataInformation : public DataInformation
 {
     friend class PrimitiveDataInformationTest; //that unit test needs to change mWasAbleToRead
 public:
-    explicit PrimitiveDataInformation(QString name, DataInformation* parent = NULL);
+    explicit PrimitiveDataInformation(const QString& name, DataInformation* parent = 0);
     virtual ~PrimitiveDataInformation();
     virtual PrimitiveDataInformation* clone() const = 0;
     virtual BitCount32 size() const = 0;
-    virtual QString typeName() const;
 
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
 
-    virtual QString valueString() const = 0;
     virtual PrimitiveDataType type() const = 0;
-    virtual AllPrimitiveTypes value() const = 0;
-    virtual void setValue(AllPrimitiveTypes newVal) = 0;
     virtual BitCount32 childSize(uint index) const;
-    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const = 0;
     virtual QScriptValue valueAsQScriptValue() const = 0;
-    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     virtual bool isPrimitive() const;
+    virtual AllPrimitiveTypes value() const = 0;
+    virtual void setValue(AllPrimitiveTypes newValue) = 0;
 
     static int unsignedDisplayBase();
     static int signedDisplayBase();
+
 protected:
     virtual BitCount32 offset(unsigned int index) const;
-    explicit PrimitiveDataInformation(const PrimitiveDataInformation& d);
+    PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 
 inline BitCount32 PrimitiveDataInformation::childSize(uint index) const
 {
-	Q_UNUSED(index);
+    Q_UNUSED(index);
     Q_ASSERT_X(false, "PrimitiveDataInformation::childSize", "This should never be called");
     return 0;
 }
-
 
 inline BitCount32 PrimitiveDataInformation::offset(unsigned int index) const
 {
@@ -86,7 +80,7 @@ inline bool PrimitiveDataInformation::isPrimitive() const
 inline int PrimitiveDataInformation::unsignedDisplayBase()
 {
     Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::type base =
-        Kasten2::StructViewPreferences::unsignedDisplayBase();
+            Kasten2::StructViewPreferences::unsignedDisplayBase();
     if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
         return 2;
     else if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
@@ -98,7 +92,7 @@ inline int PrimitiveDataInformation::unsignedDisplayBase()
 inline int PrimitiveDataInformation::signedDisplayBase()
 {
     Kasten2::StructViewPreferences::EnumSignedDisplayBase::type base =
-    Kasten2::StructViewPreferences::signedDisplayBase();
+            Kasten2::StructViewPreferences::signedDisplayBase();
     if (base == Kasten2::StructViewPreferences::EnumSignedDisplayBase::Binary)
         return 2;
     else if (base == Kasten2::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal)
@@ -107,13 +101,19 @@ inline int PrimitiveDataInformation::signedDisplayBase()
         return 10; //safe default value
 }
 
-#define PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(type,superType) public: \
-        type##DataInformation(QString name, DataInformation* parent = NULL) :\
-                superType##DataInformation(name, parent), mValue(0) {}\
-        virtual ~type##DataInformation() {} \
-    protected: \
-        type##DataInformation(const type##DataInformation& d) : \
-        superType##DataInformation(d), mValue(d.mValue) {} \
-    private:
+inline PrimitiveDataInformation::PrimitiveDataInformation(const QString& name,
+        DataInformation* parent)
+        : DataInformation(name, parent)
+{
+}
+
+inline PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d)
+        : DataInformation(d)
+{
+}
+
+inline PrimitiveDataInformation::~PrimitiveDataInformation()
+{
+}
 
 #endif /* PRIMITIVEDATAINFORMATION_H_ */

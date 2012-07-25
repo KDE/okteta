@@ -25,14 +25,6 @@
 #include <KLineEdit>
 #include <KGlobal>
 
-QString CharDataInformation::valueString() const
-{
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    //TODO char codec
-    return valueString(mValue);
-}
-
 namespace {
     QString charString(quint8 value)
     {
@@ -78,16 +70,6 @@ QString CharDataInformation::valueString(quint8 value)
 QWidget* CharDataInformation::staticCreateEditWidget(QWidget* parent)
 {
     return new KLineEdit(parent);
-}
-
-QWidget* CharDataInformation::createEditWidget(QWidget* parent) const
-{
-    return staticCreateEditWidget(parent);
-}
-
-QVariant CharDataInformation::dataFromWidget(const QWidget* w) const
-{
-    return staticDataFromWidget(w);
 }
 
 QVariant CharDataInformation::staticDataFromWidget(const QWidget* w)
@@ -148,12 +130,6 @@ QVariant CharDataInformation::staticDataFromWidget(const QWidget* w)
     return QVariant();
 }
 
-void CharDataInformation::setWidgetData(QWidget* w) const
-{
-    return staticSetWidgetData(mValue, w);
-}
-
-
 void CharDataInformation::staticSetWidgetData(quint8 value, QWidget* w)
 {
     KLineEdit* edit = dynamic_cast<KLineEdit*> (w);
@@ -166,16 +142,6 @@ void CharDataInformation::staticSetWidgetData(quint8 value, QWidget* w)
     }
 }
 
-AllPrimitiveTypes CharDataInformation::qVariantToAllPrimitiveTypes(
-        const QVariant& value) const
-{
-    if (!value.isValid())
-        kDebug() << "invalid QVariant passed.";
-
-    //This is fine since all the values are unsigned
-    return AllPrimitiveTypes(value.toUInt());
-}
-
 int CharDataInformation::displayBase()
 {
     int base = Kasten2::StructViewPreferences::charDisplayBase();
@@ -184,22 +150,6 @@ int CharDataInformation::displayBase()
     if (base == Kasten2::StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
         return 16;
     return 10; //safe default value
-}
-
-AllPrimitiveTypes CharDataInformation::value() const
-{
-    return AllPrimitiveTypes(mValue);
-}
-
-
-void CharDataInformation::setValue(AllPrimitiveTypes newVal)
-{
-    mValue = newVal.ubyteValue;
-}
-
-QScriptValue CharDataInformation::valueAsQScriptValue() const
-{
-    return asScriptValue(mValue, 0, 0);
 }
 
 QScriptValue CharDataInformation::asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler)

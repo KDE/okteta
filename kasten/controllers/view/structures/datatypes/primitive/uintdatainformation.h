@@ -22,44 +22,58 @@
 #ifndef UINTDATAINFORMATION_H
 #define UINTDATAINFORMATION_H
 
-#include "unsigneddatainformation.h"
+#include "basicprimitivedatainformation.h"
 
 template<typename T>
-class UIntDataInformation : public UnsignedDataInformation<T>
+class UIntDataInformation : public BasicPrimitiveDataInformation<T, UIntDataInformation<T> >
 {
 public:
-    explicit UIntDataInformation(QString name, DataInformation* parent = 0);
+    explicit UIntDataInformation(const QString& name, DataInformation* parent = 0);
     virtual ~UIntDataInformation() {}
     virtual UIntDataInformation<T>* clone() const;
 
-    virtual QScriptValue valueAsQScriptValue() const;
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    virtual QString valueString() const;
     static QString valueString(T val);
     static QString valueString(T val, int base);
-    virtual PrimitiveDataType type() const;
+    static PrimitiveDataType staticType();
+    static T fromVariant(const QVariant& value, bool* ok);
+
+    static QWidget* staticCreateEditWidget(QWidget* parent);
+    static QVariant staticDataFromWidget(const QWidget* w);
+    static void staticSetWidgetData(T value, QWidget* w);
 protected:
     explicit UIntDataInformation(const UIntDataInformation& d);
 };
 
 template<>
-inline PrimitiveDataType UIntDataInformation<quint8>::type() const { return Type_UInt8; }
+inline PrimitiveDataType UIntDataInformation<quint8>::staticType() { return Type_UInt8; }
 template<>
-inline PrimitiveDataType UIntDataInformation<quint16>::type() const { return Type_UInt16; }
+inline PrimitiveDataType UIntDataInformation<quint16>::staticType() { return Type_UInt16; }
 template<>
-inline PrimitiveDataType UIntDataInformation<quint32>::type() const { return Type_UInt32; }
+inline PrimitiveDataType UIntDataInformation<quint32>::staticType() { return Type_UInt32; }
 template<>
-inline PrimitiveDataType UIntDataInformation<quint64>::type() const { return Type_UInt64; }
+inline PrimitiveDataType UIntDataInformation<quint64>::staticType() { return Type_UInt64; }
 
 template<typename T>
-inline UIntDataInformation<T>::UIntDataInformation(QString name, DataInformation* parent)
-        : UnsignedDataInformation<T>(name, parent)
+inline UIntDataInformation<T>::UIntDataInformation(const QString& name, DataInformation* parent)
+        : BasicPrimitiveDataInformation<T, UIntDataInformation<T> >(name, parent)
 {
 }
 
 template<typename T>
+inline T UIntDataInformation<T>::fromVariant(const QVariant& value, bool* ok)
+{
+    Q_CHECK_PTR(ok);
+    quint64 val = value.toULongLong(ok);
+    T result = T(val);
+    if (val != quint64(result))
+        *ok = false;
+    return result;
+}
+
+template<typename T>
 inline UIntDataInformation<T>::UIntDataInformation(const UIntDataInformation& d)
-        : UnsignedDataInformation<T>(d)
+        : BasicPrimitiveDataInformation<T, UIntDataInformation<T> >(d)
 {
 }
 
@@ -74,5 +88,7 @@ inline QString UIntDataInformation<T>::valueString(T value)
 {
     return UIntDataInformation<T>::valueString(value, PrimitiveDataInformation::unsignedDisplayBase());
 }
+
+
 
 #endif // UINTDATAINFORMATION_H

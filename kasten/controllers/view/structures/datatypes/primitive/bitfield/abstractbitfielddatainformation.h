@@ -24,13 +24,16 @@
 
 #include "../primitivedatainformation.h"
 
-class AbstractBitfieldDataInformation: public PrimitiveDataInformation
+class AbstractBitfieldDataInformation : public PrimitiveDataInformation
 {
 public:
     AbstractBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0);
     virtual ~AbstractBitfieldDataInformation();
+
 protected:
     AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
+    virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
+
 public:
     BitCount32 width() const;
     void setWidth(BitCount32 newWidth);
@@ -40,19 +43,22 @@ public:
     virtual void setValue(AllPrimitiveTypes newVal);
     virtual PrimitiveDataType type() const;
     virtual QString sizeString() const;
-    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     virtual bool isBitfield() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded) const;
     virtual QScriptValue toScriptValue(QScriptEngine * engine, ScriptHandlerInfo * handlerInfo);
-protected:
-    unsigned mWidth :7; //cannot be more than 64 since a quint64 is used for storage
-    AllPrimitiveTypes mValue;
-};
+    virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
+            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
+    bool setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel *out,
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
+protected:
+    AllPrimitiveTypes mValue;
+    quint8 mWidth; //cannot be more than 64 since a quint64 is used for storage
+};
 
 inline Qt::ItemFlags AbstractBitfieldDataInformation::flags(int column, bool fileLoaded) const
 {
-    if (column == (int)DataInformation::ColumnValue && fileLoaded)
+    if (column == (int) DataInformation::ColumnValue && fileLoaded)
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
     else
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
@@ -92,6 +98,5 @@ inline bool AbstractBitfieldDataInformation::isBitfield() const
 {
     return true;
 }
-
 
 #endif /* ABSTRACTBITFIELDDATAINFORMATION_H_ */

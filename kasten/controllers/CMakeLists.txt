@@ -305,6 +305,7 @@ set( STRUCTVIEW_SRCS
   view/structures/datatypes/primitive/booldatainformation.cpp
   view/structures/datatypes/primitive/flagdatainformation.cpp
   view/structures/datatypes/primitive/primitivedatainformation.cpp
+  view/structures/datatypes/primitive/basicprimitivedatainformation.cpp
   view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp
   view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp
   view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp

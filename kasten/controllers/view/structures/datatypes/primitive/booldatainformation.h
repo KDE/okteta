@@ -20,21 +20,19 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef BOOLDATAINFORMATION_H
 #define BOOLDATAINFORMATION_H
 
-#include "unsigneddatainformation.h"
+#include "basicprimitivedatainformation.h"
+#include "uintdatainformation.h"
 #include <QScriptValue>
-#include <KDebug>
-
 
 template<typename T>
-class BoolDataInformation : public UnsignedDataInformation<T>
+class BoolDataInformation : public BasicPrimitiveDataInformation<T, BoolDataInformation<T> >
 {
 public:
     explicit BoolDataInformation(QString name, DataInformation* parent = 0);
-    virtual ~BoolDataInformation() {}
+    virtual ~BoolDataInformation();
     virtual BoolDataInformation<T>* clone() const;
 
     virtual QScriptValue valueAsQScriptValue() const;
@@ -42,24 +40,42 @@ public:
     virtual QString valueString() const;
     static QString valueString(T val);
     static QString valueString(T val, int base);
-    virtual PrimitiveDataType type() const;
+    static PrimitiveDataType staticType();
+    static T fromVariant(const QVariant& value, bool* ok);
+
+    static QWidget* staticCreateEditWidget(QWidget* parent);
+    static QVariant staticDataFromWidget(const QWidget* w);
+    static void staticSetWidgetData(T value, QWidget* w);
+
 protected:
     explicit BoolDataInformation(const BoolDataInformation& d);
 };
 
 template<>
-inline PrimitiveDataType BoolDataInformation<quint8>::type() const { return Type_Bool8; }
+inline PrimitiveDataType BoolDataInformation<quint8>::staticType()
+{
+    return Type_Bool8;
+}
 template<>
-inline PrimitiveDataType BoolDataInformation<quint16>::type() const { return Type_Bool16; }
+inline PrimitiveDataType BoolDataInformation<quint16>::staticType()
+{
+    return Type_Bool16;
+}
 template<>
-inline PrimitiveDataType BoolDataInformation<quint32>::type() const { return Type_Bool32; }
+inline PrimitiveDataType BoolDataInformation<quint32>::staticType()
+{
+    return Type_Bool32;
+}
 template<>
-inline PrimitiveDataType BoolDataInformation<quint64>::type() const { return Type_Bool64; }
+inline PrimitiveDataType BoolDataInformation<quint64>::staticType()
+{
+    return Type_Bool64;
+}
 
 template<typename T>
 inline QScriptValue BoolDataInformation<T>::valueAsQScriptValue() const
 {
-    return BoolDataInformation<T>::asScriptValue(UnsignedDataInformation<T>::mValue, 0, 0);
+    return BoolDataInformation<T>::asScriptValue(this->mValue, 0, 0);
 }
 
 template<typename T>
@@ -73,13 +89,18 @@ inline QScriptValue BoolDataInformation<T>::asScriptValue(T value, QScriptEngine
 
 template<typename T>
 inline BoolDataInformation<T>::BoolDataInformation(QString name, DataInformation* parent)
-        : UnsignedDataInformation<T>(name, parent)
+        : BasicPrimitiveDataInformation<T, BoolDataInformation<T> >(name, parent)
+{
+}
+
+template<typename T>
+inline BoolDataInformation<T>::~BoolDataInformation()
 {
 }
 
 template<typename T>
 inline BoolDataInformation<T>::BoolDataInformation(const BoolDataInformation& d)
-        : UnsignedDataInformation<T>(d)
+        : BasicPrimitiveDataInformation<T, BoolDataInformation<T> >(d)
 {
 }
 
@@ -92,7 +113,14 @@ inline BoolDataInformation<T>* BoolDataInformation<T>::clone() const
 template<typename T>
 inline QString BoolDataInformation<T>::valueString(T value)
 {
-    return BoolDataInformation<T>::valueString(value, PrimitiveDataInformation::unsignedDisplayBase());
+    return BoolDataInformation<T>::valueString(value,
+            PrimitiveDataInformation::unsignedDisplayBase());
+}
+
+template<typename T>
+inline T BoolDataInformation<T>::fromVariant(const QVariant& value, bool* ok)
+{
+    return UIntDataInformation<T>::fromVariant(value, ok);
 }
 
 #endif // BOOLDATAINFORMATION_H

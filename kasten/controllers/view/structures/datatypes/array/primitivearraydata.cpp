@@ -22,6 +22,7 @@
 #include "primitivearraydata.h"
 #include "../datainformation.h"
 #include "../primitive/primitivedatainformation.h"
+#include "../../script/scriptlogger.h"
 
 #include <abstractbytearraymodel.h>
 
@@ -98,6 +99,7 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
         Okteta::Address address, BitCount64 bitsRemaining)
 {
     Q_ASSERT(row < length());
+    Q_ASSERT(value.isValid());
     Q_ASSERT(bitsRemaining % 8 == 0);
     if ((row + 1) * sizeof(T) * 8 >= bitsRemaining)
     {
@@ -107,8 +109,15 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
     }
     ByteOrder byteOrder =  AbstractArrayData::mParent->effectiveByteOrder();
     bool littleEndian = byteOrder == ByteOrderEnumClass::LittleEndian;
-    T convertedVal = DisplayClass::fromVariant(value);
-    kDebug() << AbstractArrayData::mParent->fullObjectPath() << "setting index" << row << "to" << value << "(= " << convertedVal << ")";
+    bool ok = false;
+    T convertedVal = DisplayClass::fromVariant(value, &ok);
+    if (!ok) {
+        this->mParent->logger()->warn() << this->mParent->fullObjectPath() << "could not convert"
+                << value << "to" << type;
+        return false;
+    }
+    kDebug() << AbstractArrayData::mParent->fullObjectPath() << "setting index" << row << "to"
+            << value << "(= " << convertedVal << ")";
     this->mData[row] = convertedVal;
     this->writeOneItem(convertedVal, address + (row * sizeof(T)), out, littleEndian);
     return true;

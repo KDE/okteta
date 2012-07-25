@@ -27,18 +27,6 @@
 #include <KGlobal>
 
 
-QString FloatDataInformation::valueString() const
-{
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return valueString(mValue);
-}
-
-QWidget* FloatDataInformation::createEditWidget(QWidget* parent) const
-{
-    return staticCreateEditWidget(parent);
-}
-
 QWidget* FloatDataInformation::staticCreateEditWidget(QWidget* parent)
 {
     KDoubleNumInput* ret = new KDoubleNumInput(parent);
@@ -47,29 +35,13 @@ QWidget* FloatDataInformation::staticCreateEditWidget(QWidget* parent)
     return ret;
 }
 
-QVariant FloatDataInformation::dataFromWidget(const QWidget* w) const
-{
-    return staticDataFromWidget(w);
-}
-
 QVariant FloatDataInformation::staticDataFromWidget(const QWidget* w)
 {
     const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
-    {
-#if QT_VERSION >= 0x040600
         return ((float) spin->value());
-#else
-        return spin->value();
-#endif
-    }
     return QVariant();
-}
-
-void FloatDataInformation::setWidgetData(QWidget* w) const
-{
-    staticSetWidgetData(mValue, w);
 }
 
 void FloatDataInformation::staticSetWidgetData(float value, QWidget* w)
@@ -78,21 +50,6 @@ void FloatDataInformation::staticSetWidgetData(float value, QWidget* w)
     Q_CHECK_PTR(spin);
     if (spin)
         spin->setValue(value);
-}
-
-AllPrimitiveTypes FloatDataInformation::qVariantToAllPrimitiveTypes(const QVariant& value) const
-{
-    return AllPrimitiveTypes(value.toFloat());
-}
-
-AllPrimitiveTypes FloatDataInformation::value() const
-{
-    return AllPrimitiveTypes(mValue);
-}
-
-void FloatDataInformation::setValue(AllPrimitiveTypes newVal)
-{
-    mValue = newVal.floatValue;
 }
 
 QScriptValue FloatDataInformation::asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler)
@@ -104,7 +61,7 @@ QScriptValue FloatDataInformation::asScriptValue(float value, QScriptEngine* eng
 
 QScriptValue FloatDataInformation::valueAsQScriptValue() const
 {
-    return asScriptValue(mValue, 0, 0);
+    return QScriptValue(double(this->mValue));
 }
 
 QString FloatDataInformation::valueString(float value)

@@ -25,6 +25,7 @@
 #include <QScriptValue>
 
 #include "../booldatainformation.h"
+#include "../../../../poddecoder/typeeditors/uintspinbox.h"
 
 
 QString BoolBitfieldDataInformation::valueString() const

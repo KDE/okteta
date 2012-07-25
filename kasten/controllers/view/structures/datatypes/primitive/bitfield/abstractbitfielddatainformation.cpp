@@ -20,6 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "abstractbitfielddatainformation.h"
+#include "../../topleveldatainformation.h"
 
 #include "../../../script/classes/bitfieldscriptclass.h"
 #include "../../../script/scripthandlerinfo.h"
@@ -27,16 +28,6 @@
 QString AbstractBitfieldDataInformation::sizeString() const
 {
     return i18np("%1 bit", "%1 bits", width());
-}
-
-AllPrimitiveTypes AbstractBitfieldDataInformation::qVariantToAllPrimitiveTypes(
-        const QVariant& value) const
-{
-    if (!value.isValid())
-        kDebug() << "invalid QVariant passed.";
-
-    //This is fine since all the values are unsigned
-    return AllPrimitiveTypes(value.toULongLong());
 }
 
 AllPrimitiveTypes AbstractBitfieldDataInformation::value() const
@@ -75,4 +66,51 @@ QScriptValue AbstractBitfieldDataInformation::toScriptValue(QScriptEngine* engin
     QScriptValue ret = engine->newObject(handlerInfo->mBitfieldClass.data());
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
+}
+
+qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel *input,
+        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
+{
+    topLevelDataInformation()->updateElement(this);
+    if (bitsRemaining < BitCount64(width()))
+    {
+        mWasAbleToRead = false;
+        mValue = 0;
+        return -1;
+    }
+    bool wasValid = mWasAbleToRead;
+    AllPrimitiveTypes oldVal(mValue);
+    AllPrimitiveTypes newVal(mValue);
+
+    mWasAbleToRead = newVal.readBits(size(), input, effectiveByteOrder(), address, bitsRemaining,
+            bitOffset);
+
+    if (oldVal != newVal || wasValid != mWasAbleToRead)
+    {
+        topLevelDataInformation()->setChildDataChanged();
+        mValue = newVal;
+    }
+    return width();
+}
+
+bool AbstractBitfieldDataInformation::setData(const QVariant& valueVariant,
+        Okteta::AbstractByteArrayModel *out, Okteta::Address address, BitCount64 bitsRemaining,
+        quint8 bitOffset)
+{
+    AllPrimitiveTypes oldVal(mValue);
+    bool ok;
+    AllPrimitiveTypes valToWrite = valueVariant.toULongLong(&ok);
+    Q_ASSERT(ok);
+    if (!ok)
+        return false;
+    AllPrimitiveTypes newVal(oldVal);
+    //this handles remaining < size() for us
+    bool wasAbleToWrite = newVal.writeBits(width(), valToWrite, out, effectiveByteOrder(), address,
+            bitsRemaining, &bitOffset);
+    return wasAbleToWrite;
+}
+
+AllPrimitiveTypes AbstractBitfieldDataInformation::fromVariant(const QVariant& variant, bool* ok) const
+{
+    return AllPrimitiveTypes(variant.toULongLong(ok));
 }

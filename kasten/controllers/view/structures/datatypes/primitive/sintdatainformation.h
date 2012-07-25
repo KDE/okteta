@@ -22,51 +22,52 @@
 #ifndef SINTDATAINFORMATION_H
 #define SINTDATAINFORMATION_H
 
-#include "primitivedatainformation.h"
+#include "basicprimitivedatainformation.h"
 #include "../poddecoder/typeeditors/sintspinbox.h"
 
 template<typename T>
-class SIntDataInformation : public PrimitiveDataInformation
+class SIntDataInformation : public BasicPrimitiveDataInformation<T, SIntDataInformation<T> >
 {
 public:
-    explicit SIntDataInformation(QString name, DataInformation* parent = 0);
-    virtual ~SIntDataInformation() {}
+    explicit SIntDataInformation(const QString& name, DataInformation* parent = 0);
+    virtual ~SIntDataInformation();
     virtual SIntDataInformation<T>* clone() const;
 
-    virtual PrimitiveDataType type() const;
-    virtual BitCount32 size() const;
+    static PrimitiveDataType staticType();
+    static T fromVariant(const QVariant& value, bool* ok);
+    static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
+    static QString valueString(T val);
+    static QString valueString(T val, int base);
 
-    virtual AllPrimitiveTypes value() const;
-    virtual void setValue(AllPrimitiveTypes newVal);
-
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(T value, QWidget* w);
-
-    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
-    static T fromVariant(const QVariant& value);
-    virtual QScriptValue valueAsQScriptValue() const;
-    static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    virtual QString valueString() const;
-    static QString valueString(T val);
-    static QString valueString(T val, int base);
-protected:
+    protected:
     explicit SIntDataInformation(const SIntDataInformation& d);
-protected:
+    protected:
     T mValue;
 };
 
 template<>
-inline PrimitiveDataType SIntDataInformation<qint8>::type() const { return Type_Int8; }
+inline PrimitiveDataType SIntDataInformation<qint8>::staticType()
+{
+    return Type_Int8;
+}
 template<>
-inline PrimitiveDataType SIntDataInformation<qint16>::type() const { return Type_Int16; }
+inline PrimitiveDataType SIntDataInformation<qint16>::staticType()
+{
+    return Type_Int16;
+}
 template<>
-inline PrimitiveDataType SIntDataInformation<qint32>::type() const { return Type_Int32; }
+inline PrimitiveDataType SIntDataInformation<qint32>::staticType()
+{
+    return Type_Int32;
+}
 template<>
-inline PrimitiveDataType SIntDataInformation<qint64>::type() const { return Type_Int64; }
+inline PrimitiveDataType SIntDataInformation<qint64>::staticType()
+{
+    return Type_Int64;
+}
 
 template<typename T>
 inline QWidget* SIntDataInformation<T>::staticCreateEditWidget(QWidget* parent)
@@ -79,7 +80,7 @@ inline QWidget* SIntDataInformation<T>::staticCreateEditWidget(QWidget* parent)
 template<typename T>
 inline QVariant SIntDataInformation<T>::staticDataFromWidget(const QWidget* w)
 {
-    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*> (w);
+    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin)
         return spin->value();
@@ -91,21 +92,26 @@ inline QVariant SIntDataInformation<T>::staticDataFromWidget(const QWidget* w)
 template<typename T>
 inline void SIntDataInformation<T>::staticSetWidgetData(T value, QWidget* w)
 {
-    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
+    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin)
         spin->setValue(value);
 }
 
 template<typename T>
-inline SIntDataInformation<T>::SIntDataInformation(QString name, DataInformation* parent)
-        : PrimitiveDataInformation(name, parent), mValue(0)
+inline SIntDataInformation<T>::SIntDataInformation(const QString& name, DataInformation* parent)
+        : BasicPrimitiveDataInformation<T, SIntDataInformation<T> >(name, parent)
+{
+}
+
+template<typename T>
+inline SIntDataInformation<T>::~SIntDataInformation()
 {
 }
 
 template<typename T>
 inline SIntDataInformation<T>::SIntDataInformation(const SIntDataInformation& d)
-        : PrimitiveDataInformation(d), mValue(d.mValue)
+        : BasicPrimitiveDataInformation<T, SIntDataInformation<T> >(d)
 {
 }
 
@@ -116,46 +122,20 @@ inline SIntDataInformation<T>* SIntDataInformation<T>::clone() const
 }
 
 template<typename T>
-inline AllPrimitiveTypes SIntDataInformation<T>::qVariantToAllPrimitiveTypes(const QVariant& value) const
-{
-    Q_ASSERT(value.isValid());
-    return AllPrimitiveTypes(value.toLongLong());
-}
-
-template<typename T>
-inline AllPrimitiveTypes SIntDataInformation<T>::value() const
-{
-    return AllPrimitiveTypes(mValue);
-}
-
-template<typename T>
-inline void SIntDataInformation<T>::setValue(AllPrimitiveTypes newVal)
-{
-    mValue = newVal.value<T>();
-}
-
-template<typename T>
-inline BitCount32 SIntDataInformation<T>::size() const
-{
-    return sizeof(T) * 8;
-}
-
-template<typename T>
 inline QString SIntDataInformation<T>::valueString(T value)
 {
     return SIntDataInformation<T>::valueString(value, PrimitiveDataInformation::signedDisplayBase());
 }
 
 template<typename T>
-inline T SIntDataInformation<T>::fromVariant(const QVariant& value)
+inline T SIntDataInformation<T>::fromVariant(const QVariant& value, bool* ok)
 {
-    return T(value.toInt());
-}
-
-template<>
-inline qint64 SIntDataInformation<qint64>::fromVariant(const QVariant& value)
-{
-    return value.toLongLong();
+    Q_CHECK_PTR(ok);
+    qint64 val = value.toLongLong(ok);
+    T result = T(val);
+    if (val != qint64(result))
+        *ok = false;
+    return result;
 }
 
 #endif // SINTDATAINFORMATION_H

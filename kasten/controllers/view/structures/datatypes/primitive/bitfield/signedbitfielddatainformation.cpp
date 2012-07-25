@@ -77,3 +77,8 @@ void SignedBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
         mValue = mValue.ulongValue | (~mask());
     }
 }
+
+AllPrimitiveTypes SignedBitfieldDataInformation::fromVariant(const QVariant& variant, bool* ok) const
+{
+    return AllPrimitiveTypes(variant.toLongLong(ok));
+}

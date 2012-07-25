@@ -20,20 +20,18 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "booldatainformation.h"
-#include "uintdatainformation.h"
-
-#include <KGlobal>
 
 template<typename T>
 QString BoolDataInformation<T>::valueString() const
 {
     if (!this->mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return BoolDataInformation<T>::valueString(UnsignedDataInformation<T>::mValue);
+    return BoolDataInformation<T>::valueString(this->mValue);
 }
 
 template<typename T>
-QString BoolDataInformation<T>::valueString(T value, int base) {
+QString BoolDataInformation<T>::valueString(T value, int base)
+{
     if (value == 0)
         return i18nc("boolean value", "false");
     else if (value == 1)
@@ -46,8 +44,26 @@ QString BoolDataInformation<T>::valueString(T value, int base) {
     }
 }
 
+template<typename T>
+inline QWidget* BoolDataInformation<T>::staticCreateEditWidget(QWidget* parent)
+{
+    return UIntDataInformation<T>::staticCreateEditWidget(parent);
+}
+
+template<typename T>
+inline QVariant BoolDataInformation<T>::staticDataFromWidget(const QWidget* w)
+{
+    return UIntDataInformation<T>::staticDataFromWidget(w);
+}
+
+template<typename T>
+inline void BoolDataInformation<T>::staticSetWidgetData(T value, QWidget* w)
+{
+    UIntDataInformation<T>::staticSetWidgetData(value, w);
+}
+
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)
-template class BoolDataInformation<quint8>;
-template class BoolDataInformation<quint16>;
-template class BoolDataInformation<quint32>;
-template class BoolDataInformation<quint64>;
+template class BoolDataInformation<quint8> ;
+template class BoolDataInformation<quint16> ;
+template class BoolDataInformation<quint32> ;
+template class BoolDataInformation<quint64> ;

@@ -25,28 +25,10 @@
 #include <KDoubleNumInput>
 #include <KGlobal>
 
-
-QString DoubleDataInformation::valueString() const
-{
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return valueString(mValue);
-}
-
-QWidget* DoubleDataInformation::createEditWidget(QWidget* parent) const
-{
-    return staticCreateEditWidget(parent);
-}
-
 QWidget* DoubleDataInformation::staticCreateEditWidget(QWidget* parent)
 {
     KDoubleNumInput* ret = new KDoubleNumInput(parent);
     return ret;
-}
-
-QVariant DoubleDataInformation::dataFromWidget(const QWidget* w) const
-{
-    return staticDataFromWidget(w);
 }
 
 QVariant DoubleDataInformation::staticDataFromWidget(const QWidget* w)
@@ -58,10 +40,6 @@ QVariant DoubleDataInformation::staticDataFromWidget(const QWidget* w)
     return QVariant();
 }
 
-void DoubleDataInformation::setWidgetData(QWidget* w) const
-{
-    staticSetWidgetData(mValue, w);
-}
 
 void DoubleDataInformation::staticSetWidgetData(double value, QWidget* w)
 {
@@ -71,32 +49,11 @@ void DoubleDataInformation::staticSetWidgetData(double value, QWidget* w)
         spin->setValue(value);
 }
 
-AllPrimitiveTypes DoubleDataInformation::qVariantToAllPrimitiveTypes(const QVariant& value) const
-{
-    return AllPrimitiveTypes(value.toDouble());
-}
-
-AllPrimitiveTypes DoubleDataInformation::value() const
-{
-    return AllPrimitiveTypes(mValue);
-}
-
-void DoubleDataInformation::setValue(AllPrimitiveTypes newVal)
-{
-    mValue = newVal.doubleValue;
-}
-
 QScriptValue DoubleDataInformation::asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
     return QScriptValue(value);
-}
-
-
-QScriptValue DoubleDataInformation::valueAsQScriptValue() const
-{
-    return asScriptValue(mValue, 0, 0);
 }
 
 QString DoubleDataInformation::valueString(double value)

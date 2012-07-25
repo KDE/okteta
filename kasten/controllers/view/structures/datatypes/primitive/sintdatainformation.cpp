@@ -25,14 +25,6 @@
 #include <KGlobal>
 
 template<typename T>
-QString SIntDataInformation<T>::valueString() const
-{
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return valueString(mValue);
-}
-
-template<typename T>
 QString SIntDataInformation<T>::valueString(T val, int base)
 {
     QString num;
@@ -93,12 +85,6 @@ QString SIntDataInformation<T>::valueString(T val, int base)
 }
 
 template<typename T>
-QScriptValue SIntDataInformation<T>::valueAsQScriptValue() const
-{
-    return asScriptValue(mValue, 0, 0);
-}
-
-template<typename T>
 QScriptValue SIntDataInformation<T>::asScriptValue(T value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
@@ -114,24 +100,6 @@ QScriptValue SIntDataInformation<qint64>::asScriptValue(qint64 value, QScriptEng
     Q_UNUSED(engine);
     Q_UNUSED(handler);
     return QScriptValue(QString::number(value, 10));
-}
-
-template<typename T>
-QWidget* SIntDataInformation<T>::createEditWidget(QWidget* parent) const
-{
-    return staticCreateEditWidget(parent);
-}
-
-template<typename T>
-QVariant SIntDataInformation<T>::dataFromWidget(const QWidget* w) const
-{
-    return staticDataFromWidget(w);
-}
-
-template<typename T>
-void SIntDataInformation<T>::setWidgetData(QWidget* w) const
-{
-    staticSetWidgetData(mValue, w);
 }
 
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)

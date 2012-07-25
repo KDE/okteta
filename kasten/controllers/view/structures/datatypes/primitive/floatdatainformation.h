@@ -22,48 +22,58 @@
 #ifndef FLOATDATAINFORMATION_H_
 #define FLOATDATAINFORMATION_H_
 
-#include "primitivedatainformation.h"
+#include "basicprimitivedatainformation.h"
 
-class FloatDataInformation: public PrimitiveDataInformation
+class FloatDataInformation : public BasicPrimitiveDataInformation<float, FloatDataInformation>
 {
-PRIMITIVEDATAINFORMATION_SUBCLASS_CONSTRUCTORS(Float,Primitive)
 public:
+    explicit FloatDataInformation(const QString& name, DataInformation* parent = 0);
+    virtual ~FloatDataInformation();
     DATAINFORMATION_CLONE(Float)
 
-    virtual BitCount32 size() const;
-    virtual QString valueString() const;
+    static PrimitiveDataType staticType();
+
     static QString valueString(float value);
-    virtual PrimitiveDataType type() const;
-    virtual AllPrimitiveTypes value() const;
-    virtual void setValue(AllPrimitiveTypes newVal);
+
     virtual QScriptValue valueAsQScriptValue() const;
-    static QScriptValue asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
+    static QScriptValue asScriptValue(float value, QScriptEngine* engine,
+            ScriptHandlerInfo* handler);
+    static float fromVariant(const QVariant& value, bool* ok);
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(float value, QWidget* w);
 
-    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
-    static float fromVariant(const QVariant& value);
-private:
-    float mValue;
+protected:
+    FloatDataInformation(const FloatDataInformation& f);
 };
 
-inline PrimitiveDataType FloatDataInformation::type() const
+inline FloatDataInformation::FloatDataInformation(const QString& name, DataInformation* parent)
+        : BasicPrimitiveDataInformation<float, FloatDataInformation>(name, parent)
+{
+}
+
+inline FloatDataInformation::~FloatDataInformation()
+{
+}
+
+inline FloatDataInformation::FloatDataInformation(const FloatDataInformation& f)
+        : BasicPrimitiveDataInformation<float, FloatDataInformation>(f)
+{
+}
+
+inline PrimitiveDataType FloatDataInformation::staticType()
 {
     return Type_Float;
 }
 
-inline BitCount32 FloatDataInformation::size() const
+inline float FloatDataInformation::fromVariant(const QVariant& value, bool* ok)
 {
-    return sizeof(float) * 8;
-}
-
-inline float FloatDataInformation::fromVariant(const QVariant& value)
-{
-    return value.toFloat();
+    Q_CHECK_PTR(ok);
+    float result = value.toFloat(ok);
+    //result != result if value is NaN so check for that case too
+    if (double(result) != value.toDouble() && result == result)
+        *ok = false;
+    return result;
 }
 
 #endif /* FLOATDATAINFORMATION_H_ */

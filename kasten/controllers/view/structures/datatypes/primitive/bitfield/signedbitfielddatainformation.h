@@ -39,6 +39,7 @@ protected:
             : AbstractBitfieldDataInformation(d)
     {
     }
+    virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
 private:
 public:
     DATAINFORMATION_CLONE(SignedBitfield)
