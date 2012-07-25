@@ -10,14 +10,11 @@ function init() {
         len: uint8(),
         arrayType : enumeration("TypeEnum", uint8(), typeEnumValues),
         // length of this array is always equal to min(len.value, 100)
-        dynArray : array(uint8(), 10),
+        dynArray : array(uint8(), 10).setUpdate(updateLength),
 
         //this array changes type depending on the value of arrayType
-        typeChangingArray : array(char(), 10),
-    });
-	object.validationFunc = validateLength;
-	object.child("dynArray").updateFunc = updateLength;
-	object.child("typeChangingArray").updateFunc = updateType;
+        typeChangingArray : array(char(), 10).setUpdate(updateType),
+    }).setValidation(validateLength);
     return object;
 }
 

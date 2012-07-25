@@ -8,7 +8,7 @@ function validate2(mainStruct) {
     //always valid
     this.valid = true;
     //possible but not nice thing to do
-    mainStruct.child("member2").children["aFloat"].valid = true;
+    mainStruct.member2.aFloat.valid = true;
 }
 function updateMember4() {
     //do nothing for now
@@ -18,7 +18,7 @@ function updateMember4() {
 function init() {
 	var obj = struct({
 		/* equivalent to writing member1 : new uint32() */
-		member1 : uint32(validate1),
+		member1 : uint32().setValidation(validate1),
 		/* Following in C++:
 		 * union member2 {
 		 *	float aFloat;
@@ -33,14 +33,14 @@ function init() {
 			unsignedInt : uint32(),
 			bitField : bitfield("unsigned",10),
 			}),
-		member3 : double(validate2),
+		member3 : double().setValidation(validate2),
 		/* C++: struct {char a; charb;} member4[10] */
 		member4 : array(struct({
 				    a : char(),
 				    b: char()
-			    }), 10, null, updateMember4),
+			    }), 10).setUpdate(updateMember4),
 		/** bool member5 : 1; */
-		member5 : bitfield("bool",1),
+		member5 : bitfield("bool", 1),
 	});
 	return obj
 }
