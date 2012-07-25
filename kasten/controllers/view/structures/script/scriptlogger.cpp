@@ -35,9 +35,10 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
     if (role == Qt::DisplayRole)
     {
         const Data& data = mData.at(row);
+        const QString time = data.time.toString(QLatin1String("hh:mm:ss.zzz")) + QLatin1String(" - ");
         if (!data.origin.isEmpty())
-            return QString(data.origin + QLatin1String(": ") + data.message);
-        return data.message;
+            return QString(time + data.origin + QLatin1String(": ") + data.message);
+        return QString(time + data.message);
     }
     else if (role == Qt::DecorationRole)
     {

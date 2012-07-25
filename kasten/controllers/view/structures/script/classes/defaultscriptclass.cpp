@@ -24,6 +24,7 @@
 
 #include "../../parsers/abstractstructureparser.h"
 #include "../../datatypes/datainformation.h"
+#include "../scriptlogger.h"
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine), mHandlerInfo(handlerInfo)
@@ -70,7 +71,10 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
 {
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
+    {
+        kWarning() << "could not cast data from" << object.toString();
         return 0;
+    }
     if (name == s_valid || name == s_validationError || name == s_byteOrder)
     {
         return flags;
@@ -81,7 +85,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     }
     else if (name == s_parent)
     {
-        return flags &= ~HandlesWriteAccess;
+        return flags &= ~HandlesWriteAccess; //TODO allow write access
     }
     else if (queryAdditionalProperty(data, name, &flags, id))
     {
@@ -89,6 +93,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     }
     else
     {
+        data->logger()->error(data) << "could not find property with name" << name.toString();
         return 0;
     }
 }
@@ -98,7 +103,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data from" << object.toString();
         return QScriptValue();
     }
     if (name == s_valid)
@@ -133,7 +138,10 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     if (other.isValid())
         return other;
     else
+    {
+        data->logger()->error(data) << "could not find property with name" << name.toString();
         return engine()->undefinedValue();
+    }
 }
 
 void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value)
@@ -169,7 +177,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
             return;
         else
         {
-            kDebug() << "cannot set unknown property: " << name.toString();
+            data->logger()->error(data) << "could not set property with name" << name.toString();
         }
     }
 }
@@ -190,7 +198,10 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     if (additionalPropertyFlags(data, name, id, &result))
         return result; //is a child element
     else
+    {
+        data->logger()->error(data) << "could not find flags for property with name" << name.toString();
         return 0;
+    }
 }
 
 QScriptValue DefaultScriptClass::prototype() const
@@ -203,7 +214,7 @@ QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QSc
     DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data";
         return eng->undefinedValue();
     }
     return QString(data->typeName() + QLatin1Char(' ') + data->name());
@@ -220,8 +231,6 @@ DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& objec
     : QScriptClassPropertyIterator(object), mCurrent(-1), mList(list), mEngine(engine)
 {
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
-    if (!data)
-        kWarning() << "could not cast data";
     Q_CHECK_PTR(data);
     mData = data;
 }

@@ -26,6 +26,7 @@
 #include <QAbstractListModel>
 #include <QVector>
 #include <QDebug>
+#include <QTime>
 #include <QScriptValue>
 
 class DataInformation;
@@ -41,14 +42,17 @@ public:
 	    LogInvalid = 0, LogInfo = 1, LogWarning = 2, LogError = 3
 	};
 	struct Data {
-	    Data() : level(LogInvalid) {}
-	    Data(LogLevel lvl, const QString& o, const QScriptValue& c) : level(lvl), origin(o), cause(c) {}
-	    Data(const Data& d) : level(d.level), message(d.message), origin(d.origin), cause(d.cause) {}
-	    ~Data() {}
+	    inline Data() : level(LogInvalid) {}
+	    inline Data(LogLevel lvl, const QString& o, const QScriptValue& c)
+	        : level(lvl), origin(o), cause(c), time(QTime::currentTime()) {}
+	    inline Data(const Data& d)
+	        : level(d.level), message(d.message), origin(d.origin), cause(d.cause), time(d.time) {}
+	    inline ~Data() {}
 		ScriptLogger::LogLevel level;
 		QString message;
 		QString origin;
 		QScriptValue cause;
+		QTime time;
 	};
 	virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 	virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
