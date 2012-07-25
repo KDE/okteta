@@ -47,7 +47,7 @@ public:
     virtual void setWidgetData(QWidget* w) const;
 
     virtual QScriptValue valueAsQScriptValue() const;
-    virtual BitCount32 size() const;
+    virtual BitCount32 size() const; //TODO declare final with c++11 so it can be inlined
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,

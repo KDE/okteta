@@ -70,7 +70,7 @@ bool BasicPrimitiveDataInformation<T, C>::setData(const QVariant& value,
     T valToWrite = C::fromVariant(value, &ok);
     if (!ok)
     {
-        logger()-> warn(this) << "Failed to convert" << value << "to" << C::staticType();
+        logger()->warn(this) << "Failed to convert" << value << "to" << C::staticType();
         return false;
     }
     AllPrimitiveTypes newVal(oldVal);
@@ -85,24 +85,27 @@ qint64 BasicPrimitiveDataInformation<T, C>::readData(Okteta::AbstractByteArrayMo
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT((input->size() - address) * 8 - *bitOffset == bitsRemaining);
+    const bool wasValid = mWasAbleToRead;
     if (bitsRemaining < BitCount64(size()))
     {
         mWasAbleToRead = false;
-        setValue(0);
+        mValue = 0;
+
+        if (wasValid != mWasAbleToRead)
+            topLevelDataInformation()->setChildDataChanged();
         return -1;
     }
-    bool wasValid = mWasAbleToRead;
-    T oldVal = this->mValue;
-    //bitoffset will always stay the same since type T uses a full number of bytes
-    T newVal = AllPrimitiveTypes::readValue<T>(input, address, effectiveByteOrder(), *bitOffset);
-
-    if (oldVal != newVal || wasValid != mWasAbleToRead)
+    else
     {
-        topLevelDataInformation()->setChildDataChanged();
-        setValue(newVal);
-    }
+        mWasAbleToRead = true;
+        const T oldVal = this->mValue;
+        //bit offset will always stay the same since type T uses a full number of bytes
+        mValue = AllPrimitiveTypes::readValue<T>(input, address, effectiveByteOrder(), *bitOffset);
 
-    return size();
+        if (oldVal != mValue || wasValid != mWasAbleToRead)
+            topLevelDataInformation()->setChildDataChanged();
+        return size();
+    }
 }
 
 //specify all the specializations so we can move code to the cpp file
