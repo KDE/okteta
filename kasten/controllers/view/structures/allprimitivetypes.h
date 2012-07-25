@@ -22,7 +22,8 @@
 #ifndef ALLPRIMITIVETYPES_H_
 #define ALLPRIMITIVETYPES_H_
 
-#include <QtGlobal>
+#include <QSysInfo>
+#include <QtEndian>
 #include <QByteArray>
 #include <KLocale>
 
@@ -182,9 +183,7 @@ private:
     template<int size> static typename QIntegerForSize<size>::Unsigned readValuePrivate(
             const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
             QSysInfo::Endian endianess, quint8 bitOffset);
-    template<int size> static typename QIntegerForSize<size>::Unsigned readValueNativeOrder(
-            const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
-    template<int size> static typename QIntegerForSize<size>::Unsigned readValueNonNativeOrder(
+    template<int size> static typename QIntegerForSize<size>::Unsigned readRawBytes(
             const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
 
     void readDataLittleEndian(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
@@ -238,11 +237,12 @@ inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValuePriv
         const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         QSysInfo::Endian endianess, quint8 bitOffset)
 {
-    typename QIntegerForSize<size>::Unsigned unsignedValue;
-    if (endianess == QSysInfo::ByteOrder)
-        unsignedValue = readValueNativeOrder<size>(input, address);
-    else
-        unsignedValue = readValueNonNativeOrder<size>(input, address);
+    typename QIntegerForSize<size>::Unsigned unsignedValue = readRawBytes<size>(input, address);
+    if (endianess != QSysInfo::ByteOrder)
+    {
+        //swap the byte order if machine endianess does not match requested endianess
+        unsignedValue = qbswap(unsignedValue);
+    }
     if (Q_UNLIKELY(bitOffset != 0))
     {
         quint8 lastByte = input->byte(address + size);
@@ -269,7 +269,7 @@ inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValuePriv
 }
 
 template<int size>
-inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValueNativeOrder(
+inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readRawBytes(
         const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
     union {
@@ -281,23 +281,12 @@ inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValueNati
     return buf.value;
 }
 
-template<int size>
-inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValueNonNativeOrder(
+//specialize it for the case where we only need to read one byte
+template<>
+inline quint8 AllPrimitiveTypes::readRawBytes<1>(
         const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
-    union {
-        typename QIntegerForSize<size>::Unsigned value;
-        Okteta::Byte bytes[size];
-    } buf;
-    Okteta::Size read = input->copyTo(buf.bytes, address, size);
-    Q_ASSERT(read == size);
-    //compiler should unroll this
-    for (int i = 0; i < size / 2; ++i) {
-        const Okteta::Byte tmp = buf.bytes[i];
-        buf.bytes[i] = buf.bytes[size - i - 1];
-        buf.bytes[size - i -1] = tmp;
-    }
-    return buf.value;
+    return input->byte(address);
 }
 
 #endif /* ALLPRIMITIVETYPES_H_ */

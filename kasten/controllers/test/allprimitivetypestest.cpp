@@ -67,7 +67,6 @@ inline void AllPrimitiveTypesTest::readLittleEndian()
     QCOMPARE(readLittle<quint32>(0), quint32(0x78563412u));
     QCOMPARE(readLittle<quint64>(0), Q_UINT64_C(0xf0debc9a78563412));
     //shifted by 4
-    quint8 result2 = AllPrimitiveTypes::readValue<quint8>(model.data(), 0, QSysInfo::LittleEndian, 4);
     //this is the way gcc handles it on little endian systems
     QCOMPARE(readLittle<quint8>(4), quint8(0x41u));
     QCOMPARE(readLittle<quint16>(4), quint16(0x6341u));
