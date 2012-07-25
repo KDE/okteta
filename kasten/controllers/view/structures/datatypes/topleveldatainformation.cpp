@@ -32,6 +32,8 @@
 //QtScript
 #include <QtScript/QScriptEngine>
 
+#include <KDebug>
+
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLogger* logger,
         QScriptEngine* engine, const QFileInfo& structureFile)
         : QObject(0), mData(data), mLogger(logger), mStructureFile(structureFile),

@@ -27,6 +27,8 @@
 #include "../datainformation.h"
 #include "abstractarraydata.h"
 
+#include <QVariant>
+
 class DummyDataInformation;
 class AbstractArrayData;
 class ArrayDataInformation : public DataInformation

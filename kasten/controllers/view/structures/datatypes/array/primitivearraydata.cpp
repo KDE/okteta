@@ -43,8 +43,8 @@ qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input,
     const quint32 maxNumItems = qMin(this->length(), maxRemaining32);
     if (maxNumItems == 0)
         return -1; //reached EOF
-    const ByteOrder byteOrder = AbstractArrayData::mParent->effectiveByteOrder();
-    const bool littleEndian = byteOrder == ByteOrderEnumClass::LittleEndian;
+    const QSysInfo::Endian byteOrder = AbstractArrayData::mParent->effectiveByteOrder();
+    const bool littleEndian = byteOrder == QSysInfo::LittleEndian;
 #if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
     if (littleEndian)
         this->readDataNativeOrder(maxNumItems, input, address);
@@ -107,8 +107,8 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
                 << bitsRemaining << ") need " << ((row + 1) * sizeof(T) * 8);
         return false;
     }
-    ByteOrder byteOrder =  AbstractArrayData::mParent->effectiveByteOrder();
-    bool littleEndian = byteOrder == ByteOrderEnumClass::LittleEndian;
+    QSysInfo::Endian byteOrder =  AbstractArrayData::mParent->effectiveByteOrder();
+    bool littleEndian = byteOrder == QSysInfo::LittleEndian;
     bool ok = false;
     T convertedVal = DisplayClass::fromVariant(value, &ok);
     if (!ok) {

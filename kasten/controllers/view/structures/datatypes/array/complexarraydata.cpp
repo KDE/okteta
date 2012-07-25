@@ -23,7 +23,9 @@
 #include "complexarraydata.h"
 
 #include <QScriptValue>
+#include <QVariant>
 #include <KLocalizedString>
+#include <KDebug>
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
 #include "../../script/scripthandlerinfo.h"
@@ -130,7 +132,7 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
         if (mChildren.at(i) == data)
             return i;
     }
-    kWarning() << data << "is not child of " << this;
+    kWarning() << data << "is not child of " << mParent->fullObjectPath();
     return -1;
 }
 

@@ -24,6 +24,8 @@
 #include "primitive/primitivetemplateinfo.h"
 #include "../script/scriptlogger.h"
 
+#include <KDebug>
+
 namespace PrimitiveFactory
 {
 

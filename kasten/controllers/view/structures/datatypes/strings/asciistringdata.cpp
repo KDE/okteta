@@ -29,6 +29,7 @@
 
 #include <KLocale>
 #include <QVarLengthArray>
+#include <KDebug> //TODO remove
 
 AsciiStringData::AsciiStringData(StringDataInformation* parent): StringData(parent)
 {

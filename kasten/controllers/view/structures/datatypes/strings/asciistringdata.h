@@ -27,6 +27,8 @@
 
 #include "stringdata.h"
 
+#include <QVector>
+
 
 class AsciiStringData : public StringData
 {

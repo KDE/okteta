@@ -22,8 +22,6 @@
 #ifndef DATAINFORMATIONBASE_H
 #define DATAINFORMATIONBASE_H
 
-#include "structviewpreferences.h"
-
 class AbstractEnumDataInformation;
 class StringDataInformation;
 class DataInformationBase;
@@ -36,9 +34,8 @@ class PrimitiveDataInformation;
 class ArrayDataInformation;
 class TopLevelDataInformation;
 
-typedef Kasten2::StructViewPreferences::EnumByteOrder::type ByteOrder;
-typedef Kasten2::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
-/** To indicate that it is a number of bits not bytes */
+#include <QtGlobal>
+
 typedef quint32 BitCount32;
 typedef quint64 BitCount64;
 

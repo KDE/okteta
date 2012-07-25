@@ -26,7 +26,8 @@
 #define UTF16STRINGDATA_H
 
 #include "stringdata.h"
-#include "structviewpreferences.h"
+
+#include <QVector>
 
 class Utf16StringData : public StringData
 {

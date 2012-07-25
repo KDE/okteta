@@ -30,6 +30,7 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QString>
+#include <QStringList>
 #include <QtScript/QScriptValue>
 #include <QtScript/QScriptValueIterator>
 #include <QtScript/QScriptEngine>

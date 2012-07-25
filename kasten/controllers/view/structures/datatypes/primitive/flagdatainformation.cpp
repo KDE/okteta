@@ -22,7 +22,6 @@
 
 
 #include "flagdatainformation.h"
-#include "structviewpreferences.h"
 #include <QVarLengthArray>
 
 FlagDataInformation::FlagDataInformation(QString name, PrimitiveDataInformation* type,

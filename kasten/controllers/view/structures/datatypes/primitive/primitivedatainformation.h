@@ -24,6 +24,7 @@
 
 #include "../datainformation.h"
 #include "../primitivedatatype.h"
+#include "structviewpreferences.h" //TODO remove once (un)signeddisplaybase in different file
 
 union AllPrimitiveTypes;
 

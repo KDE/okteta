@@ -26,6 +26,10 @@
 #include "datatypes/topleveldatainformation.h"
 #include "datatypes/array/arraydatainformation.h"
 
+#include <QFont>
+
+#include <KDebug>
+
 namespace Kasten2
 {
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :

@@ -28,6 +28,8 @@
 #include "../datainformationbase.h"
 #include "../primitivedatatype.h"
 
+#include <qnamespace.h>
+
 class QWidget;
 class QScriptEngine;
 class QScriptValue;
@@ -37,6 +39,8 @@ class ScriptHandlerInfo;
 namespace Okteta {
     class AbstractByteArrayModel;
 }
+
+class QVariant;
 
 class AbstractArrayData
 {

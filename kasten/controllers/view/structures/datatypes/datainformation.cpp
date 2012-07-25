@@ -22,6 +22,7 @@
 #include "datainformation.h"
 #include "topleveldatainformation.h"
 #include "additionaldata.h"
+#include "structviewpreferences.h"
 
 #include <QScriptValue>
 
@@ -444,4 +445,21 @@ QString DataInformation::fullObjectPath() const
 void DataInformation::setAdditionalData(AdditionalData* data)
 {
     mAdditionalData.reset(data);
+}
+
+QSysInfo::Endian DataInformation::effectiveByteOrder() const
+{
+    switch (mByteOrder)
+    {
+    case EndiannessBig:
+        return QSysInfo::BigEndian;
+    case EndianessLittle:
+        return QSysInfo::LittleEndian;
+    case EndianessFromSettings:
+        return static_cast<QSysInfo::Endian>(Kasten2::StructViewPreferences::byteOrder());
+    default: //inherit
+        return (mParent && !mParent->isTopLevel()) ?
+                mParent->asDataInformation()->effectiveByteOrder() :
+                static_cast<QSysInfo::Endian>(Kasten2::StructViewPreferences::byteOrder());
+    }
 }

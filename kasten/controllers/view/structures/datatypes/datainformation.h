@@ -24,12 +24,14 @@
 
 //Qt core
 #include <QString>
+#include <QPair>
+#include <QScopedPointer>
+#include <QMetaType>
 
 //Okteta
 #include <size.h>
 #include <address.h>
 
-#include "structviewpreferences.h"
 #include "datainformationbase.h"
 
 #define DATAINFORMATION_CLONE(type) virtual inline type##DataInformation* clone() const {\
@@ -41,13 +43,15 @@ namespace Okteta
 class AbstractByteArrayModel;
 }
 
-class TopLevelDataInformation;
-class ScriptHandlerInfo;
 class QScriptContext;
 class QScriptEngine;
 class QScriptValue;
+class QVariant;
+class QWidget;
 class ScriptLogger;
 class AdditionalData;
+class TopLevelDataInformation;
+class ScriptHandlerInfo;
 
 /** Interface that must be implemented by all datatypes */
 class DataInformation : public DataInformationBase
@@ -167,7 +171,7 @@ public:
     bool hasBeenValidated() const;
     void setHasBeenValidated(bool hasBeen);
     DataInformationEndianess byteOrder() const;
-    ByteOrder effectiveByteOrder() const;
+    QSysInfo::Endian effectiveByteOrder() const;
     void setByteOrder(DataInformationEndianess newEndianess);
     QString fullObjectPath() const;
 
@@ -176,8 +180,7 @@ public:
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) = 0;
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
-    QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name,
-            uint upTo) const;
+    QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name, uint upTo) const;
     ScriptLogger* logger() const;
 
 protected:
@@ -248,26 +251,6 @@ inline unsigned int DataInformation::childCount() const
 inline bool DataInformation::wasAbleToRead() const
 {
     return mWasAbleToRead;
-}
-
-inline ByteOrder DataInformation::effectiveByteOrder() const
-{
-    switch (mByteOrder)
-    {
-    case EndiannessBig:
-        return ByteOrderEnumClass::BigEndian;
-    case EndianessLittle:
-        return ByteOrderEnumClass::LittleEndian;
-    case EndianessFromSettings:
-        return Kasten2::StructViewPreferences::byteOrder();
-    case EndianessInherit:
-        return (mParent && !mParent->isTopLevel()) ?
-                mParent->asDataInformation()->effectiveByteOrder() :
-                Kasten2::StructViewPreferences::byteOrder();
-    }
-
-    // here must be a return... I guess this is correct
-    return Kasten2::StructViewPreferences::byteOrder();
 }
 
 inline DataInformation::DataInformationEndianess DataInformation::byteOrder() const

@@ -24,6 +24,8 @@
 
 #include "datainformation.h"
 
+#include <QVector>
+
 class DataInformationWithChildren: public DataInformation
 {
 protected:

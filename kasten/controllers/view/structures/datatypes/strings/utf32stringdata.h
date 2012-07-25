@@ -23,6 +23,8 @@
 
 #include "stringdata.h"
 
+#include <QVector>
+
 
 class Utf32StringData : public StringData
 {

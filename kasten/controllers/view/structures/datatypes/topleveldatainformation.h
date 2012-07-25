@@ -24,7 +24,7 @@
 
 #include <QtCore/QMap>
 #include <QtCore/QFileInfo>
-#include <QtCore/QExplicitlySharedDataPointer>
+#include <QtCore/QSharedPointer>
 
 #include <arraychangemetricslist.h>
 #include "datainformationbase.h"

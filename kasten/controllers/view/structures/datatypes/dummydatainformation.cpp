@@ -23,6 +23,7 @@
 #include "dummydatainformation.h"
 
 #include <QScriptValue>
+#include <QVariant>
 
 DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QString& name)
     : DataInformation(name, parent)

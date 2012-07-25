@@ -27,6 +27,9 @@
 
 #include "stringdata.h"
 
+#include <QVector>
+
+
 class Latin1StringData : public StringData
 {
 public:

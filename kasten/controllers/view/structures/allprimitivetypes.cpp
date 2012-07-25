@@ -38,10 +38,9 @@ compile_time_assert(sizeof(AllPrimitiveTypes) == 8);
 //FIXME this code really needs unit tests!
 //TODO optimised methods for *bitOffset == 0 && bitCount % 8 == 0
 
-bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
-        const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel* out,
-        const ByteOrder byteOrder, const Okteta::Address address,
-        const BitCount64 bitsRemaining, quint8* const bitOffset)
+bool AllPrimitiveTypes::writeBits(quint8 bitCount, AllPrimitiveTypes newValue,
+        Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder, Okteta::Address address,
+        BitCount64 bitsRemaining, quint8* const bitOffset)
 {
     Q_ASSERT(*bitOffset < 8);
     Q_ASSERT(bitCount <= 64);
@@ -62,18 +61,17 @@ bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
     }
     else
     {
-        if (byteOrder == ByteOrderEnumClass::LittleEndian)
+        if (byteOrder == QSysInfo::LittleEndian)
         {
             writeDataLittleEndian(bitCount, newValue, out, address, *bitOffset);
         }
-        else if (byteOrder == ByteOrderEnumClass::BigEndian)
+        else if (byteOrder == QSysInfo::BigEndian)
         {
             writeDataBigEndian(bitCount, newValue, out, address, *bitOffset);
         }
         else
         {
-            kWarning() << "invalid byte order";
-            ulongValue = 0;
+            Q_ASSERT(false);
             return false;
         }
         *bitOffset = (*bitOffset + bitCount) % 8;
@@ -81,9 +79,8 @@ bool AllPrimitiveTypes::writeBits(const quint8 bitCount,
     return true;
 }
 
-bool AllPrimitiveTypes::readBits(const quint8 bitCount,
-        const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
-        const Okteta::Address address, const BitCount64 bitsRemaining,
+bool AllPrimitiveTypes::readBits(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
+        QSysInfo::Endian byteOrder, Okteta::Address address, BitCount64 bitsRemaining,
         quint8* const bitOffset)
 {
     Q_ASSERT(bitCount <= 64);
@@ -103,18 +100,17 @@ bool AllPrimitiveTypes::readBits(const quint8 bitCount,
     }
     else
     {
-        if (byteOrder == ByteOrderEnumClass::LittleEndian)
+        if (byteOrder == QSysInfo::LittleEndian)
         {
             readDataLittleEndian(bitCount, input, address, *bitOffset);
         }
-        else if (byteOrder == ByteOrderEnumClass::BigEndian)
+        else if (byteOrder == QSysInfo::BigEndian)
         {
             readDataBigEndian(bitCount, input, address, *bitOffset);
         }
         else
         {
-            kWarning() << "invalid byte order specified.";
-            ulongValue = 0;
+            Q_ASSERT(false);
             return false;
         }
         *bitOffset = (*bitOffset + bitCount) % 8;
@@ -122,9 +118,8 @@ bool AllPrimitiveTypes::readBits(const quint8 bitCount,
     return true;
 }
 
-void AllPrimitiveTypes::readDataLittleEndian(const quint8 bitCount,
-        const Okteta::AbstractByteArrayModel* input, const Okteta::Address address,
-        const quint8 bo)
+void AllPrimitiveTypes::readDataLittleEndian(quint8 bitCount,
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint8 bo)
 {
     if (bitCount <= (unsigned) (8 - bo))
     {
@@ -161,9 +156,8 @@ void AllPrimitiveTypes::readDataLittleEndian(const quint8 bitCount,
     }
 }
 
-void AllPrimitiveTypes::readDataBigEndian(const quint8 bitCount,
-        const Okteta::AbstractByteArrayModel* input, const Okteta::Address address,
-        const quint8 bo)
+void AllPrimitiveTypes::readDataBigEndian(quint8 bitCount,
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address, quint8 bo)
 {
     if (bitCount <= (unsigned) (8 - bo))
     {
@@ -208,9 +202,9 @@ void AllPrimitiveTypes::readDataBigEndian(const quint8 bitCount,
     }
 }
 
-void AllPrimitiveTypes::writeDataLittleEndian(const quint8 bitCount,
-        const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel *out,
-        const Okteta::Address address, const quint8 bo) const
+void AllPrimitiveTypes::writeDataLittleEndian(quint8 bitCount,
+        AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel *out,
+        Okteta::Address address, quint8 bo) const
 {
     if (bitCount <= (unsigned) (8 - bo))
     {
@@ -255,9 +249,9 @@ void AllPrimitiveTypes::writeDataLittleEndian(const quint8 bitCount,
     }
 }
 
-void AllPrimitiveTypes::writeDataBigEndian(const quint8 bitCount,
-        const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel *out,
-        const Okteta::Address address, const quint8 bo) const
+void AllPrimitiveTypes::writeDataBigEndian(quint8 bitCount,
+        AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel *out,
+        Okteta::Address address, quint8 bo) const
 {
     if (bitCount <= (unsigned) (8 - bo))
     {
@@ -308,29 +302,27 @@ void AllPrimitiveTypes::writeDataBigEndian(const quint8 bitCount,
     }
 }
 
-void AllPrimitiveTypes::readFullBytes(const quint8 byteCount,
-        const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
-        const Okteta::Address address)
+void AllPrimitiveTypes::readFullBytes(quint8 byteCount, const Okteta::AbstractByteArrayModel* input,
+        QSysInfo::Endian byteOrder, Okteta::Address address)
 {
     Q_ASSERT(byteCount <= 8);
     //always use unsigned value
     for (int i = 0; i < byteCount; i++)
     {
-        int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
+        int index = (byteOrder == QSysInfo::LittleEndian) ? i
                 : ((byteCount - 1) - i);
         Okteta::Byte readByte = input->byte(address + i);
         allBytes[index] = readByte;
     }
 }
 
-void AllPrimitiveTypes::writeFullBytes(const quint8 byteCount,
-        const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel* out,
-        const ByteOrder byteOrder, const Okteta::Address address)
+void AllPrimitiveTypes::writeFullBytes(quint8 byteCount, AllPrimitiveTypes newValue,
+        Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder, Okteta::Address address)
 {
     Q_ASSERT(byteCount <= 8);
     for (int i = 0; i < byteCount; ++i)
     {
-        int index = (byteOrder == ByteOrderEnumClass::LittleEndian) ? i
+        int index = (byteOrder == QSysInfo::LittleEndian) ? i
                 : ((byteCount - 1) - i);
         out->setByte(address + i, newValue.allBytes[index]);
     }

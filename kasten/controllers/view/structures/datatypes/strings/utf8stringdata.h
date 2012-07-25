@@ -25,6 +25,9 @@
 
 #include "stringdata.h"
 
+#include <QVector>
+#include <QHash>
+
 
 class Utf8StringData : public StringData
 {

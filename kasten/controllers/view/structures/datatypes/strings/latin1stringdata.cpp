@@ -29,6 +29,7 @@
 
 #include <KLocale>
 #include <QVarLengthArray>
+#include <KDebug> //TODO remove
 
 Latin1StringData::Latin1StringData(StringDataInformation* parent): StringData(parent)
 {

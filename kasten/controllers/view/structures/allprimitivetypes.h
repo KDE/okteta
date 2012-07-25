@@ -30,15 +30,12 @@
 #include <address.h>
 #include <abstractbytearraymodel.h>
 
-#include "structviewpreferences.h"
 #include "datatypes/datainformationbase.h"
 
 namespace Okteta
 {
 class AbstractByteArrayModel;
 }
-typedef Kasten2::StructViewPreferences::EnumByteOrder::type ByteOrder;
-typedef Kasten2::StructViewPreferences::EnumByteOrder ByteOrderEnumClass;
 
 /** This union holds the value of one primitive datatype. Maximum size of a datatype is currently 64 bits.
  *  It has methods for reading and writing from @c Okteta::AbstractByteArrayModel */
@@ -144,10 +141,9 @@ union AllPrimitiveTypes
      *  @param bitOffset the bit to start at in the first byte
      *  @return @c true on success, @c false otherwise
      */
-    bool writeBits(const quint8 bitCount, const AllPrimitiveTypes newValue,
-            Okteta::AbstractByteArrayModel* out, const ByteOrder byteOrder,
-            const Okteta::Address address, const BitCount64 bitsRemaining,
-            quint8* const bitOffset);
+    bool writeBits(quint8 bitCount, AllPrimitiveTypes newValue,
+            Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder,
+            Okteta::Address address, BitCount64 bitsRemaining, quint8* const bitOffset);
     /** Reads given number of bits from @p input and sets value of this union to
      *  the new value.
      *  @p bitOffset is changed in this method so it does not have to be handled later.
@@ -164,9 +160,8 @@ union AllPrimitiveTypes
      *  @param bitOffset the bit to start at in the first byte
      *  @return @c true on success, @c false otherwise
      */
-    bool readBits(const quint8 bitCount,
-            const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
-            const Okteta::Address address, const BitCount64 bitsRemaining,
+    bool readBits(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
+            QSysInfo::Endian byteOrder, Okteta::Address address, BitCount64 bitsRemaining,
             quint8* const bitOffset);
 
     template<typename T> T value() const;
@@ -189,27 +184,22 @@ private:
     template<typename T> static T readValueNonNativeOrder(const Okteta::AbstractByteArrayModel* input,
                 Okteta::Address address);
 
-    void readDataLittleEndian(const quint8 bitCount,
-            const Okteta::AbstractByteArrayModel* input,
-            const Okteta::Address address, const quint8 bo);
-    void writeDataLittleEndian(const quint8 bitCount,
-            const AllPrimitiveTypes newValue, Okteta::AbstractByteArrayModel *out,
-            const Okteta::Address address, const quint8 bo) const;
+    void readDataLittleEndian(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
+            Okteta::Address address, quint8 bo);
+    void writeDataLittleEndian(quint8 bitCount, AllPrimitiveTypes newValue,
+            Okteta::AbstractByteArrayModel *out, Okteta::Address address, quint8 bo) const;
 
-    void readDataBigEndian(const quint8 bitCount,
-            const Okteta::AbstractByteArrayModel* input,
-            const Okteta::Address address, const quint8 bo);
-    void writeDataBigEndian(const quint8 bitCount, const AllPrimitiveTypes newValue,
-            Okteta::AbstractByteArrayModel *out, const Okteta::Address address,
-            const quint8 bo) const;
+    void readDataBigEndian(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
+            Okteta::Address address, quint8 bo);
+    void writeDataBigEndian(quint8 bitCount, AllPrimitiveTypes newValue,
+            Okteta::AbstractByteArrayModel *out, Okteta::Address address, quint8 bo) const;
 
     //optimised methods for reading/writing full bytes
-    void readFullBytes(const quint8 byteCount,
-            const Okteta::AbstractByteArrayModel* input, const ByteOrder byteOrder,
-            const Okteta::Address address);
-    void writeFullBytes(const quint8 byteCount, const AllPrimitiveTypes newValue,
-            Okteta::AbstractByteArrayModel* out, const ByteOrder byteOrder,
-            const Okteta::Address address);
+    void readFullBytes(quint8 byteCount, const Okteta::AbstractByteArrayModel* input,
+            QSysInfo::Endian byteOrder, Okteta::Address address);
+    void writeFullBytes(quint8 byteCount, AllPrimitiveTypes newValue,
+            Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder,
+            Okteta::Address address);
 };
 
 template<> inline quint8 AllPrimitiveTypes::value<quint8>() const { return ubyteValue; }

@@ -42,6 +42,8 @@
 
 #include "script/scripthandler.h"
 #include "datatypes/datainformation.h"
+#include "structviewpreferences.h"
+
 
 namespace Kasten2
 {
@@ -51,7 +53,7 @@ class StructToolPrivate
 public:
     StructToolPrivate()
             : mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0), mByteOrder(
-                    StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
+                    (QSysInfo::Endian)StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
                     mWritingData(false), mCurrentItemDataChanged(false)
     {
     }
@@ -62,7 +64,7 @@ public:
     Okteta::Address mCursorIndex;
 
     // settings
-    StructViewPreferences::EnumByteOrder::type mByteOrder;
+    QSysInfo::Endian mByteOrder;
     QScopedPointer<StructuresManager> mManager;
     TopLevelDataInformation::List mData;
     TopLevelDataInformation::List mInvalidData;
@@ -91,12 +93,12 @@ StructTool::~StructTool()
 {
 }
 
-void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
+void StructTool::setByteOrder(QSysInfo::Endian order)
 {
-    if (order != StructViewPreferences::byteOrder() || order != d->mByteOrder)
+    if (order != (QSysInfo::Endian)StructViewPreferences::byteOrder() || order != d->mByteOrder)
     {
         emit byteOrderChanged();
-        StructViewPreferences::setByteOrder(order);
+        StructViewPreferences::setByteOrder((StructViewPreferences::EnumByteOrder::type)order);
         d->mByteOrder = order;
         updateData(Okteta::ArrayChangeMetricsList());
     }
@@ -147,10 +149,10 @@ void StructTool::onCursorPositionChange(Okteta::Address pos)
 
 void StructTool::setByteOrder(int order)
 {
-    if (order == StructViewPreferences::EnumByteOrder::LittleEndian)
-        setByteOrder(StructViewPreferences::EnumByteOrder::LittleEndian);
-    else if (order == StructViewPreferences::EnumByteOrder::BigEndian)
-        setByteOrder(StructViewPreferences::EnumByteOrder::BigEndian);
+    if (order == QSysInfo::LittleEndian)
+        setByteOrder(QSysInfo::LittleEndian);
+    else if (order == QSysInfo::BigEndian)
+        setByteOrder(QSysInfo::BigEndian);
     else
     {
         kWarning() << "invalid byte order set:" << order;
@@ -472,7 +474,7 @@ StructuresManager* StructTool::manager() const
     return d->mManager.data();
 }
 
-StructViewPreferences::EnumByteOrder::type StructTool::byteOrder() const
+QSysInfo::Endian StructTool::byteOrder() const
 {
     return d->mByteOrder;
 }

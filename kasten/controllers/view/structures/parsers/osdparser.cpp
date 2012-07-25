@@ -47,6 +47,8 @@
 #include <QtXml/QDomNodeList>
 #include <QScriptEngine>
 
+#include <KDebug> //FIXME remove this!!
+
 //FIXME remove all kdebug & kwarning in here!
 OsdParser::OsdParser(const QString& pluginName, const QString& absolutePath)
         : AbstractStructureParser(pluginName, absolutePath)
@@ -573,8 +575,7 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
 
         if (!ok)
         {
-            kDebug()
-            << "unparseable byte count: " << byteCount << ", defaulting to 1";
+            kDebug() << "unparseable byte count: " << byteCount << ", defaulting to 1";
             count = 1;
         }
         data->setMaxByteCount(count);
