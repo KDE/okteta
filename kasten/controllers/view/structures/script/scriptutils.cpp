@@ -88,14 +88,4 @@ void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& out,
 
     out.setProperty(QLatin1String("float"), allPrim.floatValue);
     out.setProperty(QLatin1String("double"), allPrim.doubleValue);
-    QScriptValue toStringFunc = out.engine()->newFunction(allPrimitivesToString);
-    out.setProperty(QLatin1String("toString"), toStringFunc);
-}
-
-QScriptValue ScriptUtils::allPrimitivesToString(QScriptContext* ctx,
-        QScriptEngine* eng)
-{
-    Q_UNUSED(eng)
-    QString type = ctx->thisObject().property(QLatin1String("type")).toString();
-    return ctx->thisObject().property(type).toString();
 }

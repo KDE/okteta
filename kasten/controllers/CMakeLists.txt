@@ -400,6 +400,9 @@ structures_unit_test( scriptclassestest "scriptclasses-test"
 structures_unit_test( uniondatainformationtest "union-datainformation-test"
 	test/uniondatainformationtest.cpp
 )
+structures_unit_test( allprimitivetypestest "all-primitive-types-test"
+	test/allprimitivetypestest.cpp
+)
 
 endif ( KDE4_BUILD_TESTS )
 

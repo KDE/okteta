@@ -19,7 +19,6 @@
  */
 
 #include <QtTest>
-#include <QtCore/QDate>
 #include <qglobal.h>
 #include <kglobal.h>
 #include <klocale.h>

@@ -28,6 +28,7 @@
 #include "../script/scriptlogger.h"
 
 #include <KLineEdit>
+#include <KLocalizedString>
 #include <QtScript/QScriptEngine>
 
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const

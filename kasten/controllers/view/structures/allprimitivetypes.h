@@ -28,6 +28,7 @@
 
 #include <size.h>
 #include <address.h>
+#include <abstractbytearraymodel.h>
 
 #include "structviewpreferences.h"
 #include "datatypes/datainformationbase.h"
@@ -169,8 +170,25 @@ union AllPrimitiveTypes
             quint8* const bitOffset);
 
     template<typename T> T value() const;
+    /**
+     * Read data of type @p T from the model. Range checking must have been performed before
+     * @param input the input to read from
+     * @param address the starting address
+     * @param endianess the endianess to use when reading
+     * @param bitOffset the number of bits into the first byte (different depending on endianess)
+     * @return the read value
+     */
+    //TODO bool* ok parameter for when reading from model can cause errors (or exceptions sometime?)
+    template<typename T> static T readValue(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            QSysInfo::Endian endianess, quint8 bitOffset);
+    //TODO add writeValue
 
 private:
+    template<typename T> static T readValueNativeOrder(const Okteta::AbstractByteArrayModel* input,
+            Okteta::Address address);
+    template<typename T> static T readValueNonNativeOrder(const Okteta::AbstractByteArrayModel* input,
+                Okteta::Address address);
+
     void readDataLittleEndian(const quint8 bitCount,
             const Okteta::AbstractByteArrayModel* input,
             const Okteta::Address address, const quint8 bo);
@@ -204,5 +222,78 @@ template<> inline qint32 AllPrimitiveTypes::value<qint32>() const { return intVa
 template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return longValue; }
 template<> inline float AllPrimitiveTypes::value<float>() const { return floatValue; }
 template<> inline double AllPrimitiveTypes::value<double>() const { return doubleValue; }
+
+template<typename T>
+inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* input,
+        Okteta::Address address, QSysInfo::Endian endianess, quint8 bitOffset)
+{
+    //check for out of bounds
+    Q_ASSERT((input->size() - address) * 8 - bitOffset >= sizeof(T) * 8);
+    Q_ASSERT(bitOffset < 8);
+    //this union exists to force unsigned shifts
+    union {
+        T value;
+        typename QIntegerForSizeof<T>::Unsigned unsignedValue;
+    } u;
+    if (endianess == QSysInfo::ByteOrder)
+        u.value = readValueNativeOrder<T>(input, address);
+    else
+        u.value = readValueNonNativeOrder<T>(input, address);
+    if (Q_UNLIKELY(bitOffset != 0))
+    {
+        quint8 lastByte = input->byte(address + sizeof(T));
+        //handle the remaining bits
+        if (endianess == QSysInfo::BigEndian)
+        {
+            //the coming bits are the least significant, and range from bit (8-bitOffset)..7
+            u.value <<= bitOffset;
+            lastByte >>= 8 - bitOffset; //unsigned shift
+            Q_ASSERT((u.value & lastByte) == 0); //must not overlap
+            u.value |= lastByte;
+        }
+        else
+        {
+            //the coming bits are the most significant bits and range from 0..bitOffset
+            u.unsignedValue >>= bitOffset;
+            //promote lastByte to unsigned T and mask off the interesting bits
+            typename QIntegerForSizeof<T>::Unsigned tmp = lastByte & ((1u << bitOffset) - 1);
+            tmp <<= (sizeof(T) * 8) - bitOffset;
+            u.value |= tmp;
+        }
+    }
+    return u.value;
+}
+
+template<typename T>
+inline T AllPrimitiveTypes::readValueNativeOrder(const Okteta::AbstractByteArrayModel* input,
+        Okteta::Address address)
+{
+    union {
+        T value;
+        Okteta::Byte bytes[sizeof(T)];
+    } buf;
+    Okteta::Size read = input->copyTo(buf.bytes, address, sizeof(T));
+    Q_ASSERT(read == sizeof(T));
+    return buf.value;
+}
+
+template<typename T>
+inline T AllPrimitiveTypes::readValueNonNativeOrder(const Okteta::AbstractByteArrayModel* input,
+        Okteta::Address address)
+{
+    union {
+        T value;
+        Okteta::Byte bytes[sizeof(T)];
+    } buf;
+    Okteta::Size read = input->copyTo(buf.bytes, address, sizeof(T));
+    Q_ASSERT(read == sizeof(T));
+    //compiler should unroll this (swap endianess)
+    for (int i = 0; i < sizeof(T) / 2; ++i) {
+        const Okteta::Byte tmp = buf.bytes[i];
+        buf.bytes[i] = buf.bytes[sizeof(T) - i - 1];
+        buf.bytes[sizeof(T) - i -1] = tmp;
+    }
+    return buf.value;
+}
 
 #endif /* ALLPRIMITIVETYPES_H_ */

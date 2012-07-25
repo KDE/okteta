@@ -23,6 +23,8 @@
 #define BASICPRIMITIVEDATAINFORMATION_H_
 
 #include "primitivedatainformation.h"
+#include "../../allprimitivetypes.h"
+
 
 /** A basic implementation for all primitive types.
  *  T is the data type (e.g. quint8 or float)

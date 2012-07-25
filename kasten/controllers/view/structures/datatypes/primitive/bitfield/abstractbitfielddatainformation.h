@@ -23,6 +23,7 @@
 #define ABSTRACTBITFIELDDATAINFORMATION_H_
 
 #include "../primitivedatainformation.h"
+#include "../../../allprimitivetypes.h"
 
 class AbstractBitfieldDataInformation : public PrimitiveDataInformation
 {

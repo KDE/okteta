@@ -23,12 +23,12 @@
 #ifndef SCRIPTUTILS_H_
 #define SCRIPTUTILS_H_
 
-#include "../allprimitivetypes.h"
 #include "../datatypes/primitivedatatype.h"
 
 class QScriptValue;
 class QScriptContext;
 class QScriptEngine;
+union AllPrimitiveTypes;
 
 namespace ScriptUtils
 {
@@ -36,8 +36,6 @@ namespace ScriptUtils
 
     void wrapAllPrimitiveTypes(QScriptValue& out, AllPrimitiveTypes allPrim,
             PrimitiveDataType actualType);
-
-    QScriptValue allPrimitivesToString(QScriptContext* ctx, QScriptEngine* eng);
 
 }
 

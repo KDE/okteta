@@ -19,7 +19,6 @@
  */
 
 #include <QtTest>
-#include <QtCore/QDate>
 
 #include <bytearraymodel.h>
 
@@ -38,7 +37,8 @@ private:
     template<PrimitiveDataTypeEnum primType, typename T> void testReadPrimitiveInternal();
     template<PrimitiveDataTypeEnum primType> void testReadPrimitive();
     template<typename T> bool compareItems(T first, T second, uint index);
-    private Q_SLOTS:
+
+private Q_SLOTS:
     void initTestCase();
     void testReadFloat();
     void testReadDouble();

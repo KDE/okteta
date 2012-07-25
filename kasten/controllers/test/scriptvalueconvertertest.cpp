@@ -23,7 +23,6 @@
 
 #include <QtTest>
 #include <QtCore/QString>
-#include <QtCore/QDate>
 #include <QtCore/QDebug>
 #include <QtScript/QScriptEngine>
 #include "view/structures/script/scriptvalueconverter.h"

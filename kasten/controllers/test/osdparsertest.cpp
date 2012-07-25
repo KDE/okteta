@@ -21,7 +21,6 @@
 
 #include <QtTest>
 #include <QtCore/QString>
-#include <QtCore/QDate>
 #include "view/structures/parsers/osdparser.h"
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
 #include "view/structures/datatypes/topleveldatainformation.h"

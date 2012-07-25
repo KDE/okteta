@@ -19,7 +19,6 @@
  */
 
 #include <QtTest>
-#include <QtCore/QDate>
 
 #include <bytearraymodel.h>
 #include <byte.h>

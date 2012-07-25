@@ -23,7 +23,6 @@
 #define PRIMITIVEDATAINFORMATION_H_
 
 #include "../datainformation.h"
-#include "../../allprimitivetypes.h"
 #include "../primitivedatatype.h"
 
 union AllPrimitiveTypes;
