@@ -179,10 +179,13 @@ union AllPrimitiveTypes
     //TODO add writeValue
 
 private:
-    template<typename T> static T readValueNativeOrder(const Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address);
-    template<typename T> static T readValueNonNativeOrder(const Okteta::AbstractByteArrayModel* input,
-                Okteta::Address address);
+    template<int size> static typename QIntegerForSize<size>::Unsigned readValuePrivate(
+            const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            QSysInfo::Endian endianess, quint8 bitOffset);
+    template<int size> static typename QIntegerForSize<size>::Unsigned readValueNativeOrder(
+            const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
+    template<int size> static typename QIntegerForSize<size>::Unsigned readValueNonNativeOrder(
+            const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
 
     void readDataLittleEndian(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
             Okteta::Address address, quint8 bo);
@@ -213,6 +216,7 @@ template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return longV
 template<> inline float AllPrimitiveTypes::value<float>() const { return floatValue; }
 template<> inline double AllPrimitiveTypes::value<double>() const { return doubleValue; }
 
+
 template<typename T>
 inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* input,
         Okteta::Address address, QSysInfo::Endian endianess, quint8 bitOffset)
@@ -225,63 +229,73 @@ inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* inpu
         T value;
         typename QIntegerForSizeof<T>::Unsigned unsignedValue;
     } u;
+    u.unsignedValue = readValuePrivate<sizeof(T)>(input, address, endianess, bitOffset);
+    return u.value;
+}
+
+template<int size>
+inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValuePrivate(
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+        QSysInfo::Endian endianess, quint8 bitOffset)
+{
+    typename QIntegerForSize<size>::Unsigned unsignedValue;
     if (endianess == QSysInfo::ByteOrder)
-        u.value = readValueNativeOrder<T>(input, address);
+        unsignedValue = readValueNativeOrder<size>(input, address);
     else
-        u.value = readValueNonNativeOrder<T>(input, address);
+        unsignedValue = readValueNonNativeOrder<size>(input, address);
     if (Q_UNLIKELY(bitOffset != 0))
     {
-        quint8 lastByte = input->byte(address + sizeof(T));
+        quint8 lastByte = input->byte(address + size);
         //handle the remaining bits
         if (endianess == QSysInfo::BigEndian)
         {
             //the coming bits are the least significant, and range from bit (8-bitOffset)..7
-            u.unsignedValue <<= bitOffset;
+            unsignedValue <<= bitOffset;
             lastByte >>= 8 - bitOffset; //unsigned shift
-            Q_ASSERT((u.unsignedValue & lastByte) == 0); //must not overlap
-            u.unsignedValue |= lastByte;
+            Q_ASSERT((unsignedValue & lastByte) == 0); //must not overlap
+            unsignedValue |= lastByte;
         }
         else
         {
             //the coming bits are the most significant bits and range from 0..bitOffset
-            u.unsignedValue >>= bitOffset;
+            unsignedValue >>= bitOffset;
             //promote lastByte to unsigned T and mask off the interesting bits
-            typename QIntegerForSizeof<T>::Unsigned tmp = lastByte & ((1u << bitOffset) - 1);
-            tmp <<= (sizeof(T) * 8) - bitOffset;
-            u.unsignedValue |= tmp;
+            typename QIntegerForSize<size>::Unsigned tmp = lastByte & ((1u << bitOffset) - 1);
+            tmp <<= (size * 8) - bitOffset;
+            unsignedValue |= tmp;
         }
     }
-    return u.value;
+    return unsignedValue;
 }
 
-template<typename T>
-inline T AllPrimitiveTypes::readValueNativeOrder(const Okteta::AbstractByteArrayModel* input,
-        Okteta::Address address)
+template<int size>
+inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValueNativeOrder(
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
     union {
-        T value;
-        Okteta::Byte bytes[sizeof(T)];
+        typename QIntegerForSize<size>::Unsigned value;
+        Okteta::Byte bytes[size];
     } buf;
-    Okteta::Size read = input->copyTo(buf.bytes, address, sizeof(T));
-    Q_ASSERT(read == sizeof(T));
+    Okteta::Size read = input->copyTo(buf.bytes, address, size);
+    Q_ASSERT(read == size);
     return buf.value;
 }
 
-template<typename T>
-inline T AllPrimitiveTypes::readValueNonNativeOrder(const Okteta::AbstractByteArrayModel* input,
-        Okteta::Address address)
+template<int size>
+inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValueNonNativeOrder(
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
     union {
-        T value;
-        Okteta::Byte bytes[sizeof(T)];
+        typename QIntegerForSize<size>::Unsigned value;
+        Okteta::Byte bytes[size];
     } buf;
-    Okteta::Size read = input->copyTo(buf.bytes, address, sizeof(T));
-    Q_ASSERT(read == sizeof(T));
-    //compiler should unroll this (swap endianess)
-    for (int i = 0; i < sizeof(T) / 2; ++i) {
+    Okteta::Size read = input->copyTo(buf.bytes, address, size);
+    Q_ASSERT(read == size);
+    //compiler should unroll this
+    for (int i = 0; i < size / 2; ++i) {
         const Okteta::Byte tmp = buf.bytes[i];
-        buf.bytes[i] = buf.bytes[sizeof(T) - i - 1];
-        buf.bytes[sizeof(T) - i -1] = tmp;
+        buf.bytes[i] = buf.bytes[size - i - 1];
+        buf.bytes[size - i -1] = tmp;
     }
     return buf.value;
 }
