@@ -23,6 +23,7 @@
 #include "topleveldatainformation.h"
 #include "additionaldata.h"
 #include "structviewpreferences.h"
+#include "../script/scriptlogger.h"
 
 #include <QScriptValue>
 
@@ -113,7 +114,6 @@ void DataInformation::unsetValidationError()
 
 void DataInformation::setValidationError(QString errorMessage)
 {
-    AdditionalData* data = additionalData();
     if (errorMessage.isEmpty())
     {
         unsetValidationError();
@@ -122,12 +122,14 @@ void DataInformation::setValidationError(QString errorMessage)
     else
     {
         setValidationSuccessful(false);
+        AdditionalData* data = additionalData();
         if (data)
             data->setValidationError(errorMessage);
         else
         {
             AdditionalData* newData = new AdditionalData();
             newData->setValidationError(errorMessage);
+            setAdditionalData(newData);
         }
     }
 }
@@ -159,6 +161,7 @@ void DataInformation::resetValidationState()
     mHasBeenValidated = false;
     mValidationSuccessful = false;
 }
+
 void DataInformation::beginRead()
 {
     for (uint i = 0; i < childCount(); ++i)
@@ -208,7 +211,8 @@ void DataInformation::setUpdateFunc(const QScriptValue& func)
     {
         if (!func.isFunction())
         {
-            kWarning() << func.toString() << "is not a function!";
+            logger()->warn(this) << "cannot set update function since "
+                    << func.toString() << "is not a function!";
             return;
         }
         if (data)
@@ -251,7 +255,8 @@ void DataInformation::setValidationFunc(const QScriptValue& func)
     {
         if (!func.isFunction())
         {
-            kWarning() << func.toString() << "is not a function!";
+            logger()->warn(this) << "cannot set validation function since "
+                    << func.toString() << "is not a function!";
             return;
         }
         if (data)

@@ -23,7 +23,8 @@
 #ifndef ADDITIONALDATA_H_
 #define ADDITIONALDATA_H_
 
-#include <QtScript/QScriptValue>
+#include <QScriptValue>
+#include <QSharedData>
 
 /** Additional data which is held as a pointer by the *DataInformation classes
  *  to reduce memory consumption, since this will not always be needed */
@@ -31,7 +32,7 @@ class AdditionalData
 {
 public:
     explicit AdditionalData(const QScriptValue& validate = QScriptValue(),
-                            const QScriptValue& update = QScriptValue());
+            const QScriptValue& update = QScriptValue());
     AdditionalData(const AdditionalData& data);
     ~AdditionalData();
 
@@ -41,7 +42,7 @@ public:
     void setValidationFunction(const QScriptValue& func);
     QString validationError() const;
     void setValidationError(const QString& error);
-private:
+    private:
     /** the function called when new data is read, to update the structure */
     QScriptValue mUpdateFunction;
     /** this function is called after all data has been read to validate the structure */
@@ -77,6 +78,21 @@ inline QString AdditionalData::validationError() const
 inline void AdditionalData::setValidationError(const QString& error)
 {
     mValidationError = error;
+}
+
+inline AdditionalData::AdditionalData(const QScriptValue& validate, const QScriptValue& update)
+        : mUpdateFunction(update), mValidationFunction(validate), mValidationError(QString())
+{
+}
+
+inline AdditionalData::AdditionalData(const AdditionalData& data)
+        : mUpdateFunction(data.mUpdateFunction), mValidationFunction(
+                data.mValidationFunction), mValidationError(data.mValidationError)
+{
+}
+
+inline AdditionalData::~AdditionalData()
+{
 }
 
 #endif /* ADDITIONALDATA_H_ */
