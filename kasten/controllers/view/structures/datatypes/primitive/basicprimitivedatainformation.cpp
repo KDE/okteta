@@ -92,13 +92,11 @@ qint64 BasicPrimitiveDataInformation<T, C>::readData(Okteta::AbstractByteArrayMo
         return -1;
     }
     bool wasValid = mWasAbleToRead;
-    T oldVal(this->mValue);
-    //TODO new read interface
-    AllPrimitiveTypes newVal(this->mValue);
+    T oldVal = this->mValue;
+    //bitoffset will always stay the same since type T uses a full number of bytes
+    T newVal = AllPrimitiveTypes::readValue<T>(input, address, effectiveByteOrder(), *bitOffset);
 
-    mWasAbleToRead = newVal.readBits(size(), input, effectiveByteOrder(), address, bitsRemaining, bitOffset);
-
-    if (oldVal != newVal.value<T>() || wasValid != mWasAbleToRead)
+    if (oldVal != newVal || wasValid != mWasAbleToRead)
     {
         topLevelDataInformation()->setChildDataChanged();
         setValue(newVal);

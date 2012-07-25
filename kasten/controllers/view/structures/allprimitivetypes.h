@@ -236,10 +236,10 @@ inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* inpu
         if (endianess == QSysInfo::BigEndian)
         {
             //the coming bits are the least significant, and range from bit (8-bitOffset)..7
-            u.value <<= bitOffset;
+            u.unsignedValue <<= bitOffset;
             lastByte >>= 8 - bitOffset; //unsigned shift
-            Q_ASSERT((u.value & lastByte) == 0); //must not overlap
-            u.value |= lastByte;
+            Q_ASSERT((u.unsignedValue & lastByte) == 0); //must not overlap
+            u.unsignedValue |= lastByte;
         }
         else
         {
@@ -248,7 +248,7 @@ inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* inpu
             //promote lastByte to unsigned T and mask off the interesting bits
             typename QIntegerForSizeof<T>::Unsigned tmp = lastByte & ((1u << bitOffset) - 1);
             tmp <<= (sizeof(T) * 8) - bitOffset;
-            u.value |= tmp;
+            u.unsignedValue |= tmp;
         }
     }
     return u.value;
