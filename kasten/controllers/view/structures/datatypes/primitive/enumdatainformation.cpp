@@ -24,11 +24,11 @@
 #include "../topleveldatainformation.h"
 
 #include "../../script/scriptutils.h"
-#include <QtScript/QScriptContext>
-#include <QtScript/QScriptEngine>
-#include <KDebug>
 
-EnumDataInformation::EnumDataInformation(QString name, PrimitiveDataInformation* type,
+#include <KDebug>
+#include <QScriptValue>
+
+EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
             EnumDefinition::Ptr enumDef, DataInformation* parent) :
     AbstractEnumDataInformation(name, enumDef, parent), mValue(type)
 {
@@ -42,13 +42,12 @@ EnumDataInformation::EnumDataInformation(QString name, PrimitiveDataInformation*
 EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
     AbstractEnumDataInformation(e), mValue(0)
 {
-    mValue = e.mValue->clone();
+    mValue.reset(e.mValue->clone());
     mValue->setParent(this);
 }
 
 EnumDataInformation::~EnumDataInformation()
 {
-    delete mValue;
 }
 
 QString EnumDataInformation::valueString() const
@@ -65,11 +64,6 @@ QString EnumDataInformation::valueString() const
 }
 
 QString EnumDataInformation::typeName() const
-{
-    return QLatin1String("enum");
-}
-
-QString EnumDataInformation::getTypeString() const
 {
     return i18n("enum (%1)", mValue->typeName());
 }
@@ -105,12 +99,6 @@ QVariant EnumDataInformation::dataFromWidget(const QWidget* w) const
 void EnumDataInformation::setWidgetData(QWidget* w) const
 {
     mValue->setWidgetData(w);
-}
-
-AllPrimitiveTypes EnumDataInformation::qVariantToAllPrimitiveTypes(
-        const QVariant& value) const
-{
-    return mValue->qVariantToAllPrimitiveTypes(value);
 }
 
 AllPrimitiveTypes EnumDataInformation::value() const

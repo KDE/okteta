@@ -92,7 +92,6 @@ public:
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
     virtual BitCount32 childSize(uint index) const = 0;
 
-    /** The size of this DataInformation type in bits (to allow bitfields in future) */
     virtual QString typeName() const = 0;
     /** by default just returns an empty QString */
     virtual QString valueString() const;

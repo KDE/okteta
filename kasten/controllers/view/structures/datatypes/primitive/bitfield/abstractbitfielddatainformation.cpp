@@ -46,8 +46,9 @@ PrimitiveDataType AbstractBitfieldDataInformation::type() const
     return Type_Bitfield;
 }
 
-AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent) :
-    PrimitiveDataInformation(name, parent), mWidth(qMin(width, 64u)), mValue(0)
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(QString name, BitCount32 width,
+        DataInformation* parent)
+        : PrimitiveDataInformation(name, parent), mWidth(qMin(width, 64u)), mValue(0)
 {
     Q_ASSERT(width <= 64);
 }
@@ -56,12 +57,13 @@ AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation()
 {
 }
 
-AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d) :
-    PrimitiveDataInformation(d), mWidth(d.mWidth), mValue(d.mValue)
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d)
+        : PrimitiveDataInformation(d), mWidth(d.mWidth), mValue(d.mValue)
 {
 }
 
-QScriptValue AbstractBitfieldDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+QScriptValue AbstractBitfieldDataInformation::toScriptValue(QScriptEngine* engine,
+        ScriptHandlerInfo* handlerInfo)
 {
     QScriptValue ret = engine->newObject(handlerInfo->mBitfieldClass.data());
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));

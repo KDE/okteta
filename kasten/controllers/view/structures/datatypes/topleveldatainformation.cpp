@@ -27,7 +27,6 @@
 #include "../script/scriptlogger.h"
 #include "../script/scriptengineinitializer.h"
 #include "primitivefactory.h"
-#include "../allprimitivetypes.h"
 
 #include <abstractbytearraymodel.h>
 //QtScript

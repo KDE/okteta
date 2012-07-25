@@ -31,14 +31,13 @@ class EnumDataInformation: public AbstractEnumDataInformation
 {
 public:
     /** this object takes ownership of @p type */
-    EnumDataInformation(QString name, PrimitiveDataInformation* type,
+    EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
             EnumDefinition::Ptr enumDef, DataInformation* parent = 0);
     EnumDataInformation(const EnumDataInformation& e);
     DATAINFORMATION_CLONE(Enum)
     virtual ~EnumDataInformation();
 
     virtual QString valueString() const;
-    virtual QString getTypeString() const;
     virtual QString typeName() const;
 
     virtual BitCount32 size() const;
@@ -54,11 +53,10 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
-    virtual AllPrimitiveTypes qVariantToAllPrimitiveTypes(const QVariant& value) const;
     virtual QScriptValue valueAsQScriptValue() const;
 
 protected:
-    PrimitiveDataInformation* mValue; //to allow different enum sizes
+    QScopedPointer<PrimitiveDataInformation> mValue; //to allow different enum sizes
 };
 
 inline PrimitiveDataType EnumDataInformation::type() const

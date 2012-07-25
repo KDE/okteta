@@ -25,7 +25,6 @@
 #define FLAGDATAINFORMATION_H
 
 #include "enumdatainformation.h"
-#include "enumdefinition.h"
 
 class FlagDataInformation : public EnumDataInformation
 {
