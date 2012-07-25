@@ -157,6 +157,8 @@ kDebug() << "adding Dir"<<viewProfileFolderPath;
     // While there is no proper config syncing offer in the used frameworks, use a
     // single file with the id as content as workaround and watch for it changing
     KDirWatch* defaultViewProfileWatcher = new KDirWatch( this );
+    connect( defaultViewProfileWatcher, SIGNAL(created(QString)),
+             SLOT(onDefaultViewProfileChanged(QString)) );
     connect( defaultViewProfileWatcher, SIGNAL(dirty(QString)),
              SLOT(onDefaultViewProfileChanged(QString)) );
     const QString _defaultViewProfileFilePath = defaultViewProfileFilePath();
