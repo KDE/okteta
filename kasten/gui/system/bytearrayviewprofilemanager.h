@@ -102,6 +102,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject
 
   private Q_SLOTS:
     void onViewProfilesFolderChanged( const QString& path );
+    void onDefaultViewProfileChanged( const QString& path );
 
   private:
     QList<ByteArrayViewProfile> mViewProfiles;

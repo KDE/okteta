@@ -43,7 +43,8 @@ namespace Kasten2
 static const QStringList viewProfileFileNameFilter =
     QStringList() << QLatin1String( "*.obavp" ) << QLatin1String( "*.olock" );
 static const QString viewProfileFileSuffix = QLatin1String( ".obavp" );
-static const QString viewProfileSubDir = QLatin1String( "okteta/viewprofiles" );
+static const QString viewProfileDirSubPath = QLatin1String( "okteta/viewprofiles" );
+static const QString defaultViewProfileFileSubPath = QLatin1String( "okteta/defaultviewprofile" );
 static const int DefaultNoOfBytesPerLine = 16;
 static const int DefaultNoOfBytesPerGroup = 4;
 static const int DefaultLayoutStyle = 0;
@@ -111,9 +112,15 @@ updateLockStatus( ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup,
 }
 
 static QString
+defaultViewProfileFilePath()
+{
+    return KGlobal::dirs()->saveLocation( "data" ) + defaultViewProfileFileSubPath;
+}
+
+static QString
 viewProfileFilePath( const ByteArrayViewProfile::Id& viewProfileId )
 {
-    return KGlobal::dirs()->saveLocation( "data", viewProfileSubDir ) + viewProfileId + viewProfileFileSuffix;
+    return KGlobal::dirs()->saveLocation( "data", viewProfileDirSubPath ) + viewProfileId + viewProfileFileSuffix;
 }
 
 static QString
@@ -137,7 +144,7 @@ ByteArrayViewProfileManager::ByteArrayViewProfileManager()
 
     foreach( const QString& dataFolderPath, dataFolderPaths )
     {
-        const QString viewProfileFolderPath = dataFolderPath + viewProfileSubDir;
+        const QString viewProfileFolderPath = dataFolderPath + viewProfileDirSubPath;
         // watch folder for changes
         mViewProfileFileWatcher->addDir( viewProfileFolderPath, KDirWatch::WatchDirOnly );
 kDebug() << "adding Dir"<<viewProfileFolderPath;
@@ -146,9 +153,17 @@ kDebug() << "adding Dir"<<viewProfileFolderPath;
         onViewProfilesFolderChanged( viewProfileFolderPath );
     }
 
-    // tmp
-    if( ! mViewProfiles.isEmpty() )
-        mDefaultViewProfileId = mViewProfiles.at(0).id();
+    // default view profile
+    // While there is no proper config syncing offer in the used frameworks, use a
+    // single file with the id as content as workaround and watch for it changing
+    KDirWatch* defaultViewProfileWatcher = new KDirWatch( this );
+    connect( defaultViewProfileWatcher, SIGNAL(dirty(QString)),
+             SLOT(onDefaultViewProfileChanged(QString)) );
+    const QString _defaultViewProfileFilePath = defaultViewProfileFilePath();
+
+    defaultViewProfileWatcher->addFile( _defaultViewProfileFilePath );
+
+    onDefaultViewProfileChanged( _defaultViewProfileFilePath );
 
     // report any problems with existing view profiles?
 }
@@ -264,25 +279,11 @@ ByteArrayViewProfileManager::removeViewProfiles( const QList<ByteArrayViewProfil
 void
 ByteArrayViewProfileManager::setDefaultViewProfile( const ByteArrayViewProfile::Id& viewProfileId )
 {
-    // no change?
-    if( mDefaultViewProfileId == viewProfileId )
-        return;
+    QFile defaultViewProfileFile( defaultViewProfileFilePath() );
+    defaultViewProfileFile.open( QIODevice::WriteOnly );
 
-    bool isExisting = false;
-    foreach( const ByteArrayViewProfile& viewProfile, mViewProfiles )
-    {
-        if( viewProfile.id() == viewProfileId )
-        {
-            isExisting = true;
-            break;
-        }
-    }
-
-    if( isExisting )
-    {
-        mDefaultViewProfileId = viewProfileId;
-        emit defaultViewProfileChanged( mDefaultViewProfileId );
-    }
+    defaultViewProfileFile.write( viewProfileId.toUtf8() );
+    defaultViewProfileFile.close();
 }
 
 ByteArrayViewProfileLock
@@ -577,6 +578,42 @@ kDebug() << "unlocked profiles" << newUnlockedViewProfileIds;
 kDebug() << "locked profiles" << newLockedViewProfileIds;
     if( isDefaultViewProfileChanged )
         emit defaultViewProfileChanged( mDefaultViewProfileId );
+}
+
+void ByteArrayViewProfileManager::onDefaultViewProfileChanged( const QString& path )
+{
+    QFile defaultViewProfileFile( path );
+    defaultViewProfileFile.open( QIODevice::ReadOnly );
+
+    const QByteArray fileContent = defaultViewProfileFile.readAll();
+    const QString viewProfileId = QString::fromUtf8( fileContent, fileContent.size() );
+    defaultViewProfileFile.close();
+
+kDebug() << "Default viewprofile read:" << viewProfileId;
+
+    // no id set?
+    if( viewProfileId.isEmpty() )
+        return;
+
+    // no change?
+    if( mDefaultViewProfileId == viewProfileId )
+        return;
+
+    bool isExisting = false;
+    foreach( const ByteArrayViewProfile& viewProfile, mViewProfiles )
+    {
+        if( viewProfile.id() == viewProfileId )
+        {
+            isExisting = true;
+            break;
+        }
+    }
+
+    if( isExisting )
+    {
+        mDefaultViewProfileId = viewProfileId;
+        emit defaultViewProfileChanged( mDefaultViewProfileId );
+    }
 }
 
 
