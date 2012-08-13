@@ -31,8 +31,6 @@
 #include <KPushButton>
 #include <KLocale>
 #include <KGuiItem>
-#include <KToolBar>
-// #include <KActionCollection>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QTreeView>
@@ -53,14 +51,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     QVBoxLayout* baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
 
-    // tool bar
-    KToolBar* toolbar = new KToolBar( this );
-    toolbar->setMovable( false );
-    toolbar->setToolButtonStyle( Qt::ToolButtonIconOnly );
-    toolbar->setIconDimensions( 16 );
-    toolbar->setContextMenuPolicy( Qt::NoContextMenu );
-    baseLayout->addWidget( toolbar );
-
+    // bookmarks list
     mBookmarkListView = new QTreeView( this );
     mBookmarkListView->setObjectName( QLatin1String( "BookmarkListView" ) );
     mBookmarkListView->setRootIsDecorated( false );
@@ -78,10 +69,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
     baseLayout->addWidget( mBookmarkListView, 10 );
 
-    // actions TODO: make this view work like the filebrowser?
-//     KActionCollection* actionCollection = new KActionCollection( this );
-
-
+    // actions TODO: make this view work like the filebrowser, with actions on top?
     QHBoxLayout* actionsLayout = new QHBoxLayout();
 
     const KGuiItem createBookmarkGuiItem =
