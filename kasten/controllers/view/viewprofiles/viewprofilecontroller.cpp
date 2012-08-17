@@ -197,7 +197,7 @@ void ViewProfileController::onCreateNewActionTriggered()
 {
     ViewProfileEditDialog* dialog = new ViewProfileEditDialog( mParentWidget );
     const QString dialogTitle = i18nc( "@window:title",
-                                       "Create new View Profile" );
+                                       "New View Profile" );
     dialog->setWindowTitle( dialogTitle );
 
     ByteArrayViewProfile viewProfile;

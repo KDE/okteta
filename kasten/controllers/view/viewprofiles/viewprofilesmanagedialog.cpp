@@ -46,6 +46,8 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
   , mViewProfileManager( viewProfileManager )
   , mCurrentViewProfileId()
 {
+    setCaption( i18nc("@title:window", "View Profiles") );
+
     QWidget* page = new QWidget( this );
     setMainWidget( page );
 
@@ -181,6 +183,9 @@ ViewProfilesManageDialog::onCreateNewButtonClicked()
         }
 
         dialog->setViewProfile( newByteArrayViewProfile );
+        const QString dialogTitle = i18nc( "@window:title",
+                                           "New View Profile" );
+        dialog->setWindowTitle( dialogTitle );
     }
 
     const int answer = dialog->exec();
@@ -213,6 +218,9 @@ ViewProfilesManageDialog::onEditButtonClicked()
             mViewProfileManager->viewProfile( mCurrentViewProfileId );
     ViewProfileEditDialog* dialog = new ViewProfileEditDialog( this );
     dialog->setViewProfile( viewProfile );
+    const QString dialogTitle = i18nc( "@window:title",
+                                        "\"%1\" View Profile", viewProfile.viewProfileTitle() );
+    dialog->setWindowTitle( dialogTitle );
 
     const int answer = dialog->exec();
     if( answer == KDialog::Accepted )
