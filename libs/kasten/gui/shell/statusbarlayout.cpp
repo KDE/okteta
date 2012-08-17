@@ -76,16 +76,14 @@ int StatusBarLayout::indexOf( QWidget* widget ) const
 
 QSize StatusBarLayout::sizeHint() const
 {
-    if( mIsDirty )
-        updateLayoutStructs();
+    updateLayoutStructs();
 
     return mSizeHint;
 }
 
 QSize StatusBarLayout::minimumSize() const
 {
-    if( mIsDirty )
-        updateLayoutStructs();
+    updateLayoutStructs();
 
     return QSize( 0, mSizeHint.height() );
 }
@@ -182,7 +180,7 @@ void StatusBarLayout::setGeometry( const QRect& _rect )
         if( isTooWide )
             break;
 
-        const QPoint pos( margin + usedWidth, margin );
+        const QPoint pos( margin + usedWidth + itemSpacing, margin );
         const QSize size( itemWidth, availableHeight );
         QRect r( pos, size );
 
@@ -208,9 +206,6 @@ void StatusBarLayout::setGeometry( const QRect& _rect )
 
 void StatusBarLayout::updateLayoutStructs() const
 {
-    if( ! mIsDirty )
-        return;
-
     StatusBarLayout* that = const_cast<StatusBarLayout*>( this );
 
 //     const int margin = this->margin();

@@ -40,15 +40,18 @@ StatusBar::StatusBar( QWidget* parent )
 
     mLayout = new StatusBarLayout( baseWidget );
     mLayout->setSpacing( 6 ); // hard coded in QStatusBar
-    KStatusBar::addWidget( baseWidget );
+    KStatusBar::addWidget( baseWidget, 1 );
 }
 
 
 void StatusBar::addWidget( QWidget* widget )
 {
-    mWidgetList.append( widget );
-
     mLayout->addWidget( widget );
+}
+
+void StatusBar::updateLayout()
+{
+    mLayout->invalidate();
 }
 
 

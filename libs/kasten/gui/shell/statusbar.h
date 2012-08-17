@@ -48,11 +48,13 @@ class KASTENGUI_EXPORT StatusBar : public KStatusBar
   public: // overwrite QStatusBar API
     void addWidget( QWidget* widget );
 
+  public:
+    void updateLayout();
+
   protected: // QWidget API
     virtual void changeEvent( QEvent* changeEvent );
 
   protected:
-    QList<QWidget*> mWidgetList;
     StatusBarLayout* mLayout;
 };
 
