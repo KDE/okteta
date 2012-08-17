@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="oktetapartbrowser" version="1">
+<kpartgui name="oktetapartbrowser" version="2">
 
 <MenuBar>
   <Menu name="file">
@@ -23,12 +23,13 @@
     <Action name="view_zoom_in"/>
     <Action name="view_zoom_out"/>
     <Separator/>
-    <Action name="view_showsnonprinting" />
     <Action name="view_lineoffset" />
-    <Action name="togglecolumns" />
+    <Action name="view_offsetcoding" />
     <Separator/>
+    <Action name="togglecolumns" />
     <Action name="view_valuecoding" />
     <Action name="view_charencoding" />
+    <Action name="view_showsnonprinting" />
     <Separator/>
     <Action name="view_bytesperline" />
     <Action name="view_bytespergroup" />
