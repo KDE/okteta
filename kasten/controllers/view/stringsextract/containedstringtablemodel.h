@@ -45,7 +45,8 @@ class ContainedStringTableModel : public QAbstractTableModel
     };
 
   public:
-    explicit ContainedStringTableModel( const QList<ContainedString> *containedStringList, QObject *parent = 0 );
+    ContainedStringTableModel( const QList<ContainedString> *containedStringList, int offsetCoding,
+                               QObject *parent = 0 );
     virtual ~ContainedStringTableModel();
 
   public: // QAbstractTableModel API
@@ -56,6 +57,7 @@ class ContainedStringTableModel : public QAbstractTableModel
 
   public Q_SLOTS:
     void update();
+    void setOffsetCoding( int offsetCoding );
 
   protected:
     const QList<ContainedString> * const mContainedStringList;

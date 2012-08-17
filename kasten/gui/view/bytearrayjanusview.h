@@ -92,8 +92,10 @@ class ByteArrayJanusView : public QWidget
 
   public: // elements
     void toggleOffsetColumn( bool visible );
+    void setOffsetCoding( int offsetCoding );
     void setVisibleCodings( int columns );
     bool offsetColumnVisible() const;
+    int offsetCoding() const;
     int visibleCodings() const;
 
   public: // table layout
@@ -141,6 +143,7 @@ class ByteArrayJanusView : public QWidget
     void charCodecChanged( const QString& charCodingName );
     void focusChanged( bool hasFocus );
     void offsetColumnVisibleChanged( bool visible );
+    void offsetCodingChanged( int offsetCoding );
     void visibleByteArrayCodingsChanged( int columns );
     void layoutStyleChanged( int layoutStyle );
     void noOfBytesPerLineChanged( int noOfBytesPerLine );

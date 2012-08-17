@@ -40,6 +40,7 @@ public:
     QString mId;
 
     QString mViewProfileTitle;
+    int mOffsetCoding;
     QString mCharCodingName;
     int mValueCoding;
     bool mOffsetColumnVisible;
@@ -59,6 +60,8 @@ static const QChar DefaultViewProfileSubstituteChar =  QLatin1Char( '.' );
 static const QChar DefaultViewProfileUndefinedChar =   QChar( QChar::ReplacementCharacter );
 static const int DefaultViewProfileNoOfGroupedBytes = 4;
 static const int DefaultViewProfileNoOfBytesPerLine =  16;
+static const Okteta::AbstractByteArrayView::OffsetCoding DefaultViewProfileOffsetCoding =
+    Okteta::AbstractByteArrayView::HexadecimalOffset;
 static const Okteta::AbstractByteArrayView::ValueCoding DefaultViewProfileValueCoding =
     Okteta::AbstractByteArrayView::HexadecimalCoding;
 static const Okteta::AbstractByteArrayView::LayoutStyle DefaultViewProfileResizeStyle =
@@ -69,6 +72,7 @@ static const Okteta::AbstractByteArrayView::CodingTypes DefaultViewProfileVisibl
 
 ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()
   : QSharedData()
+  , mOffsetCoding( DefaultViewProfileOffsetCoding )
   , mCharCodingName( DefaultViewProfileCharCodingName )
   , mValueCoding( DefaultViewProfileValueCoding )
   , mOffsetColumnVisible( true )
@@ -103,6 +107,7 @@ ByteArrayViewProfile& ByteArrayViewProfile::operator=( const ByteArrayViewProfil
 
 ByteArrayViewProfile::Id ByteArrayViewProfile::id() const { return d->mId; }
 QString ByteArrayViewProfile::viewProfileTitle()    const { return d->mViewProfileTitle; }
+int ByteArrayViewProfile::offsetCoding()            const { return d->mOffsetCoding; }
 QString ByteArrayViewProfile::charCodingName()      const { return d->mCharCodingName; }
 int ByteArrayViewProfile::valueCoding()             const { return d->mValueCoding; }
 bool ByteArrayViewProfile::offsetColumnVisible()    const { return d->mOffsetColumnVisible; }
@@ -117,6 +122,7 @@ int ByteArrayViewProfile::viewModus()               const { return d->mViewModus
 
 void ByteArrayViewProfile::setId( const Id& id ) { d->mId = id; }
 void ByteArrayViewProfile::setViewProfileTitle( const QString& title ) { d->mViewProfileTitle = title; }
+void ByteArrayViewProfile::setOffsetCoding( int offsetCoding ) { d->mOffsetCoding = offsetCoding; }
 void ByteArrayViewProfile::setValueCoding( int valueCoding ) { d->mValueCoding = valueCoding; }
 void ByteArrayViewProfile::setCharCoding( const QString& charCodingName ) { d->mCharCodingName = charCodingName; }
 void ByteArrayViewProfile::setSubstituteChar( const QChar& substituteChar ) { d->mSubstituteChar = substituteChar; }

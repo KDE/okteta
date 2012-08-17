@@ -54,7 +54,8 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
         NoOfBytesPerLineChanged = 1 << 7,
         NoOfGroupedBytesChanged = 1 << 8,
         LayoutStyleChanged = 1 << 9,
-        ViewModusChanged = 1 << 10
+        ViewModusChanged = 1 << 10,
+        OffsetCodingChanged = 1 << 11
     };
 
   public:
@@ -85,6 +86,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
 
     // TODO: turn to one signal/slot with enum parameter for property and QVariant as new value
     void onShowsNonprintingChanged();
+    void onOffsetCodingChanged();
     void onValueCodingChanged();
     void onCharCodecChanged();
     void onSubstituteCharChanged();

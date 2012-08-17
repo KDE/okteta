@@ -79,6 +79,7 @@ class AbstractByteArrayViewPrivate
     bool isCursorBehind() const;
 
     bool offsetColumnVisible() const;
+    AbstractByteArrayView::OffsetCoding offsetCoding() const;
 
     int noOfBytesPerLine() const;
     Address startOffset() const;
@@ -139,6 +140,7 @@ class AbstractByteArrayViewPrivate
     void setMarking( const AddressRange& marking );
 
     void toggleOffsetColumn( bool offsetColumnVisible );
+    void setOffsetCoding( AbstractByteArrayView::OffsetCoding offsetCoding );
 
   public: // zooming
     void zoomIn( int pointInc );
@@ -355,6 +357,11 @@ inline bool AbstractByteArrayViewPrivate::isByteEditorActive()   const { return 
 inline KValueEditor* AbstractByteArrayViewPrivate::valueEditor() const { return mValueEditor; }
 inline Dropper* AbstractByteArrayViewPrivate::dropper()          const { return mDropper; }
 inline bool AbstractByteArrayViewPrivate::offsetColumnVisible()  const { return mOffsetColumn->isVisible(); }
+inline AbstractByteArrayView::OffsetCoding AbstractByteArrayViewPrivate::offsetCoding() const
+{
+    return (AbstractByteArrayView::OffsetCoding)mOffsetColumn->format();
+}
+
 
 inline void AbstractByteArrayViewPrivate::cancelByteEditor()
 {

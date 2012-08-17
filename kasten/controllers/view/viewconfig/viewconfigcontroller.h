@@ -57,10 +57,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     void setBytesPerLine();
     void setBytesPerGroup();
     void setLayoutStyle( int layoutStyle );
+    void setOffsetCoding( int offsetCoding );
     void toggleOffsetColumn( bool on );
     void toggleValueCharColumns( int visibleColunms );
 
     void onOffsetColumnVisibleChanged( bool offsetColumnVisible );
+    void onOffsetCodingChanged( int offsetCoding );
     void onShowsNonprintingChanged( bool showsNonprinting );
     void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
@@ -78,6 +80,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     KAction* mSetBytesPerGroupAction;
     KSelectAction* mResizeStyleAction;
     KToggleAction* mShowOffsetColumnAction;
+    KSelectAction* mOffsetCodingAction;
     KSelectAction* mToggleColumnsAction;
 };
 

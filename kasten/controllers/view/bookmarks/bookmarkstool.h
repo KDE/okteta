@@ -61,6 +61,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
     const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
     int indexOf( const Okteta::Bookmark& bookmark ) const;
     unsigned int bookmarksCount() const;
+    int offsetCoding() const;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
@@ -80,6 +81,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
     void bookmarksRemoved( const QList<Okteta::Bookmark>& bookmarks );
     void bookmarksModified( const QList<int>& indizes );
     void canCreateBookmarkChanged( bool canCreateBookmark );
+    void offsetCodingChanged( int offsetCoding );
 
   private Q_SLOTS:
     void onCursorPositionChanged( Okteta::Address newPosition );

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -43,7 +43,6 @@ static const int DefaultMinLength = 3;
 StringsExtractTool::StringsExtractTool()
   : mExtractedStringsUptodate( false ),
     mSourceByteArrayModelUptodate( false ),
-    mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
     mMinLength( DefaultMinLength ),
     mByteArrayView( 0 ),
     mByteArrayModel( 0 ),
@@ -84,12 +83,15 @@ void StringsExtractTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
-                 SLOT(setCharCodec(QString)) );
         connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
                  SLOT(onSelectionChanged()) );
 
-        setCharCodec( mByteArrayView->charCodingName() );
+        // if strings are from same model, adapt offsetcoding
+        if( mSourceByteArrayModel == mByteArrayModel )
+        {
+            connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
+                     SIGNAL(offsetCodingChanged(int)) );
+        }
     }
 
     // TODO: if there is no view, there is nothing to extract.
@@ -98,22 +100,18 @@ void StringsExtractTool::setTargetModel( AbstractModel* model )
     emit uptodateChanged( mExtractedStringsUptodate );
     emit isApplyableChanged( isApplyable() );
     emit canHighlightStringChanged( canHighlightString() );
+    if( mSourceByteArrayModel == mByteArrayModel && mByteArrayView )
+        emit offsetCodingChanged( mByteArrayView->offsetCoding() );
 }
+
+int StringsExtractTool::offsetCoding() const { return ( mByteArrayView ? mByteArrayView->offsetCoding() : 0 ); }
+
 
 void StringsExtractTool::setMinLength( int minLength )
 {
     mMinLength = minLength;
     checkUptoDate();
     emit uptodateChanged( mExtractedStringsUptodate );
-}
-
-void StringsExtractTool::setCharCodec( const QString &codecName )
-{
-    if( codecName == mCharCodec->name() )
-        return;
-
-    delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec( codecName );
 }
 
 void StringsExtractTool::checkUptoDate()
@@ -184,10 +182,12 @@ void StringsExtractTool::extractStrings()
 
     QApplication::setOverrideCursor( Qt::WaitCursor );
 
+    Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec( mByteArrayView->charCodingName() );
     ExtractStringsJob *extractStringsJob =
-        new ExtractStringsJob( mByteArrayModel, mByteArrayView->selection(), mCharCodec, mMinLength,
+        new ExtractStringsJob( mByteArrayModel, mByteArrayView->selection(), charCodec, mMinLength,
                                &mContainedStringList );
     extractStringsJob->exec();
+    delete charCodec;
 
     QApplication::restoreOverrideCursor();
 
@@ -199,17 +199,19 @@ void StringsExtractTool::extractStrings()
              SLOT(onSourceChanged()) );
     connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
              SLOT(onSourceDestroyed()) );
+    connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
+                SIGNAL(offsetCodingChanged(int)) );
 
     mExtractedStringsUptodate = true;
     mSourceByteArrayModelUptodate = true;
     emit uptodateChanged( true );
     emit canHighlightStringChanged( true );
+    emit offsetCodingChanged( mByteArrayView->offsetCoding() );
 }
 
 
 StringsExtractTool::~StringsExtractTool()
 {
-    delete mCharCodec;
 }
 
 }

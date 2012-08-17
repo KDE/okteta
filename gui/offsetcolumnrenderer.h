@@ -52,11 +52,12 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
     virtual void renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys );
 
   public:
-    void setFormat( OffsetFormat::Format format );
+    void setFormat( OffsetFormat::Format format, const QFontMetrics& fontMetrics );
     void setFontMetrics( const QFontMetrics& fontMetrics );
 
   public: // read access
 //     int delta() const;
+    OffsetFormat::Format format() const;
     OffsetFormat::print printFunction() const;
 
 
@@ -92,6 +93,8 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 
 
 inline OffsetFormat::print OffsetColumnRenderer::printFunction()    const { return PrintFunction; }
+inline OffsetFormat::Format OffsetColumnRenderer::format()          const { return mFormat; }
+
 
 }
 

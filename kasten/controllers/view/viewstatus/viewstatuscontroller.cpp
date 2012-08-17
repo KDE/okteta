@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -35,10 +35,9 @@
 #include <KComboBox>
 #include <KLocale>
 // Qt
+#include <QtGui/QLayout>
 #include <QtGui/QLabel>
 #include <QtGui/QFontMetrics>
-
-#include <KDebug>
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation
 
@@ -65,7 +64,6 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
     statusBar->addWidget( mOverwriteModeToggleButton );
     connect( mOverwriteModeToggleButton, SIGNAL(clicked(bool)), SLOT(setOverwriteMode(bool)) );
 
-// #if 0
     mValueCodingComboBox = new KComboBox( statusBar );
     QStringList list;
     list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","Hexadecimal") );
@@ -84,24 +82,24 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
     connect( mCharCodingComboBox, SIGNAL(activated(int)), SLOT(setCharCoding(int)) );
     statusBar->addWidget( mCharCodingComboBox );
-// #endif
 
-    fixWidths();
+    fixWidths( 0 );
 
     setTargetModel( 0 );
 }
 
 
-// the letter C can be very wide, that is why with proportianl fonts there seems too much space used, but isn't
+// the letter C can be very wide, that is why with proportinal fonts there seems too much space used, but isn't
 // see http://frinring.wordpress.com/2008/10/14/better-width-with-open-sources/
-void ViewStatusController::fixWidths()
+void ViewStatusController::fixWidths( int offsetCoding )
 {
     const QFontMetrics metrics = mStatusBar->fontMetrics();
 
     // mOffsetLabel
-    static const char HexDigitsCount = 16;
-    static const char FirstLetterIndex = 10;
-    static const char HexDigits[HexDigitsCount] =
+    static const int hexDigitsCount = 16;
+    static const int decimalDigitsCount = 10;
+    static const int firstLetterIndex = 10;
+    static const char digits[hexDigitsCount] =
     {
         '0','1','2','3','4','5','6','7','8','9',
         'A','B','C','D','E','F'
@@ -110,16 +108,26 @@ void ViewStatusController::fixWidths()
     int largestOffsetWidth = 0;
     int largestSelectionWidth = 0;
     int widestDigitIndex = 0;
-    for( int i=0; i<HexDigitsCount; ++i )
+    const int digitsCount = (offsetCoding == 0) ? hexDigitsCount : decimalDigitsCount;
+    for( int i=0; i<digitsCount; ++i )
     {
-        QString offset = QString( 9, QLatin1Char(HexDigits[i]) );
-        offset[4] = QLatin1Char(':');
+        QString offset;
+        if( offsetCoding == 0 )
+        {
+            offset = QString( 9, QLatin1Char(digits[i]) );
+            offset[4] = QLatin1Char(':');
+        }
+        else
+        {
+            offset = QString( 10, QLatin1Char(digits[i]) );
+        }
+
         const QString offsetText = i18n( "Offset: %1", offset );
         const int offsetWidth = metrics.boundingRect( offsetText ).width();
         if( largestOffsetWidth < offsetWidth )
             largestOffsetWidth = offsetWidth;
 
-        const char countDigit = (i<FirstLetterIndex) ? HexDigits[i] : widestDigitIndex;
+        const char countDigit = (i<firstLetterIndex) ? digits[i] : digits[widestDigitIndex];
         const int maxNumber = QByteArray('1'+QByteArray(9,countDigit)).toInt();
         const QString bytesCount = i18n( "%1 bytes", maxNumber );
         const QString selectionString = i18nc( "@info:status selection: start offset - end offset ()",
@@ -128,14 +136,14 @@ void ViewStatusController::fixWidths()
         const int selectionWidth = metrics.boundingRect( selectionString ).width();
         if( largestSelectionWidth < selectionWidth )
         {
-            if( i < FirstLetterIndex )
-                widestDigitIndex = 1;
+            if( i < firstLetterIndex )
+                widestDigitIndex = i;
             largestSelectionWidth = selectionWidth;
         }
     }
     mOffsetLabel->setFixedWidth( largestOffsetWidth );
     mSelectionLabel->setFixedWidth( largestSelectionWidth );
-// kDebug()<<"offset"<<largestOffsetWidth<<"selection"<<largestSelectionWidth;
+    mStatusBar->updateLayout();
 }
 
 void ViewStatusController::setTargetModel( AbstractModel* model )
@@ -156,7 +164,8 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         onCursorPositionChanged( mByteArrayView->cursorPosition() );
         onSelectedDataChanged( mByteArrayView->modelSelection() );
         mOverwriteModeToggleButton->setChecked( mByteArrayView->isOverwriteMode() );
-        onValueCodingChanged( (int)mByteArrayView->valueCoding() );
+        onOffsetCodingChanged( mByteArrayView->offsetCoding() );
+        onValueCodingChanged( mByteArrayView->valueCoding() );
         onCharCodecChanged( mByteArrayView->charCodingName() );
 
         connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)), SLOT(onCursorPositionChanged(Okteta::Address)) );
@@ -164,6 +173,7 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
             SLOT(onSelectedDataChanged(const Kasten2::AbstractModelSelection*)) );
         connect( mByteArrayView, SIGNAL(overwriteModeChanged(bool)),
                  mOverwriteModeToggleButton, SLOT(setChecked(bool)) );
+        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)), SLOT(onOffsetCodingChanged(int)) );
         connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
         connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
             SLOT(onCharCodecChanged(QString)) );
@@ -189,7 +199,6 @@ void ViewStatusController::setOverwriteMode( bool overwrite )
     mByteArrayView->setOverwriteMode( overwrite );
 }
 
-// #if 0
 void ViewStatusController::setValueCoding( int valueCoding )
 {
     mByteArrayView->setValueCoding( valueCoding );
@@ -201,11 +210,10 @@ void ViewStatusController::setCharCoding( int charCoding )
     mByteArrayView->setCharCoding( Okteta::CharCodec::codecNames()[charCoding] );
     mByteArrayView->setFocus();
 }
-// #endif
 
 void ViewStatusController::onCursorPositionChanged( Okteta::Address offset )
 {
-    static char codedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
+    char codedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
 
     mPrintFunction( codedOffset, mStartOffset + offset );
 
@@ -221,8 +229,8 @@ void ViewStatusController::onSelectedDataChanged( const Kasten2::AbstractModelSe
     QString selectionString;
     if( ! selection.isEmpty() )
     {
-        static char codedSelectionStart[Okteta::OffsetFormat::MaxFormatWidth+1];
-        static char codedSelectionEnd[Okteta::OffsetFormat::MaxFormatWidth+1];
+        char codedSelectionStart[Okteta::OffsetFormat::MaxFormatWidth+1];
+        char codedSelectionEnd[Okteta::OffsetFormat::MaxFormatWidth+1];
 
         mPrintFunction( codedSelectionStart, mStartOffset + selection.start() );
         mPrintFunction( codedSelectionEnd,   mStartOffset + selection.end() );
@@ -236,7 +244,17 @@ void ViewStatusController::onSelectedDataChanged( const Kasten2::AbstractModelSe
 
     mSelectionLabel->setText( selectionString );
 }
-// #if 0
+
+void ViewStatusController::onOffsetCodingChanged( int offsetCoding )
+{
+    mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)offsetCoding );
+    fixWidths( offsetCoding );
+
+    // trigger updates of offset printing labels
+    onCursorPositionChanged( mByteArrayView->cursorPosition() );
+    onSelectedDataChanged( mByteArrayView->modelSelection() );
+}
+
 void ViewStatusController::onValueCodingChanged( int valueCoding )
 {
     mValueCodingComboBox->setCurrentIndex( valueCoding );
@@ -248,6 +266,5 @@ void ViewStatusController::onCharCodecChanged( const QString& charCodecName )
 
     mCharCodingComboBox->setCurrentIndex( charCodingIndex );
 }
-// #endif
 
 }

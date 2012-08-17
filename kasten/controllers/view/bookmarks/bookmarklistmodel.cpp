@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -38,7 +38,7 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
  : QAbstractTableModel( parent ),
    mTool( tool )
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
+    mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)tool->offsetCoding() );
 
     connect( mTool, SIGNAL(hasBookmarksChanged(bool)),
              SLOT(onHasBookmarksChanged(bool)) );
@@ -48,6 +48,8 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
              SLOT(onBookmarksChanged()) );
     connect( mTool, SIGNAL(bookmarksModified(QList<int>)),
              SLOT(onBookmarksChanged(QList<int>)) );
+    connect( mTool, SIGNAL(offsetCodingChanged(int)),
+             SLOT(onOffsetCodingChanged(int)) );
 }
 
 int BookmarkListModel::rowCount( const QModelIndex& parent ) const
@@ -195,6 +197,13 @@ void BookmarkListModel::onBookmarksChanged( const QList<int>& bookmarkIndizes )
     foreach( int row, bookmarkIndizes )
         emit dataChanged( index(row,OffsetColumnId), index(row,TitleColumnId) );
 }
+
+void BookmarkListModel::onOffsetCodingChanged( int offsetCoding )
+{
+    mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)offsetCoding );
+    reset();
+}
+
 
 #if 0
 void BookmarkListModel::onRevertedToVersionIndex( int versionIndex )

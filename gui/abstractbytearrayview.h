@@ -78,8 +78,9 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
   Q_PROPERTY( bool OffsetColumnVisible READ offsetColumnVisible WRITE toggleOffsetColumn )
+  Q_PROPERTY( OffsetCoding OffsetCoding READ offsetCoding WRITE setOffsetCoding )
   Q_PROPERTY( CodingTypes VisibleCodings READ visibleCodings WRITE setVisibleCodings )
-  Q_ENUMS( ValueCoding CharCoding LayoutStyle CodingTypes )
+  Q_ENUMS( OffsetCoding ValueCoding CharCoding LayoutStyle CodingTypes )
 
   Q_PROPERTY( bool ByteTypeColored READ isByteTypeColored WRITE setByteTypeColored )
   // value column
@@ -93,6 +94,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
+    enum OffsetCoding { HexadecimalOffset=0, DecimalOffset=1, MaxOffsetCodingId=0xFF };
     enum ValueCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
     enum CharCoding { LocalEncoding=0, ISO8859_1Encoding=1, EBCDIC1047Encoding=2,
                      StartOfOwnEncoding=0x8000, MaxEncodingId=0xFFFF };
@@ -129,6 +131,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     CodingTypeId activeCoding() const;
 
     bool offsetColumnVisible() const;
+    OffsetCoding offsetCoding() const;
 
     /** returns true if there is a selected range in the array */
     bool hasSelectedData() const;
@@ -265,6 +268,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
     /** switches the Offset column on/off */
     void toggleOffsetColumn( bool offsetColumnVisible );
+    /** sets the format of the offset column. Default is Okteta::HexadecimalCoding */
+    void setOffsetCoding( OffsetCoding offsetCoding );
 
   public:
     /** 
@@ -373,6 +378,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void focusChanged( bool hasFocus );
 
     void offsetColumnVisibleChanged( bool visible );
+    void offsetCodingChanged( int offsetCoding );
     void visibleByteArrayCodingsChanged( int columns );
     void layoutStyleChanged( int layoutStyle );
     void noOfBytesPerLineChanged( int noOfBytesPerLine );

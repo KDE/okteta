@@ -71,6 +71,15 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     // line offset shown
     mLineOffsetShownCheckBox = new QCheckBox( displayBox );
     displayBoxFormLayout->addRow( i18n("Show Line Offset:"), mLineOffsetShownCheckBox );
+    // offset coding
+    mOffsetCodingComboBox = new KComboBox( displayBox );
+    QStringList offsetCodingList;
+    offsetCodingList.append( i18nc("@item:inmenu offset in the hexadecimal format",
+                             "Hexadecimal") );
+    offsetCodingList.append( i18nc("@item:inmenu offset in the decimal format",
+                             "Decimal") );
+    mOffsetCodingComboBox->addItems( offsetCodingList );
+    displayBoxFormLayout->addRow( i18n("Offset Coding:"), mOffsetCodingComboBox );
     // values or char shown
     mValuesCharsShownComboBox = new KComboBox( displayBox );
     QStringList valuesCharsList;
@@ -180,6 +189,7 @@ ByteArrayViewProfile ViewProfileEdit::viewProfile() const
     viewProfile.setViewProfileTitle( mTitleEdit->text() );
 
     viewProfile.setOffsetColumnVisible( mLineOffsetShownCheckBox->isChecked() );
+    viewProfile.setOffsetCoding( mOffsetCodingComboBox->currentIndex() );
     const int visibleByteArrayCodings =
         byteArrayCodingsFlagsFromListIndex( mValuesCharsShownComboBox->currentIndex() );
     viewProfile.setVisibleByteArrayCodings( visibleByteArrayCodings );
@@ -204,6 +214,7 @@ void ViewProfileEdit::setViewProfile( const ByteArrayViewProfile& viewProfile )
     mTitleEdit->setText( viewProfile.viewProfileTitle() );
 
     mLineOffsetShownCheckBox->setChecked( viewProfile.offsetColumnVisible() );
+    mOffsetCodingComboBox->setCurrentIndex( viewProfile.offsetCoding() );
     const int valuesCharsShownListIndex =
         listIndexFromByteArrayCodingsFlags( viewProfile.visibleByteArrayCodings() );
     mValuesCharsShownComboBox->setCurrentIndex( valuesCharsShownListIndex );

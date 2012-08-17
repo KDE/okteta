@@ -61,6 +61,7 @@ protected: // title
     KLineEdit* mTitleEdit;
 protected: // display
     QCheckBox* mLineOffsetShownCheckBox;
+    KComboBox* mOffsetCodingComboBox;
     KComboBox* mValuesCharsShownComboBox;
     KComboBox* mDisplayModeComboBox;
 protected: // layout

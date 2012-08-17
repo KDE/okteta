@@ -60,6 +60,7 @@ ByteArrayView::ByteArrayView( ByteArrayView* other, ByteArrayViewProfileSynchron
     setViewModus( other->viewModus() );
     setVisibleByteArrayCodings( other->visibleByteArrayCodings() );
     toggleOffsetColumn( other->offsetColumnVisible() );
+    setOffsetCoding( other->offsetCoding() );
 
     setCharCoding( other->charCodingName() );
     setShowsNonprinting( other->showsNonprinting() );
@@ -128,6 +129,7 @@ void ByteArrayView::init()
     connect( mWidget, SIGNAL(focusChanged(bool)), SIGNAL(focusChanged(bool)) );
 
     connect( mWidget, SIGNAL(offsetColumnVisibleChanged(bool)), SIGNAL(offsetColumnVisibleChanged(bool)) );
+    connect( mWidget, SIGNAL(offsetCodingChanged(int)), SIGNAL(offsetCodingChanged(int)) );
     connect( mWidget, SIGNAL(visibleByteArrayCodingsChanged(int)), SIGNAL(visibleByteArrayCodingsChanged(int)) );
     connect( mWidget, SIGNAL(layoutStyleChanged(int)), SIGNAL(layoutStyleChanged(int)) );
     connect( mWidget, SIGNAL(noOfBytesPerLineChanged(int)), SIGNAL(noOfBytesPerLineChanged(int)) );
@@ -291,6 +293,11 @@ bool ByteArrayView::offsetColumnVisible() const
     return mWidget->offsetColumnVisible();
 }
 
+int ByteArrayView::offsetCoding() const
+{
+    return mWidget->offsetCoding();
+}
+
 int ByteArrayView::layoutStyle() const
 {
     return (int)mWidget->layoutStyle();
@@ -319,6 +326,11 @@ void ByteArrayView::setNoOfGroupedBytes( int noOfGroupedBytes )
 void ByteArrayView::toggleOffsetColumn( bool on )
 {
     mWidget->toggleOffsetColumn( on );
+}
+
+void ByteArrayView::setOffsetCoding( int offsetCoding )
+{
+    mWidget->setOffsetCoding( offsetCoding );
 }
 
 void ByteArrayView::setLayoutStyle( int layoutStyle )

@@ -36,7 +36,6 @@
 
 namespace Okteta {
 class AbstractByteArrayModel;
-class CharCodec;
 }
 
 
@@ -68,9 +67,9 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     bool isApplyable() const; // candidate for AbstractTool API
     bool isUptodate() const;
     bool canHighlightString() const;
+    int offsetCoding() const;
 
   public Q_SLOTS: // settings
-    void setCharCodec( const QString &codecName );
     void setMinLength( int minLength );
     void markString( int stringId );
     void unmarkString();
@@ -82,6 +81,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     void uptodateChanged( bool isUptodate );
     void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
     void canHighlightStringChanged( bool canHighlightString );
+    void offsetCodingChanged( int offsetCoding );
 
   private:
     void checkUptoDate();
@@ -98,7 +98,6 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     bool mSourceByteArrayModelUptodate:1;
 
   private: // settings
-    Okteta::CharCodec *mCharCodec;
     int mMinLength;
 
   private: // sources

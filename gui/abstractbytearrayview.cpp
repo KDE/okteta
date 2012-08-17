@@ -152,6 +152,12 @@ bool AbstractByteArrayView::offsetColumnVisible() const
     return d->offsetColumnVisible();
 }
 
+AbstractByteArrayView::OffsetCoding AbstractByteArrayView::offsetCoding() const
+{
+    Q_D( const AbstractByteArrayView );
+    return d->offsetCoding();
+}
+
 AddressRange AbstractByteArrayView::selection() const
 {
     Q_D( const AbstractByteArrayView );
@@ -315,6 +321,12 @@ void AbstractByteArrayView::toggleOffsetColumn( bool showOffsetColumn )
 {
     Q_D( AbstractByteArrayView );
     d->toggleOffsetColumn( showOffsetColumn );
+}
+
+void AbstractByteArrayView::setOffsetCoding( AbstractByteArrayView::OffsetCoding offsetCoding )
+{
+    Q_D( AbstractByteArrayView );
+    d->setOffsetCoding( offsetCoding );
 }
 
 

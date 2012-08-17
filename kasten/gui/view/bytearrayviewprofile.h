@@ -59,6 +59,8 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfile
     QString viewProfileTitle() const;
 
   public: // codings
+    void setOffsetCoding( int offsetCoding );
+    int offsetCoding() const;
     void setValueCoding( int valueCoding );
     void setCharCoding( const QString& charCodingName );
     int valueCoding() const;

@@ -247,6 +247,24 @@ void AbstractByteArrayViewPrivate::toggleOffsetColumn( bool showOffsetColumn )
 }
 
 
+void AbstractByteArrayViewPrivate::setOffsetCoding( AbstractByteArrayView::OffsetCoding offsetCoding )
+{
+    Q_Q( AbstractByteArrayView );
+
+    const OffsetFormat::Format format = (OffsetFormat::Format)offsetCoding;
+    const OffsetFormat::Format currentFormat = mOffsetColumn->format();
+    // no change?
+    if( currentFormat == format )
+        return;
+
+    mOffsetColumn->setFormat( format, q->fontMetrics() );
+
+    updateViewByWidth();
+
+    emit q->offsetCodingChanged( offsetCoding );
+}
+
+
 void AbstractByteArrayViewPrivate::changeEvent( QEvent* event )
 {
     Q_Q( AbstractByteArrayView );

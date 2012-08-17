@@ -138,13 +138,16 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
 
   public: // elements
     void toggleOffsetColumn( bool visible );
+    void setOffsetCoding( int offsetCoding );
     void setVisibleByteArrayCodings( int columns );
     void setMarking( const Okteta::AddressRange& range, bool ensureVisible = false );
     bool offsetColumnVisible() const;
+    int offsetCoding() const;
     int visibleByteArrayCodings() const;
   Q_SIGNALS:
     void offsetColumnVisibleChanged( bool visible );
     void visibleByteArrayCodingsChanged( int columns );
+    void offsetCodingChanged( int offsetCoding );
 
   public: // table layout
     void setLayoutStyle( int layoutStyle );

@@ -100,7 +100,10 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     baseLayout->addLayout( filterLayout );
 
     // strings
-    mContainedStringTableModel = new ContainedStringTableModel( mTool->containedStringList(), this );
+    mContainedStringTableModel =
+        new ContainedStringTableModel( mTool->containedStringList(), mTool->offsetCoding(), this );
+    connect( mTool, SIGNAL(offsetCodingChanged(int)),
+             mContainedStringTableModel, SLOT(setOffsetCoding(int)) );
 
     mSortFilterProxyModel = new QSortFilterProxyModel( this );
     mSortFilterProxyModel->setDynamicSortFilter( true );

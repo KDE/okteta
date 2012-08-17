@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="Okteta" version="3">
+<kpartgui name="Okteta" version="4">
 <MenuBar>
   <Menu name="file">
     <Action name="connect_to" append="open_merge" />
@@ -31,12 +31,13 @@
     <Action name="goto_offset" />
   </Menu>
   <Menu name="view">
-    <Action name="view_showsnonprinting" />
     <Action name="view_lineoffset" />
-    <Action name="togglecolumns" />
+    <Action name="view_offsetcoding" />
     <Separator/>
+    <Action name="togglecolumns" />
     <Action name="view_valuecoding" />
     <Action name="view_charencoding" />
+    <Action name="view_showsnonprinting" />
     <Separator/>
     <Action name="view_bytesperline" />
     <Action name="view_bytespergroup" />

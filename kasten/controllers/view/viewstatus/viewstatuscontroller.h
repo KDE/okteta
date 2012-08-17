@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     virtual void setTargetModel( AbstractModel* model );
 
   private:
-    void fixWidths();
+    void fixWidths( int offsetCoding );
 
   private Q_SLOTS:
     void setOverwriteMode( bool overwrite );
@@ -67,6 +67,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
 
     void onCursorPositionChanged( Okteta::Address offset );
     void onSelectedDataChanged( const Kasten2::AbstractModelSelection* modelSelection );
+    void onOffsetCodingChanged( int offsetCoding );
     void onValueCodingChanged( int valueCoding );
     void onCharCodecChanged( const QString& charCodecName );
 

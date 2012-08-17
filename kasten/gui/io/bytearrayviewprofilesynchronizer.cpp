@@ -169,6 +169,9 @@ void ByteArrayViewProfileSynchronizer::updateView( const ByteArrayViewProfile& v
     if( (mDirtyFlags&ShowsNonprintingChanged) == 0 )
         mView->setShowsNonprinting( viewProfile.showsNonprinting() );
 
+    if( (mDirtyFlags&OffsetCodingChanged) == 0 )
+        mView->setOffsetCoding( viewProfile.offsetCoding() );
+
     if( (mDirtyFlags&ValueCodingChanged) == 0 )
         mView->setValueCoding( viewProfile.valueCoding() );
 
@@ -210,6 +213,9 @@ void ByteArrayViewProfileSynchronizer::updateViewProfile( ByteArrayViewProfile& 
     if( (mDirtyFlags&ShowsNonprintingChanged) )
         viewProfile.setShowsNonprinting( mView->showsNonprinting() );
 
+    if( (mDirtyFlags&OffsetCodingChanged) )
+        viewProfile.setOffsetCoding( mView->offsetCoding() );
+
     if( (mDirtyFlags&ValueCodingChanged) )
         viewProfile.setValueCoding( mView->valueCoding() );
 
@@ -245,6 +251,8 @@ void ByteArrayViewProfileSynchronizer::connectViewSignals()
 {
     connect( mView, SIGNAL(showsNonprintingChanged(bool)),
              SLOT(onShowsNonprintingChanged()) );
+    connect( mView, SIGNAL(offsetCodingChanged(int)),
+             SLOT(onOffsetCodingChanged()) );
     connect( mView, SIGNAL(valueCodingChanged(int)),
              SLOT(onValueCodingChanged()) );
     connect( mView, SIGNAL(charCodecChanged(QString)),
@@ -300,6 +308,10 @@ ByteArrayViewProfileSynchronizer::setDirtyFlag( int dirtyFlag )
 void ByteArrayViewProfileSynchronizer::onShowsNonprintingChanged()
 {
     setDirtyFlag( ShowsNonprintingChanged );
+}
+void ByteArrayViewProfileSynchronizer::onOffsetCodingChanged()
+{
+    setDirtyFlag( OffsetCodingChanged );
 }
 void ByteArrayViewProfileSynchronizer::onValueCodingChanged()
 {

@@ -73,10 +73,13 @@ int BookmarksTool::indexOf( const Okteta::Bookmark& bookmark ) const
     return result;
 }
 unsigned int BookmarksTool::bookmarksCount() const { return mBookmarks ? mBookmarks->bookmarksCount() : 0; }
+int BookmarksTool::offsetCoding()            const { return mByteArrayView ? mByteArrayView->offsetCoding() : 0; }
 
 
 void BookmarksTool::setTargetModel( AbstractModel* model )
 {
+    const int oldOffsetCoding = offsetCoding();
+
     if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArray ) mByteArray->disconnect( this );
 
@@ -102,7 +105,10 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
                  SLOT(onBookmarksModified()) );
         connect( mByteArray, SIGNAL(bookmarksModified(QList<int>)),
                  SIGNAL(bookmarksModified(QList<int>)) );
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)), SLOT(onCursorPositionChanged(Okteta::Address)) );
+        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
+                 SLOT(onCursorPositionChanged(Okteta::Address)) );
+        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
+                 SIGNAL(offsetCodingChanged(int)) );
     }
     else
     {
@@ -114,6 +120,9 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
         }
     }
 
+    const int newOffsetCoding = offsetCoding();
+    if( oldOffsetCoding != newOffsetCoding )
+        emit offsetCodingChanged( newOffsetCoding );
     emit hasBookmarksChanged( hasViewWithBookmarks );
 }
 

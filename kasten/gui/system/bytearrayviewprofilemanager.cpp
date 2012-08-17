@@ -50,6 +50,7 @@ static const int DefaultNoOfBytesPerGroup = 4;
 static const int DefaultLayoutStyle = 0;
 static const int DefaultViewModus = 0;
 static const int DefaultVisibleByteArrayCodings = 3;
+static const int DefaultOffsetCoding = 0;
 static const int DefaultValueCoding = 0;
 static const QString DefaultCharCoding;
 
@@ -356,6 +357,7 @@ kDebug() << "ViewProfile file has an unsupported version:" << formatVersion;
 
     KConfigGroup displayConfigGroup = configFile.group( "Display" );
     result.setOffsetColumnVisible( displayConfigGroup.readEntry("OffsetColumnVisible", true) );
+    result.setOffsetCoding( displayConfigGroup.readEntry("OffsetCoding", DefaultOffsetCoding) );
     result.setViewModus( displayConfigGroup.readEntry("ViewModus", DefaultViewModus) );
     result.setVisibleByteArrayCodings( displayConfigGroup.readEntry("VisibleByteArrayCodings", DefaultVisibleByteArrayCodings) );
 
@@ -382,7 +384,7 @@ kDebug() << "------------------ Saving"<<viewProfile.id();
     KConfig configFile( fileName, KConfig::SimpleConfig );
 
     KConfigGroup formatConfigGroup = configFile.group( "OBAVP" );
-    formatConfigGroup.writeEntry( "Version", "1.0" );
+    formatConfigGroup.writeEntry( "Version", "1.1" );
 
     KConfigGroup generalConfigGroup = configFile.group( "General" );
     generalConfigGroup.writeEntry( "Title", viewProfile.viewProfileTitle() );
@@ -394,6 +396,7 @@ kDebug() << "------------------ Saving"<<viewProfile.id();
 
     KConfigGroup displayConfigGroup = configFile.group( "Display" );
     displayConfigGroup.writeEntry( "OffsetColumnVisible", viewProfile.offsetColumnVisible() );
+    displayConfigGroup.writeEntry( "OffsetCoding", viewProfile.offsetCoding() );
     displayConfigGroup.writeEntry( "ViewModus", viewProfile.viewModus() );
     displayConfigGroup.writeEntry( "VisibleByteArrayCodings", viewProfile.visibleByteArrayCodings() );
 

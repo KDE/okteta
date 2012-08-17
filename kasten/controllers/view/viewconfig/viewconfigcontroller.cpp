@@ -44,10 +44,21 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
+    // Offset coding
+    mOffsetCodingAction = actionCollection->add<KSelectAction>( QLatin1String("view_offsetcoding") );
+    mOffsetCodingAction->setText( i18nc("@title:menu","&Offset Coding") );
+    QStringList list;
+    list.append( i18nc("@item:inmenu offset in the hexadecimal format",
+                       "&Hexadecimal") );
+    list.append( i18nc("@item:inmenu offset in the decimal format",
+                       "&Decimal") );
+    mOffsetCodingAction->setItems( list );
+    connect( mOffsetCodingAction, SIGNAL(triggered(int)), SLOT(setOffsetCoding(int)) );
+
     // value valueCoding
     mCodingAction = actionCollection->add<KSelectAction>( QLatin1String("view_valuecoding") );
     mCodingAction->setText( i18nc("@title:menu","&Value Coding") );
-    QStringList list;
+    list.clear();
     list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format",
                        "&Hexadecimal") );
     list.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",
@@ -120,6 +131,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
     if( hasView )
     {
         onOffsetColumnVisibleChanged( mByteArrayView->offsetColumnVisible() );
+        onOffsetCodingChanged( mByteArrayView->offsetCoding() );
         onShowsNonprintingChanged( mByteArrayView->showsNonprinting() );
         onValueCodingChanged( mByteArrayView->valueCoding() );
         onCharCodecChanged( mByteArrayView->charCodingName() );
@@ -128,6 +140,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
 
         connect( mByteArrayView, SIGNAL(offsetColumnVisibleChanged(bool)),
                  SLOT(onOffsetColumnVisibleChanged(bool)) );
+        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)), SLOT(onOffsetCodingChanged(int)) );
         connect( mByteArrayView, SIGNAL(showsNonprintingChanged(bool)),
                  SLOT(onShowsNonprintingChanged(bool)) );
         connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
@@ -138,6 +151,7 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
                  SLOT(onVisibleByteArrayCodingsChanged(int)) );
     }
 
+    mOffsetCodingAction->setEnabled( hasView );
     mCodingAction->setEnabled( hasView );
     mEncodingAction->setEnabled( hasView );
     mShowsNonprintingAction->setEnabled( hasView );
@@ -162,6 +176,11 @@ void ViewConfigController::setShowsNonprinting( bool on )
 void ViewConfigController::toggleOffsetColumn( bool on )
 {
     mByteArrayView->toggleOffsetColumn( on );
+}
+
+void ViewConfigController::setOffsetCoding( int offsetCoding )
+{
+    mByteArrayView->setOffsetCoding( offsetCoding );
 }
 
 void ViewConfigController::setBytesPerLine()
@@ -203,6 +222,11 @@ void ViewConfigController::toggleValueCharColumns( int visibleColumns )
 void ViewConfigController::onOffsetColumnVisibleChanged( bool offsetColumnVisible )
 {
     mShowOffsetColumnAction->setChecked( offsetColumnVisible );
+}
+
+void ViewConfigController::onOffsetCodingChanged( int offsetCoding )
+{
+    mOffsetCodingAction->setCurrentItem( offsetCoding );
 }
 
 void ViewConfigController::onShowsNonprintingChanged( bool showsNonprinting )

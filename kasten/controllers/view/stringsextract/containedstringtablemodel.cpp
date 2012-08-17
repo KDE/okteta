@@ -26,12 +26,21 @@
 #include <KLocale>
 
 
-ContainedStringTableModel::ContainedStringTableModel( const QList<ContainedString> *containedStringList, QObject *parent )
+ContainedStringTableModel::ContainedStringTableModel( const QList<ContainedString> *containedStringList,
+                                                      int offsetCoding,
+                                                      QObject *parent )
  : QAbstractTableModel( parent ),
    mContainedStringList( containedStringList )
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
+    mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)offsetCoding );
 }
+
+void ContainedStringTableModel::setOffsetCoding( int offsetCoding )
+{
+    mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)offsetCoding );
+    reset();
+}
+
 
 void ContainedStringTableModel::update()
 {

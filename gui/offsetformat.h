@@ -40,9 +40,9 @@ class OKTETAGUI_EXPORT OffsetFormat
     /** */
     typedef void (*print)( char *Buffer, unsigned int Offset );
     /** */
-    enum Format { Hexadecimal=0, Decimal, None };
+    enum Format { Hexadecimal=0, Decimal };
     /** */
-    static const int MaxFormatWidth = 9;
+    static const int MaxFormatWidth = 10;
 
   private:
     OffsetFormat();

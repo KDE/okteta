@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2007-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2007-2009,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -115,6 +115,8 @@ void BookmarksController::setTargetModel( AbstractModel* model )
                  SLOT(updateBookmarks()) );
         connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
                  SLOT(onCursorPositionChanged(Okteta::Address)) );
+        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
+                 SLOT(updateBookmarks()) );
     }
 
     updateBookmarks();
@@ -142,7 +144,8 @@ void BookmarksController::updateBookmarks()
         return;
 
     const int startOffset = mByteArrayView->startOffset();
-    Okteta::OffsetFormat::print printFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
+    Okteta::OffsetFormat::print printFunction =
+        Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)mByteArrayView->offsetCoding() );
 
     char codedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
 

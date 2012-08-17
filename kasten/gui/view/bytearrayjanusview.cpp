@@ -72,6 +72,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         newView->setVisibleCodings( mView->visibleCodings() );
         newView->setActiveCoding( mView->activeCoding() );
         newView->toggleOffsetColumn( mView->offsetColumnVisible() );
+        newView->setOffsetCoding( mView->offsetCoding() );
         newView->setStartOffset( mView->startOffset() );
         newView->setFirstLineOffset( mView->firstLineOffset() );
         newView->setNoOfBytesPerLine( mView->noOfBytesPerLine() );
@@ -105,6 +106,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
     connect( mView, SIGNAL(focusChanged(bool)), SIGNAL(focusChanged(bool)) );
 
     connect( mView, SIGNAL(offsetColumnVisibleChanged(bool)), SIGNAL(offsetColumnVisibleChanged(bool)) );
+    connect( mView, SIGNAL(offsetCodingChanged(int)), SIGNAL(offsetCodingChanged(int)) );
     connect( mView, SIGNAL(visibleByteArrayCodingsChanged(int)), SIGNAL(visibleByteArrayCodingsChanged(int)) );
     connect( mView, SIGNAL(layoutStyleChanged(int)), SIGNAL(layoutStyleChanged(int)) );
     connect( mView, SIGNAL(noOfBytesPerLineChanged(int)), SIGNAL(noOfBytesPerLineChanged(int)) );
@@ -258,6 +260,11 @@ bool ByteArrayJanusView::offsetColumnVisible() const
     return mView->offsetColumnVisible();
 }
 
+int ByteArrayJanusView::offsetCoding() const
+{
+    return mView->offsetCoding();
+}
+
 int ByteArrayJanusView::layoutStyle() const
 {
     return (int)mView->layoutStyle();
@@ -296,6 +303,11 @@ void ByteArrayJanusView::setUndefinedChar( QChar undefinedChar )
 void ByteArrayJanusView::toggleOffsetColumn( bool on )
 {
     mView->toggleOffsetColumn( on );
+}
+
+void ByteArrayJanusView::setOffsetCoding( int offsetCoding )
+{
+    mView->setOffsetCoding( (AbstractByteArrayView::OffsetCoding)offsetCoding );
 }
 
 void ByteArrayJanusView::setLayoutStyle( int layoutStyle )

@@ -45,9 +45,10 @@ OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnStylist* stylist,
    mLayout( layout ),
    mOffsetTextWidth( 0 ),
    mDigitBaseLine( 0 ),
-   mFormat( OffsetFormat::None )
+   mFormat( format ),
+   PrintFunction( OffsetFormat::printFunction(format) )
 {
-    setFormat( format );
+    recalcX();
 }
 
 void OffsetColumnRenderer::renderLine( QPainter* painter, Line lineIndex )
@@ -93,7 +94,7 @@ void OffsetColumnRenderer::renderEmptyColumn( QPainter* painter, const PixelXRan
     renderColumnBackground( painter, Xs, Ys );
 }
 
-void OffsetColumnRenderer::setFormat( OffsetFormat::Format format )
+void OffsetColumnRenderer::setFormat( OffsetFormat::Format format, const QFontMetrics& fontMetrics )
 {
     // no changes?
     if( mFormat == format )
@@ -103,8 +104,7 @@ void OffsetColumnRenderer::setFormat( OffsetFormat::Format format )
 
     PrintFunction = OffsetFormat::printFunction( mFormat );
 
-    // TODO: without QFontMetrics this will fail. do we need to keep one around?
-    recalcX();
+    setFontMetrics( fontMetrics );
 }
 
 void OffsetColumnRenderer::setFontMetrics( const QFontMetrics& fontMetrics )
