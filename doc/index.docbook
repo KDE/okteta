@@ -1429,7 +1429,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <varlistentry>
     <term><menuchoice>
     <guimenu>Settings</guimenu>
-    <guimenuitem>Mangage View Profiles...</guimenuitem>
+    <guimenuitem>Manage View Profiles...</guimenuitem>
     </menuchoice></term>
     <listitem><para>Open a dialog to create, edit, delete and set a default view profile.</para></listitem>
     </varlistentry>
