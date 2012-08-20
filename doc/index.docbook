@@ -266,7 +266,9 @@ just used for development, so no need to document it. -->
   </varlistentry>
 </variablelist>
 </sect2>
-<!--FIXME Terminal missing-->
+<!--FIXME Terminal + Charset Conversion missing
+http://frinring.wordpress.com/2011/07/31/all-new-okteta-features-for-kde-apps-4-7-in-a-picture/
+-->
 </sect1>
 
 
@@ -1456,7 +1458,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <shortcut>
     <keycombo action="simul">&Ctrl;&Shift;<keycap>F</keycap></keycombo>
     </shortcut>
-    <guimenu>View</guimenu>
+    <guimenu>Settings</guimenu>
     <guimenuitem>Full Screen Mode</guimenuitem>
     </menuchoice></term>
     <listitem><para><action>Toggle full screen mode on and off.</action></para></listitem>
