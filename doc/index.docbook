@@ -38,11 +38,11 @@
 <year>2008, 2010, 2011</year>
 <holder>&Friedrich.Kossebau; and &Alex.Richardson;</holder>
 </copyright>
-
+<!--FIXME http://frinring.files.wordpress.com/2012/08/okteta-0-9-new-features.png-->
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2011-10-13</date>
-<releaseinfo>0.8.0 (&kde; 4.8)</releaseinfo>
+<date>2012-08-20</date>
+<releaseinfo>0.9.70 (&kde; 4.9)</releaseinfo>
 
 <abstract>
   <para>&okteta; is a simple editor for the raw data of files. This type of program
@@ -174,6 +174,7 @@ just used for development, so no need to document it. -->
   <title>Analyzers and Manipulators</title>
 <variablelist>
   <varlistentry>
+    <!--FIXME not in 4.9?-->
     <term>Byte Table</term>
     <listitem><para>The table lists all possible byte values, both as character and
     numerical value.</para>
@@ -265,7 +266,7 @@ just used for development, so no need to document it. -->
   </varlistentry>
 </variablelist>
 </sect2>
-
+<!--FIXME Terminal missing-->
 </sect1>
 
 
@@ -692,15 +693,17 @@ just used for development, so no need to document it. -->
       <sect3>
         <title>Further information</title>
         <para>
-          A few example structure definitions can be found <ulink url="http://websvn.kde.org/branches/KDE/4.5/kdeutils/okteta/kasten/controllers/view/structures/examples/">here.</ulink>
+          A few example structure definitions can be found <ulink url="http://websvn.kde.org/branches/KDE/4.9/kdesdk/okteta/kasten/controllers/view/structures/examples/">here.</ulink>
           This includes for example the file header for PNG files and the ELF file header.
-          An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="http://websvn.kde.org/branches/KDE/4.5/kdeutils/okteta/kasten/controllers/view/structures/schema/">here.</ulink>
+          An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="http://websvn.kde.org/branches/KDE/4.9/kdesdk/okteta/kasten/controllers/view/structures/schema/">here.</ulink>
           If more information is needed feel free to contact me at &Alex.Richardson.email;
         </para>
       </sect3>
     </sect2>
 </sect1>
-
+<!--FIXME missing 
+Extended structures definitions 
+  Structures Script Console-->
 </chapter>
 
 <chapter id="menu-commands">
@@ -804,6 +807,7 @@ just used for development, so no need to document it. -->
     <listitem><para><guimenuitem>View in Plain Text</guimenuitem>: ... as in the data view with offset, byte values and characters. </para></listitem>
     </itemizedlist>
     </listitem>
+    <!--FIXME missing: Characters, Base32, Ascii85, Uuencoding, Xxencoding, Intel Hex, S-Record-->
     </varlistentry>
 
     <varlistentry>
@@ -928,6 +932,7 @@ just used for development, so no need to document it. -->
 
 <sect1 id="edit-menu">
 <title>Edit Menu</title>
+<!--FIXME in 4.9 still true? change 4.4 to 4.9-->
 <para>Currently in &kde; 4.4 simple copy and cut send data to the clipboard with the
 mimetype "application/octetstream", &klipper; is not able to display this data.
 And almost all other applications cannot handle this, too, as this is
@@ -1009,6 +1014,8 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <listitem><para><guimenuitem>View in Plain Text</guimenuitem>: ... as in the data view with offset, byte values and characters. </para></listitem>
     </itemizedlist>
     </listitem>
+    <!--FIXME missing: Characters, Base32, Ascii85, Uuencoding, Xxencoding, Intel Hex, S-Record, see also File export-->
+
     </varlistentry>
 
     <varlistentry>
@@ -1028,6 +1035,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <!--para>If <guilabel>Repeat pattern</guilabel> is checked, the specified pattern
     will be inserted repeatedly to reach the length set in
     <guilabel>Size</guilabel>.</para--></listitem>
+    <!--FIXME Random Data + Sequence - use cases?-->
     </varlistentry>
     </variablelist>
     </listitem>
@@ -1244,7 +1252,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </para>
     </listitem>
     </varlistentry>
-
+    <!--FIXME missing Set Bytes per Line, Set Bytes per Group-->
     <varlistentry>
     <term><menuchoice>
     <guimenu>View</guimenu>
@@ -1319,13 +1327,13 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 
     <varlistentry>
     <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>F11</keycap></keycombo>
-    </shortcut>
     <guimenu>View</guimenu>
-    <guimenuitem>Full Screen Mode</guimenuitem>
+    <guimenuitem>View Profile</guimenuitem>
     </menuchoice></term>
-    <listitem><para><action>Toggle full screen mode on and off.</action></para></listitem>
+    <listitem><para>View settings can be separately stored as view profiles.
+    The currently selected profile can be updated directly from the current view
+    settings, or a new one can be created from them. All view profiles can be
+    managed in a dialog available from <menuchoice><guimenu>Settings</guimenu><guimenuitem>Manage View Profiles...</guimenuitem></menuchoice>.</para></listitem>
     </varlistentry>
 
 </variablelist>
@@ -1421,6 +1429,14 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <varlistentry>
     <term><menuchoice>
     <guimenu>Settings</guimenu>
+    <guimenuitem>Mangage View Profiles...</guimenuitem>
+    </menuchoice></term>
+    <listitem><para>Open a dialog to create, edit, delete and set a default view profile.</para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>Settings</guimenu>
     <guimenuitem>Show Toolbar</guimenuitem>
     </menuchoice></term>
     <listitem><para><action>Toggle display of the toolbar below the
@@ -1433,6 +1449,17 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <guimenuitem>Show Statusbar</guimenuitem>
     </menuchoice></term>
     <listitem><para><action>Toggle display of the status bar.</action></para></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <shortcut>
+    <keycombo action="simul">&Ctrl;&Shift;<keycap>F</keycap></keycombo>
+    </shortcut>
+    <guimenu>View</guimenu>
+    <guimenuitem>Full Screen Mode</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Toggle full screen mode on and off.</action></para></listitem>
     </varlistentry>
 
     <varlistentry>
@@ -1473,8 +1500,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <listitem><para><guiicon>New</guiicon></para></listitem>
     <listitem><para><guiicon>Open</guiicon></para></listitem>
     <listitem><para><guiicon>Save</guiicon></para></listitem>
-    <listitem><para><guiicon>Revert</guiicon></para></listitem>
-    <listitem><para><guiicon>Print</guiicon></para></listitem>
+    <listitem><para><guiicon>Save As</guiicon></para></listitem>
     <listitem><para><guiicon>Undo</guiicon></para></listitem>
     <listitem><para><guiicon>Redo</guiicon></para></listitem>
     <listitem><para><guiicon>Cut</guiicon></para></listitem>
@@ -1496,7 +1522,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </para>
 
     <!--List all the copyright holders here-->
-    <para>Program Copyright 2006-2010 &Friedrich.Kossebau;
+    <para>Program Copyright 2006-2012 &Friedrich.Kossebau;
     &Friedrich.Kossebau.email;</para>
 
     <para>Documentation Copyright 2008,2010 &Friedrich.Kossebau;
