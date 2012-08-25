@@ -3,9 +3,10 @@ project( oktetakasten )
 add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1806 )
 
 set( KASTEN_ABI_VERSION 2 )
-set( KASTENCORE_LIBS  kasten${KASTEN_ABI_VERSION}core )
-set( KASTENGUI_LIBS  kasten${KASTEN_ABI_VERSION}gui )
-set( KASTENCONTROLLERS_LIBS  kasten${KASTEN_ABI_VERSION}controllers )
+# use the real lib names here once the base Kasten libs are moved into an own project
+set( KASTENCORE_LIBS         kastencore )
+set( KASTENGUI_LIBS          kastengui )
+set( KASTENCONTROLLERS_LIBS  kastencontrollers )
 
 
 set( OKTETAKASTEN_MAJOR_VERSION 0 )
