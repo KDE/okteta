@@ -54,6 +54,8 @@ void ScriptHandler::validateData(DataInformation* data)
 {
     Q_CHECK_PTR(data);
 
+    if (data->hasBeenValidated())
+        return;
     data->setHasBeenValidated(false); //not yet validated
 
     if (data->hasChildren())
@@ -67,7 +69,7 @@ void ScriptHandler::validateData(DataInformation* data)
 
     //check if has a validation function:
     QScriptValue validationFunc = data->validationFunc();
-    if (validationFunc.isValid())
+    if (!validationFunc.isValid())
     {
         //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
@@ -81,7 +83,9 @@ void ScriptHandler::validateData(DataInformation* data)
                 &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
+        mHandlerInfo.setMode(ScriptHandlerInfo::Validating);
         QScriptValue result = validationFunc.call(thisObject, args);
+        mHandlerInfo.setMode(ScriptHandlerInfo::None);
         if (result.isError())
         {
             mTopLevel->logger()->error(data) << "Error occurred while validating element: " << result.toString();
@@ -98,6 +102,13 @@ void ScriptHandler::validateData(DataInformation* data)
         if (result.isBool() || result.isBoolean())
         {
             data->setValidationSuccessful(result.toBool());
+        }
+        if (result.isString())
+        {
+            //error string
+            QString str = result.toString();
+            if  (!str.isEmpty())
+                data->setValidationError(str);
         }
     }
 }
@@ -123,7 +134,10 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
                 &mHandlerInfo);
         QScriptValueList args;
         args << mainStruct;
+        //ensure we get the right properties
+        mHandlerInfo.setMode(ScriptHandlerInfo::Updating);
         QScriptValue result = updateFunc.call(thisObject, args);
+        mHandlerInfo.setMode(ScriptHandlerInfo::None);
         if (result.isError())
         {
             mTopLevel->logger()->error(data) << "Error occurred while updating element: " << result.toString();

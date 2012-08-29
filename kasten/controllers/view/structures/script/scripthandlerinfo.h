@@ -23,7 +23,7 @@
 #ifndef SCRIPTHANDLERINFO_H
 #define SCRIPTHANDLERINFO_H
 
-#include <QtCore/QtGlobal>
+#include <QtGlobal>
 #include <QScopedPointer>
 
 class EnumScriptClass;
@@ -38,12 +38,23 @@ class ScriptHandlerInfo {
 public:
     explicit ScriptHandlerInfo(QScriptEngine* engine);
     ~ScriptHandlerInfo();
+
+    /** The type of function that is being evaluated (most writing is only allowed when updating) */
+    enum Mode {
+        None = 0, Validating = 1, Updating = 2, DeterminingLength = 4
+    };
+
     QScopedPointer<ArrayScriptClass> mArrayClass;
     QScopedPointer<PrimitiveScriptClass> mPrimitiveClass;
     QScopedPointer<EnumScriptClass> mEnumClass;
     QScopedPointer<StructUnionScriptClass> mStructUnionClass;
     QScopedPointer<StringScriptClass> mStringClass;
     QScopedPointer<BitfieldScriptClass> mBitfieldClass;
+    /** @return The mode this handler is currently in (determines which properties are accessible */
+    inline Mode mode() const { return mMode; }
+    inline void setMode(Mode m) { mMode = m; }
+private:
+    Mode mMode;
 private:
     Q_DISABLE_COPY(ScriptHandlerInfo)
 };

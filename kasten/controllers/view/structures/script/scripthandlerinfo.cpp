@@ -34,7 +34,8 @@ ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine)
       mEnumClass(new EnumScriptClass(engine, this)),
       mStructUnionClass(new StructUnionScriptClass(engine, this)),
       mStringClass(new StringScriptClass(engine, this)),
-      mBitfieldClass(new BitfieldScriptClass(engine, this))
+      mBitfieldClass(new BitfieldScriptClass(engine, this)),
+      mMode(None)
 {
 }
 
