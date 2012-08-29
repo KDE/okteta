@@ -32,7 +32,6 @@
 #include "../datatypes/strings/stringdata.h"
 #include "../datatypes/strings/stringdatainformation.h"
 #include "../datatypes/datainformationfactory.h"
-#include "../datatypes/primitivefactory.h"
 #include "../datatypes/additionaldata.h"
 
 #include "scriptlogger.h"
@@ -182,21 +181,9 @@ AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const Par
 
 PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInfo& info)
 {
-    QString typeString =
-            value.isString() ? value.toString() : value.property(QLatin1String("type")).toString();
-    if (typeString.isEmpty())
-    {
-        info.error() << "Object is neither string nor object with type property"
-                ", cannot convert it to primitive";
-        return 0;
-    }
-    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
-    if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
-    {
-        info.error() << "unrecognised primitive type: " << typeString;
-        return 0;
-    }
-    return PrimitiveFactory::newInstance(info.name, primitiveType);
+    PrimitiveParsedData ppd(info);
+    ppd.type = value.isString() ? value.toString() : value.property(QLatin1String("type")).toString();
+    return DataInformationFactory::newPrimitive(ppd);
 }
 
 StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info)
@@ -229,33 +216,16 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
 {
     //TODO also allow bitfields
-    QString typeString = value.property(QLatin1String("enumType")).toString();
-    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(typeString);
-    if (primitiveType == Type_Invalid)
-    {
-        info.error() << "unrecognised primitive type: " << typeString;
-        return 0;
-    }
-    QScriptValue enumValuesObj = value.property(QLatin1String("enumValues"));
-    if (!enumValuesObj.isValid() || !enumValuesObj.isObject())
-    {
-        info.error() << "Could not parse enumerators since variable with key-value"
-                "structure was expected";
-        return 0;
-    }
-    QMap<AllPrimitiveTypes, QString> enumValues =
-            AbstractEnumDataInformation::parseEnumValues(enumValuesObj, info.logger, primitiveType);
-
-    QString enumName = value.property(QLatin1String("enumName")).toString();
-    EnumDefinition::Ptr def(new EnumDefinition(enumValues, enumName, primitiveType));
-    PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(info.name, primitiveType);
-    if (!primData)
-        return NULL;
+    EnumParsedData epd(info);
+    epd.type = value.property(QLatin1String("enumType")).toString();
+    epd.enumName = value.property(QLatin1String("enumName")).toString();
+    epd.enumValuesObject = value.property(QLatin1String("enumValues"));
 
     if (flags)
-        return new FlagDataInformation(info.name, primData, def);
+        return DataInformationFactory::newFlags(epd);
     else
-        return new EnumDataInformation(info.name, primData, def);
+        return DataInformationFactory::newEnum(epd);
+
 }
 
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info)

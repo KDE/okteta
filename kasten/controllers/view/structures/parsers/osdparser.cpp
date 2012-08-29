@@ -29,20 +29,20 @@
 #include "../datatypes/primitive/flagdatainformation.h"
 #include "../datatypes/strings/stringdatainformation.h"
 #include "../datatypes/strings/stringdata.h"
-#include "../datatypes/topleveldatainformation.h"
 #include "../datatypes/primitivefactory.h"
+#include "../datatypes/topleveldatainformation.h"
 #include "../datatypes/dummydatainformation.h"
 #include "../datatypes/datainformationfactory.h"
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
 #include "../script/scriptengineinitializer.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
+#include <QFile>
+#include <QFileInfo>
 
-#include <QtXml/QDomDocument>
-#include <QtXml/QDomNode>
-#include <QtXml/QDomNodeList>
+#include <QDomDocument>
+#include <QDomNode>
+#include <QDomNodeList>
 #include <QScriptEngine>
 
 #include <KDebug> //FIXME remove this!!
@@ -244,7 +244,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
             QString name = child.attribute(QLatin1String("name"), i18n("<no name specified>"));
             QString value = child.attribute(QLatin1String("value"), QString());
             QPair<AllPrimitiveTypes, QString> converted =
-                    AbstractEnumDataInformation::convertToEnumEntry(name, value, logger, type);
+                    AbstractEnumDataInformation::convertToEnumEntry(name, value, logger, type, QString());
             if (converted == QPair<AllPrimitiveTypes, QString>())
                 continue;
             defs.insert(converted.first, converted.second);
@@ -258,8 +258,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
         }
         else
         {
-            EnumDefinition::Ptr enumDef = EnumDefinition::Ptr(
-                    new EnumDefinition(defs, enumName, type));
+            EnumDefinition::Ptr enumDef = EnumDefinition::Ptr(new EnumDefinition(defs, enumName, type));
             ret.append(enumDef);
         }
     }
@@ -371,14 +370,9 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, OsdPar
 PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem,
         const OsdParserInfo& info) const
 {
-    QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
-    QString typeStr = xmlElem.attribute(QLatin1String("type"), QString());
-    if (typeStr.isEmpty())
-    {
-        info.logger->error() << "No type attribute specified in element:" << toRawXML(xmlElem);
-        return 0;
-    }
-    return PrimitiveFactory::newInstance(name, typeStr, info.logger);
+    PrimitiveParsedData ppd(info);
+    ppd.type = xmlElem.attribute(QLatin1String("type"));
+    return DataInformationFactory::newPrimitive(ppd);
 }
 
 AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& xmlElem,
@@ -420,39 +414,20 @@ template StructureDataInformation* OsdParser::structOrUnionFromXML(const QDomEle
 AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
         const OsdParserInfo& info) const
 {
-    const QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
-    const QString typeStr = xmlElem.attribute(QLatin1String("type"));
-    if (typeStr.isEmpty())
+    EnumParsedData epd(info);
+    epd.type = xmlElem.attribute(QLatin1String("type"));
+    epd.enumName = xmlElem.attribute(QLatin1String("enum"));
+    epd.enumDef = findEnum(epd.enumName, info);
+    if (!epd.enumDef)
     {
-        info.logger->error() << "No type attribute specified!\nIn element: " << toRawXML(xmlElem);
-        return 0;
-    }
-    const QString enumName = xmlElem.attribute(QLatin1String("enum"));
-    if (enumName.isEmpty())
-    {
-        info.logger->error() << "No enum attribute specified!\nIn element: " << toRawXML(xmlElem);
-        return 0;
-    }
-    EnumDefinition::Ptr def = findEnum(enumName, info);
-    if (!def)
-    {
-        info.logger->error()
-        << QString(QLatin1String("Enum definition '%1' does not exist!\nIn element %2"))
-                .arg(enumName, toRawXML(xmlElem));
-        return 0;
-    }
-    PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(name, typeStr,
-            info.logger);
-    if (!prim)
-    {
-        kWarning() << "primitive type is null!!";
+        info.error().nospace() << "Enum definition '" << epd.enumName << "' does not exist!";
         return 0;
     }
 
     if (isFlags)
-        return new FlagDataInformation(name, prim, def, info.parent);
+        return DataInformationFactory::newFlags(epd);
     else
-        return new EnumDataInformation(name, prim, def, info.parent);
+        return DataInformationFactory::newEnum(epd);
 }
 
 StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,

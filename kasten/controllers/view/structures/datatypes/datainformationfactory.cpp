@@ -24,6 +24,7 @@
 #include "primitive/bitfield/boolbitfielddatainformation.h"
 #include "primitive/bitfield/unsignedbitfielddatainformation.h"
 #include "primitive/bitfield/signedbitfielddatainformation.h"
+#include "primitivefactory.h"
 
 #include "../script/scriptlogger.h"
 
@@ -36,7 +37,7 @@ AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const Bitfi
     }
     if (!pd.widthConversionOkay)
     {
-       pd.error() << "It seems that the width is incorrect since '"
+        pd.error() << "It seems that the width is incorrect since '"
                 << pd.widthStr << "' could not be converted to an integer.";
         return 0;
     }
@@ -64,4 +65,76 @@ AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const Bitfi
         return 0;
     }
     return bitf;
+}
+
+PrimitiveDataInformation* DataInformationFactory::newPrimitive(const PrimitiveParsedData& pd)
+{
+    if (pd.type.isEmpty())
+    {
+        pd.error() << "Type of primitive not specified, cannot create it!";
+        return 0;
+    }
+    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type);
+    if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
+    {
+        pd.error() << "Unrecognized primitive type: " << pd.type;
+        return 0;
+    }
+    return PrimitiveFactory::newInstance(pd.name, primitiveType, pd.logger, pd.parent);
+}
+
+namespace
+{
+template<class T>
+T* newEnumOrFlags(const EnumParsedData& pd)
+{
+    const PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type);
+    if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
+    {
+        pd.error() << "Unrecognized enum type: " << pd.type;
+        return 0;
+    }
+    if (primitiveType == Type_Float || primitiveType == Type_Double)
+    {
+        pd.error() << "Floating-point enums are not allowed since they make little sense.";
+        return 0;
+    }
+    EnumDefinition::Ptr definition = pd.enumDef;
+    if (!pd.enumDef)
+    {
+        QMap<AllPrimitiveTypes, QString> enumValues =
+                AbstractEnumDataInformation::parseEnumValues(pd.enumValuesObject, pd.logger, primitiveType,
+                        pd.context());
+        if (enumValues.isEmpty())
+        {
+            pd.error() << "No enum values specified!";
+            return 0;
+        }
+        definition = EnumDefinition::Ptr(new EnumDefinition(enumValues, pd.enumName, primitiveType));
+    }
+    if (pd.enumDef->type() != primitiveType)
+    {
+        pd.error().nospace() << "Enum type (" << pd.enumDef->type() << ") and value type (" << primitiveType
+                << ") do not match!";
+        return 0;
+    }
+    PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(pd.name, primitiveType, pd.logger);
+    //TODO allow bitfields?
+    if (!primData)
+    {
+        pd.error() << "Could not create a value object for this enum!";
+        return 0;
+    }
+    return new T(pd.name, primData, definition, pd.parent);
+}
+}
+
+EnumDataInformation* DataInformationFactory::newEnum(const EnumParsedData& pd)
+{
+    return newEnumOrFlags<EnumDataInformation>(pd);
+}
+
+FlagDataInformation* DataInformationFactory::newFlags(const EnumParsedData& pd)
+{
+    return newEnumOrFlags<FlagDataInformation>(pd);
 }

@@ -28,17 +28,24 @@
 class PrimitiveDataInformation;
 class ScriptLogger;
 class QString;
+class DataInformation;
 
 namespace PrimitiveFactory
 {
-PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
-        ScriptLogger* logger = 0);
-PrimitiveDataInformation* newInstance(const QString& name, const QString& typeString,
-        ScriptLogger* parent = 0);
+
 /** Converts @p typeStr to a PrimitiveDataType case-insensitively
  * @return The corresponding type or PrimitiveDataTypeEnum::Type_Invalid if string is not regcognized
  */
 PrimitiveDataType typeStringToType(const QString& typeStr);
+
+PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
+        ScriptLogger* logger = 0, DataInformation* parent = 0);
+
+inline PrimitiveDataInformation* newInstance(const QString& name, const QString& typeString,
+        ScriptLogger* logger = 0, DataInformation* parent = 0)
+{
+    return newInstance(name, typeStringToType(typeString), logger, parent);
+}
 
 }
 

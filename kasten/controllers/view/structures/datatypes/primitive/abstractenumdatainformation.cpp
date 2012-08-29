@@ -21,13 +21,15 @@
  */
 #include "abstractenumdatainformation.h"
 
-#include <QtScript/QScriptValueIterator>
+#include <QScriptValueIterator>
 
 #include <limits>
 
 #include "../../script/classes/enumscriptclass.h"
 #include "../../script/scripthandlerinfo.h"
 #include "../../script/scriptlogger.h"
+#include "../primitivefactory.h"
+
 
 AbstractEnumDataInformation::AbstractEnumDataInformation(const QString& name, EnumDefinition::Ptr enumDef,
         DataInformation* parent)
@@ -44,8 +46,8 @@ AbstractEnumDataInformation::~AbstractEnumDataInformation()
 {
 }
 
-QMap<AllPrimitiveTypes, QString> AbstractEnumDataInformation::parseEnumValues(
-        const QScriptValue& val, ScriptLogger* logger, PrimitiveDataType type)
+QMap<AllPrimitiveTypes, QString> AbstractEnumDataInformation::parseEnumValues(const QScriptValue& val,
+        ScriptLogger* logger, PrimitiveDataType type, const QString& context)
 {
     QMap<AllPrimitiveTypes, QString> enumValues;
 
@@ -58,12 +60,12 @@ QMap<AllPrimitiveTypes, QString> AbstractEnumDataInformation::parseEnumValues(
         if (val.isNumber())
         {
             double num = val.toNumber();
-            conv = convertToEnumEntry(it.name(), num, logger, type);
+            conv = convertToEnumEntry(it.name(), num, logger, type, context);
         }
         else
         {
             QString numStr = val.toString();
-            conv = convertToEnumEntry(it.name(), numStr, logger, type);
+            conv = convertToEnumEntry(it.name(), numStr, logger, type, context);
         }
         if (conv == QPair<AllPrimitiveTypes, QString>())
             continue;
@@ -78,7 +80,7 @@ void AbstractEnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString>
 }
 
 QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntry(
-        const QString& name, const QVariant& value, ScriptLogger* logger, PrimitiveDataType type)
+        const QString& name, const QVariant& value, ScriptLogger* logger, PrimitiveDataType type, const QString& context)
 {
     Q_ASSERT(!name.isEmpty());
     //name must not be empty, else default constructed return would be valid!
@@ -132,7 +134,7 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
         minValue = std::numeric_limits<qint64>::min();
         break;
     default:
-        logger->warn() << type << "is an invalid type for an enumeration, no values were parsed";
+        logger->warn(context) << type << "is an invalid type for an enumeration, no values were parsed";
         return QPair<AllPrimitiveTypes, QString>();
     }
 
@@ -149,7 +151,7 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
         }
         else
         {
-            logger->warn() << "The value" << num << "in enum" << name
+            logger->warn(context) << "The value" << num << "in enum" << name
                     << " is larger than the biggest double value that can represent"
                             " any smaller integer exactly, skipping it.\n"
                             "Write the value as a string so it can be converted"
@@ -176,7 +178,7 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
         {
             QString errMessage = QString(QLatin1String("Could not convert '%1' to an enum "
                     "constant, name was: %2")).arg(valueString, name);
-            logger->warn() << errMessage;
+            logger->warn(context) << errMessage;
             return QPair<AllPrimitiveTypes, QString>();
         }
     }
@@ -187,7 +189,7 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
                 "possible for type %3 (%4)");
         errMessage = errMessage.arg(name, QString::number(asUnsigned),
                 PrimitiveType::standardTypeName(type), QString::number(maxValue));
-        logger->warn() << errMessage;
+        logger->warn(context) << errMessage;
         return QPair<AllPrimitiveTypes, QString>();
     }
     qint64 asSigned = intValue.longValue;
@@ -197,7 +199,7 @@ QPair<AllPrimitiveTypes, QString> AbstractEnumDataInformation::convertToEnumEntr
                 "possible for type %3 (%4)");
         errMessage = errMessage.arg(name, QString::number(asSigned),
                 PrimitiveType::standardTypeName(type), QString::number(minValue));
-        logger->warn() << errMessage;
+        logger->warn(context) << errMessage;
         return QPair<AllPrimitiveTypes, QString>();
     }
     return QPair<AllPrimitiveTypes, QString>(intValue, name);

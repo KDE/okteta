@@ -23,7 +23,14 @@
 #ifndef DATAINFORMATIONFACTORY_H_
 #define DATAINFORMATIONFACTORY_H_
 
+#include <QScriptValue>
+
 #include "primitive/bitfield/abstractbitfielddatainformation.h"
+#include "primitive/primitivedatainformation.h"
+#include "primitive/enumdefinition.h"
+#include "primitive/flagdatainformation.h"
+#include "primitive/enumdatainformation.h"
+
 #include "../script/scriptlogger.h"
 #include "../parsers/abstractstructureparser.h"
 
@@ -38,9 +45,28 @@ struct BitfieldParsedData : public ParserInfo {
     int width;
 };
 
+struct PrimitiveParsedData : public ParserInfo {
+    inline explicit PrimitiveParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    explicit PrimitiveParsedData(const PrimitiveParsedData& bpd);
+    QString type;
+};
+
+struct EnumParsedData : public ParserInfo {
+    inline explicit EnumParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    explicit EnumParsedData(const PrimitiveParsedData& bpd);
+    QString type;
+    QString enumName;
+    EnumDefinition::Ptr enumDef;
+    /** only used if enumDef is null, to allow sharing (only possible in OSD) */
+    QScriptValue enumValuesObject;
+};
+
 namespace DataInformationFactory
 {
 AbstractBitfieldDataInformation* newBitfield(const BitfieldParsedData& pd);
+PrimitiveDataInformation* newPrimitive(const PrimitiveParsedData& pd);
+EnumDataInformation* newEnum(const EnumParsedData& pd);
+FlagDataInformation* newFlags(const EnumParsedData& pd);
 }
 
 #endif /* DATAINFORMATIONFACTORY_H_ */
