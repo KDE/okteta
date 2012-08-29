@@ -89,3 +89,13 @@ UnionDataInformation::UnionDataInformation(const UnionDataInformation& d)
         : DataInformationWithChildren(d)
 {
 }
+
+BitCount64 UnionDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
+{
+    //all elements start at same position
+    if (mParent->isTopLevel())
+        return start * 8;
+    else
+        return mParent->asDataInformation()->childPosition(this, start);
+}
+

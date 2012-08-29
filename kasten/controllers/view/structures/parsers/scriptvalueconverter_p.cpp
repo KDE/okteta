@@ -167,7 +167,7 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 
     QScriptValue childType = value.property(PROPERTY_TYPE);
     ParserInfo childInfo(info);
-    childInfo.name = info.context() + QLatin1String(".<inner>");
+    childInfo.contextString = info.context() + QLatin1String(" (array type)");
     childInfo.parent = 0;
     apd.arrayType = toDataInformation(childType, childInfo);
 
@@ -177,7 +177,7 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info)
 {
     BitfieldParsedData bpd(info);
-    bpd.type = value.property(PROPERTY_TYPE).toString(); //TODO type
+    bpd.type = value.property(PROPERTY_TYPE).toString();
     bpd.width = ParserUtils::intFromScriptValue(value.property(PROPERTY_WIDTH));
     return DataInformationFactory::newBitfield(bpd);
 }
@@ -189,30 +189,30 @@ PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInf
     return DataInformationFactory::newPrimitive(ppd);
 }
 
-StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info)
+
+namespace {
+template<class T>
+T* toStructOrUnion(const QScriptValue& value, const ParserInfo& info)
 {
-    //TODO fix this code so parent is correct!
+    T* structOrUnion = new T(info.name, QVector<DataInformation*>(), info.parent);
     QScriptValue valueChildren = value.property(PROPERTY_CHILDREN);
-    QVector<DataInformation*> fields = convertValues(valueChildren, info.logger);
+    QVector<DataInformation*> fields = convertValues(valueChildren, info.logger, structOrUnion);
 
     if (fields.isEmpty())
-        info.info() << "No children were found for struct, this is could be a mistake.";
+        info.info() << "No children were found, this is probably a mistake.";
+    structOrUnion->appendChildren(fields, false);
+    return structOrUnion;
+}
+}
 
-    StructureDataInformation* structData = new StructureDataInformation(info.name, fields);
-    return structData;
+StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info)
+{
+    return toStructOrUnion<StructureDataInformation>(value, info);
 }
 
 UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 {
-    //TODO fix this code so parent is correct!
-    QScriptValue valueChildren = value.property(PROPERTY_CHILDREN);
-    QVector<DataInformation*> fields = convertValues(valueChildren, info.logger);
-
-    if (fields.isEmpty())
-        info.info() << "No children were found for union, this is could be a mistake.";
-
-    UnionDataInformation* unionData = new UnionDataInformation(info.name, fields);
-    return unionData;
+    return toStructOrUnion<UnionDataInformation>(value, info);
 }
 
 PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info)

@@ -32,7 +32,7 @@
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
         DataInformation* parent, const QScriptValue& lengthFunction)
-        : DataInformation(name, parent), mLengthFunction(lengthFunction)
+        : DataInformationWithDummyChildren(name, parent), mLengthFunction(lengthFunction)
 {
     Q_ASSERT(!lengthFunction.isValid() || lengthFunction.isFunction());
     if (length > MAX_LEN)
@@ -47,7 +47,7 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
-        : DataInformation(d), mData(0)
+        : DataInformationWithDummyChildren(d), mData(0)
 {
     if (d.mData)
     {
@@ -188,18 +188,21 @@ QVariant ArrayDataInformation::dataFromWidget(const QWidget*) const
 }
 
 void ArrayDataInformation::setWidgetData(QWidget*) const
-        {
+{
     Q_ASSERT_X(false, "ArrayDataInformation::setWidgetData", "this should never happen!");
 }
 
-BitCount32 ArrayDataInformation::offset(unsigned int index) const
-        {
+BitCount64 ArrayDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
+{
     if (Q_UNLIKELY(!mData))
     {
         kWarning() << "mData == null";
         return 0;
     }
-    return mData->offset(index);
+    if (mParent->isTopLevel())
+        return start * 8 + mData->offset(child);
+    else
+        return mParent->asDataInformation()->childPosition(this, start) + mData->offset(child);
 }
 
 qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -225,15 +228,18 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
         //TODO utility function for calling script value
         TopLevelDataInformation* top = topLevelDataInformation();
         Q_CHECK_PTR(top);
-        QScriptValue thisObject = this->toScriptValue(top->scriptEngine(), top->scriptHandler()->handlerInfo());
-        QScriptValue mainStruct = mainStructure()->toScriptValue(top->scriptEngine(), top->scriptHandler()->handlerInfo());
+        ScriptHandlerInfo* handlerInfo = top->scriptHandler()->handlerInfo();
+        QScriptValue thisObject = this->toScriptValue(top->scriptEngine(), handlerInfo);
+        QScriptValue mainStruct = mainStructure()->toScriptValue(top->scriptEngine(), handlerInfo);
         QScriptValueList args;
         args << mainStruct;
+        handlerInfo->setMode(ScriptHandlerInfo::DeterminingLength);
         QScriptValue result = mLengthFunction.call(thisObject, args);
         if (result.isNumber())
             setArrayLength(result.toInt32());
         else
             logError() << "Length function did not return a number! Result was: " << result.toString();
+        handlerInfo->setMode(ScriptHandlerInfo::None);
     }
 
     //FIXME do not add this padding

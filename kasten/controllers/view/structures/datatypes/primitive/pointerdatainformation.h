@@ -56,7 +56,6 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QString typeName() const;
     virtual QString valueString() const;
-    virtual BitCount32 positionRelativeToRoot(int row = -1) const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     virtual bool canHaveChildren() const;
     virtual uint childCount() const;
@@ -66,6 +65,8 @@ public:
     virtual void setValue(AllPrimitiveTypes newValue);
     virtual QScriptValue valueAsQScriptValue() const;
     virtual bool isPointer() const;
+    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
+    virtual int indexOf(const DataInformation* const data) const;
 
     void delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address);
 

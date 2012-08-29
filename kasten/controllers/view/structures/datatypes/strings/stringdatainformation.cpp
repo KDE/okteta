@@ -41,41 +41,28 @@
 #include <KLocale>
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
-    : DataInformation(name, parent), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
+    : DataInformationWithDummyChildren(name, parent), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
 {
     setEncoding(encoding); //sets mData
 }
 
 StringDataInformation::StringDataInformation(const StringDataInformation& d)
-    : DataInformation(d), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
+    : DataInformationWithDummyChildren(d), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
 {
     setEncoding(d.mEncoding); //sets mData
-    mData->copyTerminationFrom(d.mData);
+    mData->copyTerminationFrom(d.mData.data());
 }
 
 StringDataInformation::~StringDataInformation()
 {
-    delete mData;
-    delete mDummy;
 }
 
 DataInformation* StringDataInformation::childAt(unsigned int index) const
 {
 	Q_ASSERT(index < childCount());
-    return mDummy;
+	mDummy->setDummyIndex(index);
+    return mDummy.data();
 }
-
-BitCount32 StringDataInformation::offset(unsigned int index) const
-{
-    Q_ASSERT(index < (unsigned)mData->count());
-    BitCount32 offs = 0;
-    for (uint i = 0; i < index; ++i)
-    {
-        offs += mData->sizeAt(i);
-    }
-    return offs;
-}
-
 
 bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
         Okteta::Address, BitCount64, quint8)
@@ -232,9 +219,8 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
                 break;
         }
         if (mData)
-            data->copyTerminationFrom(mData);
-        delete mData;
-        mData = data;
+            data->copyTerminationFrom(mData.data());
+        mData.reset(data);
     }
     mEncoding = encoding;
 }
@@ -246,10 +232,57 @@ QScriptValue StringDataInformation::toScriptValue(QScriptEngine* engine, ScriptH
     return ret;
 }
 
+//TODO implement string editing
+
 BitCount32 StringDataInformation::childSize(uint index) const
 {
     return mData->sizeAt(index);
 }
+
+QString StringDataInformation::childTypeName(uint index) const
+{
+    return QString(); //XXX should there be something here?
+}
+
+void StringDataInformation::setChildWidgetData(uint index, QWidget* w) const
+{
+    Q_ASSERT(false);
+    Q_ASSERT(index < mData->count());
+}
+
+QVariant StringDataInformation::dataFromChildWidget(uint index, const QWidget* w) const
+{
+    Q_ASSERT(index < mData->count());
+    Q_ASSERT(false);
+    return QVariant();
+}
+
+QWidget* StringDataInformation::createChildEditWidget(uint index, QWidget* parent) const
+{
+    Q_ASSERT(false);
+    return 0;
+}
+
+QScriptValue StringDataInformation::childToScriptValue(uint index, QScriptEngine*, ScriptHandlerInfo*) const
+{
+    //just return as a string
+    return mData->stringValue(index);
+}
+
+BitCount64 StringDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
+{
+    Q_ASSERT(child->isDummy());
+    Q_ASSERT(child == mDummy.data());
+    uint index = mDummy->dummyIndex();
+    Q_ASSERT(index < mData->count());
+    BitCount32 offs = 0;
+    for (uint i = 0; i < index; ++i)
+    {
+        offs += mData->sizeAt(i);
+    }
+    return offs;
+}
+
 //TODO remove engine parameter
 
 void StringDataInformation::setMaxByteCount(const QScriptValue& value, QScriptEngine* engine)

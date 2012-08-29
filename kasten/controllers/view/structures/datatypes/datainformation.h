@@ -76,25 +76,31 @@ public:
 
     //methods for children:
     /** true for unions and structs and arrays*/
-    virtual bool canHaveChildren() const;
-    virtual unsigned int childCount() const;
-    virtual DataInformation* childAt(unsigned int) const;
+    virtual bool canHaveChildren() const = 0;
+    virtual unsigned int childCount() const = 0;
+    virtual DataInformation* childAt(unsigned int) const = 0;
     /** @brief Looks for a child of this object with given name
      *  @param name The name of the child to find
      *  @return the child with given @p name or @c NULL if none found with that name
      */
     virtual DataInformation* child(const QString& name) const;
-    virtual BitCount32 positionRelativeToRoot(int row = -1) const;
+    /**
+     * @param start the starting address of the whole structure
+     * @return the position in the file where this element is located
+     */
+    virtual BitCount64 positionInFile(Okteta::Address start) const;
+    /**
+     * @param child the direct child we want to find the address for
+     * @param start the start of the root element
+     * @return the address of @p child in the file
+     */
+    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const = 0;
 
     //for the model:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     int row() const;
     /** get the necessary data (for the model) */
     virtual QVariant data(int column, int role) const;
-    /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
-    virtual QVariant childData(int row, int column, int role) const;
-    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
-    virtual BitCount32 childSize(uint index) const = 0;
 
     virtual QString typeName() const = 0;
     /** by default just returns an empty QString */
@@ -112,13 +118,6 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const = 0;
     /** initialize the delegate widget with the correct data */
     virtual void setWidgetData(QWidget* w) const = 0;
-
-    /** create a QWidget for the QItemDelegate */
-    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
-    /** get the needed data from the widget */
-    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
-    /** initialize the delegate widget with the correct data */
-    virtual void setChildWidgetData(uint index, QWidget* w) const;
 
     //reading and writing
     /** the size in bits of this element */
@@ -150,8 +149,6 @@ public:
      *  @return @c true on success, @c false otherwise
      */
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
 
     virtual bool isTopLevel() const;
@@ -195,15 +192,9 @@ public:
 
 protected:
     /**
-     *  the offset of child number @p index compared to the beginning of the structure in bits.
-     *  @param index the index of the child
-     *  @return 0 unless this DataInformation has children
-     */
-    virtual BitCount32 offset(unsigned int index) const = 0;
-    /**
      * Find the index of a DataInformation in this object, needed to calculate the row
      */
-    virtual int indexOf(const DataInformation* const data) const; //TODO make this pure virtual
+    virtual int indexOf(const DataInformation* const data) const = 0;
     bool additionalDataNeeded(AdditionalData* data) const;
     AdditionalData* additionalData() const;
     void setAdditionalData(AdditionalData* data);

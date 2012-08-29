@@ -113,15 +113,18 @@ void ComplexArrayData::setParent(DataInformation* parent)
         mChildren.at(i)->setParent(parent);
 }
 
-BitCount32 ComplexArrayData::offset(unsigned int index) const
+BitCount64 ComplexArrayData::offset(const DataInformation* child) const
 {
-    Q_ASSERT(index < length());
-    BitCount32 offset = 0;
+    BitCount64 offset = 0;
     //sum size of elements up to index
-    for (unsigned int i = 0; i < index; ++i)
+    for (int i = 0; i < mChildren.size(); ++i)
     {
-        offset += mChildren.at(i)->size();
+        DataInformation* current = mChildren.at(i);
+        if (current == child)
+            return offset;
+        offset += current->size();
     }
+    Q_ASSERT(false); //should never be reached
     return offset;
 }
 

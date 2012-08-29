@@ -20,36 +20,90 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef DUMMYDATAINFORMATION_H
 #define DUMMYDATAINFORMATION_H
 
 #include "datainformation.h"
 
+class DataInformationWithDummyChildren;
+
 class DummyDataInformation : public DataInformation
 {
 public:
     DummyDataInformation(DataInformationBase* parent, const QString& name = QString());
+    virtual ~DummyDataInformation() {}
+    DATAINFORMATION_CLONE(Dummy)
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
             BitCount64 bitsRemaining, quint8* bitOffset);
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
     virtual BitCount32 size() const;
-    virtual BitCount32 childSize(uint index) const;
     virtual void setWidgetData(QWidget* w) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
+    virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     virtual QString typeName() const;
-    virtual DummyDataInformation* clone() const;
     virtual bool isDummy() const;
+    virtual QVariant data(int column, int role) const;
+
+
+    virtual bool canHaveChildren() const { return false; }
+    virtual unsigned int childCount() const { return 0; }
+    virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return 0; }
+    virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
+    virtual int indexOf(const DataInformation* const data) const { Q_ASSERT(false); return 0; }
+
+
+    inline void setDummyIndex(uint newIndex) { mIndex = newIndex; }
+    inline uint dummyIndex() const { return mIndex; }
+
 protected:
-    virtual BitCount32 offset(unsigned int index) const;
+    DummyDataInformation(const DummyDataInformation& d) : DataInformation(d), mIndex(d.mIndex) {}
+private:
+    uint mIndex;
+    uint mLockedIndex; //only needed when debugging, not thread safe
+    DataInformationWithDummyChildren* parentHelper() const;
 };
+
+/**
+ * This class declares all methods that are needed if there can be dummy children
+ */
+class DataInformationWithDummyChildren : public DataInformation
+{
+protected:
+    DataInformationWithDummyChildren(const DataInformationWithDummyChildren& d) : DataInformation(d) {}
+public:
+    explicit DataInformationWithDummyChildren(const QString& name, DataInformationBase* parent = 0)
+            : DataInformation(name, parent) {}
+    virtual ~DataInformationWithDummyChildren() {}
+
+    /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
+    virtual QVariant childData(int row, int column, int role) const = 0;
+    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const = 0;
+    virtual BitCount32 childSize(uint index) const = 0;
+    /** create a QWidget for the QItemDelegate */
+    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const = 0;
+    /** get the needed data from the widget */
+    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const = 0;
+    /** initialize the delegate widget with the correct data */
+    virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
+    virtual QString childTypeName(uint index) const = 0;
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
+    virtual QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const = 0;
+    virtual int indexOf(const DataInformation* const data) const;
+};
+
+
+
+inline int DataInformationWithDummyChildren::indexOf(const DataInformation* const data) const
+{
+    Q_ASSERT(data->isDummy());
+    return data->asDummy()->dummyIndex();
+}
 
 inline bool DummyDataInformation::isDummy() const
 {

@@ -26,81 +26,66 @@
 #include <QVariant>
 
 DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QString& name)
-    : DataInformation(name, parent)
+    : DataInformation(name, parent), mIndex(0)
 {
 }
 
-
-//NONE OF THESE SHOULD EVER BE CALLED
-BitCount32 DummyDataInformation::offset(unsigned int) const
+inline DataInformationWithDummyChildren* DummyDataInformation::parentHelper() const
 {
-    Q_ASSERT(false);
-    return 0;
+    DataInformationWithDummyChildren* parent = dynamic_cast<DataInformationWithDummyChildren*>(mParent);
+    Q_CHECK_PTR(parent);
+    return parent;
 }
 
-QScriptValue DummyDataInformation::toScriptValue(QScriptEngine*, ScriptHandlerInfo*)
+QVariant DummyDataInformation::data(int column, int role) const
 {
-    Q_ASSERT(false);
-    return QScriptValue();
+    return parentHelper()->childData(mIndex, column, role);
 }
 
-bool DummyDataInformation::setChildData(uint, const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, BitCount64, quint8)
+Qt::ItemFlags DummyDataInformation::flags(int column, bool fileLoaded) const
 {
-    Q_ASSERT(false);
-    return false;
+    return parentHelper()->childFlags(mIndex, column, fileLoaded);
 }
 
-bool DummyDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, BitCount64, quint8)
+QScriptValue DummyDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* info)
 {
-    Q_ASSERT(false);
-    return false;
+    return parentHelper()->childToScriptValue(mIndex, engine, info);
 }
 
-qint64 DummyDataInformation::readData(Okteta::AbstractByteArrayModel*, Okteta::Address, BitCount64, quint8*)
+bool DummyDataInformation::setData(const QVariant& v, Okteta::AbstractByteArrayModel* out,
+        Okteta::Address addr, BitCount64 remaining, quint8 offset)
 {
-    Q_ASSERT(false);
+    return parentHelper()->setChildData(mIndex, v, out, addr, remaining, offset);
+}
+
+qint64 DummyDataInformation::readData(Okteta::AbstractByteArrayModel* in, Okteta::Address addr,
+        BitCount64 remaining, quint8* offset)
+{
+    Q_ASSERT(false); //should never be called
     return -1;
 }
 
 BitCount32 DummyDataInformation::size() const
 {
-    Q_ASSERT(false);
-    return 0;
+    return parentHelper()->childSize(mIndex);
 }
 
-void DummyDataInformation::setWidgetData(QWidget*) const
+void DummyDataInformation::setWidgetData(QWidget* w) const
 {
-    Q_ASSERT(false);
+    return parentHelper()->setChildWidgetData(mIndex, w);
 }
 
-QVariant DummyDataInformation::dataFromWidget(const QWidget*) const
+QVariant DummyDataInformation::dataFromWidget(const QWidget* w) const
 {
-    Q_ASSERT(false);
-    return QVariant();
+    return parentHelper()->dataFromChildWidget(mIndex, w);
 }
 
-QWidget* DummyDataInformation::createEditWidget(QWidget*) const
+QWidget* DummyDataInformation::createEditWidget(QWidget* parent) const
 {
-    Q_ASSERT(false);
-    return 0;
+    return parentHelper()->createChildEditWidget(mIndex, parent);
 }
 
 QString DummyDataInformation::typeName() const
 {
-    Q_ASSERT(false);
-    return QLatin1String("dummy");
-}
-
-DummyDataInformation* DummyDataInformation::clone() const
-{
-    Q_ASSERT(false);
-    return 0;
-}
-
-BitCount32 DummyDataInformation::childSize(uint) const
-{
-    Q_ASSERT(false);
-    return 0;
+    return parentHelper()->childTypeName(mIndex);
 }

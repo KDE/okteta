@@ -41,6 +41,7 @@ public:
     virtual bool isStruct() const;
     //implement the DataInformation pure virtual functions
     QString typeName() const;
+    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 };
 
 inline bool StructureDataInformation::isStruct() const

@@ -50,7 +50,7 @@ public:
     virtual int indexOf(const DataInformation* data) const;
     virtual unsigned int length() const;
     virtual void setLength(uint newLength);
-    virtual BitCount32 offset(uint row) const;
+    virtual BitCount64 offset(const DataInformation* child) const;
     virtual BitCount32 size() const;
     virtual PrimitiveDataType primitiveType() const;
     virtual void setParent(DataInformation* parent);
@@ -101,8 +101,10 @@ inline void PrimitiveArrayData<type>::setParent(DataInformation* parent)
 }
 
 template<PrimitiveDataTypeEnum type>
-inline BitCount32 PrimitiveArrayData<type>::offset(uint index) const
+inline BitCount64 PrimitiveArrayData<type>::offset(const DataInformation* data) const
 {
+    Q_ASSERT(data->isDummy());
+    const uint index = data->asDummy()->dummyIndex();
     Q_ASSERT(index < length());
     return index * sizeof(T) * 8;
 }
@@ -112,6 +114,7 @@ inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
 {
     Q_ASSERT(idx < length());
     Q_UNUSED(idx);
+    mDummy->setDummyIndex(idx);
     return mDummy.data();
 }
 

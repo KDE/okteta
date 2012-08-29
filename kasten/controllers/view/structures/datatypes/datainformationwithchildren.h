@@ -44,13 +44,10 @@ public:
     virtual BitCount32 childSize(uint index) const;
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
     virtual DataInformation* childAt(unsigned int index) const;
     virtual bool canHaveChildren() const;
     virtual unsigned int childCount() const;
-    BitCount32 offset(unsigned int index) const;
     virtual QString tooltipString() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
@@ -63,7 +60,7 @@ public:
     /** Takes ownership! */
     void appendChild(DataInformation* child, bool emitSignal = true);
     /** Takes ownership of all elements */
-    void appendChildren(const QVector<DataInformation*>& newChildren);
+    void appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal = true);
     void setChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(QScriptValue newChildren);
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);

@@ -42,16 +42,8 @@ public:
     virtual BitCount32 size() const;
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
-
-protected:
-    BitCount32 offset(unsigned int index) const;
+    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 };
-
-inline BitCount32 UnionDataInformation::offset(unsigned int index) const
-{
-    Q_UNUSED(index)
-    return 0;
-}
 
 inline bool UnionDataInformation::isUnion() const
 {

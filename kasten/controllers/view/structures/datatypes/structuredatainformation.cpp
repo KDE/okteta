@@ -73,3 +73,21 @@ qint64 StructureDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     mWasAbleToRead = true;
     return readBits;
 }
+
+BitCount64 StructureDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
+{
+    BitCount64 offset = 0;
+    //sum size of elements up to index
+    for (int i = 0; i < mChildren.size(); ++i)
+    {
+        DataInformation* current = mChildren.at(i);
+        if (current == child)
+            break;
+        offset += current->size();
+    }
+
+    if (mParent->isTopLevel())
+        return start * 8 + offset;
+    else
+        return mParent->asDataInformation()->childPosition(this, start) + offset;
+}

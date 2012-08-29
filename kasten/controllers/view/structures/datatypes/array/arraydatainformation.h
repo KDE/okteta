@@ -24,7 +24,7 @@
 #define ARRAYDATAINFORMATION_H_
 
 #include "../primitivedatatype.h" //TODO remove once primitiveArrayFromType is in subclass
-#include "../datainformation.h"
+#include "../dummydatainformation.h"
 #include "abstractarraydata.h"
 
 #include <QVariant>
@@ -32,7 +32,7 @@
 
 class DummyDataInformation;
 class AbstractArrayData;
-class ArrayDataInformation : public DataInformation
+class ArrayDataInformation : public DataInformationWithDummyChildren
 {
     friend class PrimitiveArrayTest;
 protected:
@@ -72,6 +72,7 @@ public:
     virtual DataInformation* childAt(unsigned int idx) const;
     virtual unsigned int childCount() const;
     virtual bool canHaveChildren() const;
+    virtual QString childTypeName(uint index) const;
     virtual int indexOf(const DataInformation* const data) const;
     BitCount32 childSize(uint index) const;
 
@@ -83,12 +84,12 @@ public:
     virtual QScriptValue childType() const;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
+    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 private:
     /** Takes ownership of @p data ! */
     AbstractArrayData* arrayDataFromType(uint length, DataInformation* data);
     AbstractArrayData* primitiveArrayFromType(uint length, PrimitiveDataType type);
 protected:
-    virtual BitCount32 offset(unsigned int index) const;
 
     QScopedPointer<AbstractArrayData> mData;
     QScriptValue mLengthFunction;
@@ -182,6 +183,13 @@ inline void ArrayDataInformation::setChildWidgetData(uint index, QWidget* w) con
     if (Q_UNLIKELY(!mData))
         return;
     mData->setChildWidgetData(index, w);
+}
+
+inline QString ArrayDataInformation::childTypeName(uint index) const
+{
+    if (Q_UNLIKELY(!mData))
+        return QString();
+    return mData->dataAt(index, DataInformation::ColumnType, Qt::DisplayRole).toString();
 }
 
 #endif /* ARRAYDATAINFORMATION_H_ */

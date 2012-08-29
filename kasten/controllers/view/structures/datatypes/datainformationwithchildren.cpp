@@ -40,18 +40,6 @@ DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
     return mChildren[idx];
 }
 
-bool DataInformationWithChildren::setChildData(uint row, const QVariant& value,
-        Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining,
-        quint8 bitOffset)
-{
-    Q_ASSERT_X(false, "DataInformationWithChildren::setChildData", "this should not be called");
-    Q_ASSERT(row < childCount());
-    int offs = offset(row);
-    quint8 bitOffs = (offs + bitOffset) & 7; //mod 8
-    return mChildren.at(row)->setData(value, out, address + (offs / 8), bitsRemaining - offs,
-            bitOffs);
-}
-
 bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
         Okteta::Address, BitCount64, quint8)
 {
@@ -87,18 +75,21 @@ DataInformationWithChildren::DataInformationWithChildren(const DataInformationWi
 }
 
 QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const
-        {
+{
+    Q_ASSERT(false);
     return new KLineEdit(parent);
 }
 
 QVariant DataInformationWithChildren::dataFromWidget(const QWidget* w) const
-        {
+{
     Q_UNUSED(w);
+    Q_ASSERT(false);
     return QVariant();
 }
 
 void DataInformationWithChildren::setWidgetData(QWidget* w) const
-        {
+{
+    Q_ASSERT(false);
     Q_UNUSED(w)
 }
 
@@ -110,19 +101,6 @@ BitCount32 DataInformationWithChildren::size() const
         size += childAt(i)->size();
     }
     return size;
-}
-
-BitCount32 DataInformationWithChildren::offset(unsigned int index) const
-        {
-    if (index >= childCount())
-        return 0;
-    quint64 offset = 0;
-    //sum size of elements up to index
-    for (unsigned int i = 0; i < index; ++i)
-    {
-        offset += childAt(i)->size();
-    }
-    return offset;
 }
 
 void DataInformationWithChildren::resetValidationState()
@@ -226,18 +204,18 @@ void DataInformationWithChildren::appendChild(DataInformation* newChild, bool em
         topLevelDataInformation()->_childrenInserted(this, mChildren.size(), mChildren.size());
 }
 
-void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>& newChildren)
+void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal)
 {
     if (newChildren.isEmpty())
         return;
     const int added = newChildren.size();
-    topLevelDataInformation()->_childrenAboutToBeInserted(this, mChildren.size(),
-            mChildren.size() + added - 1);
+    if (emitSignal)
+        topLevelDataInformation()->_childrenAboutToBeInserted(this, mChildren.size(), mChildren.size() + added - 1);
     for (int i = 0; i < newChildren.size(); ++i)
         newChildren.at(i)->setParent(this);
     mChildren << newChildren;
-    topLevelDataInformation()->_childrenInserted(this, mChildren.size(),
-            mChildren.size() + added - 1);
+    if (emitSignal)
+        topLevelDataInformation()->_childrenInserted(this, mChildren.size(), mChildren.size() + added - 1);
 }
 
 QScriptValue DataInformationWithChildren::toScriptValue(QScriptEngine* engine,

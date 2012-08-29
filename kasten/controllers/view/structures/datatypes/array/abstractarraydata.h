@@ -67,7 +67,7 @@ public:
     virtual void setParent(DataInformation* parent) = 0;
 
     virtual int indexOf(const DataInformation* data) const = 0;
-    virtual BitCount32 offset(uint row) const = 0;
+    virtual BitCount64 offset(const DataInformation* child) const = 0;
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining) = 0;

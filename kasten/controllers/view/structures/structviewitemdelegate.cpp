@@ -45,12 +45,7 @@ QWidget* StructViewItemDelegate::createEditor(QWidget* parent, const QStyleOptio
     if (!dataB || dataB->isTopLevel())
         return 0;
     DataInformation* data = dataB->asDataInformation();
-    QWidget* ret;
-    //following static cast always okay since parent of a dummy cannot be DataInformationBase
-    if (data->isDummy())
-        ret = data->parent()->asDataInformation()->createChildEditWidget(index.row(), parent);
-    else
-        ret = data->createEditWidget(parent);
+    QWidget* ret = data->createEditWidget(parent);
     ret->setFocusPolicy(Qt::WheelFocus);
     return ret;
 }
@@ -64,12 +59,7 @@ void StructViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* m
     if (!dataB || dataB->isTopLevel())
         return;
     DataInformation* data = dataB->asDataInformation();
-    QVariant value;
-    //following static cast always okay since parent of a dummy cannot be DataInformationBase
-    if (data->isDummy())
-        value = data->parent()->asDataInformation()->dataFromChildWidget(index.row(), editor);
-    else
-        value = data->dataFromWidget(editor);
+    QVariant value = data->dataFromWidget(editor);
     model->setData(index, value, Qt::EditRole);
 }
 
@@ -82,11 +72,7 @@ void StructViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex& i
     if (!dataB || dataB->isTopLevel())
         return;
     DataInformation* data = dataB->asDataInformation();
-    //following static cast always okay since parent of a dummy cannot be DataInformationBase
-    if (data->isDummy())
-        data->parent()->asDataInformation()->setChildWidgetData(index.row(), editor);
-    else
-        data->setWidgetData(editor);
+    data->setWidgetData(editor);
 }
 
 QSize StructViewItemDelegate::sizeHint(const QStyleOptionViewItem& option,

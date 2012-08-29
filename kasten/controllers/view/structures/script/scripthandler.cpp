@@ -80,7 +80,6 @@ void ScriptHandler::validateData(DataInformation* data)
         args << mainStruct;
         mHandlerInfo.setMode(ScriptHandlerInfo::Validating);
         QScriptValue result = validationFunc.call(thisObject, args);
-        mHandlerInfo.setMode(ScriptHandlerInfo::None);
         if (result.isError())
         {
             mTopLevel->logger()->error(data) << "Error occurred while validating element: " << result.toString();
@@ -105,6 +104,7 @@ void ScriptHandler::validateData(DataInformation* data)
             if  (!str.isEmpty())
                 data->setValidationError(str);
         }
+        mHandlerInfo.setMode(ScriptHandlerInfo::None);
     }
 }
 
@@ -132,7 +132,6 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         //ensure we get the right properties
         mHandlerInfo.setMode(ScriptHandlerInfo::Updating);
         QScriptValue result = updateFunc.call(thisObject, args);
-        mHandlerInfo.setMode(ScriptHandlerInfo::None);
         if (result.isError())
         {
             mTopLevel->logger()->error(data) << "Error occurred while updating element: " << result.toString();
@@ -142,5 +141,6 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
             mTopLevel->logger()->error(data) << "Error occurred while updating element:"
                     << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
         }
+        mHandlerInfo.setMode(ScriptHandlerInfo::None);
     }
 }

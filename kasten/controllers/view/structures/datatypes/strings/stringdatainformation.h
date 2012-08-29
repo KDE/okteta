@@ -26,6 +26,7 @@
 #define STRINGDATAINFORMATION_H
 
 #include "../datainformation.h"
+#include "../dummydatainformation.h"
 #include "stringdata.h"
 
 class DummyDataInformation;
@@ -35,10 +36,9 @@ const QLatin1String stringEncodings[] = {
     QLatin1String("utf-16-be"), QLatin1String("utf32-le"), QLatin1String("utf32-be")
 };
 
-class StringDataInformation : public DataInformation
+class StringDataInformation : public DataInformationWithDummyChildren
 {
 protected:
-    virtual BitCount32 offset(unsigned int index) const;
     StringDataInformation(const StringDataInformation&);
 public:
     enum StringType {
@@ -72,13 +72,18 @@ public:
     virtual QVariant childData(int row, int column, int role) const;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
     virtual BitCount32 childSize(uint index) const;
+    virtual QString childTypeName(uint index) const;
+    virtual void setChildWidgetData(uint index, QWidget* w) const;
+    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
+    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
+    virtual QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
+    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 
     virtual QString valueString() const;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     StringType encoding() const;
     void setEncoding(StringType encoding);
-    DummyDataInformation* dummy() const;
     uint terminationCodePoint() const;
     void setTerminationCodePoint(uint term);
     void setTerminationCodePoint(const QScriptValue& value, QScriptEngine* engine);
@@ -93,19 +98,14 @@ public:
     uint terminationMode() const;
     QString valueAt(int index) const;
 private:
-    DummyDataInformation* mDummy;
-    StringData* mData;
+    QScopedPointer<DummyDataInformation> mDummy;
+    QScopedPointer<StringData> mData;
     StringType mEncoding;
 };
 
 inline bool StringDataInformation::canHaveChildren() const
 {
     return true;
-}
-
-inline DummyDataInformation* StringDataInformation::dummy() const
-{
-    return mDummy;
 }
 
 inline StringDataInformation::StringType StringDataInformation::encoding() const

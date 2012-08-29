@@ -80,7 +80,6 @@ bool PointerDataInformation::setData(const QVariant& value, Okteta::AbstractByte
 
 qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    topLevelDataInformation()->updateElement(mValue.data());
     qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
     mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
 
@@ -92,6 +91,19 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
     }
 
     return retVal;
+}
+
+BitCount64 PointerDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
+{
+    //TODO other pointer modes
+    Q_ASSERT(child == mPointerTarget.data());
+    return mWasAbleToRead ? mValue->value().ulongValue * 8 : 0;
+}
+
+int PointerDataInformation::indexOf(const DataInformation* const data) const
+{
+    Q_ASSERT(data == mPointerTarget.data());
+    return 0;
 }
 
 void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *input, Okteta::Address address)
@@ -143,17 +155,6 @@ QString PointerDataInformation::typeName() const
     return i18nc("memory pointer with underlying type", "%1 pointer", mValue->typeName());
 }
 
-BitCount32 PointerDataInformation::positionRelativeToRoot(int row) const
-{
-    //TODO fix this
-    // Two cases position of the pointer itself or position
-    // from which calculate the position of the children
-    if (row < 0)
-        return mValue->value().uintValue;
-    else
-        return DataInformation::positionRelativeToRoot(row);
-}
-
 QString PointerDataInformation::valueString() const
 {
     return mValue->valueString();
@@ -169,7 +170,7 @@ Qt::ItemFlags PointerDataInformation::flags(int column, bool fileLoaded) const
 
 uint PointerDataInformation::childCount() const
 {
-    return mWasAbleToRead ? 1 : 0;
+    return 1;
 }
 
 AllPrimitiveTypes PointerDataInformation::value() const

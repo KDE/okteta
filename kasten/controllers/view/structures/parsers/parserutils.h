@@ -44,20 +44,23 @@ class QScriptValue;
 struct ParserInfo
 {
     inline ParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent)
-            : name(name.isEmpty() ? i18n("&lt;no name specified&gt;") : name), logger(logger), parent(parent)
+            : name(name), logger(logger), parent(parent)
     {
         Q_CHECK_PTR(logger);
     }
     inline ParserInfo(const ParserInfo& i)
-            : name(i.name), logger(i.logger), parent(i.parent) {}
+            : name(i.name), logger(i.logger), parent(i.parent), contextString(i.contextString) {}
     inline ~ParserInfo() {}
     QString name;
     ScriptLogger* logger;
     DataInformation* parent;
+    QString contextString;
 
     inline QString context() const
     {
-        return parent ? parent->fullObjectPath() + QLatin1Char('.') + name : name;
+        if (contextString.isEmpty())
+            return parent ? parent->fullObjectPath() + QLatin1Char('.') + name : name;
+        return contextString;
     }
     inline QDebug info() const { return logger->info(context()); }
     inline QDebug warn() const { return logger->warn(context()); }

@@ -182,25 +182,11 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
     if (topLevel->isLockedFor(d->mByteArrayModel))
         structureStart = topLevel->lockPositionFor(d->mByteArrayModel);
     d->mWritingData = true;
-    quint64 remainingBits = qMax(d->mByteArrayModel->size() - structureStart, 0) * 8;
     bool ret = false;
-    DataInformationBase* par = item->parent();
-    if (item->isDummy())
-    {
-        //we have to use setChildData() since this item is not valid
-        DataInformation* parent = static_cast<DataInformation*>(par);
-        quint64 offs = parent->positionRelativeToRoot();
-        quint8 bitOffs = offs % 8;
-        ret = parent->setChildData(row, value, d->mByteArrayModel, structureStart + (offs / 8),
-                remainingBits - offs, bitOffs);
-    }
-    else
-    {
-        quint64 offs = item->positionRelativeToRoot(row);
-        quint8 bitOffs = offs % 8;
-        ret = item->setData(value, d->mByteArrayModel, structureStart + (offs / 8),
-                remainingBits - offs, bitOffs);
-    }
+    BitCount64 position = item->positionInFile(structureStart);
+    const quint64 remainingBits = qMax(d->mByteArrayModel->size() * 8 - qint64(position), qint64(0));
+    quint8 bitOffs = position % 8;
+    ret = item->setData(value, d->mByteArrayModel, position / 8, remainingBits, bitOffs);
     d->mWritingData = false; //finished
     //XXX: this is inefficient, best would be to only update the changed value
     updateData(Okteta::ArrayChangeMetricsList()); //update once after writing
@@ -360,14 +346,10 @@ void StructTool::mark(const QModelIndex& idx)
     Q_CHECK_PTR(data->topLevelDataInformation());
     const Okteta::Address baseAddress = startAddress(data);
     //FIXME support marking of partial bytes
-    int length;
-    if (data->isDummy())
-        length = static_cast<const DataInformation*>(data->parent())->childSize(idx.row()) / 8;
-    else
-        length = data->size() / 8;
-    int maxLen = d->mByteArrayModel->size() - baseAddress;
+    int length = data->size() / 8;
+    const int maxLen = d->mByteArrayModel->size() - baseAddress;
     length = qMin(length, maxLen);
-    const Okteta::Address startOffset = baseAddress + data->positionRelativeToRoot(idx.row()) / 8;
+    const Okteta::Address startOffset = data->positionInFile(baseAddress) / 8;
     const Okteta::AddressRange markingRange =
             Okteta::AddressRange::fromWidth(startOffset, length);
     d->mByteArrayView->setMarking(markingRange, true);

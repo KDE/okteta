@@ -70,17 +70,14 @@ QString DataInformation::sizeString() const
     }
 }
 
-BitCount32 DataInformation::positionRelativeToRoot(int index) const
+BitCount64 DataInformation::positionInFile(Okteta::Address start) const
 {
     Q_CHECK_PTR(mParent);
-    //FIXME this needs updating to support bitfield marking
     if (mParent->isTopLevel())
-        return 0;
+        return start * 8; //this is the root of the structure
 
-    //TODO add a method offset(const DataInformation* const) for efficiency
-    DataInformation* par = mParent->asDataInformation();
-    //row defaults to -1
-    return par->offset(index < 0 ? row() : index) + par->positionRelativeToRoot();
+    const DataInformation* par = mParent->asDataInformation();
+    return par->childPosition(this, start);
 }
 
 DataInformation* DataInformation::mainStructure()
@@ -282,15 +279,6 @@ int DataInformation::indexOf(const DataInformation* const data) const
     return 0;
 }
 
-QVariant DataInformation::childData(int row, int column, int role) const
-{
-    Q_ASSERT_X(false, "DataInformation::childData", "this should never happen!");
-    Q_UNUSED(row)
-    Q_UNUSED(column)
-    Q_UNUSED(role)
-    return QVariant(); //no children -> no child data
-}
-
 QVariant DataInformation::data(int column, int role) const
 {
     if (role == Qt::DisplayRole)
@@ -342,15 +330,8 @@ QString DataInformation::tooltipString() const
     }
 }
 
-Qt::ItemFlags DataInformation::childFlags(int row, int column, bool fileLoaded) const
-        {
-    Q_ASSERT_X(false, "DataInformation::childFlags()",
-            "Only subclass versions of this should be called");
-    return childAt(row)->flags(column, fileLoaded);
-}
-
 DataInformation* DataInformation::child(const QString& name) const
-        {
+{
     int size = childCount();
     for (int i = 0; i < size; ++i)
     {
@@ -377,27 +358,6 @@ int DataInformation::row() const
         return mParent->asTopLevel()->indexOf(this);
     else
         return mParent->asDataInformation()->indexOf(this);
-}
-
-QWidget* DataInformation::createChildEditWidget(uint, QWidget*) const
-        {
-    Q_ASSERT_X(false, "DataInformation::createChildEditWidget",
-            "only implemented so not all subclasses have to, since it will never be called there. Error!");
-    return 0;
-
-}
-
-void DataInformation::setChildWidgetData(uint, QWidget*) const
-        {
-    Q_ASSERT_X(false, "DataInformation::setChildWidgetData",
-            "only implemented so not all subclasses have to, since it will never be called there. Error!");
-}
-
-QVariant DataInformation::dataFromChildWidget(uint, const QWidget*) const
-        {
-    Q_ASSERT_X(false, "DataInformation::dataFromChildWidget",
-            "only implemented so not all subclasses have to, since it will never be called there. Error!");
-    return QVariant();
 }
 
 QString DataInformation::fullObjectPath() const

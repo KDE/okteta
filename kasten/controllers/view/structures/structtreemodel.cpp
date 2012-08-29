@@ -127,10 +127,7 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
         ArrayDataInformation* array = item->parent()->asArray();
         return array->childData(index.row(), column, role);
     }
-    else if (item->isDummy())
-        return item->parent()->asDataInformation()->childData(index.row(), column, role);
-    else
-        return item->data(column, role);
+    return item->data(column, role);
 }
 
 bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
@@ -159,16 +156,7 @@ Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
     if (!index.isValid())
         return 0;
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
-    if (item->isDummy())
-    {
-        Q_ASSERT(!item->parent()->isTopLevel()); //parent of a dummy cannot be top level
-        DataInformation* parent = item->parent()->asDataInformation();
-        return parent->childFlags(index.row(), index.column(), mTool->isFileLoaded());
-    }
-    else
-    {
-        return item->flags(index.column(), mTool->isFileLoaded());
-    }
+    return item->flags(index.column(), mTool->isFileLoaded());
 }
 
 QVariant StructTreeModel::headerData(int section, Qt::Orientation orientation,

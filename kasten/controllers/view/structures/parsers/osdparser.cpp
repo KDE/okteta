@@ -298,7 +298,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     }
     OsdParserInfo newInfo = info;
     newInfo.parent = 0;
-    newInfo.name = info.context();
+    newInfo.contextString = info.context() + QLatin1String(" (array type)");
     apd.arrayType = parseElement(childElement, newInfo);
     return DataInformationFactory::newArray(apd);
 }
@@ -314,6 +314,9 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
         QDomElement toParse = typeElement.firstChildElement();
         if (!toParse.isNull())
         {
+            OsdParserInfo newInfo = info;
+            newInfo.parent = 0;
+            newInfo.contextString = info.context() + QLatin1String(" (pointer value type)");
             ppd.valueType = parseElement(toParse, info);
         }
         else
@@ -327,7 +330,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
     }
     if (!typeString.isEmpty())
     {
-        LoggerWithContext lwc(info.logger, info.context() + QLatin1String(" (pointer type)"));
+        LoggerWithContext lwc(info.logger, info.context() + QLatin1String(" (pointer value type)"));
         ppd.valueType = PrimitiveFactory::newInstance(PROPERTY_TYPE, typeString, lwc);
     }
 
@@ -352,7 +355,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
     }
     OsdParserInfo newInfo = info;
     newInfo.parent = 0;
-    newInfo.name = info.context();
+    newInfo.contextString = info.context() + QLatin1String(" (pointer target)");
     ppd.pointerTarget = parseElement(childElement, newInfo);
     return DataInformationFactory::newPointer(ppd);
 }
