@@ -138,9 +138,9 @@ QStringList OsdParser::parseStructureNames() const
         }
         else
         {
-            kWarning().nospace() << "Unknown tag name in plugin " << mPluginName << " :" << tag;
+            rootLogger->error(QString()).nospace() << "Unknown tag name in plugin " << mPluginName << " :"
+                    << tag;
         }
-        childElement = childElement.nextSiblingElement();
     }
     return ret;
 }
