@@ -63,6 +63,9 @@ public:
 	QDebug info(const DataInformation* origin) { return log(LogInfo, origin); }
 	QDebug warn(const DataInformation* origin) { return log(LogWarning, origin); }
 	QDebug error(const DataInformation* origin) { return log(LogError, origin); }
+	QDebug info(const QString& origin) { return log(LogInfo, origin); }
+	QDebug warn(const QString& origin) { return log(LogWarning, origin); }
+	QDebug error(const QString& origin) { return log(LogError, origin); }
 	/**
 	 * @return a QDebug to write the message to.
 	 * Do NOT save this object, since the string it writes to may become invalid!

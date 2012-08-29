@@ -35,6 +35,7 @@
 #include "../datatypes/topleveldatainformation.h"
 #include "../datatypes/primitivefactory.h"
 #include "../datatypes/dummydatainformation.h"
+#include "../datatypes/datainformationfactory.h"
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
 #include "../script/scriptengineinitializer.h"
@@ -65,7 +66,7 @@ OsdParser::~OsdParser()
 }
 
 QDomDocument OsdParser::openDocFromString(ScriptLogger * logger) const
-        {
+{
     Q_ASSERT(!mXmlString.isEmpty());
     int errorLine, errorColumn;
     QString errorMsg;
@@ -91,7 +92,7 @@ QDomDocument OsdParser::openDocFromString(ScriptLogger * logger) const
 }
 
 QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
-        {
+{
     QFileInfo fileInfo(mAbsolutePath);
     if (!fileInfo.exists())
     {
@@ -194,7 +195,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
 
         QScriptEngine* eng = ScriptEngineInitializer::newEngine(); //we need this for dynamic arrays
         ScriptLogger* logger = new ScriptLogger();
-        ParserInfo info;
+        OsdParserInfo info;
         info.engine = eng;
         info.scriptEngineNeeded = false;
         info.enums = parseEnums(rootElem, logger);
@@ -220,9 +221,8 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
     return structures;
 }
 
-QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem,
-        ScriptLogger* logger) const
-        {
+QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger) const
+{
     QVector<EnumDefinition::Ptr> ret;
     QDomNodeList enumDefs = rootElem.elementsByTagName(QLatin1String("enumDef"));
     for (uint i = 0; i < enumDefs.length(); i++)
@@ -274,8 +274,8 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem,
 
 //Datatypes
 
-ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, ParserInfo& info) const
-        {
+ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+{
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     QDomNode node = xmlElem.firstChild();
     QString lengthStr = xmlElem.attribute(QLatin1String("length"));
@@ -354,7 +354,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, Parser
     //use dummy until real type has been determined
     ArrayDataInformation* tmp = new ArrayDataInformation(name, 0,
             new DummyDataInformation(0, QString()), info.parent);
-    ParserInfo newInfo = info;
+    OsdParserInfo newInfo = info;
     newInfo.parent = tmp;
     DataInformation* subElem = parseNode(node, newInfo);
     delete tmp;
@@ -375,8 +375,8 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, Parser
 }
 
 PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem,
-        const ParserInfo& info) const
-        {
+        const OsdParserInfo& info) const
+{
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     QString typeStr = xmlElem.attribute(QLatin1String("type"), QString());
     if (typeStr.isEmpty())
@@ -388,8 +388,7 @@ PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem
 }
 
 AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& xmlElem,
-        const ParserInfo& info) const
-
+        const OsdParserInfo& info) const
 {
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     QString typeStr = xmlElem.attribute(QLatin1String("type"), QString());
@@ -424,18 +423,16 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
     return bitf;
 }
 
-UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem,
-        ParserInfo& info) const
-
+UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
 {
-    QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
-    UnionDataInformation* un = new UnionDataInformation(name, info.parent);
+    UnionDataInformation* un = new UnionDataInformation(info.name, info.parent);
     QDomNode node = xmlElem.firstChild();
     QVector<DataInformation*> children;
-    ParserInfo newInfo = info;
+    OsdParserInfo newInfo(info);
     newInfo.parent = un;
     while (!node.isNull())
     {
+        //parseNode sets the name for us
         DataInformation* data = parseNode(node, newInfo);
         if (data)
             children.append(data);
@@ -447,17 +444,17 @@ UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem,
     return un;
 }
 
-StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem,
-        ParserInfo& info) const
-        {
+StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+{
     QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     StructureDataInformation* stru = new StructureDataInformation(name, info.parent);
     QDomNode node = xmlElem.firstChild();
     QVector<DataInformation*> children;
-    ParserInfo newInfo = info;
+    OsdParserInfo newInfo(info);
     newInfo.parent = stru;
     while (!node.isNull())
     {
+        //parseNode sets the name for us
         DataInformation* data = parseNode(node, newInfo);
         if (data)
             children.append(data);
@@ -469,9 +466,9 @@ StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem,
     return stru;
 }
 
-AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem,
-        bool isFlags, const ParserInfo& info) const
-        {
+AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
+        const OsdParserInfo& info) const
+{
     const QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     const QString typeStr = xmlElem.attribute(QLatin1String("type"));
     if (typeStr.isEmpty())
@@ -508,8 +505,8 @@ AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem,
 }
 
 StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
-        const ParserInfo& info) const
-        {
+        const OsdParserInfo& info) const
+{
     const QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
     const QString terminatedBy = xmlElem.attribute(QLatin1String("terminatedBy"));
     const QString charCount = xmlElem.attribute(QLatin1String("maxCharCount"));
@@ -583,8 +580,8 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
     return data;
 }
 
-DataInformation* OsdParser::parseNode(const QDomNode& node, ParserInfo& info) const
-        {
+DataInformation* OsdParser::parseNode(const QDomNode& node, OsdParserInfo& info) const
+{
     QDomElement elem = node.toElement(); // try to convert the node to an element.
     DataInformation* data = 0;
     if (!elem.isNull())
@@ -592,6 +589,7 @@ DataInformation* OsdParser::parseNode(const QDomNode& node, ParserInfo& info) co
         //      kDebug() << "element tag: " << elem.tagName();
         //e is element
         const QString tag = elem.tagName();
+        info.name = elem.attribute(QLatin1String("name"), i18n("&lt;invalid name&gt;"));
         if (tag == QLatin1String("struct"))
             data = structFromXML(elem, info);
         else if (tag == QLatin1String("array"))
@@ -618,22 +616,21 @@ DataInformation* OsdParser::parseNode(const QDomNode& node, ParserInfo& info) co
     return data;
 }
 
-EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const ParserInfo& info) const
-        {
+EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const OsdParserInfo& info) const
+{
     for (int i = 0; i < info.enums.size(); ++i)
     {
         const EnumDefinition::Ptr def = info.enums.at(i);
         if (def->name() == defName)
-        {
             return def;
-        }
     }
+    info.logger->error(info.parent ? info.parent->fullObjectPath() : QString())
+            << "Could not find enum definition with name" << defName;
     return EnumDefinition::Ptr(0);
-
 }
 
 QString OsdParser::toRawXML(const QDomElement& elem) const
-        {
+{
     QString ret = QLatin1Char('<') + elem.tagName();
     QDomNamedNodeMap attrs = elem.attributes();
     for (int i = 0; i < attrs.size(); ++i)

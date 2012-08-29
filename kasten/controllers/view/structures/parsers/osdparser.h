@@ -54,29 +54,29 @@ public:
     virtual QVector<TopLevelDataInformation*> parseStructures() const;
 
 private:
-
-    struct ParserInfo
-    {
+    struct OsdParserInfo : public ParserInfo {
+        inline OsdParserInfo() : engine(0), scriptEngineNeeded(false) {}
+        inline OsdParserInfo(const OsdParserInfo& i)
+            : ParserInfo(i), engine(i.engine), enums(i.enums), scriptEngineNeeded(i.scriptEngineNeeded) {}
+        inline ~OsdParserInfo() {}
+        /** OSD parser only since QScriptValue::engine() exists */
         QScriptEngine* engine;
-        ScriptLogger* logger;
-        DataInformation* parent;
         QVector<EnumDefinition::Ptr> enums;
         bool scriptEngineNeeded;
     };
 
-    PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem,
-            const ParserInfo& info) const;
-    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem,
-            const ParserInfo& info) const;
+    PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
+    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
     AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags,
-            const ParserInfo& info) const;
-    StringDataInformation* stringFromXML(const QDomElement& xmlElem, const ParserInfo& info) const;
-    UnionDataInformation* unionFromXML(const QDomElement& xmlElem, ParserInfo& info) const;
-    StructureDataInformation* structFromXML(const QDomElement& xmlElem, ParserInfo& info) const;
-    ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, ParserInfo& info) const;
+            const OsdParserInfo& info) const;
+    StringDataInformation* stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
+    UnionDataInformation* unionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
+    StructureDataInformation* structFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
+    ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
 
-    DataInformation* parseNode(const QDomNode& node, ParserInfo& info) const;
-    EnumDefinition::Ptr findEnum(const QString& defName, const ParserInfo& info) const;
+    DataInformation* parseNode(const QDomNode& node, OsdParserInfo& info) const;
+
+    EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info) const;
 
     QVector<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem,
             ScriptLogger* logger) const;

@@ -23,16 +23,33 @@
 #ifndef ABSTRACTSTRUCTUREPARSER_H_
 #define ABSTRACTSTRUCTUREPARSER_H_
 
-#include <QtCore/QVector>
-#include <QtCore/QStringList>
+#include <QVector>
+#include <QStringList>
 
 #include "../datatypes/datainformation.h"
+#include "../script/scriptlogger.h"
 
 class TopLevelDataInformation;
 namespace Kasten2
 {
 class StructureDefinitionFile;
 }
+
+/** For use by the parsers so that the functions don't have as many parameters */
+struct ParserInfo
+{
+    inline ParserInfo() : logger(0), parent(0) {}
+    inline ParserInfo(const ParserInfo& i) : logger(i.logger), parent(i.parent), name(i.name) {}
+    inline ~ParserInfo() {}
+    ScriptLogger* logger;
+    DataInformation* parent;
+    QString name;
+
+    inline QString context() const { return parent ? parent->fullObjectPath() + QLatin1Char('.') + name : name; }
+    inline QDebug info() const { return logger->info(context()); }
+    inline QDebug warn() const { return logger->warn(context()); }
+    inline QDebug error() const { return logger->error(context()); }
+};
 
 class AbstractStructureParser
 {
