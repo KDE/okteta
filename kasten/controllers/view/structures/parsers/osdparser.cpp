@@ -42,6 +42,8 @@
 #include <QDomElement>
 #include <QScriptEngine>
 
+using namespace ParserStrings;
+
 #include <KDebug> //FIXME remove this!!
 //FIXME remove all kdebug & kwarning in here!
 OsdParser::OsdParser(const QString& pluginName, const QString& absolutePath)
@@ -59,7 +61,7 @@ OsdParser::~OsdParser()
 }
 
 QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
-{
+        {
     return mXmlString.isEmpty() ? openDocFromFile(logger) : openDocFromString(logger);
 }
 
@@ -129,12 +131,11 @@ QStringList OsdParser::parseStructureNames() const
             !childElement.isNull(); childElement = childElement.nextSiblingElement())
     {
         QString tag = childElement.tagName();
-        if (tag == QLatin1String("struct") || tag == QLatin1String("array")
-                || tag == QLatin1String("bitfield") || tag == QLatin1String("primitive")
-                || tag == QLatin1String("union") || tag == QLatin1String("enum")
-                || tag == QLatin1String("flags") || tag == QLatin1String("string"))
+        if (tag == TYPE_STRUCT || tag == TYPE_ARRAY || tag == TYPE_BITFIELD || tag == TYPE_PRIMITIVE
+                || tag == TYPE_UNION || tag == TYPE_ENUM || tag == TYPE_FLAGS || tag == TYPE_STRING)
         {
-            ret.append(readProperty(childElement, QLatin1String("name"), i18n("&lt;invalid name&gt;")));
+            //TODO allow e.g. <uint8 name="asfd">
+            ret.append(readProperty(childElement, PROPERTY_NAME, i18n("&lt;invalid name&gt;")));
         }
         else
         {
@@ -170,7 +171,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
     int count = 1;
     for (QDomElement elem = rootElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement())
     {
-        if (elem.tagName() == QLatin1String("enumDef"))
+        if (elem.tagName() == TYPE_ENUMDEF)
             continue; //skip enum defs
 
         QScriptEngine* eng = ScriptEngineInitializer::newEngine(); //we need this for dynamic arrays
@@ -193,31 +194,39 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
     return structures;
 }
 
+//TODO make type depend on the user not the definition
 QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger) const
 {
     QVector<EnumDefinition::Ptr> ret;
     for (QDomElement elem = rootElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement())
     {
-        if (elem.tagName() != QLatin1String("enumDef"))
+        if (elem.tagName() != TYPE_ENUMDEF)
             continue;
 
         QMap<AllPrimitiveTypes, QString> defs;
-        const QString enumName = readProperty(elem, QLatin1String("name"), i18n("&lt;invalid name&gt;"));
+        const QString enumName = readProperty(elem, PROPERTY_NAME, i18n("&lt;invalid name&gt;"));
         const QString typeStr = readProperty(elem, QLatin1String("type"));
         if (typeStr.isEmpty())
         {
-            logger->error(enumName) << "Skipping enum definition, since no type attribute was found:" << toRawXML(elem);
+            logger->error(enumName) << "Skipping enum definition, since no type attribute was found:"
+                    << toRawXML(elem);
             continue;
         }
         PrimitiveDataType type = PrimitiveFactory::typeStringToType(typeStr);
         //handle all entries
-        for (QDomElement child = elem.firstChildElement(); !child.isNull(); child = child.nextSiblingElement())
+        for (QDomElement child = elem.firstChildElement(); !child.isNull(); child =
+                child.nextSiblingElement())
         {
             if (child.tagName() != QLatin1String("entry"))
                 continue;
 
-            QString name = readProperty(child, QLatin1String("name"), i18n("<no name specified>"));
-            QString value = readProperty(child, QLatin1String("value"));
+            QString name = readProperty(child, PROPERTY_NAME);
+            if (name.isEmpty())
+            {
+                logger->warn(enumName) << "Entry is missing name, skipping it!";
+                continue;
+            }
+            QString value = readProperty(child, PROPERTY_VALUE);
             QPair<AllPrimitiveTypes, QString> converted =
                     AbstractEnumDataInformation::convertToEnumEntry(name, value, logger, type, QString());
             if (converted == QPair<AllPrimitiveTypes, QString>())
@@ -243,20 +252,16 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
 ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
 {
     ArrayParsedData apd(info);
-    QString lengthStr = readProperty(xmlElem, QLatin1String("length"));
+    QString lengthStr = readProperty(xmlElem, PROPERTY_LENGTH);
     if (lengthStr.isEmpty())
     {
         info.error() << "No array length specified!";
         return 0;
     }
 
-    bool okay = true;
-    if (lengthStr.startsWith(QLatin1String("0x")))
-        apd.length = lengthStr.mid(2).toInt(&okay, 16);
-    else
-        apd.length = lengthStr.toInt(&okay, 10);
+    apd.length = ParserUtils::intFromString(lengthStr);
 
-    if (!okay)
+    if (!apd.length.isValid)
     {
         //we failed to parse as an integer, must be an update function now
         //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
@@ -273,7 +278,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
 
     //first check whether there is a <type> element and use the inner element
     //if that doesn't exist use the first child element as the type, but only if there is only one child
-    QDomElement childElement = xmlElem.firstChildElement(QLatin1String("type")).firstChildElement();
+    QDomElement childElement = xmlElem.firstChildElement(PROPERTY_TYPE).firstChildElement();
     if (childElement.isNull())
     {
         childElement = xmlElem.firstChildElement();
@@ -285,9 +290,9 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
         else if (childElement != xmlElem.lastChildElement())
         {
             //there is more than one child element
-           info.error().nospace() << "There is more than one child element, cannot determine which one "
-                   "wrap the correct one is the array type. Wrap the correct one in a <type> element.";
-           return 0;
+            info.error().nospace() << "There is more than one child element, cannot determine which one "
+                    "wrap the correct one is the array type. Wrap the correct one in a <type> element.";
+            return 0;
         }
     }
     OsdParserInfo newInfo = info;
@@ -297,11 +302,10 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     return DataInformationFactory::newArray(apd);
 }
 
-PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem,
-        const OsdParserInfo& info) const
+PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
 {
     PrimitiveParsedData ppd(info);
-    ppd.type = readProperty(xmlElem, QLatin1String("type"));
+    ppd.type = readProperty(xmlElem, PROPERTY_TYPE);
     return DataInformationFactory::newPrimitive(ppd);
 }
 
@@ -309,8 +313,8 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
         const OsdParserInfo& info) const
 {
     BitfieldParsedData bpd(info);
-    bpd.type = readProperty(xmlElem, QLatin1String("type"));
-    QString width = readProperty(xmlElem, QLatin1String("width"));
+    bpd.type = readProperty(xmlElem, PROPERTY_TYPE);
+    QString width = readProperty(xmlElem, PROPERTY_WIDTH);
     bpd.width = ParserUtils::intFromString(width);
     return DataInformationFactory::newBitfield(bpd);
 }
@@ -343,8 +347,8 @@ AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, 
         const OsdParserInfo& info) const
 {
     EnumParsedData epd(info);
-    epd.type = readProperty(xmlElem, QLatin1String("type"));
-    epd.enumName = readProperty(xmlElem, QLatin1String("enum"));
+    epd.type = readProperty(xmlElem, PROPERTY_TYPE);
+    epd.enumName = readProperty(xmlElem, TYPE_ENUM); //used again here as property
     epd.enumDef = findEnum(epd.enumName, info);
     if (!epd.enumDef)
     {
@@ -361,11 +365,11 @@ AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, 
 StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
         const OsdParserInfo& info) const
 {
-    const QString name = readProperty(xmlElem, QLatin1String("name"), i18n("<invalid name>"));
-    const QString terminatedBy = readProperty(xmlElem, QLatin1String("terminatedBy"));
-    const QString charCount = readProperty(xmlElem, QLatin1String("maxCharCount"));
-    const QString byteCount = readProperty(xmlElem, QLatin1String("maxByteCount"));
-    const QString encoding = readProperty(xmlElem, QLatin1String("encoding"));
+    //TODO clean up this code
+    const QString terminatedBy = readProperty(xmlElem, PROPERTY_TERMINATED_BY);
+    const QString charCount = readProperty(xmlElem, PROPERTY_MAX_CHAR_COUNT);
+    const QString byteCount = readProperty(xmlElem, PROPERTY_MAX_BYTE_COUNT);
+    const QString encoding = readProperty(xmlElem, PROPERTY_ENCODING);
 
     StringData::TerminationModes mode = StringData::None;
     if (!terminatedBy.isEmpty())
@@ -378,7 +382,7 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
     if ((mode & StringData::CharCount) && (mode & StringData::ByteCount))
         mode &= ~StringData::ByteCount; //when both exists charcount wins
 
-    StringDataInformation* data = new StringDataInformation(name, encoding, info.parent);
+    StringDataInformation* data = new StringDataInformation(info.name, encoding, info.parent);
 //if mode is None, we assume zero terminated strings
     bool ok;
     if (mode == StringData::None)
@@ -410,7 +414,8 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
 
         if (!ok)
         {
-            kDebug() << "unparseable char count: " << charCount << ", defaulting to 1";
+            kDebug()
+            << "unparseable char count: " << charCount << ", defaulting to 1";
             count = 1;
         }
         data->setMaxCharCount(count);
@@ -441,7 +446,7 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
     //kDebug() << "element tag: " << elem.tagName();
     const QString tag = elem.tagName();
     OsdParserInfo info(oldInfo);
-    info.name = readProperty(elem, QLatin1String("name"), i18n("&lt;invalid name&gt;"));
+    info.name = readProperty(elem, PROPERTY_NAME, i18n("&lt;invalid name&gt;"));
     if (tag == QLatin1String("struct"))
         data = structFromXML(elem, info);
     else if (tag == QLatin1String("array"))
@@ -462,11 +467,11 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
     if (data)
     {
         CommonParsedData cpd(oldInfo, oldInfo.engine);
-        QString byteOrderStr = readProperty(elem, QLatin1String("byteOrder"));
+        QString byteOrderStr = readProperty(elem, PROPERTY_BYTEORDER);
         if (!byteOrderStr.isEmpty())
             cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr, oldInfo);
-        cpd.updateFuncString = readProperty(elem, QLatin1String("updateFunc"));
-        cpd.validationFuncString = readProperty(elem, QLatin1String("validationFunc"));
+        cpd.updateFuncString = readProperty(elem, PROPERTY_UPDATE_FUNC);
+        cpd.validationFuncString = readProperty(elem, PROPERTY_VALIDATION_FUNC);
         if (!DataInformationFactory::commonInitialization(data, cpd))
         {
             delete data; //error message has already been logged
@@ -477,7 +482,7 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
 }
 
 EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const OsdParserInfo& info) const
-{
+        {
     for (int i = 0; i < info.enums.size(); ++i)
     {
         const EnumDefinition::Ptr def = info.enums.at(i);
@@ -502,7 +507,7 @@ QString OsdParser::readProperty(const QDomElement& elem, const QString& property
 }
 
 QString OsdParser::toRawXML(const QDomElement& elem) const
-{
+        {
     QString ret = QLatin1Char('<') + elem.tagName();
     QDomNamedNodeMap attrs = elem.attributes();
     for (int i = 0; i < attrs.size(); ++i)

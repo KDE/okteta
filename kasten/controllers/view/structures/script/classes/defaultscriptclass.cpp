@@ -22,19 +22,20 @@
 
 #include "defaultscriptclass.h"
 
-#include "../../parsers/parserutils.h"
 #include "../../datatypes/datainformation.h"
+#include "../../parsers/parserutils.h"
 #include "../scriptlogger.h"
+
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine), mHandlerInfo(handlerInfo)
 {
-    s_valid = engine->toStringHandle(QLatin1String("valid"));
-    s_wasAbleToRead = engine->toStringHandle(QLatin1String("wasAbleToRead"));
-    s_validationError = engine->toStringHandle(QLatin1String("validationError"));
-    s_parent = engine->toStringHandle(QLatin1String("parent"));
-    s_byteOrder = engine->toStringHandle(QLatin1String("byteOrder"));
-    s_name = engine->toStringHandle(QLatin1String("name"));
+    s_valid = engine->toStringHandle(ParserStrings::PROPERTY_VALID);
+    s_wasAbleToRead = engine->toStringHandle(ParserStrings::PROPERTY_ABLE_TO_READ);
+    s_validationError = engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_ERROR);
+    s_parent = engine->toStringHandle(ParserStrings::PROPERTY_PARENT);
+    s_byteOrder = engine->toStringHandle(ParserStrings::PROPERTY_BYTEORDER);
+    s_name = engine->toStringHandle(ParserStrings::PROPERTY_NAME);
     qScriptRegisterMetaType<DataInfPtr>(engine, DefaultScriptClass::toScriptValue, DefaultScriptClass::fromScriptValue);
 
     //TODO remove, every subclass should have proto

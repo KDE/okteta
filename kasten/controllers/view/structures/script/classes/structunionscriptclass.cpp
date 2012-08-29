@@ -24,15 +24,15 @@
 #include "structunionscriptclass.h"
 #include "../../datatypes/datainformationwithchildren.h"
 #include "../../datatypes/topleveldatainformation.h"
+#include "../../parsers/parserutils.h"
 #include "../scriptlogger.h"
 
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
-    s_childCount = engine->toStringHandle(QLatin1String("childCount")); //read-only
+    s_childCount = engine->toStringHandle(ParserStrings::PROPERTY_CHILD_COUNT); //read-only
     mIterableProperties.append(qMakePair(s_childCount, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-
-    s_children = engine->toStringHandle(QLatin1String("children")); //write-only
+    s_children = engine->toStringHandle(ParserStrings::PROPERTY_CHILDREN); //write-only
 
     mStructUnionPrototype = engine->newObject();
     mStructUnionPrototype.setProperty(QLatin1String("toString"),

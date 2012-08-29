@@ -76,6 +76,51 @@ struct ParsedNumber {
     static ParsedNumber<T> badInput(const QString& str) { return ParsedNumber<T>(T(), str, false); }
 };
 
+namespace ParserStrings {
+    const QString TYPE_ARRAY = QLatin1String("array");
+    const QString TYPE_BITFIELD = QLatin1String("bitfield");
+    const QString TYPE_ENUM = QLatin1String("enum");
+    const QString TYPE_FLAGS = QLatin1String("flags");
+    const QString TYPE_PRIMITIVE = QLatin1String("primitive");
+    const QString TYPE_STRING = QLatin1String("string");
+    const QString TYPE_STRUCT = QLatin1String("struct");
+    const QString TYPE_UNION = QLatin1String("union");
+    /** Only needed for .osd */
+    const QString TYPE_ENUMDEF = QLatin1String("enumDef");
+
+
+    //all types
+    const QString PROPERTY_NAME = QLatin1String("name");
+    const QString PROPERTY_BYTEORDER = QLatin1String("byteOrder");
+    const QString PROPERTY_PARENT= QLatin1String("parent");
+    const QString PROPERTY_VALIDATION_ERROR = QLatin1String("validationError");
+    const QString PROPERTY_VALID = QLatin1String("valid");
+    const QString PROPERTY_ABLE_TO_READ = QLatin1String("wasAbleToRead");
+    const QString PROPERTY_UPDATE_FUNC = QLatin1String("updateFunc");
+    const QString PROPERTY_VALIDATION_FUNC = QLatin1String("validationFunc");
+    //enum
+    const QString PROPERTY_ENUM_VALUES = QLatin1String("enumValues");
+    //array/bitfield
+    const QString PROPERTY_TYPE = QLatin1String("type");
+    //array
+    const QString PROPERTY_LENGTH = QLatin1String("length");
+    //bitfield
+    const QString PROPERTY_WIDTH = QLatin1String("width");
+    //struct/union
+    const QString PROPERTY_CHILDREN = QLatin1String("children");
+    const QString PROPERTY_CHILD_COUNT = QLatin1String("childCount");
+    //strings
+    const QString PROPERTY_CHAR_COUNT = QLatin1String("charCount");
+    const QString PROPERTY_BYTE_COUNT = QLatin1String("byteCount");
+    const QString PROPERTY_MAX_CHAR_COUNT = QLatin1String("maxCharCount");
+    const QString PROPERTY_MAX_BYTE_COUNT = QLatin1String("maxByteCount");
+    const QString PROPERTY_TERMINATED_BY = QLatin1String("terminatedBy");
+    const QString PROPERTY_ENCODING = QLatin1String("encoding");
+    //primitive
+    const QString PROPERTY_VALUE = QLatin1String("value");
+
+}
+
 namespace ParserUtils
 {
     /** If string starts with 0x, the remainder is interpreted as a hexadecimal (unsigned) number
@@ -94,7 +139,6 @@ namespace ParserUtils
     ParsedNumber<int> intFromScriptValue(const QScriptValue& val);
     /** @see ParserUtils::intFromScriptValue() */
     ParsedNumber<uint> uintFromScriptValue(const QScriptValue& val);
-
 
     DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, const ParserInfo& info);
     QString byteOrderToString(DataInformation::DataInformationEndianess order);

@@ -24,6 +24,7 @@
 #include "scriptvalueconverter_p.h"
 
 #include "datainformationfactory.h"
+#include "parserutils.h"
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/strings/stringdata.h"
@@ -32,13 +33,15 @@
 
 #include <QScriptValueIterator>
 
+using namespace ParserStrings;
+
 namespace ScriptValueConverter
 {
 
 DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& oldInfo)
 {
     ParserInfo info(oldInfo);
-    QString nameOverride = value.property(QLatin1String("name")).toString();
+    QString nameOverride = value.property(PROPERTY_NAME).toString();
     if (!nameOverride.isEmpty())
         info.name = nameOverride;
 
@@ -98,25 +101,25 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         info.error() << "Cannot convert object since type of object could not be determined!";
         return 0;
     }
-    if (type == QLatin1String("array"))
+    if (type == TYPE_ARRAY)
         returnVal = toArray(value, info);
 
-    else if (type == QLatin1String("struct"))
+    else if (type == TYPE_STRUCT)
         returnVal = toStruct(value, info);
 
-    else if (type == QLatin1String("union"))
+    else if (type == TYPE_UNION)
         returnVal = toUnion(value, info);
 
-    else if (type == QLatin1String("bitfield"))
+    else if (type == TYPE_BITFIELD)
         returnVal = toBitfield(value, info);
 
-    else if (type == QLatin1String("enum"))
+    else if (type == TYPE_ENUM)
         returnVal = toEnum(value, false, info);
 
-    else if (type == QLatin1String("flags"))
+    else if (type == TYPE_FLAGS)
         returnVal = toEnum(value, true, info);
 
-    else if (type == QLatin1String("string"))
+    else if (type == TYPE_STRING)
         returnVal = toString(value, info);
 
     //now it can only be a primitive type or something invalid
@@ -126,11 +129,11 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     if (returnVal)
     {
         CommonParsedData cpd(info, value.engine());
-        QString byteOrderStr = value.property(QLatin1String("byteOrder")).toString();
+        QString byteOrderStr = value.property(PROPERTY_BYTEORDER).toString();
         if (!byteOrderStr.isEmpty())
             cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr, info);
-        cpd.updateFunc = value.property(QLatin1String("updateFunc"));
-        cpd.validationFunc = value.property(QLatin1String("validationFunc"));
+        cpd.updateFunc = value.property(PROPERTY_UPDATE_FUNC);
+        cpd.validationFunc = value.property(PROPERTY_VALIDATION_FUNC);
         if (!DataInformationFactory::commonInitialization(returnVal, cpd))
         {
             delete returnVal; //error message has already been logged
@@ -143,7 +146,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
 ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 {
     ArrayParsedData apd(info);
-    QScriptValue lengthProp = value.property(QLatin1String("length"));
+    QScriptValue lengthProp = value.property(PROPERTY_LENGTH);
     if (!lengthProp.isValid())
     {
         info.error() << "No array length specified!";
@@ -152,20 +155,14 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 
     if (lengthProp.isFunction())
     {
-        apd.length = 0;
         apd.lengthFunction = lengthProp;
-    }
-    else if (lengthProp.isNumber())
-    {
-        apd.length = lengthProp.toInt32();
     }
     else
     {
-        info.error() << "array length is neither number nor function: " << lengthProp.toString();
-        return 0;
+        apd.length = ParserUtils::intFromScriptValue(value);
     }
 
-    QScriptValue childType = value.property(QLatin1String("childType"));
+    QScriptValue childType = value.property(QLatin1String("childType")); //TODO property "type"
     ParserInfo childInfo(info);
     childInfo.name = info.context() + QLatin1String(".<inner>");
     childInfo.parent = 0;
@@ -177,7 +174,7 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info)
 {
     BitfieldParsedData bpd(info);
-    bpd.type = value.property(QLatin1String("bitfieldType")).toString();
+    bpd.type = value.property(QLatin1String("bitfieldType")).toString(); //TODO type
     bpd.width = ParserUtils::intFromScriptValue(value.property(QLatin1String("width")));
     return DataInformationFactory::newBitfield(bpd);
 }
@@ -185,14 +182,14 @@ AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const Par
 PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInfo& info)
 {
     PrimitiveParsedData ppd(info);
-    ppd.type = value.isString() ? value.toString() : value.property(QLatin1String("type")).toString();
+    ppd.type = value.isString() ? value.toString() : value.property(PROPERTY_TYPE).toString();
     return DataInformationFactory::newPrimitive(ppd);
 }
 
 StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info)
 {
     //TODO fix this code so parent is correct!
-    QScriptValue valueChildren = value.property(QLatin1String("children"));
+    QScriptValue valueChildren = value.property(PROPERTY_CHILDREN);
     QVector<DataInformation*> fields = convertValues(valueChildren, info.logger);
 
     if (fields.isEmpty())
@@ -205,7 +202,7 @@ StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& 
 UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 {
     //TODO fix this code so parent is correct!
-    QScriptValue valueChildren = value.property(QLatin1String("children"));
+    QScriptValue valueChildren = value.property(PROPERTY_CHILDREN);
     QVector<DataInformation*> fields = convertValues(valueChildren, info.logger);
 
     if (fields.isEmpty())
@@ -232,10 +229,10 @@ AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool flags, const
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info)
 {
     //TODO check for bad parameters
-    const QScriptValue terminatedBy = value.property(QLatin1String("terminatedBy"));
-    const QScriptValue charCount = value.property(QLatin1String("maxCharCount"));
-    const QScriptValue byteCount = value.property(QLatin1String("maxByteCount"));
-    const QScriptValue encoding = value.property(QLatin1String("encoding"));
+    const QScriptValue terminatedBy = value.property(PROPERTY_TERMINATED_BY);
+    const QScriptValue charCount = value.property(PROPERTY_MAX_CHAR_COUNT);
+    const QScriptValue byteCount = value.property(PROPERTY_MAX_BYTE_COUNT);
+    const QScriptValue encoding = value.property(PROPERTY_ENCODING);
 
     StringData::TerminationModes mode = StringData::None;
     if (terminatedBy.isNumber())

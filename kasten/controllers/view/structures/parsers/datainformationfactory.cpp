@@ -156,10 +156,20 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
         pd.error() << "Failed to parse array type!";
         return 0;
     }
-    if (pd.length < 0)
+    int initialLength = 0;
+    if (!pd.length.isValid && !pd.lengthFunction.isValid())
     {
-        pd.error() << "Cannot create array with negative length:" << pd.length;
+        pd.error() << "Neither fixed length nor length function specified, cannot create array";
         return 0;
+    }
+    if (pd.length.isValid)
+    {
+        if (pd.length.value < 0)
+        {
+            pd.error() << "Cannot create array with negative length:" << pd.length.value;
+            return 0;
+        }
+        initialLength = pd.length.value;
     }
     if (pd.lengthFunction.isValid())
     {
@@ -169,7 +179,7 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
             return 0;
         }
     }
-    return new ArrayDataInformation(pd.name, pd.length, pd.arrayType, pd.parent, pd.lengthFunction);
+    return new ArrayDataInformation(pd.name, initialLength, pd.arrayType, pd.parent, pd.lengthFunction);
 }
 
 bool DataInformationFactory::commonInitialization(DataInformation* data, const CommonParsedData& pd)

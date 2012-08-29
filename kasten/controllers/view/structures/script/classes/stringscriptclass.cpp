@@ -23,24 +23,25 @@
 
 #include "stringscriptclass.h"
 #include "../../datatypes/strings/stringdatainformation.h"
+#include "../../parsers/parserutils.h"
 
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)
 {
     //read-only properties
-    s_length = eng->toStringHandle(QLatin1String("charCount"));
-    mIterableProperties.append(qMakePair(s_length, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_lengthInBytes = eng->toStringHandle(QLatin1String("byteCount"));
+    s_lengthInCodepoints = eng->toStringHandle(ParserStrings::PROPERTY_CHAR_COUNT);
+    mIterableProperties.append(qMakePair(s_lengthInCodepoints, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    s_lengthInBytes = eng->toStringHandle(ParserStrings::PROPERTY_BYTE_COUNT);
     mIterableProperties.append(qMakePair(s_lengthInBytes, QScriptValue::ReadOnly | QScriptValue::Undeletable));
 
     //read-write properties
-    s_maxByteCount = eng->toStringHandle(QLatin1String("maxByteCount"));
+    s_maxByteCount = eng->toStringHandle(ParserStrings::PROPERTY_MAX_BYTE_COUNT);
     mIterableProperties.append(qMakePair(s_maxByteCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_maxCharCount = eng->toStringHandle(QLatin1String("maxCharCount"));
+    s_maxCharCount = eng->toStringHandle(ParserStrings::PROPERTY_MAX_CHAR_COUNT);
     mIterableProperties.append(qMakePair(s_maxCharCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_terminatedBy = eng->toStringHandle(QLatin1String("terminatedBy"));
+    s_terminatedBy = eng->toStringHandle(ParserStrings::PROPERTY_TERMINATED_BY);
     mIterableProperties.append(qMakePair(s_terminatedBy, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_encoding = eng->toStringHandle(QLatin1String("encoding"));
+    s_encoding = eng->toStringHandle(ParserStrings::PROPERTY_ENCODING);
     mIterableProperties.append(qMakePair(s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mStringPrototype = eng->newObject();
@@ -58,7 +59,7 @@ bool StringScriptClass::queryAdditionalProperty(const DataInformation* data, con
     if (name == s_maxByteCount || name == s_maxCharCount || name == s_terminatedBy
             || name == s_encoding)
         return true;
-    else if (name == s_length || name == s_lengthInBytes)
+    else if (name == s_lengthInCodepoints || name == s_lengthInBytes)
     {
         *flags &= ~HandlesWriteAccess;
         return true;
@@ -97,9 +98,6 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
     if (id != 0)
     {
         quint32 pos = id - 1;
-#ifdef OKTETA_DEBUG_SCRIPT
-        kDebug() << "accessing property with id=" << id << "and name=" << name.toString();
-#endif
         if (pos >= uint(sData->stringLength()))
             return engine()->undefinedValue();
         else
@@ -107,7 +105,7 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
             return sData->valueAt(pos);
         }
     }
-    else if (name == s_length)
+    else if (name == s_lengthInCodepoints)
         return sData->stringLength();
     else if (name == s_lengthInBytes)
         return sData->stringByteLength();

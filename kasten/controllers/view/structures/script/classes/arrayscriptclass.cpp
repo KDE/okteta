@@ -23,15 +23,19 @@
 
 #include "arrayscriptclass.h"
 #include "../../datatypes/array/arraydatainformation.h"
+#include "../../parsers/parserutils.h"
 #include "../scriptlogger.h"
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
-    s_length = engine->toStringHandle(QLatin1String("length"));
+    s_length = engine->toStringHandle(ParserStrings::PROPERTY_LENGTH);
     mIterableProperties.append(qMakePair(s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_childType = engine->toStringHandle(QLatin1String("childType"));
     mIterableProperties.append(qMakePair(s_childType, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    //the preferred property (the same as childType
+    s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE);
+    mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mArrayPrototype = engine->newObject();
     mArrayPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Array_proto_toString));
@@ -47,7 +51,7 @@ bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, cons
     //no need to modify flags since both read and write are handled
     if (name == s_length)
         return true;
-    else if (name == s_childType)
+    else if (name == s_type || name == s_childType)
         return true;
     else
     {
@@ -82,9 +86,6 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
     if (id != 0)
     {
         quint32 pos = id - 1;
-#ifdef OKTETA_DEBUG_SCRIPT
-        kDebug() << "accessing property with id=" << id << "and name=" << name.toString();
-#endif
         if (pos >= data->childCount())
         {
             aData->logger()->error(aData) << "attempting to access out of bounds child: index was" << pos
@@ -98,8 +99,13 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
     }
     else if (name == s_length)
         return aData->length();
-    else if (name == s_childType)
+    else if (name == s_type)
         return aData->childType();
+    else if (name == s_childType)
+    {
+        aData->logger()->warn(aData) << "Using property 'childType' is deprecated, use the new name 'type' instead";
+        return aData->childType();
+    }
     return QScriptValue();
 }
 
@@ -120,8 +126,14 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
         }
         return true;
     }
+    else if (name == s_type)
+    {
+        aData->setArrayType(value);
+        return true;
+    }
     else if (name == s_childType)
     {
+        aData->logger()->warn(aData) << "Using property 'childType' is deprecated, use the new name 'type' instead";
         aData->setArrayType(value);
         return true;
     }

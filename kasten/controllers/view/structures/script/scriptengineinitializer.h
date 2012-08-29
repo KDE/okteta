@@ -58,7 +58,6 @@ QScriptValue scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng);
 /** create a new flag value:
  *  first parameter is the type, second parameter is a list of name - value pairs */
 QScriptValue scriptNewFlags(QScriptContext* ctx, QScriptEngine* eng);
-QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags);
 /** this script constructors/initializer takes no parameters */
 QScriptValue scriptNewUInt8(QScriptContext* ctx, QScriptEngine* eng);
 /** this script constructors/initializer takes no parameters */
@@ -140,10 +139,6 @@ QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng);
 /** this constructor takes one argument, the encoding of the string (as a string) */
 QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
-/** Do the common initialization shared by all constructors */
-QScriptValue scriptNewCommon(QScriptContext* ctx, QScriptEngine* eng, QLatin1String typeName);
-
-QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const char* type);
 
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);

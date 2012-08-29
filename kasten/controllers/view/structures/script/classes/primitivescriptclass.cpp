@@ -23,6 +23,7 @@
 
 #include "primitivescriptclass.h"
 #include "../../datatypes/primitive/primitivedatainformation.h"
+#include "../../parsers/parserutils.h"
 #include "../../allprimitivetypes.h"
 
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)

@@ -77,8 +77,8 @@ private:
 };
 
 struct ArrayParsedData : public ParserInfo {
-    inline explicit ArrayParsedData(const ParserInfo& i) : ParserInfo(i), length(-1), arrayType(0) {}
-    int length;
+    inline explicit ArrayParsedData(const ParserInfo& i) : ParserInfo(i), arrayType(0) {}
+    ParsedNumber<int> length;
     QScriptValue lengthFunction;
     DataInformation* arrayType;
 private:

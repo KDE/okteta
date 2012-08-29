@@ -41,7 +41,7 @@ protected:
 
     static QScriptValue String_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 protected:
-    QScriptString s_length;
+    QScriptString s_lengthInCodepoints;
     QScriptString s_lengthInBytes;
     QScriptString s_encoding;
     QScriptString s_terminatedBy;
