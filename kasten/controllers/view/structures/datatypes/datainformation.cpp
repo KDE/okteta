@@ -33,14 +33,15 @@
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
         : mValidationSuccessful(false), mHasBeenValidated(false), mWasAbleToRead(false),
-                mByteOrder(EndianessInherit), mAdditionalData(0), mParent(parent), mName(name)
+                mByteOrder(EndianessInherit), mLoggedData(ScriptLogger::LogInvalid),
+                mAdditionalData(0), mParent(parent), mName(name)
 {
 }
 
 DataInformation::DataInformation(const DataInformation& d)
         : mValidationSuccessful(d.mValidationSuccessful),
                 mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead),
-                mByteOrder(d.mByteOrder), mParent(0), mName(d.mName)
+                mByteOrder(d.mByteOrder), mLoggedData(d.mLoggedData), mParent(0), mName(d.mName)
 {
     if (d.mAdditionalData)
         mAdditionalData.reset(new AdditionalData(*(d.mAdditionalData)));
@@ -70,7 +71,7 @@ QString DataInformation::sizeString() const
 }
 
 BitCount32 DataInformation::positionRelativeToRoot(int index) const
-        {
+{
     Q_CHECK_PTR(mParent);
     //FIXME this needs updating to support bitfield marking
     if (mParent->isTopLevel())
@@ -169,6 +170,8 @@ void DataInformation::beginRead()
         childAt(i)->beginRead();
     }
     mWasAbleToRead = false;
+    mHasBeenValidated = false;
+    mLoggedData = ScriptLogger::LogInvalid;
 }
 
 ScriptLogger* DataInformation::logger() const
@@ -273,14 +276,14 @@ void DataInformation::setValidationFunc(const QScriptValue& func)
 }
 
 int DataInformation::indexOf(const DataInformation* const data) const
-        {
+{
     Q_UNUSED(data)
     Q_ASSERT_X(false, "DataInformation::indexOf", "this should never happen!");
     return 0;
 }
 
 QVariant DataInformation::childData(int row, int column, int role) const
-        {
+{
     Q_ASSERT_X(false, "DataInformation::childData", "this should never happen!");
     Q_UNUSED(row)
     Q_UNUSED(column)
@@ -289,7 +292,7 @@ QVariant DataInformation::childData(int row, int column, int role) const
 }
 
 QVariant DataInformation::data(int column, int role) const
-        {
+{
     if (role == Qt::DisplayRole)
     {
         if (column == ColumnName)
@@ -308,6 +311,8 @@ QVariant DataInformation::data(int column, int role) const
         //XXX better icons?
         if (mHasBeenValidated)
             return KIcon(QLatin1String(mValidationSuccessful ? "task-complete" : "dialog-warning"));
+        if (mLoggedData != ScriptLogger::LogInvalid)
+            return ScriptLogger::iconForLevel(mLoggedData);
     }
     return QVariant();
 }

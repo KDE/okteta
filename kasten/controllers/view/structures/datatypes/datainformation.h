@@ -188,7 +188,11 @@ public:
     QDebug logWarn() const;
     /** just a shorthand for logger->error(this) */
     QDebug logError() const;
-
+    /** whether data was logged from here (and which level it was)
+     * @return ScriptLogger::LogInvalid if no data was logged or the level of the most severe log
+     */
+    ScriptLogger::LogLevel loggedData() const;
+    void setLoggedData(ScriptLogger::LogLevel lvl) const;
 
 protected:
     /**
@@ -210,6 +214,7 @@ protected:
     bool mHasBeenValidated :1;
     bool mWasAbleToRead :1;
     DataInformationEndianess mByteOrder :2;
+    mutable ScriptLogger::LogLevel mLoggedData :2; //mutable is ugly but i guess it is the best solution
     QScopedPointer<AdditionalData> mAdditionalData;
     DataInformationBase* mParent;
     QString mName;
@@ -219,7 +224,7 @@ Q_DECLARE_METATYPE(DataInformation*)
 Q_DECLARE_METATYPE(const DataInformation*)
 
 inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
-        {
+{
     Q_UNUSED(column)
     Q_UNUSED(fileLoaded);
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
@@ -236,7 +241,7 @@ inline void DataInformation::setName(const QString& newName)
 }
 
 inline DataInformation* DataInformation::childAt(unsigned int) const
-        {
+{
     return NULL;
 }
 
@@ -305,4 +310,15 @@ inline QDebug DataInformation::logError() const
 {
     return logger()->error(this);
 }
+
+inline ScriptLogger::LogLevel DataInformation::loggedData() const
+{
+    return mLoggedData;
+}
+
+inline void DataInformation::setLoggedData(ScriptLogger::LogLevel lvl) const
+{
+    mLoggedData = lvl;
+}
+
 #endif /* DATAINFORMATION_H_ */

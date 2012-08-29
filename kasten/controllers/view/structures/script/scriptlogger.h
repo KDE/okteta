@@ -42,6 +42,7 @@ public:
     enum Columns {
         ColumnTime = 0, ColumnOrigin, ColumnMessage, COLUMN_COUNT
     };
+    //fits into 2 bits
 	enum LogLevel {
 	    LogInvalid = 0, LogInfo = 1, LogWarning = 2, LogError = 3
 	};
@@ -84,7 +85,6 @@ public:
 	/** whether to log to stdout instead of saving the messages */
 	inline void setLogToStdOut(bool val) { mLogToStdOut = val; }
 
-private:
 	static KIcon iconForLevel(LogLevel level);
 private:
 	QVector<Data> mData;

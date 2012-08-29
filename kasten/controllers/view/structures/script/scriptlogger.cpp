@@ -59,6 +59,8 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
             return QVariant();
         }
     }
+    if (role == Qt::DecorationRole && index.column() == ColumnTime)
+        return iconForLevel(mData.at(row).level);
     return QVariant();
 }
 
@@ -77,12 +79,7 @@ int ScriptLogger::columnCount(const QModelIndex& parent) const
 
 QVariant ScriptLogger::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if (orientation == Qt::Vertical && role == Qt::DecorationRole)
-    {
-        if (section < mData.size())
-            return iconForLevel(mData.at(section).level);
-    }
-    else if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
     {
         switch (section)
         {
@@ -101,11 +98,15 @@ QVariant ScriptLogger::headerData(int section, Qt::Orientation orientation, int 
 
 QDebug ScriptLogger::log(LogLevel level, const DataInformation* origin)
 {
+    Q_CHECK_PTR(origin);
+    if (origin->loggedData() < level)
+        origin->setLoggedData(level);
     return log(level, origin->fullObjectPath());
 }
 
 QDebug ScriptLogger::log(LogLevel level, const QString& origin)
 {
+    Q_ASSERT(level != LogInvalid);
     if (mLogToStdOut)
         return qDebug();
 

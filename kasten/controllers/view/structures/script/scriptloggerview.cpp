@@ -43,13 +43,6 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     horizHeader->setResizeMode(QHeaderView::Interactive);
     horizHeader->setSortIndicatorShown(false);
     horizHeader->setStretchLastSection(true);
-    QHeaderView* vertHeader = mView->verticalHeader();
-    vertHeader->setResizeMode(QHeaderView::Interactive);
-    vertHeader->setAcceptDrops(false);
-    vertHeader->setAlternatingRowColors(true);
-    vertHeader->setSortIndicatorShown(false);
-    vertHeader->setStretchLastSection(false);
-
     if (!mList.isEmpty())
     {
         mView->setModel(mList.at(0)->logger());
