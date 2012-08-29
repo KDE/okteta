@@ -91,6 +91,9 @@ private:
      * the inner text of an element with tag equal to @p attrib is returned*/
     static QString readProperty(const QDomElement& elem, const QString& attrib, const QString& defaultVal = QString());
 
+    /** This essentially calls engine->evaluate(str), but ensures it can be a function (QTBUG-5757)  */
+    static QScriptValue functionSafeEval(QScriptEngine* engine, const QString& str);
+
 private:
     /** @return the element as an XML string (excluding children) */
     QString toRawXML(const QDomElement& elem) const;

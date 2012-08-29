@@ -36,15 +36,10 @@
 #include "parserutils.h"
 
 struct CommonParsedData : public ParserInfo {
-    inline explicit CommonParsedData(const ParserInfo& i, QScriptEngine* engine)
-        : ParserInfo(i), engine(engine), endianess(DataInformation::EndianessInherit) {}
-    QScriptEngine* engine;
+    inline explicit CommonParsedData(const ParserInfo& i)
+        : ParserInfo(i), endianess(DataInformation::EndianessInherit) {}
     QScriptValue updateFunc;
-    /** if this is not empty it is evaluated */
-    QString updateFuncString;
     QScriptValue validationFunc;
-    /** if this is not empty it is evaluated */ //TODO remove
-    QString validationFuncString;
     DataInformation::DataInformationEndianess endianess;
 private:
     Q_DISABLE_COPY(CommonParsedData)

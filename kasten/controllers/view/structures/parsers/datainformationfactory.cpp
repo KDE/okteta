@@ -126,17 +126,6 @@ T* newEnumOrFlags(const EnumParsedData& pd)
     return new T(pd.name, primData, definition, pd.parent);
 }
 
-inline QScriptValue functionFromString(const QString& str, const CommonParsedData& info)
-{
-    Q_ASSERT(!str.isEmpty());
-    //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
-    QScriptValue ret = info.engine->evaluate(QLatin1Char('(') + str + QLatin1Char(')'));
-    if (ret.isFunction())
-        return ret;
-    else
-        return QScriptValue();
-}
-
 }
 
 EnumDataInformation* DataInformationFactory::newEnum(const EnumParsedData& pd)
@@ -185,44 +174,26 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
 bool DataInformationFactory::commonInitialization(DataInformation* data, const CommonParsedData& pd)
 {
     data->setByteOrder(pd.endianess);
-    QScriptValue update = pd.updateFunc;
-    if (!pd.updateFuncString.isEmpty())
-    {
-        update = functionFromString(pd.updateFuncString, pd);
-        if (!update.isFunction())
-        {
-            pd.error() << "Could not convert updateFunc to function: " << pd.updateFuncString;
-            return false;
-        }
-    }
-    QScriptValue validation = pd.validationFunc;
-    if (!pd.validationFuncString.isEmpty())
-    {
-        validation = functionFromString(pd.validationFuncString, pd);
-        if (!validation.isFunction())
-        {
-            pd.error() << "Could not convert validationFunc to function: " << pd.validationFuncString;
-            return false;
-        }
-    }
 
-    if (update.isValid())
+    if (pd.updateFunc.isValid())
     {
-        if (!update.isFunction())
+        if (!pd.updateFunc.isFunction())
         {
-            pd.error() << "Update function is not a function: " << update.toString();
+            pd.error() << "Update function is not a function: " << pd.updateFunc.toString();
             return false;
         }
-        data->setUpdateFunc(update);
+        else
+            data->setUpdateFunc(pd.updateFunc);
     }
-    if (validation.isValid())
+    if (pd.validationFunc.isValid())
     {
-        if (!validation.isFunction())
+        if (!pd.validationFunc.isFunction())
         {
-            pd.error() << "Validation function is not a function: " << validation.toString();
+            pd.error() << "Validation function is not a function: " << pd.validationFunc.toString();
             return false;
         }
-        data->setValidationFunc(validation);
+        else
+            data->setValidationFunc(pd.validationFunc);
     }
     return true;
 

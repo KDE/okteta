@@ -265,7 +265,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     {
         //we failed to parse as an integer, must be an update function now
         //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
-        apd.lengthFunction = info.engine->evaluate(QLatin1Char('(') + lengthStr + QLatin1Char(')'));
+        apd.lengthFunction = functionSafeEval(info.engine, lengthStr);
         if (!apd.lengthFunction.isFunction())
         {
             info.error() << "Array length is neither number nor function ('" << lengthStr
@@ -447,31 +447,31 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
     const QString tag = elem.tagName();
     OsdParserInfo info(oldInfo);
     info.name = readProperty(elem, PROPERTY_NAME, i18n("&lt;invalid name&gt;"));
-    if (tag == QLatin1String("struct"))
+    if (tag == TYPE_STRUCT)
         data = structFromXML(elem, info);
-    else if (tag == QLatin1String("array"))
+    else if (tag == TYPE_ARRAY)
         data = arrayFromXML(elem, info);
-    else if (tag == QLatin1String("bitfield"))
+    else if (tag == TYPE_BITFIELD)
         data = bitfieldFromXML(elem, info);
-    else if (tag == QLatin1String("primitive"))
+    else if (tag == TYPE_PRIMITIVE)
         data = primitiveFromXML(elem, info);
-    else if (tag == QLatin1String("union"))
+    else if (tag == TYPE_UNION)
         data = unionFromXML(elem, info);
-    else if (tag == QLatin1String("enum"))
+    else if (tag == TYPE_ENUM)
         data = enumFromXML(elem, false, info);
-    else if (tag == QLatin1String("flags"))
+    else if (tag == TYPE_FLAGS)
         data = enumFromXML(elem, true, info);
-    else if (tag == QLatin1String("string"))
+    else if (tag == TYPE_STRING)
         data = stringFromXML(elem, info);
 
     if (data)
     {
-        CommonParsedData cpd(oldInfo, oldInfo.engine);
+        CommonParsedData cpd(info);
         QString byteOrderStr = readProperty(elem, PROPERTY_BYTEORDER);
         if (!byteOrderStr.isEmpty())
             cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr, oldInfo);
-        cpd.updateFuncString = readProperty(elem, PROPERTY_UPDATE_FUNC);
-        cpd.validationFuncString = readProperty(elem, PROPERTY_VALIDATION_FUNC);
+        cpd.updateFunc = functionSafeEval(info.engine, readProperty(elem, PROPERTY_UPDATE_FUNC));
+        cpd.validationFunc = functionSafeEval(info.engine, readProperty(elem, PROPERTY_VALIDATION_FUNC));
         if (!DataInformationFactory::commonInitialization(data, cpd))
         {
             delete data; //error message has already been logged
@@ -482,7 +482,7 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
 }
 
 EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const OsdParserInfo& info) const
-        {
+{
     for (int i = 0; i < info.enums.size(); ++i)
     {
         const EnumDefinition::Ptr def = info.enums.at(i);
@@ -507,7 +507,7 @@ QString OsdParser::readProperty(const QDomElement& elem, const QString& property
 }
 
 QString OsdParser::toRawXML(const QDomElement& elem) const
-        {
+{
     QString ret = QLatin1Char('<') + elem.tagName();
     QDomNamedNodeMap attrs = elem.attributes();
     for (int i = 0; i < attrs.size(); ++i)
@@ -517,5 +517,12 @@ QString OsdParser::toRawXML(const QDomElement& elem) const
                 + QLatin1Char('"');
     }
     ret += QLatin1String("/>");
+    return ret;
+}
+
+QScriptValue OsdParser::functionSafeEval(QScriptEngine* engine, const QString& str)
+{
+    //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
+    QScriptValue ret = engine->evaluate(QLatin1Char('(') + str + QLatin1Char(')'));
     return ret;
 }

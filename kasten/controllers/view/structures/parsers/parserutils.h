@@ -100,6 +100,8 @@ namespace ParserStrings {
     const QString PROPERTY_VALIDATION_FUNC = QLatin1String("validationFunc");
     //enum
     const QString PROPERTY_ENUM_VALUES = QLatin1String("enumValues");
+    //this one is javascript only
+    const QString PROPERTY_ENUM_NAME = QLatin1String("enumName");
     //array/bitfield
     const QString PROPERTY_TYPE = QLatin1String("type");
     //array
@@ -109,6 +111,7 @@ namespace ParserStrings {
     //struct/union
     const QString PROPERTY_CHILDREN = QLatin1String("children");
     const QString PROPERTY_CHILD_COUNT = QLatin1String("childCount");
+    const QString PROPERTY_CHILD = QLatin1String("child");
     //strings
     const QString PROPERTY_CHAR_COUNT = QLatin1String("charCount");
     const QString PROPERTY_BYTE_COUNT = QLatin1String("byteCount");
@@ -118,6 +121,8 @@ namespace ParserStrings {
     const QString PROPERTY_ENCODING = QLatin1String("encoding");
     //primitive
     const QString PROPERTY_VALUE = QLatin1String("value");
+
+    const QString PROPERTY_INTERNAL_TYPE = QLatin1String("__type");
 
 }
 

@@ -101,7 +101,6 @@ QScriptEngine* newEngine()
 namespace Private
 {
 
-static const QString typePropertyString = QLatin1String("type");
 static const QString setUpdatePropertyString = QLatin1String("setUpdate");
 static const QString setValidationPropertyString = QLatin1String("setValidation");
 
@@ -110,7 +109,7 @@ namespace {
 QScriptValue scriptNewCommon(QScriptContext* ctx, QScriptEngine* eng, const QString& typeName)
 {
     QScriptValue object = ctx->isCalledAsConstructor() ? ctx->thisObject() : eng->newObject();
-    object.setProperty(typePropertyString, typeName);
+    object.setProperty(ParserStrings::PROPERTY_INTERNAL_TYPE, typeName);
     //add the setUpdate() and setValidation() functions
     object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
     object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
@@ -118,15 +117,16 @@ QScriptValue scriptNewCommon(QScriptContext* ctx, QScriptEngine* eng, const QStr
 }
 
 /** create a new primitive of type @p type */
-QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const char* type)
+QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const QString& type)
 {
-    QScriptValue object = scriptNewCommon(ctx, eng, QLatin1String(type));
+    QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_PRIMITIVE);
+    object.setProperty(ParserStrings::PROPERTY_TYPE, type);
     return object;
 }
 
 }
 #define PRIMITIVE_CONSTRUCTOR(type) QScriptValue scriptNew##type(QScriptContext* ctx, QScriptEngine* eng) \
-        { return primitiveConstructor(ctx, eng, #type); }
+        { return primitiveConstructor(ctx, eng, QLatin1String(#type)); }
 
 PRIMITIVE_CONSTRUCTOR(UInt8)
 PRIMITIVE_CONSTRUCTOR(UInt16)
@@ -150,7 +150,7 @@ QScriptValue scriptNewBitfield(QScriptContext* ctx, QScriptEngine* eng)
 {
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_BITFIELD);
 
-    object.setProperty(QLatin1String("bitfieldType"), ctx->argument(0)); //first argument is type
+    object.setProperty(ParserStrings::PROPERTY_TYPE, ctx->argument(0)); //first argument is type
     object.setProperty(ParserStrings::PROPERTY_WIDTH, ctx->argument(1)); //second argument is width
     return object;
 }
@@ -159,7 +159,7 @@ QScriptValue scriptNewBitfield(QScriptContext* ctx, QScriptEngine* eng)
 QScriptValue scriptNewStruct(QScriptContext* ctx, QScriptEngine* eng)
 {
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_STRUCT);
-    object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
+    object.setProperty(ParserStrings::PROPERTY_CHILD, eng->newFunction(getChild));
 
     object.setProperty(ParserStrings::PROPERTY_CHILDREN, ctx->argument(0)); //first argument is children
     return object;
@@ -168,7 +168,7 @@ QScriptValue scriptNewStruct(QScriptContext* ctx, QScriptEngine* eng)
 QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng)
 {
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_UNION);
-    object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
+    object.setProperty(ParserStrings::PROPERTY_TYPE, eng->newFunction(getChild));
 
     object.setProperty(ParserStrings::PROPERTY_CHILDREN, ctx->argument(0)); //first argument is children
     return object;
@@ -178,7 +178,7 @@ QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng)
 {
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_ARRAY);
 
-    object.setProperty(QLatin1String("childType"), ctx->argument(0)); //first argument is child type
+    object.setProperty(ParserStrings::PROPERTY_TYPE, ctx->argument(0)); //first argument is child type
     object.setProperty(ParserStrings::PROPERTY_LENGTH, ctx->argument(1)); //second argument is length
     return object;
 }
@@ -187,12 +187,9 @@ QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, const QSt
 {
     QScriptValue object = scriptNewCommon(ctx, eng, typeName);
 
-    object.setProperty(QLatin1String("enumName"), ctx->argument(0)); //first argument is the name of the underlying enum
-    QScriptValue enumType = ctx->argument(1);
-    if (!enumType.isString() && enumType.isObject())
-        enumType = enumType.property(typePropertyString);
-    object.setProperty(QLatin1String("enumType"), enumType); //second argument is the type of the enum
-    object.setProperty(QLatin1String("enumValues"), ctx->argument(2)); //third argument is the enum values
+    object.setProperty(ParserStrings::PROPERTY_ENUM_NAME, ctx->argument(0)); //first argument is the name of the underlying enum
+    object.setProperty(ParserStrings::PROPERTY_TYPE, ctx->argument(1)); //second argument is the type of the enum
+    object.setProperty(ParserStrings::PROPERTY_ENUM_VALUES, ctx->argument(2)); //third argument is the enum values
     return object;
 }
 

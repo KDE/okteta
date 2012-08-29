@@ -74,7 +74,6 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     }
     //variant and qobject are also object types, however they cannot appear from user code, no need to check
 
-    DataInformation* returnVal;
     //if it is a string, we convert to primitive type, if not it has to be an object
     if (value.isString())
         return toPrimitive(value, info); //a type string is also okay
@@ -95,12 +94,15 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         return 0; //no point trying to convert
     }
 
-    QString type = value.property(QLatin1String("type")).toString().toLower(); //to lower just to be safe
+    //TODO internal type
+    QString type = value.property(PROPERTY_INTERNAL_TYPE).toString().toLower(); //to lower just to be safe
     if (type.isEmpty())
     {
         info.error() << "Cannot convert object since type of object could not be determined!";
         return 0;
     }
+    DataInformation* returnVal = 0;
+
     if (type == TYPE_ARRAY)
         returnVal = toArray(value, info);
 
@@ -122,13 +124,12 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     else if (type == TYPE_STRING)
         returnVal = toString(value, info);
 
-    //now it can only be a primitive type or something invalid
-    else
+    else if (type == TYPE_PRIMITIVE)
         returnVal = toPrimitive(value, info);
 
     if (returnVal)
     {
-        CommonParsedData cpd(info, value.engine());
+        CommonParsedData cpd(info);
         QString byteOrderStr = value.property(PROPERTY_BYTEORDER).toString();
         if (!byteOrderStr.isEmpty())
             cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr, info);
@@ -162,7 +163,7 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
         apd.length = ParserUtils::intFromScriptValue(value);
     }
 
-    QScriptValue childType = value.property(QLatin1String("childType")); //TODO property "type"
+    QScriptValue childType = value.property(PROPERTY_TYPE);
     ParserInfo childInfo(info);
     childInfo.name = info.context() + QLatin1String(".<inner>");
     childInfo.parent = 0;
@@ -174,8 +175,8 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info)
 {
     BitfieldParsedData bpd(info);
-    bpd.type = value.property(QLatin1String("bitfieldType")).toString(); //TODO type
-    bpd.width = ParserUtils::intFromScriptValue(value.property(QLatin1String("width")));
+    bpd.type = value.property(PROPERTY_TYPE).toString(); //TODO type
+    bpd.width = ParserUtils::intFromScriptValue(value.property(PROPERTY_WIDTH));
     return DataInformationFactory::newBitfield(bpd);
 }
 
@@ -215,9 +216,14 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
 {
     EnumParsedData epd(info);
-    epd.type = value.property(QLatin1String("enumType")).toString();
-    epd.enumName = value.property(QLatin1String("enumName")).toString();
-    epd.enumValuesObject = value.property(QLatin1String("enumValues"));
+    QScriptValue enumType = value.property(PROPERTY_TYPE);
+    if (enumType.isString())
+        epd.type = enumType.toString();
+    else if (enumType.isObject())
+        epd.type = enumType.property(PROPERTY_TYPE).toString();
+    //else it stays empty
+    epd.enumName = value.property(PROPERTY_ENUM_NAME).toString();
+    epd.enumValuesObject = value.property(PROPERTY_ENUM_VALUES);
 
     if (flags)
         return DataInformationFactory::newFlags(epd);
