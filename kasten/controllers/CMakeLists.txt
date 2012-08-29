@@ -332,6 +332,7 @@ set( STRUCTVIEW_SRCS
   view/structures/script/classes/arrayscriptclass.cpp
   view/structures/script/classes/primitivescriptclass.cpp
   view/structures/script/classes/enumscriptclass.cpp
+  view/structures/script/classes/pointerscriptclass.cpp
   view/structures/script/classes/bitfieldscriptclass.cpp
   view/structures/script/classes/stringscriptclass.cpp
   view/structures/script/classes/structunionscriptclass.cpp

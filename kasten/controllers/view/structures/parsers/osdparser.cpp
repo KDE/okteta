@@ -380,18 +380,19 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
 template<class T>
 T* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
 {
-    QVector<DataInformation*> children;
-
-    DummyDataInformation dummy(0, info.context());
+    T* structOrUnion = new T(info.name, QVector<DataInformation*>(), info.parent);
     OsdParserInfo newInfo(info);
-    newInfo.parent = &dummy;
+    newInfo.parent = structOrUnion;
+    newInfo.name = QString();
     for (QDomElement elem = xmlElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement())
     {
         DataInformation* data = parseElement(elem, newInfo);
         if (data)
-            children.append(data);
+            structOrUnion->appendChild(data, false);
+
     }
-    T* structOrUnion = new T(info.name, children, info.parent);
+    if (structOrUnion->childCount() == 0)
+        info.info() << "No children were found, this is probably a mistake.";
     return structOrUnion;
 }
 

@@ -32,6 +32,7 @@ class ArrayScriptClass;
 class PrimitiveScriptClass;
 class StringScriptClass;
 class BitfieldScriptClass;
+class PointerScriptClass;
 class QScriptEngine;
 
 class ScriptHandlerInfo {
@@ -50,6 +51,7 @@ public:
     QScopedPointer<StructUnionScriptClass> mStructUnionClass;
     QScopedPointer<StringScriptClass> mStringClass;
     QScopedPointer<BitfieldScriptClass> mBitfieldClass;
+    QScopedPointer<PointerScriptClass> mPointerClass;
     /** @return The mode this handler is currently in (determines which properties are accessible */
     inline Mode mode() const { return mMode; }
     inline void setMode(Mode m) { mMode = m; }

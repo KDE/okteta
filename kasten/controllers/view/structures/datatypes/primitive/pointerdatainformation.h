@@ -76,11 +76,12 @@ public:
      */
     void setPointerTarget(DataInformation* target);
 
-    DataInformation* pointerType() const;
+    PrimitiveDataInformation* pointerType() const;
     /** Set a new pointer target
-    * @param type the new pointer type (ownership is taken)
-    */
-    void setPointerType(PrimitiveDataInformation* type);
+     * @param type the new pointer type (ownership is taken if return value is true)
+     * @return true if type was set, false if not
+     */
+    bool setPointerType(DataInformation* type);
 };
 
 inline bool PointerDataInformation::canHaveChildren() const
@@ -110,17 +111,9 @@ inline void PointerDataInformation::setPointerTarget(DataInformation* target)
     mPointerTarget->setParent(this);
 }
 
-inline DataInformation* PointerDataInformation::pointerType() const
+inline PrimitiveDataInformation* PointerDataInformation::pointerType() const
 {
     return mValue.data();
 }
-
-inline void PointerDataInformation::setPointerType(PrimitiveDataInformation* type)
-{
-    Q_CHECK_PTR(type);
-    mValue.reset(type);
-    mValue->setParent(this);
-}
-
 
 #endif // POINTERDATAINFORMATION_H

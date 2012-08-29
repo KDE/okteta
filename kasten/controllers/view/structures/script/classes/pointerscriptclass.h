@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -20,28 +20,25 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "scripthandlerinfo.h"
-#include "classes/arrayscriptclass.h"
-#include "classes/primitivescriptclass.h"
-#include "classes/structunionscriptclass.h"
-#include "classes/stringscriptclass.h"
-#include "classes/enumscriptclass.h"
-#include "classes/bitfieldscriptclass.h"
-#include "classes/pointerscriptclass.h"
 
-ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine)
-    : mArrayClass(new ArrayScriptClass(engine, this)),
-      mPrimitiveClass(new PrimitiveScriptClass(engine, this)),
-      mEnumClass(new EnumScriptClass(engine, this)),
-      mStructUnionClass(new StructUnionScriptClass(engine, this)),
-      mStringClass(new StringScriptClass(engine, this)),
-      mBitfieldClass(new BitfieldScriptClass(engine, this)),
-      mPointerClass(new PointerScriptClass(engine, this)),
-      mMode(None)
-{
-}
+#ifndef POINTERSCRIPTCLASS_H
+#define POINTERSCRIPTCLASS_H
 
-ScriptHandlerInfo::~ScriptHandlerInfo()
-{
-}
+#include "primitivescriptclass.h"
 
+class PointerScriptClass : public PrimitiveScriptClass {
+    Q_DISABLE_COPY(PointerScriptClass)
+public:
+    PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+    virtual ~PointerScriptClass();
+protected:
+    virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id);
+    virtual QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id);
+    virtual bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value);
+
+protected:
+    QScriptString s_target;
+    QScriptString s_type;
+};
+
+#endif // POINTERSCRIPTCLASS_H

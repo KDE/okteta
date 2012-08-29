@@ -26,7 +26,7 @@
 #include "../primitivedatatype.h"
 #include "../../allprimitivetypes.h"
 #include "../../script/scripthandlerinfo.h"
-#include "../../script/classes/structunionscriptclass.h" //TODO FIXME!!!
+#include "../../script/classes/pointerscriptclass.h"
 #include "../../script/scriptlogger.h"
 
 #include <QScriptEngine>
@@ -62,7 +62,7 @@ PointerDataInformation::PointerDataInformation(const PointerDataInformation& d)
 
 QScriptValue PointerDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    QScriptValue ret = engine->newObject(handlerInfo->mStructUnionClass.data());
+    QScriptValue ret = engine->newObject(handlerInfo->mPointerClass.data());
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
 }
@@ -192,4 +192,27 @@ DataInformation* PointerDataInformation::childAt(uint index) const
 QScriptValue PointerDataInformation::valueAsQScriptValue() const
 {
     return mValue->valueAsQScriptValue();
+}
+
+bool PointerDataInformation::setPointerType(DataInformation* type)
+{
+    Q_CHECK_PTR(type);
+    if (!type->isPrimitive())
+    {
+        logError() << "New pointer type is not primitive!";
+        return false;
+    }
+    PrimitiveDataInformation* prim = type->asPrimitive();
+    const PrimitiveDataType pdt = prim->type();
+    if (pdt == Type_UInt8 || pdt == Type_UInt16 || pdt == Type_UInt32 || pdt == Type_UInt64)
+    {
+        mValue.reset(prim);
+        mValue->setParent(this);
+        return true;
+    }
+    else
+    {
+        logError() << "New pointer type is not an unsigned integer: " << pdt;
+        return false;
+    }
 }
