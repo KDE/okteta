@@ -57,14 +57,12 @@ private:
     struct OsdParserInfo : public ParserInfo {
         inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
                 QScriptEngine* engine, QVector<EnumDefinition::Ptr> enums)
-            : ParserInfo(name, logger, parent), engine(engine), enums(enums), scriptEngineNeeded(false) {}
-        inline OsdParserInfo(const OsdParserInfo& i)
-            : ParserInfo(i), engine(i.engine), enums(i.enums), scriptEngineNeeded(i.scriptEngineNeeded) {}
+            : ParserInfo(name, logger, parent), engine(engine), enums(enums) {}
+        inline OsdParserInfo(const OsdParserInfo& i) : ParserInfo(i), engine(i.engine), enums(i.enums) {}
         inline ~OsdParserInfo() {}
         /** OSD parser only since QScriptValue::engine() exists */
         QScriptEngine* engine;
         QVector<EnumDefinition::Ptr> enums;
-        bool scriptEngineNeeded;
     };
 
     PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
@@ -73,13 +71,13 @@ private:
             const OsdParserInfo& info) const;
     StringDataInformation* stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
 
-    template<class T> T* structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
-    UnionDataInformation* unionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
-    StructureDataInformation* structFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
+    template<class T> T* structOrUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
+    UnionDataInformation* unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
+    StructureDataInformation* structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
 
-    ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
+    ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
 
-    DataInformation* parseNode(const QDomNode& node, OsdParserInfo& info) const;
+    DataInformation* parseNode(const QDomNode& node, const OsdParserInfo& info) const;
 
     EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info) const;
 
@@ -103,12 +101,12 @@ inline QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
     return mXmlString.isEmpty() ? openDocFromFile(logger) : openDocFromString(logger);
 }
 
-inline UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+inline UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
 {
     return structOrUnionFromXML<UnionDataInformation>(xmlElem, info);
 }
 
-inline StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+inline StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
 {
     return structOrUnionFromXML<StructureDataInformation>(xmlElem, info);
 }

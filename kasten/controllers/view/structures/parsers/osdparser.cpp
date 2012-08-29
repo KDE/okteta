@@ -203,12 +203,6 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
             data = new DummyDataInformation(0,
                     fileInfo.absoluteFilePath() + QLatin1String("_element") + QString::number(i));
         }
-        //if we don't need the engine, there is no point in wasting memory for it
-        if (!info.scriptEngineNeeded)
-        {
-            delete eng;
-            eng = 0;
-        }
         TopLevelDataInformation* topData = new TopLevelDataInformation(data, logger, eng, fileInfo);
         structures.append(topData);
     }
@@ -267,7 +261,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
 
 //Datatypes
 
-ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
 {
     QString name = xmlElem.attribute(QLatin1String("name"));
     QDomNode node = xmlElem.firstChild();
@@ -341,25 +335,20 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, OsdPar
         updateFunc = info.engine->evaluate(script);
         info.logger->info() << "setting updateFunc for array to" << script;
         Q_ASSERT(updateFunc.isFunction());
-        info.scriptEngineNeeded = true;
     }
     //parse subelement
-    //use dummy until real type has been determined
+    //use dummy until real type has been determined //TODO QScopedPointer<DummyDataInformation>
     ArrayDataInformation* tmp = new ArrayDataInformation(name, 0,
             new DummyDataInformation(0, QString()), info.parent);
     OsdParserInfo newInfo = info;
     newInfo.parent = tmp;
     DataInformation* subElem = parseNode(node, newInfo);
     delete tmp;
-    if (newInfo.scriptEngineNeeded)
-        info.scriptEngineNeeded = true; //we need it since child needs it
-
     if (!subElem)
     {
         info.logger->error() << "could not parse subelement type of array:" << toRawXML(xmlElem);
         return 0;
     }
-    Q_ASSERT(!subElem->isDummy());
     ArrayDataInformation* retVal = new ArrayDataInformation(name, length, subElem, info.parent);
     if (updateFunc.isValid())
         retVal->setUpdateFunc(updateFunc);
@@ -386,7 +375,7 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
 }
 
 template<class T>
-T* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+T* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
 {
     T* structOrUnion = new T(info.name, info.parent);
     QDomNode node = xmlElem.firstChild();
@@ -402,14 +391,12 @@ T* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& in
         node = node.nextSibling();
     }
     structOrUnion->setInitialChildren(children);
-    if (newInfo.scriptEngineNeeded)
-        info.scriptEngineNeeded = true;
     return structOrUnion;
 }
 
 //instantiate the template for both cases so we don't get linker errors
-template UnionDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
-template StructureDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
+template UnionDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
+template StructureDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
 
 AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
         const OsdParserInfo& info) const
@@ -506,7 +493,7 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
     return data;
 }
 
-DataInformation* OsdParser::parseNode(const QDomNode& node, OsdParserInfo& info) const
+DataInformation* OsdParser::parseNode(const QDomNode& node, const OsdParserInfo& oldInfo) const
 {
     QDomElement elem = node.toElement(); // try to convert the node to an element.
     DataInformation* data = 0;
@@ -515,6 +502,7 @@ DataInformation* OsdParser::parseNode(const QDomNode& node, OsdParserInfo& info)
         //      kDebug() << "element tag: " << elem.tagName();
         //e is element
         const QString tag = elem.tagName();
+        OsdParserInfo info(oldInfo);
         info.name = elem.attribute(QLatin1String("name"), i18n("&lt;invalid name&gt;"));
         if (tag == QLatin1String("struct"))
             data = structFromXML(elem, info);
@@ -537,7 +525,7 @@ DataInformation* OsdParser::parseNode(const QDomNode& node, OsdParserInfo& info)
     {
         QString byteOrder = elem.attribute(QLatin1String("byteOrder"),
                 QLatin1String("inherit"));
-        data->setByteOrder(byteOrderFromString(byteOrder, info.logger));
+        data->setByteOrder(byteOrderFromString(byteOrder, oldInfo.logger));
     }
     return data;
 }
