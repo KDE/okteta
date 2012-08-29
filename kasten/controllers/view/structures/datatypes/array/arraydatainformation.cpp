@@ -22,7 +22,7 @@
 #include "arraydatainformation.h"
 #include "../primitivefactory.h"
 #include "../dummydatainformation.h"
-#include "../../script/scriptvalueconverter.h"
+#include "../../parsers/scriptvalueconverter.h"
 #include "../../script/classes/arrayscriptclass.h"
 #include "../../script/scripthandlerinfo.h"
 #include "../../script/scriptlogger.h"

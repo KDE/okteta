@@ -21,7 +21,7 @@
  */
 #include "datainformationwithchildren.h"
 #include "topleveldatainformation.h"
-#include "../script/scriptvalueconverter.h"
+#include "../parsers/scriptvalueconverter.h"
 #include "../script/scriptutils.h"
 #include "../script/scripthandlerinfo.h"
 #include "../script/classes/structunionscriptclass.h"
@@ -29,7 +29,7 @@
 
 #include <KLineEdit>
 #include <KLocalizedString>
-#include <QtScript/QScriptEngine>
+#include <QScriptEngine>
 
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
         {

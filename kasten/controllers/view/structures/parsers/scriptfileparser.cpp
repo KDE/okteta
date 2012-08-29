@@ -22,12 +22,11 @@
 
 #include "scriptfileparser.h"
 
-#include "../structuredefinitionfile.h"
+#include "scriptvalueconverter.h"
 #include "../datatypes/topleveldatainformation.h"
 #include "../datatypes/dummydatainformation.h"
 #include "../script/scriptengineinitializer.h"
 #include "../script/scriptlogger.h"
-#include "../script/scriptvalueconverter.h"
 
 #include <QScriptEngine>
 

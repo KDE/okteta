@@ -25,14 +25,14 @@
 
 #include <QScriptValue>
 
-#include "primitive/bitfield/abstractbitfielddatainformation.h"
-#include "primitive/primitivedatainformation.h"
-#include "primitive/enumdefinition.h"
-#include "primitive/flagdatainformation.h"
-#include "primitive/enumdatainformation.h"
+#include "../datatypes/primitive/bitfield/abstractbitfielddatainformation.h"
+#include "../datatypes/primitive/primitivedatainformation.h"
+#include "../datatypes/primitive/enumdefinition.h"
+#include "../datatypes/primitive/flagdatainformation.h"
+#include "../datatypes/primitive/enumdatainformation.h"
 
 #include "../script/scriptlogger.h"
-#include "../parsers/abstractstructureparser.h"
+#include "abstractstructureparser.h" //TODO remove
 
 
 struct CommonParsedData : public ParserInfo {

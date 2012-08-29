@@ -22,11 +22,11 @@
 
 #include "scripthandler.h"
 #include "scriptengineinitializer.h"
-#include "scriptvalueconverter.h"
 #include "scriptutils.h"
 #include "scriptlogger.h"
 #include "../datatypes/datainformation.h"
 #include "../datatypes/topleveldatainformation.h"
+#include "../parsers/scriptvalueconverter.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QString>

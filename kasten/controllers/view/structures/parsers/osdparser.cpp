@@ -22,17 +22,15 @@
 
 #include "osdparser.h"
 
+#include "datainformationfactory.h"
 #include "../datatypes/array/arraydatainformation.h"
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
-#include "../datatypes/primitive/enumdatainformation.h"
-#include "../datatypes/primitive/flagdatainformation.h"
 #include "../datatypes/strings/stringdatainformation.h"
 #include "../datatypes/strings/stringdata.h"
 #include "../datatypes/primitivefactory.h"
 #include "../datatypes/topleveldatainformation.h"
 #include "../datatypes/dummydatainformation.h"
-#include "../datatypes/datainformationfactory.h"
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
 #include "../script/scriptengineinitializer.h"

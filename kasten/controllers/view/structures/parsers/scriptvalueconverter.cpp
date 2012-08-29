@@ -22,9 +22,8 @@
 
 #include "scriptvalueconverter.h"
 #include "scriptvalueconverter_p.h"
-#include "scriptlogger.h"
+#include "../script/scriptlogger.h"
 
-#include <KDebug>
 #include <QString>
 #include <QVector>
 #include <QScriptValue>

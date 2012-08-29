@@ -21,10 +21,10 @@
  */
 #include "datainformationfactory.h"
 
-#include "primitive/bitfield/boolbitfielddatainformation.h"
-#include "primitive/bitfield/unsignedbitfielddatainformation.h"
-#include "primitive/bitfield/signedbitfielddatainformation.h"
-#include "primitivefactory.h"
+#include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"
+#include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
+#include "../datatypes/primitive/bitfield/signedbitfielddatainformation.h"
+#include "../datatypes/primitivefactory.h"
 
 #include "../script/scriptlogger.h"
 #include <QScriptEngine>

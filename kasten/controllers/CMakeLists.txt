@@ -287,7 +287,6 @@ set( STRUCTVIEW_SRCS
   view/structures/settings/structuresmanagerview.cpp
   view/structures/datatypes/topleveldatainformation.cpp
   view/structures/datatypes/datainformation.cpp
-  view/structures/datatypes/datainformationfactory.cpp
   view/structures/datatypes/datainformationbase.cpp
   view/structures/datatypes/dummydatainformation.cpp
   view/structures/datatypes/datainformationwithchildren.cpp
@@ -325,8 +324,6 @@ set( STRUCTVIEW_SRCS
   view/structures/script/scriptengineinitializer.cpp
   view/structures/script/scripthandler.cpp
   view/structures/script/scripthandlerinfo.cpp
-  view/structures/script/scriptvalueconverter.cpp
-  view/structures/script/scriptvalueconverter_p.cpp
   view/structures/script/scriptutils.cpp
   view/structures/script/scriptlogger.cpp
   view/structures/script/scriptloggerview.cpp
@@ -340,6 +337,9 @@ set( STRUCTVIEW_SRCS
   view/structures/parsers/abstractstructureparser.cpp
   view/structures/parsers/osdparser.cpp
   view/structures/parsers/scriptfileparser.cpp
+  view/structures/parsers/scriptvalueconverter.cpp
+  view/structures/parsers/scriptvalueconverter_p.cpp
+  view/structures/parsers/datainformationfactory.cpp
 )
 configure_file( config-structtool.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-structtool.h )
 if ( OKTETA_DEBUG_SCRIPT )

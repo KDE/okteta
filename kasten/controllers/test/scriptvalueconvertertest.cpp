@@ -22,10 +22,10 @@
 #include "view/structures/allprimitivetypes.h"
 
 #include <QtTest>
-#include <QtCore/QString>
-#include <QtCore/QDebug>
-#include <QtScript/QScriptEngine>
-#include "view/structures/script/scriptvalueconverter.h"
+#include <QString>
+#include <QDebug>
+#include <QScriptEngine>
+#include "view/structures/parsers/scriptvalueconverter.h"
 #include "view/structures/datatypes/datainformation.h"
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
 #include "view/structures/datatypes/primitive/enumdatainformation.h"
