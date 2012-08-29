@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ -z "`which gccxml 2> /dev/null`" ]; then
+	echo "You need gccxml to use this script.";
+	exit;
+fi;
+
+if [ -z "`which xsltproc 2> /dev/null`" ]; then
+	echo "You need xsltporc to use this script.";
+	echo "You can find it in the libxslt package.";
+	exit;
+fi;
+
+if [ $# -lt 2 ]; then
+	echo "Usage: $0 input.cpp output.osd [struct1 struct2 ...]";
+	exit;
+fi;
+
+XSL_CONVERTER="@DATA_INSTALL_DIR@/okteta/structures/gccxml-to-osd.xsl"
+
+INPUT_FILE="$1";
+OSD_FILE="$2";
+GCCXML_FILE="${OSD_FILE%.*}.gcc.xml";
+
+shift 2;
+STRUCTS="$@"
+
+gccxml "$INPUT_FILE" -fxml="$GCCXML_FILE" || { echo "gccxml failed"; exit; };
+xsltproc --stringparam "structs" "$STRUCTS" "$XSL_CONVERTER" "$GCCXML_FILE" > "$OSD_FILE" || echo "xsltproc failed";
+
+rm "$GCCXML_FILE";

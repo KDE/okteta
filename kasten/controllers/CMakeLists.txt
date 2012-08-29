@@ -564,6 +564,10 @@ set( png_structure_FILES
 install( FILES ${png_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/png )
 install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 
+configure_file( view/structures/struct2osd.sh.in ${CMAKE_CURRENT_BINARY_DIR}/struct2osd.sh @ONLY)
+install( FILES ${CMAKE_CURRENT_BINARY_DIR}/struct2osd.sh DESTINATION ${BIN_INSTALL_DIR} )
+install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${DATA_INSTALL_DIR}/okteta/structures/ )
+
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )
 include_directories(
