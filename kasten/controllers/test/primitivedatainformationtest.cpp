@@ -168,28 +168,28 @@ template<PrimitiveDataTypeEnum Type>
 void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, QString bin,
         QString hex, QString dec, QString oct)
 {
-    QCOMPARE(PrimitiveInfo<Type>::Class::valueString(value, 2), bin);
-    QCOMPARE(PrimitiveInfo<Type>::Class::valueString(value, 16), hex);
-    QCOMPARE(PrimitiveInfo<Type>::Class::valueString(value, 10), dec);
-    QCOMPARE(PrimitiveInfo<Type>::Class::valueString(value, 8), oct);
+    QCOMPARE(PrimitiveInfo<Type>::Class::staticValueString(value, 2), bin);
+    QCOMPARE(PrimitiveInfo<Type>::Class::staticValueString(value, 16), hex);
+    QCOMPARE(PrimitiveInfo<Type>::Class::staticValueString(value, 10), dec);
+    QCOMPARE(PrimitiveInfo<Type>::Class::staticValueString(value, 8), oct);
 }
 
 template<PrimitiveDataTypeEnum first, PrimitiveDataTypeEnum second>
 void valueCompareHelperUnsigned(typename PrimitiveInfo<first>::valueType value, QString bin,
         QString hex, QString dec, QString oct, QString boolBase)
 {
-    QCOMPARE(PrimitiveInfo<first>::Class::valueString(value, 2), bin);
-    QCOMPARE(PrimitiveInfo<first>::Class::valueString(value, 16), hex);
-    QCOMPARE(PrimitiveInfo<first>::Class::valueString(value, 10), dec);
-    QCOMPARE(PrimitiveInfo<first>::Class::valueString(value, 8), oct);
+    QCOMPARE(PrimitiveInfo<first>::Class::staticValueString(value, 2), bin);
+    QCOMPARE(PrimitiveInfo<first>::Class::staticValueString(value, 16), hex);
+    QCOMPARE(PrimitiveInfo<first>::Class::staticValueString(value, 10), dec);
+    QCOMPARE(PrimitiveInfo<first>::Class::staticValueString(value, 8), oct);
 
-    QCOMPARE(PrimitiveInfo<second>::Class::valueString(value, 2),
+    QCOMPARE(PrimitiveInfo<second>::Class::staticValueString(value, 2),
             value > 1 ? boolBase.arg(bin) : boolBase);
-    QCOMPARE(PrimitiveInfo<second>::Class::valueString(value, 16),
+    QCOMPARE(PrimitiveInfo<second>::Class::staticValueString(value, 16),
             value > 1 ? boolBase.arg(hex) : boolBase);
-    QCOMPARE(PrimitiveInfo<second>::Class::valueString(value, 10),
+    QCOMPARE(PrimitiveInfo<second>::Class::staticValueString(value, 10),
             value > 1 ? boolBase.arg(dec) : boolBase);
-    QCOMPARE(PrimitiveInfo<second>::Class::valueString(value, 8),
+    QCOMPARE(PrimitiveInfo<second>::Class::staticValueString(value, 8),
             value > 1 ? boolBase.arg(oct) : boolBase);
 }
 
@@ -489,7 +489,7 @@ void PrimitiveDataInformationTest::testValueStringChar()
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QLatin1String("'%1'")).arg(charString(i));
-        QCOMPARE(CharDataInformation::valueString(i), expected);
+        QCOMPARE(CharDataInformation::staticValueString(i), expected);
     }
     Kasten2::StructViewPreferences::setShowCharNumericalValue(true);
     Kasten2::StructViewPreferences::setCharDisplayBase(
@@ -498,7 +498,7 @@ void PrimitiveDataInformationTest::testValueStringChar()
     {
         QString expected = QString(QLatin1String("'%1' (0x%2)")).arg(charString(i),
                 QString::number(i, 16));
-        QCOMPARE(CharDataInformation::valueString(i), expected);
+        QCOMPARE(CharDataInformation::staticValueString(i), expected);
     }
     Kasten2::StructViewPreferences::setCharDisplayBase(
             Kasten2::StructViewPreferences::EnumCharDisplayBase::Decimal);
@@ -506,7 +506,7 @@ void PrimitiveDataInformationTest::testValueStringChar()
     {
         QString expected = QString(QLatin1String("'%1' (%2)")).arg(charString(i),
                 QString::number(i, 10));
-        QCOMPARE(CharDataInformation::valueString(i), expected);
+        QCOMPARE(CharDataInformation::staticValueString(i), expected);
     }
     Kasten2::StructViewPreferences::setCharDisplayBase(
             Kasten2::StructViewPreferences::EnumCharDisplayBase::Binary);
@@ -514,7 +514,7 @@ void PrimitiveDataInformationTest::testValueStringChar()
     {
         QString expected = QString(QLatin1String("'%1' (0b%2)")).arg(charString(i),
                 QString::number(i, 2));
-        QCOMPARE(CharDataInformation::valueString(i), expected);
+        QCOMPARE(CharDataInformation::staticValueString(i), expected);
     }
     //TODO octal
 }

@@ -36,8 +36,8 @@ public:
     static PrimitiveDataType staticType();
     static T fromVariant(const QVariant& value, bool* ok);
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    static QString valueString(T val);
-    static QString valueString(T val, int base);
+    static QString staticValueString(T val);
+    static QString staticValueString(T val, int base);
 
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
@@ -122,9 +122,9 @@ inline SIntDataInformation<T>* SIntDataInformation<T>::clone() const
 }
 
 template<typename T>
-inline QString SIntDataInformation<T>::valueString(T value)
+inline QString SIntDataInformation<T>::staticValueString(T value)
 {
-    return SIntDataInformation<T>::valueString(value, PrimitiveDataInformation::signedDisplayBase());
+    return SIntDataInformation<T>::staticValueString(value, PrimitiveDataInformation::signedDisplayBase());
 }
 
 template<typename T>

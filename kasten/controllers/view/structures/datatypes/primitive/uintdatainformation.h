@@ -33,8 +33,8 @@ public:
     virtual UIntDataInformation<T>* clone() const;
 
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    static QString valueString(T val);
-    static QString valueString(T val, int base);
+    static QString staticValueString(T val);
+    static QString staticValueString(T val, int base);
     static PrimitiveDataType staticType();
     static T fromVariant(const QVariant& value, bool* ok);
 
@@ -84,9 +84,9 @@ inline UIntDataInformation<T>* UIntDataInformation<T>::clone() const
 }
 
 template<typename T>
-inline QString UIntDataInformation<T>::valueString(T value)
+inline QString UIntDataInformation<T>::staticValueString(T value)
 {
-    return UIntDataInformation<T>::valueString(value, PrimitiveDataInformation::unsignedDisplayBase());
+    return UIntDataInformation<T>::staticValueString(value, PrimitiveDataInformation::unsignedDisplayBase());
 }
 
 

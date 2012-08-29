@@ -64,7 +64,7 @@ QScriptValue FloatDataInformation::valueAsQScriptValue() const
     return QScriptValue(double(this->mValue));
 }
 
-QString FloatDataInformation::valueString(float value)
+QString FloatDataInformation::staticValueString(float value)
 {
 	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
 		return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());

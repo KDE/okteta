@@ -51,7 +51,7 @@ QString BasicPrimitiveDataInformation<T, C>::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return C::valueString(mValue);
+    return C::staticValueString(mValue);
 }
 
 template<typename T, typename C>

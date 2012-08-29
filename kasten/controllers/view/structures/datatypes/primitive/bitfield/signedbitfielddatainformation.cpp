@@ -31,7 +31,7 @@ QString SignedBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return SIntDataInformation<qint64>::valueString(mValue.longValue);
+    return SIntDataInformation<qint64>::staticValueString(mValue.longValue);
 }
 
 QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const

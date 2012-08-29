@@ -31,7 +31,7 @@ public:
     virtual ~DoubleDataInformation();
     DATAINFORMATION_CLONE(Double)
 
-    static QString valueString(double value);
+    static QString staticValueString(double value);
     static PrimitiveDataType staticType();
     static QScriptValue asScriptValue(double value, QScriptEngine* engine,
             ScriptHandlerInfo* handler);

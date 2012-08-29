@@ -33,7 +33,7 @@ public:
 
     static PrimitiveDataType staticType();
 
-    static QString valueString(float value);
+    static QString staticValueString(float value);
 
     virtual QScriptValue valueAsQScriptValue() const;
     static QScriptValue asScriptValue(float value, QScriptEngine* engine,

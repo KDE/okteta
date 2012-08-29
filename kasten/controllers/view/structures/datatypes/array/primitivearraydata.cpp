@@ -185,7 +185,7 @@ QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
                 //we are outside the valid range
                 return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
             }
-            return DisplayClass::valueString(mData.at(index));
+            return DisplayClass::staticValueString(mData.at(index));
         }
     }
     return QVariant();

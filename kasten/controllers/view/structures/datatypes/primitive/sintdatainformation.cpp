@@ -25,7 +25,7 @@
 #include <KGlobal>
 
 template<typename T>
-QString SIntDataInformation<T>::valueString(T val, int base)
+QString SIntDataInformation<T>::staticValueString(T val, int base)
 {
     QString num;
     if (base == 10) {

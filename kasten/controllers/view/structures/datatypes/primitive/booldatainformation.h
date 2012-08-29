@@ -37,9 +37,8 @@ public:
 
     virtual QScriptValue valueAsQScriptValue() const;
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    virtual QString valueString() const;
-    static QString valueString(T val);
-    static QString valueString(T val, int base);
+    static QString staticValueString(T val);
+    static QString staticValueString(T val, int base);
     static PrimitiveDataType staticType();
     static T fromVariant(const QVariant& value, bool* ok);
 
@@ -111,9 +110,9 @@ inline BoolDataInformation<T>* BoolDataInformation<T>::clone() const
 }
 
 template<typename T>
-inline QString BoolDataInformation<T>::valueString(T value)
+inline QString BoolDataInformation<T>::staticValueString(T value)
 {
-    return BoolDataInformation<T>::valueString(value,
+    return BoolDataInformation<T>::staticValueString(value,
             PrimitiveDataInformation::unsignedDisplayBase());
 }
 

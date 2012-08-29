@@ -47,7 +47,7 @@ QScriptValue UIntDataInformation<quint64>::asScriptValue(quint64 value, QScriptE
 }
 
 template<typename T>
-QString UIntDataInformation<T>::valueString(T value, int base)
+QString UIntDataInformation<T>::staticValueString(T value, int base)
 {
     QString num = QString::number(value, base);
     if (base == 10)

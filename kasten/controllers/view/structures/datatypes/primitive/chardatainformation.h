@@ -32,7 +32,7 @@ public:
     DATAINFORMATION_CLONE(Char)
 
     static int displayBase();
-    static QString valueString(quint8 value);
+    static QString staticValueString(quint8 value);
     static quint8 fromVariant(const QVariant& value, bool* ok);
     static PrimitiveDataType staticType();
     static QScriptValue asScriptValue(quint8 value, QScriptEngine* engine,

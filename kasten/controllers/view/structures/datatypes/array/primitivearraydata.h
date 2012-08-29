@@ -130,7 +130,6 @@ inline BitCount32 PrimitiveArrayData<type>::size() const
 template<PrimitiveDataTypeEnum type>
 void PrimitiveArrayData<type>::setLength(uint newLength)
 {
-    Q_ASSERT(newLength >= 0);
     mData.resize(newLength);
     mData.squeeze();
 }

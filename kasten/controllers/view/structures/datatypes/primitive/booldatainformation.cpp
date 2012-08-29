@@ -22,15 +22,7 @@
 #include "booldatainformation.h"
 
 template<typename T>
-QString BoolDataInformation<T>::valueString() const
-{
-    if (!this->mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return BoolDataInformation<T>::valueString(this->mValue);
-}
-
-template<typename T>
-QString BoolDataInformation<T>::valueString(T value, int base)
+QString BoolDataInformation<T>::staticValueString(T value, int base)
 {
     if (value == 0)
         return i18nc("boolean value", "false");
@@ -38,8 +30,8 @@ QString BoolDataInformation<T>::valueString(T value, int base)
         return i18nc("boolean value", "true");
     else
     {
-        //we can reuse the valueString() here
-        QString num = UIntDataInformation<T>::valueString(value, base);
+        //we can reuse the uint valueString() here
+        QString num = UIntDataInformation<T>::staticValueString(value, base);
         return i18nc("boolean value with actual value", "true (%1)", num);
     }
 }

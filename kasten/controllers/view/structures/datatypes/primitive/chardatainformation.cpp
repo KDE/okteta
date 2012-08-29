@@ -47,7 +47,7 @@ namespace {
     }
 }
 
-QString CharDataInformation::valueString(quint8 value)
+QString CharDataInformation::staticValueString(quint8 value)
 {
     QString charStr = charString(value);
     if (Kasten2::StructViewPreferences::showCharNumericalValue())
