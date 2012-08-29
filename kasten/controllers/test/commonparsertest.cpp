@@ -42,6 +42,9 @@ private Q_SLOTS:
     void testIntFromScriptValue_data();
     void testUIntFromScriptValue();
     void testUIntFromScriptValue_data();
+
+    void testToStringEncoding();
+    void testToStringEncoding_data();
 };
 
 void CommonParserTest::testIntFromString_data()
@@ -252,6 +255,53 @@ void CommonParserTest::testUIntFromScriptValue()
     }
 }
 
+inline void CommonParserTest::testToStringEncoding()
+{
+    QFETCH(QString, str);
+    QFETCH(int, expected);
+    StringDataInformation::StringType type = ParserUtils::toStringEncoding(str);
+    QCOMPARE((int)type, expected);
+}
+
+inline void CommonParserTest::testToStringEncoding_data()
+{
+    QTest::addColumn<QString>("str");
+    QTest::addColumn<int>("expected");
+
+    QTest::newRow("ascii") << "ascii" << (int)StringDataInformation::ASCII;
+    QTest::newRow("ascii upper") << "ASCII" << (int)StringDataInformation::ASCII;
+    QTest::newRow("excess char") << "asciii" << (int)StringDataInformation::InvalidEncoding;
+
+    QTest::newRow("latin1") << "latin1" << (int)StringDataInformation::Latin1;
+    QTest::newRow("latin-1") << "latin-1" << (int)StringDataInformation::Latin1;
+    QTest::newRow("latin") << "latin" << (int)StringDataInformation::InvalidEncoding;
+
+    QTest::newRow("utf8") << "utf8" << (int)StringDataInformation::UTF8;
+    QTest::newRow("utf-8") << "utf-8" << (int)StringDataInformation::UTF8;
+    QTest::newRow("utf--8") << "utf--8" << (int)StringDataInformation::InvalidEncoding;
+
+    QTest::newRow("utf16") << "utf16" << (int)StringDataInformation::UTF16_LE;
+    QTest::newRow("utf-16") << "utf-16" << (int)StringDataInformation::UTF16_LE;
+    QTest::newRow("utf-16le") << "utf-16le" << (int)StringDataInformation::UTF16_LE;
+    QTest::newRow("utf-16-le") << "utf-16-le" << (int)StringDataInformation::UTF16_LE;
+    QTest::newRow("utf-16--le") << "utf-16--le" << (int)StringDataInformation::InvalidEncoding;
+
+    QTest::newRow("utf-16be") << "utf-16be" << (int)StringDataInformation::UTF16_BE;
+    QTest::newRow("utf-16-be") << "utf-16-be" << (int)StringDataInformation::UTF16_BE;
+    QTest::newRow("utf-16-abe") << "utf-16-abe" << (int)StringDataInformation::InvalidEncoding;
+
+    QTest::newRow("utf32") << "utf32" << (int)StringDataInformation::UTF32_LE;
+    QTest::newRow("utf-32") << "utf-32" << (int)StringDataInformation::UTF32_LE;
+    QTest::newRow("utf-32le") << "utf-32le" << (int)StringDataInformation::UTF32_LE;
+    QTest::newRow("utf-32-le") << "utf-32-le" << (int)StringDataInformation::UTF32_LE;
+    QTest::newRow("utf-32--le") << "utf-32--le" << (int)StringDataInformation::InvalidEncoding;
+
+    QTest::newRow("utf-32be") << "utf-32be" << (int)StringDataInformation::UTF32_BE;
+    QTest::newRow("utf-32-be") << "utf-32-be" << (int)StringDataInformation::UTF32_BE;
+    QTest::newRow("utf-32-abe") << "utf-32-abe" << (int)StringDataInformation::InvalidEncoding;
+}
+
 QTEST_MAIN(CommonParserTest)
+
 
 #include "commonparsertest.moc"

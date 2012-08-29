@@ -26,6 +26,7 @@
 #include <KLocalizedString>
 
 #include "../datatypes/datainformation.h"
+#include "../datatypes/strings/stringdatainformation.h"
 #include "../script/scriptlogger.h"
 
 //forward declare so I don't have to repeat in all the parsers
@@ -74,6 +75,8 @@ struct ParsedNumber {
     T value;
     bool isValid;
     static ParsedNumber<T> badInput(const QString& str) { return ParsedNumber<T>(T(), str, false); }
+    inline bool isError() { return !isValid && !string.isEmpty(); }
+    inline bool isEmpty() { Q_ASSERT(!isValid); return string.isEmpty(); }
 };
 
 namespace ParserStrings {
@@ -147,6 +150,9 @@ namespace ParserUtils
 
     DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, const ParserInfo& info);
     QString byteOrderToString(DataInformation::DataInformationEndianess order);
+
+    StringDataInformation::StringType toStringEncoding(const QString& str);
+
 }
 
 #endif /* PARSERUTILS_H_ */

@@ -115,3 +115,38 @@ QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianess
         return QLatin1String("fromSettings");
     return QLatin1String("inherit");
 }
+
+StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& str)
+{
+    QString enc = str.toLower();
+    if (enc == QLatin1String("ascii"))
+        return StringDataInformation::ASCII;
+    else if (enc == QLatin1String("latin1") || enc == QLatin1String("latin-1"))
+        return StringDataInformation::Latin1;
+    else if (enc.startsWith(QLatin1String("utf")))
+    {
+        QStringRef ref = enc.midRef(3);
+        if (ref.at(0) == QLatin1Char('-'))
+            ref = enc.midRef(4); //strip '-'
+        if (ref == QLatin1String("8"))
+            return StringDataInformation::UTF8;
+
+        if (ref == QLatin1String("16") || ref == QLatin1String("16le") || ref == QLatin1String("16-le"))
+        {
+            return StringDataInformation::UTF16_LE;
+        }
+        if (ref == QLatin1String("16be") || ref == QLatin1String("16-be"))
+        {
+            return StringDataInformation::UTF16_BE;
+        }
+        if (ref == QLatin1String("32") || ref == QLatin1String("32le") || ref == QLatin1String("32-le"))
+        {
+            return StringDataInformation::UTF32_LE;
+        }
+        if (ref == QLatin1String("32be") || ref == QLatin1String("32-be"))
+        {
+            return StringDataInformation::UTF32_BE;
+        }
+    }
+    return StringDataInformation::InvalidEncoding;
+}

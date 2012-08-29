@@ -143,7 +143,12 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
     }
     else if (name == s_encoding)
     {
-        sData->setEncoding(value.toString());
+        QString enc = value.toString();
+        StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(enc);
+        if (encoding == StringDataInformation::InvalidEncoding)
+            sData->logger()->error(sData) << "Attempting to set invalid encoding:" << enc;
+        else
+            sData->setEncoding(encoding);
         return true;
     }
     return false;

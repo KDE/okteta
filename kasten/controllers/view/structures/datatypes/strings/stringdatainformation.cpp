@@ -36,16 +36,11 @@
 
 #include <QScriptEngine>
 #include <QBrush>
+#include <QString>
 
 #include <KLocale>
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
-    : DataInformation(name, parent), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
-{
-    setEncoding(encoding); //sets mData
-}
-
-StringDataInformation::StringDataInformation(const QString& name, QString encoding, DataInformationBase* parent)
     : DataInformation(name, parent), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
 {
     setEncoding(encoding); //sets mData
@@ -187,38 +182,6 @@ Qt::ItemFlags StringDataInformation::childFlags(int row, int column, bool fileLo
     Q_UNUSED(column);
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled; //not editable atm
     //TODO make editable
-}
-
-void StringDataInformation::setEncoding(QString encodingStr)
-{
-    QString enc = encodingStr.toLower();
-    StringType encoding;
-    if (enc == QLatin1String("ascii"))
-        encoding = ASCII;
-    else if (enc.startsWith(QLatin1String("latin"))) //allow latin-1 and latin1
-        encoding = Latin1;
-    else if (enc.startsWith(QLatin1String("utf-16")))
-    {
-        if (enc.endsWith(QLatin1String("be")))
-            encoding = UTF16_BE;
-        else
-            encoding = UTF16_LE;
-    }
-    else if (enc.startsWith(QLatin1String("utf-32")))
-    {
-        if (enc.endsWith(QLatin1String("be")))
-            encoding = UTF32_BE;
-        else
-            encoding = UTF32_LE;
-    }
-    else if (enc.startsWith(QLatin1String("utf-8")))
-        encoding = UTF8;
-    else
-    {
-        logger()->error(this) << "invalid encoding set: " << encodingStr << "defaulting to ASCII";
-        encoding = ASCII;
-    }
-    setEncoding(encoding);
 }
 
 void StringDataInformation::setEncoding(StringDataInformation::StringType encoding)

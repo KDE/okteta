@@ -46,7 +46,6 @@ public:
     };
 
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = 0);
-    StringDataInformation(const QString& name, QString encoding, DataInformationBase* parent = 0);
     virtual ~StringDataInformation();
     DATAINFORMATION_CLONE(String)
 
@@ -78,7 +77,6 @@ public:
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     StringType encoding() const;
-    void setEncoding(QString encoding);
     void setEncoding(StringType encoding);
     DummyDataInformation* dummy() const;
     uint terminationCodePoint() const;
