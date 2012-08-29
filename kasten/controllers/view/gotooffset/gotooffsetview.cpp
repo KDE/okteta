@@ -154,8 +154,8 @@ void GotoOffsetView::onAddressTypeChanged( int addressType )
         || addressType == Okteta::AddressValidator::InvalidAddressType )
         return;
 
-    bool fromCursor;
-    bool backwards;
+    bool fromCursor = false;
+    bool backwards = false;
 
     if( addressType == Okteta::AddressValidator::AbsoluteAddress )
     {
