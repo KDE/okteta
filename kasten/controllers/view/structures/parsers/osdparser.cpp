@@ -423,13 +423,14 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
     return bitf;
 }
 
-UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+template<class T>
+T* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
 {
-    UnionDataInformation* un = new UnionDataInformation(info.name, info.parent);
+    T* structOrUnion = new T(info.name, info.parent);
     QDomNode node = xmlElem.firstChild();
     QVector<DataInformation*> children;
     OsdParserInfo newInfo(info);
-    newInfo.parent = un;
+    newInfo.parent = structOrUnion;
     while (!node.isNull())
     {
         //parseNode sets the name for us
@@ -438,33 +439,15 @@ UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, OsdPar
             children.append(data);
         node = node.nextSibling();
     }
-    un->setInitialChildren(children);
+    structOrUnion->setInitialChildren(children);
     if (newInfo.scriptEngineNeeded)
         info.scriptEngineNeeded = true;
-    return un;
+    return structOrUnion;
 }
 
-StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
-{
-    QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
-    StructureDataInformation* stru = new StructureDataInformation(name, info.parent);
-    QDomNode node = xmlElem.firstChild();
-    QVector<DataInformation*> children;
-    OsdParserInfo newInfo(info);
-    newInfo.parent = stru;
-    while (!node.isNull())
-    {
-        //parseNode sets the name for us
-        DataInformation* data = parseNode(node, newInfo);
-        if (data)
-            children.append(data);
-        node = node.nextSibling();
-    }
-    stru->setInitialChildren(children);
-    if (newInfo.scriptEngineNeeded)
-        info.scriptEngineNeeded = true;
-    return stru;
-}
+//instantiate the template for both cases so we don't get linker errors
+template UnionDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
+template StructureDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
 
 AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
         const OsdParserInfo& info) const

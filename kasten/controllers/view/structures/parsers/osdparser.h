@@ -70,8 +70,11 @@ private:
     AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags,
             const OsdParserInfo& info) const;
     StringDataInformation* stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
+
+    template<class T> T* structOrUnionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
     UnionDataInformation* unionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
     StructureDataInformation* structFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
+
     ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const;
 
     DataInformation* parseNode(const QDomNode& node, OsdParserInfo& info) const;
@@ -94,8 +97,19 @@ private:
 };
 
 inline QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
-        {
+{
     return mXmlString.isEmpty() ? openDocFromFile(logger) : openDocFromString(logger);
 }
+
+inline UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+{
+    return structOrUnionFromXML<UnionDataInformation>(xmlElem, info);
+}
+
+inline StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
+{
+    return structOrUnionFromXML<StructureDataInformation>(xmlElem, info);
+}
+
 
 #endif /* OSDPARSER_H_ */
