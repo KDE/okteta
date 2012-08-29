@@ -97,14 +97,15 @@ QScriptEngine* newEngine()
     return ret;
 }
 
-
 namespace Private
 {
 
 static const QString setUpdatePropertyString = QLatin1String("setUpdate");
 static const QString setValidationPropertyString = QLatin1String("setValidation");
+static const QString setPropertyString = QLatin1String("set");
 
-namespace {
+namespace
+{
 
 QScriptValue scriptNewCommon(QScriptContext* ctx, QScriptEngine* eng, const QString& typeName)
 {
@@ -113,6 +114,7 @@ QScriptValue scriptNewCommon(QScriptContext* ctx, QScriptEngine* eng, const QStr
     //add the setUpdate() and setValidation() functions
     object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
     object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
+    object.setProperty(setPropertyString, eng->newFunction(addCustomPropertiesFunc, 1));
     return object;
 }
 
@@ -221,7 +223,8 @@ QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng)
     if (ret.isValid())
         return ret;
     else
-        return ctx->throwError(QString(QLatin1String("child(): could not find child with name=") + nameString));
+        return ctx->throwError(
+                QString(QLatin1String("child(): could not find child with name=") + nameString));
 }
 
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine*)
@@ -253,6 +256,29 @@ QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine*)
                 QLatin1String("setValidation(): argument must be a function!"));
     }
     thisObj.setProperty(ParserStrings::PROPERTY_VALIDATION_FUNC, func);
+    return thisObj;
+}
+
+QScriptValue addCustomPropertiesFunc(QScriptContext* ctx, QScriptEngine*)
+{
+    if (ctx->argumentCount() != 1)
+        return ctx->throwError(QLatin1String("set(): needs one argument!"));
+    QScriptValue thisObj = ctx->thisObject();
+    Q_ASSERT(thisObj.isValid());
+    QScriptValue arg = ctx->argument(0);
+    if (!arg.isValid() || !arg.isObject())
+        return ctx->throwError(QScriptContext::TypeError,
+                QLatin1String("set(): argument must be an object!"));
+    int count = 0;
+    QScriptValueIterator it(arg);
+    while (it.hasNext())
+    {
+        it.next();
+        thisObj.setProperty(it.scriptName(), it.value());
+        count++;
+    }
+    if (count == 0)
+        return ctx->throwError(QLatin1String("set(): must set at least one property!"));
     return thisObj;
 }
 

@@ -143,6 +143,15 @@ QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine* eng);
+
+/** this allows you to write e.g.
+ *  return struct({foo : uint8() })
+ *      .set({ updateFunc : ...,
+ *             name : "something"})
+ *
+ */
+QScriptValue addCustomPropertiesFunc(QScriptContext* ctx, QScriptEngine* eng);
+
 }
 
 }
