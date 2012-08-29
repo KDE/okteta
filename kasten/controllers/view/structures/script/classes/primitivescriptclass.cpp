@@ -111,7 +111,17 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
     const PrimitiveDataInformation* pData = data->asPrimitive();
 
     if (name == s_value)
-        return pData->valueAsQScriptValue();
+    {
+        if (pData->wasAbleToRead())
+            return pData->valueAsQScriptValue();
+        QScriptValue callee = engine()->currentContext()->thisObject();
+        DataInformation* cause = qscriptvalue_cast<DataInformation*>(callee.data());
+        if (cause)
+            pData->logError() << "Attempting to read from uninitialized value. Callee was " << cause->fullObjectPath();
+        else
+            pData->logError() << "Attempting to read from uninitialized value. Callee could not be determined";
+        return engine()->undefinedValue();
+    }
     else if (name == s_type)
     {
         //bitfields are handled by own scriptclass and NotPrimitive indicates an error
