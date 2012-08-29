@@ -102,7 +102,7 @@ PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType typ
         return new PrimitiveInfo<Type_Double>::Class(name, parent);
     default:
         if (logger)
-            logger->error().nospace() << "could not convert '" << type << "' to a primitive type";
+            logger->error(parent).nospace() << "could not convert '" << type << "' to a primitive type";
         else
             kWarning().nospace() << "could not convert '" << type << "' to a primitive type";
         return 0; //invalid type

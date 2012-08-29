@@ -180,7 +180,6 @@ public:
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) = 0;
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
-    QPair<DataInformation*, QString> findChildForDynamicArrayLength(const QString& name, uint upTo) const;
     ScriptLogger* logger() const;
 
 protected:

@@ -84,16 +84,14 @@ void ScriptHandler::validateData(DataInformation* data)
         QScriptValue result = validationFunc.call(thisObject, args);
         if (result.isError())
         {
-            mTopLevel->logger()->error(result) << "Error occurred while validating element"
-                    << data->fullObjectPath();
+            mTopLevel->logger()->error(data) << "Error occurred while validating element: " << result.toString();
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
         else if (mEngine->hasUncaughtException())
         {
-            mTopLevel->logger()->error(result) << "Error occurred while validating element "
-                    << data->fullObjectPath() << "\nBacktrace:"
-                    << mEngine->uncaughtExceptionBacktrace();
+            mTopLevel->logger()->error(data) << "Error occurred while validating element:"
+                    << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
@@ -128,14 +126,12 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         QScriptValue result = updateFunc.call(thisObject, args);
         if (result.isError())
         {
-            mTopLevel->logger()->error(result) << "error occurred while updating element "
-                    << data->fullObjectPath();
+            mTopLevel->logger()->error(data) << "Error occurred while updating element: " << result.toString();
         }
         if (mEngine->hasUncaughtException())
         {
-            mTopLevel->logger()->error(result) << "error occurred while updating element "
-                    << data->fullObjectPath() << "\nBacktrace:"
-                    << mEngine->uncaughtExceptionBacktrace();
+            mTopLevel->logger()->error(data) << "Error occurred while updating element:"
+                    << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
         }
     }
 }

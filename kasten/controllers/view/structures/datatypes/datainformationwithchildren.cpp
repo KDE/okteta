@@ -167,14 +167,6 @@ void DataInformationWithChildren::calculateValidationState()
     }
 }
 
-void DataInformationWithChildren::setInitialChildren(const QVector<DataInformation*>& children)
-{
-    Q_ASSERT(mChildren.isEmpty());
-    mChildren = children;
-    for (int i = 0; i < mChildren.size(); ++i)
-        mChildren.at(i)->setParent(this);
-}
-
 void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& newChildren)
 {
     uint numChildren = childCount();

@@ -24,7 +24,6 @@
 #include "scriptvalueconverter_p.h"
 
 #include "datainformationfactory.h"
-#include "../datatypes/array/arraydatainformation.h"
 #include "../datatypes/uniondatainformation.h"
 #include "../datatypes/structuredatainformation.h"
 #include "../datatypes/strings/stringdata.h"
@@ -41,7 +40,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     ParserInfo info(oldInfo);
     QString nameOverride = value.property(QLatin1String("name")).toString();
     if (!nameOverride.isEmpty())
-        info.name =  nameOverride;
+        info.name = nameOverride;
 
     //check function array and date, since they are objects too
     if (value.isRegExp())
@@ -129,7 +128,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         CommonParsedData cpd(info, value.engine());
         QString byteOrderStr = value.property(QLatin1String("byteOrder")).toString();
         if (!byteOrderStr.isEmpty())
-            cpd.endianess = AbstractStructureParser:: byteOrderFromString(byteOrderStr, oldInfo.logger);
+            cpd.endianess = AbstractStructureParser:: byteOrderFromString(byteOrderStr, info);
         cpd.updateFunc = value.property(QLatin1String("updateFunc"));
         cpd.validationFunc = value.property(QLatin1String("validationFunc"));
         if (!DataInformationFactory::commonInitialization(returnVal, cpd))
@@ -143,21 +142,36 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
 
 ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 {
-    //we can safely assume that type == "array"
-    int length = value.property(QLatin1String("length")).toInt32();
-    if (length < 0)
+    ArrayParsedData apd(info);
+    QScriptValue lengthProp = value.property(QLatin1String("length"));
+    if (!lengthProp.isValid())
     {
-        info.error() << "array length is less than 0:" << length;
+        info.error() << "No array length specified!";
         return 0;
     }
+
+    if (lengthProp.isFunction())
+    {
+        apd.length = 0;
+        apd.lengthFunction = lengthProp;
+    }
+    else if (lengthProp.isNumber())
+    {
+        apd.length = lengthProp.toInt32();
+    }
+    else
+    {
+        info.error() << "array length is neither number nor function: " << lengthProp.toString();
+        return 0;
+    }
+
     QScriptValue childType = value.property(QLatin1String("childType"));
-    DataInformation* arrayType = toDataInformation(childType, info);
-    if (!arrayType)
-    {
-        info.error() << "Failed to convert array type to valid object!";
-        return 0;
-    }
-    return new ArrayDataInformation(info.name, length, arrayType);
+    ParserInfo childInfo(info);
+    childInfo.name = info.context() + QLatin1String(".<inner>");
+    childInfo.parent = 0;
+    apd.arrayType = toDataInformation(childType, childInfo);
+
+    return DataInformationFactory::newArray(apd);
 }
 
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info)

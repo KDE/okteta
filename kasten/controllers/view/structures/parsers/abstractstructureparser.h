@@ -66,7 +66,7 @@ public:
     virtual QStringList parseStructureNames() const = 0;
     virtual QVector<TopLevelDataInformation*> parseStructures() const = 0;
 
-    static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, ScriptLogger* logger);
+    static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, const ParserInfo& info);
     static QString byteOrderToString(DataInformation::DataInformationEndianess order);
 
 protected:

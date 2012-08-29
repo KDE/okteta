@@ -67,9 +67,6 @@ public:
     void appendChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(QScriptValue newChildren);
-    /** the same as setChildren, but without emitting size change signals, since otherwise it would crash */
-    void setInitialChildren(const QVector<DataInformation*>& children);
-
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 };
 

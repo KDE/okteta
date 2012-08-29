@@ -35,7 +35,7 @@ AbstractStructureParser::~AbstractStructureParser()
 }
 
 DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(
-        const QString& string, ScriptLogger* logger)
+        const QString& string, const ParserInfo& info)
 {
     const QString lower = string.toLower();
     if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))
@@ -48,8 +48,7 @@ DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFrom
         return DataInformation::EndianessInherit;
     else
     {
-        logger->warn().nospace() << "Unrecognized byte order '" << string
-                << "', defaulting to 'inherit'";
+        info.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
         return DataInformation::EndianessInherit;
     }
 }
@@ -57,10 +56,10 @@ DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFrom
 QString AbstractStructureParser::byteOrderToString(DataInformation::DataInformationEndianess order)
 {
     if (order == DataInformation::EndianessLittle)
-        return QLatin1String("little-endian");
+        return QLatin1String("littleEndian");
     if (order == DataInformation::EndiannessBig)
-        return QLatin1String("big-endian");
+        return QLatin1String("bigEndian");
     if (order == DataInformation::EndianessFromSettings)
-        return QLatin1String("from-settings");
+        return QLatin1String("fromSettings");
     return QLatin1String("inherit");
 }

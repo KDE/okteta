@@ -37,7 +37,8 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
     Q_ASSERT(!lengthFunction.isValid() || lengthFunction.isFunction());
     if (length > MAX_LEN)
     {
-        logger()->warn(this) << "array " << name << ": " << length << "exceeds maximum length of " << MAX_LEN;
+        logger()->warn(this) << length << "exceeds maximum length of" << MAX_LEN
+                << ". Setting it to" << MAX_LEN << "instead";
         length = MAX_LEN;
     }
     Q_CHECK_PTR(childType);
@@ -46,8 +47,7 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
-        :
-                DataInformation(d), mData(0)
+        : DataInformation(d), mData(0)
 {
     if (d.mData)
     {

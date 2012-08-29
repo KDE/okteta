@@ -33,14 +33,18 @@
 namespace ScriptValueConverter
 {
 
-DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger, DataInformation* parent)
+DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
+        DataInformation* parent)
 {
+    //TODO Q_CHECK_PTR(parent)
     const ParserInfo info(name, logger, parent);
     return toDataInformation(value, info); //could be NULL
 }
 
-QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger, DataInformation* parent)
+QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
+        DataInformation* parent)
 {
+    //TODO Q_CHECK_PTR(parent);
     QVector<DataInformation*> ret;
     QScriptValueIterator it(value);
     const bool isArray = value.isArray();
@@ -54,9 +58,9 @@ QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger*
 
         if (inf)
             ret.append(inf);
-        else
-            logger->info(it.value()).nospace() << "Could not convert property '"
-                    << it.name() << "'.";
+        else //TODO remove the null check once parent must be nonnull
+            logger->info(parent ? parent->fullObjectPath() : QString()).nospace()
+                << "Could not convert property '" << it.name() << "'.";
     }
     return ret;
 }

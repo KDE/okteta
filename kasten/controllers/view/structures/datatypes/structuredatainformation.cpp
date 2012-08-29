@@ -25,11 +25,6 @@
 
 #include <KLocalizedString>
 
-StructureDataInformation::StructureDataInformation(const QString& name, DataInformation* parent)
-        : DataInformationWithChildren(name, QVector<DataInformation*>(), parent)
-{
-}
-
 QString StructureDataInformation::typeName() const
 {
     return i18nc("data type in C/C++, then name", "struct %1", name());

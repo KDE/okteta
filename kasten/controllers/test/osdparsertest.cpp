@@ -108,18 +108,10 @@ void OsdParserTest::testScriptFuntion()
     QScriptValue function = engine.evaluate(QLatin1String("x = function() { return 2; }"));
     QVERIFY(function.isFunction());
     QCOMPARE(function.toString(), QString(QLatin1String("function () { return 2; }")));
-//    qDebug() << "isArray" << function.isArray();
-//    qDebug() << "isBool" << function.isBool();
-//    qDebug() << "isDate" << function.isDate();
-//    qDebug() << "isError" << function.isError();
-//    qDebug() << "isFunction" << function.isFunction();
-//    qDebug() << "isNull" << function.isNull();
-//    qDebug() << "isNumber" << function.isNumber();
-//    qDebug() << "isObject" << function.isObject();
-//    qDebug() << "isRegExp" << function.isRegExp();
-//    qDebug() << "isString" << function.isString();
-//    qDebug() << "isUndefined" << function.isUndefined();
-//    qDebug() << function.toString();
+    //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
+    QScriptValue betterFunction = engine.evaluate(QLatin1String("(function() { return 2; })"));
+    QVERIFY(betterFunction.isFunction());
+    QCOMPARE(betterFunction.toString(), QString(QLatin1String("function () { return 2; }")));
 }
 
 QTEST_MAIN(OsdParserTest)

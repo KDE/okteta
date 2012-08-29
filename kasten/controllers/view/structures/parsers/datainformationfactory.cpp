@@ -132,7 +132,8 @@ T* newEnumOrFlags(const EnumParsedData& pd)
 inline QScriptValue functionFromString(const QString& str, const CommonParsedData& info)
 {
     Q_ASSERT(!str.isEmpty());
-    QScriptValue ret = info.engine->evaluate(QLatin1String("x = ") + str);
+    //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
+    QScriptValue ret = info.engine->evaluate(QLatin1Char('(') + str + QLatin1Char(')'));
     if (ret.isFunction())
         return ret;
     else
@@ -149,6 +150,29 @@ EnumDataInformation* DataInformationFactory::newEnum(const EnumParsedData& pd)
 FlagDataInformation* DataInformationFactory::newFlags(const EnumParsedData& pd)
 {
     return newEnumOrFlags<FlagDataInformation>(pd);
+}
+
+ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd)
+{
+    if (!pd.arrayType)
+    {
+        pd.error() << "Failed to parse array type!";
+        return 0;
+    }
+    if (pd.length < 0)
+    {
+        pd.error() << "Cannot create array with negative length:" << pd.length;
+        return 0;
+    }
+    if (pd.lengthFunction.isValid())
+    {
+        if (!pd.lengthFunction.isFunction())
+        {
+            pd.error() << "Length function is not a function:" << pd.lengthFunction.toString();
+            return 0;
+        }
+    }
+    return new ArrayDataInformation(pd.name, pd.length, pd.arrayType, pd.parent, pd.lengthFunction);
 }
 
 bool DataInformationFactory::commonInitialization(DataInformation* data, const CommonParsedData& pd)

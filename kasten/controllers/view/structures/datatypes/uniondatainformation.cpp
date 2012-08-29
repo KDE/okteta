@@ -85,11 +85,6 @@ UnionDataInformation::UnionDataInformation(const QString& name, const QVector<Da
 {
 }
 
-UnionDataInformation::UnionDataInformation(const QString& name, DataInformation* parent)
-        : DataInformationWithChildren(name, QVector<DataInformation*>(), parent)
-{
-}
-
 UnionDataInformation::UnionDataInformation(const UnionDataInformation& d)
         : DataInformationWithChildren(d)
 {

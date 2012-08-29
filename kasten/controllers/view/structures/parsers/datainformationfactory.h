@@ -30,15 +30,14 @@
 #include "../datatypes/primitive/enumdefinition.h"
 #include "../datatypes/primitive/flagdatainformation.h"
 #include "../datatypes/primitive/enumdatainformation.h"
+#include "../datatypes/array/arraydatainformation.h"
 
 #include "../script/scriptlogger.h"
 #include "abstractstructureparser.h" //TODO remove
 
-
 struct CommonParsedData : public ParserInfo {
     inline explicit CommonParsedData(const ParserInfo& i, QScriptEngine* engine)
-    : ParserInfo(i), engine(engine), endianess(DataInformation::EndianessInherit) {}
-    explicit CommonParsedData(const CommonParsedData& cpd);
+        : ParserInfo(i), engine(engine), endianess(DataInformation::EndianessInherit) {}
     QScriptEngine* engine;
     QScriptValue updateFunc;
     /** if this is not empty it is evaluated */
@@ -47,32 +46,45 @@ struct CommonParsedData : public ParserInfo {
     /** if this is not empty it is evaluated */
     QString validationFuncString;
     DataInformation::DataInformationEndianess endianess;
+private:
+    Q_DISABLE_COPY(CommonParsedData);
 };
 
 struct BitfieldParsedData : public ParserInfo {
-    inline explicit BitfieldParsedData(const ParserInfo& i)
-        : ParserInfo(i), widthConversionOkay(false), width(-1) {}
-    explicit BitfieldParsedData(const BitfieldParsedData& bpd);
+    inline explicit BitfieldParsedData(const ParserInfo& i) : ParserInfo(i), widthConversionOkay(false), width(-1) {}
     QString type;
     QString widthStr;
     bool widthConversionOkay;
     int width;
+private:
+    Q_DISABLE_COPY(BitfieldParsedData);
 };
 
 struct PrimitiveParsedData : public ParserInfo {
     inline explicit PrimitiveParsedData(const ParserInfo& i) : ParserInfo(i) {}
-    explicit PrimitiveParsedData(const PrimitiveParsedData& ppd);
     QString type;
+private:
+    Q_DISABLE_COPY(PrimitiveParsedData);
 };
 
 struct EnumParsedData : public ParserInfo {
     inline explicit EnumParsedData(const ParserInfo& i) : ParserInfo(i) {}
-    explicit EnumParsedData(const EnumParsedData& epd);
     QString type;
     QString enumName;
-    EnumDefinition::Ptr enumDef;
+    EnumDefinition::Ptr enumDef; //TODO QMap<QString, QScriptValue> instead
     /** only used if enumDef is null, to allow sharing (only possible in OSD) */
     QScriptValue enumValuesObject;
+private:
+    Q_DISABLE_COPY(EnumParsedData);
+};
+
+struct ArrayParsedData : public ParserInfo {
+    inline explicit ArrayParsedData(const ParserInfo& i) : ParserInfo(i), length(-1), arrayType(0) {}
+    int length;
+    QScriptValue lengthFunction;
+    DataInformation* arrayType;
+private:
+    Q_DISABLE_COPY(ArrayParsedData);
 };
 
 namespace DataInformationFactory
@@ -81,6 +93,7 @@ AbstractBitfieldDataInformation* newBitfield(const BitfieldParsedData& pd);
 PrimitiveDataInformation* newPrimitive(const PrimitiveParsedData& pd);
 EnumDataInformation* newEnum(const EnumParsedData& pd);
 FlagDataInformation* newFlags(const EnumParsedData& pd);
+ArrayDataInformation* newArray(const ArrayParsedData& pd);
 
 bool commonInitialization(DataInformation* data, const CommonParsedData& pd);
 }

@@ -163,7 +163,8 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     }
     else if (name == s_byteOrder)
     {
-        data->setByteOrder(AbstractStructureParser::byteOrderFromString(value.toString(), data->logger()));
+        ParserInfo parInfo(data->fullObjectPath(), data->logger(), 0);
+        data->setByteOrder(AbstractStructureParser::byteOrderFromString(value.toString(), parInfo));
     }
     else if (name == s_wasAbleToRead || name == s_name)
     {
