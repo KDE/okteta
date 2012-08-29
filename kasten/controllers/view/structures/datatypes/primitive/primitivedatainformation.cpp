@@ -39,3 +39,8 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
     else
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
+
+// The inline destructor makes the compiler unhappy
+PrimitiveDataInformation::~PrimitiveDataInformation()
+{
+}

@@ -58,14 +58,9 @@ void ScriptHandler::validateData(DataInformation* data)
         return;
     data->setHasBeenValidated(false); //not yet validated
 
-    if (data->hasChildren())
-    {
-        //first validate the children
-        for (uint i = 0; i < data->childCount(); ++i)
-        {
-            validateData(data->childAt(i));
-        }
-    }
+    //first validate the children
+    for (uint i = 0; i < data->childCount(); ++i)
+        validateData(data->childAt(i));
 
     //check if has a validation function:
     QScriptValue validationFunc = data->validationFunc();

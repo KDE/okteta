@@ -61,7 +61,7 @@ OsdParser::~OsdParser()
 }
 
 QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
-        {
+{
     return mXmlString.isEmpty() ? openDocFromFile(logger) : openDocFromString(logger);
 }
 

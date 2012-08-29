@@ -72,6 +72,11 @@ bool DataInformationBase::isString() const
     return false;
 }
 
+bool DataInformationBase::isPointer() const
+{
+    return false;
+}
+
 TopLevelDataInformation* DataInformationBase::asTopLevel()
 {
     //multiple inheritance -> we can't use reinterpret_cast -> we have to include the file

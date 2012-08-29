@@ -48,7 +48,6 @@ public:
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
     virtual DataInformation* childAt(unsigned int index) const;
-    virtual bool hasChildren() const;
     virtual bool canHaveChildren() const;
     virtual unsigned int childCount() const;
     BitCount32 offset(unsigned int index) const;
@@ -62,7 +61,7 @@ public:
     virtual void calculateValidationState();
 
     /** Takes ownership! */
-    void appendChild(DataInformation* child);
+    void appendChild(DataInformation* child, bool emitSignal = true);
     /** Takes ownership of all elements */
     void appendChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(const QVector<DataInformation*>& newChildren);
@@ -73,10 +72,6 @@ public:
 inline QVector<DataInformation*> DataInformationWithChildren::children() const
 {
     return mChildren;
-}
-inline bool DataInformationWithChildren::hasChildren() const
-{
-    return childCount() != 0;
 }
 
 inline unsigned int DataInformationWithChildren::childCount() const

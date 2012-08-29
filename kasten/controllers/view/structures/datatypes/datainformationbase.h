@@ -33,6 +33,7 @@ class AbstractBitfieldDataInformation;
 class PrimitiveDataInformation;
 class ArrayDataInformation;
 class TopLevelDataInformation;
+class PointerDataInformation;
 
 #include <QtGlobal>
 
@@ -70,6 +71,9 @@ public:
     virtual bool isString() const;
     StringDataInformation* asString();
     const StringDataInformation* asString() const;
+    virtual bool isPointer() const;
+    PointerDataInformation* asPointer();
+    const PointerDataInformation* asPointer() const;
     virtual bool isDummy() const;
     DummyDataInformation* asDummy();
     const DummyDataInformation* asDummy() const;
@@ -92,6 +96,7 @@ CAST_FUNCS(Primitive)
 CAST_FUNCS(Dummy)
 CAST_FUNCS_2(AbstractBitfieldDataInformation, Bitfield)
 CAST_FUNCS(String)
+CAST_FUNCS(Pointer)
 
 //this is not handled by the macro
 inline DataInformation* DataInformationBase::asDataInformation()

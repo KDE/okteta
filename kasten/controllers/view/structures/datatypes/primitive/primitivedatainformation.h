@@ -112,8 +112,4 @@ inline PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInf
 {
 }
 
-inline PrimitiveDataInformation::~PrimitiveDataInformation()
-{
-}
-
 #endif /* PRIMITIVEDATAINFORMATION_H_ */

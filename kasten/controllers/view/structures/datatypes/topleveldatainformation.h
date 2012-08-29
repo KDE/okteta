@@ -22,24 +22,26 @@
 #ifndef TOPLEVELDATAINFORMATION_H_
 #define TOPLEVELDATAINFORMATION_H_
 
-#include <QtCore/QMap>
-#include <QtCore/QFileInfo>
-#include <QtCore/QSharedPointer>
+#include <QMap>
+#include <QFileInfo>
+#include <QSharedPointer>
+#include <QQueue>
 
 #include <arraychangemetricslist.h>
 #include "datainformationbase.h"
 #include "../script/scripthandler.h"
 
-class ScriptLogger;
-class ScriptHandlerInfo;
 namespace Okteta
 {
 class AbstractByteArrayModel;
 } // namespace Okteta
 
+class ScriptLogger;
+class ScriptHandlerInfo;
 class QScriptEngine;
 class ScriptHandler;
 class DataInformation;
+class PointerDataInformation;
 
 class TopLevelDataInformation : public QObject, public DataInformationBase
 {
@@ -87,6 +89,7 @@ public:
     ScriptHandler* scriptHandler() const;
     ScriptLogger* logger() const;
     void setChildDataChanged();
+    void enqueueReadData(PointerDataInformation* toRead);
 
     virtual bool isTopLevel() const;
 
@@ -128,6 +131,7 @@ private:
     int mIndex;
     bool mValid :1;
     bool mChildDataChanged :1;
+    QQueue<PointerDataInformation*> mDelayedRead;
 };
 
 inline DataInformation* TopLevelDataInformation::actualDataInformation() const

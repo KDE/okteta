@@ -22,7 +22,9 @@
 
 #include "topleveldatainformation.h"
 #include "datainformation.h"
+#include "primitive/pointerdatainformation.h"
 #include "datainformationwithchildren.h"
+
 #include "../script/scripthandler.h"
 #include "../script/scriptlogger.h"
 #include "../script/scriptengineinitializer.h"
@@ -30,7 +32,7 @@
 
 #include <abstractbytearraymodel.h>
 //QtScript
-#include <QtScript/QScriptEngine>
+#include <QScriptEngine>
 
 #include <KDebug>
 
@@ -102,11 +104,23 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
     updateElement(mData.data()); //unlikely that this is useful, but maybe someone needs it
     mData->readData(input, address, remainingBits, &bitOffset);
 
+    // Read all the delayed PointerDataInformation
+    // We do this because the pointed data is indipendent from the
+    // structure containing the pointer and so we can use fields
+    // which come after the pointer itself in the structure
+    while (!mDelayedRead.isEmpty())
+        mDelayedRead.dequeue()->delayedReadData(input, address);
+
     if (mChildDataChanged)
     {
         emit dataChanged();
         mChildDataChanged = false;
     }
+}
+
+void TopLevelDataInformation::enqueueReadData(PointerDataInformation *toRead)
+{
+    mDelayedRead.append(toRead);
 }
 
 bool TopLevelDataInformation::isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,

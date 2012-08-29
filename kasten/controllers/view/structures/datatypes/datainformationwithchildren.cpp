@@ -30,7 +30,6 @@
 #include <KLineEdit>
 #include <KLocalizedString>
 #include <QScriptEngine>
-#include <KDebug>
 
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
 {
@@ -45,7 +44,7 @@ bool DataInformationWithChildren::setChildData(uint row, const QVariant& value,
         Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining,
         quint8 bitOffset)
 {
-    kError() << "this should not be called";
+    Q_ASSERT_X(false, "DataInformationWithChildren::setChildData", "this should not be called");
     Q_ASSERT(row < childCount());
     int offs = offset(row);
     quint8 bitOffs = (offs + bitOffset) & 7; //mod 8
@@ -139,7 +138,7 @@ void DataInformationWithChildren::resetValidationState()
 
 void DataInformationWithChildren::calculateValidationState()
 {
-    if (hasChildren())
+    if (childCount() > 0)
     {
         bool hasValidatedChildren = false;
         bool allChildrenValid = true;
@@ -217,12 +216,14 @@ QVariant DataInformationWithChildren::childData(int row, int column, int role) c
     return mChildren.at(row)->data(column, role);
 }
 
-void DataInformationWithChildren::appendChild(DataInformation* newChild)
+void DataInformationWithChildren::appendChild(DataInformation* newChild, bool emitSignal)
 {
-    topLevelDataInformation()->_childrenAboutToBeInserted(this, mChildren.size(), mChildren.size());
+    if (emitSignal)
+        topLevelDataInformation()->_childrenAboutToBeInserted(this, mChildren.size(), mChildren.size());
     newChild->setParent(this);
     mChildren.append(newChild);
-    topLevelDataInformation()->_childrenInserted(this, mChildren.size(), mChildren.size());
+    if (emitSignal)
+        topLevelDataInformation()->_childrenInserted(this, mChildren.size(), mChildren.size());
 }
 
 void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>& newChildren)
