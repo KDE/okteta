@@ -98,6 +98,10 @@ private:
 private:
     /** @return the element as an XML string (excluding children) */
     QString toRawXML(const QDomElement& elem) const;
+    /** Generate a length function referencing @p elemName
+     *  This is needed to support the old way of defining dynamic arrays */
+    static QString generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
+            QString currentString, const ParserInfo& info);
 
     /** if not empty construct the document from this, instead of opening file */
     const QString mXmlString;

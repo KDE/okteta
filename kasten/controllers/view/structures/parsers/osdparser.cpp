@@ -269,11 +269,33 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
         apd.lengthFunction = functionSafeEval(info.engine, lengthStr);
         if (!apd.lengthFunction.isFunction())
         {
-            info.error() << "Array length is neither number nor function ('" << lengthStr
-                    << "').\nMaybe this structure uses the old way of defining dynamic arrays.\n"
-                            "To fix this replace it with e.g.\n"
-                            "function() { return this.parent.LengthField.value; }";
-            return 0;
+
+            //it might be a simple reference (old way of defining dynamic arrays)
+            if (!info.parent)
+            {
+                info.error() << "Toplevel array has length depending on other field (" << lengthStr
+                        << "). This is not possible.";
+                return 0;
+            }
+            if (lengthStr.contains(QLatin1Char('.')))
+            {
+                info.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is allowed!";
+                return 0; // XXX maybe add possible shorthand length="this.parent.length"
+            }
+            QString dynamicArray = generateLengthFunction(info.parent, 0, lengthStr, QString(), info);
+            if (dynamicArray.isEmpty())
+            {
+                info.error() << "Could not find element " << lengthStr << " referenced as array length!";
+                return 0;
+            }
+
+            apd.lengthFunction = functionSafeEval(info.engine, dynamicArray);
+            if (!apd.lengthFunction.isFunction())
+            {
+                info.error() << "Array length is neither number nor valid function ('" << dynamicArray
+                    << "'). This is probably a bug in the parser...";
+                return 0;
+            }
         }
     }
 
@@ -285,7 +307,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
         childElement = xmlElem.firstChildElement();
         if (childElement.isNull())
         {
-            info.error() << "Array type is missing! Please add a &lt;type&gt; child element.";
+            info.error() << "Array type is missing! Please add a <type> child element.";
             return 0;
         }
         else if (childElement != xmlElem.lastChildElement())
@@ -296,9 +318,10 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
             return 0;
         }
     }
-    OsdParserInfo newInfo = info;
-    newInfo.parent = 0;
-    newInfo.contextString = info.context() + QLatin1String(" (array type)");
+    OsdParserInfo newInfo(info);
+    DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
+    newInfo.parent = &dummy;
+    newInfo.name = QLatin1String("<array type>");
     apd.arrayType = parseElement(childElement, newInfo);
     return DataInformationFactory::newArray(apd);
 }
@@ -309,15 +332,18 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
 
     QDomElement typeElement = xmlElem.firstChildElement(PROPERTY_TYPE);
     QString typeString; //only needed if type is a string not an element
+
+    OsdParserInfo newInfo(info);
+    DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
+    newInfo.parent = &dummy;
+    newInfo.name = QLatin1String("<pointer value type>");
+
     if (!typeElement.isNull())
     {
         QDomElement toParse = typeElement.firstChildElement();
         if (!toParse.isNull())
         {
-            OsdParserInfo newInfo = info;
-            newInfo.parent = 0;
-            newInfo.contextString = info.context() + QLatin1String(" (pointer value type)");
-            ppd.valueType = parseElement(toParse, info);
+            ppd.valueType = parseElement(toParse, newInfo);
         }
         else
         {
@@ -353,9 +379,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
             return 0;
         }
     }
-    OsdParserInfo newInfo = info;
-    newInfo.parent = 0;
-    newInfo.contextString = info.context() + QLatin1String(" (pointer target)");
+    newInfo.name = QLatin1String("<pointer target>");
     ppd.pointerTarget = parseElement(childElement, newInfo);
     return DataInformationFactory::newPointer(ppd);
 }
@@ -526,4 +550,46 @@ QScriptValue OsdParser::functionSafeEval(QScriptEngine* engine, const QString& s
     if (!ret.isFunction())
         return QScriptValue(str);
     return ret;
+}
+
+QString OsdParser::generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
+        QString currentString, const ParserInfo& info)
+{
+    qDebug() << "currentString = " << currentString;
+    if (!current) //reached top
+        return QString();
+    for (int i = current->childCount() - 1; i >= 0; --i)
+    {
+        DataInformation* child = current->childAt(i);
+        if (child == last)
+            return QString(); //don't go down again after going up one level
+
+        QString childName = child->name();
+        if (childName == elemName)
+        {
+            QString function = QLatin1String("function() { return this.parent.") + currentString
+                    + elemName + QLatin1String(".value; }");
+            info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
+                    << ", resulting function is: " << function;
+            qDebug() << "Found it, currentString = " << currentString << " func is: " << function;
+            return function;
+        }
+        else if (child->childCount() > 0)
+        {
+            QString func = generateLengthFunction(child, current, elemName,
+                    currentString + childName + QLatin1Char('.'), info);
+            //if func is empty no valid child was found, just continue
+            if (!func.isEmpty())
+                return func;
+        }
+        //has no children and was not the desired element -> continue loop
+    }
+    //now check parents
+    DataInformation* next = current->parent()->asDataInformation();
+    if (next == last)
+        return QString(); //we moved one level down previously, don't move up again
+    else
+        return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
+            currentString + QLatin1String("parent."), info);
+
 }

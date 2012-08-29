@@ -49,18 +49,15 @@ struct ParserInfo
         Q_CHECK_PTR(logger);
     }
     inline ParserInfo(const ParserInfo& i)
-            : name(i.name), logger(i.logger), parent(i.parent), contextString(i.contextString) {}
+            : name(i.name), logger(i.logger), parent(i.parent) {}
     inline ~ParserInfo() {}
     QString name;
     ScriptLogger* logger;
     DataInformation* parent;
-    QString contextString;
 
     inline QString context() const
     {
-        if (contextString.isEmpty())
-            return parent ? parent->fullObjectPath() + QLatin1Char('.') + name : name;
-        return contextString;
+        return parent ? parent->fullObjectPath() + QLatin1Char('.') + name : name;
     }
     inline QDebug info() const { return logger->info(context()); }
     inline QDebug warn() const { return logger->warn(context()); }

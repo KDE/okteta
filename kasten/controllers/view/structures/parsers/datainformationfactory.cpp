@@ -149,7 +149,7 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
     int initialLength = 0;
     if (!pd.length.isValid && !pd.lengthFunction.isValid())
     {
-        pd.error() << "Neither fixed length nor length function specified, cannot create array";
+        pd.error() << "Neither fixed length nor length function specified, cannot create array.";
         return 0;
     }
     if (pd.length.isValid)

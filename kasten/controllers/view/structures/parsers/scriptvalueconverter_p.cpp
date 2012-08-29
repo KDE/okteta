@@ -167,8 +167,9 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 
     QScriptValue childType = value.property(PROPERTY_TYPE);
     ParserInfo childInfo(info);
-    childInfo.contextString = info.context() + QLatin1String(" (array type)");
-    childInfo.parent = 0;
+    DummyDataInformation dummy(info.parent, info.name);
+    childInfo.parent = &dummy;
+    childInfo.name = QLatin1String("<array type>");
     apd.arrayType = toDataInformation(childType, childInfo);
 
     return DataInformationFactory::newArray(apd);
@@ -218,8 +219,14 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info)
 {
     PointerParsedData ppd(info);
-    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET), info);
-    ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE), info);
+
+    ParserInfo childInfo(info);
+    DummyDataInformation dummy(info.parent, info.name);
+    childInfo.parent = &dummy;
+    childInfo.name = QLatin1String("<pointer value type>");
+    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET), childInfo);
+    childInfo.name = QLatin1String("<pointer target>");
+    ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE), childInfo);
 
     return DataInformationFactory::newPointer(ppd);
 }
