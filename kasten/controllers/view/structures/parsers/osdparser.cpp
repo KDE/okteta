@@ -195,12 +195,9 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
 
         QScriptEngine* eng = ScriptEngineInitializer::newEngine(); //we need this for dynamic arrays
         ScriptLogger* logger = new ScriptLogger();
-        OsdParserInfo info;
-        info.engine = eng;
-        info.scriptEngineNeeded = false;
-        info.enums = parseEnums(rootElem, logger);
-        info.logger = logger;
-        info.parent = 0;
+        QVector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger);
+        OsdParserInfo info(QString(), logger, 0, eng, enums);
+
         DataInformation* data = parseNode(elem, info);
 
         if (!data)

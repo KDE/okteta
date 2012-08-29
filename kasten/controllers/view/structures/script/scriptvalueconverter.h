@@ -32,10 +32,14 @@ class DataInformation;
 
 namespace ScriptValueConverter
 {
+
+    //FIXME remove the = 0
     /** If the value is one element */
-    DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger);
+    DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
+            DataInformation* parent = 0);
     /** If the value is a list of elements or an object with many elements */
-    QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger);
+    QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
+            DataInformation* parent = 0);
 }
 
 #endif /* SCRIPTVALUECONVERTER_H_ */

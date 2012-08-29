@@ -55,7 +55,9 @@ public:
 
 private:
     struct OsdParserInfo : public ParserInfo {
-        inline OsdParserInfo() : engine(0), scriptEngineNeeded(false) {}
+        inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
+                QScriptEngine* engine, QVector<EnumDefinition::Ptr> enums)
+            : ParserInfo(name, logger, parent), engine(engine), enums(enums), scriptEngineNeeded(false) {}
         inline OsdParserInfo(const OsdParserInfo& i)
             : ParserInfo(i), engine(i.engine), enums(i.enums), scriptEngineNeeded(i.scriptEngineNeeded) {}
         inline ~OsdParserInfo() {}

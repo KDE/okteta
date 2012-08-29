@@ -22,6 +22,8 @@
 #ifndef SCRIPTVALUECONVERTER_P_H_
 #define SCRIPTVALUECONVERTER_P_H_
 
+#include "../parsers/abstractstructureparser.h"
+
 class ScriptLogger;
 class DataInformation;
 class ArrayDataInformation;
@@ -35,32 +37,26 @@ class StringDataInformation;
 class QScriptValue;
 class QString;
 
+
+
 namespace ScriptValueConverter
 {
 
-DataInformation* toDataInformation(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger);
+DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& info);
 
-ArrayDataInformation* toArray(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger);
+ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info);
 
-AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger);
+AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info);
 
-PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger);
+PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInfo& info);
 
-StructureDataInformation* toStruct(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger);
+StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info);
 
-UnionDataInformation* toUnion(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger);
+UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info);
 
-StringDataInformation* toString(const QScriptValue& value, const QString& name,
-        ScriptLogger* logger);
+StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info);
 
-AbstractEnumDataInformation* toEnum(const QScriptValue& value, const QString& name, bool isFlags,
-        ScriptLogger* logger);
+AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
 
 }
 

@@ -34,12 +34,13 @@
 namespace ScriptValueConverter
 {
 
-DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger)
+DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger, DataInformation* parent)
 {
-    return toDataInformation(value, name, logger); //could be NULL
+    const ParserInfo info(name, logger, parent);
+    return toDataInformation(value, info); //could be NULL
 }
 
-QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger)
+QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger, DataInformation* parent)
 {
     QVector<DataInformation*> ret;
     QScriptValueIterator it(value);
@@ -49,16 +50,14 @@ QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger*
         it.next();
         if (isArray && it.name() == QLatin1String("length"))
             continue; //skip the length property of arrays
-        DataInformation* inf = toDataInformation(it.value(), it.name(), logger);
+        const ParserInfo info(it.name(), logger, parent);
+        DataInformation* inf = toDataInformation(it.value(), info);
+
         if (inf)
-        {
             ret.append(inf);
-        }
         else
-        {
             logger->info(it.value()).nospace() << "Could not convert property '"
                     << it.name() << "'.";
-        }
     }
     return ret;
 }
