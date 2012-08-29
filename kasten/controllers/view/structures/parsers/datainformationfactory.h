@@ -30,6 +30,7 @@
 #include "../datatypes/primitive/enumdefinition.h"
 #include "../datatypes/primitive/flagdatainformation.h"
 #include "../datatypes/primitive/enumdatainformation.h"
+#include "../datatypes/primitive/pointerdatainformation.h"
 #include "../datatypes/array/arraydatainformation.h"
 #include "../datatypes/strings/stringdatainformation.h"
 
@@ -92,6 +93,14 @@ private:
     Q_DISABLE_COPY(ArrayParsedData)
 };
 
+struct PointerParsedData : public ParserInfo {
+    inline explicit PointerParsedData(const ParserInfo& i) : ParserInfo(i), valueType(0), pointerTarget(0) {}
+    DataInformation* valueType;
+    DataInformation* pointerTarget;
+private:
+    Q_DISABLE_COPY(PointerParsedData)
+};
+
 namespace DataInformationFactory
 {
 AbstractBitfieldDataInformation* newBitfield(const BitfieldParsedData& pd);
@@ -100,6 +109,7 @@ EnumDataInformation* newEnum(const EnumParsedData& pd);
 FlagDataInformation* newFlags(const EnumParsedData& pd);
 ArrayDataInformation* newArray(const ArrayParsedData& pd);
 StringDataInformation* newString(const StringParsedData& pd);
+PointerDataInformation* newPointer(const PointerParsedData& pd);
 
 bool commonInitialization(DataInformation* data, const CommonParsedData& pd);
 }

@@ -33,6 +33,7 @@ PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInf
 StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info);
 UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info);
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info);
+PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info);
 AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
 }
 

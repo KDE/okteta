@@ -88,6 +88,7 @@ namespace ParserStrings {
     const QString TYPE_STRING = QLatin1String("string");
     const QString TYPE_STRUCT = QLatin1String("struct");
     const QString TYPE_UNION = QLatin1String("union");
+    const QString TYPE_POINTER = QLatin1String("pointer");
     /** Only needed for .osd */
     const QString TYPE_ENUMDEF = QLatin1String("enumDef");
 
@@ -124,6 +125,8 @@ namespace ParserStrings {
     const QString PROPERTY_ENCODING = QLatin1String("encoding");
     //primitive
     const QString PROPERTY_VALUE = QLatin1String("value");
+    //pointer
+    const QString PROPERTY_TARGET = QLatin1String("target");
 
     const QString PROPERTY_INTERNAL_TYPE = QLatin1String("__type");
 

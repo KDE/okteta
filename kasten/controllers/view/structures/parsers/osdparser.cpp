@@ -291,8 +291,8 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
         else if (childElement != xmlElem.lastChildElement())
         {
             //there is more than one child element
-            info.error().nospace() << "There is more than one child element, cannot determine which one "
-                    "wrap the correct one is the array type. Wrap the correct one in a <type> element.";
+            info.error() << "There is more than one child element, cannot determine which one "
+                    "is the array type. Wrap the correct one in a <type> element.";
             return 0;
         }
     }
@@ -301,6 +301,60 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     newInfo.name = info.context();
     apd.arrayType = parseElement(childElement, newInfo);
     return DataInformationFactory::newArray(apd);
+}
+
+PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
+{
+    PointerParsedData ppd(info);
+
+    QDomElement typeElement = xmlElem.firstChildElement(PROPERTY_TYPE);
+    QString typeString; //only needed if type is a string not an element
+    if (!typeElement.isNull())
+    {
+        QDomElement toParse = typeElement.firstChildElement();
+        if (!toParse.isNull())
+        {
+            ppd.valueType = parseElement(toParse, info);
+        }
+        else
+        {
+            typeString = typeElement.text();
+        }
+    }
+    else
+    {
+        typeString = xmlElem.attribute(PROPERTY_TYPE);
+    }
+    if (!typeString.isEmpty())
+    {
+        LoggerWithContext lwc(info.logger, info.context() + QLatin1String(" (pointer type)"));
+        ppd.valueType = PrimitiveFactory::newInstance(PROPERTY_TYPE, typeString, lwc);
+    }
+
+    //first check whether there is a <target> element and use the inner element
+    //if that doesn't exist use the first child element as the type, but only if there is only one child
+    QDomElement childElement = xmlElem.firstChildElement(PROPERTY_TARGET).firstChildElement();
+    if (childElement.isNull())
+    {
+        childElement = xmlElem.firstChildElement();
+        if (childElement.isNull())
+        {
+            info.error() << "Pointer target is missing! Please add a <target> child element.";
+            return 0;
+        }
+        else if (childElement != xmlElem.lastChildElement())
+        {
+            //there is more than one child element
+            info.error() << "There is more than one child element, cannot determine which one "
+                    "is the pointer target. Wrap the correct one in a <target> element.";
+            return 0;
+        }
+    }
+    OsdParserInfo newInfo = info;
+    newInfo.parent = 0;
+    newInfo.name = info.context();
+    ppd.pointerTarget = parseElement(childElement, newInfo);
+    return DataInformationFactory::newPointer(ppd);
 }
 
 PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
@@ -398,6 +452,10 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
         data = enumFromXML(elem, true, info);
     else if (tag == TYPE_STRING)
         data = stringFromXML(elem, info);
+    else if (tag == TYPE_POINTER)
+        data = pointerFromXML(elem, info);
+    else
+        info.error() << "Unknow tag: " << tag;
 
     if (data)
     {

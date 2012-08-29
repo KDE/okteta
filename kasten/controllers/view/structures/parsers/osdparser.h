@@ -66,6 +66,7 @@ private:
     };
 
     PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
+    PointerDataInformation* pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
     AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
     AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags,
             const OsdParserInfo& info) const;

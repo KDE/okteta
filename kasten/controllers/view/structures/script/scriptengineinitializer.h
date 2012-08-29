@@ -139,6 +139,8 @@ QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng);
 /** this constructor takes one argument, the encoding of the string (as a string) */
 QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
+/** this constructor takes two arguments: 1. type of the pointer and 2. the target type */
+QScriptValue scriptNewPointer(QScriptContext* ctx, QScriptEngine* eng);
 
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);

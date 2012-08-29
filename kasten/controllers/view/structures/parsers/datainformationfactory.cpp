@@ -216,6 +216,10 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
 {
     data->setByteOrder(pd.endianess);
 
+    if (data->name().isEmpty())
+    {
+        pd.warn() << "Name is empty!";
+    }
     if (pd.updateFunc.isValid())
     {
         if (!pd.updateFunc.isFunction())
@@ -238,4 +242,31 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
     }
     return true;
 
+}
+
+PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedData& pd)
+{
+    if (!pd.pointerTarget)
+    {
+        pd.error() << "Missing pointer target";
+        return 0;
+    }
+    if (!pd.valueType)
+    {
+        pd.error() << "Missing pointer type";
+        return 0;
+    }
+    if (!pd.valueType->isPrimitive())
+    {
+        pd.error() << "Bad pointer type, only unsigned integers are allowed";
+        return 0;
+    }
+    PrimitiveDataInformation* primValue = pd.valueType->asPrimitive();
+    if (!(primValue->type() == Type_UInt8 || primValue->type() == Type_UInt16
+            || primValue->type() == Type_UInt32 || primValue->type() == Type_UInt64))
+    {
+        pd.error() << "Bad pointer type, only unsigned integers are allowed"; //TODO offsets (signed int + bitfields)
+        return 0;
+    }
+    return new PointerDataInformation(pd.name, pd.pointerTarget, primValue, pd.parent);
 }

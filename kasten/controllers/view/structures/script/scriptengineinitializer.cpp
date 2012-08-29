@@ -81,13 +81,15 @@ void addFuctionsToScriptEngine(QScriptEngine* engine)
     engine->globalObject().setProperty(QLatin1String("union"),
             engine->newFunction(Private::scriptNewUnion));
 
-    //if I use enum QtScript gives me syntax errors, I thought enum was not a keyword in JS
+    //enum is a reserved keyword in JavaScript, cannot use it
     engine->globalObject().setProperty(QLatin1String("enumeration"),
             engine->newFunction(Private::scriptNewEnum));
     engine->globalObject().setProperty(QLatin1String("flags"),
             engine->newFunction(Private::scriptNewFlags));
     engine->globalObject().setProperty(QLatin1String("string"),
             engine->newFunction(Private::scriptNewString));
+    engine->globalObject().setProperty(QLatin1String("pointer"),
+            engine->newFunction(Private::scriptNewPointer));
 }
 
 QScriptEngine* newEngine()
@@ -210,6 +212,15 @@ QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng)
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_STRING);
 
     object.setProperty(ParserStrings::PROPERTY_ENCODING, ctx->argument(0));
+    return object;
+}
+
+QScriptValue scriptNewPointer(QScriptContext* ctx, QScriptEngine* eng)
+{
+    QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_POINTER);
+
+    object.setProperty(ParserStrings::PROPERTY_TYPE, ctx->argument(0));
+    object.setProperty(ParserStrings::PROPERTY_TARGET, ctx->argument(1));
     return object;
 }
 

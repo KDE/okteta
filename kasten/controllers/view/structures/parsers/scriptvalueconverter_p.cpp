@@ -123,6 +123,9 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     else if (type == TYPE_STRING)
         returnVal = toString(value, info);
 
+    else if (type == TYPE_POINTER)
+        returnVal = toPointer(value, info);
+
     else if (type == TYPE_PRIMITIVE)
         returnVal = toPrimitive(value, info);
 
@@ -210,6 +213,15 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 
     UnionDataInformation* unionData = new UnionDataInformation(info.name, fields);
     return unionData;
+}
+
+PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info)
+{
+    PointerParsedData ppd(info);
+    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET), info);
+    ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE), info);
+
+    return DataInformationFactory::newPointer(ppd);
 }
 
 AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
