@@ -344,7 +344,7 @@ Qt::ItemFlags DataInformation::childFlags(int row, int column, bool fileLoaded) 
     return childAt(row)->flags(column, fileLoaded);
 }
 
-DataInformation* DataInformation::child(QString name) const
+DataInformation* DataInformation::child(const QString& name) const
         {
     int size = childCount();
     for (int i = 0; i < size; ++i)

@@ -46,7 +46,7 @@ PrimitiveDataType AbstractBitfieldDataInformation::type() const
     return Type_Bitfield;
 }
 
-AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(QString name, BitCount32 width,
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,
         DataInformation* parent)
         : PrimitiveDataInformation(name, parent), mValue(0), mWidth(qMin(width, 64u))
 {

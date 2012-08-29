@@ -31,7 +31,7 @@
 #include "complexarraydata.h"
 #include "primitivearraydata.h"
 
-ArrayDataInformation::ArrayDataInformation(QString name, uint length, DataInformation* childType,
+ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
         DataInformation* parent) : DataInformation(name, parent)
 {
     if (length > MAX_LEN)

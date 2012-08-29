@@ -27,7 +27,7 @@
 class SignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
 public:
-    SignedBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0)
+    SignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0)
             : AbstractBitfieldDataInformation(name, width, parent)
     {
     }

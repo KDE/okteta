@@ -34,7 +34,7 @@ class EnumDefinition: public QSharedData
 {
 public:
     typedef QSharedDataPointer<EnumDefinition> Ptr;
-    EnumDefinition(const QMap<AllPrimitiveTypes, QString> values, QString name,
+    EnumDefinition(const QMap<AllPrimitiveTypes, QString> values, const QString& name,
             PrimitiveDataType type) :
         QSharedData(), mName(name), mValues(values), mType(type)
     {

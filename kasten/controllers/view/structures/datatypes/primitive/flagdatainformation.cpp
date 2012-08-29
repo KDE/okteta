@@ -24,7 +24,7 @@
 #include "flagdatainformation.h"
 #include <QVarLengthArray>
 
-FlagDataInformation::FlagDataInformation(QString name, PrimitiveDataInformation* type,
+FlagDataInformation::FlagDataInformation(const QString& name, PrimitiveDataInformation* type,
         EnumDefinition::Ptr enumDef, DataInformation* parent)
     : EnumDataInformation(name, type, enumDef, parent)
 {

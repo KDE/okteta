@@ -31,7 +31,7 @@ class FlagDataInformation : public EnumDataInformation
 protected:
     FlagDataInformation(const FlagDataInformation& e);
 public:
-    FlagDataInformation(QString name, PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef,
+    FlagDataInformation(const QString& name, PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef,
             DataInformation* parent = 0);
     DATAINFORMATION_CLONE(Flag)
     virtual QString valueString() const;

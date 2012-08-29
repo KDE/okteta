@@ -41,7 +41,7 @@ public:
      *  takes ownership over @p childType
      *  length should be > 0
      */
-    ArrayDataInformation(QString name, uint length, DataInformation* childType,
+    ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
             DataInformation* parent = 0);
     virtual ~ArrayDataInformation();
     DATAINFORMATION_CLONE(Array)

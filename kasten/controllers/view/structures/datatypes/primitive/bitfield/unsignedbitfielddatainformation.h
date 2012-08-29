@@ -27,7 +27,7 @@
 class UnsignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
 public:
-    UnsignedBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0)
+    UnsignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0)
             : AbstractBitfieldDataInformation(name, width, parent)
     {
     }

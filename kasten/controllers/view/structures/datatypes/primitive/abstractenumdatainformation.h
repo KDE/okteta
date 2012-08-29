@@ -34,8 +34,7 @@ protected:
     AbstractEnumDataInformation(const AbstractEnumDataInformation& e);
 
 public:
-    AbstractEnumDataInformation(QString name, EnumDefinition::Ptr enumDef, DataInformation* parent =
-            0);
+    AbstractEnumDataInformation(const QString& name, EnumDefinition::Ptr enumDef, DataInformation* parent = 0);
     virtual ~AbstractEnumDataInformation();
 
     virtual bool isEnum() const;

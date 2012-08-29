@@ -31,7 +31,7 @@ template<typename T>
 class BoolDataInformation : public BasicPrimitiveDataInformation<T, BoolDataInformation<T> >
 {
 public:
-    explicit BoolDataInformation(QString name, DataInformation* parent = 0);
+    explicit BoolDataInformation(const QString& name, DataInformation* parent = 0);
     virtual ~BoolDataInformation();
     virtual BoolDataInformation<T>* clone() const;
 
@@ -88,7 +88,7 @@ inline QScriptValue BoolDataInformation<T>::asScriptValue(T value, QScriptEngine
 }
 
 template<typename T>
-inline BoolDataInformation<T>::BoolDataInformation(QString name, DataInformation* parent)
+inline BoolDataInformation<T>::BoolDataInformation(const QString& name, DataInformation* parent)
         : BasicPrimitiveDataInformation<T, BoolDataInformation<T> >(name, parent)
 {
 }

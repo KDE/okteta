@@ -83,7 +83,7 @@ public:
      *  @param name The name of the child to find
      *  @return the child with given @p name or @c NULL if none found with that name
      */
-    virtual DataInformation* child(QString name) const;
+    virtual DataInformation* child(const QString& name) const;
     virtual BitCount32 positionRelativeToRoot(int row = -1) const;
 
     //for the model:

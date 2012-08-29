@@ -28,7 +28,7 @@
 class AbstractBitfieldDataInformation : public PrimitiveDataInformation
 {
 public:
-    AbstractBitfieldDataInformation(QString name, BitCount32 width, DataInformation* parent = 0);
+    AbstractBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0);
     virtual ~AbstractBitfieldDataInformation();
 
 protected:
@@ -51,6 +51,8 @@ public:
             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
     bool setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel *out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
+
+    static AbstractBitfieldDataInformation* newBitfield(const QString& name);
 
 protected:
     AllPrimitiveTypes mValue;

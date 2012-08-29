@@ -29,7 +29,7 @@
 #include "../../script/scripthandlerinfo.h"
 #include "../../script/scriptlogger.h"
 
-AbstractEnumDataInformation::AbstractEnumDataInformation(QString name, EnumDefinition::Ptr enumDef,
+AbstractEnumDataInformation::AbstractEnumDataInformation(const QString& name, EnumDefinition::Ptr enumDef,
         DataInformation* parent)
         : PrimitiveDataInformation(name, parent), mEnum(enumDef)
 {
