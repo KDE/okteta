@@ -76,7 +76,6 @@ QString PrimitiveType::typeName(PrimitiveDataType type)
 QString PrimitiveType::standardTypeName(PrimitiveDataType type_)
 {
     PrimitiveDataTypeEnum type = type_.value;
-    Q_ASSERT(type >= Type_START && type <= Type_END);
     if (type >= Type_START && type <= Type_END)
         return QLatin1String(typeNames[type]);
     else
@@ -86,7 +85,6 @@ QString PrimitiveType::standardTypeName(PrimitiveDataType type_)
 QString PrimitiveType::longTypeName(PrimitiveDataType type_)
 {
     PrimitiveDataTypeEnum type = type_.value;
-    Q_ASSERT(type >= Type_START && type <= Type_END);
     if (type >= Type_START && type <= Type_END)
         return i18n(longTypeNames[type]);
     else

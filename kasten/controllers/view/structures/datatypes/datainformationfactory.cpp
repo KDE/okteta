@@ -100,7 +100,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
         return 0;
     }
     EnumDefinition::Ptr definition = pd.enumDef;
-    if (!pd.enumDef)
+    if (!definition)
     {
         QMap<AllPrimitiveTypes, QString> enumValues =
                 AbstractEnumDataInformation::parseEnumValues(pd.enumValuesObject, pd.logger, primitiveType,
@@ -112,9 +112,9 @@ T* newEnumOrFlags(const EnumParsedData& pd)
         }
         definition = EnumDefinition::Ptr(new EnumDefinition(enumValues, pd.enumName, primitiveType));
     }
-    if (pd.enumDef->type() != primitiveType)
+    if (definition->type() != primitiveType)
     {
-        pd.error().nospace() << "Enum type (" << pd.enumDef->type() << ") and value type (" << primitiveType
+        pd.error().nospace() << "Enum type (" << definition->type() << ") and value type (" << primitiveType
                 << ") do not match!";
         return 0;
     }
