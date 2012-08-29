@@ -33,7 +33,6 @@
 
 namespace ScriptEngineInitializer
 {
-
 void addFuctionsToScriptEngine(QScriptEngine* engine)
 {
     engine->globalObject().setProperty(QLatin1String("uint8"),
@@ -102,23 +101,23 @@ namespace Private
 {
 
 static const QString typePropertyString = QLatin1String("type");
-static const QString toStringPropertyString = QLatin1String("toString");
 static const QString setUpdatePropertyString = QLatin1String("setUpdate");
 static const QString setValidationPropertyString = QLatin1String("setValidation");
+
+QScriptValue scriptNewCommon(QScriptContext* ctx, QScriptEngine* eng, QLatin1String typeName)
+{
+    QScriptValue object = ctx->isCalledAsConstructor() ? ctx->thisObject() : eng->newObject();
+    object.setProperty(typePropertyString, typeName);
+    //add the setUpdate() and setValidation() functions
+    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
+    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
+    return object;
+}
 
 /** create a new primitive of type @p type */
 QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const char* type)
 {
-    QScriptValue object;
-    if (ctx->isCalledAsConstructor())
-        object = ctx->thisObject();
-    else
-        object = eng->newObject();
-    object.setProperty(typePropertyString, QLatin1String(type));
-    object.setProperty(toStringPropertyString, eng->newFunction(primitiveToString));
-    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
-    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
-
+    QScriptValue object = scriptNewCommon(ctx, eng, QLatin1String(type));
     return object;
 }
 
@@ -145,386 +144,82 @@ PRIMITIVE_CONSTRUCTOR(Char)
 
 QScriptValue scriptNewBitfield(QScriptContext* ctx, QScriptEngine* eng)
 {
-    //arg1 is type
-    //arg2 is width
-    //check arguments first
-    if (ctx->argumentCount() < 2)
-        return ctx->throwError(QLatin1String("bitfield initializer takes at least two arguments."));
-    if (!ctx->argument(1).isNumber())
-        return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("bitfield(): second argument is not a number"));
-    QString typeArg = ctx->argument(0).toString();
-    if (typeArg != QLatin1String("bool") && typeArg != QLatin1String("unsigned")
-            && typeArg != QLatin1String("signed"))
-    {
-        return ctx->throwError(QLatin1String("type must be 'bool', 'unsigned' 'signed'"
-                " or '', actual value was '") + typeArg + QLatin1Char('\''));
-    }
-    //all arguments are valid
-    QScriptValue object;
-    if (ctx->isCalledAsConstructor())
-        object = ctx->thisObject();
-    else
-        object = eng->newObject();
+    QScriptValue object = scriptNewCommon(ctx, eng, QLatin1String("bitfield"));
 
-    object.setProperty(typePropertyString, QLatin1String("bitfield"));
-    //has been validated, so it must contain valid values
-    object.setProperty(QLatin1String("bitfieldType"),
-            typeArg.isEmpty() ? QLatin1String("signed") : typeArg);
-    object.setProperty(QLatin1String("width"), ctx->argument(1));
-    object.setProperty(toStringPropertyString, eng->newFunction(bitfieldToString));
-    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
-    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
-
+    object.setProperty(QLatin1String("bitfieldType"), ctx->argument(0)); //first argument is type
+    object.setProperty(QLatin1String("width"), ctx->argument(1)); //second argument is width
     return object;
 }
 
 //with children:
 QScriptValue scriptNewStruct(QScriptContext* ctx, QScriptEngine* eng)
 {
-    //takes one argument, the children
-    if (ctx->argumentCount() < 1)
-        return ctx->throwError(QLatin1String("struct initializer takes at least one argument."));
-    QScriptValue children = ctx->argument(0);
-    if (!children.isObject())
-        return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("struct(): argument is not an object"));
-
-    //all arguments are valid
-    QScriptValue object;
-    if (ctx->isCalledAsConstructor())
-        object = ctx->thisObject();
-    else
-        object = eng->newObject();
-
-    object.setProperty(typePropertyString, QLatin1String("struct"));
-    object.setProperty(QLatin1String("children"), children);
-    object.setProperty(toStringPropertyString, eng->newFunction(structToString));
+    QScriptValue object = scriptNewCommon(ctx, eng, QLatin1String("struct"));
     object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
-    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
-    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
 
+    object.setProperty(QLatin1String("children"), ctx->argument(0)); //first argument is children
     return object;
 }
 
 QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng)
 {
-    //takes one argument, the children
-    if (ctx->argumentCount() < 1)
-        return ctx->throwError(QLatin1String("union initializer takes at least one argument."));
-    QScriptValue children = ctx->argument(0);
-    if (!children.isObject())
-        return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("union(): argument is not an object"));
-
-    //all arguments are valid
-    QScriptValue object;
-    if (ctx->isCalledAsConstructor())
-        object = ctx->thisObject();
-    else
-        object = eng->newObject();
-
-    object.setProperty(typePropertyString, QLatin1String("union"));
-    object.setProperty(QLatin1String("children"), children);
-    object.setProperty(toStringPropertyString, eng->newFunction(unionToString));
+    QScriptValue object = scriptNewCommon(ctx, eng, QLatin1String("union"));
     object.setProperty(QLatin1String("child"), eng->newFunction(getChild));
-    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
-    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
 
+    object.setProperty(QLatin1String("children"), ctx->argument(0)); //first argument is children
     return object;
 }
 
 QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng)
 {
-    //arg 1 is child type, arg2 is length
-    if (ctx->argumentCount() < 2)
-        return ctx->throwError(QLatin1String("array initializer takes at least two arguments."));
-    QScriptValue childType = ctx->argument(0);
-    if (!childType.isObject())
-        return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("array(): childType argument is not an object"));
-    QScriptValue length = ctx->argument(1);
-    if (!length.isNumber())
-        return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("array(): length Type argument is not a number"));
+    QScriptValue object = scriptNewCommon(ctx, eng, QLatin1String("array"));
 
-    //all arguments are valid
-    QScriptValue object;
-    if (ctx->isCalledAsConstructor())
-        object = ctx->thisObject();
-    else
-        object = eng->newObject();
-
-    object.setProperty(typePropertyString, QLatin1String("array"));
-    object.setProperty(QLatin1String("childType"), childType);
-    object.setProperty(QLatin1String("length"), length);
-    object.setProperty(toStringPropertyString, eng->newFunction(arrayToString));
-    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
-    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
-
+    object.setProperty(QLatin1String("childType"), ctx->argument(0)); //first argument is child type
+    object.setProperty(QLatin1String("length"), ctx->argument(1)); //second argument is length
     return object;
 }
 
-QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, bool flags)
+QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, QLatin1String typeName)
 {
-    if (ctx->argumentCount() < 3)
-        return ctx->throwError(
-                QLatin1String("enumeration initializer takes at least three arguments."));
-    QScriptValue name = ctx->argument(0);
-    if (!name.isString())
-        return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("enumeration(): enum name (argument 1) is not a string"));
+    QScriptValue object = scriptNewCommon(ctx, eng, typeName);
 
+    object.setProperty(QLatin1String("enumName"), ctx->argument(0)); //first argument is the name of the underlying enum
     QScriptValue enumType = ctx->argument(1);
     if (!enumType.isString() && enumType.isObject())
         enumType = enumType.property(typePropertyString);
-    else
-        return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String(
-                        "enumeration(): enum type (argument 2) is not a valid string or object"));
-
-    QString enumTypeString = enumType.toString();
-    PrimitiveDataType pdt = PrimitiveFactory::typeStringToType(enumTypeString);
-    if (pdt == Type_Invalid || pdt == Type_Float || pdt == Type_Double)
-        return ctx->throwError(
-                QLatin1String("enumeration(): enum type (argument 2) '") + enumTypeString
-                        + QLatin1String("' is not a valid type"));
-
-    QScriptValue enumValues = ctx->argument(2);
-    if (!enumValues.isObject())
-        return ctx->throwError(QScriptContext::TypeError,
-                QLatin1String("enumeration(): enum definition argument is not an object"));
-
-    //all arguments are valid
-    QScriptValue object;
-    if (ctx->isCalledAsConstructor())
-        object = ctx->thisObject();
-    else
-        object = eng->newObject();
-
-    if (flags)
-        object.setProperty(typePropertyString, QLatin1String("flags"));
-    else
-        object.setProperty(typePropertyString, QLatin1String("enum"));
-
-    object.setProperty(QLatin1String("enumType"), enumType);
-    object.setProperty(QLatin1String("enumValues"), enumValues);
-    object.setProperty(QLatin1String("enumName"), name);
-    object.setProperty(toStringPropertyString, eng->newFunction(enumToString));
-    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
-    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
-
+    object.setProperty(QLatin1String("enumType"), enumType); //second argument is the type of the enum
+    object.setProperty(QLatin1String("enumValues"), ctx->argument(2)); //third argument is the enum values
     return object;
 }
 
 QScriptValue scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng)
 {
-    return createEnumObject(ctx, eng, false);
+    return createEnumObject(ctx, eng, QLatin1String("enum"));
 }
 
 QScriptValue scriptNewFlags(QScriptContext* ctx, QScriptEngine* eng)
 {
-    return createEnumObject(ctx, eng, true);
+    return createEnumObject(ctx, eng, QLatin1String("flags"));
 }
 
 QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    QString encoding;
-    if (ctx->argumentCount() < 1)
-        encoding = QLatin1String("ascii");
-    else
-        encoding = ctx->argument(0).toString();
-    QScriptValue object;
-    if (ctx->isCalledAsConstructor())
-        object = ctx->thisObject();
-    else
-        object = eng->newObject();
+    QScriptValue object = scriptNewCommon(ctx, eng, QLatin1String("string"));
 
-    object.setProperty(typePropertyString, QLatin1String("string"));
-    object.setProperty(QLatin1String("encoding"), encoding);
-    object.setProperty(setUpdatePropertyString, eng->newFunction(addUpdateFunc, 1));
-    object.setProperty(setValidationPropertyString, eng->newFunction(addValidationFunc, 1));
-
+    object.setProperty(QLatin1String("encoding"), ctx->argument(0));
     return object;
-}
-
-//toString functions
-
-QScriptValue primitiveToString(QScriptContext* ctx, QScriptEngine* eng)
-{
-    Q_UNUSED(eng)
-    QString type =
-            ctx->thisObject().property(typePropertyString).toString().toLower();
-    if (ctx->argumentCount() == 1)
-    {
-        //name passed as parameter -> C/C++ string
-        QString name = ctx->argument(0).toString();
-        return QString(type + QLatin1Char(' ') + name + QLatin1Char(';'));
-    }
-    else
-        return type;
-}
-
-QScriptValue bitfieldToString(QScriptContext* ctx, QScriptEngine* eng)
-{
-    Q_UNUSED(eng)
-    QString type = ctx->thisObject().property(QLatin1String("bitfieldType")).toString();
-    QString width = ctx->thisObject().property(QLatin1String("width")).toString();
-    if (ctx->argumentCount() == 1)
-    {
-        //name passed as parameter -> C/C++ string
-        QString name = ctx->argument(0).toString();
-        return QString::fromLatin1("%1 %2 : %3;").arg(type, name, width);
-    }
-    else
-        return QString(type + QLatin1String(" : ") + width + QLatin1Char(';'));
-}
-
-QScriptValue arrayToString(QScriptContext* ctx, QScriptEngine* eng)
-{
-    Q_UNUSED(eng)
-    QScriptValue thisObj = ctx->thisObject();
-    QScriptValue childType = thisObj.property(QLatin1String("childType"));
-    QString type = childType.toString();
-    QString length = thisObj.property(QLatin1String("length")).toString();
-    //arg1 is name, arg2 is indentation lvl (number of tabs needed, only needed when childType is struct/union)
-    if (ctx->argumentCount() == 1 || ctx->argumentCount() == 2)
-    {
-        QString name = ctx->argument(0).toString();
-        //name passed as parameter -> C/C++ string
-        if (type == QLatin1String("struct") || type == QLatin1String("union"))
-        {
-            /*show the struct and the union too:
-             * i.e. struct {
-             *          int i;
-             *          char c;
-             *       } val[13];
-             */
-            QScriptValue toString = childType.property(toStringPropertyString);
-            if (!toString.isFunction())
-                return QString::fromLatin1("%1 %2[%3];").arg(type, name, length);
-            QScriptValueList args;
-            args << QString() << ctx->argument(1); //empty name + current indentation lvl
-            QScriptValue structStr = toString.call(childType, args);
-            QString structString = structStr.toString();
-            structString = structString.remove(structString.length() - 1, 1); //remove last char, the ';'
-            structString = structString.remove(type.length(), 1); //remove 1 unneeded space
-            structString += QLatin1Char(' ') + name + QLatin1Char('[') + length + QLatin1Char(']');
-            return structString;
-        }
-        return QString::fromLatin1("%1 %2[%3];").arg(type, name, length);
-    }
-    else
-        return QString::fromLatin1("%1[%2];").arg(type, length);
-}
-
-QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng)
-{
-    Q_UNUSED(eng)
-    QString type = ctx->thisObject().property(typePropertyString).toString(); // "union" or "struct"
-    QScriptValue children = ctx->thisObject().property(QLatin1String("children"));
-    QString name = ctx->argument(0).toString();
-    int indentationLevel = 1;
-    if (ctx->argumentCount() == 2)
-    {
-        //has second argument, which is indentation count
-        QScriptValue idtLvl = ctx->argument(1);
-        if (!idtLvl.isNumber())
-            return ctx->throwError(QScriptContext::TypeError,
-                    QLatin1String("second argument must be a number"));
-        indentationLevel = idtLvl.toUInt32();
-    }
-    QString indent = QString(indentationLevel, QLatin1Char('\t'));
-    QString baseIndent = QString(qMax(0, indentationLevel - 2), QLatin1Char('\t'));
-
-    QString completeString = baseIndent + type + QLatin1Char(' ') + name + QLatin1String(" {\n");
-    QScriptValueIterator iter(children);
-    while (iter.hasNext())
-    {
-        iter.next();
-        QString name = iter.name();
-        QScriptValue val = iter.value();
-        if (!val.isObject())
-            continue;
-
-        QScriptValue toString = val.property(toStringPropertyString);
-        if (!toString.isFunction())
-            continue;
-
-        QScriptValueList arg;
-        arg << name;
-
-        //value is a union/struct  -> increase indentation level
-        QString valType = val.property(typePropertyString).toString();
-        if (valType == QLatin1String("union")
-                || valType == QLatin1String("struct")
-                || valType == QLatin1String("array"))
-            arg << indentationLevel + 1;
-
-        QString result = toString.call(val, arg).toString();
-        completeString.append(indent + result + QLatin1Char('\n'));
-    }
-
-    completeString += QString(qMax(0, indentationLevel - 1), QLatin1Char('\t'))
-            + QLatin1String("};");
-    return completeString;
-}
-
-QScriptValue unionToString(QScriptContext* ctx, QScriptEngine* eng)
-{
-    //arg1 is name, arg2 is indentation lvl (number of tabs needed)
-    if (ctx->argumentCount() == 1 || ctx->argumentCount() == 2)
-        return unionOrStructToCPPString(ctx, eng);
-    else
-        return QLatin1String("union");
-}
-
-QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng)
-{
-    //arg1 is name, arg2 is indentation lvl (number of tabs needed)
-    if (ctx->argumentCount() == 1 || ctx->argumentCount() == 2)
-        return unionOrStructToCPPString(ctx, eng);
-    else
-        return QLatin1String("struct");
-}
-
-QScriptValue enumToString(QScriptContext* ctx, QScriptEngine* eng)
-{
-    Q_UNUSED(eng)
-    QString enumType = ctx->thisObject().property(QLatin1String("enumType")).toString();
-    QString enumName = ctx->thisObject().property(QLatin1String("enumName")).toString();
-    if (ctx->argumentCount() > 0)
-    {
-        //as c++
-        QString name = ctx->argument(0).toString();
-        return QString(enumName + QLatin1String(" /* ") + enumType + QLatin1String(" */ ")
-                + name + QLatin1Char(';'));
-    }
-    //otherwise we also list all values
-    QString result = QLatin1String("enum ") + enumName + QLatin1String(":\n");
-    QScriptValue children = ctx->thisObject().property(QLatin1String("enumValues"));
-    QScriptValueIterator iter(children);
-    while (iter.hasNext())
-    {
-        iter.next();
-        result.append(iter.name() + QLatin1String(" = ")
-                + iter.value().toString() + QLatin1Char('\n'));
-    }
-    return result;
 }
 
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng)
 {
     if (ctx->argumentCount() < 1)
-        return ctx->throwError(
-                QLatin1String("child(): name of child must be passed as first parameter"));
-    QScriptValue name = ctx->argument(0);
-    QScriptValue ret = ctx->thisObject().property(QLatin1String("children")).property(
-            name.toString());
+        return ctx->throwError(QLatin1String("child(): name of child must be passed as first parameter"));
+    QString nameString = ctx->argument(0).toString();
+    QScriptValue ret = ctx->thisObject().property(QLatin1String("children")).property(nameString);
     if (ret.isValid())
         return ret;
     else
-        return eng->undefinedValue();
+        return ctx->throwError(QString(QLatin1String("child(): could not find child with name=") + nameString));
 }
 
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine*)

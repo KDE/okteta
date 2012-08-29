@@ -30,13 +30,13 @@
 #include <QScriptValue>
 
 class DataInformation;
-
+/** NOT THREAD SAFE! */
 class ScriptLogger: public QAbstractListModel {
 Q_OBJECT
 Q_DISABLE_COPY(ScriptLogger)
 public:
-    ScriptLogger();
-    ~ScriptLogger();
+    explicit ScriptLogger();
+    virtual ~ScriptLogger();
 
 	enum LogLevel {
 	    LogInvalid = 0, LogInfo = 1, LogWarning = 2, LogError = 3
@@ -57,15 +57,15 @@ public:
 	virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 	virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
-	QDebug info(const QScriptValue& cause = QScriptValue()) { return log(LogInfo, cause); }
-	QDebug warn(const QScriptValue& cause = QScriptValue()) { return log(LogWarning, cause); }
-	QDebug error(const QScriptValue& cause = QScriptValue()) { return log(LogError, cause); }
-	QDebug info(const DataInformation* origin) { return log(LogInfo, origin); }
-	QDebug warn(const DataInformation* origin) { return log(LogWarning, origin); }
-	QDebug error(const DataInformation* origin) { return log(LogError, origin); }
-	QDebug info(const QString& origin) { return log(LogInfo, origin); }
-	QDebug warn(const QString& origin) { return log(LogWarning, origin); }
-	QDebug error(const QString& origin) { return log(LogError, origin); }
+	inline QDebug info(const QScriptValue& cause = QScriptValue()) { return log(LogInfo, cause); }
+	inline QDebug warn(const QScriptValue& cause = QScriptValue()) { return log(LogWarning, cause); }
+	inline QDebug error(const QScriptValue& cause = QScriptValue()) { return log(LogError, cause); }
+	inline QDebug info(const DataInformation* origin) { return log(LogInfo, origin); }
+	inline QDebug warn(const DataInformation* origin) { return log(LogWarning, origin); }
+	inline QDebug error(const DataInformation* origin) { return log(LogError, origin); }
+	inline QDebug info(const QString& origin) { return log(LogInfo, origin); }
+	inline QDebug warn(const QString& origin) { return log(LogWarning, origin); }
+	inline QDebug error(const QString& origin) { return log(LogError, origin); }
 	/**
 	 * @return a QDebug to write the message to.
 	 * Do NOT save this object, since the string it writes to may become invalid!
@@ -80,9 +80,12 @@ public:
 	 * @return all the messages, mainly used for testing
 	 */
 	QStringList messages(LogLevel minLevel = LogInfo) const;
+	/** whether to log to stdout instead of saving the messages */
+	inline void setLogToStdOut(bool val) { mLogToStdOut = val; }
 
 private:
 	QVector<Data> mData;
+	bool mLogToStdOut;
 };
 
 #endif // SCRIPTLOGGER_H

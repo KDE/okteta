@@ -26,6 +26,7 @@
 class QScriptEngine;
 class QScriptContext;
 class QScriptValue;
+class QLatin1String;
 
 /** This class adds all functions to the scriptengine that are needed for the scripts.
  *
@@ -139,68 +140,12 @@ QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng);
 /** this constructor takes one argument, the encoding of the string (as a string) */
 QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
-
-/** A toString() implementation for primitive types.
- * <br>
- *  If called with 1 argument returns a string containing the way this would be defined in C/C++<br>
- *  <br>
- *  Example would be: @code "uint16 foo;" @endcode
- *  <br>
- *  Otherwise just returns the primitive type, i.e. @code "int64" @endcode
- */
-
-//the toString functions
-QScriptValue primitiveToString(QScriptContext* ctx, QScriptEngine* eng);
-/** A toString() implementation for bitfields
- *
- *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
- *  <br>
- *  Example would be: @code "unsigned foo : 3;" @endcode <br>
- *  <br>
- *  Otherwise returns for example "unsigned : 2" or "bool : 1" or "signed : 12".
- */
-QScriptValue bitfieldToString(QScriptContext* ctx, QScriptEngine* eng);
-/** A toString() implementation for arrays
- *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
- *  <br>
- *  Example would be: @code "char foo[24];" @endcode<br>
- *  <br>
- *  Otherwise just returns type and length of the array, e.g. @c "uint8[12]"
- */
-QScriptValue arrayToString(QScriptContext* ctx, QScriptEngine* eng);
-/** A toString implementation for unions.
- *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
- *  Example would be:
- *  @code
- *  union foo {
- *      int16 member1;
- *      char member2;
- *   };
- *   @endcode
- *   <br>
- *   Otherwise just returns the type, which is @c "union"
- */
-QScriptValue unionToString(QScriptContext* ctx, QScriptEngine* eng);
-/** A toString implementation for structs.
- *  If called with one argument returns a string containing the way this would be defined in C/C++<br>
- *  Example would be:<br>
- *  @code
- *  "struct foo {
- *      int16 member1;
- *      char member2;
- *   };"
- *   @endcode
- *   <br>
- *   Otherwise just returns the type, which is @c "struct"
- */
-QScriptValue structToString(QScriptContext* ctx, QScriptEngine* eng);
-QScriptValue enumToString(QScriptContext* ctx, QScriptEngine* eng);
-QScriptValue unionOrStructToCPPString(QScriptContext* ctx, QScriptEngine* eng);
+/** Do the common initialization shared by all constructors */
+QScriptValue scriptNewCommon(QScriptContext* ctx, QScriptEngine* eng, QLatin1String typeName);
 
 QScriptValue primitiveConstructor(QScriptContext* ctx, QScriptEngine* eng, const char* type);
 
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
-
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine* eng);
 }

@@ -72,6 +72,9 @@ QDebug ScriptLogger::log(LogLevel level, const DataInformation* origin)
 
 QDebug ScriptLogger::log(LogLevel level, const QString& origin, const QScriptValue& cause)
 {
+    if (mLogToStdOut)
+        return qDebug();
+
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
     mData.append(Data(level, origin, cause));
     endInsertRows();
@@ -85,7 +88,7 @@ void ScriptLogger::clear()
     endRemoveRows();
 }
 
-ScriptLogger::ScriptLogger()
+ScriptLogger::ScriptLogger() : mLogToStdOut(false)
 {
 }
 

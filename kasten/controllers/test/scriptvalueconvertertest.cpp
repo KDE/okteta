@@ -239,26 +239,23 @@ void ScriptValueConverterTest::testParseEnum()
     //QFETCH(QString, name);
     QFETCH(QString, code);
     QFETCH(int, expectedCount);
-    QFETCH(bool, isInvalidType);
 
     QScriptValue val = engine->evaluate(code);
-//    if (engine.hasUncaughtException())
-//    {
-//        qDebug() << engine.uncaughtExceptionBacktrace();
-//        qDebug() << code;
-//        qDebug() << engine.uncaughtException().toString();
-//    }
-    const bool hasException = engine->hasUncaughtException();
-    QCOMPARE(hasException, isInvalidType);
-    if (hasException)
-        return;
+
     QVERIFY(val.isValid());
     QVERIFY(!val.isNull());
     QVERIFY(!val.isUndefined());
+    QVERIFY(val.isObject());
     QCOMPARE(val.property(QLatin1String("type")).toString(), QString(QLatin1String("enum")));
 
     QScopedPointer<DataInformation> data (ScriptValueConverter::convert(val, QLatin1String("val"), logger.data()));
-    QVERIFY(data);
+    if (expectedCount > 0)
+        QVERIFY(data);
+    else
+    {
+        QVERIFY(!data);
+        return;
+    }
     AbstractEnumDataInformation* e = data->asEnum();
     QVERIFY(e);
 
@@ -288,37 +285,29 @@ void ScriptValueConverterTest::testParseEnum_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<int>("expectedCount");
     QTest::addColumn<quint64>("expectedValue");
-    QTest::addColumn<bool>("isInvalidType");
 
     QTest::newRow("invalid_type_struct") << arg2(baseStr, "struct({ val : uint8() })", "1234.234")
-            << 0 << quint64(0) << true;
+            << 0 << quint64(0);
     QTest::newRow("invalid_type_array") << arg2(baseStr, "array(uint8(), 1)", "1234.234") << 0
-            << quint64(0) << true;
+            << quint64(0);
     QTest::newRow("invalid_type_union") << arg2(baseStr, "union({ val : uint8() })", "1234.234")
-            << 0 << quint64(0) << true;
-    QTest::newRow("invalid_type_double") << arg2(baseStr, "double()", "1234.234") << 0 << quint64(0)
-            << true;
-    QTest::newRow("invalid_type_float") << arg2(baseStr, "float()", "1234.234") << 0 << quint64(0)
-            << true;
-    QTest::newRow("invalid_type_string") << arg2(baseStr, "string()", "1234.234") << 0 << quint64(0)
-            << true;
+            << 0 << quint64(0);
+    QTest::newRow("invalid_type_double") << arg2(baseStr, "double()", "1234.234") << 0 << quint64(0);
+    QTest::newRow("invalid_type_float") << arg2(baseStr, "float()", "1234.234") << 0 << quint64(0);
+    QTest::newRow("invalid_type_string") << arg2(baseStr, "string()", "1234.234") << 0 << quint64(0);
 
-    QTest::newRow("float2int8") << arg2(baseStr, "uint8()", "1.234") << 1 << quint64(1) << false;
-    QTest::newRow("float2int8_range") << arg2(baseStr, "uint8()", "1234.234") << 0 << quint64(0)
-            << false;
-    QTest::newRow("float2int32") << arg2(baseStr, "uint32()", "1234.1234") << 1 << quint64(1234)
-            << false;
-    QTest::newRow("float2int32_range") << arg2(baseStr, "uint32()", "5294967296.234") << 0
-            << quint64(0) << false;
+    QTest::newRow("float2int8") << arg2(baseStr, "uint8()", "1.234") << 1 << quint64(1);
+    QTest::newRow("float2int8_range") << arg2(baseStr, "uint8()", "1234.234") << 0 << quint64(0);
+    QTest::newRow("float2int32") << arg2(baseStr, "uint32()", "1234.1234") << 1 << quint64(1234);
+    QTest::newRow("float2int32_range") << arg2(baseStr, "uint32()", "5294967296.234") << 0 << quint64(0);
     QTest::newRow("float2int64") << arg2(baseStr, "uint64()", "5294967296.234") << 1
-            << quint64(5294967296UL) << false;
+            << quint64(5294967296UL);
     QTest::newRow("double_overflow") << arg2(baseStr, "uint64()", "9007199254740993.0") << 0
-            << quint64(9007199254740993UL) << false; //only 992 and 994 can be represented as a double
-    QTest::newRow("uint64_max_hex")
-    << arg2(baseStr, "uint64()", "new String(\"0xFFFFFFFFFFFFFFFF\")") << 1
-            << quint64(0xFFFFFFFFFFFFFFFFL) << false;
-    QTest::newRow("uint64_max") << arg2(baseStr, "uint64()", "new String(\"18446744073709551615\")")
-            << 1 << quint64(18446744073709551615UL) << false;
+            << quint64(9007199254740993UL); //only 992 and 994 can be represented as a double
+    QTest::newRow("uint64_max_hex") << arg2(baseStr, "uint64()", "new String(\"0xFFFFFFFFFFFFFFFF\")") << 1
+            << quint64(0xFFFFFFFFFFFFFFFFL);
+    QTest::newRow("uint64_max") << arg2(baseStr, "uint64()", "new String(\"18446744073709551615\")") << 1
+            << quint64(18446744073709551615UL);
 }
 
 QTEST_MAIN(ScriptValueConverterTest)
