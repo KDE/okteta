@@ -91,4 +91,15 @@ private:
 	bool mLogToStdOut;
 };
 
+struct LoggerWithContext {
+public:
+    LoggerWithContext(ScriptLogger* l, const QString& s) : logger(l), context(s) {}
+    inline QDebug info() const { return logger ? logger->info(context) : qDebug(); }
+    inline QDebug warn() const { return logger ? logger->warn(context) : qWarning(); }
+    inline QDebug error() const { return logger ? logger->error(context) : qWarning(); }
+private:
+    ScriptLogger* const logger;
+    QString context;
+};
+
 #endif // SCRIPTLOGGER_H

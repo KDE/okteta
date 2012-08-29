@@ -116,10 +116,11 @@ void ScriptClassesTest::initTestCase()
             << pair("float") << pair("double") << pair("int64high32") << pair("int64low32")
             << pair("uint64high32") << pair("uint64low32") << pair("type");
     qSort(primitiveProperties);
+    LoggerWithContext lwc(0, QString());
     for (int i = Type_START; i < Type_Bitfield; ++i)
     {
         PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(
-                QLatin1String("prim"), static_cast<PrimitiveDataTypeEnum>(i));
+                QLatin1String("prim"), static_cast<PrimitiveDataTypeEnum>(i), lwc);
         prim->setValue(10);
         primitives.append(
                 new TopLevelDataInformation(prim, 0, ScriptEngineInitializer::newEngine()));
@@ -136,11 +137,11 @@ void ScriptClassesTest::initTestCase()
     EnumDefinition::Ptr enumDef(new EnumDefinition(enumValues,
             QLatin1String("theEnum"), Type_Int32));
     enumData = new EnumDataInformation(QLatin1String("enumData"),
-            PrimitiveFactory::newInstance(QLatin1String("dummy"), Type_Int32), enumDef);
+            PrimitiveFactory::newInstance(QLatin1String("dummy"), Type_Int32, lwc), enumDef);
     enumDataTop.reset(
             new TopLevelDataInformation(enumData, 0, ScriptEngineInitializer::newEngine()));
     flagData = new FlagDataInformation(QLatin1String("flagData"),
-            PrimitiveFactory::newInstance(QLatin1String("dummy"), Type_Int32), enumDef);
+            PrimitiveFactory::newInstance(QLatin1String("dummy"), Type_Int32, lwc), enumDef);
     flagDataTop.reset(
             new TopLevelDataInformation(flagData, 0, ScriptEngineInitializer::newEngine()));
 
@@ -169,7 +170,7 @@ void ScriptClassesTest::initTestCase()
             << pair("type", QScriptValue::Undeletable);
     qSort(arrayProperties);
     arrayData = new ArrayDataInformation(QLatin1String("array"), 20,
-            PrimitiveFactory::newInstance(QLatin1String("inner"), Type_Int32));
+            PrimitiveFactory::newInstance(QLatin1String("inner"), Type_Int32, lwc));
     arrayDataTop.reset(
             new TopLevelDataInformation(arrayData, 0, ScriptEngineInitializer::newEngine()));
 

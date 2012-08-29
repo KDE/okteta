@@ -254,31 +254,33 @@ void BasicDataInformationTest::initTestCase()
 {
 //	qRegisterMetaType<const DataInformation*>();
 //	qRegisterMetaType<DataInformation*>();
+    LoggerWithContext lwc(0, QString());
+
 	for (int i = Type_START; i < Type_Bitfield; ++i) {
 		primitives.append(PrimitiveFactory::newInstance(QLatin1String("prim"),
-		        PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i))));
+		        PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i)), lwc));
 	}
-	QCOMPARE(PrimitiveFactory::newInstance(QLatin1String("invalid"), Type_Bitfield), static_cast<PrimitiveDataInformation*>(0));
-	QCOMPARE(PrimitiveFactory::newInstance(QLatin1String("invalid"), QLatin1String("invalid_type")), static_cast<PrimitiveDataInformation*>(0));
+	QCOMPARE(PrimitiveFactory::newInstance(QLatin1String("invalid"), Type_Bitfield, lwc), static_cast<PrimitiveDataInformation*>(0));
+	QCOMPARE(PrimitiveFactory::newInstance(QLatin1String("invalid"), QLatin1String("invalid_type"), lwc), static_cast<PrimitiveDataInformation*>(0));
 	bitfields.append(new BoolBitfieldDataInformation(QLatin1String("bitfield"), 24));
 	bitfields.append(new UnsignedBitfieldDataInformation(QLatin1String("bitfield"), 24));
 	bitfields.append(new SignedBitfieldDataInformation(QLatin1String("bitfield"), 24));
 
 	emptyStruct = new StructureDataInformation(QLatin1String("emptyStruct"));
 	QVector<DataInformation*> structChildren;
-	structChildren << PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32)
-	        << PrimitiveFactory::newInstance(QLatin1String("prim2"), Type_UInt64);
+	structChildren << PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32, lwc)
+	        << PrimitiveFactory::newInstance(QLatin1String("prim2"), Type_UInt64, lwc);
 	structWithChildren = new StructureDataInformation(QLatin1String("structWithChildren"), structChildren);
 
 	emptyUnion = new UnionDataInformation(QLatin1String("emptyUnion"));
     QVector<DataInformation*> unionChildren;
-    unionChildren << PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32)
-            << PrimitiveFactory::newInstance(QLatin1String("prim2"), Type_UInt64);
+    unionChildren << PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32, lwc)
+            << PrimitiveFactory::newInstance(QLatin1String("prim2"), Type_UInt64, lwc);
 	unionWithChildren = new UnionDataInformation(QLatin1String("unionWithChildren"), unionChildren);
 
-	emptyPrimitiveArray = new ArrayDataInformation(QLatin1String("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32));
+	emptyPrimitiveArray = new ArrayDataInformation(QLatin1String("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32, lwc));
 	emptyComplexArray = new ArrayDataInformation(QLatin1String("emptyComplexArray"), 0, structWithChildren->clone());
-	primitiveArrayWithChildren = new ArrayDataInformation(QLatin1String("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32));
+	primitiveArrayWithChildren = new ArrayDataInformation(QLatin1String("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32, lwc));
 	complexArrayWithChildren = new ArrayDataInformation(QLatin1String("complexArrayWithChildren"), 2, structWithChildren->clone());
 
 	QMap<AllPrimitiveTypes, QString> enumVals;
@@ -286,8 +288,8 @@ void BasicDataInformationTest::initTestCase()
 	enumVals[2] = QLatin1String("two");
 	enumVals[4] = QLatin1String("four");
 	EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QLatin1String("eDef"), Type_UInt32));
-	flagData = new FlagDataInformation(QLatin1String("flagData"), PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32), edef);
-	enumData = new EnumDataInformation(QLatin1String("enumData"), PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32), edef);
+	flagData = new FlagDataInformation(QLatin1String("flagData"), PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32, lwc), edef);
+	enumData = new EnumDataInformation(QLatin1String("enumData"), PrimitiveFactory::newInstance(QLatin1String("prim"), Type_UInt32, lwc), edef);
     emptyString = new StringDataInformation(QLatin1String("string"), StringDataInformation::ASCII);
     dummy = new DummyDataInformation(0);
     topLevel = new TopLevelDataInformation(new DummyDataInformation(0));

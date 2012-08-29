@@ -72,13 +72,14 @@ PrimitiveDataInformation* DataInformationFactory::newPrimitive(const PrimitivePa
         pd.error() << "Type of primitive not specified, cannot create it!";
         return 0;
     }
-    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type);
+    LoggerWithContext lwc(pd.logger, pd.context());
+    PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
     if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
     {
         pd.error() << "Unrecognized primitive type: " << pd.type;
         return 0;
     }
-    return PrimitiveFactory::newInstance(pd.name, primitiveType, pd.logger, pd.parent);
+    return PrimitiveFactory::newInstance(pd.name, primitiveType, lwc, pd.parent);
 }
 
 namespace
@@ -86,7 +87,8 @@ namespace
 template<class T>
 T* newEnumOrFlags(const EnumParsedData& pd)
 {
-    const PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type);
+    LoggerWithContext lwc(pd.logger, pd.context() + QLatin1String(" (type)"));
+    const PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
     if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
     {
         pd.error() << "Unrecognized enum type: " << pd.type;
@@ -101,8 +103,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
     if (!definition)
     {
         QMap<AllPrimitiveTypes, QString> enumValues =
-                AbstractEnumDataInformation::parseEnumValues(pd.enumValuesObject, pd.logger, primitiveType,
-                        pd.context());
+                AbstractEnumDataInformation::parseEnumValues(pd.enumValuesObject, lwc, primitiveType);
         if (enumValues.isEmpty())
         {
             pd.error() << "No enum values specified!";
@@ -116,7 +117,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
                 << ") do not match!";
         return 0;
     }
-    PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(pd.name, primitiveType, pd.logger);
+    PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(pd.name, primitiveType, lwc);
     //TODO allow bitfields?
     if (!primData)
     {

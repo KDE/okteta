@@ -42,10 +42,10 @@ public:
     void setEnumValues(QMap<AllPrimitiveTypes, QString> newValues);
 
     static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
-            ScriptLogger* logger, PrimitiveDataType type = Type_UInt64, const QString& context = QString());
+            const LoggerWithContext& logger, PrimitiveDataType type = Type_UInt64);
     /** @return a pair containing the converted value. A default constructed pair means error! */
     static QPair<AllPrimitiveTypes, QString> convertToEnumEntry(const QString& name, const QVariant& value,
-            ScriptLogger* logger, PrimitiveDataType type, const QString& context);
+            const LoggerWithContext& logger, PrimitiveDataType type);
 
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 

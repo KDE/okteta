@@ -24,14 +24,12 @@
 #include "primitive/primitivetemplateinfo.h"
 #include "../script/scriptlogger.h"
 
-#include <KDebug>
-
 namespace PrimitiveFactory
 {
 
-PrimitiveDataType typeStringToType(const QString& string)
+PrimitiveDataType typeStringToType(const QString& string, const LoggerWithContext& logger)
 {
-    QString typeStr = string.trimmed().toLower();
+    const QString typeStr = string.trimmed().toLower();
     if (typeStr == QLatin1String("bool8"))
         return Type_Bool8;
     if (typeStr == QLatin1String("bool16"))
@@ -62,11 +60,11 @@ PrimitiveDataType typeStringToType(const QString& string)
         return Type_Float;
     if (typeStr == QLatin1String("double"))
         return Type_Double;
-
-    kWarning().nospace() << "could not convert '" << string << "' to PrimitiveType";
+    logger.warn() << typeStr << "does not name a valid primitive type";
     return Type_Invalid; //just return a default value
 }
-PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type, ScriptLogger* logger, DataInformation* parent)
+PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
+        const LoggerWithContext& logger, DataInformation* parent)
 {
     switch (type.value)
     {
@@ -101,10 +99,7 @@ PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType typ
     case Type_Double:
         return new PrimitiveInfo<Type_Double>::Class(name, parent);
     default:
-        if (logger)
-            logger->error(parent).nospace() << "could not convert '" << type << "' to a primitive type";
-        else
-            kWarning().nospace() << "could not convert '" << type << "' to a primitive type";
+        logger.error().nospace() << "could not convert '" << type << "' to a primitive type";
         return 0; //invalid type
     }
 }

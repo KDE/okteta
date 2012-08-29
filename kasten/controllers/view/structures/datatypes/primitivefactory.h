@@ -26,7 +26,7 @@
 #include "primitivedatatype.h"
 
 class PrimitiveDataInformation;
-class ScriptLogger;
+struct LoggerWithContext;
 class QString;
 class DataInformation;
 
@@ -36,15 +36,15 @@ namespace PrimitiveFactory
 /** Converts @p typeStr to a PrimitiveDataType case-insensitively
  * @return The corresponding type or PrimitiveDataTypeEnum::Type_Invalid if string is not regcognized
  */
-PrimitiveDataType typeStringToType(const QString& typeStr);
+PrimitiveDataType typeStringToType(const QString& typeStr, const LoggerWithContext& logger);
 
 PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
-        ScriptLogger* logger = 0, DataInformation* parent = 0);
+        const LoggerWithContext& logger, DataInformation* parent = 0);
 
 inline PrimitiveDataInformation* newInstance(const QString& name, const QString& typeString,
-        ScriptLogger* logger = 0, DataInformation* parent = 0)
+        const LoggerWithContext& logger, DataInformation* parent = 0)
 {
-    return newInstance(name, typeStringToType(typeString), logger, parent);
+    return newInstance(name, typeStringToType(typeString, logger), logger, parent);
 }
 
 }

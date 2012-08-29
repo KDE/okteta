@@ -212,7 +212,8 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
                     << toRawXML(elem);
             continue;
         }
-        PrimitiveDataType type = PrimitiveFactory::typeStringToType(typeStr);
+        LoggerWithContext lwc(logger, QLatin1String("enum values (") + enumName + QLatin1Char(')'));
+        PrimitiveDataType type = PrimitiveFactory::typeStringToType(typeStr, lwc);
         //handle all entries
         for (QDomElement child = elem.firstChildElement(); !child.isNull(); child =
                 child.nextSiblingElement())
@@ -223,12 +224,12 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
             QString name = readProperty(child, PROPERTY_NAME);
             if (name.isEmpty())
             {
-                logger->warn(enumName) << "Entry is missing name, skipping it!";
+                lwc.warn() << "Entry is missing name, skipping it!";
                 continue;
             }
             QString value = readProperty(child, PROPERTY_VALUE);
             QPair<AllPrimitiveTypes, QString> converted =
-                    AbstractEnumDataInformation::convertToEnumEntry(name, value, logger, type, QString());
+                    AbstractEnumDataInformation::convertToEnumEntry(name, value, lwc, type);
             if (converted == QPair<AllPrimitiveTypes, QString>())
                 continue;
             defs.insert(converted.first, converted.second);
@@ -236,7 +237,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
         //now add this enum to the list of enums
         if (defs.isEmpty())
         {
-            logger->warn(enumName) << "Enum definition contains no valid elements!";
+            lwc.error() << "Enum definition contains no valid elements!";
         }
         else
         {
@@ -380,7 +381,7 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
     //kDebug() << "element tag: " << elem.tagName();
     const QString tag = elem.tagName();
     OsdParserInfo info(oldInfo);
-    info.name = readProperty(elem, PROPERTY_NAME, i18n("&lt;invalid name&gt;"));
+    info.name = readProperty(elem, PROPERTY_NAME, QLatin1String("<anonymous>"));
     if (tag == TYPE_STRUCT)
         data = structFromXML(elem, info);
     else if (tag == TYPE_ARRAY)
