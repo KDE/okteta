@@ -40,9 +40,8 @@ EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInfor
 }
 
 EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
-    AbstractEnumDataInformation(e), mValue(0)
+    AbstractEnumDataInformation(e), mValue(e.mValue->clone())
 {
-    mValue.reset(e.mValue->clone());
     mValue->setParent(this);
 }
 
@@ -79,8 +78,6 @@ bool EnumDataInformation::setData(const QVariant& value, Okteta::AbstractByteArr
 qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    //update enum first (it is possible to change the enum definition this enum uses
-    topLevelDataInformation()->updateElement(this);
     qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
     mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
     return retVal;

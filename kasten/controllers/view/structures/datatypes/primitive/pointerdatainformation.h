@@ -37,21 +37,19 @@ public:
      */
     PointerDataInformation(QString name, DataInformation* childType,
             PrimitiveDataInformation* valueType, DataInformation* parent);
-    PointerDataInformation(QString name, PrimitiveDataInformation* type, DataInformation* parent);
     virtual ~PointerDataInformation();
 
     DATAINFORMATION_CLONE(Pointer)
 
 protected:
     QScopedPointer<PrimitiveDataInformation> mValue; // To allow different pointer sizes
-    QScopedPointer<DataInformation> mPointerTarget; // To allow different pointer sizes
+    QScopedPointer<DataInformation> mPointerTarget;
 
 public:
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
-    virtual qint64 delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address);
     virtual BitCount32 size() const;
     virtual void setWidgetData(QWidget* w) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
@@ -68,6 +66,20 @@ public:
     virtual void setValue(AllPrimitiveTypes newValue);
     virtual QScriptValue valueAsQScriptValue() const;
     virtual bool isPointer() const;
+
+    void delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address);
+
+    DataInformation* pointerTarget() const;
+    /** Set a new pointer target
+     * @param target the new target (ownership is taken)
+     */
+    void setPointerTarget(DataInformation* target);
+
+    DataInformation* pointerType() const;
+    /** Set a new pointer target
+    * @param type the new pointer type (ownership is taken)
+    */
+    void setPointerType(PrimitiveDataInformation* type);
 };
 
 inline bool PointerDataInformation::canHaveChildren() const
@@ -84,5 +96,30 @@ inline bool PointerDataInformation::isPointer() const
 {
     return true;
 }
+
+inline DataInformation* PointerDataInformation::pointerTarget() const
+{
+    return mPointerTarget.data();
+}
+
+inline void PointerDataInformation::setPointerTarget(DataInformation* target)
+{
+    Q_CHECK_PTR(target);
+    mPointerTarget.reset(target);
+    mPointerTarget->setParent(this);
+}
+
+inline DataInformation* PointerDataInformation::pointerType() const
+{
+    return mValue.data();
+}
+
+inline void PointerDataInformation::setPointerType(PrimitiveDataInformation* type)
+{
+    Q_CHECK_PTR(type);
+    mValue.reset(type);
+    mValue->setParent(this);
+}
+
 
 #endif // POINTERDATAINFORMATION_H

@@ -32,6 +32,7 @@
 #include <QScriptEngine>
 #include <KLocalizedString>
 
+#include <limits>
 
 PointerDataInformation::PointerDataInformation(QString name, DataInformation* childType,
         PrimitiveDataInformation* valueType, DataInformation* parent)
@@ -46,13 +47,6 @@ PointerDataInformation::PointerDataInformation(QString name, DataInformation* ch
     Q_UNUSED(pdt)
     mValue->setParent(this);
     mPointerTarget->setParent(this);
-}
-
-PointerDataInformation::PointerDataInformation(QString name, PrimitiveDataInformation* type, DataInformation* parent)
-        : PrimitiveDataInformation(name, parent), mValue(type)
-{
-    Q_CHECK_PTR(type);
-    type->setParent(this);
 }
 
 PointerDataInformation::~PointerDataInformation()
@@ -86,13 +80,12 @@ bool PointerDataInformation::setData(const QVariant& value, Okteta::AbstractByte
 
 qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    //update enum first (it is possible to change the enum definition this enum uses
-    topLevelDataInformation()->updateElement(this);
+    topLevelDataInformation()->updateElement(mValue.data());
     qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
     mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
 
     // If the pointer it's outside the boundaries of the input simply ignore it
-    if (mValue->value().uintValue < input->size())
+    if (mValue->value().ulongValue < quint64(input->size()))
     {
         // Enqueue for later reading of the destination
         topLevelDataInformation()->enqueueReadData(this);
@@ -101,20 +94,28 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
     return retVal;
 }
 
-qint64 PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *input, Okteta::Address address)
+void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *input, Okteta::Address address)
 {
-    quint8 childBitOffset;
+    Q_UNUSED(address); //TODO offsets
+    quint8 childBitOffset = 0;
     // Compute the destination offset
-    Okteta::Address newAddress(mValue->value().uintValue + address);
-
-    //TODO std::numeric_limits
-    // If the computed destination it's outside the boundaries of the input
-    // ignore it
+    const quint64 pointer = mValue->value().ulongValue;
+    if (pointer > quint64(std::numeric_limits<Okteta::Address>::max()))
+    {
+        logError() << "Pointer" << mValue->valueString() << "does not point to an existing address.";
+        return;
+    }
+    Okteta::Address newAddress(pointer);
+    // If the computed destination it's outside the boundaries of the input ignore it
     if (newAddress < 0 || newAddress >= input->size())
-        return 0;
-
+    {
+        logError() << "Pointer" << mValue->valueString() << "does not point to an existing address.";
+        return;
+    }
+    //update the child now
+    topLevelDataInformation()->updateElement(mPointerTarget.data());
     // Let the child do the work
-    return mPointerTarget->readData(input, newAddress, (input->size() - newAddress) * 8, &childBitOffset);
+    mPointerTarget->readData(input, newAddress, (input->size() - newAddress) * 8, &childBitOffset);
 }
 
 BitCount32 PointerDataInformation::size() const
