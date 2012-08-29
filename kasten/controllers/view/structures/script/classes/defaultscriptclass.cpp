@@ -96,7 +96,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     }
     else
     {
-        data->logger()->error(data) << "could not find property with name" << name.toString();
+        data->logError() << "could not find property with name" << name.toString();
         return 0;
     }
 }
@@ -142,7 +142,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
         return other;
     else
     {
-        data->logger()->error(data) << "could not find property with name" << name.toString();
+        data->logError() << "could not find property with name" << name.toString();
         return engine()->undefinedValue();
     }
 }
@@ -181,7 +181,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
             return;
         else
         {
-            data->logger()->error(data) << "could not set property with name" << name.toString();
+            data->logError() << "could not set property with name" << name.toString();
         }
     }
 }
@@ -203,7 +203,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         return result; //is a child element
     else
     {
-        data->logger()->error(data) << "could not find flags for property with name" << name.toString();
+        data->logError() << "could not find flags for property with name" << name.toString();
         return 0;
     }
 }

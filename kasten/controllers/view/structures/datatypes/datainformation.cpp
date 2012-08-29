@@ -211,7 +211,7 @@ void DataInformation::setUpdateFunc(const QScriptValue& func)
     {
         if (!func.isFunction())
         {
-            logger()->warn(this) << "cannot set update function since "
+            logWarn() << "cannot set update function since "
                     << func.toString() << "is not a function!";
             return;
         }
@@ -255,7 +255,7 @@ void DataInformation::setValidationFunc(const QScriptValue& func)
     {
         if (!func.isFunction())
         {
-            logger()->warn(this) << "cannot set validation function since "
+            logWarn() << "cannot set validation function since "
                     << func.toString() << "is not a function!";
             return;
         }

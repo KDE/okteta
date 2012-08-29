@@ -37,7 +37,7 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
     Q_ASSERT(!lengthFunction.isValid() || lengthFunction.isFunction());
     if (length > MAX_LEN)
     {
-        logger()->warn(this) << length << "exceeds maximum length of" << MAX_LEN
+        logWarn() << length << "exceeds maximum length of" << MAX_LEN
                 << ". Setting it to" << MAX_LEN << "instead";
         length = MAX_LEN;
     }
@@ -82,13 +82,13 @@ bool ArrayDataInformation::setArrayLength(int newLength)
     //arrays with length zero are useless -> minimum is 0
     if (newLength < 0)
     {
-        logger()->error(this).nospace() << "New array length is negative (" << newLength
+        logError().nospace() << "New array length is negative (" << newLength
                 << "), setting to 0.";
         newLength = 0;
     }
     if (uint(newLength) > MAX_LEN)
     {
-        logger()->warn(this) << QString(QLatin1String("new array length is too large (%1), limiting to (%2)"))
+        logWarn() << QString(QLatin1String("new array length is too large (%1), limiting to (%2)"))
                 .arg(QString::number(newLength), QString::number(MAX_LEN));
         newLength = MAX_LEN;
     }
@@ -121,14 +121,13 @@ bool ArrayDataInformation::setArrayType(QScriptValue type)
     //return if conversion failed
     if (!newChildType)
     {
-        logger()->error(this) << "Failed to parse new child type:" << type.toString();
+        logError() << "Failed to parse new child type:" << type.toString();
         return false;
     }
     if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType())
     {
         //there is no need to change the type
-        kDebug()
-        << "New and old child type are identical, aborting: " << mData->primitiveType();
+        logInfo() << "New and old child type are identical, skipping: " << mData->primitiveType();
         delete newChildType;
         return true;
     }
@@ -220,7 +219,8 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
     }
     if (*bitOffset != 0)
     {
-        logger()->warn(this) << "bit offset != 0 (" << *bitOffset << "), adding padding,"
+        //TODO remove this, it will probably cause issues
+        logWarn() << "bit offset != 0 (" << *bitOffset << "), adding padding,"
                 " arrays always start at full bytes";
         bitsRemaining &= BitCount64(~7); //unset lower 3 bits to make it divisible by 8
         address++;
@@ -240,7 +240,7 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
         if (result.isNumber())
             setArrayLength(result.toInt32());
         else
-            logger()->error(this) << "Length function did not return a number! Result was: " << result.toString();
+            logError() << "Length function did not return a number! Result was: " << result.toString();
     }
 
     //FIXME do not add this padding
@@ -259,7 +259,7 @@ bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta:
     }
     if (bitOffset != 0)
     {
-        logger()->warn(this) << "bit offset != 0 (" << bitOffset << "), adding padding,"
+        logWarn() << "bit offset != 0 (" << bitOffset << "), adding padding,"
                 " arrays always start at full bytes";
         bitsRemaining -= bitOffset;
         address++;

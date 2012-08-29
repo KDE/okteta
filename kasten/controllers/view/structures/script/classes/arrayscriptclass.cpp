@@ -91,7 +91,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
         quint32 pos = id - 1;
         if (pos >= data->childCount())
         {
-            aData->logger()->error(aData) << "attempting to access out of bounds child: index was" << pos
+            aData->logError() << "attempting to access out of bounds child: index was" << pos
                     << ", maximum is" << (data->childCount() - 1);
             return engine()->undefinedValue();
         }
@@ -106,7 +106,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
         return aData->childType();
     else if (name == s_childType)
     {
-        aData->logger()->warn(aData) << "Using property 'childType' is deprecated, use the new name 'type' instead";
+        aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         return aData->childType();
     }
     return QScriptValue();
@@ -119,7 +119,7 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
     {
         if (!value.isNumber())
         {
-            aData->logger()->error(aData) << "new length of array is not a number:" << value.toString();
+            aData->logError() << "new length of array is not a number:" << value.toString();
             engine()->currentContext()->throwError(QScriptContext::TypeError,
                 QLatin1String("Value is not a number: ") + value.toString());
         }
@@ -136,7 +136,7 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
     }
     else if (name == s_childType)
     {
-        aData->logger()->warn(aData) << "Using property 'childType' is deprecated, use the new name 'type' instead";
+        aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         aData->setArrayType(value);
         return true;
     }

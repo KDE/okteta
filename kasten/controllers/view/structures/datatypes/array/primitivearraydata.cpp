@@ -103,7 +103,7 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
     Q_ASSERT(bitsRemaining % 8 == 0);
     if ((row + 1) * sizeof(T) * 8 >= bitsRemaining)
     {
-        this->mParent->logger()->info(mParent) << " not enough bits remaining ("
+        this->mParent->logInfo() << " not enough bits remaining ("
                 << bitsRemaining << ") need " << ((row + 1) * sizeof(T) * 8);
         return false;
     }
@@ -112,7 +112,7 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
     bool ok = false;
     T convertedVal = DisplayClass::fromVariant(value, &ok);
     if (!ok) {
-        this->mParent->logger()->warn(mParent) << "could not convert" << value << "to" << type;
+        this->mParent->logWarn() << "could not convert" << value << "to" << type;
         return false;
     }
     kDebug() << AbstractArrayData::mParent->fullObjectPath() << "setting index" << row << "to"

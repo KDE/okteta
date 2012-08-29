@@ -188,8 +188,10 @@ void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& n
 void DataInformationWithChildren::setChildren(QScriptValue children)
 {
     if (children.isNull() || children.isUndefined())
-        logger()->warn(this) << "attempting to set children to null/undefined. "
-                "This must be an error in the script.";
+    {
+        logError() << "attempting to set children to null/undefined.";
+        return;
+    }
     QVector<DataInformation*> convertedVals =
             ScriptValueConverter::convertValues(children, topLevelDataInformation()->logger());
     setChildren(convertedVals);

@@ -133,7 +133,7 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
         if (mChildren.at(i) == data)
             return i;
     }
-    mParent->logger()->warn(mParent) << data->fullObjectPath() << "is not a valid child!";
+    mParent->logWarn() << data->fullObjectPath() << "is not a valid child!";
     return -1;
 }
 

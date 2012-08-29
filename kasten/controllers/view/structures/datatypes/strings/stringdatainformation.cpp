@@ -86,7 +86,7 @@ bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMo
 
 bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
-    logger()->warn(this) << "setChildData not implemented yet!";
+    logWarn() << "setChildData not implemented yet!";
     return false;
 }
 
@@ -97,7 +97,7 @@ qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Ok
 
     if (*bitOffset != 0)
     {
-        logger()->warn(this) << "while reading string bit offset was: " << *bitOffset
+        logWarn() << "while reading string bit offset was: " << *bitOffset
                 << ", adding padding and continuing at next byte (address=" << address << ")";
         bitsRemaining -= 8 - *bitOffset;
         *bitOffset = 0;

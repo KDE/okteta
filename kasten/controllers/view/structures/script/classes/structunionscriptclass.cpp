@@ -139,7 +139,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
 #endif
         if (pos >= data->childCount())
         {
-            dataW->logger()->error(dataW) << "attempting to access out of bounds child: index was" << pos
+            dataW->logError() << "attempting to access out of bounds child: index was" << pos
                     << ", maximum is" << (data->childCount() - 1);
             return engine()->undefinedValue();
         }
@@ -153,7 +153,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
         return dataW->childCount();
     else if (name == s_children)
     {
-        dataW->logger()->error(dataW) << "attempting to read read-only property" << s_children.toString();
+        dataW->logError() << "attempting to read read-only property" << s_children.toString();
         return engine()->undefinedValue();
     }
     else

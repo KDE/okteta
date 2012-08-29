@@ -33,6 +33,7 @@
 #include <address.h>
 
 #include "datainformationbase.h"
+#include "../script/scriptlogger.h"
 
 #define DATAINFORMATION_CLONE(type) virtual inline type##DataInformation* clone() const {\
         return new type##DataInformation(*this); \
@@ -181,6 +182,13 @@ public:
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
     ScriptLogger* logger() const;
+    /** just a shorthand for logger->info(this) */
+    QDebug logInfo() const;
+    /** just a shorthand for logger->warn(this) */
+    QDebug logWarn() const;
+    /** just a shorthand for logger->error(this) */
+    QDebug logError() const;
+
 
 protected:
     /**
@@ -283,4 +291,18 @@ inline AdditionalData* DataInformation::additionalData() const
     return mAdditionalData.data();
 }
 
+inline QDebug DataInformation::logInfo() const
+{
+    return logger()->info(this);
+}
+
+inline QDebug DataInformation::logWarn() const
+{
+    return logger()->warn(this);
+}
+
+inline QDebug DataInformation::logError() const
+{
+    return logger()->error(this);
+}
 #endif /* DATAINFORMATION_H_ */
