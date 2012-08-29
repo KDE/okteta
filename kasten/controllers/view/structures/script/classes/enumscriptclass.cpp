@@ -24,6 +24,7 @@
 #include "enumscriptclass.h"
 
 #include "../../datatypes/primitive/abstractenumdatainformation.h"
+#include "../scriptlogger.h"
 
 EnumScriptClass::EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)
@@ -70,7 +71,7 @@ bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScript
         QMap<AllPrimitiveTypes, QString> newValues = AbstractEnumDataInformation::parseEnumValues(value,
                 pData->logger(), pData->type());
         if (newValues.isEmpty())
-            kWarning() << "attempting to set empty list of enum values!";
+            pData->logger()->warn(pData) << "attempting to set empty list of enum values!";
         pData->setEnumValues(newValues);
         return true;
     }

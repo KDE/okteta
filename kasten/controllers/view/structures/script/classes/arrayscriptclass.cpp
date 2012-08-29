@@ -23,6 +23,7 @@
 
 #include "arrayscriptclass.h"
 #include "../../datatypes/array/arraydatainformation.h"
+#include "../scriptlogger.h"
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
@@ -85,7 +86,11 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
         kDebug() << "accessing property with id=" << id << "and name=" << name.toString();
 #endif
         if (pos >= data->childCount())
+        {
+            aData->logger()->error(aData) << "attempting to access out of bounds child: index was" << pos
+                    << ", maximum is" << (data->childCount() - 1);
             return engine()->undefinedValue();
+        }
         else
         {
             return aData->childToScriptValue(pos, engine(), mHandlerInfo);
@@ -105,6 +110,7 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
     {
         if (!value.isNumber())
         {
+            aData->logger()->error(aData) << "new length of array is not a number:" << value.toString();
             engine()->currentContext()->throwError(QScriptContext::TypeError,
                 QLatin1String("Value is not a number: ") + value.toString());
         }

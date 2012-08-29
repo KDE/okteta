@@ -24,6 +24,7 @@
 #include "structunionscriptclass.h"
 #include "../../datatypes/datainformationwithchildren.h"
 #include "../../datatypes/topleveldatainformation.h"
+#include "../scriptlogger.h"
 
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
@@ -135,7 +136,11 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
         kDebug() << "accessing property with id=" << id << "and name=" << name.toString();
 #endif
         if (pos >= data->childCount())
+        {
+            dataW->logger()->error(dataW) << "attempting to access out of bounds child: index was" << pos
+                    << ", maximum is" << (data->childCount() - 1);
             return engine()->undefinedValue();
+        }
         else
         {
             Q_CHECK_PTR(data->childAt(pos));
@@ -145,7 +150,10 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
     else if (name == s_childCount)
         return dataW->childCount();
     else if (name == s_children)
+    {
+        dataW->logger()->error(dataW) << "attempting to read read-only property" << s_children.toString();
         return engine()->undefinedValue();
+    }
     else
     {
         //TODO is this necessary, will there be any way a child has no id set?
@@ -191,7 +199,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_toString(QScriptContext* 
     DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data";
         return eng->undefinedValue();
     }
     return data->typeName(); //TODO better toString
