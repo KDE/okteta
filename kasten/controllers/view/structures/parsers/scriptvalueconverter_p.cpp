@@ -94,7 +94,6 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         return 0; //no point trying to convert
     }
 
-    //TODO internal type
     QString type = value.property(PROPERTY_INTERNAL_TYPE).toString().toLower(); //to lower just to be safe
     if (type.isEmpty())
     {
@@ -160,7 +159,7 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
     }
     else
     {
-        apd.length = ParserUtils::intFromScriptValue(value);
+        apd.length = ParserUtils::intFromScriptValue(lengthProp);
     }
 
     QScriptValue childType = value.property(PROPERTY_TYPE);

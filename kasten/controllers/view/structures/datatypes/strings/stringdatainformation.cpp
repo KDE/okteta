@@ -32,9 +32,10 @@
 #include "latin1stringdata.h"
 #include "../../script/classes/stringscriptclass.h"
 #include "../../script/scripthandlerinfo.h"
+#include "../../script/scriptlogger.h"
 
-#include <QtScript/QScriptEngine>
-#include <QtGui/QBrush>
+#include <QScriptEngine>
+#include <QBrush>
 
 #include <KLocale>
 
@@ -90,7 +91,7 @@ bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMo
 
 bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
-    kDebug() << "not implemented yet!";
+    logger()->warn(this) << "setChildData not implemented yet!";
     return false;
 }
 
@@ -101,7 +102,7 @@ qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Ok
 
     if (*bitOffset != 0)
     {
-        kDebug() << "while reading string bit offset was: " << *bitOffset
+        logger()->warn(this) << "while reading string bit offset was: " << *bitOffset
                 << ", adding padding and continuing at next byte (address=" << address << ")";
         bitsRemaining -= 8 - *bitOffset;
         *bitOffset = 0;
@@ -214,7 +215,7 @@ void StringDataInformation::setEncoding(QString encodingStr)
         encoding = UTF8;
     else
     {
-        kDebug() << "invalid encoding set: " << encodingStr << "defaulting to ASCII";
+        logger()->error(this) << "invalid encoding set: " << encodingStr << "defaulting to ASCII";
         encoding = ASCII;
     }
     setEncoding(encoding);
@@ -286,6 +287,7 @@ BitCount32 StringDataInformation::childSize(uint index) const
 {
     return mData->sizeAt(index);
 }
+//TODO remove engine parameter
 
 void StringDataInformation::setMaxByteCount(const QScriptValue& value, QScriptEngine* engine)
 {

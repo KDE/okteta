@@ -19,7 +19,6 @@
  */
 
 #include <QtTest>
-#include <qtest_kde.h>
 
 #include <QObject>
 #include <QScriptValueIterator>
@@ -167,7 +166,7 @@ void ScriptClassesTest::initTestCase()
             new TopLevelDataInformation(stringData, 0, ScriptEngineInitializer::newEngine()));
 
     arrayProperties << commonProperties << pair("length", QScriptValue::Undeletable)
-            << pair("childType", QScriptValue::Undeletable);
+            << pair("type", QScriptValue::Undeletable);
     qSort(arrayProperties);
     arrayData = new ArrayDataInformation(QLatin1String("array"), 20,
             PrimitiveFactory::newInstance(QLatin1String("inner"), Type_Int32));

@@ -23,12 +23,12 @@
 #ifndef DEFAULTSCRIPTCLASS_H
 #define DEFAULTSCRIPTCLASS_H
 
-#include <QtScript/QScriptClass>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptString>
-#include <QtScript/QScriptClassPropertyIterator>
-#include <KDebug>
+#include <QVector>
+#include <QScriptClass>
+#include <QScriptValue>
+#include <QScriptEngine>
+#include <QScriptString>
+#include <QScriptClassPropertyIterator>
 
 class DataInformation;
 class ScriptHandlerInfo;

@@ -30,6 +30,7 @@
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
 #include "view/structures/datatypes/primitive/enumdatainformation.h"
 #include "view/structures/script/scriptlogger.h"
+#include "view/structures/parsers/parserutils.h"
 
 class ScriptValueConverterTest : public QObject
 {
@@ -191,11 +192,6 @@ void ScriptValueConverterTest::testPrimitives_data()
     QTest::newRow("char") << "char()" << "new char()" << "Char" << (int) Type_Char;
     QTest::newRow("float") << "float()" << "new float()" << "Float" << (int) Type_Float;
     QTest::newRow("double") << "double()" << "new double()" << "Double" << (int) Type_Double;
-    //TODO this is lowercase whereas the others are uppercase, should fix it
-    QTest::newRow("bitfield") << "bitfield(\"unsigned\", 1)" << "new bitfield(\"unsigned\", 1)"
-            << "bitfield" << (int) Type_Bitfield;
-    //QTest::newRow("not primitive") << "array(uint8(), 12)" << "new array(uint8(), 1)"
-    //    << "array" <<(int)Type_NotPrimitive;
 }
 
 void ScriptValueConverterTest::testPrimitives()
@@ -209,8 +205,11 @@ void ScriptValueConverterTest::testPrimitives()
 
     QScriptValue val1 = engine->evaluate(code);
     QScriptValue val2 = engine->evaluate(code2);
-    QCOMPARE(val1.property(QLatin1String("type")).toString(), typeString);
-    QCOMPARE(val2.property(QLatin1String("type")).toString(), typeString);
+    QCOMPARE(val1.property(ParserStrings::PROPERTY_TYPE).toString(), typeString);
+    QCOMPARE(val2.property(ParserStrings::PROPERTY_TYPE).toString(), typeString);
+    QCOMPARE(val1.property(ParserStrings::PROPERTY_INTERNAL_TYPE).toString(), ParserStrings::TYPE_PRIMITIVE);
+    QCOMPARE(val2.property(ParserStrings::PROPERTY_INTERNAL_TYPE).toString(), ParserStrings::TYPE_PRIMITIVE);
+
     if (type == Type_Invalid)
         return; //the cast will fail
     QScopedPointer<DataInformation> data1(ScriptValueConverter::convert(val1, QLatin1String("val1"),
@@ -246,7 +245,7 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(!val.isNull());
     QVERIFY(!val.isUndefined());
     QVERIFY(val.isObject());
-    QCOMPARE(val.property(QLatin1String("type")).toString(), QString(QLatin1String("enum")));
+    QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE).toString(), QString(QLatin1String("enum")));
 
     QScopedPointer<DataInformation> data (ScriptValueConverter::convert(val, QLatin1String("val"), logger.data()));
     if (expectedCount > 0)

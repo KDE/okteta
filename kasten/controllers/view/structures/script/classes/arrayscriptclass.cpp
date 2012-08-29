@@ -26,14 +26,15 @@
 #include "../../parsers/parserutils.h"
 #include "../scriptlogger.h"
 
+#include <KDebug>
+
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
     s_length = engine->toStringHandle(ParserStrings::PROPERTY_LENGTH);
     mIterableProperties.append(qMakePair(s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_childType = engine->toStringHandle(QLatin1String("childType"));
-    mIterableProperties.append(qMakePair(s_childType, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    //the preferred property (the same as childType
+    //the preferred property (the same as childType)
     s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE);
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
@@ -71,6 +72,8 @@ bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, cons
 {
     Q_UNUSED(data)
     Q_UNUSED(name)
+    if (name == s_childType)
+        return true; //undeleteable is on by default
     if (id != 0)
     {
         *flags |= QScriptValue::ReadOnly;

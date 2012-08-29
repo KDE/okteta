@@ -522,7 +522,11 @@ QString OsdParser::toRawXML(const QDomElement& elem) const
 
 QScriptValue OsdParser::functionSafeEval(QScriptEngine* engine, const QString& str)
 {
+    if (str.isEmpty())
+        return QScriptValue();
     //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
     QScriptValue ret = engine->evaluate(QLatin1Char('(') + str + QLatin1Char(')'));
+    if (!ret.isFunction())
+        return QScriptValue(str);
     return ret;
 }

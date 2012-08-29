@@ -25,6 +25,8 @@
 #include "../../datatypes/strings/stringdatainformation.h"
 #include "../../parsers/parserutils.h"
 
+#include <KDebug>
+
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)
 {

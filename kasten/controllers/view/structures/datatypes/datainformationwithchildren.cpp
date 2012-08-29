@@ -30,9 +30,10 @@
 #include <KLineEdit>
 #include <KLocalizedString>
 #include <QScriptEngine>
+#include <KDebug>
 
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
-        {
+{
     if (idx >= (unsigned) mChildren.size())
     {
         return NULL;
@@ -44,7 +45,7 @@ bool DataInformationWithChildren::setChildData(uint row, const QVariant& value,
         Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining,
         quint8 bitOffset)
 {
-    kWarning() << "this should not be called";
+    kError() << "this should not be called";
     Q_ASSERT(row < childCount());
     int offs = offset(row);
     quint8 bitOffs = (offs + bitOffset) & 7; //mod 8

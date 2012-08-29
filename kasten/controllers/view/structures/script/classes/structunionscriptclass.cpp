@@ -27,6 +27,8 @@
 #include "../../parsers/parserutils.h"
 #include "../scriptlogger.h"
 
+#include <KDebug>
+
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {

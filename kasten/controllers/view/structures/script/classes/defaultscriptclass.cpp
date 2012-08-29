@@ -26,6 +26,8 @@
 #include "../../parsers/parserutils.h"
 #include "../scriptlogger.h"
 
+#include <KDebug>
+
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine), mHandlerInfo(handlerInfo)
@@ -190,7 +192,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data";
         return result;
     }
     for (int i = 0, size = mIterableProperties.size(); i < size; ++i) {
