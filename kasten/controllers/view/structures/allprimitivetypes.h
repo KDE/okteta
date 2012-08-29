@@ -24,8 +24,6 @@
 
 #include <QSysInfo>
 #include <QtEndian>
-#include <QByteArray>
-#include <KLocale>
 
 #include <size.h>
 #include <address.h>

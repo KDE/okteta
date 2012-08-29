@@ -23,6 +23,9 @@
 
 #include "flagdatainformation.h"
 #include <QVarLengthArray>
+#include <KLocalizedString>
+
+
 
 FlagDataInformation::FlagDataInformation(const QString& name, PrimitiveDataInformation* type,
         EnumDefinition::Ptr enumDef, DataInformation* parent)

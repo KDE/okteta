@@ -34,7 +34,7 @@ class PrimitiveArrayData : public AbstractArrayData
     Q_DISABLE_COPY(PrimitiveArrayData)
 public:
     typedef typename PrimitiveInfo<type>::valueType T;
-    typedef typename PrimitiveInfo<type>::Class DisplayClass;
+    typedef typename PrimitiveInfo<type>::Methods DisplayClass;
 
     explicit PrimitiveArrayData(unsigned int initialLength, DataInformation* parent);
     virtual ~PrimitiveArrayData();

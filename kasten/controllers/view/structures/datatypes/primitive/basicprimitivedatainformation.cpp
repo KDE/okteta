@@ -35,10 +35,12 @@
 #include <QScriptValue>
 #include <QScriptEngine>
 
+#include <KLocalizedString>
+
 #include <abstractbytearraymodel.h>
 
 template<typename T, typename C>
-inline QScriptValue BasicPrimitiveDataInformation<T, C>::toScriptValue(QScriptEngine* engine,
+QScriptValue BasicPrimitiveDataInformation<T, C>::toScriptValue(QScriptEngine* engine,
         ScriptHandlerInfo* handlerInfo)
 {
     QScriptValue ret = engine->newObject(handlerInfo->mPrimitiveClass.data());
@@ -109,18 +111,18 @@ qint64 BasicPrimitiveDataInformation<T, C>::readData(Okteta::AbstractByteArrayMo
 }
 
 //specify all the specializations so we can move code to the cpp file
-template class BasicPrimitiveDataInformation<quint8, UIntDataInformation<quint8> > ;
-template class BasicPrimitiveDataInformation<quint16, UIntDataInformation<quint16> > ;
-template class BasicPrimitiveDataInformation<quint32, UIntDataInformation<quint32> > ;
-template class BasicPrimitiveDataInformation<quint64, UIntDataInformation<quint64> > ;
-template class BasicPrimitiveDataInformation<quint8, BoolDataInformation<quint8> > ;
-template class BasicPrimitiveDataInformation<quint16, BoolDataInformation<quint16> > ;
-template class BasicPrimitiveDataInformation<quint32, BoolDataInformation<quint32> > ;
-template class BasicPrimitiveDataInformation<quint64, BoolDataInformation<quint64> > ;
-template class BasicPrimitiveDataInformation<qint8, SIntDataInformation<qint8> > ;
-template class BasicPrimitiveDataInformation<qint16, SIntDataInformation<qint16> > ;
-template class BasicPrimitiveDataInformation<qint32, SIntDataInformation<qint32> > ;
-template class BasicPrimitiveDataInformation<qint64, SIntDataInformation<qint64> > ;
-template class BasicPrimitiveDataInformation<quint8, CharDataInformation> ;
-template class BasicPrimitiveDataInformation<float, FloatDataInformation> ;
-template class BasicPrimitiveDataInformation<double, DoubleDataInformation> ;
+template class BasicPrimitiveDataInformation<quint8, UIntDataInformationMethods<quint8> > ;
+template class BasicPrimitiveDataInformation<quint16, UIntDataInformationMethods<quint16> > ;
+template class BasicPrimitiveDataInformation<quint32, UIntDataInformationMethods<quint32> > ;
+template class BasicPrimitiveDataInformation<quint64, UIntDataInformationMethods<quint64> > ;
+template class BasicPrimitiveDataInformation<quint8, BoolDataInformationMethods<quint8> > ;
+template class BasicPrimitiveDataInformation<quint16, BoolDataInformationMethods<quint16> > ;
+template class BasicPrimitiveDataInformation<quint32, BoolDataInformationMethods<quint32> > ;
+template class BasicPrimitiveDataInformation<quint64, BoolDataInformationMethods<quint64> > ;
+template class BasicPrimitiveDataInformation<qint8, SIntDataInformationMethods<qint8> > ;
+template class BasicPrimitiveDataInformation<qint16, SIntDataInformationMethods<qint16> > ;
+template class BasicPrimitiveDataInformation<qint32, SIntDataInformationMethods<qint32> > ;
+template class BasicPrimitiveDataInformation<qint64, SIntDataInformationMethods<qint64> > ;
+template class BasicPrimitiveDataInformation<quint8, CharDataInformationMethods> ;
+template class BasicPrimitiveDataInformation<float, FloatDataInformationMethods> ;
+template class BasicPrimitiveDataInformation<double, DoubleDataInformationMethods> ;

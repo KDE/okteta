@@ -53,8 +53,8 @@ public:
     virtual unsigned int childCount() const { return 0; }
     virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return 0; }
     virtual bool canHaveChildren() const { return false; }
-    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const { Q_ASSERT(false); return 0; }
-    virtual int indexOf(const DataInformation* const data) const {Q_ASSERT(false); return 0; }
+    virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
+    virtual int indexOf(const DataInformation* const) const {Q_ASSERT(false); return 0; }
 
 
     static int unsignedDisplayBase();

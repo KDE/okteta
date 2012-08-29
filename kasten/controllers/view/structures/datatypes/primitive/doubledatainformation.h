@@ -22,15 +22,11 @@
 #ifndef DOUBLEDATAINFORMATION_H_
 #define DOUBLEDATAINFORMATION_H_
 
-#include "basicprimitivedatainformation.h"
+#include "primitivedatainformation.h"
 
-class DoubleDataInformation : public BasicPrimitiveDataInformation<double, DoubleDataInformation>
+class DoubleDataInformationMethods
 {
 public:
-    explicit DoubleDataInformation(const QString& name, DataInformation* parent = 0);
-    virtual ~DoubleDataInformation();
-    DATAINFORMATION_CLONE(Double)
-
     static QString staticValueString(double value);
     static PrimitiveDataType staticType();
     static QScriptValue asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler);
@@ -39,34 +35,17 @@ public:
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(double value, QWidget* w);
-
-protected:
-    DoubleDataInformation(const DoubleDataInformation& d);
 };
 
-inline PrimitiveDataType DoubleDataInformation::staticType()
+inline PrimitiveDataType DoubleDataInformationMethods::staticType()
 {
     return Type_Double;
 }
 
-inline double DoubleDataInformation::fromVariant(const QVariant& value, bool* ok)
+inline double DoubleDataInformationMethods::fromVariant(const QVariant& value, bool* ok)
 {
     double result = value.toDouble(ok);
     return result;
-}
-
-inline DoubleDataInformation::DoubleDataInformation(const QString& name, DataInformation* parent)
-        : BasicPrimitiveDataInformation<double, DoubleDataInformation>(name, parent)
-{
-}
-
-inline DoubleDataInformation::~DoubleDataInformation()
-{
-}
-
-inline DoubleDataInformation::DoubleDataInformation(const DoubleDataInformation& d)
-        : BasicPrimitiveDataInformation<double, DoubleDataInformation>(d)
-{
 }
 
 #endif /* DOUBLEDATAINFORMATION_H_ */

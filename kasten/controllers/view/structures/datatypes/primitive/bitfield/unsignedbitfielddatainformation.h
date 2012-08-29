@@ -24,6 +24,8 @@
 
 #include "abstractbitfielddatainformation.h"
 
+#include <KLocalizedString>
+
 class UnsignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
 public:

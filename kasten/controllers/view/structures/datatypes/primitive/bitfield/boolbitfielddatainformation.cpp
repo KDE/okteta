@@ -32,7 +32,7 @@ QString BoolBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return BoolDataInformation<quint64>::staticValueString(mValue.ulongValue);
+    return BoolDataInformationMethods<quint64>::staticValueString(mValue.ulongValue);
 }
 
 QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const

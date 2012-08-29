@@ -54,7 +54,7 @@ public:
     virtual unsigned int childCount() const { return 0; }
     virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return 0; }
     virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
-    virtual int indexOf(const DataInformation* const data) const { Q_ASSERT(false); return 0; }
+    virtual int indexOf(const DataInformation* const) const { Q_ASSERT(false); return 0; }
 
 
     inline void setDummyIndex(uint newIndex) { mIndex = newIndex; }
@@ -64,7 +64,6 @@ protected:
     DummyDataInformation(const DummyDataInformation& d) : DataInformation(d), mIndex(d.mIndex) {}
 private:
     uint mIndex;
-    uint mLockedIndex; //only needed when debugging, not thread safe
     DataInformationWithDummyChildren* parentHelper() const;
 };
 

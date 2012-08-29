@@ -21,8 +21,10 @@
  */
 #include "booldatainformation.h"
 
+#include <KLocalizedString>
+
 template<typename T>
-QString BoolDataInformation<T>::staticValueString(T value, int base)
+QString BoolDataInformationMethods<T>::staticValueString(T value, int base)
 {
     if (value == 0)
         return i18nc("boolean value", "false");
@@ -31,31 +33,31 @@ QString BoolDataInformation<T>::staticValueString(T value, int base)
     else
     {
         //we can reuse the uint valueString() here
-        QString num = UIntDataInformation<T>::staticValueString(value, base);
+        QString num = UIntDataInformationMethods<T>::staticValueString(value, base);
         return i18nc("boolean value with actual value", "true (%1)", num);
     }
 }
 
 template<typename T>
-inline QWidget* BoolDataInformation<T>::staticCreateEditWidget(QWidget* parent)
+inline QWidget* BoolDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    return UIntDataInformation<T>::staticCreateEditWidget(parent);
+    return UIntDataInformationMethods<T>::staticCreateEditWidget(parent);
 }
 
 template<typename T>
-inline QVariant BoolDataInformation<T>::staticDataFromWidget(const QWidget* w)
+inline QVariant BoolDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
-    return UIntDataInformation<T>::staticDataFromWidget(w);
+    return UIntDataInformationMethods<T>::staticDataFromWidget(w);
 }
 
 template<typename T>
-inline void BoolDataInformation<T>::staticSetWidgetData(T value, QWidget* w)
+inline void BoolDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
-    UIntDataInformation<T>::staticSetWidgetData(value, w);
+    UIntDataInformationMethods<T>::staticSetWidgetData(value, w);
 }
 
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)
-template class BoolDataInformation<quint8> ;
-template class BoolDataInformation<quint16> ;
-template class BoolDataInformation<quint32> ;
-template class BoolDataInformation<quint64> ;
+template class BoolDataInformationMethods<quint8> ;
+template class BoolDataInformationMethods<quint16> ;
+template class BoolDataInformationMethods<quint32> ;
+template class BoolDataInformationMethods<quint64> ;

@@ -34,7 +34,7 @@ QString UnsignedBitfieldDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
         return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-    return UIntDataInformation<quint64>::staticValueString(mValue.ulongValue);
+    return UIntDataInformationMethods<quint64>::staticValueString(mValue.ulongValue);
 }
 
 QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) const

@@ -25,7 +25,7 @@
 
 #include "../../script/scriptutils.h"
 
-#include <KDebug>
+#include <KLocalizedString>
 #include <QScriptValue>
 
 EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
@@ -34,7 +34,7 @@ EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInfor
 {
     Q_CHECK_PTR(type);
     if (enumDef->type() != type->type())
-        kWarning() << "incompatible types in definition and value: "
+        logWarn() << "incompatible types in definition and value: "
                 << enumDef->type() << "and " << type->type();
     mValue->setParent(this);
 }

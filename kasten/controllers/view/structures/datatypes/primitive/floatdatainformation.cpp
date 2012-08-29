@@ -25,9 +25,11 @@
 #include <QScriptValue>
 #include <KDoubleNumInput>
 #include <KGlobal>
+#include <KLocale>
 
 
-QWidget* FloatDataInformation::staticCreateEditWidget(QWidget* parent)
+
+QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
     KDoubleNumInput* ret = new KDoubleNumInput(parent);
     ret->setMinimum(std::numeric_limits<float>::min());
@@ -35,7 +37,7 @@ QWidget* FloatDataInformation::staticCreateEditWidget(QWidget* parent)
     return ret;
 }
 
-QVariant FloatDataInformation::staticDataFromWidget(const QWidget* w)
+QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
     Q_CHECK_PTR(spin);
@@ -44,7 +46,7 @@ QVariant FloatDataInformation::staticDataFromWidget(const QWidget* w)
     return QVariant();
 }
 
-void FloatDataInformation::staticSetWidgetData(float value, QWidget* w)
+void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
 {
     KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
     Q_CHECK_PTR(spin);
@@ -52,14 +54,14 @@ void FloatDataInformation::staticSetWidgetData(float value, QWidget* w)
         spin->setValue(value);
 }
 
-QScriptValue FloatDataInformation::asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler)
+QScriptValue FloatDataInformationMethods::asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
     return QScriptValue(value);
 }
 
-QString FloatDataInformation::staticValueString(float value)
+QString FloatDataInformationMethods::staticValueString(float value)
 {
 	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
 		return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());

@@ -24,14 +24,15 @@
 #include <QScriptValue>
 #include <KDoubleNumInput>
 #include <KGlobal>
+#include <KLocale>
 
-QWidget* DoubleDataInformation::staticCreateEditWidget(QWidget* parent)
+QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
     KDoubleNumInput* ret = new KDoubleNumInput(parent);
     return ret;
 }
 
-QVariant DoubleDataInformation::staticDataFromWidget(const QWidget* w)
+QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
     Q_CHECK_PTR(spin);
@@ -41,7 +42,7 @@ QVariant DoubleDataInformation::staticDataFromWidget(const QWidget* w)
 }
 
 
-void DoubleDataInformation::staticSetWidgetData(double value, QWidget* w)
+void DoubleDataInformationMethods::staticSetWidgetData(double value, QWidget* w)
 {
     KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
     Q_CHECK_PTR(spin);
@@ -49,14 +50,14 @@ void DoubleDataInformation::staticSetWidgetData(double value, QWidget* w)
         spin->setValue(value);
 }
 
-QScriptValue DoubleDataInformation::asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler)
+QScriptValue DoubleDataInformationMethods::asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
     return QScriptValue(value);
 }
 
-QString DoubleDataInformation::staticValueString(double value)
+QString DoubleDataInformationMethods::staticValueString(double value)
 {
 	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
 		return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());

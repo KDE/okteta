@@ -72,7 +72,7 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->size(), 0u);
     QCOMPARE(primitive->isTopLevel(), false);
     QCOMPARE(primitiveTop->isTopLevel(), true);
-    QCOMPARE(primitive->positionRelativeToRoot(), 0u);
+    QCOMPARE(primitive->positionInFile(3), BitCount64(24));
     QCOMPARE(primitive->topLevelDataInformation(), primitiveTop);
 
     QVector<DataInformation*> structsChildren;
@@ -99,7 +99,7 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(complex->size(), 0u);
     QCOMPARE(complex->isTopLevel(), false);
     QCOMPARE(complexTop->isTopLevel(), true);
-    QCOMPARE(complex->positionRelativeToRoot(), 0u);
+    QCOMPARE(complex->positionInFile(3), BitCount64(24));
     QCOMPARE(complex->topLevelDataInformation(), complexTop);
 }
 

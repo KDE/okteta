@@ -23,55 +23,47 @@
 #ifndef BOOLDATAINFORMATION_H
 #define BOOLDATAINFORMATION_H
 
-#include "basicprimitivedatainformation.h"
-#include "uintdatainformation.h"
 #include <QScriptValue>
 
+#include "uintdatainformation.h"
+
 template<typename T>
-class BoolDataInformation : public BasicPrimitiveDataInformation<T, BoolDataInformation<T> >
+class BoolDataInformationMethods
 {
 public:
-    explicit BoolDataInformation(const QString& name, DataInformation* parent = 0);
-    virtual ~BoolDataInformation();
-    virtual BoolDataInformation<T>* clone() const;
-
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    static QString staticValueString(T val);
-    static QString staticValueString(T val, int base);
+    static QString staticValueString(T val, int base = PrimitiveDataInformation::unsignedDisplayBase());
     static PrimitiveDataType staticType();
     static T fromVariant(const QVariant& value, bool* ok);
 
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(T value, QWidget* w);
-
-protected:
-    explicit BoolDataInformation(const BoolDataInformation& d);
 };
 
 template<>
-inline PrimitiveDataType BoolDataInformation<quint8>::staticType()
+inline PrimitiveDataType BoolDataInformationMethods<quint8>::staticType()
 {
     return Type_Bool8;
 }
 template<>
-inline PrimitiveDataType BoolDataInformation<quint16>::staticType()
+inline PrimitiveDataType BoolDataInformationMethods<quint16>::staticType()
 {
     return Type_Bool16;
 }
 template<>
-inline PrimitiveDataType BoolDataInformation<quint32>::staticType()
+inline PrimitiveDataType BoolDataInformationMethods<quint32>::staticType()
 {
     return Type_Bool32;
 }
 template<>
-inline PrimitiveDataType BoolDataInformation<quint64>::staticType()
+inline PrimitiveDataType BoolDataInformationMethods<quint64>::staticType()
 {
     return Type_Bool64;
 }
 
 template<typename T>
-inline QScriptValue BoolDataInformation<T>::asScriptValue(T value, QScriptEngine* engine,
+inline QScriptValue BoolDataInformationMethods<T>::asScriptValue(T value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
@@ -80,39 +72,9 @@ inline QScriptValue BoolDataInformation<T>::asScriptValue(T value, QScriptEngine
 }
 
 template<typename T>
-inline BoolDataInformation<T>::BoolDataInformation(const QString& name, DataInformation* parent)
-        : BasicPrimitiveDataInformation<T, BoolDataInformation<T> >(name, parent)
+inline T BoolDataInformationMethods<T>::fromVariant(const QVariant& value, bool* ok)
 {
-}
-
-template<typename T>
-inline BoolDataInformation<T>::~BoolDataInformation()
-{
-}
-
-template<typename T>
-inline BoolDataInformation<T>::BoolDataInformation(const BoolDataInformation& d)
-        : BasicPrimitiveDataInformation<T, BoolDataInformation<T> >(d)
-{
-}
-
-template<typename T>
-inline BoolDataInformation<T>* BoolDataInformation<T>::clone() const
-{
-    return new BoolDataInformation<T>(*this);
-}
-
-template<typename T>
-inline QString BoolDataInformation<T>::staticValueString(T value)
-{
-    return BoolDataInformation<T>::staticValueString(value,
-            PrimitiveDataInformation::unsignedDisplayBase());
-}
-
-template<typename T>
-inline T BoolDataInformation<T>::fromVariant(const QVariant& value, bool* ok)
-{
-    return UIntDataInformation<T>::fromVariant(value, ok);
+    return UIntDataInformationMethods<T>::fromVariant(value, ok);
 }
 
 #endif // BOOLDATAINFORMATION_H

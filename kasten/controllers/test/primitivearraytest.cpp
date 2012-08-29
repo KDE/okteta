@@ -19,6 +19,7 @@
  */
 
 #include <QtTest>
+#include <limits>
 
 #include <bytearraymodel.h>
 

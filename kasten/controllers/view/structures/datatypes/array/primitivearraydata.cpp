@@ -26,6 +26,10 @@
 
 #include <abstractbytearraymodel.h>
 
+#include <limits>
+#include <KLocalizedString>
+
+
 
 template<PrimitiveDataTypeEnum type>
 qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -38,8 +42,8 @@ qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input,
     const quint64 maxRemaining = (bitsRemaining / 8) / sizeof(T);
     //since its 64 bits may be larger than a 32 bit value and have all lower 32 bits as zero
     //therefore we use std::numeric_limits::max()
-    const quint32 maxRemaining32 = (maxRemaining > std::numeric_limits<quint32>::max())
-            ? std::numeric_limits<quint32>::max() : quint32(maxRemaining);
+    quint32 maxRemaining32 = (maxRemaining > std::numeric_limits<quint32>::max()
+            ? std::numeric_limits<quint32>::max() : quint32(maxRemaining));
     const quint32 maxNumItems = qMin(this->length(), maxRemaining32);
     if (maxNumItems == 0)
         return -1; //reached EOF

@@ -20,6 +20,9 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "abstractbitfielddatainformation.h"
+
+#include <KLocalizedString>
+
 #include "../../topleveldatainformation.h"
 
 #include "../../../script/classes/bitfieldscriptclass.h"

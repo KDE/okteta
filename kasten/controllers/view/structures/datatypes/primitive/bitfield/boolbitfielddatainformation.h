@@ -24,6 +24,9 @@
 
 #include "abstractbitfielddatainformation.h"
 
+#include <KLocalizedString>
+
+
 class BoolBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
 public:

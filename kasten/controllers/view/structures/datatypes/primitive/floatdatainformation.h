@@ -22,15 +22,11 @@
 #ifndef FLOATDATAINFORMATION_H_
 #define FLOATDATAINFORMATION_H_
 
-#include "basicprimitivedatainformation.h"
+#include "primitivedatainformation.h"
 
-class FloatDataInformation : public BasicPrimitiveDataInformation<float, FloatDataInformation>
+class FloatDataInformationMethods
 {
 public:
-    explicit FloatDataInformation(const QString& name, DataInformation* parent = 0);
-    virtual ~FloatDataInformation();
-    DATAINFORMATION_CLONE(Float)
-
     static PrimitiveDataType staticType();
     static QString staticValueString(float value);
     static QScriptValue asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler);
@@ -39,31 +35,14 @@ public:
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(float value, QWidget* w);
-
-protected:
-    FloatDataInformation(const FloatDataInformation& f);
 };
 
-inline FloatDataInformation::FloatDataInformation(const QString& name, DataInformation* parent)
-        : BasicPrimitiveDataInformation<float, FloatDataInformation>(name, parent)
-{
-}
-
-inline FloatDataInformation::~FloatDataInformation()
-{
-}
-
-inline FloatDataInformation::FloatDataInformation(const FloatDataInformation& f)
-        : BasicPrimitiveDataInformation<float, FloatDataInformation>(f)
-{
-}
-
-inline PrimitiveDataType FloatDataInformation::staticType()
+inline PrimitiveDataType FloatDataInformationMethods::staticType()
 {
     return Type_Float;
 }
 
-inline float FloatDataInformation::fromVariant(const QVariant& value, bool* ok)
+inline float FloatDataInformationMethods::fromVariant(const QVariant& value, bool* ok)
 {
     Q_CHECK_PTR(ok);
     float result = value.toFloat(ok);

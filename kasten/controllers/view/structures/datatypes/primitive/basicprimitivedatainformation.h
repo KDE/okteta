@@ -41,6 +41,7 @@ public:
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
     virtual QString valueString() const;
+    virtual BasicPrimitiveDataInformation<T, C>* clone() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
@@ -106,26 +107,32 @@ inline BitCount32 BasicPrimitiveDataInformation<T, C>::size() const
 
 template<typename T, typename C>
 inline QVariant BasicPrimitiveDataInformation<T, C>::dataFromWidget(const QWidget* w) const
-        {
+{
     return C::staticDataFromWidget(w);
 }
 
 template<typename T, typename C>
-QWidget* BasicPrimitiveDataInformation<T, C>::createEditWidget(QWidget* parent) const
-        {
+inline QWidget* BasicPrimitiveDataInformation<T, C>::createEditWidget(QWidget* parent) const
+{
     return C::staticCreateEditWidget(parent);
 }
 
 template<typename T, typename C>
-void BasicPrimitiveDataInformation<T, C>::setWidgetData(QWidget* w) const
-        {
+inline void BasicPrimitiveDataInformation<T, C>::setWidgetData(QWidget* w) const
+{
     C::staticSetWidgetData(mValue, w);
 }
 
 template<typename T, typename C>
-PrimitiveDataType BasicPrimitiveDataInformation<T, C>::type() const
+inline PrimitiveDataType BasicPrimitiveDataInformation<T, C>::type() const
 {
     return C::staticType();
+}
+
+template<typename T, typename C>
+inline BasicPrimitiveDataInformation<T, C>* BasicPrimitiveDataInformation<T, C>::clone() const
+{
+    return new BasicPrimitiveDataInformation<T, C>(*this);
 }
 
 #endif /* BASICPRIMITIVEDATAINFORMATION_H_ */

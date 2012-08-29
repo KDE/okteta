@@ -19,10 +19,10 @@
  */
 
 #include <QtTest>
-#include <qglobal.h>
-#include <kglobal.h>
-#include <klocale.h>
-
+#include <QtGlobal>
+#include <KGlobal>
+#include <KLocale>
+#include <limits>
 #include <bytearraymodel.h>
 
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
@@ -169,28 +169,28 @@ template<PrimitiveDataTypeEnum Type>
 void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, QString bin,
         QString hex, QString dec, QString oct)
 {
-    QCOMPARE(PrimitiveInfo<Type>::Class::staticValueString(value, 2), bin);
-    QCOMPARE(PrimitiveInfo<Type>::Class::staticValueString(value, 16), hex);
-    QCOMPARE(PrimitiveInfo<Type>::Class::staticValueString(value, 10), dec);
-    QCOMPARE(PrimitiveInfo<Type>::Class::staticValueString(value, 8), oct);
+    QCOMPARE(PrimitiveInfo<Type>::Methods::staticValueString(value, 2), bin);
+    QCOMPARE(PrimitiveInfo<Type>::Methods::staticValueString(value, 16), hex);
+    QCOMPARE(PrimitiveInfo<Type>::Methods::staticValueString(value, 10), dec);
+    QCOMPARE(PrimitiveInfo<Type>::Methods::staticValueString(value, 8), oct);
 }
 
 template<PrimitiveDataTypeEnum first, PrimitiveDataTypeEnum second>
 void valueCompareHelperUnsigned(typename PrimitiveInfo<first>::valueType value, QString bin,
         QString hex, QString dec, QString oct, QString boolBase)
 {
-    QCOMPARE(PrimitiveInfo<first>::Class::staticValueString(value, 2), bin);
-    QCOMPARE(PrimitiveInfo<first>::Class::staticValueString(value, 16), hex);
-    QCOMPARE(PrimitiveInfo<first>::Class::staticValueString(value, 10), dec);
-    QCOMPARE(PrimitiveInfo<first>::Class::staticValueString(value, 8), oct);
+    QCOMPARE(PrimitiveInfo<first>::Methods::staticValueString(value, 2), bin);
+    QCOMPARE(PrimitiveInfo<first>::Methods::staticValueString(value, 16), hex);
+    QCOMPARE(PrimitiveInfo<first>::Methods::staticValueString(value, 10), dec);
+    QCOMPARE(PrimitiveInfo<first>::Methods::staticValueString(value, 8), oct);
 
-    QCOMPARE(PrimitiveInfo<second>::Class::staticValueString(value, 2),
+    QCOMPARE(PrimitiveInfo<second>::Methods::staticValueString(value, 2),
             value > 1 ? boolBase.arg(bin) : boolBase);
-    QCOMPARE(PrimitiveInfo<second>::Class::staticValueString(value, 16),
+    QCOMPARE(PrimitiveInfo<second>::Methods::staticValueString(value, 16),
             value > 1 ? boolBase.arg(hex) : boolBase);
-    QCOMPARE(PrimitiveInfo<second>::Class::staticValueString(value, 10),
+    QCOMPARE(PrimitiveInfo<second>::Methods::staticValueString(value, 10),
             value > 1 ? boolBase.arg(dec) : boolBase);
-    QCOMPARE(PrimitiveInfo<second>::Class::staticValueString(value, 8),
+    QCOMPARE(PrimitiveInfo<second>::Methods::staticValueString(value, 8),
             value > 1 ? boolBase.arg(oct) : boolBase);
 }
 
@@ -317,30 +317,30 @@ void PrimitiveDataInformationTest::testValueStringInt_data()
 void PrimitiveDataInformationTest::testFromVariant()
 {
     bool ok = false;
-    FloatDataInformation::fromVariant(QVariant(float(42.0f)), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(float(42.0f)), &ok);
     QCOMPARE(ok, true); //float in range
-    FloatDataInformation::fromVariant(QVariant(double(42.0)), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(double(42.0)), &ok);
     QCOMPARE(ok, true); //double should be fine too
-    FloatDataInformation::fromVariant(QVariant(double(std::numeric_limits<float>::max())), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(double(std::numeric_limits<float>::max())), &ok);
     QCOMPARE(ok, true); //float max as a double should work too
-    FloatDataInformation::fromVariant(QVariant(std::numeric_limits<float>::quiet_NaN()), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<float>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); //nan should be fine too
-    FloatDataInformation::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); //double nan gets mapped to float nan
-    FloatDataInformation::fromVariant(QVariant(QLatin1String("abc")), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(QLatin1String("abc")), &ok);
     QCOMPARE(ok, false); //bad data type
-    FloatDataInformation::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
     QCOMPARE(ok, false); //out of range
 
-    DoubleDataInformation::fromVariant(QVariant(float(42.0f)), &ok);
+    DoubleDataInformationMethods::fromVariant(QVariant(float(42.0f)), &ok);
     QCOMPARE(ok, true); //float should be fine too QVariant::type() == Float
-    DoubleDataInformation::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
+    DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
     QCOMPARE(ok, true); //double
-    DoubleDataInformation::fromVariant(QVariant(std::numeric_limits<float>::quiet_NaN()), &ok);
+    DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<float>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); //nan should be fine too
-    DoubleDataInformation::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
+    DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); //double nan gets mapped to float nan
-    DoubleDataInformation::fromVariant(QVariant(QLatin1String("abc")), &ok);
+    DoubleDataInformationMethods::fromVariant(QVariant(QLatin1String("abc")), &ok);
     QCOMPARE(ok, false); //bad data type
     //TODO test other types!
 
@@ -490,7 +490,7 @@ void PrimitiveDataInformationTest::testValueStringChar()
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QLatin1String("'%1'")).arg(charString(i));
-        QCOMPARE(CharDataInformation::staticValueString(i), expected);
+        QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     Kasten2::StructViewPreferences::setShowCharNumericalValue(true);
     Kasten2::StructViewPreferences::setCharDisplayBase(
@@ -499,7 +499,7 @@ void PrimitiveDataInformationTest::testValueStringChar()
     {
         QString expected = QString(QLatin1String("'%1' (0x%2)")).arg(charString(i),
                 QString::number(i, 16));
-        QCOMPARE(CharDataInformation::staticValueString(i), expected);
+        QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     Kasten2::StructViewPreferences::setCharDisplayBase(
             Kasten2::StructViewPreferences::EnumCharDisplayBase::Decimal);
@@ -507,7 +507,7 @@ void PrimitiveDataInformationTest::testValueStringChar()
     {
         QString expected = QString(QLatin1String("'%1' (%2)")).arg(charString(i),
                 QString::number(i, 10));
-        QCOMPARE(CharDataInformation::staticValueString(i), expected);
+        QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     Kasten2::StructViewPreferences::setCharDisplayBase(
             Kasten2::StructViewPreferences::EnumCharDisplayBase::Binary);
@@ -515,7 +515,7 @@ void PrimitiveDataInformationTest::testValueStringChar()
     {
         QString expected = QString(QLatin1String("'%1' (0b%2)")).arg(charString(i),
                 QString::number(i, 2));
-        QCOMPARE(CharDataInformation::staticValueString(i), expected);
+        QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     //TODO octal
 }

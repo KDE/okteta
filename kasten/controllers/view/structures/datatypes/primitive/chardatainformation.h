@@ -22,15 +22,11 @@
 #ifndef CHARDATAINFORMATION_H_
 #define CHARDATAINFORMATION_H_
 
-#include "basicprimitivedatainformation.h"
+#include "primitivedatainformation.h"
 
-class CharDataInformation : public BasicPrimitiveDataInformation<quint8, CharDataInformation>
+class CharDataInformationMethods
 {
 public:
-    explicit CharDataInformation(const QString& name, DataInformation* parent = 0);
-    virtual ~CharDataInformation();
-    DATAINFORMATION_CLONE(Char)
-
     static int displayBase();
     static QString staticValueString(quint8 value);
     static quint8 fromVariant(const QVariant& value, bool* ok);
@@ -40,17 +36,14 @@ public:
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(quint8 value, QWidget* w);
-
-protected:
-    CharDataInformation(const CharDataInformation& d);
 };
 
-inline PrimitiveDataType CharDataInformation::staticType()
+inline PrimitiveDataType CharDataInformationMethods::staticType()
 {
     return Type_Char;
 }
 
-inline quint8 CharDataInformation::fromVariant(const QVariant& value, bool* ok)
+inline quint8 CharDataInformationMethods::fromVariant(const QVariant& value, bool* ok)
 {
     Q_CHECK_PTR(ok);
     quint32 tmp = value.toUInt(ok);
@@ -61,20 +54,6 @@ inline quint8 CharDataInformation::fromVariant(const QVariant& value, bool* ok)
         return 0;
     }
     return result;
-}
-
-inline CharDataInformation::CharDataInformation(const QString& name, DataInformation* parent)
-        : BasicPrimitiveDataInformation<quint8, CharDataInformation>(name, parent)
-{
-}
-
-inline CharDataInformation::~CharDataInformation()
-{
-}
-
-inline CharDataInformation::CharDataInformation(const CharDataInformation& d)
-        : BasicPrimitiveDataInformation<quint8, CharDataInformation>(d)
-{
 }
 
 #endif /* CHARDATAINFORMATION_H_ */

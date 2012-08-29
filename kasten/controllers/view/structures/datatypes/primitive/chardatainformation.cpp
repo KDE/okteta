@@ -24,6 +24,7 @@
 #include <QScriptValue>
 #include <KLineEdit>
 #include <KGlobal>
+#include <KLocale>
 
 namespace {
     QString charString(quint8 value)
@@ -47,7 +48,7 @@ namespace {
     }
 }
 
-QString CharDataInformation::staticValueString(quint8 value)
+QString CharDataInformationMethods::staticValueString(quint8 value)
 {
     QString charStr = charString(value);
     if (Kasten2::StructViewPreferences::showCharNumericalValue())
@@ -67,12 +68,12 @@ QString CharDataInformation::staticValueString(quint8 value)
     return charStr;
 }
 
-QWidget* CharDataInformation::staticCreateEditWidget(QWidget* parent)
+QWidget* CharDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
     return new KLineEdit(parent);
 }
 
-QVariant CharDataInformation::staticDataFromWidget(const QWidget* w)
+QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     //TODO fix this code!!
     const KLineEdit* edit = dynamic_cast<const KLineEdit*> (w);
@@ -130,7 +131,7 @@ QVariant CharDataInformation::staticDataFromWidget(const QWidget* w)
     return QVariant();
 }
 
-void CharDataInformation::staticSetWidgetData(quint8 value, QWidget* w)
+void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
 {
     KLineEdit* edit = dynamic_cast<KLineEdit*> (w);
     if (edit)
@@ -142,7 +143,7 @@ void CharDataInformation::staticSetWidgetData(quint8 value, QWidget* w)
     }
 }
 
-int CharDataInformation::displayBase()
+int CharDataInformationMethods::displayBase()
 {
     int base = Kasten2::StructViewPreferences::charDisplayBase();
     if (base == Kasten2::StructViewPreferences::EnumCharDisplayBase::Binary)
@@ -152,7 +153,7 @@ int CharDataInformation::displayBase()
     return 10; //safe default value
 }
 
-QScriptValue CharDataInformation::asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler)
+QScriptValue CharDataInformationMethods::asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);

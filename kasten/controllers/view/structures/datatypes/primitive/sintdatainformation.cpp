@@ -20,12 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "sintdatainformation.h"
+#include "../poddecoder/typeeditors/sintspinbox.h"
 
 #include <QScriptValue>
 #include <KGlobal>
+#include <KLocale>
 
 template<typename T>
-QString SIntDataInformation<T>::staticValueString(T val, int base)
+QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
 {
     QString num;
     if (base == 10) {
@@ -85,7 +87,7 @@ QString SIntDataInformation<T>::staticValueString(T val, int base)
 }
 
 template<typename T>
-QScriptValue SIntDataInformation<T>::asScriptValue(T value, QScriptEngine* engine,
+QScriptValue SIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
@@ -94,7 +96,7 @@ QScriptValue SIntDataInformation<T>::asScriptValue(T value, QScriptEngine* engin
 }
 
 template<>
-QScriptValue SIntDataInformation<qint64>::asScriptValue(qint64 value, QScriptEngine* engine,
+QScriptValue SIntDataInformationMethods<qint64>::asScriptValue(qint64 value, QScriptEngine* engine,
         ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
@@ -102,8 +104,37 @@ QScriptValue SIntDataInformation<qint64>::asScriptValue(qint64 value, QScriptEng
     return QScriptValue(QString::number(value, 10));
 }
 
+template<typename T>
+inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
+{
+    SIntSpinBox* ret = new SIntSpinBox(parent, PrimitiveDataInformation::signedDisplayBase());
+    ret->setRange(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
+    return ret;
+}
+
+template<typename T>
+inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
+{
+    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*>(w);
+    Q_CHECK_PTR(spin);
+    if (spin)
+        return spin->value();
+
+    kWarning() << "could not cast widget";
+    return QVariant();
+}
+
+template<typename T>
+inline void SIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
+{
+    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*>(w);
+    Q_CHECK_PTR(spin);
+    if (spin)
+        spin->setValue(value);
+}
+
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)
-template class SIntDataInformation<qint8>;
-template class SIntDataInformation<qint16>;
-template class SIntDataInformation<qint32>;
-template class SIntDataInformation<qint64>;
+template class SIntDataInformationMethods<qint8>;
+template class SIntDataInformationMethods<qint16>;
+template class SIntDataInformationMethods<qint32>;
+template class SIntDataInformationMethods<qint64>;

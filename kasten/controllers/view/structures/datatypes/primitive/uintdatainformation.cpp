@@ -21,16 +21,16 @@
  */
 #include "uintdatainformation.h"
 
-#include <QtScript/QScriptValue>
+#include <QScriptValue>
 
 #include <KGlobal>
+#include <KLocale>
 
 #include "../../../poddecoder/typeeditors/uintspinbox.h"
 
 
 template<typename T>
-QScriptValue UIntDataInformation<T>::asScriptValue(T value, QScriptEngine* engine,
-        ScriptHandlerInfo* handlerInfo)
+QScriptValue UIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handlerInfo);
@@ -38,7 +38,7 @@ QScriptValue UIntDataInformation<T>::asScriptValue(T value, QScriptEngine* engin
 }
 
 template<>
-QScriptValue UIntDataInformation<quint64>::asScriptValue(quint64 value, QScriptEngine* engine,
+QScriptValue UIntDataInformationMethods<quint64>::asScriptValue(quint64 value, QScriptEngine* engine,
         ScriptHandlerInfo* handlerInfo)
 {
     Q_UNUSED(engine);
@@ -47,7 +47,7 @@ QScriptValue UIntDataInformation<quint64>::asScriptValue(quint64 value, QScriptE
 }
 
 template<typename T>
-QString UIntDataInformation<T>::staticValueString(T value, int base)
+QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
 {
     QString num = QString::number(value, base);
     if (base == 10)
@@ -74,7 +74,7 @@ QString UIntDataInformation<T>::staticValueString(T value, int base)
 }
 
 template<typename T>
-inline QWidget* UIntDataInformation<T>::staticCreateEditWidget(QWidget* parent)
+inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
     UIntSpinBox* ret = new UIntSpinBox(parent, PrimitiveDataInformation::unsignedDisplayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
@@ -82,7 +82,7 @@ inline QWidget* UIntDataInformation<T>::staticCreateEditWidget(QWidget* parent)
 }
 
 template<typename T>
-inline QVariant UIntDataInformation<T>::staticDataFromWidget(const QWidget* w)
+inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
     const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
@@ -93,7 +93,7 @@ inline QVariant UIntDataInformation<T>::staticDataFromWidget(const QWidget* w)
 }
 
 template<typename T>
-inline void UIntDataInformation<T>::staticSetWidgetData(T value, QWidget* w)
+inline void UIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
@@ -102,7 +102,7 @@ inline void UIntDataInformation<T>::staticSetWidgetData(T value, QWidget* w)
 }
 
 //explicitly instantiate all valid classes (c++-faq-lite 35.12)
-template class UIntDataInformation<quint8>;
-template class UIntDataInformation<quint16>;
-template class UIntDataInformation<quint32>;
-template class UIntDataInformation<quint64>;
+template class UIntDataInformationMethods<quint8>;
+template class UIntDataInformationMethods<quint16>;
+template class UIntDataInformationMethods<quint32>;
+template class UIntDataInformationMethods<quint64>;
