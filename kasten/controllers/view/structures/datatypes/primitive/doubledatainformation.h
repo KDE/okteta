@@ -33,9 +33,9 @@ public:
 
     static QString staticValueString(double value);
     static PrimitiveDataType staticType();
-    static QScriptValue asScriptValue(double value, QScriptEngine* engine,
-            ScriptHandlerInfo* handler);
+    static QScriptValue asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     static double fromVariant(const QVariant& value, bool* ok);
+
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(double value, QWidget* w);

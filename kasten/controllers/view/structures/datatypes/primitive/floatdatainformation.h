@@ -32,13 +32,10 @@ public:
     DATAINFORMATION_CLONE(Float)
 
     static PrimitiveDataType staticType();
-
     static QString staticValueString(float value);
-
-    virtual QScriptValue valueAsQScriptValue() const;
-    static QScriptValue asScriptValue(float value, QScriptEngine* engine,
-            ScriptHandlerInfo* handler);
+    static QScriptValue asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler);
     static float fromVariant(const QVariant& value, bool* ok);
+
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(float value, QWidget* w);

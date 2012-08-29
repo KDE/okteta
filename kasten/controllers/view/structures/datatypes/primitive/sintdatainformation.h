@@ -42,10 +42,9 @@ public:
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(T value, QWidget* w);
-    protected:
+
+protected:
     explicit SIntDataInformation(const SIntDataInformation& d);
-    protected:
-    T mValue;
 };
 
 template<>

@@ -28,8 +28,8 @@
 
 /** A basic implementation for all primitive types.
  *  T is the data type (e.g. quint8 or float)
- * C*/
-template<typename T, typename C>
+ *  C is a namespace containing all needed functions */
+template<typename T, class C>
 class BasicPrimitiveDataInformation : public PrimitiveDataInformation
 {
 public:

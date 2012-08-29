@@ -35,8 +35,7 @@ public:
     static QString staticValueString(quint8 value);
     static quint8 fromVariant(const QVariant& value, bool* ok);
     static PrimitiveDataType staticType();
-    static QScriptValue asScriptValue(quint8 value, QScriptEngine* engine,
-            ScriptHandlerInfo* handler);
+    static QScriptValue asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler);
 
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);
@@ -57,7 +56,10 @@ inline quint8 CharDataInformation::fromVariant(const QVariant& value, bool* ok)
     quint32 tmp = value.toUInt(ok);
     quint8 result = quint8(tmp);
     if (tmp != quint32(result))
+    {
         *ok = false; //out of bounds
+        return 0;
+    }
     return result;
 }
 
