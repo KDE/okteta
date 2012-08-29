@@ -26,36 +26,12 @@
 #include <QVector>
 #include <QStringList>
 
-#include <KLocalizedString>
-
-#include "../datatypes/datainformation.h"
-#include "../script/scriptlogger.h"
-
 class TopLevelDataInformation;
+
 namespace Kasten2
 {
 class StructureDefinitionFile;
 }
-
-/** For use by the parsers so that the functions don't have as many parameters */
-struct ParserInfo
-{
-    inline ParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent)
-        : name(name.isEmpty() ? i18n("&lt;no name specified&gt;") : name), logger(logger), parent(parent)
-    {
-        Q_CHECK_PTR(logger);
-    }
-    inline ParserInfo(const ParserInfo& i) : name(i.name), logger(i.logger), parent(i.parent) {}
-    inline ~ParserInfo() {}
-    QString name;
-    ScriptLogger* logger;
-    DataInformation* parent;
-
-    inline QString context() const { return parent ? parent->fullObjectPath() + QLatin1Char('.') + name : name; }
-    inline QDebug info() const { return logger->info(context()); }
-    inline QDebug warn() const { return logger->warn(context()); }
-    inline QDebug error() const { return logger->error(context()); }
-};
 
 class AbstractStructureParser
 {
@@ -65,10 +41,6 @@ public:
     virtual ~AbstractStructureParser();
     virtual QStringList parseStructureNames() const = 0;
     virtual QVector<TopLevelDataInformation*> parseStructures() const = 0;
-
-    static DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, const ParserInfo& info);
-    static QString byteOrderToString(DataInformation::DataInformationEndianess order);
-
 protected:
     const QString mPluginName;
     const QString mAbsolutePath;

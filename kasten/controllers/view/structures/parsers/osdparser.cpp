@@ -40,6 +40,7 @@
 
 #include <QDomDocument>
 #include <QDomNode>
+#include <QDomElement>
 #include <QDomNodeList>
 #include <QScriptEngine>
 
@@ -57,6 +58,11 @@ OsdParser::OsdParser(const QString& xml)
 
 OsdParser::~OsdParser()
 {
+}
+
+QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
+{
+    return mXmlString.isEmpty() ? openDocFromFile(logger) : openDocFromString(logger);
 }
 
 QDomDocument OsdParser::openDocFromString(ScriptLogger * logger) const
@@ -322,8 +328,8 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
 {
     BitfieldParsedData bpd(info);
     bpd.type = readProperty(xmlElem, QLatin1String("type"));
-    bpd.widthStr = readProperty(xmlElem, QLatin1String("width"));
-    bpd.width = bpd.widthStr.toInt(&bpd.widthConversionOkay, 10);
+    QString width = readProperty(xmlElem, QLatin1String("width"));
+    bpd.width = ParserUtils::intFromString(width);
     return DataInformationFactory::newBitfield(bpd);
 }
 
@@ -481,7 +487,7 @@ DataInformation* OsdParser::parseNode(const QDomNode& node, const OsdParserInfo&
         CommonParsedData cpd(oldInfo, oldInfo.engine);
         QString byteOrderStr = readProperty(elem, QLatin1String("byteOrder"));
         if (!byteOrderStr.isEmpty())
-            cpd.endianess = byteOrderFromString(byteOrderStr, oldInfo);
+            cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr, oldInfo);
         cpd.updateFuncString = readProperty(elem, QLatin1String("updateFunc"));
         cpd.validationFuncString = readProperty(elem, QLatin1String("validationFunc"));
         if (!DataInformationFactory::commonInitialization(data, cpd))

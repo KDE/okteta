@@ -33,7 +33,7 @@
 #include "../datatypes/array/arraydatainformation.h"
 
 #include "../script/scriptlogger.h"
-#include "abstractstructureparser.h" //TODO remove
+#include "parserutils.h"
 
 struct CommonParsedData : public ParserInfo {
     inline explicit CommonParsedData(const ParserInfo& i, QScriptEngine* engine)
@@ -43,7 +43,7 @@ struct CommonParsedData : public ParserInfo {
     /** if this is not empty it is evaluated */
     QString updateFuncString;
     QScriptValue validationFunc;
-    /** if this is not empty it is evaluated */
+    /** if this is not empty it is evaluated */ //TODO remove
     QString validationFuncString;
     DataInformation::DataInformationEndianess endianess;
 private:
@@ -51,11 +51,9 @@ private:
 };
 
 struct BitfieldParsedData : public ParserInfo {
-    inline explicit BitfieldParsedData(const ParserInfo& i) : ParserInfo(i), widthConversionOkay(false), width(-1) {}
+    inline explicit BitfieldParsedData(const ParserInfo& i) : ParserInfo(i) {}
     QString type;
-    QString widthStr;
-    bool widthConversionOkay;
-    int width;
+    ParsedNumber<int> width;
 private:
     Q_DISABLE_COPY(BitfieldParsedData);
 };

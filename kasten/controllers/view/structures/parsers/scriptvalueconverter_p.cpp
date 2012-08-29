@@ -128,7 +128,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         CommonParsedData cpd(info, value.engine());
         QString byteOrderStr = value.property(QLatin1String("byteOrder")).toString();
         if (!byteOrderStr.isEmpty())
-            cpd.endianess = AbstractStructureParser:: byteOrderFromString(byteOrderStr, info);
+            cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr, info);
         cpd.updateFunc = value.property(QLatin1String("updateFunc"));
         cpd.validationFunc = value.property(QLatin1String("validationFunc"));
         if (!DataInformationFactory::commonInitialization(returnVal, cpd))
@@ -178,17 +178,7 @@ AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const Par
 {
     BitfieldParsedData bpd(info);
     bpd.type = value.property(QLatin1String("bitfieldType")).toString();
-    QScriptValue widthProp = value.property(QLatin1String("width"));
-    bpd.widthStr = widthProp.toString();
-    if (widthProp.isNumber())
-    {
-        bpd.widthConversionOkay = true;
-        bpd.width = widthProp.toInt32();
-    }
-    else
-    {
-        bpd.width = bpd.widthStr.toInt(&bpd.widthConversionOkay, 10);
-    }
+    bpd.width = ParserUtils::intFromScriptValue(value.property(QLatin1String("width")));
     return DataInformationFactory::newBitfield(bpd);
 }
 
@@ -220,7 +210,6 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 
     if (fields.isEmpty())
         info.info() << "No children were found for union, this is could be a mistake.";
-
 
     UnionDataInformation* unionData = new UnionDataInformation(info.name, fields);
     return unionData;

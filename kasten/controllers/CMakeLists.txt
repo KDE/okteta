@@ -340,6 +340,7 @@ set( STRUCTVIEW_SRCS
   view/structures/parsers/scriptvalueconverter.cpp
   view/structures/parsers/scriptvalueconverter_p.cpp
   view/structures/parsers/datainformationfactory.cpp
+  view/structures/parsers/parserutils.cpp
 )
 configure_file( config-structtool.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-structtool.h )
 if ( OKTETA_DEBUG_SCRIPT )
@@ -376,33 +377,16 @@ macro(structures_unit_test _testtarget _testname)
 	set_target_properties(${_testtarget} PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 endmacro()
 
-structures_unit_test( scriptvalueconvertertest "scriptvalue-converter-test"
-	test/scriptvalueconvertertest.cpp
-)
-structures_unit_test( osdparsertest "osd-parser-test"
-	test/osdparsertest.cpp
-)
-structures_unit_test( primitivearraytest "primitive-array-test"
-	test/primitivearraytest.cpp
-)
-structures_unit_test( arraydatainformationtest "array-datainformation-test"
-	test/arraydatainformationtest.cpp
-)
-structures_unit_test( basicdatainformationtest "basic-datainformation-test"
-	test/basicdatainformationtest.cpp
-)
-structures_unit_test( primitivedatainformationtest "primitive-datainformationtest-test"
-	test/primitivedatainformationtest.cpp
-)
-structures_unit_test( scriptclassestest "scriptclasses-test"
-	test/scriptclassestest.cpp
-)
-structures_unit_test( uniondatainformationtest "union-datainformation-test"
-	test/uniondatainformationtest.cpp
-)
-structures_unit_test( allprimitivetypestest "all-primitive-types-test"
-	test/allprimitivetypestest.cpp
-)
+structures_unit_test( primitivearraytest "PrimitiveArray_test" test/primitivearraytest.cpp )
+structures_unit_test( arraydatainformationtest "ArrayDataInformation_test" test/arraydatainformationtest.cpp )
+structures_unit_test( basicdatainformationtest "basic_DataInformation_test" test/basicdatainformationtest.cpp )
+structures_unit_test( primitivedatainformationtest "PrimitiveDataInformation_test" test/primitivedatainformationtest.cpp )
+structures_unit_test( scriptclassestest "script_classes_test" test/scriptclassestest.cpp )
+structures_unit_test( uniondatainformationtest "UnionDatainformation_test" test/uniondatainformationtest.cpp )
+structures_unit_test( allprimitivetypestest "AllPrimitiveTypes_test" test/allprimitivetypestest.cpp )
+structures_unit_test( scriptvalueconvertertest "ScriptValueConverter_test" test/scriptvalueconvertertest.cpp )
+structures_unit_test( osdparsertest "OsdParser_test" test/osdparsertest.cpp )
+structures_unit_test( commonparsertest "common_parser_test" test/commonparsertest.cpp )
 
 endif ( KDE4_BUILD_TESTS )
 

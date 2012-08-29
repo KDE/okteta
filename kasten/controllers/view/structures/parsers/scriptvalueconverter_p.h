@@ -22,42 +22,18 @@
 #ifndef SCRIPTVALUECONVERTER_P_H_
 #define SCRIPTVALUECONVERTER_P_H_
 
-#include "../parsers/abstractstructureparser.h"
-
-class ScriptLogger;
-class DataInformation;
-class ArrayDataInformation;
-class PrimitiveDataInformation;
-class AbstractBitfieldDataInformation;
-class StructureDataInformation;
-class UnionDataInformation;
-class AbstractEnumDataInformation;
-class StringDataInformation;
-
-class QScriptValue;
-class QString;
-
-
+#include "../parsers/parserutils.h"
 
 namespace ScriptValueConverter
 {
-
 DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& info);
-
 ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info);
-
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info);
-
 PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInfo& info);
-
 StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info);
-
 UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info);
-
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info);
-
 AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
-
 }
 
 #endif //SCRIPTVALUECONVERTER_P_H_

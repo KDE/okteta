@@ -22,7 +22,7 @@
 
 #include "defaultscriptclass.h"
 
-#include "../../parsers/abstractstructureparser.h"
+#include "../../parsers/parserutils.h"
 #include "../../datatypes/datainformation.h"
 #include "../scriptlogger.h"
 
@@ -128,7 +128,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     }
     else if (name == s_byteOrder)
     {
-        return AbstractStructureParser::byteOrderToString(data->byteOrder());
+        return ParserUtils::byteOrderToString(data->byteOrder());
     }
     else if (name == s_name)
     {
@@ -164,7 +164,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     else if (name == s_byteOrder)
     {
         ParserInfo parInfo(data->fullObjectPath(), data->logger(), 0);
-        data->setByteOrder(AbstractStructureParser::byteOrderFromString(value.toString(), parInfo));
+        data->setByteOrder(ParserUtils::byteOrderFromString(value.toString(), parInfo));
     }
     else if (name == s_wasAbleToRead || name == s_name)
     {

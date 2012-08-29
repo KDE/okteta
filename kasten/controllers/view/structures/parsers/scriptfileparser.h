@@ -27,6 +27,7 @@
 
 class ScriptLogger;
 class QScriptEngine;
+class DataInformation;
 
 class ScriptFileParser: public AbstractStructureParser
 {

@@ -23,12 +23,13 @@
 #ifndef OSDPARSER_H_
 #define OSDPARSER_H_
 
-#include <QtCore/QDir>
-#include <QtXml/QDomNode>
-#include <QtXml/QDomNodeList>
-
-#include "../datatypes/primitive/enumdefinition.h"
 #include "abstractstructureparser.h"
+#include "parserutils.h"
+#include "../datatypes/primitive/enumdefinition.h"
+
+class QDomNode;
+class QDomElement;
+class QDomDocument;
 
 class StringDataInformation;
 class ArrayDataInformation;
@@ -81,8 +82,7 @@ private:
 
     EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info) const;
 
-    QVector<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem,
-            ScriptLogger* logger) const;
+    QVector<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem, ScriptLogger* logger) const;
 
     QDomDocument openDoc(ScriptLogger* logger) const;
     QDomDocument openDocFromFile(ScriptLogger* logger) const;
@@ -99,11 +99,6 @@ private:
     /** if not empty construct the document from this, instead of opening file */
     const QString mXmlString;
 };
-
-inline QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
-{
-    return mXmlString.isEmpty() ? openDocFromFile(logger) : openDocFromString(logger);
-}
 
 inline UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
 {

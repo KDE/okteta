@@ -31,35 +31,32 @@
 
 AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const BitfieldParsedData& pd)
 {
-    if (pd.widthStr.isEmpty())
+    if (!pd.width.isValid)
     {
-        pd.error() << "There seems to be no width specified for this bitfield.";
+        if (pd.width.string.isEmpty())
+            pd.error() << "Bitfield is missing width.";
+        else
+            pd.error() << "Width of bitfield is not a valid number: " << pd.width.string;
         return 0;
     }
-    if (!pd.widthConversionOkay)
+    if (pd.width.value <= 0 || pd.width.value > 64)
     {
-        pd.error() << "It seems that the width is incorrect since '"
-                << pd.widthStr << "' could not be converted to an integer.";
-        return 0;
-    }
-    if (pd.width <= 0 || pd.width > 64)
-    {
-        pd.error() << "Width of bitfield is not a value from 1-64:" << pd.width;
+        pd.error() << "Width of bitfield is not a value from 1-64:" << pd.width.value;
         return 0;
     }
     AbstractBitfieldDataInformation* bitf = 0;
     const QString type = pd.type.toLower();
     if (type.isEmpty())
     {
-        pd.info() << "no bitfield type specified, defaulting to unsigned.";
-        bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width, pd.parent);
+        pd.info() << "No bitfield type specified, defaulting to unsigned.";
+        bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
     }
     else if (type == QLatin1String("bool"))
-        bitf = new BoolBitfieldDataInformation(pd.name, pd.width, pd.parent);
+        bitf = new BoolBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
     else if (type == QLatin1String("unsigned"))
-        bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width, pd.parent);
+        bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
     else if (type == QLatin1String("signed"))
-        bitf = new SignedBitfieldDataInformation(pd.name, pd.width, pd.parent);
+        bitf = new SignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
     else
     {
         pd.error() << "invalid bitfield type attribute given:" << type;

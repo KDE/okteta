@@ -24,42 +24,11 @@
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
 
-AbstractStructureParser::AbstractStructureParser(const QString& pluginName,
-        const QString& absolutePath)
+AbstractStructureParser::AbstractStructureParser(const QString& pluginName, const QString& absolutePath)
         : mPluginName(pluginName), mAbsolutePath(absolutePath)
 {
 }
 
 AbstractStructureParser::~AbstractStructureParser()
 {
-}
-
-DataInformation::DataInformationEndianess AbstractStructureParser::byteOrderFromString(
-        const QString& string, const ParserInfo& info)
-{
-    const QString lower = string.toLower();
-    if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))
-        return DataInformation::EndiannessBig;
-    else if (lower == QLatin1String("littleendian") || lower == QLatin1String("little-endian"))
-        return DataInformation::EndianessLittle;
-    else if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings"))
-        return DataInformation::EndianessFromSettings;
-    else if (lower == QLatin1String("inherit"))
-        return DataInformation::EndianessInherit;
-    else
-    {
-        info.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
-        return DataInformation::EndianessInherit;
-    }
-}
-
-QString AbstractStructureParser::byteOrderToString(DataInformation::DataInformationEndianess order)
-{
-    if (order == DataInformation::EndianessLittle)
-        return QLatin1String("littleEndian");
-    if (order == DataInformation::EndiannessBig)
-        return QLatin1String("bigEndian");
-    if (order == DataInformation::EndianessFromSettings)
-        return QLatin1String("fromSettings");
-    return QLatin1String("inherit");
 }
