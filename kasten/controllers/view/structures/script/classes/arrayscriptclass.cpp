@@ -116,13 +116,13 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
         }
         else
         {
-            aData->setArrayLength(value.toInt32(), engine()->currentContext());
+            aData->setArrayLength(value.toInt32());
         }
         return true;
     }
     else if (name == s_childType)
     {
-        aData->setArrayType(value, engine()->currentContext());
+        aData->setArrayType(value);
         return true;
     }
     return false;

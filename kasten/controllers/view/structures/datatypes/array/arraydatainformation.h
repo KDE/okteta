@@ -28,6 +28,7 @@
 #include "abstractarraydata.h"
 
 #include <QVariant>
+#include <QScriptValue>
 
 class DummyDataInformation;
 class AbstractArrayData;
@@ -42,7 +43,7 @@ public:
      *  length should be > 0
      */
     ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
-            DataInformation* parent = 0);
+            DataInformation* parent = 0, const QScriptValue& lengthFuntion = QScriptValue());
     virtual ~ArrayDataInformation();
     DATAINFORMATION_CLONE(Array)
 
@@ -76,8 +77,8 @@ public:
 
     virtual bool isArray() const;
 
-    QScriptValue setArrayLength(int newLength, QScriptContext* context);
-    QScriptValue setArrayType(QScriptValue type, QScriptContext* context);
+    bool setArrayLength(int newLength);
+    bool setArrayType(QScriptValue type);
 
     virtual QScriptValue childType() const;
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
@@ -90,6 +91,7 @@ protected:
     virtual BitCount32 offset(unsigned int index) const;
 
     QScopedPointer<AbstractArrayData> mData;
+    QScriptValue mLengthFunction;
     static const uint MAX_LEN = 10000;
 };
 

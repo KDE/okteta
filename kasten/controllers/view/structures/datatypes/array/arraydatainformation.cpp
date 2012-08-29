@@ -27,16 +27,17 @@
 #include "../../script/scripthandlerinfo.h"
 #include "../../script/scriptlogger.h"
 
-#include <QtScript/QScriptContext>
 #include "complexarraydata.h"
 #include "primitivearraydata.h"
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
-        DataInformation* parent) : DataInformation(name, parent)
+        DataInformation* parent, const QScriptValue& lengthFunction)
+        : DataInformation(name, parent), mLengthFunction(lengthFunction)
 {
+    Q_ASSERT(!lengthFunction.isValid() || lengthFunction.isFunction());
     if (length > MAX_LEN)
     {
-        kWarning() << "array " << name << ": " << length << "exceeds maximum length of " << MAX_LEN;
+        logger()->warn(this) << "array " << name << ": " << length << "exceeds maximum length of " << MAX_LEN;
         length = MAX_LEN;
     }
     Q_CHECK_PTR(childType);
@@ -44,8 +45,9 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
     mData.reset(arrayDataFromType(length, childType));
 }
 
-ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d) :
-    DataInformation(d), mData(0)
+ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
+        :
+                DataInformation(d), mData(0)
 {
     if (d.mData)
     {
@@ -68,21 +70,26 @@ ArrayDataInformation::~ArrayDataInformation()
 {
 }
 
-QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext* context)
+bool ArrayDataInformation::setArrayLength(int newLength)
 {
-    if (Q_UNLIKELY(!mData)) {
+    if (Q_UNLIKELY(!mData))
+    {
         kWarning() << "mData == null";
-        return QScriptValue();
+        return false;
     }
-    kDebug() << "resizing" << fullObjectPath() << "from" << mData->length() << "to" << newLength;
+    kDebug()
+    << "resizing" << fullObjectPath() << "from" << mData->length() << "to" << newLength;
     //arrays with length zero are useless -> minimum is 0
     if (newLength < 0)
-        return context ? context->throwError(QLatin1String("new Array length is less than zero: ")
-            + QString::number(newLength)) : QScriptValue();
+    {
+        logger()->error(this).nospace() << "New array length is negative (" << newLength
+                << "), setting to 0.";
+        newLength = 0;
+    }
     if (uint(newLength) > MAX_LEN)
     {
         logger()->warn(this) << QString(QLatin1String("new array length is too large (%1), limiting to (%2)"))
-            .arg(QString::number(newLength), QString::number(MAX_LEN));
+                .arg(QString::number(newLength), QString::number(MAX_LEN));
         newLength = MAX_LEN;
     }
     int oldLength = mData->length();
@@ -98,33 +105,30 @@ QScriptValue ArrayDataInformation::setArrayLength(int newLength, QScriptContext*
         mData->setLength(newLength);
         topLevelDataInformation()->_childrenInserted(this, oldLength, newLength - 1);
     }
-    //else
-        //kDebug() << "oldLength == newLength";
     return true;
 }
 
-QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContext* context)
+bool ArrayDataInformation::setArrayType(QScriptValue type)
 {
     if (Q_UNLIKELY(!mData))
     {
         kWarning() << "mData == null";
-        return QScriptValue();
+        return false;
     }
 
-    DataInformation* newChildType = ScriptValueConverter::convert(type, QLatin1String("dummy"), logger());
+    DataInformation* newChildType = ScriptValueConverter::convert(type, QLatin1String("dummy"), logger(),
+            this);
     //return if conversion failed
     if (!newChildType)
     {
-        if (context)
-            return context->throwError(QLatin1String("Failed to convert'") + type.toString()
-                    + QLatin1String("' to a valid DataInformation!"));
-        else
-            return QScriptValue();
+        logger()->error(this) << "Failed to parse new child type:" << type.toString();
+        return false;
     }
     if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType())
     {
         //there is no need to change the type
-        kDebug() << "New and old child type are identical, aborting: " << mData->primitiveType();
+        kDebug()
+        << "New and old child type are identical, aborting: " << mData->primitiveType();
         delete newChildType;
         return true;
     }
@@ -140,7 +144,8 @@ QScriptValue ArrayDataInformation::setArrayType(QScriptValue type, QScriptContex
         mData.reset(arrayDataFromType(len, newChildType));
         topLevel->_childrenInserted(this, 0, len - 1);
     }
-    else {
+    else
+    {
         //no need to emit the signals, which cause expensive model update
         mData.reset(arrayDataFromType(len, newChildType));
     }
@@ -155,7 +160,7 @@ QScriptValue ArrayDataInformation::childType() const
 }
 
 QVariant ArrayDataInformation::childData(int row, int column, int role) const
-{
+        {
     if (Q_UNLIKELY(!mData))
         return QVariant();
     Q_ASSERT(uint(row) < mData->length());
@@ -179,24 +184,24 @@ QScriptValue ArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHa
 }
 
 QWidget* ArrayDataInformation::createEditWidget(QWidget*) const
-{
+        {
     Q_ASSERT_X(false, "ArrayDataInformation::createEditWidget", "this should never happen!");
     return 0;
 }
 
 QVariant ArrayDataInformation::dataFromWidget(const QWidget*) const
-{
+        {
     Q_ASSERT_X(false, "ArrayDataInformation::dataFromWidget", "this should never happen!");
     return QVariant();
 }
 
 void ArrayDataInformation::setWidgetData(QWidget*) const
-{
+        {
     Q_ASSERT_X(false, "ArrayDataInformation::setWidgetData", "this should never happen!");
 }
 
 BitCount32 ArrayDataInformation::offset(unsigned int index) const
-{
+        {
     if (Q_UNLIKELY(!mData))
     {
         kWarning() << "mData == null";
@@ -220,11 +225,29 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
         bitsRemaining &= BitCount64(~7); //unset lower 3 bits to make it divisible by 8
         address++;
     }
+    //update the length of the array
+    if (mLengthFunction.isValid())
+    {
+        Q_ASSERT(mLengthFunction.isFunction());
+        //TODO utility function for calling script value
+        TopLevelDataInformation* top = topLevelDataInformation();
+        Q_CHECK_PTR(top);
+        QScriptValue thisObject = this->toScriptValue(top->scriptEngine(), top->scriptHandler()->handlerInfo());
+        QScriptValue mainStruct = mainStructure()->toScriptValue(top->scriptEngine(), top->scriptHandler()->handlerInfo());
+        QScriptValueList args;
+        args << mainStruct;
+        QScriptValue result = mLengthFunction.call(thisObject, args);
+        if (result.isNumber())
+            setArrayLength(result.toInt32());
+        else
+            logger()->error(this) << "Length function did not return a number! Result was: " << result.toString();
+    }
+
+    //FIXME do not add this padding
     qint64 ret = mData->readData(input, address, bitsRemaining);
     mWasAbleToRead = ret >= 0; //if ret is -1 reading failed
     return ret;
 }
-
 
 bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
         Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
@@ -305,8 +328,9 @@ AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInfo
     return primitiveArrayFromType(length, type);
 }
 
-QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
-{
+QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine,
+        ScriptHandlerInfo* handlerInfo) const
+        {
     if (Q_UNLIKELY(!mData))
         return QScriptValue();
     return mData->toScriptValue(index, engine, handlerInfo);

@@ -114,7 +114,7 @@ void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, Top
     QFETCH(bool, insertCalled);
     QFETCH(bool, removeCalled);
 
-    array->setArrayLength(newsize, 0);
+    array->setArrayLength(newsize);
     QCOMPARE(array->length(), postsize);
     if (insertCalled)
     {
@@ -164,8 +164,8 @@ void ArrayDataInformationTest::testResize_data()
     QTest::newRow("1. (10)") << 10 << 10 << true << 0u << 9u << false << -1u << -1u;
     QTest::newRow("2. (10)") << 10 << 10 << false << -1u << -1u << false << -1u << -1u;
     QTest::newRow("3. (9)") << 9 << 9 << false << -1u << -1u << true << 9u << 9u;
-    QTest::newRow("4. (18)") << 18 << 18 << true << 9u << 17u << false << -1u << -1u;
-    QTest::newRow("6. (-1) //invalid") << -1 << 18 << false << -1u << -1u << false << -1u << -1u;
+    QTest::newRow("6. (-1) //invalid") << -1 << 0 << false << -1u << -1u << true << 0u << 8u;
+    QTest::newRow("4. (18)") << 18 << 18 << true << 0u << 17u << false << -1u << -1u;
     QTest::newRow("5. (0)") << 0 << 0 << false << -1u << -1u << true << 0u << 17u;
     QTest::newRow("7. (1)") << 1 << 1 << true << 0u << 0u << false << -1u << -1u;
     QTest::newRow("8. (0)") << 0 << 0 << false << -1u << -1u << true << 0u << 0u;
