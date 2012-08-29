@@ -27,7 +27,6 @@
 #include "parserutils.h"
 #include "../datatypes/primitive/enumdefinition.h"
 
-class QDomNode;
 class QDomElement;
 class QDomDocument;
 
@@ -78,7 +77,7 @@ private:
 
     ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
 
-    DataInformation* parseNode(const QDomNode& node, const OsdParserInfo& info) const;
+    DataInformation* parseElement(const QDomElement& node, const OsdParserInfo& info) const;
 
     EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info) const;
 
