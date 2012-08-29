@@ -114,13 +114,13 @@
             <array name="magic" length="4">
                 <primitive name="magic" type="Char" />
             </array>
-            <enum name="arch class" enum="ClassEnum" type="Char" />
-            <enum name="endianess" enum="EndianessEnum" type="Char" />
-            <primitive name="version" type="Char" />
-            <enum name="ABI" enum="ABIEnum" type="Char" />
-            <primitive name="ABI version" type="Char" />
+            <enum name="arch class" enum="ClassEnum" type="UInt8" />
+            <enum name="endianess" enum="EndianessEnum" type="UInt8" />
+            <primitive name="version" type="UInt8" />
+            <enum name="ABI" enum="ABIEnum" type="UInt8" />
+            <primitive name="ABI version" type="UInt8" />
             <array name="padding" length="7" >
-                <primitive name="padding" type="Char" />
+                <primitive name="padding" type="UInt8" />
             </array>
         </struct>
         <enum name="ObjectType" enum="ObjectTypeEnum" type="UInt16"/>

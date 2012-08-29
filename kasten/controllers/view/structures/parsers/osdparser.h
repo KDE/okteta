@@ -88,6 +88,10 @@ private:
     QDomDocument openDocFromFile(ScriptLogger* logger) const;
     QDomDocument openDocFromString(ScriptLogger* logger) const;
 
+    /** Reads an property of the QDomElement. First it is checked whether an attribute exists, if this is not the case
+     * the inner text of an element with tag equal to @p attrib is returned*/
+    static QString readProperty(const QDomElement& elem, const QString& attrib, const QString& defaultVal = QString());
+
 private:
     /** @return the element as an XML string (excluding children) */
     QString toRawXML(const QDomElement& elem) const;

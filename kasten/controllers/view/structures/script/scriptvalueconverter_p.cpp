@@ -41,8 +41,13 @@
 namespace ScriptValueConverter
 {
 
-DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& info)
+DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& oldInfo)
 {
+    ParserInfo info(oldInfo);
+    QString nameOverride = value.property(QLatin1String("name")).toString();
+    if (!nameOverride.isEmpty())
+        info.name =  nameOverride;
+
     //check function array and date, since they are objects too
     if (value.isRegExp())
     {
@@ -126,18 +131,17 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
 
     if (returnVal)
     {
-        //successfully parsed -> add the validate and update functions to the additional data
-        QScriptValue updateFunc = value.property(QLatin1String("updateFunc"));
-        QScriptValue validationFunc = value.property(QLatin1String("validationFunc"));
-        QScriptValue byteOrder = value.property(QLatin1String("byteOrder"));
-        if (byteOrder.isValid())
-            returnVal->setByteOrder(AbstractStructureParser::byteOrderFromString(byteOrder.toString(), info.logger));
-
-        if (updateFunc.isFunction())
-            returnVal->setUpdateFunc(updateFunc);
-
-        if (validationFunc.isFunction())
-            returnVal->setValidationFunc(updateFunc);
+        CommonParsedData cpd(info, value.engine());
+        QString byteOrderStr = value.property(QLatin1String("byteOrder")).toString();
+        if (!byteOrderStr.isEmpty())
+            cpd.endianess = AbstractStructureParser:: byteOrderFromString(byteOrderStr, oldInfo.logger);
+        cpd.updateFunc = value.property(QLatin1String("updateFunc"));
+        cpd.validationFunc = value.property(QLatin1String("validationFunc"));
+        if (!DataInformationFactory::commonInitialization(returnVal, cpd))
+        {
+            delete returnVal; //error message has already been logged
+            return 0;
+        }
     }
     return returnVal;
 }
@@ -215,7 +219,6 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 
 AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
 {
-    //TODO also allow bitfields
     EnumParsedData epd(info);
     epd.type = value.property(QLatin1String("enumType")).toString();
     epd.enumName = value.property(QLatin1String("enumName")).toString();

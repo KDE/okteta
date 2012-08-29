@@ -35,6 +35,20 @@
 #include "../parsers/abstractstructureparser.h"
 
 
+struct CommonParsedData : public ParserInfo {
+    inline explicit CommonParsedData(const ParserInfo& i, QScriptEngine* engine)
+    : ParserInfo(i), engine(engine), endianess(DataInformation::EndianessInherit) {}
+    explicit CommonParsedData(const CommonParsedData& cpd);
+    QScriptEngine* engine;
+    QScriptValue updateFunc;
+    /** if this is not empty it is evaluated */
+    QString updateFuncString;
+    QScriptValue validationFunc;
+    /** if this is not empty it is evaluated */
+    QString validationFuncString;
+    DataInformation::DataInformationEndianess endianess;
+};
+
 struct BitfieldParsedData : public ParserInfo {
     inline explicit BitfieldParsedData(const ParserInfo& i)
         : ParserInfo(i), widthConversionOkay(false), width(-1) {}
@@ -47,13 +61,13 @@ struct BitfieldParsedData : public ParserInfo {
 
 struct PrimitiveParsedData : public ParserInfo {
     inline explicit PrimitiveParsedData(const ParserInfo& i) : ParserInfo(i) {}
-    explicit PrimitiveParsedData(const PrimitiveParsedData& bpd);
+    explicit PrimitiveParsedData(const PrimitiveParsedData& ppd);
     QString type;
 };
 
 struct EnumParsedData : public ParserInfo {
     inline explicit EnumParsedData(const ParserInfo& i) : ParserInfo(i) {}
-    explicit EnumParsedData(const PrimitiveParsedData& bpd);
+    explicit EnumParsedData(const EnumParsedData& epd);
     QString type;
     QString enumName;
     EnumDefinition::Ptr enumDef;
@@ -67,6 +81,8 @@ AbstractBitfieldDataInformation* newBitfield(const BitfieldParsedData& pd);
 PrimitiveDataInformation* newPrimitive(const PrimitiveParsedData& pd);
 EnumDataInformation* newEnum(const EnumParsedData& pd);
 FlagDataInformation* newFlags(const EnumParsedData& pd);
+
+bool commonInitialization(DataInformation* data, const CommonParsedData& pd);
 }
 
 #endif /* DATAINFORMATIONFACTORY_H_ */
