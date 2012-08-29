@@ -24,10 +24,22 @@
 #include "../datatypes/datainformation.h"
 
 #include <KIcon>
+#include <KLocalizedString>
+
+KIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)
+{
+    if (level == LogInfo)
+        return KIcon(QLatin1String("dialog-information"));
+    else if (level == LogWarning)
+        return KIcon(QLatin1String("dialog-warning"));
+    else
+        return KIcon(QLatin1String("dialog-error"));
+    return KIcon();
+}
 
 QVariant ScriptLogger::data(const QModelIndex& index, int role) const
 {
-    if (!index.isValid() || index.column() != 0)
+    if (!index.isValid())
         return QVariant();
     int row = index.row();
     Q_ASSERT(row < mData.size());
@@ -35,20 +47,17 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
     if (role == Qt::DisplayRole)
     {
         const Data& data = mData.at(row);
-        const QString time = data.time.toString(QLatin1String("hh:mm:ss.zzz")) + QLatin1String(" - ");
-        if (!data.origin.isEmpty())
-            return QString(time + data.origin + QLatin1String(": ") + data.message);
-        return QString(time + data.message);
-    }
-    else if (role == Qt::DecorationRole)
-    {
-        LogLevel level = mData.at(row).level;
-        if (level == LogInfo)
-            return KIcon(QLatin1String("dialog-info"));
-        else if (level == LogWarning)
-            return KIcon(QLatin1String("dialog-warning"));
-        else
-            return KIcon(QLatin1String("dialog-error"));
+        switch (index.column())
+        {
+        case ColumnTime:
+            return data.time.toString(QLatin1String("hh:mm:ss.zzz"));
+        case ColumnOrigin:
+            return data.origin;
+        case ColumnMessage:
+            return data.message;
+        default:
+            return QVariant();
+        }
     }
     return QVariant();
 }
@@ -60,23 +69,47 @@ int ScriptLogger::rowCount(const QModelIndex& parent) const
     return mData.size();
 }
 
-QDebug ScriptLogger::log(LogLevel level, const QScriptValue& cause)
+int ScriptLogger::columnCount(const QModelIndex& parent) const
 {
-    return log(level, QString(), cause);
+    return COLUMN_COUNT;
+}
+
+QVariant ScriptLogger::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (orientation == Qt::Vertical && role == Qt::DecorationRole)
+    {
+        if (section < mData.size())
+            return iconForLevel(mData.at(section).level);
+    }
+    else if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
+    {
+        switch (section)
+        {
+        case ColumnTime:
+            return i18nc("@title:column", "Time");
+        case ColumnOrigin:
+            return i18nc("@title:column", "Origin");
+        case ColumnMessage:
+            return i18nc("@title:column", "Message");
+        default:
+            return QVariant();
+        }
+    }
+    return QVariant();
 }
 
 QDebug ScriptLogger::log(LogLevel level, const DataInformation* origin)
 {
-    return log(level, origin->fullObjectPath(), QScriptValue());
+    return log(level, origin->fullObjectPath());
 }
 
-QDebug ScriptLogger::log(LogLevel level, const QString& origin, const QScriptValue& cause)
+QDebug ScriptLogger::log(LogLevel level, const QString& origin)
 {
     if (mLogToStdOut)
         return qDebug();
 
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
-    mData.append(Data(level, origin, cause));
+    mData.append(Data(level, origin));
     endInsertRows();
     return QDebug(&mData.last().message);
 }
@@ -88,7 +121,8 @@ void ScriptLogger::clear()
     endRemoveRows();
 }
 
-ScriptLogger::ScriptLogger() : mLogToStdOut(false)
+ScriptLogger::ScriptLogger()
+        : mLogToStdOut(false)
 {
 }
 

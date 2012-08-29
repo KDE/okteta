@@ -23,18 +23,32 @@
 #include "scriptloggerview.h"
 
 #include <KComboBox>
-#include <QListView>
+#include <QTableView>
+#include <QHeaderView>
 #include <QVBoxLayout>
 
 #include "scriptlogger.h"
 
 ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent)
-    : QWidget(parent), mSelector(new KComboBox(this)), mView(new QListView(this)), mList(data)
+        : QWidget(parent), mSelector(new KComboBox(this)), mView(new QTableView(this)), mList(data)
 {
     for (int i = 0; i < mList.size(); ++i)
     {
         mSelector->addItem(mList.at(i)->objectName());
     }
+    mView->setShowGrid(false);
+    mView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    QHeaderView* horizHeader = mView->horizontalHeader();
+    horizHeader->setAcceptDrops(false);
+    horizHeader->setResizeMode(QHeaderView::Interactive);
+    horizHeader->setSortIndicatorShown(false);
+    horizHeader->setStretchLastSection(true);
+    QHeaderView* vertHeader = mView->horizontalHeader();
+    vertHeader->setResizeMode(QHeaderView::ResizeToContents);
+    vertHeader->setAcceptDrops(false);
+    vertHeader->setAlternatingRowColors(true);
+    vertHeader->setSortIndicatorShown(false);
+
     if (!mList.isEmpty())
         mView->setModel(mList.at(0)->logger());
     connect(mSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(updateModel(int)));

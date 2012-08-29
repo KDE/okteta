@@ -26,7 +26,7 @@
 #include <QWidget>
 #include "../datatypes/topleveldatainformation.h"
 
-class QListView;
+class QTableView;
 class KComboBox;
 
 class ScriptLoggerView : public QWidget
@@ -42,7 +42,7 @@ protected Q_SLOTS:
 
 private:
     KComboBox* mSelector;
-    QListView* mView;
+    QTableView* mView;
     //QSharedPointers so they remain valid until this widget is deleted
     //even if the backing data has changed
     const TopLevelDataInformation::List mList;

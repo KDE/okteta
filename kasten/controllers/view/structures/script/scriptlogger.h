@@ -23,57 +23,58 @@
 #ifndef SCRIPTLOGGER_H
 #define SCRIPTLOGGER_H
 
-#include <QAbstractListModel>
+#include <QAbstractTableModel>
 #include <QVector>
 #include <QDebug>
 #include <QTime>
-#include <QScriptValue>
+
+class KIcon;
 
 class DataInformation;
 /** NOT THREAD SAFE! */
-class ScriptLogger: public QAbstractListModel {
+class ScriptLogger: public QAbstractTableModel {
 Q_OBJECT
 Q_DISABLE_COPY(ScriptLogger)
 public:
     explicit ScriptLogger();
     virtual ~ScriptLogger();
 
+    enum Columns {
+        ColumnTime = 0, ColumnOrigin, ColumnMessage, COLUMN_COUNT
+    };
 	enum LogLevel {
 	    LogInvalid = 0, LogInfo = 1, LogWarning = 2, LogError = 3
 	};
 	struct Data {
 	    inline Data() : level(LogInvalid) {}
-	    inline Data(LogLevel lvl, const QString& o, const QScriptValue& c)
-	        : level(lvl), origin(o), cause(c), time(QTime::currentTime()) {}
+	    inline Data(LogLevel lvl, const QString& o)
+	        : level(lvl), origin(o), time(QTime::currentTime()) {}
 	    inline Data(const Data& d)
-	        : level(d.level), message(d.message), origin(d.origin), cause(d.cause), time(d.time) {}
+	        : level(d.level), message(d.message), origin(d.origin), time(d.time) {}
 	    inline ~Data() {}
 		ScriptLogger::LogLevel level;
 		QString message;
 		QString origin;
-		QScriptValue cause;
 		QTime time;
 	};
-	virtual QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-	virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
+	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
+	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
+	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
+	virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
 
-	inline QDebug info(const QScriptValue& cause = QScriptValue()) { return log(LogInfo, cause); }
-	inline QDebug warn(const QScriptValue& cause = QScriptValue()) { return log(LogWarning, cause); }
-	inline QDebug error(const QScriptValue& cause = QScriptValue()) { return log(LogError, cause); }
 	inline QDebug info(const DataInformation* origin) { return log(LogInfo, origin); }
 	inline QDebug warn(const DataInformation* origin) { return log(LogWarning, origin); }
 	inline QDebug error(const DataInformation* origin) { return log(LogError, origin); }
-	inline QDebug info(const QString& origin) { return log(LogInfo, origin); }
-	inline QDebug warn(const QString& origin) { return log(LogWarning, origin); }
-	inline QDebug error(const QString& origin) { return log(LogError, origin); }
+	inline QDebug info(const QString& origin = QString()) { return log(LogInfo, origin); }
+	inline QDebug warn(const QString& origin = QString()) { return log(LogWarning, origin); }
+	inline QDebug error(const QString& origin = QString()) { return log(LogError, origin); }
 	/**
 	 * @return a QDebug to write the message to.
 	 * Do NOT save this object, since the string it writes to may become invalid!
 	 * Just write the message using the << operators and do not touch it anymore after the line ends
 	 */
-	QDebug log(LogLevel level, const QScriptValue& cause);
-	QDebug log(LogLevel level, const DataInformation* cause);
-	QDebug log(LogLevel level, const QString& origin, const QScriptValue& cause);
+	QDebug log(LogLevel level, const DataInformation* origin);
+	QDebug log(LogLevel level, const QString& origin);
 	void clear();
 	/**
 	 * @param info the minimum level that the messages must have
@@ -83,6 +84,8 @@ public:
 	/** whether to log to stdout instead of saving the messages */
 	inline void setLogToStdOut(bool val) { mLogToStdOut = val; }
 
+private:
+	static KIcon iconForLevel(LogLevel level);
 private:
 	QVector<Data> mData;
 	bool mLogToStdOut;
