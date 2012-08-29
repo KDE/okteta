@@ -43,14 +43,18 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     horizHeader->setResizeMode(QHeaderView::Interactive);
     horizHeader->setSortIndicatorShown(false);
     horizHeader->setStretchLastSection(true);
-    QHeaderView* vertHeader = mView->horizontalHeader();
-    vertHeader->setResizeMode(QHeaderView::ResizeToContents);
+    QHeaderView* vertHeader = mView->verticalHeader();
+    vertHeader->setResizeMode(QHeaderView::Interactive);
     vertHeader->setAcceptDrops(false);
     vertHeader->setAlternatingRowColors(true);
     vertHeader->setSortIndicatorShown(false);
+    vertHeader->setStretchLastSection(false);
 
     if (!mList.isEmpty())
+    {
         mView->setModel(mList.at(0)->logger());
+        mView->resizeRowsToContents();
+    }
     connect(mSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(updateModel(int)));
     QVBoxLayout* layout = new QVBoxLayout();
     layout->addWidget(mSelector, 0);
@@ -66,4 +70,5 @@ void ScriptLoggerView::updateModel(int index)
 {
     Q_ASSERT(index >= 0 && index < mList.size());
     mView->setModel(mList.at(index)->logger());
+    mView->resizeRowsToContents();
 }
