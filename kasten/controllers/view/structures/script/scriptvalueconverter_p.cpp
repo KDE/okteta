@@ -31,9 +31,7 @@
 #include "../datatypes/primitive/enumdefinition.h"
 #include "../datatypes/strings/stringdata.h"
 #include "../datatypes/strings/stringdatainformation.h"
-#include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"
-#include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
-#include "../datatypes/primitive/bitfield/signedbitfielddatainformation.h"
+#include "../datatypes/datainformationfactory.h"
 #include "../datatypes/primitivefactory.h"
 #include "../datatypes/additionaldata.h"
 
@@ -166,26 +164,20 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info)
 {
-    //we can safely assume that type == "bitfield"
-    int width = value.property(QLatin1String("width")).toInt32();
-    if (width < 0 || width > 64)
+    BitfieldParsedData bpd(info);
+    bpd.type = value.property(QLatin1String("bitfieldType")).toString();
+    QScriptValue widthProp = value.property(QLatin1String("width"));
+    bpd.widthStr = widthProp.toString();
+    if (widthProp.isNumber())
     {
-        info.error() <<  "bitfield width is outside of range 1-64:" << width;
-        return 0;
+        bpd.widthConversionOkay = true;
+        bpd.width = widthProp.toInt32();
     }
-    QString bitfieldType = value.property(QLatin1String("bitfieldType")).toString();
-    if (bitfieldType.toLower() == QLatin1String("bool"))
-        return new BoolBitfieldDataInformation(info.name, width);
-
-    else if (bitfieldType.toLower() == QLatin1String("signed"))
-        return new SignedBitfieldDataInformation(info.name, width);
-
-    else if (bitfieldType.toLower() == QLatin1String("unsigned"))
-        return new UnsignedBitfieldDataInformation(info.name, width);
-
-    info.error().nospace() << "invalid bitfield type specified: '" << bitfieldType
-            << "'. Only 'bool', 'signed' or 'unsigned' are valid.";
-    return 0;
+    else
+    {
+        bpd.width = bpd.widthStr.toInt(&bpd.widthConversionOkay, 10);
+    }
+    return DataInformationFactory::newBitfield(bpd);
 }
 
 PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInfo& info)

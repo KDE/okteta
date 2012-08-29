@@ -287,6 +287,7 @@ set( STRUCTVIEW_SRCS
   view/structures/settings/structuresmanagerview.cpp
   view/structures/datatypes/topleveldatainformation.cpp
   view/structures/datatypes/datainformation.cpp
+  view/structures/datatypes/datainformationfactory.cpp
   view/structures/datatypes/datainformationbase.cpp
   view/structures/datatypes/dummydatainformation.cpp
   view/structures/datatypes/datainformationwithchildren.cpp

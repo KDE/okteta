@@ -29,9 +29,6 @@
 #include "../datatypes/primitive/flagdatainformation.h"
 #include "../datatypes/strings/stringdatainformation.h"
 #include "../datatypes/strings/stringdata.h"
-#include "../datatypes/primitive/bitfield/boolbitfielddatainformation.h"
-#include "../datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
-#include "../datatypes/primitive/bitfield/signedbitfielddatainformation.h"
 #include "../datatypes/topleveldatainformation.h"
 #include "../datatypes/primitivefactory.h"
 #include "../datatypes/dummydatainformation.h"
@@ -273,7 +270,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
 
 ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, OsdParserInfo& info) const
 {
-    QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
+    QString name = xmlElem.attribute(QLatin1String("name"));
     QDomNode node = xmlElem.firstChild();
     QString lengthStr = xmlElem.attribute(QLatin1String("length"));
     if (lengthStr.isNull())
@@ -387,37 +384,11 @@ PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem
 AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& xmlElem,
         const OsdParserInfo& info) const
 {
-    QString name = xmlElem.attribute(QLatin1String("name"), i18n("<invalid name>"));
-    QString typeStr = xmlElem.attribute(QLatin1String("type"), QString());
-    QString widthStr = xmlElem.attribute(QLatin1String("width"), QString());
-    bool okay = false;
-    uint width = widthStr.toUInt(&okay, 10);
-    if (width <= 0 || width > 64 || !okay)
-    {
-        info.logger->error() << "Width of bitfield is not a value from 1-64:" << widthStr
-                << ".\nIn element " << toRawXML(xmlElem);
-        return 0;
-    }
-    AbstractBitfieldDataInformation* bitf = 0;
-    if (typeStr.isEmpty())
-    {
-        info.logger->info() << "no bitfield type specified, defaulting to unsigned.\nIn element:"
-                << toRawXML(xmlElem);
-        bitf = new UnsignedBitfieldDataInformation(name, width, info.parent);
-    }
-    else if (typeStr == QLatin1String("bool"))
-        bitf = new BoolBitfieldDataInformation(name, width, info.parent);
-    else if (typeStr == QLatin1String("unsigned"))
-        bitf = new UnsignedBitfieldDataInformation(name, width, info.parent);
-    else if (typeStr == QLatin1String("signed"))
-        bitf = new SignedBitfieldDataInformation(name, width, info.parent);
-    else
-    {
-        info.logger->error() << "invalid bitfield type attribute given:" << typeStr
-                << ".\nIn element:" << toRawXML(xmlElem);
-        return 0;
-    }
-    return bitf;
+    BitfieldParsedData bpd(info);
+    bpd.type = xmlElem.attribute(QLatin1String("type"));
+    bpd.widthStr = xmlElem.attribute(QLatin1String("width"));
+    bpd.width = bpd.widthStr.toInt(&bpd.widthConversionOkay, 10);
+    return DataInformationFactory::newBitfield(bpd);
 }
 
 template<class T>
