@@ -70,21 +70,12 @@ ArrayDataInformation::~ArrayDataInformation()
 {
 }
 
-bool ArrayDataInformation::setArrayLength(int newLength)
+bool ArrayDataInformation::setArrayLength(uint newLength)
 {
     if (Q_UNLIKELY(!mData))
     {
         kWarning() << "mData == null";
         return false;
-    }
-    kDebug()
-    << "resizing" << fullObjectPath() << "from" << mData->length() << "to" << newLength;
-    //arrays with length zero are useless -> minimum is 0
-    if (newLength < 0)
-    {
-        logError().nospace() << "New array length is negative (" << newLength
-                << "), setting to 0.";
-        newLength = 0;
     }
     if (uint(newLength) > MAX_LEN)
     {
@@ -92,15 +83,17 @@ bool ArrayDataInformation::setArrayLength(int newLength)
                 .arg(QString::number(newLength), QString::number(MAX_LEN));
         newLength = MAX_LEN;
     }
-    int oldLength = mData->length();
+    uint oldLength = mData->length();
     if (newLength < oldLength)
     {
+        //lengthToSet is smaller so oldLength is at least 1 -> no overflow
         topLevelDataInformation()->_childrenAboutToBeRemoved(this, newLength, oldLength - 1);
         mData->setLength(newLength);
         topLevelDataInformation()->_childrenRemoved(this, newLength, oldLength - 1);
     }
     else if (newLength > oldLength)
     {
+        //lengthToSet is larger so larger is at least 1 -> no overflow
         topLevelDataInformation()->_childrenAboutToBeInserted(this, oldLength, newLength - 1);
         mData->setLength(newLength);
         topLevelDataInformation()->_childrenInserted(this, oldLength, newLength - 1);

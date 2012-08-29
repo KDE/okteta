@@ -77,7 +77,7 @@ public:
 
     virtual bool isArray() const;
 
-    bool setArrayLength(int newLength);
+    bool setArrayLength(uint newLength);
     bool setArrayType(QScriptValue type);
 
     virtual QScriptValue childType() const;
