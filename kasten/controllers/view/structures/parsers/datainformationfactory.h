@@ -31,6 +31,7 @@
 #include "../datatypes/primitive/flagdatainformation.h"
 #include "../datatypes/primitive/enumdatainformation.h"
 #include "../datatypes/array/arraydatainformation.h"
+#include "../datatypes/strings/stringdatainformation.h"
 
 #include "../script/scriptlogger.h"
 #include "parserutils.h"
@@ -71,6 +72,17 @@ private:
     Q_DISABLE_COPY(EnumParsedData)
 };
 
+struct StringParsedData : public ParserInfo {
+    inline explicit StringParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    QString encoding;
+    ParsedNumber<quint32> termination;
+    ParsedNumber<quint32> maxCharCount;
+    ParsedNumber<quint32> maxByteCount;
+
+private:
+    Q_DISABLE_COPY(StringParsedData)
+};
+
 struct ArrayParsedData : public ParserInfo {
     inline explicit ArrayParsedData(const ParserInfo& i) : ParserInfo(i), arrayType(0) {}
     ParsedNumber<int> length;
@@ -87,6 +99,7 @@ PrimitiveDataInformation* newPrimitive(const PrimitiveParsedData& pd);
 EnumDataInformation* newEnum(const EnumParsedData& pd);
 FlagDataInformation* newFlags(const EnumParsedData& pd);
 ArrayDataInformation* newArray(const ArrayParsedData& pd);
+StringDataInformation* newString(const StringParsedData& pd);
 
 bool commonInitialization(DataInformation* data, const CommonParsedData& pd);
 }

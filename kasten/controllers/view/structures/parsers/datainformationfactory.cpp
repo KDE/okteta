@@ -171,6 +171,46 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
     return new ArrayDataInformation(pd.name, initialLength, pd.arrayType, pd.parent, pd.lengthFunction);
 }
 
+StringDataInformation* DataInformationFactory::newString(const StringParsedData& pd)
+{
+    if (pd.maxByteCount.isValid && pd.maxCharCount.isValid)
+    {
+        pd.error() << "Both maxCharCount and maxByteCount are set, only one is allowed.";
+        return 0;
+    }
+    StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(pd.encoding);
+    if (encoding == StringDataInformation::InvalidEncoding)
+    {
+        pd.error() << "Bad string encoding given:" << pd.encoding;
+        return 0;
+    }
+    StringDataInformation* data = new StringDataInformation(pd.name, encoding, pd.parent);
+    bool modeSet = false;
+    if (pd.termination.isValid)
+    {
+        data->setTerminationCodePoint(pd.termination.value);
+        modeSet = true;
+    }
+    if (pd.maxByteCount.isValid)
+    {
+        data->setMaxByteCount(pd.maxByteCount.value);
+        modeSet = true;
+    }
+    if (pd.maxCharCount.isValid)
+    {
+        data->setMaxCharCount(pd.maxCharCount.value);
+        modeSet = true;
+    }
+    //if mode is None, we assume zero terminated strings
+    if (!modeSet)
+    {
+        pd.info() << "No string termination mode set, assuming null terminated strings.";
+        data->setTerminationCodePoint(0);
+        Q_ASSERT(data->terminationMode() == StringData::Sequence);
+    }
+    return data;
+}
+
 bool DataInformationFactory::commonInitialization(DataInformation* data, const CommonParsedData& pd)
 {
     data->setByteOrder(pd.endianess);

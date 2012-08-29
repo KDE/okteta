@@ -365,78 +365,12 @@ AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, 
 StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
         const OsdParserInfo& info) const
 {
-    //TODO clean up this code
-    const QString terminatedBy = readProperty(xmlElem, PROPERTY_TERMINATED_BY);
-    const QString charCount = readProperty(xmlElem, PROPERTY_MAX_CHAR_COUNT);
-    const QString byteCount = readProperty(xmlElem, PROPERTY_MAX_BYTE_COUNT);
-    const QString encoding = readProperty(xmlElem, PROPERTY_ENCODING);
-
-    StringData::TerminationModes mode = StringData::None;
-    if (!terminatedBy.isEmpty())
-        mode |= StringData::Sequence;
-    if (!charCount.isEmpty())
-        mode |= StringData::CharCount;
-    if (!byteCount.isEmpty())
-        mode |= StringData::ByteCount;
-
-    if ((mode & StringData::CharCount) && (mode & StringData::ByteCount))
-        mode &= ~StringData::ByteCount; //when both exists charcount wins
-
-    StringDataInformation* data = new StringDataInformation(info.name, encoding, info.parent);
-//if mode is None, we assume zero terminated strings
-    bool ok;
-    if (mode == StringData::None)
-    {
-        mode = StringData::Sequence;
-        data->setTerminationCodePoint(0);
-    }
-    else if (mode & StringData::Sequence)
-    {
-        uint term;
-        if (terminatedBy.startsWith(QLatin1String("0x")))
-            term = terminatedBy.mid(2).toUInt(&ok, 16);
-        else
-            term = terminatedBy.toUInt(&ok, 16); // always a hex value, never okay as normal val
-
-        if (!ok)
-            kDebug()
-            << "invalid termination codepoint specified " << terminatedBy
-                    << " (should be a hex number). Defaulting to 0";
-        data->setTerminationCodePoint(term);
-    }
-    if (mode & StringData::CharCount)
-    {
-        uint count;
-        if (charCount.startsWith(QLatin1String("0x")))
-            count = charCount.mid(2).toUInt(&ok, 16);
-        else
-            count = charCount.toUInt(&ok, 10);
-
-        if (!ok)
-        {
-            kDebug()
-            << "unparseable char count: " << charCount << ", defaulting to 1";
-            count = 1;
-        }
-        data->setMaxCharCount(count);
-    }
-    if (mode & StringData::ByteCount)
-    {
-        uint count;
-        if (byteCount.startsWith(QLatin1String("0x")))
-            count = byteCount.mid(2).toUInt(&ok, 16);
-        else
-            count = byteCount.toUInt(&ok, 10);
-
-        if (!ok)
-        {
-            kDebug()
-            << "unparseable byte count: " << byteCount << ", defaulting to 1";
-            count = 1;
-        }
-        data->setMaxByteCount(count);
-    }
-    return data;
+    StringParsedData spd(info);
+    spd.encoding = readProperty(xmlElem, PROPERTY_ENCODING);
+    spd.termination = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_TERMINATED_BY));
+    spd.maxByteCount = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_MAX_BYTE_COUNT));
+    spd.maxCharCount = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_MAX_CHAR_COUNT));
+    return DataInformationFactory::newString(spd);
 }
 
 DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo) const

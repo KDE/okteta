@@ -233,47 +233,12 @@ AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool flags, const
 
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info)
 {
-    //TODO check for bad parameters
-    const QScriptValue terminatedBy = value.property(PROPERTY_TERMINATED_BY);
-    const QScriptValue charCount = value.property(PROPERTY_MAX_CHAR_COUNT);
-    const QScriptValue byteCount = value.property(PROPERTY_MAX_BYTE_COUNT);
-    const QScriptValue encoding = value.property(PROPERTY_ENCODING);
-
-    StringData::TerminationModes mode = StringData::None;
-    if (terminatedBy.isNumber())
-        mode |= StringData::Sequence;
-    if (charCount.isNumber())
-        mode |= StringData::CharCount;
-    if (byteCount.isNumber())
-        mode |= StringData::ByteCount;
-
-    if ((mode & StringData::CharCount) && (mode & StringData::ByteCount))
-        mode &= ~StringData::ByteCount; //when both exists charcount wins
-
-    //TODO no more encoding.toString()
-    StringDataInformation* data = new StringDataInformation(info.name, encoding.toString());
-    //if mode is None, we assume zero terminated strings
-    if (mode == StringData::None)
-    {
-        mode = StringData::Sequence;
-        data->setTerminationCodePoint(0);
-    }
-    else if (mode & StringData::Sequence)
-    {
-        const uint term = terminatedBy.toUInt32();
-        data->setTerminationCodePoint(term);
-    }
-    if (mode & StringData::CharCount)
-    {
-        const int count = charCount.toInt32();
-        data->setMaxCharCount(qMax(count, 0));
-    }
-    if (mode & StringData::ByteCount)
-    {
-        const int count = byteCount.toInt32();
-        data->setMaxByteCount(qMax(count, 0));
-    }
-    return data;
+    StringParsedData spd(info);
+    spd.encoding = value.property(PROPERTY_ENCODING).toString();
+    spd.termination = ParserUtils::uintFromScriptValue(value.property(PROPERTY_TERMINATED_BY));
+    spd.maxByteCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_BYTE_COUNT));
+    spd.maxCharCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_CHAR_COUNT));
+    return DataInformationFactory::newString(spd);
 }
 
 } //namespace ScriptValueConverter
