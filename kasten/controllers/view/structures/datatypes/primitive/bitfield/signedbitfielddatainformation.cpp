@@ -69,7 +69,7 @@ QScriptValue SignedBitfieldDataInformation::valueAsQScriptValue() const
 void SignedBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 {
     //check that values are not too large
-    Q_ASSERT((newVal.longValue < 0 && (newVal.longValue | ~mask()) == newVal.longValue)
+    Q_ASSERT((newVal.longValue < 0 && (newVal.longValue | ~mask()) == newVal.ulongValue)
         || (newVal.ulongValue & mask()) == newVal.ulongValue);
     mValue = newVal.ulongValue & mask();
     //check if MSB is set -> negative -> sign extend

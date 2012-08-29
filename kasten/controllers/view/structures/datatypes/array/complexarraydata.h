@@ -41,7 +41,7 @@ public:
     virtual ~ComplexArrayData();
 
 
-    virtual QVariant dataAt(int index, int column, int role);
+    virtual QVariant dataAt(uint index, int column, int role);
 
     virtual unsigned int length() const;
     virtual void setLength(uint newLength);

@@ -26,7 +26,7 @@
 
 #include "view/structures/parsers/parserutils.h"
 
-Q_DECLARE_METATYPE(QScriptValue);
+Q_DECLARE_METATYPE(QScriptValue)
 
 class CommonParserTest : public QObject
 {

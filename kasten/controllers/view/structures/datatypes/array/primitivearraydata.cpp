@@ -169,9 +169,9 @@ void PrimitiveArrayData<Type_Double>::writeOneItem(double value, Okteta::Address
 }
 
 template<PrimitiveDataTypeEnum type>
-QVariant PrimitiveArrayData<type>::dataAt(int index, int column, int role)
+QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
 {
-    Q_ASSERT(index >= 0 && (unsigned)index < length());
+    Q_ASSERT(index < length());
     if (role == Qt::DisplayRole)
     {
         if (column == DataInformation::ColumnName)

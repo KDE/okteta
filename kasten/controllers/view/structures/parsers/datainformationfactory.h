@@ -47,7 +47,7 @@ struct CommonParsedData : public ParserInfo {
     QString validationFuncString;
     DataInformation::DataInformationEndianess endianess;
 private:
-    Q_DISABLE_COPY(CommonParsedData);
+    Q_DISABLE_COPY(CommonParsedData)
 };
 
 struct BitfieldParsedData : public ParserInfo {
@@ -55,14 +55,14 @@ struct BitfieldParsedData : public ParserInfo {
     QString type;
     ParsedNumber<int> width;
 private:
-    Q_DISABLE_COPY(BitfieldParsedData);
+    Q_DISABLE_COPY(BitfieldParsedData)
 };
 
 struct PrimitiveParsedData : public ParserInfo {
     inline explicit PrimitiveParsedData(const ParserInfo& i) : ParserInfo(i) {}
     QString type;
 private:
-    Q_DISABLE_COPY(PrimitiveParsedData);
+    Q_DISABLE_COPY(PrimitiveParsedData)
 };
 
 struct EnumParsedData : public ParserInfo {
@@ -73,7 +73,7 @@ struct EnumParsedData : public ParserInfo {
     /** only used if enumDef is null, to allow sharing (only possible in OSD) */
     QScriptValue enumValuesObject;
 private:
-    Q_DISABLE_COPY(EnumParsedData);
+    Q_DISABLE_COPY(EnumParsedData)
 };
 
 struct ArrayParsedData : public ParserInfo {
@@ -82,7 +82,7 @@ struct ArrayParsedData : public ParserInfo {
     QScriptValue lengthFunction;
     DataInformation* arrayType;
 private:
-    Q_DISABLE_COPY(ArrayParsedData);
+    Q_DISABLE_COPY(ArrayParsedData)
 };
 
 namespace DataInformationFactory

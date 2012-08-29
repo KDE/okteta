@@ -45,7 +45,7 @@ public:
             Okteta::Address address, BitCount64 bitsRemaining);
 
     virtual DataInformation* childAt(unsigned int idx);
-    virtual QVariant dataAt(int index, int column, int role);
+    virtual QVariant dataAt(uint index, int column, int role);
     AllPrimitiveTypes valueAt(int index) const;
     virtual int indexOf(const DataInformation* data) const;
     virtual unsigned int length() const;

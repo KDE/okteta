@@ -221,7 +221,7 @@ inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* inpu
         Okteta::Address address, QSysInfo::Endian endianess, quint8 bitOffset)
 {
     //check for out of bounds
-    Q_ASSERT((input->size() - address) * 8 - bitOffset >= sizeof(T) * 8);
+    Q_ASSERT(BitCount64(input->size() - address) * 8 - bitOffset >= sizeof(T) * 8);
     Q_ASSERT(bitOffset < 8);
     //this union exists to force unsigned shifts
     union {

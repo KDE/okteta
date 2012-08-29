@@ -78,7 +78,7 @@ DataInformation* ComplexArrayData::childAt(unsigned int idx)
     return mChildren.at(idx);
 }
 
-QVariant ComplexArrayData::dataAt(int index, int column, int role)
+QVariant ComplexArrayData::dataAt(uint index, int column, int role)
 {
     Q_ASSERT(index < uint(mChildren.size()));
     return mChildren.at(index)->data(column, role);

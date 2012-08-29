@@ -311,7 +311,7 @@ qint64 Utf8StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addre
         if (mMode & ByteCount)
         {
             // divide by two in case someone set length to an odd number of bytes
-            if ((addr - address) >= mLength.maxBytes)
+            if (uint(addr - address) >= mLength.maxBytes)
                 terminate = true;
         }
         if (mMode & CharCount)

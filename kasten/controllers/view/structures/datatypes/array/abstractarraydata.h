@@ -49,7 +49,7 @@ public:
     explicit AbstractArrayData(DataInformation* parent);
     virtual ~AbstractArrayData();
 
-    virtual QVariant dataAt(int index, int column, int role) = 0;
+    virtual QVariant dataAt(uint index, int column, int role) = 0;
 
     virtual unsigned int length() const = 0;
     virtual void setLength(uint newLength) = 0;
