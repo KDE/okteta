@@ -131,6 +131,10 @@ namespace ParserStrings {
 
     const QString PROPERTY_INTERNAL_TYPE = QLatin1String("__type");
 
+    const QString NAME_ARRAY_TYPE = QLatin1String("<array type>");
+    const QString NAME_POINTER_VALUE_TYPE = QLatin1String("<pointer value type>");
+    const QString NAME_POINTER_TARGET = QLatin1String("<pointer target>");
+
 }
 
 namespace ParserUtils

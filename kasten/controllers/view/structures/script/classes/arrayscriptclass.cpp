@@ -24,6 +24,7 @@
 #include "arrayscriptclass.h"
 #include "../../datatypes/array/arraydatainformation.h"
 #include "../../parsers/parserutils.h"
+#include "../../parsers/scriptvalueconverter.h"
 #include "../scriptlogger.h"
 
 #include <KDebug>
@@ -132,13 +133,25 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
     }
     else if (name == s_type)
     {
-        aData->setArrayType(value);
+        DataInformation* newChildType = ScriptValueConverter::convert(value,
+                ParserStrings::NAME_ARRAY_TYPE, aData->logger(), aData);
+
+        if (!newChildType)
+            aData->logError() << "Failed to parse new child type:" << value.toString();
+        else
+            aData->setArrayType(newChildType);
         return true;
     }
     else if (name == s_childType)
     {
         aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
-        aData->setArrayType(value);
+        DataInformation* newChildType = ScriptValueConverter::convert(value,
+                ParserStrings::NAME_ARRAY_TYPE, aData->logger(), aData);
+
+        if (!newChildType)
+            aData->logError() << "Failed to parse new child type:" << value.toString();
+        else
+            aData->setArrayType(newChildType);
         return true;
     }
     return false;

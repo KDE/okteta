@@ -128,17 +128,66 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
 
     if (name == s_maxCharCount)
     {
-        sData->setMaxCharCount(value, engine());
+        if (value.isNull())
+        {
+            sData->logInfo() << "Unsetting max char count.";
+            sData->unsetTerminationMode(StringData::CharCount);
+        }
+        else
+        {
+            ParsedNumber<uint> result = ParserUtils::uintFromScriptValue(value);
+            if (result.isValid)
+                sData->setMaxCharCount(result.value);
+            else
+                sData->logError() << "Could not set maximum char count, invalid argument: " << value.toString();
+        }
         return true;
     }
     else if (name == s_maxByteCount)
     {
-        sData->setMaxByteCount(value, engine());
+        if (value.isNull())
+        {
+            sData->logInfo() << "Unsetting max byte count.";
+            sData->unsetTerminationMode(StringData::ByteCount);
+        }
+        else
+        {
+            ParsedNumber<uint> result = ParserUtils::uintFromScriptValue(value);
+            if (result.isValid)
+                sData->setMaxByteCount(result.value);
+            else
+                sData->logError() << "Could not set maximum byte count, invalid argument: " << value.toString();
+        }
         return true;
     }
     else if (name == s_terminatedBy)
     {
-        sData->setTerminationCodePoint(value, engine());
+        if (value.isNull())
+        {
+            sData->logInfo() << "Unsetting termination character.";
+            sData->unsetTerminationMode(StringData::Sequence);
+        }
+        else
+        {
+            if (value.isString())
+            {
+                QString str = value.toString();
+                //we don't handle surrogate pairs, if you want to set that use a number instead.
+                if (str.length() != 1)
+                    sData->logError() << "Setting termination char: expected one char or a code point number"
+                            ", got a string with length " << str.length();
+                else
+                    sData->setTerminationCodePoint(str[0].unicode());
+            }
+            else
+            {
+                ParsedNumber<uint> result = ParserUtils::uintFromScriptValue(value);
+                if (result.isValid)
+                    sData->setTerminationCodePoint(result.value);
+                else
+                    sData->logError() << "Could not set maximum byte count, invalid argument: " << value.toString();
+            }
+        }
         return true;
     }
     else if (name == s_encoding)

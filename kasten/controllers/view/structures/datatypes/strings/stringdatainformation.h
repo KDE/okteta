@@ -86,17 +86,18 @@ public:
     void setEncoding(StringType encoding);
     uint terminationCodePoint() const;
     void setTerminationCodePoint(uint term);
-    void setTerminationCodePoint(const QScriptValue& value, QScriptEngine* engine);
     uint maxCharCount() const;
     void setMaxCharCount(uint count);
-    void setMaxCharCount(const QScriptValue& value, QScriptEngine* engine);
     uint maxByteCount() const;
     void setMaxByteCount(uint count);
-    void setMaxByteCount(const QScriptValue& value, QScriptEngine* engine);
     int stringLength() const;
     int stringByteLength() const;
     uint terminationMode() const;
     QString valueAt(int index) const;
+    /** Removes this mode from the termination modes. If none is left, changes string to null terminated
+     * @param mode The mode to remove
+     */
+    void unsetTerminationMode(StringData::TerminationMode mode);
 private:
     QScopedPointer<DummyDataInformation> mDummy;
     QScopedPointer<StringData> mData;

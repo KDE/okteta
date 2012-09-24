@@ -61,8 +61,8 @@ public:
     virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     /** by default just sets value, if more logic is needed can be overridden */
     virtual void setLittleEndian(bool littleEndian);
-    uint terminationMode() const;
-    void setTerminationMode(uint mode);
+    TerminationMode terminationMode() const;
+    void setTerminationMode(TerminationMode mode);
 
     bool wasEof() const;
 
@@ -85,7 +85,7 @@ protected:
         uint maxBytes;
     } mLength;
     quint32 mTerminationCodePoint;
-    int mMode : 4;
+    uint mMode : 4;
     bool mLittleEndian : 1;
     bool mEofReached : 1;
 
@@ -97,12 +97,6 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(StringData::TerminationModes)
 inline uint StringData::terminationCodePoint() const
 {
     return mTerminationCodePoint;
-}
-
-inline void StringData::setTerminationCodePoint(uint term)
-{
-    mTerminationCodePoint = term;
-    mMode |= Sequence;
 }
 
 inline uint StringData::maxByteCount() const
@@ -136,12 +130,12 @@ inline void StringData::copyTerminationFrom(const StringData* data)
     mLength = data->mLength;
 }
 
-inline uint StringData::terminationMode() const
+inline StringData::TerminationMode StringData::terminationMode() const
 {
-    return mMode;
+    return static_cast<TerminationMode>(mMode);
 }
 
-inline void StringData::setTerminationMode(uint mode)
+inline void StringData::setTerminationMode(StringData::TerminationMode mode)
 {
     mMode = mode;
 }
@@ -151,5 +145,10 @@ inline bool StringData::wasEof() const
     return mEofReached;
 }
 
+
+inline void StringData::setLittleEndian(bool littleEndian)
+{
+    mLittleEndian = littleEndian;
+}
 
 #endif // STRINGDATA_H

@@ -96,22 +96,15 @@ bool ArrayDataInformation::setArrayLength(uint newLength)
     return true;
 }
 
-bool ArrayDataInformation::setArrayType(QScriptValue type)
+void ArrayDataInformation::setArrayType(DataInformation* newChildType)
 {
-    DataInformation* newChildType = ScriptValueConverter::convert(type, QLatin1String("dummy"), logger(),
-            this);
-    //return if conversion failed
-    if (!newChildType)
-    {
-        logError() << "Failed to parse new child type:" << type.toString();
-        return false;
-    }
+    Q_CHECK_PTR(newChildType);
     if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType())
     {
         //there is no need to change the type
         logInfo() << "New and old child type are identical, skipping: " << mData->primitiveType();
         delete newChildType;
-        return true;
+        return;
     }
     newChildType->setParent(this);
     uint len = mData->length();
@@ -133,7 +126,6 @@ bool ArrayDataInformation::setArrayType(QScriptValue type)
         //only the type of the array changed -> emit that this has changed data
         topLevel->setChildDataChanged();
     }
-    return true; //success
 }
 
 QScriptValue ArrayDataInformation::childType() const

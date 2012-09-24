@@ -79,7 +79,10 @@ public:
     virtual bool isArray() const;
 
     bool setArrayLength(uint newLength);
-    bool setArrayType(QScriptValue type);
+    /** Sets the new array type
+     * @param newChildtype the new type (ownership is always taken, do not use anymore after this call!)
+     */
+    void setArrayType(DataInformation* newChildtype);
 
     QScriptValue childType() const;
     QScriptValue lengthFunction() const;

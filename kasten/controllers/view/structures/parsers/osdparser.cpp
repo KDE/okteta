@@ -183,7 +183,6 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
 
         if (!data)
         {
-            logger->error() << "Failed to parse:" << toRawXML(elem);
             data = new DummyDataInformation(0,
                     fileInfo.absoluteFilePath() + QLatin1String("_element") + QString::number(count));
         }
@@ -205,11 +204,10 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
 
         QMap<AllPrimitiveTypes, QString> defs;
         const QString enumName = readProperty(elem, PROPERTY_NAME, i18n("&lt;invalid name&gt;"));
-        const QString typeStr = readProperty(elem, QLatin1String("type"));
+        const QString typeStr = readProperty(elem, PROPERTY_TYPE);
         if (typeStr.isEmpty())
         {
-            logger->error(enumName) << "Skipping enum definition, since no type attribute was found:"
-                    << toRawXML(elem);
+            logger->error(enumName) << "Skipping enum definition, since no type attribute was found.";
             continue;
         }
         LoggerWithContext lwc(logger, QLatin1String("enum values (") + enumName + QLatin1Char(')'));
@@ -321,7 +319,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     OsdParserInfo newInfo(info);
     DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
     newInfo.parent = &dummy;
-    newInfo.name = QLatin1String("<array type>");
+    newInfo.name = NAME_ARRAY_TYPE;
     apd.arrayType = parseElement(childElement, newInfo);
     return DataInformationFactory::newArray(apd);
 }
@@ -336,7 +334,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
     OsdParserInfo newInfo(info);
     DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
     newInfo.parent = &dummy;
-    newInfo.name = QLatin1String("<pointer value type>");
+    newInfo.name = NAME_POINTER_VALUE_TYPE;
 
     if (!typeElement.isNull())
     {
@@ -356,7 +354,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
     }
     if (!typeString.isEmpty())
     {
-        LoggerWithContext lwc(info.logger, info.context() + QLatin1String(" (pointer value type)"));
+        LoggerWithContext lwc(info.logger, info.context() + NAME_POINTER_VALUE_TYPE);
         ppd.valueType = PrimitiveFactory::newInstance(PROPERTY_TYPE, typeString, lwc);
     }
 
@@ -379,7 +377,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
             return 0;
         }
     }
-    newInfo.name = QLatin1String("<pointer target>");
+    newInfo.name = NAME_POINTER_TARGET;
     ppd.pointerTarget = parseElement(childElement, newInfo);
     return DataInformationFactory::newPointer(ppd);
 }
@@ -526,20 +524,6 @@ QString OsdParser::readProperty(const QDomElement& elem, const QString& property
         return elem.text();
     else
         return defaultVal;
-}
-
-QString OsdParser::toRawXML(const QDomElement& elem) const
-{
-    QString ret = QLatin1Char('<') + elem.tagName();
-    QDomNamedNodeMap attrs = elem.attributes();
-    for (int i = 0; i < attrs.size(); ++i)
-    {
-        QDomAttr attr = attrs.item(i).toAttr();
-        ret += QLatin1Char(' ') + attr.name() + QLatin1String("=\"") + attr.value()
-                + QLatin1Char('"');
-    }
-    ret += QLatin1String("/>");
-    return ret;
 }
 
 QScriptValue OsdParser::functionSafeEval(QScriptEngine* engine, const QString& str)

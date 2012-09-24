@@ -170,7 +170,7 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name);
     childInfo.parent = &dummy;
-    childInfo.name = QLatin1String("<array type>");
+    childInfo.name = NAME_ARRAY_TYPE;
     apd.arrayType = toDataInformation(childType, childInfo);
 
     return DataInformationFactory::newArray(apd);
@@ -224,9 +224,9 @@ PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& i
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name);
     childInfo.parent = &dummy;
-    childInfo.name = QLatin1String("<pointer target>");
+    childInfo.name = NAME_POINTER_TARGET;
     ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET), childInfo);
-    childInfo.name = QLatin1String("<pointer value type>");
+    childInfo.name = NAME_POINTER_VALUE_TYPE;
     ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE), childInfo);
 
     return DataInformationFactory::newPointer(ppd);

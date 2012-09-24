@@ -96,8 +96,6 @@ private:
     static QScriptValue functionSafeEval(QScriptEngine* engine, const QString& str);
 
 private:
-    /** @return the element as an XML string (excluding children) */
-    QString toRawXML(const QDomElement& elem) const;
     /** Generate a length function referencing @p elemName
      *  This is needed to support the old way of defining dynamic arrays */
     static QString generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,

@@ -241,6 +241,7 @@ BitCount32 StringDataInformation::childSize(uint index) const
 
 QString StringDataInformation::childTypeName(uint index) const
 {
+    Q_UNUSED(index)
     return QString(); //XXX should there be something here?
 }
 
@@ -271,7 +272,9 @@ QScriptValue StringDataInformation::childToScriptValue(uint index, QScriptEngine
 
 BitCount64 StringDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
+    Q_UNUSED(start)
     Q_ASSERT(child->isDummy());
+    Q_ASSERT(child->parent() == this);
     Q_ASSERT(child == mDummy.data());
     uint index = mDummy->dummyIndex();
     Q_ASSERT(index < mData->count());
@@ -281,86 +284,6 @@ BitCount64 StringDataInformation::childPosition(const DataInformation* child, Ok
         offs += mData->sizeAt(i);
     }
     return offs;
-}
-
-//TODO remove engine parameter
-//FIXME clean this up (scriptlogger)!
-
-void StringDataInformation::setMaxByteCount(const QScriptValue& value, QScriptEngine* engine)
-{
-    if (value.isNull())
-    {
-        //clear the mode and set to null terminated of none is left
-        mData->setTerminationMode(mData->terminationMode() & ~StringData::ByteCount);
-        if (mData->terminationMode() == StringData::None)
-            mData->setTerminationCodePoint(0);
-    }
-    else if (value.isNumber())
-    {
-        mData->setMaxByteCount(value.toUInt32());
-    }
-    else
-    {
-        engine->currentContext()->throwError(QScriptContext::TypeError,
-            QLatin1String("Setting max byte count: value was not a number."));
-    }
-}
-
-void StringDataInformation::setMaxCharCount(const QScriptValue& value, QScriptEngine* engine)
-{
-    if (value.isNull())
-    {
-        //clear the mode and set to null terminated of none is left
-        mData->setTerminationMode(mData->terminationMode() & ~StringData::CharCount);
-        if (mData->terminationMode() == StringData::None)
-            mData->setTerminationCodePoint(0);
-    }
-    else if (value.isNumber())
-    {
-        mData->setMaxCharCount(value.toUInt32());
-    }
-    else
-    {
-        engine->currentContext()->throwError(QScriptContext::TypeError,
-            QLatin1String("Setting max char count: value was not a number."));
-    }
-}
-
-void StringDataInformation::setTerminationCodePoint(const QScriptValue& value, QScriptEngine* engine)
-{
-    uint cp = 0;
-    if (value.isNull())
-    {
-        //clear the mode and set to null terminated of none is left
-        mData->setTerminationMode(mData->terminationMode() & ~StringData::Sequence);
-        if (mData->terminationMode() == StringData::None)
-            mData->setTerminationCodePoint(0);
-    }
-    else if (value.isString()) {
-        QString str = value.toString();
-        if (str.length() != 1) {
-            engine->currentContext()->throwError(QScriptContext::RangeError,
-                QLatin1String("Setting termination char: expected one char or a number, got a string with length ")
-                + QString::number(str.length()));
-            return;
-        }
-        cp = str[0].unicode();
-    }
-    else if (value.isNumber())
-    {
-        cp = value.toUInt32();
-    }
-    else
-    {
-        engine->currentContext()->throwError(QScriptContext::TypeError,
-            QLatin1String("Setting termination char: value was not a number."));
-        return;
-    }
-    if (cp > StringData::UNICODE_MAX)
-            engine->currentContext()->throwError(QLatin1String("Setting termination char: U+")
-                + QString::number(cp, 16) + QLatin1String("is out of unicode range!"));
-    else
-        mData->setTerminationCodePoint(cp);
 }
 
 QVariant StringDataInformation::data(int column, int role) const
@@ -378,4 +301,12 @@ QVariant StringDataInformation::data(int column, int role) const
 bool StringDataInformation::isString() const
 {
     return true;
+}
+
+void StringDataInformation::unsetTerminationMode(StringData::TerminationMode mode)
+{
+    //clear the mode and set to null terminated of none is left
+    mData->setTerminationMode(StringData::TerminationMode(mData->terminationMode() & ~mode));
+    if (mData->terminationMode() == StringData::None)
+        mData->setTerminationCodePoint(0);
 }

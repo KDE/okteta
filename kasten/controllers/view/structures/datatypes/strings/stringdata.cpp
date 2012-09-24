@@ -36,7 +36,14 @@ StringData::~StringData()
 
 }
 
-void StringData::setLittleEndian(bool littleEndian)
+void StringData::setTerminationCodePoint(uint term)
 {
-    mLittleEndian = littleEndian;
+    if (term > UNICODE_MAX)
+    {
+        mParent->logError() << "Attempting to set termination code point which is larger"
+                " than 0x10ffff (max unicode):" << term;
+        return;
+    }
+    mTerminationCodePoint = term;
+    mMode |= Sequence;
 }
