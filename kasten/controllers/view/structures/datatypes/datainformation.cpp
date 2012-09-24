@@ -284,7 +284,12 @@ QVariant DataInformation::data(int column, int role) const
     if (role == Qt::DisplayRole)
     {
         if (column == ColumnName)
-            return name();
+        {
+            if (mParent && mParent->isArray())
+                return QString(QLatin1Char('[') + QString::number(row()) + QLatin1Char(']'));
+            else
+                return name();
+        }
         if (column == ColumnType)
             return typeName();
         if (column == ColumnValue)

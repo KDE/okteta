@@ -72,11 +72,6 @@ ArrayDataInformation::~ArrayDataInformation()
 
 bool ArrayDataInformation::setArrayLength(uint newLength)
 {
-    if (Q_UNLIKELY(!mData))
-    {
-        kWarning() << "mData == null";
-        return false;
-    }
     if (uint(newLength) > MAX_LEN)
     {
         logWarn() << QString(QLatin1String("new array length is too large (%1), limiting to (%2)"))
@@ -103,12 +98,6 @@ bool ArrayDataInformation::setArrayLength(uint newLength)
 
 bool ArrayDataInformation::setArrayType(QScriptValue type)
 {
-    if (Q_UNLIKELY(!mData))
-    {
-        kWarning() << "mData == null";
-        return false;
-    }
-
     DataInformation* newChildType = ScriptValueConverter::convert(type, QLatin1String("dummy"), logger(),
             this);
     //return if conversion failed
@@ -129,43 +118,33 @@ bool ArrayDataInformation::setArrayType(QScriptValue type)
     TopLevelDataInformation* topLevel = topLevelDataInformation();
     if (len > 0)
     {
+        //first create with length of 0, then change length to actual length (to ensure model is correct)
         topLevel->_childrenAboutToBeRemoved(this, 0, len - 1);
-        mData.reset(0);
+        mData.reset(arrayDataFromType(0, newChildType));
         topLevel->_childrenRemoved(this, 0, len - 1);
         topLevel->_childrenAboutToBeInserted(this, 0, len - 1);
-        mData.reset(arrayDataFromType(len, newChildType));
+        mData->setLength(len);
         topLevel->_childrenInserted(this, 0, len - 1);
     }
     else
     {
         //no need to emit the signals, which cause expensive model update
         mData.reset(arrayDataFromType(len, newChildType));
+        //only the type of the array changed -> emit that this has changed data
+        topLevel->setChildDataChanged();
     }
     return true; //success
 }
 
 QScriptValue ArrayDataInformation::childType() const
 {
-    if (mData)
-        return mData->typeName().toLower();
-    return QString();
+    return mData->typeName().toLower();
 }
 
 QVariant ArrayDataInformation::childData(int row, int column, int role) const
-        {
-    if (Q_UNLIKELY(!mData))
-        return QVariant();
+{
     Q_ASSERT(uint(row) < mData->length());
-    if (column == 0 && role == Qt::DisplayRole)
-    {
-        //name is being asked for
-        return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
-    }
-    else
-    {
-        //just delegate to child
-        return mData->dataAt(row, column, role);
-    }
+    return mData->dataAt(row, column, role);
 }
 
 QScriptValue ArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
@@ -176,13 +155,13 @@ QScriptValue ArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHa
 }
 
 QWidget* ArrayDataInformation::createEditWidget(QWidget*) const
-        {
+{
     Q_ASSERT_X(false, "ArrayDataInformation::createEditWidget", "this should never happen!");
     return 0;
 }
 
 QVariant ArrayDataInformation::dataFromWidget(const QWidget*) const
-        {
+{
     Q_ASSERT_X(false, "ArrayDataInformation::dataFromWidget", "this should never happen!");
     return QVariant();
 }
@@ -194,11 +173,6 @@ void ArrayDataInformation::setWidgetData(QWidget*) const
 
 BitCount64 ArrayDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
-    if (Q_UNLIKELY(!mData))
-    {
-        kWarning() << "mData == null";
-        return 0;
-    }
     if (mParent->isTopLevel())
         return start * 8 + mData->offset(child);
     else
@@ -208,11 +182,6 @@ BitCount64 ArrayDataInformation::childPosition(const DataInformation* child, Okt
 qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    if (Q_UNLIKELY(!mData))
-    {
-        kWarning() << "mData == null";
-        return -1;
-    }
     if (*bitOffset != 0)
     {
         //TODO remove this, it will probably cause issues
@@ -251,11 +220,6 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
 bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
         Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
-    if (Q_UNLIKELY(!mData))
-    {
-        kWarning() << "mData == null";
-        return false;
-    }
     if (bitOffset != 0)
     {
         logWarn() << "bit offset != 0 (" << bitOffset << "), adding padding,"
@@ -329,8 +293,6 @@ AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInfo
 
 QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine,
         ScriptHandlerInfo* handlerInfo) const
-        {
-    if (Q_UNLIKELY(!mData))
-        return QScriptValue();
+{
     return mData->toScriptValue(index, engine, handlerInfo);
 }

@@ -50,7 +50,6 @@ void ComplexArrayData::appendChildren(uint from, uint to)
     for (uint i = from; i < to; ++i)
     {
         DataInformation* arrayElem = mChildType->clone();
-        arrayElem->setName(QString::number(i));
         arrayElem->setParent(mParent);
         mChildren.append(arrayElem);
     }
@@ -81,6 +80,9 @@ DataInformation* ComplexArrayData::childAt(unsigned int idx)
 QVariant ComplexArrayData::dataAt(uint index, int column, int role)
 {
     Q_ASSERT(index < uint(mChildren.size()));
+    //this is slightly more efficient that delegating to the child
+    if (role == Qt::DisplayRole && column == DataInformation::ColumnName)
+        return QString(QLatin1Char('[') + QString::number(index) + QLatin1Char(']'));
     return mChildren.at(index)->data(column, role);
 }
 
