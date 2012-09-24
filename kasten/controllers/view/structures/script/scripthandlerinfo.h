@@ -34,10 +34,11 @@ class StringScriptClass;
 class BitfieldScriptClass;
 class PointerScriptClass;
 class QScriptEngine;
+class ScriptLogger;
 
 class ScriptHandlerInfo {
 public:
-    explicit ScriptHandlerInfo(QScriptEngine* engine);
+    explicit ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger);
     ~ScriptHandlerInfo();
 
     /** The type of function that is being evaluated (most writing is only allowed when updating) */
@@ -55,7 +56,9 @@ public:
     /** @return The mode this handler is currently in (determines which properties are accessible */
     inline Mode mode() const { return mMode; }
     inline void setMode(Mode m) { mMode = m; }
+    inline ScriptLogger* logger() { return mLogger; }
 private:
+    ScriptLogger* mLogger;
     Mode mMode;
 private:
     Q_DISABLE_COPY(ScriptHandlerInfo)

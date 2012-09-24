@@ -134,7 +134,8 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         CommonParsedData cpd(info);
         QString byteOrderStr = value.property(PROPERTY_BYTEORDER).toString();
         if (!byteOrderStr.isEmpty())
-            cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr, info);
+            cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr,
+                    LoggerWithContext(info.logger, info.context()));
         cpd.updateFunc = value.property(PROPERTY_UPDATE_FUNC);
         cpd.validationFunc = value.property(PROPERTY_VALIDATION_FUNC);
         if (!DataInformationFactory::commonInitialization(returnVal, cpd))
@@ -223,9 +224,9 @@ PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& i
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name);
     childInfo.parent = &dummy;
-    childInfo.name = QLatin1String("<pointer value type>");
-    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET), childInfo);
     childInfo.name = QLatin1String("<pointer target>");
+    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET), childInfo);
+    childInfo.name = QLatin1String("<pointer value type>");
     ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE), childInfo);
 
     return DataInformationFactory::newPointer(ppd);

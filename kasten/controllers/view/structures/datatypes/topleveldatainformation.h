@@ -74,10 +74,10 @@ public:
      */
     void read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
             const Okteta::ArrayChangeMetricsList& changesList, bool forceRead);
-    void updateElement(DataInformation* elem);
     QScriptEngine* scriptEngine() const;
 
     DataInformation* actualDataInformation() const;
+    void setActualDataInformation(DataInformation* newData);
     bool isValid() const;
     void lockPositionToOffset(Okteta::Address offset, const Okteta::AbstractByteArrayModel* model);
     void unlockPosition(const Okteta::AbstractByteArrayModel* model);

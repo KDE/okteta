@@ -86,6 +86,7 @@ template<typename T, typename C>
 qint64 BasicPrimitiveDataInformation<T, C>::readData(Okteta::AbstractByteArrayModel* input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
     Q_ASSERT(BitCount64(input->size() - address) * 8 - *bitOffset >= bitsRemaining);
     const bool wasValid = mWasAbleToRead;
     if (bitsRemaining < BitCount64(size()))

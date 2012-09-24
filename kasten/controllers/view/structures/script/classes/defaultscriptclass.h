@@ -36,6 +36,7 @@ class ScriptHandlerInfo;
 class DefaultScriptClass : public QScriptClass
 {
     Q_DISABLE_COPY(DefaultScriptClass)
+
 public:
     typedef DataInformation* DataInfPtr;
     typedef QVector<QPair<QScriptString, QScriptValue::PropertyFlags> > PropertyInfoList;
@@ -60,6 +61,8 @@ protected:
     virtual bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) = 0;
     static QScriptValue Default_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 
+private:
+    void setDataType(const QScriptValue& value, DataInformation* data);
 protected:
     QScriptString s_valid;
     QScriptString s_wasAbleToRead;
@@ -67,6 +70,9 @@ protected:
     QScriptString s_parent;
     QScriptString s_byteOrder;
     QScriptString s_name;
+    QScriptString s_datatype;
+    QScriptString s_updateFunc;
+    QScriptString s_validationFunc;
     /** Contains all properties of this class, classes inheriting should add their own properties to this list */
     PropertyInfoList mIterableProperties;
     QScriptValue mDefaultPrototype;

@@ -205,9 +205,10 @@ QString PrimitiveArrayData<type>::typeName() const
 template<PrimitiveDataTypeEnum type>
 int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
 {
-    Q_UNUSED(data);
+    if (data == this->mDummy.data())
+        return this->mDummy->dummyIndex();
     Q_ASSERT_X(false, "PrimitiveArrayData::indexOf", "This should never be called");
-    return 0;
+    return -1;
 }
 
 template<PrimitiveDataTypeEnum type>

@@ -48,7 +48,7 @@ StructureDataInformation::StructureDataInformation(const StructureDataInformatio
 qint64 StructureDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    //first of all update the structure:
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
     TopLevelDataInformation* top = topLevelDataInformation();
     Q_CHECK_PTR(top);
 
@@ -58,8 +58,15 @@ qint64 StructureDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     for (int i = 0; i < mChildren.size(); i++)
     {
         DataInformation* next = mChildren.at(i);
-        top->updateElement(next);
-        qint64 currentReadBits = next->readData(input, address + readBytes,
+        top->scriptHandler()->updateDataInformation(next);
+        //next may be a dangling pointer now, reset it
+        DataInformation* newNext = mChildren.at(i);
+        if (next != newNext)
+        {
+            logInfo() << "Child at index " << i << " was replaced.";
+            top->setChildDataChanged();
+        }
+        qint64 currentReadBits = newNext->readData(input, address + readBytes,
                 bitsRemaining - readBits, bitOffset);
         if (currentReadBits == -1)
         {

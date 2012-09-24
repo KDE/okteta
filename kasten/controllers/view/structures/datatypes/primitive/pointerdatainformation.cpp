@@ -80,6 +80,7 @@ bool PointerDataInformation::setData(const QVariant& value, Okteta::AbstractByte
 
 qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
     qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
     mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
 
@@ -89,7 +90,6 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
         // Enqueue for later reading of the destination
         topLevelDataInformation()->enqueueReadData(this);
     }
-
     return retVal;
 }
 
@@ -103,12 +103,13 @@ BitCount64 PointerDataInformation::childPosition(const DataInformation* child, O
 int PointerDataInformation::indexOf(const DataInformation* const data) const
 {
     Q_ASSERT(data == mPointerTarget.data());
-    return 0;
+    return data == mPointerTarget.data() ? 0 : -1;
 }
 
 void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *input, Okteta::Address address)
 {
     Q_UNUSED(address); //TODO offsets
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
     quint8 childBitOffset = 0;
     // Compute the destination offset
     const quint64 pointer = mValue->value().ulongValue;
@@ -125,8 +126,14 @@ void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *inp
         return;
     }
     //update the child now
-    topLevelDataInformation()->updateElement(mPointerTarget.data());
-    // Let the child do the work
+    DataInformation* oldTarget = mPointerTarget.data();
+    topLevelDataInformation()->scriptHandler()->updateDataInformation(mPointerTarget.data());
+    // Let the child do the work (maybe different than before now)
+    if (mPointerTarget.data() != oldTarget)
+    {
+        logInfo() << "Pointer target was replaced.";
+        topLevelDataInformation()->setChildDataChanged();
+    }
     mPointerTarget->readData(input, newAddress, (input->size() - newAddress) * 8, &childBitOffset);
 }
 

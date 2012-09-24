@@ -139,6 +139,7 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
             return i;
     }
     mParent->logWarn() << data->fullObjectPath() << "is not a valid child!";
+    Q_ASSERT(false); //should never land here
     return -1;
 }
 
@@ -159,8 +160,16 @@ qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta:
     for (int i = 0; i < mChildren.size(); i++)
     {
         DataInformation* next = mChildren.at(i);
-        top->updateElement(next);
-        qint64 currentReadBits = next->readData(input, address + readBytes,
+        top->scriptHandler()->updateDataInformation(next);
+        //next may be a dangling pointer now, reset it
+        //but should not be
+        DataInformation* newNext = mChildren.at(i);
+        if (next != newNext)
+        {
+            mParent->logWarn() << "Array child at index " << i << " was replaced.";
+            top->setChildDataChanged();
+        }
+        qint64 currentReadBits = newNext->readData(input, address + readBytes,
                 bitsRemaining - readBits, &bitOffset);
         if (currentReadBits == -1)
         {

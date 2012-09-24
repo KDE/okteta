@@ -190,26 +190,9 @@ qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okt
         bitsRemaining &= BitCount64(~7); //unset lower 3 bits to make it divisible by 8
         address++;
     }
+
     //update the length of the array
-    if (mLengthFunction.isValid())
-    {
-        Q_ASSERT(mLengthFunction.isFunction());
-        //TODO utility function for calling script value
-        TopLevelDataInformation* top = topLevelDataInformation();
-        Q_CHECK_PTR(top);
-        ScriptHandlerInfo* handlerInfo = top->scriptHandler()->handlerInfo();
-        QScriptValue thisObject = this->toScriptValue(top->scriptEngine(), handlerInfo);
-        QScriptValue mainStruct = mainStructure()->toScriptValue(top->scriptEngine(), handlerInfo);
-        QScriptValueList args;
-        args << mainStruct;
-        handlerInfo->setMode(ScriptHandlerInfo::DeterminingLength);
-        QScriptValue result = mLengthFunction.call(thisObject, args);
-        if (result.isNumber())
-            setArrayLength(result.toInt32());
-        else
-            logError() << "Length function did not return a number! Result was: " << result.toString();
-        handlerInfo->setMode(ScriptHandlerInfo::None);
-    }
+    topLevelDataInformation()->scriptHandler()->updateLength(this);
 
     //FIXME do not add this padding
     qint64 ret = mData->readData(input, address, bitsRemaining);

@@ -23,12 +23,16 @@
 #include "defaultscriptclass.h"
 
 #include "../../datatypes/datainformation.h"
+#include "../../datatypes/topleveldatainformation.h"
+#include "../../datatypes/uniondatainformation.h"
+#include "../../datatypes/structuredatainformation.h"
+#include "../../datatypes/primitive/pointerdatainformation.h"
 #include "../../parsers/parserutils.h"
+#include "../../parsers/scriptvalueconverter.h"
 #include "../scriptlogger.h"
 #include "../scripthandlerinfo.h"
 
 #include <KDebug>
-
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine), mHandlerInfo(handlerInfo)
@@ -39,19 +43,24 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     s_parent = engine->toStringHandle(ParserStrings::PROPERTY_PARENT);
     s_byteOrder = engine->toStringHandle(ParserStrings::PROPERTY_BYTEORDER);
     s_name = engine->toStringHandle(ParserStrings::PROPERTY_NAME);
+    s_datatype = engine->toStringHandle(ParserStrings::PROPERTY_DATATYPE);
+    s_updateFunc = engine->toStringHandle(ParserStrings::PROPERTY_UPDATE_FUNC);
+    s_validationFunc = engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_FUNC);
     qScriptRegisterMetaType<DataInfPtr>(engine, DefaultScriptClass::toScriptValue, DefaultScriptClass::fromScriptValue);
 
     //TODO remove, every subclass should have proto
     mDefaultPrototype = engine->newObject();
     mDefaultPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Default_proto_toString));
     //add all our properties
-    //TODO make name writable
     mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    mIterableProperties.append(qMakePair(s_name, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_valid, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_validationError, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_datatype, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
 DefaultScriptClass::~DefaultScriptClass()
@@ -78,15 +87,12 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        kWarning() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
         return 0;
     }
     if (name == s_valid || name == s_validationError)
     {
-        if (mode == ScriptHandlerInfo::Validating)
-            return flags;
-        else
-            return flags &= ~HandlesWriteAccess;
+        return flags &= ~HandlesWriteAccess;
     }
     if (mode != ScriptHandlerInfo::Updating)
     {
@@ -95,17 +101,14 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
         flags &= ~HandlesWriteAccess;
     }
 
-    if (name == s_byteOrder)
+    if (name == s_byteOrder || name == s_name || name == s_updateFunc
+            || name == s_validationFunc || name == s_datatype)
     {
         return flags;
     }
     else if (name == s_wasAbleToRead || name == s_parent)
     {
         return flags &= ~HandlesWriteAccess;
-    }
-    else if (name == s_name)
-    {
-        return flags &= ~HandlesWriteAccess; //TODO allow write access
     }
     else if (queryAdditionalProperty(data, name, &flags, id))
     {
@@ -124,7 +127,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        kWarning() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
         return QScriptValue();
     }
     if (name == s_valid)
@@ -142,6 +145,18 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
         if (data->parent()->isTopLevel())
             return engine()->nullValue();
         return data->parent()->asDataInformation()->toScriptValue(engine(), mHandlerInfo);
+    }
+    else if (name == s_datatype)
+    {
+        return data->typeName();
+    }
+    else if (name == s_updateFunc)
+    {
+        return data->updateFunc();
+    }
+    else if (name == s_validationFunc)
+    {
+        return data->validationFunc();
     }
     else if (name == s_validationError)
     {
@@ -165,6 +180,80 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     }
 }
 
+void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation* data)
+{
+    DataInformation* thisObj = qscriptvalue_cast<DataInformation*>(engine()->currentContext()->thisObject().data());
+    Q_CHECK_PTR(thisObj);
+    const bool isThisObj = thisObj == data;
+    if (data->hasBeenUpdated())
+    {
+        //this element has already been updated (and probably read, replacing it could cause crazy errors
+        data->logError() << "Attempting to replace an already updated object. This could cause errors."
+                "Current this object: " << (thisObj ? thisObj->fullObjectPath() : QString());
+        return;
+    }
+    //change the type of the underlying object
+    DataInformation* newType = ScriptValueConverter::convert(value, data->name(), data->logger(), data);
+    if (!newType)
+    {
+        data->logError() << "Failed to set new type, could not convert value!";
+        return;
+    }
+
+    DataInformationBase* parent = data->parent();
+    Q_CHECK_PTR(parent);
+    TopLevelDataInformation* top = data->topLevelDataInformation();
+    Q_CHECK_PTR(top);
+    //only if parent is toplevel, struct or union, can we replace
+    bool replaced = false;
+    if (parent->isTopLevel())
+    {
+        parent->asTopLevel()->setActualDataInformation(newType);
+        replaced = true;
+    }
+    else if (parent->isStruct())
+    {
+        StructureDataInformation* stru = parent->asStruct();
+        int index = stru->indexOf(data);
+        Q_ASSERT(index != -1);
+        Q_ASSERT(uint(index) < stru->childCount());
+        replaced = stru->replaceChildAt(index, newType);
+        if (!replaced)
+            stru->logError() << "failed to replace child at index" << index;
+    }
+    else if (parent->isUnion())
+    {
+        UnionDataInformation* un = parent->asUnion();
+        int index = un->indexOf(data);
+        Q_ASSERT(index != -1);
+        Q_ASSERT(uint(index) < un->childCount());
+        replaced = un->replaceChildAt(index, newType);
+        if (!replaced)
+            un->logError() << "failed to replace child at index" << index;
+    }
+    else if (parent->isPointer())
+    {
+        parent->asPointer()->setPointerTarget(newType);
+        replaced = true;
+    }
+    else
+    {
+        data->logError() << "Failed to set data type since element is not toplevel and parent"
+                " is neither struct nor union nor pointer.";
+    }
+    if (replaced)
+    {
+        top->setChildDataChanged();
+        //if the current object was "this" in javascript we have to replace it
+        if (isThisObj)
+            engine()->currentContext()->setThisObject(newType->toScriptValue(engine(), mHandlerInfo));
+    }
+    else
+    {
+        delete newType; //could not set new type
+    }
+}
+
 void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value)
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
@@ -172,36 +261,45 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        kWarning() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
         return;
     }
     if (mode != ScriptHandlerInfo::Updating)
     {
-        //only way write access is allowed is when validating: valid and validationError
-        if (mode == ScriptHandlerInfo::Validating && name == s_valid)
-            data->setValidationSuccessful(value.toBool());
-        else if (mode == ScriptHandlerInfo::Validating && name == s_validationError)
-            data->setValidationError(value.toString());
-        else
-            data->logError() << "Writing to property" << name.toString() << "is not allowed when not updating.";
+        data->logError() << "Writing to property" << name.toString() << "is only allowed when updating.";
         return;
     }
     Q_ASSERT(mode == ScriptHandlerInfo::Updating);
 
     if (name == s_byteOrder)
     {
-        ParserInfo parInfo(data->fullObjectPath(), data->logger(), 0);
-        data->setByteOrder(ParserUtils::byteOrderFromString(value.toString(), parInfo));
+        data->setByteOrder(ParserUtils::byteOrderFromString(value.toString(),
+                LoggerWithContext(data->logger(), data->fullObjectPath())));
     }
-    else if (name == s_wasAbleToRead || name == s_name || name == s_valid || name == s_validationError)
+    else if (name == s_datatype)
+    {
+        //change the type of the underlying object
+        setDataType(value, data);
+    }
+    else if (name == s_updateFunc)
+    {
+        data->setUpdateFunc(value);
+    }
+    else if (name == s_validationFunc)
+    {
+        data->setValidationFunc(value);
+    }
+    else if (name == s_name)
+    {
+        data->setName(value.toString());
+    }
+    else if (name == s_wasAbleToRead || name == s_valid || name == s_validationError)
     {
         data->logError() << "Writing to property " << s_valid.toString() << "is not allowed when updating.";
-        //TODO allow s_name (but will need signal emitted for update?)
         return; //can't write
     }
     else
     {
-        //TODO access by name
         bool setAdditional = setAdditionalProperty(data, name, id, value);
         if (setAdditional)
             return;
@@ -220,7 +318,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        kWarning() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
         return 0;
     }
     if (name == s_valid || name == s_validationError)

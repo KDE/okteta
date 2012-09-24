@@ -259,7 +259,9 @@ inline void CommonParserTest::testToStringEncoding()
 {
     QFETCH(QString, str);
     QFETCH(int, expected);
-    StringDataInformation::StringType type = ParserUtils::toStringEncoding(str);
+    QScopedPointer<ScriptLogger> logger(new ScriptLogger());
+    StringDataInformation::StringType type =
+            ParserUtils::toStringEncoding(str, LoggerWithContext(logger.data(), QString()));
     QCOMPARE((int)type, expected);
 }
 

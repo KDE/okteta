@@ -490,7 +490,8 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
         CommonParsedData cpd(info);
         QString byteOrderStr = readProperty(elem, PROPERTY_BYTEORDER);
         if (!byteOrderStr.isEmpty())
-            cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr, oldInfo);
+            cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr,
+                    LoggerWithContext(info.logger, info.context()));
         cpd.updateFunc = functionSafeEval(info.engine, readProperty(elem, PROPERTY_UPDATE_FUNC));
         cpd.validationFunc = functionSafeEval(info.engine, readProperty(elem, PROPERTY_VALIDATION_FUNC));
         if (!DataInformationFactory::commonInitialization(data, cpd))

@@ -179,7 +179,8 @@ StringDataInformation* DataInformationFactory::newString(const StringParsedData&
         pd.error() << "Both maxCharCount and maxByteCount are set, only one is allowed.";
         return 0;
     }
-    StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(pd.encoding);
+    StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(pd.encoding,
+            LoggerWithContext(pd.logger, pd.context()));
     if (encoding == StringDataInformation::InvalidEncoding)
     {
         pd.error() << "Bad string encoding given:" << pd.encoding;

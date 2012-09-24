@@ -102,6 +102,7 @@ namespace ParserStrings {
     const QString PROPERTY_ABLE_TO_READ = QLatin1String("wasAbleToRead");
     const QString PROPERTY_UPDATE_FUNC = QLatin1String("updateFunc");
     const QString PROPERTY_VALIDATION_FUNC = QLatin1String("validationFunc");
+    const QString PROPERTY_DATATYPE = QLatin1String("datatype");
     //enum
     const QString PROPERTY_ENUM_VALUES = QLatin1String("enumValues");
     //this one is javascript only
@@ -151,10 +152,10 @@ namespace ParserUtils
     /** @see ParserUtils::intFromScriptValue() */
     ParsedNumber<uint> uintFromScriptValue(const QScriptValue& val);
 
-    DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, const ParserInfo& info);
+    DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, const LoggerWithContext& logger);
     QString byteOrderToString(DataInformation::DataInformationEndianess order);
 
-    StringDataInformation::StringType toStringEncoding(const QString& str);
+    StringDataInformation::StringType toStringEncoding(const QString& str, const LoggerWithContext& logger);
 
 }
 

@@ -31,7 +31,6 @@ class DataInformationWithChildren: public DataInformation
 protected:
     QVector<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
-    virtual int indexOf(const DataInformation* const data) const;
 public:
     explicit DataInformationWithChildren(const QString& name, const QVector<DataInformation*>& children
             = QVector<DataInformation*>(), DataInformation* parent = 0);
@@ -44,6 +43,14 @@ public:
     virtual BitCount32 childSize(uint index) const;
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
+
+    /** replaces child at @p index with @p newChild.
+     * @param index the index of the child
+     * @param newChild the new child (ownership is taken if replacing is successful,
+     *  otherwise it must be deleted)
+     * @return true if replacing was successful, false otherwise */
+    bool replaceChildAt(unsigned int index, DataInformation* newChild);
+    virtual int indexOf(const DataInformation* const data) const;
 
     virtual DataInformation* childAt(unsigned int index) const;
     virtual bool canHaveChildren() const;

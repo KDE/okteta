@@ -171,6 +171,7 @@ void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
 
 bool StructTool::setData(const QVariant& value, int role, DataInformation* item, uint row)
 {
+    Q_UNUSED(row)
     if (!d->mByteArrayModel)
         return false;
     if (role != Qt::EditRole)

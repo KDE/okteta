@@ -93,6 +93,8 @@ void UnionDataInformationTest::testReadData1()
     QFETCH(uint, address);
     QFETCH(quint8, offset);
     QFETCH(quint64, bitsRemaining);
+    //update needed before read
+    top.scriptHandler()->updateDataInformation(un);
     qint64 read = un->readData(model.data(), address, bitsRemaining, &offset);
     QFETCH(qint64, readBitsTotal);
     QCOMPARE(read, readBitsTotal);

@@ -31,6 +31,7 @@
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/enumdatainformation.h"
 #include "view/structures/datatypes/primitive/flagdatainformation.h"
+#include "view/structures/datatypes/primitive/pointerdatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
@@ -42,6 +43,7 @@
 #include "view/structures/datatypes/uniondatainformation.h"
 #include "view/structures/script/scripthandler.h"
 #include "view/structures/script/scriptengineinitializer.h"
+#include "view/structures/parsers/scriptvalueconverter.h"
 
 class ScriptClassesTest : public QObject
 {
@@ -61,6 +63,7 @@ private Q_SLOTS:
     void initTestCase();
     //check that all properties are available in the iterator
     void checkIterators();
+    void testReplaceObject(); //check replacing datatype
     void cleanupTestCase();
 
 private:
@@ -100,15 +103,16 @@ private:
 
 void ScriptClassesTest::initTestCase()
 {
-    //TODO allow changing name -> no longer read only?
-    commonProperties << pair("name") << pair("wasAbleToRead") << pair("parent")
-            << pair("valid", QScriptValue::Undeletable)
-            << pair("validationError", QScriptValue::Undeletable)
-            << pair("byteOrder", QScriptValue::Undeletable);
-
-    //TODO add these to common
-    //commonProperties << pair("updateFunc") << pair("validationFunc");
-    //commonProperties << pair("type");
+    //we are only testing properties when updating
+    //TODO fix this
+    commonProperties << pair("name", QScriptValue::Undeletable)
+            << pair("wasAbleToRead") << pair("parent")
+            << pair("valid", QScriptValue::Undeletable | QScriptValue::ReadOnly)
+            << pair("validationError", QScriptValue::Undeletable | QScriptValue::ReadOnly)
+            << pair("byteOrder", QScriptValue::Undeletable)
+            << pair("updateFunc", QScriptValue::Undeletable)
+            << pair("validationFunc", QScriptValue::Undeletable)
+            << pair("datatype", QScriptValue::Undeletable);
 
     primitiveProperties << commonProperties << pair("value") << pair("char") << pair("int")
             << pair("int8") << pair("int16") << pair("int32") << pair("int64") << pair("uint")
@@ -189,6 +193,9 @@ void ScriptClassesTest::initTestCase()
 void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
         DataInformation* data, const char* tag)
 {
+    //check in updating mode
+    //TODO check also in other modes
+    data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Updating);
     QScriptValue value = data->toScriptValue(data->topLevelDataInformation()->scriptEngine(),
             data->topLevelDataInformation()->scriptHandler()->handlerInfo());
 
@@ -199,6 +206,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
         it.next();
         foundProperties.append(qMakePair(it.name(), it.flags()));
     }
+    data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::None);
     qSort(foundProperties);
     if (foundProperties.size() != expected.size())
         qWarning() << tag << ": size differs: expected"
@@ -215,6 +223,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
 
 void ScriptClassesTest::checkIterators()
 {
+
     for (int i = 0; i < primitives.size(); ++i)
     {
         TopLevelDataInformation* top = primitives.at(i);
@@ -234,6 +243,94 @@ void ScriptClassesTest::checkIterators()
     checkProperties(structUnionProperties, structData, "struct");
     checkProperties(structUnionProperties, unionData, "union");
 }
+
+void ScriptClassesTest::testReplaceObject()
+{
+    QScriptEngine* eng = ScriptEngineInitializer::newEngine();
+    ScriptLogger* logger = new ScriptLogger();
+    logger->setLogToStdOut(true);
+    QString unionDef = QLatin1String(
+            "union({\n"
+            "    innerStruct : struct({ first : uint8(), second : uint16() }),\n"
+            "    innerArray : array(uint8(), 5),\n"
+            "    innerPointer : pointer(uint8(), double())\n"
+            "});\n");
+    QScriptValue val = eng->evaluate(unionDef);
+    QVERIFY(val.isObject());
+    DataInformation* main = ScriptValueConverter::convert(val, QLatin1String("container"), logger, 0);
+    QVERIFY(main);
+    QCOMPARE(logger->rowCount(), 0);
+    TopLevelDataInformation top(main, logger, eng);
+
+    //first we read the struct, which changes the type of the first child
+    //access it again after changing to ensure it was set properly
+    QScriptValue structUpdate = eng->evaluate(QLatin1String(
+            "(function() { this.first.datatype = int32(); this.first.name = \"changed\"; })"));
+    QVERIFY(structUpdate.isFunction());
+    StructureDataInformation* structData = main->childAt(0)->asStruct();
+    QVERIFY(structData);
+    structData->setUpdateFunc(structUpdate);
+    QCOMPARE(structData->name(), QString(QLatin1String("innerStruct")));
+
+    // array changes its own type, this is the critical one
+    //access it again after changing to ensure it was set properly
+    QScriptValue arrayUpdate = eng->evaluate(QLatin1String(
+            "(function() { this.datatype = float(); this.name = \"changedToFloat\"; })"));
+    ArrayDataInformation* arrayData = main->childAt(1)->asArray();
+    arrayData->setUpdateFunc(arrayUpdate);
+
+    QVERIFY(arrayData);
+    QScriptValue pointerTargetUpdate = eng->evaluate(QLatin1String(
+            "(function() { this.datatype = array(int8(), 5); this.parent.name = \"changedToArrayPointer\"; })"));
+    PointerDataInformation* ptrData = main->childAt(2)->asPointer();
+    QVERIFY(ptrData);
+    ptrData->pointerTarget()->setUpdateFunc(pointerTargetUpdate);
+
+    QScriptValue unionUpdate = eng->evaluate(QLatin1String(
+                "(function() { this.datatype = ") + unionDef + QLatin1String(" this.name = \"newContainer\"; })"));
+    main->setUpdateFunc(unionUpdate);
+
+    //now just call update
+    QCOMPARE(structData->childCount(), 2u);
+    QCOMPARE((int)structData->childAt(0)->asPrimitive()->type().value, (int)Type_UInt8);
+    QCOMPARE(structData->childAt(0)->name(), QString(QLatin1String("first")));
+    QCOMPARE(structData->childAt(1)->name(), QString(QLatin1String("second")));
+    top.scriptHandler()->updateDataInformation(structData);
+    //now structdata should have different children
+    QCOMPARE(structData->childCount(), 2u);
+    QCOMPARE((int)structData->childAt(0)->asPrimitive()->type().value, (int)Type_Int32); //different now
+    QCOMPARE(structData->childAt(0)->name(), QString(QLatin1String("changed"))); //different now
+    QCOMPARE(structData->childAt(1)->name(), QString(QLatin1String("second"))); //still the same
+
+    QCOMPARE(arrayData->name(), QString(QLatin1String("innerArray")));
+    top.scriptHandler()->updateDataInformation(arrayData);
+    QVERIFY(main->childAt(1)->isPrimitive());
+    QCOMPARE(main->childAt(1)->name(), QString(QLatin1String("changedToFloat")));
+
+    QCOMPARE(ptrData->name(), QString(QLatin1String("innerPointer")));
+    QVERIFY(main->childAt(2)->isPointer());
+    QVERIFY(main->childAt(2)->asPointer()->pointerTarget()->isPrimitive());
+    top.scriptHandler()->updateDataInformation(ptrData->pointerTarget());
+    QVERIFY(main->childAt(2)->isPointer());
+    QVERIFY(main->childAt(2)->asPointer()->pointerTarget()->isArray());
+    QCOMPARE(main->childAt(2)->name(), QString(QLatin1String("changedToArrayPointer")));
+
+
+    //now reset to state before
+    QCOMPARE(main->name(), QString(QLatin1String("container")));
+    top.scriptHandler()->updateDataInformation(main);
+    //main is now a dangling pointer
+    main = top.actualDataInformation();
+    QString nnnname = QString(QLatin1String("newContainer"));
+    QCOMPARE(main->name(), nnnname);
+    QVERIFY(main->childAt(0)->isStruct());
+    QCOMPARE(main->childAt(0)->name(), QString(QLatin1String("innerStruct")));
+    QCOMPARE(main->childAt(1)->name(), QString(QLatin1String("innerArray")));
+    QCOMPARE(main->childAt(2)->name(), QString(QLatin1String("innerPointer")));
+
+
+}
+
 
 void ScriptClassesTest::cleanupTestCase()
 {

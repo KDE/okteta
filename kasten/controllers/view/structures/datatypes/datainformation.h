@@ -57,6 +57,7 @@ class ScriptHandlerInfo;
 /** Interface that must be implemented by all datatypes */
 class DataInformation : public DataInformationBase
 {
+    friend class ScriptHandler; //so mHasBeenUpdated/hasBeenValidated can be set
 protected:
     explicit DataInformation(const DataInformation&);
 
@@ -160,13 +161,11 @@ public:
     QScriptValue validationFunc() const;
     void setValidationFunc(const QScriptValue& func);
     QString validationError() const;
-    void setValidationError(QString errorMessage);
     void unsetValidationError();
     bool validationSuccessful() const;
-    void setValidationSuccessful(bool validationSuccessful = true);
 
+    bool hasBeenUpdated() const;
     bool hasBeenValidated() const;
-    void setHasBeenValidated(bool hasBeen);
     DataInformationEndianess byteOrder() const;
     QSysInfo::Endian effectiveByteOrder() const;
     void setByteOrder(DataInformationEndianess newEndianess);
@@ -190,18 +189,21 @@ public:
     ScriptLogger::LogLevel loggedData() const;
     void setLoggedData(ScriptLogger::LogLevel lvl) const;
 
-protected:
     /**
      * Find the index of a DataInformation in this object, needed to calculate the row
+     * @return the index of @p data or -1 if not found
      */
     virtual int indexOf(const DataInformation* const data) const = 0;
+protected:
     bool additionalDataNeeded(AdditionalData* data) const;
     AdditionalData* additionalData() const;
     void setAdditionalData(AdditionalData* data);
-
+private:
+    void setValidationError(QString errorMessage); //only called by ScriptHandler
 protected:
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;
+    bool mHasBeenUpdated :1;
     bool mWasAbleToRead :1;
     DataInformationEndianess mByteOrder :2;
     mutable ScriptLogger::LogLevel mLoggedData :2; //mutable is ugly but i guess it is the best solution
@@ -304,6 +306,21 @@ inline ScriptLogger::LogLevel DataInformation::loggedData() const
 inline void DataInformation::setLoggedData(ScriptLogger::LogLevel lvl) const
 {
     mLoggedData = lvl;
+}
+
+inline bool DataInformation::hasBeenUpdated() const
+{
+    return mHasBeenUpdated;
+}
+
+inline bool DataInformation::validationSuccessful() const
+{
+    return mValidationSuccessful;
+}
+
+inline bool DataInformation::hasBeenValidated() const
+{
+    return mHasBeenValidated;
 }
 
 #endif /* DATAINFORMATION_H_ */

@@ -140,7 +140,7 @@ void DataInformationWithChildren::calculateValidationState()
         }
         if (hasValidatedChildren)
         {
-            setValidationSuccessful(allChildrenValid);
+            mValidationSuccessful = allChildrenValid;
         }
     }
 }
@@ -175,7 +175,7 @@ void DataInformationWithChildren::setChildren(QScriptValue children)
 }
 
 int DataInformationWithChildren::indexOf(const DataInformation* const data) const
-        {
+{
     const int size = mChildren.size();
     for (int i = 0; i < size; ++i)
     {
@@ -184,6 +184,7 @@ int DataInformationWithChildren::indexOf(const DataInformation* const data) cons
             return i;
         }
     }
+    Q_ASSERT(false); //should never reach this
     return -1;
 }
 
@@ -216,6 +217,18 @@ void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>
     mChildren << newChildren;
     if (emitSignal)
         topLevelDataInformation()->_childrenInserted(this, mChildren.size(), mChildren.size() + added - 1);
+}
+
+bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInformation* newChild)
+{
+    Q_ASSERT(index < uint(mChildren.size()));
+    Q_CHECK_PTR(newChild);
+    if (index >= uint(mChildren.size()))
+        return false;
+
+    delete mChildren.at(index);
+    mChildren[index] = newChild;
+    return true;
 }
 
 QScriptValue DataInformationWithChildren::toScriptValue(QScriptEngine* engine,

@@ -76,7 +76,7 @@ QScriptValue AbstractBitfieldDataInformation::toScriptValue(QScriptEngine* engin
 qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    topLevelDataInformation()->updateElement(this);
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
     if (bitsRemaining < BitCount64(width()))
     {
         mWasAbleToRead = false;

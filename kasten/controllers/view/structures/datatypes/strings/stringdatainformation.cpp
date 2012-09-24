@@ -81,7 +81,7 @@ bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta
 qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         BitCount64 bitsRemaining, quint8* bitOffset)
 {
-
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
     if (*bitOffset != 0)
     {
         logWarn() << "while reading string bit offset was: " << *bitOffset
@@ -284,6 +284,7 @@ BitCount64 StringDataInformation::childPosition(const DataInformation* child, Ok
 }
 
 //TODO remove engine parameter
+//FIXME clean this up (scriptlogger)!
 
 void StringDataInformation::setMaxByteCount(const QScriptValue& value, QScriptEngine* engine)
 {

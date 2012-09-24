@@ -43,6 +43,7 @@ BitCount32 UnionDataInformation::size() const
 qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
     TopLevelDataInformation* top = topLevelDataInformation();
     Q_CHECK_PTR(top);
 
@@ -54,9 +55,15 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel *input,
     {
         DataInformation* next = mChildren.at(i);
         //first of all update the structure:
-        top->updateElement(next);
+        top->scriptHandler()->updateDataInformation(next);
+        DataInformation* newNext = mChildren.at(i);
+        if (next != newNext)
+        {
+            logInfo() << "Child at index " << i << " was replaced.";
+            top->setChildDataChanged();
+        }
         //bit offset always has to be reset to original value
-        qint64 currentReadBits = next->readData(input, address, bitsRemaining, bitOffset);
+        qint64 currentReadBits = newNext->readData(input, address, bitsRemaining, bitOffset);
         if (currentReadBits == -1)
         {
             //since this is a union, try to read all values and not abort as soon as one is too large

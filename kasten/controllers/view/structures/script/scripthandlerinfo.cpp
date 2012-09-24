@@ -29,7 +29,7 @@
 #include "classes/bitfieldscriptclass.h"
 #include "classes/pointerscriptclass.h"
 
-ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine)
+ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger)
     : mArrayClass(new ArrayScriptClass(engine, this)),
       mPrimitiveClass(new PrimitiveScriptClass(engine, this)),
       mEnumClass(new EnumScriptClass(engine, this)),
@@ -37,8 +37,9 @@ ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine)
       mStringClass(new StringScriptClass(engine, this)),
       mBitfieldClass(new BitfieldScriptClass(engine, this)),
       mPointerClass(new PointerScriptClass(engine, this)),
-      mMode(None)
+      mLogger(logger), mMode(None)
 {
+    Q_CHECK_PTR(mLogger);
 }
 
 ScriptHandlerInfo::~ScriptHandlerInfo()

@@ -134,9 +134,6 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
     if (id != 0)
     {
         quint32 pos = id - 1;
-#ifdef OKTETA_DEBUG_SCRIPT
-        kDebug() << "accessing property with id=" << id << "and name=" << name.toString();
-#endif
         if (pos >= data->childCount())
         {
             dataW->logError() << "attempting to access out of bounds child: index was" << pos

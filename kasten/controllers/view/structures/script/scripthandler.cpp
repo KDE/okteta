@@ -26,20 +26,17 @@
 #include "scriptlogger.h"
 #include "../datatypes/datainformation.h"
 #include "../datatypes/topleveldatainformation.h"
-#include "../parsers/scriptvalueconverter.h"
+#include "../datatypes/array/arraydatainformation.h"
+#include "../parsers/parserutils.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QString>
 #include <QStringList>
-#include <QtScript/QScriptValue>
-#include <QtScript/QScriptValueIterator>
-#include <QtScript/QScriptEngine>
-#include <QtScriptTools/QScriptEngineDebugger>
-
-#include <KDebug>
+#include <QScriptValue>
+#include <QScriptValueIterator>
+#include <QScriptEngine>
+#include <QScriptEngineDebugger>
 
 ScriptHandler::ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel)
-        : mEngine(engine), mTopLevel(topLevel), mHandlerInfo(engine)
+        : mEngine(engine), mTopLevel(topLevel), mHandlerInfo(engine, topLevel->logger())
 #ifdef OKTETA_DEBUG_SCRIPT
 , mDebugger(new QScriptEngineDebugger())
 #endif
@@ -56,8 +53,6 @@ void ScriptHandler::validateData(DataInformation* data)
 
     if (data->hasBeenValidated())
         return;
-    data->setHasBeenValidated(false); //not yet validated
-
     //first validate the children
     for (uint i = 0; i < data->childCount(); ++i)
         validateData(data->childAt(i));
@@ -66,23 +61,16 @@ void ScriptHandler::validateData(DataInformation* data)
     QScriptValue validationFunc = data->validationFunc();
     if (!validationFunc.isValid())
     {
-        //value exists, we assume it has been checked to be a function
 #ifdef OKTETA_DEBUG_SCRIPT
         mDebugger->attachTo(mEngine.data());
         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
         kDebug() << "validating element: " << data->name();
 #endif
-
-        QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
-        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(),
-                &mHandlerInfo);
-        QScriptValueList args;
-        args << mainStruct;
-        mHandlerInfo.setMode(ScriptHandlerInfo::Validating);
-        QScriptValue result = validationFunc.call(thisObject, args);
+        QScriptValue result = callFunction(validationFunc, data, ScriptHandlerInfo::Validating);
         if (result.isError())
         {
-            mTopLevel->logger()->error(data) << "Error occurred while validating element: " << result.toString();
+            mTopLevel->logger()->error(data) << "Error occurred while validating element: "
+                    << result.toString();
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
         }
@@ -95,52 +83,72 @@ void ScriptHandler::validateData(DataInformation* data)
         }
         if (result.isBool() || result.isBoolean())
         {
-            data->setValidationSuccessful(result.toBool());
+            data->mValidationSuccessful = result.toBool();
         }
         if (result.isString())
         {
             //error string
             QString str = result.toString();
-            if  (!str.isEmpty())
+            if (!str.isEmpty())
                 data->setValidationError(str);
         }
-        mHandlerInfo.setMode(ScriptHandlerInfo::None);
     }
+    data->mHasBeenValidated = true;
 }
 
 void ScriptHandler::updateDataInformation(DataInformation* data)
 {
     Q_CHECK_PTR(data);
-
     //check if has an update function:
+    Q_ASSERT(!data->hasBeenUpdated());
     QScriptValue updateFunc = data->updateFunc();
     if (updateFunc.isValid())
     {
-        //value exists, we assume it has been checked to be a function
-#ifdef OKTETA_DEBUG_SCRIPT
-//         mDebugger->attachTo(mEngine);
-//         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
-//         kDebug()
-//         << "updating element: " << data->name();
-#endif
-
-        QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
-        QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(),
-                &mHandlerInfo);
-        QScriptValueList args;
-        args << mainStruct;
-        //ensure we get the right properties
-        mHandlerInfo.setMode(ScriptHandlerInfo::Updating);
-        QScriptValue result = updateFunc.call(thisObject, args);
+        QString context = data->fullObjectPath(); //we mustn't use data after updateFunc.call(), save context
+        QScriptValue result = callFunction(updateFunc, data, ScriptHandlerInfo::Updating);
         if (result.isError())
         {
-            mTopLevel->logger()->error(data) << "Error occurred while updating element: " << result.toString();
+            mTopLevel->logger()->error(context) << "Error occurred while updating element: "
+                    << result.toString();
         }
         if (mEngine->hasUncaughtException())
         {
-            mTopLevel->logger()->error(data) << "Error occurred while updating element:"
+            mTopLevel->logger()->error(context) << "Error occurred while updating element:"
                     << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
         }
-        mHandlerInfo.setMode(ScriptHandlerInfo::None);
+    }
+    data->mHasBeenUpdated = true;
+}
+
+void ScriptHandler::updateLength(ArrayDataInformation* array)
+{
+    QScriptValue lengthFunc = array->lengthFunction();
+    if (lengthFunc.isValid())
+    {
+        Q_ASSERT(lengthFunc.isFunction());
+
+        QScriptValue result = callFunction(lengthFunc, array, ScriptHandlerInfo::DeterminingLength);
+        ParsedNumber<uint> value = ParserUtils::uintFromScriptValue(result);
+        if (value.isValid)
+            array->setArrayLength(value.value);
+        else
+            array->logError() << "Length function did not return a valid number! Result was: " << result.toString();
     }
 }
+
+QScriptValue ScriptHandler::callFunction(QScriptValue func, DataInformation* data,
+        ScriptHandlerInfo::Mode mode)
+{
+    Q_ASSERT(func.isFunction());
+    //value exists, we assume it has been checked to be a function
+    QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
+    QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(), &mHandlerInfo);
+    QScriptValueList args;
+    args << mainStruct;
+    //ensure we get the right properties
+    mHandlerInfo.setMode(mode);
+    QScriptValue result = func.call(thisObject, args);
+    mHandlerInfo.setMode(ScriptHandlerInfo::None);
+    return result;
+}
+

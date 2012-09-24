@@ -32,16 +32,15 @@
 #include <KIcon>
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
-        : mValidationSuccessful(false), mHasBeenValidated(false), mWasAbleToRead(false),
-                mByteOrder(EndianessInherit), mLoggedData(ScriptLogger::LogInvalid),
-                mAdditionalData(0), mParent(parent), mName(name)
+        : mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
+          mWasAbleToRead(false), mByteOrder(EndianessInherit), mLoggedData(ScriptLogger::LogInvalid),
+                mParent(parent), mName(name)
 {
 }
 
 DataInformation::DataInformation(const DataInformation& d)
-        : mValidationSuccessful(d.mValidationSuccessful),
-                mHasBeenValidated(d.mHasBeenValidated), mWasAbleToRead(d.mWasAbleToRead),
-                mByteOrder(d.mByteOrder), mLoggedData(d.mLoggedData), mParent(0), mName(d.mName)
+        : mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false), mWasAbleToRead(false),
+                mByteOrder(d.mByteOrder), mLoggedData(ScriptLogger::LogInvalid), mParent(0), mName(d.mName)
 {
     if (d.mAdditionalData)
         mAdditionalData.reset(new AdditionalData(*(d.mAdditionalData)));
@@ -119,7 +118,7 @@ void DataInformation::setValidationError(QString errorMessage)
     }
     else
     {
-        setValidationSuccessful(false);
+        mValidationSuccessful = false;
         AdditionalData* data = additionalData();
         if (data)
             data->setValidationError(errorMessage);
@@ -132,27 +131,6 @@ void DataInformation::setValidationError(QString errorMessage)
     }
 }
 
-bool DataInformation::validationSuccessful() const
-{
-    return mValidationSuccessful;
-}
-
-void DataInformation::setValidationSuccessful(bool successful)
-{
-    mValidationSuccessful = successful;
-    setHasBeenValidated(true);
-}
-
-bool DataInformation::hasBeenValidated() const
-{
-    return mHasBeenValidated;
-}
-
-void DataInformation::setHasBeenValidated(bool hasBeen)
-{
-    mHasBeenValidated = hasBeen;
-}
-
 void DataInformation::resetValidationState()
 {
     unsetValidationError();
@@ -162,13 +140,18 @@ void DataInformation::resetValidationState()
 
 void DataInformation::beginRead()
 {
+    mHasBeenUpdated = false;
+    mWasAbleToRead = false;
+    mHasBeenValidated = false;
+    mLoggedData = ScriptLogger::LogInvalid;
+    const uint numChildren = childCount();
+    if (numChildren > 0 && childAt(0)->isDummy())
+        return; //first child is dummy -> all are
+    //otherwise start read for all children
     for (uint i = 0; i < childCount(); ++i)
     {
         childAt(i)->beginRead();
     }
-    mWasAbleToRead = false;
-    mHasBeenValidated = false;
-    mLoggedData = ScriptLogger::LogInvalid;
 }
 
 ScriptLogger* DataInformation::logger() const
@@ -270,13 +253,6 @@ void DataInformation::setValidationFunc(const QScriptValue& func)
             setAdditionalData(newData);
         }
     }
-}
-
-int DataInformation::indexOf(const DataInformation* const data) const
-{
-    Q_UNUSED(data)
-    Q_ASSERT_X(false, "DataInformation::indexOf", "this should never happen!");
-    return 0;
 }
 
 QVariant DataInformation::data(int column, int role) const

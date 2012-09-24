@@ -53,7 +53,7 @@ ParsedNumber<uint> ParserUtils::uintFromString(const QString& str)
 }
 
 DataInformation::DataInformationEndianess ParserUtils::byteOrderFromString(const QString& string,
-        const ParserInfo& info)
+        const LoggerWithContext& logger)
 {
     const QString lower = string.toLower();
     if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))
@@ -66,7 +66,7 @@ DataInformation::DataInformationEndianess ParserUtils::byteOrderFromString(const
         return DataInformation::EndianessInherit;
     else
     {
-        info.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
+        logger.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
         return DataInformation::EndianessInherit;
     }
 }
@@ -116,7 +116,7 @@ QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianess
     return QLatin1String("inherit");
 }
 
-StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& str)
+StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& str, const LoggerWithContext& logger)
 {
     QString enc = str.toLower();
     if (enc == QLatin1String("ascii"))
@@ -148,5 +148,6 @@ StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& s
             return StringDataInformation::UTF32_BE;
         }
     }
+    logger.warn() << "Unrecognized string encoding: " << enc;
     return StringDataInformation::InvalidEncoding;
 }

@@ -49,7 +49,7 @@ public:
 
 public:
     virtual QString typeName() const;
-    int length() const;
+    uint length() const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
@@ -81,7 +81,9 @@ public:
     bool setArrayLength(uint newLength);
     bool setArrayType(QScriptValue type);
 
-    virtual QScriptValue childType() const;
+    QScriptValue childType() const;
+    QScriptValue lengthFunction() const;
+    void setLengthFunction(QScriptValue newFunc);
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
@@ -96,7 +98,7 @@ protected:
     static const uint MAX_LEN = 10000;
 };
 
-inline int ArrayDataInformation::length() const
+inline uint ArrayDataInformation::length() const
 {
     return mData->length();
 }
@@ -166,6 +168,19 @@ inline void ArrayDataInformation::setChildWidgetData(uint index, QWidget* w) con
 inline QString ArrayDataInformation::childTypeName(uint index) const
 {
     return mData->dataAt(index, DataInformation::ColumnType, Qt::DisplayRole).toString();
+}
+
+inline QScriptValue ArrayDataInformation::lengthFunction() const
+{
+    return mLengthFunction;
+}
+
+inline void ArrayDataInformation::setLengthFunction(QScriptValue newFunc)
+{
+    if (!newFunc.isFunction())
+        logError() << "New length function is not a function. It was: " << newFunc.toString();
+    else
+        mLengthFunction = newFunc;
 }
 
 #endif /* ARRAYDATAINFORMATION_H_ */

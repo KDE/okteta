@@ -48,8 +48,9 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLo
     if (!mLogger)
         mLogger.reset(new ScriptLogger());
 
-    if (engine)
-        mScriptHandler.reset(new ScriptHandler(engine, this));
+    if (!engine)
+        engine = ScriptEngineInitializer::newEngine();
+    mScriptHandler.reset(new ScriptHandler(engine, this));
 }
 
 TopLevelDataInformation::~TopLevelDataInformation()
@@ -58,11 +59,8 @@ TopLevelDataInformation::~TopLevelDataInformation()
 
 void TopLevelDataInformation::validate()
 {
-    kDebug() << "validation of structure " << mData->name() << "requested";
-    if (mScriptHandler)
-        mScriptHandler->validateData(mData.data());
-    else
-        kDebug() << "cannot validate" << mData->name() << "since it has no validators!";
+    logger()->info(mData.data()) << "Validation requested.";
+    mScriptHandler->validateData(mData.data());
 }
 
 QScriptEngine* TopLevelDataInformation::scriptEngine() const
@@ -73,13 +71,6 @@ QScriptEngine* TopLevelDataInformation::scriptEngine() const
 void TopLevelDataInformation::resetValidationState()
 {
     mData->resetValidationState();
-}
-
-void TopLevelDataInformation::updateElement(DataInformation* elem)
-{
-    Q_CHECK_PTR(elem);
-    if (mScriptHandler)
-        mScriptHandler->updateDataInformation(elem);
 }
 
 void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -101,7 +92,10 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
     quint8 bitOffset = 0;
     mData->beginRead(); //before reading set wasAbleToRead to false
     mData->resetValidationState(); //reading new data -> validation state is old
-    updateElement(mData.data()); //unlikely that this is useful, but maybe someone needs it
+    const DataInformation* oldData = mData.data();
+    mScriptHandler->updateDataInformation(mData.data()); //unlikely that this is useful, but maybe someone needs it
+    if (mData.data() != oldData)
+        mLogger->info() << "Main element was replaced!";
     mData->readData(input, address, remainingBits, &bitOffset);
 
     // Read all the delayed PointerDataInformation
@@ -219,4 +213,14 @@ int TopLevelDataInformation::indexOf(const DataInformation* const data) const
 {
     Q_ASSERT(data == mData.data());
     return mIndex;
+}
+
+void TopLevelDataInformation::setActualDataInformation(DataInformation* newData)
+{
+    Q_CHECK_PTR(newData);
+    Q_ASSERT(!mData->hasBeenUpdated());
+    if (mData->hasBeenUpdated())
+        mLogger->error() << "Cannot replace top level element since it was already updated!";
+    else
+        mData.reset(newData);
 }

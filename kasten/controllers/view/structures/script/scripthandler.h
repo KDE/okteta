@@ -23,14 +23,14 @@
 #ifndef SCRIPTHANDLER_H_
 #define SCRIPTHANDLER_H_
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QSharedData>
+#include <QScriptValue>
+#include <QScopedPointer>
 
 #include <config-structtool.h>
 #include "scripthandlerinfo.h"
 
 class DataInformation;
+class ArrayDataInformation;
 class ScriptLogger;
 class TopLevelDataInformation;
 class QScriptEngineDebugger;
@@ -38,15 +38,21 @@ class QScriptEngineDebugger;
 class ScriptHandler
 {
     Q_DISABLE_COPY(ScriptHandler)
+
 public:
     ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel);
     virtual ~ScriptHandler();
 
     void validateData(DataInformation* data);
+    /** The pointer may be changed while updating, CHECK AS SOON AS FUNCTION RETURNS! */
     void updateDataInformation(DataInformation* data);
+    void updateLength(ArrayDataInformation* array);
+
     QScriptEngine* engine() const;
     ScriptHandlerInfo* handlerInfo();
-protected:
+private:
+    QScriptValue callFunction(QScriptValue func, DataInformation* data, ScriptHandlerInfo::Mode mode);
+private:
     QScopedPointer<QScriptEngine> mEngine;
     TopLevelDataInformation* mTopLevel;
 #ifdef OKTETA_DEBUG_SCRIPT

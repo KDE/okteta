@@ -78,6 +78,7 @@ bool EnumDataInformation::setData(const QVariant& value, Okteta::AbstractByteArr
 qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
     qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
     mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
     return retVal;
