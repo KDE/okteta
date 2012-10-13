@@ -13,7 +13,7 @@
   <!ENTITY % addindex "IGNORE">
 ]>
 
-<book lang="&language;">
+<book id="okteta" lang="&language;">
 
 <bookinfo>
 <title>The &okteta; Handbook</title>
