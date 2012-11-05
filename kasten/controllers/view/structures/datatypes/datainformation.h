@@ -34,6 +34,7 @@
 
 #include "datainformationbase.h"
 #include "../script/scriptlogger.h"
+#include "primitivedatatype.h"
 
 /** Implement the clone() method and add the copy constructor declaration
  * After this macro visibility will be set to protected */
@@ -66,6 +67,7 @@ class DataInformation : public DataInformationBase
 {
     friend class ScriptHandler; //so mHasBeenUpdated/hasBeenValidated can be set
     friend class PointerDataInformation; //to set mWasAbleToRead on pointer target
+    template<PrimitiveDataTypeEnum type> friend class PrimitiveArrayData; //to set mWasAbleToRead (when returning a script value)
 protected:
     explicit DataInformation(const DataInformation&);
 

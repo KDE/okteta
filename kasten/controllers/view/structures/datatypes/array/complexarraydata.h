@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -20,8 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #ifndef COMPLEXARRAYDATA_H
 #define COMPLEXARRAYDATA_H
 
@@ -37,7 +35,7 @@ class ComplexArrayData : public AbstractArrayData
     Q_DISABLE_COPY(ComplexArrayData)
 public:
     /** Takes ownership of @p data !*/
-    ComplexArrayData(unsigned int initialLength, DataInformation* data, DataInformation* parent);
+    ComplexArrayData(unsigned int initialLength, DataInformation* data, ArrayDataInformation* parent);
     virtual ~ComplexArrayData();
 
 
@@ -60,22 +58,18 @@ public:
 
     QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
 
-    /** have to override this, to set correct parent of mChildType -> crash otherwise */
-    virtual void setParent(DataInformation* parent);
-
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
     virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining);
-    /** returns a COPY of the currently stored child type */
-    DataInformation* childType() const;
 
     virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
     virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
     virtual void setChildWidgetData(uint index, QWidget* w) const;
+protected:
+    virtual void setNewParentForChildren();
 private:
     void appendChildren(uint from, uint to);
 private:
-    DataInformation* mChildType;
     QVector<DataInformation*> mChildren;
 };
 

@@ -23,7 +23,6 @@
 #ifndef ARRAYDATAINFORMATION_H_
 #define ARRAYDATAINFORMATION_H_
 
-#include "../primitivedatatype.h" //TODO remove once primitiveArrayFromType is in subclass
 #include "../dummydatainformation.h"
 #include "abstractarraydata.h"
 
@@ -32,6 +31,8 @@
 
 class DummyDataInformation;
 class AbstractArrayData;
+class PrimitiveDataInformation;
+
 class ArrayDataInformation : public DataInformationWithDummyChildren
 {
     friend class PrimitiveArrayTest;
@@ -90,7 +91,7 @@ public:
 private:
     /** Takes ownership of @p data ! */
     AbstractArrayData* arrayDataFromType(uint length, DataInformation* data);
-    AbstractArrayData* primitiveArrayFromType(uint length, PrimitiveDataType type);
+    AbstractArrayData* primitiveArrayFromType(uint length, PrimitiveDataInformation* type);
 protected:
 
     QScopedPointer<AbstractArrayData> mData;

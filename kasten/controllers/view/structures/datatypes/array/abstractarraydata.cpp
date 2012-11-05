@@ -22,12 +22,22 @@
 
 
 #include "abstractarraydata.h"
+#include "arraydatainformation.h"
 
-AbstractArrayData::AbstractArrayData(DataInformation* parent)
-        : mParent(parent)
+AbstractArrayData::AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent)
+        : mParent(parent), mChildType(childType)
 {
+    Q_CHECK_PTR(childType);
+    mChildType->setParent(parent);
 }
 
 AbstractArrayData::~AbstractArrayData()
 {
+}
+
+void AbstractArrayData::setParent(ArrayDataInformation* parent)
+{
+    mParent = parent;
+    mChildType->setParent(parent);
+    setNewParentForChildren();
 }

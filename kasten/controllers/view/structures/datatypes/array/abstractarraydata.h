@@ -29,6 +29,7 @@
 #include "../primitivedatatype.h"
 
 #include <qnamespace.h>
+#include <QScopedPointer>
 
 class QWidget;
 class QScriptEngine;
@@ -46,11 +47,14 @@ class AbstractArrayData
 {
     Q_DISABLE_COPY(AbstractArrayData)
 public:
-    explicit AbstractArrayData(DataInformation* parent);
+    explicit AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent);
     virtual ~AbstractArrayData();
 
-    virtual QVariant dataAt(uint index, int column, int role) = 0;
+    void setParent(ArrayDataInformation* parent);
+    /** @return The current child type. Ownership is NOT transferred */
+    DataInformation* childType() const;
 
+    virtual QVariant dataAt(uint index, int column, int role) = 0;
     virtual unsigned int length() const = 0;
     virtual void setLength(uint newLength) = 0;
 
@@ -62,9 +66,8 @@ public:
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine,
             ScriptHandlerInfo* handlerInfo) const = 0;
-    /** the primitive type or Type_NotPrimitive for structs etc */
+    /** the primitive type or Type_Invalid for structs etc */
     virtual PrimitiveDataType primitiveType() const = 0;
-    virtual void setParent(DataInformation* parent) = 0;
 
     virtual int indexOf(const DataInformation* data) const = 0;
     virtual BitCount64 offset(const DataInformation* child) const = 0;
@@ -79,8 +82,15 @@ public:
     virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const = 0;
     virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
 protected:
-    DataInformation* mParent;
+    virtual void setNewParentForChildren() = 0;
+protected:
+    ArrayDataInformation* mParent;
+    QScopedPointer<DataInformation> mChildType;
 };
 
+inline DataInformation* AbstractArrayData::childType() const
+{
+    return mChildType.data();
+}
 
 #endif // ABSTRACTARRAYDATA_H

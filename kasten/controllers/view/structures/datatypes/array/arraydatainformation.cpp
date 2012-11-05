@@ -52,16 +52,8 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
     if (d.mData)
     {
         uint length = d.mData->length();
-        if (d.mData->isComplex())
-        {
-            //childtype creates a copy, so this is safe
-            DataInformation* childType = static_cast<ComplexArrayData*>(d.mData.data())->childType();
-            mData.reset(new ComplexArrayData(length, childType, this));
-        }
-        else
-        {
-            mData.reset(primitiveArrayFromType(length, d.mData->primitiveType()));
-        }
+        DataInformation* childType = static_cast<ComplexArrayData*>(d.mData.data())->childType();
+        mData.reset(arrayDataFromType(length, childType->clone()));
         Q_CHECK_PTR(mData);
     }
 }
@@ -212,58 +204,60 @@ bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMod
     return false;
 }
 
-AbstractArrayData* ArrayDataInformation::primitiveArrayFromType(uint length, PrimitiveDataType type)
+AbstractArrayData* ArrayDataInformation::primitiveArrayFromType(uint length, PrimitiveDataInformation* data)
 {
-    switch (type.value)
+    switch (data->type().value)
     {
     case Type_Char:
-        return new PrimitiveArrayData<Type_Char>(length, this);
+        return new PrimitiveArrayData<Type_Char>(length, data, this);
     case Type_Int8:
-        return new PrimitiveArrayData<Type_Int8>(length, this);
+        return new PrimitiveArrayData<Type_Int8>(length, data, this);
     case Type_Int16:
-        return new PrimitiveArrayData<Type_Int16>(length, this);
+        return new PrimitiveArrayData<Type_Int16>(length, data, this);
     case Type_Int32:
-        return new PrimitiveArrayData<Type_Int32>(length, this);
+        return new PrimitiveArrayData<Type_Int32>(length, data, this);
     case Type_Int64:
-        return new PrimitiveArrayData<Type_Int64>(length, this);
+        return new PrimitiveArrayData<Type_Int64>(length, data, this);
     case Type_UInt8:
-        return new PrimitiveArrayData<Type_UInt8>(length, this);
+        return new PrimitiveArrayData<Type_UInt8>(length, data, this);
     case Type_UInt16:
-        return new PrimitiveArrayData<Type_UInt16>(length, this);
+        return new PrimitiveArrayData<Type_UInt16>(length, data, this);
     case Type_UInt32:
-        return new PrimitiveArrayData<Type_UInt32>(length, this);
+        return new PrimitiveArrayData<Type_UInt32>(length, data, this);
     case Type_UInt64:
-        return new PrimitiveArrayData<Type_UInt64>(length, this);
+        return new PrimitiveArrayData<Type_UInt64>(length, data, this);
     case Type_Bool8:
-        return new PrimitiveArrayData<Type_Bool8>(length, this);
+        return new PrimitiveArrayData<Type_Bool8>(length, data, this);
     case Type_Bool16:
-        return new PrimitiveArrayData<Type_Bool16>(length, this);
+        return new PrimitiveArrayData<Type_Bool16>(length, data, this);
     case Type_Bool32:
-        return new PrimitiveArrayData<Type_Bool32>(length, this);
+        return new PrimitiveArrayData<Type_Bool32>(length, data, this);
     case Type_Bool64:
-        return new PrimitiveArrayData<Type_Bool64>(length, this);
+        return new PrimitiveArrayData<Type_Bool64>(length, data, this);
     case Type_Float:
-        return new PrimitiveArrayData<Type_Float>(length, this);
+        return new PrimitiveArrayData<Type_Float>(length, data, this);
     case Type_Double:
-        return new PrimitiveArrayData<Type_Double>(length, this);
+        return new PrimitiveArrayData<Type_Double>(length, data, this);
     default:
-        kWarning() << "none of the cases matched, probably an error";
+        kDebug() << "Cannot use" << data->typeName() << "for primitive arrays, using complex array";
         return 0;
     }
 }
 
 AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInformation* data)
 {
-    if (!data->isPrimitive() || data->isBitfield() || data->isEnum())
+    Q_CHECK_PTR(data);
+    AbstractArrayData* ret = 0;
+    if (data->isPrimitive())
     {
-        //we cant use primitiveArrayData for bitfields/enums or any complex data type
-        return new ComplexArrayData(length, data, this);
+        ret = primitiveArrayFromType(length, data->asPrimitive());
     }
-    //it is primitive -> create a PrimitiveArrayData
-    PrimitiveDataType type = data->asPrimitive()->type();
-    //we no longer need data now that we have the type
-    delete data;
-    return primitiveArrayFromType(length, type);
+    if (!ret)
+    {
+        //the conversion failed (i.e. it was not primitive or an enum/bitfield/pointer)
+        ret = new ComplexArrayData(length, data, this);
+    }
+    return ret;
 }
 
 QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine,

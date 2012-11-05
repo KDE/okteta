@@ -26,23 +26,21 @@
 #include <QVariant>
 #include <KLocalizedString>
 #include <KDebug>
-#include "../datainformation.h"
+#include "arraydatainformation.h"
 #include "../topleveldatainformation.h"
 #include "../../script/scripthandlerinfo.h"
 #include "../../script/scriptlogger.h"
 
 ComplexArrayData::ComplexArrayData(unsigned int initialLength, DataInformation* data,
-        DataInformation* parent): AbstractArrayData(parent), mChildType(data)
+        ArrayDataInformation* parent): AbstractArrayData(data, parent)
 {
     mChildren.reserve(initialLength);
-    mChildType->setParent(mParent);
     appendChildren(0, initialLength);
 }
 
 ComplexArrayData::~ComplexArrayData()
 {
     qDeleteAll(mChildren);
-    delete mChildType;
 }
 
 void ComplexArrayData::appendChildren(uint from, uint to)
@@ -50,6 +48,7 @@ void ComplexArrayData::appendChildren(uint from, uint to)
     for (uint i = from; i < to; ++i)
     {
         DataInformation* arrayElem = mChildType->clone();
+        arrayElem->setName(QString::number(i));
         arrayElem->setParent(mParent);
         mChildren.append(arrayElem);
     }
@@ -107,12 +106,9 @@ QString ComplexArrayData::typeName() const
     return i18nc("type name, then array length", "%1[%2]", type, QString::number(length()));
 }
 
-void ComplexArrayData::setParent(DataInformation* parent)
-{
-    mParent = parent;
-    mChildType->setParent(parent);
+void ComplexArrayData::setNewParentForChildren() {
     for (int i = 0; i < mChildren.size(); ++i)
-        mChildren.at(i)->setParent(parent);
+        mChildren.at(i)->setParent(mParent);
 }
 
 BitCount64 ComplexArrayData::offset(const DataInformation* child) const
@@ -212,11 +208,6 @@ Qt::ItemFlags ComplexArrayData::childFlags(int index, int column, bool fileLoade
 {
     Q_ASSERT(index >= 0 && uint(index) < length());
     return mChildren.at(index)->flags(column, fileLoaded);
-}
-
-DataInformation* ComplexArrayData::childType() const
-{
-    return mChildType->clone();
 }
 
 QWidget* ComplexArrayData::createChildEditWidget(uint index, QWidget* parent) const

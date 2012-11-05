@@ -42,8 +42,7 @@ public:
     typedef QVector<QPair<QScriptString, QScriptValue::PropertyFlags> > PropertyInfoList;
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual ~DefaultScriptClass();
-    //TODO
-    //virtual QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
+
     virtual QueryFlags queryProperty(const QScriptValue& object, const QScriptString& name, QueryFlags flags, uint* id);
     virtual QScriptValue::PropertyFlags propertyFlags(const QScriptValue& object, const QScriptString& name, uint id);
     virtual QScriptValue property(const QScriptValue& object, const QScriptString& name, uint id);

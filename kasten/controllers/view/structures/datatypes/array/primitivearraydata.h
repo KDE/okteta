@@ -36,7 +36,8 @@ public:
     typedef typename PrimitiveInfo<type>::valueType T;
     typedef typename PrimitiveInfo<type>::Methods DisplayClass;
 
-    explicit PrimitiveArrayData(unsigned int initialLength, DataInformation* parent);
+    explicit PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,
+            ArrayDataInformation* parent);
     virtual ~PrimitiveArrayData();
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -53,7 +54,6 @@ public:
     virtual BitCount64 offset(const DataInformation* child) const;
     virtual BitCount32 size() const;
     virtual PrimitiveDataType primitiveType() const;
-    virtual void setParent(DataInformation* parent);
     virtual BitCount32 sizeAt(uint index);
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded);
 
@@ -73,31 +73,17 @@ protected:
     void readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
     void readDataNonNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
+    virtual void setNewParentForChildren();
 
     QVector<T> mData;
     uint mNumReadValues; //the number of values read before EOF
-    QScopedPointer<DummyDataInformation> mDummy;
+    DummyDataInformation mDummy;
 };
 
-//constructors
-template<PrimitiveDataTypeEnum type>
-inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, DataInformation* parent)
-        : AbstractArrayData(parent), mNumReadValues(0), mDummy(new DummyDataInformation(parent))
-{
-    mData.reserve(initialLength);
-    mData.resize(initialLength);
-}
 
 template<PrimitiveDataTypeEnum type>
 inline PrimitiveArrayData<type>::~PrimitiveArrayData()
 {
-}
-
-template<PrimitiveDataTypeEnum type>
-inline void PrimitiveArrayData<type>::setParent(DataInformation* parent)
-{
-    mParent = parent;
-    mDummy->setParent(parent);
 }
 
 template<PrimitiveDataTypeEnum type>
@@ -114,8 +100,14 @@ inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
 {
     Q_ASSERT(idx < length());
     Q_UNUSED(idx);
-    mDummy->setDummyIndex(idx);
-    return mDummy.data();
+    mDummy.setDummyIndex(idx);
+    mDummy.setName(QString::number(idx));
+    return &mDummy;
+}
+
+template<PrimitiveDataTypeEnum type>
+inline void PrimitiveArrayData<type>::setNewParentForChildren()
+{
 }
 
 template<PrimitiveDataTypeEnum type>
@@ -174,9 +166,5 @@ AllPrimitiveTypes PrimitiveArrayData<type>::valueAt(int index) const
     Q_ASSERT(index >= 0 && index < mData.size());
     return AllPrimitiveTypes(mData.at(index));
 }
-
-
-
-
 
 #endif // PRIMITIVEARRAYDATA_H

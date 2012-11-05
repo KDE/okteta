@@ -20,7 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "primitivearraydata.h"
-#include "../datainformation.h"
+#include "arraydatainformation.h"
 #include "../primitive/primitivedatainformation.h"
 #include "../../script/scriptlogger.h"
 
@@ -30,6 +30,15 @@
 #include <KLocalizedString>
 
 
+template<PrimitiveDataTypeEnum type>
+inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,
+        ArrayDataInformation* parent)
+        : AbstractArrayData(childType, parent), mNumReadValues(0), mDummy(parent)
+{
+    Q_ASSERT(childType->type() == type);
+    mData.reserve(initialLength);
+    mData.resize(initialLength);
+}
 
 template<PrimitiveDataTypeEnum type>
 qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -205,8 +214,8 @@ QString PrimitiveArrayData<type>::typeName() const
 template<PrimitiveDataTypeEnum type>
 int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
 {
-    if (data == this->mDummy.data())
-        return this->mDummy->dummyIndex();
+    if (data == &mDummy)
+        return this->mDummy.dummyIndex();
     Q_ASSERT_X(false, "PrimitiveArrayData::indexOf", "This should never be called");
     return -1;
 }
@@ -215,7 +224,9 @@ template<PrimitiveDataTypeEnum type>
 QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
 {
     Q_ASSERT(index < length());
-    return DisplayClass::asScriptValue(mData.at(index), engine, handlerInfo);
+    mChildType->mWasAbleToRead = this->mNumReadValues > index;
+    mChildType->asPrimitive()->setValue(this->mData.at(index));
+    return mChildType->toScriptValue(engine, handlerInfo);
 
 }
 
