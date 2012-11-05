@@ -24,6 +24,7 @@
 #include "topleveldatainformation.h"
 
 #include <KLocalizedString>
+#include <limits>
 
 QString StructureDataInformation::typeName() const
 {
@@ -44,36 +45,9 @@ qint64 StructureDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
-    TopLevelDataInformation* top = topLevelDataInformation();
-    Q_CHECK_PTR(top);
-
-    uint readBytes = 0;
-    qint64 readBits = 0;
-    const quint8 origBitOffset = *bitOffset;
-    for (int i = 0; i < mChildren.size(); i++)
-    {
-        DataInformation* next = mChildren.at(i);
-        top->scriptHandler()->updateDataInformation(next);
-        //next may be a dangling pointer now, reset it
-        DataInformation* newNext = mChildren.at(i);
-        if (next != newNext)
-        {
-            logInfo() << "Child at index " << i << " was replaced.";
-            top->setChildDataChanged();
-        }
-        qint64 currentReadBits = newNext->readData(input, address + readBytes,
-                bitsRemaining - readBits, bitOffset);
-        if (currentReadBits == -1)
-        {
-            mWasAbleToRead = false;
-            //could not read one element -> whole structure could not be read
-            return -1;
-        }
-        readBits += currentReadBits;
-        readBytes = (readBits + origBitOffset) / 8;
-    }
-    mWasAbleToRead = true;
-    return readBits;
+    qint64 bitsRead = 0;
+    mWasAbleToRead = readChildren(mChildren, input, address, bitsRemaining, bitOffset, &bitsRead, topLevelDataInformation());
+    return bitsRead;
 }
 
 BitCount64 StructureDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
@@ -92,4 +66,41 @@ BitCount64 StructureDataInformation::childPosition(const DataInformation* child,
         return start * 8 + offset;
     else
         return mParent->asDataInformation()->childPosition(this, start) + offset;
+}
+
+bool StructureDataInformation::readChildren(const QVector<DataInformation*> children,
+        Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining,
+        quint8* bitOffset, qint64* readBitsPtr, TopLevelDataInformation* top)
+{
+    Q_CHECK_PTR(top);
+    Q_CHECK_PTR(readBitsPtr);
+    Q_ASSERT(*readBitsPtr >= 0); //otherwise we failed before
+    qint64 readBits = *readBitsPtr;
+    //prevent overflow
+    Q_ASSERT(sizeof(qint64) == sizeof(Okteta::Address) || readBits < (qint64(std::numeric_limits<qint32>::max()) * 8));
+    const quint8 origBitOffset = *bitOffset;
+    Okteta::Address readBytes = (readBits + origBitOffset) / 8;
+    for (int i = 0; i < children.size(); i++)
+    {
+        DataInformation* next = children.at(i);
+        top->scriptHandler()->updateDataInformation(next);
+        //next may be a dangling pointer now, reset it
+        DataInformation* newNext = children.at(i);
+        if (next != newNext)
+        {
+            //logInfo() << "Child at index " << i << " was replaced.";
+            top->setChildDataChanged();
+        }
+        qint64 currentReadBits = newNext->readData(input, address + readBytes,
+                bitsRemaining - readBits, bitOffset);
+        if (currentReadBits == -1)
+        {
+            *readBitsPtr = -1;
+            return false; //could not read one element -> whole structure could not be read
+        }
+        readBits += currentReadBits;
+        readBytes = (readBits + origBitOffset) / 8;
+    }
+    *readBitsPtr = readBits;
+    return true;
 }

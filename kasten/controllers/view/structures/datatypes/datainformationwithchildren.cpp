@@ -34,9 +34,7 @@
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
 {
     if (idx >= (unsigned) mChildren.size())
-    {
-        return NULL;
-    }
+        return 0;
     return mChildren[idx];
 }
 
@@ -61,17 +59,8 @@ DataInformationWithChildren::DataInformationWithChildren(const QString& name,
 }
 
 DataInformationWithChildren::DataInformationWithChildren(const DataInformationWithChildren& d)
-        : DataInformation(d)
+        : DataInformation(d), mChildren(cloneList(d.mChildren, this))
 {
-    int count = d.mChildren.count();
-    mChildren.reserve(count);
-    for (int i = 0; i < count; ++i)
-    {
-        const DataInformation* dat = d.mChildren.at(i);
-        DataInformation* child = dat->clone();
-        child->setParent(this);
-        mChildren.append(child);
-    }
 }
 
 QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const
@@ -264,9 +253,18 @@ QString DataInformationWithChildren::tooltipString() const
     }
 }
 
-BitCount32 DataInformationWithChildren::childSize(uint index) const
-        {
-    Q_ASSERT(index < childCount());
-    return mChildren.at(index)->size();
+QVector<DataInformation*> DataInformationWithChildren::cloneList(const QVector<DataInformation*>& other,
+        DataInformation* parent)
+{
+    int count = other.count();
+    QVector<DataInformation*> ret;
+    ret.reserve(count);
+    for (int i = 0; i < count; ++i)
+    {
+        DataInformation* dat = other.at(i);
+        DataInformation* newChild = dat->clone();
+        newChild->setParent(parent);
+        ret.append(newChild);
+    }
+    return ret;
 }
-

@@ -28,6 +28,7 @@
 #include <KDebug>
 #include "arraydatainformation.h"
 #include "../topleveldatainformation.h"
+#include "../structuredatainformation.h"
 #include "../../script/scripthandlerinfo.h"
 #include "../../script/scriptlogger.h"
 
@@ -148,33 +149,10 @@ QScriptValue ComplexArrayData::toScriptValue(uint index, QScriptEngine* engine,
 
 qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {
-    uint readBytes = 0;
     qint64 readBits = 0;
-    quint8 bitOffset = 0;
     TopLevelDataInformation* top = mParent->topLevelDataInformation();
-    Q_CHECK_PTR(top);
-    for (int i = 0; i < mChildren.size(); i++)
-    {
-        DataInformation* next = mChildren.at(i);
-        top->scriptHandler()->updateDataInformation(next);
-        //next may be a dangling pointer now, reset it
-        //but should not be
-        DataInformation* newNext = mChildren.at(i);
-        if (next != newNext)
-        {
-            mParent->logWarn() << "Array child at index " << i << " was replaced.";
-            top->setChildDataChanged();
-        }
-        qint64 currentReadBits = newNext->readData(input, address + readBytes,
-                bitsRemaining - readBits, &bitOffset);
-        if (currentReadBits == -1)
-        {
-            //could not read one element -> whole structure could not be read
-            return -1;
-        }
-        readBits += currentReadBits;
-        readBytes = (readBits + bitOffset) / 8;
-    }
+    quint8 bitOffset = 0; //FIXME no more padding before and after arrays!
+    StructureDataInformation::readChildren(mChildren, input, address, bitsRemaining, &bitOffset, &readBits, top);
     return readBits;
 }
 

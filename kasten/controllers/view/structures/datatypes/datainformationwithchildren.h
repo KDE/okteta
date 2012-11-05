@@ -37,10 +37,8 @@ public:
     virtual ~DataInformationWithChildren();
 
     virtual QVariant childData(int row, int column, int role) const;
-    QVector<DataInformation*> children() const;
 
     virtual BitCount32 size() const;
-    virtual BitCount32 childSize(uint index) const;
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
@@ -49,7 +47,7 @@ public:
      * @param newChild the new child (ownership is taken if replacing is successful,
      *  otherwise it must be deleted)
      * @return true if replacing was successful, false otherwise */
-    bool replaceChildAt(unsigned int index, DataInformation* newChild);
+    virtual bool replaceChildAt(unsigned int index, DataInformation* newChild);
     virtual int indexOf(const DataInformation* const data) const;
 
     virtual DataInformation* childAt(unsigned int index) const;
@@ -70,14 +68,11 @@ public:
     void appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal = true);
     void setChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(QScriptValue newChildren);
+
+    static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
 protected:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
 };
-
-inline QVector<DataInformation*> DataInformationWithChildren::children() const
-{
-    return mChildren;
-}
 
 inline unsigned int DataInformationWithChildren::childCount() const
 {
