@@ -60,8 +60,8 @@ qint64 PrimitiveDataInformationWrapper::readData(Okteta::AbstractByteArrayModel*
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
+    mValue->mHasBeenUpdated = true; //value does not get updated
     qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
-    mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
-
+    mWasAbleToRead = mValue->wasAbleToRead();
     return retVal;
 }

@@ -49,6 +49,8 @@ static void removeFromArray(QVarLengthArray<T, len>& array, int index) {
 
 QString FlagDataInformation::valueString() const
 {
+    if (!mWasAbleToRead)
+        return mValue->valueString();
     QMapIterator<AllPrimitiveTypes, QString> iter(mEnum->values());
     //I doubt more than 10 flags will be set very often -> only then do we need a malloc
     QVarLengthArray<FlagPair, 10> arr;

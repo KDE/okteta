@@ -134,7 +134,7 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
     else if (name == s_type)
     {
         DataInformation* newChildType = ScriptValueConverter::convert(value,
-                ParserStrings::NAME_ARRAY_TYPE, aData->logger(), aData);
+                aData->name(), aData->logger(), aData);
 
         if (!newChildType)
             aData->logError() << "Failed to parse new child type:" << value.toString();
@@ -146,7 +146,7 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
     {
         aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         DataInformation* newChildType = ScriptValueConverter::convert(value,
-                ParserStrings::NAME_ARRAY_TYPE, aData->logger(), aData);
+                aData->name(), aData->logger(), aData);
 
         if (!newChildType)
             aData->logError() << "Failed to parse new child type:" << value.toString();

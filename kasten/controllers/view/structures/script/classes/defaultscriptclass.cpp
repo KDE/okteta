@@ -244,6 +244,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     if (replaced)
     {
         top->setChildDataChanged();
+        newType->mHasBeenUpdated = true;
         //if the current object was "this" in javascript we have to replace it
         if (isThisObj)
             engine()->currentContext()->setThisObject(newType->toScriptValue(engine(), mHandlerInfo));
