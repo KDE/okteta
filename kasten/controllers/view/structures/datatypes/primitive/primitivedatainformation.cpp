@@ -23,18 +23,9 @@
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
 
-
-bool PrimitiveDataInformation::setChildData(uint, const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, BitCount64, quint8)
-{
-    Q_ASSERT_X(false, "PrimitiveDataInformation::setChildData()", "this should never be called!!");
-    return false;
-}
-
-
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {
-    if (column == (int)DataInformation::ColumnValue && fileLoaded)
+    if (column == (int) DataInformation::ColumnValue && fileLoaded)
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
     else
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
@@ -43,4 +34,34 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 // The inline destructor makes the compiler unhappy
 PrimitiveDataInformation::~PrimitiveDataInformation()
 {
+}
+
+PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d)
+        : PrimitiveDataInformation(d), mValue(d.mValue->clone())
+{
+    mValue->setParent(this);
+}
+
+PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const QString& name,
+        PrimitiveDataInformation* valueType, DataInformation* parent)
+        : PrimitiveDataInformation(name, parent), mValue(valueType)
+{
+    Q_CHECK_PTR(valueType);
+    mValue->setParent(this);
+
+}
+
+QScriptValue PrimitiveDataInformationWrapper::valueAsQScriptValue() const
+{
+    return mValue->valueAsQScriptValue();
+}
+
+qint64 PrimitiveDataInformationWrapper::readData(Okteta::AbstractByteArrayModel* input,
+        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
+{
+    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
+    qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
+    mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
+
+    return retVal;
 }

@@ -36,16 +36,14 @@
 
 PointerDataInformation::PointerDataInformation(QString name, DataInformation* childType,
         PrimitiveDataInformation* valueType, DataInformation* parent)
-        : PrimitiveDataInformation(name, parent), mValue(valueType), mPointerTarget(childType)
+        : PrimitiveDataInformationWrapper(name, valueType, parent), mPointerTarget(childType)
 {
-    Q_CHECK_PTR(valueType);
     Q_CHECK_PTR(childType);
 
     //currently only absolute unsigned pointers are allowed
     const PrimitiveDataType pdt = mValue->type();
     Q_ASSERT(pdt == Type_UInt8 || pdt == Type_UInt16 || pdt == Type_UInt32 || pdt == Type_UInt64);
     Q_UNUSED(pdt)
-    mValue->setParent(this);
     mPointerTarget->setParent(this);
 }
 
@@ -54,9 +52,8 @@ PointerDataInformation::~PointerDataInformation()
 }
 
 PointerDataInformation::PointerDataInformation(const PointerDataInformation& d)
-        : PrimitiveDataInformation(d), mValue(d.mValue->clone()), mPointerTarget(d.mPointerTarget->clone())
+        : PrimitiveDataInformationWrapper(d), mPointerTarget(d.mPointerTarget->clone())
 {
-    mValue->setParent(this);
     mPointerTarget->setParent(this);
 }
 
@@ -67,30 +64,21 @@ QScriptValue PointerDataInformation::toScriptValue(QScriptEngine* engine, Script
     return ret;
 }
 
-bool PointerDataInformation::setChildData(uint /*row*/, const QVariant& /*value*/, Okteta::AbstractByteArrayModel* /*out*/, Okteta::Address /*address*/, BitCount64 /*bitsRemaining*/, quint8 /*bitOffset*/)
+qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+        BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    Q_ASSERT_X(false, "PointerDataInformation::setChildData()", "this should never be called!!");
-    return false;
-}
-
-bool PointerDataInformation::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
-{
-    return mValue->setData(value, out, address, bitsRemaining, bitOffset);
-}
-
-qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
-{
-    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
-    qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
-    mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
-
+    qint64 ret = PrimitiveDataInformationWrapper::readData(input, address, bitsRemaining, bitOffset);
+    if (!mWasAbleToRead)
+    {
+        mPointerTarget->mWasAbleToRead = false;
+    }
     // If the pointer it's outside the boundaries of the input simply ignore it
-    if (mValue->value().ulongValue < quint64(input->size()))
+    else if (mValue->value().ulongValue < quint64(input->size()))
     {
         // Enqueue for later reading of the destination
         topLevelDataInformation()->enqueueReadData(this);
     }
-    return retVal;
+    return ret;
 }
 
 BitCount64 PointerDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
@@ -110,6 +98,7 @@ void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *inp
 {
     Q_UNUSED(address); //TODO offsets
     Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
+    Q_ASSERT(mWasAbleToRead);
     quint8 childBitOffset = 0;
     // Compute the destination offset
     const quint64 pointer = mValue->value().ulongValue;
@@ -137,26 +126,6 @@ void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *inp
     mPointerTarget->readData(input, newAddress, (input->size() - newAddress) * 8, &childBitOffset);
 }
 
-BitCount32 PointerDataInformation::size() const
-{
-    return mValue->size();
-}
-
-void PointerDataInformation::setWidgetData(QWidget* w) const
-{
-    return mValue->setWidgetData(w);
-}
-
-QVariant PointerDataInformation::dataFromWidget(const QWidget* w) const
-{
-    return mValue->dataFromWidget(w);
-}
-
-QWidget* PointerDataInformation::createEditWidget(QWidget* parent) const
-{
-    return mValue->createEditWidget(parent);
-}
-
 QString PointerDataInformation::typeName() const
 {
     return i18nc("memory pointer with underlying type", "%1 pointer", mValue->typeName());
@@ -167,38 +136,15 @@ QString PointerDataInformation::valueString() const
     return mValue->valueString();
 }
 
-Qt::ItemFlags PointerDataInformation::flags(int column, bool fileLoaded) const
-{
-    if (column == (int)DataInformation::ColumnValue && fileLoaded)
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-    else
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-}
-
 uint PointerDataInformation::childCount() const
 {
     return 1;
-}
-
-AllPrimitiveTypes PointerDataInformation::value() const
-{
-    return mValue->value();
-}
-
-void PointerDataInformation::setValue(AllPrimitiveTypes newValue)
-{
-    mValue->setValue(newValue);
 }
 
 DataInformation* PointerDataInformation::childAt(uint index) const
 {
     Q_ASSERT(index == 0);
     return index == 0 ? mPointerTarget.data() : 0;
-}
-
-QScriptValue PointerDataInformation::valueAsQScriptValue() const
-{
-    return mValue->valueAsQScriptValue();
 }
 
 bool PointerDataInformation::setPointerType(DataInformation* type)

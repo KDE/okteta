@@ -65,6 +65,7 @@ class ScriptHandlerInfo;
 class DataInformation : public DataInformationBase
 {
     friend class ScriptHandler; //so mHasBeenUpdated/hasBeenValidated can be set
+    friend class PointerDataInformation; //to set mWasAbleToRead on pointer target
 protected:
     explicit DataInformation(const DataInformation&);
 

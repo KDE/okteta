@@ -27,9 +27,9 @@
 #include "primitivedatainformation.h"
 
 
-class PointerDataInformation : public PrimitiveDataInformation
+class PointerDataInformation : public PrimitiveDataInformationWrapper
 {
-    DATAINFORMATION_CLONE_DECL(PointerDataInformation, PrimitiveDataInformation);
+    DATAINFORMATION_CLONE_DECL(PointerDataInformation, PrimitiveDataInformationWrapper);
 public:
     /** creates a new pointer
      *  takes ownership over @p childType and @p valueType
@@ -37,33 +37,21 @@ public:
     PointerDataInformation(QString name, DataInformation* childType,
             PrimitiveDataInformation* valueType, DataInformation* parent);
     virtual ~PointerDataInformation();
-protected:
-    QScopedPointer<PrimitiveDataInformation> mValue; // To allow different pointer sizes
-    QScopedPointer<DataInformation> mPointerTarget;
 
-public:
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
-    virtual BitCount32 size() const;
-    virtual void setWidgetData(QWidget* w) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QString typeName() const;
     virtual QString valueString() const;
-    virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     virtual bool canHaveChildren() const;
     virtual uint childCount() const;
     virtual DataInformation* childAt(uint index) const;
-    virtual PrimitiveDataType type() const;
-    virtual AllPrimitiveTypes value() const;
-    virtual void setValue(AllPrimitiveTypes newValue);
-    virtual QScriptValue valueAsQScriptValue() const;
     virtual bool isPointer() const;
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
     virtual int indexOf(const DataInformation* const data) const;
-
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            BitCount64 bitsRemaining, quint8* bitOffset);
+    /** Called once the whole structure has been read. Now we can evaluate what we are pointing at.
+     * @param input the input
+     * @param address the address of the root structure start */
     void delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address);
 
     DataInformation* pointerTarget() const;
@@ -78,16 +66,14 @@ public:
      * @return true if type was set, false if not
      */
     bool setPointerType(DataInformation* type);
+
+protected:
+    QScopedPointer<DataInformation> mPointerTarget;
 };
 
 inline bool PointerDataInformation::canHaveChildren() const
 {
     return true;
-}
-
-inline PrimitiveDataType PointerDataInformation::type() const
-{
-    return Type_Invalid; //FIXME add special type (pointer + bitfield)
 }
 
 inline bool PointerDataInformation::isPointer() const

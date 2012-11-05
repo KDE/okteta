@@ -24,10 +24,14 @@
 
 #include "../datainformation.h"
 #include "../primitivedatatype.h"
-#include "structviewpreferences.h" //TODO remove once (un)signeddisplaybase in different file
+#include "../../allprimitivetypes.h"
+#include "structviewpreferences.h"
 
 union AllPrimitiveTypes;
 
+/**
+ * A base class for all primitive data elements (e.g. unsigned integers or floating-point numbers)
+ */
 class PrimitiveDataInformation : public DataInformation
 {
     friend class PrimitiveDataInformationTest; //that unit test needs to change mWasAbleToRead
@@ -35,27 +39,21 @@ public:
     explicit PrimitiveDataInformation(const QString& name, DataInformation* parent = 0);
     virtual ~PrimitiveDataInformation();
     virtual PrimitiveDataInformation* clone() const = 0;
-    virtual BitCount32 size() const = 0;
 
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-
-    virtual PrimitiveDataType type() const = 0;
-    virtual BitCount32 childSize(uint index) const;
-    virtual QScriptValue valueAsQScriptValue() const = 0;
 
     virtual bool isPrimitive() const;
     virtual AllPrimitiveTypes value() const = 0;
     virtual void setValue(AllPrimitiveTypes newValue) = 0;
+    virtual QScriptValue valueAsQScriptValue() const = 0;
+    virtual PrimitiveDataType type() const = 0;
 
     virtual unsigned int childCount() const { return 0; }
     virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return 0; }
     virtual bool canHaveChildren() const { return false; }
     virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
     virtual int indexOf(const DataInformation* const) const {Q_ASSERT(false); return -1; }
-
 
     static int unsignedDisplayBase();
     static int signedDisplayBase();
@@ -65,12 +63,59 @@ protected:
     PrimitiveDataInformation(const PrimitiveDataInformation& d);
 };
 
-inline BitCount32 PrimitiveDataInformation::childSize(uint index) const
+/**
+ * A base class for data types which just wrap an underlying primitive data type.
+ * The basic operations (reading/writing/size/value) are simply delegated to the wrapped element.
+ *
+ * This is used for pointers (wrapping differently sized integers) and enumerations/bitflags
+ * Due to the use of a PrimitiveDataInformation pointer as a member any primitive type can be wrapped.
+ * For example pointers using a bitfield value are possible and theoretically floating point enums
+ * (although these were not added due to float comparison issues - use the binary representation of an
+ * equally sized integer instead).
+ */
+class PrimitiveDataInformationWrapper : public PrimitiveDataInformation
 {
-    Q_UNUSED(index);
-    Q_ASSERT_X(false, "PrimitiveDataInformation::childSize", "This should never be called");
-    return 0;
-}
+protected:
+    PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d);
+public:
+    /** takes ownership of @p valueType */
+    PrimitiveDataInformationWrapper(const QString& name, PrimitiveDataInformation* valueType,
+            DataInformation* parent = 0);
+    virtual ~PrimitiveDataInformationWrapper() {}
+
+    //delegate all these to the underlying object:
+
+    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
+    { return mValue->setData(value, out, address, bitsRemaining, bitOffset); }
+
+
+
+    virtual BitCount32 size() const { return mValue->size(); }
+
+    virtual void setWidgetData(QWidget* w) const {mValue->setWidgetData(w); }
+
+    virtual QVariant dataFromWidget(const QWidget* w) const { return mValue->dataFromWidget(w); }
+
+    virtual QWidget* createEditWidget(QWidget* parent) const { return mValue->createEditWidget(parent); }
+
+    virtual AllPrimitiveTypes value() const { return mValue->value(); }
+
+    virtual void setValue(AllPrimitiveTypes newValue) { mValue->setValue(newValue); }
+
+    //classes derived from this are not true primitive types (they provide additional information)
+    virtual PrimitiveDataType type() const { return Type_Invalid; }
+
+
+    virtual QScriptValue valueAsQScriptValue() const;
+
+    //we have to do slightly more than just forward with this method
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            BitCount64 bitsRemaining, quint8* bitOffset);
+protected:
+    QScopedPointer<PrimitiveDataInformation> mValue;
+};
+
 
 inline BitCount32 PrimitiveDataInformation::offset(unsigned int index) const
 {
