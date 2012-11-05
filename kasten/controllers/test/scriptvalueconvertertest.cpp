@@ -255,7 +255,7 @@ void ScriptValueConverterTest::testParseEnum()
         QVERIFY(!data);
         return;
     }
-    AbstractEnumDataInformation* e = data->asEnum();
+    EnumDataInformation* e = data->asEnum();
     QVERIFY(e);
 
     QMap<AllPrimitiveTypes, QString> enumVals = e->enumValues()->values();

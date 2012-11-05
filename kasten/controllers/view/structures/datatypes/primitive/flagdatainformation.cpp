@@ -122,8 +122,3 @@ QString FlagDataInformation::typeName() const
 {
     return i18n("flags (%1)", mValue->typeName());
 }
-
-QString FlagDataInformation::getTypeString() const
-{
-    return i18nc("bit flags, i.e. 'R | W | X' with undelying type", "flags(%1)", mValue->typeName());
-}

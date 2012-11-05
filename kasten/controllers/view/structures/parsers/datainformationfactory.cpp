@@ -103,7 +103,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
     if (!definition)
     {
         QMap<AllPrimitiveTypes, QString> enumValues =
-                AbstractEnumDataInformation::parseEnumValues(pd.enumValuesObject, lwc, primitiveType);
+                EnumDefinition::parseEnumValues(pd.enumValuesObject, lwc, primitiveType);
         if (enumValues.isEmpty())
         {
             pd.error() << "No enum values specified!";

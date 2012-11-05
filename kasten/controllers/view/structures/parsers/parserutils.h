@@ -35,7 +35,7 @@ class PrimitiveDataInformation;
 class AbstractBitfieldDataInformation;
 class StructureDataInformation;
 class UnionDataInformation;
-class AbstractEnumDataInformation;
+class EnumDataInformation;
 class StringDataInformation;
 
 class QScriptValue;

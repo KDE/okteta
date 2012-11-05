@@ -227,7 +227,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
             }
             QString value = readProperty(child, PROPERTY_VALUE);
             QPair<AllPrimitiveTypes, QString> converted =
-                    AbstractEnumDataInformation::convertToEnumEntry(name, value, lwc, type);
+                    EnumDefinition::convertToEnumEntry(name, value, lwc, type);
             if (converted == QPair<AllPrimitiveTypes, QString>())
                 continue;
             defs.insert(converted.first, converted.second);
@@ -424,7 +424,7 @@ template UnionDataInformation* OsdParser::structOrUnionFromXML(const QDomElement
 template StructureDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem,
         const OsdParserInfo& info) const;
 
-AbstractEnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
+EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
         const OsdParserInfo& info) const
 {
     EnumParsedData epd(info);

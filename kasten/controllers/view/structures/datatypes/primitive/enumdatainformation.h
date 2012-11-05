@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -25,11 +25,10 @@
 
 #include "primitivedatainformation.h"
 #include "enumdefinition.h"
-#include "abstractenumdatainformation.h"
 
-class EnumDataInformation: public AbstractEnumDataInformation
+class EnumDataInformation: public PrimitiveDataInformationWrapper
 {
-    DATAINFORMATION_CLONE_DECL(EnumDataInformation, AbstractEnumDataInformation);
+    DATAINFORMATION_CLONE(EnumDataInformation, PrimitiveDataInformationWrapper), mEnum(d.mEnum) {}
 public:
     /** this object takes ownership of @p type */
     EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
@@ -38,34 +37,28 @@ public:
 
     virtual QString valueString() const;
     virtual QString typeName() const;
+    virtual bool isEnum() const;
 
-    virtual BitCount32 size() const;
-    virtual PrimitiveDataType type() const;
-    virtual AllPrimitiveTypes value() const;
-    virtual void setValue(AllPrimitiveTypes newVal);
-
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, BitCount64 remaining, quint8* bitOffset);
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
-    virtual QScriptValue valueAsQScriptValue() const;
+    EnumDefinition::Ptr enumValues() const;
+    void setEnumValues(QMap<AllPrimitiveTypes, QString> newValues);
+    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
 protected:
-    QScopedPointer<PrimitiveDataInformation> mValue; //to allow different enum sizes
+    EnumDefinition::Ptr mEnum;
 };
 
-inline PrimitiveDataType EnumDataInformation::type() const
+inline bool EnumDataInformation::isEnum() const
 {
-    return mValue->type();
+    return true;
 }
 
-inline BitCount32 EnumDataInformation::size() const
+inline EnumDefinition::Ptr EnumDataInformation::enumValues() const
 {
-    return mValue->size();
+    return mEnum;
 }
 
+inline void EnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString> newValues)
+{
+    mEnum->setValues(newValues);
+}
 #endif /* ENUMDATAINFORMATION_H_ */

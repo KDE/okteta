@@ -162,7 +162,7 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
         CAST_CHECKER(false, data, asBitfield, AbstractBitfieldDataInformation);
         CAST_CHECKER(false, data, asDataInformation, DataInformation);
         CAST_CHECKER(false, data, asDummy, DummyDataInformation);
-        CAST_CHECKER(false, data, asEnum, AbstractEnumDataInformation);
+        CAST_CHECKER(false, data, asEnum, EnumDataInformation);
         CAST_CHECKER(false, data, asPrimitive, PrimitiveDataInformation);
         CAST_CHECKER(false, data, asString, StringDataInformation);
         CAST_CHECKER(false, data, asStruct, StructureDataInformation);
@@ -189,9 +189,9 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
 
     QCOMPARE(data->isEnum(), expected.isEnum);
     if (expected.isEnum)
-        CAST_CHECKER(true, data, asEnum, AbstractEnumDataInformation);
+        CAST_CHECKER(true, data, asEnum, EnumDataInformation);
     else
-        CAST_CHECKER(false, data, asEnum, AbstractEnumDataInformation);
+        CAST_CHECKER(false, data, asEnum, EnumDataInformation);
 
     QCOMPARE(data->isPrimitive(), expected.isPrimitive);
     if (expected.isPrimitive)

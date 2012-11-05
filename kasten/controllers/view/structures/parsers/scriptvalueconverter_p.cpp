@@ -232,7 +232,7 @@ PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& i
     return DataInformationFactory::newPointer(ppd);
 }
 
-AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
+EnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
 {
     EnumParsedData epd(info);
     QScriptValue enumType = value.property(PROPERTY_TYPE);

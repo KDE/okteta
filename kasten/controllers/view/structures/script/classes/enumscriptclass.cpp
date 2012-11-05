@@ -23,7 +23,7 @@
 
 #include "enumscriptclass.h"
 
-#include "../../datatypes/primitive/abstractenumdatainformation.h"
+#include "../../datatypes/primitive/enumdatainformation.h"
 #include "../../parsers/parserutils.h"
 #include "../scriptlogger.h"
 
@@ -42,7 +42,7 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
 {
     if (name == s_values)
     {
-        const AbstractEnumDataInformation* pData = data->asEnum();
+        const EnumDataInformation* pData = data->asEnum();
         QScriptValue ret = engine()->newObject();
         QMapIterator<AllPrimitiveTypes, QString> it(pData-> enumValues()->values());
         while(it.hasNext()) {
@@ -68,8 +68,8 @@ bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScript
 {
     if (name == s_values)
     {
-        AbstractEnumDataInformation* pData = data->asEnum();
-        QMap<AllPrimitiveTypes, QString> newValues = AbstractEnumDataInformation::parseEnumValues(value,
+        EnumDataInformation* pData = data->asEnum();
+        QMap<AllPrimitiveTypes, QString> newValues = EnumDefinition::parseEnumValues(value,
                 LoggerWithContext(pData->logger(), pData->fullObjectPath()) , pData->type());
         if (newValues.isEmpty())
             pData->logWarn() << "attempting to set empty list of enum values!";

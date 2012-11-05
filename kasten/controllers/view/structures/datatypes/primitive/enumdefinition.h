@@ -29,6 +29,10 @@
 #include <QSharedData>
 #include <QSharedDataPointer>
 #include <QString>
+#include <QPair>
+
+class QScriptValue;
+struct LoggerWithContext;
 
 class EnumDefinition: public QSharedData
 {
@@ -36,13 +40,9 @@ public:
     typedef QSharedDataPointer<EnumDefinition> Ptr;
     EnumDefinition(const QMap<AllPrimitiveTypes, QString> values, const QString& name,
             PrimitiveDataType type) :
-        QSharedData(), mName(name), mValues(values), mType(type)
-    {
-    }
+        QSharedData(), mName(name), mValues(values), mType(type) {}
     EnumDefinition(const EnumDefinition& e) :
-        QSharedData(e), mValues(e.mValues), mType(e.mType)
-    {
-    }
+        QSharedData(e), mValues(e.mValues), mType(e.mType) {}
 
     const QMap<AllPrimitiveTypes, QString>& values() const;
     const AllPrimitiveTypes key(QString& value) const;
@@ -50,6 +50,12 @@ public:
     PrimitiveDataType type() const;
     const QString& name() const;
     void setValues(QMap< AllPrimitiveTypes, QString > newValues);
+
+    static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
+            const LoggerWithContext& logger, PrimitiveDataType type = Type_UInt64);
+    /** @return a pair containing the converted value. A default constructed pair means error! */
+    static QPair<AllPrimitiveTypes, QString> convertToEnumEntry(const QString& name, const QVariant& value,
+            const LoggerWithContext& logger, PrimitiveDataType type);
 protected:
     const QString mName;
     QMap<AllPrimitiveTypes, QString> mValues;

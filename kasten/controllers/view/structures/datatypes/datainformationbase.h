@@ -22,7 +22,7 @@
 #ifndef DATAINFORMATIONBASE_H
 #define DATAINFORMATIONBASE_H
 
-class AbstractEnumDataInformation;
+class EnumDataInformation;
 class StringDataInformation;
 class DataInformationBase;
 class DataInformation;
@@ -57,8 +57,8 @@ public:
     PrimitiveDataInformation* asPrimitive();
     const PrimitiveDataInformation* asPrimitive() const;
     virtual bool isEnum() const;
-    AbstractEnumDataInformation* asEnum();
-    const AbstractEnumDataInformation* asEnum() const;
+    EnumDataInformation* asEnum();
+    const EnumDataInformation* asEnum() const;
     virtual bool isBitfield() const;
     AbstractBitfieldDataInformation* asBitfield();
     const AbstractBitfieldDataInformation* asBitfield() const;
@@ -91,7 +91,7 @@ public:
 CAST_FUNCS(Array)
 CAST_FUNCS(Union)
 CAST_FUNCS_2(StructureDataInformation, Struct)
-CAST_FUNCS_2(AbstractEnumDataInformation, Enum)
+CAST_FUNCS(Enum)
 CAST_FUNCS(Primitive)
 CAST_FUNCS(Dummy)
 CAST_FUNCS_2(AbstractBitfieldDataInformation, Bitfield)

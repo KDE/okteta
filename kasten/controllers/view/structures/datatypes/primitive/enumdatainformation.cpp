@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -23,14 +23,15 @@
 #include "enumdatainformation.h"
 #include "../topleveldatainformation.h"
 
-#include "../../script/scriptutils.h"
-
 #include <KLocalizedString>
 #include <QScriptValue>
 
+#include "../../script/classes/enumscriptclass.h"
+#include "../../script/scriptlogger.h"
+
 EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
-            EnumDefinition::Ptr enumDef, DataInformation* parent) :
-    AbstractEnumDataInformation(name, enumDef, parent), mValue(type)
+        EnumDefinition::Ptr enumDef, DataInformation* parent)
+        : PrimitiveDataInformationWrapper(name, type, parent), mEnum(enumDef)
 {
     Q_CHECK_PTR(type);
     if (enumDef->type() != type->type())
@@ -39,14 +40,14 @@ EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInfor
     mValue->setParent(this);
 }
 
-EnumDataInformation::EnumDataInformation(const EnumDataInformation& e) :
-    AbstractEnumDataInformation(e), mValue(e.mValue->clone())
-{
-    mValue->setParent(this);
-}
+EnumDataInformation::~EnumDataInformation() {}
 
-EnumDataInformation::~EnumDataInformation()
+QScriptValue EnumDataInformation::toScriptValue(QScriptEngine* engine,
+        ScriptHandlerInfo* handlerInfo)
 {
+    QScriptValue ret = engine->newObject(handlerInfo->mEnumClass.data());
+    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
+    return ret;
 }
 
 QString EnumDataInformation::valueString() const
@@ -65,51 +66,4 @@ QString EnumDataInformation::valueString() const
 QString EnumDataInformation::typeName() const
 {
     return i18n("enum (%1)", mValue->typeName());
-}
-
-
-bool EnumDataInformation::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-        Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
-{
-    return mValue->setData(value, out, address, bitsRemaining, bitOffset);
-}
-
-
-qint64 EnumDataInformation::readData(Okteta::AbstractByteArrayModel* input,
-        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
-{
-    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
-    qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
-    mWasAbleToRead = retVal >= 0; //not able to read if mValue->readData returns -1
-    return retVal;
-}
-
-QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
-{
-    return mValue->createEditWidget(parent);
-}
-
-QVariant EnumDataInformation::dataFromWidget(const QWidget* w) const
-{
-    return mValue->dataFromWidget(w);
-}
-
-void EnumDataInformation::setWidgetData(QWidget* w) const
-{
-    mValue->setWidgetData(w);
-}
-
-AllPrimitiveTypes EnumDataInformation::value() const
-{
-    return mValue->value();
-}
-
-void EnumDataInformation::setValue(AllPrimitiveTypes newVal)
-{
-    mValue->setValue(newVal);
-}
-
-QScriptValue EnumDataInformation::valueAsQScriptValue() const
-{
-    return mValue->valueAsQScriptValue();
 }

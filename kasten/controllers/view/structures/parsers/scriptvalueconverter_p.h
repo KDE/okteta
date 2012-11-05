@@ -34,7 +34,7 @@ StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& 
 UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info);
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info);
 PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info);
-AbstractEnumDataInformation* toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
+EnumDataInformation* toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
 }
 
 #endif //SCRIPTVALUECONVERTER_P_H_

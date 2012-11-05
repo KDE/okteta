@@ -34,7 +34,6 @@ public:
             DataInformation* parent = 0);
     virtual QString valueString() const;
     virtual QString typeName() const;
-    virtual QString getTypeString() const;
 };
 
 #endif // FLAGDATAINFORMATION_H

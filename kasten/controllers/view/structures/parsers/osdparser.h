@@ -33,7 +33,7 @@ class QDomDocument;
 class StringDataInformation;
 class ArrayDataInformation;
 class AbstractBitfieldDataInformation;
-class AbstractEnumDataInformation;
+class EnumDataInformation;
 class DataInformation;
 class StructureDataInformation;
 class UnionDataInformation;
@@ -68,7 +68,7 @@ private:
     PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
     PointerDataInformation* pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
     AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
-    AbstractEnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags,
+    EnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags,
             const OsdParserInfo& info) const;
     StringDataInformation* stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
 
