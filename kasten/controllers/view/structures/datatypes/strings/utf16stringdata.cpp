@@ -122,13 +122,8 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         mCodePoints.reserve(mLength.maxBytes / 2);
     }
 
-    if (oldSize != 0)
-    {
-        emit mParent->topLevelDataInformation()->
-            _childrenAboutToBeRemoved(mParent, 0, oldSize);
-        emit mParent->topLevelDataInformation()->
-            _childrenRemoved(mParent, 0, oldSize);
-    }
+    mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, oldSize, 0);
+    mParent->topLevelDataInformation()->_childCountChanged(mParent, oldSize, 0);
 
     const uint oldMax = mCodePoints.size();
     quint64 remaining = bitsRemaining;
@@ -225,8 +220,8 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
             break;
     }
     mCodePoints.resize(count);
-    emit mParent->topLevelDataInformation()->_childrenAboutToBeInserted(mParent, 0, count);
-    emit mParent->topLevelDataInformation()->_childrenInserted(mParent, 0, count);
+    mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, 0, count);
+    mParent->topLevelDataInformation()->_childCountChanged(mParent, 0, count);
 
     if (eofAtStart)
         return -1;

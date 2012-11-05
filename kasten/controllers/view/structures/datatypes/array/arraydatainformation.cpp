@@ -64,27 +64,16 @@ ArrayDataInformation::~ArrayDataInformation()
 
 bool ArrayDataInformation::setArrayLength(uint newLength)
 {
-    if (uint(newLength) > MAX_LEN)
+    if (newLength > MAX_LEN)
     {
         logWarn() << QString(QLatin1String("new array length is too large (%1), limiting to (%2)"))
                 .arg(QString::number(newLength), QString::number(MAX_LEN));
         newLength = MAX_LEN;
     }
     uint oldLength = mData->length();
-    if (newLength < oldLength)
-    {
-        //lengthToSet is smaller so oldLength is at least 1 -> no overflow
-        topLevelDataInformation()->_childrenAboutToBeRemoved(this, newLength, oldLength - 1);
-        mData->setLength(newLength);
-        topLevelDataInformation()->_childrenRemoved(this, newLength, oldLength - 1);
-    }
-    else if (newLength > oldLength)
-    {
-        //lengthToSet is larger so larger is at least 1 -> no overflow
-        topLevelDataInformation()->_childrenAboutToBeInserted(this, oldLength, newLength - 1);
-        mData->setLength(newLength);
-        topLevelDataInformation()->_childrenInserted(this, oldLength, newLength - 1);
-    }
+    topLevelDataInformation()->_childCountAboutToChange(this, oldLength, newLength);
+    mData->setLength(newLength);
+    topLevelDataInformation()->_childCountChanged(this, oldLength, newLength);
     return true;
 }
 
@@ -104,12 +93,13 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
     if (len > 0)
     {
         //first create with length of 0, then change length to actual length (to ensure model is correct)
-        topLevel->_childrenAboutToBeRemoved(this, 0, len - 1);
+        topLevel->_childCountAboutToChange(this, len, 0);
         mData.reset(arrayDataFromType(0, newChildType));
-        topLevel->_childrenRemoved(this, 0, len - 1);
-        topLevel->_childrenAboutToBeInserted(this, 0, len - 1);
+        topLevel->_childCountChanged(this, len, 0);
+
+        topLevel->_childCountAboutToChange(this, 0, len);
         mData->setLength(len);
-        topLevel->_childrenInserted(this, 0, len - 1);
+        topLevel->_childCountChanged(this, 0, len);
     }
     else
     {

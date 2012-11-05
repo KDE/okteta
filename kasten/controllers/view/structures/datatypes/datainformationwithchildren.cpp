@@ -147,19 +147,20 @@ void DataInformationWithChildren::calculateValidationState()
 
 void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& newChildren)
 {
+    //since we are replacing the children and the first few may be different emit
+    //change to length zero and then to new length so that model gets updated correctly
     uint numChildren = childCount();
-    if (numChildren != 0)
-        topLevelDataInformation()->_childrenAboutToBeRemoved(this, 0, numChildren - 1);
+    topLevelDataInformation()->_childCountAboutToChange(this, numChildren, 0);
     qDeleteAll(mChildren);
-    if (numChildren != 0)
-        topLevelDataInformation()->_childrenRemoved(this, 0, numChildren - 1);
+    mChildren.clear();
+    topLevelDataInformation()->_childCountChanged(this, numChildren, 0);
 
     const uint count = newChildren.size();
-    topLevelDataInformation()->_childrenAboutToBeInserted(this, 0, count - 1);
+    topLevelDataInformation()->_childCountAboutToChange(this, 0, count);
     mChildren = newChildren;
     for (int i = 0; i < mChildren.size(); ++i)
         mChildren.at(i)->setParent(this);
-    topLevelDataInformation()->_childrenInserted(this, 0, count - 1);
+    topLevelDataInformation()->_childCountChanged(this, 0, count);
 }
 
 void DataInformationWithChildren::setChildren(QScriptValue children)
@@ -189,7 +190,7 @@ int DataInformationWithChildren::indexOf(const DataInformation* const data) cons
 }
 
 QVariant DataInformationWithChildren::childData(int row, int column, int role) const
-        {
+{
     Q_ASSERT(row >= 0 && row < mChildren.size());
     //just delegate to child
     return mChildren.at(row)->data(column, role);
@@ -198,11 +199,11 @@ QVariant DataInformationWithChildren::childData(int row, int column, int role) c
 void DataInformationWithChildren::appendChild(DataInformation* newChild, bool emitSignal)
 {
     if (emitSignal)
-        topLevelDataInformation()->_childrenAboutToBeInserted(this, mChildren.size(), mChildren.size());
+        topLevelDataInformation()->_childCountAboutToChange(this, mChildren.size(), mChildren.size() + 1);
     newChild->setParent(this);
     mChildren.append(newChild);
     if (emitSignal)
-        topLevelDataInformation()->_childrenInserted(this, mChildren.size(), mChildren.size());
+        topLevelDataInformation()->_childCountChanged(this, mChildren.size(), mChildren.size() + 1);
 }
 
 void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal)
@@ -211,12 +212,12 @@ void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>
         return;
     const int added = newChildren.size();
     if (emitSignal)
-        topLevelDataInformation()->_childrenAboutToBeInserted(this, mChildren.size(), mChildren.size() + added - 1);
+        topLevelDataInformation()->_childCountAboutToChange(this, mChildren.size(), mChildren.size() + added);
     for (int i = 0; i < newChildren.size(); ++i)
         newChildren.at(i)->setParent(this);
     mChildren << newChildren;
     if (emitSignal)
-        topLevelDataInformation()->_childrenInserted(this, mChildren.size(), mChildren.size() + added - 1);
+        topLevelDataInformation()->_childCountChanged(this, mChildren.size(), mChildren.size() + added);
 }
 
 bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInformation* newChild)

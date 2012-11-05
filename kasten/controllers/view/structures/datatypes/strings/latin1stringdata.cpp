@@ -46,11 +46,8 @@ qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Add
     {
         mData.reserve(mLength.maxChars);
     }
-    if (oldSize != 0)
-    {
-        emit mParent->topLevelDataInformation()->_childrenAboutToBeRemoved(mParent, 0, oldSize);
-        emit mParent->topLevelDataInformation()->_childrenRemoved(mParent, 0, oldSize);
-    }
+    mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, oldSize, 0);
+    mParent->topLevelDataInformation()->_childCountChanged(mParent, oldSize, 0);
 
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
@@ -102,8 +99,8 @@ qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Add
             break;
     }
     mData.resize(count);
-    emit mParent->topLevelDataInformation()->_childrenAboutToBeInserted(mParent, 0, count);
-    emit mParent->topLevelDataInformation()->_childrenInserted(mParent, 0, count);
+    mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, 0, count);
+    mParent->topLevelDataInformation()->_childCountChanged(mParent, 0, count);
 
     if (eofAtStart)
         return -1;

@@ -94,10 +94,8 @@ public:
     virtual bool isTopLevel() const;
 
     //only public so that DataInformation can call them
-    void _childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
-    void _childrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
-    void _childrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
-    void _childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
+    void _childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount);
+    void _childCountChanged(DataInformation* sender, uint oldCount, uint newCount);
 
 private:
     bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList, Okteta::Address address);
@@ -159,30 +157,6 @@ inline void TopLevelDataInformation::setChildDataChanged()
     mChildDataChanged = true;
 }
 
-inline void TopLevelDataInformation::_childrenAboutToBeInserted(DataInformation* sender,
-        uint startIndex, uint endIndex)
-{
-    emit childrenAboutToBeInserted(sender, startIndex, endIndex);
-}
-
-inline void TopLevelDataInformation::_childrenAboutToBeRemoved(DataInformation* sender,
-        uint startIndex, uint endIndex)
-{
-    emit childrenAboutToBeRemoved(sender, startIndex, endIndex);
-}
-
-inline void TopLevelDataInformation::_childrenInserted(const DataInformation* sender,
-        uint startIndex, uint endIndex)
-{
-    emit childrenInserted(sender, startIndex, endIndex);
-}
-
-inline void TopLevelDataInformation::_childrenRemoved(const DataInformation* sender,
-        uint startIndex, uint endIndex)
-{
-    emit childrenRemoved(sender, startIndex, endIndex);
-}
-
 inline bool TopLevelDataInformation::isTopLevel() const
 {
     return true;
@@ -196,6 +170,22 @@ inline ScriptLogger* TopLevelDataInformation::logger() const
 inline ScriptHandler* TopLevelDataInformation::scriptHandler() const
 {
     return mScriptHandler.data();
+}
+
+inline void TopLevelDataInformation::_childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount)
+{
+    if (newCount < oldCount)  //newCount is smaller so oldCount is at least 1 -> no underflow
+        emit childrenAboutToBeRemoved(sender, newCount, oldCount - 1);
+    else if (newCount > oldCount) //newCount is larger so it is at least 1 -> no underflow
+        emit childrenAboutToBeInserted(sender, oldCount, newCount - 1);
+}
+
+inline void TopLevelDataInformation::_childCountChanged(DataInformation* sender, uint oldCount, uint newCount)
+{
+    if (newCount < oldCount)  //newCount is smaller so oldCount is at least 1 -> no underflow
+        emit childrenRemoved(sender, newCount, oldCount - 1);
+    else if (newCount > oldCount) //newCount is larger so it is at least 1 -> no underflow
+        emit childrenInserted(sender, oldCount, newCount - 1);
 }
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */
