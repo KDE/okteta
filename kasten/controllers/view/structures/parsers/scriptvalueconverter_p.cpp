@@ -31,8 +31,6 @@
 #include "../datatypes/strings/stringdatainformation.h"
 #include "../script/scriptlogger.h"
 
-#include <QScriptValueIterator>
-
 using namespace ParserStrings;
 
 namespace ScriptValueConverter
@@ -40,6 +38,11 @@ namespace ScriptValueConverter
 
 DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& oldInfo)
 {
+    if (!value.isValid())
+    {
+        oldInfo.error() << "invalid value passed!";
+        return 0;
+    }
     ParserInfo info(oldInfo);
     QString nameOverride = value.property(PROPERTY_NAME).toString();
     if (!nameOverride.isEmpty())
@@ -94,7 +97,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         return 0; //no point trying to convert
     }
 
-    QString type = value.property(PROPERTY_INTERNAL_TYPE).toString().toLower(); //to lower just to be safe
+    QString type = value.property(PROPERTY_INTERNAL_TYPE).toString();
     if (type.isEmpty())
     {
         info.error() << "Cannot convert object since type of object could not be determined!";
@@ -126,8 +129,14 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     else if (type == TYPE_POINTER)
         returnVal = toPointer(value, info);
 
+    else if (type == TYPE_TAGGED_UNION)
+        returnVal = toTaggedUnion(value, info);
+
     else if (type == TYPE_PRIMITIVE)
         returnVal = toPrimitive(value, info);
+
+    else
+        info.error() << "Unkown type:" << type;
 
     if (returnVal)
     {
@@ -170,7 +179,6 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name);
     childInfo.parent = &dummy;
-    childInfo.name = NAME_ARRAY_TYPE;
     apd.arrayType = toDataInformation(childType, childInfo);
 
     return DataInformationFactory::newArray(apd);
@@ -191,31 +199,18 @@ PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInf
     return DataInformationFactory::newPrimitive(ppd);
 }
 
-
-namespace {
-template<class T>
-T* toStructOrUnion(const QScriptValue& value, const ParserInfo& info)
-{
-    T* structOrUnion = new T(info.name, QVector<DataInformation*>(), info.parent);
-    QScriptValue valueChildren = value.property(PROPERTY_CHILDREN);
-    QVector<DataInformation*> fields = convertValues(valueChildren, info.logger, structOrUnion);
-
-    if (fields.isEmpty())
-        info.info() << "No children were found, this is probably a mistake.";
-    structOrUnion->appendChildren(fields, false);
-    return structOrUnion;
-}
-}
-
 StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info)
 {
-    return toStructOrUnion<StructureDataInformation>(value, info);
+    StructOrUnionParsedData supd(info);
+    supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN)));
+    return DataInformationFactory::newStruct(supd);
 }
 
 UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 {
-    return toStructOrUnion<UnionDataInformation>(value, info);
-}
+    StructOrUnionParsedData supd(info);
+    supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN)));
+    return DataInformationFactory::newUnion(supd);}
 
 PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info)
 {
@@ -261,4 +256,77 @@ StringDataInformation* toString(const QScriptValue& value, const ParserInfo& inf
     return DataInformationFactory::newString(spd);
 }
 
+TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const ParserInfo& info)
+{
+    TaggedUnionParsedData tpd(info);
+    QScriptValue alternatives = value.property(PROPERTY_ALTERNATIVES);
+    if (!alternatives.isArray())
+    {
+        info.error() << "Alternatives must be an array!";
+        return 0;
+    }
+    int length = alternatives.property(PROPERTY_LENGTH).toInt32();
+    for (int i = 0; i < length; ++i)
+    {
+        TaggedUnionParsedData::Alternatives alt;
+        QScriptValue current = alternatives.property(i);
+        alt.name = current.property(PROPERTY_STRUCT_NAME).toString();
+        alt.selectIf = current.property(PROPERTY_SELECT_IF);
+        alt.fields = QSharedPointer<ChildrenParser>(
+                new ScriptValueChildrenParser(info, current.property(PROPERTY_CHILDREN)));
+        tpd.alternatives.append(alt);
+    }
+    tpd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN)));
+    tpd.defaultFields.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_DEFAULT_CHILDREN)));
+    return DataInformationFactory::newTaggedUnion(tpd);
+}
+
 } //namespace ScriptValueConverter
+
+ScriptValueConverter::ScriptValueChildrenParser::ScriptValueChildrenParser(const ParserInfo& info,
+        const QScriptValue& children) : mValue(children), mIter(children), mInfo(info)
+{
+}
+
+ScriptValueConverter::ScriptValueChildrenParser::~ScriptValueChildrenParser()
+{
+}
+
+DataInformation* ScriptValueConverter::ScriptValueChildrenParser::next()
+{
+    Q_ASSERT(hasNext());
+    mIter.next();
+    if (mValue.isArray() && mIter.name() == QLatin1String("length"))
+        mIter.next(); //skip length property
+    mInfo.name = mIter.name();
+    return toDataInformation(mIter.value(), mInfo);
+}
+
+bool ScriptValueConverter::ScriptValueChildrenParser::hasNext()
+{
+    if (!mIter.hasNext())
+        return false;
+    if (mValue.isArray())
+    {
+        //check if next element is length property
+        mIter.next();
+        if (mIter.name() != QLatin1String("length"))
+        {
+            mIter.previous(); //go back and return true
+            return true;
+        }
+        else
+        {
+            return mIter.hasNext(); //skipped length
+        }
+    }
+    else
+    {
+        return true;
+    }
+}
+
+void ScriptValueConverter::ScriptValueChildrenParser::setParent(DataInformation* newParent)
+{
+    mInfo.parent = newParent;
+}

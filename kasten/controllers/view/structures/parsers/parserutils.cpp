@@ -43,13 +43,24 @@ ParsedNumber<int> ParserUtils::intFromString(const QString& str)
 
 ParsedNumber<uint> ParserUtils::uintFromString(const QString& str)
 {
-    int value = 0;
+    uint value = 0;
     bool okay;
     if (str.startsWith(QLatin1String("0x")))
         value = str.mid(2).toUInt(&okay, 16);
     else
         value = str.toUInt(&okay, 10);
     return ParsedNumber<uint>(value, str, okay);
+}
+
+ParsedNumber<quint64> ParserUtils::uint64FromString(const QString& str)
+{
+    quint64 value = 0;
+    bool okay;
+    if (str.startsWith(QLatin1String("0x")))
+        value = str.mid(2).toULongLong(&okay, 16);
+    else
+        value = str.toULongLong(&okay, 10);
+    return ParsedNumber<quint64>(value, str, okay);
 }
 
 DataInformation::DataInformationEndianess ParserUtils::byteOrderFromString(const QString& string,
@@ -103,6 +114,23 @@ ParsedNumber<uint> ParserUtils::uintFromScriptValue(const QScriptValue& val)
         return uintFromString(val.toString());
     else
         return ParsedNumber<uint>::badInput(val.toString());
+}
+
+ParsedNumber<quint64> ParserUtils::uint64FromScriptValue(const QScriptValue& val)
+{
+    if (val.isNumber())
+    {
+        //check whether it is in range
+        const uint value = val.toUInt32();
+        const qsreal doubleVal = val.toNumber();
+        if (doubleVal != qsreal(value))
+            return ParsedNumber<quint64>::badInput(val.toString());
+        return ParsedNumber<quint64>(value, val.toString(), true);
+    }
+    else if (val.isString())
+        return uint64FromString(val.toString());
+    else
+        return ParsedNumber<quint64>::badInput(val.toString());
 }
 
 QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianess order)

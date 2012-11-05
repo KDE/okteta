@@ -24,6 +24,7 @@
 #define DATAINFORMATIONFACTORY_H_
 
 #include <QScriptValue>
+#include <QSharedPointer>
 
 #include "../datatypes/primitive/bitfield/abstractbitfielddatainformation.h"
 #include "../datatypes/primitive/primitivedatainformation.h"
@@ -33,6 +34,9 @@
 #include "../datatypes/primitive/pointerdatainformation.h"
 #include "../datatypes/array/arraydatainformation.h"
 #include "../datatypes/strings/stringdatainformation.h"
+#include "../datatypes/taggeduniondatainformation.h"
+#include "../datatypes/uniondatainformation.h"
+#include "../datatypes/structuredatainformation.h"
 
 #include "../script/scriptlogger.h"
 #include "parserutils.h"
@@ -101,6 +105,27 @@ private:
     Q_DISABLE_COPY(PointerParsedData)
 };
 
+struct TaggedUnionParsedData : public ParserInfo {
+    struct Alternatives {
+        QString name;
+        QScriptValue selectIf;
+        QSharedPointer<ChildrenParser> fields;
+    };
+    inline explicit TaggedUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    QScopedPointer<ChildrenParser> children;
+    QVector<Alternatives> alternatives;
+    QScopedPointer<ChildrenParser> defaultFields;
+private:
+    Q_DISABLE_COPY(TaggedUnionParsedData)
+};
+
+struct StructOrUnionParsedData : public ParserInfo {
+    inline explicit StructOrUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
+    QScopedPointer<ChildrenParser> children;
+private:
+    Q_DISABLE_COPY(StructOrUnionParsedData)
+};
+
 namespace DataInformationFactory
 {
 AbstractBitfieldDataInformation* newBitfield(const BitfieldParsedData& pd);
@@ -110,6 +135,9 @@ FlagDataInformation* newFlags(const EnumParsedData& pd);
 ArrayDataInformation* newArray(const ArrayParsedData& pd);
 StringDataInformation* newString(const StringParsedData& pd);
 PointerDataInformation* newPointer(const PointerParsedData& pd);
+UnionDataInformation* newUnion(const StructOrUnionParsedData& pd);
+StructureDataInformation* newStruct(const StructOrUnionParsedData& pd);
+TaggedUnionDataInformation* newTaggedUnion(const TaggedUnionParsedData& pd);
 
 bool commonInitialization(DataInformation* data, const CommonParsedData& pd);
 }

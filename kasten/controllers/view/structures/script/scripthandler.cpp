@@ -101,6 +101,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
     Q_CHECK_PTR(data);
     //check if has an update function:
     Q_ASSERT(!data->hasBeenUpdated());
+    data->mHasBeenUpdated = true;
     QScriptValue updateFunc = data->updateFunc();
     if (updateFunc.isValid())
     {
@@ -117,7 +118,6 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
                     << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
         }
     }
-    data->mHasBeenUpdated = true;
 }
 
 void ScriptHandler::updateLength(ArrayDataInformation* array)

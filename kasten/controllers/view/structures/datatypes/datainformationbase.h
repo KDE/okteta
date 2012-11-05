@@ -28,6 +28,7 @@ class DataInformationBase;
 class DataInformation;
 class DummyDataInformation;
 class UnionDataInformation;
+class TaggedUnionDataInformation;
 class StructureDataInformation;
 class AbstractBitfieldDataInformation;
 class PrimitiveDataInformation;
@@ -74,6 +75,9 @@ public:
     virtual bool isPointer() const;
     PointerDataInformation* asPointer();
     const PointerDataInformation* asPointer() const;
+    virtual bool isTaggedUnion() const;
+    TaggedUnionDataInformation* asTaggedUnion();
+    const TaggedUnionDataInformation* asTaggedUnion() const;
     virtual bool isDummy() const;
     DummyDataInformation* asDummy();
     const DummyDataInformation* asDummy() const;
@@ -97,6 +101,7 @@ CAST_FUNCS(Dummy)
 CAST_FUNCS_2(AbstractBitfieldDataInformation, Bitfield)
 CAST_FUNCS(String)
 CAST_FUNCS(Pointer)
+CAST_FUNCS(TaggedUnion)
 
 //this is not handled by the macro
 inline DataInformation* DataInformationBase::asDataInformation()

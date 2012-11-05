@@ -23,6 +23,7 @@
 #define PARSERUTILS_H_
 
 #include <QDebug>
+#include <QStringList>
 #include <KLocalizedString>
 
 #include "../datatypes/datainformation.h"
@@ -37,6 +38,8 @@ class StructureDataInformation;
 class UnionDataInformation;
 class EnumDataInformation;
 class StringDataInformation;
+class TaggedUnionDataInformation;
+class PointerDataInformation;
 
 class QScriptValue;
 
@@ -64,6 +67,14 @@ struct ParserInfo
     inline QDebug error() const { return logger->error(context()); }
 };
 
+class ChildrenParser {
+public:
+    virtual DataInformation* next() = 0;
+    virtual bool hasNext() = 0;
+    virtual void setParent(DataInformation* parent) = 0;
+    virtual ~ChildrenParser() {};
+};
+
 /**
  * Holds a number that was converted either from a QScriptValue or a QString
  */
@@ -89,8 +100,11 @@ namespace ParserStrings {
     const QString TYPE_STRUCT = QLatin1String("struct");
     const QString TYPE_UNION = QLatin1String("union");
     const QString TYPE_POINTER = QLatin1String("pointer");
+    const QString TYPE_TAGGED_UNION = QLatin1String("taggedUnion");
     /** Only needed for .osd */
     const QString TYPE_ENUMDEF = QLatin1String("enumDef");
+    const QString TYPE_ALTERNATIVES = QLatin1String("alternatives");
+    const QString TYPE_GROUP= QLatin1String("group");
 
 
     //all types
@@ -114,7 +128,7 @@ namespace ParserStrings {
     //bitfield
     const QString PROPERTY_WIDTH = QLatin1String("width");
     //struct/union
-    const QString PROPERTY_CHILDREN = QLatin1String("children");
+    const QString PROPERTY_CHILDREN = QLatin1String("fields");
     const QString PROPERTY_CHILD_COUNT = QLatin1String("childCount");
     const QString PROPERTY_CHILD = QLatin1String("child");
     //strings
@@ -128,10 +142,24 @@ namespace ParserStrings {
     const QString PROPERTY_VALUE = QLatin1String("value");
     //pointer
     const QString PROPERTY_TARGET = QLatin1String("target");
+    //tagged union
+    const QString PROPERTY_ALTERNATIVES = QLatin1String("alternatives");
+    const QString PROPERTY_DEFAULT_CHILDREN = QLatin1String("defaultFields");
+    const QString PROPERTY_SELECT_IF = QLatin1String("selectIf");
+    const QString PROPERTY_STRUCT_NAME = QLatin1String("structName");
 
     const QString PROPERTY_INTERNAL_TYPE = QLatin1String("__type");
 
-    const QString NAME_ARRAY_TYPE = QLatin1String("<array type>");
+    const QStringList ALL_PROPERTIES = QStringList()
+            << PROPERTY_ABLE_TO_READ << PROPERTY_ALTERNATIVES << PROPERTY_BYTEORDER
+            << PROPERTY_BYTE_COUNT << PROPERTY_CHAR_COUNT << PROPERTY_CHAR_COUNT << PROPERTY_CHILD
+            << PROPERTY_CHILDREN << PROPERTY_CHILD_COUNT << PROPERTY_DATATYPE << PROPERTY_DEFAULT_CHILDREN
+            << PROPERTY_ENCODING << PROPERTY_ENUM_NAME << PROPERTY_ENUM_VALUES << PROPERTY_INTERNAL_TYPE <<
+            PROPERTY_LENGTH << PROPERTY_MAX_BYTE_COUNT << PROPERTY_MAX_CHAR_COUNT << PROPERTY_NAME
+            << PROPERTY_PARENT << PROPERTY_SELECT_IF << PROPERTY_STRUCT_NAME << PROPERTY_TARGET
+            << PROPERTY_TERMINATED_BY << PROPERTY_TYPE << PROPERTY_UPDATE_FUNC << PROPERTY_VALID <<
+            PROPERTY_VALIDATION_ERROR << PROPERTY_VALIDATION_FUNC << PROPERTY_VALUE << PROPERTY_WIDTH;
+
     const QString NAME_POINTER_VALUE_TYPE = QLatin1String("<pointer value type>");
     const QString NAME_POINTER_TARGET = QLatin1String("<pointer target>");
 
@@ -147,6 +175,8 @@ namespace ParserUtils
     ParsedNumber<int> intFromString(const QString& str);
     /** @see ParserUtils::intFromString() */
     ParsedNumber<uint> uintFromString(const QString& str);
+    /** @see ParserUtils::intFromString() */
+    ParsedNumber<quint64> uint64FromString(const QString& str);
     /** Checks whether the value is a number, and if it is converts it.
      * Since all script values use double internally, a valid number can be out of bounds, too
      * @param val the value to convert
@@ -155,6 +185,8 @@ namespace ParserUtils
     ParsedNumber<int> intFromScriptValue(const QScriptValue& val);
     /** @see ParserUtils::intFromScriptValue() */
     ParsedNumber<uint> uintFromScriptValue(const QScriptValue& val);
+    /** @see ParserUtils::intFromScriptValue() */
+    ParsedNumber<quint64> uint64FromScriptValue(const QScriptValue& val);
 
     DataInformation::DataInformationEndianess byteOrderFromString(const QString& string, const LoggerWithContext& logger);
     QString byteOrderToString(DataInformation::DataInformationEndianess order);

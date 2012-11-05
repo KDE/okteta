@@ -24,6 +24,9 @@
 
 #include "../parsers/parserutils.h"
 
+#include <QScriptValue>
+#include <QScriptValueIterator>
+
 namespace ScriptValueConverter
 {
 DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& info);
@@ -35,6 +38,21 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info);
 PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info);
 EnumDataInformation* toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
+TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const ParserInfo& info);
+
+class ScriptValueChildrenParser : public ChildrenParser {
+public:
+    ScriptValueChildrenParser(const ParserInfo& info, const QScriptValue& children);
+    virtual ~ScriptValueChildrenParser();
+    virtual DataInformation* next();
+    virtual bool hasNext();
+    virtual void setParent(DataInformation* newParent);
+private:
+    QScriptValue mValue;
+    QScriptValueIterator mIter;
+    ParserInfo mInfo;
+};
+
 }
 
 #endif //SCRIPTVALUECONVERTER_P_H_

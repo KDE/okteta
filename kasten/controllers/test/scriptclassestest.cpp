@@ -118,7 +118,7 @@ void ScriptClassesTest::initTestCase()
             << pair("int8") << pair("int16") << pair("int32") << pair("int64") << pair("uint")
             << pair("uint8") << pair("uint16") << pair("uint32") << pair("uint64") << pair("bool")
             << pair("float") << pair("double") << pair("int64high32") << pair("int64low32")
-            << pair("uint64high32") << pair("uint64low32") << pair("type");
+            << pair("uint64high32") << pair("uint64low32");
     qSort(primitiveProperties);
     LoggerWithContext lwc(0, QString());
     for (int i = Type_START; i < Type_Bitfield; ++i)
@@ -132,6 +132,7 @@ void ScriptClassesTest::initTestCase()
 
     enumProperties << primitiveProperties << pair("enumValues", QScriptValue::Undeletable);
     //TODO valueString property (i.e. the current value as enumerator name)
+    //XXX enumName
     qSort(enumProperties);
 
     QMap<AllPrimitiveTypes, QString> enumValues;

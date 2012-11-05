@@ -31,6 +31,7 @@
 
 class DataInformation;
 class ArrayDataInformation;
+class TaggedUnionDataInformation;
 class ScriptLogger;
 class TopLevelDataInformation;
 class QScriptEngineDebugger;
@@ -50,7 +51,7 @@ public:
 
     QScriptEngine* engine() const;
     ScriptHandlerInfo* handlerInfo();
-private:
+
     QScriptValue callFunction(QScriptValue func, DataInformation* data, ScriptHandlerInfo::Mode mode);
 private:
     QScopedPointer<QScriptEngine> mEngine;

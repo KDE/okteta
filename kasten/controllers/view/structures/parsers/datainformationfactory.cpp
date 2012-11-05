@@ -127,6 +127,24 @@ T* newEnumOrFlags(const EnumParsedData& pd)
     return new T(pd.name, primData, definition, pd.parent);
 }
 
+template<class T>
+T* newStructOrUnion(const StructOrUnionParsedData& supd)
+{
+    T* structOrUnion = new T(supd.name, QVector<DataInformation*>(), supd.parent);
+    supd.children->setParent(structOrUnion);
+    while (supd.children->hasNext())
+    {
+        DataInformation* data = supd.children->next();
+        if (data)
+            structOrUnion->appendChild(data, false);
+        else
+            return 0; //error message should be logged already
+    }
+    if (structOrUnion->childCount() == 0)
+        supd.info() << "No children were found, this is probably a mistake.";
+    return structOrUnion;
+}
+
 }
 
 EnumDataInformation* DataInformationFactory::newEnum(const EnumParsedData& pd)
@@ -213,6 +231,16 @@ StringDataInformation* DataInformationFactory::newString(const StringParsedData&
     return data;
 }
 
+UnionDataInformation* DataInformationFactory::newUnion(const StructOrUnionParsedData& pd)
+{
+    return newStructOrUnion<UnionDataInformation>(pd);
+}
+
+StructureDataInformation* DataInformationFactory::newStruct(const StructOrUnionParsedData& pd)
+{
+    return newStructOrUnion<StructureDataInformation>(pd);
+}
+
 bool DataInformationFactory::commonInitialization(DataInformation* data, const CommonParsedData& pd)
 {
     data->setByteOrder(pd.endianess);
@@ -270,4 +298,78 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
         return 0;
     }
     return new PointerDataInformation(pd.name, pd.pointerTarget, primValue, pd.parent);
+}
+
+TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedUnionParsedData& pd)
+{
+    QScopedPointer<TaggedUnionDataInformation> tagged(new TaggedUnionDataInformation(pd.name, pd.parent));
+    pd.children->setParent(tagged.data());
+    while (pd.children->hasNext())
+    {
+        DataInformation* data = pd.children->next();
+        if (data)
+            tagged->appendChild(data, false);
+        else
+            return 0; //error message should be logged already
+    }
+    if (tagged->childCount() == 0)
+    {
+        pd.error() << "No children in tagged union. At least one is required so that tag can be evaluated.";
+        return 0;
+    }
+    //verify alternatives
+    bool alternativesValid = true;
+    QVector<TaggedUnionDataInformation::FieldInfo> altInfo;
+    for(int i = 0; i < pd.alternatives.size(); ++i)
+    {
+        const TaggedUnionParsedData::Alternatives& fi = pd.alternatives.at(i);
+        if (!fi.selectIf.isFunction())
+        {
+            ParsedNumber<quint64> number = ParserUtils::uint64FromScriptValue(fi.selectIf);
+            if (!number.isValid)
+            {
+                pd.error() << "Alternative number" << i << "is not valid. SelectIf is neither function nor number!";
+                alternativesValid = false;
+            }
+            //number is valid -> there must be exactly one field
+            if (tagged->childCount() != 1)
+            {
+                pd.error() << "Alternative number" << i << "is not valid. SelectIf is number,"
+                        " but there is not exactly one child!";
+                alternativesValid = false;
+            }
+        }
+        QVector<DataInformation*> children;
+        while (fi.fields->hasNext())
+        {
+            DataInformation* next = fi.fields->next();
+            if (next)
+                children.append(next);
+            else
+            {
+                pd.error() << "Alternative number" << i << "has an invalid field!";
+                alternativesValid = false;
+            }
+        }
+        altInfo.append(TaggedUnionDataInformation::FieldInfo(fi.name, fi.selectIf, children));
+
+    }
+    if (!alternativesValid)
+    {
+        for (int i = 0; i < altInfo.size(); ++i)
+            qDeleteAll(altInfo.at(i).fields);
+        return 0;
+    }
+    tagged->setAlternatives(altInfo, false);
+
+    pd.defaultFields->setParent(tagged.data());
+    while (pd.defaultFields->hasNext())
+    {
+        DataInformation* data = pd.defaultFields->next();
+        if (data)
+            tagged->appendDefaultField(data, false);
+        else
+            return 0; //error message should be logged already
+    }
+    return tagged.take();
 }

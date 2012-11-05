@@ -39,13 +39,10 @@
 #include <QFileInfo>
 
 #include <QDomDocument>
-#include <QDomElement>
 #include <QScriptEngine>
 
 using namespace ParserStrings;
 
-#include <KDebug> //FIXME remove this!!
-//FIXME remove all kdebug & kwarning in here!
 OsdParser::OsdParser(const QString& pluginName, const QString& absolutePath)
         : AbstractStructureParser(pluginName, absolutePath)
 {
@@ -194,7 +191,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
 }
 
 //TODO make type depend on the user not the definition
-QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger) const
+QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
 {
     QVector<EnumDefinition::Ptr> ret;
     for (QDomElement elem = rootElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement())
@@ -248,7 +245,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
 
 //Datatypes
 
-ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
+ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     ArrayParsedData apd(info);
     QString lengthStr = readProperty(xmlElem, PROPERTY_LENGTH);
@@ -299,32 +296,40 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
 
     //first check whether there is a <type> element and use the inner element
     //if that doesn't exist use the first child element as the type, but only if there is only one child
-    QDomElement childElement = xmlElem.firstChildElement(PROPERTY_TYPE).firstChildElement();
-    if (childElement.isNull())
+    DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
+    QDomElement typeElement = xmlElem.firstChildElement(PROPERTY_TYPE).firstChildElement();
+    if (typeElement.isNull())
     {
-        childElement = xmlElem.firstChildElement();
-        if (childElement.isNull())
+        //there is no <type> element, use first valid child element
+        OsdChildrenParser typeParser(info, xmlElem.firstChildElement());
+        typeParser.setParent(&dummy);
+        if (typeParser.hasNext())
         {
-            info.error() << "Array type is missing! Please add a <type> child element.";
-            return 0;
+            apd.arrayType = typeParser.next();
+            if (typeParser.hasNext())
+            {
+                info.error() << "More than one possible type for array!";
+                delete apd.arrayType;
+                return 0;
+            }
         }
-        else if (childElement != xmlElem.lastChildElement())
+        else
         {
-            //there is more than one child element
-            info.error() << "There is more than one child element, cannot determine which one "
-                    "is the array type. Wrap the correct one in a <type> element.";
+            info.error() << "Array type is missing.";
             return 0;
         }
     }
-    OsdParserInfo newInfo(info);
-    DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
-    newInfo.parent = &dummy;
-    newInfo.name = NAME_ARRAY_TYPE;
-    apd.arrayType = parseElement(childElement, newInfo);
+    else
+    {
+        //we have a <type> element
+        OsdParserInfo newInfo(info);
+        newInfo.parent = &dummy;
+        apd.arrayType = parseElement(typeElement, newInfo);
+    }
     return DataInformationFactory::newArray(apd);
 }
 
-PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
+PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     PointerParsedData ppd(info);
 
@@ -382,7 +387,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
     return DataInformationFactory::newPointer(ppd);
 }
 
-PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
+PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     PrimitiveParsedData ppd(info);
     ppd.type = readProperty(xmlElem, PROPERTY_TYPE);
@@ -390,7 +395,7 @@ PrimitiveDataInformation* OsdParser::primitiveFromXML(const QDomElement& xmlElem
 }
 
 AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& xmlElem,
-        const OsdParserInfo& info) const
+        const OsdParserInfo& info)
 {
     BitfieldParsedData bpd(info);
     bpd.type = readProperty(xmlElem, PROPERTY_TYPE);
@@ -399,33 +404,22 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
     return DataInformationFactory::newBitfield(bpd);
 }
 
-template<class T>
-T* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
+inline UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
-    T* structOrUnion = new T(info.name, QVector<DataInformation*>(), info.parent);
-    OsdParserInfo newInfo(info);
-    newInfo.parent = structOrUnion;
-    newInfo.name = QString();
-    for (QDomElement elem = xmlElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement())
-    {
-        DataInformation* data = parseElement(elem, newInfo);
-        if (data)
-            structOrUnion->appendChild(data, false);
-
-    }
-    if (structOrUnion->childCount() == 0)
-        info.info() << "No children were found, this is probably a mistake.";
-    return structOrUnion;
+    StructOrUnionParsedData supd(info);
+    supd.children.reset(new OsdChildrenParser(info, xmlElem.firstChildElement()));
+    return DataInformationFactory::newUnion(supd);
 }
 
-//instantiate the template for both cases so we don't get linker errors
-template UnionDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem,
-        const OsdParserInfo& info) const;
-template StructureDataInformation* OsdParser::structOrUnionFromXML(const QDomElement& xmlElem,
-        const OsdParserInfo& info) const;
+inline StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+{
+    StructOrUnionParsedData supd(info);
+    supd.children.reset(new OsdChildrenParser(info, xmlElem.firstChildElement()));
+    return DataInformationFactory::newStruct(supd);
+}
 
 EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
-        const OsdParserInfo& info) const
+        const OsdParserInfo& info)
 {
     EnumParsedData epd(info);
     epd.type = readProperty(xmlElem, PROPERTY_TYPE);
@@ -444,7 +438,7 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isF
 }
 
 StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
-        const OsdParserInfo& info) const
+        const OsdParserInfo& info)
 {
     StringParsedData spd(info);
     spd.encoding = readProperty(xmlElem, PROPERTY_ENCODING);
@@ -454,11 +448,10 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
     return DataInformationFactory::newString(spd);
 }
 
-DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo) const
+DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo)
 {
     Q_ASSERT(!elem.isNull());
     DataInformation* data = 0;
-    //kDebug() << "element tag: " << elem.tagName();
     const QString tag = elem.tagName();
     OsdParserInfo info(oldInfo);
     info.name = readProperty(elem, PROPERTY_NAME, QLatin1String("<anonymous>"));
@@ -480,6 +473,8 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
         data = stringFromXML(elem, info);
     else if (tag == TYPE_POINTER)
         data = pointerFromXML(elem, info);
+    else if (tag == TYPE_TAGGED_UNION)
+        data = taggedUnionFromXML(elem, info);
     else
         info.error() << "Unknow tag: " << tag;
 
@@ -501,7 +496,7 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
     return data;
 }
 
-EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const OsdParserInfo& info) const
+EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const OsdParserInfo& info)
 {
     for (int i = 0; i < info.enums.size(); ++i)
     {
@@ -535,6 +530,42 @@ QScriptValue OsdParser::functionSafeEval(QScriptEngine* engine, const QString& s
     if (!ret.isFunction())
         return QScriptValue(str);
     return ret;
+}
+
+TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xmlElem,
+        const OsdParserInfo& info)
+{
+    TaggedUnionParsedData tpd(info);
+    //can be null
+    QDomElement defaultChildren = xmlElem.firstChildElement(PROPERTY_DEFAULT_CHILDREN).firstChildElement();
+    if (defaultChildren.isNull())
+        info.info() << "No default fields specified, defaulting to none.";
+    tpd.defaultFields.reset(new OsdChildrenParser(info, defaultChildren));
+    tpd.children.reset(new OsdChildrenParser(info, xmlElem.firstChildElement()));
+    //now handle alternatives
+    QDomElement alternatives = xmlElem.firstChildElement(PROPERTY_ALTERNATIVES);
+    if (alternatives.isNull())
+    {
+        info.error() << "Missing <alternatives> element, tagged union cannot exist without at least one alternative";
+        return 0;
+    }
+    for (QDomElement elem = alternatives.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement())
+    {
+        TaggedUnionParsedData::Alternatives alt;
+        alt.name = readProperty(elem, PROPERTY_STRUCT_NAME);
+        QString selectIfStr = readProperty(elem, PROPERTY_SELECT_IF);
+        QScriptValue selectIf = functionSafeEval(info.engine, selectIfStr);
+        if (!selectIf.isValid())
+            selectIf = selectIfStr;
+        alt.selectIf = selectIf;
+        if (elem.tagName() == TYPE_GROUP)
+            alt.fields = QSharedPointer<ChildrenParser>(new OsdChildrenParser(info, elem.firstChildElement()));
+        else
+            alt.fields = QSharedPointer<ChildrenParser>(new SingleElementOsdChildrenParser(info, elem));
+        tpd.alternatives.append(alt);
+    }
+
+    return DataInformationFactory::newTaggedUnion(tpd);
 }
 
 QString OsdParser::generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
@@ -577,4 +608,66 @@ QString OsdParser::generateLengthFunction(DataInformation* current, DataInformat
         return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
             currentString + QLatin1String("parent."), info);
 
+}
+
+OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, QDomElement firstChild)
+        : mInfo(info), mElem(firstChild)
+{
+}
+
+DataInformation* OsdChildrenParser::next()
+{
+    Q_ASSERT(!mElem.isNull());
+    //skip all known properties
+    while (ALL_PROPERTIES.contains(mElem.tagName()))
+        mElem = mElem.nextSiblingElement();
+    if (mElem.isNull())
+    {
+        mInfo.warn() << "Reached end of fields, but next() was requested!";
+        return 0;
+    }
+    DataInformation* ret = OsdParser::parseElement(mElem, mInfo);
+    mElem = mElem.nextSiblingElement();
+    return ret;
+}
+
+OsdChildrenParser::~OsdChildrenParser()
+{
+}
+
+bool OsdChildrenParser::hasNext()
+{
+    if (mElem.isNull())
+        return false;
+    while (ALL_PROPERTIES.contains(mElem.tagName()))
+        mElem = mElem.nextSiblingElement(); //skip known properties
+    return !mElem.isNull();
+}
+
+void OsdChildrenParser::setParent(DataInformation* newParent)
+{
+    mInfo.parent = newParent;
+}
+
+SingleElementOsdChildrenParser::SingleElementOsdChildrenParser(const OsdParserInfo& info, QDomElement element)
+    : OsdChildrenParser(info, element), mParsed(false)
+{
+    if (mElem.isNull())
+        info.warn() << "Null Element passed to child parser!";
+}
+
+SingleElementOsdChildrenParser::~SingleElementOsdChildrenParser()
+{
+}
+
+DataInformation* SingleElementOsdChildrenParser::next()
+{
+    Q_ASSERT(!mParsed);
+    mParsed = true;
+    return OsdParser::parseElement(mElem, mInfo);
+}
+
+bool SingleElementOsdChildrenParser::hasNext()
+{
+    return !mParsed && !mElem.isNull();
 }

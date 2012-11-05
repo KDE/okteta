@@ -27,7 +27,8 @@
 #include "parserutils.h"
 #include "../datatypes/primitive/enumdefinition.h"
 
-class QDomElement;
+#include <QDomElement>
+
 class QDomDocument;
 
 class StringDataInformation;
@@ -39,6 +40,17 @@ class StructureDataInformation;
 class UnionDataInformation;
 class PrimitiveDataInformation;
 class ScriptLogger;
+
+struct OsdParserInfo : public ParserInfo {
+    inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
+            QScriptEngine* engine, QVector<EnumDefinition::Ptr> enums)
+        : ParserInfo(name, logger, parent), engine(engine), enums(enums) {}
+    inline OsdParserInfo(const OsdParserInfo& i) : ParserInfo(i), engine(i.engine), enums(i.enums) {}
+    inline ~OsdParserInfo() {}
+    /** OSD parser only since QScriptValue::engine() exists */
+    QScriptEngine* engine;
+    QVector<EnumDefinition::Ptr> enums;
+};
 
 class OsdParser : public AbstractStructureParser
 {
@@ -53,36 +65,21 @@ public:
     virtual QStringList parseStructureNames() const;
     virtual QVector<TopLevelDataInformation*> parseStructures() const;
 
+    static DataInformation* parseElement(const QDomElement& node, const OsdParserInfo& info);
 private:
-    struct OsdParserInfo : public ParserInfo {
-        inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
-                QScriptEngine* engine, QVector<EnumDefinition::Ptr> enums)
-            : ParserInfo(name, logger, parent), engine(engine), enums(enums) {}
-        inline OsdParserInfo(const OsdParserInfo& i) : ParserInfo(i), engine(i.engine), enums(i.enums) {}
-        inline ~OsdParserInfo() {}
-        /** OSD parser only since QScriptValue::engine() exists */
-        QScriptEngine* engine;
-        QVector<EnumDefinition::Ptr> enums;
-    };
+    static PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static PointerDataInformation* pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static EnumDataInformation* enumFromXML(const QDomElement& elem, bool isFlags, const OsdParserInfo& info);
+    static StringDataInformation* stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static UnionDataInformation* unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static StructureDataInformation* structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static TaggedUnionDataInformation* taggedUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
 
-    PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
-    PointerDataInformation* pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
-    AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
-    EnumDataInformation* enumFromXML(const QDomElement& xmlElem, bool isFlags,
-            const OsdParserInfo& info) const;
-    StringDataInformation* stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
+    static EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info);
 
-    template<class T> T* structOrUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
-    UnionDataInformation* unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
-    StructureDataInformation* structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
-
-    ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const;
-
-    DataInformation* parseElement(const QDomElement& node, const OsdParserInfo& info) const;
-
-    EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info) const;
-
-    QVector<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem, ScriptLogger* logger) const;
+    static QVector<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem, ScriptLogger* logger);
 
     QDomDocument openDoc(ScriptLogger* logger) const;
     QDomDocument openDocFromFile(ScriptLogger* logger) const;
@@ -95,7 +92,6 @@ private:
     /** This essentially calls engine->evaluate(str), but ensures it can be a function (QTBUG-5757)  */
     static QScriptValue functionSafeEval(QScriptEngine* engine, const QString& str);
 
-private:
     /** Generate a length function referencing @p elemName
      *  This is needed to support the old way of defining dynamic arrays */
     static QString generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
@@ -105,15 +101,26 @@ private:
     const QString mXmlString;
 };
 
-inline UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
-{
-    return structOrUnionFromXML<UnionDataInformation>(xmlElem, info);
-}
+class OsdChildrenParser : public ChildrenParser {
+public:
+    OsdChildrenParser(const OsdParserInfo& info, QDomElement firstChild);
+    virtual ~OsdChildrenParser();
+    virtual DataInformation* next();
+    virtual bool hasNext();
+    virtual void setParent(DataInformation* newParent);
+protected:
+    OsdParserInfo mInfo;
+    QDomElement mElem;
+};
 
-inline StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info) const
-{
-    return structOrUnionFromXML<StructureDataInformation>(xmlElem, info);
-}
-
+class SingleElementOsdChildrenParser : public OsdChildrenParser {
+public:
+    SingleElementOsdChildrenParser(const OsdParserInfo& info, QDomElement element);
+    virtual ~SingleElementOsdChildrenParser();
+    virtual DataInformation* next();
+    virtual bool hasNext();
+protected:
+    bool mParsed;
+};
 
 #endif /* OSDPARSER_H_ */

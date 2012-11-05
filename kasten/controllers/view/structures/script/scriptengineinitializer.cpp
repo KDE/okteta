@@ -90,6 +90,11 @@ void addFuctionsToScriptEngine(QScriptEngine* engine)
             engine->newFunction(Private::scriptNewString));
     engine->globalObject().setProperty(QLatin1String("pointer"),
             engine->newFunction(Private::scriptNewPointer));
+    engine->globalObject().setProperty(QLatin1String("taggedUnion"),
+            engine->newFunction(Private::scriptNewTaggedUnion));
+
+    engine->globalObject().setProperty(QLatin1String("alternative"),
+            engine->newFunction(Private::alternativeFunc));
 }
 
 QScriptEngine* newEngine()
@@ -224,6 +229,16 @@ QScriptValue scriptNewPointer(QScriptContext* ctx, QScriptEngine* eng)
     return object;
 }
 
+QScriptValue scriptNewTaggedUnion(QScriptContext* ctx, QScriptEngine* eng)
+{
+    QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_TAGGED_UNION);
+
+    object.setProperty(ParserStrings::PROPERTY_CHILDREN, ctx->argument(0));
+    object.setProperty(ParserStrings::PROPERTY_ALTERNATIVES, ctx->argument(1));
+    object.setProperty(ParserStrings::PROPERTY_DEFAULT_CHILDREN, ctx->argument(2));
+    return object;
+}
+
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
@@ -291,6 +306,18 @@ QScriptValue addCustomPropertiesFunc(QScriptContext* ctx, QScriptEngine*)
     if (count == 0)
         return ctx->throwError(QLatin1String("set(): must set at least one property!"));
     return thisObj;
+}
+
+QScriptValue alternativeFunc(QScriptContext* ctx, QScriptEngine* eng)
+{
+    if (ctx->argumentCount() < 2)
+        return ctx->throwError(QLatin1String("alternative(): needs at least 2 arguments!"));
+    QScriptValue object = ctx->isCalledAsConstructor() ? ctx->thisObject() : eng->newObject();
+    object.setProperty(ParserStrings::PROPERTY_SELECT_IF, ctx->argument(0));
+    object.setProperty(ParserStrings::PROPERTY_CHILDREN, ctx->argument(1));
+    if (ctx->argumentCount() > 2)
+        object.setProperty(ParserStrings::PROPERTY_STRUCT_NAME, ctx->argument(2));
+    return object;
 }
 
 } //namespace Private

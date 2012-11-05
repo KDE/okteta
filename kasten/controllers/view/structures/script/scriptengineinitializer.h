@@ -141,10 +141,13 @@ QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue scriptNewString(QScriptContext* ctx, QScriptEngine* eng);
 /** this constructor takes two arguments: 1. type of the pointer and 2. the target type */
 QScriptValue scriptNewPointer(QScriptContext* ctx, QScriptEngine* eng);
+/** this constructor takes three arguments: 1. initial fields 2. the alternatives 3. (optional) default fields */
+QScriptValue scriptNewTaggedUnion(QScriptContext* ctx, QScriptEngine* eng);
 
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine* eng);
+QScriptValue alternativeFunc(QScriptContext* ctx, QScriptEngine* eng);
 
 /** this allows you to write e.g.
  *  return struct({foo : uint8() })
