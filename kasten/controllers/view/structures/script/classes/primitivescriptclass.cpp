@@ -186,6 +186,6 @@ QScriptValue PrimitiveScriptClass::Primitive_proto_toString(QScriptContext* ctx,
         return eng->undefinedValue();
     }
     //this might allow proper comparison between values without having to call .value
-    return data->valueString();
+    return data->wasAbleToRead() ? data->valueString() : eng->undefinedValue();
 }
 

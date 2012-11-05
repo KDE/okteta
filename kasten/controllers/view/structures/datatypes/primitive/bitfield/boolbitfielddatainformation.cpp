@@ -30,8 +30,7 @@
 
 QString BoolBitfieldDataInformation::valueString() const
 {
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
+    Q_ASSERT(mWasAbleToRead);
     return BoolDataInformationMethods<quint64>::staticValueString(mValue.ulongValue);
 }
 

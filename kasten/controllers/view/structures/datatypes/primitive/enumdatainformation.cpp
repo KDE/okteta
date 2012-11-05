@@ -44,8 +44,7 @@ EnumDataInformation::~EnumDataInformation() {}
 
 QString EnumDataInformation::valueString() const
 {
-    if (!mWasAbleToRead)
-        return mValue->valueString();
+    Q_ASSERT(mWasAbleToRead);
     QString enumVal = mEnum->value(mValue->value());
     if (!enumVal.isEmpty())
     {

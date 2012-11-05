@@ -48,8 +48,7 @@ inline QScriptClass* BasicPrimitiveDataInformation<T, C>::scriptClass(ScriptHand
 template<typename T, typename C>
 QString BasicPrimitiveDataInformation<T, C>::valueString() const
 {
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
+    Q_ASSERT(mWasAbleToRead);
     return C::staticValueString(mValue);
 }
 

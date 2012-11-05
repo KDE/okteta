@@ -193,14 +193,15 @@ QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
             return PrimitiveType::typeName(type);
         if (column == DataInformation::ColumnValue)
         {
+            //if we are outside the valid range
             if (uint(index) >= this->mNumReadValues)
-            {
-                //we are outside the valid range
-                return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
-            }
-            return DisplayClass::staticValueString(mData.at(index));
+                return DataInformation::eofReachedData(Qt::DisplayRole);
+            else
+                return DisplayClass::staticValueString(mData.at(index));
         }
     }
+    if (column == DataInformation::ColumnValue && uint(index) >= this->mNumReadValues)
+        return DataInformation::eofReachedData(role);
     return QVariant();
 }
 

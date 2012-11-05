@@ -91,7 +91,9 @@ qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Ok
         address += 1;
         Q_ASSERT((bitsRemaining % 8) == 0); //must be mod 8
     }
-    return mData->read(input, address, bitsRemaining);
+    qint64 ret = mData->read(input, address, bitsRemaining);
+    mWasAbleToRead = ret >= 0;
+    return ret;
 }
 
 BitCount32 StringDataInformation::size() const
@@ -159,6 +161,7 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
 
 QString StringDataInformation::valueString() const
 {
+    Q_ASSERT(mWasAbleToRead);
     return mData->completeString();
 }
 

@@ -126,6 +126,7 @@ QString PointerDataInformation::typeName() const
 
 QString PointerDataInformation::valueString() const
 {
+    Q_ASSERT(mWasAbleToRead);
     return mValue->valueString();
 }
 

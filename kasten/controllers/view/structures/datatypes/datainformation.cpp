@@ -31,6 +31,7 @@
 #include <KLocale>
 #include <KLineEdit>
 #include <KIcon>
+#include <KColorScheme>
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
         : mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
@@ -270,7 +271,7 @@ QVariant DataInformation::data(int column, int role) const
         if (column == ColumnType)
             return typeName();
         if (column == ColumnValue)
-            return valueString();
+            return mWasAbleToRead ? valueString() : eofReachedData(Qt::DisplayRole);
     }
     else if (role == Qt::ToolTipRole)
     {
@@ -284,11 +285,27 @@ QVariant DataInformation::data(int column, int role) const
         if (mLoggedData != ScriptLogger::LogInvalid)
             return ScriptLogger::iconForLevel(mLoggedData);
     }
+    else if (!mWasAbleToRead && column == ColumnValue)
+        return eofReachedData(role);
     return QVariant();
 }
 
+QVariant DataInformation::eofReachedData(int role)
+{
+    //whenever color scheme changes application must be restarted to have the correct color
+    static KColorScheme scheme(QPalette::Active);
+
+    if (role == Qt::DisplayRole)
+        return i18nc("invalid value (End of file reached)", "<EOF reached>");
+    else if (role == Qt::ForegroundRole)
+        return scheme.foreground(KColorScheme::NegativeText);
+    return QVariant();
+}
+
+
 QString DataInformation::tooltipString() const
 {
+    QString valueStr = mWasAbleToRead ? valueString() : eofReachedData(Qt::DisplayRole).toString();
     if (mHasBeenValidated && !mValidationSuccessful)
     {
         QString validationMsg = validationError();
@@ -303,12 +320,12 @@ QString DataInformation::tooltipString() const
                     "Validation failed: \"%1\"", additionalData()->validationError());
         }
         return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
-                valueString(), typeName(), sizeString(), validationMsg);
+                valueStr, typeName(), sizeString(), validationMsg);
     }
     else
     {
         return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4", name(),
-                valueString(), typeName(), sizeString());
+                valueStr, typeName(), sizeString());
     }
 }
 

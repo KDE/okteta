@@ -217,7 +217,7 @@ QScriptValue StringScriptClass::String_proto_toString(QScriptContext* ctx, QScri
         kDebug() << "could not cast data";
         return eng->undefinedValue();
     }
-    return data->valueString();
+    return data->wasAbleToRead() ? data->valueString() : eng->undefinedValue();
 }
 
 

@@ -27,13 +27,9 @@
 #include "../poddecoder/typeeditors/uintspinbox.h"
 #include "../uintdatainformation.h"
 
-
-
-
 QString UnsignedBitfieldDataInformation::valueString() const
 {
-    if (!mWasAbleToRead)
-        return i18nc("invalid value (out of range)", "&lt;invalid&gt;");
+    Q_ASSERT(mWasAbleToRead);
     return UIntDataInformationMethods<quint64>::staticValueString(mValue.ulongValue);
 }
 

@@ -228,6 +228,7 @@ QScriptClass* DataInformationWithChildren::scriptClass(ScriptHandlerInfo* handle
 
 QString DataInformationWithChildren::tooltipString() const
 {
+    QString valueStr = mWasAbleToRead ? valueString() : eofReachedData(Qt::DisplayRole).toString();
     if (mHasBeenValidated && !mValidationSuccessful)
     {
         QString validationMsg = validationError();
@@ -243,13 +244,13 @@ QString DataInformationWithChildren::tooltipString() const
         }
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)\n\n %6",
                 "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
-                childCount(), name(), valueString(), typeName(), sizeString(), validationMsg);
+                childCount(), name(), valueStr, typeName(), sizeString(), validationMsg);
     }
     else
     {
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
                 "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                childCount(), name(), valueString(), typeName(), sizeString());
+                childCount(), name(), valueStr, typeName(), sizeString());
     }
 }
 

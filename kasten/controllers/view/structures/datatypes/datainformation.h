@@ -220,6 +220,7 @@ protected:
     void setAdditionalData(AdditionalData* data);
     /** So that this object can be wrapped by the correct javascript object*/
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const = 0;
+    static QVariant eofReachedData(int role);
 private:
     void setValidationError(QString errorMessage); //only called by ScriptHandler
 protected:
