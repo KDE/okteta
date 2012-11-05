@@ -38,8 +38,7 @@ const QLatin1String stringEncodings[] = {
 
 class StringDataInformation : public DataInformationWithDummyChildren
 {
-protected:
-    StringDataInformation(const StringDataInformation&);
+    DATAINFORMATION_CLONE_DECL(StringDataInformation, DataInformationWithDummyChildren);
 public:
     enum StringType {
         InvalidEncoding = -1, ASCII = 0, Latin1, UTF8, UTF16_LE, UTF16_BE, UTF32_LE, UTF32_BE
@@ -47,7 +46,6 @@ public:
 
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = 0);
     virtual ~StringDataInformation();
-    DATAINFORMATION_CLONE(String)
 
     virtual bool canHaveChildren() const;
     virtual DataInformation* childAt(unsigned int) const;

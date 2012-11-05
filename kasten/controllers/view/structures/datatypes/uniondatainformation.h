@@ -27,21 +27,18 @@
 /** A class holding the data of a union for Okteta*/
 class UnionDataInformation : public DataInformationWithChildren
 {
-protected:
-    explicit UnionDataInformation(const UnionDataInformation& d);
-
+    DATAINFORMATION_CLONE(UnionDataInformation, DataInformationWithChildren) {}
 public:
     explicit UnionDataInformation(const QString& name, const QVector<DataInformation*>& children
             = QVector<DataInformation*>(), DataInformation* parent = 0);
     virtual ~UnionDataInformation();
-    DATAINFORMATION_CLONE(Union)
 
     virtual bool isUnion() const;
     //implement the DataInformation pure virtual functions
     virtual QString typeName() const;
     virtual BitCount32 size() const;
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+            BitCount64 bitsRemaining, quint8* bitOffset);
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 };
 

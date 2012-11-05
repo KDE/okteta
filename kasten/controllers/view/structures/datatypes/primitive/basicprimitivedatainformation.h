@@ -56,7 +56,6 @@ public:
 
 protected:
     BasicPrimitiveDataInformation(const BasicPrimitiveDataInformation<T, C>& d);
-
 protected:
     T mValue;
 };

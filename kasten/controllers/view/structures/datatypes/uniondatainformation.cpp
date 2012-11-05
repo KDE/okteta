@@ -92,11 +92,6 @@ UnionDataInformation::UnionDataInformation(const QString& name, const QVector<Da
 {
 }
 
-UnionDataInformation::UnionDataInformation(const UnionDataInformation& d)
-        : DataInformationWithChildren(d)
-{
-}
-
 BitCount64 UnionDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
     //all elements start at same position

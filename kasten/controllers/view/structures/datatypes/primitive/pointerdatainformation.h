@@ -29,8 +29,7 @@
 
 class PointerDataInformation : public PrimitiveDataInformation
 {
-protected:
-    explicit PointerDataInformation(const PointerDataInformation& d);
+    DATAINFORMATION_CLONE_DECL(PointerDataInformation, PrimitiveDataInformation);
 public:
     /** creates a new pointer
      *  takes ownership over @p childType and @p valueType
@@ -38,9 +37,6 @@ public:
     PointerDataInformation(QString name, DataInformation* childType,
             PrimitiveDataInformation* valueType, DataInformation* parent);
     virtual ~PointerDataInformation();
-
-    DATAINFORMATION_CLONE(Pointer)
-
 protected:
     QScopedPointer<PrimitiveDataInformation> mValue; // To allow different pointer sizes
     QScopedPointer<DataInformation> mPointerTarget;

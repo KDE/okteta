@@ -35,9 +35,16 @@
 #include "datainformationbase.h"
 #include "../script/scriptlogger.h"
 
-#define DATAINFORMATION_CLONE(type) virtual inline type##DataInformation* clone() const {\
-        return new type##DataInformation(*this); \
-    }
+/** Implement the clone() method and add the copy constructor declaration
+ * After this macro visibility will be set to protected */
+#define DATAINFORMATION_CLONE_DECL(type, supertype) public: \
+        virtual inline type* clone() const { return new type(*this); } \
+    protected: \
+        type(const type& d)
+
+/** Implements the clone() method and add the start of the copy constructor (up to delegating).
+ *  After this macro visibility will be set to protected */
+#define DATAINFORMATION_CLONE(type, supertype) DATAINFORMATION_CLONE_DECL(type, supertype) : supertype(d)
 
 namespace Okteta
 {

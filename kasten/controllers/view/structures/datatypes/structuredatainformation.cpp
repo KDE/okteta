@@ -40,11 +40,6 @@ StructureDataInformation::StructureDataInformation(const QString& name,
 {
 }
 
-StructureDataInformation::StructureDataInformation(const StructureDataInformation& d)
-        : DataInformationWithChildren(d)
-{
-}
-
 qint64 StructureDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {

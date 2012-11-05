@@ -29,10 +29,10 @@ class DataInformationWithDummyChildren;
 
 class DummyDataInformation : public DataInformation
 {
+    DATAINFORMATION_CLONE(DummyDataInformation, DataInformation), mIndex(d.mIndex) {}
 public:
     DummyDataInformation(DataInformationBase* parent, const QString& name = QString());
     virtual ~DummyDataInformation() {}
-    DATAINFORMATION_CLONE(Dummy)
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -59,9 +59,6 @@ public:
 
     inline void setDummyIndex(uint newIndex) { mIndex = newIndex; }
     inline uint dummyIndex() const { return mIndex; }
-
-protected:
-    DummyDataInformation(const DummyDataInformation& d) : DataInformation(d), mIndex(d.mIndex) {}
 private:
     uint mIndex;
     DataInformationWithDummyChildren* parentHelper() const;

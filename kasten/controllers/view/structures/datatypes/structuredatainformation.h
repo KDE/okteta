@@ -27,19 +27,16 @@
 /** A class holding the data of a struct for Okteta*/
 class StructureDataInformation : public DataInformationWithChildren
 {
-protected:
-    explicit StructureDataInformation(const StructureDataInformation& d);
-
+    DATAINFORMATION_CLONE(StructureDataInformation, DataInformationWithChildren) {}
 public:
     explicit StructureDataInformation(const QString& name, const QVector<DataInformation*>& children =
             QVector<DataInformation*>(), DataInformation* parent = 0);
     virtual ~StructureDataInformation();
-    DATAINFORMATION_CLONE(Structure)
 
-    virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
+    virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+            BitCount64 bitsRemaining, quint8* bitOffset);
     virtual bool isStruct() const;
-    //implement the DataInformation pure virtual functions
+
     QString typeName() const;
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 };

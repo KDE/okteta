@@ -35,8 +35,7 @@ class AbstractArrayData;
 class ArrayDataInformation : public DataInformationWithDummyChildren
 {
     friend class PrimitiveArrayTest;
-protected:
-    explicit ArrayDataInformation(const ArrayDataInformation& d);
+    DATAINFORMATION_CLONE_DECL(ArrayDataInformation, DataInformationWithDummyChildren);
 public:
     /** creates a new array with initial length @p length.
      *  takes ownership over @p childType
@@ -45,8 +44,6 @@ public:
     ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
             DataInformation* parent = 0, const QScriptValue& lengthFuntion = QScriptValue());
     virtual ~ArrayDataInformation();
-    DATAINFORMATION_CLONE(Array)
-
 public:
     virtual QString typeName() const;
     uint length() const;

@@ -28,21 +28,11 @@
 
 class UnsignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
+    DATAINFORMATION_CLONE(UnsignedBitfieldDataInformation, AbstractBitfieldDataInformation) {}
 public:
     UnsignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0)
-            : AbstractBitfieldDataInformation(name, width, parent)
-    {
-    }
-    virtual ~UnsignedBitfieldDataInformation()
-    {
-    }
-protected:
-    UnsignedBitfieldDataInformation(const UnsignedBitfieldDataInformation& d)
-            : AbstractBitfieldDataInformation(d)
-    {
-    }
-public:
-    DATAINFORMATION_CLONE(UnsignedBitfield)
+            : AbstractBitfieldDataInformation(name, width, parent) {}
+    virtual ~UnsignedBitfieldDataInformation() {}
 
     QString typeName() const;
     virtual QString valueString() const;

@@ -29,21 +29,11 @@
 
 class BoolBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
+    DATAINFORMATION_CLONE(BoolBitfieldDataInformation, AbstractBitfieldDataInformation) {}
 public:
     BoolBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0)
-            : AbstractBitfieldDataInformation(name, width, parent)
-    {
-    }
-    virtual ~BoolBitfieldDataInformation()
-    {
-    }
-protected:
-    BoolBitfieldDataInformation(const BoolBitfieldDataInformation& d)
-            : AbstractBitfieldDataInformation(d)
-    {
-    }
-public:
-    DATAINFORMATION_CLONE(BoolBitfield)
+            : AbstractBitfieldDataInformation(name, width, parent) {}
+    virtual ~BoolBitfieldDataInformation() {}
 
     QString typeName() const;
     virtual QString valueString() const;
