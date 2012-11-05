@@ -59,6 +59,9 @@ public:
 
     inline void setDummyIndex(uint newIndex) { mIndex = newIndex; }
     inline uint dummyIndex() const { return mIndex; }
+
+protected:
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const { Q_ASSERT(false); return 0; }
 private:
     uint mIndex;
     DataInformationWithDummyChildren* parentHelper() const;

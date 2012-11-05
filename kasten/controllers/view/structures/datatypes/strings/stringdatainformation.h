@@ -78,7 +78,6 @@ public:
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 
     virtual QString valueString() const;
-    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     StringType encoding() const;
     void setEncoding(StringType encoding);
@@ -96,6 +95,8 @@ public:
      * @param mode The mode to remove
      */
     void unsetTerminationMode(StringData::TerminationMode mode);
+protected:
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
 private:
     QScopedPointer<DummyDataInformation> mDummy;
     QScopedPointer<StringData> mData;

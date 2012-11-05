@@ -31,11 +31,6 @@ public:
     AbstractBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0);
     virtual ~AbstractBitfieldDataInformation();
 
-protected:
-    AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
-    virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
-
-public:
     BitCount32 width() const;
     void setWidth(BitCount32 newWidth);
     virtual BitCount32 size() const;
@@ -46,14 +41,15 @@ public:
     virtual QString sizeString() const;
     virtual bool isBitfield() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded) const;
-    virtual QScriptValue toScriptValue(QScriptEngine * engine, ScriptHandlerInfo * handlerInfo);
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
     bool setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel *out,
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
 
-    static AbstractBitfieldDataInformation* newBitfield(const QString& name);
-
+protected:
+    AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
+    virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
 protected:
     AllPrimitiveTypes mValue;
     quint8 mWidth; //cannot be more than 64 since a quint64 is used for storage

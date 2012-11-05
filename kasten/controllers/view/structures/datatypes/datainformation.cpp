@@ -26,6 +26,7 @@
 #include "../script/scriptlogger.h"
 
 #include <QScriptValue>
+#include <QScriptEngine>
 
 #include <KLocale>
 #include <KLineEdit>
@@ -378,4 +379,11 @@ QSysInfo::Endian DataInformation::effectiveByteOrder() const
                 mParent->asDataInformation()->effectiveByteOrder() :
                 static_cast<QSysInfo::Endian>(Kasten2::StructViewPreferences::byteOrder());
     }
+}
+
+QScriptValue DataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
+{
+    QScriptValue ret = engine->newObject(scriptClass(handlerInfo));
+    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
+    return ret;
 }

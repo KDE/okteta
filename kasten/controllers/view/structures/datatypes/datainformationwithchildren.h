@@ -70,7 +70,8 @@ public:
     void appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal = true);
     void setChildren(const QVector<DataInformation*>& newChildren);
     void setChildren(QScriptValue newChildren);
-    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+protected:
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
 };
 
 inline QVector<DataInformation*> DataInformationWithChildren::children() const

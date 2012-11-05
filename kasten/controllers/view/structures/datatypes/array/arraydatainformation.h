@@ -85,15 +85,15 @@ public:
     QScriptValue childType() const;
     QScriptValue lengthFunction() const;
     void setLengthFunction(QScriptValue newFunc);
-    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
+protected:
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
 private:
     /** Takes ownership of @p data ! */
     AbstractArrayData* arrayDataFromType(uint length, DataInformation* data);
     AbstractArrayData* primitiveArrayFromType(uint length, PrimitiveDataInformation* type);
 protected:
-
     QScopedPointer<AbstractArrayData> mData;
     QScriptValue mLengthFunction;
     static const uint MAX_LEN = 10000;

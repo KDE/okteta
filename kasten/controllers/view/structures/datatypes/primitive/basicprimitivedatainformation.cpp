@@ -39,13 +39,10 @@
 
 #include <abstractbytearraymodel.h>
 
-template<typename T, typename C>
-QScriptValue BasicPrimitiveDataInformation<T, C>::toScriptValue(QScriptEngine* engine,
-        ScriptHandlerInfo* handlerInfo)
+template<typename T, class C>
+inline QScriptClass* BasicPrimitiveDataInformation<T, C>::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    QScriptValue ret = engine->newObject(handlerInfo->mPrimitiveClass.data());
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
+    return handlerInfo->mPrimitiveClass.data();
 }
 
 template<typename T, typename C>

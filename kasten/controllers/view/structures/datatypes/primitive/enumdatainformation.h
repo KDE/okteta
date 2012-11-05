@@ -41,8 +41,8 @@ public:
 
     EnumDefinition::Ptr enumValues() const;
     void setEnumValues(QMap<AllPrimitiveTypes, QString> newValues);
-    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
-
+protected:
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
 protected:
     EnumDefinition::Ptr mEnum;
 };

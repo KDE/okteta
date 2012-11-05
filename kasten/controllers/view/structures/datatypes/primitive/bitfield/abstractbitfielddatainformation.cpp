@@ -65,14 +65,6 @@ AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractB
 {
 }
 
-QScriptValue AbstractBitfieldDataInformation::toScriptValue(QScriptEngine* engine,
-        ScriptHandlerInfo* handlerInfo)
-{
-    QScriptValue ret = engine->newObject(handlerInfo->mBitfieldClass.data());
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
-}
-
 qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
@@ -118,4 +110,9 @@ bool AbstractBitfieldDataInformation::setData(const QVariant& valueVariant,
 AllPrimitiveTypes AbstractBitfieldDataInformation::fromVariant(const QVariant& variant, bool* ok) const
 {
     return AllPrimitiveTypes(variant.toULongLong(ok));
+}
+
+QScriptClass* AbstractBitfieldDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
+{
+    return handlerInfo->mBitfieldClass.data();
 }

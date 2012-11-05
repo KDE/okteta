@@ -224,14 +224,6 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
     }
     mEncoding = encoding;
 }
-
-QScriptValue StringDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-{
-    QScriptValue ret = engine->newObject(handlerInfo->mStringClass.data());
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
-}
-
 //TODO implement string editing
 
 BitCount32 StringDataInformation::childSize(uint index) const
@@ -309,4 +301,9 @@ void StringDataInformation::unsetTerminationMode(StringData::TerminationMode mod
     mData->setTerminationMode(StringData::TerminationMode(mData->terminationMode() & ~mode));
     if (mData->terminationMode() == StringData::None)
         mData->setTerminationCodePoint(0);
+}
+
+QScriptClass* StringDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
+{
+    return handlerInfo->mStringClass.data();
 }

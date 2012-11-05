@@ -42,14 +42,6 @@ EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInfor
 
 EnumDataInformation::~EnumDataInformation() {}
 
-QScriptValue EnumDataInformation::toScriptValue(QScriptEngine* engine,
-        ScriptHandlerInfo* handlerInfo)
-{
-    QScriptValue ret = engine->newObject(handlerInfo->mEnumClass.data());
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
-}
-
 QString EnumDataInformation::valueString() const
 {
     if (!mWasAbleToRead)
@@ -66,4 +58,9 @@ QString EnumDataInformation::valueString() const
 QString EnumDataInformation::typeName() const
 {
     return i18n("enum (%1)", mValue->typeName());
+}
+
+QScriptClass* EnumDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
+{
+    return handlerInfo->mEnumClass.data();
 }

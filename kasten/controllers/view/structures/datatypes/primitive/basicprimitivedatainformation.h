@@ -35,7 +35,6 @@ class BasicPrimitiveDataInformation : public PrimitiveDataInformation
 public:
     BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = 0);
     virtual ~BasicPrimitiveDataInformation();
-    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual QString typeName() const;
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
@@ -55,6 +54,7 @@ public:
             BitCount64 bitsRemaining, quint8* bitOffset);
 
 protected:
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
     BasicPrimitiveDataInformation(const BasicPrimitiveDataInformation<T, C>& d);
 protected:
     T mValue;

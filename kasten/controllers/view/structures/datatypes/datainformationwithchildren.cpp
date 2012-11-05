@@ -231,12 +231,9 @@ bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInforma
     return true;
 }
 
-QScriptValue DataInformationWithChildren::toScriptValue(QScriptEngine* engine,
-        ScriptHandlerInfo* handlerInfo)
+QScriptClass* DataInformationWithChildren::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
-    QScriptValue ret = engine->newObject(handlerInfo->mStructUnionClass.data());
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
+    return handlerInfo->mStructUnionClass.data();
 }
 
 QString DataInformationWithChildren::tooltipString() const

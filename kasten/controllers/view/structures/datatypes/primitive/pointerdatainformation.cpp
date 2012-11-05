@@ -57,13 +57,6 @@ PointerDataInformation::PointerDataInformation(const PointerDataInformation& d)
     mPointerTarget->setParent(this);
 }
 
-QScriptValue PointerDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-{
-    QScriptValue ret = engine->newObject(handlerInfo->mPointerClass.data());
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
-}
-
 qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         BitCount64 bitsRemaining, quint8* bitOffset)
 {
@@ -168,4 +161,9 @@ bool PointerDataInformation::setPointerType(DataInformation* type)
         logError() << "New pointer type is not an unsigned integer: " << pdt;
         return false;
     }
+}
+
+QScriptClass* PointerDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
+{
+    return handlerInfo->mPointerClass.data();
 }

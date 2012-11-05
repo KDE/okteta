@@ -92,7 +92,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     }
     if (name == s_valid || name == s_validationError)
     {
-        return flags &= ~HandlesWriteAccess;
+        return mode == ScriptHandlerInfo::Validating ? flags : flags & ~HandlesWriteAccess;
     }
     if (mode != ScriptHandlerInfo::Updating)
     {
@@ -264,6 +264,20 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
         return;
     }
+    if (mode == ScriptHandlerInfo::Validating)
+    {
+        //only way write access is allowed is when validating: valid and validationError
+        if (data->hasBeenValidated())
+            data->logError() << "Cannot modify this object, it has already been validated!";
+        else if (name == s_valid)
+            data->mValidationSuccessful = value.toBool();
+        else if (name == s_validationError)
+            data->setValidationError(value.toString());
+        else
+            data->logError() << "Cannot write to property" << name.toString() << "while validating!";
+        return;
+    }
+
     if (mode != ScriptHandlerInfo::Updating)
     {
         data->logError() << "Writing to property" << name.toString() << "is only allowed when updating.";

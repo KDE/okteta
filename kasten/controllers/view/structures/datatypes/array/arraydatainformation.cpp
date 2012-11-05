@@ -131,13 +131,6 @@ QVariant ArrayDataInformation::childData(int row, int column, int role) const
     return mData->dataAt(row, column, role);
 }
 
-QScriptValue ArrayDataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-{
-    QScriptValue ret = engine->newObject(handlerInfo->mArrayClass.data());
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
-}
-
 QWidget* ArrayDataInformation::createEditWidget(QWidget*) const
 {
     Q_ASSERT_X(false, "ArrayDataInformation::createEditWidget", "this should never happen!");
@@ -202,6 +195,11 @@ bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMod
 {
     Q_ASSERT_X(false, "ArrayDataInformation::setData()", "this should never be called");
     return false;
+}
+
+QScriptClass* ArrayDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
+{
+    return handlerInfo->mArrayClass.data();
 }
 
 AbstractArrayData* ArrayDataInformation::primitiveArrayFromType(uint length, PrimitiveDataInformation* data)

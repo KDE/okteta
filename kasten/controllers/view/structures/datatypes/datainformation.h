@@ -55,6 +55,7 @@ class AbstractByteArrayModel;
 class QScriptContext;
 class QScriptEngine;
 class QScriptValue;
+class QScriptClass;
 class QVariant;
 class QWidget;
 class ScriptLogger;
@@ -67,6 +68,7 @@ class DataInformation : public DataInformationBase
 {
     friend class ScriptHandler; //so mHasBeenUpdated/hasBeenValidated can be set
     friend class PointerDataInformation; //to set mWasAbleToRead on pointer target
+    friend class DefaultScriptClass; //to set mValidationSucessful and validationError
     template<PrimitiveDataTypeEnum type> friend class PrimitiveArrayData; //to set mWasAbleToRead (when returning a script value)
 protected:
     explicit DataInformation(const DataInformation&);
@@ -183,7 +185,14 @@ public:
 
     virtual void resetValidationState(); //virtual for DataInformationWithChildren
     bool wasAbleToRead() const;
-    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) = 0;
+    /**
+     * This method is virtual since DummyDataInformation has to override it.
+     *
+     * @param engine the script engine
+     * @param handlerInfo the object holding the script classes
+     * @return a QScriptValue wrapping this object
+     */
+    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
     ScriptLogger* logger() const;
@@ -208,6 +217,8 @@ protected:
     bool additionalDataNeeded(AdditionalData* data) const;
     AdditionalData* additionalData() const;
     void setAdditionalData(AdditionalData* data);
+    /** So that this object can be wrapped by the correct javascript object*/
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const = 0;
 private:
     void setValidationError(QString errorMessage); //only called by ScriptHandler
 protected:
