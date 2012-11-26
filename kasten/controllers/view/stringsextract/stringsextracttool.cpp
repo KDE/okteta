@@ -114,6 +114,11 @@ void StringsExtractTool::setMinLength( int minLength )
     emit uptodateChanged( mExtractedStringsUptodate );
 }
 
+void StringsExtractTool::setCharCodec( const QString & )
+{
+    // noop, was one before, only kept for ABI stability
+}
+
 void StringsExtractTool::checkUptoDate()
 {
     mExtractedStringsUptodate =

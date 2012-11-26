@@ -36,6 +36,7 @@
 
 namespace Okteta {
 class AbstractByteArrayModel;
+class CharCodec;
 }
 
 
@@ -70,6 +71,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
     int offsetCoding() const;
 
   public Q_SLOTS: // settings
+    KDE_DEPRECATED void setCharCodec( const QString &codecName );
     void setMinLength( int minLength );
     void markString( int stringId );
     void unmarkString();

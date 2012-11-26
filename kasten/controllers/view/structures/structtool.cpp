@@ -104,6 +104,11 @@ void StructTool::setByteOrder(QSysInfo::Endian order)
     }
 }
 
+void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
+{
+    setByteOrder(static_cast<QSysInfo::Endian>(order));
+}
+
 QString StructTool::title() const
 {
     return i18nc("@title:window", "Structures");
