@@ -107,6 +107,20 @@ void OffsetColumnRenderer::setFormat( OffsetFormat::Format format, const QFontMe
     setFontMetrics( fontMetrics );
 }
 
+void OffsetColumnRenderer::setFormat( OffsetFormat::Format format )
+{
+    // no changes?
+    if( mFormat == format )
+        return;
+
+    mFormat = format;
+
+    PrintFunction = OffsetFormat::printFunction( mFormat );
+
+    // TODO: without QFontMetrics this will fail. do we need to keep one around?
+    recalcX();
+}
+
 void OffsetColumnRenderer::setFontMetrics( const QFontMetrics& fontMetrics )
 {
     mDigitBaseLine = fontMetrics.ascent();
