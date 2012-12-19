@@ -62,6 +62,7 @@ endif (KDE4_ASCII_CAST)
 
 # helper libs
 add_subdirectory( libs )
+add_subdirectory( doc )
 
 set( OKTETALIBS_MAJOR_VERSION 0 )
 set( OKTETALIBS_MINOR_VERSION 8 )
