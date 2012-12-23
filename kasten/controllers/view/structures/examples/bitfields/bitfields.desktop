@@ -5,7 +5,6 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Bitfields test
-Name[bs]=Proba bitskih polja
 Name[ca]=Prova de camps de bits
 Name[ca@valencia]=Prova de camps de bits
 Name[da]=Test af bitfields

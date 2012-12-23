@@ -6,7 +6,6 @@ ServiceTypes=KPluginInfo
 
 Name=Simple test
 Name[ar]=اختبار بسيط
-Name[bs]=Jednostavna proba
 Name[ca]=Prova simple
 Name[ca@valencia]=Prova simple
 Name[cs]=Jednoduchý test
@@ -45,7 +44,6 @@ Name[x-test]=xxSimple testxx
 Name[zh_CN]=简单测试
 Name[zh_TW]=簡單測試
 Comment=A few test structures
-Comment[bs]=Nekoliko probnih struktura
 Comment[ca]=Unes quantes estructures de proves
 Comment[ca@valencia]=Unes estructures de proves
 Comment[da]=Nogle få teststrukturer

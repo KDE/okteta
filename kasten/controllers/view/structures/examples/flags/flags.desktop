@@ -5,7 +5,6 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Testing bitflags
-Name[bs]=Testiranje bit zastavica
 Name[ca]=Proves de «bitflags»
 Name[ca@valencia]=Proves de «bitflags»
 Name[da]=Test af bitflag
@@ -34,7 +33,6 @@ Name[x-test]=xxTesting bitflagsxx
 Name[zh_CN]=测试位标记
 Name[zh_TW]=測試位元旗標
 Comment=A test for bitflags
-Comment[bs]=Test za bit zastavice
 Comment[ca]=Una prova per a «bitflags»
 Comment[ca@valencia]=Una prova per a «bitflags»
 Comment[da]=En test af bitflag
