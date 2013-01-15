@@ -139,7 +139,7 @@
       <widget class="QCheckBox" name="kcfg_ShowCharNumericalValue">
        <property name="maximumSize">
         <size>
-         <width>215</width>
+         <width>16777215</width>
          <height>16777215</height>
         </size>
        </property>
