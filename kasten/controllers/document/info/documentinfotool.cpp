@@ -153,6 +153,11 @@ void DocumentInfoTool::onContentsChanged()
 
 void DocumentInfoTool::onSynchronizerChanged( AbstractModelSynchronizer* synchronizer )
 {
+    // do an instant update, no need to delay
+    if( mMimeTypeUpdateTimer->isActive() )
+        mMimeTypeUpdateTimer->stop();
+    updateMimeType();
+
     if( mSynchronizer ) mSynchronizer->disconnect( this );
     mSynchronizer = synchronizer;
 
@@ -161,6 +166,7 @@ void DocumentInfoTool::onSynchronizerChanged( AbstractModelSynchronizer* synchro
         connect( mSynchronizer, SIGNAL(urlChanged(KUrl)),
                  SLOT(onUrlChanged(KUrl)) );
     }
+
     emit locationChanged( location() );
 }
 
