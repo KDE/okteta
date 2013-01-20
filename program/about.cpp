@@ -40,7 +40,7 @@ OktetaAboutData::OktetaAboutData()
               ki18n("Okteta"), ProgramVersion, // name
               ki18n("Hex editor"), // description
               KAboutData::License_GPL_V2,
-              ki18n("Copyright 2006-2012 Friedrich W. H. Kossebau"), //copyright
+              ki18n("Copyright 2006-2013 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit the raw data of files"), // comment
               ProgramHomepage )
 {
