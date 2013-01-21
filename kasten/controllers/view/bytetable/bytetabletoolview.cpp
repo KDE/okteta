@@ -39,6 +39,9 @@ QWidget* ByteTableToolView::widget()    const { return mWidget; }
 QString ByteTableToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* ByteTableToolView::tool() const { return mWidget->tool(); }
 
-ByteTableToolView::~ByteTableToolView() {}
+ByteTableToolView::~ByteTableToolView()
+{
+    delete mWidget;
+}
 
 }

@@ -39,6 +39,9 @@ QWidget* StringsExtractToolView::widget()    const { return mWidget; }
 QString StringsExtractToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool *StringsExtractToolView::tool() const { return mWidget->tool(); }
 
-StringsExtractToolView::~StringsExtractToolView() {}
+StringsExtractToolView::~StringsExtractToolView()
+{
+    delete mWidget;
+}
 
 }

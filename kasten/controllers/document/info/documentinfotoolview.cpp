@@ -39,6 +39,9 @@ QWidget* DocumentInfoToolView::widget()    const { return mWidget; }
 QString DocumentInfoToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* DocumentInfoToolView::tool() const { return mWidget->tool(); }
 
-DocumentInfoToolView::~DocumentInfoToolView() {}
+DocumentInfoToolView::~DocumentInfoToolView()
+{
+    delete mWidget;
+}
 
 }

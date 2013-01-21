@@ -39,6 +39,9 @@ QWidget* FilterToolView::widget()    const { return mWidget; }
 QString FilterToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* FilterToolView::tool() const { return mWidget->tool(); }
 
-FilterToolView::~FilterToolView() {}
+FilterToolView::~FilterToolView()
+{
+    delete mWidget;
+}
 
 }

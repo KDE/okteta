@@ -39,6 +39,9 @@ QWidget* BookmarksToolView::widget()    const { return mWidget; }
 QString BookmarksToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* BookmarksToolView::tool() const { return mWidget->tool(); }
 
-BookmarksToolView::~BookmarksToolView() {}
+BookmarksToolView::~BookmarksToolView()
+{
+    delete mWidget;
+}
 
 }

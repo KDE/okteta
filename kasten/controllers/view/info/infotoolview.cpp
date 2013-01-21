@@ -39,6 +39,9 @@ QWidget* InfoToolView::widget()    const { return mWidget; }
 QString InfoToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* InfoToolView::tool() const { return mWidget->tool(); }
 
-InfoToolView::~InfoToolView() {}
+InfoToolView::~InfoToolView()
+{
+    delete mWidget;
+}
 
 }

@@ -39,6 +39,9 @@ QWidget* TerminalToolView::widget()    const { return mWidget; }
 QString TerminalToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* TerminalToolView::tool() const { return mWidget->tool(); }
 
-TerminalToolView::~TerminalToolView() {}
+TerminalToolView::~TerminalToolView()
+{
+    delete mWidget;
+}
 
 }

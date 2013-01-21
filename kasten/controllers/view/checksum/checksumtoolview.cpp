@@ -39,6 +39,9 @@ QWidget* ChecksumToolView::widget()    const { return mWidget; }
 QString ChecksumToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* ChecksumToolView::tool() const { return mWidget->tool(); }
 
-ChecksumToolView::~ChecksumToolView() {}
+ChecksumToolView::~ChecksumToolView()
+{
+    delete mWidget;
+}
 
 }

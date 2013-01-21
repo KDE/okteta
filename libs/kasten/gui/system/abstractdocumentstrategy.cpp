@@ -43,6 +43,7 @@ AbstractDocumentStrategy::AbstractDocumentStrategy( AbstractDocumentStrategyPriv
 
 AbstractDocumentStrategy::~AbstractDocumentStrategy()
 {
+  delete d_ptr;
 }
 
 }

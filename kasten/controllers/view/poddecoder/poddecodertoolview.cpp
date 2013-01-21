@@ -39,6 +39,9 @@ QWidget* PODDecoderToolView::widget()    const { return mWidget; }
 QString PODDecoderToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool *PODDecoderToolView::tool() const { return mWidget->tool(); }
 
-PODDecoderToolView::~PODDecoderToolView() {}
+PODDecoderToolView::~PODDecoderToolView()
+{
+  delete mWidget;
+}
 
 }

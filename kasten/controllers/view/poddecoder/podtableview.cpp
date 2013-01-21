@@ -60,7 +60,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mPODTableView->setItemsExpandable( false );
     mPODTableView->setUniformRowHeights( true );
     mPODTableView->setAllColumnsShowFocus( true );
-    mPODTableView->setItemDelegate( new PODDelegate(mTool) );
+    mPODTableView->setItemDelegate( new PODDelegate(mTool, this) );
     mPODTableView->setEditTriggers( QAbstractItemView::EditKeyPressed | QAbstractItemView::DoubleClicked );
     mPODTableView->setDragEnabled( true );
     mPODTableView->setSortingEnabled( false );

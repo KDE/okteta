@@ -81,9 +81,7 @@ int OktetaProgram::execute()
     KApplication programCore;
 
     // TODO:
-    ByteArrayViewProfileManager* const byteArrayViewProfileManager =
-        new ByteArrayViewProfileManager();
-    mByteArrayViewProfileManager = byteArrayViewProfileManager;
+    mByteArrayViewProfileManager = new ByteArrayViewProfileManager();
     //mModelManagerManager->addModelManager( byteArrayViewProfileManager );
 
     const QList<AbstractModelStreamEncoder*> encoderList =
@@ -106,7 +104,7 @@ int OktetaProgram::execute()
     mDocumentManager->syncManager()->setOverwriteDialog( mDialogHandler );
     mDocumentManager->syncManager()->setSaveDiscardDialog( mDialogHandler );
 
-    mViewManager->setViewFactory( new ByteArrayViewFactory(byteArrayViewProfileManager) );
+    mViewManager->setViewFactory( new ByteArrayViewFactory(mByteArrayViewProfileManager) );
     mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
 
@@ -151,6 +149,7 @@ OktetaProgram::~OktetaProgram()
     delete mDocumentManager;
     delete mViewManager;
     delete mDialogHandler;
+    delete mByteArrayViewProfileManager;
 }
 
 }

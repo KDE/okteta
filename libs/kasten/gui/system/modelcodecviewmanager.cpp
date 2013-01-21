@@ -42,6 +42,7 @@ ModelCodecViewManager::ModelCodecViewManager() {}
 
 void ModelCodecViewManager::setEncoderConfigEditorFactories( const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList )
 {
+    qDeleteAll( mEncoderFactoryList );
     mEncoderFactoryList = factoryList;
 
     qDeleteAll( mExporterFactoryList );
@@ -53,11 +54,13 @@ void ModelCodecViewManager::setEncoderConfigEditorFactories( const QList<Abstrac
 
 void ModelCodecViewManager::setExporterConfigEditorFactories( const QList<AbstractModelExporterConfigEditorFactory*>& factoryList )
 {
+    qDeleteAll( mExporterFactoryList );
     mExporterFactoryList = factoryList;
 }
 
 void ModelCodecViewManager::setGeneratorConfigEditorFactories( const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList )
 {
+    qDeleteAll( mGeneratorFactoryList );
     mGeneratorFactoryList = factoryList;
 }
 
@@ -107,6 +110,7 @@ ModelCodecViewManager::~ModelCodecViewManager()
 {
     qDeleteAll( mEncoderFactoryList );
     qDeleteAll( mExporterFactoryList );
+    qDeleteAll( mGeneratorFactoryList );
 }
 
 }

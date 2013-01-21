@@ -102,4 +102,5 @@ OktetaPartFactory::~OktetaPartFactory()
 {
     delete mComponentData;
     delete mAboutData;
+    delete mByteArrayViewProfileManager;
 }
