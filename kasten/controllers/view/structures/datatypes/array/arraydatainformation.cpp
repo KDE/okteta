@@ -47,7 +47,7 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
-        : DataInformationWithDummyChildren(d), mData(0)
+        : DataInformationWithDummyChildren(d), mData(0), mLengthFunction(d.mLengthFunction)
 {
     if (d.mData)
     {
