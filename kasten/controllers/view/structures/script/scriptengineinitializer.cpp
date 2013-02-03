@@ -232,6 +232,7 @@ QScriptValue scriptNewPointer(QScriptContext* ctx, QScriptEngine* eng)
 QScriptValue scriptNewTaggedUnion(QScriptContext* ctx, QScriptEngine* eng)
 {
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_TAGGED_UNION);
+    object.setProperty(ParserStrings::PROPERTY_CHILD, eng->newFunction(getChild));
 
     object.setProperty(ParserStrings::PROPERTY_CHILDREN, ctx->argument(0));
     object.setProperty(ParserStrings::PROPERTY_ALTERNATIVES, ctx->argument(1));
