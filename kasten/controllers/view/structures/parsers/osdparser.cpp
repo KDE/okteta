@@ -291,7 +291,7 @@ DataInformation* OsdParser::parseType(const QDomElement& xmlElem, const OsdParse
     if (!typeAttribute.isEmpty()) {
         //type was specified as a primitive string
         LoggerWithContext lwc(info.logger, info.context() + name);
-        DataInformation* ret = PrimitiveFactory::newInstance(PROPERTY_TYPE, typeAttribute, lwc);
+        DataInformation* ret = PrimitiveFactory::newInstance(name, typeAttribute, lwc);
         if (!ret) {
             info.error() << typeAttribute << "is not a valid type identifier";
         }
@@ -443,8 +443,14 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
         data = pointerFromXML(elem, info);
     else if (tag == TYPE_TAGGED_UNION)
         data = taggedUnionFromXML(elem, info);
-    else
-        info.error() << "Unknow tag: " << tag;
+    else {
+        LoggerWithContext lwc(info.logger, info.context());
+        //use the type tag as a primitive type
+        data = PrimitiveFactory::newInstance(info.name, tag, lwc);
+        if (!data) {
+            info.error() << "Cannot parse unknown tag: " << tag;
+        }
+    }
 
     if (data)
     {
