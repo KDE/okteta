@@ -37,17 +37,21 @@ namespace Kasten2
 StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info)
         : mPluginInfo(info)
 {
-    QFileInfo tmp(info.entryPath());
-    mDir = tmp.dir();
+    const QFileInfo tmp(info.entryPath());
+    const QString absoluteDir = tmp.absolutePath();
 
     QString category = info.category();
-    if (category == QLatin1String("structure/js"))
-        mParser.reset(new ScriptFileParser(mPluginInfo.pluginName(),
-                absolutePath() + QLatin1String("/main.js")));
-    else if (category == QLatin1String("structure"))
-        mParser.reset(new OsdParser(mPluginInfo.pluginName(),
-                absolutePath() + QLatin1Char('/') + mPluginInfo.pluginName()
-                        + QLatin1String(".osd")));
+    if (category == QLatin1String("structure/js")) {
+        const QString filename = absoluteDir + QLatin1String("/main.js");
+        mParser.reset(new ScriptFileParser(mPluginInfo.pluginName(), filename));
+    }
+    else if (category == QLatin1String("structure")) {
+        //by default use main.osd, only if it doesn't exist fall back to old behaviour
+        QString filename = absoluteDir + QLatin1String("/main.osd");
+        if (!QFile::exists(filename))
+            filename = absoluteDir + QLatin1Char('/') + mPluginInfo.pluginName() + QLatin1String(".osd");
+        mParser.reset(new OsdParser(mPluginInfo.pluginName(), filename));
+    }
     else
         kWarning() << "no valid parser found for plugin category '" << category << "'";
 }
@@ -83,11 +87,6 @@ QStringList StructureDefinitionFile::structureNames() const
 {
     Q_CHECK_PTR(mParser);
     return mParser->parseStructureNames();
-}
-
-QString StructureDefinitionFile::absolutePath() const
-{
-    return mDir.absolutePath();
 }
 
 }

@@ -60,20 +60,9 @@ public:
         return mConfig;
     }
     StructureDefinitionFile* definition(QString& pluginName);
-    inline QString relativeFilePath(QString absPath) const
-    {
-        return mDefsDir.relativeFilePath(absPath);
-    }
-    inline const QDir& defsDir() const
-    {
-        return mDefsDir;
-    }
-
-protected:
-    void addStructDef(const KPluginInfo& info);
-
 private:
-    const QDir mDefsDir;
+    void addStructDef(const KPluginInfo& info);
+private:
     QMap<QString, StructureDefinitionFile*> mDefs;
     QStringList mLoadedFiles;
     KSharedConfig::Ptr mConfig;

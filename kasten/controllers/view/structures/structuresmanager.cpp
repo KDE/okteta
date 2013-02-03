@@ -35,8 +35,8 @@ StructuresManager::~StructuresManager()
 {
     qDeleteAll(mDefs);
 }
-StructuresManager::StructuresManager() :
-    mDefsDir(KGlobal::dirs()->locateLocal("data", QLatin1String("okteta/structures/"), true))
+
+StructuresManager::StructuresManager()
 {
     mConfig = KSharedConfig::openConfig(QLatin1String("oktetastructuresrc"),
             KSharedConfig::FullConfig, "config");
@@ -55,7 +55,6 @@ void StructuresManager::reloadPaths()
     KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));
     foreach(const KPluginInfo& info, plugins)
     {
-        QFileInfo desktopPath = QFileInfo(info.entryPath());
         addStructDef(info);
     }
 }

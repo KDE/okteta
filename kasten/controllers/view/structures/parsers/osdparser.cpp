@@ -274,7 +274,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
             }
             if (lengthStr.contains(QLatin1Char('.')))
             {
-                info.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is allowed!";
+                info.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
                 return 0; // XXX maybe add possible shorthand length="this.parent.length"
             }
             QString dynamicArray = generateLengthFunction(info.parent, 0, lengthStr, QString(), info);

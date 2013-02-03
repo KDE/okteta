@@ -24,9 +24,14 @@
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
 
+#include <QFile>
+
 AbstractStructureParser::AbstractStructureParser(const QString& pluginName, const QString& absolutePath)
         : mPluginName(pluginName), mAbsolutePath(absolutePath)
 {
+    if (!QFile::exists(absolutePath)) {
+        qWarning() << "File" << absolutePath << "does not exist, parsing structure will fail!";
+    }
 }
 
 AbstractStructureParser::~AbstractStructureParser()

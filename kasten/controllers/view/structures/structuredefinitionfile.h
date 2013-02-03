@@ -56,27 +56,18 @@ public:
     QVector<TopLevelDataInformation*> structures() const;
     QStringList structureNames() const;
     TopLevelDataInformation* structure(const QString& name) const;
-
-    const KPluginInfo& pluginInfo() const;
-    const QDir dir() const;
-    /** @return the absolute path to the directory containing the structure definition */
+    /** @return the absolute path to the directory containing the .desktop file */
     QString absolutePath() const;
+    const KPluginInfo& pluginInfo() const;
     bool isValid() const;
 private:
     KPluginInfo mPluginInfo;
-    /** the directory the plugin is saved in */
-    QDir mDir;
     QScopedPointer<AbstractStructureParser> mParser;
 };
 
 inline const KPluginInfo& StructureDefinitionFile::pluginInfo() const
 {
     return mPluginInfo;
-}
-
-inline const QDir StructureDefinitionFile::dir() const
-{
-    return mDir;
 }
 
 inline bool StructureDefinitionFile::isValid() const
