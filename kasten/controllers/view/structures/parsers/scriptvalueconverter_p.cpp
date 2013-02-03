@@ -159,22 +159,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
 ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 {
     ArrayParsedData apd(info);
-    QScriptValue lengthProp = value.property(PROPERTY_LENGTH);
-    if (!lengthProp.isValid())
-    {
-        info.error() << "No array length specified!";
-        return 0;
-    }
-
-    if (lengthProp.isFunction())
-    {
-        apd.lengthFunction = lengthProp;
-    }
-    else
-    {
-        apd.length = ParserUtils::intFromScriptValue(lengthProp);
-    }
-
+    apd.length = value.property(PROPERTY_LENGTH);
     QScriptValue childType = value.property(PROPERTY_TYPE);
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name);

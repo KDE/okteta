@@ -254,46 +254,14 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
         info.error() << "No array length specified!";
         return 0;
     }
-
-    apd.length = ParserUtils::intFromString(lengthStr);
-
-    if (!apd.length.isValid)
-    {
-        //we failed to parse as an integer, must be an update function now
-        //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
-        apd.lengthFunction = functionSafeEval(info.engine, lengthStr);
-        if (!apd.lengthFunction.isFunction())
-        {
-
-            //it might be a simple reference (old way of defining dynamic arrays)
-            if (!info.parent)
-            {
-                info.error() << "Toplevel array has length depending on other field (" << lengthStr
-                        << "). This is not possible.";
-                return 0;
-            }
-            if (lengthStr.contains(QLatin1Char('.')))
-            {
-                info.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
-                return 0; // XXX maybe add possible shorthand length="this.parent.length"
-            }
-            QString dynamicArray = generateLengthFunction(info.parent, 0, lengthStr, QString(), info);
-            if (dynamicArray.isEmpty())
-            {
-                info.error() << "Could not find element " << lengthStr << " referenced as array length!";
-                return 0;
-            }
-
-            apd.lengthFunction = functionSafeEval(info.engine, dynamicArray);
-            if (!apd.lengthFunction.isFunction())
-            {
-                info.error() << "Array length is neither number nor valid function ('" << dynamicArray
-                    << "'). This is probably a bug in the parser...";
-                return 0;
-            }
-        }
+    //must wrap in parentheses, cannot just evaluate. See https://bugreports.qt-project.org/browse/QTBUG-5757
+    const QScriptValue lengthFunc = ParserUtils::functionSafeEval(info.engine, lengthStr);
+    if (lengthFunc.isValid()) {
+        apd.length = lengthFunc;
     }
-
+    else {
+        apd.length = QScriptValue(lengthStr);
+    }
     //first check whether there is a <type> element and use the inner element
     //if that doesn't exist use the first child element as the type, but only if there is only one child
     DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
@@ -423,7 +391,9 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isF
 {
     EnumParsedData epd(info);
     epd.type = readProperty(xmlElem, PROPERTY_TYPE);
-    epd.enumName = readProperty(xmlElem, TYPE_ENUM); //used again here as property
+    epd.enumName = readProperty(xmlElem, PROPERTY_ENUM_NAME);
+    if (epd.enumName.isEmpty())
+        epd.enumName = readProperty(xmlElem, TYPE_ENUM); //used again here as property
     epd.enumDef = findEnum(epd.enumName, info);
     if (!epd.enumDef)
     {
@@ -485,8 +455,8 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
         if (!byteOrderStr.isEmpty())
             cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr,
                     LoggerWithContext(info.logger, info.context()));
-        cpd.updateFunc = functionSafeEval(info.engine, readProperty(elem, PROPERTY_UPDATE_FUNC));
-        cpd.validationFunc = functionSafeEval(info.engine, readProperty(elem, PROPERTY_VALIDATION_FUNC));
+        cpd.updateFunc = ParserUtils::functionSafeEval(info.engine, readProperty(elem, PROPERTY_UPDATE_FUNC));
+        cpd.validationFunc = ParserUtils::functionSafeEval(info.engine, readProperty(elem, PROPERTY_VALIDATION_FUNC));
         if (!DataInformationFactory::commonInitialization(data, cpd))
         {
             delete data; //error message has already been logged
@@ -521,17 +491,6 @@ QString OsdParser::readProperty(const QDomElement& elem, const QString& property
         return defaultVal;
 }
 
-QScriptValue OsdParser::functionSafeEval(QScriptEngine* engine, const QString& str)
-{
-    if (str.isEmpty())
-        return QScriptValue();
-    //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
-    QScriptValue ret = engine->evaluate(QLatin1Char('(') + str + QLatin1Char(')'));
-    if (!ret.isFunction())
-        return QScriptValue(str);
-    return ret;
-}
-
 TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xmlElem,
         const OsdParserInfo& info)
 {
@@ -554,7 +513,7 @@ TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xml
         TaggedUnionParsedData::Alternatives alt;
         alt.name = readProperty(elem, PROPERTY_STRUCT_NAME);
         QString selectIfStr = readProperty(elem, PROPERTY_SELECT_IF);
-        QScriptValue selectIf = functionSafeEval(info.engine, selectIfStr);
+        QScriptValue selectIf = ParserUtils::functionSafeEval(info.engine, selectIfStr);
         if (!selectIf.isValid())
             selectIf = selectIfStr;
         alt.selectIf = selectIf;
@@ -566,48 +525,6 @@ TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xml
     }
 
     return DataInformationFactory::newTaggedUnion(tpd);
-}
-
-QString OsdParser::generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
-        QString currentString, const ParserInfo& info)
-{
-    qDebug() << "currentString = " << currentString;
-    if (!current) //reached top
-        return QString();
-    for (int i = current->childCount() - 1; i >= 0; --i)
-    {
-        DataInformation* child = current->childAt(i);
-        if (child == last)
-            return QString(); //don't go down again after going up one level
-
-        QString childName = child->name();
-        if (childName == elemName)
-        {
-            QString function = QLatin1String("function() { return this.parent.") + currentString
-                    + elemName + QLatin1String(".value; }");
-            info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
-                    << ", resulting function is: " << function;
-            qDebug() << "Found it, currentString = " << currentString << " func is: " << function;
-            return function;
-        }
-        else if (child->childCount() > 0)
-        {
-            QString func = generateLengthFunction(child, current, elemName,
-                    currentString + childName + QLatin1Char('.'), info);
-            //if func is empty no valid child was found, just continue
-            if (!func.isEmpty())
-                return func;
-        }
-        //has no children and was not the desired element -> continue loop
-    }
-    //now check parents
-    DataInformation* next = current->parent()->asDataInformation();
-    if (next == last)
-        return QString(); //we moved one level down previously, don't move up again
-    else
-        return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
-            currentString + QLatin1String("parent."), info);
-
 }
 
 OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, QDomElement firstChild)

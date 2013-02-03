@@ -145,6 +145,48 @@ T* newStructOrUnion(const StructOrUnionParsedData& supd)
     return structOrUnion;
 }
 
+QString generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
+        QString currentString, const ParserInfo& info)
+{
+    qDebug() << "currentString = " << currentString;
+    if (!current) //reached top
+        return QString();
+    for (int i = current->childCount() - 1; i >= 0; --i)
+    {
+        DataInformation* child = current->childAt(i);
+        if (child == last)
+            return QString(); //don't go down again after going up one level
+
+        QString childName = child->name();
+        if (childName == elemName)
+        {
+            QString function = QLatin1String("function() { return this.parent.") + currentString
+                    + elemName + QLatin1String(".value; }");
+            info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
+                    << ", resulting function is: " << function;
+            qDebug() << "Found it, currentString = " << currentString << " func is: " << function;
+            return function;
+        }
+        else if (child->childCount() > 0)
+        {
+            QString func = generateLengthFunction(child, current, elemName,
+                    currentString + childName + QLatin1Char('.'), info);
+            //if func is empty no valid child was found, just continue
+            if (!func.isEmpty())
+                return func;
+        }
+        //has no children and was not the desired element -> continue loop
+    }
+    //now check parents
+    DataInformation* next = current->parent()->asDataInformation();
+    if (next == last)
+        return QString(); //we moved one level down previously, don't move up again
+    else
+        return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
+            currentString + QLatin1String("parent."), info);
+
+}
+
 }
 
 EnumDataInformation* DataInformationFactory::newEnum(const EnumParsedData& pd)
@@ -164,30 +206,43 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
         pd.error() << "Failed to parse array type!";
         return 0;
     }
-    int initialLength = 0;
-    if (!pd.length.isValid && !pd.lengthFunction.isValid())
+    if (!pd.length.isValid())
     {
-        pd.error() << "Neither fixed length nor length function specified, cannot create array.";
+        pd.error() << "No array length specified!";
         return 0;
     }
-    if (pd.length.isValid)
+    const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
+    if (fixedLength.isValid)
     {
-        if (pd.length.value < 0)
+        return new ArrayDataInformation(pd.name, fixedLength.value, pd.arrayType, pd.parent, QScriptValue());
+    }
+    else if (pd.length.isFunction())
+    {
+        return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, pd.length);
+    }
+    else
+    {
+        //neither integer nor function, must be a string containing the name of another element.
+        const QString lengthStr = pd.length.toString();
+        if (!pd.parent)
         {
-            pd.error() << "Cannot create array with negative length:" << pd.length.value;
+            pd.error() << "Toplevel array has length depending on other field (" << lengthStr
+                    << "). This is not possible.";
             return 0;
         }
-        initialLength = pd.length.value;
-    }
-    if (pd.lengthFunction.isValid())
-    {
-        if (!pd.lengthFunction.isFunction())
+        if (lengthStr.contains(QLatin1Char('.')))
         {
-            pd.error() << "Length function is not a function:" << pd.lengthFunction.toString();
+            pd.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
+            return 0; //TODO maybe add possible shorthand length="this.parent.length"
+        }
+        QString lengthFunctionString = generateLengthFunction(pd.parent, 0, lengthStr, QString(), pd);
+        if (lengthFunctionString.isEmpty()) {
+            pd.error() << "Could not find element " << lengthStr << " referenced as array length!";
             return 0;
         }
+        QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
+        return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, lengthFunction);
     }
-    return new ArrayDataInformation(pd.name, initialLength, pd.arrayType, pd.parent, pd.lengthFunction);
 }
 
 StringDataInformation* DataInformationFactory::newString(const StringParsedData& pd)

@@ -44,11 +44,9 @@ class ScriptLogger;
 struct OsdParserInfo : public ParserInfo {
     inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
             QScriptEngine* engine, QVector<EnumDefinition::Ptr> enums)
-        : ParserInfo(name, logger, parent), engine(engine), enums(enums) {}
-    inline OsdParserInfo(const OsdParserInfo& i) : ParserInfo(i), engine(i.engine), enums(i.enums) {}
+        : ParserInfo(name, logger, parent, engine), enums(enums) {}
+    inline OsdParserInfo(const OsdParserInfo& i) : ParserInfo(i), enums(i.enums) {}
     inline ~OsdParserInfo() {}
-    /** OSD parser only since QScriptValue::engine() exists */
-    QScriptEngine* engine;
     QVector<EnumDefinition::Ptr> enums;
 };
 
@@ -88,14 +86,6 @@ private:
     /** Reads an property of the QDomElement. First it is checked whether an attribute exists, if this is not the case
      * the inner text of an element with tag equal to @p attrib is returned*/
     static QString readProperty(const QDomElement& elem, const QString& attrib, const QString& defaultVal = QString());
-
-    /** This essentially calls engine->evaluate(str), but ensures it can be a function (QTBUG-5757)  */
-    static QScriptValue functionSafeEval(QScriptEngine* engine, const QString& str);
-
-    /** Generate a length function referencing @p elemName
-     *  This is needed to support the old way of defining dynamic arrays */
-    static QString generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
-            QString currentString, const ParserInfo& info);
 
     /** if not empty construct the document from this, instead of opening file */
     const QString mXmlString;

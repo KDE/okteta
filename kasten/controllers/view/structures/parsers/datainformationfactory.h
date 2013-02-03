@@ -90,8 +90,7 @@ private:
 
 struct ArrayParsedData : public ParserInfo {
     inline explicit ArrayParsedData(const ParserInfo& i) : ParserInfo(i), arrayType(0) {}
-    ParsedNumber<int> length;
-    QScriptValue lengthFunction;
+    QScriptValue length;
     DataInformation* arrayType;
 private:
     Q_DISABLE_COPY(ArrayParsedData)

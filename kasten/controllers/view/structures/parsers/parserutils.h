@@ -42,21 +42,23 @@ class TaggedUnionDataInformation;
 class PointerDataInformation;
 
 class QScriptValue;
+class QScriptEngine;
 
 /** For use by the parsers so that the functions don't have as many parameters */
 struct ParserInfo
 {
-    inline ParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent)
-            : name(name), logger(logger), parent(parent)
+    inline ParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent, QScriptEngine* engine)
+            : name(name), logger(logger), parent(parent), engine(engine)
     {
         Q_CHECK_PTR(logger);
     }
     inline ParserInfo(const ParserInfo& i)
-            : name(i.name), logger(i.logger), parent(i.parent) {}
+            : name(i.name), logger(i.logger), parent(i.parent), engine(i.engine) {}
     inline ~ParserInfo() {}
     QString name;
     ScriptLogger* logger;
     DataInformation* parent;
+    QScriptEngine* engine;
 
     inline QString context() const
     {
@@ -193,6 +195,8 @@ namespace ParserUtils
 
     StringDataInformation::StringType toStringEncoding(const QString& str, const LoggerWithContext& logger);
 
+    /** This essentially calls engine->evaluate(str), but ensures it can be a function (QTBUG-5757)  */
+    QScriptValue functionSafeEval(QScriptEngine* engine, const QString& str);
 }
 
 #endif /* PARSERUTILS_H_ */

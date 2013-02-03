@@ -37,7 +37,7 @@ DataInformation* convert(const QScriptValue& value, const QString& name, ScriptL
         DataInformation* parent)
 {
     //TODO Q_CHECK_PTR(parent)
-    const ParserInfo info(name, logger, parent);
+    const ParserInfo info(name, logger, parent, value.engine());
     return toDataInformation(value, info); //could be NULL
 }
 
@@ -53,7 +53,7 @@ QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger*
         it.next();
         if (isArray && it.name() == QLatin1String("length"))
             continue; //skip the length property of arrays
-        const ParserInfo info(it.name(), logger, parent);
+        const ParserInfo info(it.name(), logger, parent, value.engine());
         DataInformation* inf = toDataInformation(it.value(), info);
 
         if (inf)
