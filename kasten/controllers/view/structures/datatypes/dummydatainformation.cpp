@@ -58,8 +58,8 @@ bool DummyDataInformation::setData(const QVariant& v, Okteta::AbstractByteArrayM
     return parentHelper()->setChildData(mIndex, v, out, addr, remaining, offset);
 }
 
-qint64 DummyDataInformation::readData(Okteta::AbstractByteArrayModel* in, Okteta::Address addr,
-        BitCount64 remaining, quint8* offset)
+qint64 DummyDataInformation::readData(Okteta::AbstractByteArrayModel*, Okteta::Address,
+        BitCount64, quint8*)
 {
     Q_ASSERT(false); //should never be called
     return -1;

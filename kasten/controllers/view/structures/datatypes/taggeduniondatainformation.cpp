@@ -224,6 +224,8 @@ BitCount32 TaggedUnionDataInformation::size() const
 bool TaggedUnionDataInformation::replaceChildAt(unsigned int index, DataInformation* newChild)
 {
     Q_ASSERT(false); //TODO implement
+    Q_UNUSED(index)
+    Q_UNUSED(newChild)
     return false;
 }
 

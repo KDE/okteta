@@ -73,6 +73,12 @@ bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMo
 
 bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
+    Q_UNUSED(row)
+    Q_UNUSED(value)
+    Q_UNUSED(out)
+    Q_UNUSED(address)
+    Q_UNUSED(bitsRemaining)
+    Q_UNUSED(bitOffset)
     logWarn() << "setChildData not implemented yet!";
     return false;
 }
@@ -244,18 +250,23 @@ void StringDataInformation::setChildWidgetData(uint index, QWidget* w) const
 {
     Q_ASSERT(false);
     Q_ASSERT(index < mData->count());
+    Q_UNUSED(index)
+    Q_UNUSED(w)
 }
 
 QVariant StringDataInformation::dataFromChildWidget(uint index, const QWidget* w) const
 {
     Q_ASSERT(index < mData->count());
     Q_ASSERT(false);
+    Q_UNUSED(w)
     return QVariant();
 }
 
 QWidget* StringDataInformation::createChildEditWidget(uint index, QWidget* parent) const
 {
     Q_ASSERT(false);
+    Q_UNUSED(parent)
+    Q_UNUSED(index)
     return 0;
 }
 

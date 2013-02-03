@@ -61,7 +61,7 @@ public:
     inline uint dummyIndex() const { return mIndex; }
 
 protected:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const { Q_ASSERT(false); return 0; }
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo*) const { Q_ASSERT(false); return 0; }
 private:
     uint mIndex;
     DataInformationWithDummyChildren* parentHelper() const;
