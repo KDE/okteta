@@ -265,10 +265,9 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     //first check whether there is a <type> element and use the inner element
     //if that doesn't exist use the first child element as the type, but only if there is only one child
     DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
-    QDomElement typeElement = xmlElem.firstChildElement(PROPERTY_TYPE).firstChildElement();
-    if (typeElement.isNull())
-    {
-        //there is no <type> element, use first valid child element
+    apd.arrayType = parseType(xmlElem, info, NAME_ARRAY_TYPE);
+    if (!apd.arrayType) {
+        //was not specified as <type> element or type="attribute", use first child
         OsdChildrenParser typeParser(info, xmlElem.firstChildElement());
         typeParser.setParent(&dummy);
         if (typeParser.hasNext())
@@ -278,58 +277,54 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
             {
                 info.error() << "More than one possible type for array!";
                 delete apd.arrayType;
+                apd.arrayType = 0;
                 return 0;
             }
         }
-        else
-        {
-            info.error() << "Array type is missing.";
-            return 0;
-        }
-    }
-    else
-    {
-        //we have a <type> element
-        OsdParserInfo newInfo(info);
-        newInfo.parent = &dummy;
-        apd.arrayType = parseElement(typeElement, newInfo);
     }
     return DataInformationFactory::newArray(apd);
 }
 
-PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+DataInformation* OsdParser::parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
 {
-    PointerParsedData ppd(info);
-
-    QDomElement typeElement = xmlElem.firstChildElement(PROPERTY_TYPE);
-    QString typeString; //only needed if type is a string not an element
-
-    OsdParserInfo newInfo(info);
-    DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
-    newInfo.parent = &dummy;
-    newInfo.name = NAME_POINTER_VALUE_TYPE;
-
+    const QString typeAttribute = xmlElem.attribute(PROPERTY_TYPE);
+    if (!typeAttribute.isEmpty()) {
+        //type was specified as a primitive string
+        LoggerWithContext lwc(info.logger, info.context() + name);
+        DataInformation* ret = PrimitiveFactory::newInstance(PROPERTY_TYPE, typeAttribute, lwc);
+        if (!ret) {
+            info.error() << typeAttribute << "is not a valid type identifier";
+        }
+        return ret;
+    }
+    const QDomElement typeElement = xmlElem.firstChildElement(PROPERTY_TYPE);
     if (!typeElement.isNull())
     {
         QDomElement toParse = typeElement.firstChildElement();
         if (!toParse.isNull())
         {
-            ppd.valueType = parseElement(toParse, newInfo);
+            //TODO have this newInfo code only in one location
+            OsdParserInfo newInfo(info);
+            DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
+            newInfo.parent = &dummy;
+            newInfo.name = name;
+            DataInformation* ret = parseElement(toParse, newInfo);
+            if (!ret) {
+                info.error() << "Failed to parse element defined in <type>";
+            }
+            return ret;
         }
-        else
-        {
-            typeString = typeElement.text();
-        }
     }
-    else
-    {
-        typeString = xmlElem.attribute(PROPERTY_TYPE);
-    }
-    if (!typeString.isEmpty())
-    {
-        LoggerWithContext lwc(info.logger, info.context() + NAME_POINTER_VALUE_TYPE);
-        ppd.valueType = PrimitiveFactory::newInstance(PROPERTY_TYPE, typeString, lwc);
-    }
+    //don't log an error here, it may be okay (i.e. in arrays <type> can be omitted)
+    return 0;
+}
+
+
+PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+{
+    PointerParsedData ppd(info);
+
+    ppd.valueType = parseType(xmlElem, info, NAME_POINTER_VALUE_TYPE);
 
     //first check whether there is a <target> element and use the inner element
     //if that doesn't exist use the first child element as the type, but only if there is only one child
@@ -350,6 +345,9 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
             return 0;
         }
     }
+    OsdParserInfo newInfo(info);
+    DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
+    newInfo.parent = &dummy;
     newInfo.name = NAME_POINTER_TARGET;
     ppd.pointerTarget = parseElement(childElement, newInfo);
     return DataInformationFactory::newPointer(ppd);

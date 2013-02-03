@@ -162,7 +162,7 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
     apd.length = value.property(PROPERTY_LENGTH);
     QScriptValue childType = value.property(PROPERTY_TYPE);
     ParserInfo childInfo(info);
-    DummyDataInformation dummy(info.parent, info.name);
+    DummyDataInformation dummy(info.parent, info.name + QLatin1Char('.') + NAME_ARRAY_TYPE);
     childInfo.parent = &dummy;
     apd.arrayType = toDataInformation(childType, childInfo);
 

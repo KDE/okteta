@@ -74,6 +74,12 @@ private:
     static StructureDataInformation* structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static TaggedUnionDataInformation* taggedUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    /** Get the child type from the <type> element or type="" attribute.
+      * This handles both the case where it is passed as an XML element and as a primitive type string
+      * @param xmlElem the parent XML element
+      * @param info the parser info
+      * @return The parsed element or null if not possible. */
+    static DataInformation* parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
 
     static EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info);
 
