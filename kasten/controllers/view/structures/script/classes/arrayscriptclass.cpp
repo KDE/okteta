@@ -118,16 +118,22 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
     ArrayDataInformation* aData = data->asArray();
     if (name == s_length)
     {
-        ParsedNumber<uint> newLength = ParserUtils::uintFromScriptValue(value);
-
-        if (!newLength.isValid)
+        if (value.isFunction())
         {
-            aData->logError() << "new length of array is invalid:" << newLength.string;
-            aData->setArrayLength(0);
+            aData->setLengthFunction(value);
         }
         else
         {
-            aData->setArrayLength(newLength.value);
+            ParsedNumber<uint> newLength = ParserUtils::uintFromScriptValue(value);
+            if (!newLength.isValid)
+            {
+                aData->logError() << "new length of array is invalid:" << newLength.string;
+                aData->setArrayLength(0);
+            }
+            else
+            {
+                aData->setArrayLength(newLength.value);
+            }
         }
         return true;
     }
