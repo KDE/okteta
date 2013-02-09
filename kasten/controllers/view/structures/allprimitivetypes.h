@@ -36,92 +36,78 @@ namespace Okteta
 class AbstractByteArrayModel;
 }
 
+#ifdef Q_CC_GNU
+#define PACKED_STRUCT __attribute__((packed, aligned(8)))
+#else
+#define PACKED_STRUCT
+#endif
+
+/** Ensures that when used in a union the uint8 value will be equal to the lowest bits of the uint32 value
+ * This means we need to add padding equal to 8-sizeof(T) before the value in the big endian case.
+ * On little endian padding gets added at the end (not strictly necessary)
+ */
+template<typename T, int padCount>
+struct EndianIndependentBase {
+#if Q_BYTE_ORDER == Q_BIG_ENDIAN
+    char padding[padCount];
+#endif
+    T value;
+#if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
+    char padding[padCount];
+#endif
+} PACKED_STRUCT;
+template<typename T>
+struct EndianIndependentBase<T, 0> {
+    T value;
+};
+
+template<typename T>
+struct EndianIndependent : public EndianIndependentBase<T, 8 - sizeof(T)> {
+};
+
 /** This union holds the value of one primitive datatype. Maximum size of a datatype is currently 64 bits.
  *  It has methods for reading and writing from @c Okteta::AbstractByteArrayModel */
 union AllPrimitiveTypes
 {
-    qint64 longValue;
-    quint64 ulongValue;
-    qint32 intValue;
-    quint32 uintValue;
-    qint16 shortValue;
-    quint16 ushortValue;
-    qint8 byteValue;
-    quint8 ubyteValue;
-    float floatValue;
-    double doubleValue;
+private:
+    EndianIndependent<qint8> _byte;
+    EndianIndependent<quint8> _ubyte;
+    EndianIndependent<qint16> _short;
+    EndianIndependent<quint16> _ushort;
+    EndianIndependent<qint32> _int;
+    EndianIndependent<quint32> _uint;
+    EndianIndependent<qint64> _long;
+    EndianIndependent<quint64> _ulong;
+    EndianIndependent<float> _float;
+    EndianIndependent<double> _double;
+public:
     qint8 allBytes[8];
-    inline AllPrimitiveTypes() :
-        ulongValue(0)
-    {
-    }
-    inline AllPrimitiveTypes(const AllPrimitiveTypes& a)
-        : ulongValue(a.ulongValue)
-    {
-    }
-    inline AllPrimitiveTypes(quint64 val) :
-        ulongValue(val)
-    {
-    }
-    inline AllPrimitiveTypes(qint64 val) :
-        longValue(val)
-    {
-    }
+    inline AllPrimitiveTypes() { _ulong.value = 0; }
+    inline AllPrimitiveTypes(const AllPrimitiveTypes& a) { _ulong.value = a._ulong.value; }
+    inline AllPrimitiveTypes(quint64 val) { _ulong.value = val;}
+    inline AllPrimitiveTypes(qint64 val) { _long.value = val;}
     //set all to zero first with smaller data types
-    inline AllPrimitiveTypes(qint32 val) :
-        longValue(val < 0 ? -1 : 0)
-    {
-        intValue = val;
-    }
-    inline AllPrimitiveTypes(quint32 val) :
-        ulongValue(0)
-    {
-        uintValue = val;
+    inline AllPrimitiveTypes(qint32 val) { _long.value = (val < 0 ? -1 : 0); _int.value = val; }
+    inline AllPrimitiveTypes(quint32 val) { _ulong.value = 0; _uint.value = val; }
+    inline AllPrimitiveTypes(qint16 val) { _long.value = (val < 0 ? -1 : 0);  _short.value = val; }
+    inline AllPrimitiveTypes(quint16 val) { _ulong.value = 0; _ushort.value = val; }
+    inline AllPrimitiveTypes(qint8 val) { _long.value = (val < 0 ? -1 : 0); _byte.value = val; }
+    inline AllPrimitiveTypes(quint8 val) { _ulong.value = 0; _ubyte.value = val; }
+    inline AllPrimitiveTypes(float val) { _ulong.value = 0; _float.value = val; }
+    inline AllPrimitiveTypes(double val) { _double.value = val; }
 
-    }
-    inline AllPrimitiveTypes(qint16 val) :
-        longValue(val < 0 ? -1 : 0)
-    {
-        shortValue = val;
-
-    }
-    inline AllPrimitiveTypes(quint16 val) :
-        ulongValue(0)
-    {
-        ushortValue = val;
-
-    }
-    inline AllPrimitiveTypes(qint8 val) :
-        longValue(val < 0 ? -1 : 0)
-    {
-        byteValue = val;
-    }
-    inline AllPrimitiveTypes(quint8 val) :
-        ulongValue(0)
-    {
-        ubyteValue = val;
-
-    }
-    inline AllPrimitiveTypes(float val) :
-        ulongValue(0)
-    {
-        floatValue = val;
-    }
-    inline AllPrimitiveTypes(double val) :
-        doubleValue(val)
-    {
-    }
     inline bool operator!=(AllPrimitiveTypes other) const
     {
-        return ulongValue != other.ulongValue;
+        return _ulong.value != other._ulong.value;
     }
     inline bool operator==(AllPrimitiveTypes other) const
     {
-        return ulongValue == other.ulongValue;
+        return _ulong.value == other._ulong.value;
     }
+    /** Not useful, but needed so we can store this in a QMap */
     inline bool operator<(AllPrimitiveTypes other) const
     {
-        return this->ulongValue < other.ulongValue;
+        return _ulong.value < other._ulong.value;
     }
     /** Writes given number of bits to @p out.
      *  If the value of this union is not equal to @p newValue it is set to @p newValue.
@@ -202,16 +188,16 @@ private:
             Okteta::Address address);
 };
 
-template<> inline quint8 AllPrimitiveTypes::value<quint8>() const { return ubyteValue; }
-template<> inline quint16 AllPrimitiveTypes::value<quint16>() const { return ushortValue; }
-template<> inline quint32 AllPrimitiveTypes::value<quint32>() const { return uintValue; }
-template<> inline quint64 AllPrimitiveTypes::value<quint64>() const { return ulongValue; }
-template<> inline qint8 AllPrimitiveTypes::value<qint8>() const { return byteValue; }
-template<> inline qint16 AllPrimitiveTypes::value<qint16>() const { return shortValue; }
-template<> inline qint32 AllPrimitiveTypes::value<qint32>() const { return intValue; }
-template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return longValue; }
-template<> inline float AllPrimitiveTypes::value<float>() const { return floatValue; }
-template<> inline double AllPrimitiveTypes::value<double>() const { return doubleValue; }
+template<> inline quint8 AllPrimitiveTypes::value<quint8>() const { return _ubyte.value; }
+template<> inline quint16 AllPrimitiveTypes::value<quint16>() const { return _ushort.value; }
+template<> inline quint32 AllPrimitiveTypes::value<quint32>() const { return _uint.value; }
+template<> inline quint64 AllPrimitiveTypes::value<quint64>() const { return _ulong.value; }
+template<> inline qint8 AllPrimitiveTypes::value<qint8>() const { return _byte.value; }
+template<> inline qint16 AllPrimitiveTypes::value<qint16>() const { return _short.value; }
+template<> inline qint32 AllPrimitiveTypes::value<qint32>() const { return _int.value; }
+template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return _long.value; }
+template<> inline float AllPrimitiveTypes::value<float>() const { return _float.value; }
+template<> inline double AllPrimitiveTypes::value<double>() const { return _double.value; }
 
 
 template<typename T>

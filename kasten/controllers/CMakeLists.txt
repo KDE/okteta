@@ -269,7 +269,6 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarkstoolviewfactory.cpp
 )
 
-if( NOT NO_STRUCTURES_TOOL )
 set( STRUCTVIEW_SRCS
   view/structures/allprimitivetypes.cpp
   view/structures/structurestoolfactory.cpp
@@ -391,8 +390,6 @@ structures_unit_test( osdparsertest "structures-osd-parser" test/osdparsertest.c
 structures_unit_test( commonparsertest "structures-common-parser" test/commonparsertest.cpp )
 
 endif ( KDE4_BUILD_TESTS )
-
-endif( NOT NO_STRUCTURES_TOOL )
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp

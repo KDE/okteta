@@ -46,13 +46,13 @@ bool AllPrimitiveTypes::writeBits(quint8 bitCount, AllPrimitiveTypes newValue,
     Q_ASSERT(bitCount <= 64);
     if (bitsRemaining < bitCount)
     {
-        ulongValue = 0;
+        _ulong.value = 0;
         *bitOffset = 0;
         return false;
     }
     //set if not
-    if (ulongValue != newValue.ulongValue)
-        ulongValue = newValue.ulongValue;
+    if (_ulong.value != newValue._ulong.value)
+        _ulong.value = newValue._ulong.value;
 
     if (bitCount % 8 == 0 && *bitOffset == 0)
     {
@@ -87,12 +87,12 @@ bool AllPrimitiveTypes::readBits(quint8 bitCount, const Okteta::AbstractByteArra
     Q_ASSERT(*bitOffset < 8);
     if (bitsRemaining < bitCount)
     {
-        ulongValue = 0;
+        _ulong.value = 0;
         *bitOffset = 0;
         return false;
     }
     //set to zero before reading
-    ulongValue = 0;
+    _ulong.value = 0;
     if (bitCount % 8 == 0 && *bitOffset == 0)
     {
         //only reading full bytes
@@ -129,14 +129,14 @@ void AllPrimitiveTypes::readDataLittleEndian(quint8 bitCount,
         const quint8 completeMask = lowerMask & higherMask; //region in the middle
         const quint8 readByte = input->byte(address);
         const quint8 maskedByte = readByte & completeMask;
-        ubyteValue = maskedByte >> bo;
+        _ubyte.value = maskedByte >> bo;
     }
     else
     {
         const quint8 firstByteMask = 0xff << bo;
         const quint8 firstByte = input->byte(address);
         const quint8 firstByteMasked = firstByte & firstByteMask;
-        ubyteValue = firstByteMasked >> bo;
+        _ubyte.value = firstByteMasked >> bo;
         //if spans more than this one byte continue
         for (uint i = 8; i < bitCount + bo; i += 8)
         {
@@ -151,7 +151,7 @@ void AllPrimitiveTypes::readDataLittleEndian(quint8 bitCount,
             //otherwise we need full byte -> nothing to do
             //needs cast since otherwise compiler decides to use 32 bit int and top 32 bits get lost
             const quint64 shiftedVal = (quint64) readVal << i;
-            ulongValue |= shiftedVal >> bo; //move to correct byte
+            _ulong.value |= shiftedVal >> bo; //move to correct byte
         }
     }
 }
@@ -167,7 +167,7 @@ void AllPrimitiveTypes::readDataBigEndian(quint8 bitCount,
         //completeMask maskes the value -> negate it to clear all the bytes
         const quint8 readByte = input->byte(address);
         const quint8 maskedByte = readByte & completeMask;
-        ubyteValue = maskedByte >> (8 - (bo + bitCount));
+        _ubyte.value = maskedByte >> (8 - (bo + bitCount));
     }
     else
     {
@@ -176,7 +176,7 @@ void AllPrimitiveTypes::readDataBigEndian(quint8 bitCount,
         //needs quint64 since otherwise compiler decides to use 32 bit int when shifting and top 32 bits get lost
         const quint64 firstByteMasked = firstByte & firstByteMask;
         const quint64 firstByteShifted = firstByteMasked << (bo + bitCount - 8);
-        ulongValue = firstByteShifted;
+        _ulong.value = firstByteShifted;
         //if spans more than this one byte continue
         for (uint i = 8; i < bitCount + bo; i += 8)
         {
@@ -188,7 +188,7 @@ void AllPrimitiveTypes::readDataBigEndian(quint8 bitCount,
                 const quint8 mask = 0xff << (8 - missingBits);
                 const quint8 maskedVal = readVal & mask; //cut off lower bits
                 const quint8 shiftedVal = maskedVal >> (8 - missingBits);
-                ulongValue |= shiftedVal;
+                _ulong.value |= shiftedVal;
             }
             else
             {
@@ -196,7 +196,7 @@ void AllPrimitiveTypes::readDataBigEndian(quint8 bitCount,
                 //needs cast since otherwise compiler decides to use 32 bit int and top 32 bits get lost
                 const quint64 shiftedVal = (quint64) readVal << ((bo + bitCount)
                         - (8 + i)); //move to correct byte
-                ulongValue |= shiftedVal;
+                _ulong.value |= shiftedVal;
             }
         }
     }
@@ -214,7 +214,7 @@ void AllPrimitiveTypes::writeDataLittleEndian(quint8 bitCount,
         const quint8 completeMask = lowerMask | higherMask; //region in the middle is 0
         const quint8 readByte = out->byte(address);
         const quint8 maskedByte = readByte & completeMask;
-        const quint8 addedVal = newValue.ubyteValue << bo;
+        const quint8 addedVal = newValue._ubyte.value << bo;
         const quint8 newVal = maskedByte | addedVal;
         out->setByte(address, newVal);
     }
@@ -223,13 +223,13 @@ void AllPrimitiveTypes::writeDataLittleEndian(quint8 bitCount,
         const quint8 firstByteMask = (1 << bo) - 1;
         const quint8 firstByte = out->byte(address);
         const quint8 firstByteMasked = firstByte & firstByteMask;
-        const quint8 firstAddedVal = (newValue.ubyteValue << bo);
+        const quint8 firstAddedVal = (newValue._ubyte.value << bo);
         const quint8 firstByteWithValAdded = firstByteMasked | firstAddedVal;
         out->setByte(address, firstByteWithValAdded);
         //if spans more than this one byte continue
         for (uint i = 8; i < bitCount + bo; i += 8)
         {
-            const quint8 currentByte = newValue.ulongValue >> (i - bo);
+            const quint8 currentByte = newValue._ulong.value >> (i - bo);
             if (bitCount + bo < i + 8)
             {
                 const quint8 readVal = out->byte(address + (i / 8));
@@ -261,7 +261,7 @@ void AllPrimitiveTypes::writeDataBigEndian(quint8 bitCount,
         const quint8 completeMask = lowerMask | higherMask; //region in the middle is 0
         const quint8 readByte = out->byte(address);
         const quint8 maskedByte = readByte & completeMask;
-        const quint8 addedVal = newValue.ubyteValue << (8 - bo - 1); //move to missing area
+        const quint8 addedVal = newValue._ubyte.value << (8 - bo - 1); //move to missing area
         const quint8 maskedByteWithValueAdded = maskedByte | addedVal;
         out->setByte(address, maskedByteWithValueAdded);
     }
@@ -274,7 +274,7 @@ void AllPrimitiveTypes::writeDataBigEndian(quint8 bitCount,
         const quint8 lastByte = out->byte(lastAddress);
         const quint8 lastByteMask = (1 << missingBits) - 1;
         const quint8 lastByteMasked = lastByte & lastByteMask; //remove the top values
-        const quint8 lastByteAddedVal = newValue.ubyteValue << (8 - missingBits);
+        const quint8 lastByteAddedVal = newValue._ubyte.value << (8 - missingBits);
         const quint8 lastByteWithValAdded = lastByteMasked | lastByteAddedVal;
         out->setByte(lastAddress, lastByteWithValAdded);
         for (int currAddress = lastAddress - 1; currAddress >= address; currAddress--)
@@ -285,7 +285,7 @@ void AllPrimitiveTypes::writeDataBigEndian(quint8 bitCount,
                 //last byte to read
                 const quint8 firstByteMask = 0xff << (8 - bo);
                 const quint8 firstByteMasked = currentByte & firstByteMask;
-                const quint8 highestByte = newValue.ulongValue
+                const quint8 highestByte = newValue._ulong.value
                         >> (bo + bitCount - 8);
                 const quint8 firstByteWithValAdded = firstByteMasked | highestByte;
                 out->setByte(address, firstByteWithValAdded);
@@ -294,7 +294,7 @@ void AllPrimitiveTypes::writeDataBigEndian(quint8 bitCount,
             {
                 const int bytesNotToShift = 1 + (lastAddress - address)
                         - (lastAddress - currAddress);
-                const quint8 thisByteShifted = newValue.ulongValue >> (bo + bitCount
+                const quint8 thisByteShifted = newValue._ulong.value >> (bo + bitCount
                         - (8 * bytesNotToShift));
                 out->setByte(currAddress, thisByteShifted);
             }

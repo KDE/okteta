@@ -32,6 +32,7 @@ private Q_SLOTS:
     void initTestCase();
     void readLittleEndian();
     void readBigEndian();
+    void testValuesMatch();
 
 private:
     template<typename T> inline T readLittle(quint8 bitOffset)
@@ -58,7 +59,21 @@ inline void AllPrimitiveTypesTest::initTestCase()
     QCOMPARE(model->size(), Okteta::Size(sizeof(data)));
 }
 
-
+void AllPrimitiveTypesTest::testValuesMatch()
+{
+    QCOMPARE((int)sizeof(AllPrimitiveTypes), 8);
+    AllPrimitiveTypes test = Q_UINT64_C(0x1234567890abcdef);
+    QCOMPARE(test.value<qint8>(), qint8(0xef));
+    QCOMPARE(test.value<quint8>(), quint8(0xef));
+    QCOMPARE(test.value<qint16>(), qint16(0xcdef));
+    QCOMPARE(test.value<quint16>(), quint16(0xcdef));
+    QCOMPARE(test.value<qint32>(), qint32(0x90abcdef));
+    QCOMPARE(test.value<quint32>(), quint32(0x90abcdef));
+    QCOMPARE(test.value<qint64>(), Q_INT64_C(0x1234567890abcdef));
+    QCOMPARE(test.value<quint64>(), Q_UINT64_C(0x1234567890abcdef));
+    AllPrimitiveTypes test2 = Q_INT64_C(-0x1234567890abcdef);
+    QVERIFY(test2 == Q_UINT64_C(0xedcba9876f543211));
+}
 
 inline void AllPrimitiveTypesTest::readLittleEndian()
 {

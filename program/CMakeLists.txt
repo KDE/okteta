@@ -4,10 +4,6 @@ set( OKTETAKASTEN_REL_DIR ../kasten )
 set( KASTEN_REL_DIR ../libs/kasten )
 set( OKTETA_REL_DIR .. )
 
-if (NO_STRUCTURES_TOOL)
-  add_definitions( -DNO_STRUCTURES_TOOL )
-endif (NO_STRUCTURES_TOOL)
-
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/${OKTETAKASTEN_REL_DIR}/controllers
   ${OKTETAKASTEN_REL_DIR}/controllers
