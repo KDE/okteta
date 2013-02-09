@@ -121,5 +121,7 @@ QString FlagDataInformation::valueString() const
 
 QString FlagDataInformation::typeName() const
 {
-    return i18n("flags (%1)", mValue->typeName());
+    return i18nc("Displayed in the type column. first comes the name "
+            "of the enum, then the underlying type (e.g. uint32)",
+            "flag %1 (%2)", mEnum->name(), mValue->typeName());
 }

@@ -56,7 +56,9 @@ QString EnumDataInformation::valueString() const
 
 QString EnumDataInformation::typeName() const
 {
-    return i18n("enum (%1)", mValue->typeName());
+    return i18nc("Displayed in the type column. first comes the name "
+            "of the enum, then the underlying type (e.g. uint32)",
+            "enum %1 (%2)", mEnum->name(), mValue->typeName());
 }
 
 QScriptClass* EnumDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
