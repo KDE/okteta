@@ -20,13 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "uintdatainformation.h"
-
 #include <QScriptValue>
 
 #include <KGlobal>
 #include <KLocale>
+#include <KDebug>
 
 #include "../../../poddecoder/typeeditors/uintspinbox.h"
+#include "structviewpreferences.h"
 
 
 template<typename T>
@@ -58,25 +59,18 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
     else
     {
         //add one space every 8 chars
-        for (int i = 8; i < num.length(); i += 9) {
+        for (int i = 8; i < num.length(); i += 9)
+        {
             num.insert(num.length() - i, QLatin1Char(' '));
         }
-        if (base == 16)
-            num.prepend(QLatin1String("0x"));
-        else if (base == 2)
-            num.prepend(QLatin1String("0b"));
-        else if (base == 8)
-            num.prepend(QLatin1String("0o"));
-        else
-            kDebug() << "unsupported number base" << base;
     }
-    return num;
+    return PrimitiveDataInformation::basePrefix(base) + num;
 }
 
 template<typename T>
 inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox(parent, PrimitiveDataInformation::unsignedDisplayBase());
+    UIntSpinBox* ret = new UIntSpinBox(parent, Kasten2::StructViewPreferences::unsignedDisplayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }

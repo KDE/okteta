@@ -26,6 +26,8 @@
 #include "../../parsers/parserutils.h"
 #include "../../allprimitivetypes.h"
 
+#include <KDebug>
+
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {

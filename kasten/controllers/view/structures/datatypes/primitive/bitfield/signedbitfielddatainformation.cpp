@@ -36,7 +36,7 @@ QString SignedBitfieldDataInformation::valueString() const
 QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     SIntSpinBox* ret = new SIntSpinBox(parent);
-    ret->setBase(PrimitiveDataInformation::signedDisplayBase());
+    ret->setBase(Kasten2::StructViewPreferences::signedDisplayBase());
     ret->setRange(~mask(), mask() >> 1); //mask is unsigned, so shift will do the right thing
     return ret;
 }

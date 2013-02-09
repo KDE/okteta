@@ -1,37 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
-	http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
   <kcfgfile name="oktetastructuresrc" />
   <include>QSysInfo</include>
+  <include>view/structures/datatypes/datainformationbase.h</include>
   <group name="ValueDisplay">
-    <entry name="UnsignedDisplayBase" type="Enum">
-      <label>Unsigned values display</label>
+    <entry name="UnsignedDisplayBase" type="Int">
       <tooltip context="@info:tooltip">The base to use when converting unsigned numbers to a string.</tooltip>
-      <choices>
-        <choice name="Binary" />
-        <choice name="Decimal" />
-        <choice name="Hexadecimal" />
-      </choices>
-      <default>Hexadecimal</default> <!-- TODO make decimal default -->
+      <default>10</default>
     </entry>
-    <entry name="SignedDisplayBase" type="Enum">
+    <entry name="SignedDisplayBase" type="Int">
       <tooltip context="@info:tooltip">The base to use when converting signed numbers to a string.</tooltip>
-      <choices>
-        <choice name="Binary" />
-        <choice name="Decimal" />
-        <choice name="Hexadecimal" />
-      </choices>
-      <default>Hexadecimal</default> <!-- TODO make decimal default -->
+      <default>10</default>
     </entry>
-    <entry name="CharDisplayBase" type="Enum">
+    <entry name="CharDisplayBase" type="Int">
       <tooltip context="@info:tooltip">The base to use when converting characters to a value string.</tooltip>
-      <choices>
-        <choice name="Binary" />
-        <choice name="Decimal" />
-        <choice name="Hexadecimal" />
-      </choices>
-      <default>Hexadecimal</default> <!-- TODO make decimal default -->
+      <default>10</default>
     </entry>
     <entry name="ShowCharNumericalValue" type="Bool">
       <tooltip context="@info:tooltip">Whether to show the numerical value of chars</tooltip>
@@ -65,7 +49,7 @@
         <choice name="BigEndian"><label context="@item:inlistbox">Big endian</label></choice>
         <choice name="LittleEndian"><label context="@item:inlistbox">Little endian</label></choice>
       </choices>
-      <default>LittleEndian</default>
+      <default>QSysInfo::LittleEndian</default>
     </entry>
     <entry name="LoadedStructures" type="StringList">
       <default></default>

@@ -23,7 +23,6 @@
 #define STRUCTVIEWDISPLAYSETTINGSWIDGET_H_
 #include "ui_structviewdisplaysettingswidget.h"
 #include <QtGui/QWidget>
-#include <kcoreconfigskeleton.h>
 
 class KConfigSkeletonItem;
 
@@ -34,9 +33,15 @@ public:
     explicit StructViewDisplaySettingsWidget();
     ~StructViewDisplaySettingsWidget();
 private:
-    void setupEnumCombo(QComboBox* box, KCoreConfigSkeleton::ItemEnum* configItem);
+    void setupBasesCombo(QComboBox* box, KConfigSkeletonItem* configItem,
+            int currentValue, const char* slot);
+    void handleMapping(int index, QComboBox* box, QSpinBox* spin);
 private:
     Ui_StructViewSettings ui;
+private slots:
+    void setCharDisplay(int index);
+    void setSignedDisplay(int index);
+    void setUnsignedDisplay(int index);
 };
 
 #endif /* STRUCTVIEWDISPLAYSETTINGSWIDGET_H_ */

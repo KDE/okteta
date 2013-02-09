@@ -27,7 +27,7 @@
 #include <KGlobal>
 #include <KLocale>
 
-
+#include "structviewpreferences.h"
 
 QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {

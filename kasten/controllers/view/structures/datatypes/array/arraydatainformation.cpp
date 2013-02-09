@@ -20,6 +20,9 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "arraydatainformation.h"
+
+#include <KDebug>
+
 #include "../primitivefactory.h"
 #include "../dummydatainformation.h"
 #include "../../parsers/scriptvalueconverter.h"

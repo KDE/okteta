@@ -28,6 +28,7 @@
 
 #include <limits>
 #include <KLocalizedString>
+#include <KDebug>
 
 
 template<PrimitiveDataTypeEnum type>

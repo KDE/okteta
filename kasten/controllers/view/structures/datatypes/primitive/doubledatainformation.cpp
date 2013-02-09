@@ -26,6 +26,9 @@
 #include <KGlobal>
 #include <KLocale>
 
+#include "structviewpreferences.h"
+
+
 QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
     KDoubleNumInput* ret = new KDoubleNumInput(parent);

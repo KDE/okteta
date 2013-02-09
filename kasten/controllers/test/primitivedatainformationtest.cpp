@@ -31,6 +31,7 @@
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
 #include "view/structures/datatypes/primitivefactory.h"
+#include "structviewpreferences.h"
 
 class PrimitiveDataInformationTest : public QObject
 {
@@ -57,7 +58,6 @@ private Q_SLOTS:
     void testToAndFromVariant();
     void testGetAndSetValue();
     void testGetAndSetValue_data();
-    void testDisplayBase();
     void testFromVariant();
     void cleanupTestCase();
     private:
@@ -124,45 +124,6 @@ void PrimitiveDataInformationTest::initTestCase()
     QTextCodec::setCodecForCStrings(codec);
 }
 
-void PrimitiveDataInformationTest::checkSignedDisplayBase(int expected)
-{
-    QCOMPARE(PrimitiveDataInformation::signedDisplayBase(), expected);
-}
-
-void PrimitiveDataInformationTest::checkUnsignedDisplayBase(int expected)
-{
-    QCOMPARE(PrimitiveDataInformation::unsignedDisplayBase(), expected);
-}
-
-void PrimitiveDataInformationTest::testDisplayBase()
-{
-    Kasten2::StructViewPreferences::setSignedDisplayBase(
-            Kasten2::StructViewPreferences::EnumSignedDisplayBase::Binary);
-    checkSignedDisplayBase(2);
-    Kasten2::StructViewPreferences::setSignedDisplayBase(
-            Kasten2::StructViewPreferences::EnumSignedDisplayBase::Decimal);
-    checkSignedDisplayBase(10);
-    Kasten2::StructViewPreferences::setSignedDisplayBase(
-            Kasten2::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal);
-    checkSignedDisplayBase(16);
-    Kasten2::StructViewPreferences::setSignedDisplayBase(
-            Kasten2::StructViewPreferences::EnumSignedDisplayBase::COUNT);
-    checkSignedDisplayBase(10); //invalid values should default to decimal
-
-    Kasten2::StructViewPreferences::setUnsignedDisplayBase(
-            Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary);
-    checkUnsignedDisplayBase(2);
-    Kasten2::StructViewPreferences::setUnsignedDisplayBase(
-            Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Decimal);
-    checkUnsignedDisplayBase(10);
-    Kasten2::StructViewPreferences::setUnsignedDisplayBase(
-            Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal);
-    checkUnsignedDisplayBase(16);
-    Kasten2::StructViewPreferences::setUnsignedDisplayBase(
-            Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::COUNT);
-    checkUnsignedDisplayBase(10); //invalid values should default to decimal
-}
-
 namespace
 {
 template<PrimitiveDataTypeEnum Type>
@@ -227,19 +188,14 @@ void PrimitiveDataInformationTest::testValueStringInt()
         {
             bitfield.setWidth(width);
             bitfield.mWasAbleToRead = true;
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(
-                    Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal);
-            //unsigned display base was set to something else to ensure we use the right method in the code
-            Kasten2::StructViewPreferences::setSignedDisplayBase(
-                    Kasten2::StructViewPreferences::EnumSignedDisplayBase::Binary);
+            Kasten2::StructViewPreferences::setSignedDisplayBase(2);
             QCOMPARE(bitfield.valueString(), binStr);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(
-                    Kasten2::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal);
+            Kasten2::StructViewPreferences::setSignedDisplayBase(16);
             QCOMPARE(bitfield.valueString(), hexStr);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(
-                    Kasten2::StructViewPreferences::EnumSignedDisplayBase::Decimal);
+            Kasten2::StructViewPreferences::setSignedDisplayBase(10);
             QCOMPARE(bitfield.valueString(), decStr);
-            //TODO add octal to the config
+            Kasten2::StructViewPreferences::setSignedDisplayBase(8);
+            QCOMPARE(bitfield.valueString(), octStr);
         }
     }
 }
@@ -393,22 +349,18 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
         {
             bitfield.setWidth(width);
             bitfield.setWidth(width);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(
-                    Kasten2::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal);
-            //unsigned display base was set to something else to ensure we use the right method in the code
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(
-                    Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary);
+            Kasten2::StructViewPreferences::setUnsignedDisplayBase(2);
             QCOMPARE(bitfield.valueString(), binStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(binStr) : boolBase);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(
-                    Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal);
+            Kasten2::StructViewPreferences::setUnsignedDisplayBase(16);
             QCOMPARE(bitfield.valueString(), hexStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(hexStr) : boolBase);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(
-                    Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Decimal);
+            Kasten2::StructViewPreferences::setUnsignedDisplayBase(10);
             QCOMPARE(bitfield.valueString(), decStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(decStr) : boolBase);
-            //TODO add octal to the config
+            Kasten2::StructViewPreferences::setUnsignedDisplayBase(8);
+            QCOMPARE(bitfield.valueString(), octStr);
+            QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(octStr) : boolBase);
         }
     }
 }
@@ -493,28 +445,32 @@ void PrimitiveDataInformationTest::testValueStringChar()
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     Kasten2::StructViewPreferences::setShowCharNumericalValue(true);
-    Kasten2::StructViewPreferences::setCharDisplayBase(
-            Kasten2::StructViewPreferences::EnumCharDisplayBase::Hexadecimal);
+    Kasten2::StructViewPreferences::setCharDisplayBase(16);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QLatin1String("'%1' (0x%2)")).arg(charString(i),
                 QString::number(i, 16));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setCharDisplayBase(
-            Kasten2::StructViewPreferences::EnumCharDisplayBase::Decimal);
+    Kasten2::StructViewPreferences::setCharDisplayBase(10);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QLatin1String("'%1' (%2)")).arg(charString(i),
                 QString::number(i, 10));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setCharDisplayBase(
-            Kasten2::StructViewPreferences::EnumCharDisplayBase::Binary);
+    Kasten2::StructViewPreferences::setCharDisplayBase(2);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QLatin1String("'%1' (0b%2)")).arg(charString(i),
                 QString::number(i, 2));
+        QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
+    }
+    Kasten2::StructViewPreferences::setCharDisplayBase(8);
+    for (int i = 0; i < 256; ++i)
+    {
+        QString expected = QString(QLatin1String("'%1' (0o%2)")).arg(charString(i),
+                QString::number(i, 8));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     //TODO octal

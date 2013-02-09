@@ -25,7 +25,6 @@
 #include "../datainformation.h"
 #include "../primitivedatatype.h"
 #include "../../allprimitivetypes.h"
-#include "structviewpreferences.h"
 
 union AllPrimitiveTypes;
 
@@ -42,7 +41,6 @@ public:
 
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
 
-
     virtual bool isPrimitive() const;
     virtual AllPrimitiveTypes value() const = 0;
     virtual void setValue(AllPrimitiveTypes newValue) = 0;
@@ -55,9 +53,11 @@ public:
     virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
     virtual int indexOf(const DataInformation* const) const {Q_ASSERT(false); return -1; }
 
-    static int unsignedDisplayBase();
-    static int signedDisplayBase();
-
+    /** @return the matching prefix for the base (nothing, '0x', '0b' or '0o') */
+    static QString basePrefix(int base);
+    static const QString binaryPrefix;
+    static const QString octalPrefix;
+    static const QString hexPrefix;
 protected:
     virtual BitCount32 offset(unsigned int index) const;
     PrimitiveDataInformation(const PrimitiveDataInformation& d);
@@ -129,30 +129,6 @@ inline bool PrimitiveDataInformation::isPrimitive() const
     return true;
 }
 
-inline int PrimitiveDataInformation::unsignedDisplayBase()
-{
-    Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::type base =
-            Kasten2::StructViewPreferences::unsignedDisplayBase();
-    if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Binary)
-        return 2;
-    else if (base == Kasten2::StructViewPreferences::EnumUnsignedDisplayBase::Hexadecimal)
-        return 16;
-    else
-        return 10; //safe default value
-}
-
-inline int PrimitiveDataInformation::signedDisplayBase()
-{
-    Kasten2::StructViewPreferences::EnumSignedDisplayBase::type base =
-            Kasten2::StructViewPreferences::signedDisplayBase();
-    if (base == Kasten2::StructViewPreferences::EnumSignedDisplayBase::Binary)
-        return 2;
-    else if (base == Kasten2::StructViewPreferences::EnumSignedDisplayBase::Hexadecimal)
-        return 16;
-    else
-        return 10; //safe default value
-}
-
 inline PrimitiveDataInformation::PrimitiveDataInformation(const QString& name,
         DataInformation* parent)
         : DataInformation(name, parent)
@@ -163,5 +139,19 @@ inline PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInf
         : DataInformation(d)
 {
 }
+
+inline QString PrimitiveDataInformation::basePrefix(int base)
+{
+    switch (base) {
+        case 10: return QString();
+        case 2: return binaryPrefix;
+        case 8: return octalPrefix;
+        case 16: return hexPrefix;
+        default:
+            Q_ASSERT_X(false, "PrimitiveDataInformation::basePrefix()", "Invalid argument!");
+            return QString();
+    }
+}
+
 
 #endif /* PRIMITIVEDATAINFORMATION_H_ */

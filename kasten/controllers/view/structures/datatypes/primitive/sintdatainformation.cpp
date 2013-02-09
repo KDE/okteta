@@ -25,65 +25,37 @@
 #include <QScriptValue>
 #include <KGlobal>
 #include <KLocale>
+#include <KDebug>
 
 template<typename T>
 QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
 {
     QString num;
-    if (base == 10) {
+    if (base == 10)
+    {
         num = QString::number(val, base);
         if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
         return num;
     }
-    Q_ASSERT(base != 10); //base 10 must have been handeled by now!
-    if (val >= 0)
-    {
-        //no need to do anything special since value is positive
-        num = QString::number(val, base);
-        //add one space every 8 chars
-        for (int i = 8; i < num.length(); i += 9)
-        {
-            num.insert(num.length() - i, QLatin1Char(' '));
-        }
-        if (base == 16)
-            num.prepend(QLatin1String("0x"));
-        else if (base == 8)
-            num.prepend(QLatin1String("0o"));
-        else if (base == 2)
-        {
-
-            num.prepend(QLatin1String("0b"));
-        }
-        return num;
-    }
-    //value is less than zero, now the tricky bit starts
-    //TODO non decimal negative values as unsigned? probably add option
-
     //the absolute value of negative minimum can not be represented as a signed integer
     //casting it to an unsigned value yields the correct result
     if (val == std::numeric_limits<T>::min())
         num = QString::number(typename QIntegerForSizeof<T>::Unsigned(val), base);
-    else
+    else if (val < 0)
         num = QString::number(qAbs(val), base);
-
+    else
+        num = QString::number(val, base);
+    //TODO non decimal negative values as unsigned? probably add option
     //add one space every 8 chars
     for (int i = 8; i < num.length(); i += 9)
     {
         num.insert(num.length() - i, QLatin1Char(' '));
     }
-    if (base == 16)
-        num.prepend(QLatin1String("-0x"));
-    else if (base == 8)
-        num.prepend(QLatin1String("-0o"));
-    else if (base == 2)
-        num.prepend(QLatin1String("-0b"));
+    if (val < 0)
+        return QLatin1Char('-') + PrimitiveDataInformation::basePrefix(base) + num;
     else
-    {
-        num.prepend(QLatin1String("-"));
-        kDebug() << "unsupported number base" << base;
-    }
-    return num;
+        return PrimitiveDataInformation::basePrefix(base) + num;
 }
 
 template<typename T>
@@ -107,7 +79,7 @@ QScriptValue SIntDataInformationMethods<qint64>::asScriptValue(qint64 value, QSc
 template<typename T>
 inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox(parent, PrimitiveDataInformation::signedDisplayBase());
+    SIntSpinBox* ret = new SIntSpinBox(parent, Kasten2::StructViewPreferences::signedDisplayBase());
     ret->setRange(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
     return ret;
 }

@@ -26,6 +26,8 @@
 #include <KGlobal>
 #include <KLocale>
 
+#include "structviewpreferences.h"
+
 namespace {
     QString charString(quint8 value)
     {
@@ -53,17 +55,12 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
     QString charStr = charString(value);
     if (Kasten2::StructViewPreferences::showCharNumericalValue())
     {
-        int base = displayBase();
+        int base = Kasten2::StructViewPreferences::charDisplayBase();
         QString num = QString::number(value, base);
-        if (base == 16)
-            num.prepend(QLatin1String("0x"));
-        else if (base == 2)
-            num.prepend(QLatin1String("0b"));
-        else if (base == 8)
-            num.prepend(QLatin1String("0o"));
-        else if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
+        if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
             num = KGlobal::locale()->formatNumber(num, false, 0);
-        charStr += QLatin1String(" (") + num + QLatin1Char(')');
+        charStr += QLatin1String(" (") + PrimitiveDataInformation::basePrefix(base)
+                + num + QLatin1Char(')');
     }
     return charStr;
 }
@@ -141,16 +138,6 @@ void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
             qchar = QChar(QChar::ReplacementCharacter);
         edit->setText( qchar );
     }
-}
-
-int CharDataInformationMethods::displayBase()
-{
-    int base = Kasten2::StructViewPreferences::charDisplayBase();
-    if (base == Kasten2::StructViewPreferences::EnumCharDisplayBase::Binary)
-        return 2;
-    if (base == Kasten2::StructViewPreferences::EnumCharDisplayBase::Hexadecimal)
-        return 16;
-    return 10; //safe default value
 }
 
 QScriptValue CharDataInformationMethods::asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler)

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>411</width>
-    <height>289</height>
+    <height>292</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -16,20 +16,6 @@
      <property name="fieldGrowthPolicy">
       <enum>QFormLayout::ExpandingFieldsGrow</enum>
      </property>
-     <item row="1" column="0" colspan="2">
-      <widget class="QCheckBox" name="kcfg_ShortTypeNames">
-       <property name="text">
-        <string>Use short type names</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" colspan="2">
-      <widget class="QCheckBox" name="kcfg_LocaleAwareDecimalFormatting">
-       <property name="text">
-        <string>Use locale-aware integer formatting</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="byteOrderLabel">
        <property name="text">
@@ -45,6 +31,30 @@
        <property name="sizeAdjustPolicy">
         <enum>QComboBox::AdjustToContents</enum>
        </property>
+       <item>
+        <property name="text">
+         <string>Big endian</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Little endian</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QCheckBox" name="kcfg_ShortTypeNames">
+       <property name="text">
+        <string>Use short type names</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QCheckBox" name="kcfg_LocaleAwareDecimalFormatting">
+       <property name="text">
+        <string>Use locale-aware integer formatting</string>
+       </property>
       </widget>
      </item>
      <item row="3" column="0">
@@ -53,28 +63,12 @@
         <string>Unsigned values:</string>
        </property>
        <property name="buddy">
-        <cstring>kcfg_UnsignedDisplayBase</cstring>
+        <cstring>combo_UnsignedDisplayBase</cstring>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="KComboBox" name="kcfg_UnsignedDisplayBase">
-       <item>
-        <property name="text">
-         <string>Binary</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Decimal</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Hexadecimal</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="KComboBox" name="combo_UnsignedDisplayBase"/>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="signed_label">
@@ -82,28 +76,12 @@
         <string>Signed values:</string>
        </property>
        <property name="buddy">
-        <cstring>kcfg_SignedDisplayBase</cstring>
+        <cstring>combo_SignedDisplayBase</cstring>
        </property>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="KComboBox" name="kcfg_SignedDisplayBase">
-       <item>
-        <property name="text">
-         <string>Binary</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Decimal</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Hexadecimal</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="KComboBox" name="combo_SignedDisplayBase"/>
      </item>
      <item row="5" column="0" colspan="2">
       <widget class="QCheckBox" name="kcfg_LocaleAwareFloatFormatting">
@@ -138,28 +116,21 @@
         <string>Character value:</string>
        </property>
        <property name="buddy">
-        <cstring>kcfg_CharDisplayBase</cstring>
+        <cstring>combo_CharDisplayBase</cstring>
        </property>
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="KComboBox" name="kcfg_CharDisplayBase">
-       <item>
-        <property name="text">
-         <string>Binary</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Decimal</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Hexadecimal</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="KComboBox" name="combo_CharDisplayBase"/>
+     </item>
+     <item row="9" column="0">
+      <widget class="QSpinBox" name="kcfg_CharDisplayBase"/>
+     </item>
+     <item row="9" column="1">
+      <widget class="QSpinBox" name="kcfg_SignedDisplayBase"/>
+     </item>
+     <item row="10" column="0">
+      <widget class="QSpinBox" name="kcfg_UnsignedDisplayBase"/>
      </item>
     </layout>
    </item>
@@ -182,7 +153,7 @@
   <connection>
    <sender>kcfg_ShowCharNumericalValue</sender>
    <signal>toggled(bool)</signal>
-   <receiver>kcfg_CharDisplayBase</receiver>
+   <receiver>combo_CharDisplayBase</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">

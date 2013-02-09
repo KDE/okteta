@@ -23,13 +23,14 @@
 #define UINTDATAINFORMATION_H
 
 #include "primitivedatainformation.h"
+#include "structviewpreferences.h"
 
 template<typename T>
 class UIntDataInformationMethods
 {
 public:
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    static QString staticValueString(T val, int base = PrimitiveDataInformation::unsignedDisplayBase());
+    static QString staticValueString(T val, int base = Kasten2::StructViewPreferences::unsignedDisplayBase());
     static PrimitiveDataType staticType();
     static T fromVariant(const QVariant& value, bool* ok);
 

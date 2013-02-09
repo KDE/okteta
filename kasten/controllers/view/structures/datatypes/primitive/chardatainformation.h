@@ -27,7 +27,6 @@
 class CharDataInformationMethods
 {
 public:
-    static int displayBase();
     static QString staticValueString(quint8 value);
     static quint8 fromVariant(const QVariant& value, bool* ok);
     static PrimitiveDataType staticType();
