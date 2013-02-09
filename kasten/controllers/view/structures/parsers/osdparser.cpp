@@ -601,13 +601,16 @@ QString OsdParser::generateLengthFunction(DataInformation* current, DataInformat
         //has no children and was not the desired element -> continue loop
     }
     //now check parents
-    DataInformation* next = current->parent()->asDataInformation();
+    DataInformationBase* nextBase = current->parent();
+    if (!nextBase)
+        return QString();
+
+    DataInformation* next = nextBase->asDataInformation();
     if (next == last)
         return QString(); //we moved one level down previously, don't move up again
     else
         return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
-            currentString + QLatin1String("parent."), info);
-
+                currentString + QLatin1String("parent."), info);
 }
 
 OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, QDomElement firstChild)
