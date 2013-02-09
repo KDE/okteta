@@ -80,6 +80,7 @@ private:
       * @param info the parser info
       * @return The parsed element or null if not possible. */
     static DataInformation* parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
+    static DataInformation* parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
 
     static EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info);
 
@@ -92,7 +93,6 @@ private:
     /** Reads an property of the QDomElement. First it is checked whether an attribute exists, if this is not the case
      * the inner text of an element with tag equal to @p attrib is returned*/
     static QString readProperty(const QDomElement& elem, const QString& attrib, const QString& defaultVal = QString());
-
     /** if not empty construct the document from this, instead of opening file */
     const QString mXmlString;
 };

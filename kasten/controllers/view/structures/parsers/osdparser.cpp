@@ -264,10 +264,10 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     }
     //first check whether there is a <type> element and use the inner element
     //if that doesn't exist use the first child element as the type, but only if there is only one child
-    DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
     apd.arrayType = parseType(xmlElem, info, NAME_ARRAY_TYPE);
     if (!apd.arrayType) {
         //was not specified as <type> element or type="attribute", use first child
+        DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
         OsdChildrenParser typeParser(info, xmlElem.firstChildElement());
         typeParser.setParent(&dummy);
         if (typeParser.hasNext())
@@ -285,6 +285,17 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     return DataInformationFactory::newArray(apd);
 }
 
+DataInformation* OsdParser::parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
+{
+    OsdParserInfo newInfo(info);
+    //instanciate a dummy so that a propert chain up to the root element exists
+    DummyDataInformation dummy(info.parent, info.name);
+    newInfo.parent = &dummy;
+    newInfo.name = name;
+    return parseElement(xmlElem, newInfo);
+}
+
+
 DataInformation* OsdParser::parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
 {
     const QString typeAttribute = xmlElem.attribute(PROPERTY_TYPE);
@@ -297,26 +308,22 @@ DataInformation* OsdParser::parseType(const QDomElement& xmlElem, const OsdParse
         }
         return ret;
     }
-    const QDomElement typeElement = xmlElem.firstChildElement(PROPERTY_TYPE);
-    if (!typeElement.isNull())
+    //we have to parse the first child element of the <type> element
+    const QDomElement toParse = xmlElem.firstChildElement(PROPERTY_TYPE).firstChildElement();
+    if (toParse.isNull())
     {
-        QDomElement toParse = typeElement.firstChildElement();
-        if (!toParse.isNull())
-        {
-            //TODO have this newInfo code only in one location
-            OsdParserInfo newInfo(info);
-            DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
-            newInfo.parent = &dummy;
-            newInfo.name = name;
-            DataInformation* ret = parseElement(toParse, newInfo);
-            if (!ret) {
-                info.error() << "Failed to parse element defined in <type>";
-            }
-            return ret;
-        }
+        //don't log an error here, it may be okay (i.e. in arrays <type> can be omitted)
+        return 0;
     }
-    //don't log an error here, it may be okay (i.e. in arrays <type> can be omitted)
-    return 0;
+    if (!toParse.nextSiblingElement().isNull()) {
+        info.warn() << "<type> element has more than one child!";
+    }
+    //TODO have this newInfo code only in one location
+    DataInformation* ret = parseChildElement(toParse, info, name);
+    if (!ret) {
+        info.error() << "Failed to parse element defined in <type>";
+    }
+    return ret;
 }
 
 
@@ -345,11 +352,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
             return 0;
         }
     }
-    OsdParserInfo newInfo(info);
-    DummyDataInformation dummy(info.parent, info.name); //dummy so that we have a proper chain
-    newInfo.parent = &dummy;
-    newInfo.name = NAME_POINTER_TARGET;
-    ppd.pointerTarget = parseElement(childElement, newInfo);
+    ppd.pointerTarget = parseChildElement(childElement, info, NAME_POINTER_TARGET);
     return DataInformationFactory::newPointer(ppd);
 }
 
