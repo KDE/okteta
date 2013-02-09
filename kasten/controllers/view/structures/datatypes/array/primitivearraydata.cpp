@@ -57,20 +57,10 @@ qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input,
     if (maxNumItems == 0)
         return -1; //reached EOF
     const QSysInfo::Endian byteOrder = AbstractArrayData::mParent->effectiveByteOrder();
-    const bool littleEndian = byteOrder == QSysInfo::LittleEndian;
-#if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
-    if (littleEndian)
+    if (byteOrder == QSysInfo::ByteOrder)
         this->readDataNativeOrder(maxNumItems, input, address);
     else
         this->readDataNonNativeOrder(maxNumItems, input, address);
-#elif Q_BYTE_ORDER == Q_BIG_ENDIAN
-    if (littleEndian)
-        this->readDataNonNativeOrder(maxNumItems, input, address);
-    else
-        this->readDataNativeOrder(maxNumItems, input, address);
-#else
-#warning Unknown byte order, doing nothing!
-#endif
     this->mNumReadValues = maxNumItems;
     return maxNumItems * sizeof(T) * 8;
 }
