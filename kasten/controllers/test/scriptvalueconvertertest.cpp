@@ -266,7 +266,7 @@ void ScriptValueConverterTest::testParseEnum()
         QFETCH(quint64, expectedValue);
         //to ensure it does not match when value is not found add 1 to the default
         AllPrimitiveTypes result = enumVals.key(QLatin1String("value"), expectedValue + 1);
-        QCOMPARE(result.ulongValue, expectedValue);
+        QCOMPARE(result.value<quint64>(), expectedValue);
     }
 }
 

@@ -30,7 +30,7 @@
 QString SignedBitfieldDataInformation::valueString() const
 {
     Q_ASSERT(mWasAbleToRead);
-    return SIntDataInformationMethods<qint64>::staticValueString(mValue.longValue);
+    return SIntDataInformationMethods<qint64>::staticValueString(mValue.value<qint64>());
 }
 
 QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
@@ -54,26 +54,26 @@ void SignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
     if (spin)
-        spin->setValue(mValue.longValue);
+        spin->setValue(mValue.value<qint64>());
 }
 
 QScriptValue SignedBitfieldDataInformation::valueAsQScriptValue() const
 {
     if (width() <= 32)
-        return  qint32(mValue.intValue); //32 bit or less -> can be put in as value
+        return  qint32(mValue.value<qint32>()); //32 bit or less -> can be put in as value
     else //have to save it as string since 64 bit values are not supported
-        return QString::number(mValue.longValue);
+        return QString::number(mValue.value<qint64>());
 }
 
 void SignedBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 {
     //check that values are not too large
-    Q_ASSERT((newVal.longValue < 0 && (newVal.longValue | ~mask()) == newVal.ulongValue)
-        || (newVal.ulongValue & mask()) == newVal.ulongValue);
-    mValue = newVal.ulongValue & mask();
+    Q_ASSERT((newVal.value<qint64>() < 0 && (newVal.value<qint64>() | ~mask()) == newVal.value<quint64>())
+        || (newVal.value<quint64>() & mask()) == newVal.value<quint64>());
+    mValue = newVal.value<quint64>() & mask();
     //check if MSB is set -> negative -> sign extend
-    if (newVal.ulongValue & (quint64(1) << (width() - 1))) {
-        mValue = mValue.ulongValue | (~mask());
+    if (newVal.value<quint64>() & (quint64(1) << (width() - 1))) {
+        mValue = mValue.value<quint64>() | (~mask());
     }
 }
 

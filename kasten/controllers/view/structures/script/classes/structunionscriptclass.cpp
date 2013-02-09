@@ -222,7 +222,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx
     DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data";
         return eng->undefinedValue();
     }
     uint count = data->childCount();
@@ -246,7 +246,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_setChildren(QScriptContex
     DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data";
         return eng->undefinedValue();
     }
     DataInformationWithChildren* dataW = static_cast<DataInformationWithChildren*>(data);

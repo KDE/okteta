@@ -173,7 +173,7 @@ QScriptValue ArrayScriptClass::Array_proto_toString(QScriptContext* ctx, QScript
     DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data";
         return eng->undefinedValue();
     }
     return data->typeName();

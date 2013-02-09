@@ -133,33 +133,33 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
     else {
         AllPrimitiveTypes value = pData->value();
         if (name == s_bool)
-            return value.ulongValue != 0;
+            return value.value<quint64>() != 0;
         else if (name == s_char)
-            return QString(value.ubyteValue > 127 ? QChar::ReplacementCharacter : QChar(value.ubyteValue, 0));
+            return QString(value.value<quint8>() > 127 ? QChar::ReplacementCharacter : QChar(value.value<qint8>(), 0));
         else if (name == s_float)
-            return value.floatValue;
+            return value.value<float>();
         else if (name == s_double)
-            return value.doubleValue;
+            return value.value<double>();
         else if (name == s_int || name == s_int32 || name == s_int64low32)
-            return value.intValue;
+            return value.value<qint32>();
         else if (name == s_uint || name == s_uint32 || name == s_uint64low32)
-            return value.intValue;
+            return value.value<quint32>();
         else if (name == s_int64)
-            return QString::number(value.longValue);
+            return QString::number(value.value<qint64>());
         else if (name == s_uint64)
-            return QString::number(value.ulongValue);
+            return QString::number(value.value<quint64>());
         else if (name == s_int64high32)
-            return qint32(value.ulongValue >> 32);
+            return qint32(value.value<qint64>() >> 32);
         else if (name == s_uint64high32)
-            return quint32(value.ulongValue >> 32);
+            return quint32(value.value<quint64>() >> 32);
         else if (name == s_int8)
-            return qint32(value.byteValue);
+            return qint32(value.value<qint8>());
         else if (name == s_int16)
-            return qint32(value.shortValue);
+            return qint32(value.value<qint16>());
         else if (name == s_uint8)
-            return quint32(value.ubyteValue);
+            return quint32(value.value<quint8>());
         else if (name == s_uint16)
-            return quint32(value.ushortValue);
+            return quint32(value.value<quint16>());
         else
             return QScriptValue();
     }
@@ -184,7 +184,7 @@ QScriptValue PrimitiveScriptClass::Primitive_proto_toString(QScriptContext* ctx,
     DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data";
         return eng->undefinedValue();
     }
     //this might allow proper comparison between values without having to call .value

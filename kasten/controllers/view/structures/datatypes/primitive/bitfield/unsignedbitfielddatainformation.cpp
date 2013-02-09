@@ -30,7 +30,7 @@
 QString UnsignedBitfieldDataInformation::valueString() const
 {
     Q_ASSERT(mWasAbleToRead);
-    return UIntDataInformationMethods<quint64>::staticValueString(mValue.ulongValue);
+    return UIntDataInformationMethods<quint64>::staticValueString(mValue.value<quint64>());
 }
 
 QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
@@ -54,13 +54,13 @@ void UnsignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     if (spin)
-        spin->setValue(mValue.ulongValue);
+        spin->setValue(mValue.value<quint64>());
 }
 
 QScriptValue UnsignedBitfieldDataInformation::valueAsQScriptValue() const
 {
     if (width() <= 32)
-        return  mValue.uintValue & quint32(mask()); //32 bit or less -> can be put in as value
+        return  mValue.value<quint32>() & quint32(mask()); //32 bit or less -> can be put in as value
     else
-        return QString::number(mValue.ulongValue);
+        return QString::number(mValue.value<quint64>());
 }

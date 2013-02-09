@@ -214,7 +214,7 @@ QScriptValue StringScriptClass::String_proto_toString(QScriptContext* ctx, QScri
     DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
     if (!data)
     {
-        kDebug() << "could not cast data";
+        kWarning() << "could not cast data";
         return eng->undefinedValue();
     }
     return data->wasAbleToRead() ? data->valueString() : eng->undefinedValue();

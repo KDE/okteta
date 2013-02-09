@@ -31,7 +31,7 @@
 QString BoolBitfieldDataInformation::valueString() const
 {
     Q_ASSERT(mWasAbleToRead);
-    return BoolDataInformationMethods<quint64>::staticValueString(mValue.ulongValue);
+    return BoolDataInformationMethods<quint64>::staticValueString(mValue.value<quint64>());
 }
 
 QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
@@ -42,7 +42,7 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
         KComboBox* box = new KComboBox(false, parent);
         box->addItem(i18nc("boolean value", "false"));
         box->addItem(i18nc("boolean value", "true"));
-        box->setCurrentIndex(mValue.ubyteValue ? 1 : 0);
+        box->setCurrentIndex(mValue.value<quint64>() ? 1 : 0);
         return box;
     }
     UIntSpinBox* ret = new UIntSpinBox(parent);
@@ -71,11 +71,11 @@ void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
     if (spin)
-        spin->setValue(mValue.ulongValue);
+        spin->setValue(mValue.value<quint64>());
 }
 
 QScriptValue BoolBitfieldDataInformation::valueAsQScriptValue() const
 {
-    return (mValue.ulongValue) != 0;
+    return (mValue.value<quint64>()) != 0;
 }
 

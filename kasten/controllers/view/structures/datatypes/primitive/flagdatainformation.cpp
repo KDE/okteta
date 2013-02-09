@@ -53,10 +53,10 @@ QString FlagDataInformation::valueString() const
     QMapIterator<AllPrimitiveTypes, QString> iter(mEnum->values());
     //I doubt more than 10 flags will be set very often -> only then do we need a malloc
     QVarLengthArray<FlagPair, 10> arr;
-    const quint64 value = mValue->value().ulongValue;
+    const quint64 value = mValue->value().value<quint64>();
     while(iter.hasNext()) {
         iter.next();
-        const quint64 flag = iter.key().ulongValue;
+        const quint64 flag = iter.key().value<quint64>();
         if ((value & flag) == flag)
         {
             //flag is set

@@ -66,7 +66,7 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
         mPointerTarget->mWasAbleToRead = false;
     }
     // If the pointer it's outside the boundaries of the input simply ignore it
-    else if (mValue->value().ulongValue < quint64(input->size()))
+    else if (mValue->value().value<quint64>() < quint64(input->size()))
     {
         // Enqueue for later reading of the destination
         topLevelDataInformation()->enqueueReadData(this);
@@ -78,7 +78,7 @@ BitCount64 PointerDataInformation::childPosition(const DataInformation* child, O
 {
     //TODO other pointer modes
     Q_ASSERT(child == mPointerTarget.data());
-    return mWasAbleToRead ? mValue->value().ulongValue * 8 : 0;
+    return mWasAbleToRead ? mValue->value().value<quint64>() * 8 : 0;
 }
 
 int PointerDataInformation::indexOf(const DataInformation* const data) const
@@ -94,7 +94,7 @@ void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *inp
     Q_ASSERT(mWasAbleToRead);
     quint8 childBitOffset = 0;
     // Compute the destination offset
-    const quint64 pointer = mValue->value().ulongValue;
+    const quint64 pointer = mValue->value().value<quint64>();
     if (pointer > quint64(std::numeric_limits<Okteta::Address>::max()))
     {
         logError() << "Pointer" << mValue->valueString() << "does not point to an existing address.";

@@ -74,18 +74,21 @@ void ScriptUtils::wrapAllPrimitiveTypes(QScriptValue& out,
         AllPrimitiveTypes allPrim, PrimitiveDataType actualType)
 {
     out.setProperty(QLatin1String("type"), PrimitiveType::standardTypeName(actualType));
-    out.setProperty(QLatin1String("char"), QString(QLatin1Char(allPrim.ubyteValue)));
-    out.setProperty(QLatin1String("int8"), allPrim.byteValue);
-    out.setProperty(QLatin1String("uint8"), allPrim.ubyteValue);
-    out.setProperty(QLatin1String("int16"), allPrim.shortValue);
-    out.setProperty(QLatin1String("uint16"), allPrim.ushortValue);
-    out.setProperty(QLatin1String("int32"), allPrim.intValue);
-    out.setProperty(QLatin1String("uint32"), allPrim.uintValue);
+    out.setProperty(QLatin1String("char"), QString(allPrim.value<quint8>() > 127
+            ? QChar::ReplacementCharacter : QChar(allPrim.value<qint8>(), 0)));
+    out.setProperty(QLatin1String("int8"), allPrim.value<qint8>());
+    out.setProperty(QLatin1String("uint8"), allPrim.value<quint8>());
+    out.setProperty(QLatin1String("int16"), allPrim.value<qint16>());
+    out.setProperty(QLatin1String("uint16"), allPrim.value<quint16>());
+    out.setProperty(QLatin1String("int32"), allPrim.value<qint32>());
+    out.setProperty(QLatin1String("uint32"), allPrim.value<quint32>());
+    out.setProperty(QLatin1String("int64"), QString::number(allPrim.value<qint64>()));
+    out.setProperty(QLatin1String("uint64"), QString::number(allPrim.value<quint64>()));
     //QtScript has no support for 64 bit ints, add another value which contains the higher 32 bits
     //XXX any better solution for this?
-    out.setProperty(QLatin1String("int64high32bits"), qint32(allPrim.ulongValue >> 32));
-    out.setProperty(QLatin1String("uint64high32bits"), quint32(allPrim.ulongValue >> 32));
+    out.setProperty(QLatin1String("int64high32bits"), qint32(allPrim.value<qint64>() >> 32));
+    out.setProperty(QLatin1String("uint64high32bits"), quint32(allPrim.value<quint64>() >> 32));
 
-    out.setProperty(QLatin1String("float"), allPrim.floatValue);
-    out.setProperty(QLatin1String("double"), allPrim.doubleValue);
+    out.setProperty(QLatin1String("float"), allPrim.value<float>());
+    out.setProperty(QLatin1String("double"), allPrim.value<double>());
 }

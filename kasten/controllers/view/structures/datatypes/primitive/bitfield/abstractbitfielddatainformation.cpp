@@ -40,8 +40,8 @@ AllPrimitiveTypes AbstractBitfieldDataInformation::value() const
 
 void AbstractBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 {
-    Q_ASSERT((newVal.ulongValue & mask()) == newVal.ulongValue);
-    mValue.ulongValue = newVal.ulongValue & mask();
+    Q_ASSERT((newVal.value<quint64>() & mask()) == newVal.value<quint64>());
+    mValue = newVal.value<quint64>() & mask();
 }
 
 PrimitiveDataType AbstractBitfieldDataInformation::type() const
