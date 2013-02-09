@@ -33,7 +33,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="byteOrderLabel">
        <property name="text">
-        <string>Byte Order:</string>
+        <string>Byte order:</string>
        </property>
        <property name="buddy">
         <cstring>kcfg_ByteOrder</cstring>
@@ -45,16 +45,6 @@
        <property name="sizeAdjustPolicy">
         <enum>QComboBox::AdjustToContents</enum>
        </property>
-       <item>
-        <property name="text">
-         <string>Little Endian</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Big Endian</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item row="3" column="0">

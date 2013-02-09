@@ -60,16 +60,11 @@
   </group>
   <group name="StructureSettings">
     <entry name="ByteOrder" type="Enum">
-      <choices>
-      <!-- TODO how do I set the value? So that it is the same as QSysInfo::LittleEndian -->
-        <choice name="BigEndian" />
-        <choice name="LittleEndian" />
+      <label context="@label:listbox">Byte order</label>
+      <choices name="QSysInfo::Endian">
+        <choice name="BigEndian"><label context="@item:inlistbox">Big endian</label></choice>
+        <choice name="LittleEndian"><label context="@item:inlistbox">Little endian</label></choice>
       </choices>
-      <!-- static assertion -->
-      <code>
-      static char assertValueSame[sizeof(char[1 - 2*!((int)QSysInfo::LittleEndian == (int)EnumByteOrder::LittleEndian)])];
-      static char assertValueSame2[sizeof(char[1 - 2*!((int)QSysInfo::BigEndian == (int)EnumByteOrder::BigEndian)])];
-      </code>
       <default>LittleEndian</default>
     </entry>
     <entry name="LoadedStructures" type="StringList">

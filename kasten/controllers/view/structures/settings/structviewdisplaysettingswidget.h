@@ -23,6 +23,9 @@
 #define STRUCTVIEWDISPLAYSETTINGSWIDGET_H_
 #include "ui_structviewdisplaysettingswidget.h"
 #include <QtGui/QWidget>
+#include <kcoreconfigskeleton.h>
+
+class KConfigSkeletonItem;
 
 class StructViewDisplaySettingsWidget: public QWidget
 {
@@ -30,6 +33,8 @@ Q_OBJECT
 public:
     explicit StructViewDisplaySettingsWidget();
     ~StructViewDisplaySettingsWidget();
+private:
+    void setupEnumCombo(QComboBox* box, KCoreConfigSkeleton::ItemEnum* configItem);
 private:
     Ui_StructViewSettings ui;
 };

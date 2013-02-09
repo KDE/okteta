@@ -26,7 +26,6 @@
 // lib
 #include "oktetakastencontrollers_export.h"
 // tool
-#include "structviewpreferences.h"
 #include "datatypes/topleveldatainformation.h"
 // Kasten core
 #include <abstracttool.h>
@@ -64,7 +63,6 @@ public:
 public:
     QSysInfo::Endian byteOrder() const;
     void setByteOrder(QSysInfo::Endian order);
-    KDE_DEPRECATED void setByteOrder(StructViewPreferences::EnumByteOrder::type order);
     int columnCount() const;
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
     Okteta::AbstractByteArrayModel* byteArrayModel() const;

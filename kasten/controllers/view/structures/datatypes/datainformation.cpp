@@ -390,11 +390,11 @@ QSysInfo::Endian DataInformation::effectiveByteOrder() const
     case EndianessLittle:
         return QSysInfo::LittleEndian;
     case EndianessFromSettings:
-        return static_cast<QSysInfo::Endian>(Kasten2::StructViewPreferences::byteOrder());
+        return Kasten2::StructViewPreferences::byteOrder();
     default: //inherit
-        return (mParent && !mParent->isTopLevel()) ?
-                mParent->asDataInformation()->effectiveByteOrder() :
-                static_cast<QSysInfo::Endian>(Kasten2::StructViewPreferences::byteOrder());
+        if (mParent && !mParent->isTopLevel())
+            return mParent->asDataInformation()->effectiveByteOrder();
+        return Kasten2::StructViewPreferences::byteOrder();
     }
 }
 

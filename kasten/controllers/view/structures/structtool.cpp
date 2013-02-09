@@ -51,12 +51,9 @@ namespace Kasten2
 class StructToolPrivate
 {
 public:
-    StructToolPrivate()
-            : mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0), mByteOrder(
-                    (QSysInfo::Endian)StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
-                    mWritingData(false), mCurrentItemDataChanged(false)
-    {
-    }
+    StructToolPrivate() : mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0),
+            mByteOrder(StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
+            mWritingData(false), mCurrentItemDataChanged(false) {}
 
     // source
     ByteArrayView* mByteArrayView;
@@ -95,18 +92,13 @@ StructTool::~StructTool()
 
 void StructTool::setByteOrder(QSysInfo::Endian order)
 {
-    if (order != (QSysInfo::Endian)StructViewPreferences::byteOrder() || order != d->mByteOrder)
+    if (order != StructViewPreferences::byteOrder() || order != d->mByteOrder)
     {
         emit byteOrderChanged();
-        StructViewPreferences::setByteOrder((StructViewPreferences::EnumByteOrder::type)order);
+        StructViewPreferences::setByteOrder(order);
         d->mByteOrder = order;
         updateData(Okteta::ArrayChangeMetricsList());
     }
-}
-
-void StructTool::setByteOrder(StructViewPreferences::EnumByteOrder::type order)
-{
-    setByteOrder(static_cast<QSysInfo::Endian>(order));
 }
 
 QString StructTool::title() const

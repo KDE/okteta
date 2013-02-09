@@ -20,13 +20,26 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "structviewdisplaysettingswidget.h"
+#include "structviewpreferences.h"
 
 StructViewDisplaySettingsWidget::StructViewDisplaySettingsWidget() :
     QWidget(NULL)
 {
     ui.setupUi(this);
     ui.kcfg_CharDisplayBase->setEnabled(ui.kcfg_ShowCharNumericalValue->isChecked());
+    setupEnumCombo(ui.kcfg_ByteOrder, Kasten2::StructViewPreferences::self()->byteOrderItem());
 }
+
 StructViewDisplaySettingsWidget::~StructViewDisplaySettingsWidget()
 {
+}
+
+void StructViewDisplaySettingsWidget::setupEnumCombo(QComboBox* box, KCoreConfigSkeleton::ItemEnum* configItem)
+{
+    Q_ASSERT(box->count() == 0);
+    QList<KCoreConfigSkeleton::ItemEnum::Choice2> choices = configItem->choices2();
+    foreach (const KCoreConfigSkeleton::ItemEnum::Choice2& choice, choices) {
+        box->addItem(choice.label, choice.name);
+    }
+    box->setToolTip(configItem->toolTip());
 }
