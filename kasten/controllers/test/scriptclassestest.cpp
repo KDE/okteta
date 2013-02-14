@@ -107,8 +107,8 @@ void ScriptClassesTest::initTestCase()
     //TODO fix this
     commonProperties << pair("name", QScriptValue::Undeletable)
             << pair("wasAbleToRead") << pair("parent")
-            << pair("valid", QScriptValue::Undeletable | QScriptValue::ReadOnly)
-            << pair("validationError", QScriptValue::Undeletable | QScriptValue::ReadOnly)
+            << pair("valid")
+            << pair("validationError")
             << pair("byteOrder", QScriptValue::Undeletable)
             << pair("updateFunc", QScriptValue::Undeletable)
             << pair("validationFunc", QScriptValue::Undeletable)
@@ -118,7 +118,7 @@ void ScriptClassesTest::initTestCase()
             << pair("int8") << pair("int16") << pair("int32") << pair("int64") << pair("uint")
             << pair("uint8") << pair("uint16") << pair("uint32") << pair("uint64") << pair("bool")
             << pair("float") << pair("double") << pair("int64high32") << pair("int64low32")
-            << pair("uint64high32") << pair("uint64low32");
+            << pair("uint64high32") << pair("uint64low32") << pair("type");
     qSort(primitiveProperties);
     LoggerWithContext lwc(0, QString());
     for (int i = Type_START; i < Type_Bitfield; ++i)
@@ -209,10 +209,15 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
     }
     data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::None);
     qSort(foundProperties);
-    if (foundProperties.size() != expected.size())
-        qWarning() << tag << ": size differs: expected"
-                << expected.size() << ", got" << foundProperties.size();
-    QCOMPARE(foundProperties.size(), expected.size());
+    if (foundProperties.size() != expected.size()) {
+        for (int i = 0; i < qMin(foundProperties.size(), expected.size()); ++i)
+        {
+            if (foundProperties.at(i) != expected.at(i))
+                qWarning() << tag << ":" << foundProperties.at(i) << "!=" << expected.at(i);
+            QCOMPARE(foundProperties.at(i).first, expected.at(i).first);
+            QCOMPARE(foundProperties.at(i).second, expected.at(i).second);
+        }
+    }
     for (int i = 0; i < foundProperties.size(); ++i)
     {
         if (foundProperties.at(i) != expected.at(i))
@@ -220,6 +225,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
         QCOMPARE(foundProperties.at(i).first, expected.at(i).first);
         QCOMPARE(foundProperties.at(i).second, expected.at(i).second);
     }
+    QCOMPARE(foundProperties.size(), expected.size());
 }
 
 void ScriptClassesTest::checkIterators()
@@ -305,6 +311,7 @@ void ScriptClassesTest::testReplaceObject()
 
     QCOMPARE(arrayData->name(), QString(QLatin1String("innerArray")));
     top.scriptHandler()->updateDataInformation(arrayData);
+    QVERIFY(main->childAt(1)->hasBeenUpdated());
     QVERIFY(main->childAt(1)->isPrimitive());
     QCOMPARE(main->childAt(1)->name(), QString(QLatin1String("changedToFloat")));
 
