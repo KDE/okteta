@@ -259,6 +259,7 @@ QVariant StringDataInformation::dataFromChildWidget(uint index, const QWidget* w
     Q_ASSERT(index < mData->count());
     Q_ASSERT(false);
     Q_UNUSED(w)
+    Q_UNUSED(index)
     return QVariant();
 }
 
@@ -282,6 +283,7 @@ BitCount64 StringDataInformation::childPosition(const DataInformation* child, Ok
     Q_ASSERT(child->isDummy());
     Q_ASSERT(child->parent() == this);
     Q_ASSERT(child == mDummy.data());
+    Q_UNUSED(child)
     uint index = mDummy->dummyIndex();
     Q_ASSERT(index < mData->count());
     BitCount32 offs = 0;

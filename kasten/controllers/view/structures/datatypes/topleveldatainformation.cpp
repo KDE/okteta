@@ -212,6 +212,7 @@ quint64 TopLevelDataInformation::lockPositionFor(const Okteta::AbstractByteArray
 int TopLevelDataInformation::indexOf(const DataInformation* const data) const
 {
     Q_ASSERT(data == mData.data());
+    Q_UNUSED(data)
     return mIndex;
 }
 

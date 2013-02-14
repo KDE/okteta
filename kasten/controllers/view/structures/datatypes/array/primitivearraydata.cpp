@@ -226,6 +226,7 @@ template<PrimitiveDataTypeEnum type>
 QWidget* PrimitiveArrayData<type>::createChildEditWidget(uint index, QWidget* parent) const
 {
     Q_ASSERT(index < length());
+    Q_UNUSED(index)
     return DisplayClass::staticCreateEditWidget(parent);
 }
 
@@ -233,6 +234,7 @@ template<PrimitiveDataTypeEnum type>
 QVariant PrimitiveArrayData<type>::dataFromChildWidget(uint index, const QWidget* w) const
 {
     Q_ASSERT(index < length());
+    Q_UNUSED(index)
     return DisplayClass::staticDataFromWidget(w);
 }
 
@@ -240,6 +242,7 @@ template<PrimitiveDataTypeEnum type>
 void PrimitiveArrayData<type>::setChildWidgetData(uint index, QWidget* w) const
 {
     Q_ASSERT(index < length());
+    Q_UNUSED(index)
     DisplayClass::staticSetWidgetData(mData.at(index), w);
 }
 

@@ -111,6 +111,7 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
 BitCount32 AsciiStringData::sizeAt(uint i) const
 {
     Q_ASSERT(i < count());
+    Q_UNUSED(i)
     return 8;
 }
 

@@ -94,7 +94,8 @@ UnionDataInformation::UnionDataInformation(const QString& name, const QVector<Da
 
 BitCount64 UnionDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
-    //all elements start at same position
+    //all elements start at offset zero
+    Q_UNUSED(child)
     if (mParent->isTopLevel())
         return start * 8;
     else

@@ -203,5 +203,6 @@ BitCount32 Utf32StringData::size() const
 BitCount32 Utf32StringData::sizeAt(uint i) const
 {
     Q_ASSERT(i <= count());
+    Q_UNUSED(i)
     return 32;
 }

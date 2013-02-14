@@ -113,6 +113,7 @@ void ModelTest::nonDestructiveBasicTest()
 //     fetchingMore = false;
     Qt::ItemFlags flags = model->flags ( QModelIndex() );
     Q_ASSERT ( flags == Qt::ItemIsDropEnabled || flags == 0 );
+    Q_UNUSED(flags)
     model->hasChildren ( QModelIndex() );
     model->hasIndex ( 0, 0 );
     model->headerData ( 0, Qt::Horizontal );
@@ -200,6 +201,7 @@ void ModelTest::hasIndex()
     if ( rows > 0 )
         Q_ASSERT ( model->hasIndex ( 0, 0 ) == true );
 
+    Q_UNUSED(columns)
     // hasIndex() is tested more extensively in checkChildren(),
     // but this catches the big mistakes
 }
@@ -229,7 +231,7 @@ void ModelTest::index()
     QModelIndex a = model->index ( 0, 0 );
     QModelIndex b = model->index ( 0, 0 );
     Q_ASSERT ( a == b );
-
+    Q_UNUSED(columns)
     // index() is tested more extensively in checkChildren(),
     // but this catches the big mistakes
 }
@@ -436,6 +438,7 @@ void ModelTest::data()
     if ( textAlignmentVariant.isValid() ) {
         int alignment = textAlignmentVariant.toInt();
         Q_ASSERT ( alignment == ( alignment & ( Qt::AlignHorizontal_Mask | Qt::AlignVertical_Mask ) ) );
+        Q_UNUSED(alignment)
     }
 
     // General Purpose roles that should return a QColor
@@ -456,6 +459,7 @@ void ModelTest::data()
         Q_ASSERT ( state == Qt::Unchecked ||
                    state == Qt::PartiallyChecked ||
                    state == Qt::Checked );
+        Q_UNUSED(state)
     }
 }
 

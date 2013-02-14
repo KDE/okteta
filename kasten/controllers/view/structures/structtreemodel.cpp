@@ -58,6 +58,9 @@ void StructTreeModel::onChildrenRemoved(const DataInformation* sender, uint star
     Q_ASSERT(sender == mLastSender);
     Q_ASSERT(startIndex== mLastStartIndex);
     Q_ASSERT(endIndex == mLastEndIndex);
+    Q_UNUSED(sender)
+    Q_UNUSED(startIndex)
+    Q_UNUSED(endIndex)
     emit endRemoveRows();
 }
 
@@ -67,6 +70,9 @@ void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint sta
     Q_ASSERT(sender == mLastSender);
     Q_ASSERT(startIndex== mLastStartIndex);
     Q_ASSERT(endIndex == mLastEndIndex);
+    Q_UNUSED(sender)
+    Q_UNUSED(startIndex)
+    Q_UNUSED(endIndex)
     emit endInsertRows();
 }
 

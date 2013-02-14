@@ -110,6 +110,7 @@ qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Add
 BitCount32 Latin1StringData::sizeAt(uint i) const
 {
     Q_ASSERT(i < count());
+    Q_UNUSED(i)
     return 8;
 }
 

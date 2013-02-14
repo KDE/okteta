@@ -262,6 +262,7 @@ inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readRawBytes(
     } buf;
     Okteta::Size read = input->copyTo(buf.bytes, address, size);
     Q_ASSERT(read == size);
+    Q_UNUSED(read)
     return buf.value;
 }
 

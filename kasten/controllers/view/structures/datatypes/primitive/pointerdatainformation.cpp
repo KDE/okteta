@@ -76,6 +76,7 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
 
 BitCount64 PointerDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
+    Q_UNUSED(start)
     //TODO other pointer modes
     Q_ASSERT(child == mPointerTarget.data());
     return mWasAbleToRead ? mValue->value().value<quint64>() * 8 : 0;
