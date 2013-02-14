@@ -51,6 +51,10 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
         }
         return ret;
     }
+    else if (name == s_type)
+    {
+        return data->typeName();
+    }
     return PrimitiveScriptClass::additionalProperty(data, name, id);
 }
 
