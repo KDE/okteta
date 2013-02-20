@@ -20,6 +20,15 @@
 #ifndef TESTUTILS_H_
 #define TESTUTILS_H_
 
+#include <QString>
+#include <QtTest/QTest>
+#include "view/structures/datatypes/primitivedatatype.h"
+#include "view/structures/datatypes/datainformation.h"
+#include "view/structures/datatypes/primitive/primitivedatainformation.h"
+#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
+#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
+#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
+
 namespace Utils
 {
 
@@ -39,6 +48,56 @@ T binary(const char* val)
     return static_cast<T>(result);
 }
 
+struct DataInformationCheck
+{
+    virtual ~DataInformationCheck() {}
+    virtual void check(DataInformation* data) = 0;
+};
+
+struct PrimitiveTypeCheck : public DataInformationCheck
+{
+    virtual ~PrimitiveTypeCheck() {}
+    PrimitiveTypeCheck(PrimitiveDataType type) : mType(type) {};
+    virtual void check(DataInformation* data)
+    {
+        QVERIFY(data->isPrimitive());
+        QCOMPARE(data->asPrimitive()->type().value, mType.value);
+    }
+private:
+    PrimitiveDataType mType;
+};
+
+struct SignedBitfieldCheck : public DataInformationCheck
+{
+    virtual ~SignedBitfieldCheck() {}
+    virtual void check(DataInformation* data)
+    {
+        QVERIFY(data->isBitfield());
+        QVERIFY(dynamic_cast<SignedBitfieldDataInformation*>(data));
+    }
+};
+
+struct UnsignedBitfieldCheck : public DataInformationCheck
+{
+    virtual ~UnsignedBitfieldCheck() {}
+    virtual void check(DataInformation* data)
+    {
+        QVERIFY(data->isBitfield());
+        QVERIFY(dynamic_cast<UnsignedBitfieldDataInformation*>(data));
+    }
+};
+
+struct BoolBitfieldCheck : public DataInformationCheck
+{
+    virtual ~BoolBitfieldCheck() {}
+    virtual void check(DataInformation* data)
+    {
+        QVERIFY(data->isBitfield());
+        QVERIFY(dynamic_cast<BoolBitfieldDataInformation*>(data));
+    }
+};
+
 }
+Q_DECLARE_METATYPE(Utils::DataInformationCheck*)
 
 #endif /* TESTUTILS_H_ */

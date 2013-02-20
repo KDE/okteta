@@ -388,6 +388,7 @@ structures_unit_test( allprimitivetypestest "structures-all-primitive-types" tes
 structures_unit_test( scriptvalueconvertertest "structures-scriptvalue-converter" test/scriptvalueconvertertest.cpp )
 structures_unit_test( osdparsertest "structures-osd-parser" test/osdparsertest.cpp )
 structures_unit_test( commonparsertest "structures-common-parser" test/commonparsertest.cpp )
+structures_unit_test( jsparsertest "structures-js-parser" test/jsparsertest.cpp )
 
 endif ( KDE4_BUILD_TESTS )
 

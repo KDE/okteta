@@ -69,7 +69,7 @@ DataInformation::DataInformationEndianess ParserUtils::byteOrderFromString(const
 {
     const QString lower = string.toLower();
     if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))
-        return DataInformation::EndiannessBig;
+        return DataInformation::EndianessBig;
     else if (lower == QLatin1String("littleendian") || lower == QLatin1String("little-endian"))
         return DataInformation::EndianessLittle;
     else if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings"))
@@ -138,7 +138,7 @@ QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianess
 {
     if (order == DataInformation::EndianessLittle)
         return QLatin1String("littleEndian");
-    if (order == DataInformation::EndiannessBig)
+    if (order == DataInformation::EndianessBig)
         return QLatin1String("bigEndian");
     if (order == DataInformation::EndianessFromSettings)
         return QLatin1String("fromSettings");

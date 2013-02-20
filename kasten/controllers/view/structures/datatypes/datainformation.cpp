@@ -385,7 +385,7 @@ QSysInfo::Endian DataInformation::effectiveByteOrder() const
 {
     switch (mByteOrder)
     {
-    case EndiannessBig:
+    case EndianessBig:
         return QSysInfo::BigEndian;
     case EndianessLittle:
         return QSysInfo::LittleEndian;

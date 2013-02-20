@@ -85,7 +85,7 @@ public:
     };
     enum DataInformationEndianess
     {
-        EndianessFromSettings = 0, EndianessInherit, EndianessLittle, EndiannessBig
+        EndianessFromSettings = 0, EndianessInherit, EndianessLittle, EndianessBig
     };
 
     //methods for children:

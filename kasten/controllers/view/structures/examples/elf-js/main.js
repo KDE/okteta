@@ -18,7 +18,7 @@ function init() {
         "shared object" : 3,
         "core file" : 4,
     };
-    // type of the enum (first parameter) can also be a String  
+    // type of the enum (first parameter) can also be a String
     var architectureEnumValues = {
         "No machine" : 0,
         "AT&T WE 32100" : 1,
@@ -73,13 +73,13 @@ function init() {
         "32 bit" : 1,
         "64 bit" : 2,
     };
-    
+
     var endianessEnumValues = {
         "None" : 0,
         "little endian" : 1,
         "big endian" : 2,
     };
-    
+
     var ABIEnumValues = {
         "UNIX System V ABI" : 0,
         "HP-UX" : 1,
@@ -95,7 +95,7 @@ function init() {
         "ARM" : 97,
         "Standalone (embedded) application" : 255,
     };
-    
+
     // now define the real object
 
     /** the same for 32 and 64 bit */
@@ -112,8 +112,8 @@ function init() {
         ABI : enumeration("ABIEnum", uint8(), ABIEnumValues),
         ABI_Version : uint8(),
         Padding : array(uint8(), 7),
-    }, validateIdentifier);
-    
+    }).setValidation(validateIdentifier);
+
     var elf32 = struct({
         Identifier : ident,
         ObjectType : enumeration("ObjectTypeEnum", uint16(), objectTypeEnumValues),

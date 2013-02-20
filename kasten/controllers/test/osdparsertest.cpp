@@ -28,8 +28,8 @@
 
 class OsdParserTest : public QObject
 {
-Q_OBJECT
-    private Q_SLOTS:
+    Q_OBJECT
+private Q_SLOTS:
     void testPrimitive();
     void testPrimitive_data();
     void testScriptFuntion();
