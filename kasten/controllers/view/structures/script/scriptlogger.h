@@ -32,9 +32,9 @@ class KIcon;
 
 class DataInformation;
 /** NOT THREAD SAFE! */
-class ScriptLogger: public QAbstractTableModel {
-Q_OBJECT
-Q_DISABLE_COPY(ScriptLogger)
+class ScriptLogger : public QAbstractTableModel {
+    Q_DISABLE_COPY(ScriptLogger)
+    Q_OBJECT
 public:
     explicit ScriptLogger();
     virtual ~ScriptLogger();

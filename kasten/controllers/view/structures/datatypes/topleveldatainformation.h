@@ -45,8 +45,8 @@ class PointerDataInformation;
 
 class TopLevelDataInformation : public QObject, public DataInformationBase
 {
-Q_OBJECT
     Q_DISABLE_COPY(TopLevelDataInformation)
+    Q_OBJECT
 public:
     /** create a new TopLevelDataInformation wrapping @p data
      *  @param data the object to wrap (takes ownership). If data is dummy then this object is invalid

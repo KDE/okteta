@@ -352,46 +352,6 @@ endif( OKTETA_DEBUG_SCRIPT )
 kde4_add_kcfg_files( STRUCTVIEW_SRCS view/structures/settings/structviewpreferences.kcfgc )
 kde4_add_ui_files( STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
 
-if ( KDE4_BUILD_TESTS )
-#static lib for unit tests:
-kde4_add_library ( structures-static STATIC ${STRUCTVIEW_SRCS} ${PODDECODERCONTROLLER_SRCS} )
-target_link_libraries ( structures-static
-  ${oktetakastengui_LIB}
-  ${oktetakastencore_LIB}
-  ${KASTENGUI_LIBS}
-  ${KASTENCORE_LIBS}
-  ${oktetagui_LIB}
-  ${oktetacore_LIB}
-  ${KDE4_KIO_LIBS}
-  ${KDE4_KDEUI_LIBS}
-  ${KDE4_KNEWSTUFF3_LIBS}
-  ${KDE4_KCMUTILS_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTSCRIPTTOOLS_LIBRARY}
-)
-set_target_properties( structures-static PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT= )
-
-macro(structures_unit_test _testtarget _testname)
-    #message("ARGC='${ARGC}' ARGV='${ARGV}' ARGN='${ARGN}'")
-    kde4_add_unit_test(${_testtarget} TESTNAME ${_testname} ${ARGN})
-	target_link_libraries(${_testtarget} structures-static ${QT_QTTEST_LIBRARY})
-	set_target_properties(${_testtarget} PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
-endmacro()
-
-structures_unit_test( primitivearraytest "structures-primitive-array" test/primitivearraytest.cpp )
-structures_unit_test( arraydatainformationtest "structures-array-datainformation" test/arraydatainformationtest.cpp )
-structures_unit_test( basicdatainformationtest "structures-basic-datainformation" test/basicdatainformationtest.cpp )
-structures_unit_test( primitivedatainformationtest "structures-primitive-datainformation" test/primitivedatainformationtest.cpp )
-structures_unit_test( scriptclassestest "structures-script-classes" test/scriptclassestest.cpp )
-structures_unit_test( uniondatainformationtest "structures-union-datainformation" test/uniondatainformationtest.cpp )
-structures_unit_test( allprimitivetypestest "structures-all-primitive-types" test/allprimitivetypestest.cpp )
-structures_unit_test( scriptvalueconvertertest "structures-scriptvalue-converter" test/scriptvalueconvertertest.cpp )
-structures_unit_test( osdparsertest "structures-osd-parser" test/osdparsertest.cpp )
-structures_unit_test( commonparsertest "structures-common-parser" test/commonparsertest.cpp )
-structures_unit_test( jsparsertest "structures-js-parser" test/jsparsertest.cpp )
-
-endif ( KDE4_BUILD_TESTS )
-
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
   ${LIBFRAMESPRINT_REL_DIR}/framestopaperprinter.cpp
@@ -430,11 +390,27 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
   view/viewprofiles/viewprofilesmanagecontroller.cpp
 )
 
+#structview and poddecoder sources are also needed for structures tool unit tests
+#create a OBJECT library (http://www.cmake.org/Wiki/CMake/Tutorials/Object_Library)
+#to prevent compiling these object files twice with exactly the same compile flags
+#TODO remove once CMake >= 2.8.9 is required for building KDE
+if ( CMAKE_VERSION VERSION_GREATER 2.8.8)
+    add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
+    add_library( structview_objs OBJECT ${STRUCTVIEW_SRCS} )
+    set_target_properties(poddecoder_objs structview_objs PROPERTIES AUTOMOC ON)
+    set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
+    set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
+    set( STRUCTVIEW_OBJS $<TARGET_OBJECTS:structview_objs>)
+else()
+    #compile the sources twice for older CMake version
+    set( PODDECODER_OBJS ${PODDECODERCONTROLLER_SRCS})
+    set( STRUCTVIEW_OBJS ${STRUCTVIEW_SRCS})
+endif()
+
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
 #   ${OVERWRITEONLYCONTROLLER_SRCS}
   ${OVERWRITEMODECONTROLLER_SRCS}
   ${DOCUMENTINFOCONTROLLER_SRCS}
-  ${PODDECODERCONTROLLER_SRCS}
   ${LIBCHECKSUM_SRCS}
   ${CHECKSUMCONTROLLER_SRCS}
   ${STRINGSEXTRACTCONTROLLER_SRCS}
@@ -456,8 +432,50 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWMODECONTROLLER_SRCS}
   ${VIEWPROFILESCONTROLLER_SRCS}
   ${VIEWPROFILESMANAGECONTROLLER_SRCS}
-  ${STRUCTVIEW_SRCS}
+  ${PODDECODER_OBJS}
+  ${STRUCTVIEW_OBJS}
 )
+
+#structures view unit tests
+if ( KDE4_BUILD_TESTS )
+#static lib for unit tests (reuse the OBJECT library)
+kde4_add_library ( structures-static STATIC $<TARGET_OBJECTS:structview_objs> $<TARGET_OBJECTS:poddecoder_objs> )
+target_link_libraries ( structures-static
+  ${oktetakastengui_LIB}
+  ${oktetakastencore_LIB}
+  ${KASTENGUI_LIBS}
+  ${KASTENCORE_LIBS}
+  ${oktetagui_LIB}
+  ${oktetacore_LIB}
+  ${KDE4_KIO_LIBS}
+  ${KDE4_KDEUI_LIBS}
+  ${KDE4_KNEWSTUFF3_LIBS}
+  ${KDE4_KCMUTILS_LIBS}
+  ${QT_QTSCRIPT_LIBRARY}
+  ${QT_QTSCRIPTTOOLS_LIBRARY}
+)
+set_target_properties( structures-static PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT= )
+
+macro(structures_unit_test _testtarget _testname)
+    #message("ARGC='${ARGC}' ARGV='${ARGV}' ARGN='${ARGN}'")
+    kde4_add_unit_test(${_testtarget} TESTNAME ${_testname} ${ARGN})
+    target_link_libraries(${_testtarget} structures-static ${QT_QTTEST_LIBRARY})
+    set_target_properties(${_testtarget} PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
+endmacro()
+
+structures_unit_test( primitivearraytest "structures-primitive-array" test/primitivearraytest.cpp )
+structures_unit_test( arraydatainformationtest "structures-array-datainformation" test/arraydatainformationtest.cpp )
+structures_unit_test( basicdatainformationtest "structures-basic-datainformation" test/basicdatainformationtest.cpp )
+structures_unit_test( primitivedatainformationtest "structures-primitive-datainformation" test/primitivedatainformationtest.cpp )
+structures_unit_test( scriptclassestest "structures-script-classes" test/scriptclassestest.cpp )
+structures_unit_test( uniondatainformationtest "structures-union-datainformation" test/uniondatainformationtest.cpp )
+structures_unit_test( allprimitivetypestest "structures-all-primitive-types" test/allprimitivetypestest.cpp )
+structures_unit_test( scriptvalueconvertertest "structures-scriptvalue-converter" test/scriptvalueconvertertest.cpp )
+structures_unit_test( osdparsertest "structures-osd-parser" test/osdparsertest.cpp )
+structures_unit_test( commonparsertest "structures-common-parser" test/commonparsertest.cpp )
+structures_unit_test( jsparsertest "structures-js-parser" test/jsparsertest.cpp )
+
+endif ( KDE4_BUILD_TESTS )
 
 set( okteta_kastencontrollers_LIB_HDRS
   oktetakastencontrollers_export.h

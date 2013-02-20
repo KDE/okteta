@@ -46,3 +46,5 @@ SInt32 SInt32Editor::data() const
 }
 
 SInt32Editor::~SInt32Editor() {}
+
+#include "moc_sint32editor.cpp"

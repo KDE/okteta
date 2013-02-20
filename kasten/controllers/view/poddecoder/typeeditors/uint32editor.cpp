@@ -45,3 +45,5 @@ UInt32 UInt32Editor::data() const
 }
 
 UInt32Editor::~UInt32Editor() {}
+
+#include "moc_uint32editor.cpp"

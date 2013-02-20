@@ -46,3 +46,5 @@ SInt8 SInt8Editor::data() const
 }
 
 SInt8Editor::~SInt8Editor() {}
+
+#include "moc_sint8editor.cpp"

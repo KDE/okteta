@@ -95,3 +95,4 @@ void StructViewDisplaySettingsWidget::setUnsignedDisplay(int index)
     handleMapping(index, ui.combo_UnsignedDisplayBase, ui.kcfg_UnsignedDisplayBase);
 }
 
+#include "moc_structviewdisplaysettingswidget.cpp"

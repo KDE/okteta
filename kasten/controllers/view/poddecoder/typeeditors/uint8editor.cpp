@@ -45,3 +45,5 @@ UInt8 UInt8Editor::data() const
 }
 
 UInt8Editor::~UInt8Editor() {}
+
+#include "moc_uint8editor.cpp"

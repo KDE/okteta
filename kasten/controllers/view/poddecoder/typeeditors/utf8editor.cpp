@@ -70,3 +70,5 @@ Utf8 Utf8Editor::data() const
 }
 
 Utf8Editor::~Utf8Editor() {}
+
+#include "moc_utf8editor.cpp"

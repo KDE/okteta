@@ -225,3 +225,5 @@ void TopLevelDataInformation::setActualDataInformation(DataInformation* newData)
     else
         mData.reset(newData);
 }
+
+#include "moc_topleveldatainformation.cpp"

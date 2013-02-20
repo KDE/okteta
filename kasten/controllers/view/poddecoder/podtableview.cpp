@@ -110,7 +110,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     baseLayout->addLayout( settingsLayout );
 
     mTool->setDifferentSizeDialog( this );
-    
+
     //resize to fit width of contents
     //this is much (!) faster than using setResizeMode(QHeaderView::ResizeToContents)
     QFont f;
@@ -220,3 +220,5 @@ void PODTableView::onCurrentRowChanged( const QModelIndex& current, const QModel
 PODTableView::~PODTableView() {}
 
 }
+
+#include "moc_podtableview.cpp"

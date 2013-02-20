@@ -1,5 +1,5 @@
 project( oktetakasten )
-
+cmake_minimum_required(VERSION 2.8.8)
 add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1806 )
 
 set( KASTEN_ABI_VERSION 2 )

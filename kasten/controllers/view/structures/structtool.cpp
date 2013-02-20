@@ -467,3 +467,5 @@ TopLevelDataInformation::List StructTool::allData() const
 }
 
 }
+
+#include "moc_structtool.cpp"

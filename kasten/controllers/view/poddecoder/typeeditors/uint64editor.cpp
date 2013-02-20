@@ -39,3 +39,5 @@ UInt64 UInt64Editor::data() const
 }
 
 UInt64Editor::~UInt64Editor() {}
+
+#include "moc_uint64editor.cpp"

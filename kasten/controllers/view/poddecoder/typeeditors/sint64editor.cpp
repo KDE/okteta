@@ -39,3 +39,5 @@ SInt64 SInt64Editor::data() const
 }
 
 SInt64Editor::~SInt64Editor() {}
+
+#include "moc_sint64editor.cpp"

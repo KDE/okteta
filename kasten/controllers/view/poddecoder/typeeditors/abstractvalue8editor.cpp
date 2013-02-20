@@ -73,3 +73,5 @@ AbstractValue8Editor::~AbstractValue8Editor()
 {
     delete mValueCodec;
 }
+
+#include "moc_abstractvalue8editor.cpp"

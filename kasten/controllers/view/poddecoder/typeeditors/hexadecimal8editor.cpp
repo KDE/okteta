@@ -39,3 +39,5 @@ Hexadecimal8 Hexadecimal8Editor::data() const
 }
 
 Hexadecimal8Editor::~Hexadecimal8Editor() {}
+
+#include "moc_hexadecimal8editor.cpp"

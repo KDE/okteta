@@ -47,3 +47,5 @@ Float64 Float64Editor::data() const
 }
 
 Float64Editor::~Float64Editor() {}
+
+#include "moc_float64editor.cpp"

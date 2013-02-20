@@ -347,3 +347,5 @@ PODDecoderTool::~PODDecoderTool()
 }
 
 }
+
+#include "moc_poddecodertool.cpp"

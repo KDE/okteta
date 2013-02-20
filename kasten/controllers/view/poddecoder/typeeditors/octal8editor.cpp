@@ -39,3 +39,5 @@ Octal8 Octal8Editor::data() const
 }
 
 Octal8Editor::~Octal8Editor() {}
+
+#include "moc_octal8editor.cpp"
