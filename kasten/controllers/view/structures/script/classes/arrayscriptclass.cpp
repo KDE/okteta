@@ -137,20 +137,11 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
         }
         return true;
     }
-    else if (name == s_type)
+    else if (name == s_type || name == s_childType)
     {
-        DataInformation* newChildType = ScriptValueConverter::convert(value,
-                aData->name(), aData->logger(), aData);
+        if (name == s_childType)
+            aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
 
-        if (!newChildType)
-            aData->logError() << "Failed to parse new child type:" << value.toString();
-        else
-            aData->setArrayType(newChildType);
-        return true;
-    }
-    else if (name == s_childType)
-    {
-        aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         DataInformation* newChildType = ScriptValueConverter::convert(value,
                 aData->name(), aData->logger(), aData);
 

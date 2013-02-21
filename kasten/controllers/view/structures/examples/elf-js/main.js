@@ -95,7 +95,6 @@ function init() {
         "ARM" : 97,
         "Standalone (embedded) application" : 255,
     };
-
     // now define the real object
 
     /** the same for 32 and 64 bit */
@@ -114,14 +113,42 @@ function init() {
         Padding : array(uint8(), 7),
     }).setValidation(validateIdentifier);
 
+    var phoff = pointer(uint32(), struct({
+        "Section Headers": array(
+            struct({
+                p_type: uint32(),
+                p_offset: pointer(uint32(), {
+                    Data: array(uint8(), function() { return this.parent.parent.PHSize.value; })
+                }),
+                p_vaddr: uint32(),
+                p_paddr: uint32(),
+                p_filesz: uint32(),
+                p_memsz: uint32(),
+                p_flags: uint32(),
+                p_align: uint32()
+            }).set({name: "Elf32_Phdr"}), function(root) { return root.PHCount.value; }),
+    }));
+    var shoff = pointer(uint32(), struct({
+        "Section Headers": array(
+            struct({
+                sh_name: uint32(),
+                sh_type: uint32(),
+                sh_flags: uint32(),
+                sh_addr: uint32(),
+                sh_offset: pointer(uint32(), {
+                    Data: array(uint8(), function() { return this.parent.parent.parent.SHSize.value; })
+                }),
+             }).set({name: "Elf32_Phdr"}), function(root) { return root.SHCount.value; }),
+    }));
+
     var elf32 = struct({
         Identifier : ident,
         ObjectType : enumeration("ObjectTypeEnum", uint16(), objectTypeEnumValues),
         Architecture : enumeration("ArchitectureEnum", uint16(), architectureEnumValues),
         Version : uint32(),
         EntryAddr : uint32(),
-        PHOffset : uint32(),
-        SHOffset : uint32(),
+        PHOffset : phoff,
+        SHOffset : shoff,
         Flags : uint32(),
         HeaderSize : uint16(),
         PHSize : uint16(),
@@ -130,36 +157,5 @@ function init() {
         SHCount : uint16(),
         SHStringIndex : uint16(),
     });
-//
-//    <struct name="Elf64_Ehdr">
-//    <struct name="ident">
-//        <array name="magic" length="4">
-//            <primitive name="magic" type="Char" />
-//        </array>
-//        <enum name="arch class" enum="ClassEnum" type="Char" />
-//        <enum name="endianess" enum="EndianessEnum" type="Char" />
-//        <primitive name="version" type="Char" />
-//        <enum name="ABI" enum="ABIEnum" type="Char" />
-//        <primitive name="ABI version" type="Char" />
-//        <array name="padding" length="7" >
-//            <primitive name="padding" type="Char" />
-//        </array>
-//    </struct>
-//    <enum name="ObjectType" enum="ObjectTypeEnum" type="UInt16"/>
-//    <enum name="Architecture" enum="ArchitectureEnum" type="UInt16"/>
-//    <primitive name="Version" type="UInt32"/>
-//    <primitive name="EntryAddr" type="UInt64"/>
-//    <primitive name="PHOffset" type="UInt64"/>
-//    <primitive name="SHOffset" type="UInt64"/>
-//    <primitive name="Flags" type="UInt32"/>
-//    <primitive name="HeaderSize" type="UInt16"/>
-//    <primitive name="PHSize" type="UInt16"/>
-//    <primitive name="PHCount" type="UInt16"/>
-//    <primitive name="SHSize" type="UInt16"/>
-//    <primitive name="SHCount" type="UInt16"/>
-//    <primitive name="SHStringIndex" type="UInt16"/>
-//</struct>
     return elf32;
 }
-
-var q = init() //just to start debugger, otherwise it would just check for syntax errors

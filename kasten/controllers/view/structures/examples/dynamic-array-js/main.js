@@ -10,7 +10,7 @@ function init() {
         len: uint8(),
         arrayType : enumeration("TypeEnum", uint8(), typeEnumValues),
         // length of this array is always equal to min(len.value, 100)
-        dynArray : array(uint8(), 10).setUpdate(updateLength),
+        dynArray : array(uint8(), arrayLength),
 
         //this array changes type depending on the value of arrayType
         typeChangingArray : array(char(), 10).setUpdate(updateType),
@@ -18,12 +18,12 @@ function init() {
     return object;
 }
 
-function updateLength(mainStruct) {
+function arrayLength(mainStruct) {
     //set the array length to the correct length (no more than 100)
     var newLen = mainStruct.len.value;
     if (newLen > 100)
         newLen = 100;
-    this.length = newLen;
+    return newLen;
 }
 
 function updateType(mainStruct) {

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="../../structuredefs.xsd">
-  <include file="../test_2/test_2.osd" />
+<data>
   <struct name="test">
     <array name="signature" length="4">
       <primitive type="Int8" />
