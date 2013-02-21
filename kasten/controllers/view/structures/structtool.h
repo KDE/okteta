@@ -85,7 +85,8 @@ Q_SIGNALS:
     void dataCleared();
     void byteOrderChanged();
     void cursorIndexChanged();
-    void byteArrayModelChanged(bool modelIsValid);
+    KDE_DEPRECATED void byteArrayModelChanged(bool modelIsValid); //TODO remove this one once BC is broken
+    void byteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
     /** items are inserted before @p startIndex */
     void childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
     /** items are inserted before @p startIndex */

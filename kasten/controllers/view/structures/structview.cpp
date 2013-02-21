@@ -98,19 +98,17 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mValidateButton->setToolTip(validationToolTip);
     mValidateButton->setEnabled(false); //no point validating without file open
     connect(mValidateButton, SIGNAL(clicked()), mTool, SLOT(validateAllStructures()));
-    connect(mTool, SIGNAL(byteArrayModelChanged(bool)), mValidateButton,
-            SLOT(setEnabled(bool))); //disable validate button if model is invalid
+    connect(mTool, SIGNAL(byteArrayModelChanged(Okteta::AbstractByteArrayModel*)),
+                this, SLOT(onByteArrayModelChanged(Okteta::AbstractByteArrayModel*)));
     //TODO also disable the button if the structure has no validatable members
     settingsLayout->addWidget(mValidateButton);
 
     mLockStructureButton = new KPushButton(this);
     mLockStructureButton->setCheckable(true);
-    setLockButtonStated(false);
+    setLockButtonState(false);
     mLockStructureButton->setEnabled(false); //won't work at beginning
-    connect(mLockStructureButton, SIGNAL(toggled(bool)), this,
-            SLOT(lockCurrentStructure(bool)));
-    connect(mTool, SIGNAL(byteArrayModelChanged(bool)), mLockStructureButton,
-            SLOT(setEnabled(bool))); //disable lock button if model is invalid
+    connect(mLockStructureButton, SIGNAL(toggled(bool)), this, SLOT(lockButtonToggled()));
+
     settingsLayout->addWidget(mLockStructureButton);
 
     settingsLayout->addStretch(); //stretch before the settings button
@@ -184,8 +182,7 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
     {
         if (event->type() == QEvent::FocusIn)
         {
-            const QModelIndex current =
-                    mStructTreeView->selectionModel()->currentIndex();
+            const QModelIndex current = mStructTreeView->selectionModel()->currentIndex();
 
             if (current.isValid())
                 mTool->mark(current);
@@ -193,12 +190,8 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
                 mTool->unmark();
 
             //set state of lock button
-            setLockButtonStated(mTool->isStructureLocked(current));
-            if (mTool->canStructureBeLocked(current))
-                mLockStructureButton->setEnabled(true);
-            else
-                //can't lock, so just disable button
-                mLockStructureButton->setEnabled(false);
+            setLockButtonState(mTool->isStructureLocked(current));
+            mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
         }
         else if (event->type() == QEvent::FocusOut)
         {
@@ -228,14 +221,14 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
     return QWidget::eventFilter(object, event);
 }
 
-void StructView::onCurrentRowChanged(const QModelIndex& current,
-        const QModelIndex& previous)
+void StructView::onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous)
 {
     Q_UNUSED( previous )
     if (current.isValid() && mTool->byteArrayModel())
     {
         mTool->mark(current);
         mLockStructureButton->setEnabled(true);
+        setLockButtonState(mTool->isStructureLocked(current));
     }
     else
         mTool->unmark();
@@ -245,31 +238,27 @@ StructView::~StructView()
 {
 }
 
-void StructView::lockCurrentStructure(bool lock)
+void StructView::lockButtonToggled()
 {
-    setLockButtonStated(lock);
+    setLockButtonState(mLockStructureButton->isChecked());
     const QModelIndex current = mStructTreeView->selectionModel()->currentIndex();
     if (!current.isValid())
     {
-        kWarning() << "invalid index " << current << " -> returning";
+        kWarning() << "it should not be possible to toggle this button when current index is invalid!";
         return;
     }
 
-    if (lock)
-    {
+    if (mLockStructureButton->isChecked())
         mTool->lockStructure(current);
-    }
     else
-    {
         mTool->unlockStructure(current);
-    }
 }
 
-void StructView::setLockButtonStated(bool structureLocked)
+void StructView::setLockButtonState(bool structureLocked)
 {
     if (structureLocked)
     {
-        mLockStructureButton->setIcon(KIcon(QLatin1String("object-unlocked")));
+        mLockStructureButton->setIcon(KIcon(QLatin1String("object-locked")));
         mLockStructureButton->setText(i18nc("@action:pushbutton"
                         " unlock the starting offset of the current structure", "Unlock"));
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
@@ -278,12 +267,13 @@ void StructView::setLockButtonStated(bool structureLocked)
     }
     else
     {
-        mLockStructureButton->setIcon(KIcon(QLatin1String("object-locked")));
+        mLockStructureButton->setIcon(KIcon(QLatin1String("object-unlocked")));
         mLockStructureButton->setText(i18nc("@action:pushbutton"
                         " unlock the starting offset of the current structure", "Lock"));
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
                         "Lock selected structure to current offset."));
     }
+    mLockStructureButton->setChecked(structureLocked);
 }
 
 void StructView::openScriptConsole()
@@ -291,6 +281,15 @@ void StructView::openScriptConsole()
     KDialog* dialog = new KDialog(this);
     dialog->setMainWidget(new ScriptLoggerView(mTool->allData()));
     dialog->show();
+}
+
+void StructView::onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model)
+{
+    const bool validModel = model != 0;
+    QModelIndex current = mStructTreeView->currentIndex();
+    mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
+    setLockButtonState(mTool->isStructureLocked(current));
+    mValidateButton->setEnabled(validModel && current.isValid());
 }
 
 }

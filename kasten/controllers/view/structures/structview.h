@@ -27,6 +27,10 @@
 #include "structviewitemdelegate.h"
 #include <config-structtool.h>
 
+namespace Okteta {
+class AbstractByteArrayModel;
+}
+
 class KComboBox;
 class QTreeView;
 class KPushButton;
@@ -69,8 +73,9 @@ protected Q_SLOTS:
     void openScriptConsole();
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCursorIndexChange();
-    void lockCurrentStructure(bool lock);
-    void setLockButtonStated(bool structureLocked);
+    void lockButtonToggled();
+    void setLockButtonState(bool structureLocked);
+    void onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
 };
 
 inline StructTool* StructView::tool() const
