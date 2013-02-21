@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="../../structuredefs.xsd">
+<data>
   <struct name="bitfields">
     <bitfield name="flag1" type="bool" width="1"/>
     <bitfield name="flag2" type="bool" width="1"/>
     <bitfield name="flag3" type="bool" width="1"/>
     <bitfield name="longerValue" type="unsigned" width="17"/>
     <!-- now there should be padding -->
-    <primitive type="Char" name="charAfterPadding"/>
+    <primitive type="char" name="charAfterPadding"/>
     <bitfield name="unsignedVal" type="unsigned" width="10"/>
     <bitfield name="unsignedVal2" type="unsigned" width="5"/>
     <!-- now there should be padding -->
-    <primitive type="Char" name="charAfterPadding2"/>
+    <primitive type="char" name="charAfterPadding2"/>
     <bitfield name="signedVal" type="signed" width="4"/>
     <bitfield name="signedVal2" type="signed" width="4"/>
     <!-- no padding needed -->
-    <primitive type="Char" name="charAfterNoPadding"/>
+    <primitive type="char" name="charAfterNoPadding"/>
   </struct>
 </data>

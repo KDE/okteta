@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="../../structuredefs.xsd">
+<data>
   <array name="arrayArray" length="4">
     <array name="subArray" length="4">
       <struct name="val">
-        <primitive name="a" type="UInt8" />
+        <primitive name="a" type="uint8" />
         <array name="b" length="6">
-          <primitive name="b" type="Char" />
+          <primitive name="b" type="char" />
         </array>
       </struct>
     </array>
   </array>
-  <primitive name="versionNumber" type="Double" />
+  <primitive name="versionNumber" type="double" />
 </data>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="../../structuredefs.xsd">
+<data>
   <enumDef name="numbers" type="UInt8">
     <entry name="ONE" value="1" />
     <entry name="TWO" value="2" />

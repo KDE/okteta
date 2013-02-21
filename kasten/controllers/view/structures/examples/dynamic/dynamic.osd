@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="../../structuredefs.xsd">
+<data>
   <struct name="dynTest">
     <primitive name="length" type="UInt8"/>
     <array name="signature" length="length">
+      <primitive name="val" type="Char" />
+    </array>
+    <!-- exactly the same, just explictly specify the function -->
+    <!-- above the function is created dynamically when loading -->
+    <array name="signature2" length="function() { return this.parent.length.value; }">
       <primitive name="val" type="Char" />
     </array>
   </struct>
