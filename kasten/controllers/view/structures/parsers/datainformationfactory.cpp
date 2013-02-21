@@ -148,7 +148,6 @@ T* newStructOrUnion(const StructOrUnionParsedData& supd)
 QString generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
         QString currentString, const ParserInfo& info)
 {
-    qDebug() << "currentString = " << currentString;
     if (!current) //reached top
         return QString();
     for (int i = current->childCount() - 1; i >= 0; --i)
@@ -164,7 +163,6 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
                     + elemName + QLatin1String(".value; }");
             info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
                     << ", resulting function is: " << function;
-            qDebug() << "Found it, currentString = " << currentString << " func is: " << function;
             return function;
         }
         else if (child->childCount() > 0)
