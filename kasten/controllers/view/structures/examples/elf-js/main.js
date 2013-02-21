@@ -157,5 +157,6 @@ function init() {
         SHCount : uint16(),
         SHStringIndex : uint16(),
     });
+    elf32.defaultLockOffset = 0x0;
     return elf32;
 }

@@ -81,7 +81,7 @@
 		<entry value="97" name="ARM" />
 		<entry value="255" name="Standalone (embedded) application" />
 	</enumDef>
-	<struct name="Elf32_Ehdr">
+	<struct name="Elf32_Ehdr" defaultLockOffset="0x0">
 		<struct name="e_ident">
 			<array name="magic" length="4">
 				<primitive name="magic" type="Char" />
