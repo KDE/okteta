@@ -172,10 +172,8 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
         return false;
     Q_CHECK_PTR(item);
 
-    Okteta::Address structureStart = startAddress(item);
     TopLevelDataInformation* topLevel = item->topLevelDataInformation();
-    if (topLevel->isLockedFor(d->mByteArrayModel))
-        structureStart = topLevel->lockPositionFor(d->mByteArrayModel);
+    const Okteta::Address structureStart = startAddress(topLevel);
     d->mWritingData = true;
     bool ret = false;
     BitCount64 position = item->positionInFile(structureStart);
@@ -234,7 +232,7 @@ int StructTool::childCount() const
 }
 
 DataInformation* StructTool::childAt(int idx) const
-        {
+{
     if (idx >= d->mData.size() || idx < 0)
     {
         return 0;
@@ -320,41 +318,30 @@ void StructTool::setSelectedStructuresInView()
 
 }
 
-Okteta::Address StructTool::startAddress(const DataInformation* data)
+Okteta::Address StructTool::startAddress(const TopLevelDataInformation* data)
 {
-    if (data->topLevelDataInformation()->isLockedFor(d->mByteArrayModel))
-    {
-        return data->topLevelDataInformation()->lockPositionFor(d->mByteArrayModel);
-    }
+    if (data->isLockedFor(d->mByteArrayModel))
+        return data->lockPositionFor(d->mByteArrayModel);
     else
-    {
-        //not locked
         return d->mCursorIndex;
-    }
 }
 
 void StructTool::mark(const QModelIndex& idx)
 {
-    if (!d->mByteArrayModel || !d->mByteArrayView)
-    {
-        kDebug() << "model or view == NULL";
+    if (!d->mByteArrayModel || !d->mByteArrayView || !idx.isValid())
         return;
-    }
     const DataInformation* data = static_cast<const DataInformation*>(idx.internalPointer());
     if (!data)
         return;
     Q_CHECK_PTR(data->topLevelDataInformation());
-    const Okteta::Address baseAddress = startAddress(data);
+    const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
     //FIXME support marking of partial bytes
     int length = data->size() / 8;
     const int maxLen = d->mByteArrayModel->size() - baseAddress;
     length = qMin(length, maxLen);
     const Okteta::Address startOffset = data->positionInFile(baseAddress) / 8;
-    const Okteta::AddressRange markingRange =
-            Okteta::AddressRange::fromWidth(startOffset, length);
+    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(startOffset, length);
     d->mByteArrayView->setMarking(markingRange, true);
-    //    kDebug()
-    //        << "marking range " << markingRange.start() << " to  " << markingRange.end();
 }
 
 void StructTool::unmark(/*const QModelIndex& idx*/)

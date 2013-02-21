@@ -105,7 +105,7 @@ void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint 
 int StructTreeModel::columnCount(const QModelIndex& parent) const
 {
     Q_UNUSED(parent)
-    return mTool->columnCount();
+    return DataInformation::COLUMN_COUNT;
 }
 
 QVariant StructTreeModel::data(const QModelIndex& index, int role) const
