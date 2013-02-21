@@ -65,7 +65,7 @@ public:
     QSysInfo::Endian byteOrder() const;
     void setByteOrder(QSysInfo::Endian order);
     KDE_DEPRECATED void setByteOrder(StructViewPreferences::EnumByteOrder::type order);
-    int columnCount() const;
+    KDE_DEPRECATED int columnCount() const;
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
     StructuresManager* manager() const;
@@ -113,7 +113,7 @@ protected Q_SLOTS:
     void onChildItemDataChanged();
 
 private:
-    Okteta::Address startAddress(const DataInformation* data);
+    Okteta::Address startAddress(const TopLevelDataInformation* data);
 
 protected:
     QScopedPointer<StructToolPrivate> d;
