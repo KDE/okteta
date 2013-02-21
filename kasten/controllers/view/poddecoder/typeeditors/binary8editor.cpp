@@ -39,5 +39,3 @@ Binary8 Binary8Editor::data() const
 }
 
 Binary8Editor::~Binary8Editor() {}
-
-#include "moc_binary8editor.cpp"

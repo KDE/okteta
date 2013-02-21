@@ -489,5 +489,3 @@ void PODDelegate::onReadOnlyChanged( bool isReadOnly ) const
 PODDelegate::~PODDelegate() {}
 
 }
-
-#include "moc_poddelegate.cpp"

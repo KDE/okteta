@@ -191,5 +191,3 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
 StructuresManagerView::~StructuresManagerView()
 {
 }
-
-#include "moc_structuresmanagerview.cpp"

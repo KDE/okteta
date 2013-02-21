@@ -53,5 +53,3 @@ Float32 Float32Editor::data() const
 }
 
 Float32Editor::~Float32Editor() {}
-
-#include "moc_float32editor.cpp"

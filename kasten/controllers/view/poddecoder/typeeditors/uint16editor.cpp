@@ -45,5 +45,3 @@ UInt16 UInt16Editor::data() const
 }
 
 UInt16Editor::~UInt16Editor() {}
-
-#include "moc_uint16editor.cpp"

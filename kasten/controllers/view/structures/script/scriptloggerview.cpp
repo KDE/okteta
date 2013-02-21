@@ -65,5 +65,3 @@ void ScriptLoggerView::updateModel(int index)
     mView->setModel(mList.at(index)->logger());
     mView->resizeRowsToContents();
 }
-
-#include "moc_scriptloggerview.cpp"

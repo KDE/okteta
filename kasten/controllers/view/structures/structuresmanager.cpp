@@ -81,5 +81,3 @@ StructureDefinitionFile* StructuresManager::definition(QString& pluginName)
 }
 
 }
-
-#include "moc_structuresmanager.cpp"

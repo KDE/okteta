@@ -90,5 +90,3 @@ Char8 Char8Editor::data() const
 }
 
 Char8Editor::~Char8Editor() {}
-
-#include "moc_char8editor.cpp"

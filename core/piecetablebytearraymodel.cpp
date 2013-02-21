@@ -87,7 +87,7 @@ Size PieceTableByteArrayModel::fill( Byte fillByte, Address offset, Size fillLen
 // {
 //     return d->indexOf( searchString, length, from );
 // }
-// 
+//
 // int PieceTableByteArrayModel::lastIndexOf( const char *searchString, int length, int from ) const
 // {
 //     return d->lastIndexOf( searchString, length, from );

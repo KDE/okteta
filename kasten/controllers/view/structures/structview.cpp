@@ -294,5 +294,3 @@ void StructView::openScriptConsole()
 }
 
 }
-
-#include "moc_structview.cpp"

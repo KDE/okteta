@@ -46,5 +46,3 @@ SInt16 SInt16Editor::data() const
 }
 
 SInt16Editor::~SInt16Editor() {}
-
-#include "moc_sint16editor.cpp"

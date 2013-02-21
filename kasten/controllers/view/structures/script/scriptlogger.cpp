@@ -143,5 +143,3 @@ QStringList ScriptLogger::messages(LogLevel minLevel) const
     }
     return ret;
 }
-
-#include "moc_scriptlogger.cpp"

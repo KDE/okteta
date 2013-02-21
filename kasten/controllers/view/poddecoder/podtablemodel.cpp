@@ -207,5 +207,3 @@ bool PODTableModel::setData( const QModelIndex& index, const QVariant& data, int
 PODTableModel::~PODTableModel() {}
 
 }
-
-#include "moc_podtablemodel.cpp"

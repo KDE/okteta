@@ -395,9 +395,11 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
 #to prevent compiling these object files twice with exactly the same compile flags
 #TODO remove once CMake >= 2.8.9 is required for building KDE
 if ( CMAKE_VERSION VERSION_GREATER 2.8.8)
+    #OBJECT libraries seem buggy with regard to automoc, have to call it manually
+    automoc4( poddecoder_objs PODDECODERCONTROLLER_SRCS )
+    automoc4( structview_objs STRUCTVIEW_SRCS )
     add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
     add_library( structview_objs OBJECT ${STRUCTVIEW_SRCS} )
-    set_target_properties(poddecoder_objs structview_objs PROPERTIES AUTOMOC ON)
     set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
     set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
     set( STRUCTVIEW_OBJS $<TARGET_OBJECTS:structview_objs>)
@@ -439,28 +441,26 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
 #structures view unit tests
 if ( KDE4_BUILD_TESTS )
 #static lib for unit tests (reuse the OBJECT library)
-kde4_add_library ( structures-static STATIC $<TARGET_OBJECTS:structview_objs> $<TARGET_OBJECTS:poddecoder_objs> )
+kde4_add_library ( structures-static STATIC ${PODDECODER_OBJS} ${STRUCTVIEW_OBJS} )
 target_link_libraries ( structures-static
-  ${oktetakastengui_LIB}
-  ${oktetakastencore_LIB}
-  ${KASTENGUI_LIBS}
-  ${KASTENCORE_LIBS}
-  ${oktetagui_LIB}
-  ${oktetacore_LIB}
-  ${KDE4_KIO_LIBS}
+  ${QT_QTCORE_LIBRARY}
+  ${QT_QTSCRIPT_LIBRARY}
+  ${QT_QTXML_LIBRARY}
+  ${QT_QTTEST_LIBRARY}
   ${KDE4_KDEUI_LIBS}
   ${KDE4_KNEWSTUFF3_LIBS}
   ${KDE4_KCMUTILS_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTSCRIPTTOOLS_LIBRARY}
+  ${oktetakastencore_LIB}
+  ${oktetakastengui_LIB}
+  ${oktetacore_LIB}
+  ${KASTENCORE_LIBS}
+  #${KASTENGUI_LIBS}
 )
-set_target_properties( structures-static PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT= )
 
 macro(structures_unit_test _testtarget _testname)
     #message("ARGC='${ARGC}' ARGV='${ARGV}' ARGN='${ARGN}'")
     kde4_add_unit_test(${_testtarget} TESTNAME ${_testname} ${ARGN})
-    target_link_libraries(${_testtarget} structures-static ${QT_QTTEST_LIBRARY})
-    set_target_properties(${_testtarget} PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
+    target_link_libraries(${_testtarget} LINK_PRIVATE structures-static )
 endmacro()
 
 structures_unit_test( primitivearraytest "structures-primitive-array" test/primitivearraytest.cpp )
