@@ -23,6 +23,7 @@
 #include "scriptfileparser.h"
 
 #include "scriptvalueconverter.h"
+#include "parserutils.h"
 #include "../datatypes/topleveldatainformation.h"
 #include "../datatypes/dummydatainformation.h"
 #include "../script/scriptengineinitializer.h"
@@ -51,20 +52,33 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
     QScriptEngine* engine = ScriptEngineInitializer::newEngine();
     ScriptLogger* logger = new ScriptLogger();
 
-    DataInformation* dataInf = convert(logger, engine);
-    Q_CHECK_PTR(dataInf);
+    QScriptValue value = loadScriptValue(logger, engine);
+    DataInformation* dataInf = ScriptValueConverter::convert(value, mPluginName, logger);
+    if (!dataInf)
+        dataInf = new DummyDataInformation(0, mPluginName);
     const QFileInfo fileInfo(mAbsolutePath);
-    ret.append(new TopLevelDataInformation(dataInf, logger, engine, fileInfo));
+    TopLevelDataInformation* top = new TopLevelDataInformation(dataInf, logger, engine, fileInfo);
+    //handle default lock offset
+    QScriptValue lockOffset = value.property(ParserStrings::PROPERTY_DEFAULT_LOCK_OFFSET);
+    if (lockOffset.isValid())
+    {
+        ParsedNumber<quint64> offset = ParserUtils::uint64FromScriptValue(lockOffset);
+        if (!offset.isValid)
+            dataInf->logError() << "Default lock offset is not a valid number:" << offset.string;
+        else
+            top->setDefaultLockOffset(offset.value);
+    }
+    ret.append(top);
     return ret;
 }
 
-DataInformation* ScriptFileParser::convert(ScriptLogger* logger, QScriptEngine* engine) const
+QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngine* engine) const
 {
     QFile scriptFile(mAbsolutePath);
     if (!scriptFile.open(QIODevice::ReadOnly))
     {
         logger->error() << "Could not open file " << mAbsolutePath;
-        return new DummyDataInformation(0, mPluginName);
+        return QScriptValue();
     }
 
     QTextStream stream(&scriptFile);
@@ -77,7 +91,7 @@ DataInformation* ScriptFileParser::convert(ScriptLogger* logger, QScriptEngine* 
     if (!initMethod.isFunction())
     {
         logger->error() << "Script has no 'init' function! Cannot evaluate script!";
-        return new DummyDataInformation(0, mPluginName);
+        return QScriptValue();
     }
 
     QScriptValue thisObj = engine->newObject();
@@ -86,11 +100,7 @@ DataInformation* ScriptFileParser::convert(ScriptLogger* logger, QScriptEngine* 
     if (result.isError())
     {
         logger->error() << "Exception occurred while calling init()";
-        return new DummyDataInformation(0, mPluginName);
+        return QScriptValue();
     }
-
-    DataInformation* dataInf = ScriptValueConverter::convert(result, mPluginName, logger);
-    if (!dataInf)
-        dataInf = new DummyDataInformation(0, mPluginName);
-    return dataInf;
+    return result;
 }

@@ -25,6 +25,8 @@
 
 #include "abstractstructureparser.h"
 
+#include <QScriptValue>
+
 class ScriptLogger;
 class QScriptEngine;
 class DataInformation;
@@ -40,7 +42,7 @@ public:
     virtual QVector<TopLevelDataInformation*> parseStructures() const;
 
 private:
-    DataInformation* convert(ScriptLogger* logger, QScriptEngine* engine) const;
+    QScriptValue loadScriptValue(ScriptLogger* logger, QScriptEngine* engine) const;
 };
 
 #endif /* SCRIPTFILEPARSER_H_ */

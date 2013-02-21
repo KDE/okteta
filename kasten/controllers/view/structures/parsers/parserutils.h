@@ -108,7 +108,8 @@ namespace ParserStrings {
     const QString TYPE_ALTERNATIVES = QLatin1String("alternatives");
     const QString TYPE_GROUP= QLatin1String("group");
 
-
+    //lock offset
+    const QString PROPERTY_DEFAULT_LOCK_OFFSET = QLatin1String("defaultLockOffset");
     //all types
     const QString PROPERTY_NAME = QLatin1String("name");
     const QString PROPERTY_BYTEORDER = QLatin1String("byteOrder");

@@ -184,6 +184,18 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
                     fileInfo.absoluteFilePath() + QLatin1String("_element") + QString::number(count));
         }
         TopLevelDataInformation* topData = new TopLevelDataInformation(data, logger, eng, fileInfo);
+        QString lockOffsetStr = readProperty(elem, PROPERTY_DEFAULT_LOCK_OFFSET);
+        if (!lockOffsetStr.isEmpty())
+        {
+            ParsedNumber<quint64> offset = ParserUtils::uint64FromString(lockOffsetStr);
+            if (!offset.isValid)
+                data->logError() << "Default lock offset is not a valid number:" << offset.string;
+            else
+            {
+                data->logInfo() << "Default lock offset is " << offset.string;
+                topData->setDefaultLockOffset(offset.value);
+            }
+        }
         structures.append(topData);
         count++;
     }
