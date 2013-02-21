@@ -570,14 +570,14 @@ install( FILES ${okteta_kastencontrollers_LIB_HDRS}
 install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 set( elf_structure_FILES
-  view/structures/examples/elf/elf.desktop
-  view/structures/examples/elf/elf.osd
+  view/structures/examples/elf/metadata.desktop
+  view/structures/examples/elf/main.osd
 )
 install( FILES ${elf_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/elf )
 
 set( png_structure_FILES
-  view/structures/examples/png/png.desktop
-  view/structures/examples/png/png.osd
+  view/structures/examples/png/metadata.desktop
+  view/structures/examples/png/main.osd
 )
 install( FILES ${png_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/png )
 install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
