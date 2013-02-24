@@ -22,7 +22,7 @@
 #ifndef TOPLEVELDATAINFORMATION_H_
 #define TOPLEVELDATAINFORMATION_H_
 
-#include <QMap>
+#include <QHash>
 #include <QFileInfo>
 #include <QSharedPointer>
 #include <QQueue>
@@ -83,6 +83,8 @@ public:
     void unlockPosition(const Okteta::AbstractByteArrayModel* model);
     bool isLockedFor(const Okteta::AbstractByteArrayModel* model) const;
     quint64 lockPositionFor(const Okteta::AbstractByteArrayModel* model) const;
+    bool isLockedByDefault() const;
+    void setDefaultLockOffset(Okteta::Address offset);
     int indexOf(const DataInformation* const data) const;
     int index() const;
     void setIndex(int newIndex);
@@ -102,8 +104,9 @@ private:
 
 public Q_SLOTS:
     void resetValidationState();
+    void newModelActivated(Okteta::AbstractByteArrayModel* model);
+private Q_SLOTS:
     void removeByteArrayModelFromList(QObject* model);
-
 Q_SIGNALS:
     void dataChanged();
     /** items are inserted before @p startIndex */
@@ -122,13 +125,13 @@ private:
     QFileInfo mStructureFile;
     /** Save the position this structure is locked to for each ByteArrayModel
      * QObject::destroyed() has to be connected to slot removeByteArrayModel()
-     *  so that no dangling pointers remain
-     *  Keys are the models and values are a pointer so that NULL can indicate that it is not locked.
+     * so that no dangling pointers remain
      */
-    QMap<const Okteta::AbstractByteArrayModel*, quint64> mLockedPositions;
+    QHash<const Okteta::AbstractByteArrayModel*, quint64> mLockedPositions;
     int mIndex;
     bool mValid :1;
     bool mChildDataChanged :1;
+    quint64 mDefaultLockOffset;
     QQueue<PointerDataInformation*> mDelayedRead;
 };
 

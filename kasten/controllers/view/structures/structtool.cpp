@@ -123,10 +123,8 @@ void StructTool::setTargetModel(AbstractModel* model)
         d->mByteArrayModel->disconnect(this);
 
     d->mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
-    ByteArrayDocument* document =
-            d->mByteArrayView ?
-                                qobject_cast<ByteArrayDocument*>(d->mByteArrayView->baseModel()) :
-                                0;
+    ByteArrayDocument* document = d->mByteArrayView ?
+            qobject_cast<ByteArrayDocument*>(d->mByteArrayView->baseModel()) : 0;
     d->mByteArrayModel = document ? document->content() : 0;
 
     if (d->mByteArrayModel && d->mByteArrayView)
@@ -134,11 +132,10 @@ void StructTool::setTargetModel(AbstractModel* model)
         d->mCursorIndex = d->mByteArrayView->cursorPosition();
         connect(d->mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
                 SLOT(onCursorPositionChange(Okteta::Address)));
-        connect(d->mByteArrayModel,
-                SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
+        connect(d->mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
                 SLOT(onContentsChange(Okteta::ArrayChangeMetricsList)));
     }
-    emit byteArrayModelChanged(d->mByteArrayModel != 0);
+    emit byteArrayModelChanged(d->mByteArrayModel);
     updateData(Okteta::ArrayChangeMetricsList());
 }
 
@@ -268,7 +265,12 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
                 this, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)));
         connect(child, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)),
                 this, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)));
+        connect(this, SIGNAL(byteArrayModelChanged(Okteta::AbstractByteArrayModel*)),
+                child, SLOT(newModelActivated(Okteta::AbstractByteArrayModel*)));
         d->mData.append(QSharedPointer<TopLevelDataInformation>(child));
+        //ensure that locking gets set up properly
+        if (d->mByteArrayModel)
+            child->newModelActivated(d->mByteArrayModel);
     }
     else
     {
@@ -404,10 +406,11 @@ void StructTool::unlockStructure(const QModelIndex& idx)
     top->unlockPosition(d->mByteArrayModel);
     //now read from the current position:
     top->read(d->mByteArrayModel, d->mCursorIndex, Okteta::ArrayChangeMetricsList(), true);
+    mark(idx); //we have to change the marked range, otherwise it stays at the previous locked offset
 }
 
 bool StructTool::isStructureLocked(const QModelIndex& idx) const
-        {
+{
     if (!d->mByteArrayModel) //no point without ByteArrayModel
         return false;
     if (!idx.isValid() || !idx.internalPointer())
@@ -421,17 +424,9 @@ bool StructTool::isStructureLocked(const QModelIndex& idx) const
 }
 
 bool StructTool::canStructureBeLocked(const QModelIndex& idx) const
-        {
-    if (!d->mByteArrayModel) //no point without ByteArrayModel
-        return false;
-    if (!idx.isValid() || !idx.internalPointer())
-        return false;
-    DataInformation* data = static_cast<DataInformation*>(idx.internalPointer());
-    TopLevelDataInformation* top = data->topLevelDataInformation();
-    Q_ASSERT(top);
-    if (top)
-        return true;
-    return false;
+{
+    //we need a valid model and a valid index
+    return d->mByteArrayModel && idx.isValid() && idx.internalPointer();
 }
 
 void StructTool::onChildItemDataChanged()
