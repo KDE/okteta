@@ -52,7 +52,7 @@ ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate( const QString&
   : lockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName)),
     viewProfileId( id )
 {
-    if( not fileName.isEmpty() )
+    if( !fileName.isEmpty() )
         lockFile.lock( KLockFile::NoBlockFlag | KLockFile::ForceFlag );
 }
 
