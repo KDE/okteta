@@ -31,19 +31,20 @@
 #include "primitivefactory.h"
 
 #include <abstractbytearraymodel.h>
-//QtScript
+
 #include <QScriptEngine>
 
 #include <KDebug>
 
 #include <limits>
 
-static const quint64 NOT_LOCKED = std::numeric_limits<quint64>::max();
+const quint64 TopLevelDataInformation::INVALID_OFFSET = std::numeric_limits<quint64>::max();
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLogger* logger,
         QScriptEngine* engine, const QFileInfo& structureFile)
         : QObject(0), mData(data), mLogger(logger), mStructureFile(structureFile),
-                mIndex(-1), mValid(!data->isDummy()), mChildDataChanged(false), mDefaultLockOffset(NOT_LOCKED)
+          mIndex(-1), mValid(!data->isDummy()), mChildDataChanged(false),
+          mDefaultLockOffset(INVALID_OFFSET), mLastReadOffset(INVALID_OFFSET), mLastModel(0)
 {
     Q_CHECK_PTR(mData);
     mData->setParent(this);
@@ -81,17 +82,10 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
         const Okteta::ArrayChangeMetricsList& changesList, bool forceRead)
 {
     mChildDataChanged = false;
-    //first of all check if start offset is locked
-    if (isLockedFor(input))
-    {
-        //use the saved offset
-        address = lockPositionFor(input);
-        //we read from the locked position, so now check whether it is necessary to update
-        const bool updateNeccessary = forceRead || isReadingNecessary(changesList, address);
+    const bool updateNeccessary = forceRead || isReadingNecessary(input, address, changesList);
+    if (!updateNeccessary)
+        return;
 
-        if (!updateNeccessary)
-            return;
-    }
     quint64 remainingBits = (input->size() - address) * 8;
     quint8 bitOffset = 0;
     mData->beginRead(); //before reading set wasAbleToRead to false
@@ -103,7 +97,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
     mData->readData(input, address, remainingBits, &bitOffset);
 
     // Read all the delayed PointerDataInformation
-    // We do this because the pointed data is indipendent from the
+    // We do this because the pointed data is independant from the
     // structure containing the pointer and so we can use fields
     // which come after the pointer itself in the structure
     while (!mDelayedRead.isEmpty())
@@ -114,16 +108,29 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
         emit dataChanged();
         mChildDataChanged = false;
     }
+    mLastModel = input;
+    mLastReadOffset = address;
 }
 
-void TopLevelDataInformation::enqueueReadData(PointerDataInformation *toRead)
+void TopLevelDataInformation::enqueueReadData(PointerDataInformation* toRead)
 {
     mDelayedRead.append(toRead);
 }
 
-bool TopLevelDataInformation::isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList,
-        Okteta::Address address)
+bool TopLevelDataInformation::isReadingNecessary(Okteta::AbstractByteArrayModel* model,
+        Okteta::Address address, const Okteta::ArrayChangeMetricsList& changesList)
 {
+    if (model != mLastModel)
+        return true; //whenever we have a new model we have to read
+
+    if (isLockedFor(model))
+        address = lockPositionFor(model);
+
+    if (address != mLastReadOffset)
+        return true; //address as changed, we have to read again
+
+    //address has not changed, check whether the changes affect us
+
     //TODO always return true if structure contains pointers
     if (changesList.isEmpty())
         return false; //no changes
@@ -133,7 +140,7 @@ bool TopLevelDataInformation::isReadingNecessary(const Okteta::ArrayChangeMetric
     {
         const Okteta::ArrayChangeMetrics& change = changesList.at(i);
         //this is valid for all types
-        if (change.offset() > end)
+        if (change.offset() >= end)
         {
             //insertion/deletion/swapping is after end of structure, it doesn't interest us
             continue;
@@ -142,7 +149,7 @@ bool TopLevelDataInformation::isReadingNecessary(const Okteta::ArrayChangeMetric
         else if (change.type() == Okteta::ArrayChangeMetrics::Replacement)
         {
             //handle it for replacements
-            if (change.lengthChange() == 0 && change.offset() + change.removeLength() < address) {
+            if (change.lengthChange() == 0 && change.offset() + change.removeLength() <= address) {
                 //no length change and it doesn't affect structure since it is before
                 //could use insertLength() instead of removeLength() since they are the same
                 continue;
@@ -176,23 +183,23 @@ bool TopLevelDataInformation::isReadingNecessary(const Okteta::ArrayChangeMetric
 
 void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const Okteta::AbstractByteArrayModel* model)
 {
-    if (offset == NOT_LOCKED)
+    if (offset == INVALID_OFFSET)
     {
         //we use quint64 max to indicate not locked -> error out
         mLogger->error() << "Attempting to lock at uint64_max, this is forbidden.";
         return;
     }
     mLockedPositions.insert(model, quint64(offset));
-    kDebug() << mData->name() << ": Locking start offset in model" << model << "to position 0x" << QString::number(offset, 16);
+    kDebug() << mData->name() << ": Locking start offset in model" << model << "to position" << hex << offset;
     //remove when deleted
     connect(model, SIGNAL(destroyed(QObject*)), this, SLOT(removeByteArrayModelFromList(QObject*)));
 }
 
 void TopLevelDataInformation::unlockPosition(const Okteta::AbstractByteArrayModel* model)
 {
-    Q_ASSERT(mLockedPositions.contains(model) && mLockedPositions.value(model) != NOT_LOCKED);
+    Q_ASSERT(mLockedPositions.contains(model) && mLockedPositions.value(model) != INVALID_OFFSET);
     kDebug() << "removing lock at position" << mLockedPositions.value(model) << ", model=" << model;
-    mLockedPositions.insert(model, NOT_LOCKED);
+    mLockedPositions.insert(model, INVALID_OFFSET);
 }
 
 void TopLevelDataInformation::removeByteArrayModelFromList(QObject* obj)
@@ -204,12 +211,12 @@ void TopLevelDataInformation::removeByteArrayModelFromList(QObject* obj)
 
 bool TopLevelDataInformation::isLockedByDefault() const
 {
-    return mDefaultLockOffset != NOT_LOCKED;
+    return mDefaultLockOffset != INVALID_OFFSET;
 }
 
 void TopLevelDataInformation::setDefaultLockOffset(Okteta::Address offset)
 {
-    if (offset == NOT_LOCKED)
+    if (offset == INVALID_OFFSET)
     {
         //we use quint64 max to indicate not locked -> error out
         mLogger->error() << "Attempting to lock by default at uint64_max, this is forbidden.";
@@ -225,7 +232,7 @@ void TopLevelDataInformation::newModelActivated(Okteta::AbstractByteArrayModel* 
     {
         //if this structure has no default lock offset, mDefaultLockOfsset will contain NOT_LOCKED
         mLockedPositions.insert(model, mDefaultLockOffset);
-        if (mDefaultLockOffset == NOT_LOCKED)
+        if (mDefaultLockOffset == INVALID_OFFSET)
             kDebug() << "new model activated:" << model << ", not locked.";
         else
             kDebug() << "new model activated:" << model << ", locked at 0x" << QString::number(mDefaultLockOffset, 16);
@@ -235,12 +242,12 @@ void TopLevelDataInformation::newModelActivated(Okteta::AbstractByteArrayModel* 
 bool TopLevelDataInformation::isLockedFor(const Okteta::AbstractByteArrayModel* model) const
 {
     Q_ASSERT(mLockedPositions.contains(model));
-    return mLockedPositions.value(model, 0) != NOT_LOCKED;
+    return mLockedPositions.value(model, 0) != INVALID_OFFSET;
 }
 
 quint64 TopLevelDataInformation::lockPositionFor(const Okteta::AbstractByteArrayModel* model) const
 {
-    Q_ASSERT(mLockedPositions.contains(model) && mLockedPositions.value(model) != NOT_LOCKED);
+    Q_ASSERT(mLockedPositions.contains(model) && mLockedPositions.value(model) != INVALID_OFFSET);
     return mLockedPositions.value(model);
 }
 
