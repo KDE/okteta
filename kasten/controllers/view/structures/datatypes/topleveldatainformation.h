@@ -60,6 +60,7 @@ public:
 
     typedef QSharedPointer<TopLevelDataInformation> Ptr;
     typedef QVector<Ptr> List;
+    static const quint64 INVALID_OFFSET;
 
 public:
     void validate();
@@ -95,12 +96,13 @@ public:
 
     virtual bool isTopLevel() const;
 
-    //only public so that DataInformation can call them
+    //only public so that DataInformation and subclasses can call them (TODO move)
     void _childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount);
     void _childCountChanged(DataInformation* sender, uint oldCount, uint newCount);
 
 private:
-    bool isReadingNecessary(const Okteta::ArrayChangeMetricsList& changesList, Okteta::Address address);
+    bool isReadingNecessary(Okteta::AbstractByteArrayModel* model, Okteta::Address address,
+                            const Okteta::ArrayChangeMetricsList& changesList);
 
 public Q_SLOTS:
     void resetValidationState();
@@ -132,7 +134,11 @@ private:
     bool mValid :1;
     bool mChildDataChanged :1;
     quint64 mDefaultLockOffset;
+    quint64 mLastReadOffset;
+    Okteta::AbstractByteArrayModel* mLastModel;
     QQueue<PointerDataInformation*> mDelayedRead;
+
+    friend class LockToOffsetTest; //needs to call isReadingNecessary()
 };
 
 inline DataInformation* TopLevelDataInformation::actualDataInformation() const
