@@ -53,7 +53,12 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
     ScriptLogger* logger = new ScriptLogger();
 
     QScriptValue value = loadScriptValue(logger, engine);
-    DataInformation* dataInf = ScriptValueConverter::convert(value, mPluginName, logger);
+    DataInformation* dataInf;
+    if (!value.isValid())
+        dataInf = new DummyDataInformation(0, mPluginName);
+    else
+        dataInf = ScriptValueConverter::convert(value, mPluginName, logger);
+
     if (!dataInf)
         dataInf = new DummyDataInformation(0, mPluginName);
     const QFileInfo fileInfo(mAbsolutePath);
@@ -85,7 +90,26 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
     QString contents = stream.readAll();
     scriptFile.close();
     engine->evaluate(contents, mAbsolutePath);
-
+    if (engine->hasUncaughtException())
+    {
+        //check if it was a syntax error:
+        QScriptSyntaxCheckResult syntaxError = QScriptEngine::checkSyntax(contents);
+        if (syntaxError.state() == QScriptSyntaxCheckResult::Error)
+        {
+            //give a detailed syntax error message
+            logger->error() << "Syntax error in script: " << syntaxError.errorMessage();
+            logger->error() << "Line number: " << syntaxError.errorLineNumber()
+                    << "Column:" << syntaxError.errorColumnNumber();
+        }
+        else
+        {
+            //just print the generic exception message
+            logger->error() << "Error evaluating script: " << engine->uncaughtException().toString();
+            logger->error() << "Line number: " << engine->uncaughtExceptionLineNumber();
+            logger->error() << "Backtrace: " << engine->uncaughtExceptionBacktrace();
+        }
+        return QScriptValue();
+    }
     QScriptValue obj = engine->globalObject();
     QScriptValue initMethod = obj.property(QLatin1String("init"));
     if (!initMethod.isFunction())
@@ -99,7 +123,7 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
     QScriptValue result = initMethod.call(thisObj, args);
     if (result.isError())
     {
-        logger->error() << "Exception occurred while calling init()";
+        logger->error() << "Exception occurred while calling init():" << result.toString();
         return QScriptValue();
     }
     return result;
