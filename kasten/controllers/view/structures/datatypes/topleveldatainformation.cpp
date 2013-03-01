@@ -126,7 +126,7 @@ bool TopLevelDataInformation::isReadingNecessary(Okteta::AbstractByteArrayModel*
     if (isLockedFor(model))
         address = lockPositionFor(model);
 
-    if (address != mLastReadOffset)
+    if (quint64(address) != mLastReadOffset)
         return true; //address as changed, we have to read again
 
     //address has not changed, check whether the changes affect us
@@ -183,7 +183,7 @@ bool TopLevelDataInformation::isReadingNecessary(Okteta::AbstractByteArrayModel*
 
 void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const Okteta::AbstractByteArrayModel* model)
 {
-    if (offset == INVALID_OFFSET)
+    if (quint64(offset) == INVALID_OFFSET)
     {
         //we use quint64 max to indicate not locked -> error out
         mLogger->error() << "Attempting to lock at uint64_max, this is forbidden.";
@@ -216,7 +216,7 @@ bool TopLevelDataInformation::isLockedByDefault() const
 
 void TopLevelDataInformation::setDefaultLockOffset(Okteta::Address offset)
 {
-    if (offset == INVALID_OFFSET)
+    if (quint64(offset) == INVALID_OFFSET)
     {
         //we use quint64 max to indicate not locked -> error out
         mLogger->error() << "Attempting to lock by default at uint64_max, this is forbidden.";
