@@ -47,6 +47,8 @@ private Q_SLOTS:
     void testByteOrder_data();
     void testName();
     void testName_data();
+    void testCustomTypeName();
+    void testCustomTypeName_data();
     void testImport();
     void testImportPathTraversal();
 private:
@@ -262,8 +264,33 @@ void JsParserTest::testName()
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
 
-    QString expectedName = QLatin1String("expectedName");
-    QCOMPARE(data->name(), expectedName);
+    QCOMPARE(data->name(), QString(QLatin1String("expectedName")));
+}
+
+void JsParserTest::testCustomTypeName_data()
+{
+    QTest::addColumn<QString>("code");
+    QTest::addColumn<Utils::DataInformationCheck*>("checkPtr");
+
+    Q_FOREACH(const JsTestData& data, allData) {
+        QString codeStr = QLatin1String("%1.set({typeName: 'myCustomType'});");
+        QTest::newRow(data.tag + "-set()")
+            << codeStr.arg(data.constructorCall) << data.check.data();
+
+        codeStr = QLatin1String("var obj = %1;obj.typeName = 'myCustomType'; obj;");
+        QTest::newRow(data.tag + "-property assignment")
+            << codeStr.arg(data.constructorCall) << data.check.data();
+    }
+}
+
+void JsParserTest::testCustomTypeName()
+{
+    DataInformation* data = 0;
+    testCommon(&data);
+    if (QTest::currentTestFailed())
+        return; //Qt doesn't use exceptions, we must manually check after each call
+
+    QCOMPARE(data->typeName(), QString(QLatin1String("myCustomType")));
 }
 
 void JsParserTest::testImport()

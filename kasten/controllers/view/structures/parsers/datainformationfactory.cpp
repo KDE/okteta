@@ -325,6 +325,10 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
         else
             data->setValidationFunc(pd.validationFunc);
     }
+    if (!pd.customTypeName.isEmpty())
+    {
+        data->setCustomTypeName(pd.customTypeName);
+    }
     return true;
 
 }

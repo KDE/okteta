@@ -72,6 +72,7 @@ protected:
     QScriptString s_datatype;
     QScriptString s_updateFunc;
     QScriptString s_validationFunc;
+    QScriptString s_customTypeName;
     /** Contains all properties of this class, classes inheriting should add their own properties to this list */
     PropertyInfoList mIterableProperties;
     QScriptValue mDefaultPrototype;

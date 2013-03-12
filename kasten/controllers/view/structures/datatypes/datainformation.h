@@ -213,6 +213,10 @@ public:
      * @return the index of @p data or -1 if not found
      */
     virtual int indexOf(const DataInformation* const data) const = 0;
+    /** Set a custom string to be used for typeName() instead of the default.
+     * @param customTypeName the new name. Pass an empty or null string to revert to default behaviour
+     */
+    void setCustomTypeName(QString customTypeName);
 protected:
     static QVariant eofReachedData(int role);
     void setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value, const char* name);
@@ -386,7 +390,9 @@ inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
 
 inline QString DataInformation::typeName() const
 {
-    //TODO support custom types
+    QVariant v = mAdditionalData.get(AdditionalData::CustomTypeName);
+    if (Q_UNLIKELY(v.isValid())) //custom type names will be used rarely
+        return v.toString();
     return typeNameImpl();
 }
 

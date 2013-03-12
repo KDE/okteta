@@ -46,6 +46,7 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     s_datatype = engine->toStringHandle(ParserStrings::PROPERTY_DATATYPE);
     s_updateFunc = engine->toStringHandle(ParserStrings::PROPERTY_UPDATE_FUNC);
     s_validationFunc = engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_FUNC);
+    s_customTypeName = engine->toStringHandle(ParserStrings::PROPERTY_CUSTOM_TYPE_NAME);
     qScriptRegisterMetaType<DataInfPtr>(engine, DefaultScriptClass::toScriptValue, DefaultScriptClass::fromScriptValue);
 
     //TODO remove, every subclass should have proto
@@ -61,6 +62,7 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     mIterableProperties.append(qMakePair(s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_datatype, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_customTypeName, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
 DefaultScriptClass::~DefaultScriptClass()
@@ -102,7 +104,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     }
 
     if (name == s_byteOrder || name == s_name || name == s_updateFunc
-            || name == s_validationFunc || name == s_datatype)
+            || name == s_validationFunc || name == s_datatype || name == s_customTypeName)
     {
         return flags;
     }
@@ -169,6 +171,10 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     else if (name == s_name)
     {
         return data->name();
+    }
+    else if (name == s_customTypeName)
+    {
+        return data->typeName();
     }
     QScriptValue other = additionalProperty(data, name, id);
     if (other.isValid())
@@ -307,6 +313,13 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     else if (name == s_name)
     {
         data->setName(value.toString());
+    }
+    else if (name == s_customTypeName)
+    {
+        if (!value.isValid() || value.isNull() || value.isUndefined())
+            data->setCustomTypeName(QString()); //unset
+        else
+            data->setCustomTypeName(value.toString());
     }
     else if (name == s_wasAbleToRead || name == s_valid || name == s_validationError)
     {

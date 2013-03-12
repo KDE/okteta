@@ -97,6 +97,14 @@ void DataInformation::setValidationError(QString errorMessage)
         mAdditionalData.set(AdditionalData::ValidationError, errorMessage);
 }
 
+void DataInformation::setCustomTypeName(QString customTypeName)
+{
+    if (customTypeName.isEmpty())
+        mAdditionalData.remove(AdditionalData::CustomTypeName);
+    else
+        mAdditionalData.set(AdditionalData::CustomTypeName, customTypeName);
+}
+
 void DataInformation::resetValidationState()
 {
     mAdditionalData.remove(AdditionalData::ValidationError);

@@ -112,7 +112,8 @@ void ScriptClassesTest::initTestCase()
             << pair("byteOrder", QScriptValue::Undeletable)
             << pair("updateFunc", QScriptValue::Undeletable)
             << pair("validationFunc", QScriptValue::Undeletable)
-            << pair("datatype", QScriptValue::Undeletable);
+            << pair("datatype", QScriptValue::Undeletable)
+            << pair("typeName", QScriptValue::Undeletable);
 
     primitiveProperties << commonProperties << pair("value") << pair("char") << pair("int")
             << pair("int8") << pair("int16") << pair("int32") << pair("int64") << pair("uint")
