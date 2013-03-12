@@ -325,6 +325,16 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
         else
             data->setValidationFunc(pd.validationFunc);
     }
+    if (pd.toStringFunc.isValid())
+    {
+        if (!pd.toStringFunc.isFunction())
+        {
+            pd.error() << "To string function is not a function: " << pd.toStringFunc.toString();
+            return false;
+        }
+        else
+            data->setToStringFunction(pd.toStringFunc);
+    }
     if (!pd.customTypeName.isEmpty())
     {
         data->setCustomTypeName(pd.customTypeName);

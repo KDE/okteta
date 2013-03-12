@@ -476,6 +476,7 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
                     LoggerWithContext(info.logger, info.context()));
         cpd.updateFunc = ParserUtils::functionSafeEval(info.engine, readProperty(elem, PROPERTY_UPDATE_FUNC));
         cpd.validationFunc = ParserUtils::functionSafeEval(info.engine, readProperty(elem, PROPERTY_VALIDATION_FUNC));
+        cpd.toStringFunc = ParserUtils::functionSafeEval(info.engine, readProperty(elem, PROPERTY_TO_STRING_FUNC));
         cpd.customTypeName = readProperty(elem, PROPERTY_CUSTOM_TYPE_NAME);
         if (!DataInformationFactory::commonInitialization(data, cpd))
         {

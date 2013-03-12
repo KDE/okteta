@@ -147,6 +147,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
                     LoggerWithContext(info.logger, info.context()));
         cpd.updateFunc = value.property(PROPERTY_UPDATE_FUNC);
         cpd.validationFunc = value.property(PROPERTY_VALIDATION_FUNC);
+        cpd.toStringFunc = value.property(PROPERTY_TO_STRING_FUNC);
         cpd.customTypeName = value.property(PROPERTY_CUSTOM_TYPE_NAME).toString();
         if (!DataInformationFactory::commonInitialization(returnVal, cpd))
         {

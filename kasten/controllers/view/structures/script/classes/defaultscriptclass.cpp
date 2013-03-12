@@ -47,6 +47,7 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     s_updateFunc = engine->toStringHandle(ParserStrings::PROPERTY_UPDATE_FUNC);
     s_validationFunc = engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_FUNC);
     s_customTypeName = engine->toStringHandle(ParserStrings::PROPERTY_CUSTOM_TYPE_NAME);
+    s_asStringFunc = engine->toStringHandle(ParserStrings::PROPERTY_TO_STRING_FUNC);
     qScriptRegisterMetaType<DataInfPtr>(engine, DefaultScriptClass::toScriptValue, DefaultScriptClass::fromScriptValue);
 
     //TODO remove, every subclass should have proto
@@ -55,14 +56,15 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     //add all our properties
     mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable));
+    mIterableProperties.append(qMakePair(s_valid, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_datatype, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_customTypeName, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_asStringFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
 DefaultScriptClass::~DefaultScriptClass()
@@ -103,14 +105,14 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
         flags &= ~HandlesWriteAccess;
     }
 
-    if (name == s_byteOrder || name == s_name || name == s_updateFunc
-            || name == s_validationFunc || name == s_datatype || name == s_customTypeName)
+    if (name == s_byteOrder || name == s_name || name == s_updateFunc || name == s_validationFunc
+        || name == s_datatype || name == s_customTypeName || name == s_asStringFunc)
     {
         return flags;
     }
     else if (name == s_wasAbleToRead || name == s_parent)
     {
-        return flags &= ~HandlesWriteAccess;
+        return flags & ~HandlesWriteAccess;
     }
     else if (queryAdditionalProperty(data, name, &flags, id))
     {
@@ -175,6 +177,10 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     else if (name == s_customTypeName)
     {
         return data->typeName();
+    }
+    else if (name == s_asStringFunc)
+    {
+        return data->toStringFunction();
     }
     QScriptValue other = additionalProperty(data, name, id);
     if (other.isValid())
@@ -321,10 +327,9 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         else
             data->setCustomTypeName(value.toString());
     }
-    else if (name == s_wasAbleToRead || name == s_valid || name == s_validationError)
+    else if (name == s_asStringFunc)
     {
-        data->logError() << "Writing to property " << s_valid.toString() << "is not allowed when updating.";
-        return; //can't write
+        data->setToStringFunction(value);
     }
     else
     {

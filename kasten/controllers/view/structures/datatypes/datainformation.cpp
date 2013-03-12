@@ -97,7 +97,7 @@ void DataInformation::setValidationError(QString errorMessage)
         mAdditionalData.set(AdditionalData::ValidationError, errorMessage);
 }
 
-void DataInformation::setCustomTypeName(QString customTypeName)
+void DataInformation::setCustomTypeName(const QString& customTypeName)
 {
     if (customTypeName.isEmpty())
         mAdditionalData.remove(AdditionalData::CustomTypeName);
@@ -279,4 +279,15 @@ QScriptValue DataInformation::toScriptValue(QScriptEngine* engine, ScriptHandler
 QSysInfo::Endian DataInformation::byteOrderFromSettings() const
 {
     return Kasten2::StructViewPreferences::byteOrder();
+}
+
+QString DataInformation::customToString(const QScriptValue& func) const
+{
+    if (!wasAbleToRead())
+    {
+        logError() << "Attempting to call custom to string function, but element could not be read";
+        return valueStringImpl();
+    }
+    Q_ASSERT(func.isFunction());
+    return topLevelDataInformation()->scriptHandler()->customToString(this, func);
 }

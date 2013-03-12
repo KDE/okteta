@@ -43,7 +43,8 @@ public:
 
     /** The type of function that is being evaluated (most writing is only allowed when updating) */
     enum Mode {
-        None = 0, Validating = 1, Updating = 2, DeterminingLength = 4, TaggedUnionSelection = 8
+        None = 0, Validating = 1, Updating = 2, DeterminingLength = 4,
+        TaggedUnionSelection = 8, CustomToString = 16
     };
 
     QScopedPointer<ArrayScriptClass> mArrayClass;

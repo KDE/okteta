@@ -32,7 +32,7 @@ class AdditionalData
 {
 public:
     enum AdditionalDataType {
-        UpdateFunction, ValidationFunction, ValidationError, ArrayLengthFunction, CustomTypeName
+        UpdateFunction, ValidationFunction, ValidationError, ArrayLengthFunction, CustomTypeName, ToStringFunction
     };
     explicit AdditionalData();
     AdditionalData(const AdditionalData& data);

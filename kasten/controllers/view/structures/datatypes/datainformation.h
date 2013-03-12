@@ -216,7 +216,9 @@ public:
     /** Set a custom string to be used for typeName() instead of the default.
      * @param customTypeName the new name. Pass an empty or null string to revert to default behaviour
      */
-    void setCustomTypeName(QString customTypeName);
+    void setCustomTypeName(const QString& customTypeName);
+    QScriptValue toStringFunction() const;
+    void setToStringFunction(const QScriptValue& value);
 protected:
     static QVariant eofReachedData(int role);
     void setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value, const char* name);
@@ -228,6 +230,7 @@ private:
 private:
     void setValidationError(QString errorMessage); //only called by ScriptHandler
     QSysInfo::Endian byteOrderFromSettings() const; //so there is no need to include structviewpreferences.h here
+    QString customToString(const QScriptValue& func) const;
 protected:
     AdditionalData mAdditionalData;
     DataInformationBase* mParent;
@@ -356,6 +359,11 @@ inline QScriptValue DataInformation::validationFunc() const
     return mAdditionalData.get(AdditionalData::ValidationFunction).value<QScriptValue>();
 }
 
+inline QScriptValue DataInformation::toStringFunction() const
+{
+    return mAdditionalData.get(AdditionalData::ToStringFunction).value<QScriptValue>();
+}
+
 inline void DataInformation::setUpdateFunc(const QScriptValue& func)
 {
     setAdditionalFunction(AdditionalData::UpdateFunction, func, "update function");
@@ -364,6 +372,11 @@ inline void DataInformation::setUpdateFunc(const QScriptValue& func)
 inline void DataInformation::setValidationFunc(const QScriptValue& func)
 {
     setAdditionalFunction(AdditionalData::ValidationFunction, func, "validation function");
+}
+
+inline void DataInformation::setToStringFunction(const QScriptValue& func)
+{
+    setAdditionalFunction(AdditionalData::ToStringFunction, func, "to string function");
 }
 
 inline QString DataInformation::validationError() const
@@ -398,9 +411,10 @@ inline QString DataInformation::typeName() const
 
 inline QString DataInformation::valueString() const
 {
+    QVariant v = mAdditionalData.get(AdditionalData::ToStringFunction);
+    if (Q_UNLIKELY(v.isValid())) //custom to string functions will be used rarely
+        return customToString(v.value<QScriptValue>());
     return valueStringImpl();
 }
-
-
 
 #endif /* DATAINFORMATION_H_ */

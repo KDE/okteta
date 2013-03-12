@@ -142,6 +142,20 @@ void ScriptHandler::updateLength(ArrayDataInformation* array)
     }
 }
 
+QString ScriptHandler::customToString(const DataInformation* data, const QScriptValue& func)
+{
+    Q_ASSERT(func.isValid());
+    Q_ASSERT(func.isFunction());
+    Q_ASSERT(data->wasAbleToRead()); //this should never be called if EOF was reached
+    //it is effectively const, since nothing may be modified while mode is CustomToString
+    //const_cast is okay in this case
+    QScriptValue result = callFunction(func, const_cast<DataInformation*>(data), ScriptHandlerInfo::CustomToString);
+    if (result.isError())
+        data->logError() << "toStringFunc caused an error:" << result.toString();
+    return result.toString();
+}
+
+
 QScriptValue ScriptHandler::callFunction(QScriptValue func, DataInformation* data,
         ScriptHandlerInfo::Mode mode)
 {

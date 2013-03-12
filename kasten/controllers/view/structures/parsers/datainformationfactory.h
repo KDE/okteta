@@ -46,8 +46,9 @@ struct CommonParsedData : public ParserInfo {
         : ParserInfo(i), endianess(DataInformation::EndianessInherit) {}
     QScriptValue updateFunc;
     QScriptValue validationFunc;
-    DataInformation::DataInformationEndianess endianess;
+    QScriptValue toStringFunc;
     QString customTypeName;
+    DataInformation::DataInformationEndianess endianess;
 private:
     Q_DISABLE_COPY(CommonParsedData)
 };

@@ -22,12 +22,14 @@
 
 #include <QString>
 #include <QtTest/QTest>
+#include <QScriptEngine>
 #include "view/structures/datatypes/primitivedatatype.h"
 #include "view/structures/datatypes/datainformation.h"
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
+#include "view/structures/parsers/scriptvalueconverter.h"
 
 namespace Utils
 {
@@ -46,6 +48,17 @@ T binary(const char* val)
     quint64 result = value.toULongLong(&ok, 2);
     Q_ASSERT(ok);
     return static_cast<T>(result);
+}
+
+DataInformation* evalAndParse(QScriptEngine* eng, const QString& code, ScriptLogger* logger) {
+    QScriptValue result = eng->evaluate(code);
+    if (result.isError())
+        qWarning() << "error parsing" << code << ":" << result.toString();
+    return ScriptValueConverter::convert(result, QLatin1String("result"), logger);
+}
+
+DataInformation* evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger* logger) {
+    return evalAndParse(eng, QLatin1String(code), logger);
 }
 
 struct DataInformationCheck

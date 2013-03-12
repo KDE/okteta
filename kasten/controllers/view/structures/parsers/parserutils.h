@@ -119,6 +119,7 @@ namespace ParserStrings {
     const QString PROPERTY_ABLE_TO_READ = QLatin1String("wasAbleToRead");
     const QString PROPERTY_UPDATE_FUNC = QLatin1String("updateFunc");
     const QString PROPERTY_VALIDATION_FUNC = QLatin1String("validationFunc");
+    const QString PROPERTY_TO_STRING_FUNC = QLatin1String("toStringFunc");
     const QString PROPERTY_DATATYPE = QLatin1String("datatype");
     const QString PROPERTY_CUSTOM_TYPE_NAME = QLatin1String("typeName");
     //enum
