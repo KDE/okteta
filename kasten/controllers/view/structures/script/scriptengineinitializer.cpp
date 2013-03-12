@@ -25,12 +25,15 @@
 #include "../datatypes/primitivefactory.h"
 #include "../parsers/parserutils.h"
 #include <QStringList>
+#include <QFile>
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QScriptContext>
 #include <QScriptValueIterator>
 
 #include <KDebug>
+#include <KGlobal>
+#include <KStandardDirs>
 
 namespace ScriptEngineInitializer
 {
@@ -95,6 +98,9 @@ void addFuctionsToScriptEngine(QScriptEngine* engine)
 
     engine->globalObject().setProperty(QLatin1String("alternative"),
             engine->newFunction(Private::alternativeFunc));
+
+    engine->globalObject().setProperty(QLatin1String("importScript"),
+        engine->newFunction(Private::importScriptFunc));
 }
 
 QScriptEngine* newEngine()
@@ -320,6 +326,34 @@ QScriptValue alternativeFunc(QScriptContext* ctx, QScriptEngine* eng)
         object.setProperty(ParserStrings::PROPERTY_STRUCT_NAME, ctx->argument(2));
     return object;
 }
+
+QScriptValue importScriptFunc(QScriptContext* ctx, QScriptEngine* eng)
+{
+    if (ctx->argumentCount() != 1)
+        return ctx->throwError(QLatin1String("importScript(): expected one argument!"));
+    QString arg = ctx->argument(0).toString();
+    if (arg.contains(QLatin1String("..")))
+        return ctx->throwError(QLatin1String("importScript(): You may only access installed structure files! Path traversal detected."));
+    QString fileName = KGlobal::dirs()->findResource("data", QLatin1String("okteta/structures/") + arg);
+    if (fileName.isEmpty())
+        return ctx->throwError(QLatin1String("importScript(): could not find file to import!"));
+    QFile file(fileName);
+    if (!file.open(QFile::ReadOnly))
+        return ctx->throwError(QLatin1String("importScript(): failed to open file!"));
+    QTextStream s(&file);
+    QString code = s.readAll();
+    file.close();
+    //now push context so that we don't conflict with the current execution
+    QScriptContext* newCtx = eng->pushContext();
+    QScriptValue result = eng->evaluate(code);
+    if (result.isError())
+        result = QScriptValue(QLatin1String("importScript(): failed due to exception: ") + result.toString());
+    else
+        result = newCtx->activationObject();
+    eng->popContext();
+    return result;
+}
+
 
 } //namespace Private
 

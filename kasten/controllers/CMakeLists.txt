@@ -474,6 +474,7 @@ structures_unit_test( scriptvalueconvertertest "structures-scriptvalue-converter
 structures_unit_test( osdparsertest "structures-osd-parser" test/osdparsertest.cpp )
 structures_unit_test( commonparsertest "structures-common-parser" test/commonparsertest.cpp )
 structures_unit_test( jsparsertest "structures-js-parser" test/jsparsertest.cpp )
+set_target_properties( jsparsertest PROPERTIES COMPILE_DEFINITIONS SRCDIR=\"${CMAKE_CURRENT_SOURCE_DIR}/test\" )
 structures_unit_test( locktooffsettest "structures-lock-to-offset" test/locktooffsettest.cpp )
 
 endif ( KDE4_BUILD_TESTS )

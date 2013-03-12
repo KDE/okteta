@@ -148,6 +148,7 @@ QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine* eng);
 QScriptValue alternativeFunc(QScriptContext* ctx, QScriptEngine* eng);
+QScriptValue importScriptFunc(QScriptContext* ctx, QScriptEngine* eng);
 
 /** this allows you to write e.g.
  *  return struct({foo : uint8() })

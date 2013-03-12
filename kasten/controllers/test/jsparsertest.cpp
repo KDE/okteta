@@ -19,6 +19,8 @@
  */
 #include <QtTest/QtTest>
 #include <QScriptEngine>
+#include <KGlobal>
+#include <KStandardDirs>
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/parsers/scriptvalueconverter.h"
 #include "testutils.h"
@@ -45,6 +47,8 @@ private Q_SLOTS:
     void testByteOrder_data();
     void testName();
     void testName_data();
+    void testImport();
+    void testImportPathTraversal();
 private:
     /** data gets set to the parsed result.
      * This is needed since functions with QVERIFY/QCOMPARE must return void */
@@ -89,7 +93,12 @@ void JsParserTest::initTestCase()
 
     allData << primitiveData << bitfieldData;
     //TODO struct, union, taggedUnion, pointer, flags, enum, array, string
+
+    //needed so that imports can be resolved
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", QLatin1String(SRCDIR "/resources")));
 }
+
+//#pragma message(SRCDIR)
 
 void JsParserTest::testByteOrder_data()
 {
@@ -256,6 +265,22 @@ void JsParserTest::testName()
     QString expectedName = QLatin1String("expectedName");
     QCOMPARE(data->name(), expectedName);
 }
+
+void JsParserTest::testImport()
+{
+    QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
+    QScriptValue val = eng->evaluate(QLatin1String("s = importScript('simpleImport.js');s.foo()"));
+    QCOMPARE(val.toString(), QString(QLatin1String("100")));
+}
+
+void JsParserTest::testImportPathTraversal()
+{
+    QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
+    QScriptValue val = eng->evaluate(QLatin1String("s = importScript('../../pathtraversal.js');s.foo()"));
+    QVERIFY(val.isError());
+    QCOMPARE(val.toString(), QString(QLatin1String("Error: importScript(): You may only access installed structure files! Path traversal detected.")));
+}
+
 
 
 QTEST_MAIN(JsParserTest)
