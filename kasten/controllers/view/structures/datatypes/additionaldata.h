@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2010, 2011, 2013 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -24,70 +24,50 @@
 #define ADDITIONALDATA_H_
 
 #include <QScriptValue>
-#include <QSharedData>
+#include <QVariant>
+#include "../compiletimeassert.h"
 
-/** Additional data which is held as a pointer by the *DataInformation classes
- *  to reduce memory consumption, since this will not always be needed */
+/** Additional data which is not needed frequently. Store this in a QHash to save memory */
 class AdditionalData
 {
 public:
-    explicit AdditionalData(const QScriptValue& validate = QScriptValue(),
-            const QScriptValue& update = QScriptValue());
+    enum AdditionalDataType {
+        UpdateFunction, ValidationFunction, ValidationError
+    };
+    explicit AdditionalData();
     AdditionalData(const AdditionalData& data);
     ~AdditionalData();
-
-    const QScriptValue& updateFunction() const;
-    void setUpdateFunction(const QScriptValue& func);
-    const QScriptValue& validationFunction() const;
-    void setValidationFunction(const QScriptValue& func);
-    QString validationError() const;
-    void setValidationError(const QString& error);
-    private:
-    /** the function called when new data is read, to update the structure */
-    QScriptValue mUpdateFunction;
-    /** this function is called after all data has been read to validate the structure */
-    QScriptValue mValidationFunction;
-    QString mValidationError;
+    QVariant get(AdditionalDataType entry) const;
+    void set(AdditionalDataType entry, const QVariant& value);
+    void remove(AdditionalDataType entry);
+private:
+    QHash<int, QVariant> mData;
 };
+compile_time_assert(sizeof(AdditionalData) == sizeof(void*));
 
-inline const QScriptValue& AdditionalData::updateFunction() const
+Q_DECLARE_METATYPE(QScriptValue)
+
+inline QVariant AdditionalData::get(AdditionalData::AdditionalDataType entry) const
 {
-    return mUpdateFunction;
+    return mData.value((int)entry);
 }
 
-inline void AdditionalData::setUpdateFunction(const QScriptValue& func)
+inline void AdditionalData::set(AdditionalData::AdditionalDataType entry, const QVariant& value)
 {
-    mUpdateFunction = func;
+    mData.insert((int)entry, value);
 }
 
-inline const QScriptValue& AdditionalData::validationFunction() const
+inline void AdditionalData::remove(AdditionalData::AdditionalDataType entry)
 {
-    return mValidationFunction;
+    mData.remove((int)entry);
 }
 
-inline void AdditionalData::setValidationFunction(const QScriptValue& func)
-{
-    mValidationFunction = func;
-}
-
-inline QString AdditionalData::validationError() const
-{
-    return mValidationError;
-}
-
-inline void AdditionalData::setValidationError(const QString& error)
-{
-    mValidationError = error;
-}
-
-inline AdditionalData::AdditionalData(const QScriptValue& validate, const QScriptValue& update)
-        : mUpdateFunction(update), mValidationFunction(validate), mValidationError(QString())
+inline AdditionalData::AdditionalData()
 {
 }
 
 inline AdditionalData::AdditionalData(const AdditionalData& data)
-        : mUpdateFunction(data.mUpdateFunction), mValidationFunction(
-                data.mValidationFunction), mValidationError(data.mValidationError)
+    : mData(data.mData)
 {
 }
 

@@ -21,14 +21,11 @@
  */
 
 #include "allprimitivetypes.h"
+#include "compiletimeassert.h"
 #include "datatypes/primitive/primitivedatainformation.h"
 
 #include <abstractbytearraymodel.h>
 
-//TODO replace with Q_STATIC_ASSERT (Qt5) or static_assert(C++11)
-#define concat2_hidden(a, b) a ## b
-#define concat2(a, b) concat2_hidden(a, b)
-#define compile_time_assert(e) extern char (*concat2(ct_assert, __LINE__)(void)) [sizeof(char[1 - 2*!(e)])]
 
 compile_time_assert(sizeof(double) == 8);
 compile_time_assert(sizeof(float) == 4);

@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011, 2013 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -36,16 +36,15 @@
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
         : mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
           mWasAbleToRead(false), mByteOrder(EndianessInherit), mLoggedData(ScriptLogger::LogInvalid),
-                mParent(parent), mName(name)
+          mParent(parent), mName(name)
 {
 }
 
 DataInformation::DataInformation(const DataInformation& d)
-        : mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false), mWasAbleToRead(false),
-                mByteOrder(d.mByteOrder), mLoggedData(ScriptLogger::LogInvalid), mParent(0), mName(d.mName)
+        : mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
+          mWasAbleToRead(false), mByteOrder(d.mByteOrder), mLoggedData(ScriptLogger::LogInvalid),
+          mAdditionalData(d.mAdditionalData), mParent(0), mName(d.mName)
 {
-    if (d.mAdditionalData)
-        mAdditionalData.reset(new AdditionalData(*(d.mAdditionalData)));
 }
 
 DataInformation::~DataInformation()
@@ -91,51 +90,17 @@ DataInformation* DataInformation::mainStructure()
 
 }
 
-QString DataInformation::validationError() const
-{
-    AdditionalData* data = additionalData();
-    if (!data)
-        return QString();
-    return data->validationError();
-}
-
-void DataInformation::unsetValidationError()
-{
-    AdditionalData* data = additionalData();
-    if (data)
-    {
-        data->setValidationError(QString());
-        //check whether we still need the AdditionalData
-        if (!additionalDataNeeded(data))
-            setAdditionalData(0);
-    }
-}
-
 void DataInformation::setValidationError(QString errorMessage)
 {
     if (errorMessage.isEmpty())
-    {
-        unsetValidationError();
-        return;
-    }
+        mAdditionalData.remove(AdditionalData::ValidationError);
     else
-    {
-        mValidationSuccessful = false;
-        AdditionalData* data = additionalData();
-        if (data)
-            data->setValidationError(errorMessage);
-        else
-        {
-            AdditionalData* newData = new AdditionalData();
-            newData->setValidationError(errorMessage);
-            setAdditionalData(newData);
-        }
-    }
+        mAdditionalData.set(AdditionalData::ValidationError, errorMessage);
 }
 
 void DataInformation::resetValidationState()
 {
-    unsetValidationError();
+    mAdditionalData.remove(AdditionalData::ValidationError);
     mHasBeenValidated = false;
     mValidationSuccessful = false;
 }
@@ -161,100 +126,21 @@ ScriptLogger* DataInformation::logger() const
     return topLevelDataInformation()->logger();
 }
 
-bool DataInformation::additionalDataNeeded(AdditionalData* data) const
+void DataInformation::setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value,
+                                            const char* name)
 {
-    Q_CHECK_PTR(data);
-    return data->updateFunction().isValid()
-            || data->validationFunction().isValid()
-            || !data->validationError().isEmpty();
-}
-
-QScriptValue DataInformation::updateFunc() const
-{
-    const AdditionalData* data = additionalData();
-    if (data)
-        return data->updateFunction();
-    return QScriptValue();
-}
-
-void DataInformation::setUpdateFunc(const QScriptValue& func)
-{
-    AdditionalData* data = additionalData();
-    if (!func.isValid() || func.isNull() || func.isUndefined())
+    if (!value.isValid() || value.isNull() || value.isUndefined())
     {
-        //reset update func to QScriptValue() and delete additionalData() if not needed anymore
-        if (data)
-        {
-            data->setUpdateFunction(QScriptValue());
-            if (!additionalDataNeeded(data))
-                setAdditionalData(0); //we don't need it anymore, just delete
-        }
-        //if additionalData() is already null no need to do anything
+        //removal requested
+        mAdditionalData.remove(entry);
         return;
     }
-    else
+    if (!value.isFunction())
     {
-        if (!func.isFunction())
-        {
-            logWarn() << "cannot set update function since "
-                    << func.toString() << "is not a function!";
-            return;
-        }
-        if (data)
-        {
-            data->setUpdateFunction(func);
-        }
-        else
-        {
-            AdditionalData* newData = new AdditionalData();
-            newData->setUpdateFunction(func);
-            setAdditionalData(newData);
-        }
-    }
-}
-
-QScriptValue DataInformation::validationFunc() const
-{
-    const AdditionalData* data = additionalData();
-    if (data)
-        return data->validationFunction();
-    return QScriptValue();
-}
-
-void DataInformation::setValidationFunc(const QScriptValue& func)
-{
-    AdditionalData* data = additionalData();
-    if (!func.isValid() || func.isNull() || func.isUndefined())
-    {
-        if (data)
-        {
-            //reset validationfunc func to QScriptValue() and delete additionalData() if not needed anymore
-            data->setValidationFunction(QScriptValue());
-            if (!additionalDataNeeded(data))
-                setAdditionalData(0);
-        }
-        //if additionalData() is already null no need to do anything
+        logWarn() << "cannot set" << name << "since" << value.toString() << "is not a function!";
         return;
     }
-    else
-    {
-        if (!func.isFunction())
-        {
-            logWarn() << "cannot set validation function since "
-                    << func.toString() << "is not a function!";
-            return;
-        }
-        if (data)
-        {
-            data->setValidationFunction(func);
-        }
-        else
-        {
-            AdditionalData* newData = new AdditionalData();
-            newData->setValidationFunction(func);
-            setAdditionalData(newData);
-        }
-    }
+    mAdditionalData.set(entry, QVariant::fromValue(value));
 }
 
 QVariant DataInformation::data(int column, int role) const
@@ -317,7 +203,7 @@ QString DataInformation::tooltipString() const
         else
         {
             validationMsg = i18nc("not all values in this structure are as they should be",
-                    "Validation failed: \"%1\"", additionalData()->validationError());
+                    "Validation failed: \"%1\"", validationMsg);
         }
         return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
                 valueStr, typeName(), sizeString(), validationMsg);
@@ -376,31 +262,14 @@ QString DataInformation::fullObjectPath() const
     return result;
 }
 
-void DataInformation::setAdditionalData(AdditionalData* data)
-{
-    mAdditionalData.reset(data);
-}
-
-QSysInfo::Endian DataInformation::effectiveByteOrder() const
-{
-    switch (mByteOrder)
-    {
-    case EndianessBig:
-        return QSysInfo::BigEndian;
-    case EndianessLittle:
-        return QSysInfo::LittleEndian;
-    case EndianessFromSettings:
-        return Kasten2::StructViewPreferences::byteOrder();
-    default: //inherit
-        if (mParent && !mParent->isTopLevel())
-            return mParent->asDataInformation()->effectiveByteOrder();
-        return Kasten2::StructViewPreferences::byteOrder();
-    }
-}
-
 QScriptValue DataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
     QScriptValue ret = engine->newObject(scriptClass(handlerInfo));
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
+}
+
+QSysInfo::Endian DataInformation::byteOrderFromSettings() const
+{
+    return Kasten2::StructViewPreferences::byteOrder();
 }

@@ -94,9 +94,7 @@ BitCount32 DataInformationWithChildren::size() const
 
 void DataInformationWithChildren::resetValidationState()
 {
-    unsetValidationError();
-    mHasBeenValidated = false;
-    mValidationSuccessful = false;
+    DataInformation::resetValidationState();
     for (int i = 0; i < mChildren.size(); ++i)
     {
         mChildren.at(i)->resetValidationState();

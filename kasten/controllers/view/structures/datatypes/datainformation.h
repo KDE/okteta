@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010, 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011, 2012, 2013 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,7 @@
 #include <address.h>
 
 #include "datainformationbase.h"
+#include "additionaldata.h"
 #include "../script/scriptlogger.h"
 #include "primitivedatatype.h"
 
@@ -59,7 +60,6 @@ class QScriptClass;
 class QVariant;
 class QWidget;
 class ScriptLogger;
-class AdditionalData;
 class TopLevelDataInformation;
 class ScriptHandlerInfo;
 
@@ -174,7 +174,6 @@ public:
     QScriptValue validationFunc() const;
     void setValidationFunc(const QScriptValue& func);
     QString validationError() const;
-    void unsetValidationError();
     bool validationSuccessful() const;
 
     bool hasBeenUpdated() const;
@@ -215,14 +214,13 @@ public:
      */
     virtual int indexOf(const DataInformation* const data) const = 0;
 protected:
-    bool additionalDataNeeded(AdditionalData* data) const;
-    AdditionalData* additionalData() const;
-    void setAdditionalData(AdditionalData* data);
     /** So that this object can be wrapped by the correct javascript object*/
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const = 0;
     static QVariant eofReachedData(int role);
+    void setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value, const char* name);
 private:
     void setValidationError(QString errorMessage); //only called by ScriptHandler
+    QSysInfo::Endian byteOrderFromSettings() const; //so there is no need to include structviewpreferences.h here
 protected:
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;
@@ -230,7 +228,7 @@ protected:
     bool mWasAbleToRead :1;
     DataInformationEndianess mByteOrder :2;
     mutable ScriptLogger::LogLevel mLoggedData :2; //mutable is ugly but i guess it is the best solution
-    QScopedPointer<AdditionalData> mAdditionalData;
+    AdditionalData mAdditionalData;
     DataInformationBase* mParent;
     QString mName;
 };
@@ -257,7 +255,7 @@ inline void DataInformation::setName(const QString& newName)
 
 inline DataInformation* DataInformation::childAt(unsigned int) const
 {
-    return NULL;
+    return 0;
 }
 
 inline bool DataInformation::canHaveChildren() const
@@ -301,11 +299,6 @@ inline DataInformationBase* DataInformation::parent() const
     return mParent;
 }
 
-inline AdditionalData* DataInformation::additionalData() const
-{
-    return mAdditionalData.data();
-}
-
 inline QDebug DataInformation::logInfo() const
 {
     return logger()->info(this);
@@ -344,6 +337,48 @@ inline bool DataInformation::validationSuccessful() const
 inline bool DataInformation::hasBeenValidated() const
 {
     return mHasBeenValidated;
+}
+
+inline QScriptValue DataInformation::updateFunc() const
+{
+    return mAdditionalData.get(AdditionalData::UpdateFunction).value<QScriptValue>();
+}
+
+inline QScriptValue DataInformation::validationFunc() const
+{
+    return mAdditionalData.get(AdditionalData::ValidationFunction).value<QScriptValue>();
+}
+
+inline void DataInformation::setUpdateFunc(const QScriptValue& func)
+{
+    setAdditionalFunction(AdditionalData::UpdateFunction, func, "update function");
+}
+
+inline void DataInformation::setValidationFunc(const QScriptValue& func)
+{
+    setAdditionalFunction(AdditionalData::ValidationFunction, func, "validation function");
+}
+
+inline QString DataInformation::validationError() const
+{
+    return mAdditionalData.get(AdditionalData::ValidationError).toString();
+}
+
+inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
+{
+    switch (mByteOrder)
+    {
+    case EndianessBig:
+        return QSysInfo::BigEndian;
+    case EndianessLittle:
+        return QSysInfo::LittleEndian;
+    case EndianessFromSettings:
+        return byteOrderFromSettings();
+    default: //inherit
+        if (mParent && !mParent->isTopLevel())
+            return mParent->asDataInformation()->effectiveByteOrder();
+        return byteOrderFromSettings();
+    }
 }
 
 #endif /* DATAINFORMATION_H_ */
