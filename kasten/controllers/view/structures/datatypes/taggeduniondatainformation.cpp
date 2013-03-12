@@ -28,7 +28,7 @@
 
 #include <KLocalizedString>
 
-QString TaggedUnionDataInformation::typeName() const
+QString TaggedUnionDataInformation::typeNameImpl() const
 {
     if (mLastIndex >= 0)
         return i18nc("data type in C/C++, then name", "struct %1", mAlternatives.at(mLastIndex).name);
@@ -44,7 +44,6 @@ TaggedUnionDataInformation::~TaggedUnionDataInformation()
         qDeleteAll(fi.fields);
     }
 }
-
 
 TaggedUnionDataInformation::TaggedUnionDataInformation(const QString& name, DataInformation* parent)
         : DataInformationWithChildren(name, QVector<DataInformation*>(), parent), mLastIndex(-1)

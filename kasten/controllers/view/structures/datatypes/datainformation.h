@@ -116,9 +116,9 @@ public:
     /** get the necessary data (for the model) */
     virtual QVariant data(int column, int role) const;
 
-    virtual QString typeName() const = 0;
+    QString typeName() const;
     /** by default just returns an empty QString */
-    virtual QString valueString() const;
+    QString valueString() const;
     QString name() const;
     void setName(const QString& newName);
     virtual QString tooltipString() const;
@@ -214,10 +214,13 @@ public:
      */
     virtual int indexOf(const DataInformation* const data) const = 0;
 protected:
-    /** So that this object can be wrapped by the correct javascript object*/
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const = 0;
     static QVariant eofReachedData(int role);
     void setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value, const char* name);
+private:
+    virtual QString valueStringImpl() const;
+    virtual QString typeNameImpl() const = 0;
+    /** So that this object can be wrapped by the correct javascript object*/
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const = 0;
 private:
     void setValidationError(QString errorMessage); //only called by ScriptHandler
     QSysInfo::Endian byteOrderFromSettings() const; //so there is no need to include structviewpreferences.h here
@@ -380,5 +383,18 @@ inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
         return byteOrderFromSettings();
     }
 }
+
+inline QString DataInformation::typeName() const
+{
+    //TODO support custom types
+    return typeNameImpl();
+}
+
+inline QString DataInformation::valueString() const
+{
+    return valueStringImpl();
+}
+
+
 
 #endif /* DATAINFORMATION_H_ */

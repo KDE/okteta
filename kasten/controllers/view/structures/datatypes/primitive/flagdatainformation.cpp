@@ -47,7 +47,7 @@ static void removeFromArray(QVarLengthArray<T, len>& array, int index) {
     array.removeLast();
 }
 
-QString FlagDataInformation::valueString() const
+QString FlagDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
     QMapIterator<AllPrimitiveTypes, QString> iter(mEnum->values());
@@ -119,7 +119,7 @@ QString FlagDataInformation::valueString() const
     return result;
 }
 
-QString FlagDataInformation::typeName() const
+QString FlagDataInformation::typeNameImpl() const
 {
     return i18nc("Displayed in the type column. first comes the name "
             "of the enum, then the underlying type (e.g. uint32)",

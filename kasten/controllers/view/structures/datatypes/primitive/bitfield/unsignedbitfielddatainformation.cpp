@@ -27,7 +27,7 @@
 #include "../poddecoder/typeeditors/uintspinbox.h"
 #include "../uintdatainformation.h"
 
-QString UnsignedBitfieldDataInformation::valueString() const
+QString UnsignedBitfieldDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
     return UIntDataInformationMethods<quint64>::staticValueString(mValue.value<quint64>());

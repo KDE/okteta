@@ -38,8 +38,6 @@ public:
             PrimitiveDataInformation* valueType, DataInformation* parent);
     virtual ~PointerDataInformation();
 
-    virtual QString typeName() const;
-    virtual QString valueString() const;
     virtual bool canHaveChildren() const;
     virtual uint childCount() const;
     virtual DataInformation* childAt(uint index) const;
@@ -65,8 +63,10 @@ public:
      * @return true if type was set, false if not
      */
     bool setPointerType(DataInformation* type);
-protected:
+private:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
+    virtual QString valueStringImpl() const;
+    virtual QString typeNameImpl() const;
 protected:
     QScopedPointer<DataInformation> mPointerTarget;
 };

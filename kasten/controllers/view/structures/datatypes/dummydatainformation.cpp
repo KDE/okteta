@@ -85,7 +85,7 @@ QWidget* DummyDataInformation::createEditWidget(QWidget* parent) const
     return parentHelper()->createChildEditWidget(mIndex, parent);
 }
 
-QString DummyDataInformation::typeName() const
+QString DummyDataInformation::typeNameImpl() const
 {
     return parentHelper()->childTypeName(mIndex);
 }

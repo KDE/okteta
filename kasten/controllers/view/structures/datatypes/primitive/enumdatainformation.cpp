@@ -42,7 +42,7 @@ EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInfor
 
 EnumDataInformation::~EnumDataInformation() {}
 
-QString EnumDataInformation::valueString() const
+QString EnumDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
     QString enumVal = mEnum->value(mValue->value());
@@ -54,7 +54,7 @@ QString EnumDataInformation::valueString() const
         return i18n("%1 (value not in enum)", mValue->valueString());
 }
 
-QString EnumDataInformation::typeName() const
+QString EnumDataInformation::typeNameImpl() const
 {
     return i18nc("Displayed in the type column. first comes the name "
             "of the enum, then the underlying type (e.g. uint32)",

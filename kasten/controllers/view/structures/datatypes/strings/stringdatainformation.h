@@ -61,7 +61,6 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QString typeName() const;
     virtual unsigned int childCount() const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     virtual bool isString() const;
@@ -76,8 +75,6 @@ public:
     virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
     virtual QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
-
-    virtual QString valueString() const;
 
     StringType encoding() const;
     void setEncoding(StringType encoding);
@@ -95,8 +92,10 @@ public:
      * @param mode The mode to remove
      */
     void unsetTerminationMode(StringData::TerminationMode mode);
-protected:
+private:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
+    virtual QString typeNameImpl() const;
+    virtual QString valueStringImpl() const;
 private:
     QScopedPointer<DummyDataInformation> mDummy;
     QScopedPointer<StringData> mData;

@@ -28,7 +28,7 @@
 #include "../../../../poddecoder/typeeditors/uintspinbox.h"
 
 
-QString BoolBitfieldDataInformation::valueString() const
+QString BoolBitfieldDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
     return BoolDataInformationMethods<quint64>::staticValueString(mValue.value<quint64>());

@@ -53,11 +53,9 @@ public:
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
     virtual bool isTaggedUnion() const;
-    //implement the DataInformation pure virtual functions
-    QString typeName() const;
+
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 
-    //reimplement these
     virtual BitCount32 size() const;
 
     virtual bool replaceChildAt(unsigned int index, DataInformation* newChild);
@@ -67,8 +65,8 @@ public:
     virtual unsigned int childCount() const;
     void appendDefaultField(DataInformation* field, bool emitSignal);
     void setAlternatives(const QVector<FieldInfo>& alternatives, bool emitSignal);
-
-
+private:
+    virtual QString typeNameImpl() const;
 private:
     const QVector<DataInformation*>& currentChildren() const;
     int determineSelection(TopLevelDataInformation* top);

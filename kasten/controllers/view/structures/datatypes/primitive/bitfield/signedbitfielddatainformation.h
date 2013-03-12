@@ -35,17 +35,18 @@ public:
     virtual ~SignedBitfieldDataInformation() {}
     virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
 
-    QString typeName() const;
-    virtual QString valueString() const;
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
     /** sign extend the value if it is negative, so it can always be treated as a plain qint64 */
     virtual void setValue(AllPrimitiveTypes newVal);
+private:
+    virtual QString valueStringImpl() const;
+    virtual QString typeNameImpl() const;
 };
 
-inline QString SignedBitfieldDataInformation::typeName() const
+inline QString SignedBitfieldDataInformation::typeNameImpl() const
 {
     return i18ncp("Data type", "signed bitfield (%1 bit wide)", "signed bitfield (%1 bits wide)",
             width());

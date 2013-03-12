@@ -37,12 +37,13 @@ public:
             BitCount64 bitsRemaining, quint8* bitOffset);
     virtual bool isStruct() const;
 
-    QString typeName() const;
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 
     static bool readChildren(const QVector<DataInformation*> children, Okteta::AbstractByteArrayModel *input,
             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,
             TopLevelDataInformation* top);
+private:
+    virtual QString typeNameImpl() const;
 };
 
 inline bool StructureDataInformation::isStruct() const

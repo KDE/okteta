@@ -126,7 +126,7 @@ QWidget* StringDataInformation::createEditWidget(QWidget*) const
     return 0;
 }
 
-QString StringDataInformation::typeName() const
+QString StringDataInformation::typeNameImpl() const
 {
     return mData->typeName();
 }
@@ -165,7 +165,7 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
     return QVariant();
 }
 
-QString StringDataInformation::valueString() const
+QString StringDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
     return mData->completeString();

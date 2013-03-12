@@ -32,8 +32,9 @@ class FlagDataInformation : public EnumDataInformation
 public:
     FlagDataInformation(const QString& name, PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef,
             DataInformation* parent = 0);
-    virtual QString valueString() const;
-    virtual QString typeName() const;
+private:
+    virtual QString valueStringImpl() const;
+    virtual QString typeNameImpl() const;
 };
 
 #endif // FLAGDATAINFORMATION_H

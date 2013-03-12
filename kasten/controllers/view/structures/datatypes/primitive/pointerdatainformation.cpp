@@ -120,12 +120,12 @@ void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *inp
     mPointerTarget->readData(input, newAddress, (input->size() - newAddress) * 8, &childBitOffset);
 }
 
-QString PointerDataInformation::typeName() const
+QString PointerDataInformation::typeNameImpl() const
 {
     return i18nc("memory pointer with underlying type", "%1 pointer", mValue->typeName());
 }
 
-QString PointerDataInformation::valueString() const
+QString PointerDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
     return mValue->valueString();

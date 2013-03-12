@@ -49,6 +49,7 @@ public:
 protected:
     AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
     virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
+private:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
 protected:
     AllPrimitiveTypes mValue;

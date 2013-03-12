@@ -45,7 +45,6 @@ public:
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
-    virtual QString typeName() const;
     virtual bool isDummy() const;
     virtual QVariant data(int column, int role) const;
 
@@ -60,8 +59,9 @@ public:
     inline void setDummyIndex(uint newIndex) { mIndex = newIndex; }
     inline uint dummyIndex() const { return mIndex; }
 
-protected:
+private:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo*) const { Q_ASSERT(false); return 0; }
+    virtual QString typeNameImpl() const;
 private:
     uint mIndex;
     DataInformationWithDummyChildren* parentHelper() const;

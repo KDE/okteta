@@ -35,11 +35,9 @@ class BasicPrimitiveDataInformation : public PrimitiveDataInformation
 public:
     BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = 0);
     virtual ~BasicPrimitiveDataInformation();
-    virtual QString typeName() const;
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;
     virtual void setValue(AllPrimitiveTypes newVal);
-    virtual QString valueString() const;
     virtual BasicPrimitiveDataInformation<T, C>* clone() const;
 
     virtual QWidget* createEditWidget(QWidget* parent) const;
@@ -52,10 +50,12 @@ public:
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
             BitCount64 bitsRemaining, quint8* bitOffset);
-
 protected:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
     BasicPrimitiveDataInformation(const BasicPrimitiveDataInformation<T, C>& d);
+private:
+    virtual QString valueStringImpl() const;
+    virtual QString typeNameImpl() const;
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
 protected:
     T mValue;
 };
@@ -80,7 +80,7 @@ inline BasicPrimitiveDataInformation<T, C>::~BasicPrimitiveDataInformation()
 }
 
 template<typename T, typename C>
-inline QString BasicPrimitiveDataInformation<T, C>::typeName() const
+inline QString BasicPrimitiveDataInformation<T, C>::typeNameImpl() const
 {
     return PrimitiveType::typeName(C::staticType());
 }
@@ -132,6 +132,13 @@ template<typename T, typename C>
 inline BasicPrimitiveDataInformation<T, C>* BasicPrimitiveDataInformation<T, C>::clone() const
 {
     return new BasicPrimitiveDataInformation<T, C>(*this);
+}
+
+template<typename T, typename C>
+QString BasicPrimitiveDataInformation<T, C>::valueStringImpl() const
+{
+    Q_ASSERT(mWasAbleToRead);
+    return C::staticValueString(mValue);
 }
 
 #endif /* BASICPRIMITIVEDATAINFORMATION_H_ */

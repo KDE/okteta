@@ -35,15 +35,16 @@ public:
             : AbstractBitfieldDataInformation(name, width, parent) {}
     virtual ~BoolBitfieldDataInformation() {}
 
-    QString typeName() const;
-    virtual QString valueString() const;
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+private:
+    virtual QString valueStringImpl() const;
+    virtual QString typeNameImpl() const;
 };
 
-inline QString BoolBitfieldDataInformation::typeName() const
+inline QString BoolBitfieldDataInformation::typeNameImpl() const
 {
     return i18ncp("Data type", "boolean bitfield (%1 bit wide)", "boolean bitfield (%1 bits wide)",
             width());

@@ -34,15 +34,16 @@ public:
             : AbstractBitfieldDataInformation(name, width, parent) {}
     virtual ~UnsignedBitfieldDataInformation() {}
 
-    QString typeName() const;
-    virtual QString valueString() const;
     virtual QScriptValue valueAsQScriptValue() const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+private:
+    virtual QString valueStringImpl() const;
+    virtual QString typeNameImpl() const;
 };
 
-inline QString UnsignedBitfieldDataInformation::typeName() const
+inline QString UnsignedBitfieldDataInformation::typeNameImpl() const
 {
     return i18ncp("Data type", "unsigned bitfield (%1 bit wide)",
             "unsigned bitfield (%1 bits wide)", width());

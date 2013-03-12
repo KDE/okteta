@@ -35,14 +35,14 @@ public:
             EnumDefinition::Ptr enumDef, DataInformation* parent = 0);
     virtual ~EnumDataInformation();
 
-    virtual QString valueString() const;
-    virtual QString typeName() const;
     virtual bool isEnum() const;
 
     EnumDefinition::Ptr enumValues() const;
     void setEnumValues(QMap<AllPrimitiveTypes, QString> newValues);
-protected:
+private:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
+    virtual QString valueStringImpl() const;
+    virtual QString typeNameImpl() const;
 protected:
     EnumDefinition::Ptr mEnum;
 };

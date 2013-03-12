@@ -46,13 +46,6 @@ inline QScriptClass* BasicPrimitiveDataInformation<T, C>::scriptClass(ScriptHand
 }
 
 template<typename T, typename C>
-QString BasicPrimitiveDataInformation<T, C>::valueString() const
-{
-    Q_ASSERT(mWasAbleToRead);
-    return C::staticValueString(mValue);
-}
-
-template<typename T, typename C>
 QScriptValue BasicPrimitiveDataInformation<T, C>::valueAsQScriptValue() const
 {
     return C::asScriptValue(mValue, 0, 0);

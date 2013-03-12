@@ -34,12 +34,12 @@ public:
     virtual ~UnionDataInformation();
 
     virtual bool isUnion() const;
-    //implement the DataInformation pure virtual functions
-    virtual QString typeName() const;
     virtual BitCount32 size() const;
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
             BitCount64 bitsRemaining, quint8* bitOffset);
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
+private:
+    virtual QString typeNameImpl() const;
 };
 
 inline bool UnionDataInformation::isUnion() const

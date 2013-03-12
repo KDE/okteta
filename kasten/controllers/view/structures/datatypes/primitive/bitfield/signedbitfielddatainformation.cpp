@@ -27,7 +27,7 @@
 #include "../sintdatainformation.h"
 
 
-QString SignedBitfieldDataInformation::valueString() const
+QString SignedBitfieldDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
     return SIntDataInformationMethods<qint64>::staticValueString(mValue.value<qint64>());

@@ -24,7 +24,7 @@
 
 #include <KLocale>
 
-QString UnionDataInformation::typeName() const
+QString UnionDataInformation::typeNameImpl() const
 {
     return i18nc("data type in C/C++, then name", "union %1", name());
 }

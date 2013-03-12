@@ -50,11 +50,6 @@ DataInformation::~DataInformation()
 {
 }
 
-QString DataInformation::valueString() const
-{
-    return QString();
-}
-
 QString DataInformation::sizeString() const
 {
     if (size() % 8 == 0) //no bits remaining
@@ -67,6 +62,11 @@ QString DataInformation::sizeString() const
         QString bits = i18np("1 bit", "%1 bits", size() % 8);
         return i18nc("number of bytes, then number of bits", "%1 %2", bytes, bits);
     }
+}
+
+QString DataInformation::valueStringImpl() const
+{
+    return QString();
 }
 
 BitCount64 DataInformation::positionInFile(Okteta::Address start) const

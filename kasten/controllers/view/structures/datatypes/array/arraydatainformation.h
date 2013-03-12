@@ -46,7 +46,6 @@ public:
             DataInformation* parent = 0, const QScriptValue& lengthFuntion = QScriptValue());
     virtual ~ArrayDataInformation();
 public:
-    virtual QString typeName() const;
     uint length() const;
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
@@ -87,9 +86,10 @@ public:
     void setLengthFunction(QScriptValue newFunc);
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
-protected:
+private:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
-protected:
+    virtual QString typeNameImpl() const;
+private:
     QScopedPointer<AbstractArrayData> mData;
     static const uint MAX_LEN = 10000;
 };
@@ -99,11 +99,9 @@ inline uint ArrayDataInformation::length() const
     return mData->length();
 }
 
-inline QString ArrayDataInformation::typeName() const
+inline QString ArrayDataInformation::typeNameImpl() const
 {
     return mData->typeName();
-    //don't show name of child
-    //return i18nc("array type then length", "%1[%2]", data->typeName(), childCount()); //TODO
 }
 
 inline BitCount32 ArrayDataInformation::size() const
