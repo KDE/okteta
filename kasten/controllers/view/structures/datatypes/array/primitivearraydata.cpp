@@ -217,16 +217,20 @@ int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
 {
     if (data == &mDummy)
         return this->mDummy.dummyIndex();
-    Q_ASSERT_X(false, "PrimitiveArrayData::indexOf", "This should never be called");
+    if (data == mChildType.data())
+        return this->mDummy.dummyIndex();
+    Q_ASSERT_X(false, "PrimitiveArrayData::indexOf", "Logic error, should never be reached");
     return -1;
 }
 
 template<PrimitiveDataTypeEnum type>
-QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const
+QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
     Q_ASSERT(index < length());
     mChildType->mWasAbleToRead = this->mNumReadValues > index;
     mChildType->asPrimitive()->setValue(this->mData.at(index));
+    mChildType->setName(QString::number(index));
+    mDummy.setDummyIndex(index);
     return mChildType->toScriptValue(engine, handlerInfo);
 
 }

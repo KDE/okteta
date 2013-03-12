@@ -141,7 +141,7 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
 }
 
 QScriptValue ComplexArrayData::toScriptValue(uint index, QScriptEngine* engine,
-        ScriptHandlerInfo* handlerInfo) const
+        ScriptHandlerInfo* handlerInfo)
 {
     Q_ASSERT(index < length());
     return mChildren.at(index)->toScriptValue(engine, handlerInfo);
