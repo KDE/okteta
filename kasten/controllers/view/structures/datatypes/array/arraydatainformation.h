@@ -89,13 +89,8 @@ public:
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 protected:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
-private:
-    /** Takes ownership of @p data ! */
-    AbstractArrayData* arrayDataFromType(uint length, DataInformation* data);
-    AbstractArrayData* primitiveArrayFromType(uint length, PrimitiveDataInformation* type);
 protected:
     QScopedPointer<AbstractArrayData> mData;
-    QScriptValue mLengthFunction;
     static const uint MAX_LEN = 10000;
 };
 
@@ -173,15 +168,12 @@ inline QString ArrayDataInformation::childTypeName(uint index) const
 
 inline QScriptValue ArrayDataInformation::lengthFunction() const
 {
-    return mLengthFunction;
+    return mAdditionalData.get(AdditionalData::ArrayLengthFunction).value<QScriptValue>();
 }
 
 inline void ArrayDataInformation::setLengthFunction(QScriptValue newFunc)
 {
-    if (!newFunc.isFunction())
-        logError() << "New length function is not a function. It was: " << newFunc.toString();
-    else
-        mLengthFunction = newFunc;
+    setAdditionalFunction(AdditionalData::ArrayLengthFunction, newFunc, "array length function");
 }
 
 #endif /* ARRAYDATAINFORMATION_H_ */

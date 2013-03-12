@@ -222,15 +222,15 @@ private:
     void setValidationError(QString errorMessage); //only called by ScriptHandler
     QSysInfo::Endian byteOrderFromSettings() const; //so there is no need to include structviewpreferences.h here
 protected:
+    AdditionalData mAdditionalData;
+    DataInformationBase* mParent;
+    QString mName;
     bool mValidationSuccessful :1;
     bool mHasBeenValidated :1;
     bool mHasBeenUpdated :1;
     bool mWasAbleToRead :1;
     DataInformationEndianess mByteOrder :2;
     mutable ScriptLogger::LogLevel mLoggedData :2; //mutable is ugly but i guess it is the best solution
-    AdditionalData mAdditionalData;
-    DataInformationBase* mParent;
-    QString mName;
 };
 
 Q_DECLARE_METATYPE(DataInformation*)

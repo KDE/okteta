@@ -23,6 +23,9 @@
 
 #include "abstractarraydata.h"
 #include "arraydatainformation.h"
+#include "primitivearraydata.h"
+#include "complexarraydata.h"
+#include "../primitive/primitivedatainformation.h"
 
 AbstractArrayData::AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent)
         : mParent(parent), mChildType(childType)
@@ -40,4 +43,49 @@ void AbstractArrayData::setParent(ArrayDataInformation* parent)
     mParent = parent;
     mChildType->setParent(parent);
     setNewParentForChildren();
+}
+
+AbstractArrayData* AbstractArrayData::newArrayData(uint length, DataInformation* type, ArrayDataInformation* parent)
+{
+    Q_CHECK_PTR(type);
+    if (!type->isPrimitive())
+        return new ComplexArrayData(length, type, parent);
+    PrimitiveDataInformation* data = type->asPrimitive();
+
+    switch (data->type().value)
+    {
+    case Type_Char:
+        return new PrimitiveArrayData<Type_Char>(length, data, parent);
+    case Type_Int8:
+        return new PrimitiveArrayData<Type_Int8>(length, data, parent);
+    case Type_Int16:
+        return new PrimitiveArrayData<Type_Int16>(length, data, parent);
+    case Type_Int32:
+        return new PrimitiveArrayData<Type_Int32>(length, data, parent);
+    case Type_Int64:
+        return new PrimitiveArrayData<Type_Int64>(length, data, parent);
+    case Type_UInt8:
+        return new PrimitiveArrayData<Type_UInt8>(length, data, parent);
+    case Type_UInt16:
+        return new PrimitiveArrayData<Type_UInt16>(length, data, parent);
+    case Type_UInt32:
+        return new PrimitiveArrayData<Type_UInt32>(length, data, parent);
+    case Type_UInt64:
+        return new PrimitiveArrayData<Type_UInt64>(length, data, parent);
+    case Type_Bool8:
+        return new PrimitiveArrayData<Type_Bool8>(length, data, parent);
+    case Type_Bool16:
+        return new PrimitiveArrayData<Type_Bool16>(length, data, parent);
+    case Type_Bool32:
+        return new PrimitiveArrayData<Type_Bool32>(length, data, parent);
+    case Type_Bool64:
+        return new PrimitiveArrayData<Type_Bool64>(length, data, parent);
+    case Type_Float:
+        return new PrimitiveArrayData<Type_Float>(length, data, parent);
+    case Type_Double:
+        return new PrimitiveArrayData<Type_Double>(length, data, parent);
+    default:
+        // enum/bitfield/pointer need complex array data
+        return new ComplexArrayData(length, data, parent);
+    }
 }

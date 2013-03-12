@@ -35,9 +35,13 @@
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
         DataInformation* parent, const QScriptValue& lengthFunction)
-        : DataInformationWithDummyChildren(name, parent), mLengthFunction(lengthFunction)
+        : DataInformationWithDummyChildren(name, parent)
 {
-    Q_ASSERT(!lengthFunction.isValid() || lengthFunction.isFunction());
+    if (lengthFunction.isValid())
+    {
+        Q_ASSERT(lengthFunction.isFunction());
+        setLengthFunction(lengthFunction);
+    }
     if (length > MAX_LEN)
     {
         logWarn() << length << "exceeds maximum length of" << MAX_LEN
@@ -46,19 +50,15 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
     }
     Q_CHECK_PTR(childType);
     childType->setParent(this);
-    mData.reset(arrayDataFromType(length, childType));
+    mData.reset(AbstractArrayData::newArrayData(length, childType, this));
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
-        : DataInformationWithDummyChildren(d), mData(0), mLengthFunction(d.mLengthFunction)
+        : DataInformationWithDummyChildren(d), mData(0)
 {
-    if (d.mData)
-    {
-        uint length = d.mData->length();
-        DataInformation* childType = static_cast<ComplexArrayData*>(d.mData.data())->childType();
-        mData.reset(arrayDataFromType(length, childType->clone()));
-        Q_CHECK_PTR(mData);
-    }
+    uint length = d.mData->length();
+    DataInformation* childType = d.mData.data()->childType();
+    mData.reset(AbstractArrayData::newArrayData(length, childType->clone(), this));
 }
 
 ArrayDataInformation::~ArrayDataInformation()
@@ -97,7 +97,7 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
     {
         //first create with length of 0, then change length to actual length (to ensure model is correct)
         topLevel->_childCountAboutToChange(this, len, 0);
-        mData.reset(arrayDataFromType(0, newChildType));
+        mData.reset(AbstractArrayData::newArrayData(0, newChildType, this));
         topLevel->_childCountChanged(this, len, 0);
 
         topLevel->_childCountAboutToChange(this, 0, len);
@@ -107,7 +107,7 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
     else
     {
         //no need to emit the signals, which cause expensive model update
-        mData.reset(arrayDataFromType(len, newChildType));
+        mData.reset(AbstractArrayData::newArrayData(len, newChildType, this));
         //only the type of the array changed -> emit that this has changed data
         topLevel->setChildDataChanged();
     }
@@ -193,62 +193,6 @@ bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayMod
 QScriptClass* ArrayDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
 {
     return handlerInfo->mArrayClass.data();
-}
-
-AbstractArrayData* ArrayDataInformation::primitiveArrayFromType(uint length, PrimitiveDataInformation* data)
-{
-    switch (data->type().value)
-    {
-    case Type_Char:
-        return new PrimitiveArrayData<Type_Char>(length, data, this);
-    case Type_Int8:
-        return new PrimitiveArrayData<Type_Int8>(length, data, this);
-    case Type_Int16:
-        return new PrimitiveArrayData<Type_Int16>(length, data, this);
-    case Type_Int32:
-        return new PrimitiveArrayData<Type_Int32>(length, data, this);
-    case Type_Int64:
-        return new PrimitiveArrayData<Type_Int64>(length, data, this);
-    case Type_UInt8:
-        return new PrimitiveArrayData<Type_UInt8>(length, data, this);
-    case Type_UInt16:
-        return new PrimitiveArrayData<Type_UInt16>(length, data, this);
-    case Type_UInt32:
-        return new PrimitiveArrayData<Type_UInt32>(length, data, this);
-    case Type_UInt64:
-        return new PrimitiveArrayData<Type_UInt64>(length, data, this);
-    case Type_Bool8:
-        return new PrimitiveArrayData<Type_Bool8>(length, data, this);
-    case Type_Bool16:
-        return new PrimitiveArrayData<Type_Bool16>(length, data, this);
-    case Type_Bool32:
-        return new PrimitiveArrayData<Type_Bool32>(length, data, this);
-    case Type_Bool64:
-        return new PrimitiveArrayData<Type_Bool64>(length, data, this);
-    case Type_Float:
-        return new PrimitiveArrayData<Type_Float>(length, data, this);
-    case Type_Double:
-        return new PrimitiveArrayData<Type_Double>(length, data, this);
-    default:
-        kDebug() << "Cannot use" << data->typeName() << "for primitive arrays, using complex array";
-        return 0;
-    }
-}
-
-AbstractArrayData* ArrayDataInformation::arrayDataFromType(uint length, DataInformation* data)
-{
-    Q_CHECK_PTR(data);
-    AbstractArrayData* ret = 0;
-    if (data->isPrimitive())
-    {
-        ret = primitiveArrayFromType(length, data->asPrimitive());
-    }
-    if (!ret)
-    {
-        //the conversion failed (i.e. it was not primitive or an enum/bitfield/pointer)
-        ret = new ComplexArrayData(length, data, this);
-    }
-    return ret;
 }
 
 QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine,

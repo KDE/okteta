@@ -179,7 +179,7 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
     BitCount64 position = item->positionInFile(structureStart);
     const quint64 remainingBits = qMax(d->mByteArrayModel->size() * 8 - qint64(position), qint64(0));
     quint8 bitOffs = position % 8;
-    ret = item->setData(value, d->mByteArrayModel, position / 8, remainingBits, bitOffs);
+    ret = item->setData(value, d->mByteArrayModel, Okteta::Address(position / 8), remainingBits, bitOffs);
     d->mWritingData = false; //finished
     //XXX: this is inefficient, best would be to only update the changed value
     updateData(Okteta::ArrayChangeMetricsList()); //update once after writing
@@ -321,7 +321,7 @@ void StructTool::setSelectedStructuresInView()
 Okteta::Address StructTool::startAddress(const TopLevelDataInformation* data)
 {
     if (data->isLockedFor(d->mByteArrayModel))
-        return data->lockPositionFor(d->mByteArrayModel);
+        return Okteta::Address(data->lockPositionFor(d->mByteArrayModel));
     else
         return d->mCursorIndex;
 }
@@ -339,7 +339,7 @@ void StructTool::mark(const QModelIndex& idx)
     int length = data->size() / 8;
     const int maxLen = d->mByteArrayModel->size() - baseAddress;
     length = qMin(length, maxLen);
-    const Okteta::Address startOffset = data->positionInFile(baseAddress) / 8;
+    const Okteta::Address startOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
     const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(startOffset, length);
     d->mByteArrayView->setMarking(markingRange, true);
 }

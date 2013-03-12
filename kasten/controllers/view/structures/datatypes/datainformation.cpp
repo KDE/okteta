@@ -34,16 +34,15 @@
 #include <KColorScheme>
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
-        : mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
-          mWasAbleToRead(false), mByteOrder(EndianessInherit), mLoggedData(ScriptLogger::LogInvalid),
-          mParent(parent), mName(name)
+        : mParent(parent), mName(name), mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
+          mWasAbleToRead(false), mByteOrder(EndianessInherit), mLoggedData(ScriptLogger::LogInvalid)
 {
 }
 
 DataInformation::DataInformation(const DataInformation& d)
-        : mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
-          mWasAbleToRead(false), mByteOrder(d.mByteOrder), mLoggedData(ScriptLogger::LogInvalid),
-          mAdditionalData(d.mAdditionalData), mParent(0), mName(d.mName)
+        : mAdditionalData(d.mAdditionalData), mParent(0), mName(d.mName),
+          mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
+          mWasAbleToRead(false), mByteOrder(d.mByteOrder), mLoggedData(ScriptLogger::LogInvalid)
 {
 }
 
@@ -137,7 +136,7 @@ void DataInformation::setAdditionalFunction(AdditionalData::AdditionalDataType e
     }
     if (!value.isFunction())
     {
-        logWarn() << "cannot set" << name << "since" << value.toString() << "is not a function!";
+        logError() << "cannot set" << name << "since" << value.toString() << "is not a function!";
         return;
     }
     mAdditionalData.set(entry, QVariant::fromValue(value));

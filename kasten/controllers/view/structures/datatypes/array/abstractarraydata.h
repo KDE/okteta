@@ -81,6 +81,9 @@ public:
     virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const = 0;
     virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const = 0;
     virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
+
+    /** Takes ownership over @p type ! */
+    static AbstractArrayData* newArrayData(uint length, DataInformation* type, ArrayDataInformation* parent);
 protected:
     virtual void setNewParentForChildren() = 0;
 protected:
