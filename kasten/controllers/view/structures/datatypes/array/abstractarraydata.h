@@ -65,7 +65,7 @@ public:
     virtual DataInformation* childAt(unsigned int idx) = 0;
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine,
-            ScriptHandlerInfo* handlerInfo) const = 0;
+            ScriptHandlerInfo* handlerInfo) = 0;
     /** the primitive type or Type_Invalid for structs etc */
     virtual PrimitiveDataType primitiveType() const = 0;
 

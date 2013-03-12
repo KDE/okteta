@@ -57,7 +57,7 @@ public:
     virtual BitCount32 sizeAt(uint index);
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded);
 
-    virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
+    virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     virtual QString typeName() const;
 
     virtual bool isComplex() const;

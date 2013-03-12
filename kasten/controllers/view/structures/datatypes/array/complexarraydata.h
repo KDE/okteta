@@ -56,7 +56,7 @@ public:
     virtual PrimitiveDataType primitiveType() const;
     virtual bool isComplex() const;
 
-    QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
+    virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
     virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
