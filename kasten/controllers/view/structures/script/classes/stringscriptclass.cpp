@@ -215,7 +215,7 @@ QScriptValue StringScriptClass::prototype() const
 
 QScriptValue StringScriptClass::String_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    DataInformation* data = toDataInformation(ctx->thisObject().data());
     if (!data)
     {
         kDebug() << "could not cast data";

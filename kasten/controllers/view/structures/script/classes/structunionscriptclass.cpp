@@ -197,7 +197,7 @@ QScriptValue StructUnionScriptClass::prototype() const
 
 QScriptValue StructUnionScriptClass::StructUnion_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
         kWarning() << "could not cast data";
@@ -221,7 +221,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx
                         QLatin1String("(struct/union).child(name) argument has to be a string"));
         return QScriptValue::UndefinedValue;
     }
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
         kDebug() << "could not cast data";
@@ -245,7 +245,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_setChildren(QScriptContex
         return ctx->throwError(QScriptContext::RangeError,
                                QLatin1String("(struct/union).child(children) needs one argument"));
     }
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
         kDebug() << "could not cast data";

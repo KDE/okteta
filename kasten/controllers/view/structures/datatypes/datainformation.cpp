@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2009, 2010, 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2009, 2010, 2011, 2013 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -320,7 +320,7 @@ QString DataInformation::tooltipString() const
         else
         {
             validationMsg = i18nc("not all values in this structure are as they should be",
-                    "Validation failed: \"%1\"", additionalData()->validationError());
+                    "Validation failed: \"%1\"", validationMsg);
         }
         return i18n("Name: %1\nValue: %2\n\nType: %3\nSize: %4\n\n%5", name(),
                 valueStr, typeName(), sizeString(), validationMsg);
@@ -403,9 +403,8 @@ QSysInfo::Endian DataInformation::effectiveByteOrder() const
 
 QScriptValue DataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    QScriptValue ret = engine->newObject(scriptClass(handlerInfo));
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
+    return engine->newObject(scriptClass(handlerInfo),
+                             engine->newVariant(QVariant::fromValue(SafeReference(this))));
 }
 
 QScriptValue DataInformation::toScriptValue(TopLevelDataInformation* top)

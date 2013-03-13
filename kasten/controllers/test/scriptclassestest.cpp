@@ -43,6 +43,8 @@
 #include "view/structures/datatypes/uniondatainformation.h"
 #include "view/structures/script/scripthandler.h"
 #include "view/structures/script/scriptengineinitializer.h"
+#include "view/structures/script/classes/defaultscriptclass.h"
+#include "view/structures/script/safereference.h"
 #include "view/structures/parsers/scriptvalueconverter.h"
 #include "testutils.h"
 
@@ -354,11 +356,11 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
     arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Updating);
     QScriptValue v0 = eng->evaluate(QLatin1String("myArray[0]"));
     QCOMPARE(Utils::property(v0, "name").toString(), QString::number(0));
-    QVERIFY(qscriptvalue_cast<DataInformation*>(v0.data()) != 0);
+    QVERIFY(DefaultScriptClass::toDataInformation(v0) != 0);
     //access index 1 -> index 0 should become invalid, since there is only one object available
     QScriptValue v1 = eng->evaluate(QLatin1String("myArray[1]"));
-    QVERIFY(qscriptvalue_cast<DataInformation*>(v1.data()) != 0);
-    QVERIFY(qscriptvalue_cast<DataInformation*>(v0.data()) == 0);
+    QVERIFY(DefaultScriptClass::toDataInformation(v1) != 0);
+    QVERIFY(DefaultScriptClass::toDataInformation(v0) == 0);
     QVERIFY(!eng->hasUncaughtException());
     QCOMPARE(Utils::property(v1, "name").toString(), QString::number(1));
     QVERIFY(!eng->hasUncaughtException());

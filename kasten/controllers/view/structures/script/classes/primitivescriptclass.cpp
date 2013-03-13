@@ -115,7 +115,7 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
         if (pData->wasAbleToRead())
             return pData->valueAsQScriptValue();
         QScriptValue callee = engine()->currentContext()->thisObject();
-        DataInformation* cause = qscriptvalue_cast<DataInformation*>(callee.data());
+        DataInformation* cause = toDataInformation(callee);
         if (cause)
             pData->logError() << "Attempting to read from uninitialized value. Callee was " << cause->fullObjectPath();
         else
@@ -180,7 +180,7 @@ QScriptValue PrimitiveScriptClass::prototype() const
 
 QScriptValue PrimitiveScriptClass::Primitive_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
         kDebug() << "could not cast data";

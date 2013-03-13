@@ -47,7 +47,6 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     s_datatype = engine->toStringHandle(ParserStrings::PROPERTY_DATATYPE);
     s_updateFunc = engine->toStringHandle(ParserStrings::PROPERTY_UPDATE_FUNC);
     s_validationFunc = engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_FUNC);
-    qScriptRegisterMetaType<DataInfPtr>(engine, DefaultScriptClass::toScriptValue, DefaultScriptClass::fromScriptValue);
 
     //TODO remove, every subclass should have proto
     mDefaultPrototype = engine->newObject();
@@ -68,21 +67,18 @@ DefaultScriptClass::~DefaultScriptClass()
 {
 }
 
-QScriptValue DefaultScriptClass::toScriptValue(QScriptEngine* eng, const DataInfPtr& data)
+DataInformation* DefaultScriptClass::toDataInformation(const QScriptValue& obj)
 {
-    QScriptValue obj = eng->newObject();
-    obj.setData(eng->newVariant(QVariant::fromValue(SafeReference(data))));
-    return obj;
-}
-
-void DefaultScriptClass::fromScriptValue(const QScriptValue& obj, DataInfPtr& data)
-{
+    if (!obj.scriptClass())
+        return 0;
+    Q_ASSERT(obj.data().isVariant());
     const QVariant variant = obj.data().toVariant();
-    //TODO get a reference to the data to prevent unnecessary copying
-    if (variant.isValid() && variant.canConvert<SafeReference>())
-        data = variant.value<SafeReference>().data();
-    else
-        data = 0;
+    if (variant.isValid() && variant.canConvert<SafeReference>() && variant.userType() == qMetaTypeId<SafeReference>())
+    {
+        const SafeReference& ref = *reinterpret_cast<const SafeReference*>(variant.constData());
+        return ref.data();
+    }
+    return 0;
 }
 
 QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& object,
@@ -90,7 +86,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::None);
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = toDataInformation(object);
     if (!data)
     {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
@@ -134,7 +130,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
 QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScriptString& name, uint id)
 {
     Q_ASSERT(mHandlerInfo->mode() != ScriptHandlerInfo::None);
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = toDataInformation(object);
     if (!data)
     {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
@@ -194,7 +190,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
 
 void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation* data)
 {
-    DataInformation* thisObj = qscriptvalue_cast<DataInformation*>(engine()->currentContext()->thisObject().data());
+    DataInformation* thisObj = toDataInformation(engine()->currentContext()->thisObject());
     Q_CHECK_PTR(thisObj);
     const bool isThisObj = thisObj == data;
     if (data->hasBeenUpdated())
@@ -271,7 +267,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::None);
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = toDataInformation(object);
     if (!data)
     {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
@@ -346,7 +342,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     QScriptValue::PropertyFlags result;
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::None);
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = toDataInformation(object);
     if (!data)
     {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
@@ -384,7 +380,7 @@ QScriptValue DefaultScriptClass::prototype() const
 
 QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
         kWarning() << "could not cast data";
@@ -396,14 +392,13 @@ QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QSc
 
 QScriptClassPropertyIterator* DefaultScriptClass::newIterator(const QScriptValue& object)
 {
-    return new DefaultscriptClassIterator(object, mIterableProperties, engine());
+    return new DefaultscriptClassIterator(object, this);
 }
 
-DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& object, const DefaultScriptClass::PropertyInfoList& list,
-                                                       QScriptEngine* engine)
-    : QScriptClassPropertyIterator(object), mCurrent(-1), mList(list), mEngine(engine)
+DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& object, DefaultScriptClass* cls)
+        : QScriptClassPropertyIterator(object), mCurrent(-1), mClass(cls)
 {
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = DefaultScriptClass::toDataInformation(object);
     Q_CHECK_PTR(data);
     mData = data;
 }
@@ -414,7 +409,7 @@ DefaultscriptClassIterator::~DefaultscriptClassIterator()
 
 bool DefaultscriptClassIterator::hasNext() const
 {
-    return mCurrent < mList.size() - 1;
+    return mCurrent < mClass->mIterableProperties.size() - 1;
 }
 
 bool DefaultscriptClassIterator::hasPrevious() const
@@ -424,41 +419,41 @@ bool DefaultscriptClassIterator::hasPrevious() const
 
 QScriptString DefaultscriptClassIterator::name() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount())
         return QScriptString();
-    if (mCurrent < mList.size())
-        return mList.at(mCurrent).first;
-    int index = mCurrent - mList.size();
+    if (mCurrent < mClass->mIterableProperties.size())
+        return mClass->mIterableProperties.at(mCurrent).first;
+    int index = mCurrent - mClass->mIterableProperties.size();
     Q_ASSERT(index >= 0);
     DataInformation* child = mData->childAt(index);
-    return mEngine->toStringHandle(child->name());
+    return mClass->engine()->toStringHandle(child->name());
 }
 
 QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount())
         return 0;
-    if (mCurrent < mList.size())
-        return mList.at(mCurrent).second;
+    if (mCurrent < mClass->mIterableProperties.size())
+        return mClass->propertyFlags(object(), mClass->mIterableProperties.at(mCurrent).first, id());
     return QScriptValue::ReadOnly;
 }
 
 uint DefaultscriptClassIterator::id() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount())
         return 0;
     //only children have an id assigned
-    if (mCurrent < mList.size())
+    if (mCurrent < mClass->mIterableProperties.size())
         return 0;
-    return mCurrent - mList.size() + 1;
+    return mCurrent - mClass->mIterableProperties.size() + 1;
 }
 
 void DefaultscriptClassIterator::next()
 {
-    Q_ASSERT(mCurrent == -1 || (uint)mCurrent < mList.size() + mData->childCount());
+    Q_ASSERT(mCurrent == -1 || (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
     mCurrent++;
 }
 
@@ -470,7 +465,7 @@ void DefaultscriptClassIterator::previous()
 
 void DefaultscriptClassIterator::toBack()
 {
-    mCurrent = mList.size() + mData->childCount();
+    mCurrent = mClass->mIterableProperties.size() + mData->childCount();
 }
 
 void DefaultscriptClassIterator::toFront()
