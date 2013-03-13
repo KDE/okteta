@@ -93,8 +93,10 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
         if (pos >= data->childCount())
         {
             aData->logError() << "attempting to access out of bounds child: index was" << pos
-                    << ", maximum is" << (data->childCount() - 1);
-            return engine()->undefinedValue();
+                    << ", length is" << data->childCount();
+            return engine()->currentContext()->throwError(QScriptContext::RangeError,
+                QString(QLatin1String("Attempting to access array index %1, but length is %2")).arg(
+                    QString::number(pos), QString::number(data->childCount())));
         }
         else
         {
