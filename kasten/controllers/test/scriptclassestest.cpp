@@ -42,6 +42,13 @@
 #include "view/structures/datatypes/structuredatainformation.h"
 #include "view/structures/datatypes/uniondatainformation.h"
 #include "view/structures/script/scripthandler.h"
+#include "view/structures/script/classes/arrayscriptclass.h"
+#include "view/structures/script/classes/primitivescriptclass.h"
+#include "view/structures/script/classes/structunionscriptclass.h"
+#include "view/structures/script/classes/stringscriptclass.h"
+#include "view/structures/script/classes/enumscriptclass.h"
+#include "view/structures/script/classes/bitfieldscriptclass.h"
+#include "view/structures/script/classes/pointerscriptclass.h"
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/script/classes/defaultscriptclass.h"
 #include "view/structures/script/safereference.h"
@@ -70,6 +77,8 @@ private Q_SLOTS:
     void cleanupTestCase();
     void testSafeReferenceDeleteObject();
     void testSafePrimitiveArrayReference();
+    void testScriptValueContents_data();
+    void testScriptValueContents();
 
 private:
     QVector<PropertyPair> commonProperties;
@@ -131,8 +140,7 @@ void ScriptClassesTest::initTestCase()
         PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(
                 QLatin1String("prim"), static_cast<PrimitiveDataTypeEnum>(i), lwc);
         prim->setValue(10);
-        primitives.append(
-                new TopLevelDataInformation(prim, 0, ScriptEngineInitializer::newEngine()));
+        primitives << new TopLevelDataInformation(prim);
     }
 
     enumProperties << primitiveProperties << pair("enumValues", QScriptValue::Undeletable);
@@ -194,6 +202,44 @@ void ScriptClassesTest::initTestCase()
             new TopLevelDataInformation(unionData, 0, ScriptEngineInitializer::newEngine()));
     qSort(structUnionProperties);
 
+}
+
+Q_DECLARE_METATYPE(QScriptClass*)
+
+static inline void scriptValueContentsAddRow(const char* tag, DataInformation* data, QScriptClass* cls) {
+    QTest::newRow(tag) << data << cls;
+}
+
+void ScriptClassesTest::testScriptValueContents_data()
+{
+    QTest::addColumn<DataInformation*>("data");
+    QTest::addColumn<QScriptClass*>("scriptClass");
+
+    scriptValueContentsAddRow("struct", structData,
+            structDataTop->scriptHandler()->handlerInfo()->mStructUnionClass.data());
+    scriptValueContentsAddRow("union", unionData,
+            unionDataTop->scriptHandler()->handlerInfo()->mStructUnionClass.data());
+    scriptValueContentsAddRow("array", arrayData,
+            arrayDataTop->scriptHandler()->handlerInfo()->mArrayClass.data());
+    scriptValueContentsAddRow("string", stringData,
+            stringDataTop->scriptHandler()->handlerInfo()->mStringClass.data());
+}
+
+void ScriptClassesTest::testScriptValueContents()
+{
+    QFETCH(DataInformation*, data);
+    QFETCH(QScriptClass*, scriptClass);
+
+    QScriptValue val = data->toScriptValue(data->topLevelDataInformation());
+    QVERIFY(val.isValid());
+    QVERIFY(val.isObject());
+    QCOMPARE(val.scriptClass(), scriptClass);
+    QVERIFY(val.data().isVariant());
+    QVariant variant = val.data().toVariant();
+    QVERIFY(variant.isValid());
+    QVERIFY(variant.canConvert<SafeReference>());
+    QCOMPARE(variant.value<SafeReference>().data(), data);
+    QCOMPARE(DefaultScriptClass::toDataInformation(val), data);
 }
 
 void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
