@@ -23,11 +23,9 @@
 //#include "../datatypes/datainformation.h"
 
 #include <KDebug>
+#include <cstdio>
 
 SafeReferenceHolder SafeReferenceHolder::instance = SafeReferenceHolder();
-
-int safeRefDestroyCnt = 0;
-int safeRefRegisterCnt = 0;
 
 void SafeReferenceHolder::invalidateAll(DataInformation* data)
 {
@@ -46,6 +44,7 @@ void SafeReferenceHolder::invalidateAll(DataInformation* data)
 }
 
 SafeReferenceHolder::SafeReferenceHolder()
+    : safeRefDestroyCnt(0), safeRefRegisterCnt(0)
 {
 }
 
@@ -53,7 +52,7 @@ SafeReferenceHolder::~SafeReferenceHolder()
 {
     if (mRefs.size() > 0)
         kWarning() << mRefs.size() << "safe references were not removed";
-    qDebug() << "register count: " << safeRefRegisterCnt << " destroy count: " << safeRefDestroyCnt;
+    printf("register count: %d, destroy count %d: ", safeRefRegisterCnt, safeRefDestroyCnt);
 }
 
 

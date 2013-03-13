@@ -41,6 +41,8 @@ public:
     static SafeReferenceHolder instance;
 private:
     typedef QMultiHash<DataInformation*, SafeReference*> Container;
+    int safeRefDestroyCnt;
+    int safeRefRegisterCnt;
     Container mRefs;
 };
 
@@ -93,8 +95,6 @@ inline void SafeReference::invalidate()
 {
     mData = 0;
 }
-extern int safeRefDestroyCnt;
-extern int safeRefRegisterCnt;
 
 inline void SafeReferenceHolder::safeReferenceDestroyed(SafeReference* ref)
 {
