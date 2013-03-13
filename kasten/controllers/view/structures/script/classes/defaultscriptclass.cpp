@@ -31,6 +31,7 @@
 #include "../../parsers/scriptvalueconverter.h"
 #include "../scriptlogger.h"
 #include "../scripthandlerinfo.h"
+#include "../safereference.h"
 
 #include <KDebug>
 
@@ -70,13 +71,18 @@ DefaultScriptClass::~DefaultScriptClass()
 QScriptValue DefaultScriptClass::toScriptValue(QScriptEngine* eng, const DataInfPtr& data)
 {
     QScriptValue obj = eng->newObject();
-    obj.setData(eng->newVariant(QVariant::fromValue(data)));
+    obj.setData(eng->newVariant(QVariant::fromValue(SafeReference(data))));
     return obj;
 }
 
 void DefaultScriptClass::fromScriptValue(const QScriptValue& obj, DataInfPtr& data)
 {
-    data = qvariant_cast<DataInfPtr>(obj.data().toVariant());
+    const QVariant variant = obj.data().toVariant();
+    //TODO get a reference to the data to prevent unnecessary copying
+    if (variant.isValid() && variant.canConvert<SafeReference>())
+        data = variant.value<SafeReference>().data();
+    else
+        data = 0;
 }
 
 QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& object,

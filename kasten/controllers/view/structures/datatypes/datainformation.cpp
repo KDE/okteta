@@ -24,6 +24,7 @@
 #include "additionaldata.h"
 #include "structviewpreferences.h"
 #include "../script/scriptlogger.h"
+#include "../script/safereference.h"
 
 #include <QScriptValue>
 #include <QScriptEngine>
@@ -50,6 +51,8 @@ DataInformation::DataInformation(const DataInformation& d)
 
 DataInformation::~DataInformation()
 {
+    //references to this are no longer valid
+    SafeReferenceHolder::instance.invalidateAll(this);
 }
 
 QString DataInformation::valueString() const
@@ -403,4 +406,9 @@ QScriptValue DataInformation::toScriptValue(QScriptEngine* engine, ScriptHandler
     QScriptValue ret = engine->newObject(scriptClass(handlerInfo));
     ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
     return ret;
+}
+
+QScriptValue DataInformation::toScriptValue(TopLevelDataInformation* top)
+{
+    return toScriptValue(top->scriptEngine(), top->scriptHandler()->handlerInfo());
 }

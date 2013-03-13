@@ -328,6 +328,7 @@ set( STRUCTVIEW_SRCS
   view/structures/script/scriptutils.cpp
   view/structures/script/scriptlogger.cpp
   view/structures/script/scriptloggerview.cpp
+  view/structures/script/safereference.cpp
   view/structures/script/classes/defaultscriptclass.cpp
   view/structures/script/classes/arrayscriptclass.cpp
   view/structures/script/classes/primitivescriptclass.cpp

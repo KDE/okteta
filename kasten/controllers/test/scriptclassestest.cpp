@@ -1,7 +1,7 @@
 /*
  *    This file is part of the Okteta Kasten module, made within the KDE community.
  *
- *    Copyright 2012  Alex Richardson <alex.richardson@gmx.de>
+ *    Copyright 2012, 2013  Alex Richardson <alex.richardson@gmx.de>
  *
  *    This library is free software; you can redistribute it and/or
  *    modify it under the terms of the GNU Lesser General Public
@@ -44,6 +44,7 @@
 #include "view/structures/script/scripthandler.h"
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/parsers/scriptvalueconverter.h"
+#include "testutils.h"
 
 class ScriptClassesTest : public QObject
 {
@@ -65,6 +66,8 @@ private Q_SLOTS:
     void checkIterators();
     void testReplaceObject(); //check replacing datatype
     void cleanupTestCase();
+    void testSafeReferenceDeleteObject();
+    void testSafePrimitiveArrayReference();
 
 private:
     QVector<PropertyPair> commonProperties;
@@ -213,7 +216,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
         for (int i = 0; i < qMin(foundProperties.size(), expected.size()); ++i)
         {
             if (foundProperties.at(i) != expected.at(i))
-                qWarning() << tag << ":" << foundProperties.at(i) << "!=" << expected.at(i);
+                qWarning() << tag << ":" << foundProperties.at(i) << ", but expected:" << expected.at(i);
             QCOMPARE(foundProperties.at(i).first, expected.at(i).first);
             QCOMPARE(foundProperties.at(i).second, expected.at(i).second);
         }
@@ -335,15 +338,62 @@ void ScriptClassesTest::testReplaceObject()
     QCOMPARE(main->childAt(0)->name(), QString(QLatin1String("innerStruct")));
     QCOMPARE(main->childAt(1)->name(), QString(QLatin1String("innerArray")));
     QCOMPARE(main->childAt(2)->name(), QString(QLatin1String("innerPointer")));
-
-
 }
 
+static const QString invalidObjectError = QLatin1String("ReferenceError: Attempting to access an invalid object");
+
+void ScriptClassesTest::testSafePrimitiveArrayReference()
+{
+    QVERIFY(arrayData->arrayType()->isPrimitive());
+    QVERIFY(arrayData->length() > 2);
+    arrayDataTop->logger()->setLogToStdOut(true);
+    QScriptEngine* eng = arrayDataTop->scriptEngine();
+    eng->pushContext();
+    eng->currentContext()->activationObject().setProperty(QLatin1String("myArray"),
+            arrayData->toScriptValue(arrayDataTop.data()));
+    arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Updating);
+    QScriptValue v0 = eng->evaluate(QLatin1String("myArray[0]"));
+    QCOMPARE(Utils::property(v0, "name").toString(), QString::number(0));
+    QVERIFY(qscriptvalue_cast<DataInformation*>(v0.data()) != 0);
+    //access index 1 -> index 0 should become invalid, since there is only one object available
+    QScriptValue v1 = eng->evaluate(QLatin1String("myArray[1]"));
+    QVERIFY(qscriptvalue_cast<DataInformation*>(v1.data()) != 0);
+    QVERIFY(qscriptvalue_cast<DataInformation*>(v0.data()) == 0);
+    QVERIFY(!eng->hasUncaughtException());
+    QCOMPARE(Utils::property(v1, "name").toString(), QString::number(1));
+    QVERIFY(!eng->hasUncaughtException());
+    QCOMPARE(Utils::property(v0, "name").toString(), invalidObjectError);
+    QVERIFY(!eng->hasUncaughtException());
+    //even after accessing a v0 property (which will fail), v1 properties should remain valid
+    QCOMPARE(Utils::property(v1, "name").toString(), QString::number(1));
+    QVERIFY(!eng->hasUncaughtException());
+    arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::None);
+    eng->popContext();
+}
+
+void ScriptClassesTest::testSafeReferenceDeleteObject()
+{
+    QScopedPointer<TopLevelDataInformation> top(Utils::evalAndParse("struct({bar: uint8()}).set({name: 'foo'});"));
+    QVERIFY(top->actualDataInformation()->isStruct());
+    top->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::TaggedUnionSelection);
+    QScriptValue val = top->actualDataInformation()->toScriptValue(top.data());
+    QScriptValue name = Utils::property(val, "name");
+    QVERIFY(name.isValid());
+    QVERIFY(!name.isError());
+    QCOMPARE(name.toString(), QString(QLatin1String("foo")));
+    top->setActualDataInformation(new DummyDataInformation(0));
+    //val should now point to an invalid reference -> accessing name should throw an error
+    name = Utils::property(val, "name");
+    QVERIFY(name.isValid());
+    QVERIFY(name.isError());
+    QCOMPARE(name.toString(), invalidObjectError);
+}
 
 void ScriptClassesTest::cleanupTestCase()
 {
     qDeleteAll(primitives);
 }
+
 
 QTEST_MAIN(ScriptClassesTest)
 
