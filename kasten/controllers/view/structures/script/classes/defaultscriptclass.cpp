@@ -87,7 +87,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         return 0;
     }
     if (name == s_valid || name == s_validationError)
@@ -127,7 +127,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         return QScriptValue();
     }
     if (name == s_valid)
@@ -262,7 +262,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         return;
     }
     if (mode == ScriptHandlerInfo::Validating)
@@ -333,7 +333,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     if (!data)
     {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         return 0;
     }
     if (name == s_valid || name == s_validationError)
