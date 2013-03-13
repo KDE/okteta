@@ -1,7 +1,7 @@
 /*
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
- *   Copyright 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2011, 2012, 2013 Alex Richardson <alex.richardson@gmx.de>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -56,9 +56,9 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     //add all our properties
     mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_byteOrder, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    mIterableProperties.append(qMakePair(s_valid, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
+    mIterableProperties.append(qMakePair(s_valid, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_validationError, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_validationFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_updateFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
@@ -396,12 +396,11 @@ QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QSc
 
 QScriptClassPropertyIterator* DefaultScriptClass::newIterator(const QScriptValue& object)
 {
-    return new DefaultscriptClassIterator(object, mIterableProperties, engine());
+    return new DefaultscriptClassIterator(object, this);
 }
 
-DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& object, const DefaultScriptClass::PropertyInfoList& list,
-                                                       QScriptEngine* engine)
-    : QScriptClassPropertyIterator(object), mCurrent(-1), mList(list), mEngine(engine)
+DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& object, DefaultScriptClass* cls)
+        : QScriptClassPropertyIterator(object), mCurrent(-1), mClass(cls)
 {
     DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
     Q_CHECK_PTR(data);
@@ -414,7 +413,7 @@ DefaultscriptClassIterator::~DefaultscriptClassIterator()
 
 bool DefaultscriptClassIterator::hasNext() const
 {
-    return mCurrent < mList.size() - 1;
+    return mCurrent < mClass->mIterableProperties.size() - 1;
 }
 
 bool DefaultscriptClassIterator::hasPrevious() const
@@ -424,41 +423,41 @@ bool DefaultscriptClassIterator::hasPrevious() const
 
 QScriptString DefaultscriptClassIterator::name() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount())
         return QScriptString();
-    if (mCurrent < mList.size())
-        return mList.at(mCurrent).first;
-    int index = mCurrent - mList.size();
+    if (mCurrent < mClass->mIterableProperties.size())
+        return mClass->mIterableProperties.at(mCurrent).first;
+    int index = mCurrent - mClass->mIterableProperties.size();
     Q_ASSERT(index >= 0);
     DataInformation* child = mData->childAt(index);
-    return mEngine->toStringHandle(child->name());
+    return mClass->engine()->toStringHandle(child->name());
 }
 
 QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount())
         return 0;
-    if (mCurrent < mList.size())
-        return mList.at(mCurrent).second;
+    if (mCurrent < mClass->mIterableProperties.size())
+        return mClass->propertyFlags(object(), mClass->mIterableProperties.at(mCurrent).first, id());
     return QScriptValue::ReadOnly;
 }
 
 uint DefaultscriptClassIterator::id() const
 {
-    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mList.size() + mData->childCount());
-    if (mCurrent < 0 || (uint)mCurrent >= mList.size() + mData->childCount())
+    Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
+    if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount())
         return 0;
     //only children have an id assigned
-    if (mCurrent < mList.size())
+    if (mCurrent < mClass->mIterableProperties.size())
         return 0;
-    return mCurrent - mList.size() + 1;
+    return mCurrent - mClass->mIterableProperties.size() + 1;
 }
 
 void DefaultscriptClassIterator::next()
 {
-    Q_ASSERT(mCurrent == -1 || (uint)mCurrent < mList.size() + mData->childCount());
+    Q_ASSERT(mCurrent == -1 || (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
     mCurrent++;
 }
 
@@ -470,7 +469,7 @@ void DefaultscriptClassIterator::previous()
 
 void DefaultscriptClassIterator::toBack()
 {
-    mCurrent = mList.size() + mData->childCount();
+    mCurrent = mClass->mIterableProperties.size() + mData->childCount();
 }
 
 void DefaultscriptClassIterator::toFront()

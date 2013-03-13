@@ -59,40 +59,62 @@ static char nullUuid[16] =
 
 void CustomToStringTest::testUuid_data()
 {
-    QTest::addColumn<QString>("type");
+    QTest::addColumn<bool>("isGUID");
     QTest::addColumn<QString>("uuidString");
     QTest::addColumn<QByteArray>("data");
-    QTest::newRow("uuid1") << "UUID" << "{550e8400-e29b-41d4-a716-446655440000}" << QByteArray::fromRawData(uuid1, 16); //from wikipedia
-    QTest::newRow("uuid2") << "UUID" << "{3f2504e0-4f89-11d3-9a0c-0305e82c3301}"<< QByteArray::fromRawData(uuid2, 16); //from wikipedia
-    QTest::newRow("null uuid") << "UUID" << "{00000000-0000-0000-0000-000000000000}"<< QByteArray::fromRawData(nullUuid, 16);
+    QTest::newRow("uuid1") << false << "{550e8400-e29b-41d4-a716-446655440000}" << QByteArray::fromRawData(uuid1, 16); //from wikipedia
+    QTest::newRow("uuid2") << false << "{3f2504e0-4f89-11d3-9a0c-0305e82c3301}"<< QByteArray::fromRawData(uuid2, 16); //from wikipedia
+    QTest::newRow("null uuid") << false << "{00000000-0000-0000-0000-000000000000}"<< QByteArray::fromRawData(nullUuid, 16);
 
     //now the same just as a Microsoft GUID
-    QTest::newRow("guid1") << "GUID" << "{550e8400-e29b-41d4-a716-446655440000}" << QByteArray::fromRawData(uuid1, 16); //from wikipedia
-    QTest::newRow("guid2") << "GUID" << "{3f2504e0-4f89-11d3-9a0c-0305e82c3301}"<< QByteArray::fromRawData(uuid2, 16); //from wikipedia
-    QTest::newRow("null guid") << "GUID" << "{00000000-0000-0000-0000-000000000000}"<< QByteArray::fromRawData(nullUuid, 16);
+    QTest::newRow("guid1") << true << "{00840e55-9be2-d441-a716-446655440000}" << QByteArray::fromRawData(uuid1, 16); //from wikipedia
+    QTest::newRow("guid2") << true << "{e004253f-894f-d311-9a0c-0305e82c3301}"<< QByteArray::fromRawData(uuid2, 16); //from wikipedia
+    QTest::newRow("null guid") << true << "{00000000-0000-0000-0000-000000000000}"<< QByteArray::fromRawData(nullUuid, 16);
 }
 
 void CustomToStringTest::testUuid()
 {
     QFETCH(QByteArray, data);
     QFETCH(QString, uuidString);
-    QFETCH(QString, type);
-    QUuid uuid = QUuid::fromRfc4122(data);
-    QCOMPARE(uuid.toString(), uuidString);
+    QFETCH(bool, isGUID);
     QScriptEngine* eng = ScriptEngineInitializer::newEngine();
     ScriptLogger* logger = new ScriptLogger();
     logger->setLogToStdOut(true);
-    const QString codeBase = QLatin1String("var u = importScript('uuid.js'); u.%1();");
-    DataInformation* structure = Utils::evalAndParse(eng, codeBase.arg(type), logger);
+    DataInformation* structure = 0;
+    if (isGUID)
+        structure = Utils::evalAndParse(eng, "var u = importScript('uuid.js'); u.GUID();", logger);
+    else
+        structure = Utils::evalAndParse(eng, "var u = importScript('uuid.js'); u.UUID();", logger);
     QVERIFY(structure);
     TopLevelDataInformation top(structure, logger, eng);
     QCOMPARE(structure->childCount(), 4u);
+
     QVERIFY(structure->toStringFunction().isFunction());
     Okteta::ByteArrayModel model(reinterpret_cast<const uchar*>(data.constData()), data.size());
     model.setAutoDelete(false);
     top.read(&model, 0, Okteta::ArrayChangeMetricsList(), true);
+
+    QCOMPARE(structure->childAt(0)->effectiveByteOrder(),
+             isGUID ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
+    QCOMPARE(structure->childAt(1)->effectiveByteOrder(),
+             isGUID ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
+    QCOMPARE(structure->childAt(2)->effectiveByteOrder(),
+             isGUID ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
+    bool ok;
+    quint32 val1 = uuidString.mid(1, 8).toUInt(&ok, 16);
+    QVERIFY(ok);
+    quint16 val2 = uuidString.mid(10, 4).toUShort(&ok, 16);
+    QVERIFY(ok);
+    quint16 val3 = uuidString.mid(15, 4).toUShort(&ok, 16);
+    QVERIFY(ok);
+    qDebug() << hex << val1 << val2 << val3;
+    QCOMPARE(structure->childAt(0)->asPrimitive()->value().value<quint32>(), val1);
+    QCOMPARE(structure->childAt(1)->asPrimitive()->value().value<quint16>(), val2);
+    QCOMPARE(structure->childAt(2)->asPrimitive()->value().value<quint16>(), val3);
+
+    QString typeStr = isGUID ? QLatin1String("GUID") : QLatin1String("UUID");
+    QCOMPARE(structure->typeName(), typeStr);
     QCOMPARE(structure->valueString(), uuidString);
-    QCOMPARE(structure->typeName(), type);
 }
 
 QTEST_MAIN(CustomToStringTest)

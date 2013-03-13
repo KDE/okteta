@@ -1,7 +1,7 @@
 /*
  *    This file is part of the Okteta Kasten module, made within the KDE community.
  *
- *    Copyright 2012  Alex Richardson <alex.richardson@gmx.de>
+ *    Copyright 2012, 2013  Alex Richardson <alex.richardson@gmx.de>
  *
  *    This library is free software; you can redistribute it and/or
  *    modify it under the terms of the GNU Lesser General Public
@@ -113,7 +113,8 @@ void ScriptClassesTest::initTestCase()
             << pair("updateFunc", QScriptValue::Undeletable)
             << pair("validationFunc", QScriptValue::Undeletable)
             << pair("datatype", QScriptValue::Undeletable)
-            << pair("typeName", QScriptValue::Undeletable);
+            << pair("typeName", QScriptValue::Undeletable)
+            << pair("toStringFunc", QScriptValue::Undeletable);
 
     primitiveProperties << commonProperties << pair("value") << pair("char") << pair("int")
             << pair("int8") << pair("int16") << pair("int32") << pair("int64") << pair("uint")
@@ -214,7 +215,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
         for (int i = 0; i < qMin(foundProperties.size(), expected.size()); ++i)
         {
             if (foundProperties.at(i) != expected.at(i))
-                qWarning() << tag << ":" << foundProperties.at(i) << "!=" << expected.at(i);
+                qWarning() << tag << ":" << foundProperties.at(i) << ", but expected:" << expected.at(i);
             QCOMPARE(foundProperties.at(i).first, expected.at(i).first);
             QCOMPARE(foundProperties.at(i).second, expected.at(i).second);
         }
@@ -336,10 +337,7 @@ void ScriptClassesTest::testReplaceObject()
     QCOMPARE(main->childAt(0)->name(), QString(QLatin1String("innerStruct")));
     QCOMPARE(main->childAt(1)->name(), QString(QLatin1String("innerArray")));
     QCOMPARE(main->childAt(2)->name(), QString(QLatin1String("innerPointer")));
-
-
 }
-
 
 void ScriptClassesTest::cleanupTestCase()
 {
