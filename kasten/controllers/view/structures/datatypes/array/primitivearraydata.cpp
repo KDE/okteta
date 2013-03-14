@@ -23,6 +23,7 @@
 #include "arraydatainformation.h"
 #include "../primitive/primitivedatainformation.h"
 #include "../../script/scriptlogger.h"
+#include "../../script/safereference.h"
 
 #include <abstractbytearraymodel.h>
 
@@ -218,6 +219,8 @@ template<PrimitiveDataTypeEnum type>
 QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
     Q_ASSERT(index < length());
+    //invalidate all previous references
+    SafeReferenceHolder::instance.invalidateAll(mChildType.data());
     mChildType->mWasAbleToRead = this->mNumReadValues > index;
     mChildType->asPrimitive()->setValue(this->mData.at(index));
     mChildType->setName(QString::number(index));

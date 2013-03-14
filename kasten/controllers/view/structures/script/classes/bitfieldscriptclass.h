@@ -38,4 +38,4 @@ protected:
     QScriptString s_width;
 };
 
-#endif				// BITFIELDSCRIPTCLASS_H
+#endif // BITFIELDSCRIPTCLASS_H

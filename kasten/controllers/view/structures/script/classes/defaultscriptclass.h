@@ -51,8 +51,12 @@ public:
 
     virtual QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
 
-    static QScriptValue toScriptValue(QScriptEngine* eng, const DataInfPtr& data);
-    static void fromScriptValue(const QScriptValue& obj, DataInfPtr& data);
+    /** Convert a QScriptValue to DataInformation than qscriptvalue_cast, since we know exactly what to expect
+     * @param val the value to convert. Do not call .data() on it.
+     * @return @p val converted to a Datainformation*
+     */
+    static DataInformation* toDataInformation(const QScriptValue& val);
+
 protected:
     virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QueryFlags* flags, uint* id) = 0;
     virtual bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)  = 0;

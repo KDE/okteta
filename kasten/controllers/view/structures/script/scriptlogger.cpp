@@ -108,7 +108,7 @@ QDebug ScriptLogger::log(LogLevel level, const QString& origin)
 {
     Q_ASSERT(level != LogInvalid);
     if (mLogToStdOut)
-        return qDebug();
+        return (level == LogInvalid || level == LogInfo) ? qDebug() : qWarning();
 
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
     mData.append(Data(level, origin));

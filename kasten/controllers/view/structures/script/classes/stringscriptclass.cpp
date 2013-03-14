@@ -101,7 +101,11 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
     {
         quint32 pos = id - 1;
         if (pos >= uint(sData->stringLength()))
-            return engine()->undefinedValue();
+        {
+            return engine()->currentContext()->throwError(QScriptContext::RangeError,
+                QString(QLatin1String("Attempting to access string index %1, but length is %2")).arg(
+                    QString::number(pos), QString::number(sData->stringLength())));
+        }
         else
         {
             return sData->valueAt(pos);
@@ -211,7 +215,7 @@ QScriptValue StringScriptClass::prototype() const
 
 QScriptValue StringScriptClass::String_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    DataInformation* data = toDataInformation(ctx->thisObject().data());
     if (!data)
     {
         kWarning() << "could not cast data";

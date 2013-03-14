@@ -24,6 +24,7 @@
 #include "scriptengineinitializer.h"
 #include "scriptutils.h"
 #include "scriptlogger.h"
+#include "classes/defaultscriptclass.h"
 #include "../datatypes/datainformation.h"
 #include "../datatypes/topleveldatainformation.h"
 #include "../datatypes/array/arraydatainformation.h"
@@ -80,6 +81,7 @@ void ScriptHandler::validateData(DataInformation* data)
                     << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
             data->setValidationError(QLatin1String("Error occurred in validation: ")
                     + result.toString());
+            mEngine->clearExceptions();
         }
         if (result.isBool() || result.isBoolean())
         {
@@ -115,8 +117,9 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         {
             mTopLevel->logger()->error(context) << "Error occurred while updating element:"
                     << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
+            mEngine->clearExceptions();
         }
-        DataInformation* newData = qscriptvalue_cast<DataInformation*>(result);
+        DataInformation* newData = DefaultScriptClass::toDataInformation(result);
         if (newData)
             newData->mHasBeenUpdated = true;
     }
@@ -134,6 +137,12 @@ void ScriptHandler::updateLength(ArrayDataInformation* array)
         Q_ASSERT(lengthFunc.isFunction());
 
         QScriptValue result = callFunction(lengthFunc, array, ScriptHandlerInfo::DeterminingLength);
+        if (mEngine->hasUncaughtException())
+        {
+            mTopLevel->logger()->error(array) << "Error occurred while calculating length:"
+                    << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
+            mEngine->clearExceptions();
+        }
         ParsedNumber<uint> value = ParserUtils::uintFromScriptValue(result);
         if (value.isValid)
             array->setArrayLength(value.value);

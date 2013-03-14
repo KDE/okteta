@@ -29,7 +29,9 @@
 #include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
+#include "view/structures/datatypes/topleveldatainformation.h"
 #include "view/structures/parsers/scriptvalueconverter.h"
+#include "view/structures/script/scriptengineinitializer.h"
 
 namespace Utils
 {
@@ -50,15 +52,61 @@ T binary(const char* val)
     return static_cast<T>(result);
 }
 
-DataInformation* evalAndParse(QScriptEngine* eng, const QString& code, ScriptLogger* logger) {
+DataInformation* evalAndParse(QScriptEngine* eng, const QString& code, ScriptLogger* logger)
+{
     QScriptValue result = eng->evaluate(code);
     if (result.isError())
         qWarning() << "error parsing" << code << ":" << result.toString();
     return ScriptValueConverter::convert(result, QLatin1String("result"), logger);
 }
 
-DataInformation* evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger* logger) {
+DataInformation* evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger* logger)
+{
     return evalAndParse(eng, QLatin1String(code), logger);
+}
+
+TopLevelDataInformation* evalAndParse(const QString& code)
+{
+    ScriptLogger* l = new ScriptLogger();
+    l->setLogToStdOut(true);
+    QScriptEngine* engine = ScriptEngineInitializer::newEngine();
+    DataInformation* inf = evalAndParse(engine, code, l);
+    Q_ASSERT(inf);
+    return new TopLevelDataInformation(inf, l, engine);
+}
+
+TopLevelDataInformation* evalAndParse(const char* code)
+{
+    return evalAndParse(QLatin1String(code));
+}
+
+/** The same as engine->evaluate, but if there is an exception return that instead */
+QScriptValue evaluate(QScriptEngine* engine, const QString& code)
+{
+    QScriptValue ret = engine->evaluate(code);
+    if (engine->hasUncaughtException())
+    {
+        ret = engine->uncaughtException();
+        engine->clearExceptions();
+    }
+    return ret;
+}
+
+QScriptValue evaluate(QScriptEngine* engine, const char* code)
+{
+    return evaluate(engine, QLatin1String(code));
+}
+
+/** The same as value.property(), but if there is an exception return that instead*/
+QScriptValue property(const QScriptValue& value, const char* property)
+{
+    QScriptValue ret = value.property(QLatin1String(property));
+    if (value.engine()->hasUncaughtException())
+    {
+        ret = value.engine()->uncaughtException();
+        value.engine()->clearExceptions();
+    }
+    return ret;
 }
 
 struct DataInformationCheck

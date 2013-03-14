@@ -31,6 +31,7 @@
 #include "../../parsers/scriptvalueconverter.h"
 #include "../scriptlogger.h"
 #include "../scripthandlerinfo.h"
+#include "../safereference.h"
 
 #include <KDebug>
 
@@ -48,7 +49,7 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     s_validationFunc = engine->toStringHandle(ParserStrings::PROPERTY_VALIDATION_FUNC);
     s_customTypeName = engine->toStringHandle(ParserStrings::PROPERTY_CUSTOM_TYPE_NAME);
     s_asStringFunc = engine->toStringHandle(ParserStrings::PROPERTY_TO_STRING_FUNC);
-    qScriptRegisterMetaType<DataInfPtr>(engine, DefaultScriptClass::toScriptValue, DefaultScriptClass::fromScriptValue);
+
 
     //TODO remove, every subclass should have proto
     mDefaultPrototype = engine->newObject();
@@ -71,16 +72,18 @@ DefaultScriptClass::~DefaultScriptClass()
 {
 }
 
-QScriptValue DefaultScriptClass::toScriptValue(QScriptEngine* eng, const DataInfPtr& data)
+DataInformation* DefaultScriptClass::toDataInformation(const QScriptValue& obj)
 {
-    QScriptValue obj = eng->newObject();
-    obj.setData(eng->newVariant(QVariant::fromValue(data)));
-    return obj;
-}
-
-void DefaultScriptClass::fromScriptValue(const QScriptValue& obj, DataInfPtr& data)
-{
-    data = qvariant_cast<DataInfPtr>(obj.data().toVariant());
+    if (!obj.scriptClass())
+        return 0;
+    Q_ASSERT(obj.data().isVariant());
+    const QVariant variant = obj.data().toVariant();
+    if (variant.isValid() && variant.canConvert<SafeReference>() && variant.userType() == qMetaTypeId<SafeReference>())
+    {
+        const SafeReference& ref = *reinterpret_cast<const SafeReference*>(variant.constData());
+        return ref.data();
+    }
+    return 0;
 }
 
 QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& object,
@@ -88,10 +91,12 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::None);
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = toDataInformation(object);
     if (!data)
     {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
+        engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                QLatin1String("Attempting to access an invalid object"));
         return 0;
     }
     if (name == s_valid || name == s_validationError)
@@ -121,6 +126,8 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     else
     {
         data->logError() << "could not find property with name" << name.toString();
+        engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                QLatin1String("Could not find property with name ") + name.toString());
         return 0;
     }
 }
@@ -128,11 +135,12 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
 QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScriptString& name, uint id)
 {
     Q_ASSERT(mHandlerInfo->mode() != ScriptHandlerInfo::None);
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = toDataInformation(object);
     if (!data)
     {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
-        return QScriptValue();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
+        return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                QLatin1String("Attempting to access an invalid object"));
     }
     if (name == s_valid)
     {
@@ -188,13 +196,14 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     else
     {
         data->logError() << "could not find property with name" << name.toString();
-        return engine()->undefinedValue();
+        return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                QLatin1String("Cannot read property ") + name.toString());
     }
 }
 
 void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation* data)
 {
-    DataInformation* thisObj = qscriptvalue_cast<DataInformation*>(engine()->currentContext()->thisObject().data());
+    DataInformation* thisObj = toDataInformation(engine()->currentContext()->thisObject());
     Q_CHECK_PTR(thisObj);
     const bool isThisObj = thisObj == data;
     if (data->hasBeenUpdated())
@@ -271,10 +280,12 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::None);
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = toDataInformation(object);
     if (!data)
     {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
+        engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                QLatin1String("Attempting to access an invalid object"));
         return;
     }
     if (mode == ScriptHandlerInfo::Validating)
@@ -339,6 +350,8 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         else
         {
             data->logError() << "could not set property with name" << name.toString();
+            engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                QLatin1String("Cannot write property ") + name.toString());
         }
     }
 }
@@ -348,10 +361,12 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     QScriptValue::PropertyFlags result;
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::None);
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = toDataInformation(object);
     if (!data)
     {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.toString();
+        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
+        engine()->currentContext()->throwError(QScriptContext::ReferenceError,
+                QLatin1String("Attempting to access an invalid object"));
         return 0;
     }
     if (name == s_valid || name == s_validationError)
@@ -384,7 +399,7 @@ QScriptValue DefaultScriptClass::prototype() const
 
 QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(ctx->thisObject().data());
+    DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
         kWarning() << "could not cast data";
@@ -402,7 +417,7 @@ QScriptClassPropertyIterator* DefaultScriptClass::newIterator(const QScriptValue
 DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& object, DefaultScriptClass* cls)
         : QScriptClassPropertyIterator(object), mCurrent(-1), mClass(cls)
 {
-    DataInformation* data = qscriptvalue_cast<DataInformation*>(object.data());
+    DataInformation* data = DefaultScriptClass::toDataInformation(object);
     Q_CHECK_PTR(data);
     mData = data;
 }

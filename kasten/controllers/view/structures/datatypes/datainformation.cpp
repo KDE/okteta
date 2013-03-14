@@ -24,6 +24,7 @@
 #include "additionaldata.h"
 #include "structviewpreferences.h"
 #include "../script/scriptlogger.h"
+#include "../script/safereference.h"
 
 #include <QScriptValue>
 #include <QScriptEngine>
@@ -48,6 +49,8 @@ DataInformation::DataInformation(const DataInformation& d)
 
 DataInformation::~DataInformation()
 {
+    //references to this are no longer valid
+    SafeReferenceHolder::instance.invalidateAll(this);
 }
 
 QString DataInformation::sizeString() const
@@ -271,14 +274,20 @@ QString DataInformation::fullObjectPath() const
 
 QScriptValue DataInformation::toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    QScriptValue ret = engine->newObject(scriptClass(handlerInfo));
-    ret.setData(engine->toScriptValue(static_cast<DataInformation*>(this)));
-    return ret;
+    return engine->newObject(scriptClass(handlerInfo),
+                             engine->newVariant(QVariant::fromValue(SafeReference(this))));
 }
 
 QSysInfo::Endian DataInformation::byteOrderFromSettings() const
 {
     return Kasten2::StructViewPreferences::byteOrder();
+}
+
+
+
+QScriptValue DataInformation::toScriptValue(TopLevelDataInformation* top)
+{
+    return toScriptValue(top->scriptEngine(), top->scriptHandler()->handlerInfo());
 }
 
 QString DataInformation::customToString(const QScriptValue& func) const
@@ -291,3 +300,4 @@ QString DataInformation::customToString(const QScriptValue& func) const
     Q_ASSERT(func.isFunction());
     return topLevelDataInformation()->scriptHandler()->customToString(this, func);
 }
+

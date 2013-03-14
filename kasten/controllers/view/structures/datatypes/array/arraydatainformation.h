@@ -80,6 +80,7 @@ public:
      * @param newChildtype the new type (ownership is always taken, do not use anymore after this call!)
      */
     void setArrayType(DataInformation* newChildtype);
+    DataInformation* arrayType() const;
 
     QScriptValue childType() const;
     QScriptValue lengthFunction() const;
@@ -162,6 +163,11 @@ inline void ArrayDataInformation::setChildWidgetData(uint index, QWidget* w) con
 inline QString ArrayDataInformation::childTypeName(uint index) const
 {
     return mData->dataAt(index, DataInformation::ColumnType, Qt::DisplayRole).toString();
+}
+
+inline DataInformation* ArrayDataInformation::arrayType() const
+{
+    return mData->childType();
 }
 
 inline QScriptValue ArrayDataInformation::lengthFunction() const

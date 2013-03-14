@@ -193,6 +193,8 @@ public:
      * @return a QScriptValue wrapping this object
      */
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+    /** the same as above, just using the properties from TopLevelDataInformation */
+    QScriptValue toScriptValue(TopLevelDataInformation* top);
     void setParent(DataInformationBase* newParent);
     DataInformationBase* parent() const;
     ScriptLogger* logger() const;
