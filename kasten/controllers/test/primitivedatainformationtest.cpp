@@ -87,7 +87,7 @@ int PrimitiveDataInformationTest::minimumSignedBits(qint64 value)
         if ((value & (qint64(1) << i)) == 0)
             return i + 2; //found first zero, we need one bit more
     }
-    Q_ASSERT(false);
+    QTEST_ASSERT(false);
     return 65;
 }
 
@@ -100,7 +100,7 @@ int PrimitiveDataInformationTest::minimumUnsignedBits(quint64 value)
         if ((value & (quint64(1) << i)) == (quint64(1) << i))
             return i + 1;
     }
-    Q_ASSERT(false);
+    QTEST_ASSERT(false);
     return 65;
 }
 

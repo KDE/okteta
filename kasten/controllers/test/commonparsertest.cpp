@@ -56,7 +56,7 @@ void CommonParserTest::testIntFromString_data()
     QTest::newRow("0xff") << "0xff" << true << 0xff;
 
     int maxInt = 0x7fffffff;
-    Q_ASSERT(maxInt == std::numeric_limits<int>::max());
+    QTEST_ASSERT(maxInt == std::numeric_limits<int>::max());
     QTest::newRow("max decimal") << "2147483647" << true << maxInt;
     QTest::newRow("max hex") << "0x7fffffff" << true << maxInt;
     QTest::newRow("max hex no leading 0x") << "7fffffff" << false;
@@ -67,7 +67,7 @@ void CommonParserTest::testIntFromString_data()
     QTest::newRow("max-1 hex") << "7ffffffe" << false << 2147483646;
 
     int minInt = -0x80000000;
-    Q_ASSERT(minInt == std::numeric_limits<int>::min());
+    QTEST_ASSERT(minInt == std::numeric_limits<int>::min());
     QTest::newRow("min decimal") << "-2147483648" << true << minInt;
     QTest::newRow("min hex") << "-0x80000000" << true << minInt;
 
@@ -104,7 +104,7 @@ void CommonParserTest::testUIntFromString_data()
     QTest::newRow("1234") << "1234" << true << 1234u;
 
     uint maxUint = 0xffffffff;
-    Q_ASSERT(maxUint == std::numeric_limits<uint>::max());
+    QTEST_ASSERT(maxUint == std::numeric_limits<uint>::max());
     QTest::newRow("max decimal") << "4294967295" << true << maxUint;
     QTest::newRow("max hex") << "0xffffffff" << true << maxUint;
     QTest::newRow("max hex no leading 0x") << "ffffffff" << false;
@@ -155,7 +155,7 @@ void CommonParserTest::testIntFromScriptValue_data()
     QTest::newRow("-0xff string") << QScriptValue(QLatin1String("-0xff")) << true << -0xff;
 
     int maxInt = 0x7fffffff;
-    Q_ASSERT(maxInt == std::numeric_limits<int>::max());
+    QTEST_ASSERT(maxInt == std::numeric_limits<int>::max());
     QTest::newRow("max int") << QScriptValue(maxInt) << true << maxInt;
     QTest::newRow("max double") << QScriptValue(double(maxInt)) << true << maxInt;
     QTest::newRow("max string") << QScriptValue(QLatin1String("2147483647")) << true << maxInt;
@@ -167,7 +167,7 @@ void CommonParserTest::testIntFromScriptValue_data()
     QTest::newRow("max+2") << QScriptValue(double(maxInt) + 2) << false;
 
     int minInt = -0x80000000;
-    Q_ASSERT(minInt == std::numeric_limits<int>::min());
+    QTEST_ASSERT(minInt == std::numeric_limits<int>::min());
     QTest::newRow("min int") << QScriptValue(minInt) << true << minInt;
     QTest::newRow("min double") << QScriptValue(double(minInt)) << true << minInt;
     QTest::newRow("min string") << QScriptValue(QLatin1String("-2147483648")) << true << minInt;
@@ -222,7 +222,7 @@ void CommonParserTest::testUIntFromScriptValue_data()
     QTest::newRow("negative number") << QScriptValue(-1) << false;
 
     uint maxInt = 0xffffffff;
-    Q_ASSERT(maxInt == std::numeric_limits<uint>::max());
+    QTEST_ASSERT(maxInt == std::numeric_limits<uint>::max());
     QTest::newRow("max") << QScriptValue(double(maxInt)) << true << maxInt;
     QTest::newRow("max int") << QScriptValue(maxInt) << true << maxInt;
     QTest::newRow("max string") << QScriptValue(QLatin1String("4294967295")) << true << maxInt;
