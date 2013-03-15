@@ -477,7 +477,7 @@ structures_unit_test( commonparsertest "structures-common-parser" test/commonpar
 structures_unit_test( jsparsertest "structures-js-parser" test/jsparsertest.cpp )
 structures_unit_test( customtostringtest "structures-custom-to-string" test/customtostringtest.cpp )
 structures_unit_test( locktooffsettest "structures-lock-to-offset" test/locktooffsettest.cpp )
-set_target_properties( jsparsertest customtostringtest PROPERTIES COMPILE_DEFINITIONS SRCDIR=\"${CMAKE_CURRENT_SOURCE_DIR}/test\" )
+set_target_properties( jsparsertest customtostringtest PROPERTIES COMPILE_DEFINITIONS SRCDIR=\"${CMAKE_CURRENT_SOURCE_DIR}\" )
 
 endif ( KDE4_BUILD_TESTS )
 
@@ -574,17 +574,17 @@ install( FILES ${okteta_kastencontrollers_LIB_HDRS}
 install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
 
 set( elf_structure_FILES
-  view/structures/examples/elf/metadata.desktop
-  view/structures/examples/elf/main.osd
+  view/structures/examples/okteta/structures/elf/metadata.desktop
+  view/structures/examples/okteta/structures/elf/main.osd
 )
 install( FILES ${elf_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/elf )
 
 set( png_structure_FILES
-  view/structures/examples/png/metadata.desktop
-  view/structures/examples/png/main.osd
+  view/structures/examples/okteta/structures/png/metadata.desktop
+  view/structures/examples/okteta/structures/png/main.osd
 )
 install( FILES ${png_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/png )
-install( FILES test/resources/okteta/structures/uuid.js  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/ )
+install( FILES view/structures/examples/okteta/structures/uuid.js  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/ )
 install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 
 configure_file( view/structures/struct2osd.sh.in ${CMAKE_CURRENT_BINARY_DIR}/struct2osd.sh @ONLY)
