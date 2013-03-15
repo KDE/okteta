@@ -35,8 +35,8 @@ class ScriptHandlerInfo;
 
 class DefaultScriptClass : public QScriptClass
 {
+    friend class DefaultscriptClassIterator;
     Q_DISABLE_COPY(DefaultScriptClass)
-
 public:
     typedef DataInformation* DataInfPtr;
     typedef QVector<QPair<QScriptString, QScriptValue::PropertyFlags> > PropertyInfoList;
@@ -85,8 +85,7 @@ protected:
 /** Provide a default iterator for all properties. This should suffice for all classes that don't have children */
 class DefaultscriptClassIterator : public QScriptClassPropertyIterator {
 public:
-    DefaultscriptClassIterator(const QScriptValue& object, const DefaultScriptClass::PropertyInfoList& list,
-        QScriptEngine* engine);
+    DefaultscriptClassIterator(const QScriptValue& object, DefaultScriptClass* cls);
     virtual ~DefaultscriptClassIterator();
     virtual bool hasNext() const;
     virtual bool hasPrevious() const;
@@ -99,8 +98,7 @@ public:
     virtual void toFront();
 private:
     int mCurrent;
-    const DefaultScriptClass::PropertyInfoList& mList;
-    QScriptEngine* mEngine;
+    DefaultScriptClass* mClass;
     DataInformation* mData;
 };
 
