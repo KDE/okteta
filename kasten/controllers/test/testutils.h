@@ -45,10 +45,10 @@ T binary(const char* val)
 {
     QString value = QLatin1String(val);
     value = value.remove(QLatin1Char(' '));
-    Q_ASSERT(unsigned(value.length()) <= sizeof(T) * 8); //otherwise we overflow
+    QTEST_ASSERT(unsigned(value.length()) <= sizeof(T) * 8); //otherwise we overflow
     bool ok = false;
     quint64 result = value.toULongLong(&ok, 2);
-    Q_ASSERT(ok);
+    QTEST_ASSERT(ok);
     return static_cast<T>(result);
 }
 
@@ -71,7 +71,7 @@ TopLevelDataInformation* evalAndParse(const QString& code)
     l->setLogToStdOut(true);
     QScriptEngine* engine = ScriptEngineInitializer::newEngine();
     DataInformation* inf = evalAndParse(engine, code, l);
-    Q_ASSERT(inf);
+    QTEST_ASSERT(inf);
     return new TopLevelDataInformation(inf, l, engine);
 }
 
