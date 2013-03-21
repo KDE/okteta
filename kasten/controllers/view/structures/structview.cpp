@@ -72,8 +72,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mStructTreeView->setItemsExpandable(true);
     mStructTreeView->setUniformRowHeights(true);
     mStructTreeView->setAllColumnsShowFocus(true);
-    mStructTreeView->setEditTriggers(QAbstractItemView::DoubleClicked
-            | QAbstractItemView::EditKeyPressed);
+    mStructTreeView->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed);
     mStructTreeView->setItemDelegate(mDelegate);
     mStructTreeView->setDragEnabled(false);
     mStructTreeView->setSortingEnabled(false);
@@ -289,7 +288,7 @@ void StructView::onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model)
     QModelIndex current = mStructTreeView->currentIndex();
     mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
     setLockButtonState(mTool->isStructureLocked(current));
-    mValidateButton->setEnabled(validModel && current.isValid());
+    mValidateButton->setEnabled(validModel);
 }
 
 }

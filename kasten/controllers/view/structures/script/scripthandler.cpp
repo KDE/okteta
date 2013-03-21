@@ -60,7 +60,7 @@ void ScriptHandler::validateData(DataInformation* data)
 
     //check if has a validation function:
     QScriptValue validationFunc = data->validationFunc();
-    if (!validationFunc.isValid())
+    if (validationFunc.isValid())
     {
 #ifdef OKTETA_DEBUG_SCRIPT
         mDebugger->attachTo(mEngine.data());
@@ -94,8 +94,8 @@ void ScriptHandler::validateData(DataInformation* data)
             if (!str.isEmpty())
                 data->setValidationError(str);
         }
+        data->mHasBeenValidated = true;
     }
-    data->mHasBeenValidated = true;
 }
 
 void ScriptHandler::updateDataInformation(DataInformation* data)
