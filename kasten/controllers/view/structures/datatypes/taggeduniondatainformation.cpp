@@ -151,11 +151,23 @@ qint64 TaggedUnionDataInformation::readData(Okteta::AbstractByteArrayModel *inpu
     TopLevelDataInformation* top = topLevelDataInformation();
     Q_CHECK_PTR(top);
 
+    const QVector<DataInformation*>& oldChildren = currentChildren();
+
     qint64 readBits = 0;
     mWasAbleToRead = StructureDataInformation::readChildren(mChildren,
             input, address, bitsRemaining, bitOffset, &readBits, top);
     mLastIndex = determineSelection(top);
     const QVector<DataInformation*>& others = currentChildren();
+    //check whether we have different children now, if yes we have to emit child count changed
+    if (oldChildren != others) {
+        const int fixedSize = mChildren.size();
+        //tell the model that all children have changed by setting to 0 and then to new size
+        top->_childCountAboutToChange(this, fixedSize + oldChildren.size(), fixedSize);
+        top->_childCountChanged(this, fixedSize + oldChildren.size(), fixedSize);
+        top->_childCountAboutToChange(this, fixedSize, fixedSize + others.size());
+        top->_childCountChanged(this, fixedSize, fixedSize + others.size());
+    }
+
     //this is important since the remaining children might have changed since before the read
     //where beginRead was called on the children at that time
     for (int i = 0; i < others.size(); i++)
