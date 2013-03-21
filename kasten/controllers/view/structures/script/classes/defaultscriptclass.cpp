@@ -193,7 +193,8 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     DataInformation* thisObj = toDataInformation(engine()->currentContext()->thisObject());
     Q_CHECK_PTR(thisObj);
     const bool isThisObj = thisObj == data;
-    if (data->hasBeenUpdated())
+    //this object always has mHasBeenUpdated set just before calling updateFunc, so in that case it is okay
+    if (data->hasBeenUpdated() && !isThisObj)
     {
         //this element has already been updated (and probably read, replacing it could cause crazy errors
         data->logError() << "Attempting to replace an already updated object. This could cause errors."
@@ -216,6 +217,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     bool replaced = false;
     if (parent->isTopLevel())
     {
+        Q_ASSERT(isThisObj); //we can only do this if we are currently at the top level element
         parent->asTopLevel()->setActualDataInformation(newType);
         replaced = true;
     }
@@ -252,7 +254,6 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     if (replaced)
     {
         top->setChildDataChanged();
-        newType->mHasBeenUpdated = true;
         //if the current object was "this" in javascript we have to replace it
         if (isThisObj)
             engine()->currentContext()->setThisObject(newType->toScriptValue(engine(), mHandlerInfo));
@@ -261,6 +262,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     {
         delete newType; //could not set new type
     }
+    newType->mHasBeenUpdated = true;
 }
 
 void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value)

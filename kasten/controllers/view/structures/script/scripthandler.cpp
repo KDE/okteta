@@ -104,6 +104,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
     //check if has an update function:
     Q_ASSERT(!data->hasBeenUpdated());
     QScriptValue updateFunc = data->updateFunc();
+    data->mHasBeenUpdated = true;
     if (updateFunc.isValid())
     {
         QString context = data->fullObjectPath(); //we mustn't use data after updateFunc.call(), save context
@@ -119,13 +120,6 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
                     << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
             mEngine->clearExceptions();
         }
-        DataInformation* newData = DefaultScriptClass::toDataInformation(result);
-        if (newData)
-            newData->mHasBeenUpdated = true;
-    }
-    else
-    {
-        data->mHasBeenUpdated = true;
     }
 }
 

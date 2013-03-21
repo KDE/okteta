@@ -260,9 +260,5 @@ int TopLevelDataInformation::indexOf(const DataInformation* const data) const
 void TopLevelDataInformation::setActualDataInformation(DataInformation* newData)
 {
     Q_ASSERT(newData);
-    Q_ASSERT(!mData->hasBeenUpdated());
-    if (mData->hasBeenUpdated())
-        mLogger->error() << "Cannot replace top level element since it was already updated!";
-    else
-        mData.reset(newData);
+    mData.reset(newData);
 }
