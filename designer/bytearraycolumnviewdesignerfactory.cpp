@@ -53,7 +53,7 @@ QIcon ByteArrayColumnViewDesignerFactory::icon() const
 
 QString ByteArrayColumnViewDesignerFactory::includeFile() const
 {
-    return QString::fromLatin1("okteta/bytearraycolumnview.h");
+    return QString::fromLatin1("okteta1/bytearraycolumnview.h");
 }
 
 QString ByteArrayColumnViewDesignerFactory::toolTip() const
