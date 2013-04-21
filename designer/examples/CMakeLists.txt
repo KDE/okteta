@@ -1,6 +1,9 @@
 project( oktetadesignerexamples )
 
-set( OKTETA_REL_DIR ../.. )
+include_directories(
+  ${INCLUDE_INSTALL_DIR}
+  ${INCLUDE_INSTALL_DIR}/KDE
+)
 
 set( oktetadesignerexamplewidget_SRCS
   main.cpp
