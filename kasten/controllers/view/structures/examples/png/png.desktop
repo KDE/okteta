@@ -69,6 +69,7 @@ Comment[nl]=Een teststructuur die de PNG-bestandskop bevat (bestand moet ingeste
 Comment[pl]=Struktura testowa zawierająca nagłówek pliku PNG (plik musi być ustawiony na big-endian)
 Comment[pt]=Uma estrutura de testes que contém o cabeçalho do ficheiro PNG (o ficheiro deverá estar como 'big-endian')
 Comment[pt_BR]=Uma estrutura de testes que contém o cabeçalho de um arquivo PNG (o arquivo deve estar em big-endian)
+Comment[ru]=Пример структуры, описывающей заголовок файла PNG (с порядком байт «от старшего к младшему»)
 Comment[sk]=Testovacia štruktúra obsahujúca hlavičku súboru PNG (súbor musí byť nastavený na big-endian)
 Comment[sr]=Пробна структура која садржи заглавље ПНГ фајла (који мора бити велике крајњости)
 Comment[sr@ijekavian]=Пробна структура која садржи заглавље ПНГ фајла (који мора бити велике крајњости)
