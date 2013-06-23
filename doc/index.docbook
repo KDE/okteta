@@ -695,9 +695,9 @@ http://frinring.wordpress.com/2011/07/31/all-new-okteta-features-for-kde-apps-4-
       <sect3>
         <title>Further information</title>
         <para>
-          A few example structure definitions can be found <ulink url="http://websvn.kde.org/branches/KDE/4.9/kdesdk/okteta/kasten/controllers/view/structures/examples/">here.</ulink>
+          A few example structure definitions can be found in the <ulink url="https://projects.kde.org/projects/kde/kdesdk/okteta/repository/revisions/master/show/kasten/controllers/view/structures/examples/okteta/structures">Git repository.</ulink>
           This includes for example the file header for PNG files and the ELF file header.
-          An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="http://websvn.kde.org/branches/KDE/4.9/kdesdk/okteta/kasten/controllers/view/structures/schema/">here.</ulink>
+          An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="https://projects.kde.org/projects/kde/kdesdk/okteta/repository/revisions/master/show/kasten/controllers/view/structures/schema">here.</ulink>
           If more information is needed feel free to contact me at &Alex.Richardson.email;
         </para>
       </sect3>
