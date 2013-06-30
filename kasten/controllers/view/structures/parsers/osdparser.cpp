@@ -41,6 +41,8 @@
 #include <QDomDocument>
 #include <QScriptEngine>
 
+#include <KDebug>
+
 using namespace ParserStrings;
 
 OsdParser::OsdParser(const QString& pluginName, const QString& absolutePath)
@@ -180,8 +182,12 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
 
         if (!data)
         {
-            data = new DummyDataInformation(0,
-                    fileInfo.absoluteFilePath() + QLatin1String("_element") + QString::number(count));
+            QString name = readProperty(elem, PROPERTY_NAME);
+            if (name.isEmpty())
+                name = fileInfo.absoluteFilePath() + QLatin1String("_element") + QString::number(count);
+            kDebug() << "Failed to parse element" << elem.tagName() << name;
+            kDebug() << "Parsing messages were:" << logger->messages();
+            data = new DummyDataInformation(0, name);
         }
         TopLevelDataInformation* topData = new TopLevelDataInformation(data, logger, eng, fileInfo);
         QString lockOffsetStr = readProperty(elem, PROPERTY_DEFAULT_LOCK_OFFSET);

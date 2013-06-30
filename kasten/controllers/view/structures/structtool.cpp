@@ -307,6 +307,8 @@ void StructTool::setSelectedStructuresInView()
                 TopLevelDataInformation* data = def->structure(name);
                 if (data)
                     addChildItem(data);
+                else
+                    kDebug() << "Could not find structure with name" << name << "in" << pluginName;
             }
         }
     }
