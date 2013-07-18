@@ -591,7 +591,7 @@ void ByteArrayViewProfileManager::onDefaultViewProfileChanged( const QString& pa
     defaultViewProfileFile.open( QIODevice::ReadOnly );
 
     const QByteArray fileContent = defaultViewProfileFile.readAll();
-    const QString viewProfileId = QString::fromUtf8( fileContent, fileContent.size() );
+    const QString viewProfileId = QString::fromUtf8( fileContent );
     defaultViewProfileFile.close();
 
 kDebug() << "Default viewprofile read:" << viewProfileId;

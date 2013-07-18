@@ -113,35 +113,35 @@ void JsParserTest::testByteOrder_data()
     Q_FOREACH(const JsTestData& data, allData) {
         //default should be inherit
         QString codeStr = QLatin1String("%1;");
-        QTest::newRow(data.tag) << codeStr.arg(data.constructorCall)
+        QTest::newRow(data.tag.constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessInherit;
 
         //use set() function to specify byteOrder
         codeStr = QLatin1String("%1.set({byteOrder: \"inherit\"})");
-        QTest::newRow(data.tag + " set() inherit") << codeStr.arg(data.constructorCall)
+        QTest::newRow((data.tag + " set() inherit").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessInherit;
         codeStr = QLatin1String("%1.set({byteOrder: \"littleEndian\"})");
-        QTest::newRow(data.tag + " set() little endian") << codeStr.arg(data.constructorCall)
+        QTest::newRow((data.tag + " set() little endian").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessLittle;
         codeStr = QLatin1String("%1.set({byteOrder: \"bigEndian\"})");
-        QTest::newRow(data.tag + " set() big endian") << codeStr.arg(data.constructorCall)
+        QTest::newRow((data.tag + " set() big endian").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessBig;
         codeStr = QLatin1String("%1.set({byteOrder: \"fromSettings\"})");
-        QTest::newRow(data.tag + " set() from settings") << codeStr.arg(data.constructorCall)
+        QTest::newRow((data.tag + " set() from settings").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessFromSettings;
 
         //direct property access to specify byteOrder
         codeStr = QLatin1String("var obj = %1; obj.byteOrder = \"inherit\"; obj;");
-        QTest::newRow(data.tag + " property assign inherit") << codeStr.arg(data.constructorCall)
+        QTest::newRow((data.tag + " property assign inherit").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessInherit;
         codeStr = QLatin1String("var obj = %1; obj.byteOrder = \"little-endian\"; obj;");
-        QTest::newRow(data.tag + " property assign little endian") << codeStr.arg(data.constructorCall)
+        QTest::newRow((data.tag + " property assign little endian").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessLittle;
         codeStr = QLatin1String("var obj = %1; obj.byteOrder = \"big-endian\"; obj;");
-        QTest::newRow(data.tag + " property assign big endian") << codeStr.arg(data.constructorCall)
+        QTest::newRow((data.tag + " property assign big endian").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessBig;
         codeStr = QLatin1String("var obj = %1; obj.byteOrder = \"from-settings\"; obj;");
-        QTest::newRow(data.tag + " property assign from settings") << codeStr.arg(data.constructorCall)
+        QTest::newRow((data.tag + " property assign from settings").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessFromSettings;
     }
 }
@@ -181,15 +181,15 @@ void JsParserTest::testUpdateFunc_data()
 
     Q_FOREACH(const JsTestData& data, allData) {
         QString codeStr = QLatin1String("%1.setUpdate(") + updateFunction + QLatin1String(");");
-        QTest::newRow(data.tag + "-setUpdate()")
+        QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
         codeStr = QLatin1String("%1.set({updateFunc: ") + updateFunction + QLatin1String("});");
-        QTest::newRow(data.tag + "-set()")
+        QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
         codeStr = QLatin1String("var obj = %1; obj.updateFunc = ") + updateFunction + QLatin1String("; obj;");
-        QTest::newRow(data.tag + "-property assign")
+        QTest::newRow((data.tag + "-property assign").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
     }
 }
@@ -216,15 +216,15 @@ void JsParserTest::testValidationFunc_data()
 
     Q_FOREACH(const JsTestData& data, allData) {
         QString codeStr = QLatin1String("%1.setValidation(") + validationFunction + QLatin1String(");");
-        QTest::newRow(data.tag + "-setUpdate()")
+        QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
         codeStr = QLatin1String("%1.set({validationFunc: ") + validationFunction + QLatin1String("});");
-        QTest::newRow(data.tag + "-set()")
+        QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
         codeStr = QLatin1String("var obj = %1; obj.validationFunc = ") + validationFunction + QLatin1String("; obj;");
-        QTest::newRow(data.tag + "-property assign")
+        QTest::newRow((data.tag + "-property assign").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
     }
 }
@@ -249,11 +249,11 @@ void JsParserTest::testName_data()
 
     Q_FOREACH(const JsTestData& data, allData) {
         QString codeStr = QLatin1String("%1.set({name: \"expectedName\"});");
-        QTest::newRow(data.tag + "-set()")
+        QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
         codeStr = QLatin1String("var obj = %1;obj.name = \"expectedName\"; obj;");
-        QTest::newRow(data.tag + "-property assignment")
+        QTest::newRow((data.tag + "-property assignment").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
     }
 }
@@ -275,11 +275,11 @@ void JsParserTest::testCustomTypeName_data()
 
     Q_FOREACH(const JsTestData& data, allData) {
         QString codeStr = QLatin1String("%1.set({typeName: 'myCustomType'});");
-        QTest::newRow(data.tag + "-set()")
+        QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
         codeStr = QLatin1String("var obj = %1;obj.typeName = 'myCustomType'; obj;");
-        QTest::newRow(data.tag + "-property assignment")
+        QTest::newRow((data.tag + "-property assignment").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
     }
 }
