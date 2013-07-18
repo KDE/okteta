@@ -38,7 +38,7 @@ private:
     void handleMapping(int index, QComboBox* box, QSpinBox* spin);
 private:
     Ui_StructViewSettings ui;
-private slots:
+private Q_SLOTS:
     void setCharDisplay(int index);
     void setSignedDisplay(int index);
     void setUnsignedDisplay(int index);
