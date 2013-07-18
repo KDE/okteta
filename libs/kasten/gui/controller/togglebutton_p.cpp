@@ -34,7 +34,7 @@ ToggleButtonPrivate::ToggleButtonPrivate( ToggleButton* parent ) : p( parent )
     p->connect( p, SIGNAL(toggled(bool)), SLOT(onToggled(bool)) );
 }
 
-void ToggleButtonPrivate::setOtherState( const KIcon& icon, const QString& text, const QString& toolTip )
+void ToggleButtonPrivate::setOtherState( const QIcon& icon, const QString& text, const QString& toolTip )
 {
     const QFontMetrics metrics = p->fontMetrics();
     mOtherIcon = icon;
@@ -60,10 +60,10 @@ void ToggleButtonPrivate::setOtherState( const KIcon& icon, const QString& text,
 
 void ToggleButtonPrivate::onToggled( bool )
 {
-    const KIcon otherIcon = mOtherIcon;
+    const QIcon otherIcon = mOtherIcon;
     if( !otherIcon.isNull() )
     {
-        mOtherIcon = KIcon( p->icon() );
+        mOtherIcon = p->icon();
         p->setIcon( otherIcon );
     }
 

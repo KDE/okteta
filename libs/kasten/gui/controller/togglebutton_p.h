@@ -23,9 +23,8 @@
 #ifndef TOGGLEBUTTON_P_H
 #define TOGGLEBUTTON_P_H
 
-// KDE
-#include <KIcon>
 // Qt
+#include <QIcon>
 #include <QtCore/QString>
 
 
@@ -41,13 +40,13 @@ class ToggleButtonPrivate
     explicit ToggleButtonPrivate( ToggleButton* parent );
 
   public:
-    void setOtherState( const KIcon& icon, const QString& text, const QString& toolTip );
+    void setOtherState( const QIcon& icon, const QString& text, const QString& toolTip );
 
   public:
     void onToggled( bool );
 
   private:
-    KIcon mOtherIcon;
+    QIcon mOtherIcon;
     QString mOtherText;
     QString mOtherToolTip;
 
