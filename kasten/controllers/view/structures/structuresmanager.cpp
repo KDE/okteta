@@ -40,7 +40,7 @@ StructuresManager::~StructuresManager()
 StructuresManager::StructuresManager()
 {
     mConfig = KSharedConfig::openConfig(QLatin1String("oktetastructuresrc"),
-            KSharedConfig::FullConfig, "config");
+            KSharedConfig::FullConfig, QStandardPaths::ConfigLocation);
     reloadPaths();
 }
 
