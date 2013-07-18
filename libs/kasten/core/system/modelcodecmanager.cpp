@@ -121,13 +121,18 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         exportFileDialog.setMode( KFile::File );
         const QStringList mimeTypes = QStringList() << exporter->remoteMimeType();
         exportFileDialog.setMimeFilter( mimeTypes );
+#pragma message("TODO: port KDialog::setCaption")
+#if 0
+        //TODO port this
         exportFileDialog.setCaption( dialogTitle );
+#endif
+
         const KGuiItem exportGuiItem( i18nc("@action:button",
                                             "&Export"),
                                       QLatin1String("document-export"),
                                       i18nc("@info:tooltip",
                                             "Export the data into the file with the entered name.") );
-        exportFileDialog.okButton()->setGuiItem( exportGuiItem );
+        KGuiItem::assign(exportFileDialog.okButton(),  exportGuiItem );
 
         exportFileDialog.exec();
 
