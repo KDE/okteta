@@ -36,15 +36,15 @@ static const char AREmailAddress[] =     "alex.richardson@gmx.de";
 
 
 OktetaAboutData::OktetaAboutData()
-: KAboutData( ProgramId, 0,
+: K4AboutData( ProgramId, 0,
               ki18n("Okteta"), ProgramVersion, // name
               ki18n("Hex editor"), // description
-              KAboutData::License_GPL_V2,
+              K4AboutData::License_GPL_V2,
               ki18n("Copyright 2006-2013 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit the raw data of files"), // comment
               ProgramHomepage )
 {
-    addLicense(KAboutData::License_GPL_V3);
+    addLicense(K4AboutData::License_GPL_V3);
     setOrganizationDomain( "kde.org" );
     addAuthor( ki18n("Friedrich W. H. Kossebau"), // name
                ki18n("Author"), // task

@@ -32,7 +32,7 @@
 #include <bytearraydatageneratorfactory.h>
 // KDE
 #include <KComponentData>
-#include <KAboutData>
+#include <k4aboutdata.h>
 #include <KLocalizedString>
 
 
@@ -51,8 +51,8 @@ static const char FWHKEmailAddress[] = "kossebau@kde.org";
 OktetaPartFactory::OktetaPartFactory()
 {
 // TODO: also load encoder and other plugins here
-    mAboutData = new KAboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
-                                 KAboutData::License_GPL_V2, ki18n(PartCopyright), KLocalizedString(), 0, FWHKEmailAddress );
+    mAboutData = new K4AboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
+                                 K4AboutData::License_GPL_V2, ki18n(PartCopyright), KLocalizedString(), 0, FWHKEmailAddress );
     mAboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
     mComponentData = new KComponentData( mAboutData );
 

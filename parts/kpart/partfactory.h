@@ -30,7 +30,7 @@ namespace Kasten2 {
 class ByteArrayViewProfileManager;
 }
 class KComponentData;
-class KAboutData;
+class K4AboutData;
 
 
 class OktetaPartFactory : public KParts::Factory
@@ -49,7 +49,7 @@ class OktetaPartFactory : public KParts::Factory
 
   private:
     KComponentData* mComponentData;
-    KAboutData* mAboutData;
+    K4AboutData* mAboutData;
     Kasten2::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };
 

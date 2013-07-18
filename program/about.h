@@ -24,10 +24,10 @@
 #define OKTETAABOUT_H
 
 // KDE
-#include <KAboutData>
+#include <k4aboutdata.h>s
 
 
-class OktetaAboutData : public KAboutData
+class OktetaAboutData : public K4AboutData
 {
 public:
     OktetaAboutData();
