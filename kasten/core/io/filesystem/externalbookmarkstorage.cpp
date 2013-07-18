@@ -32,6 +32,7 @@
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KStandardDirs>
+#include <KUrl>
 #include <KBookmarkManager>
 #include <KBookmarkGroup>
 
@@ -74,7 +75,7 @@ void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const 
                 if( bm.isSeparator() || bm.isGroup() )
                     continue;
 
-                bookmark.setOffset( bm.url().htmlRef().toULongLong() );
+                bookmark.setOffset( bm.url().fragment().toULongLong() );
                 bookmark.setName( bm.fullText() );
 
                 bookmarksToBeCreated.append( bookmark );
