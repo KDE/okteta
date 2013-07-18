@@ -28,7 +28,7 @@
 namespace Kasten2
 {
 
-ToggleButton::ToggleButton( const KIcon& icon, const QString& text, const QString& toolTip, QWidget* parent )
+ToggleButton::ToggleButton( const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent )
   : QToolButton( parent ),
     d( new ToggleButtonPrivate(this) )
 {
@@ -46,14 +46,14 @@ ToggleButton::ToggleButton( const QString& text, const QString& toolTip, QWidget
     setToolTip( toolTip );
 }
 
-void ToggleButton::setCheckedState( const KIcon& icon, const QString& text, const QString& toolTip )
+void ToggleButton::setCheckedState( const QIcon& icon, const QString& text, const QString& toolTip )
 {
     d->setOtherState( icon, text, toolTip );
 }
 
 void ToggleButton::setCheckedState( const QString& text, const QString& toolTip )
 {
-    d->setOtherState( KIcon(), text, toolTip );
+    d->setOtherState( QIcon(), text, toolTip );
 }
 
 ToggleButton::~ToggleButton()
@@ -62,3 +62,6 @@ ToggleButton::~ToggleButton()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_togglebutton.cpp"

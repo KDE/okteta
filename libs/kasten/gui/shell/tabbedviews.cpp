@@ -128,3 +128,6 @@ TabbedViews::~TabbedViews()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_tabbedviews.cpp"
