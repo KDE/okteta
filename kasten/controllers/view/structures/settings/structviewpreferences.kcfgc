@@ -2,6 +2,7 @@
 File=structviewpreferences.kcfg
 ClassName=StructViewPreferences
 Namespace=Kasten2
+NameSpace=Kasten2
 Singleton=true
 Mutators=true
 ItemAccessors=true
