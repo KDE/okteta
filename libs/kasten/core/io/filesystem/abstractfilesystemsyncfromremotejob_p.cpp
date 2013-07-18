@@ -42,7 +42,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
     const KUrl url = mSynchronizer->url();
 
     // TODO: see if this could be used asynchronously instead
-    bool isWorkFileOk = KIO::NetAccess::download( url.url(), mWorkFilePath, 0 );
+    bool isWorkFileOk = KIO::NetAccess::download( url, mWorkFilePath, 0 );
     if( isWorkFileOk )
     {
         mFile = new QFile( mWorkFilePath );

@@ -40,7 +40,7 @@ void AbstractFileSystemLoadJobPrivate::load()
     Q_Q( AbstractFileSystemLoadJob );
 
     // TODO: see if this could be used asynchronously instead
-    bool isWorkFileOk = KIO::NetAccess::download( mUrl.url(), mWorkFilePath, 0 );
+    bool isWorkFileOk = KIO::NetAccess::download( mUrl, mWorkFilePath, 0 );
 
     if( isWorkFileOk )
     {

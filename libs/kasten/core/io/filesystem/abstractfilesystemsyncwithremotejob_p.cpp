@@ -63,7 +63,7 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
     }
     else
     {
-        isWorkFileOk = KIO::NetAccess::download( mUrl.url(), mWorkFilePath, 0 );
+        isWorkFileOk = KIO::NetAccess::download( mUrl, mWorkFilePath, 0 );
         if( isWorkFileOk )
         {
             mFile = new QFile( mWorkFilePath );
