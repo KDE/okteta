@@ -30,6 +30,8 @@
 #include <KDirOperator>
 #include <KActionCollection>
 #include <KToolBar>
+#include <KIcon>
+#include <KUrl>
 #include <KLocalizedString>
 #include <kdeversion.h>
 // Qt
@@ -68,7 +70,7 @@ void FileSystemBrowserView::init()
     layout->addWidget( mUrlNavigator );
 
     // view
-    mDirOperator = new KDirOperator( QDir::homePath(), this );
+    mDirOperator = new KDirOperator( QUrl::fromLocalFile( QDir::homePath() ), this );
     mDirOperator->setView( KFile::Detail );
     connect( mDirOperator, SIGNAL(urlEntered(KUrl)), SLOT(setNavigatorUrl(KUrl)));
     connect( mDirOperator, SIGNAL(fileSelected(KFileItem)), SLOT(openFile(KFileItem)) );
