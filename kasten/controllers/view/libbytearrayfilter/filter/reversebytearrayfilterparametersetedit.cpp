@@ -25,7 +25,7 @@
 //
 #include "reversebytearrayfilterparameterset.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QFormLayout>

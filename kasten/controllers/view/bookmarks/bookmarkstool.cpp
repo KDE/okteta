@@ -37,9 +37,9 @@
 #include <bookmark.h>
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 
 namespace Kasten2

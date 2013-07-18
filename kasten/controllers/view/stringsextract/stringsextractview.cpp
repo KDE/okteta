@@ -29,7 +29,7 @@
 #include <KPushButton>
 #include <KLineEdit>
 #include <KGuiItem>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KGlobalSettings>
 // Qt
 #include <QtGui/QLabel>
@@ -39,7 +39,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QTreeView>
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QFocusEvent>
 
 

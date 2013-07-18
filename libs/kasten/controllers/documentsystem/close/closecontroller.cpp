@@ -30,7 +30,7 @@
 #include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIcon>
 
 

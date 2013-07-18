@@ -24,7 +24,7 @@
 #include "widgetcolumnstylist_p.h"
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 
 namespace Okteta

@@ -24,7 +24,7 @@
 #define BOOKMARKSVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KPushButton;
 class QTreeView;

@@ -29,7 +29,7 @@
 #include "bytetableviewsettings.h"
 // KDE
 #include <KPushButton>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KStandardGuiItem>
 #include <KGlobalSettings>
 //#include <KDebug>

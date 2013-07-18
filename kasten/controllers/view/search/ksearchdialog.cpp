@@ -25,7 +25,7 @@
 // controller
 #include "searchtool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // #include <kstandardguiitem.h>
 
 

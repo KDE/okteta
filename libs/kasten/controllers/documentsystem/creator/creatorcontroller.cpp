@@ -32,13 +32,13 @@
 #include <abstractmodeldatagenerator.h>
 // KDE
 #include <KIcon>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KStandardAction>
 #include <KXMLGUIClient>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QMimeData>
 
 

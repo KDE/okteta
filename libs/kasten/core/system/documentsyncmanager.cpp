@@ -37,9 +37,10 @@
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
-#include <KLocale>
+#include <KLocalizedString>
+#include <KUrl>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

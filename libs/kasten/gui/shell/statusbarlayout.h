@@ -24,7 +24,7 @@
 #define STATUSBARLAYOUT_H
 
 // Qt
-#include <QtGui/QLayout>
+#include <QLayout>
 #include <QtCore/QList>
 
 class QWidgetItem;

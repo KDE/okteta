@@ -28,7 +28,7 @@
 #include <oktetacore.h>
 // KDE
 #include <KGlobal>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QGroupBox>

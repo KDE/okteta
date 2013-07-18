@@ -26,7 +26,7 @@
 // lib
 #include "kastengui_export.h"
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KIcon;
 

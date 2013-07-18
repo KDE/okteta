@@ -29,13 +29,13 @@
 #include <abstractmodel.h>
 // KDE
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KAction>
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QMimeData>
 
 

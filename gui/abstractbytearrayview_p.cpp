@@ -44,8 +44,8 @@
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDragLeaveEvent>
 #include <QtGui/QDropEvent>
-#include <QtGui/QApplication>
-#include <QtGui/QToolTip>
+#include <QApplication>
+#include <QToolTip>
 #include <QtCore/QMimeData>
 #include <QtCore/QTimer>
 

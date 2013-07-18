@@ -27,7 +27,7 @@
 #include <abstractselectionview.h>
 // KDE
 #include <KGlobal>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QSplitter>
 #include <QtGui/QGroupBox>

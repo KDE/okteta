@@ -25,7 +25,7 @@
 // lib
 #include "bytearraytextstreamencoderpreview.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KComboBox>
 // Qt
 #include <QtGui/QFormLayout>

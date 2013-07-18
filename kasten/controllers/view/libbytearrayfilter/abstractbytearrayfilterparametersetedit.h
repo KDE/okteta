@@ -25,7 +25,7 @@
 
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class AbstractByteArrayFilterParameterSet;
 

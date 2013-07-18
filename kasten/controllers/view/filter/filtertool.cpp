@@ -34,9 +34,9 @@
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QByteArray>
 
 

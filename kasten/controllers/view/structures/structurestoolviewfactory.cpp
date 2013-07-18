@@ -26,7 +26,7 @@
 #include "structtoolview.h"
 #include "structtool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 namespace Kasten2
 {

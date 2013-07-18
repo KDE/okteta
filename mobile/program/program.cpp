@@ -42,7 +42,7 @@
 #include <documentsyncmanager.h>
 #include <modelcodecmanager.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KUrl>
 #include <KCmdLineArgs>
 #include <KApplication>

@@ -24,7 +24,7 @@
 #define VIEWAREABOX_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QShortcut;
 

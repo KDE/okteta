@@ -41,7 +41,7 @@
 
 // KDE
 #include <KComboBox>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigDialog>
 #include <KPushButton>
 

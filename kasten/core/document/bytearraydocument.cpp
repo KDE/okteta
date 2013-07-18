@@ -27,7 +27,7 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIcon>
 
 

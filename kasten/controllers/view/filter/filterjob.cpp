@@ -25,7 +25,7 @@
 // filter
 #include <abstractbytearrayfilter.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

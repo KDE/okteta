@@ -27,7 +27,7 @@
 // KDE
 #include <KMessageBox>
 #include <KUrl>
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

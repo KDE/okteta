@@ -29,7 +29,7 @@
 #include <bookmark.h>
 // KDE
 #include <KPushButton>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KGuiItem>
 // Qt
 #include <QtGui/QLayout>

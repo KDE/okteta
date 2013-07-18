@@ -22,7 +22,7 @@
 #ifndef STRUCTUREADDREMOVEWIDGET_H
 #define STRUCTUREADDREMOVEWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KPushButton;
 class QLabel;

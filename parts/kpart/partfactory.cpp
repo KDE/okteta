@@ -33,7 +33,7 @@
 // KDE
 #include <KComponentData>
 #include <KAboutData>
-#include <KLocale>
+#include <KLocalizedString>
 
 
 // Part

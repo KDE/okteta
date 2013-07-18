@@ -27,7 +27,7 @@
 // Okteta core
 #include <bookmark.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIcon>
 
 

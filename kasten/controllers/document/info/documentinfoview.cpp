@@ -25,7 +25,7 @@
 // 
 #include "documentinfotool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIconLoader>
 #include <KSeparator>
 #include <KSqueezedTextLabel>

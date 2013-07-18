@@ -26,7 +26,7 @@
 #include "charsetconversiontoolview.h"
 #include "charsetconversiontool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

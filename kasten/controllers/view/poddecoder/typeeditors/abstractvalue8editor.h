@@ -28,7 +28,7 @@
 // OKteta core
 #include <oktetacore.h>
 // Qt
-#include <QtGui/QSpinBox>
+#include <QSpinBox>
 
 namespace Okteta {
 class ValueCodec;

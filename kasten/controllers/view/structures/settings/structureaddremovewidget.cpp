@@ -31,8 +31,9 @@
 #include <QTreeWidgetItem>
 
 #include <QRegExp>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KDebug>
+#include <KIcon>
 #include <KConfigDialogManager>
 
 using namespace Kasten2;

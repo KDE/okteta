@@ -31,7 +31,7 @@
 #include <abstractbytearrayfilter.h>
 // KDE
 #include <KPushButton>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KComboBox>
 #include <KGuiItem>
 // Qt

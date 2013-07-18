@@ -26,7 +26,7 @@
 #include "stringsextracttoolview.h"
 #include "stringsextracttool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

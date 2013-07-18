@@ -26,7 +26,7 @@
 #include "../types/sint64.h"
 #include "../poddata.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Okteta

@@ -25,7 +25,7 @@
 // lib
 #include "modelstreamencodethread.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QFile>
 
 

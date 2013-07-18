@@ -30,7 +30,7 @@
 #include <charcodec.h>
 // KDE
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KSelectAction>
 #include <KToggleAction>

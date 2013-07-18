@@ -28,7 +28,7 @@
 //
 #include <arraychangemetrics.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace KPieceTable

@@ -29,7 +29,7 @@
 // KDE
 #include <KPushButton>
 #include <KGuiItem>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KGlobal>
 #include <KApplication>
 #include <KGlobalSettings>

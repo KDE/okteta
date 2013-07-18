@@ -26,7 +26,7 @@
 #include <KJob>
 #include <KMessageBox>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

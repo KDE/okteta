@@ -29,9 +29,10 @@
 #include <bytearraytablelayout.h>
 #include <wordbytearrayservice.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QClipboard>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QDrag>
 #include <QtCore/QTimer>
 
 #include <KDebug>

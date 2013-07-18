@@ -28,7 +28,7 @@
 #include "poddecodertool.h"
 // KDE
 #include <KComboBox>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 // Qt
 #include <QtGui/QLabel>

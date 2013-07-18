@@ -29,7 +29,7 @@
 #include <character.h>
 #include <charcodec.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 

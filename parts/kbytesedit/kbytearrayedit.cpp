@@ -28,7 +28,7 @@
 #include <bytearraymodel.h>
 // Qt
 #include <QtGui/QLayout>
-#include <QtGui/QWidget>
+#include <QWidget>
 
 
 

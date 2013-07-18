@@ -28,13 +28,13 @@
 #include "replacetool.h"
 // KDE
 #include <KXmlGuiWindow>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KAction>
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KMessageBox>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

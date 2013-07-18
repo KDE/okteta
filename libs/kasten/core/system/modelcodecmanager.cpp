@@ -35,7 +35,9 @@
 #include <KIO/NetAccess>
 #include <KFileDialog>
 #include <KPushButton>
-#include <KLocale>
+#include <KLocalizedString>
+#include <KGuiItem>
+#include <KUrl>
 
 
 namespace Kasten2

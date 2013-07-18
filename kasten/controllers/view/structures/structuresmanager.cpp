@@ -26,6 +26,7 @@
 #include "structuredefinitionfile.h"
 #include <KStandardDirs>
 #include <KDebug>
+#include <KGlobal>
 #include <QDir>
 
 namespace Kasten2

@@ -26,7 +26,7 @@
 #include <bytearrayview.h>
 // KDE
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KSelectAction>
 

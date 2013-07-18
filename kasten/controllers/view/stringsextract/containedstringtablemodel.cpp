@@ -23,7 +23,7 @@
 #include "containedstringtablemodel.h"
 
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 ContainedStringTableModel::ContainedStringTableModel( const QList<ContainedString> *containedStringList,

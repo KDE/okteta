@@ -26,7 +26,7 @@
 #include "bookmarkstoolview.h"
 #include "bookmarkstool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

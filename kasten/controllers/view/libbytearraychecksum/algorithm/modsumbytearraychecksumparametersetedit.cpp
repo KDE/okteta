@@ -25,7 +25,7 @@
 // parameterset
 #include "modsumbytearraychecksumparameterset.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KComboBox>
 // Qt
 #include <QtGui/QFormLayout>

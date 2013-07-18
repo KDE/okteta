@@ -26,7 +26,7 @@
 #include <versionable.h>
 #include <abstractmodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIcon>
 
 

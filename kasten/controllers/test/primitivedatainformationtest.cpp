@@ -21,7 +21,7 @@
 #include <QtTest>
 #include <QtGlobal>
 #include <KGlobal>
-#include <KLocale>
+#include <KLocalizedString>
 #include <limits>
 #include <bytearraymodel.h>
 

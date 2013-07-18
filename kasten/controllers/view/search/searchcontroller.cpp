@@ -27,7 +27,7 @@
 #include "searchtool.h"
 // KDE
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KAction>
 #include <KActionCollection>
 #include <KStandardAction>

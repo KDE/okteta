@@ -30,7 +30,7 @@
 #include <changesdescribable.h>
 #include <valuecodec.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QKeyEvent>
 

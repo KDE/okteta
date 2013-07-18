@@ -23,7 +23,7 @@
 #include "kreplaceprompt.h"
 
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QEventLoop>
 

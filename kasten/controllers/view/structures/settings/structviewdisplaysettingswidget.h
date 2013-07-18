@@ -22,7 +22,7 @@
 #ifndef STRUCTVIEWDISPLAYSETTINGSWIDGET_H_
 #define STRUCTVIEWDISPLAYSETTINGSWIDGET_H_
 #include "ui_structviewdisplaysettingswidget.h"
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KConfigSkeletonItem;
 

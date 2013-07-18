@@ -50,7 +50,7 @@
 // #include "algorithm/mybytearraychecksumalgorithm.h"
 // NEWCHECKSUM(end)
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 #ifdef HAVE_QCA2

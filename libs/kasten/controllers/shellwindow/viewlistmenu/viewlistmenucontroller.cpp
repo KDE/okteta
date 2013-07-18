@@ -31,7 +31,7 @@
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KStringHandler>
 // Qt
 #include <QtGui/QActionGroup>

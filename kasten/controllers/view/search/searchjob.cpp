@@ -26,7 +26,7 @@
 #include <abstractbytearraymodel.h>
 #include <charcodec.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

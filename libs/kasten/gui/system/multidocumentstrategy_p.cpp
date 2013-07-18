@@ -33,9 +33,9 @@
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
 // Qt
-#include <QtGui/QClipboard>
-#include <QtGui/QApplication>
-#include <QtCore/QMimeData>
+#include <QClipboard>
+#include <QApplication>
+#include <QMimeData>
 
 
 namespace Kasten2

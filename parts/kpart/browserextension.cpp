@@ -30,7 +30,7 @@
 #include <bytearraydocument.h>
 // Qt
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart* part )

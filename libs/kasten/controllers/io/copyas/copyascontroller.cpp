@@ -37,13 +37,13 @@
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KSelectAction>
 // Qt
 #include <QtCore/QBuffer>
 #include <QtCore/QMimeData>
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 Q_DECLARE_METATYPE(Kasten2::AbstractModelStreamEncoder*)

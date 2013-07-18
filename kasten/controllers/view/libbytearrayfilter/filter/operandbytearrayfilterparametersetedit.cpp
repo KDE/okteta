@@ -27,7 +27,7 @@
 // lib
 #include <bytearraycombobox.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QFormLayout>

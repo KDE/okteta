@@ -25,7 +25,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 static const int MOD_ADLER = 65521;

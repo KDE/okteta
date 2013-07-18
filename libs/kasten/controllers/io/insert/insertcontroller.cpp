@@ -37,11 +37,11 @@
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KSelectAction>
 // Qt
 #include <QtCore/QMimeData>
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 #ifndef ABSTRACTMODELDATAGENERATOR_METATYPE

@@ -28,7 +28,7 @@
 #include <abstractmodel.h>
 // KDE
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KToolBarPopupAction>
 #include <KStandardShortcut>

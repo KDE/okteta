@@ -26,7 +26,7 @@
 #include "filtertoolview.h"
 #include "filtertool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

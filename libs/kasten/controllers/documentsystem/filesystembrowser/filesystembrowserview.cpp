@@ -30,7 +30,7 @@
 #include <KDirOperator>
 #include <KActionCollection>
 #include <KToolBar>
-#include <KLocale>
+#include <KLocalizedString>
 #include <kdeversion.h>
 // Qt
 #include <QtGui/QLayout>

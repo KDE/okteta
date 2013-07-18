@@ -29,7 +29,7 @@
 #include <QScriptValue>
 #include <QScriptEngine>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KLineEdit>
 #include <KIcon>
 #include <KColorScheme>

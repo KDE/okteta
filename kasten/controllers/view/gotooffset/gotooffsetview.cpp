@@ -30,7 +30,7 @@
 // KDE
 #include <KPushButton>
 #include <KGuiItem>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QCheckBox>
 #include <QtGui/QLabel>

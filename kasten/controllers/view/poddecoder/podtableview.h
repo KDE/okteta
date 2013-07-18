@@ -26,7 +26,7 @@
 // lib
 #include "abstractdifferentsizedialog.h"
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KComboBox;
 class QTreeView;

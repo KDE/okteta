@@ -25,7 +25,7 @@
 // lib
 #include "abstractview.h"
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <QVBoxLayout>
 
 
 namespace Kasten2

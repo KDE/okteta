@@ -33,11 +33,11 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <kdeprintdialog.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
 #include <QtGui/QFont>

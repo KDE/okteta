@@ -24,7 +24,7 @@
 #define FILESYSTEMBROWSERVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KDirOperator;
 class KUrlNavigator;

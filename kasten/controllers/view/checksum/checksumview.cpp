@@ -34,7 +34,7 @@
 #include <KPushButton>
 #include <KLineEdit>
 #include <KGuiItem>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KGlobalSettings>
 // Qt
 #include <QtGui/QLabel>
@@ -42,7 +42,7 @@
 #include <QtGui/QStackedWidget>
 #include <QtGui/QLayout>
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QAbstractItemView>
 
 

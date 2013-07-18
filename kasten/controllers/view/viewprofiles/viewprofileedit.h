@@ -24,7 +24,7 @@
 #define VIEWPROFILEEDIT_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 // KDE
 class KLineEdit;

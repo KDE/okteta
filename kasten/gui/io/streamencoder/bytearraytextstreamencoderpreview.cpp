@@ -27,7 +27,7 @@
 // KDE
 #include <KTextEdit>
 #include <KGlobalSettings>
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

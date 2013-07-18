@@ -31,10 +31,10 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KUrl>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QTimer>
 
 

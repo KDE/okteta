@@ -29,7 +29,7 @@
 // Qt
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDropEvent>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QClipboard>
 
 

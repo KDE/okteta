@@ -24,7 +24,7 @@
 #define TOOLINLINEVIEWWIDGET_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 
 namespace Kasten2

@@ -33,7 +33,7 @@
 #include <KPushButton>
 #include <KComboBox>
 #include <KGuiItem>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QFormLayout>
 #include <QtGui/QLayout>

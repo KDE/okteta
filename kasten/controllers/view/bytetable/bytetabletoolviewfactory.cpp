@@ -26,7 +26,7 @@
 #include "bytetabletoolview.h"
 #include "bytetabletool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

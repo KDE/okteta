@@ -25,10 +25,10 @@
 // KDE
 #include <KIcon>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QApplication>
+#include <QLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QApplication>
 
 
 namespace Kasten2

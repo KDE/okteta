@@ -30,7 +30,7 @@
 #include <khexedit/zoominterface.h>
 #include <khexedit/clipboardinterface.h>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 namespace Okteta {
 class ByteArrayModel;

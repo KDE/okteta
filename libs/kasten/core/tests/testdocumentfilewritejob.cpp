@@ -28,7 +28,7 @@
 #include "testdocumentfilewritethread.h"
 #include "testdocument.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

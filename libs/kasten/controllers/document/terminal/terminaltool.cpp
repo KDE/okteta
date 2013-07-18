@@ -27,7 +27,7 @@
 #include <abstractdocument.h>
 #include <abstractmodelsynchronizer.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KUrl>
 
 

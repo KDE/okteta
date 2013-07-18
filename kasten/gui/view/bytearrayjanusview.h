@@ -26,7 +26,7 @@
 // Okteta core
 #include <addressrange.h>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QHBoxLayout;
 class QMimeData;

@@ -28,7 +28,7 @@
 #include "multiviewareas.h"
 #include "tabbedviews.h"
 // Qt
-#include <QtGui/QSplitter>
+#include <QSplitter>
 
 class QDragMoveEvent;
 class QDropEvent;

@@ -28,7 +28,7 @@
 // Okteta core
 #include <address.h>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QString;
 class QByteArray;

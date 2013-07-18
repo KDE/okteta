@@ -33,9 +33,9 @@
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

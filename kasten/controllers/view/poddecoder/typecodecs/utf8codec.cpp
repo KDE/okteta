@@ -26,7 +26,7 @@
 #include "../types/utf8.h"
 #include "../poddata.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextCodec>
 

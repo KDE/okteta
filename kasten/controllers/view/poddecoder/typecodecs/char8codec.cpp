@@ -29,7 +29,7 @@
 #include <charcodec.h>
 #include <character.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Okteta

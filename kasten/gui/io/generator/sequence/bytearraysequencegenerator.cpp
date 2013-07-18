@@ -25,7 +25,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QMimeData>
 #include <QtCore/QByteArray>

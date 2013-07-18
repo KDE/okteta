@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastengui_export.h"
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QString;
 class QByteArray;

@@ -25,7 +25,7 @@
 // lib
 #include "terminaltool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KServiceTypeTrader>
 #include <KParts/ReadOnlyPart>
 #include <kde_terminal_interface.h>

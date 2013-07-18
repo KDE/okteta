@@ -26,7 +26,7 @@
 // Okteta core
 #include <byte.h>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 namespace Okteta { class ByteArrayComboBox; }
 class KComboBox;

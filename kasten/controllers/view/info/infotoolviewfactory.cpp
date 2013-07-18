@@ -26,7 +26,7 @@
 #include "infotoolview.h"
 #include "infotool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

@@ -24,7 +24,7 @@
 #define TERMINALVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class TerminalInterface;
 namespace KParts

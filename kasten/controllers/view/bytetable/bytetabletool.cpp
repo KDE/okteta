@@ -33,7 +33,7 @@
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

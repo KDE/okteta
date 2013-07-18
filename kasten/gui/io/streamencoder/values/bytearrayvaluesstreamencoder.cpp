@@ -28,7 +28,7 @@
 #include <abstractbytearraymodel.h>
 #include <valuecodec.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 

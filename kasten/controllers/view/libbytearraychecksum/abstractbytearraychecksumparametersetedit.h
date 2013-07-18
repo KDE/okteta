@@ -24,7 +24,7 @@
 #define ABSTRACTBYTEARRAYCHECKSUMPARAMETERSETEDIT_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class AbstractByteArrayChecksumParameterSet;
 

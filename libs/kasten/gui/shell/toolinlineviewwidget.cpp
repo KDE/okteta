@@ -27,8 +27,8 @@
 // KDE
 #include <KIcon>
 // Qt
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QToolButton>
+#include <QHBoxLayout>
+#include <QToolButton>
 
 
 namespace Kasten2

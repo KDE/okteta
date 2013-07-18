@@ -28,7 +28,7 @@
 #include <togglebutton.h>
 #include <statusbar.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIcon>
 
 

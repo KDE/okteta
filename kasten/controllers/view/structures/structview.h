@@ -23,7 +23,7 @@
 
 #ifndef STRUCTVIEW_H_
 #define STRUCTVIEW_H_
-#include <QtGui/QWidget>
+#include <QWidget>
 #include "structviewitemdelegate.h"
 #include <config-structtool.h>
 

@@ -40,7 +40,7 @@
 #include <KProcess>
 // QtGui
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 // QtCore
 #include <QtCore/QMimeData>
 

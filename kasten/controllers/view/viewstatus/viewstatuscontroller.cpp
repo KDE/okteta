@@ -33,7 +33,7 @@
 // KDE
 #include <KSqueezedTextLabel>
 #include <KComboBox>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QLabel>

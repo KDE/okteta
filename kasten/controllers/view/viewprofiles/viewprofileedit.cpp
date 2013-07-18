@@ -27,7 +27,7 @@
 // Okteta core
 #include <charcodec.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIntNumInput>
 #include <KComboBox>
 #include <KLineEdit>

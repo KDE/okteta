@@ -27,7 +27,7 @@
 // KDE
 #include <KApplication>
 #include <KColorScheme>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KIcon>
 // Qt
 #include <QtCore/QVector>

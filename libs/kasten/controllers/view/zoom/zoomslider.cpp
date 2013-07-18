@@ -28,12 +28,12 @@
 #include <abstractmodel.h>
 // KDE
 #include <KIcon>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QSlider>
 #include <QtGui/QToolButton>
 #include <QtGui/QLayout>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QHelpEvent>
 
 

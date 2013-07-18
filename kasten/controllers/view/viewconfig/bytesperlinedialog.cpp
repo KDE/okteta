@@ -24,7 +24,7 @@
 
 // KDE
 #include <KIntNumInput>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QFormLayout>
 

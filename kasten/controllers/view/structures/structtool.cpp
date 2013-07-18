@@ -32,7 +32,7 @@
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KDebug>
 #include <KGlobal>
 #include <KStandardDirs>

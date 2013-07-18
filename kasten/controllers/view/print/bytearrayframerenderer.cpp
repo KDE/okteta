@@ -42,7 +42,7 @@
 #include <QtCore/QDateTime>
 #include <QtGui/QPainter>
 #include <QtGui/QFontMetrics>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QListIterator>
 
 

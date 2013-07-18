@@ -29,7 +29,7 @@
 #include "linerange.h"
 // Qt
 #include <QtCore/QList>
-#include <QtGui/QAbstractScrollArea>
+#include <QAbstractScrollArea>
 
 
 namespace Okteta

@@ -26,7 +26,7 @@
 #include <documentmanager.h>
 #include <abstractdocument.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

@@ -25,7 +25,7 @@
 #include <QScriptValue>
 #include <KDoubleNumInput>
 #include <KGlobal>
-#include <KLocale>
+#include <KLocalizedString>
 
 #include "structviewpreferences.h"
 

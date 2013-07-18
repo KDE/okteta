@@ -19,12 +19,12 @@
 #include "template_bytearrayfilterparameterset.h"
 //// ADAPT(end)
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 //// ADAPT(start)
 //// add includes for all elements used in the widget
 #include <KIntNumInput>
 // Qt
-#include <QtGui/QFormLayout>
+#include <QFormLayout>
 //// ADAPT(end)
 
 

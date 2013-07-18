@@ -25,7 +25,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 class Crc32LookupTable

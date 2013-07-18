@@ -22,7 +22,7 @@
 #include "uniondatainformation.h"
 #include "topleveldatainformation.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 QString UnionDataInformation::typeNameImpl() const
 {

@@ -25,9 +25,9 @@
 // KDE
 #include <KDebug>
 // Qt
-#include <QtGui/QWidgetItem>
-#include <QtGui/QWidget>
-#include <QtGui/QStyle>
+#include <QWidgetItem>
+#include <QWidget>
+#include <QStyle>
 
 
 namespace Kasten2

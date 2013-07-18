@@ -23,7 +23,7 @@
 #include "about.h"
 
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 // Program

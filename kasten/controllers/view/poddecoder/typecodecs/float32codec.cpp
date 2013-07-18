@@ -26,7 +26,7 @@
 #include "../types/float32.h"
 #include "../poddata.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Okteta

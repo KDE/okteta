@@ -24,7 +24,7 @@
 #define INFOVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KPushButton;
 class QLabel;

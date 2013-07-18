@@ -23,7 +23,7 @@
 #include <QScriptValue>
 
 #include <KGlobal>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KDebug>
 
 #include "../../../poddecoder/typeeditors/uintspinbox.h"

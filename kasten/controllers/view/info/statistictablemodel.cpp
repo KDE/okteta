@@ -27,7 +27,7 @@
 #include <charcodec.h>
 #include <valuecodec.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KApplication>
 #include <KColorScheme>
 

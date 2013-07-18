@@ -25,7 +25,7 @@
 #define STRUCTURESMANAGERVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <KNS3/Entry>
 
 class StructureAddRemoveWidget;

@@ -31,7 +31,7 @@
 #include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KAction>
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

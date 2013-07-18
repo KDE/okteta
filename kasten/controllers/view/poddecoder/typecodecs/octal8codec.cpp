@@ -26,7 +26,7 @@
 #include "../types/octal8.h"
 #include "../poddata.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Okteta

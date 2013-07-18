@@ -27,7 +27,7 @@
 #include <charcodec.h>
 #include <character.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

@@ -28,8 +28,8 @@
 #include <QtCore/QListIterator>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QPainter>
-#include <QtGui/QStyle>
-#include <QtGui/QScrollBar>
+#include <QStyle>
+#include <QScrollBar>
 
 
 namespace Okteta

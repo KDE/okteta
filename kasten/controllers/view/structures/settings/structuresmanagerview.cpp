@@ -40,9 +40,9 @@
 //KNS
 #include <KNS3/KNewStuffButton>
 // Qt
-#include <QtGui/QListWidgetItem>
-#include <QtGui/QLayout>
-#include <QtGui/QSizePolicy>
+#include <QListWidgetItem>
+#include <QLayout>
+#include <QSizePolicy>
 #include <KDebug>
 
 static const int FileNameRole = Qt::UserRole;

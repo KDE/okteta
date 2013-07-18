@@ -26,7 +26,7 @@
 #include "framestopaperprinter.h"
 // #include "printthread.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 // #include <QtGui/QFontDatabase>
 
 

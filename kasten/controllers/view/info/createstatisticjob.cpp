@@ -25,7 +25,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 namespace Kasten2

@@ -23,8 +23,8 @@
 #include "viewareabox.h"
 
 // Qt
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QShortcut>
+#include <QVBoxLayout>
+#include <QShortcut>
 
 
 namespace Kasten2

@@ -28,7 +28,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

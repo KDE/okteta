@@ -29,7 +29,7 @@
 // Kasten core
 #include <person.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QMimeData>
 

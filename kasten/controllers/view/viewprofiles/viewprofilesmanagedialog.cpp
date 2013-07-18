@@ -30,7 +30,7 @@
 #include <bytearrayviewprofilelock.h>
 // KDE
 #include <KPushButton>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QTreeView>

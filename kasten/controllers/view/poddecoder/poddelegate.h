@@ -24,7 +24,7 @@
 #define PODDELEGATE_H
 
 // Qt
-#include <QtGui/QStyledItemDelegate>
+#include <QStyledItemDelegate>
 #include <QtCore/QPointer>
 
 

@@ -26,7 +26,7 @@
 
 #include <QVarLengthArray>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KDebug> //TODO remove
 
 #include <abstractbytearraymodel.h>

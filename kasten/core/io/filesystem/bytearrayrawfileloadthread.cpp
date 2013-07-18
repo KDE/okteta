@@ -29,7 +29,7 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDataStream>

@@ -61,7 +61,7 @@
 // KDE
 #include <KActionCollection>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QtGui/QLayout>
 #include <QtCore/QList>
 

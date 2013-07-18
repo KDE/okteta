@@ -24,7 +24,7 @@
 #define DOCUMENTSVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QTreeView;
 class QModelIndex;

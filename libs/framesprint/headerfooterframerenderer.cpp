@@ -23,7 +23,7 @@
 #include "headerfooterframerenderer.h"
 
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 #include <KGlobal>
 #include <KUser>
 // Qt

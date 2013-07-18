@@ -26,9 +26,9 @@
 #include "testdocument.h"
 // KDE
 #include <KUrl>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
 

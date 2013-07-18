@@ -26,7 +26,7 @@
 #include "checksumtoolview.h"
 #include "checksumtool.h"
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 
 
 namespace Kasten2

@@ -26,7 +26,7 @@
 // KDE
 #include <KMimeType>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KSqueezedTextLabel;
 class QString;

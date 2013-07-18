@@ -25,7 +25,7 @@
 // Kasten gui
 #include <abstractmodeldatageneratorconfigeditor.h>
 // KDE
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QLayout>
 #include <QtGui/QLabel>
