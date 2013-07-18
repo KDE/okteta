@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
-class KAction;
+class QAction;
 class KXMLGUIClient;
 
 
@@ -57,7 +57,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT SelectRangeController : public AbstractXmlG
     void select();
 
   private:
-    KAction* mSelectAction;
+    QAction* mSelectAction;
 
     If::ToolInlineViewable* mToolInlineViewable;
 

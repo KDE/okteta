@@ -29,7 +29,7 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 
 
 namespace Kasten2
@@ -56,7 +56,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfilesManageController : public Abstr
     QWidget* mParentWidget;
     ByteArrayViewProfileManager* mViewProfileManager;
 
-    KAction* mManageAction;
+    QAction* mManageAction;
 };
 
 }

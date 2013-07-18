@@ -30,7 +30,7 @@
 // Kasten core
 #include <abstractdocument.h>
 
-class KAction;
+class QAction;
 class KXMLGUIClient;
 
 
@@ -66,8 +66,8 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
     AbstractDocument* mDocument;
     AbstractModelFileSystemSynchronizer* mSynchronizer;
 
-    KAction *mSaveAction;
-    KAction *mReloadAction;
+    QAction *mSaveAction;
+    QAction *mReloadAction;
 };
 
 }

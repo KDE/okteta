@@ -85,12 +85,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
     Okteta::AbstractByteArrayModel *mByteArray;
     Okteta::Bookmarkable *mBookmarks;
 
-    KAction* mCreateAction;
-    KAction* mDeleteAction;
-    KAction* mDeleteAllAction;
+    QAction* mCreateAction;
+    QAction* mDeleteAction;
+    QAction* mDeleteAllAction;
 
-    KAction* mGotoNextBookmarkAction;
-    KAction* mGotoPreviousBookmarkAction;
+    QAction* mGotoNextBookmarkAction;
+    QAction* mGotoPreviousBookmarkAction;
 
     QActionGroup *mBookmarksActionGroup;
 };

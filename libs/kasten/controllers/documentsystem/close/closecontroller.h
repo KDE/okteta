@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
-class KAction;
+class QAction;
 class KXMLGUIClient;
 
 
@@ -63,9 +63,9 @@ class KASTENCONTROLLERS_EXPORT CloseController : public AbstractXmlGuiController
     AbstractDocumentStrategy* mDocumentStrategy;
 
     AbstractDocument* mDocument;
-    KAction* mCloseAction;
-    KAction* mCloseAllAction;
-    KAction* mCloseAllOtherAction;
+    QAction* mCloseAction;
+    QAction* mCloseAllAction;
+    QAction* mCloseAllOtherAction;
 };
 
 }

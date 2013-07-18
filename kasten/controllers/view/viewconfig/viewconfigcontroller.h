@@ -31,7 +31,7 @@
 class KXMLGUIClient;
 class KSelectAction;
 class KToggleAction;
-class KAction;
+class QAction;
 
 
 namespace Kasten2
@@ -76,8 +76,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     KSelectAction* mCodingAction;
     KSelectAction* mEncodingAction;
     KToggleAction* mShowsNonprintingAction;
-    KAction* mSetBytesPerLineAction;
-    KAction* mSetBytesPerGroupAction;
+    QAction* mSetBytesPerLineAction;
+    QAction* mSetBytesPerGroupAction;
     KSelectAction* mResizeStyleAction;
     KToggleAction* mShowOffsetColumnAction;
     KSelectAction* mOffsetCodingAction;

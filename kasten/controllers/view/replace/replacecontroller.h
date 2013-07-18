@@ -33,7 +33,7 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 class QWidget;
 
 
@@ -69,7 +69,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ReplaceController : public AbstractXmlGuiCo
   private:
     QWidget* mParentWidget;
 
-    KAction *mReplaceAction;
+    QAction *mReplaceAction;
 
     KReplaceDialog *mReplaceDialog;
     mutable KReplacePrompt* mReplacePrompt;

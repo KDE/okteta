@@ -29,7 +29,7 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 
 
 namespace Kasten2
@@ -71,9 +71,9 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiCo
     If::ViewAreaSplitable* mViewAreaSplitable;
     AbstractGroupedViews* mCurrentViewArea;
 
-    KAction* mSplitVerticallyAction;
-    KAction* mSplitHorizontallyAction;
-    KAction* mCloseAction;
+    QAction* mSplitVerticallyAction;
+    QAction* mSplitHorizontallyAction;
+    QAction* mCloseAction;
 };
 
 }

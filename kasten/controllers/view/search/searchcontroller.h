@@ -33,7 +33,7 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 class QWidget;
 
 
@@ -71,9 +71,9 @@ class OKTETAKASTENCONTROLLERS_EXPORT SearchController : public AbstractXmlGuiCon
   private:
     QWidget* mParentWidget;
 
-    KAction* mFindAction;
-    KAction* mFindNextAction;
-    KAction* mFindPrevAction;
+    QAction* mFindAction;
+    QAction* mFindNextAction;
+    QAction* mFindPrevAction;
 
     KSearchDialog* mSearchDialog;
     SearchTool* mTool;

@@ -29,7 +29,7 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 
 
 namespace Kasten2
@@ -61,8 +61,8 @@ class KASTENCONTROLLERS_EXPORT SelectController : public AbstractXmlGuiControlle
     AbstractModel* mModel;
     If::DataSelectable* mSelectControl;
 
-    KAction *mSelectAllAction;
-    KAction *mDeselectAction;
+    QAction *mSelectAllAction;
+    QAction *mDeselectAction;
 };
 
 }

@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
-class KAction;
+class QAction;
 class KXMLGUIClient;
 
 
@@ -54,7 +54,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PrintController : public AbstractXmlGuiCont
 
 
   private:
-    KAction *mPrintAction;
+    QAction *mPrintAction;
 
     PrintTool *mPrintTool;
 };
