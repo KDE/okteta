@@ -394,21 +394,17 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
 #structview and poddecoder sources are also needed for structures tool unit tests
 #create a OBJECT library (http://www.cmake.org/Wiki/CMake/Tutorials/Object_Library)
 #to prevent compiling these object files twice with exactly the same compile flags
-#TODO remove once CMake >= 2.8.9 is required for building KDE
-if ( CMAKE_VERSION VERSION_GREATER 2.8.8)
-    #OBJECT libraries seem buggy with regard to automoc, have to call it manually
-    automoc4( poddecoder_objs PODDECODERCONTROLLER_SRCS )
-    automoc4( structview_objs STRUCTVIEW_SRCS )
-    add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
-    add_library( structview_objs OBJECT ${STRUCTVIEW_SRCS} )
-    set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
-    set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
-    set( STRUCTVIEW_OBJS $<TARGET_OBJECTS:structview_objs>)
-else()
-    #compile the sources twice for older CMake version
-    set( PODDECODER_OBJS ${PODDECODERCONTROLLER_SRCS})
-    set( STRUCTVIEW_OBJS ${STRUCTVIEW_SRCS})
-endif()
+
+#OBJECT libraries seem buggy with regard to automoc, have to call it manually
+#automoc4( poddecoder_objs PODDECODERCONTROLLER_SRCS )
+#automoc4( structview_objs STRUCTVIEW_SRCS )
+
+add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
+add_library( structview_objs OBJECT ${STRUCTVIEW_SRCS} )
+set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
+set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
+set( STRUCTVIEW_OBJS $<TARGET_OBJECTS:structview_objs>)
+
 
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
 #   ${OVERWRITEONLYCONTROLLER_SRCS}
@@ -554,6 +550,7 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   ${KDE4_KCMUTILS_LIBS}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSCRIPTTOOLS_LIBRARY}
+  ${KDE4Attic_LIBRARIES}
 )
 if( QCA2_FOUND )
   target_link_libraries( ${oktetakastencontrollers_LIB} ${QCA2_LIBRARIES} )

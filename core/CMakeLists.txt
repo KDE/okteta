@@ -112,18 +112,12 @@ set( oktetacore_LIB_CCHDRS
   includes/CharCodec
 )
 
-#TODO remove once CMake >= 2.8.9 is required for building KDE
-#don't compile sources twice
-if ( CMAKE_VERSION VERSION_GREATER 2.8.8)
-    #OBJECT libraries seem buggy with regard to automoc, have to call it manually
-    automoc4( oktetacore_objs oktetacore_LIB_SRCS )
-    add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
-    set_target_properties(oktetacore_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
-    set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
-else()
-    #compile the sources twice for older CMake version
-    set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS})
-endif()
+#don't compile sources twice by using object libraries
+#OBJECT libraries seem buggy with regard to automoc, have to call it manually
+#automoc4( oktetacore_objs oktetacore_LIB_SRCS )
+add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
+set_target_properties(oktetacore_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
+set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
 
 kde4_add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
 target_link_libraries( ${oktetacore_LIB}

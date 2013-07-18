@@ -185,6 +185,7 @@ target_link_libraries( ${kastencontrollers_LIB}
   ${kastencore_LIB}
   ${KDE4_KPARTS_LIBS}
   ${KDE4_KFILE_LIBS}
+  ${KDE4Support_LIBRARIES}
 )
 set_target_properties( ${kastencontrollers_LIB}  PROPERTIES
   OUTPUT_NAME ${kastencontrollers_LIB_NAME}

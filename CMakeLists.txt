@@ -1,10 +1,42 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8.11.1)
 
 project( okteta )
 
-find_package(KDE4 REQUIRED)
+#copy the way kde-workspace does it
+
+set(QT_MIN_VERSION "5.2.0")
+find_package(ECM 0.0.8 REQUIRED NO_MODULE)
+include(CMakePackageConfigHelpers)
+# where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools)
+find_package(Qt5Transitional MODULE)
+#workaround wrong dirs being used
+
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions for now
+
+
+find_package(kdeqt5staging REQUIRED NO_MODULE)
+# Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
+find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
+                                            KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KService ItemViews KConfigWidgets 
+                                            KWindowSystem KNotifications KAuth KCodecs KWidgets KIconThemes Sonnet KCompletion
+                                            KTextWidgets XmlGui KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
+                                            )
+
+# needed for set_package_properties macro
+find_package(LibAttica REQUIRED NO_MODULE ) #somehow this is not searched for
+find_package(KDELibs4 REQUIRED NO_MODULE) #needed for KDE4Support
+find_package(KDE4Support REQUIRED NO_MODULE)
+find_package(KDE4Attic REQUIRED NO_MODULE)
 include(KDE4Defaults)
-include(MacroLibrary)
+
+set(CMAKE_POSITION_INDEPENDENT_CODE ON) #this is needed since it is apparently not set by Qt5Config.cmake
+#don't add KDE4Support manually to every target
+set(KDE4_KDECORE_LIBS ${KDE4_KDECORE_LIBS} ${KDE4Support_LIBRARIES})
+set(KDE4_KDEUI_LIBS ${KDE4_KDEUI_LIBS} ${KDE4Support_LIBRARIES})
+set(KDE4_KIO_LIBS ${KDE4_KIO_LIBS} ${KDE4Support_LIBRARIES})
 
 macro_optional_find_package( QCA2 )
 macro_log_feature( QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" FALSE "2.0.0" "Needed for most of the algorithms of the checksum tool." )

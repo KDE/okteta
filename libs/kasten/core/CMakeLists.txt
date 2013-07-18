@@ -127,6 +127,7 @@ kde4_add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
 target_link_libraries( ${kastencore_LIB}
   ${KDE4_KIO_LIBS}
   ${KDE4_SOLID_LIBS}
+  Qt5::Widgets
 )
 set_target_properties( ${kastencore_LIB}  PROPERTIES
   OUTPUT_NAME ${kastencore_LIB_NAME}

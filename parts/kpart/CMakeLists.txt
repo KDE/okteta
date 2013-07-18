@@ -52,6 +52,7 @@ target_link_libraries( oktetapart
   kastengui
   kastencore
   ${KDE4_KPARTS_LIBS}
+  ${KDE4Support_LIBRARIES}
 )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})

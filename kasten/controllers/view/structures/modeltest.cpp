@@ -21,7 +21,7 @@
 **
 ****************************************************************************/
 
-#include <QtGui/QtGui>
+#include <QtWidgets>
 
 #include "modeltest.h"
 
