@@ -36,6 +36,8 @@
 #include <KConfigDialogManager>
 #include <KPluginInfo>
 #include <KPushButton>
+#include <KLocalizedString>
+#include <KIcon>
 #include <KDialog>
 //KNS
 #include <KNS3/KNewStuffButton>

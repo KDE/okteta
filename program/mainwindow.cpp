@@ -111,6 +111,7 @@
 #include <KUrl>
 #include <KGlobal>
 #include <KConfigGroup>
+#include <KSharedConfig>
 
 
 namespace Kasten2

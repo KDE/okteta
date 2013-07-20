@@ -31,12 +31,12 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QCheckBox>
-#include <QtGui/QTreeView>
-#include <QtGui/QHeaderView>
-#include <QtGui/QFocusEvent>
+#include <QLabel>
+#include <QLayout>
+#include <QCheckBox>
+#include <QTreeView>
+#include <QHeaderView>
+#include <QFocusEvent>
 #include <QtGui/QFontMetrics>
 
 #include <KDebug>

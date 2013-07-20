@@ -26,7 +26,7 @@
 // #include <widgetsdockable.h>
 // #include <toolviewdockwidget.h>
 // Qt
-#include <QtGui/QAction>
+#include <QAction>
 
 
 namespace Kasten2

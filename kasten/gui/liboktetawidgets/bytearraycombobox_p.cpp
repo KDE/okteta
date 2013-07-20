@@ -26,9 +26,9 @@
 // KDE
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLineEdit>
-#include <QtGui/QAbstractItemView>
+#include <QLayout>
+#include <QLineEdit>
+#include <QAbstractItemView>
 
 
 namespace Okteta

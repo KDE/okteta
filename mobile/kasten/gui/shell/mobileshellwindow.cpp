@@ -26,7 +26,7 @@
 #include <abstractview.h>
 #include <documentmanager.h>
 // Qt
-#include <QtGui/QToolBar>
+#include <QToolBar>
 
 
 namespace Kasten2

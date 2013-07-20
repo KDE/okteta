@@ -29,6 +29,7 @@
 #include <KUrl>
 #include <KActionCollection>
 #include <KAction>
+#include <KIcon>
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KLocalizedString>

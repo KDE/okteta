@@ -27,6 +27,7 @@
 #include <kastencore.h>
 // KDE
 #include <KParts/ReadWritePart>
+#include <KComponentData>
 
 namespace Kasten2 {
 class ByteArrayViewProfileManager;

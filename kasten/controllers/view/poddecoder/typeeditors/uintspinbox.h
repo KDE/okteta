@@ -24,7 +24,7 @@
 #define UINTSPINBOX_H
 
 // Qt
-#include <QtGui/QAbstractSpinBox>
+#include <QAbstractSpinBox>
 // C++
 #include <limits>
 

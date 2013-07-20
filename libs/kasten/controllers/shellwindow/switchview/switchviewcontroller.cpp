@@ -29,7 +29,7 @@
 #include <KActionCollection>
 #include <KAction>
 // Qt
-#include <QtGui/QActionGroup>
+#include <QActionGroup>
 
 
 namespace Kasten2

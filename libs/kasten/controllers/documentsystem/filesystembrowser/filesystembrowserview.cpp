@@ -33,7 +33,7 @@
 #include <KLocalizedString>
 #include <kdeversion.h>
 // Qt
-#include <QtGui/QLayout>
+#include <QLayout>
 #include <QtCore/QDir>
 
 

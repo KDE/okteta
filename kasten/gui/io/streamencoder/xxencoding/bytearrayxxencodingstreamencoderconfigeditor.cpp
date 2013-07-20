@@ -28,8 +28,8 @@
 #include <KLocalizedString>
 #include <KLineEdit>
 // Qt
-#include <QtGui/QFormLayout>
-#include <QtGui/QLabel>
+#include <QFormLayout>
+#include <QLabel>
 
 
 namespace Kasten2

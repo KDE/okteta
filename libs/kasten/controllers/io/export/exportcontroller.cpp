@@ -38,6 +38,7 @@
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
+#include <KIcon>
 #include <KSelectAction>
 
 

@@ -26,6 +26,7 @@
 #include "documentinfotool.h"
 // KDE
 #include <KLocalizedString>
+#include <KLocale>
 #include <KIconLoader>
 #include <KSeparator>
 #include <KSqueezedTextLabel>
@@ -34,9 +35,9 @@
 #include <kio/netaccess.h>
 // Qt
 #include <QtGui/QFont>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QGridLayout>
+#include <QLabel>
+#include <QLayout>
+#include <QGridLayout>
 
 
 namespace Kasten2

@@ -32,10 +32,10 @@
 #include <KComboBox>
 #include <KLineEdit>
 // Qt
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QFormLayout>
-#include <QtGui/QCheckBox>
+#include <QVBoxLayout>
+#include <QGroupBox>
+#include <QFormLayout>
+#include <QCheckBox>
 
 namespace Kasten2
 {

@@ -31,6 +31,7 @@
 #include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KAction>
+#include <KIcon>
 #include <KLocalizedString>
 
 

@@ -37,13 +37,13 @@
 #include <KLocalizedString>
 #include <KGlobalSettings>
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QGroupBox>
-#include <QtGui/QStackedWidget>
-#include <QtGui/QLayout>
+#include <QLabel>
+#include <QGroupBox>
+#include <QStackedWidget>
+#include <QLayout>
 #include <QtGui/QClipboard>
 #include <QApplication>
-#include <QtGui/QAbstractItemView>
+#include <QAbstractItemView>
 
 
 namespace Kasten2

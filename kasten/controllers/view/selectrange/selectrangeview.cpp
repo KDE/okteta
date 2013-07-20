@@ -31,9 +31,9 @@
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QCheckBox>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
+#include <QCheckBox>
+#include <QLabel>
+#include <QLayout>
 
 
 namespace Kasten2

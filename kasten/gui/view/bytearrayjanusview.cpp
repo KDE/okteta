@@ -26,8 +26,8 @@
 #include <bytearraycolumnview.h>
 #include <bytearrayrowview.h>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QScrollBar>
+#include <QLayout>
+#include <QScrollBar>
 
 
 namespace Okteta

@@ -32,9 +32,9 @@
 #include <KPushButton>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QTreeView>
-#include <QtGui/QItemSelectionModel>
+#include <QHBoxLayout>
+#include <QTreeView>
+#include <QtCore/QItemSelectionModel>
 
 
 namespace Kasten2

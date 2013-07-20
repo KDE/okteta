@@ -62,7 +62,8 @@
 #include <KActionCollection>
 // Qt
 #include <QWidget>
-#include <QtGui/QLayout>
+#include <QLayout>
+#include <KUrl>
 #include <QtCore/QList>
 
 

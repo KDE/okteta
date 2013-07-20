@@ -34,11 +34,11 @@
 #include <KApplication>
 #include <KGlobalSettings>
 // Qt
-#include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QTreeView>
+#include <QtCore/QSortFilterProxyModel>
+#include <QLabel>
+#include <QLayout>
+#include <QHeaderView>
+#include <QTreeView>
 #include <QtGui/QFontMetrics>
 
 

@@ -29,10 +29,10 @@
 #include <KGlobal>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QSplitter>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
+#include <QSplitter>
+#include <QGroupBox>
+#include <QLayout>
+#include <QLabel>
 #include <QtGui/QFont>
 
 

@@ -29,8 +29,8 @@
 // KDE
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QCheckBox>
-#include <QtGui/QFormLayout>
+#include <QCheckBox>
+#include <QFormLayout>
 
 
 const char* const OperandByteArrayFilterParameterSetEdit::Id = "Operand";

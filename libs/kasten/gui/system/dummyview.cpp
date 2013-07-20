@@ -25,7 +25,7 @@
 // lib
 #include "abstractdocument.h"
 // Qt
-#include <QtGui/QLabel>
+#include <QLabel>
 
 
 namespace Kasten2

@@ -33,6 +33,7 @@
 #include <KXMLGUIClient>
 #include <KConfigGroup>
 #include <KGlobal>
+#include <KSharedConfig>
 
 
 namespace Kasten2

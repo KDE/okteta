@@ -27,9 +27,9 @@
 // KDE
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
-#include <QtGui/QFont>
+#include <QLayout>
+#include <QLabel>
+#include <QFont>
 
 
 namespace Kasten2

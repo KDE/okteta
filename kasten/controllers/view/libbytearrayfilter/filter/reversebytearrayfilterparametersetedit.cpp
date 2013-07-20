@@ -27,8 +27,8 @@
 // KDE
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QCheckBox>
-#include <QtGui/QFormLayout>
+#include <QCheckBox>
+#include <QFormLayout>
 
 
 const char* const ReverseByteArrayFilterParameterSetEdit::Id = "Reverse";

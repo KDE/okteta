@@ -28,7 +28,7 @@
 #include <KLocalizedString>
 #include <KIntNumInput>
 // Qt
-#include <QtGui/QFormLayout>
+#include <QFormLayout>
 
 
 const char* const RotateByteArrayFilterParameterSetEdit::Id = "Rotate";

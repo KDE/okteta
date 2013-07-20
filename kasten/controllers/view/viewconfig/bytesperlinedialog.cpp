@@ -26,7 +26,7 @@
 #include <KIntNumInput>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QFormLayout>
+#include <QFormLayout>
 
 
 namespace Kasten2

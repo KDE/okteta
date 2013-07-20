@@ -29,6 +29,8 @@
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KToggleAction>
+#include <KIcon>
+#include <KGuiItem>
 
 
 namespace Kasten2

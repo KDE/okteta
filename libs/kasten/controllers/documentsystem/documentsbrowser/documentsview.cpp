@@ -26,8 +26,8 @@
 #include "documentlistmodel.h"
 #include "documentstool.h"
 // Qt
-#include <QtGui/QTreeView>
-#include <QtGui/QLayout>
+#include <QTreeView>
+#include <QLayout>
 
 
 namespace Kasten2

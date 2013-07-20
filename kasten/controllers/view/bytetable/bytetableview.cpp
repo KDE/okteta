@@ -36,10 +36,10 @@
 #include <KApplication>
 #include <KIntNumInput>
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QTreeView>
+#include <QLabel>
+#include <QLayout>
+#include <QHeaderView>
+#include <QTreeView>
 
 
 namespace Kasten2

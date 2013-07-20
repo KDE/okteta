@@ -35,11 +35,11 @@
 #include <KComboBox>
 #include <KGuiItem>
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QStackedWidget>
-#include <QtGui/QGroupBox>
-#include <QtGui/QAbstractItemView>
+#include <QLabel>
+#include <QLayout>
+#include <QStackedWidget>
+#include <QGroupBox>
+#include <QAbstractItemView>
 
 
 namespace Kasten2

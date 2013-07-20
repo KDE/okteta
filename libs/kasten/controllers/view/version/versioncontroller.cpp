@@ -32,8 +32,9 @@
 #include <KActionCollection>
 #include <KToolBarPopupAction>
 #include <KStandardShortcut>
+#include <KIcon>
 // Qt
-#include <QtGui/QMenu>
+#include <QMenu>
 
 
 namespace Kasten2

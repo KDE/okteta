@@ -45,7 +45,7 @@
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt
-#include <QtGui/QAction>
+#include <QAction>
 
 
 namespace Kasten2

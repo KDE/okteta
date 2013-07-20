@@ -31,7 +31,7 @@
 #include <KLocalizedString>
 #include <KIcon>
 // Qt
-#include <QtGui/QLabel>
+#include <QLabel>
 
 
 namespace Kasten2

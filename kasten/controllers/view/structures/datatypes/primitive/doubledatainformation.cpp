@@ -23,6 +23,7 @@
 
 #include <QScriptValue>
 #include <KDoubleNumInput>
+#include <KLocale>
 #include <KGlobal>
 #include <KLocalizedString>
 

@@ -28,7 +28,7 @@
 #include <KLocalizedString>
 #include <KComboBox>
 // Qt
-#include <QtGui/QFormLayout>
+#include <QFormLayout>
 
 
 const char* const ModSumByteArrayChecksumParameterSetEdit::Id = "ModSum";

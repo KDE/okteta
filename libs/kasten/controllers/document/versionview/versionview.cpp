@@ -29,8 +29,8 @@
 #include <versionable.h>
 #include <abstractmodel.h>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QTreeView>
+#include <QLayout>
+#include <QTreeView>
 
 
 namespace Kasten2

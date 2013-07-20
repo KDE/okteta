@@ -35,11 +35,11 @@
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QFormLayout>
-#include <QtGui/QLayout>
-#include <QtGui/QCheckBox>
-#include <QtGui/QLabel>
-#include <QtGui/QGroupBox>
+#include <QFormLayout>
+#include <QLayout>
+#include <QCheckBox>
+#include <QLabel>
+#include <QGroupBox>
 
 #include <KDebug>
 

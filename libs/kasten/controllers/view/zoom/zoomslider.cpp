@@ -30,9 +30,9 @@
 #include <KIcon>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QSlider>
-#include <QtGui/QToolButton>
-#include <QtGui/QLayout>
+#include <QSlider>
+#include <QToolButton>
+#include <QLayout>
 #include <QApplication>
 #include <QtGui/QHelpEvent>
 

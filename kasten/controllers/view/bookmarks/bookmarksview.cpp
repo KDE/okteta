@@ -32,9 +32,9 @@
 #include <KLocalizedString>
 #include <KGuiItem>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QTreeView>
-#include <QtGui/QHeaderView>
+#include <QLayout>
+#include <QTreeView>
+#include <QHeaderView>
 
 
 namespace Kasten2

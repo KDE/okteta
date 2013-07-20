@@ -34,7 +34,7 @@
 #include <KLocalizedString>
 #include <KStringHandler>
 // Qt
-#include <QtGui/QActionGroup>
+#include <QActionGroup>
 
 
 

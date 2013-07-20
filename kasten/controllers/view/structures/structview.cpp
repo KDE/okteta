@@ -44,12 +44,15 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <KPushButton>
+#include <KIcon>
+#include <KDialog>
+#include <KDebug>
 
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QTreeView>
-#include <QtGui/QHeaderView>
+#include <QLabel>
+#include <QLayout>
+#include <QTreeView>
+#include <QHeaderView>
 #include <QFocusEvent>
 
 namespace Kasten2

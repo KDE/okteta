@@ -23,7 +23,7 @@
 #include "sintspinbox.h"
 
 // Qt
-#include <QtGui/QLineEdit>
+#include <QLineEdit>
 
 
 QValidator::State SIntSpinBox::validate( QString& input, int& pos ) const

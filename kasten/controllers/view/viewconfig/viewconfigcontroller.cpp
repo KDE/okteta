@@ -34,6 +34,7 @@
 #include <KActionCollection>
 #include <KSelectAction>
 #include <KToggleAction>
+#include <KAction>
 
 
 namespace Kasten2

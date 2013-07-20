@@ -32,6 +32,7 @@
 #include <KLocalizedString>
 #include <KAction>
 #include <KActionCollection>
+#include <KIcon>
 
 
 namespace Kasten2

@@ -29,10 +29,10 @@
 #include <KGlobal>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QSplitter>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
+#include <QSplitter>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLayout>
 
 
 namespace Kasten2

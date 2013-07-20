@@ -35,8 +35,8 @@
 #include <KComboBox>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
+#include <QLayout>
+#include <QLabel>
 #include <QtGui/QFontMetrics>
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation

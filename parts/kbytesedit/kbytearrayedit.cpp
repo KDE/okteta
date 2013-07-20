@@ -27,7 +27,7 @@
 // Okteta core
 #include <bytearraymodel.h>
 // Qt
-#include <QtGui/QLayout>
+#include <QLayout>
 #include <QWidget>
 
 

@@ -30,6 +30,7 @@
 
 template< class C > class QList;
 class QTreeView;
+class KPushButton;
 
 
 namespace Kasten2

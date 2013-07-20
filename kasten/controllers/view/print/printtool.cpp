@@ -38,8 +38,8 @@
 #include <kdeprintdialog.h>
 // Qt
 #include <QApplication>
-#include <QtGui/QPrintDialog>
-#include <QtGui/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrinter>
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
 

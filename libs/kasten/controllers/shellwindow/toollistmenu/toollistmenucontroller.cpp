@@ -29,7 +29,7 @@
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 // Qt
-#include <QtGui/QAction>
+#include <QAction>
 
 
 namespace Kasten2

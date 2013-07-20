@@ -31,9 +31,9 @@
 // Okteta core
 #include <valuecodec.h>
 // Qt
-#include <QtGui/QStyle>
+#include <QStyle>
 #include <QtGui/QPainter>
-#include <QtGui/QScrollBar>
+#include <QScrollBar>
 #include <QtCore/QEvent>
 
 

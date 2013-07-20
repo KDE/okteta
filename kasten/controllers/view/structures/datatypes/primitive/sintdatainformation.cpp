@@ -24,6 +24,7 @@
 
 #include <QScriptValue>
 #include <KGlobal>
+#include <KLocale>
 #include <KLocalizedString>
 #include <KDebug>
 

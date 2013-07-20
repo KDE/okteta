@@ -28,7 +28,7 @@
 #include <KLocalizedString>
 #include <KFileDialog>
 // Qt
-#include <QtGui/QMenuBar>
+#include <QMenuBar>
 
 
 namespace Kasten2

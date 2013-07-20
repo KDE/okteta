@@ -29,8 +29,8 @@
 #include <KLineEdit>
 // #include <KComboBox>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
+#include <QLayout>
+#include <QLabel>
 
 
 namespace Kasten2

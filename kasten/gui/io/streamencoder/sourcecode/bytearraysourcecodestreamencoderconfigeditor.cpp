@@ -30,8 +30,8 @@
 #include <KIntNumInput>
 #include <KComboBox>
 // Qt
-#include <QtGui/QFormLayout>
-#include <QtGui/QCheckBox>
+#include <QFormLayout>
+#include <QCheckBox>
 
 
 namespace Kasten2

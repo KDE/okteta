@@ -31,8 +31,8 @@
 #include <kde_terminal_interface.h>
 #include <KUrl>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QFrame>
+#include <QLayout>
+#include <QFrame>
 #include <QtCore/QDir>
 
 

@@ -30,9 +30,9 @@
 #include <KGlobal>
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QCheckBox>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLayout>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QLayout>
 
 
 namespace Kasten2

@@ -39,6 +39,7 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KSelectAction>
+#include <KIcon>
 // Qt
 #include <QtCore/QBuffer>
 #include <QtCore/QMimeData>
