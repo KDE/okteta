@@ -260,7 +260,7 @@ void StructView::setLockButtonState(bool structureLocked)
     if (structureLocked)
     {
         mLockStructureButton->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
-        mLockStructureButton->setText(i18nc("@action:pushbutton"
+        mLockStructureButton->setText(i18nc("@action:button"
                         " unlock the starting offset of the current structure", "Unlock"));
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
                         "Unlock selected structure, i.e. the starting offset is"
@@ -269,7 +269,7 @@ void StructView::setLockButtonState(bool structureLocked)
     else
     {
         mLockStructureButton->setIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
-        mLockStructureButton->setText(i18nc("@action:pushbutton"
+        mLockStructureButton->setText(i18nc("@action:button"
                         " unlock the starting offset of the current structure", "Lock"));
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
                         "Lock selected structure to current offset."));
