@@ -30,7 +30,6 @@ find_package(LibAttica REQUIRED NO_MODULE ) #somehow this is not searched for
 find_package(KDELibs4 REQUIRED NO_MODULE) #needed for KDE4Support
 find_package(KDE4Support REQUIRED NO_MODULE)
 find_package(KDE4Attic REQUIRED NO_MODULE)
-include(KDE4Defaults)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) #this is needed since it is apparently not set by Qt5Config.cmake
 #don't add KDE4Support manually to every target
@@ -38,15 +37,13 @@ set(KDE4_KDECORE_LIBS ${KDE4_KDECORE_LIBS} ${KDE4Support_LIBRARIES})
 set(KDE4_KDEUI_LIBS ${KDE4_KDEUI_LIBS} ${KDE4Support_LIBRARIES})
 set(KDE4_KIO_LIBS ${KDE4_KIO_LIBS} ${KDE4Support_LIBRARIES})
 
+
+SET( CMAKE_INCLUDE_CURRENT_DIR ON )
+set( CMAKE_AUTOMOC TRUE )
+include_directories( ${KDE4_INCLUDES} )
+
 macro_optional_find_package( QCA2 )
 macro_log_feature( QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" FALSE "2.0.0" "Needed for most of the algorithms of the checksum tool." )
-
-add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories(
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_BINARY_DIR}
-    ${KDE4_INCLUDES}
-)
 
 # control build scope
 # TODO: examples and templates not internal need headers and libs as installed

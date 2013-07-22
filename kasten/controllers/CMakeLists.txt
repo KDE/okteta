@@ -440,10 +440,10 @@ if ( KDE4_BUILD_TESTS )
 #static lib for unit tests (reuse the OBJECT library)
 kde4_add_library ( structures-static STATIC ${PODDECODER_OBJS} ${STRUCTVIEW_OBJS} )
 target_link_libraries ( structures-static
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTXML_LIBRARY}
-  ${QT_QTTEST_LIBRARY}
+  Qt5::Core
+  Qt5::Test
+  Qt5::Script
+  Qt5::Xml
   ${KDE4_KDEUI_LIBS}
   ${KDE4_KNEWSTUFF3_LIBS}
   ${KDE4_KCMUTILS_LIBS}
@@ -548,8 +548,8 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   ${KDE4_KDEUI_LIBS}
   ${KDE4_KNEWSTUFF3_LIBS}
   ${KDE4_KCMUTILS_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTSCRIPTTOOLS_LIBRARY}
+  Qt5::Script
+  Qt5::ScriptTools
   ${KDE4Attic_LIBRARIES}
 )
 if( QCA2_FOUND )

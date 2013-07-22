@@ -17,6 +17,5 @@ target_link_libraries( oktetadesignerexample
   ${oktetagui_LIB}
   ${oktetacore_LIB}
   ${KDE4_KDEUI_LIBS}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTCORE_LIBRARY}
+  Qt5::Widgets
 )

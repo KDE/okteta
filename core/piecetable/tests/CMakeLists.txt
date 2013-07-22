@@ -16,7 +16,7 @@ set( piecetest_SRCS
 )
 
 kde4_add_unit_test( piecetest  TESTNAME libpiecetable-piecetest  ${piecetest_SRCS} )
-target_link_libraries( piecetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+target_link_libraries( piecetest  ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### piecetabletest ###############
@@ -27,7 +27,7 @@ set( piecetabletest_SRCS
 )
 
 kde4_add_unit_test( piecetabletest  TESTNAME libpiecetable-piecetabletest  ${piecetabletest_SRCS} )
-target_link_libraries( piecetabletest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+target_link_libraries( piecetabletest  ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### testpiecetablechangetest ###############
@@ -43,7 +43,7 @@ kde4_add_unit_test( testpiecetablechangetest
   TESTNAME libpiecetable-testpiecetablechangetest
   ${testpiecetablechangetest_SRCS}
 )
-target_link_libraries( testpiecetablechangetest  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+target_link_libraries( testpiecetablechangetest  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### abstractpiecetablechangeiftestsources ###############
@@ -67,7 +67,7 @@ kde4_add_unit_test( testpiecetablechangeabstractpiecetablechangeiftest
   ${testpiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( testpiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### insertpiecetablechangeabstractpiecetablechangeiftest ###############
@@ -83,7 +83,7 @@ kde4_add_unit_test( insertpiecetablechangeabstractpiecetablechangeiftest
   ${insertpiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( insertpiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### removepiecetablechangeabstractpiecetablechangeiftest ###############
@@ -99,7 +99,7 @@ kde4_add_unit_test( removepiecetablechangeabstractpiecetablechangeiftest
   ${removepiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( removepiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### replacepiecetablechangeabstractpiecetablechangeiftest ###############
@@ -115,7 +115,7 @@ kde4_add_unit_test( replacepiecetablechangeabstractpiecetablechangeiftest
   ${replacepiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( replacepiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### swaprangespiecetablechangeabstractpiecetablechangeiftest ###############
@@ -131,7 +131,7 @@ kde4_add_unit_test( swaprangespiecetablechangeabstractpiecetablechangeiftest
   ${swaprangespiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( swaprangespiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### grouppiecetablechangeabstractpiecetablechangeiftest ###############
@@ -153,7 +153,7 @@ kde4_add_unit_test( grouppiecetablechangeabstractpiecetablechangeiftest
   ${grouppiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( grouppiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
 endif()
 
 ########### grouppiecetablechangetest ###############
@@ -175,7 +175,7 @@ kde4_add_unit_test( grouppiecetablechangetest
   TESTNAME libpiecetable-grouppiecetablechangetest
   ${grouppiecetablechangetest_SRCS}
 )
-target_link_libraries( grouppiecetablechangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+target_link_libraries( grouppiecetablechangetest  ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### piecetablechangehistorytest ###############
@@ -198,7 +198,7 @@ kde4_add_unit_test( piecetablechangehistorytest
   TESTNAME libpiecetable-piecetablechangehistorytest
   ${piecetablechangehistorytest_SRCS}
 )
-target_link_libraries( piecetablechangehistorytest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+target_link_libraries( piecetablechangehistorytest  ${KDE4_KDECORE_LIBS} Qt5::Test )
 
 
 ########### revertablepiecetabletest ###############
@@ -221,4 +221,4 @@ kde4_add_unit_test( revertablepiecetabletest
   TESTNAME libpiecetable-revertablepiecetabletest
   ${revertablepiecetabletest_SRCS}
 )
-target_link_libraries( revertablepiecetabletest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+target_link_libraries( revertablepiecetabletest  ${KDE4_KDECORE_LIBS} Qt5::Test )

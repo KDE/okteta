@@ -22,8 +22,7 @@ kde4_add_plugin( oktetadesignerplugin  ${oktetadesignerplugin_SRCS} )
 target_link_libraries( oktetadesignerplugin
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTCORE_LIBRARY}
+  Qt5::Widgets
 )
 
 install( TARGETS oktetadesignerplugin  DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )

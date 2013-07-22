@@ -33,7 +33,7 @@ target_link_libraries( bytearraydocumenttest
   ${KASTENCORE_LIBS}
   testoktetacore
   ${KDE4_KIO_LIBS}
-  ${QT_QTTEST_LIBRARY}
+  Qt5::Test
 )
 
 
@@ -54,5 +54,5 @@ target_link_libraries( bytearraydocumentfactorytest
   oktetacoretestutil
   testoktetacore
   ${KDE4_KIO_LIBS}
-  ${QT_QTTEST_LIBRARY}
+  Qt5::Test
 )

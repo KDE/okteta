@@ -57,7 +57,7 @@ target_link_libraries( bytearrayrawfilesynchronizertest
   oktetacoretestutil
   testoktetacore
   ${KDE4_KIO_LIBS}
-  ${QT_QTTEST_LIBRARY}
+  Qt5::Test
 )
 
 ########### bytearrayrawfilesynchronizerfactorytest ###############
@@ -81,5 +81,5 @@ target_link_libraries( bytearrayrawfilesynchronizerfactorytest
   oktetacoretestutil
   testoktetacore
   ${KDE4_KIO_LIBS}
-  ${QT_QTTEST_LIBRARY}
+  Qt5::Test
 )
