@@ -51,12 +51,12 @@ LoaderController::LoaderController( AbstractDocumentStrategy* documentStrategy,
 
     KStandardAction::open( this, SLOT(load()), actionCollection );
     mOpenRecentAction =
-        KStandardAction::openRecent( this, SLOT(loadRecent(KUrl)), actionCollection );
+        KStandardAction::openRecent( this, SLOT(loadRecent(QUrl)), actionCollection );
 
     KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
     mOpenRecentAction->loadEntries( configGroup );
 
-    connect( mDocumentStrategy, SIGNAL(urlUsed(KUrl)), SLOT(onUrlUsed(KUrl)) );
+    connect( mDocumentStrategy, &AbstractDocumentStrategy::urlUsed, this, &LoaderController::onUrlUsed );
 }
 
 
@@ -93,12 +93,12 @@ void LoaderController::load()
         mDocumentStrategy->load( url );
 }
 
-void LoaderController::loadRecent( const KUrl& url )
+void LoaderController::loadRecent( const QUrl& url )
 {
     mDocumentStrategy->load( url );
 }
 
-void LoaderController::onUrlUsed( const KUrl& url )
+void LoaderController::onUrlUsed( const QUrl& url )
 {
     mOpenRecentAction->addUrl( url );
 }

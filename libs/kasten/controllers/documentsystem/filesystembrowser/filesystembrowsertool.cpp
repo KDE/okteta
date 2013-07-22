@@ -31,6 +31,8 @@
 #include <KLocalizedString>
 #include <KUrl>
 
+#include <QUrl>
+
 
 namespace Kasten2
 {
@@ -47,9 +49,9 @@ FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncM
 QString FileSystemBrowserTool::title() const { return i18nc("@title:window", "Filesystem"); }
 
 
-KUrl FileSystemBrowserTool::currentUrl() const
+QUrl FileSystemBrowserTool::currentUrl() const
 {
-    KUrl result;
+    QUrl result;
 
     if( mDocument )
         result = mDocumentSyncManager->urlOf( mDocument ).upUrl();
@@ -74,7 +76,7 @@ void FileSystemBrowserTool::setTargetModel( AbstractModel* model )
         emit hasCurrentUrlChanged( newHasCurrentUrl );
 }
 
-void FileSystemBrowserTool::open( const KUrl& url )
+void FileSystemBrowserTool::open( const QUrl& url )
 {
     mDocumentSyncManager->load( url );
 }

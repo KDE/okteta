@@ -30,11 +30,11 @@
 #include <KDirOperator>
 #include <KActionCollection>
 #include <KToolBar>
-#include <KUrl>
 #include <KLocalizedString>
 #include <kdeversion.h>
 // Qt
 #include <QLayout>
+#include <QUrl>
 #include <QtCore/QDir>
 
 
@@ -64,15 +64,15 @@ void FileSystemBrowserView::init()
 
     // url bar
     KFilePlacesModel* filePlacesModel = new KFilePlacesModel( this );
-    mUrlNavigator = new KUrlNavigator( filePlacesModel , KUrl( QDir::homePath() ), this );
-    connect( mUrlNavigator, SIGNAL(urlChanged(KUrl)), SLOT(setDirOperatorUrl(KUrl)) );
+    mUrlNavigator = new KUrlNavigator( filePlacesModel , QUrl::fromLocalFile( QDir::homePath() ), this );
+    connect( mUrlNavigator, &KUrlNavigator::urlChanged, this, &FileSystemBrowserView::setDirOperatorUrl );
     layout->addWidget( mUrlNavigator );
 
     // view
     mDirOperator = new KDirOperator( QUrl::fromLocalFile( QDir::homePath() ), this );
     mDirOperator->setView( KFile::Detail );
-    connect( mDirOperator, SIGNAL(urlEntered(KUrl)), SLOT(setNavigatorUrl(KUrl)));
-    connect( mDirOperator, SIGNAL(fileSelected(KFileItem)), SLOT(openFile(KFileItem)) );
+    connect( mDirOperator, &KDirOperator::urlEntered, this, &FileSystemBrowserView::setNavigatorUrl );
+    connect( mDirOperator, &KDirOperator::fileSelected, this, &FileSystemBrowserView::openFile );
     layout->addWidget( mDirOperator );
 
     // fill toolbar
@@ -93,30 +93,26 @@ void FileSystemBrowserView::init()
                                                            this, SLOT(syncCurrentDocumentDirectory()) );
     syncDirAction->setIcon( QIcon::fromTheme( QStringLiteral("go-parent-folder") ) );
     syncDirAction->setText( i18nc("@action:intoolbar", "Folder of Current Document") );
-    connect( mTool, SIGNAL(hasCurrentUrlChanged(bool)), syncDirAction, SLOT(setEnabled(bool)) );
+    connect( mTool, &FileSystemBrowserTool::hasCurrentUrlChanged, syncDirAction, &QAction::setEnabled );
     syncDirAction->setEnabled( mTool->hasCurrentUrl() );
     mToolbar->addAction( syncDirAction );
 }
 
 
-void FileSystemBrowserView::setDirOperatorUrl( const KUrl& url )
+void FileSystemBrowserView::setDirOperatorUrl( const QUrl& url )
 {
     mDirOperator->setUrl( url, true );
 }
 
 
-void FileSystemBrowserView::setNavigatorUrl( const KUrl& url )
+void FileSystemBrowserView::setNavigatorUrl( const QUrl& url )
 {
-#if KDE_VERSION >= KDE_MAKE_VERSION( 4, 4, 50 )
     mUrlNavigator->setLocationUrl( url );
-#else
-    mUrlNavigator->setUrl( url );
-#endif
 }
 
 void FileSystemBrowserView::syncCurrentDocumentDirectory()
 {
-    const KUrl url = mTool->currentUrl();
+    const QUrl url = mTool->currentUrl();
 
     if( !url.isEmpty() )
         setNavigatorUrl( url );
