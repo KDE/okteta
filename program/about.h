@@ -24,7 +24,7 @@
 #define OKTETAABOUT_H
 
 // KDE
-#include <k4aboutdata.h>s
+#include <k4aboutdata.h>
 
 
 class OktetaAboutData : public K4AboutData
