@@ -33,7 +33,6 @@
 #include <QRegExp>
 #include <KLocalizedString>
 #include <KDebug>
-#include <KIcon>
 #include <KConfigDialogManager>
 
 using namespace Kasten2;
@@ -70,17 +69,17 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
 
     leftRightLayout = new QVBoxLayout();
     leftRightLayout->addStretch();
-    mRightButton = new KPushButton(KIcon(QLatin1String("arrow-right")), QString(), this);
+    mRightButton = new KPushButton(QIcon::fromTheme(QStringLiteral("arrow-right")), QString(), this);
     leftRightLayout->addWidget(mRightButton);
-    mLeftButton = new KPushButton(KIcon(QLatin1String("arrow-left")), QString(), this);
+    mLeftButton = new KPushButton(QIcon::fromTheme(QStringLiteral("arrow-left")), QString(), this);
     leftRightLayout->addWidget(mLeftButton);
     leftRightLayout->addStretch();
 
     upDownLayout = new QVBoxLayout();
     upDownLayout->addStretch();
-    mUpButton = new KPushButton(KIcon(QLatin1String("arrow-up")), QString(), this);
+    mUpButton = new KPushButton(QIcon::fromTheme(QStringLiteral("arrow-up")), QString(), this);
     upDownLayout->addWidget(mUpButton);
-    mDownButton = new KPushButton(KIcon(QLatin1String("arrow-down")), QString(), this);
+    mDownButton = new KPushButton(QIcon::fromTheme(QStringLiteral("arrow-down")), QString(), this);
     upDownLayout->addWidget(mDownButton);
     upDownLayout->addStretch();
 

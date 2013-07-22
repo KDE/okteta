@@ -28,7 +28,6 @@
 #include <piecetablebytearraymodel.h>
 // KDE
 #include <KLocalizedString>
-#include <KIcon>
 
 
 namespace Kasten2

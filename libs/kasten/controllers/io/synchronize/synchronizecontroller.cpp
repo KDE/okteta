@@ -29,7 +29,6 @@
 #include <KUrl>
 #include <KActionCollection>
 #include <KAction>
-#include <KIcon>
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
@@ -50,7 +49,7 @@ SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, 
     mReloadAction = actionCollection->addAction( QLatin1String("file_reload"),
                                                  this, SLOT(reload()) );
     mReloadAction->setText( i18nc("@title:menu","Reloa&d") );
-    mReloadAction->setIcon( KIcon( QLatin1String("view-refresh") ) );
+    mReloadAction->setIcon( QIcon::fromTheme( QStringLiteral("view-refresh") ) );
     mReloadAction->setShortcuts( KStandardShortcut::reload() );
 
     setTargetModel( 0 );

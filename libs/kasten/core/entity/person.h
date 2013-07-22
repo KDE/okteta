@@ -28,7 +28,7 @@
 // KDE
 #include <KSharedPtr>
 
-class KIcon;
+class QIcon;
 class QString;
 
 
@@ -42,7 +42,7 @@ class KASTENCORE_EXPORT Person
     static void setEgoId( int egoId );
 
   public:
-    Person( const QString& name, const KIcon& faceIcon );
+    Person( const QString& name, const QIcon& faceIcon );
     Person();
     Person( const Person& other );
     ~Person();
@@ -55,7 +55,7 @@ class KASTENCORE_EXPORT Person
 
   public:
     QString name() const;
-    KIcon faceIcon() const;
+    QIcon faceIcon() const;
 
   protected:
     class Private;

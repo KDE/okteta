@@ -37,7 +37,6 @@
 #include <KPluginInfo>
 #include <KPushButton>
 #include <KLocalizedString>
-#include <KIcon>
 #include <KDialog>
 //KNS
 #include <KNS3/KNewStuffButton>
@@ -71,7 +70,7 @@ StructuresManagerView::StructuresManagerView(Kasten2::StructTool* tool, QWidget*
             SLOT(onGetNewStructuresClicked(KNS3::Entry::List)));
     buttonsLayout->addWidget(mGetNewStructuresButton);
 
-    mAdvancedSelectionButton = new KPushButton(KIcon(QLatin1String("configure")), i18n("Advanced Selection..."), this);
+    mAdvancedSelectionButton = new KPushButton(QIcon::fromTheme(QStringLiteral("configure")), i18n("Advanced Selection..."), this);
     connect(mAdvancedSelectionButton, SIGNAL(clicked()), SLOT(advancedSelection()));
     buttonsLayout->addWidget(mAdvancedSelectionButton);
 }

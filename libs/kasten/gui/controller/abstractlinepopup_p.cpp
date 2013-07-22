@@ -22,9 +22,8 @@
 
 #include "abstractlinepopup_p.h"
 
-// KDE
-#include <KIcon>
 // Qt
+#include <QIcon>
 #include <QLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -52,7 +51,7 @@ void AbstractLinePopupPrivate::init()
 }
 
 
-void AbstractLinePopupPrivate::setIcon( const KIcon& icon )
+void AbstractLinePopupPrivate::setIcon( const QIcon& icon )
 {
     mIconLabel->setPixmap( icon.pixmap(22) ); // TODO: correct call, using KDE size
 }

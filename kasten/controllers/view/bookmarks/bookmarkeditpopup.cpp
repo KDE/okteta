@@ -25,8 +25,8 @@
 // Okteta core
 // #include <bookmark.h>
 // KDE
-#include <KIcon>
 #include <KLineEdit>
+#include <QIcon>
 
 
 namespace Kasten2
@@ -35,7 +35,7 @@ namespace Kasten2
 BookmarkEditPopup::BookmarkEditPopup( QWidget* parent )
   : AbstractLinePopup( parent )
 {
-    setIcon( KIcon(QLatin1String("bookmark-new")) );
+    setIcon( QIcon::fromTheme( QStringLiteral("bookmark-new") ) );
 
     mBookmarkNameLineEdit = new KLineEdit( this );
     connect( mBookmarkNameLineEdit, SIGNAL(returnPressed()), SLOT(onReturnPressed()) );

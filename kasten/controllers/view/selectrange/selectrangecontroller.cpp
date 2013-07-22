@@ -32,7 +32,6 @@
 #include <KLocalizedString>
 #include <KAction>
 #include <KActionCollection>
-#include <KIcon>
 
 
 namespace Kasten2
@@ -48,7 +47,7 @@ SelectRangeController::SelectRangeController( If::ToolInlineViewable* toolInline
     mSelectAction = actionCollection->addAction( QLatin1String("edit_select"),
                                                  this, SLOT(select()) );
     mSelectAction->setText( i18nc("@action:inmenu","&Select range...") );
-    mSelectAction->setIcon( KIcon(QLatin1String("select-rectangular")) );
+    mSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("select-rectangular") ) );
     mSelectAction->setShortcut( Qt::CTRL + Qt::Key_E );
 
     mTool = new SelectRangeTool();

@@ -28,7 +28,7 @@
 #include <QDebug>
 #include <QTime>
 
-class KIcon;
+class QIcon;
 
 class DataInformation;
 /** NOT THREAD SAFE! */
@@ -85,7 +85,7 @@ public:
 	/** whether to log to stdout instead of saving the messages */
 	inline void setLogToStdOut(bool val) { mLogToStdOut = val; }
 
-	static KIcon iconForLevel(LogLevel level);
+	static QIcon iconForLevel(LogLevel level);
 private:
 	QVector<Data> mData;
 	bool mLogToStdOut;

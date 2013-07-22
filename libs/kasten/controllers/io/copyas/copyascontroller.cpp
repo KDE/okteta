@@ -39,7 +39,6 @@
 #include <KActionCollection>
 #include <KLocalizedString>
 #include <KSelectAction>
-#include <KIcon>
 // Qt
 #include <QtCore/QBuffer>
 #include <QtCore/QMimeData>
@@ -64,7 +63,7 @@ CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager
 
     mCopyAsSelectAction = actionCollection->add<KSelectAction>( QLatin1String("copy_as") );
     mCopyAsSelectAction->setText( i18nc("@title:menu","Copy As") );
-    mCopyAsSelectAction->setIcon( KIcon( QLatin1String("edit-copy") ) );
+    mCopyAsSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("edit-copy") ) );
     mCopyAsSelectAction->setToolBarMode( KSelectAction::MenuMode );
     connect( mCopyAsSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
 

@@ -28,9 +28,9 @@
 #include <KApplication>
 #include <KColorScheme>
 #include <KLocalizedString>
-#include <KIcon>
 // Qt
 #include <QtCore/QVector>
+#include <QIcon>
 
 
 namespace Kasten2
@@ -95,7 +95,7 @@ QVariant ViewProfileTableModel::data( const QModelIndex &index, int role ) const
                 mViewProfileManager->viewProfiles().at(viewProfileIndex).id();
 
             if( mViewProfileManager->defaultViewProfileId() == viewProfileId )
-                result = KIcon( QLatin1String("arrow-right") );
+                result = QIcon::fromTheme( QStringLiteral("arrow-right") );
         }
         break;
     }

@@ -42,7 +42,7 @@ Person Person::createEgo()
 {
     const EgoDataStruct* currentEgoData = &EgoData[currentEgoDataIndex];
     const Person result( QLatin1String(currentEgoData->name),
-                         KIcon(QLatin1String(currentEgoData->faceIconName)) );
+                         QIcon::fromTheme( QLatin1String(currentEgoData->faceIconName) ) );
 //     if( currentEgoDataIndex < lastEgoDataIndex )
 //         ++currentEgoDataIndex;
     return result;
@@ -56,12 +56,12 @@ void Person::setEgoId( int egoId )
 }
 
 
-Person::Person( const QString& name, const KIcon& faceIcon )
+Person::Person( const QString& name, const QIcon& faceIcon )
  : d( new Private(name,faceIcon) )
 {
 }
 Person::Person()
- : d( new Private(QString(),KIcon()) )
+ : d( new Private(QString(),QIcon()) )
 {
 }
 Person::Person( const Person& other )
@@ -80,7 +80,7 @@ Person& Person::operator=( const Person& other )
 }
 
 QString Person::name()   const { return d->name(); }
-KIcon Person::faceIcon() const { return d->faceIcon(); }
+QIcon Person::faceIcon() const { return d->faceIcon(); }
 
 Person::~Person() {}
 

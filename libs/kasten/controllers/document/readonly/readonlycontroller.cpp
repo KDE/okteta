@@ -29,7 +29,6 @@
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KToggleAction>
-#include <KIcon>
 #include <KGuiItem>
 
 
@@ -44,9 +43,9 @@ ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
     mSetReadOnlyAction = actionCollection->add<KToggleAction>( QLatin1String("isreadonly") );
     const QString text = i18nc( "@option:check set the document to read-only", "Set Read-only" );
     mSetReadOnlyAction->setText( text );
-    mSetReadOnlyAction->setIcon( KIcon( QLatin1String("object-unlocked") ) );
+    mSetReadOnlyAction->setIcon( QIcon::fromTheme( QStringLiteral("object-unlocked") ) );
     const QString checkedText = i18nc( "@option:check set the document to read-write", "Set Read-write" );
-    const KGuiItem checkedState( checkedText, KIcon( QLatin1String("object-locked") ) );
+    const KGuiItem checkedState( checkedText, QIcon::fromTheme( QStringLiteral("object-locked") ) );
     mSetReadOnlyAction->setCheckedState( checkedState );
     connect( mSetReadOnlyAction, SIGNAL(triggered(bool)), SLOT(setReadOnly(bool)) );
 

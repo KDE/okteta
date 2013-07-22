@@ -28,7 +28,7 @@
 // Qt
 #include <QWidget>
 
-class KIcon;
+class QIcon;
 
 
 namespace Kasten2
@@ -52,7 +52,7 @@ class KASTENGUI_EXPORT AbstractLinePopup : public QWidget
     virtual ~AbstractLinePopup();
 
   public:
-    void setIcon( const KIcon& icon );
+    void setIcon( const QIcon& icon );
     void setPosition( const QPoint& globalPosition );
     void setWidget( QWidget* widget );
 

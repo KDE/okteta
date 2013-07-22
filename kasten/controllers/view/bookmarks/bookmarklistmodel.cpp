@@ -28,7 +28,6 @@
 #include <bookmark.h>
 // KDE
 #include <KLocalizedString>
-#include <KIcon>
 
 
 namespace Kasten2

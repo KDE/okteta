@@ -28,10 +28,10 @@
 
 #include <QScriptValue>
 #include <QScriptEngine>
+#include <QIcon>
 
 #include <KLocalizedString>
 #include <KLineEdit>
-#include <KIcon>
 #include <KColorScheme>
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
@@ -177,7 +177,7 @@ QVariant DataInformation::data(int column, int role) const
     {
         //XXX better icons?
         if (mHasBeenValidated)
-            return KIcon(QLatin1String(mValidationSuccessful ? "task-complete" : "dialog-warning"));
+            return QIcon::fromTheme(mValidationSuccessful ? QStringLiteral("task-complete") : QStringLiteral("dialog-warning"));
         if (mLoggedData != ScriptLogger::LogInvalid)
             return ScriptLogger::iconForLevel(mLoggedData);
     }

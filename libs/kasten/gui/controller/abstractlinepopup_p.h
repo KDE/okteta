@@ -25,7 +25,7 @@
 
 #include "abstractlinepopup.h"
 
-class KIcon;
+class QIcon;
 class QLabel;
 class QHBoxLayout;
 class QEventLoop;
@@ -44,7 +44,7 @@ class AbstractLinePopupPrivate
     void init();
 
     void setPosition( const QPoint& globalPosition );
-    void setIcon( const KIcon& icon );
+    void setIcon( const QIcon& icon );
     void setWidget( QWidget* widget );
 
     void setResult( int result );

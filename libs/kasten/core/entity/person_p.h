@@ -26,10 +26,9 @@
 
 #include "person.h"
 
-//KDE
-#include <KIcon>
 //Qt
 #include <QtCore/QString>
+#include <QIcon>
 
 
 namespace Kasten2
@@ -38,23 +37,23 @@ namespace Kasten2
 class Person::Private : public KShared
 {
   public:
-    Private( const QString& name, const KIcon& faceIcon );
+    Private( const QString& name, const QIcon& faceIcon );
     ~Private();
 
   public:
     QString name() const;
-    KIcon faceIcon() const;
+    QIcon faceIcon() const;
 
   protected:
     QString mName;
-    KIcon mFaceIcon;
+    QIcon mFaceIcon;
 };
 
-inline Person::Private::Private( const QString& name, const KIcon& faceIcon )
+inline Person::Private::Private( const QString& name, const QIcon& faceIcon )
  : mName( name ), mFaceIcon( faceIcon ) {}
 
 inline QString Person::Private::name()   const { return mName; }
-inline KIcon Person::Private::faceIcon() const { return mFaceIcon; }
+inline QIcon Person::Private::faceIcon() const { return mFaceIcon; }
 
 inline Person::Private::~Private() {}
 

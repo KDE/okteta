@@ -31,7 +31,6 @@
 #include <modelcodecmanager.h>
 #include <abstractmodeldatagenerator.h>
 // KDE
-#include <KIcon>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>
@@ -61,11 +60,11 @@ CreatorController::CreatorController( ModelCodecManager* modelCodecManager,
 
     KActionMenu* newMenuAction = actionCollection->add<KActionMenu>( QLatin1String("file_new"), this, SLOT(onNewActionTriggered()) );
     newMenuAction->setText( i18nc("@title:menu create new byte arrays from different sources", "New" ) );
-    newMenuAction->setIcon( KIcon( QLatin1String("document-new") ) );
+    newMenuAction->setIcon( QIcon::fromTheme( QStringLiteral("document-new") ) );
     newMenuAction->setShortcuts( KStandardShortcut::openNew() );
 
     QAction* newEmptyDocumentAction =
-        new QAction( KIcon( QLatin1String("document-new") ), i18nc("@title:menu create a new empty document", "Empty" ), this );
+        new QAction( QIcon::fromTheme( QStringLiteral("document-new") ), i18nc("@title:menu create a new empty document", "Empty" ), this );
 //     newEmptyDocumentAction->setToolTip( factory-toolTip() );
 //         i18nc( "@info:tooltip", "Create an empty document" ) );
 //     newEmptyDocumentAction->setHelpText( factory->helpText() );
@@ -75,7 +74,7 @@ CreatorController::CreatorController( ModelCodecManager* modelCodecManager,
     connect( newEmptyDocumentAction, SIGNAL(triggered(bool)), SLOT(onNewActionTriggered()) );
 
     QAction* newFromClipboardDocumentAction =
-        new QAction( KIcon( QLatin1String("edit-paste") ), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard" ), this );
+        new QAction( QIcon::fromTheme( QStringLiteral("edit-paste") ), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard" ), this );
     connect( newFromClipboardDocumentAction, SIGNAL(triggered(bool)), SLOT(onNewFromClipboardActionTriggered()) );
 
     newMenuAction->addAction( newEmptyDocumentAction );
@@ -99,7 +98,7 @@ CreatorController::CreatorController( ModelCodecManager* modelCodecManager,
             const QString title = generator->typeName();
             const QString iconName = QString::fromLatin1( "document-new" );//generator->iconName();
 
-            QAction* action = new QAction( KIcon(iconName), title, this );
+            QAction* action = new QAction( QIcon::fromTheme(iconName), title, this );
             action->setData( QVariant::fromValue(generator) );
             connect( action, SIGNAL(triggered(bool)), SLOT(onNewFromGeneratorActionTriggered()) );
 

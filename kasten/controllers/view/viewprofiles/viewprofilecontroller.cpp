@@ -35,7 +35,6 @@
 #include <KActionCollection>
 #include <KAction>
 #include <KLocalizedString>
-#include <KIcon>
 
 
 namespace Kasten2
@@ -59,21 +58,21 @@ ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewP
                                         "View Profile") );
 
     mCreateNewAction =
-        new QAction( KIcon( QLatin1String("document-new") ),
+        new QAction( QIcon::fromTheme( QStringLiteral("document-new") ),
                      i18nc("@title:menu create a new view profile",
                             "Create new..." ),
                      this );
     connect( mCreateNewAction, SIGNAL(triggered(bool)), SLOT(onCreateNewActionTriggered()) );
 
     mSaveChangesAction =
-        new QAction( KIcon( QLatin1String("document-save") ),
+        new QAction( QIcon::fromTheme( QStringLiteral("document-save") ),
                      i18nc("@title:menu save changed to the view profile to the base profile",
                            "Save changes" ),
                      this );
     connect( mSaveChangesAction, SIGNAL(triggered(bool)), SLOT(onSaveChangesActionTriggered()) );
 
     mResetChangesAction =
-        new QAction( KIcon(QLatin1String("document-revert")),
+        new QAction( QIcon::fromTheme( QStringLiteral("document-revert") ),
                      i18nc("@title:menu reset settings back to those of the saved base profile",
                            "Reset changes" ),
                      this );

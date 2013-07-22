@@ -32,7 +32,6 @@
 #include <KLocalizedString>
 #include <KAction>
 #include <KActionCollection>
-#include <KIcon>
 
 
 namespace Kasten2
@@ -47,7 +46,7 @@ GotoOffsetController::GotoOffsetController( If::ToolInlineViewable* toolInlineVi
     mGotoOffsetAction = actionCollection->addAction( QLatin1String("goto_offset"),
                                                      this, SLOT(gotoOffset()) );
     mGotoOffsetAction->setText( i18nc("@action:inmenu","&Go to Offset...") );
-    mGotoOffsetAction->setIcon( KIcon(QLatin1String("go-jump")) );
+    mGotoOffsetAction->setIcon( QIcon::fromTheme( QStringLiteral("go-jump") ) );
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
     mTool = new GotoOffsetTool();

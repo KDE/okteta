@@ -44,7 +44,6 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <KPushButton>
-#include <KIcon>
 #include <KDialog>
 #include <KDebug>
 
@@ -94,7 +93,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
 
     baseLayout->addLayout(settingsLayout);
 
-    KIcon validateIcon = KIcon(QLatin1String("document-sign"));
+    QIcon validateIcon = QIcon::fromTheme(QStringLiteral("document-sign"));
     mValidateButton = new KPushButton(validateIcon, i18nc("@action:button", "Validate"), this);
     const QString validationToolTip = i18nc("@info:tooltip", "Validate all structures.");
     mValidateButton->setToolTip(validationToolTip);
@@ -115,13 +114,13 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
 
     settingsLayout->addStretch(); //stretch before the settings button
 
-    KIcon console = KIcon(QLatin1String("utilities-terminal"));
+    QIcon console = QIcon::fromTheme(QStringLiteral("utilities-terminal"));
     mScriptConsoleButton = new KPushButton(console, i18nc("@action:button", "Script console"), this);
     mScriptConsoleButton->setToolTip(i18nc("@info:tooltip", "Open script console."));
     connect(mScriptConsoleButton, SIGNAL(pressed()), this, SLOT(openScriptConsole()));
     settingsLayout->addWidget(mScriptConsoleButton);
 
-    KIcon settings = KIcon(QLatin1String("configure"));
+    QIcon settings = QIcon::fromTheme(QStringLiteral("configure"));
     mSettingsButton = new KPushButton(settings, i18nc("@action:button", "Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
     mSettingsButton->setToolTip(settingsTooltip);
@@ -260,7 +259,7 @@ void StructView::setLockButtonState(bool structureLocked)
 {
     if (structureLocked)
     {
-        mLockStructureButton->setIcon(KIcon(QLatin1String("object-locked")));
+        mLockStructureButton->setIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
         mLockStructureButton->setText(i18nc("@action:pushbutton"
                         " unlock the starting offset of the current structure", "Unlock"));
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",
@@ -269,7 +268,7 @@ void StructView::setLockButtonState(bool structureLocked)
     }
     else
     {
-        mLockStructureButton->setIcon(KIcon(QLatin1String("object-unlocked")));
+        mLockStructureButton->setIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
         mLockStructureButton->setText(i18nc("@action:pushbutton"
                         " unlock the starting offset of the current structure", "Lock"));
         mLockStructureButton->setToolTip(i18nc("@info:tooltip",

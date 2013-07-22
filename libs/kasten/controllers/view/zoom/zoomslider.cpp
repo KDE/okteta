@@ -27,7 +27,6 @@
 // Kasten core
 #include <abstractmodel.h>
 // KDE
-#include <KIcon>
 #include <KLocalizedString>
 // Qt
 #include <QSlider>
@@ -51,13 +50,13 @@ ZoomSlider::ZoomSlider( QWidget* parent )
   : QWidget( parent ), mModel( 0 ), mZoomControl( 0 )
 {
     mZoomOutButton = new QToolButton( this );
-    mZoomOutButton->setIcon( KIcon( QLatin1String("zoom-out") ) );
+    mZoomOutButton->setIcon( QIcon::fromTheme( QStringLiteral("zoom-out") ) );
     mZoomOutButton->setAutoRaise( true );
 
     mSlider = new QSlider( Qt::Horizontal, this );
 
     mZoomInButton = new QToolButton( this );
-    mZoomInButton->setIcon( KIcon( QLatin1String("zoom-in") ) );
+    mZoomInButton->setIcon( QIcon::fromTheme( QStringLiteral("zoom-in") ) );
     mZoomInButton->setAutoRaise( true );
 
     QHBoxLayout* layout = new QHBoxLayout( this );

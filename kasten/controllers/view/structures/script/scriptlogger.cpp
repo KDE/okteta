@@ -23,18 +23,18 @@
 #include "scriptlogger.h"
 #include "../datatypes/datainformation.h"
 
-#include <KIcon>
 #include <KLocalizedString>
+#include <QIcon>
 
-KIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)
+QIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)
 {
     if (level == LogInfo)
-        return KIcon(QLatin1String("dialog-information"));
+        return QIcon::fromTheme(QStringLiteral("dialog-information"));
     else if (level == LogWarning)
-        return KIcon(QLatin1String("dialog-warning"));
+        return QIcon::fromTheme(QStringLiteral("dialog-warning"));
     else
-        return KIcon(QLatin1String("dialog-error"));
-    return KIcon();
+        return QIcon::fromTheme(QStringLiteral("dialog-error"));
+    return QIcon();
 }
 
 QVariant ScriptLogger::data(const QModelIndex& index, int role) const

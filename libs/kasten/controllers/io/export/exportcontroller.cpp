@@ -38,7 +38,6 @@
 #include <KXMLGUIFactory>
 #include <KActionCollection>
 #include <KLocalizedString>
-#include <KIcon>
 #include <KSelectAction>
 
 
@@ -59,7 +58,7 @@ ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager
 
     mExportSelectAction = actionCollection->add<KSelectAction>( QLatin1String("export") );
     mExportSelectAction->setText( i18nc("@title:menu","Export") );
-    mExportSelectAction->setIcon( KIcon( QLatin1String("document-export") ) );
+    mExportSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("document-export") ) );
     mExportSelectAction->setToolBarMode( KSelectAction::MenuMode );
     connect( mExportSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
 

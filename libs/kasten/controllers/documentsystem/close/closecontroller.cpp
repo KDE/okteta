@@ -31,7 +31,6 @@
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
-#include <KIcon>
 
 
 namespace Kasten2
@@ -54,13 +53,13 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
         mCloseAllAction = actionCollection->addAction( QLatin1String("file_close_all"),
                                                        this, SLOT(closeAll()) );
         mCloseAllAction->setText( i18nc("@title:menu","Close All") );
-        mCloseAllAction->setIcon( KIcon( QLatin1String("window-close") ) );
+        mCloseAllAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
         mCloseAllAction->setEnabled( false );
 
         mCloseAllOtherAction = actionCollection->addAction( QLatin1String("file_close_all_other"),
                                                             this, SLOT(closeAllOther()) );
         mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
-        mCloseAllOtherAction->setIcon( KIcon( QLatin1String("window-close") ) );
+        mCloseAllOtherAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
         mCloseAllOtherAction->setEnabled( false );
 
         connect( mDocumentStrategy, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),

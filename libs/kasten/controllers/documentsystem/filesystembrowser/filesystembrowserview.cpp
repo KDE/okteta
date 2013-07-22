@@ -30,7 +30,6 @@
 #include <KDirOperator>
 #include <KActionCollection>
 #include <KToolBar>
-#include <KIcon>
 #include <KUrl>
 #include <KLocalizedString>
 #include <kdeversion.h>
@@ -92,7 +91,7 @@ void FileSystemBrowserView::init()
     mActionCollection = new KActionCollection( this );
     QAction* syncDirAction = mActionCollection->addAction( QLatin1String("sync_dir"),
                                                            this, SLOT(syncCurrentDocumentDirectory()) );
-    syncDirAction->setIcon( KIcon( QLatin1String("go-parent-folder") ) );
+    syncDirAction->setIcon( QIcon::fromTheme( QStringLiteral("go-parent-folder") ) );
     syncDirAction->setText( i18nc("@action:intoolbar", "Folder of Current Document") );
     connect( mTool, SIGNAL(hasCurrentUrlChanged(bool)), syncDirAction, SLOT(setEnabled(bool)) );
     syncDirAction->setEnabled( mTool->hasCurrentUrl() );

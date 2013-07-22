@@ -29,9 +29,9 @@
 #include <abstractdocument.h>
 // KDE
 #include <KLocalizedString>
-#include <KIcon>
 // Qt
 #include <QLabel>
+#include <QIcon>
 
 
 namespace Kasten2
@@ -96,7 +96,7 @@ void ModifiedBarController::onLocalSyncStateChanged( LocalSyncState localSyncSta
 
     // TODO: depend an statusbar height
     const QPixmap pixmap = isModified ?
-        KIcon( QLatin1String("document-save") ).pixmap(modifiedPixmapWidth) :
+		QIcon::fromTheme( QStringLiteral("document-save") ).pixmap(modifiedPixmapWidth) :
         QPixmap();
     mLocalStateLabel->setPixmap( pixmap );
 
@@ -118,7 +118,7 @@ void ModifiedBarController::onRemoteSyncStateChanged( RemoteSyncState remoteSync
 
     // TODO: depend an statusbar height
     const QPixmap pixmap = iconName ?
-        KIcon( QLatin1String(iconName) ).pixmap(modifiedPixmapWidth) :
+        QIcon::fromTheme( QLatin1String(iconName) ).pixmap(modifiedPixmapWidth) :
         QPixmap();
     mRemoteStateLabel->setPixmap( pixmap );
 

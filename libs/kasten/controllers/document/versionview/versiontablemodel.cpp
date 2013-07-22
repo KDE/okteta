@@ -27,7 +27,8 @@
 #include <abstractmodel.h>
 // KDE
 #include <KLocalizedString>
-#include <KIcon>
+
+#include <QIcon>
 
 
 namespace Kasten2
@@ -107,7 +108,7 @@ QVariant VersionTableModel::data( const QModelIndex &index, int role ) const
         {
             const int versionIndex = index.row();
             if( mVersionControl->versionIndex() == versionIndex )
-                result = KIcon( QLatin1String("arrow-right") );
+                result = QIcon::fromTheme( QStringLiteral("arrow-right") );
         }
     }
 

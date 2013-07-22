@@ -29,7 +29,6 @@
 #include <statusbar.h>
 // KDE
 #include <KLocalizedString>
-#include <KIcon>
 
 
 namespace Kasten2
@@ -40,8 +39,8 @@ ReadOnlyBarController::ReadOnlyBarController( StatusBar* statusBar )
 {
     const QString readWriteText = i18nc( "@option:check the document is read-write", "Read-write" );
     const QString readOnlyText = i18nc( "@option:check the document is read-only", "Read-only" );
-    mReadOnlyButton = new ToggleButton( KIcon( QLatin1String("object-unlocked") ), QString(), readWriteText, statusBar );
-    mReadOnlyButton->setCheckedState( KIcon( QLatin1String("object-locked") ), QString(), readOnlyText );
+    mReadOnlyButton = new ToggleButton( QIcon::fromTheme( QStringLiteral("object-unlocked") ), QString(), readWriteText, statusBar );
+    mReadOnlyButton->setCheckedState( QIcon::fromTheme( QStringLiteral("object-locked") ), QString(), readOnlyText );
     statusBar->addWidget( mReadOnlyButton );
     connect( mReadOnlyButton, SIGNAL(clicked(bool)), SLOT(setReadOnly(bool)) );
 
