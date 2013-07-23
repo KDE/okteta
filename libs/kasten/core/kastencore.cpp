@@ -23,12 +23,12 @@
 #include "kastencore.h"
 
 // KDE
-#include <KGlobal>
+#include <KLocalizedString>
 
 
 namespace Kasten2
 {
 
-static const KCatalogLoader catalogLoader( QLatin1String("libkasten") );
+static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("libkasten") ), 0);
 
 }

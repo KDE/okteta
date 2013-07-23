@@ -23,12 +23,12 @@
 #include "oktetacore.h"
 
 // KDE
-#include <KGlobal>
+#include <KLocalizedString>
 
 
 namespace Okteta
 {
 
-static const KCatalogLoader coreCatalogLoader( QLatin1String("liboktetacore") );
+static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("liboktetacore") ), 0);
 
 }
