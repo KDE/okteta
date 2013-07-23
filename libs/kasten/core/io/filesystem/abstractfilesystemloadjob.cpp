@@ -29,7 +29,7 @@ namespace Kasten2
 {
 
 AbstractFileSystemLoadJob::AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                                      const KUrl& url )
+                                                      const QUrl& url )
   : AbstractLoadJob( new AbstractFileSystemLoadJobPrivate(this,synchronizer,url) )
 {
 }
@@ -41,7 +41,7 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::synchronizer() c
     return d->synchronizer();
 }
 
-KUrl AbstractFileSystemLoadJob::url() const
+QUrl AbstractFileSystemLoadJob::url() const
 {
     Q_D( const AbstractFileSystemLoadJob );
 

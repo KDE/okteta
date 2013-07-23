@@ -38,7 +38,7 @@ DialogHandler::DialogHandler( QWidget* widget ) : mWidget( widget ) {}
 
 void DialogHandler::setWidget( QWidget* widget ) { mWidget = widget; }
 
-Answer DialogHandler::queryOverwrite( const KUrl& url, const QString& title ) const
+Answer DialogHandler::queryOverwrite( const QUrl& url, const QString& title ) const
 {
     const QString message =
         i18nc( "@info",

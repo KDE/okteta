@@ -39,7 +39,7 @@ class TestDocumentFileWriteToJob : public AbstractFileSystemSyncWithRemoteJob
 
   public:
     TestDocumentFileWriteToJob( TestDocumentFileSynchronizer* synchronizer,
-                                const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~TestDocumentFileWriteToJob();
 
   protected: // AbstractFileSystemSyncWithRemoteJob API

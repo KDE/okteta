@@ -32,7 +32,6 @@
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KStandardDirs>
-#include <KUrl>
 #include <KBookmarkManager>
 #include <KBookmarkGroup>
 
@@ -48,14 +47,14 @@ ExternalBookmarkStorage::ExternalBookmarkStorage()
 }
 
  
-void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const KUrl& url )
+void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const QUrl& url )
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
     Okteta::Bookmarkable* bookmarkable = qobject_cast<Okteta::Bookmarkable*>( byteArray );
 
     bookmarkable->removeAllBookmarks();
 
-    const QString urlString = url.isLocalFile() ? url.path() : url.prettyUrl();
+    const QString urlString = url.isLocalFile() ? url.path(QUrl::FullyDecoded) : url.toDisplayString();
 
     KBookmarkGroup root = mBookmarkManager->root();
 
@@ -88,7 +87,7 @@ void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const 
     }
 }
 
-void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const KUrl& url )
+void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const QUrl& url )
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
     Okteta::Bookmarkable* bookmarkable = qobject_cast<Okteta::Bookmarkable*>( byteArray );
@@ -96,7 +95,7 @@ void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const
     if( ! bookmarkable )
         return;
 
-    const QString urlString = url.isLocalFile() ? url.path() : url.prettyUrl();
+    const QString urlString = url.isLocalFile() ? url.path(QUrl::FullyDecoded) : url.toDisplayString();
 
     KBookmarkGroup root = mBookmarkManager->root();
 
@@ -122,8 +121,8 @@ void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const
     while( bit.hasNext() )
     {
         const Okteta::Bookmark& bookmark = bit.next();
-        KUrl bookmarkUrl = url;
-        bookmarkUrl.setHTMLRef( QString::number(bookmark.offset()) );
+        QUrl bookmarkUrl = url;
+        bookmarkUrl.setFragment( QString::number(bookmark.offset()) );
         bookmarkGroup.addBookmark( bookmark.name(), bookmarkUrl, QString() );
     }
 

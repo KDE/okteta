@@ -29,7 +29,7 @@
 #include <abstractmodelsynchronizer.h>
 // KDE
 #include <KLocalizedString>
-#include <KUrl>
+#include <kio/global.h>
 
 #include <QUrl>
 
@@ -54,7 +54,7 @@ QUrl FileSystemBrowserTool::currentUrl() const
     QUrl result;
 
     if( mDocument )
-        result = mDocumentSyncManager->urlOf( mDocument ).upUrl();
+        result = KIO::upUrl( mDocumentSyncManager->urlOf( mDocument ) );
 
     return result;
 }

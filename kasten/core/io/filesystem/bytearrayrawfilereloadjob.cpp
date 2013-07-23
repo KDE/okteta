@@ -29,8 +29,6 @@
 #include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KUrl>
 // Qt
 #include <QtCore/QCoreApplication>
 

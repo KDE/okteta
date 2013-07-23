@@ -56,7 +56,7 @@ class MultiDocumentStrategyPrivate : public AbstractDocumentStrategyPrivate
     void createNewFromClipboard();
     void createNewWithGenerator( AbstractModelDataGenerator* generator );
 
-    void load( const KUrl& url );
+    void load( const QUrl& url );
 
     void closeDocument( AbstractDocument* document );
     void closeAll();
@@ -119,7 +119,7 @@ inline void MultiDocumentStrategyPrivate::createNew()
     mDocumentManager->createManager()->createNew();
 }
 
-inline void MultiDocumentStrategyPrivate::load( const KUrl& url )
+inline void MultiDocumentStrategyPrivate::load( const QUrl& url )
 {
     mDocumentManager->syncManager()->load( url );
 }

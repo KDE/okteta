@@ -36,7 +36,7 @@ namespace Kasten2
 
 TestDocumentFileConnectJob::TestDocumentFileConnectJob( TestDocumentFileSynchronizer* synchronizer,
                                                         AbstractDocument* document,
-                                                        const KUrl& url,
+                                                        const QUrl& url,
                                                         AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemConnectJob( synchronizer, document, url, option )
 {

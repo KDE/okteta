@@ -29,7 +29,7 @@ namespace Kasten2
 {
 
 AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
-                                 const KUrl& url )
+                                 const QUrl& url )
   : AbstractExportJob( new AbstractFileSystemExportJobPrivate(this,model,selection,url) )
 {
 }

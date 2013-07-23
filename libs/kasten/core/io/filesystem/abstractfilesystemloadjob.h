@@ -26,7 +26,7 @@
 // library
 #include <abstractloadjob.h>
 
-class KUrl;
+class QUrl;
 class QFile;
 
 
@@ -43,7 +43,7 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
   Q_OBJECT
 
   public:
-    AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const KUrl& url );
+    AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url );
 
     virtual ~AbstractFileSystemLoadJob();
 
@@ -58,7 +58,7 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
 
   protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    KUrl url() const;
+    QUrl url() const;
     QFile* file() const;
 
   protected:

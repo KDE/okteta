@@ -48,13 +48,13 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
     {
         if( mUrl.isLocalFile() )
         {
-            mWorkFilePath = mUrl.path();
+            mWorkFilePath = mUrl.path(QUrl::FullyDecoded);
             mFile = new QFile( mWorkFilePath );
             isWorkFileOk = mFile->open( QIODevice::WriteOnly );
         }
         else
         {
-            KTemporaryFile* temporaryFile = new KTemporaryFile;
+            QTemporaryFile* temporaryFile = new QTemporaryFile;
             isWorkFileOk = temporaryFile->open();
 
             mWorkFilePath = temporaryFile->fileName();

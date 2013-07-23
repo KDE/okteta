@@ -29,8 +29,8 @@
 #include "testdocumentfilereloadjob.h"
 #include "testdocumentfilewritetojob.h"
 #include "testdocument.h"
-// KDE
-#include <KUrl>
+// Qt
+#include <QUrl>
 
 
 namespace Kasten2
@@ -51,7 +51,7 @@ LocalSyncState TestDocumentFileSynchronizer::localSyncState() const
 }
 
 
-AbstractLoadJob* TestDocumentFileSynchronizer::startLoad( const KUrl& url )
+AbstractLoadJob* TestDocumentFileSynchronizer::startLoad( const QUrl& url )
 {
     return new TestDocumentFileLoadJob( this, url );
 }
@@ -66,13 +66,13 @@ AbstractSyncFromRemoteJob* TestDocumentFileSynchronizer::startSyncFromRemote()
     return new TestDocumentFileReloadJob( this );
 }
 
-AbstractSyncWithRemoteJob* TestDocumentFileSynchronizer::startSyncWithRemote( const KUrl& url, AbstractModelSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob* TestDocumentFileSynchronizer::startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option  )
 {
     return new TestDocumentFileWriteToJob( this, url, option );
 }
 
 AbstractConnectJob* TestDocumentFileSynchronizer::startConnect( AbstractDocument* document,
-                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new TestDocumentFileConnectJob( this, document, url, option );
 }

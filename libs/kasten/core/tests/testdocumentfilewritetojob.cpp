@@ -35,7 +35,7 @@ namespace Kasten2
 {
 
 TestDocumentFileWriteToJob::TestDocumentFileWriteToJob( TestDocumentFileSynchronizer* synchronizer,
-                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
 {}
 

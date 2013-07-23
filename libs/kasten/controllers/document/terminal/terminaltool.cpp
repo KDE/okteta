@@ -28,8 +28,9 @@
 #include <abstractmodelsynchronizer.h>
 // KDE
 #include <KLocalizedString>
-#include <KUrl>
-
+#include <kio/global.h>
+// Qt
+#include <QUrl>
 
 namespace Kasten2
 {
@@ -46,23 +47,23 @@ TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )
 QString TerminalTool::title() const { return i18nc("@title:window", "Terminal"); }
 
 
-KUrl TerminalTool::currentUrl() const
+QUrl TerminalTool::currentUrl() const
 {
-    KUrl result;
+    QUrl result;
 
     if( mDocument )
-        result = mDocumentSyncManager->urlOf( mDocument ).upUrl();
+        result = KIO::upUrl( mDocumentSyncManager->urlOf( mDocument ) );
 
     return result;
 }
 
 void TerminalTool::setTargetModel( AbstractModel* model )
 {
-    const KUrl oldCurrentUrl = currentUrl();
+    const QUrl oldCurrentUrl = currentUrl();
 
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
-    const KUrl newCurrentUrl = currentUrl();
+    const QUrl newCurrentUrl = currentUrl();
 
     if( oldCurrentUrl != newCurrentUrl )
         emit currentUrlChanged( newCurrentUrl );

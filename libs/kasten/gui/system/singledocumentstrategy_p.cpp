@@ -36,13 +36,12 @@
 #include <abstractmodel.h>
 // KDE
 #include <KApplication>
-#include <KUrl>
 #include <KProcess>
-// QtGui
-#include <QtGui/QClipboard>
-#include <QApplication>
-// QtCore
+// Qt
 #include <QtCore/QMimeData>
+#include <QtGui/QClipboard>
+#include <QUrl>
+#include <QApplication>
 
 
 namespace Kasten2
@@ -146,7 +145,7 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGen
     QApplication::restoreOverrideCursor();
 }
 
-void SingleDocumentStrategyPrivate::load( const KUrl& url )
+void SingleDocumentStrategyPrivate::load( const QUrl& url )
 {
     if( mDocumentManager->isEmpty() )
         mDocumentManager->syncManager()->load( url );

@@ -36,11 +36,11 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
     Q_Q( AbstractFileSystemSyncToRemoteJob );
 
     bool isWorkFileOk;
-    const KUrl url = mSynchronizer->url();
+    const QUrl url = mSynchronizer->url();
 
     if( url.isLocalFile() )
     {
-        mWorkFilePath = url.path();
+        mWorkFilePath = url.path(QUrl::FullyDecoded);
         mFile = new QFile( mWorkFilePath );
         isWorkFileOk = mFile->open( QIODevice::WriteOnly );
 
@@ -48,7 +48,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
     }
     else
     {
-        KTemporaryFile* temporaryFile = new KTemporaryFile;
+        QTemporaryFile* temporaryFile = new QTemporaryFile;
         isWorkFileOk = temporaryFile->open();
 
         mWorkFilePath = temporaryFile->fileName();
@@ -76,7 +76,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
         QFileInfo fileInfo( *mFile );
         mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
 
-        const KUrl url = mSynchronizer->url();
+        const QUrl url = mSynchronizer->url();
         const bool isLocalFile = url.isLocalFile();
 
         if( ! isLocalFile )

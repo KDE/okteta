@@ -31,8 +31,8 @@
 #include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KUrl>
+// Qt
+#include <QUrl>
 
 
 namespace Kasten2
@@ -41,7 +41,7 @@ namespace Kasten2
 ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()
  : mDocument( 0 )
 {
-    connect( this, SIGNAL(urlChanged(KUrl)), SLOT(onUrlChange(KUrl)) );
+    connect( this, SIGNAL(urlChanged(QUrl)), SLOT(onUrlChange(QUrl)) );
 }
 
 AbstractDocument* ByteArrayRawFileSynchronizer::document() const { return mDocument; }
@@ -62,7 +62,7 @@ void ByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument* document )
 
 void ByteArrayRawFileSynchronizer::startOffering( AbstractDocument* document ) { Q_UNUSED(document) }
 
-AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const KUrl &url )
+AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const QUrl &url )
 {
     return new ByteArrayRawFileLoadJob( this, url );
 }
@@ -77,18 +77,18 @@ AbstractSyncFromRemoteJob *ByteArrayRawFileSynchronizer::startSyncFromRemote()
     return new ByteArrayRawFileReloadJob( this );
 }
 
-AbstractSyncWithRemoteJob *ByteArrayRawFileSynchronizer::startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob *ByteArrayRawFileSynchronizer::startSyncWithRemote( const QUrl &url, AbstractModelSynchronizer::ConnectOption option  )
 {
     return new ByteArrayRawFileWriteToJob( this, url, option );
 }
 
 AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument* document,
-                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new ByteArrayRawFileConnectJob( this, document, url, option );
 }
 
-void ByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
+void ByteArrayRawFileSynchronizer::onUrlChange( const QUrl &url )
 {
     mDocument->setTitle( url.fileName() );
 }

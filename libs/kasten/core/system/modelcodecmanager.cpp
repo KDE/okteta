@@ -37,7 +37,8 @@
 #include <KPushButton>
 #include <KLocalizedString>
 #include <KGuiItem>
-#include <KUrl>
+// Qt
+#include <QUrl>
 
 
 namespace Kasten2
@@ -115,7 +116,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         i18nc( "@title:window", "Export" );
     do
     {
-        KFileDialog exportFileDialog( /*mWorkingUrl.url()*/KUrl(), QString(), /*mWidget*/0 );
+        KFileDialog exportFileDialog( /*mWorkingUrl.url()*/QUrl(), QString(), /*mWidget*/0 );
 
         exportFileDialog.setOperationMode( KFileDialog::Saving );
         exportFileDialog.setMode( KFile::File );
@@ -136,7 +137,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
 
         exportFileDialog.exec();
 
-        const KUrl exportUrl = exportFileDialog.selectedUrl();
+        const QUrl exportUrl = exportFileDialog.selectedUrl();
 
         if( !exportUrl.isEmpty() )
         {

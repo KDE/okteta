@@ -45,13 +45,13 @@ class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizer : public AbstractMode
     ByteArrayRawFileSynchronizer();
 
   public: // AbstractModelSynchronizer API
-    virtual void startOffering( AbstractDocument* document );
-    virtual AbstractLoadJob *startLoad( const KUrl &url );
-    virtual AbstractSyncToRemoteJob *startSyncToRemote();
-    virtual AbstractSyncFromRemoteJob *startSyncFromRemote();
-    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+    virtual void startOffering( AbstractDocument* document ) Q_DECL_OVERRIDE;
+    virtual AbstractLoadJob *startLoad( const QUrl &url ) Q_DECL_OVERRIDE;
+    virtual AbstractSyncToRemoteJob *startSyncToRemote() Q_DECL_OVERRIDE;
+    virtual AbstractSyncFromRemoteJob *startSyncFromRemote() Q_DECL_OVERRIDE;
+    virtual AbstractSyncWithRemoteJob *startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) Q_DECL_OVERRIDE;
     virtual AbstractConnectJob *startConnect( AbstractDocument* document,
-                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) Q_DECL_OVERRIDE;
 
     virtual AbstractDocument* document() const;
 
@@ -61,7 +61,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizer : public AbstractMode
     void setDocument( ByteArrayDocument *document );
 
   private Q_SLOTS:
-    void onUrlChange( const KUrl &url );
+    void onUrlChange( const QUrl &url );
     void onModelModified( bool isModified );
 
   private:

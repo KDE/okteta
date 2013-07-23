@@ -28,8 +28,8 @@
 #include "bytearrayrawfilewritethread.h"
 #include "bytearraydocument.h"
 // KDE
-#include <KUrl>
 // Qt
+#include <QUrl>
 #include <QtCore/QCoreApplication>
 
 
@@ -37,7 +37,7 @@ namespace Kasten2
 {
 
 ByteArrayRawFileWriteToJob::ByteArrayRawFileWriteToJob( ByteArrayRawFileSynchronizer *synchronizer,
-                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
 {}
 

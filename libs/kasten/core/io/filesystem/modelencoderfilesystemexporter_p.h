@@ -44,7 +44,7 @@ class ModelEncoderFileSystemExporterPrivate : public AbstractModelExporterPrivat
 
   public: // AbstractModelExporter API
     AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,
-                                    const KUrl& url );
+                                    const QUrl& url );
     QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const;
 
   public:
@@ -69,7 +69,7 @@ inline AbstractModelStreamEncoder* ModelEncoderFileSystemExporterPrivate::encode
 
 inline AbstractExportJob* ModelEncoderFileSystemExporterPrivate::startExport( AbstractModel* model,
     const AbstractModelSelection* selection,
-    const KUrl& url )
+    const QUrl& url )
 {
     return new ModelEncoderFileSystemExportJob( model, selection, url, mEncoder );
 }

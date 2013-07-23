@@ -40,17 +40,17 @@ class AbstractModelSynchronizerPrivate
     virtual ~AbstractModelSynchronizerPrivate();
 
   public:
-    const KUrl& url() const;
+    const QUrl& url() const;
 
   public:
-    void setUrl( const KUrl& url );
+    void setUrl( const QUrl& url );
 
   protected:
     AbstractModelSynchronizer* const q_ptr;
     Q_DECLARE_PUBLIC( AbstractModelSynchronizer )
 
   protected:
-    KUrl mUrl;
+    QUrl mUrl;
 };
 
 
@@ -61,9 +61,9 @@ inline AbstractModelSynchronizerPrivate::AbstractModelSynchronizerPrivate( Abstr
 
 inline AbstractModelSynchronizerPrivate::~AbstractModelSynchronizerPrivate() {}
 
-inline const KUrl& AbstractModelSynchronizerPrivate::url() const { return mUrl; }
+inline const QUrl& AbstractModelSynchronizerPrivate::url() const { return mUrl; }
 
-inline void AbstractModelSynchronizerPrivate::setUrl( const KUrl& url)
+inline void AbstractModelSynchronizerPrivate::setUrl( const QUrl& url)
 {
     Q_Q( AbstractModelSynchronizer );
 

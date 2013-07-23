@@ -26,9 +26,9 @@
 // library
 #include "abstractfilesystemconnectjob.h"
 #include <abstractconnectjob_p.h>
-// KDE
-#include <KUrl>
-#include <KTemporaryFile>
+// Qt
+#include <QUrl>
+#include <QTemporaryFile>
 
 
 namespace Kasten2
@@ -39,7 +39,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractCon
   public:
     AbstractFileSystemConnectJobPrivate( AbstractFileSystemConnectJob* parent,
                                          AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
-                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
     virtual ~AbstractFileSystemConnectJobPrivate();
 
@@ -63,7 +63,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractCon
   protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     AbstractDocument* const mDocument;
-    const KUrl mUrl;
+    const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
     QFile* mFile;
     QString mWorkFilePath;
@@ -72,7 +72,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractCon
 
 inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate( AbstractFileSystemConnectJob* parent,
     AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
-    const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+    const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
   : AbstractConnectJobPrivate( parent ),
     mSynchronizer( synchronizer ),
     mDocument( document ),

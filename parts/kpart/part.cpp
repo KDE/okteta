@@ -63,7 +63,7 @@
 // Qt
 #include <QWidget>
 #include <QLayout>
-#include <KUrl>
+#include <QUrl>
 #include <QtCore/QList>
 
 
@@ -160,7 +160,7 @@ bool OktetaPart::openFile()
     Kasten2::ByteArrayRawFileSynchronizerFactory* synchronizerFactory = new Kasten2::ByteArrayRawFileSynchronizerFactory();
     Kasten2::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
 
-    Kasten2::AbstractLoadJob* loadJob = synchronizer->startLoad( localFilePath() );
+    Kasten2::AbstractLoadJob* loadJob = synchronizer->startLoad( QUrl::fromLocalFile( localFilePath() ) );
     connect( loadJob, SIGNAL(documentLoaded(Kasten2::AbstractDocument*)),
              SLOT(onDocumentLoaded(Kasten2::AbstractDocument*)) );
     Kasten2::JobManager::executeJob( loadJob );
@@ -175,7 +175,7 @@ bool OktetaPart::saveFile()
     Kasten2::AbstractModelSynchronizer* synchronizer = mDocument->synchronizer();
 
     Kasten2::AbstractSyncWithRemoteJob *syncJob =
-        synchronizer->startSyncWithRemote( localFilePath(), Kasten2::AbstractModelSynchronizer::ReplaceRemote );
+        synchronizer->startSyncWithRemote( QUrl::fromLocalFile( localFilePath() ), Kasten2::AbstractModelSynchronizer::ReplaceRemote );
     const bool syncSucceeded = Kasten2::JobManager::executeJob( syncJob );
 
     return syncSucceeded;

@@ -28,7 +28,7 @@
 // Qt
 #include <QtCore/QObject>
 
-class KUrl;
+class QUrl;
 class QString;
 
 
@@ -51,7 +51,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
     virtual ~DocumentSyncManager();
 
   public:
-    void load( const KUrl& url );
+    void load( const QUrl& url );
 // TODO: better name
     bool setSynchronizer( AbstractDocument* document );
     bool canClose( AbstractDocument* document );
@@ -61,7 +61,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
   public:
     QStringList supportedRemoteTypes() const;
     bool hasSynchronizerForLocal( const QString& mimeType ) const;
-    KUrl urlOf( AbstractDocument* document ) const;
+    QUrl urlOf( AbstractDocument* document ) const;
 
   public:
     void setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory );
@@ -69,7 +69,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
     void setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog );
 
   Q_SIGNALS:
-    void urlUsed( const KUrl& url );
+    void urlUsed( const QUrl& url );
 
   private Q_SLOTS:
     void onDocumentLoaded( Kasten2::AbstractDocument* document );

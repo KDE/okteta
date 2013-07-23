@@ -48,7 +48,7 @@ class KASTENGUI_EXPORT MultiDocumentStrategy : public AbstractDocumentStrategy
     virtual void createNewFromClipboard();
     virtual void createNewWithGenerator( AbstractModelDataGenerator* generator );
 
-    virtual void load( const KUrl& url );
+    virtual void load( const QUrl& url );
 
     virtual void closeDocument( AbstractDocument* document );
     virtual void closeAll();

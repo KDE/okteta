@@ -26,8 +26,8 @@
 // lib
 #include "abstractfilesystemexportjob.h"
 #include <abstractexportjob_p.h>
-// KDE
-#include <KUrl>
+// Qt
+#include <QUrl>
 
 
 namespace Kasten2
@@ -37,7 +37,7 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
 {
   public:
     AbstractFileSystemExportJobPrivate( AbstractFileSystemExportJob* parent,
-                                        AbstractModel* model, const AbstractModelSelection* selection, const KUrl& url );
+                                        AbstractModel* model, const AbstractModelSelection* selection, const QUrl& url );
 
     virtual ~AbstractFileSystemExportJobPrivate();
 
@@ -61,7 +61,7 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
   protected:
     AbstractModel* const mModel;
     const AbstractModelSelection* const mSelection;
-    const KUrl mUrl;
+    const QUrl mUrl;
     QFile* mFile;
     QString mWorkFilePath;
 };
@@ -69,7 +69,7 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
 
 inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate( AbstractFileSystemExportJob* parent,
                                         AbstractModel* model, const AbstractModelSelection* selection,
-                                        const KUrl& url)
+                                        const QUrl& url)
   : AbstractExportJobPrivate( parent ),
     mModel( model ),
     mSelection( selection ),

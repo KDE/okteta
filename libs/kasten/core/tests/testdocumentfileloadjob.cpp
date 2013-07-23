@@ -34,7 +34,7 @@
 namespace Kasten2
 {
 
-TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const KUrl& url )
+TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const QUrl& url )
  : AbstractFileSystemLoadJob( synchronizer, url )
 {}
 

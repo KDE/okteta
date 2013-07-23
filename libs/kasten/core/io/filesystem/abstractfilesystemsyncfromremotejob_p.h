@@ -27,7 +27,7 @@
 #include "abstractfilesystemsyncfromremotejob.h"
 #include <abstractsyncfromremotejob_p.h>
 // KDE
-#include <KTemporaryFile>
+#include <QTemporaryFile>
 
 
 namespace Kasten2

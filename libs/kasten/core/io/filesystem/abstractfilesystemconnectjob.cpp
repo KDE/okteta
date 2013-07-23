@@ -30,7 +30,7 @@ namespace Kasten2
 
 AbstractFileSystemConnectJob::AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer,
                                                             AbstractDocument* document,
-                                                            const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                                            const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
   : AbstractConnectJob( new AbstractFileSystemConnectJobPrivate(this,synchronizer,document,url,option) )
 {
 }

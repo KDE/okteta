@@ -29,7 +29,7 @@ namespace Kasten2
 {
 
 AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
   : AbstractSyncWithRemoteJob( new AbstractFileSystemSyncWithRemoteJobPrivate(this,synchronizer,url,option) )
 {}
 

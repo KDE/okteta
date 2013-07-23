@@ -37,7 +37,6 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KDE
-#include <KUrl>
 #include <KLocale>
 #include <QtTest/QTest>
 // Qt
@@ -100,7 +99,7 @@ void ByteArrayRawFileSynchronizerTest::init()
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) ) );
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
     AbstractDocument* document = synchronizer->document();
@@ -122,7 +121,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(NotExistingUrl) ) );
 
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
@@ -134,7 +133,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 
 void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) ) );
 
     ByteArrayDocument* document =
         new Kasten2::ByteArrayDocument(QLatin1String("New created for test."));

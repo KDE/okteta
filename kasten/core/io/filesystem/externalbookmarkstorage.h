@@ -24,7 +24,7 @@
 #define EXTERNALBOOKMARKSTORAGE_H
 
 class KBookmarkManager;
-class KUrl;
+class QUrl;
 
 
 namespace Kasten2
@@ -39,8 +39,8 @@ class ExternalBookmarkStorage
     ~ExternalBookmarkStorage();
 
   public:
-    void readBookmarks( ByteArrayDocument* document, const KUrl& url );
-    void writeBookmarks( ByteArrayDocument* document, const KUrl& url );
+    void readBookmarks( ByteArrayDocument* document, const QUrl& url );
+    void writeBookmarks( ByteArrayDocument* document, const QUrl& url );
 
   protected:
     KBookmarkManager* mBookmarkManager;

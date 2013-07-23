@@ -41,7 +41,7 @@ AbstractModelStreamEncoder* ModelEncoderFileSystemExporter::encoder() const
 
 AbstractExportJob* ModelEncoderFileSystemExporter::startExport( AbstractModel* model,
                                                                 const AbstractModelSelection* selection,
-                                                                const KUrl& url )
+                                                                const QUrl& url )
 {
     Q_D( ModelEncoderFileSystemExporter );
 

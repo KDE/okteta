@@ -94,7 +94,7 @@ void MultiDocumentStrategy::createNewWithGenerator( AbstractModelDataGenerator* 
     d->createNewWithGenerator( generator );
 }
 
-void MultiDocumentStrategy::load( const KUrl& url )
+void MultiDocumentStrategy::load( const QUrl& url )
 {
     Q_D( MultiDocumentStrategy );
 

@@ -40,7 +40,7 @@ class ByteArrayRawFileConnectJob : public AbstractFileSystemConnectJob
 
   public:
     ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer, AbstractDocument* document,
-                                const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~ByteArrayRawFileConnectJob();
 
   protected: // AbstractFileSystemLoadJob API

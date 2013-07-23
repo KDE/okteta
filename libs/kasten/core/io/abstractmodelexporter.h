@@ -29,7 +29,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-class KUrl;
+class QUrl;
 
 
 namespace Kasten2
@@ -56,7 +56,7 @@ class KASTENCORE_EXPORT AbstractModelExporter : public QObject
 
   public: // API to be implemented
     virtual AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,
-                                            const KUrl& url ) = 0;
+                                            const QUrl& url ) = 0;
     virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const = 0;
 
   public:

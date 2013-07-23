@@ -25,8 +25,6 @@
 // lib
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearraydocument.h"
-// KDE
-#include <KUrl>
 // Qt
 #include <QtCore/QLatin1String>
 

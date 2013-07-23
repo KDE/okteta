@@ -38,7 +38,7 @@ class ByteArrayRawFileLoadJob : public AbstractFileSystemLoadJob
   Q_OBJECT
 
   public:
-    ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer* synchronizer, const KUrl& url );
+    ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer* synchronizer, const QUrl& url );
     virtual ~ByteArrayRawFileLoadJob();
 
   protected: // AbstractFileSystemLoadJob API

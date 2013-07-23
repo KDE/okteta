@@ -94,7 +94,7 @@ void SingleDocumentStrategy::createNewWithGenerator( AbstractModelDataGenerator*
     d->createNewWithGenerator( generator );
 }
 
-void SingleDocumentStrategy::load( const KUrl& url )
+void SingleDocumentStrategy::load( const QUrl& url )
 {
     Q_D( SingleDocumentStrategy );
 

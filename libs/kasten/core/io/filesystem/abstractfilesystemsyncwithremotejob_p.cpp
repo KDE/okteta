@@ -27,10 +27,10 @@
 #include <abstractdocument.h>
 // KDE
 #include <KIO/NetAccess>
-#include <KTemporaryFile>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
+#include <QTemporaryFile>
 
 
 namespace Kasten2
@@ -48,13 +48,13 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
     {
         if( mUrl.isLocalFile() )
         {
-            mWorkFilePath = mUrl.path();
+            mWorkFilePath = mUrl.path(QUrl::FullyDecoded);
             mFile = new QFile( mWorkFilePath );
             isWorkFileOk = mFile->open( QIODevice::WriteOnly );
         }
         else
         {
-            KTemporaryFile* temporaryFile = new KTemporaryFile;
+            QTemporaryFile* temporaryFile = new QTemporaryFile;
             isWorkFileOk = temporaryFile->open();
 
             mWorkFilePath = temporaryFile->fileName();
@@ -73,7 +73,7 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
 
     if( isWorkFileOk )
     {
-        const KUrl oldUrl = mSynchronizer->url();
+        const QUrl oldUrl = mSynchronizer->url();
         if( oldUrl.isLocalFile() )
             mSynchronizer->stopFileWatching();
         else

@@ -27,16 +27,15 @@
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfileloadthread.h"
 #include "bytearraydocument.h"
-// KDE
-#include <KUrl>
 // Qt
 #include <QtCore/QCoreApplication>
+#include <QUrl>
 
 
 namespace Kasten2
 {
 
-ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer *synchronizer, const KUrl &url )
+ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer *synchronizer, const QUrl &url )
  : AbstractFileSystemLoadJob( synchronizer, url )
 {}
 

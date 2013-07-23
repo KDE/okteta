@@ -38,9 +38,9 @@
 #include <KIO/NetAccess>
 #include <KFileDialog>
 #include <KLocalizedString>
-#include <KUrl>
 // Qt
 #include <QApplication>
+#include <QUrl>
 
 
 namespace Kasten2
@@ -76,11 +76,11 @@ bool DocumentSyncManager::hasSynchronizerForLocal( const QString& workDocumentTy
     return ( mSynchronizerFactory->supportedWorkType() == workDocumentType );
 }
 
-KUrl DocumentSyncManager::urlOf( AbstractDocument* document ) const
+QUrl DocumentSyncManager::urlOf( AbstractDocument* document ) const
 {
     AbstractModelSynchronizer* synchronizer = document->synchronizer();
 
-    return synchronizer ? synchronizer->url() : KUrl();
+    return synchronizer ? synchronizer->url() : QUrl();
 }
 
 void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory )
@@ -88,7 +88,7 @@ void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchroni
     mSynchronizerFactory = synchronizerFactory;
 }
 
-void DocumentSyncManager::load( const KUrl& url )
+void DocumentSyncManager::load( const QUrl& url )
 {
     foreach( AbstractDocument* document, mManager->documents() )
     {
@@ -142,7 +142,7 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
     const QString filterString = mimetypeFilterString( supportedRemoteTypes() );
     do
     {
-        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/KUrl(), filterString, /*mWidget*/0, processTitle );
+        QUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QUrl(), filterString, /*mWidget*/0, processTitle );
 
         if( !newUrl.isEmpty() )
         {

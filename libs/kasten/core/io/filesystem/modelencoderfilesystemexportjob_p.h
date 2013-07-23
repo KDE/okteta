@@ -37,7 +37,7 @@ class ModelEncoderFileSystemExportJobPrivate : public AbstractFileSystemExportJo
     ModelEncoderFileSystemExportJobPrivate( ModelEncoderFileSystemExportJob* parent,
                                             AbstractModel* model,
                                             const AbstractModelSelection* selection,
-                                            const KUrl& url,
+                                            const QUrl& url,
                                             AbstractModelStreamEncoder* encoder );
 
     virtual ~ModelEncoderFileSystemExportJobPrivate();
@@ -59,7 +59,7 @@ class ModelEncoderFileSystemExportJobPrivate : public AbstractFileSystemExportJo
 inline ModelEncoderFileSystemExportJobPrivate::ModelEncoderFileSystemExportJobPrivate( ModelEncoderFileSystemExportJob* parent,
     AbstractModel* model,
     const AbstractModelSelection* selection,
-    const KUrl& url,
+    const QUrl& url,
     AbstractModelStreamEncoder* encoder )
   : AbstractFileSystemExportJobPrivate( parent, model, selection, url ),
     mEncoder( encoder )

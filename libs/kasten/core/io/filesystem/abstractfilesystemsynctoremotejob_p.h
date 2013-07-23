@@ -29,7 +29,7 @@
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
 // KDE
-#include <KTemporaryFile>
+#include <QTemporaryFile>
 #include <KUrl>
 
 

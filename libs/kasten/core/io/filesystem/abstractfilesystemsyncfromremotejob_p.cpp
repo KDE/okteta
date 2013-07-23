@@ -26,10 +26,10 @@
 #include "abstractmodelfilesystemsynchronizer.h"
 // KDE
 #include <KIO/NetAccess>
-#include <KUrl>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
+#include <QUrl>
 
 
 namespace Kasten2
@@ -39,7 +39,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
 {
     Q_Q( AbstractFileSystemSyncFromRemoteJob );
 
-    const KUrl url = mSynchronizer->url();
+    const QUrl url = mSynchronizer->url();
 
     // TODO: see if this could be used asynchronously instead
     bool isWorkFileOk = KIO::NetAccess::download( url, mWorkFilePath, 0 );
@@ -66,7 +66,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead( bool success )
 
     if( success )
     {
-        const KUrl url = mSynchronizer->url();
+        const QUrl url = mSynchronizer->url();
         const bool isLocalFile = url.isLocalFile();
 
         QFileInfo fileInfo( mWorkFilePath );

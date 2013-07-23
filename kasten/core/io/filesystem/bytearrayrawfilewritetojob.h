@@ -39,7 +39,7 @@ class ByteArrayRawFileWriteToJob : public AbstractFileSystemSyncWithRemoteJob
 
   public:
     ByteArrayRawFileWriteToJob( ByteArrayRawFileSynchronizer *synchronizer,
-                                const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~ByteArrayRawFileWriteToJob();
 
   protected: // AbstractFileSystemSyncWithRemoteJob API

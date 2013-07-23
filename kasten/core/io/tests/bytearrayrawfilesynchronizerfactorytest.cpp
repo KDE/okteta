@@ -32,7 +32,6 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KDE
-#include <KUrl>
 #include <QtTest/QTest>
 // Qt
 #include <QtTest/QtTest>
@@ -96,7 +95,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 #if 0
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
+    const QUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
     Kasten2::ByteArrayRawFileSynchronizerFactory *factory = new Kasten2::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
@@ -116,7 +115,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
+    const QUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
 
     Kasten2::ByteArrayRawFileSynchronizerFactory *factory = new Kasten2::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );

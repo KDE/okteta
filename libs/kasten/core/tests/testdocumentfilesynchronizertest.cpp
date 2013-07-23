@@ -122,7 +122,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
     QCOMPARE( document->synchronizer()->document(), document );
     QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
     QCOMPARE( *testDocument->data(), testData );
-    QCOMPARE( document->synchronizer()->url(), fileUrl );
+    QCOMPARE( document->synchronizer()->url(), QUrl( fileUrl ) );
 
     delete document;
 }
