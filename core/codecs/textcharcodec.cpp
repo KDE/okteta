@@ -25,9 +25,8 @@
 // lib
 #include <character.h>
 // KDE
-#include <kglobal.h>
-#include <klocale.h>
-#include <kcharsets.h>
+#include <KLocale>
+#include <KCharsets>
 // Qt
 #include <QtCore/QTextCodec>
 
@@ -98,7 +97,7 @@ static bool is8Bit( QTextCodec* codec )
 
 static QTextCodec* createLatin1()
 {
-    return KGlobal::charsets()->codecForName( QLatin1String(encodingDataList[0].name) );
+    return KCharsets::charsets()->codecForName( QLatin1String(encodingDataList[0].name) );
 }
 
 /* heuristic seems to be doomed :(
@@ -139,12 +138,12 @@ const QStringList &TextCharCodec::codecNames()
   // first call?
   if( CodecNames.isEmpty() )
 {
-    const QStringList &CharSets = KGlobal::charsets()->availableEncodingNames();
+    const QStringList &CharSets = KCharsets::charsets()->availableEncodingNames();
 
     for( QStringList::ConstIterator it = CharSets.begin(); it != CharSets.end(); ++it )
 {
       bool Found = true;
-      QTextCodec* Codec = KGlobal::charsets()->codecForName( *it, Found );
+      QTextCodec* Codec = KCharsets::charsets()->codecForName( *it, Found );
       if( Found && is8Bit(Codec) )
         CodecNames.append( QString::fromLatin1(Codec->name()) );
 }
@@ -187,7 +186,7 @@ TextCharCodec* TextCharCodec::createLocalCodec()
 TextCharCodec* TextCharCodec::createCodec( const QString& codecName )
 {
     bool isOk = false;
-    QTextCodec* codec = KGlobal::charsets()->codecForName( codecName, isOk );
+    QTextCodec* codec = KCharsets::charsets()->codecForName( codecName, isOk );
     if( isOk )
         isOk = is8Bit( codec );
     return isOk ? new TextCharCodec( codec ) : 0;
@@ -201,7 +200,7 @@ const QStringList& TextCharCodec::codecNames()
     // first call?
     if( textCodecNames.isEmpty() )
     {
-        KCharsets* charsets = KGlobal::charsets();
+        KCharsets* charsets = KCharsets::charsets();
         for( unsigned int i = 0; i < encodingDataListSize; ++i )
         {
             bool isCodecFound = false;
