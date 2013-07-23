@@ -31,7 +31,7 @@ namespace KParts
 {
 class ReadOnlyPart;
 }
-class KUrl;
+class QUrl;
 
 
 namespace Kasten2
@@ -54,7 +54,7 @@ class TerminalView : public QWidget
   private Q_SLOTS:
     void createTerminalPart();
 
-    void onCurrentUrlChanged( const KUrl& currentUrl );
+    void onCurrentUrlChanged( const QUrl& currentUrl );
 
     void onTerminalPartDestroyed();
 

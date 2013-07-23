@@ -29,10 +29,10 @@
 #include <KServiceTypeTrader>
 #include <KParts/ReadOnlyPart>
 #include <kde_terminal_interface.h>
-#include <KUrl>
 // Qt
 #include <QLayout>
 #include <QFrame>
+#include <QUrl>
 #include <QtCore/QDir>
 
 
@@ -48,7 +48,7 @@ TerminalView::TerminalView( TerminalTool* tool, QWidget* parent )
     QVBoxLayout* layout = new QVBoxLayout( this );
     layout->setMargin( 0 );
 
-    connect( mTool, SIGNAL(currentUrlChanged(KUrl)), SLOT(onCurrentUrlChanged(KUrl)) );
+    connect( mTool, &TerminalTool::currentUrlChanged, this, &TerminalView::onCurrentUrlChanged );
     QMetaObject::invokeMethod( this, "createTerminalPart", Qt::QueuedConnection );
 }
 
@@ -76,14 +76,14 @@ void TerminalView::createTerminalPart()
         terminalWidget->show();
 
         mTerminalInterface = qobject_cast<TerminalInterface*>( mTerminalPart );
-        KUrl currentUrl = mTool->currentUrl();
+        QUrl currentUrl = mTool->currentUrl();
         if( currentUrl.isEmpty() )
-            currentUrl = QDir::homePath();
+            currentUrl = QUrl::fromLocalFile( QDir::homePath() );
         onCurrentUrlChanged( currentUrl );
     }
 }
 
-void TerminalView::onCurrentUrlChanged( const KUrl& currentUrl )
+void TerminalView::onCurrentUrlChanged( const QUrl& currentUrl )
 {
     if( mTerminalInterface && currentUrl.isLocalFile() )
         mTerminalInterface->showShellInDir( currentUrl.path() );
