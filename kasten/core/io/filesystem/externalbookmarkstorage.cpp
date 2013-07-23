@@ -31,10 +31,10 @@
 #include <bookmark.h>
 #include <abstractbytearraymodel.h>
 // KDE
-#include <KStandardDirs>
 #include <KBookmarkManager>
 #include <KBookmarkGroup>
 
+#include <QStandardPaths>
 
 namespace Kasten2
 {
@@ -42,7 +42,7 @@ namespace Kasten2
 ExternalBookmarkStorage::ExternalBookmarkStorage()
 {
     const QString bookmarksFileName =
-        KStandardDirs::locateLocal( "data", QLatin1String("okteta/bookmarks.xml") );
+        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/okteta/bookmarks.xml");
     mBookmarkManager = KBookmarkManager::managerForFile( bookmarksFileName, QLatin1String("okteta") );
 }
 
