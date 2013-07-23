@@ -25,7 +25,7 @@
 #include <KDebug>
 #include <cstdio>
 
-SafeReferenceHolder SafeReferenceHolder::instance = SafeReferenceHolder();
+SafeReferenceHolder SafeReferenceHolder::instance;
 
 void SafeReferenceHolder::invalidateAll(DataInformation* data)
 {

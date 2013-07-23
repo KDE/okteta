@@ -45,7 +45,7 @@ class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizer : public AbstractMode
     ByteArrayRawFileSynchronizer();
 
   public: // AbstractModelSynchronizer API
-    virtual void startOffering( AbstractDocument* document ) Q_DECL_OVERRIDE;
+    virtual void startOffering( AbstractDocument* document ) Q_DECL_EQ_DELETE;
     virtual AbstractLoadJob *startLoad( const QUrl &url ) Q_DECL_OVERRIDE;
     virtual AbstractSyncToRemoteJob *startSyncToRemote() Q_DECL_OVERRIDE;
     virtual AbstractSyncFromRemoteJob *startSyncFromRemote() Q_DECL_OVERRIDE;

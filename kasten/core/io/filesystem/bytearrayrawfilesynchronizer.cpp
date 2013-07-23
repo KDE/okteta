@@ -60,8 +60,6 @@ void ByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument* document )
                  SLOT(onModelModified(bool)) );
 }
 
-void ByteArrayRawFileSynchronizer::startOffering( AbstractDocument* document ) { Q_UNUSED(document) }
-
 AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const QUrl &url )
 {
     return new ByteArrayRawFileLoadJob( this, url );

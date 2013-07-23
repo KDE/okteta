@@ -25,6 +25,10 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
                                             KTextWidgets XmlGui KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
                                             )
 
+if( UNIX )
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x")
+endif()
+
 # needed for set_package_properties macro
 find_package(LibAttica REQUIRED NO_MODULE ) #somehow this is not searched for
 find_package(KDELibs4 REQUIRED NO_MODULE) #needed for KDE4Support
