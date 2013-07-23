@@ -124,6 +124,6 @@ void CustomToStringTest::testUuid()
     QCOMPARE(structure->valueString(), uuidString);
 }
 
-QTEST_MAIN(CustomToStringTest)
+QTEST_GUILESS_MAIN(CustomToStringTest)
 
 #include "customtostringtest.moc"

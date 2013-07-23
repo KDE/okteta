@@ -19,7 +19,8 @@
  */
 
 
-#include <QtTest>
+#include <QtTest/QTest>
+#include <QSignalSpy>
 
 #include "view/structures/datatypes/array/arraydatainformation.h"
 #include "view/structures/datatypes/array/primitivearraydata.h"
@@ -181,7 +182,7 @@ void ArrayDataInformationTest::cleanupTestCase()
 
 
 
-QTEST_MAIN(ArrayDataInformationTest)
+QTEST_GUILESS_MAIN(ArrayDataInformationTest)
 
 
 #include "arraydatainformationtest.moc"

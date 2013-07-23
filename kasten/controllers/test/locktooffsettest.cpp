@@ -205,6 +205,6 @@ void LockToOffsetTest::testReadingNecessary()
     delete structure;
 }
 
-QTEST_MAIN(LockToOffsetTest)
+QTEST_GUILESS_MAIN(LockToOffsetTest)
 
 #include "locktooffsettest.moc"

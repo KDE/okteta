@@ -18,7 +18,7 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <QtTest>
+#include <QtTest/QTest>
 
 #include <QObject>
 #include <QScriptValueIterator>
@@ -445,6 +445,6 @@ void ScriptClassesTest::cleanupTestCase()
 }
 
 
-QTEST_MAIN(ScriptClassesTest)
+QTEST_GUILESS_MAIN(ScriptClassesTest)
 
 #include "scriptclassestest.moc"

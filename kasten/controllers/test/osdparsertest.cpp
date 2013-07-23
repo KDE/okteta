@@ -18,7 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <QtTest>
+#include <QtTest/QTest>
 #include <QString>
 #include <QScriptEngine>
 #include <QScriptValue>
@@ -114,6 +114,6 @@ void OsdParserTest::testScriptFuntion()
     QCOMPARE(betterFunction.toString(), QString(QLatin1String("function () { return 2; }")));
 }
 
-QTEST_MAIN(OsdParserTest)
+QTEST_GUILESS_MAIN(OsdParserTest)
 
 #include "osdparsertest.moc"

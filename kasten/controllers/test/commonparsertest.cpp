@@ -301,7 +301,7 @@ inline void CommonParserTest::testToStringEncoding_data()
     QTest::newRow("utf-32-abe") << "utf-32-abe" << (int)StringDataInformation::InvalidEncoding;
 }
 
-QTEST_MAIN(CommonParserTest)
+QTEST_GUILESS_MAIN(CommonParserTest)
 
 
 #include "commonparsertest.moc"

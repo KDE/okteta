@@ -18,7 +18,7 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <QtTest>
+#include <QtTest/QTest>
 #include <QtGlobal>
 #include <KGlobal>
 #include <KLocale>
@@ -568,6 +568,6 @@ void PrimitiveDataInformationTest::cleanupTestCase()
     delete boolBitfield;
 }
 
-QTEST_MAIN(PrimitiveDataInformationTest)
+QTEST_GUILESS_MAIN(PrimitiveDataInformationTest)
 
 #include "primitivedatainformationtest.moc"

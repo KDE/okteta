@@ -18,7 +18,7 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <QtTest>
+#include <QtTest/QTest>
 #include <limits>
 
 #include <bytearraymodel.h>
@@ -278,6 +278,6 @@ void PrimitiveArrayTest::testReadBool64()
     testReadPrimitive<Type_Bool64>();
 }
 
-QTEST_MAIN(PrimitiveArrayTest)
+QTEST_GUILESS_MAIN(PrimitiveArrayTest)
 
 #include "primitivearraytest.moc"

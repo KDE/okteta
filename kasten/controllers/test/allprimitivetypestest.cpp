@@ -18,7 +18,7 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <QtTest>
+#include <QtTest/QTest>
 #include <QScopedPointer>
 
 #include <bytearraymodel.h>
@@ -126,6 +126,6 @@ inline void AllPrimitiveTypesTest::readBigEndian()
 
 }
 
-QTEST_MAIN(AllPrimitiveTypesTest)
+QTEST_GUILESS_MAIN(AllPrimitiveTypesTest)
 
 #include "allprimitivetypestest.moc"

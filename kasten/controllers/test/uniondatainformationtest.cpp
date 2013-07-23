@@ -18,7 +18,7 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <QtTest>
+#include <QtTest/QTest>
 
 #include <bytearraymodel.h>
 #include <byte.h>
@@ -175,6 +175,6 @@ void UnionDataInformationTest::testReadData1_data()
             /* u54 */ << Utils::binary<quint64>("0") << false;
 }
 
-QTEST_MAIN(UnionDataInformationTest)
+QTEST_GUILESS_MAIN(UnionDataInformationTest)
 
 #include "uniondatainformationtest.moc"

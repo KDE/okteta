@@ -21,7 +21,7 @@
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/allprimitivetypes.h"
 
-#include <QtTest>
+#include <QtTest/QTest>
 #include <QString>
 #include <QDebug>
 #include <QScriptEngine>
@@ -309,6 +309,6 @@ void ScriptValueConverterTest::testParseEnum_data()
             << quint64(18446744073709551615UL);
 }
 
-QTEST_MAIN(ScriptValueConverterTest)
+QTEST_GUILESS_MAIN(ScriptValueConverterTest)
 
 #include "scriptvalueconvertertest.moc"

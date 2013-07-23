@@ -19,7 +19,7 @@
  */
 
 
-#include <QtTest>
+#include <QtTest/QTest>
 
 #include "view/structures/datatypes/array/arraydatainformation.h"
 #include "view/structures/datatypes/array/primitivearraydata.h"
@@ -427,7 +427,7 @@ void BasicDataInformationTest::cleanupTestCase()
     delete topLevel;
 }
 
-QTEST_MAIN(BasicDataInformationTest)
+QTEST_GUILESS_MAIN(BasicDataInformationTest)
 
 
 #include "basicdatainformationtest.moc"

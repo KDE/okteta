@@ -311,6 +311,6 @@ void JsParserTest::testImportPathTraversal()
 
 
 
-QTEST_MAIN(JsParserTest)
+QTEST_GUILESS_MAIN(JsParserTest)
 
 #include "jsparsertest.moc"
