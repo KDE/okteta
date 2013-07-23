@@ -39,7 +39,7 @@
 // KDE
 #include <KUrl>
 #include <KLocale>
-#include <qtest_kde.h>
+#include <QtTest/QTest>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
@@ -166,4 +166,4 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 
 }
 
-QTEST_KDEMAIN_CORE( Kasten2::ByteArrayRawFileSynchronizerTest )
+QTEST_GUILESS_MAIN( Kasten2::ByteArrayRawFileSynchronizerTest )

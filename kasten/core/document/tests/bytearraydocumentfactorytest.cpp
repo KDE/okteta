@@ -27,7 +27,7 @@
 // lib
 #include <bytearraydocument.h>
 // KDE
-#include <qtest_kde.h>
+#include <QtTest/QTest>
 
 
 namespace Kasten2
@@ -50,4 +50,4 @@ void ByteArrayDocumentFactoryTest::testCreate()
 
 }
 
-QTEST_KDEMAIN_CORE( Kasten2::ByteArrayDocumentFactoryTest )
+QTEST_GUILESS_MAIN( Kasten2::ByteArrayDocumentFactoryTest )

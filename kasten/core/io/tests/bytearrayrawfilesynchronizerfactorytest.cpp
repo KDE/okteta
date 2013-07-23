@@ -33,7 +33,7 @@
 #include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
-#include <qtest_kde.h>
+#include <QtTest/QTest>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
@@ -157,4 +157,4 @@ TODO: save mit path als Parameter? Oder separat setzen? Wie Kopie speichern?
 }
 #endif
 
-QTEST_KDEMAIN_CORE( ByteArrayRawFileSynchronizerFactoryTest )
+QTEST_GUILESS_MAIN( ByteArrayRawFileSynchronizerFactoryTest )

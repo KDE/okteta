@@ -29,7 +29,7 @@
 // test utils
 #include <util/filesystem.h>
 // KDE
-#include <qtest_kde.h>
+#include <QtTest/QTest>
 #include <KUrl>
 // Qt
 #include <QtTest/QtTest>
@@ -227,4 +227,4 @@ void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
 }
 #endif
 
-QTEST_KDEMAIN_CORE( TestDocumentFileSynchronizerFactoryTest )
+QTEST_GUILESS_MAIN( TestDocumentFileSynchronizerFactoryTest )

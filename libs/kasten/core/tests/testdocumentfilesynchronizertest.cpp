@@ -34,7 +34,7 @@
 #include <abstractsyncfromremotejob.h>
 #include <abstractsyncwithremotejob.h>
 // KDE
-#include <qtest_kde.h>
+#include <QtTest/QTest>
 #include <KUrl>
 // Qt
 #include <QtTest/QtTest>
@@ -289,4 +289,4 @@ void TestDocumentFileSynchronizerTest::testHeader()
 }
 
 
-QTEST_KDEMAIN_CORE( TestDocumentFileSynchronizerTest )
+QTEST_GUILESS_MAIN( TestDocumentFileSynchronizerTest )
