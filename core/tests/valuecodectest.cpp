@@ -24,9 +24,8 @@
 
 // test object
 #include <valuecodec.h>
-// KDE
-#include <qtest_kde.h>
 // Qt
+#include <QtTest/QTest>
 #include <QtCore/QBitArray>
 
 
@@ -324,4 +323,4 @@ void ValueCodecTest::testIsValidDigit()
 
 }
 
-QTEST_KDEMAIN_CORE( Okteta::ValueCodecTest )
+QTEST_GUILESS_MAIN( Okteta::ValueCodecTest )

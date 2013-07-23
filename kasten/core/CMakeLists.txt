@@ -53,11 +53,16 @@ set( okteta_kastencore_LIB_HDRS
 
 kde4_add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
 
-target_link_libraries( ${oktetakastencore_LIB}
+target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC
   ${KASTENCORE_LIBS}
   ${oktetacore_LIB}
   ${KDE4_KDECORE_LIBS}
 )
+
+target_link_libraries( ${oktetakastencore_LIB} LINK_PRIVATE
+  ${KDE4Support_LIBRARIES}
+)
+
 set_target_properties( ${oktetakastencore_LIB} PROPERTIES
   OUTPUT_NAME ${oktetakastencore_LIB_NAME}
   VERSION     ${OKTETAKASTEN_LIB_VERSION}

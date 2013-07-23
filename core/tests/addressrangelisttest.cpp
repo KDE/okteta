@@ -160,4 +160,4 @@ void AddressRangeListTest::testAddNonJoinableRanges()
 
 }
 
-QTEST_MAIN( Okteta::AddressRangeListTest )
+QTEST_GUILESS_MAIN( Okteta::AddressRangeListTest )

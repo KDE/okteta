@@ -25,7 +25,7 @@
 // test object
 #include <codecs/textcharcodec.h>
 // KDE
-#include <qtest_kde.h>
+#include <QtTest/QTest>
 
 
 namespace Okteta
@@ -69,4 +69,4 @@ void TextCharCodecTest::testCreateNonexistingCodec()
 
 }
 
-QTEST_KDEMAIN_CORE( Okteta::TextCharCodecTest )
+QTEST_GUILESS_MAIN( Okteta::TextCharCodecTest )
