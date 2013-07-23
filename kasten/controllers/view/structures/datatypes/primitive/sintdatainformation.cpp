@@ -36,7 +36,7 @@ QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
     {
         num = QString::number(val, base);
         if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
+            num = KLocale::global()->formatNumber(num, false, 0);
         return num;
     }
     //the absolute value of negative minimum can not be represented as a signed integer

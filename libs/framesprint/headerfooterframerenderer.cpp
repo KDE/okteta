@@ -91,11 +91,11 @@ void HeaderFooterFrameRenderer::prepare()
     // create list of replacements
     QHash<char,QString> tagReplacements;
 
-    tagReplacements['d'] = KGlobal::locale()->formatDateTime( dateTime, KLocale::ShortDate );
-    tagReplacements['D'] = KGlobal::locale()->formatDateTime( dateTime, KLocale::LongDate );
-    tagReplacements['h'] = KGlobal::locale()->formatTime( dateTime.time(), false );
-    tagReplacements['y'] = KGlobal::locale()->formatDate( dateTime.date(), KLocale::ShortDate );
-    tagReplacements['Y'] = KGlobal::locale()->formatDate( dateTime.date(), KLocale::LongDate );
+    tagReplacements['d'] = KLocale::global()->formatDateTime( dateTime, KLocale::ShortDate );
+    tagReplacements['D'] = KLocale::global()->formatDateTime( dateTime, KLocale::LongDate );
+    tagReplacements['h'] = KLocale::global()->formatTime( dateTime.time(), false );
+    tagReplacements['y'] = KLocale::global()->formatDate( dateTime.date(), KLocale::ShortDate );
+    tagReplacements['Y'] = KLocale::global()->formatDate( dateTime.date(), KLocale::LongDate );
     tagReplacements['u'] = user.loginName();
     tagReplacements['U'] = user.property( KUser::FullName ).toString();
 //     tagReplacements['f'] = isSelection ? i18n("(Selection of) %1", url.fileName()) : url.fileName();

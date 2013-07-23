@@ -129,7 +129,7 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
       label = new QLabel(i18n("Created:"), this );
       propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
 
-      label = new QLabel(KGlobal::locale()->formatDateTime(dt), this );
+      label = new QLabel(KLocale::global()->formatDateTime(dt), this );
       propertyGrid->addWidget(label, currentPropertyRow++, 2);
     }
 #endif
@@ -190,7 +190,7 @@ void DocumentInfoView::onDocumentSizeChanged( int newSize )
     const QString size = ( newSize != -1 ) ?
         QString::fromLatin1( "%1 (%2)" )
         .arg( KIO::convertSize(newSize) )
-        .arg( KGlobal::locale()->formatNumber(newSize, 0) ) :
+        .arg( KLocale::global()->formatNumber(newSize, 0) ) :
         QString::fromLatin1( "-" );
     mSizeLabel->setText( size );
 }

@@ -59,7 +59,7 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
         int base = Kasten2::StructViewPreferences::charDisplayBase();
         QString num = QString::number(value, base);
         if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
+            num = KLocale::global()->formatNumber(num, false, 0);
         charStr += QLatin1String(" (") + PrimitiveDataInformation::basePrefix(base)
                 + num + QLatin1Char(')');
     }

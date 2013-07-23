@@ -55,7 +55,7 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
     if (base == 10)
     {
         if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
+            num = KLocale::global()->formatNumber(num, false, 0);
     }
     else
     {

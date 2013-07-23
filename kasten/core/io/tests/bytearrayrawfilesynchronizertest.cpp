@@ -38,6 +38,7 @@
 #include <piecetablebytearraymodel.h>
 // KDE
 #include <KUrl>
+#include <KLocale>
 #include <qtest_kde.h>
 // Qt
 #include <QtTest/QtTest>
@@ -61,7 +62,7 @@ static const char TestDataChar = 0;
 void ByteArrayRawFileSynchronizerTest::initTestCase()
 {
     // TODO: see if this could be part of a QTEST_KDE* macro
-    KGlobal::locale();
+    KLocale::global(); //TODO still necessary?
 
     QByteArray byteArray( TestDataSize, TestDataChar );
     ::textureByteArray( &byteArray );

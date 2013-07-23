@@ -108,8 +108,8 @@ void PrimitiveDataInformationTest::initTestCase()
 {
     Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
     Kasten2::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
-    KGlobal::locale()->setDecimalSymbol(QLatin1String("."));
-    KGlobal::locale()->setThousandsSeparator(QLatin1String(""));
+    KLocale::global()->setDecimalSymbol(QLatin1String("."));
+    KLocale::global()->setThousandsSeparator(QLatin1String(""));
     LoggerWithContext lwc(0, QString());
 
     for (int i = Type_START; i < Type_Bitfield; ++i)

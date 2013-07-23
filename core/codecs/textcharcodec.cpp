@@ -177,7 +177,7 @@ QString TextCharCodec::nameOfEncoding( CharCoding _char )
 
 TextCharCodec* TextCharCodec::createLocalCodec()
 {
-    QTextCodec* codec = KGlobal::locale()->codecForEncoding();
+    QTextCodec* codec = KLocale::global()->codecForEncoding();
     if( ! is8Bit(codec) )
         codec = createLatin1();
     return new TextCharCodec( codec );

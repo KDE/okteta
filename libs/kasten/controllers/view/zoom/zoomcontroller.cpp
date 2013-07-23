@@ -109,7 +109,7 @@ void ZoomController::zoomTo( const QString& nz )
     QString z = nz;
     double zoom;
     z.remove(  z.indexOf(  '%' ), 1 );
-    zoom = KGlobal::locale()->readNumber(  z ) / 100;
+    zoom = KLocale::global()->readNumber(  z ) / 100;
     kDebug( 4500 ) << "ZOOM = "  << nz << ", setting zoom = " << zoom << endl;
 
     DisplayOptions options = miniWidget()->displayOptions();
