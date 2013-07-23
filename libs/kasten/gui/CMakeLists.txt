@@ -159,6 +159,7 @@ kde4_add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
 target_link_libraries( ${kastengui_LIB}
   ${kastencore_LIB}
   ${KDE4_KDEUI_LIBS}
+  ${KDE4Support_LIBRARIES}
 )
 set_target_properties( ${kastengui_LIB}  PROPERTIES
   OUTPUT_NAME ${kastengui_LIB_NAME}

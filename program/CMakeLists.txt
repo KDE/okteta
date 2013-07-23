@@ -53,6 +53,7 @@ target_link_libraries( okteta
   kastengui
   kastencore
   ${KDE4_KDEUI_LIBS}
+  ${KDE4Support_LIBRARIES}
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )

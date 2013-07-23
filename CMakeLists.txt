@@ -32,9 +32,6 @@ find_package(KDE4Support REQUIRED NO_MODULE)
 find_package(KDE4Attic REQUIRED NO_MODULE)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) #this is needed since it is apparently not set by Qt5Config.cmake
-#don't add KDE4Support manually to every target
-set(KDE4_KDEUI_LIBS ${KDE4_KDEUI_LIBS} ${KDE4Support_LIBRARIES})
-
 
 SET( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC TRUE )

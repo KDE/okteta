@@ -451,7 +451,7 @@ target_link_libraries ( structures-static
   ${oktetakastengui_LIB}
   ${oktetacore_LIB}
   ${KASTENCORE_LIBS}
-  #${KASTENGUI_LIBS}
+  ${KDE4Support_LIBRARIES}
 )
 
 macro(structures_unit_test _testtarget _testname)
@@ -551,6 +551,7 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   Qt5::Script
   Qt5::ScriptTools
   ${KDE4Attic_LIBRARIES}
+  ${KDE4Support_LIBRARIES}
 )
 if( QCA2_FOUND )
   target_link_libraries( ${oktetakastencontrollers_LIB} ${QCA2_LIBRARIES} )
