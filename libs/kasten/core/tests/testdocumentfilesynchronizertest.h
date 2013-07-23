@@ -29,7 +29,7 @@
 
 class TestFileSystem;
 class QString;
-class KUrl;
+class QUrl;
 
 class TestDocumentFileSynchronizerTest : public QObject
 {
@@ -37,7 +37,7 @@ class TestDocumentFileSynchronizerTest : public QObject
 
   private:
     void writeToFile( const QString& filePath, const QByteArray& data, const QByteArray& header = QByteArray() );
-    void checkFileContent( const KUrl& fileUrl, const QByteArray& data, const QByteArray& header = QByteArray() );
+    void checkFileContent( const QUrl& fileUrl, const QByteArray& data, const QByteArray& header = QByteArray() );
 
   private Q_SLOTS:
     void initTestCase();

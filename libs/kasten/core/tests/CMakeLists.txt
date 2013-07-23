@@ -67,7 +67,6 @@ target_link_libraries( testdocumentfilesynchronizertest
   ${kastencore_LIB}
   kastencoretestutil
   ${KDE4_KIO_LIBS}
-  ${KDE4Support_LIBRARIES}
   Qt5::Test
 )
 

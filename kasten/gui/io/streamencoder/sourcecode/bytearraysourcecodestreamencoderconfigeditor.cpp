@@ -27,9 +27,9 @@
 // KDE
 #include <KLocalizedString>
 #include <KLineEdit>
-#include <KIntNumInput>
 #include <KComboBox>
 // Qt
+#include <QSpinBox>
 #include <QFormLayout>
 #include <QCheckBox>
 
@@ -61,7 +61,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
         i18nc( "@label:textbox to define after how many items the list is wrapped",
                "Items per line:" );
 
-    mItemsPerLineEdit = new KIntNumInput( this );
+    mItemsPerLineEdit = new QSpinBox( this );
     mItemsPerLineEdit->setMinimum( 1 );
     mItemsPerLineEdit->setValue( mSettings.elementsPerLine );
     connect( mItemsPerLineEdit, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );

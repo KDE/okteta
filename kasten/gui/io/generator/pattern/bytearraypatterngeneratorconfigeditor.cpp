@@ -26,8 +26,8 @@
 #include <bytearraycombobox.h>
 // KDE
 #include <KLocalizedString>
-#include <KIntNumInput>
 // Qt
+#include <QSpinBox>
 #include <QFormLayout>
 
 
@@ -62,7 +62,7 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( By
     const QString numberInputLabel =
         i18nc( "@label:spinbox number of times to insert the pattern",
                "&Number:" );
-    mNumberInput = new KIntNumInput( this );
+    mNumberInput = new QSpinBox( this );
     mNumberInput->setRange( 1, INT_MAX );
     mNumberInput->setValue( mSettings.count );
     connect( mNumberInput, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );

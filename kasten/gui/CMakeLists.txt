@@ -199,10 +199,8 @@ target_link_libraries( ${oktetakastengui_LIB}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
   ${KDE4_KDEUI_LIBS}
-  ${KDE4Support_LIBRARIES}
   Qt5::Script
 )
-#TODO should probably first check if QtScript is available??
 set_target_properties( ${oktetakastengui_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetakastengui_LIB_NAME}
   VERSION     ${OKTETAKASTEN_LIB_VERSION}

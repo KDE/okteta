@@ -24,8 +24,8 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KIntNumInput>
 // Qt
+#include <QSpinBox>
 #include <QFormLayout>
 
 
@@ -45,10 +45,11 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
     const QString numberInputLabel =
         i18nc( "@label:spinbox size of the bytes to generate",
                "&Size:" );
-    mSizeInput = new KIntNumInput( this );
+    mSizeInput = new QSpinBox( this );
     mSizeInput->setRange( 1, INT_MAX );
     mSizeInput->setValue( mSettings.size );
-    mSizeInput->setSuffix( ki18np(" byte"," bytes") );
+#pragma message("Plural suffix?")
+    mSizeInput->setSuffix( i18n(" bytes") ); //TODO plural
     connect( mSizeInput, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",

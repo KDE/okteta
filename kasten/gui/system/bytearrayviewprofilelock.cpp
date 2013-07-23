@@ -22,8 +22,10 @@
 
 #include "bytearrayviewprofilelock.h"
 
-// KDE
-#include <KLockFile>
+// Qt
+#include <QLockFile>
+#include <QDebug>
+#include <QSharedPointer>
 
 
 namespace Kasten2
@@ -35,7 +37,7 @@ public:
     ByteArrayViewProfileLockPrivate( const QString& fileName,
                                      const ByteArrayViewProfile::Id& viewProfileId );
 public:
-    KLockFile lockFile;
+    QSharedPointer<QLockFile> lockFile;
     ByteArrayViewProfile::Id viewProfileId;
 };
 
@@ -49,11 +51,15 @@ viewProfileFileLockPath( const QString& viewProfileFilePath)
 
 ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate( const QString& fileName,
                                                                   const ByteArrayViewProfile::Id& id )
-  : lockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName)),
+  : lockFile(new QLockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName))),
     viewProfileId( id )
 {
     if( !fileName.isEmpty() )
-        lockFile.lock( KLockFile::NoBlockFlag | KLockFile::ForceFlag );
+    {
+        if ( !lockFile->tryLock( 1000 ) )
+            qWarning() << "Failed to acquire lock file" << fileName
+                    << "error =" << lockFile->error();
+    }
 }
 
 
@@ -79,13 +85,13 @@ ByteArrayViewProfileLock::operator=( const ByteArrayViewProfileLock& other )
 void
 ByteArrayViewProfileLock::unlock()
 {
-    d->lockFile.unlock();
+    d->lockFile->unlock();
 }
 
 bool
 ByteArrayViewProfileLock::isLocked() const
 {
-    return d->lockFile.isLocked();
+    return d->lockFile->isLocked();
 }
 
 ByteArrayViewProfile::Id

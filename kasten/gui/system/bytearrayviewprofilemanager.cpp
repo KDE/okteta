@@ -43,8 +43,8 @@ namespace Kasten2
 static const QStringList viewProfileFileNameFilter =
     QStringList() << QStringLiteral( "*.obavp" ) << QStringLiteral( "*.olock" );
 static const QString viewProfileFileSuffix = QStringLiteral( ".obavp" );
-static const QString viewProfileDirSubPath = QStringLiteral( "okteta/viewprofiles" );
-static const QString defaultViewProfileFileSubPath = QStringLiteral( "okteta/defaultviewprofile" );
+static const QString viewProfileDirSubPath = QStringLiteral( "/okteta/viewprofiles" );
+static const QString defaultViewProfileFileSubPath = QStringLiteral( "/okteta/defaultviewprofile" );
 static const int DefaultNoOfBytesPerLine = 16;
 static const int DefaultNoOfBytesPerGroup = 4;
 static const int DefaultLayoutStyle = 0;
@@ -115,13 +115,14 @@ updateLockStatus( ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup,
 static QString
 defaultViewProfileFilePath()
 {
-    return KGlobal::dirs()->saveLocation( "data" ) + defaultViewProfileFileSubPath;
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + defaultViewProfileFileSubPath;
 }
 
 static QString
 viewProfileFilePath( const ByteArrayViewProfile::Id& viewProfileId )
 {
-    return KGlobal::dirs()->saveLocation( "data", viewProfileDirSubPath ) + viewProfileId + viewProfileFileSuffix;
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
+        + viewProfileDirSubPath + QLatin1Char('/') + viewProfileId + viewProfileFileSuffix;
 }
 
 static QString
@@ -140,15 +141,15 @@ ByteArrayViewProfileManager::ByteArrayViewProfileManager()
              SLOT(onViewProfilesFolderChanged(QString)) );
 
     // get all folder where viewProfiles could be stored
-    const KStandardDirs* const standardDirs = KGlobal::dirs();
-    const QStringList dataFolderPaths = standardDirs->resourceDirs( "data" );
+    const QStringList dataFolderPaths =
+            QStandardPaths::standardLocations( QStandardPaths::GenericDataLocation );
 
     foreach( const QString& dataFolderPath, dataFolderPaths )
     {
         const QString viewProfileFolderPath = dataFolderPath + viewProfileDirSubPath;
         // watch folder for changes
         mViewProfileFileWatcher->addDir( viewProfileFolderPath, KDirWatch::WatchDirOnly );
-kDebug() << "adding Dir"<<viewProfileFolderPath;
+        kDebug() << "adding Dir" << viewProfileFolderPath;
 
         // read current files
         onViewProfilesFolderChanged( viewProfileFolderPath );

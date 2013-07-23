@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstractmodeldatageneratorconfigeditor.h>
 
-class KIntNumInput;
+class QSpinBox;
 
 
 namespace Kasten2
@@ -56,7 +56,7 @@ class ByteArrayRandomDataGeneratorConfigEditor : public AbstractModelDataGenerat
     ByteArrayRandomDataGenerator* mGenerator;
     ByteArrayRandomDataGeneratorSettings mSettings;
 
-    KIntNumInput* mSizeInput;
+    QSpinBox* mSizeInput;
 };
 
 }
