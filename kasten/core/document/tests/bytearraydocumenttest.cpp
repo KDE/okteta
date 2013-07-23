@@ -40,7 +40,7 @@ static const char Title[] = "title";
 
 void ByteArrayDocumentTest::testCreateNew()
 {
-    ByteArrayDocument* document = new ByteArrayDocument(QLatin1String("New created for test."));
+    ByteArrayDocument* document = new ByteArrayDocument(QStringLiteral("New created for test."));
 
     QVERIFY( document != 0 );
     QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
@@ -55,7 +55,7 @@ void ByteArrayDocumentTest::testCreateNew()
 
 void ByteArrayDocumentTest::testSetTitle()
 {
-    ByteArrayDocument* document = new ByteArrayDocument(QLatin1String("New created for test."));
+    ByteArrayDocument* document = new ByteArrayDocument(QStringLiteral("New created for test."));
     QSignalSpy* titleChangeSpy =  new QSignalSpy( document, SIGNAL(titleChanged(QString)) );
 
     const QLatin1String title( Title );

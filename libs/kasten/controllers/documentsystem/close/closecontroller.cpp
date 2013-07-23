@@ -50,13 +50,13 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
 
     if( supportMultiple )
     {
-        mCloseAllAction = actionCollection->addAction( QLatin1String("file_close_all"),
+        mCloseAllAction = actionCollection->addAction( QStringLiteral("file_close_all"),
                                                        this, SLOT(closeAll()) );
         mCloseAllAction->setText( i18nc("@title:menu","Close All") );
         mCloseAllAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
         mCloseAllAction->setEnabled( false );
 
-        mCloseAllOtherAction = actionCollection->addAction( QLatin1String("file_close_all_other"),
+        mCloseAllOtherAction = actionCollection->addAction( QStringLiteral("file_close_all_other"),
                                                             this, SLOT(closeAllOther()) );
         mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
         mCloseAllOtherAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );

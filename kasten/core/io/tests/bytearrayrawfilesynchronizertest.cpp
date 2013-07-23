@@ -79,7 +79,7 @@ void ByteArrayRawFileSynchronizerTest::initTestCase()
 
 //     QDir dir(mDataDir);
 //     QVERIFY(dir.mkdir("Europe"));
-//     QFile::copy(QString::fromLatin1(KDESRCDIR) + QLatin1String("/Paris"), mDataDir + QLatin1String("/Europe/Paris"));
+//     QFile::copy(QString::fromLatin1(KDESRCDIR) + QStringLiteral("/Paris"), mDataDir + QStringLiteral("/Europe/Paris"));
 }
 
 void ByteArrayRawFileSynchronizerTest::cleanupTestCase()
@@ -136,7 +136,7 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
     const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) ) );
 
     ByteArrayDocument* document =
-        new Kasten2::ByteArrayDocument(QLatin1String("New created for test."));
+        new Kasten2::ByteArrayDocument(QStringLiteral("New created for test."));
     Okteta::PieceTableByteArrayModel* byteArray =
         qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
 

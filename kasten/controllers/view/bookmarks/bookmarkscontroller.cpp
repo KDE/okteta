@@ -62,22 +62,22 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 
     mCreateAction = KStandardAction::addBookmark( this, SLOT(createBookmark()), actionCollection );
 
-    mDeleteAction = actionCollection->addAction( QLatin1String("bookmark_remove"),
+    mDeleteAction = actionCollection->addAction( QStringLiteral("bookmark_remove"),
                                                  this, SLOT(deleteBookmark()) );
     mDeleteAction->setText( i18nc("@action:inmenu","Remove Bookmark") );
     mDeleteAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_B );
 
-    mDeleteAllAction = actionCollection->addAction( QLatin1String("bookmark_remove_all"),
+    mDeleteAllAction = actionCollection->addAction( QStringLiteral("bookmark_remove_all"),
                                                     this, SLOT(deleteAllBookmarks()) );
     mDeleteAllAction->setText( i18nc("@action:inmenu","Remove All Bookmarks") );
 //     mDeleteAllAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
-    mGotoNextBookmarkAction = actionCollection->addAction( QLatin1String("bookmark_next"),
+    mGotoNextBookmarkAction = actionCollection->addAction( QStringLiteral("bookmark_next"),
                                                            this, SLOT(gotoNextBookmark()) );
     mGotoNextBookmarkAction->setText( i18nc("@action:inmenu","Go to Next Bookmark") );
     mGotoNextBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Down );
 
-    mGotoPreviousBookmarkAction = actionCollection->addAction( QLatin1String("bookmark_previous"),
+    mGotoPreviousBookmarkAction = actionCollection->addAction( QStringLiteral("bookmark_previous"),
                                                                this, SLOT(gotoPreviousBookmark()) );
     mGotoPreviousBookmarkAction->setText( i18nc("@action:inmenu","Go to Previous Bookmark") );
     mGotoPreviousBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Up );
@@ -158,7 +158,7 @@ void BookmarksController::updateBookmarks()
     {
         const Okteta::Bookmark& bookmark = bit.next();
         printFunction( codedOffset, startOffset+bookmark.offset() );
-        QString title = i18nc( "@item description of bookmark", "%1: %2", QLatin1String(codedOffset),bookmark.name() );
+        QString title = i18nc( "@item description of bookmark", "%1: %2", QString::fromUtf8(codedOffset),bookmark.name() );
         if( b <= lastWithNumericShortCut )
         {
             title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
@@ -170,7 +170,7 @@ void BookmarksController::updateBookmarks()
         action->setData( bookmark.offset() );
         mBookmarksActionGroup->addAction( action );
     }
-    mGuiClient->plugActionList( QLatin1String(BookmarkListActionListId),
+    mGuiClient->plugActionList( QString::fromUtf8(BookmarkListActionListId),
                                 mBookmarksActionGroup->actions() );
 }
 

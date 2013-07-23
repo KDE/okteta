@@ -56,21 +56,21 @@ ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, Abst
 
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSplitVerticallyAction = actionCollection->addAction( QLatin1String("view_area_split_vertically"),
+    mSplitVerticallyAction = actionCollection->addAction( QStringLiteral("view_area_split_vertically"),
                                                           this, SLOT(splitVertically()) );
     mSplitVerticallyAction->setText( i18nc("@title:menu","Split Vertically") );
     mSplitVerticallyAction->setIcon( QIcon::fromTheme( QStringLiteral("view-split-left-right") ) );
     mSplitVerticallyAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_L );
     mSplitVerticallyAction->setEnabled( mViewAreaSplitable != 0 );
 
-    mSplitHorizontallyAction = actionCollection->addAction( QLatin1String("view_area_split_horizontally"),
+    mSplitHorizontallyAction = actionCollection->addAction( QStringLiteral("view_area_split_horizontally"),
                                                             this, SLOT(splitHorizontally()) );
     mSplitHorizontallyAction->setText( i18nc("@title:menu","Split Horizontal") );
     mSplitHorizontallyAction->setIcon( QIcon::fromTheme( QStringLiteral("view-split-top-bottom") ) );
     mSplitHorizontallyAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_T );
     mSplitHorizontallyAction->setEnabled( mViewAreaSplitable != 0 );
 
-    mCloseAction = actionCollection->addAction( QLatin1String("view_area_close"),
+    mCloseAction = actionCollection->addAction( QStringLiteral("view_area_close"),
                                                 this, SLOT(close()) );
     mCloseAction->setText( i18nc("@title:menu","Close View Area") );
     mCloseAction->setIcon( QIcon::fromTheme( QStringLiteral("view-close") ) );

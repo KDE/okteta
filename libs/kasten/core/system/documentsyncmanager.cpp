@@ -122,11 +122,11 @@ static QString mimetypeFilterString( const QStringList& _mimetypes )
 {
     QStringList mimetypes = _mimetypes;
 
-    const int index = mimetypes.indexOf( QLatin1String("application/octet-stream") );
+    const int index = mimetypes.indexOf( QStringLiteral("application/octet-stream") );
     if( index != -1 )
-        mimetypes.replace( index, QLatin1String("all/allfiles") );
+        mimetypes.replace( index, QStringLiteral("all/allfiles") );
 
-    return mimetypes.join( QLatin1String(" ") );
+    return mimetypes.join( QStringLiteral(" ") );
 }
 
 bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )

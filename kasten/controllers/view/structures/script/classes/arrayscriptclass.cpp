@@ -34,13 +34,13 @@ ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* han
 {
     s_length = engine->toStringHandle(ParserStrings::PROPERTY_LENGTH);
     mIterableProperties.append(qMakePair(s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_childType = engine->toStringHandle(QLatin1String("childType"));
+    s_childType = engine->toStringHandle(QStringLiteral("childType"));
     //the preferred property (the same as childType)
     s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE);
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mArrayPrototype = engine->newObject();
-    mArrayPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Array_proto_toString));
+    mArrayPrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Array_proto_toString));
 }
 
 ArrayScriptClass::~ArrayScriptClass()
@@ -95,7 +95,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
             aData->logError() << "attempting to access out of bounds child: index was" << pos
                     << ", length is" << data->childCount();
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
-                QString(QLatin1String("Attempting to access array index %1, but length is %2")).arg(
+                QString(QStringLiteral("Attempting to access array index %1, but length is %2")).arg(
                     QString::number(pos), QString::number(data->childCount())));
         }
         else

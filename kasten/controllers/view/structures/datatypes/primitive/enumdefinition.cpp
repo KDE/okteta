@@ -140,7 +140,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
     {
         const QString valueString = value.toString();
         bool ok = false;
-        if (valueString.startsWith(QLatin1String("0x")))
+        if (valueString.startsWith(QStringLiteral("0x")))
         {
             intValue = valueString.mid(2).toULongLong(&ok, 16);
         }
@@ -153,7 +153,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         }
         if (!ok)
         {
-            QString errMessage = QString(QLatin1String("Could not convert '%1' to an enum "
+            QString errMessage = QString(QStringLiteral("Could not convert '%1' to an enum "
                     "constant, name was: %2")).arg(valueString, name);
             logger.warn() << errMessage;
             return QPair<AllPrimitiveTypes, QString>();
@@ -162,7 +162,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
     quint64 asUnsigned = intValue.value<quint64>();
     if (asUnsigned > maxValue)
     {
-        QString errMessage = QLatin1String("Enumerator %1: %2 is larger than the maximum "
+        QString errMessage = QStringLiteral("Enumerator %1: %2 is larger than the maximum "
                 "possible for type %3 (%4)");
         errMessage = errMessage.arg(name, QString::number(asUnsigned),
                 PrimitiveType::standardTypeName(type), QString::number(maxValue));
@@ -172,7 +172,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
     qint64 asSigned = intValue.value<qint64>();
     if (minValue != 0 && asSigned < minValue)
     {
-        QString errMessage = QLatin1String("Enumerator %1: %2 is smaller than the minimum "
+        QString errMessage = QStringLiteral("Enumerator %1: %2 is smaller than the minimum "
                 "possible for type %3 (%4)");
         errMessage = errMessage.arg(name, QString::number(asSigned),
                 PrimitiveType::standardTypeName(type), QString::number(minValue));

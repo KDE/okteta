@@ -64,14 +64,14 @@ void UnionDataInformationTest::testSize()
 {
     LoggerWithContext lwc(0, QString());
 
-    UnionDataInformation empty(QLatin1String("empty"));
+    UnionDataInformation empty(QStringLiteral("empty"));
     QCOMPARE(empty.size(), BitCount32(0));
     QVector<DataInformation*> size54;
-    size54 << PrimitiveFactory::newInstance(QLatin1String("8"), Type_Bool8, lwc);
-    size54 << PrimitiveFactory::newInstance(QLatin1String("16"), Type_Int16, lwc);
-    size54 << PrimitiveFactory::newInstance(QLatin1String("32"), Type_Float, lwc);
-    size54 << new UnsignedBitfieldDataInformation(QLatin1String("54"), 54);
-    UnionDataInformation fourChildren(QLatin1String("four"), size54);
+    size54 << PrimitiveFactory::newInstance(QStringLiteral("8"), Type_Bool8, lwc);
+    size54 << PrimitiveFactory::newInstance(QStringLiteral("16"), Type_Int16, lwc);
+    size54 << PrimitiveFactory::newInstance(QStringLiteral("32"), Type_Float, lwc);
+    size54 << new UnsignedBitfieldDataInformation(QStringLiteral("54"), 54);
+    UnionDataInformation fourChildren(QStringLiteral("four"), size54);
     QCOMPARE(fourChildren.size(), BitCount32(54));
 }
 
@@ -79,14 +79,14 @@ void UnionDataInformationTest::testReadData1()
 {
     LoggerWithContext lwc(0, QString());
 
-    PrimitiveDataInformation* b8 = PrimitiveFactory::newInstance(QLatin1String("8"), Type_Bool8, lwc);
-    PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QLatin1String("32"), Type_UInt32, lwc);
-    PrimitiveDataInformation* i16 = PrimitiveFactory::newInstance(QLatin1String("16"), Type_Int16, lwc);
-    UnsignedBitfieldDataInformation* u54 = new UnsignedBitfieldDataInformation(QLatin1String("54"),
+    PrimitiveDataInformation* b8 = PrimitiveFactory::newInstance(QStringLiteral("8"), Type_Bool8, lwc);
+    PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QStringLiteral("32"), Type_UInt32, lwc);
+    PrimitiveDataInformation* i16 = PrimitiveFactory::newInstance(QStringLiteral("16"), Type_Int16, lwc);
+    UnsignedBitfieldDataInformation* u54 = new UnsignedBitfieldDataInformation(QStringLiteral("54"),
             54);
     QVector<DataInformation*> children;
     children << b8 << u32 << i16 << u54;
-    UnionDataInformation* un = new UnionDataInformation(QLatin1String("un"), children);
+    UnionDataInformation* un = new UnionDataInformation(QStringLiteral("un"), children);
     un->setByteOrder(DataInformation::EndianessLittle);
     TopLevelDataInformation top(un);
     //read from bit 0

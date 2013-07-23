@@ -102,7 +102,7 @@ static const char LoadedUrlsKey[] = "LoadedUrls";
 OktetaMainWindow::OktetaMainWindow( OktetaProgram *program )
  : MobileShellWindow( program->documentManager()/*, program->viewManager()*/ ), mProgram( program )
 {
-    setObjectName( QLatin1String("Shell") );
+    setObjectName( QStringLiteral("Shell") );
 
 //     setStatusBar( new Kasten2::StatusBar(this) );
 

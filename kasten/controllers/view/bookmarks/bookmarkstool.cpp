@@ -48,7 +48,7 @@ namespace Kasten2
 BookmarksTool::BookmarksTool()
  : mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 ), mCanCreateBookmark( false )
 {
-    setObjectName( QLatin1String( "Bookmarks" ) );
+    setObjectName( QStringLiteral( "Bookmarks" ) );
 }
 
 

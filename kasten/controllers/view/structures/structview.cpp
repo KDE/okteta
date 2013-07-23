@@ -68,7 +68,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mStructTreeModel = new StructTreeModel(mTool, this);
     //  mModeltest = new ModelTest(mStructTreeModel, this);
     mStructTreeView = new QTreeView(this);
-    mStructTreeView->setObjectName( QLatin1String("StructTree" ));
+    mStructTreeView->setObjectName( QStringLiteral("StructTree" ));
     mStructTreeView->setRootIsDecorated(true);
     mStructTreeView->setAlternatingRowColors(true);
     mStructTreeView->setItemsExpandable(true);
@@ -146,23 +146,23 @@ void StructView::openSettingsDlg(int page)
     //An instance of your dialog could be already created and could be cached,
     //in which case you want to display the cached dialog instead of creating
     //another one
-    if (KConfigDialog::showDialog(QLatin1String("Structures Tool Settings")))
+    if (KConfigDialog::showDialog(QStringLiteral("Structures Tool Settings")))
         return;
 
     //KConfigDialog didn't find an instance of this dialog, so lets create it :
-    KConfigDialog* dialog = new KConfigDialog(this, QLatin1String("Structures Tool Settings"),
+    KConfigDialog* dialog = new KConfigDialog(this, QStringLiteral("Structures Tool Settings"),
             StructViewPreferences::self());
     StructViewDisplaySettingsWidget* displaySettings = new StructViewDisplaySettingsWidget();
     QWidget* structSelectionWrapper = new QWidget();
     StructuresManagerView* structureSettings = new StructuresManagerView(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
-            QLatin1String("configure"));
+            QStringLiteral("configure"));
     QHBoxLayout* hbox = new QHBoxLayout();
     structSelectionWrapper->setLayout(hbox);
     hbox->addWidget(structureSettings);
-    Q_ASSERT(structureSettings->objectName() == QLatin1String("kcfg_LoadedStructures"));
+    Q_ASSERT(structureSettings->objectName() == QStringLiteral("kcfg_LoadedStructures"));
     KPageWidgetItem* management = dialog->addPage(structSelectionWrapper, i18n("Structures management"),
-                                                  QLatin1String("preferences-plugin"));
+                                                  QStringLiteral("preferences-plugin"));
 
     //User edited the configuration - update your local copies of the configuration data
     connect(dialog, SIGNAL(settingsChanged(QString)), mTool, SLOT(setSelectedStructuresInView()));

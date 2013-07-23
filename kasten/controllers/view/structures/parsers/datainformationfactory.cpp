@@ -51,11 +51,11 @@ AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const Bitfi
         pd.info() << "No bitfield type specified, defaulting to unsigned.";
         bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
     }
-    else if (type == QLatin1String("bool"))
+    else if (type == QStringLiteral("bool"))
         bitf = new BoolBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
-    else if (type == QLatin1String("unsigned"))
+    else if (type == QStringLiteral("unsigned"))
         bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
-    else if (type == QLatin1String("signed"))
+    else if (type == QStringLiteral("signed"))
         bitf = new SignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
     else
     {
@@ -87,7 +87,7 @@ namespace
 template<class T>
 T* newEnumOrFlags(const EnumParsedData& pd)
 {
-    LoggerWithContext lwc(pd.logger, pd.context() + QLatin1String(" (type)"));
+    LoggerWithContext lwc(pd.logger, pd.context() + QStringLiteral(" (type)"));
     const PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
     if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
     {
@@ -159,8 +159,8 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
         QString childName = child->name();
         if (childName == elemName)
         {
-            QString function = QLatin1String("function() { return this.parent.") + currentString
-                    + elemName + QLatin1String(".value; }");
+            QString function = QStringLiteral("function() { return this.parent.") + currentString
+                    + elemName + QStringLiteral(".value; }");
             info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
                     << ", resulting function is: " << function;
             return function;
@@ -185,7 +185,7 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
         return QString(); //we moved one level down previously, don't move up again
     else
         return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
-                currentString + QLatin1String("parent."), info);
+                currentString + QStringLiteral("parent."), info);
 }
 
 }

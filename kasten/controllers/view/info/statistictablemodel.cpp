@@ -133,7 +133,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
             }
             case CountId:
                 result =  ( mSize == -1 ) ?
-                    QVariant( QLatin1String("-") ) :
+                    QVariant( QStringLiteral("-") ) :
                     QVariant( mByteCount[byte] );
                 break;
             case PercentId:
@@ -141,7 +141,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
                           // TODO: before we printed only a string (which killed sorting) with QString::number( x, 'f', 6 )
                           // Qt now cuts trailing 0s, results in unaligned numbers, not so beautiful.
                           QVariant( 100.0*(double)mByteCount[byte]/mSize ) :
-                          QVariant( QLatin1String("-") );
+                          QVariant( QStringLiteral("-") );
                 break;
             default:
                 ;

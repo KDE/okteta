@@ -105,7 +105,7 @@ void HeaderFooterFrameRenderer::prepare()
 
     // create text with globally replaced tags
     const int sizeOfTag = 2;
-    QRegExp tagsPattern( QLatin1String("%([dDhyYuUfFP])") );
+    QRegExp tagsPattern( QStringLiteral("%([dDhyYuUfFP])") );
 
     mGloballyReplacedTextList.clear();
 
@@ -146,7 +146,7 @@ void HeaderFooterFrameRenderer::renderFrame( QPainter *painter, int frameIndex )
     {
         QString text = mGloballyReplacedTextList[i];
         // substitute locally
-        const QString pageNumberTag = QLatin1String( "%p" );
+        const QString pageNumberTag = QStringLiteral( "%p" );
         if( text.indexOf(pageNumberTag) != -1 )
             text.replace( pageNumberTag, QString::number(frameIndex+1) ); //TODO: frameIndex != pageNumber in general
         int align = verticalAlign | horizontalAlign[i];

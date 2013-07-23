@@ -46,7 +46,7 @@ namespace Kasten2
 FilterTool::FilterTool()
  : mByteArrayView( 0 ), mByteArrayModel( 0 ), mHasWritable( false )
 {
-    setObjectName( QLatin1String( "BinaryFilter" ) );
+    setObjectName( QStringLiteral( "BinaryFilter" ) );
 
     mFilterList = ByteArrayFilterFactory::createFilters();
 }

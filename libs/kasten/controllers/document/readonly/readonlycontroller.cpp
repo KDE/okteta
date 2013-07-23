@@ -40,7 +40,7 @@ ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSetReadOnlyAction = actionCollection->add<KToggleAction>( QLatin1String("isreadonly") );
+    mSetReadOnlyAction = actionCollection->add<KToggleAction>( QStringLiteral("isreadonly") );
     const QString text = i18nc( "@option:check set the document to read-only", "Set Read-only" );
     mSetReadOnlyAction->setText( text );
     mSetReadOnlyAction->setIcon( QIcon::fromTheme( QStringLiteral("object-unlocked") ) );

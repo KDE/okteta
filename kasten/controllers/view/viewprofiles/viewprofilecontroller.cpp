@@ -52,7 +52,7 @@ ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewP
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mViewProfileActionMenu = actionCollection->add<KActionMenu>( QLatin1String("view_profile") );
+    mViewProfileActionMenu = actionCollection->add<KActionMenu>( QStringLiteral("view_profile") );
     mViewProfileActionMenu->setDelayed( false );
     mViewProfileActionMenu->setText( i18nc("@title:menu submenu to select the view profile or change it",
                                         "View Profile") );

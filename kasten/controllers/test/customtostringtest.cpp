@@ -39,8 +39,8 @@ private Q_SLOTS:
 void CustomToStringTest::initTestCase()
 {
     //needed so that imports can be resolved
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QLatin1String(SRCDIR "/test/resources")));
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QLatin1String(SRCDIR "/view/structures/examples")));
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", QStringLiteral(SRCDIR "/test/resources")));
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", QStringLiteral(SRCDIR "/view/structures/examples")));
 }
 
 static uchar uuid1[16] =
@@ -119,7 +119,7 @@ void CustomToStringTest::testUuid()
     QCOMPARE(structure->childAt(1)->asPrimitive()->value().value<quint16>(), val2);
     QCOMPARE(structure->childAt(2)->asPrimitive()->value().value<quint16>(), val3);
 
-    QString typeStr = isGUID ? QLatin1String("GUID") : QLatin1String("UUID");
+    QString typeStr = isGUID ? QStringLiteral("GUID") : QStringLiteral("UUID");
     QCOMPARE(structure->typeName(), typeStr);
     QCOMPARE(structure->valueString(), uuidString);
 }

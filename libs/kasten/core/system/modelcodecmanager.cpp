@@ -130,7 +130,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
 
         const KGuiItem exportGuiItem( i18nc("@action:button",
                                             "&Export"),
-                                      QLatin1String("document-export"),
+                                      QStringLiteral("document-export"),
                                       i18nc("@info:tooltip",
                                             "Export the data into the file with the entered name.") );
         KGuiItem::assign(exportFileDialog.okButton(),  exportGuiItem );

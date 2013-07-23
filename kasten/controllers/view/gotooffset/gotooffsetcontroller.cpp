@@ -43,7 +43,7 @@ GotoOffsetController::GotoOffsetController( If::ToolInlineViewable* toolInlineVi
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mGotoOffsetAction = actionCollection->addAction( QLatin1String("goto_offset"),
+    mGotoOffsetAction = actionCollection->addAction( QStringLiteral("goto_offset"),
                                                      this, SLOT(gotoOffset()) );
     mGotoOffsetAction->setText( i18nc("@action:inmenu","&Go to Offset...") );
     mGotoOffsetAction->setIcon( QIcon::fromTheme( QStringLiteral("go-jump") ) );

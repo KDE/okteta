@@ -37,7 +37,7 @@ OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart* part )
   : KParts::BrowserExtension( part ),
     mPart( part )
 {
-    setObjectName( QLatin1String( "oktetapartbrowserextension" ) );
+    setObjectName( QStringLiteral( "oktetapartbrowserextension" ) );
 
     connect( mPart, SIGNAL(hasSelectedDataChanged(bool)),
              SLOT(onSelectionChanged(bool)) );

@@ -42,7 +42,7 @@ SelectRangeTool::SelectRangeTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "SelectRange" ) );
+    setObjectName( QStringLiteral( "SelectRange" ) );
 }
 
 int SelectRangeTool::currentSelectionStart() const

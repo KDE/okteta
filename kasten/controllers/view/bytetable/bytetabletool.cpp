@@ -43,7 +43,7 @@ ByteTableTool::ByteTableTool()
  : mByteTableModel( new ByteTableModel(this) ),
    mByteArrayView( 0 ), mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "ByteTable" ) );
+    setObjectName( QStringLiteral( "ByteTable" ) );
 }
 
 QString ByteTableTool::title() const { return i18nc("@title:window", "Value/Char Table"); }

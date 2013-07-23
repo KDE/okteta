@@ -71,7 +71,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
 
     const KGuiItem updateGuiItem =
         KGuiItem( i18nc("@action:button extract the strings from the byte array","&Extract"),
-                  QLatin1String("document-export"),
+                  QStringLiteral("document-export"),
                   i18nc("@info:tooltip",
                         "Finds the strings contained in the selected range and lists them in the view below."),
                   i18nc("@info:whatsthis",
@@ -117,7 +117,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
              SLOT(setFixedFontByGlobalSettings()) );
     setFixedFontByGlobalSettings(); //do this before setting model
-    mContainedStringTableView->setObjectName( QLatin1String( "ContainedStringTable" ) );
+    mContainedStringTableView->setObjectName( QStringLiteral( "ContainedStringTable" ) );
     mContainedStringTableView->setRootIsDecorated( false );
     mContainedStringTableView->setItemsExpandable( false );
     mContainedStringTableView->setUniformRowHeights( true );
@@ -143,7 +143,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
 
     const KGuiItem copyGuiItem =
         KGuiItem( i18n("C&opy"),
-                  QLatin1String("edit-copy"),
+                  QStringLiteral("edit-copy"),
                   i18nc("@info:tooltip",
                         "Copies the selected strings to the clipboard."),
                   i18nc("@info:whatsthis",
@@ -157,7 +157,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
 
     const KGuiItem gotoGuiItem =
         KGuiItem( i18n("&Show"),
-                  QLatin1String("go-jump"),
+                  QStringLiteral("go-jump"),
                   i18nc("@info:tooltip",
                         "Shows the selected string in the view."),
                   i18nc("@info:whatsthis",

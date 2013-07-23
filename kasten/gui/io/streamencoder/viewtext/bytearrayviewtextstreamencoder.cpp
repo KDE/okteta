@@ -52,7 +52,7 @@ ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
   codecName(),
   undefinedChar( QLatin1Char('?') ),
   substituteChar( QLatin1Char('.') ),
-  separation( QLatin1String(" ") )
+  separation( QStringLiteral(" ") )
 {}
 
 ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()

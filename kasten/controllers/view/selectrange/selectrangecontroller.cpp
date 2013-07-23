@@ -44,7 +44,7 @@ SelectRangeController::SelectRangeController( If::ToolInlineViewable* toolInline
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSelectAction = actionCollection->addAction( QLatin1String("edit_select"),
+    mSelectAction = actionCollection->addAction( QStringLiteral("edit_select"),
                                                  this, SLOT(select()) );
     mSelectAction->setText( i18nc("@action:inmenu","&Select range...") );
     mSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("select-rectangular") ) );

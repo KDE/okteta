@@ -51,8 +51,8 @@ static const int FileNameRole = Qt::UserRole;
 StructuresManagerView::StructuresManagerView(Kasten2::StructTool* tool, QWidget* parent)
     : QWidget(parent), mTool(tool), mStructuresSelector(0), mRebuildingPluginsList(false)
 {
-    KConfigDialogManager::changedMap()->insert(QLatin1String("StructuresManagerView"), SIGNAL(changed(QStringList)));
-    setObjectName(QLatin1String("kcfg_LoadedStructures"));
+    KConfigDialogManager::changedMap()->insert(QStringLiteral("StructuresManagerView"), SIGNAL(changed(QStringList)));
+    setObjectName(QStringLiteral("kcfg_LoadedStructures"));
     mSelectedStructures = Kasten2::StructViewPreferences::loadedStructures();
 
     QVBoxLayout* pageLayout = new QVBoxLayout();
@@ -65,7 +65,7 @@ StructuresManagerView::StructuresManagerView(Kasten2::StructTool* tool, QWidget*
     pageLayout->addLayout(buttonsLayout);
 
     mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
-                                               QLatin1String("okteta-structures.knsrc"), this);
+                                               QStringLiteral("okteta-structures.knsrc"), this);
     connect(mGetNewStructuresButton, SIGNAL(dialogFinished(KNS3::Entry::List)),
             SLOT(onGetNewStructuresClicked(KNS3::Entry::List)));
     buttonsLayout->addWidget(mGetNewStructuresButton);
@@ -138,7 +138,7 @@ void StructuresManagerView::reloadSelectedItems() {
     {
         KPluginInfo info = def->pluginInfo();
         if (info.isPluginEnabled())
-            newVals.append(QString(QLatin1String("\'%1\':\'*\'")).arg(info.pluginName()));
+            newVals.append(QString(QStringLiteral("\'%1\':\'*\'")).arg(info.pluginName()));
     }
     if (newVals != mSelectedStructures) {
         kDebug() << "selection changed from " << mSelectedStructures << "to" << newVals;
@@ -159,9 +159,9 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     foreach(const Kasten2::StructureDefinitionFile* def, mTool->manager()->structureDefs())
         {
             KPluginInfo info = def->pluginInfo();
-            if (info.category() == QLatin1String("structure"))
+            if (info.category() == QStringLiteral("structure"))
                 plugins.append(info);
-            else if (info.category() == QLatin1String("structure/js"))
+            else if (info.category() == QStringLiteral("structure/js"))
                 dynamicPlugins.append(info);
         }
 
@@ -179,9 +179,9 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     layoutObj->insertWidget(0, mStructuresSelector);
 
     mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
-            "Structure Definitions"), QLatin1String("structure"), mTool->manager()->config());
+            "Structure Definitions"), QStringLiteral("structure"), mTool->manager()->config());
     mStructuresSelector->addPlugins(dynamicPlugins, KPluginSelector::ReadConfigFile,
-            i18n("Dynamic Structure Definitions"), QLatin1String("structure/js"),
+            i18n("Dynamic Structure Definitions"), QStringLiteral("structure/js"),
             mTool->manager()->config());
     mStructuresSelector->load();
     mStructuresSelector->updatePluginsState();

@@ -21,7 +21,7 @@
 #include <QtCore/QFile>
 #include <QtTest/QtTest>
 
-
+//TODO QStringLiteral
 static const char basePath[] = "/.kde-unit-test/";
 
 
@@ -61,7 +61,7 @@ void TestFileSystem::_removeDir( const QString& path )
     }
     QCOMPARE( (int)localDir.entryList(QDir::Files).count(), 0 );
     QString subDirectory = path;
-    subDirectory.remove( QRegExp(QLatin1String("^.*/")) );
+    subDirectory.remove( QRegExp(QStringLiteral("^.*/")) );
     localDir.cdUp();
     localDir.rmpath( subDirectory );
 }
@@ -75,9 +75,9 @@ TestFileSystem::~TestFileSystem()
 {
     _removeDir( mBasePath );
 
-//     removeDir(QLatin1String("kdatetimetest/Africa"));
-//     removeDir( QLatin1String("share/config"));
-//     removeDir( QLatin1String("share") );
+//     removeDir(QStringLiteral("kdatetimetest/Africa"));
+//     removeDir( QStringLiteral("share/config"));
+//     removeDir( QStringLiteral("share") );
 //     QDir().rmpath(QDir::homePath() + "/.kde-unit-test/share");
 }
 

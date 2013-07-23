@@ -57,7 +57,7 @@ void AddressValidator::setCodec( Coding codecId )
 }
 
 const QRegExp AddressValidator::expressionRegex =
-    QRegExp(QLatin1String("[0-9a-fx\\+/\\s\\-\\*]+"),
+    QRegExp(QStringLiteral("[0-9a-fx\\+/\\s\\-\\*]+"),
         Qt::CaseInsensitive, QRegExp::RegExp2); //FIXME this is way too simple, only there to test
 
 QValidator::State AddressValidator::validate( QString& string, int& pos ) const
@@ -71,8 +71,8 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
         if( ! expressionRegex.exactMatch(string) )
             result = QValidator::Invalid;
         //only prefix has been typed:
-        if( string == QLatin1String("+")
-            || string == QLatin1String("-")
+        if( string == QStringLiteral("+")
+            || string == QStringLiteral("-")
             || string.endsWith(QLatin1Char('x')) ) // 0x at end
             result = QValidator::Intermediate;
     }

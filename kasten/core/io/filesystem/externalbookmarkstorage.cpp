@@ -43,7 +43,7 @@ ExternalBookmarkStorage::ExternalBookmarkStorage()
 {
     const QString bookmarksFileName =
         QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/okteta/bookmarks.xml");
-    mBookmarkManager = KBookmarkManager::managerForFile( bookmarksFileName, QLatin1String("okteta") );
+    mBookmarkManager = KBookmarkManager::managerForFile( bookmarksFileName, QStringLiteral("okteta") );
 }
 
  

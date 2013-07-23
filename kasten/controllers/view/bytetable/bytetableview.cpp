@@ -60,7 +60,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     connect( KGlobalSettings::self(), SIGNAL(kdisplayStyleChanged()),
              SLOT(resizeColumnsWidth()) );
     setFixedFontByGlobalSettings(); //do this before setting model
-    mByteTableView->setObjectName( QLatin1String( "ByteTable" ) );
+    mByteTableView->setObjectName( QStringLiteral( "ByteTable" ) );
     mByteTableView->setRootIsDecorated( false );
     mByteTableView->setItemsExpandable( false );
     mByteTableView->setUniformRowHeights( true );

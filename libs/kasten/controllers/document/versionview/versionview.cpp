@@ -45,7 +45,7 @@ VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
     baseLayout->setMargin( 0 );
 
     mVersionTableView = new QTreeView( this );
-    mVersionTableView->setObjectName( QLatin1String( "VersionsTable" ) );
+    mVersionTableView->setObjectName( QStringLiteral( "VersionsTable" ) );
     mVersionTableView->setRootIsDecorated( false );
     mVersionTableView->setItemsExpandable( false );
     mVersionTableView->setUniformRowHeights( true );

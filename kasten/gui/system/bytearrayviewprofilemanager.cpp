@@ -41,10 +41,10 @@
 namespace Kasten2
 {
 static const QStringList viewProfileFileNameFilter =
-    QStringList() << QLatin1String( "*.obavp" ) << QLatin1String( "*.olock" );
-static const QString viewProfileFileSuffix = QLatin1String( ".obavp" );
-static const QString viewProfileDirSubPath = QLatin1String( "okteta/viewprofiles" );
-static const QString defaultViewProfileFileSubPath = QLatin1String( "okteta/defaultviewprofile" );
+    QStringList() << QStringLiteral( "*.obavp" ) << QStringLiteral( "*.olock" );
+static const QString viewProfileFileSuffix = QStringLiteral( ".obavp" );
+static const QString viewProfileDirSubPath = QStringLiteral( "okteta/viewprofiles" );
+static const QString defaultViewProfileFileSubPath = QStringLiteral( "okteta/defaultviewprofile" );
 static const int DefaultNoOfBytesPerLine = 16;
 static const int DefaultNoOfBytesPerGroup = 4;
 static const int DefaultLayoutStyle = 0;
@@ -339,7 +339,7 @@ kDebug() << "Loading" << QFileInfo(absoluteFilePath).baseName() << absoluteFileP
     // check version
     KConfigGroup formatConfigGroup = configFile.group( "OBAVP" );
     const QString formatVersion = formatConfigGroup.readEntry( "Version" );
-    if( ! formatVersion.startsWith(QLatin1String( "1." )) )
+    if( ! formatVersion.startsWith(QStringLiteral( "1." )) )
     {
 kDebug() << "ViewProfile file has an unsupported version:" << formatVersion;
         return result;
@@ -473,7 +473,7 @@ kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
     foreach( const QFileInfo& viewProfileFileInfo, viewProfileFileInfoList )
     {
        // a lock file ?
-       if( viewProfileFileInfo.suffix() == QLatin1String("olock") )
+       if( viewProfileFileInfo.suffix() == QStringLiteral("olock") )
        {
            const ByteArrayViewProfile::Id lockedViewProfileId = viewProfileFileInfo.baseName();
            // if not in old locks, is a new lock
@@ -483,7 +483,7 @@ kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
        }
 
        // not a viewprofile file ?
-       if( viewProfileFileInfo.suffix() != QLatin1String("obavp") )
+       if( viewProfileFileInfo.suffix() != QStringLiteral("obavp") )
             continue;
 
        // all other files assumed to be viewProfile files

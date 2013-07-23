@@ -26,7 +26,7 @@
 class QScriptEngine;
 class QScriptContext;
 class QScriptValue;
-class QLatin1String;
+class QStringLiteral;
 
 /** This class adds all functions to the scriptengine that are needed for the scripts.
  *

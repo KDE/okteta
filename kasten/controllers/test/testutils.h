@@ -43,7 +43,7 @@ namespace Utils
 template<typename T>
 T binary(const char* val)
 {
-    QString value = QLatin1String(val);
+    QString value = QString::fromUtf8(val);
     value = value.remove(QLatin1Char(' '));
     QTEST_ASSERT(unsigned(value.length()) <= sizeof(T) * 8); //otherwise we overflow
     bool ok = false;
@@ -57,12 +57,12 @@ DataInformation* evalAndParse(QScriptEngine* eng, const QString& code, ScriptLog
     QScriptValue result = eng->evaluate(code);
     if (result.isError())
         qWarning() << "error parsing" << code << ":" << result.toString();
-    return ScriptValueConverter::convert(result, QLatin1String("result"), logger);
+    return ScriptValueConverter::convert(result, QStringLiteral("result"), logger);
 }
 
 DataInformation* evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger* logger)
 {
-    return evalAndParse(eng, QLatin1String(code), logger);
+    return evalAndParse(eng, QString::fromUtf8(code), logger);
 }
 
 TopLevelDataInformation* evalAndParse(const QString& code)
@@ -77,7 +77,7 @@ TopLevelDataInformation* evalAndParse(const QString& code)
 
 TopLevelDataInformation* evalAndParse(const char* code)
 {
-    return evalAndParse(QLatin1String(code));
+    return evalAndParse(QString::fromUtf8(code));
 }
 
 /** The same as engine->evaluate, but if there is an exception return that instead */
@@ -94,13 +94,13 @@ QScriptValue evaluate(QScriptEngine* engine, const QString& code)
 
 QScriptValue evaluate(QScriptEngine* engine, const char* code)
 {
-    return evaluate(engine, QLatin1String(code));
+    return evaluate(engine, QString::fromUtf8(code));
 }
 
 /** The same as value.property(), but if there is an exception return that instead*/
 QScriptValue property(const QScriptValue& value, const char* property)
 {
-    QScriptValue ret = value.property(QLatin1String(property));
+    QScriptValue ret = value.property(QString::fromUtf8(property));
     if (value.engine()->hasUncaughtException())
     {
         ret = value.engine()->uncaughtException();

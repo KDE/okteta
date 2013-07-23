@@ -39,7 +39,7 @@ StructuresManager::~StructuresManager()
 
 StructuresManager::StructuresManager()
 {
-    mConfig = KSharedConfig::openConfig(QLatin1String("oktetastructuresrc"),
+    mConfig = KSharedConfig::openConfig(QStringLiteral("oktetastructuresrc"),
             KSharedConfig::FullConfig, QStandardPaths::ConfigLocation);
     reloadPaths();
 }
@@ -50,7 +50,7 @@ void StructuresManager::reloadPaths()
     mDefs.clear();
     mLoadedFiles.clear();
     QStringList paths = KGlobal::dirs()->findAllResources("data",
-            QLatin1String("okteta/structures/*/*.desktop"), KStandardDirs::Recursive
+            QStringLiteral("okteta/structures/*/*.desktop"), KStandardDirs::Recursive
                     | KStandardDirs::NoDuplicates);
     kDebug() << "found structures: " << paths;
     KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));

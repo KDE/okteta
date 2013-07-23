@@ -41,15 +41,15 @@ StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info)
     const QString absoluteDir = tmp.absolutePath();
 
     QString category = info.category();
-    if (category == QLatin1String("structure/js")) {
-        const QString filename = absoluteDir + QLatin1String("/main.js");
+    if (category == QStringLiteral("structure/js")) {
+        const QString filename = absoluteDir + QStringLiteral("/main.js");
         mParser.reset(new ScriptFileParser(mPluginInfo.pluginName(), filename));
     }
-    else if (category == QLatin1String("structure")) {
+    else if (category == QStringLiteral("structure")) {
         //by default use main.osd, only if it doesn't exist fall back to old behaviour
-        QString filename = absoluteDir + QLatin1String("/main.osd");
+        QString filename = absoluteDir + QStringLiteral("/main.osd");
         if (!QFile::exists(filename))
-            filename = absoluteDir + QLatin1Char('/') + mPluginInfo.pluginName() + QLatin1String(".osd");
+            filename = absoluteDir + QLatin1Char('/') + mPluginInfo.pluginName() + QStringLiteral(".osd");
         mParser.reset(new OsdParser(mPluginInfo.pluginName(), filename));
     }
     else

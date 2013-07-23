@@ -46,7 +46,7 @@ SearchTool::SearchTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "Search" ) );
+    setObjectName( QStringLiteral( "Search" ) );
 }
 
 bool SearchTool::isApplyable() const

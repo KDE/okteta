@@ -42,7 +42,7 @@ FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncM
     mDocumentSyncManager( documentSyncManager ),
     mDocument( 0 )
 {
-    setObjectName( QLatin1String( "FileSystemBrowser" ) );
+    setObjectName( QStringLiteral( "FileSystemBrowser" ) );
 }
 
 

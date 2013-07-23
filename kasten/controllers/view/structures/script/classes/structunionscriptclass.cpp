@@ -37,11 +37,11 @@ StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHand
     s_children = engine->toStringHandle(ParserStrings::PROPERTY_CHILDREN); //write-only
 
     mStructUnionPrototype = engine->newObject();
-    mStructUnionPrototype.setProperty(QLatin1String("toString"),
+    mStructUnionPrototype.setProperty(QStringLiteral("toString"),
                                       engine->newFunction(StructUnion_proto_toString));
-    mStructUnionPrototype.setProperty(QLatin1String("setChildren"),
+    mStructUnionPrototype.setProperty(QStringLiteral("setChildren"),
                                       engine->newFunction(StructUnion_proto_setChildren));
-    mStructUnionPrototype.setProperty(QLatin1String("child"),
+    mStructUnionPrototype.setProperty(QStringLiteral("child"),
                                       engine->newFunction(StructUnion_proto_child));
 }
 
@@ -139,7 +139,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
             dataW->logError() << "attempting to access out of bounds child: index was" << pos
                     << ", maximum is" << (data->childCount() - 1);
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
-                QString(QLatin1String("Attempting to access struct index %1, but length is %2")).arg(
+                QString(QStringLiteral("Attempting to access struct index %1, but length is %2")).arg(
                     QString::number(pos), QString::number(data->childCount())));
         }
         else
@@ -211,14 +211,14 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx
     if (ctx->argumentCount() < 1)
     {
         ctx->throwError(QScriptContext::RangeError,
-                        QLatin1String("(struct/union).child(name) needs at least one argument"));
+                        QStringLiteral("(struct/union).child(name) needs at least one argument"));
         return eng->undefinedValue();
     }
     QScriptValue arg = ctx->argument(0);
     if (!arg.isString())
     {
         ctx->throwError(QScriptContext::TypeError,
-                        QLatin1String("(struct/union).child(name) argument has to be a string"));
+                        QStringLiteral("(struct/union).child(name) argument has to be a string"));
         return QScriptValue::UndefinedValue;
     }
     DataInformation* data = toDataInformation(ctx->thisObject());
@@ -243,7 +243,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_setChildren(QScriptContex
     if (ctx->argumentCount() < 1)
     {
         return ctx->throwError(QScriptContext::RangeError,
-                               QLatin1String("(struct/union).child(children) needs one argument"));
+                               QStringLiteral("(struct/union).child(children) needs one argument"));
     }
     DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)

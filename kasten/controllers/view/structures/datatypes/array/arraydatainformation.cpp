@@ -69,7 +69,7 @@ bool ArrayDataInformation::setArrayLength(uint newLength)
 {
     if (newLength > MAX_LEN)
     {
-        logWarn() << QString(QLatin1String("new array length is too large (%1), limiting to (%2)"))
+        logWarn() << QString(QStringLiteral("new array length is too large (%1), limiting to (%2)"))
                 .arg(QString::number(newLength), QString::number(MAX_LEN));
         newLength = MAX_LEN;
     }

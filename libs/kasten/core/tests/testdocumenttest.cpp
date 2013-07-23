@@ -106,7 +106,7 @@ void TestDocumentTest::testSetTitle()
 
     QSignalSpy* titleChangedSpy = new QSignalSpy( document, SIGNAL(titleChanged(QString)) );
 
-    const QLatin1String title( "title" );
+    const QLatin1String title( "title" ); //TODO QStringLiteral
     document->setTitle( title );
 
     QCOMPARE( document->title(), title );

@@ -38,6 +38,7 @@ namespace Kasten2
 {
 
 static int newByteArrayDocumentCounter = 0;
+//TODO QStringLiteral
 static const char OctetStreamFormatName[] = "application/octet-stream";
 
 bool ByteArrayDocumentFactory::canCreateFromData( const QMimeData* mimeData )

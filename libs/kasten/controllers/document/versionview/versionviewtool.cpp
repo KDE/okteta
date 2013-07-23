@@ -35,7 +35,7 @@ namespace Kasten2
 VersionViewTool::VersionViewTool()
  : mModel( 0 )
 {
-    setObjectName( QLatin1String( "Versions" ) );
+    setObjectName( QStringLiteral( "Versions" ) );
 }
 
 

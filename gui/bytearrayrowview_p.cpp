@@ -69,7 +69,7 @@ void ByteArrayRowViewPrivate::init()
     adaptController();
 
     // do here, not in base class, as changeEvent(fontEvent) needs this init run before
-    QFont fixedFont( QLatin1String("fixed") );
+    QFont fixedFont( QStringLiteral("fixed") );
     fixedFont.setFixedPitch( true );
     q->setFont( fixedFont );
 }

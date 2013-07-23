@@ -39,7 +39,7 @@ namespace
 {
 inline QString arg(const QString& str, const char* argument)
 {
-    return str.arg(QLatin1String(argument));
+    return str.arg(QString::fromUtf8(argument));
 }
 }
 void OsdParserTest::testPrimitive_data()
@@ -48,7 +48,7 @@ void OsdParserTest::testPrimitive_data()
     QTest::addColumn<QString>("secondXml");
     QTest::addColumn<int>("expectedType");
     QString base(
-            QLatin1String(
+            QStringLiteral(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\"?><data><primitive name=\"foo\" type=\"%1\" /></data>"));
     QTest::newRow("uint8") << arg(base, "uint8") << arg(base, "UInt8") << (int) Type_UInt8;
     QTest::newRow("uint16") << arg(base, "uint16") << arg(base, "UInt16") << (int) Type_UInt16;
@@ -79,7 +79,7 @@ void OsdParserTest::testPrimitive()
     QCOMPARE(tds.size(), 1);
     const TopLevelDataInformation* td = tds.at(0);
     DataInformation* data = td->actualDataInformation();
-    QCOMPARE(data->name(), QLatin1String("foo"));
+    QCOMPARE(data->name(), QStringLiteral("foo"));
     PrimitiveDataInformation* prim = data->asPrimitive();
     QVERIFY(prim);
     QCOMPARE(prim->type(), type);
@@ -91,7 +91,7 @@ void OsdParserTest::testPrimitive()
     QCOMPARE(tds2.size(), 1);
     const TopLevelDataInformation* td2 = tds2.at(0);
     DataInformation* data2 = td2->actualDataInformation();
-    QCOMPARE(data2->name(), QString(QLatin1String("foo")));
+    QCOMPARE(data2->name(), QString(QStringLiteral("foo")));
     PrimitiveDataInformation* prim2 = data2->asPrimitive();
     QVERIFY(prim2);
     QCOMPARE(prim2->type(), type);
@@ -101,17 +101,17 @@ void OsdParserTest::testPrimitive()
 void OsdParserTest::testScriptFuntion()
 {
     QScriptEngine engine;
-    QScriptValue functionWrong1 = engine.evaluate(QLatin1String("function x() { return 2; }"));
+    QScriptValue functionWrong1 = engine.evaluate(QStringLiteral("function x() { return 2; }"));
     QVERIFY(functionWrong1.isUndefined());
-    QScriptValue functionWrong2 = engine.evaluate(QLatin1String("function() { return 2; }"));
+    QScriptValue functionWrong2 = engine.evaluate(QStringLiteral("function() { return 2; }"));
     QVERIFY(functionWrong2.isError());
-    QScriptValue function = engine.evaluate(QLatin1String("x = function() { return 2; }"));
+    QScriptValue function = engine.evaluate(QStringLiteral("x = function() { return 2; }"));
     QVERIFY(function.isFunction());
-    QCOMPARE(function.toString(), QString(QLatin1String("function () { return 2; }")));
+    QCOMPARE(function.toString(), QString(QStringLiteral("function () { return 2; }")));
     //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
-    QScriptValue betterFunction = engine.evaluate(QLatin1String("(function() { return 2; })"));
+    QScriptValue betterFunction = engine.evaluate(QStringLiteral("(function() { return 2; })"));
     QVERIFY(betterFunction.isFunction());
-    QCOMPARE(betterFunction.toString(), QString(QLatin1String("function () { return 2; }")));
+    QCOMPARE(betterFunction.toString(), QString(QStringLiteral("function () { return 2; }")));
 }
 
 QTEST_GUILESS_MAIN(OsdParserTest)

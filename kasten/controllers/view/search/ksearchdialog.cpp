@@ -38,7 +38,7 @@ KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )
 {
     setCaption( i18nc("@title:window","Find Bytes") );
     setButtonGuiItem( Ok, KGuiItem( i18nc("@action:button","&Find"),
-                      QLatin1String("edit-find"),
+                      QStringLiteral("edit-find"),
                       i18nc("@info:tooltip","Start searching"),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Find</interface> button, "

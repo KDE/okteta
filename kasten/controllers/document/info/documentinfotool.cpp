@@ -51,7 +51,7 @@ DocumentInfoTool::DocumentInfoTool( DocumentSyncManager* syncManager )
     mMimeTypeUpdateTimer( new QTimer(this) ),
     mMimeType( 0 )
 {
-    setObjectName( QLatin1String( "DocumentInfo" ) );
+    setObjectName( QStringLiteral( "DocumentInfo" ) );
 
     mMimeTypeUpdateTimer->setInterval( mimeTypeUpdateTimeInterval );
     mMimeTypeUpdateTimer->setSingleShot( true );

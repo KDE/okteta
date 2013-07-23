@@ -54,7 +54,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     // table
     mPODTableModel = new PODTableModel( mTool, this );
     mPODTableView = new QTreeView( this );
-    mPODTableView->setObjectName( QLatin1String( "PODTable" ) );
+    mPODTableView->setObjectName( QStringLiteral( "PODTable" ) );
     mPODTableView->setRootIsDecorated( false );
     mPODTableView->setAlternatingRowColors( true );
     mPODTableView->setItemsExpandable( false );
@@ -117,8 +117,8 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     QFontMetrics metrics( f );
     //ideally we should check the width of the longest translated string, but this should be wide enough for most
     //anyway this is just an initial setting and the width can be changed manually
-    header->resizeSection( 0, metrics.width( QLatin1String( "Hexadecimal 8-bit" ) ) + 30 );
-    header->resizeSection( 1, metrics.width( QLatin1String( "1.01234567890123456789e-111" ) ) + 15 );
+    header->resizeSection( 0, metrics.width( QStringLiteral( "Hexadecimal 8-bit" ) ) + 30 );
+    header->resizeSection( 1, metrics.width( QStringLiteral( "1.01234567890123456789e-111" ) ) + 15 );
 }
 
 Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )

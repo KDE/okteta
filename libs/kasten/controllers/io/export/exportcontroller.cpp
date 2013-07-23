@@ -56,7 +56,7 @@ ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mExportSelectAction = actionCollection->add<KSelectAction>( QLatin1String("export") );
+    mExportSelectAction = actionCollection->add<KSelectAction>( QStringLiteral("export") );
     mExportSelectAction->setText( i18nc("@title:menu","Export") );
     mExportSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("document-export") ) );
     mExportSelectAction->setToolBarMode( KSelectAction::MenuMode );

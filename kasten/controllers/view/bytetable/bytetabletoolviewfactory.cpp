@@ -34,9 +34,9 @@ namespace Kasten2
 
 ByteTableToolViewFactory::ByteTableToolViewFactory() {}
 
-QString ByteTableToolViewFactory::iconName() const { return QLatin1String("table"); }
+QString ByteTableToolViewFactory::iconName() const { return QStringLiteral("table"); }
 QString ByteTableToolViewFactory::title()    const { return i18nc("@title:window", "Value/Char Table"); }
-QString ByteTableToolViewFactory::id()       const { return QLatin1String("org.kde.okteta.ByteTableToolView"); }
+QString ByteTableToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.ByteTableToolView"); }
 SidePosition ByteTableToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* ByteTableToolViewFactory::create( AbstractTool* tool )

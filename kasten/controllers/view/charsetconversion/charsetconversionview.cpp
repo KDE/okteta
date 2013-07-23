@@ -162,7 +162,7 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
 
     const KGuiItem convertGuiItem =
         KGuiItem( i18n("Con&vert"),
-                  QLatin1String("run-build"),
+                  QStringLiteral("run-build"),
                   i18nc("@info:tooltip",
                         "Converts the bytes in the selected range."),
                   i18nc("@info:whatsthis",
@@ -216,7 +216,7 @@ void CharsetConversionView::onConversionDone( bool success, int convertedBytesCo
             foreach( int failedByteCount, failedPerByteCount )
                 totalFailedByteCount += failedByteCount;
             //TODO: show table with failed bytes and their number.
-            conversionReport += QLatin1String( "<br />" );
+            conversionReport += QStringLiteral( "<br />" );
             conversionReport += (totalFailedByteCount==0) ?
                 i18nc( "@info", "No bytes substituted.") :
                 i18ncp( "@info", "1 byte substituted.", "%1 bytes substituted.", totalFailedByteCount );

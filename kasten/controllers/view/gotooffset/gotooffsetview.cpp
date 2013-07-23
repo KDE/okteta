@@ -105,7 +105,7 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
     // Goto button
     const KGuiItem gotoGuiItem =
         KGuiItem( i18nc("@action:button","&Go"),
-                  QLatin1String("go-jump"),
+                  QStringLiteral("go-jump"),
                   i18nc("@info:tooltip",
                         "Go to the Offset"),
                   i18nc("@info:whatsthis",

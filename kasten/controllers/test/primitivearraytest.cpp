@@ -173,9 +173,9 @@ template<PrimitiveDataTypeEnum primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
     LoggerWithContext lwc(0, QString());
-    ArrayDataInformation* dataInf = new ArrayDataInformation(QLatin1String("values"),
+    ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
             model->size() / sizeof(T),
-            PrimitiveFactory::newInstance(QLatin1String("value"), primType, lwc));
+            PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
     QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, 0,
             ScriptEngineInitializer::newEngine()));

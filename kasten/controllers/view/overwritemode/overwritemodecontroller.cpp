@@ -39,7 +39,7 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSetOverWriteAction = actionCollection->add<KToggleAction>( QLatin1String("set_overwrite") );
+    mSetOverWriteAction = actionCollection->add<KToggleAction>( QStringLiteral("set_overwrite") );
     const QString text = i18nc( "@option:check set the view into overwrite mode", "Overwr&ite Mode" );
     mSetOverWriteAction->setText( text );
     mSetOverWriteAction->setWhatsThis(

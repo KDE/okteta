@@ -48,7 +48,7 @@ CharsetConversionTool::CharsetConversionTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String("CharsetConversion") );
+    setObjectName( QStringLiteral("CharsetConversion") );
 }
 
 bool CharsetConversionTool::isApplyable() const

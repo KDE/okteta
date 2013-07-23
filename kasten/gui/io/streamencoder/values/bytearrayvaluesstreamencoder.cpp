@@ -37,7 +37,7 @@ namespace Kasten2
 {
 
 ValuesStreamEncoderSettings::ValuesStreamEncoderSettings()
- : valueCoding( Okteta::HexadecimalCoding), separation( QLatin1String(" ") )
+ : valueCoding( Okteta::HexadecimalCoding), separation( QStringLiteral(" ") )
 {}
 
 ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()

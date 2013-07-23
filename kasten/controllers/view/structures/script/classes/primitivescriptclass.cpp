@@ -31,50 +31,50 @@
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
-    s_value = engine->toStringHandle(QLatin1String("value"));
+    s_value = engine->toStringHandle(QStringLiteral("value"));
     mIterableProperties.append(qMakePair(s_value, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_type = engine->toStringHandle(QLatin1String("type"));
+    s_type = engine->toStringHandle(QStringLiteral("type"));
     mIterableProperties.append(qMakePair(s_type, QScriptValue::ReadOnly | QScriptValue::Undeletable));
 
-    s_bool = engine->toStringHandle(QLatin1String("bool"));
+    s_bool = engine->toStringHandle(QStringLiteral("bool"));
     mIterableProperties.append(qMakePair(s_bool, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_char = engine->toStringHandle(QLatin1String("char"));
+    s_char = engine->toStringHandle(QStringLiteral("char"));
     mIterableProperties.append(qMakePair(s_char, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_double = engine->toStringHandle(QLatin1String("double"));
+    s_double = engine->toStringHandle(QStringLiteral("double"));
     mIterableProperties.append(qMakePair(s_double, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_float = engine->toStringHandle(QLatin1String("float"));
+    s_float = engine->toStringHandle(QStringLiteral("float"));
     mIterableProperties.append(qMakePair(s_float, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_int = engine->toStringHandle(QLatin1String("int"));
+    s_int = engine->toStringHandle(QStringLiteral("int"));
     mIterableProperties.append(qMakePair(s_int, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_int8 = engine->toStringHandle(QLatin1String("int8"));
+    s_int8 = engine->toStringHandle(QStringLiteral("int8"));
     mIterableProperties.append(qMakePair(s_int8, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_int16 = engine->toStringHandle(QLatin1String("int16"));
+    s_int16 = engine->toStringHandle(QStringLiteral("int16"));
     mIterableProperties.append(qMakePair(s_int16, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_int32 = engine->toStringHandle(QLatin1String("int32"));
+    s_int32 = engine->toStringHandle(QStringLiteral("int32"));
     mIterableProperties.append(qMakePair(s_int32, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_int64low32 = engine->toStringHandle(QLatin1String("int64low32"));
+    s_int64low32 = engine->toStringHandle(QStringLiteral("int64low32"));
     mIterableProperties.append(qMakePair(s_int64low32, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_int64high32 = engine->toStringHandle(QLatin1String("int64high32"));
+    s_int64high32 = engine->toStringHandle(QStringLiteral("int64high32"));
     mIterableProperties.append(qMakePair(s_int64high32, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_int64 = engine->toStringHandle(QLatin1String("int64"));
+    s_int64 = engine->toStringHandle(QStringLiteral("int64"));
     mIterableProperties.append(qMakePair(s_int64, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_uint = engine->toStringHandle(QLatin1String("uint"));
+    s_uint = engine->toStringHandle(QStringLiteral("uint"));
     mIterableProperties.append(qMakePair(s_uint, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_uint8 = engine->toStringHandle(QLatin1String("uint8"));
+    s_uint8 = engine->toStringHandle(QStringLiteral("uint8"));
     mIterableProperties.append(qMakePair(s_uint8, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_uint16 = engine->toStringHandle(QLatin1String("uint16"));
+    s_uint16 = engine->toStringHandle(QStringLiteral("uint16"));
     mIterableProperties.append(qMakePair(s_uint16, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_uint32 = engine->toStringHandle(QLatin1String("uint32"));
+    s_uint32 = engine->toStringHandle(QStringLiteral("uint32"));
     mIterableProperties.append(qMakePair(s_uint32, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_uint64low32 = engine->toStringHandle(QLatin1String("uint64low32"));
+    s_uint64low32 = engine->toStringHandle(QStringLiteral("uint64low32"));
     mIterableProperties.append(qMakePair(s_uint64low32, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_uint64high32 = engine->toStringHandle(QLatin1String("uint64high32"));
+    s_uint64high32 = engine->toStringHandle(QStringLiteral("uint64high32"));
     mIterableProperties.append(qMakePair(s_uint64high32, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_uint64 = engine->toStringHandle(QLatin1String("uint64"));
+    s_uint64 = engine->toStringHandle(QStringLiteral("uint64"));
     mIterableProperties.append(qMakePair(s_uint64, QScriptValue::ReadOnly | QScriptValue::Undeletable));
 
     mPrimitivePrototype = engine->newObject();
-    mPrimitivePrototype.setProperty(QLatin1String("toString"), engine->newFunction(Primitive_proto_toString));
+    mPrimitivePrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Primitive_proto_toString));
 }
 
 PrimitiveScriptClass::~PrimitiveScriptClass()

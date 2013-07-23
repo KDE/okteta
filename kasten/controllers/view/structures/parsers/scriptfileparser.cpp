@@ -111,7 +111,7 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
         return QScriptValue();
     }
     QScriptValue obj = engine->globalObject();
-    QScriptValue initMethod = obj.property(QLatin1String("init"));
+    QScriptValue initMethod = obj.property(QStringLiteral("init"));
     if (!initMethod.isFunction())
     {
         logger->error() << "Script has no 'init' function! Cannot evaluate script!";

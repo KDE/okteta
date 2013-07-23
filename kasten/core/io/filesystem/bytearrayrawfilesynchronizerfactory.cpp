@@ -26,7 +26,7 @@
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearraydocument.h"
 // Qt
-#include <QtCore/QLatin1String>
+#include <QtCore/QString>
 
 
 namespace Kasten2
@@ -36,8 +36,8 @@ ByteArrayRawFileSynchronizerFactory::ByteArrayRawFileSynchronizerFactory() {}
 
 // could be set to base class as value, is only one object per factory at runtime
 // and settable in desktop file
-QString ByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QLatin1String("ByteArrayDocument");}
-QString ByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QLatin1String("application/octet-stream");}
+QString ByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QStringLiteral("ByteArrayDocument");}
+QString ByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QStringLiteral("application/octet-stream");}
 
 
 AbstractModelSynchronizer* ByteArrayRawFileSynchronizerFactory::createSynchronizer() const

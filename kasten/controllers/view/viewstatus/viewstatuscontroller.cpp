@@ -217,7 +217,7 @@ void ViewStatusController::onCursorPositionChanged( Okteta::Address offset )
 
     mPrintFunction( codedOffset, mStartOffset + offset );
 
-    mOffsetLabel->setText( i18n("Offset: %1", QLatin1String(codedOffset)) );
+    mOffsetLabel->setText( i18n("Offset: %1", QString::fromUtf8(codedOffset)) );
 }
 
 // TODO: fix selection by cursor not sending updates
@@ -237,7 +237,7 @@ void ViewStatusController::onSelectedDataChanged( const Kasten2::AbstractModelSe
 
         const QString bytesCount = i18np( "1 byte", "%1 bytes", selection.width() );
         selectionString = i18nc( "@info:status selection: start offset - end offset (number of bytes)",
-                                 "Selection: %1 - %2 (%3)", QLatin1String(codedSelectionStart), QLatin1String(codedSelectionEnd), bytesCount );
+                                 "Selection: %1 - %2 (%3)", QString::fromUtf8(codedSelectionStart), QString::fromUtf8(codedSelectionEnd), bytesCount );
     }
     else
         selectionString = i18nc( "@info:status offset value not available", "Selection: -" );

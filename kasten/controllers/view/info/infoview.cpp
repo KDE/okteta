@@ -71,7 +71,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     const KGuiItem updateGuiItem =
         KGuiItem(i18nc("@action:button build the statistic of the byte frequency",
                        "&Build"),
-                 QLatin1String("run-build"),
+                 QStringLiteral("run-build"),
                  i18nc("@info:tooltip",
                        "Builds the byte frequency statistic for the bytes in the selected range."),
                  i18nc("@info:whatsthis",
@@ -93,7 +93,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     connect( KGlobalSettings::self(), SIGNAL(kdisplayStyleChanged()),
              SLOT(resizeColumnsWidth()) );
     setFixedFontByGlobalSettings(); //do this before setting model
-    mStatisticTableView->setObjectName( QLatin1String( "StatisticTable" ) );
+    mStatisticTableView->setObjectName( QStringLiteral( "StatisticTable" ) );
     mStatisticTableView->setRootIsDecorated( false );
     mStatisticTableView->setItemsExpandable( false );
     mStatisticTableView->setUniformRowHeights( true );

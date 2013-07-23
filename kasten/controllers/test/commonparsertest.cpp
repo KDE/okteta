@@ -146,32 +146,32 @@ void CommonParserTest::testIntFromScriptValue_data()
     QTest::newRow("float") << QScriptValue(1234.5) << false;
 
     QTest::newRow("-1234 number") << QScriptValue(-1234) << true << -1234;
-    QTest::newRow("-1234 string") << QScriptValue(QLatin1String("-1234")) << true << -1234;
+    QTest::newRow("-1234 string") << QScriptValue(QStringLiteral("-1234")) << true << -1234;
     QTest::newRow("1234 number") << QScriptValue(1234) << true << 1234;
-    QTest::newRow("1234 string") << QScriptValue(QLatin1String("1234")) << true << 1234;
+    QTest::newRow("1234 string") << QScriptValue(QStringLiteral("1234")) << true << 1234;
     QTest::newRow("0xff number") << QScriptValue(0xff) << true << 0xff;
-    QTest::newRow("0xff string") << QScriptValue(QLatin1String("0xff")) << true << 0xff;
+    QTest::newRow("0xff string") << QScriptValue(QStringLiteral("0xff")) << true << 0xff;
     QTest::newRow("-0xff number") << QScriptValue(-0xff) << true << -0xff;
-    QTest::newRow("-0xff string") << QScriptValue(QLatin1String("-0xff")) << true << -0xff;
+    QTest::newRow("-0xff string") << QScriptValue(QStringLiteral("-0xff")) << true << -0xff;
 
     int maxInt = 0x7fffffff;
     QTEST_ASSERT(maxInt == std::numeric_limits<int>::max());
     QTest::newRow("max int") << QScriptValue(maxInt) << true << maxInt;
     QTest::newRow("max double") << QScriptValue(double(maxInt)) << true << maxInt;
-    QTest::newRow("max string") << QScriptValue(QLatin1String("2147483647")) << true << maxInt;
-    QTest::newRow("max hex string") << QScriptValue(QLatin1String("0x7fffffff")) << true << maxInt;
+    QTest::newRow("max string") << QScriptValue(QStringLiteral("2147483647")) << true << maxInt;
+    QTest::newRow("max hex string") << QScriptValue(QStringLiteral("0x7fffffff")) << true << maxInt;
     //to int32 wraps around
     QTest::newRow("max+1") << QScriptValue(double(maxInt) + 1) << false;
-    QTest::newRow("max+1 string") << QScriptValue(QLatin1String("2147483648")) << false;
-    QTest::newRow("max+1 hex string") << QScriptValue(QLatin1String("0x80000000")) << false;
+    QTest::newRow("max+1 string") << QScriptValue(QStringLiteral("2147483648")) << false;
+    QTest::newRow("max+1 hex string") << QScriptValue(QStringLiteral("0x80000000")) << false;
     QTest::newRow("max+2") << QScriptValue(double(maxInt) + 2) << false;
 
     int minInt = -0x80000000;
     QTEST_ASSERT(minInt == std::numeric_limits<int>::min());
     QTest::newRow("min int") << QScriptValue(minInt) << true << minInt;
     QTest::newRow("min double") << QScriptValue(double(minInt)) << true << minInt;
-    QTest::newRow("min string") << QScriptValue(QLatin1String("-2147483648")) << true << minInt;
-    QTest::newRow("min hex string") << QScriptValue(QLatin1String("-0x80000000")) << true << minInt;
+    QTest::newRow("min string") << QScriptValue(QStringLiteral("-2147483648")) << true << minInt;
+    QTest::newRow("min hex string") << QScriptValue(QStringLiteral("-0x80000000")) << true << minInt;
     QTest::newRow("min-1") << QScriptValue(double(minInt) - 1) << false;
     QTest::newRow("large number") << QScriptValue(double(0x123456789a)) << false;
 
@@ -214,22 +214,22 @@ void CommonParserTest::testUIntFromScriptValue_data()
     QTest::newRow("float") << QScriptValue(1234.5) << false;
 
     QTest::newRow("1234 number") << QScriptValue(1234) << true << 1234u;
-    QTest::newRow("1234 string") << QScriptValue(QLatin1String("1234")) << true << 1234u;
+    QTest::newRow("1234 string") << QScriptValue(QStringLiteral("1234")) << true << 1234u;
     QTest::newRow("0xff number") << QScriptValue(0xff) << true << 0xffu;
-    QTest::newRow("0xff string") << QScriptValue(QLatin1String("0xff")) << true << 0xffu;
+    QTest::newRow("0xff string") << QScriptValue(QStringLiteral("0xff")) << true << 0xffu;
 
-    QTest::newRow("negative string") << QScriptValue(QLatin1String("-1")) << false;
+    QTest::newRow("negative string") << QScriptValue(QStringLiteral("-1")) << false;
     QTest::newRow("negative number") << QScriptValue(-1) << false;
 
     uint maxInt = 0xffffffff;
     QTEST_ASSERT(maxInt == std::numeric_limits<uint>::max());
     QTest::newRow("max") << QScriptValue(double(maxInt)) << true << maxInt;
     QTest::newRow("max int") << QScriptValue(maxInt) << true << maxInt;
-    QTest::newRow("max string") << QScriptValue(QLatin1String("4294967295")) << true << maxInt;
-    QTest::newRow("max hex string") << QScriptValue(QLatin1String("0xffffffff")) << true << maxInt;
+    QTest::newRow("max string") << QScriptValue(QStringLiteral("4294967295")) << true << maxInt;
+    QTest::newRow("max hex string") << QScriptValue(QStringLiteral("0xffffffff")) << true << maxInt;
     QTest::newRow("max+1") << QScriptValue(double(maxInt) + 1) << false;
-    QTest::newRow("max+1 string") << QScriptValue(QLatin1String("4294967296")) << false;
-    QTest::newRow("max+1 hex string") << QScriptValue(QLatin1String("0x100000000")) << false;
+    QTest::newRow("max+1 string") << QScriptValue(QStringLiteral("4294967296")) << false;
+    QTest::newRow("max+1 hex string") << QScriptValue(QStringLiteral("0x100000000")) << false;
     QTest::newRow("large number") << QScriptValue(double(0x123456789a)) << false;
 }
 

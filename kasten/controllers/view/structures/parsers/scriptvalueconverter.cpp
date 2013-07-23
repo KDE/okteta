@@ -51,7 +51,7 @@ QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger*
     while (it.hasNext())
     {
         it.next();
-        if (isArray && it.name() == QLatin1String("length"))
+        if (isArray && it.name() == QStringLiteral("length"))
             continue; //skip the length property of arrays
         const ParserInfo info(it.name(), logger, parent, value.engine());
         DataInformation* inf = toDataInformation(it.value(), info);

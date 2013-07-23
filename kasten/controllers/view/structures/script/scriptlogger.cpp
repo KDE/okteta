@@ -50,7 +50,7 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
         switch (index.column())
         {
         case ColumnTime:
-            return data.time.toString(QLatin1String("hh:mm:ss.zzz"));
+            return data.time.toString(QStringLiteral("hh:mm:ss.zzz"));
         case ColumnOrigin:
             return data.origin;
         case ColumnMessage:

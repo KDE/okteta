@@ -1,0 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=arrow-left
+Type=Service
+ServiceTypes=KPluginInfo
+
+Name=VHD test
+
+X-KDE-PluginInfo-Author=Alex Richardson
+X-KDE-PluginInfo-Email=alex.richardson@gmx.de
+X-KDE-PluginInfo-Name=bitfields
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://www.plugin.org/
+X-KDE-PluginInfo-Category=structure
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=false

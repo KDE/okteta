@@ -67,7 +67,7 @@ QString Utf16StringData::stringValue(int row) const
     uint val = mCodePoints.at(row);
     QString number = QString::number(val, 16).toUpper();
     if (number.length() == 1)
-        number = QLatin1String("0") + number;
+        number = QStringLiteral("0") + number;
     if (val > UNICODE_MAX)
         return i18n("Value too big: 0x%1", number);
     else if (val > BMP_MAX) {

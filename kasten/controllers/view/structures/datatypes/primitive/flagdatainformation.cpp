@@ -102,7 +102,7 @@ QString FlagDataInformation::valueStringImpl() const
     for (int i = 0, size = arr.size(); i < size; ++i)
     {
         if (i != 0)
-            result += QLatin1String(" | ");
+            result += QStringLiteral(" | ");
         result += arr.at(i).first;
         usedBits |= arr.at(i).second;
     }
@@ -113,7 +113,7 @@ QString FlagDataInformation::valueStringImpl() const
     if (usedBits != value)
     {
         quint64 missing = value & ~usedBits;
-        result += QLatin1String(" | 0x") + QString::number(missing, 16);
+        result += QStringLiteral(" | 0x") + QString::number(missing, 16);
     }
 
     return result;

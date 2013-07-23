@@ -72,14 +72,14 @@ void ScriptHandler::validateData(DataInformation* data)
         {
             mTopLevel->logger()->error(data) << "Error occurred while validating element: "
                     << result.toString();
-            data->setValidationError(QLatin1String("Error occurred in validation: ")
+            data->setValidationError(QStringLiteral("Error occurred in validation: ")
                     + result.toString());
         }
         else if (mEngine->hasUncaughtException())
         {
             mTopLevel->logger()->error(data) << "Error occurred while validating element:"
                     << result.toString() << "\nBacktrace:" << mEngine->uncaughtExceptionBacktrace();
-            data->setValidationError(QLatin1String("Error occurred in validation: ")
+            data->setValidationError(QStringLiteral("Error occurred in validation: ")
                     + result.toString());
             mEngine->clearExceptions();
         }

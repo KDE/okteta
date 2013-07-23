@@ -89,7 +89,7 @@ void FileSystemBrowserView::init()
     }
 
     mActionCollection = new KActionCollection( this );
-    QAction* syncDirAction = mActionCollection->addAction( QLatin1String("sync_dir"),
+    QAction* syncDirAction = mActionCollection->addAction( QStringLiteral("sync_dir"),
                                                            this, SLOT(syncCurrentDocumentDirectory()) );
     syncDirAction->setIcon( QIcon::fromTheme( QStringLiteral("go-parent-folder") ) );
     syncDirAction->setText( i18nc("@action:intoolbar", "Folder of Current Document") );

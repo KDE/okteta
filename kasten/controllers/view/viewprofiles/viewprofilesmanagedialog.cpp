@@ -56,7 +56,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
     // profile list
     mViewProfileTableView = new QTreeView( page );
     mViewProfileTableModel = new ViewProfileTableModel( mViewProfileManager, this );
-    mViewProfileTableView->setObjectName( QLatin1String("ViewProfileTableView") );
+    mViewProfileTableView->setObjectName( QStringLiteral("ViewProfileTableView") );
     mViewProfileTableView->setHeaderHidden( true );
     mViewProfileTableView->setRootIsDecorated( false );
     mViewProfileTableView->setItemsExpandable( false );
@@ -75,7 +75,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
         new KPushButton(
             KGuiItem(i18nc("@action:button",
                            "&Create new..."),
-                     QLatin1String("document-new"),
+                     QStringLiteral("document-new"),
                      i18nc("@info:tooltip",
                            "Opens an editor for a new view profile."),
                      i18nc("@info:whatsthis",
@@ -90,7 +90,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
         new KPushButton(
             KGuiItem(i18nc("@action:button",
                            "&Edit..."),
-                     QLatin1String("document-edit"),
+                     QStringLiteral("document-edit"),
                      i18nc("@info:tooltip",
                            "Opens an editor for the view profile."),
                      i18nc("@info:whatsthis",
@@ -117,7 +117,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
         new KPushButton(
             KGuiItem(i18nc("@action:button",
                            "&Delete"),
-                     QLatin1String("list-remove"),
+                     QStringLiteral("list-remove"),
                      i18nc("@info:tooltip",
                            "Deletes the selected view profile."),
                      i18nc("@info:whatsthis",

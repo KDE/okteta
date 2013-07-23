@@ -123,7 +123,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
   : ShellWindow( program->viewManager() ),
     mProgram( program )
 {
-    setObjectName( QLatin1String("Shell") );
+    setObjectName( QStringLiteral("Shell") );
 
     // there is only one mainwindow, so have this show the document if requested
     connect( mProgram->documentManager(), SIGNAL(focusRequested(Kasten2::AbstractDocument*)),
@@ -140,10 +140,10 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     //      Setting this state if none is present seems to work, but there's
     //      still the versioning problem to be accounted for.
     //      Hack borrowed from trunk/koffice/krita/ui/kis_view2.cpp:
-    const QString mainWindowState = QLatin1String(
+    const QString mainWindowState = QStringLiteral(
 "AAAA/wAAAAD9AAAAAwAAAAAAAADPAAACg/wCAAAAAvsAAAAiAEYAaQBsAGUAUwB5AHMAdABlAG0AQgByAG8AdwBzAGUAcgAAAABJAAACgwAAAB4BAAAF+wAAABIARABvAGMAdQBtAGUAbgB0AHMAAAAASQAAAmMAAABeAQAABQAAAAEAAAGcAAACXPwCAAAACPsAAAAUAFAATwBEAEQAZQBjAG8AZABlAHIAAAAAQgAAARMAAAB9AQAABfsAAAAUAFMAdAByAHUAYwB0AFQAbwBvAGwAAAAAQgAAAlwAAAB9AQAABfsAAAAQAFYAZQByAHMAaQBvAG4AcwAAAABNAAAAVgAAAF4BAAAF+wAAABgAQgBpAG4AYQByAHkARgBpAGwAdABlAHIAAAABegAAAM0AAAC8AQAABfsAAAAQAEMAaABlAGMAawBzAHUAbQAAAAF8AAAAywAAAL0BAAAF/AAAAREAAADlAAAAAAD////6AAAAAAEAAAAE+wAAABAAQwBoAGUAYwBrAFMAdQBtAQAAAAD/////AAAAAAAAAAD7AAAAEgBCAG8AbwBrAG0AYQByAGsAcwIAAALBAAAAPQAAAT8AAAFk+wAAAA4AUwB0AHIAaQBuAGcAcwAAAAAA/////wAAAQ8BAAAF+wAAAAgASQBuAGYAbwAAAAGRAAABTAAAAIUBAAAF+wAAABIAQgB5AHQAZQBUAGEAYgBsAGUAAAAAUwAAAjkAAAB9AQAABfsAAAAYAEQAbwBjAHUAbQBlAG4AdABJAG4AZgBvAAAAAEkAAAJjAAAA+wEAAAUAAAADAAAAAAAAAAD8AQAAAAH7AAAAEABUAGUAcgBtAGkAbgBhAGwAAAAAAP////8AAABPAQAABQAABBUAAAGLAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAAAAAEBgAAAAAAAAAA");
     const char mainWindowStateKey[] = "State";
-    KConfigGroup group( KGlobal::config(), QLatin1String("MainWindow") );
+    KConfigGroup group( KGlobal::config(), QStringLiteral("MainWindow") );
     if( !group.hasKey(mainWindowStateKey) )
         group.writeEntry( mainWindowStateKey, mainWindowState );
 

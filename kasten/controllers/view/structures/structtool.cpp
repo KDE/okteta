@@ -73,7 +73,7 @@ StructTool::StructTool()
         : d(new StructToolPrivate())
 {
     //leave mLoadedFiles empty for now, since otherwise loading slot will not work
-    setObjectName(QLatin1String("StructTool"));
+    setObjectName(QStringLiteral("StructTool"));
     d->mManager->reloadPaths();
     setSelectedStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
@@ -277,7 +277,7 @@ void StructTool::setSelectedStructuresInView()
     d->mInvalidData.clear();
     emit dataCleared();
 
-    QRegExp regex(QLatin1String("'(.+)':'(.+)'"));
+    QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
     kDebug() << "loadedStructs " << loadedStructs;
     for (int i = 0; i < loadedStructs.size(); ++i)
@@ -295,7 +295,7 @@ void StructTool::setSelectedStructuresInView()
             if (!def->isValid())
                 continue;
             //should be valid now
-            if (name == QLatin1String("*"))
+            if (name == QStringLiteral("*"))
             {
                 //add all of them
                 QVector<TopLevelDataInformation*> structs = def->structures();

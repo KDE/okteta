@@ -79,7 +79,7 @@ QString PrimitiveType::standardTypeName(PrimitiveDataType type_)
     if (type >= Type_START && type <= Type_END)
         return QLatin1String(typeNames[type]);
     else
-        return QLatin1String("invalid");
+        return QStringLiteral("invalid");
 }
 
 QString PrimitiveType::longTypeName(PrimitiveDataType type_)

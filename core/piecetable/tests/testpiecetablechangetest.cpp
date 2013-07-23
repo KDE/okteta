@@ -37,7 +37,7 @@ namespace KPieceTable
 void TestPieceTableChangeTest::testSimpleConstructor()
 {
     const int typeId = 0;
-    const QString description = QLatin1String( "0" );
+    const QString description = QStringLiteral( "0" );
     TestPieceTableChange change( typeId, description );
 
     QCOMPARE( change.type(), typeId );
@@ -47,9 +47,9 @@ void TestPieceTableChangeTest::testSimpleConstructor()
 void TestPieceTableChangeTest::testMerge()
 {
     const int type0Id = 0;
-    const QString description0 = QLatin1String( "0" );
+    const QString description0 = QStringLiteral( "0" );
     const int type1Id = 1;
-    const QString description1 = QLatin1String( "1" );
+    const QString description1 = QStringLiteral( "1" );
 
     TestPieceTableChange change( type0Id, description0 );
 

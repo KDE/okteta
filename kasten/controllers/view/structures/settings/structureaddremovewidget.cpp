@@ -97,7 +97,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
     buildAvailableList();
 
     //already loaded defs:
-    QRegExp regex(QLatin1String("'(.+)':'(.+)'"));
+    QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
     foreach(const QString& s, selected)
     {
         int pos = regex.indexIn(s);
@@ -105,7 +105,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
         {
             QString pluginName = regex.cap(1);
             QString structName = regex.cap(2);
-            if (structName == QLatin1String("*")) {
+            if (structName == QStringLiteral("*")) {
                 //add all of them
                 for (int i = 0; i < mTreeAvailable->topLevelItemCount(); i++)
                 {

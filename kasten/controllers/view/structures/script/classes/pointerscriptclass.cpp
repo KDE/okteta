@@ -70,7 +70,7 @@ bool PointerScriptClass::setAdditionalProperty(DataInformation* data, const QScr
 {
     if (name == s_type)
     {
-        DataInformation* newType = ScriptValueConverter::convert(value, QLatin1String("(pointer value)"),
+        DataInformation* newType = ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
                 data->logger(), data);
         if (!newType)
             data->logError() << "Could not set new pointer type.";
@@ -81,7 +81,7 @@ bool PointerScriptClass::setAdditionalProperty(DataInformation* data, const QScr
     }
     if (name == s_target)
     {
-        DataInformation* newTarget = ScriptValueConverter::convert(value, QLatin1String("(pointer value)"),
+        DataInformation* newTarget = ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
                 data->logger(), data);
         if (!newTarget)
             data->logError() << "Could not set new pointer target.";

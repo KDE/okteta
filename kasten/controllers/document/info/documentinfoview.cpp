@@ -164,7 +164,7 @@ void DocumentInfoView::onMimeTypeChanged( KMimeType::Ptr mimeTypePtr )
 
     if( mimeTypePtr.isNull() )
     {
-        mimeTypeComment = QLatin1String( "-" );
+        mimeTypeComment = QStringLiteral( "-" );
 //         mimeTypeIcon = ?
     }
     else

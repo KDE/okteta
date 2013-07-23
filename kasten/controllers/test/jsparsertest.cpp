@@ -28,7 +28,7 @@
 struct JsTestData {
     JsTestData() {}
     JsTestData(const char* tag, const char* constructor, Utils::DataInformationCheck* check)
-            : tag(tag), constructorCall(QLatin1String(constructor)), check(check) {}
+            : tag(tag), constructorCall(QString::fromUtf8(constructor)), check(check) {}
     QByteArray tag;
     QString constructorCall;
     QSharedPointer<Utils::DataInformationCheck> check;
@@ -97,8 +97,8 @@ void JsParserTest::initTestCase()
     //TODO struct, union, taggedUnion, pointer, flags, enum, array, string
 
     //needed so that imports can be resolved
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QLatin1String(SRCDIR "/test/resources")));
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QLatin1String(SRCDIR "/view/structures/examples")));
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", QStringLiteral(SRCDIR "/test/resources")));
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", QStringLiteral(SRCDIR "/view/structures/examples")));
 }
 
 //#pragma message(SRCDIR)
@@ -109,38 +109,38 @@ void JsParserTest::testByteOrder_data()
     QTest::addColumn<Utils::DataInformationCheck*>("checkPtr");
     QTest::addColumn<int>("expectedByteOrder");
     //verify that default is inherit
-    QString codeStr = QLatin1String("%1");
+    QString codeStr = QStringLiteral("%1");
     Q_FOREACH(const JsTestData& data, allData) {
         //default should be inherit
-        QString codeStr = QLatin1String("%1;");
+        QString codeStr = QStringLiteral("%1;");
         QTest::newRow(data.tag.constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessInherit;
 
         //use set() function to specify byteOrder
-        codeStr = QLatin1String("%1.set({byteOrder: \"inherit\"})");
+        codeStr = QStringLiteral("%1.set({byteOrder: \"inherit\"})");
         QTest::newRow((data.tag + " set() inherit").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessInherit;
-        codeStr = QLatin1String("%1.set({byteOrder: \"littleEndian\"})");
+        codeStr = QStringLiteral("%1.set({byteOrder: \"littleEndian\"})");
         QTest::newRow((data.tag + " set() little endian").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessLittle;
-        codeStr = QLatin1String("%1.set({byteOrder: \"bigEndian\"})");
+        codeStr = QStringLiteral("%1.set({byteOrder: \"bigEndian\"})");
         QTest::newRow((data.tag + " set() big endian").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessBig;
-        codeStr = QLatin1String("%1.set({byteOrder: \"fromSettings\"})");
+        codeStr = QStringLiteral("%1.set({byteOrder: \"fromSettings\"})");
         QTest::newRow((data.tag + " set() from settings").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessFromSettings;
 
         //direct property access to specify byteOrder
-        codeStr = QLatin1String("var obj = %1; obj.byteOrder = \"inherit\"; obj;");
+        codeStr = QStringLiteral("var obj = %1; obj.byteOrder = \"inherit\"; obj;");
         QTest::newRow((data.tag + " property assign inherit").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessInherit;
-        codeStr = QLatin1String("var obj = %1; obj.byteOrder = \"little-endian\"; obj;");
+        codeStr = QStringLiteral("var obj = %1; obj.byteOrder = \"little-endian\"; obj;");
         QTest::newRow((data.tag + " property assign little endian").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessLittle;
-        codeStr = QLatin1String("var obj = %1; obj.byteOrder = \"big-endian\"; obj;");
+        codeStr = QStringLiteral("var obj = %1; obj.byteOrder = \"big-endian\"; obj;");
         QTest::newRow((data.tag + " property assign big endian").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessBig;
-        codeStr = QLatin1String("var obj = %1; obj.byteOrder = \"from-settings\"; obj;");
+        codeStr = QStringLiteral("var obj = %1; obj.byteOrder = \"from-settings\"; obj;");
         QTest::newRow((data.tag + " property assign from settings").constData()) << codeStr.arg(data.constructorCall)
             << data.check.data() << (int)DataInformation::EndianessFromSettings;
     }
@@ -155,7 +155,7 @@ void JsParserTest::testCommon(DataInformation** dataPtr) {
     QVERIFY(value.isObject());
     ScriptLogger logger;
     QScopedPointer<DataInformation> data
-            (ScriptValueConverter::convert(value, QLatin1String("converted"), &logger));
+            (ScriptValueConverter::convert(value, QStringLiteral("converted"), &logger));
     QVERIFY(logger.rowCount() == 0);
     QVERIFY(data);
     checkPtr->check(data.data());
@@ -172,7 +172,7 @@ void JsParserTest::testByteOrder()
     QCOMPARE((int)data->byteOrder(), expectedByteOrder);
 }
 
-static const QString updateFunction = QLatin1String("function () { /* do nothing*/; }");
+static const QString updateFunction = QStringLiteral("function () { /* do nothing*/; }");
 
 void JsParserTest::testUpdateFunc_data()
 {
@@ -180,15 +180,15 @@ void JsParserTest::testUpdateFunc_data()
     QTest::addColumn<Utils::DataInformationCheck*>("checkPtr");
 
     Q_FOREACH(const JsTestData& data, allData) {
-        QString codeStr = QLatin1String("%1.setUpdate(") + updateFunction + QLatin1String(");");
+        QString codeStr = QStringLiteral("%1.setUpdate(") + updateFunction + QStringLiteral(");");
         QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
-        codeStr = QLatin1String("%1.set({updateFunc: ") + updateFunction + QLatin1String("});");
+        codeStr = QStringLiteral("%1.set({updateFunc: ") + updateFunction + QStringLiteral("});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
-        codeStr = QLatin1String("var obj = %1; obj.updateFunc = ") + updateFunction + QLatin1String("; obj;");
+        codeStr = QStringLiteral("var obj = %1; obj.updateFunc = ") + updateFunction + QStringLiteral("; obj;");
         QTest::newRow((data.tag + "-property assign").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
     }
@@ -207,7 +207,7 @@ void JsParserTest::testUpdateFunc()
     QCOMPARE(update.toString(), updateFunction);
 }
 
-static const QString validationFunction = QLatin1String("function () { return true; }");
+static const QString validationFunction = QStringLiteral("function () { return true; }");
 
 void JsParserTest::testValidationFunc_data()
 {
@@ -215,15 +215,15 @@ void JsParserTest::testValidationFunc_data()
     QTest::addColumn<Utils::DataInformationCheck*>("checkPtr");
 
     Q_FOREACH(const JsTestData& data, allData) {
-        QString codeStr = QLatin1String("%1.setValidation(") + validationFunction + QLatin1String(");");
+        QString codeStr = QStringLiteral("%1.setValidation(") + validationFunction + QStringLiteral(");");
         QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
-        codeStr = QLatin1String("%1.set({validationFunc: ") + validationFunction + QLatin1String("});");
+        codeStr = QStringLiteral("%1.set({validationFunc: ") + validationFunction + QStringLiteral("});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
-        codeStr = QLatin1String("var obj = %1; obj.validationFunc = ") + validationFunction + QLatin1String("; obj;");
+        codeStr = QStringLiteral("var obj = %1; obj.validationFunc = ") + validationFunction + QStringLiteral("; obj;");
         QTest::newRow((data.tag + "-property assign").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
     }
@@ -248,11 +248,11 @@ void JsParserTest::testName_data()
     QTest::addColumn<Utils::DataInformationCheck*>("checkPtr");
 
     Q_FOREACH(const JsTestData& data, allData) {
-        QString codeStr = QLatin1String("%1.set({name: \"expectedName\"});");
+        QString codeStr = QStringLiteral("%1.set({name: \"expectedName\"});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
-        codeStr = QLatin1String("var obj = %1;obj.name = \"expectedName\"; obj;");
+        codeStr = QStringLiteral("var obj = %1;obj.name = \"expectedName\"; obj;");
         QTest::newRow((data.tag + "-property assignment").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
     }
@@ -265,7 +265,7 @@ void JsParserTest::testName()
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
 
-    QCOMPARE(data->name(), QString(QLatin1String("expectedName")));
+    QCOMPARE(data->name(), QString(QStringLiteral("expectedName")));
 }
 
 void JsParserTest::testCustomTypeName_data()
@@ -274,11 +274,11 @@ void JsParserTest::testCustomTypeName_data()
     QTest::addColumn<Utils::DataInformationCheck*>("checkPtr");
 
     Q_FOREACH(const JsTestData& data, allData) {
-        QString codeStr = QLatin1String("%1.set({typeName: 'myCustomType'});");
+        QString codeStr = QStringLiteral("%1.set({typeName: 'myCustomType'});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
 
-        codeStr = QLatin1String("var obj = %1;obj.typeName = 'myCustomType'; obj;");
+        codeStr = QStringLiteral("var obj = %1;obj.typeName = 'myCustomType'; obj;");
         QTest::newRow((data.tag + "-property assignment").constData())
             << codeStr.arg(data.constructorCall) << data.check.data();
     }
@@ -291,22 +291,22 @@ void JsParserTest::testCustomTypeName()
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
 
-    QCOMPARE(data->typeName(), QString(QLatin1String("myCustomType")));
+    QCOMPARE(data->typeName(), QString(QStringLiteral("myCustomType")));
 }
 
 void JsParserTest::testImport()
 {
     QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
-    QScriptValue val = eng->evaluate(QLatin1String("s = importScript('simpleImport.js');s.foo()"));
-    QCOMPARE(val.toString(), QString(QLatin1String("100")));
+    QScriptValue val = eng->evaluate(QStringLiteral("s = importScript('simpleImport.js');s.foo()"));
+    QCOMPARE(val.toString(), QString(QStringLiteral("100")));
 }
 
 void JsParserTest::testImportPathTraversal()
 {
     QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
-    QScriptValue val = eng->evaluate(QLatin1String("s = importScript('../../pathtraversal.js');s.foo()"));
+    QScriptValue val = eng->evaluate(QStringLiteral("s = importScript('../../pathtraversal.js');s.foo()"));
     QVERIFY(val.isError());
-    QCOMPARE(val.toString(), QString(QLatin1String("Error: importScript(): You may only access installed structure files! Path traversal detected.")));
+    QCOMPARE(val.toString(), QString(QStringLiteral("Error: importScript(): You may only access installed structure files! Path traversal detected.")));
 }
 
 

@@ -130,7 +130,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
 
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
-    const KUrl fileUrl( QString::fromLatin1(NotExistingUrlName) );
+    const QUrl fileUrl = QUrl( QLatin1String(NotExistingUrlName) );
     Kasten2::TestDocumentFileSynchronizer* synchronizer = new Kasten2::TestDocumentFileSynchronizer();
     Kasten2::AbstractLoadJob* loadJob = synchronizer->startLoad( fileUrl );
     loadJob->exec();

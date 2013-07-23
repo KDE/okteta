@@ -53,7 +53,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
     // bookmarks list
     mBookmarkListView = new QTreeView( this );
-    mBookmarkListView->setObjectName( QLatin1String( "BookmarkListView" ) );
+    mBookmarkListView->setObjectName( QStringLiteral( "BookmarkListView" ) );
     mBookmarkListView->setRootIsDecorated( false );
     mBookmarkListView->setItemsExpandable( false );
     mBookmarkListView->setUniformRowHeights( true );
@@ -74,7 +74,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
     const KGuiItem createBookmarkGuiItem =
         KGuiItem( QString()/*i18n("C&opy")*/,
-                  QLatin1String("bookmark-new"),
+                  QStringLiteral("bookmark-new"),
                   i18nc("@info:tooltip",
                         "Creates a new bookmark for the current cursor position."),
                   i18nc("@info:whatsthis",
@@ -90,7 +90,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
     const KGuiItem deleteBookmarkGuiItem =
         KGuiItem( QString()/*i18n("&Go to")*/,
-                  QLatin1String("edit-delete"),
+                  QStringLiteral("edit-delete"),
                   i18nc("@info:tooltip",
                         "Deletes all the selected bookmarks."),
                   i18nc("@info:whatsthis",
@@ -104,7 +104,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
     const KGuiItem gotoGuiItem =
         KGuiItem( QString()/*i18n("&Go to")*/,
-                  QLatin1String("go-jump"),
+                  QStringLiteral("go-jump"),
                   i18nc("@info:tooltip",
                         "Moves the cursor to the selected bookmark."),
                   i18nc("@info:whatsthis",
@@ -116,7 +116,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
 
     const KGuiItem renameGuiItem =
         KGuiItem( QString()/*i18n("&Go to")*/,
-                  QLatin1String("edit-rename"),
+                  QStringLiteral("edit-rename"),
                   i18nc("@info:tooltip",
                         "Enables renaming of the selected bookmark."),
                   i18nc("@info:whatsthis",

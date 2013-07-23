@@ -68,7 +68,7 @@ void SingleDocumentStrategyPrivate::createNew()
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters = QStringList() << QLatin1String( "-c" );
+        const QStringList parameters = QStringList() << QStringLiteral( "-c" );
         KProcess::startDetached( executable, parameters );
     }
 }
@@ -88,9 +88,9 @@ void SingleDocumentStrategyPrivate::createNewFromClipboard()
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
         const QStringList parameters = QStringList()
-            << QLatin1String( "-c" )
-            << QLatin1String( "-g" )
-            << QLatin1String( "FromClipboard" );
+            << QStringLiteral( "-c" )
+            << QStringLiteral( "-g" )
+            << QStringLiteral( "FromClipboard" );
         KProcess::startDetached( executable, parameters );
     }
 }
@@ -108,8 +108,8 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGen
         // TODO: forward also interesting parameters passed to this program
         // TODO: add id to AbstractModelDataGenerator, to use instead of className
         const QStringList parameters = QStringList()
-            << QLatin1String( "-c" )
-            << QLatin1String( "-g" )
+            << QStringLiteral( "-c" )
+            << QStringLiteral( "-g" )
             << QLatin1String(generator->metaObject()->className());
         KProcess::startDetached( executable, parameters );
         return;

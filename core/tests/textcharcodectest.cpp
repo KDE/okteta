@@ -63,7 +63,7 @@ void TextCharCodecTest::testCreateLocalCodec()
 
 void TextCharCodecTest::testCreateNonexistingCodec()
 {
-    TextCharCodec* codec = TextCharCodec::createCodec( QLatin1String("NonexistingCode") );
+    TextCharCodec* codec = TextCharCodec::createCodec( QStringLiteral("NonexistingCode") );
     QVERIFY( codec == 0 );
 }
 

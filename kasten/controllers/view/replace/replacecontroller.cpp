@@ -102,7 +102,7 @@ bool ReplaceController::queryContinue( KFindDirection direction, int noOfReplace
         i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
         i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
-    const QString message = replacementReport + QLatin1String("<br /><br />") + question;
+    const QString message = replacementReport + QStringLiteral("<br /><br />") + question;
     const int answer = KMessageBox::questionYesNo( mParentWidget, message, messageBoxTitle,
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
 

@@ -40,7 +40,7 @@ TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )
     mDocumentSyncManager( documentSyncManager ),
     mDocument( 0 )
 {
-    setObjectName( QLatin1String( "Terminal" ) );
+    setObjectName( QStringLiteral( "Terminal" ) );
 }
 
 

@@ -51,7 +51,7 @@ Q_UNUSED( model )
 
 void LoaderActionController::load()
 {
-    static const QString allFileNamesFilter = QLatin1String(AllFileNamesFilter);
+    static const QString allFileNamesFilter = QStringLiteral(AllFileNamesFilter);
     const KUrl::List urls =
         KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, allFileNamesFilter, /*mWidget*/0 );
 

@@ -44,7 +44,7 @@ static QString
 viewProfileFileLockPath( const QString& viewProfileFilePath)
 {
     // TODO: just ".lock" conflicts with KConfig(?) using the same
-    return viewProfileFilePath + QLatin1String(".olock");
+    return viewProfileFilePath + QStringLiteral(".olock");
 }
 
 ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate( const QString& fileName,

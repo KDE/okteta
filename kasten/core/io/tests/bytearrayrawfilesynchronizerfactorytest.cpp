@@ -67,7 +67,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::initTestCase()
 
 //     QDir dir(mDataDir);
 //     QVERIFY(dir.mkdir("Europe"));
-//     QFile::copy(QString::fromLatin1(KDESRCDIR) + QLatin1String("/Paris"), mDataDir + QLatin1String("/Europe/Paris"));
+//     QFile::copy(QString::fromLatin1(KDESRCDIR) + QStringLiteral("/Paris"), mDataDir + QStringLiteral("/Europe/Paris"));
 }
 
 void ByteArrayRawFileSynchronizerFactoryTest::cleanupTestCase()
@@ -95,7 +95,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 #if 0
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
-    const QUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( FileProtocolName );
+    const QUrl fileUrl = mFileSystem->createFilePath( QStringLiteral(TestFileName) ).prepend( FileProtocolName );
     Kasten2::ByteArrayRawFileSynchronizerFactory *factory = new Kasten2::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
@@ -115,7 +115,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
-    const QUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
+    const QUrl fileUrl = mFileSystem->createFilePath( QStringLiteral(NotExistingUrl) );
 
     Kasten2::ByteArrayRawFileSynchronizerFactory *factory = new Kasten2::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
@@ -128,7 +128,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 #if 0
 void ByteArrayRawFileSynchronizerFactoryTest::testSaveToFile()
 {
-    const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
+    const QString filePath = mFileSystem->createFilePath( QStringLiteral(TestFileName) );
 
 
     ByteArrayDocument *document = new ByteArrayDocument();

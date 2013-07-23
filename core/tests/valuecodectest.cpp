@@ -95,7 +95,7 @@ void ValueCodecTest::testEncodeDecode_data()
         {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
-                QString::fromLatin1(" - %1").arg( j );
+                QString(QStringLiteral(" - %1")).arg( j );
 
             QTest::newRow(rowTitle.toLatin1().constData())
                 << valueCodecDescription.id
@@ -137,7 +137,7 @@ void ValueCodecTest::testEncodeShortDecode_data()
         {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
-                QString::fromLatin1(" - %1").arg(j);
+                QString(QStringLiteral(" - %1")).arg(j);
 
             QTest::newRow(rowTitle.toLatin1().constData())
                 << valueCodecDescription.id
@@ -180,7 +180,7 @@ void ValueCodecTest::testAppendDigit_data()
         {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
-                QString::fromLatin1(" - %1").arg(j);
+                QString(QStringLiteral(" - %1")).arg(j);
 
             QTest::newRow(rowTitle.toLatin1().constData())
                 << valueCodecDescription.id
@@ -225,7 +225,7 @@ void ValueCodecTest::testRemoveLastDigit_data()
             {
                 const QString rowTitle =
                     QLatin1String(valueCodecDescription.name) +
-                    QString::fromLatin1(" - %1 - removed last %2").arg(b).arg(r);
+                    QString(QStringLiteral(" - %1 - removed last %2")).arg(b).arg(r);
 
                 QTest::newRow(rowTitle.toLatin1().constData())
                     << valueCodecDescription.id
@@ -297,8 +297,8 @@ void ValueCodecTest::testIsValidDigit_data()
             const bool isValid = validnessPerDigitField.testBit( j );
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
-                QString::fromLatin1(" - \"%1\" is ").arg(QLatin1Char(digit)) +
-                QLatin1String(isValid ? "valid" : "invalid");
+                QString(QStringLiteral(" - \"%1\" is ")).arg(QLatin1Char(digit)) +
+                (isValid ? QStringLiteral("valid") : QStringLiteral("invalid"));
 
             QTest::newRow(rowTitle.toLatin1().constData())
                 << valueCodecDescription.id

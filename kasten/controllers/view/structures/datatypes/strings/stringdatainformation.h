@@ -31,6 +31,7 @@
 
 class DummyDataInformation;
 
+//TODO QStringLiteral
 const QLatin1String stringEncodings[] = {
     QLatin1String("ascii"), QLatin1String("latin1"), QLatin1String("utf-8"), QLatin1String("utf-16le"),
     QLatin1String("utf-16-be"), QLatin1String("utf32-le"), QLatin1String("utf32-be")

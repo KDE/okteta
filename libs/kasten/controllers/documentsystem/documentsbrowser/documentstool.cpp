@@ -35,7 +35,7 @@ namespace Kasten2
 DocumentsTool::DocumentsTool( DocumentManager* documentManager )
  : mDocumentManager( documentManager ), mFocussedDocument( 0 )
 {
-    setObjectName( QLatin1String( "Documents" ) );
+    setObjectName( QStringLiteral( "Documents" ) );
 
     connect( mDocumentManager, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
              SIGNAL(documentsAdded(QList<Kasten2::AbstractDocument*>)) );

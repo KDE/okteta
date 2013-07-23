@@ -47,7 +47,7 @@ ReplaceTool::ReplaceTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "Replace" ) );
+    setObjectName( QStringLiteral( "Replace" ) );
 }
 
 bool ReplaceTool::isApplyable() const

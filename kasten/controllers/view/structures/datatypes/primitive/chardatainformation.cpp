@@ -34,14 +34,14 @@ namespace {
     {
         switch (value)
         {
-            case '\0': return QLatin1String("'\\0'");
-            case '\a': return QLatin1String("'\\a'");
-            case '\b': return QLatin1String("'\\b'");
-            case '\f': return QLatin1String("'\\f'");
-            case '\n': return QLatin1String("'\\n'");
-            case '\r': return QLatin1String("'\\r'");
-            case '\t': return QLatin1String("'\\t'");
-            case '\v': return QLatin1String("'\\v'");
+            case '\0': return QStringLiteral("'\\0'");
+            case '\a': return QStringLiteral("'\\a'");
+            case '\b': return QStringLiteral("'\\b'");
+            case '\f': return QStringLiteral("'\\f'");
+            case '\n': return QStringLiteral("'\\n'");
+            case '\r': return QStringLiteral("'\\r'");
+            case '\t': return QStringLiteral("'\\t'");
+            case '\v': return QStringLiteral("'\\v'");
             default: break;
         }
         QChar qchar = QChar(quint32(value));
@@ -60,7 +60,7 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
         QString num = QString::number(value, base);
         if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
             num = KLocale::global()->formatNumber(num, false, 0);
-        charStr += QLatin1String(" (") + PrimitiveDataInformation::basePrefix(base)
+        charStr += QStringLiteral(" (") + PrimitiveDataInformation::basePrefix(base)
                 + num + QLatin1Char(')');
     }
     return charStr;
