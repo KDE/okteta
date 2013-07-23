@@ -59,10 +59,6 @@ target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC
   ${KDE4_KDECORE_LIBS}
 )
 
-target_link_libraries( ${oktetakastencore_LIB} LINK_PRIVATE
-  ${KDE4Support_LIBRARIES}
-)
-
 set_target_properties( ${oktetakastencore_LIB} PROPERTIES
   OUTPUT_NAME ${oktetakastencore_LIB_NAME}
   VERSION     ${OKTETAKASTEN_LIB_VERSION}
