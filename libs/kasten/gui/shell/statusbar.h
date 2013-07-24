@@ -25,10 +25,9 @@
 
 // lib
 #include "kastengui_export.h"
-// KDE
-#include <KStatusBar>
 // Qt
 #include <QtCore/QList>
+#include <QStatusBar>
 
 
 namespace Kasten2
@@ -37,7 +36,7 @@ namespace Kasten2
 class StatusBarLayout;
 
 
-class KASTENGUI_EXPORT StatusBar : public KStatusBar
+class KASTENGUI_EXPORT StatusBar : public QStatusBar
 {
     Q_OBJECT
 
@@ -52,7 +51,7 @@ class KASTENGUI_EXPORT StatusBar : public KStatusBar
     void updateLayout();
 
   protected: // QWidget API
-    virtual void changeEvent( QEvent* changeEvent );
+    virtual void changeEvent( QEvent* changeEvent ) Q_DECL_OVERRIDE;
 
   protected:
     StatusBarLayout* mLayout;

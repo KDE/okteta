@@ -32,7 +32,7 @@
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KConfigGroup>
-#include <KGlobal>
+#include <KComponentData>
 #include <KSharedConfig>
 
 
@@ -53,7 +53,7 @@ LoaderController::LoaderController( AbstractDocumentStrategy* documentStrategy,
     mOpenRecentAction =
         KStandardAction::openRecent( this, SLOT(loadRecent(QUrl)), actionCollection );
 
-    KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
+    KConfigGroup configGroup( KComponentData::mainComponent().config(), CreatorConfigGroupId );
     mOpenRecentAction->loadEntries( configGroup );
 
     connect( mDocumentStrategy, &AbstractDocumentStrategy::urlUsed, this, &LoaderController::onUrlUsed );
@@ -86,10 +86,10 @@ void LoaderController::load()
 {
     const QString filterString = mimetypeFilterString( mDocumentStrategy->supportedRemoteTypes() );
 
-    const KUrl::List urls =
-        KFileDialog::getOpenUrls( KUrl()/*mWorkingUrl.url()*/, filterString, /*mWidget*/0 );
+    const QList<QUrl> urls =
+        KFileDialog::getOpenUrls( QUrl()/*mWorkingUrl.url()*/, filterString, /*mWidget*/0 );
 
-    foreach( const KUrl& url, urls )
+    foreach( const QUrl& url, urls )
         mDocumentStrategy->load( url );
 }
 
@@ -105,7 +105,7 @@ void LoaderController::onUrlUsed( const QUrl& url )
 
 LoaderController::~LoaderController()
 {
-    KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
+    KConfigGroup configGroup( KComponentData::mainComponent().config(), CreatorConfigGroupId );
     mOpenRecentAction->saveEntries( configGroup );
 }
 
