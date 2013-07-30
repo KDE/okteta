@@ -30,7 +30,7 @@
 
 template< class C > class QList;
 class QTreeView;
-class KPushButton;
+class QPushButton;
 
 
 namespace Kasten2
@@ -69,9 +69,9 @@ class ViewProfilesManageDialog : public KDialog
     ByteArrayViewProfile::Id mCurrentViewProfileId;
 
     QTreeView* mViewProfileTableView;
-    KPushButton* mEditButton;
-    KPushButton* mSetDefaultButton;
-    KPushButton* mDeleteButton;
+    QPushButton* mEditButton;
+    QPushButton* mSetDefaultButton;
+    QPushButton* mDeleteButton;
 };
 
 }

@@ -43,7 +43,6 @@
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KConfigDialog>
-#include <KPushButton>
 #include <KDialog>
 #include <KDebug>
 
@@ -51,6 +50,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QTreeView>
+#include <QPushButton>
 #include <QHeaderView>
 #include <QFocusEvent>
 
@@ -94,7 +94,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     baseLayout->addLayout(settingsLayout);
 
     QIcon validateIcon = QIcon::fromTheme(QStringLiteral("document-sign"));
-    mValidateButton = new KPushButton(validateIcon, i18nc("@action:button", "Validate"), this);
+    mValidateButton = new QPushButton(validateIcon, i18nc("@action:button", "Validate"), this);
     const QString validationToolTip = i18nc("@info:tooltip", "Validate all structures.");
     mValidateButton->setToolTip(validationToolTip);
     mValidateButton->setEnabled(false); //no point validating without file open
@@ -104,7 +104,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     //TODO also disable the button if the structure has no validatable members
     settingsLayout->addWidget(mValidateButton);
 
-    mLockStructureButton = new KPushButton(this);
+    mLockStructureButton = new QPushButton(this);
     mLockStructureButton->setCheckable(true);
     setLockButtonState(false);
     mLockStructureButton->setEnabled(false); //won't work at beginning
@@ -115,13 +115,13 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     settingsLayout->addStretch(); //stretch before the settings button
 
     QIcon console = QIcon::fromTheme(QStringLiteral("utilities-terminal"));
-    mScriptConsoleButton = new KPushButton(console, i18nc("@action:button", "Script console"), this);
+    mScriptConsoleButton = new QPushButton(console, i18nc("@action:button", "Script console"), this);
     mScriptConsoleButton->setToolTip(i18nc("@info:tooltip", "Open script console."));
     connect(mScriptConsoleButton, SIGNAL(pressed()), this, SLOT(openScriptConsole()));
     settingsLayout->addWidget(mScriptConsoleButton);
 
     QIcon settings = QIcon::fromTheme(QStringLiteral("configure"));
-    mSettingsButton = new KPushButton(settings, i18nc("@action:button", "Settings"), this);
+    mSettingsButton = new QPushButton(settings, i18nc("@action:button", "Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
     mSettingsButton->setToolTip(settingsTooltip);
     connect(mSettingsButton, SIGNAL(pressed()), this, SLOT(openSettingsDlg()));

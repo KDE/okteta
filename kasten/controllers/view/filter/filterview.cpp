@@ -30,7 +30,6 @@
 #include <abstractbytearrayfilterparameterset.h>
 #include <abstractbytearrayfilter.h>
 // KDE
-#include <KPushButton>
 #include <KLocalizedString>
 #include <KComboBox>
 #include <KGuiItem>
@@ -38,6 +37,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QStackedWidget>
+#include <QPushButton>
 #include <QGroupBox>
 #include <QAbstractItemView>
 
@@ -87,12 +87,13 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     // filter button
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addStretch( 10 );
-    mFilterButton = new KPushButton( KGuiItem(i18nc("@action:button","&Filter"),
+    mFilterButton = new QPushButton( this );
+    KGuiItem::assign( mFilterButton, KGuiItem(i18nc("@action:button","&Filter"),
                       QStringLiteral("run-build"),
                       i18nc("@info:tooltip","Executes the filter for the bytes in the selected range."),
                       i18nc("@info:whatsthis",
                             "If you press the <interface>Filter</interface> button, the operation you selected "
-                            "above is executed for the bytes in the selected range with the given options.")), this );
+                            "above is executed for the bytes in the selected range with the given options.")) );
     mFilterButton->setEnabled( mTool->hasWriteable() );
     connect( mTool, SIGNAL(hasWriteableChanged(bool)), SLOT(onHasWriteableChanged(bool)) );
     connect( mTool, SIGNAL(charCodecChanged(QString)), SLOT(onCharCodecChanged(QString)) );

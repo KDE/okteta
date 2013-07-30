@@ -26,7 +26,7 @@
 // Qt
 #include <QWidget>
 
-class KPushButton;
+class QPushButton;
 class QLabel;
 class QTreeView;
 
@@ -61,7 +61,7 @@ class InfoView : public QWidget
 
     QLabel *mSizeLabel;
     QTreeView *mStatisticTableView;
-    KPushButton *mUpdateButton;
+    QPushButton *mUpdateButton;
 };
 
 

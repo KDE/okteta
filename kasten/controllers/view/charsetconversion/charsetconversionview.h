@@ -30,7 +30,7 @@
 
 namespace Okteta { class ByteArrayComboBox; }
 class KComboBox;
-class KPushButton;
+class QPushButton;
 class QCheckBox;
 template <class Key, class T> class QMap;
 
@@ -67,7 +67,7 @@ class CharsetConversionView : public QWidget
     KComboBox* mOtherCharSetComboBox;
     QCheckBox* mSubstituteMissingCharCheckBox;
     Okteta::ByteArrayComboBox* mSubstituteByteEdit;
-    KPushButton* mConvertButton;
+    QPushButton* mConvertButton;
 };
 
 

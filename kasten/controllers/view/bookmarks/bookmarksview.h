@@ -26,7 +26,7 @@
 // Qt
 #include <QWidget>
 
-class KPushButton;
+class QPushButton;
 class QTreeView;
 class QModelIndex;
 
@@ -63,10 +63,10 @@ class BookmarksView : public QWidget
     BookmarkListModel* mBookmarkListModel;
 
     QTreeView* mBookmarkListView;
-    KPushButton* mCreateBookmarkButton;
-    KPushButton* mDeleteBookmarksButton;
-    KPushButton* mGotoBookmarkButton;
-    KPushButton* mRenameBookmarkButton;
+    QPushButton* mCreateBookmarkButton;
+    QPushButton* mDeleteBookmarksButton;
+    QPushButton* mGotoBookmarkButton;
+    QPushButton* mRenameBookmarkButton;
 };
 
 

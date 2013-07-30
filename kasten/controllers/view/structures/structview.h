@@ -33,7 +33,7 @@ class AbstractByteArrayModel;
 
 class KComboBox;
 class QTreeView;
-class KPushButton;
+class QPushButton;
 class KTextEdit;
 //class ModelTest;
 
@@ -61,11 +61,11 @@ protected:
 //    ModelTest* mModeltest;
 
     QTreeView* mStructTreeView;
-    KPushButton* mValidateButton;
-    KPushButton* mSettingsButton;
-    KPushButton* mScriptConsoleButton;
+    QPushButton* mValidateButton;
+    QPushButton* mSettingsButton;
+    QPushButton* mScriptConsoleButton;
     StructViewItemDelegate* mDelegate;
-    KPushButton* mLockStructureButton;
+    QPushButton* mLockStructureButton;
     QWidget* mStructTreeViewFocusChild;
 
 protected Q_SLOTS:

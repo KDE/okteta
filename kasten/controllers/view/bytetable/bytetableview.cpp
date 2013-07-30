@@ -28,7 +28,7 @@
 #include "bytetablemodel.h"
 #include "bytetableviewsettings.h"
 // KDE
-#include <KPushButton>
+#include <QPushButton>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
 #include <KGlobalSettings>
@@ -95,7 +95,8 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
     insertLayout->addStretch();
 
-    mInsertButton = new KPushButton( KStandardGuiItem::insert(), this );
+    mInsertButton = new QPushButton( this );
+    KGuiItem::assign( mInsertButton, KStandardGuiItem::insert() );
     mInsertButton->setEnabled( mTool->hasWriteable() );
     connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT(setEnabled(bool)) );
     connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) );

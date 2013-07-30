@@ -27,7 +27,7 @@
 // lib
 #include <addresscombobox.h>
 // KDE
-#include <KPushButton>
+#include <QPushButton>
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
@@ -126,7 +126,8 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
                         "If you press the <interface>Select</interface> "
                         "button, the cursor will be moved in the document to or, "
                         "on your option, by the offset you entered above.") );
-    mSelectButton = new KPushButton( selectGuiItem, this );
+    mSelectButton = new QPushButton( this );
+    KGuiItem::assign( mSelectButton, selectGuiItem );
     connect( mSelectButton, SIGNAL(clicked(bool)), SLOT(onSelectButtonClicked()) );
     addButton( mSelectButton, AbstractToolWidget::Default );
     baseLayout->addWidget( mSelectButton );

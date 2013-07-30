@@ -28,7 +28,7 @@
 
 class ContainedStringTableModel;
 
-class KPushButton;
+class QPushButton;
 
 class QTreeView;
 class QSortFilterProxyModel;
@@ -78,9 +78,9 @@ class StringsExtractView : public QWidget
 
     QTreeView *mContainedStringTableView;
     QSpinBox *mMinLengthSpinBox;
-    KPushButton *mUpdateButton;
-    KPushButton *mCopyButton;
-    KPushButton *mGotoButton;
+    QPushButton *mUpdateButton;
+    QPushButton *mCopyButton;
+    QPushButton *mGotoButton;
 };
 
 

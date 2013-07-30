@@ -24,7 +24,7 @@
 #include "../structuresmanager.h"
 #include "../structuredefinitionfile.h"
 
-#include <KPushButton>
+#include <QPushButton>
 #include <QLabel>
 #include <QLayout>
 #include <QTreeWidget>
@@ -69,17 +69,17 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
 
     leftRightLayout = new QVBoxLayout();
     leftRightLayout->addStretch();
-    mRightButton = new KPushButton(QIcon::fromTheme(QStringLiteral("arrow-right")), QString(), this);
+    mRightButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-right")), QString(), this);
     leftRightLayout->addWidget(mRightButton);
-    mLeftButton = new KPushButton(QIcon::fromTheme(QStringLiteral("arrow-left")), QString(), this);
+    mLeftButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-left")), QString(), this);
     leftRightLayout->addWidget(mLeftButton);
     leftRightLayout->addStretch();
 
     upDownLayout = new QVBoxLayout();
     upDownLayout->addStretch();
-    mUpButton = new KPushButton(QIcon::fromTheme(QStringLiteral("arrow-up")), QString(), this);
+    mUpButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-up")), QString(), this);
     upDownLayout->addWidget(mUpButton);
-    mDownButton = new KPushButton(QIcon::fromTheme(QStringLiteral("arrow-down")), QString(), this);
+    mDownButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-down")), QString(), this);
     upDownLayout->addWidget(mDownButton);
     upDownLayout->addStretch();
 

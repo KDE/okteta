@@ -24,7 +24,7 @@
 
 #include <QWidget>
 
-class KPushButton;
+class QPushButton;
 class QLabel;
 class QTreeWidget;
 class KListWidget;
@@ -43,11 +43,11 @@ Q_OBJECT
     QLabel* mTree2Label;
     QTreeWidget* mTreeSelected;
 
-    KPushButton* mRightButton;
-    KPushButton* mLeftButton;
+    QPushButton* mRightButton;
+    QPushButton* mLeftButton;
 
-    KPushButton* mUpButton;
-    KPushButton* mDownButton;
+    QPushButton* mUpButton;
+    QPushButton* mDownButton;
 
     QStringList mValues;
 public:

@@ -30,7 +30,7 @@ namespace Okteta {
 class AddressComboBox;
 }
 
-class KPushButton;
+class QPushButton;
 
 class QCheckBox;
 
@@ -65,7 +65,7 @@ class SelectRangeView : public AbstractToolWidget
     Okteta::AddressComboBox* mEndEdit;
     QCheckBox* mRelativeCheckBox;
     QCheckBox* mBackwardsCheckBox;
-    KPushButton* mSelectButton;
+    QPushButton* mSelectButton;
 };
 
 

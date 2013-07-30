@@ -26,7 +26,7 @@
 // Kasten gui
 #include <abstracttoolwidget.h>
 
-class KPushButton;
+class QPushButton;
 class KIntNumInput;
 class QTreeView;
 class QModelIndex;
@@ -62,7 +62,7 @@ class ByteTableView : public AbstractToolWidget
 
     KIntNumInput* mInsertCountEdit;
     QTreeView *mByteTableView;
-    KPushButton *mInsertButton;
+    QPushButton *mInsertButton;
 };
 
 

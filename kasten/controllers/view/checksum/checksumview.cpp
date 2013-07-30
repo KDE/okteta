@@ -31,7 +31,6 @@
 #include <abstractbytearraychecksumalgorithm.h>
 // KDE
 #include <KComboBox>
-#include <KPushButton>
 #include <KLineEdit>
 #include <KGuiItem>
 #include <KLocalizedString>
@@ -40,6 +39,7 @@
 #include <QLabel>
 #include <QGroupBox>
 #include <QStackedWidget>
+#include <QPushButton>
 #include <QLayout>
 #include <QtGui/QClipboard>
 #include <QApplication>
@@ -94,7 +94,8 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
                   i18nc("@info:whatsthis",
                         "If you press the <interface>Calculate</interface> button, the list will be updated "
                         "to all strings which are contained in the selected range and have the set minimum length.") );
-    mCalculateButton = new KPushButton( updateGuiItem, this );
+    mCalculateButton = new QPushButton( this );
+    KGuiItem::assign( mCalculateButton, updateGuiItem );
     mCalculateButton->setEnabled( mTool->isApplyable() );
     connect( mCalculateButton, SIGNAL(clicked(bool)), SLOT(onCalculateClicked()) );
     addButton( mCalculateButton, AbstractToolWidget::Default );

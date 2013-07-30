@@ -26,7 +26,6 @@
 #include "containedstringtablemodel.h"
 #include "stringsextracttool.h"
 // KDE
-#include <KPushButton>
 #include <KLineEdit>
 #include <KGuiItem>
 #include <KLocalizedString>
@@ -35,6 +34,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QSpinBox>
+#include <QPushButton>
 #include <QtCore/QSortFilterProxyModel>
 #include <QHeaderView>
 #include <QTreeView>
@@ -78,7 +78,8 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
                         "If you press the <interface>Extract</interface> button, "
                         "the selected range is searched for all strings which have the set minimum length. "
                         "This strings found will be listed in the view below.") );
-    mUpdateButton = new KPushButton( updateGuiItem, this );
+    mUpdateButton = new QPushButton( this );
+    KGuiItem::assign( mUpdateButton, updateGuiItem );
     mUpdateButton->setEnabled( mTool->isApplyable() );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(extractStrings()) );
     updateLayout->addWidget( mUpdateButton );
@@ -149,7 +150,8 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
                   i18nc("@info:whatsthis",
                         "If you press the <interface>Copy</interface> button, all strings you selected "
                         "in the list are copied to the clipboard.") );
-    mCopyButton = new KPushButton( copyGuiItem, this );
+    mCopyButton = new QPushButton( this );
+    KGuiItem::assign( mCopyButton, copyGuiItem );
     connect( mCopyButton, SIGNAL(clicked(bool)), SLOT(onCopyButtonClicked()) );
     actionsLayout->addWidget( mCopyButton );
 
@@ -163,7 +165,8 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
                   i18nc("@info:whatsthis",
                         "If you press the <interface>Go to</interface> button, the string which was last "
                         "selected is marked and shown in the view.") );
-    mGotoButton = new KPushButton( gotoGuiItem, this );
+    mGotoButton = new QPushButton( this );
+    KGuiItem::assign( mGotoButton, gotoGuiItem );
     connect( mGotoButton, SIGNAL(clicked(bool)), SLOT(onGotoButtonClicked()) );
     actionsLayout->addWidget( mGotoButton );
 

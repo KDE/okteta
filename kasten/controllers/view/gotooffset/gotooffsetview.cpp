@@ -28,7 +28,7 @@
 #include <addresscombobox.h>
 #include <addressvalidator.h>
 // KDE
-#include <KPushButton>
+#include <QPushButton>
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
@@ -112,7 +112,8 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
                         "If you press the <interface>Go</interface> "
                         "button, the cursor will be moved in the document to or, "
                         "on your option, by the offset you entered above.") );
-    mGotoButton = new KPushButton( gotoGuiItem, this );
+    mGotoButton = new QPushButton( this );
+    KGuiItem::assign( mGotoButton, gotoGuiItem );
     connect( mGotoButton, SIGNAL(clicked(bool)), SLOT(onGotoButtonClicked()) );
     addButton( mGotoButton, AbstractToolWidget::Default );
     baseLayout->addWidget( mGotoButton );

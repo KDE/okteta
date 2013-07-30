@@ -30,11 +30,11 @@
 #include <charcodec.h>
 // KDE
 #include <KMessageBox>
-#include <KPushButton>
 #include <KComboBox>
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
+#include <QPushButton>
 #include <QFormLayout>
 #include <QLayout>
 #include <QCheckBox>
@@ -170,7 +170,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
                         "all bytes in the selected range "
                         "will be replaced by bytes which represent the same character "
                         "in the selected target charset.") );
-    mConvertButton = new KPushButton( convertGuiItem, this );
+    mConvertButton = new QPushButton( this );
+    KGuiItem::assign( mConvertButton, convertGuiItem );
     connect( mConvertButton, SIGNAL(clicked(bool)), SLOT(onConvertButtonClicked()) );
     actionsLayout->addWidget( mConvertButton );
 

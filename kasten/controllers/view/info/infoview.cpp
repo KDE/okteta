@@ -27,7 +27,6 @@
 #include "statistictablemodel.h"
 #include "infoviewsettings.h"
 // KDE
-#include <KPushButton>
 #include <KGuiItem>
 #include <KLocalizedString>
 #include <KGlobal>
@@ -35,6 +34,7 @@
 #include <KGlobalSettings>
 // Qt
 #include <QtCore/QSortFilterProxyModel>
+#include <QPushButton>
 #include <QLabel>
 #include <QLayout>
 #include <QHeaderView>
@@ -77,7 +77,8 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
                  i18nc("@info:whatsthis",
                        "If you press the <interface>Build</interface> button,"
                        " the byte frequency statistic is built for the bytes in the selected range.") );
-    mUpdateButton = new KPushButton( updateGuiItem, this );
+    mUpdateButton = new QPushButton( this );
+    KGuiItem::assign( mUpdateButton, updateGuiItem );
     mUpdateButton->setEnabled( mTool->isApplyable() );
     connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT(setEnabled(bool)) );
     connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 

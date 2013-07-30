@@ -34,7 +34,6 @@
 // KDE
 #include <KIO/NetAccess>
 #include <KFileDialog>
-#include <KPushButton>
 #include <KLocalizedString>
 #include <KGuiItem>
 // Qt

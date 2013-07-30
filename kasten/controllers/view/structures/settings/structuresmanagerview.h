@@ -29,7 +29,7 @@
 #include <KNS3/Entry>
 
 class StructureAddRemoveWidget;
-class KPushButton;
+class QPushButton;
 class KPluginSelector;
 
 namespace KNS3
@@ -67,7 +67,7 @@ private:
     Kasten2::StructTool* mTool;
     QStringList mSelectedStructures;
     KNS3::Button* mGetNewStructuresButton;
-    KPushButton* mAdvancedSelectionButton;
+    QPushButton* mAdvancedSelectionButton;
     KPluginSelector* mStructuresSelector;
     bool mRebuildingPluginsList :1;
 
