@@ -37,7 +37,7 @@ namespace Kasten2
 {
 
 TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray& header )
- : mHeader( header )
+ :  mDocument(0), mHeader( header )
 {
     // TODO: where to catch this? who decides about this?
 //     mDocument->setTitle( url.fileName() );

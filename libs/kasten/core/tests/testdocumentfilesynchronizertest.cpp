@@ -107,7 +107,7 @@ void TestDocumentFileSynchronizerTest::checkFileContent( const QUrl& fileUrl, co
 void TestDocumentFileSynchronizerTest::testLoadFromFile()
 {
     const QByteArray testData( TestData1 );
-    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( QLatin1String(FileProtocolName) ) );
 
     Kasten2::TestDocumentFileSynchronizer* synchronizer = new Kasten2::TestDocumentFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
@@ -141,7 +141,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
 
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
 {
-    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(NotExistingFileName) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(NotExistingFileName) ).prepend( QLatin1String(FileProtocolName) ) );
     Kasten2::TestDocumentFileSynchronizer* synchronizer = new Kasten2::TestDocumentFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
     Kasten2::AbstractDocument* document = synchronizer->document();
@@ -153,7 +153,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
 void TestDocumentFileSynchronizerTest::testLoadSaveFile()
 {
     const QByteArray otherData( TestData2 );
-    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( QLatin1String(FileProtocolName) ) );
     Kasten2::TestDocumentFileSynchronizer* synchronizer = new Kasten2::TestDocumentFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
     Kasten2::AbstractDocument* document = synchronizer->document();
