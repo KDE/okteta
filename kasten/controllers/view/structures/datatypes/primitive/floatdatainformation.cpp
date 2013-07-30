@@ -23,7 +23,7 @@
 
 #include <limits>
 #include <QScriptValue>
-#include <KDoubleNumInput>
+#include <QDoubleSpinBox>
 #include <KLocale>
 #include <KGlobal>
 #include <KLocalizedString>
@@ -32,7 +32,7 @@
 
 QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    KDoubleNumInput* ret = new KDoubleNumInput(parent);
+    QDoubleSpinBox* ret = new QDoubleSpinBox(parent);
     ret->setMinimum(std::numeric_limits<float>::min());
     ret->setMaximum(std::numeric_limits<float>::max());
     return ret;
@@ -40,7 +40,7 @@ QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 
 QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
-    const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
+    const QDoubleSpinBox* spin = dynamic_cast<const QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
         return ((float) spin->value());
@@ -49,7 +49,7 @@ QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
 {
-    KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
+    QDoubleSpinBox* spin = dynamic_cast<QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
         spin->setValue(value);

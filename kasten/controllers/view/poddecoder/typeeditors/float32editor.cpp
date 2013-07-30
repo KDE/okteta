@@ -22,8 +22,8 @@
 
 #include "float32editor.h"
 
-// KDE
-#include <KDoubleValidator>
+// Qt
+#include <QDoubleValidator>
 // C++
 #include <limits>
 
@@ -34,7 +34,7 @@ Float32Editor::Float32Editor( QWidget* parent )
     const float floatMax = std::numeric_limits<float>::max();
     const float floatMin = std::numeric_limits<float>::min();
 
-    KDoubleValidator* validator = new KDoubleValidator( this );
+    QDoubleValidator* validator = new QDoubleValidator( this );
     validator->setNotation( QDoubleValidator::ScientificNotation );
     validator->setRange( floatMin, floatMax );
 

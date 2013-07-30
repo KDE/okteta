@@ -22,14 +22,14 @@
 
 #include "float64editor.h"
 
-// KDE
-#include <KDoubleValidator>
+// Qt
+#include <QDoubleValidator>
 
 
 Float64Editor::Float64Editor( QWidget* parent )
   : KLineEdit( parent )
 {
-    KDoubleValidator* validator = new KDoubleValidator( this );
+    QDoubleValidator* validator = new QDoubleValidator( this );
     validator->setNotation( QDoubleValidator::ScientificNotation );
 
     setValidator( validator );

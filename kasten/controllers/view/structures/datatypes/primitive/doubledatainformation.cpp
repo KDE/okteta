@@ -22,9 +22,8 @@
 #include "doubledatainformation.h"
 
 #include <QScriptValue>
-#include <KDoubleNumInput>
 #include <KLocale>
-#include <KGlobal>
+#include <QDoubleSpinBox>
 #include <KLocalizedString>
 
 #include "structviewpreferences.h"
@@ -32,13 +31,13 @@
 
 QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    KDoubleNumInput* ret = new KDoubleNumInput(parent);
+    QDoubleSpinBox* ret = new QDoubleSpinBox(parent);
     return ret;
 }
 
 QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
-    const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
+    const QDoubleSpinBox* spin = dynamic_cast<const QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
         return spin->value();
@@ -48,7 +47,7 @@ QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void DoubleDataInformationMethods::staticSetWidgetData(double value, QWidget* w)
 {
-    KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
+    QDoubleSpinBox* spin = dynamic_cast<QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
         spin->setValue(value);
