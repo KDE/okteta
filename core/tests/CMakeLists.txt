@@ -14,7 +14,6 @@ set( oktetacoretestutil_LIB_SRCS
 
 kde4_add_library( oktetacoretestutil  STATIC ${oktetacoretestutil_LIB_SRCS} )
 
-
 ########### arraychangemetricstest ###############
 
 set( arraychangemetricstest_SRCS
@@ -154,7 +153,7 @@ set( charcodectest_SRCS
 
 kde4_add_unit_test( charcodectest  TESTNAME libokteta-core-charcodectest  ${charcodectest_SRCS})
 target_link_libraries( charcodectest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test ${KDE4Attic_LIBRARIES}
 )
 
 
@@ -166,7 +165,7 @@ set( textcharcodectest_SRCS
 
 kde4_add_unit_test( textcharcodectest  TESTNAME libokteta-core-textcharcodectest  ${textcharcodectest_SRCS} )
 target_link_libraries( textcharcodectest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test ${KDE4Attic_LIBRARIES}
 )
 
 
@@ -179,7 +178,7 @@ set( textcharcodeccharcodeciftest_SRCS
 
 kde4_add_unit_test( textcharcodeccharcodeciftest TESTNAME libokteta-core-textcharcodeccharcodeciftest  ${textcharcodeccharcodeciftest_SRCS} )
 target_link_libraries( textcharcodeccharcodeciftest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test ${KDE4Attic_LIBRARIES}
 )
 
 

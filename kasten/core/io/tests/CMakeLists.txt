@@ -57,6 +57,7 @@ target_link_libraries( bytearrayrawfilesynchronizertest
   oktetacoretestutil
   testoktetacore
   ${KDE4_KIO_LIBS}
+  ${KDE4Attic_LIBRARIES}
   Qt5::Test
 )
 

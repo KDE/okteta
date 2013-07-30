@@ -35,8 +35,8 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QUuid>
+#include <QDebug>
 
-#include <KDebug>
 
 namespace Kasten2
 {
@@ -149,7 +149,7 @@ ByteArrayViewProfileManager::ByteArrayViewProfileManager()
         const QString viewProfileFolderPath = dataFolderPath + viewProfileDirSubPath;
         // watch folder for changes
         mViewProfileFileWatcher->addDir( viewProfileFolderPath, KDirWatch::WatchDirOnly );
-        kDebug() << "adding Dir" << viewProfileFolderPath;
+        qDebug() << "adding Dir" << viewProfileFolderPath;
 
         // read current files
         onViewProfilesFolderChanged( viewProfileFolderPath );
@@ -264,7 +264,7 @@ void ByteArrayViewProfileManager::saveViewProfiles( QList<ByteArrayViewProfile>&
         if( needsId )
             viewProfile.setId( QUuid::createUuid().toString() );
 
-kDebug() << "going to save"<<viewProfile.viewProfileTitle()<<viewProfile.id()<<oldViewProfileId;
+qDebug() << "going to save"<<viewProfile.viewProfileTitle()<<viewProfile.id()<<oldViewProfileId;
         saveViewProfile( viewProfile );
     }
 }
@@ -332,7 +332,7 @@ ByteArrayViewProfileManager::lockViewProfile( const Kasten::ByteArrayViewProfile
 ByteArrayViewProfile
 ByteArrayViewProfileManager::loadViewProfile( const QString& absoluteFilePath ) const
 {
-kDebug() << "Loading" << QFileInfo(absoluteFilePath).baseName() << absoluteFilePath;
+qDebug() << "Loading" << QFileInfo(absoluteFilePath).baseName() << absoluteFilePath;
     ByteArrayViewProfile result;
 
     KConfig configFile( absoluteFilePath, KConfig::SimpleConfig );
@@ -342,7 +342,7 @@ kDebug() << "Loading" << QFileInfo(absoluteFilePath).baseName() << absoluteFileP
     const QString formatVersion = formatConfigGroup.readEntry( "Version" );
     if( ! formatVersion.startsWith(QStringLiteral( "1." )) )
     {
-kDebug() << "ViewProfile file has an unsupported version:" << formatVersion;
+qDebug() << "ViewProfile file has an unsupported version:" << formatVersion;
         return result;
     }
 
@@ -379,7 +379,7 @@ kDebug() << "ViewProfile file has an unsupported version:" << formatVersion;
 void
 ByteArrayViewProfileManager::saveViewProfile( const ByteArrayViewProfile& viewProfile ) const
 {
-kDebug() << "------------------ Saving"<<viewProfile.id();
+qDebug() << "------------------ Saving"<<viewProfile.id();
 {
     const QString fileName = viewProfileFilePath( viewProfile.id() );
     KConfig configFile( fileName, KConfig::SimpleConfig );
@@ -412,14 +412,14 @@ kDebug() << "------------------ Saving"<<viewProfile.id();
     charsConfigGroup.writeEntry( "SubstituteChar", QString(viewProfile.substituteChar()) );
     charsConfigGroup.writeEntry( "UndefinedChar", QString(viewProfile.undefinedChar()) );
 }
-kDebug() << "------------------ Saved"<<viewProfile.id();
+qDebug() << "------------------ Saved"<<viewProfile.id();
 }
 
 void
 ByteArrayViewProfileManager::removeViewProfile( const ByteArrayViewProfile::Id& viewProfileId )
 {
     const QString filePath = filePathOfViewProfile( viewProfileId );
-kDebug() << "------------------ Removing"<<viewProfileId<<filePath;
+qDebug() << "------------------ Removing"<<viewProfileId<<filePath;
     if( ! filePath.isEmpty() )
         QFile::remove( filePath );
 }
@@ -453,7 +453,7 @@ ByteArrayViewProfileManager::filePathOfViewProfile( const ByteArrayViewProfile::
 void
 ByteArrayViewProfileManager::onViewProfilesFolderChanged( const QString& viewProfileFolderPath )
 {
-kDebug() << "looking into folder"<< viewProfileFolderPath;
+qDebug() << "looking into folder"<< viewProfileFolderPath;
     ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup =
         mViewProfileFileInfoLookupPerFolder[viewProfileFolderPath];
 
@@ -465,8 +465,8 @@ kDebug() << "looking into folder"<< viewProfileFolderPath;
 
     QList<ByteArrayViewProfile::Id> newUnlockedViewProfileIds = lockedViewProfileIds(viewProfileFileInfoLookup);
     QList<ByteArrayViewProfile::Id> newLockedViewProfileIds;
-kDebug() << "old profiles:" << removedViewProfileIds;
-kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
+qDebug() << "old profiles:" << removedViewProfileIds;
+qDebug() << "locked profiles:" << newUnlockedViewProfileIds;
     // iterate all files in folder
     const QFileInfoList viewProfileFileInfoList =
         QDir( viewProfileFolderPath ).entryInfoList( viewProfileFileNameFilter, QDir::Files );
@@ -489,7 +489,7 @@ kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
 
        // all other files assumed to be viewProfile files
         const ByteArrayViewProfile::Id viewProfileId = viewProfileFileInfo.baseName();
-kDebug() <<"going to load"<<viewProfileId;
+qDebug() <<"going to load"<<viewProfileId;
         // load file
         const ByteArrayViewProfile viewProfile = loadViewProfile( viewProfileFileInfo.absoluteFilePath() );
         // loading failed? Treat as not existing
@@ -566,22 +566,22 @@ kDebug() <<"going to load"<<viewProfileId;
     // update lock info
     updateLockStatus( viewProfileFileInfoLookup, newLockedViewProfileIds, newUnlockedViewProfileIds );
 
-kDebug() << "new profiles:" << viewProfileFileInfoLookup.keys();
+qDebug() << "new profiles:" << viewProfileFileInfoLookup.keys();
 
     // signal changes
     if( ! changedViewProfiles.isEmpty() )
         emit viewProfilesChanged( changedViewProfiles );
-kDebug() << "changed profiles" << viewProfileIds(changedViewProfiles);
+qDebug() << "changed profiles" << viewProfileIds(changedViewProfiles);
     if( ! removedViewProfileIds.isEmpty() )
         emit viewProfilesRemoved( removedViewProfileIds );
-kDebug() << "removed profiles" << removedViewProfileIds;
+qDebug() << "removed profiles" << removedViewProfileIds;
 
     if( ! newUnlockedViewProfileIds.isEmpty() )
         emit viewProfilesUnlocked( newUnlockedViewProfileIds );
-kDebug() << "unlocked profiles" << newUnlockedViewProfileIds;
+qDebug() << "unlocked profiles" << newUnlockedViewProfileIds;
     if( ! newLockedViewProfileIds.isEmpty() )
         emit viewProfilesLocked( newLockedViewProfileIds );
-kDebug() << "locked profiles" << newLockedViewProfileIds;
+qDebug() << "locked profiles" << newLockedViewProfileIds;
     if( isDefaultViewProfileChanged )
         emit defaultViewProfileChanged( mDefaultViewProfileId );
 }
@@ -595,7 +595,7 @@ void ByteArrayViewProfileManager::onDefaultViewProfileChanged( const QString& pa
     const QString viewProfileId = QString::fromUtf8( fileContent );
     defaultViewProfileFile.close();
 
-kDebug() << "Default viewprofile read:" << viewProfileId;
+qDebug() << "Default viewprofile read:" << viewProfileId;
 
     // no id set?
     if( viewProfileId.isEmpty() )

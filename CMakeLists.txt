@@ -20,9 +20,10 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions fo
 find_package(kdeqt5staging REQUIRED NO_MODULE)
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
-                                            KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KService ItemViews KConfigWidgets 
-                                            KWindowSystem KNotifications KAuth KCodecs KWidgets KIconThemes Sonnet KCompletion
+                                            KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KDBusAddons KService ItemViews KAuth KConfigWidgets
+                                            KWindowSystem KNotifications KCodecs KWidgets KIconThemes Sonnet KCompletion
                                             KTextWidgets XmlGui KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
+                                            KIO KUnitConversion KDE4Attic
                                             )
 
 if( UNIX )
@@ -33,16 +34,19 @@ endif()
 find_package(LibAttica REQUIRED NO_MODULE ) #somehow this is not searched for
 find_package(KDELibs4 REQUIRED NO_MODULE) #needed for KDE4Support
 find_package(KDE4Support REQUIRED NO_MODULE)
-find_package(KDE4Attic REQUIRED NO_MODULE)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) #this is needed since it is apparently not set by Qt5Config.cmake
 
-SET( CMAKE_INCLUDE_CURRENT_DIR ON )
+set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC TRUE )
 include_directories( ${KDE4_INCLUDES} )
 
-macro_optional_find_package( QCA2 )
-macro_log_feature( QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" FALSE "2.0.0" "Needed for most of the algorithms of the checksum tool." )
+include(FeatureSummary)
+
+find_package(QCA2)
+set_package_properties(QCA2 PROPERTIES DESCRIPTION "Qt Cryptographic Architecture"
+                       URL "http://delta.affinix.com/qca" TYPE OPTIONAL
+                       PURPOSE "Needed for most of the algorithms of the checksum tool")
 
 # control build scope
 # TODO: examples and templates not internal need headers and libs as installed
@@ -120,4 +124,4 @@ if (QT_QTDECLARATIVE_FOUND AND OKTETA_MOBILE_UI)
     macro_optional_add_subdirectory(mobile)
 endif (QT_QTDECLARATIVE_FOUND AND OKTETA_MOBILE_UI)
 
-macro_display_feature_log()
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

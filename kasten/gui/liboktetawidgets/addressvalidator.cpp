@@ -26,8 +26,8 @@
 #include <valuecodec.h>
 // KDE
 #include <KLocalizedString>
-#include <KDebug>
 // Qt
+#include <QDebug>
 #include <QtCore/QString>
 #include <QtCore/QRegExp>
 #include <QtScript/QScriptEngine>
@@ -118,12 +118,11 @@ Address AddressValidator::toAddress( const QString& string, AddressType* address
         QScriptEngine evaluator;
         QScriptValue value = evaluator.evaluate( expression );
         address = value.toInt32();
-kDebug() << "expression " << expression << " evaluated to: " << address;
+        qDebug() << "expression " << expression << " evaluated to: " << address;
 
         if( evaluator.hasUncaughtException() )
         {
-            kWarning() << "evaluation error: "
-                    << evaluator.uncaughtExceptionBacktrace();
+            qWarning() << "evaluation error: " << evaluator.uncaughtExceptionBacktrace();
             if( addressType )
                 *addressType = InvalidAddressType;
         }

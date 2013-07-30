@@ -120,7 +120,7 @@ set_target_properties(oktetacore_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
 
 kde4_add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
-target_link_libraries( ${oktetacore_LIB} LINK_PUBLIC ${KDE4_KDECORE_LIBS} )
+target_link_libraries( ${oktetacore_LIB} LINK_PUBLIC ${KDE4_KDECORE_LIBS} ${KDE4Attic_LIBRARIES} )
 
 set_target_properties( ${oktetacore_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetacore_LIB_NAME}
