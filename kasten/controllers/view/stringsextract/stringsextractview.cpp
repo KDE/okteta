@@ -94,7 +94,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
 
     KLineEdit *mFilterEdit = new KLineEdit( this );
     mFilterEdit->setClearButtonShown( true );
-    mFilterEdit->setClickMessage( i18n("Enter a term to limit the list.") );
+    mFilterEdit->setPlaceholderText( i18n("Enter a term to limit the list.") );
     label->setBuddy( mFilterEdit );
     filterLayout->addWidget( mFilterEdit, 10 );
 
