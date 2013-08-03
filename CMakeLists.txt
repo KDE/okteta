@@ -65,7 +65,7 @@ set( OKTETA_BUILD_INTERNAL_TEMPLATES NOT OMIT_INTERNAL_TEMPLATES )
 # mobile needs
 option(OKTETA_MOBILE_UI "Build UI for mobile devices instead of for desktops" FALSE)
 if (OKTETA_MOBILE_UI)
-  macro_log_feature(QT_QTDECLARATIVE_FOUND "QtDeclarative" "Qt Declarative (QML) module" "http://qt.nokia.com" TRUE "4.7" "Required for building mobile UI")
+  find_package(Qt5Quick REQUIRED)
   add_definitions( -DOKTETA_MOBILE_UI )
 endif (OKTETA_MOBILE_UI)
 
@@ -120,8 +120,8 @@ add_subdirectory( parts )
 add_subdirectory( program )
 
 # program for mobile
-if (QT_QTDECLARATIVE_FOUND AND OKTETA_MOBILE_UI)
+if (Qt5Quick_FOUND AND OKTETA_MOBILE_UI)
     macro_optional_add_subdirectory(mobile)
-endif (QT_QTDECLARATIVE_FOUND AND OKTETA_MOBILE_UI)
+endif ()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

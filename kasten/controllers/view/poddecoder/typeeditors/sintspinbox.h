@@ -31,6 +31,8 @@
 
 class SIntSpinBox : public QAbstractSpinBox
 {
+Q_OBJECT
+Q_PROPERTY( qint64 value READ value WRITE setValue USER true )
   public:
     explicit SIntSpinBox( QWidget* parent = 0, int base = 10 );
 
@@ -42,8 +44,14 @@ class SIntSpinBox : public QAbstractSpinBox
   public:
     void setValue( qint64 value );
 
+    //TODO getters + setters
     void setRange( qint64 minimum, qint64 maximum );
     void setBase( int base );
+
+    static SIntSpinBox* createSInt64Spinbox( QWidget* parent = 0 );
+    static SIntSpinBox* createSInt32Spinbox( QWidget* parent = 0 );
+    static SIntSpinBox* createSInt16Spinbox( QWidget* parent = 0 );
+    static SIntSpinBox* createSInt8Spinbox( QWidget* parent = 0 );
 
   protected: // QAbstractSpinBox API
     virtual QValidator::State validate( QString& input, int& pos ) const;
@@ -127,5 +135,31 @@ inline void SIntSpinBox::setBase( int base )
 }
 
 inline SIntSpinBox::~SIntSpinBox() {}
+
+inline SIntSpinBox* SIntSpinBox::createSInt64Spinbox( QWidget* parent )
+{
+    return new SIntSpinBox( parent );
+}
+
+inline SIntSpinBox* SIntSpinBox::createSInt32Spinbox( QWidget* parent )
+{
+    SIntSpinBox* ret = new SIntSpinBox( parent );
+    ret->setRange( std::numeric_limits<qint32>::min(), std::numeric_limits<qint32>::max() );
+    return ret;
+}
+
+inline SIntSpinBox* SIntSpinBox::createSInt16Spinbox( QWidget* parent )
+{
+    SIntSpinBox* ret = new SIntSpinBox( parent );
+    ret->setRange( std::numeric_limits<qint16>::min(), std::numeric_limits<qint16>::max() );
+    return ret;
+}
+
+inline SIntSpinBox* SIntSpinBox::createSInt8Spinbox( QWidget* parent )
+{
+    SIntSpinBox* ret = new SIntSpinBox( parent );
+    ret->setRange( std::numeric_limits<qint8>::min(), std::numeric_limits<qint8>::max() );
+    return ret;
+}
 
 #endif

@@ -31,6 +31,8 @@
 
 class UIntSpinBox : public QAbstractSpinBox
 {
+Q_OBJECT
+Q_PROPERTY( quint64 value READ value WRITE setValue USER true )
   public:
     explicit UIntSpinBox( QWidget* parent = 0, int base = 10 );
 
@@ -47,11 +49,16 @@ class UIntSpinBox : public QAbstractSpinBox
     void setMaximum( quint64 max );
     void setBase( int base );
 
+    static UIntSpinBox* createUInt64Spinbox( QWidget* parent = 0 );
+    static UIntSpinBox* createUInt32Spinbox( QWidget* parent = 0 );
+    static UIntSpinBox* createUInt16Spinbox( QWidget* parent = 0 );
+    static UIntSpinBox* createUInt8Spinbox( QWidget* parent = 0 );
+
   protected: // QAbstractSpinBox API
     virtual QValidator::State validate( QString& input, int& pos ) const;
     virtual void stepBy( int steps );
     virtual void fixup( QString& input ) const;
-    virtual StepEnabled stepEnabled () const;
+    virtual StepEnabled stepEnabled() const;
 
   protected:
     void updateEditLine() const;
@@ -60,6 +67,7 @@ class UIntSpinBox : public QAbstractSpinBox
     mutable quint64 mValue;
 
     quint64 mMaximum;
+    //TODO minimum
     int mBase;
 
     QString mPrefix;
@@ -122,5 +130,32 @@ inline void UIntSpinBox::setBase( int base )
 }
 
 inline UIntSpinBox::~UIntSpinBox() {}
+
+
+inline UIntSpinBox* UIntSpinBox::createUInt64Spinbox( QWidget* parent )
+{
+    return new UIntSpinBox( parent );
+}
+
+inline UIntSpinBox* UIntSpinBox::createUInt32Spinbox( QWidget* parent )
+{
+    UIntSpinBox* ret = new UIntSpinBox( parent );
+    ret->setMaximum( std::numeric_limits<quint32>::max() );
+    return ret;
+}
+
+inline UIntSpinBox* UIntSpinBox::createUInt16Spinbox( QWidget* parent )
+{
+    UIntSpinBox* ret = new UIntSpinBox( parent );
+    ret->setMaximum( std::numeric_limits<quint16>::max() );
+    return ret;
+}
+
+inline UIntSpinBox* UIntSpinBox::createUInt8Spinbox( QWidget* parent )
+{
+    UIntSpinBox* ret = new UIntSpinBox( parent );
+    ret->setMaximum( std::numeric_limits<quint8>::max() );
+    return ret;
+}
 
 #endif
