@@ -184,9 +184,9 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     qint64 result = dataInf->readData(model.data(), 0, model->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), model->size() * 8);
     T* dataAsT = reinterpret_cast<T*>(data.data());
+    QVERIFY(!dataInf->mData->isComplex());
     PrimitiveArrayData<primType>* arrayData =
-            dynamic_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
-    QVERIFY(arrayData);
+            static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
     for (uint i = 0; i < dataInf->childCount(); ++i)
     {
         AllPrimitiveTypes childDataAll = arrayData->valueAt(i);

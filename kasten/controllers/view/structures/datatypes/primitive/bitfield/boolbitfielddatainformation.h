@@ -52,7 +52,7 @@ inline QString BoolBitfieldDataInformation::typeNameImpl() const
             width());
 }
 
-inline Type UnsignedBitfieldDataInformation::bitfieldType() const
+inline AbstractBitfieldDataInformation::Type BoolBitfieldDataInformation::bitfieldType() const
 {
     return AbstractBitfieldDataInformation::Boolean;
 }

@@ -387,10 +387,6 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
 #create a OBJECT library (http://www.cmake.org/Wiki/CMake/Tutorials/Object_Library)
 #to prevent compiling these object files twice with exactly the same compile flags
 
-#OBJECT libraries seem buggy with regard to automoc, have to call it manually
-#automoc4( poddecoder_objs PODDECODERCONTROLLER_SRCS )
-#automoc4( structview_objs STRUCTVIEW_SRCS )
-
 add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
 add_library( structview_objs OBJECT ${STRUCTVIEW_SRCS} )
 set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)

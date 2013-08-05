@@ -53,7 +53,7 @@ inline QString SignedBitfieldDataInformation::typeNameImpl() const
             width());
 }
 
-inline Type UnsignedBitfieldDataInformation::bitfieldType() const
+inline AbstractBitfieldDataInformation::Type SignedBitfieldDataInformation::bitfieldType() const
 {
     return AbstractBitfieldDataInformation::Signed;
 }

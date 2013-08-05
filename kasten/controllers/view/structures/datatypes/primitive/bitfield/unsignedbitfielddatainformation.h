@@ -44,15 +44,15 @@ private:
     virtual QString typeNameImpl() const;
 };
 
-inline Type UnsignedBitfieldDataInformation::bitfieldType() const
-{
-    return AbstractBitfieldDataInformation::Unsigned;
-}
-
 inline QString UnsignedBitfieldDataInformation::typeNameImpl() const
 {
     return i18ncp("Data type", "unsigned bitfield (%1 bit wide)",
             "unsigned bitfield (%1 bits wide)", width());
+}
+
+inline AbstractBitfieldDataInformation::Type UnsignedBitfieldDataInformation::bitfieldType() const
+{
+    return AbstractBitfieldDataInformation::Unsigned;
 }
 
 #endif /* UNSIGNEDBITFIELDDATAINFORMATION_H_ */
