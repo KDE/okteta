@@ -41,6 +41,7 @@ public:
     virtual void setWidgetData(QWidget* w) const;
     /** sign extend the value if it is negative, so it can always be treated as a plain qint64 */
     virtual void setValue(AllPrimitiveTypes newVal);
+    virtual Type bitfieldType() const;
 private:
     virtual QString valueStringImpl() const;
     virtual QString typeNameImpl() const;
@@ -50,6 +51,11 @@ inline QString SignedBitfieldDataInformation::typeNameImpl() const
 {
     return i18ncp("Data type", "signed bitfield (%1 bit wide)", "signed bitfield (%1 bits wide)",
             width());
+}
+
+inline Type UnsignedBitfieldDataInformation::bitfieldType() const
+{
+    return AbstractBitfieldDataInformation::Signed;
 }
 
 #endif /* SIGNEDBITFIELDDATAINFORMATION_H_ */

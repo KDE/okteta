@@ -28,6 +28,10 @@
 class AbstractBitfieldDataInformation : public PrimitiveDataInformation
 {
 public:
+    enum Type {
+        Signed, Unsigned, Boolean
+    };
+
     AbstractBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0);
     virtual ~AbstractBitfieldDataInformation();
 
@@ -40,6 +44,7 @@ public:
     virtual PrimitiveDataType type() const;
     virtual QString sizeString() const;
     virtual bool isBitfield() const;
+    virtual Type bitfieldType() const = 0;
     virtual Qt::ItemFlags flags(int column, bool fileLoaded) const;
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);

@@ -38,10 +38,16 @@ public:
     virtual QWidget* createEditWidget(QWidget* parent) const;
     virtual QVariant dataFromWidget(const QWidget* w) const;
     virtual void setWidgetData(QWidget* w) const;
+    virtual Type bitfieldType() const;
 private:
     virtual QString valueStringImpl() const;
     virtual QString typeNameImpl() const;
 };
+
+inline Type UnsignedBitfieldDataInformation::bitfieldType() const
+{
+    return AbstractBitfieldDataInformation::Unsigned;
+}
 
 inline QString UnsignedBitfieldDataInformation::typeNameImpl() const
 {
