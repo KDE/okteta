@@ -29,6 +29,7 @@
 namespace Kasten2
 {
 
-static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("liboktetakasten") ), 0);
+// FIXME: Replace with ki18n functionality
+//static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("liboktetakasten") ), 0);
 
 }
