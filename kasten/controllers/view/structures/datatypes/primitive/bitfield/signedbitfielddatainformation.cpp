@@ -43,7 +43,7 @@ QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 
 QVariant SignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
-    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*> (w);
+    const SIntSpinBox* spin = qobject_cast<const SIntSpinBox*> (w);
     if (spin)
         return spin->value();
     else
@@ -52,7 +52,7 @@ QVariant SignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 
 void SignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
-    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*> (w);
+    SIntSpinBox* spin = qobject_cast<SIntSpinBox*> (w);
     if (spin)
         spin->setValue(mValue.value<qint64>());
 }

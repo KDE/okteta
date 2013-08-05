@@ -88,7 +88,7 @@ inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* p
 template<typename T>
 inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
-    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*>(w);
+    const SIntSpinBox* spin = qobject_cast<const SIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin)
         return spin->value();
@@ -100,7 +100,7 @@ inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidge
 template<typename T>
 inline void SIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
-    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*>(w);
+    SIntSpinBox* spin = qobject_cast<SIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin)
         spin->setValue(value);

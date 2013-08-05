@@ -74,7 +74,7 @@ QWidget* CharDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     //TODO fix this code!!
-    const KLineEdit* edit = dynamic_cast<const KLineEdit*> (w);
+    const KLineEdit* edit = qobject_cast<const KLineEdit*> (w);
     if (edit)
     {
         QString text = edit->text();
@@ -131,7 +131,7 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
 {
-    KLineEdit* edit = dynamic_cast<KLineEdit*> (w);
+    KLineEdit* edit = qobject_cast<KLineEdit*> (w);
     if (edit)
     {
         QChar qchar(value, 0);
