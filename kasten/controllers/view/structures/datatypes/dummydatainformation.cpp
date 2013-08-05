@@ -32,7 +32,7 @@ DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QS
 
 inline DataInformationWithDummyChildren* DummyDataInformation::parentHelper() const
 {
-    DataInformationWithDummyChildren* parent = dynamic_cast<DataInformationWithDummyChildren*>(mParent);
+    DataInformationWithDummyChildren* parent = mParent->asDataInformationWithDummyChildren();
     Q_CHECK_PTR(parent);
     return parent;
 }

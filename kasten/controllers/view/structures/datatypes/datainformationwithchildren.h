@@ -62,6 +62,8 @@ public:
     virtual void resetValidationState();
     virtual void calculateValidationState();
 
+    virtual bool isDataInformationWithChildren() const;
+
     /** Takes ownership! */
     void appendChild(DataInformation* child, bool emitSignal = true);
     /** Takes ownership of all elements */
@@ -80,6 +82,11 @@ inline unsigned int DataInformationWithChildren::childCount() const
 }
 
 inline bool DataInformationWithChildren::canHaveChildren() const
+{
+    return true;
+}
+
+inline bool DataInformationWithChildren::isDataInformationWithChildren() const
 {
     return true;
 }

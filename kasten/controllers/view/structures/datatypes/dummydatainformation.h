@@ -94,6 +94,7 @@ public:
             Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
     virtual QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const = 0;
     virtual int indexOf(const DataInformation* const data) const;
+    virtual bool isDataInformationWithDummyChildren() const;
 };
 
 
@@ -105,6 +106,11 @@ inline int DataInformationWithDummyChildren::indexOf(const DataInformation* cons
 }
 
 inline bool DummyDataInformation::isDummy() const
+{
+    return true;
+}
+
+inline bool DataInformationWithDummyChildren::isDataInformationWithDummyChildren() const
 {
     return true;
 }
