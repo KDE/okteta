@@ -20,8 +20,8 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions fo
 find_package(kdeqt5staging REQUIRED NO_MODULE)
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
-                                            KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KDBusAddons KService ItemViews KAuth KConfigWidgets
-                                            KWindowSystem KNotifications KCodecs KWidgets KIconThemes Sonnet KCompletion
+                                            KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KDBusAddons KService ItemViews KAuth KCodecs
+                                            KConfigWidgets KWindowSystem KNotifications KIconThemes Sonnet KCompletion
                                             KTextWidgets XmlGui KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
                                             KIO KUnitConversion KDE4Attic
                                             )

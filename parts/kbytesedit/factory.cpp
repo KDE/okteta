@@ -27,3 +27,5 @@
 
 K_PLUGIN_FACTORY(ProductFactory, registerPlugin<KByteArrayEdit>();)
 K_EXPORT_PLUGIN(ProductFactory("kbytearrayedit"))
+
+#include "factory.moc"
