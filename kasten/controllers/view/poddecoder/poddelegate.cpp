@@ -322,43 +322,43 @@ void PODDelegate::setModelData( QWidget* editor, QAbstractItemModel* model, cons
     }
     else if( data.canConvert<SInt8>() )
     {
-        SIntSpinBox* editor = qobject_cast<SIntSpinBox*>( editor );
-        model->setData( index, QVariant::fromValue( SInt8(editor->value()) ) );
+        SIntSpinBox* sintEditor = qobject_cast<SIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( SInt8(sintEditor->value()) ) );
     }
     else if( data.canConvert<SInt16>() )
     {
-        SIntSpinBox* editor = qobject_cast<SIntSpinBox*>( editor );
-        model->setData( index, QVariant::fromValue( SInt16(editor->value()) ) );
+        SIntSpinBox* sintEditor = qobject_cast<SIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( SInt16(sintEditor->value()) ) );
     }
     else if( data.canConvert<SInt32>() )
     {
-        SIntSpinBox* editor = qobject_cast<SIntSpinBox*>( editor );
-        model->setData( index, QVariant::fromValue( SInt32(editor->value()) ) );
+        SIntSpinBox* sintEditor = qobject_cast<SIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( SInt32(sintEditor->value()) ) );
     }
     else if( data.canConvert<SInt64>() )
     {
-        SIntSpinBox* editor = qobject_cast<SIntSpinBox*>( editor );
-        model->setData( index, QVariant::fromValue( SInt64(editor->value()) ) );
+        SIntSpinBox* sintEditor = qobject_cast<SIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( SInt64(sintEditor->value()) ) );
     }
     else if( data.canConvert<UInt8>() )
     {
-        UIntSpinBox* editor = qobject_cast<UIntSpinBox*>( editor );
-        model->setData( index, QVariant::fromValue( UInt8(editor->value()) ) );
+        UIntSpinBox* uintEditor = qobject_cast<UIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( UInt8(uintEditor->value()) ) );
     }
     else if( data.canConvert<UInt16>() )
     {
-        UIntSpinBox* editor = qobject_cast<UIntSpinBox*>( editor );
-        model->setData( index, QVariant::fromValue( UInt16(editor->value()) ) );
+        UIntSpinBox* uintEditor = qobject_cast<UIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( UInt16(uintEditor->value()) ) );
     }
     else if( data.canConvert<UInt32>() )
     {
-        UIntSpinBox* editor = qobject_cast<UIntSpinBox*>( editor );
-        model->setData( index, QVariant::fromValue( UInt32(editor->value()) ) );
+        UIntSpinBox* uintEditor = qobject_cast<UIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( UInt32(uintEditor->value()) ) );
     }
     else if( data.canConvert<UInt64>() )
     {
-        UIntSpinBox* editor = qobject_cast<UIntSpinBox*>( editor );
-        model->setData( index, QVariant::fromValue( UInt64(editor->value()) ) );
+        UIntSpinBox* uintEditor = qobject_cast<UIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( UInt64(uintEditor->value()) ) );
     }
     else if( data.canConvert<Float32>() )
     {
