@@ -49,8 +49,8 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( By
                "Pattern:" );
     mPatternEdit = new Okteta::ByteArrayComboBox( this );
     mPatternEdit->setByteArray( mSettings.pattern );
-    connect( mPatternEdit, SIGNAL(byteArrayChanged(QByteArray)), SLOT(onSettingsChanged()) );
-    connect( mPatternEdit, SIGNAL(byteArrayChanged(QByteArray)), SLOT(onPatternChanged(QByteArray)) );
+    connect( mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged );
+    connect( mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onPatternChanged );
     const QString inputWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter a pattern to search for, or select a previous pattern from the list." );
@@ -65,7 +65,7 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( By
     mNumberInput = new QSpinBox( this );
     mNumberInput->setRange( 1, INT_MAX );
     mNumberInput->setValue( mSettings.count );
-    connect( mNumberInput, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );
+    connect( mNumberInput, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter the number of times the pattern should be inserted." );

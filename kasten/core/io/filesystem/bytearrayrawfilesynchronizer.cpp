@@ -41,7 +41,7 @@ namespace Kasten2
 ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()
  : mDocument( 0 )
 {
-    connect( this, SIGNAL(urlChanged(QUrl)), SLOT(onUrlChange(QUrl)) );
+    connect( this, &ByteArrayRawFileSynchronizer::urlChanged, this, &ByteArrayRawFileSynchronizer::onUrlChange );
 }
 
 AbstractDocument* ByteArrayRawFileSynchronizer::document() const { return mDocument; }
@@ -56,8 +56,8 @@ void ByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument* document )
 {
     mDocument = document;
     if( mDocument )
-        connect( mDocument->content(), SIGNAL(modifiedChanged(bool)),
-                 SLOT(onModelModified(bool)) );
+        connect( mDocument->content(), &Okteta::AbstractByteArrayModel::modifiedChanged,
+                 this, &ByteArrayRawFileSynchronizer::onModelModified );
 }
 
 AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const QUrl &url )

@@ -59,7 +59,7 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( 
                        "16-bit") );
     mAddressSizeSelect->addItems( list );
     mAddressSizeSelect->setCurrentIndex( mSettings.addressSizeId );
-    connect( mAddressSizeSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
+    connect( mAddressSizeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
 }
 

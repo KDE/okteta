@@ -52,7 +52,7 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
 
     mFileNameEdit = new KLineEdit( this );
     mFileNameEdit->setText( mSettings.fileName );
-    connect( mFileNameEdit, SIGNAL(textChanged(QString)), SLOT(onSettingsChanged()) );
+    connect( mFileNameEdit, &KLineEdit::textChanged, this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( fileNameLabel, mFileNameEdit );
 
     // data type
@@ -68,7 +68,7 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
                        "Base64") );
     mEncodingSelect->addItems( list );
     mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
-    connect( mEncodingSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
+    connect( mEncodingSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
 }
 

@@ -59,7 +59,7 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
                        "z-base-32") );
     mEncodingSelect->addItems( list );
     mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
-    connect( mEncodingSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
+    connect( mEncodingSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
 }
 

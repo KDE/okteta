@@ -137,8 +137,8 @@ viewProfileFileName( const ByteArrayViewProfile::Id& viewProfileId )
 ByteArrayViewProfileManager::ByteArrayViewProfileManager()
 {
     mViewProfileFileWatcher = new KDirWatch( this );
-    connect( mViewProfileFileWatcher, SIGNAL(dirty(QString)),
-             SLOT(onViewProfilesFolderChanged(QString)) );
+    connect( mViewProfileFileWatcher, &KDirWatch::dirty,
+             this, &ByteArrayViewProfileManager::onViewProfilesFolderChanged );
 
     // get all folder where viewProfiles could be stored
     const QStringList dataFolderPaths =
@@ -159,10 +159,10 @@ ByteArrayViewProfileManager::ByteArrayViewProfileManager()
     // While there is no proper config syncing offer in the used frameworks, use a
     // single file with the id as content as workaround and watch for it changing
     KDirWatch* defaultViewProfileWatcher = new KDirWatch( this );
-    connect( defaultViewProfileWatcher, SIGNAL(created(QString)),
-             SLOT(onDefaultViewProfileChanged(QString)) );
-    connect( defaultViewProfileWatcher, SIGNAL(dirty(QString)),
-             SLOT(onDefaultViewProfileChanged(QString)) );
+    connect( defaultViewProfileWatcher, &KDirWatch::created,
+             this, &ByteArrayViewProfileManager::onDefaultViewProfileChanged );
+    connect( defaultViewProfileWatcher, &KDirWatch::dirty,
+             this, &ByteArrayViewProfileManager::onDefaultViewProfileChanged );
     const QString _defaultViewProfileFilePath = defaultViewProfileFilePath();
 
     defaultViewProfileWatcher->addFile( _defaultViewProfileFilePath );

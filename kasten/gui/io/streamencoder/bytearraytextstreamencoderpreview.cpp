@@ -41,11 +41,11 @@ ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractBy
     mWidget->setLineWrapMode( QTextEdit::NoWrap );
     mWidget->setToolTip( i18n("The preview uses maximal the first 100 bytes.") );
 
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
+    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+             this, &ByteArrayTextStreamEncoderPreview::setFixedFontByGlobalSettings );
     setFixedFontByGlobalSettings();
 
-    connect( mEncoder, SIGNAL(settingsChanged()), SLOT(update()) );
+    connect( mEncoder, &AbstractByteArrayStreamEncoder::settingsChanged, this, &ByteArrayTextStreamEncoderPreview::update );
 }
 
 QWidget* ByteArrayTextStreamEncoderPreview::widget() const { return mWidget; }

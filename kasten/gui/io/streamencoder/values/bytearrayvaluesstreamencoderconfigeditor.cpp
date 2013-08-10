@@ -69,7 +69,7 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
 
     mSeparationEdit = new KLineEdit( this );
     mSeparationEdit->setText( mSettings.separation );
-    connect( mSeparationEdit, SIGNAL(textChanged(QString)), SLOT(onSettingsChanged()) );
+    connect( mSeparationEdit, &KLineEdit::textChanged, this, &ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addWidget( mSeparationEdit, 0, 1);
 
 

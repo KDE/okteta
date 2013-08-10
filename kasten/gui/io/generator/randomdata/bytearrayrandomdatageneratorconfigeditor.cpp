@@ -50,7 +50,7 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
     mSizeInput->setValue( mSettings.size );
 #pragma message("Plural suffix?")
     mSizeInput->setSuffix( i18n(" bytes") ); //TODO plural
-    connect( mSizeInput, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );
+    connect( mSizeInput, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter the size of the byte to generate." );
