@@ -56,8 +56,8 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
 
     QLabel* label = new QLabel( i18nc("@label:listbox","Start offset:"), this );
     mStartEdit = new Okteta::AddressComboBox( this );
-    connect( mStartEdit, SIGNAL(addressChanged(Okteta::Address)),
-             mTool, SLOT(setTargetStart(Okteta::Address)) );
+    connect( mStartEdit, &Okteta::AddressComboBox::addressChanged,
+             mTool, &SelectRangeTool::setTargetStart );
     label->setBuddy( mStartEdit );
     const QString startInputWhatsThis =
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
@@ -76,8 +76,8 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
 
     label = new QLabel( i18nc("@label:listbox","End offset:"), this );
     mEndEdit = new Okteta::AddressComboBox( this );
-    connect( mEndEdit, SIGNAL(addressChanged(Okteta::Address)),
-             mTool, SLOT(setTargetEnd(Okteta::Address)) );
+    connect( mEndEdit, &Okteta::AddressComboBox::addressChanged,
+             mTool, &SelectRangeTool::setTargetEnd );
     label->setBuddy( mEndEdit );
     const QString endInputWhatsThis =
         i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
@@ -97,17 +97,17 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
     mRelativeCheckBox = new QCheckBox( i18nc("@option:check","End relative"), this );
     mRelativeCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
-    connect( mRelativeCheckBox, SIGNAL(toggled(bool)),
-             mTool, SLOT(setIsEndRelative(bool)) );
+    connect( mRelativeCheckBox, &QCheckBox::toggled,
+             mTool, &SelectRangeTool::setIsEndRelative );
     mRelativeCheckBox->setChecked( mTool->isEndRelative() );
     mBackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), this );
     mBackwardsCheckBox->setWhatsThis(
         i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
-    connect( mBackwardsCheckBox, SIGNAL(toggled(bool)),
-             mTool, SLOT(setIsEndBackwards(bool)) );
+    connect( mBackwardsCheckBox, &QCheckBox::toggled,
+             mTool, &SelectRangeTool::setIsEndBackwards );
     mBackwardsCheckBox->setChecked( mTool->isEndBackwards() );
 
-    connect( mRelativeCheckBox, SIGNAL(toggled(bool)), mBackwardsCheckBox, SLOT(setEnabled(bool)) );
+    connect( mRelativeCheckBox, &QCheckBox::toggled, mBackwardsCheckBox, &QCheckBox::setEnabled );
     mBackwardsCheckBox->setEnabled( mRelativeCheckBox->isChecked() );
 
     optionsLayout->addWidget( mRelativeCheckBox );
@@ -128,7 +128,7 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
                         "on your option, by the offset you entered above.") );
     mSelectButton = new QPushButton( this );
     KGuiItem::assign( mSelectButton, selectGuiItem );
-    connect( mSelectButton, SIGNAL(clicked(bool)), SLOT(onSelectButtonClicked()) );
+    connect( mSelectButton, &QPushButton::clicked, this, &SelectRangeView::onSelectButtonClicked );
     addButton( mSelectButton, AbstractToolWidget::Default );
     baseLayout->addWidget( mSelectButton );
     baseLayout->setAlignment( mSelectButton, Qt::AlignTop );
@@ -140,7 +140,7 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
     setTabOrder( mRelativeCheckBox, mBackwardsCheckBox );
     setTabOrder( mBackwardsCheckBox, mSelectButton );
 
-    connect( mTool, SIGNAL(isApplyableChanged(bool)), SLOT(onApplyableChanged(bool)) );
+    connect( mTool, &SelectRangeTool::isApplyableChanged, this, &SelectRangeView::onApplyableChanged );
 
     onApplyableChanged( mTool->isApplyable() );
 }

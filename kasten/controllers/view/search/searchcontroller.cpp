@@ -51,14 +51,14 @@ SearchController::SearchController( KXMLGUIClient* guiClient, QWidget* parentWid
     mTool = new SearchTool();
     mTool->setUserQueryAgent( this );
 
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-             mFindAction, SLOT(setEnabled(bool)) );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-             mFindNextAction, SLOT(setEnabled(bool)) );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-             mFindPrevAction, SLOT(setEnabled(bool)) );
+    connect( mTool, &SearchTool::isApplyableChanged,
+             mFindAction, &QAction::setEnabled );
+    connect( mTool, &SearchTool::isApplyableChanged,
+             mFindNextAction, &QAction::setEnabled );
+    connect( mTool, &SearchTool::isApplyableChanged,
+             mFindPrevAction, &QAction::setEnabled );
 
-    connect( mTool, SIGNAL(dataNotFound()), SLOT(onDataNotFound()) );
+    connect( mTool, &SearchTool::dataNotFound, this, &SearchController::onDataNotFound );
 
     mFindAction->setEnabled( false );
     mFindNextAction->setEnabled( false );

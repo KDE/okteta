@@ -63,8 +63,8 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     label->setToolTip( sizeToolTip );
     mSizeLabel->setToolTip( sizeToolTip );
     topLineLayout->addWidget( mSizeLabel, 10 );
-    connect( mTool->statisticTableModel(), SIGNAL(sizeChanged(int)),
-             SLOT(setByteArraySize(int)) );
+    connect( mTool->statisticTableModel(), &StatisticTableModel::sizeChanged,
+             this, &InfoView::setByteArraySize );
 
     topLineLayout->addStretch();
 
@@ -80,19 +80,19 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mUpdateButton = new QPushButton( this );
     KGuiItem::assign( mUpdateButton, updateGuiItem );
     mUpdateButton->setEnabled( mTool->isApplyable() );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT(setEnabled(bool)) );
-    connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
+    connect( mTool, &InfoTool::isApplyableChanged, mUpdateButton, &QPushButton::setEnabled );
+    connect( mUpdateButton, &QPushButton::clicked, mTool, &InfoTool::updateStatistic ); 
     topLineLayout->addWidget( mUpdateButton );
 
     baseLayout->addLayout( topLineLayout );
 
     mStatisticTableView = new QTreeView( this );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(resizeColumnsWidth()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayStyleChanged()),
-             SLOT(resizeColumnsWidth()) );
+    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+             this, &InfoView::setFixedFontByGlobalSettings );
+    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+             this, &InfoView::resizeColumnsWidth );
+    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
+             this, &InfoView::resizeColumnsWidth );
     setFixedFontByGlobalSettings(); //do this before setting model
     mStatisticTableView->setObjectName( QStringLiteral( "StatisticTable" ) );
     mStatisticTableView->setRootIsDecorated( false );
@@ -110,7 +110,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     proxyModel->setSourceModel( mTool->statisticTableModel() );
     mStatisticTableView->setModel( proxyModel );
     mStatisticTableView->sortByColumn( StatisticTableModel::CountId, Qt::DescendingOrder );
-    connect( mTool->statisticTableModel(), SIGNAL(headerChanged()), SLOT(updateHeader()) );
+    connect( mTool->statisticTableModel(), &StatisticTableModel::headerChanged, this, &InfoView::updateHeader );
 
     baseLayout->addWidget( mStatisticTableView, 10 );
 

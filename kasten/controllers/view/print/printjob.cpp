@@ -51,7 +51,7 @@ void PrintJob::start()
 
 bool PrintJob::exec()
 {
-    connect( mFramesPrinter, SIGNAL(printedPage(int)), SLOT(onPagePrinted()) );
+    connect( mFramesPrinter, &FramesToPaperPrinter::printedPage, this, &PrintJob::onPagePrinted );
 
     const bool result = mFramesPrinter->print( mPrinter, mFirstPage, mLastPage );
 

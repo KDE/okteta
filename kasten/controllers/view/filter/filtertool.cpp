@@ -82,10 +82,10 @@ void FilterTool::setTargetModel( AbstractModel* model )
     if( hasByteArray )
     {
         newCharCodecName = mByteArrayView->charCodingName();
-        connect( mByteArrayView, SIGNAL(hasSelectedDataChanged(bool)), SLOT(onApplyableChanged()) );
-        connect( mByteArrayView, SIGNAL(readOnlyChanged(bool)),        SLOT(onApplyableChanged()) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
-                 SIGNAL(charCodecChanged(QString)) );
+        connect( mByteArrayView, &ByteArrayView::hasSelectedDataChanged, this, &FilterTool::onApplyableChanged );
+        connect( mByteArrayView, &ByteArrayView::readOnlyChanged,        this, &FilterTool::onApplyableChanged );
+        connect( mByteArrayView, &ByteArrayView::charCodecChanged,
+                 this, &FilterTool::charCodecChanged );
     }
 
     onApplyableChanged();

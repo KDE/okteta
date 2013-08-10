@@ -83,8 +83,8 @@ void GotoOffsetTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                 SLOT(onContentsChanged()) );
+        connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                 this, &GotoOffsetTool::onContentsChanged );
         // TODO: update isApplyable on cursor movement and size changes
     }
 

@@ -41,16 +41,16 @@ ViewProfileTableModel::ViewProfileTableModel( const ByteArrayViewProfileManager*
   : QAbstractTableModel( parent )
   , mViewProfileManager( viewProfileManager )
 {
-    connect( viewProfileManager, SIGNAL(viewProfilesChanged(QList<Kasten2::ByteArrayViewProfile>)),
-             SLOT(onViewProfilesChanged()) );
-    connect( viewProfileManager, SIGNAL(viewProfilesRemoved(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfilesChanged()) );
-    connect( viewProfileManager, SIGNAL(defaultViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)),
-             SLOT(onDefaultIndexChanged()) );
-    connect( viewProfileManager, SIGNAL(viewProfilesLocked(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfilesChanged()) );
-    connect( viewProfileManager, SIGNAL(viewProfilesUnlocked(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfileLocksChanged(QList<Kasten2::ByteArrayViewProfile::Id>)) );
+    connect( viewProfileManager, &ByteArrayViewProfileManager::viewProfilesChanged,
+             this, &ViewProfileTableModel::onViewProfilesChanged );
+    connect( viewProfileManager, &ByteArrayViewProfileManager::viewProfilesRemoved,
+             this, &ViewProfileTableModel::onViewProfilesChanged );
+    connect( viewProfileManager, &ByteArrayViewProfileManager::defaultViewProfileChanged,
+             this, &ViewProfileTableModel::onDefaultIndexChanged );
+    connect( viewProfileManager, &ByteArrayViewProfileManager::viewProfilesLocked,
+             this, &ViewProfileTableModel::onViewProfilesChanged );
+    connect( viewProfileManager, &ByteArrayViewProfileManager::viewProfilesUnlocked,
+             this, &ViewProfileTableModel::onViewProfileLocksChanged );
 }
 
 int ViewProfileTableModel::rowCount( const QModelIndex &parent ) const

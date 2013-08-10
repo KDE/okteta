@@ -73,8 +73,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
         i18nc( "@info:whatsthis",
                "Select the direction the bytes are converted, to or from the selected charset." );
     mDirectionComboBox->setWhatsThis( directionWhatsThis );
-    connect( mDirectionComboBox, SIGNAL(activated(int)),
-             mTool, SLOT(setConversionDirection(int)) );
+    connect( mDirectionComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+             mTool, &CharsetConversionTool::setConversionDirection );
 
     directionCharsetLayout->addWidget( mDirectionComboBox );
 
@@ -92,8 +92,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
         i18nc( "@info:whatsthis",
                "Select the charset the bytes are converted to." );
     mOtherCharSetComboBox->setWhatsThis( targetCharsetWhatsThis );
-    connect( mOtherCharSetComboBox, SIGNAL(activated(QString)),
-             mTool, SLOT(setOtherCharCodecName(QString)) );
+    connect( mOtherCharSetComboBox, static_cast<void (KComboBox::*)(const QString&)>(&KComboBox::activated),
+             mTool, &CharsetConversionTool::setOtherCharCodecName );
 
     directionCharsetLayout->addWidget( mOtherCharSetComboBox, 10 );
     baseLayout->addLayout( directionCharsetLayout );
@@ -118,8 +118,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
                "if its char in the source charset is not part of the target charset." );
     mSubstituteMissingCharCheckBox->setToolTip( substituteMissingCharToolTip );
     mSubstituteMissingCharCheckBox->setWhatsThis( substituteMissingCharWhatsThis );
-    connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
-             mTool, SLOT(setSubstitutingMissingChars(bool)) );
+    connect( mSubstituteMissingCharCheckBox, &QCheckBox::toggled,
+             mTool, &CharsetConversionTool::setSubstitutingMissingChars );
     settingsLayout->addRow( substituteMissingCharLabelText, mSubstituteMissingCharCheckBox );
     // TODO: control what happens on conflicts or unmatched chars in the target set
     // option to try only if no conflicts or unmatched chars are hit
@@ -144,8 +144,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
     mSubstituteByteEdit->setWhatsThis( substituteByteWhatsThis );
 //     mSubstituteByteEdit->setEnabled( mTool->isSubstitutingMissingChars() );
     mSubstituteByteEdit->setEnabled( false ); // TODO: fix char entering and enable again
-    connect( mSubstituteByteEdit, SIGNAL(byteArrayChanged(QByteArray)),
-             SLOT(onDefaultByteEditChanged(QByteArray)) );
+    connect( mSubstituteByteEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
+             this, &CharsetConversionView::onDefaultByteEditChanged );
 //     connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
 //              mSubstituteByteEdit, SLOT(setEnabled(bool)) );
     mSubstituteByteEdit->setByteArray( QByteArray(1, mTool->substituteByte()) );
@@ -172,16 +172,16 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
                         "in the selected target charset.") );
     mConvertButton = new QPushButton( this );
     KGuiItem::assign( mConvertButton, convertGuiItem );
-    connect( mConvertButton, SIGNAL(clicked(bool)), SLOT(onConvertButtonClicked()) );
+    connect( mConvertButton, &QPushButton::clicked, this, &CharsetConversionView::onConvertButtonClicked );
     actionsLayout->addWidget( mConvertButton );
 
     baseLayout->addLayout( actionsLayout );
     baseLayout->addStretch();
 
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-                    SLOT(onApplyableChanged(bool)) );
-    connect( mTool, SIGNAL(conversionDone(bool,int,QMap<Okteta::Byte,int>)),
-                    SLOT(onConversionDone(bool,int,QMap<Okteta::Byte,int>)) );
+    connect( mTool, &CharsetConversionTool::isApplyableChanged,
+                    this, &CharsetConversionView::onApplyableChanged );
+    connect( mTool, &CharsetConversionTool::conversionDone,
+                    this, &CharsetConversionView::onConversionDone );
 }
 
 

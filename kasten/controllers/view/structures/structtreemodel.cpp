@@ -35,16 +35,16 @@ namespace Kasten2
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
     QAbstractItemModel(parent), mTool(tool), mLastSender(0), mLastStartIndex(0), mLastEndIndex(0)
 {
-    connect(mTool, SIGNAL(dataChanged(int,void*)), this, SLOT(onToolDataChange(int,void*)));
-    connect(mTool, SIGNAL(dataCleared()), this, SLOT(onToolDataClear()));
-    connect(mTool, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)),
-            this, SLOT(onChildrenAboutToBeInserted(DataInformation*,uint,uint)));
-    connect(mTool, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)),
-            this, SLOT(onChildrenAboutToBeRemoved(DataInformation*,uint,uint)));
-    connect(mTool, SIGNAL(childrenInserted(const DataInformation*,uint,uint)),
-            this, SLOT(onChildrenInserted(const DataInformation*,uint,uint)));
-    connect(mTool, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)),
-            this, SLOT(onChildrenRemoved(const DataInformation*,uint,uint)));
+    connect(mTool, &StructTool::dataChanged, this, &StructTreeModel::onToolDataChange);
+    connect(mTool, &StructTool::dataCleared, this, &StructTreeModel::onToolDataClear);
+    connect(mTool, &StructTool::childrenAboutToBeInserted,
+            this, &StructTreeModel::onChildrenAboutToBeInserted);
+    connect(mTool, &StructTool::childrenAboutToBeRemoved,
+            this, &StructTreeModel::onChildrenAboutToBeRemoved);
+    connect(mTool, &StructTool::childrenInserted,
+            this, &StructTreeModel::onChildrenInserted);
+    connect(mTool, &StructTool::childrenRemoved,
+            this, &StructTreeModel::onChildrenRemoved);
 
 }
 

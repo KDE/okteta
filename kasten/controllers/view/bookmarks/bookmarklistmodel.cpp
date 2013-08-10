@@ -39,16 +39,16 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)tool->offsetCoding() );
 
-    connect( mTool, SIGNAL(hasBookmarksChanged(bool)),
-             SLOT(onHasBookmarksChanged(bool)) );
-    connect( mTool, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-             SLOT(onBookmarksChanged()) );
-    connect( mTool, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-             SLOT(onBookmarksChanged()) );
-    connect( mTool, SIGNAL(bookmarksModified(QList<int>)),
-             SLOT(onBookmarksChanged(QList<int>)) );
-    connect( mTool, SIGNAL(offsetCodingChanged(int)),
-             SLOT(onOffsetCodingChanged(int)) );
+    connect( mTool, &BookmarksTool::hasBookmarksChanged,
+             this, &BookmarkListModel::onHasBookmarksChanged );
+    connect( mTool, &BookmarksTool::bookmarksAdded,
+             this, static_cast<void (BookmarkListModel::*)()>(&BookmarkListModel::onBookmarksChanged) );
+    connect( mTool, &BookmarksTool::bookmarksRemoved,
+             this, static_cast<void (BookmarkListModel::*)()>(&BookmarkListModel::onBookmarksChanged) );
+    connect( mTool, &BookmarksTool::bookmarksModified,
+             this, static_cast<void (BookmarkListModel::*)(const QList<int>&)>(&BookmarkListModel::onBookmarksChanged) );
+    connect( mTool, &BookmarksTool::offsetCodingChanged,
+             this, &BookmarkListModel::onOffsetCodingChanged );
 }
 
 int BookmarkListModel::rowCount( const QModelIndex& parent ) const

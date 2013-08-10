@@ -70,7 +70,7 @@ PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )
     qRegisterMetaType<Char8>();
     qRegisterMetaType<Utf8>();
 
-    connect( mTool, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
+    connect( mTool, &PODDecoderTool::readOnlyChanged, this, &PODDelegate::onReadOnlyChanged );
 }
 
 // make sure only editors are created which have a readOnly property
@@ -85,110 +85,110 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     if( data.canConvert<Binary8>() )
     {
         Binary8Editor* editor = new Binary8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Binary8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Octal8>() )
     {
         Octal8Editor* editor = new Octal8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Octal8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Hexadecimal8>() )
     {
         Hexadecimal8Editor* editor = new Hexadecimal8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Hexadecimal8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<SInt8>() )
     {
         SIntSpinBox* editor = SIntSpinBox::createSInt8Spinbox( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &SIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<SInt16>() )
     {
         SIntSpinBox* editor = SIntSpinBox::createSInt16Spinbox( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &SIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<SInt32>() )
     {
         SIntSpinBox* editor = SIntSpinBox::createSInt32Spinbox( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &SIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<SInt64>() )
     {
         SIntSpinBox* editor = SIntSpinBox::createSInt64Spinbox( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &SIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<UInt8>() )
     {
         UIntSpinBox* editor = UIntSpinBox::createUInt8Spinbox( parent );
         editor->setBase( mTool->isUnsignedAsHex() ? 16 : 10 );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &UIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<UInt16>() )
     {
         UIntSpinBox* editor = UIntSpinBox::createUInt16Spinbox( parent );
         editor->setBase( mTool->isUnsignedAsHex() ? 16 : 10 );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &UIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<UInt32>() )
     {
         UIntSpinBox* editor = UIntSpinBox::createUInt32Spinbox( parent );
         editor->setBase( mTool->isUnsignedAsHex() ? 16 : 10 );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &UIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<UInt64>() )
     {
         UIntSpinBox* editor = UIntSpinBox::createUInt64Spinbox( parent );
         editor->setBase( mTool->isUnsignedAsHex() ? 16 : 10 );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &UIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Float32>() )
     {
         Float32Editor* editor = new Float32Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Float32Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Float64>() )
     {
         Float64Editor* editor = new Float64Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Float64Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Char8>() )
     {
         Char8Editor* editor = new Char8Editor( mTool->charCodec(), parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Char8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Utf8>() )
     {
         Utf8Editor* editor = new Utf8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Utf8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else

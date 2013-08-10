@@ -78,7 +78,7 @@ StructTool::StructTool()
     setSelectedStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
 
-    connect(this, SIGNAL(byteOrderChanged()), this, SLOT(onByteOrderChanged()));
+    connect(this, &StructTool::byteOrderChanged, this, &StructTool::onByteOrderChanged);
 }
 
 void StructTool::onByteOrderChanged()
@@ -122,10 +122,10 @@ void StructTool::setTargetModel(AbstractModel* model)
     if (d->mByteArrayModel && d->mByteArrayView)
     {
         d->mCursorIndex = d->mByteArrayView->cursorPosition();
-        connect(d->mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
-                SLOT(onCursorPositionChange(Okteta::Address)));
-        connect(d->mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                SLOT(onContentsChange(Okteta::ArrayChangeMetricsList)));
+        connect(d->mByteArrayView, &ByteArrayView::cursorPositionChanged,
+                this, &StructTool::onCursorPositionChange);
+        connect(d->mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                this, &StructTool::onContentsChange);
     }
     emit byteArrayModelChanged(d->mByteArrayModel);
     updateData(Okteta::ArrayChangeMetricsList());
@@ -248,17 +248,17 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
     if (child->isValid())
     {
         child->setIndex(d->mData.size());
-        connect(child, SIGNAL(dataChanged()), this, SLOT(onChildItemDataChanged()));
-        connect(child, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)),
-                this, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)));
-        connect(child, SIGNAL(childrenInserted(const DataInformation*,uint,uint)),
-                this, SIGNAL(childrenInserted(const DataInformation*,uint,uint)));
-        connect(child, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)),
-                this, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)));
-        connect(child, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)),
-                this, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)));
-        connect(this, SIGNAL(byteArrayModelChanged(Okteta::AbstractByteArrayModel*)),
-                child, SLOT(newModelActivated(Okteta::AbstractByteArrayModel*)));
+        connect(child, &TopLevelDataInformation::dataChanged, this, &StructTool::onChildItemDataChanged);
+        connect(child, &TopLevelDataInformation::childrenAboutToBeInserted,
+                this, &StructTool::childrenAboutToBeInserted);
+        connect(child, &TopLevelDataInformation::childrenInserted,
+                this, &StructTool::childrenInserted);
+        connect(child, &TopLevelDataInformation::childrenAboutToBeRemoved,
+                this, &StructTool::childrenAboutToBeRemoved);
+        connect(child, &TopLevelDataInformation::childrenRemoved,
+                this, &StructTool::childrenRemoved);
+        connect(this, &StructTool::byteArrayModelChanged,
+                child, &TopLevelDataInformation::newModelActivated);
         d->mData.append(QSharedPointer<TopLevelDataInformation>(child));
         //ensure that locking gets set up properly
         if (d->mByteArrayModel)

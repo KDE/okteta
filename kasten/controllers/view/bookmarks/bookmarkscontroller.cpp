@@ -37,7 +37,7 @@
 #include <bookmarkable.h>
 #include <bookmarksconstiterator.h>
 #include <bookmark.h>
-#include <abstractbytearraymodel.h>
+#include <bytearraymodel.h>
 // KDE
 #include <KXMLGUIClient>
 #include <KLocalizedString>
@@ -84,8 +84,8 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 
     mBookmarksActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
 //     mBookmarksActionGroup->setExclusive( true );
-    connect( mBookmarksActionGroup, SIGNAL(triggered(QAction*)),
-             SLOT(onBookmarkTriggered(QAction*)) );
+    connect( mBookmarksActionGroup, &QActionGroup::triggered,
+             this, &BookmarksController::onBookmarkTriggered );
 
     setTargetModel( 0 );
 }
@@ -107,16 +107,19 @@ void BookmarksController::setTargetModel( AbstractModel* model )
     if( hasViewWithBookmarks )
     {
         bookmarksCount = mBookmarks->bookmarksCount();
-        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                 SLOT(onBookmarksAdded(QList<Okteta::Bookmark>)) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                 SLOT(onBookmarksRemoved(QList<Okteta::Bookmark>)) );
-        connect( mByteArray, SIGNAL(bookmarksModified(QList<int>)),
-                 SLOT(updateBookmarks()) );
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
-                 SLOT(onCursorPositionChanged(Okteta::Address)) );
-        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
-                 SLOT(updateBookmarks()) );
+        if (auto asByteArraModel = qobject_cast<Okteta::ByteArrayModel*>(mByteArray) ) {
+            connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksAdded,
+                     this, &BookmarksController::onBookmarksAdded );
+            connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksRemoved,
+                     this, &BookmarksController::onBookmarksRemoved );
+            connect( asByteArraModel,
+                     static_cast<void (Okteta::ByteArrayModel::*)(const QList<int>&)>(&Okteta::ByteArrayModel::bookmarksModified),
+                     this, &BookmarksController::updateBookmarks );
+        }
+        connect( mByteArrayView, &ByteArrayView::cursorPositionChanged,
+                 this, &BookmarksController::onCursorPositionChanged );
+        connect( mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                 this, &BookmarksController::updateBookmarks );
     }
 
     updateBookmarks();

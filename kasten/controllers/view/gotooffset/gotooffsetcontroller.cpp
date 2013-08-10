@@ -50,8 +50,8 @@ GotoOffsetController::GotoOffsetController( If::ToolInlineViewable* toolInlineVi
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
     mTool = new GotoOffsetTool();
-    connect( mTool, SIGNAL(isUsableChanged(bool)),
-             mGotoOffsetAction, SLOT(setEnabled(bool)) );
+    connect( mTool, &GotoOffsetTool::isUsableChanged,
+             mGotoOffsetAction, &QAction::setEnabled );
     mGotoOffsetAction->setEnabled( mTool->isUsable() );
 
     mView = new GotoOffsetToolView( mTool );

@@ -38,7 +38,7 @@ BookmarkEditPopup::BookmarkEditPopup( QWidget* parent )
     setIcon( QIcon::fromTheme( QStringLiteral("bookmark-new") ) );
 
     mBookmarkNameLineEdit = new KLineEdit( this );
-    connect( mBookmarkNameLineEdit, SIGNAL(returnPressed()), SLOT(onReturnPressed()) );
+    connect( mBookmarkNameLineEdit, &KLineEdit::returnPressed, this, &BookmarkEditPopup::onReturnPressed );
 
     setWidget( mBookmarkNameLineEdit );
 }

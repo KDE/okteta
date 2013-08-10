@@ -45,8 +45,8 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     mTool( tool )
 {
     mBookmarkListModel = new BookmarkListModel( mTool, this );
-    connect( mBookmarkListModel, SIGNAL(modelReset()),
-             SLOT(onBookmarkSelectionChanged()) );
+    connect( mBookmarkListModel, &BookmarkListModel::modelReset,
+             this, &BookmarksView::onBookmarkSelectionChanged );
 
     QVBoxLayout* baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -61,11 +61,11 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     mBookmarkListView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mBookmarkListView->setModel( mBookmarkListModel );
     mBookmarkListView->header()->setResizeMode( QHeaderView::Interactive );
-    connect( mBookmarkListView, SIGNAL(doubleClicked(QModelIndex)),
-             SLOT(onBookmarkDoubleClicked(QModelIndex)) );
+    connect( mBookmarkListView, &QTreeView::doubleClicked,
+             this, &BookmarksView::onBookmarkDoubleClicked );
     connect( mBookmarkListView->selectionModel(),
-             SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-             SLOT(onBookmarkSelectionChanged()) );
+             &QItemSelectionModel::selectionChanged,
+             this, &BookmarksView::onBookmarkSelectionChanged );
 
     baseLayout->addWidget( mBookmarkListView, 10 );
 
@@ -83,10 +83,10 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     mCreateBookmarkButton = new QPushButton( this );
     KGuiItem::assign( mCreateBookmarkButton, createBookmarkGuiItem );
     mCreateBookmarkButton->setEnabled( mTool->canCreateBookmark() );
-    connect( mCreateBookmarkButton, SIGNAL(clicked(bool)),
-             SLOT(onCreateBookmarkButtonClicked()) );
-    connect( mTool, SIGNAL(canCreateBookmarkChanged(bool)),
-             mCreateBookmarkButton, SLOT(setEnabled(bool)) );
+    connect( mCreateBookmarkButton, &QPushButton::clicked,
+             this, &BookmarksView::onCreateBookmarkButtonClicked );
+    connect( mTool, &BookmarksTool::canCreateBookmarkChanged,
+             mCreateBookmarkButton, &QPushButton::setEnabled );
     actionsLayout->addWidget( mCreateBookmarkButton );
 
     const KGuiItem deleteBookmarkGuiItem =
@@ -99,7 +99,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
                         "selected will be deleted.") );
     mDeleteBookmarksButton = new QPushButton( this );
     KGuiItem::assign( mDeleteBookmarksButton, deleteBookmarkGuiItem );
-    connect( mDeleteBookmarksButton, SIGNAL(clicked(bool)), SLOT(onDeleteBookmarkButtonClicked()) );
+    connect( mDeleteBookmarksButton, &QPushButton::clicked, this, &BookmarksView::onDeleteBookmarkButtonClicked );
     actionsLayout->addWidget( mDeleteBookmarksButton );
 
     actionsLayout->addStretch();
@@ -114,7 +114,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
                         "of the bookmark which has been last selected.") );
     mGotoBookmarkButton = new QPushButton( this );
     KGuiItem::assign( mGotoBookmarkButton, gotoGuiItem );
-    connect( mGotoBookmarkButton, SIGNAL(clicked(bool)), SLOT(onGotoBookmarkButtonClicked()) );
+    connect( mGotoBookmarkButton, &QPushButton::clicked, this, &BookmarksView::onGotoBookmarkButtonClicked );
     actionsLayout->addWidget( mGotoBookmarkButton );
 
     const KGuiItem renameGuiItem =
@@ -127,7 +127,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
                         "which was last selected can be edited.") );
     mRenameBookmarkButton = new QPushButton( this );
     KGuiItem::assign( mRenameBookmarkButton, renameGuiItem );
-    connect( mRenameBookmarkButton, SIGNAL(clicked(bool)), SLOT(onRenameBookmarkButtonClicked()) );
+    connect( mRenameBookmarkButton, &QPushButton::clicked, this, &BookmarksView::onRenameBookmarkButtonClicked );
     actionsLayout->addWidget( mRenameBookmarkButton );
 
     baseLayout->addLayout( actionsLayout );

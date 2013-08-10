@@ -64,10 +64,10 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
     mViewProfileTableView->setAllColumnsShowFocus( true );
     mViewProfileTableView->setModel( mViewProfileTableModel );
     connect( mViewProfileTableView->selectionModel(),
-             SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-             SLOT(onViewProfileSelectionChanged()) );
-    connect( mViewProfileTableModel, SIGNAL(modelReset()),
-             SLOT(onModelReset()) );
+             &QItemSelectionModel::selectionChanged,
+             this, &ViewProfilesManageDialog::onViewProfileSelectionChanged );
+    connect( mViewProfileTableModel, &ViewProfileTableModel::modelReset,
+             this, &ViewProfilesManageDialog::onModelReset );
 
     // buttons
     QVBoxLayout* buttonLayout = new QVBoxLayout;
@@ -84,7 +84,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
                            "an editor is opened where you can create and edit a new view profile. "
                            "The values will be based on the ones of the view profile you selected "
                            "in the list.")) );
-    connect( createButton, SIGNAL(clicked(bool)), SLOT(onCreateNewButtonClicked()) );
+    connect( createButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onCreateNewButtonClicked );
     buttonLayout->addWidget( createButton );
     mEditButton = new QPushButton( page );
     KGuiItem::assign( mEditButton,
@@ -97,7 +97,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
                            "If you press the <interface>Edit...</interface> button, "
                            "an editor will be opened for the view profile you selected "
                            "in the list.")) );
-    connect( mEditButton, SIGNAL(clicked(bool)), SLOT(onEditButtonClicked()) );
+    connect( mEditButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onEditButtonClicked );
     buttonLayout->addWidget( mEditButton );
     mSetDefaultButton = new QPushButton( page );
     KGuiItem::assign( mSetDefaultButton,
@@ -109,7 +109,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
                      i18nc("@info:whatsthis",
                            "If you press the <interface>Set as Default</interface> button, "
                            "the view profile you selected in the list is set as default for all views.")) );
-    connect( mSetDefaultButton, SIGNAL(clicked(bool)), SLOT(onSetDefaultButtonClicked()) );
+    connect( mSetDefaultButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onSetDefaultButtonClicked );
     buttonLayout->addWidget( mSetDefaultButton );
     mDeleteButton = new QPushButton( page );
     KGuiItem::assign( mDeleteButton,
@@ -121,7 +121,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
                      i18nc("@info:whatsthis",
                            "If you press the <interface>Delete</interface> button, "
                            "the view profile you selected in the list is deleted.")) );
-    connect( mDeleteButton, SIGNAL(clicked(bool)), SLOT(onDeleteButtonClicked()) );
+    connect( mDeleteButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onDeleteButtonClicked );
     buttonLayout->addWidget( mDeleteButton );
     buttonLayout->addStretch();
 
@@ -130,12 +130,12 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
 
     setButtons( Close );
 
-    connect( mViewProfileManager, SIGNAL(viewProfilesLocked(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfilesLocked(QList<Kasten2::ByteArrayViewProfile::Id>)) );
-    connect( mViewProfileManager, SIGNAL(viewProfilesLocked(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfilesUnlocked(QList<Kasten2::ByteArrayViewProfile::Id>)) );
-    connect( mViewProfileManager, SIGNAL(defaultViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)),
-             SLOT(onDefaultViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)) );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesLocked,
+             this, &ViewProfilesManageDialog::onViewProfilesLocked );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesLocked,
+             this, &ViewProfilesManageDialog::onViewProfilesUnlocked );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::defaultViewProfileChanged,
+             this, &ViewProfilesManageDialog::onDefaultViewProfileChanged );
 
     // select first by default
     onModelReset();

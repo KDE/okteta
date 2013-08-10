@@ -54,7 +54,7 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     list.append( i18nc("@item:inmenu offset in the decimal format",
                        "&Decimal") );
     mOffsetCodingAction->setItems( list );
-    connect( mOffsetCodingAction, SIGNAL(triggered(int)), SLOT(setOffsetCoding(int)) );
+    connect( mOffsetCodingAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setOffsetCoding );
 
     // value valueCoding
     mCodingAction = actionCollection->add<KSelectAction>( QStringLiteral("view_valuecoding") );
@@ -69,17 +69,17 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     list.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",
                        "&Binary") );
     mCodingAction->setItems( list );
-    connect( mCodingAction, SIGNAL(triggered(int)), SLOT(setValueCoding(int)) );
+    connect( mCodingAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setValueCoding );
 
     // char valueCoding
     mEncodingAction = actionCollection->add<KSelectAction>( QStringLiteral("view_charencoding") );
     mEncodingAction->setText( i18nc("@title:menu","&Char Coding") );
     mEncodingAction->setItems( Okteta::CharCodec::codecNames() );
-    connect( mEncodingAction, SIGNAL(triggered(int)), SLOT(setCharCoding(int)) );
+    connect( mEncodingAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setCharCoding );
 
     mShowsNonprintingAction = actionCollection->add<KToggleAction>( QStringLiteral("view_showsnonprinting") );
     mShowsNonprintingAction->setText( i18nc("@option:check","Show &Non-printing Chars") );
-    connect( mShowsNonprintingAction, SIGNAL(triggered(bool)), SLOT(setShowsNonprinting(bool)) );
+    connect( mShowsNonprintingAction, &KToggleAction::triggered, this, &ViewConfigController::setShowsNonprinting );
 
     // bytes per line
     mSetBytesPerLineAction = actionCollection->addAction( QStringLiteral("view_bytesperline"),
@@ -102,12 +102,12 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     list.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
                        "&On") );
     mResizeStyleAction->setItems( list );
-    connect( mResizeStyleAction, SIGNAL(triggered(int)), SLOT(setLayoutStyle(int)) );
+    connect( mResizeStyleAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setLayoutStyle );
 
     mShowOffsetColumnAction = actionCollection->add<KToggleAction>( QStringLiteral("view_lineoffset") );
     mShowOffsetColumnAction->setText( i18nc("@option:check","Show &Line Offset") );
     mShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
-    connect( mShowOffsetColumnAction, SIGNAL(triggered(bool)), SLOT(toggleOffsetColumn(bool)) );
+    connect( mShowOffsetColumnAction, &KToggleAction::triggered, this, &ViewConfigController::toggleOffsetColumn );
 
     // show buffer columns
     mToggleColumnsAction = actionCollection->add<KSelectAction>( QStringLiteral("togglecolumns") );
@@ -117,7 +117,7 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     list.append( i18nc("@item:inmenu","&Chars") );
     list.append( i18nc("@item:inmenu","Values && Chars") );
     mToggleColumnsAction->setItems( list );
-    connect( mToggleColumnsAction, SIGNAL(triggered(int)), SLOT(toggleValueCharColumns(int)) );
+    connect( mToggleColumnsAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::toggleValueCharColumns );
 
     setTargetModel( 0 );
 }
@@ -139,17 +139,17 @@ void ViewConfigController::setTargetModel( AbstractModel* model )
         onLayoutStyleChanged( mByteArrayView->layoutStyle() );
         onVisibleByteArrayCodingsChanged( mByteArrayView->visibleByteArrayCodings() );
 
-        connect( mByteArrayView, SIGNAL(offsetColumnVisibleChanged(bool)),
-                 SLOT(onOffsetColumnVisibleChanged(bool)) );
-        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)), SLOT(onOffsetCodingChanged(int)) );
-        connect( mByteArrayView, SIGNAL(showsNonprintingChanged(bool)),
-                 SLOT(onShowsNonprintingChanged(bool)) );
-        connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
-            SLOT(onCharCodecChanged(QString)) );
-        connect( mByteArrayView, SIGNAL(layoutStyleChanged(int)), SLOT(onLayoutStyleChanged(int)) );
-        connect( mByteArrayView, SIGNAL(visibleByteArrayCodingsChanged(int)),
-                 SLOT(onVisibleByteArrayCodingsChanged(int)) );
+        connect( mByteArrayView, &ByteArrayView::offsetColumnVisibleChanged,
+                 this, &ViewConfigController::onOffsetColumnVisibleChanged );
+        connect( mByteArrayView, &ByteArrayView::offsetCodingChanged, this, &ViewConfigController::onOffsetCodingChanged );
+        connect( mByteArrayView, &ByteArrayView::showsNonprintingChanged,
+                 this, &ViewConfigController::onShowsNonprintingChanged );
+        connect( mByteArrayView, &ByteArrayView::valueCodingChanged, this, &ViewConfigController::onValueCodingChanged );
+        connect( mByteArrayView, &ByteArrayView::charCodecChanged,
+            this, &ViewConfigController::onCharCodecChanged );
+        connect( mByteArrayView, &ByteArrayView::layoutStyleChanged, this, &ViewConfigController::onLayoutStyleChanged );
+        connect( mByteArrayView, &ByteArrayView::visibleByteArrayCodingsChanged,
+                 this, &ViewConfigController::onVisibleByteArrayCodingsChanged );
     }
 
     mOffsetCodingAction->setEnabled( hasView );

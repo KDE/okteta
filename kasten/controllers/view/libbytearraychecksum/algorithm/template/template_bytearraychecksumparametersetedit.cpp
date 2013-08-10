@@ -52,8 +52,8 @@ Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterS
     mBitNumberEdit->setRange( 0, 8 );
     // start with the invalid number
     mBitNumberEdit->setValue( 0 );
-    connect( mBitNumberEdit, SIGNAL(valueChanged(int)),
-             SLOT(onBitNumberChanged(int)) );
+    connect( mBitNumberEdit, &KIntNumInput::valueChanged,
+             this, &Template_ByteArrayChecksumParameterSetEdit::onBitNumberChanged );
 
     const QString levelLabelText =
          i18nc( "@label:spinbox number of the bit to use",

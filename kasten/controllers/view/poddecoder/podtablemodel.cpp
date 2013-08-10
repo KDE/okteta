@@ -38,7 +38,7 @@ PODTableModel::PODTableModel( PODDecoderTool* tool, QObject *parent )
    mTool( tool ),
    mEmptyNote( QLatin1Char('-') )
 {
-    connect( mTool, SIGNAL(dataChanged()), SLOT(onDataChanged()) );
+    connect( mTool, &PODDecoderTool::dataChanged, this, &PODTableModel::onDataChanged );
 }
 
 void PODTableModel::onDataChanged()

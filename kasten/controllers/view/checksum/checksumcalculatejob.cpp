@@ -49,7 +49,7 @@ void ChecksumCalculateJob::exec()
         return;
     }
 
-    connect( mAlgorithm, SIGNAL(calculatedBytes(int)), SLOT(onCalculatedBytes()) );
+    connect( mAlgorithm, &AbstractByteArrayChecksumAlgorithm::calculatedBytes, this, &ChecksumCalculateJob::onCalculatedBytes );
 
     mAlgorithm->calculateChecksum( mChecksum, mByteArrayModel, mSelection );
 

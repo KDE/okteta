@@ -46,7 +46,7 @@ ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
     list.append( i18nc("@item:inmenu","&Columns") );
     list.append( i18nc("@item:inmenu","&Rows") );
     mViewModeAction->setItems( list );
-    connect( mViewModeAction, SIGNAL(triggered(int)), SLOT(setViewMode(int)) );
+    connect( mViewModeAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewModeController::setViewMode );
 
     setTargetModel( 0 );
 }

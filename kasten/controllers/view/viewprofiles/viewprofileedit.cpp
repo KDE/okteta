@@ -113,8 +113,8 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     lineBreakList.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
                                 "On") );
     mLineBreakComboBox->addItems( lineBreakList );
-    connect( mLineBreakComboBox, SIGNAL(currentIndexChanged(int)),
-             SLOT(onLineBreakIndexChanged(int)) );
+    connect( mLineBreakComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::currentIndexChanged),
+             this, &ViewProfileEdit::onLineBreakIndexChanged );
     layoutBoxFormLayout->addRow( i18n("Break lines:"), mLineBreakComboBox );
     // bytes per group
     mGroupedBytesCountEdit = new KIntNumInput( this );

@@ -53,8 +53,8 @@ KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )
     setModal( false );
 
     setCharCodec( mTool->charCodingName() );
-    connect( mTool,  SIGNAL(charCodecChanged(QString)),
-             SLOT(setCharCodec(QString)) );
+    connect( mTool,  &SearchTool::charCodecChanged,
+             this, &KSearchDialog::setCharCodec );
 }
 
 

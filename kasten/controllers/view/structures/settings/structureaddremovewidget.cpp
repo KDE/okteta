@@ -89,10 +89,10 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
     baseLayout->addLayout(upDownLayout);
     setLayout(baseLayout);
 
-    connect(mLeftButton, SIGNAL(pressed()), SLOT(moveLeft()));
-    connect(mRightButton, SIGNAL(pressed()), SLOT(moveRight()));
-    connect(mUpButton, SIGNAL(pressed()), SLOT(moveUp()));
-    connect(mDownButton, SIGNAL(pressed()), SLOT(moveDown()));
+    connect(mLeftButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveLeft);
+    connect(mRightButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveRight);
+    connect(mUpButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveUp);
+    connect(mDownButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveDown);
 
     buildAvailableList();
 

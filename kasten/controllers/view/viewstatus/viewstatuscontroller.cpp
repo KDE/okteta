@@ -62,7 +62,7 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
     mOverwriteModeToggleButton = new ToggleButton( insertModeText, insertModeTooltip, statusBar );
     mOverwriteModeToggleButton->setCheckedState( overwriteModeText, overwriteModeTooltip );
     statusBar->addWidget( mOverwriteModeToggleButton );
-    connect( mOverwriteModeToggleButton, SIGNAL(clicked(bool)), SLOT(setOverwriteMode(bool)) );
+    connect( mOverwriteModeToggleButton, &ToggleButton::clicked, this, &ViewStatusController::setOverwriteMode );
 
     mValueCodingComboBox = new KComboBox( statusBar );
     QStringList list;
@@ -73,14 +73,14 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
     mValueCodingComboBox->addItems( list );
     mValueCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Coding of the value interpretation in the current view.") );
-    connect( mValueCodingComboBox, SIGNAL(activated(int)), SLOT(setValueCoding(int)) );
+    connect( mValueCodingComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ViewStatusController::setValueCoding );
     statusBar->addWidget( mValueCodingComboBox );
 
     mCharCodingComboBox = new KComboBox( statusBar );
     mCharCodingComboBox->addItems( Okteta::CharCodec::codecNames() );
     mCharCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
-    connect( mCharCodingComboBox, SIGNAL(activated(int)), SLOT(setCharCoding(int)) );
+    connect( mCharCodingComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ViewStatusController::setCharCoding );
     statusBar->addWidget( mCharCodingComboBox );
 
     fixWidths( 0 );
@@ -168,15 +168,15 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         onValueCodingChanged( mByteArrayView->valueCoding() );
         onCharCodecChanged( mByteArrayView->charCodingName() );
 
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)), SLOT(onCursorPositionChanged(Okteta::Address)) );
-        connect( mByteArrayView, SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
-            SLOT(onSelectedDataChanged(const Kasten2::AbstractModelSelection*)) );
-        connect( mByteArrayView, SIGNAL(overwriteModeChanged(bool)),
-                 mOverwriteModeToggleButton, SLOT(setChecked(bool)) );
-        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)), SLOT(onOffsetCodingChanged(int)) );
-        connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
-            SLOT(onCharCodecChanged(QString)) );
+        connect( mByteArrayView, &ByteArrayView::cursorPositionChanged, this, &ViewStatusController::onCursorPositionChanged );
+        connect( mByteArrayView, &ByteArrayView::selectedDataChanged,
+            this, &ViewStatusController::onSelectedDataChanged );
+        connect( mByteArrayView, &ByteArrayView::overwriteModeChanged,
+                 mOverwriteModeToggleButton, &ToggleButton::setChecked );
+        connect( mByteArrayView, &ByteArrayView::offsetCodingChanged, this, &ViewStatusController::onOffsetCodingChanged );
+        connect( mByteArrayView, &ByteArrayView::valueCodingChanged, this, &ViewStatusController::onValueCodingChanged );
+        connect( mByteArrayView, &ByteArrayView::charCodecChanged,
+            this, &ViewStatusController::onCharCodecChanged );
     }
     else
     {

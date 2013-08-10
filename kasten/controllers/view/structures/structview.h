@@ -69,7 +69,7 @@ protected:
     QWidget* mStructTreeViewFocusChild;
 
 protected Q_SLOTS:
-    void openSettingsDlg(int page = 0);
+    void openSettingsDlg();
     void openScriptConsole();
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCursorIndexChange();

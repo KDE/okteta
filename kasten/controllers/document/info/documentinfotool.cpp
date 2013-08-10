@@ -55,7 +55,7 @@ DocumentInfoTool::DocumentInfoTool( DocumentSyncManager* syncManager )
 
     mMimeTypeUpdateTimer->setInterval( mimeTypeUpdateTimeInterval );
     mMimeTypeUpdateTimer->setSingleShot( true );
-    connect( mMimeTypeUpdateTimer, SIGNAL(timeout()), SLOT(updateMimeType()) );
+    connect( mMimeTypeUpdateTimer, &QTimer::timeout, this, &DocumentInfoTool::updateMimeType );
 }
 
 //TODO: file or document or ...?
@@ -104,12 +104,12 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
         documentSize = mByteArrayModel->size();
         synchronizer = mDocument->synchronizer();
 
-        connect( mDocument, SIGNAL(titleChanged(QString)),
-                 SIGNAL(documentTitleChanged(QString)) );
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
-                 SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                 SLOT(onContentsChanged()) );
+        connect( mDocument, &ByteArrayDocument::titleChanged,
+                 this, &DocumentInfoTool::documentTitleChanged );
+        connect( mDocument, &ByteArrayDocument::synchronizerChanged,
+                 this, &DocumentInfoTool::onSynchronizerChanged );
+        connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                 this, &DocumentInfoTool::onContentsChanged );
     }
 
     onSynchronizerChanged( synchronizer );
@@ -163,8 +163,8 @@ void DocumentInfoTool::onSynchronizerChanged( AbstractModelSynchronizer* synchro
 
     if( mSynchronizer )
     {
-        connect( mSynchronizer, SIGNAL(urlChanged(KUrl)),
-                 SLOT(onUrlChanged(KUrl)) );
+        connect( mSynchronizer, &AbstractModelSynchronizer::urlChanged,
+                 this, &DocumentInfoTool::onUrlChanged );
     }
 
     emit locationChanged( location() );

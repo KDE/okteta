@@ -70,8 +70,8 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     header->setResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     connect( mPODTableView->selectionModel(),
-             SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-             SLOT(onCurrentRowChanged(QModelIndex,QModelIndex)) );
+             &QItemSelectionModel::currentRowChanged,
+             this, &PODTableView::onCurrentRowChanged );
 
     baseLayout->addWidget( mPODTableView, 10 );
 
@@ -83,8 +83,8 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mByteOrderSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
     mByteOrderSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
     mByteOrderSelection->setCurrentIndex( mTool->byteOrder() );
-    connect( mByteOrderSelection, SIGNAL(activated(int)),
-             mTool, SLOT(setByteOrder(int)));
+    connect( mByteOrderSelection, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+             mTool, &PODDecoderTool::setByteOrder);
     const QString byteOrderToolTip =
         i18nc( "@info:tooltip",
                "The byte order to use for decoding the bytes." );
@@ -96,8 +96,8 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
 
     mUnsignedAsHexCheck = new QCheckBox( this );
     mUnsignedAsHexCheck->setChecked( mTool->isUnsignedAsHex() );
-    connect( mUnsignedAsHexCheck, SIGNAL(toggled(bool)),
-             mTool, SLOT(setUnsignedAsHex(bool)) );
+    connect( mUnsignedAsHexCheck, &QCheckBox::toggled,
+             mTool, &PODDecoderTool::setUnsignedAsHex );
     unsignedAsHexLabel->setBuddy( mUnsignedAsHexCheck );
     const QString unsignedAsHexToolTip =
         i18nc( "@info:tooltip",

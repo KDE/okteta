@@ -62,21 +62,21 @@ ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewP
                      i18nc("@title:menu create a new view profile",
                             "Create new..." ),
                      this );
-    connect( mCreateNewAction, SIGNAL(triggered(bool)), SLOT(onCreateNewActionTriggered()) );
+    connect( mCreateNewAction, &QAction::triggered, this, &ViewProfileController::onCreateNewActionTriggered );
 
     mSaveChangesAction =
         new QAction( QIcon::fromTheme( QStringLiteral("document-save") ),
                      i18nc("@title:menu save changed to the view profile to the base profile",
                            "Save changes" ),
                      this );
-    connect( mSaveChangesAction, SIGNAL(triggered(bool)), SLOT(onSaveChangesActionTriggered()) );
+    connect( mSaveChangesAction, &QAction::triggered, this, &ViewProfileController::onSaveChangesActionTriggered );
 
     mResetChangesAction =
         new QAction( QIcon::fromTheme( QStringLiteral("document-revert") ),
                      i18nc("@title:menu reset settings back to those of the saved base profile",
                            "Reset changes" ),
                      this );
-    connect( mResetChangesAction, SIGNAL(triggered(bool)), SLOT(onResetChangesActionTriggered()) );
+    connect( mResetChangesAction, &QAction::triggered, this, &ViewProfileController::onResetChangesActionTriggered );
 
     mViewProfileActionMenu->addAction( mCreateNewAction );
     mViewProfileActionMenu->addSeparator();
@@ -85,13 +85,13 @@ ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewP
 
     mViewProfilesActionGroup = new QActionGroup( this );
     mViewProfilesActionGroup->setExclusive( true );
-    connect( mViewProfilesActionGroup, SIGNAL(triggered(QAction*)),
-             SLOT(onViewProfileTriggered(QAction*)) );
+    connect( mViewProfilesActionGroup, &QActionGroup::triggered,
+             this, &ViewProfileController::onViewProfileTriggered );
 
-    connect( mViewProfileManager, SIGNAL(viewProfilesChanged(QList<Kasten2::ByteArrayViewProfile>)),
-             SLOT(onViewProfilesChanged()) );
-    connect( mViewProfileManager, SIGNAL(viewProfilesRemoved(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfilesChanged()) );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesChanged,
+             this, &ViewProfileController::onViewProfilesChanged );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesRemoved,
+             this, &ViewProfileController::onViewProfilesChanged );
 
     onViewProfilesChanged();
 
@@ -111,13 +111,13 @@ void ViewProfileController::setTargetModel( AbstractModel* model )
     {
         onViewProfileChanged( mByteArrayViewProfileSynchronizer->viewProfileId() );
 
-        connect( mByteArrayViewProfileSynchronizer, SIGNAL(viewProfileChanged(Kasten2::ByteArrayViewProfile::Id)),
-                 SLOT(onViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)) );
+        connect( mByteArrayViewProfileSynchronizer, &ByteArrayViewProfileSynchronizer::viewProfileChanged,
+                 this, &ViewProfileController::onViewProfileChanged );
 
         onLocalSyncStateChanged( mByteArrayViewProfileSynchronizer->localSyncState() );
 
-        connect( mByteArrayViewProfileSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                 SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+        connect( mByteArrayViewProfileSynchronizer, &ByteArrayViewProfileSynchronizer::localSyncStateChanged,
+                 this, &ViewProfileController::onLocalSyncStateChanged );
     }
     else
     {

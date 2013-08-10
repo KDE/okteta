@@ -73,13 +73,13 @@ void ByteTableTool::setTargetModel( AbstractModel* model )
     {
         mByteTableModel->setCharCodec( mByteArrayView->charCodingName() );
         mByteTableModel->setUndefinedChar( mByteArrayView->undefinedChar() );
-        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
-                 mByteTableModel, SLOT(setCharCodec(QString)) );
-        connect( mByteArrayView, SIGNAL(undefinedCharChanged(QChar)),
-                 mByteTableModel, SLOT(setUndefinedChar(QChar)) );
+        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
+                 mByteTableModel, &ByteTableModel::setCharCodec );
+        connect( mByteArrayView, &ByteArrayView::undefinedCharChanged,
+                 mByteTableModel, &ByteTableModel::setUndefinedChar );
 
-        connect( mByteArrayView, SIGNAL(readOnlyChanged(bool)),
-                 SLOT(onReadOnlyChanged(bool)) );
+        connect( mByteArrayView, &ByteArrayView::readOnlyChanged,
+                 this, &ByteTableTool::onReadOnlyChanged );
     }
 
     const bool isWriteable = ( hasView && !mByteArrayView->isReadOnly() );

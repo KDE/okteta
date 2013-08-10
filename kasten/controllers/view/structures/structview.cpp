@@ -98,9 +98,9 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     const QString validationToolTip = i18nc("@info:tooltip", "Validate all structures.");
     mValidateButton->setToolTip(validationToolTip);
     mValidateButton->setEnabled(false); //no point validating without file open
-    connect(mValidateButton, SIGNAL(clicked()), mTool, SLOT(validateAllStructures()));
-    connect(mTool, SIGNAL(byteArrayModelChanged(Okteta::AbstractByteArrayModel*)),
-                this, SLOT(onByteArrayModelChanged(Okteta::AbstractByteArrayModel*)));
+    connect(mValidateButton, &QPushButton::clicked, mTool, &StructTool::validateAllStructures);
+    connect(mTool, &StructTool::byteArrayModelChanged,
+                this, &StructView::onByteArrayModelChanged);
     //TODO also disable the button if the structure has no validatable members
     settingsLayout->addWidget(mValidateButton);
 
@@ -108,7 +108,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mLockStructureButton->setCheckable(true);
     setLockButtonState(false);
     mLockStructureButton->setEnabled(false); //won't work at beginning
-    connect(mLockStructureButton, SIGNAL(toggled(bool)), this, SLOT(lockButtonToggled()));
+    connect(mLockStructureButton, &QPushButton::toggled, this, &StructView::lockButtonToggled);
 
     settingsLayout->addWidget(mLockStructureButton);
 
@@ -117,21 +117,21 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     QIcon console = QIcon::fromTheme(QStringLiteral("utilities-terminal"));
     mScriptConsoleButton = new QPushButton(console, i18nc("@action:button", "Script console"), this);
     mScriptConsoleButton->setToolTip(i18nc("@info:tooltip", "Open script console."));
-    connect(mScriptConsoleButton, SIGNAL(pressed()), this, SLOT(openScriptConsole()));
+    connect(mScriptConsoleButton, &QPushButton::pressed, this, &StructView::openScriptConsole);
     settingsLayout->addWidget(mScriptConsoleButton);
 
     QIcon settings = QIcon::fromTheme(QStringLiteral("configure"));
     mSettingsButton = new QPushButton(settings, i18nc("@action:button", "Settings"), this);
     const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
     mSettingsButton->setToolTip(settingsTooltip);
-    connect(mSettingsButton, SIGNAL(pressed()), this, SLOT(openSettingsDlg()));
+    connect(mSettingsButton, &QPushButton::pressed, this, &StructView::openSettingsDlg);
     settingsLayout->addWidget(mSettingsButton);
 
     connect(mStructTreeView->selectionModel(),
-            SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-            SLOT(onCurrentRowChanged(QModelIndex,QModelIndex)));
+            &QItemSelectionModel::currentRowChanged,
+            this, &StructView::onCurrentRowChanged);
 
-    connect(mTool, SIGNAL(cursorIndexChanged()), SLOT(onCursorIndexChange()));
+    connect(mTool, &StructTool::cursorIndexChanged, this, &StructView::onCursorIndexChange);
 }
 
 void StructView::onCursorIndexChange()
@@ -141,7 +141,7 @@ void StructView::onCursorIndexChange()
         mTool->mark(idx);
 }
 
-void StructView::openSettingsDlg(int page)
+void StructView::openSettingsDlg()
 {
     //An instance of your dialog could be already created and could be cached,
     //in which case you want to display the cached dialog instead of creating
@@ -161,19 +161,14 @@ void StructView::openSettingsDlg(int page)
     structSelectionWrapper->setLayout(hbox);
     hbox->addWidget(structureSettings);
     Q_ASSERT(structureSettings->objectName() == QStringLiteral("kcfg_LoadedStructures"));
-    KPageWidgetItem* management = dialog->addPage(structSelectionWrapper, i18n("Structures management"),
+    dialog->addPage(structSelectionWrapper, i18n("Structures management"),
                                                   QStringLiteral("preferences-plugin"));
 
     //User edited the configuration - update your local copies of the configuration data
-    connect(dialog, SIGNAL(settingsChanged(QString)), mTool, SLOT(setSelectedStructuresInView()));
-    connect(dialog, SIGNAL(settingsChanged(QString)), this, SLOT(update()));
+    connect(dialog, &KConfigDialog::settingsChanged, mTool, &StructTool::setSelectedStructuresInView);
 
     //XXX once kconfig_compiler signals work with settings dialog, use that
-    if (page == 0)
-        dialog->setCurrentPage(displ);
-    else if (page == 1)
-        dialog->setCurrentPage(management);
-
+    dialog->setCurrentPage(displ);
     dialog->show();
 }
 

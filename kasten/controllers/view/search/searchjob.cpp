@@ -52,7 +52,7 @@ SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
 Okteta::Address SearchJob::exec()
 {
     //TODO: what kind of signal could a filter send?
-    connect( mByteArrayModel, SIGNAL(searchedBytes(Okteta::Size)), SLOT(onBytesSearched()) );
+    connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::searchedBytes, this, &SearchJob::onBytesSearched );
 
     Okteta::Address result;
 

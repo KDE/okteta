@@ -36,7 +36,7 @@ static const int FilterMaxEventProcessTimeInMS = 100;
 bool FilterJob::exec()
 {
     //TODO: what kind of signal could a filter send?
-    connect( mByteArrayFilter, SIGNAL(filteredBytes(int)), SLOT(onFilteredBytes()) );
+    connect( mByteArrayFilter, &AbstractByteArrayFilter::filteredBytes, this, &FilterJob::onFilteredBytes );
 
     const bool result = mByteArrayFilter->filter( mResult, mModel, mRange );
 

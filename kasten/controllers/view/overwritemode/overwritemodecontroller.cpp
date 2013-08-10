@@ -47,7 +47,7 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
               "Choose whether you want the input to be inserted or to overwrite existing data.") );
     // TODO: or should we catch the signal from the view (needs to be added)
     mSetOverWriteAction->setShortcut( QKeySequence(Qt::Key_Insert) );
-    connect( mSetOverWriteAction, SIGNAL(triggered(bool)), SLOT(setOverWrite(bool)) );
+    connect( mSetOverWriteAction, &KToggleAction::triggered, this, &OverwriteModeController::setOverWrite );
 
     setTargetModel( 0 );
 }
@@ -62,8 +62,8 @@ void OverwriteModeController::setTargetModel( AbstractModel* model )
     {
         mSetOverWriteAction->setChecked( mByteArrayView->isOverwriteMode() );
 
-        connect( mByteArrayView, SIGNAL(overwriteModeChanged(bool)),
-                 mSetOverWriteAction, SLOT(setChecked(bool)) );
+        connect( mByteArrayView, &ByteArrayView::overwriteModeChanged,
+                 mSetOverWriteAction, &KToggleAction::setChecked );
         // TODO: catch if isOverwriteOnly changes
     }
 

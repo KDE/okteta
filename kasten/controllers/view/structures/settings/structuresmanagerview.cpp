@@ -66,12 +66,12 @@ StructuresManagerView::StructuresManagerView(Kasten2::StructTool* tool, QWidget*
 
     mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
                                                QStringLiteral("okteta-structures.knsrc"), this);
-    connect(mGetNewStructuresButton, SIGNAL(dialogFinished(KNS3::Entry::List)),
-            SLOT(onGetNewStructuresClicked(KNS3::Entry::List)));
+    connect(mGetNewStructuresButton, &KNS3::Button::dialogFinished,
+            this, &StructuresManagerView::onGetNewStructuresClicked);
     buttonsLayout->addWidget(mGetNewStructuresButton);
 
     mAdvancedSelectionButton = new QPushButton(QIcon::fromTheme(QStringLiteral("configure")), i18n("Advanced Selection..."), this);
-    connect(mAdvancedSelectionButton, SIGNAL(clicked()), SLOT(advancedSelection()));
+    connect(mAdvancedSelectionButton, &QPushButton::clicked, this, &StructuresManagerView::advancedSelection);
     buttonsLayout->addWidget(mAdvancedSelectionButton);
 }
 
@@ -174,8 +174,8 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
         delete mStructuresSelector;
     }
     mStructuresSelector = new KPluginSelector(this);
-    connect(mStructuresSelector, SIGNAL(changed(bool)),
-            SLOT(onPluginSelectorChange(bool)));
+    connect(mStructuresSelector, &KPluginSelector::changed,
+            this, &StructuresManagerView::onPluginSelectorChange);
     layoutObj->insertWidget(0, mStructuresSelector);
 
     mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(

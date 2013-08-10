@@ -53,12 +53,12 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     baseLayout->setMargin( 0 );
 
     mByteTableView = new QTreeView( this );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(resizeColumnsWidth()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayStyleChanged()),
-             SLOT(resizeColumnsWidth()) );
+    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+             this, &ByteTableView::setFixedFontByGlobalSettings );
+    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+             this, &ByteTableView::resizeColumnsWidth );
+    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
+             this, &ByteTableView::resizeColumnsWidth );
     setFixedFontByGlobalSettings(); //do this before setting model
     mByteTableView->setObjectName( QStringLiteral( "ByteTable" ) );
     mByteTableView->setRootIsDecorated( false );
@@ -71,8 +71,8 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     header->setResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     mByteTableView->setModel( mTool->byteTableModel() );
-    connect( mByteTableView, SIGNAL(doubleClicked(QModelIndex)),
-             SLOT(onDoubleClicked(QModelIndex)) );
+    connect( mByteTableView, &QTreeView::doubleClicked,
+             this, &ByteTableView::onDoubleClicked );
 
     baseLayout->addWidget( mByteTableView, 10 );
 
@@ -98,8 +98,8 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mInsertButton = new QPushButton( this );
     KGuiItem::assign( mInsertButton, KStandardGuiItem::insert() );
     mInsertButton->setEnabled( mTool->hasWriteable() );
-    connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT(setEnabled(bool)) );
-    connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) );
+    connect( mTool, &ByteTableTool::hasWriteableChanged, mInsertButton, &QPushButton::setEnabled );
+    connect( mInsertButton, &QPushButton::clicked, this, &ByteTableView::onInsertClicked );
     const QString insertButtonToolTip =
         i18nc( "@info:tooltip",
                "Inserts the byte currently selected in the table with the given number." );

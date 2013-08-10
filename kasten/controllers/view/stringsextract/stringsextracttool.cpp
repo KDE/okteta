@@ -83,14 +83,14 @@ void StringsExtractTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
-                 SLOT(onSelectionChanged()) );
+        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                 this, &StringsExtractTool::onSelectionChanged );
 
         // if strings are from same model, adapt offsetcoding
         if( mSourceByteArrayModel == mByteArrayModel )
         {
-            connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
-                     SIGNAL(offsetCodingChanged(int)) );
+            connect( mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                     this, &StringsExtractTool::offsetCodingChanged );
         }
     }
 
@@ -134,8 +134,8 @@ void StringsExtractTool::markString( int stringId )
     {
         if( mSourceByteArrayView ) mSourceByteArrayView->disconnect( this );
         mSourceByteArrayView = mByteArrayView;
-        connect( mSourceByteArrayView,  SIGNAL(destroyed()),
-                 SLOT(onSourceViewDestroyed()) );
+        connect( mSourceByteArrayView,  &ByteArrayView::destroyed,
+                 this, &StringsExtractTool::onSourceViewDestroyed );
     }
     const ContainedString &containedString = mContainedStringList.at( stringId );
     const Okteta::Address offset = containedString.offset();
@@ -200,12 +200,12 @@ void StringsExtractTool::extractStrings()
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = mByteArrayView->selection();
     mSourceMinLength = mMinLength;
-    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-             SLOT(onSourceChanged()) );
-    connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
-             SLOT(onSourceDestroyed()) );
-    connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
-                SIGNAL(offsetCodingChanged(int)) );
+    connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
+             this, &StringsExtractTool::onSourceChanged );
+    connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
+             this, &StringsExtractTool::onSourceDestroyed );
+    connect( mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                this, &StringsExtractTool::offsetCodingChanged );
 
     mExtractedStringsUptodate = true;
     mSourceByteArrayModelUptodate = true;

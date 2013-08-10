@@ -192,7 +192,7 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const
     mLockedPositions.insert(model, quint64(offset));
     kDebug() << mData->name() << ": Locking start offset in model" << model << "to position" << hex << offset;
     //remove when deleted
-    connect(model, SIGNAL(destroyed(QObject*)), this, SLOT(removeByteArrayModelFromList(QObject*)));
+    connect(model, &Okteta::AbstractByteArrayModel::destroyed, this, &TopLevelDataInformation::removeByteArrayModelFromList);
 }
 
 void TopLevelDataInformation::unlockPosition(const Okteta::AbstractByteArrayModel* model)

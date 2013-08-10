@@ -98,10 +98,10 @@ void CharsetConversionTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
-                 SLOT(onViewChanged()) );
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
-                 SLOT(onViewChanged()) );
+        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
+                 this, &CharsetConversionTool::onViewChanged );
+        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                 this, &CharsetConversionTool::onViewChanged );
     }
 
     onViewChanged();

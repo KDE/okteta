@@ -61,7 +61,7 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
     mMoveBitWidthEdit = new KIntNumInput( this );
     mMoveBitWidthEdit->setRange( INT_MIN, INT_MAX );
     mMoveBitWidthEdit->setSuffix( ki18np(" bit"," bits") );
-    connect( mMoveBitWidthEdit, SIGNAL(valueChanged(int)), SLOT(onValueChanged(int)) );
+    connect( mMoveBitWidthEdit, &KIntNumInput::valueChanged, this, &RotateByteArrayFilterParameterSetEdit::onValueChanged );
 
     const QString moveBitWidthLabelText =
         i18nc( "@label:spinbox width (in number of bits) the bits are moved",

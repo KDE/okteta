@@ -51,8 +51,8 @@ SelectRangeController::SelectRangeController( If::ToolInlineViewable* toolInline
     mSelectAction->setShortcut( Qt::CTRL + Qt::Key_E );
 
     mTool = new SelectRangeTool();
-    connect( mTool, SIGNAL(isUsableChanged(bool)),
-             mSelectAction, SLOT(setEnabled(bool)) );
+    connect( mTool, &SelectRangeTool::isUsableChanged,
+             mSelectAction, &QAction::setEnabled );
     mSelectAction->setEnabled( mTool->isUsable() );
 
     mView = new SelectRangeToolView( mTool );

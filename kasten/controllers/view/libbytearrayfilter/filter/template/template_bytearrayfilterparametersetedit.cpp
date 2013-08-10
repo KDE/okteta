@@ -52,7 +52,7 @@ Template_ByteArrayFilterParameterSetEdit::Template_ByteArrayFilterParameterSetEd
     mLevelEdit->setRange( -1, 256 );
     // start with the invalid number
     mLevelEdit->setValue( -1 );
-    connect( mLevelEdit, SIGNAL(valueChanged(int)), SLOT(onLevelChanged(int)) );
+    connect( mLevelEdit, &KIntNumInput::valueChanged, this, &Template_ByteArrayFilterParameterSetEdit::onLevelChanged );
 
     const QString levelLabelText =
          i18nc( "@label:spinbox decimal value up to which bytes are set to 0",
