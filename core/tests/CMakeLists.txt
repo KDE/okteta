@@ -22,7 +22,7 @@ set( arraychangemetricstest_SRCS
 )
 
 kde4_add_unit_test( arraychangemetricstest  TESTNAME libokteta-core-arraychangemetricstest  ${arraychangemetricstest_SRCS} )
-target_link_libraries( arraychangemetricstest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( arraychangemetricstest Qt5::Test )
 
 
 ########### addressrangetest ###############
@@ -32,7 +32,7 @@ set( addressrangetest_SRCS
 )
 
 kde4_add_unit_test( addressrangetest  TESTNAME libokteta-core-addressrangetest  ${addressrangetest_SRCS} )
-target_link_libraries( addressrangetest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( addressrangetest testoktetacore Qt5::Test )
 
 
 ########### addressrangelisttest ###############
@@ -42,7 +42,7 @@ set( addressrangelisttest_SRCS
 )
 
 kde4_add_unit_test( addressrangelisttest  TESTNAME libokteta-core-addressrangelisttest  ${addressrangelisttest_SRCS} )
-target_link_libraries( addressrangelisttest  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( addressrangelisttest  testoktetacore Qt5::Test )
 
 
 ########### fixedsizebytearraymodeltest ###############
@@ -53,7 +53,7 @@ set( fixedsizebytearraymodeltest_SRCS
 
 kde4_add_unit_test( fixedsizebytearraymodeltest  TESTNAME libokteta-core-fixedsizebytearraymodeltest  ${fixedsizebytearraymodeltest_SRCS})
 target_link_libraries( fixedsizebytearraymodeltest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  testoktetacore Qt5::Test KF5::KI18n
 )
 
 
@@ -69,7 +69,7 @@ kde4_add_unit_test( fixedsizebytearraymodelabstractbytearraymodeliftest
   ${fixedsizebytearraymodelabstractbytearraymodeliftest_SRCS}
 )
 target_link_libraries( fixedsizebytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n
 )
 
 
@@ -81,7 +81,7 @@ set( bytearraymodeltest_SRCS
 
 kde4_add_unit_test( bytearraymodeltest  TESTNAME libokteta-core-bytearraymodeltest  ${bytearraymodeltest_SRCS} )
 target_link_libraries( bytearraymodeltest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  ${oktetacore_LIB} Qt5::Test
 )
 
 
@@ -97,7 +97,7 @@ kde4_add_unit_test( bytearraymodelabstractbytearraymodeliftest
   ${bytearraymodelabstractbytearraymodeliftest_SRCS}
 )
 target_link_libraries( bytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n
 )
 
 
@@ -113,7 +113,7 @@ kde4_add_unit_test( piecetablebytearraymodelabstractbytearraymodeliftest
   ${piecetablebytearraymodelabstractbytearraymodeliftest_SRCS}
 )
 target_link_libraries( piecetablebytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n
 )
 
 
@@ -129,7 +129,7 @@ kde4_add_unit_test( piecetablebytearraymodelversionableiftest
   ${piecetablebytearraymodelversionableiftest_SRCS}
 )
 target_link_libraries( piecetablebytearraymodelversionableiftest
-  oktetacoretestutil testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  oktetacoretestutil ${oktetacore_LIB} Qt5::Test
 )
 
 
@@ -141,7 +141,7 @@ set( valuecodectest_SRCS
 
 kde4_add_unit_test( valuecodectest  TESTNAME libokteta-core-valuecodectest  ${valuecodectest_SRCS})
 target_link_libraries( valuecodectest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  ${oktetacore_LIB} Qt5::Test
 )
 
 
@@ -153,7 +153,7 @@ set( charcodectest_SRCS
 
 kde4_add_unit_test( charcodectest  TESTNAME libokteta-core-charcodectest  ${charcodectest_SRCS})
 target_link_libraries( charcodectest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test ${KDE4Attic_LIBRARIES}
+  ${oktetacore_LIB} Qt5::Test KF5::KI18n
 )
 
 
@@ -165,7 +165,7 @@ set( textcharcodectest_SRCS
 
 kde4_add_unit_test( textcharcodectest  TESTNAME libokteta-core-textcharcodectest  ${textcharcodectest_SRCS} )
 target_link_libraries( textcharcodectest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test ${KDE4Attic_LIBRARIES}
+  testoktetacore Qt5::Test KF5::KI18n KF5::KCodecs KF5::KDE4Attic
 )
 
 
@@ -178,7 +178,7 @@ set( textcharcodeccharcodeciftest_SRCS
 
 kde4_add_unit_test( textcharcodeccharcodeciftest TESTNAME libokteta-core-textcharcodeccharcodeciftest  ${textcharcodeccharcodeciftest_SRCS} )
 target_link_libraries( textcharcodeccharcodeciftest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test ${KDE4Attic_LIBRARIES}
+  testoktetacore Qt5::Test KF5::KI18n KF5::KCodecs KF5::KDE4Attic
 )
 
 
@@ -190,7 +190,7 @@ set( ebcdic1047charcodeccharcodeciftest_SRCS
 
 kde4_add_unit_test( ebcdic1047charcodeccharcodeciftest  TESTNAME libokteta-core-ebcdic1047charcodeccharcodeciftest  ${ebcdic1047charcodeccharcodeciftest_SRCS} )
 target_link_libraries( ebcdic1047charcodeccharcodeciftest
-  testoktetacore ${KDE4_KDECORE_LIBS} Qt5::Test
+  testoktetacore Qt5::Test
 )
 
 
@@ -201,17 +201,16 @@ set( bookmarktest_SRCS
 )
 
 kde4_add_unit_test( bookmarktest  TESTNAME libokteta-core-bookmarktest  ${bookmarktest_SRCS} )
-target_link_libraries( bookmarktest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( bookmarktest Qt5::Test )
 
 
 ########### bookmarklisttest ###############
 
 set( bookmarklisttest_SRCS
   bookmarklisttest.cpp
-  ${SUTDIR}/bookmarklist.cpp
 )
 
 kde4_add_unit_test( bookmarklisttest  TESTNAME libokteta-core-bookmarklisttest  ${bookmarklisttest_SRCS} )
-target_link_libraries( bookmarklisttest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( bookmarklisttest testoktetacore Qt5::Test KF5::KI18n )
 
 

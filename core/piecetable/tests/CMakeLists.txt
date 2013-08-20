@@ -16,18 +16,17 @@ set( piecetest_SRCS
 )
 
 kde4_add_unit_test( piecetest  TESTNAME libpiecetable-piecetest  ${piecetest_SRCS} )
-target_link_libraries( piecetest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( piecetest Qt5::Test )
 
 
 ########### piecetabletest ###############
 
 set( piecetabletest_SRCS
   piecetabletest.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
 )
 
 kde4_add_unit_test( piecetabletest  TESTNAME libpiecetable-piecetabletest  ${piecetabletest_SRCS} )
-target_link_libraries( piecetabletest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( piecetabletest testoktetacore Qt5::Test KF5::KI18n )
 
 
 ########### testpiecetablechangetest ###############
@@ -35,15 +34,13 @@ target_link_libraries( piecetabletest  ${KDE4_KDECORE_LIBS} Qt5::Test )
 set( testpiecetablechangetest_SRCS
   testpiecetablechangetest.cpp
   testpiecetablechange.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
 )
 
 kde4_add_unit_test( testpiecetablechangetest
   TESTNAME libpiecetable-testpiecetablechangetest
   ${testpiecetablechangetest_SRCS}
 )
-target_link_libraries( testpiecetablechangetest  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( testpiecetablechangetest testoktetacore oktetacoretestutil Qt5::Test KF5::KI18n )
 
 
 ########### abstractpiecetablechangeiftestsources ###############
@@ -51,8 +48,6 @@ target_link_libraries( testpiecetablechangetest  oktetacoretestutil ${KDE4_KDECO
 set( abstractpiecetablechangeiftest_SRCS
   abstractpiecetablechangeiftest.cpp
   testpiecetablechange.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
 )
 
 ########### testpiecetablechangeabstractpiecetablechangeiftest ###############
@@ -67,7 +62,7 @@ kde4_add_unit_test( testpiecetablechangeabstractpiecetablechangeiftest
   ${testpiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( testpiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
+  oktetacoretestutil testoktetacore Qt5::Test )
 
 
 ########### insertpiecetablechangeabstractpiecetablechangeiftest ###############
@@ -75,7 +70,6 @@ target_link_libraries( testpiecetablechangeabstractpiecetablechangeiftest
 set( insertpiecetablechangeabstractpiecetablechangeiftest_SRCS
   insertpiecetablechangeabstractpiecetablechangeiftest.cpp
   ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
 )
 
 kde4_add_unit_test( insertpiecetablechangeabstractpiecetablechangeiftest
@@ -83,7 +77,7 @@ kde4_add_unit_test( insertpiecetablechangeabstractpiecetablechangeiftest
   ${insertpiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( insertpiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
+  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n )
 
 
 ########### removepiecetablechangeabstractpiecetablechangeiftest ###############
@@ -91,7 +85,6 @@ target_link_libraries( insertpiecetablechangeabstractpiecetablechangeiftest
 set( removepiecetablechangeabstractpiecetablechangeiftest_SRCS
   removepiecetablechangeabstractpiecetablechangeiftest.cpp
   ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
 )
 
 kde4_add_unit_test( removepiecetablechangeabstractpiecetablechangeiftest
@@ -99,7 +92,7 @@ kde4_add_unit_test( removepiecetablechangeabstractpiecetablechangeiftest
   ${removepiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( removepiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
+  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n )
 
 
 ########### replacepiecetablechangeabstractpiecetablechangeiftest ###############
@@ -107,7 +100,6 @@ target_link_libraries( removepiecetablechangeabstractpiecetablechangeiftest
 set( replacepiecetablechangeabstractpiecetablechangeiftest_SRCS
   replacepiecetablechangeabstractpiecetablechangeiftest.cpp
   ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
 )
 
 kde4_add_unit_test( replacepiecetablechangeabstractpiecetablechangeiftest
@@ -115,7 +107,7 @@ kde4_add_unit_test( replacepiecetablechangeabstractpiecetablechangeiftest
   ${replacepiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( replacepiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
+  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n )
 
 
 ########### swaprangespiecetablechangeabstractpiecetablechangeiftest ###############
@@ -123,7 +115,6 @@ target_link_libraries( replacepiecetablechangeabstractpiecetablechangeiftest
 set( swaprangespiecetablechangeabstractpiecetablechangeiftest_SRCS
   swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
   ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
 )
 
 kde4_add_unit_test( swaprangespiecetablechangeabstractpiecetablechangeiftest
@@ -131,7 +122,7 @@ kde4_add_unit_test( swaprangespiecetablechangeabstractpiecetablechangeiftest
   ${swaprangespiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( swaprangespiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
+  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n )
 
 
 ########### grouppiecetablechangeabstractpiecetablechangeiftest ###############
@@ -141,11 +132,6 @@ if(IWILLPICKUPWORKONOKTETACORE)
 set( grouppiecetablechangeabstractpiecetablechangeiftest_SRCS
   grouppiecetablechangeabstractpiecetablechangeiftest.cpp
   ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/addressrangelist.cpp
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
-  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
 )
 
 kde4_add_unit_test( grouppiecetablechangeabstractpiecetablechangeiftest
@@ -153,7 +139,7 @@ kde4_add_unit_test( grouppiecetablechangeabstractpiecetablechangeiftest
   ${grouppiecetablechangeabstractpiecetablechangeiftest_SRCS}
 )
 target_link_libraries( grouppiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} Qt5::Test )
+  oktetacoretestutil testoktetacore Qt5::Test )
 endif()
 
 ########### grouppiecetablechangetest ###############
@@ -161,21 +147,13 @@ endif()
 set( grouppiecetablechangetest_SRCS
   grouppiecetablechangetest.cpp
   testpiecetablechange.cpp
-  ${SUTDIR}/addressrangelist.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
-  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
-  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
 )
 
 kde4_add_unit_test( grouppiecetablechangetest
   TESTNAME libpiecetable-grouppiecetablechangetest
   ${grouppiecetablechangetest_SRCS}
 )
-target_link_libraries( grouppiecetablechangetest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( grouppiecetablechangetest testoktetacore Qt5::Test KF5::KI18n)
 
 
 ########### piecetablechangehistorytest ###############
@@ -183,42 +161,23 @@ target_link_libraries( grouppiecetablechangetest  ${KDE4_KDECORE_LIBS} Qt5::Test
 set( piecetablechangehistorytest_SRCS
   piecetablechangehistorytest.cpp
   testpiecetablechange.cpp
-  ${SUTDIR}/addressrangelist.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
-  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
-  ${SUTDIR}/piecetable/piecetablechangehistory.cpp
-  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
 )
 
 kde4_add_unit_test( piecetablechangehistorytest
   TESTNAME libpiecetable-piecetablechangehistorytest
   ${piecetablechangehistorytest_SRCS}
 )
-target_link_libraries( piecetablechangehistorytest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( piecetablechangehistorytest testoktetacore Qt5::Test )
 
 
 ########### revertablepiecetabletest ###############
 
 set( revertablepiecetabletest_SRCS
   revertablepiecetabletest.cpp
-  ${SUTDIR}/addressrangelist.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
-  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
-  ${SUTDIR}/piecetable/piecetablechangehistory.cpp
-  ${SUTDIR}/piecetable/revertablepiecetable.cpp
-  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
 )
 
 kde4_add_unit_test( revertablepiecetabletest
   TESTNAME libpiecetable-revertablepiecetabletest
   ${revertablepiecetabletest_SRCS}
 )
-target_link_libraries( revertablepiecetabletest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( revertablepiecetabletest testoktetacore Qt5::Test KF5::KI18n )

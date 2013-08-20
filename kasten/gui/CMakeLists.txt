@@ -192,15 +192,20 @@ set( okteta_kastengui_LIB_HDRS
 
 kde4_add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
 
-target_link_libraries( ${oktetakastengui_LIB}
+target_link_libraries( ${oktetakastengui_LIB} LINK_PUBLIC
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-  ${KDE4_KDEUI_LIBS}
-  Qt5::Script
 )
+target_link_libraries( ${oktetakastengui_LIB} LINK_PRIVATE
+  Qt5::Script
+  KF5::KI18n
+  KF5::KCompletion
+  ${KDE4Support_LIBRARIES} #KGlobalSettings
+)
+
 set_target_properties( ${oktetakastengui_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetakastengui_LIB_NAME}
   VERSION     ${OKTETAKASTEN_LIB_VERSION}

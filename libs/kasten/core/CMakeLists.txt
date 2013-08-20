@@ -124,12 +124,9 @@ set( kastencore_LIB_HDRS
 )
 
 kde4_add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
-target_link_libraries( ${kastencore_LIB}
-  ${KDE4_KIO_LIBS}
-  ${KDE4_SOLID_LIBS}
-  Qt5::Widgets
-)
-set_target_properties( ${kastencore_LIB}  PROPERTIES
+target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core KF5::KIOCore )
+target_link_libraries( ${kastencore_LIB} LINK_PRIVATE KF5::KI18n ${KDE4_KIO_LIBS} KF5::Solid )
+set_target_properties( ${kastencore_LIB} PROPERTIES
   OUTPUT_NAME ${kastencore_LIB_NAME}
   VERSION     ${KASTEN_LIB_VERSION}
   SOVERSION   ${KASTEN_LIB_SOVERSION}

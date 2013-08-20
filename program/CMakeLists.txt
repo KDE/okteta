@@ -52,7 +52,8 @@ target_link_libraries( okteta
   kastencontrollers
   kastengui
   kastencore
-  ${KDE4_KDEUI_LIBS}
+  KF5::KI18n
+  KF5::XmlGui
   ${KDE4Support_LIBRARIES}
 )
 

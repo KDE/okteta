@@ -25,10 +25,10 @@
 // lib
 #include "abstractbytearraystreamencoder.h"
 // KDE
-#include <KTextEdit>
 #include <KGlobalSettings>
 #include <KLocalizedString>
-
+// Qt
+#include <QTextEdit>
 
 namespace Kasten2
 {
@@ -36,7 +36,7 @@ namespace Kasten2
 ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder )
  : mEncoder( encoder ), mModel( 0 )
 {
-    mWidget = new KTextEdit(); // TODO: use Kate for syntax highlighting
+    mWidget = new QTextEdit(); // TODO: use Kate for syntax highlighting
     mWidget->setReadOnly( true );
     mWidget->setLineWrapMode( QTextEdit::NoWrap );
     mWidget->setToolTip( i18n("The preview uses maximal the first 100 bytes.") );

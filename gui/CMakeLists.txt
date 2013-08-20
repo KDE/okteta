@@ -124,9 +124,13 @@ set( oktetagui_LIB_CCHDRS
 )
 
 kde4_add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
-target_link_libraries( ${oktetagui_LIB}
+target_link_libraries( ${oktetagui_LIB} LINK_PUBLIC
   ${oktetacore_LIB}
-  ${KDE4_KDEUI_LIBS}
+  Qt5::Widgets
+)
+target_link_libraries( ${oktetagui_LIB} LINK_PRIVATE
+  KF5::KI18n
+  KF5::KConfigWidgets
 )
 set_target_properties( ${oktetagui_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetagui_LIB_NAME}

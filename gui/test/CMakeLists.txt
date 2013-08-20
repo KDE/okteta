@@ -18,7 +18,7 @@ set( selectiontest_SRCS
 )
 
 kde4_add_unit_test( selectiontest  TESTNAME libokteta-gui-selectiontest  ${selectiontest_SRCS} )
-target_link_libraries( selectiontest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( selectiontest Qt5::Test )
 
 set_tests_properties(libokteta-gui-selectiontest PROPERTIES LABELS OktetaLabel)
 
@@ -29,7 +29,7 @@ set( coordtest_SRCS
 )
 
 kde4_add_unit_test( coordtest  TESTNAME libokteta-gui-coordtest  ${coordtest_SRCS} )
-target_link_libraries( coordtest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( coordtest Qt5::Test )
 
 
 ########### coordrangetest ###############
@@ -39,7 +39,7 @@ set( coordrangetest_SRCS
 )
 
 kde4_add_unit_test( coordrangetest  TESTNAME libokteta-gui-coordrangetest  ${coordrangetest_SRCS} )
-target_link_libraries( coordrangetest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( coordrangetest Qt5::Test )
 
 
 ########### coordrangelisttest ###############
@@ -50,7 +50,7 @@ set( coordrangelisttest_SRCS
 )
 
 kde4_add_unit_test( coordrangelisttest  TESTNAME libokteta-gui-coordrangelisttest  ${coordrangelisttest_SRCS} )
-target_link_libraries( coordrangelisttest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( coordrangelisttest Qt5::Test )
 
 
 ########### bytearraytablelayouttest ###############
@@ -64,7 +64,7 @@ kde4_add_unit_test( bytearraytablelayouttest
   TESTNAME libokteta-gui-bytearraytablelayouttest
   ${bytearraytablelayouttest_SRCS}
 )
-target_link_libraries( bytearraytablelayouttest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( bytearraytablelayouttest Qt5::Test )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
 set_target_properties( bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
@@ -82,7 +82,7 @@ kde4_add_unit_test( bytearraytablecursortest
   TESTNAME libokteta-gui-bytearraytablecursortest
   ${bytearraytablecursortest_SRCS}
 )
-target_link_libraries( bytearraytablecursortest  ${KDE4_KDECORE_LIBS} Qt5::Test )
+target_link_libraries( bytearraytablecursortest Qt5::Test )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
 set_target_properties( bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )

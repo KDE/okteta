@@ -56,7 +56,9 @@ kde4_add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} 
 target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC
   ${KASTENCORE_LIBS}
   ${oktetacore_LIB}
-  ${KDE4_KDECORE_LIBS}
+)
+target_link_libraries( ${oktetakastencore_LIB} LINK_PRIVATE
+	KF5::KI18n
 )
 
 set_target_properties( ${oktetakastencore_LIB} PROPERTIES

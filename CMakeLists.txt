@@ -31,7 +31,6 @@ if( UNIX )
 endif()
 
 # needed for set_package_properties macro
-find_package(LibAttica REQUIRED NO_MODULE ) #somehow this is not searched for
 find_package(KDELibs4 REQUIRED NO_MODULE) #needed for KDE4Support
 find_package(KDE4Support REQUIRED NO_MODULE)
 
@@ -113,7 +112,9 @@ add_subdirectory( designer )
 # Okteta Kasten components
 add_subdirectory( kasten )
 # special mimetypes
-add_subdirectory( mimetypes )
+#disable this for now, FindSharedMimeInfo is no longer installed by KF5
+#TODO fix this
+#add_subdirectory( mimetypes )
 
 # programs and parts for desktop
 add_subdirectory( parts )

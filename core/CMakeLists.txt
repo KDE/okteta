@@ -113,14 +113,16 @@ set( oktetacore_LIB_CCHDRS
 )
 
 #don't compile sources twice by using object libraries
-#OBJECT libraries seem buggy with regard to automoc, have to call it manually
-#automoc4( oktetacore_objs oktetacore_LIB_SRCS )
 add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
-set_target_properties(oktetacore_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
 
 kde4_add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
-target_link_libraries( ${oktetacore_LIB} LINK_PUBLIC ${KDE4_KDECORE_LIBS} ${KDE4Attic_LIBRARIES} )
+target_link_libraries( ${oktetacore_LIB} LINK_PUBLIC Qt5::Core )
+target_link_libraries( ${oktetacore_LIB} LINK_PRIVATE
+  KF5::KI18n
+  KF5::KCodecs   #needed for codecs
+  KF5::KDE4Attic #needed for codecs
+)
 
 set_target_properties( ${oktetacore_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetacore_LIB_NAME}
@@ -140,8 +142,8 @@ install( FILES ${oktetacore_LIB_CCHDRS}
 )
 
 
-add_subdirectory( piecetable/tests )
-add_subdirectory( tests )
 if(KDE4_BUILD_TESTS)
   kde4_add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
+  add_subdirectory( piecetable/tests )
+  add_subdirectory( tests )
 endif(KDE4_BUILD_TESTS)

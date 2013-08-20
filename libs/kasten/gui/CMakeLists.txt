@@ -156,11 +156,17 @@ set( kastengui_LIB_HDRS
 )
 
 kde4_add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
-target_link_libraries( ${kastengui_LIB}
+target_link_libraries( ${kastengui_LIB} LINK_PUBLIC
   ${kastencore_LIB}
-  ${KDE4_KDEUI_LIBS}
+  Qt5::Widgets
+)
+target_link_libraries( ${kastengui_LIB} LINK_PRIVATE
+  KF5::XmlGui
+  KF5::KI18n
   ${KDE4Support_LIBRARIES}
 )
+
+
 set_target_properties( ${kastengui_LIB}  PROPERTIES
   OUTPUT_NAME ${kastengui_LIB_NAME}
   VERSION     ${KASTEN_LIB_VERSION}

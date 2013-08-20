@@ -58,6 +58,7 @@ class OKTETACORE_EXPORT BookmarksConstIterator
     void toFront();
 
   protected:
+    //TODO: QExplicitlySharedDataPointer
     KSharedPtr<BookmarksConstIteratorAdapter> mAdapter;
 };
 

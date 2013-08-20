@@ -432,13 +432,15 @@ target_link_libraries ( structures-static
   Qt5::Test
   Qt5::Script
   Qt5::Xml
-  ${KDE4_KDEUI_LIBS}
+  KF5::KI18n
+  KF5::KConfigWidgets
   ${KDE4_KNEWSTUFF3_LIBS}
   ${KDE4_KCMUTILS_LIBS}
   ${oktetakastencore_LIB}
   ${oktetakastengui_LIB}
   ${oktetacore_LIB}
   ${KASTENCORE_LIBS}
+  ${KDE4Attic_LIBRARIES}
   ${KDE4Support_LIBRARIES}
 )
 
@@ -532,10 +534,11 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-  ${KDE4_KIO_LIBS}
-  ${KDE4_KDEUI_LIBS}
   ${KDE4_KNEWSTUFF3_LIBS}
-  ${KDE4_KCMUTILS_LIBS}
+  ${KDE4_KUTILS_LIBS}
+  KF5::KI18n
+  KF5::KConfigWidgets
+  KF5::KIconThemes
   Qt5::Script
   Qt5::ScriptTools
   ${KDE4Attic_LIBRARIES}
