@@ -13,6 +13,7 @@ set( oktetacoretestutil_LIB_SRCS
 )
 
 kde4_add_library( oktetacoretestutil  STATIC ${oktetacoretestutil_LIB_SRCS} )
+target_link_libraries( oktetacoretestutil Qt5::Core )
 
 ########### arraychangemetricstest ###############
 

@@ -17,6 +17,7 @@ set( kastencoretestutil_LIB_SRCS
 )
 
 kde4_add_library( kastencoretestutil  STATIC ${kastencoretestutil_LIB_SRCS} )
+target_link_libraries( kastencoretestutil Qt5::Core )
 
 ########### io ###############
 
@@ -32,6 +33,7 @@ set( kastencoretestio_LIB_SRCS
 )
 
 kde4_add_library( kastencoretestio  STATIC ${kastencoretestio_LIB_SRCS} )
+target_link_libraries( kastencoretestio Qt5::Core )
 
 ########### testdocumenttest ###############
 

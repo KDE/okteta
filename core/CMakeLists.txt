@@ -114,6 +114,7 @@ set( oktetacore_LIB_CCHDRS
 
 #don't compile sources twice by using object libraries
 add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
+target_include_directories( oktetacore_objs PUBLIC $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES> )
 set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
 
 kde4_add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
@@ -144,6 +145,7 @@ install( FILES ${oktetacore_LIB_CCHDRS}
 
 if(KDE4_BUILD_TESTS)
   kde4_add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
+  target_link_libraries( testoktetacore Qt5::Core )
   add_subdirectory( piecetable/tests )
   add_subdirectory( tests )
 endif(KDE4_BUILD_TESTS)

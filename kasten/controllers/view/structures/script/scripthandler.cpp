@@ -34,7 +34,10 @@
 #include <QScriptValue>
 #include <QScriptValueIterator>
 #include <QScriptEngine>
+#ifdef OKTETA_DEBUG_SCRIPT
 #include <QScriptEngineDebugger>
+#endif
+
 
 ScriptHandler::ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel)
         : mEngine(engine), mTopLevel(topLevel), mHandlerInfo(engine, topLevel->logger())

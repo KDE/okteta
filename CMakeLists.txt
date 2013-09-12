@@ -4,16 +4,14 @@ project( okteta )
 
 #copy the way kde-workspace does it
 
-set(QT_MIN_VERSION "5.2.0")
 find_package(ECM 0.0.8 REQUIRED NO_MODULE)
-include(CMakePackageConfigHelpers)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools)
-find_package(Qt5Transitional MODULE)
-#workaround wrong dirs being used
-
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools Xml Network PrintSupport)
+if (BUILD_TESTING)
+  find_package(Qt5Test REQUIRED NO_MODULE)
+endif()
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions for now
 
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
@@ -25,7 +23,7 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
                                             )
 
 if( UNIX )
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti -Wno-deprecated-declarations")
 endif()
 
 # needed for set_package_properties macro

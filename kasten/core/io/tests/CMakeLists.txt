@@ -35,6 +35,7 @@ set( oktetakastenio_LIB_SRCS
 )
 
 kde4_add_library( oktetakastenio  STATIC ${oktetakastenio_LIB_SRCS} )
+target_link_libraries( oktetakastenio Qt5::Core )
 
 
 ########### bytearrayrawfilesynchronizertest ###############

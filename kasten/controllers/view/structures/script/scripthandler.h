@@ -23,7 +23,6 @@
 #ifndef SCRIPTHANDLER_H_
 #define SCRIPTHANDLER_H_
 
-#include <QScriptValue>
 #include <QScopedPointer>
 
 #include <config-structtool.h>
@@ -35,6 +34,7 @@ class TaggedUnionDataInformation;
 class ScriptLogger;
 class TopLevelDataInformation;
 class QScriptEngineDebugger;
+class QScriptValue;
 
 class ScriptHandler
 {

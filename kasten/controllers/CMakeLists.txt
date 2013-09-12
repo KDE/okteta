@@ -339,6 +339,7 @@ set( STRUCTVIEW_SRCS
 configure_file( config-structtool.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-structtool.h )
 if ( OKTETA_DEBUG_SCRIPT )
     message( STATUS "Okteta will be compiled with script debugging enabled" )
+    find_package(Qt5ScriptTools)
 else( OKTETA_DEBUG_SCRIPT )
     message( STATUS "Okteta will be compiled without script debugging. (-DOKTETA_DEBUG_SCRIPT=1 to enable)" )
 endif( OKTETA_DEBUG_SCRIPT )
@@ -388,7 +389,17 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
 #to prevent compiling these object files twice with exactly the same compile flags
 
 add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
+target_include_directories( poddecoder_objs PUBLIC
+  $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
+  $<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
+)
 add_library( structview_objs OBJECT ${STRUCTVIEW_SRCS} )
+target_include_directories( structview_objs PUBLIC
+  $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
+  $<TARGET_PROPERTY:Qt5::Script,INTERFACE_INCLUDE_DIRECTORIES>
+  $<TARGET_PROPERTY:Qt5::Xml,INTERFACE_INCLUDE_DIRECTORIES>
+  $<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
+)
 set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
 set( STRUCTVIEW_OBJS $<TARGET_OBJECTS:structview_objs>)
@@ -603,5 +614,6 @@ set( okteta_kastencontrollers_templates_SRCS
 )
 
 kde4_add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
+target_link_libraries( oktetakastencontrollertemplates Qt5::Widgets )
 
 endif( KASTEN_BUILD_INTERNAL_TEMPLATES )
