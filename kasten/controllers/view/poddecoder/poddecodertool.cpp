@@ -180,7 +180,7 @@ void PODDecoderTool::setUnsignedAsHex( bool unsignedAsHex )
 void PODDecoderTool::setByteOrder( int byteOrder )
 {
     // TODO: test on no change is done in PODData, not this level
-    mPODData.setByteOrder( (Okteta::ByteOrder)byteOrder );
+    mPODData.setByteOrder( (QSysInfo::Endian)byteOrder );
     updateData();
 }
 
@@ -243,7 +243,7 @@ void PODDecoderTool::setData( const QVariant& data, int podId )
         return;
 
     // need to swap the bytes
-    if( mPODData.byteOrder() != Okteta::thisMachineByteOrder )
+    if( mPODData.byteOrder() != QSysInfo::ByteOrder )
     {
         const int firstHalfBytesCount = bytesSize/2;
         int j = bytesSize - 1;

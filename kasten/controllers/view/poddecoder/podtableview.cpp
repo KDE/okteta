@@ -80,8 +80,8 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     settingsLayout->setMargin( 0 );
 
     mByteOrderSelection = new KComboBox( this );
-    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
-    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
+    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add first for index
+    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add second for index
     mByteOrderSelection->setCurrentIndex( mTool->byteOrder() );
     connect( mByteOrderSelection, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
              mTool, &PODDecoderTool::setByteOrder);
