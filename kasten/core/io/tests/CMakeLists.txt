@@ -59,6 +59,7 @@ target_link_libraries( bytearrayrawfilesynchronizertest
   ${KDE4_KIO_LIBS}
   ${KDE4Attic_LIBRARIES}
   KF5::KI18n
+  KF5::KBookmarks
   Qt5::Test
 )
 
@@ -84,5 +85,6 @@ target_link_libraries( bytearrayrawfilesynchronizerfactorytest
   testoktetacore
   ${KDE4_KIO_LIBS}
   KF5::KI18n
+  KF5::KBookmarks
   Qt5::Test
 )

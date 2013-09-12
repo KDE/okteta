@@ -162,7 +162,7 @@ void DocumentInfoView::onMimeTypeChanged( KMimeType::Ptr mimeTypePtr )
     QString mimeTypeComment;
     QPixmap mimeTypeIcon;
 
-    if( mimeTypePtr.isNull() )
+    if( !mimeTypePtr )
     {
         mimeTypeComment = QStringLiteral( "-" );
 //         mimeTypeIcon = ?
