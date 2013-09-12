@@ -28,7 +28,6 @@
 #include <KUrl>
 #include <KLocalizedString>
 // Qt
-#include <QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
 

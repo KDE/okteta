@@ -28,7 +28,7 @@
 #include "testdocumentfileloadthread.h"
 #include "testdocument.h"
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten2
@@ -46,7 +46,7 @@ void TestDocumentFileLoadJob::startLoadFromFile()
         new TestDocumentFileLoadThread( this, testSynchronizer->header(), file() );
     loadThread->start();
     while( !loadThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     TestDocument* document = loadThread->document();
     testSynchronizer->setDocument( document );

@@ -28,7 +28,7 @@
 #include "testdocumentfilewritethread.h"
 #include "testdocument.h"
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten2
@@ -46,7 +46,7 @@ void TestDocumentFileWriteJob::startWriteToFile()
     TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(),  document, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     const bool success = writeThread->success();
     delete writeThread;

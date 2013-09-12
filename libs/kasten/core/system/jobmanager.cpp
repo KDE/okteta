@@ -26,7 +26,7 @@
 #include <KJob>
 #include <KMessageBox>
 // Qt
-#include <QApplication>
+#include <QGuiApplication>
 
 
 namespace Kasten2
@@ -38,13 +38,13 @@ bool JobManager::executeJob( KJob* job )
         return false;
 
     //TODO linking to QtWidgets in core library should be avoided
-#pragma message("TODO: no longer link to QtWidgets")
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+#pragma message("TODO: no longer link to QtGui")
+    QGuiApplication::setOverrideCursor( Qt::WaitCursor );
 
     job->exec();
     const bool success = ( job->error() == KJob::NoError );
 
-    QApplication::restoreOverrideCursor();
+    QGuiApplication::restoreOverrideCursor();
 
     if( !success )
         KMessageBox::error( 0, job->errorText() ); // TODO: feed into notification system

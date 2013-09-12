@@ -29,9 +29,9 @@
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QByteArray>
-#include <QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
+#include <QCoreApplication>
 
 
 namespace Kasten2
@@ -62,7 +62,7 @@ void TestDocumentFileLoadThread::run()
         if( streamIsOk )
         {
             mDocument = new TestDocument( byteArray );
-            mDocument->moveToThread( QApplication::instance()->thread() );
+            mDocument->moveToThread( QCoreApplication::instance()->thread() );
         }
         else
         {
