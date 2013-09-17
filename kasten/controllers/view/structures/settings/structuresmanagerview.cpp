@@ -30,7 +30,6 @@
 // KDE
 #include <KFileDialog>
 #include <KStandardDirs>
-#include <KIO/NetAccess>
 #include <KMessageBox>
 #include <KPluginSelector>
 #include <KConfigDialogManager>
