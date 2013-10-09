@@ -261,21 +261,8 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarkstoolviewfactory.cpp
 )
 
-set( STRUCTVIEW_SRCS
+set( STRUCTVIEW_TESTED_SRCS
   view/structures/allprimitivetypes.cpp
-  view/structures/structurestoolfactory.cpp
-  view/structures/structurestoolviewfactory.cpp
-  view/structures/structuresmanager.cpp
-  view/structures/structtool.cpp
-  view/structures/structtreemodel.cpp
-  view/structures/modeltest.cpp
-  view/structures/structview.cpp
-  view/structures/structtoolview.cpp
-  view/structures/structviewitemdelegate.cpp
-  view/structures/structuredefinitionfile.cpp
-  view/structures/settings/structureaddremovewidget.cpp
-  view/structures/settings/structviewdisplaysettingswidget.cpp
-  view/structures/settings/structuresmanagerview.cpp
   view/structures/datatypes/topleveldatainformation.cpp
   view/structures/datatypes/datainformation.cpp
   view/structures/datatypes/datainformationbase.cpp
@@ -336,6 +323,24 @@ set( STRUCTVIEW_SRCS
   view/structures/parsers/datainformationfactory.cpp
   view/structures/parsers/parserutils.cpp
 )
+
+#these source files are not needed by the static library for unit tests, therefore keep them separate
+set( STRUCTVIEW_OTHER_SRCS
+  view/structures/structurestoolfactory.cpp
+  view/structures/structurestoolviewfactory.cpp
+  view/structures/structuresmanager.cpp
+  view/structures/structtool.cpp
+  view/structures/structtreemodel.cpp
+  view/structures/structuredefinitionfile.cpp
+  view/structures/modeltest.cpp
+  view/structures/structview.cpp
+  view/structures/structtoolview.cpp
+  view/structures/structviewitemdelegate.cpp
+  view/structures/settings/structureaddremovewidget.cpp
+  view/structures/settings/structviewdisplaysettingswidget.cpp
+  view/structures/settings/structuresmanagerview.cpp
+)
+
 configure_file( config-structtool.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-structtool.h )
 if ( OKTETA_DEBUG_SCRIPT )
     message( STATUS "Okteta will be compiled with script debugging enabled" )
@@ -343,8 +348,8 @@ if ( OKTETA_DEBUG_SCRIPT )
 else( OKTETA_DEBUG_SCRIPT )
     message( STATUS "Okteta will be compiled without script debugging. (-DOKTETA_DEBUG_SCRIPT=1 to enable)" )
 endif( OKTETA_DEBUG_SCRIPT )
-kde4_add_kcfg_files( STRUCTVIEW_SRCS view/structures/settings/structviewpreferences.kcfgc )
-kde4_add_ui_files( STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
+kde4_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structviewpreferences.kcfgc )
+kde4_add_ui_files( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
@@ -393,7 +398,7 @@ target_include_directories( poddecoder_objs PUBLIC
   $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
   $<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
 )
-add_library( structview_objs OBJECT ${STRUCTVIEW_SRCS} )
+add_library( structview_objs OBJECT ${STRUCTVIEW_TESTED_SRCS} )
 target_include_directories( structview_objs PUBLIC
   $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
   $<TARGET_PROPERTY:Qt5::Script,INTERFACE_INCLUDE_DIRECTORIES>
@@ -432,21 +437,22 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWPROFILESMANAGECONTROLLER_SRCS}
   ${PODDECODER_OBJS}
   ${STRUCTVIEW_OBJS}
+  ${STRUCTVIEW_OTHER_SRCS}
 )
 
 #structures view unit tests
-if ( KDE4_BUILD_TESTS )
+include(ECMAddTests)
 #static lib for unit tests (reuse the OBJECT library)
-kde4_add_library ( structures-static STATIC ${PODDECODER_OBJS} ${STRUCTVIEW_OBJS} )
-target_link_libraries ( structures-static
+add_library( structures-static STATIC ${PODDECODER_OBJS} ${STRUCTVIEW_OBJS} )
+ecm_mark_as_test( structures-static )
+target_link_libraries( structures-static
   Qt5::Core
   Qt5::Test
   Qt5::Script
   Qt5::Xml
   KF5::KI18n
-  KF5::KConfigWidgets
-  KF5::KCMUtils
-  ${KDE4_KNEWSTUFF3_LIBS}
+#  KF5::KConfigWidgets
+#  KF5::KCMUtils
   ${oktetakastencore_LIB}
   ${oktetakastengui_LIB}
   ${oktetacore_LIB}
@@ -455,28 +461,24 @@ target_link_libraries ( structures-static
   ${KDE4Support_LIBRARIES}
 )
 
-macro(structures_unit_test _testtarget _testname)
-    #message("ARGC='${ARGC}' ARGV='${ARGV}' ARGN='${ARGN}'")
-    kde4_add_unit_test(${_testtarget} TESTNAME ${_testname} ${ARGN})
-    target_link_libraries(${_testtarget} LINK_PRIVATE structures-static )
-endmacro()
+ecm_add_tests(
+  test/primitivearraytest.cpp
+  test/arraydatainformationtest.cpp
+  test/basicdatainformationtest.cpp
+  test/primitivedatainformationtest.cpp
+  test/scriptclassestest.cpp
+  test/uniondatainformationtest.cpp
+  test/allprimitivetypestest.cpp
+  test/scriptvalueconvertertest.cpp
+  test/osdparsertest.cpp
+  test/commonparsertest.cpp
+  test/jsparsertest.cpp
+  test/customtostringtest.cpp
+  test/locktooffsettest.cpp
 
-structures_unit_test( primitivearraytest "structures-primitive-array" test/primitivearraytest.cpp )
-structures_unit_test( arraydatainformationtest "structures-array-datainformation" test/arraydatainformationtest.cpp )
-structures_unit_test( basicdatainformationtest "structures-basic-datainformation" test/basicdatainformationtest.cpp )
-structures_unit_test( primitivedatainformationtest "structures-primitive-datainformation" test/primitivedatainformationtest.cpp )
-structures_unit_test( scriptclassestest "structures-script-classes" test/scriptclassestest.cpp )
-structures_unit_test( uniondatainformationtest "structures-union-datainformation" test/uniondatainformationtest.cpp )
-structures_unit_test( allprimitivetypestest "structures-all-primitive-types" test/allprimitivetypestest.cpp )
-structures_unit_test( scriptvalueconvertertest "structures-scriptvalue-converter" test/scriptvalueconvertertest.cpp )
-structures_unit_test( osdparsertest "structures-osd-parser" test/osdparsertest.cpp )
-structures_unit_test( commonparsertest "structures-common-parser" test/commonparsertest.cpp )
-structures_unit_test( jsparsertest "structures-js-parser" test/jsparsertest.cpp )
-structures_unit_test( customtostringtest "structures-custom-to-string" test/customtostringtest.cpp )
-structures_unit_test( locktooffsettest "structures-lock-to-offset" test/locktooffsettest.cpp )
-set_target_properties( jsparsertest customtostringtest PROPERTIES COMPILE_DEFINITIONS SRCDIR=\"${CMAKE_CURRENT_SOURCE_DIR}\" )
-
-endif ( KDE4_BUILD_TESTS )
+  NAME_PREFIX structures-
+  LINK_LIBRARIES structures-static
+)
 
 set( okteta_kastencontrollers_LIB_HDRS
   oktetakastencontrollers_export.h

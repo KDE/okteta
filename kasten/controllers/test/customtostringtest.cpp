@@ -39,8 +39,12 @@ private Q_SLOTS:
 void CustomToStringTest::initTestCase()
 {
     //needed so that imports can be resolved
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QStringLiteral(SRCDIR "/test/resources")));
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QStringLiteral(SRCDIR "/view/structures/examples")));
+    QString resources = QFINDTESTDATA("resources");
+    QString examples = QFINDTESTDATA("../view/structures/examples");
+    QVERIFY2(!resources.isEmpty(), "Test data must exist!");
+    QVERIFY2(!examples.isEmpty(), "Test data must exist!");
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", resources));
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", examples));
 }
 
 static uchar uuid1[16] =

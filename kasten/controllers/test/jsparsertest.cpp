@@ -117,11 +117,13 @@ void JsParserTest::initTestCase()
     //TODO struct, union, taggedUnion, pointer, flags, enum, array, string
 
     //needed so that imports can be resolved
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QStringLiteral(SRCDIR "/test/resources")));
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QStringLiteral(SRCDIR "/view/structures/examples")));
+    QString resources = QFINDTESTDATA("resources");
+    QString examples = QFINDTESTDATA("../view/structures/examples");
+    QVERIFY2(!resources.isEmpty(), "Test data must exist!");
+    QVERIFY2(!examples.isEmpty(), "Test data must exist!");
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", resources));
+    QVERIFY(KGlobal::dirs()->addResourceDir("data", examples));
 }
-
-//#pragma message(SRCDIR)
 
 void JsParserTest::testByteOrder_data()
 {
