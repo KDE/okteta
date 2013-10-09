@@ -35,7 +35,7 @@
 #include <abstractmodelsynchronizerfactory.h>
 #include <abstractdocument.h>
 // KDE
-#include <KIO/NetAccess>
+#include <kio/netaccess.h>
 #include <KFileDialog>
 #include <KLocalizedString>
 // Qt

@@ -17,11 +17,10 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions fo
 # Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
 find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
                                             KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KDBusAddons KService ItemViews KAuth KCodecs
-                                            KConfigWidgets KWindowSystem KNotifications KIconThemes Sonnet KCompletion
-                                            KTextWidgets XmlGui KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
-                                            KIO KUnitConversion KDE4Attic KBookmarks
+                                            KConfigWidgets KWindowSystem KNotifications KIconThemes Sonnet KCompletion 
+                                            KTextWidgets XmlGui KBookmarks KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
+                                            KIO KUnitConversion KDE4Attic Kross KParts KCMUtils KPrintUtils
                                             )
-
 if( UNIX )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
 endif()

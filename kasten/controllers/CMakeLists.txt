@@ -445,8 +445,8 @@ target_link_libraries ( structures-static
   Qt5::Xml
   KF5::KI18n
   KF5::KConfigWidgets
+  KF5::KCMUtils
   ${KDE4_KNEWSTUFF3_LIBS}
-  ${KDE4_KCMUTILS_LIBS}
   ${oktetakastencore_LIB}
   ${oktetakastengui_LIB}
   ${oktetacore_LIB}
@@ -546,10 +546,11 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
   ${KDE4_KNEWSTUFF3_LIBS}
-  ${KDE4_KUTILS_LIBS}
   KF5::KI18n
   KF5::KConfigWidgets
   KF5::KIconThemes
+  KF5::KCMUtils
+  KF5::KPrintUtils
   Qt5::Script
   Qt5::ScriptTools
   ${KDE4Attic_LIBRARIES}

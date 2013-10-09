@@ -23,7 +23,7 @@
 #include "abstractfilesystemexportjob_p.h"
 
 // KDE
-#include <KIO/NetAccess>
+#include <kio/netaccess.h>
 
 #include <QTemporaryFile>
 

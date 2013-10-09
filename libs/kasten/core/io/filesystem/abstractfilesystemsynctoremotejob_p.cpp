@@ -23,7 +23,7 @@
 #include "abstractfilesystemsynctoremotejob_p.h"
 
 // KDE
-#include <KIO/NetAccess>
+#include <kio/netaccess.h>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>

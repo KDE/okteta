@@ -184,8 +184,11 @@ target_link_libraries( ${kastencontrollers_LIB}
   ${kastengui_LIB}
   ${kastencore_LIB}
   KF5::KI18n
-  ${KDE4_KPARTS_LIBS}
-  ${KDE4_KFILE_LIBS}
+  KF5::KConfigWidgets
+  KF5::XmlGui
+  KF5::KIOFileWidgets
+  KF5::KParts
+  ${KDE4_KIO_LIBS}
   ${KDE4Support_LIBRARIES}
 )
 set_target_properties( ${kastencontrollers_LIB}  PROPERTIES

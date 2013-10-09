@@ -124,11 +124,13 @@ set( kastencore_LIB_HDRS
 )
 
 kde4_add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
-target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core KF5::KIOCore )
+target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core Qt5::Gui KF5::KIOCore )
 target_link_libraries( ${kastencore_LIB} LINK_PRIVATE
+  Qt5::Widgets #so that #include <QMessageBox> in <KMessageBox> works
   KF5::KI18n
-  ${KDE4_KIO_LIBS}
   KF5::Solid
+  KF5::KWidgetsAddons
+  ${KDE4_KIO_LIBS} #KFileDialog TODO: change once it has moved somewhere
   ${KDE4Support_LIBRARIES} #for KIO::NetAccess (TODO: port away)
 )
 set_target_properties( ${kastencore_LIB} PROPERTIES

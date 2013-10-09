@@ -32,7 +32,7 @@
 #include "documentmanager.h"
 #include "abstractexportjob.h"
 // KDE
-#include <KIO/NetAccess>
+#include <kio/netaccess.h>
 #include <KFileDialog>
 #include <KLocalizedString>
 #include <KGuiItem>
