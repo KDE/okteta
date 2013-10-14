@@ -28,7 +28,6 @@
 #include "../structuresmanager.h"
 #include "../structtool.h"
 // KDE
-#include <KFileDialog>
 #include <KStandardDirs>
 #include <KMessageBox>
 #include <KPluginSelector>

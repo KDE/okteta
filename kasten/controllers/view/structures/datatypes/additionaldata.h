@@ -25,7 +25,6 @@
 
 #include <QScriptValue>
 #include <QVariant>
-#include "../compiletimeassert.h"
 
 /** Additional data which is not needed frequently. Store this in a QHash to save memory */
 class AdditionalData
@@ -43,7 +42,7 @@ public:
 private:
     QHash<int, QVariant> mData;
 };
-compile_time_assert(sizeof(AdditionalData) == sizeof(void*));
+Q_STATIC_ASSERT(sizeof(AdditionalData) == sizeof(void*));
 
 Q_DECLARE_METATYPE(QScriptValue)
 

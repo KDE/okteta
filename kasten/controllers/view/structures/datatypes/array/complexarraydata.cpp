@@ -25,7 +25,6 @@
 #include <QScriptValue>
 #include <QVariant>
 #include <KLocalizedString>
-#include <KDebug>
 #include "arraydatainformation.h"
 #include "../topleveldatainformation.h"
 #include "../structuredatainformation.h"

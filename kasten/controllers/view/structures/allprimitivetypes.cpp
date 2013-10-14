@@ -21,15 +21,14 @@
  */
 
 #include "allprimitivetypes.h"
-#include "compiletimeassert.h"
 #include "datatypes/primitive/primitivedatainformation.h"
 
 #include <abstractbytearraymodel.h>
 
 
-compile_time_assert(sizeof(double) == 8);
-compile_time_assert(sizeof(float) == 4);
-compile_time_assert(sizeof(AllPrimitiveTypes) == 8);
+Q_STATIC_ASSERT(sizeof(double) == 8);
+Q_STATIC_ASSERT(sizeof(float) == 4);
+Q_STATIC_ASSERT(sizeof(AllPrimitiveTypes) == 8);
 
 
 //FIXME this code really needs unit tests!
