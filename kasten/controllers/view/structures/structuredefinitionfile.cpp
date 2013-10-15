@@ -25,6 +25,8 @@
 #include <QDir>
 #include <QStringList>
 
+#include <KDebug>
+
 #include "datatypes/topleveldatainformation.h"
 
 #include "parsers/abstractstructureparser.h"

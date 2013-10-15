@@ -48,7 +48,6 @@ kde4_add_library( kasten2mobilegui SHARED ${mobilekastengui_LIB_SRCS} )
 target_link_libraries( kasten2mobilegui
   kasten2gui
   kasten2core
-  ${KDE4_KDEUI_LIBS}
 )
 set_target_properties( kasten2mobilegui  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 

@@ -121,8 +121,6 @@ target_link_libraries( kasten2mobilecontrollers
   kasten2controllers
   kasten2gui
   kasten2core
-  ${KDE4_KIO_LIBS}
-  ${KDE4_KFILE_LIBS}
 )
 set_target_properties( kasten2mobilecontrollers  PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 

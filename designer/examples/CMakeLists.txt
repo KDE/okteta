@@ -16,6 +16,5 @@ kde4_add_executable( oktetadesignerexample  ${oktetadesignerexamplewidget_SRCS} 
 target_link_libraries( oktetadesignerexample
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-  ${KDE4_KDEUI_LIBS}
   Qt5::Widgets
 )

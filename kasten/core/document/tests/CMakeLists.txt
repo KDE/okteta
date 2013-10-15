@@ -32,7 +32,6 @@ kde4_add_unit_test( bytearraydocumenttest
 target_link_libraries( bytearraydocumenttest
   ${KASTENCORE_LIBS}
   testoktetacore
-  ${KDE4_KIO_LIBS}
   Qt5::Test
   KF5::KI18n
 )
@@ -54,7 +53,6 @@ target_link_libraries( bytearraydocumentfactorytest
   ${KASTENCORE_LIBS}
   oktetacoretestutil
   testoktetacore
-  ${KDE4_KIO_LIBS}
   Qt5::Test
   KF5::KI18n
 )

@@ -33,9 +33,9 @@
 #include "abstractexportjob.h"
 // KDE
 #include <kio/netaccess.h>
-#include <KFileDialog>
 #include <KLocalizedString>
 #include <KGuiItem>
+#include <KFileDialog>
 // Qt
 #include <QUrl>
 
@@ -121,11 +121,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         exportFileDialog.setMode( KFile::File );
         const QStringList mimeTypes = QStringList() << exporter->remoteMimeType();
         exportFileDialog.setMimeFilter( mimeTypes );
-#pragma message("TODO: port KDialog::setCaption")
-#if 0
-        //TODO port this
-        exportFileDialog.setCaption( dialogTitle );
-#endif
+        exportFileDialog.setWindowTitle( dialogTitle );
 
         const KGuiItem exportGuiItem( i18nc("@action:button",
                                             "&Export"),

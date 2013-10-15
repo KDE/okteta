@@ -56,7 +56,6 @@ target_link_libraries( okteta-mobile
   kasten2controllers
 #   kasten2gui
   kasten2core
-  ${KDE4_KDEUI_LIBS}
 )
 
 install( TARGETS okteta-mobile  ${INSTALL_TARGETS_DEFAULT_ARGS} )

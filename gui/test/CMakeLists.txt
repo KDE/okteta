@@ -94,6 +94,6 @@ set_target_properties( bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE
 
 ##kde4_add_unit_test(mvctest TESTNAME okteta-mvctest  ${mvctest_SRCS} )
 
-# target_link_libraries( mvctest  oktetacore oktetagui ${KDE4_KDEUI_LIBS} )
+# target_link_libraries( mvctest  oktetacore oktetagui )
 
 ########### install files ###############

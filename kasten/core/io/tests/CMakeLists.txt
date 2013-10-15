@@ -57,7 +57,6 @@ target_link_libraries( bytearrayrawfilesynchronizertest
   kastencoretestutil
   oktetacoretestutil
   testoktetacore
-  ${KDE4_KIO_LIBS}
   KF5::KI18n
   KF5::KBookmarks
   Qt5::Test
@@ -83,7 +82,6 @@ target_link_libraries( bytearrayrawfilesynchronizerfactorytest
   kastencoretestutil
   oktetacoretestutil
   testoktetacore
-  ${KDE4_KIO_LIBS}
   KF5::KI18n
   KF5::KBookmarks
   Qt5::Test

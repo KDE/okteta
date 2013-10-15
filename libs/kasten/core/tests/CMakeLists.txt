@@ -48,7 +48,6 @@ kde4_add_unit_test( testdocumenttest
 )
 target_link_libraries( testdocumenttest
   ${kastencore_LIB}
-  ${KDE4_KIO_LIBS}
   Qt5::Test
 )
 
@@ -68,7 +67,6 @@ target_link_libraries( testdocumentfilesynchronizertest
   kastencoretestio
   ${kastencore_LIB}
   kastencoretestutil
-  ${KDE4_KIO_LIBS}
   Qt5::Test
 )
 
@@ -89,7 +87,6 @@ target_link_libraries( testdocumentfilesynchronizerfactorytest
   kastencoretestio
   ${kastencore_LIB}
   kastencoretestutil
-  ${KDE4_KIO_LIBS}
   Qt5::Test
 )
 
@@ -106,6 +103,5 @@ kde4_add_unit_test( documentmanagertest
 )
 target_link_libraries( documentmanagertest
   ${kastencore_LIB}
-  ${KDE4_KIO_LIBS}
   Qt5::Test
 )
