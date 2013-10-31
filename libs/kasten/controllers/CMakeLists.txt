@@ -189,7 +189,7 @@ target_link_libraries( ${kastencontrollers_LIB}
   KF5::KIOFileWidgets
   KF5::KParts
   ${KDE4_KIO_LIBS}
-  ${KDE4Support_LIBRARIES}
+  KF5::KDE4Support
 )
 set_target_properties( ${kastencontrollers_LIB}  PROPERTIES
   OUTPUT_NAME ${kastencontrollers_LIB_NAME}

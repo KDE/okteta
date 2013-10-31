@@ -130,8 +130,8 @@ target_link_libraries( ${kastencore_LIB} LINK_PRIVATE
   KF5::KI18n
   KF5::Solid
   KF5::KWidgetsAddons
-  ${KDE4_KIO_LIBS} #KFileDialog TODO: change once it has moved somewhere
-  ${KDE4Support_LIBRARIES} #for KIO::NetAccess (TODO: port away)
+  #${KDE4_KIO_LIBS} #KFileDialog TODO: change once it has moved somewhere
+  KF5::KDE4Support #for KIO::NetAccess (TODO: port away)
 )
 set_target_properties( ${kastencore_LIB} PROPERTIES
   OUTPUT_NAME ${kastencore_LIB_NAME}

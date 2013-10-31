@@ -163,7 +163,7 @@ target_link_libraries( ${kastengui_LIB} LINK_PUBLIC
 target_link_libraries( ${kastengui_LIB} LINK_PRIVATE
   KF5::XmlGui
   KF5::KI18n
-  ${KDE4Support_LIBRARIES}
+  KF5::KDE4Support
 )
 
 

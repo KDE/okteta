@@ -19,15 +19,15 @@ find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
                                             KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KDBusAddons KService ItemViews KAuth KCodecs
                                             KConfigWidgets KWindowSystem KNotifications KIconThemes Sonnet KCompletion 
                                             KTextWidgets XmlGui KBookmarks KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
-                                            KIO KUnitConversion KDE4Attic Kross KParts KCMUtils KPrintUtils
+                                            KIO KUnitConversion Kross KParts KCMUtils KPrintUtils
                                             )
 if( UNIX )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
 endif()
 
 # needed for set_package_properties macro
-find_package(KDELibs4 REQUIRED NO_MODULE) #needed for KDE4Support
 find_package(KDE4Support REQUIRED NO_MODULE)
+find_package(KDELibs4 REQUIRED NO_MODULE) #needed for KDE4Support
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) #this is needed since it is apparently not set by Qt5Config.cmake
 

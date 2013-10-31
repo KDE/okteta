@@ -53,7 +53,7 @@ target_link_libraries( oktetapart
   kastencore
   KF5::KI18n
   KF5::KParts
-  ${KDE4Support_LIBRARIES}
+  KF5::KDE4Support
 )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})

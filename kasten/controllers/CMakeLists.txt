@@ -451,14 +451,13 @@ target_link_libraries( structures-static
   Qt5::Script
   Qt5::Xml
   KF5::KI18n
+  KF5::KDE4Support
 #  KF5::KConfigWidgets
 #  KF5::KCMUtils
   ${oktetakastencore_LIB}
   ${oktetakastengui_LIB}
   ${oktetacore_LIB}
   ${KASTENCORE_LIBS}
-  ${KDE4Attic_LIBRARIES}
-  ${KDE4Support_LIBRARIES}
 )
 
 ecm_add_tests(
@@ -555,8 +554,7 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   KF5::KPrintUtils
   Qt5::Script
   Qt5::ScriptTools
-  ${KDE4Attic_LIBRARIES}
-  ${KDE4Support_LIBRARIES}
+  KF5::KDE4Support
 )
 if( QCA2_FOUND )
   target_link_libraries( ${oktetakastencontrollers_LIB} ${QCA2_LIBRARIES} )

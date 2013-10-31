@@ -203,7 +203,7 @@ target_link_libraries( ${oktetakastengui_LIB} LINK_PRIVATE
   Qt5::Script
   KF5::KI18n
   KF5::KCompletion
-  ${KDE4Support_LIBRARIES} #KGlobalSettings
+  KF5::KDE4Support #KGlobalSettings
 )
 
 set_target_properties( ${oktetakastengui_LIB}  PROPERTIES

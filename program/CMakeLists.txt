@@ -54,7 +54,7 @@ target_link_libraries( okteta
   kastencore
   KF5::KI18n
   KF5::XmlGui
-  ${KDE4Support_LIBRARIES}
+  KF5::KDE4Support
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )

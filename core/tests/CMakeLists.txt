@@ -166,7 +166,7 @@ set( textcharcodectest_SRCS
 
 kde4_add_unit_test( textcharcodectest  TESTNAME libokteta-core-textcharcodectest  ${textcharcodectest_SRCS} )
 target_link_libraries( textcharcodectest
-  testoktetacore Qt5::Test KF5::KI18n KF5::KCodecs KF5::KDE4Attic
+  testoktetacore Qt5::Test KF5::KI18n KF5::KCodecs
 )
 
 
@@ -179,7 +179,7 @@ set( textcharcodeccharcodeciftest_SRCS
 
 kde4_add_unit_test( textcharcodeccharcodeciftest TESTNAME libokteta-core-textcharcodeccharcodeciftest  ${textcharcodeccharcodeciftest_SRCS} )
 target_link_libraries( textcharcodeccharcodeciftest
-  testoktetacore Qt5::Test KF5::KI18n KF5::KCodecs KF5::KDE4Attic
+  testoktetacore Qt5::Test KF5::KI18n KF5::KCodecs
 )
 
 
