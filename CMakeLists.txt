@@ -6,7 +6,11 @@ project( okteta )
 
 find_package(ECM 0.0.8 REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools Xml Network PrintSupport)
 if (BUILD_TESTING)
@@ -14,9 +18,7 @@ if (BUILD_TESTING)
 endif()
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions for now
 
-# Load CMake, Compiler and InstallDirs settings from KF5 and the following are already somewhat "done" tier1/tier2 libs from kdelibs:
-find_package(KF5 MODULE REQUIRED COMPONENTS CMake Compiler InstallDirs
-                                            KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KDBusAddons KService ItemViews KAuth KCodecs
+find_package(KF5 CONFIG REQUIRED COMPONENTS KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KDBusAddons KService ItemViews KAuth KCodecs
                                             KConfigWidgets KWindowSystem KNotifications KIconThemes Sonnet KCompletion 
                                             KTextWidgets XmlGui KBookmarks KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
                                             KIO KUnitConversion Kross KParts KCMUtils KPrintUtils
