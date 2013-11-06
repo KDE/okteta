@@ -59,6 +59,7 @@ target_link_libraries( bytearrayrawfilesynchronizertest
   testoktetacore
   KF5::KI18n
   KF5::KBookmarks
+  KF5::KDE4Support
   Qt5::Test
 )
 
