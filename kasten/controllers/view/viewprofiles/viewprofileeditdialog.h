@@ -34,6 +34,8 @@ class ByteArrayViewProfile;
 
 class ViewProfileEditDialog : public KDialog
 {
+    Q_OBJECT
+
 public:
     explicit ViewProfileEditDialog( QWidget* parent = 0 );
 
@@ -44,6 +46,9 @@ public:
 
 public:
     void setViewProfile( const ByteArrayViewProfile& viewProfile );
+
+protected Q_SLOTS:
+    void onProfileTitleChanged( const QString& title );
 
 protected:
     ViewProfileEdit* mViewProfileEdit;

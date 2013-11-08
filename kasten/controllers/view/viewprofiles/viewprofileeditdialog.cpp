@@ -35,6 +35,9 @@ ViewProfileEditDialog::ViewProfileEditDialog( QWidget* parent )
   : KDialog( parent )
 {
     mViewProfileEdit = new ViewProfileEdit( this );
+    connect( mViewProfileEdit, SIGNAL(profileTitleChanged(QString)), SLOT(onProfileTitleChanged(QString)) );
+    // Disable it by default
+    enableButtonOk( false );
     setMainWidget( mViewProfileEdit );
 }
 
@@ -49,6 +52,11 @@ void ViewProfileEditDialog::setViewProfile( const ByteArrayViewProfile& viewProf
 {
     mViewProfileEdit->setViewProfile( viewProfile );
     mId = viewProfile.id();
+}
+
+void ViewProfileEditDialog::onProfileTitleChanged(const QString& title)
+{
+    enableButtonOk( !title.isEmpty() );
 }
 
 ViewProfileEditDialog::~ViewProfileEditDialog()
