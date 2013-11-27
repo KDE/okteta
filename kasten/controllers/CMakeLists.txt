@@ -546,7 +546,7 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-  ${KDE4_KNEWSTUFF3_LIBS}
+  KF5::KNewStuff
   KF5::KI18n
   KF5::KConfigWidgets
   KF5::KIconThemes
