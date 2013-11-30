@@ -49,6 +49,54 @@ class KByteArrayEdit : public QWidget
   Q_PROPERTY( bool AutoDelete READ isAutoDelete WRITE setAutoDelete DESIGNABLE false )
 
   public:
+
+    /** collection of ids for the different numeric codings of a byte */
+    enum KCoding
+    {
+        /** hexadecimal encoding */
+        HexadecimalCoding=0,
+        /** decimal encoding */
+        DecimalCoding=1,
+        /** octal encoding */
+        OctalCoding=2,
+        /** bit by bit coding */
+        BinaryCoding=3,
+        /** @internal enables extension without breaking binary compatibility */
+        MaxCodingId=0xFFFF
+    };
+
+    /** collection of ids for the fitting of the layout into the available widget's width */
+    enum KResizeStyle
+    {
+        /** we don't care about the actual sizing of the widget
+          * but stick to the given NoOfBytesPerLine
+          */
+        NoResize=0,
+        /** we try to fit the layout to the available width
+          * but only with full groups like set in NoOfGroupedBytes
+          * with minimum of one full group
+          */
+        LockGrouping=1,
+        /** we try to fit as many bytes into the width as possible, with minimum of 1 byte
+          */
+        FullSizeUsage=2,
+        /** @internal enables extension without breaking binary compatibility */
+        MaxResizeStyleId=0xFF
+    };
+
+    /** encoding used to display the symbols in the text column */
+    enum KEncoding
+    {
+        /** the encoding of your shell. If that is a multibyte encoding this will default to Latin1. */
+        LocalEncoding=0,
+        /** extended ASCII encoding, also known as Latin1 */
+        ISO8859_1Encoding=1,
+        /** @internal not implemented: the most common EBCDIC codepage */
+        CECP1047Encoding=2,
+        /** @internal enables extension without breaking binary compatibility */
+        MaxEncodingId=0xFFFF
+    };
+
     /** constructor API as demanded by KPluginFactory */
     explicit KByteArrayEdit( QWidget* parent, const QList<QVariant>& = QList<QVariant>() );
     virtual ~KByteArrayEdit();
