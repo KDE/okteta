@@ -25,6 +25,7 @@
 
 // Qt
 #include <QWidget>
+#include <QVariant>
 
 namespace Okteta {
 class ByteArrayModel;
