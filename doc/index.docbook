@@ -835,7 +835,7 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <guimenu>Edit</guimenu>
     <guisubmenu>Copy as</guisubmenu>
     </menuchoice></term>
-    <listitem><para>Copy the selected bytes in in one of different formats to the clipboard.
+    <listitem><para>Copy the selected bytes in one of different formats to the clipboard.
     For a list of available formats see the menu item <menuchoice><guimenu>File</guimenu>
     <guisubmenu>Export</guisubmenu></menuchoice>
     </para>
