@@ -27,7 +27,6 @@
 #include <kastencore.h>
 // KDE
 #include <KParts/ReadWritePart>
-#include <KComponentData>
 
 namespace Kasten2 {
 class ByteArrayViewProfileManager;
@@ -52,7 +51,7 @@ class OktetaPart : public KParts::ReadWritePart
 
   public:
     OktetaPart( QObject* parent,
-                const KComponentData& componentData,
+                const KAboutData& componentData,
                 Modus modus,
                 Kasten2::ByteArrayViewProfileManager* viewProfileManager );
 

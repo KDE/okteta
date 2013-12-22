@@ -76,7 +76,7 @@ static const char* const UIFileName[] =
 
 
 OktetaPart::OktetaPart( QObject* parent,
-                        const KComponentData& componentData,
+                        const KAboutData& componentData,
                         Modus modus,
                         Kasten2::ByteArrayViewProfileManager* viewProfileManager )
   : KParts::ReadWritePart( parent )

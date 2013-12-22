@@ -29,7 +29,6 @@
 namespace Kasten2 {
 class ByteArrayViewProfileManager;
 }
-class KComponentData;
 class K4AboutData;
 
 
@@ -48,7 +47,6 @@ class OktetaPartFactory : public KParts::Factory
                                             const char* className, const QStringList& args );
 
   private:
-    KComponentData* mComponentData;
     K4AboutData* mAboutData;
     Kasten2::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };

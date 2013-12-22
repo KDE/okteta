@@ -31,7 +31,6 @@
 #include <bytearraystreamencoderfactory.h>
 #include <bytearraydatageneratorfactory.h>
 // KDE
-#include <KComponentData>
 #include <k4aboutdata.h>
 #include <KLocalizedString>
 
@@ -54,7 +53,6 @@ OktetaPartFactory::OktetaPartFactory()
     mAboutData = new K4AboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
                                  K4AboutData::License_GPL_V2, ki18n(PartCopyright), KLocalizedString(), 0, FWHKEmailAddress );
     mAboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
-    mComponentData = new KComponentData( mAboutData );
 
     mByteArrayViewProfileManager = new Kasten2::ByteArrayViewProfileManager();
 
@@ -92,7 +90,7 @@ Q_UNUSED( args )
         ( className == "Browser/View" ) ?         OktetaPart::BrowserViewModus :
         /* else */                                OktetaPart::ReadWriteModus;
 
-    OktetaPart* part = new OktetaPart( parent, *mComponentData, modus, mByteArrayViewProfileManager );
+    OktetaPart* part = new OktetaPart( parent, *mAboutData, modus, mByteArrayViewProfileManager );
 
     return part;
 }
@@ -100,7 +98,6 @@ Q_UNUSED( args )
 
 OktetaPartFactory::~OktetaPartFactory()
 {
-    delete mComponentData;
     delete mAboutData;
     delete mByteArrayViewProfileManager;
 }
