@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,8 @@
 #ifndef INSERTDIALOG_H
 #define INSERTDIALOG_H
 
-// KDE
-#include <KDialog>
+// Qt
+#include <QtWidgets/QDialog>
 
 
 namespace Kasten2
@@ -33,7 +33,7 @@ namespace Kasten2
 class AbstractModelDataGeneratorConfigEditor;
 
 
-class InsertDialog : public KDialog
+class InsertDialog : public QDialog
 {
   Q_OBJECT
 

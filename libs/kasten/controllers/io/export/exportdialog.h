@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,8 @@
 #ifndef EXPORTDIALOG_H
 #define EXPORTDIALOG_H
 
-// KDE
-#include <KDialog>
+// Qt
+#include <QtWidgets/QDialog>
 
 
 namespace Kasten2
@@ -36,7 +36,7 @@ class AbstractModelSelection;
 class AbstractModel;
 
 
-class ExportDialog : public KDialog
+class ExportDialog : public QDialog
 {
   Q_OBJECT
 
