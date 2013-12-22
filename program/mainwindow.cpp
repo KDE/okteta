@@ -108,10 +108,11 @@
 #include <documentsyncmanager.h>
 #include <documentmanager.h>
 // KDE
-#include <KUrl>
 #include <KGlobal>
 #include <KConfigGroup>
 #include <KSharedConfig>
+// Qt
+#include <QtCore/QUrl>
 
 
 namespace Kasten2
@@ -260,7 +261,7 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
     DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
     DocumentCreateManager* const createManager = documentManager->createManager();
-    foreach( const KUrl& url, urls )
+    foreach( const QUrl& url, urls )
     {
         if( url.isEmpty() )
             createManager->createNew();
@@ -273,20 +274,20 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
 
 void OktetaMainWindow::onDataOffered( const QMimeData* mimeData, bool& accept )
 {
-    accept = KUrl::List::canDecode( mimeData )
+    accept = mimeData->hasUrls()
              || mProgram->documentManager()->createManager()->canCreateNewFromData( mimeData );
 }
 
 void OktetaMainWindow::onDataDropped( const QMimeData* mimeData )
 {
-    const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
+    const QList<QUrl> urls = mimeData->urls();
 
     DocumentManager* const documentManager = mProgram->documentManager();
     if( ! urls.isEmpty() )
     {
         DocumentSyncManager* const syncManager = documentManager->syncManager();
 
-        foreach( const KUrl& url, urls )
+        foreach( const QUrl& url, urls )
             syncManager->load( url );
     }
     else

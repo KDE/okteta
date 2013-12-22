@@ -43,11 +43,11 @@
 #include <modelcodecmanager.h>
 // KDE
 #include <KLocalizedString>
-#include <KUrl>
 #include <KCmdLineArgs>
 #include <KApplication>
 // Qt
 #include <QtCore/QList>
+#include <QtCore/QUrl>
 
 
 namespace Kasten2

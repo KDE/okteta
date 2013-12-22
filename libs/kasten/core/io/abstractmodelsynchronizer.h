@@ -89,11 +89,11 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     virtual AbstractLoadJob* startLoad( const QUrl& url ) = 0;
     /** */
     // TODO: not in constructor? cannot be called twice, each synchronizer is attached to its document
-//     virtual AbstractDocument* createWorkingCopy( const KUrl& originUrl, int* success ) const = 0;
+//     virtual AbstractDocument* createWorkingCopy( const QUrl& originUrl, int* success ) const = 0;
 
     /** */
     // TODO: static? or by function? or another class? but 
-//     virtual void copyTo( const KUrl& url, AbstractDocument* document, int* success ) const = 0;
+//     virtual void copyTo( const QUrl& url, AbstractDocument* document, int* success ) const = 0;
 
     /** overwrite remote with local (save) */
     virtual AbstractSyncToRemoteJob* startSyncToRemote() = 0;

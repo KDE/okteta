@@ -33,7 +33,6 @@
 namespace Okteta {
 class AbstractByteArrayModel;
 }
-class KUrl;
 class QString;
 class QTimer;
 
@@ -77,7 +76,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
 
     void onContentsChanged();
     void onSynchronizerChanged( Kasten2::AbstractModelSynchronizer* synchronizer );
-    void onUrlChanged( const KUrl& url );
+    void onUrlChanged( const QUrl& url );
 
   private:
     ByteArrayDocument* mDocument;

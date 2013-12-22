@@ -32,10 +32,10 @@
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KLocalizedString>
-#include <KUrl>
 // Qt
 #include <QApplication>
 #include <QtCore/QTimer>
+#include <QtCore/QUrl>
 
 
 namespace Kasten2
@@ -70,8 +70,8 @@ QString DocumentInfoTool::location() const
     QString result;
     if( mDocument )
     {
-        const KUrl url = mDocumentSyncManager->urlOf( mDocument );
-        result = url.isLocalFile() ? url.path() : url.prettyUrl();
+        const QUrl url = mDocumentSyncManager->urlOf( mDocument );
+        result = url.isLocalFile() ? url.path() : url.toDisplayString();
     }
     return result;
 }
@@ -170,7 +170,7 @@ void DocumentInfoTool::onSynchronizerChanged( AbstractModelSynchronizer* synchro
     emit locationChanged( location() );
 }
 
-void DocumentInfoTool::onUrlChanged( const KUrl& url )
+void DocumentInfoTool::onUrlChanged( const QUrl& url )
 {
     Q_UNUSED( url );
 

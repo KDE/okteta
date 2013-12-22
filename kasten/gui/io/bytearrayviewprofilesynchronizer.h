@@ -62,11 +62,11 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
     explicit ByteArrayViewProfileSynchronizer( ByteArrayViewProfileManager* viewProfileManager );
 
   public:
-//     AbstractLoadJob *startLoad( const KUrl &url );
+//     AbstractLoadJob *startLoad( const QUrl &url );
     void syncToRemote();
     void syncFromRemote();
 //     AbstractConnectJob *startConnect( AbstractDocument* document,
-//                                               const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+//                                               const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
     ByteArrayView* view() const;
     ByteArrayViewProfile::Id viewProfileId() const;

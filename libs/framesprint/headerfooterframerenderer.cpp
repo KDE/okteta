@@ -86,7 +86,7 @@ void HeaderFooterFrameRenderer::prepare()
 {
     const QDateTime dateTime = QDateTime::currentDateTime();
     const KUser user( KUser::UseRealUserID );
-    const KUrl url = mInfo->url();
+    const QUrl url = mInfo->url();
 
     // create list of replacements
     QHash<char,QString> tagReplacements;
@@ -100,7 +100,7 @@ void HeaderFooterFrameRenderer::prepare()
     tagReplacements['U'] = user.property( KUser::FullName ).toString();
 //     tagReplacements['f'] = isSelection ? i18n("(Selection of) %1", url.fileName()) : url.fileName();
     tagReplacements['f'] = url.fileName();
-    tagReplacements['F'] = url.prettyUrl();
+    tagReplacements['F'] = url.toDisplayString();
     tagReplacements['P'] = QString::number( mInfo->noOfPages() );
 
     // create text with globally replaced tags

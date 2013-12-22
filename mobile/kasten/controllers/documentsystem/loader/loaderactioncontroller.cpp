@@ -52,10 +52,10 @@ Q_UNUSED( model )
 void LoaderActionController::load()
 {
     static const QString allFileNamesFilter = QStringLiteral(AllFileNamesFilter);
-    const KUrl::List urls =
+    const QList<QUrl> urls =
         KFileDialog::getOpenUrls( QString()/*mWorkingUrl.url()*/, allFileNamesFilter, /*mWidget*/0 );
 
-    foreach( const KUrl& url, urls )
+    foreach( const QUrl& url, urls )
         mSyncManager->load( url );
 }
 

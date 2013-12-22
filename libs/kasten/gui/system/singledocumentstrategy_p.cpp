@@ -55,8 +55,8 @@ void SingleDocumentStrategyPrivate::init()
                       mViewManager, SLOT(createViewsFor(QList<Kasten2::AbstractDocument*>)) );
     QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
                       mViewManager, SLOT(removeViewsFor(QList<Kasten2::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager->syncManager(), SIGNAL(urlUsed(KUrl)),
-                      q, SIGNAL(urlUsed(KUrl)) );
+    QObject::connect( mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
+                      q, &SingleDocumentStrategy::urlUsed );
 }
 
 void SingleDocumentStrategyPrivate::createNew()
