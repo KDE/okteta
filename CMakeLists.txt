@@ -12,7 +12,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools Xml Network PrintSupport)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools Xml Network Designer PrintSupport)
 if (BUILD_TESTING)
   find_package(Qt5Test REQUIRED NO_MODULE)
 endif()

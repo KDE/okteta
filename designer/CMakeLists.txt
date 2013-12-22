@@ -23,6 +23,7 @@ target_link_libraries( oktetadesignerplugin
   ${oktetagui_LIB}
   ${oktetacore_LIB}
   Qt5::Widgets
+  Qt5::Designer
 )
 
 install( TARGETS oktetadesignerplugin  DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
