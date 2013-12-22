@@ -41,8 +41,8 @@ class KSearchDialog : public KAbstractFindDialog
     explicit KSearchDialog( SearchTool* tool, QWidget* parent = 0 );
     virtual ~KSearchDialog();
 
-  protected: // KDialog API
-    virtual void slotButtonClicked( int button );
+  protected: // KAbstractFindDialog API
+    virtual void onFindButtonClicked();
 
   protected: // QWidget API
     virtual void showEvent( QShowEvent* showEvent );

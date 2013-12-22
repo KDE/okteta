@@ -32,33 +32,61 @@
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QLayout>
+#include <QIcon>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QDialogButtonBox>
 
 
 namespace Kasten2
 {
 
 KAbstractFindDialog::KAbstractFindDialog( QWidget* parent )
-  : KDialog( parent )
+  : QDialog( parent )
 {
-    setButtons( Ok | Cancel );
-    setDefaultButton( Ok );
+    // main widget
+    QWidget* mainWidget = new QWidget;
+    MainWidgetLayout = new QVBoxLayout( mainWidget );
+    MainWidgetLayout->setMargin( 0 );
 
+    // dialog buttons
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    FindButton = new QPushButton;
+    dialogButtonBox->addButton( FindButton, QDialogButtonBox::AcceptRole );
+    connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &KAbstractFindDialog::forwardFindButtonClicked );
+    dialogButtonBox->addButton( QDialogButtonBox::Cancel );
+    connect( dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
+
+    // main layout
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget( mainWidget );
+    layout->addStretch();
+    layout->addWidget( dialogButtonBox );
+
+    setLayout( layout );
     // TODO: setting ok button to disabled as before done gets overwritten to true
     // if setting the button gui with an inline KGuiItem in the subclass,
     // which has no parameter for enabled and defaults to true
 }
 
+void KAbstractFindDialog::setFindButton( const QString& buttonText, const QString& buttonIconName,
+                                         const QString& buttonToolTip, const QString& buttonWhatsThis )
+{
+    FindButton->setText( buttonText );
+    FindButton->setIcon( QIcon::fromTheme(buttonIconName) );
+    FindButton->setToolTip( buttonToolTip );
+    FindButton->setWhatsThis( buttonWhatsThis );
+}
+
+void KAbstractFindDialog::setFindButtonEnabled( bool enabled )
+{
+    FindButton->setEnabled( enabled );
+}
+
 void KAbstractFindDialog::setupFindBox()
 {
-    QWidget* page = new QWidget( this );
-    setMainWidget( page );
-
-    QVBoxLayout *pageLayout = new QVBoxLayout( page );
-    pageLayout->setMargin( 0 );
-
     // find term
-    QGroupBox *findBox = new QGroupBox( i18nc("@title:window","Find"), page );
-    pageLayout->addWidget( findBox );
+    QGroupBox *findBox = new QGroupBox( i18nc("@title:window","Find") );
+    MainWidgetLayout->addWidget( findBox );
 
     QVBoxLayout *findBoxLayout = new QVBoxLayout;
 
@@ -78,21 +106,16 @@ void KAbstractFindDialog::setupFindBox()
 
 void KAbstractFindDialog::setupOperationBox( QGroupBox *operationBox )
 {
-    QVBoxLayout *pageLayout = static_cast<QVBoxLayout *>( mainWidget()->layout() );
-
     // operation box
     if( operationBox )
-        pageLayout->addWidget( operationBox );
+        MainWidgetLayout->addWidget( operationBox );
 }
 
 void KAbstractFindDialog::setupCheckBoxes( QCheckBox *optionCheckBox )
 {
-    QWidget* page = mainWidget();
-    QVBoxLayout *pageLayout = static_cast<QVBoxLayout *>( mainWidget()->layout() );
-
     // options
-    QGroupBox *optionsBox = new QGroupBox( i18nc("@title:group","Options"), page );
-    pageLayout->addWidget( optionsBox );
+    QGroupBox *optionsBox = new QGroupBox( i18nc("@title:group","Options") );
+    MainWidgetLayout->addWidget( optionsBox );
 
     QGridLayout *optionsBoxLayout = new QGridLayout( optionsBox );
 
@@ -164,6 +187,10 @@ void KAbstractFindDialog::rememberCurrentSettings()
     SearchDataEdit->rememberCurrentByteArray();
 }
 
+void KAbstractFindDialog::onFindButtonClicked()
+{
+}
+
 void KAbstractFindDialog::onSearchDataFormatChanged( int index )
 {
     const bool isCharCoding = ( index == Okteta::ByteArrayComboBox::CharCoding );
@@ -173,13 +200,18 @@ void KAbstractFindDialog::onSearchDataFormatChanged( int index )
 
 void KAbstractFindDialog::onSearchDataChanged( const QByteArray &data )
 {
-    enableButtonOk( !data.isEmpty() );
+    FindButton->setEnabled( !data.isEmpty() );
+}
+
+void KAbstractFindDialog::forwardFindButtonClicked()
+{
+    onFindButtonClicked();
 }
 
 
 void KAbstractFindDialog::showEvent( QShowEvent *showEvent )
 {
-  KDialog::showEvent(showEvent);
+  QDialog::showEvent(showEvent);
   SearchDataEdit->setFocus();
 }
 
