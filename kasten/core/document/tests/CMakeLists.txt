@@ -33,7 +33,7 @@ target_link_libraries( bytearraydocumenttest
   ${KASTENCORE_LIBS}
   testoktetacore
   Qt5::Test
-  KF5::KI18n
+  KF5::I18n
 )
 
 
@@ -54,5 +54,5 @@ target_link_libraries( bytearraydocumentfactorytest
   oktetacoretestutil
   testoktetacore
   Qt5::Test
-  KF5::KI18n
+  KF5::I18n
 )

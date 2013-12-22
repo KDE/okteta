@@ -18,11 +18,9 @@ if (BUILD_TESTING)
 endif()
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions for now
 
-find_package(KF5 CONFIG REQUIRED COMPONENTS WidgetsAddons CoreAddons Config I18n GuiAddons DBusAddons Service ItemViews Auth Codecs
-                                            ConfigWidgets WindowSystem Notifications IconThemes Sonnet Completion
-                                            TextWidgets XmlGui Bookmarks DBusAddons Crash Archive ItemModels JobWidgets Solid Wallet JS
-                                            KIO UnitConversion Parts KCMUtils PrintUtils NewStuff KDE4Support
-                                            )
+find_package(KF5 CONFIG REQUIRED COMPONENTS NewStuff KCMUtils PrintUtils Codecs I18n ConfigWidgets
+                                            KCMUtils Bookmarks Completion XmlGui KIO Parts
+                                            WidgetsAddons Service Solid KDE4Support)
 if( UNIX )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
 endif()

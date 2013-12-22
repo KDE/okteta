@@ -54,7 +54,7 @@ set( fixedsizebytearraymodeltest_SRCS
 
 kde4_add_unit_test( fixedsizebytearraymodeltest  TESTNAME libokteta-core-fixedsizebytearraymodeltest  ${fixedsizebytearraymodeltest_SRCS})
 target_link_libraries( fixedsizebytearraymodeltest
-  testoktetacore Qt5::Test KF5::KI18n
+  testoktetacore Qt5::Test KF5::I18n
 )
 
 
@@ -70,7 +70,7 @@ kde4_add_unit_test( fixedsizebytearraymodelabstractbytearraymodeliftest
   ${fixedsizebytearraymodelabstractbytearraymodeliftest_SRCS}
 )
 target_link_libraries( fixedsizebytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n
+  oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
 )
 
 
@@ -98,7 +98,7 @@ kde4_add_unit_test( bytearraymodelabstractbytearraymodeliftest
   ${bytearraymodelabstractbytearraymodeliftest_SRCS}
 )
 target_link_libraries( bytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n
+  oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
 )
 
 
@@ -114,7 +114,7 @@ kde4_add_unit_test( piecetablebytearraymodelabstractbytearraymodeliftest
   ${piecetablebytearraymodelabstractbytearraymodeliftest_SRCS}
 )
 target_link_libraries( piecetablebytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore Qt5::Test KF5::KI18n
+  oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
 )
 
 
@@ -154,7 +154,7 @@ set( charcodectest_SRCS
 
 kde4_add_unit_test( charcodectest  TESTNAME libokteta-core-charcodectest  ${charcodectest_SRCS})
 target_link_libraries( charcodectest
-  ${oktetacore_LIB} Qt5::Test KF5::KI18n
+  ${oktetacore_LIB} Qt5::Test KF5::I18n
 )
 
 
@@ -166,7 +166,7 @@ set( textcharcodectest_SRCS
 
 kde4_add_unit_test( textcharcodectest  TESTNAME libokteta-core-textcharcodectest  ${textcharcodectest_SRCS} )
 target_link_libraries( textcharcodectest
-  testoktetacore Qt5::Test KF5::KI18n KF5::KCodecs KF5::KDE4Support
+  testoktetacore Qt5::Test KF5::I18n KF5::Codecs KF5::KDE4Support
 )
 
 
@@ -179,7 +179,7 @@ set( textcharcodeccharcodeciftest_SRCS
 
 kde4_add_unit_test( textcharcodeccharcodeciftest TESTNAME libokteta-core-textcharcodeccharcodeciftest  ${textcharcodeccharcodeciftest_SRCS} )
 target_link_libraries( textcharcodeccharcodeciftest
-  testoktetacore Qt5::Test KF5::KI18n KF5::KCodecs KF5::KDE4Support
+  testoktetacore Qt5::Test KF5::I18n KF5::Codecs KF5::KDE4Support
 )
 
 
@@ -212,6 +212,6 @@ set( bookmarklisttest_SRCS
 )
 
 kde4_add_unit_test( bookmarklisttest  TESTNAME libokteta-core-bookmarklisttest  ${bookmarklisttest_SRCS} )
-target_link_libraries( bookmarklisttest testoktetacore Qt5::Test KF5::KI18n )
+target_link_libraries( bookmarklisttest testoktetacore Qt5::Test KF5::I18n )
 
 

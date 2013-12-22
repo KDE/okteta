@@ -128,7 +128,6 @@ target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core Qt5::Gui KF5::KIO
 target_link_libraries( ${kastencore_LIB} LINK_PRIVATE
   Qt5::Widgets #so that #include <QMessageBox> in <KMessageBox> works
   KF5::I18n
-  KF5::Solid
   KF5::WidgetsAddons
   KF5::KDE4Support #for KIO::NetAccess (TODO: port away)
 )
