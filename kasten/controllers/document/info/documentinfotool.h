@@ -27,8 +27,8 @@
 #include "oktetakastencontrollers_export.h"
 // Kasten core
 #include <abstracttool.h>
-// KDE
-#include <KMimeType>
+// Qt
+#include <QtCore/QMimeType>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -61,13 +61,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
 
   public:
     QString documentTitle() const;
-    KMimeType::Ptr mimeType() const;
+    QMimeType mimeType() const;
     QString location() const;
     int documentSize() const;
 
   Q_SIGNALS:
     void documentTitleChanged( const QString& documentTitle );
-    void documentMimeTypeChanged( KMimeType::Ptr mimeType );
+    void documentMimeTypeChanged(const QMimeType& mimeType );
     void locationChanged( const QString& location );
     void documentSizeChanged( int newSize );
 
@@ -87,11 +87,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     DocumentSyncManager* mDocumentSyncManager;
 
     QTimer* mMimeTypeUpdateTimer;
-    KMimeType::Ptr mMimeType;
+    QMimeType mMimeType;
 };
 
 
-inline KMimeType::Ptr DocumentInfoTool::mimeType() const { return mMimeType; }
+inline QMimeType DocumentInfoTool::mimeType() const { return mMimeType; }
 
 }
 

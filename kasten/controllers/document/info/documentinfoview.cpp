@@ -37,6 +37,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QGridLayout>
+#include <QtCore/QMimeType>
 
 
 namespace Kasten2
@@ -156,20 +157,20 @@ void DocumentInfoView::onDocumentTitleChanged( const QString& documentTitle )
     mDocumentTitleLabel->setText( documentTitle );
 }
 
-void DocumentInfoView::onMimeTypeChanged( KMimeType::Ptr mimeTypePtr )
+void DocumentInfoView::onMimeTypeChanged( const QMimeType& mimeType )
 {
     QString mimeTypeComment;
     QPixmap mimeTypeIcon;
 
-    if( !mimeTypePtr )
+    if( !mimeType.isValid() )
     {
         mimeTypeComment = QStringLiteral( "-" );
 //         mimeTypeIcon = ?
     }
     else
     {
-        mimeTypeComment = mimeTypePtr->comment();
-        mimeTypeIcon = KIconLoader::global()->loadIcon( mimeTypePtr->iconName(), KIconLoader::Desktop, KIconLoader::SizeEnormous );
+        mimeTypeComment = mimeType.comment();
+        mimeTypeIcon = KIconLoader::global()->loadIcon( mimeType.iconName(), KIconLoader::Desktop, KIconLoader::SizeEnormous );
     }
 
     mIconLabel->setPixmap( mimeTypeIcon );

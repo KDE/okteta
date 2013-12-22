@@ -36,6 +36,7 @@
 #include <QApplication>
 #include <QtCore/QTimer>
 #include <QtCore/QUrl>
+#include <QtCore/QMimeDatabase>
 
 
 namespace Kasten2
@@ -49,7 +50,7 @@ DocumentInfoTool::DocumentInfoTool( DocumentSyncManager* syncManager )
     mSynchronizer( 0 ),
     mDocumentSyncManager( syncManager ),
     mMimeTypeUpdateTimer( new QTimer(this) ),
-    mMimeType( 0 )
+    mMimeType()
 {
     setObjectName( QStringLiteral( "DocumentInfo" ) );
 
@@ -121,7 +122,7 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
 // TODO: should this be done in a worker thread, to not block the UI?
 void DocumentInfoTool::updateMimeType()
 {
-    KMimeType::Ptr currentMimeType;
+    QMimeType currentMimeType;
 
     if( mDocument )
     {
@@ -129,13 +130,13 @@ void DocumentInfoTool::updateMimeType()
         const QString filename = mDocumentSyncManager->urlOf( mDocument ).fileName();
 
         Okteta::ByteArrayModelIoDevice byteArrayModelIoDevice( mByteArrayModel );
+        QMimeDatabase db;
         currentMimeType = filename.isEmpty() ?
-            KMimeType::findByContent( &byteArrayModelIoDevice ) :
-            KMimeType::findByNameAndContent( filename, &byteArrayModelIoDevice );
+            db.mimeTypeForData( &byteArrayModelIoDevice ) :
+            db.mimeTypeForFileNameAndData( filename, &byteArrayModelIoDevice );
     }
 
-// TODO: KMimeType has no operator !=
-//     if( *mMimeType != *currentMimeType )
+    if( mMimeType != currentMimeType )
     {
         mMimeType = currentMimeType;
         emit documentMimeTypeChanged( currentMimeType );
