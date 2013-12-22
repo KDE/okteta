@@ -34,6 +34,7 @@
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
 #include "../script/scriptengineinitializer.h"
+#include "../structlogging.h"
 
 #include <QFile>
 #include <QFileInfo>
@@ -41,7 +42,6 @@
 #include <QDomDocument>
 #include <QScriptEngine>
 
-#include <KDebug>
 
 using namespace ParserStrings;
 
@@ -185,8 +185,8 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
             QString name = readProperty(elem, PROPERTY_NAME);
             if (name.isEmpty())
                 name = fileInfo.absoluteFilePath() + QStringLiteral("_element") + QString::number(count);
-            kDebug() << "Failed to parse element" << elem.tagName() << name;
-            kDebug() << "Parsing messages were:" << logger->messages();
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Failed to parse element" << elem.tagName() << name;
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Parsing messages were:" << logger->messages();
             data = new DummyDataInformation(0, name);
         }
         TopLevelDataInformation* topData = new TopLevelDataInformation(data, logger, eng, fileInfo);

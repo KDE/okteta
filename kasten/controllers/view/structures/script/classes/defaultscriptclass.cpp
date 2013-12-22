@@ -32,8 +32,8 @@
 #include "../scriptlogger.h"
 #include "../scripthandlerinfo.h"
 #include "../safereference.h"
+#include "../../structlogging.h"
 
-#include <KDebug>
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine), mHandlerInfo(handlerInfo)
@@ -404,7 +404,7 @@ QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QSc
     DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     return QString(data->typeName() + QLatin1Char(' ') + data->name());

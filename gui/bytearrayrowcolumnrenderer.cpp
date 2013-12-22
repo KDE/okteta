@@ -582,7 +582,7 @@ void ByteArrayRowColumnRenderer::renderLinePositions( QPainter* painter, Line li
     bool hasMarking = mRanges->hasMarking();
     bool hasSelection = mRanges->hasSelection();
 
-//kDebug() << QString("painting linePositions (painter%1-%2L%3): ").arg(linePositions.start()).arg(linePositions.end()).arg(lineIndex)
+//qCDebug(LOG_OKTETA_GUI) << QString("painting linePositions (painter%1-%2L%3): ").arg(linePositions.start()).arg(linePositions.end()).arg(lineIndex)
 //         <<linePositions.start()<<"-"<<linePositions.start()
 //         <<" for byteIndizes "<<byteIndizes.start()<<"-"<<byteIndizes.start()<<endl;
     while( linePositions.isValid() )

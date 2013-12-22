@@ -21,8 +21,10 @@
  */
 
 #include "abstractstructureparser.h"
+
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
+#include "../structlogging.h"
 
 #include <QFile>
 
@@ -30,7 +32,7 @@ AbstractStructureParser::AbstractStructureParser(const QString& pluginName, cons
         : mPluginName(pluginName), mAbsolutePath(absolutePath)
 {
     if (!QFile::exists(absolutePath)) {
-        qWarning() << "File" << absolutePath << "does not exist, parsing structure will fail!";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "File" << absolutePath << "does not exist, parsing structure will fail!";
     }
 }
 

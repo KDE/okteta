@@ -22,10 +22,11 @@
 
 #include "structuresmanager.h"
 #include "structviewpreferences.h"
+#include "structlogging.h"
 // tool
 #include "structuredefinitionfile.h"
+#include "structlogging.h"
 #include <KStandardDirs>
-#include <KDebug>
 #include <KGlobal>
 #include <QDir>
 
@@ -52,7 +53,7 @@ void StructuresManager::reloadPaths()
     QStringList paths = KGlobal::dirs()->findAllResources("data",
             QStringLiteral("okteta/structures/*/*.desktop"), KStandardDirs::Recursive
                     | KStandardDirs::NoDuplicates);
-    kDebug() << "found structures: " << paths;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "found structures: " << paths;
     KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));
     foreach(const KPluginInfo& info, plugins)
     {
@@ -75,7 +76,7 @@ StructureDefinitionFile* StructuresManager::definition(QString& pluginName)
 {
     if (!mDefs.contains(pluginName))
     {
-        kWarning() << "could not find structuredefinitionFile with name=" << pluginName;
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not find structuredefinitionFile with name=" << pluginName;
         return NULL;
     }
     return mDefs.value(pluginName);

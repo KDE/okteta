@@ -32,7 +32,6 @@
 #include <KLocalizedString>
 #include <KStandardGuiItem>
 #include <KGlobalSettings>
-//#include <KDebug>
 #include <KIntNumInput>
 // Qt
 #include <QtWidgets/QApplication>
@@ -130,7 +129,6 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
 void ByteTableView::resizeColumnsWidth()
 {
-    //kDebug() << "recalculating header width";
     QHeaderView* header = mByteTableView->header();
     for (int i = 0; i < ByteTableModel::NoOfIds; ++i) 
     {

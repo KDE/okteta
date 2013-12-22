@@ -39,7 +39,7 @@
 #include <QFocusEvent>
 #include <QtGui/QFontMetrics>
 
-#include <KDebug>
+
 namespace Kasten2
 {
 

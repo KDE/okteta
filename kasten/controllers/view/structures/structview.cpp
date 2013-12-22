@@ -28,6 +28,7 @@
 #include "structtool.h"
 #include "structuresmanager.h"
 #include "structviewitemdelegate.h"
+#include "structlogging.h"
 //settings
 #include "structviewpreferences.h"
 #include "settings/structviewdisplaysettingswidget.h"
@@ -44,8 +45,6 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 #include <KDialog>
-#include <KDebug>
-
 // Qt
 #include <QLabel>
 #include <QLayout>
@@ -240,7 +239,7 @@ void StructView::lockButtonToggled()
     const QModelIndex current = mStructTreeView->selectionModel()->currentIndex();
     if (!current.isValid())
     {
-        kWarning() << "it should not be possible to toggle this button when current index is invalid!";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "it should not be possible to toggle this button when current index is invalid!";
         return;
     }
 

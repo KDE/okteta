@@ -24,8 +24,8 @@
 #include "stringscriptclass.h"
 #include "../../datatypes/strings/stringdatainformation.h"
 #include "../../parsers/parserutils.h"
+#include "../../structlogging.h"
 
-#include <KDebug>
 
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)
@@ -218,7 +218,7 @@ QScriptValue StringScriptClass::String_proto_toString(QScriptContext* ctx, QScri
     DataInformation* data = toDataInformation(ctx->thisObject().data());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     return data->wasAbleToRead() ? data->valueString() : eng->undefinedValue();

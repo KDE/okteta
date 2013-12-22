@@ -70,6 +70,7 @@ set( oktetagui_LIB_SRCS
   coordrangelist.cpp
   ${bytearraycolumnview_SRCS}
   ${bytearrayrowview_SRCS}
+  oktetagui.cpp
 )
 
 set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/kcursor.cpp PROPERTIES LABELS OktetaLabel)

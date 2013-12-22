@@ -253,7 +253,7 @@ void TabbedViewsPrivate::onViewFocusChanged( bool hasFocus )
     Q_Q( TabbedViews );
 
 //     AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
-// kDebug()<<view<<view->title()<<hasFocus;
+// qCDebug(LOG_KASTEN_GUI)<<view<<view->title()<<hasFocus;
 
     emit q->focusChanged( hasFocus );
 }

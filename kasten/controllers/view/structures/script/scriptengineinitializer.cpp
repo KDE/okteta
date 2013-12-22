@@ -31,9 +31,9 @@
 #include <QScriptContext>
 #include <QScriptValueIterator>
 
-#include <KDebug>
 #include <KGlobal>
 #include <KStandardDirs>
+
 
 namespace ScriptEngineInitializer
 {

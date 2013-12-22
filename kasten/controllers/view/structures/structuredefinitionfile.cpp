@@ -21,11 +21,11 @@
  */
 #include "structuredefinitionfile.h"
 
+#include "structlogging.h"
+
 #include <QFile>
 #include <QDir>
 #include <QStringList>
-
-#include <KDebug>
 
 #include "datatypes/topleveldatainformation.h"
 
@@ -54,7 +54,7 @@ StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info)
         mParser.reset(new OsdParser(mPluginInfo.pluginName(), filename));
     }
     else
-        kWarning() << "no valid parser found for plugin category '" << category << "'";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no valid parser found for plugin category '" << category << "'";
 }
 
 StructureDefinitionFile::~StructureDefinitionFile()
@@ -80,7 +80,7 @@ TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name)
             delete list.at(i); //we have no use for this element
     }
     if (!ret)
-        kWarning() << "could not find structure with name=" << name;
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not find structure with name=" << name;
     return ret; // not found
 }
 

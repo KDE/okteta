@@ -152,6 +152,7 @@ set( okteta_kastengui_system_SRCS
 )
 
 set( okteta_kastengui_LIB_SRCS
+  oktetakastengui.cpp
   ${oktetawidgets_LIB_SRCS}
   ${okteta_kastengui_view_SRCS}
   ${okteta_kastengui_io_SRCS}

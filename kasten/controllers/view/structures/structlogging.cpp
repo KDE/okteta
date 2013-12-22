@@ -1,7 +1,7 @@
 /*
-    This file is part of the Kasten Framework, made within the KDE community.
+    This file is part of the Okteta Kasten Framework, made within the KDE community.
 
-    Copyright 2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2013 Alex Richardson <alex.richardson@gmx.de>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,18 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "kastencore.h"
+#include "structlogging.h"
 
-// KDE
-#include <KLocalizedString>
-
-
-Q_LOGGING_CATEGORY(LOG_KASTEN_CORE, "kasten.core")
-
-namespace Kasten2
-{
-
-// FIXME: Replace with ki18n functionality once semantics is clear.
-//static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("libkasten") ), 0);
-
-}
+Q_LOGGING_CATEGORY(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES, "kasten.okteta.controllers.structures")

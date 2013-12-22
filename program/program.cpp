@@ -50,7 +50,7 @@
 // Qt
 #include <QtCore/QList>
 #include <QtCore/QUrl>
-
+#include <QtCore/QLoggingCategory>
 
 namespace Kasten2
 {
@@ -66,6 +66,17 @@ OktetaProgram::OktetaProgram( int argc, char* argv[] )
     mDocumentStrategy( new MultiDocumentStrategy(mDocumentManager, mViewManager) ),
     mDialogHandler( new DialogHandler() )
 {
+#ifndef QT_NO_DEBUG
+    QLoggingCategory::setFilterRules(QStringLiteral(
+        "okteta.core.debug = true\n"
+        "okteta.gui.debug = true\n"
+        "kasten.core.debug = true\n"
+        "kasten.gui.debug = true\n"
+        "kasten.okteta.core = true\n"
+        "kasten.okteta.gui = true\n"
+        "kasten.okteta.controllers.structures.debug = true\n"));
+#endif
+
     KCmdLineOptions programOptions;
 //     programOptions.add( OffsetOptionShortId );
 //     programOptions.add( OffsetOptionId, ki18n("Offset to set the cursor to"), 0 );

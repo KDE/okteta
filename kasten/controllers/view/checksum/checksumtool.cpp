@@ -48,8 +48,6 @@
 // Qt
 #include <QApplication>
 
-#include <KDebug>
-
 
 namespace Kasten2
 {
@@ -68,7 +66,7 @@ ChecksumTool::ChecksumTool()
 // TODO: find a better place to do and store the initialization
 #ifdef HAVE_QCA2
     mQcaInitializer = new QCA::Initializer( QCA::Practical, 64 );
-kDebug()<< QCA::supportedFeatures();//Hash::supportedTypes();
+qCDebug(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM)<< QCA::supportedFeatures();//Hash::supportedTypes();
 #endif
 
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();

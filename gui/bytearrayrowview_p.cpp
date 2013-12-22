@@ -360,7 +360,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
     int fittingBytesPerLineWithScrollbar = 0;
     for(;;)
     {
-    //    kDebug() << "matchWidth: " << fullWidth
+    //    qCDebug(LOG_OKTETA_GUI) << "matchWidth: " << fullWidth
     //              << " (v:" << visibleWidth()
     //              << ", f:" << frameWidth()
     //              << ", A:" << availableWidth
@@ -381,7 +381,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
             if( fittingGroupsPerLine > 0 )
                 availableWidth -= fittingGroupsPerLine*totalGroupWidth; // includes additional spacing after last group
 
-//         kDebug() << "Left: " << availableWidth << "("<<byteWidth<<")" ;
+//         qCDebug(LOG_OKTETA_GUI) << "Left: " << availableWidth << "("<<byteWidth<<")" ;
 
             if( availableWidth > 0 )
                 fittingBytesPerLine += (availableWidth+byteSpacingWidth) / (byteWidth+byteSpacingWidth);
@@ -403,7 +403,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
             break;
         }
 
-//    kDebug() << "meantime: " << fittingGroupsPerLine << " (T:" << totalGroupWidth
+//    qCDebug(LOG_OKTETA_GUI) << "meantime: " << fittingGroupsPerLine << " (T:" << totalGroupWidth
 //              << ", h:" << byteGroupWidth
 //              << ", s:" << groupSpacingWidth << ") " <<fittingBytesPerLine<< endl;
 
@@ -429,7 +429,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
                 fittingBytesPerLineWithScrollbar = fittingBytesPerLine;
                 availableWidth = fullWidth;
                 matchRun = TestWithoutScrollbar;
-        //          kDebug() << "tested without scrollbar..." ;
+        //          qCDebug(LOG_OKTETA_GUI) << "tested without scrollbar..." ;
                 continue;
             }
         }
@@ -441,7 +441,7 @@ int ByteArrayRowViewPrivate::fittingBytesPerLine() const
                 // need for a scrollbar has risen... ->less width, new calculation
                 availableWidth = fullWidth - scrollbarExtent;
                 matchRun = RerunWithScrollbarOn;
-        //          kDebug() << "rerun with scrollbar on..." ;
+        //          qCDebug(LOG_OKTETA_GUI) << "rerun with scrollbar on..." ;
                 continue;
             }
         }

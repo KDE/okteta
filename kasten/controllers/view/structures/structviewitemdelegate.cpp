@@ -24,7 +24,7 @@
 #include "datatypes/datainformation.h"
 #include <QLineEdit>
 #include <QtCore/QScopedPointer>
-#include <KDebug>
+
 
 StructViewItemDelegate::StructViewItemDelegate(QObject * parent) :
     QStyledItemDelegate(parent)

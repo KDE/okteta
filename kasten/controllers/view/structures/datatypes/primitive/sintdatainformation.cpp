@@ -21,12 +21,12 @@
  */
 #include "sintdatainformation.h"
 #include "../poddecoder/typeeditors/sintspinbox.h"
+#include "../../structlogging.h"
 
 #include <QScriptValue>
 #include <KGlobal>
 #include <KLocale>
 #include <KLocalizedString>
-#include <KDebug>
 
 template<typename T>
 QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
@@ -93,7 +93,7 @@ inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidge
     if (spin)
         return spin->value();
 
-    kWarning() << "could not cast widget";
+    qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast widget";
     return QVariant();
 }
 

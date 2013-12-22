@@ -138,6 +138,7 @@ set( kastengui_controller_HDRS
 )
 
 set( kastengui_LIB_SRCS
+  kastengui.cpp
   ${kastengui_view_SRCS}
   ${kastengui_io_SRCS}
   ${kastengui_system_SRCS}

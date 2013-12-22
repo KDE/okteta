@@ -20,7 +20,9 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "structviewdisplaysettingswidget.h"
+
 #include "structviewpreferences.h"
+#include "../structlogging.h"
 
 StructViewDisplaySettingsWidget::StructViewDisplaySettingsWidget() :
     QWidget(NULL)
@@ -57,7 +59,7 @@ void StructViewDisplaySettingsWidget::setupBasesCombo(QComboBox* box, KConfigSke
 {
     Q_ASSERT(box->count() == 0);
     Q_ASSERT(currentValue == 2 || currentValue == 8 || currentValue == 10 || currentValue == 16);
-    qDebug() << "current value:" << configItem->property() << "vs" << currentValue;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "current value:" << configItem->property() << "vs" << currentValue;
     box->addItem(i18nc("@item:inlistbox", "Binary"), 2);
     box->addItem(i18nc("@item:inlistbox", "Octal"), 8);
     box->addItem(i18nc("@item:inlistbox", "Decimal"), 10);
@@ -72,25 +74,25 @@ void StructViewDisplaySettingsWidget::setupBasesCombo(QComboBox* box, KConfigSke
 void StructViewDisplaySettingsWidget::handleMapping(int index, QComboBox* box, QSpinBox* spin)
 {
     QVariant currentValue = box->itemData(index);
-    qDebug() << "box changed to " << index << "value = " << currentValue;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "box changed to " << index << "value = " << currentValue;
     if (spin->value() != currentValue.toInt())
         spin->setValue(currentValue.toInt());
 }
 
 void StructViewDisplaySettingsWidget::setCharDisplay(int index)
 {
-    qDebug() << "byteOrder changed to " << index;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "byteOrder changed to " << index;
     handleMapping(index, ui.combo_CharDisplayBase, ui.kcfg_CharDisplayBase);
 }
 
 void StructViewDisplaySettingsWidget::setSignedDisplay(int index)
 {
-    qDebug() << "byteOrder changed to " << index;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "byteOrder changed to " << index;
     handleMapping(index, ui.combo_SignedDisplayBase, ui.kcfg_SignedDisplayBase);
 }
 
 void StructViewDisplaySettingsWidget::setUnsignedDisplay(int index)
 {
-    qDebug() << "byteOrder changed to " << index;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "byteOrder changed to " << index;
     handleMapping(index, ui.combo_UnsignedDisplayBase, ui.kcfg_UnsignedDisplayBase);
 }

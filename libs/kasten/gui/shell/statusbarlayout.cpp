@@ -22,8 +22,8 @@
 
 #include "statusbarlayout.h"
 
-// KDE
-#include <KDebug>
+// lib
+#include <kastengui.h>
 // Qt
 #include <QWidgetItem>
 #include <QWidget>
@@ -92,7 +92,7 @@ QSize StatusBarLayout::minimumSize() const
 void StatusBarLayout::addItem( QLayoutItem* item )
 {
 Q_UNUSED( item )
-    kWarning() << "not implemented!  Please use addWidget() instead";
+    qCWarning(LOG_KASTEN_GUI) << "not implemented!  Please use addWidget() instead";
     return;
 }
 
@@ -173,7 +173,7 @@ void StatusBarLayout::setGeometry( const QRect& _rect )
         const int itemWidth = item->sizeHint().width();
         const int itemSpacing = ( visibleCount == 0 ) ? 0 : spacing;
         const int newUsedWidth = usedWidth + itemSpacing + itemWidth;
-// kDebug()<<widget<<<<availableWidth<<usedWidth<<itemWidth<<itemSpacing<<newUsedWidth;
+// qCDebug(LOG_KASTEN_GUI)<<widget<<<<availableWidth<<usedWidth<<itemWidth<<itemSpacing<<newUsedWidth;
 
         const bool isTooWide = ( newUsedWidth > availableWidth );
 

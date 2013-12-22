@@ -27,8 +27,6 @@
 #include <QScriptContext>
 #include <QScriptEngine>
 
-#include <KDebug>
-
 #include "../allprimitivetypes.h"
 
 QString ScriptUtils::qScriptValueToString(const QScriptValue& val)

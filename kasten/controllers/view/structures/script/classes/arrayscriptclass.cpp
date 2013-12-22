@@ -26,8 +26,8 @@
 #include "../../parsers/parserutils.h"
 #include "../../parsers/scriptvalueconverter.h"
 #include "../scriptlogger.h"
+#include "../../structlogging.h"
 
-#include <KDebug>
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
@@ -166,7 +166,7 @@ QScriptValue ArrayScriptClass::Array_proto_toString(QScriptContext* ctx, QScript
     DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     return data->typeName();

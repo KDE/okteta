@@ -41,7 +41,6 @@
 #include <QLabel>
 #include <QGroupBox>
 
-#include <KDebug>
 
 namespace Kasten2
 {

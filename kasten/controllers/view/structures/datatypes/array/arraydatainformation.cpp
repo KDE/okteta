@@ -21,8 +21,6 @@
  */
 #include "arraydatainformation.h"
 
-#include <KDebug>
-
 #include "../primitivefactory.h"
 #include "../dummydatainformation.h"
 #include "../../parsers/scriptvalueconverter.h"

@@ -27,6 +27,7 @@
 #include "structviewpreferences.h"
 #include "../structuresmanager.h"
 #include "../structtool.h"
+#include "../structlogging.h"
 // KDE
 #include <KStandardDirs>
 #include <KMessageBox>
@@ -42,7 +43,6 @@
 #include <QListWidgetItem>
 #include <QLayout>
 #include <QSizePolicy>
-#include <KDebug>
 
 static const int FileNameRole = Qt::UserRole;
 
@@ -77,21 +77,21 @@ void StructuresManagerView::onGetNewStructuresClicked(const KNS3::Entry::List& c
 {
     foreach (const KNS3::Entry& e, changedEntries)
         {
-            kDebug() << "Changed Entry: " << e.name();
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Changed Entry: " << e.name();
             if (e.status() == KNS3::Entry::Installed)
             {
                 //new element installed
-                kDebug() << "installed files:" << e.installedFiles();
+                qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed files:" << e.installedFiles();
             }
             if (e.status() == KNS3::Entry::Deleted)
             {
                 //element uninstalled
-                kDebug() << "deleted files:" << e.uninstalledFiles();
+                qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "deleted files:" << e.uninstalledFiles();
             }
         }
     if (!changedEntries.isEmpty())
     {
-        kDebug() << "installed structures changed ->  rebuilding list of installed structures";
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed structures changed ->  rebuilding list of installed structures";
         mTool->manager()->reloadPaths();
         rebuildPluginSelectorEntries();
     }
@@ -111,7 +111,8 @@ void StructuresManagerView::advancedSelection()
     if (dlg->exec() == QDialog::Accepted) {
         QStringList newVals = advancedSelectionWidget->values();
         if (newVals != mSelectedStructures) {
-            kDebug() << "selection changed from " << mSelectedStructures << "to" << newVals;
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                    << "selection changed from " << mSelectedStructures << "to" << newVals;
             mSelectedStructures = newVals;
             emit changed(newVals);
         }
@@ -123,7 +124,8 @@ void StructuresManagerView::onPluginSelectorChange(bool change)
 {
     if (mRebuildingPluginsList)
         return;
-    kDebug() << "pluginselector changed: " << change;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+            << "pluginselector changed: " << change;
     if (!change)
         return;
     mStructuresSelector->save();
@@ -139,12 +141,13 @@ void StructuresManagerView::reloadSelectedItems() {
             newVals.append(QString(QStringLiteral("\'%1\':\'*\'")).arg(info.pluginName()));
     }
     if (newVals != mSelectedStructures) {
-        kDebug() << "selection changed from " << mSelectedStructures << "to" << newVals;
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                << "selection changed from " << mSelectedStructures << "to" << newVals;
         mSelectedStructures = newVals;
         emit changed(newVals);
     }
     else {
-        kDebug() << "no change:" << mSelectedStructures;
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no change:" << mSelectedStructures;
     }
 }
 

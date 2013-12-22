@@ -22,9 +22,10 @@
 
 #include "bytearrayviewprofilelock.h"
 
+// library
+#include <oktetakastengui.h>
 // Qt
 #include <QLockFile>
-#include <QDebug>
 #include <QSharedPointer>
 
 
@@ -57,7 +58,7 @@ ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate( const QString&
     if( !fileName.isEmpty() )
     {
         if ( !lockFile->tryLock( 1000 ) )
-            qWarning() << "Failed to acquire lock file" << fileName
+            qCWarning(LOG_KASTEN_OKTETA_GUI) << "Failed to acquire lock file" << fileName
                     << "error =" << lockFile->error();
     }
 }

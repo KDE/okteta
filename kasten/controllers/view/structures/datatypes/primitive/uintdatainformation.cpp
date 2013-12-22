@@ -20,12 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "uintdatainformation.h"
+
+#include "../../structlogging.h"
+
 #include <QScriptValue>
 
 #include <KGlobal>
 #include <KLocale>
 #include <KLocalizedString>
-#include <KDebug>
 
 #include "../../../poddecoder/typeeditors/uintspinbox.h"
 #include "structviewpreferences.h"
@@ -83,7 +85,7 @@ inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidge
     Q_CHECK_PTR(spin);
     if (spin)
         return QVariant(spin->value());
-    kWarning() << "could not cast widget";
+    qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast widget";
     return QVariant();
 }
 

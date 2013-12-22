@@ -26,7 +26,7 @@
 #include <bytearrayviewprofilemanager.h>
 #include <bytearrayview.h>
 
-#include <KDebug>
+
 namespace Kasten2
 {
 

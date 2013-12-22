@@ -23,6 +23,7 @@
 #include "../structtool.h"
 #include "../structuresmanager.h"
 #include "../structuredefinitionfile.h"
+#include "../structlogging.h"
 
 #include <QPushButton>
 #include <QLabel>
@@ -32,7 +33,6 @@
 
 #include <QRegExp>
 #include <KLocalizedString>
-#include <KDebug>
 #include <KConfigDialogManager>
 
 using namespace Kasten2;
@@ -243,7 +243,7 @@ void StructureAddRemoveWidget::syncData()
         QString dataStr = QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1), item->text(0));
         strings.append(dataStr);
     }
-    kDebug() << "selection changed to: " << strings;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "selection changed to: " << strings;
     mValues = strings;
 }
 
@@ -265,14 +265,15 @@ void StructureAddRemoveWidget::updateAvailable()
     }
     bool changed = false;
     QList<QTreeWidgetItem*> toRemove;
-    kDebug() << "paths = " << plugins;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "paths = " << plugins;
     for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i)
     {
         QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
         //text(1) is plugin name
         if (!plugins.contains(item->text(1)))
         {
-            kDebug() << "removed item: " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                    << "removed item: " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
                         item->text(0));
 
             changed = true;
@@ -280,13 +281,15 @@ void StructureAddRemoveWidget::updateAvailable()
         }
         else
         {
-            kDebug() << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                    << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
                     item->text(0)) << "still loaded -> keep";
         }
     }
     foreach(QTreeWidgetItem* itm,toRemove)
     {
-        kDebug() << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(itm->text(1),
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(itm->text(1),
                 itm->text(0)) << "removed";
         delete mTreeSelected->takeTopLevelItem(mTreeSelected->indexOfTopLevelItem(itm));
     }

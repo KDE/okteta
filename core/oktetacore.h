@@ -23,6 +23,11 @@
 #ifndef OKTETACORE_H
 #define OKTETACORE_H
 
+// Qt
+#include <QtCore/QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_CORE)
+
 // here we collect all general data
 // let's see how much it gets ;)
 

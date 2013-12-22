@@ -112,7 +112,7 @@ static bool is8Bit( QTextCodec *Codec )
   QString S = Codec->toUnicode( (const char*)&c,4 );
   int Length = 1;
   QCString CS = Codec->fromUnicode( S, Length );
-  //kDebug() << Codec->name() << " "<<Length ;
+  //qCDebug(LOG_OKTETA_CORE) << Codec->name() << " "<<Length ;
   if( Length > 0 )
     Result = false;
   // test if all chars survive the recoding
@@ -123,7 +123,7 @@ static bool is8Bit( QTextCodec *Codec )
     S = Codec->toUnicode( (const char*)&c,4 );
     Length = 1;
     CS = Codec->fromUnicode( S, Length );
-    //kDebug() << Codec->name() << " "<<c[0]<<"->"<<CS[0]<<":"<<Length ;
+    //qCDebug(LOG_OKTETA_CORE) << Codec->name() << " "<<c[0]<<"->"<<CS[0]<<":"<<Length ;
     if( Length != 1 || (CS[0] != (char)c[0] && CS[0] != QTextCodecWhiteSpace) )
     {
       Result = false;

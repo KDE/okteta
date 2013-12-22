@@ -22,12 +22,13 @@
 
 #include "addressvalidator.h"
 
+// lib
+#include <oktetakastengui.h>
 // Okteta core
 #include <valuecodec.h>
 // KDE
 #include <KLocalizedString>
 // Qt
-#include <QDebug>
 #include <QtCore/QString>
 #include <QtCore/QRegExp>
 #include <QtScript/QScriptEngine>
@@ -118,11 +119,11 @@ Address AddressValidator::toAddress( const QString& string, AddressType* address
         QScriptEngine evaluator;
         QScriptValue value = evaluator.evaluate( expression );
         address = value.toInt32();
-        qDebug() << "expression " << expression << " evaluated to: " << address;
+        qCDebug(LOG_KASTEN_OKTETA_GUI) << "expression " << expression << " evaluated to: " << address;
 
         if( evaluator.hasUncaughtException() )
         {
-            qWarning() << "evaluation error: " << evaluator.uncaughtExceptionBacktrace();
+            qCWarning(LOG_KASTEN_OKTETA_GUI) << "evaluation error: " << evaluator.uncaughtExceptionBacktrace();
             if( addressType )
                 *addressType = InvalidAddressType;
         }

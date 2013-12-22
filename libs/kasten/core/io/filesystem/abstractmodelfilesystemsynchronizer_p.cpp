@@ -26,7 +26,6 @@
 #include <KDirWatch>
 #include <Solid/Networking>
 
-#include <QDebug>
 
 namespace Kasten2
 {
@@ -94,14 +93,14 @@ void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
 {
     Q_UNUSED( fileName )
-    qDebug() << fileName;
+    qCDebug(LOG_KASTEN_CORE) << fileName;
     setRemoteState( RemoteHasChanges );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& fileName )
 {
     Q_UNUSED( fileName )
-    qDebug() << fileName;
+    qCDebug(LOG_KASTEN_CORE) << fileName;
     //TODO: could happen after a delete, what to do?
     setRemoteState( RemoteHasChanges );
 }
@@ -109,19 +108,19 @@ void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& f
 void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& fileName )
 {
     Q_UNUSED( fileName )
-    qDebug() << fileName;
+    qCDebug(LOG_KASTEN_CORE) << fileName;
     setRemoteState( RemoteDeleted );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onNetworkConnect()
 {
-    qDebug();
+    qCDebug(LOG_KASTEN_CORE);
     setRemoteState( RemoteUnknown );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onNetworkDisconnect()
 {
-    qDebug();
+    qCDebug(LOG_KASTEN_CORE);
     setRemoteState( RemoteUnreachable );
 }
 

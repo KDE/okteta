@@ -68,7 +68,7 @@ void ScriptHandler::validateData(DataInformation* data)
 #ifdef OKTETA_DEBUG_SCRIPT
         mDebugger->attachTo(mEngine.data());
         mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
-        kDebug() << "validating element: " << data->name();
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "validating element: " << data->name();
 #endif
         QScriptValue result = callFunction(validationFunc, data, ScriptHandlerInfo::Validating);
         if (result.isError())

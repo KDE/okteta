@@ -322,6 +322,7 @@ set( STRUCTVIEW_TESTED_SRCS
   view/structures/parsers/scriptvalueconverter_p.cpp
   view/structures/parsers/datainformationfactory.cpp
   view/structures/parsers/parserutils.cpp
+  view/structures/structlogging.cpp
 )
 
 #these source files are not needed by the static library for unit tests, therefore keep them separate

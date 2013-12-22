@@ -25,8 +25,8 @@
 #include "../../datatypes/primitive/primitivedatainformation.h"
 #include "../../parsers/parserutils.h"
 #include "../../allprimitivetypes.h"
+#include "../../structlogging.h"
 
-#include <KDebug>
 
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
@@ -185,7 +185,7 @@ QScriptValue PrimitiveScriptClass::Primitive_proto_toString(QScriptContext* ctx,
     DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     //this might allow proper comparison between values without having to call .value

@@ -26,8 +26,8 @@
 #include "../../datatypes/topleveldatainformation.h"
 #include "../../parsers/parserutils.h"
 #include "../scriptlogger.h"
+#include "../../structlogging.h"
 
-#include <KDebug>
 
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
@@ -200,7 +200,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_toString(QScriptContext* 
     DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     return data->typeName(); //TODO better toString
@@ -224,7 +224,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx
     DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     uint count = data->childCount();
@@ -248,7 +248,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_setChildren(QScriptContex
     DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     DataInformationWithChildren* dataW = static_cast<DataInformationWithChildren*>(data);

@@ -26,6 +26,8 @@
 #include <KLocalizedString>
 
 
+Q_LOGGING_CATEGORY(LOG_OKTETA_CORE, "okteta.core")
+
 namespace Okteta
 {
 

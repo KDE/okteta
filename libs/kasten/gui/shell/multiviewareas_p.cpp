@@ -31,7 +31,6 @@
 // KDE
 #include <KGlobalSettings>
 
-#include <KDebug>
 
 namespace Kasten2
 {
@@ -200,7 +199,7 @@ void MultiViewAreasPrivate::onViewAreaFocusChanged( bool hasFocus )
     Q_Q( MultiViewAreas );
 
     TabbedViews* viewArea = qobject_cast<TabbedViews *>( q->sender() );
-kDebug()<<viewArea<<hasFocus;
+
     if( mCurrentViewArea == viewArea )
         return;
 

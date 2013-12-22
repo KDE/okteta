@@ -24,6 +24,7 @@
 #include "structtool.h"
 #include "structuredefinitionfile.h"
 #include "structuresmanager.h"
+#include "structlogging.h"
 // lib
 #include <bytearraydocument.h>
 #include <bytearrayview.h>
@@ -33,7 +34,6 @@
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KLocalizedString>
-#include <KDebug>
 #include <KStandardDirs>
 //Qt
 #include <QModelIndex>
@@ -148,16 +148,16 @@ void StructTool::setByteOrder(int order)
         setByteOrder(QSysInfo::BigEndian);
     else
     {
-        kWarning() << "invalid byte order set:" << order;
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalid byte order set:" << order;
     }
 }
 
 void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
 {
-    kDebug() << "contents changed";
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "contents changed";
     for (int i = 0; i < list.size(); ++i) {
         const Okteta::ArrayChangeMetrics& acm = list.at(i);
-        kDebug() << "change: t=" << acm.type() << "o=" << acm.offset() << "a2=" << acm.removeLength() << "a3=" << acm.insertLength();
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "change: t=" << acm.type() << "o=" << acm.offset() << "a2=" << acm.removeLength() << "a3=" << acm.insertLength();
     }
     updateData(list);
 }
@@ -189,7 +189,7 @@ void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
 {
     if (d->mWritingData)
     {
-        kWarning() << "currently writing data, won't update";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "currently writing data, won't update";
         return;
     }
     if (!d->mByteArrayModel)
@@ -278,7 +278,7 @@ void StructTool::setSelectedStructuresInView()
 
     QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
-    kDebug() << "loadedStructs " << loadedStructs;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "loadedStructs " << loadedStructs;
     for (int i = 0; i < loadedStructs.size(); ++i)
     {
         const QString& s = loadedStructs.at(i);
@@ -287,7 +287,7 @@ void StructTool::setSelectedStructuresInView()
         {
             QString pluginName = regex.cap(1);
             QString name = regex.cap(2);
-            //kDebug() << "pluginName=" << path << " structureName=" << name;
+            //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "pluginName=" << path << " structureName=" << name;
             StructureDefinitionFile* def = d->mManager->definition(pluginName);
             if (!def)
                 continue;
@@ -307,7 +307,7 @@ void StructTool::setSelectedStructuresInView()
                 if (data)
                     addChildItem(data);
                 else
-                    kDebug() << "Could not find structure with name" << name << "in" << pluginName;
+                    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Could not find structure with name" << name << "in" << pluginName;
             }
         }
     }

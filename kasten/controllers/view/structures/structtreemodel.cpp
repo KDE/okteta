@@ -22,13 +22,13 @@
 
 #include "structtreemodel.h"
 #include "structtool.h"
+#include "structlogging.h"
 #include "datatypes/datainformationwithchildren.h"
 #include "datatypes/topleveldatainformation.h"
 #include "datatypes/array/arraydatainformation.h"
 
 #include <QFont>
 
-#include <KDebug>
 
 namespace Kasten2
 {
@@ -79,7 +79,7 @@ void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint sta
 void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    //kDebug() << "data information" << sender->fullObjectPath() << ": removing "
+    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": removing "
     //        "children from index" << startIndex << "to" << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
@@ -92,7 +92,7 @@ void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint s
 void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    //kDebug() << "data information" << sender->fullObjectPath() << ": inserting "
+    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": inserting "
     //        "children from index" << startIndex << "to" << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
@@ -144,7 +144,7 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
 
     if (!index.internalPointer())
     {
-        kDebug() << "item == NULL";
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "item == NULL";
         return false;
     }
 
@@ -226,7 +226,7 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
             static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem)
     {
-        kDebug() << "parentItem is NULL";
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "parentItem is NULL";
         return mTool->childCount();
     }
     return parentItem->childCount();

@@ -21,16 +21,18 @@
  */
 #include "utf32stringdata.h"
 
+#include "../../structlogging.h"
+
 #include <QVarLengthArray>
 
 #include <KLocalizedString>
-#include <KDebug> //TODO remove
 
 #include <abstractbytearraymodel.h>
 
 #include "../topleveldatainformation.h"
 #include "../dummydatainformation.h"
 #include "stringdatainformation.h"
+
 
 Utf32StringData::Utf32StringData(StringDataInformation* parent)
     : StringData(parent), mNonBMPCount(0)
@@ -180,7 +182,7 @@ qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
                 terminate = true;
         }
         if (mMode == None) {
-            kDebug() << "no termination mode set!!";
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no termination mode set!!";
             Q_ASSERT(false);
         }
         if (terminate)
