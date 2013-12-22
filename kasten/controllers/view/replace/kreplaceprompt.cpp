@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009,2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,6 +25,9 @@
 // KDE
 #include <KLocalizedString>
 // Qt
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QPushButton>
 #include <QtCore/QEventLoop>
 
 
@@ -32,21 +35,34 @@ namespace Kasten2
 {
 
 KReplacePrompt::KReplacePrompt( QWidget* parent )
- : KDialog( parent )
+ : QDialog( parent )
 {
     setModal( true );
-    setCaption( i18nc("@title:window prompt for iterative replacement","Replace") );
+    setWindowTitle( i18nc("@title:window prompt for iterative replacement","Replace") );
 
-    setButtons( User1 | User2 | User3 | Close );
+    // dialog buttons
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    QPushButton* button = dialogButtonBox->addButton( i18nc("@action:button","Replace &All"),
+                                                      QDialogButtonBox::ApplyRole );
+    connect( button, &QAbstractButton::clicked, this, &KReplacePrompt::onReplaceAllButton );
+    button = dialogButtonBox->addButton( i18nc("@action:button","&Skip"),
+                                         QDialogButtonBox::ApplyRole );
+    connect( button, &QAbstractButton::clicked, this, &KReplacePrompt::onSkipButton );
+    QPushButton* replaceButton = dialogButtonBox->addButton( i18nc("@action:button","Replace"),
+                                                             QDialogButtonBox::ApplyRole );
+    connect( replaceButton, &QAbstractButton::clicked, this, &KReplacePrompt::onReplaceButton );
+    button = dialogButtonBox->addButton( QDialogButtonBox::Close );
+    connect( button, &QAbstractButton::clicked, this, &KReplacePrompt::onCloseButton );
 
-    setButtonGuiItem( User1, KGuiItem(i18nc("@action:button","Replace &All")) );
-    setButtonGuiItem( User2, KGuiItem(i18nc("@action:button","&Skip")) );
-    setButtonGuiItem( User3, KGuiItem(i18nc("@action:button","Replace")) );
 
-    setDefaultButton( User3 );
-    showButtonSeparator( false );
+    // main layout
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget( dialogButtonBox );
 
+    setLayout( layout );
     resize(minimumSize());
+
+    replaceButton->setDefault( true );
 }
 
 ReplaceBehaviour KReplacePrompt::query()
@@ -58,24 +74,28 @@ ReplaceBehaviour KReplacePrompt::query()
     return mResult;
 }
 
-void KReplacePrompt::slotButtonClicked( int buttonCode )
+void KReplacePrompt::onReplaceAllButton()
 {
-    const struct { int mButtonCode; ReplaceBehaviour mBehaviour; } table[] =
-    {
-        {User1, ReplaceAll},
-        {User2, SkipCurrent},
-        {User3,ReplaceCurrent},
-        {Close,CancelReplacing}
-    };
-    const int tableSize = sizeof(table) / sizeof(table[0]);
+    mResult = ReplaceAll;
+    mEventLoop->quit();
+}
 
-    for( int i=0; i<tableSize; ++i )
-        if( table[i].mButtonCode == buttonCode )
-        {
-            mResult = table[i].mBehaviour;
-            mEventLoop->quit();
-            break;
-        }
+void KReplacePrompt::onSkipButton()
+{
+    mResult = SkipCurrent;
+    mEventLoop->quit();
+}
+
+void KReplacePrompt::onReplaceButton()
+{
+    mResult = ReplaceCurrent;
+    mEventLoop->quit();
+}
+
+void KReplacePrompt::onCloseButton()
+{
+    mResult = CancelReplacing;
+    mEventLoop->quit();
 }
 
 }

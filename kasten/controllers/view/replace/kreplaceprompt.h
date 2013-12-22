@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2006-2007,2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2009,2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,8 +25,8 @@
 
 // controller
 #include "replaceuserqueryable.h"
-// KDE
-#include <KDialog>
+// Qt
+#include <QtWidgets/QDialog>
 
 class QEventLoop;
 
@@ -34,7 +34,7 @@ class QEventLoop;
 namespace Kasten2
 {
 
-class KReplacePrompt : public KDialog
+class KReplacePrompt : public QDialog
 {
   public:
     explicit KReplacePrompt( QWidget* parent );
@@ -42,10 +42,13 @@ class KReplacePrompt : public KDialog
   public:
     ReplaceBehaviour query();
 
-  public: // KDialog API
-    virtual void slotButtonClicked( int button );
+  private Q_SLOTS:
+    void onReplaceAllButton();
+    void onSkipButton();
+    void onReplaceButton();
+    void onCloseButton();
 
-  protected:
+  private:
     QEventLoop* mEventLoop;
 
     ReplaceBehaviour mResult;
