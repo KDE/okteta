@@ -31,7 +31,6 @@
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KConfigGroup>
-#include <KComponentData>
 #include <KSharedConfig>
 // Qt
 #include <QtCore/QUrl>
@@ -54,7 +53,7 @@ LoaderController::LoaderController( AbstractDocumentStrategy* documentStrategy,
     mOpenRecentAction =
         KStandardAction::openRecent( this, SLOT(loadRecent(QUrl)), actionCollection );
 
-    KConfigGroup configGroup( KComponentData::mainComponent().config(), CreatorConfigGroupId );
+    KConfigGroup configGroup( KSharedConfig::openConfig(), CreatorConfigGroupId );
     mOpenRecentAction->loadEntries( configGroup );
 
     connect( mDocumentStrategy, &AbstractDocumentStrategy::urlUsed, this, &LoaderController::onUrlUsed );
@@ -106,7 +105,7 @@ void LoaderController::onUrlUsed( const QUrl& url )
 
 LoaderController::~LoaderController()
 {
-    KConfigGroup configGroup( KComponentData::mainComponent().config(), CreatorConfigGroupId );
+    KConfigGroup configGroup( KSharedConfig::openConfig(), CreatorConfigGroupId );
     mOpenRecentAction->saveEntries( configGroup );
 }
 
