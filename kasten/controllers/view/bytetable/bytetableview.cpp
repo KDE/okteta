@@ -33,9 +33,9 @@
 #include <KStandardGuiItem>
 #include <KGlobalSettings>
 //#include <KDebug>
-#include <KApplication>
 #include <KIntNumInput>
 // Qt
+#include <QtWidgets/QApplication>
 #include <QLabel>
 #include <QLayout>
 #include <QHeaderView>
@@ -112,7 +112,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     //if nothing has changed reuse the old values. This means the bytetable is fully constructed
     //after ~3ms and not 800 as it was before. If the saved values can not be reused it takes ~100ms
     const QList<int> columnsWidth = ByteTableViewSettings::columnsWidth();
-    const QString styleName = KApplication::style()->objectName();
+    const QString styleName = QApplication::style()->objectName();
     const QString fixedFontData = KGlobalSettings::fixedFont().toString();
     if ( columnsWidth.size() < ByteTableModel::NoOfIds || styleName != ByteTableViewSettings::style()
             || fixedFontData != ByteTableViewSettings::fixedFont() )
@@ -178,7 +178,7 @@ ByteTableView::~ByteTableView()
         columnsWidth.append( header->sectionSize( i ) );
     }
     ByteTableViewSettings::setColumnsWidth( columnsWidth );
-    ByteTableViewSettings::setStyle( KApplication::style()->objectName() );
+    ByteTableViewSettings::setStyle( QApplication::style()->objectName() );
     ByteTableViewSettings::setFixedFont( KGlobalSettings::fixedFont().toString() );
     ByteTableViewSettings::self()->writeConfig();
 }

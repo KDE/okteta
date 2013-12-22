@@ -29,10 +29,9 @@
 // KDE
 #include <KGuiItem>
 #include <KLocalizedString>
-#include <KGlobal>
-#include <KApplication>
 #include <KGlobalSettings>
 // Qt
+#include <QtWidgets/QApplication>
 #include <QtCore/QSortFilterProxyModel>
 #include <QPushButton>
 #include <QLabel>
@@ -115,10 +114,10 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     baseLayout->addWidget( mStatisticTableView, 10 );
 
     setByteArraySize( mTool->size() );
-    
+
     //if nothing has changed reuse the old values. This means the info view is fully constructed much quicker.
     const QList<int> columnsWidth = InfoViewSettings::columnsWidth();
-    const QString styleName = KApplication::style()->objectName();
+    const QString styleName = QApplication::style()->objectName();
     const QString fixedFontData = KGlobalSettings::fixedFont().toString();
     if ( columnsWidth.size() < StatisticTableModel::NoOfIds || styleName != InfoViewSettings::style()
             || fixedFontData != InfoViewSettings::fixedFont() )
@@ -173,7 +172,7 @@ InfoView::~InfoView()
         columnsWidth.append( header->sectionSize( i ) );
     }
     InfoViewSettings::setColumnsWidth( columnsWidth );
-    InfoViewSettings::setStyle( KApplication::style()->objectName() );
+    InfoViewSettings::setStyle( QApplication::style()->objectName() );
     InfoViewSettings::setFixedFont( KGlobalSettings::fixedFont().toString() );
     InfoViewSettings::self()->writeConfig();
 }

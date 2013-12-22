@@ -26,8 +26,9 @@
 #include "poddecodertool.h"
 // KDE
 #include <KLocalizedString>
-#include <KApplication>
 #include <KColorScheme>
+// Qt
+#include <QtWidgets/QApplication>
 
 
 namespace Kasten2
@@ -111,7 +112,7 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
 
             if( value.isNull() )
             {
-                const QPalette &palette = KApplication::kApplication()->palette();
+                const QPalette &palette = QApplication::palette();
                 const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
                 result = colorScheme.foreground( KColorScheme::InactiveText );
             }

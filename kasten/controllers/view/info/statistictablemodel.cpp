@@ -28,8 +28,9 @@
 #include <valuecodec.h>
 // KDE
 #include <KLocalizedString>
-#include <KApplication>
 #include <KColorScheme>
+// Qt
+#include <QtWidgets/QApplication>
 
 
 namespace Kasten2
@@ -166,7 +167,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
         }
         if( isInactive )
         {
-            const QPalette& palette = KApplication::kApplication()->palette();
+            const QPalette& palette = QApplication::palette();
             const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
             result = colorScheme.foreground( KColorScheme::InactiveText );
         }

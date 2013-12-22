@@ -25,10 +25,10 @@
 // Okteta Gui Kasten
 #include <bytearrayviewprofilemanager.h>
 // KDE
-#include <KApplication>
 #include <KColorScheme>
 #include <KLocalizedString>
 // Qt
+#include <QtWidgets/QApplication>
 #include <QtCore/QVector>
 #include <QIcon>
 
@@ -107,7 +107,7 @@ QVariant ViewProfileTableModel::data( const QModelIndex &index, int role ) const
 
         if( mViewProfileManager->isViewProfileLocked(viewProfileId) )
         {
-            const QPalette& palette = KApplication::kApplication()->palette();
+            const QPalette& palette = QApplication::palette();
             const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
             result = colorScheme.foreground( KColorScheme::InactiveText );
         }
