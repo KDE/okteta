@@ -26,7 +26,6 @@
 #include <abstractmodelexporterconfigeditor.h>
 #include <abstractselectionview.h>
 // KDE
-#include <KGlobal>
 #include <KLocalizedString>
 // Qt
 #include <QSplitter>

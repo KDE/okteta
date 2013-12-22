@@ -35,7 +35,6 @@
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
 // KDE
-#include <KApplication>
 #include <KProcess>
 // Qt
 #include <QtCore/QMimeData>
