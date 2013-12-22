@@ -34,9 +34,8 @@
 // KDE
 #include <kio/netaccess.h>
 #include <KLocalizedString>
-#include <KGuiItem>
-#include <KFileDialog>
 // Qt
+#include <QFileDialog>
 #include <QUrl>
 
 
@@ -115,27 +114,22 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         i18nc( "@title:window", "Export" );
     do
     {
-        KFileDialog exportFileDialog( /*mWorkingUrl.url()*/QUrl(), QString(), /*mWidget*/0 );
+        QFileDialog exportFileDialog(/*mWidget*/0, dialogTitle );
 
-        exportFileDialog.setOperationMode( KFileDialog::Saving );
-        exportFileDialog.setMode( KFile::File );
+        exportFileDialog.setAcceptMode( QFileDialog::AcceptSave );
+        exportFileDialog.setFileMode( QFileDialog::AnyFile );
         const QStringList mimeTypes = QStringList() << exporter->remoteMimeType();
-        exportFileDialog.setMimeFilter( mimeTypes );
-        exportFileDialog.setWindowTitle( dialogTitle );
+        exportFileDialog.setMimeTypeFilters( mimeTypes );
 
-        const KGuiItem exportGuiItem( i18nc("@action:button",
-                                            "&Export"),
-                                      QStringLiteral("document-export"),
-                                      i18nc("@info:tooltip",
-                                            "Export the data into the file with the entered name.") );
-        KGuiItem::assign(exportFileDialog.okButton(),  exportGuiItem );
+        exportFileDialog.setLabelText(QFileDialog::Accept, i18nc("@action:button", "&Export"));
 
         exportFileDialog.exec();
 
-        const QUrl exportUrl = exportFileDialog.selectedUrl();
+        const QList<QUrl> exportUrls = exportFileDialog.selectedUrls();
 
-        if( !exportUrl.isEmpty() )
+        if( !exportUrls.isEmpty() )
         {
+            const QUrl& exportUrl = exportUrls.at(0);
             const bool isUrlInUse = KIO::NetAccess::exists( exportUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
 
             if( isUrlInUse )
