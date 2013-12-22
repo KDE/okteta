@@ -35,7 +35,6 @@
 #include <QtGui/QDrag>
 #include <QtCore/QTimer>
 
-#include <KDebug>
 namespace Okteta
 {
 static const int DefaultScrollTimerPeriod = 100;
