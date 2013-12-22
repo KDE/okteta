@@ -43,17 +43,15 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
 
     // number
     const QString numberInputLabel =
-        i18nc( "@label:spinbox size of the bytes to generate",
-               "&Size:" );
+        i18nc( "@label:spinbox size of the bytearray to generate",
+               "&Size (bytes):" );
     mSizeInput = new QSpinBox( this );
     mSizeInput->setRange( 1, INT_MAX );
     mSizeInput->setValue( mSettings.size );
-#pragma message("Plural suffix?")
-    mSizeInput->setSuffix( i18n(" bytes") ); //TODO plural
     connect( mSizeInput, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",
-               "Enter the size of the byte to generate." );
+               "Enter the size of the bytearray to generate." );
     mSizeInput->setWhatsThis( numberWhatsThis );
 
     pageLayout->addRow( numberInputLabel, mSizeInput );
