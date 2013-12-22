@@ -25,8 +25,6 @@
 // library
 #include "bytearrayviewprofilelock.h"
 // KDE
-#include <KGlobal>
-#include <KStandardDirs>
 #include <KConfigGroup>
 #include <KConfig>
 #include <KDirWatch>
