@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012-2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,16 +26,34 @@
 #include "viewprofileedit.h"
 // Okteta Gui Kasten
 #include <bytearrayviewprofile.h>
+// Qt
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QDialogButtonBox>
 
 
 namespace Kasten2
 {
 
 ViewProfileEditDialog::ViewProfileEditDialog( QWidget* parent )
-  : KDialog( parent )
+  : QDialog( parent )
 {
     mViewProfileEdit = new ViewProfileEdit( this );
-    setMainWidget( mViewProfileEdit );
+
+    // dialog buttons
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok
+                                                             | QDialogButtonBox::Cancel);
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );
+    connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
+
+    // main layout
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget( mViewProfileEdit );
+    layout->addStretch();
+    layout->addWidget( dialogButtonBox );
+    setLayout( layout );
+
+    dialogButtonBox->button( QDialogButtonBox::Cancel )->setDefault( true );
 }
 
 ByteArrayViewProfile ViewProfileEditDialog::viewProfile() const

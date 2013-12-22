@@ -219,7 +219,7 @@ void ViewProfileController::onCreateNewActionTriggered()
 
     const int answer = dialog->exec();
 
-    if( answer == KDialog::Accepted )
+    if( answer == QDialog::Accepted )
     {
         QList<ByteArrayViewProfile> viewProfiles;
         viewProfiles << dialog->viewProfile();

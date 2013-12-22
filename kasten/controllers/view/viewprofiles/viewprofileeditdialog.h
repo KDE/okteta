@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012-2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,8 @@
 #ifndef VIEWPROFILEEDITDIALOG_H
 #define VIEWPROFILEEDITDIALOG_H
 
-// KDE
-#include <KDialog>
+// Qt
+#include <QtWidgets/QDialog>
 
 
 namespace Kasten2
@@ -32,7 +32,7 @@ namespace Kasten2
 class ViewProfileEdit;
 class ByteArrayViewProfile;
 
-class ViewProfileEditDialog : public KDialog
+class ViewProfileEditDialog : public QDialog
 {
 public:
     explicit ViewProfileEditDialog( QWidget* parent = 0 );
