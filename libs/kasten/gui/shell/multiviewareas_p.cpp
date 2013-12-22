@@ -28,8 +28,6 @@
 #include <abstracttoolinlineview.h>
 #include <abstractdocument.h>
 #include <abstractview.h>
-// KDE
-#include <KGlobalSettings>
 
 
 namespace Kasten2
@@ -65,7 +63,6 @@ void MultiViewAreasPrivate::init()
     mViewAreaList.append( viewArea );
     mCurrentViewArea = viewArea;
 
-    mMainSplitter->setOpaqueResize( KGlobalSettings::opaqueResize() );
     mMainSplitter->addWidget( viewArea->widget() );
 }
 
@@ -86,8 +83,6 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea( AbstractViewArea* _viewA
         const QList<int> baseSplitterSizes = baseSplitter->sizes();
         const int index = baseSplitter->indexOf( firstViewAreaWidget );
         splitter = new QSplitter( baseSplitter );
-        // TODO: react on opaqueResize change
-        splitter->setOpaqueResize( KGlobalSettings::opaqueResize() );
         baseSplitter->insertWidget( index, splitter );
         splitter->addWidget( firstViewAreaWidget );
         baseSplitter->setSizes( baseSplitterSizes );
