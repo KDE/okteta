@@ -51,8 +51,8 @@ target_link_libraries( oktetapart
   kastencontrollers
   kastengui
   kastencore
-  KF5::KI18n
-  KF5::KParts
+  KF5::I18n
+  KF5::Parts
   KF5::KDE4Support
 )
 

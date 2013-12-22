@@ -450,7 +450,7 @@ target_link_libraries( structures-static
   Qt5::Test
   Qt5::Script
   Qt5::Xml
-  KF5::KI18n
+  KF5::I18n
   KF5::KDE4Support
 #  KF5::KConfigWidgets
 #  KF5::KCMUtils
@@ -546,12 +546,12 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-  KF5::KNewStuff
-  KF5::KI18n
-  KF5::KConfigWidgets
-  KF5::KIconThemes
+  KF5::NewStuff
+  KF5::I18n
+  KF5::ConfigWidgets
+  KF5::IconThemes
   KF5::KCMUtils
-  KF5::KPrintUtils
+  KF5::PrintUtils
   Qt5::Script
   Qt5::ScriptTools
   KF5::KDE4Support

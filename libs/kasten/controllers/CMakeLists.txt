@@ -183,11 +183,11 @@ kde4_add_library( ${kastencontrollers_LIB} SHARED ${kastencontroller_LIB_SRCS} )
 target_link_libraries( ${kastencontrollers_LIB}
   ${kastengui_LIB}
   ${kastencore_LIB}
-  KF5::KI18n
-  KF5::KConfigWidgets
+  KF5::I18n
+  KF5::ConfigWidgets
   KF5::XmlGui
   KF5::KIOFileWidgets
-  KF5::KParts
+  KF5::Parts
   KF5::KDE4Support
 )
 set_target_properties( ${kastencontrollers_LIB}  PROPERTIES

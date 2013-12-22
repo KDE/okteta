@@ -58,8 +58,8 @@ target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC
   ${oktetacore_LIB}
 )
 target_link_libraries( ${oktetakastencore_LIB} LINK_PRIVATE
-	KF5::KI18n
-	KF5::KBookmarks
+  KF5::I18n
+  KF5::Bookmarks
 )
 
 set_target_properties( ${oktetakastencore_LIB} PROPERTIES

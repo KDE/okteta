@@ -129,8 +129,8 @@ target_link_libraries( ${oktetagui_LIB} LINK_PUBLIC
   Qt5::Widgets
 )
 target_link_libraries( ${oktetagui_LIB} LINK_PRIVATE
-  KF5::KI18n
-  KF5::KConfigWidgets
+  KF5::I18n
+  KF5::ConfigWidgets
 )
 set_target_properties( ${oktetagui_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetagui_LIB_NAME}

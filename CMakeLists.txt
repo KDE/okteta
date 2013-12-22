@@ -18,18 +18,14 @@ if (BUILD_TESTING)
 endif()
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions for now
 
-find_package(KF5 CONFIG REQUIRED COMPONENTS KWidgetsAddons KCoreAddons KConfig KI18n KGuiAddons KDBusAddons KService ItemViews KAuth KCodecs
-                                            KConfigWidgets KWindowSystem KNotifications KIconThemes Sonnet KCompletion 
-                                            KTextWidgets XmlGui KBookmarks KDBusAddons KCrash KArchive ItemModels KJobWidgets Solid KWallet KJS
-                                            KIO KUnitConversion KParts KCMUtils KPrintUtils KNewStuff
+find_package(KF5 CONFIG REQUIRED COMPONENTS WidgetsAddons CoreAddons Config I18n GuiAddons DBusAddons Service ItemViews Auth Codecs
+                                            ConfigWidgets WindowSystem Notifications IconThemes Sonnet Completion
+                                            TextWidgets XmlGui Bookmarks DBusAddons Crash Archive ItemModels JobWidgets Solid Wallet JS
+                                            KIO UnitConversion Parts KCMUtils PrintUtils NewStuff KDE4Support
                                             )
 if( UNIX )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
 endif()
-
-find_package(KDE4Support REQUIRED NO_MODULE)
-
-set(CMAKE_POSITION_INDEPENDENT_CODE ON) #this is needed since it is apparently not set by Qt5Config.cmake
 
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC TRUE )

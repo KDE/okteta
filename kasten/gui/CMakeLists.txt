@@ -201,8 +201,8 @@ target_link_libraries( ${oktetakastengui_LIB} LINK_PUBLIC
 )
 target_link_libraries( ${oktetakastengui_LIB} LINK_PRIVATE
   Qt5::Script
-  KF5::KI18n
-  KF5::KCompletion
+  KF5::I18n
+  KF5::Completion
   KF5::KDE4Support #KGlobalSettings
 )
 
