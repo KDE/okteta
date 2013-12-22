@@ -22,7 +22,6 @@
 
 #include "abstracttoolwidget.h"
 #include "abstracttoolwidget_p.h"
-#include "abstracttoolwidget.moc"
 
 
 namespace Kasten2

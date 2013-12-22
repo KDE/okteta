@@ -22,7 +22,6 @@
 
 #include "shellwindow.h"
 #include "shellwindow_p.h"
-#include "shellwindow.moc"
 
 
 namespace Kasten2

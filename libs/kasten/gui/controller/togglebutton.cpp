@@ -22,7 +22,6 @@
 
 #include "togglebutton.h"
 #include "togglebutton_p.h"
-#include "togglebutton.moc"
 
 
 namespace Kasten2

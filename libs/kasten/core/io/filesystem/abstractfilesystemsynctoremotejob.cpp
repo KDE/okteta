@@ -22,7 +22,6 @@
 
 #include "abstractfilesystemsynctoremotejob.h"
 #include "abstractfilesystemsynctoremotejob_p.h"
-#include "abstractfilesystemsynctoremotejob.moc"
 
 
 namespace Kasten2

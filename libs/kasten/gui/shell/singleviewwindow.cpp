@@ -22,7 +22,6 @@
 
 #include "singleviewwindow.h"
 #include "singleviewwindow_p.h"
-#include "singleviewwindow.moc"
 
 
 namespace Kasten2

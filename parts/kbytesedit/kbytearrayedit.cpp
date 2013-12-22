@@ -328,5 +328,3 @@ KByteArrayEdit::~KByteArrayEdit()
 {
     delete Model;
 }
-
-#include "kbytearrayedit.moc"

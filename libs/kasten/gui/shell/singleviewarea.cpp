@@ -22,7 +22,6 @@
 
 #include "singleviewarea.h"
 #include "singleviewarea_p.h"
-#include "singleviewarea.moc"
 
 
 namespace Kasten2

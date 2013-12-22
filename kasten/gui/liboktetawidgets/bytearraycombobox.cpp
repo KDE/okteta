@@ -22,7 +22,6 @@
 
 #include "bytearraycombobox.h"
 #include "bytearraycombobox_p.h"
-#include "bytearraycombobox.moc"
 
 
 namespace Okteta

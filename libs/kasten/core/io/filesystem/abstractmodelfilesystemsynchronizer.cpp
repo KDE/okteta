@@ -22,7 +22,6 @@
 
 #include "abstractmodelfilesystemsynchronizer.h"
 #include "abstractmodelfilesystemsynchronizer_p.h"
-#include "abstractmodelfilesystemsynchronizer.moc"
 
 // lib
 #include <abstractdocument.h>

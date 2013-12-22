@@ -22,7 +22,6 @@
 
 #include "abstractfilesystemloadjob.h"
 #include "abstractfilesystemloadjob_p.h"
-#include "abstractfilesystemloadjob.moc"
 
 
 namespace Kasten2

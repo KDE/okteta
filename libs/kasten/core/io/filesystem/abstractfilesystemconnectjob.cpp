@@ -22,7 +22,6 @@
 
 #include "abstractfilesystemconnectjob.h"
 #include "abstractfilesystemconnectjob_p.h"
-#include "abstractfilesystemconnectjob.moc"
 
 
 namespace Kasten2

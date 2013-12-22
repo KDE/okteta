@@ -22,7 +22,6 @@
 
 #include "addresscombobox.h"
 #include "addresscombobox_p.h"
-#include "addresscombobox.moc"
 
 
 namespace Okteta

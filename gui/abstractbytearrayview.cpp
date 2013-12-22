@@ -22,7 +22,6 @@
 
 #include "abstractbytearrayview.h"
 #include "abstractbytearrayview_p.h"
-#include "abstractbytearrayview.moc"
 
 // lib
 #include "controller/kcontroller.h"

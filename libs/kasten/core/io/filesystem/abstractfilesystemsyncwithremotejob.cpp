@@ -22,7 +22,6 @@
 
 #include "abstractfilesystemsyncwithremotejob.h"
 #include "abstractfilesystemsyncwithremotejob_p.h"
-#include "abstractfilesystemsyncwithremotejob.moc"
 
 
 namespace Kasten2

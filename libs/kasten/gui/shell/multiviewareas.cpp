@@ -22,7 +22,6 @@
 
 #include "multiviewareas.h"
 #include "multiviewareas_p.h"
-#include "multiviewareas.moc"
 
 
 namespace Kasten2

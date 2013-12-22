@@ -22,7 +22,6 @@
 
 #include "abstractfilesystemexportjob.h"
 #include "abstractfilesystemexportjob_p.h"
-#include "abstractfilesystemexportjob.moc"
 
 
 namespace Kasten2

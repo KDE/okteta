@@ -22,7 +22,6 @@
 
 #include "tabbedviews.h"
 #include "tabbedviews_p.h"
-#include "tabbedviews.moc"
 
 
 namespace Kasten2
