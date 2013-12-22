@@ -34,7 +34,6 @@
 #include <KLineEdit>
 #include <KGuiItem>
 #include <KLocalizedString>
-#include <KGlobalSettings>
 // Qt
 #include <QLabel>
 #include <QGroupBox>

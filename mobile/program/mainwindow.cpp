@@ -90,7 +90,6 @@
 #include <documentmanager.h>
 // KDE
 #include <KMenuBar>
-#include <KGlobal>
 #include <KConfigGroup>
 
 

@@ -27,7 +27,6 @@
 // Okteta core
 #include <oktetacore.h>
 // KDE
-#include <KGlobal>
 #include <KLocalizedString>
 // Qt
 #include <QCheckBox>

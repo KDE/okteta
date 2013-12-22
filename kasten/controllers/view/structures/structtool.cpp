@@ -34,7 +34,6 @@
 // KDE
 #include <KLocalizedString>
 #include <KDebug>
-#include <KGlobal>
 #include <KStandardDirs>
 //Qt
 #include <QModelIndex>
