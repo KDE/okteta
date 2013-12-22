@@ -28,7 +28,6 @@
 #include <charcodec.h>
 // KDE
 #include <KLocalizedString>
-#include <KIntNumInput>
 #include <KComboBox>
 #include <KLineEdit>
 // Qt
@@ -36,6 +35,8 @@
 #include <QGroupBox>
 #include <QFormLayout>
 #include <QCheckBox>
+#include <QSpinBox>
+
 
 namespace Kasten2
 {
@@ -117,9 +118,8 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
              this, &ViewProfileEdit::onLineBreakIndexChanged );
     layoutBoxFormLayout->addRow( i18n("Break lines:"), mLineBreakComboBox );
     // bytes per group
-    mGroupedBytesCountEdit = new KIntNumInput( this );
+    mGroupedBytesCountEdit = new QSpinBox( this );
     mGroupedBytesCountEdit->setRange( 0, INT_MAX );
-    mGroupedBytesCountEdit->setSuffix( ki18np(" byte"," bytes") );
     const QString noGroupingText = i18nc( "@label",
                                           "No grouping." );
     mGroupedBytesCountEdit->setSpecialValueText( noGroupingText );
@@ -128,9 +128,8 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
                "Bytes per Group:" );
     layoutBoxFormLayout->addRow( groupedBytesCountLabel, mGroupedBytesCountEdit );
     // bytes per group
-    mBytesPerLineEdit = new KIntNumInput( this );
+    mBytesPerLineEdit = new QSpinBox( this );
     mBytesPerLineEdit->setRange( 1, INT_MAX );
-    mBytesPerLineEdit->setSuffix( ki18np(" byte"," bytes") );
     const QString bytesPerLineLabel =
         i18nc( "@label:spinbox number of bytes which are shown per line",
                 "Bytes per Line:" );

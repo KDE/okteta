@@ -32,9 +32,9 @@
 #include <KLocalizedString>
 #include <KStandardGuiItem>
 #include <KGlobalSettings>
-#include <KIntNumInput>
 // Qt
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QSpinBox>
 #include <QLabel>
 #include <QLayout>
 #include <QHeaderView>
@@ -77,13 +77,12 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
     QHBoxLayout *insertLayout = new QHBoxLayout();
 
-    QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes to insert","Number:"), this );
+    QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes to insert","Number (bytes):"), this );
     insertLayout->addWidget( label );
 
-    mInsertCountEdit = new KIntNumInput( this );
+    mInsertCountEdit = new QSpinBox( this );
     mInsertCountEdit->setRange( 1, INT_MAX );
     mInsertCountEdit->setValue( 1 );
-    mInsertCountEdit->setSuffix( ki18np(" byte"," bytes") );
     label->setBuddy( mInsertCountEdit );
     insertLayout->addWidget( mInsertCountEdit );
     const QString insertCountToolTip =

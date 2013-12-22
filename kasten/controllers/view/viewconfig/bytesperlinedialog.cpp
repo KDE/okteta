@@ -23,10 +23,10 @@
 #include "bytesperlinedialog.h"
 
 // KDE
-#include <KIntNumInput>
 #include <KLocalizedString>
 // Qt
 #include <QFormLayout>
+#include <QSpinBox>
 
 
 namespace Kasten2
@@ -41,12 +41,11 @@ BytesPerLineDialog::BytesPerLineDialog( QWidget* parent )
     QFormLayout* pageLayout = new QFormLayout( page );
     pageLayout->setMargin( 0 );
 
-    mBytesPerLineEdit = new KIntNumInput( this );
+    mBytesPerLineEdit = new QSpinBox( this );
     mBytesPerLineEdit->setRange( 1, INT_MAX );
-    mBytesPerLineEdit->setSuffix( ki18np(" byte"," bytes") );
     const QString bytesPerLineLabel =
         i18nc( "@label:spinbox number of bytes which are shown per line",
-                "Per Line:" );
+                "Bytes per Line:" );
     pageLayout->addRow( bytesPerLineLabel, mBytesPerLineEdit );
 
     const QString caption =

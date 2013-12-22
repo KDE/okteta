@@ -22,7 +22,7 @@
 #include <KLocalizedString>
 //// ADAPT(start)
 //// add includes for all elements used in the widget
-#include <KIntNumInput>
+#include <QSpinBox>
 // Qt
 #include <QFormLayout>
 //// ADAPT(end)
@@ -46,13 +46,13 @@ Template_ByteArrayFilterParameterSetEdit::Template_ByteArrayFilterParameterSetEd
     // margin is provided by the container for this widget
     baseLayout->setMargin( 0 );
 
-    mLevelEdit = new KIntNumInput( this );
+    mLevelEdit = new QSpinBox( this );
     // For demonstration purpose we start at -1, not 0, to show handling of an invalid state
     // Otherwise the range should start at 0 and there is no need to connect to the valueChanged signal
     mLevelEdit->setRange( -1, 256 );
     // start with the invalid number
     mLevelEdit->setValue( -1 );
-    connect( mLevelEdit, &KIntNumInput::valueChanged, this, &Template_ByteArrayFilterParameterSetEdit::onLevelChanged );
+    connect( mLevelEdit, SIGNAL(valueChanged(int)), SLOT(onLevelChanged(int)) );
 
     const QString levelLabelText =
          i18nc( "@label:spinbox decimal value up to which bytes are set to 0",

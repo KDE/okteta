@@ -22,7 +22,7 @@
 #include <KLocalizedString>
 //// ADAPT(start)
 //// add includes for all elements used in the widget
-#include <KIntNumInput>
+#include <QSpinBox>
 // Qt
 #include <QFormLayout>
 //// ADAPT(end)
@@ -46,14 +46,13 @@ Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterS
     // margin is provided by the container for this widget
     baseLayout->setMargin( 0 );
 
-    mBitNumberEdit = new KIntNumInput( this );
+    mBitNumberEdit = new QSpinBox( this );
     // For demonstration purpose we start at 0, not 1, to show handling of an invalid state
     // Otherwise the range should start at 1 and there is no need to connect to the valueChanged signal
     mBitNumberEdit->setRange( 0, 8 );
     // start with the invalid number
     mBitNumberEdit->setValue( 0 );
-    connect( mBitNumberEdit, &KIntNumInput::valueChanged,
-             this, &Template_ByteArrayChecksumParameterSetEdit::onBitNumberChanged );
+    connect( mBitNumberEdit, SIGNAL(valueChanged(int)), SLOT(onBitNumberChanged(int)) );
 
     const QString levelLabelText =
          i18nc( "@label:spinbox number of the bit to use",

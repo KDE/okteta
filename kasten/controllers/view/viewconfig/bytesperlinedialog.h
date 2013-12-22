@@ -26,7 +26,7 @@
 // KDE
 #include <KDialog>
 
-class KIntNumInput;
+class QSpinBox;
 
 
 namespace Kasten2
@@ -46,7 +46,7 @@ class BytesPerLineDialog : public KDialog
     int bytesPerLine() const;
 
   protected:
-    KIntNumInput* mBytesPerLineEdit;
+    QSpinBox* mBytesPerLineEdit;
 };
 
 }

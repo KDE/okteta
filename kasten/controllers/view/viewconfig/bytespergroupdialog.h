@@ -26,7 +26,7 @@
 // KDE
 #include <KDialog>
 
-class KIntNumInput;
+class QSpinBox;
 
 
 namespace Kasten2
@@ -46,7 +46,7 @@ class BytesPerGroupDialog : public KDialog
     int groupedBytesCount() const;
 
   protected:
-    KIntNumInput* mGroupedBytesCountEdit;
+    QSpinBox* mGroupedBytesCountEdit;
 };
 
 }

@@ -29,9 +29,9 @@
 // KDE
 class KLineEdit;
 class KComboBox;
-class KIntNumInput;
 // Qt
 class QCheckBox;
+class QSpinBox;
 
 
 namespace Kasten2
@@ -66,8 +66,8 @@ protected: // display
     KComboBox* mDisplayModeComboBox;
 protected: // layout
     KComboBox* mLineBreakComboBox;
-    KIntNumInput* mGroupedBytesCountEdit;
-    KIntNumInput* mBytesPerLineEdit;
+    QSpinBox* mGroupedBytesCountEdit;
+    QSpinBox* mBytesPerLineEdit;
 protected: // value
     KComboBox* mValueCodingComboBox;
 protected: // char

@@ -23,10 +23,10 @@
 #include "bytespergroupdialog.h"
 
 // KDE
-#include <KIntNumInput>
 #include <KLocalizedString>
 // Qt
 #include <QFormLayout>
+#include <QSpinBox>
 
 
 namespace Kasten2
@@ -41,15 +41,14 @@ BytesPerGroupDialog::BytesPerGroupDialog( QWidget* parent )
     QFormLayout* pageLayout = new QFormLayout( page );
     pageLayout->setMargin( 0 );
 
-    mGroupedBytesCountEdit = new KIntNumInput( this );
+    mGroupedBytesCountEdit = new QSpinBox( this );
     mGroupedBytesCountEdit->setRange( 0, INT_MAX );
-    mGroupedBytesCountEdit->setSuffix( ki18np(" byte"," bytes") );
     const QString noGroupingText = i18nc( "@label",
                                           "No grouping." );
     mGroupedBytesCountEdit->setSpecialValueText( noGroupingText );
     const QString groupedBytesCountLabel =
         i18nc( "@label:spinbox number of bytes which are grouped",
-               "Per Group:" );
+               "Bytes per Group:" );
     pageLayout->addRow( groupedBytesCountLabel, mGroupedBytesCountEdit );
 
     const QString caption =

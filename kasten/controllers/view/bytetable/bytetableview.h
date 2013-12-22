@@ -27,7 +27,7 @@
 #include <abstracttoolwidget.h>
 
 class QPushButton;
-class KIntNumInput;
+class QSpinBox;
 class QTreeView;
 class QModelIndex;
 
@@ -60,7 +60,7 @@ class ByteTableView : public AbstractToolWidget
   private:
     ByteTableTool *mTool;
 
-    KIntNumInput* mInsertCountEdit;
+    QSpinBox* mInsertCountEdit;
     QTreeView *mByteTableView;
     QPushButton *mInsertButton;
 };
