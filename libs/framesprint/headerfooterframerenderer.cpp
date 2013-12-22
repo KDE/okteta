@@ -24,7 +24,6 @@
 
 // KDE
 #include <KLocalizedString>
-#include <KGlobal>
 #include <KLocale>
 #include <KUser>
 // Qt

@@ -24,7 +24,6 @@
 #include <QScriptValue>
 #include <KLineEdit>
 #include <KLocale>
-#include <KGlobal>
 #include <KLocalizedString>
 
 #include "structviewpreferences.h"

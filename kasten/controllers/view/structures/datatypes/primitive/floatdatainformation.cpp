@@ -25,7 +25,6 @@
 #include <QScriptValue>
 #include <QDoubleSpinBox>
 #include <KLocale>
-#include <KGlobal>
 #include <KLocalizedString>
 
 #include "structviewpreferences.h"

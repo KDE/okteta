@@ -24,7 +24,6 @@
 #include "../../structlogging.h"
 
 #include <QScriptValue>
-#include <KGlobal>
 #include <KLocale>
 #include <KLocalizedString>
 
