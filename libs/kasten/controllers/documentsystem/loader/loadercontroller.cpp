@@ -25,7 +25,6 @@
 // Kasten core
 #include <abstractdocumentstrategy.h>
 // KDE
-#include <KUrl>
 #include <KFileDialog>
 #include <KRecentFilesAction>
 #include <KActionCollection>
@@ -34,6 +33,8 @@
 #include <KConfigGroup>
 #include <KComponentData>
 #include <KSharedConfig>
+// Qt
+#include <QtCore/QUrl>
 
 
 namespace Kasten2

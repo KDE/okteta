@@ -28,9 +28,9 @@
 
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
-// KDE
-#include <QTemporaryFile>
-#include <KUrl>
+// Qt
+#include <QtCore/QUrl>
+#include <QtCore/QTemporaryFile>
 
 
 namespace Kasten2

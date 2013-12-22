@@ -27,7 +27,6 @@
 #include <abstractconnectjob.h>
 #include <abstractmodelsynchronizer.h>
 
-class KUrl;
 class QFile;
 
 

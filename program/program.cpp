@@ -45,11 +45,11 @@
 #include <documentsyncmanager.h>
 #include <modelcodecmanager.h>
 // KDE
-#include <KUrl>
 #include <KCmdLineArgs>
 #include <KApplication>
 // Qt
 #include <QtCore/QList>
+#include <QtCore/QUrl>
 
 
 namespace Kasten2

@@ -26,12 +26,13 @@
 #include <documentsyncmanager.h>
 #include <abstractmodelfilesystemsynchronizer.h>
 // KDE
-#include <KUrl>
 #include <KActionCollection>
 #include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
+// Qt
+#include <QtCore/QUrl>
 
 
 namespace Kasten2

@@ -26,9 +26,9 @@
 #include <abstractdocument.h>
 // KDE
 #include <KMessageBox>
-#include <KUrl>
 #include <KLocalizedString>
-
+// Qt
+#include <QtCore/QUrl>
 
 namespace Kasten2
 {

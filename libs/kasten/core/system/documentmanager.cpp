@@ -24,9 +24,8 @@
 
 // lib
 #include <abstractdocument.h>
-// KDE
-#include <KUrl>
 // Qt
+#include <QtCore/QUrl>
 #include <QtCore/QMutableListIterator>
 #include <QtCore/QStringList>
 

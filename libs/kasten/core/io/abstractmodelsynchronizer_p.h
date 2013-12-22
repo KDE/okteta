@@ -25,8 +25,8 @@
 
 #include "abstractmodelsynchronizer.h"
 
-// KDE
-#include <KUrl>
+// Qt
+#include <QtCore/QUrl>
 
 
 namespace Kasten2
