@@ -70,6 +70,7 @@ else (KDE4_ASCII_CAST)
 add_definitions(
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_CAST_FROM_ASCII
+    -DQT_NO_CAST_FROM_BYTEARRAY
 )
 endif (KDE4_ASCII_CAST)
 
