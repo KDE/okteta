@@ -34,7 +34,7 @@
 #include <documentcreatemanager.h>
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KProcess>
 // Qt
 #include <QtCore/QMimeData>

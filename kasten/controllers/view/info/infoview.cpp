@@ -26,7 +26,7 @@
 #include "infotool.h"
 #include "statistictablemodel.h"
 #include "infoviewsettings.h"
-// KDE
+// KF5
 #include <KGuiItem>
 #include <KLocalizedString>
 #include <KGlobalSettings>

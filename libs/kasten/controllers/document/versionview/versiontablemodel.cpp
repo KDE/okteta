@@ -25,7 +25,7 @@
 // Kasten core
 #include <versionable.h>
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 #include <QIcon>

@@ -24,7 +24,7 @@
 
 // lib
 #include "poddecodertool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KColorScheme>
 // Qt

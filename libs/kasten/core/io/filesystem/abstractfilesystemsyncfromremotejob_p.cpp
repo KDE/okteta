@@ -24,7 +24,7 @@
 
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
-// KDE
+// KF5
 #include <kio/netaccess.h>
 // Qt
 #include <QtCore/QFileInfo>

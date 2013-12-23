@@ -25,7 +25,7 @@
 // tool
 #include "../types/sint64.h"
 #include "../poddata.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

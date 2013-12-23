@@ -23,7 +23,7 @@
 #ifndef BYTESPERGROUPDIALOG_H
 #define BYTESPERGROUPDIALOG_H
 
-// KDE
+// KF5
 #include <KDialog>
 
 class QSpinBox;

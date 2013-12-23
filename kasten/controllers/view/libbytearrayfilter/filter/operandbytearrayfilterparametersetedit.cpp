@@ -26,7 +26,7 @@
 #include "operandbytearrayfilterparameterset.h"
 // lib
 #include <bytearraycombobox.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QCheckBox>

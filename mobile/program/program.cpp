@@ -41,7 +41,7 @@
 #include <documentcreatemanager.h>
 #include <documentsyncmanager.h>
 #include <modelcodecmanager.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KCmdLineArgs>
 #include <KApplication>

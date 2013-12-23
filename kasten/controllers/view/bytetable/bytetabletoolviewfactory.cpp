@@ -25,7 +25,7 @@
 // lib
 #include "bytetabletoolview.h"
 #include "bytetabletool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

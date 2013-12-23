@@ -28,7 +28,7 @@
 // Okteta core
 #include <charcodec.h>
 #include <character.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

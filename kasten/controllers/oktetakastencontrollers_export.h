@@ -23,7 +23,7 @@
 #ifndef OKTETAKASTENCONTROLLERS_EXPORT_H
 #define OKTETAKASTENCONTROLLERS_EXPORT_H
 
-// KDE
+// KF5
 #include <kdemacros.h>
 
 

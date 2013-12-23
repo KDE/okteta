@@ -22,7 +22,7 @@
 
 #include "kastencore.h"
 
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

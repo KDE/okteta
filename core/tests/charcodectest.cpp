@@ -26,7 +26,7 @@
 #include <charcodec.h>
 // lib
 #include <character.h>
-// KDE
+// KF5
 #include <QtTest/QTest>
 
 

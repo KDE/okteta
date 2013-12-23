@@ -88,7 +88,7 @@
 // #include <documentcreatemanager.h>
 // #include <documentsyncmanager.h>
 #include <documentmanager.h>
-// KDE
+// KF5
 #include <KMenuBar>
 #include <KConfigGroup>
 

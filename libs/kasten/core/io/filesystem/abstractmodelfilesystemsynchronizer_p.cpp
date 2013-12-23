@@ -22,7 +22,7 @@
 
 #include "abstractmodelfilesystemsynchronizer_p.h"
 
-// KDE
+// KF5
 #include <KDirWatch>
 #include <Solid/Networking>
 

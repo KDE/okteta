@@ -25,7 +25,7 @@
 // lib
 #include <widgetsdockable.h>
 #include <toolviewdockwidget.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 // Qt

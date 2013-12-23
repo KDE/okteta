@@ -26,7 +26,7 @@
 // lib
 #include "bytearraycombobox.h"
 #include "bytearrayvalidator.h"
-// KDE
+// KF5
 #include <KComboBox>
 // Qt
 #include <QtCore/QByteArray>

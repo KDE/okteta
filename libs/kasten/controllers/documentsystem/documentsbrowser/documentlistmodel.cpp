@@ -27,7 +27,7 @@
 // Kasten core
 #include <abstractmodelsynchronizer.h>
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 #include <QIcon>

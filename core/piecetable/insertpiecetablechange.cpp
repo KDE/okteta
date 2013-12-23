@@ -27,7 +27,7 @@
 #include "piecetable.h"
 //
 #include <arraychangemetrics.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

@@ -26,7 +26,7 @@
 #include <zoomable.h>
 // Kasten core
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QSlider>

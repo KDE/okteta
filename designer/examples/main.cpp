@@ -16,7 +16,7 @@
 #include <Okteta1/PieceTableByteArrayModel>
 
 //// only needed for the example
-// KDE
+// KF5
 #include <KApplication>
 #include <KCmdLineArgs>
 #include <KAboutData>

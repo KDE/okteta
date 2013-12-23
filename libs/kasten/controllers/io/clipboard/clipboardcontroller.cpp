@@ -27,7 +27,7 @@
 #include <selecteddatawriteable.h>
 // Kasten core
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KAction>

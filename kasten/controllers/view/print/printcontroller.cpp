@@ -24,7 +24,7 @@
 
 // controller
 #include "printtool.h"
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KStandardAction>

@@ -23,7 +23,7 @@
 #ifndef OKTETAKASTENCORE_EXPORT_H
 #define OKTETAKASTENCORE_EXPORT_H
 
-// KDE
+// KF5
 #include <kdemacros.h>
 
 

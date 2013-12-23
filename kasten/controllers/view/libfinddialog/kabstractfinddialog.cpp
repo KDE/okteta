@@ -26,7 +26,7 @@
 #include <bytearraycombobox.h>
 // Okteta core
 #include <oktetacore.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QCheckBox>

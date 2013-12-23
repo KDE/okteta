@@ -23,7 +23,7 @@
 #ifndef MOBILEKASTENCONTROLLERS_EXPORT_H
 #define MOBILEKASTENCONTROLLERS_EXPORT_H
 
-// KDE
+// KF5
 #include <kdemacros.h>
 
 

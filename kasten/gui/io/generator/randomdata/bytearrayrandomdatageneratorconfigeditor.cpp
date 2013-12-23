@@ -22,7 +22,7 @@
 
 #include "bytearrayrandomdatageneratorconfigeditor.h"
 
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QSpinBox>

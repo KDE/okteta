@@ -25,7 +25,7 @@
 
 // lib
 #include <character.h>
-// KDE
+// KF5
 #include <KColorScheme>
 // Qt
 #include <QtGui/QColor>

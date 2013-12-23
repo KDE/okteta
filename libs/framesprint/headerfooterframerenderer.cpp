@@ -22,7 +22,7 @@
 
 #include "headerfooterframerenderer.h"
 
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KLocale>
 #include <KUser>

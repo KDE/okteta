@@ -27,7 +27,7 @@
 #include <viewmanager.h>
 // Kasten core
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>

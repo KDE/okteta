@@ -26,7 +26,7 @@
 #include <documentversiondata.h>
 #include <versionable.h>
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

@@ -24,7 +24,7 @@
 
 // 
 #include "documentinfotool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KLocale>
 #include <KIconLoader>

@@ -30,7 +30,7 @@
 // Kasten core
 #include <modelcodecmanager.h>
 #include <abstractmodeldatagenerator.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KActionMenu>

@@ -26,7 +26,7 @@
 #include <character.h>
 #include <charcodec.h>
 #include <valuecodec.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

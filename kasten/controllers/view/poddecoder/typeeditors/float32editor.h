@@ -25,7 +25,7 @@
 
 // lib
 #include "../types/float32.h"
-// KDE
+// KF5
 #include <KLineEdit>
 
 

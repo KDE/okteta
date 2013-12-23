@@ -34,7 +34,7 @@
 #include <abstractsyncfromremotejob.h>
 #include <abstractmodelsynchronizerfactory.h>
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <kio/netaccess.h>
 #include <KFileDialog>
 #include <KLocalizedString>

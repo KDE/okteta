@@ -28,7 +28,7 @@
 #include <person.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QCoreApplication>

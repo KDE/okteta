@@ -28,7 +28,7 @@
 #include <piecetablebytearraymodel.h>
 // Kasten core
 #include <person.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QMimeData>

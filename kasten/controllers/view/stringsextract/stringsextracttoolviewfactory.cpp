@@ -25,7 +25,7 @@
 // lib
 #include "stringsextracttoolview.h"
 #include "stringsextracttool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

@@ -23,7 +23,7 @@
 #ifndef PRINTJOB_H
 #define PRINTJOB_H
 
-// KDE
+// KF5
 // #include <KJob>
 // Qt
 #include <QtCore/QObject>

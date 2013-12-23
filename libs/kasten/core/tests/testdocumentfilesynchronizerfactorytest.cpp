@@ -28,7 +28,7 @@
 #include <testdocument.h>
 // test utils
 #include <util/filesystem.h>
-// KDE
+// KF5
 #include <QtTest/QTest>
 // Qt
 #include <QtTest/QtTest>

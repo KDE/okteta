@@ -24,7 +24,7 @@
 
 // Kasten core
 #include <abstractdocumentstrategy.h>
-// KDE
+// KF5
 #include <KFileDialog>
 #include <KRecentFilesAction>
 #include <KActionCollection>

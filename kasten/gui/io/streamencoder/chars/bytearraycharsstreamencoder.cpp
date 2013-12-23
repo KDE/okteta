@@ -28,7 +28,7 @@
 #include <abstractbytearraymodel.h>
 #include <character.h>
 #include <charcodec.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>

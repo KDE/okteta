@@ -24,7 +24,7 @@
 
 // Kasten gui
 #include <viewmanager.h>
-// KDE
+// KF5
 #include <KActionCollection>
 #include <KAction>
 #include <KStandardAction>

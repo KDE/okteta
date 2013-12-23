@@ -33,7 +33,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QApplication>

@@ -25,7 +25,7 @@
 // controller
 #include "ksearchdialog.h"
 #include "searchtool.h"
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KAction>

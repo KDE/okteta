@@ -30,7 +30,7 @@
 #include <bytearraydatageneratorconfigeditorfactoryfactory.h>
 #include <bytearraystreamencoderfactory.h>
 #include <bytearraydatageneratorfactory.h>
-// KDE
+// KF5
 #include <k4aboutdata.h>
 #include <KLocalizedString>
 

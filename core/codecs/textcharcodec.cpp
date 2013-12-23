@@ -24,7 +24,7 @@
 
 // lib
 #include <character.h>
-// KDE
+// KF5
 #include <KLocale>
 #include <KCharsets>
 // Qt

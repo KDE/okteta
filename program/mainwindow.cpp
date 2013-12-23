@@ -107,7 +107,7 @@
 #include <documentcreatemanager.h>
 #include <documentsyncmanager.h>
 #include <documentmanager.h>
-// KDE
+// KF5
 #include <KGlobal>
 #include <KConfigGroup>
 #include <KSharedConfig>

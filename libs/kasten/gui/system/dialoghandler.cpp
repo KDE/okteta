@@ -24,7 +24,7 @@
 
 // Kasten core
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <KMessageBox>
 #include <KLocalizedString>
 // Qt

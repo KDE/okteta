@@ -28,7 +28,7 @@
 #include <bytearrayviewprofilemanager.h>
 #include <bytearrayviewprofilesynchronizer.h>
 #include <bytearrayview.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionMenu>

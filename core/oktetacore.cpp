@@ -22,7 +22,7 @@
 
 #include "oktetacore.h"
 
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

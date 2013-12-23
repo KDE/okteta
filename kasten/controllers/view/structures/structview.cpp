@@ -40,7 +40,7 @@
 
 //#include "modeltest.h"
 
-// KDE
+// KF5
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KConfigDialog>

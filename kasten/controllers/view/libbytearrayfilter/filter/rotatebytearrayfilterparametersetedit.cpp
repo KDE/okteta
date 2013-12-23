@@ -24,7 +24,7 @@
 
 // parameterset
 #include "rotatebytearrayfilterparameterset.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QFormLayout>

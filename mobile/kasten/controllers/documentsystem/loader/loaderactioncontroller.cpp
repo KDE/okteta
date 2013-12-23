@@ -24,7 +24,7 @@
 
 // Kasten core
 #include <documentsyncmanager.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KFileDialog>
 // Qt

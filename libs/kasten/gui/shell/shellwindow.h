@@ -26,7 +26,7 @@
 // Kasten gui
 #include "kastengui_export.h"
 #include "widgetsdockable.h"
-// KDE
+// KF5
 #include <KXmlGuiWindow>
 
 template<class T> class QList;

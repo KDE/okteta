@@ -22,7 +22,7 @@
 
 #include "kbytearrayedit.h"
 
-// KDE
+// KF5
 #include <KPluginFactory>
 
 K_PLUGIN_FACTORY(ProductFactory, registerPlugin<KByteArrayEdit>();)

@@ -27,7 +27,7 @@
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilewritethread.h"
 #include "bytearraydocument.h"
-// KDE
+// KF5
 // Qt
 #include <QUrl>
 #include <QtCore/QCoreApplication>

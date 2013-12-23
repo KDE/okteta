@@ -36,7 +36,7 @@
 #include <bookmark.h>
 #include <charcodec.h>
 #include <valuecodec.h>
-// KDE
+// KF5
 #include <KColorScheme>
 // Qt
 #include <QtGui/QPainter>

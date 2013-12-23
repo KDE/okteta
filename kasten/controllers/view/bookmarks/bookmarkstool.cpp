@@ -36,7 +36,7 @@
 #include <bookmarksconstiterator.h>
 #include <bookmark.h>
 #include <bytearraymodel.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QWidget>

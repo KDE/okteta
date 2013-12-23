@@ -30,7 +30,7 @@
 // Okteta core
 #include <valuecodec.h>
 #include <charcodec.h>
-// KDE
+// KF5
 #include <KColorScheme>
 // Qt
 #include <QtGui/QPainter>

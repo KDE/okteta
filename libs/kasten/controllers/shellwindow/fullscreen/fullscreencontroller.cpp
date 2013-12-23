@@ -22,7 +22,7 @@
 
 #include "fullscreencontroller.h"
 
-// KDE
+// KF5
 #include <KToggleFullScreenAction>
 #include <KXmlGuiWindow>
 #include <KActionCollection>

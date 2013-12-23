@@ -33,7 +33,7 @@
 #include <modelcodecmanager.h>
 #include <abstractdocument.h>
 #include <abstractmodelexporter.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>

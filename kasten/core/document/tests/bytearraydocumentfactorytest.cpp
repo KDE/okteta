@@ -26,7 +26,7 @@
 #include <bytearraydocumentfactory.h>
 // lib
 #include <bytearraydocument.h>
-// KDE
+// KF5
 #include <QtTest/QTest>
 
 

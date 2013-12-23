@@ -31,7 +31,7 @@
 #include <util/fill.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
+// KF5
 #include <QtTest/QTest>
 // Qt
 #include <QtTest/QtTest>

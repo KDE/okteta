@@ -27,7 +27,7 @@
 // Kasten ui
 #include <togglebutton.h>
 #include <statusbar.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

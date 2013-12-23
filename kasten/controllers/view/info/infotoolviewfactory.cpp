@@ -25,7 +25,7 @@
 // lib
 #include "infotoolview.h"
 #include "infotool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

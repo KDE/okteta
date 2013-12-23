@@ -31,7 +31,7 @@
 #include "jobmanager.h"
 #include "documentmanager.h"
 #include "abstractexportjob.h"
-// KDE
+// KF5
 #include <kio/netaccess.h>
 #include <KLocalizedString>
 // Qt

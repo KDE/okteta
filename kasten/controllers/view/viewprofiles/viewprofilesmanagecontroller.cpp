@@ -26,7 +26,7 @@
 #include <bytearrayviewprofilemanager.h>
 // controller
 #include "viewprofilesmanagedialog.h"
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

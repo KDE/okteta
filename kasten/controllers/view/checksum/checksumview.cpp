@@ -29,7 +29,7 @@
 #include <abstractbytearraychecksumparametersetedit.h>
 #include <abstractbytearraychecksumparameterset.h>
 #include <abstractbytearraychecksumalgorithm.h>
-// KDE
+// KF5
 #include <KComboBox>
 #include <KLineEdit>
 #include <KGuiItem>

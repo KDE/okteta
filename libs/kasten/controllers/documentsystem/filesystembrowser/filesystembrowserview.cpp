@@ -24,7 +24,7 @@
 
 // lib
 #include "filesystembrowsertool.h"
-// KDE
+// KF5
 #include <KUrlNavigator>
 #include <KFilePlacesModel>
 #include <KDirOperator>

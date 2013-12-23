@@ -27,7 +27,7 @@
 //
 #include <addressrangelist.h>
 #include <arraychangemetricslist.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

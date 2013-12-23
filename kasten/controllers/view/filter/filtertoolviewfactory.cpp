@@ -25,7 +25,7 @@
 // lib
 #include "filtertoolview.h"
 #include "filtertool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

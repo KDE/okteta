@@ -25,7 +25,7 @@
 // lib
 #include "poddecodertoolview.h"
 #include "poddecodertool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

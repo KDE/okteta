@@ -23,7 +23,7 @@
 #include "bytearraycombobox_p.h"
 #include "bytearraycombobox.h"
 
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QLayout>

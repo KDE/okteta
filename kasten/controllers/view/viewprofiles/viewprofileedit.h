@@ -26,7 +26,7 @@
 // Qt
 #include <QWidget>
 
-// KDE
+// KF5
 class KLineEdit;
 class KComboBox;
 // Qt

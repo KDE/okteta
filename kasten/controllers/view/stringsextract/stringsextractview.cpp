@@ -25,7 +25,7 @@
 // tool
 #include "containedstringtablemodel.h"
 #include "stringsextracttool.h"
-// KDE
+// KF5
 #include <KLineEdit>
 #include <KGuiItem>
 #include <KLocalizedString>

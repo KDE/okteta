@@ -22,7 +22,7 @@
 
 #include "kreplaceprompt.h"
 
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QtWidgets/QDialogButtonBox>

@@ -23,7 +23,7 @@
 #ifndef BYTESPERLINEDIALOG_H
 #define BYTESPERLINEDIALOG_H
 
-// KDE
+// KF5
 #include <KDialog>
 
 class QSpinBox;

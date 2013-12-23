@@ -30,7 +30,7 @@
 // Okteta core
 #include <charcodec.h>
 #include <oktetacore.h>
-// KDE
+// KF5
 #include <KSqueezedTextLabel>
 #include <KComboBox>
 #include <KLocalizedString>

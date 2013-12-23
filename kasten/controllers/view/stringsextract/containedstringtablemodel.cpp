@@ -22,7 +22,7 @@
 
 #include "containedstringtablemodel.h"
 
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

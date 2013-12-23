@@ -23,7 +23,7 @@
 #ifndef KASTENCONTROLLERS_EXPORT_H
 #define KASTENCONTROLLERS_EXPORT_H
 
-// KDE
+// KF5
 #include <kdemacros.h>
 
 

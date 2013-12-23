@@ -25,7 +25,7 @@
 // tool
 #include "../types/binary8.h"
 #include "../poddata.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

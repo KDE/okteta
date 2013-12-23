@@ -27,7 +27,7 @@
 // lib
 #include <addresscombobox.h>
 #include <addressvalidator.h>
-// KDE
+// KF5
 #include <QPushButton>
 #include <KGuiItem>
 #include <KLocalizedString>

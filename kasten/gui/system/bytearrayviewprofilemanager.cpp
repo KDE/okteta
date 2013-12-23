@@ -25,7 +25,7 @@
 // library
 #include "bytearrayviewprofilelock.h"
 #include <oktetakastengui.h>
-// KDE
+// KF5
 #include <KConfigGroup>
 #include <KConfig>
 #include <KDirWatch>

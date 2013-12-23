@@ -35,7 +35,7 @@
 #include <abstractbytearraymodel.h>
 #include <valuecodec.h>
 #include <charcodec.h>
-// KDE
+// KF5
 #include <KGlobalSettings>
 // Qt
 #include <QtCore/QHash>

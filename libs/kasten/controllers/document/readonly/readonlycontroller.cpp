@@ -24,7 +24,7 @@
 
 // Kasten core
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

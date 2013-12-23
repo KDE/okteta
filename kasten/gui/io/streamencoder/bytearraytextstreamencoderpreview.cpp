@@ -24,7 +24,7 @@
 
 // lib
 #include "abstractbytearraystreamencoder.h"
-// KDE
+// KF5
 #include <KGlobalSettings>
 #include <KLocalizedString>
 // Qt

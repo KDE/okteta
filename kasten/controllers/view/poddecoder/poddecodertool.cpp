@@ -47,7 +47,7 @@
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

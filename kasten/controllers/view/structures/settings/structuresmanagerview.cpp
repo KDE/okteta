@@ -28,7 +28,7 @@
 #include "../structuresmanager.h"
 #include "../structtool.h"
 #include "../structlogging.h"
-// KDE
+// KF5
 #include <KPluginSelector>
 #include <KConfigDialogManager>
 #include <KPluginInfo>

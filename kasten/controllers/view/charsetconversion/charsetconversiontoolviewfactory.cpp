@@ -25,7 +25,7 @@
 // lib
 #include "charsetconversiontoolview.h"
 #include "charsetconversiontool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

@@ -49,7 +49,7 @@
 // e.g.
 // #include "algorithm/mybytearraychecksumalgorithm.h"
 // NEWCHECKSUM(end)
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

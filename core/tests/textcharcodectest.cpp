@@ -24,7 +24,7 @@
 
 // test object
 #include <codecs/textcharcodec.h>
-// KDE
+// KF5
 #include <QtTest/QTest>
 
 

@@ -26,7 +26,7 @@
 #include <documentsyncmanager.h>
 #include <abstractdocument.h>
 #include <abstractmodelsynchronizer.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <kio/global.h>
 // Qt

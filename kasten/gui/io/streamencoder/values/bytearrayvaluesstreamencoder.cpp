@@ -27,7 +27,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <valuecodec.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>

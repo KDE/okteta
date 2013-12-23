@@ -24,7 +24,7 @@
 
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

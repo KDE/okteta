@@ -24,7 +24,7 @@
 
 // lib
 #include "bytearraytextstreamencoderpreview.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KLineEdit>
 #include <KComboBox>

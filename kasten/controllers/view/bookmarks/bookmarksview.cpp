@@ -27,7 +27,7 @@
 #include "bookmarkstool.h"
 // Okteta core
 #include <bookmark.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KGuiItem>
 // Qt

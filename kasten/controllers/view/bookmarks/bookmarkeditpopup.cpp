@@ -24,7 +24,7 @@
 
 // Okteta core
 // #include <bookmark.h>
-// KDE
+// KF5
 #include <KLineEdit>
 #include <QIcon>
 

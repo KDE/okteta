@@ -26,7 +26,7 @@
 #include <bytearrayviewprofile.h>
 // Okteta core
 #include <charcodec.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KComboBox>
 #include <KLineEdit>

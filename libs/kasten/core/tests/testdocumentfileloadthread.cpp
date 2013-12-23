@@ -24,7 +24,7 @@
 
 // lib
 #include "testdocument.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QUrl>

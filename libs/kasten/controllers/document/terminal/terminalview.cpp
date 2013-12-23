@@ -24,7 +24,7 @@
 
 // lib
 #include "terminaltool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 #include <KServiceTypeTrader>
 #include <KParts/ReadOnlyPart>

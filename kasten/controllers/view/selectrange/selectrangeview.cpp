@@ -26,7 +26,7 @@
 #include "selectrangetool.h"
 // lib
 #include <addresscombobox.h>
-// KDE
+// KF5
 #include <QPushButton>
 #include <KGuiItem>
 #include <KLocalizedString>

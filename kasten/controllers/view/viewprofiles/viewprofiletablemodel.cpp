@@ -24,7 +24,7 @@
 
 // Okteta Gui Kasten
 #include <bytearrayviewprofilemanager.h>
-// KDE
+// KF5
 #include <KColorScheme>
 #include <KLocalizedString>
 // Qt

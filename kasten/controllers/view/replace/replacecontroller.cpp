@@ -26,7 +26,7 @@
 #include "kreplacedialog.h"
 #include "kreplaceprompt.h"
 #include "replacetool.h"
-// KDE
+// KF5
 #include <KXmlGuiWindow>
 #include <KLocalizedString>
 #include <KAction>

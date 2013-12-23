@@ -26,7 +26,7 @@
 // library
 #include "abstractfilesystemsyncfromremotejob.h"
 #include <abstractsyncfromremotejob_p.h>
-// KDE
+// KF5
 #include <QTemporaryFile>
 
 

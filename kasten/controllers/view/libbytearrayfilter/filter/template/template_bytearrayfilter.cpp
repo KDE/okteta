@@ -14,7 +14,7 @@
 
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

@@ -58,7 +58,7 @@
 #include <view/zoom/zoomcontroller.h>
 #include <view/zoom/zoombarcontroller.h>
 #include <view/select/selectcontroller.h>
-// KDE
+// KF5
 #include <KActionCollection>
 // Qt
 #include <QWidget>

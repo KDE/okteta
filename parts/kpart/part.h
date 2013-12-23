@@ -25,7 +25,7 @@
 
 // Kasten
 #include <kastencore.h>
-// KDE
+// KF5
 #include <KParts/ReadWritePart>
 
 namespace Kasten2 {

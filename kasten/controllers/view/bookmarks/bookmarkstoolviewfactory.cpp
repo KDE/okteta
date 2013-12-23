@@ -25,7 +25,7 @@
 // lib
 #include "bookmarkstoolview.h"
 #include "bookmarkstool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

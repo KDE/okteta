@@ -36,7 +36,7 @@
 #include <abstractsyncwithremotejob.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
+// KF5
 #include <KLocale>
 #include <QtTest/QTest>
 // Qt

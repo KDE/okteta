@@ -28,7 +28,7 @@
 #include <bytearraycombobox.h>
 // Okteta core
 #include <charcodec.h>
-// KDE
+// KF5
 #include <KMessageBox>
 #include <KComboBox>
 #include <KGuiItem>

@@ -25,7 +25,7 @@
 // lib
 #include "checksumtoolview.h"
 #include "checksumtool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

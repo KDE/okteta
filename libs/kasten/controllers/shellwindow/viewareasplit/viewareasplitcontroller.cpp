@@ -27,7 +27,7 @@
 #include <viewareasplitable.h>
 #include <abstractviewarea.h>
 #include <viewmanager.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KAction>

@@ -23,7 +23,7 @@
 #ifndef OKTETAPARTFACTORY_H
 #define OKTETAPARTFACTORY_H
 
-// KDE
+// KF5
 #include <KParts/Factory>
 
 namespace Kasten2 {

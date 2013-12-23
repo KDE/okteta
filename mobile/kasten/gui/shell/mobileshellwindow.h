@@ -25,7 +25,7 @@
 
 // Kasten gui
 #include "mobilekastengui_export.h"
-// KDE
+// KF5
 #include <KMainWindow>
 // Qt
 #include <QtCore/QList>

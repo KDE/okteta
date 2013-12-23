@@ -30,7 +30,7 @@
 #include <bookmarksconstiterator.h>
 #include <bookmark.h>
 #include <abstractbytearraymodel.h>
-// KDE
+// KF5
 #include <KBookmarkManager>
 #include <KBookmarkGroup>
 

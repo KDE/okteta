@@ -28,7 +28,7 @@
 #include <QList>
 #include <QStringList>
 #include <QDir>
-// KDE
+// KF5
 #include <KSharedConfig>
 #include <KPluginInfo>
 

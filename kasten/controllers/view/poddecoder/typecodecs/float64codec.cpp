@@ -25,7 +25,7 @@
 // tool
 #include "../types/float64.h"
 #include "../poddata.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 

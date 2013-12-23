@@ -26,7 +26,7 @@
 #include "podtablemodel.h"
 #include "poddelegate.h"
 #include "poddecodertool.h"
-// KDE
+// KF5
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KMessageBox>

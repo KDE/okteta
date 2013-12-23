@@ -30,7 +30,7 @@
 #include <abstractbytearrayview.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
+// KF5
 #include <KGlobalSettings>
 
 

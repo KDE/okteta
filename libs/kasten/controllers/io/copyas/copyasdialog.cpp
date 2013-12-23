@@ -25,7 +25,7 @@
 // Kasten gui
 #include <abstractmodelstreamencoderconfigeditor.h>
 #include <abstractselectionview.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QSplitter>

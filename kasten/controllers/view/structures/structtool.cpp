@@ -32,7 +32,7 @@
 #include <character.h>
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 //Qt
 #include <QModelIndex>

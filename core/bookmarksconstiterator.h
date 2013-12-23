@@ -26,7 +26,7 @@
 // lib
 #include "bookmarksconstiteratoradapter.h"
 #include "oktetacore_export.h"
-// KDE
+// KF5
 #include <KSharedPtr>
 
 

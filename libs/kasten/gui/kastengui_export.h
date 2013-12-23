@@ -23,7 +23,7 @@
 #ifndef KASTENGUI_EXPORT_H
 #define KASTENGUI_EXPORT_H
 
-// KDE
+// KF5
 #include <kdemacros.h>
 
 

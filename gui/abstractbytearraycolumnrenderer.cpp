@@ -35,7 +35,7 @@
 #include <bookmarksconstiterator.h>
 #include <bookmark.h>
 #include <charcodec.h>
-// KDE
+// KF5
 #include <KColorScheme>
 // Qt
 #include <QtGui/QPainter>

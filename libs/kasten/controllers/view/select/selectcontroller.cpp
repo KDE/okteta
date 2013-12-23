@@ -25,7 +25,7 @@
 // Kasten gui
 #include <dataselectable.h>
 #include <abstractview.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KAction>

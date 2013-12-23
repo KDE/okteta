@@ -28,7 +28,7 @@
 #include <bytearrayview.h>
 // Okteta core
 #include <charcodec.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>

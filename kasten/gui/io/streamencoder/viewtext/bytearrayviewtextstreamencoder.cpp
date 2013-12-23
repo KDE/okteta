@@ -35,7 +35,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <character.h>
-// KDE
+// KF5
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>

@@ -25,7 +25,7 @@
 // lib
 #include "structtoolview.h"
 #include "structtool.h"
-// KDE
+// KF5
 #include <KLocalizedString>
 
 namespace Kasten2
