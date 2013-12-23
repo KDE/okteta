@@ -31,10 +31,8 @@ liboktetakastencontroller, all found in the subdir kasten/.
 The foundation of the framework Kasten itself is currently found within the
 Okteta sources, in the subdirectory libs/kasten/.
 
-The end-user products are the stand-alone program also named Okteta, a KPart
-useable e.g. for Konqueror, and a module implementing the service type
-KHexEdit/KBytesEdit as defined by some kdelibs interfaces. These are in the
-subdirs program/ and parts/.
+The end-user products are the stand-alone program also named Okteta and a KPart
+useable e.g. for Konqueror. These are in the subdirs program/ and parts/.
 
 
 What to find in which subdirectory:
@@ -53,9 +51,6 @@ kasten:
 
 parts:
   collection of plugins based on the Okteta libraries
-
-parts/kbytesedit:
-  plugin for the service type KHexEdit/KBytesEdit
 
 parts/kpart:
   plugin of the type KPart::ReadWritePart, with BrowserExtension
