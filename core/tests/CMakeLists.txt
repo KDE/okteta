@@ -1,3 +1,5 @@
+include(ECMAddTests)
+
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
@@ -15,203 +17,137 @@ set( oktetacoretestutil_LIB_SRCS
 kde4_add_library( oktetacoretestutil  STATIC ${oktetacoretestutil_LIB_SRCS} )
 target_link_libraries( oktetacoretestutil Qt5::Core )
 
-########### arraychangemetricstest ###############
-
-set( arraychangemetricstest_SRCS
+ecm_add_test(
   arraychangemetricstest.cpp
 #   ${SUTDIR}/arraychangemetrics.cpp
+  TEST_NAME arraychangemetricstest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES Qt5::Test
 )
 
-kde4_add_unit_test( arraychangemetricstest  TESTNAME libokteta-core-arraychangemetricstest  ${arraychangemetricstest_SRCS} )
-target_link_libraries( arraychangemetricstest Qt5::Test )
 
-
-########### addressrangetest ###############
-
-set( addressrangetest_SRCS
+ecm_add_test(
   addressrangetest.cpp
+  TEST_NAME addressrangetest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES testoktetacore Qt5::Test
 )
 
-kde4_add_unit_test( addressrangetest  TESTNAME libokteta-core-addressrangetest  ${addressrangetest_SRCS} )
-target_link_libraries( addressrangetest testoktetacore Qt5::Test )
 
-
-########### addressrangelisttest ###############
-
-set( addressrangelisttest_SRCS
+ecm_add_test(
   addressrangelisttest.cpp
+  TEST_NAME addressrangelisttest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES testoktetacore Qt5::Test
 )
 
-kde4_add_unit_test( addressrangelisttest  TESTNAME libokteta-core-addressrangelisttest  ${addressrangelisttest_SRCS} )
-target_link_libraries( addressrangelisttest  testoktetacore Qt5::Test )
 
-
-########### fixedsizebytearraymodeltest ###############
-
-set( fixedsizebytearraymodeltest_SRCS
+ecm_add_test(
   fixedsizebytearraymodeltest.cpp
+  TEST_NAME fixedsizebytearraymodeltest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n
 )
 
-kde4_add_unit_test( fixedsizebytearraymodeltest  TESTNAME libokteta-core-fixedsizebytearraymodeltest  ${fixedsizebytearraymodeltest_SRCS})
-target_link_libraries( fixedsizebytearraymodeltest
-  testoktetacore Qt5::Test KF5::I18n
-)
 
-
-########### fixedsizebytearraymodelabstractbytearraymodeliftest ###############
-
-set( fixedsizebytearraymodelabstractbytearraymodeliftest_SRCS
+ecm_add_test(
   abstractbytearraymodeliftest.cpp
   fixedsizebytearraymodelabstractbytearraymodeliftest.cpp
-)
-
-kde4_add_unit_test( fixedsizebytearraymodelabstractbytearraymodeliftest
-  TESTNAME libokteta-core-fixedsizebytearraymodelabstractbytearraymodeliftest
-  ${fixedsizebytearraymodelabstractbytearraymodeliftest_SRCS}
-)
-target_link_libraries( fixedsizebytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
+  TEST_NAME fixedsizebytearraymodelabstractbytearraymodeliftest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
 )
 
 
-########### bytearraymodeltest ###############
-
-set( bytearraymodeltest_SRCS
+ecm_add_test(
   bytearraymodeltest.cpp
+  TEST_NAME bytearraymodeltest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES ${oktetacore_LIB} Qt5::Test
 )
 
-kde4_add_unit_test( bytearraymodeltest  TESTNAME libokteta-core-bytearraymodeltest  ${bytearraymodeltest_SRCS} )
-target_link_libraries( bytearraymodeltest
-  ${oktetacore_LIB} Qt5::Test
-)
 
-
-########### bytearraymodelabstractbytearraymodeliftest ###############
-
-set( bytearraymodelabstractbytearraymodeliftest_SRCS
+ecm_add_test(
   abstractbytearraymodeliftest.cpp
   bytearraymodelabstractbytearraymodeliftest.cpp
-)
-
-kde4_add_unit_test( bytearraymodelabstractbytearraymodeliftest
-  TESTNAME libokteta-core-bytearraymodelabstractbytearraymodeliftest
-  ${bytearraymodelabstractbytearraymodeliftest_SRCS}
-)
-target_link_libraries( bytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
+  TEST_NAME bytearraymodelabstractbytearraymodeliftest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
 )
 
 
-########### piecetablebytearraymodelabstractbytearraymodeliftest ###############
-
-set( piecetablebytearraymodelabstractbytearraymodeliftest_SRCS
+ecm_add_test(
   abstractbytearraymodeliftest.cpp
   piecetablebytearraymodelabstractbytearraymodeliftest.cpp
-)
-
-kde4_add_unit_test( piecetablebytearraymodelabstractbytearraymodeliftest
-  TESTNAME libokteta-core-piecetablebytearraymodelabstractbytearraymodeliftest
-  ${piecetablebytearraymodelabstractbytearraymodeliftest_SRCS}
-)
-target_link_libraries( piecetablebytearraymodelabstractbytearraymodeliftest
-  oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
+  TEST_NAME piecetablebytearraymodelabstractbytearraymodeliftest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES oktetacoretestutil testoktetacore Qt5::Test KF5::I18n
 )
 
 
-########### piecetablebytearraymodelversionableiftest ###############
-
-set( piecetablebytearraymodelversionableiftest_SRCS
+ecm_add_test(
   versionableiftest.cpp
   piecetablebytearraymodelversionableiftest.cpp
-)
-
-kde4_add_unit_test( piecetablebytearraymodelversionableiftest
-  TESTNAME libokteta-core-piecetablebytearraymodelversionableiftest
-  ${piecetablebytearraymodelversionableiftest_SRCS}
-)
-target_link_libraries( piecetablebytearraymodelversionableiftest
-  oktetacoretestutil ${oktetacore_LIB} Qt5::Test
+  TEST_NAME piecetablebytearraymodelversionableiftest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES oktetacoretestutil ${oktetacore_LIB} Qt5::Test
 )
 
 
-########### valuecodectest ###############
-
-set( valuecodectest_SRCS
+ecm_add_test(
   valuecodectest.cpp
+  TEST_NAME valuecodectest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES ${oktetacore_LIB} Qt5::Test
 )
 
-kde4_add_unit_test( valuecodectest  TESTNAME libokteta-core-valuecodectest  ${valuecodectest_SRCS})
-target_link_libraries( valuecodectest
-  ${oktetacore_LIB} Qt5::Test
-)
 
-
-########### charcodectest ###############
-
-set( charcodectest_SRCS
+ecm_add_test(
   charcodectest.cpp
+  TEST_NAME charcodectest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES ${oktetacore_LIB} Qt5::Test KF5::I18n
 )
 
-kde4_add_unit_test( charcodectest  TESTNAME libokteta-core-charcodectest  ${charcodectest_SRCS})
-target_link_libraries( charcodectest
-  ${oktetacore_LIB} Qt5::Test KF5::I18n
-)
 
-
-########### textcharcodectest ###############
-
-set( textcharcodectest_SRCS
+ecm_add_test(
   textcharcodectest.cpp
+  TEST_NAME textcharcodectest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n KF5::Codecs KF5::KDE4Support
 )
 
-kde4_add_unit_test( textcharcodectest  TESTNAME libokteta-core-textcharcodectest  ${textcharcodectest_SRCS} )
-target_link_libraries( textcharcodectest
-  testoktetacore Qt5::Test KF5::I18n KF5::Codecs KF5::KDE4Support
-)
 
-
-########### textcharcodeccharcodeciftest ###############
-
-set( textcharcodeccharcodeciftest_SRCS
+ecm_add_test(
   charcodeciftest.cpp
   textcharcodeccharcodeciftest.cpp
+  TEST_NAME textcharcodeccharcodeciftest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n KF5::Codecs KF5::KDE4Support
 )
 
-kde4_add_unit_test( textcharcodeccharcodeciftest TESTNAME libokteta-core-textcharcodeccharcodeciftest  ${textcharcodeccharcodeciftest_SRCS} )
-target_link_libraries( textcharcodeccharcodeciftest
-  testoktetacore Qt5::Test KF5::I18n KF5::Codecs KF5::KDE4Support
-)
 
-
-########### ebcdic1047charcodeccharcodeciftest ###############
-
-set( ebcdic1047charcodeccharcodeciftest_SRCS
+ecm_add_test(
   charcodeciftest.cpp ebcdic1047charcodeccharcodeciftest.cpp
+  TEST_NAME ebcdic1047charcodeccharcodeciftest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES testoktetacore Qt5::Test
 )
 
-kde4_add_unit_test( ebcdic1047charcodeccharcodeciftest  TESTNAME libokteta-core-ebcdic1047charcodeccharcodeciftest  ${ebcdic1047charcodeccharcodeciftest_SRCS} )
-target_link_libraries( ebcdic1047charcodeccharcodeciftest
-  testoktetacore Qt5::Test
-)
 
-
-########### bookmarktest ###############
-
-set( bookmarktest_SRCS
+ecm_add_test(
   bookmarktest.cpp
+  TEST_NAME bookmarktest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES Qt5::Test
 )
 
-kde4_add_unit_test( bookmarktest  TESTNAME libokteta-core-bookmarktest  ${bookmarktest_SRCS} )
-target_link_libraries( bookmarktest Qt5::Test )
 
-
-########### bookmarklisttest ###############
-
-set( bookmarklisttest_SRCS
+ecm_add_test(
   bookmarklisttest.cpp
+  TEST_NAME bookmarklisttest
+  NAME_PREFIX libokteta-core-
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n
 )
-
-kde4_add_unit_test( bookmarklisttest  TESTNAME libokteta-core-bookmarklisttest  ${bookmarklisttest_SRCS} )
-target_link_libraries( bookmarklisttest testoktetacore Qt5::Test KF5::I18n )
 
 

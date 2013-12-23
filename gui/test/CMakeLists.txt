@@ -1,3 +1,5 @@
+include(ECMAddTests)
+
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
@@ -11,81 +13,57 @@ include_directories(
 )
 
 
-########### selectiontest ###############
-
-set( selectiontest_SRCS
+ecm_add_test(
   selectiontest.cpp
-)
-
-kde4_add_unit_test( selectiontest  TESTNAME libokteta-gui-selectiontest  ${selectiontest_SRCS} )
-target_link_libraries( selectiontest Qt5::Test )
+  TEST_NAME selectiontest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 
 set_tests_properties(libokteta-gui-selectiontest PROPERTIES LABELS OktetaLabel)
 
-########### coordtest ###############
-
-set( coordtest_SRCS
+ecm_add_test(
   coordtest.cpp
-)
+  TEST_NAME coordtest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 
-kde4_add_unit_test( coordtest  TESTNAME libokteta-gui-coordtest  ${coordtest_SRCS} )
-target_link_libraries( coordtest Qt5::Test )
 
-
-########### coordrangetest ###############
-
-set( coordrangetest_SRCS
+ecm_add_test(
   coordrangetest.cpp
-)
+  TEST_NAME coordrangetest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 
-kde4_add_unit_test( coordrangetest  TESTNAME libokteta-gui-coordrangetest  ${coordrangetest_SRCS} )
-target_link_libraries( coordrangetest Qt5::Test )
 
-
-########### coordrangelisttest ###############
-
-set( coordrangelisttest_SRCS
+ecm_add_test(
   ${SUTDIR}/coordrangelist.cpp
   coordrangelisttest.cpp
-)
+  TEST_NAME coordrangelisttest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 
-kde4_add_unit_test( coordrangelisttest  TESTNAME libokteta-gui-coordrangelisttest  ${coordrangelisttest_SRCS} )
-target_link_libraries( coordrangelisttest Qt5::Test )
 
-
-########### bytearraytablelayouttest ###############
-
-set( bytearraytablelayouttest_SRCS
+ecm_add_test(
   ${SUTDIR}/bytearraytablelayout.cpp
   bytearraytablelayouttest.cpp
-)
-
-kde4_add_unit_test( bytearraytablelayouttest
-  TESTNAME libokteta-gui-bytearraytablelayouttest
-  ${bytearraytablelayouttest_SRCS}
-)
-target_link_libraries( bytearraytablelayouttest Qt5::Test )
+  TEST_NAME bytearraytablelayouttest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
-set_target_properties( bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
+set_target_properties( libokteta-gui-bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
-########### bytearraytablecursortest ###############
-
-set( bytearraytablecursortest_SRCS
+ecm_add_test(
   ${SUTDIR}/bytearraytablecursor.cpp
   ${SUTDIR}/bytearraytablelayout.cpp
   bytearraytablecursortest.cpp
-)
-
-kde4_add_unit_test( bytearraytablecursortest
-  TESTNAME libokteta-gui-bytearraytablecursortest
-  ${bytearraytablecursortest_SRCS}
-)
-target_link_libraries( bytearraytablecursortest Qt5::Test )
+  TEST_NAME bytearraytablecursortest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
-set_target_properties( bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
+set_target_properties(libokteta-gui-bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
 ########### mvctest ###############
