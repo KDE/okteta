@@ -1,7 +1,5 @@
 project( kastengui )
 
-add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1804 )
-
 include_directories(
   ../core
   ../core/document

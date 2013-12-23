@@ -1,7 +1,5 @@
 project( oktetacore )
 
-add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1801 )
-
 set( libcontroller_SRCS
   controller/kchareditor.cpp
   controller/kcontroller.cpp

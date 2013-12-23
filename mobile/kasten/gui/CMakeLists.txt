@@ -1,5 +1,3 @@
-add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1804 )
-
 set( KASTEN_REL_DIR ../../../libs/kasten )
 
 include_directories(

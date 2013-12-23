@@ -1,7 +1,5 @@
 project( kastencontrollers )
 
-add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1805 )
-
 include_directories(
   ../core
   ../core/entity
