@@ -58,8 +58,7 @@ if (OKTETA_MOBILE_UI)
 endif (OKTETA_MOBILE_UI)
 
 add_definitions(
-    -DQT_USE_FAST_CONCATENATION
-    -DQT_USE_FAST_OPERATOR_PLUS
+    -DQT_USE_QSTRINGBUILDER
 )
 # switch between no cast to/from ascii and a warning about it
 if (KDE4_ASCII_CAST)
