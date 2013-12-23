@@ -29,8 +29,6 @@
 #include "../structtool.h"
 #include "../structlogging.h"
 // KDE
-#include <KStandardDirs>
-#include <KMessageBox>
 #include <KPluginSelector>
 #include <KConfigDialogManager>
 #include <KPluginInfo>

@@ -30,7 +30,6 @@
 #include <KIconLoader>
 #include <KSeparator>
 #include <KSqueezedTextLabel>
-#include <KDateTime>
 #include <kio/global.h>
 // Qt
 #include <QtGui/QFont>

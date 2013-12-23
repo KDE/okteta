@@ -34,7 +34,6 @@
 #include <abstractbytearraymodel.h>
 // KDE
 #include <KLocalizedString>
-#include <KStandardDirs>
 //Qt
 #include <QModelIndex>
 
