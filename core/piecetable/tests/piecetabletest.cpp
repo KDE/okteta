@@ -947,7 +947,6 @@ void PieceTableTest::testSwap()
     // moving a lot:
     const int pieceCount = 5;
     const Size fullSize = pieceCount * BaseSize;
-    const int midPiece = (pieceCount+1)/2;
 
     // moving start of piece at start
     fillWithSize( &pieceTable, pieceCount );
