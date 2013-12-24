@@ -25,8 +25,8 @@
 
 // lib
 #include "kastencore_export.h"
-// KF5
-#include <KSharedPtr>
+// Qt
+#include <QtCore/QExplicitlySharedDataPointer>
 
 class QIcon;
 class QString;
@@ -59,7 +59,7 @@ class KASTENCORE_EXPORT Person
 
   protected:
     class Private;
-    KSharedPtr<Private> d;
+    QExplicitlySharedDataPointer<Private> d;
 };
 
 }
