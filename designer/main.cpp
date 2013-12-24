@@ -25,7 +25,9 @@
 // Qt
 #include <QtCore/QtPlugin>
 
+#ifdef __GNUC__
 #pragma message("TODO: Q_EXPORT_PLUGIN2 does not work with Qt5, fix it")
+#endif
 #if 0
 Q_EXPORT_PLUGIN2( oktetadesignerplugin, OktetaWidgetDesignerFactoryCollection )
 #endif
