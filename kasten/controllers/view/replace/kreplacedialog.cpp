@@ -47,11 +47,11 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
     setFindButton( i18nc("@action;button", "&Replace"),
                    QStringLiteral("edit-find-replace"),
                    i18nc("@info:tooltip","Start replace"),
-                   i18nc("@info:whatsthis",
-                         "If you press the <interface>Replace</interface> button, "
-                         "the bytes you entered above are searched for within "
-                         "the byte array and any occurrence is replaced with "
-                         "the replacement bytes.") );
+                   xi18nc("@info:whatsthis",
+                          "If you press the <interface>Replace</interface> button, "
+                          "the bytes you entered above are searched for within "
+                          "the byte array and any occurrence is replaced with "
+                          "the replacement bytes.") );
 
     setupFindBox();
 

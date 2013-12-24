@@ -84,10 +84,10 @@ CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,
                                                 i18nc("@action:button","&Copy to clipboard"));
     exportButton->setToolTip(i18nc("@info:tooltip",
                                    "Copy the selected data to the clipboard."));
-    exportButton->setWhatsThis(i18nc("@info:whatsthis",
-                                     "If you press the <interface>Copy to clipboard</interface> "
-                                     "button, the selected data will be copied to the clipboard "
-                                     "with the settings you entered above."));
+    exportButton->setWhatsThis(xi18nc("@info:whatsthis",
+                                      "If you press the <interface>Copy to clipboard</interface> "
+                                      "button, the selected data will be copied to the clipboard "
+                                      "with the settings you entered above."));
 
     dialogButtonBox->addButton( exportButton, QDialogButtonBox::AcceptRole );
     connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );

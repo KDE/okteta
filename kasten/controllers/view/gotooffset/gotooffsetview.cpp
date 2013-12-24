@@ -108,10 +108,10 @@ GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )
                   QStringLiteral("go-jump"),
                   i18nc("@info:tooltip",
                         "Go to the Offset"),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Go</interface> "
-                        "button, the cursor will be moved in the document to or, "
-                        "on your option, by the offset you entered above.") );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Go</interface> "
+                         "button, the cursor will be moved in the document to or, "
+                         "on your option, by the offset you entered above.") );
     mGotoButton = new QPushButton( this );
     KGuiItem::assign( mGotoButton, gotoGuiItem );
     connect( mGotoButton, &QPushButton::clicked, this, &GotoOffsetView::onGotoButtonClicked );

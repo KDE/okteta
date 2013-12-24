@@ -122,10 +122,10 @@ SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
                   QString(),
                   i18nc("@info:tooltip",
                         "Select the range."),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Select</interface> "
-                        "button, the cursor will be moved in the document to or, "
-                        "on your option, by the offset you entered above.") );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Select</interface> "
+                         "button, the cursor will be moved in the document to or, "
+                         "on your option, by the offset you entered above.") );
     mSelectButton = new QPushButton( this );
     KGuiItem::assign( mSelectButton, selectGuiItem );
     connect( mSelectButton, &QPushButton::clicked, this, &SelectRangeView::onSelectButtonClicked );

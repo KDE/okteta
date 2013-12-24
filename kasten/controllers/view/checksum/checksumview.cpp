@@ -90,9 +90,9 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
                   QStringLiteral("run-build"),
                   i18nc("@info:tooltip",
                         "Calculate the checksum for the bytes in the selected range."),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Calculate</interface> button, the list will be updated "
-                        "to all strings which are contained in the selected range and have the set minimum length.") );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Calculate</interface> button, the list will be updated "
+                         "to all strings which are contained in the selected range and have the set minimum length.") );
     mCalculateButton = new QPushButton( this );
     KGuiItem::assign( mCalculateButton, updateGuiItem );
     mCalculateButton->setEnabled( mTool->isApplyable() );

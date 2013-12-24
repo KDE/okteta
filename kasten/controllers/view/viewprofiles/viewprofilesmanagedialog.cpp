@@ -78,11 +78,11 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
                      QStringLiteral("document-new"),
                      i18nc("@info:tooltip",
                            "Opens an editor for a new view profile."),
-                     i18nc("@info:whatsthis",
-                           "If you press the <interface>Create new...</interface> button, "
-                           "an editor is opened where you can create and edit a new view profile. "
-                           "The values will be based on the ones of the view profile you selected "
-                           "in the list.")) );
+                     xi18nc("@info:whatsthis",
+                            "If you press the <interface>Create new...</interface> button, "
+                            "an editor is opened where you can create and edit a new view profile. "
+                            "The values will be based on the ones of the view profile you selected "
+                            "in the list.")) );
     connect( createButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onCreateNewButtonClicked );
     buttonLayout->addWidget( createButton );
     mEditButton = new QPushButton;
@@ -92,10 +92,10 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
                      QStringLiteral("document-edit"),
                      i18nc("@info:tooltip",
                            "Opens an editor for the view profile."),
-                     i18nc("@info:whatsthis",
-                           "If you press the <interface>Edit...</interface> button, "
-                           "an editor will be opened for the view profile you selected "
-                           "in the list.")) );
+                     xi18nc("@info:whatsthis",
+                            "If you press the <interface>Edit...</interface> button, "
+                            "an editor will be opened for the view profile you selected "
+                            "in the list.")) );
     connect( mEditButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onEditButtonClicked );
     buttonLayout->addWidget( mEditButton );
     mSetDefaultButton = new QPushButton;
@@ -105,9 +105,9 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
                      QString(),
                      i18nc("@info:tooltip",
                            "Sets the selected view profile as default for all views."),
-                     i18nc("@info:whatsthis",
-                           "If you press the <interface>Set as Default</interface> button, "
-                           "the view profile you selected in the list is set as default for all views.")) );
+                     xi18nc("@info:whatsthis",
+                            "If you press the <interface>Set as Default</interface> button, "
+                            "the view profile you selected in the list is set as default for all views.")) );
     connect( mSetDefaultButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onSetDefaultButtonClicked );
     buttonLayout->addWidget( mSetDefaultButton );
     mDeleteButton = new QPushButton;
@@ -117,9 +117,9 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
                      QStringLiteral("list-remove"),
                      i18nc("@info:tooltip",
                            "Deletes the selected view profile."),
-                     i18nc("@info:whatsthis",
-                           "If you press the <interface>Delete</interface> button, "
-                           "the view profile you selected in the list is deleted.")) );
+                     xi18nc("@info:whatsthis",
+                            "If you press the <interface>Delete</interface> button, "
+                            "the view profile you selected in the list is deleted.")) );
     connect( mDeleteButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onDeleteButtonClicked );
     buttonLayout->addWidget( mDeleteButton );
     buttonLayout->addStretch();

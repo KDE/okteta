@@ -131,7 +131,7 @@ Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
     if( newValueSize < oldValueSize )
     {
         const QString message =
-            i18nc( "@info",
+            xi18nc( "@info",
                     "The new value needs <emphasis>fewer</emphasis> bytes (%1 instead of %2).<nl/>"
                     "Keep the unused bytes or remove them?", newValueSize, oldValueSize );
 
@@ -149,7 +149,7 @@ Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
     else
     {
         const QString message =
-            i18nc( "@info",
+            xi18nc( "@info",
                     "The new value needs <emphasis>more</emphasis> bytes (%1 instead of %2).<nl/>"
                     "Overwrite the following bytes or insert new ones as needed?", newValueSize, oldValueSize );
 

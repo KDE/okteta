@@ -164,11 +164,11 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
                   QStringLiteral("run-build"),
                   i18nc("@info:tooltip",
                         "Converts the bytes in the selected range."),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Convert</interface> button, "
-                        "all bytes in the selected range "
-                        "will be replaced by bytes which represent the same character "
-                        "in the selected target charset.") );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Convert</interface> button, "
+                         "all bytes in the selected range "
+                         "will be replaced by bytes which represent the same character "
+                         "in the selected target charset.") );
     mConvertButton = new QPushButton( this );
     KGuiItem::assign( mConvertButton, convertGuiItem );
     connect( mConvertButton, &QPushButton::clicked, this, &CharsetConversionView::onConvertButtonClicked );

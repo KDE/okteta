@@ -91,9 +91,9 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     KGuiItem::assign( mFilterButton, KGuiItem(i18nc("@action:button","&Filter"),
                       QStringLiteral("run-build"),
                       i18nc("@info:tooltip","Executes the filter for the bytes in the selected range."),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Filter</interface> button, the operation you selected "
-                            "above is executed for the bytes in the selected range with the given options.")) );
+                      xi18nc("@info:whatsthis",
+                             "If you press the <interface>Filter</interface> button, the operation you selected "
+                             "above is executed for the bytes in the selected range with the given options.")) );
     mFilterButton->setEnabled( mTool->hasWriteable() );
     connect( mTool, &FilterTool::hasWriteableChanged, this, &FilterView::onHasWriteableChanged );
     connect( mTool, &FilterTool::charCodecChanged, this, &FilterView::onCharCodecChanged );

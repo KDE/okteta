@@ -75,10 +75,10 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
                   QStringLiteral("document-export"),
                   i18nc("@info:tooltip",
                         "Finds the strings contained in the selected range and lists them in the view below."),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Extract</interface> button, "
-                        "the selected range is searched for all strings which have the set minimum length. "
-                        "This strings found will be listed in the view below.") );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Extract</interface> button, "
+                         "the selected range is searched for all strings which have the set minimum length. "
+                         "This strings found will be listed in the view below.") );
     mUpdateButton = new QPushButton( this );
     KGuiItem::assign( mUpdateButton, updateGuiItem );
     mUpdateButton->setEnabled( mTool->isApplyable() );
@@ -148,9 +148,9 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
                   QStringLiteral("edit-copy"),
                   i18nc("@info:tooltip",
                         "Copies the selected strings to the clipboard."),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Copy</interface> button, all strings you selected "
-                        "in the list are copied to the clipboard.") );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Copy</interface> button, all strings you selected "
+                         "in the list are copied to the clipboard.") );
     mCopyButton = new QPushButton( this );
     KGuiItem::assign( mCopyButton, copyGuiItem );
     connect( mCopyButton, &QPushButton::clicked, this, &StringsExtractView::onCopyButtonClicked );
@@ -163,9 +163,9 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
                   QStringLiteral("go-jump"),
                   i18nc("@info:tooltip",
                         "Shows the selected string in the view."),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Go to</interface> button, the string which was last "
-                        "selected is marked and shown in the view.") );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Go to</interface> button, the string which was last "
+                         "selected is marked and shown in the view.") );
     mGotoButton = new QPushButton( this );
     KGuiItem::assign( mGotoButton, gotoGuiItem );
     connect( mGotoButton, &QPushButton::clicked, this, &StringsExtractView::onGotoButtonClicked );

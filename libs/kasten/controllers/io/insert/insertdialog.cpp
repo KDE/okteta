@@ -54,10 +54,10 @@ InsertDialog::InsertDialog( AbstractModelDataGeneratorConfigEditor* configEditor
     QPushButton* insertButton = new QPushButton(i18nc("@action:button","&Insert"));
     insertButton->setToolTip(i18nc("@info:tooltip",
                                    "Insert the generated data into the document."));
-    insertButton->setWhatsThis(i18nc("@info:whatsthis",
-                                     "If you press the <interface>Insert</interface> button, "
-                                     "the data will be generated with the settings you entered above "
-                                     "and inserted into the document at the cursor position."));
+    insertButton->setWhatsThis(xi18nc("@info:whatsthis",
+                                      "If you press the <interface>Insert</interface> button, "
+                                      "the data will be generated with the settings you entered above "
+                                      "and inserted into the document at the cursor position."));
 
     dialogButtonBox->addButton( insertButton, QDialogButtonBox::AcceptRole );
     connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );

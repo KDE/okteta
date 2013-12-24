@@ -84,10 +84,10 @@ ExportDialog::ExportDialog( const QString& remoteTypeName,
                                                 i18nc("@action:button","&Export to File..."));
     exportButton->setToolTip(i18nc("@info:tooltip",
                                    "Export the selected data to a file."));
-    exportButton->setWhatsThis(i18nc("@info:whatsthis",
-                                     "If you press the <interface>Export to file</interface> "
-                                     "button, the selected data will be copied to a file "
-                                     "with the settings you entered above."));
+    exportButton->setWhatsThis(xi18nc("@info:whatsthis",
+                                      "If you press the <interface>Export to file</interface> "
+                                      "button, the selected data will be copied to a file "
+                                      "with the settings you entered above."));
 
     dialogButtonBox->addButton( exportButton, QDialogButtonBox::AcceptRole );
     connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );

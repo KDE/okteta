@@ -56,10 +56,10 @@ CreateDialog::CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor
                                                 i18nc("@action:button create the new document","&Create"));
     createButton->setToolTip(i18nc("@info:tooltip",
                                    "Create a new document with the generated data."));
-    createButton->setWhatsThis(i18nc("@info:whatsthis",
-                                     "If you press the <interface>Create</interface> button, "
-                                     "the data will be generated with the settings you entered above "
-                                     "and inserted in a new document."));
+    createButton->setWhatsThis(xi18nc("@info:whatsthis",
+                                      "If you press the <interface>Create</interface> button, "
+                                      "the data will be generated with the settings you entered above "
+                                      "and inserted in a new document."));
 
     dialogButtonBox->addButton( createButton, QDialogButtonBox::AcceptRole );
     connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );

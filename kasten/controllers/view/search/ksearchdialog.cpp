@@ -40,10 +40,10 @@ KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )
     setFindButton( i18nc("@action:button","&Find"),
                    QStringLiteral("edit-find"),
                    i18nc("@info:tooltip","Start searching"),
-                   i18nc("@info:whatsthis",
-                         "If you press the <interface>Find</interface> button, "
-                         "the bytes you entered above are searched for within "
-                         "the byte array.") );
+                   xi18nc("@info:whatsthis",
+                          "If you press the <interface>Find</interface> button, "
+                          "the bytes you entered above are searched for within "
+                          "the byte array.") );
 
     setupFindBox();
     setupOperationBox();

@@ -73,9 +73,9 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
                  QStringLiteral("run-build"),
                  i18nc("@info:tooltip",
                        "Builds the byte frequency statistic for the bytes in the selected range."),
-                 i18nc("@info:whatsthis",
-                       "If you press the <interface>Build</interface> button,"
-                       " the byte frequency statistic is built for the bytes in the selected range.") );
+                 xi18nc("@info:whatsthis",
+                        "If you press the <interface>Build</interface> button,"
+                        " the byte frequency statistic is built for the bytes in the selected range.") );
     mUpdateButton = new QPushButton( this );
     KGuiItem::assign( mUpdateButton, updateGuiItem );
     mUpdateButton->setEnabled( mTool->isApplyable() );
