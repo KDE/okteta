@@ -37,8 +37,6 @@ bool JobManager::executeJob( KJob* job )
     if( ! job )
         return false;
 
-    //TODO linking to QtWidgets in core library should be avoided
-#pragma message("TODO: no longer link to QtGui")
     QGuiApplication::setOverrideCursor( Qt::WaitCursor );
 
     job->exec();
