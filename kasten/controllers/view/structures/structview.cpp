@@ -44,8 +44,9 @@
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KConfigDialog>
-#include <KDialog>
 // Qt
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
 #include <QLabel>
 #include <QLayout>
 #include <QTreeView>
@@ -273,8 +274,14 @@ void StructView::setLockButtonState(bool structureLocked)
 
 void StructView::openScriptConsole()
 {
-    KDialog* dialog = new KDialog(this);
-    dialog->setMainWidget(new ScriptLoggerView(mTool->allData()));
+    QDialog* dialog = new QDialog(this);
+    QVBoxLayout* layout = new QVBoxLayout;
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    QPushButton* closeButton = dialogButtonBox->addButton( QDialogButtonBox::Close );
+    connect( closeButton, &QPushButton::clicked, dialog, &QDialog::accept );
+    layout->addWidget( new ScriptLoggerView(mTool->allData()) );
+    layout->addWidget( dialogButtonBox );
+    dialog->setLayout( layout );
     dialog->show();
 }
 
