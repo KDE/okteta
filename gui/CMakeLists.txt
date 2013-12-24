@@ -130,6 +130,7 @@ target_link_libraries( ${oktetagui_LIB} LINK_PUBLIC
 target_link_libraries( ${oktetagui_LIB} LINK_PRIVATE
   KF5::I18n
   KF5::ConfigWidgets
+  KF5::KDE4Support
 )
 set_target_properties( ${oktetagui_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetagui_LIB_NAME}

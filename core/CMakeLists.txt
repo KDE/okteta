@@ -148,7 +148,7 @@ install( FILES ${oktetacore_LIB_CCHDRS}
 
 if(BUILD_TESTING)
   add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
-  target_link_libraries( testoktetacore Qt5::Core )
+  target_link_libraries( testoktetacore Qt5::Core KF5::KDE4Support)
   add_subdirectory( piecetable/tests )
   add_subdirectory( tests )
 endif()

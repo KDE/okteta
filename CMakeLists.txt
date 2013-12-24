@@ -27,7 +27,6 @@ endif()
 
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC TRUE )
-include_directories( ${KDE4_INCLUDES} )
 
 include(FeatureSummary)
 
