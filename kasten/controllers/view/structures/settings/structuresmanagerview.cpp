@@ -33,10 +33,11 @@
 #include <KConfigDialogManager>
 #include <KPluginInfo>
 #include <KLocalizedString>
-#include <KDialog>
 //KNS
 #include <KNS3/KNewStuffButton>
 // Qt
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QLayout>
@@ -104,8 +105,16 @@ QStringList StructuresManagerView::values()
 void StructuresManagerView::advancedSelection()
 {
     StructureAddRemoveWidget* advancedSelectionWidget = new StructureAddRemoveWidget(mSelectedStructures, mTool, this);
-    QPointer<KDialog> dlg = new KDialog(this); //the dlg-on-heap-variant
-    dlg->setMainWidget(advancedSelectionWidget);
+    QPointer<QDialog> dlg = new QDialog(this); //the dlg-on-heap-variant
+    QVBoxLayout* layout = new QVBoxLayout;
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    dialogButtonBox->addButton(QDialogButtonBox::Ok);
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, dlg.data(), &QDialog::accept);
+    dialogButtonBox->addButton(QDialogButtonBox::Cancel);
+    connect(dialogButtonBox, &QDialogButtonBox::rejected, dlg.data(), &QDialog::reject);
+    layout->addWidget(advancedSelectionWidget);
+    layout->addWidget(dialogButtonBox);
+    dlg->setLayout(layout);
     if (dlg->exec() == QDialog::Accepted) {
         QStringList newVals = advancedSelectionWidget->values();
         if (newVals != mSelectedStructures) {
