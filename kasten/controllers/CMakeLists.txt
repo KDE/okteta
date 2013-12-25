@@ -394,6 +394,9 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
 #create a OBJECT library (http://www.cmake.org/Wiki/CMake/Tutorials/Object_Library)
 #to prevent compiling these object files twice with exactly the same compile flags
 
+# compile flags don't get set for object libraries, since cannot link to target
+#TODO: find out how to properly use targets for object libraries
+if ( FALSE )
 add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
 target_include_directories( poddecoder_objs PUBLIC
   $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
@@ -411,6 +414,10 @@ target_include_directories( structview_objs PUBLIC
 set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
 set( STRUCTVIEW_OBJS $<TARGET_OBJECTS:structview_objs>)
+endif()
+
+set( PODDECODER_OBJS ${PODDECODERCONTROLLER_SRCS})
+set( STRUCTVIEW_OBJS ${STRUCTVIEW_TESTED_SRCS})
 
 
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
@@ -617,6 +624,6 @@ set( okteta_kastencontrollers_templates_SRCS
 )
 
 kde4_add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
-target_link_libraries( oktetakastencontrollertemplates Qt5::Widgets  KF5::KDE4Support)
+target_link_libraries( oktetakastencontrollertemplates Qt5::Widgets KF5::KDE4Support ${oktetacore_LIB} )
 
 endif( KASTEN_BUILD_INTERNAL_TEMPLATES )

@@ -75,7 +75,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/kcursor.cpp PROPERTIES L
 
 set( oktetagui_LIB_HDRS
   ${libcolumnsview_HDRS}
-  oktetagui_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetagui_export.h
   oktetagui.h
   lineposition.h
   line.h
@@ -127,6 +127,10 @@ target_link_libraries( ${oktetagui_LIB} LINK_PUBLIC
   ${oktetacore_LIB}
   Qt5::Widgets
 )
+
+generate_export_header( ${oktetagui_LIB} )
+target_include_directories( ${oktetagui_LIB} PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
+
 target_link_libraries( ${oktetagui_LIB} LINK_PRIVATE
   KF5::I18n
   KF5::ConfigWidgets

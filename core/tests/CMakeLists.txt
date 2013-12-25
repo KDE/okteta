@@ -1,13 +1,15 @@
 include(ECMAddTests)
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
-set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
-include_directories( ${SUTDIR} )
+include_directories(
+  ${CMAKE_CURRENT_BINARY_DIR}/.. # for oktetacore_export.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/.. # okteta core includes
+)
 
 # make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
 # against a small part of the libs
-add_definitions(-DOKTETACORE_EXPORT=)
+add_definitions(-DOKTETACORE_STATIC_DEFINE)
 
 # helper
 set( oktetacoretestutil_LIB_SRCS
@@ -19,7 +21,7 @@ target_link_libraries( oktetacoretestutil Qt5::Core )
 
 ecm_add_test(
   arraychangemetricstest.cpp
-#   ${SUTDIR}/arraychangemetrics.cpp
+#  ${CMAKE_CURRENT_SOURCE_DIR}/../arraychangemetrics.cpp
   TEST_NAME arraychangemetricstest
   NAME_PREFIX libokteta-core-
   LINK_LIBRARIES Qt5::Test

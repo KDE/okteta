@@ -12,10 +12,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools Xml Network Designer PrintSupport)
-if (BUILD_TESTING)
-  find_package(Qt5Test REQUIRED NO_MODULE)
-endif()
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools Xml Network Designer PrintSupport Test)
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions for now
 
 find_package(KF5 CONFIG REQUIRED COMPONENTS NewStuff KCMUtils PrintUtils Codecs I18n ConfigWidgets
@@ -27,7 +24,6 @@ endif()
 
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_AUTOMOC TRUE )
-
 include(FeatureSummary)
 
 find_package(QCA2)

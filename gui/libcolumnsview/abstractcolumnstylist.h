@@ -25,6 +25,9 @@
 
 // lib
 #include "oktetagui_export.h"
+// Qt
+#include <QtGlobal>
+
 
 class QPalette;
 

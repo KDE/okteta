@@ -5,13 +5,13 @@ set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 # make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
 # against a small part of the libs
-add_definitions( -DOKTETACORE_EXPORT= )
-add_definitions( -DOKTETAGUI_EXPORT= )
+add_definitions( -DOKTETACORE_STATIC_DEFINE -DOKTETAGUI_STATIC_DEFINE )
 
 include_directories(
   ${SUTDIR}
+  ${CMAKE_CURRENT_BINARY_DIR}/..
+  ${CMAKE_CURRENT_BINARY_DIR}/../../core
 )
-
 
 ecm_add_test(
   selectiontest.cpp

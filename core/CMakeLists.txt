@@ -53,7 +53,7 @@ set( oktetacore_LIB_SRCS
 )
 
 set( oktetacore_LIB_HDRS
-  oktetacore_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetacore_export.h
   oktetacore.h
   address.h
   size.h
@@ -116,7 +116,7 @@ set( oktetacore_LIB_CCHDRS
 #set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
 
 # compile flags don't get set for object libraries, since cannot link to target
-#TODO: find out how to properly use targets
+#TODO: find out how to properly use targets for object libraries
 set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS} )
 
 
@@ -127,6 +127,9 @@ target_link_libraries( ${oktetacore_LIB} LINK_PRIVATE
   KF5::KDE4Support
   KF5::Codecs   #needed for codecs
 )
+
+generate_export_header( ${oktetacore_LIB} )
+target_include_directories( ${oktetacore_LIB} PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
 
 set_target_properties( ${oktetacore_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetacore_LIB_NAME}
@@ -148,7 +151,9 @@ install( FILES ${oktetacore_LIB_CCHDRS}
 
 if(BUILD_TESTING)
   add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
-  target_link_libraries( testoktetacore Qt5::Core KF5::KDE4Support)
+  set_target_properties( testoktetacore PROPERTIES COMPILE_FLAGS -DOKTETACORE_STATIC_DEFINE )
+  target_include_directories( testoktetacore PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
+  target_link_libraries( testoktetacore Qt5::Core KF5::KDE4Support )
   add_subdirectory( piecetable/tests )
   add_subdirectory( tests )
 endif()
