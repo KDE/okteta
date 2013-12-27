@@ -114,7 +114,7 @@ set( oktetacore_LIB_CCHDRS
 
 #TODO remove once CMake >= 2.8.9 is required for building KDE
 #don't compile sources twice
-if ( CMAKE_VERSION VERSION_GREATER 2.8.8)
+if ( CMAKE_VERSION VERSION_GREATER 2.8.8 AND NOT WIN32)
     #OBJECT libraries seem buggy with regard to automoc, have to call it manually
     automoc4( oktetacore_objs oktetacore_LIB_SRCS )
     add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
@@ -151,4 +151,5 @@ add_subdirectory( piecetable/tests )
 add_subdirectory( tests )
 if(KDE4_BUILD_TESTS)
   kde4_add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
+  set_target_properties(testoktetacore PROPERTIES COMPILE_FLAGS -DOKTETACORE_EXPORT=)
 endif(KDE4_BUILD_TESTS)

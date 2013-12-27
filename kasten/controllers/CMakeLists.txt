@@ -395,7 +395,7 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
 #create a OBJECT library (http://www.cmake.org/Wiki/CMake/Tutorials/Object_Library)
 #to prevent compiling these object files twice with exactly the same compile flags
 #TODO remove once CMake >= 2.8.9 is required for building KDE
-if ( CMAKE_VERSION VERSION_GREATER 2.8.8)
+if ( CMAKE_VERSION VERSION_GREATER 2.8.8 AND NOT WIN32)
     #OBJECT libraries seem buggy with regard to automoc, have to call it manually
     automoc4( poddecoder_objs PODDECODERCONTROLLER_SRCS )
     automoc4( structview_objs STRUCTVIEW_SRCS )
@@ -457,6 +457,7 @@ target_link_libraries ( structures-static
   ${KASTENCORE_LIBS}
   #${KASTENGUI_LIBS}
 )
+set_target_properties( structures-static PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 
 macro(structures_unit_test _testtarget _testname)
     #message("ARGC='${ARGC}' ARGV='${ARGV}' ARGN='${ARGN}'")
