@@ -136,7 +136,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         returnVal = toPrimitive(value, info);
 
     else
-        info.error() << "Unkown type:" << type;
+        info.error() << "Unknown type:" << type;
 
     if (returnVal)
     {

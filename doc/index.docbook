@@ -38,11 +38,10 @@
 <year>2008, 2010, 2011</year>
 <holder>&Friedrich.Kossebau; and &Alex.Richardson;</holder>
 </copyright>
-<!--FIXME http://frinring.files.wordpress.com/2012/08/okteta-0-9-new-features.png-->
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2012-08-20</date>
-<releaseinfo>0.9.70 (&kde; 4.9)</releaseinfo>
+<date>2013-11-28</date>
+<releaseinfo>0.12 (&kde; 4.12)</releaseinfo>
 
 <abstract>
   <para>&okteta; is a simple editor for the raw data of files. This type of program
@@ -106,9 +105,6 @@ extraction tool.</para>
     <para><option><replaceable>&lt;&URL;(s)&gt;</replaceable></option> - open
     file(s) from the specified &URL;(s)</para>
 
-<!--<para><option>- -offset</option>
-<replaceable>&lt;offset&gt;</replaceable> jump to position
-<replaceable>&lt;offset&gt;</replaceable> in the opened file.</para>-->
 </sect1>
 
 <sect1 id="usage-basics">
@@ -157,7 +153,13 @@ extraction tool.</para>
 
 <!-- The tool Versions is not part of released versions,
 just used for development, so no need to document it. -->
-
+<!--
+4.7
+Other stuff:
+New encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+File info tool now estimates the mimetype also for the unstored/edited data in the working memory
+FIXME  
+-->
 <sect1 id="tools-overview">
 
   <title>Overview</title>
@@ -174,10 +176,9 @@ just used for development, so no need to document it. -->
   <title>Analyzers and Manipulators</title>
 <variablelist>
   <varlistentry>
-    <!--FIXME not in 4.9?-->
-    <term>Byte Table</term>
+    <term>Value/Char Table</term>
     <listitem><para>The table lists all possible byte values, both as character and
-    numerical value.</para>
+    in the different numerical codings.</para>
     <para>The selected value can be inserted at the cursor position for a
     defined number of bytes. This can be achieved by using the <guibutton>Insert</guibutton>
     button or double-clicking the line in the table.</para></listitem>
@@ -264,16 +265,29 @@ just used for development, so no need to document it. -->
     <listitem><para>This tool displays some information about the current file,
     including its type, the location of storage and the size.</para></listitem>
   </varlistentry>
+
+  <varlistentry>
+    <term>Terminal</term>
+    <listitem><para>An embedded Terminal, the working directory is not coupled with the active file.</para></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>Charset Conversion</term>
+    <listitem><para>The tool rewrites the bytes so the respective chars are the same as with the other charset.
+     Only 8-bit charsets are supported, and unmatched chars are currently substituted with a value hardcoded to 0.
+     </para></listitem>
+  </varlistentry>
 </variablelist>
 </sect2>
-<!--FIXME Terminal + Charset Conversion missing
-http://frinring.wordpress.com/2011/07/31/all-new-okteta-features-for-kde-apps-4-7-in-a-picture/
--->
 </sect1>
 
 
 <sect1 id="tools-structures">
-
+<!--
+Many improvements in the Structures tool by Alex:
+Begin of a structure can be pinned to a specific offset
+Support for strings (various Unicode encodings) in definitions
+  -->
     <title>Structures Tool</title>
 
     <sect2>
@@ -359,7 +373,7 @@ http://frinring.wordpress.com/2011/07/31/all-new-okteta-features-for-kde-apps-4-
       <title>Creating structure definitions</title>
       <para>There are two different ways of creating structure definitions. The first is writing the
       definition in &XML; the other is using JavaScript<!-- Markup??-->. The JavaScript approach allows you
-      to create more complex structures with features like e.g. validating the structure. Using &XML; gives you
+      to create more complex structures with features like &eg; validating the structure. Using &XML; gives you
       less features but if a static structure is all you need this may be the easiest approach. If you need a dynamic
       structure i.e. where array lengths depend on other values in the structure or the structure layout is different when
       some member value changes, then you will have to write the structure definition in JavaScript.
@@ -379,7 +393,7 @@ http://frinring.wordpress.com/2011/07/31/all-new-okteta-features-for-kde-apps-4-
       <variablelist>
           <varlistentry>
             <term><emphasis role="bold"><emphasis>&lt;primitive&gt;</emphasis></emphasis></term>
-            <listitem><para>To create a primitive data types like e.g. <emphasis>int</emphasis> and
+            <listitem><para>To create a primitive data types like &eg; <emphasis>int</emphasis> and
               <emphasis>float</emphasis>. This element accepts no subelements and can have the following attributes:</para>
               <variablelist>
                 <varlistentry>
@@ -702,18 +716,23 @@ http://frinring.wordpress.com/2011/07/31/all-new-okteta-features-for-kde-apps-4-
         </para>
       </sect3>
     </sect2>
+<!--FIXME missing
+Extended structures definitions
+Structures Script Console-->
 </sect1>
-<!--FIXME missing 
-Extended structures definitions 
-  Structures Script Console-->
 </chapter>
 
-<chapter id="menu-commands">
-<title>Menu Entries</title>
+<chapter id="interface-overview">
+<title>Interface Overview</title>
 
-<para>Note that most menu commands also have a keyboard shortcut.</para>
+<sect1 id="menu-commands">
+<title>Menu Items</title>
 
-<sect1 id="file-menu">
+<para>Apart from the common &kde; menus described in the <ulink url="help:/fundamentals/ui.html#menus">Menu</ulink>
+chapter of the &kde; Fundamentals documentation &okteta; has these application specific menu entries:
+</para>
+
+<sect2 id="file-menu">
 <title>File Menu</title>
 
 <variablelist>
@@ -742,172 +761,55 @@ Extended structures definitions
 
     <varlistentry>
     <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
-    </shortcut>
-    <guimenu>File</guimenu>
-    <guimenuitem>Open...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Open an existing file.</action></para></listitem>
-    </varlistentry>
-
-    <!--<varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>I</keycap></keycombo>
-    </shortcut>
-    <guimenu>File</guimenu>
-    <guimenuitem>Insert...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Insert an exiting file in the current
-    document.</action></para></listitem>
-    </varlistentry>-->
-
-    <varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu>
-    <guisubmenu>Open Recent</guisubmenu>
-    </menuchoice></term>
-    <listitem><para><action>Choose from a list of the last opened
-    files.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo>
-    </shortcut>
-    <guimenu>File</guimenu>
-    <guimenuitem>Save</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Save byte array to the assigned file.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu>
-    <guimenuitem>Save As...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Save byte array to another file with a new name.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
     <guimenu>File</guimenu>
     <guisubmenu>Export</guisubmenu>
     </menuchoice></term>
     <listitem><para>Export the selected bytes to a file...</para>
     <itemizedlist>
-    <listitem><para><guimenuitem>Values</guimenuitem>: ... encoded as byte values.</para>
+    <listitem><para><guimenuitem>Values</guimenuitem>: ... encoded as byte values.
+    By default the values are separated with one whitespace. The <guilabel>Separation</guilabel>
+    characters can be changed in the <guilabel>Export</guilabel> dialog.
+    </para>
     </listitem>
-    <listitem><para><guimenuitem>Plain Text</guimenuitem>: ... encoded as characters.
+    <listitem><para><guimenuitem>Characters</guimenuitem>: ... encoded as plain text.
     </para></listitem>
-    <listitem><para><guimenuitem>Base64</guimenuitem>: ... encoded in the Base64
+    <listitem><para><guimenuitem>Base64</guimenuitem>: ... encoded in the
+    <ulink url="https://en.wikipedia.org/wiki/Base64">Base64</ulink>
+    format.</para></listitem>
+    <listitem><para><guimenuitem>Base32</guimenuitem>: ... encoded in the 
+    <ulink url="https://en.wikipedia.org/wiki/Base32">Base32</ulink>
+    format.</para></listitem>
+    <listitem><para><guimenuitem>Ascii85</guimenuitem>: ... encoded in the
+    <ulink url="https://en.wikipedia.org/wiki/Ascii85">Ascii85</ulink>
+    format.</para></listitem>
+    <listitem><para><guimenuitem>Uuencoding</guimenuitem>: ... encoded in the
+    <ulink url="https://en.wikipedia.org/wiki/Uuencoding">Uuencoding</ulink>
+    format.</para></listitem>
+    <listitem><para><guimenuitem>Xxencoding</guimenuitem>: ... encoded in the
+    <ulink url="https://en.wikipedia.org/wiki/Xxencoding">Xxencoding</ulink>
+    format.</para></listitem>
+    <listitem><para><guimenuitem>Intel Hex</guimenuitem>: ... encoded in the
+    <ulink url="https://en.wikipedia.org/wiki/Intel_Hex">Intel Hex</ulink>
+    format.</para></listitem>
+    <listitem><para><guimenuitem>S-Record</guimenuitem>: ... encoded in the
+    <ulink url="https://en.wikipedia.org/wiki/S-record">S-Record</ulink>
     format.</para></listitem>
     <listitem><para><guimenuitem>C array</guimenuitem>: ... defined as
     an array in the programming language C.</para></listitem>
-    <listitem><para><guimenuitem>View in Plain Text</guimenuitem>: ... as in the data view with offset, byte values and characters. </para></listitem>
+    <listitem><para><guimenuitem>View in Plain Text</guimenuitem>:
+    ... as in the data view with offset, byte values and characters. </para></listitem>
     </itemizedlist>
     </listitem>
-    <!--FIXME missing: Characters, Base32, Ascii85, Uuencoding, Xxencoding, Intel Hex, S-Record-->
-    </varlistentry>
 
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut><keycap>F5</keycap></shortcut>
-    <guimenu>File</guimenu>
-    <guimenuitem>Reload</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Discards all changes and reloads the byte array from
-    the file.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo>
-    </shortcut>
-    <guimenu>File</guimenu>
-    <guimenuitem>Print...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Print the current byte array.</action></para></listitem>
-    </varlistentry>
-
-<!--    <varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu>
-    <guimenuitem>Export...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Export the selected document or a portion of
-    it.</action></para><para>Opens a dialog box with these options:</para>
-    <variablelist>
-    <varlistentry>
-    <term><guilabel>Format</guilabel></term>
-    <listitem><para>Plain text, &HTML; table, rich text
-    format, C array.  Use the <guilabel>Options</guilabel> tab to select
-    details for a C array or an &HTML; table.</para></listitem>
-    </varlistentry>
-    <varlistentry>
-    <term><guilabel>Destination</guilabel></term>
-    <listitem><para>The file to which the data will be
-    exported</para></listitem>
-    </varlistentry>
-    <varlistentry>
-    <term><guilabel>Export Range</guilabel></term>
-    <listitem><para>Selects which data will be exported - - the entire document, the
-    selected portion or the range between two specified
-    offsets.</para></listitem>
-    </varlistentry>
-    </variablelist>
-    </listitem></varlistentry>-->
-
-    <!--<varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu>
-    <guimenuitem>Cancel Operation</guimenuitem>
-    </menuchoice></term>
-    <listitem><para>Stop the current operation</para></listitem>
-    </varlistentry>-->
+</varlistentry>
 
     <varlistentry>
     <term><menuchoice>
     <guimenu>File</guimenu>
-    <guimenuitem>Permissions</guimenuitem>
+    <guisubmenu>Permissions</guisubmenu><guimenuitem>Set Read-only</guimenuitem>
     </menuchoice></term>
-    <listitem><para>Set modification privileges:</para>
-    <variablelist>
-
-    <varlistentry>
-    <term><guilabel>Set Read-only</guilabel></term>
     <listitem><para>When set, changes may not be made to the loaded
     byte array.</para></listitem>
-    </varlistentry>
-    <!--<varlistentry>
-    <term><guilabel>Allow Resize</guilabel></term>
-    <listitem><para>When off, individual bytes may be edited but the total number of
-    bytes may not be changed.</para></listitem>
-    </varlistentry>-->
-    </variablelist>
-    </listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo>
-    </shortcut>
-    <guimenu>File</guimenu>
-    <guimenuitem>Close</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Close the current byte array.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <guimenu>File</guimenu>
-    <guimenuitem>Close All</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Close all byte arrays.</action></para></listitem>
     </varlistentry>
 
     <varlistentry>
@@ -918,106 +820,26 @@ Extended structures definitions
     <listitem><para><action>Close all besides the current byte array.</action></para></listitem>
     </varlistentry>
 
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
-    </shortcut>
-    <guimenu>File</guimenu>
-    <guimenuitem>Quit</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Close the</action> &okteta;
-    window.</para></listitem>
-    </varlistentry>
 </variablelist>
-</sect1>
+</sect2>
 
-<sect1 id="edit-menu">
+<sect2 id="edit-menu">
 <title>Edit Menu</title>
-<!--FIXME in 4.9 still true? change 4.4 to 4.9-->
-<para>Currently in &kde; 4.4 simple copy and cut send data to the clipboard with the
-mimetype "application/octetstream", &klipper; is not able to display this data.
+<variablelist>
+<para>Simple copy and cut send data to the clipboard with the
+mimetype <quote>application/octetstream</quote>, &klipper; is not able to display this data.
 And almost all other applications cannot handle this, too, as this is
 simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</para>
-<variablelist>
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>Z</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Undo</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Undo the last action.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>Z</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Redo</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Redo the last undone action.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>X</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Cut</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Delete the selected bytes and copy them to the
-    clipboard.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Copy</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Copy the selected bytes to the
-    clipboard.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>V</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Paste</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Insert the cut or copied bytes in the
-    clipboard.</action></para></listitem>
-    </varlistentry>
-
     <varlistentry>
     <term><menuchoice>
     <guimenu>Edit</guimenu>
     <guisubmenu>Copy as</guisubmenu>
     </menuchoice></term>
-    <listitem><para>Copy the selected bytes to the clipboard...</para>
-    <itemizedlist>
-    <listitem><para><guimenuitem>Values</guimenuitem>: ... encoded as byte values.</para>
+    <listitem><para>Copy the selected bytes in one of different formats to the clipboard.
+    For a list of available formats see the menu item <menuchoice><guimenu>File</guimenu>
+    <guisubmenu>Export</guisubmenu></menuchoice>
+    </para>
     </listitem>
-    <listitem><para><guimenuitem>Plain Text</guimenuitem>: ... encoded as characters.
-    </para></listitem>
-    <listitem><para><guimenuitem>Base64</guimenuitem>: ... encoded in the Base64
-    format.</para></listitem>
-    <listitem><para><guimenuitem>C array</guimenuitem>: ... defined as
-    an array in the programming language C.</para></listitem>
-    <listitem><para><guimenuitem>View in Plain Text</guimenuitem>: ... as in the data view with offset, byte values and characters. </para></listitem>
-    </itemizedlist>
-    </listitem>
-    <!--FIXME missing: Characters, Base32, Ascii85, Uuencoding, Xxencoding, Intel Hex, S-Record, see also File export-->
-
     </varlistentry>
 
     <varlistentry>
@@ -1034,24 +856,11 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <listitem><para><action>Insert a specified string of bytes at the cursor.</action></para>
     <para>Options in the dialog box allow you to specify the number of insertion of the pattern
     and it's format (Hexadecimal, Decimal, Octal, Binary, Character(s) or UTF-8).</para>
-    <!--para>If <guilabel>Repeat pattern</guilabel> is checked, the specified pattern
-    will be inserted repeatedly to reach the length set in
-    <guilabel>Size</guilabel>.</para--></listitem>
     <!--FIXME Random Data + Sequence - use cases?-->
+    </listitem>
     </varlistentry>
     </variablelist>
     </listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Select All</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Select the entire byte array.</action></para></listitem>
     </varlistentry>
 
     <varlistentry>
@@ -1109,46 +918,6 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <varlistentry>
     <term><menuchoice>
     <shortcut>
-    <keycombo action="simul"><keycap>F3</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Find Next</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Find the next instance</action> of the
-    <guimenuitem>Find</guimenuitem> pattern.</para>
-    <para>If there isn't a pattern specified, the dialog box will be shown.</para>
-    </listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Shift;<keycap>F3</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Find Previous</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Find the previous instance</action> of the
-    <guimenuitem>Find</guimenuitem> pattern.</para>
-    <para>If there isn't a pattern specified, the dialog box will be shown.</para>
-    </listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>R</keycap></keycombo>
-    </shortcut>
-    <guimenu>Edit</guimenu>
-    <guimenuitem>Replace...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Replace</action> the find pattern with a different
-    pattern.</para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
     <keycombo action="simul">&Ctrl;<keycap>G</keycap></keycombo>
     </shortcut>
     <guimenu>Edit</guimenu>
@@ -1159,36 +928,12 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </varlistentry>
 
 </variablelist>
-</sect1>
+</sect2>
 
-<sect1 id="view-menu">
+<sect2 id="view-menu">
 <title>View Menu</title>
 
 <variablelist>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>+</keycap></keycombo>
-    </shortcut>
-    <guimenu>View</guimenu>
-    <guimenuitem>Zoom In</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Increase the size of the font.</action></para>
-    </listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;<keycap>-</keycap></keycombo>
-    </shortcut>
-    <guimenu>View</guimenu>
-    <guimenuitem>Zoom Out</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Decrease the size of the font.</action></para>
-    </listitem>
-    </varlistentry>
 
     <varlistentry>
     <term><menuchoice>
@@ -1211,7 +956,6 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     <listitem><para><action>Toggle display of the line offset on a pane to the left
     on and off.</action></para></listitem>
     </varlistentry>
-
 
     <varlistentry>
     <term><menuchoice>
@@ -1254,7 +998,26 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </para>
     </listitem>
     </varlistentry>
-    <!--FIXME missing Set Bytes per Line, Set Bytes per Group-->
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guisubmenu>Set Bytes per Line</guisubmenu>
+    </menuchoice></term>
+    <listitem><para><action>Select the displayed bytes per line</action>
+    from the dialog, the default value is 16 bytes.
+    </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guisubmenu>Set Bytes per Group</guisubmenu>
+    </menuchoice></term>
+    <listitem><para><action>By default the hexadecimal values are displayed in groups of 4 bytes.</action>
+     Using this menu item you can adapt this to your preferences in a dialog.
+    </para>
+    </listitem>
+    </varlistentry>
     <varlistentry>
     <term><menuchoice>
     <guimenu>View</guimenu>
@@ -1339,16 +1102,17 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </varlistentry>
 
 </variablelist>
-</sect1>
 
-<sect1 id="windows-menu">
+</sect2>
+
+<sect2 id="windows-menu">
 <title>Windows Menu</title>
 
     <para>Provides a list of the current views. Select the active window.</para>
 
-</sect1>
+</sect2>
 
-<sect1 id="bookmarks-menu">
+<sect2 id="bookmarks-menu">
 <title>Bookmarks Menu</title>
 
     <para>Multiple bookmarks can be set for a single byte array. Each byte array
@@ -1415,18 +1179,19 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </varlistentry>
 
 </variablelist>
-</sect1>
 
-<sect1 id="tools-menu">
+</sect2>
+
+<sect2 id="tools-menu">
 <title>Tools Menu</title>
 
-    <para>Provides a list of installed tools. Toggle the display of each tools
-    on or off. A detailed description of each tool you find in the <link linkend="tools">Tools</link> section.</para>
-</sect1>
+<para>Provides a list of installed tools. Toggle the display of each tools
+on or off. A detailed description of each tool you find in the <link linkend="tools">Tools</link> section.</para>
 
-<sect1 id="settings-menu">
+</sect2>
+
+<sect2 id="settings-menu">
 <title>Settings Menu</title>
-
 <variablelist>
     <varlistentry>
     <term><menuchoice>
@@ -1435,82 +1200,9 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </menuchoice></term>
     <listitem><para>Open a dialog to create, edit, delete and set a default view profile.</para></listitem>
     </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <guimenu>Settings</guimenu>
-    <guimenuitem>Show Toolbar</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Toggle display of the toolbar below the
-    menu bar.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <guimenu>Settings</guimenu>
-    <guimenuitem>Show Statusbar</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Toggle display of the status bar.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <shortcut>
-    <keycombo action="simul">&Ctrl;&Shift;<keycap>F</keycap></keycombo>
-    </shortcut>
-    <guimenu>Settings</guimenu>
-    <guimenuitem>Full Screen Mode</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Toggle full screen mode on and off.</action></para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <guimenu>Settings</guimenu>
-    <guimenuitem>Configure Shortcuts...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para>Change program action shortcuts.</para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
-    <guimenu>Settings</guimenu>
-    <guimenuitem>Configure Toolbars...</guimenuitem>
-    </menuchoice></term>
-    <listitem><para>Control the content of the toolbar.</para></listitem>
-    </varlistentry>
-
 </variablelist>
 
-</sect1>
-
-<sect1 id="help-menu">
-<title>Help Menu</title>
-
-    &help.menu.documentation;
-
-</sect1>
-
-
-
-<sect1 id="toolbar"><title>Toolbar</title>
-    <para>The toolbar contains icons for the following commands:</para>
-
-    <note><para>(All behave identically to the menu command.)</para></note>
-
-    <itemizedlist>
-    <listitem><para><guiicon>New</guiicon></para></listitem>
-    <listitem><para><guiicon>Open</guiicon></para></listitem>
-    <listitem><para><guiicon>Save</guiicon></para></listitem>
-    <listitem><para><guiicon>Save As</guiicon></para></listitem>
-    <listitem><para><guiicon>Undo</guiicon></para></listitem>
-    <listitem><para><guiicon>Redo</guiicon></para></listitem>
-    <listitem><para><guiicon>Cut</guiicon></para></listitem>
-    <listitem><para><guiicon>Copy</guiicon></para></listitem>
-    <listitem><para><guiicon>Paste</guiicon></para></listitem>
-    <listitem><para><guiicon>Find</guiicon></para></listitem>
-    <listitem><para><guiicon>Find Next</guiicon></para></listitem>
-    </itemizedlist>
+</sect2>
 
 </sect1>
 

@@ -54,6 +54,12 @@ ViewProfileEditDialog::ViewProfileEditDialog( QWidget* parent )
     setLayout( layout );
 
     dialogButtonBox->button( QDialogButtonBox::Cancel )->setDefault( true );
+
+    connect( mViewProfileEdit, &ViewProfileEdit::profileTitleChanged,
+             this, &ViewProfileEditDialog::onProfileTitleChanged );
+    // Disable it by default
+    mOkButton = dialogButtonBox->button( QDialogButtonBox::Ok );
+    mOkButton->setEnabled( false );
 }
 
 ByteArrayViewProfile ViewProfileEditDialog::viewProfile() const
@@ -67,6 +73,11 @@ void ViewProfileEditDialog::setViewProfile( const ByteArrayViewProfile& viewProf
 {
     mViewProfileEdit->setViewProfile( viewProfile );
     mId = viewProfile.id();
+}
+
+void ViewProfileEditDialog::onProfileTitleChanged(const QString& title)
+{
+    mOkButton->setEnabled( !title.isEmpty() );
 }
 
 ViewProfileEditDialog::~ViewProfileEditDialog()

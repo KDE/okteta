@@ -26,6 +26,8 @@
 // Qt
 #include <QtWidgets/QDialog>
 
+class QPushButton;
+
 
 namespace Kasten2
 {
@@ -34,6 +36,8 @@ class ByteArrayViewProfile;
 
 class ViewProfileEditDialog : public QDialog
 {
+    Q_OBJECT
+
 public:
     explicit ViewProfileEditDialog( QWidget* parent = 0 );
 
@@ -45,9 +49,13 @@ public:
 public:
     void setViewProfile( const ByteArrayViewProfile& viewProfile );
 
-protected:
+private Q_SLOTS:
+    void onProfileTitleChanged( const QString& title );
+
+private:
     ViewProfileEdit* mViewProfileEdit;
     QString mId;
+    QPushButton* mOkButton;
 };
 
 }

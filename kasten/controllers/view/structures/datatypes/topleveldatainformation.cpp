@@ -97,7 +97,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
     mData->readData(input, address, remainingBits, &bitOffset);
 
     // Read all the delayed PointerDataInformation
-    // We do this because the pointed data is independant from the
+    // We do this because the pointed data is independent from the
     // structure containing the pointer and so we can use fields
     // which come after the pointer itself in the structure
     while (!mDelayedRead.isEmpty())

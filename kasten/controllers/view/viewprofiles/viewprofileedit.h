@@ -54,6 +54,9 @@ public:
 public:
     void setViewProfile( const ByteArrayViewProfile& viewProfile );
 
+Q_SIGNALS:
+    void profileTitleChanged( const QString& title );
+
 protected Q_SLOTS:
     void onLineBreakIndexChanged( int lineBreakIndex );
 
