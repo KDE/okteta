@@ -28,7 +28,7 @@
 
 // Program
 static const char ProgramId[] =          "okteta";
-static const char ProgramVersion[] =     "0.10.90";
+static const char ProgramVersion[] =     "0.12.60";
 static const char ProgramHomepage[] =    "http://userbase.kde.org/Okteta";
 // Author
 static const char FWHKEmailAddress[] =   "kossebau@kde.org";
@@ -40,7 +40,7 @@ OktetaAboutData::OktetaAboutData()
               ki18n("Okteta"), ProgramVersion, // name
               ki18n("Hex editor"), // description
               K4AboutData::License_GPL_V2,
-              ki18n("Copyright 2006-2013 Friedrich W. H. Kossebau"), //copyright
+              ki18n("Copyright 2006-2014 Friedrich W. H. Kossebau"), //copyright
               ki18n("Edit the raw data of files"), // comment
               ProgramHomepage )
 {
