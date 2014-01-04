@@ -77,7 +77,7 @@ set( kastencore_LIB_SRCS
 )
 
 set( kastencore_LIB_HDRS
-  kastencore_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kastencore_export.h
   kastencore.h
   document/abstractmodel.h
   document/abstractmodelselection.h
@@ -122,10 +122,11 @@ set( kastencore_LIB_HDRS
 )
 
 kde4_add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
+generate_export_header( ${kastencore_LIB} )
 target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core Qt5::Gui KF5::KIOCore )
 target_link_libraries( ${kastencore_LIB} LINK_PRIVATE
-  Qt5::Widgets #so that #include <QMessageBox> in <KMessageBox> works
   KF5::I18n
+  KF5::Solid
   KF5::WidgetsAddons
   KF5::KDE4Support #for KIO::NetAccess (TODO: port away)
 )

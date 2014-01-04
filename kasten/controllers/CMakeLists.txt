@@ -489,7 +489,7 @@ ecm_add_tests(
 )
 
 set( okteta_kastencontrollers_LIB_HDRS
-  oktetakastencontrollers_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencontrollers_export.h
   view/print/printcontroller.h
   view/bookmarks/bookmarkscontroller.h
   view/bookmarks/bookmarkstool.h
@@ -547,6 +547,7 @@ set( okteta_kastencontrollers_LIB_HDRS
 )
 
 kde4_add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+generate_export_header( ${oktetakastencontrollers_LIB} )
 
 target_link_libraries( ${oktetakastencontrollers_LIB}
   ${oktetakastengui_LIB}

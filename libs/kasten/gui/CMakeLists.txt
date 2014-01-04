@@ -145,7 +145,7 @@ set( kastengui_LIB_SRCS
 )
 
 set( kastengui_LIB_HDRS
-  kastengui_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kastengui_export.h
   kastengui.h
   ${kastengui_view_HDRS}
   ${kastengui_io_HDRS}
@@ -155,6 +155,7 @@ set( kastengui_LIB_HDRS
 )
 
 kde4_add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
+generate_export_header( ${kastengui_LIB} )
 target_link_libraries( ${kastengui_LIB} LINK_PUBLIC
   ${kastencore_LIB}
   Qt5::Widgets

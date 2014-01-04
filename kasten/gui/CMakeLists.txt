@@ -185,13 +185,14 @@ set( okteta_kastengui_system_HDRS
 )
 
 set( okteta_kastengui_LIB_HDRS
-  oktetakastengui_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastengui_export.h
   ${okteta_kastengui_view_HDRS}
   ${okteta_kastengui_io_HDRS}
   ${okteta_kastengui_system_HDRS}
 )
 
 kde4_add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
+generate_export_header( ${oktetakastengui_LIB} )
 
 target_link_libraries( ${oktetakastengui_LIB} LINK_PUBLIC
   ${oktetakastencore_LIB}

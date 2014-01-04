@@ -43,7 +43,7 @@ set( okteta_kastencore_LIB_SRCS
 )
 
 set( okteta_kastencore_LIB_HDRS
-  oktetakastencore_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencore_export.h
   document/bytearrayselection.h
   document/bytearraydocument.h
   document/bytearraydocumentfactory.h
@@ -52,6 +52,7 @@ set( okteta_kastencore_LIB_HDRS
 )
 
 kde4_add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
+generate_export_header( ${oktetakastencore_LIB} )
 
 target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC
   ${KASTENCORE_LIBS}

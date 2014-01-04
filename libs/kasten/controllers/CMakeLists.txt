@@ -146,7 +146,7 @@ set( kastencontroller_LIB_SRCS
 )
 
 set( kastencontrollers_LIB_HDRS
-  kastencontrollers_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kastencontrollers_export.h
   document/modified/modifiedbarcontroller.h
   document/readonly/readonlybarcontroller.h
   document/readonly/readonlycontroller.h
@@ -178,6 +178,7 @@ set( kastencontrollers_LIB_HDRS
 )
 
 kde4_add_library( ${kastencontrollers_LIB} SHARED ${kastencontroller_LIB_SRCS} )
+generate_export_header( ${kastencontrollers_LIB} )
 target_link_libraries( ${kastencontrollers_LIB}
   ${kastengui_LIB}
   ${kastencore_LIB}
