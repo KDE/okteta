@@ -122,7 +122,7 @@ set( oktetagui_LIB_CCHDRS
   includes/WidgetColumnStylist
 )
 
-kde4_add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
+add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
 target_link_libraries( ${oktetagui_LIB} LINK_PUBLIC
   ${oktetacore_LIB}
   Qt5::Widgets
@@ -155,5 +155,5 @@ install( FILES ${oktetagui_LIB_CCHDRS}
 
 
 add_subdirectory( test )
-#   kde4_add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )
+#   add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )
 

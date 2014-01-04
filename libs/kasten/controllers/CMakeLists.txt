@@ -177,7 +177,7 @@ set( kastencontrollers_LIB_HDRS
   program/quit/quitcontroller.h
 )
 
-kde4_add_library( ${kastencontrollers_LIB} SHARED ${kastencontroller_LIB_SRCS} )
+add_library( ${kastencontrollers_LIB} SHARED ${kastencontroller_LIB_SRCS} )
 generate_export_header( ${kastencontrollers_LIB} )
 target_link_libraries( ${kastencontrollers_LIB}
   ${kastengui_LIB}

@@ -16,7 +16,7 @@ set( oktetacoretestutil_LIB_SRCS
   util/fill.cpp
 )
 
-kde4_add_library( oktetacoretestutil  STATIC ${oktetacoretestutil_LIB_SRCS} )
+add_library( oktetacoretestutil  STATIC ${oktetacoretestutil_LIB_SRCS} )
 target_link_libraries( oktetacoretestutil Qt5::Core )
 
 ecm_add_test(

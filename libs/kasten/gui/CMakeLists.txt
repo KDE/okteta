@@ -154,7 +154,7 @@ set( kastengui_LIB_HDRS
   ${kastengui_controller_HDRS}
 )
 
-kde4_add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
+add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
 generate_export_header( ${kastengui_LIB} )
 target_link_libraries( ${kastengui_LIB} LINK_PUBLIC
   ${kastencore_LIB}

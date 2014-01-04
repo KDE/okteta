@@ -191,7 +191,7 @@ set( okteta_kastengui_LIB_HDRS
   ${okteta_kastengui_system_HDRS}
 )
 
-kde4_add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
+add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
 generate_export_header( ${oktetakastengui_LIB} )
 
 target_link_libraries( ${oktetakastengui_LIB} LINK_PUBLIC

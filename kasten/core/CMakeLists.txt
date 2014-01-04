@@ -51,7 +51,7 @@ set( okteta_kastencore_LIB_HDRS
   io/filesystem/bytearrayrawfilesynchronizerfactory.h
 )
 
-kde4_add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
+add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
 generate_export_header( ${oktetakastencore_LIB} )
 
 target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC

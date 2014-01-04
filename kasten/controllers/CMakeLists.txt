@@ -546,7 +546,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   document/overwriteonly/overwriteonlycontroller.h
 )
 
-kde4_add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
 generate_export_header( ${oktetakastencontrollers_LIB} )
 
 target_link_libraries( ${oktetakastencontrollers_LIB}
@@ -623,7 +623,7 @@ set( okteta_kastencontrollers_templates_SRCS
   ${libchecksum_templates_SRCS}
 )
 
-kde4_add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
+add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
 target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets ${oktetacore_LIB} )
 
 endif( KASTEN_BUILD_INTERNAL_TEMPLATES )

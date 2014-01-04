@@ -18,7 +18,7 @@ set( kastencoretestutil_LIB_SRCS
   util/filesystem.cpp
 )
 
-kde4_add_library( kastencoretestutil  STATIC ${kastencoretestutil_LIB_SRCS} )
+add_library( kastencoretestutil  STATIC ${kastencoretestutil_LIB_SRCS} )
 target_link_libraries( kastencoretestutil Qt5::Core )
 
 ########### io ###############
@@ -34,7 +34,7 @@ set( kastencoretestio_LIB_SRCS
   testdocumentfilewritetojob.cpp
 )
 
-kde4_add_library( kastencoretestio  STATIC ${kastencoretestio_LIB_SRCS} )
+add_library( kastencoretestio  STATIC ${kastencoretestio_LIB_SRCS} )
 target_link_libraries( kastencoretestio   KF5::I18n KF5::CoreAddons Qt5::Core )
 
 ########### testdocumenttest ###############

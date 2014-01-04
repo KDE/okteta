@@ -121,7 +121,7 @@ set( kastencore_LIB_HDRS
   system/modelcodecmanager.h
 )
 
-kde4_add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
+add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
 generate_export_header( ${kastencore_LIB} )
 target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core Qt5::Gui KF5::KIOCore )
 target_link_libraries( ${kastencore_LIB} LINK_PRIVATE

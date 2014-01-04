@@ -120,7 +120,7 @@ set( oktetacore_LIB_CCHDRS
 set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS} )
 
 
-kde4_add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
+add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
 target_link_libraries( ${oktetacore_LIB} LINK_PUBLIC Qt5::Core )
 target_link_libraries( ${oktetacore_LIB} LINK_PRIVATE
   KF5::I18n
