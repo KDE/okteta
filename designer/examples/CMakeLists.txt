@@ -11,7 +11,7 @@ set( oktetadesignerexamplewidget_SRCS
 
 kde4_add_ui_files( oktetadesignerexamplewidget_SRCS example_widget.ui )
 
-kde4_add_executable( oktetadesignerexample  ${oktetadesignerexamplewidget_SRCS} )
+add_executable( oktetadesignerexample  ${oktetadesignerexamplewidget_SRCS} )
 
 target_link_libraries( oktetadesignerexample
   ${oktetagui_LIB}
