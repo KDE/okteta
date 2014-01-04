@@ -1,29 +1,55 @@
-cmake_minimum_required(VERSION 2.8.11.1)
-
 project( okteta )
 
-#copy the way kde-workspace does it
+cmake_minimum_required(VERSION 2.8.11.1)
+set(QT_MIN_VERSION "5.2.0")
 
 find_package(ECM 0.0.8 REQUIRED NO_MODULE)
+
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+include(FeatureSummary)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools Xml Network Designer PrintSupport Test)
+find_package(Qt5 REQUIRED NO_MODULE
+    COMPONENTS
+    Core
+    Network
+    Designer
+    PrintSupport
+    Script
+    ScriptTools
+    Test
+    Widgets
+    Xml
+)
 
-find_package(KF5 CONFIG REQUIRED COMPONENTS NewStuff KCMUtils PrintUtils Codecs I18n ConfigWidgets
-                                            KCMUtils Bookmarks Completion XmlGui KIO Parts
-                                            WidgetsAddons Service Solid KDE4Support)
+find_package(KF5 CONFIG REQUIRED
+    COMPONENTS
+    Bookmarks
+    Codecs
+    Completion
+    ConfigWidgets
+    DBusAddons
+    I18n
+    KCMUtils
+    KDE4Support
+    KIO
+    NewStuff
+    Parts
+    PrintUtils
+    Service
+    Solid
+    WidgetsAddons
+    XmlGui
+)
+
 if( UNIX )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
 endif()
-
-set( CMAKE_INCLUDE_CURRENT_DIR ON )
-set( CMAKE_AUTOMOC TRUE )
-include(FeatureSummary)
 
 find_package(QCA2)
 set_package_properties(QCA2 PROPERTIES DESCRIPTION "Qt Cryptographic Architecture"
