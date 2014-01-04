@@ -13,7 +13,6 @@ include(KDECMakeSettings)
 include(KDECompilerSettings)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Widgets Script ScriptTools Xml Network Designer PrintSupport Test)
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0) #allow deprecated functions for now
 
 find_package(KF5 CONFIG REQUIRED COMPONENTS NewStuff KCMUtils PrintUtils Codecs I18n ConfigWidgets
                                             KCMUtils Bookmarks Completion XmlGui KIO Parts
