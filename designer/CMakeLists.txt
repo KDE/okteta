@@ -13,7 +13,6 @@ set( oktetadesignerplugin_SRCS
   bytearrayrowviewdesignerfactory.cpp
   oktetawidgetdesignerfactorycollection.cpp
   fillerbytearraymodel.cpp
-  main.cpp
 )
 
 
@@ -26,7 +25,7 @@ target_link_libraries( oktetadesignerplugin
   Qt5::Designer
 )
 
-install( TARGETS oktetadesignerplugin  DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
+install( TARGETS oktetadesignerplugin  DESTINATION ${QT_PLUGIN_INSTALL_DIR}/designer )
 
 
 if( OKTETA_BUILD_EXAMPLES )
