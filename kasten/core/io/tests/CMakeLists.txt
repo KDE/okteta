@@ -1,5 +1,7 @@
 project( oktetakasten_io_tests )
 
+include(ECMAddTests)
+
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 # make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
@@ -10,11 +12,14 @@ set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 
 include_directories(
+  ${CMAKE_CURRENT_BINARY_DIR}/../..
   ${SUTDIR}
   ${SUTDIR}/..
   ${SUTDIR}/../document
   ${SUTDIR}/filesystem
+  ${CMAKE_CURRENT_BINARY_DIR}/../../../../core
   ${SUTDIR}/../../../core
+  ${CMAKE_CURRENT_BINARY_DIR}/../../../../libs/kasten/core
   ${SUTDIR}/../../../libs/kasten/core/document
   ${SUTDIR}/../../../libs/kasten/core/io
   ${SUTDIR}/../../../core/tests
@@ -34,24 +39,20 @@ set( oktetakastenio_LIB_SRCS
   ${SUTDIR}/filesystem/bytearrayrawfilewritetojob.cpp
 )
 
-kde4_add_library( oktetakastenio  STATIC ${oktetakastenio_LIB_SRCS} )
-target_link_libraries( oktetakastenio Qt5::Core )
+add_library( oktetakastenio  STATIC ${oktetakastenio_LIB_SRCS} )
+target_link_libraries( oktetakastenio  KF5::I18n KF5::CoreAddons Qt5::Core )
 
 
 ########### bytearrayrawfilesynchronizertest ###############
 
-set( bytearrayrawfilesynchronizertest_SRCS
+ecm_add_test(
   bytearrayrawfilesynchronizertest.cpp
   ${SUTDIR}/../document/bytearraydocument.cpp
   ${SUTDIR}/filesystem/bytearrayrawfilesynchronizer.cpp
   ${SUTDIR}/filesystem/externalbookmarkstorage.cpp
-)
-
-kde4_add_unit_test( bytearrayrawfilesynchronizertest
-  TESTNAME oktetakasten-io-bytearrayrawfilesynchronizertest
-  ${bytearrayrawfilesynchronizertest_SRCS}
-)
-target_link_libraries( bytearrayrawfilesynchronizertest
+  TEST_NAME bytearrayrawfilesynchronizertest
+  NAME_PREFIX oktetakasten-io-
+  LINK_LIBRARIES
   oktetakastenio
   ${KASTENCORE_LIBS}
   kastencoretestutil
@@ -65,19 +66,15 @@ target_link_libraries( bytearrayrawfilesynchronizertest
 
 ########### bytearrayrawfilesynchronizerfactorytest ###############
 
-set( bytearrayrawfilesynchronizerfactorytest_SRCS
+ecm_add_test(
   bytearrayrawfilesynchronizerfactorytest.cpp
   ${SUTDIR}/../document/bytearraydocument.cpp
   ${SUTDIR}/filesystem/externalbookmarkstorage.cpp
   ${SUTDIR}/filesystem/bytearrayrawfilesynchronizer.cpp
   ${SUTDIR}/filesystem/bytearrayrawfilesynchronizerfactory.cpp
-)
-
-kde4_add_unit_test( bytearrayrawfilesynchronizerfactorytest
-  TESTNAME oktetakasten-io-bytearrayrawfilesynchronizerfactorytest
-  ${bytearrayrawfilesynchronizerfactorytest_SRCS}
-)
-target_link_libraries( bytearrayrawfilesynchronizerfactorytest
+  TEST_NAME bytearrayrawfilesynchronizerfactorytest
+  NAME_PREFIX oktetakasten-io-
+  LINK_LIBRARIES
   oktetakastenio
   ${KASTENCORE_LIBS}
   kastencoretestutil

@@ -1,5 +1,7 @@
 project( oktetakasten_document_tests )
 
+include(ECMAddTests)
+
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 # make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
@@ -10,9 +12,12 @@ set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 
 include_directories(
+  ${CMAKE_CURRENT_BINARY_DIR}/../..
   ${SUTDIR}
   ${SUTDIR}/..
+  ${CMAKE_CURRENT_BINARY_DIR}/../../../../core
   ${SUTDIR}/../../../core
+  ${CMAKE_CURRENT_BINARY_DIR}/../../../../libs/kasten/core
   ${SUTDIR}/../../../libs/kasten/core/document
   ${SUTDIR}/../../../core/tests
   ${SUTDIR}/../../../libs/kasten/core/tests
@@ -20,16 +25,12 @@ include_directories(
 
 ########### bytearraydocumenttest ###############
 
-set( bytearraydocumenttest_SRCS
+ecm_add_test(
   bytearraydocumenttest.cpp
   ${SUTDIR}/bytearraydocument.cpp
-)
-
-kde4_add_unit_test( bytearraydocumenttest
-  TESTNAME oktetakasten-document-bytearraydocumenttest
-  ${bytearraydocumenttest_SRCS}
-)
-target_link_libraries( bytearraydocumenttest
+  TEST_NAME bytearraydocumenttest
+  NAME_PREFIX oktetakasten-document-
+  LINK_LIBRARIES
   ${KASTENCORE_LIBS}
   testoktetacore
   Qt5::Test
@@ -39,17 +40,13 @@ target_link_libraries( bytearraydocumenttest
 
 ########### bytearraydocumentfactorytest ###############
 
-set( bytearraydocumentfactorytest_SRCS
+ecm_add_test(
   bytearraydocumentfactorytest.cpp
   ${SUTDIR}/bytearraydocument.cpp
   ${SUTDIR}/bytearraydocumentfactory.cpp
-)
-
-kde4_add_unit_test( bytearraydocumentfactorytest
-  TESTNAME oktetakasten-document-bytearraydocumentfactorytest
-  ${bytearraydocumentfactorytest_SRCS}
-)
-target_link_libraries( bytearraydocumentfactorytest
+  TEST_NAME bytearraydocumentfactorytest
+  NAME_PREFIX oktetakasten-document-
+  LINK_LIBRARIES
   ${KASTENCORE_LIBS}
   oktetacoretestutil
   testoktetacore

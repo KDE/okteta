@@ -1,11 +1,13 @@
 project( kasten_core_tests )
 
+include(ECMAddTests)
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 include_directories(
+  ${CMAKE_CURRENT_BINARY_DIR}/..
   ${SUTDIR}/..
   ${SUTDIR}
 )
@@ -33,37 +35,29 @@ set( kastencoretestio_LIB_SRCS
 )
 
 kde4_add_library( kastencoretestio  STATIC ${kastencoretestio_LIB_SRCS} )
-target_link_libraries( kastencoretestio Qt5::Core )
+target_link_libraries( kastencoretestio   KF5::I18n KF5::CoreAddons Qt5::Core )
 
 ########### testdocumenttest ###############
 
-set( testdocumenttest_SRCS
+ecm_add_test(
   testdocument.cpp
   testdocumenttest.cpp
-)
-
-kde4_add_unit_test( testdocumenttest
-  TESTNAME libkasten-core-testdocumenttest
-  ${testdocumenttest_SRCS}
-)
-target_link_libraries( testdocumenttest
+  TEST_NAME testdocumenttest
+  NAME_PREFIX libkasten-core-
+  LINK_LIBRARIES
   ${kastencore_LIB}
   Qt5::Test
 )
 
 ########### testdocumentfilesynchronizertest ###############
 
-set( testdocumentfilesynchronizertest_SRCS
+ecm_add_test(
   testdocument.cpp
   testdocumentfilesynchronizer.cpp
   testdocumentfilesynchronizertest.cpp
-)
-
-kde4_add_unit_test( testdocumentfilesynchronizertest
-  TESTNAME libkasten-core-testdocumentfilesynchronizertest
-  ${testdocumentfilesynchronizertest_SRCS}
-)
-target_link_libraries( testdocumentfilesynchronizertest
+  TEST_NAME testdocumentfilesynchronizertest
+  NAME_PREFIX libkasten-core-
+  LINK_LIBRARIES
   kastencoretestio
   ${kastencore_LIB}
   kastencoretestutil
@@ -72,18 +66,14 @@ target_link_libraries( testdocumentfilesynchronizertest
 
 ############ testdocumentfilesynchronizerfactorytest ###############
 
-set( testdocumentfilesynchronizerfactorytest_SRCS
+ecm_add_test(
   testdocument.cpp
   testdocumentfilesynchronizer.cpp
   testdocumentfilesynchronizerfactory.cpp
   testdocumentfilesynchronizerfactorytest.cpp
-)
-
-kde4_add_unit_test( testdocumentfilesynchronizerfactorytest
-  TESTNAME libkasten-core-testdocumentfilesynchronizerfactorytest
-  ${testdocumentfilesynchronizerfactorytest_SRCS}
-)
-target_link_libraries( testdocumentfilesynchronizerfactorytest
+  TEST_NAME testdocumentfilesynchronizerfactorytest
+  NAME_PREFIX libkasten-core-
+  LINK_LIBRARIES
   kastencoretestio
   ${kastencore_LIB}
   kastencoretestutil
@@ -92,16 +82,12 @@ target_link_libraries( testdocumentfilesynchronizerfactorytest
 
 ########### documentmanagertest ###############
 
-set( documentmanagertest_SRCS
+ecm_add_test(
   testdocument.cpp
   documentmanagertest.cpp
-)
-
-kde4_add_unit_test( documentmanagertest
-  TESTNAME libkasten-core-documentmanagertest
-  ${documentmanagertest_SRCS}
-)
-target_link_libraries( documentmanagertest
+  TEST_NAME documentmanagertest
+  NAME_PREFIX libkasten-core-
+  LINK_LIBRARIES
   ${kastencore_LIB}
   Qt5::Test
 )

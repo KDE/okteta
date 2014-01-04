@@ -143,6 +143,6 @@ install( FILES ${kastencore_LIB_HDRS}
   COMPONENT   Devel
 )
 
-# if(KDE4_BUILD_TESTS)
-#   add_subdirectory( tests )
-# endif(KDE4_BUILD_TESTS)
+if(BUILD_TESTING)
+  add_subdirectory( tests )
+endif(BUILD_TESTING)
