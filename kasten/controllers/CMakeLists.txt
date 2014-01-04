@@ -401,7 +401,6 @@ add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
 target_include_directories( poddecoder_objs PUBLIC
   $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
   $<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
-  $<TARGET_PROPERTY:KF5::KDE4Support,INTERFACE_INCLUDE_DIRECTORIES>
 )
 add_library( structview_objs OBJECT ${STRUCTVIEW_TESTED_SRCS} )
 target_include_directories( structview_objs PUBLIC
@@ -409,7 +408,6 @@ target_include_directories( structview_objs PUBLIC
   $<TARGET_PROPERTY:Qt5::Script,INTERFACE_INCLUDE_DIRECTORIES>
   $<TARGET_PROPERTY:Qt5::Xml,INTERFACE_INCLUDE_DIRECTORIES>
   $<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
-  $<TARGET_PROPERTY:KF5::KDE4Support,INTERFACE_INCLUDE_DIRECTORIES>
 )
 set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
@@ -462,7 +460,8 @@ target_link_libraries( structures-static
   Qt5::Xml
   KF5::I18n
   KF5::KDE4Support
-#  KF5::KConfigWidgets
+#  KF5::Completion
+#  KF5::ConfigWidgets
 #  KF5::KCMUtils
   ${oktetakastencore_LIB}
   ${oktetakastengui_LIB}
@@ -561,9 +560,9 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   KF5::ConfigWidgets
   KF5::KCMUtils
   KF5::PrintUtils
+  KF5::KDE4Support
   Qt5::Script
   Qt5::ScriptTools
-  KF5::KDE4Support
 )
 if( QCA2_FOUND )
   target_link_libraries( ${oktetakastencontrollers_LIB} ${QCA2_LIBRARIES} )
@@ -624,6 +623,6 @@ set( okteta_kastencontrollers_templates_SRCS
 )
 
 kde4_add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
-target_link_libraries( oktetakastencontrollertemplates Qt5::Widgets KF5::KDE4Support ${oktetacore_LIB} )
+target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets ${oktetacore_LIB} )
 
 endif( KASTEN_BUILD_INTERNAL_TEMPLATES )

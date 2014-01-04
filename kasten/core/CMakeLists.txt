@@ -60,7 +60,6 @@ target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC
 target_link_libraries( ${oktetakastencore_LIB} LINK_PRIVATE
   KF5::I18n
   KF5::Bookmarks
-  KF5::KDE4Support
 )
 
 set_target_properties( ${oktetakastencore_LIB} PROPERTIES
