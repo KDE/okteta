@@ -77,7 +77,7 @@ install( FILES ${okteta_kastencore_LIB_HDRS}
 )
 
 
-if(KDE4_BUILD_TESTS)
-  add_subdirectory(document/tests)
-  add_subdirectory(io/tests)
-endif(KDE4_BUILD_TESTS)
+# if(KDE4_BUILD_TESTS)
+#   add_subdirectory(document/tests)
+#   add_subdirectory(io/tests)
+# endif(KDE4_BUILD_TESTS)
