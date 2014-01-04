@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, made within the KDE community.
 
-    Copyright 2006-2007,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2007,2011,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -23,8 +23,8 @@
 #ifndef OKTETAPROGRAM_H
 #define OKTETAPROGRAM_H
 
-// program
-#include "about.h"
+// Qt
+#include <QtWidgets/QApplication>
 
 
 namespace Kasten2
@@ -55,7 +55,7 @@ class OktetaProgram
     ByteArrayViewProfileManager* byteArrayViewProfileManager();
 
   protected:
-    OktetaAboutData mAboutData;
+    QApplication mApp;
 
     DocumentManager* mDocumentManager;
     ViewManager* mViewManager;

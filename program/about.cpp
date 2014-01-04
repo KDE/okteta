@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, made within the KDE community.
 
-    Copyright 2006-2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -26,30 +26,21 @@
 #include <KLocalizedString>
 
 
-// Program
-static const char ProgramId[] =          "okteta";
-static const char ProgramVersion[] =     "0.12.60";
-static const char ProgramHomepage[] =    "http://userbase.kde.org/Okteta";
-// Author
-static const char FWHKEmailAddress[] =   "kossebau@kde.org";
-static const char AREmailAddress[] =     "alex.richardson@gmx.de";
-
-
 OktetaAboutData::OktetaAboutData()
-: K4AboutData( ProgramId, 0,
-              ki18n("Okteta"), ProgramVersion, // name
-              ki18n("Hex editor"), // description
-              K4AboutData::License_GPL_V2,
-              ki18n("Copyright 2006-2014 Friedrich W. H. Kossebau"), //copyright
-              ki18n("Edit the raw data of files"), // comment
-              ProgramHomepage )
+: KAboutData( QStringLiteral("okteta"), QString(),
+              i18n("Okteta"), QStringLiteral("0.12.70"), // name
+              i18n("Hex editor"), // description
+              KAboutData::License_GPL_V2,
+              i18n("Copyright 2006-2014 Friedrich W. H. Kossebau"), //copyright
+              i18n("Edit the raw data of files"), // comment
+              QStringLiteral("http://userbase.kde.org/Okteta") )
 {
-    addLicense(K4AboutData::License_GPL_V3);
+    addLicense(KAboutData::License_GPL_V3);
     setOrganizationDomain( "kde.org" );
-    addAuthor( ki18n("Friedrich W. H. Kossebau"), // name
-               ki18n("Author"), // task
-               FWHKEmailAddress );
-    addAuthor( ki18nc("Author","Alexander Richardson"),// name
-               ki18nc("Task description","Structures tool"), // task
-               AREmailAddress );
+    addAuthor( i18n("Friedrich W. H. Kossebau"), // name
+               i18n("Author"), // task
+               QStringLiteral("kossebau@kde.org") );
+    addAuthor( i18nc("Author","Alexander Richardson"),// name
+               i18nc("Task description","Structures tool"), // task
+               QStringLiteral("alex.richardson@gmx.de") );
 }

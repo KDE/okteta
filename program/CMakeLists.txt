@@ -54,6 +54,7 @@ target_link_libraries( okteta
   kastencore
   KF5::I18n
   KF5::XmlGui
+  KF5::DBusAddons
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )

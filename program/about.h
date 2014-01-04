@@ -24,10 +24,10 @@
 #define OKTETAABOUT_H
 
 // KF5
-#include <k4aboutdata.h>
+#include <KAboutData>
 
 
-class OktetaAboutData : public K4AboutData
+class OktetaAboutData : public KAboutData
 {
 public:
     OktetaAboutData();
