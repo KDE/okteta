@@ -63,7 +63,6 @@ public:
 public:
     QSysInfo::Endian byteOrder() const;
     void setByteOrder(QSysInfo::Endian order);
-    KDE_DEPRECATED int columnCount() const;
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
     StructuresManager* manager() const;

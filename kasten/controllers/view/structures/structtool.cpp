@@ -361,11 +361,6 @@ void StructTool::validateAllStructures()
     }
 }
 
-int StructTool::columnCount() const
-{
-    return DataInformation::COLUMN_COUNT;
-}
-
 bool StructTool::isFileLoaded() const
 {
     return d->mByteArrayModel != NULL;
