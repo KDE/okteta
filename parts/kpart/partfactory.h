@@ -24,12 +24,12 @@
 #define OKTETAPARTFACTORY_H
 
 // KF5
+#include <KAboutData>
 #include <KParts/Factory>
 
 namespace Kasten2 {
 class ByteArrayViewProfileManager;
 }
-class K4AboutData;
 
 
 class OktetaPartFactory : public KParts::Factory
@@ -47,7 +47,7 @@ class OktetaPartFactory : public KParts::Factory
                                             const char* className, const QStringList& args );
 
   private:
-    K4AboutData* mAboutData;
+    KAboutData mAboutData;
     Kasten2::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };
 

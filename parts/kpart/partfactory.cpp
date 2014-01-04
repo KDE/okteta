@@ -31,28 +31,15 @@
 #include <bytearraystreamencoderfactory.h>
 #include <bytearraydatageneratorfactory.h>
 // KF5
-#include <k4aboutdata.h>
 #include <KLocalizedString>
 
 
-// Part
-static const char PartId[] =          "oktetapart";
-static const char PartName[] =        I18N_NOOP("OktetaPart");
-static const char PartDescription[] = I18N_NOOP("Embedded hex editor");
-static const char PartVersion[] =     "0.5.0";
-static const char PartCopyright[] =   "2003-2009 Friedrich W. H. Kossebau";
-// Author
-static const char FWHKName[] =         "Friedrich W. H. Kossebau";
-static const char FWHKTask[] =         I18N_NOOP("Author");
-static const char FWHKEmailAddress[] = "kossebau@kde.org";
-
-
 OktetaPartFactory::OktetaPartFactory()
+  : mAboutData( QStringLiteral("oktetapart"), QString(), i18n("OktetaPart"), QStringLiteral("0.5.0"),
+                i18n("Embedded hex editor"), KAboutData::License_GPL_V2, i18n("2003-2014 Friedrich W. H. Kossebau") )
 {
 // TODO: also load encoder and other plugins here
-    mAboutData = new K4AboutData( PartId, 0, ki18n(PartName), PartVersion, ki18n(PartDescription),
-                                 K4AboutData::License_GPL_V2, ki18n(PartCopyright), KLocalizedString(), 0, FWHKEmailAddress );
-    mAboutData->addAuthor( ki18n(FWHKName), ki18n(FWHKTask), FWHKEmailAddress );
+    mAboutData.addAuthor( i18n("Friedrich W. H. Kossebau"), i18n("Author"), QStringLiteral("kossebau@kde.org") );
 
     mByteArrayViewProfileManager = new Kasten2::ByteArrayViewProfileManager();
 
@@ -90,7 +77,7 @@ Q_UNUSED( args )
         ( className == "Browser/View" ) ?         OktetaPart::BrowserViewModus :
         /* else */                                OktetaPart::ReadWriteModus;
 
-    OktetaPart* part = new OktetaPart( parent, *mAboutData, modus, mByteArrayViewProfileManager );
+    OktetaPart* part = new OktetaPart( parent, mAboutData, modus, mByteArrayViewProfileManager );
 
     return part;
 }
@@ -98,6 +85,5 @@ Q_UNUSED( args )
 
 OktetaPartFactory::~OktetaPartFactory()
 {
-    delete mAboutData;
     delete mByteArrayViewProfileManager;
 }
