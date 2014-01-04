@@ -17,7 +17,7 @@ set( oktetadesignerplugin_SRCS
 )
 
 
-kde4_add_plugin( oktetadesignerplugin  ${oktetadesignerplugin_SRCS} )
+add_library( oktetadesignerplugin  MODULE ${oktetadesignerplugin_SRCS} )
 
 target_link_libraries( oktetadesignerplugin
   ${oktetagui_LIB}

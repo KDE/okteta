@@ -41,7 +41,7 @@ set( oktetapart_SRCS
   main.cpp
 )
 
-kde4_add_plugin( oktetapart  ${oktetapart_SRCS})
+add_library( oktetapart  MODULE ${oktetapart_SRCS} )
 
 
 target_link_libraries( oktetapart
