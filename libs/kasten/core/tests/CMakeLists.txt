@@ -35,7 +35,8 @@ set( kastencoretestio_LIB_SRCS
 )
 
 add_library( kastencoretestio  STATIC ${kastencoretestio_LIB_SRCS} )
-target_link_libraries( kastencoretestio   KF5::I18n KF5::CoreAddons Qt5::Core )
+target_link_libraries( kastencoretestio LINK_PUBLIC Qt5::Core )
+target_link_libraries( kastencoretestio LINK_PRIVATE KF5::I18n KF5::CoreAddons Qt5::Core )
 
 ########### testdocumenttest ###############
 
