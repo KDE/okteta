@@ -9,7 +9,7 @@ set( oktetadesignerexamplewidget_SRCS
   main.cpp
 )
 
-kde4_add_ui_files( oktetadesignerexamplewidget_SRCS example_widget.ui )
+qt5_wrap_ui( oktetadesignerexamplewidget_SRCS example_widget.ui )
 
 add_executable( oktetadesignerexample  ${oktetadesignerexamplewidget_SRCS} )
 

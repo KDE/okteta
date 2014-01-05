@@ -350,7 +350,7 @@ else( OKTETA_DEBUG_SCRIPT )
     message( STATUS "Okteta will be compiled without script debugging. (-DOKTETA_DEBUG_SCRIPT=1 to enable)" )
 endif( OKTETA_DEBUG_SCRIPT )
 kde4_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structviewpreferences.kcfgc )
-kde4_add_ui_files( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
+qt5_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp

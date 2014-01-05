@@ -24,6 +24,9 @@
 #include "structviewpreferences.h"
 #include "../structlogging.h"
 
+#include <KLocalizedString>
+
+
 StructViewDisplaySettingsWidget::StructViewDisplaySettingsWidget() :
     QWidget(NULL)
 {
