@@ -107,7 +107,7 @@ void PrintTool::print()
         HeaderFooterFrameRenderer *footerFrameRenderer = new HeaderFooterFrameRenderer( &info );
         footerFrameRenderer->setTexts( i18nc("in the footer of the printed page, e.g. Printed by: Joe User",
                                              "Printed by: %U"),
-                                       i18nc("advertizer in the footer of the printed page","Okteta, built on KDE4"),
+                                       QString(),
                                        QStringLiteral("%F") );
         footerFrameRenderer->setWidth( width );
         const int footerTop = pageRect.bottom() - footerFrameRenderer->height();
