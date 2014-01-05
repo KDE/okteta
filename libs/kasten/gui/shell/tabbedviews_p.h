@@ -30,7 +30,7 @@
 #include "viewbox.h"
 #include <abstractview.h>
 // Qt
-#include <KTabWidget>
+#include <QTabWidget>
 
 
 namespace Kasten2
@@ -68,7 +68,7 @@ class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
 
   public: // Q_SLOTS:
     void onCurrentChanged( int index );
-    void onCloseRequest( QWidget* widget );
+    void onTabCloseRequest( int tabIndex );
     void onTitleChanged( const QString &newTitle );
 //     void onModifiedChanged( Kasten2::AbstractDocument::SyncStates newStates );
     void onViewFocusChanged( bool focusChanged );
@@ -81,7 +81,7 @@ class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
 
   protected:
     ViewAreaBox* mViewAreaBox;
-    KTabWidget* mTabWidget;
+    QTabWidget* mTabWidget;
 
     AbstractView* mCurrentView;
 };
