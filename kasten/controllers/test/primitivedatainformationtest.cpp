@@ -20,7 +20,7 @@
 
 #include <QtTest/QTest>
 #include <QtGlobal>
-#include <KLocale>
+#include <QLocale>
 #include <limits>
 #include <bytearraymodel.h>
 
@@ -107,8 +107,10 @@ void PrimitiveDataInformationTest::initTestCase()
 {
     Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
     Kasten2::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
-    KLocale::global()->setDecimalSymbol(QStringLiteral("."));
-    KLocale::global()->setThousandsSeparator(QStringLiteral(""));
+    QLocale locale(QLocale::C);
+    locale.setNumberOptions(QLocale::OmitGroupSeparator);
+    QLocale::setDefault(locale);
+
     LoggerWithContext lwc(0, QString());
 
     for (int i = Type_START; i < Type_Bitfield; ++i)

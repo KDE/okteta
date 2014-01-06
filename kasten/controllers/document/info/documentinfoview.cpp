@@ -26,7 +26,6 @@
 #include "documentinfotool.h"
 // KF5
 #include <KLocalizedString>
-#include <KLocale>
 #include <KIconLoader>
 #include <KSeparator>
 #include <KSqueezedTextLabel>
@@ -36,6 +35,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QGridLayout>
+#include <QLocale>
 #include <QtCore/QMimeType>
 
 
@@ -189,7 +189,7 @@ void DocumentInfoView::onDocumentSizeChanged( int newSize )
     const QString size = ( newSize != -1 ) ?
         QString::fromLatin1( "%1 (%2)" )
         .arg( KIO::convertSize(newSize) )
-        .arg( KLocale::global()->formatNumber(newSize, 0) ) :
+        .arg( QLocale().toString(newSize) ) :
         QString::fromLatin1( "-" );
     mSizeLabel->setText( size );
 }

@@ -36,9 +36,6 @@
 #include <abstractsyncwithremotejob.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KF5
-#include <KLocale>
-#include <QtTest/QTest>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
@@ -60,9 +57,6 @@ static const char TestDataChar = 0;
 
 void ByteArrayRawFileSynchronizerTest::initTestCase()
 {
-    // TODO: see if this could be part of a QTEST_KDE* macro
-    KLocale::global(); //TODO still necessary?
-
     QByteArray byteArray( TestDataSize, TestDataChar );
     ::textureByteArray( &byteArray );
 

@@ -124,7 +124,6 @@ add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
 target_link_libraries( ${oktetacore_LIB} LINK_PUBLIC Qt5::Core )
 target_link_libraries( ${oktetacore_LIB} LINK_PRIVATE
   KF5::I18n
-  KF5::KDE4Support
   KF5::Codecs   #needed for codecs
 )
 

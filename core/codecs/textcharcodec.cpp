@@ -25,7 +25,6 @@
 // lib
 #include <character.h>
 // KF5
-#include <KLocale>
 #include <KCharsets>
 // Qt
 #include <QtCore/QTextCodec>
@@ -176,7 +175,7 @@ QString TextCharCodec::nameOfEncoding( CharCoding _char )
 
 TextCharCodec* TextCharCodec::createLocalCodec()
 {
-    QTextCodec* codec = KLocale::global()->codecForEncoding();
+    QTextCodec* codec = QTextCodec::codecForLocale();
     if( ! is8Bit(codec) )
         codec = createLatin1();
     return new TextCharCodec( codec );

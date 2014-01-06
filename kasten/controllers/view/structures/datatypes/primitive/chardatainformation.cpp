@@ -21,10 +21,13 @@
  */
 #include "chardatainformation.h"
 
-#include <QScriptValue>
+// KF5
 #include <KLineEdit>
-#include <KLocale>
 #include <KLocalizedString>
+// Qt
+#include <QLocale>
+#include <QScriptValue>
+
 
 #include "structviewpreferences.h"
 
@@ -56,9 +59,9 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
     if (Kasten2::StructViewPreferences::showCharNumericalValue())
     {
         int base = Kasten2::StructViewPreferences::charDisplayBase();
-        QString num = QString::number(value, base);
-        if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KLocale::global()->formatNumber(num, false, 0);
+        const QString num = (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
+            ? QLocale().toString(value)
+            : QString::number(value, base);
         charStr += QStringLiteral(" (") + PrimitiveDataInformation::basePrefix(base)
                 + num + QLatin1Char(')');
     }

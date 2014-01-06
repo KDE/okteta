@@ -24,9 +24,9 @@
 
 // KF5
 #include <KLocalizedString>
-#include <KLocale>
 #include <KUser>
 // Qt
+#include <QtCore/QLocale>
 #include <QtCore/QHash>
 #include <QtCore/QDateTime>
 #include <QtGui/QPainter>
@@ -90,11 +90,12 @@ void HeaderFooterFrameRenderer::prepare()
     // create list of replacements
     QHash<char,QString> tagReplacements;
 
-    tagReplacements['d'] = KLocale::global()->formatDateTime( dateTime, KLocale::ShortDate );
-    tagReplacements['D'] = KLocale::global()->formatDateTime( dateTime, KLocale::LongDate );
-    tagReplacements['h'] = KLocale::global()->formatTime( dateTime.time(), false );
-    tagReplacements['y'] = KLocale::global()->formatDate( dateTime.date(), KLocale::ShortDate );
-    tagReplacements['Y'] = KLocale::global()->formatDate( dateTime.date(), KLocale::LongDate );
+    QLocale locale;
+    tagReplacements['d'] = locale.toString( dateTime, QLocale::ShortFormat );
+    tagReplacements['D'] = locale.toString( dateTime, QLocale::LongFormat );
+    tagReplacements['h'] = locale.toString( dateTime.time(), QLocale::ShortFormat );
+    tagReplacements['y'] = locale.toString( dateTime.date(), QLocale::ShortFormat );
+    tagReplacements['Y'] = locale.toString( dateTime.date(), QLocale::LongFormat );
     tagReplacements['u'] = user.loginName();
     tagReplacements['U'] = user.property( KUser::FullName ).toString();
 //     tagReplacements['f'] = isSelection ? i18n("(Selection of) %1", url.fileName()) : url.fileName();

@@ -23,9 +23,11 @@
 #include "../poddecoder/typeeditors/sintspinbox.h"
 #include "../../structlogging.h"
 
-#include <QScriptValue>
-#include <KLocale>
+// KF5
 #include <KLocalizedString>
+// Qt
+#include <QScriptValue>
+#include <QLocale>
 
 template<typename T>
 QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
@@ -33,10 +35,9 @@ QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
     QString num;
     if (base == 10)
     {
-        num = QString::number(val, base);
-        if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KLocale::global()->formatNumber(num, false, 0);
-        return num;
+        return Kasten2::StructViewPreferences::localeAwareDecimalFormatting()
+            ? QLocale().toString(val)
+            : QString::number(val, base);
     }
     //the absolute value of negative minimum can not be represented as a signed integer
     //casting it to an unsigned value yields the correct result

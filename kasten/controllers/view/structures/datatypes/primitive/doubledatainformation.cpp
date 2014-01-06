@@ -21,10 +21,12 @@
  */
 #include "doubledatainformation.h"
 
-#include <QScriptValue>
-#include <KLocale>
-#include <QDoubleSpinBox>
+// KF5
 #include <KLocalizedString>
+// Qt
+#include <QScriptValue>
+#include <QLocale>
+#include <QDoubleSpinBox>
 
 #include "structviewpreferences.h"
 
@@ -62,8 +64,7 @@ QScriptValue DoubleDataInformationMethods::asScriptValue(double value, QScriptEn
 
 QString DoubleDataInformationMethods::staticValueString(double value)
 {
-	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
-		return KLocale::global()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());
-	else
-		return QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
+    return (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
+        ? QLocale().toString(value, 'g', Kasten2::StructViewPreferences::floatPrecision())
+        : QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
 }
