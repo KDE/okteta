@@ -116,7 +116,7 @@ ecm_add_test(
   textcharcodectest.cpp
   TEST_NAME textcharcodectest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n KF5::Codecs KF5::KDE4Support
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n KF5::Codecs
 )
 
 
@@ -125,7 +125,7 @@ ecm_add_test(
   textcharcodeccharcodeciftest.cpp
   TEST_NAME textcharcodeccharcodeciftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n KF5::Codecs KF5::KDE4Support
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n KF5::Codecs
 )
 
 

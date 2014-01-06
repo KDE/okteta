@@ -60,7 +60,6 @@ ecm_add_test(
   testoktetacore
   KF5::I18n
   KF5::Bookmarks
-  KF5::KDE4Support
   Qt5::Test
 )
 

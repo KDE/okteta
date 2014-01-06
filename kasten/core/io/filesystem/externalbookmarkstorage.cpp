@@ -32,8 +32,7 @@
 #include <abstractbytearraymodel.h>
 // KF5
 #include <KBookmarkManager>
-#include <KBookmarkGroup>
-
+// Qt
 #include <QStandardPaths>
 
 namespace Kasten2
