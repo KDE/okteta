@@ -29,7 +29,6 @@
 #include <KConfigGroup>
 #include <KConfig>
 #include <KDirWatch>
-#include <KLockFile>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>

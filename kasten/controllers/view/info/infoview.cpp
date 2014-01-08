@@ -29,10 +29,10 @@
 // KF5
 #include <KGuiItem>
 #include <KLocalizedString>
-#include <KGlobalSettings>
 // Qt
 #include <QtWidgets/QApplication>
 #include <QtCore/QSortFilterProxyModel>
+#include <QFontDatabase>
 #include <QPushButton>
 #include <QLabel>
 #include <QLayout>
@@ -86,12 +86,13 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     baseLayout->addLayout( topLineLayout );
 
     mStatisticTableView = new QTreeView( this );
-    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
-             this, &InfoView::setFixedFontByGlobalSettings );
-    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
-             this, &InfoView::resizeColumnsWidth );
-    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
-             this, &InfoView::resizeColumnsWidth );
+    // TODO: find a signal/event emitted when fixedfont changes
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &InfoView::setFixedFontByGlobalSettings );
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &InfoView::resizeColumnsWidth );
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
+//              this, &InfoView::resizeColumnsWidth );
     setFixedFontByGlobalSettings(); //do this before setting model
     mStatisticTableView->setObjectName( QStringLiteral( "StatisticTable" ) );
     mStatisticTableView->setRootIsDecorated( false );
@@ -118,7 +119,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     //if nothing has changed reuse the old values. This means the info view is fully constructed much quicker.
     const QList<int> columnsWidth = InfoViewSettings::columnsWidth();
     const QString styleName = QApplication::style()->objectName();
-    const QString fixedFontData = KGlobalSettings::fixedFont().toString();
+    const QString fixedFontData = QFontDatabase::systemFont(QFontDatabase::FixedFont).toString();
     if ( columnsWidth.size() < StatisticTableModel::NoOfIds || styleName != InfoViewSettings::style()
             || fixedFontData != InfoViewSettings::fixedFont() )
     {
@@ -159,7 +160,7 @@ void InfoView::setByteArraySize( int size )
 
 void InfoView::setFixedFontByGlobalSettings()
 {
-    mStatisticTableView->setFont( KGlobalSettings::fixedFont() );
+    mStatisticTableView->setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 InfoView::~InfoView() 
@@ -172,7 +173,7 @@ InfoView::~InfoView()
     }
     InfoViewSettings::setColumnsWidth( columnsWidth );
     InfoViewSettings::setStyle( QApplication::style()->objectName() );
-    InfoViewSettings::setFixedFont( KGlobalSettings::fixedFont().toString() );
+    InfoViewSettings::setFixedFont( QFontDatabase::systemFont(QFontDatabase::FixedFont).toString() );
     InfoViewSettings::self()->writeConfig();
 }
 

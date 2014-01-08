@@ -31,10 +31,10 @@
 #include <QPushButton>
 #include <KLocalizedString>
 #include <KStandardGuiItem>
-#include <KGlobalSettings>
 // Qt
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QSpinBox>
+#include <QFontDatabase>
 #include <QLabel>
 #include <QLayout>
 #include <QHeaderView>
@@ -52,12 +52,13 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     baseLayout->setMargin( 0 );
 
     mByteTableView = new QTreeView( this );
-    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
-             this, &ByteTableView::setFixedFontByGlobalSettings );
-    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
-             this, &ByteTableView::resizeColumnsWidth );
-    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
-             this, &ByteTableView::resizeColumnsWidth );
+    // TODO: find a signal/event emitted when fixedfont changes
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &ByteTableView::setFixedFontByGlobalSettings );
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &ByteTableView::resizeColumnsWidth );
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
+//              this, &ByteTableView::resizeColumnsWidth );
     setFixedFontByGlobalSettings(); //do this before setting model
     mByteTableView->setObjectName( QStringLiteral( "ByteTable" ) );
     mByteTableView->setRootIsDecorated( false );
@@ -111,7 +112,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     //after ~3ms and not 800 as it was before. If the saved values can not be reused it takes ~100ms
     const QList<int> columnsWidth = ByteTableViewSettings::columnsWidth();
     const QString styleName = QApplication::style()->objectName();
-    const QString fixedFontData = KGlobalSettings::fixedFont().toString();
+    const QString fixedFontData = QFontDatabase::systemFont(QFontDatabase::FixedFont).toString();
     if ( columnsWidth.size() < ByteTableModel::NoOfIds || styleName != ByteTableViewSettings::style()
             || fixedFontData != ByteTableViewSettings::fixedFont() )
     {
@@ -148,7 +149,7 @@ void ByteTableView::resizeColumnsWidth()
 
 void ByteTableView::setFixedFontByGlobalSettings()
 {
-    mByteTableView->setFont( KGlobalSettings::fixedFont() );
+    mByteTableView->setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 void ByteTableView::onDoubleClicked( const QModelIndex &index )
@@ -176,7 +177,7 @@ ByteTableView::~ByteTableView()
     }
     ByteTableViewSettings::setColumnsWidth( columnsWidth );
     ByteTableViewSettings::setStyle( QApplication::style()->objectName() );
-    ByteTableViewSettings::setFixedFont( KGlobalSettings::fixedFont().toString() );
+    ByteTableViewSettings::setFixedFont( QFontDatabase::systemFont(QFontDatabase::FixedFont).toString() );
     ByteTableViewSettings::self()->writeConfig();
 }
 

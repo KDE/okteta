@@ -30,8 +30,8 @@
 #include <abstractbytearrayview.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KF5
-#include <KGlobalSettings>
+// Qt
+#include <QFontDatabase>
 
 
 namespace Kasten2
@@ -108,8 +108,9 @@ void ByteArrayView::init()
     mWidget = new Okteta::ByteArrayJanusView();
     mWidget->setByteArrayModel( content );
 
-    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
-             this, &ByteArrayView::setFontByGlobalSettings );
+    // TODO: find a signal/event emitted when fixedfont changes
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &ByteArrayView::setFontByGlobalSettings );
     setFontByGlobalSettings();
 
     mWidget->setNoOfBytesPerLine( 16 );
@@ -414,7 +415,7 @@ int ByteArrayView::viewModus() const
 
 void ByteArrayView::setFontByGlobalSettings()
 {
-    mWidget->propagateFont( KGlobalSettings::fixedFont() );
+    mWidget->propagateFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 ByteArrayView::~ByteArrayView()

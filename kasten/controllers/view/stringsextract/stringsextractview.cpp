@@ -29,8 +29,8 @@
 #include <KLineEdit>
 #include <KGuiItem>
 #include <KLocalizedString>
-#include <KGlobalSettings>
 // Qt
+#include <QFontDatabase>
 #include <QLabel>
 #include <QLayout>
 #include <QSpinBox>
@@ -116,8 +116,9 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
              mSortFilterProxyModel, &QSortFilterProxyModel::setFilterFixedString );
 
     mContainedStringTableView = new QTreeView( this );
-    connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
-             this, &StringsExtractView::setFixedFontByGlobalSettings );
+    // TODO: find a signal/event emitted when fixedfont changes
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &StringsExtractView::setFixedFontByGlobalSettings );
     setFixedFontByGlobalSettings(); //do this before setting model
     mContainedStringTableView->setObjectName( QStringLiteral( "ContainedStringTable" ) );
     mContainedStringTableView->setRootIsDecorated( false );
@@ -199,7 +200,7 @@ bool StringsExtractView::eventFilter( QObject* object, QEvent* event )
 
 void StringsExtractView::setFixedFontByGlobalSettings()
 {
-    mContainedStringTableView->setFont( KGlobalSettings::fixedFont() );
+    mContainedStringTableView->setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 void StringsExtractView::onStringsUptodateChanged( bool stringsUptodate )
