@@ -26,8 +26,8 @@
 // tool
 #include "structuredefinitionfile.h"
 #include "structlogging.h"
-#include <KStandardDirs>
-#include <KGlobal>
+// Qt
+#include <QStandardPaths>
 #include <QDir>
 
 namespace Kasten2
@@ -50,9 +50,23 @@ void StructuresManager::reloadPaths()
     qDeleteAll(mDefs);
     mDefs.clear();
     mLoadedFiles.clear();
-    QStringList paths = KGlobal::dirs()->findAllResources("data",
-            QStringLiteral("okteta/structures/*/*.desktop"), KStandardDirs::Recursive
-                    | KStandardDirs::NoDuplicates);
+    QStringList paths;
+    const QStringList structuresDirs = QStandardPaths::locateAll( QStandardPaths::GenericDataLocation,
+            QStringLiteral("okteta/structures"), QStandardPaths::LocateDirectory );
+    foreach( const QString& structuresDir, structuresDirs )
+    {
+        const QStringList entries = QDir( structuresDir ).entryList( QDir::Dirs );
+        foreach( const QString& e, entries )
+        {
+            const QString structureBasePath = structuresDir + QLatin1Char('/') + e;
+            const QStringList desktopFiles =
+                QDir(structureBasePath).entryList( QStringList(QStringLiteral("*.desktop")) );
+            foreach(const QString& desktopFile, desktopFiles)
+            {
+                paths << structureBasePath + QLatin1Char('/') + desktopFile;
+            }
+        }
+    }
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "found structures: " << paths;
     KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));
     foreach(const KPluginInfo& info, plugins)

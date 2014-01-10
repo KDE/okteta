@@ -30,9 +30,7 @@
 #include <QScriptEngine>
 #include <QScriptContext>
 #include <QScriptValueIterator>
-
-#include <KGlobal>
-#include <KStandardDirs>
+#include <QStandardPaths>
 
 
 namespace ScriptEngineInitializer
@@ -334,7 +332,7 @@ QScriptValue importScriptFunc(QScriptContext* ctx, QScriptEngine* eng)
     QString arg = ctx->argument(0).toString();
     if (arg.contains(QStringLiteral("..")))
         return ctx->throwError(QStringLiteral("importScript(): You may only access installed structure files! Path traversal detected."));
-    QString fileName = KGlobal::dirs()->findResource("data", QStringLiteral("okteta/structures/") + arg);
+    const QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("okteta/structures/") + arg);
     if (fileName.isEmpty())
         return ctx->throwError(QStringLiteral("importScript(): could not find file to import!"));
     QFile file(fileName);

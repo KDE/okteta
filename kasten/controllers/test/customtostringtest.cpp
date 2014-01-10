@@ -19,8 +19,7 @@
  */
 #include <QtTest/QtTest>
 #include <QScriptEngine>
-#include <KGlobal>
-#include <KStandardDirs>
+
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/parsers/scriptvalueconverter.h"
 #include "view/structures/datatypes/topleveldatainformation.h"
@@ -31,21 +30,9 @@ class CustomToStringTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
-    void initTestCase();
     void testUuid_data();
     void testUuid();
 };
-
-void CustomToStringTest::initTestCase()
-{
-    //needed so that imports can be resolved
-    QString resources = QFINDTESTDATA("resources");
-    QString examples = QFINDTESTDATA("../view/structures/examples");
-    QVERIFY2(!resources.isEmpty(), "Test data must exist!");
-    QVERIFY2(!examples.isEmpty(), "Test data must exist!");
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", resources));
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", examples));
-}
 
 static uchar uuid1[16] =
 {

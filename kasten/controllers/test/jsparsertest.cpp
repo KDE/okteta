@@ -23,8 +23,6 @@
 
 #include <QtTest/QtTest>
 #include <QScriptEngine>
-#include <KGlobal>
-#include <KStandardDirs>
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/parsers/scriptvalueconverter.h"
 #include "testutils.h"
@@ -125,8 +123,9 @@ void JsParserTest::initTestCase()
     QString examples = QFINDTESTDATA("../view/structures/examples");
     QVERIFY2(!resources.isEmpty(), "Test data must exist!");
     QVERIFY2(!examples.isEmpty(), "Test data must exist!");
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", resources));
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", examples));
+    qputenv("XDG_DATA_DIRS",
+            QFile::encodeName(QFileInfo(resources).absoluteFilePath()) + ':' +
+            QFile::encodeName(QFileInfo(examples).absoluteFilePath()));
 }
 
 void JsParserTest::testByteOrder_data()
