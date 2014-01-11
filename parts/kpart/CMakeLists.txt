@@ -38,7 +38,6 @@ set( oktetapart_SRCS
   part.cpp
   browserextension.cpp
   partfactory.cpp
-  main.cpp
 )
 
 add_library( oktetapart  MODULE ${oktetapart_SRCS} )
@@ -56,7 +55,7 @@ target_link_libraries( oktetapart
 )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
-install( FILES oktetapart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
+kservice_desktop_to_json( oktetapart.desktop )
 install(
   FILES oktetapartreadonlyui.rc oktetapartbrowserui.rc oktetapartreadwriteui.rc
   DESTINATION ${DATA_INSTALL_DIR}/oktetapart

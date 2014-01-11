@@ -25,26 +25,32 @@
 
 // KF5
 #include <KAboutData>
-#include <KParts/Factory>
+#include <KPluginFactory>
 
 namespace Kasten2 {
 class ByteArrayViewProfileManager;
 }
 
 
-class OktetaPartFactory : public KParts::Factory
+class OktetaPartFactory : public KPluginFactory
 {
     Q_OBJECT
 
+    Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE "oktetapart.json")
+
+    Q_INTERFACES(KPluginFactory)
+
   public:
-    OktetaPartFactory();
+    explicit OktetaPartFactory( const char* componentName = 0, QObject* parent = 0 );
 
     virtual ~OktetaPartFactory();
 
-  public:
-    virtual KParts::Part* createPartObject( QWidget* parentWidget,
-                                            QObject* parent,
-                                            const char* className, const QStringList& args );
+  public: // KPluginFactory API
+    virtual QObject* create( const char* iface,
+                             QWidget* parentWidget,
+                             QObject* parent,
+                             const QVariantList& args,
+                             const QString& keyword );
 
   private:
     KAboutData mAboutData;

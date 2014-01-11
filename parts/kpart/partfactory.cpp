@@ -34,8 +34,9 @@
 #include <KLocalizedString>
 
 
-OktetaPartFactory::OktetaPartFactory()
-  : mAboutData( QStringLiteral("oktetapart"), QString(), i18n("OktetaPart"), QStringLiteral("0.5.0"),
+OktetaPartFactory::OktetaPartFactory( const char* componentName, QObject* parent )
+  : KPluginFactory( componentName, parent )
+  , mAboutData( QStringLiteral("oktetapart"), QString(), i18n("OktetaPart"), QStringLiteral("0.5.0"),
                 i18n("Embedded hex editor"), KAboutData::License_GPL_V2, i18n("2003-2014 Friedrich W. H. Kossebau") )
 {
 // TODO: also load encoder and other plugins here
@@ -64,14 +65,17 @@ OktetaPartFactory::OktetaPartFactory()
 }
 
 
-KParts::Part* OktetaPartFactory::createPartObject( QWidget* parentWidget,
-                                                   QObject* parent,
-                                                   const char* cn, const QStringList& args )
+QObject* OktetaPartFactory::create( const char* iface,
+                                    QWidget* parentWidget,
+                                    QObject* parent,
+                                    const QVariantList& args,
+                                    const QString& keyword )
 {
 Q_UNUSED( parentWidget )
 Q_UNUSED( args )
+Q_UNUSED( keyword );
 
-    const QByteArray className( cn );
+    const QByteArray className( iface );
     const OktetaPart::Modus modus =
         ( className == "KParts::ReadOnlyPart" ) ? OktetaPart::ReadOnlyModus :
         ( className == "Browser/View" ) ?         OktetaPart::BrowserViewModus :
