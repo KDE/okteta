@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,8 @@
 #include "abstractfilesystemsynctoremotejob_p.h"
 
 // KF5
-#include <kio/netaccess.h>
+#include <KIO/FileCopyJob>
+#include <KJobWidgets>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
@@ -81,11 +82,15 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
 
         if( ! isLocalFile )
         {
-            success = KIO::NetAccess::upload( mWorkFilePath, url, 0 );
+            KIO::FileCopyJob* fileCopyJob =
+                KIO::file_copy( QUrl::fromLocalFile(mWorkFilePath), url, -1, KIO::Overwrite );
+            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+
+            success = fileCopyJob->exec();
             if( ! success )
             {
                 q->setError( KJob::KilledJobError );
-                q->setErrorText( KIO::NetAccess::lastErrorString() );
+                q->setErrorText( fileCopyJob->errorString() );
             }
             else
                 mSynchronizer->setRemoteState( RemoteUnknown );

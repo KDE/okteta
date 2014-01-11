@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,9 @@
 #include "abstractfilesystemexportjob_p.h"
 
 // KF5
-#include <kio/netaccess.h>
-
+#include <KIO/FileCopyJob>
+#include <KJobWidgets>
+// Qt
 #include <QTemporaryFile>
 
 
@@ -71,11 +72,15 @@ void AbstractFileSystemExportJobPrivate::completeExport( bool success )
     {
         if( ! mUrl.isLocalFile() )
         {
-            success = KIO::NetAccess::upload( mWorkFilePath, mUrl, 0 );
+            KIO::FileCopyJob* fileCopyJob =
+                KIO::file_copy( QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite );
+            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+
+            success = fileCopyJob->exec();
             if( ! success )
             {
                 q->setError( KJob::KilledJobError );
-                q->setErrorText( KIO::NetAccess::lastErrorString() );
+                q->setErrorText( fileCopyJob->errorString() );
             }
         }
     }
