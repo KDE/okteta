@@ -27,12 +27,12 @@
 #include <abstractmodelfilesystemsynchronizer.h>
 // KF5
 #include <KActionCollection>
-#include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QUrl>
+#include <QAction>
 
 
 namespace Kasten2

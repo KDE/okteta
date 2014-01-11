@@ -30,7 +30,8 @@
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>
-#include <KAction>
+// Qt
+#include <QAction>
 
 
 namespace Kasten2

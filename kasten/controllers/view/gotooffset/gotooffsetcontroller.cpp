@@ -30,8 +30,9 @@
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
-#include <KAction>
 #include <KActionCollection>
+// Qt
+#include <QAction>
 
 
 namespace Kasten2

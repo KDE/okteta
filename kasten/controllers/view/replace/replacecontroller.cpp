@@ -29,12 +29,11 @@
 // KF5
 #include <KXmlGuiWindow>
 #include <KLocalizedString>
-#include <KAction>
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KMessageBox>
 // Qt
-#include <QApplication>
+#include <QAction>
 
 
 namespace Kasten2

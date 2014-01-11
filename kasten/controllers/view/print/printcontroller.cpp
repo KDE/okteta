@@ -28,8 +28,8 @@
 #include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KStandardAction>
-#include <KAction>
-
+// Qt
+#include <QAction>
 
 namespace Kasten2
 {

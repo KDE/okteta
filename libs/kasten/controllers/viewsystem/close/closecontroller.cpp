@@ -26,9 +26,10 @@
 #include <viewmanager.h>
 // KF5
 #include <KActionCollection>
-#include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
+// Qt
+#include <QAction>
 
 
 namespace Kasten2

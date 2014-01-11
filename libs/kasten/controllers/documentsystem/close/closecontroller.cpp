@@ -27,10 +27,11 @@
 #include <abstractdocument.h>
 // KF5
 #include <KActionCollection>
-#include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
+// Qt
+#include <QAction>
 
 
 namespace Kasten2

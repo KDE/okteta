@@ -27,7 +27,6 @@
 // KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>
-#include <KAction>
 // Qt
 #include <QActionGroup>
 

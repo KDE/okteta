@@ -33,8 +33,9 @@
 #include <KXMLGUIFactory>
 #include <KActionMenu>
 #include <KActionCollection>
-#include <KAction>
 #include <KLocalizedString>
+// Qt
+#include <QAction>
 
 
 namespace Kasten2
