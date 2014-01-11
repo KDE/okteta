@@ -126,9 +126,9 @@ generate_export_header( ${kastencore_LIB} )
 target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core Qt5::Gui KF5::KIOCore )
 target_link_libraries( ${kastencore_LIB} LINK_PRIVATE
   KF5::I18n
+  KF5::JobWidgets
   KF5::Solid
   KF5::WidgetsAddons
-  KF5::KDE4Support #for KIO::NetAccess (TODO: port away)
 )
 set_target_properties( ${kastencore_LIB} PROPERTIES
   OUTPUT_NAME ${kastencore_LIB_NAME}

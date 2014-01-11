@@ -67,6 +67,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractCon
     const AbstractModelSynchronizer::ConnectOption mOption;
     QFile* mFile;
     QString mWorkFilePath;
+    QString mTempFilePath;
 };
 
 

@@ -62,6 +62,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJobPrivate : public Abst
   protected:
     AbstractModelFileSystemSynchronizer* mSynchronizer;
     QString mWorkFilePath;
+    QString mTempFilePath;
     QFile* mFile;
 };
 

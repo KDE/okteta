@@ -62,6 +62,7 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
     const QUrl mUrl;
     QFile* mFile;
     QString mWorkFilePath;
+    QString mTempFilePath;
 };
 
 

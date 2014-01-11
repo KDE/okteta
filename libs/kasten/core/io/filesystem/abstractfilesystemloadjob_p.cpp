@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,10 +26,12 @@
 #include "abstractmodelfilesystemsynchronizer.h"
 #include <abstractdocument.h>
 // KF5
-#include <kio/netaccess.h>
+#include <KIO/FileCopyJob>
+#include <KJobWidgets>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
+#include <QTemporaryFile>
 
 
 namespace Kasten2
@@ -39,13 +41,36 @@ void AbstractFileSystemLoadJobPrivate::load()
 {
     Q_Q( AbstractFileSystemLoadJob );
 
-    // TODO: see if this could be used asynchronously instead
-    bool isWorkFileOk = KIO::NetAccess::download( mUrl, mWorkFilePath, 0 );
+    bool isWorkFileOk;
+
+    if( mUrl.isLocalFile() )
+    {
+        // file protocol. We do not need the network
+        mWorkFilePath = mUrl.toLocalFile();
+        isWorkFileOk = true;
+    } else {
+        QTemporaryFile tmpFile;
+        tmpFile.setAutoRemove( false );
+        tmpFile.open();
+
+        mWorkFilePath = tmpFile.fileName();
+        mTempFilePath = mWorkFilePath;
+
+        KIO::FileCopyJob* fileCopyJob =
+            KIO::file_copy( mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite );
+        KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+
+        isWorkFileOk = fileCopyJob->exec();
+        if( ! isWorkFileOk )
+            q->setErrorText( fileCopyJob->errorString() );
+    }
 
     if( isWorkFileOk )
     {
         mFile = new QFile( mWorkFilePath );
         isWorkFileOk = mFile->open( QIODevice::ReadOnly );
+        if( ! isWorkFileOk )
+            q->setErrorText( mFile->errorString() );
     }
 
     if( isWorkFileOk )
@@ -53,7 +78,6 @@ void AbstractFileSystemLoadJobPrivate::load()
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile ? mFile->errorString() : KIO::NetAccess::lastErrorString() );
         // TODO: should we rather skip setDocument in the API?
         q->AbstractLoadJob::setDocument( 0 );
     }
@@ -89,7 +113,9 @@ void AbstractFileSystemLoadJobPrivate::setDocument( AbstractDocument* document )
     }
 
     delete mFile;
-    KIO::NetAccess::removeTempFile( mWorkFilePath );
+
+    if( ! mTempFilePath.isEmpty() )
+        QFile::remove( mTempFilePath );
 
     q->AbstractLoadJob::setDocument( document );
 }
