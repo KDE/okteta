@@ -35,7 +35,8 @@
 #include <abstractmodelsynchronizerfactory.h>
 #include <abstractdocument.h>
 // KF5
-#include <kio/netaccess.h>
+#include <KIO/StatJob>
+#include <KJobWidgets>
 #include <KLocalizedString>
 // Qt
 #include <QUrl>
@@ -136,8 +137,11 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 
             if( isNewUrl )
             {
-                const bool isUrlInUse =
-                    KIO::NetAccess::exists( newUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
+                KIO::StatJob* statJob = KIO::stat( newUrl );
+                statJob->setSide(  KIO::StatJob::DestinationSide );
+                KJobWidgets::setWindow( statJob, /*mWidget*/0 );
+
+                const bool isUrlInUse = statJob->exec();
 
                 if( isUrlInUse )
                 {

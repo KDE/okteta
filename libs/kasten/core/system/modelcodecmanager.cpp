@@ -32,7 +32,8 @@
 #include "documentmanager.h"
 #include "abstractexportjob.h"
 // KF5
-#include <kio/netaccess.h>
+#include <KIO/StatJob>
+#include <KJobWidgets>
 #include <KLocalizedString>
 // Qt
 #include <QFileDialog>
@@ -130,7 +131,12 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         if( !exportUrls.isEmpty() )
         {
             const QUrl& exportUrl = exportUrls.at(0);
-            const bool isUrlInUse = KIO::NetAccess::exists( exportUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
+
+            KIO::StatJob* statJob = KIO::stat( exportUrl );
+            statJob->setSide(  KIO::StatJob::DestinationSide );
+            KJobWidgets::setWindow( statJob, /*mWidget*/0 );
+
+            const bool isUrlInUse = statJob->exec();
 
             if( isUrlInUse )
             {
