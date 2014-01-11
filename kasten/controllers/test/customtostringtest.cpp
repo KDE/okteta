@@ -30,6 +30,7 @@ class CustomToStringTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
+    void initTestCase();
     void testUuid_data();
     void testUuid();
 };
@@ -48,6 +49,14 @@ static uchar nullUuid[16] =
 {
     0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0
 };
+
+void CustomToStringTest::initTestCase()
+{
+    //needed so that imports can be resolved
+    QString examples = QFINDTESTDATA("../view/structures/examples");
+    QVERIFY2(!examples.isEmpty(), "Test data must exist!");
+    qputenv("XDG_DATA_DIRS", QFile::encodeName(QFileInfo(examples).absoluteFilePath()));
+}
 
 void CustomToStringTest::testUuid_data()
 {
