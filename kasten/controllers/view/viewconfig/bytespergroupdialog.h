@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,8 +23,8 @@
 #ifndef BYTESPERGROUPDIALOG_H
 #define BYTESPERGROUPDIALOG_H
 
-// KF5
-#include <KDialog>
+// Qt
+#include <QDialog>
 
 class QSpinBox;
 
@@ -32,7 +32,7 @@ class QSpinBox;
 namespace Kasten2
 {
 
-class BytesPerGroupDialog : public KDialog
+class BytesPerGroupDialog : public QDialog
 {
   public:
     explicit BytesPerGroupDialog( QWidget* parent = 0 );

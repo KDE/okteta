@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -26,20 +26,18 @@
 #include <KLocalizedString>
 // Qt
 #include <QFormLayout>
+#include <QVBoxLayout>
 #include <QSpinBox>
+#include <QDialogButtonBox>
 
 
 namespace Kasten2
 {
 
 BytesPerLineDialog::BytesPerLineDialog( QWidget* parent )
-  : KDialog( parent )
+  : QDialog( parent )
 {
-    QWidget* page = new QWidget( this );
-    setMainWidget( page );
-
-    QFormLayout* pageLayout = new QFormLayout( page );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout();
 
     mBytesPerLineEdit = new QSpinBox( this );
     mBytesPerLineEdit->setRange( 1, INT_MAX );
@@ -48,10 +46,20 @@ BytesPerLineDialog::BytesPerLineDialog( QWidget* parent )
                 "Bytes per Line:" );
     pageLayout->addRow( bytesPerLineLabel, mBytesPerLineEdit );
 
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    dialogButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+
+    QVBoxLayout* layout = new QVBoxLayout;
+
+    layout->addLayout(pageLayout);
+    layout->addWidget(dialogButtonBox);
+    setLayout(layout);
+
     const QString caption =
         i18nc("@title:window","Bytes per Line");
-    setCaption( caption );
-    setButtons( Ok | Cancel );
+    setWindowTitle( caption );
 }
 
 int BytesPerLineDialog::bytesPerLine()      const { return mBytesPerLineEdit->value(); }
