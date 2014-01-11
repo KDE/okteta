@@ -36,11 +36,11 @@
 #include <abstractdocument.h>
 // KF5
 #include <kio/netaccess.h>
-#include <KFileDialog>
 #include <KLocalizedString>
 // Qt
-#include <QApplication>
 #include <QUrl>
+#include <QFileDialog>
+#include <QMimeDatabase>
 
 
 namespace Kasten2
@@ -112,23 +112,6 @@ void DocumentSyncManager::load( const QUrl& url )
     emit urlUsed( url );
 }
 
-/// Creates a filter string as used by KFileDialog from @a _mimetypes
-/// Does a workaround for "application/octet-stream" because the mimetype system
-/// does not have a real entry for it ATM. It is replaced with "all/allfiles" in
-/// the created string which is instead used by Filedialog as fake mimetype for
-/// a type which is base type of all files.
-/// See also e.g. LoaderController.
-static QString mimetypeFilterString( const QStringList& _mimetypes )
-{
-    QStringList mimetypes = _mimetypes;
-
-    const int index = mimetypes.indexOf( QStringLiteral("application/octet-stream") );
-    if( index != -1 )
-        mimetypes.replace( index, QStringLiteral("all/allfiles") );
-
-    return mimetypes.join( QStringLiteral(" ") );
-}
-
 bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 {
     bool storingDone = false;
@@ -139,12 +122,14 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 //         currentSynchronizer->pauseSynchronization(); also unpause below
     const QString processTitle =
         i18nc( "@title:window", "Save As" );
-    const QString filterString = mimetypeFilterString( supportedRemoteTypes() );
     do
     {
-        QUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/QUrl(), filterString, /*mWidget*/0, processTitle );
+        QFileDialog dialog( /*mWidget*/0, processTitle, /*mWorkingUrl.url()*/QString() );
+        dialog.setMimeTypeFilters( supportedRemoteTypes() );
+        dialog.setAcceptMode( QFileDialog::AcceptSave );
+        const QUrl newUrl = dialog.exec() ? dialog.selectedUrls().value(0) : QUrl();
 
-        if( !newUrl.isEmpty() )
+        if( newUrl.isValid() )
         {
             const bool isNewUrl = ( currentSynchronizer == 0 )
                                   || ( newUrl != currentSynchronizer->url() );

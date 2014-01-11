@@ -25,7 +25,6 @@
 // Kasten core
 #include <abstractdocumentstrategy.h>
 // KF5
-#include <KFileDialog>
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include <KStandardAction>
@@ -34,6 +33,8 @@
 #include <KSharedConfig>
 // Qt
 #include <QtCore/QUrl>
+#include <QFileDialog>
+#include <QMimeDatabase>
 
 
 namespace Kasten2
@@ -65,32 +66,17 @@ void LoaderController::setTargetModel( AbstractModel* model )
 Q_UNUSED( model )
 }
 
-/// Creates a filter string as used by KFileDialog from @a _mimetypes
-/// Does a workaround for "application/octet-stream" because the mimetype system
-/// does not have a real entry for it ATM. It is replaced with "all/allfiles" in
-/// the created string which is instead used by Filedialog as fake mimetype for
-/// a type which is base type of all files.
-/// See also DocumentSyncManager.
-static QString mimetypeFilterString( const QStringList& _mimetypes )
-{
-    QStringList mimetypes = _mimetypes;
-
-    const int index = mimetypes.indexOf( QStringLiteral("application/octet-stream") );
-    if( index != -1 )
-        mimetypes.replace( index, QStringLiteral("all/allfiles") );
-
-    return mimetypes.join( QStringLiteral(" ") );
-}
-
 void LoaderController::load()
 {
-    const QString filterString = mimetypeFilterString( mDocumentStrategy->supportedRemoteTypes() );
+    QFileDialog dialog;
+    dialog.setMimeTypeFilters( mDocumentStrategy->supportedRemoteTypes() );
+    if( dialog.exec() )
+    {
+        const QList<QUrl> urls = dialog.selectedUrls();
 
-    const QList<QUrl> urls =
-        KFileDialog::getOpenUrls( QUrl()/*mWorkingUrl.url()*/, filterString, /*mWidget*/0 );
-
-    foreach( const QUrl& url, urls )
-        mDocumentStrategy->load( url );
+        foreach( const QUrl& url, urls )
+            mDocumentStrategy->load( url );
+    }
 }
 
 void LoaderController::loadRecent( const QUrl& url )
