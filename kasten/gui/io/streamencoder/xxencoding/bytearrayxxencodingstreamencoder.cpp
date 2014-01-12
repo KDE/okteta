@@ -90,7 +90,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     unsigned char bitsFromLastByte;
 
     // header
-    textStream << header << " 644 " << mSettings.fileName.toAscii();
+    textStream << header << " 644 " << mSettings.fileName.toLatin1();
 
     const int firstLineLength = qMin( range.width(), xxInputLineLength );
     if( firstLineLength > 0 )
