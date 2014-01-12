@@ -40,7 +40,7 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     mView->setSelectionBehavior(QAbstractItemView::SelectRows);
     QHeaderView* horizHeader = mView->horizontalHeader();
     horizHeader->setAcceptDrops(false);
-    horizHeader->setResizeMode(QHeaderView::Interactive);
+    horizHeader->setSectionResizeMode(QHeaderView::Interactive);
     horizHeader->setSortIndicatorShown(false);
     horizHeader->setStretchLastSection(true);
     if (!mList.isEmpty())

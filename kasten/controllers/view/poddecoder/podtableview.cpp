@@ -67,7 +67,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mPODTableView->setModel( mPODTableModel );
     mPODTableView->installEventFilter( this );
     QHeaderView* header = mPODTableView->header();
-    header->setResizeMode( QHeaderView::Interactive );
+    header->setSectionResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     connect( mPODTableView->selectionModel(),
              &QItemSelectionModel::currentRowChanged,

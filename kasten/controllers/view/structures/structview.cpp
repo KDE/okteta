@@ -83,7 +83,7 @@ StructView::StructView(StructTool* tool, QWidget* parent) :
     mStructTreeView->setSortingEnabled(false);
     mStructTreeView->installEventFilter(this);
     QHeaderView* header = mStructTreeView->header();
-    header->setResizeMode(QHeaderView::Interactive);
+    header->setSectionResizeMode(QHeaderView::Interactive);
 
     baseLayout->addWidget(mStructTreeView, 10);
 

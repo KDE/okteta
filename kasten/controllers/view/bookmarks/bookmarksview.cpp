@@ -60,7 +60,7 @@ BookmarksView::BookmarksView( BookmarksTool* tool, QWidget* parent )
     mBookmarkListView->setAllColumnsShowFocus( true );
     mBookmarkListView->setSelectionMode( QAbstractItemView::ExtendedSelection );
     mBookmarkListView->setModel( mBookmarkListModel );
-    mBookmarkListView->header()->setResizeMode( QHeaderView::Interactive );
+    mBookmarkListView->header()->setSectionResizeMode( QHeaderView::Interactive );
     connect( mBookmarkListView, &QTreeView::doubleClicked,
              this, &BookmarksView::onBookmarkDoubleClicked );
     connect( mBookmarkListView->selectionModel(),

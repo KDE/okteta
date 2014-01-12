@@ -102,7 +102,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mStatisticTableView->setSortingEnabled( true );
     QHeaderView* header = mStatisticTableView->header();
     header->setFont( font() );
-    header->setResizeMode( QHeaderView::Interactive );
+    header->setSectionResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     // TODO: write subclass to filter count and percent by num, not string
     QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel( this );

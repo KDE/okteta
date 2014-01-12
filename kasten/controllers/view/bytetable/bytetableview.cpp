@@ -68,7 +68,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mByteTableView->setSortingEnabled( false );
     QHeaderView* header = mByteTableView->header();
     header->setFont( font() );
-    header->setResizeMode( QHeaderView::Interactive );
+    header->setSectionResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     mByteTableView->setModel( mTool->byteTableModel() );
     connect( mByteTableView, &QTreeView::doubleClicked,

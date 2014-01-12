@@ -130,7 +130,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     mContainedStringTableView->installEventFilter( this );
     QHeaderView* header = mContainedStringTableView->header();
     header->setFont( font() );
-    header->setResizeMode( QHeaderView::Interactive );
+    header->setSectionResizeMode( QHeaderView::Interactive );
     mContainedStringTableView->setModel( mSortFilterProxyModel );
     mContainedStringTableView->sortByColumn( ContainedStringTableModel::OffsetColumnId, Qt::AscendingOrder );
     connect( mContainedStringTableView, &QTreeView::doubleClicked,
