@@ -141,7 +141,7 @@ QString AsciiStringData::completeString(bool skipInvalid) const
         }
         else
         {
-            buf[i] = QChar::fromAscii(val);
+            buf[i] = QChar::fromLatin1(val);
         }
     }
     return QString(buf.constData(), max);
@@ -154,7 +154,7 @@ QString AsciiStringData::stringValue(int row) const
     if (val > ASCII_MAX)
         return i18n("Non-ASCII char: 0x%1", val);
     else
-        return QChar::fromAscii(val);
+        return QChar::fromLatin1(val);
 }
 
 QString AsciiStringData::charType() const
