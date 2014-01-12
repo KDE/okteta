@@ -31,7 +31,6 @@
 #include <KActionCollection>
 #include <KToolBar>
 #include <KLocalizedString>
-#include <kdeversion.h>
 // Qt
 #include <QLayout>
 #include <QUrl>
