@@ -65,7 +65,8 @@ void VersionTableModel::setModel( AbstractModel* model, If::Versionable* version
     }
     mVersionIndex = versionControl ? versionControl->versionIndex() : 0;
 
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 int VersionTableModel::rowCount( const QModelIndex &parent ) const
@@ -157,7 +158,8 @@ void VersionTableModel::onHeadVersionChanged( int newHeadVersionIndex )
 {
     mVersionIndex = newHeadVersionIndex;
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void VersionTableModel::onHeadVersionDataChanged( const DocumentVersionData &versionData )

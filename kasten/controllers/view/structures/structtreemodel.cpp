@@ -259,7 +259,8 @@ void StructTreeModel::onToolDataChange(int row, void* data)
 
 void StructTreeModel::onToolDataClear()
 {
-    emit reset();
+    beginResetModel();
+    endResetModel();
 }
 
 

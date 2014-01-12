@@ -183,12 +183,14 @@ void BookmarkListModel::onHasBookmarksChanged( bool hasBookmarks )
 {
 Q_UNUSED( hasBookmarks )
 
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void BookmarkListModel::onBookmarksChanged()
 {
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void BookmarkListModel::onBookmarksChanged( const QList<int>& bookmarkIndizes )
@@ -200,7 +202,8 @@ void BookmarkListModel::onBookmarksChanged( const QList<int>& bookmarkIndizes )
 void BookmarkListModel::onOffsetCodingChanged( int offsetCoding )
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)offsetCoding );
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 

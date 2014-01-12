@@ -157,7 +157,8 @@ void ViewProfileTableModel::onDefaultIndexChanged()
 
 void ViewProfileTableModel::onViewProfilesChanged()
 {
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void ViewProfileTableModel::onViewProfileLocksChanged(const QList<ByteArrayViewProfile::Id>& viewProfileIds )

@@ -149,7 +149,8 @@ void DocumentListModel::onFocussedDocumentChanged( AbstractDocument* document )
 {
 Q_UNUSED( document )
 
-    reset();
+    beginResetModel();
+    endResetModel();
 // TODO: store current focused document, then only emit for changed
 #if 0
     const int oldVersionIndex = mVersionIndex;
@@ -176,14 +177,16 @@ void DocumentListModel::onDocumentsAdded( const QList<Kasten2::AbstractDocument*
         }
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void DocumentListModel::onDocumentsClosing( const QList<Kasten2::AbstractDocument*>& documents )
 {
 Q_UNUSED( documents )
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 
@@ -198,13 +201,15 @@ void DocumentListModel::onSynchronizerChanged( AbstractModelSynchronizer* synchr
                  SLOT(onSyncStatesChanged()) );
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void DocumentListModel::onSyncStatesChanged()
 {
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 
