@@ -187,7 +187,6 @@ target_link_libraries( ${kastencontrollers_LIB}
   KF5::XmlGui
   KF5::KIOFileWidgets
   KF5::Parts
-  KF5::KDE4Support
 )
 set_target_properties( ${kastencontrollers_LIB}  PROPERTIES
   OUTPUT_NAME ${kastencontrollers_LIB_NAME}

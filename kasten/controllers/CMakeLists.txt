@@ -43,7 +43,7 @@ if( QCA2_FOUND )
   endif( KDE4_ENABLE_FINAL )
 endif( QCA2_FOUND )
 
-macro_bool_to_01( QCA2_FOUND  HAVE_QCA2 )
+set(HAVE_QCA2 ${QCA2_FOUND})
 configure_file( config-qca2.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h )
 
 set( DOCUMENTINFOCONTROLLER_SRCS
@@ -459,10 +459,9 @@ target_link_libraries( structures-static
   Qt5::Script
   Qt5::Xml
   KF5::I18n
-  KF5::KDE4Support
-#  KF5::Completion
-#  KF5::ConfigWidgets
-#  KF5::KCMUtils
+  KF5::Completion
+  KF5::ConfigWidgets
+  KF5::KCMUtils
   ${oktetakastencore_LIB}
   ${oktetakastengui_LIB}
   ${oktetacore_LIB}
@@ -561,7 +560,8 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   KF5::ConfigWidgets
   KF5::KCMUtils
   KF5::PrintUtils
-  KF5::KDE4Support
+  KF5::IconThemes
+  KF5::Completion
   Qt5::Script
   Qt5::ScriptTools
 )

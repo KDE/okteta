@@ -41,7 +41,8 @@ set( okteta_SRCS
   mainwindow.cpp
 )
 
-kde4_add_app_icon(okteta_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/hi*-app-okteta.png")
+#TODO KF5:
+# kde4_add_app_icon(okteta_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/hi*-app-okteta.png")
 
 add_executable( okteta  ${okteta_SRCS} )
 

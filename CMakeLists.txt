@@ -10,6 +10,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_D
 
 include(ECMInstallIcons)
 include(FeatureSummary)
+include(GenerateExportHeader)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -35,9 +36,9 @@ find_package(KF5 CONFIG REQUIRED
     Completion
     ConfigWidgets
     DBusAddons
+    DocTools
     I18n
     KCMUtils
-    KDE4Support
     KIO
     NewStuff
     Parts
