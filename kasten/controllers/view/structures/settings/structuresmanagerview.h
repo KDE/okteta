@@ -24,9 +24,10 @@
 #ifndef STRUCTURESMANAGERVIEW_H
 #define STRUCTURESMANAGERVIEW_H
 
+// KF5
+#include <knewstuff3/entry.h>
 // Qt
 #include <QWidget>
-#include <KNS3/Entry>
 
 class StructureAddRemoveWidget;
 class QPushButton;
