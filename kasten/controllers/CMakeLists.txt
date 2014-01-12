@@ -333,7 +333,7 @@ set( STRUCTVIEW_OTHER_SRCS
   view/structures/structtool.cpp
   view/structures/structtreemodel.cpp
   view/structures/structuredefinitionfile.cpp
-  view/structures/modeltest.cpp
+#   view/structures/modeltest.cpp
   view/structures/structview.cpp
   view/structures/structtoolview.cpp
   view/structures/structviewitemdelegate.cpp

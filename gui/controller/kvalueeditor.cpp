@@ -144,7 +144,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
             if( keyEvent->text().length() > 0
                 && ( !(keyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) ) )
             {
-                const int input = keyEvent->text()[0].toAscii();
+                const int input = keyEvent->text()[0].toLatin1();
                 // no usable char?
                 if( input < 32 )
                 {
