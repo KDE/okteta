@@ -110,7 +110,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
             &base64UumapEncodeData;
 
     // header
-    textStream << encodeData->header << " 644 " << mSettings.fileName.toAscii();
+    textStream << encodeData->header << " 644 " << mSettings.fileName.toLatin1();
 
     const int firstLineLength = qMin( range.width(), uuInputLineLength );
     if( firstLineLength > 0 )
