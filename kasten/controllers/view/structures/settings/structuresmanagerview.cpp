@@ -33,7 +33,7 @@
 #include <KConfigDialogManager>
 #include <KPluginInfo>
 #include <KLocalizedString>
-#include <knewstuff3/button.h>
+#include <KNS3/Button>
 // Qt
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>

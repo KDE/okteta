@@ -25,7 +25,7 @@
 #define STRUCTURESMANAGERVIEW_H
 
 // KF5
-#include <knewstuff3/entry.h>
+#include <KNS3/Entry>
 // Qt
 #include <QWidget>
 
