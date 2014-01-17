@@ -280,7 +280,7 @@ QScriptValue DataInformation::toScriptValue(QScriptEngine* engine, ScriptHandler
 
 QSysInfo::Endian DataInformation::byteOrderFromSettings() const
 {
-    return Kasten2::StructViewPreferences::byteOrder();
+    return Kasten::StructViewPreferences::byteOrder();
 }
 
 

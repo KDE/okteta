@@ -28,7 +28,7 @@
 
 Q_LOGGING_CATEGORY(LOG_KASTEN_CORE, "kasten.core")
 
-namespace Kasten2
+namespace Kasten
 {
 
 // FIXME: Replace with ki18n functionality once semantics is clear.

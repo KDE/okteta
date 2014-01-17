@@ -1,1 +1,1 @@
-#include "../../kasten2/abstracttoolinlineview.h"
+#include "../kasten/abstracttoolinlineview.h"

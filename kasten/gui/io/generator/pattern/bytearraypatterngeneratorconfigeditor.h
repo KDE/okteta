@@ -34,7 +34,7 @@ class ByteArrayComboBox;
 class QSpinBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayPatternGeneratorConfigEditor : public AbstractModelDataGeneratorConfigEditor

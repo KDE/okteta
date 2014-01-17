@@ -31,7 +31,7 @@
 #include <KToggleAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )

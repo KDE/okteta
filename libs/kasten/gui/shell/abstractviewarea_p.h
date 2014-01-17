@@ -29,7 +29,7 @@
 #include <Qt>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractViewAreaPrivate

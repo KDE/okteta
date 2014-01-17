@@ -29,7 +29,7 @@
 class QFile;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelFileSystemSynchronizer;

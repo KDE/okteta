@@ -29,7 +29,7 @@
 #include <abstracttoolview.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class DocumentInfoView;

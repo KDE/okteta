@@ -46,7 +46,7 @@
 // TODO: Stranger that you are reading this: please help out and show how to add QVariant::Types for custom datatypes,
 // so that instead of this unflexible maintanance mess^WWWunlooped code QItemEditorCreator can be used!
 
-namespace Kasten2
+namespace Kasten
 {
 
 PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )

@@ -31,7 +31,7 @@
 class QTextEdit;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractByteArrayStreamEncoder;

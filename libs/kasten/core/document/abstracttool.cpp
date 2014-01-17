@@ -23,7 +23,7 @@
 #include "abstracttool.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractTool::Private

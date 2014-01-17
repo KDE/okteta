@@ -1,1 +1,1 @@
-#include "../../kasten2/abstractmodeldatageneratorconfigeditorfactory.h"
+#include "../kasten/abstractmodeldatageneratorconfigeditorfactory.h"

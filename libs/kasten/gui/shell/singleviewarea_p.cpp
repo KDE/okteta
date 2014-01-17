@@ -27,7 +27,7 @@
 #include <abstracttoolinlineview.h>
 #include <abstractdocument.h>
 
-namespace Kasten2
+namespace Kasten
 {
 
 SingleViewAreaPrivate::SingleViewAreaPrivate( SingleViewArea* parent )

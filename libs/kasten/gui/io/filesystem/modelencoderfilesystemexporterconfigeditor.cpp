@@ -28,7 +28,7 @@
 #include <QLayout>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfigEditor( AbstractModelStreamEncoderConfigEditor* encoderConfigEditor )

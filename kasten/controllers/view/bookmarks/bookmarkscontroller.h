@@ -43,7 +43,7 @@ class QActionGroup;
 class QAction;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayView;

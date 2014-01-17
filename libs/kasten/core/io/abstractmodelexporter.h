@@ -32,7 +32,7 @@
 class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModel;

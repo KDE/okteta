@@ -33,19 +33,19 @@
 #include <QIcon>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* parent )
  : QAbstractTableModel( parent ),
    mDocumentsTool( documentsTool )
 {
-    connect( mDocumentsTool, SIGNAL(documentsAdded(QList<Kasten2::AbstractDocument*>)),
-             SLOT(onDocumentsAdded(QList<Kasten2::AbstractDocument*>)) );
-    connect( mDocumentsTool, SIGNAL(documentsClosing(QList<Kasten2::AbstractDocument*>)),
-             SLOT(onDocumentsClosing(QList<Kasten2::AbstractDocument*>)) );
-    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged(Kasten2::AbstractDocument*)),
-             SLOT(onFocussedDocumentChanged(Kasten2::AbstractDocument*)) );
+    connect( mDocumentsTool, SIGNAL(documentsAdded(QList<Kasten::AbstractDocument*>)),
+             SLOT(onDocumentsAdded(QList<Kasten::AbstractDocument*>)) );
+    connect( mDocumentsTool, SIGNAL(documentsClosing(QList<Kasten::AbstractDocument*>)),
+             SLOT(onDocumentsClosing(QList<Kasten::AbstractDocument*>)) );
+    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged(Kasten::AbstractDocument*)),
+             SLOT(onFocussedDocumentChanged(Kasten::AbstractDocument*)) );
 }
 
 int DocumentListModel::rowCount( const QModelIndex& parent ) const
@@ -161,18 +161,18 @@ Q_UNUSED( document )
 #endif
 }
 
-void DocumentListModel::onDocumentsAdded( const QList<Kasten2::AbstractDocument*>& documents )
+void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
     foreach( AbstractDocument* document, documents )
     {
-        connect( document, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
-                 SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
+        connect( document, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
+                 SLOT(onSynchronizerChanged(Kasten::AbstractModelSynchronizer*)) );
         AbstractModelSynchronizer* synchronizer = document->synchronizer();
         if( synchronizer )
         {
-            connect( synchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+            connect( synchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
                     SLOT(onSyncStatesChanged()) );
-            connect( synchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+            connect( synchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
                     SLOT(onSyncStatesChanged()) );
         }
     }
@@ -181,7 +181,7 @@ void DocumentListModel::onDocumentsAdded( const QList<Kasten2::AbstractDocument*
     endResetModel();
 }
 
-void DocumentListModel::onDocumentsClosing( const QList<Kasten2::AbstractDocument*>& documents )
+void DocumentListModel::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
 {
 Q_UNUSED( documents )
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
@@ -195,9 +195,9 @@ void DocumentListModel::onSynchronizerChanged( AbstractModelSynchronizer* synchr
     // TODO: what about the old synchronizer? assume it is deleted and that way disconnects?
     if( synchronizer )
     {
-        connect( synchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+        connect( synchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
                  SLOT(onSyncStatesChanged()) );
-        connect( synchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+        connect( synchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
                  SLOT(onSyncStatesChanged()) );
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns

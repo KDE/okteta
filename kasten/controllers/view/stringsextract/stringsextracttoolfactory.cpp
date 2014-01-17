@@ -25,7 +25,7 @@
 // lib
 #include "stringsextracttool.h"
 
-namespace Kasten2
+namespace Kasten
 {
 
 StringsExtractToolFactory::StringsExtractToolFactory() {}

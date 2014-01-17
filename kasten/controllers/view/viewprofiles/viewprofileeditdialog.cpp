@@ -32,7 +32,7 @@
 #include <QtWidgets/QDialogButtonBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewProfileEditDialog::ViewProfileEditDialog( QWidget* parent )

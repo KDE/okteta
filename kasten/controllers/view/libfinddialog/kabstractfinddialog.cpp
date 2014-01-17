@@ -37,7 +37,7 @@
 #include <QtWidgets/QDialogButtonBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 KAbstractFindDialog::KAbstractFindDialog( QWidget* parent )

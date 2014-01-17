@@ -41,7 +41,7 @@ class ArrayChangeMetricsList;
 class AbstractByteArrayModel;
 }
 
-namespace Kasten2
+namespace Kasten
 {
 class StructuresManager;
 class StructToolPrivate;

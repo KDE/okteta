@@ -54,7 +54,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QLoggingCategory>
 
-namespace Kasten2
+namespace Kasten
 {
 
 // static const char OffsetOptionId[] = "offset";

@@ -27,7 +27,7 @@
 // lib
 #include <kabstractfinddialog.h>
 
-namespace Kasten2
+namespace Kasten
 {
 
 class SearchTool;

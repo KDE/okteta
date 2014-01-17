@@ -39,7 +39,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ClipboardController::ClipboardController( KXMLGUIClient* guiClient )

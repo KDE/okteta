@@ -65,7 +65,7 @@ QScriptValue FloatDataInformationMethods::asScriptValue(float value, QScriptEngi
 
 QString FloatDataInformationMethods::staticValueString(float value)
 {
-    return (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
-        ? QLocale().toString(value, 'g', Kasten2::StructViewPreferences::floatPrecision())
-        : QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
+    return (Kasten::StructViewPreferences::localeAwareFloatFormatting())
+        ? QLocale().toString(value, 'g', Kasten::StructViewPreferences::floatPrecision())
+        : QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
 }

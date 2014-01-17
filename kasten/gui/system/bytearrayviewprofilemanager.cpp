@@ -35,7 +35,7 @@
 #include <QtCore/QUuid>
 
 
-namespace Kasten2
+namespace Kasten
 {
 static const QStringList viewProfileFileNameFilter =
     QStringList() << QStringLiteral( "*.obavp" ) << QStringLiteral( "*.olock" );

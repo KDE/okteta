@@ -38,7 +38,7 @@
 #include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CharsetConversionTool::CharsetConversionTool()

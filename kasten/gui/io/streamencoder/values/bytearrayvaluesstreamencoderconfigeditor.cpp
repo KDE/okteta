@@ -33,7 +33,7 @@
 #include <QLabel>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEditor( ByteArrayValuesStreamEncoder* encoder, QWidget* parent )

@@ -30,7 +30,7 @@
 // #include <QtGui/QFontDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int PrintMaxEventProcessTimeInMS = 100;

@@ -31,7 +31,7 @@
 #include <QtCore/QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRawFileWriteJob::ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer *synchronizer )

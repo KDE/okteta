@@ -31,7 +31,7 @@ class QHBoxLayout;
 class QEventLoop;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractLinePopupPrivate

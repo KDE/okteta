@@ -23,7 +23,7 @@
 #include "bytearrayselection.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArraySelection::ByteArraySelection()

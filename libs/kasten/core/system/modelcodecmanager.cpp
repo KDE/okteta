@@ -40,7 +40,7 @@
 #include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ModelCodecManager::ModelCodecManager( DocumentManager* manager )

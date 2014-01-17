@@ -29,7 +29,7 @@
 #include <KStandardAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 FullScreenController::FullScreenController( KXmlGuiWindow* window )

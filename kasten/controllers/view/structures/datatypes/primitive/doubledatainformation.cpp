@@ -64,7 +64,7 @@ QScriptValue DoubleDataInformationMethods::asScriptValue(double value, QScriptEn
 
 QString DoubleDataInformationMethods::staticValueString(double value)
 {
-    return (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
-        ? QLocale().toString(value, 'g', Kasten2::StructViewPreferences::floatPrecision())
-        : QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
+    return (Kasten::StructViewPreferences::localeAwareFloatFormatting())
+        ? QLocale().toString(value, 'g', Kasten::StructViewPreferences::floatPrecision())
+        : QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
 }

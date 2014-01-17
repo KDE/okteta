@@ -31,7 +31,7 @@
 #include <QIcon>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class Person::Private : public QSharedData

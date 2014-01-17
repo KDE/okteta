@@ -31,7 +31,7 @@ class QSlider;
 class QToolButton;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModel;

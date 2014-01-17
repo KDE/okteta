@@ -31,7 +31,7 @@ class QUrl;
 class QString;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KASTENCORE_EXPORT AbstractOverwriteDialog

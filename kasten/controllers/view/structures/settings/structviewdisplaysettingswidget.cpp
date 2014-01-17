@@ -39,18 +39,18 @@ StructViewDisplaySettingsWidget::StructViewDisplaySettingsWidget() :
     //these are needed since KConfigXT always uses the combo box index as the value
     //we want the UserData of the current index instead
     //maybe there is a nicer solution, but this works
-    ui.kcfg_CharDisplayBase->setValue(Kasten2::StructViewPreferences::charDisplayBase());
+    ui.kcfg_CharDisplayBase->setValue(Kasten::StructViewPreferences::charDisplayBase());
     ui.kcfg_CharDisplayBase->setHidden(true);
-    ui.kcfg_SignedDisplayBase->setValue(Kasten2::StructViewPreferences::signedDisplayBase());
+    ui.kcfg_SignedDisplayBase->setValue(Kasten::StructViewPreferences::signedDisplayBase());
     ui.kcfg_SignedDisplayBase->setHidden(true);
-    ui.kcfg_UnsignedDisplayBase->setValue(Kasten2::StructViewPreferences::unsignedDisplayBase());
+    ui.kcfg_UnsignedDisplayBase->setValue(Kasten::StructViewPreferences::unsignedDisplayBase());
     ui.kcfg_UnsignedDisplayBase->setHidden(true);
-    setupBasesCombo(ui.combo_SignedDisplayBase, Kasten2::StructViewPreferences::self()->signedDisplayBaseItem(),
-        Kasten2::StructViewPreferences::signedDisplayBase(), SLOT(setSignedDisplay(int)));
-    setupBasesCombo(ui.combo_UnsignedDisplayBase, Kasten2::StructViewPreferences::self()->unsignedDisplayBaseItem(),
-        Kasten2::StructViewPreferences::unsignedDisplayBase(), SLOT(setUnsignedDisplay(int)));
-    setupBasesCombo(ui.combo_CharDisplayBase, Kasten2::StructViewPreferences::self()->charDisplayBaseItem(),
-        Kasten2::StructViewPreferences::charDisplayBase(), SLOT(setCharDisplay(int)));
+    setupBasesCombo(ui.combo_SignedDisplayBase, Kasten::StructViewPreferences::self()->signedDisplayBaseItem(),
+        Kasten::StructViewPreferences::signedDisplayBase(), SLOT(setSignedDisplay(int)));
+    setupBasesCombo(ui.combo_UnsignedDisplayBase, Kasten::StructViewPreferences::self()->unsignedDisplayBaseItem(),
+        Kasten::StructViewPreferences::unsignedDisplayBase(), SLOT(setUnsignedDisplay(int)));
+    setupBasesCombo(ui.combo_CharDisplayBase, Kasten::StructViewPreferences::self()->charDisplayBaseItem(),
+        Kasten::StructViewPreferences::charDisplayBase(), SLOT(setCharDisplay(int)));
 }
 
 StructViewDisplaySettingsWidget::~StructViewDisplaySettingsWidget()

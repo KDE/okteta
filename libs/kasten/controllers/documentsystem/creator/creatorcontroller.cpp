@@ -43,10 +43,10 @@
 
 #ifndef ABSTRACTMODELDATAGENERATOR_METATYPE
 #define ABSTRACTMODELDATAGENERATOR_METATYPE
-Q_DECLARE_METATYPE(Kasten2::AbstractModelDataGenerator*)
+Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
 #endif
 
-namespace Kasten2
+namespace Kasten
 {
 
 CreatorController::CreatorController( ModelCodecManager* modelCodecManager,

@@ -31,7 +31,7 @@
 
 using Okteta::PieceTableByteArrayModel;
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayDocument::ByteArrayDocument( const QString &initDescription )

@@ -31,7 +31,7 @@
 class QMimeData;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractDocument;

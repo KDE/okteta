@@ -24,7 +24,7 @@
 #include "abstractgroupedviews_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractGroupedViews::AbstractGroupedViews()

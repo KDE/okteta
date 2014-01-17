@@ -44,12 +44,12 @@
 
 static const int FileNameRole = Qt::UserRole;
 
-StructuresManagerView::StructuresManagerView(Kasten2::StructTool* tool, QWidget* parent)
+StructuresManagerView::StructuresManagerView(Kasten::StructTool* tool, QWidget* parent)
     : QWidget(parent), mTool(tool), mStructuresSelector(0), mRebuildingPluginsList(false)
 {
     KConfigDialogManager::changedMap()->insert(QStringLiteral("StructuresManagerView"), SIGNAL(changed(QStringList)));
     setObjectName(QStringLiteral("kcfg_LoadedStructures"));
-    mSelectedStructures = Kasten2::StructViewPreferences::loadedStructures();
+    mSelectedStructures = Kasten::StructViewPreferences::loadedStructures();
 
     QVBoxLayout* pageLayout = new QVBoxLayout();
     setLayout(pageLayout);
@@ -140,7 +140,7 @@ void StructuresManagerView::onPluginSelectorChange(bool change)
 
 void StructuresManagerView::reloadSelectedItems() {
     QStringList newVals;
-    foreach(const Kasten2::StructureDefinitionFile* def, mTool->manager()->structureDefs())
+    foreach(const Kasten::StructureDefinitionFile* def, mTool->manager()->structureDefs())
     {
         KPluginInfo info = def->pluginInfo();
         if (info.isPluginEnabled())
@@ -163,7 +163,7 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     QStringList newVals;
     KPluginInfo::List plugins;
     KPluginInfo::List dynamicPlugins;
-    foreach(const Kasten2::StructureDefinitionFile* def, mTool->manager()->structureDefs())
+    foreach(const Kasten::StructureDefinitionFile* def, mTool->manager()->structureDefs())
         {
             KPluginInfo info = def->pluginInfo();
             if (info.category() == QStringLiteral("structure"))

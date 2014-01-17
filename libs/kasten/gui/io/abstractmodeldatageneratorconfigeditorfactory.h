@@ -27,7 +27,7 @@
 #include "kastengui_export.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelDataGeneratorConfigEditor;

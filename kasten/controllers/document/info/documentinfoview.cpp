@@ -39,7 +39,7 @@
 #include <QtCore/QMimeType>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )

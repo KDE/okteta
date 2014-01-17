@@ -30,7 +30,7 @@
 #include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )

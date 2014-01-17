@@ -32,7 +32,7 @@
 #include <KGuiItem>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )

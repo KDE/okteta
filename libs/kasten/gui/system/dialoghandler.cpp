@@ -30,7 +30,7 @@
 // Qt
 #include <QtCore/QUrl>
 
-namespace Kasten2
+namespace Kasten
 {
 
 

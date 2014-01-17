@@ -24,7 +24,7 @@
 #include "abstractfilesystemconnectjob_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractFileSystemConnectJob::AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer,

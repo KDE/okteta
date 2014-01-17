@@ -24,7 +24,7 @@
 #include "abstractmodelexporter_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractModelExporter::AbstractModelExporter( AbstractModelExporterPrivate* d )

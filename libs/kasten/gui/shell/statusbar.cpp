@@ -28,7 +28,7 @@
 #include <QtCore/QEvent>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 StatusBar::StatusBar( QWidget* parent )

@@ -28,7 +28,7 @@
 #include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int FilterMaxEventProcessTimeInMS = 100;

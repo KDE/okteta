@@ -30,7 +30,7 @@
 #include <QFont>
 
 
-namespace Kasten2
+namespace Kasten
 {
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
     QAbstractItemModel(parent), mTool(tool), mLastSender(0), mLastStartIndex(0), mLastEndIndex(0)

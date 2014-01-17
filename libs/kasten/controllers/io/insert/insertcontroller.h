@@ -33,7 +33,7 @@ class KSelectAction;
 class QAction;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ModelCodecViewManager;

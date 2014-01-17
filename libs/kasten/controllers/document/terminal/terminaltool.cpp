@@ -32,7 +32,7 @@
 // Qt
 #include <QUrl>
 
-namespace Kasten2
+namespace Kasten
 {
 
 TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )

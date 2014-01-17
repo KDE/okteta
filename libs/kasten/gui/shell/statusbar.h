@@ -30,7 +30,7 @@
 #include <QStatusBar>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class StatusBarLayout;

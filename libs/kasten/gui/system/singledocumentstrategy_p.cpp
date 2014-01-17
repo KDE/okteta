@@ -43,17 +43,17 @@
 #include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void SingleDocumentStrategyPrivate::init()
 {
     Q_Q( SingleDocumentStrategy );
     // setup
-    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
-                      mViewManager, SLOT(createViewsFor(QList<Kasten2::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
-                      mViewManager, SLOT(removeViewsFor(QList<Kasten2::AbstractDocument*>)) );
+    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
+                      mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
+    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
+                      mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
     QObject::connect( mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
                       q, &SingleDocumentStrategy::urlUsed );
 }

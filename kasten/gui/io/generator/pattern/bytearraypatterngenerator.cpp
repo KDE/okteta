@@ -29,7 +29,7 @@
 #include <QtCore/QByteArray>
 
 
-namespace Kasten2
+namespace Kasten
 {
 static const char PatternMimeType[] = "application/octet-stream";
 

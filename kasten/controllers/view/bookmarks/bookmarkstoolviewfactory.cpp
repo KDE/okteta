@@ -29,7 +29,7 @@
 #include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 BookmarksToolViewFactory::BookmarksToolViewFactory() {}

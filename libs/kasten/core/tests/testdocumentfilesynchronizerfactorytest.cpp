@@ -87,10 +87,10 @@ void TestDocumentFileSynchronizerFactoryTest::checkFileContent( const QUrl& file
 {
 Q_UNUSED( data )
 Q_UNUSED( fileUrl )
-    Kasten2::TestDocumentFileSynchronizerFactory* factory = new Kasten2::TestDocumentFileSynchronizerFactory( header );
+    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory( header );
 #if 0
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
-    Kasten2::TestDocument* testDocument = qobject_cast<Kasten2::TestDocument* >( document );
+    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
     QVERIFY( testDocument != 0 );
     QCOMPARE( *testDocument->data(), data );
 
@@ -102,7 +102,7 @@ Q_UNUSED( fileUrl )
 // ------------------------------------------------------------------ tests ----
 void TestDocumentFileSynchronizerFactoryTest::testCreate()
 {
-    Kasten2::TestDocumentFileSynchronizerFactory* factory = new Kasten2::TestDocumentFileSynchronizerFactory();
+    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
 
     QVERIFY( factory != 0 );
 
@@ -114,10 +114,10 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()
     const QByteArray testData( TestData1 );
     const QUrl fileUrl = mFileSystem->createFilePath( QStringLiteral(TestFileName1) ).prepend( FileProtocolName );
 
-    Kasten2::TestDocumentFileSynchronizerFactory* factory = new Kasten2::TestDocumentFileSynchronizerFactory();
+    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
-    Kasten2::TestDocument* testDocument = qobject_cast<Kasten2::TestDocument* >( document );
+    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
 
     QVERIFY( document != 0 );
     QVERIFY( testDocument != 0 );
@@ -135,7 +135,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()
 void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
     const QUrl fileUrl( QString::fromLatin1(NotExistingUrlName) );
-    Kasten2::TestDocumentFileSynchronizerFactory* factory = new Kasten2::TestDocumentFileSynchronizerFactory();
+    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
@@ -145,7 +145,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingFile()
 {
     const QUrl fileUrl = mFileSystem->createFilePath( QStringLiteral(NotExistingFileName) ).prepend( FileProtocolName );
-    Kasten2::TestDocumentFileSynchronizerFactory* factory = new Kasten2::TestDocumentFileSynchronizerFactory();
+    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
     QVERIFY( document == 0 );
@@ -157,10 +157,10 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadSaveFile()
     const QByteArray otherData( TestData2 );
     const QUrl fileUrl = mFileSystem->createFilePath( QStringLiteral(TestFileName1) ).prepend( FileProtocolName );
 
-    Kasten2::TestDocumentFileSynchronizerFactory* factory = new Kasten2::TestDocumentFileSynchronizerFactory();
+    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
-    Kasten2::TestDocument* testDocument = qobject_cast<Kasten2::TestDocument* >( document );
+    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
     QVERIFY( testDocument != 0 );
     // change and save
     testDocument->setData( otherData );
@@ -179,16 +179,16 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
     const QString filePath = mFileSystem->createFilePath( QStringLiteral(TestFileName1) );
     const QUrl fileUrl = QString( filePath ).prepend( FileProtocolName );
 
-    Kasten2::TestDocumentFileSynchronizerFactory* factory = new Kasten2::TestDocumentFileSynchronizerFactory();
+    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 
-    Kasten2::TestDocument* testDocument = qobject_cast<Kasten2::TestDocument* >( document );
+    Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
     QVERIFY( testDocument != 0 );
 
     // change on disc and reload
     writeToFile( filePath, otherData );
    // ? use QTest::kWaitForSignal (QObject* obj, const char* signal, int timeout=0)
-//     QCOMPARE( document->syncStates(), Kasten2::TestDocument::RemoteHasChanges );
+//     QCOMPARE( document->syncStates(), Kasten::TestDocument::RemoteHasChanges );
 
     document->synchronizer()->syncFromRemote();
 
@@ -205,8 +205,8 @@ void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
     const QString filePath2 = mFileSystem->createFilePath( QStringLiteral(TestFileName2) );
     const QUrl fileUrl2 = QString( filePath2 ).prepend( FileProtocolName );
 
-    Kasten2::TestDocumentFileSynchronizerFactory* factory = new Kasten2::TestDocumentFileSynchronizerFactory();
-    Kasten2::TestDocument* testDocument = new Kasten2::TestDocument();
+    Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
+    Kasten::TestDocument* testDocument = new Kasten::TestDocument();
     AbstractDocument* document = testDocument;
     testDocument->setData( otherData );
 

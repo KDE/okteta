@@ -27,7 +27,7 @@
 #include "bytetabletool.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteTableToolView::ByteTableToolView( ByteTableTool* tool )

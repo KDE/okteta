@@ -25,7 +25,7 @@
 // lib
 #include "charsetconversiontool.h"
 
-namespace Kasten2
+namespace Kasten
 {
 
 CharsetConversionToolFactory::CharsetConversionToolFactory() {}

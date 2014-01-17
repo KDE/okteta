@@ -29,7 +29,7 @@
 #include <QSharedPointer>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayViewProfileLockPrivate : public QSharedData

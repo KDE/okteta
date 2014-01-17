@@ -24,7 +24,7 @@
 #include "modelencoderfilesystemexporter_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter( AbstractModelStreamEncoder* encoder )

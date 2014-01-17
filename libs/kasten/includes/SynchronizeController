@@ -1,1 +1,1 @@
-#include "../../kasten2/synchronizecontroller.h"
+#include "../kasten/synchronizecontroller.h"

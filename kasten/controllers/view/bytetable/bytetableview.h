@@ -32,7 +32,7 @@ class QTreeView;
 class QModelIndex;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteTableTool;

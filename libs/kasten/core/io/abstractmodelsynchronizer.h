@@ -32,7 +32,7 @@
 class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractLoadJob;
@@ -123,8 +123,8 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
     // TODO: this signal should be part of AbstractModel?
-    void localSyncStateChanged( Kasten2::LocalSyncState newState );
-    void remoteSyncStateChanged( Kasten2::RemoteSyncState newState );
+    void localSyncStateChanged( Kasten::LocalSyncState newState );
+    void remoteSyncStateChanged( Kasten::RemoteSyncState newState );
 
   protected: // get
     void setUrl( const QUrl& url );

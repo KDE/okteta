@@ -42,7 +42,7 @@ OktetaPartFactory::OktetaPartFactory( const char* componentName, QObject* parent
 // TODO: also load encoder and other plugins here
     mAboutData.addAuthor( i18n("Friedrich W. H. Kossebau"), i18n("Author"), QStringLiteral("kossebau@kde.org") );
 
-    mByteArrayViewProfileManager = new Kasten2::ByteArrayViewProfileManager();
+    mByteArrayViewProfileManager = new Kasten::ByteArrayViewProfileManager();
 
 //     const QList<AbstractModelStreamEncoder*> encoderList =
 //         ByteArrayStreamEncoderFactory::createStreamEncoders();

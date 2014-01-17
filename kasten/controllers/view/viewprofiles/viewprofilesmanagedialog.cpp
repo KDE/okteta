@@ -39,7 +39,7 @@
 #include <QtCore/QItemSelectionModel>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager* viewProfileManager,

@@ -38,7 +38,7 @@
 #include <QtCore/QHash>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
@@ -52,13 +52,13 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
 {
     parent->setCentralWidget( mGroupedViews->widget() );
 
-    QObject::connect( mViewManager, SIGNAL(opened(QList<Kasten2::AbstractView*>)),
-                      mGroupedViews, SLOT(addViews(QList<Kasten2::AbstractView*>)) );
-    QObject::connect( mViewManager, SIGNAL(closing(QList<Kasten2::AbstractView*>)),
-                      mGroupedViews, SLOT(removeViews(QList<Kasten2::AbstractView*>)) );
+    QObject::connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
+                      mGroupedViews, SLOT(addViews(QList<Kasten::AbstractView*>)) );
+    QObject::connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
+                      mGroupedViews, SLOT(removeViews(QList<Kasten::AbstractView*>)) );
 
-    QObject::connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten2::AbstractView*)),
-                      parent, SLOT(onViewFocusChanged(Kasten2::AbstractView*)) );
+    QObject::connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
+                      parent, SLOT(onViewFocusChanged(Kasten::AbstractView*)) );
 }
 
 void ShellWindowPrivate::addTool( AbstractToolView* toolView )
@@ -98,7 +98,7 @@ void ShellWindowPrivate::showDocument( AbstractDocument* document )
         mGroupedViews->setViewFocus( viewOfDocument );
     else
     {
-        QList<Kasten2::AbstractDocument*> documents;
+        QList<Kasten::AbstractDocument*> documents;
         documents.append( document );
         mViewManager->createViewsFor( documents );
     }
@@ -191,8 +191,8 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView* view )
     {
         if( isNewSynchronizer )
         {
-            QObject::connect( mCurrentSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                            q, SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+            QObject::connect( mCurrentSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+                            q, SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
             QObject::connect( mCurrentSynchronizer, SIGNAL(destroyed(QObject*)),
                             q, SLOT(onSynchronizerDeleted(QObject*)) );
         }
@@ -200,8 +200,8 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView* view )
     else if( mCurrentDocument )
     {
         if( isNewDocument )
-            QObject::connect( mCurrentDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
-                              q, SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+            QObject::connect( mCurrentDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
+                              q, SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
     }
 }
 
@@ -227,8 +227,8 @@ void ShellWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
     mCurrentSynchronizer = 0;
 
     // switch to document state
-    QObject::connect( mCurrentDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
-                      q, SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+    QObject::connect( mCurrentDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
+                      q, SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
 
     onContentFlagsChanged( mCurrentDocument->contentFlags() );
 }

@@ -35,7 +35,7 @@ class AbstractByteArrayModel;
 }
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 namespace If {

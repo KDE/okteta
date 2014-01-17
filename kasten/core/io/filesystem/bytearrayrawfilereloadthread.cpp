@@ -33,7 +33,7 @@
 #include <limits>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject* parent, QFile* file )

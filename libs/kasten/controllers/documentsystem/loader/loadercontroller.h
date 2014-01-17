@@ -33,7 +33,7 @@ class KXMLGUIClient;
 class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractDocumentStrategy;

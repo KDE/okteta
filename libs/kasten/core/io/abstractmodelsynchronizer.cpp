@@ -24,7 +24,7 @@
 #include "abstractmodelsynchronizer_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractModelSynchronizer::AbstractModelSynchronizer( AbstractModelSynchronizerPrivate* d )

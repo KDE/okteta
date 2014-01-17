@@ -34,7 +34,7 @@
 class KDirWatch;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ByteArrayViewProfileLock;
 
@@ -86,11 +86,11 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject
     ByteArrayViewProfileLock createLock( const ByteArrayViewProfile::Id& viewProfileId );
 
   Q_SIGNALS:
-    void viewProfilesChanged( const QList<Kasten2::ByteArrayViewProfile>& viewProfiles );
-    void viewProfilesRemoved( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
-    void defaultViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId );
-    void viewProfilesLocked( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
-    void viewProfilesUnlocked( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
+    void viewProfilesChanged( const QList<Kasten::ByteArrayViewProfile>& viewProfiles );
+    void viewProfilesRemoved( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+    void defaultViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
+    void viewProfilesLocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+    void viewProfilesUnlocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
 
   private:
     QString filePathOfViewProfile( const ByteArrayViewProfile::Id& viewProfileId ) const;

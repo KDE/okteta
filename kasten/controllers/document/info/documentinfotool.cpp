@@ -39,7 +39,7 @@
 #include <QtCore/QMimeDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 static const int mimeTypeUpdateTimeInterval = 500; // msec
 

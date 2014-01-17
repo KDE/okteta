@@ -30,7 +30,7 @@
 #include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const unsigned char ByteTableDefaultUndefinedChar = '?';

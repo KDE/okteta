@@ -28,7 +28,7 @@
 // Qt
 #include <QToolButton>
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ToggleButtonPrivate;

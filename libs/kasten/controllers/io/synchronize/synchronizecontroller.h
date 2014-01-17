@@ -34,7 +34,7 @@ class QAction;
 class KXMLGUIClient;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelSynchronizer;
@@ -57,7 +57,7 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
     void reload();
 
   private Q_SLOTS:
-    void onSynchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
+    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
     void onSynchronizerDeleted( QObject* synchronizer );
     void onSyncStateChanged();
 

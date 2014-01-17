@@ -30,7 +30,7 @@
 #include <abstractview.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 // TODO: catch area focues change!
 MultiViewAreasPrivate::MultiViewAreasPrivate( MultiViewAreas* parent )
@@ -49,11 +49,11 @@ void MultiViewAreasPrivate::init()
     TabbedViews* viewArea = new TabbedViews();
     q->connect( viewArea, SIGNAL(focusChanged(bool)),
                 SLOT(onViewAreaFocusChanged(bool)) );
-    q->connect( viewArea, SIGNAL(viewFocusChanged(Kasten2::AbstractView*)),
-                SIGNAL(viewFocusChanged(Kasten2::AbstractView*)) );
-    q->connect( viewArea, SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)),
-                SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)) );
-    q->connect( viewArea, SIGNAL(removing(QList<Kasten2::AbstractView*>)),
+    q->connect( viewArea, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
+                SIGNAL(viewFocusChanged(Kasten::AbstractView*)) );
+    q->connect( viewArea, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
+                SIGNAL(closeRequest(QList<Kasten::AbstractView*>)) );
+    q->connect( viewArea, SIGNAL(removing(QList<Kasten::AbstractView*>)),
                 SLOT(onViewsRemoved()) );
     q->connect( viewArea, SIGNAL(dataOffered(const QMimeData*,bool&)),
                 SIGNAL(dataOffered(const QMimeData*,bool&)) );
@@ -91,11 +91,11 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea( AbstractViewArea* _viewA
     TabbedViews* secondViewArea = new TabbedViews();
     q->connect( secondViewArea, SIGNAL(focusChanged(bool)),
                 SLOT(onViewAreaFocusChanged(bool)) );
-    q->connect( secondViewArea, SIGNAL(viewFocusChanged(Kasten2::AbstractView*)),
-                SIGNAL(viewFocusChanged(Kasten2::AbstractView*)) );
-    q->connect( secondViewArea, SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)),
-                SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)) );
-    q->connect( secondViewArea, SIGNAL(removing(QList<Kasten2::AbstractView*>)),
+    q->connect( secondViewArea, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
+                SIGNAL(viewFocusChanged(Kasten::AbstractView*)) );
+    q->connect( secondViewArea, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
+                SIGNAL(closeRequest(QList<Kasten::AbstractView*>)) );
+    q->connect( secondViewArea, SIGNAL(removing(QList<Kasten::AbstractView*>)),
                 SLOT(onViewsRemoved()) );
     q->connect( secondViewArea, SIGNAL(dataOffered(const QMimeData*,bool&)),
                 SIGNAL(dataOffered(const QMimeData*,bool&)) );

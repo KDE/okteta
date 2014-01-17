@@ -38,7 +38,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewProfileManager,
@@ -131,7 +131,7 @@ void ViewProfileController::setTargetModel( AbstractModel* model )
 }
 
 
-void ViewProfileController::onViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId )
+void ViewProfileController::onViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId )
 {
     const QList<QAction*> actions = mViewProfilesActionGroup->actions();
 
@@ -186,7 +186,7 @@ void ViewProfileController::onViewProfileTriggered( QAction* action )
     mByteArrayViewProfileSynchronizer->setViewProfileId( action->data().toString() );
 }
 
-void ViewProfileController::onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState )
+void ViewProfileController::onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState )
 {
     const bool hasDifference = ( localSyncState == LocalHasChanges );
 

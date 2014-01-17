@@ -31,7 +31,7 @@
 // Qt
 #include <QAction>
 
-namespace Kasten2
+namespace Kasten
 {
 
 PrintController::PrintController( KXMLGUIClient* guiClient )

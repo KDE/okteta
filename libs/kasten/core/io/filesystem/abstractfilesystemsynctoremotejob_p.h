@@ -33,7 +33,7 @@
 #include <QtCore/QTemporaryFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobPrivate
 {

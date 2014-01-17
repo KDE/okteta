@@ -26,7 +26,7 @@
 // Qt
 #include <QtCore/QtPlugin>
 
-namespace Kasten2
+namespace Kasten
 {
 namespace If
 {
@@ -54,6 +54,6 @@ inline Zoomable::~Zoomable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten2::If::Zoomable, "org.kde.kasten2.if.zoomable/1.0" )
+Q_DECLARE_INTERFACE( Kasten::If::Zoomable, "org.kde.kasten.if.zoomable/1.0" )
 
 #endif

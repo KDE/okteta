@@ -35,7 +35,7 @@
 class TopLevelDataInformation;
 class AbstractStructureParser;
 
-namespace Kasten2
+namespace Kasten
 {
 /**
  *  This class takes care of all the XML parsing and stores the result.
@@ -75,6 +75,6 @@ inline bool StructureDefinitionFile::isValid() const
     return !mParser.isNull();
 }
 
-} //namespace Kasten2
+} //namespace Kasten
 
 #endif /* STRUCTUREDEFINITIONFILE_H_ */

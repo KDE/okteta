@@ -31,7 +31,7 @@
 #include <QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TestDocumentFileWriteToJob::TestDocumentFileWriteToJob( TestDocumentFileSynchronizer* synchronizer,

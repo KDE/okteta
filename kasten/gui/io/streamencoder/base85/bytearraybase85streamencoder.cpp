@@ -30,7 +30,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static inline void streamEncoded( QTextStream& textStream, int& outputBytesPerLine,

@@ -32,7 +32,7 @@ class QMimeType;
 class QLabel;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class DocumentInfoTool;

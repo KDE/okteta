@@ -33,7 +33,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SetRemoteController::SetRemoteController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )

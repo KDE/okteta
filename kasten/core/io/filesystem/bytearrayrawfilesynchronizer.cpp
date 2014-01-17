@@ -35,7 +35,7 @@
 #include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()

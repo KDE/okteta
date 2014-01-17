@@ -1,1 +1,1 @@
-#include "../../kasten2/abstractviewarea.h"
+#include "../kasten/abstractviewarea.h"

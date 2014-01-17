@@ -36,7 +36,7 @@
 #include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteTableTool::ByteTableTool()

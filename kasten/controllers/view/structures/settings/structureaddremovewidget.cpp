@@ -35,8 +35,8 @@
 #include <KLocalizedString>
 #include <KConfigDialogManager>
 
-using namespace Kasten2;
-StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, Kasten2::StructTool* tool, QWidget* parent) :
+using namespace Kasten;
+StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, Kasten::StructTool* tool, QWidget* parent) :
     QWidget(parent), mTool(tool)
 {
     QHBoxLayout* baseLayout;

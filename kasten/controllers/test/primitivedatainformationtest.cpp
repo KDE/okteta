@@ -105,8 +105,8 @@ int PrimitiveDataInformationTest::minimumUnsignedBits(quint64 value)
 
 void PrimitiveDataInformationTest::initTestCase()
 {
-    Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
-    Kasten2::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
+    Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
+    Kasten::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
     QLocale locale(QLocale::C);
     locale.setNumberOptions(QLocale::OmitGroupSeparator);
     QLocale::setDefault(locale);
@@ -169,7 +169,7 @@ void PrimitiveDataInformationTest::testValueStringInt()
     //run once with locale aware, and once without
     for (int i = 0; i <= 1; ++i)
     {
-        Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
+        Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
             valueCompareHelper<Type_Int8>(qint8(value), binStr, hexStr, decStr, octStr);
@@ -187,13 +187,13 @@ void PrimitiveDataInformationTest::testValueStringInt()
         {
             bitfield.setWidth(width);
             bitfield.mWasAbleToRead = true;
-            Kasten2::StructViewPreferences::setSignedDisplayBase(2);
+            Kasten::StructViewPreferences::setSignedDisplayBase(2);
             QCOMPARE(bitfield.valueString(), binStr);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(16);
+            Kasten::StructViewPreferences::setSignedDisplayBase(16);
             QCOMPARE(bitfield.valueString(), hexStr);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(10);
+            Kasten::StructViewPreferences::setSignedDisplayBase(10);
             QCOMPARE(bitfield.valueString(), decStr);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(8);
+            Kasten::StructViewPreferences::setSignedDisplayBase(8);
             QCOMPARE(bitfield.valueString(), octStr);
         }
     }
@@ -322,7 +322,7 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
     //run once with locale aware, and once without
     for (int i = 0; i <= 1; ++i)
     {
-        Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
+        Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
             valueCompareHelperUnsigned<Type_UInt8, Type_Bool8>(quint8(value), binStr, hexStr,
@@ -348,16 +348,16 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
         {
             bitfield.setWidth(width);
             bitfield.setWidth(width);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(2);
+            Kasten::StructViewPreferences::setUnsignedDisplayBase(2);
             QCOMPARE(bitfield.valueString(), binStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(binStr) : boolBase);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(16);
+            Kasten::StructViewPreferences::setUnsignedDisplayBase(16);
             QCOMPARE(bitfield.valueString(), hexStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(hexStr) : boolBase);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(10);
+            Kasten::StructViewPreferences::setUnsignedDisplayBase(10);
             QCOMPARE(bitfield.valueString(), decStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(decStr) : boolBase);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(8);
+            Kasten::StructViewPreferences::setUnsignedDisplayBase(8);
             QCOMPARE(bitfield.valueString(), octStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(octStr) : boolBase);
         }
@@ -435,37 +435,37 @@ static QString charString(quint32 i)
 
 void PrimitiveDataInformationTest::testValueStringChar()
 {
-    Kasten2::StructViewPreferences::setShowCharNumericalValue(false);
-    Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(false);
+    Kasten::StructViewPreferences::setShowCharNumericalValue(false);
+    Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(false);
     //we don't want the numeric value now
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1'")).arg(charString(i));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setShowCharNumericalValue(true);
-    Kasten2::StructViewPreferences::setCharDisplayBase(16);
+    Kasten::StructViewPreferences::setShowCharNumericalValue(true);
+    Kasten::StructViewPreferences::setCharDisplayBase(16);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1' (0x%2)")).arg(charString(i),
                 QString::number(i, 16));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setCharDisplayBase(10);
+    Kasten::StructViewPreferences::setCharDisplayBase(10);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1' (%2)")).arg(charString(i),
                 QString::number(i, 10));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setCharDisplayBase(2);
+    Kasten::StructViewPreferences::setCharDisplayBase(2);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1' (0b%2)")).arg(charString(i),
                 QString::number(i, 2));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setCharDisplayBase(8);
+    Kasten::StructViewPreferences::setCharDisplayBase(8);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1' (0o%2)")).arg(charString(i),

@@ -24,7 +24,7 @@
 #include "person_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const struct EgoDataStruct { const char* name; const char* faceIconName; }

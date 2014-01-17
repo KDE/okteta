@@ -40,7 +40,7 @@ class CharCodec;
 }
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayView;

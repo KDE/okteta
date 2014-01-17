@@ -37,7 +37,7 @@ class QAction;
 class QWidget;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KSearchDialog;

@@ -34,7 +34,7 @@
 #include <QTemporaryFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void AbstractFileSystemLoadJobPrivate::load()

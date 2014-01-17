@@ -24,7 +24,7 @@
 #include "togglebutton_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ToggleButton::ToggleButton( const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent )

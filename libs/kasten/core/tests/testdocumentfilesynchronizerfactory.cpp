@@ -29,7 +29,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const QByteArray& header )

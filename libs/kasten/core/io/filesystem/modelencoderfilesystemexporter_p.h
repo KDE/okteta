@@ -30,7 +30,7 @@
 #include <abstractmodelexporter_p.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ModelEncoderFileSystemExporterPrivate : public AbstractModelExporterPrivate

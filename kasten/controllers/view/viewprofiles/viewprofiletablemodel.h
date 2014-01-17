@@ -31,7 +31,7 @@
 template< class C > class QList;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ByteArrayViewProfileManager;
 
@@ -65,7 +65,7 @@ class ViewProfileTableModel : public QAbstractTableModel
   protected Q_SLOTS:
     void onDefaultIndexChanged();
     void onViewProfilesChanged();
-    void onViewProfileLocksChanged(const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onViewProfileLocksChanged(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
 
   protected:
     const ByteArrayViewProfileManager* mViewProfileManager;

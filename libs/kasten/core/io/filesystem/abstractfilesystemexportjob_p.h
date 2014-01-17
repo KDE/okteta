@@ -30,7 +30,7 @@
 #include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate

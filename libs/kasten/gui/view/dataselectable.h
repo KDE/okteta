@@ -29,7 +29,7 @@
 class QMimeData;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelSelection;
@@ -64,6 +64,6 @@ inline DataSelectable::~DataSelectable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten2::If::DataSelectable, "org.kde.kasten2.if.dataselectable/1.0" )
+Q_DECLARE_INTERFACE( Kasten::If::DataSelectable, "org.kde.kasten.if.dataselectable/1.0" )
 
 #endif

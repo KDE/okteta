@@ -36,7 +36,7 @@
 #include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 InfoTool::InfoTool()

@@ -26,7 +26,7 @@
 #include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // FIXME: Replace with ki18n functionality

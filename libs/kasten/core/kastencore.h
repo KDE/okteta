@@ -30,7 +30,7 @@
 Q_DECLARE_LOGGING_CATEGORY(LOG_KASTEN_CORE)
 
 
-namespace Kasten2
+namespace Kasten
 {
     //TODO: reuse terms from vcs
     enum LocalSyncState

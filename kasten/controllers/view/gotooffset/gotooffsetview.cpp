@@ -37,7 +37,7 @@
 #include <QLayout>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 GotoOffsetView::GotoOffsetView( GotoOffsetTool* tool, QWidget* parent )

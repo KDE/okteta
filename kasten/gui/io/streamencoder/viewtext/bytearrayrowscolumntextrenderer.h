@@ -38,7 +38,7 @@ class CharCodec;
 class AbstractByteArrayModel;
 }
 
-namespace Kasten2
+namespace Kasten
 {
 
 // TODO: offset should be set in renderFirstLine, calculated using coordRange,

@@ -1,1 +1,1 @@
-#include "../../okteta1/abstractbytearraymodel.h"
+#include "../okteta/abstractbytearraymodel.h"

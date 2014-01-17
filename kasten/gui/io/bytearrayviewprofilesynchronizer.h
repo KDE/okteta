@@ -32,7 +32,7 @@
 #include <QtCore/QObject>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayViewProfileManager;
@@ -77,12 +77,12 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
     LocalSyncState localSyncState() const;
 
   Q_SIGNALS:
-    void localSyncStateChanged( Kasten2::LocalSyncState newState );
-    void viewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId );
+    void localSyncStateChanged( Kasten::LocalSyncState newState );
+    void viewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
 
   private Q_SLOTS:
-    void onViewProfilesChanged( const QList<Kasten2::ByteArrayViewProfile>& viewProfiles );
-    void onViewProfilesRemoved( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onViewProfilesChanged( const QList<Kasten::ByteArrayViewProfile>& viewProfiles );
+    void onViewProfilesRemoved( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
 
     // TODO: turn to one signal/slot with enum parameter for property and QVariant as new value
     void onShowsNonprintingChanged();

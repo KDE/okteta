@@ -1,1 +1,1 @@
-#include "../../okteta1/abstractcolumnrenderer.h"
+#include "../okteta/abstractcolumnrenderer.h"

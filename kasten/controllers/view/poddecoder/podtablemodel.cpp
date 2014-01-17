@@ -31,7 +31,7 @@
 #include <QtWidgets/QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 PODTableModel::PODTableModel( PODDecoderTool* tool, QObject *parent )

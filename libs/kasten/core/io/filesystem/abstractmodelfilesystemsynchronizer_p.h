@@ -31,7 +31,7 @@
 #include <QtCore/QDateTime>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchronizerPrivate

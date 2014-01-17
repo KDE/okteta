@@ -44,7 +44,7 @@
 #include <QMimeDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 
@@ -103,8 +103,8 @@ void DocumentSyncManager::load( const QUrl& url )
 
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
     AbstractLoadJob* loadJob = synchronizer->startLoad( url );
-    connect( loadJob, SIGNAL(documentLoaded(Kasten2::AbstractDocument*)),
-             SLOT(onDocumentLoaded(Kasten2::AbstractDocument*)) );
+    connect( loadJob, SIGNAL(documentLoaded(Kasten::AbstractDocument*)),
+             SLOT(onDocumentLoaded(Kasten::AbstractDocument*)) );
 
     JobManager::executeJob( loadJob ); // TODO: pass a ui handler to jobmanager
 
@@ -284,12 +284,12 @@ void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
         mManager->addDocument( document );
 }
 
-void DocumentSyncManager::onDocumentsAdded( const QList<Kasten2::AbstractDocument*>& documents )
+void DocumentSyncManager::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
     Q_UNUSED( documents )
 }
 
-void DocumentSyncManager::onDocumentsClosing( const QList<Kasten2::AbstractDocument*>& documents )
+void DocumentSyncManager::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
 {
     Q_UNUSED( documents )
 }

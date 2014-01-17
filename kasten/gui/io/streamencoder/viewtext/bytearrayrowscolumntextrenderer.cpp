@@ -31,7 +31,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRowsColumnTextRenderer::ByteArrayRowsColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel,

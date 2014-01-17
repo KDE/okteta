@@ -31,7 +31,7 @@ class AbstractByteArrayModel;
 }
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayView;

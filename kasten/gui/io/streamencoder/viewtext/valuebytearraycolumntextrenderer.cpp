@@ -29,7 +29,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ValueByteArrayColumnTextRenderer::ValueByteArrayColumnTextRenderer(

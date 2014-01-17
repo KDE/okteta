@@ -34,7 +34,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SelectController::SelectController( KXMLGUIClient* guiClient )

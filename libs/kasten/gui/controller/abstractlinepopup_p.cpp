@@ -30,7 +30,7 @@
 #include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void AbstractLinePopupPrivate::init()

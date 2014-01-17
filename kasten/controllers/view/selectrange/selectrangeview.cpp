@@ -36,7 +36,7 @@
 #include <QLayout>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )

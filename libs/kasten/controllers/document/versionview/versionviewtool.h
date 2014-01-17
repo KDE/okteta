@@ -29,7 +29,7 @@
 #include <abstracttool.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 /**
@@ -52,7 +52,7 @@ class KASTENCONTROLLERS_EXPORT VersionViewTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   Q_SIGNALS:
-    void modelChanged( Kasten2::AbstractModel* model );
+    void modelChanged( Kasten::AbstractModel* model );
 
   private: // sources
     AbstractModel* mModel;

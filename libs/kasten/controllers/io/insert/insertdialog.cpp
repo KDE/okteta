@@ -34,7 +34,7 @@
 #include <QtWidgets/QDialogButtonBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 InsertDialog::InsertDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent )

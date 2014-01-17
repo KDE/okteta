@@ -56,10 +56,10 @@ namespace {
 QString CharDataInformationMethods::staticValueString(quint8 value)
 {
     QString charStr = charString(value);
-    if (Kasten2::StructViewPreferences::showCharNumericalValue())
+    if (Kasten::StructViewPreferences::showCharNumericalValue())
     {
-        int base = Kasten2::StructViewPreferences::charDisplayBase();
-        const QString num = (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
+        int base = Kasten::StructViewPreferences::charDisplayBase();
+        const QString num = (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
             ? QLocale().toString(value)
             : QString::number(value, base);
         charStr += QStringLiteral(" (") + PrimitiveDataInformation::basePrefix(base)

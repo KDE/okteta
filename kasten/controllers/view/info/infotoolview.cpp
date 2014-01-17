@@ -27,7 +27,7 @@
 #include "infotool.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 InfoToolView::InfoToolView( InfoTool* tool )

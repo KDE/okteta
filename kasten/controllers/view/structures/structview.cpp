@@ -54,7 +54,7 @@
 #include <QHeaderView>
 #include <QFocusEvent>
 
-namespace Kasten2
+namespace Kasten
 {
 
 StructView::StructView(StructTool* tool, QWidget* parent) :

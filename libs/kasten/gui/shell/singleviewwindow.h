@@ -33,7 +33,7 @@ template<class T> class QList;
 class QMimeData;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class SingleViewWindowPrivate;
@@ -48,7 +48,7 @@ class KASTENGUI_EXPORT SingleViewWindow : public KXmlGuiWindow,
                                           public If::WidgetsDockable
 {
    Q_OBJECT
-   Q_INTERFACES( Kasten2::If::WidgetsDockable )
+   Q_INTERFACES( Kasten::If::WidgetsDockable )
 
   public:
     explicit SingleViewWindow( AbstractView* view );
@@ -69,9 +69,9 @@ class KASTENGUI_EXPORT SingleViewWindow : public KXmlGuiWindow,
 
   private:
     Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& newTitle ) )
-    Q_PRIVATE_SLOT( d_func(), void onContentFlagsChanged( Kasten2::ContentFlags contentFlags ) )
-    Q_PRIVATE_SLOT( d_func(), void onLocalSyncStateChanged( Kasten2::LocalSyncState newState ) )
-//     void onViewFocusChanged( Kasten2::AbstractView* view );
+    Q_PRIVATE_SLOT( d_func(), void onContentFlagsChanged( Kasten::ContentFlags contentFlags ) )
+    Q_PRIVATE_SLOT( d_func(), void onLocalSyncStateChanged( Kasten::LocalSyncState newState ) )
+//     void onViewFocusChanged( Kasten::AbstractView* view );
     Q_PRIVATE_SLOT( d_func(), void onToolVisibilityChanged( bool isVisible ) )
     Q_PRIVATE_SLOT( d_func(), void onSynchronizerDeleted( QObject* synchronizer ) )
 

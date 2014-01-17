@@ -30,7 +30,7 @@
 #include "abstractmodel.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractModelSynchronizer;
 class AbstractDocumentPrivate;
@@ -67,8 +67,8 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     QString id() const;
 
   Q_SIGNALS:
-    void synchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
-    void contentFlagsChanged( Kasten2::ContentFlags contentFlags );
+    void synchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
+    void contentFlagsChanged( Kasten::ContentFlags contentFlags );
 
   protected:
     void setId( const QString& id );

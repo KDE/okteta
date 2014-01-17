@@ -37,7 +37,7 @@ namespace KNS3
 {
 class Button;
 }
-namespace Kasten2
+namespace Kasten
 {
 class StructuresManager;
 class StructTool;
@@ -49,7 +49,7 @@ Q_OBJECT
 
 public:
     Q_PROPERTY(QStringList values READ values USER true)
-    explicit StructuresManagerView(Kasten2::StructTool* manager, QWidget* parent = 0);
+    explicit StructuresManagerView(Kasten::StructTool* manager, QWidget* parent = 0);
 
     virtual ~StructuresManagerView();
     QStringList values();
@@ -65,7 +65,7 @@ private:
     void rebuildPluginSelectorEntries();
     void reloadSelectedItems();
 private:
-    Kasten2::StructTool* mTool;
+    Kasten::StructTool* mTool;
     QStringList mSelectedStructures;
     KNS3::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;

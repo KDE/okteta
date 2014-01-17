@@ -43,7 +43,7 @@
 #include "structviewpreferences.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class StructToolPrivate

@@ -32,7 +32,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char ToolListActionListId[] = "tools_list";

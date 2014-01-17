@@ -40,7 +40,7 @@ class QPushButton;
 class QVBoxLayout;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KAbstractFindDialog : public QDialog

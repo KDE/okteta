@@ -40,7 +40,7 @@
 #include <QtCore/QByteArray>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 FilterTool::FilterTool()

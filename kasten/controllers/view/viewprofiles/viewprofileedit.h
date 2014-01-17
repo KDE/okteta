@@ -34,7 +34,7 @@ class QCheckBox;
 class QSpinBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ByteArrayViewProfile;
 

@@ -35,7 +35,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
@@ -64,8 +64,8 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
-                            SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
+        connect( mDocument, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
+                            SLOT(onSynchronizerChanged(Kasten::AbstractModelSynchronizer*)) );
     }
     onSynchronizerChanged( mDocument ? mDocument->synchronizer() : 0 );
 }
@@ -97,9 +97,9 @@ void SynchronizeController::onSynchronizerChanged( AbstractModelSynchronizer* ne
                   || ( remoteSyncState == RemoteHasChanges )
                   || ( remoteSyncState == RemoteUnknown );
 
-        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
                                 SLOT(onSyncStateChanged()) );
-        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
                                 SLOT(onSyncStateChanged()) );
         connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
                                 SLOT(onSynchronizerDeleted(QObject*)) );

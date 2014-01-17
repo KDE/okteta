@@ -24,7 +24,7 @@
 #include "tabbedviews_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TabbedViews::TabbedViews( TabbedViewsPrivate* _d )

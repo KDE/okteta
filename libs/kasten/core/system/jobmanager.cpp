@@ -29,7 +29,7 @@
 #include <QGuiApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 bool JobManager::executeJob( KJob* job )

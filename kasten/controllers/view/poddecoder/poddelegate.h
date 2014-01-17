@@ -28,7 +28,7 @@
 #include <QtCore/QPointer>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class PODDecoderTool;
 

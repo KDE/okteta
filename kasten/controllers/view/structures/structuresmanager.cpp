@@ -30,7 +30,7 @@
 #include <QStandardPaths>
 #include <QDir>
 
-namespace Kasten2
+namespace Kasten
 {
 
 StructuresManager::~StructuresManager()

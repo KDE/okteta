@@ -34,7 +34,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 IHexStreamEncoderSettings::IHexStreamEncoderSettings()

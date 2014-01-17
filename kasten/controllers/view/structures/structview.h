@@ -37,7 +37,7 @@ class QPushButton;
 class KTextEdit;
 //class ModelTest;
 
-namespace Kasten2
+namespace Kasten
 {
 class StructTool;
 class StructTreeModel;

@@ -30,7 +30,7 @@
 #include <QFontDatabase>
 #include <QTextEdit>
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder )

@@ -27,7 +27,7 @@
 #include <QDockWidget>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractToolView;

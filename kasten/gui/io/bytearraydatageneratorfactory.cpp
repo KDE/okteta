@@ -35,7 +35,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 QList<AbstractModelDataGenerator*> ByteArrayDataGeneratorFactory::createDataGenerators()

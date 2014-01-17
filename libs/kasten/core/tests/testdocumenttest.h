@@ -38,7 +38,7 @@ class TestDocumentTest : public QObject
 
   private:
     void checkTitleChanged( QSignalSpy* titleChangedSpy, const QString& title );
-    void checkContentFlagsChanged( QSignalSpy* changedSpy, Kasten2::ContentFlags contentFlags );
+    void checkContentFlagsChanged( QSignalSpy* changedSpy, Kasten::ContentFlags contentFlags );
 
   private Q_SLOTS: // test functions
     void testPlainConstructor();

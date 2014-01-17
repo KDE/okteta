@@ -34,7 +34,7 @@ class QSpinBox;
 class QCheckBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor

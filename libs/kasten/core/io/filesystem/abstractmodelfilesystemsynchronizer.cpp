@@ -27,7 +27,7 @@
 #include <abstractdocument.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d )

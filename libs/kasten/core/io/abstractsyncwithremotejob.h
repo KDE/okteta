@@ -29,7 +29,7 @@
 #include <KJob>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractSyncWithRemoteJobPrivate;

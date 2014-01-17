@@ -26,7 +26,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void BorderColumnTextRenderer::renderFirstLine( QTextStream *stream, int lineIndex ) const

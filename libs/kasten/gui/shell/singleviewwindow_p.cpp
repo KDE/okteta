@@ -33,7 +33,7 @@
 #include <abstractmodelsynchronizer.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SingleViewWindowPrivate::SingleViewWindowPrivate( SingleViewWindow* parent,
@@ -102,8 +102,8 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
     {
         if( isNewSynchronizer )
         {
-            q->connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                        SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+            q->connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+                        SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
             q->connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
                         SLOT(onSynchronizerDeleted(QObject*)) );
         }
@@ -111,8 +111,8 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
     else if( mDocument )
     {
         if( isNewDocument )
-            q->connect( mDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
-                        SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+            q->connect( mDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
+                        SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
     }
 }
 
@@ -187,8 +187,8 @@ void SingleViewWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
     mSynchronizer = 0;
 
     // switch to document state
-    q->connect( mDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
-                SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+    q->connect( mDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
+                SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
 
     onContentFlagsChanged( mDocument->contentFlags() );
 }

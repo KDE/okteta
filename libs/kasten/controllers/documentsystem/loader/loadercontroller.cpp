@@ -37,7 +37,7 @@
 #include <QMimeDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char CreatorConfigGroupId[] = "Recent Files";

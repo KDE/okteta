@@ -27,7 +27,7 @@
 #include <KAboutData>
 #include <KPluginFactory>
 
-namespace Kasten2 {
+namespace Kasten {
 class ByteArrayViewProfileManager;
 }
 
@@ -54,7 +54,7 @@ class OktetaPartFactory : public KPluginFactory
 
   private:
     KAboutData mAboutData;
-    Kasten2::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
+    Kasten::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };
 
 #endif

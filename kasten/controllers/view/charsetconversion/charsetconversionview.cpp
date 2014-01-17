@@ -42,7 +42,7 @@
 #include <QGroupBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidget* parent )

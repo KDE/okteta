@@ -34,7 +34,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
@@ -63,9 +63,9 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
         mCloseAllOtherAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
         mCloseAllOtherAction->setEnabled( false );
 
-        connect( mDocumentStrategy, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
+        connect( mDocumentStrategy, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
                 SLOT(onDocumentsChanged()) );
-        connect( mDocumentStrategy, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
+        connect( mDocumentStrategy, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
                 SLOT(onDocumentsChanged()) );
     }
 }

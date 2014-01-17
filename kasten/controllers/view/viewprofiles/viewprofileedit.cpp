@@ -38,7 +38,7 @@
 #include <QSpinBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static int

@@ -24,7 +24,7 @@
 #include "abstractexportjob_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractExportJob::AbstractExportJob( AbstractExportJobPrivate* d )

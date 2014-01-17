@@ -32,7 +32,7 @@ class QAction;
 class KXMLGUIClient;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class GotoOffsetToolView;

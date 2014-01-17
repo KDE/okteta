@@ -31,7 +31,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractModelSynchronizer;
 class AbstractDocument;
@@ -60,9 +60,9 @@ class ShellWindowPrivate
 
   private: // Q_SLOTS
     void onTitleChanged( const QString& newTitle );
-    void onContentFlagsChanged( Kasten2::ContentFlags contentFlags );
-    void onLocalSyncStateChanged( Kasten2::LocalSyncState newState );
-    void onViewFocusChanged( Kasten2::AbstractView* view );
+    void onContentFlagsChanged( Kasten::ContentFlags contentFlags );
+    void onLocalSyncStateChanged( Kasten::LocalSyncState newState );
+    void onViewFocusChanged( Kasten::AbstractView* view );
     void onToolVisibilityChanged( bool isVisible );
     void onSynchronizerDeleted( QObject* synchronizer );
 

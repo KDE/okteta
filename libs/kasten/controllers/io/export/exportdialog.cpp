@@ -38,7 +38,7 @@
 #include <QtWidgets/QDialogButtonBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ExportDialog::ExportDialog( const QString& remoteTypeName,

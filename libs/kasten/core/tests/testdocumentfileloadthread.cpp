@@ -34,7 +34,7 @@
 #include <QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void TestDocumentFileLoadThread::run()

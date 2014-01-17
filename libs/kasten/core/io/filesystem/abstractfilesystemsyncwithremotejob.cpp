@@ -24,7 +24,7 @@
 #include "abstractfilesystemsyncwithremotejob_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,

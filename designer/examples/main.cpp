@@ -11,9 +11,9 @@
 #include "ui_example_widget.h"
 //// include the header of the bytearray model you want to use
 // Okteta core
-#include <okteta1/piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 //// or
-#include <Okteta1/PieceTableByteArrayModel>
+#include <Okteta/PieceTableByteArrayModel>
 
 //// only needed for the example
 // KF5

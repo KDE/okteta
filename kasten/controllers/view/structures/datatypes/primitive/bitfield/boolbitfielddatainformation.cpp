@@ -46,7 +46,7 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
         return box;
     }
     UIntSpinBox* ret = new UIntSpinBox(parent);
-    ret->setBase(Kasten2::StructViewPreferences::unsignedDisplayBase());
+    ret->setBase(Kasten::StructViewPreferences::unsignedDisplayBase());
     ret->setMaximum(mask());
     return ret;
 }

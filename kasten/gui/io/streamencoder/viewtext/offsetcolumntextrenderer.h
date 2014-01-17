@@ -29,7 +29,7 @@
 #include <offsetformat.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class OffsetColumnTextRenderer : public AbstractColumnTextRenderer

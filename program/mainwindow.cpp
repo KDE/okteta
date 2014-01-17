@@ -115,7 +115,7 @@
 #include <QMimeData>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char LoadedUrlsKey[] = "LoadedUrls";
@@ -127,14 +127,14 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     setObjectName( QStringLiteral("Shell") );
 
     // there is only one mainwindow, so have this show the document if requested
-    connect( mProgram->documentManager(), SIGNAL(focusRequested(Kasten2::AbstractDocument*)),
-             SLOT(showDocument(Kasten2::AbstractDocument*)) );
+    connect( mProgram->documentManager(), SIGNAL(focusRequested(Kasten::AbstractDocument*)),
+             SLOT(showDocument(Kasten::AbstractDocument*)) );
     connect( viewArea(), SIGNAL(dataOffered(const QMimeData*,bool&)),
              SLOT(onDataOffered(const QMimeData*,bool&)) );
     connect( viewArea(), SIGNAL(dataDropped(const QMimeData*)),
              SLOT(onDataDropped(const QMimeData*)) );
-    connect( viewArea(), SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)),
-             SLOT(onCloseRequest(QList<Kasten2::AbstractView*>)) );
+    connect( viewArea(), SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
+             SLOT(onCloseRequest(QList<Kasten::AbstractView*>)) );
 
     // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
     //      This state is taken from an oktetarc where the docker constellation was configured by hand.
@@ -148,7 +148,7 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     if( !group.hasKey(mainWindowStateKey) )
         group.writeEntry( mainWindowStateKey, mainWindowState );
 
-    setStatusBar( new Kasten2::StatusBar(this) );
+    setStatusBar( new Kasten::StatusBar(this) );
 
     setupControllers();
     setupGUI();
@@ -217,7 +217,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewProfileController(byteArrayViewProfileManager,this,this) );
     addXmlGuiController( new ViewProfilesManageController(this,byteArrayViewProfileManager,this) );
 
-    Kasten2::StatusBar* const bottomBar = static_cast<Kasten2::StatusBar*>( statusBar() );
+    Kasten::StatusBar* const bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
     addXmlGuiController( new ViewStatusController(bottomBar) );
     addXmlGuiController( new ModifiedBarController(bottomBar) );
     addXmlGuiController( new ReadOnlyBarController(bottomBar) );
@@ -294,7 +294,7 @@ void OktetaMainWindow::onDataDropped( const QMimeData* mimeData )
         documentManager->createManager()->createNewFromData( mimeData, true );
 }
 
-void OktetaMainWindow::onCloseRequest( const QList<Kasten2::AbstractView*>& views )
+void OktetaMainWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
 {
     // group views per document
     QHash<AbstractDocument*,QList<AbstractView*> > viewsToClosePerDocument;

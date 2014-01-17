@@ -34,7 +34,7 @@
 #include <QFontDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayView::ByteArrayView( ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer )

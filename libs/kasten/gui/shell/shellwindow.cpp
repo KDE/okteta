@@ -24,7 +24,7 @@
 #include "shellwindow_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ShellWindow::ShellWindow( ViewManager* viewManager )

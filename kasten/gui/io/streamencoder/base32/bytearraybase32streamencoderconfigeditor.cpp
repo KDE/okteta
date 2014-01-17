@@ -32,7 +32,7 @@
 #include <QLabel>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEditor( ByteArrayBase32StreamEncoder* encoder, QWidget* parent )

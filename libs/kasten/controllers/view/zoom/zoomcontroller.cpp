@@ -35,7 +35,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ZoomController::ZoomController( KXMLGUIClient* guiClient )

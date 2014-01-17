@@ -32,7 +32,7 @@ public:
     static PrimitiveDataType staticType();
     static T fromVariant(const QVariant& value, bool* ok);
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    static QString staticValueString(T val, int base = Kasten2::StructViewPreferences::signedDisplayBase());
+    static QString staticValueString(T val, int base = Kasten::StructViewPreferences::signedDisplayBase());
 
     static QWidget* staticCreateEditWidget(QWidget* parent);
     static QVariant staticDataFromWidget(const QWidget* w);

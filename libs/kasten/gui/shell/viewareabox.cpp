@@ -27,7 +27,7 @@
 #include <QShortcut>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewAreaBox::ViewAreaBox( QWidget* centralWidget, QWidget* parent )

@@ -39,7 +39,7 @@
 #include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void MultiDocumentStrategyPrivate::init()

@@ -38,7 +38,7 @@ class AbstractByteArrayModel;
 }
 class QString;
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayView;

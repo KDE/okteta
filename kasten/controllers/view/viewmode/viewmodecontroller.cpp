@@ -31,7 +31,7 @@
 #include <KSelectAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewModeController::ViewModeController( KXMLGUIClient* guiClient )

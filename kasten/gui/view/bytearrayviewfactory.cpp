@@ -29,7 +29,7 @@
 #include <bytearraydocument.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayViewFactory::ByteArrayViewFactory( ByteArrayViewProfileManager* byteArrayViewProfileManager )

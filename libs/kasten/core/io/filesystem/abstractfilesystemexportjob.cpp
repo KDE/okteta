@@ -24,7 +24,7 @@
 #include "abstractfilesystemexportjob_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,

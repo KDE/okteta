@@ -35,7 +35,7 @@
 #include <QtWidgets/QPushButton>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )

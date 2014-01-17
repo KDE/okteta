@@ -38,7 +38,7 @@
 #include <QtWidgets/QDialogButtonBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,

@@ -32,7 +32,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int defaultUuInputLineLength = 45;

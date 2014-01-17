@@ -38,9 +38,9 @@
 
 
 
-Q_DECLARE_METATYPE(Kasten2::AbstractView*)
+Q_DECLARE_METATYPE(Kasten::AbstractView*)
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int MaxEntryLength = 150;
@@ -57,8 +57,8 @@ ViewListMenuController::ViewListMenuController( ViewManager* viewManager, Abstra
 //     mWindowsActionGroup->setExclusive( true );
     connect( mWindowsActionGroup, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
 
-    connect( mViewManager, SIGNAL(opened(QList<Kasten2::AbstractView*>)),  SLOT(updateActions()) );
-    connect( mViewManager, SIGNAL(closing(QList<Kasten2::AbstractView*>)), SLOT(updateActions()) );
+    connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),  SLOT(updateActions()) );
+    connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)), SLOT(updateActions()) );
 
     updateActions();
 }

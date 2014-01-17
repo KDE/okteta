@@ -34,7 +34,7 @@ class KToggleAction;
 class QAction;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayView;

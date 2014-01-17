@@ -24,7 +24,7 @@
 #include "multiviewareas_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 // TODO: catch area focues change!
 MultiViewAreas::MultiViewAreas()

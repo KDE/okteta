@@ -33,7 +33,7 @@
 #include <QtCore/QStringList>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ViewManager;
 

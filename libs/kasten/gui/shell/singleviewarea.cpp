@@ -24,7 +24,7 @@
 #include "singleviewarea_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 // TODO: catch area focues change!
 SingleViewArea::SingleViewArea()

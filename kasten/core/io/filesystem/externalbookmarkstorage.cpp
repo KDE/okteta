@@ -35,7 +35,7 @@
 // Qt
 #include <QStandardPaths>
 
-namespace Kasten2
+namespace Kasten
 {
 
 ExternalBookmarkStorage::ExternalBookmarkStorage()

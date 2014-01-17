@@ -34,7 +34,7 @@
 #include <time.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 static const char RandomDataMimeType[] = "application/octet-stream";
 

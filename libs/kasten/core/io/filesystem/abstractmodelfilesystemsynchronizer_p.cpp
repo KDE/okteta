@@ -27,7 +27,7 @@
 #include <Solid/Networking>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()

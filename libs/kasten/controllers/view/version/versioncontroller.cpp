@@ -36,7 +36,7 @@
 #include <QMenu>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int MaxMenuEntries = 10;

@@ -32,7 +32,7 @@
 class QWidget;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog,

@@ -28,7 +28,7 @@
 #include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )

@@ -35,7 +35,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical

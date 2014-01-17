@@ -24,7 +24,7 @@
 #include "abstracttoolwidget_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractToolWidget::AbstractToolWidget( QWidget* parent )

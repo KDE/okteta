@@ -31,7 +31,7 @@
 #include <QTemporaryFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractConnectJobPrivate

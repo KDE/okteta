@@ -35,7 +35,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // TODO: a tool(view) might perhaps be invoked indirectly by asking for a tool for the object, here select

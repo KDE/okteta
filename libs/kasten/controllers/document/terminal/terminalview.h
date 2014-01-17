@@ -34,7 +34,7 @@ class ReadOnlyPart;
 class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class TerminalTool;

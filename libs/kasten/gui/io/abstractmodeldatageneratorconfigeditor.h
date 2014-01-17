@@ -29,7 +29,7 @@
 #include <QWidget>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractModelDataGeneratorConfigEditorPrivate;
 

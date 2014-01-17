@@ -30,7 +30,7 @@
 #include <QTemporaryFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelFileSystemSynchronizer;

@@ -30,7 +30,7 @@
 #include "abstractmodelsynchronizer.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractDocumentPrivate : public AbstractModelPrivate

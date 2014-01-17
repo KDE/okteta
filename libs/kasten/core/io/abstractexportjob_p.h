@@ -26,7 +26,7 @@
 #include "abstractexportjob.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractExportJobPrivate

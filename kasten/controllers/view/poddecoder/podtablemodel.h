@@ -27,7 +27,7 @@
 #include <QtCore/QAbstractTableModel>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class PODDecoderTool;

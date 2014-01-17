@@ -29,7 +29,7 @@
 class QShortcut;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ViewAreaBox : public QWidget

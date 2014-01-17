@@ -32,7 +32,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CloseController::CloseController( ViewManager* viewManager, KXMLGUIClient* guiClient )

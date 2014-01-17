@@ -31,7 +31,7 @@
 #include <QDialogButtonBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 BytesPerGroupDialog::BytesPerGroupDialog( QWidget* parent )

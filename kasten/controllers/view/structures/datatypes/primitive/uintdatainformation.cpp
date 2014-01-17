@@ -56,7 +56,7 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
     QString num = QString::number(value, base);
     if (base == 10)
     {
-        if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
+        if (Kasten::StructViewPreferences::localeAwareDecimalFormatting())
             num = QLocale().toString(value);
     }
     else
@@ -73,7 +73,7 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
 template<typename T>
 inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox(parent, Kasten2::StructViewPreferences::unsignedDisplayBase());
+    UIntSpinBox* ret = new UIntSpinBox(parent, Kasten::StructViewPreferences::unsignedDisplayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }

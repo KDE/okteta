@@ -33,7 +33,7 @@ class QTreeView;
 class QPushButton;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayViewProfileManager;
@@ -59,9 +59,9 @@ class ViewProfilesManageDialog : public QDialog
     void onDeleteButtonClicked();
 
     void onModelReset();
-    void onViewProfilesLocked( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
-    void onViewProfilesUnlocked( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
-    void onDefaultViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId );
+    void onViewProfilesLocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onViewProfilesUnlocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onDefaultViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
 
   private:
     ByteArrayViewProfileManager* mViewProfileManager;

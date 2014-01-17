@@ -35,7 +35,7 @@ class KLineEdit;
 class QStackedWidget;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ChecksumTool;

@@ -33,7 +33,7 @@
 #include <QIcon>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewProfileTableModel::ViewProfileTableModel( const ByteArrayViewProfileManager* viewProfileManager,

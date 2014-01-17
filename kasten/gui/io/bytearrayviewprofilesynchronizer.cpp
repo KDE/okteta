@@ -27,7 +27,7 @@
 #include <bytearrayview.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayViewProfileSynchronizer::ByteArrayViewProfileSynchronizer( ByteArrayViewProfileManager* viewProfileManager )

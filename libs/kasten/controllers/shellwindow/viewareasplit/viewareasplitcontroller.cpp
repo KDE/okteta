@@ -35,7 +35,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient )
@@ -47,11 +47,11 @@ ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, Abst
     mViewAreaSplitable = mGroupedViews ? qobject_cast<If::ViewAreaSplitable*>( mGroupedViews ) : 0;
     if( mViewAreaSplitable )
     {
-        connect( mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten2::AbstractViewArea*)),
-                 SLOT(onViewAreaFocusChanged(Kasten2::AbstractViewArea*)) );
-        connect( mGroupedViews, SIGNAL(viewAreasAdded(QList<Kasten2::AbstractViewArea*>)),
+        connect( mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten::AbstractViewArea*)),
+                 SLOT(onViewAreaFocusChanged(Kasten::AbstractViewArea*)) );
+        connect( mGroupedViews, SIGNAL(viewAreasAdded(QList<Kasten::AbstractViewArea*>)),
                  SLOT(onViewAreasChanged()) );
-        connect( mGroupedViews, SIGNAL(viewAreasRemoved(QList<Kasten2::AbstractViewArea*>)),
+        connect( mGroupedViews, SIGNAL(viewAreasRemoved(QList<Kasten::AbstractViewArea*>)),
                  SLOT(onViewAreasChanged()) );
     }
 
@@ -123,9 +123,9 @@ void ViewAreaSplitController::onViewAreaFocusChanged( AbstractViewArea* viewArea
 
     if( mCurrentViewArea )
     {
-        connect( mCurrentViewArea, SIGNAL(added(QList<Kasten2::AbstractView*>)),
+        connect( mCurrentViewArea, SIGNAL(added(QList<Kasten::AbstractView*>)),
                  SLOT(onViewsChanged()) );
-        connect( mCurrentViewArea, SIGNAL(removing(QList<Kasten2::AbstractView*>)),
+        connect( mCurrentViewArea, SIGNAL(removing(QList<Kasten::AbstractView*>)),
                  SLOT(onViewsChanged()) );
     }
     onViewsChanged();

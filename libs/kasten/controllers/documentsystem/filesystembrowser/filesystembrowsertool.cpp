@@ -34,7 +34,7 @@
 #include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncManager )

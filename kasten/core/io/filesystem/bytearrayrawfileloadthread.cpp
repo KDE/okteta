@@ -38,7 +38,7 @@
 #include <limits>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void ByteArrayRawFileLoadThread::run()

@@ -25,7 +25,7 @@
 // lib
 #include "structtool.h"
 
-namespace Kasten2
+namespace Kasten
 {
 
 StructuresToolFactory::StructuresToolFactory()

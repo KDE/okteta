@@ -47,7 +47,7 @@
 #include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char BookmarkListActionListId[] = "bookmark_list";
