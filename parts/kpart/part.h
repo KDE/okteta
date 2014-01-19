@@ -26,7 +26,7 @@
 // Kasten
 #include <kastencore.h>
 // KF5
-#include <kparts/part.h>
+#include <KParts/ReadWritePart>
 
 namespace Kasten {
 class ByteArrayViewProfileManager;

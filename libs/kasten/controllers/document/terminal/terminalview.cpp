@@ -27,7 +27,7 @@
 // KF5
 #include <KLocalizedString>
 #include <KServiceTypeTrader>
-#include <kparts/part.h>
+#include <KParts/ReadOnlyPart>
 #include <kde_terminal_interface.h>
 // Qt
 #include <QLayout>
