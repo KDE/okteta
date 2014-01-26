@@ -25,6 +25,7 @@
 // lib
 #include "textcharcodec.h"
 #include "ebcdic1047charcodec.h"
+#include "usasciicharcodec.h"
 // Qt
 #include <QtCore/QStringList>
 
@@ -39,6 +40,7 @@ const QStringList& CharCodec::codecNames()
     if( codecNames.isEmpty() )
     {
         codecNames = TextCharCodec::codecNames();
+        codecNames.append( USASCIICharCodec::codecName() );
         codecNames.append( EBCDIC1047CharCodec::codecName() );
     }
 
@@ -52,6 +54,8 @@ CharCodec* CharCodec::createCodec( const QString& name )
 
     if( TextCharCodec::codecNames().indexOf(name) != -1 )
         result = TextCharCodec::createCodec( name );
+    else if( USASCIICharCodec::codecName() == name )
+        result = USASCIICharCodec::create();
     else if( EBCDIC1047CharCodec::codecName() == name )
         result = EBCDIC1047CharCodec::create();
     else

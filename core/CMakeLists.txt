@@ -16,6 +16,7 @@ set(libcodecs_SRCS
   codecs/valuecodec.cpp
   codecs/charcodec.cpp
   codecs/decimalbytecodec.cpp
+  codecs/usasciicharcodec.cpp
   codecs/ebcdic1047charcodec.cpp
   codecs/hexadecimalbytecodec.cpp
   codecs/octalbytecodec.cpp
