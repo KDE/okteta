@@ -24,10 +24,15 @@ find_package(Qt5 REQUIRED NO_MODULE
     PrintSupport
     Script
     ScriptTools
-    Test
     Widgets
     Xml
+    OPTIONAL_COMPONENTS
+    Test
 )
+if (NOT Qt5Test_FOUND)
+  message(STATUS "Qt5Test not found, unit tests will not be built.")
+endif()
+
 
 find_package(KF5 CONFIG REQUIRED
     COMPONENTS

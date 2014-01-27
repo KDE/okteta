@@ -448,44 +448,47 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${STRUCTVIEW_OTHER_SRCS}
 )
 
-#structures view unit tests
-include(ECMAddTests)
-#static lib for unit tests (reuse the OBJECT library)
-add_library( structures-static STATIC ${PODDECODER_OBJS} ${STRUCTVIEW_OBJS} )
-ecm_mark_as_test( structures-static )
-target_link_libraries( structures-static
-  Qt5::Core
-  Qt5::Test
-  Qt5::Script
-  Qt5::Xml
-  KF5::I18n
-  KF5::Completion
-  KF5::ConfigWidgets
-  KF5::KCMUtils
-  ${oktetakastencore_LIB}
-  ${oktetakastengui_LIB}
-  ${oktetacore_LIB}
-  ${KASTENCORE_LIBS}
-)
 
-ecm_add_tests(
-  test/primitivearraytest.cpp
-  test/arraydatainformationtest.cpp
-  test/basicdatainformationtest.cpp
-  test/primitivedatainformationtest.cpp
-  test/scriptclassestest.cpp
-  test/uniondatainformationtest.cpp
-  test/allprimitivetypestest.cpp
-  test/scriptvalueconvertertest.cpp
-  test/osdparsertest.cpp
-  test/commonparsertest.cpp
-  test/jsparsertest.cpp
-  test/customtostringtest.cpp
-  test/locktooffsettest.cpp
+if (Qt5Test_FOUND)
+  #structures view unit tests
+  include(ECMAddTests)
+  #static lib for unit tests (reuse the OBJECT library)
+  add_library( structures-static STATIC ${PODDECODER_OBJS} ${STRUCTVIEW_OBJS} )
+  ecm_mark_as_test( structures-static )
+  target_link_libraries( structures-static
+    Qt5::Core
+    Qt5::Test
+    Qt5::Script
+    Qt5::Xml
+    KF5::I18n
+    KF5::Completion
+    KF5::ConfigWidgets
+    KF5::KCMUtils
+    ${oktetakastencore_LIB}
+    ${oktetakastengui_LIB}
+    ${oktetacore_LIB}
+    ${KASTENCORE_LIBS}
+  )
 
-  NAME_PREFIX structures-
-  LINK_LIBRARIES structures-static
-)
+  ecm_add_tests(
+    test/primitivearraytest.cpp
+    test/arraydatainformationtest.cpp
+    test/basicdatainformationtest.cpp
+    test/primitivedatainformationtest.cpp
+    test/scriptclassestest.cpp
+    test/uniondatainformationtest.cpp
+    test/allprimitivetypestest.cpp
+    test/scriptvalueconvertertest.cpp
+    test/osdparsertest.cpp
+    test/commonparsertest.cpp
+    test/jsparsertest.cpp
+    test/customtostringtest.cpp
+    test/locktooffsettest.cpp
+
+    NAME_PREFIX structures-
+    LINK_LIBRARIES structures-static
+  )
+endif()
 
 set( okteta_kastencontrollers_LIB_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencontrollers_export.h

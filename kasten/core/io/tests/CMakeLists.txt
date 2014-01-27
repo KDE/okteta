@@ -1,3 +1,7 @@
+if (NOT Qt5Test_FOUND)
+  return()
+endif()
+
 project( oktetakasten_io_tests )
 
 include(ECMAddTests)

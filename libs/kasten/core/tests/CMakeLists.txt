@@ -1,3 +1,7 @@
+if (NOT Qt5Test_FOUND)
+  return()
+endif()
+
 project( kasten_core_tests )
 
 include(ECMAddTests)

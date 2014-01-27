@@ -1,3 +1,7 @@
+if (NOT Qt5Test_FOUND)
+  return()
+endif()
+
 include(ECMAddTests)
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
