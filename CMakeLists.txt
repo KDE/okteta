@@ -26,9 +26,8 @@ find_package(Qt5 REQUIRED NO_MODULE
     ScriptTools
     Widgets
     Xml
-    OPTIONAL_COMPONENTS
-    Test
 )
+find_package(Qt5Test QUIET)
 if (NOT Qt5Test_FOUND)
   message(STATUS "Qt5Test not found, unit tests will not be built.")
 endif()
