@@ -491,6 +491,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/bookmarks/bookmarkstoolfactory.h
   view/bookmarks/bookmarkstoolviewfactory.h
   view/overwritemode/overwritemodecontroller.h
+  view/poddecoder/poddata.h
   view/poddecoder/poddecodertool.h
   view/poddecoder/poddecodertoolview.h
   view/poddecoder/poddecodertoolfactory.h
@@ -525,6 +526,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/viewstatus/viewstatuscontroller.h
   view/viewprofiles/viewprofilecontroller.h
   view/viewprofiles/viewprofilesmanagecontroller.h
+  view/stringsextract/containedstring.h
   view/stringsextract/stringsextracttool.h
   view/stringsextract/stringsextracttoolview.h
   view/stringsextract/stringsextracttoolfactory.h
@@ -538,6 +540,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   document/info/documentinfotoolview.h
   document/info/documentinfotool.h
   document/overwriteonly/overwriteonlycontroller.h
+  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
 )
 
 kde4_add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )

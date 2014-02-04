@@ -82,6 +82,10 @@ set( oktetagui_LIB_HDRS
   line.h
   linepositionrange.h
   linerange.h
+  coord.h
+  coordrange.h
+  coordrangelist.h
+  selection.h
   abstractbytearraycolumnrenderer.h
   offsetcolumnrenderer.h
   bordercolumnrenderer.h
@@ -92,7 +96,7 @@ set( oktetagui_LIB_HDRS
   abstractbytearrayview.h
   bytearraycolumnview.h
   bytearrayrowview.h
-  bytearraytablelayout.h 
+  bytearraytablelayout.h
   bytearraytableranges.h
   offsetformat.h
 )
