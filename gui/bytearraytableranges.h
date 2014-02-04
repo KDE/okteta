@@ -28,7 +28,7 @@
 #include "coordrangelist.h"
 #include "oktetagui_export.h"
 // Okteta core
-#include "addressrangelist.h"
+#include "addressrange.h"
 
 
 namespace Okteta
