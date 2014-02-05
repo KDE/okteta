@@ -533,7 +533,12 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/stringsextract/stringsextracttoolviewfactory.h
   view/search/searchcontroller.h
   view/search/searchuserqueryable.h
-  view/structures/structtool.h
+# structtool.h cannot be installed as it pulls (too) many private uninstalled headers
+# KF5 TODO: any tools/controllers and views should be created by the resp. factories
+# since some time, no more directly.
+# So on next ABI change depublish tools/controllers & their views
+# For now keeping all installed, in case someone is using them still/already.
+#   view/structures/structtool.h
   view/structures/structtoolview.h
   view/structures/structurestoolfactory.h
   view/structures/structurestoolviewfactory.h
