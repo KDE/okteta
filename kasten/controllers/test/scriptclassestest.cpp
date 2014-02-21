@@ -311,10 +311,10 @@ void ScriptClassesTest::testReplaceObject()
     logger->setLogToStdOut(true);
     QString unionDef = QStringLiteral(
             "union({\n"
-            "    innerStruct : struct({ first : uint8(), second : uint16() }),\n"
-            "    innerArray : array(uint8(), 5),\n"
-            "    innerPointer : pointer(uint8(), double())\n"
-            "});\n");
+            QT_UNICODE_LITERAL("    innerStruct : struct({ first : uint8(), second : uint16() }),\n")
+            QT_UNICODE_LITERAL("    innerArray : array(uint8(), 5),\n")
+            QT_UNICODE_LITERAL("    innerPointer : pointer(uint8(), double())\n")
+            QT_UNICODE_LITERAL("});\n"));
     QScriptValue val = eng->evaluate(unionDef);
     QVERIFY(val.isObject());
     DataInformation* main = ScriptValueConverter::convert(val, QStringLiteral("container"), logger, 0);

@@ -64,14 +64,16 @@ OktetaProgram::OktetaProgram( int argc, char* argv[] )
   : mApp( argc, argv )
 {
 #ifndef QT_NO_DEBUG
+    // MSVC complains about mismatched strings... (wide vs normal)
+    // fix it using QT_UNICODE_LITERAL
     QLoggingCategory::setFilterRules(QStringLiteral(
         "okteta.core.debug = true\n"
-        "okteta.gui.debug = true\n"
-        "kasten.core.debug = true\n"
-        "kasten.gui.debug = true\n"
-        "kasten.okteta.core = true\n"
-        "kasten.okteta.gui = true\n"
-        "kasten.okteta.controllers.structures.debug = true\n"));
+        QT_UNICODE_LITERAL("okteta.gui.debug = true\n")
+        QT_UNICODE_LITERAL("kasten.core.debug = true\n")
+        QT_UNICODE_LITERAL("kasten.gui.debug = true\n")
+        QT_UNICODE_LITERAL("kasten.okteta.core = true\n")
+        QT_UNICODE_LITERAL("kasten.okteta.gui = true\n")
+        QT_UNICODE_LITERAL("kasten.okteta.controllers.structures.debug = true\n")));
 #endif
 }
 

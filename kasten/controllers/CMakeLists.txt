@@ -469,6 +469,7 @@ if (Qt5Test_FOUND)
     ${oktetacore_LIB}
     ${KASTENCORE_LIBS}
   )
+  target_compile_definitions( structures-static PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
 
   ecm_add_tests(
     test/primitivearraytest.cpp
@@ -627,6 +628,8 @@ set( okteta_kastencontrollers_templates_SRCS
 )
 
 add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
+# MSVC needs this
+target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
 target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets ${oktetacore_LIB} )
 
 endif( KASTEN_BUILD_INTERNAL_TEMPLATES )
