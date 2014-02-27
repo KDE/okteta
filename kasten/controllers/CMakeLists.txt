@@ -563,9 +563,9 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   KF5::I18n
   KF5::ConfigWidgets
   KF5::KCMUtils
-  KF5::PrintUtils
   KF5::IconThemes
   KF5::Completion
+  Qt5::PrintSupport
   Qt5::Script
   Qt5::ScriptTools
 )

@@ -35,7 +35,6 @@
 // KF5
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <kdeprintdialog.h>
 // Qt
 #include <QApplication>
 #include <QtPrintSupport/QPrintDialog>
@@ -71,13 +70,14 @@ void PrintTool::print()
 
     QPrinter printer;
 
-    // Not supported by Qt?
-    //printer.setPageSelection( QPrinter::SystemSide );
-
 //     LayoutDialogPage* layoutPage = new LayoutDialogPage();
     QList<QWidget*> customDialogPages;
 //     customDialogPages << layoutPage;
-    QPrintDialog *printDialog = KdePrint::createPrintDialog( &printer, customDialogPages, 0 );
+    QPrintDialog *printDialog = new QPrintDialog( &printer, 0 );
+    // Disable PrintPageRange, this tells Qt we can't do client-side page selection,
+    // so it will try do server-side page selection if supported
+    printDialog->setOption(QPrintDialog::PrintPageRange, false);
+//    printDialog->setOptionTabs(customDialogPages);
 
     printDialog->setWindowTitle( processTitle );
     if( printDialog->exec() )
