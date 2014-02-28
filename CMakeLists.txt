@@ -46,7 +46,6 @@ find_package(KF5 CONFIG REQUIRED
     KIO
     NewStuff
     Parts
-    PrintUtils
     Service
     Solid
     WidgetsAddons
