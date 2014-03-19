@@ -41,7 +41,7 @@ class ByteArrayViewProfileManager;
 class OktetaProgram
 {
   public:
-    OktetaProgram( int argc, char* argv[] );
+    OktetaProgram( int &argc, char* argv[] );
     ~OktetaProgram();
 
   public:

@@ -60,7 +60,7 @@ namespace Kasten
 // static const char OffsetOptionId[] = "offset";
 // static const char OffsetOptionShortId[] = "o";
 
-OktetaProgram::OktetaProgram( int argc, char* argv[] )
+OktetaProgram::OktetaProgram( int &argc, char* argv[] )
   : mApp( argc, argv )
 {
 #ifndef QT_NO_DEBUG
