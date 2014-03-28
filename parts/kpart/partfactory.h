@@ -41,7 +41,7 @@ class OktetaPartFactory : public KPluginFactory
     Q_INTERFACES(KPluginFactory)
 
   public:
-    explicit OktetaPartFactory( const char* componentName = 0, QObject* parent = 0 );
+    OktetaPartFactory();
 
     virtual ~OktetaPartFactory();
 
