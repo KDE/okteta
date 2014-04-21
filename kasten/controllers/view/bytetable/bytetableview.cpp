@@ -178,7 +178,7 @@ ByteTableView::~ByteTableView()
     ByteTableViewSettings::setColumnsWidth( columnsWidth );
     ByteTableViewSettings::setStyle( QApplication::style()->objectName() );
     ByteTableViewSettings::setFixedFont( QFontDatabase::systemFont(QFontDatabase::FixedFont).toString() );
-    ByteTableViewSettings::self()->writeConfig();
+    ByteTableViewSettings::self()->save();
 }
 
 }

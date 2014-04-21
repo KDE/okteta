@@ -174,7 +174,7 @@ InfoView::~InfoView()
     InfoViewSettings::setColumnsWidth( columnsWidth );
     InfoViewSettings::setStyle( QApplication::style()->objectName() );
     InfoViewSettings::setFixedFont( QFontDatabase::systemFont(QFontDatabase::FixedFont).toString() );
-    InfoViewSettings::self()->writeConfig();
+    InfoViewSettings::self()->save();
 }
 
 }
