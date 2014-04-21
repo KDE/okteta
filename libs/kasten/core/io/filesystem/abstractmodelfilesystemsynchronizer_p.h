@@ -30,6 +30,8 @@
 // Qt
 #include <QtCore/QDateTime>
 
+class QNetworkConfigurationManager;
+
 
 namespace Kasten
 {
@@ -60,12 +62,12 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
     void onFileDirty( const QString& fileName );
     void onFileCreated( const QString& fileName );
     void onFileDeleted( const QString& fileName );
-    void onNetworkConnect();
-    void onNetworkDisconnect();
+    void onOnlineStateChanged( bool isOnline );
 
   protected:
     QDateTime mFileDateTime;
     RemoteSyncState mRemoteState;
+    QNetworkConfigurationManager* mNetworkConfigurationManager;
     mutable KDirWatch* mDirWatch;
 
   protected:
@@ -76,6 +78,7 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
 inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent )
   : AbstractModelSynchronizerPrivate( parent ),
     mRemoteState( RemoteUnknown ),
+    mNetworkConfigurationManager( 0 ),
     mDirWatch( 0 )
 {
 }

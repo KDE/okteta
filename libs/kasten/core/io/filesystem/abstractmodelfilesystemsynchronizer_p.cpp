@@ -24,7 +24,8 @@
 
 // KF5
 #include <KDirWatch>
-#include <Solid/Networking>
+// Qt
+#include <QNetworkConfigurationManager>
 
 
 namespace Kasten
@@ -78,16 +79,15 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
 {
     Q_Q( AbstractModelFileSystemSynchronizer );
 
-    Solid::Networking::Notifier* networkingNotifier = Solid::Networking::notifier();
-    q->connect( networkingNotifier, SIGNAL(shouldConnect()), SLOT(onNetworkConnect()) );
-    q->connect( networkingNotifier, SIGNAL(shouldDisconnect()), SLOT(onNetworkDisconnect()) );
+    mNetworkConfigurationManager = new QNetworkConfigurationManager();
+    q->connect( mNetworkConfigurationManager, SIGNAL(onlineStateChanged(bool)), SLOT(onOnlineStateChanged(bool)) );
 }
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 {
     Q_Q( AbstractModelFileSystemSynchronizer );
 
-    Solid::Networking::Notifier* networkingNotifier = Solid::Networking::notifier();
-    networkingNotifier->disconnect( q );
+    delete mNetworkConfigurationManager;
+    mNetworkConfigurationManager = 0;
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
@@ -112,20 +112,15 @@ void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& f
     setRemoteState( RemoteDeleted );
 }
 
-void AbstractModelFileSystemSynchronizerPrivate::onNetworkConnect()
+void AbstractModelFileSystemSynchronizerPrivate::onOnlineStateChanged( bool isOnline )
 {
     qCDebug(LOG_KASTEN_CORE);
-    setRemoteState( RemoteUnknown );
-}
-
-void AbstractModelFileSystemSynchronizerPrivate::onNetworkDisconnect()
-{
-    qCDebug(LOG_KASTEN_CORE);
-    setRemoteState( RemoteUnreachable );
+    setRemoteState( isOnline ? RemoteUnknown : RemoteUnreachable );
 }
 
 AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()
 {
+    delete mNetworkConfigurationManager;
 }
 
 }

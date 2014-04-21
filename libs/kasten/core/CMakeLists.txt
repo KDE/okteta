@@ -127,8 +127,8 @@ target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core Qt5::Gui KF5::KIO
 target_link_libraries( ${kastencore_LIB} LINK_PRIVATE
   KF5::I18n
   KF5::JobWidgets
-  KF5::Solid
   KF5::WidgetsAddons
+  Qt5::Network
 )
 set_target_properties( ${kastencore_LIB} PROPERTIES
   OUTPUT_NAME ${kastencore_LIB_NAME}
