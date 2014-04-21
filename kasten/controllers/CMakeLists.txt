@@ -500,6 +500,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/bookmarks/bookmarkstoolfactory.h
   view/bookmarks/bookmarkstoolviewfactory.h
   view/overwritemode/overwritemodecontroller.h
+  view/poddecoder/poddata.h
   view/poddecoder/poddecodertool.h
   view/poddecoder/poddecodertoolview.h
   view/poddecoder/poddecodertoolfactory.h
@@ -534,19 +535,26 @@ set( okteta_kastencontrollers_LIB_HDRS
   view/viewstatus/viewstatuscontroller.h
   view/viewprofiles/viewprofilecontroller.h
   view/viewprofiles/viewprofilesmanagecontroller.h
+  view/stringsextract/containedstring.h
   view/stringsextract/stringsextracttool.h
   view/stringsextract/stringsextracttoolview.h
   view/stringsextract/stringsextracttoolfactory.h
   view/stringsextract/stringsextracttoolviewfactory.h
   view/search/searchcontroller.h
   view/search/searchuserqueryable.h
-  view/structures/structtool.h
+# structtool.h cannot be installed as it pulls (too) many private uninstalled headers
+# KF5 TODO: any tools/controllers and views should be created by the resp. factories
+# since some time, no more directly.
+# So on next ABI change depublish tools/controllers & their views
+# For now keeping all installed, in case someone is using them still/already.
+#   view/structures/structtool.h
   view/structures/structtoolview.h
   view/structures/structurestoolfactory.h
   view/structures/structurestoolviewfactory.h
   document/info/documentinfotoolview.h
   document/info/documentinfotool.h
   document/overwriteonly/overwriteonlycontroller.h
+  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
 )
 
 add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )

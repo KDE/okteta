@@ -123,6 +123,13 @@ void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelec
     if( inSelection )
     {
         const Okteta::AddressRange selection = mByteArrayView->selection();
+        if( ! selection.isValid() )
+        {
+            // nothing selected, so skip any search and finish now
+            emit dataNotFound();
+            return;
+        }
+
         mSearchFirstIndex = selection.start();
         mSearchLastIndex =  selection.end();
     }

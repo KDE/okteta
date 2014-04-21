@@ -29,7 +29,15 @@
 // Kasten core
 #include <person.h>
 #include <userlistable.h>
-#include <versionable.h>
+// HACK: Both the Okteta and Kasten libs have a versionable.h
+// and in all the installed headers the files are included without the
+// path prefix matching the namespace. To avoid inclusion of the wrong file if
+// Okteta include dirs listed are before the Kasten ones, workaround with a
+// relative path matching the situation when installed
+// Uses the special forwarding file kasten/core/versionable.h for build
+// KF5 TODO: all includes from installed headers need to be fixed up, there is
+// no namespace protection for all of them currently
+#include "../versionable.h"
 #include <abstractdocument.h>
 // Qt
 #include <QtCore/QString>

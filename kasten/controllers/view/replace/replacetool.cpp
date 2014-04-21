@@ -142,6 +142,13 @@ void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSel
     if( inSelection )
     {
         const Okteta::AddressRange selection = mByteArrayView->selection();
+        if( ! selection.isValid() )
+        {
+            // nothing selected, so skip any search and finish now
+            emit finished( false, 0 );
+            return;
+        }
+
         mReplaceFirstIndex = selection.start();
         mReplaceLastIndex =  selection.end();
         startIndex = selection.start();
