@@ -1,6 +1,6 @@
 project( okteta )
 
-cmake_minimum_required(VERSION 2.8.11.1)
+cmake_minimum_required(VERSION 2.8.12)
 set(QT_MIN_VERSION "5.2.0")
 
 find_package(ECM 0.0.8 REQUIRED NO_MODULE)
