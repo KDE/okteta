@@ -33,7 +33,7 @@ if (NOT Qt5Test_FOUND)
 endif()
 
 
-find_package(KF5 CONFIG REQUIRED
+find_package(KF5 REQUIRED
     COMPONENTS
     Bookmarks
     Codecs
