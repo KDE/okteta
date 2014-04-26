@@ -65,4 +65,7 @@ install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( PROGRAMS okteta.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES oktetaui.rc  DESTINATION ${DATA_INSTALL_DIR}/okteta )
 
-ecm_install_icons( ${ICON_INSTALL_DIR} )
+ecm_install_icons(
+  ICONS 16-apps-okteta.png  32-apps-okteta.png  48-apps-okteta.png
+  DESTINATION ${ICON_INSTALL_DIR}
+)
