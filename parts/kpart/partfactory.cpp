@@ -35,7 +35,7 @@
 
 
 OktetaPartFactory::OktetaPartFactory()
-  : mAboutData( QStringLiteral("oktetapart"), QString(), i18n("OktetaPart"), QStringLiteral("0.13.60"),
+  : mAboutData( QStringLiteral("oktetapart"), i18n("OktetaPart"), QStringLiteral("0.13.60"),
                 i18n("Embedded hex editor"), KAboutData::License_GPL_V2, i18n("2003-2014 Friedrich W. H. Kossebau") )
 {
 // TODO: also load encoder and other plugins here

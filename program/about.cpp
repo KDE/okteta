@@ -27,7 +27,7 @@
 
 
 OktetaAboutData::OktetaAboutData()
-: KAboutData( QStringLiteral("okteta"), QString(),
+: KAboutData( QStringLiteral("okteta"),
               i18n("Okteta"), QStringLiteral("0.13.60"), // name
               i18n("Hex editor"), // description
               KAboutData::License_GPL_V2,
