@@ -117,9 +117,7 @@ add_subdirectory( designer )
 # Okteta Kasten components
 add_subdirectory( kasten )
 # special mimetypes
-#disable this for now, FindSharedMimeInfo is no longer installed by KF5
-#TODO fix this
-#add_subdirectory( mimetypes )
+add_subdirectory( mimetypes )
 
 # programs and parts for desktop
 add_subdirectory( parts )
