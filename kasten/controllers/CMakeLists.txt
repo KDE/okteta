@@ -32,15 +32,6 @@ include_directories(
 
 if( QCA2_FOUND )
   include_directories( ${QCA2_INCLUDE_DIR} )
-  # QCA needs QT_NO_CAST_FROM_ASCII disabled when included.
-  # So in case of ENABLE_FINAL that needs to be done globally,
-  # not only in checksumtool.cpp
-  if( KDE4_ENABLE_FINAL )
-    remove_definitions(
-      -DQT_NO_CAST_TO_ASCII
-      -DQT_NO_CAST_FROM_ASCII
-    )
-  endif( KDE4_ENABLE_FINAL )
 endif( QCA2_FOUND )
 
 set(HAVE_QCA2 ${QCA2_FOUND})
