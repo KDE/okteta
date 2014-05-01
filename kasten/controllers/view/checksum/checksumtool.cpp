@@ -35,6 +35,7 @@
 
 // lib
 #include "checksumcalculatejob.h"
+#include "checksumlogging.h"
 //
 #include <bytearraychecksumalgorithmfactory.h>
 #include <abstractbytearraychecksumalgorithm.h>

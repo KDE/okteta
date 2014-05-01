@@ -117,6 +117,7 @@ set( LIBCHECKSUM_SRCS
 )
 set( CHECKSUMCONTROLLER_SRCS
   view/checksum/checksumcalculatejob.cpp
+  view/checksum/checksumlogging.cpp
   view/checksum/checksumtool.cpp
   view/checksum/checksumview.cpp
   view/checksum/checksumtoolview.cpp
