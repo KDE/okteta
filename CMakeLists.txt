@@ -6,7 +6,7 @@ set(QT_MIN_VERSION "5.2.0")
 find_package(ECM 0.0.8 REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(ECMInstallIcons)
 include(FeatureSummary)
@@ -56,9 +56,9 @@ if( UNIX )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
 endif()
 
-find_package(QCA2)
+find_package(QCA2 2.1.0)
 set_package_properties(QCA2 PROPERTIES DESCRIPTION "Qt Cryptographic Architecture"
-                       URL "http://delta.affinix.com/qca" TYPE OPTIONAL
+                       URL "https://projects.kde.org/projects/kdesupport/qca" TYPE OPTIONAL
                        PURPOSE "Needed for most of the algorithms of the checksum tool")
 
 # control build scope
