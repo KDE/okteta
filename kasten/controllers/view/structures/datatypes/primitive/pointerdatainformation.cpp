@@ -117,7 +117,7 @@ void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *inp
         logInfo() << "Pointer target was replaced.";
         topLevelDataInformation()->setChildDataChanged();
     }
-    mPointerTarget->readData(input, newAddress, (input->size() - newAddress) * 8, &childBitOffset);
+    mPointerTarget->readData(input, newAddress, BitCount64(input->size() - newAddress) * 8, &childBitOffset);
 }
 
 QString PointerDataInformation::typeNameImpl() const

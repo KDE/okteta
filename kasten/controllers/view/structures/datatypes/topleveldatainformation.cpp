@@ -86,7 +86,7 @@ void TopLevelDataInformation::read(Okteta::AbstractByteArrayModel* input, Okteta
     if (!updateNeccessary)
         return;
 
-    quint64 remainingBits = (input->size() - address) * 8;
+    quint64 remainingBits = BitCount64(input->size() - address) * 8;
     quint8 bitOffset = 0;
     mData->beginRead(); //before reading set wasAbleToRead to false
     mData->resetValidationState(); //reading new data -> validation state is old
