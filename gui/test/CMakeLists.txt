@@ -55,7 +55,7 @@ ecm_add_test(
   LINK_LIBRARIES Qt5::Test )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
-set_target_properties( libokteta-gui-bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
+set_tests_properties( libokteta-gui-bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
 ecm_add_test(
@@ -67,7 +67,7 @@ ecm_add_test(
   LINK_LIBRARIES Qt5::Test )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
-set_target_properties(libokteta-gui-bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
+set_tests_properties(libokteta-gui-bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
 ########### mvctest ###############
