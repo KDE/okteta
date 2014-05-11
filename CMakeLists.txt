@@ -47,7 +47,6 @@ find_package(KF5 REQUIRED
     NewStuff
     Parts
     Service
-    Solid
     WidgetsAddons
     XmlGui
 )
