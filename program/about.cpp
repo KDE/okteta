@@ -30,12 +30,12 @@ OktetaAboutData::OktetaAboutData()
 : KAboutData( QStringLiteral("okteta"),
               i18n("Okteta"), QStringLiteral("0.13.60"), // name
               i18n("Hex editor"), // description
-              KAboutData::License_GPL_V2,
+              KAboutLicense::GPL_V2,
               i18n("Copyright 2006-2014 Friedrich W. H. Kossebau"), //copyright
               i18n("Edit the raw data of files"), // comment
               QStringLiteral("http://userbase.kde.org/Okteta") )
 {
-    addLicense(KAboutData::License_GPL_V3);
+    addLicense(KAboutLicense::GPL_V3);
     setOrganizationDomain( "kde.org" );
     addAuthor( i18n("Friedrich W. H. Kossebau"), // name
                i18n("Author"), // task
