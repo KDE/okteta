@@ -134,6 +134,17 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/typecodecs/float64codec.cpp
   view/poddecoder/typecodecs/char8codec.cpp
   view/poddecoder/typecodecs/utf8codec.cpp
+  view/poddecoder/poddata.cpp
+  view/poddecoder/poddecodertool.cpp
+  view/poddecoder/podtablemodel.cpp
+  view/poddecoder/poddelegate.cpp
+  view/poddecoder/podtableview.cpp
+  view/poddecoder/poddecodertoolview.cpp
+  view/poddecoder/poddecodertoolfactory.cpp
+  view/poddecoder/poddecodertoolviewfactory.cpp
+)
+
+set( PODDECODER_TYPEEDITOR_SRCS
   view/poddecoder/typeeditors/abstractvalue8editor.cpp
   view/poddecoder/typeeditors/binary8editor.cpp
   view/poddecoder/typeeditors/octal8editor.cpp
@@ -144,15 +155,8 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/typeeditors/float64editor.cpp
   view/poddecoder/typeeditors/char8editor.cpp
   view/poddecoder/typeeditors/utf8editor.cpp
-  view/poddecoder/poddata.cpp
-  view/poddecoder/poddecodertool.cpp
-  view/poddecoder/podtablemodel.cpp
-  view/poddecoder/poddelegate.cpp
-  view/poddecoder/podtableview.cpp
-  view/poddecoder/poddecodertoolview.cpp
-  view/poddecoder/poddecodertoolfactory.cpp
-  view/poddecoder/poddecodertoolviewfactory.cpp
 )
+
 set( BYTETABLECONTROLLER_SRCS
   view/bytetable/bytetablemodel.cpp
   view/bytetable/bytetabletool.cpp
@@ -375,33 +379,17 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
   view/viewprofiles/viewprofilesmanagecontroller.cpp
 )
 
-#structview and poddecoder sources are also needed for structures tool unit tests
-#create a OBJECT library (http://www.cmake.org/Wiki/CMake/Tutorials/Object_Library)
-#to prevent compiling these object files twice with exactly the same compile flags
+# create a static library for the unit tests. This means we don't have to compile the sources twice
 
-# compile flags don't get set for object libraries, since cannot link to target
-#TODO: find out how to properly use targets for object libraries
-if ( FALSE )
-add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
-target_include_directories( poddecoder_objs PUBLIC
-  $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
-  $<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
+add_library( poddecoder-typeeditors STATIC ${PODDECODER_TYPEEDITOR_SRCS} )
+target_link_libraries( poddecoder-typeeditors PUBLIC KF5::Completion ${oktetacore_LIB} )
+
+add_library( structview-tested-srcs STATIC ${STRUCTVIEW_TESTED_SRCS} )
+target_link_libraries( structview-tested-srcs PUBLIC
+  Qt5::Script Qt5::Xml Qt5::Widgets
+  KF5::ConfigGui KF5::ConfigWidgets KF5::I18n KF5::Completion KF5::Service
+  ${oktetacore_LIB}
 )
-add_library( structview_objs OBJECT ${STRUCTVIEW_TESTED_SRCS} )
-target_include_directories( structview_objs PUBLIC
-  $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
-  $<TARGET_PROPERTY:Qt5::Script,INTERFACE_INCLUDE_DIRECTORIES>
-  $<TARGET_PROPERTY:Qt5::Xml,INTERFACE_INCLUDE_DIRECTORIES>
-  $<TARGET_PROPERTY:Qt5::Widgets,INTERFACE_INCLUDE_DIRECTORIES>
-)
-set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
-set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
-set( STRUCTVIEW_OBJS $<TARGET_OBJECTS:structview_objs>)
-endif()
-
-set( PODDECODER_OBJS ${PODDECODERCONTROLLER_SRCS})
-set( STRUCTVIEW_OBJS ${STRUCTVIEW_TESTED_SRCS})
-
 
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
 #   ${OVERWRITEONLYCONTROLLER_SRCS}
@@ -428,8 +416,7 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWMODECONTROLLER_SRCS}
   ${VIEWPROFILESCONTROLLER_SRCS}
   ${VIEWPROFILESMANAGECONTROLLER_SRCS}
-  ${PODDECODER_OBJS}
-  ${STRUCTVIEW_OBJS}
+  ${PODDECODERCONTROLLER_SRCS}
   ${STRUCTVIEW_OTHER_SRCS}
 )
 
@@ -437,25 +424,6 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
 if (Qt5Test_FOUND)
   #structures view unit tests
   include(ECMAddTests)
-  #static lib for unit tests (reuse the OBJECT library)
-  add_library( structures-static STATIC ${PODDECODER_OBJS} ${STRUCTVIEW_OBJS} )
-  ecm_mark_as_test( structures-static )
-  target_link_libraries( structures-static
-    Qt5::Core
-    Qt5::Test
-    Qt5::Script
-    Qt5::Xml
-    KF5::I18n
-    KF5::Completion
-    KF5::ConfigWidgets
-    KF5::KCMUtils
-    ${oktetakastencore_LIB}
-    ${oktetakastengui_LIB}
-    ${oktetacore_LIB}
-    ${KASTENCORE_LIBS}
-  )
-  target_compile_definitions( structures-static PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
-
   ecm_add_tests(
     test/primitivearraytest.cpp
     test/arraydatainformationtest.cpp
@@ -472,7 +440,7 @@ if (Qt5Test_FOUND)
     test/locktooffsettest.cpp
 
     NAME_PREFIX structures-
-    LINK_LIBRARIES structures-static
+    LINK_LIBRARIES structview-tested-srcs Qt5::Test poddecoder-typeeditors
   )
 endif()
 
@@ -546,6 +514,8 @@ add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_
 generate_export_header( ${oktetakastencontrollers_LIB} )
 
 target_link_libraries( ${oktetakastencontrollers_LIB}
+  structview-tested-srcs
+  poddecoder-typeeditors
   ${oktetakastengui_LIB}
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
