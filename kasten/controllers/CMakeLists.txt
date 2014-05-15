@@ -334,13 +334,6 @@ set( STRUCTVIEW_OTHER_SRCS
   view/structures/settings/structuresmanagerview.cpp
 )
 
-configure_file( config-structtool.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-structtool.h )
-if ( OKTETA_DEBUG_SCRIPT )
-    message( STATUS "Okteta will be compiled with script debugging enabled" )
-    find_package(Qt5ScriptTools)
-else( OKTETA_DEBUG_SCRIPT )
-    message( STATUS "Okteta will be compiled without script debugging. (-DOKTETA_DEBUG_SCRIPT=1 to enable)" )
-endif( OKTETA_DEBUG_SCRIPT )
 kconfig_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structviewpreferences.kcfgc )
 qt5_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
 
@@ -567,7 +560,6 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   KF5::Completion
   Qt5::PrintSupport
   Qt5::Script
-  Qt5::ScriptTools
 )
 if( QCA2_FOUND )
   target_link_libraries( ${oktetakastencontrollers_LIB} ${QCA2_LIBRARIES} )

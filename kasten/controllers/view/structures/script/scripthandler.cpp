@@ -34,16 +34,10 @@
 #include <QScriptValue>
 #include <QScriptValueIterator>
 #include <QScriptEngine>
-#ifdef OKTETA_DEBUG_SCRIPT
-#include <QScriptEngineDebugger>
-#endif
 
 
 ScriptHandler::ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel)
         : mEngine(engine), mTopLevel(topLevel), mHandlerInfo(engine, topLevel->logger())
-#ifdef OKTETA_DEBUG_SCRIPT
-, mDebugger(new QScriptEngineDebugger())
-#endif
 {
 }
 
@@ -65,11 +59,6 @@ void ScriptHandler::validateData(DataInformation* data)
     QScriptValue validationFunc = data->validationFunc();
     if (validationFunc.isValid())
     {
-#ifdef OKTETA_DEBUG_SCRIPT
-        mDebugger->attachTo(mEngine.data());
-        mDebugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
-        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "validating element: " << data->name();
-#endif
         QScriptValue result = callFunction(validationFunc, data, ScriptHandlerInfo::Validating);
         if (result.isError())
         {

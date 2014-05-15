@@ -57,9 +57,6 @@ public:
 private:
     QScopedPointer<QScriptEngine> mEngine;
     TopLevelDataInformation* mTopLevel;
-#ifdef OKTETA_DEBUG_SCRIPT
-    QScopedPointer<QScriptEngineDebugger> mDebugger;
-#endif
     ScriptHandlerInfo mHandlerInfo;
 };
 
