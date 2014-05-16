@@ -25,7 +25,6 @@
 #define STRUCTVIEW_H_
 #include <QWidget>
 #include "structviewitemdelegate.h"
-#include <config-structtool.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;

@@ -25,7 +25,6 @@
 
 #include <QScopedPointer>
 
-#include <config-structtool.h>
 #include "scripthandlerinfo.h"
 
 class DataInformation;
