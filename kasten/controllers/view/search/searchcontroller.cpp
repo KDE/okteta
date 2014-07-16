@@ -114,8 +114,8 @@ bool SearchController::queryContinue( KFindDirection direction ) const
 {
     const QString messageBoxTitle = i18nc( "@title:window", "Find" );
     const QString question = ( direction == FindForward ) ?
-        i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
-        i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
+        xi18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
+        xi18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
     const int answer = KMessageBox::questionYesNo( mParentWidget, question, messageBoxTitle,
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel() );

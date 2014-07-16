@@ -134,7 +134,7 @@ QStringList OsdParser::parseStructureNames() const
                 || tag == TYPE_UNION || tag == TYPE_ENUM || tag == TYPE_FLAGS || tag == TYPE_STRING)
         {
             //TODO allow e.g. <uint8 name="asfd">
-            ret.append(readProperty(childElement, PROPERTY_NAME, i18n("&lt;invalid name&gt;")));
+            ret.append(readProperty(childElement, PROPERTY_NAME, i18n("<invalid name>")));
         }
         else
         {
@@ -218,7 +218,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
             continue;
 
         QMap<AllPrimitiveTypes, QString> defs;
-        const QString enumName = readProperty(elem, PROPERTY_NAME, i18n("&lt;invalid name&gt;"));
+        const QString enumName = readProperty(elem, PROPERTY_NAME, i18n("<invalid name>"));
         const QString typeStr = readProperty(elem, PROPERTY_TYPE);
         if (typeStr.isEmpty())
         {
