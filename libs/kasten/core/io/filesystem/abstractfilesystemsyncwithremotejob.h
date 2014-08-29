@@ -27,11 +27,11 @@
 #include <abstractsyncwithremotejob.h>
 #include <abstractmodelsynchronizer.h>
 
-class KUrl;
+class QUrl;
 class QFile;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelFileSystemSynchronizer;
@@ -45,7 +45,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJob : public AbstractSyn
 
   public:
     AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~AbstractFileSystemSyncWithRemoteJob();
 
   public: // KJob API

@@ -27,7 +27,7 @@
 #include <abstractfilesystemsynctoremotejob.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayRawFileSynchronizer;

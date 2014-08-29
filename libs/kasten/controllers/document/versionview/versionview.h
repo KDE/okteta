@@ -25,12 +25,12 @@
 
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QTreeView;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class VersionTableModel;
@@ -50,7 +50,7 @@ class VersionView : public QWidget
     VersionViewTool* tool() const;
 
   public Q_SLOTS:
-    void setModel( Kasten2::AbstractModel* model );
+    void setModel( Kasten::AbstractModel* model );
 
   private:
     VersionViewTool* mTool;

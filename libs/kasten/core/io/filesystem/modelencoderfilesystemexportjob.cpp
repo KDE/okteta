@@ -24,12 +24,12 @@
 #include "modelencoderfilesystemexportjob_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob( AbstractModel* model,
                                                                   const AbstractModelSelection* selection,
-                                                                  const KUrl& url,
+                                                                  const QUrl& url,
                                                                   AbstractModelStreamEncoder* encoder )
   : AbstractFileSystemExportJob( new ModelEncoderFileSystemExportJobPrivate(this,model,selection,url,encoder) )
 {

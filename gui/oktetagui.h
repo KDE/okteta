@@ -32,6 +32,10 @@
 #include "oktetacore.h"
 // Qt
 #include <QtCore/QChar>
+#include <QtCore/QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_GUI)
+
 
 namespace Okteta
 {

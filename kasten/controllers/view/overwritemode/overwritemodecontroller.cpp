@@ -24,14 +24,14 @@
 
 // lib
 #include <bytearrayview.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KToggleAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
@@ -39,7 +39,7 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSetOverWriteAction = actionCollection->add<KToggleAction>( QLatin1String("set_overwrite") );
+    mSetOverWriteAction = actionCollection->add<KToggleAction>( QStringLiteral("set_overwrite") );
     const QString text = i18nc( "@option:check set the view into overwrite mode", "Overwr&ite Mode" );
     mSetOverWriteAction->setText( text );
     mSetOverWriteAction->setWhatsThis(
@@ -47,7 +47,7 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
               "Choose whether you want the input to be inserted or to overwrite existing data.") );
     // TODO: or should we catch the signal from the view (needs to be added)
     mSetOverWriteAction->setShortcut( QKeySequence(Qt::Key_Insert) );
-    connect( mSetOverWriteAction, SIGNAL(triggered(bool)), SLOT(setOverWrite(bool)) );
+    connect( mSetOverWriteAction, &KToggleAction::triggered, this, &OverwriteModeController::setOverWrite );
 
     setTargetModel( 0 );
 }
@@ -62,8 +62,8 @@ void OverwriteModeController::setTargetModel( AbstractModel* model )
     {
         mSetOverWriteAction->setChecked( mByteArrayView->isOverwriteMode() );
 
-        connect( mByteArrayView, SIGNAL(overwriteModeChanged(bool)),
-                 mSetOverWriteAction, SLOT(setChecked(bool)) );
+        connect( mByteArrayView, &ByteArrayView::overwriteModeChanged,
+                 mSetOverWriteAction, &KToggleAction::setChecked );
         // TODO: catch if isOverwriteOnly changes
     }
 

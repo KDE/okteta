@@ -1,20 +1,64 @@
-cmake_minimum_required(VERSION 2.6)
-
 project( okteta )
 
-find_package(KDE4 REQUIRED)
-include(KDE4Defaults)
-include(MacroLibrary)
+cmake_minimum_required(VERSION 2.8.12)
+set(QT_MIN_VERSION "5.2.0")
 
-macro_optional_find_package( QCA2 )
-macro_log_feature( QCA2_FOUND "QCA2" "Qt Cryptographic Architecture" "http://delta.affinix.com/qca" FALSE "2.0.0" "Needed for most of the algorithms of the checksum tool." )
+find_package(ECM 0.0.8 REQUIRED NO_MODULE)
 
-add_definitions( ${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
-include_directories(
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_BINARY_DIR}
-    ${KDE4_INCLUDES}
+# where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+
+include(ECMInstallIcons)
+include(FeatureSummary)
+include(GenerateExportHeader)
+
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+
+find_package(Qt5 REQUIRED NO_MODULE
+    COMPONENTS
+    Core
+    Network
+    Designer
+    PrintSupport
+    Script
+    ScriptTools
+    Widgets
+    Xml
 )
+find_package(Qt5Test QUIET)
+if (NOT Qt5Test_FOUND)
+  message(STATUS "Qt5Test not found, unit tests will not be built.")
+endif()
+
+
+find_package(KF5 REQUIRED
+    COMPONENTS
+    Bookmarks
+    Codecs
+    Completion
+    ConfigWidgets
+    DBusAddons
+    DocTools
+    I18n
+    KCMUtils
+    KIO
+    NewStuff
+    Parts
+    Service
+    WidgetsAddons
+    XmlGui
+)
+
+if( UNIX )
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
+endif()
+
+find_package(QCA2 2.1.0)
+set_package_properties(QCA2 PROPERTIES DESCRIPTION "Qt Cryptographic Architecture"
+                       URL "https://projects.kde.org/projects/kdesupport/qca" TYPE OPTIONAL
+                       PURPOSE "Needed for most of the algorithms of the checksum tool")
 
 # control build scope
 # TODO: examples and templates not internal need headers and libs as installed
@@ -30,40 +74,24 @@ set( OKTETA_BUILD_INTERNAL_EXAMPLES  NOT OMIT_INTERNAL_EXAMPLES )
 set( KASTEN_BUILD_INTERNAL_TEMPLATES NOT OMIT_INTERNAL_TEMPLATES )
 set( OKTETA_BUILD_INTERNAL_TEMPLATES NOT OMIT_INTERNAL_TEMPLATES )
 
-# mobile needs
-option(OKTETA_MOBILE_UI "Build UI for mobile devices instead of for desktops" FALSE)
-if (OKTETA_MOBILE_UI)
-  macro_log_feature(QT_QTDECLARATIVE_FOUND "QtDeclarative" "Qt Declarative (QML) module" "http://qt.nokia.com" TRUE "4.7" "Required for building mobile UI")
-  add_definitions( -DOKTETA_MOBILE_UI )
-endif (OKTETA_MOBILE_UI)
-
 add_definitions(
-    -DQT_USE_FAST_CONCATENATION
-    -DQT_USE_FAST_OPERATOR_PLUS
-)
-# switch between no cast to/from ascii and a warning about it
-if (KDE4_ASCII_CAST)
-add_definitions(
-    -DQT_ASCII_CAST_WARNINGS
-)
-else (KDE4_ASCII_CAST)
-add_definitions(
+    -DQT_USE_QSTRINGBUILDER
     -DQT_NO_CAST_TO_ASCII
     -DQT_NO_CAST_FROM_ASCII
+    -DQT_NO_CAST_FROM_BYTEARRAY
 )
-endif (KDE4_ASCII_CAST)
 
 # helper libs
 add_subdirectory( libs )
 add_subdirectory( doc )
 
 set( OKTETALIBS_MAJOR_VERSION 0 )
-set( OKTETALIBS_MINOR_VERSION 8 )
-set( OKTETALIBS_PATCHLEVEL_VERSION 1 )
+set( OKTETALIBS_MINOR_VERSION 9 )
+set( OKTETALIBS_PATCHLEVEL_VERSION 0 )
 set( OKTETALIBS_VERSION "${OKTETALIBS_MAJOR_VERSION}.${OKTETALIBS_MINOR_VERSION}.${OKTETALIBS_PATCHLEVEL_VERSION}" )
-set( OKTETALIBS_ABI_VERSION 1 )
-set( OKTETALIBS_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/okteta${OKTETALIBS_ABI_VERSION} )
-set( OKTETALIBS_CCINCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/KDE/Okteta${OKTETALIBS_ABI_VERSION} )
+set( OKTETALIBS_ABI_VERSION 2 )
+set( OKTETALIBS_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/okteta ) #${OKTETALIBS_ABI_VERSION} )
+set( OKTETALIBS_CCINCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/Okteta ) #${OKTETALIBS_ABI_VERSION} )
 
 set( oktetacore_LIB  oktetacore )
 set( oktetagui_LIB   oktetagui )
@@ -87,9 +115,4 @@ add_subdirectory( mimetypes )
 add_subdirectory( parts )
 add_subdirectory( program )
 
-# program for mobile
-if (QT_QTDECLARATIVE_FOUND AND OKTETA_MOBILE_UI)
-    macro_optional_add_subdirectory(mobile)
-endif (QT_QTDECLARATIVE_FOUND AND OKTETA_MOBILE_UI)
-
-macro_display_feature_log()
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

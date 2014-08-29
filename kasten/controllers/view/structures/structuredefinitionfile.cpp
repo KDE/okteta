@@ -21,18 +21,19 @@
  */
 #include "structuredefinitionfile.h"
 
+#include "structlogging.h"
+
 #include <QFile>
 #include <QDir>
 #include <QStringList>
 
-#include <KDebug>
 #include "datatypes/topleveldatainformation.h"
 
 #include "parsers/abstractstructureparser.h"
 #include "parsers/osdparser.h"
 #include "parsers/scriptfileparser.h"
 
-namespace Kasten2
+namespace Kasten
 {
 StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info)
         : mPluginInfo(info)
@@ -41,19 +42,19 @@ StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info)
     const QString absoluteDir = tmp.absolutePath();
 
     QString category = info.category();
-    if (category == QLatin1String("structure/js")) {
-        const QString filename = absoluteDir + QLatin1String("/main.js");
+    if (category == QStringLiteral("structure/js")) {
+        const QString filename = absoluteDir + QStringLiteral("/main.js");
         mParser.reset(new ScriptFileParser(mPluginInfo.pluginName(), filename));
     }
-    else if (category == QLatin1String("structure")) {
+    else if (category == QStringLiteral("structure")) {
         //by default use main.osd, only if it doesn't exist fall back to old behaviour
-        QString filename = absoluteDir + QLatin1String("/main.osd");
+        QString filename = absoluteDir + QStringLiteral("/main.osd");
         if (!QFile::exists(filename))
-            filename = absoluteDir + QLatin1Char('/') + mPluginInfo.pluginName() + QLatin1String(".osd");
+            filename = absoluteDir + QLatin1Char('/') + mPluginInfo.pluginName() + QStringLiteral(".osd");
         mParser.reset(new OsdParser(mPluginInfo.pluginName(), filename));
     }
     else
-        kWarning() << "no valid parser found for plugin category '" << category << "'";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no valid parser found for plugin category '" << category << "'";
 }
 
 StructureDefinitionFile::~StructureDefinitionFile()
@@ -79,7 +80,7 @@ TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name)
             delete list.at(i); //we have no use for this element
     }
     if (!ret)
-        kWarning() << "could not find structure with name=" << name;
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not find structure with name=" << name;
     return ret; // not found
 }
 

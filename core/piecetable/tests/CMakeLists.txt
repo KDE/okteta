@@ -1,3 +1,7 @@
+if (NOT Qt5Test_FOUND)
+  return()
+endif()
+
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/../.. )
 
@@ -9,216 +13,97 @@ include_directories(
   ${SUTDIR}
 )
 
+add_library( testpiecetablechangelib STATIC
+  abstractpiecetablechangeiftest.cpp
+  testpiecetablechange.cpp
+)
+target_link_libraries( testpiecetablechangelib Qt5::Core testoktetacore )
+
+include(ECMAddTests)
+
 ########### piecetest ###############
 
-set( piecetest_SRCS
-  piecetest.cpp
+ecm_add_test( piecetest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES Qt5::Test
 )
-
-kde4_add_unit_test( piecetest  TESTNAME libpiecetable-piecetest  ${piecetest_SRCS} )
-target_link_libraries( piecetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### piecetabletest ###############
 
-set( piecetabletest_SRCS
-  piecetabletest.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
+ecm_add_test( piecetabletest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES testoktetacore testpiecetablechangelib Qt5::Test KF5::I18n
 )
-
-kde4_add_unit_test( piecetabletest  TESTNAME libpiecetable-piecetabletest  ${piecetabletest_SRCS} )
-target_link_libraries( piecetabletest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### testpiecetablechangetest ###############
 
-set( testpiecetablechangetest_SRCS
-  testpiecetablechangetest.cpp
-  testpiecetablechange.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
-)
-
-kde4_add_unit_test( testpiecetablechangetest
-  TESTNAME libpiecetable-testpiecetablechangetest
-  ${testpiecetablechangetest_SRCS}
-)
-target_link_libraries( testpiecetablechangetest  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
-
-########### abstractpiecetablechangeiftestsources ###############
-
-set( abstractpiecetablechangeiftest_SRCS
-  abstractpiecetablechangeiftest.cpp
-  testpiecetablechange.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
+ecm_add_test( testpiecetablechangetest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES oktetacoretestutil testpiecetablechangelib Qt5::Test KF5::I18n
 )
 
 ########### testpiecetablechangeabstractpiecetablechangeiftest ###############
 
-set( testpiecetablechangeabstractpiecetablechangeiftest_SRCS
-  testpiecetablechangeabstractpiecetablechangeiftest.cpp
-  ${abstractpiecetablechangeiftest_SRCS}
+ecm_add_test( testpiecetablechangeabstractpiecetablechangeiftest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
 )
-
-kde4_add_unit_test( testpiecetablechangeabstractpiecetablechangeiftest
-  TESTNAME libpiecetable-testpiecetablechangeabstractpiecetablechangeiftest
-  ${testpiecetablechangeabstractpiecetablechangeiftest_SRCS}
-)
-target_link_libraries( testpiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### insertpiecetablechangeabstractpiecetablechangeiftest ###############
 
-set( insertpiecetablechangeabstractpiecetablechangeiftest_SRCS
-  insertpiecetablechangeabstractpiecetablechangeiftest.cpp
-  ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
+ecm_add_test( insertpiecetablechangeabstractpiecetablechangeiftest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test KF5::I18n
 )
-
-kde4_add_unit_test( insertpiecetablechangeabstractpiecetablechangeiftest
-  TESTNAME libpiecetable-insertpiecetablechangeabstractpiecetablechangeiftest
-  ${insertpiecetablechangeabstractpiecetablechangeiftest_SRCS}
-)
-target_link_libraries( insertpiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### removepiecetablechangeabstractpiecetablechangeiftest ###############
 
-set( removepiecetablechangeabstractpiecetablechangeiftest_SRCS
-  removepiecetablechangeabstractpiecetablechangeiftest.cpp
-  ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
+ecm_add_test( removepiecetablechangeabstractpiecetablechangeiftest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test KF5::I18n
 )
-
-kde4_add_unit_test( removepiecetablechangeabstractpiecetablechangeiftest
-  TESTNAME libpiecetable-removepiecetablechangeabstractpiecetablechangeiftest
-  ${removepiecetablechangeabstractpiecetablechangeiftest_SRCS}
-)
-target_link_libraries( removepiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### replacepiecetablechangeabstractpiecetablechangeiftest ###############
 
-set( replacepiecetablechangeabstractpiecetablechangeiftest_SRCS
-  replacepiecetablechangeabstractpiecetablechangeiftest.cpp
-  ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
+ecm_add_test( replacepiecetablechangeabstractpiecetablechangeiftest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test KF5::I18n
 )
-
-kde4_add_unit_test( replacepiecetablechangeabstractpiecetablechangeiftest
-  TESTNAME libpiecetable-replacepiecetablechangeabstractpiecetablechangeiftest
-  ${replacepiecetablechangeabstractpiecetablechangeiftest_SRCS}
-)
-target_link_libraries( replacepiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### swaprangespiecetablechangeabstractpiecetablechangeiftest ###############
 
-set( swaprangespiecetablechangeabstractpiecetablechangeiftest_SRCS
-  swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
-  ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
+ecm_add_test( swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test KF5::I18n
 )
-
-kde4_add_unit_test( swaprangespiecetablechangeabstractpiecetablechangeiftest
-  TESTNAME libpiecetable-swaprangespiecetablechangeabstractpiecetablechangeiftest
-  ${swaprangespiecetablechangeabstractpiecetablechangeiftest_SRCS}
-)
-target_link_libraries( swaprangespiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### grouppiecetablechangeabstractpiecetablechangeiftest ###############
 
 # grouped changes break some assumptions and got workarounds, so disable for now
 if(IWILLPICKUPWORKONOKTETACORE)
-set( grouppiecetablechangeabstractpiecetablechangeiftest_SRCS
-  grouppiecetablechangeabstractpiecetablechangeiftest.cpp
-  ${abstractpiecetablechangeiftest_SRCS}
-  ${SUTDIR}/addressrangelist.cpp
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
-  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
+ecm_add_test( grouppiecetablechangeabstractpiecetablechangeiftest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES oktetacoretestutil testoktetacore testpiecetablechangelib Qt5::Test
 )
-
-kde4_add_unit_test( grouppiecetablechangeabstractpiecetablechangeiftest
-  TESTNAME libpiecetable-grouppiecetablechangeabstractpiecetablechangeiftest
-  ${grouppiecetablechangeabstractpiecetablechangeiftest_SRCS}
-)
-target_link_libraries( grouppiecetablechangeabstractpiecetablechangeiftest
-  oktetacoretestutil ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 endif()
 
 ########### grouppiecetablechangetest ###############
 
-set( grouppiecetablechangetest_SRCS
-  grouppiecetablechangetest.cpp
-  testpiecetablechange.cpp
-  ${SUTDIR}/addressrangelist.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
-  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
-  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
+ecm_add_test( grouppiecetablechangetest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES testoktetacore testpiecetablechangelib Qt5::Test KF5::I18n
 )
-
-kde4_add_unit_test( grouppiecetablechangetest
-  TESTNAME libpiecetable-grouppiecetablechangetest
-  ${grouppiecetablechangetest_SRCS}
-)
-target_link_libraries( grouppiecetablechangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### piecetablechangehistorytest ###############
 
-set( piecetablechangehistorytest_SRCS
-  piecetablechangehistorytest.cpp
-  testpiecetablechange.cpp
-  ${SUTDIR}/addressrangelist.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
-  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
-  ${SUTDIR}/piecetable/piecetablechangehistory.cpp
-  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
+ecm_add_test( piecetablechangehistorytest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES testoktetacore testpiecetablechangelib Qt5::Test
 )
-
-kde4_add_unit_test( piecetablechangehistorytest
-  TESTNAME libpiecetable-piecetablechangehistorytest
-  ${piecetablechangehistorytest_SRCS}
-)
-target_link_libraries( piecetablechangehistorytest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
-
 
 ########### revertablepiecetabletest ###############
 
-set( revertablepiecetabletest_SRCS
-  revertablepiecetabletest.cpp
-  ${SUTDIR}/addressrangelist.cpp
-  ${SUTDIR}/piecetable/piecetable.cpp
-  ${SUTDIR}/piecetable/abstractpiecetablechange.cpp
-  ${SUTDIR}/piecetable/insertpiecetablechange.cpp
-  ${SUTDIR}/piecetable/removepiecetablechange.cpp
-  ${SUTDIR}/piecetable/replacepiecetablechange.cpp
-  ${SUTDIR}/piecetable/swaprangespiecetablechange.cpp
-  ${SUTDIR}/piecetable/piecetablechangehistory.cpp
-  ${SUTDIR}/piecetable/revertablepiecetable.cpp
-  ${SUTDIR}/piecetable/grouppiecetablechange.cpp
+ecm_add_test( revertablepiecetabletest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES testoktetacore Qt5::Test KF5::I18n
 )
-
-kde4_add_unit_test( revertablepiecetabletest
-  TESTNAME libpiecetable-revertablepiecetabletest
-  ${revertablepiecetabletest_SRCS}
-)
-target_link_libraries( revertablepiecetabletest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )

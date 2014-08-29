@@ -24,10 +24,10 @@
 #define TOOLVIEWDOCKWIDGET_H
 
 // Qt
-#include <QtGui/QDockWidget>
+#include <QDockWidget>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractToolView;

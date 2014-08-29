@@ -1,1 +1,1 @@
-#include "../../kasten2/abstractmodelstreamencoderconfigeditor.h"
+#include "../kasten/abstractmodelstreamencoderconfigeditor.h"

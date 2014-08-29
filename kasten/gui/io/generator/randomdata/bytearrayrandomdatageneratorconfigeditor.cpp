@@ -22,14 +22,14 @@
 
 #include "bytearrayrandomdatageneratorconfigeditor.h"
 
-// KDE
-#include <KLocale>
-#include <KIntNumInput>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QFormLayout>
+#include <QSpinBox>
+#include <QFormLayout>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEditor( ByteArrayRandomDataGenerator* generator, QWidget* parent )
@@ -43,16 +43,15 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
 
     // number
     const QString numberInputLabel =
-        i18nc( "@label:spinbox size of the bytes to generate",
-               "&Size:" );
-    mSizeInput = new KIntNumInput( this );
+        i18nc( "@label:spinbox size of the bytearray to generate",
+               "&Size (bytes):" );
+    mSizeInput = new QSpinBox( this );
     mSizeInput->setRange( 1, INT_MAX );
     mSizeInput->setValue( mSettings.size );
-    mSizeInput->setSuffix( ki18np(" byte"," bytes") );
-    connect( mSizeInput, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );
+    connect( mSizeInput, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",
-               "Enter the size of the byte to generate." );
+               "Enter the size of the bytearray to generate." );
     mSizeInput->setWhatsThis( numberWhatsThis );
 
     pageLayout->addRow( numberInputLabel, mSizeInput );

@@ -34,30 +34,28 @@
 #include <documentcreatemanager.h>
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
-// KDE
-#include <KApplication>
-#include <KUrl>
+// KF5
 #include <KProcess>
-// QtGui
-#include <QtGui/QClipboard>
-#include <QtGui/QApplication>
-// QtCore
+// Qt
 #include <QtCore/QMimeData>
+#include <QtGui/QClipboard>
+#include <QUrl>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void SingleDocumentStrategyPrivate::init()
 {
     Q_Q( SingleDocumentStrategy );
     // setup
-    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
-                      mViewManager, SLOT(createViewsFor(QList<Kasten2::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
-                      mViewManager, SLOT(removeViewsFor(QList<Kasten2::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager->syncManager(), SIGNAL(urlUsed(KUrl)),
-                      q, SIGNAL(urlUsed(KUrl)) );
+    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
+                      mViewManager, SLOT(createViewsFor(QList<Kasten::AbstractDocument*>)) );
+    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
+                      mViewManager, SLOT(removeViewsFor(QList<Kasten::AbstractDocument*>)) );
+    QObject::connect( mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
+                      q, &SingleDocumentStrategy::urlUsed );
 }
 
 void SingleDocumentStrategyPrivate::createNew()
@@ -69,7 +67,7 @@ void SingleDocumentStrategyPrivate::createNew()
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters = QStringList() << QLatin1String( "-c" );
+        const QStringList parameters = QStringList() << QStringLiteral( "-c" );
         KProcess::startDetached( executable, parameters );
     }
 }
@@ -89,9 +87,9 @@ void SingleDocumentStrategyPrivate::createNewFromClipboard()
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
         const QStringList parameters = QStringList()
-            << QLatin1String( "-c" )
-            << QLatin1String( "-g" )
-            << QLatin1String( "FromClipboard" );
+            << QStringLiteral( "-c" )
+            << QStringLiteral( "-g" )
+            << QStringLiteral( "FromClipboard" );
         KProcess::startDetached( executable, parameters );
     }
 }
@@ -109,8 +107,8 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGen
         // TODO: forward also interesting parameters passed to this program
         // TODO: add id to AbstractModelDataGenerator, to use instead of className
         const QStringList parameters = QStringList()
-            << QLatin1String( "-c" )
-            << QLatin1String( "-g" )
+            << QStringLiteral( "-c" )
+            << QStringLiteral( "-g" )
             << QLatin1String(generator->metaObject()->className());
         KProcess::startDetached( executable, parameters );
         return;
@@ -146,7 +144,7 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGen
     QApplication::restoreOverrideCursor();
 }
 
-void SingleDocumentStrategyPrivate::load( const KUrl& url )
+void SingleDocumentStrategyPrivate::load( const QUrl& url )
 {
     if( mDocumentManager->isEmpty() )
         mDocumentManager->syncManager()->load( url );

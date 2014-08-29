@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,48 +24,58 @@
 
 // Kasten gui
 #include <abstractmodeldatageneratorconfigeditor.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
+#include <QLayout>
+#include <QLabel>
+#include <QPushButton>
 #include <QtGui/QFont>
+#include <QtWidgets/QDialogButtonBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 InsertDialog::InsertDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent )
-  : KDialog( parent ),
+  : QDialog( parent ),
     mConfigEditor( configEditor )
 {
-    setCaption( i18nc("@title:window","Insert") );
-    setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Insert"), QString(),//"insert-text",
-                      i18nc("@info:tooltip",
-                            "Insert the generated data into the document."),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Insert</interface> button, "
-                            "the data will be generated with the settings you entered above "
-                            "and inserted into the document at the cursor position.")) );
-    setDefaultButton( Ok );
+    setWindowTitle( i18nc("@title:window","Insert") );
 
-    QWidget* page = new QWidget( this );
-    setMainWidget( page );
-
-    QVBoxLayout* layout = new QVBoxLayout( page );
-    layout->setMargin( 0 );
-
+    // editor
     QLabel* editorLabel = new QLabel( mConfigEditor->name() );
     QFont font = editorLabel->font();
     font.setBold( true );
     editorLabel->setFont( font );
+
+    // dialog buttons
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    QPushButton* insertButton = new QPushButton(i18nc("@action:button","&Insert"));
+    insertButton->setToolTip(i18nc("@info:tooltip",
+                                   "Insert the generated data into the document."));
+    insertButton->setWhatsThis(xi18nc("@info:whatsthis",
+                                      "If you press the <interface>Insert</interface> button, "
+                                      "the data will be generated with the settings you entered above "
+                                      "and inserted into the document at the cursor position."));
+
+    dialogButtonBox->addButton( insertButton, QDialogButtonBox::AcceptRole );
+    connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );
+    dialogButtonBox->addButton( QDialogButtonBox::Cancel );
+    connect( dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
+
+    insertButton->setEnabled( configEditor->isValid() );
+    connect( configEditor, &AbstractModelDataGeneratorConfigEditor::validityChanged,
+             insertButton, &QWidget::setEnabled );
+
+    // main layout
+    QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget( editorLabel );
     layout->addWidget( mConfigEditor );
     layout->addStretch();
+    layout->addWidget( dialogButtonBox );
 
-    enableButtonOk( configEditor->isValid() );
-    connect( configEditor, SIGNAL(validityChanged(bool)), SLOT(enableButtonOk(bool)) );
+    setLayout( layout );
 }
 
 InsertDialog::~InsertDialog()

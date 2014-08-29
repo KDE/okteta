@@ -24,8 +24,8 @@
 #define BYTEARRAYCOLUMNVIEWDESIGNERFACTORY_H
 
 // Qt
-#include <QtDesigner/QDesignerCustomWidgetInterface>
-#include <QtCore/QObject>
+#include <QDesignerCustomWidgetInterface>
+#include <QObject>
 
 
 class ByteArrayColumnViewDesignerFactory : public QObject,

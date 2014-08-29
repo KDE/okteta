@@ -22,14 +22,14 @@
 
 #include "bytearraypatterngenerator.h"
 
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QMimeData>
 #include <QtCore/QByteArray>
 
 
-namespace Kasten2
+namespace Kasten
 {
 static const char PatternMimeType[] = "application/octet-stream";
 

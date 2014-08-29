@@ -67,7 +67,7 @@ static const char* typeNames[Type_END + 1] =
 
 QString PrimitiveType::typeName(PrimitiveDataType type)
 {
-    if (Kasten2::StructViewPreferences::shortTypeNames())
+    if (Kasten::StructViewPreferences::shortTypeNames())
         return standardTypeName(type);
     else
         return longTypeName(type);
@@ -79,7 +79,7 @@ QString PrimitiveType::standardTypeName(PrimitiveDataType type_)
     if (type >= Type_START && type <= Type_END)
         return QLatin1String(typeNames[type]);
     else
-        return QLatin1String("invalid");
+        return QStringLiteral("invalid");
 }
 
 QString PrimitiveType::longTypeName(PrimitiveDataType type_)

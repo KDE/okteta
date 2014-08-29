@@ -32,19 +32,18 @@
 #include <bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 #include <KMessageBox>
-#include <kdeprintdialog.h>
 // Qt
-#include <QtGui/QApplication>
-#include <QtGui/QPrintDialog>
-#include <QtGui/QPrinter>
+#include <QApplication>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrinter>
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 PrintTool::PrintTool()
@@ -71,13 +70,14 @@ void PrintTool::print()
 
     QPrinter printer;
 
-    // Not supported by Qt?
-    //printer.setPageSelection( QPrinter::SystemSide );
-
 //     LayoutDialogPage* layoutPage = new LayoutDialogPage();
     QList<QWidget*> customDialogPages;
 //     customDialogPages << layoutPage;
-    QPrintDialog *printDialog = KdePrint::createPrintDialog( &printer, customDialogPages, 0 );
+    QPrintDialog *printDialog = new QPrintDialog( &printer, 0 );
+    // Disable PrintPageRange, this tells Qt we can't do client-side page selection,
+    // so it will try do server-side page selection if supported
+    printDialog->setOption(QPrintDialog::PrintPageRange, false);
+//    printDialog->setOptionTabs(customDialogPages);
 
     printDialog->setWindowTitle( processTitle );
     if( printDialog->exec() )
@@ -98,8 +98,8 @@ void PrintTool::print()
         const int width = pageRect.width();
 
         HeaderFooterFrameRenderer *headerFrameRenderer = new HeaderFooterFrameRenderer( &info );
-        headerFrameRenderer->setTexts( QLatin1String("%d"),
-                                       QLatin1String("%f"),
+        headerFrameRenderer->setTexts( QStringLiteral("%d"),
+                                       QStringLiteral("%f"),
                                        i18nc("in the header of the printed page, e.g. Page 2 of 20","Page %p of %P") );
         headerFrameRenderer->setWidth( width );
         headerFrameRenderer->setPos( pageRect.topLeft() );
@@ -107,8 +107,8 @@ void PrintTool::print()
         HeaderFooterFrameRenderer *footerFrameRenderer = new HeaderFooterFrameRenderer( &info );
         footerFrameRenderer->setTexts( i18nc("in the footer of the printed page, e.g. Printed by: Joe User",
                                              "Printed by: %U"),
-                                       i18nc("advertizer in the footer of the printed page","Okteta, built on KDE4"),
-                                       QLatin1String("%F") );
+                                       QString(),
+                                       QStringLiteral("%F") );
         footerFrameRenderer->setWidth( width );
         const int footerTop = pageRect.bottom() - footerFrameRenderer->height();
         footerFrameRenderer->setPos( left, footerTop );

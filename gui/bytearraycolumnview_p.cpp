@@ -31,9 +31,10 @@
 // Okteta core
 #include <valuecodec.h>
 // Qt
-#include <QtGui/QStyle>
+#include <QStyle>
+#include <QFontDatabase>
 #include <QtGui/QPainter>
-#include <QtGui/QScrollBar>
+#include <QScrollBar>
 #include <QtCore/QEvent>
 
 
@@ -75,9 +76,7 @@ void ByteArrayColumnViewPrivate::init()
     adaptController();
 
     // do here, not in base class, as changeEvent(fontEvent) needs this init run before
-    QFont fixedFont( QLatin1String("fixed") );
-    fixedFont.setFixedPitch( true );
-    q->setFont( fixedFont );
+    q->setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 AbstractByteArrayView::CodingTypeId ByteArrayColumnViewPrivate::activeCoding() const
@@ -391,7 +390,7 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
     int fittingBytesPerLineWithScrollbar = 0;
     for(;;)
     {
-    //    kDebug() << "matchWidth: " << fullWidth
+    //    qCDebug(LOG_OKTETA_GUI) << "matchWidth: " << fullWidth
     //              << " (v:" << visibleWidth()
     //              << ", f:" << frameWidth()
     //              << ", A:" << availableWidth
@@ -412,7 +411,7 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
             if( fittingGroupsPerLine > 0 )
                 availableWidth -= fittingGroupsPerLine*totalGroupWidth; // includes additional spacing after last group
 
-//         kDebug() << "Left: " << availableWidth << "("<<valueByteWidth<<", "<<charByteWidth<<")" ;
+//         qCDebug(LOG_OKTETA_GUI) << "Left: " << availableWidth << "("<<valueByteWidth<<", "<<charByteWidth<<")" ;
 
             if( availableWidth > 0 )
                 fittingBytesPerLine += (availableWidth+byteSpacingWidth) / (valueByteWidth+byteSpacingWidth+charByteWidth);
@@ -434,7 +433,7 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
             break;
         }
 
-//    kDebug() << "meantime: " << fittingGroupsPerLine << " (T:" << totalGroupWidth
+//    qCDebug(LOG_OKTETA_GUI) << "meantime: " << fittingGroupsPerLine << " (T:" << totalGroupWidth
 //              << ", h:" << valueByteGroupWidth
 //              << ", t:" << charByteGroupWidth
 //              << ", s:" << groupSpacingWidth << ") " <<fittingBytesPerLine<< endl;
@@ -461,7 +460,7 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
                 fittingBytesPerLineWithScrollbar = fittingBytesPerLine;
                 availableWidth = fullWidth;
                 matchRun = TestWithoutScrollbar;
-        //          kDebug() << "tested without scrollbar..." ;
+        //          qCDebug(LOG_OKTETA_GUI) << "tested without scrollbar..." ;
                 continue;
             }
         }
@@ -473,7 +472,7 @@ int ByteArrayColumnViewPrivate::fittingBytesPerLine() const
                 // need for a scrollbar has risen... ->less width, new calculation
                 availableWidth = fullWidth - scrollbarExtent;
                 matchRun = RerunWithScrollbarOn;
-        //          kDebug() << "rerun with scrollbar on..." ;
+        //          qCDebug(LOG_OKTETA_GUI) << "rerun with scrollbar on..." ;
                 continue;
             }
         }

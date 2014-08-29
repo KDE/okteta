@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012-2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -23,16 +23,18 @@
 #ifndef VIEWPROFILEEDITDIALOG_H
 #define VIEWPROFILEEDITDIALOG_H
 
-// KDE
-#include <KDialog>
+// Qt
+#include <QtWidgets/QDialog>
+
+class QPushButton;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ViewProfileEdit;
 class ByteArrayViewProfile;
 
-class ViewProfileEditDialog : public KDialog
+class ViewProfileEditDialog : public QDialog
 {
     Q_OBJECT
 
@@ -47,12 +49,13 @@ public:
 public:
     void setViewProfile( const ByteArrayViewProfile& viewProfile );
 
-protected Q_SLOTS:
+private Q_SLOTS:
     void onProfileTitleChanged( const QString& title );
 
-protected:
+private:
     ViewProfileEdit* mViewProfileEdit;
     QString mId;
+    QPushButton* mOkButton;
 };
 
 }

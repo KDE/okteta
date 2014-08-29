@@ -24,13 +24,13 @@
 #define STATUSBARLAYOUT_H
 
 // Qt
-#include <QtGui/QLayout>
+#include <QLayout>
 #include <QtCore/QList>
 
 class QWidgetItem;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class StatusBarLayout : public QLayout

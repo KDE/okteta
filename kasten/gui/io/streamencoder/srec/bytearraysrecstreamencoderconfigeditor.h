@@ -31,7 +31,7 @@
 class KComboBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArraySRecStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor

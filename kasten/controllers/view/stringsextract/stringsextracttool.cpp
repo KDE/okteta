@@ -29,13 +29,13 @@
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int DefaultMinLength = 3;
@@ -50,7 +50,7 @@ StringsExtractTool::StringsExtractTool()
     mSourceByteArrayModel( 0 ),
     mSourceMinLength( 0 )
 {
-    setObjectName( QLatin1String( "Strings" ) );
+    setObjectName( QStringLiteral( "Strings" ) );
 }
 
 bool StringsExtractTool::isApplyable() const
@@ -83,14 +83,14 @@ void StringsExtractTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
-                 SLOT(onSelectionChanged()) );
+        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                 this, &StringsExtractTool::onSelectionChanged );
 
         // if strings are from same model, adapt offsetcoding
         if( mSourceByteArrayModel == mByteArrayModel )
         {
-            connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
-                     SIGNAL(offsetCodingChanged(int)) );
+            connect( mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                     this, &StringsExtractTool::offsetCodingChanged );
         }
     }
 
@@ -114,11 +114,6 @@ void StringsExtractTool::setMinLength( int minLength )
     emit uptodateChanged( mExtractedStringsUptodate );
 }
 
-void StringsExtractTool::setCharCodec( const QString & )
-{
-    // noop, was one before, only kept for ABI stability
-}
-
 void StringsExtractTool::checkUptoDate()
 {
     mExtractedStringsUptodate =
@@ -134,8 +129,8 @@ void StringsExtractTool::markString( int stringId )
     {
         if( mSourceByteArrayView ) mSourceByteArrayView->disconnect( this );
         mSourceByteArrayView = mByteArrayView;
-        connect( mSourceByteArrayView,  SIGNAL(destroyed()),
-                 SLOT(onSourceViewDestroyed()) );
+        connect( mSourceByteArrayView,  &ByteArrayView::destroyed,
+                 this, &StringsExtractTool::onSourceViewDestroyed );
     }
     const ContainedString &containedString = mContainedStringList.at( stringId );
     const Okteta::Address offset = containedString.offset();
@@ -200,12 +195,12 @@ void StringsExtractTool::extractStrings()
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = mByteArrayView->selection();
     mSourceMinLength = mMinLength;
-    connect( mSourceByteArrayModel,  SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-             SLOT(onSourceChanged()) );
-    connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
-             SLOT(onSourceDestroyed()) );
-    connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
-                SIGNAL(offsetCodingChanged(int)) );
+    connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
+             this, &StringsExtractTool::onSourceChanged );
+    connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
+             this, &StringsExtractTool::onSourceDestroyed );
+    connect( mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                this, &StringsExtractTool::offsetCodingChanged );
 
     mExtractedStringsUptodate = true;
     mSourceByteArrayModelUptodate = true;

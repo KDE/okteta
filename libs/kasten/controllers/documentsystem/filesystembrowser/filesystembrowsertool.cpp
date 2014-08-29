@@ -27,12 +27,14 @@
 #include <versionable.h>
 #include <abstractdocument.h>
 #include <abstractmodelsynchronizer.h>
-// KDE
-#include <KLocale>
-#include <KUrl>
+// KF5
+#include <KLocalizedString>
+#include <kio/global.h>
+
+#include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncManager )
@@ -40,19 +42,19 @@ FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncM
     mDocumentSyncManager( documentSyncManager ),
     mDocument( 0 )
 {
-    setObjectName( QLatin1String( "FileSystemBrowser" ) );
+    setObjectName( QStringLiteral( "FileSystemBrowser" ) );
 }
 
 
 QString FileSystemBrowserTool::title() const { return i18nc("@title:window", "Filesystem"); }
 
 
-KUrl FileSystemBrowserTool::currentUrl() const
+QUrl FileSystemBrowserTool::currentUrl() const
 {
-    KUrl result;
+    QUrl result;
 
     if( mDocument )
-        result = mDocumentSyncManager->urlOf( mDocument ).upUrl();
+        result = KIO::upUrl( mDocumentSyncManager->urlOf( mDocument ) );
 
     return result;
 }
@@ -74,7 +76,7 @@ void FileSystemBrowserTool::setTargetModel( AbstractModel* model )
         emit hasCurrentUrlChanged( newHasCurrentUrl );
 }
 
-void FileSystemBrowserTool::open( const KUrl& url )
+void FileSystemBrowserTool::open( const QUrl& url )
 {
     mDocumentSyncManager->load( url );
 }

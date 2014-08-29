@@ -280,7 +280,7 @@ QList<ByteArrayChange> PieceTableByteArrayModelPrivate::changes( int firstVersio
 void PieceTableByteArrayModelPrivate::doChanges( const QList<ByteArrayChange>& changes,
                                                  int oldVersionIndex, int newVersionIndex )
 {
-// kDebug() << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;
+// qCDebug(LOG_OKTETA_CORE) << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;
     // changes already done? TODO: should this check be here?
     if( newVersionIndex == versionIndex() )
         return;
@@ -325,7 +325,7 @@ void PieceTableByteArrayModelPrivate::doChanges( const QList<ByteArrayChange>& c
     // not the same versioning? TODO: where and how to define the version id?
 //     if( newVersionIndex != versionIndex() )
 //         return;
-// kDebug()<<this<<" is now at "<<versionIndex();
+// qCDebug(LOG_OKTETA_CORE)<<this<<" is now at "<<versionIndex();
 
     endChanges();
 }

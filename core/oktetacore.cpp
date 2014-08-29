@@ -22,13 +22,16 @@
 
 #include "oktetacore.h"
 
-// KDE
-#include <KGlobal>
+// KF5
+#include <KLocalizedString>
 
+
+Q_LOGGING_CATEGORY(LOG_OKTETA_CORE, "okteta.core")
 
 namespace Okteta
 {
 
-static const KCatalogLoader coreCatalogLoader( QLatin1String("liboktetacore") );
+// FIXME: Replace with ki18n functionality once semantics is clear.
+//static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("liboktetacore") ), 0);
 
 }

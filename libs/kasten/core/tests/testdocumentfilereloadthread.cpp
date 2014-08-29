@@ -24,16 +24,15 @@
 
 // lib
 #include "testdocument.h"
-// KDE
-#include <KUrl>
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QtCore/QUrl>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject* parent, const QByteArray& header,

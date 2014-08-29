@@ -29,7 +29,7 @@
 #include <QtCore/QObject>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // not really a classic factory, functions do some more, instead it is what?
@@ -49,17 +49,17 @@ class KASTENCORE_EXPORT AbstractModelSynchronizerFactory : public QObject
   public: // API to be implemented
     virtual AbstractModelSynchronizer* createSynchronizer() const = 0;
 
-//     virtual AbstractDocument* loadNewDocument( const KUrl& originUrl ) const = 0;
-//     virtual AbstractLoadJob* startLoad( const KUrl& url ) = 0;
+//     virtual AbstractDocument* loadNewDocument( const QUrl& originUrl ) const = 0;
+//     virtual AbstractLoadJob* startLoad( const QUrl& url ) = 0;
     // TODO: better name than connect: bind?
 
-//     virtual bool connectDocument( AbstractDocument* document, const KUrl& originUrl,
+//     virtual bool connectDocument( AbstractDocument* document, const QUrl& originUrl,
 //                                   AbstractDocumentSynchronizer::ConnectOption option ) const = 0;
 //     virtual AbstractConnectJob* startConnect( AbstractDocument* document,
-//                                               const KUrl& url, AbstractDocumentSynchronizer::ConnectOption option ) = 0;
+//                                               const QUrl& url, AbstractDocumentSynchronizer::ConnectOption option ) = 0;
 
-//     virtual bool exportDocument( AbstractDocument* document, const KUrl& originUrl ) const = 0;
-//     virtual AbstractExportJob* startExport( AbstractDocument* document, const KUrl& originUrl ) const = 0;
+//     virtual bool exportDocument( AbstractDocument* document, const QUrl& originUrl ) const = 0;
+//     virtual AbstractExportJob* startExport( AbstractDocument* document, const QUrl& originUrl ) const = 0;
 
     /** returns the id of the work model type */
     // TODO: is QByteArray enough?

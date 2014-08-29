@@ -18,10 +18,9 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <QtTest>
+#include <QtTest/QTest>
 #include <QtGlobal>
-#include <KGlobal>
-#include <KLocale>
+#include <QLocale>
 #include <limits>
 #include <bytearraymodel.h>
 
@@ -106,22 +105,22 @@ int PrimitiveDataInformationTest::minimumUnsignedBits(quint64 value)
 
 void PrimitiveDataInformationTest::initTestCase()
 {
-    Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
-    Kasten2::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
-    KGlobal::locale()->setDecimalSymbol(QLatin1String("."));
-    KGlobal::locale()->setThousandsSeparator(QLatin1String(""));
+    Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
+    Kasten::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
+    QLocale locale(QLocale::C);
+    locale.setNumberOptions(QLocale::OmitGroupSeparator);
+    QLocale::setDefault(locale);
+
     LoggerWithContext lwc(0, QString());
 
     for (int i = Type_START; i < Type_Bitfield; ++i)
     {
-        basic.append(PrimitiveFactory::newInstance(QLatin1String("prim"),
+        basic.append(PrimitiveFactory::newInstance(QStringLiteral("prim"),
                         static_cast<PrimitiveDataTypeEnum>(i), lwc));
     }
-    boolBitfield = new BoolBitfieldDataInformation(QLatin1String("bitfield"), 24);
-    unsignedBitfield = new UnsignedBitfieldDataInformation(QLatin1String("bitfield"), 24);
-    signedBitfield = new SignedBitfieldDataInformation(QLatin1String("bitfield"), 24);
-    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
-    QTextCodec::setCodecForCStrings(codec);
+    boolBitfield = new BoolBitfieldDataInformation(QStringLiteral("bitfield"), 24);
+    unsignedBitfield = new UnsignedBitfieldDataInformation(QStringLiteral("bitfield"), 24);
+    signedBitfield = new SignedBitfieldDataInformation(QStringLiteral("bitfield"), 24);
 }
 
 namespace
@@ -170,7 +169,7 @@ void PrimitiveDataInformationTest::testValueStringInt()
     //run once with locale aware, and once without
     for (int i = 0; i <= 1; ++i)
     {
-        Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
+        Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
             valueCompareHelper<Type_Int8>(qint8(value), binStr, hexStr, decStr, octStr);
@@ -182,19 +181,19 @@ void PrimitiveDataInformationTest::testValueStringInt()
             valueCompareHelper<Type_Int64>(qint64(value), binStr, hexStr, decStr, octStr);
 
         //check bitfield now
-        SignedBitfieldDataInformation bitfield(QLatin1String("signed"), minSize);
+        SignedBitfieldDataInformation bitfield(QStringLiteral("signed"), minSize);
         bitfield.setValue(value);
         for (uint width = minSize; width <= 64u; ++width)
         {
             bitfield.setWidth(width);
             bitfield.mWasAbleToRead = true;
-            Kasten2::StructViewPreferences::setSignedDisplayBase(2);
+            Kasten::StructViewPreferences::setSignedDisplayBase(2);
             QCOMPARE(bitfield.valueString(), binStr);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(16);
+            Kasten::StructViewPreferences::setSignedDisplayBase(16);
             QCOMPARE(bitfield.valueString(), hexStr);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(10);
+            Kasten::StructViewPreferences::setSignedDisplayBase(10);
             QCOMPARE(bitfield.valueString(), decStr);
-            Kasten2::StructViewPreferences::setSignedDisplayBase(8);
+            Kasten::StructViewPreferences::setSignedDisplayBase(8);
             QCOMPARE(bitfield.valueString(), octStr);
         }
     }
@@ -283,7 +282,7 @@ void PrimitiveDataInformationTest::testFromVariant()
     QCOMPARE(ok, true); //nan should be fine too
     FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); //double nan gets mapped to float nan
-    FloatDataInformationMethods::fromVariant(QVariant(QLatin1String("abc")), &ok);
+    FloatDataInformationMethods::fromVariant(QVariant(QStringLiteral("abc")), &ok);
     QCOMPARE(ok, false); //bad data type
     FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
     QCOMPARE(ok, false); //out of range
@@ -296,7 +295,7 @@ void PrimitiveDataInformationTest::testFromVariant()
     QCOMPARE(ok, true); //nan should be fine too
     DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); //double nan gets mapped to float nan
-    DoubleDataInformationMethods::fromVariant(QVariant(QLatin1String("abc")), &ok);
+    DoubleDataInformationMethods::fromVariant(QVariant(QStringLiteral("abc")), &ok);
     QCOMPARE(ok, false); //bad data type
     //TODO test other types!
 
@@ -315,15 +314,15 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
     //qDebug() << "need" << minSize << "bit to represent" << value;
     QString boolBase;
     if (value == 0)
-        boolBase = QLatin1String("false");
+        boolBase = QStringLiteral("false");
     else if (value == 1)
-        boolBase = QLatin1String("true");
+        boolBase = QStringLiteral("true");
     else
-        boolBase = QLatin1String("true (%1)");
+        boolBase = QStringLiteral("true (%1)");
     //run once with locale aware, and once without
     for (int i = 0; i <= 1; ++i)
     {
-        Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
+        Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
             valueCompareHelperUnsigned<Type_UInt8, Type_Bool8>(quint8(value), binStr, hexStr,
@@ -339,8 +338,8 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
                     decStr, octStr, boolBase);
 
         //check bitfield now
-        UnsignedBitfieldDataInformation bitfield(QLatin1String("unsigned"), minSize);
-        BoolBitfieldDataInformation boolBitfield(QLatin1String("bool"), minSize);
+        UnsignedBitfieldDataInformation bitfield(QStringLiteral("unsigned"), minSize);
+        BoolBitfieldDataInformation boolBitfield(QStringLiteral("bool"), minSize);
         bitfield.setValue(value);
         boolBitfield.setValue(value);
         bitfield.mWasAbleToRead = true;
@@ -349,16 +348,16 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
         {
             bitfield.setWidth(width);
             bitfield.setWidth(width);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(2);
+            Kasten::StructViewPreferences::setUnsignedDisplayBase(2);
             QCOMPARE(bitfield.valueString(), binStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(binStr) : boolBase);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(16);
+            Kasten::StructViewPreferences::setUnsignedDisplayBase(16);
             QCOMPARE(bitfield.valueString(), hexStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(hexStr) : boolBase);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(10);
+            Kasten::StructViewPreferences::setUnsignedDisplayBase(10);
             QCOMPARE(bitfield.valueString(), decStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(decStr) : boolBase);
-            Kasten2::StructViewPreferences::setUnsignedDisplayBase(8);
+            Kasten::StructViewPreferences::setUnsignedDisplayBase(8);
             QCOMPARE(bitfield.valueString(), octStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(octStr) : boolBase);
         }
@@ -405,21 +404,21 @@ static QString charString(quint32 i)
 {
     QString charString;
     if (i == '\n')
-        charString = QLatin1String("\\n");
+        charString = QStringLiteral("\\n");
     else if (i == '\t')
-        charString = QLatin1String("\\t");
+        charString = QStringLiteral("\\t");
     else if (i == '\r')
-        charString = QLatin1String("\\r");
+        charString = QStringLiteral("\\r");
     else if (i == '\f')
-        charString = QLatin1String("\\f");
+        charString = QStringLiteral("\\f");
     else if (i == '\0')
-        charString = QLatin1String("\\0");
+        charString = QStringLiteral("\\0");
     else if (i == '\v')
-        charString = QLatin1String("\\v");
+        charString = QStringLiteral("\\v");
     else if (i == '\b')
-        charString = QLatin1String("\\b");
+        charString = QStringLiteral("\\b");
     else if (i == '\a')
-        charString = QLatin1String("\\a");
+        charString = QStringLiteral("\\a");
     else
     {
         QChar unicode(i);
@@ -436,40 +435,40 @@ static QString charString(quint32 i)
 
 void PrimitiveDataInformationTest::testValueStringChar()
 {
-    Kasten2::StructViewPreferences::setShowCharNumericalValue(false);
-    Kasten2::StructViewPreferences::setLocaleAwareDecimalFormatting(false);
+    Kasten::StructViewPreferences::setShowCharNumericalValue(false);
+    Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(false);
     //we don't want the numeric value now
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QLatin1String("'%1'")).arg(charString(i));
+        QString expected = QString(QStringLiteral("'%1'")).arg(charString(i));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setShowCharNumericalValue(true);
-    Kasten2::StructViewPreferences::setCharDisplayBase(16);
+    Kasten::StructViewPreferences::setShowCharNumericalValue(true);
+    Kasten::StructViewPreferences::setCharDisplayBase(16);
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QLatin1String("'%1' (0x%2)")).arg(charString(i),
+        QString expected = QString(QStringLiteral("'%1' (0x%2)")).arg(charString(i),
                 QString::number(i, 16));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setCharDisplayBase(10);
+    Kasten::StructViewPreferences::setCharDisplayBase(10);
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QLatin1String("'%1' (%2)")).arg(charString(i),
+        QString expected = QString(QStringLiteral("'%1' (%2)")).arg(charString(i),
                 QString::number(i, 10));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setCharDisplayBase(2);
+    Kasten::StructViewPreferences::setCharDisplayBase(2);
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QLatin1String("'%1' (0b%2)")).arg(charString(i),
+        QString expected = QString(QStringLiteral("'%1' (0b%2)")).arg(charString(i),
                 QString::number(i, 2));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten2::StructViewPreferences::setCharDisplayBase(8);
+    Kasten::StructViewPreferences::setCharDisplayBase(8);
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QLatin1String("'%1' (0o%2)")).arg(charString(i),
+        QString expected = QString(QStringLiteral("'%1' (0o%2)")).arg(charString(i),
                 QString::number(i, 8));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
@@ -502,52 +501,52 @@ void PrimitiveDataInformationTest::testGetAndSetValue()
     QCOMPARE(clone->value(), expected);
 }
 
-template<typename s, typename u>
+template<typename signedType, typename unsignedType>
 void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataTypeEnum type, const char* name)
 {
-    QString msg = QLatin1String(name);
-    QTest::newRow(msg.arg(QLatin1String("-325")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(s(-325));
-    QTest::newRow(msg.arg(QLatin1String("0")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(0) << AllPrimitiveTypes(s(0));
-    QTest::newRow(msg.arg(QLatin1String("-1")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(-1) << AllPrimitiveTypes(s(-1));
-    QTest::newRow(msg.arg(QLatin1String("357891")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(357891) << AllPrimitiveTypes(s(357891));
+    QString msg = QString::fromUtf8(name);
+    QTest::newRow(msg.arg(QStringLiteral("-325")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(signedType(-325));
+    QTest::newRow(msg.arg(QStringLiteral("0")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(0) << AllPrimitiveTypes(signedType(0));
+    QTest::newRow(msg.arg(QStringLiteral("-1")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(-1) << AllPrimitiveTypes(signedType(-1));
+    QTest::newRow(msg.arg(QStringLiteral("357891")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(357891) << AllPrimitiveTypes(signedType(357891));
 
-    QTest::newRow(msg.arg(QLatin1String("max")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(std::numeric_limits<s>::max())
-            << AllPrimitiveTypes(s(std::numeric_limits<s>::max()));
-    QTest::newRow(msg.arg(QLatin1String("min")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(std::numeric_limits<s>::min())
-            << AllPrimitiveTypes(s(std::numeric_limits<s>::min()));
-    QTest::newRow(msg.arg(QLatin1String("u_max")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(std::numeric_limits<u>::max())
-            << AllPrimitiveTypes(s(std::numeric_limits<u>::max()));
-    QTest::newRow(msg.arg(QLatin1String("u_min")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(std::numeric_limits<u>::min())
-            << AllPrimitiveTypes(s(std::numeric_limits<u>::min()));
+    QTest::newRow(msg.arg(QStringLiteral("max")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(std::numeric_limits<signedType>::max())
+            << AllPrimitiveTypes(signedType(std::numeric_limits<signedType>::max()));
+    QTest::newRow(msg.arg(QStringLiteral("min")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(std::numeric_limits<signedType>::min())
+            << AllPrimitiveTypes(signedType(std::numeric_limits<signedType>::min()));
+    QTest::newRow(msg.arg(QStringLiteral("u_max")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(std::numeric_limits<unsignedType>::max())
+            << AllPrimitiveTypes(signedType(std::numeric_limits<unsignedType>::max()));
+    QTest::newRow(msg.arg(QStringLiteral("u_min")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(std::numeric_limits<unsignedType>::min())
+            << AllPrimitiveTypes(signedType(std::numeric_limits<unsignedType>::min()));
 }
 
-template<typename s>
+template<typename signedType>
 void PrimitiveDataInformationTest::addRowsGetAndSetUnsigned(PrimitiveDataTypeEnum type, const char* name)
 {
-    QString msg = QLatin1String(name);
-    QTest::newRow(msg.arg(QLatin1String("-325")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(s(-325));
-    QTest::newRow(msg.arg(QLatin1String("0")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(0) << AllPrimitiveTypes(s(0));
-    QTest::newRow(msg.arg(QLatin1String("-1")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(-1) << AllPrimitiveTypes(s(-1));
-    QTest::newRow(msg.arg(QLatin1String("357891")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(357891) << AllPrimitiveTypes(s(357891));
+    QString msg = QString::fromUtf8(name);
+    QTest::newRow(msg.arg(QStringLiteral("-325")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(signedType(-325));
+    QTest::newRow(msg.arg(QStringLiteral("0")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(0) << AllPrimitiveTypes(signedType(0));
+    QTest::newRow(msg.arg(QStringLiteral("-1")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(-1) << AllPrimitiveTypes(signedType(-1));
+    QTest::newRow(msg.arg(QStringLiteral("357891")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(357891) << AllPrimitiveTypes(signedType(357891));
 
-    QTest::newRow(msg.arg(QLatin1String("max")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(std::numeric_limits<s>::max())
-            << AllPrimitiveTypes(s(std::numeric_limits<s>::max()));
-    QTest::newRow(msg.arg(QLatin1String("min")).toUtf8().constData())
-    << basic[type] << AllPrimitiveTypes(std::numeric_limits<s>::min())
-            << AllPrimitiveTypes(s(std::numeric_limits<s>::min()));
+    QTest::newRow(msg.arg(QStringLiteral("max")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(std::numeric_limits<signedType>::max())
+            << AllPrimitiveTypes(signedType(std::numeric_limits<signedType>::max()));
+    QTest::newRow(msg.arg(QStringLiteral("min")).toUtf8().constData())
+    << basic[type] << AllPrimitiveTypes(std::numeric_limits<signedType>::min())
+            << AllPrimitiveTypes(signedType(std::numeric_limits<signedType>::min()));
 }
 
 void PrimitiveDataInformationTest::testGetAndSetValue_data()
@@ -570,6 +569,6 @@ void PrimitiveDataInformationTest::cleanupTestCase()
     delete boolBitfield;
 }
 
-QTEST_MAIN(PrimitiveDataInformationTest)
+QTEST_GUILESS_MAIN(PrimitiveDataInformationTest)
 
 #include "primitivedatainformationtest.moc"

@@ -38,19 +38,19 @@ PODData::PODData()
  : mCurrentOriginalData( 0 ),
    mCurrentEndiannessSetData( 0 ),
    mCurrentSize( 0 ),
-   mByteOrder( thisMachineByteOrder )
+   mByteOrder( QSysInfo::ByteOrder )
 {
 }
 
 const Byte* PODData::originalData()     const { return mCurrentOriginalData; }
 const Byte* PODData::byteOrderSetData() const { return mCurrentEndiannessSetData; }
-ByteOrder PODData::byteOrder()          const { return mByteOrder; }
+QSysInfo::Endian PODData::byteOrder()          const { return mByteOrder; }
 int PODData::size()                     const { return mCurrentSize; }
 
 
 Byte* PODData::rawData()    { return mOriginalAligned64Bit.mBytes; }
 
-void PODData::setByteOrder( ByteOrder byteOrder )
+void PODData::setByteOrder( QSysInfo::Endian byteOrder )
 {
     if( mByteOrder == byteOrder )
         return;
@@ -80,7 +80,7 @@ unsigned long PODData::bitValue( int noOfBitsToRead ) const
     // TODO: the cursor currently does not go into the byte
     int noOfUsedBits = 0;//7 - state.cell;
 
-    const bool isReverse = ( mByteOrder != thisMachineByteOrder );
+    const bool isReverse = ( mByteOrder != QSysInfo::ByteOrder );
     const Byte* data = mByteOrderSetAligned64Bit.mBytes;
     if( isReverse )
         data += 7;
@@ -121,7 +121,7 @@ bool PODData::updateRawData( int size )
 
     if( size > 0 )
     {
-        if( mByteOrder != thisMachineByteOrder )
+        if( mByteOrder != QSysInfo::ByteOrder )
             copyInvertedBytes( mByteOrderSetAligned64Bit.mBytes, mOriginalAligned64Bit.mBytes, Size );
         else
             mByteOrderSetAligned64Bit = mOriginalAligned64Bit;
@@ -145,7 +145,7 @@ void PODData::getPointers( const void** P8Bit, const void** P16Bit, const void**
     static const int MachineOffsets[4] = { 0, 0, 0, 0 };
     static const int ReversedOffsets[4] = { 7, 6, 4, 0 };
 
-    const int* offsets = ( mByteOrder == thisMachineByteOrder ) ? MachineOffsets : ReversedOffsets;
+    const int* offsets = ( mByteOrder == QSysInfo::ByteOrder ) ? MachineOffsets : ReversedOffsets;
     const Byte* data = mByteOrderSetAligned64Bit.mBytes;
 
     *P8Bit =  (mCurrentSize>=1) ? data + offsets[0] : 0;
@@ -159,7 +159,7 @@ const void* PODData::pointer( int byteCount ) const
     if( byteCount > mCurrentSize )
         byteCount = 0;
 
-    const int offset = ( mByteOrder == thisMachineByteOrder ) ? 0 : 8-byteCount;
+    const int offset = ( mByteOrder == QSysInfo::ByteOrder ) ? 0 : 8-byteCount;
     const Byte* data = mByteOrderSetAligned64Bit.mBytes;
 
     return (byteCount>0) ? data + offset : 0;

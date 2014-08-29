@@ -22,10 +22,9 @@
 
 #include "abstractfilesystemsynctoremotejob.h"
 #include "abstractfilesystemsynctoremotejob_p.h"
-#include "abstractfilesystemsynctoremotejob.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractFileSystemSyncToRemoteJob::AbstractFileSystemSyncToRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer )
@@ -67,3 +66,6 @@ AbstractFileSystemSyncToRemoteJob::~AbstractFileSystemSyncToRemoteJob()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_abstractfilesystemsynctoremotejob.cpp"

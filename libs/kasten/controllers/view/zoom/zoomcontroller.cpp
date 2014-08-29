@@ -26,15 +26,16 @@
 #include <zoomable.h>
 // Kasten core
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
-#include <KAction>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ZoomController::ZoomController( KXMLGUIClient* guiClient )
@@ -109,8 +110,8 @@ void ZoomController::zoomTo( const QString& nz )
     QString z = nz;
     double zoom;
     z.remove(  z.indexOf(  '%' ), 1 );
-    zoom = KGlobal::locale()->readNumber(  z ) / 100;
-    kDebug( 4500 ) << "ZOOM = "  << nz << ", setting zoom = " << zoom << endl;
+    zoom = KLocale::global()->readNumber(  z ) / 100;
+    qCDebug(LOG_KASTEN_CONTROLLERS) << "ZOOM = "  << nz << ", setting zoom = " << zoom << endl;
 
     DisplayOptions options = miniWidget()->displayOptions();
     options.setMagnification( zoom );

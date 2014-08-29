@@ -23,7 +23,7 @@
 #include "sintspinbox.h"
 
 // Qt
-#include <QtGui/QLineEdit>
+#include <QLineEdit>
 
 
 QValidator::State SIntSpinBox::validate( QString& input, int& pos ) const
@@ -33,7 +33,7 @@ QValidator::State SIntSpinBox::validate( QString& input, int& pos ) const
     QValidator::State result;
 
     if( input.isEmpty()
-        || (mMinimum < 0 && input == QLatin1String("-")) )
+        || (mMinimum < 0 && input == QStringLiteral("-")) )
     {
         mValue = 0;
         result = QValidator::Intermediate;

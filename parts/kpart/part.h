@@ -25,10 +25,10 @@
 
 // Kasten
 #include <kastencore.h>
-// KDE
+// KF5
 #include <KParts/ReadWritePart>
 
-namespace Kasten2 {
+namespace Kasten {
 class ByteArrayViewProfileManager;
 class ByteArrayView;
 class ByteArrayDocument;
@@ -51,14 +51,14 @@ class OktetaPart : public KParts::ReadWritePart
 
   public:
     OktetaPart( QObject* parent,
-                const KComponentData& componentData,
+                const KAboutData& componentData,
                 Modus modus,
-                Kasten2::ByteArrayViewProfileManager* viewProfileManager );
+                Kasten::ByteArrayViewProfileManager* viewProfileManager );
 
     virtual ~OktetaPart();
 
   public:
-    Kasten2::PrintController* printController() const;
+    Kasten::PrintController* printController() const;
 
   public: // KParts::ReadWritePart API
     virtual void setReadWrite( bool readWrite = true );
@@ -76,26 +76,26 @@ class OktetaPart : public KParts::ReadWritePart
     void setupActions( bool browserViewWanted );
 
   protected:
-    Kasten2::ByteArrayView* byteArrayView() const;
+    Kasten::ByteArrayView* byteArrayView() const;
 
   protected Q_SLOTS:
-    void onDocumentLoaded( Kasten2::AbstractDocument* document );
-    void onModified( Kasten2::LocalSyncState state );
+    void onDocumentLoaded( Kasten::AbstractDocument* document );
+    void onModified( Kasten::LocalSyncState state );
 
   private:
     const Modus mModus;
     QVBoxLayout* mLayout;
 
-    Kasten2::ByteArrayDocument* mDocument;
-    Kasten2::ByteArrayView* mByteArrayView;
+    Kasten::ByteArrayDocument* mDocument;
+    Kasten::ByteArrayView* mByteArrayView;
 
-    Kasten2::PrintController* mPrintController;
-    QList<Kasten2::AbstractXmlGuiController*> mControllers;
+    Kasten::PrintController* mPrintController;
+    QList<Kasten::AbstractXmlGuiController*> mControllers;
 
-    Kasten2::ByteArrayViewProfileManager* mViewProfileManager;
+    Kasten::ByteArrayViewProfileManager* mViewProfileManager;
 };
 
 
-inline Kasten2::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView; }
+inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView; }
 
 #endif

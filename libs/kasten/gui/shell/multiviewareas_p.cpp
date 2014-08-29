@@ -28,12 +28,9 @@
 #include <abstracttoolinlineview.h>
 #include <abstractdocument.h>
 #include <abstractview.h>
-// KDE
-#include <KGlobalSettings>
 
-#include <KDebug>
 
-namespace Kasten2
+namespace Kasten
 {
 // TODO: catch area focues change!
 MultiViewAreasPrivate::MultiViewAreasPrivate( MultiViewAreas* parent )
@@ -52,11 +49,11 @@ void MultiViewAreasPrivate::init()
     TabbedViews* viewArea = new TabbedViews();
     q->connect( viewArea, SIGNAL(focusChanged(bool)),
                 SLOT(onViewAreaFocusChanged(bool)) );
-    q->connect( viewArea, SIGNAL(viewFocusChanged(Kasten2::AbstractView*)),
-                SIGNAL(viewFocusChanged(Kasten2::AbstractView*)) );
-    q->connect( viewArea, SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)),
-                SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)) );
-    q->connect( viewArea, SIGNAL(removing(QList<Kasten2::AbstractView*>)),
+    q->connect( viewArea, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
+                SIGNAL(viewFocusChanged(Kasten::AbstractView*)) );
+    q->connect( viewArea, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
+                SIGNAL(closeRequest(QList<Kasten::AbstractView*>)) );
+    q->connect( viewArea, SIGNAL(removing(QList<Kasten::AbstractView*>)),
                 SLOT(onViewsRemoved()) );
     q->connect( viewArea, SIGNAL(dataOffered(const QMimeData*,bool&)),
                 SIGNAL(dataOffered(const QMimeData*,bool&)) );
@@ -66,7 +63,6 @@ void MultiViewAreasPrivate::init()
     mViewAreaList.append( viewArea );
     mCurrentViewArea = viewArea;
 
-    mMainSplitter->setOpaqueResize( KGlobalSettings::opaqueResize() );
     mMainSplitter->addWidget( viewArea->widget() );
 }
 
@@ -87,8 +83,6 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea( AbstractViewArea* _viewA
         const QList<int> baseSplitterSizes = baseSplitter->sizes();
         const int index = baseSplitter->indexOf( firstViewAreaWidget );
         splitter = new QSplitter( baseSplitter );
-        // TODO: react on opaqueResize change
-        splitter->setOpaqueResize( KGlobalSettings::opaqueResize() );
         baseSplitter->insertWidget( index, splitter );
         splitter->addWidget( firstViewAreaWidget );
         baseSplitter->setSizes( baseSplitterSizes );
@@ -97,11 +91,11 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea( AbstractViewArea* _viewA
     TabbedViews* secondViewArea = new TabbedViews();
     q->connect( secondViewArea, SIGNAL(focusChanged(bool)),
                 SLOT(onViewAreaFocusChanged(bool)) );
-    q->connect( secondViewArea, SIGNAL(viewFocusChanged(Kasten2::AbstractView*)),
-                SIGNAL(viewFocusChanged(Kasten2::AbstractView*)) );
-    q->connect( secondViewArea, SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)),
-                SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)) );
-    q->connect( secondViewArea, SIGNAL(removing(QList<Kasten2::AbstractView*>)),
+    q->connect( secondViewArea, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
+                SIGNAL(viewFocusChanged(Kasten::AbstractView*)) );
+    q->connect( secondViewArea, SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
+                SIGNAL(closeRequest(QList<Kasten::AbstractView*>)) );
+    q->connect( secondViewArea, SIGNAL(removing(QList<Kasten::AbstractView*>)),
                 SLOT(onViewsRemoved()) );
     q->connect( secondViewArea, SIGNAL(dataOffered(const QMimeData*,bool&)),
                 SIGNAL(dataOffered(const QMimeData*,bool&)) );
@@ -200,7 +194,7 @@ void MultiViewAreasPrivate::onViewAreaFocusChanged( bool hasFocus )
     Q_Q( MultiViewAreas );
 
     TabbedViews* viewArea = qobject_cast<TabbedViews *>( q->sender() );
-kDebug()<<viewArea<<hasFocus;
+
     if( mCurrentViewArea == viewArea )
         return;
 

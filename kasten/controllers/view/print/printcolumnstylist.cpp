@@ -23,7 +23,7 @@
 #include "printcolumnstylist.h"
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 
 namespace Okteta

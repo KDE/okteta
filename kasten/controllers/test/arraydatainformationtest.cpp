@@ -19,7 +19,8 @@
  */
 
 
-#include <QtTest>
+#include <QtTest/QTest>
+#include <QSignalSpy>
 
 #include "view/structures/datatypes/array/arraydatainformation.h"
 #include "view/structures/datatypes/array/primitivearraydata.h"
@@ -53,8 +54,8 @@ void ArrayDataInformationTest::initTestCase()
     qRegisterMetaType<DataInformation*>();
     LoggerWithContext lwc(0, QString());
 
-    primitive = new ArrayDataInformation(QLatin1String("primitives"), 0,
-            PrimitiveFactory::newInstance(QLatin1String("child"), Type_UInt32, lwc));
+    primitive = new ArrayDataInformation(QStringLiteral("primitives"), 0,
+            PrimitiveFactory::newInstance(QStringLiteral("child"), Type_UInt32, lwc));
     primitiveSize = 32;
     primitiveTop = new TopLevelDataInformation(primitive);
 
@@ -76,13 +77,13 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->topLevelDataInformation(), primitiveTop);
 
     QVector<DataInformation*> structsChildren;
-    structsChildren << PrimitiveFactory::newInstance(QLatin1String("first"), Type_UInt32, lwc)
-            << PrimitiveFactory::newInstance(QLatin1String("second"), Type_UInt32, lwc);
+    structsChildren << PrimitiveFactory::newInstance(QStringLiteral("first"), Type_UInt32, lwc)
+            << PrimitiveFactory::newInstance(QStringLiteral("second"), Type_UInt32, lwc);
 
-    StructureDataInformation* structs = new StructureDataInformation(QLatin1String("vals"), structsChildren);
+    StructureDataInformation* structs = new StructureDataInformation(QStringLiteral("vals"), structsChildren);
 
     complexSize = 64;
-    complex = new ArrayDataInformation(QLatin1String("complex"), 0, structs);
+    complex = new ArrayDataInformation(QStringLiteral("complex"), 0, structs);
     complexTop = new TopLevelDataInformation(complex);
 
     QCOMPARE(complex->isArray(), true);
@@ -181,7 +182,7 @@ void ArrayDataInformationTest::cleanupTestCase()
 
 
 
-QTEST_MAIN(ArrayDataInformationTest)
+QTEST_GUILESS_MAIN(ArrayDataInformationTest)
 
 
 #include "arraydatainformationtest.moc"

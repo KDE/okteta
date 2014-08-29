@@ -30,11 +30,11 @@
 #include <abstractbytearrayview.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KGlobalSettings>
+// Qt
+#include <QFontDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayView::ByteArrayView( ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer )
@@ -108,8 +108,9 @@ void ByteArrayView::init()
     mWidget = new Okteta::ByteArrayJanusView();
     mWidget->setByteArrayModel( content );
 
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFontByGlobalSettings()) );
+    // TODO: find a signal/event emitted when fixedfont changes
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &ByteArrayView::setFontByGlobalSettings );
     setFontByGlobalSettings();
 
     mWidget->setNoOfBytesPerLine( 16 );
@@ -118,26 +119,27 @@ void ByteArrayView::init()
     mWidget->setOverwriteMode( useOverwriteAsDefault );
 
     // propagate signals
-    connect( mDocument, SIGNAL(titleChanged(QString)), SIGNAL(titleChanged(QString)) );
-    connect( mWidget, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );
-    connect( mWidget, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
-    connect( mWidget, SIGNAL(overwriteModeChanged(bool)), SIGNAL(overwriteModeChanged(bool)) );
-    connect( mWidget, SIGNAL(selectionChanged(Okteta::AddressRange)), SLOT(onSelectionChanged(Okteta::AddressRange)) );
-    connect( mWidget, SIGNAL(cursorPositionChanged(Okteta::Address)), SIGNAL(cursorPositionChanged(Okteta::Address)) );
-    connect( mWidget, SIGNAL(valueCodingChanged(int)), SIGNAL(valueCodingChanged(int)) );
-    connect( mWidget, SIGNAL(charCodecChanged(QString)), SIGNAL(charCodecChanged(QString)) );
-    connect( mWidget, SIGNAL(focusChanged(bool)), SIGNAL(focusChanged(bool)) );
+    using Okteta::ByteArrayJanusView;
+    connect( mDocument, &ByteArrayDocument::titleChanged, this, &ByteArrayView::titleChanged );
+    connect( mWidget, &ByteArrayJanusView::hasSelectedDataChanged, this, &ByteArrayView::hasSelectedDataChanged );
+    connect( mWidget, &ByteArrayJanusView::readOnlyChanged, this, &ByteArrayView::readOnlyChanged );
+    connect( mWidget, &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::overwriteModeChanged );
+    connect( mWidget, &ByteArrayJanusView::selectionChanged, this, &ByteArrayView::onSelectionChanged );
+    connect( mWidget, &ByteArrayJanusView::cursorPositionChanged, this, &ByteArrayView::cursorPositionChanged );
+    connect( mWidget, &ByteArrayJanusView::valueCodingChanged, this, &ByteArrayView::valueCodingChanged );
+    connect( mWidget, &ByteArrayJanusView::charCodecChanged, this, &ByteArrayView::charCodecChanged );
+    connect( mWidget, &ByteArrayJanusView::focusChanged, this, &ByteArrayView::focusChanged );
 
-    connect( mWidget, SIGNAL(offsetColumnVisibleChanged(bool)), SIGNAL(offsetColumnVisibleChanged(bool)) );
-    connect( mWidget, SIGNAL(offsetCodingChanged(int)), SIGNAL(offsetCodingChanged(int)) );
-    connect( mWidget, SIGNAL(visibleByteArrayCodingsChanged(int)), SIGNAL(visibleByteArrayCodingsChanged(int)) );
-    connect( mWidget, SIGNAL(layoutStyleChanged(int)), SIGNAL(layoutStyleChanged(int)) );
-    connect( mWidget, SIGNAL(noOfBytesPerLineChanged(int)), SIGNAL(noOfBytesPerLineChanged(int)) );
-    connect( mWidget, SIGNAL(showsNonprintingChanged(bool)), SIGNAL(showsNonprintingChanged(bool)) );
-    connect( mWidget, SIGNAL(substituteCharChanged(QChar)), SIGNAL(substituteCharChanged(QChar)) );
-    connect( mWidget, SIGNAL(undefinedCharChanged(QChar)), SIGNAL(undefinedCharChanged(QChar)) );
-    connect( mWidget, SIGNAL(noOfGroupedBytesChanged(int)), SIGNAL(noOfGroupedBytesChanged(int)) );
-    connect( mWidget, SIGNAL(viewModusChanged(int)), SIGNAL(viewModusChanged(int)) );
+    connect( mWidget, &ByteArrayJanusView::offsetColumnVisibleChanged, this, &ByteArrayView::offsetColumnVisibleChanged );
+    connect( mWidget, &ByteArrayJanusView::offsetCodingChanged, this, &ByteArrayView::offsetCodingChanged );
+    connect( mWidget, &ByteArrayJanusView::visibleByteArrayCodingsChanged, this, &ByteArrayView::visibleByteArrayCodingsChanged );
+    connect( mWidget, &ByteArrayJanusView::layoutStyleChanged, this, &ByteArrayView::layoutStyleChanged );
+    connect( mWidget, &ByteArrayJanusView::noOfBytesPerLineChanged, this, &ByteArrayView::noOfBytesPerLineChanged );
+    connect( mWidget, &ByteArrayJanusView::showsNonprintingChanged, this, &ByteArrayView::showsNonprintingChanged );
+    connect( mWidget, &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged );
+    connect( mWidget, &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged );
+    connect( mWidget, &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged );
+    connect( mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged );
 }
 
 ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer; }
@@ -413,7 +415,7 @@ int ByteArrayView::viewModus() const
 
 void ByteArrayView::setFontByGlobalSettings()
 {
-    mWidget->propagateFont( KGlobalSettings::fixedFont() );
+    mWidget->propagateFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 ByteArrayView::~ByteArrayView()

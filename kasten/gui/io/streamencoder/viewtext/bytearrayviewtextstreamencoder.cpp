@@ -35,13 +35,13 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <character.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const Okteta::OffsetFormat::Format DefaultOffsetFormat = Okteta::OffsetFormat::Hexadecimal;
@@ -52,7 +52,7 @@ ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
   codecName(),
   undefinedChar( QLatin1Char('?') ),
   substituteChar( QLatin1Char('.') ),
-  separation( QLatin1String(" ") )
+  separation( QStringLiteral(" ") )
 {}
 
 ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()

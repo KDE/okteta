@@ -30,11 +30,12 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtGui/QDragEnterEvent>
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDragLeaveEvent>
 #include <QtGui/QDropEvent>
+#include <QtCore/QMimeData>
 
 
 namespace Okteta

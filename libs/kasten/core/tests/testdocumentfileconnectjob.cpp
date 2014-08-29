@@ -28,15 +28,15 @@
 #include "testdocumentfilewritethread.h"
 #include "testdocument.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TestDocumentFileConnectJob::TestDocumentFileConnectJob( TestDocumentFileSynchronizer* synchronizer,
                                                         AbstractDocument* document,
-                                                        const KUrl& url,
+                                                        const QUrl& url,
                                                         AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemConnectJob( synchronizer, document, url, option )
 {
@@ -51,7 +51,7 @@ void TestDocumentFileConnectJob::startConnectWithFile()
 
     writeThread->start();
     while( !writeThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     const bool success = writeThread->success();
 

@@ -22,10 +22,9 @@
 
 #include "multiviewareas.h"
 #include "multiviewareas_p.h"
-#include "multiviewareas.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 // TODO: catch area focues change!
 MultiViewAreas::MultiViewAreas()
@@ -154,3 +153,6 @@ MultiViewAreas::~MultiViewAreas()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_multiviewareas.cpp"

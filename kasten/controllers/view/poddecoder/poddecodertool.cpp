@@ -42,15 +42,16 @@
 #include "abstractdifferentsizedialog.h"
 #include <bytearraydocument.h>
 #include <bytearrayview.h>
+#include <abstractbytearraymodel.h>
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 enum PODTypes
@@ -85,7 +86,7 @@ PODDecoderTool::PODDecoderTool()
     mDifferentSizeDialog( 0 ),
     mUnsignedAsHex( true )
 {
-    setObjectName( QLatin1String( "PODDecoder" ) );
+    setObjectName( QStringLiteral( "PODDecoder" ) );
 
     setupDecoder();
 }
@@ -114,14 +115,14 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
     if( mByteArrayModel && mByteArrayView )
     {
         mCursorIndex = mByteArrayView->cursorPosition();
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
-                 SLOT(onCursorPositionChange(Okteta::Address)) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                 SLOT(onContentsChange()) );
-        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
-                 SLOT(onCharCodecChange(QString)) );
-        connect( mByteArrayView, SIGNAL(readOnlyChanged(bool)),
-                 SLOT(onReadOnlyChanged()) );
+        connect( mByteArrayView, &ByteArrayView::cursorPositionChanged,
+                 this, &PODDecoderTool::onCursorPositionChange );
+        connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                 this, &PODDecoderTool::onContentsChange );
+        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
+                 this, &PODDecoderTool::onCharCodecChange );
+        connect( mByteArrayView, &ByteArrayView::readOnlyChanged,
+                 this, &PODDecoderTool::onReadOnlyChanged );
         onCharCodecChange( mByteArrayView->charCodingName() );
     }
 
@@ -179,7 +180,7 @@ void PODDecoderTool::setUnsignedAsHex( bool unsignedAsHex )
 void PODDecoderTool::setByteOrder( int byteOrder )
 {
     // TODO: test on no change is done in PODData, not this level
-    mPODData.setByteOrder( (Okteta::ByteOrder)byteOrder );
+    mPODData.setByteOrder( (QSysInfo::Endian)byteOrder );
     updateData();
 }
 
@@ -242,7 +243,7 @@ void PODDecoderTool::setData( const QVariant& data, int podId )
         return;
 
     // need to swap the bytes
-    if( mPODData.byteOrder() != Okteta::thisMachineByteOrder )
+    if( mPODData.byteOrder() != QSysInfo::ByteOrder )
     {
         const int firstHalfBytesCount = bytesSize/2;
         int j = bytesSize - 1;

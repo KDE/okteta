@@ -26,13 +26,13 @@
 #include "../base64/bytearraybase64streamencoder.h"
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int defaultUuInputLineLength = 45;

@@ -31,13 +31,13 @@
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SearchTool::SearchTool()
@@ -46,7 +46,7 @@ SearchTool::SearchTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "Search" ) );
+    setObjectName( QStringLiteral( "Search" ) );
 }
 
 bool SearchTool::isApplyable() const
@@ -78,8 +78,8 @@ void SearchTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
-                 SIGNAL(charCodecChanged(QString)) );
+        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
+                 this, &SearchTool::charCodecChanged );
         // TODO: update isApplyable on cursor movement and size changes
     }
 

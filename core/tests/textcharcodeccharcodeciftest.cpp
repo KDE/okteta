@@ -33,7 +33,7 @@ namespace Okteta
 
 CharCodec* TextCharCodecCharCodecIfTest::createCodec()
 {
-    return TextCharCodec::createCodec( QLatin1String("ISO8859-1") );
+    return TextCharCodec::createCodec( QStringLiteral("ISO8859-1") );
     // TODO: test for some more, e.g. KOI8-R
 }
 

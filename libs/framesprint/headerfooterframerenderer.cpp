@@ -22,11 +22,11 @@
 
 #include "headerfooterframerenderer.h"
 
-// KDE
-#include <KLocale>
-#include <KGlobal>
+// KF5
+#include <KLocalizedString>
 #include <KUser>
 // Qt
+#include <QtCore/QLocale>
 #include <QtCore/QHash>
 #include <QtCore/QDateTime>
 #include <QtGui/QPainter>
@@ -85,26 +85,27 @@ void HeaderFooterFrameRenderer::prepare()
 {
     const QDateTime dateTime = QDateTime::currentDateTime();
     const KUser user( KUser::UseRealUserID );
-    const KUrl url = mInfo->url();
+    const QUrl url = mInfo->url();
 
     // create list of replacements
     QHash<char,QString> tagReplacements;
 
-    tagReplacements['d'] = KGlobal::locale()->formatDateTime( dateTime, KLocale::ShortDate );
-    tagReplacements['D'] = KGlobal::locale()->formatDateTime( dateTime, KLocale::LongDate );
-    tagReplacements['h'] = KGlobal::locale()->formatTime( dateTime.time(), false );
-    tagReplacements['y'] = KGlobal::locale()->formatDate( dateTime.date(), KLocale::ShortDate );
-    tagReplacements['Y'] = KGlobal::locale()->formatDate( dateTime.date(), KLocale::LongDate );
+    QLocale locale;
+    tagReplacements['d'] = locale.toString( dateTime, QLocale::ShortFormat );
+    tagReplacements['D'] = locale.toString( dateTime, QLocale::LongFormat );
+    tagReplacements['h'] = locale.toString( dateTime.time(), QLocale::ShortFormat );
+    tagReplacements['y'] = locale.toString( dateTime.date(), QLocale::ShortFormat );
+    tagReplacements['Y'] = locale.toString( dateTime.date(), QLocale::LongFormat );
     tagReplacements['u'] = user.loginName();
     tagReplacements['U'] = user.property( KUser::FullName ).toString();
 //     tagReplacements['f'] = isSelection ? i18n("(Selection of) %1", url.fileName()) : url.fileName();
     tagReplacements['f'] = url.fileName();
-    tagReplacements['F'] = url.prettyUrl();
+    tagReplacements['F'] = url.toDisplayString();
     tagReplacements['P'] = QString::number( mInfo->noOfPages() );
 
     // create text with globally replaced tags
     const int sizeOfTag = 2;
-    QRegExp tagsPattern( QLatin1String("%([dDhyYuUfFP])") );
+    QRegExp tagsPattern( QStringLiteral("%([dDhyYuUfFP])") );
 
     mGloballyReplacedTextList.clear();
 
@@ -145,7 +146,7 @@ void HeaderFooterFrameRenderer::renderFrame( QPainter *painter, int frameIndex )
     {
         QString text = mGloballyReplacedTextList[i];
         // substitute locally
-        const QString pageNumberTag = QLatin1String( "%p" );
+        const QString pageNumberTag = QStringLiteral( "%p" );
         if( text.indexOf(pageNumberTag) != -1 )
             text.replace( pageNumberTag, QString::number(frameIndex+1) ); //TODO: frameIndex != pageNumber in general
         int align = verticalAlign | horizontalAlign[i];

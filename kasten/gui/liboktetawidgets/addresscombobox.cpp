@@ -22,7 +22,6 @@
 
 #include "addresscombobox.h"
 #include "addresscombobox_p.h"
-#include "addresscombobox.moc"
 
 
 namespace Okteta
@@ -73,3 +72,6 @@ AddressComboBox::~AddressComboBox()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_addresscombobox.cpp"

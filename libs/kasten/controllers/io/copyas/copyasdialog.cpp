@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008,2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,38 +25,31 @@
 // Kasten gui
 #include <abstractmodelstreamencoderconfigeditor.h>
 #include <abstractselectionview.h>
-// KDE
-#include <KGlobal>
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QSplitter>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
+#include <QSplitter>
+#include <QGroupBox>
+#include <QLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QIcon>
 #include <QtGui/QFont>
+#include <QtWidgets/QDialogButtonBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,
                             AbstractModelStreamEncoderConfigEditor* configEditor,
                             QWidget* parent )
-  : KDialog( parent ),
+  : QDialog( parent ),
     mConfigEditor( configEditor )
 {
-    setCaption( i18nc("@title:window","Copy As") );
-    setButtons( Ok | Cancel );
-    setButtonGuiItem( Ok, KGuiItem(i18nc("@action:button","&Copy to clipboard"), QLatin1String("edit-copy"),
-                      i18nc("@info:tooltip","Copy the selected data to the clipboard."),
-                      i18nc("@info:whatsthis","If you press the <interface>Copy to clipboard</interface> "
-                            "button, the selected data will be copied to the clipboard "
-                            "with the settings you entered above.")) );
-    setDefaultButton( Ok );
+    setWindowTitle( i18nc("@title:window","Copy As") );
 
     QSplitter* splitter = new QSplitter( this );
-
-    setMainWidget( splitter );
 
     // config editor
     QWidget* editorPage = new QWidget( splitter );
@@ -65,6 +58,7 @@ CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,
     QFont font = editorLabel->font();
     font.setBold( true );
     editorLabel->setFont( font );
+
     editorPageLayout->addWidget( editorLabel );
     editorPageLayout->addWidget( mConfigEditor );
     editorPageLayout->addStretch();
@@ -84,8 +78,33 @@ CopyAsDialog::CopyAsDialog( const QString& remoteTypeName,
         previewBoxLayout->addWidget( mPreviewView->widget() );
     }
 
-    enableButtonOk( configEditor->isValid() );
-    connect( configEditor, SIGNAL(validityChanged(bool)), SLOT(enableButtonOk(bool)) );
+    // dialog buttons
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    QPushButton* exportButton = new QPushButton(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                                i18nc("@action:button","&Copy to clipboard"));
+    exportButton->setToolTip(i18nc("@info:tooltip",
+                                   "Copy the selected data to the clipboard."));
+    exportButton->setWhatsThis(xi18nc("@info:whatsthis",
+                                      "If you press the <interface>Copy to clipboard</interface> "
+                                      "button, the selected data will be copied to the clipboard "
+                                      "with the settings you entered above."));
+
+    dialogButtonBox->addButton( exportButton, QDialogButtonBox::AcceptRole );
+    connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );
+    dialogButtonBox->addButton( QDialogButtonBox::Cancel );
+    connect( dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
+
+    exportButton->setEnabled( configEditor->isValid() );
+    connect( configEditor, &AbstractModelStreamEncoderConfigEditor::validityChanged,
+             exportButton, &QWidget::setEnabled );
+
+    // main layout
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addWidget( splitter );
+    layout->addStretch();
+    layout->addWidget( dialogButtonBox );
+
+    setLayout( layout );
 }
 
 void CopyAsDialog::setData( AbstractModel* model, const AbstractModelSelection* selection )

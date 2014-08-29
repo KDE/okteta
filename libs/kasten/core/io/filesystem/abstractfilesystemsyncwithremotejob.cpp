@@ -22,14 +22,13 @@
 
 #include "abstractfilesystemsyncwithremotejob.h"
 #include "abstractfilesystemsyncwithremotejob_p.h"
-#include "abstractfilesystemsyncwithremotejob.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
   : AbstractSyncWithRemoteJob( new AbstractFileSystemSyncWithRemoteJobPrivate(this,synchronizer,url,option) )
 {}
 
@@ -65,3 +64,6 @@ AbstractFileSystemSyncWithRemoteJob::~AbstractFileSystemSyncWithRemoteJob()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_abstractfilesystemsyncwithremotejob.cpp"

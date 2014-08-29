@@ -24,7 +24,7 @@
 #include "modelencoderfilesystemexporter_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter( AbstractModelStreamEncoder* encoder )
@@ -41,7 +41,7 @@ AbstractModelStreamEncoder* ModelEncoderFileSystemExporter::encoder() const
 
 AbstractExportJob* ModelEncoderFileSystemExporter::startExport( AbstractModel* model,
                                                                 const AbstractModelSelection* selection,
-                                                                const KUrl& url )
+                                                                const QUrl& url )
 {
     Q_D( ModelEncoderFileSystemExporter );
 

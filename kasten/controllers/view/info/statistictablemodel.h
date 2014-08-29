@@ -34,7 +34,7 @@ class ValueCodec;
 }
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class StatisticTableModel : public QAbstractTableModel

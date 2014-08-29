@@ -41,9 +41,10 @@ set( okteta_SRCS
   mainwindow.cpp
 )
 
-kde4_add_app_icon(okteta_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/hi*-app-okteta.png")
+#TODO KF5:
+# kde4_add_app_icon(okteta_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/hi*-app-okteta.png")
 
-kde4_add_executable( okteta  ${okteta_SRCS} )
+add_executable( okteta  ${okteta_SRCS} )
 
 target_link_libraries( okteta
   oktetakastencontrollers
@@ -52,13 +53,19 @@ target_link_libraries( okteta
   kastencontrollers
   kastengui
   kastencore
-  ${KDE4_KDEUI_LIBS}
+  KF5::ConfigCore
+  KF5::I18n
+  KF5::XmlGui
+  KF5::DBusAddons
 )
 
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 install( PROGRAMS okteta.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES oktetaui.rc  DESTINATION ${DATA_INSTALL_DIR}/okteta )
+install( FILES oktetaui.rc  DESTINATION ${KXMLGUI_INSTALL_DIR}/okteta )
 
-kde4_install_icons( ${ICON_INSTALL_DIR} )
+ecm_install_icons(
+  ICONS 16-apps-okteta.png  32-apps-okteta.png  48-apps-okteta.png
+  DESTINATION ${ICON_INSTALL_DIR}
+)

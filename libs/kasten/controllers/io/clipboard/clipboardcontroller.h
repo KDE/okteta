@@ -29,10 +29,10 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 namespace If {
@@ -66,9 +66,9 @@ class KASTENCONTROLLERS_EXPORT ClipboardController : public AbstractXmlGuiContro
     If::DataSelectable *mSelectionControl;
     If::SelectedDataWriteable *mMimeDataControl;
 
-    KAction *mCutAction;
-    KAction *mCopyAction;
-    KAction *mPasteAction;
+    QAction *mCutAction;
+    QAction *mCopyAction;
+    QAction *mPasteAction;
 };
 
 }

@@ -22,7 +22,6 @@
 
 #include "abstractbytearrayview.h"
 #include "abstractbytearrayview_p.h"
-#include "abstractbytearrayview.moc"
 
 // lib
 #include "controller/kcontroller.h"
@@ -636,3 +635,6 @@ AbstractByteArrayView::~AbstractByteArrayView()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_abstractbytearrayview.cpp"

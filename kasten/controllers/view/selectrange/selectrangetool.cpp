@@ -27,11 +27,11 @@
 #include <bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SelectRangeTool::SelectRangeTool()
@@ -42,7 +42,7 @@ SelectRangeTool::SelectRangeTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "SelectRange" ) );
+    setObjectName( QStringLiteral( "SelectRange" ) );
 }
 
 int SelectRangeTool::currentSelectionStart() const
@@ -92,8 +92,8 @@ void SelectRangeTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                 SLOT(onContentsChanged()) );
+        connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                 this, &SelectRangeTool::onContentsChanged );
         // TODO: update isApplyable on cursor movement and size changes
     }
 

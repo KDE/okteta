@@ -22,15 +22,14 @@
 
 #include "abstractfilesystemconnectjob.h"
 #include "abstractfilesystemconnectjob_p.h"
-#include "abstractfilesystemconnectjob.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractFileSystemConnectJob::AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer,
                                                             AbstractDocument* document,
-                                                            const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                                            const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
   : AbstractConnectJob( new AbstractFileSystemConnectJobPrivate(this,synchronizer,document,url,option) )
 {
 }
@@ -73,3 +72,6 @@ AbstractFileSystemConnectJob::~AbstractFileSystemConnectJob()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_abstractfilesystemconnectjob.cpp"

@@ -27,7 +27,7 @@
 #include "bytearrayvaluesstreamencoder.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayValuesStreamEncoderConfigEditorFactory::ByteArrayValuesStreamEncoderConfigEditorFactory()

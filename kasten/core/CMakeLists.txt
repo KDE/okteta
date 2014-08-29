@@ -43,7 +43,7 @@ set( okteta_kastencore_LIB_SRCS
 )
 
 set( okteta_kastencore_LIB_HDRS
-  oktetakastencore_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencore_export.h
   document/bytearrayselection.h
   document/bytearraydocument.h
   document/bytearraydocumentfactory.h
@@ -51,13 +51,18 @@ set( okteta_kastencore_LIB_HDRS
   io/filesystem/bytearrayrawfilesynchronizerfactory.h
 )
 
-kde4_add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
+add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
+generate_export_header( ${oktetakastencore_LIB} )
 
-target_link_libraries( ${oktetakastencore_LIB}
+target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC
   ${KASTENCORE_LIBS}
   ${oktetacore_LIB}
-  ${KDE4_KDECORE_LIBS}
 )
+target_link_libraries( ${oktetakastencore_LIB} LINK_PRIVATE
+  KF5::I18n
+  KF5::Bookmarks
+)
+
 set_target_properties( ${oktetakastencore_LIB} PROPERTIES
   OUTPUT_NAME ${oktetakastencore_LIB_NAME}
   VERSION     ${OKTETAKASTEN_LIB_VERSION}
@@ -72,7 +77,7 @@ install( FILES ${okteta_kastencore_LIB_HDRS}
 )
 
 
-if(KDE4_BUILD_TESTS)
+if(BUILD_TESTING)
   add_subdirectory(document/tests)
   add_subdirectory(io/tests)
-endif(KDE4_BUILD_TESTS)
+endif(BUILD_TESTING)

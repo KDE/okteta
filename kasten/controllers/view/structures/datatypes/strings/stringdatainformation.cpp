@@ -38,7 +38,7 @@
 #include <QBrush>
 #include <QString>
 
-#include <KLocale>
+#include <KLocalizedString>
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
     : DataInformationWithDummyChildren(name, parent), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)

@@ -24,7 +24,7 @@
 #include "abstractdocumentstrategy_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractDocumentStrategy::AbstractDocumentStrategy()

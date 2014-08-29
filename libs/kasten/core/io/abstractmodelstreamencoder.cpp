@@ -24,7 +24,7 @@
 #include "abstractmodelstreamencoder_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractModelStreamEncoder::AbstractModelStreamEncoder( AbstractModelStreamEncoderPrivate* d )

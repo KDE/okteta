@@ -22,13 +22,13 @@
 
 #include "abstractmodelfilesystemsynchronizer_p.h"
 
-// KDE
+// KF5
 #include <KDirWatch>
-#include <Solid/Networking>
+// Qt
+#include <QNetworkConfigurationManager>
 
-#include <KDebug>
 
-namespace Kasten2
+namespace Kasten
 {
 
 void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
@@ -79,54 +79,48 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
 {
     Q_Q( AbstractModelFileSystemSynchronizer );
 
-    Solid::Networking::Notifier* networkingNotifier = Solid::Networking::notifier();
-    q->connect( networkingNotifier, SIGNAL(shouldConnect()), SLOT(onNetworkConnect()) );
-    q->connect( networkingNotifier, SIGNAL(shouldDisconnect()), SLOT(onNetworkDisconnect()) );
+    mNetworkConfigurationManager = new QNetworkConfigurationManager();
+    q->connect( mNetworkConfigurationManager, SIGNAL(onlineStateChanged(bool)), SLOT(onOnlineStateChanged(bool)) );
 }
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 {
     Q_Q( AbstractModelFileSystemSynchronizer );
 
-    Solid::Networking::Notifier* networkingNotifier = Solid::Networking::notifier();
-    networkingNotifier->disconnect( q );
+    delete mNetworkConfigurationManager;
+    mNetworkConfigurationManager = 0;
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
 {
     Q_UNUSED( fileName )
-kDebug()<<fileName;
+    qCDebug(LOG_KASTEN_CORE) << fileName;
     setRemoteState( RemoteHasChanges );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& fileName )
 {
     Q_UNUSED( fileName )
-kDebug()<<fileName;
-  //TODO: could happen after a delete, what to do?
+    qCDebug(LOG_KASTEN_CORE) << fileName;
+    //TODO: could happen after a delete, what to do?
     setRemoteState( RemoteHasChanges );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& fileName )
 {
     Q_UNUSED( fileName )
-kDebug()<<fileName;
+    qCDebug(LOG_KASTEN_CORE) << fileName;
     setRemoteState( RemoteDeleted );
 }
 
-void AbstractModelFileSystemSynchronizerPrivate::onNetworkConnect()
+void AbstractModelFileSystemSynchronizerPrivate::onOnlineStateChanged( bool isOnline )
 {
-kDebug();
-    setRemoteState( RemoteUnknown );
-}
-
-void AbstractModelFileSystemSynchronizerPrivate::onNetworkDisconnect()
-{
-kDebug();
-    setRemoteState( RemoteUnreachable );
+    qCDebug(LOG_KASTEN_CORE);
+    setRemoteState( isOnline ? RemoteUnknown : RemoteUnreachable );
 }
 
 AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()
 {
+    delete mNetworkConfigurationManager;
 }
 
 }

@@ -24,10 +24,8 @@
 
 // lib
 #include <character.h>
-// KDE
-#include <kglobal.h>
-#include <klocale.h>
-#include <kcharsets.h>
+// KF5
+#include <KCharsets>
 // Qt
 #include <QtCore/QTextCodec>
 
@@ -98,7 +96,7 @@ static bool is8Bit( QTextCodec* codec )
 
 static QTextCodec* createLatin1()
 {
-    return KGlobal::charsets()->codecForName( QLatin1String(encodingDataList[0].name) );
+    return KCharsets::charsets()->codecForName( QLatin1String(encodingDataList[0].name) );
 }
 
 /* heuristic seems to be doomed :(
@@ -113,7 +111,7 @@ static bool is8Bit( QTextCodec *Codec )
   QString S = Codec->toUnicode( (const char*)&c,4 );
   int Length = 1;
   QCString CS = Codec->fromUnicode( S, Length );
-  //kDebug() << Codec->name() << " "<<Length ;
+  //qCDebug(LOG_OKTETA_CORE) << Codec->name() << " "<<Length ;
   if( Length > 0 )
     Result = false;
   // test if all chars survive the recoding
@@ -124,7 +122,7 @@ static bool is8Bit( QTextCodec *Codec )
     S = Codec->toUnicode( (const char*)&c,4 );
     Length = 1;
     CS = Codec->fromUnicode( S, Length );
-    //kDebug() << Codec->name() << " "<<c[0]<<"->"<<CS[0]<<":"<<Length ;
+    //qCDebug(LOG_OKTETA_CORE) << Codec->name() << " "<<c[0]<<"->"<<CS[0]<<":"<<Length ;
     if( Length != 1 || (CS[0] != (char)c[0] && CS[0] != QTextCodecWhiteSpace) )
     {
       Result = false;
@@ -139,12 +137,12 @@ const QStringList &TextCharCodec::codecNames()
   // first call?
   if( CodecNames.isEmpty() )
 {
-    const QStringList &CharSets = KGlobal::charsets()->availableEncodingNames();
+    const QStringList &CharSets = KCharsets::charsets()->availableEncodingNames();
 
     for( QStringList::ConstIterator it = CharSets.begin(); it != CharSets.end(); ++it )
 {
       bool Found = true;
-      QTextCodec* Codec = KGlobal::charsets()->codecForName( *it, Found );
+      QTextCodec* Codec = KCharsets::charsets()->codecForName( *it, Found );
       if( Found && is8Bit(Codec) )
         CodecNames.append( QString::fromLatin1(Codec->name()) );
 }
@@ -177,7 +175,7 @@ QString TextCharCodec::nameOfEncoding( CharCoding _char )
 
 TextCharCodec* TextCharCodec::createLocalCodec()
 {
-    QTextCodec* codec = KGlobal::locale()->codecForEncoding();
+    QTextCodec* codec = QTextCodec::codecForLocale();
     if( ! is8Bit(codec) )
         codec = createLatin1();
     return new TextCharCodec( codec );
@@ -187,7 +185,7 @@ TextCharCodec* TextCharCodec::createLocalCodec()
 TextCharCodec* TextCharCodec::createCodec( const QString& codecName )
 {
     bool isOk = false;
-    QTextCodec* codec = KGlobal::charsets()->codecForName( codecName, isOk );
+    QTextCodec* codec = KCharsets::charsets()->codecForName( codecName, isOk );
     if( isOk )
         isOk = is8Bit( codec );
     return isOk ? new TextCharCodec( codec ) : 0;
@@ -201,7 +199,7 @@ const QStringList& TextCharCodec::codecNames()
     // first call?
     if( textCodecNames.isEmpty() )
     {
-        KCharsets* charsets = KGlobal::charsets();
+        KCharsets* charsets = KCharsets::charsets();
         for( unsigned int i = 0; i < encodingDataListSize; ++i )
         {
             bool isCodecFound = false;

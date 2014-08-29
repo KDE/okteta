@@ -25,13 +25,13 @@
 
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QSlider;
 class QToolButton;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModel;

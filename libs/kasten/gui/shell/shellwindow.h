@@ -26,13 +26,13 @@
 // Kasten gui
 #include "kastengui_export.h"
 #include "widgetsdockable.h"
-// KDE
+// KF5
 #include <KXmlGuiWindow>
 
 template<class T> class QList;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ShellWindowPrivate;
 
@@ -48,14 +48,14 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
                                      public If::WidgetsDockable
 {
    Q_OBJECT
-   Q_INTERFACES( Kasten2::If::WidgetsDockable )
+   Q_INTERFACES( Kasten::If::WidgetsDockable )
 
   public:
     explicit ShellWindow( ViewManager* viewManager );
     virtual ~ShellWindow();
 
   public Q_SLOTS:
-    void showDocument( Kasten2::AbstractDocument* document ); // TODO: better name
+    void showDocument( Kasten::AbstractDocument* document ); // TODO: better name
 
   public:
     void updateControllers( AbstractView* view );
@@ -71,9 +71,9 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
 
   private:
     Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& newTitle ) )
-    Q_PRIVATE_SLOT( d_func(), void onContentFlagsChanged( Kasten2::ContentFlags contentFlags ) )
-    Q_PRIVATE_SLOT( d_func(), void onLocalSyncStateChanged( Kasten2::LocalSyncState newState ) )
-    Q_PRIVATE_SLOT( d_func(), void onViewFocusChanged( Kasten2::AbstractView* view ) )
+    Q_PRIVATE_SLOT( d_func(), void onContentFlagsChanged( Kasten::ContentFlags contentFlags ) )
+    Q_PRIVATE_SLOT( d_func(), void onLocalSyncStateChanged( Kasten::LocalSyncState newState ) )
+    Q_PRIVATE_SLOT( d_func(), void onViewFocusChanged( Kasten::AbstractView* view ) )
     Q_PRIVATE_SLOT( d_func(), void onToolVisibilityChanged( bool isVisible ) )
     Q_PRIVATE_SLOT( d_func(), void onSynchronizerDeleted( QObject* synchronizer ) )
 

@@ -26,12 +26,13 @@
 #include <documentsyncmanager.h>
 #include <abstractdocument.h>
 #include <abstractmodelsynchronizer.h>
-// KDE
-#include <KLocale>
-#include <KUrl>
+// KF5
+#include <KLocalizedString>
+#include <kio/global.h>
+// Qt
+#include <QUrl>
 
-
-namespace Kasten2
+namespace Kasten
 {
 
 TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )
@@ -39,30 +40,30 @@ TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )
     mDocumentSyncManager( documentSyncManager ),
     mDocument( 0 )
 {
-    setObjectName( QLatin1String( "Terminal" ) );
+    setObjectName( QStringLiteral( "Terminal" ) );
 }
 
 
 QString TerminalTool::title() const { return i18nc("@title:window", "Terminal"); }
 
 
-KUrl TerminalTool::currentUrl() const
+QUrl TerminalTool::currentUrl() const
 {
-    KUrl result;
+    QUrl result;
 
     if( mDocument )
-        result = mDocumentSyncManager->urlOf( mDocument ).upUrl();
+        result = KIO::upUrl( mDocumentSyncManager->urlOf( mDocument ) );
 
     return result;
 }
 
 void TerminalTool::setTargetModel( AbstractModel* model )
 {
-    const KUrl oldCurrentUrl = currentUrl();
+    const QUrl oldCurrentUrl = currentUrl();
 
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
 
-    const KUrl newCurrentUrl = currentUrl();
+    const QUrl newCurrentUrl = currentUrl();
 
     if( oldCurrentUrl != newCurrentUrl )
         emit currentUrlChanged( newCurrentUrl );

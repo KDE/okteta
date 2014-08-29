@@ -26,12 +26,9 @@
 // lib
 #include "kastengui_export.h"
 // Qt
-#include <QtGui/QToolButton>
+#include <QToolButton>
 
-class KIcon;
-
-
-namespace Kasten2
+namespace Kasten
 {
 
 class ToggleButtonPrivate;
@@ -43,11 +40,11 @@ class KASTENGUI_EXPORT ToggleButton : public QToolButton
 
   public:
     ToggleButton( const QString& text, const QString& toolTip, QWidget* parent = 0 );
-    ToggleButton( const KIcon& icon, const QString& text, const QString& toolTip, QWidget* parent = 0 );
+    ToggleButton( const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent = 0 );
     virtual ~ToggleButton();
 
   public:
-    void setCheckedState( const KIcon& icon, const QString& text, const QString& toolTip );
+    void setCheckedState( const QIcon& icon, const QString& text, const QString& toolTip );
     void setCheckedState( const QString& text, const QString& toolTip );
 
   private:

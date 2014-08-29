@@ -22,14 +22,13 @@
 
 #include "abstractfilesystemexportjob.h"
 #include "abstractfilesystemexportjob_p.h"
-#include "abstractfilesystemexportjob.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
-                                 const KUrl& url )
+                                 const QUrl& url )
   : AbstractExportJob( new AbstractFileSystemExportJobPrivate(this,model,selection,url) )
 {
 }
@@ -78,3 +77,6 @@ AbstractFileSystemExportJob::~AbstractFileSystemExportJob()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_abstractfilesystemexportjob.cpp"

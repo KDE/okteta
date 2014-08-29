@@ -269,7 +269,7 @@ void ByteArrayTableRanges::addChangedRange( Address startIndex, Address endIndex
 
 void ByteArrayTableRanges::addChangedRange( const AddressRange& range )
 {
-// kDebug() << "adding change range "<<S.start()<<","<<S.end();
+// qCDebug(LOG_OKTETA_GUI) << "adding change range "<<S.start()<<","<<S.end();
   addChangedRange( mLayout->coordRangeOfIndizes(range) );
 }
 
@@ -277,7 +277,7 @@ void ByteArrayTableRanges::addChangedRange( const AddressRange& range )
 void ByteArrayTableRanges::addChangedRange( const CoordRange& range )
 {
   ChangedRanges.addCoordRange( range );
-// kDebug() << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"
+// qCDebug(LOG_OKTETA_GUI) << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"
 // <<NewRange.end().pos()<<","<<NewRange.end().line()<<endl;
 
   mModified = true;

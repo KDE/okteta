@@ -24,11 +24,11 @@
 
 // parameterset
 #include "modsumbytearraychecksumparameterset.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 #include <KComboBox>
 // Qt
-#include <QtGui/QFormLayout>
+#include <QFormLayout>
 
 
 const char* const ModSumByteArrayChecksumParameterSetEdit::Id = "ModSum";
@@ -43,8 +43,8 @@ ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit
     mByteOrderComboBox = new KComboBox( this );
     mByteOrderComboBox->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
     mByteOrderComboBox->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
-    connect( mByteOrderComboBox, SIGNAL(activated(int)),
-             SIGNAL(valuesChanged()) );
+    connect( mByteOrderComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+             this, &ModSumByteArrayChecksumParameterSetEdit::valuesChanged );
 
     const QString byteOrderLabelText =
          i18nc( "@label:listbox byte order to use for decoding the bytes into integer values",

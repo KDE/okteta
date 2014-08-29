@@ -25,8 +25,8 @@
 // tool
 #include "../types/hexadecimal8.h"
 #include "../poddata.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
 namespace Okteta

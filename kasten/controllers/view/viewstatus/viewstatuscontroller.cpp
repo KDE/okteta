@@ -30,18 +30,18 @@
 // Okteta core
 #include <charcodec.h>
 #include <oktetacore.h>
-// KDE
+// KF5
 #include <KSqueezedTextLabel>
 #include <KComboBox>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
+#include <QLayout>
+#include <QLabel>
 #include <QtGui/QFontMetrics>
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewStatusController::ViewStatusController( StatusBar* statusBar )
@@ -62,7 +62,7 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
     mOverwriteModeToggleButton = new ToggleButton( insertModeText, insertModeTooltip, statusBar );
     mOverwriteModeToggleButton->setCheckedState( overwriteModeText, overwriteModeTooltip );
     statusBar->addWidget( mOverwriteModeToggleButton );
-    connect( mOverwriteModeToggleButton, SIGNAL(clicked(bool)), SLOT(setOverwriteMode(bool)) );
+    connect( mOverwriteModeToggleButton, &ToggleButton::clicked, this, &ViewStatusController::setOverwriteMode );
 
     mValueCodingComboBox = new KComboBox( statusBar );
     QStringList list;
@@ -73,14 +73,14 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
     mValueCodingComboBox->addItems( list );
     mValueCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Coding of the value interpretation in the current view.") );
-    connect( mValueCodingComboBox, SIGNAL(activated(int)), SLOT(setValueCoding(int)) );
+    connect( mValueCodingComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ViewStatusController::setValueCoding );
     statusBar->addWidget( mValueCodingComboBox );
 
     mCharCodingComboBox = new KComboBox( statusBar );
     mCharCodingComboBox->addItems( Okteta::CharCodec::codecNames() );
     mCharCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
-    connect( mCharCodingComboBox, SIGNAL(activated(int)), SLOT(setCharCoding(int)) );
+    connect( mCharCodingComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ViewStatusController::setCharCoding );
     statusBar->addWidget( mCharCodingComboBox );
 
     fixWidths( 0 );
@@ -168,15 +168,15 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         onValueCodingChanged( mByteArrayView->valueCoding() );
         onCharCodecChanged( mByteArrayView->charCodingName() );
 
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)), SLOT(onCursorPositionChanged(Okteta::Address)) );
-        connect( mByteArrayView, SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
-            SLOT(onSelectedDataChanged(const Kasten2::AbstractModelSelection*)) );
-        connect( mByteArrayView, SIGNAL(overwriteModeChanged(bool)),
-                 mOverwriteModeToggleButton, SLOT(setChecked(bool)) );
-        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)), SLOT(onOffsetCodingChanged(int)) );
-        connect( mByteArrayView, SIGNAL(valueCodingChanged(int)), SLOT(onValueCodingChanged(int)) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
-            SLOT(onCharCodecChanged(QString)) );
+        connect( mByteArrayView, &ByteArrayView::cursorPositionChanged, this, &ViewStatusController::onCursorPositionChanged );
+        connect( mByteArrayView, &ByteArrayView::selectedDataChanged,
+            this, &ViewStatusController::onSelectedDataChanged );
+        connect( mByteArrayView, &ByteArrayView::overwriteModeChanged,
+                 mOverwriteModeToggleButton, &ToggleButton::setChecked );
+        connect( mByteArrayView, &ByteArrayView::offsetCodingChanged, this, &ViewStatusController::onOffsetCodingChanged );
+        connect( mByteArrayView, &ByteArrayView::valueCodingChanged, this, &ViewStatusController::onValueCodingChanged );
+        connect( mByteArrayView, &ByteArrayView::charCodecChanged,
+            this, &ViewStatusController::onCharCodecChanged );
     }
     else
     {
@@ -217,11 +217,11 @@ void ViewStatusController::onCursorPositionChanged( Okteta::Address offset )
 
     mPrintFunction( codedOffset, mStartOffset + offset );
 
-    mOffsetLabel->setText( i18n("Offset: %1", QLatin1String(codedOffset)) );
+    mOffsetLabel->setText( i18n("Offset: %1", QString::fromUtf8(codedOffset)) );
 }
 
 // TODO: fix selection by cursor not sending updates
-void ViewStatusController::onSelectedDataChanged( const Kasten2::AbstractModelSelection* modelSelection )
+void ViewStatusController::onSelectedDataChanged( const Kasten::AbstractModelSelection* modelSelection )
 {
     const ByteArraySelection* byteArraySelection = static_cast<const ByteArraySelection*>( modelSelection );
     const Okteta::AddressRange selection = byteArraySelection->range();
@@ -237,7 +237,7 @@ void ViewStatusController::onSelectedDataChanged( const Kasten2::AbstractModelSe
 
         const QString bytesCount = i18np( "1 byte", "%1 bytes", selection.width() );
         selectionString = i18nc( "@info:status selection: start offset - end offset (number of bytes)",
-                                 "Selection: %1 - %2 (%3)", QLatin1String(codedSelectionStart), QLatin1String(codedSelectionEnd), bytesCount );
+                                 "Selection: %1 - %2 (%3)", QString::fromUtf8(codedSelectionStart), QString::fromUtf8(codedSelectionEnd), bytesCount );
     }
     else
         selectionString = i18nc( "@info:status offset value not available", "Selection: -" );

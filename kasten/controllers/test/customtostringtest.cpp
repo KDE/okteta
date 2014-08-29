@@ -19,8 +19,7 @@
  */
 #include <QtTest/QtTest>
 #include <QScriptEngine>
-#include <KGlobal>
-#include <KStandardDirs>
+
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/parsers/scriptvalueconverter.h"
 #include "view/structures/datatypes/topleveldatainformation.h"
@@ -36,13 +35,6 @@ private Q_SLOTS:
     void testUuid();
 };
 
-void CustomToStringTest::initTestCase()
-{
-    //needed so that imports can be resolved
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QLatin1String(SRCDIR "/test/resources")));
-    QVERIFY(KGlobal::dirs()->addResourceDir("data", QLatin1String(SRCDIR "/view/structures/examples")));
-}
-
 static uchar uuid1[16] =
 {
     0x55,0x0e,0x84,0x00,0xe2,0x9b,0x41,0xd4,0xa7,0x16,0x44,0x66,0x55,0x44,0x00,0x00
@@ -57,6 +49,14 @@ static uchar nullUuid[16] =
 {
     0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0
 };
+
+void CustomToStringTest::initTestCase()
+{
+    //needed so that imports can be resolved
+    QString examples = QFINDTESTDATA("../view/structures/examples");
+    QVERIFY2(!examples.isEmpty(), "Test data must exist!");
+    qputenv("XDG_DATA_DIRS", QFile::encodeName(QFileInfo(examples).absoluteFilePath()));
+}
 
 void CustomToStringTest::testUuid_data()
 {
@@ -119,11 +119,11 @@ void CustomToStringTest::testUuid()
     QCOMPARE(structure->childAt(1)->asPrimitive()->value().value<quint16>(), val2);
     QCOMPARE(structure->childAt(2)->asPrimitive()->value().value<quint16>(), val3);
 
-    QString typeStr = isGUID ? QLatin1String("GUID") : QLatin1String("UUID");
+    QString typeStr = isGUID ? QStringLiteral("GUID") : QStringLiteral("UUID");
     QCOMPARE(structure->typeName(), typeStr);
     QCOMPARE(structure->valueString(), uuidString);
 }
 
-QTEST_MAIN(CustomToStringTest)
+QTEST_GUILESS_MAIN(CustomToStringTest)
 
 #include "customtostringtest.moc"

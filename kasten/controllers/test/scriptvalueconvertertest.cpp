@@ -21,7 +21,7 @@
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/allprimitivetypes.h"
 
-#include <QtTest>
+#include <QtTest/QTest>
 #include <QString>
 #include <QDebug>
 #include <QScriptEngine>
@@ -56,12 +56,12 @@ private:
 DataInformation* ScriptValueConverterTest::convert(const QString& code)
 {
     QScriptValue value = engine->evaluate(code);
-    return ScriptValueConverter::convert(value, QLatin1String("value"), logger.data());
+    return ScriptValueConverter::convert(value, QStringLiteral("value"), logger.data());
 }
 
 DataInformation* ScriptValueConverterTest::convert(const QScriptValue& value)
 {
-    return ScriptValueConverter::convert(value, QLatin1String("value"), logger.data());
+    return ScriptValueConverter::convert(value, QStringLiteral("value"), logger.data());
 }
 
 QScriptValue ScriptValueConverterTest::evaluate(const char* code)
@@ -85,12 +85,12 @@ void ScriptValueConverterTest::basicConverterTest()
     QVector<DataInformation*> converted = ScriptValueConverter::convertValues(sVal, logger.data());
     QCOMPARE(converted.size(), 3);
     QVERIFY(converted[0]->isPrimitive());
-    QCOMPARE(converted[0]->name(), QLatin1String("value"));
+    QCOMPARE(converted[0]->name(), QStringLiteral("value"));
     QVERIFY(converted[1]->isStruct());
-    QCOMPARE(converted[1]->name(), QLatin1String("str"));
+    QCOMPARE(converted[1]->name(), QStringLiteral("str"));
     QCOMPARE(converted[1]->childCount(), 2u);
     QVERIFY(converted[2]->isArray());
-    QCOMPARE(converted[2]->name(), QLatin1String("obj"));
+    QCOMPARE(converted[2]->name(), QStringLiteral("obj"));
     QCOMPARE(converted[2]->childCount(), 10u);
 
     //test with an array now
@@ -104,9 +104,9 @@ void ScriptValueConverterTest::basicConverterTest()
     QVERIFY(converted[0]->asPrimitive()->type() == Type_UInt8);
     QVERIFY(converted[1]->asPrimitive()->type() == Type_UInt16);
     QVERIFY(converted[2]->asPrimitive()->type() == Type_UInt32);
-    QCOMPARE(converted[0]->name(), QLatin1String("0"));
-    QCOMPARE(converted[1]->name(), QLatin1String("1"));
-    QCOMPARE(converted[2]->name(), QLatin1String("2"));
+    QCOMPARE(converted[0]->name(), QStringLiteral("0"));
+    QCOMPARE(converted[1]->name(), QStringLiteral("1"));
+    QCOMPARE(converted[2]->name(), QStringLiteral("2"));
 
     //check number is not a valid object
     sVal = evaluate("1 + 2");
@@ -212,9 +212,9 @@ void ScriptValueConverterTest::testPrimitives()
 
     if (type == Type_Invalid)
         return; //the cast will fail
-    QScopedPointer<DataInformation> data1(ScriptValueConverter::convert(val1, QLatin1String("val1"),
+    QScopedPointer<DataInformation> data1(ScriptValueConverter::convert(val1, QStringLiteral("val1"),
             logger.data()));
-    QScopedPointer<DataInformation> data2(ScriptValueConverter::convert(val2, QLatin1String("val2"),
+    QScopedPointer<DataInformation> data2(ScriptValueConverter::convert(val2, QStringLiteral("val2"),
             logger.data()));
     QVERIFY(data1);
     QVERIFY(data2);
@@ -226,7 +226,7 @@ void ScriptValueConverterTest::testPrimitives()
     QCOMPARE(p2->type(), type);
     if (type == Type_Bitfield)
         return; //the following tests don't work with bitfields
-    QScopedPointer<DataInformation> data3(convert(QString(QLatin1String("\"%1\"")).arg(typeString)));
+    QScopedPointer<DataInformation> data3(convert(QString(QStringLiteral("\"%1\"")).arg(typeString)));
     QVERIFY(data3);
     PrimitiveDataInformation* p3 = data3->asPrimitive();
     QVERIFY(p3);
@@ -245,9 +245,9 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(!val.isNull());
     QVERIFY(!val.isUndefined());
     QVERIFY(val.isObject());
-    QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE).toString(), QString(QLatin1String("enum")));
+    QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE).toString(), QString(QStringLiteral("enum")));
 
-    QScopedPointer<DataInformation> data (ScriptValueConverter::convert(val, QLatin1String("val"), logger.data()));
+    QScopedPointer<DataInformation> data (ScriptValueConverter::convert(val, QStringLiteral("val"), logger.data()));
     if (expectedCount > 0)
         QVERIFY(data);
     else
@@ -265,7 +265,7 @@ void ScriptValueConverterTest::testParseEnum()
     {
         QFETCH(quint64, expectedValue);
         //to ensure it does not match when value is not found add 1 to the default
-        AllPrimitiveTypes result = enumVals.key(QLatin1String("value"), expectedValue + 1);
+        AllPrimitiveTypes result = enumVals.key(QStringLiteral("value"), expectedValue + 1);
         QCOMPARE(result.value<quint64>(), expectedValue);
     }
 }
@@ -274,13 +274,13 @@ namespace
 {
 inline QString arg2(const QString& str, const char* arg_1, const char* arg_2)
 {
-    return str.arg(QLatin1String(arg_1), QLatin1String(arg_2));
+    return str.arg(QString::fromUtf8(arg_1), QString::fromUtf8(arg_2));
 }
 }
 
 void ScriptValueConverterTest::testParseEnum_data()
 {
-    QString baseStr = QLatin1String("enumeration(\"someValues\", %1, { value : %2})");
+    QString baseStr = QStringLiteral("enumeration(\"someValues\", %1, { value : %2})");
     QTest::addColumn<QString>("code");
     QTest::addColumn<int>("expectedCount");
     QTest::addColumn<quint64>("expectedValue");
@@ -309,6 +309,6 @@ void ScriptValueConverterTest::testParseEnum_data()
             << quint64(18446744073709551615UL);
 }
 
-QTEST_MAIN(ScriptValueConverterTest)
+QTEST_GUILESS_MAIN(ScriptValueConverterTest)
 
 #include "scriptvalueconvertertest.moc"

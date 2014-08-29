@@ -24,7 +24,7 @@
 #include "multidocumentstrategy_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 MultiDocumentStrategy::MultiDocumentStrategy( DocumentManager* documentManager,
@@ -94,7 +94,7 @@ void MultiDocumentStrategy::createNewWithGenerator( AbstractModelDataGenerator* 
     d->createNewWithGenerator( generator );
 }
 
-void MultiDocumentStrategy::load( const KUrl& url )
+void MultiDocumentStrategy::load( const QUrl& url )
 {
     Q_D( MultiDocumentStrategy );
 

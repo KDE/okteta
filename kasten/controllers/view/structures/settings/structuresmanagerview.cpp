@@ -27,32 +27,29 @@
 #include "structviewpreferences.h"
 #include "../structuresmanager.h"
 #include "../structtool.h"
-// KDE
-#include <KFileDialog>
-#include <KStandardDirs>
-#include <KIO/NetAccess>
-#include <KMessageBox>
+#include "../structlogging.h"
+// KF5
 #include <KPluginSelector>
 #include <KConfigDialogManager>
 #include <KPluginInfo>
-#include <KPushButton>
-#include <KDialog>
-//KNS
-#include <KNS3/KNewStuffButton>
+#include <KLocalizedString>
+#include <KNS3/Button>
 // Qt
-#include <QtGui/QListWidgetItem>
-#include <QtGui/QLayout>
-#include <QtGui/QSizePolicy>
-#include <KDebug>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QPushButton>
+#include <QListWidgetItem>
+#include <QLayout>
+#include <QSizePolicy>
 
 static const int FileNameRole = Qt::UserRole;
 
-StructuresManagerView::StructuresManagerView(Kasten2::StructTool* tool, QWidget* parent)
+StructuresManagerView::StructuresManagerView(Kasten::StructTool* tool, QWidget* parent)
     : QWidget(parent), mTool(tool), mStructuresSelector(0), mRebuildingPluginsList(false)
 {
-    KConfigDialogManager::changedMap()->insert(QLatin1String("StructuresManagerView"), SIGNAL(changed(QStringList)));
-    setObjectName(QLatin1String("kcfg_LoadedStructures"));
-    mSelectedStructures = Kasten2::StructViewPreferences::loadedStructures();
+    KConfigDialogManager::changedMap()->insert(QStringLiteral("StructuresManagerView"), SIGNAL(changed(QStringList)));
+    setObjectName(QStringLiteral("kcfg_LoadedStructures"));
+    mSelectedStructures = Kasten::StructViewPreferences::loadedStructures();
 
     QVBoxLayout* pageLayout = new QVBoxLayout();
     setLayout(pageLayout);
@@ -64,13 +61,13 @@ StructuresManagerView::StructuresManagerView(Kasten2::StructTool* tool, QWidget*
     pageLayout->addLayout(buttonsLayout);
 
     mGetNewStructuresButton = new KNS3::Button(i18n("Get New Structures..."),
-                                               QLatin1String("okteta-structures.knsrc"), this);
-    connect(mGetNewStructuresButton, SIGNAL(dialogFinished(KNS3::Entry::List)),
-            SLOT(onGetNewStructuresClicked(KNS3::Entry::List)));
+                                               QStringLiteral("okteta-structures.knsrc"), this);
+    connect(mGetNewStructuresButton, &KNS3::Button::dialogFinished,
+            this, &StructuresManagerView::onGetNewStructuresClicked);
     buttonsLayout->addWidget(mGetNewStructuresButton);
 
-    mAdvancedSelectionButton = new KPushButton(KIcon(QLatin1String("configure")), i18n("Advanced Selection..."), this);
-    connect(mAdvancedSelectionButton, SIGNAL(clicked()), SLOT(advancedSelection()));
+    mAdvancedSelectionButton = new QPushButton(QIcon::fromTheme(QStringLiteral("configure")), i18n("Advanced Selection..."), this);
+    connect(mAdvancedSelectionButton, &QPushButton::clicked, this, &StructuresManagerView::advancedSelection);
     buttonsLayout->addWidget(mAdvancedSelectionButton);
 }
 
@@ -78,21 +75,21 @@ void StructuresManagerView::onGetNewStructuresClicked(const KNS3::Entry::List& c
 {
     foreach (const KNS3::Entry& e, changedEntries)
         {
-            kDebug() << "Changed Entry: " << e.name();
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Changed Entry: " << e.name();
             if (e.status() == KNS3::Entry::Installed)
             {
                 //new element installed
-                kDebug() << "installed files:" << e.installedFiles();
+                qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed files:" << e.installedFiles();
             }
             if (e.status() == KNS3::Entry::Deleted)
             {
                 //element uninstalled
-                kDebug() << "deleted files:" << e.uninstalledFiles();
+                qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "deleted files:" << e.uninstalledFiles();
             }
         }
     if (!changedEntries.isEmpty())
     {
-        kDebug() << "installed structures changed ->  rebuilding list of installed structures";
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed structures changed ->  rebuilding list of installed structures";
         mTool->manager()->reloadPaths();
         rebuildPluginSelectorEntries();
     }
@@ -107,12 +104,21 @@ QStringList StructuresManagerView::values()
 void StructuresManagerView::advancedSelection()
 {
     StructureAddRemoveWidget* advancedSelectionWidget = new StructureAddRemoveWidget(mSelectedStructures, mTool, this);
-    QPointer<KDialog> dlg = new KDialog(this); //the dlg-on-heap-variant
-    dlg->setMainWidget(advancedSelectionWidget);
+    QPointer<QDialog> dlg = new QDialog(this); //the dlg-on-heap-variant
+    QVBoxLayout* layout = new QVBoxLayout;
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    dialogButtonBox->addButton(QDialogButtonBox::Ok);
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, dlg.data(), &QDialog::accept);
+    dialogButtonBox->addButton(QDialogButtonBox::Cancel);
+    connect(dialogButtonBox, &QDialogButtonBox::rejected, dlg.data(), &QDialog::reject);
+    layout->addWidget(advancedSelectionWidget);
+    layout->addWidget(dialogButtonBox);
+    dlg->setLayout(layout);
     if (dlg->exec() == QDialog::Accepted) {
         QStringList newVals = advancedSelectionWidget->values();
         if (newVals != mSelectedStructures) {
-            kDebug() << "selection changed from " << mSelectedStructures << "to" << newVals;
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                    << "selection changed from " << mSelectedStructures << "to" << newVals;
             mSelectedStructures = newVals;
             emit changed(newVals);
         }
@@ -124,7 +130,8 @@ void StructuresManagerView::onPluginSelectorChange(bool change)
 {
     if (mRebuildingPluginsList)
         return;
-    kDebug() << "pluginselector changed: " << change;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+            << "pluginselector changed: " << change;
     if (!change)
         return;
     mStructuresSelector->save();
@@ -133,19 +140,20 @@ void StructuresManagerView::onPluginSelectorChange(bool change)
 
 void StructuresManagerView::reloadSelectedItems() {
     QStringList newVals;
-    foreach(const Kasten2::StructureDefinitionFile* def, mTool->manager()->structureDefs())
+    foreach(const Kasten::StructureDefinitionFile* def, mTool->manager()->structureDefs())
     {
         KPluginInfo info = def->pluginInfo();
         if (info.isPluginEnabled())
-            newVals.append(QString(QLatin1String("\'%1\':\'*\'")).arg(info.pluginName()));
+            newVals.append(QString(QStringLiteral("\'%1\':\'*\'")).arg(info.pluginName()));
     }
     if (newVals != mSelectedStructures) {
-        kDebug() << "selection changed from " << mSelectedStructures << "to" << newVals;
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                << "selection changed from " << mSelectedStructures << "to" << newVals;
         mSelectedStructures = newVals;
         emit changed(newVals);
     }
     else {
-        kDebug() << "no change:" << mSelectedStructures;
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no change:" << mSelectedStructures;
     }
 }
 
@@ -155,12 +163,12 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     QStringList newVals;
     KPluginInfo::List plugins;
     KPluginInfo::List dynamicPlugins;
-    foreach(const Kasten2::StructureDefinitionFile* def, mTool->manager()->structureDefs())
+    foreach(const Kasten::StructureDefinitionFile* def, mTool->manager()->structureDefs())
         {
             KPluginInfo info = def->pluginInfo();
-            if (info.category() == QLatin1String("structure"))
+            if (info.category() == QStringLiteral("structure"))
                 plugins.append(info);
-            else if (info.category() == QLatin1String("structure/js"))
+            else if (info.category() == QStringLiteral("structure/js"))
                 dynamicPlugins.append(info);
         }
 
@@ -173,14 +181,14 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
         delete mStructuresSelector;
     }
     mStructuresSelector = new KPluginSelector(this);
-    connect(mStructuresSelector, SIGNAL(changed(bool)),
-            SLOT(onPluginSelectorChange(bool)));
+    connect(mStructuresSelector, &KPluginSelector::changed,
+            this, &StructuresManagerView::onPluginSelectorChange);
     layoutObj->insertWidget(0, mStructuresSelector);
 
     mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
-            "Structure Definitions"), QLatin1String("structure"), mTool->manager()->config());
+            "Structure Definitions"), QStringLiteral("structure"), mTool->manager()->config());
     mStructuresSelector->addPlugins(dynamicPlugins, KPluginSelector::ReadConfigFile,
-            i18n("Dynamic Structure Definitions"), QLatin1String("structure/js"),
+            i18n("Dynamic Structure Definitions"), QStringLiteral("structure/js"),
             mTool->manager()->config());
     mStructuresSelector->load();
     mStructuresSelector->updatePluginsState();

@@ -23,20 +23,20 @@
 #include "../structtool.h"
 #include "../structuresmanager.h"
 #include "../structuredefinitionfile.h"
+#include "../structlogging.h"
 
-#include <KPushButton>
+#include <QPushButton>
 #include <QLabel>
 #include <QLayout>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 
 #include <QRegExp>
-#include <KLocale>
-#include <KDebug>
+#include <KLocalizedString>
 #include <KConfigDialogManager>
 
-using namespace Kasten2;
-StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, Kasten2::StructTool* tool, QWidget* parent) :
+using namespace Kasten;
+StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, Kasten::StructTool* tool, QWidget* parent) :
     QWidget(parent), mTool(tool)
 {
     QHBoxLayout* baseLayout;
@@ -46,6 +46,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
     QVBoxLayout* upDownLayout;
 
     baseLayout = new QHBoxLayout();
+    baseLayout->setMargin(0);
 
     tree1Layout = new QVBoxLayout();
     mTree1Label = new QLabel(i18nc("@info:label", "Installed structures:"), this);
@@ -69,17 +70,17 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
 
     leftRightLayout = new QVBoxLayout();
     leftRightLayout->addStretch();
-    mRightButton = new KPushButton(KIcon(QLatin1String("arrow-right")), QString(), this);
+    mRightButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-right")), QString(), this);
     leftRightLayout->addWidget(mRightButton);
-    mLeftButton = new KPushButton(KIcon(QLatin1String("arrow-left")), QString(), this);
+    mLeftButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-left")), QString(), this);
     leftRightLayout->addWidget(mLeftButton);
     leftRightLayout->addStretch();
 
     upDownLayout = new QVBoxLayout();
     upDownLayout->addStretch();
-    mUpButton = new KPushButton(KIcon(QLatin1String("arrow-up")), QString(), this);
+    mUpButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-up")), QString(), this);
     upDownLayout->addWidget(mUpButton);
-    mDownButton = new KPushButton(KIcon(QLatin1String("arrow-down")), QString(), this);
+    mDownButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-down")), QString(), this);
     upDownLayout->addWidget(mDownButton);
     upDownLayout->addStretch();
 
@@ -89,15 +90,15 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
     baseLayout->addLayout(upDownLayout);
     setLayout(baseLayout);
 
-    connect(mLeftButton, SIGNAL(pressed()), SLOT(moveLeft()));
-    connect(mRightButton, SIGNAL(pressed()), SLOT(moveRight()));
-    connect(mUpButton, SIGNAL(pressed()), SLOT(moveUp()));
-    connect(mDownButton, SIGNAL(pressed()), SLOT(moveDown()));
+    connect(mLeftButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveLeft);
+    connect(mRightButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveRight);
+    connect(mUpButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveUp);
+    connect(mDownButton, &QPushButton::pressed, this, &StructureAddRemoveWidget::moveDown);
 
     buildAvailableList();
 
     //already loaded defs:
-    QRegExp regex(QLatin1String("'(.+)':'(.+)'"));
+    QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
     foreach(const QString& s, selected)
     {
         int pos = regex.indexIn(s);
@@ -105,7 +106,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
         {
             QString pluginName = regex.cap(1);
             QString structName = regex.cap(2);
-            if (structName == QLatin1String("*")) {
+            if (structName == QStringLiteral("*")) {
                 //add all of them
                 for (int i = 0; i < mTreeAvailable->topLevelItemCount(); i++)
                 {
@@ -243,7 +244,7 @@ void StructureAddRemoveWidget::syncData()
         QString dataStr = QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1), item->text(0));
         strings.append(dataStr);
     }
-    kDebug() << "selection changed to: " << strings;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "selection changed to: " << strings;
     mValues = strings;
 }
 
@@ -265,14 +266,15 @@ void StructureAddRemoveWidget::updateAvailable()
     }
     bool changed = false;
     QList<QTreeWidgetItem*> toRemove;
-    kDebug() << "paths = " << plugins;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "paths = " << plugins;
     for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i)
     {
         QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
         //text(1) is plugin name
         if (!plugins.contains(item->text(1)))
         {
-            kDebug() << "removed item: " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                    << "removed item: " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
                         item->text(0));
 
             changed = true;
@@ -280,13 +282,15 @@ void StructureAddRemoveWidget::updateAvailable()
         }
         else
         {
-            kDebug() << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                    << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(item->text(1),
                     item->text(0)) << "still loaded -> keep";
         }
     }
     foreach(QTreeWidgetItem* itm,toRemove)
     {
-        kDebug() << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(itm->text(1),
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                << "item " << QString::fromLatin1("\'%1\':\'%2\'").arg(itm->text(1),
                 itm->text(0)) << "removed";
         delete mTreeSelected->takeTopLevelItem(mTreeSelected->indexOfTopLevelItem(itm));
     }

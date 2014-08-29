@@ -26,11 +26,11 @@
 #include "framestopaperprinter.h"
 // #include "printthread.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 // #include <QtGui/QFontDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int PrintMaxEventProcessTimeInMS = 100;
@@ -51,7 +51,7 @@ void PrintJob::start()
 
 bool PrintJob::exec()
 {
-    connect( mFramesPrinter, SIGNAL(printedPage(int)), SLOT(onPagePrinted()) );
+    connect( mFramesPrinter, &FramesToPaperPrinter::printedPage, this, &PrintJob::onPagePrinted );
 
     const bool result = mFramesPrinter->print( mPrinter, mFirstPage, mLastPage );
 

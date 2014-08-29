@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012-2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,21 +25,22 @@
 
 // lib
 #include <bytearrayviewprofile.h>
-// KDE
-#include <KDialog>
+// Qt
+#include <QtWidgets/QDialog>
 
 template< class C > class QList;
 class QTreeView;
+class QPushButton;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayViewProfileManager;
 class ViewProfileTableModel;
 
 
-class ViewProfilesManageDialog : public KDialog
+class ViewProfilesManageDialog : public QDialog
 {
   Q_OBJECT
 
@@ -58,9 +59,9 @@ class ViewProfilesManageDialog : public KDialog
     void onDeleteButtonClicked();
 
     void onModelReset();
-    void onViewProfilesLocked( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
-    void onViewProfilesUnlocked( const QList<Kasten2::ByteArrayViewProfile::Id>& viewProfileIds );
-    void onDefaultViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId );
+    void onViewProfilesLocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onViewProfilesUnlocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onDefaultViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
 
   private:
     ByteArrayViewProfileManager* mViewProfileManager;
@@ -68,9 +69,11 @@ class ViewProfilesManageDialog : public KDialog
     ByteArrayViewProfile::Id mCurrentViewProfileId;
 
     QTreeView* mViewProfileTableView;
-    KPushButton* mEditButton;
-    KPushButton* mSetDefaultButton;
-    KPushButton* mDeleteButton;
+    QPushButton* mEditButton;
+    QPushButton* mSetDefaultButton;
+    QPushButton* mDeleteButton;
+
+    QPushButton* mCloseButton;
 };
 
 }

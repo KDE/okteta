@@ -22,7 +22,6 @@
 
 #include "bytearraycolumnview.h"
 #include "bytearraycolumnview_p.h"
-#include "bytearraycolumnview.moc" // due to Q_PRIVATE_SLOT
 
 
 namespace Okteta

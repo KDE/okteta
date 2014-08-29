@@ -27,17 +27,17 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <valuecodec.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ValuesStreamEncoderSettings::ValuesStreamEncoderSettings()
- : valueCoding( Okteta::HexadecimalCoding), separation( QLatin1String(" ") )
+ : valueCoding( Okteta::HexadecimalCoding), separation( QStringLiteral(" ") )
 {}
 
 ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()

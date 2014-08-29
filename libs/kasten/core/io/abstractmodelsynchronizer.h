@@ -29,10 +29,10 @@
 // Qt
 #include <QtCore/QObject>
 
-class KUrl;
+class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractLoadJob;
@@ -78,7 +78,7 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     virtual ~AbstractModelSynchronizer();
 
   public:
-    KUrl url() const;
+    QUrl url() const;
 
   public: // API to be implemented
     // TODO: makes this a job, too
@@ -86,14 +86,14 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
 //     virtual void startOffering( AbstractDocument* document ) = 0;
     // TODO: once the synchronizer is attached to a document, this function should not be called
     // is there a way to ensure this?
-    virtual AbstractLoadJob* startLoad( const KUrl& url ) = 0;
+    virtual AbstractLoadJob* startLoad( const QUrl& url ) = 0;
     /** */
     // TODO: not in constructor? cannot be called twice, each synchronizer is attached to its document
-//     virtual AbstractDocument* createWorkingCopy( const KUrl& originUrl, int* success ) const = 0;
+//     virtual AbstractDocument* createWorkingCopy( const QUrl& originUrl, int* success ) const = 0;
 
     /** */
     // TODO: static? or by function? or another class? but 
-//     virtual void copyTo( const KUrl& url, AbstractDocument* document, int* success ) const = 0;
+//     virtual void copyTo( const QUrl& url, AbstractDocument* document, int* success ) const = 0;
 
     /** overwrite remote with local (save) */
     virtual AbstractSyncToRemoteJob* startSyncToRemote() = 0;
@@ -101,10 +101,10 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     virtual AbstractSyncFromRemoteJob* startSyncFromRemote() = 0;
 
     /** changes the  */ // TODO: better name for replace: overwrite?
-    virtual AbstractSyncWithRemoteJob* startSyncWithRemote( const KUrl& url, AbstractModelSynchronizer::ConnectOption option ) = 0;
+    virtual AbstractSyncWithRemoteJob* startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) = 0;
 
     virtual AbstractConnectJob* startConnect( AbstractDocument* document,
-                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option ) = 0;
+                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) = 0;
 //     virtual bool syncBiDirectly() = 0;
 //     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();
@@ -115,7 +115,7 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
 
 
   Q_SIGNALS:
-    void urlChanged( const KUrl& url );
+    void urlChanged( const QUrl& url );
     // TODO: next two could be part of an interface? parameter quite specific
     void dataPulled( int ) const;
     void dataPushed( int ) const;
@@ -123,11 +123,11 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
     // TODO: this signal should be part of AbstractModel?
-    void localSyncStateChanged( Kasten2::LocalSyncState newState );
-    void remoteSyncStateChanged( Kasten2::RemoteSyncState newState );
+    void localSyncStateChanged( Kasten::LocalSyncState newState );
+    void remoteSyncStateChanged( Kasten::RemoteSyncState newState );
 
   protected: // get
-    void setUrl( const KUrl& url );
+    void setUrl( const QUrl& url );
 
   protected:
     Q_DECLARE_PRIVATE( AbstractModelSynchronizer )

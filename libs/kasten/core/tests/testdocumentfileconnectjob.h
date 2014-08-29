@@ -27,7 +27,7 @@
 #include <abstractfilesystemconnectjob.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class TestDocumentFileSynchronizer;
@@ -40,7 +40,7 @@ class TestDocumentFileConnectJob : public AbstractFileSystemConnectJob
 
   public:
     TestDocumentFileConnectJob( TestDocumentFileSynchronizer* synchronizer, AbstractDocument* document,
-                                const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~TestDocumentFileConnectJob();
 
   protected: // AbstractFileSystemLoadJob API

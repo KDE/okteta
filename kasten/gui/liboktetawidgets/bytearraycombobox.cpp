@@ -22,7 +22,6 @@
 
 #include "bytearraycombobox.h"
 #include "bytearraycombobox_p.h"
-#include "bytearraycombobox.moc"
 
 
 namespace Okteta
@@ -107,3 +106,6 @@ ByteArrayComboBox::~ByteArrayComboBox()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_bytearraycombobox.cpp"

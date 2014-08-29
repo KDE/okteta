@@ -57,7 +57,7 @@ bool PieceTable::getStorageData( int* storageId, Address* storageOffset, Address
         if( dataRange.includes(dataOffset) )
         {
             *storageId = piece.storageId();
-// kDebug() <<piece.start()<<"+"<<dataRange.localIndex( dataOffset );
+// qCDebug(LOG_OKTETA_CORE) <<piece.start()<<"+"<<dataRange.localIndex( dataOffset );
             *storageOffset = piece.start() + dataRange.localIndex( dataOffset );
             result = true;
             break;
@@ -215,7 +215,7 @@ PieceList PieceTable::remove( const AddressRange& removeRange )
 
                 mList.insert( ++it, secondPiece );
                 removedPieceList.append( removedPiece );
-// kDebug() << "removed intern";
+// qCDebug(LOG_OKTETA_CORE) << "removed intern";
                 break;
             }
             do
@@ -223,7 +223,7 @@ PieceList PieceTable::remove( const AddressRange& removeRange )
                 if( dataRange.includes(removeRange.end()) )
                 {
                     QLinkedList<Piece>::Iterator lastRemoved = it;
-// kDebug() << removeRange.start() << removeRange.end() << firstDataRangeStart << dataRange.end();
+// qCDebug(LOG_OKTETA_CORE) << removeRange.start() << removeRange.end() << firstDataRangeStart << dataRange.end();
                     // cut from first section if not all
                     bool onlyCompletePiecesRemoved = true;
                     if( firstDataRangeStart < removeRange.start() )
@@ -234,7 +234,7 @@ PieceList PieceTable::remove( const AddressRange& removeRange )
 
                         ++firstRemoved;
                         onlyCompletePiecesRemoved = false;
-// kDebug() << "end of first removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
+// qCDebug(LOG_OKTETA_CORE) << "end of first removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
 // --sections;
                     }
 
@@ -246,7 +246,7 @@ PieceList PieceTable::remove( const AddressRange& removeRange )
                         removedPartialPieceFromLast = piece->removeStartBeforeLocal( newLocalStart );
 
                         onlyCompletePiecesRemoved = false;
-// kDebug() << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPartialPieceFromLast.start()<<removedPartialPieceFromLast.end();
+// qCDebug(LOG_OKTETA_CORE) << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPartialPieceFromLast.start()<<removedPartialPieceFromLast.end();
 // --sections;
                     }
                     else
@@ -270,7 +270,7 @@ PieceList PieceTable::remove( const AddressRange& removeRange )
                     }
 
                     mList.erase( firstRemoved, lastRemoved );
-// kDebug() << "removed "<<sections;
+// qCDebug(LOG_OKTETA_CORE) << "removed "<<sections;
                     break;
                 }
                 dataRange.setStart( dataRange.nextBehindEnd() );
@@ -292,7 +292,7 @@ PieceList PieceTable::remove( const AddressRange& removeRange )
 
     mSize -= removeRange.width();
 
-// kDebug()<<"end:"<<asStringList(mList);
+// qCDebug(LOG_OKTETA_CORE)<<"end:"<<asStringList(mList);
     return removedPieceList;
 }
 

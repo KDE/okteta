@@ -23,7 +23,7 @@
 #ifndef OKTETAABOUT_H
 #define OKTETAABOUT_H
 
-// KDE
+// KF5
 #include <KAboutData>
 
 

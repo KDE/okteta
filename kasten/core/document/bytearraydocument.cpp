@@ -26,36 +26,36 @@
 #include <person.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KLocale>
-#include <KIcon>
+// KF5
+#include <KLocalizedString>
 
+using Okteta::PieceTableByteArrayModel;
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
   : mByteArray( new Okteta::PieceTableByteArrayModel() ),
     mInitDescription( initDescription )
 {
-    connect( mByteArray, SIGNAL(modifiedChanged(bool)), SLOT(onModelModified(bool)) );
-    connect( mByteArray, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
-    connect( mByteArray, SIGNAL(revertedToVersionIndex(int)), SIGNAL(revertedToVersionIndex(int)) );
-    connect( mByteArray, SIGNAL(headVersionChanged(int)), SIGNAL(headVersionChanged(int)) );
-    connect( mByteArray, SIGNAL(headVersionDescriptionChanged(QString)),
-             SLOT(onHeadVersionDescriptionChanged(QString)) );
+    connect( mByteArray, &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified );
+    connect( mByteArray, &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged );
+    connect( mByteArray, &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex );
+    connect( mByteArray, &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged );
+    connect( mByteArray, &PieceTableByteArrayModel::headVersionDescriptionChanged,
+             this, &ByteArrayDocument::onHeadVersionDescriptionChanged );
 }
 
 ByteArrayDocument::ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
   : mByteArray( byteArray ),
     mInitDescription( initDescription )
 {
-    connect( mByteArray, SIGNAL(modifiedChanged(bool)), SLOT(onModelModified(bool)) );
-    connect( mByteArray, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
-    connect( mByteArray, SIGNAL(revertedToVersionIndex(int)), SIGNAL(revertedToVersionIndex(int)) );
-    connect( mByteArray, SIGNAL(headVersionChanged(int)), SIGNAL(headVersionChanged(int)) );
-    connect( mByteArray, SIGNAL(headVersionDescriptionChanged(QString)),
-             SLOT(onHeadVersionDescriptionChanged(QString)) );
+    connect( mByteArray, &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified );
+    connect( mByteArray, &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged );
+    connect( mByteArray, &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex );
+    connect( mByteArray, &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged );
+    connect( mByteArray, &PieceTableByteArrayModel::headVersionDescriptionChanged,
+             this, &ByteArrayDocument::onHeadVersionDescriptionChanged );
 }
 
 Okteta::AbstractByteArrayModel* ByteArrayDocument::content() const { return mByteArray; }

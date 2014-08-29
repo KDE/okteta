@@ -79,6 +79,7 @@ BitCount64 PointerDataInformation::childPosition(const DataInformation* child, O
     Q_UNUSED(start)
     //TODO other pointer modes
     Q_ASSERT(child == mPointerTarget.data());
+    Q_UNUSED(child);
     return mWasAbleToRead ? mValue->value().value<quint64>() * 8 : 0;
 }
 

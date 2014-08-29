@@ -22,14 +22,14 @@
 #ifndef STRUCTUREADDREMOVEWIDGET_H
 #define STRUCTUREADDREMOVEWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
-class KPushButton;
+class QPushButton;
 class QLabel;
 class QTreeWidget;
 class KListWidget;
 
-namespace Kasten2
+namespace Kasten
 {
 class StructTool;
 }
@@ -43,15 +43,15 @@ Q_OBJECT
     QLabel* mTree2Label;
     QTreeWidget* mTreeSelected;
 
-    KPushButton* mRightButton;
-    KPushButton* mLeftButton;
+    QPushButton* mRightButton;
+    QPushButton* mLeftButton;
 
-    KPushButton* mUpButton;
-    KPushButton* mDownButton;
+    QPushButton* mUpButton;
+    QPushButton* mDownButton;
 
     QStringList mValues;
 public:
-    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten2::StructTool* tool, QWidget* parent = 0);
+    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten::StructTool* tool, QWidget* parent = 0);
     ~StructureAddRemoveWidget();
     QStringList values() const;
 public Q_SLOTS:
@@ -63,7 +63,7 @@ public Q_SLOTS:
 private:
     void buildAvailableList();
     void syncData();
-    const Kasten2::StructTool* mTool;
+    const Kasten::StructTool* mTool;
 };
 
 inline QStringList StructureAddRemoveWidget::values() const

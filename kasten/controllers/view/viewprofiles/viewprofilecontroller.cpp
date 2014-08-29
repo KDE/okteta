@@ -28,16 +28,17 @@
 #include <bytearrayviewprofilemanager.h>
 #include <bytearrayviewprofilesynchronizer.h>
 #include <bytearrayview.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionMenu>
 #include <KActionCollection>
-#include <KAction>
-#include <KLocale>
+#include <KLocalizedString>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewProfileManager,
@@ -52,31 +53,31 @@ ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewP
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mViewProfileActionMenu = actionCollection->add<KActionMenu>( QLatin1String("view_profile") );
+    mViewProfileActionMenu = actionCollection->add<KActionMenu>( QStringLiteral("view_profile") );
     mViewProfileActionMenu->setDelayed( false );
     mViewProfileActionMenu->setText( i18nc("@title:menu submenu to select the view profile or change it",
                                         "View Profile") );
 
     mCreateNewAction =
-        new QAction( KIcon( QLatin1String("document-new") ),
+        new QAction( QIcon::fromTheme( QStringLiteral("document-new") ),
                      i18nc("@title:menu create a new view profile",
                             "Create new..." ),
                      this );
-    connect( mCreateNewAction, SIGNAL(triggered(bool)), SLOT(onCreateNewActionTriggered()) );
+    connect( mCreateNewAction, &QAction::triggered, this, &ViewProfileController::onCreateNewActionTriggered );
 
     mSaveChangesAction =
-        new QAction( KIcon( QLatin1String("document-save") ),
+        new QAction( QIcon::fromTheme( QStringLiteral("document-save") ),
                      i18nc("@title:menu save changed to the view profile to the base profile",
                            "Save changes" ),
                      this );
-    connect( mSaveChangesAction, SIGNAL(triggered(bool)), SLOT(onSaveChangesActionTriggered()) );
+    connect( mSaveChangesAction, &QAction::triggered, this, &ViewProfileController::onSaveChangesActionTriggered );
 
     mResetChangesAction =
-        new QAction( KIcon(QLatin1String("document-revert")),
+        new QAction( QIcon::fromTheme( QStringLiteral("document-revert") ),
                      i18nc("@title:menu reset settings back to those of the saved base profile",
                            "Reset changes" ),
                      this );
-    connect( mResetChangesAction, SIGNAL(triggered(bool)), SLOT(onResetChangesActionTriggered()) );
+    connect( mResetChangesAction, &QAction::triggered, this, &ViewProfileController::onResetChangesActionTriggered );
 
     mViewProfileActionMenu->addAction( mCreateNewAction );
     mViewProfileActionMenu->addSeparator();
@@ -85,13 +86,13 @@ ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewP
 
     mViewProfilesActionGroup = new QActionGroup( this );
     mViewProfilesActionGroup->setExclusive( true );
-    connect( mViewProfilesActionGroup, SIGNAL(triggered(QAction*)),
-             SLOT(onViewProfileTriggered(QAction*)) );
+    connect( mViewProfilesActionGroup, &QActionGroup::triggered,
+             this, &ViewProfileController::onViewProfileTriggered );
 
-    connect( mViewProfileManager, SIGNAL(viewProfilesChanged(QList<Kasten2::ByteArrayViewProfile>)),
-             SLOT(onViewProfilesChanged()) );
-    connect( mViewProfileManager, SIGNAL(viewProfilesRemoved(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfilesChanged()) );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesChanged,
+             this, &ViewProfileController::onViewProfilesChanged );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesRemoved,
+             this, &ViewProfileController::onViewProfilesChanged );
 
     onViewProfilesChanged();
 
@@ -111,13 +112,13 @@ void ViewProfileController::setTargetModel( AbstractModel* model )
     {
         onViewProfileChanged( mByteArrayViewProfileSynchronizer->viewProfileId() );
 
-        connect( mByteArrayViewProfileSynchronizer, SIGNAL(viewProfileChanged(Kasten2::ByteArrayViewProfile::Id)),
-                 SLOT(onViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)) );
+        connect( mByteArrayViewProfileSynchronizer, &ByteArrayViewProfileSynchronizer::viewProfileChanged,
+                 this, &ViewProfileController::onViewProfileChanged );
 
         onLocalSyncStateChanged( mByteArrayViewProfileSynchronizer->localSyncState() );
 
-        connect( mByteArrayViewProfileSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                 SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
+        connect( mByteArrayViewProfileSynchronizer, &ByteArrayViewProfileSynchronizer::localSyncStateChanged,
+                 this, &ViewProfileController::onLocalSyncStateChanged );
     }
     else
     {
@@ -130,7 +131,7 @@ void ViewProfileController::setTargetModel( AbstractModel* model )
 }
 
 
-void ViewProfileController::onViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId )
+void ViewProfileController::onViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId )
 {
     const QList<QAction*> actions = mViewProfilesActionGroup->actions();
 
@@ -185,7 +186,7 @@ void ViewProfileController::onViewProfileTriggered( QAction* action )
     mByteArrayViewProfileSynchronizer->setViewProfileId( action->data().toString() );
 }
 
-void ViewProfileController::onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState )
+void ViewProfileController::onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState )
 {
     const bool hasDifference = ( localSyncState == LocalHasChanges );
 
@@ -219,7 +220,7 @@ void ViewProfileController::onCreateNewActionTriggered()
 
     const int answer = dialog->exec();
 
-    if( answer == KDialog::Accepted )
+    if( answer == QDialog::Accepted )
     {
         QList<ByteArrayViewProfile> viewProfiles;
         viewProfiles << dialog->viewProfile();

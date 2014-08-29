@@ -22,13 +22,12 @@
 
 #include "abstractmodelfilesystemsynchronizer.h"
 #include "abstractmodelfilesystemsynchronizer_p.h"
-#include "abstractmodelfilesystemsynchronizer.moc"
 
 // lib
 #include <abstractdocument.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d )
@@ -108,3 +107,6 @@ AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_abstractmodelfilesystemsynchronizer.cpp"

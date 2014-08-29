@@ -26,13 +26,13 @@
 // Kasten gui
 #include <abstracttoolwidget.h>
 
-class KPushButton;
-class KIntNumInput;
+class QPushButton;
+class QSpinBox;
 class QTreeView;
 class QModelIndex;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteTableTool;
@@ -60,9 +60,9 @@ class ByteTableView : public AbstractToolWidget
   private:
     ByteTableTool *mTool;
 
-    KIntNumInput* mInsertCountEdit;
+    QSpinBox* mInsertCountEdit;
     QTreeView *mByteTableView;
-    KPushButton *mInsertButton;
+    QPushButton *mInsertButton;
 };
 
 

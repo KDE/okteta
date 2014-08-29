@@ -24,7 +24,7 @@
 #define OKTETABROWSEREXTENSION_H
 
 
-// KDE
+// KF5
 #include <KParts/BrowserExtension>
 
 class OktetaPart;

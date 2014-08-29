@@ -33,17 +33,17 @@
 #include <modelcodecmanager.h>
 #include <abstractdocument.h>
 #include <abstractmodelexporter.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KSelectAction>
 
 
-Q_DECLARE_METATYPE( Kasten2::AbstractModelExporter* )
+Q_DECLARE_METATYPE( Kasten::AbstractModelExporter* )
 
-namespace Kasten2
+namespace Kasten
 {
 
 ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager,
@@ -56,9 +56,9 @@ ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mExportSelectAction = actionCollection->add<KSelectAction>( QLatin1String("export") );
+    mExportSelectAction = actionCollection->add<KSelectAction>( QStringLiteral("export") );
     mExportSelectAction->setText( i18nc("@title:menu","Export") );
-    mExportSelectAction->setIcon( KIcon( QLatin1String("document-export") ) );
+    mExportSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("document-export") ) );
     mExportSelectAction->setToolBarMode( KSelectAction::MenuMode );
     connect( mExportSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
 

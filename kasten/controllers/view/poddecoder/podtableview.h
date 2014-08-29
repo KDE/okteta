@@ -26,7 +26,7 @@
 // lib
 #include "abstractdifferentsizedialog.h"
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KComboBox;
 class QTreeView;
@@ -34,7 +34,7 @@ class QCheckBox;
 class QModelIndex;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class PODTableModel;

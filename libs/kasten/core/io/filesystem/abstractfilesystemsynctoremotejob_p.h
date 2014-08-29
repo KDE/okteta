@@ -28,12 +28,12 @@
 
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
-// KDE
-#include <KTemporaryFile>
-#include <KUrl>
+// Qt
+#include <QtCore/QUrl>
+#include <QtCore/QTemporaryFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobPrivate
 {

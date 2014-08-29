@@ -35,6 +35,7 @@
 
 // lib
 #include "checksumcalculatejob.h"
+#include "checksumlogging.h"
 //
 #include <bytearraychecksumalgorithmfactory.h>
 #include <abstractbytearraychecksumalgorithm.h>
@@ -43,15 +44,13 @@
 #include <bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
-
-#include <KDebug>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ChecksumTool::ChecksumTool()
@@ -63,12 +62,12 @@ ChecksumTool::ChecksumTool()
     mSourceAlgorithmId( -1 ),
     mSourceByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "Checksum" ) );
+    setObjectName( QStringLiteral( "Checksum" ) );
 
 // TODO: find a better place to do and store the initialization
 #ifdef HAVE_QCA2
     mQcaInitializer = new QCA::Initializer( QCA::Practical, 64 );
-kDebug()<< QCA::supportedFeatures();//Hash::supportedTypes();
+qCDebug(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM)<< QCA::supportedFeatures();//Hash::supportedTypes();
 #endif
 
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
@@ -104,8 +103,8 @@ void ChecksumTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
-                 SLOT(onSelectionChanged()) );
+        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                 this, &ChecksumTool::onSelectionChanged );
     }
 
     // TODO: if there is no view, there is nothing calculate a checksum from
@@ -147,10 +146,10 @@ void ChecksumTool::calculateChecksum()
         mSourceAlgorithmId = mAlgorithmId;
         mSourceByteArrayModel = mByteArrayModel;
         mSourceSelection = mByteArrayView->selection();
-        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                 SLOT(onSourceChanged()) );
-        connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
-                 SLOT(onSourceDestroyed()) );
+        connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
+                 this, &ChecksumTool::onSourceChanged );
+        connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
+                 this, &ChecksumTool::onSourceDestroyed );
 
         mChecksumUptodate = true;
         mSourceByteArrayModelUptodate = true;

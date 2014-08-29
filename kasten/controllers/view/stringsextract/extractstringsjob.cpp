@@ -27,10 +27,10 @@
 #include <charcodec.h>
 #include <character.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int ExtractStringBlockSize = 100000;

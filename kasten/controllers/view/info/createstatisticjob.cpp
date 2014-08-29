@@ -25,10 +25,10 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int StatisticBlockSize = 100000;

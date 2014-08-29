@@ -1,1 +1,1 @@
-#include "../../kasten2/dialoghandler.h"
+#include "../kasten/dialoghandler.h"

@@ -27,14 +27,14 @@
 // Kasten core
 #include <abstractmodelsynchronizer.h>
 #include <abstractdocument.h>
-// KDE
-#include <KLocale>
-#include <KIcon>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QLabel>
+#include <QLabel>
+#include <QIcon>
 
 
-namespace Kasten2
+namespace Kasten
 {
 static const int modifiedPixmapWidth = 16;
 
@@ -73,8 +73,8 @@ void ModifiedBarController::setTargetModel( AbstractModel* model )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
-                            SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
+        connect( mDocument, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
+                            SLOT(onSynchronizerChanged(Kasten::AbstractModelSynchronizer*)) );
     }
 
     mLocalStateLabel->setEnabled( mDocument );
@@ -96,7 +96,7 @@ void ModifiedBarController::onLocalSyncStateChanged( LocalSyncState localSyncSta
 
     // TODO: depend an statusbar height
     const QPixmap pixmap = isModified ?
-        KIcon( QLatin1String("document-save") ).pixmap(modifiedPixmapWidth) :
+		QIcon::fromTheme( QStringLiteral("document-save") ).pixmap(modifiedPixmapWidth) :
         QPixmap();
     mLocalStateLabel->setPixmap( pixmap );
 
@@ -118,7 +118,7 @@ void ModifiedBarController::onRemoteSyncStateChanged( RemoteSyncState remoteSync
 
     // TODO: depend an statusbar height
     const QPixmap pixmap = iconName ?
-        KIcon( QLatin1String(iconName) ).pixmap(modifiedPixmapWidth) :
+        QIcon::fromTheme( QLatin1String(iconName) ).pixmap(modifiedPixmapWidth) :
         QPixmap();
     mRemoteStateLabel->setPixmap( pixmap );
 
@@ -137,15 +137,15 @@ void ModifiedBarController::onSynchronizerChanged( AbstractModelSynchronizer* ne
     if( mSynchronizer )
     {
         if( ! oldSynchronizer )
-            mDocument->disconnect( this, SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+            mDocument->disconnect( this, SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
 
         localState = mSynchronizer->localSyncState();
         remoteState = mSynchronizer->remoteSyncState();
 
-        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
-                 SLOT(onLocalSyncStateChanged(Kasten2::LocalSyncState)) );
-        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
-                 SLOT(onRemoteSyncStateChanged(Kasten2::RemoteSyncState)) );
+        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
+                 SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
+        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
+                 SLOT(onRemoteSyncStateChanged(Kasten::RemoteSyncState)) );
         connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
                                 SLOT(onSynchronizerDeleted(QObject*)) );
     }
@@ -156,8 +156,8 @@ void ModifiedBarController::onSynchronizerChanged( AbstractModelSynchronizer* ne
         // TODO: onRemoteSyncStateChanged(...) checks for mSynchronizer and ignores this
         remoteState = RemoteInSync;
 
-        connect( mDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
-                 SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+        connect( mDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
+                 SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
     }
     else
     {
@@ -178,8 +178,8 @@ void ModifiedBarController::onSynchronizerDeleted( QObject* synchronizer )
     mSynchronizer = 0;
 
     // switch to document state
-    connect( mDocument, SIGNAL(contentFlagsChanged(Kasten2::ContentFlags)),
-             SLOT(onContentFlagsChanged(Kasten2::ContentFlags)) );
+    connect( mDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
+             SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
 
     onContentFlagsChanged( mDocument->contentFlags() );
         // TODO: onRemoteSyncStateChanged(...) checks for mSynchronizer and ignores the parameter

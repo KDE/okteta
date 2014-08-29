@@ -26,8 +26,8 @@
 #include <bytearraycolumnview.h>
 #include <bytearrayrowview.h>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QScrollBar>
+#include <QLayout>
+#include <QScrollBar>
 
 
 namespace Okteta
@@ -96,24 +96,24 @@ void ByteArrayJanusView::setViewModus( int viewModus )
         mView->setFocus();
     mViewModus = viewModus;
 
-    connect( mView, SIGNAL(hasSelectedDataChanged(bool)), SIGNAL(hasSelectedDataChanged(bool)) );
-    connect( mView, SIGNAL(selectionChanged(Okteta::AddressRange)), SIGNAL(selectionChanged(Okteta::AddressRange)) );
-    connect( mView, SIGNAL(readOnlyChanged(bool)), SIGNAL(readOnlyChanged(bool)) );
-    connect( mView, SIGNAL(overwriteModeChanged(bool)), SIGNAL(overwriteModeChanged(bool)) );
-    connect( mView, SIGNAL(cursorPositionChanged(Okteta::Address)), SIGNAL(cursorPositionChanged(Okteta::Address)) );
-    connect( mView, SIGNAL(valueCodingChanged(int)), SIGNAL(valueCodingChanged(int)) );
-    connect( mView, SIGNAL(charCodecChanged(QString)), SIGNAL(charCodecChanged(QString)) );
-    connect( mView, SIGNAL(focusChanged(bool)), SIGNAL(focusChanged(bool)) );
+    connect( mView, &AbstractByteArrayView::hasSelectedDataChanged, this, &ByteArrayJanusView::hasSelectedDataChanged );
+    connect( mView, &AbstractByteArrayView::selectionChanged, this, &ByteArrayJanusView::selectionChanged );
+    connect( mView, &AbstractByteArrayView::readOnlyChanged, this, &ByteArrayJanusView::readOnlyChanged );
+    connect( mView, &AbstractByteArrayView::overwriteModeChanged, this, &ByteArrayJanusView::overwriteModeChanged );
+    connect( mView, &AbstractByteArrayView::cursorPositionChanged, this, &ByteArrayJanusView::cursorPositionChanged );
+    connect( mView, &AbstractByteArrayView::valueCodingChanged, this, &ByteArrayJanusView::valueCodingChanged );
+    connect( mView, &AbstractByteArrayView::charCodecChanged, this, &ByteArrayJanusView::charCodecChanged );
+    connect( mView, &AbstractByteArrayView::focusChanged, this, &ByteArrayJanusView::focusChanged );
 
-    connect( mView, SIGNAL(offsetColumnVisibleChanged(bool)), SIGNAL(offsetColumnVisibleChanged(bool)) );
-    connect( mView, SIGNAL(offsetCodingChanged(int)), SIGNAL(offsetCodingChanged(int)) );
-    connect( mView, SIGNAL(visibleByteArrayCodingsChanged(int)), SIGNAL(visibleByteArrayCodingsChanged(int)) );
-    connect( mView, SIGNAL(layoutStyleChanged(int)), SIGNAL(layoutStyleChanged(int)) );
-    connect( mView, SIGNAL(noOfBytesPerLineChanged(int)), SIGNAL(noOfBytesPerLineChanged(int)) );
-    connect( mView, SIGNAL(showsNonprintingChanged(bool)), SIGNAL(showsNonprintingChanged(bool)) );
-    connect( mView, SIGNAL(substituteCharChanged(QChar)), SIGNAL(substituteCharChanged(QChar)) );
-    connect( mView, SIGNAL(undefinedCharChanged(QChar)), SIGNAL(undefinedCharChanged(QChar)) );
-    connect( mView, SIGNAL(noOfGroupedBytesChanged(int)), SIGNAL(noOfGroupedBytesChanged(int)) );
+    connect( mView, &AbstractByteArrayView::offsetColumnVisibleChanged, this, &ByteArrayJanusView::offsetColumnVisibleChanged );
+    connect( mView, &AbstractByteArrayView::offsetCodingChanged, this, &ByteArrayJanusView::offsetCodingChanged );
+    connect( mView, &AbstractByteArrayView::visibleByteArrayCodingsChanged, this, &ByteArrayJanusView::visibleByteArrayCodingsChanged );
+    connect( mView, &AbstractByteArrayView::layoutStyleChanged, this, &ByteArrayJanusView::layoutStyleChanged );
+    connect( mView, &AbstractByteArrayView::noOfBytesPerLineChanged, this, &ByteArrayJanusView::noOfBytesPerLineChanged );
+    connect( mView, &AbstractByteArrayView::showsNonprintingChanged, this, &ByteArrayJanusView::showsNonprintingChanged );
+    connect( mView, &AbstractByteArrayView::substituteCharChanged, this, &ByteArrayJanusView::substituteCharChanged );
+    connect( mView, &AbstractByteArrayView::undefinedCharChanged, this, &ByteArrayJanusView::undefinedCharChanged );
+    connect( mView, &AbstractByteArrayView::noOfGroupedBytesChanged, this, &ByteArrayJanusView::noOfGroupedBytesChanged );
 
     emit viewModusChanged( mViewModus );
 }

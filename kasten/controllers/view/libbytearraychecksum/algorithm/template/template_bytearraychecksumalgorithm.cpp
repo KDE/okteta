@@ -14,8 +14,8 @@
 
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
 Template_ByteArrayChecksumAlgorithm::Template_ByteArrayChecksumAlgorithm()

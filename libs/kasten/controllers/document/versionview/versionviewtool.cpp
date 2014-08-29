@@ -25,17 +25,17 @@
 // Kasten core
 #include <versionable.h>
 #include <abstractdocument.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 VersionViewTool::VersionViewTool()
  : mModel( 0 )
 {
-    setObjectName( QLatin1String( "Versions" ) );
+    setObjectName( QStringLiteral( "Versions" ) );
 }
 
 

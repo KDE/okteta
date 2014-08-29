@@ -33,20 +33,20 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QByteArray>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 FilterTool::FilterTool()
  : mByteArrayView( 0 ), mByteArrayModel( 0 ), mHasWritable( false )
 {
-    setObjectName( QLatin1String( "BinaryFilter" ) );
+    setObjectName( QStringLiteral( "BinaryFilter" ) );
 
     mFilterList = ByteArrayFilterFactory::createFilters();
 }
@@ -82,10 +82,10 @@ void FilterTool::setTargetModel( AbstractModel* model )
     if( hasByteArray )
     {
         newCharCodecName = mByteArrayView->charCodingName();
-        connect( mByteArrayView, SIGNAL(hasSelectedDataChanged(bool)), SLOT(onApplyableChanged()) );
-        connect( mByteArrayView, SIGNAL(readOnlyChanged(bool)),        SLOT(onApplyableChanged()) );
-        connect( mByteArrayView, SIGNAL(charCodecChanged(QString)),
-                 SIGNAL(charCodecChanged(QString)) );
+        connect( mByteArrayView, &ByteArrayView::hasSelectedDataChanged, this, &FilterTool::onApplyableChanged );
+        connect( mByteArrayView, &ByteArrayView::readOnlyChanged,        this, &FilterTool::onApplyableChanged );
+        connect( mByteArrayView, &ByteArrayView::charCodecChanged,
+                 this, &FilterTool::charCodecChanged );
     }
 
     onApplyableChanged();

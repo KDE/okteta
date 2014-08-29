@@ -28,14 +28,14 @@
 #include "testdocumentfilewritethread.h"
 #include "testdocument.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TestDocumentFileWriteToJob::TestDocumentFileWriteToJob( TestDocumentFileSynchronizer* synchronizer,
-                                         const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
 {}
 
@@ -46,7 +46,7 @@ void TestDocumentFileWriteToJob::startSyncWithRemote()
     TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(), document, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     const bool success = writeThread->success();
     delete writeThread;

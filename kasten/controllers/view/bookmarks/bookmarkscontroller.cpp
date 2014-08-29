@@ -37,18 +37,17 @@
 #include <bookmarkable.h>
 #include <bookmarksconstiterator.h>
 #include <bookmark.h>
-#include <abstractbytearraymodel.h>
-// KDE
+#include <bytearraymodel.h>
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
-#include <KAction>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt
-#include <QtGui/QAction>
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char BookmarkListActionListId[] = "bookmark_list";
@@ -62,30 +61,30 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
 
     mCreateAction = KStandardAction::addBookmark( this, SLOT(createBookmark()), actionCollection );
 
-    mDeleteAction = actionCollection->addAction( QLatin1String("bookmark_remove"),
+    mDeleteAction = actionCollection->addAction( QStringLiteral("bookmark_remove"),
                                                  this, SLOT(deleteBookmark()) );
     mDeleteAction->setText( i18nc("@action:inmenu","Remove Bookmark") );
     mDeleteAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_B );
 
-    mDeleteAllAction = actionCollection->addAction( QLatin1String("bookmark_remove_all"),
+    mDeleteAllAction = actionCollection->addAction( QStringLiteral("bookmark_remove_all"),
                                                     this, SLOT(deleteAllBookmarks()) );
     mDeleteAllAction->setText( i18nc("@action:inmenu","Remove All Bookmarks") );
 //     mDeleteAllAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
-    mGotoNextBookmarkAction = actionCollection->addAction( QLatin1String("bookmark_next"),
+    mGotoNextBookmarkAction = actionCollection->addAction( QStringLiteral("bookmark_next"),
                                                            this, SLOT(gotoNextBookmark()) );
     mGotoNextBookmarkAction->setText( i18nc("@action:inmenu","Go to Next Bookmark") );
     mGotoNextBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Down );
 
-    mGotoPreviousBookmarkAction = actionCollection->addAction( QLatin1String("bookmark_previous"),
+    mGotoPreviousBookmarkAction = actionCollection->addAction( QStringLiteral("bookmark_previous"),
                                                                this, SLOT(gotoPreviousBookmark()) );
     mGotoPreviousBookmarkAction->setText( i18nc("@action:inmenu","Go to Previous Bookmark") );
     mGotoPreviousBookmarkAction->setShortcut( Qt::ALT + Qt::Key_Up );
 
     mBookmarksActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
 //     mBookmarksActionGroup->setExclusive( true );
-    connect( mBookmarksActionGroup, SIGNAL(triggered(QAction*)),
-             SLOT(onBookmarkTriggered(QAction*)) );
+    connect( mBookmarksActionGroup, &QActionGroup::triggered,
+             this, &BookmarksController::onBookmarkTriggered );
 
     setTargetModel( 0 );
 }
@@ -107,16 +106,19 @@ void BookmarksController::setTargetModel( AbstractModel* model )
     if( hasViewWithBookmarks )
     {
         bookmarksCount = mBookmarks->bookmarksCount();
-        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                 SLOT(onBookmarksAdded(QList<Okteta::Bookmark>)) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                 SLOT(onBookmarksRemoved(QList<Okteta::Bookmark>)) );
-        connect( mByteArray, SIGNAL(bookmarksModified(QList<int>)),
-                 SLOT(updateBookmarks()) );
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
-                 SLOT(onCursorPositionChanged(Okteta::Address)) );
-        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
-                 SLOT(updateBookmarks()) );
+        if (auto asByteArraModel = qobject_cast<Okteta::ByteArrayModel*>(mByteArray) ) {
+            connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksAdded,
+                     this, &BookmarksController::onBookmarksAdded );
+            connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksRemoved,
+                     this, &BookmarksController::onBookmarksRemoved );
+            connect( asByteArraModel,
+                     static_cast<void (Okteta::ByteArrayModel::*)(const QList<int>&)>(&Okteta::ByteArrayModel::bookmarksModified),
+                     this, &BookmarksController::updateBookmarks );
+        }
+        connect( mByteArrayView, &ByteArrayView::cursorPositionChanged,
+                 this, &BookmarksController::onCursorPositionChanged );
+        connect( mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                 this, &BookmarksController::updateBookmarks );
     }
 
     updateBookmarks();
@@ -158,7 +160,7 @@ void BookmarksController::updateBookmarks()
     {
         const Okteta::Bookmark& bookmark = bit.next();
         printFunction( codedOffset, startOffset+bookmark.offset() );
-        QString title = i18nc( "@item description of bookmark", "%1: %2", QLatin1String(codedOffset),bookmark.name() );
+        QString title = i18nc( "@item description of bookmark", "%1: %2", QString::fromUtf8(codedOffset),bookmark.name() );
         if( b <= lastWithNumericShortCut )
         {
             title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
@@ -170,7 +172,7 @@ void BookmarksController::updateBookmarks()
         action->setData( bookmark.offset() );
         mBookmarksActionGroup->addAction( action );
     }
-    mGuiClient->plugActionList( QLatin1String(BookmarkListActionListId),
+    mGuiClient->plugActionList( QString::fromUtf8(BookmarkListActionListId),
                                 mBookmarksActionGroup->actions() );
 }
 

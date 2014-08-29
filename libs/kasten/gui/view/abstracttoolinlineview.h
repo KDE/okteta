@@ -30,7 +30,7 @@ class QWidget;
 class QString;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractTool;

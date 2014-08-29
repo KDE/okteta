@@ -26,17 +26,17 @@
 #include <documentversiondata.h>
 #include <versionable.h>
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KToolBarPopupAction>
 #include <KStandardShortcut>
 // Qt
-#include <QtGui/QMenu>
+#include <QMenu>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int MaxMenuEntries = 10;
@@ -46,8 +46,8 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSetToOlderVersionAction = new KToolBarPopupAction( KIcon( QLatin1String("edit-undo") ), i18nc("@action:inmenu","Undo"), this );
-    actionCollection->addAction( QLatin1String("edit_undo"), mSetToOlderVersionAction );
+    mSetToOlderVersionAction = new KToolBarPopupAction( QIcon::fromTheme( QStringLiteral("edit-undo") ), i18nc("@action:inmenu","Undo"), this );
+    actionCollection->addAction( QStringLiteral("edit_undo"), mSetToOlderVersionAction );
     mSetToOlderVersionAction->setShortcuts( KStandardShortcut::undo() );
 
     connect( mSetToOlderVersionAction, SIGNAL(triggered(bool)),
@@ -57,8 +57,8 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
     connect( mSetToOlderVersionAction->menu(), SIGNAL(triggered(QAction*)),
              SLOT(onOlderVersionMenuTriggered(QAction*)) );
 
-    mSetToNewerVersionAction = new KToolBarPopupAction( KIcon( QLatin1String("edit-redo") ), i18nc("@action:inmenu","Redo"), this );
-    actionCollection->addAction( QLatin1String("edit_redo"), mSetToNewerVersionAction );
+    mSetToNewerVersionAction = new KToolBarPopupAction( QIcon::fromTheme( QStringLiteral("edit-redo") ), i18nc("@action:inmenu","Redo"), this );
+    actionCollection->addAction( QStringLiteral("edit_redo"), mSetToNewerVersionAction );
     mSetToNewerVersionAction->setShortcuts( KStandardShortcut::redo() );
 
     connect( mSetToNewerVersionAction, SIGNAL(triggered(bool)),

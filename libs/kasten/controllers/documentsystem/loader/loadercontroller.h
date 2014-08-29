@@ -30,10 +30,10 @@
 
 class KRecentFilesAction;
 class KXMLGUIClient;
-class KUrl;
+class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractDocumentStrategy;
@@ -53,9 +53,9 @@ class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiControlle
 
   private Q_SLOTS:
     void load();
-    void loadRecent( const KUrl& url );
+    void loadRecent( const QUrl& url );
 
-    void onUrlUsed( const KUrl& url );
+    void onUrlUsed( const QUrl& url );
 
   private:
     AbstractDocumentStrategy* mDocumentStrategy;

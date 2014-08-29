@@ -33,22 +33,22 @@
 #include <modelcodecmanager.h>
 #include <abstractmodelstreamencoder.h>
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KSelectAction>
 // Qt
 #include <QtCore/QBuffer>
 #include <QtCore/QMimeData>
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-Q_DECLARE_METATYPE(Kasten2::AbstractModelStreamEncoder*)
+Q_DECLARE_METATYPE(Kasten::AbstractModelStreamEncoder*)
 
-namespace Kasten2
+namespace Kasten
 {
 
 CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager,
@@ -61,9 +61,9 @@ CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mCopyAsSelectAction = actionCollection->add<KSelectAction>( QLatin1String("copy_as") );
+    mCopyAsSelectAction = actionCollection->add<KSelectAction>( QStringLiteral("copy_as") );
     mCopyAsSelectAction->setText( i18nc("@title:menu","Copy As") );
-    mCopyAsSelectAction->setIcon( KIcon( QLatin1String("edit-copy") ) );
+    mCopyAsSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("edit-copy") ) );
     mCopyAsSelectAction->setToolBarMode( KSelectAction::MenuMode );
     connect( mCopyAsSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
 

@@ -28,11 +28,11 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
-class KAction;
+class QAction;
 class KXMLGUIClient;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class GotoOffsetToolView;
@@ -57,7 +57,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT GotoOffsetController : public AbstractXmlGu
     void gotoOffset();
 
   private:
-    KAction* mGotoOffsetAction;
+    QAction* mGotoOffsetAction;
 
     If::ToolInlineViewable* mToolInlineViewable;
 

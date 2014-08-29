@@ -31,14 +31,16 @@
 #include "jobmanager.h"
 #include "documentmanager.h"
 #include "abstractexportjob.h"
-// KDE
-#include <KIO/NetAccess>
-#include <KFileDialog>
-#include <KPushButton>
-#include <KLocale>
+// KF5
+#include <KIO/StatJob>
+#include <KJobWidgets>
+#include <KLocalizedString>
+// Qt
+#include <QFileDialog>
+#include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ModelCodecManager::ModelCodecManager( DocumentManager* manager )
@@ -113,27 +115,28 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         i18nc( "@title:window", "Export" );
     do
     {
-        KFileDialog exportFileDialog( /*mWorkingUrl.url()*/KUrl(), QString(), /*mWidget*/0 );
+        QFileDialog exportFileDialog(/*mWidget*/0, dialogTitle );
 
-        exportFileDialog.setOperationMode( KFileDialog::Saving );
-        exportFileDialog.setMode( KFile::File );
+        exportFileDialog.setAcceptMode( QFileDialog::AcceptSave );
+        exportFileDialog.setFileMode( QFileDialog::AnyFile );
         const QStringList mimeTypes = QStringList() << exporter->remoteMimeType();
-        exportFileDialog.setMimeFilter( mimeTypes );
-        exportFileDialog.setCaption( dialogTitle );
-        const KGuiItem exportGuiItem( i18nc("@action:button",
-                                            "&Export"),
-                                      QLatin1String("document-export"),
-                                      i18nc("@info:tooltip",
-                                            "Export the data into the file with the entered name.") );
-        exportFileDialog.okButton()->setGuiItem( exportGuiItem );
+        exportFileDialog.setMimeTypeFilters( mimeTypes );
+
+        exportFileDialog.setLabelText(QFileDialog::Accept, i18nc("@action:button", "&Export"));
 
         exportFileDialog.exec();
 
-        const KUrl exportUrl = exportFileDialog.selectedUrl();
+        const QList<QUrl> exportUrls = exportFileDialog.selectedUrls();
 
-        if( !exportUrl.isEmpty() )
+        if( !exportUrls.isEmpty() )
         {
-            const bool isUrlInUse = KIO::NetAccess::exists( exportUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
+            const QUrl& exportUrl = exportUrls.at(0);
+
+            KIO::StatJob* statJob = KIO::stat( exportUrl );
+            statJob->setSide(  KIO::StatJob::DestinationSide );
+            KJobWidgets::setWindow( statJob, /*mWidget*/0 );
+
+            const bool isUrlInUse = statJob->exec();
 
             if( isUrlInUse )
             {

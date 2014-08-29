@@ -25,14 +25,14 @@
 // lib
 #include <widgetsdockable.h>
 #include <toolviewdockwidget.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 // Qt
-#include <QtGui/QAction>
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char ToolListActionListId[] = "tools_list";

@@ -82,6 +82,16 @@ bool DataInformationBase::isTaggedUnion() const
     return false;
 }
 
+inline bool DataInformationBase::isDataInformationWithChildren() const
+{
+    return false;
+}
+
+inline bool DataInformationBase::isDataInformationWithDummyChildren() const
+{
+    return false;
+}
+
 TopLevelDataInformation* DataInformationBase::asTopLevel()
 {
     //multiple inheritance -> we can't use reinterpret_cast -> we have to include the file

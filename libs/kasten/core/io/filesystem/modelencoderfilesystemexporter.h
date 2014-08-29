@@ -27,7 +27,7 @@
 #include "abstractmodelexporter.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelStreamEncoder;
@@ -49,7 +49,7 @@ class KASTENCORE_EXPORT ModelEncoderFileSystemExporter : public AbstractModelExp
 
   public: // AbstractModelExporter API
     virtual AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,
-                                            const KUrl& url );
+                                            const QUrl& url );
     virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const;
 
   protected:

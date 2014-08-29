@@ -27,7 +27,7 @@
 #include <kabstractfinddialog.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ReplaceTool;
@@ -49,14 +49,12 @@ class KReplaceDialog : public KAbstractFindDialog
     QByteArray replaceData() const;
     bool prompt() const;
 
+  protected: // KAbstractFindDialog API
+    virtual void onFindButtonClicked();
+    virtual void rememberCurrentSettings();
+
   protected: // QWidget API
     virtual void showEvent( QShowEvent* showEvent );
-
-  protected: // KDialog API
-    virtual void slotButtonClicked( int button );
-
-  protected: // KAbstractFindDialog API
-    virtual void rememberCurrentSettings();
 
   private:
     Okteta::ByteArrayComboBox* ReplaceDataEdit;

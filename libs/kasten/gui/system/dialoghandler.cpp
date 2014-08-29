@@ -24,13 +24,13 @@
 
 // Kasten core
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <KMessageBox>
-#include <KUrl>
-#include <KLocale>
+#include <KLocalizedString>
+// Qt
+#include <QtCore/QUrl>
 
-
-namespace Kasten2
+namespace Kasten
 {
 
 
@@ -38,10 +38,10 @@ DialogHandler::DialogHandler( QWidget* widget ) : mWidget( widget ) {}
 
 void DialogHandler::setWidget( QWidget* widget ) { mWidget = widget; }
 
-Answer DialogHandler::queryOverwrite( const KUrl& url, const QString& title ) const
+Answer DialogHandler::queryOverwrite( const QUrl& url, const QString& title ) const
 {
     const QString message =
-        i18nc( "@info",
+        xi18nc( "@info",
                 "There is already a file at<nl/><filename>%1</filename>.<nl/>"
                 "Overwrite?", url.url() );
     const int answer = KMessageBox::warningYesNoCancel( mWidget, message, title,
@@ -56,7 +56,7 @@ Answer DialogHandler::queryOverwrite( const KUrl& url, const QString& title ) co
 
 Answer DialogHandler::queryDiscardOnReload( const AbstractDocument* document, const QString& title ) const
 {
-    const QString message = i18nc( "@info \"%title\" has been modified.",
+    const QString message = xi18nc( "@info \"%title\" has been modified.",
         "There are unsaved modifications to <filename>%1</filename>. "
         "They will be lost if you reload the document.<nl/>"
         "Do you want to discard them?", document->title() );
@@ -69,7 +69,7 @@ Answer DialogHandler::queryDiscardOnReload( const AbstractDocument* document, co
 
 Answer DialogHandler::querySaveDiscard( const AbstractDocument* document, const QString& title ) const
 {
-    const QString message = i18nc( "@info \"%title\" has been modified.",
+    const QString message = xi18nc( "@info \"%title\" has been modified.",
         "<filename>%1</filename> has been modified.<nl/>"
         "Do you want to save your changes or discard them?", document->title() );
 
@@ -83,7 +83,7 @@ Answer DialogHandler::querySaveDiscard( const AbstractDocument* document, const 
 
 Answer DialogHandler::queryDiscard( const AbstractDocument* document, const QString& title ) const
 {
-    const QString message = i18nc( "@info \"%title\" has been modified.",
+    const QString message = xi18nc( "@info \"%title\" has been modified.",
         "<filename>%1</filename> has been modified.<nl/>"
         "Do you want to discard your changes?", document->title() );
 

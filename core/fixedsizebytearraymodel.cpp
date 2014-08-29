@@ -275,7 +275,7 @@ Size FixedSizeByteArrayModel::fill( Byte fillByte, Address offset, Size fillLeng
 int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const AddressRange& _otherRange, Address offset )
 {
     AddressRange otherRange( _otherRange );
-    //kDebug() << QString("offset: %1, otherRange: (%3/%4)" ).arg(offset).arg(otherRange.start()).arg(otherRange.end())
+    //qCDebug(LOG_OKTETA_CORE) << QString("offset: %1, otherRange: (%3/%4)" ).arg(offset).arg(otherRange.start()).arg(otherRange.end())
     //    << endl;
     // test other values
     if( otherRange.startsBehind(other.size()-1) )
@@ -305,7 +305,7 @@ int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const
         if( otherRange.width() > range.width() )
             valueByLength = -1;
     }
-    //kDebug()
+    //qCDebug(LOG_OKTETA_CORE)
     //    << QString( "range: (%1/%2), otherRange: (%3/%4)" ).arg(range.start()).arg(range.end()).arg(otherRange.start()).arg(otherRange.end())
     //    << endl;
     const Address rangeEnd = range.end();
@@ -314,7 +314,7 @@ int FixedSizeByteArrayModel::compare( const AbstractByteArrayModel& other, const
     {
         Byte OD = other.byte(oi);
         Byte data = mData[i];
-        //kDebug() << QString("%1==%2").arg((int)data).arg((int)OD) ;
+        //qCDebug(LOG_OKTETA_CORE) << QString("%1==%2").arg((int)data).arg((int)OD) ;
         if( OD == data )
             continue;
         return ( OD < data ) ? 1 : -1;

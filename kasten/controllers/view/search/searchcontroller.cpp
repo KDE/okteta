@@ -25,16 +25,17 @@
 // controller
 #include "ksearchdialog.h"
 #include "searchtool.h"
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
-#include <KAction>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KMessageBox>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
@@ -51,14 +52,14 @@ SearchController::SearchController( KXMLGUIClient* guiClient, QWidget* parentWid
     mTool = new SearchTool();
     mTool->setUserQueryAgent( this );
 
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-             mFindAction, SLOT(setEnabled(bool)) );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-             mFindNextAction, SLOT(setEnabled(bool)) );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-             mFindPrevAction, SLOT(setEnabled(bool)) );
+    connect( mTool, &SearchTool::isApplyableChanged,
+             mFindAction, &QAction::setEnabled );
+    connect( mTool, &SearchTool::isApplyableChanged,
+             mFindNextAction, &QAction::setEnabled );
+    connect( mTool, &SearchTool::isApplyableChanged,
+             mFindPrevAction, &QAction::setEnabled );
 
-    connect( mTool, SIGNAL(dataNotFound()), SLOT(onDataNotFound()) );
+    connect( mTool, &SearchTool::dataNotFound, this, &SearchController::onDataNotFound );
 
     mFindAction->setEnabled( false );
     mFindNextAction->setEnabled( false );
@@ -113,8 +114,8 @@ bool SearchController::queryContinue( KFindDirection direction ) const
 {
     const QString messageBoxTitle = i18nc( "@title:window", "Find" );
     const QString question = ( direction == FindForward ) ?
-        i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
-        i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
+        xi18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
+        xi18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
     const int answer = KMessageBox::questionYesNo( mParentWidget, question, messageBoxTitle,
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel() );

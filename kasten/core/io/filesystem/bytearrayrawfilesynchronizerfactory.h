@@ -29,7 +29,7 @@
 #include <abstractmodelsynchronizerfactory.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizerFactory : public AbstractModelSynchronizerFactory

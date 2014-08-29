@@ -27,7 +27,7 @@
 #include <abstractfilesystemconnectjob.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayRawFileSynchronizer;
@@ -40,7 +40,7 @@ class ByteArrayRawFileConnectJob : public AbstractFileSystemConnectJob
 
   public:
     ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer, AbstractDocument* document,
-                                const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
     virtual ~ByteArrayRawFileConnectJob();
 
   protected: // AbstractFileSystemLoadJob API

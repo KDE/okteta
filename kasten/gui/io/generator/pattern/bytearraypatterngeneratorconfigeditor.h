@@ -31,10 +31,10 @@
 namespace Okteta {
 class ByteArrayComboBox;
 }
-class KIntNumInput;
+class QSpinBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayPatternGeneratorConfigEditor : public AbstractModelDataGeneratorConfigEditor
@@ -61,7 +61,7 @@ class ByteArrayPatternGeneratorConfigEditor : public AbstractModelDataGeneratorC
     ByteArrayPatternGenerator* mGenerator;
     ByteArrayPatternGeneratorSettings mSettings;
 
-    KIntNumInput* mNumberInput;
+    QSpinBox* mNumberInput;
     Okteta::ByteArrayComboBox* mPatternEdit;
 };
 

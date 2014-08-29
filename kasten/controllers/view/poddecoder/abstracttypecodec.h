@@ -25,9 +25,9 @@
 
 // Qt
 #include <QtCore/QString>
+#include <QtCore/QVariant>
 
 class QByteArray;
-class QVariant;
 
 
 namespace Okteta

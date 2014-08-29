@@ -26,13 +26,14 @@
 #include <character.h>
 #include <charcodec.h>
 #include <valuecodec.h>
-// KDE
-#include <KLocale>
-#include <KApplication>
+// KF5
+#include <KLocalizedString>
 #include <KColorScheme>
+// Qt
+#include <QtWidgets/QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const unsigned char StatisticsDefaultUndefinedChar = '?';
@@ -133,7 +134,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
             }
             case CountId:
                 result =  ( mSize == -1 ) ?
-                    QVariant( QLatin1String("-") ) :
+                    QVariant( QStringLiteral("-") ) :
                     QVariant( mByteCount[byte] );
                 break;
             case PercentId:
@@ -141,7 +142,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
                           // TODO: before we printed only a string (which killed sorting) with QString::number( x, 'f', 6 )
                           // Qt now cuts trailing 0s, results in unaligned numbers, not so beautiful.
                           QVariant( 100.0*(double)mByteCount[byte]/mSize ) :
-                          QVariant( QLatin1String("-") );
+                          QVariant( QStringLiteral("-") );
                 break;
             default:
                 ;
@@ -166,7 +167,7 @@ QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
         }
         if( isInactive )
         {
-            const QPalette& palette = KApplication::kApplication()->palette();
+            const QPalette& palette = QApplication::palette();
             const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
             result = colorScheme.foreground( KColorScheme::InactiveText );
         }

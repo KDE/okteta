@@ -34,6 +34,7 @@
 #include "../structuredefinitionfile.h"
 #include "../script/scriptlogger.h"
 #include "../script/scriptengineinitializer.h"
+#include "../structlogging.h"
 
 #include <QFile>
 #include <QFileInfo>
@@ -41,7 +42,6 @@
 #include <QDomDocument>
 #include <QScriptEngine>
 
-#include <KDebug>
 
 using namespace ParserStrings;
 
@@ -74,7 +74,7 @@ QDomDocument OsdParser::openDocFromString(ScriptLogger * logger) const
     if (!doc.setContent(mXmlString, false, &errorMsg, &errorLine, &errorColumn))
     {
         const QString errorOutput = QString(
-                QLatin1String("error reading XML: %1\n error line=%2\nerror column=%3"))
+                QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3"))
                 .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
         logger->error() << errorOutput;
         logger->info() << "XML was:" << mXmlString;
@@ -96,7 +96,7 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
     QFile file(fileInfo.absoluteFilePath());
     if (!file.open(QIODevice::ReadOnly))
     {
-        const QString errorOutput = QLatin1String("Could not open file ") + mAbsolutePath;
+        const QString errorOutput = QStringLiteral("Could not open file ") + mAbsolutePath;
         logger->error() << errorOutput;
         return QDomDocument();
     }
@@ -106,7 +106,7 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
     if (!doc.setContent(&file, false, &errorMsg, &errorLine, &errorColumn))
     {
         const QString errorOutput = QString(
-                QLatin1String("error reading XML: %1\n error line=%2\nerror column=%3"))
+                QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3"))
                 .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
         logger->error() << errorOutput;
         logger->info() << "File was:" << mAbsolutePath;
@@ -123,7 +123,7 @@ QStringList OsdParser::parseStructureNames() const
     QDomDocument document = openDoc(rootLogger.data());
     if (document.isNull())
         return QStringList();
-    QDomElement rootElem = document.firstChildElement(QLatin1String("data"));
+    QDomElement rootElem = document.firstChildElement(QStringLiteral("data"));
     if (rootElem.isNull())
         return QStringList();
     for (QDomElement childElement = rootElem.firstChildElement();
@@ -134,7 +134,7 @@ QStringList OsdParser::parseStructureNames() const
                 || tag == TYPE_UNION || tag == TYPE_ENUM || tag == TYPE_FLAGS || tag == TYPE_STRING)
         {
             //TODO allow e.g. <uint8 name="asfd">
-            ret.append(readProperty(childElement, PROPERTY_NAME, i18n("&lt;invalid name&gt;")));
+            ret.append(readProperty(childElement, PROPERTY_NAME, i18n("<invalid name>")));
         }
         else
         {
@@ -159,7 +159,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
         return structures;
     }
 
-    QDomElement rootElem = document.firstChildElement(QLatin1String("data"));
+    QDomElement rootElem = document.firstChildElement(QStringLiteral("data"));
     if (rootElem.isNull())
     {
         rootLogger->error() << "Missing top level <data> element!";
@@ -184,9 +184,9 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
         {
             QString name = readProperty(elem, PROPERTY_NAME);
             if (name.isEmpty())
-                name = fileInfo.absoluteFilePath() + QLatin1String("_element") + QString::number(count);
-            kDebug() << "Failed to parse element" << elem.tagName() << name;
-            kDebug() << "Parsing messages were:" << logger->messages();
+                name = fileInfo.absoluteFilePath() + QStringLiteral("_element") + QString::number(count);
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Failed to parse element" << elem.tagName() << name;
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Parsing messages were:" << logger->messages();
             data = new DummyDataInformation(0, name);
         }
         TopLevelDataInformation* topData = new TopLevelDataInformation(data, logger, eng, fileInfo);
@@ -218,20 +218,20 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
             continue;
 
         QMap<AllPrimitiveTypes, QString> defs;
-        const QString enumName = readProperty(elem, PROPERTY_NAME, i18n("&lt;invalid name&gt;"));
+        const QString enumName = readProperty(elem, PROPERTY_NAME, i18n("<invalid name>"));
         const QString typeStr = readProperty(elem, PROPERTY_TYPE);
         if (typeStr.isEmpty())
         {
             logger->error(enumName) << "Skipping enum definition, since no type attribute was found.";
             continue;
         }
-        LoggerWithContext lwc(logger, QLatin1String("enum values (") + enumName + QLatin1Char(')'));
+        LoggerWithContext lwc(logger, QStringLiteral("enum values (") + enumName + QLatin1Char(')'));
         PrimitiveDataType type = PrimitiveFactory::typeStringToType(typeStr, lwc);
         //handle all entries
         for (QDomElement child = elem.firstChildElement(); !child.isNull(); child =
                 child.nextSiblingElement())
         {
-            if (child.tagName() != QLatin1String("entry"))
+            if (child.tagName() != QStringLiteral("entry"))
                 continue;
 
             QString name = readProperty(child, PROPERTY_NAME);
@@ -443,7 +443,7 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
     DataInformation* data = 0;
     const QString tag = elem.tagName();
     OsdParserInfo info(oldInfo);
-    info.name = readProperty(elem, PROPERTY_NAME, QLatin1String("<anonymous>"));
+    info.name = readProperty(elem, PROPERTY_NAME, QStringLiteral("<anonymous>"));
     if (tag == TYPE_STRUCT)
         data = structFromXML(elem, info);
     else if (tag == TYPE_ARRAY)

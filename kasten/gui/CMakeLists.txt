@@ -152,6 +152,7 @@ set( okteta_kastengui_system_SRCS
 )
 
 set( okteta_kastengui_LIB_SRCS
+  oktetakastengui.cpp
   ${oktetawidgets_LIB_SRCS}
   ${okteta_kastengui_view_SRCS}
   ${okteta_kastengui_io_SRCS}
@@ -184,24 +185,28 @@ set( okteta_kastengui_system_HDRS
 )
 
 set( okteta_kastengui_LIB_HDRS
-  oktetakastengui_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastengui_export.h
   ${okteta_kastengui_view_HDRS}
   ${okteta_kastengui_io_HDRS}
   ${okteta_kastengui_system_HDRS}
 )
 
-kde4_add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
+add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
+generate_export_header( ${oktetakastengui_LIB} )
 
-target_link_libraries( ${oktetakastengui_LIB}
+target_link_libraries( ${oktetakastengui_LIB} LINK_PUBLIC
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-  ${KDE4_KDEUI_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
 )
-#TODO should probably first check if QtScript is available??
+target_link_libraries( ${oktetakastengui_LIB} LINK_PRIVATE
+  Qt5::Script
+  KF5::I18n
+  KF5::Completion
+)
+
 set_target_properties( ${oktetakastengui_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetakastengui_LIB_NAME}
   VERSION     ${OKTETAKASTEN_LIB_VERSION}

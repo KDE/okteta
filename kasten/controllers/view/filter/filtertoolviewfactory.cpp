@@ -25,11 +25,11 @@
 // lib
 #include "filtertoolview.h"
 #include "filtertool.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 FilterToolViewFactory::FilterToolViewFactory() {}

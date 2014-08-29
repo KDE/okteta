@@ -29,7 +29,7 @@
 #include <abstractviewfactory.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ByteArrayViewProfileManager;
 

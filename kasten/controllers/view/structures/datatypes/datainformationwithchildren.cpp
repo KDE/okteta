@@ -110,8 +110,7 @@ void DataInformationWithChildren::calculateValidationState()
         for (uint i = 0; i < childCount(); ++i)
         {
             DataInformation* child = childAt(i);
-            DataInformationWithChildren* childWithChildren =
-                    dynamic_cast<DataInformationWithChildren*>(child);
+            DataInformationWithChildren* childWithChildren = child->asDataInformationWithChildren();
             if (childWithChildren)
                 childWithChildren->calculateValidationState();
             //first make sure the child item validation state has been set

@@ -28,8 +28,8 @@
 #include <QtCore/QListIterator>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QPainter>
-#include <QtGui/QStyle>
-#include <QtGui/QScrollBar>
+#include <QStyle>
+#include <QScrollBar>
 
 
 namespace Okteta
@@ -327,7 +327,7 @@ void ColumnsView::renderColumns( QPainter* painter, int cx, int cy, int cw, int 
                     fit.next()->renderColumn( painter, dirtyXs, dirtyYs );
 
                 PixelY cy = dirtyLines.start() * d->LineHeight;
-        //kDebug()<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
+        //qCDebug(LOG_OKTETA_GUI)<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
                 // starting painting with the first line
                 Line line = dirtyLines.start();
                 QListIterator<AbstractColumnRenderer*> it( dirtyColumns );

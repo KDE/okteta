@@ -20,16 +20,16 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "latin1stringdata.h"
+
 #include "../topleveldatainformation.h"
 #include "stringdatainformation.h"
+#include "../../structlogging.h"
 
 #include <abstractbytearraymodel.h>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QVarLengthArray>
-#include <KDebug> //TODO remove
 
 Latin1StringData::Latin1StringData(StringDataInformation* parent): StringData(parent)
 {
@@ -92,7 +92,7 @@ qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Add
                 terminate = true;
         }
         if (mMode == None) {
-            kDebug() << "no termination mode set!!";
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no termination mode set!!";
             Q_ASSERT(false);
         }
         if (terminate)

@@ -24,13 +24,13 @@
 
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 const char base64EncodeMap[64] =

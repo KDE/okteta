@@ -22,10 +22,9 @@
 
 #include "tabbedviews.h"
 #include "tabbedviews_p.h"
-#include "tabbedviews.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TabbedViews::TabbedViews( TabbedViewsPrivate* _d )
@@ -128,3 +127,6 @@ TabbedViews::~TabbedViews()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_tabbedviews.cpp"

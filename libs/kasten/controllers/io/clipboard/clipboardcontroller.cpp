@@ -27,19 +27,19 @@
 #include <selecteddatawriteable.h>
 // Kasten core
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
-#include <KAction>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QMimeData>
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ClipboardController::ClipboardController( KXMLGUIClient* guiClient )

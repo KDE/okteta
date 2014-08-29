@@ -21,10 +21,13 @@
  */
 #include "chardatainformation.h"
 
-#include <QScriptValue>
+// KF5
 #include <KLineEdit>
-#include <KGlobal>
-#include <KLocale>
+#include <KLocalizedString>
+// Qt
+#include <QLocale>
+#include <QScriptValue>
+
 
 #include "structviewpreferences.h"
 
@@ -33,14 +36,14 @@ namespace {
     {
         switch (value)
         {
-            case '\0': return QLatin1String("'\\0'");
-            case '\a': return QLatin1String("'\\a'");
-            case '\b': return QLatin1String("'\\b'");
-            case '\f': return QLatin1String("'\\f'");
-            case '\n': return QLatin1String("'\\n'");
-            case '\r': return QLatin1String("'\\r'");
-            case '\t': return QLatin1String("'\\t'");
-            case '\v': return QLatin1String("'\\v'");
+            case '\0': return QStringLiteral("'\\0'");
+            case '\a': return QStringLiteral("'\\a'");
+            case '\b': return QStringLiteral("'\\b'");
+            case '\f': return QStringLiteral("'\\f'");
+            case '\n': return QStringLiteral("'\\n'");
+            case '\r': return QStringLiteral("'\\r'");
+            case '\t': return QStringLiteral("'\\t'");
+            case '\v': return QStringLiteral("'\\v'");
             default: break;
         }
         QChar qchar = QChar(quint32(value));
@@ -53,13 +56,13 @@ namespace {
 QString CharDataInformationMethods::staticValueString(quint8 value)
 {
     QString charStr = charString(value);
-    if (Kasten2::StructViewPreferences::showCharNumericalValue())
+    if (Kasten::StructViewPreferences::showCharNumericalValue())
     {
-        int base = Kasten2::StructViewPreferences::charDisplayBase();
-        QString num = QString::number(value, base);
-        if (base == 10 && Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
-        charStr += QLatin1String(" (") + PrimitiveDataInformation::basePrefix(base)
+        int base = Kasten::StructViewPreferences::charDisplayBase();
+        const QString num = (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
+            ? QLocale().toString(value)
+            : QString::number(value, base);
+        charStr += QStringLiteral(" (") + PrimitiveDataInformation::basePrefix(base)
                 + num + QLatin1Char(')');
     }
     return charStr;
@@ -73,7 +76,7 @@ QWidget* CharDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     //TODO fix this code!!
-    const KLineEdit* edit = dynamic_cast<const KLineEdit*> (w);
+    const KLineEdit* edit = qobject_cast<const KLineEdit*> (w);
     if (edit)
     {
         QString text = edit->text();
@@ -130,7 +133,7 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
 {
-    KLineEdit* edit = dynamic_cast<KLineEdit*> (w);
+    KLineEdit* edit = qobject_cast<KLineEdit*> (w);
     if (edit)
     {
         QChar qchar(value, 0);

@@ -44,8 +44,8 @@
 #include <QtGui/QDragMoveEvent>
 #include <QtGui/QDragLeaveEvent>
 #include <QtGui/QDropEvent>
-#include <QtGui/QApplication>
-#include <QtGui/QToolTip>
+#include <QApplication>
+#include <QToolTip>
 #include <QtCore/QMimeData>
 #include <QtCore/QTimer>
 
@@ -1206,7 +1206,7 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const ArrayChangeMetricsLi
         mTableCursor->adaptToChanges( changeList, oldLength );
 
     mTableRanges->adaptToChanges( changeList, oldLength );
-    // kDebug() << "Cursor:"<<mDataCursor->index()<<", selection:"<<mTableRanges->selectionStart()<<"-"<<mTableRanges->selectionEnd()
+    // qCDebug(LOG_OKTETA_GUI) << "Cursor:"<<mDataCursor->index()<<", selection:"<<mTableRanges->selectionStart()<<"-"<<mTableRanges->selectionEnd()
     //          <<", BytesPerLine: "<<mTableLayout->noOfBytesPerLine()<<endl;
 
     ensureCursorVisible();

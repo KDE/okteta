@@ -38,10 +38,9 @@ set( oktetapart_SRCS
   part.cpp
   browserextension.cpp
   partfactory.cpp
-  main.cpp
 )
 
-kde4_add_plugin( oktetapart  ${oktetapart_SRCS})
+add_library( oktetapart  MODULE ${oktetapart_SRCS} )
 
 
 target_link_libraries( oktetapart
@@ -51,11 +50,12 @@ target_link_libraries( oktetapart
   kastencontrollers
   kastengui
   kastencore
-  ${KDE4_KPARTS_LIBS}
+  KF5::I18n
+  KF5::Parts
 )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
-install( FILES oktetapart.desktop  DESTINATION ${SERVICES_INSTALL_DIR} )
+kservice_desktop_to_json(oktetapart oktetapart.desktop )
 install(
   FILES oktetapartreadonlyui.rc oktetapartbrowserui.rc oktetapartreadwriteui.rc
   DESTINATION ${DATA_INSTALL_DIR}/oktetapart

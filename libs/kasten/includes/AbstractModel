@@ -1,1 +1,1 @@
-#include "../../kasten2/abstractmodel.h"
+#include "../kasten/abstractmodel.h"

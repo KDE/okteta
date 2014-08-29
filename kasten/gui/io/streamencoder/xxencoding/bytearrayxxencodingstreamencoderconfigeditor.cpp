@@ -24,15 +24,15 @@
 
 // lib
 #include "bytearraytextstreamencoderpreview.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 #include <KLineEdit>
 // Qt
-#include <QtGui/QFormLayout>
-#include <QtGui/QLabel>
+#include <QFormLayout>
+#include <QLabel>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayXxencodingStreamEncoderConfigEditor::ByteArrayXxencodingStreamEncoderConfigEditor( ByteArrayXxencodingStreamEncoder* encoder, QWidget* parent )
@@ -51,7 +51,7 @@ ByteArrayXxencodingStreamEncoderConfigEditor::ByteArrayXxencodingStreamEncoderCo
 
     mFileNameEdit = new KLineEdit( this );
     mFileNameEdit->setText( mSettings.fileName );
-    connect( mFileNameEdit, SIGNAL(textChanged(QString)), SLOT(onSettingsChanged()) );
+    connect( mFileNameEdit, &KLineEdit::textChanged, this, &ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( fileNameLabel, mFileNameEdit );
 }
 

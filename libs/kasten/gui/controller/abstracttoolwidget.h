@@ -26,12 +26,12 @@
 // lib
 #include "kastengui_export.h"
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QPushButton;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractToolWidgetPrivate;

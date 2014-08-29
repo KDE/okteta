@@ -107,13 +107,15 @@
 #include <documentcreatemanager.h>
 #include <documentsyncmanager.h>
 #include <documentmanager.h>
-// KDE
-#include <KUrl>
-#include <KGlobal>
+// KF5
 #include <KConfigGroup>
+#include <KSharedConfig>
+// Qt
+#include <QtCore/QUrl>
+#include <QMimeData>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char LoadedUrlsKey[] = "LoadedUrls";
@@ -122,31 +124,31 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
   : ShellWindow( program->viewManager() ),
     mProgram( program )
 {
-    setObjectName( QLatin1String("Shell") );
+    setObjectName( QStringLiteral("Shell") );
 
     // there is only one mainwindow, so have this show the document if requested
-    connect( mProgram->documentManager(), SIGNAL(focusRequested(Kasten2::AbstractDocument*)),
-             SLOT(showDocument(Kasten2::AbstractDocument*)) );
+    connect( mProgram->documentManager(), SIGNAL(focusRequested(Kasten::AbstractDocument*)),
+             SLOT(showDocument(Kasten::AbstractDocument*)) );
     connect( viewArea(), SIGNAL(dataOffered(const QMimeData*,bool&)),
              SLOT(onDataOffered(const QMimeData*,bool&)) );
     connect( viewArea(), SIGNAL(dataDropped(const QMimeData*)),
              SLOT(onDataDropped(const QMimeData*)) );
-    connect( viewArea(), SIGNAL(closeRequest(QList<Kasten2::AbstractView*>)),
-             SLOT(onCloseRequest(QList<Kasten2::AbstractView*>)) );
+    connect( viewArea(), SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
+             SLOT(onCloseRequest(QList<Kasten::AbstractView*>)) );
 
     // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
     //      This state is taken from an oktetarc where the docker constellation was configured by hand.
     //      Setting this state if none is present seems to work, but there's
     //      still the versioning problem to be accounted for.
     //      Hack borrowed from trunk/koffice/krita/ui/kis_view2.cpp:
-    const QString mainWindowState = QLatin1String(
+    const QString mainWindowState = QStringLiteral(
 "AAAA/wAAAAD9AAAAAwAAAAAAAADPAAACg/wCAAAAAvsAAAAiAEYAaQBsAGUAUwB5AHMAdABlAG0AQgByAG8AdwBzAGUAcgAAAABJAAACgwAAAB4BAAAF+wAAABIARABvAGMAdQBtAGUAbgB0AHMAAAAASQAAAmMAAABeAQAABQAAAAEAAAGcAAACXPwCAAAACPsAAAAUAFAATwBEAEQAZQBjAG8AZABlAHIAAAAAQgAAARMAAAB9AQAABfsAAAAUAFMAdAByAHUAYwB0AFQAbwBvAGwAAAAAQgAAAlwAAAB9AQAABfsAAAAQAFYAZQByAHMAaQBvAG4AcwAAAABNAAAAVgAAAF4BAAAF+wAAABgAQgBpAG4AYQByAHkARgBpAGwAdABlAHIAAAABegAAAM0AAAC8AQAABfsAAAAQAEMAaABlAGMAawBzAHUAbQAAAAF8AAAAywAAAL0BAAAF/AAAAREAAADlAAAAAAD////6AAAAAAEAAAAE+wAAABAAQwBoAGUAYwBrAFMAdQBtAQAAAAD/////AAAAAAAAAAD7AAAAEgBCAG8AbwBrAG0AYQByAGsAcwIAAALBAAAAPQAAAT8AAAFk+wAAAA4AUwB0AHIAaQBuAGcAcwAAAAAA/////wAAAQ8BAAAF+wAAAAgASQBuAGYAbwAAAAGRAAABTAAAAIUBAAAF+wAAABIAQgB5AHQAZQBUAGEAYgBsAGUAAAAAUwAAAjkAAAB9AQAABfsAAAAYAEQAbwBjAHUAbQBlAG4AdABJAG4AZgBvAAAAAEkAAAJjAAAA+wEAAAUAAAADAAAAAAAAAAD8AQAAAAH7AAAAEABUAGUAcgBtAGkAbgBhAGwAAAAAAP////8AAABPAQAABQAABBUAAAGLAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAAAAAEBgAAAAAAAAAA");
     const char mainWindowStateKey[] = "State";
-    KConfigGroup group( KGlobal::config(), QLatin1String("MainWindow") );
+    KConfigGroup group( KSharedConfig::openConfig(), QStringLiteral("MainWindow") );
     if( !group.hasKey(mainWindowStateKey) )
         group.writeEntry( mainWindowStateKey, mainWindowState );
 
-    setStatusBar( new Kasten2::StatusBar(this) );
+    setStatusBar( new Kasten::StatusBar(this) );
 
     setupControllers();
     setupGUI();
@@ -215,7 +217,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new ViewProfileController(byteArrayViewProfileManager,this,this) );
     addXmlGuiController( new ViewProfilesManageController(this,byteArrayViewProfileManager,this) );
 
-    Kasten2::StatusBar* const bottomBar = static_cast<Kasten2::StatusBar*>( statusBar() );
+    Kasten::StatusBar* const bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
     addXmlGuiController( new ViewStatusController(bottomBar) );
     addXmlGuiController( new ModifiedBarController(bottomBar) );
     addXmlGuiController( new ReadOnlyBarController(bottomBar) );
@@ -259,7 +261,7 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
     DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
     DocumentCreateManager* const createManager = documentManager->createManager();
-    foreach( const KUrl& url, urls )
+    foreach( const QUrl& url, urls )
     {
         if( url.isEmpty() )
             createManager->createNew();
@@ -272,27 +274,27 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
 
 void OktetaMainWindow::onDataOffered( const QMimeData* mimeData, bool& accept )
 {
-    accept = KUrl::List::canDecode( mimeData )
+    accept = mimeData->hasUrls()
              || mProgram->documentManager()->createManager()->canCreateNewFromData( mimeData );
 }
 
 void OktetaMainWindow::onDataDropped( const QMimeData* mimeData )
 {
-    const KUrl::List urls = KUrl::List::fromMimeData( mimeData );
+    const QList<QUrl> urls = mimeData->urls();
 
     DocumentManager* const documentManager = mProgram->documentManager();
     if( ! urls.isEmpty() )
     {
         DocumentSyncManager* const syncManager = documentManager->syncManager();
 
-        foreach( const KUrl& url, urls )
+        foreach( const QUrl& url, urls )
             syncManager->load( url );
     }
     else
         documentManager->createManager()->createNewFromData( mimeData, true );
 }
 
-void OktetaMainWindow::onCloseRequest( const QList<Kasten2::AbstractView*>& views )
+void OktetaMainWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
 {
     // group views per document
     QHash<AbstractDocument*,QList<AbstractView*> > viewsToClosePerDocument;

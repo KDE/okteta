@@ -24,13 +24,13 @@
 
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static inline void streamEncoded( QTextStream& textStream, int& outputBytesPerLine,

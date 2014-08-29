@@ -24,28 +24,29 @@
 
 // lib
 #include "abstractbytearraystreamencoder.h"
-// KDE
-#include <KTextEdit>
-#include <KGlobalSettings>
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
+// Qt
+#include <QFontDatabase>
+#include <QTextEdit>
 
-
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder )
  : mEncoder( encoder ), mModel( 0 )
 {
-    mWidget = new KTextEdit(); // TODO: use Kate for syntax highlighting
+    mWidget = new QTextEdit(); // TODO: use Kate for syntax highlighting
     mWidget->setReadOnly( true );
     mWidget->setLineWrapMode( QTextEdit::NoWrap );
     mWidget->setToolTip( i18n("The preview uses maximal the first 100 bytes.") );
 
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
+    // TODO: find a signal/event emitted when fixedfont changes
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &ByteArrayTextStreamEncoderPreview::setFixedFontByGlobalSettings );
     setFixedFontByGlobalSettings();
 
-    connect( mEncoder, SIGNAL(settingsChanged()), SLOT(update()) );
+    connect( mEncoder, &AbstractByteArrayStreamEncoder::settingsChanged, this, &ByteArrayTextStreamEncoderPreview::update );
 }
 
 QWidget* ByteArrayTextStreamEncoderPreview::widget() const { return mWidget; }
@@ -67,7 +68,7 @@ void ByteArrayTextStreamEncoderPreview::update()
 
 void ByteArrayTextStreamEncoderPreview::setFixedFontByGlobalSettings()
 {
-    mWidget->setFont( KGlobalSettings::fixedFont() );
+    mWidget->setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 ByteArrayTextStreamEncoderPreview::~ByteArrayTextStreamEncoderPreview()

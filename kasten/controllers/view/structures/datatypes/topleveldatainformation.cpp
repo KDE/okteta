@@ -28,15 +28,15 @@
 #include "../script/scripthandler.h"
 #include "../script/scriptlogger.h"
 #include "../script/scriptengineinitializer.h"
+#include "../structlogging.h"
 #include "primitivefactory.h"
 
 #include <abstractbytearraymodel.h>
 
 #include <QScriptEngine>
 
-#include <KDebug>
-
 #include <limits>
+
 
 const quint64 TopLevelDataInformation::INVALID_OFFSET = std::numeric_limits<quint64>::max();
 
@@ -174,7 +174,7 @@ bool TopLevelDataInformation::isReadingNecessary(Okteta::AbstractByteArrayModel*
         }
         else
         {
-            kDebug() << "Invalid change";
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Invalid change";
             continue;
         }
     }
@@ -190,15 +190,17 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const
         return;
     }
     mLockedPositions.insert(model, quint64(offset));
-    kDebug() << mData->name() << ": Locking start offset in model" << model << "to position" << hex << offset;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+            << mData->name() << ": Locking start offset in model" << model << "to position" << hex << offset;
     //remove when deleted
-    connect(model, SIGNAL(destroyed(QObject*)), this, SLOT(removeByteArrayModelFromList(QObject*)));
+    connect(model, &Okteta::AbstractByteArrayModel::destroyed, this, &TopLevelDataInformation::removeByteArrayModelFromList);
 }
 
 void TopLevelDataInformation::unlockPosition(const Okteta::AbstractByteArrayModel* model)
 {
     Q_ASSERT(mLockedPositions.contains(model) && mLockedPositions.value(model) != INVALID_OFFSET);
-    kDebug() << "removing lock at position" << mLockedPositions.value(model) << ", model=" << model;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+            << "removing lock at position" << mLockedPositions.value(model) << ", model=" << model;
     mLockedPositions.insert(model, INVALID_OFFSET);
 }
 
@@ -233,9 +235,11 @@ void TopLevelDataInformation::newModelActivated(Okteta::AbstractByteArrayModel* 
         //if this structure has no default lock offset, mDefaultLockOfsset will contain NOT_LOCKED
         mLockedPositions.insert(model, mDefaultLockOffset);
         if (mDefaultLockOffset == INVALID_OFFSET)
-            kDebug() << "new model activated:" << model << ", not locked.";
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                    << "new model activated:" << model << ", not locked.";
         else
-            kDebug() << "new model activated:" << model << ", locked at 0x" << QString::number(mDefaultLockOffset, 16);
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+                    << "new model activated:" << model << ", locked at 0x" << QString::number(mDefaultLockOffset, 16);
     }
 }
 

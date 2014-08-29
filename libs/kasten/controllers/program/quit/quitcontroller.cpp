@@ -22,13 +22,13 @@
 
 #include "quitcontroller.h"
 
-// KDE
+// KF5
 #include <KXmlGuiWindow>
 #include <KActionCollection>
 #include <KStandardAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 QuitController::QuitController( KProgram *program, KXmlGuiWindow *window )

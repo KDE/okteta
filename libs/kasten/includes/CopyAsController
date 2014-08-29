@@ -1,1 +1,1 @@
-#include "../../kasten2/copyascontroller.h"
+#include "../kasten/copyascontroller.h"

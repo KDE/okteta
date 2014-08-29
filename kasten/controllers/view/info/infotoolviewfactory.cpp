@@ -25,11 +25,11 @@
 // lib
 #include "infotoolview.h"
 #include "infotool.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 InfoToolViewFactory::InfoToolViewFactory() {}

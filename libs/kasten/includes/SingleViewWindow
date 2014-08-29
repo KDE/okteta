@@ -1,1 +1,1 @@
-#include "../../kasten2/singleviewwindow.h"
+#include "../kasten/singleviewwindow.h"

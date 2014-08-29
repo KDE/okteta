@@ -24,17 +24,17 @@
 #define FILESYSTEMBROWSERVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KDirOperator;
 class KUrlNavigator;
-class KUrl;
+class QUrl;
 class KFileItem;
 class KActionCollection;
 class KToolBar;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class FileSystemBrowserTool;
@@ -54,8 +54,8 @@ class FileSystemBrowserView : public QWidget
   private Q_SLOTS:
     void init();
 
-    void setDirOperatorUrl( const KUrl& url );
-    void setNavigatorUrl( const KUrl& url );
+    void setDirOperatorUrl( const QUrl& url );
+    void setNavigatorUrl( const QUrl& url );
     void syncCurrentDocumentDirectory();
     void openFile( const KFileItem& fileItem );
 

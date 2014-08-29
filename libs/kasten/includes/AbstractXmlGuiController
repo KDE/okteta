@@ -1,1 +1,1 @@
-#include "../../kasten2/abstractxmlguicontroller.h"
+#include "../kasten/abstractxmlguicontroller.h"

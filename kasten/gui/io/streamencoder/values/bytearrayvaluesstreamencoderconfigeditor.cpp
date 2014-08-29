@@ -24,16 +24,16 @@
 
 // lib
 #include "bytearraytextstreamencoderpreview.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 #include <KLineEdit>
 // #include <KComboBox>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLabel>
+#include <QLayout>
+#include <QLabel>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEditor( ByteArrayValuesStreamEncoder* encoder, QWidget* parent )
@@ -69,7 +69,7 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
 
     mSeparationEdit = new KLineEdit( this );
     mSeparationEdit->setText( mSettings.separation );
-    connect( mSeparationEdit, SIGNAL(textChanged(QString)), SLOT(onSettingsChanged()) );
+    connect( mSeparationEdit, &KLineEdit::textChanged, this, &ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addWidget( mSeparationEdit, 0, 1);
 
 

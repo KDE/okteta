@@ -28,11 +28,11 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 
-class KAction;
+class QAction;
 class KXMLGUIClient;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractDocument;
@@ -53,7 +53,7 @@ class KASTENCONTROLLERS_EXPORT SetRemoteController : public AbstractXmlGuiContro
     void saveAs();
 
   private:
-    KAction* mSaveAsAction;
+    QAction* mSaveAsAction;
 
     DocumentSyncManager* mSyncManager;
     AbstractDocument* mDocument;

@@ -29,11 +29,11 @@
 #include "viewareabox.h"
 #include "viewbox.h"
 #include <abstractview.h>
-// KDE
-#include <KTabWidget>
+// Qt
+#include <QTabWidget>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
@@ -68,9 +68,9 @@ class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
 
   public: // Q_SLOTS:
     void onCurrentChanged( int index );
-    void onCloseRequest( QWidget* widget );
+    void onTabCloseRequest( int tabIndex );
     void onTitleChanged( const QString &newTitle );
-//     void onModifiedChanged( Kasten2::AbstractDocument::SyncStates newStates );
+//     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
     void onViewFocusChanged( bool focusChanged );
     void onMouseMiddleClick();
     void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
@@ -81,7 +81,7 @@ class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
 
   protected:
     ViewAreaBox* mViewAreaBox;
-    KTabWidget* mTabWidget;
+    QTabWidget* mTabWidget;
 
     AbstractView* mCurrentView;
 };

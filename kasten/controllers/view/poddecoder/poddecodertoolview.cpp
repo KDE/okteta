@@ -27,7 +27,7 @@
 #include "poddecodertool.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 PODDecoderToolView::PODDecoderToolView( PODDecoderTool *tool )

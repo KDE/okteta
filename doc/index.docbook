@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
   <!ENTITY okteta "<application>Okteta</application>">
   <!ENTITY kappname "&okteta;" >
   <!ENTITY package "kdesdk">
@@ -326,9 +326,9 @@ Support for strings (various Unicode encodings) in definitions
       <sect3>
         <title>Installing structure definitions manually</title>
         <para>The Structures tool looks for structure descriptions in the
-          subdirectory <filename class="directory">share/apps/okteta/structures/</filename>
+          subdirectory <filename class="directory">share/okteta/structures/</filename>
           of the user's directory for program data (find that by executing
-          <userinput><command>kde4-config</command> <option>--localprefix</option></userinput>).
+          <userinput><command>kf5-config</command> <option>--path data</option></userinput>).
           You may need to create this directory if there are no structure
           definitions installed yet.</para>
           <para>Two files exist for every structure definition: One file for the actual definition and a

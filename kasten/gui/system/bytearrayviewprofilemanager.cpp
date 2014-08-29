@@ -24,27 +24,24 @@
 
 // library
 #include "bytearrayviewprofilelock.h"
-// KDE
-#include <KGlobal>
-#include <KStandardDirs>
+#include <oktetakastengui.h>
+// KF5
 #include <KConfigGroup>
 #include <KConfig>
 #include <KDirWatch>
-#include <KLockFile>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QUuid>
 
-#include <KDebug>
 
-namespace Kasten2
+namespace Kasten
 {
 static const QStringList viewProfileFileNameFilter =
-    QStringList() << QLatin1String( "*.obavp" ) << QLatin1String( "*.olock" );
-static const QString viewProfileFileSuffix = QLatin1String( ".obavp" );
-static const QString viewProfileDirSubPath = QLatin1String( "okteta/viewprofiles" );
-static const QString defaultViewProfileFileSubPath = QLatin1String( "okteta/defaultviewprofile" );
+    QStringList() << QStringLiteral( "*.obavp" ) << QStringLiteral( "*.olock" );
+static const QString viewProfileFileSuffix = QStringLiteral( ".obavp" );
+static const QString viewProfileDirSubPath = QStringLiteral( "/okteta/viewprofiles" );
+static const QString defaultViewProfileFileSubPath = QStringLiteral( "/okteta/defaultviewprofile" );
 static const int DefaultNoOfBytesPerLine = 16;
 static const int DefaultNoOfBytesPerGroup = 4;
 static const int DefaultLayoutStyle = 0;
@@ -115,13 +112,14 @@ updateLockStatus( ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup,
 static QString
 defaultViewProfileFilePath()
 {
-    return KGlobal::dirs()->saveLocation( "data" ) + defaultViewProfileFileSubPath;
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + defaultViewProfileFileSubPath;
 }
 
 static QString
 viewProfileFilePath( const ByteArrayViewProfile::Id& viewProfileId )
 {
-    return KGlobal::dirs()->saveLocation( "data", viewProfileDirSubPath ) + viewProfileId + viewProfileFileSuffix;
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
+        + viewProfileDirSubPath + QLatin1Char('/') + viewProfileId + viewProfileFileSuffix;
 }
 
 static QString
@@ -136,19 +134,19 @@ viewProfileFileName( const ByteArrayViewProfile::Id& viewProfileId )
 ByteArrayViewProfileManager::ByteArrayViewProfileManager()
 {
     mViewProfileFileWatcher = new KDirWatch( this );
-    connect( mViewProfileFileWatcher, SIGNAL(dirty(QString)),
-             SLOT(onViewProfilesFolderChanged(QString)) );
+    connect( mViewProfileFileWatcher, &KDirWatch::dirty,
+             this, &ByteArrayViewProfileManager::onViewProfilesFolderChanged );
 
     // get all folder where viewProfiles could be stored
-    const KStandardDirs* const standardDirs = KGlobal::dirs();
-    const QStringList dataFolderPaths = standardDirs->resourceDirs( "data" );
+    const QStringList dataFolderPaths =
+            QStandardPaths::standardLocations( QStandardPaths::GenericDataLocation );
 
     foreach( const QString& dataFolderPath, dataFolderPaths )
     {
         const QString viewProfileFolderPath = dataFolderPath + viewProfileDirSubPath;
         // watch folder for changes
         mViewProfileFileWatcher->addDir( viewProfileFolderPath, KDirWatch::WatchDirOnly );
-kDebug() << "adding Dir"<<viewProfileFolderPath;
+        qCDebug(LOG_KASTEN_OKTETA_GUI) << "adding Dir" << viewProfileFolderPath;
 
         // read current files
         onViewProfilesFolderChanged( viewProfileFolderPath );
@@ -158,10 +156,10 @@ kDebug() << "adding Dir"<<viewProfileFolderPath;
     // While there is no proper config syncing offer in the used frameworks, use a
     // single file with the id as content as workaround and watch for it changing
     KDirWatch* defaultViewProfileWatcher = new KDirWatch( this );
-    connect( defaultViewProfileWatcher, SIGNAL(created(QString)),
-             SLOT(onDefaultViewProfileChanged(QString)) );
-    connect( defaultViewProfileWatcher, SIGNAL(dirty(QString)),
-             SLOT(onDefaultViewProfileChanged(QString)) );
+    connect( defaultViewProfileWatcher, &KDirWatch::created,
+             this, &ByteArrayViewProfileManager::onDefaultViewProfileChanged );
+    connect( defaultViewProfileWatcher, &KDirWatch::dirty,
+             this, &ByteArrayViewProfileManager::onDefaultViewProfileChanged );
     const QString _defaultViewProfileFilePath = defaultViewProfileFilePath();
 
     defaultViewProfileWatcher->addFile( _defaultViewProfileFilePath );
@@ -263,7 +261,7 @@ void ByteArrayViewProfileManager::saveViewProfiles( QList<ByteArrayViewProfile>&
         if( needsId )
             viewProfile.setId( QUuid::createUuid().toString() );
 
-kDebug() << "going to save"<<viewProfile.viewProfileTitle()<<viewProfile.id()<<oldViewProfileId;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "going to save"<<viewProfile.viewProfileTitle()<<viewProfile.id()<<oldViewProfileId;
         saveViewProfile( viewProfile );
     }
 }
@@ -331,7 +329,7 @@ ByteArrayViewProfileManager::lockViewProfile( const Kasten::ByteArrayViewProfile
 ByteArrayViewProfile
 ByteArrayViewProfileManager::loadViewProfile( const QString& absoluteFilePath ) const
 {
-kDebug() << "Loading" << QFileInfo(absoluteFilePath).baseName() << absoluteFilePath;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "Loading" << QFileInfo(absoluteFilePath).baseName() << absoluteFilePath;
     ByteArrayViewProfile result;
 
     KConfig configFile( absoluteFilePath, KConfig::SimpleConfig );
@@ -339,9 +337,9 @@ kDebug() << "Loading" << QFileInfo(absoluteFilePath).baseName() << absoluteFileP
     // check version
     KConfigGroup formatConfigGroup = configFile.group( "OBAVP" );
     const QString formatVersion = formatConfigGroup.readEntry( "Version" );
-    if( ! formatVersion.startsWith(QLatin1String( "1." )) )
+    if( ! formatVersion.startsWith(QStringLiteral( "1." )) )
     {
-kDebug() << "ViewProfile file has an unsupported version:" << formatVersion;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "ViewProfile file has an unsupported version:" << formatVersion;
         return result;
     }
 
@@ -378,7 +376,7 @@ kDebug() << "ViewProfile file has an unsupported version:" << formatVersion;
 void
 ByteArrayViewProfileManager::saveViewProfile( const ByteArrayViewProfile& viewProfile ) const
 {
-kDebug() << "------------------ Saving"<<viewProfile.id();
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "------------------ Saving"<<viewProfile.id();
 {
     const QString fileName = viewProfileFilePath( viewProfile.id() );
     KConfig configFile( fileName, KConfig::SimpleConfig );
@@ -411,14 +409,14 @@ kDebug() << "------------------ Saving"<<viewProfile.id();
     charsConfigGroup.writeEntry( "SubstituteChar", QString(viewProfile.substituteChar()) );
     charsConfigGroup.writeEntry( "UndefinedChar", QString(viewProfile.undefinedChar()) );
 }
-kDebug() << "------------------ Saved"<<viewProfile.id();
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "------------------ Saved"<<viewProfile.id();
 }
 
 void
 ByteArrayViewProfileManager::removeViewProfile( const ByteArrayViewProfile::Id& viewProfileId )
 {
     const QString filePath = filePathOfViewProfile( viewProfileId );
-kDebug() << "------------------ Removing"<<viewProfileId<<filePath;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "------------------ Removing"<<viewProfileId<<filePath;
     if( ! filePath.isEmpty() )
         QFile::remove( filePath );
 }
@@ -452,7 +450,7 @@ ByteArrayViewProfileManager::filePathOfViewProfile( const ByteArrayViewProfile::
 void
 ByteArrayViewProfileManager::onViewProfilesFolderChanged( const QString& viewProfileFolderPath )
 {
-kDebug() << "looking into folder"<< viewProfileFolderPath;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "looking into folder"<< viewProfileFolderPath;
     ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup =
         mViewProfileFileInfoLookupPerFolder[viewProfileFolderPath];
 
@@ -464,8 +462,8 @@ kDebug() << "looking into folder"<< viewProfileFolderPath;
 
     QList<ByteArrayViewProfile::Id> newUnlockedViewProfileIds = lockedViewProfileIds(viewProfileFileInfoLookup);
     QList<ByteArrayViewProfile::Id> newLockedViewProfileIds;
-kDebug() << "old profiles:" << removedViewProfileIds;
-kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "old profiles:" << removedViewProfileIds;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "locked profiles:" << newUnlockedViewProfileIds;
     // iterate all files in folder
     const QFileInfoList viewProfileFileInfoList =
         QDir( viewProfileFolderPath ).entryInfoList( viewProfileFileNameFilter, QDir::Files );
@@ -473,7 +471,7 @@ kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
     foreach( const QFileInfo& viewProfileFileInfo, viewProfileFileInfoList )
     {
        // a lock file ?
-       if( viewProfileFileInfo.suffix() == QLatin1String("olock") )
+       if( viewProfileFileInfo.suffix() == QStringLiteral("olock") )
        {
            const ByteArrayViewProfile::Id lockedViewProfileId = viewProfileFileInfo.baseName();
            // if not in old locks, is a new lock
@@ -483,12 +481,12 @@ kDebug() << "locked profiles:" << newUnlockedViewProfileIds;
        }
 
        // not a viewprofile file ?
-       if( viewProfileFileInfo.suffix() != QLatin1String("obavp") )
+       if( viewProfileFileInfo.suffix() != QStringLiteral("obavp") )
             continue;
 
        // all other files assumed to be viewProfile files
         const ByteArrayViewProfile::Id viewProfileId = viewProfileFileInfo.baseName();
-kDebug() <<"going to load"<<viewProfileId;
+qCDebug(LOG_KASTEN_OKTETA_GUI) <<"going to load"<<viewProfileId;
         // load file
         const ByteArrayViewProfile viewProfile = loadViewProfile( viewProfileFileInfo.absoluteFilePath() );
         // loading failed? Treat as not existing
@@ -565,22 +563,22 @@ kDebug() <<"going to load"<<viewProfileId;
     // update lock info
     updateLockStatus( viewProfileFileInfoLookup, newLockedViewProfileIds, newUnlockedViewProfileIds );
 
-kDebug() << "new profiles:" << viewProfileFileInfoLookup.keys();
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "new profiles:" << viewProfileFileInfoLookup.keys();
 
     // signal changes
     if( ! changedViewProfiles.isEmpty() )
         emit viewProfilesChanged( changedViewProfiles );
-kDebug() << "changed profiles" << viewProfileIds(changedViewProfiles);
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "changed profiles" << viewProfileIds(changedViewProfiles);
     if( ! removedViewProfileIds.isEmpty() )
         emit viewProfilesRemoved( removedViewProfileIds );
-kDebug() << "removed profiles" << removedViewProfileIds;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "removed profiles" << removedViewProfileIds;
 
     if( ! newUnlockedViewProfileIds.isEmpty() )
         emit viewProfilesUnlocked( newUnlockedViewProfileIds );
-kDebug() << "unlocked profiles" << newUnlockedViewProfileIds;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "unlocked profiles" << newUnlockedViewProfileIds;
     if( ! newLockedViewProfileIds.isEmpty() )
         emit viewProfilesLocked( newLockedViewProfileIds );
-kDebug() << "locked profiles" << newLockedViewProfileIds;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "locked profiles" << newLockedViewProfileIds;
     if( isDefaultViewProfileChanged )
         emit defaultViewProfileChanged( mDefaultViewProfileId );
 }
@@ -591,10 +589,10 @@ void ByteArrayViewProfileManager::onDefaultViewProfileChanged( const QString& pa
     defaultViewProfileFile.open( QIODevice::ReadOnly );
 
     const QByteArray fileContent = defaultViewProfileFile.readAll();
-    const QString viewProfileId = QString::fromUtf8( fileContent, fileContent.size() );
+    const QString viewProfileId = QString::fromUtf8( fileContent );
     defaultViewProfileFile.close();
 
-kDebug() << "Default viewprofile read:" << viewProfileId;
+qCDebug(LOG_KASTEN_OKTETA_GUI) << "Default viewprofile read:" << viewProfileId;
 
     // no id set?
     if( viewProfileId.isEmpty() )

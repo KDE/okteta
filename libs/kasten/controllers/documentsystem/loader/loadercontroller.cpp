@@ -24,18 +24,20 @@
 
 // Kasten core
 #include <abstractdocumentstrategy.h>
-// KDE
-#include <KUrl>
-#include <KFileDialog>
+// KF5
 #include <KRecentFilesAction>
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KConfigGroup>
-#include <KGlobal>
+#include <KSharedConfig>
+// Qt
+#include <QtCore/QUrl>
+#include <QFileDialog>
+#include <QMimeDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char CreatorConfigGroupId[] = "Recent Files";
@@ -50,12 +52,12 @@ LoaderController::LoaderController( AbstractDocumentStrategy* documentStrategy,
 
     KStandardAction::open( this, SLOT(load()), actionCollection );
     mOpenRecentAction =
-        KStandardAction::openRecent( this, SLOT(loadRecent(KUrl)), actionCollection );
+        KStandardAction::openRecent( this, SLOT(loadRecent(QUrl)), actionCollection );
 
-    KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
+    KConfigGroup configGroup( KSharedConfig::openConfig(), CreatorConfigGroupId );
     mOpenRecentAction->loadEntries( configGroup );
 
-    connect( mDocumentStrategy, SIGNAL(urlUsed(KUrl)), SLOT(onUrlUsed(KUrl)) );
+    connect( mDocumentStrategy, &AbstractDocumentStrategy::urlUsed, this, &LoaderController::onUrlUsed );
 }
 
 
@@ -64,47 +66,32 @@ void LoaderController::setTargetModel( AbstractModel* model )
 Q_UNUSED( model )
 }
 
-/// Creates a filter string as used by KFileDialog from @a _mimetypes
-/// Does a workaround for "application/octet-stream" because the mimetype system
-/// does not have a real entry for it ATM. It is replaced with "all/allfiles" in
-/// the created string which is instead used by Filedialog as fake mimetype for
-/// a type which is base type of all files.
-/// See also DocumentSyncManager.
-static QString mimetypeFilterString( const QStringList& _mimetypes )
-{
-    QStringList mimetypes = _mimetypes;
-
-    const int index = mimetypes.indexOf( QLatin1String("application/octet-stream") );
-    if( index != -1 )
-        mimetypes.replace( index, QLatin1String("all/allfiles") );
-
-    return mimetypes.join( QLatin1String(" ") );
-}
-
 void LoaderController::load()
 {
-    const QString filterString = mimetypeFilterString( mDocumentStrategy->supportedRemoteTypes() );
+    QFileDialog dialog;
+    dialog.setMimeTypeFilters( mDocumentStrategy->supportedRemoteTypes() );
+    if( dialog.exec() )
+    {
+        const QList<QUrl> urls = dialog.selectedUrls();
 
-    const KUrl::List urls =
-        KFileDialog::getOpenUrls( KUrl()/*mWorkingUrl.url()*/, filterString, /*mWidget*/0 );
-
-    foreach( const KUrl& url, urls )
-        mDocumentStrategy->load( url );
+        foreach( const QUrl& url, urls )
+            mDocumentStrategy->load( url );
+    }
 }
 
-void LoaderController::loadRecent( const KUrl& url )
+void LoaderController::loadRecent( const QUrl& url )
 {
     mDocumentStrategy->load( url );
 }
 
-void LoaderController::onUrlUsed( const KUrl& url )
+void LoaderController::onUrlUsed( const QUrl& url )
 {
     mOpenRecentAction->addUrl( url );
 }
 
 LoaderController::~LoaderController()
 {
-    KConfigGroup configGroup( KGlobal::config(), CreatorConfigGroupId );
+    KConfigGroup configGroup( KSharedConfig::openConfig(), CreatorConfigGroupId );
     mOpenRecentAction->saveEntries( configGroup );
 }
 

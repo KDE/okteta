@@ -29,10 +29,10 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 namespace If {
@@ -63,8 +63,8 @@ class KASTENCONTROLLERS_EXPORT ZoomController : public AbstractXmlGuiController
 
     double mZoomLevel;
 
-    KAction *mZoomInAction;
-    KAction *mZoomOutAction;
+    QAction *mZoomInAction;
+    QAction *mZoomOutAction;
 };
 
 }

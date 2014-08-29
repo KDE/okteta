@@ -27,11 +27,11 @@
 #include <bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 GotoOffsetTool::GotoOffsetTool()
@@ -42,7 +42,7 @@ GotoOffsetTool::GotoOffsetTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "GotoOffset" ) );
+    setObjectName( QStringLiteral( "GotoOffset" ) );
 }
 
 int GotoOffsetTool::currentOffset() const
@@ -83,8 +83,8 @@ void GotoOffsetTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                 SLOT(onContentsChanged()) );
+        connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                 this, &GotoOffsetTool::onContentsChanged );
         // TODO: update isApplyable on cursor movement and size changes
     }
 

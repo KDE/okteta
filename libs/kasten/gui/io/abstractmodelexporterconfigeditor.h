@@ -26,10 +26,10 @@
 // lib
 #include "kastengui_export.h"
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractSelectionView;

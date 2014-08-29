@@ -18,7 +18,7 @@
 
 //// ADAPT(start)
 //// add here all needed headers and forward declarations for the members of the widget
-class KIntNumInput;
+class QSpinBox;
 //// ADAPT(end)
 
 
@@ -57,7 +57,7 @@ class Template_ByteArrayChecksumParameterSetEdit : public AbstractByteArrayCheck
 //// ADAPT(start)
 //// here list the UI elements as usual
   protected:
-    KIntNumInput* mBitNumberEdit;
+    QSpinBox* mBitNumberEdit;
 
     bool mIsValid :1;
 //// ADAPT(end)

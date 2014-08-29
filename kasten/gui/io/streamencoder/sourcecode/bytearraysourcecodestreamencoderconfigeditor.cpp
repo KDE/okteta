@@ -24,17 +24,17 @@
 
 // lib
 #include "bytearraytextstreamencoderpreview.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 #include <KLineEdit>
-#include <KIntNumInput>
 #include <KComboBox>
 // Qt
-#include <QtGui/QFormLayout>
-#include <QtGui/QCheckBox>
+#include <QSpinBox>
+#include <QFormLayout>
+#include <QCheckBox>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderConfigEditor( ByteArraySourceCodeStreamEncoder* encoder, QWidget* parent )
@@ -53,7 +53,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
 
     mVariableNameEdit = new KLineEdit( this );
     mVariableNameEdit->setText( mSettings.variableName );
-    connect( mVariableNameEdit, SIGNAL(textChanged(QString)), SLOT(onSettingsChanged()) );
+    connect( mVariableNameEdit, &KLineEdit::textChanged, this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( variableNameLabel, mVariableNameEdit );
 
     // items per line
@@ -61,10 +61,10 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
         i18nc( "@label:textbox to define after how many items the list is wrapped",
                "Items per line:" );
 
-    mItemsPerLineEdit = new KIntNumInput( this );
+    mItemsPerLineEdit = new QSpinBox( this );
     mItemsPerLineEdit->setMinimum( 1 );
     mItemsPerLineEdit->setValue( mSettings.elementsPerLine );
-    connect( mItemsPerLineEdit, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );
+    connect( mItemsPerLineEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( itemsPerLineLabel, mItemsPerLineEdit );
 
     // data type
@@ -80,7 +80,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
         dataTypeNameStrings << QLatin1String(dataTypeNames[i]);
     mDataTypeSelect->addItems( dataTypeNameStrings );
     mDataTypeSelect->setCurrentIndex( mSettings.dataType );
-    connect( mDataTypeSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
+    connect( mDataTypeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( dataTypeLabel, mDataTypeSelect );
 
     // unsigned as hexadezimal
@@ -91,7 +91,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
 
     mUnsignedAsHexadecimalCheck = new QCheckBox( this );
     mUnsignedAsHexadecimalCheck->setChecked( mSettings.unsignedAsHexadecimal );
-    connect( mUnsignedAsHexadecimalCheck, SIGNAL(toggled(bool)), SLOT(onSettingsChanged()) );
+    connect( mUnsignedAsHexadecimalCheck, &QCheckBox::toggled, this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( unsignedAsHexadecimalLabel, mUnsignedAsHexadecimalCheck );
 }
 

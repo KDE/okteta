@@ -26,11 +26,11 @@
 // library
 #include "abstractfilesystemsyncfromremotejob.h"
 #include <abstractsyncfromremotejob_p.h>
-// KDE
-#include <KTemporaryFile>
+// KF5
+#include <QTemporaryFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelFileSystemSynchronizer;
@@ -62,6 +62,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJobPrivate : public Abst
   protected:
     AbstractModelFileSystemSynchronizer* mSynchronizer;
     QString mWorkFilePath;
+    QString mTempFilePath;
     QFile* mFile;
 };
 

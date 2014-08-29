@@ -22,9 +22,10 @@
 #ifndef SAFEREFERENCE_H
 #define SAFEREFERENCE_H
 
+#include "../structlogging.h"
+
 #include <QMultiHash>
 #include <QMetaType>
-#include <QDebug>
 
 class DataInformation;
 class SafeReference;
@@ -68,7 +69,7 @@ Q_DECLARE_METATYPE(SafeReference)
 
 inline SafeReference::SafeReference() : mData(0)
 {
-    qDebug() << "default constructed safe reference";
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "default constructed safe reference";
 }
 
 inline SafeReference::SafeReference(DataInformation* data) : mData(data)
@@ -101,9 +102,9 @@ inline void SafeReferenceHolder::safeReferenceDestroyed(SafeReference* ref)
     if (!ref->data())
         return; //has been invalidated -> was already removed
     int removed = mRefs.remove(ref->data(), ref);
-    //qDebug() << "safe ref destroyed " << ref;
+    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "safe ref destroyed " << ref;
     if (removed <= 0)
-        qDebug() << "safe refenrece could not be removed:" << ref;
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "safe refenrece could not be removed:" << ref;
     else
         safeRefDestroyCnt += removed;
 }
@@ -113,11 +114,11 @@ inline void SafeReferenceHolder::registerSafeReference(SafeReference* ref, DataI
     if (Q_LIKELY(data))
     {
         mRefs.insert(data, ref);
-        //qDebug() << "registered safe ref" << ref << data;
+        //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "registered safe ref" << ref << data;
         safeRefRegisterCnt++;
     }
     else {
-        qWarning() << "invalid ref copied";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalid ref copied";
     }
 }
 

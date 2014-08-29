@@ -1,7 +1,7 @@
 # Code generation options for kconfig_compiler
 File=structviewpreferences.kcfg
 ClassName=StructViewPreferences
-Namespace=Kasten2
+NameSpace=Kasten
 Singleton=true
 Mutators=true
 ItemAccessors=true

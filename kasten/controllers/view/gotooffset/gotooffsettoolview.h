@@ -27,7 +27,7 @@
 #include <abstracttoolinlineview.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class GotoOffsetView;

@@ -20,7 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "structviewdisplaysettingswidget.h"
+
 #include "structviewpreferences.h"
+#include "../structlogging.h"
+
+#include <KLocalizedString>
+
 
 StructViewDisplaySettingsWidget::StructViewDisplaySettingsWidget() :
     QWidget(NULL)
@@ -34,18 +39,18 @@ StructViewDisplaySettingsWidget::StructViewDisplaySettingsWidget() :
     //these are needed since KConfigXT always uses the combo box index as the value
     //we want the UserData of the current index instead
     //maybe there is a nicer solution, but this works
-    ui.kcfg_CharDisplayBase->setValue(Kasten2::StructViewPreferences::charDisplayBase());
+    ui.kcfg_CharDisplayBase->setValue(Kasten::StructViewPreferences::charDisplayBase());
     ui.kcfg_CharDisplayBase->setHidden(true);
-    ui.kcfg_SignedDisplayBase->setValue(Kasten2::StructViewPreferences::signedDisplayBase());
+    ui.kcfg_SignedDisplayBase->setValue(Kasten::StructViewPreferences::signedDisplayBase());
     ui.kcfg_SignedDisplayBase->setHidden(true);
-    ui.kcfg_UnsignedDisplayBase->setValue(Kasten2::StructViewPreferences::unsignedDisplayBase());
+    ui.kcfg_UnsignedDisplayBase->setValue(Kasten::StructViewPreferences::unsignedDisplayBase());
     ui.kcfg_UnsignedDisplayBase->setHidden(true);
-    setupBasesCombo(ui.combo_SignedDisplayBase, Kasten2::StructViewPreferences::self()->signedDisplayBaseItem(),
-        Kasten2::StructViewPreferences::signedDisplayBase(), SLOT(setSignedDisplay(int)));
-    setupBasesCombo(ui.combo_UnsignedDisplayBase, Kasten2::StructViewPreferences::self()->unsignedDisplayBaseItem(),
-        Kasten2::StructViewPreferences::unsignedDisplayBase(), SLOT(setUnsignedDisplay(int)));
-    setupBasesCombo(ui.combo_CharDisplayBase, Kasten2::StructViewPreferences::self()->charDisplayBaseItem(),
-        Kasten2::StructViewPreferences::charDisplayBase(), SLOT(setCharDisplay(int)));
+    setupBasesCombo(ui.combo_SignedDisplayBase, Kasten::StructViewPreferences::self()->signedDisplayBaseItem(),
+        Kasten::StructViewPreferences::signedDisplayBase(), SLOT(setSignedDisplay(int)));
+    setupBasesCombo(ui.combo_UnsignedDisplayBase, Kasten::StructViewPreferences::self()->unsignedDisplayBaseItem(),
+        Kasten::StructViewPreferences::unsignedDisplayBase(), SLOT(setUnsignedDisplay(int)));
+    setupBasesCombo(ui.combo_CharDisplayBase, Kasten::StructViewPreferences::self()->charDisplayBaseItem(),
+        Kasten::StructViewPreferences::charDisplayBase(), SLOT(setCharDisplay(int)));
 }
 
 StructViewDisplaySettingsWidget::~StructViewDisplaySettingsWidget()
@@ -57,7 +62,7 @@ void StructViewDisplaySettingsWidget::setupBasesCombo(QComboBox* box, KConfigSke
 {
     Q_ASSERT(box->count() == 0);
     Q_ASSERT(currentValue == 2 || currentValue == 8 || currentValue == 10 || currentValue == 16);
-    qDebug() << "current value:" << configItem->property() << "vs" << currentValue;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "current value:" << configItem->property() << "vs" << currentValue;
     box->addItem(i18nc("@item:inlistbox", "Binary"), 2);
     box->addItem(i18nc("@item:inlistbox", "Octal"), 8);
     box->addItem(i18nc("@item:inlistbox", "Decimal"), 10);
@@ -72,25 +77,25 @@ void StructViewDisplaySettingsWidget::setupBasesCombo(QComboBox* box, KConfigSke
 void StructViewDisplaySettingsWidget::handleMapping(int index, QComboBox* box, QSpinBox* spin)
 {
     QVariant currentValue = box->itemData(index);
-    qDebug() << "box changed to " << index << "value = " << currentValue;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "box changed to " << index << "value = " << currentValue;
     if (spin->value() != currentValue.toInt())
         spin->setValue(currentValue.toInt());
 }
 
 void StructViewDisplaySettingsWidget::setCharDisplay(int index)
 {
-    qDebug() << "byteOrder changed to " << index;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "byteOrder changed to " << index;
     handleMapping(index, ui.combo_CharDisplayBase, ui.kcfg_CharDisplayBase);
 }
 
 void StructViewDisplaySettingsWidget::setSignedDisplay(int index)
 {
-    qDebug() << "byteOrder changed to " << index;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "byteOrder changed to " << index;
     handleMapping(index, ui.combo_SignedDisplayBase, ui.kcfg_SignedDisplayBase);
 }
 
 void StructViewDisplaySettingsWidget::setUnsignedDisplay(int index)
 {
-    qDebug() << "byteOrder changed to " << index;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "byteOrder changed to " << index;
     handleMapping(index, ui.combo_UnsignedDisplayBase, ui.kcfg_UnsignedDisplayBase);
 }

@@ -27,11 +27,10 @@
 #include <abstractconnectjob.h>
 #include <abstractmodelsynchronizer.h>
 
-class KUrl;
 class QFile;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelFileSystemSynchronizer;
@@ -45,7 +44,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJob : public AbstractConnectJob
 
   public:
     AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
-                                  const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                  const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
     virtual ~AbstractFileSystemConnectJob();
 

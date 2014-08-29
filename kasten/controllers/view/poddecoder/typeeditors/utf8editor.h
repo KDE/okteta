@@ -25,7 +25,7 @@
 
 // lib
 #include "../types/utf8.h"
-// KDE
+// KF5
 #include <KLineEdit>
 
 

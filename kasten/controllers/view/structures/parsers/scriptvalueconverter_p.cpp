@@ -283,7 +283,7 @@ DataInformation* ScriptValueConverter::ScriptValueChildrenParser::next()
 {
     Q_ASSERT(hasNext());
     mIter.next();
-    if (mValue.isArray() && mIter.name() == QLatin1String("length"))
+    if (mValue.isArray() && mIter.name() == QStringLiteral("length"))
         mIter.next(); //skip length property
     mInfo.name = mIter.name();
     return toDataInformation(mIter.value(), mInfo);
@@ -297,7 +297,7 @@ bool ScriptValueConverter::ScriptValueChildrenParser::hasNext()
     {
         //check if next element is length property
         mIter.next();
-        if (mIter.name() != QLatin1String("length"))
+        if (mIter.name() != QStringLiteral("length"))
         {
             mIter.previous(); //go back and return true
             return true;

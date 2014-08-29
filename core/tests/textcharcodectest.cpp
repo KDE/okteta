@@ -24,8 +24,8 @@
 
 // test object
 #include <codecs/textcharcodec.h>
-// KDE
-#include <qtest_kde.h>
+// KF5
+#include <QtTest/QTest>
 
 
 namespace Okteta
@@ -63,10 +63,10 @@ void TextCharCodecTest::testCreateLocalCodec()
 
 void TextCharCodecTest::testCreateNonexistingCodec()
 {
-    TextCharCodec* codec = TextCharCodec::createCodec( QLatin1String("NonexistingCode") );
+    TextCharCodec* codec = TextCharCodec::createCodec( QStringLiteral("NonexistingCode") );
     QVERIFY( codec == 0 );
 }
 
 }
 
-QTEST_KDEMAIN_CORE( Okteta::TextCharCodecTest )
+QTEST_GUILESS_MAIN( Okteta::TextCharCodecTest )

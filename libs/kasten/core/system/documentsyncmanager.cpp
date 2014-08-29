@@ -34,15 +34,17 @@
 #include <abstractsyncfromremotejob.h>
 #include <abstractmodelsynchronizerfactory.h>
 #include <abstractdocument.h>
-// KDE
-#include <KIO/NetAccess>
-#include <KFileDialog>
-#include <KLocale>
+// KF5
+#include <KIO/StatJob>
+#include <KJobWidgets>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QUrl>
+#include <QFileDialog>
+#include <QMimeDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 
@@ -75,11 +77,11 @@ bool DocumentSyncManager::hasSynchronizerForLocal( const QString& workDocumentTy
     return ( mSynchronizerFactory->supportedWorkType() == workDocumentType );
 }
 
-KUrl DocumentSyncManager::urlOf( AbstractDocument* document ) const
+QUrl DocumentSyncManager::urlOf( AbstractDocument* document ) const
 {
     AbstractModelSynchronizer* synchronizer = document->synchronizer();
 
-    return synchronizer ? synchronizer->url() : KUrl();
+    return synchronizer ? synchronizer->url() : QUrl();
 }
 
 void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory )
@@ -87,7 +89,7 @@ void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchroni
     mSynchronizerFactory = synchronizerFactory;
 }
 
-void DocumentSyncManager::load( const KUrl& url )
+void DocumentSyncManager::load( const QUrl& url )
 {
     foreach( AbstractDocument* document, mManager->documents() )
     {
@@ -101,31 +103,14 @@ void DocumentSyncManager::load( const KUrl& url )
 
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
     AbstractLoadJob* loadJob = synchronizer->startLoad( url );
-    connect( loadJob, SIGNAL(documentLoaded(Kasten2::AbstractDocument*)),
-             SLOT(onDocumentLoaded(Kasten2::AbstractDocument*)) );
+    connect( loadJob, SIGNAL(documentLoaded(Kasten::AbstractDocument*)),
+             SLOT(onDocumentLoaded(Kasten::AbstractDocument*)) );
 
     JobManager::executeJob( loadJob ); // TODO: pass a ui handler to jobmanager
 
     // store path
 //     mWorkingUrl = url.upUrl();
     emit urlUsed( url );
-}
-
-/// Creates a filter string as used by KFileDialog from @a _mimetypes
-/// Does a workaround for "application/octet-stream" because the mimetype system
-/// does not have a real entry for it ATM. It is replaced with "all/allfiles" in
-/// the created string which is instead used by Filedialog as fake mimetype for
-/// a type which is base type of all files.
-/// See also e.g. LoaderController.
-static QString mimetypeFilterString( const QStringList& _mimetypes )
-{
-    QStringList mimetypes = _mimetypes;
-
-    const int index = mimetypes.indexOf( QLatin1String("application/octet-stream") );
-    if( index != -1 )
-        mimetypes.replace( index, QLatin1String("all/allfiles") );
-
-    return mimetypes.join( QLatin1String(" ") );
 }
 
 bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
@@ -138,20 +123,25 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
 //         currentSynchronizer->pauseSynchronization(); also unpause below
     const QString processTitle =
         i18nc( "@title:window", "Save As" );
-    const QString filterString = mimetypeFilterString( supportedRemoteTypes() );
     do
     {
-        KUrl newUrl = KFileDialog::getSaveUrl( /*mWorkingUrl.url()*/KUrl(), filterString, /*mWidget*/0, processTitle );
+        QFileDialog dialog( /*mWidget*/0, processTitle, /*mWorkingUrl.url()*/QString() );
+        dialog.setMimeTypeFilters( supportedRemoteTypes() );
+        dialog.setAcceptMode( QFileDialog::AcceptSave );
+        const QUrl newUrl = dialog.exec() ? dialog.selectedUrls().value(0) : QUrl();
 
-        if( !newUrl.isEmpty() )
+        if( newUrl.isValid() )
         {
             const bool isNewUrl = ( currentSynchronizer == 0 )
                                   || ( newUrl != currentSynchronizer->url() );
 
             if( isNewUrl )
             {
-                const bool isUrlInUse =
-                    KIO::NetAccess::exists( newUrl, KIO::NetAccess::DestinationSide, /*mWidget*/0 );
+                KIO::StatJob* statJob = KIO::stat( newUrl );
+                statJob->setSide(  KIO::StatJob::DestinationSide );
+                KJobWidgets::setWindow( statJob, /*mWidget*/0 );
+
+                const bool isUrlInUse = statJob->exec();
 
                 if( isUrlInUse )
                 {
@@ -294,12 +284,12 @@ void DocumentSyncManager::onDocumentLoaded( AbstractDocument* document )
         mManager->addDocument( document );
 }
 
-void DocumentSyncManager::onDocumentsAdded( const QList<Kasten2::AbstractDocument*>& documents )
+void DocumentSyncManager::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
     Q_UNUSED( documents )
 }
 
-void DocumentSyncManager::onDocumentsClosing( const QList<Kasten2::AbstractDocument*>& documents )
+void DocumentSyncManager::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
 {
     Q_UNUSED( documents )
 }

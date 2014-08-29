@@ -26,14 +26,15 @@
 #include <bytearrayviewprofilemanager.h>
 // controller
 #include "viewprofilesmanagedialog.h"
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
-#include <KAction>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewProfilesManageController::ViewProfilesManageController( KXMLGUIClient* guiClient,
@@ -44,7 +45,7 @@ ViewProfilesManageController::ViewProfilesManageController( KXMLGUIClient* guiCl
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mManageAction = actionCollection->addAction( QLatin1String("settings_viewprofiles_manage"),
+    mManageAction = actionCollection->addAction( QStringLiteral("settings_viewprofiles_manage"),
                                                  this, SLOT(manageProfiles()) );
     mManageAction->setText( i18nc("@action:inmenu",
                                   "Manage View Profiles...") );

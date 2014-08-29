@@ -33,23 +33,23 @@
 #include <modelcodecmanager.h>
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
 #include <KActionCollection>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KSelectAction>
 // Qt
 #include <QtCore/QMimeData>
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 #ifndef ABSTRACTMODELDATAGENERATOR_METATYPE
 #define ABSTRACTMODELDATAGENERATOR_METATYPE
-Q_DECLARE_METATYPE(Kasten2::AbstractModelDataGenerator*)
+Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
 #endif
 
-namespace Kasten2
+namespace Kasten
 {
 
 InsertController::InsertController( ModelCodecViewManager* modelCodecViewManager,
@@ -62,9 +62,9 @@ InsertController::InsertController( ModelCodecViewManager* modelCodecViewManager
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mInsertSelectAction = actionCollection->add<KSelectAction>( QLatin1String("insert") ); //TODO: find better id
+    mInsertSelectAction = actionCollection->add<KSelectAction>( QStringLiteral("insert") ); //TODO: find better id
     mInsertSelectAction->setText( i18nc("@title:menu","Insert") );
-//     mInsertSelectAction->setIcon( KIcon("insert-text") );
+//     mInsertSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("insert-text") ) );
     mInsertSelectAction->setToolBarMode( KSelectAction::MenuMode );
     connect( mInsertSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
 

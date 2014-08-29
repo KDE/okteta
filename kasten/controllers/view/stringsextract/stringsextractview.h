@@ -24,11 +24,11 @@
 #define STRINGSEXTRACTVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class ContainedStringTableModel;
 
-class KPushButton;
+class QPushButton;
 
 class QTreeView;
 class QSortFilterProxyModel;
@@ -36,7 +36,7 @@ class QModelIndex;
 class QSpinBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class StringsExtractTool;
@@ -78,9 +78,9 @@ class StringsExtractView : public QWidget
 
     QTreeView *mContainedStringTableView;
     QSpinBox *mMinLengthSpinBox;
-    KPushButton *mUpdateButton;
-    KPushButton *mCopyButton;
-    KPushButton *mGotoButton;
+    QPushButton *mUpdateButton;
+    QPushButton *mCopyButton;
+    QPushButton *mGotoButton;
 };
 
 

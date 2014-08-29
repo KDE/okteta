@@ -29,7 +29,7 @@
 #include <QtCore/QtPlugin>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 namespace If
@@ -49,6 +49,6 @@ inline SearchUserQueryable::~SearchUserQueryable() {}
 }
 }
 
-// Q_DECLARE_INTERFACE( Kasten2::If::UserListable, "org.kde.kasten2.if.userlistable/1.0" )
+// Q_DECLARE_INTERFACE( Kasten::If::UserListable, "org.kde.kasten.if.userlistable/1.0" )
 
 #endif

@@ -32,18 +32,9 @@ include_directories(
 
 if( QCA2_FOUND )
   include_directories( ${QCA2_INCLUDE_DIR} )
-  # QCA needs QT_NO_CAST_FROM_ASCII disabled when included.
-  # So in case of ENABLE_FINAL that needs to be done globally,
-  # not only in checksumtool.cpp
-  if( KDE4_ENABLE_FINAL )
-    remove_definitions(
-      -DQT_NO_CAST_TO_ASCII
-      -DQT_NO_CAST_FROM_ASCII
-    )
-  endif( KDE4_ENABLE_FINAL )
 endif( QCA2_FOUND )
 
-macro_bool_to_01( QCA2_FOUND  HAVE_QCA2 )
+set(HAVE_QCA2 ${QCA2_FOUND})
 configure_file( config-qca2.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h )
 
 set( DOCUMENTINFOCONTROLLER_SRCS
@@ -67,7 +58,7 @@ set( INFOCONTROLLER_SRCS
   view/info/infotoolfactory.cpp
   view/info/infotoolviewfactory.cpp
 )
-kde4_add_kcfg_files( INFOCONTROLLER_SRCS view/info/infoviewsettings.kcfgc )
+kconfig_add_kcfg_files( INFOCONTROLLER_SRCS view/info/infoviewsettings.kcfgc )
 
 set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/extractstringsjob.cpp
@@ -117,6 +108,7 @@ set( LIBCHECKSUM_SRCS
 )
 set( CHECKSUMCONTROLLER_SRCS
   view/checksum/checksumcalculatejob.cpp
+  view/checksum/checksumlogging.cpp
   view/checksum/checksumtool.cpp
   view/checksum/checksumview.cpp
   view/checksum/checksumtoolview.cpp
@@ -142,24 +134,6 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/typecodecs/float64codec.cpp
   view/poddecoder/typecodecs/char8codec.cpp
   view/poddecoder/typecodecs/utf8codec.cpp
-  view/poddecoder/typeeditors/abstractvalue8editor.cpp
-  view/poddecoder/typeeditors/binary8editor.cpp
-  view/poddecoder/typeeditors/octal8editor.cpp
-  view/poddecoder/typeeditors/hexadecimal8editor.cpp
-  view/poddecoder/typeeditors/uintspinbox.cpp
-  view/poddecoder/typeeditors/sintspinbox.cpp
-  view/poddecoder/typeeditors/uint8editor.cpp
-  view/poddecoder/typeeditors/uint16editor.cpp
-  view/poddecoder/typeeditors/uint32editor.cpp
-  view/poddecoder/typeeditors/uint64editor.cpp
-  view/poddecoder/typeeditors/sint8editor.cpp
-  view/poddecoder/typeeditors/sint16editor.cpp
-  view/poddecoder/typeeditors/sint32editor.cpp
-  view/poddecoder/typeeditors/sint64editor.cpp
-  view/poddecoder/typeeditors/float32editor.cpp
-  view/poddecoder/typeeditors/float64editor.cpp
-  view/poddecoder/typeeditors/char8editor.cpp
-  view/poddecoder/typeeditors/utf8editor.cpp
   view/poddecoder/poddata.cpp
   view/poddecoder/poddecodertool.cpp
   view/poddecoder/podtablemodel.cpp
@@ -169,6 +143,20 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/poddecodertoolfactory.cpp
   view/poddecoder/poddecodertoolviewfactory.cpp
 )
+
+set( PODDECODER_TYPEEDITOR_SRCS
+  view/poddecoder/typeeditors/abstractvalue8editor.cpp
+  view/poddecoder/typeeditors/binary8editor.cpp
+  view/poddecoder/typeeditors/octal8editor.cpp
+  view/poddecoder/typeeditors/hexadecimal8editor.cpp
+  view/poddecoder/typeeditors/uintspinbox.cpp
+  view/poddecoder/typeeditors/sintspinbox.cpp
+  view/poddecoder/typeeditors/float32editor.cpp
+  view/poddecoder/typeeditors/float64editor.cpp
+  view/poddecoder/typeeditors/char8editor.cpp
+  view/poddecoder/typeeditors/utf8editor.cpp
+)
+
 set( BYTETABLECONTROLLER_SRCS
   view/bytetable/bytetablemodel.cpp
   view/bytetable/bytetabletool.cpp
@@ -177,7 +165,7 @@ set( BYTETABLECONTROLLER_SRCS
   view/bytetable/bytetabletoolfactory.cpp
   view/bytetable/bytetabletoolviewfactory.cpp
 )
-kde4_add_kcfg_files( BYTETABLECONTROLLER_SRCS view/bytetable/bytetableviewsettings.kcfgc )
+kconfig_add_kcfg_files( BYTETABLECONTROLLER_SRCS view/bytetable/bytetableviewsettings.kcfgc )
 
 set( SEARCHCONTROLLER_SRCS
   view/search/ksearchdialog.cpp
@@ -269,21 +257,8 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarkstoolviewfactory.cpp
 )
 
-set( STRUCTVIEW_SRCS
+set( STRUCTVIEW_TESTED_SRCS
   view/structures/allprimitivetypes.cpp
-  view/structures/structurestoolfactory.cpp
-  view/structures/structurestoolviewfactory.cpp
-  view/structures/structuresmanager.cpp
-  view/structures/structtool.cpp
-  view/structures/structtreemodel.cpp
-#   view/structures/modeltest.cpp
-  view/structures/structview.cpp
-  view/structures/structtoolview.cpp
-  view/structures/structviewitemdelegate.cpp
-  view/structures/structuredefinitionfile.cpp
-  view/structures/settings/structureaddremovewidget.cpp
-  view/structures/settings/structviewdisplaysettingswidget.cpp
-  view/structures/settings/structuresmanagerview.cpp
   view/structures/datatypes/topleveldatainformation.cpp
   view/structures/datatypes/datainformation.cpp
   view/structures/datatypes/datainformationbase.cpp
@@ -343,15 +318,28 @@ set( STRUCTVIEW_SRCS
   view/structures/parsers/scriptvalueconverter_p.cpp
   view/structures/parsers/datainformationfactory.cpp
   view/structures/parsers/parserutils.cpp
+  view/structures/structlogging.cpp
 )
-configure_file( config-structtool.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-structtool.h )
-if ( OKTETA_DEBUG_SCRIPT )
-    message( STATUS "Okteta will be compiled with script debugging enabled" )
-else( OKTETA_DEBUG_SCRIPT )
-    message( STATUS "Okteta will be compiled without script debugging. (-DOKTETA_DEBUG_SCRIPT=1 to enable)" )
-endif( OKTETA_DEBUG_SCRIPT )
-kde4_add_kcfg_files( STRUCTVIEW_SRCS view/structures/settings/structviewpreferences.kcfgc )
-kde4_add_ui_files( STRUCTVIEW_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
+
+#these source files are not needed by the static library for unit tests, therefore keep them separate
+set( STRUCTVIEW_OTHER_SRCS
+  view/structures/structurestoolfactory.cpp
+  view/structures/structurestoolviewfactory.cpp
+  view/structures/structuresmanager.cpp
+  view/structures/structtool.cpp
+  view/structures/structtreemodel.cpp
+  view/structures/structuredefinitionfile.cpp
+#   view/structures/modeltest.cpp
+  view/structures/structview.cpp
+  view/structures/structtoolview.cpp
+  view/structures/structviewitemdelegate.cpp
+  view/structures/settings/structureaddremovewidget.cpp
+  view/structures/settings/structviewdisplaysettingswidget.cpp
+  view/structures/settings/structuresmanagerview.cpp
+)
+
+kconfig_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structviewpreferences.kcfgc )
+qt5_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
@@ -391,24 +379,19 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
   view/viewprofiles/viewprofilesmanagecontroller.cpp
 )
 
-#structview and poddecoder sources are also needed for structures tool unit tests
-#create a OBJECT library (http://www.cmake.org/Wiki/CMake/Tutorials/Object_Library)
-#to prevent compiling these object files twice with exactly the same compile flags
-#TODO remove once CMake >= 2.8.9 is required for building KDE
-if ( CMAKE_VERSION VERSION_GREATER 2.8.8 AND NOT WIN32)
-    #OBJECT libraries seem buggy with regard to automoc, have to call it manually
-    automoc4( poddecoder_objs PODDECODERCONTROLLER_SRCS )
-    automoc4( structview_objs STRUCTVIEW_SRCS )
-    add_library( poddecoder_objs OBJECT ${PODDECODERCONTROLLER_SRCS} )
-    add_library( structview_objs OBJECT ${STRUCTVIEW_SRCS} )
-    set_target_properties(poddecoder_objs structview_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
-    set( PODDECODER_OBJS $<TARGET_OBJECTS:poddecoder_objs>)
-    set( STRUCTVIEW_OBJS $<TARGET_OBJECTS:structview_objs>)
-else()
-    #compile the sources twice for older CMake version
-    set( PODDECODER_OBJS ${PODDECODERCONTROLLER_SRCS})
-    set( STRUCTVIEW_OBJS ${STRUCTVIEW_SRCS})
-endif()
+# create a static library for the unit tests. This means we don't have to compile the sources twice
+
+add_library( poddecoder-typeeditors STATIC ${PODDECODER_TYPEEDITOR_SRCS} )
+set_target_properties( poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
+target_link_libraries( poddecoder-typeeditors PUBLIC KF5::Completion ${oktetacore_LIB} )
+
+add_library( structview-tested-srcs STATIC ${STRUCTVIEW_TESTED_SRCS} )
+set_target_properties( structview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
+target_link_libraries( structview-tested-srcs PUBLIC
+  Qt5::Script Qt5::Xml Qt5::Widgets
+  KF5::ConfigGui KF5::ConfigWidgets KF5::I18n KF5::Completion KF5::Service
+  ${oktetacore_LIB}
+)
 
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
 #   ${OVERWRITEONLYCONTROLLER_SRCS}
@@ -435,55 +418,36 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${VIEWMODECONTROLLER_SRCS}
   ${VIEWPROFILESCONTROLLER_SRCS}
   ${VIEWPROFILESMANAGECONTROLLER_SRCS}
-  ${PODDECODER_OBJS}
-  ${STRUCTVIEW_OBJS}
+  ${PODDECODERCONTROLLER_SRCS}
+  ${STRUCTVIEW_OTHER_SRCS}
 )
 
-#structures view unit tests
-if ( KDE4_BUILD_TESTS )
-#static lib for unit tests (reuse the OBJECT library)
-kde4_add_library ( structures-static STATIC ${PODDECODER_OBJS} ${STRUCTVIEW_OBJS} )
-target_link_libraries ( structures-static
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTXML_LIBRARY}
-  ${QT_QTTEST_LIBRARY}
-  ${KDE4_KDEUI_LIBS}
-  ${KDE4_KNEWSTUFF3_LIBS}
-  ${KDE4_KCMUTILS_LIBS}
-  ${oktetakastencore_LIB}
-  ${oktetakastengui_LIB}
-  ${oktetacore_LIB}
-  ${KASTENCORE_LIBS}
-  #${KASTENGUI_LIBS}
-)
-set_target_properties( structures-static PROPERTIES COMPILE_FLAGS -DOKTETAKASTENCONTROLLERS_EXPORT=)
 
-macro(structures_unit_test _testtarget _testname)
-    #message("ARGC='${ARGC}' ARGV='${ARGV}' ARGN='${ARGN}'")
-    kde4_add_unit_test(${_testtarget} TESTNAME ${_testname} ${ARGN})
-    target_link_libraries(${_testtarget} LINK_PRIVATE structures-static )
-endmacro()
+if (Qt5Test_FOUND)
+  #structures view unit tests
+  include(ECMAddTests)
+  ecm_add_tests(
+    test/primitivearraytest.cpp
+    test/arraydatainformationtest.cpp
+    test/basicdatainformationtest.cpp
+    test/primitivedatainformationtest.cpp
+    test/scriptclassestest.cpp
+    test/uniondatainformationtest.cpp
+    test/allprimitivetypestest.cpp
+    test/scriptvalueconvertertest.cpp
+    test/osdparsertest.cpp
+    test/commonparsertest.cpp
+    test/jsparsertest.cpp
+    test/customtostringtest.cpp
+    test/locktooffsettest.cpp
 
-structures_unit_test( primitivearraytest "structures-primitive-array" test/primitivearraytest.cpp )
-structures_unit_test( arraydatainformationtest "structures-array-datainformation" test/arraydatainformationtest.cpp )
-structures_unit_test( basicdatainformationtest "structures-basic-datainformation" test/basicdatainformationtest.cpp )
-structures_unit_test( primitivedatainformationtest "structures-primitive-datainformation" test/primitivedatainformationtest.cpp )
-structures_unit_test( scriptclassestest "structures-script-classes" test/scriptclassestest.cpp )
-structures_unit_test( uniondatainformationtest "structures-union-datainformation" test/uniondatainformationtest.cpp )
-structures_unit_test( allprimitivetypestest "structures-all-primitive-types" test/allprimitivetypestest.cpp )
-structures_unit_test( scriptvalueconvertertest "structures-scriptvalue-converter" test/scriptvalueconvertertest.cpp )
-structures_unit_test( osdparsertest "structures-osd-parser" test/osdparsertest.cpp )
-structures_unit_test( commonparsertest "structures-common-parser" test/commonparsertest.cpp )
-structures_unit_test( jsparsertest "structures-js-parser" test/jsparsertest.cpp )
-structures_unit_test( customtostringtest "structures-custom-to-string" test/customtostringtest.cpp )
-structures_unit_test( locktooffsettest "structures-lock-to-offset" test/locktooffsettest.cpp )
-set_target_properties( jsparsertest customtostringtest PROPERTIES COMPILE_DEFINITIONS SRCDIR=\"${CMAKE_CURRENT_SOURCE_DIR}\" )
-
-endif ( KDE4_BUILD_TESTS )
+    NAME_PREFIX structures-
+    LINK_LIBRARIES structview-tested-srcs Qt5::Test poddecoder-typeeditors
+  )
+endif()
 
 set( okteta_kastencontrollers_LIB_HDRS
-  oktetakastencontrollers_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencontrollers_export.h
   view/print/printcontroller.h
   view/bookmarks/bookmarkscontroller.h
   view/bookmarks/bookmarkstool.h
@@ -548,21 +512,26 @@ set( okteta_kastencontrollers_LIB_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
 )
 
-kde4_add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+generate_export_header( ${oktetakastencontrollers_LIB} )
 
 target_link_libraries( ${oktetakastencontrollers_LIB}
+  structview-tested-srcs
+  poddecoder-typeeditors
   ${oktetakastengui_LIB}
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-  ${KDE4_KIO_LIBS}
-  ${KDE4_KDEUI_LIBS}
-  ${KDE4_KNEWSTUFF3_LIBS}
-  ${KDE4_KCMUTILS_LIBS}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTSCRIPTTOOLS_LIBRARY}
+  KF5::NewStuff
+  KF5::I18n
+  KF5::ConfigWidgets
+  KF5::KCMUtils
+  KF5::IconThemes
+  KF5::Completion
+  Qt5::PrintSupport
+  Qt5::Script
 )
 if( QCA2_FOUND )
   target_link_libraries( ${oktetakastencontrollers_LIB} ${QCA2_LIBRARIES} )
@@ -622,6 +591,9 @@ set( okteta_kastencontrollers_templates_SRCS
   ${libchecksum_templates_SRCS}
 )
 
-kde4_add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
+add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
+# MSVC needs this
+target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
+target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets ${oktetacore_LIB} )
 
 endif( KASTEN_BUILD_INTERNAL_TEMPLATES )

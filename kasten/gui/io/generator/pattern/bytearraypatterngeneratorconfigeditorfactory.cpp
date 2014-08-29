@@ -27,7 +27,7 @@
 #include "bytearraypatterngenerator.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayPatternGeneratorConfigEditorFactory::ByteArrayPatternGeneratorConfigEditorFactory()

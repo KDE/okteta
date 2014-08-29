@@ -27,13 +27,11 @@
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilewritethread.h"
 #include "bytearraydocument.h"
-// KDE
-#include <KUrl>
 // Qt
 #include <QtCore/QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRawFileWriteJob::ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer *synchronizer )

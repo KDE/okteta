@@ -29,13 +29,13 @@
 class AbstractByteArrayChecksumParameterSet;
 
 class KComboBox;
-class KPushButton;
+class QPushButton;
 class KLineEdit;
 
 class QStackedWidget;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ChecksumTool;
@@ -74,7 +74,7 @@ class ChecksumView : public AbstractToolWidget
     KComboBox* mAlgorithmComboBox;
     QStackedWidget* mParameterSetEditStack;
     KLineEdit* mChecksumLabel;
-    KPushButton* mCalculateButton;
+    QPushButton* mCalculateButton;
 };
 
 

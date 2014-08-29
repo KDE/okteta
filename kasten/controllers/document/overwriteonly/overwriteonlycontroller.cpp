@@ -24,14 +24,14 @@
 
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KToggleAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 OverwriteOnlyController::OverwriteOnlyController( KXMLGUIClient* guiClient )

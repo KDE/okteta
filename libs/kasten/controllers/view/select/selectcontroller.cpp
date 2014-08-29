@@ -25,15 +25,16 @@
 // Kasten gui
 #include <dataselectable.h>
 #include <abstractview.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
-#include <KAction>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SelectController::SelectController( KXMLGUIClient* guiClient )

@@ -24,8 +24,8 @@
 #include "stringscriptclass.h"
 #include "../../datatypes/strings/stringdatainformation.h"
 #include "../../parsers/parserutils.h"
+#include "../../structlogging.h"
 
-#include <KDebug>
 
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)
@@ -47,7 +47,7 @@ StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* hand
     mIterableProperties.append(qMakePair(s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mStringPrototype = eng->newObject();
-    mStringPrototype.setProperty(QLatin1String("toString"), eng->newFunction(String_proto_toString));
+    mStringPrototype.setProperty(QStringLiteral("toString"), eng->newFunction(String_proto_toString));
 }
 
 StringScriptClass::~StringScriptClass()
@@ -103,7 +103,7 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
         if (pos >= uint(sData->stringLength()))
         {
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
-                QString(QLatin1String("Attempting to access string index %1, but length is %2")).arg(
+                QString(QStringLiteral("Attempting to access string index %1, but length is %2")).arg(
                     QString::number(pos), QString::number(sData->stringLength())));
         }
         else
@@ -218,7 +218,7 @@ QScriptValue StringScriptClass::String_proto_toString(QScriptContext* ctx, QScri
     DataInformation* data = toDataInformation(ctx->thisObject().data());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     return data->wasAbleToRead() ? data->valueString() : eng->undefinedValue();

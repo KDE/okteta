@@ -28,22 +28,21 @@
 #include <bytearraycombobox.h>
 // Okteta core
 #include <charcodec.h>
-// KDE
+// KF5
 #include <KMessageBox>
-#include <KPushButton>
 #include <KComboBox>
 #include <KGuiItem>
-#include <KLocale>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QFormLayout>
-#include <QtGui/QLayout>
-#include <QtGui/QCheckBox>
-#include <QtGui/QLabel>
-#include <QtGui/QGroupBox>
+#include <QPushButton>
+#include <QFormLayout>
+#include <QLayout>
+#include <QCheckBox>
+#include <QLabel>
+#include <QGroupBox>
 
-#include <KDebug>
 
-namespace Kasten2
+namespace Kasten
 {
 
 CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidget* parent )
@@ -73,8 +72,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
         i18nc( "@info:whatsthis",
                "Select the direction the bytes are converted, to or from the selected charset." );
     mDirectionComboBox->setWhatsThis( directionWhatsThis );
-    connect( mDirectionComboBox, SIGNAL(activated(int)),
-             mTool, SLOT(setConversionDirection(int)) );
+    connect( mDirectionComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+             mTool, &CharsetConversionTool::setConversionDirection );
 
     directionCharsetLayout->addWidget( mDirectionComboBox );
 
@@ -92,8 +91,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
         i18nc( "@info:whatsthis",
                "Select the charset the bytes are converted to." );
     mOtherCharSetComboBox->setWhatsThis( targetCharsetWhatsThis );
-    connect( mOtherCharSetComboBox, SIGNAL(activated(QString)),
-             mTool, SLOT(setOtherCharCodecName(QString)) );
+    connect( mOtherCharSetComboBox, static_cast<void (KComboBox::*)(const QString&)>(&KComboBox::activated),
+             mTool, &CharsetConversionTool::setOtherCharCodecName );
 
     directionCharsetLayout->addWidget( mOtherCharSetComboBox, 10 );
     baseLayout->addLayout( directionCharsetLayout );
@@ -118,8 +117,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
                "if its char in the source charset is not part of the target charset." );
     mSubstituteMissingCharCheckBox->setToolTip( substituteMissingCharToolTip );
     mSubstituteMissingCharCheckBox->setWhatsThis( substituteMissingCharWhatsThis );
-    connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
-             mTool, SLOT(setSubstitutingMissingChars(bool)) );
+    connect( mSubstituteMissingCharCheckBox, &QCheckBox::toggled,
+             mTool, &CharsetConversionTool::setSubstitutingMissingChars );
     settingsLayout->addRow( substituteMissingCharLabelText, mSubstituteMissingCharCheckBox );
     // TODO: control what happens on conflicts or unmatched chars in the target set
     // option to try only if no conflicts or unmatched chars are hit
@@ -144,8 +143,8 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
     mSubstituteByteEdit->setWhatsThis( substituteByteWhatsThis );
 //     mSubstituteByteEdit->setEnabled( mTool->isSubstitutingMissingChars() );
     mSubstituteByteEdit->setEnabled( false ); // TODO: fix char entering and enable again
-    connect( mSubstituteByteEdit, SIGNAL(byteArrayChanged(QByteArray)),
-             SLOT(onDefaultByteEditChanged(QByteArray)) );
+    connect( mSubstituteByteEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
+             this, &CharsetConversionView::onDefaultByteEditChanged );
 //     connect( mSubstituteMissingCharCheckBox, SIGNAL(toggled(bool)),
 //              mSubstituteByteEdit, SLOT(setEnabled(bool)) );
     mSubstituteByteEdit->setByteArray( QByteArray(1, mTool->substituteByte()) );
@@ -162,25 +161,26 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
 
     const KGuiItem convertGuiItem =
         KGuiItem( i18n("Con&vert"),
-                  QLatin1String("run-build"),
+                  QStringLiteral("run-build"),
                   i18nc("@info:tooltip",
                         "Converts the bytes in the selected range."),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Convert</interface> button, "
-                        "all bytes in the selected range "
-                        "will be replaced by bytes which represent the same character "
-                        "in the selected target charset.") );
-    mConvertButton = new KPushButton( convertGuiItem, this );
-    connect( mConvertButton, SIGNAL(clicked(bool)), SLOT(onConvertButtonClicked()) );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Convert</interface> button, "
+                         "all bytes in the selected range "
+                         "will be replaced by bytes which represent the same character "
+                         "in the selected target charset.") );
+    mConvertButton = new QPushButton( this );
+    KGuiItem::assign( mConvertButton, convertGuiItem );
+    connect( mConvertButton, &QPushButton::clicked, this, &CharsetConversionView::onConvertButtonClicked );
     actionsLayout->addWidget( mConvertButton );
 
     baseLayout->addLayout( actionsLayout );
     baseLayout->addStretch();
 
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-                    SLOT(onApplyableChanged(bool)) );
-    connect( mTool, SIGNAL(conversionDone(bool,int,QMap<Okteta::Byte,int>)),
-                    SLOT(onConversionDone(bool,int,QMap<Okteta::Byte,int>)) );
+    connect( mTool, &CharsetConversionTool::isApplyableChanged,
+                    this, &CharsetConversionView::onApplyableChanged );
+    connect( mTool, &CharsetConversionTool::conversionDone,
+                    this, &CharsetConversionView::onConversionDone );
 }
 
 
@@ -216,7 +216,7 @@ void CharsetConversionView::onConversionDone( bool success, int convertedBytesCo
             foreach( int failedByteCount, failedPerByteCount )
                 totalFailedByteCount += failedByteCount;
             //TODO: show table with failed bytes and their number.
-            conversionReport += QLatin1String( "<br />" );
+            conversionReport += QStringLiteral( "<br />" );
             conversionReport += (totalFailedByteCount==0) ?
                 i18nc( "@info", "No bytes substituted.") :
                 i18ncp( "@info", "1 byte substituted.", "%1 bytes substituted.", totalFailedByteCount );

@@ -25,14 +25,14 @@
 
 // lib
 #include "kastencore_export.h"
-// KDE
-#include <KSharedPtr>
+// Qt
+#include <QtCore/QExplicitlySharedDataPointer>
 
-class KIcon;
+class QIcon;
 class QString;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KASTENCORE_EXPORT Person
@@ -42,7 +42,7 @@ class KASTENCORE_EXPORT Person
     static void setEgoId( int egoId );
 
   public:
-    Person( const QString& name, const KIcon& faceIcon );
+    Person( const QString& name, const QIcon& faceIcon );
     Person();
     Person( const Person& other );
     ~Person();
@@ -55,11 +55,11 @@ class KASTENCORE_EXPORT Person
 
   public:
     QString name() const;
-    KIcon faceIcon() const;
+    QIcon faceIcon() const;
 
   protected:
     class Private;
-    KSharedPtr<Private> d;
+    QExplicitlySharedDataPointer<Private> d;
 };
 
 }

@@ -31,7 +31,7 @@
 class QWidget;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // TODO: is there a common base for view and document?

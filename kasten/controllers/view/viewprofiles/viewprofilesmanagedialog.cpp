@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta Kasten module, made within the KDE community.
 
-    Copyright 2010,2012 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2010,2012-2013 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -28,35 +28,34 @@
 // Okteta Gui Kasten
 #include <bytearrayviewprofilemanager.h>
 #include <bytearrayviewprofilelock.h>
-// KDE
-#include <KPushButton>
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
+#include <KGuiItem>
 // Qt
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QTreeView>
-#include <QtGui/QItemSelectionModel>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QTreeView>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtCore/QItemSelectionModel>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager* viewProfileManager,
                                                     QWidget* parent )
-  : KDialog( parent )
+  : QDialog( parent )
   , mViewProfileManager( viewProfileManager )
   , mCurrentViewProfileId()
 {
-    setCaption( i18nc("@title:window", "View Profiles") );
+    setWindowTitle( i18nc("@title:window", "View Profiles") );
 
-    QWidget* page = new QWidget( this );
-    setMainWidget( page );
-
-    QHBoxLayout* pageLayout = new QHBoxLayout( page );
+    QHBoxLayout* pageLayout = new QHBoxLayout;
 
     // profile list
-    mViewProfileTableView = new QTreeView( page );
+    mViewProfileTableView = new QTreeView;
     mViewProfileTableModel = new ViewProfileTableModel( mViewProfileManager, this );
-    mViewProfileTableView->setObjectName( QLatin1String("ViewProfileTableView") );
+    mViewProfileTableView->setObjectName( QStringLiteral("ViewProfileTableView") );
     mViewProfileTableView->setHeaderHidden( true );
     mViewProfileTableView->setRootIsDecorated( false );
     mViewProfileTableView->setItemsExpandable( false );
@@ -64,81 +63,89 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
     mViewProfileTableView->setAllColumnsShowFocus( true );
     mViewProfileTableView->setModel( mViewProfileTableModel );
     connect( mViewProfileTableView->selectionModel(),
-             SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-             SLOT(onViewProfileSelectionChanged()) );
-    connect( mViewProfileTableModel, SIGNAL(modelReset()),
-             SLOT(onModelReset()) );
+             &QItemSelectionModel::selectionChanged,
+             this, &ViewProfilesManageDialog::onViewProfileSelectionChanged );
+    connect( mViewProfileTableModel, &ViewProfileTableModel::modelReset,
+             this, &ViewProfilesManageDialog::onModelReset );
 
     // buttons
     QVBoxLayout* buttonLayout = new QVBoxLayout;
-    KPushButton* createButton = // copy from selected
-        new KPushButton(
+    QPushButton* createButton = // copy from selected
+        new QPushButton;
+    KGuiItem::assign( createButton,
             KGuiItem(i18nc("@action:button",
                            "&Create new..."),
-                     QLatin1String("document-new"),
+                     QStringLiteral("document-new"),
                      i18nc("@info:tooltip",
                            "Opens an editor for a new view profile."),
-                     i18nc("@info:whatsthis",
-                           "If you press the <interface>Create new...</interface> button, "
-                           "an editor is opened where you can create and edit a new view profile. "
-                           "The values will be based on the ones of the view profile you selected "
-                           "in the list.")),
-            page );
-    connect( createButton, SIGNAL(clicked(bool)), SLOT(onCreateNewButtonClicked()) );
+                     xi18nc("@info:whatsthis",
+                            "If you press the <interface>Create new...</interface> button, "
+                            "an editor is opened where you can create and edit a new view profile. "
+                            "The values will be based on the ones of the view profile you selected "
+                            "in the list.")) );
+    connect( createButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onCreateNewButtonClicked );
     buttonLayout->addWidget( createButton );
-    mEditButton =
-        new KPushButton(
+    mEditButton = new QPushButton;
+    KGuiItem::assign( mEditButton,
             KGuiItem(i18nc("@action:button",
                            "&Edit..."),
-                     QLatin1String("document-edit"),
+                     QStringLiteral("document-edit"),
                      i18nc("@info:tooltip",
                            "Opens an editor for the view profile."),
-                     i18nc("@info:whatsthis",
-                           "If you press the <interface>Edit...</interface> button, "
-                           "an editor will be opened for the view profile you selected "
-                           "in the list.")),
-            page );
-    connect( mEditButton, SIGNAL(clicked(bool)), SLOT(onEditButtonClicked()) );
+                     xi18nc("@info:whatsthis",
+                            "If you press the <interface>Edit...</interface> button, "
+                            "an editor will be opened for the view profile you selected "
+                            "in the list.")) );
+    connect( mEditButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onEditButtonClicked );
     buttonLayout->addWidget( mEditButton );
-    mSetDefaultButton =
-        new KPushButton(
+    mSetDefaultButton = new QPushButton;
+    KGuiItem::assign( mSetDefaultButton,
             KGuiItem(i18nc("@action:button",
                            "&Set as Default"),
                      QString(),
                      i18nc("@info:tooltip",
                            "Sets the selected view profile as default for all views."),
-                     i18nc("@info:whatsthis",
-                           "If you press the <interface>Set as Default</interface> button, "
-                           "the view profile you selected in the list is set as default for all views.")),
-            page );
-    connect( mSetDefaultButton, SIGNAL(clicked(bool)), SLOT(onSetDefaultButtonClicked()) );
+                     xi18nc("@info:whatsthis",
+                            "If you press the <interface>Set as Default</interface> button, "
+                            "the view profile you selected in the list is set as default for all views.")) );
+    connect( mSetDefaultButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onSetDefaultButtonClicked );
     buttonLayout->addWidget( mSetDefaultButton );
-    mDeleteButton =
-        new KPushButton(
+    mDeleteButton = new QPushButton;
+    KGuiItem::assign( mDeleteButton,
             KGuiItem(i18nc("@action:button",
                            "&Delete"),
-                     QLatin1String("list-remove"),
+                     QStringLiteral("list-remove"),
                      i18nc("@info:tooltip",
                            "Deletes the selected view profile."),
-                     i18nc("@info:whatsthis",
-                           "If you press the <interface>Delete</interface> button, "
-                           "the view profile you selected in the list is deleted.")),
-            page );
-    connect( mDeleteButton, SIGNAL(clicked(bool)), SLOT(onDeleteButtonClicked()) );
+                     xi18nc("@info:whatsthis",
+                            "If you press the <interface>Delete</interface> button, "
+                            "the view profile you selected in the list is deleted.")) );
+    connect( mDeleteButton, &QPushButton::clicked, this, &ViewProfilesManageDialog::onDeleteButtonClicked );
     buttonLayout->addWidget( mDeleteButton );
     buttonLayout->addStretch();
 
     pageLayout->addWidget( mViewProfileTableView );
     pageLayout->addLayout( buttonLayout );
 
-    setButtons( Close );
+    // dialog buttons
+    QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
+    mCloseButton = dialogButtonBox->addButton( QDialogButtonBox::Close );
+    connect( mCloseButton, &QAbstractButton::clicked, this, &QDialog::accept );
 
-    connect( mViewProfileManager, SIGNAL(viewProfilesLocked(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfilesLocked(QList<Kasten2::ByteArrayViewProfile::Id>)) );
-    connect( mViewProfileManager, SIGNAL(viewProfilesLocked(QList<Kasten2::ByteArrayViewProfile::Id>)),
-             SLOT(onViewProfilesUnlocked(QList<Kasten2::ByteArrayViewProfile::Id>)) );
-    connect( mViewProfileManager, SIGNAL(defaultViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)),
-             SLOT(onDefaultViewProfileChanged(Kasten2::ByteArrayViewProfile::Id)) );
+    // main layout
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->addLayout( pageLayout );
+    layout->addWidget( dialogButtonBox );
+    setLayout( layout );
+
+    mCloseButton->setDefault( true );
+
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesLocked,
+             this, &ViewProfilesManageDialog::onViewProfilesLocked );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesLocked,
+             this, &ViewProfilesManageDialog::onViewProfilesUnlocked );
+    connect( mViewProfileManager, &ByteArrayViewProfileManager::defaultViewProfileChanged,
+             this, &ViewProfilesManageDialog::onDefaultViewProfileChanged );
 
     // select first by default
     onModelReset();
@@ -190,7 +197,7 @@ ViewProfilesManageDialog::onCreateNewButtonClicked()
 
     const int answer = dialog->exec();
 
-    if( answer == KDialog::Accepted )
+    if( answer == QDialog::Accepted )
     {
         QList<ByteArrayViewProfile> viewProfiles;
         viewProfiles << dialog->viewProfile();
@@ -199,7 +206,7 @@ ViewProfilesManageDialog::onCreateNewButtonClicked()
 
     delete dialog;
 
-    setButtonFocus( Close );
+    mCloseButton->setDefault( true );
 }
 
 void
@@ -223,7 +230,7 @@ ViewProfilesManageDialog::onEditButtonClicked()
     dialog->setWindowTitle( dialogTitle );
 
     const int answer = dialog->exec();
-    if( answer == KDialog::Accepted )
+    if( answer == QDialog::Accepted )
     {
         QList<ByteArrayViewProfile> viewProfiles;
         viewProfiles << dialog->viewProfile();
@@ -232,7 +239,7 @@ ViewProfilesManageDialog::onEditButtonClicked()
 
     delete dialog;
 
-    setButtonFocus( Close );
+    mCloseButton->setDefault( true );
 }
 
 void
@@ -243,7 +250,7 @@ ViewProfilesManageDialog::onSetDefaultButtonClicked()
 
     mViewProfileManager->setDefaultViewProfile( mCurrentViewProfileId );
 
-    setButtonFocus( Close );
+    mCloseButton->setDefault( true );
 }
 
 void
@@ -257,7 +264,7 @@ ViewProfilesManageDialog::onDeleteButtonClicked()
     viewProfileIds << mCurrentViewProfileId;
     mViewProfileManager->removeViewProfiles( viewProfileIds );
 
-    setButtonFocus( Close );
+    mCloseButton->setDefault( true );
 }
 
 void

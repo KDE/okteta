@@ -26,17 +26,17 @@
 // lib
 #include "abstractfilesystemloadjob.h"
 #include <abstractloadjob_p.h>
-// KDE
-#include <KUrl>
+
+#include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 {
   public:
-    AbstractFileSystemLoadJobPrivate( AbstractFileSystemLoadJob* parent, AbstractModelFileSystemSynchronizer* synchronizer, const KUrl& url );
+    AbstractFileSystemLoadJobPrivate( AbstractFileSystemLoadJob* parent, AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url );
 
     virtual ~AbstractFileSystemLoadJobPrivate();
 
@@ -48,7 +48,7 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 
   public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
-    const KUrl& url() const;
+    const QUrl& url() const;
     QFile* file() const;
 
   public: // slots
@@ -59,14 +59,15 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 
   protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
-    const KUrl mUrl;
+    const QUrl mUrl;
     QFile* mFile;
     QString mWorkFilePath;
+    QString mTempFilePath;
 };
 
 
 inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate( AbstractFileSystemLoadJob* parent,
-    AbstractModelFileSystemSynchronizer* synchronizer, const KUrl& url )
+    AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url )
   : AbstractLoadJobPrivate( parent ),
     mSynchronizer( synchronizer ),
     mUrl( url ),
@@ -79,7 +80,7 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJobPrivate::sy
 {
     return mSynchronizer;
 }
-inline const KUrl& AbstractFileSystemLoadJobPrivate::url() const { return mUrl; }
+inline const QUrl& AbstractFileSystemLoadJobPrivate::url() const { return mUrl; }
 
 inline QFile* AbstractFileSystemLoadJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system

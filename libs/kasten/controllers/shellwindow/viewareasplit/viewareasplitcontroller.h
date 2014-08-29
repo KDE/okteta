@@ -29,10 +29,10 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 namespace If {
@@ -61,7 +61,7 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiCo
     void splitHorizontally();
     void close();
 
-    void onViewAreaFocusChanged( Kasten2::AbstractViewArea* viewArea );
+    void onViewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
     void onViewAreasChanged();
     void onViewsChanged();
 
@@ -71,9 +71,9 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiCo
     If::ViewAreaSplitable* mViewAreaSplitable;
     AbstractGroupedViews* mCurrentViewArea;
 
-    KAction* mSplitVerticallyAction;
-    KAction* mSplitHorizontallyAction;
-    KAction* mCloseAction;
+    QAction* mSplitVerticallyAction;
+    QAction* mSplitHorizontallyAction;
+    QAction* mCloseAction;
 };
 
 }

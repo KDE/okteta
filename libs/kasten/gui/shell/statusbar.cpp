@@ -28,11 +28,11 @@
 #include <QtCore/QEvent>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 StatusBar::StatusBar( QWidget* parent )
-  : KStatusBar( parent )
+  : QStatusBar( parent )
 {
 //     setMinimumWidth( 1 );
 
@@ -40,7 +40,7 @@ StatusBar::StatusBar( QWidget* parent )
 
     mLayout = new StatusBarLayout( baseWidget );
     mLayout->setSpacing( 6 ); // hard coded in QStatusBar
-    KStatusBar::addWidget( baseWidget, 1 );
+    QStatusBar::addWidget( baseWidget, 1 );
 }
 
 
@@ -67,7 +67,7 @@ void StatusBar::changeEvent( QEvent* event )
         break;
     }
 
-    KStatusBar::changeEvent( event );
+    QStatusBar::changeEvent( event );
 }
 
 

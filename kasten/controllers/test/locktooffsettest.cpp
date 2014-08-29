@@ -103,9 +103,9 @@ void LockToOffsetTest::cleanupTestCase()
 TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArrayModel* lastModel, quint64 lastReadOffset)
 {
     QVector<DataInformation*> children;
-    children.append(new UInt16DataInformation(QLatin1String("first")));
-    children.append(new UInt64DataInformation(QLatin1String("second")));
-    DataInformation* data = new StructureDataInformation(QLatin1String("container"), children);
+    children.append(new UInt16DataInformation(QStringLiteral("first")));
+    children.append(new UInt64DataInformation(QStringLiteral("second")));
+    DataInformation* data = new StructureDataInformation(QStringLiteral("container"), children);
     data->setByteOrder(DataInformation::EndianessBig);
     TopLevelDataInformation* top = new TopLevelDataInformation(data);
     top->mLastModel = lastModel;
@@ -205,6 +205,6 @@ void LockToOffsetTest::testReadingNecessary()
     delete structure;
 }
 
-QTEST_MAIN(LockToOffsetTest)
+QTEST_GUILESS_MAIN(LockToOffsetTest)
 
 #include "locktooffsettest.moc"

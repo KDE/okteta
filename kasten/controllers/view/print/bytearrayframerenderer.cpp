@@ -35,14 +35,13 @@
 #include <abstractbytearraymodel.h>
 #include <valuecodec.h>
 #include <charcodec.h>
-// KDE
-#include <KGlobalSettings>
 // Qt
 #include <QtCore/QHash>
 #include <QtCore/QDateTime>
 #include <QtGui/QPainter>
 #include <QtGui/QFontMetrics>
-#include <QtGui/QApplication>
+#include <QFontDatabase>
+#include <QApplication>
 #include <QtCore/QListIterator>
 
 
@@ -99,7 +98,7 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     mValueColumnRenderer->setCharCodec( mCharCodec );
     mCharColumnRenderer->setCharCodec( mCharCodec );
 
-    setFont( KGlobalSettings::fixedFont() );
+    setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 Okteta::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }

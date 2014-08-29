@@ -27,18 +27,16 @@
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearrayrawfilewritethread.h"
 #include "bytearraydocument.h"
-// KDE
-#include <KUrl>
 // Qt
 #include <QtCore/QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer,
                                                         AbstractDocument* document,
-                                                        const KUrl &url,
+                                                        const QUrl &url,
                                                         AbstractModelSynchronizer::ConnectOption option )
  : AbstractFileSystemConnectJob( synchronizer, document, url, option )
 {

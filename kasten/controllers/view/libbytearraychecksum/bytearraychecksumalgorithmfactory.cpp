@@ -49,8 +49,8 @@
 // e.g.
 // #include "algorithm/mybytearraychecksumalgorithm.h"
 // NEWCHECKSUM(end)
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
 #ifdef HAVE_QCA2

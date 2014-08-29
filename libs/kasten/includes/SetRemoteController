@@ -1,1 +1,1 @@
-#include "../../kasten2/setremotecontroller.h"
+#include "../kasten/setremotecontroller.h"

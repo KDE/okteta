@@ -25,22 +25,22 @@
 // Kasten core
 #include <documentmanager.h>
 #include <abstractdocument.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 DocumentsTool::DocumentsTool( DocumentManager* documentManager )
  : mDocumentManager( documentManager ), mFocussedDocument( 0 )
 {
-    setObjectName( QLatin1String( "Documents" ) );
+    setObjectName( QStringLiteral( "Documents" ) );
 
-    connect( mDocumentManager, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
-             SIGNAL(documentsAdded(QList<Kasten2::AbstractDocument*>)) );
-    connect( mDocumentManager, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
-             SIGNAL(documentsClosing(QList<Kasten2::AbstractDocument*>)) );
+    connect( mDocumentManager, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
+             SIGNAL(documentsAdded(QList<Kasten::AbstractDocument*>)) );
+    connect( mDocumentManager, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
+             SIGNAL(documentsClosing(QList<Kasten::AbstractDocument*>)) );
 }
 
 QList<AbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }

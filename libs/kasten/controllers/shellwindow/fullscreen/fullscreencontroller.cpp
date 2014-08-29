@@ -22,14 +22,14 @@
 
 #include "fullscreencontroller.h"
 
-// KDE
+// KF5
 #include <KToggleFullScreenAction>
 #include <KXmlGuiWindow>
 #include <KActionCollection>
 #include <KStandardAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 FullScreenController::FullScreenController( KXmlGuiWindow* window )

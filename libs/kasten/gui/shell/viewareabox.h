@@ -24,12 +24,12 @@
 #define VIEWAREABOX_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QShortcut;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ViewAreaBox : public QWidget

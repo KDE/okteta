@@ -24,14 +24,13 @@
 
 // lib
 #include <abstracttoolinlineview.h>
-// KDE
-#include <KIcon>
 // Qt
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QToolButton>
+#include <QIcon>
+#include <QHBoxLayout>
+#include <QToolButton>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ToolInlineViewWidget::ToolInlineViewWidget( AbstractToolInlineView* view, QWidget* parent )
@@ -44,7 +43,7 @@ ToolInlineViewWidget::ToolInlineViewWidget( AbstractToolInlineView* view, QWidge
     //TODO: use style buttons instead, like QDockWidget
     QToolButton* closeButton = new QToolButton( this );
     closeButton->setAutoRaise( true );
-    closeButton->setIcon( KIcon(QLatin1String("dialog-close")) );
+    closeButton->setIcon( QIcon::fromTheme( QStringLiteral("dialog-close") ) );
     connect( closeButton, SIGNAL(clicked()), SIGNAL(done()) );
     layout->addWidget( closeButton );
     layout->setAlignment( closeButton, (Qt::Alignment)(Qt::AlignLeft|Qt::AlignTop) );

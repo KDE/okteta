@@ -26,7 +26,7 @@
 #include "abstractsyncfromremotejob.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractSyncFromRemoteJobPrivate

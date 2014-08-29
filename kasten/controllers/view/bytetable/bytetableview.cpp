@@ -27,22 +27,21 @@
 #include "bytetabletool.h"
 #include "bytetablemodel.h"
 #include "bytetableviewsettings.h"
-// KDE
-#include <KPushButton>
-#include <KLocale>
+// KF5
+#include <QPushButton>
+#include <KLocalizedString>
 #include <KStandardGuiItem>
-#include <KGlobalSettings>
-//#include <KDebug>
-#include <KApplication>
-#include <KIntNumInput>
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QTreeView>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QSpinBox>
+#include <QFontDatabase>
+#include <QLabel>
+#include <QLayout>
+#include <QHeaderView>
+#include <QTreeView>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
@@ -53,14 +52,15 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     baseLayout->setMargin( 0 );
 
     mByteTableView = new QTreeView( this );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(resizeColumnsWidth()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayStyleChanged()),
-             SLOT(resizeColumnsWidth()) );
+    // TODO: find a signal/event emitted when fixedfont changes
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &ByteTableView::setFixedFontByGlobalSettings );
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &ByteTableView::resizeColumnsWidth );
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
+//              this, &ByteTableView::resizeColumnsWidth );
     setFixedFontByGlobalSettings(); //do this before setting model
-    mByteTableView->setObjectName( QLatin1String( "ByteTable" ) );
+    mByteTableView->setObjectName( QStringLiteral( "ByteTable" ) );
     mByteTableView->setRootIsDecorated( false );
     mByteTableView->setItemsExpandable( false );
     mByteTableView->setUniformRowHeights( true );
@@ -68,23 +68,22 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     mByteTableView->setSortingEnabled( false );
     QHeaderView* header = mByteTableView->header();
     header->setFont( font() );
-    header->setResizeMode( QHeaderView::Interactive );
+    header->setSectionResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     mByteTableView->setModel( mTool->byteTableModel() );
-    connect( mByteTableView, SIGNAL(doubleClicked(QModelIndex)),
-             SLOT(onDoubleClicked(QModelIndex)) );
+    connect( mByteTableView, &QTreeView::doubleClicked,
+             this, &ByteTableView::onDoubleClicked );
 
     baseLayout->addWidget( mByteTableView, 10 );
 
     QHBoxLayout *insertLayout = new QHBoxLayout();
 
-    QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes to insert","Number:"), this );
+    QLabel *label = new QLabel( i18nc("@label:spinbox number of bytes to insert","Number (bytes):"), this );
     insertLayout->addWidget( label );
 
-    mInsertCountEdit = new KIntNumInput( this );
+    mInsertCountEdit = new QSpinBox( this );
     mInsertCountEdit->setRange( 1, INT_MAX );
     mInsertCountEdit->setValue( 1 );
-    mInsertCountEdit->setSuffix( ki18np(" byte"," bytes") );
     label->setBuddy( mInsertCountEdit );
     insertLayout->addWidget( mInsertCountEdit );
     const QString insertCountToolTip =
@@ -95,10 +94,11 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
     insertLayout->addStretch();
 
-    mInsertButton = new KPushButton( KStandardGuiItem::insert(), this );
+    mInsertButton = new QPushButton( this );
+    KGuiItem::assign( mInsertButton, KStandardGuiItem::insert() );
     mInsertButton->setEnabled( mTool->hasWriteable() );
-    connect( mTool, SIGNAL(hasWriteableChanged(bool)), mInsertButton, SLOT(setEnabled(bool)) );
-    connect( mInsertButton, SIGNAL(clicked(bool)), SLOT(onInsertClicked()) );
+    connect( mTool, &ByteTableTool::hasWriteableChanged, mInsertButton, &QPushButton::setEnabled );
+    connect( mInsertButton, &QPushButton::clicked, this, &ByteTableView::onInsertClicked );
     const QString insertButtonToolTip =
         i18nc( "@info:tooltip",
                "Inserts the byte currently selected in the table with the given number." );
@@ -111,8 +111,8 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     //if nothing has changed reuse the old values. This means the bytetable is fully constructed
     //after ~3ms and not 800 as it was before. If the saved values can not be reused it takes ~100ms
     const QList<int> columnsWidth = ByteTableViewSettings::columnsWidth();
-    const QString styleName = KApplication::style()->objectName();
-    const QString fixedFontData = KGlobalSettings::fixedFont().toString();
+    const QString styleName = QApplication::style()->objectName();
+    const QString fixedFontData = QFontDatabase::systemFont(QFontDatabase::FixedFont).toString();
     if ( columnsWidth.size() < ByteTableModel::NoOfIds || styleName != ByteTableViewSettings::style()
             || fixedFontData != ByteTableViewSettings::fixedFont() )
     {
@@ -129,7 +129,6 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
 
 void ByteTableView::resizeColumnsWidth()
 {
-    //kDebug() << "recalculating header width";
     QHeaderView* header = mByteTableView->header();
     for (int i = 0; i < ByteTableModel::NoOfIds; ++i) 
     {
@@ -150,7 +149,7 @@ void ByteTableView::resizeColumnsWidth()
 
 void ByteTableView::setFixedFontByGlobalSettings()
 {
-    mByteTableView->setFont( KGlobalSettings::fixedFont() );
+    mByteTableView->setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 void ByteTableView::onDoubleClicked( const QModelIndex &index )
@@ -177,9 +176,9 @@ ByteTableView::~ByteTableView()
         columnsWidth.append( header->sectionSize( i ) );
     }
     ByteTableViewSettings::setColumnsWidth( columnsWidth );
-    ByteTableViewSettings::setStyle( KApplication::style()->objectName() );
-    ByteTableViewSettings::setFixedFont( KGlobalSettings::fixedFont().toString() );
-    ByteTableViewSettings::self()->writeConfig();
+    ByteTableViewSettings::setStyle( QApplication::style()->objectName() );
+    ByteTableViewSettings::setFixedFont( QFontDatabase::systemFont(QFontDatabase::FixedFont).toString() );
+    ByteTableViewSettings::self()->save();
 }
 
 }

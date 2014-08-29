@@ -36,9 +36,6 @@
 #include <abstractsyncwithremotejob.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KUrl>
-#include <qtest_kde.h>
 // Qt
 #include <QtTest/QtTest>
 #include <QtTest/QSignalSpy>
@@ -47,7 +44,7 @@
 #include <QtCore/QDataStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
@@ -60,9 +57,6 @@ static const char TestDataChar = 0;
 
 void ByteArrayRawFileSynchronizerTest::initTestCase()
 {
-    // TODO: see if this could be part of a QTEST_KDE* macro
-    KGlobal::locale();
-
     QByteArray byteArray( TestDataSize, TestDataChar );
     ::textureByteArray( &byteArray );
 
@@ -79,7 +73,7 @@ void ByteArrayRawFileSynchronizerTest::initTestCase()
 
 //     QDir dir(mDataDir);
 //     QVERIFY(dir.mkdir("Europe"));
-//     QFile::copy(QString::fromLatin1(KDESRCDIR) + QLatin1String("/Paris"), mDataDir + QLatin1String("/Europe/Paris"));
+//     QFile::copy(QString::fromLatin1(KDESRCDIR) + QStringLiteral("/Paris"), mDataDir + QStringLiteral("/Europe/Paris"));
 }
 
 void ByteArrayRawFileSynchronizerTest::cleanupTestCase()
@@ -99,7 +93,7 @@ void ByteArrayRawFileSynchronizerTest::init()
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) ) );
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
     AbstractDocument* document = synchronizer->document();
@@ -110,9 +104,9 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
     QVERIFY( byteArrayDocument != 0 );
     QVERIFY( document->synchronizer() != 0 );
     QCOMPARE( document->synchronizer()->document(), document );
-    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
-    QCOMPARE( document->synchronizer()->localSyncState(), Kasten2::LocalInSync );
-    QCOMPARE( document->synchronizer()->remoteSyncState(), Kasten2::RemoteInSync );
+    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
+    QCOMPARE( document->synchronizer()->localSyncState(), Kasten::LocalInSync );
+    QCOMPARE( document->synchronizer()->remoteSyncState(), Kasten::RemoteInSync );
 
     QCOMPARE( document->synchronizer()->url(), fileUrl );
 
@@ -121,7 +115,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(NotExistingUrl) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(NotExistingUrl) ) );
 
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
@@ -133,10 +127,10 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 
 void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
-    const KUrl fileUrl = mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) );
+    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) ) );
 
     ByteArrayDocument* document =
-        new Kasten2::ByteArrayDocument(QLatin1String("New created for test."));
+        new Kasten::ByteArrayDocument(QStringLiteral("New created for test."));
     Okteta::PieceTableByteArrayModel* byteArray =
         qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
 
@@ -165,4 +159,4 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 
 }
 
-QTEST_KDEMAIN_CORE( Kasten2::ByteArrayRawFileSynchronizerTest )
+QTEST_GUILESS_MAIN( Kasten::ByteArrayRawFileSynchronizerTest )

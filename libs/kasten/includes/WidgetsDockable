@@ -1,1 +1,1 @@
-#include "../../kasten2/widgetsdockable.h"
+#include "../kasten/widgetsdockable.h"

@@ -23,34 +23,38 @@
 #ifndef OKTETAPARTFACTORY_H
 #define OKTETAPARTFACTORY_H
 
-// KDE
-#include <KParts/Factory>
+// KF5
+#include <KAboutData>
+#include <KPluginFactory>
 
-namespace Kasten2 {
+namespace Kasten {
 class ByteArrayViewProfileManager;
 }
-class KComponentData;
-class KAboutData;
 
 
-class OktetaPartFactory : public KParts::Factory
+class OktetaPartFactory : public KPluginFactory
 {
     Q_OBJECT
+
+    Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE "oktetapart.json")
+
+    Q_INTERFACES(KPluginFactory)
 
   public:
     OktetaPartFactory();
 
     virtual ~OktetaPartFactory();
 
-  public:
-    virtual KParts::Part* createPartObject( QWidget* parentWidget,
-                                            QObject* parent,
-                                            const char* className, const QStringList& args );
+  public: // KPluginFactory API
+    virtual QObject* create( const char* iface,
+                             QWidget* parentWidget,
+                             QObject* parent,
+                             const QVariantList& args,
+                             const QString& keyword );
 
   private:
-    KComponentData* mComponentData;
-    KAboutData* mAboutData;
-    Kasten2::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
+    KAboutData mAboutData;
+    Kasten::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };
 
 #endif

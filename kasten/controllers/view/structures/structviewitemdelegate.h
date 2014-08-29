@@ -23,7 +23,7 @@
 #ifndef STRUCTVIEWITEMDELEGATE_H_
 #define STRUCTVIEWITEMDELEGATE_H_
 
-#include <QtGui/QStyledItemDelegate>
+#include <QStyledItemDelegate>
 
 class StructViewItemDelegate: public QStyledItemDelegate
 {

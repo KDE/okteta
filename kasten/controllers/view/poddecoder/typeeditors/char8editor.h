@@ -25,7 +25,7 @@
 
 // lib
 #include "../types/char8.h"
-// KDE
+// KF5
 #include <KLineEdit>
 
 namespace Okteta {

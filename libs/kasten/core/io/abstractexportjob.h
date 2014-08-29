@@ -25,11 +25,11 @@
 
 // lib
 #include "kastencore_export.h"
-// KDE
+// KF5
 #include <KJob>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractDocument;
@@ -53,7 +53,7 @@ class KASTENCORE_EXPORT AbstractExportJob : public KJob
     AbstractDocument* document() const;
 
   Q_SIGNALS:
-    void documentLoaded( Kasten2::AbstractDocument* document );
+    void documentLoaded( Kasten::AbstractDocument* document );
 
   protected:
     // emits documentLoaded()

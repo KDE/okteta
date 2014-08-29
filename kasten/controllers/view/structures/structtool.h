@@ -41,7 +41,7 @@ class ArrayChangeMetricsList;
 class AbstractByteArrayModel;
 }
 
-namespace Kasten2
+namespace Kasten
 {
 class StructuresManager;
 class StructToolPrivate;
@@ -63,7 +63,6 @@ public:
 public:
     QSysInfo::Endian byteOrder() const;
     void setByteOrder(QSysInfo::Endian order);
-    KDE_DEPRECATED int columnCount() const;
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
     StructuresManager* manager() const;
@@ -85,7 +84,6 @@ Q_SIGNALS:
     void dataCleared();
     void byteOrderChanged();
     void cursorIndexChanged();
-    KDE_DEPRECATED void byteArrayModelChanged(bool modelIsValid); //TODO remove this one once BC is broken
     void byteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
     /** items are inserted before @p startIndex */
     void childrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);

@@ -24,14 +24,14 @@
 #define INFOVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
-class KPushButton;
+class QPushButton;
 class QLabel;
 class QTreeView;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class InfoTool;
@@ -61,7 +61,7 @@ class InfoView : public QWidget
 
     QLabel *mSizeLabel;
     QTreeView *mStatisticTableView;
-    KPushButton *mUpdateButton;
+    QPushButton *mUpdateButton;
 };
 
 

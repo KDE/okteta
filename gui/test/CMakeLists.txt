@@ -1,91 +1,73 @@
+if (NOT Qt5Test_FOUND)
+  return()
+endif()
+
+include(ECMAddTests)
+
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 # make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically
 # against a small part of the libs
-add_definitions( -DOKTETACORE_EXPORT= )
-add_definitions( -DOKTETAGUI_EXPORT= )
+add_definitions( -DOKTETACORE_STATIC_DEFINE -DOKTETAGUI_STATIC_DEFINE )
 
 include_directories(
   ${SUTDIR}
+  ${CMAKE_CURRENT_BINARY_DIR}/..
+  ${CMAKE_CURRENT_BINARY_DIR}/../../core
 )
 
-
-########### selectiontest ###############
-
-set( selectiontest_SRCS
+ecm_add_test(
   selectiontest.cpp
-)
-
-kde4_add_unit_test( selectiontest  TESTNAME libokteta-gui-selectiontest  ${selectiontest_SRCS} )
-target_link_libraries( selectiontest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  TEST_NAME selectiontest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 
 set_tests_properties(libokteta-gui-selectiontest PROPERTIES LABELS OktetaLabel)
 
-########### coordtest ###############
-
-set( coordtest_SRCS
+ecm_add_test(
   coordtest.cpp
-)
+  TEST_NAME coordtest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 
-kde4_add_unit_test( coordtest  TESTNAME libokteta-gui-coordtest  ${coordtest_SRCS} )
-target_link_libraries( coordtest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
-
-########### coordrangetest ###############
-
-set( coordrangetest_SRCS
+ecm_add_test(
   coordrangetest.cpp
-)
+  TEST_NAME coordrangetest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 
-kde4_add_unit_test( coordrangetest  TESTNAME libokteta-gui-coordrangetest  ${coordrangetest_SRCS} )
-target_link_libraries( coordrangetest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
-
-########### coordrangelisttest ###############
-
-set( coordrangelisttest_SRCS
+ecm_add_test(
   ${SUTDIR}/coordrangelist.cpp
   coordrangelisttest.cpp
-)
+  TEST_NAME coordrangelisttest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 
-kde4_add_unit_test( coordrangelisttest  TESTNAME libokteta-gui-coordrangelisttest  ${coordrangelisttest_SRCS} )
-target_link_libraries( coordrangelisttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
-
-########### bytearraytablelayouttest ###############
-
-set( bytearraytablelayouttest_SRCS
+ecm_add_test(
   ${SUTDIR}/bytearraytablelayout.cpp
   bytearraytablelayouttest.cpp
-)
-
-kde4_add_unit_test( bytearraytablelayouttest
-  TESTNAME libokteta-gui-bytearraytablelayouttest
-  ${bytearraytablelayouttest_SRCS}
-)
-target_link_libraries( bytearraytablelayouttest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  TEST_NAME bytearraytablelayouttest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
-set_target_properties( bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
+set_tests_properties( libokteta-gui-bytearraytablelayouttest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
-########### bytearraytablecursortest ###############
-
-set( bytearraytablecursortest_SRCS
+ecm_add_test(
   ${SUTDIR}/bytearraytablecursor.cpp
   ${SUTDIR}/bytearraytablelayout.cpp
   bytearraytablecursortest.cpp
-)
-
-kde4_add_unit_test( bytearraytablecursortest
-  TESTNAME libokteta-gui-bytearraytablecursortest
-  ${bytearraytablecursortest_SRCS}
-)
-target_link_libraries( bytearraytablecursortest  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
+  TEST_NAME bytearraytablecursortest
+  NAME_PREFIX libokteta-gui-
+  LINK_LIBRARIES Qt5::Test )
 # FIXME:
 # this is a rather stupid workaround - you should link to liboktetagui instead
-set_target_properties( bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
+set_tests_properties(libokteta-gui-bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE_OKTETAGUI_LIB" )
 
 
 ########### mvctest ###############
@@ -94,6 +76,6 @@ set_target_properties( bytearraytablecursortest PROPERTIES COMPILE_FLAGS "-DMAKE
 
 ##kde4_add_unit_test(mvctest TESTNAME okteta-mvctest  ${mvctest_SRCS} )
 
-# target_link_libraries( mvctest  oktetacore oktetagui ${KDE4_KDEUI_LIBS} )
+# target_link_libraries( mvctest  oktetacore oktetagui )
 
 ########### install files ###############

@@ -28,13 +28,13 @@
 #include "testdocumentfileloadthread.h"
 #include "testdocument.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
-TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const KUrl& url )
+TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const QUrl& url )
  : AbstractFileSystemLoadJob( synchronizer, url )
 {}
 
@@ -46,7 +46,7 @@ void TestDocumentFileLoadJob::startLoadFromFile()
         new TestDocumentFileLoadThread( this, testSynchronizer->header(), file() );
     loadThread->start();
     while( !loadThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     TestDocument* document = loadThread->document();
     testSynchronizer->setDocument( document );

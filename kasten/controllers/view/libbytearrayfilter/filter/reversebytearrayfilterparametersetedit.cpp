@@ -24,11 +24,11 @@
 
 //
 #include "reversebytearrayfilterparameterset.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QCheckBox>
-#include <QtGui/QFormLayout>
+#include <QCheckBox>
+#include <QFormLayout>
 
 
 const char* const ReverseByteArrayFilterParameterSetEdit::Id = "Reverse";

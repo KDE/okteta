@@ -25,11 +25,11 @@
 // lib
 #include "bookmarkstoolview.h"
 #include "bookmarkstool.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 BookmarksToolViewFactory::BookmarksToolViewFactory() {}

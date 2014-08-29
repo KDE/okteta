@@ -21,16 +21,18 @@
  */
 #include "utf32stringdata.h"
 
+#include "../../structlogging.h"
+
 #include <QVarLengthArray>
 
-#include <KLocale>
-#include <KDebug> //TODO remove
+#include <KLocalizedString>
 
 #include <abstractbytearraymodel.h>
 
 #include "../topleveldatainformation.h"
 #include "../dummydatainformation.h"
 #include "stringdatainformation.h"
+
 
 Utf32StringData::Utf32StringData(StringDataInformation* parent)
     : StringData(parent), mNonBMPCount(0)
@@ -64,7 +66,7 @@ QString Utf32StringData::stringValue(int row) const
     uint val = mCodePoints.at(row);
     QString number = QString::number(val, 16).toUpper();
     if (number.length() == 1)
-        number = QLatin1String("0") + number;
+        number = QStringLiteral("0") + number;
     if (val > UNICODE_MAX)
         return i18n("Value too big: 0x%1", number);
     else if (val > BMP_MAX) {
@@ -180,7 +182,7 @@ qint64 Utf32StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
                 terminate = true;
         }
         if (mMode == None) {
-            kDebug() << "no termination mode set!!";
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no termination mode set!!";
             Q_ASSERT(false);
         }
         if (terminate)

@@ -28,10 +28,10 @@
 // Kasten core
 #include <abstracttool.h>
 
-class KUrl;
+class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class DocumentSyncManager;
@@ -47,7 +47,7 @@ class KASTENCONTROLLERS_EXPORT TerminalTool : public AbstractTool
     virtual ~TerminalTool();
 
   public:
-    KUrl currentUrl() const;
+    QUrl currentUrl() const;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
@@ -56,7 +56,7 @@ class KASTENCONTROLLERS_EXPORT TerminalTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   Q_SIGNALS:
-    void currentUrlChanged( const KUrl& currentUrl );
+    void currentUrlChanged( const QUrl& currentUrl );
 
   private: // sources
     DocumentSyncManager* mDocumentSyncManager;

@@ -35,20 +35,20 @@
 #include <bookmarkable.h>
 #include <bookmarksconstiterator.h>
 #include <bookmark.h>
-#include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+#include <bytearraymodel.h>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 BookmarksTool::BookmarksTool()
  : mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 ), mCanCreateBookmark( false )
 {
-    setObjectName( QLatin1String( "Bookmarks" ) );
+    setObjectName( QStringLiteral( "Bookmarks" ) );
 }
 
 
@@ -95,20 +95,23 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
     {
         onCursorPositionChanged( mByteArrayView->cursorPosition() );
 
-        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                 SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                 SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)) );
-        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                 SLOT(onBookmarksModified()) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                 SLOT(onBookmarksModified()) );
-        connect( mByteArray, SIGNAL(bookmarksModified(QList<int>)),
-                 SIGNAL(bookmarksModified(QList<int>)) );
-        connect( mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
-                 SLOT(onCursorPositionChanged(Okteta::Address)) );
-        connect( mByteArrayView, SIGNAL(offsetCodingChanged(int)),
-                 SIGNAL(offsetCodingChanged(int)) );
+        if (auto asByteArraModel = qobject_cast<Okteta::ByteArrayModel*>(mByteArray) ) {
+            connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksAdded,
+                     this, &BookmarksTool::bookmarksAdded );
+            connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksRemoved,
+                     this, &BookmarksTool::bookmarksRemoved );
+            connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksAdded,
+                     this, &BookmarksTool::onBookmarksModified );
+            connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksRemoved,
+                     this, &BookmarksTool::onBookmarksModified );
+            connect( asByteArraModel,
+                     static_cast<void (Okteta::ByteArrayModel::*)(const QList<int>&)>(&Okteta::ByteArrayModel::bookmarksModified),
+                     this, &BookmarksTool::bookmarksModified );
+        }
+        connect( mByteArrayView, &ByteArrayView::cursorPositionChanged,
+                 this, &BookmarksTool::onCursorPositionChanged );
+        connect( mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                 this, &BookmarksTool::offsetCodingChanged );
     }
     else
     {

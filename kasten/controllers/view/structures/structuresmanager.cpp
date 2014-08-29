@@ -22,13 +22,15 @@
 
 #include "structuresmanager.h"
 #include "structviewpreferences.h"
+#include "structlogging.h"
 // tool
 #include "structuredefinitionfile.h"
-#include <KStandardDirs>
-#include <KDebug>
+#include "structlogging.h"
+// Qt
+#include <QStandardPaths>
 #include <QDir>
 
-namespace Kasten2
+namespace Kasten
 {
 
 StructuresManager::~StructuresManager()
@@ -38,8 +40,8 @@ StructuresManager::~StructuresManager()
 
 StructuresManager::StructuresManager()
 {
-    mConfig = KSharedConfig::openConfig(QLatin1String("oktetastructuresrc"),
-            KSharedConfig::FullConfig, "config");
+    mConfig = KSharedConfig::openConfig(QStringLiteral("oktetastructuresrc"),
+            KSharedConfig::FullConfig, QStandardPaths::ConfigLocation);
     reloadPaths();
 }
 
@@ -48,10 +50,24 @@ void StructuresManager::reloadPaths()
     qDeleteAll(mDefs);
     mDefs.clear();
     mLoadedFiles.clear();
-    QStringList paths = KGlobal::dirs()->findAllResources("data",
-            QLatin1String("okteta/structures/*/*.desktop"), KStandardDirs::Recursive
-                    | KStandardDirs::NoDuplicates);
-    kDebug() << "found structures: " << paths;
+    QStringList paths;
+    const QStringList structuresDirs = QStandardPaths::locateAll( QStandardPaths::GenericDataLocation,
+            QStringLiteral("okteta/structures"), QStandardPaths::LocateDirectory );
+    foreach( const QString& structuresDir, structuresDirs )
+    {
+        const QStringList entries = QDir( structuresDir ).entryList( QDir::Dirs );
+        foreach( const QString& e, entries )
+        {
+            const QString structureBasePath = structuresDir + QLatin1Char('/') + e;
+            const QStringList desktopFiles =
+                QDir(structureBasePath).entryList( QStringList(QStringLiteral("*.desktop")) );
+            foreach(const QString& desktopFile, desktopFiles)
+            {
+                paths << structureBasePath + QLatin1Char('/') + desktopFile;
+            }
+        }
+    }
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "found structures: " << paths;
     KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));
     foreach(const KPluginInfo& info, plugins)
     {
@@ -74,7 +90,7 @@ StructureDefinitionFile* StructuresManager::definition(QString& pluginName)
 {
     if (!mDefs.contains(pluginName))
     {
-        kWarning() << "could not find structuredefinitionFile with name=" << pluginName;
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not find structuredefinitionFile with name=" << pluginName;
         return NULL;
     }
     return mDefs.value(pluginName);

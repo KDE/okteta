@@ -26,18 +26,17 @@
 #include "kreplacedialog.h"
 #include "kreplaceprompt.h"
 #include "replacetool.h"
-// KDE
+// KF5
 #include <KXmlGuiWindow>
-#include <KLocale>
-#include <KAction>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KMessageBox>
 // Qt
-#include <QtGui/QApplication>
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
@@ -53,10 +52,10 @@ ReplaceController::ReplaceController( KXMLGUIClient* guiClient, QWidget* parentW
     mTool = new ReplaceTool();
     mTool->setUserQueryAgent( this );
 
-    connect( mTool, SIGNAL(isApplyableChanged(bool)),
-             mReplaceAction, SLOT(setEnabled(bool)) );
+    connect( mTool, &ReplaceTool::isApplyableChanged,
+             mReplaceAction, &QAction::setEnabled );
 
-    connect( mTool, SIGNAL(finished(bool,int)), SLOT(onFinished(bool,int)) );
+    connect( mTool, &ReplaceTool::finished, this, &ReplaceController::onFinished );
 
     mReplaceAction->setEnabled( false );
 }
@@ -99,10 +98,10 @@ bool ReplaceController::queryContinue( KFindDirection direction, int noOfReplace
             i18nc( "@info", "No replacements made.") :
             i18ncp( "@info", "1 replacement made.", "%1 replacements made.", noOfReplacements );
     const QString question = ( direction == FindForward ) ?
-        i18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
-        i18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
+        xi18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
+        xi18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
 
-    const QString message = replacementReport + QLatin1String("<br /><br />") + question;
+    const QString message = replacementReport + QStringLiteral("<br /><br />") + question;
     const int answer = KMessageBox::questionYesNo( mParentWidget, message, messageBoxTitle,
                                                    KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
 

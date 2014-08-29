@@ -25,9 +25,12 @@
 
 // Qt
 #include <QtCore/QFlags>
+#include <QtCore/QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(LOG_KASTEN_GUI)
 
 
-namespace Kasten2
+namespace Kasten
 {
     // keep in sync with both DockWidgetAre a and ToolBarArea
     enum SidePosition

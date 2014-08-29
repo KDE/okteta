@@ -25,10 +25,10 @@
 // lib
 #include "abstractview.h"
 // Qt
-#include <QtGui/QVBoxLayout>
+#include <QVBoxLayout>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewBox::ViewBox( AbstractView* view, QWidget* parent )

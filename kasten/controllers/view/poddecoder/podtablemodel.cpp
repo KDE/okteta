@@ -24,13 +24,14 @@
 
 // lib
 #include "poddecodertool.h"
-// KDE
-#include <KLocale>
-#include <KApplication>
+// KF5
+#include <KLocalizedString>
 #include <KColorScheme>
+// Qt
+#include <QtWidgets/QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 PODTableModel::PODTableModel( PODDecoderTool* tool, QObject *parent )
@@ -38,7 +39,7 @@ PODTableModel::PODTableModel( PODDecoderTool* tool, QObject *parent )
    mTool( tool ),
    mEmptyNote( QLatin1Char('-') )
 {
-    connect( mTool, SIGNAL(dataChanged()), SLOT(onDataChanged()) );
+    connect( mTool, &PODDecoderTool::dataChanged, this, &PODTableModel::onDataChanged );
 }
 
 void PODTableModel::onDataChanged()
@@ -111,7 +112,7 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
 
             if( value.isNull() )
             {
-                const QPalette &palette = KApplication::kApplication()->palette();
+                const QPalette &palette = QApplication::palette();
                 const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
                 result = colorScheme.foreground( KColorScheme::InactiveText );
             }

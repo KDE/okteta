@@ -1,7 +1,5 @@
 project( kastengui )
 
-add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1804 )
-
 include_directories(
   ../core
   ../core/document
@@ -138,6 +136,7 @@ set( kastengui_controller_HDRS
 )
 
 set( kastengui_LIB_SRCS
+  kastengui.cpp
   ${kastengui_view_SRCS}
   ${kastengui_io_SRCS}
   ${kastengui_system_SRCS}
@@ -146,7 +145,7 @@ set( kastengui_LIB_SRCS
 )
 
 set( kastengui_LIB_HDRS
-  kastengui_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kastengui_export.h
   kastengui.h
   ${kastengui_view_HDRS}
   ${kastengui_io_HDRS}
@@ -155,11 +154,18 @@ set( kastengui_LIB_HDRS
   ${kastengui_controller_HDRS}
 )
 
-kde4_add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
-target_link_libraries( ${kastengui_LIB}
+add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
+generate_export_header( ${kastengui_LIB} )
+target_link_libraries( ${kastengui_LIB} LINK_PUBLIC
   ${kastencore_LIB}
-  ${KDE4_KDEUI_LIBS}
+  Qt5::Widgets
 )
+target_link_libraries( ${kastengui_LIB} LINK_PRIVATE
+  KF5::XmlGui
+  KF5::I18n
+)
+
+
 set_target_properties( ${kastengui_LIB}  PROPERTIES
   OUTPUT_NAME ${kastengui_LIB_NAME}
   VERSION     ${KASTEN_LIB_VERSION}

@@ -1,7 +1,5 @@
 project( oktetagui )
 
-add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1802 )
-
 include_directories(
   ../core
   ../gui/libcolumnsview
@@ -70,13 +68,14 @@ set( oktetagui_LIB_SRCS
   coordrangelist.cpp
   ${bytearraycolumnview_SRCS}
   ${bytearrayrowview_SRCS}
+  oktetagui.cpp
 )
 
 set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/kcursor.cpp PROPERTIES LABELS OktetaLabel)
 
 set( oktetagui_LIB_HDRS
   ${libcolumnsview_HDRS}
-  oktetagui_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetagui_export.h
   oktetagui.h
   lineposition.h
   line.h
@@ -127,10 +126,18 @@ set( oktetagui_LIB_CCHDRS
   includes/WidgetColumnStylist
 )
 
-kde4_add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
-target_link_libraries( ${oktetagui_LIB}
+add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
+target_link_libraries( ${oktetagui_LIB} LINK_PUBLIC
   ${oktetacore_LIB}
-  ${KDE4_KDEUI_LIBS}
+  Qt5::Widgets
+)
+
+generate_export_header( ${oktetagui_LIB} )
+target_include_directories( ${oktetagui_LIB} PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
+
+target_link_libraries( ${oktetagui_LIB} LINK_PRIVATE
+  KF5::I18n
+  KF5::ConfigWidgets
 )
 set_target_properties( ${oktetagui_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetagui_LIB_NAME}
@@ -152,5 +159,5 @@ install( FILES ${oktetagui_LIB_CCHDRS}
 
 
 add_subdirectory( test )
-#   kde4_add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )
+#   add_library( testoktetacore STATIC ${oktetagui_LIB_SRCS} )
 

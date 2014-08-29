@@ -25,11 +25,11 @@
 
 // lib
 #include "kastencore_export.h"
-// KDE
+// KF5
 #include <KJob>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractSyncToRemoteJobPrivate;
 

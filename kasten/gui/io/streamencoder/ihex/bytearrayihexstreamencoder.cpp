@@ -28,13 +28,13 @@
 #include <bytearraytablelayout.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 IHexStreamEncoderSettings::IHexStreamEncoderSettings()

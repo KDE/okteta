@@ -22,8 +22,8 @@
 
 #include "containedstringtablemodel.h"
 
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
 ContainedStringTableModel::ContainedStringTableModel( const QList<ContainedString> *containedStringList,
@@ -38,13 +38,15 @@ ContainedStringTableModel::ContainedStringTableModel( const QList<ContainedStrin
 void ContainedStringTableModel::setOffsetCoding( int offsetCoding )
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)offsetCoding );
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 
 void ContainedStringTableModel::update()
 {
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 

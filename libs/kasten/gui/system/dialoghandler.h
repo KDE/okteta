@@ -32,7 +32,7 @@
 class QWidget;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog,
@@ -44,7 +44,7 @@ class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog,
     virtual ~DialogHandler();
 
   public: // AbstractOverwriteDialog API
-    virtual Answer queryOverwrite( const KUrl& url, const QString& title ) const;
+    virtual Answer queryOverwrite( const QUrl& url, const QString& title ) const;
 
   public: // AbstractSaveDiscardDialog API
     virtual Answer queryDiscardOnReload( const AbstractDocument* document, const QString& title ) const;

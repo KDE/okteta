@@ -22,13 +22,16 @@
 
 #include "kastencore.h"
 
-// KDE
-#include <KGlobal>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+Q_LOGGING_CATEGORY(LOG_KASTEN_CORE, "kasten.core")
+
+namespace Kasten
 {
 
-static const KCatalogLoader catalogLoader( QLatin1String("libkasten") );
+// FIXME: Replace with ki18n functionality once semantics is clear.
+//static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("libkasten") ), 0);
 
 }

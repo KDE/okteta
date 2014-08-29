@@ -26,21 +26,21 @@
 #include "podtablemodel.h"
 #include "poddelegate.h"
 #include "poddecodertool.h"
-// KDE
+// KF5
 #include <KComboBox>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QCheckBox>
-#include <QtGui/QTreeView>
-#include <QtGui/QHeaderView>
-#include <QtGui/QFocusEvent>
+#include <QLabel>
+#include <QLayout>
+#include <QCheckBox>
+#include <QTreeView>
+#include <QHeaderView>
+#include <QFocusEvent>
 #include <QtGui/QFontMetrics>
 
-#include <KDebug>
-namespace Kasten2
+
+namespace Kasten
 {
 
 PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
@@ -54,7 +54,7 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     // table
     mPODTableModel = new PODTableModel( mTool, this );
     mPODTableView = new QTreeView( this );
-    mPODTableView->setObjectName( QLatin1String( "PODTable" ) );
+    mPODTableView->setObjectName( QStringLiteral( "PODTable" ) );
     mPODTableView->setRootIsDecorated( false );
     mPODTableView->setAlternatingRowColors( true );
     mPODTableView->setItemsExpandable( false );
@@ -67,11 +67,11 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     mPODTableView->setModel( mPODTableModel );
     mPODTableView->installEventFilter( this );
     QHeaderView* header = mPODTableView->header();
-    header->setResizeMode( QHeaderView::Interactive );
+    header->setSectionResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     connect( mPODTableView->selectionModel(),
-             SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-             SLOT(onCurrentRowChanged(QModelIndex,QModelIndex)) );
+             &QItemSelectionModel::currentRowChanged,
+             this, &PODTableView::onCurrentRowChanged );
 
     baseLayout->addWidget( mPODTableView, 10 );
 
@@ -80,11 +80,11 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     settingsLayout->setMargin( 0 );
 
     mByteOrderSelection = new KComboBox( this );
-    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
-    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
+    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Big-endian") );    // add first for index
+    mByteOrderSelection->addItem( i18nc("@item:inlistbox","Little-endian") ); // add second for index
     mByteOrderSelection->setCurrentIndex( mTool->byteOrder() );
-    connect( mByteOrderSelection, SIGNAL(activated(int)),
-             mTool, SLOT(setByteOrder(int)));
+    connect( mByteOrderSelection, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+             mTool, &PODDecoderTool::setByteOrder);
     const QString byteOrderToolTip =
         i18nc( "@info:tooltip",
                "The byte order to use for decoding the bytes." );
@@ -96,8 +96,8 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
 
     mUnsignedAsHexCheck = new QCheckBox( this );
     mUnsignedAsHexCheck->setChecked( mTool->isUnsignedAsHex() );
-    connect( mUnsignedAsHexCheck, SIGNAL(toggled(bool)),
-             mTool, SLOT(setUnsignedAsHex(bool)) );
+    connect( mUnsignedAsHexCheck, &QCheckBox::toggled,
+             mTool, &PODDecoderTool::setUnsignedAsHex );
     unsignedAsHexLabel->setBuddy( mUnsignedAsHexCheck );
     const QString unsignedAsHexToolTip =
         i18nc( "@info:tooltip",
@@ -117,8 +117,8 @@ PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
     QFontMetrics metrics( f );
     //ideally we should check the width of the longest translated string, but this should be wide enough for most
     //anyway this is just an initial setting and the width can be changed manually
-    header->resizeSection( 0, metrics.width( QLatin1String( "Hexadecimal 8-bit" ) ) + 30 );
-    header->resizeSection( 1, metrics.width( QLatin1String( "1.01234567890123456789e-111" ) ) + 15 );
+    header->resizeSection( 0, metrics.width( QStringLiteral( "Hexadecimal 8-bit" ) ) + 30 );
+    header->resizeSection( 1, metrics.width( QStringLiteral( "1.01234567890123456789e-111" ) ) + 15 );
 }
 
 Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
@@ -131,7 +131,7 @@ Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
     if( newValueSize < oldValueSize )
     {
         const QString message =
-            i18nc( "@info",
+            xi18nc( "@info",
                     "The new value needs <emphasis>fewer</emphasis> bytes (%1 instead of %2).<nl/>"
                     "Keep the unused bytes or remove them?", newValueSize, oldValueSize );
 
@@ -149,7 +149,7 @@ Answer PODTableView::query( int newValueSize, int oldValueSize, int sizeLeft )
     else
     {
         const QString message =
-            i18nc( "@info",
+            xi18nc( "@info",
                     "The new value needs <emphasis>more</emphasis> bytes (%1 instead of %2).<nl/>"
                     "Overwrite the following bytes or insert new ones as needed?", newValueSize, oldValueSize );
 

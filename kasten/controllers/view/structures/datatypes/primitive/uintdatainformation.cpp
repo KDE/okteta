@@ -20,11 +20,14 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "uintdatainformation.h"
-#include <QScriptValue>
 
-#include <KGlobal>
-#include <KLocale>
-#include <KDebug>
+#include "../../structlogging.h"
+
+// KF5
+#include <KLocalizedString>
+// Qt
+#include <QScriptValue>
+#include <QLocale>
 
 #include "../../../poddecoder/typeeditors/uintspinbox.h"
 #include "structviewpreferences.h"
@@ -53,8 +56,8 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
     QString num = QString::number(value, base);
     if (base == 10)
     {
-        if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
+        if (Kasten::StructViewPreferences::localeAwareDecimalFormatting())
+            num = QLocale().toString(value);
     }
     else
     {
@@ -70,7 +73,7 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
 template<typename T>
 inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox(parent, Kasten2::StructViewPreferences::unsignedDisplayBase());
+    UIntSpinBox* ret = new UIntSpinBox(parent, Kasten::StructViewPreferences::unsignedDisplayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }
@@ -78,18 +81,18 @@ inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* p
 template<typename T>
 inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
-    const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*> (w);
+    const UIntSpinBox* spin = qobject_cast<const UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
         return QVariant(spin->value());
-    kWarning() << "could not cast widget";
+    qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast widget";
     return QVariant();
 }
 
 template<typename T>
 inline void UIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
-    UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
+    UIntSpinBox* spin = qobject_cast<UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
         spin->setValue(value);

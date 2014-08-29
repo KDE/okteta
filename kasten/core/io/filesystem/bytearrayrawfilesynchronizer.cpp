@@ -31,17 +31,17 @@
 #include "bytearraydocument.h"
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KUrl>
+// Qt
+#include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()
  : mDocument( 0 )
 {
-    connect( this, SIGNAL(urlChanged(KUrl)), SLOT(onUrlChange(KUrl)) );
+    connect( this, &ByteArrayRawFileSynchronizer::urlChanged, this, &ByteArrayRawFileSynchronizer::onUrlChange );
 }
 
 AbstractDocument* ByteArrayRawFileSynchronizer::document() const { return mDocument; }
@@ -56,13 +56,11 @@ void ByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument* document )
 {
     mDocument = document;
     if( mDocument )
-        connect( mDocument->content(), SIGNAL(modifiedChanged(bool)),
-                 SLOT(onModelModified(bool)) );
+        connect( mDocument->content(), &Okteta::AbstractByteArrayModel::modifiedChanged,
+                 this, &ByteArrayRawFileSynchronizer::onModelModified );
 }
 
-void ByteArrayRawFileSynchronizer::startOffering( AbstractDocument* document ) { Q_UNUSED(document) }
-
-AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const KUrl &url )
+AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const QUrl &url )
 {
     return new ByteArrayRawFileLoadJob( this, url );
 }
@@ -77,18 +75,18 @@ AbstractSyncFromRemoteJob *ByteArrayRawFileSynchronizer::startSyncFromRemote()
     return new ByteArrayRawFileReloadJob( this );
 }
 
-AbstractSyncWithRemoteJob *ByteArrayRawFileSynchronizer::startSyncWithRemote( const KUrl &url, AbstractModelSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob *ByteArrayRawFileSynchronizer::startSyncWithRemote( const QUrl &url, AbstractModelSynchronizer::ConnectOption option  )
 {
     return new ByteArrayRawFileWriteToJob( this, url, option );
 }
 
 AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument* document,
-                                              const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
 {
     return new ByteArrayRawFileConnectJob( this, document, url, option );
 }
 
-void ByteArrayRawFileSynchronizer::onUrlChange( const KUrl &url )
+void ByteArrayRawFileSynchronizer::onUrlChange( const QUrl &url )
 {
     mDocument->setTitle( url.fileName() );
 }

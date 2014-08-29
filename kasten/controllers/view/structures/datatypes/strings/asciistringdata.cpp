@@ -24,12 +24,13 @@
 #include "asciistringdata.h"
 #include "stringdatainformation.h"
 #include "../topleveldatainformation.h"
+#include "../../structlogging.h"
 
 #include <abstractbytearraymodel.h>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QVarLengthArray>
-#include <KDebug> //TODO remove
+
 
 AsciiStringData::AsciiStringData(StringDataInformation* parent): StringData(parent)
 {
@@ -93,7 +94,7 @@ qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
                 terminate = true;
         }
         if (mMode == None) {
-            kDebug() << "no termination mode set!!";
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no termination mode set!!";
             Q_ASSERT(false);
         }
         if (terminate)

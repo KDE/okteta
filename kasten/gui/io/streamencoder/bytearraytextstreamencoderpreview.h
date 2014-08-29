@@ -28,10 +28,10 @@
 // Kasten ui
 #include <abstractselectionview.h>
 
-class KTextEdit;
+class QTextEdit;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractByteArrayStreamEncoder;
@@ -63,7 +63,7 @@ class ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
     AbstractModel* mModel;
     const AbstractModelSelection* mSelection;
 
-    KTextEdit* mWidget;
+    QTextEdit* mWidget;
 };
 
 }

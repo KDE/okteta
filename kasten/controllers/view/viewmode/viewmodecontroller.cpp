@@ -24,14 +24,14 @@
 
 // lib
 #include <bytearrayview.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KSelectAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
@@ -40,13 +40,13 @@ ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     // view style
-    mViewModeAction = actionCollection->add<KSelectAction>( QLatin1String("viewmode") );
+    mViewModeAction = actionCollection->add<KSelectAction>( QStringLiteral("viewmode") );
     mViewModeAction->setText( i18nc("@title:menu","&View Mode") );
     QStringList list;
     list.append( i18nc("@item:inmenu","&Columns") );
     list.append( i18nc("@item:inmenu","&Rows") );
     mViewModeAction->setItems( list );
-    connect( mViewModeAction, SIGNAL(triggered(int)), SLOT(setViewMode(int)) );
+    connect( mViewModeAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewModeController::setViewMode );
 
     setTargetModel( 0 );
 }

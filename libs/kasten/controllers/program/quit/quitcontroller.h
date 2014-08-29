@@ -31,7 +31,7 @@
 class KXmlGuiWindow;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KProgram;

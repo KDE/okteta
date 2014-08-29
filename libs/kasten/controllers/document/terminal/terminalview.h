@@ -24,17 +24,17 @@
 #define TERMINALVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class TerminalInterface;
 namespace KParts
 {
 class ReadOnlyPart;
 }
-class KUrl;
+class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class TerminalTool;
@@ -54,7 +54,7 @@ class TerminalView : public QWidget
   private Q_SLOTS:
     void createTerminalPart();
 
-    void onCurrentUrlChanged( const KUrl& currentUrl );
+    void onCurrentUrlChanged( const QUrl& currentUrl );
 
     void onTerminalPartDestroyed();
 

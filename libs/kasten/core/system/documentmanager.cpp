@@ -24,9 +24,8 @@
 
 // lib
 #include <abstractdocument.h>
-// KDE
-#include <KUrl>
 // Qt
+#include <QtCore/QUrl>
 #include <QtCore/QMutableListIterator>
 #include <QtCore/QStringList>
 
@@ -36,7 +35,7 @@
 #include "modelcodecmanager.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static int lastDocumentId = 0;

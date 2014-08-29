@@ -35,7 +35,7 @@
 #include <abstractmodeldatagenerator.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ModelCodecViewManager::ModelCodecViewManager() {}

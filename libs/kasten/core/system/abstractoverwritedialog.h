@@ -27,11 +27,11 @@
 #include <kastencore_export.h>
 #include <kastencore.h>
 
-class KUrl;
+class QUrl;
 class QString;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KASTENCORE_EXPORT AbstractOverwriteDialog
@@ -40,7 +40,7 @@ class KASTENCORE_EXPORT AbstractOverwriteDialog
     virtual ~AbstractOverwriteDialog();
 
   public: // API to be implemented
-    virtual Answer queryOverwrite( const KUrl& url, const QString& title ) const = 0;
+    virtual Answer queryOverwrite( const QUrl& url, const QString& title ) const = 0;
 };
 
 

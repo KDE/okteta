@@ -24,14 +24,14 @@
 #define BOOKMARKSVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
-class KPushButton;
+class QPushButton;
 class QTreeView;
 class QModelIndex;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class BookmarkListModel;
@@ -63,10 +63,10 @@ class BookmarksView : public QWidget
     BookmarkListModel* mBookmarkListModel;
 
     QTreeView* mBookmarkListView;
-    KPushButton* mCreateBookmarkButton;
-    KPushButton* mDeleteBookmarksButton;
-    KPushButton* mGotoBookmarkButton;
-    KPushButton* mRenameBookmarkButton;
+    QPushButton* mCreateBookmarkButton;
+    QPushButton* mDeleteBookmarksButton;
+    QPushButton* mGotoBookmarkButton;
+    QPushButton* mRenameBookmarkButton;
 };
 
 

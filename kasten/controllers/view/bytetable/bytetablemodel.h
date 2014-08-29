@@ -32,7 +32,7 @@ class ValueCodec;
 }
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteTableModel : public QAbstractTableModel

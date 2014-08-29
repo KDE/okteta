@@ -23,17 +23,16 @@
 #ifndef DOCUMENTINFOVIEW_H
 #define DOCUMENTINFOVIEW_H
 
-// KDE
-#include <KMimeType>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KSqueezedTextLabel;
 class QString;
+class QMimeType;
 class QLabel;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class DocumentInfoTool;
@@ -52,7 +51,7 @@ class DocumentInfoView : public QWidget
 
   private Q_SLOTS:
     void onDocumentTitleChanged( const QString& documentTitle );
-    void onMimeTypeChanged( KMimeType::Ptr mimeTypePtr );
+    void onMimeTypeChanged( const QMimeType& mimeType );
     void onLocationChanged( const QString& location );
     void onDocumentSizeChanged( int newSize );
 

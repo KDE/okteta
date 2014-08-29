@@ -25,16 +25,17 @@
 // Kasten core
 #include <documentsyncmanager.h>
 #include <abstractmodelfilesystemsynchronizer.h>
-// KDE
-#include <KUrl>
+// KF5
 #include <KActionCollection>
-#include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
+// Qt
+#include <QtCore/QUrl>
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
@@ -46,10 +47,10 @@ SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, 
 
     mSaveAction = KStandardAction::save( this, SLOT(save()), actionCollection );
 
-    mReloadAction = actionCollection->addAction( QLatin1String("file_reload"),
+    mReloadAction = actionCollection->addAction( QStringLiteral("file_reload"),
                                                  this, SLOT(reload()) );
     mReloadAction->setText( i18nc("@title:menu","Reloa&d") );
-    mReloadAction->setIcon( KIcon( QLatin1String("view-refresh") ) );
+    mReloadAction->setIcon( QIcon::fromTheme( QStringLiteral("view-refresh") ) );
     mReloadAction->setShortcuts( KStandardShortcut::reload() );
 
     setTargetModel( 0 );
@@ -63,8 +64,8 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
-                            SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
+        connect( mDocument, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
+                            SLOT(onSynchronizerChanged(Kasten::AbstractModelSynchronizer*)) );
     }
     onSynchronizerChanged( mDocument ? mDocument->synchronizer() : 0 );
 }
@@ -96,9 +97,9 @@ void SynchronizeController::onSynchronizerChanged( AbstractModelSynchronizer* ne
                   || ( remoteSyncState == RemoteHasChanges )
                   || ( remoteSyncState == RemoteUnknown );
 
-        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten2::LocalSyncState)),
+        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
                                 SLOT(onSyncStateChanged()) );
-        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten2::RemoteSyncState)),
+        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
                                 SLOT(onSyncStateChanged()) );
         connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
                                 SLOT(onSynchronizerDeleted(QObject*)) );

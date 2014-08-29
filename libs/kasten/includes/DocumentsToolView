@@ -1,1 +1,1 @@
-#include "../../kasten2/documentstoolview.h"
+#include "../kasten/documentstoolview.h"

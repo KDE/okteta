@@ -28,8 +28,8 @@
 #include <person.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDataStream>
@@ -38,7 +38,7 @@
 #include <limits>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void ByteArrayRawFileLoadThread::run()

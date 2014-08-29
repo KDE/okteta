@@ -26,10 +26,10 @@
 #include "testdocument.h"
 #include "testdocumentfilesynchronizer.h"
 // Qt
-#include <QtCore/QLatin1String>
+#include <QtCore/QString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const QByteArray& header )
@@ -37,8 +37,8 @@ TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const 
 
 // could be set to base class as value, is only one object per factory at runtime
 // and settable in desktop file
-QString TestDocumentFileSynchronizerFactory::supportedWorkType() const { return QLatin1String("TestDocument");}
-QString TestDocumentFileSynchronizerFactory::supportedRemoteType() const { return QLatin1String("application/octet-stream");}
+QString TestDocumentFileSynchronizerFactory::supportedWorkType() const { return QStringLiteral("TestDocument");}
+QString TestDocumentFileSynchronizerFactory::supportedRemoteType() const { return QStringLiteral("application/octet-stream");}
 
 // TODO: these function seems to be always the same. Make macro or template function
 // or, if there is only one place which calls this, move there

@@ -26,24 +26,27 @@
 #include "typeeditors/binary8editor.h"
 #include "typeeditors/octal8editor.h"
 #include "typeeditors/hexadecimal8editor.h"
-#include "typeeditors/sint8editor.h"
-#include "typeeditors/sint16editor.h"
-#include "typeeditors/sint32editor.h"
-#include "typeeditors/sint64editor.h"
-#include "typeeditors/uint8editor.h"
-#include "typeeditors/uint16editor.h"
-#include "typeeditors/uint32editor.h"
-#include "typeeditors/uint64editor.h"
 #include "typeeditors/float32editor.h"
 #include "typeeditors/float64editor.h"
 #include "typeeditors/char8editor.h"
 #include "typeeditors/utf8editor.h"
+#include "typeeditors/sintspinbox.h"
+#include "typeeditors/uintspinbox.h"
 #include "poddecodertool.h"
+#include "types/sint8.h"
+#include "types/sint16.h"
+#include "types/sint32.h"
+#include "types/sint64.h"
+#include "types/uint8.h"
+#include "types/uint16.h"
+#include "types/uint32.h"
+#include "types/uint64.h"
+
 
 // TODO: Stranger that you are reading this: please help out and show how to add QVariant::Types for custom datatypes,
 // so that instead of this unflexible maintanance mess^WWWunlooped code QItemEditorCreator can be used!
 
-namespace Kasten2
+namespace Kasten
 {
 
 PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )
@@ -67,7 +70,7 @@ PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )
     qRegisterMetaType<Char8>();
     qRegisterMetaType<Utf8>();
 
-    connect( mTool, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
+    connect( mTool, &PODDecoderTool::readOnlyChanged, this, &PODDelegate::onReadOnlyChanged );
 }
 
 // make sure only editors are created which have a readOnly property
@@ -82,110 +85,110 @@ QWidget* PODDelegate::createEditor( QWidget* parent, const QStyleOptionViewItem&
     if( data.canConvert<Binary8>() )
     {
         Binary8Editor* editor = new Binary8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Binary8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Octal8>() )
     {
         Octal8Editor* editor = new Octal8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Octal8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Hexadecimal8>() )
     {
         Hexadecimal8Editor* editor = new Hexadecimal8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Hexadecimal8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<SInt8>() )
     {
-        SInt8Editor* editor = new SInt8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        SIntSpinBox* editor = SIntSpinBox::createSInt8Spinbox( parent );
+        connect( editor, &SIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<SInt16>() )
     {
-        SInt16Editor* editor = new SInt16Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        SIntSpinBox* editor = SIntSpinBox::createSInt16Spinbox( parent );
+        connect( editor, &SIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<SInt32>() )
     {
-        SInt32Editor* editor = new SInt32Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        SIntSpinBox* editor = SIntSpinBox::createSInt32Spinbox( parent );
+        connect( editor, &SIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<SInt64>() )
     {
-        SInt64Editor* editor = new SInt64Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        SIntSpinBox* editor = SIntSpinBox::createSInt64Spinbox( parent );
+        connect( editor, &SIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<UInt8>() )
     {
-        UInt8Editor* editor = new UInt8Editor( parent );
+        UIntSpinBox* editor = UIntSpinBox::createUInt8Spinbox( parent );
         editor->setBase( mTool->isUnsignedAsHex() ? 16 : 10 );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &UIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<UInt16>() )
     {
-        UInt16Editor* editor = new UInt16Editor( parent );
+        UIntSpinBox* editor = UIntSpinBox::createUInt16Spinbox( parent );
         editor->setBase( mTool->isUnsignedAsHex() ? 16 : 10 );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &UIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<UInt32>() )
     {
-        UInt32Editor* editor = new UInt32Editor( parent );
+        UIntSpinBox* editor = UIntSpinBox::createUInt32Spinbox( parent );
         editor->setBase( mTool->isUnsignedAsHex() ? 16 : 10 );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &UIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<UInt64>() )
     {
-        UInt64Editor* editor = new UInt64Editor( parent );
+        UIntSpinBox* editor = UIntSpinBox::createUInt64Spinbox( parent );
         editor->setBase( mTool->isUnsignedAsHex() ? 16 : 10 );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &UIntSpinBox::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Float32>() )
     {
         Float32Editor* editor = new Float32Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Float32Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Float64>() )
     {
         Float64Editor* editor = new Float64Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Float64Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Char8>() )
     {
         Char8Editor* editor = new Char8Editor( mTool->charCodec(), parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Char8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else if( data.canConvert<Utf8>() )
     {
         Utf8Editor* editor = new Utf8Editor( parent );
-        connect( editor, SIGNAL(editingFinished()),
-                 SLOT(onEditorDone()) );
+        connect( editor, &Utf8Editor::editingFinished,
+                 this, &PODDelegate::onEditorDone );
         result = editor;
     }
     else
@@ -222,50 +225,50 @@ void PODDelegate::setEditorData( QWidget* editor, const QModelIndex& index ) con
     else if( data.canConvert<SInt8>() )
     {
         SInt8 sInt8 = data.value<SInt8>();
-        SInt8Editor* sInt8Editor = qobject_cast<SInt8Editor*>( editor );
-        sInt8Editor->setData( sInt8 );
+        SIntSpinBox* sInt8Editor = qobject_cast<SIntSpinBox*>( editor );
+        sInt8Editor->setValue( sInt8.value );
     }
     else if( data.canConvert<SInt16>() )
     {
         SInt16 sInt16 = data.value<SInt16>();
-        SInt16Editor* sInt16Editor = qobject_cast<SInt16Editor*>( editor );
-        sInt16Editor->setData( sInt16 );
+        SIntSpinBox* sInt16Editor = qobject_cast<SIntSpinBox*>( editor );
+        sInt16Editor->setValue( sInt16.value );
     }
     else if( data.canConvert<SInt32>() )
     {
         SInt32 sInt32 = data.value<SInt32>();
-        SInt32Editor* sInt32Editor = qobject_cast<SInt32Editor*>( editor );
-        sInt32Editor->setData( sInt32 );
+        SIntSpinBox* sInt32Editor = qobject_cast<SIntSpinBox*>( editor );
+        sInt32Editor->setValue( sInt32.value );
     }
     else if( data.canConvert<SInt64>() )
     {
         SInt64 sInt64 = data.value<SInt64>();
-        SInt64Editor* sInt64Editor = qobject_cast<SInt64Editor*>( editor );
-        sInt64Editor->setData( sInt64 );
+        SIntSpinBox* sInt64Editor = qobject_cast<SIntSpinBox*>( editor );
+        sInt64Editor->setValue( sInt64.value );
     }
     else if( data.canConvert<UInt8>() )
     {
         UInt8 uInt8 = data.value<UInt8>();
-        UInt8Editor* uInt8Editor = qobject_cast<UInt8Editor*>( editor );
-        uInt8Editor->setData( uInt8 );
+        UIntSpinBox* uInt8Editor = qobject_cast<UIntSpinBox*>( editor );
+        uInt8Editor->setValue( uInt8.value );
     }
     else if( data.canConvert<UInt16>() )
     {
         UInt16 uInt16 = data.value<UInt16>();
-        UInt16Editor* uInt16Editor = qobject_cast<UInt16Editor*>( editor );
-        uInt16Editor->setData( uInt16 );
+        UIntSpinBox* uInt16Editor = qobject_cast<UIntSpinBox*>( editor );
+        uInt16Editor->setValue( uInt16.value );
     }
     else if( data.canConvert<UInt32>() )
     {
         UInt32 uInt32 = data.value<UInt32>();
-        UInt32Editor* uInt32Editor = qobject_cast<UInt32Editor*>( editor );
-        uInt32Editor->setData( uInt32 );
+        UIntSpinBox* uInt32Editor = qobject_cast<UIntSpinBox*>( editor );
+        uInt32Editor->setValue( uInt32.value );
     }
     else if( data.canConvert<UInt64>() )
     {
         UInt64 uInt64 = data.value<UInt64>();
-        UInt64Editor* uInt64Editor = qobject_cast<UInt64Editor*>( editor );
-        uInt64Editor->setData( uInt64 );
+        UIntSpinBox* uInt64Editor = qobject_cast<UIntSpinBox*>( editor );
+        uInt64Editor->setValue( uInt64.value );
     }
     else if( data.canConvert<Float32>() )
     {
@@ -319,43 +322,43 @@ void PODDelegate::setModelData( QWidget* editor, QAbstractItemModel* model, cons
     }
     else if( data.canConvert<SInt8>() )
     {
-        SInt8Editor* sInt8Editor = qobject_cast<SInt8Editor*>( editor );
-        model->setData( index, QVariant::fromValue(sInt8Editor->data()) );
+        SIntSpinBox* sintEditor = qobject_cast<SIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( SInt8(sintEditor->value()) ) );
     }
     else if( data.canConvert<SInt16>() )
     {
-        SInt16Editor* sInt16Editor = qobject_cast<SInt16Editor*>( editor );
-        model->setData( index, QVariant::fromValue(sInt16Editor->data()) );
+        SIntSpinBox* sintEditor = qobject_cast<SIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( SInt16(sintEditor->value()) ) );
     }
     else if( data.canConvert<SInt32>() )
     {
-        SInt32Editor* sInt32Editor = qobject_cast<SInt32Editor*>( editor );
-        model->setData( index, QVariant::fromValue(sInt32Editor->data()) );
+        SIntSpinBox* sintEditor = qobject_cast<SIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( SInt32(sintEditor->value()) ) );
     }
     else if( data.canConvert<SInt64>() )
     {
-        SInt64Editor* sInt64Editor = qobject_cast<SInt64Editor*>( editor );
-        model->setData( index, QVariant::fromValue(sInt64Editor->data()) );
+        SIntSpinBox* sintEditor = qobject_cast<SIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( SInt64(sintEditor->value()) ) );
     }
     else if( data.canConvert<UInt8>() )
     {
-        UInt8Editor* uInt8Editor = qobject_cast<UInt8Editor*>( editor );
-        model->setData( index, QVariant::fromValue(uInt8Editor->data()) );
+        UIntSpinBox* uintEditor = qobject_cast<UIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( UInt8(uintEditor->value()) ) );
     }
     else if( data.canConvert<UInt16>() )
     {
-        UInt16Editor* uInt16Editor = qobject_cast<UInt16Editor*>( editor );
-        model->setData( index, QVariant::fromValue(uInt16Editor->data()) );
+        UIntSpinBox* uintEditor = qobject_cast<UIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( UInt16(uintEditor->value()) ) );
     }
     else if( data.canConvert<UInt32>() )
     {
-        UInt32Editor* uInt32Editor = qobject_cast<UInt32Editor*>( editor );
-        model->setData( index, QVariant::fromValue(uInt32Editor->data()) );
+        UIntSpinBox* uintEditor = qobject_cast<UIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( UInt32(uintEditor->value()) ) );
     }
     else if( data.canConvert<UInt64>() )
     {
-        UInt64Editor* uInt64Editor = qobject_cast<UInt64Editor*>( editor );
-        model->setData( index, QVariant::fromValue(uInt64Editor->data()) );
+        UIntSpinBox* uintEditor = qobject_cast<UIntSpinBox*>( editor );
+        model->setData( index, QVariant::fromValue( UInt64(uintEditor->value()) ) );
     }
     else if( data.canConvert<Float32>() )
     {

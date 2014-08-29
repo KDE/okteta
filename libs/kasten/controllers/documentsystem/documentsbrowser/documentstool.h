@@ -28,7 +28,7 @@
 // Kasten core
 #include <abstracttool.h>
 
-namespace Kasten2
+namespace Kasten
 {
 
 class DocumentManager;
@@ -55,9 +55,9 @@ class KASTENCONTROLLERS_EXPORT DocumentsTool : public AbstractTool
     virtual void setTargetModel( AbstractModel* model );
 
   Q_SIGNALS:
-    void documentsAdded( const QList<Kasten2::AbstractDocument*>& documents );
-    void documentsClosing( const QList<Kasten2::AbstractDocument*>& documents );
-    void focussedDocumentChanged( Kasten2::AbstractDocument* document );
+    void documentsAdded( const QList<Kasten::AbstractDocument*>& documents );
+    void documentsClosing( const QList<Kasten::AbstractDocument*>& documents );
+    void focussedDocumentChanged( Kasten::AbstractDocument* document );
 
   private: // sources
     DocumentManager* mDocumentManager;

@@ -32,8 +32,8 @@
 #include "../scriptlogger.h"
 #include "../scripthandlerinfo.h"
 #include "../safereference.h"
+#include "../../structlogging.h"
 
-#include <KDebug>
 
 DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : QScriptClass(engine), mHandlerInfo(handlerInfo)
@@ -53,7 +53,7 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
 
     //TODO remove, every subclass should have proto
     mDefaultPrototype = engine->newObject();
-    mDefaultPrototype.setProperty(QLatin1String("toString"), engine->newFunction(Default_proto_toString));
+    mDefaultPrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Default_proto_toString));
     //add all our properties
     mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
@@ -96,7 +96,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QLatin1String("Attempting to access an invalid object"));
+                QStringLiteral("Attempting to access an invalid object"));
         return 0;
     }
     if (name == s_valid || name == s_validationError)
@@ -127,7 +127,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     {
         data->logError() << "could not find property with name" << name.toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QLatin1String("Could not find property with name ") + name.toString());
+                QStringLiteral("Could not find property with name ") + name.toString());
         return 0;
     }
 }
@@ -140,7 +140,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QLatin1String("Attempting to access an invalid object"));
+                QStringLiteral("Attempting to access an invalid object"));
     }
     if (name == s_valid)
     {
@@ -197,7 +197,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     {
         data->logError() << "could not find property with name" << name.toString();
         return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QLatin1String("Cannot read property ") + name.toString());
+                QStringLiteral("Cannot read property ") + name.toString());
     }
 }
 
@@ -287,7 +287,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QLatin1String("Attempting to access an invalid object"));
+                QStringLiteral("Attempting to access an invalid object"));
         return;
     }
     if (mode == ScriptHandlerInfo::Validating)
@@ -353,7 +353,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         {
             data->logError() << "could not set property with name" << name.toString();
             engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QLatin1String("Cannot write property ") + name.toString());
+                QStringLiteral("Cannot write property ") + name.toString());
         }
     }
 }
@@ -368,7 +368,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QLatin1String("Attempting to access an invalid object"));
+                QStringLiteral("Attempting to access an invalid object"));
         return 0;
     }
     if (name == s_valid || name == s_validationError)
@@ -404,7 +404,7 @@ QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QSc
     DataInformation* data = toDataInformation(ctx->thisObject());
     if (!data)
     {
-        kWarning() << "could not cast data";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     return QString(data->typeName() + QLatin1Char(' ') + data->name());

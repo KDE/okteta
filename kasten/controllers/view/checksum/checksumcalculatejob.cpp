@@ -27,10 +27,10 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int MaxChecksumEventProcessTimeInMS = 100;
@@ -49,7 +49,7 @@ void ChecksumCalculateJob::exec()
         return;
     }
 
-    connect( mAlgorithm, SIGNAL(calculatedBytes(int)), SLOT(onCalculatedBytes()) );
+    connect( mAlgorithm, &AbstractByteArrayChecksumAlgorithm::calculatedBytes, this, &ChecksumCalculateJob::onCalculatedBytes );
 
     mAlgorithm->calculateChecksum( mChecksum, mByteArrayModel, mSelection );
 

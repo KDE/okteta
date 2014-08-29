@@ -26,7 +26,7 @@
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, Okteta::Address offset, const Okteta::CoordRange& coordRange,

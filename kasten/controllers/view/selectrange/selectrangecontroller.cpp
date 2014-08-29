@@ -27,14 +27,15 @@
 #include "selectrangetool.h"
 // Kasten gui
 #include <toolinlineviewable.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
-#include <KAction>
+#include <KLocalizedString>
 #include <KActionCollection>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // TODO: a tool(view) might perhaps be invoked indirectly by asking for a tool for the object, here select
@@ -44,15 +45,15 @@ SelectRangeController::SelectRangeController( If::ToolInlineViewable* toolInline
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSelectAction = actionCollection->addAction( QLatin1String("edit_select"),
+    mSelectAction = actionCollection->addAction( QStringLiteral("edit_select"),
                                                  this, SLOT(select()) );
     mSelectAction->setText( i18nc("@action:inmenu","&Select range...") );
-    mSelectAction->setIcon( KIcon(QLatin1String("select-rectangular")) );
+    mSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("select-rectangular") ) );
     mSelectAction->setShortcut( Qt::CTRL + Qt::Key_E );
 
     mTool = new SelectRangeTool();
-    connect( mTool, SIGNAL(isUsableChanged(bool)),
-             mSelectAction, SLOT(setEnabled(bool)) );
+    connect( mTool, &SelectRangeTool::isUsableChanged,
+             mSelectAction, &QAction::setEnabled );
     mSelectAction->setEnabled( mTool->isUsable() );
 
     mView = new SelectRangeToolView( mTool );

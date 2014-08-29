@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2011,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -25,49 +25,73 @@
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
 #include <abstractdocument.h>
-// KDE
-#include <KIO/NetAccess>
+// KF5
+#include <KIO/FileCopyJob>
+#include <KJobWidgets>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
+#include <QTemporaryFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void AbstractFileSystemConnectJobPrivate::connectWithFile()
 {
     Q_Q( AbstractFileSystemConnectJob );
 
-// Comment: here we play tricks to reuse the temporary file
-// KIO::NetAccess::removeTempFile only removes tempfiles created by KIO::NetAccess::download
-// So if replaceRemote and workFilePath is temporaryFile both don't conflict -> no problem (now)
-
     bool isWorkFileOk;
     if( mOption == AbstractModelSynchronizer::ReplaceRemote )
     {
         if( mUrl.isLocalFile() )
         {
-            mWorkFilePath = mUrl.path();
+            mWorkFilePath = mUrl.path(QUrl::FullyDecoded);
             mFile = new QFile( mWorkFilePath );
             isWorkFileOk = mFile->open( QIODevice::WriteOnly );
         }
         else
         {
-            KTemporaryFile* temporaryFile = new KTemporaryFile;
+            QTemporaryFile* temporaryFile = new QTemporaryFile;
             isWorkFileOk = temporaryFile->open();
 
             mWorkFilePath = temporaryFile->fileName();
+            mTempFilePath = mWorkFilePath;
             mFile = temporaryFile;
         }
+        if( ! isWorkFileOk )
+            q->setErrorText( mFile->errorString() );
     }
     else
     {
-        isWorkFileOk = KIO::NetAccess::download( mUrl.url(), mWorkFilePath, 0 );
+        if( mUrl.isLocalFile() )
+        {
+            // file protocol. We do not need the network
+            mWorkFilePath = mUrl.toLocalFile();
+            isWorkFileOk = true;
+        } else {
+            QTemporaryFile tmpFile;
+            tmpFile.setAutoRemove( false );
+            tmpFile.open();
+
+            mWorkFilePath = tmpFile.fileName();
+            mTempFilePath = mWorkFilePath;
+
+            KIO::FileCopyJob* fileCopyJob =
+                KIO::file_copy( mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite );
+            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+
+            isWorkFileOk = fileCopyJob->exec();
+            if( ! isWorkFileOk )
+                q->setErrorText( fileCopyJob->errorString() );
+        }
+
         if( isWorkFileOk )
         {
             mFile = new QFile( mWorkFilePath );
             isWorkFileOk = mFile->open( QIODevice::ReadOnly );
+            if( ! isWorkFileOk )
+                q->setErrorText( mFile->errorString() );
         }
     }
 
@@ -76,7 +100,6 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile ? mFile->errorString() : KIO::NetAccess::lastErrorString() );
         delete mFile;
         // TODO: should we rather skip setDocument in the API?
         q->emitResult();
@@ -97,11 +120,15 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
 
         if( ! mUrl.isLocalFile() )
         {
-            const bool uploaded = KIO::NetAccess::upload( mWorkFilePath, mUrl, 0 );
+            KIO::FileCopyJob* fileCopyJob =
+                KIO::file_copy( QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite );
+            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+
+            const bool uploaded = fileCopyJob->exec();
             if( ! uploaded )
             {
                 q->setError( KJob::KilledJobError );
-                q->setErrorText( KIO::NetAccess::lastErrorString() );
+                q->setErrorText( fileCopyJob->errorString() );
             }
             else
             {
@@ -129,7 +156,9 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
     }
 
     delete mFile;
-    KIO::NetAccess::removeTempFile( mWorkFilePath );
+
+    if( ! mTempFilePath.isEmpty() )
+        QFile::remove( mTempFilePath );
 
     q->emitResult();
 }

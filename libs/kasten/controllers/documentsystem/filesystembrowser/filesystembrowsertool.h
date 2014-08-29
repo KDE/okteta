@@ -28,10 +28,10 @@
 // Kasten core
 #include <abstracttool.h>
 
-class KUrl;
+class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class DocumentSyncManager;
@@ -47,10 +47,10 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
     virtual ~FileSystemBrowserTool();
 
   public:
-    void open( const KUrl& url );
+    void open( const QUrl& url );
 
   public:
-    KUrl currentUrl() const;
+    QUrl currentUrl() const;
     bool hasCurrentUrl() const;
 
   public: // AbstractTool API

@@ -24,7 +24,7 @@
 #include "singledocumentstrategy_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SingleDocumentStrategy::SingleDocumentStrategy( DocumentManager* documentManager,
@@ -94,7 +94,7 @@ void SingleDocumentStrategy::createNewWithGenerator( AbstractModelDataGenerator*
     d->createNewWithGenerator( generator );
 }
 
-void SingleDocumentStrategy::load( const KUrl& url )
+void SingleDocumentStrategy::load( const QUrl& url )
 {
     Q_D( SingleDocumentStrategy );
 

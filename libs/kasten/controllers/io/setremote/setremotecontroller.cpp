@@ -25,14 +25,15 @@
 // Kasten core
 #include <documentsyncmanager.h>
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <KActionCollection>
-#include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SetRemoteController::SetRemoteController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )

@@ -22,11 +22,14 @@
 
 #include "bytearrayviewprofilelock.h"
 
-// KDE
-#include <KLockFile>
+// library
+#include <oktetakastengui.h>
+// Qt
+#include <QLockFile>
+#include <QSharedPointer>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayViewProfileLockPrivate : public QSharedData
@@ -35,7 +38,7 @@ public:
     ByteArrayViewProfileLockPrivate( const QString& fileName,
                                      const ByteArrayViewProfile::Id& viewProfileId );
 public:
-    KLockFile lockFile;
+    QSharedPointer<QLockFile> lockFile;
     ByteArrayViewProfile::Id viewProfileId;
 };
 
@@ -44,16 +47,20 @@ static QString
 viewProfileFileLockPath( const QString& viewProfileFilePath)
 {
     // TODO: just ".lock" conflicts with KConfig(?) using the same
-    return viewProfileFilePath + QLatin1String(".olock");
+    return viewProfileFilePath + QStringLiteral(".olock");
 }
 
 ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate( const QString& fileName,
                                                                   const ByteArrayViewProfile::Id& id )
-  : lockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName)),
+  : lockFile(new QLockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName))),
     viewProfileId( id )
 {
     if( !fileName.isEmpty() )
-        lockFile.lock( KLockFile::NoBlockFlag | KLockFile::ForceFlag );
+    {
+        if ( !lockFile->tryLock( 1000 ) )
+            qCWarning(LOG_KASTEN_OKTETA_GUI) << "Failed to acquire lock file" << fileName
+                    << "error =" << lockFile->error();
+    }
 }
 
 
@@ -79,13 +86,13 @@ ByteArrayViewProfileLock::operator=( const ByteArrayViewProfileLock& other )
 void
 ByteArrayViewProfileLock::unlock()
 {
-    d->lockFile.unlock();
+    d->lockFile->unlock();
 }
 
 bool
 ByteArrayViewProfileLock::isLocked() const
 {
-    return d->lockFile.isLocked();
+    return d->lockFile->isLocked();
 }
 
 ByteArrayViewProfile::Id

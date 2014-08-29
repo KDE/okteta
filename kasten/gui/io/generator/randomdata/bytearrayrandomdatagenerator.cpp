@@ -24,8 +24,8 @@
 
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QMimeData>
 #include <QtCore/QByteArray>
@@ -34,7 +34,7 @@
 #include <time.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 static const char RandomDataMimeType[] = "application/octet-stream";
 

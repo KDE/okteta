@@ -29,7 +29,7 @@
 #include <QtCore/QtPlugin>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 enum ReplaceBehaviour { ReplaceAll, SkipCurrent, ReplaceCurrent, CancelReplacing };
@@ -53,6 +53,6 @@ inline ReplaceUserQueryable::~ReplaceUserQueryable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten2::If::ReplaceUserQueryable, "org.kde.kasten2.if.userlistable/1.0" )
+Q_DECLARE_INTERFACE( Kasten::If::ReplaceUserQueryable, "org.kde.kasten.if.userlistable/1.0" )
 
 #endif

@@ -28,10 +28,10 @@
 #include "testdocumentfilereloadthread.h"
 #include "testdocument.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 TestDocumentFileReloadJob::TestDocumentFileReloadJob( TestDocumentFileSynchronizer* synchronizer )
@@ -46,7 +46,7 @@ void TestDocumentFileReloadJob::startReadFromFile()
         new TestDocumentFileReloadThread( this, testSynchronizer->header(), /*document, */file() );
     reloadThread->start();
     while( !reloadThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     const bool success = reloadThread->success();
     // TODO: moved this here to avoid marshalling the change signals out of the thread. Good idea?

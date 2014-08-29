@@ -23,7 +23,7 @@
 #include "abstractcontroller.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void AbstractController::setTargetModel( AbstractModel* model )

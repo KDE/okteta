@@ -26,23 +26,22 @@
 #include "infotool.h"
 #include "statistictablemodel.h"
 #include "infoviewsettings.h"
-// KDE
-#include <KPushButton>
+// KF5
 #include <KGuiItem>
-#include <KLocale>
-#include <KGlobal>
-#include <KApplication>
-#include <KGlobalSettings>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QTreeView>
+#include <QtWidgets/QApplication>
+#include <QtCore/QSortFilterProxyModel>
+#include <QFontDatabase>
+#include <QPushButton>
+#include <QLabel>
+#include <QLayout>
+#include <QHeaderView>
+#include <QTreeView>
 #include <QtGui/QFontMetrics>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 InfoView::InfoView( InfoTool *tool, QWidget* parent )
@@ -63,37 +62,39 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     label->setToolTip( sizeToolTip );
     mSizeLabel->setToolTip( sizeToolTip );
     topLineLayout->addWidget( mSizeLabel, 10 );
-    connect( mTool->statisticTableModel(), SIGNAL(sizeChanged(int)),
-             SLOT(setByteArraySize(int)) );
+    connect( mTool->statisticTableModel(), &StatisticTableModel::sizeChanged,
+             this, &InfoView::setByteArraySize );
 
     topLineLayout->addStretch();
 
     const KGuiItem updateGuiItem =
         KGuiItem(i18nc("@action:button build the statistic of the byte frequency",
                        "&Build"),
-                 QLatin1String("run-build"),
+                 QStringLiteral("run-build"),
                  i18nc("@info:tooltip",
                        "Builds the byte frequency statistic for the bytes in the selected range."),
-                 i18nc("@info:whatsthis",
-                       "If you press the <interface>Build</interface> button,"
-                       " the byte frequency statistic is built for the bytes in the selected range.") );
-    mUpdateButton = new KPushButton( updateGuiItem, this );
+                 xi18nc("@info:whatsthis",
+                        "If you press the <interface>Build</interface> button,"
+                        " the byte frequency statistic is built for the bytes in the selected range.") );
+    mUpdateButton = new QPushButton( this );
+    KGuiItem::assign( mUpdateButton, updateGuiItem );
     mUpdateButton->setEnabled( mTool->isApplyable() );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)), mUpdateButton, SLOT(setEnabled(bool)) );
-    connect( mUpdateButton, SIGNAL(clicked(bool)), mTool, SLOT(updateStatistic()) ); 
+    connect( mTool, &InfoTool::isApplyableChanged, mUpdateButton, &QPushButton::setEnabled );
+    connect( mUpdateButton, &QPushButton::clicked, mTool, &InfoTool::updateStatistic ); 
     topLineLayout->addWidget( mUpdateButton );
 
     baseLayout->addLayout( topLineLayout );
 
     mStatisticTableView = new QTreeView( this );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(setFixedFontByGlobalSettings()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()),
-             SLOT(resizeColumnsWidth()) );
-    connect( KGlobalSettings::self(), SIGNAL(kdisplayStyleChanged()),
-             SLOT(resizeColumnsWidth()) );
+    // TODO: find a signal/event emitted when fixedfont changes
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &InfoView::setFixedFontByGlobalSettings );
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
+//              this, &InfoView::resizeColumnsWidth );
+//     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayStyleChanged,
+//              this, &InfoView::resizeColumnsWidth );
     setFixedFontByGlobalSettings(); //do this before setting model
-    mStatisticTableView->setObjectName( QLatin1String( "StatisticTable" ) );
+    mStatisticTableView->setObjectName( QStringLiteral( "StatisticTable" ) );
     mStatisticTableView->setRootIsDecorated( false );
     mStatisticTableView->setItemsExpandable( false );
     mStatisticTableView->setUniformRowHeights( true );
@@ -101,7 +102,7 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     mStatisticTableView->setSortingEnabled( true );
     QHeaderView* header = mStatisticTableView->header();
     header->setFont( font() );
-    header->setResizeMode( QHeaderView::Interactive );
+    header->setSectionResizeMode( QHeaderView::Interactive );
     header->setStretchLastSection( false );
     // TODO: write subclass to filter count and percent by num, not string
     QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel( this );
@@ -109,16 +110,16 @@ InfoView::InfoView( InfoTool *tool, QWidget* parent )
     proxyModel->setSourceModel( mTool->statisticTableModel() );
     mStatisticTableView->setModel( proxyModel );
     mStatisticTableView->sortByColumn( StatisticTableModel::CountId, Qt::DescendingOrder );
-    connect( mTool->statisticTableModel(), SIGNAL(headerChanged()), SLOT(updateHeader()) );
+    connect( mTool->statisticTableModel(), &StatisticTableModel::headerChanged, this, &InfoView::updateHeader );
 
     baseLayout->addWidget( mStatisticTableView, 10 );
 
     setByteArraySize( mTool->size() );
-    
+
     //if nothing has changed reuse the old values. This means the info view is fully constructed much quicker.
     const QList<int> columnsWidth = InfoViewSettings::columnsWidth();
-    const QString styleName = KApplication::style()->objectName();
-    const QString fixedFontData = KGlobalSettings::fixedFont().toString();
+    const QString styleName = QApplication::style()->objectName();
+    const QString fixedFontData = QFontDatabase::systemFont(QFontDatabase::FixedFont).toString();
     if ( columnsWidth.size() < StatisticTableModel::NoOfIds || styleName != InfoViewSettings::style()
             || fixedFontData != InfoViewSettings::fixedFont() )
     {
@@ -142,7 +143,6 @@ void InfoView::updateHeader()
 
 void InfoView::resizeColumnsWidth()
 {
-    //kDebug() << "recalculating header width";
     for (int i = 0; i < StatisticTableModel::NoOfIds; ++i) 
     {
         mStatisticTableView->resizeColumnToContents( i );
@@ -160,7 +160,7 @@ void InfoView::setByteArraySize( int size )
 
 void InfoView::setFixedFontByGlobalSettings()
 {
-    mStatisticTableView->setFont( KGlobalSettings::fixedFont() );
+    mStatisticTableView->setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
 }
 
 InfoView::~InfoView() 
@@ -172,9 +172,9 @@ InfoView::~InfoView()
         columnsWidth.append( header->sectionSize( i ) );
     }
     InfoViewSettings::setColumnsWidth( columnsWidth );
-    InfoViewSettings::setStyle( KApplication::style()->objectName() );
-    InfoViewSettings::setFixedFont( KGlobalSettings::fixedFont().toString() );
-    InfoViewSettings::self()->writeConfig();
+    InfoViewSettings::setStyle( QApplication::style()->objectName() );
+    InfoViewSettings::setFixedFont( QFontDatabase::systemFont(QFontDatabase::FixedFont).toString() );
+    InfoViewSettings::self()->save();
 }
 
 }

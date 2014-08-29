@@ -29,10 +29,10 @@
 #include <QtCore/QObject>
 
 template<typename C> class QList;
-class KUrl;
+class QUrl;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractDocument;
 class AbstractModelDataGenerator;
@@ -54,7 +54,7 @@ class KASTENGUI_EXPORT AbstractDocumentStrategy : public QObject
     virtual void createNewFromClipboard() = 0;
     virtual void createNewWithGenerator( AbstractModelDataGenerator* generator ) = 0;
 
-    virtual void load( const KUrl& url ) = 0;
+    virtual void load( const QUrl& url ) = 0;
 
     virtual void closeDocument( AbstractDocument* document ) = 0;
 //     virtual void closeDocuments( const QList<AbstractDocument*>& documents ) = 0;
@@ -78,14 +78,14 @@ class KASTENGUI_EXPORT AbstractDocumentStrategy : public QObject
 
   Q_SIGNALS:
     // documents got added
-    void added( const QList<Kasten2::AbstractDocument*>& documents );
+    void added( const QList<Kasten::AbstractDocument*>& documents );
     /// documents are about to be closed, cannot be stopped
-    void closing( const QList<Kasten2::AbstractDocument*>& documents );
+    void closing( const QList<Kasten::AbstractDocument*>& documents );
 
     // TODO: or should the document be able to emit this?
-    void focusRequested( Kasten2::AbstractDocument* document );
+    void focusRequested( Kasten::AbstractDocument* document );
 
-    void urlUsed( const KUrl& url );
+    void urlUsed( const QUrl& url );
 
   protected:
     AbstractDocumentStrategyPrivate* const d_ptr;

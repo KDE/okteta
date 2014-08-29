@@ -28,13 +28,13 @@
 #include <abstractbytearraymodel.h>
 #include <character.h>
 #include <charcodec.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextStream>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CharsStreamEncoderSettings::CharsStreamEncoderSettings()

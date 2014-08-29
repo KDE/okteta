@@ -23,10 +23,8 @@
 #ifndef SCRIPTHANDLER_H_
 #define SCRIPTHANDLER_H_
 
-#include <QScriptValue>
 #include <QScopedPointer>
 
-#include <config-structtool.h>
 #include "scripthandlerinfo.h"
 
 class DataInformation;
@@ -35,6 +33,7 @@ class TaggedUnionDataInformation;
 class ScriptLogger;
 class TopLevelDataInformation;
 class QScriptEngineDebugger;
+class QScriptValue;
 
 class ScriptHandler
 {
@@ -57,9 +56,6 @@ public:
 private:
     QScopedPointer<QScriptEngine> mEngine;
     TopLevelDataInformation* mTopLevel;
-#ifdef OKTETA_DEBUG_SCRIPT
-    QScopedPointer<QScriptEngineDebugger> mDebugger;
-#endif
     ScriptHandlerInfo mHandlerInfo;
 };
 

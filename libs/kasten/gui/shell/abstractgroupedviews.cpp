@@ -22,10 +22,9 @@
 
 #include "abstractgroupedviews.h"
 #include "abstractgroupedviews_p.h"
-#include "abstractgroupedviews.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractGroupedViews::AbstractGroupedViews()

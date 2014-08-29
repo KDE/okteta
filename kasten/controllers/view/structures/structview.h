@@ -23,9 +23,8 @@
 
 #ifndef STRUCTVIEW_H_
 #define STRUCTVIEW_H_
-#include <QtGui/QWidget>
+#include <QWidget>
 #include "structviewitemdelegate.h"
-#include <config-structtool.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -33,11 +32,11 @@ class AbstractByteArrayModel;
 
 class KComboBox;
 class QTreeView;
-class KPushButton;
+class QPushButton;
 class KTextEdit;
 //class ModelTest;
 
-namespace Kasten2
+namespace Kasten
 {
 class StructTool;
 class StructTreeModel;
@@ -61,15 +60,15 @@ protected:
 //    ModelTest* mModeltest;
 
     QTreeView* mStructTreeView;
-    KPushButton* mValidateButton;
-    KPushButton* mSettingsButton;
-    KPushButton* mScriptConsoleButton;
+    QPushButton* mValidateButton;
+    QPushButton* mSettingsButton;
+    QPushButton* mScriptConsoleButton;
     StructViewItemDelegate* mDelegate;
-    KPushButton* mLockStructureButton;
+    QPushButton* mLockStructureButton;
     QWidget* mStructTreeViewFocusChild;
 
 protected Q_SLOTS:
-    void openSettingsDlg(int page = 0);
+    void openSettingsDlg();
     void openScriptConsole();
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
     void onCursorIndexChange();

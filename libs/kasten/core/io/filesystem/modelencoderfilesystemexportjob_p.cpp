@@ -25,11 +25,11 @@
 // lib
 #include "modelstreamencodethread.h"
 // Qt
-#include <QtGui/QApplication>
+#include <QCoreApplication>
 #include <QtCore/QFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void ModelEncoderFileSystemExportJobPrivate::startExportToFile()
@@ -40,7 +40,7 @@ void ModelEncoderFileSystemExportJobPrivate::startExportToFile()
         new ModelStreamEncodeThread( q, file(), model(), selection(), mEncoder );
     exportThread->start();
     while( ! exportThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
 
     const bool success = exportThread->success();
     delete exportThread;

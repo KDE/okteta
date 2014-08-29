@@ -24,14 +24,14 @@
 
 // controller
 #include "printtool.h"
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>
 #include <KStandardAction>
-#include <KAction>
+// Qt
+#include <QAction>
 
-
-namespace Kasten2
+namespace Kasten
 {
 
 PrintController::PrintController( KXMLGUIClient* guiClient )
@@ -40,8 +40,8 @@ PrintController::PrintController( KXMLGUIClient* guiClient )
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mPrintAction = KStandardAction::print( mPrintTool, SLOT(print()), actionCollection );
-    connect( mPrintTool, SIGNAL(viewChanged(bool)),
-             mPrintAction, SLOT(setEnabled(bool)) );
+    connect( mPrintTool, &PrintTool::viewChanged,
+             mPrintAction, &QAction::setEnabled );
 
     setTargetModel( 0 );
 }

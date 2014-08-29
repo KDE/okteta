@@ -26,7 +26,7 @@
 #include "abstractframerenderer.h"
 // Qt
 #include <QtGui/QPainter>
-#include <QtGui/QPrinter>
+#include <QtPrintSupport/QPrinter>
 
 
 FramesToPaperPrinter::FramesToPaperPrinter() {}
@@ -80,5 +80,3 @@ FramesToPaperPrinter::~FramesToPaperPrinter()
 {
     qDeleteAll( mFrameRendererList );
 }
-
-#include "framestopaperprinter.moc"

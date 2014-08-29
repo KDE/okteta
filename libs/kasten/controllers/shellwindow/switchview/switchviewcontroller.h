@@ -29,10 +29,10 @@
 #include <abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
-class KAction;
+class QAction;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractGroupedViews;
@@ -57,8 +57,8 @@ class KASTENCONTROLLERS_EXPORT SwitchViewController : public AbstractXmlGuiContr
   private:
     AbstractGroupedViews* mGroupedViews;
 
-    KAction* mForwardAction;
-    KAction* mBackwardAction;
+    QAction* mForwardAction;
+    QAction* mBackwardAction;
 };
 
 }

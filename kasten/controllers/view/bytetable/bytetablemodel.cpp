@@ -26,11 +26,11 @@
 #include <character.h>
 #include <charcodec.h>
 #include <valuecodec.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const unsigned char ByteTableDefaultUndefinedChar = '?';

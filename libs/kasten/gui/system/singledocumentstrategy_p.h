@@ -33,7 +33,7 @@
 #include <QtCore/QStringList>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ViewManager;
 
@@ -54,7 +54,7 @@ class SingleDocumentStrategyPrivate : public AbstractDocumentStrategyPrivate
     void createNewFromClipboard();
     void createNewWithGenerator( AbstractModelDataGenerator* generator );
 
-    void load( const KUrl& url );
+    void load( const QUrl& url );
 
     void closeDocument( AbstractDocument* document );
     void closeAll();

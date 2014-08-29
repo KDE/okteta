@@ -22,14 +22,14 @@
 
 #include "jobmanager.h"
 
-// KDE
+// KF5
 #include <KJob>
 #include <KMessageBox>
 // Qt
-#include <QtGui/QApplication>
+#include <QGuiApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 bool JobManager::executeJob( KJob* job )
@@ -37,12 +37,12 @@ bool JobManager::executeJob( KJob* job )
     if( ! job )
         return false;
 
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QGuiApplication::setOverrideCursor( Qt::WaitCursor );
 
     job->exec();
     const bool success = ( job->error() == KJob::NoError );
 
-    QApplication::restoreOverrideCursor();
+    QGuiApplication::restoreOverrideCursor();
 
     if( !success )
         KMessageBox::error( 0, job->errorText() ); // TODO: feed into notification system

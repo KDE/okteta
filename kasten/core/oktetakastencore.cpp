@@ -22,13 +22,14 @@
 
 #include "kastencore.h"
 
-// KDE
-#include <KGlobal>
+// KF5
+#include <KLocalizedString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
-static const KCatalogLoader catalogLoader( QLatin1String("liboktetakasten") );
+// FIXME: Replace with ki18n functionality
+//static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("liboktetakasten") ), 0);
 
 }

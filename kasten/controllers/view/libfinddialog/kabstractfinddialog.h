@@ -25,9 +25,8 @@
 
 // lib
 #include "kfinddirection.h"
-// KDE
-#include <KDialog>
 // Qt
+#include <QtWidgets/QDialog>
 #include <QtCore/QByteArray>
 #include <QtCore/QString>
 
@@ -37,12 +36,14 @@ class ByteArrayComboBox;
 
 class QGroupBox;
 class QCheckBox;
+class QPushButton;
+class QVBoxLayout;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
-class KAbstractFindDialog : public KDialog
+class KAbstractFindDialog : public QDialog
 {
   Q_OBJECT
 
@@ -68,24 +69,31 @@ class KAbstractFindDialog : public KDialog
     virtual void showEvent( QShowEvent *e );
 
   protected:
+    void setFindButton(const QString& buttonText, const QString& buttonIconName,
+                       const QString& buttonToolTip, const QString& buttonWhatsThis );
+    void setFindButtonEnabled( bool enabled );
     void setupFindBox();
     void setupOperationBox( QGroupBox *operationBox = 0 );
     void setupCheckBoxes( QCheckBox *optionCheckBox = 0 );
 
-  protected:
+  protected: // API to be implemented
+    virtual void onFindButtonClicked();
     virtual void rememberCurrentSettings();
 
   private Q_SLOTS:
     void onSearchDataChanged( const QByteArray &ata );
     void onSearchDataFormatChanged( int Format );
+    void forwardFindButtonClicked();
 
   private:
+    QVBoxLayout* MainWidgetLayout;
     Okteta::ByteArrayComboBox* SearchDataEdit;
     QCheckBox *BackwardsCheckBox;
     QCheckBox *AtCursorCheckBox;
     QCheckBox *SelectedCheckBox;
     QCheckBox *WholeWordsCheckBox;
     QCheckBox *CaseSensitiveCheckBox;
+    QPushButton* FindButton;
 };
 
 }

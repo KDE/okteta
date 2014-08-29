@@ -22,10 +22,9 @@
 
 #include "singleviewarea.h"
 #include "singleviewarea_p.h"
-#include "singleviewarea.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 // TODO: catch area focues change!
 SingleViewArea::SingleViewArea()

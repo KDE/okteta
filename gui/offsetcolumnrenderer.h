@@ -53,7 +53,7 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 
   public:
     void setFormat( OffsetFormat::Format format, const QFontMetrics& fontMetrics );
-    KDE_DEPRECATED void setFormat( OffsetFormat::Format format );
+    OKTETAGUI_DEPRECATED void setFormat( OffsetFormat::Format format );
     void setFontMetrics( const QFontMetrics& fontMetrics );
 
   public: // read access

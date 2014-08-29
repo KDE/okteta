@@ -26,11 +26,11 @@
 #include "documentlistmodel.h"
 #include "documentstool.h"
 // Qt
-#include <QtGui/QTreeView>
-#include <QtGui/QLayout>
+#include <QTreeView>
+#include <QLayout>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 DocumentsView::DocumentsView( DocumentsTool* tool, QWidget* parent )
@@ -43,7 +43,7 @@ DocumentsView::DocumentsView( DocumentsTool* tool, QWidget* parent )
     baseLayout->setSpacing( 0 );
 
     mDocumentListView = new QTreeView( this );
-    mDocumentListView->setObjectName( QLatin1String( "DocumentListView" ) );
+    mDocumentListView->setObjectName( QStringLiteral( "DocumentListView" ) );
     mDocumentListView->setRootIsDecorated( false );
     mDocumentListView->setItemsExpandable( false );
     mDocumentListView->setUniformRowHeights( true );

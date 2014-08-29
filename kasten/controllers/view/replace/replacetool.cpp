@@ -32,13 +32,13 @@
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ReplaceTool::ReplaceTool()
@@ -47,7 +47,7 @@ ReplaceTool::ReplaceTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "Replace" ) );
+    setObjectName( QStringLiteral( "Replace" ) );
 }
 
 bool ReplaceTool::isApplyable() const
@@ -80,7 +80,7 @@ void ReplaceTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
+        connect( mByteArrayView, &ByteArrayView::readOnlyChanged, this, &ReplaceTool::onReadOnlyChanged );
         // TODO: update isApplyable on cursor movement and size changes
     }
 

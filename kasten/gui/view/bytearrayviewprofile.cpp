@@ -28,7 +28,7 @@
 #include <QtCore/QString>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayViewProfilePrivate : public QSharedData
@@ -54,7 +54,7 @@ public:
     int mViewModus;
 };
 
-static const QString DefaultViewProfileCharCodingName = QLatin1String("ISO-8859-1");
+static const QString DefaultViewProfileCharCodingName = QStringLiteral("ISO-8859-1");
 static const bool  DefaultViewProfileShowingNonprinting = false;
 static const QChar DefaultViewProfileSubstituteChar =  QLatin1Char( '.' );
 static const QChar DefaultViewProfileUndefinedChar =   QChar( QChar::ReplacementCharacter );

@@ -22,29 +22,29 @@
 
 #include "structtreemodel.h"
 #include "structtool.h"
+#include "structlogging.h"
 #include "datatypes/datainformationwithchildren.h"
 #include "datatypes/topleveldatainformation.h"
 #include "datatypes/array/arraydatainformation.h"
 
 #include <QFont>
 
-#include <KDebug>
 
-namespace Kasten2
+namespace Kasten
 {
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
     QAbstractItemModel(parent), mTool(tool), mLastSender(0), mLastStartIndex(0), mLastEndIndex(0)
 {
-    connect(mTool, SIGNAL(dataChanged(int,void*)), this, SLOT(onToolDataChange(int,void*)));
-    connect(mTool, SIGNAL(dataCleared()), this, SLOT(onToolDataClear()));
-    connect(mTool, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)),
-            this, SLOT(onChildrenAboutToBeInserted(DataInformation*,uint,uint)));
-    connect(mTool, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)),
-            this, SLOT(onChildrenAboutToBeRemoved(DataInformation*,uint,uint)));
-    connect(mTool, SIGNAL(childrenInserted(const DataInformation*,uint,uint)),
-            this, SLOT(onChildrenInserted(const DataInformation*,uint,uint)));
-    connect(mTool, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)),
-            this, SLOT(onChildrenRemoved(const DataInformation*,uint,uint)));
+    connect(mTool, &StructTool::dataChanged, this, &StructTreeModel::onToolDataChange);
+    connect(mTool, &StructTool::dataCleared, this, &StructTreeModel::onToolDataClear);
+    connect(mTool, &StructTool::childrenAboutToBeInserted,
+            this, &StructTreeModel::onChildrenAboutToBeInserted);
+    connect(mTool, &StructTool::childrenAboutToBeRemoved,
+            this, &StructTreeModel::onChildrenAboutToBeRemoved);
+    connect(mTool, &StructTool::childrenInserted,
+            this, &StructTreeModel::onChildrenInserted);
+    connect(mTool, &StructTool::childrenRemoved,
+            this, &StructTreeModel::onChildrenRemoved);
 
 }
 
@@ -79,7 +79,7 @@ void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint sta
 void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    //kDebug() << "data information" << sender->fullObjectPath() << ": removing "
+    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": removing "
     //        "children from index" << startIndex << "to" << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
@@ -92,7 +92,7 @@ void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint s
 void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
-    //kDebug() << "data information" << sender->fullObjectPath() << ": inserting "
+    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": inserting "
     //        "children from index" << startIndex << "to" << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
@@ -144,7 +144,7 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
 
     if (!index.internalPointer())
     {
-        kDebug() << "item == NULL";
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "item == NULL";
         return false;
     }
 
@@ -226,7 +226,7 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
             static_cast<DataInformation*> (parent.internalPointer());
     if (!parentItem)
     {
-        kDebug() << "parentItem is NULL";
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "parentItem is NULL";
         return mTool->childCount();
     }
     return parentItem->childCount();
@@ -259,7 +259,8 @@ void StructTreeModel::onToolDataChange(int row, void* data)
 
 void StructTreeModel::onToolDataClear()
 {
-    emit reset();
+    beginResetModel();
+    endResetModel();
 }
 
 

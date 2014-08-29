@@ -26,8 +26,8 @@
 #include <charcodec.h>
 // lib
 #include <character.h>
-// KDE
-#include <qtest_kde.h>
+// KF5
+#include <QtTest/QTest>
 
 
 namespace Okteta
@@ -93,4 +93,4 @@ void CharCodecTest::testEncodeDecode()
 
 }
 
-QTEST_KDEMAIN_CORE( Okteta::CharCodecTest )
+QTEST_GUILESS_MAIN( Okteta::CharCodecTest )

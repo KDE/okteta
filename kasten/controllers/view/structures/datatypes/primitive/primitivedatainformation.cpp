@@ -24,9 +24,9 @@
 #include "../topleveldatainformation.h"
 #include "structviewpreferences.h"
 
-const QString PrimitiveDataInformation::hexPrefix = QLatin1String("0x");
-const QString PrimitiveDataInformation::octalPrefix = QLatin1String("0o");
-const QString PrimitiveDataInformation::binaryPrefix = QLatin1String("0b");
+const QString PrimitiveDataInformation::hexPrefix = QStringLiteral("0x");
+const QString PrimitiveDataInformation::octalPrefix = QStringLiteral("0o");
+const QString PrimitiveDataInformation::binaryPrefix = QStringLiteral("0b");
 
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {

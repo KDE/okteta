@@ -24,14 +24,15 @@
 
 // Kasten core
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KActionCollection>
 #include <KToggleAction>
+#include <KGuiItem>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
@@ -39,12 +40,12 @@ ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSetReadOnlyAction = actionCollection->add<KToggleAction>( QLatin1String("isreadonly") );
+    mSetReadOnlyAction = actionCollection->add<KToggleAction>( QStringLiteral("isreadonly") );
     const QString text = i18nc( "@option:check set the document to read-only", "Set Read-only" );
     mSetReadOnlyAction->setText( text );
-    mSetReadOnlyAction->setIcon( KIcon( QLatin1String("object-unlocked") ) );
+    mSetReadOnlyAction->setIcon( QIcon::fromTheme( QStringLiteral("object-unlocked") ) );
     const QString checkedText = i18nc( "@option:check set the document to read-write", "Set Read-write" );
-    const KGuiItem checkedState( checkedText, KIcon( QLatin1String("object-locked") ) );
+    const KGuiItem checkedState( checkedText, QIcon::fromTheme( QStringLiteral("object-locked") ) );
     mSetReadOnlyAction->setCheckedState( checkedState );
     connect( mSetReadOnlyAction, SIGNAL(triggered(bool)), SLOT(setReadOnly(bool)) );
 

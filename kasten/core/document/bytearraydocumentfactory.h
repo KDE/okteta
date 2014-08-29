@@ -29,7 +29,7 @@
 #include <abstractdocumentfactory.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class OKTETAKASTENCORE_EXPORT ByteArrayDocumentFactory : public AbstractDocumentFactory

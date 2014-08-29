@@ -26,18 +26,17 @@
 #include <zoomable.h>
 // Kasten core
 #include <abstractmodel.h>
-// KDE
-#include <KIcon>
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QSlider>
-#include <QtGui/QToolButton>
-#include <QtGui/QLayout>
-#include <QtGui/QApplication>
+#include <QSlider>
+#include <QToolButton>
+#include <QLayout>
+#include <QApplication>
 #include <QtGui/QHelpEvent>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static const int ZoomSliderWidth = 150;
@@ -51,13 +50,13 @@ ZoomSlider::ZoomSlider( QWidget* parent )
   : QWidget( parent ), mModel( 0 ), mZoomControl( 0 )
 {
     mZoomOutButton = new QToolButton( this );
-    mZoomOutButton->setIcon( KIcon( QLatin1String("zoom-out") ) );
+    mZoomOutButton->setIcon( QIcon::fromTheme( QStringLiteral("zoom-out") ) );
     mZoomOutButton->setAutoRaise( true );
 
     mSlider = new QSlider( Qt::Horizontal, this );
 
     mZoomInButton = new QToolButton( this );
-    mZoomInButton->setIcon( KIcon( QLatin1String("zoom-in") ) );
+    mZoomInButton->setIcon( QIcon::fromTheme( QStringLiteral("zoom-in") ) );
     mZoomInButton->setAutoRaise( true );
 
     QHBoxLayout* layout = new QHBoxLayout( this );

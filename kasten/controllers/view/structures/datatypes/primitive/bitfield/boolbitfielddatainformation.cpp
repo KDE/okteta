@@ -46,7 +46,7 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
         return box;
     }
     UIntSpinBox* ret = new UIntSpinBox(parent);
-    ret->setBase(Kasten2::StructViewPreferences::unsignedDisplayBase());
+    ret->setBase(Kasten::StructViewPreferences::unsignedDisplayBase());
     ret->setMaximum(mask());
     return ret;
 }
@@ -55,11 +55,11 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
     if (width() == 1)
     {
-        const KComboBox* box = dynamic_cast<const KComboBox*>(w);
+        const KComboBox* box = qobject_cast<const KComboBox*>(w);
         Q_CHECK_PTR(box);
         return box->currentIndex();
     }
-    const UIntSpinBox* spin = dynamic_cast<const UIntSpinBox*>(w);
+    const UIntSpinBox* spin = qobject_cast<const UIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin)
         return spin->value();
@@ -69,7 +69,7 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 
 void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
-    UIntSpinBox* spin = dynamic_cast<UIntSpinBox*> (w);
+    UIntSpinBox* spin = qobject_cast<UIntSpinBox*> (w);
     if (spin)
         spin->setValue(mValue.value<quint64>());
 }

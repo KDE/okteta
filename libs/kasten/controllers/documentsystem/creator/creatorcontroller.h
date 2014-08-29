@@ -31,7 +31,7 @@
 class KXMLGUIClient;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ModelCodecManager;

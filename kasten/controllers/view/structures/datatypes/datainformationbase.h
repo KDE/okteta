@@ -35,6 +35,8 @@ class PrimitiveDataInformation;
 class ArrayDataInformation;
 class TopLevelDataInformation;
 class PointerDataInformation;
+class DataInformationWithChildren;
+class DataInformationWithDummyChildren;
 
 #include <QtGlobal>
 
@@ -78,6 +80,12 @@ public:
     virtual bool isTaggedUnion() const;
     TaggedUnionDataInformation* asTaggedUnion();
     const TaggedUnionDataInformation* asTaggedUnion() const;
+    virtual bool isDataInformationWithChildren() const;
+    DataInformationWithChildren* asDataInformationWithChildren();
+    const DataInformationWithChildren* asDataInformationWithChildren() const;
+    virtual bool isDataInformationWithDummyChildren() const;
+    DataInformationWithDummyChildren* asDataInformationWithDummyChildren();
+    const DataInformationWithDummyChildren* asDataInformationWithDummyChildren() const;
     virtual bool isDummy() const;
     DummyDataInformation* asDummy();
     const DummyDataInformation* asDummy() const;
@@ -102,6 +110,8 @@ CAST_FUNCS_2(AbstractBitfieldDataInformation, Bitfield)
 CAST_FUNCS(String)
 CAST_FUNCS(Pointer)
 CAST_FUNCS(TaggedUnion)
+CAST_FUNCS_2(DataInformationWithChildren, DataInformationWithChildren)
+CAST_FUNCS_2(DataInformationWithDummyChildren, DataInformationWithDummyChildren)
 
 //this is not handled by the macro
 inline DataInformation* DataInformationBase::asDataInformation()

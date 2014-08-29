@@ -26,11 +26,11 @@
 // library
 #include "abstractfilesystemsyncwithremotejob.h"
 #include <abstractsyncwithremotejob_p.h>
-// KDE
-#include <KUrl>
+
+#include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJobPrivate : public AbstractSyncWithRemoteJobPrivate
@@ -38,7 +38,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJobPrivate : public Abst
   public:
     AbstractFileSystemSyncWithRemoteJobPrivate( AbstractFileSystemSyncWithRemoteJob* parent,
                                                 AbstractModelFileSystemSynchronizer* synchronizer,
-                                                const KUrl& url, AbstractModelSynchronizer::ConnectOption option );
+                                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
     virtual ~AbstractFileSystemSyncWithRemoteJobPrivate();
 
@@ -60,16 +60,17 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJobPrivate : public Abst
 
   protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
-    const KUrl mUrl;
+    const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
     QFile* mFile;
     QString mWorkFilePath;
+    QString mTempFilePath;
 };
 
 
 inline AbstractFileSystemSyncWithRemoteJobPrivate::AbstractFileSystemSyncWithRemoteJobPrivate( AbstractFileSystemSyncWithRemoteJob* parent,
     AbstractModelFileSystemSynchronizer* synchronizer,
-    const KUrl& url, AbstractModelSynchronizer::ConnectOption option )
+    const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
   : AbstractSyncWithRemoteJobPrivate( parent ),
     mSynchronizer( synchronizer ),
     mUrl( url ),

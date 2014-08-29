@@ -25,7 +25,7 @@
 // lib
 #include "bytetabletool.h"
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteTableToolFactory::ByteTableToolFactory() {}

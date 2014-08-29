@@ -22,10 +22,9 @@
 
 #include "shellwindow.h"
 #include "shellwindow_p.h"
-#include "shellwindow.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ShellWindow::ShellWindow( ViewManager* viewManager )
@@ -89,3 +88,6 @@ ShellWindow::~ShellWindow()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_shellwindow.cpp"

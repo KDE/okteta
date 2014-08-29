@@ -24,15 +24,15 @@
 
 // lib
 #include "bytearraytextstreamencoderpreview.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 #include <KComboBox>
 // Qt
-#include <QtGui/QFormLayout>
-#include <QtGui/QLabel>
+#include <QFormLayout>
+#include <QLabel>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( ByteArraySRecStreamEncoder* encoder, QWidget* parent )
@@ -59,7 +59,7 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( 
                        "16-bit") );
     mAddressSizeSelect->addItems( list );
     mAddressSizeSelect->setCurrentIndex( mSettings.addressSizeId );
-    connect( mAddressSizeSelect, SIGNAL(activated(int)), SLOT(onSettingsChanged()) );
+    connect( mAddressSizeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
 }
 

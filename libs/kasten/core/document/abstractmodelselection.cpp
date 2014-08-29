@@ -23,7 +23,7 @@
 #include "abstractmodelselection.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelSelection::Private

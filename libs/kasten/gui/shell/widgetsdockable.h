@@ -28,7 +28,7 @@
 #include <QtCore/QList>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ToolViewDockWidget;
@@ -57,6 +57,6 @@ inline WidgetsDockable::~WidgetsDockable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten2::If::WidgetsDockable, "org.kde.kasten2.if.widgetsdockable/1.0" )
+Q_DECLARE_INTERFACE( Kasten::If::WidgetsDockable, "org.kde.kasten.if.widgetsdockable/1.0" )
 
 #endif

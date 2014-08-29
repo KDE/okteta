@@ -30,7 +30,7 @@ class KDirWatch;
 class QDateTime;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractModelFileSystemSynchronizerPrivate;
 
@@ -75,8 +75,7 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
     Q_PRIVATE_SLOT( d_func(), void onFileDirty( const QString& filePath ) )
     Q_PRIVATE_SLOT( d_func(), void onFileCreated( const QString& filePath ) )
     Q_PRIVATE_SLOT( d_func(), void onFileDeleted( const QString& filePath ) )
-    Q_PRIVATE_SLOT( d_func(), void onNetworkConnect() )
-    Q_PRIVATE_SLOT( d_func(), void onNetworkDisconnect() )
+    Q_PRIVATE_SLOT( d_func(), void onOnlineStateChanged( bool isOnline ) )
 
   protected:
     Q_DECLARE_PRIVATE( AbstractModelFileSystemSynchronizer )

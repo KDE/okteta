@@ -28,16 +28,17 @@
 #include <piecetablebytearraymodel.h>
 // Kasten core
 #include <person.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QMimeData>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 static int newByteArrayDocumentCounter = 0;
+//TODO QStringLiteral
 static const char OctetStreamFormatName[] = "application/octet-stream";
 
 bool ByteArrayDocumentFactory::canCreateFromData( const QMimeData* mimeData )

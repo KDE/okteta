@@ -29,12 +29,12 @@
 #include <abstractmodelstreamencoderconfigeditor.h>
 
 class KLineEdit;
-class KIntNumInput;
 class KComboBox;
+class QSpinBox;
 class QCheckBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
@@ -57,7 +57,7 @@ class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamE
     SourceCodeStreamEncoderSettings mSettings;
 
     KLineEdit* mVariableNameEdit;
-    KIntNumInput* mItemsPerLineEdit;
+    QSpinBox* mItemsPerLineEdit;
     KComboBox* mDataTypeSelect;
     QCheckBox* mUnsignedAsHexadecimalCheck;
 };

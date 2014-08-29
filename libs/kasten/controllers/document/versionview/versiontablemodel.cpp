@@ -25,12 +25,13 @@
 // Kasten core
 #include <versionable.h>
 #include <abstractmodel.h>
-// KDE
-#include <KLocale>
-#include <KIcon>
+// KF5
+#include <KLocalizedString>
+
+#include <QIcon>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 VersionTableModel::VersionTableModel( AbstractModel* model, If::Versionable* versionControl, QObject* parent )
@@ -43,8 +44,8 @@ VersionTableModel::VersionTableModel( AbstractModel* model, If::Versionable* ver
     {
         connect( mModel, SIGNAL(revertedToVersionIndex(int)), SLOT(onRevertedToVersionIndex(int)) );
         connect( mModel, SIGNAL(headVersionChanged(int)), SLOT(onHeadVersionChanged(int)) );
-        connect( mModel, SIGNAL(headVersionDataChanged(Kasten2::DocumentVersionData)),
-                 SLOT(onHeadVersionDataChanged(Kasten2::DocumentVersionData)) );
+        connect( mModel, SIGNAL(headVersionDataChanged(Kasten::DocumentVersionData)),
+                 SLOT(onHeadVersionDataChanged(Kasten::DocumentVersionData)) );
     }
 }
 
@@ -59,12 +60,13 @@ void VersionTableModel::setModel( AbstractModel* model, If::Versionable* version
     {
         connect( mModel, SIGNAL(revertedToVersionIndex(int)), SLOT(onRevertedToVersionIndex(int)) );
         connect( mModel, SIGNAL(headVersionChanged(int)), SLOT(onHeadVersionChanged(int)) );
-        connect( mModel, SIGNAL(headVersionDataChanged(Kasten2::DocumentVersionData)),
-                 SLOT(onHeadVersionDataChanged(Kasten2::DocumentVersionData)) );
+        connect( mModel, SIGNAL(headVersionDataChanged(Kasten::DocumentVersionData)),
+                 SLOT(onHeadVersionDataChanged(Kasten::DocumentVersionData)) );
     }
     mVersionIndex = versionControl ? versionControl->versionIndex() : 0;
 
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 int VersionTableModel::rowCount( const QModelIndex &parent ) const
@@ -107,7 +109,7 @@ QVariant VersionTableModel::data( const QModelIndex &index, int role ) const
         {
             const int versionIndex = index.row();
             if( mVersionControl->versionIndex() == versionIndex )
-                result = KIcon( QLatin1String("arrow-right") );
+                result = QIcon::fromTheme( QStringLiteral("arrow-right") );
         }
     }
 
@@ -156,7 +158,8 @@ void VersionTableModel::onHeadVersionChanged( int newHeadVersionIndex )
 {
     mVersionIndex = newHeadVersionIndex;
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
-    reset();
+    beginResetModel();
+    endResetModel();
 }
 
 void VersionTableModel::onHeadVersionDataChanged( const DocumentVersionData &versionData )

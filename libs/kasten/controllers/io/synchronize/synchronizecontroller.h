@@ -30,11 +30,11 @@
 // Kasten core
 #include <abstractdocument.h>
 
-class KAction;
+class QAction;
 class KXMLGUIClient;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModelSynchronizer;
@@ -57,7 +57,7 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
     void reload();
 
   private Q_SLOTS:
-    void onSynchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
+    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
     void onSynchronizerDeleted( QObject* synchronizer );
     void onSyncStateChanged();
 
@@ -66,8 +66,8 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
     AbstractDocument* mDocument;
     AbstractModelFileSystemSynchronizer* mSynchronizer;
 
-    KAction *mSaveAction;
-    KAction *mReloadAction;
+    QAction *mSaveAction;
+    QAction *mReloadAction;
 };
 
 }

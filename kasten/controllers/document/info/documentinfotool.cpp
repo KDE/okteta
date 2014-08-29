@@ -30,15 +30,16 @@
 #include <abstractmodelsynchronizer.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
-#include <KUrl>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QtCore/QTimer>
+#include <QtCore/QUrl>
+#include <QtCore/QMimeDatabase>
 
 
-namespace Kasten2
+namespace Kasten
 {
 static const int mimeTypeUpdateTimeInterval = 500; // msec
 
@@ -49,13 +50,13 @@ DocumentInfoTool::DocumentInfoTool( DocumentSyncManager* syncManager )
     mSynchronizer( 0 ),
     mDocumentSyncManager( syncManager ),
     mMimeTypeUpdateTimer( new QTimer(this) ),
-    mMimeType( 0 )
+    mMimeType()
 {
-    setObjectName( QLatin1String( "DocumentInfo" ) );
+    setObjectName( QStringLiteral( "DocumentInfo" ) );
 
     mMimeTypeUpdateTimer->setInterval( mimeTypeUpdateTimeInterval );
     mMimeTypeUpdateTimer->setSingleShot( true );
-    connect( mMimeTypeUpdateTimer, SIGNAL(timeout()), SLOT(updateMimeType()) );
+    connect( mMimeTypeUpdateTimer, &QTimer::timeout, this, &DocumentInfoTool::updateMimeType );
 }
 
 //TODO: file or document or ...?
@@ -70,8 +71,8 @@ QString DocumentInfoTool::location() const
     QString result;
     if( mDocument )
     {
-        const KUrl url = mDocumentSyncManager->urlOf( mDocument );
-        result = url.isLocalFile() ? url.path() : url.prettyUrl();
+        const QUrl url = mDocumentSyncManager->urlOf( mDocument );
+        result = url.isLocalFile() ? url.path() : url.toDisplayString();
     }
     return result;
 }
@@ -104,12 +105,12 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
         documentSize = mByteArrayModel->size();
         synchronizer = mDocument->synchronizer();
 
-        connect( mDocument, SIGNAL(titleChanged(QString)),
-                 SIGNAL(documentTitleChanged(QString)) );
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten2::AbstractModelSynchronizer*)),
-                 SLOT(onSynchronizerChanged(Kasten2::AbstractModelSynchronizer*)) );
-        connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                 SLOT(onContentsChanged()) );
+        connect( mDocument, &ByteArrayDocument::titleChanged,
+                 this, &DocumentInfoTool::documentTitleChanged );
+        connect( mDocument, &ByteArrayDocument::synchronizerChanged,
+                 this, &DocumentInfoTool::onSynchronizerChanged );
+        connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                 this, &DocumentInfoTool::onContentsChanged );
     }
 
     onSynchronizerChanged( synchronizer );
@@ -121,7 +122,7 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
 // TODO: should this be done in a worker thread, to not block the UI?
 void DocumentInfoTool::updateMimeType()
 {
-    KMimeType::Ptr currentMimeType;
+    QMimeType currentMimeType;
 
     if( mDocument )
     {
@@ -129,13 +130,13 @@ void DocumentInfoTool::updateMimeType()
         const QString filename = mDocumentSyncManager->urlOf( mDocument ).fileName();
 
         Okteta::ByteArrayModelIoDevice byteArrayModelIoDevice( mByteArrayModel );
+        QMimeDatabase db;
         currentMimeType = filename.isEmpty() ?
-            KMimeType::findByContent( &byteArrayModelIoDevice ) :
-            KMimeType::findByNameAndContent( filename, &byteArrayModelIoDevice );
+            db.mimeTypeForData( &byteArrayModelIoDevice ) :
+            db.mimeTypeForFileNameAndData( filename, &byteArrayModelIoDevice );
     }
 
-// TODO: KMimeType has no operator !=
-//     if( *mMimeType != *currentMimeType )
+    if( mMimeType != currentMimeType )
     {
         mMimeType = currentMimeType;
         emit documentMimeTypeChanged( currentMimeType );
@@ -163,14 +164,14 @@ void DocumentInfoTool::onSynchronizerChanged( AbstractModelSynchronizer* synchro
 
     if( mSynchronizer )
     {
-        connect( mSynchronizer, SIGNAL(urlChanged(KUrl)),
-                 SLOT(onUrlChanged(KUrl)) );
+        connect( mSynchronizer, &AbstractModelSynchronizer::urlChanged,
+                 this, &DocumentInfoTool::onUrlChanged );
     }
 
     emit locationChanged( location() );
 }
 
-void DocumentInfoTool::onUrlChanged( const KUrl& url )
+void DocumentInfoTool::onUrlChanged( const QUrl& url )
 {
     Q_UNUSED( url );
 

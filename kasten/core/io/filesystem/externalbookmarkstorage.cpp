@@ -30,31 +30,30 @@
 #include <bookmarksconstiterator.h>
 #include <bookmark.h>
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KStandardDirs>
+// KF5
 #include <KBookmarkManager>
-#include <KBookmarkGroup>
+// Qt
+#include <QStandardPaths>
 
-
-namespace Kasten2
+namespace Kasten
 {
 
 ExternalBookmarkStorage::ExternalBookmarkStorage()
 {
     const QString bookmarksFileName =
-        KStandardDirs::locateLocal( "data", QLatin1String("okteta/bookmarks.xml") );
-    mBookmarkManager = KBookmarkManager::managerForFile( bookmarksFileName, QLatin1String("okteta") );
+        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/okteta/bookmarks.xml");
+    mBookmarkManager = KBookmarkManager::managerForFile( bookmarksFileName, QStringLiteral("okteta") );
 }
 
  
-void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const KUrl& url )
+void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const QUrl& url )
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
     Okteta::Bookmarkable* bookmarkable = qobject_cast<Okteta::Bookmarkable*>( byteArray );
 
     bookmarkable->removeAllBookmarks();
 
-    const QString urlString = url.isLocalFile() ? url.path() : url.prettyUrl();
+    const QString urlString = url.isLocalFile() ? url.path(QUrl::FullyDecoded) : url.toDisplayString();
 
     KBookmarkGroup root = mBookmarkManager->root();
 
@@ -74,7 +73,7 @@ void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const 
                 if( bm.isSeparator() || bm.isGroup() )
                     continue;
 
-                bookmark.setOffset( bm.url().htmlRef().toULongLong() );
+                bookmark.setOffset( bm.url().fragment().toULongLong() );
                 bookmark.setName( bm.fullText() );
 
                 bookmarksToBeCreated.append( bookmark );
@@ -87,7 +86,7 @@ void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const 
     }
 }
 
-void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const KUrl& url )
+void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const QUrl& url )
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
     Okteta::Bookmarkable* bookmarkable = qobject_cast<Okteta::Bookmarkable*>( byteArray );
@@ -95,7 +94,7 @@ void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const
     if( ! bookmarkable )
         return;
 
-    const QString urlString = url.isLocalFile() ? url.path() : url.prettyUrl();
+    const QString urlString = url.isLocalFile() ? url.path(QUrl::FullyDecoded) : url.toDisplayString();
 
     KBookmarkGroup root = mBookmarkManager->root();
 
@@ -121,8 +120,8 @@ void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const
     while( bit.hasNext() )
     {
         const Okteta::Bookmark& bookmark = bit.next();
-        KUrl bookmarkUrl = url;
-        bookmarkUrl.setHTMLRef( QString::number(bookmark.offset()) );
+        QUrl bookmarkUrl = url;
+        bookmarkUrl.setFragment( QString::number(bookmark.offset()) );
         bookmarkGroup.addBookmark( bookmark.name(), bookmarkUrl, QString() );
     }
 

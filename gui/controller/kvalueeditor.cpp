@@ -29,8 +29,8 @@
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
 #include <valuecodec.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtGui/QKeyEvent>
 

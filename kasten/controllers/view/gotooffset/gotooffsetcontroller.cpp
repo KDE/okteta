@@ -27,14 +27,15 @@
 #include "gotooffsettool.h"
 // Kasten gui
 #include <toolinlineviewable.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
-#include <KLocale>
-#include <KAction>
+#include <KLocalizedString>
 #include <KActionCollection>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
@@ -43,15 +44,15 @@ GotoOffsetController::GotoOffsetController( If::ToolInlineViewable* toolInlineVi
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mGotoOffsetAction = actionCollection->addAction( QLatin1String("goto_offset"),
+    mGotoOffsetAction = actionCollection->addAction( QStringLiteral("goto_offset"),
                                                      this, SLOT(gotoOffset()) );
     mGotoOffsetAction->setText( i18nc("@action:inmenu","&Go to Offset...") );
-    mGotoOffsetAction->setIcon( KIcon(QLatin1String("go-jump")) );
+    mGotoOffsetAction->setIcon( QIcon::fromTheme( QStringLiteral("go-jump") ) );
     mGotoOffsetAction->setShortcut( Qt::CTRL + Qt::Key_G );
 
     mTool = new GotoOffsetTool();
-    connect( mTool, SIGNAL(isUsableChanged(bool)),
-             mGotoOffsetAction, SLOT(setEnabled(bool)) );
+    connect( mTool, &GotoOffsetTool::isUsableChanged,
+             mGotoOffsetAction, &QAction::setEnabled );
     mGotoOffsetAction->setEnabled( mTool->isUsable() );
 
     mView = new GotoOffsetToolView( mTool );

@@ -32,13 +32,13 @@
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
 #include <changesdescribable.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CharsetConversionTool::CharsetConversionTool()
@@ -48,7 +48,7 @@ CharsetConversionTool::CharsetConversionTool()
     mByteArrayView( 0 ),
     mByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String("CharsetConversion") );
+    setObjectName( QStringLiteral("CharsetConversion") );
 }
 
 bool CharsetConversionTool::isApplyable() const
@@ -98,10 +98,10 @@ void CharsetConversionTool::setTargetModel( AbstractModel* model )
 
     if( mByteArrayView && mByteArrayModel )
     {
-        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
-                 SLOT(onViewChanged()) );
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
-                 SLOT(onViewChanged()) );
+        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
+                 this, &CharsetConversionTool::onViewChanged );
+        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                 this, &CharsetConversionTool::onViewChanged );
     }
 
     onViewChanged();

@@ -28,14 +28,14 @@
 
 class AbstractByteArrayFilterParameterSet;
 
-class KPushButton;
+class QPushButton;
 class KComboBox;
 
 class QStackedWidget;
 class QString;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class FilterTool;
@@ -69,7 +69,7 @@ class FilterView : public AbstractToolWidget
     FilterTool *mTool;
     KComboBox *mOperationComboBox;
     QStackedWidget *mParameterSetEditStack;
-    KPushButton *mFilterButton;
+    QPushButton *mFilterButton;
 };
 
 

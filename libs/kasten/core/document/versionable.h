@@ -60,7 +60,7 @@ Version
 InitialVersion : Index = 0
 */
 
-namespace Kasten2
+namespace Kasten
 {
 namespace If
 {
@@ -100,6 +100,6 @@ inline Versionable::~Versionable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten2::If::Versionable, "org.kde.kasten2.if.versionable/1.0" )
+Q_DECLARE_INTERFACE( Kasten::If::Versionable, "org.kde.kasten.if.versionable/1.0" )
 
 #endif

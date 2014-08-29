@@ -28,8 +28,8 @@
 // Okteta core
 #include <charcodec.h>
 #include <character.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
 namespace Okteta

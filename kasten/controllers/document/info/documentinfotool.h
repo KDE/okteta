@@ -27,18 +27,17 @@
 #include "oktetakastencontrollers_export.h"
 // Kasten core
 #include <abstracttool.h>
-// KDE
-#include <KMimeType>
+// Qt
+#include <QtCore/QMimeType>
 
 namespace Okteta {
 class AbstractByteArrayModel;
 }
-class KUrl;
 class QString;
 class QTimer;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ByteArrayDocument;
@@ -62,13 +61,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
 
   public:
     QString documentTitle() const;
-    KMimeType::Ptr mimeType() const;
+    QMimeType mimeType() const;
     QString location() const;
     int documentSize() const;
 
   Q_SIGNALS:
     void documentTitleChanged( const QString& documentTitle );
-    void documentMimeTypeChanged( KMimeType::Ptr mimeType );
+    void documentMimeTypeChanged(const QMimeType& mimeType );
     void locationChanged( const QString& location );
     void documentSizeChanged( int newSize );
 
@@ -76,8 +75,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     void updateMimeType();
 
     void onContentsChanged();
-    void onSynchronizerChanged( Kasten2::AbstractModelSynchronizer* synchronizer );
-    void onUrlChanged( const KUrl& url );
+    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* synchronizer );
+    void onUrlChanged( const QUrl& url );
 
   private:
     ByteArrayDocument* mDocument;
@@ -88,11 +87,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     DocumentSyncManager* mDocumentSyncManager;
 
     QTimer* mMimeTypeUpdateTimer;
-    KMimeType::Ptr mMimeType;
+    QMimeType mMimeType;
 };
 
 
-inline KMimeType::Ptr DocumentInfoTool::mimeType() const { return mMimeType; }
+inline QMimeType DocumentInfoTool::mimeType() const { return mMimeType; }
 
 }
 

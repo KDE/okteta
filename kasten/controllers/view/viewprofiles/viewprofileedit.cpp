@@ -26,18 +26,19 @@
 #include <bytearrayviewprofile.h>
 // Okteta core
 #include <charcodec.h>
-// KDE
-#include <KLocale>
-#include <KIntNumInput>
+// KF5
+#include <KLocalizedString>
 #include <KComboBox>
 #include <KLineEdit>
 // Qt
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QFormLayout>
-#include <QtGui/QCheckBox>
+#include <QVBoxLayout>
+#include <QGroupBox>
+#include <QFormLayout>
+#include <QCheckBox>
+#include <QSpinBox>
 
-namespace Kasten2
+
+namespace Kasten
 {
 
 static int
@@ -57,6 +58,7 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
   : QWidget( parent )
 {
     QVBoxLayout* layout = new QVBoxLayout( this );
+    layout->setMargin( 0 );
 
     // titel
     QFormLayout* titleFormLayout = new QFormLayout;
@@ -114,13 +116,12 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     lineBreakList.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
                                 "On") );
     mLineBreakComboBox->addItems( lineBreakList );
-    connect( mLineBreakComboBox, SIGNAL(currentIndexChanged(int)),
-             SLOT(onLineBreakIndexChanged(int)) );
+    connect( mLineBreakComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::currentIndexChanged),
+             this, &ViewProfileEdit::onLineBreakIndexChanged );
     layoutBoxFormLayout->addRow( i18n("Break lines:"), mLineBreakComboBox );
     // bytes per group
-    mGroupedBytesCountEdit = new KIntNumInput( this );
+    mGroupedBytesCountEdit = new QSpinBox( this );
     mGroupedBytesCountEdit->setRange( 0, INT_MAX );
-    mGroupedBytesCountEdit->setSuffix( ki18np(" byte"," bytes") );
     const QString noGroupingText = i18nc( "@label",
                                           "No grouping." );
     mGroupedBytesCountEdit->setSpecialValueText( noGroupingText );
@@ -129,9 +130,8 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
                "Bytes per Group:" );
     layoutBoxFormLayout->addRow( groupedBytesCountLabel, mGroupedBytesCountEdit );
     // bytes per group
-    mBytesPerLineEdit = new KIntNumInput( this );
+    mBytesPerLineEdit = new QSpinBox( this );
     mBytesPerLineEdit->setRange( 1, INT_MAX );
-    mBytesPerLineEdit->setSuffix( ki18np(" byte"," bytes") );
     const QString bytesPerLineLabel =
         i18nc( "@label:spinbox number of bytes which are shown per line",
                 "Bytes per Line:" );

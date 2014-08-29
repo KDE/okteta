@@ -24,11 +24,11 @@
 #define PODDELEGATE_H
 
 // Qt
-#include <QtGui/QStyledItemDelegate>
+#include <QStyledItemDelegate>
 #include <QtCore/QPointer>
 
 
-namespace Kasten2
+namespace Kasten
 {
 class PODDecoderTool;
 

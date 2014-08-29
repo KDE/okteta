@@ -21,23 +21,25 @@
  */
 #include "doubledatainformation.h"
 
+// KF5
+#include <KLocalizedString>
+// Qt
 #include <QScriptValue>
-#include <KDoubleNumInput>
-#include <KGlobal>
-#include <KLocale>
+#include <QLocale>
+#include <QDoubleSpinBox>
 
 #include "structviewpreferences.h"
 
 
 QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    KDoubleNumInput* ret = new KDoubleNumInput(parent);
+    QDoubleSpinBox* ret = new QDoubleSpinBox(parent);
     return ret;
 }
 
 QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
-    const KDoubleNumInput* spin = dynamic_cast<const KDoubleNumInput*> (w);
+    const QDoubleSpinBox* spin = qobject_cast<const QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
         return spin->value();
@@ -47,7 +49,7 @@ QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void DoubleDataInformationMethods::staticSetWidgetData(double value, QWidget* w)
 {
-    KDoubleNumInput* spin = dynamic_cast<KDoubleNumInput*> (w);
+    QDoubleSpinBox* spin = qobject_cast<QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin)
         spin->setValue(value);
@@ -62,8 +64,7 @@ QScriptValue DoubleDataInformationMethods::asScriptValue(double value, QScriptEn
 
 QString DoubleDataInformationMethods::staticValueString(double value)
 {
-	if (Kasten2::StructViewPreferences::localeAwareFloatFormatting())
-		return KGlobal::locale()->formatNumber(value, Kasten2::StructViewPreferences::floatPrecision());
-	else
-		return QString::number(value, 'g', Kasten2::StructViewPreferences::floatPrecision());
+    return (Kasten::StructViewPreferences::localeAwareFloatFormatting())
+        ? QLocale().toString(value, 'g', Kasten::StructViewPreferences::floatPrecision())
+        : QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
 }

@@ -22,10 +22,9 @@
 
 #include "singleviewwindow.h"
 #include "singleviewwindow_p.h"
-#include "singleviewwindow.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SingleViewWindow::SingleViewWindow( AbstractView* view )
@@ -84,3 +83,6 @@ SingleViewWindow::~SingleViewWindow()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_singleviewwindow.cpp"

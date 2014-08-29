@@ -24,22 +24,22 @@
 
 // 
 #include "documentinfotool.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 #include <KIconLoader>
 #include <KSeparator>
 #include <KSqueezedTextLabel>
-#include <KGlobal>
-#include <KDateTime>
-#include <kio/netaccess.h>
+#include <kio/global.h>
 // Qt
 #include <QtGui/QFont>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QGridLayout>
+#include <QLabel>
+#include <QLayout>
+#include <QGridLayout>
+#include <QLocale>
+#include <QtCore/QMimeType>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
@@ -128,7 +128,7 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
       label = new QLabel(i18n("Created:"), this );
       propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
 
-      label = new QLabel(KGlobal::locale()->formatDateTime(dt), this );
+      label = new QLabel(KLocale::global()->formatDateTime(dt), this );
       propertyGrid->addWidget(label, currentPropertyRow++, 2);
     }
 #endif
@@ -136,14 +136,14 @@ DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
     baseLayout->addLayout( propertyGrid );
     baseLayout->addStretch( 10 );
 
-    connect( mTool, SIGNAL(documentTitleChanged(QString)),
-             SLOT(onDocumentTitleChanged(QString)) );
-    connect( mTool, SIGNAL(documentMimeTypeChanged(KMimeType::Ptr)),
-             SLOT(onMimeTypeChanged(KMimeType::Ptr)) );
-    connect( mTool, SIGNAL(locationChanged(QString)),
-             SLOT(onLocationChanged(QString)) );
-    connect( mTool, SIGNAL(documentSizeChanged(int)),
-             SLOT(onDocumentSizeChanged(int)) );
+    connect( mTool, &DocumentInfoTool::documentTitleChanged,
+             this, &DocumentInfoView::onDocumentTitleChanged );
+    connect( mTool, &DocumentInfoTool::documentMimeTypeChanged,
+             this, &DocumentInfoView::onMimeTypeChanged );
+    connect( mTool, &DocumentInfoTool::locationChanged,
+             this, &DocumentInfoView::onLocationChanged );
+    connect( mTool, &DocumentInfoTool::documentSizeChanged,
+             this, &DocumentInfoView::onDocumentSizeChanged );
     onDocumentTitleChanged( mTool->documentTitle() );
     onMimeTypeChanged( mTool->mimeType() );
     onLocationChanged( mTool->location() );
@@ -156,20 +156,20 @@ void DocumentInfoView::onDocumentTitleChanged( const QString& documentTitle )
     mDocumentTitleLabel->setText( documentTitle );
 }
 
-void DocumentInfoView::onMimeTypeChanged( KMimeType::Ptr mimeTypePtr )
+void DocumentInfoView::onMimeTypeChanged( const QMimeType& mimeType )
 {
     QString mimeTypeComment;
     QPixmap mimeTypeIcon;
 
-    if( mimeTypePtr.isNull() )
+    if( !mimeType.isValid() )
     {
-        mimeTypeComment = QLatin1String( "-" );
+        mimeTypeComment = QStringLiteral( "-" );
 //         mimeTypeIcon = ?
     }
     else
     {
-        mimeTypeComment = mimeTypePtr->comment();
-        mimeTypeIcon = KIconLoader::global()->loadIcon( mimeTypePtr->iconName(), KIconLoader::Desktop, KIconLoader::SizeEnormous );
+        mimeTypeComment = mimeType.comment();
+        mimeTypeIcon = KIconLoader::global()->loadIcon( mimeType.iconName(), KIconLoader::Desktop, KIconLoader::SizeEnormous );
     }
 
     mIconLabel->setPixmap( mimeTypeIcon );
@@ -189,7 +189,7 @@ void DocumentInfoView::onDocumentSizeChanged( int newSize )
     const QString size = ( newSize != -1 ) ?
         QString::fromLatin1( "%1 (%2)" )
         .arg( KIO::convertSize(newSize) )
-        .arg( KGlobal::locale()->formatNumber(newSize, 0) ) :
+        .arg( QLocale().toString(newSize) ) :
         QString::fromLatin1( "-" );
     mSizeLabel->setText( size );
 }

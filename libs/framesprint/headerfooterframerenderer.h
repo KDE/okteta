@@ -25,33 +25,32 @@
 
 // lib
 #include "abstractframerenderer.h"
-// KDE
-#include <KUrl>
 // Qt
 #include <QtCore/QStringList>
 #include <QtGui/QFont>
 #include <QtGui/QColor>
+#include <QtCore/QUrl>
 
 class QString;
 
 class PrintInfo
 {
   public:
-    KUrl url() const;
+    QUrl url() const;
     int noOfPages() const;
 
   public:
-    void setUrl( const KUrl &url );
+    void setUrl( const QUrl &url );
     void setNoOfPages( int noOfPages );
 
   protected:
-    KUrl mUrl;
+    QUrl mUrl;
     int mNoOfPages;
 };
 
-inline KUrl PrintInfo::url()      const { return mUrl; }
+inline QUrl PrintInfo::url()      const { return mUrl; }
 inline int PrintInfo::noOfPages() const { return mNoOfPages; }
-inline void PrintInfo::setUrl( const KUrl &url ) { mUrl = url; }
+inline void PrintInfo::setUrl( const QUrl &url ) { mUrl = url; }
 inline void PrintInfo::setNoOfPages( int noOfPages ) { mNoOfPages = noOfPages; }
 
 

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<!-- http://download.microsoft.com/download/f/f/e/ffef50a5-07dd-4cf8-aaa3-442c0673a029/Virtual%20Hard%20Disk%20Format%20Spec_10_18_06.doc -->
+	<!-- Big-Endian -->
+	<enumDef name="DiskType_enum" type="UInt32">
+		<entry name="None" value="0"/>
+		<entry name="Reserved1 (deprecated)" value="1"/>
+		<entry name="Fixed hard disk" value="2"/>
+		<entry name="Dynamic hard disk" value="3"/>
+		<entry name="Differencing hard disk" value="4"/>
+		<entry name="Reserved5 (deprecated)" value="5"/>
+		<entry name="Reserved6 (deprecated)" value="6"/>
+	</enumDef>
+	<enumDef name="PlatformCode_enum" type="UInt32">
+		<entry name="None" value="0"/>
+		<entry name="Wi2r" value="1466511986"/><!-- 0x57693272 -->
+		<entry name="Wi2k" value="1466511979"/><!-- 0x5769326b -->
+		<entry name="W2ru" value="1462923893"/><!-- 0x57327275 -->
+		<entry name="W2ku" value="1462922101"/><!-- 0x57326b75 -->
+		<entry name="Mac " value="1298228000"/><!-- 0x4D616320 -->
+		<entry name="MacX" value="1298228056"/><!-- 0x4D616358 -->
+	</enumDef>
+	<enumDef name="uuidSubtype_enum" type="UInt8">
+		<entry name="time" value="1"/>
+		<entry name="DCE" value="2"/>
+		<entry name="MD5" value="3"/>
+		<entry name="random" value="4"/>
+		<entry name="SHA1" value="5"/>
+	</enumDef>
+	<!-- 312be7de-995b-4ecd-8a90-724ee7d3cdd7 -->
+	<struct name="uuid">
+		<primitive name="time_low" type="UInt32"/>
+		<primitive name="time_mid" type="UInt16"/>
+		<!--primitive name="time_hi_and_version" type="UInt16"/-->
+		<bitfield name="time_hi" width="12" type="unsigned"/>
+		<bitfield name="version" width="4" type="unsigned"/>
+		<!--primitive name="clock_seq_high_and_reserved" type="UInt8"/-->
+		<bitfield name="clock_seq_hight" width="6" type="unsigned"/>
+		<bitfield name="reserved" width="2" type="unsigned"/>
+		<primitive name="clock_seq_low" type="UInt8"/>
+		<bitfield name="node" width="48" type="unsigned"/>
+	</struct>
+	<struct name="VHDDynamicDiskHeader">
+		<string name="Cookie" maxCharCount="8" encoding="ASCII"/><!-- cxsparse -->
+		<primitive name="DataOffset" type="UInt64"/><!-- 0xFFFFFFFFFFFFFFFF -->
+		<primitive name="TableOffset" type="UInt64"/><!-- BAT -->
+		<struct name="HeaderVersion"><!-- Major:Minor=0x00010000 -->
+			<primitive name="Major" type="UInt16"/>
+			<primitive name="Minor" type="UInt16"/>
+		</struct>
+		<primitive name="MaxTableEntries" type="UInt32"/>
+		<primitive name="BlockSize" type="UInt32"/><!-- 0x00200000=2 MiB -->
+		<primitive name="Checksum" type="UInt32"/>
+		<array name="ParentUniqueID" length="16">
+			<primitive name="ParentUniqueID" type="UInt8" />
+		</array>
+		<primitive name="ParentTimeStamp" type="UInt32"/><!-- seconds since 2000-01-01 00:00:00 -->
+		<primitive name="Reserved0" type="UInt32"/>
+		<string name="ParentUnicodeName" maxByteCount="512" encoding="UTF-16-BE"/>
+		<array name="ParentLocatorEntry" length="8">
+			<struct>
+				<enum name="PlatformCode" enum="PlatformCode_enum" type="UInt32"/>
+				<primitive name="PlatformDataSpace" type="UInt32"/>
+				<primitive name="PlatformDataLength" type="UInt32"/>
+				<primitive name="Reserved" type="UInt32"/>
+				<primitive name="PlatformDataOffset" type="UInt64"/>
+			</struct>
+		</array>
+		<array name="Reserved1" length="256">
+			<primitive type="UInt8" />
+		</array>
+	</struct>
+	<struct name="VHDFooter">
+		<string name="Cookie" maxCharCount="8" encoding="ASCII"/><!-- conectix -->
+		<struct name="Features">
+			<bitfield name="padding" width="30" type="bool"/>
+			<bitfield name="Reserved" width="1" type="bool"/>
+			<bitfield name="Temporary" width="1" type="bool"/>
+		</struct>
+		<struct name="FileFormatVersion">
+			<primitive name="Major" type="UInt16"/>
+			<primitive name="Minor" type="UInt16"/>
+		</struct>
+		<primitive name="DataOffset" type="UInt64"/><!-- seconds since 2000-01-01 00:00:00 -->
+		<primitive name="TimeStamp" type="UInt32"/><!-- seconds since 2000-01-01 00:00:00 -->
+		<string name="CreatorApplication" maxByteCount="4" encoding="ASCII"/><!-- "vpc ", "vs  " -->
+		<struct name="CreatorVersion"><!-- VS2004:0x00010000, VPC2004:00050000 -->
+			<primitive name="Major" type="UInt16"/>
+			<primitive name="Minor" type="UInt16"/>
+		</struct>
+		<string name="CreatorHostOS" maxByteCount="4" encoding="ASCII"/><!-- Windows:0x5769326B='Wi2k', Mac:0x4D616320='Mac ' -->
+		<primitive name="OriginalSize" type="UInt64"/>
+		<primitive name="CurrentSize" type="UInt64"/>
+		<struct name="DiskGeometry">
+			<primitive name="Cylinders" type="UInt16"/>
+			<primitive name="Heads" type="UInt8"/>
+			<primitive name="SectorsPerTrackCylinder" type="UInt8"/>
+		</struct>
+		<enum name="DiskType" enum="DiskType_enum" type="UInt32"/>
+		<primitive name="Checksum" type="UInt32"/>
+		<array name="UniqueID" length="16">
+			<primitive name="UniqueID" type="UInt8" />
+		</array>
+		<primitive name="SavedState" type="Bool8"/>
+		<array name="unused" length="427">
+			<primitive type="UInt8" />
+		</array>
+	</struct>
+</data>

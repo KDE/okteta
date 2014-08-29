@@ -1,1 +1,1 @@
-#include "../../kasten2/multidocumentstrategy.h"
+#include "../kasten/multidocumentstrategy.h"

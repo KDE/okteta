@@ -25,16 +25,16 @@
 // Kasten core
 #include <abstractdocumentstrategy.h>
 #include <abstractdocument.h>
-// KDE
+// KF5
 #include <KActionCollection>
-#include <KAction>
 #include <KStandardAction>
 #include <KXMLGUIClient>
-#include <KLocale>
-#include <KIcon>
+#include <KLocalizedString>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
@@ -51,21 +51,21 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
 
     if( supportMultiple )
     {
-        mCloseAllAction = actionCollection->addAction( QLatin1String("file_close_all"),
+        mCloseAllAction = actionCollection->addAction( QStringLiteral("file_close_all"),
                                                        this, SLOT(closeAll()) );
         mCloseAllAction->setText( i18nc("@title:menu","Close All") );
-        mCloseAllAction->setIcon( KIcon( QLatin1String("window-close") ) );
+        mCloseAllAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
         mCloseAllAction->setEnabled( false );
 
-        mCloseAllOtherAction = actionCollection->addAction( QLatin1String("file_close_all_other"),
+        mCloseAllOtherAction = actionCollection->addAction( QStringLiteral("file_close_all_other"),
                                                             this, SLOT(closeAllOther()) );
         mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
-        mCloseAllOtherAction->setIcon( KIcon( QLatin1String("window-close") ) );
+        mCloseAllOtherAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
         mCloseAllOtherAction->setEnabled( false );
 
-        connect( mDocumentStrategy, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
+        connect( mDocumentStrategy, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
                 SLOT(onDocumentsChanged()) );
-        connect( mDocumentStrategy, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
+        connect( mDocumentStrategy, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
                 SLOT(onDocumentsChanged()) );
     }
 }

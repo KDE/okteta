@@ -24,6 +24,7 @@
 #include "structtool.h"
 #include "structuredefinitionfile.h"
 #include "structuresmanager.h"
+#include "structlogging.h"
 // lib
 #include <bytearraydocument.h>
 #include <bytearrayview.h>
@@ -31,11 +32,8 @@
 #include <character.h>
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
-#include <KDebug>
-#include <KGlobal>
-#include <KStandardDirs>
+// KF5
+#include <KLocalizedString>
 //Qt
 #include <QModelIndex>
 
@@ -45,7 +43,7 @@
 #include "structviewpreferences.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class StructToolPrivate
@@ -73,12 +71,12 @@ StructTool::StructTool()
         : d(new StructToolPrivate())
 {
     //leave mLoadedFiles empty for now, since otherwise loading slot will not work
-    setObjectName(QLatin1String("StructTool"));
+    setObjectName(QStringLiteral("StructTool"));
     d->mManager->reloadPaths();
     setSelectedStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
 
-    connect(this, SIGNAL(byteOrderChanged()), this, SLOT(onByteOrderChanged()));
+    connect(this, &StructTool::byteOrderChanged, this, &StructTool::onByteOrderChanged);
 }
 
 void StructTool::onByteOrderChanged()
@@ -122,10 +120,10 @@ void StructTool::setTargetModel(AbstractModel* model)
     if (d->mByteArrayModel && d->mByteArrayView)
     {
         d->mCursorIndex = d->mByteArrayView->cursorPosition();
-        connect(d->mByteArrayView, SIGNAL(cursorPositionChanged(Okteta::Address)),
-                SLOT(onCursorPositionChange(Okteta::Address)));
-        connect(d->mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                SLOT(onContentsChange(Okteta::ArrayChangeMetricsList)));
+        connect(d->mByteArrayView, &ByteArrayView::cursorPositionChanged,
+                this, &StructTool::onCursorPositionChange);
+        connect(d->mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                this, &StructTool::onContentsChange);
     }
     emit byteArrayModelChanged(d->mByteArrayModel);
     updateData(Okteta::ArrayChangeMetricsList());
@@ -149,16 +147,16 @@ void StructTool::setByteOrder(int order)
         setByteOrder(QSysInfo::BigEndian);
     else
     {
-        kWarning() << "invalid byte order set:" << order;
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalid byte order set:" << order;
     }
 }
 
 void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
 {
-    kDebug() << "contents changed";
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "contents changed";
     for (int i = 0; i < list.size(); ++i) {
         const Okteta::ArrayChangeMetrics& acm = list.at(i);
-        kDebug() << "change: t=" << acm.type() << "o=" << acm.offset() << "a2=" << acm.removeLength() << "a3=" << acm.insertLength();
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "change: t=" << acm.type() << "o=" << acm.offset() << "a2=" << acm.removeLength() << "a3=" << acm.insertLength();
     }
     updateData(list);
 }
@@ -190,7 +188,7 @@ void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
 {
     if (d->mWritingData)
     {
-        kWarning() << "currently writing data, won't update";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "currently writing data, won't update";
         return;
     }
     if (!d->mByteArrayModel)
@@ -248,17 +246,17 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
     if (child->isValid())
     {
         child->setIndex(d->mData.size());
-        connect(child, SIGNAL(dataChanged()), this, SLOT(onChildItemDataChanged()));
-        connect(child, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)),
-                this, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)));
-        connect(child, SIGNAL(childrenInserted(const DataInformation*,uint,uint)),
-                this, SIGNAL(childrenInserted(const DataInformation*,uint,uint)));
-        connect(child, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)),
-                this, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)));
-        connect(child, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)),
-                this, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)));
-        connect(this, SIGNAL(byteArrayModelChanged(Okteta::AbstractByteArrayModel*)),
-                child, SLOT(newModelActivated(Okteta::AbstractByteArrayModel*)));
+        connect(child, &TopLevelDataInformation::dataChanged, this, &StructTool::onChildItemDataChanged);
+        connect(child, &TopLevelDataInformation::childrenAboutToBeInserted,
+                this, &StructTool::childrenAboutToBeInserted);
+        connect(child, &TopLevelDataInformation::childrenInserted,
+                this, &StructTool::childrenInserted);
+        connect(child, &TopLevelDataInformation::childrenAboutToBeRemoved,
+                this, &StructTool::childrenAboutToBeRemoved);
+        connect(child, &TopLevelDataInformation::childrenRemoved,
+                this, &StructTool::childrenRemoved);
+        connect(this, &StructTool::byteArrayModelChanged,
+                child, &TopLevelDataInformation::newModelActivated);
         d->mData.append(QSharedPointer<TopLevelDataInformation>(child));
         //ensure that locking gets set up properly
         if (d->mByteArrayModel)
@@ -277,9 +275,9 @@ void StructTool::setSelectedStructuresInView()
     d->mInvalidData.clear();
     emit dataCleared();
 
-    QRegExp regex(QLatin1String("'(.+)':'(.+)'"));
+    QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
     QStringList loadedStructs = StructViewPreferences::loadedStructures();
-    kDebug() << "loadedStructs " << loadedStructs;
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "loadedStructs " << loadedStructs;
     for (int i = 0; i < loadedStructs.size(); ++i)
     {
         const QString& s = loadedStructs.at(i);
@@ -288,14 +286,14 @@ void StructTool::setSelectedStructuresInView()
         {
             QString pluginName = regex.cap(1);
             QString name = regex.cap(2);
-            //kDebug() << "pluginName=" << path << " structureName=" << name;
+            //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "pluginName=" << path << " structureName=" << name;
             StructureDefinitionFile* def = d->mManager->definition(pluginName);
             if (!def)
                 continue;
             if (!def->isValid())
                 continue;
             //should be valid now
-            if (name == QLatin1String("*"))
+            if (name == QStringLiteral("*"))
             {
                 //add all of them
                 QVector<TopLevelDataInformation*> structs = def->structures();
@@ -308,7 +306,7 @@ void StructTool::setSelectedStructuresInView()
                 if (data)
                     addChildItem(data);
                 else
-                    kDebug() << "Could not find structure with name" << name << "in" << pluginName;
+                    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Could not find structure with name" << name << "in" << pluginName;
             }
         }
     }
@@ -361,11 +359,6 @@ void StructTool::validateAllStructures()
     {
         d->mData.at(i)->validate();
     }
-}
-
-int StructTool::columnCount() const
-{
-    return DataInformation::COLUMN_COUNT;
 }
 
 bool StructTool::isFileLoaded() const

@@ -76,7 +76,7 @@ CharCodec* CharCodec::createCodec( CharCoding charCoding )
     if( charCoding == EBCDIC1047Encoding )
         result = EBCDIC1047CharCodec::create();
     else if( charCoding == ISO8859_1Encoding )
-        result = TextCharCodec::createCodec( QLatin1String("ISO-8859-1") );
+        result = TextCharCodec::createCodec( QStringLiteral("ISO-8859-1") );
     // LocalEncoding
     else
         result = 0;

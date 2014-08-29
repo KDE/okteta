@@ -20,27 +20,27 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "safereference.h"
+#include "../structlogging.h"
 //#include "../datatypes/datainformation.h"
 
-#include <KDebug>
 #include <cstdio>
 
-SafeReferenceHolder SafeReferenceHolder::instance = SafeReferenceHolder();
+SafeReferenceHolder SafeReferenceHolder::instance;
 
 void SafeReferenceHolder::invalidateAll(DataInformation* data)
 {
     //this is called from DataInformation destructor, don't do anything with data!
     Container::iterator i = mRefs.find(data);
-    //qDebug() << "invalidating all references to" << data->name();
+    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalidating all references to" << data->name();
     while (i != mRefs.end() && i.key() == data) {
-        //qDebug() << "invalidating" << i.value();
+        //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalidating" << i.value();
         i.value()->invalidate();
         ++i;
     }
     //remove all this items from the list
     int removed = mRefs.remove(data);
     safeRefDestroyCnt += removed;
-    //qDebug() << "removed" << removed << "items";
+    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "removed" << removed << "items";
 }
 
 SafeReferenceHolder::SafeReferenceHolder()
@@ -51,7 +51,7 @@ SafeReferenceHolder::SafeReferenceHolder()
 SafeReferenceHolder::~SafeReferenceHolder()
 {
     if (mRefs.size() > 0)
-        kWarning() << mRefs.size() << "safe references were not removed";
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << mRefs.size() << "safe references were not removed";
     printf("register count: %d, destroy count %d: ", safeRefRegisterCnt, safeRefDestroyCnt);
 }
 

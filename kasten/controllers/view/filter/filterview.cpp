@@ -29,20 +29,20 @@
 #include <abstractbytearrayfilterparametersetedit.h>
 #include <abstractbytearrayfilterparameterset.h>
 #include <abstractbytearrayfilter.h>
-// KDE
-#include <KPushButton>
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 #include <KComboBox>
 #include <KGuiItem>
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QStackedWidget>
-#include <QtGui/QGroupBox>
-#include <QtGui/QAbstractItemView>
+#include <QLabel>
+#include <QLayout>
+#include <QStackedWidget>
+#include <QPushButton>
+#include <QGroupBox>
+#include <QAbstractItemView>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 FilterView::FilterView( FilterTool *tool, QWidget* parent )
@@ -56,8 +56,8 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     QHBoxLayout *operationLayout = new QHBoxLayout();
     QLabel *label = new QLabel( i18nc("@label:listbox operation to use by the filter","Operation:"), this );
     mOperationComboBox = new KComboBox( this );
-    connect( mOperationComboBox, SIGNAL(activated(int)),
-             SLOT(onOperationChange(int)) );
+    connect( mOperationComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+             this, &FilterView::onOperationChange );
 
     label->setBuddy( mOperationComboBox );
     const QString operationToolTip =
@@ -87,16 +87,17 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     // filter button
     QHBoxLayout *buttonLayout = new QHBoxLayout();
     buttonLayout->addStretch( 10 );
-    mFilterButton = new KPushButton( KGuiItem(i18nc("@action:button","&Filter"),
-                      QLatin1String("run-build"),
+    mFilterButton = new QPushButton( this );
+    KGuiItem::assign( mFilterButton, KGuiItem(i18nc("@action:button","&Filter"),
+                      QStringLiteral("run-build"),
                       i18nc("@info:tooltip","Executes the filter for the bytes in the selected range."),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Filter</interface> button, the operation you selected "
-                            "above is executed for the bytes in the selected range with the given options.")), this );
+                      xi18nc("@info:whatsthis",
+                             "If you press the <interface>Filter</interface> button, the operation you selected "
+                             "above is executed for the bytes in the selected range with the given options.")) );
     mFilterButton->setEnabled( mTool->hasWriteable() );
-    connect( mTool, SIGNAL(hasWriteableChanged(bool)), SLOT(onHasWriteableChanged(bool)) );
-    connect( mTool, SIGNAL(charCodecChanged(QString)), SLOT(onCharCodecChanged(QString)) );
-    connect( mFilterButton, SIGNAL(clicked(bool)), SLOT(onFilterClicked()) );
+    connect( mTool, &FilterTool::hasWriteableChanged, this, &FilterView::onHasWriteableChanged );
+    connect( mTool, &FilterTool::charCodecChanged, this, &FilterView::onCharCodecChanged );
+    connect( mFilterButton, &QPushButton::clicked, this, &FilterView::onFilterClicked );
     addButton( mFilterButton, AbstractToolWidget::Default );
     buttonLayout->addWidget( mFilterButton );
     baseLayout->addLayout( buttonLayout );
@@ -104,11 +105,11 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
 
     // automatically set focus to the parameters if a operation has been selected
     QAbstractItemView* operationComboBoxListView = mOperationComboBox->view();
-    QObject::connect( operationComboBoxListView, SIGNAL(activated(QModelIndex)),
-             mParameterSetEditStack, SLOT(setFocus()) );
+    QObject::connect( operationComboBoxListView, &QAbstractItemView::activated,
+             mParameterSetEditStack, static_cast<void (QStackedWidget::*)()>(&QStackedWidget::setFocus) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    QObject::connect( operationComboBoxListView, SIGNAL(pressed(QModelIndex)),
-             mParameterSetEditStack, SLOT(setFocus()) );
+    QObject::connect( operationComboBoxListView, &QAbstractItemView::pressed,
+             mParameterSetEditStack, static_cast<void (QStackedWidget::*)()>(&QStackedWidget::setFocus) );
     // TODO: goto filter button if there are no parameters
 
     addFilters();
@@ -169,8 +170,8 @@ void FilterView::onOperationChange( int index )
         qobject_cast<AbstractByteArrayFilterParameterSetEdit *>( mParameterSetEditStack->currentWidget() );
     if( parametersetEdit )
     {
-        connect( parametersetEdit, SIGNAL(validityChanged(bool)),
-                 SLOT(onValidityChanged(bool)) );
+        connect( parametersetEdit, &AbstractByteArrayFilterParameterSetEdit::validityChanged,
+                 this, &FilterView::onValidityChanged );
         onValidityChanged( parametersetEdit->isValid() );
     }
 }

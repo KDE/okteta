@@ -27,7 +27,7 @@
 #include <kastencore.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractDifferentSizeDialog

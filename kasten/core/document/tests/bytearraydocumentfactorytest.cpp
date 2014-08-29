@@ -26,11 +26,11 @@
 #include <bytearraydocumentfactory.h>
 // lib
 #include <bytearraydocument.h>
-// KDE
-#include <qtest_kde.h>
+// KF5
+#include <QtTest/QTest>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void ByteArrayDocumentFactoryTest::testCreate()
@@ -42,7 +42,7 @@ void ByteArrayDocumentFactoryTest::testCreate()
 
     QVERIFY( document != 0 );
     QVERIFY( byteArrayDocument != 0 );
-    QCOMPARE( document->contentFlags(), Kasten2::ContentStateNormal );
+    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
 
     delete document;
     delete factory;
@@ -50,4 +50,4 @@ void ByteArrayDocumentFactoryTest::testCreate()
 
 }
 
-QTEST_KDEMAIN_CORE( Kasten2::ByteArrayDocumentFactoryTest )
+QTEST_GUILESS_MAIN( Kasten::ByteArrayDocumentFactoryTest )

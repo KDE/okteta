@@ -22,11 +22,12 @@
 
 #include "addressvalidator.h"
 
+// lib
+#include <oktetakastengui.h>
 // Okteta core
 #include <valuecodec.h>
-// KDE
-#include <KLocale>
-#include <KDebug>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QString>
 #include <QtCore/QRegExp>
@@ -57,7 +58,7 @@ void AddressValidator::setCodec( Coding codecId )
 }
 
 const QRegExp AddressValidator::expressionRegex =
-    QRegExp(QLatin1String("[0-9a-fx\\+/\\s\\-\\*]+"),
+    QRegExp(QStringLiteral("[0-9a-fx\\+/\\s\\-\\*]+"),
         Qt::CaseInsensitive, QRegExp::RegExp2); //FIXME this is way too simple, only there to test
 
 QValidator::State AddressValidator::validate( QString& string, int& pos ) const
@@ -71,8 +72,8 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
         if( ! expressionRegex.exactMatch(string) )
             result = QValidator::Invalid;
         //only prefix has been typed:
-        if( string == QLatin1String("+")
-            || string == QLatin1String("-")
+        if( string == QStringLiteral("+")
+            || string == QStringLiteral("-")
             || string.endsWith(QLatin1Char('x')) ) // 0x at end
             result = QValidator::Intermediate;
     }
@@ -118,12 +119,11 @@ Address AddressValidator::toAddress( const QString& string, AddressType* address
         QScriptEngine evaluator;
         QScriptValue value = evaluator.evaluate( expression );
         address = value.toInt32();
-kDebug() << "expression " << expression << " evaluated to: " << address;
+        qCDebug(LOG_KASTEN_OKTETA_GUI) << "expression " << expression << " evaluated to: " << address;
 
         if( evaluator.hasUncaughtException() )
         {
-            kWarning() << "evaluation error: "
-                    << evaluator.uncaughtExceptionBacktrace();
+            qCWarning(LOG_KASTEN_OKTETA_GUI) << "evaluation error: " << evaluator.uncaughtExceptionBacktrace();
             if( addressType )
                 *addressType = InvalidAddressType;
         }

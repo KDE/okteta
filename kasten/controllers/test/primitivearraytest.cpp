@@ -18,7 +18,7 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <QtTest>
+#include <QtTest/QTest>
 #include <limits>
 
 #include <bytearraymodel.h>
@@ -173,9 +173,9 @@ template<PrimitiveDataTypeEnum primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
     LoggerWithContext lwc(0, QString());
-    ArrayDataInformation* dataInf = new ArrayDataInformation(QLatin1String("values"),
+    ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
             model->size() / sizeof(T),
-            PrimitiveFactory::newInstance(QLatin1String("value"), primType, lwc));
+            PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
     QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, 0,
             ScriptEngineInitializer::newEngine()));
@@ -184,9 +184,9 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     qint64 result = dataInf->readData(model.data(), 0, model->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), model->size() * 8);
     T* dataAsT = reinterpret_cast<T*>(data.data());
+    QVERIFY(!dataInf->mData->isComplex());
     PrimitiveArrayData<primType>* arrayData =
-            dynamic_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
-    QVERIFY(arrayData);
+            static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
     for (uint i = 0; i < dataInf->childCount(); ++i)
     {
         AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
@@ -278,6 +278,6 @@ void PrimitiveArrayTest::testReadBool64()
     testReadPrimitive<Type_Bool64>();
 }
 
-QTEST_MAIN(PrimitiveArrayTest)
+QTEST_GUILESS_MAIN(PrimitiveArrayTest)
 
 #include "primitivearraytest.moc"

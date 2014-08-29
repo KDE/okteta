@@ -24,14 +24,14 @@
 
 // lib
 #include <bytearraycombobox.h>
-// KDE
-#include <KLocale>
-#include <KIntNumInput>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QFormLayout>
+#include <QSpinBox>
+#include <QFormLayout>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( ByteArrayPatternGenerator* generator, QWidget* parent )
@@ -49,8 +49,8 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( By
                "Pattern:" );
     mPatternEdit = new Okteta::ByteArrayComboBox( this );
     mPatternEdit->setByteArray( mSettings.pattern );
-    connect( mPatternEdit, SIGNAL(byteArrayChanged(QByteArray)), SLOT(onSettingsChanged()) );
-    connect( mPatternEdit, SIGNAL(byteArrayChanged(QByteArray)), SLOT(onPatternChanged(QByteArray)) );
+    connect( mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged );
+    connect( mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onPatternChanged );
     const QString inputWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter a pattern to search for, or select a previous pattern from the list." );
@@ -62,10 +62,10 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( By
     const QString numberInputLabel =
         i18nc( "@label:spinbox number of times to insert the pattern",
                "&Number:" );
-    mNumberInput = new KIntNumInput( this );
+    mNumberInput = new QSpinBox( this );
     mNumberInput->setRange( 1, INT_MAX );
     mNumberInput->setValue( mSettings.count );
-    connect( mNumberInput, SIGNAL(valueChanged(int)), SLOT(onSettingsChanged()) );
+    connect( mNumberInput, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter the number of times the pattern should be inserted." );

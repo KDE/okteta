@@ -24,17 +24,17 @@
 
 // lib
 #include "testdocument.h"
-// KDE
-#include <KUrl>
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
+#include <QtCore/QUrl>
 #include <QtCore/QByteArray>
-#include <QtGui/QApplication>
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
+#include <QCoreApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void TestDocumentFileLoadThread::run()
@@ -62,7 +62,7 @@ void TestDocumentFileLoadThread::run()
         if( streamIsOk )
         {
             mDocument = new TestDocument( byteArray );
-            mDocument->moveToThread( QApplication::instance()->thread() );
+            mDocument->moveToThread( QCoreApplication::instance()->thread() );
         }
         else
         {

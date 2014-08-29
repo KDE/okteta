@@ -24,13 +24,13 @@
 #define DOCUMENTSVIEW_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class QTreeView;
 class QModelIndex;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class DocumentListModel;

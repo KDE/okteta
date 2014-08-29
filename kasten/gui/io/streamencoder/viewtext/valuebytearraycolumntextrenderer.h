@@ -32,7 +32,7 @@ namespace Okteta {
 class ValueCodec;
 }
 
-namespace Kasten2
+namespace Kasten
 {
 
 class ValueByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer

@@ -32,8 +32,8 @@
 // temporary
 #include "modelcodecviewmanager.h"
 
-#include <KDebug>
-namespace Kasten2
+
+namespace Kasten
 {
 
 ViewManager::ViewManager()
@@ -80,15 +80,15 @@ void ViewManager::createCopyOfView( AbstractView* view, Qt::Alignment alignment 
 
     mViewList.append( viewCopy );
 
-    QList<Kasten2::AbstractView*> views;
+    QList<Kasten::AbstractView*> views;
     views.append( viewCopy );
 
     emit opened( views );
 }
 
-void ViewManager::createViewsFor( const QList<Kasten2::AbstractDocument*>& documents )
+void ViewManager::createViewsFor( const QList<Kasten::AbstractDocument*>& documents )
 {
-    QList<Kasten2::AbstractView*> openedViews;
+    QList<Kasten::AbstractView*> openedViews;
 
     foreach( AbstractDocument* document, documents )
     {
@@ -105,9 +105,9 @@ void ViewManager::createViewsFor( const QList<Kasten2::AbstractDocument*>& docum
 }
 
 
-void ViewManager::removeViewsFor( const QList<Kasten2::AbstractDocument*>& documents )
+void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& documents )
 {
-    QList<Kasten2::AbstractView*> closedViews;
+    QList<Kasten::AbstractView*> closedViews;
 
     QMutableListIterator<AbstractView*> it( mViewList );
     foreach( AbstractDocument* document, documents )
@@ -129,7 +129,7 @@ void ViewManager::removeViewsFor( const QList<Kasten2::AbstractDocument*>& docum
 
     foreach( AbstractView* view, closedViews )
     {
-        kDebug()<<view->title();
+//         qCDebug(LOG_KASTEN_GUI) << view->title();
         delete view;
     }
 }
@@ -143,7 +143,7 @@ void ViewManager::removeViews( const QList<AbstractView*>& views )
 
     foreach( AbstractView* view, views )
     {
-        kDebug()<<view->title();
+//         qCDebug(LOG_KASTEN_GUI)<<view->title();
         delete view;
     }
 }

@@ -19,17 +19,19 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "primitivearraydata.h"
+
 #include "arraydatainformation.h"
 #include "../primitive/primitivedatainformation.h"
 #include "../../script/scriptlogger.h"
 #include "../../script/safereference.h"
+#include "../../structlogging.h"
 
 #include <abstractbytearraymodel.h>
 
 #include <limits>
 #include <KLocalizedString>
-#include <KDebug>
 
 
 template<PrimitiveDataTypeEnum type>
@@ -120,7 +122,8 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
         this->mParent->logWarn() << "could not convert" << value << "to" << type;
         return false;
     }
-    kDebug() << AbstractArrayData::mParent->fullObjectPath() << "setting index" << row << "to"
+    qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
+            << AbstractArrayData::mParent->fullObjectPath() << "setting index" << row << "to"
             << value << "(= " << convertedVal << ")";
     this->mData[row] = convertedVal;
     this->writeOneItem(convertedVal, address + (row * sizeof(T)), out, littleEndian);

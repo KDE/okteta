@@ -29,24 +29,23 @@
 #include <abstractbytearraychecksumparametersetedit.h>
 #include <abstractbytearraychecksumparameterset.h>
 #include <abstractbytearraychecksumalgorithm.h>
-// KDE
+// KF5
 #include <KComboBox>
-#include <KPushButton>
 #include <KLineEdit>
 #include <KGuiItem>
-#include <KLocale>
-#include <KGlobalSettings>
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QLabel>
-#include <QtGui/QGroupBox>
-#include <QtGui/QStackedWidget>
-#include <QtGui/QLayout>
+#include <QLabel>
+#include <QGroupBox>
+#include <QStackedWidget>
+#include <QPushButton>
+#include <QLayout>
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
-#include <QtGui/QAbstractItemView>
+#include <QApplication>
+#include <QAbstractItemView>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
@@ -60,8 +59,8 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     QHBoxLayout* algorithmLayout = new QHBoxLayout();
     QLabel* label = new QLabel( i18nc("@label:listbox algorithm to use for the checksum","Algorithm:"), this );
     mAlgorithmComboBox = new KComboBox( this );
-    connect( mAlgorithmComboBox, SIGNAL(activated(int)),
-             SLOT(onOperationChange(int)) );
+    connect( mAlgorithmComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+             this, &ChecksumView::onOperationChange );
 
     label->setBuddy( mAlgorithmComboBox );
     const QString algorithmWhatsThis =
@@ -88,15 +87,16 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     calculateLayout->addStretch();
     const KGuiItem updateGuiItem = 
         KGuiItem( i18nc("@action:button calculate the checksum","&Calculate"),
-                  QLatin1String("run-build"),
+                  QStringLiteral("run-build"),
                   i18nc("@info:tooltip",
                         "Calculate the checksum for the bytes in the selected range."),
-                  i18nc("@info:whatsthis",
-                        "If you press the <interface>Calculate</interface> button, the list will be updated "
-                        "to all strings which are contained in the selected range and have the set minimum length.") );
-    mCalculateButton = new KPushButton( updateGuiItem, this );
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Calculate</interface> button, the list will be updated "
+                         "to all strings which are contained in the selected range and have the set minimum length.") );
+    mCalculateButton = new QPushButton( this );
+    KGuiItem::assign( mCalculateButton, updateGuiItem );
     mCalculateButton->setEnabled( mTool->isApplyable() );
-    connect( mCalculateButton, SIGNAL(clicked(bool)), SLOT(onCalculateClicked()) );
+    connect( mCalculateButton, &QPushButton::clicked, this, &ChecksumView::onCalculateClicked );
     addButton( mCalculateButton, AbstractToolWidget::Default );
     calculateLayout->addWidget( mCalculateButton );
     baseLayout->addLayout( calculateLayout );
@@ -104,21 +104,21 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     mChecksumLabel = new KLineEdit( this );
     mChecksumLabel->setReadOnly( true );
     mChecksumLabel->setText( mTool->checkSum() );
-    connect( mTool, SIGNAL(checksumChanged(QString)), mChecksumLabel, SLOT(setText(QString)) );
+    connect( mTool, &ChecksumTool::checksumChanged, mChecksumLabel, &KLineEdit::setText );
     baseLayout->addWidget( mChecksumLabel, 10 );
 
     baseLayout->addStretch( 10 );
 
-    connect( mTool, SIGNAL(uptodateChanged(bool)), SLOT(onChecksumUptodateChanged(bool)) );
-    connect( mTool, SIGNAL(isApplyableChanged(bool)), SLOT(onApplyableChanged(bool)) );
+    connect( mTool, &ChecksumTool::uptodateChanged, this, &ChecksumView::onChecksumUptodateChanged );
+    connect( mTool, &ChecksumTool::isApplyableChanged, this, &ChecksumView::onApplyableChanged );
 
     // automatically set focus to the parameters if a operation has been selected
     QAbstractItemView* algorithmComboBoxListView = mAlgorithmComboBox->view();
-    QObject::connect( algorithmComboBoxListView, SIGNAL(activated(QModelIndex)),
-             mParameterSetEditStack, SLOT(setFocus()) );
+    QObject::connect( algorithmComboBoxListView, &QAbstractItemView::activated,
+             mParameterSetEditStack, static_cast<void (QStackedWidget::*)()>(&QStackedWidget::setFocus) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    QObject::connect( algorithmComboBoxListView, SIGNAL(pressed(QModelIndex)),
-             mParameterSetEditStack, SLOT(setFocus()) );
+    QObject::connect( algorithmComboBoxListView, &QAbstractItemView::pressed,
+             mParameterSetEditStack, static_cast<void (QStackedWidget::*)()>(&QStackedWidget::setFocus) );
     // TODO: goto filter button if there are no parameters
 
     addAlgorithms();
@@ -175,11 +175,11 @@ void ChecksumView::onOperationChange( int index )
         qobject_cast<AbstractByteArrayChecksumParameterSetEdit*>( mParameterSetEditStack->currentWidget() );
     if( parametersetEdit )
     {
-        connect( parametersetEdit, SIGNAL(validityChanged(bool)),
-                 SLOT(onValidityChanged(bool)) );
+        connect( parametersetEdit, &AbstractByteArrayChecksumParameterSetEdit::validityChanged,
+                 this, &ChecksumView::onValidityChanged );
         // TODO: hack, see checksum source
-        connect( parametersetEdit, SIGNAL(valuesChanged()),
-                 mTool, SLOT(resetSourceTool()) );
+        connect( parametersetEdit, &AbstractByteArrayChecksumParameterSetEdit::valuesChanged,
+                 mTool, &ChecksumTool::resetSourceTool );
         onValidityChanged( parametersetEdit->isValid() );
     }
 }

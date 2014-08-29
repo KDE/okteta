@@ -30,14 +30,14 @@
 #include <bytearraydocument.h>
 // Qt
 #include <QtGui/QClipboard>
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
 OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart* part )
   : KParts::BrowserExtension( part ),
     mPart( part )
 {
-    setObjectName( QLatin1String( "oktetapartbrowserextension" ) );
+    setObjectName( QStringLiteral( "oktetapartbrowserextension" ) );
 
     connect( mPart, SIGNAL(hasSelectedDataChanged(bool)),
              SLOT(onSelectionChanged(bool)) );
@@ -71,7 +71,7 @@ void OktetaBrowserExtension::saveState( QDataStream& stream )
 {
     KParts::BrowserExtension::saveState( stream );
 
-    Kasten2::ByteArrayView* view = mPart->byteArrayView();
+    Kasten::ByteArrayView* view = mPart->byteArrayView();
 
     stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
         << (int)view->layoutStyle() << (int)view->valueCoding() 
@@ -106,7 +106,7 @@ void OktetaBrowserExtension::restoreState( QDataStream& stream )
 //            >> activeCoding
            ;
 
-    Kasten2::ByteArrayView* view = mPart->byteArrayView();
+    Kasten::ByteArrayView* view = mPart->byteArrayView();
 
     view->toggleOffsetColumn( offsetColumnVisible );
     view->setVisibleByteArrayCodings( visibleCodings );

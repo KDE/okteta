@@ -26,8 +26,8 @@
 // lib
 #include "bookmarksconstiteratoradapter.h"
 #include "oktetacore_export.h"
-// KDE
-#include <KSharedPtr>
+// Qt
+#include <QtCore/QExplicitlySharedDataPointer>
 
 
 namespace Okteta
@@ -58,7 +58,7 @@ class OKTETACORE_EXPORT BookmarksConstIterator
     void toFront();
 
   protected:
-    KSharedPtr<BookmarksConstIteratorAdapter> mAdapter;
+    QExplicitlySharedDataPointer<BookmarksConstIteratorAdapter> mAdapter;
 };
 
 

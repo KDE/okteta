@@ -24,15 +24,14 @@
 
 // lib
 #include <abstractgroupedviews.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>
-#include <KAction>
 // Qt
-#include <QtGui/QActionGroup>
+#include <QActionGroup>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 SwitchViewController::SwitchViewController( AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient )
@@ -40,13 +39,13 @@ SwitchViewController::SwitchViewController( AbstractGroupedViews* groupedViews, 
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mForwardAction = actionCollection->addAction( KStandardAction::Forward, QLatin1String("window_next"), this, SLOT(forward()) );
-    mBackwardAction = actionCollection->addAction( KStandardAction::Back, QLatin1String("window_previous"), this, SLOT(backward()) );
+    mForwardAction = actionCollection->addAction( KStandardAction::Forward, QStringLiteral("window_next"), this, SLOT(forward()) );
+    mBackwardAction = actionCollection->addAction( KStandardAction::Back, QStringLiteral("window_previous"), this, SLOT(backward()) );
 
-    connect( groupedViews, SIGNAL(added(QList<Kasten2::AbstractView*>)),  SLOT(updateActions()) );
-    connect( groupedViews, SIGNAL(removing(QList<Kasten2::AbstractView*>)), SLOT(updateActions()) );
+    connect( groupedViews, SIGNAL(added(QList<Kasten::AbstractView*>)),  SLOT(updateActions()) );
+    connect( groupedViews, SIGNAL(removing(QList<Kasten::AbstractView*>)), SLOT(updateActions()) );
 
-    connect( groupedViews, SIGNAL(viewFocusChanged(Kasten2::AbstractView*)), SLOT(updateActions()) );
+    connect( groupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)), SLOT(updateActions()) );
 
     updateActions();
 }

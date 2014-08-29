@@ -27,14 +27,15 @@
 #include <viewareasplitable.h>
 #include <abstractviewarea.h>
 #include <viewmanager.h>
-// KDE
+// KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>
-#include <KAction>
-#include <KLocale>
+#include <KLocalizedString>
+// Qt
+#include <QAction>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient )
@@ -46,34 +47,34 @@ ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, Abst
     mViewAreaSplitable = mGroupedViews ? qobject_cast<If::ViewAreaSplitable*>( mGroupedViews ) : 0;
     if( mViewAreaSplitable )
     {
-        connect( mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten2::AbstractViewArea*)),
-                 SLOT(onViewAreaFocusChanged(Kasten2::AbstractViewArea*)) );
-        connect( mGroupedViews, SIGNAL(viewAreasAdded(QList<Kasten2::AbstractViewArea*>)),
+        connect( mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten::AbstractViewArea*)),
+                 SLOT(onViewAreaFocusChanged(Kasten::AbstractViewArea*)) );
+        connect( mGroupedViews, SIGNAL(viewAreasAdded(QList<Kasten::AbstractViewArea*>)),
                  SLOT(onViewAreasChanged()) );
-        connect( mGroupedViews, SIGNAL(viewAreasRemoved(QList<Kasten2::AbstractViewArea*>)),
+        connect( mGroupedViews, SIGNAL(viewAreasRemoved(QList<Kasten::AbstractViewArea*>)),
                  SLOT(onViewAreasChanged()) );
     }
 
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSplitVerticallyAction = actionCollection->addAction( QLatin1String("view_area_split_vertically"),
+    mSplitVerticallyAction = actionCollection->addAction( QStringLiteral("view_area_split_vertically"),
                                                           this, SLOT(splitVertically()) );
     mSplitVerticallyAction->setText( i18nc("@title:menu","Split Vertically") );
-    mSplitVerticallyAction->setIcon( KIcon( QLatin1String("view-split-left-right") ) );
+    mSplitVerticallyAction->setIcon( QIcon::fromTheme( QStringLiteral("view-split-left-right") ) );
     mSplitVerticallyAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_L );
     mSplitVerticallyAction->setEnabled( mViewAreaSplitable != 0 );
 
-    mSplitHorizontallyAction = actionCollection->addAction( QLatin1String("view_area_split_horizontally"),
+    mSplitHorizontallyAction = actionCollection->addAction( QStringLiteral("view_area_split_horizontally"),
                                                             this, SLOT(splitHorizontally()) );
     mSplitHorizontallyAction->setText( i18nc("@title:menu","Split Horizontal") );
-    mSplitHorizontallyAction->setIcon( KIcon( QLatin1String("view-split-top-bottom") ) );
+    mSplitHorizontallyAction->setIcon( QIcon::fromTheme( QStringLiteral("view-split-top-bottom") ) );
     mSplitHorizontallyAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_T );
     mSplitHorizontallyAction->setEnabled( mViewAreaSplitable != 0 );
 
-    mCloseAction = actionCollection->addAction( QLatin1String("view_area_close"),
+    mCloseAction = actionCollection->addAction( QStringLiteral("view_area_close"),
                                                 this, SLOT(close()) );
     mCloseAction->setText( i18nc("@title:menu","Close View Area") );
-    mCloseAction->setIcon( KIcon( QLatin1String("view-close") ) );
+    mCloseAction->setIcon( QIcon::fromTheme( QStringLiteral("view-close") ) );
     mCloseAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_R );
 
     onViewAreaFocusChanged( mViewAreaSplitable ? mViewAreaSplitable->viewAreaFocus() : 0 );
@@ -122,9 +123,9 @@ void ViewAreaSplitController::onViewAreaFocusChanged( AbstractViewArea* viewArea
 
     if( mCurrentViewArea )
     {
-        connect( mCurrentViewArea, SIGNAL(added(QList<Kasten2::AbstractView*>)),
+        connect( mCurrentViewArea, SIGNAL(added(QList<Kasten::AbstractView*>)),
                  SLOT(onViewsChanged()) );
-        connect( mCurrentViewArea, SIGNAL(removing(QList<Kasten2::AbstractView*>)),
+        connect( mCurrentViewArea, SIGNAL(removing(QList<Kasten::AbstractView*>)),
                  SLOT(onViewsChanged()) );
     }
     onViewsChanged();

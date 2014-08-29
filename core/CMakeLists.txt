@@ -1,7 +1,5 @@
 project( oktetacore )
 
-add_definitions( -DKDE_DEFAULT_DEBUG_AREA=1801 )
-
 set( libcontroller_SRCS
   controller/kchareditor.cpp
   controller/kcontroller.cpp
@@ -56,7 +54,7 @@ set( oktetacore_LIB_SRCS
 )
 
 set( oktetacore_LIB_HDRS
-  oktetacore_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/oktetacore_export.h
   oktetacore.h
   address.h
   size.h
@@ -113,23 +111,26 @@ set( oktetacore_LIB_CCHDRS
   includes/CharCodec
 )
 
-#TODO remove once CMake >= 2.8.9 is required for building KDE
-#don't compile sources twice
-if ( CMAKE_VERSION VERSION_GREATER 2.8.8 AND NOT WIN32)
-    #OBJECT libraries seem buggy with regard to automoc, have to call it manually
-    automoc4( oktetacore_objs oktetacore_LIB_SRCS )
-    add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
-    set_target_properties(oktetacore_objs PROPERTIES POSITION_INDEPENDENT_CODE ON)
-    set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
-else()
-    #compile the sources twice for older CMake version
-    set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS})
-endif()
+#don't compile sources twice by using object libraries
+#add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
+#target_include_directories( oktetacore_objs PUBLIC $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES> )
+#set( oktetacore_LIB_OBJS $<TARGET_OBJECTS:oktetacore_objs>)
 
-kde4_add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
-target_link_libraries( ${oktetacore_LIB}
-  ${KDE4_KDECORE_LIBS}
+# compile flags don't get set for object libraries, since cannot link to target
+#TODO: find out how to properly use targets for object libraries
+set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS} )
+
+
+add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
+target_link_libraries( ${oktetacore_LIB} LINK_PUBLIC Qt5::Core )
+target_link_libraries( ${oktetacore_LIB} LINK_PRIVATE
+  KF5::I18n
+  KF5::Codecs   #needed for codecs
 )
+
+generate_export_header( ${oktetacore_LIB} )
+target_include_directories( ${oktetacore_LIB} PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
+
 set_target_properties( ${oktetacore_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetacore_LIB_NAME}
   VERSION     ${OKTETALIBS_LIB_VERSION}
@@ -148,9 +149,11 @@ install( FILES ${oktetacore_LIB_CCHDRS}
 )
 
 
-add_subdirectory( piecetable/tests )
-add_subdirectory( tests )
-if(KDE4_BUILD_TESTS)
-  kde4_add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
-  set_target_properties(testoktetacore PROPERTIES COMPILE_FLAGS -DOKTETACORE_EXPORT=)
-endif(KDE4_BUILD_TESTS)
+if(BUILD_TESTING)
+  add_library( testoktetacore STATIC ${oktetacore_LIB_OBJS} )
+  set_target_properties( testoktetacore PROPERTIES COMPILE_FLAGS -DOKTETACORE_STATIC_DEFINE )
+  target_include_directories( testoktetacore PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
+  target_link_libraries( testoktetacore Qt5::Core KF5::I18n KF5::Codecs )
+  add_subdirectory( piecetable/tests )
+  add_subdirectory( tests )
+endif()

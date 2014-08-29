@@ -24,11 +24,11 @@
 
 // parameterset
 #include "rotatebytearrayfilterparameterset.h"
-// KDE
-#include <KLocale>
-#include <KIntNumInput>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QFormLayout>
+#include <QFormLayout>
+#include <QSpinBox>
 
 
 const char* const RotateByteArrayFilterParameterSetEdit::Id = "Rotate";
@@ -40,13 +40,12 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
     QFormLayout* baseLayout = new QFormLayout( this );
     baseLayout->setMargin( 0 );
 
-    mGroupSizeEdit = new KIntNumInput( this );
+    mGroupSizeEdit = new QSpinBox( this );
     mGroupSizeEdit->setRange( 1, INT_MAX );
-    mGroupSizeEdit->setSuffix( ki18np(" byte"," bytes") );
 
     const QString groupSizeLabelText =
          i18nc( "@label:spinbox number of bytes the movement is done within",
-                "&Group size:" );
+                "&Group size (bytes):" );
     const QString groupSizeToolTip =
         i18nc( "@info:tooltip",
                "The number of bytes within which each movement is made." );
@@ -58,14 +57,13 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
 
     baseLayout->addRow( groupSizeLabelText, mGroupSizeEdit );
 
-    mMoveBitWidthEdit = new KIntNumInput( this );
+    mMoveBitWidthEdit = new QSpinBox( this );
     mMoveBitWidthEdit->setRange( INT_MIN, INT_MAX );
-    mMoveBitWidthEdit->setSuffix( ki18np(" bit"," bits") );
-    connect( mMoveBitWidthEdit, SIGNAL(valueChanged(int)), SLOT(onValueChanged(int)) );
+    connect( mMoveBitWidthEdit, SIGNAL(valueChanged(int)), SLOT(onValueChanged(int)));
 
     const QString moveBitWidthLabelText =
         i18nc( "@label:spinbox width (in number of bits) the bits are moved",
-               "S&hift width:" );
+               "S&hift width (bits):" );
     const QString moveBitWidthToolTip =
         i18nc( "@info:tooltip",
                "The width of the shift. Positive numbers move the bits to the right, negative to the left." );

@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta program, made within the KDE community.
 
-    Copyright 2006-2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2006-2009,2011,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -23,6 +23,7 @@
 #include "program.h"
 
 // program
+#include "about.h"
 #include "mainwindow.h"
 // Okteta Kasten
 #include <bytearraydocumentfactory.h>
@@ -44,41 +45,72 @@
 #include <documentcreatemanager.h>
 #include <documentsyncmanager.h>
 #include <modelcodecmanager.h>
-// KDE
-#include <KUrl>
-#include <KCmdLineArgs>
-#include <KApplication>
+// KF5
+#include <KDBusService>
+#include <KLocalizedString>
 // Qt
+#include <QtCore/QCommandLineParser>
 #include <QtCore/QList>
+#include <QtCore/QUrl>
+#include <QtCore/QLoggingCategory>
 
-
-namespace Kasten2
+namespace Kasten
 {
 
 // static const char OffsetOptionId[] = "offset";
 // static const char OffsetOptionShortId[] = "o";
 
-#define CmdLineOptionName(STRING) QByteArray::fromRawData( STRING, sizeof(STRING)-1 )
-
-OktetaProgram::OktetaProgram( int argc, char* argv[] )
-  : mDocumentManager( new DocumentManager() ),
-    mViewManager( new ViewManager() ),
-    mDocumentStrategy( new MultiDocumentStrategy(mDocumentManager, mViewManager) ),
-    mDialogHandler( new DialogHandler() )
+OktetaProgram::OktetaProgram( int &argc, char* argv[] )
+  : mApp( argc, argv )
 {
-    KCmdLineOptions programOptions;
-//     programOptions.add( OffsetOptionShortId );
-//     programOptions.add( OffsetOptionId, ki18n("Offset to set the cursor to"), 0 );
-    programOptions.add( CmdLineOptionName("+[URL(s)]"), ki18n("File(s) to load") );
-
-    KCmdLineArgs::init( argc, argv, &mAboutData );
-    KCmdLineArgs::addCmdLineOptions( programOptions );
+#ifndef QT_NO_DEBUG
+    // MSVC complains about mismatched strings... (wide vs normal)
+    // fix it using QT_UNICODE_LITERAL
+    QLoggingCategory::setFilterRules(QStringLiteral(
+        "okteta.core.debug = true\n"
+        QT_UNICODE_LITERAL("okteta.gui.debug = true\n")
+        QT_UNICODE_LITERAL("kasten.core.debug = true\n")
+        QT_UNICODE_LITERAL("kasten.gui.debug = true\n")
+        QT_UNICODE_LITERAL("kasten.okteta.core = true\n")
+        QT_UNICODE_LITERAL("kasten.okteta.gui = true\n")
+        QT_UNICODE_LITERAL("kasten.okteta.controllers.structures.debug = true\n")));
+#endif
 }
 
 
 int OktetaProgram::execute()
 {
-    KApplication programCore;
+    mDocumentManager = new DocumentManager();
+    mViewManager = new ViewManager();
+    mDocumentStrategy = new MultiDocumentStrategy( mDocumentManager, mViewManager );
+    mDialogHandler = new DialogHandler();
+
+    // TODO: not best position, some of the manager classes might use i18n before
+    KLocalizedString::setApplicationDomain( "okteta" );
+
+    OktetaAboutData aboutData;
+    KAboutData::setApplicationData( aboutData );
+
+    mApp.setApplicationName( aboutData.componentName() );
+    mApp.setApplicationDisplayName( aboutData.displayName() );
+    mApp.setOrganizationDomain( aboutData.organizationDomain() );
+    mApp.setApplicationVersion( aboutData.version() );
+
+    KDBusService programDBusService;
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription( aboutData.shortDescription() );
+    parser.addHelpOption();
+    parser.addVersionOption();
+
+    // urls to open
+    parser.addPositionalArgument( QStringLiteral("urls"), i18n("File(s) to load."), QStringLiteral("[urls...]") );
+
+    // offset option
+//     programOptions.add( OffsetOptionShortId );
+//     programOptions.add( OffsetOptionId, ki18n("Offset to set the cursor to"), 0 );
+
+    parser.process(mApp);
 
     // TODO:
     mByteArrayViewProfileManager = new ByteArrayViewProfileManager();
@@ -112,34 +144,37 @@ int OktetaProgram::execute()
     mDialogHandler->setWidget( mainWindow );
 
     // started by session management?
-    if( programCore.isSessionRestored() && KMainWindow::canBeRestored(1) )
+    if( mApp.isSessionRestored() && KMainWindow::canBeRestored(1) )
     {
         mainWindow->restore( 1 );
     }
     else
     {
         // no session.. just start up normally
-        KCmdLineArgs* arguments = KCmdLineArgs::parsedArgs();
+        const QStringList urls = parser.positionalArguments();
 
         // take arguments
-        if( arguments->count() > 0 )
+        if( ! urls.isEmpty() )
         {
-            for( int i=0; i<arguments->count(); ++i )
-                mDocumentStrategy->load( arguments->url(i) );
+            const QRegExp withProtocolChecker( QStringLiteral("^[a-zA-Z]+:") );
+            foreach (const QString &url, urls) {
+                const QUrl u = (withProtocolChecker.indexIn(url) == 0) ?
+                    QUrl::fromUserInput( url ) : QUrl::fromLocalFile( url );
+                mDocumentStrategy->load( u );
+            }
         }
 
         mainWindow->show();
 
-        arguments->clear();
     }
 
-    return programCore.exec();
+    return mApp.exec();
 }
 
 
 void OktetaProgram::quit()
 {
-    kapp->quit();
+    qApp->quit();
 }
 
 

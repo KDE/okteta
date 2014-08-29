@@ -27,8 +27,8 @@
 //
 #include <addressrangelist.h>
 #include <arraychangemetricslist.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 
 
 namespace KPieceTable

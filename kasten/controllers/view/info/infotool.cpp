@@ -30,20 +30,20 @@
 #include <bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QApplication>
+#include <QApplication>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 InfoTool::InfoTool()
  : mStatisticTableModel( new StatisticTableModel(mByteCount,this) ),
    mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModelUptodate( false ), mSourceByteArrayModel( 0 )
 {
-    setObjectName( QLatin1String( "Info" ) );
+    setObjectName( QStringLiteral( "Info" ) );
     updateStatistic();
 }
 
@@ -81,15 +81,15 @@ void InfoTool::setTargetModel( AbstractModel* model )
         mStatisticTableModel->setCharCodec( mByteArrayView->charCodingName() );
         mStatisticTableModel->setValueCoding( mByteArrayView->valueCoding() );
         mStatisticTableModel->setUndefinedChar( mByteArrayView->undefinedChar() );
-        connect( mByteArrayView,  SIGNAL(charCodecChanged(QString)),
-                 mStatisticTableModel, SLOT(setCharCodec(QString)) );
-        connect( mByteArrayView,  SIGNAL(valueCodingChanged(int)),
-                 mStatisticTableModel, SLOT(setValueCoding(int)) );
-        connect( mByteArrayView,  SIGNAL(undefinedCharChanged(QChar)),
-                 mStatisticTableModel, SLOT(setUndefinedChar(QChar)) );
+        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
+                 mStatisticTableModel, &StatisticTableModel::setCharCodec );
+        connect( mByteArrayView,  &ByteArrayView::valueCodingChanged,
+                 mStatisticTableModel, &StatisticTableModel::setValueCoding );
+        connect( mByteArrayView,  &ByteArrayView::undefinedCharChanged,
+                 mStatisticTableModel, &StatisticTableModel::setUndefinedChar );
 
-        connect( mByteArrayView,  SIGNAL(selectedDataChanged(const Kasten2::AbstractModelSelection*)),
-                 SLOT(onSelectionChanged()) );
+        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                 this, &InfoTool::onSelectionChanged );
     }
 
     emit statisticDirty( !isStatisticUptodate() );
@@ -137,10 +137,10 @@ void InfoTool::updateStatistic()
     mSourceSelection = selection;
     if( mSourceByteArrayModel )
     {
-        connect( mSourceByteArrayModel,  SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                 SLOT(onSourceChanged()) );
-        connect( mSourceByteArrayModel,  SIGNAL(destroyed()),
-                 SLOT(onSourceDestroyed()) );
+        connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
+                 this, &InfoTool::onSourceChanged );
+        connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
+                 this, &InfoTool::onSourceDestroyed );
     }
 
     mSourceByteArrayModelUptodate = true;

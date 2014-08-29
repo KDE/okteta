@@ -26,11 +26,11 @@
 // lib
 #include <abstractexportjob.h>
 
-class KUrl;
+class QUrl;
 class QFile;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModel;
@@ -48,7 +48,7 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
 
   public:
     AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
-                                 const KUrl& url );
+                                 const QUrl& url );
 
     virtual ~AbstractFileSystemExportJob();
 

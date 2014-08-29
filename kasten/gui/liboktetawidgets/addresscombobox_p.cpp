@@ -23,12 +23,12 @@
 #include "addresscombobox_p.h"
 #include "addresscombobox.h"
 
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QLayout>
-#include <QtGui/QLineEdit>
-#include <QtGui/QAbstractItemView>
+#include <QLayout>
+#include <QLineEdit>
+#include <QAbstractItemView>
 
 
 /*
@@ -72,11 +72,11 @@ void AddressComboBoxPrivate::init()
     q->setFocusProxy( mValueComboBox );
     q->connect( mValueComboBox->lineEdit(), SIGNAL(textEdited(QString)), SLOT(onValueEdited(QString)) );
     QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
-    QObject::connect( formatComboBoxListView, SIGNAL(activated(QModelIndex)),
-             mValueComboBox, SLOT(setFocus()) );
+    QObject::connect( formatComboBoxListView, &QAbstractItemView::activated,
+             mValueComboBox, static_cast<void (KComboBox::*)()>(&KComboBox::setFocus) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
-    QObject::connect( formatComboBoxListView, SIGNAL(pressed(QModelIndex)),
-             mValueComboBox, SLOT(setFocus()) );
+    QObject::connect( formatComboBoxListView, &QAbstractItemView::pressed,
+             mValueComboBox, static_cast<void (KComboBox::*)()>(&KComboBox::setFocus) );
     mValidator = new AddressValidator( mValueComboBox, AddressValidator::HexadecimalCoding );
     const AddressValidator::Coding coding =
         static_cast<AddressValidator::Coding>( mFormatComboBox->currentIndex() );

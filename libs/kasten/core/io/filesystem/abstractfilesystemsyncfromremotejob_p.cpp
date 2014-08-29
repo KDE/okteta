@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2008-2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2008-2009,2014 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -24,28 +24,55 @@
 
 // library
 #include "abstractmodelfilesystemsynchronizer.h"
-// KDE
-#include <KIO/NetAccess>
+// KF5
+#include <KIO/FileCopyJob>
+#include <KJobWidgets>
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QDateTime>
+#include <QUrl>
+#include <QTemporaryFile>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
 {
     Q_Q( AbstractFileSystemSyncFromRemoteJob );
 
-    const KUrl url = mSynchronizer->url();
+    const QUrl url = mSynchronizer->url();
 
-    // TODO: see if this could be used asynchronously instead
-    bool isWorkFileOk = KIO::NetAccess::download( url.url(), mWorkFilePath, 0 );
+    bool isWorkFileOk;
+
+    if( url.isLocalFile() )
+    {
+        // file protocol. We do not need the network
+        mWorkFilePath = url.toLocalFile();
+        isWorkFileOk = true;
+    } else {
+        QTemporaryFile tmpFile;
+        tmpFile.setAutoRemove( false );
+        tmpFile.open();
+
+        mWorkFilePath = tmpFile.fileName();
+        mTempFilePath = mWorkFilePath;
+
+        KIO::FileCopyJob* fileCopyJob =
+            KIO::file_copy( url, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite );
+        KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+
+        isWorkFileOk = fileCopyJob->exec();
+        if( ! isWorkFileOk )
+            q->setErrorText( fileCopyJob->errorString() );
+    }
+
     if( isWorkFileOk )
     {
         mFile = new QFile( mWorkFilePath );
         isWorkFileOk = mFile->open( QIODevice::ReadOnly );
+        if( ! isWorkFileOk )
+            q->setErrorText( mFile->errorString() );
     }
 
     if( isWorkFileOk )
@@ -53,7 +80,6 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
     else
     {
         q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile ? mFile->errorString() : KIO::NetAccess::lastErrorString() );
         delete mFile;
         q->emitResult();
     }
@@ -65,7 +91,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead( bool success )
 
     if( success )
     {
-        const KUrl url = mSynchronizer->url();
+        const QUrl url = mSynchronizer->url();
         const bool isLocalFile = url.isLocalFile();
 
         QFileInfo fileInfo( mWorkFilePath );
@@ -74,7 +100,9 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead( bool success )
     }
 
     delete mFile;
-    KIO::NetAccess::removeTempFile( mWorkFilePath );
+
+    if( ! mTempFilePath.isEmpty() )
+        QFile::remove( mTempFilePath );
 
     q->emitResult();
 }

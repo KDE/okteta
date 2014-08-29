@@ -28,7 +28,7 @@
 #include "abstractviewarea_p.h"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractGroupedViewsPrivate : public AbstractViewAreaPrivate

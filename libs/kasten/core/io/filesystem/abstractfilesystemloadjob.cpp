@@ -22,14 +22,13 @@
 
 #include "abstractfilesystemloadjob.h"
 #include "abstractfilesystemloadjob_p.h"
-#include "abstractfilesystemloadjob.moc"
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractFileSystemLoadJob::AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                                      const KUrl& url )
+                                                      const QUrl& url )
   : AbstractLoadJob( new AbstractFileSystemLoadJobPrivate(this,synchronizer,url) )
 {
 }
@@ -41,7 +40,7 @@ AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::synchronizer() c
     return d->synchronizer();
 }
 
-KUrl AbstractFileSystemLoadJob::url() const
+QUrl AbstractFileSystemLoadJob::url() const
 {
     Q_D( const AbstractFileSystemLoadJob );
 
@@ -75,3 +74,6 @@ AbstractFileSystemLoadJob::~AbstractFileSystemLoadJob()
 }
 
 }
+
+//have to include this because of Q_PRIVATE_SLOT
+#include "moc_abstractfilesystemloadjob.cpp"

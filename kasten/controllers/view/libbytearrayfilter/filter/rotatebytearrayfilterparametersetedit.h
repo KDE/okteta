@@ -26,7 +26,7 @@
 // lib
 #include "abstractbytearrayfilterparametersetedit.h"
 
-class KIntNumInput;
+class QSpinBox;
 
 
 class RotateByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
@@ -49,8 +49,8 @@ class RotateByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPara
     void onValueChanged( int value );
 
   protected:
-    KIntNumInput* mGroupSizeEdit;
-    KIntNumInput* mMoveBitWidthEdit;
+    QSpinBox* mGroupSizeEdit;
+    QSpinBox* mMoveBitWidthEdit;
 };
 
 #endif

@@ -27,7 +27,7 @@
 #include <QtCore/QEvent>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractLinePopup::AbstractLinePopup( QWidget* parent )
@@ -42,7 +42,7 @@ void AbstractLinePopup::setPosition( const QPoint& globalPosition )
 {
     d->setPosition( globalPosition );
 }
-void AbstractLinePopup::setIcon( const KIcon& icon )
+void AbstractLinePopup::setIcon( const QIcon& icon )
 {
     d->setIcon( icon );
 }

@@ -25,8 +25,8 @@
 // tool
 #include "../types/utf8.h"
 #include "../poddata.h"
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QTextCodec>
 

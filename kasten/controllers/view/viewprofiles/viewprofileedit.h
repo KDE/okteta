@@ -24,17 +24,17 @@
 #define VIEWPROFILEEDIT_H
 
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
-// KDE
+// KF5
 class KLineEdit;
 class KComboBox;
-class KIntNumInput;
 // Qt
 class QCheckBox;
+class QSpinBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ByteArrayViewProfile;
 
@@ -69,8 +69,8 @@ protected: // display
     KComboBox* mDisplayModeComboBox;
 protected: // layout
     KComboBox* mLineBreakComboBox;
-    KIntNumInput* mGroupedBytesCountEdit;
-    KIntNumInput* mBytesPerLineEdit;
+    QSpinBox* mGroupedBytesCountEdit;
+    QSpinBox* mBytesPerLineEdit;
 protected: // value
     KComboBox* mValueCodingComboBox;
 protected: // char

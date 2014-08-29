@@ -28,7 +28,7 @@
 #include <abstracttool.h>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ToolViewDockWidget::ToolViewDockWidget( AbstractToolView* toolView, QWidget* parent )

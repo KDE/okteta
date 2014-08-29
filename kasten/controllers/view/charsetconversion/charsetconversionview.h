@@ -26,15 +26,15 @@
 // Okteta core
 #include <byte.h>
 // Qt
-#include <QtGui/QWidget>
+#include <QWidget>
 
 namespace Okteta { class ByteArrayComboBox; }
 class KComboBox;
-class KPushButton;
+class QPushButton;
 class QCheckBox;
 template <class Key, class T> class QMap;
 
-namespace Kasten2
+namespace Kasten
 {
 
 class CharsetConversionTool;
@@ -67,7 +67,7 @@ class CharsetConversionView : public QWidget
     KComboBox* mOtherCharSetComboBox;
     QCheckBox* mSubstituteMissingCharCheckBox;
     Okteta::ByteArrayComboBox* mSubstituteByteEdit;
-    KPushButton* mConvertButton;
+    QPushButton* mConvertButton;
 };
 
 

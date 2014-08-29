@@ -36,6 +36,8 @@ class OktetaWidgetDesignerFactoryCollection : public QObject,
     QDesignerCustomWidgetCollectionInterface
   )
 
+  Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QDesignerCustomWidgetInterface")
+
   public:
     explicit OktetaWidgetDesignerFactoryCollection( QObject* parent = 0 );
 

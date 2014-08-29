@@ -21,11 +21,13 @@
  */
 #include "sintdatainformation.h"
 #include "../poddecoder/typeeditors/sintspinbox.h"
+#include "../../structlogging.h"
 
+// KF5
+#include <KLocalizedString>
+// Qt
 #include <QScriptValue>
-#include <KGlobal>
-#include <KLocale>
-#include <KDebug>
+#include <QLocale>
 
 template<typename T>
 QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
@@ -33,10 +35,9 @@ QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
     QString num;
     if (base == 10)
     {
-        num = QString::number(val, base);
-        if (Kasten2::StructViewPreferences::localeAwareDecimalFormatting())
-            num = KGlobal::locale()->formatNumber(num, false, 0);
-        return num;
+        return Kasten::StructViewPreferences::localeAwareDecimalFormatting()
+            ? QLocale().toString(val)
+            : QString::number(val, base);
     }
     //the absolute value of negative minimum can not be represented as a signed integer
     //casting it to an unsigned value yields the correct result
@@ -79,7 +80,7 @@ QScriptValue SIntDataInformationMethods<qint64>::asScriptValue(qint64 value, QSc
 template<typename T>
 inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox(parent, Kasten2::StructViewPreferences::signedDisplayBase());
+    SIntSpinBox* ret = new SIntSpinBox(parent, Kasten::StructViewPreferences::signedDisplayBase());
     ret->setRange(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
     return ret;
 }
@@ -87,19 +88,19 @@ inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* p
 template<typename T>
 inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
-    const SIntSpinBox* spin = dynamic_cast<const SIntSpinBox*>(w);
+    const SIntSpinBox* spin = qobject_cast<const SIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin)
         return spin->value();
 
-    kWarning() << "could not cast widget";
+    qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast widget";
     return QVariant();
 }
 
 template<typename T>
 inline void SIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
-    SIntSpinBox* spin = dynamic_cast<SIntSpinBox*>(w);
+    SIntSpinBox* spin = qobject_cast<SIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin)
         spin->setValue(value);

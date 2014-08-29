@@ -37,7 +37,7 @@ class QActionGroup;
 class QAction;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class ByteArrayViewProfileManager;
 class ByteArrayViewProfileSynchronizer;
@@ -57,8 +57,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileController : public AbstractXmlG
     virtual void setTargetModel( AbstractModel* model );
 
   private Q_SLOTS: // update slots
-    void onViewProfileChanged( const Kasten2::ByteArrayViewProfile::Id& viewProfileId );
-    void onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState );
+    void onViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
+    void onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState );
 
     void onViewProfilesChanged();
 

@@ -28,12 +28,12 @@ ParsedNumber<int> ParserUtils::intFromString(const QString& str)
 {
     int value = 0;
     bool okay = false;
-    if (str.startsWith(QLatin1String("0x")))
+    if (str.startsWith(QStringLiteral("0x")))
         value = str.mid(2).toInt(&okay, 16);
-    else if (str.startsWith(QLatin1String("-0x")))
+    else if (str.startsWith(QStringLiteral("-0x")))
     {
         //special case for minimum possible value
-        if (str == QLatin1String("-0x80000000"))
+        if (str == QStringLiteral("-0x80000000"))
             return ParsedNumber<int>(-0x80000000, str, true);
         value = -str.mid(3).toInt(&okay, 16);
     }
@@ -46,7 +46,7 @@ ParsedNumber<uint> ParserUtils::uintFromString(const QString& str)
 {
     uint value = 0;
     bool okay;
-    if (str.startsWith(QLatin1String("0x")))
+    if (str.startsWith(QStringLiteral("0x")))
         value = str.mid(2).toUInt(&okay, 16);
     else
         value = str.toUInt(&okay, 10);
@@ -57,7 +57,7 @@ ParsedNumber<quint64> ParserUtils::uint64FromString(const QString& str)
 {
     quint64 value = 0;
     bool okay;
-    if (str.startsWith(QLatin1String("0x")))
+    if (str.startsWith(QStringLiteral("0x")))
         value = str.mid(2).toULongLong(&okay, 16);
     else
         value = str.toULongLong(&okay, 10);
@@ -68,13 +68,13 @@ DataInformation::DataInformationEndianess ParserUtils::byteOrderFromString(const
         const LoggerWithContext& logger)
 {
     const QString lower = string.toLower();
-    if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))
+    if (lower == QStringLiteral("bigendian") || lower == QStringLiteral("big-endian"))
         return DataInformation::EndianessBig;
-    else if (lower == QLatin1String("littleendian") || lower == QLatin1String("little-endian"))
+    else if (lower == QStringLiteral("littleendian") || lower == QStringLiteral("little-endian"))
         return DataInformation::EndianessLittle;
-    else if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings"))
+    else if (lower == QStringLiteral("fromsettings") || lower == QStringLiteral("from-settings"))
         return DataInformation::EndianessFromSettings;
-    else if (lower == QLatin1String("inherit"))
+    else if (lower == QStringLiteral("inherit"))
         return DataInformation::EndianessInherit;
     else
     {
@@ -137,42 +137,42 @@ ParsedNumber<quint64> ParserUtils::uint64FromScriptValue(const QScriptValue& val
 QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianess order)
 {
     if (order == DataInformation::EndianessLittle)
-        return QLatin1String("littleEndian");
+        return QStringLiteral("littleEndian");
     if (order == DataInformation::EndianessBig)
-        return QLatin1String("bigEndian");
+        return QStringLiteral("bigEndian");
     if (order == DataInformation::EndianessFromSettings)
-        return QLatin1String("fromSettings");
-    return QLatin1String("inherit");
+        return QStringLiteral("fromSettings");
+    return QStringLiteral("inherit");
 }
 
 StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& str, const LoggerWithContext& logger)
 {
     QString enc = str.toLower();
-    if (enc == QLatin1String("ascii"))
+    if (enc == QStringLiteral("ascii"))
         return StringDataInformation::ASCII;
-    else if (enc == QLatin1String("latin1") || enc == QLatin1String("latin-1"))
+    else if (enc == QStringLiteral("latin1") || enc == QStringLiteral("latin-1"))
         return StringDataInformation::Latin1;
-    else if (enc.startsWith(QLatin1String("utf")))
+    else if (enc.startsWith(QStringLiteral("utf")))
     {
         QStringRef ref = enc.midRef(3);
         if (ref.at(0) == QLatin1Char('-'))
             ref = enc.midRef(4); //strip '-'
-        if (ref == QLatin1String("8"))
+        if (ref == QStringLiteral("8"))
             return StringDataInformation::UTF8;
 
-        if (ref == QLatin1String("16") || ref == QLatin1String("16le") || ref == QLatin1String("16-le"))
+        if (ref == QStringLiteral("16") || ref == QStringLiteral("16le") || ref == QStringLiteral("16-le"))
         {
             return StringDataInformation::UTF16_LE;
         }
-        if (ref == QLatin1String("16be") || ref == QLatin1String("16-be"))
+        if (ref == QStringLiteral("16be") || ref == QStringLiteral("16-be"))
         {
             return StringDataInformation::UTF16_BE;
         }
-        if (ref == QLatin1String("32") || ref == QLatin1String("32le") || ref == QLatin1String("32-le"))
+        if (ref == QStringLiteral("32") || ref == QStringLiteral("32le") || ref == QStringLiteral("32-le"))
         {
             return StringDataInformation::UTF32_LE;
         }
-        if (ref == QLatin1String("32be") || ref == QLatin1String("32-be"))
+        if (ref == QStringLiteral("32be") || ref == QStringLiteral("32-be"))
         {
             return StringDataInformation::UTF32_BE;
         }

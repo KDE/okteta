@@ -23,11 +23,11 @@
 #include "abstracttoolwidget_p.h"
 
 // Qt
-#include <QtGui/QPushButton>
-#include <QtGui/QShortcut>
+#include <QPushButton>
+#include <QShortcut>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractToolWidgetPrivate::AbstractToolWidgetPrivate( AbstractToolWidget* parent )

@@ -26,36 +26,37 @@
 #include "replacetool.h"
 //  lib
 #include <bytearraycombobox.h>
-// KDE
-#include <KGlobal>
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
-#include <QtGui/QCheckBox>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLayout>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QLayout>
+#include <QtWidgets/QPushButton>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
   : KAbstractFindDialog( parent ),
     mTool( tool )
 {
-    setCaption( i18nc("@title:window","Replace Bytes") );
-    setButtonGuiItem( Ok, KGuiItem( i18nc("@action;button", "&Replace"),
-                      QLatin1String("edit-find-replace"),
-                      i18nc("@info:tooltip","Start replace"),
-                      i18nc("@info:whatsthis",
-                            "If you press the <interface>Replace</interface> button, "
-                            "the bytes you entered above are searched for within "
-                            "the byte array and any occurrence is replaced with "
-                            "the replacement bytes.")) );
+    setWindowTitle( i18nc("@title:window","Replace Bytes") );
+
+    setFindButton( i18nc("@action;button", "&Replace"),
+                   QStringLiteral("edit-find-replace"),
+                   i18nc("@info:tooltip","Start replace"),
+                   xi18nc("@info:whatsthis",
+                          "If you press the <interface>Replace</interface> button, "
+                          "the bytes you entered above are searched for within "
+                          "the byte array and any occurrence is replaced with "
+                          "the replacement bytes.") );
 
     setupFindBox();
 
     // replace term
-    QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace With"), mainWidget() );
+    QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace With") );
 
     QVBoxLayout *ReplaceBoxLayout = new QVBoxLayout;
 
@@ -76,7 +77,7 @@ KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
 
     setupCheckBoxes( PromptCheckBox );
 
-    enableButtonOk( false );
+    setFindButtonEnabled( false );
     setModal( true );
 }
 
@@ -98,23 +99,18 @@ void KReplaceDialog::setCharCodec( const QString &codecName )
 }
 
 
-void KReplaceDialog::slotButtonClicked( int button )
+void KReplaceDialog::onFindButtonClicked()
 {
-    if( button != KDialog::Ok )
-        KAbstractFindDialog::slotButtonClicked( button );
-    else
-    {
-        hide();
+    hide();
 
-        rememberCurrentSettings();
+    rememberCurrentSettings();
 
-        mTool->setSearchData( data() );
-        mTool->setReplaceData( replaceData() );
-        mTool->setCaseSensitivity( caseSensitivity() );
-        mTool->setDoPrompt( prompt() );
+    mTool->setSearchData( data() );
+    mTool->setReplaceData( replaceData() );
+    mTool->setCaseSensitivity( caseSensitivity() );
+    mTool->setDoPrompt( prompt() );
 
-        mTool->replace( direction(), fromCursor(), inSelection() );
-    }
+    mTool->replace( direction(), fromCursor(), inSelection() );
 }
 
 void KReplaceDialog::showEvent( QShowEvent* showEvent )

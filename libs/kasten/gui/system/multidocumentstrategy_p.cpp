@@ -33,12 +33,13 @@
 #include <abstractmodeldatagenerator.h>
 #include <abstractmodel.h>
 // Qt
-#include <QtGui/QClipboard>
-#include <QtGui/QApplication>
-#include <QtCore/QMimeData>
+#include <QClipboard>
+#include <QApplication>
+#include <QMimeData>
+#include <QUrl>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 void MultiDocumentStrategyPrivate::init()
@@ -46,12 +47,12 @@ void MultiDocumentStrategyPrivate::init()
     Q_Q( MultiDocumentStrategy );
 
     // setup
-    QObject::connect( mDocumentManager, SIGNAL(added(QList<Kasten2::AbstractDocument*>)),
-                      mViewManager, SLOT(createViewsFor(QList<Kasten2::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager, SIGNAL(closing(QList<Kasten2::AbstractDocument*>)),
-                      mViewManager, SLOT(removeViewsFor(QList<Kasten2::AbstractDocument*>)) );
-    QObject::connect( mDocumentManager->syncManager(), SIGNAL(urlUsed(KUrl)),
-                      q, SIGNAL(urlUsed(KUrl)) );
+    QObject::connect( mDocumentManager, &DocumentManager::added,
+                      mViewManager, &ViewManager::createViewsFor );
+    QObject::connect( mDocumentManager, &DocumentManager::closing,
+                      mViewManager, &ViewManager::removeViewsFor );
+    QObject::connect( mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
+                      q, &MultiDocumentStrategy::urlUsed );
 }
 
 void MultiDocumentStrategyPrivate::createNewFromClipboard()

@@ -32,7 +32,7 @@
 class QIODevice;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class AbstractModel;

@@ -24,8 +24,8 @@
 
 // Okteta core
 #include <piecetablebytearraymodel.h>
-// KDE
-#include <KLocale>
+// KF5
+#include <KLocalizedString>
 // Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QFile>
@@ -33,7 +33,7 @@
 #include <limits>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject* parent, QFile* file )

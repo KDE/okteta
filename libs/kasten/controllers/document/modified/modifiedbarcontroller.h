@@ -33,7 +33,7 @@
 class QLabel;
 
 
-namespace Kasten2
+namespace Kasten
 {
 class AbstractModelSynchronizer;
 class AbstractDocument;
@@ -51,10 +51,10 @@ class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiCont
     virtual void setTargetModel( AbstractModel* model );
 
   private Q_SLOTS:
-    void onContentFlagsChanged( Kasten2::ContentFlags contentFlags );
-    void onLocalSyncStateChanged( Kasten2::LocalSyncState localSyncState );
-    void onRemoteSyncStateChanged( Kasten2::RemoteSyncState remoteSyncState );
-    void onSynchronizerChanged( Kasten2::AbstractModelSynchronizer* newSynchronizer );
+    void onContentFlagsChanged( Kasten::ContentFlags contentFlags );
+    void onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState );
+    void onRemoteSyncStateChanged( Kasten::RemoteSyncState remoteSyncState );
+    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
     void onSynchronizerDeleted( QObject* synchronizer );
 
   private:

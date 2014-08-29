@@ -27,7 +27,7 @@
 #include <Qt>
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 AbstractViewArea::AbstractViewArea()

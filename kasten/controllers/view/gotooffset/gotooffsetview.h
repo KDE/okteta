@@ -30,12 +30,12 @@ namespace Okteta {
 class AddressComboBox;
 }
 
-class KPushButton;
+class QPushButton;
 
 class QCheckBox;
 
 
-namespace Kasten2
+namespace Kasten
 {
 
 class GotoOffsetTool;
@@ -64,7 +64,7 @@ class GotoOffsetView : public AbstractToolWidget
     GotoOffsetTool* mTool;
 
     Okteta::AddressComboBox* mAddressEdit;
-    KPushButton* mGotoButton;
+    QPushButton* mGotoButton;
     QCheckBox* mAtCursorCheckBox;
     QCheckBox* mExtendSelectionCheckBox;
     QCheckBox* mBackwardsCheckBox;

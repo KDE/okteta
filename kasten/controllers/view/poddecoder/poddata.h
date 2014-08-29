@@ -26,6 +26,7 @@
 // Okteta core
 #include <byte.h>
 #include <oktetacore.h>
+#include <QSysInfo>
 
 
 namespace Okteta
@@ -40,14 +41,14 @@ class PODData
     PODData();
 
   public:
-    void setByteOrder( ByteOrder byteOrder );
+    void setByteOrder( QSysInfo::Endian byteOrder );
     bool updateRawData( int size );
     Byte* rawData();
 
   public:
     const Byte* originalData() const;
     const Byte* byteOrderSetData() const;
-    ByteOrder byteOrder() const;
+    QSysInfo::Endian byteOrder() const;
 
     unsigned long bitValue( int noOfBitsToRead ) const;
     void getPointers( const void** P8Bit, const void** P16Bit, const void** P32Bit, const void** P64Bit ) const;
@@ -70,7 +71,7 @@ class PODData
     Aligned64Bit mByteOrderSetAligned64Bit;
 
     int mCurrentSize;
-    ByteOrder mByteOrder;
+    QSysInfo::Endian mByteOrder;
 };
 
 }
