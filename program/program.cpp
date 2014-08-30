@@ -99,7 +99,7 @@ int OktetaProgram::execute()
     KDBusService programDBusService;
 
     QCommandLineParser parser;
-    parser.setApplicationDescription( aboutData.shortDescription() );
+    aboutData.setupCommandLine(&parser);
     parser.addHelpOption();
     parser.addVersionOption();
 
@@ -111,6 +111,8 @@ int OktetaProgram::execute()
 //     programOptions.add( OffsetOptionId, ki18n("Offset to set the cursor to"), 0 );
 
     parser.process(mApp);
+
+    aboutData.processCommandLine(&parser);
 
     // TODO:
     mByteArrayViewProfileManager = new ByteArrayViewProfileManager();
