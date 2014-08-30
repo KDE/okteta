@@ -91,11 +91,6 @@ int OktetaProgram::execute()
     OktetaAboutData aboutData;
     KAboutData::setApplicationData( aboutData );
 
-    mApp.setApplicationName( aboutData.componentName() );
-    mApp.setApplicationDisplayName( aboutData.displayName() );
-    mApp.setOrganizationDomain( aboutData.organizationDomain() );
-    mApp.setApplicationVersion( aboutData.version() );
-
     KDBusService programDBusService;
 
     QCommandLineParser parser;
