@@ -62,7 +62,7 @@ target_link_libraries( okteta
 install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
-install( PROGRAMS okteta.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( PROGRAMS org.kde.okteta.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES oktetaui.rc  DESTINATION ${KXMLGUI_INSTALL_DIR}/okteta )
 
 ecm_install_icons(
