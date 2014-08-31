@@ -105,7 +105,7 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
 
     mShowOffsetColumnAction = actionCollection->add<KToggleAction>( QStringLiteral("view_lineoffset") );
     mShowOffsetColumnAction->setText( i18nc("@option:check","Show &Line Offset") );
-    mShowOffsetColumnAction->setShortcut( Qt::Key_F11 );
+    actionCollection->setDefaultShortcut( mShowOffsetColumnAction, Qt::Key_F11 );
     connect( mShowOffsetColumnAction, &KToggleAction::triggered, this, &ViewConfigController::toggleOffsetColumn );
 
     // show buffer columns

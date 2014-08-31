@@ -51,7 +51,7 @@ SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, 
                                                  this, SLOT(reload()) );
     mReloadAction->setText( i18nc("@title:menu","Reloa&d") );
     mReloadAction->setIcon( QIcon::fromTheme( QStringLiteral("view-refresh") ) );
-    mReloadAction->setShortcuts( KStandardShortcut::reload() );
+    actionCollection->setDefaultShortcuts( mReloadAction, KStandardShortcut::reload() );
 
     setTargetModel( 0 );
 }

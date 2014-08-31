@@ -61,7 +61,7 @@ CreatorController::CreatorController( ModelCodecManager* modelCodecManager,
     KActionMenu* newMenuAction = actionCollection->add<KActionMenu>( QStringLiteral("file_new"), this, SLOT(onNewActionTriggered()) );
     newMenuAction->setText( i18nc("@title:menu create new byte arrays from different sources", "New" ) );
     newMenuAction->setIcon( QIcon::fromTheme( QStringLiteral("document-new") ) );
-    newMenuAction->setShortcuts( KStandardShortcut::openNew() );
+    actionCollection->setDefaultShortcuts( newMenuAction, KStandardShortcut::openNew() );
 
     QAction* newEmptyDocumentAction =
         new QAction( QIcon::fromTheme( QStringLiteral("document-new") ), i18nc("@title:menu create a new empty document", "Empty" ), this );

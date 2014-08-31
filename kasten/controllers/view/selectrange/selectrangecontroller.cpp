@@ -49,7 +49,7 @@ SelectRangeController::SelectRangeController( If::ToolInlineViewable* toolInline
                                                  this, SLOT(select()) );
     mSelectAction->setText( i18nc("@action:inmenu","&Select range...") );
     mSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("select-rectangular") ) );
-    mSelectAction->setShortcut( Qt::CTRL + Qt::Key_E );
+    actionCollection->setDefaultShortcut( mSelectAction, Qt::CTRL + Qt::Key_E );
 
     mTool = new SelectRangeTool();
     connect( mTool, &SelectRangeTool::isUsableChanged,
