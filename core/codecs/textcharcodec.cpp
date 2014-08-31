@@ -52,6 +52,7 @@ const encodingDataList[] =
     { ISO8859_8Encoding, "ISO-8859-8" },
     { ISO8859_8_IEncoding, "ISO-8859-8-I" },
     { ISO8859_9Encoding, "ISO-8859-9" },
+    { ISO8859_10Encoding, "ISO-8859-10" },
     { ISO8859_11Encoding, "TIS-620" }, // was: ISO-8859-11
     { ISO8859_13Encoding, "ISO-8859-13" },
     { ISO8859_14Encoding, "ISO-8859-14" },
