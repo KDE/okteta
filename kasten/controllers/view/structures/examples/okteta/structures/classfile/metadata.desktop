@@ -5,7 +5,23 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Java .class file format
+Name[es]=Formato de archivo .class de Java
+Name[hu]=Java .class fájlformátum
+Name[nl]=Bestandsformaat van Java .class
+Name[pt]=Formato de ficheiro .class do Java
+Name[sk]=Formát súborov Java .class
+Name[sv]=Java .class-filformat
+Name[uk]=Формат файлів .class Java
+Name[x-test]=xxJava .class file formatxx
 Comment=still very incomplete!!!
+Comment[es]=Todavía bastante incompleto
+Comment[hu]=még mindig nagyon hiányos!!!
+Comment[nl]=nog steeds erg onvolledig!!!
+Comment[pt]=ainda muito incompleto!!!
+Comment[sk]=stále veľmi nekompletné!!!
+Comment[sv]=Fortfarande mycket ofullständigt!
+Comment[uk]=Все ще доволі неповний!
+Comment[x-test]=xxstill very incomplete!!!xx
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
