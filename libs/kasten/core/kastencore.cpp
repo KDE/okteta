@@ -22,16 +22,4 @@
 
 #include "kastencore.h"
 
-// KF5
-#include <KLocalizedString>
-
-
 Q_LOGGING_CATEGORY(LOG_KASTEN_CORE, "kasten.core")
-
-namespace Kasten
-{
-
-// FIXME: Replace with ki18n functionality once semantics is clear.
-//static int dummy = (KLocalizedString::insertCatalog( QStringLiteral("libkasten") ), 0);
-
-}

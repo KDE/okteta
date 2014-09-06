@@ -1,5 +1,7 @@
 project( oktetacore )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"liboktetacore\")
+
 set( libcontroller_SRCS
   controller/kchareditor.cpp
   controller/kcontroller.cpp

@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="oktetapartreadwrite" version="2">
+<kpartgui name="oktetapartreadwrite" version="2" translationDomain="oktetapart">
 
 <MenuBar>
   <Menu name="file">

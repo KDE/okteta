@@ -2,6 +2,8 @@ set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
 set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
+
 include_directories(
   ../gui
   ../gui/view
@@ -339,7 +341,7 @@ set( STRUCTVIEW_OTHER_SRCS
 )
 
 kconfig_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structviewpreferences.kcfgc )
-qt5_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
+ki18n_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp

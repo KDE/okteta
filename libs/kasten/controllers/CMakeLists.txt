@@ -1,5 +1,7 @@
 project( kastencontrollers )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
+
 include_directories(
   ../core
   ../core/entity

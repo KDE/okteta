@@ -1,5 +1,7 @@
 project( kastencore )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
+
 include_directories(
   entity
   document

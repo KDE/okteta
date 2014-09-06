@@ -1,5 +1,7 @@
 project( oktetagui )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"liboktetagui\")
+
 include_directories(
   ../core
   ../gui/libcolumnsview

@@ -7,3 +7,5 @@ Mutators=true
 ItemAccessors=false
 SetUserTexts=true
 UseEnumTypes=true
+TranslationSystem=kde
+TranslationDomain=liboktetakasten

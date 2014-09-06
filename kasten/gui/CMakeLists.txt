@@ -1,6 +1,8 @@
 set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
+
 include_directories(
   system
   io
