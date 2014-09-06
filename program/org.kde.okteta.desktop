@@ -97,5 +97,5 @@ Terminal=false
 X-KDE-StartupNotify=true
 X-DBUS-StartupType=Multi
 X-DBUS-ServiceName=org.kde.okteta
+DBusActivatable=true
 Categories=Qt;KDE;Utility;X-KDE-Utilities-File;
-
