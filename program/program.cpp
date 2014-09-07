@@ -75,6 +75,8 @@ OktetaProgram::OktetaProgram( int &argc, char* argv[] )
         QT_UNICODE_LITERAL("kasten.okteta.gui = true\n")
         QT_UNICODE_LITERAL("kasten.okteta.controllers.structures.debug = true\n")));
 #endif
+
+    KLocalizedString::setApplicationDomain( "okteta" );
 }
 
 
@@ -84,9 +86,6 @@ int OktetaProgram::execute()
     mViewManager = new ViewManager();
     mDocumentStrategy = new MultiDocumentStrategy( mDocumentManager, mViewManager );
     mDialogHandler = new DialogHandler();
-
-    // TODO: not best position, some of the manager classes might use i18n before
-    KLocalizedString::setApplicationDomain( "okteta" );
 
     OktetaAboutData aboutData;
     KAboutData::setApplicationData( aboutData );
