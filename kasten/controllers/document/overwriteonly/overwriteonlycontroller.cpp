@@ -40,7 +40,7 @@ OverwriteOnlyController::OverwriteOnlyController( KXMLGUIClient* guiClient )
     KActionCollection *actionCollection = guiClient->actionCollection();
 
     mSetOverwriteOnlyAction = actionCollection->add<KToggleAction>( "isoverwriteonly" );
-    mSetOverwriteOnlyAction->setText( i18nc("@action:inmenu","Overwrite only") );
+    mSetOverwriteOnlyAction->setText( i18nc("@option:check","Overwrite only") );
     connect( mSetOverwriteOnlyAction, SIGNAL(triggered(bool)), SLOT(setOverwriteOnly(bool)) );
 
     setTargetModel( 0 );
