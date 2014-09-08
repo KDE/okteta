@@ -5,6 +5,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Java .class file format
+Name[en_GB]=Java .class file format
 Name[es]=Formato de archivo .class de Java
 Name[hu]=Java .class fájlformátum
 Name[nl]=Bestandsformaat van Java .class
@@ -20,6 +21,7 @@ Name[sv]=Java .class-filformat
 Name[uk]=Формат файлів .class Java
 Name[x-test]=xxJava .class file formatxx
 Comment=still very incomplete!!!
+Comment[en_GB]=still very incomplete!!!
 Comment[es]=Todavía bastante incompleto
 Comment[hu]=még mindig nagyon hiányos!!!
 Comment[nl]=nog steeds erg onvolledig!!!
