@@ -21,6 +21,7 @@ Name[sr@latin]=Format javanskog .class fajla
 Name[sv]=Java .class-filformat
 Name[uk]=Формат файлів .class Java
 Name[x-test]=xxJava .class file formatxx
+Name[zh_TW]=Java .class 檔案格式
 Comment=still very incomplete!!!
 Comment[ca]=Encara està molt incomplet!
 Comment[en_GB]=still very incomplete!!!
@@ -38,6 +39,7 @@ Comment[sr@latin]=Još uvek vrlo nepotpuno!
 Comment[sv]=Fortfarande mycket ofullständigt!
 Comment[uk]=Все ще доволі неповний!
 Comment[x-test]=xxstill very incomplete!!!xx
+Comment[zh_TW]=仍然不完整！
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
