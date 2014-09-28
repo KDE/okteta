@@ -31,7 +31,7 @@
 #include <QSpinBox>
 
 
-const char* const RotateByteArrayFilterParameterSetEdit::Id = "Rotate";
+const char RotateByteArrayFilterParameterSetEdit::Id[] = "Rotate";
 
 
 RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QWidget* parent )

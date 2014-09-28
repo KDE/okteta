@@ -34,7 +34,7 @@ class ReverseByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
   Q_OBJECT
 
   public:
-    static const char* const Id;
+    static const char Id[];
 
   public:
     explicit ReverseByteArrayFilterParameterSetEdit( QWidget* parent = 0 );

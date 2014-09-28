@@ -25,7 +25,7 @@
 #include <KLocalizedString>
 #include <QDebug>
 
-static const char* longTypeNames[Type_END + 1] =
+static const char* const longTypeNames[Type_END + 1] =
         {
                 I18N_NOOP2("data type", "bool (1 byte)"),
                 I18N_NOOP2("data type", "signed byte"),
@@ -45,7 +45,7 @@ static const char* longTypeNames[Type_END + 1] =
                 I18N_NOOP2("data type", "bitfield"),
         };
 
-static const char* typeNames[Type_END + 1] =
+static const char* const typeNames[Type_END + 1] =
         {
                 "bool8",
                 "int8",

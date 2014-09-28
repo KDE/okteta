@@ -31,7 +31,7 @@
 #include <QFormLayout>
 
 
-const char* const ReverseByteArrayFilterParameterSetEdit::Id = "Reverse";
+const char ReverseByteArrayFilterParameterSetEdit::Id[] = "Reverse";
 
 
 ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit( QWidget* parent )

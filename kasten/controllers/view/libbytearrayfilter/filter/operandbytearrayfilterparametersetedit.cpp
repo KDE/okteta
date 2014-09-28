@@ -33,7 +33,7 @@
 #include <QFormLayout>
 
 
-const char* const OperandByteArrayFilterParameterSetEdit::Id = "Operand";
+const char OperandByteArrayFilterParameterSetEdit::Id[] = "Operand";
 
 
 OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( QWidget* parent )

@@ -23,7 +23,7 @@
 #include "nobytearrayfilterparametersetedit.h"
 
 
-const char* const NoByteArrayFilterParameterSetEdit::Id = "None";
+const char NoByteArrayFilterParameterSetEdit::Id[] = "None";
 
 
 NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit( QWidget* parent )

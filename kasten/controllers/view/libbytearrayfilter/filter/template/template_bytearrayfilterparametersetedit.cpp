@@ -31,7 +31,7 @@
 //// ADAPT(start)
 //// rename "Template_ParameterSetId" to the id of your parameterset,
 //// e.g. "MyParameterSet"
-const char* const Template_ByteArrayFilterParameterSetEdit::Id = "Template_ParameterSetId";
+const char Template_ByteArrayFilterParameterSetEdit::Id[] = "Template_ParameterSetId";
 //// ADAPT(end)
 
 

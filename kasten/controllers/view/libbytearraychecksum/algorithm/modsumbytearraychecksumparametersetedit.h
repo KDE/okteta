@@ -34,7 +34,7 @@ class ModSumByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksum
   Q_OBJECT
 
   public:
-    static const char* const Id;
+    static const char Id[];
 
   public:
     ModSumByteArrayChecksumParameterSetEdit( QWidget* parent = 0 );

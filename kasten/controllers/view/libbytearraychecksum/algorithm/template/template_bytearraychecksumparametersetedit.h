@@ -31,7 +31,7 @@ class Template_ByteArrayChecksumParameterSetEdit : public AbstractByteArrayCheck
   Q_OBJECT
 
   public:
-    static const char* const Id;
+    static const char Id[];
 
   public:
     Template_ByteArrayChecksumParameterSetEdit( QWidget* parent = 0 );

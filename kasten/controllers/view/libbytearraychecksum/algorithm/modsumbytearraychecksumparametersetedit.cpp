@@ -31,7 +31,7 @@
 #include <QFormLayout>
 
 
-const char* const ModSumByteArrayChecksumParameterSetEdit::Id = "ModSum";
+const char ModSumByteArrayChecksumParameterSetEdit::Id[] = "ModSum";
 
 
 ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit( QWidget* parent )
