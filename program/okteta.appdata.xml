@@ -4,10 +4,12 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>Okteta</name>
+  <name xml:lang="ca">Okteta</name>
   <name xml:lang="de">Okteta</name>
   <name xml:lang="es">Okteta</name>
   <name xml:lang="fi">Okteta</name>
   <name xml:lang="ko">Okteta</name>
+  <name xml:lang="nl">Okteta</name>
   <name xml:lang="pl">Okteta</name>
   <name xml:lang="pt">Okteta</name>
   <name xml:lang="pt-BR">Okteta</name>
@@ -20,10 +22,12 @@
   <name xml:lang="uk">Okteta</name>
   <name xml:lang="x-test">xxOktetaxx</name>
   <summary>Hex editor</summary>
+  <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="de">Hex-Editor</summary>
   <summary xml:lang="es">Editor hexadecimal</summary>
   <summary xml:lang="fi">Heksaeditori</summary>
   <summary xml:lang="ko">16진수 편집기</summary>
+  <summary xml:lang="nl">Hexbewerker</summary>
   <summary xml:lang="pl">Edytor szesnastkowy</summary>
   <summary xml:lang="pt">Editor hexadecimal</summary>
   <summary xml:lang="pt-BR">Editor hexadecimal</summary>
@@ -37,10 +41,12 @@
   <summary xml:lang="x-test">xxHex editorxx</summary>
   <description>
     <p>Okteta is a simple editor for the raw data of files.</p>
+    <p xml:lang="ca">L'Okteta és un editor senzill per les dades de fitxers.</p>
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
     <p xml:lang="es">Okteta es un sencillo editor de archivos de datos en bruto.</p>
     <p xml:lang="fi">Okteta on yksinkertainen editori tiedostojen raakadatalle.</p>
     <p xml:lang="ko">Okteta는 파일 데이터를 직접 편집할 수 있는 편집기입니다.</p>
+    <p xml:lang="nl">Okteta is een eenvoudige bewerker voor de ruwe gegevens van bestanden.</p>
     <p xml:lang="pl">Okteta to prosty edytor do przeglądania nieprzetworzonych danych plików.</p>
     <p xml:lang="pt">O Okteta é um editor simples para os dados em bruto dos ficheiros.</p>
     <p xml:lang="pt-BR">Okteta é um editor simples para os dados brutos dos arquivos.</p>
@@ -53,9 +59,11 @@
     <p xml:lang="uk">Okteta — простий редактор для безпосереднього редагування даних файлів.</p>
     <p xml:lang="x-test">xxOkteta is a simple editor for the raw data of files.xx</p>
     <p>Features:</p>
+    <p xml:lang="ca">Característiques:</p>
     <p xml:lang="es">Funciones:</p>
     <p xml:lang="fi">Ominaisuudet:</p>
     <p xml:lang="ko">기능:</p>
+    <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="pl">Możliwości:</p>
     <p xml:lang="pt">Características:</p>
     <p xml:lang="pt-BR">Funcionalidades:</p>
@@ -69,9 +77,11 @@
     <p xml:lang="x-test">xxFeatures:xx</p>
     <ul>
       <li>Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
+      <li xml:lang="ca">Els valors i el caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
       <li xml:lang="es">Muestra valores y caracteres en dos columnas (la vista tradicional para editores hexadecimales) o en filas con los valores encima de los caracteres</li>
       <li xml:lang="fi">Arvot ja merkit näytetään joko kahdessa sarakkeessa (niin kuin perinteisesti heksaeditoreissa) tai riveittäin arvo merkin yläpuolella</li>
       <li xml:lang="ko">일반적인 16진수 편집기처럼 값과 해당하는 문자열을 같이 표시하거나 값과 함께 표시 가능</li>
+      <li xml:lang="nl">Waarden en tekens worden getoond ofwel in twee kolommen (de traditionele weergave in hex-editors) of in rijen met de waarde boven het teken.</li>
       <li xml:lang="pl">Wartości i znaki są pokazywane albo w dwóch kolumnach (tradycyjne wyświetlanie w edytorach szesnastkowych) lub w wierszach z wartością nad znakiem</li>
       <li xml:lang="pt">Valores e respectivos caracteres apresentados em duas colunas (a aparência tradicional dos editores hexadecimais) ou em linhas com o valor no topo dos caracteres.</li>
       <li xml:lang="pt-BR">Valores e respectivos caracteres apresentados em duas colunas (a aparência tradicional dos editores hexadecimais) ou em linhas com o valor no topo dos caracteres.</li>
@@ -84,9 +94,11 @@
       <li xml:lang="uk">Значення та символи може бути показано або у два стовпчики (типовий формат перегляду у шістнадцяткових редакторах) або у форматі рядків, де значення буде показано над символом.</li>
       <li xml:lang="x-test">xxValues and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the characterxx</li>
       <li>Editing and navigating similar to a text editor</li>
+      <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="es">Edición y navegación similar a la de los editores de texto</li>
       <li xml:lang="fi">Muokkaus ja siirtyminen kuin tekstieditorissa</li>
       <li xml:lang="ko">텍스트 편집기와 비슷한 편집과 탐색 인터페이스</li>
+      <li xml:lang="nl">Bewerken en navigeren is gelijk aan die in een tekstbewerker</li>
       <li xml:lang="pl">Edytowanie i poruszanie się po programie podobnie jak w edytorach tekstowych</li>
       <li xml:lang="pt">Edição e navegação semelhantes a um editor de texto</li>
       <li xml:lang="pt-BR">Edição e navegação semelhantes a um editor de texto</li>
@@ -99,9 +111,11 @@
       <li xml:lang="uk">Панелі редагування і навігації, подібні на відповідні панелі текстового редактора.</li>
       <li xml:lang="x-test">xxEditing and navigating similar to a text editorxx</li>
       <li>Customizable data views, with loadable and storable profiles</li>
+      <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="es">Vistas personalizadas de datos, con perfiles que se pueden guardar y cargar</li>
       <li xml:lang="fi">Muokattavissa olevat datanäkymät; ladattavat ja tallennettavat profiilit</li>
       <li xml:lang="ko">데이터 보기 형식 사용자 정의, 저장 및 차후 불러오기</li>
+      <li xml:lang="nl">Aan te passen weergave met profielen die zijn te laden en op te slaan</li>
       <li xml:lang="pl">Własne widoki danych wraz z możliwością wczytywania i zachowywania profili</li>
       <li xml:lang="pt">Vistas de dados personalizadas, com perfis que podem ser carregados e gravados</li>
       <li xml:lang="pt-BR">Modos de exibição de dados personalizados, com perfis que podem ser gravados e carregados</li>
@@ -114,9 +128,11 @@
       <li xml:lang="uk">Придатні до налаштовування панелі перегляду даних з можливістю завантаження та збереження профілів.</li>
       <li xml:lang="x-test">xxCustomizable data views, with loadable and storable profilesxx</li>
       <li>Tools dockable on all sides or floating</li>
+      <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
       <li xml:lang="es">Herramientas que se pueden fijar en cualquier lado o dejar flotantes</li>
       <li xml:lang="fi">Työkalut, jotka voi telakoida mihin tahansa laitaan tai antaa kellua vapaasti</li>
       <li xml:lang="ko">도킹 및 띄울 수 있는 도구 상자</li>
+      <li xml:lang="nl">Hulpmiddelen die aan alle kanten zijn te verankeren of zweven</li>
       <li xml:lang="pl">Narzędzia pływające lub z możliwością dokowania na wszystkich stronach</li>
       <li xml:lang="pt">Ferramentas acopláveis a todos os lados ou flutuantes</li>
       <li xml:lang="pt-BR">Ferramentas acopláveis em todos os lados ou flutuantes</li>
@@ -129,10 +145,12 @@
       <li xml:lang="uk">Можливість довільного розташування або повного від’єднання від вікна панелей інструментів.</li>
       <li xml:lang="x-test">xxTools dockable on all sides or floatingxx</li>
       <li>Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
+      <li xml:lang="ca">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
       <li xml:lang="es">Codificaciones numéricas (hexadecimal, decimal, octal, binaria)</li>
       <li xml:lang="fi">Lukujen koodaukset: heksa, desimaali, oktaali, binaari</li>
       <li xml:lang="ko">숫자 표시 방법: 2, 8, 10, 16진수</li>
+      <li xml:lang="nl">Numerieke coderingen: hexadecimaal, decimaal, octaal, binair</li>
       <li xml:lang="pl">Kodowania numeryczne: szesnastkowe, dziesiętne, ósemkowe, dwójkowe</li>
       <li xml:lang="pt">Codificações numéricas: Hexadecimal, Decimal, Octal, Binário</li>
       <li xml:lang="pt-BR">Codificações numéricas: Hexadecimal, Decimal, Octal e Binário</li>
@@ -145,9 +163,11 @@
       <li xml:lang="uk">Числові кодування: шістнадцяткове, десяткове, вісімкове, двійкове.</li>
       <li xml:lang="x-test">xxNumerical encodings: Hexadecimal, Decimal, Octal, Binaryxx</li>
       <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
+      <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="es">Codificaciones de caracteres (todas las codificaciones de 8 bits que proporciona Qt, EBCDIC)</li>
       <li xml:lang="fi">Merkkikoodaukset: Kaikki Qt:n tarjoamat 8-bittiset koodaukset sekä EBCDIC</li>
       <li xml:lang="ko">문자 인코딩: Qt에서 지원하는 모든 8비트 기반 인코딩, EBCDIC</li>
+      <li xml:lang="nl">Coderingen van tekens: alle 8-bits coderingen zoals geleverd door Qt, EBCDIC</li>
       <li xml:lang="pl">Kodowania znakowe: wszystkie 8-bitowe kodowania dostarczone przez Qt, EBCDIC</li>
       <li xml:lang="pt">Codificações de caracteres: Todas as codificações de 8 bits suportadas pelo Qt, EBCDIC</li>
       <li xml:lang="pt-BR">Codificações de caracteres: Todas as codificações de 8 bits suportadas pelo Qt, EBCDIC</li>
@@ -160,9 +180,11 @@
       <li xml:lang="uk">Кодування символів: підтримка усіх 8-бітових кодувань, які підтримуються у Qt, EBCDIC.</li>
       <li xml:lang="x-test">xxCharacter encodings: All 8-bit encodings as supplied by Qt, EBCDICxx</li>
       <li>Fast data rendering on screen</li>
+      <li xml:lang="ca">Renderització ràpida de dades en la pantalla</li>
       <li xml:lang="es">Visualización rápida de datos en la pantalla</li>
       <li xml:lang="fi">Datan nopea näyttäminen</li>
       <li xml:lang="ko">빠른 화면 표시</li>
+      <li xml:lang="nl">Snelle weergave van gegevens op het scherm</li>
       <li xml:lang="pl">Szybkie wyświetlane danych na ekranie</li>
       <li xml:lang="pt">Apresentação rápida dos dados no ecrã</li>
       <li xml:lang="pt-BR">Apresentação rápida dos dados na tela</li>
@@ -175,9 +197,11 @@
       <li xml:lang="uk">Швидкий показ даних на екрані.</li>
       <li xml:lang="x-test">xxFast data rendering on screenxx</li>
       <li>Multiple open files</li>
+      <li xml:lang="ca">Múltiples fitxers oberts</li>
       <li xml:lang="es">Permite abrir varios archivos a la vez</li>
       <li xml:lang="fi">Useat avoimet tiedostot</li>
       <li xml:lang="ko">다중 파일 작업</li>
+      <li xml:lang="nl">Meerdere geopende bestanden</li>
       <li xml:lang="pl">Otwieranie wielu plików</li>
       <li xml:lang="pt">Diversos ficheiros abertos</li>
       <li xml:lang="pt-BR">Diversos arquivos abertos</li>
@@ -190,10 +214,12 @@
       <li xml:lang="uk">Можливість одночасної роботи з декількома файлами.</li>
       <li xml:lang="x-test">xxMultiple open filesxx</li>
       <li>Undo/redo support</li>
+      <li xml:lang="ca">Implementació de desfer/refer</li>
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
       <li xml:lang="es">Permite deshacer y rehacer acciones</li>
       <li xml:lang="fi">Tuki muutosten kumoamiselle ja tekemiselle uudelleen</li>
       <li xml:lang="ko">실행 취소/다시 실행 지원</li>
+      <li xml:lang="nl">Ondersteuning ongedaan maken/opnieuw</li>
       <li xml:lang="pl">Obsługa cofnij/ponów</li>
       <li xml:lang="pt">Suporte para desfazer/refazer</li>
       <li xml:lang="pt-BR">Suporte para desfazer/refazer</li>
@@ -206,9 +232,11 @@
       <li xml:lang="uk">Підтримка скасовування та повторення дій.</li>
       <li xml:lang="x-test">xxUndo/redo supportxx</li>
       <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
+      <li xml:lang="ca">Eina d'estructures per analitzar i editar basada en definicions d'estructures que pot crear l'usuari</li>
       <li xml:lang="es">Herramienta de estructuras para análisis y edición basada en definiciones de estructuras creadas por el usuario</li>
       <li xml:lang="fi">Rakennetyökalu datan analysointiin ja muokkaamiseen; perustuu rakennemääritelmiin, joita käyttäjät voivat luoda</li>
       <li xml:lang="ko">사용자가 생성할 수 있는 구조체 선언에 따른 데이터 분석 및 편집</li>
+      <li xml:lang="nl">Het hulpmiddel Structuren voor analyseren en bewerking op door de gebruiker gemaakte structuurdefinities</li>
       <li xml:lang="pl">Narzędzie struktur do analizowania i edytowania na podstawie definicji struktur tworzonych przez użytkownika</li>
       <li xml:lang="pt">Ferramenta de estruturas para analisar e editar com base em definições de estruturas criadas pelo utilizador</li>
       <li xml:lang="pt-BR">Ferramenta de estruturas para análise e edição com base em definições de estruturas criadas pelo usuário</li>
@@ -221,10 +249,12 @@
       <li xml:lang="uk">За допомогою інструменту «Структури» можна аналізувати та редагувати масиви байтів на основі створених користувачем визначень структур.</li>
       <li xml:lang="x-test">xxStructures tool for analyzing and editing based on user-creatable structure definitionsxx</li>
       <li>And more...</li>
+      <li xml:lang="ca">I més...</li>
       <li xml:lang="de">Und noch mehr ...</li>
       <li xml:lang="es">Y más...</li>
       <li xml:lang="fi">Ja muuta…</li>
       <li xml:lang="ko">그 외의 여러가지...</li>
+      <li xml:lang="nl">En meer...</li>
       <li xml:lang="pl">I więcej...</li>
       <li xml:lang="pt">E mais...</li>
       <li xml:lang="pt-BR">E mais...</li>
