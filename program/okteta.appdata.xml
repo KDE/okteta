@@ -5,6 +5,7 @@
   <project_license>GPL-2.0</project_license>
   <name>Okteta</name>
   <name xml:lang="ca">Okteta</name>
+  <name xml:lang="cs">Okteta</name>
   <name xml:lang="de">Okteta</name>
   <name xml:lang="es">Okteta</name>
   <name xml:lang="fi">Okteta</name>
@@ -23,6 +24,7 @@
   <name xml:lang="x-test">xxOktetaxx</name>
   <summary>Hex editor</summary>
   <summary xml:lang="ca">Editor hexadecimal</summary>
+  <summary xml:lang="cs">Hexa editor</summary>
   <summary xml:lang="de">Hex-Editor</summary>
   <summary xml:lang="es">Editor hexadecimal</summary>
   <summary xml:lang="fi">Heksaeditori</summary>
@@ -60,6 +62,7 @@
     <p xml:lang="x-test">xxOkteta is a simple editor for the raw data of files.xx</p>
     <p>Features:</p>
     <p xml:lang="ca">Característiques:</p>
+    <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="es">Funciones:</p>
     <p xml:lang="fi">Ominaisuudet:</p>
     <p xml:lang="ko">기능:</p>
@@ -198,6 +201,7 @@
       <li xml:lang="x-test">xxFast data rendering on screenxx</li>
       <li>Multiple open files</li>
       <li xml:lang="ca">Múltiples fitxers oberts</li>
+      <li xml:lang="cs">Otevření více souborů</li>
       <li xml:lang="es">Permite abrir varios archivos a la vez</li>
       <li xml:lang="fi">Useat avoimet tiedostot</li>
       <li xml:lang="ko">다중 파일 작업</li>
@@ -250,6 +254,7 @@
       <li xml:lang="x-test">xxStructures tool for analyzing and editing based on user-creatable structure definitionsxx</li>
       <li>And more...</li>
       <li xml:lang="ca">I més...</li>
+      <li xml:lang="cs">A další...</li>
       <li xml:lang="de">Und noch mehr ...</li>
       <li xml:lang="es">Y más...</li>
       <li xml:lang="fi">Ja muuta…</li>
