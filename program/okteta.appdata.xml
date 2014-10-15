@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop">
+  <id>org.kde.okteta.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <project_license>GPL-3.0</project_license>
+  <name>Okteta</name>
+  <summary>Hex editor</summary>
+  <description>
+    <p>Okteta is a simple editor for the raw data of files.</p>
+    <p>Features:</p>
+    <ul>
+      <li>Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
+      <li>Editing and navigating similar to a text editor</li>
+      <li>Customizable data views, with loadable and storable profiles</li>
+      <li>Tools dockable on all sides or floating</li>
+      <li>Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
+      <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
+      <li>Fast data rendering on screen</li>
+      <li>Multiple open files</li>
+      <li>Undo/redo support</li>
+      <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
+      <li>And more...</li>
+    </ul>
+  </description>
+  <url type="homepage">http://userbase.kde.org/Okteta/</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=okteta</url>
+  <url type="help">http://docs.kde.org/stable/en/kdesdk/okteta/index.html</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://kde.org/images/screenshots/okteta.png</image>
+    </screenshot>
+  </screenshots>
+  <updatecontact>kossebau@kde.org</updatecontact>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>okteta</binary>
+  </provides>
+</component>
