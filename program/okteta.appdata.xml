@@ -9,6 +9,7 @@
   <name xml:lang="de">Okteta</name>
   <name xml:lang="es">Okteta</name>
   <name xml:lang="fi">Okteta</name>
+  <name xml:lang="it">Okteta</name>
   <name xml:lang="ko">Okteta</name>
   <name xml:lang="nl">Okteta</name>
   <name xml:lang="pl">Okteta</name>
@@ -28,6 +29,7 @@
   <summary xml:lang="de">Hex-Editor</summary>
   <summary xml:lang="es">Editor hexadecimal</summary>
   <summary xml:lang="fi">Heksaeditori</summary>
+  <summary xml:lang="it">Editor esadecimale</summary>
   <summary xml:lang="ko">16진수 편집기</summary>
   <summary xml:lang="nl">Hexbewerker</summary>
   <summary xml:lang="pl">Edytor szesnastkowy</summary>
@@ -47,6 +49,7 @@
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
     <p xml:lang="es">Okteta es un sencillo editor de archivos de datos en bruto.</p>
     <p xml:lang="fi">Okteta on yksinkertainen editori tiedostojen raakadatalle.</p>
+    <p xml:lang="it">Okteta è un semplice editor dei dati grezzi di un file.</p>
     <p xml:lang="ko">Okteta는 파일 데이터를 직접 편집할 수 있는 편집기입니다.</p>
     <p xml:lang="nl">Okteta is een eenvoudige bewerker voor de ruwe gegevens van bestanden.</p>
     <p xml:lang="pl">Okteta to prosty edytor do przeglądania nieprzetworzonych danych plików.</p>
@@ -65,6 +68,7 @@
     <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="es">Funciones:</p>
     <p xml:lang="fi">Ominaisuudet:</p>
+    <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="ko">기능:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="pl">Możliwości:</p>
@@ -83,6 +87,7 @@
       <li xml:lang="ca">Els valors i el caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
       <li xml:lang="es">Muestra valores y caracteres en dos columnas (la vista tradicional para editores hexadecimales) o en filas con los valores encima de los caracteres</li>
       <li xml:lang="fi">Arvot ja merkit näytetään joko kahdessa sarakkeessa (niin kuin perinteisesti heksaeditoreissa) tai riveittäin arvo merkin yläpuolella</li>
+      <li xml:lang="it">I valori e i caratteri visualizzati in due colonne (la visualizzazione normale degli editor esadecimali) o in righe con il valore sopra il carattere</li>
       <li xml:lang="ko">일반적인 16진수 편집기처럼 값과 해당하는 문자열을 같이 표시하거나 값과 함께 표시 가능</li>
       <li xml:lang="nl">Waarden en tekens worden getoond ofwel in twee kolommen (de traditionele weergave in hex-editors) of in rijen met de waarde boven het teken.</li>
       <li xml:lang="pl">Wartości i znaki są pokazywane albo w dwóch kolumnach (tradycyjne wyświetlanie w edytorach szesnastkowych) lub w wierszach z wartością nad znakiem</li>
@@ -100,6 +105,7 @@
       <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="es">Edición y navegación similar a la de los editores de texto</li>
       <li xml:lang="fi">Muokkaus ja siirtyminen kuin tekstieditorissa</li>
+      <li xml:lang="it">Modifica e navigazione simili ad un editor di testo</li>
       <li xml:lang="ko">텍스트 편집기와 비슷한 편집과 탐색 인터페이스</li>
       <li xml:lang="nl">Bewerken en navigeren is gelijk aan die in een tekstbewerker</li>
       <li xml:lang="pl">Edytowanie i poruszanie się po programie podobnie jak w edytorach tekstowych</li>
@@ -117,6 +123,7 @@
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="es">Vistas personalizadas de datos, con perfiles que se pueden guardar y cargar</li>
       <li xml:lang="fi">Muokattavissa olevat datanäkymät; ladattavat ja tallennettavat profiilit</li>
+      <li xml:lang="it">Viste dei dati configurabili, con profili caricabili e salvabili</li>
       <li xml:lang="ko">데이터 보기 형식 사용자 정의, 저장 및 차후 불러오기</li>
       <li xml:lang="nl">Aan te passen weergave met profielen die zijn te laden en op te slaan</li>
       <li xml:lang="pl">Własne widoki danych wraz z możliwością wczytywania i zachowywania profili</li>
@@ -134,6 +141,7 @@
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
       <li xml:lang="es">Herramientas que se pueden fijar en cualquier lado o dejar flotantes</li>
       <li xml:lang="fi">Työkalut, jotka voi telakoida mihin tahansa laitaan tai antaa kellua vapaasti</li>
+      <li xml:lang="it">Strumenti agganciabili su qualsiasi lato o liberi</li>
       <li xml:lang="ko">도킹 및 띄울 수 있는 도구 상자</li>
       <li xml:lang="nl">Hulpmiddelen die aan alle kanten zijn te verankeren of zweven</li>
       <li xml:lang="pl">Narzędzia pływające lub z możliwością dokowania na wszystkich stronach</li>
@@ -152,6 +160,7 @@
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
       <li xml:lang="es">Codificaciones numéricas (hexadecimal, decimal, octal, binaria)</li>
       <li xml:lang="fi">Lukujen koodaukset: heksa, desimaali, oktaali, binaari</li>
+      <li xml:lang="it">Codifiche numeriche: esadecimale, decimale, ottale e binaria</li>
       <li xml:lang="ko">숫자 표시 방법: 2, 8, 10, 16진수</li>
       <li xml:lang="nl">Numerieke coderingen: hexadecimaal, decimaal, octaal, binair</li>
       <li xml:lang="pl">Kodowania numeryczne: szesnastkowe, dziesiętne, ósemkowe, dwójkowe</li>
@@ -169,6 +178,7 @@
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="es">Codificaciones de caracteres (todas las codificaciones de 8 bits que proporciona Qt, EBCDIC)</li>
       <li xml:lang="fi">Merkkikoodaukset: Kaikki Qt:n tarjoamat 8-bittiset koodaukset sekä EBCDIC</li>
+      <li xml:lang="it">Codifiche dei caratteri: tutte le codifiche a 8 bit fornite da Qt, EBCDIC</li>
       <li xml:lang="ko">문자 인코딩: Qt에서 지원하는 모든 8비트 기반 인코딩, EBCDIC</li>
       <li xml:lang="nl">Coderingen van tekens: alle 8-bits coderingen zoals geleverd door Qt, EBCDIC</li>
       <li xml:lang="pl">Kodowania znakowe: wszystkie 8-bitowe kodowania dostarczone przez Qt, EBCDIC</li>
@@ -186,6 +196,7 @@
       <li xml:lang="ca">Renderització ràpida de dades en la pantalla</li>
       <li xml:lang="es">Visualización rápida de datos en la pantalla</li>
       <li xml:lang="fi">Datan nopea näyttäminen</li>
+      <li xml:lang="it">Resa veloce dei dati sullo schermo</li>
       <li xml:lang="ko">빠른 화면 표시</li>
       <li xml:lang="nl">Snelle weergave van gegevens op het scherm</li>
       <li xml:lang="pl">Szybkie wyświetlane danych na ekranie</li>
@@ -204,6 +215,7 @@
       <li xml:lang="cs">Otevření více souborů</li>
       <li xml:lang="es">Permite abrir varios archivos a la vez</li>
       <li xml:lang="fi">Useat avoimet tiedostot</li>
+      <li xml:lang="it">Più file aperti</li>
       <li xml:lang="ko">다중 파일 작업</li>
       <li xml:lang="nl">Meerdere geopende bestanden</li>
       <li xml:lang="pl">Otwieranie wielu plików</li>
@@ -222,6 +234,7 @@
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
       <li xml:lang="es">Permite deshacer y rehacer acciones</li>
       <li xml:lang="fi">Tuki muutosten kumoamiselle ja tekemiselle uudelleen</li>
+      <li xml:lang="it">Supporto per annulla/rifai</li>
       <li xml:lang="ko">실행 취소/다시 실행 지원</li>
       <li xml:lang="nl">Ondersteuning ongedaan maken/opnieuw</li>
       <li xml:lang="pl">Obsługa cofnij/ponów</li>
@@ -239,6 +252,7 @@
       <li xml:lang="ca">Eina d'estructures per analitzar i editar basada en definicions d'estructures que pot crear l'usuari</li>
       <li xml:lang="es">Herramienta de estructuras para análisis y edición basada en definiciones de estructuras creadas por el usuario</li>
       <li xml:lang="fi">Rakennetyökalu datan analysointiin ja muokkaamiseen; perustuu rakennemääritelmiin, joita käyttäjät voivat luoda</li>
+      <li xml:lang="it">Strumento per le strutture per analizzare e modificare in base a definizioni di strutture dell'utente</li>
       <li xml:lang="ko">사용자가 생성할 수 있는 구조체 선언에 따른 데이터 분석 및 편집</li>
       <li xml:lang="nl">Het hulpmiddel Structuren voor analyseren en bewerking op door de gebruiker gemaakte structuurdefinities</li>
       <li xml:lang="pl">Narzędzie struktur do analizowania i edytowania na podstawie definicji struktur tworzonych przez użytkownika</li>
@@ -258,6 +272,7 @@
       <li xml:lang="de">Und noch mehr ...</li>
       <li xml:lang="es">Y más...</li>
       <li xml:lang="fi">Ja muuta…</li>
+      <li xml:lang="it">E altro ancora...</li>
       <li xml:lang="ko">그 외의 여러가지...</li>
       <li xml:lang="nl">En meer...</li>
       <li xml:lang="pl">I więcej...</li>
