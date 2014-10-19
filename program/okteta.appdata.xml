@@ -8,7 +8,9 @@
   <name xml:lang="ca">Okteta</name>
   <name xml:lang="cs">Okteta</name>
   <name xml:lang="de">Okteta</name>
+  <name xml:lang="hu">Okteta</name>
   <name xml:lang="nl">Okteta</name>
+  <name xml:lang="pl">Okteta</name>
   <name xml:lang="pt">Okteta</name>
   <name xml:lang="pt-BR">Okteta</name>
   <name xml:lang="ro">Okteta</name>
@@ -20,7 +22,9 @@
   <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="cs">Hexa editor</summary>
   <summary xml:lang="de">Hex-Editor</summary>
+  <summary xml:lang="hu">Hexaszerkesztő</summary>
   <summary xml:lang="nl">Hexbewerker</summary>
+  <summary xml:lang="pl">Edytor szesnastkowy</summary>
   <summary xml:lang="pt">Editor hexadecimal</summary>
   <summary xml:lang="pt-BR">Editor hexadecimal</summary>
   <summary xml:lang="ro">Redactor hexazecimal</summary>
@@ -32,7 +36,9 @@
     <p>Okteta is a simple editor for the raw data of files.</p>
     <p xml:lang="ca">L'Okteta és un editor senzill per les dades de fitxers.</p>
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
+    <p xml:lang="hu">Az Oktate egy egyszerű program fájlok nyers adatainak szerkesztéséhez.</p>
     <p xml:lang="nl">Okteta is een eenvoudige bewerker voor de ruwe gegevens van bestanden.</p>
+    <p xml:lang="pl">Okteta to prosty edytor do przeglądania nieprzetworzonych danych plików.</p>
     <p xml:lang="pt">O Okteta é um editor simples para os dados em bruto dos ficheiros.</p>
     <p xml:lang="pt-BR">Okteta é um editor simples para os dados brutos dos arquivos.</p>
     <p xml:lang="sk">Okteta je jednoduchý editor na čisté údaje súborov.</p>
@@ -43,7 +49,9 @@
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="de">Funktionen:</p>
+    <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
+    <p xml:lang="pl">Możliwości:</p>
     <p xml:lang="pt">Funcionalidades:</p>
     <p xml:lang="pt-BR">Funcionalidades:</p>
     <p xml:lang="ro">Caracteristici:</p>
@@ -55,7 +63,9 @@
       <li>Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
       <li xml:lang="ca">Els valors i el caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
       <li xml:lang="de">Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden</li>
+      <li xml:lang="hu">Értékek és karakterek megjelenítése hagyományos (kétoszlopos) módon, vagy sorokban (az értékek a karakterek fölött helyezkednek el)</li>
       <li xml:lang="nl">Waarden en tekens worden getoond ofwel in twee kolommen (de traditionele weergave in hex-editors) of in rijen met de waarde boven het teken.</li>
+      <li xml:lang="pl">Wartości i znaki są pokazywane albo w dwóch kolumnach (tradycyjne wyświetlanie w edytorach szesnastkowych) lub w wierszach z wartością nad znakiem</li>
       <li xml:lang="pt">Valores e respectivos caracteres apresentados em duas colunas (a aparência tradicional dos editores hexadecimais) ou em linhas com o valor no topo dos caracteres.</li>
       <li xml:lang="pt-BR">Valores e respectivos caracteres apresentados em duas colunas (a aparência tradicional dos editores hexadecimais) ou em linhas com o valor no topo dos caracteres.</li>
       <li xml:lang="sk">Hodnoty a znaky zobrazené buď vo dvoch stĺpcoch (tradičné zobrazenie v hex editoroch) alebo v riadkoch s hodnotou nad znakom</li>
@@ -65,7 +75,9 @@
       <li>Editing and navigating similar to a text editor</li>
       <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="de">Bearbeiten und navigieren ähnlich wie in einem Texteditor</li>
+      <li xml:lang="hu">Szerkesztés és navigálás egy szövegszerkesztőhöz hasonlóan</li>
       <li xml:lang="nl">Bewerken en navigeren is gelijk aan die in een tekstbewerker</li>
+      <li xml:lang="pl">Edytowanie i poruszanie się po programie podobnie jak w edytorach tekstowych</li>
       <li xml:lang="pt">Edição e navegação semelhantes a um editor de texto</li>
       <li xml:lang="pt-BR">Edição e navegação semelhantes a um editor de texto</li>
       <li xml:lang="sk">Úprava a navigácia podobná ako v textovom editore</li>
@@ -74,7 +86,9 @@
       <li xml:lang="x-test">xxEditing and navigating similar to a text editorxx</li>
       <li>Customizable data views, with loadable and storable profiles</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
+      <li xml:lang="hu">Testre szabható adatnézetek, betölthető és menthető profilokkal</li>
       <li xml:lang="nl">Aan te passen weergave met profielen die zijn te laden en op te slaan</li>
+      <li xml:lang="pl">Własne widoki danych wraz z możliwością wczytywania i zachowywania profili</li>
       <li xml:lang="pt">Vistas de dados personalizadas, com perfis que podem ser carregados e gravados</li>
       <li xml:lang="pt-BR">Modos de exibição de dados personalizados, com perfis que podem ser gravados e carregados</li>
       <li xml:lang="sk">Prispôsobiteľné pohľady údajov s načítateľnými a uložiteľnými profilmi</li>
@@ -83,7 +97,9 @@
       <li xml:lang="x-test">xxCustomizable data views, with loadable and storable profilesxx</li>
       <li>Tools dockable on all sides or floating</li>
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
+      <li xml:lang="hu">Bármely oldalon dokkolható vagy lebegő eszköztárak</li>
       <li xml:lang="nl">Hulpmiddelen die aan alle kanten zijn te verankeren of zweven</li>
+      <li xml:lang="pl">Narzędzia pływające lub z możliwością dokowania na wszystkich stronach</li>
       <li xml:lang="pt">Ferramentas acopláveis a todos os lados ou flutuantes</li>
       <li xml:lang="pt-BR">Ferramentas acopláveis em todos os lados ou flutuantes</li>
       <li xml:lang="sk">Nástroje uchytiteľné na všetkých stranách alebo plávajúce</li>
@@ -93,7 +109,9 @@
       <li>Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
       <li xml:lang="ca">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
+      <li xml:lang="hu">Numerikus kódolások: hexadecimális, decimális, oktális, bináris</li>
       <li xml:lang="nl">Numerieke coderingen: hexadecimaal, decimaal, octaal, binair</li>
+      <li xml:lang="pl">Kodowania numeryczne: szesnastkowe, dziesiętne, ósemkowe, dwójkowe</li>
       <li xml:lang="pt">Codificações numéricas: Hexadecimal, Decimal, Octal, Binário</li>
       <li xml:lang="pt-BR">Codificações numéricas: Hexadecimal, Decimal, Octal e Binário</li>
       <li xml:lang="sk">Numerické kódovania: hexadecimálne, decimálne, osmičkové a binárne</li>
@@ -102,7 +120,9 @@
       <li xml:lang="x-test">xxNumerical encodings: Hexadecimal, Decimal, Octal, Binaryxx</li>
       <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
+      <li xml:lang="hu">Karakterkódolások: minden, a Qt és EBCDIC által biztosított 8 bites kódolás</li>
       <li xml:lang="nl">Tekencoderingen: alle 8-bits coderingen zoals geleverd door Qt, EBCDIC</li>
+      <li xml:lang="pl">Kodowania znakowe: wszystkie 8-bitowe kodowania dostarczone przez Qt, EBCDIC</li>
       <li xml:lang="pt">Codificações de caracteres: Todas as codificações de 8 bits suportadas pelo Qt, EBCDIC</li>
       <li xml:lang="pt-BR">Codificações de caracteres: Todas as codificações de 8 bits suportadas pelo Qt, EBCDIC</li>
       <li xml:lang="sk">Kódovania znakov: všetky 8-bitové kódovania v Qt, EBCDIC</li>
@@ -112,7 +132,9 @@
       <li>Fast data rendering on screen</li>
       <li xml:lang="ca">Renderització ràpida de dades en la pantalla</li>
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
+      <li xml:lang="hu">Gyors adatrenderelés a kijelzőn</li>
       <li xml:lang="nl">Snelle weergave van gegevens op het scherm</li>
+      <li xml:lang="pl">Szybkie wyświetlane danych na ekranie</li>
       <li xml:lang="pt">Apresentação rápida dos dados no ecrã</li>
       <li xml:lang="pt-BR">Apresentação rápida dos dados na tela</li>
       <li xml:lang="sk">Rýchle zobrazovanie údajov na obrazovke</li>
@@ -123,7 +145,9 @@
       <li xml:lang="ca">Múltiples fitxers oberts</li>
       <li xml:lang="cs">Otevření více souborů</li>
       <li xml:lang="de">Mehrere geöffnete Dateien</li>
+      <li xml:lang="hu">Több fájl megnyitása egyszerre</li>
       <li xml:lang="nl">Meerdere geopende bestanden</li>
+      <li xml:lang="pl">Otwieranie wielu plików</li>
       <li xml:lang="pt">Diversos ficheiros abertos</li>
       <li xml:lang="pt-BR">Diversos arquivos abertos</li>
       <li xml:lang="sk">Otváranie viacerých súborov</li>
@@ -133,7 +157,9 @@
       <li>Undo/redo support</li>
       <li xml:lang="ca">Implementació de desfer/refer</li>
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
+      <li xml:lang="hu">Visszavonás/újra műveletek támogatása</li>
       <li xml:lang="nl">Ondersteuning ongedaan maken/opnieuw</li>
+      <li xml:lang="pl">Obsługa cofnij/ponów</li>
       <li xml:lang="pt">Suporte para desfazer/refazer</li>
       <li xml:lang="pt-BR">Suporte para desfazer/refazer</li>
       <li xml:lang="sk">Podpora Späť/Znova</li>
@@ -143,7 +169,9 @@
       <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
       <li xml:lang="ca">Eina d'estructures per analitzar i editar basada en definicions d'estructures que pot crear l'usuari</li>
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
+      <li xml:lang="hu">Struktúra eszközök a felhasználó által létrehozott struktúradefiníciók elemzésére és szerkesztésére</li>
       <li xml:lang="nl">Het hulpmiddel Structuren voor analyseren en bewerking op door de gebruiker gemaakte structuurdefinities</li>
+      <li xml:lang="pl">Narzędzie struktur do analizowania i edytowania na podstawie definicji struktur tworzonych przez użytkownika</li>
       <li xml:lang="pt">Ferramenta de estruturas para analisar e editar com base em definições de estruturas criadas pelo utilizador</li>
       <li xml:lang="pt-BR">Ferramenta de estruturas para análise e edição com base em definições de estruturas criadas pelo usuário</li>
       <li xml:lang="sk">Nástroj štruktúr na analýzu a úpravu založený na používateľom vytvoriteľných definíciách štruktúr</li>
@@ -154,7 +182,9 @@
       <li xml:lang="ca">I més...</li>
       <li xml:lang="cs">A další...</li>
       <li xml:lang="de">Und noch mehr ...</li>
+      <li xml:lang="hu">És még sok minden más…</li>
       <li xml:lang="nl">En meer...</li>
+      <li xml:lang="pl">I więcej...</li>
       <li xml:lang="pt">E mais...</li>
       <li xml:lang="pt-BR">E mais...</li>
       <li xml:lang="ro">Și altele...</li>
