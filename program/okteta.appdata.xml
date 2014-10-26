@@ -8,6 +8,7 @@
   <name xml:lang="ca">Okteta</name>
   <name xml:lang="cs">Okteta</name>
   <name xml:lang="de">Okteta</name>
+  <name xml:lang="en-GB">Okteta</name>
   <name xml:lang="es">Okteta</name>
   <name xml:lang="fi">Okteta</name>
   <name xml:lang="it">Okteta</name>
@@ -29,6 +30,7 @@
   <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="cs">Hexa editor</summary>
   <summary xml:lang="de">Hex-Editor</summary>
+  <summary xml:lang="en-GB">Hex editor</summary>
   <summary xml:lang="es">Editor hexadecimal</summary>
   <summary xml:lang="fi">Heksaeditori</summary>
   <summary xml:lang="it">Editor esadecimale</summary>
@@ -50,6 +52,7 @@
     <p>Okteta is a simple editor for the raw data of files.</p>
     <p xml:lang="ca">L'Okteta és un editor senzill per les dades de fitxers.</p>
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
+    <p xml:lang="en-GB">Okteta is a simple editor for the raw data of files.</p>
     <p xml:lang="es">Okteta es un sencillo editor de archivos de datos en bruto.</p>
     <p xml:lang="fi">Okteta on yksinkertainen editori tiedostojen raakadatalle.</p>
     <p xml:lang="it">Okteta è un semplice editor dei dati grezzi di un file.</p>
@@ -71,6 +74,7 @@
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="de">Funktionen:</p>
+    <p xml:lang="en-GB">Features:</p>
     <p xml:lang="es">Funciones:</p>
     <p xml:lang="fi">Ominaisuudet:</p>
     <p xml:lang="it">Funzionalità:</p>
@@ -92,6 +96,7 @@
       <li>Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
       <li xml:lang="ca">Els valors i el caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
       <li xml:lang="de">Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden</li>
+      <li xml:lang="en-GB">Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
       <li xml:lang="es">Muestra valores y caracteres en dos columnas (la vista tradicional para editores hexadecimales) o en filas con los valores encima de los caracteres</li>
       <li xml:lang="fi">Arvot ja merkit näytetään joko kahdessa sarakkeessa (niin kuin perinteisesti heksaeditoreissa) tai riveittäin arvo merkin yläpuolella</li>
       <li xml:lang="it">I valori e i caratteri visualizzati in due colonne (la visualizzazione normale degli editor esadecimali) o in righe con il valore sopra il carattere</li>
@@ -112,6 +117,7 @@
       <li>Editing and navigating similar to a text editor</li>
       <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="de">Bearbeiten und navigieren ähnlich wie in einem Texteditor</li>
+      <li xml:lang="en-GB">Editing and navigating similar to a text editor</li>
       <li xml:lang="es">Edición y navegación similar a la de los editores de texto</li>
       <li xml:lang="fi">Muokkaus ja siirtyminen kuin tekstieditorissa</li>
       <li xml:lang="it">Modifica e navigazione simili ad un editor di testo</li>
@@ -132,6 +138,7 @@
       <li>Customizable data views, with loadable and storable profiles</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
+      <li xml:lang="en-GB">Customisable data views, with loadable and storable profiles</li>
       <li xml:lang="es">Vistas personalizadas de datos, con perfiles que se pueden guardar y cargar</li>
       <li xml:lang="fi">Muokattavissa olevat datanäkymät; ladattavat ja tallennettavat profiilit</li>
       <li xml:lang="it">Viste dei dati configurabili, con profili caricabili e salvabili</li>
@@ -151,6 +158,7 @@
       <li xml:lang="zh-TW">客製化的資料檢視，可載入並儲存設定檔</li>
       <li>Tools dockable on all sides or floating</li>
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
+      <li xml:lang="en-GB">Tools dockable on all sides or floating</li>
       <li xml:lang="es">Herramientas que se pueden fijar en cualquier lado o dejar flotantes</li>
       <li xml:lang="fi">Työkalut, jotka voi telakoida mihin tahansa laitaan tai antaa kellua vapaasti</li>
       <li xml:lang="it">Strumenti agganciabili su qualsiasi lato o liberi</li>
@@ -171,6 +179,7 @@
       <li>Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
       <li xml:lang="ca">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
+      <li xml:lang="en-GB">Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
       <li xml:lang="es">Codificaciones numéricas (hexadecimal, decimal, octal, binaria)</li>
       <li xml:lang="fi">Lukujen koodaukset: heksa, desimaali, oktaali, binaari</li>
       <li xml:lang="it">Codifiche numeriche: esadecimale, decimale, ottale e binaria</li>
@@ -191,6 +200,7 @@
       <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="de">Zeichenkodierungen: Alle Kodierungen, die von Qt und EBCDIC unterstützt werden</li>
+      <li xml:lang="en-GB">Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
       <li xml:lang="es">Codificaciones de caracteres (todas las codificaciones de 8 bits que proporciona Qt, EBCDIC)</li>
       <li xml:lang="fi">Merkkikoodaukset: Kaikki Qt:n tarjoamat 8-bittiset koodaukset sekä EBCDIC</li>
       <li xml:lang="it">Codifiche dei caratteri: tutte le codifiche a 8 bit fornite da Qt, EBCDIC</li>
@@ -211,6 +221,7 @@
       <li>Fast data rendering on screen</li>
       <li xml:lang="ca">Renderització ràpida de dades en la pantalla</li>
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
+      <li xml:lang="en-GB">Fast data rendering on screen</li>
       <li xml:lang="es">Visualización rápida de datos en la pantalla</li>
       <li xml:lang="fi">Datan nopea näyttäminen</li>
       <li xml:lang="it">Resa veloce dei dati sullo schermo</li>
@@ -232,6 +243,7 @@
       <li xml:lang="ca">Múltiples fitxers oberts</li>
       <li xml:lang="cs">Otevření více souborů</li>
       <li xml:lang="de">Mehrere geöffnete Dateien</li>
+      <li xml:lang="en-GB">Multiple open files</li>
       <li xml:lang="es">Permite abrir varios archivos a la vez</li>
       <li xml:lang="fi">Useat avoimet tiedostot</li>
       <li xml:lang="it">Più file aperti</li>
@@ -252,6 +264,7 @@
       <li>Undo/redo support</li>
       <li xml:lang="ca">Implementació de desfer/refer</li>
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
+      <li xml:lang="en-GB">Undo/redo support</li>
       <li xml:lang="es">Permite deshacer y rehacer acciones</li>
       <li xml:lang="fi">Tuki muutosten kumoamiselle ja tekemiselle uudelleen</li>
       <li xml:lang="it">Supporto per annulla/rifai</li>
@@ -272,6 +285,7 @@
       <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
       <li xml:lang="ca">Eina d'estructures per analitzar i editar basada en definicions d'estructures que pot crear l'usuari</li>
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
+      <li xml:lang="en-GB">Structures tool for analysing and editing based on user-creatable structure definitions</li>
       <li xml:lang="es">Herramienta de estructuras para análisis y edición basada en definiciones de estructuras creadas por el usuario</li>
       <li xml:lang="fi">Rakennetyökalu datan analysointiin ja muokkaamiseen; perustuu rakennemääritelmiin, joita käyttäjät voivat luoda</li>
       <li xml:lang="it">Strumento per le strutture per analizzare e modificare in base a definizioni di strutture dell'utente</li>
@@ -293,6 +307,7 @@
       <li xml:lang="ca">I més...</li>
       <li xml:lang="cs">A další...</li>
       <li xml:lang="de">Und noch mehr ...</li>
+      <li xml:lang="en-GB">And more...</li>
       <li xml:lang="es">Y más...</li>
       <li xml:lang="fi">Ja muuta…</li>
       <li xml:lang="it">E altro ancora...</li>
