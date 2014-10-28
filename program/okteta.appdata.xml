@@ -10,6 +10,7 @@
   <name xml:lang="de">Okteta</name>
   <name xml:lang="en-GB">Okteta</name>
   <name xml:lang="es">Okteta</name>
+  <name xml:lang="fi">Okteta</name>
   <name xml:lang="hu">Okteta</name>
   <name xml:lang="it">Okteta</name>
   <name xml:lang="nl">Okteta</name>
@@ -23,6 +24,7 @@
   <name xml:lang="sr-ijekavian">Октета</name>
   <name xml:lang="sr-ijekavianlatin">Okteta</name>
   <name xml:lang="sv">Okteta</name>
+  <name xml:lang="tr">Okteta</name>
   <name xml:lang="uk">Okteta</name>
   <name xml:lang="x-test">xxOktetaxx</name>
   <summary>Hex editor</summary>
@@ -31,6 +33,7 @@
   <summary xml:lang="de">Hex-Editor</summary>
   <summary xml:lang="en-GB">Hex editor</summary>
   <summary xml:lang="es">Editor hexadecimal</summary>
+  <summary xml:lang="fi">Heksaeditori</summary>
   <summary xml:lang="hu">Hexaszerkesztő</summary>
   <summary xml:lang="it">Editor esadecimale</summary>
   <summary xml:lang="nl">Hexbewerker</summary>
@@ -44,6 +47,7 @@
   <summary xml:lang="sr-ijekavian">Хексадекадни уређивач</summary>
   <summary xml:lang="sr-ijekavianlatin">Heksadekadni uređivač</summary>
   <summary xml:lang="sv">Hexeditor</summary>
+  <summary xml:lang="tr">Hex düzenleyici</summary>
   <summary xml:lang="uk">Шістнадцятковий редактор</summary>
   <summary xml:lang="x-test">xxHex editorxx</summary>
   <description>
@@ -52,6 +56,7 @@
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
     <p xml:lang="en-GB">Okteta is a simple editor for the raw data of files.</p>
     <p xml:lang="es">Okteta es un sencillo editor de archivos de datos en bruto.</p>
+    <p xml:lang="fi">Okteta on yksinkertainen editori tiedostojen raakadatalle.</p>
     <p xml:lang="hu">Az Oktate egy egyszerű program fájlok nyers adatainak szerkesztéséhez.</p>
     <p xml:lang="it">Okteta è un semplice editor dei dati grezzi di un file.</p>
     <p xml:lang="nl">Okteta is een eenvoudige bewerker voor de ruwe gegevens van bestanden.</p>
@@ -64,6 +69,7 @@
     <p xml:lang="sr-ijekavian">Октета је једноставан уређивач за сирове податке у фајловима.</p>
     <p xml:lang="sr-ijekavianlatin">Okteta je jednostavan uređivač za sirove podatke u fajlovima.</p>
     <p xml:lang="sv">Okteta är en enkel editor för rådata i filer.</p>
+    <p xml:lang="tr">Okteta, ham dosya verileri için basit bir düzenleyicidir.</p>
     <p xml:lang="uk">Okteta — простий редактор для безпосереднього редагування даних файлів.</p>
     <p xml:lang="x-test">xxOkteta is a simple editor for the raw data of files.xx</p>
     <p>Features:</p>
@@ -72,6 +78,7 @@
     <p xml:lang="de">Funktionen:</p>
     <p xml:lang="en-GB">Features:</p>
     <p xml:lang="es">Funcionalidades:</p>
+    <p xml:lang="fi">Ominaisuudet:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
@@ -85,6 +92,7 @@
     <p xml:lang="sr-ijekavian">Могућности:</p>
     <p xml:lang="sr-ijekavianlatin">Mogućnosti:</p>
     <p xml:lang="sv">Funktioner:</p>
+    <p xml:lang="tr">Özellikler:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
     <ul>
@@ -93,6 +101,7 @@
       <li xml:lang="de">Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden</li>
       <li xml:lang="en-GB">Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
       <li xml:lang="es">Muestra valores y caracteres en dos columnas (la vista tradicional para editores hexadecimales) o en filas con los valores encima de los caracteres</li>
+      <li xml:lang="fi">Arvot ja merkit näytetään joko kahdessa sarakkeessa (niin kuin perinteisesti heksaeditoreissa) tai riveittäin arvo merkin yläpuolella</li>
       <li xml:lang="hu">Értékek és karakterek megjelenítése hagyományos (kétoszlopos) módon, vagy sorokban (az értékek a karakterek fölött helyezkednek el)</li>
       <li xml:lang="it">I valori e i caratteri visualizzati in due colonne (la visualizzazione normale degli editor esadecimali) o in righe con il valore sopra il carattere</li>
       <li xml:lang="nl">Waarden en tekens worden getoond ofwel in twee kolommen (de traditionele weergave in hex-editors) of in rijen met de waarde boven het teken.</li>
@@ -112,6 +121,7 @@
       <li xml:lang="de">Bearbeiten und navigieren ähnlich wie in einem Texteditor</li>
       <li xml:lang="en-GB">Editing and navigating similar to a text editor</li>
       <li xml:lang="es">Edición y navegación similar a la de los editores de texto</li>
+      <li xml:lang="fi">Muokkaus ja siirtyminen kuin tekstieditorissa</li>
       <li xml:lang="hu">Szerkesztés és navigálás egy szövegszerkesztőhöz hasonlóan</li>
       <li xml:lang="it">Modifica e navigazione simili ad un editor di testo</li>
       <li xml:lang="nl">Bewerken en navigeren is gelijk aan die in een tekstbewerker</li>
@@ -130,6 +140,7 @@
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="en-GB">Customisable data views, with loadable and storable profiles</li>
       <li xml:lang="es">Vistas personalizadas de datos, con perfiles que se pueden guardar y cargar</li>
+      <li xml:lang="fi">Muokattavissa olevat datanäkymät; ladattavat ja tallennettavat profiilit</li>
       <li xml:lang="hu">Testre szabható adatnézetek, betölthető és menthető profilokkal</li>
       <li xml:lang="it">Viste dei dati configurabili, con profili caricabili e salvabili</li>
       <li xml:lang="nl">Aan te passen weergave met profielen die zijn te laden en op te slaan</li>
@@ -148,6 +159,7 @@
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
       <li xml:lang="en-GB">Tools dockable on all sides or floating</li>
       <li xml:lang="es">Cajas de herramientas empotrables o flotantes</li>
+      <li xml:lang="fi">Työkalut, jotka voi telakoida mihin tahansa laitaan tai antaa kellua vapaasti</li>
       <li xml:lang="hu">Bármely oldalon dokkolható vagy lebegő eszköztárak</li>
       <li xml:lang="it">Strumenti agganciabili su qualsiasi lato o liberi</li>
       <li xml:lang="nl">Hulpmiddelen die aan alle kanten zijn te verankeren of zweven</li>
@@ -167,6 +179,7 @@
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
       <li xml:lang="en-GB">Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
       <li xml:lang="es">Codificaciones numéricas (hexadecimal, decimal, octal, binaria)</li>
+      <li xml:lang="fi">Lukujen koodaukset: heksa, desimaali, oktaali, binaari</li>
       <li xml:lang="hu">Numerikus kódolások: hexadecimális, decimális, oktális, bináris</li>
       <li xml:lang="it">Codifiche numeriche: esadecimale, decimale, ottale e binaria</li>
       <li xml:lang="nl">Numerieke coderingen: hexadecimaal, decimaal, octaal, binair</li>
@@ -185,6 +198,7 @@
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="en-GB">Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
       <li xml:lang="es">Codificaciones de caracteres (todas las codificaciones de 8 bits que proporciona Qt, EBCDIC)</li>
+      <li xml:lang="fi">Merkkikoodaukset: Kaikki Qt:n tarjoamat 8-bittiset koodaukset sekä EBCDIC</li>
       <li xml:lang="hu">Karakterkódolások: minden, a Qt és EBCDIC által biztosított 8 bites kódolás</li>
       <li xml:lang="it">Codifiche dei caratteri: tutte le codifiche a 8 bit fornite da Qt, EBCDIC</li>
       <li xml:lang="nl">Tekencoderingen: alle 8-bits coderingen zoals geleverd door Qt, EBCDIC</li>
@@ -204,6 +218,7 @@
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
       <li xml:lang="en-GB">Fast data rendering on screen</li>
       <li xml:lang="es">Visualización rápida de datos en la pantalla</li>
+      <li xml:lang="fi">Datan nopea näyttäminen</li>
       <li xml:lang="hu">Gyors adatrenderelés a kijelzőn</li>
       <li xml:lang="it">Resa veloce dei dati sullo schermo</li>
       <li xml:lang="nl">Snelle weergave van gegevens op het scherm</li>
@@ -224,6 +239,7 @@
       <li xml:lang="de">Mehrere geöffnete Dateien</li>
       <li xml:lang="en-GB">Multiple open files</li>
       <li xml:lang="es">Permite abrir varios archivos a la vez</li>
+      <li xml:lang="fi">Useat avoimet tiedostot</li>
       <li xml:lang="hu">Több fájl megnyitása egyszerre</li>
       <li xml:lang="it">Più file aperti</li>
       <li xml:lang="nl">Meerdere geopende bestanden</li>
@@ -243,6 +259,7 @@
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
       <li xml:lang="en-GB">Undo/redo support</li>
       <li xml:lang="es">Permite deshacer y rehacer acciones</li>
+      <li xml:lang="fi">Tuki muutosten kumoamiselle ja tekemiselle uudelleen</li>
       <li xml:lang="hu">Visszavonás/újra műveletek támogatása</li>
       <li xml:lang="it">Supporto per annulla/rifai</li>
       <li xml:lang="nl">Ondersteuning ongedaan maken/opnieuw</li>
@@ -262,6 +279,7 @@
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
       <li xml:lang="en-GB">Structures tool for analysing and editing based on user-creatable structure definitions</li>
       <li xml:lang="es">Herramientas de estructuras para analizar y editar basándose en definiciones de estructuras creadas por el usuario</li>
+      <li xml:lang="fi">Rakennetyökalu datan analysointiin ja muokkaamiseen; perustuu rakennemääritelmiin, joita käyttäjät voivat luoda</li>
       <li xml:lang="hu">Struktúra eszközök a felhasználó által létrehozott struktúradefiníciók elemzésére és szerkesztésére</li>
       <li xml:lang="it">Strumento per le strutture per analizzare e modificare in base a definizioni di strutture dell'utente</li>
       <li xml:lang="nl">Het hulpmiddel Structuren voor analyseren en bewerking op door de gebruiker gemaakte structuurdefinities</li>
@@ -282,6 +300,7 @@
       <li xml:lang="de">Und noch mehr ...</li>
       <li xml:lang="en-GB">And more...</li>
       <li xml:lang="es">Y más...</li>
+      <li xml:lang="fi">Ja muuta…</li>
       <li xml:lang="hu">És még sok minden más…</li>
       <li xml:lang="it">E altro ancora...</li>
       <li xml:lang="nl">En meer...</li>
