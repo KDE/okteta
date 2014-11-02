@@ -5,6 +5,27 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=VHD test
+Name[ca]=Prova el VHD
+Name[de]=VHD-Test
+Name[en_GB]=VHD test
+Name[es]=Prueba VHD
+Name[fi]=VHD-testi
+Name[hu]=VHD teszt
+Name[it]=Prova VHD
+Name[nl]=VHD-test
+Name[pl]=Próba VHD
+Name[pt]=Teste de VHD
+Name[pt_BR]=Teste de VHD
+Name[sk]=VHD test
+Name[sr]=Проба ВХД‑а
+Name[sr@ijekavian]=Проба ВХД‑а
+Name[sr@ijekavianlatin]=Proba VHD‑a
+Name[sr@latin]=Proba VHD‑a
+Name[sv]=VHD-test
+Name[tr]=VHD testi
+Name[uk]=Тестування VHD
+Name[x-test]=xxVHD testxx
+Name[zh_TW]=VHD 測試
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
