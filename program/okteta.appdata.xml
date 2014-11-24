@@ -138,6 +138,7 @@
       <li xml:lang="x-test">xxEditing and navigating similar to a text editorxx</li>
       <li>Customizable data views, with loadable and storable profiles</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
+      <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
       <li xml:lang="en-GB">Customisable data views, with loadable and storable profiles</li>
       <li xml:lang="es">Vistas personalizadas de datos, con perfiles que se pueden guardar y cargar</li>
       <li xml:lang="fi">Muokattavissa olevat datanäkymät; ladattavat ja tallennettavat profiilit</li>
@@ -157,6 +158,7 @@
       <li xml:lang="x-test">xxCustomizable data views, with loadable and storable profilesxx</li>
       <li>Tools dockable on all sides or floating</li>
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
+      <li xml:lang="de">Werkzeuge können an allen Seiten verankert oder freischwebend benutzt werden</li>
       <li xml:lang="en-GB">Tools dockable on all sides or floating</li>
       <li xml:lang="es">Cajas de herramientas empotrables o flotantes</li>
       <li xml:lang="fi">Työkalut, jotka voi telakoida mihin tahansa laitaan tai antaa kellua vapaasti</li>
@@ -196,6 +198,7 @@
       <li xml:lang="x-test">xxNumerical encodings: Hexadecimal, Decimal, Octal, Binaryxx</li>
       <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
+      <li xml:lang="de">Zeichenkodierungen: Alle Kodierungen, die von Qt und EBCDIC unterstützt werden</li>
       <li xml:lang="en-GB">Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
       <li xml:lang="es">Codificaciones de caracteres (todas las codificaciones de 8 bits que proporciona Qt, EBCDIC)</li>
       <li xml:lang="fi">Merkkikoodaukset: Kaikki Qt:n tarjoamat 8-bittiset koodaukset sekä EBCDIC</li>
