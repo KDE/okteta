@@ -59,7 +59,7 @@ target_link_libraries( oktetapart
 )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
-kservice_desktop_to_json(oktetapart oktetapart.desktop )
+kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop )
 install(
   FILES oktetapartreadonlyui.rc oktetapartbrowserui.rc oktetapartreadwriteui.rc
   DESTINATION ${DATA_INSTALL_DIR}/oktetapart
