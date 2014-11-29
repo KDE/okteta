@@ -105,6 +105,7 @@ int PrimitiveDataInformationTest::minimumUnsignedBits(quint64 value)
 
 void PrimitiveDataInformationTest::initTestCase()
 {
+    KLocalizedString::setLanguages(QStringList() << QStringLiteral("C"));
     Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
     Kasten::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
     QLocale locale(QLocale::C);
