@@ -29,6 +29,7 @@
   <name xml:lang="tr">Okteta</name>
   <name xml:lang="uk">Okteta</name>
   <name xml:lang="x-test">xxOktetaxx</name>
+  <name xml:lang="zh-CN">Okteta</name>
   <summary>Hex editor</summary>
   <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="cs">Hexa editor</summary>
@@ -53,6 +54,7 @@
   <summary xml:lang="tr">Hex düzenleyici</summary>
   <summary xml:lang="uk">Шістнадцятковий редактор</summary>
   <summary xml:lang="x-test">xxHex editorxx</summary>
+  <summary xml:lang="zh-CN">十六进制编辑器</summary>
   <description>
     <p>Okteta is a simple editor for the raw data of files.</p>
     <p xml:lang="ca">L'Okteta és un editor senzill per les dades de fitxers.</p>
@@ -100,6 +102,7 @@
     <p xml:lang="tr">Özellikleri:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
+    <p xml:lang="zh-CN">功能：</p>
     <ul>
       <li>Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
       <li xml:lang="ca">Els valors i el caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
@@ -345,6 +348,7 @@
       <li xml:lang="tr">Ve daha fazlası...</li>
       <li xml:lang="uk">Та багато чого іншого…</li>
       <li xml:lang="x-test">xxAnd more...xx</li>
+      <li xml:lang="zh-CN">以及更多...</li>
     </ul>
   </description>
   <url type="homepage">http://userbase.kde.org/Okteta/</url>
