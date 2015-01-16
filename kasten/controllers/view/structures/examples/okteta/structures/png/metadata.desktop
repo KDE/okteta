@@ -80,6 +80,7 @@ Comment[sv]=En teststruktur som innehåller PNG-filhuvudet (filen måste vara in
 Comment[tr]=PNG dosya başlığı içeren bir test yapısı (dosya big-endian olarak ayarlanmalı)
 Comment[uk]=Тестова структура, що містить заголовок файла PNG (порядок байтів у файлі має бути зворотним)
 Comment[x-test]=xxA test structure containing the PNG file header (file must be set to big-endian)xx
+Comment[zh_CN]=包含 PNG 文件头的测试结构 (文件需要设置为大端)
 Comment[zh_TW]=包含 PNG 檔頭的測試結構（檔案必須設定為高位元優先）
 
 X-KDE-PluginInfo-Author=Alex Richardson

@@ -80,6 +80,7 @@ Comment[sv]=Bara test av strukturer definierade med Javascript
 Comment[tr]=JS'de tanımlanmış sadece yapılar test ediliyor
 Comment[uk]=Проста перевірка структур, визначених у JS
 Comment[x-test]=xxJust testing structures defined in JSxx
+Comment[zh_CN]=测试 JS 中定义的结构
 Comment[zh_TW]=測試定義於 JS 中的結構
 
 X-KDE-PluginInfo-Author=Alex Richardson
