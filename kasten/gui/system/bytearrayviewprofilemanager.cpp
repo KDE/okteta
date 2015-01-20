@@ -555,7 +555,11 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged( const QString& viewPro
 void ByteArrayViewProfileManager::onDefaultViewProfileChanged( const QString& path )
 {
     QFile defaultViewProfileFile( path );
-    defaultViewProfileFile.open( QIODevice::ReadOnly );
+    if ( !defaultViewProfileFile.open( QIODevice::ReadOnly ) )
+    {
+        qCDebug(LOG_KASTEN_OKTETA_GUI) << "Failed to open view profiles file " << path;
+        return;
+    }
 
     const QByteArray fileContent = defaultViewProfileFile.readAll();
     const QString viewProfileId = QString::fromUtf8( fileContent );
