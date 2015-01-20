@@ -52,7 +52,9 @@ find_package(KF5 REQUIRED
 )
 
 if( UNIX )
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
+  add_compile_options(-Wall)
+  # enable this to reduce the file sizes (might crash)
+  # add_compile_options(-fno-rtti)
 endif()
 
 find_package(QCA2 2.1.0)
