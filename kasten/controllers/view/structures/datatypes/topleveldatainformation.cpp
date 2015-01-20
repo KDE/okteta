@@ -206,7 +206,6 @@ void TopLevelDataInformation::unlockPosition(const Okteta::AbstractByteArrayMode
 
 void TopLevelDataInformation::removeByteArrayModelFromList(QObject* obj)
 {
-    Q_ASSERT(qobject_cast<Okteta::AbstractByteArrayModel*>(obj));
     const Okteta::AbstractByteArrayModel* model = static_cast<Okteta::AbstractByteArrayModel*>(obj);
     mLockedPositions.remove(model);
 }
