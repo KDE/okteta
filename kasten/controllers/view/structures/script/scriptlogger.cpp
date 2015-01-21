@@ -28,13 +28,18 @@
 
 QIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)
 {
-    if (level == LogInfo)
+    switch (level)
+    {
+    case LogInfo:
         return QIcon::fromTheme(QStringLiteral("dialog-information"));
-    else if (level == LogWarning)
+    case LogWarning:
         return QIcon::fromTheme(QStringLiteral("dialog-warning"));
-    else
+    case LogError:
         return QIcon::fromTheme(QStringLiteral("dialog-error"));
-    return QIcon();
+    default:
+        Q_ASSERT_X(false, "ScriptLogger::iconForLevel", "Invalid log level passed");
+        return QIcon();
+    }
 }
 
 QVariant ScriptLogger::data(const QModelIndex& index, int role) const
