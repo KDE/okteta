@@ -270,12 +270,12 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         //if the current object was "this" in javascript we have to replace it
         if (isThisObj)
             engine()->currentContext()->setThisObject(newType->toScriptValue(engine(), mHandlerInfo));
+        newType->mHasBeenUpdated = true;
     }
     else
     {
         delete newType; //could not set new type
     }
-    newType->mHasBeenUpdated = true;
 }
 
 void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value)
