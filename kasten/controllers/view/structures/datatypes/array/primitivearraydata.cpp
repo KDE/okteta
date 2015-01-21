@@ -147,7 +147,7 @@ void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
     }
     else
     {
-        for (uint i = 0; i < sizeof(T); ++i)
+        for (uint i = 1; i <= sizeof(T); ++i)
         {
             //compiler should be smart enough not to create a loop
             quint8 val = (quint64(value) & (quint64(0xff) << (8 * (sizeof(T) - i)))) >> (8 * (sizeof(T) - i));
