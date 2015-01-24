@@ -75,6 +75,8 @@ protected Q_SLOTS:
     void lockButtonToggled();
     void setLockButtonState(bool structureLocked);
     void onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
+private:
+    void setLockButtonState(const QModelIndex& current);
 };
 
 inline StructTool* StructView::tool() const

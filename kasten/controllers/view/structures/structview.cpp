@@ -167,7 +167,7 @@ void StructView::openSettingsDlg()
     //User edited the configuration - update your local copies of the configuration data
     connect(dialog, &KConfigDialog::settingsChanged, mTool, &StructTool::setSelectedStructuresInView);
 
-    //XXX once kconfig_compiler signals work with settings dialog, use that
+#pragma message("TODO: kconfig_compiler signals work now, use those signals and not the generic KConfigDialog::settingsChanged")
     dialog->setCurrentPage(displ);
     dialog->show();
 }
@@ -185,9 +185,7 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
             else
                 mTool->unmark();
 
-            //set state of lock button
-            setLockButtonState(mTool->isStructureLocked(current));
-            mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
+            setLockButtonState(current);
         }
         else if (event->type() == QEvent::FocusOut)
         {
@@ -217,14 +215,24 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
     return QWidget::eventFilter(object, event);
 }
 
+void StructView::setLockButtonState(const QModelIndex& current)
+{
+    // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "setLockButtonState() for" << current;
+
+    // we don't want the toggled signal here, only when the user clicks the button!
+    QSignalBlocker block(mLockStructureButton);
+    setLockButtonState(mTool->isStructureLocked(current));
+    mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
+}
+
+
 void StructView::onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous)
 {
     Q_UNUSED( previous )
     if (current.isValid() && mTool->byteArrayModel())
     {
         mTool->mark(current);
-        mLockStructureButton->setEnabled(true);
-        setLockButtonState(mTool->isStructureLocked(current));
+        setLockButtonState(current);
     }
     else
         mTool->unmark();
@@ -236,6 +244,8 @@ StructView::~StructView()
 
 void StructView::lockButtonToggled()
 {
+    // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Lock button toggled";
+
     setLockButtonState(mLockStructureButton->isChecked());
     const QModelIndex current = mStructTreeView->selectionModel()->currentIndex();
     if (!current.isValid())
