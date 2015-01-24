@@ -38,6 +38,7 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     }
     mView->setShowGrid(false);
     mView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    mView->setWordWrap(false);
     QHeaderView* horizHeader = mView->horizontalHeader();
     horizHeader->setAcceptDrops(false);
     horizHeader->setSectionResizeMode(QHeaderView::Interactive);
