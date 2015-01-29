@@ -55,9 +55,9 @@ if( UNIX )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++0x -fno-rtti")
 endif()
 
-find_package(QCA2 2.1.0)
-set_package_properties(QCA2 PROPERTIES DESCRIPTION "Qt Cryptographic Architecture"
-                       URL "https://projects.kde.org/projects/kdesupport/qca" TYPE OPTIONAL
+find_package(Qca-qt5 2.1.0)
+set_package_properties(Qca-qt5 PROPERTIES DESCRIPTION "Qt Cryptographic Architecture"
+                       URL "http:/download.kde.org/stable/qca-qt5" TYPE OPTIONAL
                        PURPOSE "Needed for most of the algorithms of the checksum tool")
 
 # control build scope

@@ -32,11 +32,7 @@ include_directories(
   ${OKTETA_REL_DIR}/core
 )
 
-if( QCA2_FOUND )
-  include_directories( ${QCA2_INCLUDE_DIR} )
-endif( QCA2_FOUND )
-
-set(HAVE_QCA2 ${QCA2_FOUND})
+set(HAVE_QCA2 ${Qca-qt5_FOUND})
 configure_file( config-qca2.h.cmake  ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h )
 
 set( DOCUMENTINFOCONTROLLER_SRCS
@@ -72,11 +68,11 @@ set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/stringsextracttoolviewfactory.cpp
 )
 
-if( QCA2_FOUND )
+if( Qca-qt5_FOUND )
     set( QCA2CHECKSUM_SRCS
       view/libbytearraychecksum/algorithm/qca2bytearraychecksumalgorithm.cpp
     )
-endif( QCA2_FOUND )
+endif( Qca-qt5_FOUND )
 
 set( LIBCHECKSUM_SRCS
   view/libbytearraychecksum/abstractbytearraychecksumalgorithm.cpp
@@ -535,9 +531,9 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   Qt5::PrintSupport
   Qt5::Script
 )
-if( QCA2_FOUND )
-  target_link_libraries( ${oktetakastencontrollers_LIB} ${QCA2_LIBRARIES} )
-endif( QCA2_FOUND )
+if( Qca-qt5_FOUND )
+  target_link_libraries( ${oktetakastencontrollers_LIB} qca-qt5 )
+endif( Qca-qt5_FOUND )
 
 set_target_properties( ${oktetakastencontrollers_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetakastencontrollers_LIB_NAME}
