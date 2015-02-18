@@ -46,6 +46,7 @@
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
+#include <arraychangemetricslist.h>
 #include <changesdescribable.h>
 // KF5
 #include <KLocalizedString>

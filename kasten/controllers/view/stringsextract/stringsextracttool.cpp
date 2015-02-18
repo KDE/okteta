@@ -29,6 +29,7 @@
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>
+#include <arraychangemetricslist.h>
 // KF5
 #include <KLocalizedString>
 // Qt
