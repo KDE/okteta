@@ -31,6 +31,7 @@
 // Qt
 #include <QtGui/QClipboard>
 #include <QApplication>
+#include <QDataStream>
 
 
 OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart* part )
