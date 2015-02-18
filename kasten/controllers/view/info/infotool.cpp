@@ -30,6 +30,7 @@
 #include <bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
+#include <arraychangemetricslist.h>
 // KF5
 #include <KLocalizedString>
 // Qt
