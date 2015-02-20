@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=Java .class file format
 Name[ca]=Format de fitxer .class del Java
+Name[da]=Java .class-filformat
 Name[de]=Java-„.class“-Dateiformat
 Name[en_GB]=Java .class file format
 Name[es]=Formato de archivo .class de Java
@@ -30,6 +31,7 @@ Name[zh_CN]=Java .class 文件格式
 Name[zh_TW]=Java .class 檔案格式
 Comment=still very incomplete!!!
 Comment[ca]=Encara està molt incomplet!
+Comment[da]=stadig langt fra færdigt!!!
 Comment[de]=Noch sehr unvollständig
 Comment[en_GB]=still very incomplete!!!
 Comment[es]=Todavía bastante incompleto
