@@ -2,7 +2,6 @@ project( oktetapart )
 
 add_definitions(-DTRANSLATION_DOMAIN=\"oktetapart\")
 
-set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETAKASTEN_REL_DIR ../../kasten )
 set( OKTETA_REL_DIR ../.. )
 
@@ -19,7 +18,6 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/core
   ${OKTETAKASTEN_REL_DIR}/core/io
   ${OKTETAKASTEN_REL_DIR}/core/document
-  ${KASTEN_REL_DIR}/controllers
 #TODO: remove this
   ${OKTETA_REL_DIR}/core
   ${OKTETA_REL_DIR}/gui/libcolumnsview

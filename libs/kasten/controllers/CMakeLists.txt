@@ -314,6 +314,9 @@ PRIVATE
   KF5::KIOFileWidgets
   KF5::Parts
 )
+
+target_include_directories(${kastencontrollers_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
+
 set_target_properties( ${kastencontrollers_LIB}  PROPERTIES
   OUTPUT_NAME ${kastencontrollers_LIB_NAME}
   VERSION     ${KASTEN_LIB_VERSION}
