@@ -4,7 +4,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"liboktetagui\")
 
 include_directories(
   ../core
-  ../gui/libcolumnsview
+  libcolumnsview
 )
 
 set( libcontroller_SRCS
@@ -31,9 +31,16 @@ set( libcolumnsview_SRCS
 
 set( libcolumnsview_HDRS
   libcolumnsview/kadds.h
-  libcolumnsview/abstractcolumnstylist.h
-  libcolumnsview/abstractcolumnrenderer.h
-  libcolumnsview/columnsview.h
+)
+
+ecm_generate_headers(libcolumnsview_CCHDRS
+  HEADER_NAMES
+    AbstractColumnStylist
+    AbstractColumnRenderer
+    ColumnsView
+  RELATIVE libcolumnsview
+  PREFIX Okteta
+  REQUIRED_HEADERS libcolumnsview_HDRS
 )
 
 set( libabstractbytearrayview_SRCS
@@ -78,54 +85,43 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/kcursor.cpp PROPERTIES L
 set( oktetagui_LIB_HDRS
   ${libcolumnsview_HDRS}
   ${CMAKE_CURRENT_BINARY_DIR}/oktetagui_export.h
-  oktetagui.h
-  lineposition.h
-  line.h
-  linepositionrange.h
-  linerange.h
-  coord.h
-  coordrange.h
-  coordrangelist.h
-  selection.h
-  abstractbytearraycolumnrenderer.h
-  offsetcolumnrenderer.h
-  bordercolumnrenderer.h
-  bytearrayrowcolumnrenderer.h
-  charbytearraycolumnrenderer.h
-  valuebytearraycolumnrenderer.h
-  widgetcolumnstylist.h
-  abstractbytearrayview.h
-  bytearraycolumnview.h
-  bytearrayrowview.h
-  bytearraytablelayout.h
-  bytearraytableranges.h
-  offsetformat.h
 )
 
-set( oktetagui_LIB_CCHDRS
-  includes/LinePosition
-  includes/Line
-  includes/LinePositionRange
-  includes/LineRange
+set(oktetagui_LIB_CCHDRS
+    ${libcolumnsview_CCHDRS}
+)
 
-  includes/AbstractColumnStylist
-  includes/AbstractColumnRenderer
+ecm_generate_headers(oktetagui_LIB_CCHDRS
+  HEADER_NAMES
+    OktetaGui
 
-  includes/AbstractByteArrayColumnRenderer
-  includes/CharByteArrayColumnRenderer
-  includes/ValueByteArrayColumnRenderer
-  includes/ByteArrayRowColumnRenderer
-  includes/OffsetColumnRenderer
-  includes/BorderColumnRenderer
+    LinePosition
+    Line
+    LinePositionRange
+    LineRange
 
-  includes/AbstractByteArrayView
-  includes/ByteArrayColumnView
+    Coord
+    CoordRange
+    CoordRangeList
+    Selection
 
-  includes/OffsetFormat
-  includes/ByteArrayTableRanges
-  includes/ByteArrayRowView
-  includes/ByteArrayTableLayout
-  includes/WidgetColumnStylist
+    AbstractByteArrayColumnRenderer
+    CharByteArrayColumnRenderer
+    ValueByteArrayColumnRenderer
+    ByteArrayRowColumnRenderer
+    OffsetColumnRenderer
+    BorderColumnRenderer
+
+    AbstractByteArrayView
+    ByteArrayColumnView
+
+    OffsetFormat
+    ByteArrayTableRanges
+    ByteArrayRowView
+    ByteArrayTableLayout
+    WidgetColumnStylist
+  PREFIX Okteta
+  REQUIRED_HEADERS oktetagui_LIB_HDRS
 )
 
 add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
