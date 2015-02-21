@@ -2,15 +2,6 @@ project( kastencontrollers )
 
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
-include_directories(
-  ../core
-  ../core/entity
-  ../core/document
-  ../core/io
-  ../core/io/filesystem
-  ../core/system
-)
-
 macro(KASTENCONTROLLERS_GENERATE_HEADERS _SUBLIB _RELATIVE)
     ecm_generate_headers("${_SUBLIB}_CCHDRS"
         HEADER_NAMES ${ARGN}

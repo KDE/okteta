@@ -182,6 +182,9 @@ PRIVATE
   KF5::WidgetsAddons
   Qt5::Network
 )
+
+target_include_directories(${kastencore_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
+
 set_target_properties( ${kastencore_LIB} PROPERTIES
   OUTPUT_NAME ${kastencore_LIB_NAME}
   VERSION     ${KASTEN_LIB_VERSION}

@@ -11,10 +11,6 @@ include_directories(
   liboktetawidgets
   ../core
   ../core/document
-  ${KASTEN_REL_DIR}/core
-  ${KASTEN_REL_DIR}/core/document
-  ${KASTEN_REL_DIR}/core/entity
-  ${KASTEN_REL_DIR}/core/io
   ${OKTETA_REL_DIR}/gui
   ${OKTETA_REL_DIR}/gui/libcolumnsview
   ${OKTETA_REL_DIR}/core

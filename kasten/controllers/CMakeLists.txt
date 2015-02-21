@@ -1,5 +1,4 @@
 set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
-set( KASTEN_REL_DIR ../../libs/kasten )
 set( OKTETA_REL_DIR ../.. )
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
@@ -13,11 +12,6 @@ include_directories(
   ../core
   ../core/io
   ../core/document
-  ${KASTEN_REL_DIR}/core
-  ${KASTEN_REL_DIR}/core/document
-  ${KASTEN_REL_DIR}/core/entity
-  ${KASTEN_REL_DIR}/core/io
-  ${KASTEN_REL_DIR}/core/system
   view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog

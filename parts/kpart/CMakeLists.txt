@@ -20,11 +20,6 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/core/io
   ${OKTETAKASTEN_REL_DIR}/core/document
   ${KASTEN_REL_DIR}/controllers
-  ${KASTEN_REL_DIR}/core
-  ${KASTEN_REL_DIR}/core/document
-  ${KASTEN_REL_DIR}/core/entity
-  ${KASTEN_REL_DIR}/core/io
-  ${KASTEN_REL_DIR}/core/system
 #TODO: remove this
   ${OKTETA_REL_DIR}/core
   ${OKTETA_REL_DIR}/gui/libcolumnsview

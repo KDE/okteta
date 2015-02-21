@@ -3,10 +3,6 @@ project( kastengui )
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
 include_directories(
-  ../core
-  ../core/document
-  ../core/io
-  ../core/system
   view
   io
   system
