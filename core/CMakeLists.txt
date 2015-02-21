@@ -99,6 +99,9 @@ set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS} )
 
 
 add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
+
+generate_export_header( ${oktetacore_LIB} )
+
 target_link_libraries( ${oktetacore_LIB}
 PUBLIC
   Qt5::Core
@@ -107,8 +110,7 @@ PRIVATE
   KF5::Codecs   #needed for codecs
 )
 
-generate_export_header( ${oktetacore_LIB} )
-target_include_directories( ${oktetacore_LIB} PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
+target_include_directories(${oktetacore_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
 
 set_target_properties( ${oktetacore_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetacore_LIB_NAME}

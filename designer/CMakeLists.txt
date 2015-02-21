@@ -3,7 +3,6 @@ project( oktetadesignerplugin )
 set( OKTETA_REL_DIR .. )
 
 include_directories(
-  ${OKTETA_REL_DIR}/core
   ${OKTETA_REL_DIR}/gui/libcolumnsview
   ${OKTETA_REL_DIR}/gui
 )

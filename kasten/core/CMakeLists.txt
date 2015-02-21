@@ -1,5 +1,4 @@
 set( KASTEN_REL_DIR ../../libs/kasten )
-set( OKTETA_REL_DIR ../.. )
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
@@ -10,7 +9,6 @@ include_directories(
   ${KASTEN_REL_DIR}/core/entity
   ${KASTEN_REL_DIR}/core/io
   ${KASTEN_REL_DIR}/core/io/filesystem
-  ${OKTETA_REL_DIR}/core
 )
 
 set( okteta_kastencore_document_SRCS

@@ -13,7 +13,6 @@ include_directories(
   ../core/document
   ${OKTETA_REL_DIR}/gui
   ${OKTETA_REL_DIR}/gui/libcolumnsview
-  ${OKTETA_REL_DIR}/core
 )
 
 # if(KDE4_BUILD_TESTS)

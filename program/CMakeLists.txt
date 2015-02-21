@@ -18,7 +18,6 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/core/document
 #TODO: remove this
   ${OKTETA_REL_DIR}/gui
-  ${OKTETA_REL_DIR}/core
 )
 
 set( okteta_SRCS

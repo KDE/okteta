@@ -19,7 +19,6 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/core/io
   ${OKTETAKASTEN_REL_DIR}/core/document
 #TODO: remove this
-  ${OKTETA_REL_DIR}/core
   ${OKTETA_REL_DIR}/gui/libcolumnsview
   ${OKTETA_REL_DIR}/gui
 )

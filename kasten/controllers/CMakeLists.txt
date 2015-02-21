@@ -18,7 +18,6 @@ include_directories(
   ${LIBFRAMESPRINT_REL_DIR}
   ${OKTETA_REL_DIR}/gui
   ${OKTETA_REL_DIR}/gui/libcolumnsview
-  ${OKTETA_REL_DIR}/core
 )
 
 set(HAVE_QCA2 ${Qca-qt5_FOUND})
