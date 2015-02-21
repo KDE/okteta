@@ -192,11 +192,11 @@ set( kastengui_LIB_CCHDRS
 
 add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
 generate_export_header( ${kastengui_LIB} )
-target_link_libraries( ${kastengui_LIB} LINK_PUBLIC
+target_link_libraries( ${kastengui_LIB}
+PUBLIC
   ${kastencore_LIB}
   Qt5::Widgets
-)
-target_link_libraries( ${kastengui_LIB} LINK_PRIVATE
+PRIVATE
   KF5::XmlGui
   KF5::I18n
 )

@@ -171,8 +171,12 @@ set( kastencore_LIB_CCHDRS
 
 add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
 generate_export_header( ${kastencore_LIB} )
-target_link_libraries( ${kastencore_LIB} LINK_PUBLIC Qt5::Core Qt5::Gui KF5::KIOCore )
-target_link_libraries( ${kastencore_LIB} LINK_PRIVATE
+target_link_libraries( ${kastencore_LIB}
+PUBLIC
+  KF5::KIOCore
+  Qt5::Core
+  Qt5::Gui
+PRIVATE
   KF5::I18n
   KF5::JobWidgets
   KF5::WidgetsAddons

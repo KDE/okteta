@@ -514,14 +514,16 @@ add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_
 generate_export_header( ${oktetakastencontrollers_LIB} )
 
 target_link_libraries( ${oktetakastencontrollers_LIB}
-  structview-tested-srcs
-  poddecoder-typeeditors
+PUBLIC
   ${oktetakastengui_LIB}
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
+PRIVATE
+  structview-tested-srcs
+  poddecoder-typeeditors
   KF5::NewStuff
   KF5::I18n
   KF5::ConfigWidgets
@@ -532,7 +534,10 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
   Qt5::Script
 )
 if( Qca-qt5_FOUND )
-  target_link_libraries( ${oktetakastencontrollers_LIB} qca-qt5 )
+  target_link_libraries( ${oktetakastencontrollers_LIB}
+  PRIVATE
+    qca-qt5
+  )
 endif( Qca-qt5_FOUND )
 
 set_target_properties( ${oktetakastencontrollers_LIB}  PROPERTIES

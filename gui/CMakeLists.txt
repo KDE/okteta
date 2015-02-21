@@ -125,7 +125,8 @@ ecm_generate_headers(oktetagui_LIB_CCHDRS
 )
 
 add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
-target_link_libraries( ${oktetagui_LIB} LINK_PUBLIC
+target_link_libraries( ${oktetagui_LIB}
+PUBLIC
   ${oktetacore_LIB}
   Qt5::Widgets
 )

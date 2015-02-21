@@ -55,11 +55,11 @@ set( okteta_kastencore_LIB_HDRS
 add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
 generate_export_header( ${oktetakastencore_LIB} )
 
-target_link_libraries( ${oktetakastencore_LIB} LINK_PUBLIC
+target_link_libraries( ${oktetakastencore_LIB}
+PUBLIC
   ${KASTENCORE_LIBS}
   ${oktetacore_LIB}
-)
-target_link_libraries( ${oktetakastencore_LIB} LINK_PRIVATE
+PRIVATE
   KF5::I18n
   KF5::Bookmarks
 )

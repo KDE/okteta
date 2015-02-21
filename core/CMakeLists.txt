@@ -99,8 +99,10 @@ set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS} )
 
 
 add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
-target_link_libraries( ${oktetacore_LIB} LINK_PUBLIC Qt5::Core )
-target_link_libraries( ${oktetacore_LIB} LINK_PRIVATE
+target_link_libraries( ${oktetacore_LIB}
+PUBLIC
+  Qt5::Core
+PRIVATE
   KF5::I18n
   KF5::Codecs   #needed for codecs
 )

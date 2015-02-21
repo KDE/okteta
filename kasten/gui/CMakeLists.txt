@@ -196,14 +196,14 @@ set( okteta_kastengui_LIB_HDRS
 add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
 generate_export_header( ${oktetakastengui_LIB} )
 
-target_link_libraries( ${oktetakastengui_LIB} LINK_PUBLIC
+target_link_libraries( ${oktetakastengui_LIB}
+PUBLIC
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
   ${oktetacore_LIB}
-)
-target_link_libraries( ${oktetakastengui_LIB} LINK_PRIVATE
+PRIVATE
   Qt5::Script
   KF5::I18n
   KF5::Completion
