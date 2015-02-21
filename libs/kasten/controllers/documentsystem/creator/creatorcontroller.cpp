@@ -22,8 +22,6 @@
 
 #include "creatorcontroller.h"
 
-// lib
-#include "createdialog.h"
 // Kasten gui
 #include <abstractdocumentstrategy.h>
 #include <selecteddatawriteable.h>

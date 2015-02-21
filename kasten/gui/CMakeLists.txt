@@ -11,9 +11,6 @@ include_directories(
   liboktetawidgets
   ../core
   ../core/document
-  ${KASTEN_REL_DIR}/gui
-  ${KASTEN_REL_DIR}/gui/view
-  ${KASTEN_REL_DIR}/gui/io
   ${KASTEN_REL_DIR}/core
   ${KASTEN_REL_DIR}/core/document
   ${KASTEN_REL_DIR}/core/entity

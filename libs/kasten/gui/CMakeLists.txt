@@ -201,6 +201,7 @@ PRIVATE
   KF5::I18n
 )
 
+target_include_directories(${kastengui_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
 
 set_target_properties( ${kastengui_LIB}  PROPERTIES
   OUTPUT_NAME ${kastengui_LIB_NAME}

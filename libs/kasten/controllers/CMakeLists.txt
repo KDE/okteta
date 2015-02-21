@@ -9,12 +9,6 @@ include_directories(
   ../core/io
   ../core/io/filesystem
   ../core/system
-  ../gui
-  ../gui/view
-  ../gui/io
-  ../gui/system
-  ../gui/shell
-  ../gui/controller
 )
 
 macro(KASTENCONTROLLERS_GENERATE_HEADERS _SUBLIB _RELATIVE)

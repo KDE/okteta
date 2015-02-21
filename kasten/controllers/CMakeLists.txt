@@ -13,11 +13,6 @@ include_directories(
   ../core
   ../core/io
   ../core/document
-  ${KASTEN_REL_DIR}/gui
-  ${KASTEN_REL_DIR}/gui/view
-  ${KASTEN_REL_DIR}/gui/system
-  ${KASTEN_REL_DIR}/gui/shell
-  ${KASTEN_REL_DIR}/gui/controller
   ${KASTEN_REL_DIR}/core
   ${KASTEN_REL_DIR}/core/document
   ${KASTEN_REL_DIR}/core/entity
