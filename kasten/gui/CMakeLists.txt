@@ -1,5 +1,4 @@
 set( KASTEN_REL_DIR ../../libs/kasten )
-set( OKTETA_REL_DIR ../.. )
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
@@ -11,8 +10,6 @@ include_directories(
   liboktetawidgets
   ../core
   ../core/document
-  ${OKTETA_REL_DIR}/gui
-  ${OKTETA_REL_DIR}/gui/libcolumnsview
 )
 
 # if(KDE4_BUILD_TESTS)

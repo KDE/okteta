@@ -1,12 +1,5 @@
 project( oktetadesignerplugin )
 
-set( OKTETA_REL_DIR .. )
-
-include_directories(
-  ${OKTETA_REL_DIR}/gui/libcolumnsview
-  ${OKTETA_REL_DIR}/gui
-)
-
 set( oktetadesignerplugin_SRCS
   bytearraycolumnviewdesignerfactory.cpp
   bytearrayrowviewdesignerfactory.cpp

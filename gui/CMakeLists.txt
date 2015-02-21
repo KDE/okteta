@@ -29,12 +29,9 @@ set( libcolumnsview_SRCS
   libcolumnsview/columnsview.cpp
 )
 
-set( libcolumnsview_HDRS
-  libcolumnsview/kadds.h
-)
-
 ecm_generate_headers(libcolumnsview_CCHDRS
   HEADER_NAMES
+    KAdds # TODO: this header needs to be redone
     AbstractColumnStylist
     AbstractColumnRenderer
     ColumnsView
@@ -125,14 +122,16 @@ ecm_generate_headers(oktetagui_LIB_CCHDRS
 )
 
 add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
+
+generate_export_header( ${oktetagui_LIB} )
+
 target_link_libraries( ${oktetagui_LIB}
 PUBLIC
   ${oktetacore_LIB}
   Qt5::Widgets
 )
 
-generate_export_header( ${oktetagui_LIB} )
-target_include_directories( ${oktetagui_LIB} PUBLIC ${CMAKE_CURRENT_BINARY_DIR} )
+target_include_directories(${oktetacore_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
 
 target_link_libraries( ${oktetagui_LIB} LINK_PRIVATE
   KF5::I18n

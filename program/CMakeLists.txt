@@ -1,7 +1,6 @@
 project( oktetaprogram )
 
 set( OKTETAKASTEN_REL_DIR ../kasten )
-set( OKTETA_REL_DIR .. )
 
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/${OKTETAKASTEN_REL_DIR}/controllers
@@ -16,8 +15,6 @@ include_directories(
   ${OKTETAKASTEN_REL_DIR}/core
   ${OKTETAKASTEN_REL_DIR}/core/io
   ${OKTETAKASTEN_REL_DIR}/core/document
-#TODO: remove this
-  ${OKTETA_REL_DIR}/gui
 )
 
 set( okteta_SRCS

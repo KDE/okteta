@@ -1,5 +1,4 @@
 set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
-set( OKTETA_REL_DIR ../.. )
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
@@ -16,8 +15,6 @@ include_directories(
   view/libbytearrayfilter
   view/libfinddialog
   ${LIBFRAMESPRINT_REL_DIR}
-  ${OKTETA_REL_DIR}/gui
-  ${OKTETA_REL_DIR}/gui/libcolumnsview
 )
 
 set(HAVE_QCA2 ${Qca-qt5_FOUND})
@@ -369,14 +366,26 @@ set( VIEWPROFILESMANAGECONTROLLER_SRCS
 
 add_library( poddecoder-typeeditors STATIC ${PODDECODER_TYPEEDITOR_SRCS} )
 set_target_properties( poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
-target_link_libraries( poddecoder-typeeditors PUBLIC KF5::Completion ${oktetacore_LIB} )
+target_link_libraries( poddecoder-typeeditors
+PRIVATE
+  ${oktetagui_LIB}
+  ${oktetacore_LIB}
+  KF5::Completion
+)
 
 add_library( structview-tested-srcs STATIC ${STRUCTVIEW_TESTED_SRCS} )
 set_target_properties( structview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
-target_link_libraries( structview-tested-srcs PUBLIC
-  Qt5::Script Qt5::Xml Qt5::Widgets
-  KF5::ConfigGui KF5::ConfigWidgets KF5::I18n KF5::Completion KF5::Service
+target_link_libraries( structview-tested-srcs
+PRIVATE
   ${oktetacore_LIB}
+  KF5::ConfigGui
+  KF5::ConfigWidgets
+  KF5::I18n
+  KF5::Completion
+  KF5::Service
+  Qt5::Script
+  Qt5::Xml
+  Qt5::Widgets
 )
 
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
@@ -507,8 +516,6 @@ PUBLIC
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
   ${KASTENCORE_LIBS}
-  ${oktetagui_LIB}
-  ${oktetacore_LIB}
 PRIVATE
   structview-tested-srcs
   poddecoder-typeeditors
