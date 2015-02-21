@@ -30,6 +30,7 @@
   <name xml:lang="uk">Okteta</name>
   <name xml:lang="x-test">xxOktetaxx</name>
   <name xml:lang="zh-CN">Okteta</name>
+  <name xml:lang="zh-TW">Okteta</name>
   <summary>Hex editor</summary>
   <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="cs">Hexa editor</summary>
@@ -55,6 +56,7 @@
   <summary xml:lang="uk">Шістнадцятковий редактор</summary>
   <summary xml:lang="x-test">xxHex editorxx</summary>
   <summary xml:lang="zh-CN">十六进制编辑器</summary>
+  <summary xml:lang="zh-TW">十六進位資料編輯器</summary>
   <description>
     <p>Okteta is a simple editor for the raw data of files.</p>
     <p xml:lang="ca">L'Okteta és un editor senzill per les dades de fitxers.</p>
@@ -78,6 +80,7 @@
     <p xml:lang="tr">Okteta ham veri dosyaları için basit bir düzenleyicidir.</p>
     <p xml:lang="uk">Okteta — простий редактор для безпосереднього редагування даних файлів.</p>
     <p xml:lang="x-test">xxOkteta is a simple editor for the raw data of files.xx</p>
+    <p xml:lang="zh-TW">Okteta 是一套編輯檔案原始資料的簡易編輯器。</p>
     <p>Features:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
@@ -103,6 +106,7 @@
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
     <p xml:lang="zh-CN">功能：</p>
+    <p xml:lang="zh-TW">功能：</p>
     <ul>
       <li>Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
       <li xml:lang="ca">Els valors i el caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
@@ -126,6 +130,7 @@
       <li xml:lang="tr">Değerler ve karakterler ya iki sütunda (hex düzenleyicilerin geleneksel görünümü) ya da değer karakterin üzerinde olacak şekilde iki satırda görüntülenir</li>
       <li xml:lang="uk">Значення та символи може бути показано або у два стовпчики (типовий формат перегляду у шістнадцяткових редакторах) або у форматі рядків, де значення буде показано над символом.</li>
       <li xml:lang="x-test">xxValues and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the characterxx</li>
+      <li xml:lang="zh-TW">數值與字元可以用兩個欄位（傳統十六進制資料編輯的方式）顯示，或是在一列中將數值顯示在字元上方。</li>
       <li>Editing and navigating similar to a text editor</li>
       <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="de">Bearbeiten und navigieren ähnlich wie in einem Texteditor</li>
@@ -148,6 +153,7 @@
       <li xml:lang="tr">Metin düzenleyicilere benzer düzenleme ve gezinme</li>
       <li xml:lang="uk">Панелі редагування і навігації, подібні на відповідні панелі текстового редактора.</li>
       <li xml:lang="x-test">xxEditing and navigating similar to a text editorxx</li>
+      <li xml:lang="zh-TW">編輯與導覽類似一般文字編輯器</li>
       <li>Customizable data views, with loadable and storable profiles</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
@@ -170,6 +176,7 @@
       <li xml:lang="tr">Yüklenebilir ve saklanabilir profillerle özelleştirilebilir veri görünümleri</li>
       <li xml:lang="uk">Придатні до налаштовування панелі перегляду даних з можливістю завантаження та збереження профілів.</li>
       <li xml:lang="x-test">xxCustomizable data views, with loadable and storable profilesxx</li>
+      <li xml:lang="zh-TW">客製化的資料檢視，可載入並儲存設定檔</li>
       <li>Tools dockable on all sides or floating</li>
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
       <li xml:lang="de">Werkzeuge können an allen Seiten verankert oder freischwebend benutzt werden</li>
@@ -191,6 +198,7 @@
       <li xml:lang="tr">Kenarlara tutturulmuş veya kayan araçlar</li>
       <li xml:lang="uk">Можливість довільного розташування або повного від’єднання від вікна панелей інструментів.</li>
       <li xml:lang="x-test">xxTools dockable on all sides or floatingxx</li>
+      <li xml:lang="zh-TW">工具可以嵌在每一個側邊，或是浮出來</li>
       <li>Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
       <li xml:lang="ca">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
@@ -213,6 +221,7 @@
       <li xml:lang="tr">Sayısal kodlama: On altılık, Onluk, Sekizlik, İkilik</li>
       <li xml:lang="uk">Числові кодування: шістнадцяткове, десяткове, вісімкове, двійкове.</li>
       <li xml:lang="x-test">xxNumerical encodings: Hexadecimal, Decimal, Octal, Binaryxx</li>
+      <li xml:lang="zh-TW">數值編碼：十六進制，十進制，八進制或二進制</li>
       <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="de">Zeichenkodierungen: Alle Kodierungen, die von Qt und EBCDIC unterstützt werden</li>
@@ -235,6 +244,7 @@
       <li xml:lang="tr">Karakter kodlamaları: Qt tarafından verilen tüm 8-bit kodlamaları, EBCDIC</li>
       <li xml:lang="uk">Кодування символів: підтримка усіх 8-бітових кодувань, які підтримуються у Qt, EBCDIC.</li>
       <li xml:lang="x-test">xxCharacter encodings: All 8-bit encodings as supplied by Qt, EBCDICxx</li>
+      <li xml:lang="zh-TW">字元編碼：所有 Qt 與 EBCDIC 5 支援的八位元編碼方式</li>
       <li>Fast data rendering on screen</li>
       <li xml:lang="ca">Renderització ràpida de dades en la pantalla</li>
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
@@ -257,6 +267,7 @@
       <li xml:lang="tr">Ekranda hızlı veri gerçekleme</li>
       <li xml:lang="uk">Швидкий показ даних на екрані.</li>
       <li xml:lang="x-test">xxFast data rendering on screenxx</li>
+      <li xml:lang="zh-TW">快速螢幕資料繪制</li>
       <li>Multiple open files</li>
       <li xml:lang="ca">Múltiples fitxers oberts</li>
       <li xml:lang="cs">Otevření více souborů</li>
@@ -280,6 +291,7 @@
       <li xml:lang="tr">Çoklu dosya açılması</li>
       <li xml:lang="uk">Можливість одночасної роботи з декількома файлами.</li>
       <li xml:lang="x-test">xxMultiple open filesxx</li>
+      <li xml:lang="zh-TW">可開啟多個檔案</li>
       <li>Undo/redo support</li>
       <li xml:lang="ca">Implementació de desfer/refer</li>
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
@@ -302,6 +314,7 @@
       <li xml:lang="tr">Geri al/yeniden yap desteği</li>
       <li xml:lang="uk">Підтримка скасовування та повторення дій.</li>
       <li xml:lang="x-test">xxUndo/redo supportxx</li>
+      <li xml:lang="zh-TW">復原/重做支援</li>
       <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
       <li xml:lang="ca">Eina d'estructures per analitzar i editar basada en definicions d'estructures que pot crear l'usuari</li>
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
@@ -324,6 +337,7 @@
       <li xml:lang="tr">Kullanıcının oluşturabildiği yapı tanımlamalarına dayalı analiz ve düzenleme yapmak için araçlar</li>
       <li xml:lang="uk">За допомогою інструменту «Структури» можна аналізувати та редагувати масиви байтів на основі створених користувачем визначень структур.</li>
       <li xml:lang="x-test">xxStructures tool for analyzing and editing based on user-creatable structure definitionsxx</li>
+      <li xml:lang="zh-TW">基於使用者建立的結構定義做分析與編輯的工具</li>
       <li>And more...</li>
       <li xml:lang="ca">I més...</li>
       <li xml:lang="cs">A další...</li>
@@ -349,6 +363,7 @@
       <li xml:lang="uk">Та багато чого іншого…</li>
       <li xml:lang="x-test">xxAnd more...xx</li>
       <li xml:lang="zh-CN">以及更多...</li>
+      <li xml:lang="zh-TW">還有更多...</li>
     </ul>
   </description>
   <url type="homepage">http://userbase.kde.org/Okteta/</url>
