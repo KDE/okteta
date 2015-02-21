@@ -21,16 +21,20 @@ set( kastengui_view_SRCS
   view/abstracttoolinlineview.cpp
   view/abstracttoolview.cpp
 )
-set( kastengui_view_HDRS
-  view/abstractviewfactory.h
-  view/selecteddatawriteable.h
-  view/abstracttoolinlineview.h
-  view/abstractview.h
-  view/abstractselectionview.h
-  view/abstracttoolview.h
-  view/abstracttoolviewfactory.h
-  view/dataselectable.h
-  view/zoomable.h
+ecm_generate_headers(kastengui_view_CCHDRS
+  HEADER_NAMES
+    AbstractViewFactory
+    SelectedDataWriteable
+    AbstractToolInlineView
+    AbstractView
+    AbstractSelectionView
+    AbstractToolView
+    AbstractToolViewFactory
+    DataSelectable
+    Zoomable
+  RELATIVE view
+  PREFIX Kasten
+  REQUIRED_HEADERS kastengui_view_HDRS
 )
 
 set( kastengui_io_configeditor_SRCS
@@ -43,15 +47,25 @@ set( kastengui_io_configeditor_SRCS
 set( kastengui_io_SRCS
   ${kastengui_io_configeditor_SRCS}
 )
-set( kastengui_io_HDRS
-  io/filesystem/modelencoderfilesystemexporterconfigeditor.h
-  io/filesystem/modelencoderfilesystemexporterconfigeditorfactory.h
-  io/abstractmodelstreamencoderconfigeditor.h
-  io/abstractmodelexporterconfigeditor.h
-  io/abstractmodeldatageneratorconfigeditor.h
-  io/abstractmodelstreamencoderconfigeditorfactory.h
-  io/abstractmodelexporterconfigeditorfactory.h
-  io/abstractmodeldatageneratorconfigeditorfactory.h
+ecm_generate_headers(kastengui_io_CCHDRS
+  HEADER_NAMES
+    ModelencoderFileSystemExporterConfigEditor
+    ModelencoderFileSystemExporterConfigEditorFactory
+  RELATIVE io/filesystem
+  PREFIX Kasten
+  REQUIRED_HEADERS kastengui_io_HDRS
+)
+ecm_generate_headers(kastengui_io_CCHDRS
+  HEADER_NAMES
+    AbstractModelStreamEncoderConfigEditor
+    AbstractModelExporterConfigEditor
+    AbstractModelDataGeneratorConfigEditor
+    AbstractModelStreamEncoderConfigEditorFactory
+    AbstractModelExporterConfigEditorFactory
+    AbstractModelDataGeneratorConfigEditorFactory
+  RELATIVE io
+  PREFIX Kasten
+  REQUIRED_HEADERS kastengui_io_HDRS
 )
 
 
@@ -67,14 +81,18 @@ set( kastengui_system_SRCS
   system/singledocumentstrategy.cpp
   system/viewmanager.cpp
 )
-set( kastengui_system_HDRS
-  system/abstractdocumentstrategy.h
-  system/dialoghandler.h
-  system/dummyview.h
-  system/modelcodecviewmanager.h
-  system/multidocumentstrategy.h
-  system/singledocumentstrategy.h
-  system/viewmanager.h
+ecm_generate_headers(kastengui_system_CCHDRS
+  HEADER_NAMES
+    AbstractDocumentStrategy
+    DialogHandler
+    DummyView
+    ModelCodecViewManager
+    MultiDocumentStrategy
+    SingleDocumentStrategy
+    ViewManager
+  RELATIVE system
+  PREFIX Kasten
+  REQUIRED_HEADERS kastengui_system_HDRS
 )
 
 set( kastengui_shell_SRCS
@@ -97,23 +115,27 @@ set( kastengui_shell_SRCS
   shell/statusbar.cpp
   shell/statusbarlayout.cpp
 )
-set( kastengui_shell_HDRS
-  shell/shellwindow.h
-  shell/abstractviewarea.h
-  shell/abstractgroupedviews.h
-  shell/statusbar.h
-  shell/viewareabox.h
-  shell/viewbox.h
-  shell/singleviewarea.h
-  shell/singleviewwindow.h
-  shell/tabbedviews.h
-  shell/multiviewareas.h
-  shell/toolinlineviewwidget.h
-  shell/toolviewdockwidget.h
-  shell/statusbarlayout.h
-  shell/toolinlineviewable.h
-  shell/widgetsdockable.h
-  shell/viewareasplitable.h
+ecm_generate_headers(kastengui_shell_CCHDRS
+  HEADER_NAMES
+    ShellWindow
+    AbstractViewArea
+    AbstractGroupedViews
+    StatusBar
+    ViewAreaBox
+    ViewBox
+    SingleViewArea
+    SingleViewWindow
+    TabbedViews
+    MultiViewAreas
+    ToolInlineViewWidget
+    ToolViewDockWidget
+    StatusBarLayout
+    ToolInlineViewable
+    WidgetsDockable
+    ViewAreaSplitable
+  RELATIVE shell
+  PREFIX Kasten
+  REQUIRED_HEADERS kastengui_shell_HDRS
 )
 
 set( kastengui_controller_widgets_SRCS
@@ -129,12 +151,16 @@ set( kastengui_controller_SRCS
   controller/abstractcontroller.cpp
   controller/abstractxmlguicontroller.cpp
 )
-set( kastengui_controller_HDRS
-  controller/abstractcontroller.h
-  controller/abstractxmlguicontroller.h
-  controller/abstractlinepopup.h
-  controller/togglebutton.h
-  controller/abstracttoolwidget.h
+ecm_generate_headers(kastengui_controller_CCHDRS
+  HEADER_NAMES
+    AbstractController
+    AbstractXmlGuiController
+    AbstractLinePopup
+    ToggleButton
+    AbstractToolWidget
+  RELATIVE controller
+  PREFIX Kasten
+  REQUIRED_HEADERS kastengui_controller_HDRS
 )
 
 set( kastengui_LIB_SRCS
@@ -154,6 +180,14 @@ set( kastengui_LIB_HDRS
   ${kastengui_system_HDRS}
   ${kastengui_shell_HDRS}
   ${kastengui_controller_HDRS}
+)
+
+set( kastengui_LIB_CCHDRS
+  ${kastengui_view_CCHDRS}
+  ${kastengui_io_CCHDRS}
+  ${kastengui_system_CCHDRS}
+  ${kastengui_shell_CCHDRS}
+  ${kastengui_controller_CCHDRS}
 )
 
 add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
@@ -179,4 +213,8 @@ install( TARGETS ${kastengui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES ${kastengui_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
   COMPONENT   Devel
+)
+install( FILES ${kastengui_LIB_CCHDRS}
+  DESTINATION ${KASTEN_CCINCLUDE_INSTALL_DIR}
+  COMPONENT Devel
 )

@@ -15,6 +15,13 @@ set( KASTEN_CORE_ENTITY_SRCS
   entity/person.cpp
 #   entity/abstractentity.cpp
 )
+ecm_generate_headers(KASTEN_CORE_ENTITY_CCHDRS
+  HEADER_NAMES
+    Person
+  RELATIVE entity
+  PREFIX Kasten
+  REQUIRED_HEADERS KASTEN_CORE_ENTITY_HDRS
+)
 
 set( KASTEN_CORE_DOCUMENT_SRCS
   document/abstractmodel.cpp
@@ -23,6 +30,24 @@ set( KASTEN_CORE_DOCUMENT_SRCS
   document/abstractdocument.cpp
   document/abstractdocumentfactory.cpp
   document/documentversiondata.cpp
+)
+set( KASTEN_CORE_DOCUMENT_HDRS
+  document/documentversionid.h
+)
+ecm_generate_headers(KASTEN_CORE_DOCUMENT_CCHDRS
+  HEADER_NAMES
+    AbstractModel
+    AbstractModelSelection
+    AbstractDocument
+    AbstractDocumentFactory
+    AbstractTool
+    AbstractToolFactory
+    DocumentVersionData
+    Versionable
+    UserListable
+  RELATIVE document
+  PREFIX Kasten
+  REQUIRED_HEADERS KASTEN_CORE_DOCUMENT_HDRS
 )
 
 set( KASTEN_CORE_IO_SRCS
@@ -39,6 +64,25 @@ set( KASTEN_CORE_IO_SRCS
   io/modelstreamencodethread.cpp
   io/abstractmodelsynchronizer.cpp
   io/abstractmodelsynchronizerfactory.cpp
+)
+ecm_generate_headers(KASTEN_CORE_IO_CCHDRS
+  HEADER_NAMES
+    AbstractSyncToRemoteJob
+    AbstractModelSynchronizer
+    AbstractSyncWithRemoteJob
+    AbstractSyncFromRemoteJob
+    AbstractConnectJob
+    AbstractModelStreamEncoder
+    AbstractModelDataGenerator
+    AbstractExportJob
+    AbstractModelExporter
+    ModelStreamEncodeThread
+    ModelDataGenerateThread
+    AbstractloadJob
+    AbstractModelSynchronizerfactory
+  RELATIVE io
+  PREFIX Kasten
+  REQUIRED_HEADERS KASTEN_CORE_IO_HDRS
 )
 
 set( KASTEN_CORE_IO_FILESYSTEM_SRCS
@@ -60,6 +104,21 @@ set( KASTEN_CORE_IO_FILESYSTEM_SRCS
   io/filesystem/abstractmodelfilesystemsynchronizer_p.cpp
   io/filesystem/abstractmodelfilesystemsynchronizer.cpp
 )
+ecm_generate_headers(KASTEN_CORE_IO_FILESYSTEM_CCHDRS
+  HEADER_NAMES
+    AbstractFileSystemSyncWithRemoteJob
+    AbstractFileSystemSyncFromRemoteJob
+    AbstractFileSystemSyncToRemoteJob
+    AbstractModelFileSystemSynchronizer
+    AbstractFileSystemConnectJob
+    AbstractFileSystemLoadJob
+    AbstractFileSystemExportjob
+    ModelEncoderFileSystemExporter
+    ModelEncoderFileSystemExportJob
+  RELATIVE io/filesystem
+  PREFIX Kasten
+  REQUIRED_HEADERS KASTEN_CORE_IO_FILESYSTEM_HDRS
+)
 
 set( KASTEN_CORE_SYSTEM_SRCS
   system/jobmanager.cpp
@@ -67,6 +126,19 @@ set( KASTEN_CORE_SYSTEM_SRCS
   system/documentcreatemanager.cpp
   system/documentsyncmanager.cpp
   system/modelcodecmanager.cpp
+)
+ecm_generate_headers(KASTEN_CORE_SYSTEM_CCHDRS
+  HEADER_NAMES
+    AbstractOverwriteDialog
+    AbstractSaveDiscardDialog
+    JobManager
+    DocumentManager
+    DocumentCreateManager
+    DocumentSyncManager
+    ModelCodecManager
+  RELATIVE system
+  PREFIX Kasten
+  REQUIRED_HEADERS KASTEN_CORE_SYSTEM_HDRS
 )
 
 set( kastencore_LIB_SRCS
@@ -81,47 +153,21 @@ set( kastencore_LIB_SRCS
 set( kastencore_LIB_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/kastencore_export.h
   kastencore.h
-  document/abstractmodel.h
-  document/abstractmodelselection.h
-  document/abstractdocument.h
-  document/abstractdocumentfactory.h
-  document/abstracttool.h
-  document/abstracttoolfactory.h
-  document/documentversiondata.h
-  document/documentversionid.h
-  document/versionable.h
-  document/userlistable.h
-  entity/person.h
-  io/abstractsynctoremotejob.h
-  io/abstractmodelsynchronizer.h
-  io/abstractsyncwithremotejob.h
-  io/filesystem/abstractfilesystemsyncwithremotejob.h
-  io/filesystem/abstractfilesystemsyncfromremotejob.h
-  io/filesystem/abstractfilesystemsynctoremotejob.h
-  io/filesystem/abstractmodelfilesystemsynchronizer.h
-  io/filesystem/abstractfilesystemconnectjob.h
-  io/filesystem/abstractfilesystemloadjob.h
-  io/filesystem/abstractfilesystemexportjob.h
-  io/filesystem/modelencoderfilesystemexporter.h
-  io/filesystem/modelencoderfilesystemexportjob.h
-  io/abstractsyncfromremotejob.h
-  io/abstractconnectjob.h
-  io/abstractmodelstreamencoder.h
-  io/abstractmodeldatagenerator.h
-  io/abstractexportjob.h
-  io/abstractmodelexporter.h
-  io/modelstreamencodethread.h
-  io/modeldatageneratethread.h
-  io/abstractloadjob.h
-  io/abstractmodelsynchronizerfactory.h
-  system/abstractoverwritedialog.h
-  system/abstractsavediscarddialog.h
-  system/jobmanager.h
-  system/documentmanager.h
-  system/documentcreatemanager.h
-  system/documentsyncmanager.h
-  system/modelcodecmanager.h
+  ${KASTEN_CORE_ENTITY_HDRS}
+  ${KASTEN_CORE_DOCUMENT_HDRS}
+  ${KASTEN_CORE_IO_HDRS}
+  ${KASTEN_CORE_IO_FILESYSTEM_HDRS}
+  ${KASTEN_CORE_SYSTEM_HDRS}
 )
+
+set( kastencore_LIB_CCHDRS
+  ${KASTEN_CORE_ENTITY_CCHDRS}
+  ${KASTEN_CORE_DOCUMENT_CCHDRS}
+  ${KASTEN_CORE_IO_CCHDRS}
+  ${KASTEN_CORE_IO_FILESYSTEM_CCHDRS}
+  ${KASTEN_CORE_SYSTEM_CCHDRS}
+)
+
 
 add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
 generate_export_header( ${kastencore_LIB} )
@@ -143,6 +189,10 @@ install( TARGETS ${kastencore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 install( FILES ${kastencore_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
   COMPONENT   Devel
+)
+install( FILES ${kastencore_LIB_CCHDRS}
+  DESTINATION ${KASTEN_CCINCLUDE_INSTALL_DIR}
+  COMPONENT Devel
 )
 
 if(BUILD_TESTING)

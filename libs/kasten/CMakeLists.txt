@@ -6,6 +6,7 @@ set( KASTEN_PATCHLEVEL_VERSION 0 )
 set( KASTEN_VERSION "${KASTEN_MAJOR_VERSION}.${KASTEN_MINOR_VERSION}.${KASTEN_PATCHLEVEL_VERSION}" )
 set( KASTEN_ABI_VERSION 3 )
 set( KASTEN_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/kasten ) #${KASTEN_ABI_VERSION} )
+set( KASTEN_CCINCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/Kasten ) #${KASTEN_ABI_VERSION}
 
 set( kastencore_LIB         kastencore )
 set( kastengui_LIB          kastengui )
@@ -20,7 +21,5 @@ set( KASTEN_LIB_VERSION ${KASTEN_VERSION} )
 add_subdirectory( core )
 add_subdirectory( gui )
 add_subdirectory( controllers )
-
-add_subdirectory( includes )
 
 #add_subdirectory( kparts )
