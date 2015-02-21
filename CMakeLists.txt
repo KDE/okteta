@@ -3,12 +3,14 @@ project( okteta )
 cmake_minimum_required(VERSION 2.8.12)
 set(QT_MIN_VERSION "5.2.0")
 
-find_package(ECM 0.0.8 REQUIRED NO_MODULE)
+find_package(ECM 1.0.0 REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 include(ECMInstallIcons)
+include(ECMGenerateHeaders)
+
 include(FeatureSummary)
 include(GenerateExportHeader)
 

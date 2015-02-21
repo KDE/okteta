@@ -55,64 +55,39 @@ set( oktetacore_LIB_SRCS
   addressrangelist.cpp
 )
 
-set( oktetacore_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/oktetacore_export.h
-  oktetacore.h
-  address.h
-  size.h
-  byte.h
-  abstractbytearraymodel.h
-  piecetablebytearraymodel.h
-#   filebytearraymodel.h
-  bytearraymodel.h
-  bookmarkable.h
-  changesdescribable.h
-  changehistory.h
-  versionable.h
-  arraychangemetrics.h
-  bookmark.h
-  bookmarksconstiterator.h
-  bookmarksconstiteratoradapter.h
-  bytearraychange.h
-  charcodec.h
-  character.h
-  range.h
-  numberrange.h
-  addressrange.h
-  valuecodec.h
-  wordbytearrayservice.h
+ecm_generate_headers(oktetacore_LIB_CCHDRS
+  HEADER_NAMES
+    OktetaCore
+    Range
+    NumberRange
+
+    Address
+    AddressRange
+    Size
+    Byte
+    AbstractByteArrayModel
+    Versionable
+    Bookmarkable
+    ChangesDescribable
+    ChangeHistory
+
+    ByteArrayModel
+    #FileByteArrayModel
+    PieceTableByteArrayModel
+
+    Character
+    ArrayChangeMetrics
+    ByteArrayChange
+
+    Bookmark
+    BookmarksConstIterator
+
+    WordByteArrayService
+    ValueCodec
+    CharCodec
+  PREFIX Okteta
+  REQUIRED_HEADERS oktetacore_LIB_HDRS
 )
-
-set( oktetacore_LIB_CCHDRS
-  includes/Range
-  includes/NumberRange
-
-  includes/Address
-  includes/AddressRange
-  includes/Size
-  includes/Byte
-  includes/AbstractByteArrayModel
-  includes/Versionable
-  includes/Bookmarkable
-  includes/ChangesDescribable
-  includes/ChangeHistory
-
-  includes/ByteArrayModel
-  #includes/FileByteArrayModel
-  includes/PieceTableByteArrayModel
-
-  includes/Character
-  includes/ArrayChangeMetrics
-  includes/ByteArrayChange
-
-  includes/Bookmark
-  includes/BookmarksConstIterator
-
-  includes/WordByteArrayService
-  includes/ValueCodec
-  includes/CharCodec
-)
-
 #don't compile sources twice by using object libraries
 #add_library( oktetacore_objs OBJECT ${oktetacore_LIB_SRCS} )
 #target_include_directories( oktetacore_objs PUBLIC $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES> )
@@ -141,7 +116,10 @@ set_target_properties( ${oktetacore_LIB}  PROPERTIES
 
 install( TARGETS ${oktetacore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-install( FILES ${oktetacore_LIB_HDRS}
+install( FILES
+    ${oktetacore_LIB_HDRS}
+    bookmarksconstiteratoradapter.h # TODO: make private or move adapter class to iterator
+    ${CMAKE_CURRENT_BINARY_DIR}/oktetacore_export.h
   DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}
   COMPONENT Devel
 )
