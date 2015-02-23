@@ -5,6 +5,7 @@
   <project_license>GPL-2.0</project_license>
   <project_license>GPL-3.0</project_license>
   <name>Okteta</name>
+  <name xml:lang="bs">Okteta</name>
   <name xml:lang="ca">Okteta</name>
   <name xml:lang="cs">Okteta</name>
   <name xml:lang="de">Okteta</name>
@@ -29,6 +30,7 @@
   <name xml:lang="x-test">xxOktetaxx</name>
   <name xml:lang="zh-CN">Okteta</name>
   <summary>Hex editor</summary>
+  <summary xml:lang="bs">Heksadekadni editor</summary>
   <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="cs">Hexa editor</summary>
   <summary xml:lang="de">Hex-Editor</summary>
@@ -75,6 +77,7 @@
     <p xml:lang="uk">Okteta — простий редактор для безпосереднього редагування даних файлів.</p>
     <p xml:lang="x-test">xxOkteta is a simple editor for the raw data of files.xx</p>
     <p>Features:</p>
+    <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="de">Funktionen:</p>
