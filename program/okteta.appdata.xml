@@ -5,6 +5,7 @@
   <project_license>GPL-2.0</project_license>
   <project_license>GPL-3.0</project_license>
   <name>Okteta</name>
+  <name xml:lang="bs">Okteta</name>
   <name xml:lang="ca">Okteta</name>
   <name xml:lang="cs">Okteta</name>
   <name xml:lang="da">Okteta</name>
@@ -33,6 +34,7 @@
   <name xml:lang="zh-CN">Okteta</name>
   <name xml:lang="zh-TW">Okteta</name>
   <summary>Hex editor</summary>
+  <summary xml:lang="bs">Heksadekadni editor</summary>
   <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="cs">Hexa editor</summary>
   <summary xml:lang="de">Hex-Editor</summary>
@@ -85,6 +87,7 @@
     <p xml:lang="x-test">xxOkteta is a simple editor for the raw data of files.xx</p>
     <p xml:lang="zh-TW">Okteta 是一套編輯檔案原始資料的簡易編輯器。</p>
     <p>Features:</p>
+    <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="de">Funktionen:</p>
@@ -305,6 +308,7 @@
       <li xml:lang="x-test">xxMultiple open filesxx</li>
       <li xml:lang="zh-TW">可開啟多個檔案</li>
       <li>Undo/redo support</li>
+      <li xml:lang="bs">Podrška za poništavanje/ponavljanje akcija</li>
       <li xml:lang="ca">Implementació de desfer/refer</li>
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
       <li xml:lang="en-GB">Undo/redo support</li>
@@ -353,6 +357,7 @@
       <li xml:lang="x-test">xxStructures tool for analyzing and editing based on user-creatable structure definitionsxx</li>
       <li xml:lang="zh-TW">基於使用者建立的結構定義做分析與編輯的工具</li>
       <li>And more...</li>
+      <li xml:lang="bs">i još %1</li>
       <li xml:lang="ca">I més...</li>
       <li xml:lang="cs">A další...</li>
       <li xml:lang="de">Und noch mehr ...</li>
