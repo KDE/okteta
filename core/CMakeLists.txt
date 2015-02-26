@@ -18,6 +18,7 @@ set(libcodecs_SRCS
   codecs/decimalbytecodec.cpp
   codecs/usasciicharcodec.cpp
   codecs/ebcdic1047charcodec.cpp
+  codecs/jisx0201charcodec.cpp
   codecs/hexadecimalbytecodec.cpp
   codecs/octalbytecodec.cpp
   codecs/textcharcodec.cpp
