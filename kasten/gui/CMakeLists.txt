@@ -1,5 +1,3 @@
-set( KASTEN_REL_DIR ../../libs/kasten )
-
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 include_directories(

@@ -19,12 +19,6 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/../..
   ${SUTDIR}
   ${SUTDIR}/..
-  ${CMAKE_CURRENT_BINARY_DIR}/../../../../core
-  ${SUTDIR}/../../../core
-  ${CMAKE_CURRENT_BINARY_DIR}/../../../../libs/kasten/core
-  ${SUTDIR}/../../../libs/kasten/core/document
-  ${SUTDIR}/../../../core/tests
-  ${SUTDIR}/../../../libs/kasten/core/tests
 )
 
 ########### bytearraydocumenttest ###############

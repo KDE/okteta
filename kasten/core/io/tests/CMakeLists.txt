@@ -21,13 +21,6 @@ include_directories(
   ${SUTDIR}/..
   ${SUTDIR}/../document
   ${SUTDIR}/filesystem
-  ${CMAKE_CURRENT_BINARY_DIR}/../../../../core
-  ${SUTDIR}/../../../core
-  ${CMAKE_CURRENT_BINARY_DIR}/../../../../libs/kasten/core
-  ${SUTDIR}/../../../libs/kasten/core/document
-  ${SUTDIR}/../../../libs/kasten/core/io
-  ${SUTDIR}/../../../core/tests
-  ${SUTDIR}/../../../libs/kasten/core/tests
 )
 
 ########### io ###############
@@ -44,7 +37,7 @@ set( oktetakastenio_LIB_SRCS
 )
 
 add_library( oktetakastenio  STATIC ${oktetakastenio_LIB_SRCS} )
-target_link_libraries( oktetakastenio  KF5::I18n KF5::CoreAddons Qt5::Core )
+target_link_libraries( oktetakastenio  ${KASTENCORE_LIBS} oktetacore KF5::I18n KF5::CoreAddons Qt5::Core )
 
 
 ########### bytearrayrawfilesynchronizertest ###############
