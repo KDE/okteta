@@ -134,14 +134,13 @@ target_link_libraries( ${oktetagui_LIB}
 PUBLIC
   ${oktetacore_LIB}
   Qt5::Widgets
+PRIVATE
+  KF5::I18n
+  KF5::ConfigWidgets
 )
 
 target_include_directories(${oktetacore_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
 
-target_link_libraries( ${oktetagui_LIB} LINK_PRIVATE
-  KF5::I18n
-  KF5::ConfigWidgets
-)
 set_target_properties( ${oktetagui_LIB}  PROPERTIES
   EXPORT_NAME "OktetaGui"
   OUTPUT_NAME ${oktetagui_LIB_NAME}
