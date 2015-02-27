@@ -139,7 +139,7 @@ PRIVATE
   KF5::ConfigWidgets
 )
 
-target_include_directories(${oktetacore_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
+target_include_directories(${oktetagui_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
 
 set_target_properties( ${oktetagui_LIB}  PROPERTIES
   EXPORT_NAME "OktetaGui"
