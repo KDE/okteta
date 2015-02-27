@@ -1,5 +1,11 @@
 project( oktetagui )
 
+ecm_setup_version( ${OKTETALIBS_LIB_VERSION}
+    VARIABLE_PREFIX OKTETAGUI
+    SOVERSION ${OKTETALIBS_LIB_SOVERSION}
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/OktetaGuiConfigVersion.cmake"
+)
+
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetagui\")
 
 include_directories(
@@ -138,9 +144,10 @@ target_link_libraries( ${oktetagui_LIB} LINK_PRIVATE
   KF5::ConfigWidgets
 )
 set_target_properties( ${oktetagui_LIB}  PROPERTIES
+  EXPORT_NAME "OktetaGui"
   OUTPUT_NAME ${oktetagui_LIB_NAME}
-  VERSION     ${OKTETALIBS_LIB_VERSION}
-  SOVERSION   ${OKTETALIBS_LIB_SOVERSION}
+  VERSION     ${OKTETAGUI_VERSION}
+  SOVERSION   ${OKTETAGUI_SOVERSION}
   LABELS OktetaLabel
 )
 
@@ -153,6 +160,27 @@ install( FILES ${oktetagui_LIB_HDRS}
 install( FILES ${oktetagui_LIB_CCHDRS}
   DESTINATION ${OKTETALIBS_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
+)
+
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/Okteta")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/OktetaGuiConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/OktetaGuiConfig.cmake"
+  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install( FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaGuiConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaGuiConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
+
+install(EXPORT OktetaCoreTargets
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  FILE OktetaCoreTargets.cmake
 )
 
 

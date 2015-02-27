@@ -10,6 +10,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules" $
 
 include(ECMInstallIcons)
 include(ECMGenerateHeaders)
+include(ECMSetupVersion)
+include(ECMPackageConfigHelpers)
 
 include(FeatureSummary)
 include(GenerateExportHeader)

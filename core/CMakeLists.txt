@@ -1,5 +1,11 @@
 project( oktetacore )
 
+ecm_setup_version( ${OKTETALIBS_LIB_VERSION}
+    VARIABLE_PREFIX OKTETACORE
+    SOVERSION ${OKTETALIBS_LIB_SOVERSION}
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/OktetaCoreConfigVersion.cmake"
+)
+
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetacore\")
 
 set( libcontroller_SRCS
@@ -114,12 +120,13 @@ PRIVATE
 target_include_directories(${oktetacore_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
 
 set_target_properties( ${oktetacore_LIB}  PROPERTIES
+  EXPORT_NAME "OktetaCore"
   OUTPUT_NAME ${oktetacore_LIB_NAME}
-  VERSION     ${OKTETALIBS_LIB_VERSION}
-  SOVERSION   ${OKTETALIBS_LIB_SOVERSION}
+  VERSION     ${OKTETACORE_VERSION}
+  SOVERSION   ${OKTETACORE_SOVERSION}
 )
 
-install( TARGETS ${oktetacore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${oktetacore_LIB} EXPORT OktetaCoreTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES
     ${oktetacore_LIB_HDRS}
@@ -131,6 +138,27 @@ install( FILES
 install( FILES ${oktetacore_LIB_CCHDRS}
   DESTINATION ${OKTETALIBS_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
+)
+
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/Okteta")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/OktetaCoreConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/OktetaCoreConfig.cmake"
+  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install( FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaCoreConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaCoreConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
+
+install(EXPORT OktetaCoreTargets
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  FILE OktetaCoreTargets.cmake
 )
 
 
