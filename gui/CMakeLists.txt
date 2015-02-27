@@ -146,7 +146,6 @@ set_target_properties( ${oktetagui_LIB}  PROPERTIES
   OUTPUT_NAME ${oktetagui_LIB_NAME}
   VERSION     ${OKTETAGUI_VERSION}
   SOVERSION   ${OKTETAGUI_SOVERSION}
-  LABELS OktetaLabel
 )
 
 install( TARGETS ${oktetagui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )

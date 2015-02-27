@@ -22,8 +22,6 @@ ecm_add_test(
   NAME_PREFIX libokteta-gui-
   LINK_LIBRARIES ${oktetacore_LIB} Qt5::Test )
 
-set_tests_properties(libokteta-gui-selectiontest PROPERTIES LABELS OktetaLabel)
-
 ecm_add_test(
   coordtest.cpp
   TEST_NAME coordtest
