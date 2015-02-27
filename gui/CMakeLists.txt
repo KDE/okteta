@@ -9,7 +9,6 @@ ecm_setup_version( ${OKTETALIBS_LIB_VERSION}
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetagui\")
 
 include_directories(
-  ../core
   libcolumnsview
 )
 
