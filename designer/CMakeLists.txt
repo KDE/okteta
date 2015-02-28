@@ -11,7 +11,7 @@ set( oktetadesignerplugin_SRCS
 add_library( oktetadesignerplugin  MODULE ${oktetadesignerplugin_SRCS} )
 
 target_link_libraries( oktetadesignerplugin
-  ${oktetagui_LIB}
+  OktetaGui
   OktetaCore
   Qt5::Widgets
   Qt5::Designer

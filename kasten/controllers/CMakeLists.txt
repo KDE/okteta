@@ -368,7 +368,7 @@ add_library( poddecoder-typeeditors STATIC ${PODDECODER_TYPEEDITOR_SRCS} )
 set_target_properties( poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
 target_link_libraries( poddecoder-typeeditors
 PRIVATE
-  ${oktetagui_LIB}
+  OktetaGui
   OktetaCore
   KF5::Completion
 )

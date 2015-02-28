@@ -188,7 +188,7 @@ PUBLIC
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
   ${KASTENCORE_LIBS}
-  ${oktetagui_LIB}
+  OktetaGui
   OktetaCore
 PRIVATE
   Qt5::Script

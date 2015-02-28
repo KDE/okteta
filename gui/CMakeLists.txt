@@ -126,11 +126,11 @@ ecm_generate_headers(oktetagui_LIB_CCHDRS
   REQUIRED_HEADERS oktetagui_LIB_HDRS
 )
 
-add_library( ${oktetagui_LIB}  SHARED ${oktetagui_LIB_SRCS} )
+add_library( OktetaGui  SHARED ${oktetagui_LIB_SRCS} )
 
-generate_export_header( ${oktetagui_LIB} )
+generate_export_header( OktetaGui )
 
-target_link_libraries( ${oktetagui_LIB}
+target_link_libraries( OktetaGui
 PUBLIC
   OktetaCore
   Qt5::Widgets
@@ -139,16 +139,16 @@ PRIVATE
   KF5::ConfigWidgets
 )
 
-target_include_directories(${oktetagui_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
+target_include_directories(OktetaGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
 
-set_target_properties( ${oktetagui_LIB}  PROPERTIES
+set_target_properties( OktetaGui  PROPERTIES
   EXPORT_NAME "OktetaGui"
-  OUTPUT_NAME ${oktetagui_LIB_NAME}
+  OUTPUT_NAME okteta${OKTETALIBS_ABI_VERSION}gui
   VERSION     ${OKTETAGUI_VERSION}
   SOVERSION   ${OKTETAGUI_SOVERSION}
 )
 
-install( TARGETS ${oktetagui_LIB}  EXPORT OktetaGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaGui  EXPORT OktetaGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktetagui_LIB_HDRS}
   DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}

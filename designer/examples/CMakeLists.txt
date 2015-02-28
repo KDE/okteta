@@ -9,7 +9,7 @@ qt5_wrap_ui( oktetadesignerexamplewidget_SRCS example_widget.ui )
 add_executable( oktetadesignerexample  ${oktetadesignerexamplewidget_SRCS} )
 
 target_link_libraries( oktetadesignerexample
-  ${oktetagui_LIB}
+  OktetaGui
   OktetaCore
   Qt5::Widgets
 )
