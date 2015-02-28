@@ -2,8 +2,6 @@ if (NOT Qt5Test_FOUND)
   return()
 endif()
 
-project( oktetakasten_document_tests )
-
 include(ECMAddTests)
 
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )

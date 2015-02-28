@@ -2,8 +2,6 @@ if (NOT Qt5Test_FOUND)
   return()
 endif()
 
-project( kasten_core_tests )
-
 include(ECMAddTests)
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
