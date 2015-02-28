@@ -27,7 +27,7 @@ ecm_add_test(
   TEST_NAME bytearraydocumenttest
   NAME_PREFIX oktetakasten-document-
   LINK_LIBRARIES
-  ${KASTENCORE_LIBS}
+  KastenCore
   testoktetacore
   Qt5::Test
   KF5::I18n
@@ -43,7 +43,7 @@ ecm_add_test(
   TEST_NAME bytearraydocumentfactorytest
   NAME_PREFIX oktetakasten-document-
   LINK_LIBRARIES
-  ${KASTENCORE_LIBS}
+  KastenCore
   oktetacoretestutil
   testoktetacore
   Qt5::Test

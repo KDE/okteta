@@ -515,7 +515,7 @@ PUBLIC
   ${oktetakastengui_LIB}
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
-  ${KASTENCORE_LIBS}
+  KastenCore
 PRIVATE
   structview-tested-srcs
   poddecoder-typeeditors

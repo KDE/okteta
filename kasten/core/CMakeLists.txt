@@ -48,7 +48,7 @@ generate_export_header( ${oktetakastencore_LIB} )
 
 target_link_libraries( ${oktetakastencore_LIB}
 PUBLIC
-  ${KASTENCORE_LIBS}
+  KastenCore
   OktetaCore
 PRIVATE
   KF5::I18n

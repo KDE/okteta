@@ -311,7 +311,7 @@ generate_export_header( ${kastencontrollers_LIB} )
 target_link_libraries( ${kastencontrollers_LIB}
 PUBLIC
   ${kastengui_LIB}
-  ${kastencore_LIB}
+  KastenCore
 PRIVATE
   KF5::I18n
   KF5::ConfigWidgets

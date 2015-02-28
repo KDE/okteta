@@ -35,7 +35,7 @@ set( oktetakastenio_LIB_SRCS
 )
 
 add_library( oktetakastenio  STATIC ${oktetakastenio_LIB_SRCS} )
-target_link_libraries( oktetakastenio  ${KASTENCORE_LIBS} OktetaCore KF5::I18n KF5::CoreAddons Qt5::Core )
+target_link_libraries( oktetakastenio  KastenCore OktetaCore KF5::I18n KF5::CoreAddons Qt5::Core )
 
 
 ########### bytearrayrawfilesynchronizertest ###############
@@ -49,7 +49,7 @@ ecm_add_test(
   NAME_PREFIX oktetakasten-io-
   LINK_LIBRARIES
   oktetakastenio
-  ${KASTENCORE_LIBS}
+  KastenCore
   kastencoretestutil
   oktetacoretestutil
   testoktetacore
@@ -70,7 +70,7 @@ ecm_add_test(
   NAME_PREFIX oktetakasten-io-
   LINK_LIBRARIES
   oktetakastenio
-  ${KASTENCORE_LIBS}
+  KastenCore
   kastencoretestutil
   oktetacoretestutil
   testoktetacore

@@ -195,7 +195,7 @@ add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
 generate_export_header( ${kastengui_LIB} )
 target_link_libraries( ${kastengui_LIB}
 PUBLIC
-  ${kastencore_LIB}
+  KastenCore
   Qt5::Widgets
 PRIVATE
   KF5::XmlGui

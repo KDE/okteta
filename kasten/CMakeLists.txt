@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 2.8.8)
 
 set( KASTEN_ABI_VERSION 3 )
 # use the real lib names here once the base Kasten libs are moved into an own project
-set( KASTENCORE_LIBS         kastencore )
 set( KASTENGUI_LIBS          kastengui )
 set( KASTENCONTROLLERS_LIBS  kastencontrollers )
 

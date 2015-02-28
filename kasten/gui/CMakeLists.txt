@@ -187,7 +187,7 @@ target_link_libraries( ${oktetakastengui_LIB}
 PUBLIC
   ${oktetakastencore_LIB}
   ${KASTENGUI_LIBS}
-  ${KASTENCORE_LIBS}
+  KastenCore
   OktetaGui
   OktetaCore
 PRIVATE

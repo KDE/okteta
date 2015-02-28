@@ -53,7 +53,7 @@ ecm_add_test(
   TEST_NAME testdocumenttest
   NAME_PREFIX libkasten-core-
   LINK_LIBRARIES
-  ${kastencore_LIB}
+  KastenCore
   Qt5::Test
 )
 
@@ -67,7 +67,7 @@ ecm_add_test(
   NAME_PREFIX libkasten-core-
   LINK_LIBRARIES
   kastencoretestio
-  ${kastencore_LIB}
+  KastenCore
   kastencoretestutil
   Qt5::Test
 )
@@ -83,7 +83,7 @@ ecm_add_test(
   NAME_PREFIX libkasten-core-
   LINK_LIBRARIES
   kastencoretestio
-  ${kastencore_LIB}
+  KastenCore
   kastencoretestutil
   Qt5::Test
 )
@@ -96,6 +96,6 @@ ecm_add_test(
   TEST_NAME documentmanagertest
   NAME_PREFIX libkasten-core-
   LINK_LIBRARIES
-  ${kastencore_LIB}
+  KastenCore
   Qt5::Test
 )

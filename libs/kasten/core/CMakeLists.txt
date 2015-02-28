@@ -174,9 +174,9 @@ set( kastencore_LIB_CCHDRS
 )
 
 
-add_library( ${kastencore_LIB} SHARED ${kastencore_LIB_SRCS} )
-generate_export_header( ${kastencore_LIB} )
-target_link_libraries( ${kastencore_LIB}
+add_library( KastenCore SHARED ${kastencore_LIB_SRCS} )
+generate_export_header( KastenCore )
+target_link_libraries( KastenCore
 PUBLIC
   KF5::KIOCore
   Qt5::Core
@@ -188,16 +188,16 @@ PRIVATE
   Qt5::Network
 )
 
-target_include_directories(${kastencore_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
+target_include_directories(KastenCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
 
-set_target_properties( ${kastencore_LIB} PROPERTIES
+set_target_properties( KastenCore PROPERTIES
   EXPORT_NAME "KastenCore"
-  OUTPUT_NAME ${kastencore_LIB_NAME}
+  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}core
   VERSION     ${KASTENCORE_VERSION}
   SOVERSION   ${KASTENCORE_SOVERSION}
 )
 
-install( TARGETS ${kastencore_LIB}  EXPORT KastenCoreTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS KastenCore  EXPORT KastenCoreTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${kastencore_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
