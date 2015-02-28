@@ -191,9 +191,9 @@ set( kastengui_LIB_CCHDRS
   ${kastengui_controller_CCHDRS}
 )
 
-add_library( ${kastengui_LIB} SHARED ${kastengui_LIB_SRCS} )
-generate_export_header( ${kastengui_LIB} )
-target_link_libraries( ${kastengui_LIB}
+add_library( KastenGui SHARED ${kastengui_LIB_SRCS} )
+generate_export_header( KastenGui )
+target_link_libraries( KastenGui
 PUBLIC
   KastenCore
   Qt5::Widgets
@@ -202,16 +202,16 @@ PRIVATE
   KF5::I18n
 )
 
-target_include_directories(${kastengui_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
+target_include_directories(KastenGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
 
-set_target_properties( ${kastengui_LIB}  PROPERTIES
+set_target_properties( KastenGui  PROPERTIES
   EXPORT_NAME "KastenGui"
-  OUTPUT_NAME ${kastengui_LIB_NAME}
+  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}gui
   VERSION     ${KASTENGUI_VERSION}
   SOVERSION   ${KASTENGUI_SOVERSION}
 )
 
-install( TARGETS ${kastengui_LIB}  EXPORT KastenGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS KastenGui  EXPORT KastenGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${kastengui_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}

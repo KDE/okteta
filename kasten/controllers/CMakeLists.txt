@@ -514,7 +514,7 @@ target_link_libraries( ${oktetakastencontrollers_LIB}
 PUBLIC
   ${oktetakastengui_LIB}
   ${oktetakastencore_LIB}
-  ${KASTENGUI_LIBS}
+  KastenGui
   KastenCore
 PRIVATE
   structview-tested-srcs

@@ -310,7 +310,7 @@ add_library( ${kastencontrollers_LIB} SHARED ${kastencontrollers_LIB_SRCS} )
 generate_export_header( ${kastencontrollers_LIB} )
 target_link_libraries( ${kastencontrollers_LIB}
 PUBLIC
-  ${kastengui_LIB}
+  KastenGui
   KastenCore
 PRIVATE
   KF5::I18n
