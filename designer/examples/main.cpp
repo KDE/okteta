@@ -1,7 +1,7 @@
 /*
     This file is part of the Okteta project, made within the KDE community.
 
-    Copyright 2009,2011 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2009,2011,2015 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     Public domain.
 */
@@ -16,10 +16,8 @@
 #include <Okteta/PieceTableByteArrayModel>
 
 //// only needed for the example
-// KF5
-#include <KApplication>
-#include <KCmdLineArgs>
-#include <KAboutData>
+// Qt
+#include <QApplication>
 
 
 //// some static data so the bytearray model is not empty on start
@@ -84,9 +82,7 @@ Widget::~Widget() {}
 
 int main( int argc, char* argv[] )
 {
-    KAboutData aboutData( "uitest", "UIT", ki18n(""), "", ki18n("") );
-    KCmdLineArgs::init( argc, argv, &aboutData );
-    KApplication programCore;
+    QApplication programCore(argc, argv);
 
     Widget* widget = new Widget;
     widget->show();
