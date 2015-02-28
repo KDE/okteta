@@ -180,10 +180,10 @@ set( okteta_kastengui_LIB_HDRS
   ${okteta_kastengui_system_HDRS}
 )
 
-add_library( ${oktetakastengui_LIB}  SHARED ${okteta_kastengui_LIB_SRCS} )
-generate_export_header( ${oktetakastengui_LIB} )
+add_library( OktetaKastenGui  SHARED ${okteta_kastengui_LIB_SRCS} )
+generate_export_header( OktetaKastenGui )
 
-target_link_libraries( ${oktetakastengui_LIB}
+target_link_libraries( OktetaKastenGui
 PUBLIC
   OktetaKastenCore
   KastenGui
@@ -196,13 +196,13 @@ PRIVATE
   KF5::Completion
 )
 
-set_target_properties( ${oktetakastengui_LIB}  PROPERTIES
-  OUTPUT_NAME ${oktetakastengui_LIB_NAME}
+set_target_properties( OktetaKastenGui  PROPERTIES
+  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}gui
   VERSION     ${OKTETAKASTEN_LIB_VERSION}
   SOVERSION   ${OKTETAKASTEN_LIB_SOVERSION}
 )
 
-install( TARGETS ${oktetakastengui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaKastenGui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastengui_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}

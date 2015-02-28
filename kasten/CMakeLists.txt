@@ -10,9 +10,7 @@ set( OKTETAKASTEN_VERSION "${OKTETAKASTEN_MAJOR_VERSION}.${OKTETAKASTEN_MINOR_VE
 set( OKTETAKASTEN_ABI_VERSION 1 )
 set( OKTETAKASTEN_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/kasten/okteta ) #${KASTEN_ABI_VERSION}/okteta${OKTETAKASTEN_ABI_VERSION} )
 
-set( oktetakastengui_LIB          oktetakastengui )
 set( oktetakastencontrollers_LIB  oktetakastencontrollers )
-set( oktetakastengui_LIB_NAME          kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}gui )
 set( oktetakastencontrollers_LIB_NAME  kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}controllers )
 
 set( OKTETAKASTEN_LIB_SOVERSION ${OKTETAKASTEN_ABI_VERSION} )
