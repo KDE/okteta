@@ -33,7 +33,7 @@ target_link_libraries( okteta
   oktetakastencontrollers
   oktetakastengui
   oktetakastencore
-  kastencontrollers
+  KastenControllers
   KastenGui
   KastenCore
   KF5::ConfigCore

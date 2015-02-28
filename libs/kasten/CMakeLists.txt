@@ -8,9 +8,6 @@ set( KASTEN_ABI_VERSION 3 )
 set( KASTEN_INCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/kasten ) #${KASTEN_ABI_VERSION} )
 set( KASTEN_CCINCLUDE_INSTALL_DIR  ${INCLUDE_INSTALL_DIR}/Kasten ) #${KASTEN_ABI_VERSION}
 
-set( kastencontrollers_LIB  kastencontrollers )
-set( kastencontrollers_LIB_NAME kasten${KASTEN_ABI_VERSION}controllers )
-
 set( KASTEN_LIB_SOVERSION ${KASTEN_ABI_VERSION} )
 set( KASTEN_LIB_VERSION ${KASTEN_VERSION} )
 

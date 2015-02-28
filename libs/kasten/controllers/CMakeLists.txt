@@ -306,9 +306,9 @@ set( kastencontrollers_LIB_CCHDRS
   ${QUITCONTROLLER_CCHDRS}
 )
 
-add_library( ${kastencontrollers_LIB} SHARED ${kastencontrollers_LIB_SRCS} )
-generate_export_header( ${kastencontrollers_LIB} )
-target_link_libraries( ${kastencontrollers_LIB}
+add_library( KastenControllers SHARED ${kastencontrollers_LIB_SRCS} )
+generate_export_header( KastenControllers )
+target_link_libraries( KastenControllers
 PUBLIC
   KastenGui
   KastenCore
@@ -320,16 +320,16 @@ PRIVATE
   KF5::Parts
 )
 
-target_include_directories(${kastencontrollers_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
+target_include_directories(KastenControllers PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
 
-set_target_properties( ${kastencontrollers_LIB}  PROPERTIES
+set_target_properties( KastenControllers  PROPERTIES
   EXPORT_NAME "KastenControllers"
-  OUTPUT_NAME ${kastencontrollers_LIB_NAME}
+  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}controllers
   VERSION     ${KASTENCONTROLLERS_VERSION}
   SOVERSION   ${KASTENCONTROLLERS_SOVERSION}
 )
 
-install( TARGETS ${kastencontrollers_LIB}  EXPORT KastenControllersTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS KastenControllers  EXPORT KastenControllersTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${kastencontrollers_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}

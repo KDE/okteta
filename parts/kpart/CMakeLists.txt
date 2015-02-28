@@ -33,7 +33,7 @@ target_link_libraries( oktetapart
   oktetakastencontrollers
   oktetakastengui
   oktetakastencore
-  kastencontrollers
+  KastenControllers
   KastenGui
   KastenCore
   KF5::I18n
