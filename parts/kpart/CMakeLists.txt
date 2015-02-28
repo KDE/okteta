@@ -32,7 +32,7 @@ add_library( oktetapart  MODULE ${oktetapart_SRCS} )
 target_link_libraries( oktetapart
   oktetakastencontrollers
   oktetakastengui
-  oktetakastencore
+  OktetaKastenCore
   KastenControllers
   KastenGui
   KastenCore

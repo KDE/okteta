@@ -43,10 +43,10 @@ set( okteta_kastencore_LIB_HDRS
   io/filesystem/bytearrayrawfilesynchronizerfactory.h
 )
 
-add_library( ${oktetakastencore_LIB}  SHARED ${okteta_kastencore_LIB_SRCS} )
-generate_export_header( ${oktetakastencore_LIB} )
+add_library( OktetaKastenCore  SHARED ${okteta_kastencore_LIB_SRCS} )
+generate_export_header( OktetaKastenCore )
 
-target_link_libraries( ${oktetakastencore_LIB}
+target_link_libraries( OktetaKastenCore
 PUBLIC
   KastenCore
   OktetaCore
@@ -55,13 +55,13 @@ PRIVATE
   KF5::Bookmarks
 )
 
-set_target_properties( ${oktetakastencore_LIB} PROPERTIES
-  OUTPUT_NAME ${oktetakastencore_LIB_NAME}
+set_target_properties( OktetaKastenCore PROPERTIES
+  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}core
   VERSION     ${OKTETAKASTEN_LIB_VERSION}
   SOVERSION   ${OKTETAKASTEN_LIB_SOVERSION}
 )
 
-install( TARGETS ${oktetakastencore_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaKastenCore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastencore_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}

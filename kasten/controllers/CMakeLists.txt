@@ -513,7 +513,7 @@ generate_export_header( ${oktetakastencontrollers_LIB} )
 target_link_libraries( ${oktetakastencontrollers_LIB}
 PUBLIC
   ${oktetakastengui_LIB}
-  ${oktetakastencore_LIB}
+  OktetaKastenCore
   KastenGui
   KastenCore
 PRIVATE

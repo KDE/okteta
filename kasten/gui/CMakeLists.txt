@@ -185,7 +185,7 @@ generate_export_header( ${oktetakastengui_LIB} )
 
 target_link_libraries( ${oktetakastengui_LIB}
 PUBLIC
-  ${oktetakastencore_LIB}
+  OktetaKastenCore
   KastenGui
   KastenCore
   OktetaGui
