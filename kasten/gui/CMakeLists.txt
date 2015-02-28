@@ -1,5 +1,11 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
+ecm_setup_version( ${OKTETAKASTEN_LIB_VERSION}
+    VARIABLE_PREFIX OKTETAKASTENGUI
+    SOVERSION ${OKTETAKASTEN_LIB_SOVERSION}
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenGuiConfigVersion.cmake"
+)
+
 include_directories(
   system
   io
@@ -187,9 +193,7 @@ target_link_libraries( OktetaKastenGui
 PUBLIC
   OktetaKastenCore
   KastenGui
-  KastenCore
   OktetaGui
-  OktetaCore
 PRIVATE
   Qt5::Script
   KF5::I18n
@@ -197,14 +201,36 @@ PRIVATE
 )
 
 set_target_properties( OktetaKastenGui  PROPERTIES
+  EXPORT_NAME "OktetaKastenGui"
   OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}gui
-  VERSION     ${OKTETAKASTEN_LIB_VERSION}
-  SOVERSION   ${OKTETAKASTEN_LIB_SOVERSION}
+  VERSION     ${OKTETAKASTENGUI_VERSION}
+  SOVERSION   ${OKTETAKASTENGUI_SOVERSION}
 )
 
-install( TARGETS OktetaKastenGui  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaKastenGui  EXPORT OktetaKastenGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastengui_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
   COMPONENT Devel
+)
+
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaKasten")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenGuiConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenGuiConfig.cmake"
+  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install( FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenGuiConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenGuiConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
+
+install(EXPORT OktetaKastenGuiTargets
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  FILE OktetaKastenGuiTargets.cmake
 )

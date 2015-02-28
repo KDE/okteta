@@ -1,5 +1,11 @@
 set( LIBFRAMESPRINT_REL_DIR ../../libs/framesprint )
 
+ecm_setup_version( ${OKTETAKASTEN_LIB_VERSION}
+    VARIABLE_PREFIX OKTETAKASTENCONTROLLERS
+    SOVERSION ${OKTETAKASTEN_LIB_SOVERSION}
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfigVersion.cmake"
+)
+
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
 include_directories(
@@ -536,12 +542,13 @@ if( Qca-qt5_FOUND )
 endif( Qca-qt5_FOUND )
 
 set_target_properties( OktetaKastenControllers  PROPERTIES
+  EXPORT_NAME "OktetaKastenControllers"
   OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}controllers
-  VERSION     ${OKTETAKASTEN_LIB_VERSION}
-  SOVERSION   ${OKTETAKASTEN_LIB_SOVERSION}
+  VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
+  SOVERSION   ${OKTETAKASTENCONTROLLERS_SOVERSION}
 )
 
-install( TARGETS OktetaKastenControllers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaKastenControllers  EXPORT OktetaKastenControllersTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastencontrollers_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
@@ -566,6 +573,27 @@ install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION 
 configure_file( view/structures/struct2osd.sh.in ${CMAKE_CURRENT_BINARY_DIR}/struct2osd.sh @ONLY)
 install( FILES ${CMAKE_CURRENT_BINARY_DIR}/struct2osd.sh DESTINATION ${BIN_INSTALL_DIR} )
 install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${DATA_INSTALL_DIR}/okteta/structures/ )
+
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaKasten")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenControllersConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfig.cmake"
+  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install( FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
+
+install(EXPORT OktetaKastenControllersTargets
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  FILE OktetaKastenControllersTargets.cmake
+)
 
 
 if( KASTEN_BUILD_INTERNAL_TEMPLATES )

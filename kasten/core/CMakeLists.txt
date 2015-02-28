@@ -1,5 +1,11 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
+ecm_setup_version( ${OKTETAKASTEN_LIB_VERSION}
+    VARIABLE_PREFIX OKTETAKASTENCORE
+    SOVERSION ${OKTETAKASTEN_LIB_SOVERSION}
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenCoreConfigVersion.cmake"
+)
+
 include_directories(
   document
 )
@@ -56,16 +62,38 @@ PRIVATE
 )
 
 set_target_properties( OktetaKastenCore PROPERTIES
+  EXPORT_NAME "OktetaKastenCore"
   OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}core
-  VERSION     ${OKTETAKASTEN_LIB_VERSION}
-  SOVERSION   ${OKTETAKASTEN_LIB_SOVERSION}
+  VERSION     ${OKTETAKASTENCORE_VERSION}
+  SOVERSION   ${OKTETAKASTENCORE_SOVERSION}
 )
 
-install( TARGETS OktetaKastenCore  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaKastenCore  EXPORT OktetaKastenCoreTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastencore_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
   COMPONENT Devel
+)
+
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaKasten")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenCoreConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenCoreConfig.cmake"
+  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install( FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenCoreConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenCoreConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
+
+install(EXPORT OktetaKastenCoreTargets
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  FILE OktetaKastenCoreTargets.cmake
 )
 
 
