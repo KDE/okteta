@@ -132,7 +132,7 @@ generate_export_header( ${oktetagui_LIB} )
 
 target_link_libraries( ${oktetagui_LIB}
 PUBLIC
-  ${oktetacore_LIB}
+  OktetaCore
   Qt5::Widgets
 PRIVATE
   KF5::I18n

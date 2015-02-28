@@ -49,7 +49,7 @@ generate_export_header( ${oktetakastencore_LIB} )
 target_link_libraries( ${oktetakastencore_LIB}
 PUBLIC
   ${KASTENCORE_LIBS}
-  ${oktetacore_LIB}
+  OktetaCore
 PRIVATE
   KF5::I18n
   KF5::Bookmarks

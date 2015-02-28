@@ -189,7 +189,7 @@ PUBLIC
   ${KASTENGUI_LIBS}
   ${KASTENCORE_LIBS}
   ${oktetagui_LIB}
-  ${oktetacore_LIB}
+  OktetaCore
 PRIVATE
   Qt5::Script
   KF5::I18n

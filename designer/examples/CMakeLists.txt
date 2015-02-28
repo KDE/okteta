@@ -10,6 +10,6 @@ add_executable( oktetadesignerexample  ${oktetadesignerexamplewidget_SRCS} )
 
 target_link_libraries( oktetadesignerexample
   ${oktetagui_LIB}
-  ${oktetacore_LIB}
+  OktetaCore
   Qt5::Widgets
 )

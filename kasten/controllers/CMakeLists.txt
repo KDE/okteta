@@ -369,7 +369,7 @@ set_target_properties( poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CO
 target_link_libraries( poddecoder-typeeditors
 PRIVATE
   ${oktetagui_LIB}
-  ${oktetacore_LIB}
+  OktetaCore
   KF5::Completion
 )
 
@@ -377,7 +377,7 @@ add_library( structview-tested-srcs STATIC ${STRUCTVIEW_TESTED_SRCS} )
 set_target_properties( structview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
 target_link_libraries( structview-tested-srcs
 PRIVATE
-  ${oktetacore_LIB}
+  OktetaCore
   KF5::ConfigGui
   KF5::ConfigWidgets
   KF5::I18n
@@ -592,6 +592,6 @@ set( okteta_kastencontrollers_templates_SRCS
 add_library( oktetakastencontrollertemplates  STATIC ${okteta_kastencontrollers_templates_SRCS} )
 # MSVC needs this
 target_compile_definitions( oktetakastencontrollertemplates PUBLIC OKTETAKASTENCONTROLLERS_STATIC_DEFINE=1 )
-target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets ${oktetacore_LIB} )
+target_link_libraries( oktetakastencontrollertemplates   KF5::I18n Qt5::Widgets OktetaCore )
 
 endif( KASTEN_BUILD_INTERNAL_TEMPLATES )

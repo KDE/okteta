@@ -69,7 +69,7 @@ ecm_add_test(
   bytearraymodeltest.cpp
   TEST_NAME bytearraymodeltest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES ${oktetacore_LIB} Qt5::Test
+  LINK_LIBRARIES OktetaCore Qt5::Test
 )
 
 
@@ -96,7 +96,7 @@ ecm_add_test(
   piecetablebytearraymodelversionableiftest.cpp
   TEST_NAME piecetablebytearraymodelversionableiftest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES oktetacoretestutil ${oktetacore_LIB} Qt5::Test
+  LINK_LIBRARIES oktetacoretestutil OktetaCore Qt5::Test
 )
 
 
@@ -104,7 +104,7 @@ ecm_add_test(
   valuecodectest.cpp
   TEST_NAME valuecodectest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES ${oktetacore_LIB} Qt5::Test
+  LINK_LIBRARIES OktetaCore Qt5::Test
 )
 
 
@@ -112,7 +112,7 @@ ecm_add_test(
   charcodectest.cpp
   TEST_NAME charcodectest
   NAME_PREFIX libokteta-core-
-  LINK_LIBRARIES ${oktetacore_LIB} Qt5::Test KF5::I18n
+  LINK_LIBRARIES OktetaCore Qt5::Test KF5::I18n
 )
 
 

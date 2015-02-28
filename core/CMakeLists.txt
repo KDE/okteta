@@ -105,11 +105,11 @@ ecm_generate_headers(oktetacore_LIB_CCHDRS
 set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS} )
 
 
-add_library( ${oktetacore_LIB} SHARED ${oktetacore_LIB_OBJS} )
+add_library( OktetaCore SHARED ${oktetacore_LIB_OBJS} )
 
-generate_export_header( ${oktetacore_LIB} )
+generate_export_header( OktetaCore )
 
-target_link_libraries( ${oktetacore_LIB}
+target_link_libraries( OktetaCore
 PUBLIC
   Qt5::Core
 PRIVATE
@@ -117,16 +117,16 @@ PRIVATE
   KF5::Codecs   #needed for codecs
 )
 
-target_include_directories(${oktetacore_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
+target_include_directories(OktetaCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
 
-set_target_properties( ${oktetacore_LIB}  PROPERTIES
+set_target_properties( OktetaCore  PROPERTIES
   EXPORT_NAME "OktetaCore"
-  OUTPUT_NAME ${oktetacore_LIB_NAME}
+  OUTPUT_NAME okteta${OKTETALIBS_ABI_VERSION}core
   VERSION     ${OKTETACORE_VERSION}
   SOVERSION   ${OKTETACORE_SOVERSION}
 )
 
-install( TARGETS ${oktetacore_LIB} EXPORT OktetaCoreTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaCore EXPORT OktetaCoreTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES
     ${oktetacore_LIB_HDRS}
