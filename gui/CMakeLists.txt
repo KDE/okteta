@@ -148,7 +148,7 @@ set_target_properties( ${oktetagui_LIB}  PROPERTIES
   SOVERSION   ${OKTETAGUI_SOVERSION}
 )
 
-install( TARGETS ${oktetagui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${oktetagui_LIB}  EXPORT OktetaGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktetagui_LIB_HDRS}
   DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}
@@ -175,9 +175,9 @@ install( FILES
   COMPONENT Devel
 )
 
-install(EXPORT OktetaCoreTargets
+install(EXPORT OktetaGuiTargets
   DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  FILE OktetaCoreTargets.cmake
+  FILE OktetaGuiTargets.cmake
 )
 
 
