@@ -66,15 +66,20 @@ set_package_properties(Qca-qt5 PROPERTIES DESCRIPTION "Qt Cryptographic Architec
                        URL "http:/download.kde.org/stable/qca-qt5" TYPE OPTIONAL
                        PURPOSE "Needed for most of the algorithms of the checksum tool")
 
-# control build scope
-if(NOT DEFINED OMIT_EXAMPLES)
-    set(OMIT_EXAMPLES ${BUILD_TESTING})
+# control build scope, default to examples if BUILD_TESTING is ON
+if( NOT DEFINED OMIT_EXAMPLES AND NOT BUILD_TESTING )
+    set( OMIT_EXAMPLES TRUE )
 endif()
-if(NOT DEFINED OMIT_INTERNAL_TEMPLATES)
-    set(OMIT_INTERNAL_TEMPLATES ${BUILD_TESTING})
+if( NOT DEFINED OMIT_INTERNAL_TEMPLATES AND NOT BUILD_TESTING )
+    set( OMIT_INTERNAL_TEMPLATES TRUE )
 endif()
-set( OKTETA_BUILD_EXAMPLES  NOT OMIT_EXAMPLES )
-set( KASTEN_BUILD_INTERNAL_TEMPLATES NOT OMIT_INTERNAL_TEMPLATES )
+
+if( NOT OMIT_EXAMPLES )
+    set( OKTETA_BUILD_EXAMPLES TRUE )
+endif()
+if( NOT OMIT_INTERNAL_TEMPLATES )
+    set( KASTEN_BUILD_INTERNAL_TEMPLATES TRUE )
+endif()
 
 add_definitions(
     -DQT_USE_QSTRINGBUILDER
