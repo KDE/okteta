@@ -1,5 +1,10 @@
 project( kastengui )
 
+ecm_setup_version( ${KASTEN_LIB_VERSION}
+    VARIABLE_PREFIX KASTENGUI
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KastenGuiConfigVersion.cmake"
+)
+
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
 include_directories(
@@ -200,12 +205,13 @@ PRIVATE
 target_include_directories(${kastengui_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
 
 set_target_properties( ${kastengui_LIB}  PROPERTIES
+  EXPORT_NAME "KastenGui"
   OUTPUT_NAME ${kastengui_LIB_NAME}
-  VERSION     ${KASTEN_LIB_VERSION}
-  SOVERSION   ${KASTEN_LIB_SOVERSION}
+  VERSION     ${KASTENGUI_VERSION}
+  SOVERSION   ${KASTENGUI_SOVERSION}
 )
 
-install( TARGETS ${kastengui_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${kastengui_LIB}  EXPORT KastenGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${kastengui_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
@@ -214,4 +220,25 @@ install( FILES ${kastengui_LIB_HDRS}
 install( FILES ${kastengui_LIB_CCHDRS}
   DESTINATION ${KASTEN_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
+)
+
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/Kasten")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/KastenGuiConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/KastenGuiConfig.cmake"
+  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install( FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KastenGuiConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KastenGuiConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
+
+install(EXPORT KastenGuiTargets
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  FILE KastenGuiTargets.cmake
 )

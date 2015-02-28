@@ -1,5 +1,10 @@
 project( kastencontrollers )
 
+ecm_setup_version( ${KASTEN_LIB_VERSION}
+    VARIABLE_PREFIX KASTENCONTROLLERS
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KastenControllersConfigVersion.cmake"
+)
+
 add_definitions(-DTRANSLATION_DOMAIN=\"libkasten\")
 
 macro(KASTENCONTROLLERS_GENERATE_HEADERS _SUBLIB _RELATIVE)
@@ -318,12 +323,13 @@ PRIVATE
 target_include_directories(${kastencontrollers_LIB} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
 
 set_target_properties( ${kastencontrollers_LIB}  PROPERTIES
+  EXPORT_NAME "KastenControllers"
   OUTPUT_NAME ${kastencontrollers_LIB_NAME}
-  VERSION     ${KASTEN_LIB_VERSION}
-  SOVERSION   ${KASTEN_LIB_SOVERSION}
+  VERSION     ${KASTENCONTROLLERS_VERSION}
+  SOVERSION   ${KASTENCONTROLLERS_SOVERSION}
 )
 
-install( TARGETS ${kastencontrollers_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS ${kastencontrollers_LIB}  EXPORT KastenControllersTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${kastencontrollers_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
@@ -332,4 +338,25 @@ install( FILES ${kastencontrollers_LIB_HDRS}
 install( FILES ${kastencontrollers_LIB_CCHDRS}
   DESTINATION ${KASTEN_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
+)
+
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/Kasten")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/KastenControllersConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/KastenControllersConfig.cmake"
+  INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install( FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KastenControllersConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KastenControllersConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
+
+install(EXPORT KastenControllersTargets
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  FILE KastenControllersTargets.cmake
 )
