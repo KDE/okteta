@@ -507,10 +507,10 @@ set( okteta_kastencontrollers_LIB_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
 )
 
-add_library( ${oktetakastencontrollers_LIB}  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
-generate_export_header( ${oktetakastencontrollers_LIB} )
+add_library( OktetaKastenControllers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
+generate_export_header( OktetaKastenControllers )
 
-target_link_libraries( ${oktetakastencontrollers_LIB}
+target_link_libraries( OktetaKastenControllers
 PUBLIC
   OktetaKastenGui
   OktetaKastenCore
@@ -529,19 +529,19 @@ PRIVATE
   Qt5::Script
 )
 if( Qca-qt5_FOUND )
-  target_link_libraries( ${oktetakastencontrollers_LIB}
+  target_link_libraries( OktetaKastenControllers
   PRIVATE
     qca-qt5
   )
 endif( Qca-qt5_FOUND )
 
-set_target_properties( ${oktetakastencontrollers_LIB}  PROPERTIES
-  OUTPUT_NAME ${oktetakastencontrollers_LIB_NAME}
+set_target_properties( OktetaKastenControllers  PROPERTIES
+  OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}controllers
   VERSION     ${OKTETAKASTEN_LIB_VERSION}
   SOVERSION   ${OKTETAKASTEN_LIB_SOVERSION}
 )
 
-install( TARGETS ${oktetakastencontrollers_LIB}  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaKastenControllers  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastencontrollers_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}

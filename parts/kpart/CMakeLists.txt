@@ -30,7 +30,7 @@ add_library( oktetapart  MODULE ${oktetapart_SRCS} )
 
 
 target_link_libraries( oktetapart
-  oktetakastencontrollers
+  OktetaKastenControllers
   OktetaKastenGui
   OktetaKastenCore
   KastenControllers

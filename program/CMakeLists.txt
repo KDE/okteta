@@ -30,7 +30,7 @@ set( okteta_SRCS
 add_executable( okteta  ${okteta_SRCS} )
 
 target_link_libraries( okteta
-  oktetakastencontrollers
+  OktetaKastenControllers
   OktetaKastenGui
   OktetaKastenCore
   KastenControllers
