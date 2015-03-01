@@ -25,7 +25,7 @@
 // part
 #include "part.h"
 // Okteta Kasten
-#include <print/printcontroller.h>
+#include <printcontroller.h>
 #include <bytearrayview.h>
 #include <bytearraydocument.h>
 // Qt

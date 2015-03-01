@@ -28,7 +28,7 @@
 // Okteta Kasten
 #include <bytearraydocumentfactory.h>
 #include <bytearrayviewfactory.h>
-#include <filesystem/bytearrayrawfilesynchronizerfactory.h>
+#include <bytearrayrawfilesynchronizerfactory.h>
 #include <bytearraystreamencoderconfigeditorfactoryfactory.h>
 #include <bytearraydatageneratorconfigeditorfactoryfactory.h>
 #include <bytearraystreamencoderfactory.h>

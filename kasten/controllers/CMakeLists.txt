@@ -8,15 +8,16 @@ ecm_setup_version( ${OKTETAKASTEN_LIB_VERSION}
 
 add_definitions(-DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
+macro(OKTETAKASTENCONTROLLERS_GENERATE_HEADERS _SUBLIB _RELATIVE)
+    ecm_generate_headers("${_SUBLIB}_CCHDRS"
+        HEADER_NAMES ${ARGN}
+        RELATIVE ${_RELATIVE}
+        PREFIX Kasten/Okteta
+        REQUIRED_HEADERS "${_SUBLIB}_HDRS"
+    )
+endmacro()
+
 include_directories(
-  ../gui
-  ../gui/view
-  ../gui/io
-  ../gui/liboktetawidgets
-  ../gui/system
-  ../core
-  ../core/io
-  ../core/document
   view/libbytearraychecksum
   view/libbytearrayfilter
   view/libfinddialog
@@ -32,11 +33,21 @@ set( DOCUMENTINFOCONTROLLER_SRCS
   document/info/documentinfoview.cpp
   document/info/documentinfotoolview.cpp
 )
+oktetakastencontrollers_generate_headers(documentinfocontroller document/info
+  DocumentInfoTool
+  DocumentInfoToolView
+)
 set( OVERWRITEONLYCONTROLLER_SRCS
   document/overwriteonly/overwriteonlycontroller.cpp
 )
+oktetakastencontrollers_generate_headers(overwriteonlycontroller document/overwriteonly
+  OverwriteOnlyController
+)
 set( OVERWRITEMODECONTROLLER_SRCS
   view/overwritemode/overwritemodecontroller.cpp
+)
+oktetakastencontrollers_generate_headers(overwritemodecontroller view/overwritemode
+  OverwriteModeController
 )
 set( INFOCONTROLLER_SRCS
   view/info/createstatisticjob.cpp
@@ -48,6 +59,12 @@ set( INFOCONTROLLER_SRCS
   view/info/infotoolviewfactory.cpp
 )
 kconfig_add_kcfg_files( INFOCONTROLLER_SRCS view/info/infoviewsettings.kcfgc )
+oktetakastencontrollers_generate_headers(infocontroller view/info
+  InfoTool
+  InfoToolView
+  InfoToolFactory
+  InfoToolViewFactory
+)
 
 set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/extractstringsjob.cpp
@@ -58,13 +75,19 @@ set( STRINGSEXTRACTCONTROLLER_SRCS
   view/stringsextract/stringsextracttoolfactory.cpp
   view/stringsextract/stringsextracttoolviewfactory.cpp
 )
+oktetakastencontrollers_generate_headers(stringsextractcontroller view/stringsextract
+  ContainedString
+  StringsExtractTool
+  StringsExtractToolView
+  StringsExtractToolFactory
+  StringsExtractToolViewFactory
+)
 
 if( Qca-qt5_FOUND )
     set( QCA2CHECKSUM_SRCS
       view/libbytearraychecksum/algorithm/qca2bytearraychecksumalgorithm.cpp
     )
 endif( Qca-qt5_FOUND )
-
 set( LIBCHECKSUM_SRCS
   view/libbytearraychecksum/abstractbytearraychecksumalgorithm.cpp
   view/libbytearraychecksum/abstractbytearraychecksumparameterset.cpp
@@ -104,9 +127,20 @@ set( CHECKSUMCONTROLLER_SRCS
   view/checksum/checksumtoolfactory.cpp
   view/checksum/checksumtoolviewfactory.cpp
 )
+oktetakastencontrollers_generate_headers(checksumcontroller view/checksum
+  ChecksumTool
+  ChecksumToolView
+  ChecksumToolFactory
+  ChecksumToolViewFactory
+)
+
 set( FINDDIALOG_LIB_SRCS
   view/libfinddialog/kabstractfinddialog.cpp
 )
+oktetakastencontrollers_generate_headers(FINDDIALOG_LIB view/libfinddialog
+  KFindDirection
+)
+
 set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/typecodecs/binary8codec.cpp
   view/poddecoder/typecodecs/octal8codec.cpp
@@ -132,6 +166,13 @@ set( PODDECODERCONTROLLER_SRCS
   view/poddecoder/poddecodertoolfactory.cpp
   view/poddecoder/poddecodertoolviewfactory.cpp
 )
+oktetakastencontrollers_generate_headers(poddecodercontroller view/poddecoder
+  PODData
+  PODDecoderTool
+  PODDecoderToolView
+  PODDecoderToolFactory
+  PODDecoderToolViewFactory
+)
 
 set( PODDECODER_TYPEEDITOR_SRCS
   view/poddecoder/typeeditors/abstractvalue8editor.cpp
@@ -155,6 +196,12 @@ set( BYTETABLECONTROLLER_SRCS
   view/bytetable/bytetabletoolviewfactory.cpp
 )
 kconfig_add_kcfg_files( BYTETABLECONTROLLER_SRCS view/bytetable/bytetableviewsettings.kcfgc )
+oktetakastencontrollers_generate_headers(bytetablecontroller view/bytetable
+  ByteTableTool
+  ByteTableToolView
+  ByteTableToolFactory
+  ByteTableToolViewFactory
+)
 
 set( SEARCHCONTROLLER_SRCS
   view/search/ksearchdialog.cpp
@@ -162,12 +209,22 @@ set( SEARCHCONTROLLER_SRCS
   view/search/searchtool.cpp
   view/search/searchcontroller.cpp
 )
+oktetakastencontrollers_generate_headers(searchcontroller view/search
+  SearchController
+  SearchUserQueryable
+)
+
 set( REPLACECONTROLLER_SRCS
   view/replace/kreplacedialog.cpp
   view/replace/kreplaceprompt.cpp
   view/replace/replacetool.cpp
   view/replace/replacecontroller.cpp
 )
+oktetakastencontrollers_generate_headers(replacecontroller view/replace
+  ReplaceController
+  ReplaceUserQueryable
+)
+
 set( LIBFILTER_SRCS
   view/libbytearrayfilter/abstractbytearrayfilter.cpp
   view/libbytearrayfilter/abstractbytearrayfilterparameterset.cpp
@@ -213,6 +270,13 @@ set( FILTERCONTROLLER_SRCS
   view/filter/filtertoolfactory.cpp
   view/filter/filtertoolviewfactory.cpp
 )
+oktetakastencontrollers_generate_headers(filtercontroller view/filter
+  FilterTool
+  FilterToolView
+  FilterToolFactory
+  FilterToolViewFactory
+)
+
 set( CHARSETCONVERSIONTOOL_SRCS
   view/charsetconversion/charsetconversionjob.cpp
   view/charsetconversion/charsetconversiontool.cpp
@@ -221,22 +285,41 @@ set( CHARSETCONVERSIONTOOL_SRCS
   view/charsetconversion/charsetconversiontoolfactory.cpp
   view/charsetconversion/charsetconversiontoolviewfactory.cpp
 )
+oktetakastencontrollers_generate_headers(charsetconversiontool view/charsetconversion
+  CharsetConversionTool
+  CharsetConversionToolView
+  CharsetConversionToolFactory
+  CharsetConversionToolViewFactory
+)
+
 set( GOTOOFFSETCONTROLLER_SRCS
   view/gotooffset/gotooffsettool.cpp
   view/gotooffset/gotooffsetview.cpp
   view/gotooffset/gotooffsettoolview.cpp
   view/gotooffset/gotooffsetcontroller.cpp
 )
+oktetakastencontrollers_generate_headers(gotooffsetcontroller view/gotooffset
+  GotoOffsetController
+)
+
 set( SELECTRANGECONTROLLER_SRCS
   view/selectrange/selectrangetool.cpp
   view/selectrange/selectrangeview.cpp
   view/selectrange/selectrangetoolview.cpp
   view/selectrange/selectrangecontroller.cpp
 )
+oktetakastencontrollers_generate_headers(selectrangecontroller view/selectrange
+  SelectRangeController
+)
+
 set( BOOKMARKSCONTROLLER_SRCS
   view/bookmarks/bookmarkeditpopup.cpp
   view/bookmarks/bookmarkscontroller.cpp
 )
+oktetakastencontrollers_generate_headers(bookmarkscontroller view/bookmarks
+  BookmarksController
+)
+
 set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarklistmodel.cpp
   view/bookmarks/bookmarkstool.cpp
@@ -244,6 +327,12 @@ set( BOOKMARKSTOOL_SRCS
   view/bookmarks/bookmarkstoolview.cpp
   view/bookmarks/bookmarkstoolfactory.cpp
   view/bookmarks/bookmarkstoolviewfactory.cpp
+)
+oktetakastencontrollers_generate_headers(bookmarkstool view/bookmarks
+  BookmarksTool
+  BookmarksToolView
+  BookmarksToolFactory
+  BookmarksToolViewFactory
 )
 
 set( STRUCTVIEW_TESTED_SRCS
@@ -329,6 +418,17 @@ set( STRUCTVIEW_OTHER_SRCS
 
 kconfig_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structviewpreferences.kcfgc )
 ki18n_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
+# structtool.h cannot be installed as it pulls (too) many private uninstalled headers
+# KF5 TODO: any tools/controllers and views should be created by the resp. factories
+# since some time, no more directly.
+# So on next ABI change depublish tools/controllers & their views
+# For now keeping all installed, in case someone is using them still/already.
+oktetakastencontrollers_generate_headers(structview_other view/structures
+#   StructTool
+  StructToolView
+  StructuresToolFactory
+  StructuresToolViewFactory
+)
 
 set( LIBFRAMESPRINT_SRCS
   ${LIBFRAMESPRINT_REL_DIR}/abstractframerenderer.cpp
@@ -344,16 +444,31 @@ set( PRINTCONTROLLER_SRCS
   view/print/printcolumnstylist.cpp
   view/print/bytearrayframerenderer.cpp
 )
+oktetakastencontrollers_generate_headers(printcontroller view/print
+  PrintController
+)
+
 set( VIEWCONFIGCONTROLLER_SRCS
   view/viewconfig/bytesperlinedialog.cpp
   view/viewconfig/bytespergroupdialog.cpp
   view/viewconfig/viewconfigcontroller.cpp
 )
+oktetakastencontrollers_generate_headers(viewconfigcontroller view/viewconfig
+  ViewConfigController
+)
+
 set( VIEWSTATUSCONTROLLER_SRCS
   view/viewstatus/viewstatuscontroller.cpp
 )
+oktetakastencontrollers_generate_headers(viewstatuscontroller view/viewstatus
+  ViewStatusController
+)
+
 set( VIEWMODECONTROLLER_SRCS
   view/viewmode/viewmodecontroller.cpp
+)
+oktetakastencontrollers_generate_headers(viewmodecontroller view/viewmode
+  ViewModeController
 )
 
 set( VIEWPROFILESCONTROLLER_SRCS
@@ -362,10 +477,16 @@ set( VIEWPROFILESCONTROLLER_SRCS
   view/viewprofiles/viewprofiletablemodel.cpp
   view/viewprofiles/viewprofilecontroller.cpp
 )
+oktetakastencontrollers_generate_headers(viewprofilescontroller view/viewprofiles
+  ViewProfileController
+)
 
 set( VIEWPROFILESMANAGECONTROLLER_SRCS
   view/viewprofiles/viewprofilesmanagedialog.cpp
   view/viewprofiles/viewprofilesmanagecontroller.cpp
+)
+oktetakastencontrollers_generate_headers(viewprofilesmanagecontroller view/viewprofiles
+  ViewProfilesManageController
 )
 
 # create a static library for the unit tests. This means we don't have to compile the sources twice
@@ -449,68 +570,61 @@ endif()
 
 set( okteta_kastencontrollers_LIB_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencontrollers_export.h
-  view/print/printcontroller.h
-  view/bookmarks/bookmarkscontroller.h
-  view/bookmarks/bookmarkstool.h
-  view/bookmarks/bookmarkstoolview.h
-  view/bookmarks/bookmarkstoolfactory.h
-  view/bookmarks/bookmarkstoolviewfactory.h
-  view/overwritemode/overwritemodecontroller.h
-  view/poddecoder/poddata.h
-  view/poddecoder/poddecodertool.h
-  view/poddecoder/poddecodertoolview.h
-  view/poddecoder/poddecodertoolfactory.h
-  view/poddecoder/poddecodertoolviewfactory.h
-  view/viewconfig/viewconfigcontroller.h
-  view/gotooffset/gotooffsetcontroller.h
-  view/gotooffset/gotooffsettool.h
-  view/gotooffset/gotooffsettoolview.h
-  view/viewmode/viewmodecontroller.h
-  view/checksum/checksumtool.h
-  view/checksum/checksumtoolview.h
-  view/checksum/checksumtoolfactory.h
-  view/checksum/checksumtoolviewfactory.h
-  view/info/infotool.h
-  view/info/infotoolview.h
-  view/info/infotoolfactory.h
-  view/info/infotoolviewfactory.h
-  view/bytetable/bytetabletool.h
-  view/bytetable/bytetabletoolview.h
-  view/bytetable/bytetabletoolfactory.h
-  view/bytetable/bytetabletoolviewfactory.h
-  view/filter/filtertool.h
-  view/filter/filtertoolview.h
-  view/filter/filtertoolfactory.h
-  view/filter/filtertoolviewfactory.h
-  view/charsetconversion/charsetconversiontoolfactory.h
-  view/charsetconversion/charsetconversiontoolviewfactory.h
-  view/selectrange/selectrangecontroller.h
-  view/libfinddialog/kfinddirection.h
-  view/replace/replacecontroller.h
-  view/replace/replaceuserqueryable.h
-  view/viewstatus/viewstatuscontroller.h
-  view/viewprofiles/viewprofilecontroller.h
-  view/viewprofiles/viewprofilesmanagecontroller.h
-  view/stringsextract/containedstring.h
-  view/stringsextract/stringsextracttool.h
-  view/stringsextract/stringsextracttoolview.h
-  view/stringsextract/stringsextracttoolfactory.h
-  view/stringsextract/stringsextracttoolviewfactory.h
-  view/search/searchcontroller.h
-  view/search/searchuserqueryable.h
-# structtool.h cannot be installed as it pulls (too) many private uninstalled headers
-# KF5 TODO: any tools/controllers and views should be created by the resp. factories
-# since some time, no more directly.
-# So on next ABI change depublish tools/controllers & their views
-# For now keeping all installed, in case someone is using them still/already.
-#   view/structures/structtool.h
-  view/structures/structtoolview.h
-  view/structures/structurestoolfactory.h
-  view/structures/structurestoolviewfactory.h
-  document/info/documentinfotoolview.h
-  document/info/documentinfotool.h
-  document/overwriteonly/overwriteonlycontroller.h
   ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
+#   ${overwriteonlycontroller_HDRS}
+  ${overwritemodecontroller_HDRS}
+  ${documentinfocontroller_HDRS}
+  ${libchecksum_HDRS}
+  ${checksumcontroller_HDRS}
+  ${stringsextractcontroller_HDRS}
+  ${bytetablecontroller_HDRS}
+  ${infocontroller_HDRS}
+  ${finddialog_lib_HDRS}
+  ${searchcontroller_HDRS}
+  ${replacecontroller_HDRS}
+  ${libfilter_HDRS}
+  ${filtercontroller_HDRS}
+  ${charsetconversiontool_HDRS}
+  ${gotooffsetcontroller_HDRS}
+  ${selectrangecontroller_HDRS}
+  ${printcontroller_HDRS}
+  ${bookmarkscontroller_HDRS}
+  ${bookmarkstool_HDRS}
+  ${viewconfigcontroller_HDRS}
+  ${viewstatuscontroller_HDRS}
+  ${viewmodecontroller_HDRS}
+  ${viewprofilescontroller_HDRS}
+  ${viewprofilesmanagecontroller_HDRS}
+  ${poddecodercontroller_HDRS}
+  ${structview_other_HDRS}
+)
+set( okteta_kastencontrollers_LIB_CCHDRS
+#   ${overwriteonlycontroller_CCHDRS}
+  ${overwritemodecontroller_CCHDRS}
+  ${documentinfocontroller_CCHDRS}
+  ${libchecksum_CCHDRS}
+  ${checksumcontroller_CCHDRS}
+  ${stringsextractcontroller_CCHDRS}
+  ${bytetablecontroller_CCHDRS}
+  ${infocontroller_CCHDRS}
+  ${finddialog_lib_CCHDRS}
+  ${searchcontroller_CCHDRS}
+  ${replacecontroller_CCHDRS}
+  ${libfilter_CCHDRS}
+  ${filtercontroller_CCHDRS}
+  ${charsetconversiontool_CCHDRS}
+  ${gotooffsetcontroller_CCHDRS}
+  ${selectrangecontroller_CCHDRS}
+  ${printcontroller_CCHDRS}
+  ${bookmarkscontroller_CCHDRS}
+  ${bookmarkstool_CCHDRS}
+  ${viewconfigcontroller_CCHDRS}
+  ${viewstatuscontroller_CCHDRS}
+  ${viewmodecontroller_CCHDRS}
+  ${viewprofilescontroller_CCHDRS}
+  ${viewprofilesmanagecontroller_CCHDRS}
+  ${poddecodercontroller_CCHDRS}
+  ${structview_other_CCHDRS}
 )
 
 add_library( OktetaKastenControllers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
@@ -541,6 +655,8 @@ if( Qca-qt5_FOUND )
   )
 endif( Qca-qt5_FOUND )
 
+target_include_directories(OktetaKastenControllers PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta>")
+
 set_target_properties( OktetaKastenControllers  PROPERTIES
   EXPORT_NAME "OktetaKastenControllers"
   OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}controllers
@@ -552,6 +668,10 @@ install( TARGETS OktetaKastenControllers  EXPORT OktetaKastenControllersTargets 
 
 install( FILES ${okteta_kastencontrollers_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
+install( FILES ${okteta_kastencontrollers_LIB_CCHDRS}
+  DESTINATION ${OKTETAKASTEN_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
 )
 install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )

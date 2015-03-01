@@ -58,7 +58,7 @@ set( FILESYSTEMBROWSERCONTROLLER_SRCS
 )
 kastencontrollers_generate_headers(FILESYSTEMBROWSERCONTROLLER documentsystem/filesystembrowser
   FileSystemBrowserTool
-  FileSystemBrowserView
+  FileSystemBrowserToolView
 )
 
 set( DOCUMENTSBROWSERCONTROLLER_SRCS
@@ -69,7 +69,7 @@ set( DOCUMENTSBROWSERCONTROLLER_SRCS
 )
 kastencontrollers_generate_headers(DOCUMENTSBROWSERCONTROLLER documentsystem/documentsbrowser
   DocumentsTool
-  DocumentsView
+  DocumentsToolView
 )
 
 set( TERMINALCONTROLLER_SRCS
@@ -79,7 +79,7 @@ set( TERMINALCONTROLLER_SRCS
 )
 kastencontrollers_generate_headers(TERMINALCONTROLLER document/terminal
   TerminalTool
-  TerminalView
+  TerminalToolView
 )
 
 set( MODIFIEDBARCONTROLLER_SRCS
@@ -111,6 +111,10 @@ set( VERSIONVIEWCONTROLLER_SRCS
   document/versionview/versionview.cpp
   document/versionview/versionviewtool.cpp
   document/versionview/versionviewtoolview.cpp
+)
+kastencontrollers_generate_headers(VERSIONVIEWCONTROLLER document/versionview
+  VersionViewTool
+  VersionViewToolView
 )
 endif(CMAKE_BUILD_TYPE_TOLOWER MATCHES release)
 set( VERSIONCONTROLLER_SRCS

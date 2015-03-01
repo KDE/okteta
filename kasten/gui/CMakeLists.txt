@@ -6,14 +6,21 @@ ecm_setup_version( ${OKTETAKASTEN_LIB_VERSION}
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenGuiConfigVersion.cmake"
 )
 
+macro(OKTETAKASTENGUI_GENERATE_HEADERS _SUBLIB _RELATIVE)
+    ecm_generate_headers("${_SUBLIB}_CCHDRS"
+        HEADER_NAMES ${ARGN}
+        RELATIVE ${_RELATIVE}
+        PREFIX Kasten/Okteta
+        REQUIRED_HEADERS "${_SUBLIB}_HDRS"
+    )
+endmacro()
+
 include_directories(
   system
   io
   view
   io/streamencoder
   liboktetawidgets
-  ../core
-  ../core/document
 )
 
 # if(KDE4_BUILD_TESTS)
@@ -27,6 +34,11 @@ set( oktetawidgets_LIB_SRCS
   liboktetawidgets/addressvalidator.cpp
   liboktetawidgets/addresscombobox_p.cpp
   liboktetawidgets/addresscombobox.cpp
+)
+oktetakastengui_generate_headers(oktetawidgets liboktetawidgets
+  AddressValidator
+  AddressComboBox
+  ByteArrayComboBox
 )
 
 set( okteta_values_streamencoder_SRCS
@@ -99,6 +111,13 @@ set( okteta_streamencoder_SRCS
   io/bytearraystreamencoderfactory.cpp
   io/bytearraystreamencoderconfigeditorfactoryfactory.cpp
 )
+oktetakastengui_generate_headers(okteta_streamencoder io/streamencoder
+  AbstractByteArrayStreamEncoder
+)
+oktetakastengui_generate_headers(okteta_streamencoder io
+  ByteArrayStreamEncoderFactory
+  ByteArrayStreamEncoderConfigEditorFactoryFactory
+)
 
 set( okteta_pattern_datagenerator_SRCS
   io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp
@@ -123,15 +142,32 @@ set( okteta_datagenerator_SRCS
   io/bytearraydatageneratorfactory.cpp
   io/bytearraydatageneratorconfigeditorfactoryfactory.cpp
 )
+oktetakastengui_generate_headers(okteta_datagenerator io
+  ByteArrayDataGeneratorFactory
+  ByteArrayDataGeneratorConfigEditorFactoryFactory
+)
 
 set( okteta_viewprofile_io_SRCS
   io/bytearrayviewprofilesynchronizer.cpp
+)
+oktetakastengui_generate_headers(okteta_viewprofile_io io
+  ByteArrayViewProfileSynchronizer
 )
 
 set( okteta_kastengui_io_SRCS
   ${okteta_streamencoder_SRCS}
   ${okteta_datagenerator_SRCS}
   ${okteta_viewprofile_io_SRCS}
+)
+set( okteta_kastengui_io_HDRS
+  ${okteta_streamencoder_HDRS}
+  ${okteta_datagenerator_HDRS}
+  ${okteta_viewprofile_io_HDRS}
+)
+set( okteta_kastengui_io_CCHDRS
+  ${okteta_streamencoder_CCHDRS}
+  ${okteta_datagenerator_CCHDRS}
+  ${okteta_viewprofile_io_CCHDRS}
 )
 
 set( okteta_kastengui_view_SRCS
@@ -140,10 +176,19 @@ set( okteta_kastengui_view_SRCS
   view/bytearrayview.cpp
   view/bytearrayviewprofile.cpp
 )
+oktetakastengui_generate_headers(okteta_kastengui_view view
+  ByteArrayViewFactory
+  ByteArrayView
+  ByteArrayViewProfile
+)
 
 set( okteta_kastengui_system_SRCS
   system/bytearrayviewprofilelock.cpp
   system/bytearrayviewprofilemanager.cpp
+)
+oktetakastengui_generate_headers(okteta_kastengui_system system
+  ByteArrayViewProfileLock
+  ByteArrayViewProfileManager
 )
 
 set( okteta_kastengui_LIB_SRCS
@@ -154,36 +199,18 @@ set( okteta_kastengui_LIB_SRCS
   ${okteta_kastengui_system_SRCS}
 )
 
-set( okteta_kastengui_view_HDRS
-  view/bytearrayviewfactory.h
-  view/bytearrayview.h
-  view/bytearrayviewprofile.h
-)
-
-set( okteta_kastengui_io_HDRS
-  io/streamencoder/viewtext/bytearrayviewtextstreamencoder.h
-  io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.h
-  io/streamencoder/chars/bytearraycharsstreamencoder.h
-  io/streamencoder/values/bytearrayvaluesstreamencoder.h
-  io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.h
-  io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.h
-  io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditorfactory.h
-  io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditorfactory.h
-  io/streamencoder/abstractbytearraystreamencoder.h
-  io/streamencoder/bytearraytextstreamencoderpreview.h
-  io/bytearrayviewprofilesynchronizer.h
-)
-
-set( okteta_kastengui_system_HDRS
-  system/bytearrayviewprofilelock.h
-  system/bytearrayviewprofilemanager.h
-)
-
 set( okteta_kastengui_LIB_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/oktetakastengui_export.h
+  ${oktetawidgets_LIB_HDRS}
   ${okteta_kastengui_view_HDRS}
   ${okteta_kastengui_io_HDRS}
   ${okteta_kastengui_system_HDRS}
+)
+set( okteta_kastengui_LIB_CCHDRS
+  ${oktetawidgets_LIB_CCHDRS}
+  ${okteta_kastengui_view_CCHDRS}
+  ${okteta_kastengui_io_CCHDRS}
+  ${okteta_kastengui_system_CCHDRS}
 )
 
 add_library( OktetaKastenGui  SHARED ${okteta_kastengui_LIB_SRCS} )
@@ -200,6 +227,8 @@ PRIVATE
   KF5::Completion
 )
 
+target_include_directories(OktetaKastenGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta>")
+
 set_target_properties( OktetaKastenGui  PROPERTIES
   EXPORT_NAME "OktetaKastenGui"
   OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}gui
@@ -211,6 +240,10 @@ install( TARGETS OktetaKastenGui  EXPORT OktetaKastenGuiTargets ${INSTALL_TARGET
 
 install( FILES ${okteta_kastengui_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
+install( FILES ${okteta_kastengui_LIB_CCHDRS}
+  DESTINATION ${OKTETAKASTEN_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
 )
 

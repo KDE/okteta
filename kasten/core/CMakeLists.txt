@@ -15,6 +15,15 @@ set( okteta_kastencore_document_SRCS
   document/bytearraydocument.cpp
   document/bytearrayselection.cpp
 )
+ecm_generate_headers(OKTETA_KASTEN_CORE_DOCUMENT_CCHDRS
+  HEADER_NAMES
+    ByteArrayDocumentFactory
+    ByteArrayDocument
+    ByteArraySelection
+  RELATIVE document
+  PREFIX Kasten/Okteta
+  REQUIRED_HEADERS OKTETA_KASTEN_CORE_DOCUMENT_HDRS
+)
 
 set( okteta_kastencore_io_filesystem_SRCS
 #   io/filesystem/externalbookmarkstorage.cpp
@@ -29,10 +38,24 @@ set( okteta_kastencore_io_filesystem_SRCS
   io/filesystem/bytearrayrawfilesynchronizer.cpp
   io/filesystem/bytearrayrawfilesynchronizerfactory.cpp
 )
+ecm_generate_headers(OKTETA_KASTEN_CORE_IO_FILESYSTEM_CCHDRS
+  HEADER_NAMES
+    ByteArrayRawFileSynchronizer
+    ByteArrayRawFileSynchronizerFactory
+  RELATIVE io/filesystem
+  PREFIX Kasten/Okteta
+  REQUIRED_HEADERS OKTETA_KASTEN_CORE_IO_FILESYSTEM_HDRS
+)
 
 
 set( okteta_kastencore_io_SRCS
   ${okteta_kastencore_io_filesystem_SRCS}
+)
+set( OKTETA_KASTEN_CORE_IO_HDRS
+  ${OKTETA_KASTEN_CORE_IO_FILESYSTEM_HDRS}
+)
+set( OKTETA_KASTEN_CORE_IO_CCHDRS
+  ${OKTETA_KASTEN_CORE_IO_FILESYSTEM_CCHDRS}
 )
 
 set( okteta_kastencore_LIB_SRCS
@@ -42,11 +65,13 @@ set( okteta_kastencore_LIB_SRCS
 
 set( okteta_kastencore_LIB_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencore_export.h
-  document/bytearrayselection.h
-  document/bytearraydocument.h
-  document/bytearraydocumentfactory.h
-  io/filesystem/bytearrayrawfilesynchronizer.h
-  io/filesystem/bytearrayrawfilesynchronizerfactory.h
+  ${OKTETA_KASTEN_CORE_DOCUMENT_HDRS}
+  ${OKTETA_KASTEN_CORE_IO_HDRS}
+)
+
+set( okteta_kastencore_LIB_CCHDRS
+  ${OKTETA_KASTEN_CORE_DOCUMENT_CCHDRS}
+  ${OKTETA_KASTEN_CORE_IO_CCHDRS}
 )
 
 add_library( OktetaKastenCore  SHARED ${okteta_kastencore_LIB_SRCS} )
@@ -61,6 +86,8 @@ PRIVATE
   KF5::Bookmarks
 )
 
+target_include_directories(OktetaKastenCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta>")
+
 set_target_properties( OktetaKastenCore PROPERTIES
   EXPORT_NAME "OktetaKastenCore"
   OUTPUT_NAME kasten${KASTEN_ABI_VERSION}okteta${OKTETAKASTEN_ABI_VERSION}core
@@ -72,6 +99,10 @@ install( TARGETS OktetaKastenCore  EXPORT OktetaKastenCoreTargets ${INSTALL_TARG
 
 install( FILES ${okteta_kastencore_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
+  COMPONENT Devel
+)
+install( FILES ${okteta_kastencore_LIB_CCHDRS}
+  DESTINATION ${OKTETAKASTEN_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
 )
 
