@@ -2,6 +2,7 @@ project( kastencontrollers )
 
 ecm_setup_version( ${KASTEN_LIB_VERSION}
     VARIABLE_PREFIX KASTENCONTROLLERS
+    SOVERSION ${KASTEN_LIB_SOVERSION}
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KastenControllersConfigVersion.cmake"
 )
 
