@@ -45,7 +45,7 @@ bool ShiftByteArrayFilter::filter( Okteta::Byte* result,
 {
     const int groupSize = mParameterSet.groupSize();
     const int groupBitCount = (groupSize * ShiftBitsPerByte );
-    const int groupShiftBitWidth = qAbs( mParameterSet.moveBitWidth() ) % groupBitCount;
+    const int groupShiftBitWidth = std::abs( mParameterSet.moveBitWidth() ) % groupBitCount;
 
     const int shiftByteWidth = groupShiftBitWidth / ShiftBitsPerByte;
     const int shiftBitWidth = groupShiftBitWidth - shiftByteWidth * ShiftBitsPerByte;
