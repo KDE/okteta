@@ -44,7 +44,7 @@ bool RotateByteArrayFilter::filter( Okteta::Byte* result,
 {
     const int groupSize = mParameterSet.groupSize();
     const int groupBitCount = (groupSize * RotateBitsPerByte );
-    const int groupShiftBitWidth = qAbs( mParameterSet.moveBitWidth() ) % groupBitCount;
+    const int groupShiftBitWidth = std::abs( mParameterSet.moveBitWidth() ) % groupBitCount;
 
     const int shiftByteWidth = groupShiftBitWidth / RotateBitsPerByte;
     const int shiftBitWidth = groupShiftBitWidth - shiftByteWidth * RotateBitsPerByte;

@@ -124,7 +124,7 @@ bool FileByteArrayModelPrivate::ensurePageLoaded( unsigned int pageIndex ) const
     if( mNoOfFreePages < 1 )
     {
         // free the page which is the furthest away from the page we are loading
-        if( abs(mFirstPage-(long)pageIndex) > abs(mLastPage-(long)pageIndex) )
+        if( std::abs(mFirstPage-(long)pageIndex) > std::abs(mLastPage-(long)pageIndex) )
             while( !freePage(mFirstPage++) ) {
                 ;
             }
