@@ -691,7 +691,7 @@ install( FILES view/structures/examples/okteta/structures/uuid.js  DESTINATION  
 install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 
 configure_file( view/structures/struct2osd.in ${CMAKE_CURRENT_BINARY_DIR}/struct2osd @ONLY )
-install( FILES ${CMAKE_CURRENT_BINARY_DIR}/struct2osd DESTINATION ${BIN_INSTALL_DIR} )
+install( PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/struct2osd DESTINATION ${BIN_INSTALL_DIR} )
 install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${DATA_INSTALL_DIR}/okteta/structures/ )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
