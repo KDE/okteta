@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -z "`which gccxml 2> /dev/null`" ]; then
 	echo "You need gccxml to use this script.";
