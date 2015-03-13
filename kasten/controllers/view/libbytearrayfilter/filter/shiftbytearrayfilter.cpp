@@ -28,6 +28,8 @@
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QtGlobal>
+// C
+#include <cstdlib>
 
 // TODO: add option which bit (0/1) to insert
 static const int ShiftBitsPerByte = 8;
