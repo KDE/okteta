@@ -28,6 +28,8 @@
 #include <KLocalizedString>
 // Qt
 #include <QtCore/QtGlobal>
+// C
+#include <cstdlib>
 
 static const int RotateBitsPerByte = 8;
 
