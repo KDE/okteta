@@ -45,6 +45,7 @@ find_package(KF5 REQUIRED
     ConfigWidgets
     DBusAddons
     DocTools
+    IconThemes
     I18n
     KCMUtils
     KIO
