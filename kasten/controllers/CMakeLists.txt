@@ -695,7 +695,7 @@ install( FILES ${CMAKE_CURRENT_BINARY_DIR}/struct2osd.sh DESTINATION ${BIN_INSTA
 install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${DATA_INSTALL_DIR}/okteta/structures/ )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaKasten")
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaKastenControllers")
 
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenControllersConfig.cmake.in"
