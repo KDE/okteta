@@ -27,7 +27,7 @@
 #include "coordrange.h"
 #include "oktetagui_export.h"
 // Okteta core
-#include "addressrange.h"
+#include <okteta/addressrange.h>
 
 
 // TODO: rename things like startOffset and firstLineOffset, not really descriptive

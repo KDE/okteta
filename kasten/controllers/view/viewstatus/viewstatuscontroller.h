@@ -30,7 +30,7 @@
 // Okteta gui
 #include <offsetformat.h>
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 
 class KComboBox;
 class KSqueezedTextLabel;

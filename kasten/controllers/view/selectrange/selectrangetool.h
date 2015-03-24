@@ -24,7 +24,7 @@
 #define SELECTRANGETOOL_H
 
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 // Kasten core
 #include <abstracttool.h>
 

@@ -24,9 +24,9 @@
 #define OKTETA_ARRAYCHANGEMETRICS_H
 
 // lib
-#include "oktetacore_export.h"
-#include "size.h"
-#include "address.h"
+#include <okteta/oktetacore_export.h>
+#include <okteta/size.h>
+#include <okteta/address.h>
 // Qt
 #include <QDataStream>
 

@@ -28,8 +28,8 @@
 #include "linepositionrange.h"
 #include "linerange.h"
 // Okteta core
-#include "oktetacore.h"
-#include "abstractbytearraymodel.h"
+#include <okteta/oktetacore.h>
+#include <okteta/abstractbytearraymodel.h>
 #include "character.h"
 // Qt
 #include <QFontMetrics>

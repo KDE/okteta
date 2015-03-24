@@ -24,7 +24,7 @@
 #define SEARCHJOB_H
 
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 // Qt
 #include <QObject>
 #include <QByteArray>

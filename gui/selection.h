@@ -23,8 +23,8 @@
 #ifndef OKTETA_SELECTION_H
 #define OKTETA_SELECTION_H
 
-// lib
-#include "addressrange.h"
+// Okteta core
+#include <okteta/addressrange.h>
 
 
 namespace Okteta

@@ -26,7 +26,7 @@
 // lib
 #include "columnsview.h"
 // Okteta core
-#include "addressrange.h"
+#include <okteta/addressrange.h>
 // Qt
 #include <QClipboard>
 

@@ -24,7 +24,7 @@
 #define OKTETA_BOOKMARKLISTCONSTITERATORADAPTER_H
 
 // lib
-#include "bookmarksconstiteratoradapter.h"
+#include <okteta/bookmarksconstiteratoradapter.h>
 // Qt
 #include <QLinkedListIterator>
 

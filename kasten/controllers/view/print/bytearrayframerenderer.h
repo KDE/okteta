@@ -27,7 +27,7 @@
 #include "abstractcolumnframerenderer.h"
 // Okteta core
 #include <oktetacore.h>
-#include <address.h>
+#include <okteta/address.h>
 #include <size.h>
 // Qt
 #include <QFont>

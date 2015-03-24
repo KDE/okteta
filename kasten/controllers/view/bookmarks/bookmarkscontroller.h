@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 // Qt
 #include <QList>
 

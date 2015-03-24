@@ -27,8 +27,8 @@
 #include "lineposition.h"
 #include "line.h"
 // Okteta core
-#include "address.h"
-#include "size.h"
+#include <okteta/address.h>
+#include <okteta/size.h>
 
 
 namespace Okteta

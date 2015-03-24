@@ -24,7 +24,7 @@
 #define OKTETA_CHANGEHISTORY_H
 
 // lib
-#include "bytearraychange.h"
+#include <okteta/bytearraychange.h>
 // Qt
 #include <QList>
 #include <QtPlugin>

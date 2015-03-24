@@ -24,7 +24,7 @@
 #define OKTETA_ARRAYCHANGEMETRICSLIST_H
 
 // lib
-#include "arraychangemetrics.h"
+#include <okteta/arraychangemetrics.h>
 //
 #include <QList>
 

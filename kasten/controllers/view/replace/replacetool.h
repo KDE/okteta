@@ -28,7 +28,7 @@
 // Kasten core
 #include <abstracttool.h>
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;

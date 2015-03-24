@@ -24,9 +24,9 @@
 #define OKTETA_ADDRESSRANGE_H
 
 // lib
-#include "numberrange.h"
-#include "address.h"
-#include "size.h"
+#include <okteta/numberrange.h>
+#include <okteta/address.h>
+#include <okteta/size.h>
 
 
 namespace Okteta

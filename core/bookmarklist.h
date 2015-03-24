@@ -24,7 +24,7 @@
 #define OKTETA_BOOKMARKLIST_H
 
 // lib
-#include "bookmark.h"
+#include <okteta/bookmark.h>
 // Qt
 #include <QLinkedList>
 

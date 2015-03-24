@@ -24,9 +24,9 @@
 #define OKTETA_VALUECODEC_H
 
 // lib
-#include "oktetacore.h"
-#include "oktetacore_export.h"
-#include "byte.h"
+#include <okteta/oktetacore.h>
+#include <okteta/oktetacore_export.h>
+#include <okteta/byte.h>
 
 class QString;
 

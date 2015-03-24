@@ -25,7 +25,7 @@
 
 // Okteta core
 #include <oktetacore.h>
-#include <address.h>
+#include <okteta/address.h>
 // Qt
 #include <QValidator>
 

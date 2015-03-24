@@ -24,8 +24,8 @@
 #define OKTETA_BYTEARRAYCHANGE_H
 
 // lib
-#include "oktetacore_export.h"
-#include "arraychangemetrics.h"
+#include <okteta/oktetacore_export.h>
+#include <okteta/arraychangemetrics.h>
 // Qt
 #include <QByteArray>
 

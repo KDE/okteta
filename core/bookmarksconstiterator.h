@@ -24,8 +24,8 @@
 #define OKTETA_BOOKMARKSCONSTITERATOR_H
 
 // lib
-#include "bookmarksconstiteratoradapter.h"
-#include "oktetacore_export.h"
+#include <okteta/bookmarksconstiteratoradapter.h>
+#include <okteta/oktetacore_export.h>
 // Qt
 #include <QExplicitlySharedDataPointer>
 

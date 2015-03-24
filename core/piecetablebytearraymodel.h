@@ -24,11 +24,11 @@
 #define OKTETA_PIECETABLEBYTEARRAYMODEL_H
 
 // lib
-#include "abstractbytearraymodel.h"
-#include "versionable.h"
-#include "bookmarkable.h"
-#include "changesdescribable.h"
-#include "changehistory.h"
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/versionable.h>
+#include <okteta/bookmarkable.h>
+#include <okteta/changesdescribable.h>
+#include <okteta/changehistory.h>
 
 
 namespace Okteta

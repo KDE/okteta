@@ -24,7 +24,7 @@
 #define CONTAINEDSTRING_H
 
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 #include <size.h>
 // Qt
 #include <QString>

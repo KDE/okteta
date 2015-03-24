@@ -24,7 +24,7 @@
 #ifndef STRINGDATA_H
 #define STRINGDATA_H
 
-#include <address.h>
+#include <okteta/address.h>
 #include "../datainformationbase.h"
 
 class StringDataInformation;

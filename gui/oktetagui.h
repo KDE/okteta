@@ -28,8 +28,8 @@
 // ColumnsView
 #include "kadds.h"
 // Okteta core
-#include "byte.h"
-#include "oktetacore.h"
+#include <okteta/byte.h>
+#include <okteta/oktetacore.h>
 // Qt
 #include <QChar>
 #include <QLoggingCategory>

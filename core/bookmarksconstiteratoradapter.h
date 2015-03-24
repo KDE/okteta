@@ -24,7 +24,7 @@
 #define OKTETA_BOOKMARKSCONSTITERATORADAPTER_H
 
 // lib
-#include <address.h>
+#include <okteta/address.h>
 // Qt
 #include <QSharedData>
 

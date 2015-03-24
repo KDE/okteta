@@ -24,10 +24,10 @@
 #define OKTETA_ABSTRACTBYTEARRAYMODEL_H
 
 // lib
-#include "oktetacore_export.h"
-#include "addressrange.h"
-#include "size.h"
-#include "byte.h"
+#include <okteta/oktetacore_export.h>
+#include <okteta/addressrange.h>
+#include <okteta/size.h>
+#include <okteta/byte.h>
 // Qt
 #include <QObject>
 #include <QByteArray>
