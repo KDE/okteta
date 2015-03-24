@@ -24,8 +24,8 @@
 #define OKTETA_BYTEARRAYTABLELAYOUT_H
 
 // lib
-#include "coordrange.h"
-#include "oktetagui_export.h"
+#include <okteta/coordrange.h>
+#include <okteta/oktetagui_export.h>
 // Okteta core
 #include <okteta/addressrange.h>
 

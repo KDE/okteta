@@ -24,7 +24,7 @@
 #define OKTETA_ABSTRACTBYTEARRAYVIEW_H
 
 // lib
-#include "columnsview.h"
+#include <okteta/columnsview.h>
 // Okteta core
 #include <okteta/addressrange.h>
 // Qt

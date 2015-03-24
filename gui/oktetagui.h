@@ -24,9 +24,9 @@
 #define OKTETAGUI_H
 
 // this
-#include "lineposition.h"
+#include <okteta/lineposition.h>
 // ColumnsView
-#include "kadds.h"
+#include <okteta/kadds.h>
 // Okteta core
 #include <okteta/byte.h>
 #include <okteta/oktetacore.h>

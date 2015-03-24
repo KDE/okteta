@@ -22,10 +22,9 @@
 
 #include "abstractcolumnframerenderer.h"
 
-// lib
-#include <abstractcolumnrenderer.h>
 // Okteta gui
-#include <linerange.h>
+#include <okteta/linerange.h>
+#include <okteta/abstractcolumnrenderer.h>
 // Qt
 #include <QPainter>
 #include <QListIterator>

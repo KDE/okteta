@@ -86,7 +86,7 @@ set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/kcursor.cpp PROPERTIES L
 
 set( oktetagui_LIB_HDRS
   ${libcolumnsview_HDRS}
-  ${CMAKE_CURRENT_BINARY_DIR}/oktetagui_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/okteta/oktetagui_export.h
 )
 
 set(oktetagui_LIB_CCHDRS
@@ -128,7 +128,7 @@ ecm_generate_headers(oktetagui_LIB_CCHDRS
 
 add_library( OktetaGui  SHARED ${oktetagui_LIB_SRCS} )
 
-generate_export_header( OktetaGui )
+generate_export_header( OktetaGui EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/okteta/oktetagui_export.h)
 
 target_link_libraries( OktetaGui
 PUBLIC
@@ -139,7 +139,7 @@ PRIVATE
   KF5::ConfigWidgets
 )
 
-target_include_directories(OktetaGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
+target_include_directories(OktetaGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_target_properties( OktetaGui  PROPERTIES
   EXPORT_NAME "OktetaGui"

@@ -24,9 +24,9 @@
 #define OKTETA_BYTEARRAYTABLERANGES_H
 
 // lib
-#include "selection.h"
-#include "coordrangelist.h"
-#include "oktetagui_export.h"
+#include <okteta/selection.h>
+#include <okteta/coordrangelist.h>
+#include <okteta/oktetagui_export.h>
 // Okteta core
 #include <okteta/addressrange.h>
 

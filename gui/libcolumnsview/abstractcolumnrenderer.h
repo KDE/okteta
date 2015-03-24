@@ -24,8 +24,8 @@
 #define OKTETA_ABSTRACTCOLUMNRENDERER_H
 
 // lib
-#include "kadds.h"
-#include "oktetagui_export.h"
+#include <okteta/kadds.h>
+#include <okteta/oktetagui_export.h>
 
 class QPainter;
 

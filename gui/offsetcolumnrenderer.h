@@ -24,9 +24,9 @@
 #define OKTETA_OFFSETCOLUMNRENDERER_H
 
 // lib
-#include "offsetformat.h"
-#include "abstractcolumnrenderer.h"
-#include "line.h"
+#include <okteta/offsetformat.h>
+#include <okteta/abstractcolumnrenderer.h>
+#include <okteta/line.h>
 
 class QFontMetrics;
 

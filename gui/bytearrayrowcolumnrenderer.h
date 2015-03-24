@@ -24,10 +24,10 @@
 #define OKTETA_BYTEARRAYROWCOLUMNRENDERER_H
 
 // lib
-#include "abstractbytearrayview.h"
+#include <okteta/abstractbytearrayview.h>
 // ColumnsView
-#include "abstractcolumnrenderer.h"
-#include "linepositionrange.h"
+#include <okteta/abstractcolumnrenderer.h>
+#include <okteta/linepositionrange.h>
 // Okteta core
 #include <okteta/oktetacore.h>
 #include <okteta/abstractbytearraymodel.h>

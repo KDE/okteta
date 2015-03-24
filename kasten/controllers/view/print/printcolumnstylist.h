@@ -23,8 +23,8 @@
 #ifndef PRINTCOLUMNSTYLIST_H
 #define PRINTCOLUMNSTYLIST_H
 
-// lib
-#include <abstractcolumnstylist.h>
+// Okteta gui
+#include <okteta/abstractcolumnstylist.h>
 // Qt
 #include <QPalette>
 

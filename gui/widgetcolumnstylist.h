@@ -24,7 +24,7 @@
 #define OKTETA_WIDGETCOLUMNSTYLIST_H
 
 // lib
-#include <abstractcolumnstylist.h>
+#include <okteta/abstractcolumnstylist.h>
 
 class QWidget;
 

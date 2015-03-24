@@ -24,7 +24,7 @@
 #define OKTETA_LINERANGE_H
 
 // lib
-#include "line.h"
+#include <okteta/line.h>
 // Okteta core
 #include <okteta/numberrange.h>
 

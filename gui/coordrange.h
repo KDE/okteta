@@ -24,9 +24,9 @@
 #define OKTETA_COORDRANGE_H
 
 // lib
-#include "coord.h"
-#include "linepositionrange.h"
-#include "linerange.h"
+#include <okteta/coord.h>
+#include <okteta/linepositionrange.h>
+#include <okteta/linerange.h>
 // Okteta core
 #include <okteta/range.h>
 

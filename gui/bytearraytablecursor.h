@@ -24,7 +24,7 @@
 #define OKTETA_BYTEARRAYTABLECURSOR_H
 
 // lib
-#include "coord.h"
+#include <okteta/coord.h>
 
 
 namespace Okteta

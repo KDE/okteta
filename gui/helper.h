@@ -24,7 +24,7 @@
 #define OKTETA_HELPER
 
 // lib
-#include <character.h>
+#include <okteta/character.h>
 // KF5
 #include <KColorScheme>
 // Qt

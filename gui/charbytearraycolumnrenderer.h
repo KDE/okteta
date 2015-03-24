@@ -24,7 +24,7 @@
 #define OKTETA_CHARBYTEARRAYCOLUMNRENDERER_H
 
 // lib
-#include "abstractbytearraycolumnrenderer.h"
+#include <okteta/abstractbytearraycolumnrenderer.h>
 
 
 namespace Okteta
