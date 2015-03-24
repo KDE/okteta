@@ -82,8 +82,6 @@ set( oktetagui_LIB_SRCS
   oktetagui.cpp
 )
 
-set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/kcursor.cpp PROPERTIES LABELS OktetaLabel)
-
 set( oktetagui_LIB_HDRS
   ${libcolumnsview_HDRS}
   ${CMAKE_CURRENT_BINARY_DIR}/okteta/oktetagui_export.h
