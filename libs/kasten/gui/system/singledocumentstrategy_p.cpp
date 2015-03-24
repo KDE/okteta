@@ -37,8 +37,8 @@
 // KF5
 #include <KProcess>
 // Qt
-#include <QtCore/QMimeData>
-#include <QtGui/QClipboard>
+#include <QMimeData>
+#include <QClipboard>
 #include <QUrl>
 #include <QApplication>
 

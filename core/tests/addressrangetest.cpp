@@ -25,7 +25,7 @@
 // test object
 #include <addressrange.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 
 // TODO: find out how to test a template class with Qt/KDE,

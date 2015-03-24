@@ -26,7 +26,7 @@
 // lib
 #include "bookmarksconstiteratoradapter.h"
 // Qt
-#include <QtCore/QLinkedListIterator>
+#include <QLinkedListIterator>
 
 
 namespace Okteta

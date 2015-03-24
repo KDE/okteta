@@ -27,7 +27,7 @@
 // lib
 #include <character.h>
 // KF5
-#include <QtTest/QTest>
+#include <QTest>
 
 
 namespace Okteta

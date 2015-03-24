@@ -24,7 +24,7 @@
 #define FIXEDSIZEBYTEARRAYMODELTEST_H
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 
 namespace Okteta

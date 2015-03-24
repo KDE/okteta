@@ -45,8 +45,8 @@
 #include <KLocalizedString>
 #include <KConfigDialog>
 // Qt
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
+#include <QDialog>
+#include <QDialogButtonBox>
 #include <QLabel>
 #include <QLayout>
 #include <QTreeView>

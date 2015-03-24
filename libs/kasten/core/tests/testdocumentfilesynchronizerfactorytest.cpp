@@ -28,15 +28,13 @@
 #include <testdocument.h>
 // test utils
 #include <util/filesystem.h>
-// KF5
-#include <QtTest/QTest>
 // Qt
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
-#include <QtCore/QByteArray>
-#include <QtCore/QFile>
-#include <QtCore/QDataStream>
-#include <QtCore/QUrl>
+#include <QTest>
+#include <QSignalSpy>
+#include <QByteArray>
+#include <QFile>
+#include <QDataStream>
+#include <QUrl>
 
 
 static const char TestDirectory[] = "testdocumentfile1synchronizertest";

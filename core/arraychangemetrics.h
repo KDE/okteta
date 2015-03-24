@@ -28,7 +28,7 @@
 #include "size.h"
 #include "address.h"
 // Qt
-#include <QtCore/QDataStream>
+#include <QDataStream>
 
 
 namespace Okteta

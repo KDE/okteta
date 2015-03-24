@@ -31,7 +31,7 @@
 #include <arraychangemetricslist.h>
 #include <addressrangelist.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 
 namespace KPieceTable

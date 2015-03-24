@@ -33,7 +33,7 @@
 #include <oktetacore.h>
 #include <address.h>
 // Qt
-#include <QtCore/QVector>
+#include <QVector>
 
 namespace Okteta {
 class AbstractTypeCodec;

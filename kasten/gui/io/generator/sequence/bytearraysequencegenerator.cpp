@@ -27,8 +27,8 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QMimeData>
-#include <QtCore/QByteArray>
+#include <QMimeData>
+#include <QByteArray>
 
 
 namespace Kasten

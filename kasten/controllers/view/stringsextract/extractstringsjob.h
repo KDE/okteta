@@ -28,8 +28,8 @@
 // Okteta core
 #include <addressrange.h>
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <QObject>
+#include <QList>
 
 namespace Okteta {
 class AbstractByteArrayModel;

@@ -27,7 +27,7 @@
 // KF5
 #include <KCharsets>
 // Qt
-#include <QtCore/QTextCodec>
+#include <QTextCodec>
 
 
 namespace Okteta

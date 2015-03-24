@@ -24,8 +24,8 @@
 #define ABSTRACTTYPECODEC_H
 
 // Qt
-#include <QtCore/QString>
-#include <QtCore/QVariant>
+#include <QString>
+#include <QVariant>
 
 class QByteArray;
 

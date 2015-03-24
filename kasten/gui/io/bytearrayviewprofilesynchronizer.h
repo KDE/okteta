@@ -29,7 +29,7 @@
 // Kasten core
 #include <kastencore.h>
 // Qt Core
-#include <QtCore/QObject>
+#include <QObject>
 
 
 namespace Kasten

@@ -34,7 +34,7 @@
 // Qt
 #include <QLayout>
 #include <QUrl>
-#include <QtCore/QDir>
+#include <QDir>
 
 
 namespace Kasten

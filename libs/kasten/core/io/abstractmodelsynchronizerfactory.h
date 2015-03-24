@@ -26,7 +26,7 @@
 // lib
 #include "abstractmodelsynchronizer.h"
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 
 namespace Kasten

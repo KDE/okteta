@@ -27,7 +27,7 @@
 #include "kastencore_export.h"
 #include "documentversionid.h"
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

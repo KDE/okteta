@@ -26,7 +26,7 @@
 // lib
 #include "bookmark.h"
 // Qt
-#include <QtCore/QLinkedList>
+#include <QLinkedList>
 
 template <class T> class QList;
 

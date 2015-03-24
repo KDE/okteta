@@ -40,7 +40,7 @@
 #include <KLocalizedString>
 #include <KSelectAction>
 // Qt
-#include <QtCore/QMimeData>
+#include <QMimeData>
 #include <QApplication>
 
 

@@ -25,8 +25,8 @@
 // lib
 #include "testdocument.h"
 // Qt
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QDataStream>
+#include <QFile>
 
 
 namespace Kasten

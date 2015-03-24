@@ -26,10 +26,10 @@
 // lib
 #include "bytearrayviewprofile.h"
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QList>
-#include <QtCore/QDateTime>
-#include <QtCore/QHash>
+#include <QObject>
+#include <QList>
+#include <QDateTime>
+#include <QHash>
 
 class KDirWatch;
 

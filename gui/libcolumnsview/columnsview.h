@@ -28,7 +28,7 @@
 #include "kadds.h"
 #include "linerange.h"
 // Qt
-#include <QtCore/QList>
+#include <QList>
 #include <QAbstractScrollArea>
 
 

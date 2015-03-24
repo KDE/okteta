@@ -30,7 +30,7 @@
 // Okteta core
 #include <byte.h>
 // Qt
-#include <QtCore/QList>
+#include <QList>
 #include <kastencore.h>
 
 namespace Okteta {

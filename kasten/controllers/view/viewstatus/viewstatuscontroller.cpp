@@ -37,7 +37,7 @@
 // Qt
 #include <QLayout>
 #include <QLabel>
-#include <QtGui/QFontMetrics>
+#include <QFontMetrics>
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation
 

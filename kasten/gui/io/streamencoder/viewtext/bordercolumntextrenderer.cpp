@@ -23,7 +23,7 @@
 #include "bordercolumntextrenderer.h"
 
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

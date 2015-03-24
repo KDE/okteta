@@ -26,7 +26,7 @@
 // lib
 #include "coordrange.h"
 // Qt
-#include <QtCore/QLinkedList>
+#include <QLinkedList>
 
 
 namespace Okteta

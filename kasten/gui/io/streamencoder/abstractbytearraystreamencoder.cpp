@@ -29,7 +29,7 @@
 // Okteta core
 #include <abstractbytearraymodel.h>
 // Qt
-#include <QtCore/QBuffer>
+#include <QBuffer>
 
 
 namespace Kasten

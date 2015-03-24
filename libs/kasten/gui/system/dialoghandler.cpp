@@ -28,7 +28,7 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QUrl>
+#include <QUrl>
 
 namespace Kasten
 {

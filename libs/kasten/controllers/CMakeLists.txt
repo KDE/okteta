@@ -326,6 +326,7 @@ PRIVATE
 )
 
 target_include_directories(KastenControllers PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
+target_include_directories(KastenControllers INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/Kasten>")
 
 set_target_properties( KastenControllers  PROPERTIES
   EXPORT_NAME "KastenControllers"

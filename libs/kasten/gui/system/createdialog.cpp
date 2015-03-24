@@ -31,8 +31,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QIcon>
-#include <QtGui/QFont>
-#include <QtWidgets/QDialogButtonBox>
+#include <QFont>
+#include <QDialogButtonBox>
 
 
 namespace Kasten

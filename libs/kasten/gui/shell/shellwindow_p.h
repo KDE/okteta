@@ -28,7 +28,7 @@
 // Okteta core
 #include <kastencore.h>
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 
 namespace Kasten

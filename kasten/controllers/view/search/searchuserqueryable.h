@@ -26,7 +26,7 @@
 // libfinddialog
 #include <kfinddirection.h>
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 
 namespace Kasten

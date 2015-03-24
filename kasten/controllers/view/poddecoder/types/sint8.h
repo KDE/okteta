@@ -24,8 +24,8 @@
 #define SINT8_H
 
 // Qt
-#include <QtCore/QMetaType>
-#include <QtCore/QString>
+#include <QMetaType>
+#include <QString>
 
 
 struct SInt8

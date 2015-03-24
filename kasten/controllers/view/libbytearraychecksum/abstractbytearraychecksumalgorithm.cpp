@@ -23,7 +23,7 @@
 #include "abstractbytearraychecksumalgorithm.h"
 
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 class AbstractByteArrayChecksumAlgorithm::Private

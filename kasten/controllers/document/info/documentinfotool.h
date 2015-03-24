@@ -28,7 +28,7 @@
 // Kasten core
 #include <abstracttool.h>
 // Qt
-#include <QtCore/QMimeType>
+#include <QMimeType>
 
 namespace Okteta {
 class AbstractByteArrayModel;

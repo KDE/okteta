@@ -27,7 +27,7 @@
 #include "oktetacore_export.h"
 #include "arraychangemetrics.h"
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 namespace Okteta
 {

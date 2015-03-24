@@ -27,7 +27,7 @@
 #include "kastencore_export.h"
 #include "kastencore.h"
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class QUrl;
 

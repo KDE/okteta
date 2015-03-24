@@ -28,7 +28,7 @@
 #include "decimalbytecodec.h"
 #include "hexadecimalbytecodec.h"
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Okteta {

@@ -33,7 +33,7 @@
 #include <QToolButton>
 #include <QLayout>
 #include <QApplication>
-#include <QtGui/QHelpEvent>
+#include <QHelpEvent>
 
 
 namespace Kasten

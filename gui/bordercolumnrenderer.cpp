@@ -25,7 +25,7 @@
 // lib
 #include <abstractcolumnstylist.h>
 // Qt
-#include <QtGui/QPainter>
+#include <QPainter>
 #include <QStyle>
 
 

@@ -25,8 +25,8 @@
 // test object
 #include <testdocument.h>
 // Qt
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
+#include <QTest>
+#include <QSignalSpy>
 
 static const char TestData[] = "TestData";
 

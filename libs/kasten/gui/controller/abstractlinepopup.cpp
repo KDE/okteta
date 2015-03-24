@@ -24,7 +24,7 @@
 #include "abstractlinepopup_p.h"
 
 // Qt
-#include <QtCore/QEvent>
+#include <QEvent>
 
 
 namespace Kasten

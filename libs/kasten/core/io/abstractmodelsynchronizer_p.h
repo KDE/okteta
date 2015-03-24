@@ -26,7 +26,7 @@
 #include "abstractmodelsynchronizer.h"
 
 // Qt
-#include <QtCore/QUrl>
+#include <QUrl>
 
 
 namespace Kasten

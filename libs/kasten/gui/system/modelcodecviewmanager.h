@@ -26,8 +26,8 @@
 // lib
 #include "kastengui_export.h"
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <QObject>
+#include <QList>
 
 class QString;
 

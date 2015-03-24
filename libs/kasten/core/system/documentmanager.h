@@ -26,8 +26,8 @@
 // lib
 #include "kastencore_export.h"
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QObject>
+#include <QList>
+#include <QObject>
 
 class QStringList;
 

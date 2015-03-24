@@ -27,7 +27,7 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QtEndian>
+#include <QtEndian>
 
 
 ModSum64ByteArrayChecksumAlgorithm::ModSum64ByteArrayChecksumAlgorithm()

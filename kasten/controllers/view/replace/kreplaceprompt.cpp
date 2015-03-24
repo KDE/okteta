@@ -25,10 +25,10 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtWidgets/QDialogButtonBox>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QPushButton>
-#include <QtCore/QEventLoop>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QEventLoop>
 
 
 namespace Kasten

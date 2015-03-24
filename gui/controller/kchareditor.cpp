@@ -27,7 +27,7 @@
 // commonlib
 #include <charcodec.h>
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 
 
 namespace Okteta

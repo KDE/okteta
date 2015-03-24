@@ -26,8 +26,8 @@
 // lib
 #include "abstractmousecontroller.h"
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QPoint>
+#include <QObject>
+#include <QPoint>
 
 class QMouseEvent;
 class QTimer;

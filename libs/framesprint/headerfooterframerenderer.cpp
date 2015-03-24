@@ -26,11 +26,11 @@
 #include <KLocalizedString>
 #include <KUser>
 // Qt
-#include <QtCore/QLocale>
-#include <QtCore/QHash>
-#include <QtCore/QDateTime>
-#include <QtGui/QPainter>
-#include <QtGui/QFontMetrics>
+#include <QLocale>
+#include <QHash>
+#include <QDateTime>
+#include <QPainter>
+#include <QFontMetrics>
 
 
 HeaderFooterFrameRenderer::HeaderFooterFrameRenderer( const PrintInfo* info )

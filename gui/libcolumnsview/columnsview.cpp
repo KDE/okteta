@@ -25,9 +25,9 @@
 // lib
 #include "abstractcolumnrenderer.h"
 // Qt
-#include <QtCore/QListIterator>
-#include <QtGui/QPaintEvent>
-#include <QtGui/QPainter>
+#include <QListIterator>
+#include <QPaintEvent>
+#include <QPainter>
 #include <QStyle>
 #include <QScrollBar>
 

@@ -27,7 +27,7 @@
 // #include "printthread.h"
 // Qt
 #include <QApplication>
-// #include <QtGui/QFontDatabase>
+// #include <QFontDatabase>
 
 
 namespace Kasten

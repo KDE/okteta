@@ -26,7 +26,7 @@
 // lib
 #include "kastencore_export.h"
 // Qt
-#include <QtCore/QExplicitlySharedDataPointer>
+#include <QExplicitlySharedDataPointer>
 
 class QIcon;
 class QString;

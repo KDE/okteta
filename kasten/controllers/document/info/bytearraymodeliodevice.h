@@ -26,7 +26,7 @@
 // Okteta
 #include <address.h>
 // Qt
-#include <QtCore/QIODevice>
+#include <QIODevice>
 
 
 namespace Okteta

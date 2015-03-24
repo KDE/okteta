@@ -30,10 +30,10 @@
 #include <wordbytearrayservice.h>
 // Qt
 #include <QApplication>
-#include <QtGui/QClipboard>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QDrag>
-#include <QtCore/QTimer>
+#include <QClipboard>
+#include <QMouseEvent>
+#include <QDrag>
+#include <QTimer>
 
 namespace Okteta
 {

@@ -37,7 +37,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 
 namespace Kasten

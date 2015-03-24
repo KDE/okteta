@@ -24,7 +24,7 @@
 #define BYTEARRAYDOCUMENTFACTORYTEST_H
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 
 namespace Kasten

@@ -33,9 +33,9 @@
 // Qt
 #include <QStyle>
 #include <QFontDatabase>
-#include <QtGui/QPainter>
+#include <QPainter>
 #include <QScrollBar>
-#include <QtCore/QEvent>
+#include <QEvent>
 
 
 namespace Okteta

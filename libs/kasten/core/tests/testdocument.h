@@ -26,8 +26,8 @@
 // lib
 #include "abstractdocument.h"
 // Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
+#include <QByteArray>
+#include <QString>
 
 
 namespace Kasten

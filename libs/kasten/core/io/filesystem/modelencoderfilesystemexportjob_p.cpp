@@ -26,7 +26,7 @@
 #include "modelstreamencodethread.h"
 // Qt
 #include <QCoreApplication>
-#include <QtCore/QFile>
+#include <QFile>
 
 
 namespace Kasten

@@ -21,7 +21,7 @@
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/allprimitivetypes.h"
 
-#include <QtTest/QTest>
+#include <QTest>
 #include <QString>
 #include <QDebug>
 #include <QScriptEngine>

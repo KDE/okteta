@@ -32,7 +32,7 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 
 
 namespace Okteta

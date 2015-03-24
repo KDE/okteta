@@ -36,7 +36,7 @@
 #include <KXMLGUIClient>
 // Qt
 #include <QApplication>
-#include <QtCore/QMimeData>
+#include <QMimeData>
 
 
 #ifndef ABSTRACTMODELDATAGENERATOR_METATYPE

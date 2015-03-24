@@ -37,7 +37,7 @@
 #include <QTreeView>
 #include <QHeaderView>
 #include <QFocusEvent>
-#include <QtGui/QFontMetrics>
+#include <QFontMetrics>
 
 
 namespace Kasten

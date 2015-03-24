@@ -30,7 +30,7 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // Qt
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten

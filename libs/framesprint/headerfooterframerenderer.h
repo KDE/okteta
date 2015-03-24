@@ -26,10 +26,10 @@
 // lib
 #include "abstractframerenderer.h"
 // Qt
-#include <QtCore/QStringList>
-#include <QtGui/QFont>
-#include <QtGui/QColor>
-#include <QtCore/QUrl>
+#include <QStringList>
+#include <QFont>
+#include <QColor>
+#include <QUrl>
 
 class QString;
 

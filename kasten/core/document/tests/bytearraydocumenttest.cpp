@@ -27,9 +27,9 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // Qt
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
-#include <QtCore/QByteArray>
+#include <QTest>
+#include <QSignalSpy>
+#include <QByteArray>
 
 
 namespace Kasten

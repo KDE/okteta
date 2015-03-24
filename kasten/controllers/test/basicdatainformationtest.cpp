@@ -19,7 +19,7 @@
  */
 
 
-#include <QtTest/QTest>
+#include <QTest>
 
 #include "view/structures/datatypes/array/arraydatainformation.h"
 #include "view/structures/datatypes/array/primitivearraydata.h"

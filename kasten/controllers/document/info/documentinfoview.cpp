@@ -31,12 +31,12 @@
 #include <KSqueezedTextLabel>
 #include <kio/global.h>
 // Qt
-#include <QtGui/QFont>
+#include <QFont>
 #include <QLabel>
 #include <QLayout>
 #include <QGridLayout>
 #include <QLocale>
-#include <QtCore/QMimeType>
+#include <QMimeType>
 
 
 namespace Kasten

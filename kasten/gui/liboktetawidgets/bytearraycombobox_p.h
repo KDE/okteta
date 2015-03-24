@@ -29,7 +29,7 @@
 // KF5
 #include <KComboBox>
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 
 namespace Okteta

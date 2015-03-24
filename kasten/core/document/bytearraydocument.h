@@ -40,7 +40,7 @@
 #include "../versionable.h"
 #include <abstractdocument.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 namespace Okteta {
 class AbstractByteArrayModel;

@@ -21,7 +21,7 @@
 // TODO: find better way to work-around simple name creation for QTest::newRow
 #undef QT_USE_QSTRINGBUILDER
 
-#include <QtTest/QtTest>
+#include <QTest>
 #include <QScriptEngine>
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/parsers/scriptvalueconverter.h"

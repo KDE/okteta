@@ -25,8 +25,8 @@
 // test object
 #include <versionable.h>
 // Qt
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
+#include <QTest>
+#include <QSignalSpy>
 
 namespace Okteta
 {

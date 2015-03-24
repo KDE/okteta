@@ -26,8 +26,8 @@
 // lib
 #include "bytearraychange.h"
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QtPlugin>
+#include <QList>
+#include <QtPlugin>
 
 class QByteArray;
 

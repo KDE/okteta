@@ -30,7 +30,7 @@
 // Okteta core
 #include <oktetacore.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

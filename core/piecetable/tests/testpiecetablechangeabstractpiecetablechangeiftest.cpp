@@ -27,7 +27,7 @@
 // lib
 #include <piecetable/piecetable.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 
 static const int TestOffset = 30;

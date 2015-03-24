@@ -23,7 +23,7 @@
 #include "abstractbytearrayfilter.h"
 
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 class AbstractByteArrayFilter::Private
 {

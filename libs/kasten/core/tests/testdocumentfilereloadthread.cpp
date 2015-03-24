@@ -27,9 +27,9 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QUrl>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QUrl>
+#include <QDataStream>
+#include <QFile>
 
 
 namespace Kasten

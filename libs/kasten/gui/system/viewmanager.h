@@ -26,8 +26,8 @@
 // lib
 #include "abstractview.h"
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QObject>
+#include <QList>
+#include <QObject>
 
 
 namespace Kasten

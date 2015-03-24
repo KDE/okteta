@@ -36,13 +36,13 @@
 #include <valuecodec.h>
 #include <charcodec.h>
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QDateTime>
-#include <QtGui/QPainter>
-#include <QtGui/QFontMetrics>
+#include <QHash>
+#include <QDateTime>
+#include <QPainter>
+#include <QFontMetrics>
 #include <QFontDatabase>
 #include <QApplication>
-#include <QtCore/QListIterator>
+#include <QListIterator>
 
 
 static const Okteta::Address DefaultStartOffset = 0;

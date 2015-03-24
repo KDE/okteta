@@ -26,7 +26,7 @@
 // lib
 #include "kastencore_export.h"
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 
 namespace Kasten

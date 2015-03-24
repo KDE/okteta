@@ -35,9 +35,9 @@
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
-#include <QtCore/QTimer>
-#include <QtCore/QUrl>
-#include <QtCore/QMimeDatabase>
+#include <QTimer>
+#include <QUrl>
+#include <QMimeDatabase>
 
 
 namespace Kasten

@@ -30,15 +30,15 @@
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
-#include <QtWidgets/QApplication>
-#include <QtCore/QSortFilterProxyModel>
+#include <QApplication>
+#include <QSortFilterProxyModel>
 #include <QFontDatabase>
 #include <QPushButton>
 #include <QLabel>
 #include <QLayout>
 #include <QHeaderView>
 #include <QTreeView>
-#include <QtGui/QFontMetrics>
+#include <QFontMetrics>
 
 
 namespace Kasten

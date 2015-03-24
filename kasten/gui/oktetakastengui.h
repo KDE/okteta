@@ -24,7 +24,7 @@
 #define OKTETAKASTENGUI_H
 
 // Qt
-#include <QtCore/QLoggingCategory>
+#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_KASTEN_OKTETA_GUI)
 

@@ -64,7 +64,7 @@
 #include <QWidget>
 #include <QLayout>
 #include <QUrl>
-#include <QtCore/QList>
+#include <QList>
 
 
 static const char* const UIFileName[] =

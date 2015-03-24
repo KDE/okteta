@@ -23,8 +23,8 @@
 #ifndef STRUCTTREEMODEL_H_
 #define STRUCTTREEMODEL_H_
 
-#include <QtCore/QAbstractItemModel>
-#include <QtCore/QSet>
+#include <QAbstractItemModel>
+#include <QSet>
 
 class DataInformationBase;
 class DataInformation;

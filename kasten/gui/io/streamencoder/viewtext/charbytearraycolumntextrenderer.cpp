@@ -27,7 +27,7 @@
 #include <charcodec.h>
 #include <character.h>
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

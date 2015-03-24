@@ -33,7 +33,7 @@
 // KF5
 #include <KColorScheme>
 // Qt
-#include <QtGui/QPainter>
+#include <QPainter>
 
 
 namespace Okteta

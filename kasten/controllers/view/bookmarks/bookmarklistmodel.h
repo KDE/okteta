@@ -26,7 +26,7 @@
 // Okteta gui
 #include <offsetformat.h>
 // Qt
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 namespace Okteta {
 class Bookmark;

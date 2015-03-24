@@ -28,7 +28,7 @@
 // Okteta core
 #include "addressrange.h"
 // Qt
-#include <QtGui/QClipboard>
+#include <QClipboard>
 
 class QMimeData;
 class QByteArray;

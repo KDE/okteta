@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastengui_export.h"
 // Qt
-#include <QtCore/QSharedDataPointer>
+#include <QSharedDataPointer>
 
 class QChar;
 class QString;

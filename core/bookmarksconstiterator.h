@@ -27,7 +27,7 @@
 #include "bookmarksconstiteratoradapter.h"
 #include "oktetacore_export.h"
 // Qt
-#include <QtCore/QExplicitlySharedDataPointer>
+#include <QExplicitlySharedDataPointer>
 
 
 namespace Okteta

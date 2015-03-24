@@ -28,7 +28,7 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QTextCodec>
+#include <QTextCodec>
 
 
 namespace Okteta

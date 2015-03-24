@@ -35,8 +35,8 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QTreeView>
-#include <QtWidgets/QDialogButtonBox>
-#include <QtCore/QItemSelectionModel>
+#include <QDialogButtonBox>
+#include <QItemSelectionModel>
 
 
 namespace Kasten

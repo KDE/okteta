@@ -30,7 +30,7 @@
 #include <address.h>
 #include <size.h>
 // Qt
-#include <QtGui/QFont>
+#include <QFont>
 
 namespace Okteta {
 class OffsetColumnRenderer;

@@ -35,7 +35,7 @@
 #include <abstractmodelsynchronizer.h>
 #include <abstractdocument.h>
 // Qt
-#include <QtCore/QHash>
+#include <QHash>
 
 
 namespace Kasten

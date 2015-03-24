@@ -26,7 +26,7 @@
 // Okteta Gui Kasten
 #include <bytearrayviewprofile.h>
 // Qt
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 template< class C > class QList;
 

@@ -25,7 +25,7 @@
 
 #include "abstractarraydata.h"
 
-#include <QtCore/QVector>
+#include <QVector>
 
 class DataInformation;
 class ScriptHandlerInfo;

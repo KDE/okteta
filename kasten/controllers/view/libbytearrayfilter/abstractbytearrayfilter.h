@@ -27,7 +27,7 @@
 #include <addressrange.h>
 #include <byte.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class AbstractByteArrayFilterParameterSet;
 namespace Okteta {

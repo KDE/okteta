@@ -35,12 +35,12 @@
 #include <QLayout>
 #include <QSpinBox>
 #include <QPushButton>
-#include <QtCore/QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
 #include <QHeaderView>
 #include <QTreeView>
-#include <QtGui/QClipboard>
+#include <QClipboard>
 #include <QApplication>
-#include <QtGui/QFocusEvent>
+#include <QFocusEvent>
 
 
 namespace Kasten

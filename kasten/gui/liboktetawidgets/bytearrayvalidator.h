@@ -26,7 +26,7 @@
 // Okteta core
 #include <oktetacore.h>
 // Qt
-#include <QtGui/QValidator>
+#include <QValidator>
 
 
 namespace Okteta

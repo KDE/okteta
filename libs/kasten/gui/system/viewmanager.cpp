@@ -26,8 +26,8 @@
 #include "abstractviewfactory.h"
 #include "dummyview.h"
 // Qt
-#include <QtCore/QListIterator>
-#include <QtCore/QMutableListIterator>
+#include <QListIterator>
+#include <QMutableListIterator>
 
 // temporary
 #include "modelcodecviewmanager.h"

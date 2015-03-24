@@ -24,8 +24,8 @@
 #define OKTETA_CHANGESDESCRIBABLE_H
 
 // Qt
-#include <QtCore/QtPlugin>
-#include <QtCore/QString>
+#include <QtPlugin>
+#include <QString>
 
 namespace Okteta
 {

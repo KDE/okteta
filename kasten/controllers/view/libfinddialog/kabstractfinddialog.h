@@ -26,9 +26,9 @@
 // lib
 #include "kfinddirection.h"
 // Qt
-#include <QtWidgets/QDialog>
-#include <QtCore/QByteArray>
-#include <QtCore/QString>
+#include <QDialog>
+#include <QByteArray>
+#include <QString>
 
 namespace Okteta {
 class ByteArrayComboBox;

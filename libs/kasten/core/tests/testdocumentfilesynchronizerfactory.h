@@ -26,7 +26,7 @@
 // Kasten
 #include <abstractmodelsynchronizerfactory.h>
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 
 namespace Kasten

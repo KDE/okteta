@@ -24,7 +24,7 @@
 #define REVERTABLEPIECETABLETEST_H
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace KPieceTable
 {

@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 class QAction;
 class KXMLGUIClient;

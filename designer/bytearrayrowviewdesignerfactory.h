@@ -24,8 +24,8 @@
 #define BYTEARRAYROWVIEWDESIGNERFACTORY_H
 
 // Qt
-#include <QtDesigner/QDesignerCustomWidgetInterface>
-#include <QtCore/QObject>
+#include <QDesignerCustomWidgetInterface>
+#include <QObject>
 
 
 class ByteArrayRowViewDesignerFactory : public QObject,

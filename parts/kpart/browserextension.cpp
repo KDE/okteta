@@ -29,7 +29,7 @@
 #include <bytearrayview.h>
 #include <bytearraydocument.h>
 // Qt
-#include <QtGui/QClipboard>
+#include <QClipboard>
 #include <QApplication>
 #include <QDataStream>
 

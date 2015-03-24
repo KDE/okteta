@@ -24,8 +24,8 @@
 #define KASTEN_IF_WIDGETSDOCKABLE_H
 
 // Qt
-#include <QtCore/QtPlugin>
-#include <QtCore/QList>
+#include <QtPlugin>
+#include <QList>
 
 
 namespace Kasten

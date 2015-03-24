@@ -31,9 +31,9 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QCoreApplication>
+#include <QDataStream>
+#include <QFile>
 // C++
 #include <limits>
 

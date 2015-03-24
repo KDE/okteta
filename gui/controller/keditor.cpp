@@ -30,7 +30,7 @@
 #include <abstractbytearraymodel.h>
 #include <wordbytearrayservice.h>
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 
 
 namespace Okteta

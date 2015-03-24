@@ -26,7 +26,7 @@
 // lib
 #include "bytearrayviewprofile.h"
 // Qt
-#include <QtCore/QSharedDataPointer>
+#include <QSharedDataPointer>
 
 class QString;
 

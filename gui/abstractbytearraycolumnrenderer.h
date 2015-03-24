@@ -32,7 +32,7 @@
 #include "abstractbytearraymodel.h"
 #include "character.h"
 // Qt
-#include <QtGui/QFontMetrics>
+#include <QFontMetrics>
 
 class QPainter;
 class QColor;

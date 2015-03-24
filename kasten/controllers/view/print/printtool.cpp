@@ -37,10 +37,10 @@
 #include <KMessageBox>
 // Qt
 #include <QApplication>
-#include <QtPrintSupport/QPrintDialog>
-#include <QtPrintSupport/QPrinter>
-#include <QtGui/QFont>
-#include <QtGui/QFontMetrics>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QFont>
+#include <QFontMetrics>
 
 
 namespace Kasten

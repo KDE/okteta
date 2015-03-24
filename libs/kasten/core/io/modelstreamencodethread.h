@@ -26,7 +26,7 @@
 // lib
 #include "kastencore_export.h"
 // Qt
-#include <QtCore/QThread>
+#include <QThread>
 
 class QIODevice;
 

@@ -28,7 +28,7 @@
 #include "address.h"
 #include "size.h"
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Okteta

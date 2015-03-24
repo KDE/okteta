@@ -28,7 +28,7 @@
 #include "jisx0201charcodec.h"
 #include "usasciicharcodec.h"
 // Qt
-#include <QtCore/QStringList>
+#include <QStringList>
 
 
 namespace Okteta

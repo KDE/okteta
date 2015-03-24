@@ -25,7 +25,7 @@
 
 // Qt
 #include <QIcon>
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

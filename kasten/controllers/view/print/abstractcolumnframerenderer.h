@@ -32,7 +32,7 @@
 // Okteta core
 #include <addressrange.h>
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 namespace Okteta {
 class AbstractColumnRenderer;

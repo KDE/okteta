@@ -25,7 +25,7 @@
 
 // Qt
 #include <QStyledItemDelegate>
-#include <QtCore/QPointer>
+#include <QPointer>
 
 
 namespace Kasten

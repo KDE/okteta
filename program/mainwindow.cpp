@@ -112,7 +112,7 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 // Qt
-#include <QtCore/QUrl>
+#include <QUrl>
 #include <QMimeData>
 
 

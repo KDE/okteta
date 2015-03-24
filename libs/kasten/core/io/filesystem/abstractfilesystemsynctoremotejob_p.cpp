@@ -26,8 +26,8 @@
 #include <KIO/FileCopyJob>
 #include <KJobWidgets>
 // Qt
-#include <QtCore/QFileInfo>
-#include <QtCore/QDateTime>
+#include <QFileInfo>
+#include <QDateTime>
 
 namespace Kasten
 {

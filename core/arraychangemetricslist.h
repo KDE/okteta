@@ -26,7 +26,7 @@
 // lib
 #include "arraychangemetrics.h"
 //
-#include <QtCore/QList>
+#include <QList>
 
 
 namespace Okteta

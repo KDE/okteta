@@ -30,7 +30,7 @@
 // Okteta core
 #include <oktetacore.h>
 // Qt
-#include <QtCore/QChar>
+#include <QChar>
 
 namespace Okteta {
 class ValueCodec;

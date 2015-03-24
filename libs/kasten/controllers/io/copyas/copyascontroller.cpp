@@ -40,9 +40,9 @@
 #include <KLocalizedString>
 #include <KSelectAction>
 // Qt
-#include <QtCore/QBuffer>
-#include <QtCore/QMimeData>
-#include <QtGui/QClipboard>
+#include <QBuffer>
+#include <QMimeData>
+#include <QClipboard>
 #include <QApplication>
 
 

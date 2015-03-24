@@ -24,8 +24,8 @@
 #define TESTDOCUMENTFILESYNCHRONIZERTEST_H
 
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QByteArray>
+#include <QObject>
+#include <QByteArray>
 
 class TestFileSystem;
 class QString;

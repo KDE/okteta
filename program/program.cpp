@@ -49,10 +49,10 @@
 #include <KDBusService>
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QCommandLineParser>
-#include <QtCore/QList>
-#include <QtCore/QUrl>
-#include <QtCore/QLoggingCategory>
+#include <QCommandLineParser>
+#include <QList>
+#include <QUrl>
+#include <QLoggingCategory>
 
 namespace Kasten
 {

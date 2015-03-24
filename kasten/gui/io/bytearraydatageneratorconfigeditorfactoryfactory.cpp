@@ -31,7 +31,7 @@
 //// #include "my_bytearraydatageneratorconfigeditorfactory.h"
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(end)
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 
 namespace Kasten

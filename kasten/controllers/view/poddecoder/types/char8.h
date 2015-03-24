@@ -28,8 +28,8 @@
 // Okteta core
 #include <character.h>
 // Qt
-#include <QtCore/QMetaType>
-#include <QtCore/QString>
+#include <QMetaType>
+#include <QString>
 
 
 struct Char8

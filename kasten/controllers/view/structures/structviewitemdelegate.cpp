@@ -23,7 +23,7 @@
 #include "structviewitemdelegate.h"
 #include "datatypes/datainformation.h"
 #include <QLineEdit>
-#include <QtCore/QScopedPointer>
+#include <QScopedPointer>
 
 
 StructViewItemDelegate::StructViewItemDelegate(QObject * parent) :

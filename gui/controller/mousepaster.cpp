@@ -28,7 +28,7 @@
 #include <bytearraytablecursor.h>
 #include <bytearraytablelayout.h>
 // Qt
-#include <QtGui/QMouseEvent>
+#include <QMouseEvent>
 
 
 namespace Okteta

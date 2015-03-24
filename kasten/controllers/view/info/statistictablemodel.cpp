@@ -30,7 +30,7 @@
 #include <KLocalizedString>
 #include <KColorScheme>
 // Qt
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 
 namespace Kasten

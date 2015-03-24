@@ -24,7 +24,7 @@
 #define VIEWPROFILEEDITDIALOG_H
 
 // Qt
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 class QPushButton;
 

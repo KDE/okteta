@@ -25,7 +25,7 @@
 // test object
 #include <bookmark.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 using namespace Okteta;
 

@@ -23,7 +23,7 @@
 #include "bookmarklist.h"
 
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 
 namespace Okteta

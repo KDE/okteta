@@ -27,7 +27,7 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QtGlobal>
+#include <QtGlobal>
 
 
 

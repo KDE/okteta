@@ -24,7 +24,7 @@
 #define BYTEARRAYRAWFILEWRITETHREAD_H
 
 // Qt
-#include <QtCore/QThread>
+#include <QThread>
 
 class QFile;
 

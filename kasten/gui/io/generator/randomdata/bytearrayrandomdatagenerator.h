@@ -26,8 +26,8 @@
 // Kasten core
 #include <abstractmodeldatagenerator.h>
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 
 namespace Kasten

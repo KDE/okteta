@@ -26,7 +26,7 @@
 // lib
 #include "oktetacore_export.h"
 // Qt
-#include <QtCore/QChar>
+#include <QChar>
 
 
 namespace Okteta

@@ -28,8 +28,8 @@
 // Okteta gui
 #include <offsetformat.h>
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QAbstractTableModel>
+#include <QList>
+#include <QAbstractTableModel>
 
 
 class ContainedStringTableModel : public QAbstractTableModel

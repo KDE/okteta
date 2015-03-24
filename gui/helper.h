@@ -28,7 +28,7 @@
 // KF5
 #include <KColorScheme>
 // Qt
-#include <QtGui/QColor>
+#include <QColor>
 
 
 // temporary solution until syntax highlighting is implemented

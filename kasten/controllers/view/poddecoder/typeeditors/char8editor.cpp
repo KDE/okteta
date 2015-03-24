@@ -26,7 +26,7 @@
 #include <character.h>
 #include <charcodec.h>
 // Qt
-#include <QtGui/QValidator>
+#include <QValidator>
 
 
 class Char8Validator : public QValidator

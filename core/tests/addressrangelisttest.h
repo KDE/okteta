@@ -24,7 +24,7 @@
 #define ADDRESSRANGELISTTEST_H
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 
 namespace Okteta

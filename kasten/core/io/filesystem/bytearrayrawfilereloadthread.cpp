@@ -27,8 +27,8 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QDataStream>
+#include <QFile>
 // C++
 #include <limits>
 

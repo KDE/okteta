@@ -26,7 +26,7 @@
 // Kasten
 #include <abstractmodelfilesystemsynchronizer.h>
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 
 namespace Kasten

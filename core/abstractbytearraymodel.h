@@ -29,8 +29,8 @@
 #include "size.h"
 #include "byte.h"
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QByteArray>
+#include <QObject>
+#include <QByteArray>
 
 
 namespace Okteta

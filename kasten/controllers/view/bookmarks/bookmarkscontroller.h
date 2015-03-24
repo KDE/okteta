@@ -30,7 +30,7 @@
 // Okteta core
 #include <address.h>
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 namespace Okteta {
 class Bookmarkable;

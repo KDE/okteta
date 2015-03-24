@@ -26,7 +26,7 @@
 // lib
 #include "abstractbytearraycolumntextrenderer.h"
 // Qt
-#include <QtCore/QChar>
+#include <QChar>
 
 namespace Okteta {
 class CharCodec;

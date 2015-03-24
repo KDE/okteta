@@ -27,8 +27,8 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // Qt
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QDataStream>
+#include <QFile>
 
 
 namespace Kasten

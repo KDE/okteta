@@ -31,7 +31,7 @@
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QUrl>
+#include <QUrl>
 #include <QAction>
 
 

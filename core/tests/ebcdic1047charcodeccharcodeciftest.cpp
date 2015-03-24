@@ -25,7 +25,7 @@
 // test object
 #include <codecs/ebcdic1047charcodec.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 
 namespace Okteta

@@ -26,7 +26,7 @@
 // lib
 #include "kastengui_export.h"
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 
 class KXMLGUIClient;

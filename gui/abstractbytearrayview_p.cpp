@@ -40,14 +40,14 @@
 #include <wordbytearrayservice.h>
 #include <bookmark.h>
 // Qt
-#include <QtGui/QDragEnterEvent>
-#include <QtGui/QDragMoveEvent>
-#include <QtGui/QDragLeaveEvent>
-#include <QtGui/QDropEvent>
+#include <QDragEnterEvent>
+#include <QDragMoveEvent>
+#include <QDragLeaveEvent>
+#include <QDropEvent>
 #include <QApplication>
 #include <QToolTip>
-#include <QtCore/QMimeData>
-#include <QtCore/QTimer>
+#include <QMimeData>
+#include <QTimer>
 
 
 namespace Okteta

@@ -26,7 +26,7 @@
 // lib
 #include <bytearrayviewprofile.h>
 // Qt
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 template< class C > class QList;
 class QTreeView;

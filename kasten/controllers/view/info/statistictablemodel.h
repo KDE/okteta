@@ -26,7 +26,7 @@
 // Okteta core
 #include <oktetacore.h>
 // Qt
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 namespace Okteta {
 class CharCodec;

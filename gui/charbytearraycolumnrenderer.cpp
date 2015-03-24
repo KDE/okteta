@@ -25,7 +25,7 @@
 // lib
 #include "oktetagui.h"
 // Qt
-#include <QtGui/QPainter>
+#include <QPainter>
 
 
 namespace Okteta

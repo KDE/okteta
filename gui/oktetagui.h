@@ -31,8 +31,8 @@
 #include "byte.h"
 #include "oktetacore.h"
 // Qt
-#include <QtCore/QChar>
-#include <QtCore/QLoggingCategory>
+#include <QChar>
+#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_GUI)
 

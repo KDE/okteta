@@ -39,8 +39,8 @@
 // KF5
 #include <KColorScheme>
 // Qt
-#include <QtGui/QPainter>
-#include <QtGui/QFontMetrics>
+#include <QPainter>
+#include <QFontMetrics>
 
 
 namespace Okteta

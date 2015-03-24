@@ -25,7 +25,7 @@
 
 // Qt
 #include <QLayout>
-#include <QtCore/QList>
+#include <QList>
 
 class QWidgetItem;
 

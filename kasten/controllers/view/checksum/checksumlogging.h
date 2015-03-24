@@ -23,7 +23,7 @@
 #ifndef CHECKSUMLOGGING_H
 #define CHECKSUMLOGGING_H
 
-#include <QtCore/QLoggingCategory>
+#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM)
 

@@ -31,7 +31,7 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QMimeData>
+#include <QMimeData>
 
 
 namespace Kasten

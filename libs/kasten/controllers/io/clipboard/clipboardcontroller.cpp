@@ -33,9 +33,9 @@
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt
-#include <QtGui/QClipboard>
+#include <QClipboard>
 #include <QApplication>
-#include <QtCore/QMimeData>
+#include <QMimeData>
 #include <QAction>
 
 

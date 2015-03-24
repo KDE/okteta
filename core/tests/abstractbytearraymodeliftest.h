@@ -26,7 +26,7 @@
 // lib
 #include <addressrange.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class QSignalSpy;
 

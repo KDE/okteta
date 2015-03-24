@@ -26,7 +26,7 @@
 // lib
 #include <address.h>
 // Qt
-#include <QtCore/QSharedData>
+#include <QSharedData>
 
 
 namespace Okteta

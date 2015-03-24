@@ -28,8 +28,8 @@
 #include <KColorScheme>
 #include <KLocalizedString>
 // Qt
-#include <QtWidgets/QApplication>
-#include <QtCore/QVector>
+#include <QApplication>
+#include <QVector>
 #include <QIcon>
 
 

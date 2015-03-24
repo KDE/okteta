@@ -28,7 +28,7 @@
 #include <character.h>
 #include <abstractbytearraymodel.h>
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

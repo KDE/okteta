@@ -28,7 +28,7 @@
 // Kasten core
 #include <abstracttool.h>
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 class AbstractByteArrayFilterParameterSet;
 class AbstractByteArrayFilter;

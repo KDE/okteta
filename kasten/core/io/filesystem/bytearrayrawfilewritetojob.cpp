@@ -30,7 +30,7 @@
 // KF5
 // Qt
 #include <QUrl>
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten

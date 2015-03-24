@@ -28,8 +28,8 @@
 #include <KIO/FileCopyJob>
 #include <KJobWidgets>
 // Qt
-#include <QtCore/QFileInfo>
-#include <QtCore/QDateTime>
+#include <QFileInfo>
+#include <QDateTime>
 #include <QUrl>
 #include <QTemporaryFile>
 

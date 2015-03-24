@@ -31,7 +31,7 @@
 #include <documentsyncmanager.h>
 #include <documentcreatemanager.h>
 // Qt Core
-#include <QtCore/QStringList>
+#include <QStringList>
 
 
 namespace Kasten

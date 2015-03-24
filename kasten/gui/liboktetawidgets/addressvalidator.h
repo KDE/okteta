@@ -27,7 +27,7 @@
 #include <oktetacore.h>
 #include <address.h>
 // Qt
-#include <QtGui/QValidator>
+#include <QValidator>
 
 
 namespace Okteta

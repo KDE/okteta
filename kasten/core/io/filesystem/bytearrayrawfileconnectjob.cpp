@@ -28,7 +28,7 @@
 #include "bytearrayrawfilewritethread.h"
 #include "bytearraydocument.h"
 // Qt
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten

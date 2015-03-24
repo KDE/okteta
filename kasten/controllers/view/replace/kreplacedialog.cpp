@@ -32,7 +32,7 @@
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QLayout>
-#include <QtWidgets/QPushButton>
+#include <QPushButton>
 
 
 namespace Kasten
