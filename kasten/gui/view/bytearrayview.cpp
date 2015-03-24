@@ -25,7 +25,7 @@
 // lib
 #include "bytearrayjanusview.h"
 #include <bytearrayviewprofilesynchronizer.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta gui
 #include <abstractbytearrayview.h>
 // Okteta core

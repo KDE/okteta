@@ -28,7 +28,7 @@
 #include "../search/searchjob.h"
 // lib
 #include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>

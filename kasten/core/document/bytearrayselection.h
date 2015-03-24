@@ -24,11 +24,11 @@
 #define BYTEARRAYSELECTION_H
 
 // lib
-#include "oktetakastencore_export.h"
+#include <kasten/okteta/oktetakastencore_export.h>
 // Kasten core
 #include <kasten/abstractmodelselection.h>
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 
 
 namespace Kasten

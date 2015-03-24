@@ -26,9 +26,9 @@
 #include "about.h"
 #include "mainwindow.h"
 // Okteta Kasten
-#include <bytearraydocumentfactory.h>
+#include <kasten/okteta/bytearraydocumentfactory.h>
 #include <bytearrayviewfactory.h>
-#include <bytearrayrawfilesynchronizerfactory.h>
+#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.h>
 #include <bytearraystreamencoderconfigeditorfactoryfactory.h>
 #include <bytearraydatageneratorconfigeditorfactoryfactory.h>
 #include <bytearraystreamencoderfactory.h>

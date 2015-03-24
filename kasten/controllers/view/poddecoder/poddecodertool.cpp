@@ -40,7 +40,7 @@
 #include "typecodecs/utf8codec.h"
 #include "abstracttypecodec.h"
 #include "abstractdifferentsizedialog.h"
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 #include <bytearrayview.h>
 #include <abstractbytearraymodel.h>
 // Okteta core

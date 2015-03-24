@@ -24,7 +24,7 @@
 
 // lib
 #include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <arraychangemetricslist.h>

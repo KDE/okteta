@@ -27,7 +27,7 @@
 // Okteta Kasten gui
 #include <bytearrayview.h>
 // Okteta Kasten core
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <charcodec.h>
 #include <abstractbytearraymodel.h>

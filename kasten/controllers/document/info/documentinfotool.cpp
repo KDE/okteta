@@ -24,7 +24,7 @@
 
 // lib
 #include "bytearraymodeliodevice.h"
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Kasten core
 #include <kasten/documentsyncmanager.h>
 #include <kasten/abstractmodelsynchronizer.h>

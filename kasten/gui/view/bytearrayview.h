@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastengui_export.h"
 // lib
-#include <bytearrayselection.h>
+#include <kasten/okteta/bytearrayselection.h>
 // Kasten gui
 #include <kasten/abstractview.h>
 #include <kasten/zoomable.h> // TODO: able instead of interface? or else?

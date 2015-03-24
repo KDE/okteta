@@ -26,7 +26,7 @@
 #include "structuresmanager.h"
 #include "structlogging.h"
 // lib
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 #include <bytearrayview.h>
 // Okteta core
 #include <character.h>

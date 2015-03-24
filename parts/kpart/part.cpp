@@ -26,11 +26,11 @@
 #include "partfactory.h"
 #include "browserextension.h"
 // Okteta Kasten
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 #include <bytearrayview.h>
 #include <bytearrayviewprofilesynchronizer.h>
 #include <bytearrayviewprofilemanager.h>
-#include <bytearrayrawfilesynchronizerfactory.h>
+#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.h>
 #include <overwriteonlycontroller.h>
 #include <overwritemodecontroller.h>
 #include <gotooffsetcontroller.h>

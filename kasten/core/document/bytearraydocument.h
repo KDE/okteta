@@ -24,7 +24,7 @@
 #define BYTEARRAYDOCUMENT_H
 
 // lib
-#include "oktetakastencore_export.h"
+#include <kasten/okteta/oktetakastencore_export.h>
 // #include "kbytearrayinterface.h"
 // Kasten core
 #include <kasten/person.h>

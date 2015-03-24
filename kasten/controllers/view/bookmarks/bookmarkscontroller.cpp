@@ -26,7 +26,7 @@
 #include "bookmarkeditpopup.h"
 // lib
 #include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Kasten core
 #include <kasten/abstractmodel.h>
 // Okteta gui

@@ -24,7 +24,7 @@
 #define BYTEARRAYDOCUMENTFACTORY_H
 
 // lib
-#include "oktetakastencore_export.h"
+#include <kasten/okteta/oktetakastencore_export.h>
 // Kasten core
 #include <kasten/abstractdocumentfactory.h>
 

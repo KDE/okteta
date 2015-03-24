@@ -26,7 +26,8 @@
 #include "bytearrayview.h"
 #include <bytearrayviewprofilemanager.h>
 #include <bytearrayviewprofilesynchronizer.h>
-#include <bytearraydocument.h>
+// core
+#include <kasten/okteta/bytearraydocument.h>
 
 
 namespace Kasten
