@@ -25,6 +25,7 @@
 // Kasten core
 #include <kasten/documentsyncmanager.h>
 #include <kasten/abstractmodelfilesystemsynchronizer.h>
+#include <kasten/abstractdocument.h>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

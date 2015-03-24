@@ -24,7 +24,7 @@
 #define ZOOMBARCONTROLLER_H
 
 // lib
-#include "kastencontrollers_export.h"
+#include <kasten/kastencontrollers_export.h>
 // Kasten gui
 #include <kasten/abstractxmlguicontroller.h>
 

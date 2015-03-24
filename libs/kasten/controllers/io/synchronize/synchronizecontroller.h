@@ -24,11 +24,9 @@
 #define SYNCHRONIZECONTROLLER_H
 
 // lib
-#include "kastencontrollers_export.h"
+#include <kasten/kastencontrollers_export.h>
 // Kasten gui
 #include <kasten/abstractxmlguicontroller.h>
-// Kasten core
-#include <kasten/abstractdocument.h>
 
 class QAction;
 class KXMLGUIClient;
@@ -40,6 +38,7 @@ namespace Kasten
 class AbstractModelSynchronizer;
 class AbstractModelFileSystemSynchronizer;
 class DocumentSyncManager;
+class AbstractDocument;
 
 
 class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiController

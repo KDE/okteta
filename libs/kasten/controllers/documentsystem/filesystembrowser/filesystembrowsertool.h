@@ -24,7 +24,7 @@
 #define FILESYSTEMBROWSERTOOL_H
 
 // lib
-#include "kastencontrollers_export.h"
+#include <kasten/kastencontrollers_export.h>
 // Kasten core
 #include <kasten/abstracttool.h>
 

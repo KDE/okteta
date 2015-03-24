@@ -253,7 +253,7 @@ set( kastencontrollers_LIB_SRCS
 )
 
 set( kastencontrollers_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/kastencontrollers_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastencontrollers_export.h
   ${SETREMOTECONTROLLER_HDRS}
   ${CLOSECONTROLLER_HDRS}
   ${FILESYSTEMBROWSERCONTROLLER_HDRS}
@@ -312,7 +312,7 @@ set( kastencontrollers_LIB_CCHDRS
 )
 
 add_library( KastenControllers SHARED ${kastencontrollers_LIB_SRCS} )
-generate_export_header( KastenControllers )
+generate_export_header( KastenControllers EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastencontrollers_export.h)
 target_link_libraries( KastenControllers
 PUBLIC
   KastenGui
@@ -325,8 +325,7 @@ PRIVATE
   KF5::Parts
 )
 
-target_include_directories(KastenControllers PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
-target_include_directories(KastenControllers INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/Kasten>")
+target_include_directories(KastenControllers PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_target_properties( KastenControllers  PROPERTIES
   EXPORT_NAME "KastenControllers"

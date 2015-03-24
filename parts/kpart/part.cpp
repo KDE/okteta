@@ -47,17 +47,17 @@
 #include <kasten/jobmanager.h>
 #include <kasten/abstractloadjob.h>
 #include <kasten/abstractsyncwithremotejob.h>
-#include <readonlycontroller.h>
-// #include <readonlybarcontroller.h>
-// #include <synchronizecontroller.h>
-#include <clipboardcontroller.h>
-#include <insertcontroller.h>
-#include <copyascontroller.h>
-#include <exportcontroller.h>
-#include <versioncontroller.h>
-#include <zoomcontroller.h>
-#include <zoombarcontroller.h>
-#include <selectcontroller.h>
+#include <kasten/readonlycontroller.h>
+// #include <kasten/readonlybarcontroller.h>
+// #include <kasten/synchronizecontroller.h>
+#include <kasten/clipboardcontroller.h>
+#include <kasten/insertcontroller.h>
+#include <kasten/copyascontroller.h>
+#include <kasten/exportcontroller.h>
+#include <kasten/versioncontroller.h>
+#include <kasten/zoomcontroller.h>
+#include <kasten/zoombarcontroller.h>
+#include <kasten/selectcontroller.h>
 // KF5
 #include <KActionCollection>
 // Qt
