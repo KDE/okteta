@@ -24,7 +24,7 @@
 #define ABSTRACTGROUPEDVIEWS_H
 
 // lib
-#include "abstractviewarea.h"
+#include <kasten/abstractviewarea.h>
 
 
 namespace Kasten

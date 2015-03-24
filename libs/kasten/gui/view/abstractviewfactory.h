@@ -24,7 +24,7 @@
 #define ABSTRACTVIEWFACTORY_H
 
 // lib
-#include "abstractview.h"
+#include <kasten/abstractview.h>
 
 
 namespace Kasten

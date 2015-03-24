@@ -24,8 +24,8 @@
 #define SINGLEVIEWAREA_H
 
 // lib
-#include "abstractviewarea.h"
-#include "toolinlineviewable.h"
+#include <kasten/abstractviewarea.h>
+#include <kasten/toolinlineviewable.h>
 
 class QMimeData;
 

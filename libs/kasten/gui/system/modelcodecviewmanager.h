@@ -24,7 +24,7 @@
 #define MODELCODECVIEWMANAGER_H
 
 // lib
-#include "kastengui_export.h"
+#include <kasten/kastengui_export.h>
 // Qt
 #include <QObject>
 #include <QList>

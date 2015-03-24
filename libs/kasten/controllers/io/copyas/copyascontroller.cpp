@@ -25,9 +25,9 @@
 // lib
 #include "copyasdialog.h"
 // Kasten gui
-#include <modelcodecviewmanager.h>
-#include <dataselectable.h>
-#include <abstractmodelstreamencoderconfigeditor.h>
+#include <kasten/modelcodecviewmanager.h>
+#include <kasten/dataselectable.h>
+#include <kasten/abstractmodelstreamencoderconfigeditor.h>
 // Kasten core
 #include <kasten/modelstreamencodethread.h>
 #include <kasten/modelcodecmanager.h>

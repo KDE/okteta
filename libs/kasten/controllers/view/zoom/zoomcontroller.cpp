@@ -23,7 +23,7 @@
 #include "zoomcontroller.h"
 
 // Kasten gui
-#include <zoomable.h>
+#include <kasten/zoomable.h>
 // Kasten core
 #include <kasten/abstractmodel.h>
 // KF5

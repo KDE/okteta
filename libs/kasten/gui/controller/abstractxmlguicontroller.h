@@ -24,7 +24,7 @@
 #define ABSTRACTXMLGUICONTROLLER_H
 
 // lib
-#include "abstractcontroller.h"
+#include <kasten/abstractcontroller.h>
 
 namespace Kasten
 {

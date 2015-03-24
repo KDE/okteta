@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastencontrollers_export.h"
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 // Okteta gui
 #include <offsetformat.h>
 // Okteta core

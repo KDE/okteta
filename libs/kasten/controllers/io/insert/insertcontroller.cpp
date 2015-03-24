@@ -25,9 +25,9 @@
 // lib
 #include "insertdialog.h"
 // Kasten gui
-#include <modelcodecviewmanager.h>
-#include <selecteddatawriteable.h>
-#include <abstractmodeldatageneratorconfigeditor.h>
+#include <kasten/modelcodecviewmanager.h>
+#include <kasten/selecteddatawriteable.h>
+#include <kasten/abstractmodeldatageneratorconfigeditor.h>
 // Kasten core
 #include <kasten/modeldatageneratethread.h>
 #include <kasten/modelcodecmanager.h>

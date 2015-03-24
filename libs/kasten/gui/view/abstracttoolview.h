@@ -24,7 +24,7 @@
 #define ABSTRACTTOOLVIEW_H
 
 // lib
-#include "kastengui_export.h"
+#include <kasten/kastengui_export.h>
 
 class QWidget;
 class QString;

@@ -24,8 +24,8 @@
 #define SHELLWINDOW_H
 
 // Kasten gui
-#include "kastengui_export.h"
-#include "widgetsdockable.h"
+#include <kasten/kastengui_export.h>
+#include <kasten/widgetsdockable.h>
 // KF5
 #include <KXmlGuiWindow>
 

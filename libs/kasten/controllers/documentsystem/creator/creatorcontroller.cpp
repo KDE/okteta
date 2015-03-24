@@ -23,8 +23,8 @@
 #include "creatorcontroller.h"
 
 // Kasten gui
-#include <abstractdocumentstrategy.h>
-#include <selecteddatawriteable.h>
+#include <kasten/abstractdocumentstrategy.h>
+#include <kasten/selecteddatawriteable.h>
 // Kasten core
 #include <kasten/modelcodecmanager.h>
 #include <kasten/abstractmodeldatagenerator.h>

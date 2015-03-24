@@ -26,9 +26,9 @@
 // lib
 #include "exportdialog.h"
 // Kasten gui
-#include <modelcodecviewmanager.h>
-#include <dataselectable.h>
-#include <abstractmodelexporterconfigeditor.h>
+#include <kasten/modelcodecviewmanager.h>
+#include <kasten/dataselectable.h>
+#include <kasten/abstractmodelexporterconfigeditor.h>
 // Kasten core
 #include <kasten/modelcodecmanager.h>
 #include <kasten/abstractdocument.h>

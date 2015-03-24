@@ -28,10 +28,10 @@
 // lib
 #include <bytearrayselection.h>
 // Kasten gui
-#include <abstractview.h>
-#include <zoomable.h> // TODO: able instead of interface? or else?
-#include <dataselectable.h>
-#include <selecteddatawriteable.h>
+#include <kasten/abstractview.h>
+#include <kasten/zoomable.h> // TODO: able instead of interface? or else?
+#include <kasten/dataselectable.h>
+#include <kasten/selecteddatawriteable.h>
 // Okteta core
 #include <addressrange.h>
 

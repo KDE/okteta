@@ -23,7 +23,7 @@
 #include "modifiedbarcontroller.h"
 
 // Kasten ui
-#include <statusbar.h>
+#include <kasten/statusbar.h>
 // Kasten core
 #include <kasten/abstractmodelsynchronizer.h>
 #include <kasten/abstractdocument.h>

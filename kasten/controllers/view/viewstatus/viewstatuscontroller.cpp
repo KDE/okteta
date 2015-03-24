@@ -25,8 +25,8 @@
 // lib
 #include <bytearrayview.h>
 // Kasten ui
-#include <togglebutton.h>
-#include <statusbar.h>
+#include <kasten/togglebutton.h>
+#include <kasten/statusbar.h>
 // Okteta core
 #include <charcodec.h>
 #include <oktetacore.h>

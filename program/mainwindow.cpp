@@ -98,11 +98,11 @@
 /*#include <closecontroller.h>*/
 #include <quitcontroller.h>
 // Kasten gui
-#include <multidocumentstrategy.h>
-#include <modelcodecviewmanager.h>
-#include <viewmanager.h>
-#include <multiviewareas.h>
-#include <statusbar.h>
+#include <kasten/multidocumentstrategy.h>
+#include <kasten/modelcodecviewmanager.h>
+#include <kasten/viewmanager.h>
+#include <kasten/multiviewareas.h>
+#include <kasten/statusbar.h>
 // Kasten core
 #include <kasten/modelcodecmanager.h>
 #include <kasten/documentcreatemanager.h>

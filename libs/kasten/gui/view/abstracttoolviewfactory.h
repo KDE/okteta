@@ -23,7 +23,7 @@
 #ifndef ABSTRACTTOOLVIEWFACTORY_H
 #define ABSTRACTTOOLVIEWFACTORY_H
 
-#include "kastengui.h"
+#include <kasten/kastengui.h>
 
 namespace Kasten
 {

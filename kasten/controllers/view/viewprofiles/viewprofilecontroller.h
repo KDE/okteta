@@ -27,7 +27,7 @@
 #include "oktetakastencontrollers_export.h"
 #include <bytearrayviewprofile.h>
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 // Kasten core
 #include <kasten/kastencore.h>
 

@@ -23,10 +23,10 @@
 #include "viewareasplitcontroller.h"
 
 // lib
-#include <abstractgroupedviews.h>
-#include <viewareasplitable.h>
-#include <abstractviewarea.h>
-#include <viewmanager.h>
+#include <kasten/abstractgroupedviews.h>
+#include <kasten/viewareasplitable.h>
+#include <kasten/abstractviewarea.h>
+#include <kasten/viewmanager.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>

@@ -25,8 +25,8 @@
 
 // lib
 #include "oktetakastengui_export.h"
-// Okteta gui
-#include <abstractmodelstreamencoderconfigeditorfactory.h>
+// Kasten gui
+#include <kasten/abstractmodelstreamencoderconfigeditorfactory.h>
 
 
 namespace Kasten

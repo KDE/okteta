@@ -36,10 +36,10 @@
 // tmp
 #include <bytearrayviewprofilemanager.h>
 // Kasten gui
-#include <multidocumentstrategy.h>
-#include <dialoghandler.h>
-#include <viewmanager.h>
-#include <modelcodecviewmanager.h>
+#include <kasten/multidocumentstrategy.h>
+#include <kasten/dialoghandler.h>
+#include <kasten/viewmanager.h>
+#include <kasten/modelcodecviewmanager.h>
 // Kasten core
 #include <kasten/documentmanager.h>
 #include <kasten/documentcreatemanager.h>

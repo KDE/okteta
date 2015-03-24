@@ -23,8 +23,8 @@
 #include "toollistmenucontroller.h"
 
 // lib
-#include <widgetsdockable.h>
-#include <toolviewdockwidget.h>
+#include <kasten/widgetsdockable.h>
+#include <kasten/toolviewdockwidget.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

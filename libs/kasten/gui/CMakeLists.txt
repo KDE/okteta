@@ -165,8 +165,18 @@ ecm_generate_headers(kastengui_controller_CCHDRS
   REQUIRED_HEADERS kastengui_controller_HDRS
 )
 
-set( kastengui_LIB_SRCS
+set( kastengui_SRCS
   kastengui.cpp
+)
+ecm_generate_headers(kastengui_CCHDRS
+  HEADER_NAMES
+    KastenGui
+  PREFIX Kasten
+  REQUIRED_HEADERS kastengui_HDRS
+)
+
+set( kastengui_LIB_SRCS
+  ${kastengui_SRCS}
   ${kastengui_view_SRCS}
   ${kastengui_io_SRCS}
   ${kastengui_system_SRCS}
@@ -175,8 +185,8 @@ set( kastengui_LIB_SRCS
 )
 
 set( kastengui_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/kastengui_export.h
-  kastengui.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastengui_export.h
+  ${kastengui_HDRS}
   ${kastengui_view_HDRS}
   ${kastengui_io_HDRS}
   ${kastengui_system_HDRS}
@@ -185,6 +195,7 @@ set( kastengui_LIB_HDRS
 )
 
 set( kastengui_LIB_CCHDRS
+  ${kastengui_CCHDRS}
   ${kastengui_view_CCHDRS}
   ${kastengui_io_CCHDRS}
   ${kastengui_system_CCHDRS}
@@ -193,7 +204,9 @@ set( kastengui_LIB_CCHDRS
 )
 
 add_library( KastenGui SHARED ${kastengui_LIB_SRCS} )
-generate_export_header( KastenGui )
+
+generate_export_header( KastenGui EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastengui_export.h)
+
 target_link_libraries( KastenGui
 PUBLIC
   KastenCore
@@ -203,7 +216,7 @@ PRIVATE
   KF5::I18n
 )
 
-target_include_directories(KastenGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
+target_include_directories(KastenGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_target_properties( KastenGui  PROPERTIES
   EXPORT_NAME "KastenGui"

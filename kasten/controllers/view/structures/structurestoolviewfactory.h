@@ -25,8 +25,8 @@
 
 // lib
 #include "oktetakastencontrollers_export.h"
-// Kasten core
-#include <abstracttoolviewfactory.h>
+// Kasten gui
+#include <kasten/abstracttoolviewfactory.h>
 
 namespace Kasten
 {

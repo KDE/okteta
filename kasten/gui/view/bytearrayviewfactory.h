@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastengui_export.h"
 // Kasten gui
-#include <abstractviewfactory.h>
+#include <kasten/abstractviewfactory.h>
 
 
 namespace Kasten

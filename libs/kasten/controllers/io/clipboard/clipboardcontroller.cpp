@@ -23,8 +23,8 @@
 #include "clipboardcontroller.h"
 
 // Kasten gui
-#include <dataselectable.h>
-#include <selecteddatawriteable.h>
+#include <kasten/dataselectable.h>
+#include <kasten/selecteddatawriteable.h>
 // Kasten core
 #include <kasten/abstractmodel.h>
 // KF5

@@ -23,7 +23,7 @@
 #include "loadercontroller.h"
 
 // Kasten Gui
-#include <abstractdocumentstrategy.h>
+#include <kasten/abstractdocumentstrategy.h>
 // KF5
 #include <KRecentFilesAction>
 #include <KActionCollection>

@@ -24,7 +24,7 @@
 #define VIEWMANAGER_H
 
 // lib
-#include "abstractview.h"
+#include <kasten/abstractview.h>
 // Qt
 #include <QList>
 #include <QObject>

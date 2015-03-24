@@ -23,7 +23,7 @@
 #include "closecontroller.h"
 
 // Kasten gui
-#include <abstractdocumentstrategy.h>
+#include <kasten/abstractdocumentstrategy.h>
 // Kasten core
 #include <kasten/abstractdocument.h>
 // KF5

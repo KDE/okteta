@@ -26,7 +26,7 @@
 // lib
 #include "kastencontrollers_export.h"
 // Kasten gui
-#include <abstracttoolview.h>
+#include <kasten/abstracttoolview.h>
 
 
 namespace Kasten

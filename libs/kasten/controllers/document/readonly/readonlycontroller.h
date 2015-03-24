@@ -27,7 +27,7 @@
 // lib
 #include "kastencontrollers_export.h"
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 
 class KToggleAction;
 

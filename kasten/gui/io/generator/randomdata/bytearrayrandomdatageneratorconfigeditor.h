@@ -26,7 +26,7 @@
 // lib
 #include "bytearrayrandomdatagenerator.h"
 // Kasten gui
-#include <abstractmodeldatageneratorconfigeditor.h>
+#include <kasten/abstractmodeldatageneratorconfigeditor.h>
 
 class QSpinBox;
 

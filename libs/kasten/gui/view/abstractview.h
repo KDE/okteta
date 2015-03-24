@@ -24,7 +24,7 @@
 #define ABSTRACTVIEW_H
 
 // lib
-#include "kastengui_export.h"
+#include <kasten/kastengui_export.h>
 // Kasten core
 #include <kasten/abstractdocument.h>
 

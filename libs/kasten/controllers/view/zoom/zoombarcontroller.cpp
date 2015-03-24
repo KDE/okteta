@@ -25,7 +25,7 @@
 // lib
 #include "zoomslider.h"
 // 
-#include <statusbar.h>
+#include <kasten/statusbar.h>
 
 
 namespace Kasten

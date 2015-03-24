@@ -26,7 +26,7 @@
 #include "selectrangetoolview.h"
 #include "selectrangetool.h"
 // Kasten gui
-#include <toolinlineviewable.h>
+#include <kasten/toolinlineviewable.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

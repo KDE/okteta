@@ -24,7 +24,7 @@
 #define MULTIDOCUMENTSTRATEGY_H
 
 // lib
-#include "abstractdocumentstrategy.h"
+#include <kasten/abstractdocumentstrategy.h>
 
 
 namespace Kasten
