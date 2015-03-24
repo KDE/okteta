@@ -104,10 +104,10 @@
 #include <multiviewareas.h>
 #include <statusbar.h>
 // Kasten core
-#include <modelcodecmanager.h>
-#include <documentcreatemanager.h>
-#include <documentsyncmanager.h>
-#include <documentmanager.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/documentcreatemanager.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/documentmanager.h>
 // KF5
 #include <KConfigGroup>
 #include <KSharedConfig>

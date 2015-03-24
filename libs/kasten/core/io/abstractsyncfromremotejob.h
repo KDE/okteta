@@ -24,7 +24,7 @@
 #define ABSTRACTSYNCFROMREMOTEJOB_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 // KF5
 #include <KJob>
 

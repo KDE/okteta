@@ -26,13 +26,14 @@
 #include <filesystem/modelencoderfilesystemexporterconfigeditorfactory.h>
 #include <abstractmodelstreamencoderconfigeditorfactory.h>
 #include <abstractmodelstreamencoderconfigeditor.h>
-#include <abstractmodelstreamencoder.h>
 #include <abstractmodelexporterconfigeditorfactory.h>
 #include <abstractmodelexporterconfigeditor.h>
-#include <abstractmodelexporter.h>
 #include <abstractmodeldatageneratorconfigeditorfactory.h>
 #include <abstractmodeldatageneratorconfigeditor.h>
-#include <abstractmodeldatagenerator.h>
+// Kasten core
+#include <kasten/abstractmodelexporter.h>
+#include <kasten/abstractmodeldatagenerator.h>
+#include <kasten/abstractmodelstreamencoder.h>
 
 
 namespace Kasten

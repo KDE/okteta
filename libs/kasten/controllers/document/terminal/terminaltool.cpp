@@ -23,9 +23,10 @@
 #include "terminaltool.h"
 
 // Kasten core
-#include <documentsyncmanager.h>
-#include <abstractdocument.h>
-#include <abstractmodelsynchronizer.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/abstractdocument.h>
+#include <kasten/abstractmodelsynchronizer.h>
+
 // KF5
 #include <KLocalizedString>
 #include <kio/global.h>

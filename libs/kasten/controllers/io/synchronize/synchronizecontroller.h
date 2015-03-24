@@ -28,7 +28,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Kasten core
-#include <abstractdocument.h>
+#include <kasten/abstractdocument.h>
 
 class QAction;
 class KXMLGUIClient;

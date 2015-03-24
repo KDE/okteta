@@ -25,7 +25,7 @@
 // lib
 #include "bytearraydocument.h"
 // Kasten core
-#include <person.h>
+#include <kasten/person.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KF5

@@ -29,10 +29,10 @@
 #include <selecteddatawriteable.h>
 #include <abstractmodeldatageneratorconfigeditor.h>
 // Kasten core
-#include <modeldatageneratethread.h>
-#include <modelcodecmanager.h>
-#include <abstractmodeldatagenerator.h>
-#include <abstractmodel.h>
+#include <kasten/modeldatageneratethread.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/abstractmodeldatagenerator.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

@@ -27,7 +27,7 @@
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // Kasten core
-#include <person.h>
+#include <kasten/person.h>
 // KF5
 #include <KLocalizedString>
 // Qt

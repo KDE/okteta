@@ -41,10 +41,10 @@
 #include <viewmanager.h>
 #include <modelcodecviewmanager.h>
 // Kasten core
-#include <documentmanager.h>
-#include <documentcreatemanager.h>
-#include <documentsyncmanager.h>
-#include <modelcodecmanager.h>
+#include <kasten/documentmanager.h>
+#include <kasten/documentcreatemanager.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/modelcodecmanager.h>
 // KF5
 #include <KDBusService>
 #include <KLocalizedString>

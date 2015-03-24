@@ -29,11 +29,11 @@
 #include <modelcodecviewmanager.h>
 #include <viewmanager.h>
 // Kasten core
-#include <modeldatageneratethread.h>
-#include <documentsyncmanager.h>
-#include <documentcreatemanager.h>
-#include <abstractmodeldatagenerator.h>
-#include <abstractmodel.h>
+#include <kasten/modeldatageneratethread.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/documentcreatemanager.h>
+#include <kasten/abstractmodeldatagenerator.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KProcess>
 // Qt

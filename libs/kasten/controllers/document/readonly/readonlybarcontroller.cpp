@@ -23,7 +23,7 @@
 #include "readonlybarcontroller.h"
 
 // lib
-#include <abstractdocument.h>
+#include <kasten/abstractdocument.h>
 // Kasten ui
 #include <togglebutton.h>
 #include <statusbar.h>

@@ -27,7 +27,7 @@
 #include "oktetakastencontrollers_export.h"
 #include <config-qca2.h>
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
 #include <addressrange.h>
 

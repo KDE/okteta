@@ -23,8 +23,8 @@
 #include "synchronizecontroller.h"
 
 // Kasten core
-#include <documentsyncmanager.h>
-#include <abstractmodelfilesystemsynchronizer.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/abstractmodelfilesystemsynchronizer.h>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

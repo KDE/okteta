@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastencore_export.h"
 // Kasten core
-#include <abstractmodelsynchronizerfactory.h>
+#include <kasten/abstractmodelsynchronizerfactory.h>
 
 
 namespace Kasten

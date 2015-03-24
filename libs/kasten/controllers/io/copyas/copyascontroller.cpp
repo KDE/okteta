@@ -29,10 +29,10 @@
 #include <dataselectable.h>
 #include <abstractmodelstreamencoderconfigeditor.h>
 // Kasten core
-#include <modelstreamencodethread.h>
-#include <modelcodecmanager.h>
-#include <abstractmodelstreamencoder.h>
-#include <abstractmodel.h>
+#include <kasten/modelstreamencodethread.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/abstractmodelstreamencoder.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

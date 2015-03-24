@@ -26,12 +26,12 @@
 // lib
 #include "oktetakastencontrollers_export.h"
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
 #include <byte.h>
 // Qt
 #include <QList>
-#include <kastencore.h>
+#include <kasten/kastencore.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;

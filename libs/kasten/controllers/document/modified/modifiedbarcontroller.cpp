@@ -25,8 +25,8 @@
 // Kasten ui
 #include <statusbar.h>
 // Kasten core
-#include <abstractmodelsynchronizer.h>
-#include <abstractdocument.h>
+#include <kasten/abstractmodelsynchronizer.h>
+#include <kasten/abstractdocument.h>
 // KF5
 #include <KLocalizedString>
 // Qt

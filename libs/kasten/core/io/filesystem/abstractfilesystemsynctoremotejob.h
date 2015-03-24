@@ -24,7 +24,7 @@
 #define ABSTRACTFILESYSTEMSYNCTOREMOTEJOB_H
 
 // library
-#include <abstractsynctoremotejob.h>
+#include <kasten/abstractsynctoremotejob.h>
 
 class QFile;
 

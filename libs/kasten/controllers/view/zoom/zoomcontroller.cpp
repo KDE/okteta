@@ -25,7 +25,7 @@
 // Kasten gui
 #include <zoomable.h>
 // Kasten core
-#include <abstractmodel.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

@@ -48,6 +48,7 @@ ecm_generate_headers(KASTEN_CORE_DOCUMENT_CCHDRS
     AbstractDocumentFactory
     AbstractTool
     AbstractToolFactory
+    DocumentVersionId
     DocumentVersionData
     Versionable
     UserListable
@@ -146,9 +147,18 @@ ecm_generate_headers(KASTEN_CORE_SYSTEM_CCHDRS
   PREFIX Kasten
   REQUIRED_HEADERS KASTEN_CORE_SYSTEM_HDRS
 )
+set( KASTEN_CORE_SRCS
+  kastencore.cpp
+)
+ecm_generate_headers(KASTEN_CORE_CCHDRS
+  HEADER_NAMES
+    KastenCore
+  PREFIX Kasten
+  REQUIRED_HEADERS KASTEN_CORE_HDRS
+)
 
 set( kastencore_LIB_SRCS
-  kastencore.cpp
+  ${KASTEN_CORE_SRCS}
   ${KASTEN_CORE_ENTITY_SRCS}
   ${KASTEN_CORE_DOCUMENT_SRCS}
   ${KASTEN_CORE_IO_SRCS}
@@ -157,8 +167,8 @@ set( kastencore_LIB_SRCS
 )
 
 set( kastencore_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/kastencore_export.h
-  kastencore.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastencore_export.h
+  ${KASTEN_CORE_HDRS}
   ${KASTEN_CORE_ENTITY_HDRS}
   ${KASTEN_CORE_DOCUMENT_HDRS}
   ${KASTEN_CORE_IO_HDRS}
@@ -167,6 +177,7 @@ set( kastencore_LIB_HDRS
 )
 
 set( kastencore_LIB_CCHDRS
+  ${KASTEN_CORE_CCHDRS}
   ${KASTEN_CORE_ENTITY_CCHDRS}
   ${KASTEN_CORE_DOCUMENT_CCHDRS}
   ${KASTEN_CORE_IO_CCHDRS}
@@ -176,7 +187,7 @@ set( kastencore_LIB_CCHDRS
 
 
 add_library( KastenCore SHARED ${kastencore_LIB_SRCS} )
-generate_export_header( KastenCore )
+generate_export_header( KastenCore  EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/kastencore_export.h)
 target_link_libraries( KastenCore
 PUBLIC
   KF5::KIOCore
@@ -189,7 +200,7 @@ PRIVATE
   Qt5::Network
 )
 
-target_include_directories(KastenCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten>")
+target_include_directories(KastenCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_target_properties( KastenCore PROPERTIES
   EXPORT_NAME "KastenCore"

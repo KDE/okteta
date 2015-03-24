@@ -26,8 +26,9 @@
 #include "viewbox.h"
 #include "toolinlineviewwidget.h"
 #include <abstracttoolinlineview.h>
-#include <abstractdocument.h>
 #include <abstractview.h>
+// Kasten core
+#include <kasten/abstractdocument.h>
 
 
 namespace Kasten

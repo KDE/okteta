@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastengui_export.h"
 // Kasten core
-#include <abstractmodelstreamencoder.h>
+#include <kasten/abstractmodelstreamencoder.h>
 // Okteta core
 #include <addressrange.h>
 

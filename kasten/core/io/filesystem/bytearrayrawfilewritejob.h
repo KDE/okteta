@@ -24,7 +24,7 @@
 #define BYTEARRAYRAWFILEWRITEJOB_H
 
 // Kasten core
-#include <abstractfilesystemsynctoremotejob.h>
+#include <kasten/abstractfilesystemsynctoremotejob.h>
 
 
 namespace Kasten

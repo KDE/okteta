@@ -24,8 +24,8 @@
 
 // lib
 #include <abstracttoolview.h>
-// Okteta core
-#include <abstracttool.h>
+// Kasten core
+#include <kasten/abstracttool.h>
 
 
 namespace Kasten

@@ -24,7 +24,7 @@
 #define MODELSTREAMENCODETHREAD_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 // Qt
 #include <QThread>
 

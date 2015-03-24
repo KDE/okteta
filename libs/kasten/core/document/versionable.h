@@ -24,8 +24,8 @@
 #define KDE_IF_VERSIONABLE_H
 
 // lib
-// #include "documentversionid.h"
-#include "documentversiondata.h"
+// #include <kasten/documentversionid.h>
+#include <kasten/documentversiondata.h>
 // Qt
 #include <QtPlugin>
 

@@ -23,7 +23,7 @@
 #include "bytearraydocument.h"
 
 //
-#include <person.h>
+#include <kasten/person.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // KF5

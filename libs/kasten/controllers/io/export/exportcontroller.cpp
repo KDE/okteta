@@ -30,9 +30,9 @@
 #include <dataselectable.h>
 #include <abstractmodelexporterconfigeditor.h>
 // Kasten core
-#include <modelcodecmanager.h>
-#include <abstractdocument.h>
-#include <abstractmodelexporter.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/abstractdocument.h>
+#include <kasten/abstractmodelexporter.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

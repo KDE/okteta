@@ -24,7 +24,7 @@
 #define ABSTRACTDIFFERENTSIZEDIALOG_H
 
 // Kasten core
-#include <kastencore.h>
+#include <kasten/kastencore.h>
 
 
 namespace Kasten

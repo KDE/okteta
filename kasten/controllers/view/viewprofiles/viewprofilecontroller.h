@@ -29,7 +29,7 @@
 // Kasten gui
 #include <abstractxmlguicontroller.h>
 // Kasten core
-#include <kastencore.h>
+#include <kasten/kastencore.h>
 
 class KXMLGUIClient;
 class KActionMenu;

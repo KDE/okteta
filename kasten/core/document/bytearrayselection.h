@@ -26,7 +26,7 @@
 // lib
 #include "oktetakastencore_export.h"
 // Kasten core
-#include <abstractmodelselection.h>
+#include <kasten/abstractmodelselection.h>
 // Okteta core
 #include <addressrange.h>
 

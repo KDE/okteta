@@ -24,7 +24,7 @@
 #define BYTEARRAYRANDOMDATAGENERATOR_H
 
 // Kasten core
-#include <abstractmodeldatagenerator.h>
+#include <kasten/abstractmodeldatagenerator.h>
 // Qt
 #include <QObject>
 #include <QString>

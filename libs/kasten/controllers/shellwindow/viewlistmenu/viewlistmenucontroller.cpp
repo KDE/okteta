@@ -26,7 +26,7 @@
 #include <abstractgroupedviews.h>
 #include <viewmanager.h>
 // Kasten core
-#include <abstractdocument.h>
+#include <kasten/abstractdocument.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

@@ -23,9 +23,9 @@
 #include "versioncontroller.h"
 
 // Kasten core
-#include <documentversiondata.h>
-#include <versionable.h>
-#include <abstractmodel.h>
+#include <kasten/documentversiondata.h>
+#include <kasten/versionable.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

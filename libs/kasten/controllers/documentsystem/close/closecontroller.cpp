@@ -22,9 +22,10 @@
 
 #include "closecontroller.h"
 
-// Kasten core
+// Kasten gui
 #include <abstractdocumentstrategy.h>
-#include <abstractdocument.h>
+// Kasten core
+#include <kasten/abstractdocument.h>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

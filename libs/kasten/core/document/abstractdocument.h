@@ -24,10 +24,10 @@
 #define ABSTRACTDOCUMENT_H
 
 // lib
-#include "kastencore_export.h"
-#include "kastencore.h"
+#include <kasten/kastencore_export.h>
+#include <kasten/kastencore.h>
 // lib
-#include "abstractmodel.h"
+#include <kasten/abstractmodel.h>
 
 
 namespace Kasten

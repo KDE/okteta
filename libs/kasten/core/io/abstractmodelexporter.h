@@ -24,7 +24,7 @@
 #define ABSTRACTMODELEXPORTER_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 // Qt
 #include <QObject>
 #include <QString>

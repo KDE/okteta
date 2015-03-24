@@ -26,8 +26,8 @@
 // lib
 #include "kastengui_export.h"
 // Kasten core
-#include <abstractoverwritedialog.h>
-#include <abstractsavediscarddialog.h>
+#include <kasten/abstractoverwritedialog.h>
+#include <kasten/abstractsavediscarddialog.h>
 
 class QWidget;
 

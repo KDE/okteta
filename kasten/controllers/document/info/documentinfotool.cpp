@@ -26,8 +26,9 @@
 #include "bytearraymodeliodevice.h"
 #include <bytearraydocument.h>
 // Kasten core
-#include <documentsyncmanager.h>
-#include <abstractmodelsynchronizer.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/abstractmodelsynchronizer.h>
+
 // Okteta core
 #include <abstractbytearraymodel.h>
 #include <arraychangemetricslist.h>

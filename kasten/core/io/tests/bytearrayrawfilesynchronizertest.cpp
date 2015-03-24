@@ -30,10 +30,10 @@
 #include <util/filesystem.h>
 #include <util/fill.h>
 // Kasten core
-#include <abstractloadjob.h>
-#include <abstractconnectjob.h>
-#include <abstractsynctoremotejob.h>
-#include <abstractsyncwithremotejob.h>
+#include <kasten/abstractloadjob.h>
+#include <kasten/abstractconnectjob.h>
+#include <kasten/abstractsynctoremotejob.h>
+#include <kasten/abstractsyncwithremotejob.h>
 // Okteta core
 #include <piecetablebytearraymodel.h>
 // Qt

@@ -44,9 +44,9 @@
 #include <viewstatuscontroller.h>
 #include <viewprofilecontroller.h>
 // Kasten
-#include <jobmanager.h>
-#include <abstractloadjob.h>
-#include <abstractsyncwithremotejob.h>
+#include <kasten/jobmanager.h>
+#include <kasten/abstractloadjob.h>
+#include <kasten/abstractsyncwithremotejob.h>
 #include <readonlycontroller.h>
 // #include <readonlybarcontroller.h>
 // #include <synchronizecontroller.h>

@@ -28,7 +28,7 @@
 // tool
 #include "datatypes/topleveldatainformation.h"
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
 #include <okteta/address.h>
 //Qt

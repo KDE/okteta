@@ -28,7 +28,7 @@
 // tool
 #include "poddata.h"
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
 #include <oktetacore.h>
 #include <okteta/address.h>

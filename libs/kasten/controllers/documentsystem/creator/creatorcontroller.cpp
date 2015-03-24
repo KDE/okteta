@@ -26,8 +26,8 @@
 #include <abstractdocumentstrategy.h>
 #include <selecteddatawriteable.h>
 // Kasten core
-#include <modelcodecmanager.h>
-#include <abstractmodeldatagenerator.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/abstractmodeldatagenerator.h>
 // KF5
 #include <KLocalizedString>
 #include <KActionCollection>

@@ -23,7 +23,7 @@
 #include "dummyview.h"
 
 // lib
-#include "abstractdocument.h"
+#include <kasten/abstractdocument.h>
 // Qt
 #include <QLabel>
 

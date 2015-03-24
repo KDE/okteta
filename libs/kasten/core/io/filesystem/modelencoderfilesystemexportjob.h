@@ -24,7 +24,7 @@
 #define MODELENCODERFILESYSTEMEXPORTJOB_H
 
 // lib
-#include "abstractfilesystemexportjob.h"
+#include <kasten/abstractfilesystemexportjob.h>
 
 namespace Kasten
 {

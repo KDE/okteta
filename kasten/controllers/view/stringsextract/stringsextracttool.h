@@ -28,7 +28,7 @@
 // tool
 #include "containedstring.h"
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
 #include <addressrange.h>
 // Qt

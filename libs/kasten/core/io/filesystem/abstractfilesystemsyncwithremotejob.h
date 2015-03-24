@@ -24,8 +24,9 @@
 #define ABSTRACTFILESYSTEMSYNCWITHREMOTEJOB_H
 
 // library
-#include <abstractsyncwithremotejob.h>
-#include <abstractmodelsynchronizer.h>
+#include <kasten/abstractsyncwithremotejob.h>
+#include <kasten/abstractmodelsynchronizer.h>
+
 
 class QUrl;
 class QFile;

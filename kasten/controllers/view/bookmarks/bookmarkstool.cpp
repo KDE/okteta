@@ -26,7 +26,7 @@
 #include <bytearrayview.h>
 #include <bytearraydocument.h>
 // Kasten core
-#include <abstractmodel.h>
+#include <kasten/abstractmodel.h>
 // Okteta gui
 #include <offsetformat.h>
 // Okteta core
