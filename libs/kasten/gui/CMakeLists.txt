@@ -51,8 +51,8 @@ set( kastengui_io_SRCS
 )
 ecm_generate_headers(kastengui_io_CCHDRS
   HEADER_NAMES
-    ModelencoderFileSystemExporterConfigEditor
-    ModelencoderFileSystemExporterConfigEditorFactory
+    ModelEncoderFileSystemExporterConfigEditor
+    ModelEncoderFileSystemExporterConfigEditorFactory
   RELATIVE io/filesystem
   PREFIX Kasten
   REQUIRED_HEADERS kastengui_io_HDRS
@@ -211,8 +211,8 @@ target_link_libraries( KastenGui
 PUBLIC
   KastenCore
   Qt5::Widgets
-PRIVATE
   KF5::XmlGui
+PRIVATE
   KF5::I18n
 )
 
