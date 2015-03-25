@@ -24,11 +24,11 @@
 #define VIEWSTATUSCONTROLLER_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // Kasten gui
 #include <kasten/abstractxmlguicontroller.h>
 // Okteta gui
-#include <offsetformat.h>
+#include <okteta/offsetformat.h>
 // Okteta core
 #include <okteta/address.h>
 

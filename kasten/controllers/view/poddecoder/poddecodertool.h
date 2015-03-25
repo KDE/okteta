@@ -24,13 +24,13 @@
 #define PODDECODERTOOL_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // tool
 #include "poddata.h"
 // Kasten core
 #include <kasten/abstracttool.h>
 // Okteta core
-#include <oktetacore.h>
+#include <okteta/oktetacore.h>
 #include <okteta/address.h>
 // Qt
 #include <QVector>

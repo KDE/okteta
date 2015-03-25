@@ -24,13 +24,13 @@
 #define STRINGSEXTRACTTOOL_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // tool
 #include "containedstring.h"
 // Kasten core
 #include <kasten/abstracttool.h>
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 // Qt
 #include <QList>
 

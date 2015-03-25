@@ -24,14 +24,13 @@
 #define CHARSETCONVERSIONTOOL_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // Kasten core
 #include <kasten/abstracttool.h>
 // Okteta core
-#include <byte.h>
+#include <okteta/byte.h>
 // Qt
 #include <QList>
-#include <kasten/kastencore.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;

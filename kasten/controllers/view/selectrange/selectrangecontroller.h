@@ -24,7 +24,7 @@
 #define SELECTRANGECONTROLLER_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // Kasten gui
 #include <kasten/abstractxmlguicontroller.h>
 

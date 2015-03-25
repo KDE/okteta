@@ -23,7 +23,7 @@
 #ifndef STRUCTTOOLVIEW_H_
 #define STRUCTTOOLVIEW_H_
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 
 // Kasten gui
 #include <kasten/abstracttoolview.h>

@@ -24,7 +24,7 @@
 #define VIEWPROFILECONTROLLER_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 #include <kasten/okteta/bytearrayviewprofile.h>
 // Kasten gui
 #include <kasten/abstractxmlguicontroller.h>
