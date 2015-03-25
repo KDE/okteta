@@ -24,7 +24,7 @@
 #define BOOKMARKLISTTEST_H
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class BookmarkListTest : public QObject
 {

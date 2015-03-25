@@ -22,13 +22,12 @@
 
 #include "abstractcolumnframerenderer.h"
 
-// lib
-#include <abstractcolumnrenderer.h>
 // Okteta gui
-#include <linerange.h>
+#include <okteta/linerange.h>
+#include <okteta/abstractcolumnrenderer.h>
 // Qt
-#include <QtGui/QPainter>
-#include <QtCore/QListIterator>
+#include <QPainter>
+#include <QListIterator>
 
 
 static const int DefaultSingleStep = 20;

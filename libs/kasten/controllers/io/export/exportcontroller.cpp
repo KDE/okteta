@@ -26,13 +26,13 @@
 // lib
 #include "exportdialog.h"
 // Kasten gui
-#include <modelcodecviewmanager.h>
-#include <dataselectable.h>
-#include <abstractmodelexporterconfigeditor.h>
+#include <kasten/modelcodecviewmanager.h>
+#include <kasten/dataselectable.h>
+#include <kasten/abstractmodelexporterconfigeditor.h>
 // Kasten core
-#include <modelcodecmanager.h>
-#include <abstractdocument.h>
-#include <abstractmodelexporter.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/abstractdocument.h>
+#include <kasten/abstractmodelexporter.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

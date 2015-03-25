@@ -24,12 +24,12 @@
 #define VIEWPROFILECONTROLLER_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/oktetakastencontrollers_export.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 // Kasten core
-#include <kastencore.h>
+#include <kasten/kastencore.h>
 
 class KXMLGUIClient;
 class KActionMenu;

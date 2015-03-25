@@ -24,7 +24,7 @@
 #define KDE_IF_TOOLINLINEVIEWABLE_H
 
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 
 namespace Kasten

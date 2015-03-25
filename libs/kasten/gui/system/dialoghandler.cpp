@@ -23,12 +23,12 @@
 #include "dialoghandler.h"
 
 // Kasten core
-#include <abstractdocument.h>
+#include <kasten/abstractdocument.h>
 // KF5
 #include <KMessageBox>
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QUrl>
+#include <QUrl>
 
 namespace Kasten
 {

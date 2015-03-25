@@ -24,9 +24,9 @@
 #define VIEWPROFILESMANAGEDIALOG_H
 
 // lib
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Qt
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 template< class C > class QList;
 class QTreeView;

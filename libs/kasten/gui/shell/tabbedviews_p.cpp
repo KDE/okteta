@@ -25,12 +25,12 @@
 // lib
 #include "toolinlineviewwidget.h"
 #include <abstracttoolinlineview.h>
-#include <abstractdocument.h>
+#include <kasten/abstractdocument.h>
 // Qt
-#include <QtGui/QDragMoveEvent>
-#include <QtGui/QDropEvent>
+#include <QDragMoveEvent>
+#include <QDropEvent>
 #include <QApplication>
-#include <QtGui/QClipboard>
+#include <QClipboard>
 
 
 namespace Kasten

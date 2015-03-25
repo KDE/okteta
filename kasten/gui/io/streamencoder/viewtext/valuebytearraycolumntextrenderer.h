@@ -26,7 +26,7 @@
 // lib
 #include "abstractbytearraycolumntextrenderer.h"
 // Okteta core
-#include <oktetacore.h>
+#include <okteta/oktetacore.h>
 
 namespace Okteta {
 class ValueCodec;

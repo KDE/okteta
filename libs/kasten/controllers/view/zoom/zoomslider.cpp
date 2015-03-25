@@ -23,9 +23,9 @@
 #include "zoomslider.h"
 
 // Kasten gui
-#include <zoomable.h>
+#include <kasten/zoomable.h>
 // Kasten core
-#include <abstractmodel.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt
@@ -33,7 +33,7 @@
 #include <QToolButton>
 #include <QLayout>
 #include <QApplication>
-#include <QtGui/QHelpEvent>
+#include <QHelpEvent>
 
 
 namespace Kasten

@@ -21,7 +21,7 @@
 #define TESTUTILS_H_
 
 #include <QString>
-#include <QtTest/QTest>
+#include <QTest>
 #include <QScriptEngine>
 #include "view/structures/datatypes/primitivedatatype.h"
 #include "view/structures/datatypes/datainformation.h"

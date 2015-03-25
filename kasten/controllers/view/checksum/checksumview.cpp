@@ -40,7 +40,7 @@
 #include <QStackedWidget>
 #include <QPushButton>
 #include <QLayout>
-#include <QtGui/QClipboard>
+#include <QClipboard>
 #include <QApplication>
 #include <QAbstractItemView>
 

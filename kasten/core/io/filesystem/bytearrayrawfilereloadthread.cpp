@@ -23,12 +23,12 @@
 #include "bytearrayrawfilereloadthread.h"
 
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QDataStream>
+#include <QFile>
 // C++
 #include <limits>
 

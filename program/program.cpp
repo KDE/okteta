@@ -26,33 +26,33 @@
 #include "about.h"
 #include "mainwindow.h"
 // Okteta Kasten
-#include <bytearraydocumentfactory.h>
-#include <bytearrayviewfactory.h>
-#include <bytearrayrawfilesynchronizerfactory.h>
-#include <bytearraystreamencoderconfigeditorfactoryfactory.h>
-#include <bytearraydatageneratorconfigeditorfactoryfactory.h>
-#include <bytearraystreamencoderfactory.h>
-#include <bytearraydatageneratorfactory.h>
+#include <kasten/okteta/bytearraydocumentfactory.h>
+#include <kasten/okteta/bytearrayviewfactory.h>
+#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.h>
+#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.h>
+#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.h>
+#include <kasten/okteta/bytearraystreamencoderfactory.h>
+#include <kasten/okteta/bytearraydatageneratorfactory.h>
 // tmp
-#include <bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
 // Kasten gui
-#include <multidocumentstrategy.h>
-#include <dialoghandler.h>
-#include <viewmanager.h>
-#include <modelcodecviewmanager.h>
+#include <kasten/multidocumentstrategy.h>
+#include <kasten/dialoghandler.h>
+#include <kasten/viewmanager.h>
+#include <kasten/modelcodecviewmanager.h>
 // Kasten core
-#include <documentmanager.h>
-#include <documentcreatemanager.h>
-#include <documentsyncmanager.h>
-#include <modelcodecmanager.h>
+#include <kasten/documentmanager.h>
+#include <kasten/documentcreatemanager.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/modelcodecmanager.h>
 // KF5
 #include <KDBusService>
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QCommandLineParser>
-#include <QtCore/QList>
-#include <QtCore/QUrl>
-#include <QtCore/QLoggingCategory>
+#include <QCommandLineParser>
+#include <QList>
+#include <QUrl>
+#include <QLoggingCategory>
 
 namespace Kasten
 {

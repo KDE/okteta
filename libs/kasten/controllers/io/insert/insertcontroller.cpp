@@ -25,14 +25,14 @@
 // lib
 #include "insertdialog.h"
 // Kasten gui
-#include <modelcodecviewmanager.h>
-#include <selecteddatawriteable.h>
-#include <abstractmodeldatageneratorconfigeditor.h>
+#include <kasten/modelcodecviewmanager.h>
+#include <kasten/selecteddatawriteable.h>
+#include <kasten/abstractmodeldatageneratorconfigeditor.h>
 // Kasten core
-#include <modeldatageneratethread.h>
-#include <modelcodecmanager.h>
-#include <abstractmodeldatagenerator.h>
-#include <abstractmodel.h>
+#include <kasten/modeldatageneratethread.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/abstractmodeldatagenerator.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
@@ -40,7 +40,7 @@
 #include <KLocalizedString>
 #include <KSelectAction>
 // Qt
-#include <QtCore/QMimeData>
+#include <QMimeData>
 #include <QApplication>
 
 

@@ -25,7 +25,7 @@
 // test object
 #include <codecs/textcharcodec.h>
 // KF5
-#include <QtTest/QTest>
+#include <QTest>
 
 
 namespace Okteta

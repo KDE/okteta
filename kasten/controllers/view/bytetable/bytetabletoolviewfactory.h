@@ -24,9 +24,9 @@
 #define BYTETABLETOOLVIEWFACTORY_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
-// Kasten core
-#include <abstracttoolviewfactory.h>
+#include <kasten/okteta/oktetakastencontrollers_export.h>
+// Kasten gui
+#include <kasten/abstracttoolviewfactory.h>
 
 
 namespace Kasten

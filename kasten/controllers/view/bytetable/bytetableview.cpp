@@ -32,8 +32,8 @@
 #include <KLocalizedString>
 #include <KStandardGuiItem>
 // Qt
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QSpinBox>
+#include <QApplication>
+#include <QSpinBox>
 #include <QFontDatabase>
 #include <QLabel>
 #include <QLayout>

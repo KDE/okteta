@@ -23,9 +23,9 @@
 #include "bytearrayviewprofile.h"
 
 // Okteta Gui
-#include <bytearraycolumnview.h>
+#include <okteta/bytearraycolumnview.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

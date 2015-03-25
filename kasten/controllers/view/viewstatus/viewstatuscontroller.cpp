@@ -23,13 +23,13 @@
 #include "viewstatuscontroller.h"
 
 // lib
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 // Kasten ui
-#include <togglebutton.h>
-#include <statusbar.h>
+#include <kasten/togglebutton.h>
+#include <kasten/statusbar.h>
 // Okteta core
-#include <charcodec.h>
-#include <oktetacore.h>
+#include <okteta/charcodec.h>
+#include <okteta/oktetacore.h>
 // KF5
 #include <KSqueezedTextLabel>
 #include <KComboBox>
@@ -37,7 +37,7 @@
 // Qt
 #include <QLayout>
 #include <QLabel>
-#include <QtGui/QFontMetrics>
+#include <QFontMetrics>
 
 // TODO: make status bar capable to hide entries if size is too small, use priorisation
 

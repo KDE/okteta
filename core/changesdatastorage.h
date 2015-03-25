@@ -24,7 +24,7 @@
 #define OKTETA_CHANGESDATASTORAGE_H
 
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 namespace Okteta
 {

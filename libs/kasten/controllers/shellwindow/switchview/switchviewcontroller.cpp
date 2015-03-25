@@ -23,7 +23,7 @@
 #include "switchviewcontroller.h"
 
 // lib
-#include <abstractgroupedviews.h>
+#include <kasten/abstractgroupedviews.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>

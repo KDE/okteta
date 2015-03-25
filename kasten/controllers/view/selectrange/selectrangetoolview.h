@@ -24,7 +24,7 @@
 #define SELECTRANGETOOLVIEW_H
 
 // Kasten gui
-#include <abstracttoolinlineview.h>
+#include <kasten/abstracttoolinlineview.h>
 
 
 namespace Kasten

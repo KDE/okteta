@@ -25,14 +25,14 @@
 // lib
 #include <oktetakastengui.h>
 // Okteta core
-#include <valuecodec.h>
+#include <okteta/valuecodec.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QString>
-#include <QtCore/QRegExp>
-#include <QtScript/QScriptEngine>
-#include <QtScript/QScriptValue>
+#include <QString>
+#include <QRegExp>
+#include <QScriptEngine>
+#include <QScriptValue>
 
 
 namespace Okteta

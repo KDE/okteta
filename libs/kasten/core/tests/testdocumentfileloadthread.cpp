@@ -27,10 +27,10 @@
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QUrl>
-#include <QtCore/QByteArray>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QUrl>
+#include <QByteArray>
+#include <QDataStream>
+#include <QFile>
 #include <QCoreApplication>
 
 

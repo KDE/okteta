@@ -23,9 +23,9 @@
 #include "abstractframerenderer.h"
 
 // Qt
-#include <QtCore/QPoint>
-#include <QtCore/QSize>
-#include <QtCore/QRect>
+#include <QPoint>
+#include <QSize>
+#include <QRect>
 
 class AbstractFrameRenderer::Private
 {

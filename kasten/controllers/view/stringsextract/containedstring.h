@@ -24,10 +24,10 @@
 #define CONTAINEDSTRING_H
 
 // Okteta core
-#include <address.h>
-#include <size.h>
+#include <okteta/address.h>
+#include <okteta/size.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 class ContainedString

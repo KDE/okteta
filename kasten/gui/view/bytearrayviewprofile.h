@@ -24,9 +24,9 @@
 #define BYTEARRAYVIEWPROFILE_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // Qt
-#include <QtCore/QSharedDataPointer>
+#include <QSharedDataPointer>
 
 class QChar;
 class QString;

@@ -24,23 +24,15 @@
 #define BYTEARRAYDOCUMENT_H
 
 // lib
-#include "oktetakastencore_export.h"
+#include <kasten/okteta/oktetakastencore_export.h>
 // #include "kbytearrayinterface.h"
 // Kasten core
-#include <person.h>
-#include <userlistable.h>
-// HACK: Both the Okteta and Kasten libs have a versionable.h
-// and in all the installed headers the files are included without the
-// path prefix matching the namespace. To avoid inclusion of the wrong file if
-// Okteta include dirs listed are before the Kasten ones, workaround with a
-// relative path matching the situation when installed
-// Uses the special forwarding file kasten/core/versionable.h for build
-// KF5 TODO: all includes from installed headers need to be fixed up, there is
-// no namespace protection for all of them currently
-#include "../versionable.h"
-#include <abstractdocument.h>
+#include <kasten/person.h>
+#include <kasten/userlistable.h>
+#include <kasten/versionable.h>
+#include <kasten/abstractdocument.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 namespace Okteta {
 class AbstractByteArrayModel;

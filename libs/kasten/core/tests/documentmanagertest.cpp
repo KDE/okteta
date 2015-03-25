@@ -27,8 +27,8 @@
 // test
 #include <testdocument.h>
 // Qt
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
+#include <QTest>
+#include <QSignalSpy>
 
 
 Q_DECLARE_METATYPE( QList<Kasten::AbstractDocument*> )

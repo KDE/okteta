@@ -40,7 +40,7 @@
 //// #include "my_bytearraystreamencoder.h"
 //// NEWBYTEARRAYSTREAMENCODER(end)
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 
 namespace Kasten

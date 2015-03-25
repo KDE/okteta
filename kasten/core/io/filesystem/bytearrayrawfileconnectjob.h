@@ -24,7 +24,7 @@
 #define BYTEARRAYRAWFILECONNECTJOB_H
 
 // Kasten core
-#include <abstractfilesystemconnectjob.h>
+#include <kasten/abstractfilesystemconnectjob.h>
 
 
 namespace Kasten

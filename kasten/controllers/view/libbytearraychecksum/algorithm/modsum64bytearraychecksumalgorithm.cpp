@@ -23,11 +23,11 @@
 #include "modsum64bytearraychecksumalgorithm.h"
 
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QtEndian>
+#include <QtEndian>
 
 
 ModSum64ByteArrayChecksumAlgorithm::ModSum64ByteArrayChecksumAlgorithm()

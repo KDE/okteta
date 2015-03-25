@@ -19,7 +19,7 @@
 #define OKTETATEST_FILESYSTEM_H
 
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 class TestFileSystem
 {

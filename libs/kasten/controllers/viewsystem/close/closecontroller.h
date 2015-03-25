@@ -24,9 +24,9 @@
 #define CLOSECONTROLLER_H
 
 // lib
-#include "kastencontrollers_export.h"
+#include <kasten/kastencontrollers_export.h>
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 
 class KAction;
 class KXMLGUIClient;

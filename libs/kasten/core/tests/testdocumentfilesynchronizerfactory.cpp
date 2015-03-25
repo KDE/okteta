@@ -26,7 +26,7 @@
 #include "testdocument.h"
 #include "testdocumentfilesynchronizer.h"
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

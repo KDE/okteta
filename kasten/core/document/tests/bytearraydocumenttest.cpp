@@ -25,11 +25,11 @@
 // test object
 #include <bytearraydocument.h>
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // Qt
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
-#include <QtCore/QByteArray>
+#include <QTest>
+#include <QSignalSpy>
+#include <QByteArray>
 
 
 namespace Kasten

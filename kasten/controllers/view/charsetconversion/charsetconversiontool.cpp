@@ -25,13 +25,13 @@
 // tool
 #include "charsetconversionjob.h"
 // Okteta Kasten gui
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 // Okteta Kasten core
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <charcodec.h>
-#include <abstractbytearraymodel.h>
-#include <changesdescribable.h>
+#include <okteta/charcodec.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/changesdescribable.h>
 // KF5
 #include <KLocalizedString>
 // Qt

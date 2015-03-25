@@ -17,9 +17,9 @@
 #include "filesystem.h"
 
 // Qt
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtTest/QtTest>
+#include <QDir>
+#include <QFile>
+#include <QTest>
 
 //TODO QStringLiteral
 static const char basePath[] = "/.kde-unit-test/";

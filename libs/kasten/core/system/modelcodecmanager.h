@@ -24,10 +24,10 @@
 #define MODELCODECMANAGER_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <QObject>
+#include <QList>
 
 class QString;
 

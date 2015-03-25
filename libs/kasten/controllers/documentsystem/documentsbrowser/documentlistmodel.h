@@ -24,7 +24,7 @@
 #define DOCUMENTLISTMODEL_H
 
 // Qt
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 
 namespace Kasten

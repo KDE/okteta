@@ -28,7 +28,7 @@
 #include "bytearrayrawfileloadthread.h"
 #include "bytearraydocument.h"
 // Qt
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
 #include <QUrl>
 
 

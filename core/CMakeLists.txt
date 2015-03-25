@@ -84,9 +84,11 @@ ecm_generate_headers(oktetacore_LIB_CCHDRS
 
     Character
     ArrayChangeMetrics
+    ArrayChangeMetricsList
     ByteArrayChange
 
     Bookmark
+    BookmarksConstIteratorAdapter # TODO: make private or move adapter class to iterator
     BookmarksConstIterator
 
     WordByteArrayService
@@ -107,7 +109,7 @@ set( oktetacore_LIB_OBJS ${oktetacore_LIB_SRCS} )
 
 add_library( OktetaCore SHARED ${oktetacore_LIB_OBJS} )
 
-generate_export_header( OktetaCore )
+generate_export_header( OktetaCore EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/okteta/oktetacore_export.h)
 
 target_link_libraries( OktetaCore
 PUBLIC
@@ -117,7 +119,7 @@ PRIVATE
   KF5::Codecs   #needed for codecs
 )
 
-target_include_directories(OktetaCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/okteta>")
+target_include_directories(OktetaCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_target_properties( OktetaCore  PROPERTIES
   EXPORT_NAME "OktetaCore"
@@ -130,8 +132,7 @@ install( TARGETS OktetaCore EXPORT OktetaCoreTargets ${INSTALL_TARGETS_DEFAULT_A
 
 install( FILES
     ${oktetacore_LIB_HDRS}
-    bookmarksconstiteratoradapter.h # TODO: make private or move adapter class to iterator
-    ${CMAKE_CURRENT_BINARY_DIR}/oktetacore_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/okteta/oktetacore_export.h
   DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}
   COMPONENT Devel
 )

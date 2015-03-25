@@ -24,8 +24,8 @@
 #define KASTENCORE_H
 
 // Qt core
-#include <QtCore/QFlags>
-#include <QtCore/QLoggingCategory>
+#include <QFlags>
+#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_KASTEN_CORE)
 

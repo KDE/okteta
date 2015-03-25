@@ -23,10 +23,10 @@
 #include "viewlistmenucontroller.h"
 
 // lib
-#include <abstractgroupedviews.h>
-#include <viewmanager.h>
+#include <kasten/abstractgroupedviews.h>
+#include <kasten/viewmanager.h>
 // Kasten core
-#include <abstractdocument.h>
+#include <kasten/abstractdocument.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

@@ -40,11 +40,11 @@
 #include <bytearraychecksumalgorithmfactory.h>
 #include <abstractbytearraychecksumalgorithm.h>
 // 
-#include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <arraychangemetricslist.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/arraychangemetricslist.h>
 // KF5
 #include <KLocalizedString>
 // Qt

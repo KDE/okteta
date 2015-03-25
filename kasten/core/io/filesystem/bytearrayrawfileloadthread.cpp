@@ -25,15 +25,15 @@
 // lib
 #include "bytearraydocument.h"
 // Kasten core
-#include <person.h>
+#include <kasten/person.h>
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QCoreApplication>
+#include <QDataStream>
+#include <QFile>
 // C++
 #include <limits>
 

@@ -34,20 +34,20 @@
 #include "bordercolumnrenderer.h"
 #include "oktetagui.h"
 // Okteta core
-#include <valuecodec.h>
-#include <bookmarkable.h>
-#include <versionable.h>
-#include <wordbytearrayservice.h>
-#include <bookmark.h>
+#include <okteta/valuecodec.h>
+#include <okteta/bookmarkable.h>
+#include <okteta/versionable.h>
+#include <okteta/wordbytearrayservice.h>
+#include <okteta/bookmark.h>
 // Qt
-#include <QtGui/QDragEnterEvent>
-#include <QtGui/QDragMoveEvent>
-#include <QtGui/QDragLeaveEvent>
-#include <QtGui/QDropEvent>
+#include <QDragEnterEvent>
+#include <QDragMoveEvent>
+#include <QDragLeaveEvent>
+#include <QDropEvent>
 #include <QApplication>
 #include <QToolTip>
-#include <QtCore/QMimeData>
-#include <QtCore/QTimer>
+#include <QMimeData>
+#include <QTimer>
 
 
 namespace Okteta

@@ -24,10 +24,10 @@
 #define SEARCHJOB_H
 
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QByteArray>
+#include <QObject>
+#include <QByteArray>
 
 namespace Okteta {
 class AbstractByteArrayModel;

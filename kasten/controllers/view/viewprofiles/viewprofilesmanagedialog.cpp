@@ -26,8 +26,8 @@
 #include "viewprofileeditdialog.h"
 #include "viewprofiletablemodel.h"
 // Okteta Gui Kasten
-#include <bytearrayviewprofilemanager.h>
-#include <bytearrayviewprofilelock.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilelock.h>
 // KF5
 #include <KLocalizedString>
 #include <KGuiItem>
@@ -35,8 +35,8 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QTreeView>
-#include <QtWidgets/QDialogButtonBox>
-#include <QtCore/QItemSelectionModel>
+#include <QDialogButtonBox>
+#include <QItemSelectionModel>
 
 
 namespace Kasten

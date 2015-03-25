@@ -27,13 +27,13 @@
 #include <bytearraytableranges.h>
 #include <bytearraytablecursor.h>
 #include <bytearraytablelayout.h>
-#include <wordbytearrayservice.h>
+#include <okteta/wordbytearrayservice.h>
 // Qt
 #include <QApplication>
-#include <QtGui/QClipboard>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QDrag>
-#include <QtCore/QTimer>
+#include <QClipboard>
+#include <QMouseEvent>
+#include <QDrag>
+#include <QTimer>
 
 namespace Okteta
 {

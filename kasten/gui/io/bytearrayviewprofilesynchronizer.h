@@ -24,12 +24,12 @@
 #define BYTEARRAYVIEWPROFILESYNCHRONIZER_H
 
 // lib
-#include "oktetakastengui_export.h"
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/oktetakastengui_export.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Kasten core
-#include <kastencore.h>
+#include <kasten/kastencore.h>
 // Qt Core
-#include <QtCore/QObject>
+#include <QObject>
 
 
 namespace Kasten

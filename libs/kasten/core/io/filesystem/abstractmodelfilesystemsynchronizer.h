@@ -24,7 +24,8 @@
 #define ABSTRACTMODELFILESYSTEMSYNCHRONIZER_H
 
 // lib
-#include <abstractmodelsynchronizer.h>
+#include <kasten/abstractmodelsynchronizer.h>
+
 
 class KDirWatch;
 class QDateTime;

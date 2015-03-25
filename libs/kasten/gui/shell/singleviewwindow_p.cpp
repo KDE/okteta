@@ -29,8 +29,9 @@
 #include <abstracttoolview.h>
 #include <abstractview.h>
 // Kasten core
-#include <abstracttool.h>
-#include <abstractmodelsynchronizer.h>
+#include <kasten/abstracttool.h>
+#include <kasten/abstractmodelsynchronizer.h>
+
 
 
 namespace Kasten

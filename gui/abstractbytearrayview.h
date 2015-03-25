@@ -24,11 +24,11 @@
 #define OKTETA_ABSTRACTBYTEARRAYVIEW_H
 
 // lib
-#include "columnsview.h"
+#include <okteta/columnsview.h>
 // Okteta core
-#include "addressrange.h"
+#include <okteta/addressrange.h>
 // Qt
-#include <QtGui/QClipboard>
+#include <QClipboard>
 
 class QMimeData;
 class QByteArray;

@@ -26,7 +26,7 @@
 // lib
 #include "piecelist.h"
 // Qt
-#include <QtCore/QLinkedList>
+#include <QLinkedList>
 
 
 namespace KPieceTable

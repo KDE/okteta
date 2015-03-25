@@ -24,9 +24,9 @@
 #define DOCUMENTCREATEMANAGER_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class QMimeData;
 

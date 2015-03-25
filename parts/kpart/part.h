@@ -24,7 +24,7 @@
 #define OKTETAPART_H
 
 // Kasten
-#include <kastencore.h>
+#include <kasten/kastencore.h>
 // KF5
 #include <KParts/ReadWritePart>
 

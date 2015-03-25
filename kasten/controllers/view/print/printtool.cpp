@@ -28,19 +28,19 @@
 #include "headerfooterframerenderer.h"
 #include "bytearrayframerenderer.h"
 // lib
-#include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 #include <KMessageBox>
 // Qt
 #include <QApplication>
-#include <QtPrintSupport/QPrintDialog>
-#include <QtPrintSupport/QPrinter>
-#include <QtGui/QFont>
-#include <QtGui/QFontMetrics>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QFont>
+#include <QFontMetrics>
 
 
 namespace Kasten

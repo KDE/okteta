@@ -26,7 +26,7 @@
 // controller
 #include "replaceuserqueryable.h"
 // Qt
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 class QEventLoop;
 

@@ -24,8 +24,8 @@
 #define TESTDOCUMENTFILERELOADTHREAD_H
 
 // Qt
-#include <QtCore/QByteArray>
-#include <QtCore/QThread>
+#include <QByteArray>
+#include <QThread>
 
 class QFile;
 

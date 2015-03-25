@@ -23,7 +23,7 @@
 #include "allprimitivetypes.h"
 #include "datatypes/primitive/primitivedatainformation.h"
 
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 
 
 Q_STATIC_ASSERT(sizeof(double) == 8);

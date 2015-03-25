@@ -25,8 +25,8 @@
 
 // lib
 #include "bytearraybase32streamencoder.h"
-// Qt
-#include <abstractmodelstreamencoderconfigeditor.h>
+// Kasten gui
+#include <kasten/abstractmodelstreamencoderconfigeditor.h>
 
 class KComboBox;
 

@@ -24,9 +24,9 @@
 #define DOCUMENTSYNCMANAGER_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class QUrl;
 class QString;

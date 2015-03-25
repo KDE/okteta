@@ -24,15 +24,15 @@
 #define OKTETA_ABSTRACTBYTEARRAYCOLUMNRENDERER_H
 
 // ColumnsView
-#include "abstractcolumnrenderer.h"
-#include "linepositionrange.h"
-#include "linerange.h"
+#include <okteta/abstractcolumnrenderer.h>
+#include <okteta/linepositionrange.h>
+#include <okteta/linerange.h>
 // Okteta core
-#include "oktetacore.h"
-#include "abstractbytearraymodel.h"
-#include "character.h"
+#include <okteta/oktetacore.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/character.h>
 // Qt
-#include <QtGui/QFontMetrics>
+#include <QFontMetrics>
 
 class QPainter;
 class QColor;

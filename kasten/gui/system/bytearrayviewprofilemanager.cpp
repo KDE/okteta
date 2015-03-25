@@ -30,9 +30,9 @@
 #include <KConfig>
 #include <KDirWatch>
 // Qt
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
-#include <QtCore/QUuid>
+#include <QFileInfo>
+#include <QDir>
+#include <QUuid>
 
 
 namespace Kasten

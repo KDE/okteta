@@ -26,13 +26,13 @@
 #include <bytearraytablecursor.h>
 #include <abstractbytearrayview.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <changesdescribable.h>
-#include <valuecodec.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/changesdescribable.h>
+#include <okteta/valuecodec.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 
 
 namespace Okteta

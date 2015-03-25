@@ -26,8 +26,8 @@
 #include <QtEndian>
 
 #include <size.h>
-#include <address.h>
-#include <abstractbytearraymodel.h>
+#include <okteta/address.h>
+#include <okteta/abstractbytearraymodel.h>
 
 #include "datatypes/datainformationbase.h"
 

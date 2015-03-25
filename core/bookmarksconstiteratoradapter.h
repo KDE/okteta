@@ -24,9 +24,9 @@
 #define OKTETA_BOOKMARKSCONSTITERATORADAPTER_H
 
 // lib
-#include <address.h>
+#include <okteta/address.h>
 // Qt
-#include <QtCore/QSharedData>
+#include <QSharedData>
 
 
 namespace Okteta

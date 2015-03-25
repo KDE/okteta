@@ -24,8 +24,8 @@
 #define KASTENGUI_H
 
 // Qt
-#include <QtCore/QFlags>
-#include <QtCore/QLoggingCategory>
+#include <QFlags>
+#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_KASTEN_GUI)
 

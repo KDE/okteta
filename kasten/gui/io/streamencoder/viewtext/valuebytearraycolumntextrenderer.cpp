@@ -23,10 +23,10 @@
 #include "valuebytearraycolumntextrenderer.h"
 
 // Okteta core
-#include <valuecodec.h>
-#include <abstractbytearraymodel.h>
+#include <okteta/valuecodec.h>
+#include <okteta/abstractbytearraymodel.h>
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

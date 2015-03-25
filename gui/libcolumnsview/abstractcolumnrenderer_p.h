@@ -28,8 +28,8 @@
 // lib
 #include "abstractcolumnstylist.h"
 // Qt
-#include <QtGui/QPainter>
-#include <QtGui/QPalette>
+#include <QPainter>
+#include <QPalette>
 
 
 namespace Okteta

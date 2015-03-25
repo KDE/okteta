@@ -25,7 +25,7 @@
 // lib
 #include <abstractbytearrayview.h>
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 
 namespace Okteta
 {

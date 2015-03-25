@@ -24,7 +24,7 @@
 #define OKTETAPROGRAM_H
 
 // Qt
-#include <QtWidgets/QApplication>
+#include <QApplication>
 
 
 namespace Kasten

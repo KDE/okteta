@@ -26,7 +26,7 @@
 // KF5
 // #include <KJob>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class FramesToPaperPrinter;
 

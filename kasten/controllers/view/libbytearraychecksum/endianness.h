@@ -24,7 +24,7 @@
 #define ENDIANNESS_H
 
 // Qt
-#include <QtCore/Qt>
+#include <Qt>
 
 
 enum Endianness

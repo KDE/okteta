@@ -25,8 +25,8 @@
 
 // lib
 #include "bytearrayuuencodingstreamencoder.h"
-// Qt
-#include <abstractmodelstreamencoderconfigeditor.h>
+// Kasten gui
+#include <kasten/abstractmodelstreamencoderconfigeditor.h>
 
 class KLineEdit;
 class KComboBox;

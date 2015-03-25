@@ -28,7 +28,7 @@
 // lib
 #include <abstractmodelsynchronizer_p.h>
 // Qt
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 class QNetworkConfigurationManager;
 

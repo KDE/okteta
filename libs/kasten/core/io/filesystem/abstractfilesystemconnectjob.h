@@ -24,8 +24,9 @@
 #define ABSTRACTFILESYSTEMCONNECTJOB_H
 
 // library
-#include <abstractconnectjob.h>
-#include <abstractmodelsynchronizer.h>
+#include <kasten/abstractconnectjob.h>
+#include <kasten/abstractmodelsynchronizer.h>
+
 
 class QFile;
 

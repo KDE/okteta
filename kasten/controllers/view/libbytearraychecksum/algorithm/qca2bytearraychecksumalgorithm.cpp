@@ -34,9 +34,9 @@
 #include "qca2bytearraychecksumalgorithm.h"
 
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 
 Qca2ByteArrayChecksumAlgorithm::Qca2ByteArrayChecksumAlgorithm( const QString& name, const QString& type )

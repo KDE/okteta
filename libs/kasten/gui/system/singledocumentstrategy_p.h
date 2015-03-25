@@ -27,10 +27,10 @@
 #include "abstractdocumentstrategy_p.h"
 #include "singledocumentstrategy.h"
 // Kasten core
-#include <documentmanager.h>
-#include <documentsyncmanager.h>
+#include <kasten/documentmanager.h>
+#include <kasten/documentsyncmanager.h>
 // Qt Core
-#include <QtCore/QStringList>
+#include <QStringList>
 
 
 namespace Kasten

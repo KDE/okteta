@@ -24,9 +24,9 @@
 
 // lib 
 #include "modelencoderfilesystemexporterconfigeditor.h"
-// Kasten core
-#include <modelencoderfilesystemexporter.h>
 #include <abstractmodelstreamencoderconfigeditorfactory.h>
+// Kasten core
+#include <kasten/modelencoderfilesystemexporter.h>
 
 
 namespace Kasten

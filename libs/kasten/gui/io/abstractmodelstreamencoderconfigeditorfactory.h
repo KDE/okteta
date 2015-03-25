@@ -24,7 +24,7 @@
 #define ABSTRACTMODELSTREAMENCODERCONFIGEDITORFACTORY_H
 
 // lib
-#include "kastengui_export.h"
+#include <kasten/kastengui_export.h>
 
 
 namespace Kasten

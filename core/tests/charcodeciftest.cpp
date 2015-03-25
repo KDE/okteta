@@ -27,7 +27,7 @@
 // lib
 #include <character.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 
 namespace Okteta

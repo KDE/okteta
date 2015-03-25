@@ -27,7 +27,7 @@
 //
 #include <piecetable/piecetable.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 namespace KPieceTable
 {

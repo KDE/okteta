@@ -24,7 +24,7 @@
 #define OKTETA_BOOKMARKABLE_H
 
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 template <class T> class QList;
 

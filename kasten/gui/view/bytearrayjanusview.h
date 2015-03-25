@@ -24,7 +24,7 @@
 #define BYTEARRAYJANUSVIEW_H
 
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 // Qt
 #include <QWidget>
 

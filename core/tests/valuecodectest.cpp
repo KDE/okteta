@@ -25,8 +25,8 @@
 // test object
 #include <valuecodec.h>
 // Qt
-#include <QtTest/QTest>
-#include <QtCore/QBitArray>
+#include <QTest>
+#include <QBitArray>
 
 
 namespace Okteta

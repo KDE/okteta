@@ -25,7 +25,7 @@
 // lib
 #include "statusbarlayout.h"
 // Qt
-#include <QtCore/QEvent>
+#include <QEvent>
 
 
 namespace Kasten

@@ -30,15 +30,15 @@
 #include "bytearrayrowscolumntextrenderer.h"
 #include <bytearrayview.h>
 // Okteta gui
-#include <bytearraytablelayout.h>
-#include <abstractbytearrayview.h>
+#include <okteta/bytearraytablelayout.h>
+#include <okteta/abstractbytearrayview.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <character.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/character.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

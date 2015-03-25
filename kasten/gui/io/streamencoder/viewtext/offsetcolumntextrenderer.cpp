@@ -23,8 +23,8 @@
 #include "offsetcolumntextrenderer.h"
 
 // Qt
-#include <QtCore/QString>
-#include <QtCore/QTextStream>
+#include <QString>
+#include <QTextStream>
 
 
 namespace Kasten

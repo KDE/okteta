@@ -569,7 +569,7 @@ if (Qt5Test_FOUND)
 endif()
 
 set( okteta_kastencontrollers_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencontrollers_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastencontrollers_export.h
   ${CMAKE_CURRENT_BINARY_DIR}/config-qca2.h
 #   ${overwriteonlycontroller_HDRS}
   ${overwritemodecontroller_HDRS}
@@ -628,7 +628,8 @@ set( okteta_kastencontrollers_LIB_CCHDRS
 )
 
 add_library( OktetaKastenControllers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
-generate_export_header( OktetaKastenControllers )
+
+generate_export_header( OktetaKastenControllers EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastencontrollers_export.h )
 
 target_link_libraries( OktetaKastenControllers
 PUBLIC
@@ -655,7 +656,7 @@ if( Qca-qt5_FOUND )
   )
 endif( Qca-qt5_FOUND )
 
-target_include_directories(OktetaKastenControllers PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta>")
+target_include_directories(OktetaKastenControllers PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_target_properties( OktetaKastenControllers  PROPERTIES
   EXPORT_NAME "OktetaKastenControllers"

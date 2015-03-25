@@ -26,7 +26,7 @@
 // lib
 #include "abstractcolumntextrenderer.h"
 // Okteta gui
-#include <coordrange.h>
+#include <okteta/coordrange.h>
 
 
 namespace Okteta {

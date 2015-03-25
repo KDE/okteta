@@ -24,10 +24,10 @@
 #define DOCUMENTVERSIONDATA_H
 
 // lib
-#include "kastencore_export.h"
-#include "documentversionid.h"
+#include <kasten/kastencore_export.h>
+#include <kasten/documentversionid.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

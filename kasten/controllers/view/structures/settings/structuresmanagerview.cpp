@@ -35,8 +35,8 @@
 #include <KLocalizedString>
 #include <KNS3/Button>
 // Qt
-#include <QtWidgets/QDialog>
-#include <QtWidgets/QDialogButtonBox>
+#include <QDialog>
+#include <QDialogButtonBox>
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QLayout>

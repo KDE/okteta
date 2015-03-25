@@ -24,13 +24,13 @@
 #define REPLACECONTROLLER_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // controller
-#include "replaceuserqueryable.h"
+#include <kasten/okteta/replaceuserqueryable.h>
 // lib
-#include <kfinddirection.h>
+#include <kasten/okteta/kfinddirection.h>
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
 class QAction;

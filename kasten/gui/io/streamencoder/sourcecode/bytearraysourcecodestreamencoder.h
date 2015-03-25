@@ -26,7 +26,7 @@
 // lib
 #include "abstractbytearraystreamencoder.h"
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

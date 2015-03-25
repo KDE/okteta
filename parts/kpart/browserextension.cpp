@@ -25,11 +25,11 @@
 // part
 #include "part.h"
 // Okteta Kasten
-#include <printcontroller.h>
-#include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/printcontroller.h>
+#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Qt
-#include <QtGui/QClipboard>
+#include <QClipboard>
 #include <QApplication>
 #include <QDataStream>
 

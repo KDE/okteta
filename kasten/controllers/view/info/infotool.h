@@ -24,11 +24,11 @@
 #define INFOTOOL_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;

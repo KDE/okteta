@@ -25,9 +25,9 @@
 // lib
 #include <abstractbytearrayview.h>
 // commonlib
-#include <charcodec.h>
+#include <okteta/charcodec.h>
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 
 
 namespace Okteta

@@ -23,9 +23,9 @@
 #include "viewprofileedit.h"
 
 // Okteta Gui Kasten
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Okteta core
-#include <charcodec.h>
+#include <okteta/charcodec.h>
 // KF5
 #include <KLocalizedString>
 #include <KComboBox>

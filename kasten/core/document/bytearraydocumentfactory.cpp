@@ -25,13 +25,13 @@
 // lib
 #include "bytearraydocument.h"
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // Kasten core
-#include <person.h>
+#include <kasten/person.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QMimeData>
+#include <QMimeData>
 
 
 namespace Kasten

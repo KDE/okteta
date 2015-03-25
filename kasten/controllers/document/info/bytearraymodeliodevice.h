@@ -24,9 +24,9 @@
 #define BYTEARRAYMODELIODEVICE_H
 
 // Okteta
-#include <address.h>
+#include <okteta/address.h>
 // Qt
-#include <QtCore/QIODevice>
+#include <QIODevice>
 
 
 namespace Okteta

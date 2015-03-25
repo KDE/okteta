@@ -24,7 +24,7 @@
 #define BYTETABLEMODEL_H
 
 // Qt
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 namespace Okteta {
 class CharCodec;

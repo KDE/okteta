@@ -24,16 +24,16 @@
 #define BYTEARRAYVIEW_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // lib
-#include <bytearrayselection.h>
+#include <kasten/okteta/bytearrayselection.h>
 // Kasten gui
-#include <abstractview.h>
-#include <zoomable.h> // TODO: able instead of interface? or else?
-#include <dataselectable.h>
-#include <selecteddatawriteable.h>
+#include <kasten/abstractview.h>
+#include <kasten/zoomable.h> // TODO: able instead of interface? or else?
+#include <kasten/dataselectable.h>
+#include <kasten/selecteddatawriteable.h>
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 
 namespace Okteta {
 class ByteArrayJanusView;

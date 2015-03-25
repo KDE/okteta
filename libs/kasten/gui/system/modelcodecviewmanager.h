@@ -24,10 +24,10 @@
 #define MODELCODECVIEWMANAGER_H
 
 // lib
-#include "kastengui_export.h"
+#include <kasten/kastengui_export.h>
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <QObject>
+#include <QList>
 
 class QString;
 

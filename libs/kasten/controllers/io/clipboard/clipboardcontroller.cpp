@@ -23,19 +23,19 @@
 #include "clipboardcontroller.h"
 
 // Kasten gui
-#include <dataselectable.h>
-#include <selecteddatawriteable.h>
+#include <kasten/dataselectable.h>
+#include <kasten/selecteddatawriteable.h>
 // Kasten core
-#include <abstractmodel.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 #include <KActionCollection>
 #include <KStandardAction>
 // Qt
-#include <QtGui/QClipboard>
+#include <QClipboard>
 #include <QApplication>
-#include <QtCore/QMimeData>
+#include <QMimeData>
 #include <QAction>
 
 

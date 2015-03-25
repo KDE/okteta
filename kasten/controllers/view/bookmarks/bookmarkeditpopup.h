@@ -24,7 +24,7 @@
 #define BOOKMARKEDITPOPUP_H
 
 // Kasten gui
-#include <abstractlinepopup.h>
+#include <kasten/abstractlinepopup.h>
 
 // class Bookmark;
 class KLineEdit;

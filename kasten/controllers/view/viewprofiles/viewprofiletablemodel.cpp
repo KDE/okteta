@@ -23,13 +23,13 @@
 #include "viewprofiletablemodel.h"
 
 // Okteta Gui Kasten
-#include <bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
 // KF5
 #include <KColorScheme>
 #include <KLocalizedString>
 // Qt
-#include <QtWidgets/QApplication>
-#include <QtCore/QVector>
+#include <QApplication>
+#include <QVector>
 #include <QIcon>
 
 

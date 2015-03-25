@@ -24,7 +24,7 @@
 #define OKTETA_ADDRESS_H
 
 // Qt
-#include <QtCore/QtGlobal>
+#include <QtGlobal>
 
 
 namespace Okteta

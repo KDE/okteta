@@ -24,7 +24,7 @@
 #define OKTETA_ABSTRACTCOLUMNSTYLIST_H
 
 // lib
-#include "oktetagui_export.h"
+#include <okteta/oktetagui_export.h>
 // Qt
 #include <QtGlobal>
 

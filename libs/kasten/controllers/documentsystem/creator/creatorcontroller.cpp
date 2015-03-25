@@ -23,11 +23,11 @@
 #include "creatorcontroller.h"
 
 // Kasten gui
-#include <abstractdocumentstrategy.h>
-#include <selecteddatawriteable.h>
+#include <kasten/abstractdocumentstrategy.h>
+#include <kasten/selecteddatawriteable.h>
 // Kasten core
-#include <modelcodecmanager.h>
-#include <abstractmodeldatagenerator.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/abstractmodeldatagenerator.h>
 // KF5
 #include <KLocalizedString>
 #include <KActionCollection>
@@ -36,7 +36,7 @@
 #include <KXMLGUIClient>
 // Qt
 #include <QApplication>
-#include <QtCore/QMimeData>
+#include <QMimeData>
 
 
 #ifndef ABSTRACTMODELDATAGENERATOR_METATYPE

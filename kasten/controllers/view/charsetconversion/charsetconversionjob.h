@@ -24,11 +24,11 @@
 #define CHARSETCONVERSIONJOB_H
 
 // Okteta core
-#include <addressrange.h>
-#include <byte.h>
+#include <okteta/addressrange.h>
+#include <okteta/byte.h>
 // Qt
-#include <QtCore/QMap>
-#include <QtCore/QObject>
+#include <QMap>
+#include <QObject>
 
 namespace Okteta {
 class AbstractByteArrayModel;

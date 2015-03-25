@@ -24,9 +24,9 @@
 #define MODELDATAGENERATETHREAD_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 // Qt
-#include <QtCore/QThread>
+#include <QThread>
 
 class QMimeData;
 

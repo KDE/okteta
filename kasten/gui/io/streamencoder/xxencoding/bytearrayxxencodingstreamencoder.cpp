@@ -23,11 +23,11 @@
 #include "bytearrayxxencodingstreamencoder.h"
 
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

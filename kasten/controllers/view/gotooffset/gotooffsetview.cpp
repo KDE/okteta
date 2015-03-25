@@ -25,8 +25,8 @@
 // tool
 #include "gotooffsettool.h"
 // lib
-#include <addresscombobox.h>
-#include <addressvalidator.h>
+#include <kasten/okteta/addresscombobox.h>
+#include <kasten/okteta/addressvalidator.h>
 // KF5
 #include <QPushButton>
 #include <KGuiItem>

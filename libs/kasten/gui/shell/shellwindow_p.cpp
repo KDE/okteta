@@ -28,14 +28,14 @@
 #include <viewmanager.h>
 #include <abstractview.h>
 #include <abstracttoolview.h>
-#include <abstracttool.h>
 #include <abstractxmlguicontroller.h>
 #include <toolviewdockwidget.h>
 // Kasten core
-#include <abstractmodelsynchronizer.h>
-#include <abstractdocument.h>
+#include <kasten/abstracttool.h>
+#include <kasten/abstractmodelsynchronizer.h>
+#include <kasten/abstractdocument.h>
 // Qt
-#include <QtCore/QHash>
+#include <QHash>
 
 
 namespace Kasten

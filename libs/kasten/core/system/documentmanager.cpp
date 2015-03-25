@@ -25,9 +25,9 @@
 // lib
 #include <abstractdocument.h>
 // Qt
-#include <QtCore/QUrl>
-#include <QtCore/QMutableListIterator>
-#include <QtCore/QStringList>
+#include <QUrl>
+#include <QMutableListIterator>
+#include <QStringList>
 
 // temporary
 #include "documentcreatemanager.h"

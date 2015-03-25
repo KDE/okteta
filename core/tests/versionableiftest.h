@@ -25,7 +25,7 @@
 
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class QSignalSpy;
 

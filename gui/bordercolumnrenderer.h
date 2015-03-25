@@ -24,7 +24,7 @@
 #define OKTETA_BORDERCOLUMNRENDERER_H
 
 // lib
-#include "abstractcolumnrenderer.h"
+#include <okteta/abstractcolumnrenderer.h>
 
 
 namespace Okteta

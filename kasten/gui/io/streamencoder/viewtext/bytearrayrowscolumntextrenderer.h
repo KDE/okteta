@@ -26,11 +26,11 @@
 // lib
 #include "abstractcolumntextrenderer.h"
 // Okteta gui
-#include <coordrange.h>
+#include <okteta/coordrange.h>
 // Okteta core
-#include <oktetacore.h>
+#include <okteta/oktetacore.h>
 // Qt
-#include <QtCore/QChar>
+#include <QChar>
 
 namespace Okteta {
 class ValueCodec;

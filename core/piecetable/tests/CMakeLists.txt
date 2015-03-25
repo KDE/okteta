@@ -17,7 +17,7 @@ add_library( testpiecetablechangelib STATIC
   abstractpiecetablechangeiftest.cpp
   testpiecetablechange.cpp
 )
-target_link_libraries( testpiecetablechangelib Qt5::Core testoktetacore )
+target_link_libraries( testpiecetablechangelib  testoktetacore Qt5::Test Qt5::Core )
 
 include(ECMAddTests)
 
@@ -26,6 +26,9 @@ include(ECMAddTests)
 ecm_add_test( piecetest.cpp
   NAME_PREFIX "libpiecetable-"
   LINK_LIBRARIES Qt5::Test
+)
+target_include_directories(piecetest
+    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../..
 )
 
 ########### piecetabletest ###############

@@ -27,7 +27,7 @@
 
 #include <KLocalizedString>
 
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 
 #include "../topleveldatainformation.h"
 #include "../dummydatainformation.h"

@@ -19,7 +19,7 @@
  */
 
 
-#include <QtTest/QTest>
+#include <QTest>
 #include <QSignalSpy>
 
 #include "view/structures/datatypes/array/arraydatainformation.h"

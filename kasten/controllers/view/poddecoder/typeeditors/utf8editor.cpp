@@ -23,7 +23,7 @@
 #include "utf8editor.h"
 
 // Qt
-#include <QtGui/QValidator>
+#include <QValidator>
 
 
 class Utf8CharValidator : public QValidator

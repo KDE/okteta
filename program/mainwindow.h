@@ -24,7 +24,7 @@
 #define OKTETAMAINWINDOW_H
 
 // Kasten gui
-#include <shellwindow.h>
+#include <kasten/shellwindow.h>
 
 template<class T> class QList;
 class QMimeData;

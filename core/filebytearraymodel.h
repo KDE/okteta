@@ -24,7 +24,7 @@
 #define OKTETA_FILEBYTEARRAYMODEL_H
 
 // lib
-#include "abstractbytearraymodel.h"
+#include <okteta/abstractbytearraymodel.h>
 
 
 namespace Okteta

@@ -23,7 +23,7 @@
 #include "closecontroller.h"
 
 // Kasten gui
-#include <viewmanager.h>
+#include <kasten/viewmanager.h>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>

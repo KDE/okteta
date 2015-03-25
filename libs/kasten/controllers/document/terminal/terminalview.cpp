@@ -33,7 +33,7 @@
 #include <QLayout>
 #include <QFrame>
 #include <QUrl>
-#include <QtCore/QDir>
+#include <QDir>
 
 
 namespace Kasten

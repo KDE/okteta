@@ -27,12 +27,12 @@
 // lib
 #include "abstractframerenderer.h"
 // Okteta gui
-#include <kadds.h>
-#include <line.h>
+#include <okteta/kadds.h>
+#include <okteta/line.h>
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 // Qt
-#include <QtCore/QList>
+#include <QList>
 
 namespace Okteta {
 class AbstractColumnRenderer;

@@ -24,8 +24,8 @@
 #define TABBEDVIEWS_H
 
 // lib
-#include "abstractgroupedviews.h"
-#include "toolinlineviewable.h"
+#include <kasten/abstractgroupedviews.h>
+#include <kasten/toolinlineviewable.h>
 
 class QMimeData;
 

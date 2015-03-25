@@ -24,7 +24,7 @@
 #define GOTOOFFSETVIEW_H
 
 // Kasten gui
-#include <abstracttoolwidget.h>
+#include <kasten/abstracttoolwidget.h>
 
 namespace Okteta {
 class AddressComboBox;

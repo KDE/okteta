@@ -23,7 +23,7 @@
 #include "bookmarkeditpopup.h"
 
 // Okteta core
-// #include <bookmark.h>
+// #include <okteta/bookmark.h>
 // KF5
 #include <KLineEdit>
 #include <QIcon>

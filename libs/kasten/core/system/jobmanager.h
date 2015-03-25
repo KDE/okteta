@@ -24,7 +24,7 @@
 #define JOBMANAGER_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 
 class KJob;
 

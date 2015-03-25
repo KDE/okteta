@@ -24,9 +24,9 @@
 #define MULTIVIEWAREAS_H
 
 // lib
-#include "abstractgroupedviews.h"
-#include "viewareasplitable.h"
-#include "toolinlineviewable.h"
+#include <kasten/abstractgroupedviews.h>
+#include <kasten/viewareasplitable.h>
+#include <kasten/toolinlineviewable.h>
 
 class QMimeData;
 

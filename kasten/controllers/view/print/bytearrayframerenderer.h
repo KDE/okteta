@@ -26,11 +26,11 @@
 // lib
 #include "abstractcolumnframerenderer.h"
 // Okteta core
-#include <oktetacore.h>
-#include <address.h>
-#include <size.h>
+#include <okteta/oktetacore.h>
+#include <okteta/address.h>
+#include <okteta/size.h>
 // Qt
-#include <QtGui/QFont>
+#include <QFont>
 
 namespace Okteta {
 class OffsetColumnRenderer;

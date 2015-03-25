@@ -26,45 +26,45 @@
 #include "partfactory.h"
 #include "browserextension.h"
 // Okteta Kasten
-#include <bytearraydocument.h>
-#include <bytearrayview.h>
-#include <bytearrayviewprofilesynchronizer.h>
-#include <bytearrayviewprofilemanager.h>
-#include <bytearrayrawfilesynchronizerfactory.h>
-#include <overwriteonlycontroller.h>
-#include <overwritemodecontroller.h>
-#include <gotooffsetcontroller.h>
-#include <selectrangecontroller.h>
-#include <searchcontroller.h>
-#include <replacecontroller.h>
-#include <bookmarkscontroller.h>
-#include <printcontroller.h>
-#include <viewconfigcontroller.h>
-#include <viewmodecontroller.h>
-#include <viewstatuscontroller.h>
-#include <viewprofilecontroller.h>
+#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearrayviewprofilesynchronizer.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayrawfilesynchronizerfactory.h>
+#include <kasten/okteta/overwriteonlycontroller.h>
+#include <kasten/okteta/overwritemodecontroller.h>
+#include <kasten/okteta/gotooffsetcontroller.h>
+#include <kasten/okteta/selectrangecontroller.h>
+#include <kasten/okteta/searchcontroller.h>
+#include <kasten/okteta/replacecontroller.h>
+#include <kasten/okteta/bookmarkscontroller.h>
+#include <kasten/okteta/printcontroller.h>
+#include <kasten/okteta/viewconfigcontroller.h>
+#include <kasten/okteta/viewmodecontroller.h>
+#include <kasten/okteta/viewstatuscontroller.h>
+#include <kasten/okteta/viewprofilecontroller.h>
 // Kasten
-#include <jobmanager.h>
-#include <abstractloadjob.h>
-#include <abstractsyncwithremotejob.h>
-#include <readonlycontroller.h>
-// #include <readonlybarcontroller.h>
-// #include <synchronizecontroller.h>
-#include <clipboardcontroller.h>
-#include <insertcontroller.h>
-#include <copyascontroller.h>
-#include <exportcontroller.h>
-#include <versioncontroller.h>
-#include <zoomcontroller.h>
-#include <zoombarcontroller.h>
-#include <selectcontroller.h>
+#include <kasten/jobmanager.h>
+#include <kasten/abstractloadjob.h>
+#include <kasten/abstractsyncwithremotejob.h>
+#include <kasten/readonlycontroller.h>
+// #include <kasten/readonlybarcontroller.h>
+// #include <kasten/synchronizecontroller.h>
+#include <kasten/clipboardcontroller.h>
+#include <kasten/insertcontroller.h>
+#include <kasten/copyascontroller.h>
+#include <kasten/exportcontroller.h>
+#include <kasten/versioncontroller.h>
+#include <kasten/zoomcontroller.h>
+#include <kasten/zoombarcontroller.h>
+#include <kasten/selectcontroller.h>
 // KF5
 #include <KActionCollection>
 // Qt
 #include <QWidget>
 #include <QLayout>
 #include <QUrl>
-#include <QtCore/QList>
+#include <QList>
 
 
 static const char* const UIFileName[] =

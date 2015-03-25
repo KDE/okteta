@@ -24,9 +24,9 @@
 #define ABSTRACTMODELSYNCHRONIZERFACTORY_H
 
 // lib
-#include "abstractmodelsynchronizer.h"
+#include <kasten/abstractmodelsynchronizer.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 
 namespace Kasten

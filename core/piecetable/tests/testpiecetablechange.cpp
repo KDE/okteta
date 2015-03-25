@@ -26,7 +26,7 @@
 #include <piecetable/piecetable.h>
 #include <arraychangemetrics.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace KPieceTable

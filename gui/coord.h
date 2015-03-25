@@ -24,11 +24,11 @@
 #define OKTETA_COORD_H
 
 // lib
-#include "lineposition.h"
-#include "line.h"
+#include <okteta/lineposition.h>
+#include <okteta/line.h>
 // Okteta core
-#include "address.h"
-#include "size.h"
+#include <okteta/address.h>
+#include <okteta/size.h>
 
 
 namespace Okteta

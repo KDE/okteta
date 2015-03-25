@@ -26,7 +26,7 @@
 // lib
 #include <charcodec.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 class QTextCodec;
 class QTextDecoder;

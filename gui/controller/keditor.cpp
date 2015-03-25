@@ -27,10 +27,10 @@
 #include <bytearraytablecursor.h>
 #include <abstractbytearrayview.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <wordbytearrayservice.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/wordbytearrayservice.h>
 // Qt
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 
 
 namespace Okteta

@@ -30,15 +30,13 @@
 #include <util/filesystem.h>
 #include <util/fill.h>
 // Okteta core
-#include <piecetablebytearraymodel.h>
-// KF5
-#include <QtTest/QTest>
+#include <okteta/piecetablebytearraymodel.h>
 // Qt
-#include <QtTest/QtTest>
-#include <QtTest/QSignalSpy>
-#include <QtCore/QByteArray>
-#include <QtCore/QFile>
-#include <QtCore/QDataStream>
+#include <QTest>
+#include <QSignalSpy>
+#include <QByteArray>
+#include <QFile>
+#include <QDataStream>
 
 
 static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";

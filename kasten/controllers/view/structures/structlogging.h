@@ -23,7 +23,7 @@
 #ifndef STRUCTLOGGING_H_
 #define STRUCTLOGGING_H_
 
-#include <QtCore/QLoggingCategory>
+#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
 

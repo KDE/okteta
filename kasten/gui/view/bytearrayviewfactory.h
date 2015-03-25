@@ -24,9 +24,9 @@
 #define BYTEARRAYVIEWFACTORY_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // Kasten gui
-#include <abstractviewfactory.h>
+#include <kasten/abstractviewfactory.h>
 
 
 namespace Kasten

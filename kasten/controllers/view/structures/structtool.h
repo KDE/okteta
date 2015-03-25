@@ -24,13 +24,13 @@
 #define STRUCTTOOL_H_
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // tool
 #include "datatypes/topleveldatainformation.h"
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 //Qt
 class QModelIndex;
 

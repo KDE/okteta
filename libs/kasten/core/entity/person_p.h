@@ -27,7 +27,7 @@
 #include "person.h"
 
 //Qt
-#include <QtCore/QString>
+#include <QString>
 #include <QIcon>
 
 

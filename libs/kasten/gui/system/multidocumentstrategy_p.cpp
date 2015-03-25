@@ -29,9 +29,9 @@
 #include <modelcodecviewmanager.h>
 #include <viewmanager.h>
 // Kasten core
-#include <modeldatageneratethread.h>
-#include <abstractmodeldatagenerator.h>
-#include <abstractmodel.h>
+#include <kasten/modeldatageneratethread.h>
+#include <kasten/abstractmodeldatagenerator.h>
+#include <kasten/abstractmodel.h>
 // Qt
 #include <QClipboard>
 #include <QApplication>

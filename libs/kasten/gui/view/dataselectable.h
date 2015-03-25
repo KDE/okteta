@@ -24,7 +24,7 @@
 #define KASTEN_IF_DATASELECTABLE_H
 
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 class QMimeData;
 

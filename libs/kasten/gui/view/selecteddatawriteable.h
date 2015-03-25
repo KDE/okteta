@@ -24,7 +24,7 @@
 #define KASTEN_IF_SELECTEDDATAWRITEABLE_H
 
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 class QMimeData;
 

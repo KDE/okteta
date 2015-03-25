@@ -24,11 +24,11 @@
 #define MODIFIEDBARCONTROLLER_H
 
 // lib
-#include "kastencontrollers_export.h"
+#include <kasten/kastencontrollers_export.h>
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 // Kasten core
-#include <kastencore.h>
+#include <kasten/kastencore.h>
 
 class QLabel;
 

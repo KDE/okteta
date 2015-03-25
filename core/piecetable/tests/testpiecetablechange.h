@@ -27,7 +27,7 @@
 #include <piecetable/abstractpiecetablechange.h>
 #include <piecetable/piece.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace KPieceTable

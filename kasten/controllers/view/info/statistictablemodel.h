@@ -24,9 +24,9 @@
 #define STATISTICTABLEMODEL_H
 
 // Okteta core
-#include <oktetacore.h>
+#include <okteta/oktetacore.h>
 // Qt
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 namespace Okteta {
 class CharCodec;

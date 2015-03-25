@@ -24,7 +24,7 @@
 #define BYTEARRAYRAWFILELOADJOB_H
 
 // Kasten core
-#include <abstractfilesystemloadjob.h>
+#include <kasten/abstractfilesystemloadjob.h>
 
 
 namespace Kasten

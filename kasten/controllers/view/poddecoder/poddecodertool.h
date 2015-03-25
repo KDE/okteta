@@ -24,16 +24,16 @@
 #define PODDECODERTOOL_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // tool
 #include "poddata.h"
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
-#include <oktetacore.h>
-#include <address.h>
+#include <okteta/oktetacore.h>
+#include <okteta/address.h>
 // Qt
-#include <QtCore/QVector>
+#include <QVector>
 
 namespace Okteta {
 class AbstractTypeCodec;

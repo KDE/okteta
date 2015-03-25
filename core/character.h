@@ -24,9 +24,9 @@
 #define OKTETA_CHARACTER_H
 
 // lib
-#include "oktetacore_export.h"
+#include <okteta/oktetacore_export.h>
 // Qt
-#include <QtCore/QChar>
+#include <QChar>
 
 
 namespace Okteta

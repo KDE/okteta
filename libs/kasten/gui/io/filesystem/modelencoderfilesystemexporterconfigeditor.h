@@ -24,7 +24,7 @@
 #define MODELENCODERFILESYSTEMEXPORTERCONFIGEDITOR_H
 
 // lib
-#include <abstractmodelexporterconfigeditor.h>
+#include <kasten/abstractmodelexporterconfigeditor.h>
 
 
 namespace Kasten

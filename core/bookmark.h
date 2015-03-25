@@ -24,11 +24,11 @@
 #define OKTETA_BOOKMARK_H
 
 // lib
-#include "oktetacore_export.h"
-#include "address.h"
-#include "size.h"
+#include <okteta/oktetacore_export.h>
+#include <okteta/address.h>
+#include <okteta/size.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Okteta

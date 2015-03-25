@@ -24,9 +24,9 @@
 #define VERSIONVIEWTOOL_H
 
 // lib
-#include "kastencontrollers_export.h"
+#include <kasten/kastencontrollers_export.h>
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 
 
 namespace Kasten

@@ -26,7 +26,7 @@
 #include "bytearrayrawfilesynchronizer.h"
 #include "bytearraydocument.h"
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

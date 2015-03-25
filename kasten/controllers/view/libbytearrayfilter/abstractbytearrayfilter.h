@@ -24,10 +24,10 @@
 #define ABSTRACTBYTEARRAYFILTER_H
 
 // Okteta core
-#include <addressrange.h>
-#include <byte.h>
+#include <okteta/addressrange.h>
+#include <okteta/byte.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class AbstractByteArrayFilterParameterSet;
 namespace Okteta {

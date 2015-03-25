@@ -24,9 +24,9 @@
 #define BYTEARRAYTEXTSTREAMENCODERPREVIEW_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // Kasten ui
-#include <abstractselectionview.h>
+#include <kasten/abstractselectionview.h>
 
 class QTextEdit;
 

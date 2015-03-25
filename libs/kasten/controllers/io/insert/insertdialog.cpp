@@ -23,15 +23,15 @@
 #include "insertdialog.h"
 
 // Kasten gui
-#include <abstractmodeldatageneratorconfigeditor.h>
+#include <kasten/abstractmodeldatageneratorconfigeditor.h>
 // KF5
 #include <KLocalizedString>
 // Qt
 #include <QLayout>
 #include <QLabel>
 #include <QPushButton>
-#include <QtGui/QFont>
-#include <QtWidgets/QDialogButtonBox>
+#include <QFont>
+#include <QDialogButtonBox>
 
 
 namespace Kasten

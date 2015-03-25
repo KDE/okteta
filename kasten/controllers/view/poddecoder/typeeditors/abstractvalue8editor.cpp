@@ -23,7 +23,7 @@
 #include "abstractvalue8editor.h"
 
 // Okteta core
-#include <valuecodec.h>
+#include <okteta/valuecodec.h>
 // C++
 #include <limits>
 

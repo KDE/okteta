@@ -25,7 +25,7 @@
 // lib
 #include <codecs/textcharcodec.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 
 namespace Okteta

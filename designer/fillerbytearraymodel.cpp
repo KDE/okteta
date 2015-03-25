@@ -23,7 +23,7 @@
 #include "fillerbytearraymodel.h"
 
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 
 
 static const char fillerData[] =

@@ -24,9 +24,9 @@
 #define FRAMESTOPAPERPRINTER_H
 
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QList>
-#include <QtCore/QRect>
+#include <QObject>
+#include <QList>
+#include <QRect>
 
 class QPrinter;
 class AbstractFrameRenderer;

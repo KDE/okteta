@@ -24,9 +24,9 @@
 #define ABSTRACTDOCUMENTSTRATEGY_H
 
 // lib
-#include "kastengui_export.h"
+#include <kasten/kastengui_export.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 template<typename C> class QList;
 class QUrl;

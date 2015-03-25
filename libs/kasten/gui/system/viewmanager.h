@@ -24,10 +24,10 @@
 #define VIEWMANAGER_H
 
 // lib
-#include "abstractview.h"
+#include <kasten/abstractview.h>
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QObject>
+#include <QList>
+#include <QObject>
 
 
 namespace Kasten

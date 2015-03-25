@@ -23,10 +23,10 @@
 #include "char8editor.h"
 
 // Okteta core
-#include <character.h>
-#include <charcodec.h>
+#include <okteta/character.h>
+#include <okteta/charcodec.h>
 // Qt
-#include <QtGui/QValidator>
+#include <QValidator>
 
 
 class Char8Validator : public QValidator

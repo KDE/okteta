@@ -24,8 +24,8 @@
 #define OKTETAWIDGETDESIGNERFACTORYCOLLECTION_H
 
 // Qt
-#include <QtDesigner/QDesignerCustomWidgetCollectionInterface>
-#include <QtCore/QObject>
+#include <QDesignerCustomWidgetCollectionInterface>
+#include <QObject>
 
 
 class OktetaWidgetDesignerFactoryCollection : public QObject,

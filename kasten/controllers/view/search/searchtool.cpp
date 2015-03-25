@@ -26,11 +26,11 @@
 #include "searchuserqueryable.h"
 #include "searchjob.h"
 // lib
-#include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <charcodec.h>
-#include <abstractbytearraymodel.h>
+#include <okteta/charcodec.h>
+#include <okteta/abstractbytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt

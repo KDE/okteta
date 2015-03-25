@@ -64,7 +64,7 @@ set( okteta_kastencore_LIB_SRCS
 )
 
 set( okteta_kastencore_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastencore_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastencore_export.h
   ${OKTETA_KASTEN_CORE_DOCUMENT_HDRS}
   ${OKTETA_KASTEN_CORE_IO_HDRS}
 )
@@ -75,7 +75,8 @@ set( okteta_kastencore_LIB_CCHDRS
 )
 
 add_library( OktetaKastenCore  SHARED ${okteta_kastencore_LIB_SRCS} )
-generate_export_header( OktetaKastenCore )
+
+generate_export_header( OktetaKastenCore EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastencore_export.h)
 
 target_link_libraries( OktetaKastenCore
 PUBLIC
@@ -86,7 +87,7 @@ PRIVATE
   KF5::Bookmarks
 )
 
-target_include_directories(OktetaKastenCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta>")
+target_include_directories(OktetaKastenCore PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_target_properties( OktetaKastenCore PROPERTIES
   EXPORT_NAME "OktetaKastenCore"

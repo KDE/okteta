@@ -26,7 +26,7 @@
 // lib
 #include "abstractbytearrayfilterparameterset.h"
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 
 class OperandByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet

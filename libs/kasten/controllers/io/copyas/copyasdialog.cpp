@@ -23,8 +23,8 @@
 #include "copyasdialog.h"
 
 // Kasten gui
-#include <abstractmodelstreamencoderconfigeditor.h>
-#include <abstractselectionview.h>
+#include <kasten/abstractmodelstreamencoderconfigeditor.h>
+#include <kasten/abstractselectionview.h>
 // KF5
 #include <KLocalizedString>
 // Qt
@@ -34,8 +34,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QIcon>
-#include <QtGui/QFont>
-#include <QtWidgets/QDialogButtonBox>
+#include <QFont>
+#include <QDialogButtonBox>
 
 
 namespace Kasten

@@ -24,7 +24,7 @@
 #define DOCUMENTMANAGERTEST_H
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace Kasten {
 class AbstractDocument;

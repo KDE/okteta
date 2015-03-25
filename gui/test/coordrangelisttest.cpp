@@ -25,7 +25,7 @@
 // test object
 #include <coordrangelist.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 
 namespace Okteta

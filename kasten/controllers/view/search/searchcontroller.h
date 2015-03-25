@@ -24,13 +24,13 @@
 #define SEARCHCONTROLLER_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // controller
-#include "searchuserqueryable.h"
+#include <kasten/okteta/searchuserqueryable.h>
 // libfinddialog
-#include <kfinddirection.h>
+#include <kasten/okteta/kfinddirection.h>
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 
 class KXMLGUIClient;
 class QAction;

@@ -24,7 +24,7 @@
 #define OKTETA_BYTEARRAYCOLUMNVIEW_H
 
 // lib
-#include "abstractbytearrayview.h"
+#include <okteta/abstractbytearrayview.h>
 
 
 namespace Okteta

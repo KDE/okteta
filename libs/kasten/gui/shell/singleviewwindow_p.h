@@ -26,7 +26,7 @@
 // lib
 #include "singleviewwindow.h"
 // Kasten core
-#include <kastencore.h>
+#include <kasten/kastencore.h>
 
 class QDragMoveEvent;
 class QDropEvent;

@@ -27,7 +27,7 @@
 // lib
 #include "kadds.h"
 // Qt
-#include <QtGui/QPixmap>
+#include <QPixmap>
 
 
 namespace Okteta

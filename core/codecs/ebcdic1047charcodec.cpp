@@ -25,7 +25,7 @@
 // lib
 #include <character.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Okteta

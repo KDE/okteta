@@ -24,9 +24,9 @@
 #define BYTEARRAYPATTERNGENERATORCONFIGEDITORFACTORY_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // Kasten gui
-#include <abstractmodeldatageneratorconfigeditorfactory.h>
+#include <kasten/abstractmodeldatageneratorconfigeditorfactory.h>
 
 
 namespace Kasten

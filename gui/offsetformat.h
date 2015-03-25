@@ -25,7 +25,7 @@
 
 
 // lib
-#include "oktetagui_export.h"
+#include <okteta/oktetagui_export.h>
 
 namespace Okteta
 {

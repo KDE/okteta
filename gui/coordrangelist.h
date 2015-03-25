@@ -24,9 +24,9 @@
 #define OKTETA_COORDRANGELIST_H
 
 // lib
-#include "coordrange.h"
+#include <okteta/coordrange.h>
 // Qt
-#include <QtCore/QLinkedList>
+#include <QLinkedList>
 
 
 namespace Okteta

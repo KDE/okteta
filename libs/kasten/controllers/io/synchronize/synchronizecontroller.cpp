@@ -23,15 +23,16 @@
 #include "synchronizecontroller.h"
 
 // Kasten core
-#include <documentsyncmanager.h>
-#include <abstractmodelfilesystemsynchronizer.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/abstractmodelfilesystemsynchronizer.h>
+#include <kasten/abstractdocument.h>
 // KF5
 #include <KActionCollection>
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QUrl>
+#include <QUrl>
 #include <QAction>
 
 

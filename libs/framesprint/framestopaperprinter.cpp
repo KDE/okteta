@@ -25,8 +25,8 @@
 // lib
 #include "abstractframerenderer.h"
 // Qt
-#include <QtGui/QPainter>
-#include <QtPrintSupport/QPrinter>
+#include <QPainter>
+#include <QPrinter>
 
 
 FramesToPaperPrinter::FramesToPaperPrinter() {}

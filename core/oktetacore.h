@@ -24,7 +24,7 @@
 #define OKTETACORE_H
 
 // Qt
-#include <QtCore/QLoggingCategory>
+#include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_CORE)
 

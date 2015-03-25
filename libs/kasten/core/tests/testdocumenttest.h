@@ -26,7 +26,7 @@
 // sut
 #include <kastencore.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class QSignalSpy;
 class QString;

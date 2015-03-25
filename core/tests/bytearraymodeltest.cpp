@@ -25,7 +25,7 @@
 // test object
 #include <bytearraymodel.h>
 // Qt
-#include <QtTest/QtTest>
+#include <QTest>
 
 
 namespace Okteta

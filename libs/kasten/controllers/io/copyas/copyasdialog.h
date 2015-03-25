@@ -24,7 +24,7 @@
 #define COPYASDIALOG_H
 
 // Qt
-#include <QtWidgets/QDialog>
+#include <QDialog>
 
 
 namespace Kasten

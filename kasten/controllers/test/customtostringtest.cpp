@@ -17,14 +17,14 @@
  *  License along with this library; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#include <QtTest/QtTest>
+#include <QTest>
 #include <QScriptEngine>
 
 #include "view/structures/script/scriptengineinitializer.h"
 #include "view/structures/parsers/scriptvalueconverter.h"
 #include "view/structures/datatypes/topleveldatainformation.h"
 #include "testutils.h"
-#include <bytearraymodel.h>
+#include <okteta/bytearraymodel.h>
 
 class CustomToStringTest : public QObject
 {

@@ -24,7 +24,7 @@
 #define KASTEN_IF_USERLISTABLE_H
 
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 template <class T> class QList;
 

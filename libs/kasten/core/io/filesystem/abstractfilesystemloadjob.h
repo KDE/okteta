@@ -24,7 +24,7 @@
 #define ABSTRACTFILESYSTEMLOADJOB_H
 
 // library
-#include <abstractloadjob.h>
+#include <kasten/abstractloadjob.h>
 
 class QUrl;
 class QFile;

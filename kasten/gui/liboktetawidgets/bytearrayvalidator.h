@@ -24,9 +24,9 @@
 #define BYTEARRAYVALIDATOR_H
 
 // Okteta core
-#include <oktetacore.h>
+#include <okteta/oktetacore.h>
 // Qt
-#include <QtGui/QValidator>
+#include <QValidator>
 
 
 namespace Okteta

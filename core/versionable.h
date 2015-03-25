@@ -24,7 +24,7 @@
 #define OKTETA_VERSIONABLE_H
 
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 class QString;
 

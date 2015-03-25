@@ -25,10 +25,10 @@
 // lib
 #include "bytearraydocument.h"
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // Qt
-#include <QtCore/QDataStream>
-#include <QtCore/QFile>
+#include <QDataStream>
+#include <QFile>
 
 
 namespace Kasten

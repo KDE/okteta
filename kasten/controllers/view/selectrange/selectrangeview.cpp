@@ -25,7 +25,7 @@
 // tool
 #include "selectrangetool.h"
 // lib
-#include <addresscombobox.h>
+#include <kasten/okteta/addresscombobox.h>
 // KF5
 #include <QPushButton>
 #include <KGuiItem>

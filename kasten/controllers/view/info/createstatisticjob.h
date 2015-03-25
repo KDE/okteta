@@ -24,9 +24,9 @@
 #define CREATESTATISTICJOB_H
 
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace Okteta {
 class AbstractByteArrayModel;

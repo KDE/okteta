@@ -26,11 +26,11 @@
 // lib
 #include "abstractbytearraystreamencoder.h"
 // Okteta gui
-// #include <offsetformat.h>
+// #include <okteta/offsetformat.h>
 // Okteta core
-#include <oktetacore.h>
+#include <okteta/oktetacore.h>
 // Qt
-#include <QtCore/QString>
+#include <QString>
 
 
 namespace Kasten

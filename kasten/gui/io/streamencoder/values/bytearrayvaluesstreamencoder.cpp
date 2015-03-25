@@ -25,12 +25,12 @@
 // lib
 #include <bytearrayview.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <valuecodec.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/valuecodec.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

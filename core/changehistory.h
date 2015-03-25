@@ -24,10 +24,10 @@
 #define OKTETA_CHANGEHISTORY_H
 
 // lib
-#include "bytearraychange.h"
+#include <okteta/bytearraychange.h>
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QtPlugin>
+#include <QList>
+#include <QtPlugin>
 
 class QByteArray;
 

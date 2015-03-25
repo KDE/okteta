@@ -28,16 +28,16 @@
 #include <bytearrayfilterfactory.h>
 #include <abstractbytearrayfilter.h>
 // lib
-#include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <changesdescribable.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/changesdescribable.h>
 // KF5
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 
 namespace Kasten

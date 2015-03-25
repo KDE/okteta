@@ -21,7 +21,7 @@ set( kastencoretestutil_LIB_SRCS
 )
 
 add_library( kastencoretestutil  STATIC ${kastencoretestutil_LIB_SRCS} )
-target_link_libraries( kastencoretestutil Qt5::Core )
+target_link_libraries( kastencoretestutil Qt5::Test Qt5::Core)
 
 ########### io ###############
 

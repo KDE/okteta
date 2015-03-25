@@ -23,7 +23,7 @@
 #include "piecetable.h"
 
 // Qt
-#include <QtCore/QMutableLinkedListIterator>
+#include <QMutableLinkedListIterator>
 
 
 namespace KPieceTable

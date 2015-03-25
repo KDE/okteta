@@ -24,10 +24,10 @@
 #define ABSTRACTMODELSYNCHRONIZER_H
 
 // lib
-#include "kastencore_export.h"
-#include "kastencore.h"
+#include <kasten/kastencore_export.h>
+#include <kasten/kastencore.h>
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class QUrl;
 

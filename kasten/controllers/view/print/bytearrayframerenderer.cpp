@@ -25,24 +25,24 @@
 // lib
 #include "printcolumnstylist.h"
 // Okteta gui
-#include <offsetcolumnrenderer.h>
-#include <bordercolumnrenderer.h>
-#include <valuebytearraycolumnrenderer.h>
-#include <charbytearraycolumnrenderer.h>
-#include <bytearraytablelayout.h>
-#include <bytearraytableranges.h>
+#include <okteta/offsetcolumnrenderer.h>
+#include <okteta/bordercolumnrenderer.h>
+#include <okteta/valuebytearraycolumnrenderer.h>
+#include <okteta/charbytearraycolumnrenderer.h>
+#include <okteta/bytearraytablelayout.h>
+#include <okteta/bytearraytableranges.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <valuecodec.h>
-#include <charcodec.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/valuecodec.h>
+#include <okteta/charcodec.h>
 // Qt
-#include <QtCore/QHash>
-#include <QtCore/QDateTime>
-#include <QtGui/QPainter>
-#include <QtGui/QFontMetrics>
+#include <QHash>
+#include <QDateTime>
+#include <QPainter>
+#include <QFontMetrics>
 #include <QFontDatabase>
 #include <QApplication>
-#include <QtCore/QListIterator>
+#include <QListIterator>
 
 
 static const Okteta::Address DefaultStartOffset = 0;

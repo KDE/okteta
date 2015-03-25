@@ -25,7 +25,7 @@
 
 
 // Qt
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 
 namespace Kasten

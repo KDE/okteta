@@ -23,7 +23,7 @@
 #include "abstractpiecetablechange.h"
 
 // Qt
-#include <QtCore/Qt>
+#include <Qt>
 
 namespace KPieceTable
 {

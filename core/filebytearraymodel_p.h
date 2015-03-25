@@ -26,8 +26,8 @@
 // lib
 #include "filebytearraymodel.h"
 // Qt
-#include <QtCore/QVector>
-#include <QtCore/QFile>
+#include <QVector>
+#include <QFile>
 
 
 namespace Okteta

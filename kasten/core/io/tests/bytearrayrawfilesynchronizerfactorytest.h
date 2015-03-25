@@ -24,7 +24,7 @@
 #define BYTEARRAYRAWFILESYNCHRONIZERFACTORYTEST_H
 
 // Qt
-#include <QtCore/QObject>
+#include <QObject>
 
 class TestFileSystem;
 

@@ -25,14 +25,14 @@
 // controller
 #include "replacetool.h"
 //  lib
-#include <bytearraycombobox.h>
+#include <kasten/okteta/bytearraycombobox.h>
 // KF5
 #include <KLocalizedString>
 // Qt
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QLayout>
-#include <QtWidgets/QPushButton>
+#include <QPushButton>
 
 
 namespace Kasten

@@ -24,12 +24,12 @@
 
 // lib
 #include <bytearrayview.h>
-#include <bytearraydocument.h>
-#include <bytearrayselection.h>
+#include <kasten/okteta/bytearraydocument.h>
+#include <kasten/okteta/bytearrayselection.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // Qt
-#include <QtCore/QBuffer>
+#include <QBuffer>
 
 
 namespace Kasten

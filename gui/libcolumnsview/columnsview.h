@@ -24,11 +24,11 @@
 #define OKTETA_COLUMNSVIEW_H
 
 // lib
-#include "oktetagui_export.h"
-#include "kadds.h"
-#include "linerange.h"
+#include <okteta/oktetagui_export.h>
+#include <okteta/kadds.h>
+#include <okteta/linerange.h>
 // Qt
-#include <QtCore/QList>
+#include <QList>
 #include <QAbstractScrollArea>
 
 

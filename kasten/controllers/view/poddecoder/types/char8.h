@@ -24,12 +24,12 @@
 #define CHAR8_H
 
 // Okteta gui
-#include <oktetagui.h>
+#include <okteta/oktetagui.h>
 // Okteta core
-#include <character.h>
+#include <okteta/character.h>
 // Qt
-#include <QtCore/QMetaType>
-#include <QtCore/QString>
+#include <QMetaType>
+#include <QString>
 
 
 struct Char8

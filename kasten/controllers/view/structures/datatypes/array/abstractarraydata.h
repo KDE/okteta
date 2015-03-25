@@ -24,7 +24,7 @@
 #ifndef ABSTRACTARRAYDATA_H
 #define ABSTRACTARRAYDATA_H
 
-#include <address.h>
+#include <okteta/address.h>
 #include "../datainformationbase.h"
 #include "../primitivedatatype.h"
 

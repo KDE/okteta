@@ -24,11 +24,11 @@
 #define BOOKMARKSTOOL_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // Kasten core
-#include <abstracttool.h>
+#include <kasten/abstracttool.h>
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 
 namespace Okteta {
 class Bookmarkable;

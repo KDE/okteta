@@ -24,10 +24,10 @@
 #define KDE_IF_VERSIONABLE_H
 
 // lib
-// #include "documentversionid.h"
-#include "documentversiondata.h"
+// #include <kasten/documentversionid.h>
+#include <kasten/documentversiondata.h>
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 /*
 This interface for now just deals with the working copy of the model,

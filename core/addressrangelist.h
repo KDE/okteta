@@ -24,9 +24,9 @@
 #define OKTETA_ADDRESSRANGELIST_H
 
 // lib
-#include "addressrange.h"
+#include <okteta/addressrange.h>
 // Qt
-#include <QtCore/QLinkedList>
+#include <QLinkedList>
 
 
 namespace Okteta

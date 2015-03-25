@@ -26,8 +26,8 @@
 // lib
 #include "abstractpiecetablechange.h"
 // Qt
-#include <QtCore/QStack>
-#include <QtCore/QString>
+#include <QStack>
+#include <QString>
 
 
 namespace Okteta {

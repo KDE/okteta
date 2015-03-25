@@ -23,8 +23,8 @@
 #include "versionviewtool.h"
 
 // Kasten core
-#include <versionable.h>
-#include <abstractdocument.h>
+#include <kasten/versionable.h>
+#include <kasten/abstractdocument.h>
 // KF5
 #include <KLocalizedString>
 

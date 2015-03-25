@@ -22,8 +22,8 @@
 
 #include "loadercontroller.h"
 
-// Kasten core
-#include <abstractdocumentstrategy.h>
+// Kasten Gui
+#include <kasten/abstractdocumentstrategy.h>
 // KF5
 #include <KRecentFilesAction>
 #include <KActionCollection>
@@ -32,7 +32,7 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 // Qt
-#include <QtCore/QUrl>
+#include <QUrl>
 #include <QFileDialog>
 #include <QMimeDatabase>
 

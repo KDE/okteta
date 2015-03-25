@@ -24,10 +24,10 @@
 #define ADDRESSVALIDATOR_H
 
 // Okteta core
-#include <oktetacore.h>
-#include <address.h>
+#include <okteta/oktetacore.h>
+#include <okteta/address.h>
 // Qt
-#include <QtGui/QValidator>
+#include <QValidator>
 
 
 namespace Okteta

@@ -24,9 +24,9 @@
 #define KDE_IF_REPLACEUSERQUERYABLE_H
 
 // libfinddialog
-#include <kfinddirection.h>
+#include <kasten/okteta/kfinddirection.h>
 // Qt
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 
 
 namespace Kasten

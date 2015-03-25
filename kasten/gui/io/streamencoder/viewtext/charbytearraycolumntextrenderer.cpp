@@ -23,11 +23,11 @@
 #include "charbytearraycolumntextrenderer.h"
 
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <charcodec.h>
-#include <character.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/charcodec.h>
+#include <okteta/character.h>
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

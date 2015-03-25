@@ -25,13 +25,13 @@
 // lib
 #include <bytearrayview.h>
 // Okteta gui
-#include <bytearraytablelayout.h>
+#include <okteta/bytearraytablelayout.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 
 namespace Kasten

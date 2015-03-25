@@ -24,7 +24,7 @@
 #define KDE_NUMBERRANGE_H
 
 // lib
-#include "range.h"
+#include <okteta/range.h>
 
 
 namespace KDE

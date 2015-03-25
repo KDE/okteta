@@ -25,14 +25,14 @@
 // lib
 #include "copyasdialog.h"
 // Kasten gui
-#include <modelcodecviewmanager.h>
-#include <dataselectable.h>
-#include <abstractmodelstreamencoderconfigeditor.h>
+#include <kasten/modelcodecviewmanager.h>
+#include <kasten/dataselectable.h>
+#include <kasten/abstractmodelstreamencoderconfigeditor.h>
 // Kasten core
-#include <modelstreamencodethread.h>
-#include <modelcodecmanager.h>
-#include <abstractmodelstreamencoder.h>
-#include <abstractmodel.h>
+#include <kasten/modelstreamencodethread.h>
+#include <kasten/modelcodecmanager.h>
+#include <kasten/abstractmodelstreamencoder.h>
+#include <kasten/abstractmodel.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>
@@ -40,9 +40,9 @@
 #include <KLocalizedString>
 #include <KSelectAction>
 // Qt
-#include <QtCore/QBuffer>
-#include <QtCore/QMimeData>
-#include <QtGui/QClipboard>
+#include <QBuffer>
+#include <QMimeData>
+#include <QClipboard>
 #include <QApplication>
 
 

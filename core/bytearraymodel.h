@@ -24,9 +24,9 @@
 #define OKTETA_BYTEARRAYMODEL_H
 
 // lib
-#include "abstractbytearraymodel.h"
-#include "bookmarkable.h"
-#include "bookmarksconstiterator.h"
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/bookmarkable.h>
+#include <okteta/bookmarksconstiterator.h>
 
 
 namespace Okteta

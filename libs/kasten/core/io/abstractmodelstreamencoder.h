@@ -24,10 +24,10 @@
 #define ABSTRACTMODELSTREAMENCODER_H
 
 // lib
-#include "kastencore_export.h"
+#include <kasten/kastencore_export.h>
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QObject>
+#include <QString>
 
 class QIODevice;
 

@@ -25,7 +25,7 @@
 // 
 #include <abstractbytearraymodel.h>
 // Qt
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 
 using namespace Okteta;

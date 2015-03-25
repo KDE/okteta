@@ -25,11 +25,11 @@
 // lib
 #include "viewprofileedit.h"
 // Okteta Gui Kasten
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Qt
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QDialogButtonBox>
 
 
 namespace Kasten

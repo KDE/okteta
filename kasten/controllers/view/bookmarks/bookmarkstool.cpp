@@ -23,19 +23,19 @@
 #include "bookmarkstool.h"
 
 // Kasten core
-#include <bytearrayview.h>
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Kasten core
-#include <abstractmodel.h>
+#include <kasten/abstractmodel.h>
 // Okteta gui
-#include <offsetformat.h>
+#include <okteta/offsetformat.h>
 // Okteta core
-#include <wordbytearrayservice.h>
-#include <charcodec.h>
-#include <bookmarkable.h>
-#include <bookmarksconstiterator.h>
-#include <bookmark.h>
-#include <bytearraymodel.h>
+#include <okteta/wordbytearrayservice.h>
+#include <okteta/charcodec.h>
+#include <okteta/bookmarkable.h>
+#include <okteta/bookmarksconstiterator.h>
+#include <okteta/bookmark.h>
+#include <okteta/bytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt

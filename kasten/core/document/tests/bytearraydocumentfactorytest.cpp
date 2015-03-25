@@ -26,8 +26,8 @@
 #include <bytearraydocumentfactory.h>
 // lib
 #include <bytearraydocument.h>
-// KF5
-#include <QtTest/QTest>
+// Qt
+#include <QTest>
 
 
 namespace Kasten

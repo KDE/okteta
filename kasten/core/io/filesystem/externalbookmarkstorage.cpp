@@ -26,10 +26,10 @@
 // lib
 #include "bytearraydocument.h"
 // Okteta core
-#include <bookmarkable.h>
-#include <bookmarksconstiterator.h>
-#include <bookmark.h>
-#include <abstractbytearraymodel.h>
+#include <okteta/bookmarkable.h>
+#include <okteta/bookmarksconstiterator.h>
+#include <okteta/bookmark.h>
+#include <okteta/abstractbytearraymodel.h>
 // KF5
 #include <KBookmarkManager>
 // Qt

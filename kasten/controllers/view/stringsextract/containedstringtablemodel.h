@@ -26,10 +26,10 @@
 // tool
 #include "containedstring.h"
 // Okteta gui
-#include <offsetformat.h>
+#include <okteta/offsetformat.h>
 // Qt
-#include <QtCore/QList>
-#include <QtCore/QAbstractTableModel>
+#include <QList>
+#include <QAbstractTableModel>
 
 
 class ContainedStringTableModel : public QAbstractTableModel

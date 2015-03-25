@@ -23,9 +23,9 @@
 #include "kabstractfinddialog.h"
 
 // lib
-#include <bytearraycombobox.h>
+#include <kasten/okteta/bytearraycombobox.h>
 // Okteta core
-#include <oktetacore.h>
+#include <okteta/oktetacore.h>
 // KF5
 #include <KLocalizedString>
 // Qt
@@ -33,8 +33,8 @@
 #include <QGroupBox>
 #include <QLayout>
 #include <QIcon>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QDialogButtonBox>
+#include <QPushButton>
+#include <QDialogButtonBox>
 
 
 namespace Kasten

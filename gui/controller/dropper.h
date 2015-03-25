@@ -24,7 +24,7 @@
 #define OKTETA_DROPPER_H
 
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 
 
 class QDragEnterEvent;

@@ -26,7 +26,7 @@
 #include "gotooffsettoolview.h"
 #include "gotooffsettool.h"
 // Kasten gui
-#include <toolinlineviewable.h>
+#include <kasten/toolinlineviewable.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

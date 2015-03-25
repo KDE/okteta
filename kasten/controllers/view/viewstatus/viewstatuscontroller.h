@@ -24,13 +24,13 @@
 #define VIEWSTATUSCONTROLLER_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // Kasten gui
-#include <abstractxmlguicontroller.h>
+#include <kasten/abstractxmlguicontroller.h>
 // Okteta gui
-#include <offsetformat.h>
+#include <okteta/offsetformat.h>
 // Okteta core
-#include <address.h>
+#include <okteta/address.h>
 
 class KComboBox;
 class KSqueezedTextLabel;

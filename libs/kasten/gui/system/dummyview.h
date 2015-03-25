@@ -25,7 +25,7 @@
 
 
 // lib
-#include <abstractview.h>
+#include <kasten/abstractview.h>
 
 class QLabel;
 

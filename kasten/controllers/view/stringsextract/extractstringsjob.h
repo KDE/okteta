@@ -26,10 +26,10 @@
 // tool
 #include "containedstring.h"
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 // Qt
-#include <QtCore/QObject>
-#include <QtCore/QList>
+#include <QObject>
+#include <QList>
 
 namespace Okteta {
 class AbstractByteArrayModel;

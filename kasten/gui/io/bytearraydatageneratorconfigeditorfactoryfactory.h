@@ -24,7 +24,7 @@
 #define BYTEARRAYDATAGENERATORCONFIGEDITORFACTORYFACTORY_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 
 template<class T> class QList;
 

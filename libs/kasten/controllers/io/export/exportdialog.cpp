@@ -23,8 +23,8 @@
 #include "exportdialog.h"
 
 // Kasten gui
-#include <abstractmodelexporterconfigeditor.h>
-#include <abstractselectionview.h>
+#include <kasten/abstractmodelexporterconfigeditor.h>
+#include <kasten/abstractselectionview.h>
 // KF5
 #include <KLocalizedString>
 // Qt
@@ -34,8 +34,8 @@
 #include <QLayout>
 #include <QPushButton>
 #include <QIcon>
-#include <QtGui/QFont>
-#include <QtWidgets/QDialogButtonBox>
+#include <QFont>
+#include <QDialogButtonBox>
 
 
 namespace Kasten

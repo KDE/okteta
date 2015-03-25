@@ -24,20 +24,21 @@
 
 // lib
 #include "bytearraymodeliodevice.h"
-#include <bytearraydocument.h>
+#include <kasten/okteta/bytearraydocument.h>
 // Kasten core
-#include <documentsyncmanager.h>
-#include <abstractmodelsynchronizer.h>
+#include <kasten/documentsyncmanager.h>
+#include <kasten/abstractmodelsynchronizer.h>
+
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <arraychangemetricslist.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/arraychangemetricslist.h>
 // KF5
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
-#include <QtCore/QTimer>
-#include <QtCore/QUrl>
-#include <QtCore/QMimeDatabase>
+#include <QTimer>
+#include <QUrl>
+#include <QMimeDatabase>
 
 
 namespace Kasten

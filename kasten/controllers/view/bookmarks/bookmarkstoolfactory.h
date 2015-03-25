@@ -24,9 +24,9 @@
 #define BOOKMARKSTOOLFACTORY_H
 
 // lib
-#include "oktetakastencontrollers_export.h"
+#include <kasten/okteta/oktetakastencontrollers_export.h>
 // Kasten core
-#include <abstracttoolfactory.h>
+#include <kasten/abstracttoolfactory.h>
 
 
 namespace Kasten

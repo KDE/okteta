@@ -24,8 +24,8 @@
 #define OKTETA_WORDBYTEARRAYSERVICE_H
 
 // lib
-#include "oktetacore_export.h"
-#include "addressrange.h"
+#include <okteta/oktetacore_export.h>
+#include <okteta/addressrange.h>
 
 class QString;
 

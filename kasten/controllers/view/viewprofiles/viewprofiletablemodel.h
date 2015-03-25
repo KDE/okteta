@@ -24,9 +24,9 @@
 #define VIEWPROFILETABLEMODEL_H
 
 // Okteta Gui Kasten
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Qt
-#include <QtCore/QAbstractTableModel>
+#include <QAbstractTableModel>
 
 template< class C > class QList;
 
