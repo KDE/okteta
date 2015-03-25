@@ -151,7 +151,7 @@ set( CLIPBOARDCONTROLLER_SRCS
   io/clipboard/clipboardcontroller.cpp
 )
 kastencontrollers_generate_headers(CLIPBOARDCONTROLLER io/clipboard
-  ClipBoardController
+  ClipboardController
 )
 
 set( INSERTCONTROLLER_SRCS

@@ -85,8 +85,8 @@ ecm_generate_headers(KASTEN_CORE_IO_CCHDRS
     AbstractModelExporter
     ModelStreamEncodeThread
     ModelDataGenerateThread
-    AbstractloadJob
-    AbstractModelSynchronizerfactory
+    AbstractLoadJob
+    AbstractModelSynchronizerFactory
   RELATIVE io
   PREFIX Kasten
   REQUIRED_HEADERS KASTEN_CORE_IO_HDRS
@@ -119,7 +119,7 @@ ecm_generate_headers(KASTEN_CORE_IO_FILESYSTEM_CCHDRS
     AbstractModelFileSystemSynchronizer
     AbstractFileSystemConnectJob
     AbstractFileSystemLoadJob
-    AbstractFileSystemExportjob
+    AbstractFileSystemExportJob
     ModelEncoderFileSystemExporter
     ModelEncoderFileSystemExportJob
   RELATIVE io/filesystem
