@@ -25,11 +25,11 @@
 // part
 #include "part.h"
 // Okteta Kasten
-#include <bytearrayviewprofilemanager.h>
-#include <bytearraystreamencoderconfigeditorfactoryfactory.h>
-#include <bytearraydatageneratorconfigeditorfactoryfactory.h>
-#include <bytearraystreamencoderfactory.h>
-#include <bytearraydatageneratorfactory.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.h>
+#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.h>
+#include <kasten/okteta/bytearraystreamencoderfactory.h>
+#include <kasten/okteta/bytearraydatageneratorfactory.h>
 // KF5
 #include <KLocalizedString>
 

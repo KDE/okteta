@@ -25,7 +25,7 @@
 // tool
 #include "charsetconversiontool.h"
 // Okteta Kasten gui
-#include <bytearraycombobox.h>
+#include <kasten/okteta/bytearraycombobox.h>
 // Okteta core
 #include <charcodec.h>
 // KF5

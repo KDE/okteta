@@ -191,30 +191,43 @@ oktetakastengui_generate_headers(okteta_kastengui_system system
   ByteArrayViewProfileManager
 )
 
-set( okteta_kastengui_LIB_SRCS
+set( okteta_kastengui_SRCS
   oktetakastengui.cpp
+)
+ecm_generate_headers(okteta_kastengui_CCHDRS
+  HEADER_NAMES
+    OktetaKastenGui
+  PREFIX Kasten/Okteta
+  REQUIRED_HEADERS okteta_kastengui_HDRS
+)
+
+set( okteta_kastengui_LIB_SRCS
   ${oktetawidgets_LIB_SRCS}
+  ${okteta_kastengui_SRCS}
   ${okteta_kastengui_view_SRCS}
   ${okteta_kastengui_io_SRCS}
   ${okteta_kastengui_system_SRCS}
 )
 
 set( okteta_kastengui_LIB_HDRS
-  ${CMAKE_CURRENT_BINARY_DIR}/oktetakastengui_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastengui_export.h
   ${oktetawidgets_LIB_HDRS}
+  ${okteta_kastengui_HDRS}
   ${okteta_kastengui_view_HDRS}
   ${okteta_kastengui_io_HDRS}
   ${okteta_kastengui_system_HDRS}
 )
 set( okteta_kastengui_LIB_CCHDRS
   ${oktetawidgets_LIB_CCHDRS}
+  ${okteta_kastengui_CCHDRS}
   ${okteta_kastengui_view_CCHDRS}
   ${okteta_kastengui_io_CCHDRS}
   ${okteta_kastengui_system_CCHDRS}
 )
 
 add_library( OktetaKastenGui  SHARED ${okteta_kastengui_LIB_SRCS} )
-generate_export_header( OktetaKastenGui )
+
+generate_export_header( OktetaKastenGui EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta/oktetakastengui_export.h )
 
 target_link_libraries( OktetaKastenGui
 PUBLIC
@@ -227,7 +240,7 @@ PRIVATE
   KF5::Completion
 )
 
-target_include_directories(OktetaKastenGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/kasten/okteta>")
+target_include_directories(OktetaKastenGui PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 
 set_target_properties( OktetaKastenGui  PROPERTIES
   EXPORT_NAME "OktetaKastenGui"

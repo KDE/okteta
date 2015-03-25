@@ -25,7 +25,7 @@
 // controller
 #include "replacetool.h"
 //  lib
-#include <bytearraycombobox.h>
+#include <kasten/okteta/bytearraycombobox.h>
 // KF5
 #include <KLocalizedString>
 // Qt

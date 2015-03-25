@@ -25,7 +25,7 @@
 // tool
 #include "charsetconversionjob.h"
 // Okteta Kasten gui
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 // Okteta Kasten core
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core

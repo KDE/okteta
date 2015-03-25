@@ -27,7 +27,7 @@
 // search controller
 #include "../search/searchjob.h"
 // lib
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <charcodec.h>

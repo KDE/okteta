@@ -28,7 +28,7 @@
 #include <bytearrayfilterfactory.h>
 #include <abstractbytearrayfilter.h>
 // lib
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>

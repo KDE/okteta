@@ -24,7 +24,7 @@
 #define VIEWPROFILESMANAGEDIALOG_H
 
 // lib
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Qt
 #include <QDialog>
 

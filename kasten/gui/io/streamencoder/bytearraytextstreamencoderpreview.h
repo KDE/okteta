@@ -24,7 +24,7 @@
 #define BYTEARRAYTEXTSTREAMENCODERPREVIEW_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // Kasten ui
 #include <kasten/abstractselectionview.h>
 

@@ -27,7 +27,7 @@
 #include "structlogging.h"
 // lib
 #include <kasten/okteta/bytearraydocument.h>
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 // Okteta core
 #include <character.h>
 #include <charcodec.h>

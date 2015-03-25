@@ -23,7 +23,7 @@
 #include "viewprofilesmanagecontroller.h"
 
 // Okteta Gui Kasten
-#include <bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
 // controller
 #include "viewprofilesmanagedialog.h"
 // KF5

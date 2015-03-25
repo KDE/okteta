@@ -27,9 +27,9 @@
 #include "browserextension.h"
 // Okteta Kasten
 #include <kasten/okteta/bytearraydocument.h>
-#include <bytearrayview.h>
-#include <bytearrayviewprofilesynchronizer.h>
-#include <bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayview.h>
+#include <kasten/okteta/bytearrayviewprofilesynchronizer.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
 #include <kasten/okteta/bytearrayrawfilesynchronizerfactory.h>
 #include <overwriteonlycontroller.h>
 #include <overwritemodecontroller.h>

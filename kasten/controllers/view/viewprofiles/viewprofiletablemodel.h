@@ -24,7 +24,7 @@
 #define VIEWPROFILETABLEMODEL_H
 
 // Okteta Gui Kasten
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Qt
 #include <QAbstractTableModel>
 

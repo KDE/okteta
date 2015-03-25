@@ -23,7 +23,7 @@
 #include "overwritemodecontroller.h"
 
 // lib
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

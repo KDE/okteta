@@ -24,8 +24,8 @@
 #define BYTEARRAYVIEWPROFILESYNCHRONIZER_H
 
 // lib
-#include "oktetakastengui_export.h"
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/oktetakastengui_export.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Kasten core
 #include <kasten/kastencore.h>
 // Qt Core

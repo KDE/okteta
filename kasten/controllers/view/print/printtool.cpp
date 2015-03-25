@@ -28,7 +28,7 @@
 #include "headerfooterframerenderer.h"
 #include "bytearrayframerenderer.h"
 // lib
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <abstractbytearraymodel.h>

@@ -24,7 +24,7 @@
 #define ABSTRACTBYTEARRAYSTREAMENCODER_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // Kasten core
 #include <kasten/abstractmodelstreamencoder.h>
 // Okteta core

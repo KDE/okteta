@@ -24,7 +24,7 @@
 #define ADDRESSCOMBOBOX_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // Okteta core
 #include <okteta/address.h>
 // Qt

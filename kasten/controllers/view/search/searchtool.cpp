@@ -26,7 +26,7 @@
 #include "searchuserqueryable.h"
 #include "searchjob.h"
 // lib
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <charcodec.h>

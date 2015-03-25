@@ -27,14 +27,14 @@
 #include "mainwindow.h"
 // Okteta Kasten
 #include <kasten/okteta/bytearraydocumentfactory.h>
-#include <bytearrayviewfactory.h>
+#include <kasten/okteta/bytearrayviewfactory.h>
 #include <kasten/okteta/bytearrayrawfilesynchronizerfactory.h>
-#include <bytearraystreamencoderconfigeditorfactoryfactory.h>
-#include <bytearraydatageneratorconfigeditorfactoryfactory.h>
-#include <bytearraystreamencoderfactory.h>
-#include <bytearraydatageneratorfactory.h>
+#include <kasten/okteta/bytearraystreamencoderconfigeditorfactoryfactory.h>
+#include <kasten/okteta/bytearraydatageneratorconfigeditorfactoryfactory.h>
+#include <kasten/okteta/bytearraystreamencoderfactory.h>
+#include <kasten/okteta/bytearraydatageneratorfactory.h>
 // tmp
-#include <bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
 // Kasten gui
 #include <kasten/multidocumentstrategy.h>
 #include <kasten/dialoghandler.h>

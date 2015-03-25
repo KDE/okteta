@@ -24,7 +24,7 @@
 #define BYTEARRAYVIEW_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // lib
 #include <kasten/okteta/bytearrayselection.h>
 // Kasten gui
@@ -33,7 +33,7 @@
 #include <kasten/dataselectable.h>
 #include <kasten/selecteddatawriteable.h>
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 
 namespace Okteta {
 class ByteArrayJanusView;

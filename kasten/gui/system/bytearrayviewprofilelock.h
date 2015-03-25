@@ -24,7 +24,7 @@
 #define BYTEARRAYVIEWPROFILELOCK_H
 
 // lib
-#include "bytearrayviewprofile.h"
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Qt
 #include <QSharedDataPointer>
 

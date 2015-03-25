@@ -24,7 +24,7 @@
 #define BYTEARRAYVIEWPROFILEMANAGER_H
 
 // lib
-#include "bytearrayviewprofile.h"
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Qt
 #include <QObject>
 #include <QList>

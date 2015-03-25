@@ -25,9 +25,9 @@
 // controller
 #include "viewprofileeditdialog.h"
 // Okteta Gui Kasten
-#include <bytearrayviewprofilemanager.h>
-#include <bytearrayviewprofilesynchronizer.h>
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilesynchronizer.h>
+#include <kasten/okteta/bytearrayview.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KXMLGUIFactory>

@@ -23,7 +23,7 @@
 #include "viewprofileedit.h"
 
 // Okteta Gui Kasten
-#include <bytearrayviewprofile.h>
+#include <kasten/okteta/bytearrayviewprofile.h>
 // Okteta core
 #include <charcodec.h>
 // KF5

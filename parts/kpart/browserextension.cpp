@@ -26,7 +26,7 @@
 #include "part.h"
 // Okteta Kasten
 #include <printcontroller.h>
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Qt
 #include <QClipboard>

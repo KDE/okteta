@@ -24,7 +24,7 @@
 #define BYTEARRAYIHEXSTREAMENCODERCONFIGEDITORFACTORY_H
 
 // lib
-#include "oktetakastengui_export.h"
+#include <kasten/okteta/oktetakastengui_export.h>
 // Kasten gui
 #include <kasten/abstractmodelstreamencoderconfigeditorfactory.h>
 

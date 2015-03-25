@@ -23,7 +23,7 @@
 #include "viewstatuscontroller.h"
 
 // lib
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 // Kasten ui
 #include <kasten/togglebutton.h>
 #include <kasten/statusbar.h>

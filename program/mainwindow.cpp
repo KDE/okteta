@@ -25,7 +25,7 @@
 // program
 #include "program.h"
 // tmp
-#include <bytearrayviewprofilemanager.h>
+#include <kasten/okteta/bytearrayviewprofilemanager.h>
 // tools
 #include <stringsextracttoolview.h>
 #include <stringsextracttool.h>

@@ -24,7 +24,7 @@
 
 // lib
 #include "extractstringsjob.h"
-#include <bytearrayview.h>
+#include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <charcodec.h>
