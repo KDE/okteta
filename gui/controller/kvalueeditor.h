@@ -27,7 +27,7 @@
 // lib
 #include "keditor.h"
 // Okteta core
-#include <byte.h>
+#include <okteta/byte.h>
 // Qt
 #include <QString>
 

@@ -23,7 +23,7 @@
 #include "bytearrayrawfilereloadthread.h"
 
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 // Qt

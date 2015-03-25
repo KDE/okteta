@@ -25,7 +25,7 @@
 
 // Okteta core
 #include <okteta/address.h>
-#include <size.h>
+#include <okteta/size.h>
 // Qt
 #include <QString>
 

@@ -28,7 +28,7 @@
 #include "../../script/safereference.h"
 #include "../../structlogging.h"
 
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 
 #include <limits>
 #include <KLocalizedString>

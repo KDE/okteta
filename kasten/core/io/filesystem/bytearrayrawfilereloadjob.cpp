@@ -28,7 +28,7 @@
 #include "bytearrayrawfilereloadthread.h"
 #include "bytearraydocument.h"
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // Qt
 #include <QCoreApplication>
 

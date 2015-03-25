@@ -24,8 +24,8 @@
 #define PODDATA_H
 
 // Okteta core
-#include <byte.h>
-#include <oktetacore.h>
+#include <okteta/byte.h>
+#include <okteta/oktetacore.h>
 #include <QSysInfo>
 
 

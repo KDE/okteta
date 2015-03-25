@@ -27,7 +27,7 @@
 
 #include <size.h>
 #include <okteta/address.h>
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 
 #include "datatypes/datainformationbase.h"
 

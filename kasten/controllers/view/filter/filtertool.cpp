@@ -31,8 +31,8 @@
 #include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <changesdescribable.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/changesdescribable.h>
 // KF5
 #include <KLocalizedString>
 // Qt

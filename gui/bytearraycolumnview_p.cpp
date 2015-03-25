@@ -29,7 +29,7 @@
 #include "controller/dropper.h"
 #include "kcursor.h"
 // Okteta core
-#include <valuecodec.h>
+#include <okteta/valuecodec.h>
 // Qt
 #include <QStyle>
 #include <QFontDatabase>

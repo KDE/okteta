@@ -22,7 +22,7 @@
 #include <QtGlobal>
 #include <QLocale>
 #include <limits>
-#include <bytearraymodel.h>
+#include <okteta/bytearraymodel.h>
 
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"

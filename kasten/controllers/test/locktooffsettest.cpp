@@ -22,7 +22,7 @@
 
 #include <limits>
 
-#include <bytearraymodel.h>
+#include <okteta/bytearraymodel.h>
 #include "view/structures/datatypes/topleveldatainformation.h"
 #include "view/structures/datatypes/structuredatainformation.h"
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.h"

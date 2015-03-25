@@ -42,12 +42,12 @@
 #include "abstractdifferentsizedialog.h"
 #include <kasten/okteta/bytearraydocument.h>
 #include <kasten/okteta/bytearrayview.h>
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // Okteta core
-#include <charcodec.h>
-#include <abstractbytearraymodel.h>
-#include <arraychangemetricslist.h>
-#include <changesdescribable.h>
+#include <okteta/charcodec.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/arraychangemetricslist.h>
+#include <okteta/changesdescribable.h>
 // KF5
 #include <KLocalizedString>
 

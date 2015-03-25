@@ -30,7 +30,7 @@
 #include <util/filesystem.h>
 #include <util/fill.h>
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

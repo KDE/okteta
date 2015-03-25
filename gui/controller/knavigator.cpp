@@ -27,7 +27,7 @@
 #include <bytearraytablecursor.h>
 #include <abstractbytearrayview.h>
 // lib
-#include <wordbytearrayservice.h>
+#include <okteta/wordbytearrayservice.h>
 // Qt
 #include <QKeyEvent>
 

@@ -26,7 +26,7 @@
 #include "stringdatainformation.h"
 #include "../../structlogging.h"
 
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 
 #include <KLocalizedString>
 #include <QVarLengthArray>

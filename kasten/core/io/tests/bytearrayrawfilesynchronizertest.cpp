@@ -35,7 +35,7 @@
 #include <kasten/abstractsynctoremotejob.h>
 #include <kasten/abstractsyncwithremotejob.h>
 // Okteta core
-#include <piecetablebytearraymodel.h>
+#include <okteta/piecetablebytearraymodel.h>
 // Qt
 #include <QTest>
 #include <QSignalSpy>

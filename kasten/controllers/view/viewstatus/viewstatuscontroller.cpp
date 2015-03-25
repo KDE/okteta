@@ -28,8 +28,8 @@
 #include <kasten/togglebutton.h>
 #include <kasten/statusbar.h>
 // Okteta core
-#include <charcodec.h>
-#include <oktetacore.h>
+#include <okteta/charcodec.h>
+#include <okteta/oktetacore.h>
 // KF5
 #include <KSqueezedTextLabel>
 #include <KComboBox>

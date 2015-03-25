@@ -25,7 +25,7 @@
 // Okteta Gui Kasten
 #include <kasten/okteta/bytearrayviewprofile.h>
 // Okteta core
-#include <charcodec.h>
+#include <okteta/charcodec.h>
 // KF5
 #include <KLocalizedString>
 #include <KComboBox>

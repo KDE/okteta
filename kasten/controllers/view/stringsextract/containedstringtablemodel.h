@@ -26,7 +26,7 @@
 // tool
 #include "containedstring.h"
 // Okteta gui
-#include <offsetformat.h>
+#include <okteta/offsetformat.h>
 // Qt
 #include <QList>
 #include <QAbstractTableModel>

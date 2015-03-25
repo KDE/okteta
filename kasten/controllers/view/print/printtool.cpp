@@ -31,7 +31,7 @@
 #include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // KF5
 #include <KLocalizedString>
 #include <KMessageBox>

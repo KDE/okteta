@@ -24,7 +24,7 @@
 #include "view/structures/parsers/scriptvalueconverter.h"
 #include "view/structures/datatypes/topleveldatainformation.h"
 #include "testutils.h"
-#include <bytearraymodel.h>
+#include <okteta/bytearraymodel.h>
 
 class CustomToStringTest : public QObject
 {

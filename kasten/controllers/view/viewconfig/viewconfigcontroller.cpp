@@ -27,7 +27,7 @@
 #include "bytespergroupdialog.h"
 #include <kasten/okteta/bytearrayview.h>
 // Okteta core
-#include <charcodec.h>
+#include <okteta/charcodec.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>

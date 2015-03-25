@@ -24,7 +24,7 @@
 #define BOOKMARKLISTMODEL_H
 
 // Okteta gui
-#include <offsetformat.h>
+#include <okteta/offsetformat.h>
 // Qt
 #include <QAbstractTableModel>
 

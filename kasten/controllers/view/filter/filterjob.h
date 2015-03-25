@@ -24,8 +24,8 @@
 #define FILTERJOB_H
 
 // Okteta core
-#include <addressrange.h>
-#include <byte.h>
+#include <okteta/addressrange.h>
+#include <okteta/byte.h>
 // Qt
 #include <QObject>
 

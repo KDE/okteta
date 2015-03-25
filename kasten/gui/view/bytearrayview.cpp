@@ -27,9 +27,9 @@
 #include <bytearrayviewprofilesynchronizer.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta gui
-#include <abstractbytearrayview.h>
+#include <okteta/abstractbytearrayview.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // Qt
 #include <QFontDatabase>
 

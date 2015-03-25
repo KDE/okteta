@@ -24,7 +24,7 @@
 #define STATISTICTABLEMODEL_H
 
 // Okteta core
-#include <oktetacore.h>
+#include <okteta/oktetacore.h>
 // Qt
 #include <QAbstractTableModel>
 

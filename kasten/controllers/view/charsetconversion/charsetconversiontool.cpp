@@ -29,9 +29,9 @@
 // Okteta Kasten core
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <charcodec.h>
-#include <abstractbytearraymodel.h>
-#include <changesdescribable.h>
+#include <okteta/charcodec.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/changesdescribable.h>
 // KF5
 #include <KLocalizedString>
 // Qt

@@ -27,7 +27,7 @@
 #include <kasten/okteta/bytearraydocument.h>
 #include <kasten/okteta/bytearrayselection.h>
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 // Qt
 #include <QBuffer>
 

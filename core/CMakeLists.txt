@@ -84,6 +84,7 @@ ecm_generate_headers(oktetacore_LIB_CCHDRS
 
     Character
     ArrayChangeMetrics
+    ArrayChangeMetricsList
     ByteArrayChange
 
     Bookmark

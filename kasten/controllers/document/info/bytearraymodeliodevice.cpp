@@ -23,7 +23,7 @@
 #include "bytearraymodeliodevice.h"
 
 // Okteta core
-#include <abstractbytearraymodel.h>
+#include <okteta/abstractbytearraymodel.h>
 
 
 namespace Okteta

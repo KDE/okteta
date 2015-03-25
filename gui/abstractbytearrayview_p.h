@@ -32,8 +32,8 @@
 #include "controller/ktabcontroller.h"
 #include "offsetcolumnrenderer.h"
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <charcodec.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/charcodec.h>
 
 class QTimer;
 

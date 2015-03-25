@@ -27,7 +27,7 @@
 #include <bytearraytableranges.h>
 #include <bytearraytablecursor.h>
 #include <bytearraytablelayout.h>
-#include <wordbytearrayservice.h>
+#include <okteta/wordbytearrayservice.h>
 // Qt
 #include <QApplication>
 #include <QClipboard>

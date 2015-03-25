@@ -25,7 +25,7 @@
 // lib
 #include "bytearraytablelayout.h"
 // Okteta core
-#include <arraychangemetricslist.h>
+#include <okteta/arraychangemetricslist.h>
 
 
 namespace Okteta

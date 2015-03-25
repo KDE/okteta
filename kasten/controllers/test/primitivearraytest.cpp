@@ -21,7 +21,7 @@
 #include <QTest>
 #include <limits>
 
-#include <bytearraymodel.h>
+#include <okteta/bytearraymodel.h>
 
 #include "view/structures/datatypes/array/arraydatainformation.h"
 #include "view/structures/datatypes/array/primitivearraydata.h"

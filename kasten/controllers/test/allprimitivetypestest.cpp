@@ -21,7 +21,7 @@
 #include <QTest>
 #include <QScopedPointer>
 
-#include <bytearraymodel.h>
+#include <okteta/bytearraymodel.h>
 #include "view/structures/allprimitivetypes.h"
 
 class AllPrimitiveTypesTest : public QObject

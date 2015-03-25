@@ -28,10 +28,10 @@
 #include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
-#include <character.h>
-#include <charcodec.h>
-#include <abstractbytearraymodel.h>
-#include <changesdescribable.h>
+#include <okteta/character.h>
+#include <okteta/charcodec.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/changesdescribable.h>
 // KF5
 #include <KLocalizedString>
 

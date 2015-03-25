@@ -30,14 +30,14 @@
 // Kasten core
 #include <kasten/abstractmodel.h>
 // Okteta gui
-#include <offsetformat.h>
+#include <okteta/offsetformat.h>
 // Okteta core
-#include <wordbytearrayservice.h>
-#include <charcodec.h>
-#include <bookmarkable.h>
-#include <bookmarksconstiterator.h>
-#include <bookmark.h>
-#include <bytearraymodel.h>
+#include <okteta/wordbytearrayservice.h>
+#include <okteta/charcodec.h>
+#include <okteta/bookmarkable.h>
+#include <okteta/bookmarksconstiterator.h>
+#include <okteta/bookmark.h>
+#include <okteta/bytearraymodel.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KLocalizedString>
@@ -106,6 +106,7 @@ void BookmarksController::setTargetModel( AbstractModel* model )
     if( hasViewWithBookmarks )
     {
         bookmarksCount = mBookmarks->bookmarksCount();
+        // TODO: not PieceTableByteArrayModel ?
         if (auto asByteArraModel = qobject_cast<Okteta::ByteArrayModel*>(mByteArray) ) {
             connect( asByteArraModel, &Okteta::ByteArrayModel::bookmarksAdded,
                      this, &BookmarksController::onBookmarksAdded );

@@ -20,8 +20,8 @@
 
 #include <QTest>
 
-#include <bytearraymodel.h>
-#include <byte.h>
+#include <okteta/bytearraymodel.h>
+#include <okteta/byte.h>
 
 #include "testutils.h"
 

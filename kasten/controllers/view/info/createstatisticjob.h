@@ -24,7 +24,7 @@
 #define CREATESTATISTICJOB_H
 
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 // Qt
 #include <QObject>
 

@@ -28,7 +28,7 @@
 // Kasten core
 #include <kasten/abstractmodelstreamencoder.h>
 // Okteta core
-#include <addressrange.h>
+#include <okteta/addressrange.h>
 
 namespace Okteta {
 class AbstractByteArrayModel;

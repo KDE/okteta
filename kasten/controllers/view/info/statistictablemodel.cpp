@@ -23,9 +23,9 @@
 #include "statistictablemodel.h"
 
 // Okteta core
-#include <character.h>
-#include <charcodec.h>
-#include <valuecodec.h>
+#include <okteta/character.h>
+#include <okteta/charcodec.h>
+#include <okteta/valuecodec.h>
 // KF5
 #include <KLocalizedString>
 #include <KColorScheme>

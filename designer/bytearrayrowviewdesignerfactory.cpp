@@ -25,7 +25,7 @@
 // plugin
 #include "fillerbytearraymodel.h"
 // Okteta gui
-#include <bytearrayrowview.h>
+#include <okteta/bytearrayrowview.h>
 
 
 // TODO: add translations for visible names

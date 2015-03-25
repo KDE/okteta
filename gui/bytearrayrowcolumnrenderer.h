@@ -31,7 +31,7 @@
 // Okteta core
 #include <okteta/oktetacore.h>
 #include <okteta/abstractbytearraymodel.h>
-#include "character.h"
+#include <okteta/character.h>
 // Qt
 #include <QFontMetrics>
 

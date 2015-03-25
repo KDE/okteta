@@ -24,7 +24,7 @@
 #define CHARSETCONVERSIONVIEW_H
 
 // Okteta core
-#include <byte.h>
+#include <okteta/byte.h>
 // Qt
 #include <QWidget>
 

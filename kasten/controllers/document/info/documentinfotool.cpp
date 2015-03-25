@@ -30,8 +30,8 @@
 #include <kasten/abstractmodelsynchronizer.h>
 
 // Okteta core
-#include <abstractbytearraymodel.h>
-#include <arraychangemetricslist.h>
+#include <okteta/abstractbytearraymodel.h>
+#include <okteta/arraychangemetricslist.h>
 // KF5
 #include <KLocalizedString>
 // Qt
