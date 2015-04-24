@@ -39,14 +39,18 @@
 
 static const char TestDirectory[] = "testdocumentfile1synchronizertest";
 static const char TestFileName1[] = "test1.data";
+#if 0
 static const char TestFileName2[] = "test2.data";
 static const char NotExistingFileName[] = "not.existing";
 static const char FileProtocolName[] = "file://";
 static const char NotExistingUrlName[] = "not://existing";
+#endif
 static const char TestData1[] = "TestData1";
+#if 0
 static const char TestData2[] = "TestData2";
 static const char Header1[] = "Header1";
 static const char Header2[] = "Header2";
+#endif
 
 
 void TestDocumentFileSynchronizerFactoryTest::writeToFile( const QString &filePath, const QByteArray &data, const QByteArray &header  )

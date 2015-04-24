@@ -84,8 +84,6 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
 }
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 {
-    Q_Q( AbstractModelFileSystemSynchronizer );
-
     delete mNetworkConfigurationManager;
     mNetworkConfigurationManager = 0;
 }

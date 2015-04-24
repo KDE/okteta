@@ -46,8 +46,6 @@ static Coord End1(   Pos2, Line2 );
 static Coord Start2( Pos1, Line3 );
 static Coord End2(   Pos2, Line4 );
 
-static const Size BufferWidth = Pos2 + 5;
-
 
 void CoordRangeListTest::testSimpleConstructor()
 {

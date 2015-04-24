@@ -35,8 +35,6 @@ namespace Okteta
 static const Address Start = 15;
 static const Address End = 27;
 
-static const Size Width = End - Start + 1;
-
 
 void SelectionTest::testPlainConstructor()
 {

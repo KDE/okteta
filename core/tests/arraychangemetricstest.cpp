@@ -35,8 +35,6 @@ static const Address Offset = 15;
 
 static const Size LengthDiff = 5;
 static const Size InsertLength = 15;
-static const Size BiggerRemoveLength = InsertLength + LengthDiff;
-static const Size SameRemoveLength = InsertLength;
 static const Size SmallerRemoveLength = InsertLength - LengthDiff;
 
 static const Size FirstLength = 15;

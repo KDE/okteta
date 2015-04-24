@@ -37,16 +37,6 @@
 namespace KPieceTable
 {
 
-// local variables
-static const Address Start = 15;
-static const Address End = 27;
-
-static const Size Width = End - Start + 1;
-
-static const Address ChangeStart = 8;
-static const Address ChangeEnd = ChangeStart + Width - 1;
-
-
 void PieceTableChangeHistoryTest::testSimpleConstructor()
 {
     PieceTableChangeHistory pieceTableChangeHistory;

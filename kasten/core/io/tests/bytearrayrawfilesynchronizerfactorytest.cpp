@@ -42,7 +42,9 @@
 static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
 static const char TestFileName[] = "test.data";
 static const char NotExistingUrl[] = "notexisting://";
+#if 0
 static const char FileProtocolName[] = "file://";
+#endif
 static const int TestDataSize = 50;
 static const char TestDataChar = 0;
 

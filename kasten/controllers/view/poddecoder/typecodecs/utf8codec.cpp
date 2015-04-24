@@ -33,8 +33,6 @@
 
 namespace Okteta
 {
-static const unsigned char PrimitivesDefaultUndefinedChar = '?';
-
 
 Utf8Codec::Utf8Codec()
   : AbstractTypeCodec( i18nc("@label:textbox","UTF-8") ),
