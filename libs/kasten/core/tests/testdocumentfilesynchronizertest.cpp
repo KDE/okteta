@@ -51,7 +51,6 @@ static const char NotExistingUrlName[] = "not://existing";
 static const char TestData1[] = "TestData1";
 static const char TestData2[] = "TestData2";
 static const char Header1[] = "Header1";
-static const char Header2[] = "Header2";
 
 
 void TestDocumentFileSynchronizerTest::writeToFile( const QString& filePath, const QByteArray& data, const QByteArray& header )

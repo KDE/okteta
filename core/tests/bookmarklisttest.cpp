@@ -33,13 +33,10 @@ static const int Offset1 = 7;
 static const int Offset2 = 23;
 static const int Offset3 = 45;
 static const int Offset4 = 67;
-static const int Offset5 = 89;
 static const int Distance12 = Offset2 - Offset1;
 static const int Distance23 = Offset3 - Offset2;
 static const int Distance34 = Offset4 - Offset3;
-static const int Distance45 = Offset5 - Offset4;
 static const int Distance13 = Distance12 + Distance23;
-static const int Distance35 = Distance34 + Distance45;
 
 
 void BookmarkListTest::testSimpleConstructor()
