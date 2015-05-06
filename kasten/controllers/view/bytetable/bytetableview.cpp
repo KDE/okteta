@@ -88,7 +88,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     insertLayout->addWidget( mInsertCountEdit );
     const QString insertCountToolTip =
         i18nc( "@info:tooltip",
-               "The number with which the byte currently selected in the table will be inserted." );
+               "Number of repeats of the currently selected byte in the table to be inserted." );
     label->setToolTip( insertCountToolTip );
     mInsertCountEdit->setToolTip( insertCountToolTip );
 
@@ -101,7 +101,7 @@ ByteTableView::ByteTableView( ByteTableTool *tool, QWidget* parent )
     connect( mInsertButton, &QPushButton::clicked, this, &ByteTableView::onInsertClicked );
     const QString insertButtonToolTip =
         i18nc( "@info:tooltip",
-               "Inserts the byte currently selected in the table with the given number." );
+               "Insert the currently selected byte in the table repeated the given number of times." );
     mInsertButton->setToolTip( insertButtonToolTip );
     addButton( mInsertButton, AbstractToolWidget::Default );
     insertLayout->addWidget( mInsertButton );
