@@ -22,6 +22,7 @@
   <name xml:lang="pt">Okteta</name>
   <name xml:lang="pt-BR">Okteta</name>
   <name xml:lang="ro">Okteta</name>
+  <name xml:lang="ru">Okteta</name>
   <name xml:lang="sk">Okteta</name>
   <name xml:lang="sr">Октета</name>
   <name xml:lang="sr-Latn">Okteta</name>
@@ -50,6 +51,7 @@
   <summary xml:lang="pt">Editor hexadecimal</summary>
   <summary xml:lang="pt-BR">Editor hexadecimal</summary>
   <summary xml:lang="ro">Redactor hexazecimal</summary>
+  <summary xml:lang="ru">Шестнадцатеричный редактор</summary>
   <summary xml:lang="sk">Hex editor</summary>
   <summary xml:lang="sr">Хексадекадни уређивач</summary>
   <summary xml:lang="sr-Latn">Heksadekadni uređivač</summary>
@@ -76,6 +78,7 @@
     <p xml:lang="pl">Okteta to prosty edytor do przeglądania nieprzetworzonych danych plików.</p>
     <p xml:lang="pt">O Okteta é um editor simples para os dados em bruto dos ficheiros.</p>
     <p xml:lang="pt-BR">Okteta é um editor simples para os dados brutos dos arquivos.</p>
+    <p xml:lang="ru">Okteta — простой редактор двоичных файлов</p>
     <p xml:lang="sk">Okteta je jednoduchý editor na čisté údaje súborov.</p>
     <p xml:lang="sr">Октета је једноставан уређивач за сирове податке у фајловима.</p>
     <p xml:lang="sr-Latn">Okteta je jednostavan uređivač za sirove podatke u fajlovima.</p>
@@ -103,6 +106,7 @@
     <p xml:lang="pt">Funcionalidades:</p>
     <p xml:lang="pt-BR">Funcionalidades:</p>
     <p xml:lang="ro">Caracteristici:</p>
+    <p xml:lang="ru">Возможности:</p>
     <p xml:lang="sk">Funkcie:</p>
     <p xml:lang="sr">Могућности:</p>
     <p xml:lang="sr-Latn">Mogućnosti:</p>
@@ -129,6 +133,7 @@
       <li xml:lang="pl">Wartości i znaki są pokazywane albo w dwóch kolumnach (tradycyjne wyświetlanie w edytorach szesnastkowych) lub w wierszach z wartością nad znakiem</li>
       <li xml:lang="pt">Valores e respectivos caracteres apresentados em duas colunas (a aparência tradicional dos editores hexadecimais) ou em linhas com o valor no topo dos caracteres.</li>
       <li xml:lang="pt-BR">Valores e respectivos caracteres apresentados em duas colunas (a aparência tradicional dos editores hexadecimais) ou em linhas com o valor no topo dos caracteres</li>
+      <li xml:lang="ru">Расположение значений и символов либо в двух столбцах (как в большинстве шестнадцатеричных редакторов), либо в строках со значениями над символами</li>
       <li xml:lang="sk">Hodnoty a znaky zobrazené buď vo dvoch stĺpcoch (tradičné zobrazenie v hex editoroch) alebo v riadkoch s hodnotou nad znakom</li>
       <li xml:lang="sr">Приказ вредности и знакова или у две колоне (традиционално за хексадекадне уређиваче) или по врстама са вредношћу над знаком.</li>
       <li xml:lang="sr-Latn">Prikaz vrednosti i znakova ili u dve kolone (tradicionalno za heksadekadne uređivače) ili po vrstama sa vrednošću nad znakom.</li>
@@ -153,6 +158,7 @@
       <li xml:lang="pl">Edytowanie i poruszanie się po programie podobnie jak w edytorach tekstowych</li>
       <li xml:lang="pt">Edição e navegação semelhantes a um editor de texto</li>
       <li xml:lang="pt-BR">Edição e navegação semelhantes a um editor de texto</li>
+      <li xml:lang="ru">Редактирование и навигация приближена к интерфейсу текстового редактора</li>
       <li xml:lang="sk">Úprava a navigácia podobná ako v textovom editore</li>
       <li xml:lang="sr">Уређивање и кретање слично уређивачу текста.</li>
       <li xml:lang="sr-Latn">Uređivanje i kretanje slično uređivaču teksta.</li>
@@ -177,6 +183,7 @@
       <li xml:lang="pl">Własne widoki danych wraz z możliwością wczytywania i zachowywania profili</li>
       <li xml:lang="pt">Vistas de dados personalizadas, com perfis que podem ser carregados e gravados</li>
       <li xml:lang="pt-BR">Modos de exibição de dados personalizados, com perfis que podem ser gravados e carregados</li>
+      <li xml:lang="ru">Настраиваемые панели просмотра данных с возможностью сохранения и загрузки профилей</li>
       <li xml:lang="sk">Prispôsobiteľné pohľady údajov s načítateľnými a uložiteľnými profilmi</li>
       <li xml:lang="sr">Прилагодљиви прикази података, уписивање и учитавање профила.</li>
       <li xml:lang="sr-Latn">Prilagodljivi prikazi podataka, upisivanje i učitavanje profila.</li>
@@ -201,6 +208,7 @@
       <li xml:lang="pl">Narzędzia pływające lub z możliwością dokowania na wszystkich stronach</li>
       <li xml:lang="pt">Ferramentas acopláveis a todos os lados ou flutuantes</li>
       <li xml:lang="pt-BR">Ferramentas acopláveis em todos os lados ou flutuantes</li>
+      <li xml:lang="ru">Перемещаемые панели</li>
       <li xml:lang="sk">Nástroje uchytiteľné na všetkých stranách alebo plávajúce</li>
       <li xml:lang="sr">Алатке усидриве уз било коју страну, или плутајуће.</li>
       <li xml:lang="sr-Latn">Alatke usidrive uz bilo koju stranu, ili plutajuće.</li>
@@ -225,6 +233,7 @@
       <li xml:lang="pl">Kodowania numeryczne: szesnastkowe, dziesiętne, ósemkowe, dwójkowe</li>
       <li xml:lang="pt">Codificações numéricas: Hexadecimal, Decimal, Octal, Binário</li>
       <li xml:lang="pt-BR">Codificações numéricas: Hexadecimal, Decimal, Octal e Binário</li>
+      <li xml:lang="ru">Поддержка шестнадцатеричной, десятичной, восьмеричной и двоичной записи чисел</li>
       <li xml:lang="sk">Numerické kódovania: hexadecimálne, decimálne, osmičkové a binárne</li>
       <li xml:lang="sr">Бројевна кодирања: хексадекадно, декадно, октално, бинарно.</li>
       <li xml:lang="sr-Latn">Brojevna kodiranja: heksadekadno, dekadno, oktalno, binarno.</li>
@@ -249,6 +258,7 @@
       <li xml:lang="pl">Kodowania znakowe: wszystkie 8-bitowe kodowania dostarczone przez Qt, EBCDIC</li>
       <li xml:lang="pt">Codificações de caracteres: Todas as codificações de 8 bits suportadas pelo Qt, EBCDIC</li>
       <li xml:lang="pt-BR">Codificações de caracteres: Todas as codificações de 8 bits suportadas pelo Qt, EBCDIC</li>
+      <li xml:lang="ru">Поддерживаются все 8-битные кодировки символов, имеющиеся в Qt, а также EBCDIC</li>
       <li xml:lang="sk">Kódovania znakov: všetky 8-bitové kódovania v Qt, EBCDIC</li>
       <li xml:lang="sr">Знаковна кодирања: сва осмобитна кодирања подржана КуТ‑ом, и ЕБЦДИЦ.</li>
       <li xml:lang="sr-Latn">Znakovna kodiranja: sva osmobitna kodiranja podržana Qt‑om, i EBCDIC.</li>
@@ -273,6 +283,7 @@
       <li xml:lang="pl">Szybkie wyświetlane danych na ekranie</li>
       <li xml:lang="pt">Apresentação rápida dos dados no ecrã</li>
       <li xml:lang="pt-BR">Apresentação rápida dos dados na tela</li>
+      <li xml:lang="ru">Быстрый показ данных на экране</li>
       <li xml:lang="sk">Rýchle zobrazovanie údajov na obrazovke</li>
       <li xml:lang="sr">Брзо рендеровање података на екрану.</li>
       <li xml:lang="sr-Latn">Brzo renderovanje podataka na ekranu.</li>
@@ -298,6 +309,7 @@
       <li xml:lang="pl">Otwieranie wielu plików</li>
       <li xml:lang="pt">Diversos ficheiros abertos</li>
       <li xml:lang="pt-BR">Diversos arquivos abertos</li>
+      <li xml:lang="ru">Работа с несколькими файлами в одном окне</li>
       <li xml:lang="sk">Otváranie viacerých súborov</li>
       <li xml:lang="sr">Више отворених фајлова.</li>
       <li xml:lang="sr-Latn">Više otvorenih fajlova.</li>
@@ -323,6 +335,7 @@
       <li xml:lang="pl">Obsługa cofnij/ponów</li>
       <li xml:lang="pt">Suporte para desfazer/refazer</li>
       <li xml:lang="pt-BR">Suporte para desfazer/refazer</li>
+      <li xml:lang="ru">Отмена и возврат действий</li>
       <li xml:lang="sk">Podpora Späť/Znova</li>
       <li xml:lang="sr">Опозивање и понављање.</li>
       <li xml:lang="sr-Latn">Opozivanje i ponavljanje.</li>
@@ -347,6 +360,7 @@
       <li xml:lang="pl">Narzędzie struktur do analizowania i edytowania na podstawie definicji struktur tworzonych przez użytkownika</li>
       <li xml:lang="pt">Ferramenta de estruturas para analisar e editar com base em definições de estruturas criadas pelo utilizador</li>
       <li xml:lang="pt-BR">Ferramenta de estruturas para análise e edição com base em definições de estruturas criadas pelo usuário</li>
+      <li xml:lang="ru">Инструмент для работы со структурами данных, вы можете сами создавать определения для новых структур данных</li>
       <li xml:lang="sk">Nástroj štruktúr na analýzu a úpravu založený na používateľom vytvoriteľných definíciách štruktúr</li>
       <li xml:lang="sr">Алатка структура за анализирање и уређивање на основу кориснички задатих дефиниција структура.</li>
       <li xml:lang="sr-Latn">Alatka struktura za analiziranje i uređivanje na osnovu korisnički zadatih definicija struktura.</li>
@@ -374,6 +388,7 @@
       <li xml:lang="pt">E mais...</li>
       <li xml:lang="pt-BR">E mais...</li>
       <li xml:lang="ro">Și altele...</li>
+      <li xml:lang="ru">И многое другое...</li>
       <li xml:lang="sk">A viac...</li>
       <li xml:lang="sr">И више...</li>
       <li xml:lang="sr-Latn">I više...</li>
