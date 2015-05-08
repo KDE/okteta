@@ -5,6 +5,7 @@
   <project_license>GPL-2.0</project_license>
   <project_license>GPL-3.0</project_license>
   <name>Okteta</name>
+  <name xml:lang="ast">Okteta</name>
   <name xml:lang="bs">Okteta</name>
   <name xml:lang="ca">Okteta</name>
   <name xml:lang="cs">Okteta</name>
@@ -35,6 +36,7 @@
   <name xml:lang="zh-CN">Okteta</name>
   <name xml:lang="zh-TW">Okteta</name>
   <summary>Hex editor</summary>
+  <summary xml:lang="ast">Editor hexadecimal</summary>
   <summary xml:lang="bs">Heksadekadni editor</summary>
   <summary xml:lang="ca">Editor hexadecimal</summary>
   <summary xml:lang="cs">Hexa editor</summary>
@@ -90,6 +92,7 @@
     <p xml:lang="x-test">xxOkteta is a simple editor for the raw data of files.xx</p>
     <p xml:lang="zh-TW">Okteta 是一套編輯檔案原始資料的簡易編輯器。</p>
     <p>Features:</p>
+    <p xml:lang="ast">Carauterístiques:</p>
     <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
@@ -120,6 +123,7 @@
     <p xml:lang="zh-TW">功能：</p>
     <ul>
       <li>Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
+      <li xml:lang="ast">Los valores y caráuteres amuésense dambos en dos columnes (l'amosanza tradicional nos editores hexadecimales) o en fileres col valor enriba'l caráuter</li>
       <li xml:lang="ca">Els valors i el caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
       <li xml:lang="de">Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden</li>
       <li xml:lang="en-GB">Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
@@ -270,6 +274,7 @@
       <li xml:lang="x-test">xxCharacter encodings: All 8-bit encodings as supplied by Qt, EBCDICxx</li>
       <li xml:lang="zh-TW">字元編碼：所有 Qt 與 EBCDIC 5 支援的八位元編碼方式</li>
       <li>Fast data rendering on screen</li>
+      <li xml:lang="ast">Renderizáu de datos rápidu na pantalla</li>
       <li xml:lang="ca">Renderització ràpida de dades en la pantalla</li>
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
       <li xml:lang="en-GB">Fast data rendering on screen</li>
@@ -372,6 +377,7 @@
       <li xml:lang="x-test">xxStructures tool for analyzing and editing based on user-creatable structure definitionsxx</li>
       <li xml:lang="zh-TW">基於使用者建立的結構定義做分析與編輯的工具</li>
       <li>And more...</li>
+      <li xml:lang="ast">Y más...</li>
       <li xml:lang="bs">i još %1</li>
       <li xml:lang="ca">I més...</li>
       <li xml:lang="cs">A další...</li>
