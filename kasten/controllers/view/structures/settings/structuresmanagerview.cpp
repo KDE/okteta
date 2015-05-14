@@ -42,7 +42,6 @@
 #include <QLayout>
 #include <QSizePolicy>
 
-static const int FileNameRole = Qt::UserRole;
 
 StructuresManagerView::StructuresManagerView(Kasten::StructTool* tool, QWidget* parent)
     : QWidget(parent), mTool(tool), mStructuresSelector(0), mRebuildingPluginsList(false)

@@ -30,9 +30,6 @@
 #include <QListIterator>
 
 
-static const int DefaultSingleStep = 20;
-
-
 class AbstractColumnFrameRendererPrivate
 {
   public:
