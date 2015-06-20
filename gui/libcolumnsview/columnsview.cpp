@@ -177,18 +177,26 @@ void ColumnsView::updateScrollBars()
 {
     QSize viewSize = maximumViewportSize();
 
-    const bool needsVerticalBar = ( columnsHeight() > viewSize.height() );
-    const bool needsHorizontalBar = ( columnsWidth() > viewSize.width() );
     const int scrollBarWidth = style()->pixelMetric( QStyle::PM_ScrollBarExtent );
+    const PixelY usedHeight = columnsHeight();
+    const PixelX usedWidth = columnsWidth();
 
-    if( needsVerticalBar )
+    const bool needsVerticalBarDefinitely = ( usedHeight > viewSize.height() );
+    const bool needsHorizontalBarDefinitely = ( usedWidth > viewSize.width() );
+
+    if( needsVerticalBarDefinitely )
         viewSize.rwidth() -= scrollBarWidth;
-    if( needsHorizontalBar )
+    if( needsHorizontalBarDefinitely )
+        viewSize.rheight() -= scrollBarWidth;
+    // check again if bars are not needed now
+    if( !needsVerticalBarDefinitely && usedHeight > viewSize.height() )
+        viewSize.rwidth() -= scrollBarWidth;
+    if( !needsHorizontalBarDefinitely && usedWidth > viewSize.width() )
         viewSize.rheight() -= scrollBarWidth;
 
-    verticalScrollBar()->setRange( 0, columnsHeight()-viewSize.height() );
+    verticalScrollBar()->setRange( 0, usedHeight-viewSize.height() );
     verticalScrollBar()->setPageStep( viewSize.height() );
-    horizontalScrollBar()->setRange( 0, columnsWidth()-viewSize.width() );
+    horizontalScrollBar()->setRange( 0, usedWidth-viewSize.width() );
     horizontalScrollBar()->setPageStep( viewSize.width() );
 }
 
