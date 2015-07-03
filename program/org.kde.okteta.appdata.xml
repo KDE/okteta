@@ -69,6 +69,7 @@
   <summary xml:lang="zh-TW">十六進位資料編輯器</summary>
   <description>
     <p>Okteta is a simple editor for the raw data of files.</p>
+    <p xml:lang="ast">Okteta ye un editor cenciellu pa ficheros de datos en brutu.</p>
     <p xml:lang="ca">L'Okteta és un editor senzill per les dades de fitxers.</p>
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
     <p xml:lang="en-GB">Okteta is a simple editor for the raw data of files.</p>
@@ -154,6 +155,7 @@
       <li xml:lang="x-test">xxValues and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the characterxx</li>
       <li xml:lang="zh-TW">數值與字元可以用兩個欄位（傳統十六進制資料編輯的方式）顯示，或是在一列中將數值顯示在字元上方。</li>
       <li>Editing and navigating similar to a text editor</li>
+      <li xml:lang="ast">Edición y navegación similiar a un editor de testu</li>
       <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="de">Bearbeiten und navigieren ähnlich wie in einem Texteditor</li>
       <li xml:lang="en-GB">Editing and navigating similar to a text editor</li>
@@ -180,6 +182,7 @@
       <li xml:lang="x-test">xxEditing and navigating similar to a text editorxx</li>
       <li xml:lang="zh-TW">編輯與導覽類似一般文字編輯器</li>
       <li>Customizable data views, with loadable and storable profiles</li>
+      <li xml:lang="ast">Vistes de datos personalizaos, con perfiles que puen cargase y atrosaxe</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
       <li xml:lang="en-GB">Customisable data views, with loadable and storable profiles</li>
@@ -206,6 +209,7 @@
       <li xml:lang="x-test">xxCustomizable data views, with loadable and storable profilesxx</li>
       <li xml:lang="zh-TW">客製化的資料檢視，可載入並儲存設定檔</li>
       <li>Tools dockable on all sides or floating</li>
+      <li xml:lang="ast">Ferramientes que puen flotar o anclase en tolos llaos</li>
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
       <li xml:lang="de">Werkzeuge können an allen Seiten verankert oder freischwebend benutzt werden</li>
       <li xml:lang="en-GB">Tools dockable on all sides or floating</li>
@@ -232,6 +236,7 @@
       <li xml:lang="x-test">xxTools dockable on all sides or floatingxx</li>
       <li xml:lang="zh-TW">工具可以嵌在每一個側邊，或是浮出來</li>
       <li>Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
+      <li xml:lang="ast">Codificaciones numbériques: Hexadecimal, decimal, octal, binariu</li>
       <li xml:lang="ca">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
       <li xml:lang="en-GB">Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
@@ -258,6 +263,7 @@
       <li xml:lang="x-test">xxNumerical encodings: Hexadecimal, Decimal, Octal, Binaryxx</li>
       <li xml:lang="zh-TW">數值編碼：十六進制，十進制，八進制或二進制</li>
       <li>Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
+      <li xml:lang="ast">Codificación de caráuteres: tola codificación en 8-bits apúrrese pente Qt, EBCDIC</li>
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="de">Zeichenkodierungen: Alle Kodierungen, die von Qt und EBCDIC unterstützt werden</li>
       <li xml:lang="en-GB">Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
@@ -311,6 +317,7 @@
       <li xml:lang="x-test">xxFast data rendering on screenxx</li>
       <li xml:lang="zh-TW">快速螢幕資料繪制</li>
       <li>Multiple open files</li>
+      <li xml:lang="ast">Apertura múltiple de ficheros</li>
       <li xml:lang="ca">Múltiples fitxers oberts</li>
       <li xml:lang="cs">Otevření více souborů</li>
       <li xml:lang="de">Mehrere geöffnete Dateien</li>
@@ -338,6 +345,7 @@
       <li xml:lang="x-test">xxMultiple open filesxx</li>
       <li xml:lang="zh-TW">可開啟多個檔案</li>
       <li>Undo/redo support</li>
+      <li xml:lang="ast">Sofitu de desfechura/refechura</li>
       <li xml:lang="bs">Podrška za poništavanje/ponavljanje akcija</li>
       <li xml:lang="ca">Implementació de desfer/refer</li>
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
@@ -365,6 +373,7 @@
       <li xml:lang="x-test">xxUndo/redo supportxx</li>
       <li xml:lang="zh-TW">復原/重做支援</li>
       <li>Structures tool for analyzing and editing based on user-creatable structure definitions</li>
+      <li xml:lang="ast">Ferraminetes de cadarma pal analís y edición da</li>
       <li xml:lang="ca">Eina d'estructures per analitzar i editar basada en definicions d'estructures que pot crear l'usuari</li>
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
       <li xml:lang="en-GB">Structures tool for analysing and editing based on user-creatable structure definitions</li>
