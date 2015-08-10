@@ -8,7 +8,10 @@ set( okteta_SRCS
 )
 
 ecm_add_app_icon(okteta_SRCS
-  ICONS 16-apps-okteta.png  32-apps-okteta.png  48-apps-okteta.png
+  ICONS
+    ${CMAKE_CURRENT_SOURCE_DIR}/16-apps-okteta.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/32-apps-okteta.png
+    ${CMAKE_CURRENT_SOURCE_DIR}/48-apps-okteta.png
 )
 
 add_executable( okteta  ${okteta_SRCS} )
