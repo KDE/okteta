@@ -29,7 +29,7 @@
 namespace Kasten
 {
 
-class AbstractSelectionView::Private
+class Q_DECL_HIDDEN AbstractSelectionView::Private
 {
   public:
     explicit Private( AbstractSelectionView* view );

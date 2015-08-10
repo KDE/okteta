@@ -26,7 +26,7 @@
 namespace Kasten
 {
 
-class AbstractTool::Private
+class Q_DECL_HIDDEN AbstractTool::Private
 {
   public:
     explicit Private( AbstractTool* tool );

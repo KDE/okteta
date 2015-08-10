@@ -34,7 +34,7 @@
 namespace Kasten
 {
 
-class Person::Private : public QSharedData
+class Q_DECL_HIDDEN Person::Private : public QSharedData
 {
   public:
     Private( const QString& name, const QIcon& faceIcon );

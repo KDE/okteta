@@ -29,7 +29,7 @@
 namespace Kasten
 {
 
-class AbstractToolView::Private
+class Q_DECL_HIDDEN AbstractToolView::Private
 {
   public:
     explicit Private( AbstractToolView* view );

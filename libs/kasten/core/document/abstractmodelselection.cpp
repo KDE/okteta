@@ -26,7 +26,7 @@
 namespace Kasten
 {
 
-class AbstractModelSelection::Private
+class Q_DECL_HIDDEN AbstractModelSelection::Private
 {
 };
 
