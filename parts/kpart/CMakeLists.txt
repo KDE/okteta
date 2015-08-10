@@ -27,6 +27,6 @@ install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
 kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop )
 install(
   FILES oktetapartreadonlyui.rc oktetapartbrowserui.rc oktetapartreadwriteui.rc
-  DESTINATION ${DATA_INSTALL_DIR}/oktetapart
+  DESTINATION ${KXMLGUI_INSTALL_DIR}/oktetapart
 )
 
