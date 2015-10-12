@@ -60,7 +60,7 @@ qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input,
     const quint32 maxNumItems = qMin(this->length(), maxRemaining32);
     if (maxNumItems == 0)
         return -1; //reached EOF
-    const QSysInfo::Endian byteOrder = AbstractArrayData::mParent->effectiveByteOrder();
+    const QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
     if (byteOrder == QSysInfo::ByteOrder)
         this->readDataNativeOrder(maxNumItems, input, address);
     else
@@ -114,7 +114,7 @@ bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::Ab
                 << bitsRemaining << ") need " << ((row + 1) * sizeof(T) * 8);
         return false;
     }
-    QSysInfo::Endian byteOrder =  AbstractArrayData::mParent->effectiveByteOrder();
+    QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
     bool littleEndian = byteOrder == QSysInfo::LittleEndian;
     bool ok = false;
     T convertedVal = DisplayClass::fromVariant(value, &ok);
@@ -177,6 +177,18 @@ void PrimitiveArrayData<Type_Double>::writeOneItem(double value, Okteta::Address
 }
 
 template<PrimitiveDataTypeEnum type>
+void PrimitiveArrayData<type>::activateIndex(uint index)
+{
+    Q_ASSERT(index < length());
+    //invalidate all previous references
+    SafeReferenceHolder::instance.invalidateAll(mChildType.data());
+    mChildType->mWasAbleToRead = mNumReadValues > index;
+    mChildType->asPrimitive()->setValue(mData.at(index));
+    mChildType->setName(QString::number(index));
+    mDummy.setDummyIndex(index);
+}
+
+template<PrimitiveDataTypeEnum type>
 QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
 {
     Q_ASSERT(index < length());
@@ -185,14 +197,17 @@ QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
         if (column == DataInformation::ColumnName)
             return QString(QLatin1Char('[') + QString::number(index) + QLatin1Char(']'));
         if (column == DataInformation::ColumnType)
-            return PrimitiveType::typeName(type);
+            return mChildType->typeName();
         if (column == DataInformation::ColumnValue)
         {
             //if we are outside the valid range
             if (uint(index) >= this->mNumReadValues)
                 return DataInformation::eofReachedData(Qt::DisplayRole);
-            else
-                return DisplayClass::staticValueString(mData.at(index));
+            if (Q_UNLIKELY(mChildType->toStringFunction().isValid())) {
+                activateIndex(index);
+                return mChildType->valueString();
+            }
+            return DisplayClass::staticValueString(mData.at(index));
         }
     }
     if (column == DataInformation::ColumnValue && uint(index) >= this->mNumReadValues)
@@ -203,7 +218,7 @@ QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
 template<PrimitiveDataTypeEnum type>
 QString PrimitiveArrayData<type>::typeName() const
 {
-    return QString(PrimitiveType::typeName(type) + QLatin1Char('[')
+    return QString(mChildType->typeName() + QLatin1Char('[')
             + QString::number(this->length()) + QLatin1Char(']'));
 }
 
@@ -221,15 +236,8 @@ int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
 template<PrimitiveDataTypeEnum type>
 QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
-    Q_ASSERT(index < length());
-    //invalidate all previous references
-    SafeReferenceHolder::instance.invalidateAll(mChildType.data());
-    mChildType->mWasAbleToRead = this->mNumReadValues > index;
-    mChildType->asPrimitive()->setValue(this->mData.at(index));
-    mChildType->setName(QString::number(index));
-    mDummy.setDummyIndex(index);
+    activateIndex(index);
     return mChildType->toScriptValue(engine, handlerInfo);
-
 }
 
 template<PrimitiveDataTypeEnum type>

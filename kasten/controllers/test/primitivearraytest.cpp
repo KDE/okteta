@@ -19,6 +19,7 @@
  */
 
 #include <QTest>
+#include <QtScript/QScriptEngine>
 #include <limits>
 
 #include <okteta/bytearraymodel.h>
@@ -35,6 +36,8 @@ class PrimitiveArrayTest : public QObject
 Q_OBJECT
 
 private:
+    /** Tests user defined overrides of byteOrder, typeName, and toStringFunc. */
+    template<PrimitiveDataTypeEnum primType, typename T> void testReadCustomizedPrimitiveInternal();
     template<PrimitiveDataTypeEnum primType, typename T> void testReadPrimitiveInternal();
     template<PrimitiveDataTypeEnum primType> void testReadPrimitive();
     template<typename T> bool compareItems(T first, T second, uint index);
@@ -60,17 +63,22 @@ private Q_SLOTS:
 private:
     QScopedArrayPointer<Okteta::Byte> data;
     QScopedPointer<Okteta::ByteArrayModel> model;
+    QScopedArrayPointer<Okteta::Byte> endianData;
+    QScopedPointer<Okteta::ByteArrayModel> endianModel;
 };
 
 #if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
 #define CURRENT_BYTE_ORDER (DataInformation::EndianessLittle)
+#define NON_CURRENT_BYTE_ORDER (DataInformation::EndianessBig)
 #elif Q_BYTE_ORDER == Q_BIG_ENDIAN
 #define CURRENT_BYTE_ORDER (DataInformation::EndianessBig)
+#define NON_CURRENT_BYTE_ORDER (DataInformation::EndianessLittle)
 #else
 #error unknown byte order
 #endif
 
 static const uint SIZE = 8192;
+static const uint ENDIAN_SIZE = 16;
 
 void PrimitiveArrayTest::initTestCase()
 {
@@ -100,6 +108,17 @@ void PrimitiveArrayTest::initTestCase()
     model.reset(new Okteta::ByteArrayModel(copy, SIZE));
     model->setAutoDelete(true);
     QCOMPARE(model->size(), Okteta::Size(SIZE));
+
+    endianData.reset(new Okteta::Byte[ENDIAN_SIZE]);
+    for (uint i = 0; i < ENDIAN_SIZE; ++i)
+    {
+        endianData[i] = i;
+    }
+    Okteta::Byte* endianCopy = new Okteta::Byte[SIZE];
+    memcpy(endianCopy, endianData.data(), ENDIAN_SIZE);
+    endianModel.reset(new Okteta::ByteArrayModel(endianCopy, ENDIAN_SIZE));
+    endianModel->setAutoDelete(true);
+    QCOMPARE(endianModel->size(), Okteta::Size(ENDIAN_SIZE));
 }
 
 template<typename T>
@@ -167,6 +186,64 @@ template<PrimitiveDataTypeEnum primType>
 inline void PrimitiveArrayTest::testReadPrimitive()
 {
     testReadPrimitiveInternal<primType, typename PrimitiveInfo<primType>::valueType>();
+    testReadCustomizedPrimitiveInternal<primType, typename PrimitiveInfo<primType>::valueType>();
+}
+
+QScriptValue customToStringFunc(QScriptContext *context, QScriptEngine *engine)
+{
+    Q_UNUSED(context);
+    Q_UNUSED(engine);
+    return QStringLiteral("myvalue");
+}
+
+template<PrimitiveDataTypeEnum primType, typename T>
+void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
+{
+    LoggerWithContext lwc(0, QString());
+    QScriptEngine* engine = ScriptEngineInitializer::newEngine();
+
+    PrimitiveDataInformation* primInfo(PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
+    primInfo->setByteOrder(NON_CURRENT_BYTE_ORDER);
+    primInfo->setCustomTypeName(QStringLiteral("mytype"));
+    primInfo->setToStringFunction(engine->newFunction(customToStringFunc));
+
+    ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
+            endianModel->size() / sizeof(T),
+            primInfo);
+    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, 0, engine));
+
+    QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
+    quint8 bitOffs = 0;
+    qint64 result = dataInf->readData(endianModel.data(), 0, endianModel->size() * 8, &bitOffs);
+    QCOMPARE(Okteta::Size(result), endianModel->size() * 8);
+    T* dataAsT = reinterpret_cast<T*>(endianData.data());
+    QVERIFY(!dataInf->mData->isComplex());
+    PrimitiveArrayData<primType>* arrayData =
+            static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
+
+    // Verify byteOrder of values. The data is set up without palindromes.
+    if (sizeof(T) > 1) {
+        for (uint i = 0; i < dataInf->childCount(); ++i)
+        {
+            AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
+            T childData = childDataAll.value<T>();
+            T expected = dataAsT[i];
+            //TODO comparison for float and double: nan != nan
+            if (compareItems<T>(childData, expected, i))
+            {
+                QByteArray desc = "i=" + QByteArray::number(i) + ", model[i]="
+                        + QByteArray::number(childData)
+                        + ", data[i]=" + QByteArray::number(expected);
+                QVERIFY2(!compareItems<T>(childData, expected, i), desc.constData());
+            }
+        }
+    }
+    // Verify typeName as the user will see it.
+    QCOMPARE(arrayData->dataAt(0, DataInformation::ColumnType, Qt::DisplayRole).toString(),
+             QStringLiteral("mytype"));
+    // Verify value string as the user will see it.
+    QCOMPARE(arrayData->dataAt(0, DataInformation::ColumnValue, Qt::DisplayRole).toString(),
+             QStringLiteral("myvalue"));
 }
 
 template<PrimitiveDataTypeEnum primType, typename T>

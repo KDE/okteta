@@ -69,6 +69,8 @@ public:
 
     static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, bool littleEndian);
 protected:
+    /** sets mChildType and mDummy as @p index, which must have been checked before calling this method!! */
+    void activateIndex(uint index);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
     void readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
