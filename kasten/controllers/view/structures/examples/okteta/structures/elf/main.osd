@@ -118,7 +118,7 @@
 			</array>
 		</pointer>
 		<pointer name="e_shoff" type="UInt32">
-			<array name="Section headers" length="function(root) { return root.e_phnum.value; }">
+			<array name="Section headers" length="function(root) { return root.e_shnum.value; }">
 				<struct name="Elf32_Shdr">
 					<primitive name="sh_name" type="UInt32" />
 					<primitive name="sh_type" type="UInt32" />
