@@ -6,6 +6,7 @@ ServiceTypes=KPluginInfo
 
 Name=VHD test
 Name[ca]=Prova el VHD
+Name[ca@valencia]=Prova el VHD
 Name[cs]=Test VHD
 Name[da]=VHD-test
 Name[de]=VHD-Test
