@@ -89,6 +89,7 @@ int OktetaProgram::execute()
 
     OktetaAboutData aboutData;
     KAboutData::setApplicationData( aboutData );
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("okteta")));
 
     KDBusService programDBusService;
 
