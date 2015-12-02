@@ -52,6 +52,7 @@
 #include <QCommandLineParser>
 #include <QList>
 #include <QUrl>
+#include <QDir>
 #include <QLoggingCategory>
 
 namespace Kasten
@@ -156,7 +157,9 @@ int OktetaProgram::execute()
             const QRegExp withProtocolChecker( QStringLiteral("^[a-zA-Z]+:") );
             foreach (const QString &url, urls) {
                 const QUrl u = (withProtocolChecker.indexIn(url) == 0) ?
-                    QUrl::fromUserInput( url ) : QUrl::fromLocalFile( url );
+                    QUrl::fromUserInput( url ) :
+                    QUrl::fromLocalFile(QDir::current().absoluteFilePath(url));
+
                 mDocumentStrategy->load( u );
             }
         }
