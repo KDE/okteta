@@ -574,7 +574,6 @@ set( okteta_kastencontrollers_LIB_HDRS
 #   ${overwriteonlycontroller_HDRS}
   ${overwritemodecontroller_HDRS}
   ${documentinfocontroller_HDRS}
-  ${libchecksum_HDRS}
   ${checksumcontroller_HDRS}
   ${stringsextractcontroller_HDRS}
   ${bytetablecontroller_HDRS}
@@ -582,7 +581,6 @@ set( okteta_kastencontrollers_LIB_HDRS
   ${libfinddialog_HDRS}
   ${searchcontroller_HDRS}
   ${replacecontroller_HDRS}
-  ${libfilter_HDRS}
   ${filtercontroller_HDRS}
   ${charsetconversiontool_HDRS}
   ${gotooffsetcontroller_HDRS}
@@ -602,7 +600,6 @@ set( okteta_kastencontrollers_LIB_CCHDRS
 #   ${overwriteonlycontroller_CCHDRS}
   ${overwritemodecontroller_CCHDRS}
   ${documentinfocontroller_CCHDRS}
-  ${libchecksum_CCHDRS}
   ${checksumcontroller_CCHDRS}
   ${stringsextractcontroller_CCHDRS}
   ${bytetablecontroller_CCHDRS}
@@ -610,7 +607,6 @@ set( okteta_kastencontrollers_LIB_CCHDRS
   ${libfinddialog_CCHDRS}
   ${searchcontroller_CCHDRS}
   ${replacecontroller_CCHDRS}
-  ${libfilter_CCHDRS}
   ${filtercontroller_CCHDRS}
   ${charsetconversiontool_CCHDRS}
   ${gotooffsetcontroller_CCHDRS}
