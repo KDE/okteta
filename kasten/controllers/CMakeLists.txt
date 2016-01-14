@@ -134,10 +134,10 @@ oktetakastencontrollers_generate_headers(checksumcontroller view/checksum
   ChecksumToolViewFactory
 )
 
-set( FINDDIALOG_LIB_SRCS
+set( LIBFINDDIALOG_SRCS
   view/libfinddialog/kabstractfinddialog.cpp
 )
-oktetakastencontrollers_generate_headers(FINDDIALOG_LIB view/libfinddialog
+oktetakastencontrollers_generate_headers(libfinddialog view/libfinddialog
   KFindDirection
 )
 
@@ -524,7 +524,7 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
   ${STRINGSEXTRACTCONTROLLER_SRCS}
   ${BYTETABLECONTROLLER_SRCS}
   ${INFOCONTROLLER_SRCS}
-  ${FINDDIALOG_LIB_SRCS}
+  ${LIBFINDDIALOG_SRCS}
   ${SEARCHCONTROLLER_SRCS}
   ${REPLACECONTROLLER_SRCS}
   ${LIBFILTER_SRCS}
@@ -579,7 +579,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   ${stringsextractcontroller_HDRS}
   ${bytetablecontroller_HDRS}
   ${infocontroller_HDRS}
-  ${finddialog_lib_HDRS}
+  ${libfinddialog_HDRS}
   ${searchcontroller_HDRS}
   ${replacecontroller_HDRS}
   ${libfilter_HDRS}
@@ -607,7 +607,7 @@ set( okteta_kastencontrollers_LIB_CCHDRS
   ${stringsextractcontroller_CCHDRS}
   ${bytetablecontroller_CCHDRS}
   ${infocontroller_CCHDRS}
-  ${finddialog_lib_CCHDRS}
+  ${libfinddialog_CCHDRS}
   ${searchcontroller_CCHDRS}
   ${replacecontroller_CCHDRS}
   ${libfilter_CCHDRS}
