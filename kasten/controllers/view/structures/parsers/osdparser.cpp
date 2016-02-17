@@ -306,7 +306,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
 DataInformation* OsdParser::parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
 {
     OsdParserInfo newInfo(info);
-    //instanciate a dummy so that a propert chain up to the root element exists
+    //instantiate a dummy so that a propert chain up to the root element exists
     DummyDataInformation dummy(info.parent, info.name);
     newInfo.parent = &dummy;
     newInfo.name = name;
