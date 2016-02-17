@@ -19,7 +19,7 @@
  */
 
 #include <QTest>
-#include <QtScript/QScriptEngine>
+#include <QScriptEngine>
 #include <limits>
 
 #include <okteta/bytearraymodel.h>
