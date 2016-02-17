@@ -50,7 +50,6 @@ public:
      *      (passed by value so nothing bad can happen)
      */
     explicit StructureDefinitionFile(KPluginInfo info);
-    StructureDefinitionFile(StructureDefinitionFile& f);
     virtual ~StructureDefinitionFile();
 
     QVector<TopLevelDataInformation*> structures() const;
