@@ -38,7 +38,7 @@ class ByteArrayRawFileReloadJob : public AbstractFileSystemSyncFromRemoteJob
   Q_OBJECT
 
   public:
-    ByteArrayRawFileReloadJob( ByteArrayRawFileSynchronizer *synchronizer );
+    explicit ByteArrayRawFileReloadJob( ByteArrayRawFileSynchronizer *synchronizer );
     virtual ~ByteArrayRawFileReloadJob();
 
   protected: // AbstractFileSystemSyncFromRemoteJob API

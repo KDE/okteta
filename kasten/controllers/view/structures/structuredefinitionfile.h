@@ -49,7 +49,7 @@ public:
      * @param info the information about this structure definition
      *      (passed by value so nothing bad can happen)
      */
-    StructureDefinitionFile(KPluginInfo info);
+    explicit StructureDefinitionFile(KPluginInfo info);
     StructureDefinitionFile(StructureDefinitionFile& f);
     virtual ~StructureDefinitionFile();
 

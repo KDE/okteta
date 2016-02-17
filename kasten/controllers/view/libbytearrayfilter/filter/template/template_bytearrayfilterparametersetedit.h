@@ -34,7 +34,7 @@ class Template_ByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterP
     static const char Id[];
 
   public:
-    Template_ByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
+    explicit Template_ByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
 
     virtual ~Template_ByteArrayFilterParameterSetEdit();
 

@@ -31,7 +31,7 @@ class DummyDataInformation : public DataInformation
 {
     DATAINFORMATION_CLONE(DummyDataInformation, DataInformation), mIndex(d.mIndex) {}
 public:
-    DummyDataInformation(DataInformationBase* parent, const QString& name = QString());
+    explicit DummyDataInformation(DataInformationBase* parent, const QString& name = QString());
     virtual ~DummyDataInformation() {}
     virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 

@@ -39,7 +39,7 @@ class KASTENCONTROLLERS_EXPORT FullScreenController : public AbstractXmlGuiContr
   Q_OBJECT
 
   public:
-    FullScreenController( KXmlGuiWindow *window );
+    explicit FullScreenController( KXmlGuiWindow *window );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );

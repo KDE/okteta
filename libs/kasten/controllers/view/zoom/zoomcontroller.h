@@ -45,7 +45,7 @@ class KASTENCONTROLLERS_EXPORT ZoomController : public AbstractXmlGuiController
   Q_OBJECT
 
   public:
-    ZoomController( KXMLGUIClient* guiClient );
+    explicit ZoomController( KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );

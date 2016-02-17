@@ -46,7 +46,7 @@ class KASTENCONTROLLERS_EXPORT VersionController : public AbstractXmlGuiControll
   Q_OBJECT
 
   public:
-    VersionController( KXMLGUIClient* guiClient );
+    explicit VersionController( KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );

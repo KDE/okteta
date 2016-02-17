@@ -42,7 +42,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJob : public AbstractSyn
   Q_OBJECT
 
   public:
-    AbstractFileSystemSyncFromRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
+    explicit AbstractFileSystemSyncFromRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
 
     virtual ~AbstractFileSystemSyncFromRemoteJob();
 

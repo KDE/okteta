@@ -38,7 +38,7 @@ class ByteArrayRawFileWriteJob : public AbstractFileSystemSyncToRemoteJob
   Q_OBJECT
 
   public:
-    ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer *synchronizer );
+    explicit ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer *synchronizer );
     virtual ~ByteArrayRawFileWriteJob();
 
   protected: // AbstractFileSystemSyncToRemoteJob API

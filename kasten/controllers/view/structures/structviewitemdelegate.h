@@ -28,7 +28,7 @@
 class StructViewItemDelegate: public QStyledItemDelegate
 {
 public:
-    StructViewItemDelegate(QObject * parent = 0);
+    explicit StructViewItemDelegate(QObject * parent = 0);
     virtual ~StructViewItemDelegate();
     virtual void setModelData(QWidget * editor, QAbstractItemModel * model,
             const QModelIndex & index) const;

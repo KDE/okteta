@@ -43,7 +43,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT OverwriteOnlyController : public AbstractXm
   Q_OBJECT
 
   public:
-    OverwriteOnlyController( KXMLGUIClient* guiClient );
+    explicit OverwriteOnlyController( KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
     virtual void setTargetModel( AbstractModel* model );
