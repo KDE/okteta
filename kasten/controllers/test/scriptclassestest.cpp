@@ -26,9 +26,6 @@
 
 #include "view/structures/datatypes/primitive/primitivetemplateinfo.h"
 #include "view/structures/datatypes/primitive/primitivedatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
-#include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/enumdatainformation.h"
 #include "view/structures/datatypes/primitive/flagdatainformation.h"
 #include "view/structures/datatypes/primitive/pointerdatainformation.h"

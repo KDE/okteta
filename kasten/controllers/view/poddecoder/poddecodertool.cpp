@@ -42,7 +42,6 @@
 #include "abstractdifferentsizedialog.h"
 #include <kasten/okteta/bytearraydocument.h>
 #include <kasten/okteta/bytearrayview.h>
-#include <okteta/abstractbytearraymodel.h>
 // Okteta core
 #include <okteta/charcodec.h>
 #include <okteta/abstractbytearraymodel.h>

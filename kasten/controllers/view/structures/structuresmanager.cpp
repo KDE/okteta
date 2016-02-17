@@ -21,9 +21,9 @@
  */
 
 #include "structuresmanager.h"
-#include "structviewpreferences.h"
-#include "structlogging.h"
+
 // tool
+#include "structviewpreferences.h"
 #include "structuredefinitionfile.h"
 #include "structlogging.h"
 // Qt

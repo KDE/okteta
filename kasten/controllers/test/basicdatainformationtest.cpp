@@ -34,7 +34,6 @@
 #include "view/structures/datatypes/primitivefactory.h"
 #include "view/structures/datatypes/uniondatainformation.h"
 #include "view/structures/datatypes/structuredatainformation.h"
-#include "view/structures/datatypes/structuredatainformation.h"
 
 struct ExpectedResults {
 	ExpectedResults()
