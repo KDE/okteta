@@ -709,9 +709,9 @@ Support for strings (various Unicode encodings) in definitions
       <sect3>
         <title>Further information</title>
         <para>
-          A few example structure definitions can be found in the <ulink url="https://projects.kde.org/projects/kde/kdesdk/okteta/repository/revisions/master/show/kasten/controllers/view/structures/examples/okteta/structures">Git repository.</ulink>
+          A few example structure definitions can be found in the <ulink url="https://quickgit.kde.org/?p=okteta.git&amp;a=tree&amp;f=kasten%2Fcontrollers%2Fview%2Fstructures%2Fexamples%2Fokteta%2Fstructures">Git repository.</ulink>
           This includes for example the file header for PNG files and the ELF file header.
-          An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="https://projects.kde.org/projects/kde/kdesdk/okteta/repository/revisions/master/show/kasten/controllers/view/structures/schema">here.</ulink>
+          An &XML; schema describing the structure of the <literal role="extension">.osd</literal> file can be found  <ulink url="https://quickgit.kde.org/?p=okteta.git&amp;a=tree&amp;f=kasten%2Fcontrollers%2Fview%2Fstructures%2Fschema">here.</ulink>
           If more information is needed feel free to contact me at &Alex.Richardson.email;
         </para>
       </sect3>
