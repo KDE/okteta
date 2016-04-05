@@ -30,7 +30,6 @@
 #include <QMimeData>
 #include <QByteArray>
 // C++
-#include <stdlib.h>
 #include <time.h>
 
 
@@ -60,13 +59,13 @@ ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
 // TODO: use different RNG, with multiple characteristics and offer them in the config
 QMimeData* ByteArrayRandomDataGenerator::generateData()
 {
-    srand( (unsigned int)time(0) );
+    qsrand( (unsigned int)time(0) );
 
     const int insertDataSize = mSettings.size;
     QByteArray insertData( insertDataSize, '\0' );
 
     for( int i=0; i < insertDataSize; ++i )
-        insertData[i] = rand() % 256; // TODO: modulo is expensive, even if easy to use
+        insertData[i] = qrand() % 256; // TODO: modulo is expensive, even if easy to use
 
     QMimeData* mimeData = new QMimeData;
     mimeData->setData( mimeType(), insertData );
