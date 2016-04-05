@@ -114,6 +114,7 @@ void ByteArrayJanusView::setViewModus( int viewModus )
     connect( mView, &AbstractByteArrayView::substituteCharChanged, this, &ByteArrayJanusView::substituteCharChanged );
     connect( mView, &AbstractByteArrayView::undefinedCharChanged, this, &ByteArrayJanusView::undefinedCharChanged );
     connect( mView, &AbstractByteArrayView::noOfGroupedBytesChanged, this, &ByteArrayJanusView::noOfGroupedBytesChanged );
+    connect( mView, &AbstractByteArrayView::zoomLevelChanged, this, &ByteArrayJanusView::zoomLevelChanged );
 
     emit viewModusChanged( mViewModus );
 }

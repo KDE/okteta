@@ -151,6 +151,7 @@ class ByteArrayJanusView : public QWidget
     void substituteCharChanged( QChar substituteChar );
     void undefinedCharChanged( QChar undefinedChar );
     void noOfGroupedBytesChanged( int noOfGroupedBytes );
+    void zoomLevelChanged( double level );
     void viewModusChanged( int viewModus );
 
   private:

@@ -275,6 +275,7 @@ void AbstractByteArrayViewPrivate::changeEvent( QEvent* event )
         && !mInZooming )
     {
         mDefaultFontSize = q->font().pointSize();
+        // TODO: why reset zoomlevel here? should this not rather recalculate the new applied font size?
         mZoomLevel = 1.0;
     }
 }
@@ -297,6 +298,8 @@ void AbstractByteArrayViewPrivate::zoomIn( int pointIncrement )
     mInZooming = true;
     q->setFont( newFont );
     mInZooming = false;
+
+    emit q->zoomLevelChanged( mZoomLevel );
 }
 
 void AbstractByteArrayViewPrivate::zoomOut( int pointDecrement )
@@ -314,6 +317,8 @@ void AbstractByteArrayViewPrivate::zoomOut( int pointDecrement )
     mInZooming = true;
     q->setFont( newFont );
     mInZooming = false;
+
+    emit q->zoomLevelChanged( mZoomLevel );
 }
 
 
@@ -336,6 +341,8 @@ void AbstractByteArrayViewPrivate::zoomTo( int newPointSize )
     mInZooming = true;
     q->setFont( newFont );
     mInZooming = false;
+
+    emit q->zoomLevelChanged( mZoomLevel );
 }
 
 
@@ -348,7 +355,6 @@ void AbstractByteArrayViewPrivate::setZoomLevel( double zoomLevel )
 {
     Q_Q( AbstractByteArrayView );
 
-    const int newPointSize = (int)(zoomLevel*mDefaultFontSize);
     const int currentPointSize = q->fontInfo().pointSize();
 
     // TODO: here we catch any new zoomlevels which are out of bounds and the zoom already at that bound
@@ -356,11 +362,26 @@ void AbstractByteArrayViewPrivate::setZoomLevel( double zoomLevel )
         || (MaxFontPointSize <= currentPointSize && (double)MaxFontPointSize/mDefaultFontSize < zoomLevel) )
         return;
 
-    zoomTo( newPointSize );
-    // TODO: this hack overwrites the new zoomlevel calculated from the integers in zoomTo,
-    // to avoid getting trapped inside a small integer value, if the zoom tool operates relatively
+    int newPointSize = (int)(zoomLevel*mDefaultFontSize);
+    if( newPointSize < MinFontPointSize )
+        newPointSize = MinFontPointSize;
+    else if( newPointSize > MaxFontPointSize )
+        newPointSize = MaxFontPointSize;
+
+    QFont newFont( q->font() );
+
+    // other than in zoomTo(), where the new zoomlevel is calculated from the integers, here
+    // use the passed zoomlevel value, to avoid getting trapped inside a small integer value,
+    // if the zoom tool operates relatively
     // think about, if this is the right approach
     mZoomLevel = zoomLevel;
+    newFont.setPointSize( newPointSize );
+
+    mInZooming = true;
+    q->setFont( newFont );
+    mInZooming = false;
+
+    emit q->zoomLevelChanged(mZoomLevel);
 }
 
 
