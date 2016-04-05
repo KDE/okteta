@@ -387,6 +387,8 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     void undefinedCharChanged( QChar undefinedChar );
     void noOfGroupedBytesChanged( int noOfGroupedBytes );
 
+    void zoomLevelChanged( double level );
+
   protected:
     void finishByteEdit();
     void emitSelectionSignals();

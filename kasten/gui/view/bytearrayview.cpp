@@ -139,6 +139,7 @@ void ByteArrayView::init()
     connect( mWidget, &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged );
     connect( mWidget, &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged );
     connect( mWidget, &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged );
+    connect( mWidget, &ByteArrayJanusView::zoomLevelChanged, this, &ByteArrayView::zoomLevelChanged );
     connect( mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged );
 }
 
@@ -164,7 +165,6 @@ void ByteArrayView::setReadOnly( bool isReadOnly ) { mWidget->setReadOnly( isRea
 void ByteArrayView::setZoomLevel( double Level )
 {
     mWidget->setZoomLevel( Level );
-    emit zoomLevelChanged( mWidget->zoomLevel() );
 }
 
 double ByteArrayView::zoomLevel() const

@@ -45,9 +45,9 @@ bool ZoomWheelController::handleWheelEvent( QWheelEvent* wheelEvent )
     {
         const int delta = wheelEvent->delta();
         if( delta > 0 )
-            mView->zoomOut();
-        else if( delta < 0 )
             mView->zoomIn();
+        else if( delta < 0 )
+            mView->zoomOut();
 
         eventUsed = true;
     }
