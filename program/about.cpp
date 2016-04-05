@@ -34,7 +34,7 @@ OktetaAboutData::OktetaAboutData()
               KAboutLicense::GPL_V2,
               i18n("Copyright 2006-2016 Friedrich W. H. Kossebau"), //copyright
               i18n("Edit the raw data of files"), // comment
-              QStringLiteral("http://userbase.kde.org/Okteta") )
+              QStringLiteral("https://userbase.kde.org/Okteta") )
 {
     addLicense(KAboutLicense::GPL_V3);
     setOrganizationDomain( "kde.org" );
