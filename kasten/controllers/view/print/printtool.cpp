@@ -32,6 +32,8 @@
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
 #include <okteta/abstractbytearraymodel.h>
+// Kasten core
+#include <kasten/abstractmodelsynchronizer.h>
 // KF5
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -155,7 +157,10 @@ void PrintTool::print()
         framesPrinter.addFrameRenderer( footerFrameRenderer );
 
         info.setNoOfPages( byteArrayFrameRenderer->framesCount() );
-        info.setUrl( mDocument->title() ); //TODO: get the url from synchronizer!!!
+        AbstractModelSynchronizer* synchronizer = mDocument->synchronizer();
+        if (synchronizer) {
+            info.setUrl( synchronizer->url() );
+        }
 
         QApplication::setOverrideCursor( Qt::WaitCursor );
 
