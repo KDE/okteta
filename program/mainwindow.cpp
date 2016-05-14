@@ -262,12 +262,12 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
     DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
     DocumentCreateManager* const createManager = documentManager->createManager();
-    foreach( const QUrl& url, urls )
+    foreach( const QString& url, urls )
     {
         if( url.isEmpty() )
             createManager->createNew();
         else
-            syncManager->load( url );
+            syncManager->load( QUrl(url, QUrl::TolerantMode) );
         // TODO: set view to offset
         // if( offset != -1 )
     }
