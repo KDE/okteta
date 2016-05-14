@@ -100,7 +100,7 @@ void HeaderFooterFrameRenderer::prepare()
     tagReplacements['U'] = user.property( KUser::FullName ).toString();
 //     tagReplacements['f'] = isSelection ? i18n("(Selection of) %1", url.fileName()) : url.fileName();
     tagReplacements['f'] = url.fileName();
-    tagReplacements['F'] = url.toDisplayString();
+    tagReplacements['F'] = url.toDisplayString(QUrl::PrettyDecoded|QUrl::PreferLocalFile);
     tagReplacements['P'] = QString::number( mInfo->noOfPages() );
 
     // create text with globally replaced tags
