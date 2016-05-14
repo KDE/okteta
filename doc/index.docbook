@@ -371,6 +371,11 @@ Support for strings (various Unicode encodings) in definitions
 
     <sect2>
       <title>Creating structure definitions</title>
+
+      <note><para>A more up to date, but not completed guide to writing structure definitions can be found
+        <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions">on the KDE UserBase Wiki</ulink>.
+      </para></note>
+
       <para>There are two different ways of creating structure definitions. The first is writing the
       definition in &XML; the other is using JavaScript<!-- Markup??-->. The JavaScript approach allows you
       to create more complex structures with features like &eg; validating the structure. Using &XML; gives you
@@ -385,6 +390,9 @@ Support for strings (various Unicode encodings) in definitions
 
     <sect2>
       <title>Structure definition &XML; file format</title>
+      <note><para>A more up to date, but not completed guide to writing structure definitions can be found
+        <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions">on the KDE UserBase Wiki</ulink>.
+      </para></note>
       <para>
       <!-- TODO xml schema -->
       The <literal role="extension">.osd</literal> &XML; file has one root element: <emphasis>&lt;data&gt;</emphasis> with no
@@ -560,6 +568,10 @@ Support for strings (various Unicode encodings) in definitions
 
     <sect2>
       <title>An example structure definition in both &XML; and JavaScript</title>
+      <note><para>A more up to date, but not completed guide to writing structure definitions can be found
+        <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions">on the KDE UserBase Wiki</ulink>.
+      </para></note>
+
       <sect3>
         <title>The common step shared by both approaches</title>
         <para>
@@ -633,7 +645,8 @@ Support for strings (various Unicode encodings) in definitions
       <sect3>
         <title>The simple structure in JavaScript</title>
         <para>
-        To implement the structure above in JavaScript, create a file named <filename>main.js</filename> instead of <filename>simplestruct.osd</filename>.
+        To implement the structure above in JavaScript, create a file named <filename>main.js</filename> instead of <filename>simplestruct.osd</filename>
+        and change X-KDE-PluginInfo-Category=structure to X-KDE-PluginInfo-Category=structure/js
         The contents of that file should be:
         <screen>
         function init() {
