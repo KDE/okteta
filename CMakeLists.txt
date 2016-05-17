@@ -17,8 +17,8 @@ include(FeatureSummary)
 include(GenerateExportHeader)
 
 include(KDEInstallDirs)
-include(KDECMakeSettings)
-include(KDECompilerSettings)
+include(KDECMakeSettings NO_POLICY_SCOPE)
+include(KDECompilerSettings NO_POLICY_SCOPE)
 
 set(REQUIRED_QT_VERSION "5.2.0")
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
