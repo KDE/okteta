@@ -1,5 +1,3 @@
-project( kastengui )
-
 ecm_setup_version( ${KASTEN_LIB_VERSION}
     VARIABLE_PREFIX KASTENGUI
     SOVERSION ${KASTEN_LIB_SOVERSION}

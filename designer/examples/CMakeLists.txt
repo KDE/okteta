@@ -1,5 +1,3 @@
-project( oktetadesignerexamples )
-
 set( oktetadesignerexamplewidget_SRCS
   main.cpp
 )

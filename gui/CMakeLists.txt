@@ -1,5 +1,3 @@
-project( oktetagui )
-
 ecm_setup_version( ${OKTETALIBS_LIB_VERSION}
     VARIABLE_PREFIX OKTETAGUI
     SOVERSION ${OKTETALIBS_LIB_SOVERSION}

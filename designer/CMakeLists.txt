@@ -1,5 +1,3 @@
-project( oktetadesignerplugin )
-
 set( oktetadesignerplugin_SRCS
   bytearraycolumnviewdesignerfactory.cpp
   bytearrayrowviewdesignerfactory.cpp

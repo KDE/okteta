@@ -1,7 +1,4 @@
-project( oktetapart )
-
 add_definitions(-DTRANSLATION_DOMAIN=\"oktetapart\")
-
 
 set( oktetapart_SRCS
   part.cpp

@@ -1,5 +1,3 @@
-project( kastencontrollers )
-
 ecm_setup_version( ${KASTEN_LIB_VERSION}
     VARIABLE_PREFIX KASTENCONTROLLERS
     SOVERSION ${KASTEN_LIB_SOVERSION}

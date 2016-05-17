@@ -1,5 +1,3 @@
-project( kastencore )
-
 ecm_setup_version( ${KASTEN_LIB_VERSION}
     VARIABLE_PREFIX KASTENCORE
     SOVERSION ${KASTEN_LIB_SOVERSION}

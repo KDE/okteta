@@ -1,5 +1,3 @@
-project( oktetaprogram )
-
 set( okteta_SRCS
   main.cpp
   program.cpp

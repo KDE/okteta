@@ -1,5 +1,3 @@
-project( kasten )
-
 set( KASTEN_MAJOR_VERSION 0 )
 set( KASTEN_MINOR_VERSION 3 )
 set( KASTEN_PATCHLEVEL_VERSION 0 )

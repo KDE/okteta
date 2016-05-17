@@ -1,5 +1,3 @@
-project( oktetacore )
-
 ecm_setup_version( ${OKTETALIBS_LIB_VERSION}
     VARIABLE_PREFIX OKTETACORE
     SOVERSION ${OKTETALIBS_LIB_SOVERSION}
