@@ -494,25 +494,26 @@ oktetakastencontrollers_generate_headers(viewprofilesmanagecontroller view/viewp
 add_library( poddecoder-typeeditors STATIC ${PODDECODER_TYPEEDITOR_SRCS} )
 set_target_properties( poddecoder-typeeditors PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
 target_link_libraries( poddecoder-typeeditors
-PRIVATE
+PUBLIC
   OktetaGui
-  OktetaCore
+PRIVATE
   KF5::Completion
 )
 
 add_library( structview-tested-srcs STATIC ${STRUCTVIEW_TESTED_SRCS} )
 set_target_properties( structview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
 target_link_libraries( structview-tested-srcs
-PRIVATE
+PUBLIC
   OktetaCore
   KF5::ConfigGui
-  KF5::ConfigWidgets
   KF5::I18n
-  KF5::Completion
   KF5::Service
   Qt5::Script
   Qt5::Xml
   Qt5::Widgets
+PRIVATE
+  KF5::Completion
+  KF5::ConfigWidgets
 )
 
 set( OKTETA_KASTEN_CONTROLLERS_SRCS
