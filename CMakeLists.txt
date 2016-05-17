@@ -1,6 +1,6 @@
-project( okteta )
-
 cmake_minimum_required(VERSION 2.8.12)
+
+project( okteta )
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 
