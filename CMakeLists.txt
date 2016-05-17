@@ -1,7 +1,6 @@
 project( okteta )
 
 cmake_minimum_required(VERSION 2.8.12)
-set(QT_MIN_VERSION "5.2.0")
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 
@@ -21,7 +20,8 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
 
-find_package(Qt5 REQUIRED NO_MODULE
+set(REQUIRED_QT_VERSION "5.2.0")
+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     COMPONENTS
     Core
     Network
@@ -32,13 +32,14 @@ find_package(Qt5 REQUIRED NO_MODULE
     Widgets
     Xml
 )
-find_package(Qt5Test QUIET)
+find_package(Qt5Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
 if (NOT Qt5Test_FOUND)
   message(STATUS "Qt5Test not found, unit tests will not be built.")
 endif()
 
 
-find_package(KF5 REQUIRED
+set(REQUIRED_KF5_VERSION "5.7.0")
+find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
     COMPONENTS
     Bookmarks
     Codecs
