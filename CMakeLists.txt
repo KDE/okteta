@@ -7,18 +7,20 @@ find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules" ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
+# ECM KDE macros (include first, to have their policies and settings effect all other macros)
+include(KDEInstallDirs)
+include(KDECMakeSettings NO_POLICY_SCOPE)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+# ECM macros
 include(ECMInstallIcons)
 include(ECMGenerateHeaders)
 include(ECMSetupVersion)
 include(ECMPackageConfigHelpers)
 include(ECMAddAppIcon)
-
+# CMake macros
 include(FeatureSummary)
 include(GenerateExportHeader)
 
-include(KDEInstallDirs)
-include(KDECMakeSettings NO_POLICY_SCOPE)
-include(KDECompilerSettings NO_POLICY_SCOPE)
 
 set(REQUIRED_QT_VERSION "5.2.0")
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
