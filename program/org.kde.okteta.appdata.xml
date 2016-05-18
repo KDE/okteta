@@ -457,7 +457,7 @@
       <image>https://kde.org/images/screenshots/okteta.png</image>
     </screenshot>
   </screenshots>
-  <updatecontact>kossebau@kde.org</updatecontact>
+  <update_contact>kossebau_at_kde.org</update_contact>
   <project_group>KDE</project_group>
   <provides>
     <binary>okteta</binary>
