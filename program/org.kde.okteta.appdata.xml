@@ -2,8 +2,7 @@
 <component type="desktop">
   <id>org.kde.okteta.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0</project_license>
-  <project_license>GPL-3.0</project_license>
+  <project_license>GPL-2.0 OR GPL-3.0</project_license>
   <name>Okteta</name>
   <name xml:lang="ast">Okteta</name>
   <name xml:lang="bs">Okteta</name>
@@ -451,12 +450,13 @@
   <url type="homepage">https://userbase.kde.org/Okteta/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=okteta</url>
   <url type="help">https://docs.kde.org/stable/en/kdesdk/okteta/index.html</url>
+  <url type="donation">https://www.kde.org/community/donations/</url>
   <screenshots>
     <screenshot type="default">
       <image>https://kde.org/images/screenshots/okteta.png</image>
     </screenshot>
   </screenshots>
-  <updatecontact>kossebau@kde.org</updatecontact>
+  <update_contact>kossebau_at_kde.org</update_contact>
   <project_group>KDE</project_group>
   <provides>
     <binary>okteta</binary>
