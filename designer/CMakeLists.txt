@@ -1,3 +1,7 @@
+if (NOT Qt5Designer_FOUND)
+  return()
+endif()
+
 set( oktetadesignerplugin_SRCS
   bytearraycolumnviewdesignerfactory.cpp
   bytearrayrowviewdesignerfactory.cpp
@@ -12,7 +16,11 @@ target_link_libraries( oktetadesignerplugin
   OktetaGui
   OktetaCore
   Qt5::Widgets
-  Qt5::Designer
+)
+target_include_directories( oktetadesignerplugin
+    PRIVATE
+        ${Qt5UiPlugin_INCLUDE_DIRS}
+        ${Qt5Designer_INCLUDE_DIRS}
 )
 
 install( TARGETS oktetadesignerplugin  DESTINATION ${QT_PLUGIN_INSTALL_DIR}/designer )

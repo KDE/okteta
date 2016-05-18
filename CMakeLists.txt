@@ -25,7 +25,6 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     COMPONENTS
     Core
     Network
-    Designer
     PrintSupport
     Script
     ScriptTools
@@ -35,6 +34,21 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
 find_package(Qt5Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
 if (NOT Qt5Test_FOUND)
   message(STATUS "Qt5Test not found, unit tests will not be built.")
+endif()
+
+find_package(Qt5Designer ${REQUIRED_QT_VERSION} CONFIG QUIET)
+set_package_properties(Qt5Designer PROPERTIES TYPE OPTIONAL
+    PURPOSE "Required to build Qt Designer plugins"
+)
+if(NOT Qt5Designer_VERSION_STRING VERSION_LESS 5.5.0)
+    find_package(Qt5UiPlugin ${REQUIRED_QT_VERSION} CONFIG QUIET)
+    set_package_properties(Qt5UiPlugin PROPERTIES TYPE OPTIONAL
+        PURPOSE "Required to build Qt Designer plugins"
+    )
+    if (Qt5UiPlugin_FOUND)
+        # for some reason, Qt5UiPlugin does not set its _INCLUDE_DIRS variable. Fill it manually
+        get_target_property(Qt5UiPlugin_INCLUDE_DIRS Qt5::UiPlugin INTERFACE_INCLUDE_DIRECTORIES)
+    endif()
 endif()
 
 
