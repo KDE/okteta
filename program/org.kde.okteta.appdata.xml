@@ -2,8 +2,7 @@
 <component type="desktop">
   <id>org.kde.okteta.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0</project_license>
-  <project_license>GPL-3.0</project_license>
+  <project_license>GPL-2.0 OR GPL-3.0</project_license>
   <name>Okteta</name>
   <name xml:lang="ast">Okteta</name>
   <name xml:lang="bs">Okteta</name>
