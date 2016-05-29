@@ -646,7 +646,7 @@ Support for strings (various Unicode encodings) in definitions
         <title>The simple structure in JavaScript</title>
         <para>
         To implement the structure above in JavaScript, create a file named <filename>main.js</filename> instead of <filename>simplestruct.osd</filename>
-        and change X-KDE-PluginInfo-Category=structure to X-KDE-PluginInfo-Category=structure/js
+        and change X-KDE-PluginInfo-Category=structure to X-KDE-PluginInfo-Category=structure/js.
         The contents of that file should be:
         <screen>
         function init() {
