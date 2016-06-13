@@ -114,7 +114,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 {
-    const QUrl fileUrl = mFileSystem->createFilePath( QStringLiteral(NotExistingUrl) );
+    const QUrl fileUrl = QUrl( QStringLiteral(NotExistingUrl) );
 
     Kasten::ByteArrayRawFileSynchronizerFactory *factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );

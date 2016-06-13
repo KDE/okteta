@@ -114,7 +114,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
-    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(NotExistingUrl) ) );
+    const QUrl fileUrl = QUrl( QLatin1String(NotExistingUrl) );
 
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
