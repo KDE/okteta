@@ -50,7 +50,6 @@ namespace Kasten
 static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
 static const char TestFileName[] = "test.data";
 static const char NotExistingUrl[] = "notexisting://";
-static const char FileProtocolName[] = "file://";
 static const int TestDataSize = 50;
 static const char TestDataChar = 0;
 
@@ -93,7 +92,7 @@ void ByteArrayRawFileSynchronizerTest::init()
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 {
-    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName) ) );
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
     AbstractDocument* document = synchronizer->document();
@@ -127,7 +126,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 
 void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
-    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName) ) );
 
     ByteArrayDocument* document =
         new Kasten::ByteArrayDocument(QStringLiteral("New created for test."));

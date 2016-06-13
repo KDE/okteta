@@ -43,7 +43,6 @@ static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
 static const char TestFileName[] = "test.data";
 #if 0
 static const char NotExistingUrl[] = "notexisting://";
-static const char FileProtocolName[] = "file://";
 #endif
 static const int TestDataSize = 50;
 static const char TestDataChar = 0;
@@ -95,7 +94,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testCreate()
 #if 0
 void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
 {
-    const QUrl fileUrl = mFileSystem->createFilePath( QStringLiteral(TestFileName) ).prepend( FileProtocolName );
+    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QStringLiteral(TestFileName) ) );
     Kasten::ByteArrayRawFileSynchronizerFactory *factory = new Kasten::ByteArrayRawFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument( fileUrl );
 

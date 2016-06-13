@@ -46,7 +46,6 @@ static const char TestDirectory[] = "testdocumentfile1synchronizertest";
 static const char TestFileName1[] = "test1.data";
 static const char TestFileName2[] = "test2.data";
 static const char NotExistingFileName[] = "not.existing";
-static const char FileProtocolName[] = "file://";
 static const char NotExistingUrlName[] = "not://existing";
 static const char TestData1[] = "TestData1";
 static const char TestData2[] = "TestData2";
@@ -105,7 +104,7 @@ void TestDocumentFileSynchronizerTest::checkFileContent( const QUrl& fileUrl, co
 void TestDocumentFileSynchronizerTest::testLoadFromFile()
 {
     const QByteArray testData( TestData1 );
-    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName1) ) );
 
     Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
@@ -139,7 +138,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
 
 void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
 {
-    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(NotExistingFileName) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(NotExistingFileName) ) );
     Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
@@ -151,7 +150,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
 void TestDocumentFileSynchronizerTest::testLoadSaveFile()
 {
     const QByteArray otherData( TestData2 );
-    const QUrl fileUrl = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName1) ) );
     Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
@@ -172,7 +171,7 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
 {
     const QByteArray otherData( TestData2 );
     const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName1) );
-    const QUrl fileUrl = QUrl( QString( filePath ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile( QString( filePath ) );
 
     Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
     synchronizer->startLoad( fileUrl )->exec();
@@ -197,9 +196,9 @@ void TestDocumentFileSynchronizerTest::testChangeFile()
 {
     const QByteArray data( TestData1 );
     const QByteArray otherData( TestData2 );
-    const QUrl fileUrl1 = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl1 = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName1) ) );
     const QString filePath2 = mFileSystem->createFilePath( QLatin1String(TestFileName2) );
-    const QUrl fileUrl2 = QUrl( QString( filePath2 ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl2 = QUrl::fromLocalFile( filePath2 );
 
     // load from 1
     Kasten::TestDocumentFileSynchronizer* synchronizer = new Kasten::TestDocumentFileSynchronizer();
@@ -219,9 +218,9 @@ void TestDocumentFileSynchronizerTest::testChangeFile()
 void TestDocumentFileSynchronizerTest::testConnectToFile()
 {
     const QByteArray otherData( TestData2 );
-    const QUrl fileUrl1 = QUrl( mFileSystem->createFilePath( QLatin1String(TestFileName1) ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl1 = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName1) ) );
     const QString filePath2 = mFileSystem->createFilePath( QLatin1String(TestFileName2) );
-    const QUrl fileUrl2 = QUrl( QString( filePath2 ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl2 = QUrl::fromLocalFile( QString( filePath2 ) );
 
     Kasten::TestDocument* testDocument = new Kasten::TestDocument();
     Kasten::AbstractDocument* document = testDocument;
@@ -251,7 +250,7 @@ void TestDocumentFileSynchronizerTest::testHeader()
     const QByteArray header( Header1);
     const QByteArray otherData( TestData2 );
     const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName1) );
-    const QUrl fileUrl = QUrl( QString( filePath ).prepend( QLatin1String(FileProtocolName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile( filePath );
 
 // TODO: failing calls in AbstractDocumentFileSystemSynchronizer trigger GUI here, so far it worked ;)
 #if 0
