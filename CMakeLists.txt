@@ -51,6 +51,9 @@ if(NOT Qt5Designer_VERSION_STRING VERSION_LESS 5.5.0)
         # for some reason, Qt5UiPlugin does not set its _INCLUDE_DIRS variable. Fill it manually
         get_target_property(Qt5UiPlugin_INCLUDE_DIRS Qt5::UiPlugin INTERFACE_INCLUDE_DIRECTORIES)
     endif()
+    set(DesignerPluginDeps_FOUND ${Qt5UiPlugin_FOUND})
+else()
+    set(DesignerPluginDeps_FOUND ${Qt5Designer_FOUND})
 endif()
 
 

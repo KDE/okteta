@@ -1,4 +1,4 @@
-if (NOT Qt5Designer_FOUND)
+if (NOT DesignerPluginDeps_FOUND)
   return()
 endif()
 
