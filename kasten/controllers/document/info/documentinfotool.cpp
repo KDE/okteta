@@ -74,7 +74,7 @@ QString DocumentInfoTool::location() const
     if( mDocument )
     {
         const QUrl url = mDocumentSyncManager->urlOf( mDocument );
-        result = url.isLocalFile() ? url.path() : url.toDisplayString();
+        result = url.toDisplayString(QUrl::PrettyDecoded|QUrl::PreferLocalFile);
     }
     return result;
 }

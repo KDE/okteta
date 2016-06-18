@@ -53,7 +53,7 @@ void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const 
 
     bookmarkable->removeAllBookmarks();
 
-    const QString urlString = url.isLocalFile() ? url.path(QUrl::FullyDecoded) : url.toDisplayString();
+    const QString urlString = url.toDisplayString(QUrl::PrettyDecoded|QUrl::PreferLocalFile);
 
     KBookmarkGroup root = mBookmarkManager->root();
 
@@ -94,7 +94,7 @@ void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const
     if( ! bookmarkable )
         return;
 
-    const QString urlString = url.isLocalFile() ? url.path(QUrl::FullyDecoded) : url.toDisplayString();
+    const QString urlString = url.toDisplayString(QUrl::PrettyDecoded|QUrl::PreferLocalFile);
 
     KBookmarkGroup root = mBookmarkManager->root();
 
