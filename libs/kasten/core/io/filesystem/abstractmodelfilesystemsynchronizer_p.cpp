@@ -48,7 +48,7 @@ void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
             q, SLOT(onFileDeleted(QString)) );
     }
 
-    mDirWatch->addFile( mUrl.path() );
+    mDirWatch->addFile( mUrl.toLocalFile() );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::stopFileWatching()
@@ -56,7 +56,7 @@ void AbstractModelFileSystemSynchronizerPrivate::stopFileWatching()
     if( ! mDirWatch )
         return;
 
-    mDirWatch->removeFile( mUrl.path() );
+    mDirWatch->removeFile( mUrl.toLocalFile() );
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::pauseFileWatching()

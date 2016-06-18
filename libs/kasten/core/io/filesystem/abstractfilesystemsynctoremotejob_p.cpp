@@ -41,7 +41,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
 
     if( url.isLocalFile() )
     {
-        mWorkFilePath = url.path(QUrl::FullyDecoded);
+        mWorkFilePath = url.toLocalFile();
         mFile = new QFile( mWorkFilePath );
         isWorkFileOk = mFile->open( QIODevice::WriteOnly );
 
