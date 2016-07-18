@@ -32,7 +32,7 @@ install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( PROGRAMS org.kde.okteta.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES oktetaui.rc  DESTINATION ${KXMLGUI_INSTALL_DIR}/okteta )
-install( FILES org.kde.okteta.appdata.xml DESTINATION ${KDE_INSTALL_METAINFO} )
+install( FILES org.kde.okteta.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
 
 ecm_install_icons(
   ICONS 16-apps-okteta.png  32-apps-okteta.png  48-apps-okteta.png
