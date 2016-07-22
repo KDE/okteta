@@ -19,6 +19,10 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Motorola S-Records</comment>
+    <comment xml:lang="ca">Registres S de Motorola</comment>
+    <comment xml:lang="pt">Registos-S da Motorola</comment>
+    <comment xml:lang="sl">Motorola S-Records</comment>
+    <comment xml:lang="sv">Motorola S-Records</comment>
     <magic priority="70">
       <match offset="0" value="S0" type="string">
         <match offset="4" value="0000" type="string"/>
@@ -36,6 +40,10 @@ Notes:
     <generic-icon name="text-x-hex"/>
 <!--     <generic-icon name="application-octet-stream"/> -->
     <comment>Intel hexadecimal object file</comment>
+    <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel</comment>
+    <comment xml:lang="pt">Ficheiro de objectos em hexadecimal da Intel</comment>
+    <comment xml:lang="sl">Intelova šestnajstiška predmetna datoteka</comment>
+    <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
     <magic priority="70">
       <match type="string" offset="0" value=":">
@@ -50,6 +58,10 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Base64 encoded data</comment>
+    <comment xml:lang="ca">Dades codificades en Base64</comment>
+    <comment xml:lang="pt">Dados codificados em Base64</comment>
+    <comment xml:lang="sl">Podatki kodirani z Base64</comment>
+    <comment xml:lang="sv">Base64-kodad data</comment>
     <glob pattern="*.base64"/>
     <glob pattern="*.b64"/>
   </mime-type>
@@ -58,6 +70,10 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Base32 encoded data</comment>
+    <comment xml:lang="ca">Dades codificades en Base32</comment>
+    <comment xml:lang="pt">Dados codificados em Base32</comment>
+    <comment xml:lang="sl">Podatki kodirani z Base32</comment>
+    <comment xml:lang="sv">Base32-kodad data</comment>
     <glob pattern="*.base32"/>
   </mime-type>
 
@@ -65,6 +81,10 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Btoa Encoded File</comment>
+    <comment xml:lang="ca">Fitxer BTOA codificat</comment>
+    <comment xml:lang="pt">Dados codificados em Btoa</comment>
+    <comment xml:lang="sl">Datoteka kodirana z Btoa</comment>
+    <comment xml:lang="sv">BTOA-kodad data</comment>
     <magic priority="50">
       <match type="string" offset="0" value="xbtoa Begin"/>
     </magic>
@@ -76,6 +96,10 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Ascii85 encoded data</comment>
+    <comment xml:lang="ca">Dades codificades en ASCII85</comment>
+    <comment xml:lang="pt">Dados codificados em Ascii85</comment>
+    <comment xml:lang="sl">Podatki kodirani z Ascii85</comment>
+    <comment xml:lang="sv">ASCII85-kodad data</comment>
     <magic priority="50">
       <match type="string" offset="0" value="$lt;~"/>
     </magic>
@@ -86,6 +110,10 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Uuencoded file</comment>
+    <comment xml:lang="ca">Fitxer «uuencoded»</comment>
+    <comment xml:lang="pt">Ficheiro codificado com UUencode</comment>
+    <comment xml:lang="sl">Datoteka Uuencoded</comment>
+    <comment xml:lang="sv">Uuencoded fil</comment>
     <magic priority="50">
       <match type="string" offset="0" value="begin"/>
       <match type="string" offset="0" value="begin-base64"/>
@@ -99,6 +127,10 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Xxencoded file</comment>
+    <comment xml:lang="ca">Fitxer «xxencoded»</comment>
+    <comment xml:lang="pt">Ficheiro codificado com Xxencode</comment>
+    <comment xml:lang="sl">Datoteka Xxencoded</comment>
+    <comment xml:lang="sv">Xxencoded fil</comment>
     <magic priority="50">
       <match type="string" offset="0" value="begin"/>
     </magic>
@@ -108,6 +140,11 @@ Notes:
   <mime-type type="application/x-vnd.kde.okteta.structure">
     <sub-class-of type="application/xml"/>
     <comment>Okteta Structure definition</comment>
+    <comment xml:lang="ca">Definició d'estructura de l'Okteta</comment>
+    <comment xml:lang="es">Definición de estructura de Okteta</comment>
+    <comment xml:lang="pt">Definição de estrutura do Okteta</comment>
+    <comment xml:lang="sl">Določilo zgradbe za Okteto</comment>
+    <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <glob pattern="*.osd"/>
   </mime-type>
 </mime-info>
