@@ -20,9 +20,13 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Motorola S-Records</comment>
     <comment xml:lang="ca">Registres S de Motorola</comment>
+    <comment xml:lang="ca@valencia">Registres S de Motorola</comment>
+    <comment xml:lang="en_GB">Motorola S-Records</comment>
     <comment xml:lang="es">Motorola S-Records</comment>
+    <comment xml:lang="nl">Motorola S-records</comment>
     <comment xml:lang="pl">Motorola S-Records</comment>
     <comment xml:lang="pt">Registos-S da Motorola</comment>
+    <comment xml:lang="sk">Motorola S-Records</comment>
     <comment xml:lang="sl">Motorola S-Records</comment>
     <comment xml:lang="sv">Motorola S-Records</comment>
     <magic priority="70">
@@ -43,9 +47,13 @@ Notes:
 <!--     <generic-icon name="application-octet-stream"/> -->
     <comment>Intel hexadecimal object file</comment>
     <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel</comment>
+    <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel</comment>
+    <comment xml:lang="en_GB">Intel hexadecimal object file</comment>
     <comment xml:lang="es">Archivo objeto hexadecimal de Intel</comment>
+    <comment xml:lang="nl">Intel hexadecimaal objectbestand</comment>
     <comment xml:lang="pl">Plik obiektu szesnastkowego Intel</comment>
     <comment xml:lang="pt">Ficheiro de objectos em hexadecimal da Intel</comment>
+    <comment xml:lang="sk">Intel hexadecimálny objektový súbor</comment>
     <comment xml:lang="sl">Intelova šestnajstiška predmetna datoteka</comment>
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
@@ -63,9 +71,13 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Base64 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en Base64</comment>
+    <comment xml:lang="ca@valencia">Dades codificades en Base64</comment>
+    <comment xml:lang="en_GB">Base64 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Base64</comment>
+    <comment xml:lang="nl">Base64 gecodeerde gegevens</comment>
     <comment xml:lang="pl">Dane zakodowane Base64</comment>
     <comment xml:lang="pt">Dados codificados em Base64</comment>
+    <comment xml:lang="sk">Dáta zakódované Base64</comment>
     <comment xml:lang="sl">Podatki kodirani z Base64</comment>
     <comment xml:lang="sv">Base64-kodad data</comment>
     <glob pattern="*.base64"/>
@@ -77,9 +89,13 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Base32 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en Base32</comment>
+    <comment xml:lang="ca@valencia">Dades codificades en Base32</comment>
+    <comment xml:lang="en_GB">Base32 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Base32</comment>
+    <comment xml:lang="nl">Base32 gecodeerde gegevens</comment>
     <comment xml:lang="pl">Dane zakodowane Base32</comment>
     <comment xml:lang="pt">Dados codificados em Base32</comment>
+    <comment xml:lang="sk">Dáta zakódované Base32</comment>
     <comment xml:lang="sl">Podatki kodirani z Base32</comment>
     <comment xml:lang="sv">Base32-kodad data</comment>
     <glob pattern="*.base32"/>
@@ -90,9 +106,13 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Btoa Encoded File</comment>
     <comment xml:lang="ca">Fitxer BTOA codificat</comment>
+    <comment xml:lang="ca@valencia">Fitxer BTOA codificat</comment>
+    <comment xml:lang="en_GB">Btoa Encoded File</comment>
     <comment xml:lang="es">Archivo codificado en Btoa</comment>
+    <comment xml:lang="nl">Btoa gecodeerd bestand</comment>
     <comment xml:lang="pl">Dane zakodowane Btoa</comment>
     <comment xml:lang="pt">Dados codificados em Btoa</comment>
+    <comment xml:lang="sk">Súbor zakódovaný Btoa</comment>
     <comment xml:lang="sl">Datoteka kodirana z Btoa</comment>
     <comment xml:lang="sv">BTOA-kodad data</comment>
     <magic priority="50">
@@ -107,9 +127,13 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Ascii85 encoded data</comment>
     <comment xml:lang="ca">Dades codificades en ASCII85</comment>
+    <comment xml:lang="ca@valencia">Dades codificades en ASCII85</comment>
+    <comment xml:lang="en_GB">Ascii85 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Ascii85</comment>
+    <comment xml:lang="nl">Ascii85 gecodeerde gegevens</comment>
     <comment xml:lang="pl">Dane zakodowane Ascii85</comment>
     <comment xml:lang="pt">Dados codificados em Ascii85</comment>
+    <comment xml:lang="sk">Dáta zakódované Ascii85</comment>
     <comment xml:lang="sl">Podatki kodirani z Ascii85</comment>
     <comment xml:lang="sv">ASCII85-kodad data</comment>
     <magic priority="50">
@@ -123,9 +147,13 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Uuencoded file</comment>
     <comment xml:lang="ca">Fitxer «uuencoded»</comment>
+    <comment xml:lang="ca@valencia">Fitxer «uuencoded»</comment>
+    <comment xml:lang="en_GB">Uuencoded file</comment>
     <comment xml:lang="es">Archivo codificado con Uuencode</comment>
+    <comment xml:lang="nl">Uuencoded bestand</comment>
     <comment xml:lang="pl">Plik Uuencoded</comment>
     <comment xml:lang="pt">Ficheiro codificado com UUencode</comment>
+    <comment xml:lang="sk">Uuencoded súbor</comment>
     <comment xml:lang="sl">Datoteka Uuencoded</comment>
     <comment xml:lang="sv">Uuencoded fil</comment>
     <magic priority="50">
@@ -142,9 +170,13 @@ Notes:
     <generic-icon name="text-x-hex"/>
     <comment>Xxencoded file</comment>
     <comment xml:lang="ca">Fitxer «xxencoded»</comment>
+    <comment xml:lang="ca@valencia">Fitxer «xxencoded»</comment>
+    <comment xml:lang="en_GB">Xxencoded file</comment>
     <comment xml:lang="es">Archivo codificado con Xxencode</comment>
+    <comment xml:lang="nl">Xxencoded bestand</comment>
     <comment xml:lang="pl">Plik Xxencoded</comment>
     <comment xml:lang="pt">Ficheiro codificado com Xxencode</comment>
+    <comment xml:lang="sk">Xxencoded súbor</comment>
     <comment xml:lang="sl">Datoteka Xxencoded</comment>
     <comment xml:lang="sv">Xxencoded fil</comment>
     <magic priority="50">
@@ -157,9 +189,13 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>Okteta Structure definition</comment>
     <comment xml:lang="ca">Definició d'estructura de l'Okteta</comment>
+    <comment xml:lang="ca@valencia">Definició d'estructura de l'Okteta</comment>
+    <comment xml:lang="en_GB">Okteta Structure definition</comment>
     <comment xml:lang="es">Definición de estructura de Okteta</comment>
+    <comment xml:lang="nl">Okteta structuurdefinitie</comment>
     <comment xml:lang="pl">Definicja struktury Okteta</comment>
     <comment xml:lang="pt">Definição de estrutura do Okteta</comment>
+    <comment xml:lang="sk">Definícia štruktúry Okteta</comment>
     <comment xml:lang="sl">Določilo zgradbe za Okteto</comment>
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <glob pattern="*.osd"/>
