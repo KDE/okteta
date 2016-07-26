@@ -27,6 +27,10 @@ Notes:
     <comment xml:lang="pt">Registos-S da Motorola</comment>
     <comment xml:lang="sk">Motorola S-Records</comment>
     <comment xml:lang="sl">Motorola S-Records</comment>
+    <comment xml:lang="sr">Моторолин с‑рекорд</comment>
+    <comment xml:lang="sr@ijekavian">Моторолин с‑рекорд</comment>
+    <comment xml:lang="sr@ijekavianlatin">Motorolin S‑Record</comment>
+    <comment xml:lang="sr@latin">Motorolin S‑Record</comment>
     <comment xml:lang="sv">Motorola S-Records</comment>
     <magic priority="70">
       <match offset="0" value="S0" type="string">
@@ -53,6 +57,10 @@ Notes:
     <comment xml:lang="pt">Ficheiro de objectos em hexadecimal da Intel</comment>
     <comment xml:lang="sk">Intel hexadecimálny objektový súbor</comment>
     <comment xml:lang="sl">Intelova šestnajstiška predmetna datoteka</comment>
+    <comment xml:lang="sr">Интелов хексадекадни објектни фајл</comment>
+    <comment xml:lang="sr@ijekavian">Интелов хексадекадни објектни фајл</comment>
+    <comment xml:lang="sr@ijekavianlatin">Intelov heksadekadni objektni fajl</comment>
+    <comment xml:lang="sr@latin">Intelov heksadekadni objektni fajl</comment>
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
     <magic priority="70">
@@ -76,6 +84,10 @@ Notes:
     <comment xml:lang="pt">Dados codificados em Base64</comment>
     <comment xml:lang="sk">Dáta zakódované Base64</comment>
     <comment xml:lang="sl">Podatki kodirani z Base64</comment>
+    <comment xml:lang="sr">база64 кодирани подаци</comment>
+    <comment xml:lang="sr@ijekavian">база64 кодирани подаци</comment>
+    <comment xml:lang="sr@ijekavianlatin">base64 kodirani podaci</comment>
+    <comment xml:lang="sr@latin">base64 kodirani podaci</comment>
     <comment xml:lang="sv">Base64-kodad data</comment>
     <glob pattern="*.base64"/>
     <glob pattern="*.b64"/>
@@ -93,6 +105,10 @@ Notes:
     <comment xml:lang="pt">Dados codificados em Base32</comment>
     <comment xml:lang="sk">Dáta zakódované Base32</comment>
     <comment xml:lang="sl">Podatki kodirani z Base32</comment>
+    <comment xml:lang="sr">база32 кодирани подаци</comment>
+    <comment xml:lang="sr@ijekavian">база32 кодирани подаци</comment>
+    <comment xml:lang="sr@ijekavianlatin">base32 kodirani podaci</comment>
+    <comment xml:lang="sr@latin">base32 kodirani podaci</comment>
     <comment xml:lang="sv">Base32-kodad data</comment>
     <glob pattern="*.base32"/>
   </mime-type>
@@ -109,6 +125,10 @@ Notes:
     <comment xml:lang="pt">Dados codificados em Btoa</comment>
     <comment xml:lang="sk">Súbor zakódovaný Btoa</comment>
     <comment xml:lang="sl">Datoteka kodirana z Btoa</comment>
+    <comment xml:lang="sr">бтоа кодирани подаци</comment>
+    <comment xml:lang="sr@ijekavian">бтоа кодирани подаци</comment>
+    <comment xml:lang="sr@ijekavianlatin">btoa kodirani podaci</comment>
+    <comment xml:lang="sr@latin">btoa kodirani podaci</comment>
     <comment xml:lang="sv">BTOA-kodad data</comment>
     <magic priority="50">
       <match type="string" offset="0" value="xbtoa Begin"/>
@@ -129,6 +149,10 @@ Notes:
     <comment xml:lang="pt">Dados codificados em Ascii85</comment>
     <comment xml:lang="sk">Dáta zakódované Ascii85</comment>
     <comment xml:lang="sl">Podatki kodirani z Ascii85</comment>
+    <comment xml:lang="sr">аски‑85 кодирани подаци</comment>
+    <comment xml:lang="sr@ijekavian">аски‑85 кодирани подаци</comment>
+    <comment xml:lang="sr@ijekavianlatin">ASCII‑85 kodirani podaci</comment>
+    <comment xml:lang="sr@latin">ASCII‑85 kodirani podaci</comment>
     <comment xml:lang="sv">ASCII85-kodad data</comment>
     <magic priority="50">
       <match type="string" offset="0" value="$lt;~"/>
@@ -148,6 +172,10 @@ Notes:
     <comment xml:lang="pt">Ficheiro codificado com UUencode</comment>
     <comment xml:lang="sk">Uuencoded súbor</comment>
     <comment xml:lang="sl">Datoteka Uuencoded</comment>
+    <comment xml:lang="sr">уу‑кодни фајл</comment>
+    <comment xml:lang="sr@ijekavian">уу‑кодни фајл</comment>
+    <comment xml:lang="sr@ijekavianlatin">Uuencoding fajl</comment>
+    <comment xml:lang="sr@latin">Uuencoding fajl</comment>
     <comment xml:lang="sv">Uuencoded fil</comment>
     <magic priority="50">
       <match type="string" offset="0" value="begin"/>
@@ -170,6 +198,10 @@ Notes:
     <comment xml:lang="pt">Ficheiro codificado com Xxencode</comment>
     <comment xml:lang="sk">Xxencoded súbor</comment>
     <comment xml:lang="sl">Datoteka Xxencoded</comment>
+    <comment xml:lang="sr">иксикс-кодни фајл</comment>
+    <comment xml:lang="sr@ijekavian">иксикс-кодни фајл</comment>
+    <comment xml:lang="sr@ijekavianlatin">Xxencoding fajl</comment>
+    <comment xml:lang="sr@latin">Xxencoding fajl</comment>
     <comment xml:lang="sv">Xxencoded fil</comment>
     <magic priority="50">
       <match type="string" offset="0" value="begin"/>
@@ -188,6 +220,10 @@ Notes:
     <comment xml:lang="pt">Definição de estrutura do Okteta</comment>
     <comment xml:lang="sk">Definícia štruktúry Okteta</comment>
     <comment xml:lang="sl">Določilo zgradbe za Okteto</comment>
+    <comment xml:lang="sr">Октетина дефиниција структуре</comment>
+    <comment xml:lang="sr@ijekavian">Октетина дефиниција структуре</comment>
+    <comment xml:lang="sr@ijekavianlatin">Oktetina definicija strukture</comment>
+    <comment xml:lang="sr@latin">Oktetina definicija strukture</comment>
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <glob pattern="*.osd"/>
   </mime-type>
