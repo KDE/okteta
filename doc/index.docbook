@@ -1,8 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY okteta "<application>Okteta</application>">
-  <!ENTITY kappname "&okteta;" >
-  <!ENTITY package "kdesdk">
   <!ENTITY Friedrich.Kossebau
 "<personname><firstname>Friedrich</firstname><othername>W. H.</othername><surname>Kossebau</surname></personname>">
   <!ENTITY Friedrich.Kossebau.email "<email>kossebau@kde.org</email>">
@@ -40,8 +37,8 @@
 </copyright>
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2013-11-28</date>
-<releaseinfo>0.12 (&kde; 4.12)</releaseinfo>
+<date>2016-07-29</date>
+<releaseinfo>0.20 (Applications 16.08)</releaseinfo>
 
 <abstract>
   <para>&okteta; is a simple editor for the raw data of files. This type of program
@@ -50,7 +47,7 @@
 
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>&package;</keyword>
+<keyword>kdesdk</keyword>
 <keyword>Okteta</keyword>
 <keyword>view</keyword>
 <keyword>edit</keyword>
@@ -96,7 +93,7 @@ extraction tool.</para>
     <menuchoice><guisubmenu>Applications</guisubmenu><guisubmenu>Utilities</guisubmenu>
     </menuchoice> group in the application launcher.</para>
 
-    <para>The standard &Qt; and &kde; command line
+    <para>The standard &Qt; and &kf5-full; command line
     options are available, and can be listed by entering
     <userinput><command>okteta</command> <option>--help</option></userinput>.</para>
 
@@ -950,16 +947,6 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
 
     <varlistentry>
     <term><menuchoice>
-    <guimenu>View</guimenu>
-    <guimenuitem>Show Non-printing Chars</guimenuitem>
-    </menuchoice></term>
-    <listitem><para><action>Toggle display of non-printing chars on and
-    off.</action> If the display is turned off, at the corresponding places in
-    the character column a substitute char is shown instead.</para></listitem>
-    </varlistentry>
-
-    <varlistentry>
-    <term><menuchoice>
     <shortcut>
     <keycap>F11</keycap>
     </shortcut>
@@ -1011,6 +998,17 @@ simply raw data. So also see for the <guisubmenu>Copy as</guisubmenu> submenu.</
     </para>
     </listitem>
     </varlistentry>
+
+    <varlistentry>
+    <term><menuchoice>
+    <guimenu>View</guimenu>
+    <guimenuitem>Show Non-printing Chars</guimenuitem>
+    </menuchoice></term>
+    <listitem><para><action>Toggle display of non-printing chars on and
+    off.</action> If the display is turned off, at the corresponding places in
+    the character column a substitute char is shown instead.</para></listitem>
+    </varlistentry>
+
     <varlistentry>
     <term><menuchoice>
     <guimenu>View</guimenu>
@@ -1241,22 +1239,6 @@ on or off. A detailed description of each tool you find in the <link linkend="to
     &underGPL;
 
 </chapter>
-
-<!-- !!!do not change ANYTHING after this line!!!! -->
-
-<appendix id="installation">
-    <title>Installation</title>
-
-    <sect1 id="getting-kapp">
-        <title>How to obtain &okteta;</title>
-        &install.intro.documentation;
-    </sect1>
-
-    <sect1 id="Compilation">
-        <title>Compilation and Installation</title>
-        &install.compile.documentation;
-    </sect1>
-</appendix>
 
 &documentation.index;
 </book>
