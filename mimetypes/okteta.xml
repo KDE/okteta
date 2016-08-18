@@ -23,6 +23,7 @@ Notes:
     <comment xml:lang="ca@valencia">Registres S de Motorola</comment>
     <comment xml:lang="en_GB">Motorola S-Records</comment>
     <comment xml:lang="es">Motorola S-Records</comment>
+    <comment xml:lang="et">Motorola S-Records</comment>
     <comment xml:lang="it">S-Records Motorola</comment>
     <comment xml:lang="nl">Motorola S-records</comment>
     <comment xml:lang="pl">Motorola S-Records</comment>
@@ -56,6 +57,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel</comment>
     <comment xml:lang="en_GB">Intel hexadecimal object file</comment>
     <comment xml:lang="es">Archivo objeto hexadecimal de Intel</comment>
+    <comment xml:lang="et">Inteli 16nd-objektfail</comment>
     <comment xml:lang="it">File oggetto esadecimale Intel</comment>
     <comment xml:lang="nl">Intel hexadecimaal objectbestand</comment>
     <comment xml:lang="pl">Plik obiektu szesnastkowego Intel</comment>
@@ -86,6 +88,7 @@ Notes:
     <comment xml:lang="ca@valencia">Dades codificades en Base64</comment>
     <comment xml:lang="en_GB">Base64 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Base64</comment>
+    <comment xml:lang="et">Base64 kodeeringus andmed</comment>
     <comment xml:lang="it">Dati codificati in Base64</comment>
     <comment xml:lang="nl">Base64 gecodeerde gegevens</comment>
     <comment xml:lang="pl">Dane zakodowane Base64</comment>
@@ -110,6 +113,7 @@ Notes:
     <comment xml:lang="ca@valencia">Dades codificades en Base32</comment>
     <comment xml:lang="en_GB">Base32 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Base32</comment>
+    <comment xml:lang="et">Base32 kodeeringus andmed</comment>
     <comment xml:lang="it">Dati codificati in Base32</comment>
     <comment xml:lang="nl">Base32 gecodeerde gegevens</comment>
     <comment xml:lang="pl">Dane zakodowane Base32</comment>
@@ -133,6 +137,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer BTOA codificat</comment>
     <comment xml:lang="en_GB">Btoa Encoded File</comment>
     <comment xml:lang="es">Archivo codificado en Btoa</comment>
+    <comment xml:lang="et">Btoa kodeeringus fail</comment>
     <comment xml:lang="it">File codificato in Btoa</comment>
     <comment xml:lang="nl">Btoa gecodeerd bestand</comment>
     <comment xml:lang="pl">Dane zakodowane Btoa</comment>
@@ -160,6 +165,7 @@ Notes:
     <comment xml:lang="ca@valencia">Dades codificades en ASCII85</comment>
     <comment xml:lang="en_GB">Ascii85 encoded data</comment>
     <comment xml:lang="es">Datos codificados en Ascii85</comment>
+    <comment xml:lang="et">Ascii85 kodeeringus andmed</comment>
     <comment xml:lang="it">File codificato in Ascii85</comment>
     <comment xml:lang="nl">Ascii85 gecodeerde gegevens</comment>
     <comment xml:lang="pl">Dane zakodowane Ascii85</comment>
@@ -186,6 +192,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer «uuencoded»</comment>
     <comment xml:lang="en_GB">Uuencoded file</comment>
     <comment xml:lang="es">Archivo codificado con Uuencode</comment>
+    <comment xml:lang="et">Uuencode-fail</comment>
     <comment xml:lang="it">File con codifica UUencode</comment>
     <comment xml:lang="nl">Uuencoded bestand</comment>
     <comment xml:lang="pl">Plik Uuencoded</comment>
@@ -215,6 +222,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer «xxencoded»</comment>
     <comment xml:lang="en_GB">Xxencoded file</comment>
     <comment xml:lang="es">Archivo codificado con Xxencode</comment>
+    <comment xml:lang="et">Xxencode-fail</comment>
     <comment xml:lang="it">File con codifica Xxencoded</comment>
     <comment xml:lang="nl">Xxencoded bestand</comment>
     <comment xml:lang="pl">Plik Xxencoded</comment>
@@ -240,6 +248,7 @@ Notes:
     <comment xml:lang="ca@valencia">Definició d'estructura de l'Okteta</comment>
     <comment xml:lang="en_GB">Okteta Structure definition</comment>
     <comment xml:lang="es">Definición de estructura de Okteta</comment>
+    <comment xml:lang="et">Okteta struktuuridefinitsioon</comment>
     <comment xml:lang="it">Definizione di struttura di Okteta</comment>
     <comment xml:lang="nl">Okteta structuurdefinitie</comment>
     <comment xml:lang="pl">Definicja struktury Okteta</comment>
