@@ -21,7 +21,12 @@ target_link_libraries( oktetapart
 )
 
 install( TARGETS oktetapart  DESTINATION ${PLUGIN_INSTALL_DIR})
-kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop )
+if(${KF5_VERSION} VERSION_LESS "5.16.0")
+    kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop)
+else()
+    kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop  SERVICE_TYPES kpart.desktop)
+endif()
+
 install(
   FILES oktetapartreadonlyui.rc oktetapartbrowserui.rc oktetapartreadwriteui.rc
   DESTINATION ${KXMLGUI_INSTALL_DIR}/oktetapart
