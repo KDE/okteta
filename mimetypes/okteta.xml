@@ -62,6 +62,7 @@ Notes:
     <comment xml:lang="nl">Intel hexadecimaal objectbestand</comment>
     <comment xml:lang="pl">Plik obiektu szesnastkowego Intel</comment>
     <comment xml:lang="pt">Ficheiro de objectos em hexadecimal da Intel</comment>
+    <comment xml:lang="pt_BR">Arquivo objeto em hexadecimal da Intel</comment>
     <comment xml:lang="sk">Intel hexadecimálny objektový súbor</comment>
     <comment xml:lang="sl">Intelova šestnajstiška predmetna datoteka</comment>
     <comment xml:lang="sr">Интелов хексадекадни објектни фајл</comment>
@@ -197,6 +198,7 @@ Notes:
     <comment xml:lang="nl">Uuencoded bestand</comment>
     <comment xml:lang="pl">Plik Uuencoded</comment>
     <comment xml:lang="pt">Ficheiro codificado com UUencode</comment>
+    <comment xml:lang="pt_BR">Arquivo uuencoded</comment>
     <comment xml:lang="sk">Uuencoded súbor</comment>
     <comment xml:lang="sl">Datoteka Uuencoded</comment>
     <comment xml:lang="sr">уу‑кодни фајл</comment>
@@ -227,6 +229,7 @@ Notes:
     <comment xml:lang="nl">Xxencoded bestand</comment>
     <comment xml:lang="pl">Plik Xxencoded</comment>
     <comment xml:lang="pt">Ficheiro codificado com Xxencode</comment>
+    <comment xml:lang="pt_BR">Arquivo xxencoded</comment>
     <comment xml:lang="sk">Xxencoded súbor</comment>
     <comment xml:lang="sl">Datoteka Xxencoded</comment>
     <comment xml:lang="sr">иксикс-кодни фајл</comment>
