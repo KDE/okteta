@@ -196,6 +196,7 @@ Notes:
     <comment>Uuencoded file</comment>
     <comment xml:lang="ca">Fitxer «uuencoded»</comment>
     <comment xml:lang="ca@valencia">Fitxer «uuencoded»</comment>
+    <comment xml:lang="de">UUencode-Datei</comment>
     <comment xml:lang="en_GB">Uuencoded file</comment>
     <comment xml:lang="es">Archivo codificado con Uuencode</comment>
     <comment xml:lang="et">Uuencode-fail</comment>
@@ -226,6 +227,7 @@ Notes:
     <comment>Xxencoded file</comment>
     <comment xml:lang="ca">Fitxer «xxencoded»</comment>
     <comment xml:lang="ca@valencia">Fitxer «xxencoded»</comment>
+    <comment xml:lang="de">Xxencode-Datei</comment>
     <comment xml:lang="en_GB">Xxencoded file</comment>
     <comment xml:lang="es">Archivo codificado con Xxencode</comment>
     <comment xml:lang="et">Xxencode-fail</comment>
