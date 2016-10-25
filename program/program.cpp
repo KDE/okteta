@@ -77,6 +77,7 @@ OktetaProgram::OktetaProgram( int &argc, char* argv[] )
         QT_UNICODE_LITERAL("kasten.okteta.controllers.structures.debug = true\n")));
 #endif
 
+    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     KLocalizedString::setApplicationDomain( "okteta" );
 }
 
