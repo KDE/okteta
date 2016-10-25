@@ -40,7 +40,7 @@ void ModelEncoderFileSystemExportJobPrivate::startExportToFile()
         new ModelStreamEncodeThread( q, file(), model(), selection(), mEncoder );
     exportThread->start();
     while( ! exportThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 
     const bool success = exportThread->success();
     delete exportThread;

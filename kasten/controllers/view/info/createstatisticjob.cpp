@@ -25,7 +25,7 @@
 // Okteta core
 #include <okteta/abstractbytearraymodel.h>
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten
@@ -50,7 +50,7 @@ int CreateStatisticJob::exec()
         for( ; i<=blockEnd; ++i )
             ++mByteCount[mByteArrayModel->byte(i)];
 
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
     }
 
     deleteLater(); // TODO: could be reused on next search

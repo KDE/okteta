@@ -132,7 +132,7 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGen
         new ModelDataGenerateThread( q, generator );
     generateThread->start();
     while( !generateThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 
     QMimeData* mimeData = generateThread->data();
 

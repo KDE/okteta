@@ -25,13 +25,11 @@
 // filter
 #include <abstractbytearrayfilter.h>
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten
 {
-
-static const int FilterMaxEventProcessTimeInMS = 100;
 
 bool FilterJob::exec()
 {
@@ -47,7 +45,7 @@ bool FilterJob::exec()
 
 void FilterJob::onFilteredBytes()
 {
-    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, FilterMaxEventProcessTimeInMS );
+    QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 }
 
 }

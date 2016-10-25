@@ -147,7 +147,7 @@ void CopyAsController::onActionTriggered( QAction *action )
         new ModelStreamEncodeThread( this, &exportDataBuffer, mModel, selection, encoder );
     encodeThread->start();
     while( !encodeThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 
     delete encodeThread;
 

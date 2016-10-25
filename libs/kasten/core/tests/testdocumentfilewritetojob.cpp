@@ -46,7 +46,7 @@ void TestDocumentFileWriteToJob::startSyncWithRemote()
     TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(), document, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 
     const bool success = writeThread->success();
     delete writeThread;

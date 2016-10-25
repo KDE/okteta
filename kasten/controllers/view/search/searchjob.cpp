@@ -26,14 +26,11 @@
 #include <okteta/abstractbytearraymodel.h>
 #include <okteta/charcodec.h>
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten
 {
-
-static const int SearchMaxEventProcessTimeInMS = 100;
-
 
 SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
                       const QByteArray& searchData,
@@ -78,7 +75,7 @@ Okteta::Address SearchJob::exec()
 
 void SearchJob::onBytesSearched()
 {
-    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, SearchMaxEventProcessTimeInMS );
+    QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 }
 
 
