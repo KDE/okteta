@@ -51,7 +51,7 @@ void TestDocumentFileConnectJob::startConnectWithFile()
 
     writeThread->start();
     while( !writeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 
     const bool success = writeThread->success();
 

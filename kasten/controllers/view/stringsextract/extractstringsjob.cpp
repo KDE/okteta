@@ -27,7 +27,7 @@
 #include <okteta/charcodec.h>
 #include <okteta/character.h>
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten
@@ -89,7 +89,7 @@ void ExtractStringsJob::exec()
             }
         }
 
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
     }
 
     // last string not ended?

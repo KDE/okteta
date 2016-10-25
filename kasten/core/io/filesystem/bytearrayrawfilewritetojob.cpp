@@ -47,7 +47,7 @@ void ByteArrayRawFileWriteToJob::startSyncWithRemote()
     ByteArrayRawFileWriteThread *writeThread = new ByteArrayRawFileWriteThread( this, document, file() );
     writeThread->start();
     while( !writeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 
     const bool success = writeThread->success();
     delete writeThread;

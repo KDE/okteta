@@ -143,7 +143,7 @@ void InsertController::onActionTriggered( QAction *action )
         new ModelDataGenerateThread( this, generator );
     generateThread->start();
     while( !generateThread->wait(100) )
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 
     QMimeData* mimeData = generateThread->data();
 

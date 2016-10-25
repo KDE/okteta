@@ -26,14 +26,12 @@
 #include "framestopaperprinter.h"
 // #include "printthread.h"
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 // #include <QFontDatabase>
 
 
 namespace Kasten
 {
-
-static const int PrintMaxEventProcessTimeInMS = 100;
 
 #if 0
 PrintJob::PrintJob( FramesToPaperPrinter *framesPrinter, int firstPage, int lastPage, QPrinter *printer )
@@ -62,7 +60,7 @@ bool PrintJob::exec()
 
 void PrintJob::onPagePrinted()
 {
-    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, PrintMaxEventProcessTimeInMS );
+    QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 }
 
 #if 0

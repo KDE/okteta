@@ -27,7 +27,7 @@
 #include <okteta/charcodec.h>
 #include <okteta/character.h>
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten
@@ -87,7 +87,7 @@ bool CharsetConversionJob::exec()
             mResult[r++] = convertedByte;
         }
 
-        QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, 100 );
+        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
     }
 
     deleteLater(); // TODO: could be reused on next operation

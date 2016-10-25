@@ -27,14 +27,11 @@
 // Okteta core
 #include <okteta/abstractbytearraymodel.h>
 // Qt
-#include <QApplication>
+#include <QCoreApplication>
 
 
 namespace Kasten
 {
-
-static const int MaxChecksumEventProcessTimeInMS = 100;
-
 
 void ChecksumCalculateJob::exec()
 {
@@ -58,7 +55,7 @@ void ChecksumCalculateJob::exec()
 
 void ChecksumCalculateJob::onCalculatedBytes()
 {
-    QApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers, MaxChecksumEventProcessTimeInMS );
+    QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
 }
 
 }
