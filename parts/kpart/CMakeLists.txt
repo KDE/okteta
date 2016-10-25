@@ -32,3 +32,6 @@ install(
   DESTINATION ${KXMLGUI_INSTALL_DIR}/oktetapart
 )
 
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
