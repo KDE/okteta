@@ -2,6 +2,7 @@
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
  *   Copyright 2011, 2012 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2016 Aaron Bishop <erroneous@gmail.com>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -29,6 +30,7 @@
 #include "utf16stringdata.h"
 #include "utf8stringdata.h"
 #include "asciistringdata.h"
+#include "ebcdicstringdata.h"
 #include "latin1stringdata.h"
 #include "../../script/classes/stringscriptclass.h"
 #include "../../script/scripthandlerinfo.h"
@@ -222,6 +224,9 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
             case UTF32_BE:
                 data = new Utf32StringData(this);
                 data->setLittleEndian(false);
+                break;
+            case EBCDIC:
+                data = new EbcdicStringData(this);
                 break;
             default:
                 data = new AsciiStringData(this); //TODO add the other classes

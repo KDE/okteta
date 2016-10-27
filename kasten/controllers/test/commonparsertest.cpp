@@ -2,6 +2,7 @@
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
  *   Copyright 2012 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2016 Aaron Bishop <erroneous@gmail.com>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -269,6 +270,7 @@ inline void CommonParserTest::testToStringEncoding_data()
     QTest::addColumn<int>("expected");
 
     QTest::newRow("ascii") << "ascii" << (int)StringDataInformation::ASCII;
+    QTest::newRow("ebcdic") << "ebcdic" << (int)StringDataInformation::EBCDIC;
     QTest::newRow("ascii upper") << "ASCII" << (int)StringDataInformation::ASCII;
     QTest::newRow("excess char") << "asciii" << (int)StringDataInformation::InvalidEncoding;
 

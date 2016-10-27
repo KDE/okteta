@@ -2,6 +2,7 @@
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
  *   Copyright 2012 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2016 Aaron Bishop <erroneous@gmail.com>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -150,6 +151,8 @@ StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& s
     QString enc = str.toLower();
     if (enc == QStringLiteral("ascii"))
         return StringDataInformation::ASCII;
+    else if (enc == QStringLiteral("ebcdic"))
+        return StringDataInformation::EBCDIC;
     else if (enc == QStringLiteral("latin1") || enc == QStringLiteral("latin-1"))
         return StringDataInformation::Latin1;
     else if (enc.startsWith(QStringLiteral("utf")))

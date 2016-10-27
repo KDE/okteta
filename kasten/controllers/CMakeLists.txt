@@ -374,6 +374,8 @@ set( STRUCTVIEW_TESTED_SRCS
   view/structures/datatypes/strings/utf8stringdata.cpp
   view/structures/datatypes/strings/utf16stringdata.cpp
   view/structures/datatypes/strings/utf32stringdata.cpp
+  view/structures/datatypes/strings/ebcdicstringdata.cpp
+  ../../core/codecs/ebcdic1047charcodec.cpp
   view/structures/script/scriptengineinitializer.cpp
   view/structures/script/scripthandler.cpp
   view/structures/script/scripthandlerinfo.cpp

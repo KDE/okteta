@@ -2,6 +2,7 @@
  *   This file is part of the Okteta Kasten Framework, made within the KDE community.
  *
  *   Copyright 2011 Alex Richardson <alex.richardson@gmx.de>
+ *   Copyright 2016 Aaron Bishop <erroneous@gmail.com>
  *
  *   This library is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU Lesser General Public
@@ -34,7 +35,7 @@ class DummyDataInformation;
 //TODO QStringLiteral
 const QLatin1String stringEncodings[] = {
     QLatin1String("ascii"), QLatin1String("latin1"), QLatin1String("utf-8"), QLatin1String("utf-16le"),
-    QLatin1String("utf-16-be"), QLatin1String("utf32-le"), QLatin1String("utf32-be")
+    QLatin1String("utf-16-be"), QLatin1String("utf32-le"), QLatin1String("utf32-be"), QLatin1String("ebcdic")
 };
 
 class StringDataInformation : public DataInformationWithDummyChildren
@@ -42,7 +43,7 @@ class StringDataInformation : public DataInformationWithDummyChildren
     DATAINFORMATION_CLONE_DECL(StringDataInformation, DataInformationWithDummyChildren);
 public:
     enum StringType {
-        InvalidEncoding = -1, ASCII = 0, Latin1, UTF8, UTF16_LE, UTF16_BE, UTF32_LE, UTF32_BE
+        InvalidEncoding = -1, ASCII = 0, Latin1, UTF8, UTF16_LE, UTF16_BE, UTF32_LE, UTF32_BE, EBCDIC
     };
 
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = 0);
