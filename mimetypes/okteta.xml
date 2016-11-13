@@ -38,6 +38,7 @@ Notes:
     <comment xml:lang="sr@latin">Motorolin S‑Record</comment>
     <comment xml:lang="sv">Motorola S-Records</comment>
     <comment xml:lang="uk">S-записи Motorola</comment>
+    <comment xml:lang="zh_CN">Motorola S-Record</comment>
     <magic priority="70">
       <match offset="0" value="S0" type="string">
         <match offset="4" value="0000" type="string"/>
@@ -74,6 +75,7 @@ Notes:
     <comment xml:lang="sr@latin">Intelov heksadekadni objektni fajl</comment>
     <comment xml:lang="sv">Intel hexadecimal objektfil</comment>
     <comment xml:lang="uk">шістнадцятковий об’єктний файл Intel®</comment>
+    <comment xml:lang="zh_CN">Intel 十六进制对象文件</comment>
 <!--  Intel MCS-86 Object is alternative name?  -->
     <magic priority="70">
       <match type="string" offset="0" value=":">
@@ -107,6 +109,7 @@ Notes:
     <comment xml:lang="sr@latin">base64 kodirani podaci</comment>
     <comment xml:lang="sv">Base64-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Base64</comment>
+    <comment xml:lang="zh_CN">Base64 编码的数据</comment>
     <glob pattern="*.base64"/>
     <glob pattern="*.b64"/>
   </mime-type>
@@ -134,6 +137,7 @@ Notes:
     <comment xml:lang="sr@latin">base32 kodirani podaci</comment>
     <comment xml:lang="sv">Base32-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Base32</comment>
+    <comment xml:lang="zh_CN">Base32 编码的数据</comment>
     <glob pattern="*.base32"/>
   </mime-type>
 
@@ -160,6 +164,7 @@ Notes:
     <comment xml:lang="sr@latin">btoa kodirani podaci</comment>
     <comment xml:lang="sv">BTOA-kodad data</comment>
     <comment xml:lang="uk">файл у кодуванні Btoa</comment>
+    <comment xml:lang="zh_CN">Btoa 编码的文件</comment>
     <magic priority="50">
       <match type="string" offset="0" value="xbtoa Begin"/>
     </magic>
@@ -190,6 +195,7 @@ Notes:
     <comment xml:lang="sr@latin">ASCII‑85 kodirani podaci</comment>
     <comment xml:lang="sv">ASCII85-kodad data</comment>
     <comment xml:lang="uk">дані у кодуванні Ascii85</comment>
+    <comment xml:lang="zh_CN">Ascii85 编码的数据</comment>
     <magic priority="50">
       <match type="string" offset="0" value="$lt;~"/>
     </magic>
@@ -219,6 +225,7 @@ Notes:
     <comment xml:lang="sr@latin">Uuencoding fajl</comment>
     <comment xml:lang="sv">Uuencoded fil</comment>
     <comment xml:lang="uk">файл даних у форматі UUE</comment>
+    <comment xml:lang="zh_CN">Uuencoding 编码的文件</comment>
     <magic priority="50">
       <match type="string" offset="0" value="begin"/>
       <match type="string" offset="0" value="begin-base64"/>
@@ -251,6 +258,7 @@ Notes:
     <comment xml:lang="sr@latin">Xxencoding fajl</comment>
     <comment xml:lang="sv">Xxencoded fil</comment>
     <comment xml:lang="uk">файл даних у форматі xxe</comment>
+    <comment xml:lang="zh_CN">Xxencoding 编码的文件</comment>
     <magic priority="50">
       <match type="string" offset="0" value="begin"/>
     </magic>
@@ -279,6 +287,7 @@ Notes:
     <comment xml:lang="sr@latin">Oktetina definicija strukture</comment>
     <comment xml:lang="sv">Okteta strukturdefinition</comment>
     <comment xml:lang="uk">визначення структури Okteta</comment>
+    <comment xml:lang="zh_CN">Okteta 结构体定义</comment>
     <glob pattern="*.osd"/>
   </mime-type>
 </mime-info>
