@@ -355,7 +355,7 @@ Support for strings (various Unicode encodings) in definitions
       <title>Sharing structure definitions</title>
       <para>For common structures you may not need to create a definition yourself,
       but instead can reuse an already existing definition from places like
-      <ulink url="http://kde-files.org/index.php?xcontentmode=691">kde-files.org</ulink>.</para>
+      <ulink url="https://store.kde.org/">store.kde.org</ulink>.</para>
       <para>You also may want to share a definition yourself. To do so, create a
       file archive (&eg; a zipped tar archive, <literal role="extension">.tar.gz</literal>)
       containing just the subdirectory with the <literal role="extension">.desktop</literal>
