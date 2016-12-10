@@ -325,7 +325,7 @@ Support for strings (various Unicode encodings) in definitions
         <para>The Structures tool looks for structure descriptions in the
           subdirectory <filename class="directory">share/okteta/structures/</filename>
           of the user's directory for program data (find that by executing
-          <userinput><command>kf5-config</command> <option>--path data</option></userinput>).
+          <userinput><command>qtpaths</command> <option>--path GenericDataLocation</option></userinput>).
           You may need to create this directory if there are no structure
           definitions installed yet.</para>
           <para>Two files exist for every structure definition: One file for the actual definition and a
@@ -334,9 +334,10 @@ Support for strings (various Unicode encodings) in definitions
           definition, which contains both the <literal role="extension">.desktop</literal>
           file and the <literal role="extension">.osd</literal> or
           <filename>main.js</filename> file of that definition.</para>
-          <para>For example, with the program data directory <filename class="directory">.kde</filename>
+          <para>For example, with the program data directory
+          <filename class="directory"><userinput><command>qtpaths</command> <option>--paths GenericDataLocation</option></userinput></filename>
           and a structure definition named ExampleStructure there is the directory
-          <filename class="directory">.kde/share/apps/okteta/structures/ExampleStructure</filename>,
+          <filename class="directory">/share/apps/okteta/structures/ExampleStructure</filename>
           which contains a file <filename>ExampleStructure.desktop</filename> and a
           file <filename>ExampleStructure.osd</filename>.</para>
       </sect3>
