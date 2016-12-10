@@ -323,7 +323,7 @@ Support for strings (various Unicode encodings) in definitions
       <sect3>
         <title>Installing structure definitions manually</title>
         <para>The Structures tool looks for structure descriptions in the
-          subdirectory <filename class="directory">share/okteta/structures/</filename>
+          subdirectory <filename class="directory">okteta/structures/</filename>
           of the user's directory for program data (find that by executing
           <userinput><command>qtpaths</command> <option>--path GenericDataLocation</option></userinput>).
           You may need to create this directory if there are no structure
@@ -337,7 +337,7 @@ Support for strings (various Unicode encodings) in definitions
           <para>For example, with the program data directory
           <filename class="directory"><userinput><command>qtpaths</command> <option>--paths GenericDataLocation</option></userinput></filename>
           and a structure definition named ExampleStructure there is the directory
-          <filename class="directory">/share/apps/okteta/structures/ExampleStructure</filename>
+          <filename class="directory">okteta/structures/ExampleStructure</filename>
           which contains a file <filename>ExampleStructure.desktop</filename> and a
           file <filename>ExampleStructure.osd</filename>.</para>
       </sect3>
