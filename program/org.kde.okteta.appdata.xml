@@ -20,6 +20,7 @@
   <name xml:lang="hu">Okteta</name>
   <name xml:lang="it">Okteta</name>
   <name xml:lang="nl">Okteta</name>
+  <name xml:lang="nn">Okteta</name>
   <name xml:lang="pl">Okteta</name>
   <name xml:lang="pt">Okteta</name>
   <name xml:lang="pt-BR">Okteta</name>
@@ -53,6 +54,7 @@
   <summary xml:lang="hu">Hexaszerkesztő</summary>
   <summary xml:lang="it">Editor esadecimale</summary>
   <summary xml:lang="nl">Hexbewerker</summary>
+  <summary xml:lang="nn">Hex-redigering</summary>
   <summary xml:lang="pl">Edytor szesnastkowy</summary>
   <summary xml:lang="pt">Editor hexadecimal</summary>
   <summary xml:lang="pt-BR">Editor hexadecimal</summary>
@@ -85,6 +87,7 @@
     <p xml:lang="hu">Az Oktate egy egyszerű program fájlok nyers adatainak szerkesztéséhez.</p>
     <p xml:lang="it">Okteta è un semplice editor dei dati grezzi di un file.</p>
     <p xml:lang="nl">Okteta is een eenvoudige bewerker voor de ruwe gegevens van bestanden.</p>
+    <p xml:lang="nn">Okteta er eit veldig enkelt redigeringsprogram for rådata i filer.</p>
     <p xml:lang="pl">Okteta to prosty edytor do przeglądania nieprzetworzonych danych plików.</p>
     <p xml:lang="pt">O Okteta é um editor simples para os dados em bruto dos ficheiros.</p>
     <p xml:lang="pt-BR">Okteta é um editor simples para os dados brutos dos arquivos.</p>
@@ -118,6 +121,7 @@
     <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
+    <p xml:lang="nn">Funksjonar:</p>
     <p xml:lang="pl">Możliwości:</p>
     <p xml:lang="pt">Funcionalidades:</p>
     <p xml:lang="pt-BR">Funcionalidades:</p>
@@ -454,6 +458,7 @@
       <li xml:lang="hu">És még sok minden más…</li>
       <li xml:lang="it">E altro ancora...</li>
       <li xml:lang="nl">En meer...</li>
+      <li xml:lang="nn">Og mykje meir …</li>
       <li xml:lang="pl">I więcej...</li>
       <li xml:lang="pt">E mais...</li>
       <li xml:lang="pt-BR">E mais...</li>
