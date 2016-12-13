@@ -218,6 +218,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Uuencoded file</comment>
+    <comment xml:lang="ast">Ficheru Uuencoded</comment>
     <comment xml:lang="ca">Fitxer «uuencoded»</comment>
     <comment xml:lang="ca@valencia">Fitxer «uuencoded»</comment>
     <comment xml:lang="de">UUencode-Datei</comment>
