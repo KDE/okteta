@@ -11,6 +11,7 @@
   <name xml:lang="cs">Okteta</name>
   <name xml:lang="da">Okteta</name>
   <name xml:lang="de">Okteta</name>
+  <name xml:lang="el">Okteta</name>
   <name xml:lang="en-GB">Okteta</name>
   <name xml:lang="es">Okteta</name>
   <name xml:lang="et">Okteta</name>
@@ -44,6 +45,7 @@
   <summary xml:lang="ca-valencia">Editor hexadecimal</summary>
   <summary xml:lang="cs">Hexa editor</summary>
   <summary xml:lang="de">Hex-Editor</summary>
+  <summary xml:lang="el">Επεξεργαστής δεκαεξαδικών</summary>
   <summary xml:lang="en-GB">Hex editor</summary>
   <summary xml:lang="es">Editor hexadecimal</summary>
   <summary xml:lang="et">Binaarfailide redaktor</summary>
@@ -109,6 +111,7 @@
     <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="da">Funktioner:</p>
     <p xml:lang="de">Funktionen:</p>
+    <p xml:lang="el">Χαρακτηριστικά:</p>
     <p xml:lang="en-GB">Features:</p>
     <p xml:lang="es">Funcionalidades:</p>
     <p xml:lang="et">Omadused:</p>
@@ -345,6 +348,7 @@
       <li xml:lang="ca-valencia">Múltiples fitxers oberts</li>
       <li xml:lang="cs">Otevření více souborů</li>
       <li xml:lang="de">Mehrere geöffnete Dateien</li>
+      <li xml:lang="el">Άνοιγμα πολλαπλών αρχείων</li>
       <li xml:lang="en-GB">Multiple open files</li>
       <li xml:lang="es">Permite abrir varios archivos a la vez</li>
       <li xml:lang="et">Paljude failide korraga avamise võimalus</li>
@@ -375,6 +379,7 @@
       <li xml:lang="ca">Admet desfer/refer</li>
       <li xml:lang="ca-valencia">Admet desfer/refer</li>
       <li xml:lang="de">Unterstützung für Zurücknehmen und Wiederherstellen</li>
+      <li xml:lang="el">Υποστήριξη αναίρεσης/επανάληψης</li>
       <li xml:lang="en-GB">Undo/redo support</li>
       <li xml:lang="es">Permite deshacer y rehacer acciones</li>
       <li xml:lang="et">Tagasivõtmiste ja uuestitegemiste toetus</li>
@@ -435,6 +440,7 @@
       <li xml:lang="ca-valencia">I més...</li>
       <li xml:lang="cs">A další...</li>
       <li xml:lang="de">Und noch mehr ...</li>
+      <li xml:lang="el">Και πολλά άλλα...</li>
       <li xml:lang="en-GB">And more...</li>
       <li xml:lang="es">Y más...</li>
       <li xml:lang="et">Ja veel palju muud...</li>
