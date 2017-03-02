@@ -140,11 +140,13 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                 keyUsed = false;
             break;
         default:
+        {
             // is plain char?
-            if( keyEvent->text().length() > 0
+            const  QString text = keyEvent->text();
+            if( text.length() > 0
                 && ( !(keyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) ) )
             {
-                const int input = keyEvent->text()[0].toLatin1();
+                const int input = text.at(0).toLatin1();
                 // no usable char?
                 if( input < 32 )
                 {
@@ -191,6 +193,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
             }
             else
                 keyUsed = false;
+        }
         }
     }
     else

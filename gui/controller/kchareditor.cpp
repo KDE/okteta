@@ -42,11 +42,15 @@ KCharEditor::KCharEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* v
 bool KCharEditor::handleKeyPress( QKeyEvent* keyEvent )
 {
     bool keyUsed = false;
+
+    const QString text = keyEvent->text();
+
     // some input that should be inserted?
-    if( keyEvent->text().length() > 0
+    if( text.length() > 0
         && !(keyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) )
     {
-        const QChar enteredChar = keyEvent->text()[0];
+
+        const QChar enteredChar = text.at(0);
         if( enteredChar.isPrint() )
         {
             Byte byte;
