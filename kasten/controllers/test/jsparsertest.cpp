@@ -134,7 +134,6 @@ void JsParserTest::testByteOrder_data()
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
     QTest::addColumn<int>("expectedByteOrder");
     //verify that default is inherit
-    QString codeStr = QStringLiteral("%1");
     Q_FOREACH(const JsTestData& data, allData) {
         //default should be inherit
         QString codeStr = QStringLiteral("%1;");

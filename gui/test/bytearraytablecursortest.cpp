@@ -54,8 +54,6 @@ static const Line FinalLine =  RelativeFinalOffset/ NoOfBytesPerLine;
 static const LinePosition FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
 static Coord FinalCoord( FinalLinePosition, FinalLine );
 
-static const LineSize NoOfLinesPerPage = 5;
-
 static const LinePosition Pos1 = 15;
 static const LinePosition Pos2 = 25;
 static const Line Line1 = 10;

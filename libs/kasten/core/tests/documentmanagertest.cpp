@@ -39,7 +39,6 @@ void DocumentManagerTest::checkAdded( QSignalSpy* changedSpy, Kasten::AbstractDo
     QCOMPARE( changedSpy->count(), 1 );
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE( arguments.count(), 1 );
-    const QVariant firstArgument = arguments.at(0);
     const QList<Kasten::AbstractDocument*> documents =
         arguments.at(0).value<QList<Kasten::AbstractDocument*> >();
     QCOMPARE( documents.count(), 1 );

@@ -36,7 +36,6 @@ ToggleButtonPrivate::ToggleButtonPrivate( ToggleButton* parent ) : p( parent )
 
 void ToggleButtonPrivate::setOtherState( const QIcon& icon, const QString& text, const QString& toolTip )
 {
-    const QFontMetrics metrics = p->fontMetrics();
     mOtherIcon = icon;
     mOtherText = text;
     mOtherToolTip = toolTip;
