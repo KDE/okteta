@@ -187,10 +187,8 @@ void DocumentInfoView::onLocationChanged( const QString& location )
 void DocumentInfoView::onDocumentSizeChanged( int newSize )
 {
     const QString size = ( newSize != -1 ) ?
-        QString::fromLatin1( "%1 (%2)" )
-        .arg( KIO::convertSize(newSize) )
-        .arg( QLocale().toString(newSize) ) :
-        QString::fromLatin1( "-" );
+        KIO::convertSize(newSize) + QLatin1String(" (") + QLocale().toString(newSize) + QLatin1Char(')') :
+        QStringLiteral("-");
     mSizeLabel->setText( size );
 }
 
