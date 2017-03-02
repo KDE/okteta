@@ -31,19 +31,19 @@ StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* hand
     : DefaultScriptClass(eng, handlerInfo)
 {
     //read-only properties
-    s_lengthInCodepoints = eng->toStringHandle(ParserStrings::PROPERTY_CHAR_COUNT);
+    s_lengthInCodepoints = eng->toStringHandle(ParserStrings::PROPERTY_CHAR_COUNT());
     mIterableProperties.append(qMakePair(s_lengthInCodepoints, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_lengthInBytes = eng->toStringHandle(ParserStrings::PROPERTY_BYTE_COUNT);
+    s_lengthInBytes = eng->toStringHandle(ParserStrings::PROPERTY_BYTE_COUNT());
     mIterableProperties.append(qMakePair(s_lengthInBytes, QScriptValue::ReadOnly | QScriptValue::Undeletable));
 
     //read-write properties
-    s_maxByteCount = eng->toStringHandle(ParserStrings::PROPERTY_MAX_BYTE_COUNT);
+    s_maxByteCount = eng->toStringHandle(ParserStrings::PROPERTY_MAX_BYTE_COUNT());
     mIterableProperties.append(qMakePair(s_maxByteCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_maxCharCount = eng->toStringHandle(ParserStrings::PROPERTY_MAX_CHAR_COUNT);
+    s_maxCharCount = eng->toStringHandle(ParserStrings::PROPERTY_MAX_CHAR_COUNT());
     mIterableProperties.append(qMakePair(s_maxCharCount, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_terminatedBy = eng->toStringHandle(ParserStrings::PROPERTY_TERMINATED_BY);
+    s_terminatedBy = eng->toStringHandle(ParserStrings::PROPERTY_TERMINATED_BY());
     mIterableProperties.append(qMakePair(s_terminatedBy, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_encoding = eng->toStringHandle(ParserStrings::PROPERTY_ENCODING);
+    s_encoding = eng->toStringHandle(ParserStrings::PROPERTY_ENCODING());
     mIterableProperties.append(qMakePair(s_encoding, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mStringPrototype = eng->newObject();

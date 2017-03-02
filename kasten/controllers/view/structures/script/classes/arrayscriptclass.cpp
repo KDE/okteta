@@ -32,11 +32,11 @@
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
-    s_length = engine->toStringHandle(ParserStrings::PROPERTY_LENGTH);
+    s_length = engine->toStringHandle(ParserStrings::PROPERTY_LENGTH());
     mIterableProperties.append(qMakePair(s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_childType = engine->toStringHandle(QStringLiteral("childType"));
     //the preferred property (the same as childType)
-    s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE);
+    s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE());
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
     mArrayPrototype = engine->newObject();

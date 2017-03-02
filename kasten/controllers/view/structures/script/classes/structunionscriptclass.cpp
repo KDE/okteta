@@ -32,9 +32,9 @@
 StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
-    s_childCount = engine->toStringHandle(ParserStrings::PROPERTY_CHILD_COUNT); //read-only
+    s_childCount = engine->toStringHandle(ParserStrings::PROPERTY_CHILD_COUNT()); //read-only
     mIterableProperties.append(qMakePair(s_childCount, QScriptValue::ReadOnly | QScriptValue::Undeletable));
-    s_children = engine->toStringHandle(ParserStrings::PROPERTY_CHILDREN); //write-only
+    s_children = engine->toStringHandle(ParserStrings::PROPERTY_CHILDREN()); //write-only
 
     mStructUnionPrototype = engine->newObject();
     mStructUnionPrototype.setProperty(QStringLiteral("toString"),

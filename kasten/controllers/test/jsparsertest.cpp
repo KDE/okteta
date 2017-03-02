@@ -196,7 +196,9 @@ void JsParserTest::testByteOrder()
     QCOMPARE((int)data->byteOrder(), expectedByteOrder);
 }
 
-static const QString updateFunction = QStringLiteral("function () { /* do nothing*/; }");
+namespace {
+QString updateFunction() { return QStringLiteral("function () { /* do nothing*/; }"); }
+}
 
 void JsParserTest::testUpdateFunc_data()
 {
@@ -204,15 +206,15 @@ void JsParserTest::testUpdateFunc_data()
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
     Q_FOREACH(const JsTestData& data, allData) {
-        QString codeStr = QStringLiteral("%1.setUpdate(") + updateFunction + QStringLiteral(");");
+        QString codeStr = QStringLiteral("%1.setUpdate(") + updateFunction() + QStringLiteral(");");
         QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
 
-        codeStr = QStringLiteral("%1.set({updateFunc: ") + updateFunction + QStringLiteral("});");
+        codeStr = QStringLiteral("%1.set({updateFunc: ") + updateFunction() + QStringLiteral("});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
 
-        codeStr = QStringLiteral("var obj = %1; obj.updateFunc = ") + updateFunction + QStringLiteral("; obj;");
+        codeStr = QStringLiteral("var obj = %1; obj.updateFunc = ") + updateFunction() + QStringLiteral("; obj;");
         QTest::newRow((data.tag + "-property assign").constData())
             << codeStr.arg(data.constructorCall) << data.check;
     }
@@ -228,10 +230,12 @@ void JsParserTest::testUpdateFunc()
     QScriptValue update = data->updateFunc();
     QVERIFY(update.isValid());
     QVERIFY(update.isFunction());
-    QCOMPARE(update.toString(), updateFunction);
+    QCOMPARE(update.toString(), updateFunction());
 }
 
-static const QString validationFunction = QStringLiteral("function () { return true; }");
+namespace {
+QString validationFunction() { return QStringLiteral("function () { return true; }"); }
+}
 
 void JsParserTest::testValidationFunc_data()
 {
@@ -239,15 +243,15 @@ void JsParserTest::testValidationFunc_data()
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
     Q_FOREACH(const JsTestData& data, allData) {
-        QString codeStr = QStringLiteral("%1.setValidation(") + validationFunction + QStringLiteral(");");
+        QString codeStr = QStringLiteral("%1.setValidation(") + validationFunction() + QStringLiteral(");");
         QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
 
-        codeStr = QStringLiteral("%1.set({validationFunc: ") + validationFunction + QStringLiteral("});");
+        codeStr = QStringLiteral("%1.set({validationFunc: ") + validationFunction() + QStringLiteral("});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
 
-        codeStr = QStringLiteral("var obj = %1; obj.validationFunc = ") + validationFunction + QStringLiteral("; obj;");
+        codeStr = QStringLiteral("var obj = %1; obj.validationFunc = ") + validationFunction() + QStringLiteral("; obj;");
         QTest::newRow((data.tag + "-property assign").constData())
             << codeStr.arg(data.constructorCall) << data.check;
     }
@@ -263,7 +267,7 @@ void JsParserTest::testValidationFunc()
     QScriptValue validation = data->validationFunc();
     QVERIFY(validation.isValid());
     QVERIFY(validation.isFunction());
-    QCOMPARE(validation.toString(), validationFunction);
+    QCOMPARE(validation.toString(), validationFunction());
 }
 
 void JsParserTest::testName_data()

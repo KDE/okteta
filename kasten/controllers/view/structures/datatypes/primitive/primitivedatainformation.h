@@ -55,9 +55,7 @@ public:
 
     /** @return the matching prefix for the base (nothing, '0x', '0b' or '0o') */
     static QString basePrefix(int base);
-    static const QString binaryPrefix;
-    static const QString octalPrefix;
-    static const QString hexPrefix;
+
 protected:
     virtual BitCount32 offset(unsigned int index) const;
     PrimitiveDataInformation(const PrimitiveDataInformation& d);
@@ -144,9 +142,9 @@ inline QString PrimitiveDataInformation::basePrefix(int base)
 {
     switch (base) {
         case 10: return QString();
-        case 2: return binaryPrefix;
-        case 8: return octalPrefix;
-        case 16: return hexPrefix;
+        case 2: return QStringLiteral("0b");
+        case 8: return QStringLiteral("0o");
+        case 16: return QStringLiteral("0x");
         default:
             Q_ASSERT_X(false, "PrimitiveDataInformation::basePrefix()", "Invalid argument!");
             return QString();

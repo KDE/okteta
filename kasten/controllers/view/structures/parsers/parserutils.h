@@ -93,82 +93,73 @@ struct ParsedNumber {
 };
 
 namespace ParserStrings {
-    const QString TYPE_ARRAY = QStringLiteral("array");
-    const QString TYPE_BITFIELD = QStringLiteral("bitfield");
-    const QString TYPE_ENUM = QStringLiteral("enum");
-    const QString TYPE_FLAGS = QStringLiteral("flags");
-    const QString TYPE_PRIMITIVE = QStringLiteral("primitive");
-    const QString TYPE_STRING = QStringLiteral("string");
-    const QString TYPE_STRUCT = QStringLiteral("struct");
-    const QString TYPE_UNION = QStringLiteral("union");
-    const QString TYPE_POINTER = QStringLiteral("pointer");
-    const QString TYPE_TAGGED_UNION = QStringLiteral("taggedUnion");
+    QString TYPE_ARRAY();
+    QString TYPE_BITFIELD();
+    QString TYPE_ENUM();
+    QString TYPE_FLAGS();
+    QString TYPE_PRIMITIVE();
+    QString TYPE_STRING();
+    QString TYPE_STRUCT();
+    QString TYPE_UNION();
+    QString TYPE_POINTER();
+    QString TYPE_TAGGED_UNION();
     /** Only needed for .osd */
-    const QString TYPE_ENUMDEF = QStringLiteral("enumDef");
-    const QString TYPE_ALTERNATIVES = QStringLiteral("alternatives");
-    const QString TYPE_GROUP= QStringLiteral("group");
+    QString TYPE_ENUMDEF();
+    QString TYPE_ALTERNATIVES();
+    QString TYPE_GROUP();
 
     //lock offset
-    const QString PROPERTY_DEFAULT_LOCK_OFFSET = QStringLiteral("defaultLockOffset");
+    QString PROPERTY_DEFAULT_LOCK_OFFSET();
     //all types
-    const QString PROPERTY_NAME = QStringLiteral("name");
-    const QString PROPERTY_BYTEORDER = QStringLiteral("byteOrder");
-    const QString PROPERTY_PARENT= QStringLiteral("parent");
-    const QString PROPERTY_VALIDATION_ERROR = QStringLiteral("validationError");
-    const QString PROPERTY_VALID = QStringLiteral("valid");
-    const QString PROPERTY_ABLE_TO_READ = QStringLiteral("wasAbleToRead");
-    const QString PROPERTY_UPDATE_FUNC = QStringLiteral("updateFunc");
-    const QString PROPERTY_VALIDATION_FUNC = QStringLiteral("validationFunc");
-    const QString PROPERTY_TO_STRING_FUNC = QStringLiteral("toStringFunc");
-    const QString PROPERTY_DATATYPE = QStringLiteral("datatype");
-    const QString PROPERTY_CUSTOM_TYPE_NAME = QStringLiteral("typeName");
+    QString PROPERTY_NAME();
+    QString PROPERTY_BYTEORDER();
+    QString PROPERTY_PARENT();
+    QString PROPERTY_VALIDATION_ERROR();
+    QString PROPERTY_VALID();
+    QString PROPERTY_ABLE_TO_READ();
+    QString PROPERTY_UPDATE_FUNC();
+    QString PROPERTY_VALIDATION_FUNC();
+    QString PROPERTY_TO_STRING_FUNC();
+    QString PROPERTY_DATATYPE();
+    QString PROPERTY_CUSTOM_TYPE_NAME();
     //enum
-    const QString PROPERTY_ENUM_VALUES = QStringLiteral("enumValues");
+    QString PROPERTY_ENUM_VALUES();
     //this one is javascript only
-    const QString PROPERTY_ENUM_NAME = QStringLiteral("enumName");
+    QString PROPERTY_ENUM_NAME();
     //array/bitfield
-    const QString PROPERTY_TYPE = QStringLiteral("type");
+    QString PROPERTY_TYPE();
     //array
-    const QString PROPERTY_LENGTH = QStringLiteral("length");
+    QString PROPERTY_LENGTH();
     //bitfield
-    const QString PROPERTY_WIDTH = QStringLiteral("width");
+    QString PROPERTY_WIDTH();
     //struct/union
-    const QString PROPERTY_CHILDREN = QStringLiteral("fields");
-    const QString PROPERTY_CHILD_COUNT = QStringLiteral("childCount");
-    const QString PROPERTY_CHILD = QStringLiteral("child");
+    QString PROPERTY_CHILDREN();
+    QString PROPERTY_CHILD_COUNT();
+    QString PROPERTY_CHILD();
     //strings
-    const QString PROPERTY_CHAR_COUNT = QStringLiteral("charCount");
-    const QString PROPERTY_BYTE_COUNT = QStringLiteral("byteCount");
-    const QString PROPERTY_MAX_CHAR_COUNT = QStringLiteral("maxCharCount");
-    const QString PROPERTY_MAX_BYTE_COUNT = QStringLiteral("maxByteCount");
-    const QString PROPERTY_TERMINATED_BY = QStringLiteral("terminatedBy");
-    const QString PROPERTY_ENCODING = QStringLiteral("encoding");
+    QString PROPERTY_CHAR_COUNT();
+    QString PROPERTY_BYTE_COUNT();
+    QString PROPERTY_MAX_CHAR_COUNT();
+    QString PROPERTY_MAX_BYTE_COUNT();
+    QString PROPERTY_TERMINATED_BY();
+    QString PROPERTY_ENCODING();
     //primitive
-    const QString PROPERTY_VALUE = QStringLiteral("value");
+    QString PROPERTY_VALUE();
     //pointer
-    const QString PROPERTY_TARGET = QStringLiteral("target");
+    QString PROPERTY_TARGET();
     //tagged union
-    const QString PROPERTY_ALTERNATIVES = QStringLiteral("alternatives");
-    const QString PROPERTY_DEFAULT_CHILDREN = QStringLiteral("defaultFields");
-    const QString PROPERTY_SELECT_IF = QStringLiteral("selectIf");
-    const QString PROPERTY_STRUCT_NAME = QStringLiteral("structName");
+    QString PROPERTY_ALTERNATIVES();
+    QString PROPERTY_DEFAULT_CHILDREN();
+    QString PROPERTY_SELECT_IF();
+    QString PROPERTY_STRUCT_NAME();
 
-    const QString PROPERTY_INTERNAL_TYPE = QStringLiteral("__type");
+    QString PROPERTY_INTERNAL_TYPE();
 
-    const QStringList ALL_PROPERTIES = QStringList()
-            << PROPERTY_ABLE_TO_READ << PROPERTY_ALTERNATIVES << PROPERTY_BYTEORDER
-            << PROPERTY_BYTE_COUNT << PROPERTY_CHAR_COUNT << PROPERTY_CHAR_COUNT << PROPERTY_CHILD
-            << PROPERTY_CHILDREN << PROPERTY_CHILD_COUNT << PROPERTY_DATATYPE << PROPERTY_DEFAULT_CHILDREN
-            << PROPERTY_ENCODING << PROPERTY_ENUM_NAME << PROPERTY_ENUM_VALUES << PROPERTY_INTERNAL_TYPE <<
-            PROPERTY_LENGTH << PROPERTY_MAX_BYTE_COUNT << PROPERTY_MAX_CHAR_COUNT << PROPERTY_NAME
-            << PROPERTY_PARENT << PROPERTY_SELECT_IF << PROPERTY_STRUCT_NAME << PROPERTY_TARGET
-            << PROPERTY_TERMINATED_BY << PROPERTY_TYPE << PROPERTY_UPDATE_FUNC << PROPERTY_VALID <<
-            PROPERTY_VALIDATION_ERROR << PROPERTY_VALIDATION_FUNC << PROPERTY_VALUE << PROPERTY_WIDTH;
+    QStringList ALL_PROPERTIES();
 
-    const QString NAME_POINTER_VALUE_TYPE = QStringLiteral("<pointer value type>");
-    const QString NAME_POINTER_TARGET = QStringLiteral("<pointer target>");
-    const QString NAME_ARRAY_TYPE = QStringLiteral("<array type>");
-
+    QString NAME_POINTER_VALUE_TYPE();
+    QString NAME_POINTER_TARGET();
+    QString NAME_ARRAY_TYPE();
 }
 
 namespace ParserUtils

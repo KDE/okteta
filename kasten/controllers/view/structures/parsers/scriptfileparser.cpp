@@ -64,7 +64,7 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
     const QFileInfo fileInfo(mAbsolutePath);
     TopLevelDataInformation* top = new TopLevelDataInformation(dataInf, logger, engine, fileInfo);
     //handle default lock offset
-    QScriptValue lockOffset = value.property(ParserStrings::PROPERTY_DEFAULT_LOCK_OFFSET);
+    QScriptValue lockOffset = value.property(ParserStrings::PROPERTY_DEFAULT_LOCK_OFFSET());
     if (lockOffset.isValid())
     {
         ParsedNumber<quint64> offset = ParserUtils::uint64FromScriptValue(lockOffset);

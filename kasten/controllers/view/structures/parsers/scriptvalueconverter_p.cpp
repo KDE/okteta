@@ -44,7 +44,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         return 0;
     }
     ParserInfo info(oldInfo);
-    QString nameOverride = value.property(PROPERTY_NAME).toString();
+    QString nameOverride = value.property(PROPERTY_NAME()).toString();
     if (!nameOverride.isEmpty())
         info.name = nameOverride;
 
@@ -97,7 +97,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         return 0; //no point trying to convert
     }
 
-    QString type = value.property(PROPERTY_INTERNAL_TYPE).toString();
+    QString type = value.property(PROPERTY_INTERNAL_TYPE()).toString();
     if (type.isEmpty())
     {
         info.error() << "Cannot convert object since type of object could not be determined!";
@@ -105,34 +105,34 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     }
     DataInformation* returnVal = 0;
 
-    if (type == TYPE_ARRAY)
+    if (type == TYPE_ARRAY())
         returnVal = toArray(value, info);
 
-    else if (type == TYPE_STRUCT)
+    else if (type == TYPE_STRUCT())
         returnVal = toStruct(value, info);
 
-    else if (type == TYPE_UNION)
+    else if (type == TYPE_UNION())
         returnVal = toUnion(value, info);
 
-    else if (type == TYPE_BITFIELD)
+    else if (type == TYPE_BITFIELD())
         returnVal = toBitfield(value, info);
 
-    else if (type == TYPE_ENUM)
+    else if (type == TYPE_ENUM())
         returnVal = toEnum(value, false, info);
 
-    else if (type == TYPE_FLAGS)
+    else if (type == TYPE_FLAGS())
         returnVal = toEnum(value, true, info);
 
-    else if (type == TYPE_STRING)
+    else if (type == TYPE_STRING())
         returnVal = toString(value, info);
 
-    else if (type == TYPE_POINTER)
+    else if (type == TYPE_POINTER())
         returnVal = toPointer(value, info);
 
-    else if (type == TYPE_TAGGED_UNION)
+    else if (type == TYPE_TAGGED_UNION())
         returnVal = toTaggedUnion(value, info);
 
-    else if (type == TYPE_PRIMITIVE)
+    else if (type == TYPE_PRIMITIVE())
         returnVal = toPrimitive(value, info);
 
     else
@@ -141,14 +141,14 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     if (returnVal)
     {
         CommonParsedData cpd(info);
-        QString byteOrderStr = value.property(PROPERTY_BYTEORDER).toString();
+        QString byteOrderStr = value.property(PROPERTY_BYTEORDER()).toString();
         if (!byteOrderStr.isEmpty())
             cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr,
                     LoggerWithContext(info.logger, info.context()));
-        cpd.updateFunc = value.property(PROPERTY_UPDATE_FUNC);
-        cpd.validationFunc = value.property(PROPERTY_VALIDATION_FUNC);
-        cpd.toStringFunc = value.property(PROPERTY_TO_STRING_FUNC);
-        cpd.customTypeName = value.property(PROPERTY_CUSTOM_TYPE_NAME).toString();
+        cpd.updateFunc = value.property(PROPERTY_UPDATE_FUNC());
+        cpd.validationFunc = value.property(PROPERTY_VALIDATION_FUNC());
+        cpd.toStringFunc = value.property(PROPERTY_TO_STRING_FUNC());
+        cpd.customTypeName = value.property(PROPERTY_CUSTOM_TYPE_NAME()).toString();
         if (!DataInformationFactory::commonInitialization(returnVal, cpd))
         {
             delete returnVal; //error message has already been logged
@@ -161,10 +161,10 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
 ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 {
     ArrayParsedData apd(info);
-    apd.length = value.property(PROPERTY_LENGTH);
-    QScriptValue childType = value.property(PROPERTY_TYPE);
+    apd.length = value.property(PROPERTY_LENGTH());
+    QScriptValue childType = value.property(PROPERTY_TYPE());
     ParserInfo childInfo(info);
-    DummyDataInformation dummy(info.parent, info.name + QLatin1Char('.') + NAME_ARRAY_TYPE);
+    DummyDataInformation dummy(info.parent, info.name + QLatin1Char('.') + NAME_ARRAY_TYPE());
     childInfo.parent = &dummy;
     apd.arrayType = toDataInformation(childType, childInfo);
 
@@ -174,29 +174,29 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info)
 {
     BitfieldParsedData bpd(info);
-    bpd.type = value.property(PROPERTY_TYPE).toString();
-    bpd.width = ParserUtils::intFromScriptValue(value.property(PROPERTY_WIDTH));
+    bpd.type = value.property(PROPERTY_TYPE()).toString();
+    bpd.width = ParserUtils::intFromScriptValue(value.property(PROPERTY_WIDTH()));
     return DataInformationFactory::newBitfield(bpd);
 }
 
 PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInfo& info)
 {
     PrimitiveParsedData ppd(info);
-    ppd.type = value.isString() ? value.toString() : value.property(PROPERTY_TYPE).toString();
+    ppd.type = value.isString() ? value.toString() : value.property(PROPERTY_TYPE()).toString();
     return DataInformationFactory::newPrimitive(ppd);
 }
 
 StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
-    supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN)));
+    supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN())));
     return DataInformationFactory::newStruct(supd);
 }
 
 UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
-    supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN)));
+    supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN())));
     return DataInformationFactory::newUnion(supd);}
 
 PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info)
@@ -206,10 +206,10 @@ PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& i
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name);
     childInfo.parent = &dummy;
-    childInfo.name = NAME_POINTER_TARGET;
-    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET), childInfo);
-    childInfo.name = NAME_POINTER_VALUE_TYPE;
-    ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE), childInfo);
+    childInfo.name = NAME_POINTER_TARGET();
+    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET()), childInfo);
+    childInfo.name = NAME_POINTER_VALUE_TYPE();
+    ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE()), childInfo);
 
     return DataInformationFactory::newPointer(ppd);
 }
@@ -217,14 +217,14 @@ PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& i
 EnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
 {
     EnumParsedData epd(info);
-    QScriptValue enumType = value.property(PROPERTY_TYPE);
+    QScriptValue enumType = value.property(PROPERTY_TYPE());
     if (enumType.isString())
         epd.type = enumType.toString();
     else if (enumType.isObject())
-        epd.type = enumType.property(PROPERTY_TYPE).toString();
+        epd.type = enumType.property(PROPERTY_TYPE()).toString();
     //else it stays empty
-    epd.enumName = value.property(PROPERTY_ENUM_NAME).toString();
-    epd.enumValuesObject = value.property(PROPERTY_ENUM_VALUES);
+    epd.enumName = value.property(PROPERTY_ENUM_NAME()).toString();
+    epd.enumValuesObject = value.property(PROPERTY_ENUM_VALUES());
 
     if (flags)
         return DataInformationFactory::newFlags(epd);
@@ -236,35 +236,35 @@ EnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserI
 StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info)
 {
     StringParsedData spd(info);
-    spd.encoding = value.property(PROPERTY_ENCODING).toString();
-    spd.termination = ParserUtils::uintFromScriptValue(value.property(PROPERTY_TERMINATED_BY));
-    spd.maxByteCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_BYTE_COUNT));
-    spd.maxCharCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_CHAR_COUNT));
+    spd.encoding = value.property(PROPERTY_ENCODING()).toString();
+    spd.termination = ParserUtils::uintFromScriptValue(value.property(PROPERTY_TERMINATED_BY()));
+    spd.maxByteCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_BYTE_COUNT()));
+    spd.maxCharCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_CHAR_COUNT()));
     return DataInformationFactory::newString(spd);
 }
 
 TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const ParserInfo& info)
 {
     TaggedUnionParsedData tpd(info);
-    QScriptValue alternatives = value.property(PROPERTY_ALTERNATIVES);
+    QScriptValue alternatives = value.property(PROPERTY_ALTERNATIVES());
     if (!alternatives.isArray())
     {
         info.error() << "Alternatives must be an array!";
         return 0;
     }
-    int length = alternatives.property(PROPERTY_LENGTH).toInt32();
+    int length = alternatives.property(PROPERTY_LENGTH()).toInt32();
     for (int i = 0; i < length; ++i)
     {
         TaggedUnionParsedData::Alternatives alt;
         QScriptValue current = alternatives.property(i);
-        alt.name = current.property(PROPERTY_STRUCT_NAME).toString();
-        alt.selectIf = current.property(PROPERTY_SELECT_IF);
+        alt.name = current.property(PROPERTY_STRUCT_NAME()).toString();
+        alt.selectIf = current.property(PROPERTY_SELECT_IF());
         alt.fields = QSharedPointer<ChildrenParser>(
-                new ScriptValueChildrenParser(info, current.property(PROPERTY_CHILDREN)));
+                new ScriptValueChildrenParser(info, current.property(PROPERTY_CHILDREN())));
         tpd.alternatives.append(alt);
     }
-    tpd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN)));
-    tpd.defaultFields.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_DEFAULT_CHILDREN)));
+    tpd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN())));
+    tpd.defaultFields.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_DEFAULT_CHILDREN())));
     return DataInformationFactory::newTaggedUnion(tpd);
 }
 

@@ -29,9 +29,9 @@
 PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
         : PrimitiveScriptClass(engine, handlerInfo)
 {
-    s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE);
+    s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE());
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
-    s_target = engine->toStringHandle(ParserStrings::PROPERTY_TARGET);
+    s_target = engine->toStringHandle(ParserStrings::PROPERTY_TARGET());
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 

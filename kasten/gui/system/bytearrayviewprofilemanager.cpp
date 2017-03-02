@@ -37,11 +37,10 @@
 
 namespace Kasten
 {
-static const QStringList viewProfileFileNameFilter =
-    QStringList() << QStringLiteral( "*.obavp" ) << QStringLiteral( "*.olock" );
-static const QString viewProfileFileSuffix = QStringLiteral( ".obavp" );
-static const QString viewProfileDirSubPath = QStringLiteral( "/okteta/viewprofiles" );
-static const QString defaultViewProfileFileSubPath = QStringLiteral( "/okteta/defaultviewprofile" );
+QStringList viewProfileFileNameFilter() { return QStringList() << QStringLiteral( "*.obavp" ) << QStringLiteral( "*.olock" ); }
+static const QLatin1String viewProfileFileSuffix = QLatin1String( ".obavp" );
+static const QLatin1String viewProfileDirSubPath = QLatin1String( "/okteta/viewprofiles" );
+static const QLatin1String defaultViewProfileFileSubPath = QLatin1String( "/okteta/defaultviewprofile" );
 static const int DefaultNoOfBytesPerLine = 16;
 static const int DefaultNoOfBytesPerGroup = 4;
 static const int DefaultLayoutStyle = 0;
@@ -49,7 +48,7 @@ static const int DefaultViewModus = 0;
 static const int DefaultVisibleByteArrayCodings = 3;
 static const int DefaultOffsetCoding = 0;
 static const int DefaultValueCoding = 0;
-static const QString DefaultCharCoding;
+QString DefaultCharCoding() { return QString(); }
 
 static QList<ByteArrayViewProfile::Id>
 lockedViewProfileIds( const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup )
@@ -349,7 +348,7 @@ ByteArrayViewProfileManager::loadViewProfile( const QString& absoluteFilePath ) 
     result.setValueCoding( valuesConfigGroup.readEntry("Coding", DefaultValueCoding) );
 
     KConfigGroup charsConfigGroup = interpretationConfigGroup.group( "Chars" );
-    result.setCharCoding( charsConfigGroup.readEntry("Coding", DefaultCharCoding) );
+    result.setCharCoding( charsConfigGroup.readEntry("Coding", DefaultCharCoding()) );
     result.setShowsNonprinting( charsConfigGroup.readEntry("NonprintingShown", false) );
     result.setSubstituteChar( charsConfigGroup.readEntry("SubstituteChar", ".").at(0) );
     result.setUndefinedChar( charsConfigGroup.readEntry("UndefinedChar", "?").at(0) );
@@ -442,7 +441,7 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged( const QString& viewPro
     QList<ByteArrayViewProfile::Id> newLockedViewProfileIds;
     // iterate all files in folder
     const QFileInfoList viewProfileFileInfoList =
-        QDir( viewProfileFolderPath ).entryInfoList( viewProfileFileNameFilter, QDir::Files );
+        QDir( viewProfileFolderPath ).entryInfoList( viewProfileFileNameFilter(), QDir::Files );
 
     foreach( const QFileInfo& viewProfileFileInfo, viewProfileFileInfoList )
     {

@@ -387,7 +387,9 @@ void ScriptClassesTest::testReplaceObject()
     QCOMPARE(main->childAt(2)->name(), QString(QStringLiteral("innerPointer")));
 }
 
-static const QString invalidObjectError = QStringLiteral("ReferenceError: Attempting to access an invalid object");
+namespace {
+QString invalidObjectError() { return QStringLiteral("ReferenceError: Attempting to access an invalid object"); }
+}
 
 void ScriptClassesTest::testSafePrimitiveArrayReference()
 {
@@ -409,7 +411,7 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
     QVERIFY(!eng->hasUncaughtException());
     QCOMPARE(Utils::property(v1, "name").toString(), QString::number(1));
     QVERIFY(!eng->hasUncaughtException());
-    QCOMPARE(Utils::property(v0, "name").toString(), invalidObjectError);
+    QCOMPARE(Utils::property(v0, "name").toString(), invalidObjectError());
     QVERIFY(!eng->hasUncaughtException());
     //even after accessing a v0 property (which will fail), v1 properties should remain valid
     QCOMPARE(Utils::property(v1, "name").toString(), QString::number(1));
@@ -433,7 +435,7 @@ void ScriptClassesTest::testSafeReferenceDeleteObject()
     name = Utils::property(val, "name");
     QVERIFY(name.isValid());
     QVERIFY(name.isError());
-    QCOMPARE(name.toString(), invalidObjectError);
+    QCOMPARE(name.toString(), invalidObjectError());
 }
 
 void ScriptClassesTest::cleanupTestCase()

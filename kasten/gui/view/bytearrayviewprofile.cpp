@@ -54,7 +54,7 @@ public:
     int mViewModus;
 };
 
-static const QString DefaultViewProfileCharCodingName = QStringLiteral("ISO-8859-1");
+QString DefaultViewProfileCharCodingName() { return QStringLiteral("ISO-8859-1"); }
 static const bool  DefaultViewProfileShowingNonprinting = false;
 static const QChar DefaultViewProfileSubstituteChar =  QLatin1Char( '.' );
 static const QChar DefaultViewProfileUndefinedChar =   QChar( QChar::ReplacementCharacter );
@@ -73,7 +73,7 @@ static const Okteta::AbstractByteArrayView::CodingTypes DefaultViewProfileVisibl
 ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()
   : QSharedData()
   , mOffsetCoding( DefaultViewProfileOffsetCoding )
-  , mCharCodingName( DefaultViewProfileCharCodingName )
+  , mCharCodingName( DefaultViewProfileCharCodingName() )
   , mValueCoding( DefaultViewProfileValueCoding )
   , mOffsetColumnVisible( true )
   , mVisibleByteArrayCodings( DefaultViewProfileVisibleByteArrayCodings )

@@ -205,10 +205,10 @@ void ScriptValueConverterTest::testPrimitives()
 
     QScriptValue val1 = engine->evaluate(code);
     QScriptValue val2 = engine->evaluate(code2);
-    QCOMPARE(val1.property(ParserStrings::PROPERTY_TYPE).toString(), typeString);
-    QCOMPARE(val2.property(ParserStrings::PROPERTY_TYPE).toString(), typeString);
-    QCOMPARE(val1.property(ParserStrings::PROPERTY_INTERNAL_TYPE).toString(), ParserStrings::TYPE_PRIMITIVE);
-    QCOMPARE(val2.property(ParserStrings::PROPERTY_INTERNAL_TYPE).toString(), ParserStrings::TYPE_PRIMITIVE);
+    QCOMPARE(val1.property(ParserStrings::PROPERTY_TYPE()).toString(), typeString);
+    QCOMPARE(val2.property(ParserStrings::PROPERTY_TYPE()).toString(), typeString);
+    QCOMPARE(val1.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), ParserStrings::TYPE_PRIMITIVE());
+    QCOMPARE(val2.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), ParserStrings::TYPE_PRIMITIVE());
 
     if (type == Type_Invalid)
         return; //the cast will fail
@@ -245,7 +245,7 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(!val.isNull());
     QVERIFY(!val.isUndefined());
     QVERIFY(val.isObject());
-    QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE).toString(), QString(QStringLiteral("enum")));
+    QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), QString(QStringLiteral("enum")));
 
     QScopedPointer<DataInformation> data (ScriptValueConverter::convert(val, QStringLiteral("val"), logger.data()));
     if (expectedCount > 0)

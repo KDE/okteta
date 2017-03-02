@@ -30,7 +30,7 @@
 EnumScriptClass::EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo)
 {
-    s_values = engine->toStringHandle(ParserStrings::PROPERTY_ENUM_VALUES);
+    s_values = engine->toStringHandle(ParserStrings::PROPERTY_ENUM_VALUES());
     mIterableProperties.append(qMakePair(s_values, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 

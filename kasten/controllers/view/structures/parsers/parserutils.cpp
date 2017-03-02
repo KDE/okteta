@@ -25,6 +25,83 @@
 #include <QScriptValue>
 #include <QScriptEngine>
 
+namespace ParserStrings {
+
+QString TYPE_ARRAY() { return QStringLiteral("array"); }
+QString TYPE_BITFIELD() { return QStringLiteral("bitfield"); }
+QString TYPE_ENUM() { return QStringLiteral("enum"); }
+QString TYPE_FLAGS() { return QStringLiteral("flags"); }
+QString TYPE_PRIMITIVE() { return QStringLiteral("primitive"); }
+QString TYPE_STRING() { return QStringLiteral("string"); }
+QString TYPE_STRUCT() { return QStringLiteral("struct"); }
+QString TYPE_UNION() { return QStringLiteral("union"); }
+QString TYPE_POINTER() { return QStringLiteral("pointer"); }
+QString TYPE_TAGGED_UNION() { return QStringLiteral("taggedUnion"); }
+
+QString TYPE_ENUMDEF() { return QStringLiteral("enumDef"); }
+QString TYPE_ALTERNATIVES() { return QStringLiteral("alternatives"); }
+QString TYPE_GROUP() { return QStringLiteral("group"); }
+
+QString PROPERTY_DEFAULT_LOCK_OFFSET() { return QStringLiteral("defaultLockOffset"); }
+
+QString PROPERTY_NAME() { return QStringLiteral("name"); }
+QString PROPERTY_BYTEORDER() { return QStringLiteral("byteOrder"); }
+QString PROPERTY_PARENT() { return QStringLiteral("parent"); }
+QString PROPERTY_VALIDATION_ERROR() { return QStringLiteral("validationError"); }
+QString PROPERTY_VALID() { return QStringLiteral("valid"); }
+QString PROPERTY_ABLE_TO_READ() { return QStringLiteral("wasAbleToRead"); }
+QString PROPERTY_UPDATE_FUNC() { return QStringLiteral("updateFunc"); }
+QString PROPERTY_VALIDATION_FUNC() { return QStringLiteral("validationFunc"); }
+QString PROPERTY_TO_STRING_FUNC() { return QStringLiteral("toStringFunc"); }
+QString PROPERTY_DATATYPE() { return QStringLiteral("datatype"); }
+QString PROPERTY_CUSTOM_TYPE_NAME() { return QStringLiteral("typeName"); }
+
+QString PROPERTY_ENUM_VALUES() { return QStringLiteral("enumValues"); }
+
+QString PROPERTY_ENUM_NAME() { return QStringLiteral("enumName"); }
+
+QString PROPERTY_TYPE() { return QStringLiteral("type"); }
+
+QString PROPERTY_LENGTH() { return QStringLiteral("length"); }
+
+QString PROPERTY_WIDTH() { return QStringLiteral("width"); }
+QString PROPERTY_CHILDREN() { return QStringLiteral("fields"); }
+QString PROPERTY_CHILD_COUNT() { return QStringLiteral("childCount"); }
+QString PROPERTY_CHILD() { return QStringLiteral("child"); }
+
+QString PROPERTY_CHAR_COUNT() { return QStringLiteral("charCount"); }
+QString PROPERTY_BYTE_COUNT() { return QStringLiteral("byteCount"); }
+QString PROPERTY_MAX_CHAR_COUNT() { return QStringLiteral("maxCharCount"); }
+QString PROPERTY_MAX_BYTE_COUNT() { return QStringLiteral("maxByteCount"); }
+QString PROPERTY_TERMINATED_BY() { return QStringLiteral("terminatedBy"); }
+QString PROPERTY_ENCODING() { return QStringLiteral("encoding"); }
+    //primitive
+QString PROPERTY_VALUE() { return QStringLiteral("value"); }
+    //pointer
+QString PROPERTY_TARGET() { return QStringLiteral("target"); }
+    //tagged union
+QString PROPERTY_ALTERNATIVES() { return QStringLiteral("alternatives"); }
+QString PROPERTY_DEFAULT_CHILDREN() { return QStringLiteral("defaultFields"); }
+QString PROPERTY_SELECT_IF() { return QStringLiteral("selectIf"); }
+QString PROPERTY_STRUCT_NAME() { return QStringLiteral("structName"); }
+
+QString PROPERTY_INTERNAL_TYPE() { return QStringLiteral("__type"); }
+
+QStringList ALL_PROPERTIES() { return QStringList()
+            << PROPERTY_ABLE_TO_READ() << PROPERTY_ALTERNATIVES() << PROPERTY_BYTEORDER()
+            << PROPERTY_BYTE_COUNT() << PROPERTY_CHAR_COUNT() << PROPERTY_CHAR_COUNT() << PROPERTY_CHILD()
+            << PROPERTY_CHILDREN() << PROPERTY_CHILD_COUNT() << PROPERTY_DATATYPE() << PROPERTY_DEFAULT_CHILDREN()
+            << PROPERTY_ENCODING() << PROPERTY_ENUM_NAME() << PROPERTY_ENUM_VALUES() << PROPERTY_INTERNAL_TYPE() <<
+            PROPERTY_LENGTH() << PROPERTY_MAX_BYTE_COUNT() << PROPERTY_MAX_CHAR_COUNT() << PROPERTY_NAME()
+            << PROPERTY_PARENT() << PROPERTY_SELECT_IF() << PROPERTY_STRUCT_NAME() << PROPERTY_TARGET()
+            << PROPERTY_TERMINATED_BY() << PROPERTY_TYPE() << PROPERTY_UPDATE_FUNC() << PROPERTY_VALID() <<
+            PROPERTY_VALIDATION_ERROR() << PROPERTY_VALIDATION_FUNC() << PROPERTY_VALUE() << PROPERTY_WIDTH(); }
+
+QString NAME_POINTER_VALUE_TYPE() { return QStringLiteral("<pointer value type>"); }
+QString NAME_POINTER_TARGET() { return QStringLiteral("<pointer target>"); }
+QString NAME_ARRAY_TYPE() { return QStringLiteral("<array type>"); }
+}
+
 ParsedNumber<int> ParserUtils::intFromString(const QString& str)
 {
     int value = 0;
