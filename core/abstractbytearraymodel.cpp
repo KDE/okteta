@@ -191,7 +191,7 @@ Address AbstractByteArrayModel::indexOfCaseInsensitive( const CharCodec* charCod
         if( nextSignalByteCount <= i )
         {
             nextSignalByteCount += SearchedByteCountSignalLimit;
-            searchedBytes( i-fromOffset+1 );
+            emit searchedBytes( i-fromOffset+1 );
         }
 
         if( c == patternLength )
@@ -243,7 +243,7 @@ Address AbstractByteArrayModel::lastIndexOfCaseInsensitive( const CharCodec* cha
         if( nextSignalByteCount >= i )
         {
             nextSignalByteCount -= SearchedByteCountSignalLimit;
-            searchedBytes( i-fromOffset+1 );
+            emit searchedBytes( i-fromOffset+1 );
         }
 
         if( c == patternLength )
