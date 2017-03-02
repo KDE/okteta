@@ -38,6 +38,8 @@ namespace Okteta
 
 class FixedSizeByteArrayModel : public AbstractByteArrayModel
 {
+  Q_OBJECT
+
   public:
     /** creates a readonly buffer around the given data */
     FixedSizeByteArrayModel( Byte* data, int size, Byte fillUpChar = '\0', QObject* parent = 0 );

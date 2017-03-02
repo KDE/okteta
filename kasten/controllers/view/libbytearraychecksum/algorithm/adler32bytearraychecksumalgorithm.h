@@ -31,6 +31,8 @@
 
 class Adler32ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 {
+  Q_OBJECT
+
   public:
     Adler32ByteArrayChecksumAlgorithm();
     virtual ~Adler32ByteArrayChecksumAlgorithm();

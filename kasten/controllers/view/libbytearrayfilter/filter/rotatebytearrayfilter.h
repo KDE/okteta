@@ -31,6 +31,8 @@
 
 class RotateByteArrayFilter : public AbstractByteArrayFilter
 {
+  Q_OBJECT
+
   public:
     RotateByteArrayFilter();
 

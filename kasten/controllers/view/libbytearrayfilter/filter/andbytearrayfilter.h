@@ -31,6 +31,8 @@
 
 class AndByteArrayFilter : public AbstractByteArrayFilter
 {
+  Q_OBJECT
+
   public:
     AndByteArrayFilter();
 

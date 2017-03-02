@@ -31,6 +31,8 @@
 
 class ModSum16ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 {
+  Q_OBJECT
+
   public:
     ModSum16ByteArrayChecksumAlgorithm();
     virtual ~ModSum16ByteArrayChecksumAlgorithm();

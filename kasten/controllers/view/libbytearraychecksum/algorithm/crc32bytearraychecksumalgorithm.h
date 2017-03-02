@@ -31,6 +31,8 @@
 
 class Crc32ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 {
+  Q_OBJECT
+
   public:
     Crc32ByteArrayChecksumAlgorithm();
     virtual ~Crc32ByteArrayChecksumAlgorithm();

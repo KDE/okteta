@@ -28,6 +28,8 @@
 class Template_ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 //// ADAPT(end)
 {
+  Q_OBJECT
+
   public:
     Template_ByteArrayChecksumAlgorithm();
 

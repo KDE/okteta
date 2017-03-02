@@ -27,6 +27,8 @@
 
 class StructViewItemDelegate: public QStyledItemDelegate
 {
+  Q_OBJECT
+
 public:
     explicit StructViewItemDelegate(QObject * parent = 0);
     virtual ~StructViewItemDelegate();

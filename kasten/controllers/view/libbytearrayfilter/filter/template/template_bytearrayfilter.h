@@ -28,6 +28,8 @@
 class Template_ByteArrayFilter : public AbstractByteArrayFilter
 //// ADAPT(end)
 {
+  Q_OBJECT
+
   public:
     Template_ByteArrayFilter();
 

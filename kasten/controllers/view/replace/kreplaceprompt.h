@@ -36,6 +36,8 @@ namespace Kasten
 
 class KReplacePrompt : public QDialog
 {
+  Q_OBJECT
+
   public:
     explicit KReplacePrompt( QWidget* parent );
 

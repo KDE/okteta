@@ -31,6 +31,8 @@
 
 class XOrByteArrayFilter : public AbstractByteArrayFilter
 {
+  Q_OBJECT
+
   public:
     XOrByteArrayFilter();
 

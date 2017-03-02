@@ -31,6 +31,8 @@
 
 class InvertByteArrayFilter : public AbstractByteArrayFilter
 {
+  Q_OBJECT
+
   public:
     InvertByteArrayFilter();
 

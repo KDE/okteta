@@ -35,6 +35,8 @@ namespace Kasten
 
 class StatusBarLayout : public QLayout
 {
+  Q_OBJECT
+
   public:
     explicit StatusBarLayout( QWidget* parent = 0 );
     virtual ~StatusBarLayout();

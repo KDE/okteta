@@ -31,6 +31,8 @@
 
 class Char8Validator : public QValidator
 {
+  Q_OBJECT
+
   public:
     Char8Validator( Okteta::CharCodec* charCodec, QObject* parent = 0 );
 
@@ -90,3 +92,5 @@ Char8 Char8Editor::data() const
 }
 
 Char8Editor::~Char8Editor() {}
+
+#include "char8editor.moc"

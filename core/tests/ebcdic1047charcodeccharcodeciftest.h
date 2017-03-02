@@ -32,6 +32,8 @@ namespace Okteta
 
 class EBCDIC1047CharCodecCharCodecIfTest : public CharCodecIfTest
 {
+  Q_OBJECT
+
   protected: // CharCodecIfTest API
     virtual CharCodec* createCodec();
     virtual void deleteCodec( CharCodec* codec );

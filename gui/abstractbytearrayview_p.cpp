@@ -71,6 +71,8 @@ static const char OctetStreamFormatName[] = "application/octet-stream";
 
 class NullModel : public AbstractByteArrayModel
 {
+  Q_OBJECT
+
   public:
     NullModel();
     virtual ~NullModel();
@@ -1275,3 +1277,5 @@ AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
 }
 
 }
+
+#include "abstractbytearrayview_p.moc"

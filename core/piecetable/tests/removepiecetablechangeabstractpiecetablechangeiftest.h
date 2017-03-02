@@ -32,6 +32,8 @@ namespace KPieceTable
 
 class RemovePieceTableChangeAbstractPieceTableChangeIfTest : public AbstractPieceTableChangeIfTest
 {
+  Q_OBJECT
+
   protected: // AbstractPieceTableChangeIfTest API
     virtual AbstractPieceTableChange *createPieceTableChange();
     virtual void deletePieceTableChange( AbstractPieceTableChange *pieceTableChange );

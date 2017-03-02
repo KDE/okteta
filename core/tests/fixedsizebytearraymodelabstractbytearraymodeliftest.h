@@ -31,6 +31,8 @@ namespace Okteta
 
 class FixedSizeByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
 {
+  Q_OBJECT
+
   protected: // AbstractByteArrayModelIfTest API
     AbstractByteArrayModel* createByteArrayModel();
     void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel );

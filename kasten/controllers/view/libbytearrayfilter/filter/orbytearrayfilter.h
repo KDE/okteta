@@ -31,6 +31,8 @@
 
 class OrByteArrayFilter : public AbstractByteArrayFilter
 {
+  Q_OBJECT
+
   public:
     OrByteArrayFilter();
 

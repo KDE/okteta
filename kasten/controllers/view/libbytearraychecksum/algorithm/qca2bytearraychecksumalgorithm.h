@@ -31,6 +31,8 @@
 
 class Qca2ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 {
+  Q_OBJECT
+
   public:
     Qca2ByteArrayChecksumAlgorithm( const QString& name, const QString& type );
     virtual ~Qca2ByteArrayChecksumAlgorithm();

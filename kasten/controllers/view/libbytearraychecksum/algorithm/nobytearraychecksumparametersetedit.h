@@ -29,6 +29,8 @@
 
 class NoByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksumParameterSetEdit
 {
+  Q_OBJECT
+
   public:
     static const char Id[];
 

@@ -34,6 +34,8 @@ namespace Kasten
 
 class BytesPerGroupDialog : public QDialog
 {
+  Q_OBJECT
+
   public:
     explicit BytesPerGroupDialog( QWidget* parent = 0 );
 

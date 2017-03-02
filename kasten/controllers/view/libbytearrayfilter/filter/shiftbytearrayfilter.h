@@ -31,6 +31,8 @@
 
 class ShiftByteArrayFilter : public AbstractByteArrayFilter
 {
+  Q_OBJECT
+
   public:
     ShiftByteArrayFilter();
 

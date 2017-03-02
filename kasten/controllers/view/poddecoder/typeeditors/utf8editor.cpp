@@ -28,6 +28,8 @@
 
 class Utf8CharValidator : public QValidator
 {
+  Q_OBJECT
+
   public:
     explicit Utf8CharValidator( QObject* parent = 0 );
 
@@ -70,3 +72,5 @@ Utf8 Utf8Editor::data() const
 }
 
 Utf8Editor::~Utf8Editor() {}
+
+#include "utf8editor.moc"
