@@ -72,8 +72,8 @@ QValidator::State AddressValidator::validate( QString& string, int& pos ) const
         if( ! expressionRegex.exactMatch(string) )
             result = QValidator::Invalid;
         //only prefix has been typed:
-        if( string == QStringLiteral("+")
-            || string == QStringLiteral("-")
+        if( string == QLatin1String("+")
+            || string == QLatin1String("-")
             || string.endsWith(QLatin1Char('x')) ) // 0x at end
             result = QValidator::Intermediate;
     }

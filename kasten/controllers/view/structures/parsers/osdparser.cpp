@@ -96,7 +96,7 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
     QFile file(fileInfo.absoluteFilePath());
     if (!file.open(QIODevice::ReadOnly))
     {
-        const QString errorOutput = QStringLiteral("Could not open file ") + mAbsolutePath;
+        const QString errorOutput = QLatin1String("Could not open file ") + mAbsolutePath;
         logger->error() << errorOutput;
         return QDomDocument();
     }
@@ -184,7 +184,7 @@ QVector<TopLevelDataInformation*> OsdParser::parseStructures() const
         {
             QString name = readProperty(elem, PROPERTY_NAME());
             if (name.isEmpty())
-                name = fileInfo.absoluteFilePath() + QStringLiteral("_element") + QString::number(count);
+                name = fileInfo.absoluteFilePath() + QLatin1String("_element") + QString::number(count);
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Failed to parse element" << elem.tagName() << name;
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Parsing messages were:" << logger->messages();
             data = new DummyDataInformation(0, name);
@@ -225,13 +225,13 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
             logger->error(enumName) << "Skipping enum definition, since no type attribute was found.";
             continue;
         }
-        LoggerWithContext lwc(logger, QStringLiteral("enum values (") + enumName + QLatin1Char(')'));
+        LoggerWithContext lwc(logger, QLatin1String("enum values (") + enumName + QLatin1Char(')'));
         PrimitiveDataType type = PrimitiveFactory::typeStringToType(typeStr, lwc);
         //handle all entries
         for (QDomElement child = elem.firstChildElement(); !child.isNull(); child =
                 child.nextSiblingElement())
         {
-            if (child.tagName() != QStringLiteral("entry"))
+            if (child.tagName() != QLatin1String("entry"))
                 continue;
 
             QString name = readProperty(child, PROPERTY_NAME());

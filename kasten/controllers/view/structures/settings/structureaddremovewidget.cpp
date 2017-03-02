@@ -106,7 +106,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
         {
             QString pluginName = regex.cap(1);
             QString structName = regex.cap(2);
-            if (structName == QStringLiteral("*")) {
+            if (structName == QLatin1String("*")) {
                 //add all of them
                 for (int i = 0; i < mTreeAvailable->topLevelItemCount(); i++)
                 {

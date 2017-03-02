@@ -248,14 +248,14 @@ QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     if (ctx->argumentCount() < 1)
-        return ctx->throwError(QStringLiteral("child(): name of child must be passed as first parameter"));
+        return ctx->throwError(QLatin1String("child(): name of child must be passed as first parameter"));
     QString nameString = ctx->argument(0).toString();
     QScriptValue ret = ctx->thisObject().property(ParserStrings::PROPERTY_CHILDREN()).property(nameString);
     if (ret.isValid())
         return ret;
     else
         return ctx->throwError(
-                QString(QStringLiteral("child(): could not find child with name=") + nameString));
+                QString(QLatin1String("child(): could not find child with name=") + nameString));
 }
 
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine*)
@@ -330,9 +330,9 @@ QScriptValue importScriptFunc(QScriptContext* ctx, QScriptEngine* eng)
     if (ctx->argumentCount() != 1)
         return ctx->throwError(QStringLiteral("importScript(): expected one argument!"));
     QString arg = ctx->argument(0).toString();
-    if (arg.contains(QStringLiteral("..")))
+    if (arg.contains(QLatin1String("..")))
         return ctx->throwError(QStringLiteral("importScript(): You may only access installed structure files! Path traversal detected."));
-    const QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("okteta/structures/") + arg);
+    const QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("okteta/structures/") + arg);
     if (fileName.isEmpty())
         return ctx->throwError(QStringLiteral("importScript(): could not find file to import!"));
     QFile file(fileName);
@@ -345,7 +345,7 @@ QScriptValue importScriptFunc(QScriptContext* ctx, QScriptEngine* eng)
     QScriptContext* newCtx = eng->pushContext();
     QScriptValue result = eng->evaluate(code);
     if (result.isError())
-        result = QScriptValue(QStringLiteral("importScript(): failed due to exception: ") + result.toString());
+        result = QScriptValue(QLatin1String("importScript(): failed due to exception: ") + result.toString());
     else
         result = newCtx->activationObject();
     eng->popContext();

@@ -41,7 +41,7 @@ namespace Kasten
 ExternalBookmarkStorage::ExternalBookmarkStorage()
 {
     const QString bookmarksFileName =
-        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/okteta/bookmarks.xml");
+        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/okteta/bookmarks.xml");
     mBookmarkManager = KBookmarkManager::managerForFile( bookmarksFileName, QStringLiteral("okteta") );
 }
 

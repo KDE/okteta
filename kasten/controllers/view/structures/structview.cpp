@@ -160,7 +160,7 @@ void StructView::openSettingsDlg()
     QHBoxLayout* hbox = new QHBoxLayout();
     structSelectionWrapper->setLayout(hbox);
     hbox->addWidget(structureSettings);
-    Q_ASSERT(structureSettings->objectName() == QStringLiteral("kcfg_LoadedStructures"));
+    Q_ASSERT(structureSettings->objectName() == QLatin1String("kcfg_LoadedStructures"));
     dialog->addPage(structSelectionWrapper, i18n("Structures management"),
                                                   QStringLiteral("preferences-plugin"));
 

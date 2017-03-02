@@ -293,7 +293,7 @@ void StructTool::setSelectedStructuresInView()
             if (!def->isValid())
                 continue;
             //should be valid now
-            if (name == QStringLiteral("*"))
+            if (name == QLatin1String("*"))
             {
                 //add all of them
                 QVector<TopLevelDataInformation*> structs = def->structures();

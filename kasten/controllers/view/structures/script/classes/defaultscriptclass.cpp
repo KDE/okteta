@@ -127,7 +127,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     {
         data->logError() << "could not find property with name" << name.toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QStringLiteral("Could not find property with name ") + name.toString());
+                QLatin1String("Could not find property with name ") + name.toString());
         return 0;
     }
 }
@@ -197,7 +197,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     {
         data->logError() << "could not find property with name" << name.toString();
         return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QStringLiteral("Cannot read property ") + name.toString());
+                QLatin1String("Cannot read property ") + name.toString());
     }
 }
 
@@ -353,7 +353,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         {
             data->logError() << "could not set property with name" << name.toString();
             engine()->currentContext()->throwError(QScriptContext::ReferenceError,
-                QStringLiteral("Cannot write property ") + name.toString());
+                QLatin1String("Cannot write property ") + name.toString());
         }
     }
 }

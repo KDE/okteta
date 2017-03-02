@@ -30,35 +30,35 @@ namespace PrimitiveFactory
 PrimitiveDataType typeStringToType(const QString& string, const LoggerWithContext& logger)
 {
     const QString typeStr = string.trimmed().toLower();
-    if (typeStr == QStringLiteral("bool8"))
+    if (typeStr == QLatin1String("bool8"))
         return Type_Bool8;
-    if (typeStr == QStringLiteral("bool16"))
+    if (typeStr == QLatin1String("bool16"))
         return Type_Bool16;
-    if (typeStr == QStringLiteral("bool32"))
+    if (typeStr == QLatin1String("bool32"))
         return Type_Bool32;
-    if (typeStr == QStringLiteral("bool64"))
+    if (typeStr == QLatin1String("bool64"))
         return Type_Bool64;
-    if (typeStr == QStringLiteral("int8"))
+    if (typeStr == QLatin1String("int8"))
         return Type_Int8;
-    if (typeStr == QStringLiteral("uint8"))
+    if (typeStr == QLatin1String("uint8"))
         return Type_UInt8;
-    if (typeStr == QStringLiteral("int16"))
+    if (typeStr == QLatin1String("int16"))
         return Type_Int16;
-    if (typeStr == QStringLiteral("uint16"))
+    if (typeStr == QLatin1String("uint16"))
         return Type_UInt16;
-    if (typeStr == QStringLiteral("int32"))
+    if (typeStr == QLatin1String("int32"))
         return Type_Int32;
-    if (typeStr == QStringLiteral("uint32"))
+    if (typeStr == QLatin1String("uint32"))
         return Type_UInt32;
-    if (typeStr == QStringLiteral("int64"))
+    if (typeStr == QLatin1String("int64"))
         return Type_Int64;
-    if (typeStr == QStringLiteral("uint64"))
+    if (typeStr == QLatin1String("uint64"))
         return Type_UInt64;
-    if (typeStr == QStringLiteral("char"))
+    if (typeStr == QLatin1String("char"))
         return Type_Char;
-    if (typeStr == QStringLiteral("float"))
+    if (typeStr == QLatin1String("float"))
         return Type_Float;
-    if (typeStr == QStringLiteral("double"))
+    if (typeStr == QLatin1String("double"))
         return Type_Double;
     logger.warn() << typeStr << "does not name a valid primitive type";
     return Type_Invalid; //just return a default value

@@ -321,7 +321,7 @@ ByteArrayViewProfileManager::loadViewProfile( const QString& absoluteFilePath ) 
     // check version
     KConfigGroup formatConfigGroup = configFile.group( "OBAVP" );
     const QString formatVersion = formatConfigGroup.readEntry( "Version" );
-    if( ! formatVersion.startsWith(QStringLiteral( "1." )) )
+    if( ! formatVersion.startsWith(QLatin1String( "1." )) )
     {
         return result;
     }
@@ -446,7 +446,7 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged( const QString& viewPro
     foreach( const QFileInfo& viewProfileFileInfo, viewProfileFileInfoList )
     {
        // a lock file ?
-       if( viewProfileFileInfo.suffix() == QStringLiteral("olock") )
+       if( viewProfileFileInfo.suffix() == QLatin1String("olock") )
        {
            const ByteArrayViewProfile::Id lockedViewProfileId = viewProfileFileInfo.baseName();
            // if not in old locks, is a new lock
@@ -456,7 +456,7 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged( const QString& viewPro
        }
 
        // not a viewprofile file ?
-       if( viewProfileFileInfo.suffix() != QStringLiteral("obavp") )
+       if( viewProfileFileInfo.suffix() != QLatin1String("obavp") )
             continue;
 
        // all other files assumed to be viewProfile files

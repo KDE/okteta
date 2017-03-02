@@ -62,7 +62,7 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
         const QString num = (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
             ? QLocale().toString(value)
             : QString::number(value, base);
-        charStr += QStringLiteral(" (") + PrimitiveDataInformation::basePrefix(base)
+        charStr += QLatin1String(" (") + PrimitiveDataInformation::basePrefix(base)
                 + num + QLatin1Char(')');
     }
     return charStr;

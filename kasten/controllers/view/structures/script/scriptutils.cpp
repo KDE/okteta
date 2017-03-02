@@ -43,26 +43,26 @@ QString ScriptUtils::qScriptValueToString(const QScriptValue& val)
     if (!val.isQObject()) {
         return ret;
     }
-    ret += QStringLiteral(" [");
+    ret += QLatin1String(" [");
     QScriptValueIterator it(val);
     bool first = true;
     while (it.hasNext())
     {
-        if (it.name().startsWith(QStringLiteral("_")))
+        if (it.name().startsWith(QLatin1String("_")))
             continue; // skip all names starting with _ like e.g. __proto__
 
         if (!first)
-            ret += QStringLiteral(", ");
+            ret += QLatin1String(", ");
         else
             first = false;
 
         it.next();
         QScriptValue loopValue = it.value();
         if (!loopValue.isObject()) {
-            ret += it.name() + QStringLiteral("=") + loopValue.toString();
+            ret += it.name() + QLatin1Char('=') + loopValue.toString();
         }
         else {
-            ret += it.name() + QStringLiteral("=") + qScriptValueToString(loopValue);
+            ret += it.name() + QLatin1Char('=') + qScriptValueToString(loopValue);
         }
     }
     return ret;

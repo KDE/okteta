@@ -165,9 +165,9 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     foreach(const Kasten::StructureDefinitionFile* def, mTool->manager()->structureDefs())
         {
             KPluginInfo info = def->pluginInfo();
-            if (info.category() == QStringLiteral("structure"))
+            if (info.category() == QLatin1String("structure"))
                 plugins.append(info);
-            else if (info.category() == QStringLiteral("structure/js"))
+            else if (info.category() == QLatin1String("structure/js"))
                 dynamicPlugins.append(info);
         }
 
