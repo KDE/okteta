@@ -132,7 +132,7 @@ void ScriptClassesTest::initTestCase()
             << pair("uint8") << pair("uint16") << pair("uint32") << pair("uint64") << pair("bool")
             << pair("float") << pair("double") << pair("int64high32") << pair("int64low32")
             << pair("uint64high32") << pair("uint64low32") << pair("type");
-    qSort(primitiveProperties);
+    std::sort(primitiveProperties.begin(), primitiveProperties.end());
     LoggerWithContext lwc(0, QString());
     for (int i = Type_START; i < Type_Bitfield; ++i)
     {
@@ -145,7 +145,7 @@ void ScriptClassesTest::initTestCase()
     enumProperties << primitiveProperties << pair("enumValues", QScriptValue::Undeletable);
     //TODO valueString property (i.e. the current value as enumerator name)
     //XXX enumName
-    qSort(enumProperties);
+    std::sort(enumProperties.begin(), enumProperties.end());
 
     QMap<AllPrimitiveTypes, QString> enumValues;
     enumValues.insert(1, QStringLiteral("one"));
@@ -163,7 +163,7 @@ void ScriptClassesTest::initTestCase()
             new TopLevelDataInformation(flagData, 0, ScriptEngineInitializer::newEngine()));
 
     bitfieldProperties << primitiveProperties << pair("width", QScriptValue::Undeletable);
-    qSort(bitfieldProperties);
+    std::sort(bitfieldProperties.begin(), bitfieldProperties.end());
     unsignedBitfield = new UnsignedBitfieldDataInformation(QStringLiteral("unsignedBit"), 42);
     unsignedBitfieldTop.reset(
             new TopLevelDataInformation(unsignedBitfield, 0, ScriptEngineInitializer::newEngine()));
@@ -178,14 +178,14 @@ void ScriptClassesTest::initTestCase()
             << pair("byteCount") << pair("maxCharCount", QScriptValue::Undeletable)
             << pair("charCount") << pair("encoding", QScriptValue::Undeletable)
             << pair("maxByteCount", QScriptValue::Undeletable);
-    qSort(stringProperties);
+    std::sort(stringProperties.begin(), stringProperties.end());
     stringData = new StringDataInformation(QStringLiteral("string"), StringDataInformation::Latin1);
     stringDataTop.reset(
             new TopLevelDataInformation(stringData, 0, ScriptEngineInitializer::newEngine()));
 
     arrayProperties << commonProperties << pair("length", QScriptValue::Undeletable)
             << pair("type", QScriptValue::Undeletable);
-    qSort(arrayProperties);
+    std::sort(arrayProperties.begin(), arrayProperties.end());
     arrayData = new ArrayDataInformation(QStringLiteral("array"), 20,
             PrimitiveFactory::newInstance(QStringLiteral("inner"), Type_Int32, lwc));
     arrayDataTop.reset(
@@ -199,7 +199,7 @@ void ScriptClassesTest::initTestCase()
     unionData = new UnionDataInformation(QStringLiteral("union"));
     unionDataTop.reset(
             new TopLevelDataInformation(unionData, 0, ScriptEngineInitializer::newEngine()));
-    qSort(structUnionProperties);
+    std::sort(structUnionProperties.begin(), structUnionProperties.end());
 
 }
 
@@ -258,7 +258,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
         foundProperties.append(qMakePair(it.name(), it.flags()));
     }
     data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::None);
-    qSort(foundProperties);
+    std::sort(foundProperties.begin(), foundProperties.end());
     if (foundProperties.size() != expected.size()) {
         for (int i = 0; i < qMin(foundProperties.size(), expected.size()); ++i)
         {
