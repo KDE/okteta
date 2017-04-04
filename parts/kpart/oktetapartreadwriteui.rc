@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="oktetapartreadwrite" version="2" translationDomain="oktetapart">
+<gui name="oktetapartreadwrite" version="2" translationDomain="oktetapart">
 
 <MenuBar>
   <Menu name="file">
@@ -66,4 +66,4 @@
   <Action name="edit_find_last" group="edit_operations" />
 </ToolBar>
 
-</kpartgui>
+</gui>
