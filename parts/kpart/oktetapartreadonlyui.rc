@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="oktetapartreadonly" version="2" translationDomain="oktetapart">
+<gui name="oktetapartreadonly" version="2" translationDomain="oktetapart">
 
 <MenuBar>
   <Menu name="file">
@@ -49,4 +49,4 @@
   <Action name="view_zoom_out" />
 </ToolBar>
 
-</kpartgui>
+</gui>

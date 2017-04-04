@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="Okteta" version="4">
+<gui name="Okteta" version="4">
 <MenuBar>
   <Menu name="file">
     <Action name="connect_to" append="open_merge" />
@@ -99,4 +99,4 @@
   <Action name="cancel"/>
   <Action name="help"/>
 </ToolBar>
-</kpartgui>
+</gui>
