@@ -223,7 +223,7 @@ set_target_properties( KastenGui  PROPERTIES
   SOVERSION   ${KASTENGUI_SOVERSION}
 )
 
-install( TARGETS KastenGui  EXPORT KastenGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS KastenGui  EXPORT KastenGuiTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${kastengui_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
@@ -235,7 +235,7 @@ install( FILES ${kastengui_LIB_CCHDRS}
 )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KastenGui")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KastenGui")
 
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KastenGuiConfig.cmake.in"

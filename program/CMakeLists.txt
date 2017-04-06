@@ -27,14 +27,14 @@ target_link_libraries( okteta
   KF5::DBusAddons
 )
 
-install( TARGETS okteta  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS okteta  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
-install( PROGRAMS org.kde.okteta.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES oktetaui.rc  DESTINATION ${KXMLGUI_INSTALL_DIR}/okteta )
+install( PROGRAMS org.kde.okteta.desktop  DESTINATION ${KDE_INSTALL_APPDIR} )
+install( FILES oktetaui.rc  DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/okteta )
 install( FILES org.kde.okteta.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
 
 ecm_install_icons(
   ICONS 16-apps-okteta.png  32-apps-okteta.png  48-apps-okteta.png
-  DESTINATION ${ICON_INSTALL_DIR}
+  DESTINATION ${KDE_INSTALL_ICONDIR}
 )

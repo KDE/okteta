@@ -16,7 +16,7 @@ if [ $# -lt 2 ]; then
 	exit;
 fi;
 
-XSL_CONVERTER="@DATA_INSTALL_DIR@/okteta/structures/gccxml-to-osd.xsl"
+XSL_CONVERTER="@KDE_INSTALL_DATADIR@/okteta/structures/gccxml-to-osd.xsl"
 
 INPUT_FILE="$1";
 OSD_FILE="$2";

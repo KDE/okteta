@@ -664,7 +664,7 @@ set_target_properties( OktetaKastenControllers  PROPERTIES
   SOVERSION   ${OKTETAKASTENCONTROLLERS_SOVERSION}
 )
 
-install( TARGETS OktetaKastenControllers  EXPORT OktetaKastenControllersTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaKastenControllers  EXPORT OktetaKastenControllersTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastencontrollers_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
@@ -674,28 +674,28 @@ install( FILES ${okteta_kastencontrollers_LIB_CCHDRS}
   DESTINATION ${OKTETAKASTEN_CCINCLUDE_INSTALL_DIR}
   COMPONENT Devel
 )
-install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${CONFIG_INSTALL_DIR} )
+install( FILES view/structures/kns/okteta-structures.knsrc  DESTINATION  ${KDE_INSTALL_CONFDIR} )
 
 set( elf_structure_FILES
   view/structures/examples/okteta/structures/elf/metadata.desktop
   view/structures/examples/okteta/structures/elf/main.osd
 )
-install( FILES ${elf_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/elf )
+install( FILES ${elf_structure_FILES}  DESTINATION  ${KDE_INSTALL_DATADIR}/okteta/structures/elf )
 
 set( png_structure_FILES
   view/structures/examples/okteta/structures/png/metadata.desktop
   view/structures/examples/okteta/structures/png/main.osd
 )
-install( FILES ${png_structure_FILES}  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/png )
-install( FILES view/structures/examples/okteta/structures/uuid.js  DESTINATION  ${DATA_INSTALL_DIR}/okteta/structures/ )
-install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
+install( FILES ${png_structure_FILES}  DESTINATION  ${KDE_INSTALL_DATADIR}/okteta/structures/png )
+install( FILES view/structures/examples/okteta/structures/uuid.js  DESTINATION  ${KDE_INSTALL_DATADIR}/okteta/structures/ )
+install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION  ${KDE_INSTALL_KCFGDIR} )
 
 configure_file( view/structures/struct2osd.in ${CMAKE_CURRENT_BINARY_DIR}/struct2osd @ONLY )
-install( PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/struct2osd DESTINATION ${BIN_INSTALL_DIR} )
-install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${DATA_INSTALL_DIR}/okteta/structures/ )
+install( PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/struct2osd DESTINATION ${KDE_INSTALL_BINDIR} )
+install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${KDE_INSTALL_DATADIR}/okteta/structures/ )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaKastenControllers")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/OktetaKastenControllers")
 
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenControllersConfig.cmake.in"
