@@ -249,7 +249,7 @@ set_target_properties( OktetaKastenGui  PROPERTIES
   SOVERSION   ${OKTETAKASTENGUI_SOVERSION}
 )
 
-install( TARGETS OktetaKastenGui  EXPORT OktetaKastenGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaKastenGui  EXPORT OktetaKastenGuiTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${okteta_kastengui_LIB_HDRS}
   DESTINATION ${OKTETAKASTEN_INCLUDE_INSTALL_DIR}
@@ -261,7 +261,7 @@ install( FILES ${okteta_kastengui_LIB_CCHDRS}
 )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaKastenGui")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/OktetaKastenGui")
 
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenGuiConfig.cmake.in"

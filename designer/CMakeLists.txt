@@ -23,7 +23,7 @@ target_include_directories( oktetadesignerplugin
         ${Qt5Designer_INCLUDE_DIRS}
 )
 
-install( TARGETS oktetadesignerplugin  DESTINATION ${QT_PLUGIN_INSTALL_DIR}/designer )
+install( TARGETS oktetadesignerplugin  DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/designer )
 
 
 if( OKTETA_BUILD_EXAMPLES )

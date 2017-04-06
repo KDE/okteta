@@ -144,7 +144,7 @@ set_target_properties( OktetaGui  PROPERTIES
   SOVERSION   ${OKTETAGUI_SOVERSION}
 )
 
-install( TARGETS OktetaGui  EXPORT OktetaGuiTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaGui  EXPORT OktetaGuiTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${oktetagui_LIB_HDRS}
   DESTINATION ${OKTETALIBS_INCLUDE_INSTALL_DIR}
@@ -156,7 +156,7 @@ install( FILES ${oktetagui_LIB_CCHDRS}
 )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaGui")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/OktetaGui")
 
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/OktetaGuiConfig.cmake.in"

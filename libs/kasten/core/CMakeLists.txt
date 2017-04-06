@@ -207,7 +207,7 @@ set_target_properties( KastenCore PROPERTIES
   SOVERSION   ${KASTENCORE_SOVERSION}
 )
 
-install( TARGETS KastenCore  EXPORT KastenCoreTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS KastenCore  EXPORT KastenCoreTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${kastencore_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
@@ -219,7 +219,7 @@ install( FILES ${kastencore_LIB_CCHDRS}
 )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KastenCore")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KastenCore")
 
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KastenCoreConfig.cmake.in"

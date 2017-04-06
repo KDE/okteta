@@ -332,7 +332,7 @@ set_target_properties( KastenControllers  PROPERTIES
   SOVERSION   ${KASTENCONTROLLERS_SOVERSION}
 )
 
-install( TARGETS KastenControllers  EXPORT KastenControllersTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS KastenControllers  EXPORT KastenControllersTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES ${kastencontrollers_LIB_HDRS}
   DESTINATION ${KASTEN_INCLUDE_INSTALL_DIR}
@@ -344,7 +344,7 @@ install( FILES ${kastencontrollers_LIB_CCHDRS}
 )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KastenControllers")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KastenControllers")
 
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KastenControllersConfig.cmake.in"

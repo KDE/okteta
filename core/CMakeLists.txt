@@ -126,7 +126,7 @@ set_target_properties( OktetaCore  PROPERTIES
   SOVERSION   ${OKTETACORE_SOVERSION}
 )
 
-install( TARGETS OktetaCore EXPORT OktetaCoreTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS OktetaCore EXPORT OktetaCoreTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 install( FILES
     ${oktetacore_LIB_HDRS}
@@ -140,7 +140,7 @@ install( FILES ${oktetacore_LIB_CCHDRS}
 )
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/OktetaCore")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/OktetaCore")
 
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/OktetaCoreConfig.cmake.in"
