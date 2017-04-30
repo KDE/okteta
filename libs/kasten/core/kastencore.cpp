@@ -22,4 +22,8 @@
 
 #include "kastencore.h"
 
+#if QT_VERSION >= 0x050500
+Q_LOGGING_CATEGORY(LOG_KASTEN_CORE, "kasten.core", QtInfoMsg)
+#else
 Q_LOGGING_CATEGORY(LOG_KASTEN_CORE, "kasten.core")
+#endif

@@ -22,4 +22,8 @@
 
 #include "structlogging.h"
 
+#if QT_VERSION >= 0x050500
+Q_LOGGING_CATEGORY(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES, "kasten.okteta.controllers.structures", QtInfoMsg)
+#else
 Q_LOGGING_CATEGORY(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES, "kasten.okteta.controllers.structures")
+#endif
