@@ -22,4 +22,8 @@
 
 #include "kastengui.h"
 
+#if QT_VERSION >= 0x050500
+Q_LOGGING_CATEGORY(LOG_KASTEN_GUI, "kasten.gui", QtInfoMsg)
+#else
 Q_LOGGING_CATEGORY(LOG_KASTEN_GUI, "kasten.gui")
+#endif

@@ -22,4 +22,8 @@
 
 #include "oktetagui.h"
 
+#if QT_VERSION >= 0x050500
+Q_LOGGING_CATEGORY(LOG_OKTETA_GUI, "okteta.gui", QtInfoMsg)
+#else
 Q_LOGGING_CATEGORY(LOG_OKTETA_GUI, "okteta.gui")
+#endif
