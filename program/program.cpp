@@ -68,13 +68,13 @@ OktetaProgram::OktetaProgram( int &argc, char* argv[] )
     // MSVC complains about mismatched strings... (wide vs normal)
     // fix it using QT_UNICODE_LITERAL
     QLoggingCategory::setFilterRules(QStringLiteral(
-        "okteta.core.debug = true\n"
-        QT_UNICODE_LITERAL("okteta.gui.debug = true\n")
-        QT_UNICODE_LITERAL("kasten.core.debug = true\n")
-        QT_UNICODE_LITERAL("kasten.gui.debug = true\n")
-        QT_UNICODE_LITERAL("kasten.okteta.core = true\n")
-        QT_UNICODE_LITERAL("kasten.okteta.gui = true\n")
-        QT_UNICODE_LITERAL("kasten.okteta.controllers.structures.debug = true\n")));
+        "okteta.core.debug = false\n"
+        QT_UNICODE_LITERAL("okteta.gui.debug = false\n")
+        QT_UNICODE_LITERAL("kasten.core.debug = false\n")
+        QT_UNICODE_LITERAL("kasten.gui.debug = false\n")
+        QT_UNICODE_LITERAL("kasten.okteta.core = false\n")
+        QT_UNICODE_LITERAL("kasten.okteta.gui = false\n")
+        QT_UNICODE_LITERAL("kasten.okteta.controllers.structures.debug = false\n")));
 #endif
 
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
