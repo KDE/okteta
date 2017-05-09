@@ -100,8 +100,6 @@ int OktetaProgram::execute()
     KAboutData::setApplicationData( aboutData );
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("okteta")));
 
-    KDBusService programDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
-
     QCommandLineParser parser;
     aboutData.setupCommandLine(&parser);
     parser.addHelpOption();
@@ -117,6 +115,8 @@ int OktetaProgram::execute()
     parser.process(mApp);
 
     aboutData.processCommandLine(&parser);
+
+    KDBusService programDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
 
     // TODO:
     mByteArrayViewProfileManager = new ByteArrayViewProfileManager();
