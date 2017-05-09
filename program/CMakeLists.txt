@@ -25,6 +25,7 @@ target_link_libraries( okteta
   KF5::I18n
   KF5::XmlGui
   KF5::DBusAddons
+  KF5::Crash
 )
 
 install( TARGETS okteta  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )

@@ -64,6 +64,7 @@ find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
     Codecs
     Completion
     ConfigWidgets
+    Crash
     DBusAddons
     DocTools
     IconThemes
