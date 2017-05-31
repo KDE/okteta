@@ -160,7 +160,7 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
 Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
 {
     if (!index.isValid())
-        return 0;
+        return Qt::NoItemFlags;
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
     return item->flags(index.column(), mTool->isFileLoaded());
 }
