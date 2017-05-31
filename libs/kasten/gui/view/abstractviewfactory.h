@@ -43,7 +43,7 @@ class KASTENGUI_EXPORT AbstractViewFactory
     /**
     * @param alignment on which side the new view is placed to show a continuous whole view
     */
-    virtual AbstractView* createCopyOfView( AbstractView* view, Qt::Alignment alignment = 0 );
+    virtual AbstractView* createCopyOfView( AbstractView* view, Qt::Alignment alignment = {} );
 };
 
 

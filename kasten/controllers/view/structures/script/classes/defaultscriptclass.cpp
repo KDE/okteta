@@ -97,7 +97,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                 QStringLiteral("Attempting to access an invalid object"));
-        return 0;
+        return QScriptClass::QueryFlags();
     }
     if (name == s_valid || name == s_validationError)
     {
@@ -128,7 +128,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
         data->logError() << "could not find property with name" << name.toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                 QLatin1String("Could not find property with name ") + name.toString());
-        return 0;
+        return QScriptClass::QueryFlags();
     }
 }
 
@@ -369,7 +369,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                 QStringLiteral("Attempting to access an invalid object"));
-        return 0;
+        return QScriptValue::PropertyFlags();
     }
     if (name == s_valid || name == s_validationError)
     {
@@ -390,7 +390,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     else
     {
         data->logError() << "could not find flags for property with name" << name.toString();
-        return 0;
+        return QScriptValue::PropertyFlags();
     }
 }
 
@@ -455,7 +455,7 @@ QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
 {
     Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
     if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount())
-        return 0;
+        return QScriptValue::PropertyFlags();
     if (mCurrent < mClass->mIterableProperties.size())
         return mClass->propertyFlags(object(), mClass->mIterableProperties.at(mCurrent).first, id());
     return QScriptValue::ReadOnly;

@@ -66,7 +66,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
   public:
     ByteArrayView( ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer );
     ByteArrayView( ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
-                   Qt::Alignment alignment = 0 );
+                   Qt::Alignment alignment = {} );
 
     virtual ~ByteArrayView();
 
