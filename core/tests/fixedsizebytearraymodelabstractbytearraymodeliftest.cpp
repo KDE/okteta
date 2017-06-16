@@ -34,6 +34,11 @@ namespace Okteta
 static const Size FixedSizeByteArrayModelSize = 60;
 
 
+bool FixedSizeByteArrayModelAbstractByteArrayModelIfTest::byteArrayModelSizeCanBeChanged() const
+{
+    return false;
+}
+
 AbstractByteArrayModel* FixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
     return new FixedSizeByteArrayModel( FixedSizeByteArrayModelSize );

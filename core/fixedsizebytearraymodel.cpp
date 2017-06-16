@@ -261,6 +261,9 @@ Size FixedSizeByteArrayModel::fill( Byte fillByte, Address offset, Size fillLeng
     if( fillLength < 0 || fillLength > lengthToEnd )
         fillLength = lengthToEnd;
 
+    if( fillLength == 0 )
+        return 0;
+
     memset( &mData[offset], fillByte, fillLength );
     mModified = true;
 

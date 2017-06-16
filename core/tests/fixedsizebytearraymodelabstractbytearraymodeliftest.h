@@ -36,6 +36,7 @@ class FixedSizeByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteA
   protected: // AbstractByteArrayModelIfTest API
     AbstractByteArrayModel* createByteArrayModel();
     void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel );
+    bool byteArrayModelSizeCanBeChanged() const;
 };
 
 }

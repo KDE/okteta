@@ -46,6 +46,7 @@ class AbstractByteArrayModelIfTest : public QObject
   protected: // our API
     virtual AbstractByteArrayModel* createByteArrayModel() = 0;
     virtual void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel ) = 0;
+    virtual bool byteArrayModelSizeCanBeChanged() const;
 
   protected:
     void checkContentsReplaced( Address Position, Size removedLength, int insertedLength );
