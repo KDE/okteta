@@ -38,6 +38,11 @@ Q_DECLARE_METATYPE(Okteta::ArrayChangeMetricsList)
 namespace Okteta
 {
 
+bool AbstractByteArrayModelIfTest::byteArrayModelSizeCanBeChanged() const
+{
+    return true;
+}
+
 // ---------------------------------------------------------------- Tests -----
 
 
@@ -214,6 +219,22 @@ void AbstractByteArrayModelIfTest::testFill()
   QCOMPARE( copy.compare(*mByteArrayModel, fillRange, fillRange.start()), 0 );
   QVERIFY( mByteArrayModel->isModified() );
   checkContentsReplaced( fillRange, fillRange.width() );
+
+  // fill() at end with length reaching behind end
+  static const Size behindEndSize = 2;
+  mByteArrayModel->setModified( false );
+  mByteArrayModel->fill( BlankChar );
+  fillRange.moveToEnd( size - 1 + behindEndSize );
+  clearSignalSpys();
+
+  mByteArrayModel->fill( PaintChar, fillRange.start(), fillRange.width() );
+  const AddressRange removedRange( fillRange.start(), size-1 );
+  const AddressRange insertedRange = byteArrayModelSizeCanBeChanged() ? fillRange : removedRange;
+  QCOMPARE( mByteArrayModel->byte(insertedRange.nextBeforeStart()), BlankChar );
+  QCOMPARE( copy.compare(*mByteArrayModel, insertedRange, insertedRange.start()-behindEndSize), 0 );
+  QVERIFY( mByteArrayModel->isModified() );
+  QCOMPARE( mByteArrayModel->size(), insertedRange.nextBehindEnd() );
+  checkContentsReplaced( removedRange, insertedRange.width() );
 
   // fill() at mid
   mByteArrayModel->setModified( false );
