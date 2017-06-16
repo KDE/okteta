@@ -197,7 +197,7 @@ Size PieceTableByteArrayModelPrivate::fill( Byte fillByte, Address offset, Size 
         fillLength = lengthToEnd;
     const int filledLength = ( fillLength < lengthToEnd ) ? fillLength : lengthToEnd;
     // check parameters
-    const bool nothingToFill = ( (int)offset >= mPieceTable.size() );
+    const bool nothingToFill = ( ((int)offset >= mPieceTable.size()) || (fillLength == 0));
     if( nothingToFill )
         return 0;
 
@@ -428,7 +428,7 @@ void PieceTableByteArrayModelPrivate::doFillChange( Address offset, Size filledL
     mChangesDataStorage.appendFill( storageOffset, fillByte, fillLength );
 
     const ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( offset, fillLength, fillLength );
+        ArrayChangeMetrics::asReplacement( offset, filledLength, fillLength );
     const ByteArrayChange change( metrics );
 
     mChangeMetrics.append( metrics );

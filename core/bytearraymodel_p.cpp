@@ -327,7 +327,7 @@ Size ByteArrayModelPrivate::fill( Byte fillByte, Address offset, Size fillLength
         return 0;
 
     // nothing to fill
-    if( offset >= mSize )
+    if( (offset >= mSize) || (fillLength == 0) )
         return 0;
 
     const bool wasModifiedBefore = mModified;
@@ -336,13 +336,24 @@ Size ByteArrayModelPrivate::fill( Byte fillByte, Address offset, Size fillLength
 
     if( fillLength < 0 )
         fillLength = lengthToEnd;
-    else if( fillLength > lengthToEnd )
-        fillLength = addSize( fillLength, offset, false );
+
+    const bool isToFillBehindEnd = ( fillLength > lengthToEnd );
+    const Size replacedLength = ( isToFillBehindEnd ? lengthToEnd : fillLength );
+
+    if( isToFillBehindEnd )
+    {
+        Size sizeToAdd = fillLength - lengthToEnd;
+        sizeToAdd = addSize( sizeToAdd, offset, false );
+        fillLength = lengthToEnd + sizeToAdd;
+    }
+    // nothing to fill
+    if( fillLength == 0 )
+        return 0;
 
     memset( &mData[offset], fillByte, fillLength );
     mModified = true;
 
-    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(offset,fillLength,fillLength) );
+    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(offset,replacedLength,fillLength) );
     if( ! wasModifiedBefore )
         emit p->modifiedChanged( true );
     return fillLength;
