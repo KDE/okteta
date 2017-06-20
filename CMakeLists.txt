@@ -42,7 +42,7 @@ find_package(Qt5Designer ${REQUIRED_QT_VERSION} CONFIG QUIET)
 set_package_properties(Qt5Designer PROPERTIES TYPE OPTIONAL
     PURPOSE "Required to build Qt Designer plugins"
 )
-if(NOT Qt5Designer_VERSION_STRING VERSION_LESS 5.5.0)
+if(NOT Qt5Designer_VERSION VERSION_LESS 5.5.0)
     find_package(Qt5UiPlugin ${REQUIRED_QT_VERSION} CONFIG QUIET)
     set_package_properties(Qt5UiPlugin PROPERTIES TYPE OPTIONAL
         PURPOSE "Required to build Qt Designer plugins"
