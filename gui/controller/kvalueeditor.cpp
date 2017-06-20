@@ -123,6 +123,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *keyEvent )
                 keyUsed = false;
                 break;
             }
+            // fallthrough
         case Qt::Key_Enter:
         case Qt::Key_Return:
             doValueEditAction( mInEditMode?LeaveValue:EnterValue );
