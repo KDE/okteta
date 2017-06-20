@@ -89,6 +89,7 @@ QVariant BookmarkListModel::data( const QModelIndex& index, int role ) const
             default:
                 ;
         }
+        break;
     }
     case Qt::EditRole:
     {
