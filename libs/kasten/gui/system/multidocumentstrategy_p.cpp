@@ -51,6 +51,10 @@ void MultiDocumentStrategyPrivate::init()
                       mViewManager, &ViewManager::createViewsFor );
     QObject::connect( mDocumentManager, &DocumentManager::closing,
                       mViewManager, &ViewManager::removeViewsFor );
+    QObject::connect( mDocumentManager, &DocumentManager::added,
+                      q, &MultiDocumentStrategy::added );
+    QObject::connect( mDocumentManager, &DocumentManager::closing,
+                      q, &MultiDocumentStrategy::closing );
     QObject::connect( mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
                       q, &MultiDocumentStrategy::urlUsed );
 }
