@@ -22,8 +22,4 @@
 
 #include "oktetacore.h"
 
-#if QT_VERSION >= 0x050500
 Q_LOGGING_CATEGORY(LOG_OKTETA_CORE, "okteta.core", QtInfoMsg)
-#else
-Q_LOGGING_CATEGORY(LOG_OKTETA_CORE, "okteta.core")
-#endif

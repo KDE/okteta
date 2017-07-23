@@ -22,8 +22,4 @@
 
 #include "checksumlogging.h"
 
-#if QT_VERSION >= 0x050500
 Q_LOGGING_CATEGORY(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM, "kasten.okteta.controllers.checksum", QtInfoMsg)
-#else
-Q_LOGGING_CATEGORY(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM, "kasten.okteta.controllers.checksum")
-#endif

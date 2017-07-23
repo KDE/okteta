@@ -66,21 +66,6 @@ namespace Kasten
 OktetaProgram::OktetaProgram( int &argc, char* argv[] )
   : mApp( argc, argv )
 {
-#if QT_VERSION < 0x050500
-#ifndef QT_NO_DEBUG
-    // MSVC complains about mismatched strings... (wide vs normal)
-    // fix it using QT_UNICODE_LITERAL
-    QLoggingCategory::setFilterRules(QStringLiteral(
-        "okteta.core.debug = false\n"
-        QT_UNICODE_LITERAL("okteta.gui.debug = false\n")
-        QT_UNICODE_LITERAL("kasten.core.debug = false\n")
-        QT_UNICODE_LITERAL("kasten.gui.debug = false\n")
-        QT_UNICODE_LITERAL("kasten.okteta.core = false\n")
-        QT_UNICODE_LITERAL("kasten.okteta.gui = false\n")
-        QT_UNICODE_LITERAL("kasten.okteta.controllers.structures.debug = false\n")));
-#endif
-#endif
-
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     KLocalizedString::setApplicationDomain( "okteta" );
 #if KCOREADDONS_VERSION >= 0x051500

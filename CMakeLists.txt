@@ -22,7 +22,7 @@ include(FeatureSummary)
 include(GenerateExportHeader)
 
 
-set(REQUIRED_QT_VERSION "5.2.0")
+set(REQUIRED_QT_VERSION "5.6.0")
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     COMPONENTS
     Core
@@ -42,19 +42,15 @@ find_package(Qt5Designer ${REQUIRED_QT_VERSION} CONFIG QUIET)
 set_package_properties(Qt5Designer PROPERTIES TYPE OPTIONAL
     PURPOSE "Required to build Qt Designer plugins"
 )
-if(NOT Qt5Designer_VERSION VERSION_LESS 5.5.0)
-    find_package(Qt5UiPlugin ${REQUIRED_QT_VERSION} CONFIG QUIET)
-    set_package_properties(Qt5UiPlugin PROPERTIES TYPE OPTIONAL
-        PURPOSE "Required to build Qt Designer plugins"
-    )
-    if (Qt5UiPlugin_FOUND)
-        # for some reason, Qt5UiPlugin does not set its _INCLUDE_DIRS variable. Fill it manually
-        get_target_property(Qt5UiPlugin_INCLUDE_DIRS Qt5::UiPlugin INTERFACE_INCLUDE_DIRECTORIES)
-    endif()
-    set(DesignerPluginDeps_FOUND ${Qt5UiPlugin_FOUND})
-else()
-    set(DesignerPluginDeps_FOUND ${Qt5Designer_FOUND})
+find_package(Qt5UiPlugin ${REQUIRED_QT_VERSION} CONFIG QUIET)
+set_package_properties(Qt5UiPlugin PROPERTIES TYPE OPTIONAL
+    PURPOSE "Required to build Qt Designer plugins"
+)
+if (Qt5UiPlugin_FOUND)
+    # for some reason, Qt5UiPlugin does not set its _INCLUDE_DIRS variable. Fill it manually
+    get_target_property(Qt5UiPlugin_INCLUDE_DIRS Qt5::UiPlugin INTERFACE_INCLUDE_DIRECTORIES)
 endif()
+set(DesignerPluginDeps_FOUND ${Qt5UiPlugin_FOUND})
 
 
 set(REQUIRED_KF5_VERSION "5.7.0")
