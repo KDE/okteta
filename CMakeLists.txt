@@ -78,12 +78,6 @@ find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
     XmlGui
 )
 
-if( UNIX )
-  add_compile_options(-Wall)
-  # enable this to reduce the file sizes (might crash)
-  # add_compile_options(-fno-rtti)
-endif()
-
 find_package(Qca-qt5 2.1.0)
 set_package_properties(Qca-qt5 PROPERTIES DESCRIPTION "Qt Cryptographic Architecture"
                        URL "http:/download.kde.org/stable/qca-qt5" TYPE OPTIONAL
