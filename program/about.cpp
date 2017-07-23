@@ -24,7 +24,6 @@
 
 // KF5
 #include <KLocalizedString>
-#include <kcoreaddons_version.h>
 
 
 OktetaAboutData::OktetaAboutData()
@@ -45,7 +44,5 @@ OktetaAboutData::OktetaAboutData()
     addAuthor( i18nc("Author","Alexander Richardson"),// name
                i18nc("Task description","Structures tool"), // task
                QStringLiteral("alex.richardson@gmx.de") );
-#if KCOREADDONS_VERSION >= 0x051600
     setDesktopFileName(QStringLiteral("org.kde.okteta"));
-#endif
 }

@@ -33,9 +33,5 @@ ecm_add_test(
   Qt5::Test
 )
 
-if(${KF5_VERSION} VERSION_LESS "5.16.0")
-    kcoreaddons_desktop_to_json(oktetaparttest ../oktetapart.desktop)
-else()
-    kcoreaddons_desktop_to_json(oktetaparttest ../oktetapart.desktop  SERVICE_TYPES kpart.desktop)
-endif()
+kcoreaddons_desktop_to_json(oktetaparttest ../oktetapart.desktop  SERVICE_TYPES kpart.desktop)
 

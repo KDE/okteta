@@ -49,7 +49,6 @@
 #include <KDBusService>
 #include <KLocalizedString>
 #include <KCrash>
-#include <kcoreaddons_version.h>
 // Qt
 #include <QCommandLineParser>
 #include <QList>
@@ -68,9 +67,7 @@ OktetaProgram::OktetaProgram( int &argc, char* argv[] )
 {
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
     KLocalizedString::setApplicationDomain( "okteta" );
-#if KCOREADDONS_VERSION >= 0x051500
     KCrash::initialize();
-#endif
 }
 
 

@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project( okteta )
 
-find_package(ECM 1.7.0 REQUIRED NO_MODULE)
+set(REQUIRED_ECM_VERSION "5.18.0")
+find_package(ECM ${REQUIRED_ECM_VERSION} REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -53,7 +54,7 @@ endif()
 set(DesignerPluginDeps_FOUND ${Qt5UiPlugin_FOUND})
 
 
-set(REQUIRED_KF5_VERSION "5.7.0")
+set(REQUIRED_KF5_VERSION "5.18.0")
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
     COMPONENTS
     Bookmarks
