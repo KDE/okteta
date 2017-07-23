@@ -49,8 +49,8 @@ DocumentsView::DocumentsView( DocumentsTool* tool, QWidget* parent )
     mDocumentListView->setUniformRowHeights( true );
     mDocumentListView->setAllColumnsShowFocus( true );
     mDocumentListView->setModel( mDocumentListModel );
-    connect( mDocumentListView, SIGNAL(activated(QModelIndex)),
-             SLOT(onDocumentActivated(QModelIndex)) );
+    connect( mDocumentListView, &QAbstractItemView::activated,
+             this, &DocumentsView::onDocumentActivated );
     for( int c = 0; c<DocumentListModel::NoOfColumnIds; ++c )
         mDocumentListView->resizeColumnToContents( c );
 

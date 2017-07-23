@@ -71,9 +71,6 @@ class OKTETAKASTENGUI_EXPORT AddressComboBox : public QWidget
     AddressComboBoxPrivate* const d_ptr;
   private:
     Q_DECLARE_PRIVATE( AddressComboBox )
-    Q_PRIVATE_SLOT( d_func(), void onFormatChanged( int index ) )
-    Q_PRIVATE_SLOT( d_func(), void onValueEdited( const QString& value ) )
-    Q_PRIVATE_SLOT( d_func(), void onValueActivated( int index ) )
 };
 
 }

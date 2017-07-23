@@ -103,8 +103,8 @@ void DocumentSyncManager::load( const QUrl& url )
 
     AbstractModelSynchronizer* synchronizer = mSynchronizerFactory->createSynchronizer();
     AbstractLoadJob* loadJob = synchronizer->startLoad( url );
-    connect( loadJob, SIGNAL(documentLoaded(Kasten::AbstractDocument*)),
-             SLOT(onDocumentLoaded(Kasten::AbstractDocument*)) );
+    connect( loadJob, &AbstractLoadJob::documentLoaded,
+             this, &DocumentSyncManager::onDocumentLoaded );
 
     JobManager::executeJob( loadJob ); // TODO: pass a ui handler to jobmanager
 

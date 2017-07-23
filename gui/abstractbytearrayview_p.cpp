@@ -179,7 +179,8 @@ void AbstractByteArrayViewPrivate::init()
 
     mCursorBlinkTimer = new QTimer( q );
 
-    q->connect( mCursorBlinkTimer, SIGNAL(timeout()), q, SLOT(blinkCursor()) );
+    QObject::connect( mCursorBlinkTimer, &QTimer::timeout,
+                      q, [&]() { blinkCursor(); } );
 
     q->setAcceptDrops( true );
 }
@@ -202,10 +203,10 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* by
     if( mByteArrayModel->isReadOnly() )
         setReadOnly( true );
 
-    q->connect( mByteArrayModel, SIGNAL(readOnlyChanged(bool)),
-                q, SLOT(onByteArrayReadOnlyChange(bool)) );
-    q->connect( mByteArrayModel, SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)),
-                q, SLOT(onContentsChanged(Okteta::ArrayChangeMetricsList)) );
+    QObject::connect( mByteArrayModel, &AbstractByteArrayModel::readOnlyChanged,
+                      q, [&](bool isReadOnly) { onByteArrayReadOnlyChange(isReadOnly); } );
+    QObject::connect( mByteArrayModel, &AbstractByteArrayModel::contentsChanged,
+                      q, [&](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); } );
 
     Bookmarkable *bookmarks = qobject_cast<Bookmarkable*>( mByteArrayModel );
     if( bookmarks )

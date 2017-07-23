@@ -64,7 +64,8 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     QFormLayout* titleFormLayout = new QFormLayout;
     // char for non-printable bytes
     mTitleEdit = new KLineEdit( this );
-    connect( mTitleEdit, SIGNAL(textChanged(QString)), SIGNAL(profileTitleChanged(QString)) );
+    connect( mTitleEdit, &QLineEdit::textChanged,
+             this, &ViewProfileEdit::profileTitleChanged );
     titleFormLayout->addRow( i18n("Title:"), mTitleEdit );
 
     // display settings

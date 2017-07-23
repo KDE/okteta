@@ -45,7 +45,7 @@ ViewAreaBox::ViewAreaBox( QWidget* centralWidget, QWidget* parent )
 
     mEscapeShortcut = new QShortcut( Qt::Key_Escape, this );
     mEscapeShortcut->setEnabled( false );
-    connect( mEscapeShortcut, SIGNAL(activated()), SLOT(onDone()) ); // TODO: better use onCancelled
+    connect( mEscapeShortcut, &QShortcut::activated, this, &ViewAreaBox::onDone ); // TODO: better use onCancelled
 }
 
 

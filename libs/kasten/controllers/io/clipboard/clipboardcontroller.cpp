@@ -51,7 +51,8 @@ ClipboardController::ClipboardController( KXMLGUIClient* guiClient )
     mCopyAction =  KStandardAction::copy(  this, SLOT(copy()),  actionCollection );
     mPasteAction = KStandardAction::paste( this, SLOT(paste()), actionCollection );
 
-    connect( QApplication::clipboard(), SIGNAL(dataChanged()), SLOT(onClipboardDataChanged()) );
+    connect( QApplication::clipboard(), &QClipboard::dataChanged,
+             this, &ClipboardController::onClipboardDataChanged );
 
     setTargetModel( 0 );
 }
@@ -69,7 +70,8 @@ void ClipboardController::setTargetModel( AbstractModel* model )
 
         mMimeDataControl = qobject_cast<If::SelectedDataWriteable*>( mModel );
         if( mMimeDataControl )
-            connect( mModel, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
+            connect( mModel, &AbstractModel::readOnlyChanged,
+                     this, &ClipboardController::onReadOnlyChanged );
     }
     else
         mMimeDataControl = 0;

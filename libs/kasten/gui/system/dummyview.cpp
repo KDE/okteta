@@ -38,8 +38,8 @@ DummyView::DummyView( AbstractDocument* document )
 {
     mLabel->setText( mDocument->title() );
 
-    connect( document, SIGNAL(titleChanged(QString)),
-             SLOT(onTitleChange(QString)) );
+    connect( document, &Kasten::AbstractDocument::titleChanged,
+             this, &DummyView::onTitleChange );
 }
 
 

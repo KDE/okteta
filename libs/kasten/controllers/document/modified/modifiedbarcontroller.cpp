@@ -73,8 +73,8 @@ void ModifiedBarController::setTargetModel( AbstractModel* model )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
-                            SLOT(onSynchronizerChanged(Kasten::AbstractModelSynchronizer*)) );
+        connect( mDocument, &Kasten::AbstractDocument::synchronizerChanged,
+                 this,      &ModifiedBarController::onSynchronizerChanged );
     }
 
     mLocalStateLabel->setEnabled( mDocument );
@@ -137,17 +137,18 @@ void ModifiedBarController::onSynchronizerChanged( AbstractModelSynchronizer* ne
     if( mSynchronizer )
     {
         if( ! oldSynchronizer )
-            mDocument->disconnect( this, SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
+            disconnect( mDocument, &Kasten::AbstractDocument::contentFlagsChanged,
+                        this, &ModifiedBarController::onContentFlagsChanged );
 
         localState = mSynchronizer->localSyncState();
         remoteState = mSynchronizer->remoteSyncState();
 
-        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                 SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
-        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
-                 SLOT(onRemoteSyncStateChanged(Kasten::RemoteSyncState)) );
-        connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
-                                SLOT(onSynchronizerDeleted(QObject*)) );
+        connect( mSynchronizer, &Kasten::AbstractModelSynchronizer::localSyncStateChanged,
+                 this, &ModifiedBarController::onLocalSyncStateChanged );
+        connect( mSynchronizer, &Kasten::AbstractModelSynchronizer::remoteSyncStateChanged,
+                 this, &ModifiedBarController::onRemoteSyncStateChanged );
+        connect( mSynchronizer, &QObject::destroyed,
+                 this, &ModifiedBarController::onSynchronizerDeleted );
     }
     else if( mDocument )
     {
@@ -156,8 +157,8 @@ void ModifiedBarController::onSynchronizerChanged( AbstractModelSynchronizer* ne
         // TODO: onRemoteSyncStateChanged(...) checks for mSynchronizer and ignores this
         remoteState = RemoteInSync;
 
-        connect( mDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
-                 SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
+        connect( mDocument, &Kasten::AbstractDocument::contentFlagsChanged,
+                 this, &ModifiedBarController::onContentFlagsChanged );
     }
     else
     {
@@ -178,8 +179,8 @@ void ModifiedBarController::onSynchronizerDeleted( QObject* synchronizer )
     mSynchronizer = 0;
 
     // switch to document state
-    connect( mDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
-             SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
+    connect( mDocument, &Kasten::AbstractDocument::contentFlagsChanged,
+             this, &ModifiedBarController::onContentFlagsChanged );
 
     onContentFlagsChanged( mDocument->contentFlags() );
         // TODO: onRemoteSyncStateChanged(...) checks for mSynchronizer and ignores the parameter

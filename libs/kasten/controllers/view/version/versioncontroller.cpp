@@ -50,23 +50,23 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
     actionCollection->addAction( QStringLiteral("edit_undo"), mSetToOlderVersionAction );
     actionCollection->setDefaultShortcuts( mSetToOlderVersionAction, KStandardShortcut::undo() );
 
-    connect( mSetToOlderVersionAction, SIGNAL(triggered(bool)),
-             SLOT(onSetToOlderVersionTriggered()) );
-    connect( mSetToOlderVersionAction->menu(), SIGNAL(aboutToShow()),
-             SLOT(onOlderVersionMenuAboutToShow()) );
-    connect( mSetToOlderVersionAction->menu(), SIGNAL(triggered(QAction*)),
-             SLOT(onOlderVersionMenuTriggered(QAction*)) );
+    connect( mSetToOlderVersionAction, &QAction::triggered,
+             this, &VersionController::onSetToOlderVersionTriggered );
+    connect( mSetToOlderVersionAction->menu(), &QMenu::aboutToShow,
+             this, &VersionController::onOlderVersionMenuAboutToShow );
+    connect( mSetToOlderVersionAction->menu(), &QMenu::triggered,
+             this, &VersionController::onOlderVersionMenuTriggered );
 
     mSetToNewerVersionAction = new KToolBarPopupAction( QIcon::fromTheme( QStringLiteral("edit-redo") ), i18nc("@action:inmenu","Redo"), this );
     actionCollection->addAction( QStringLiteral("edit_redo"), mSetToNewerVersionAction );
     actionCollection->setDefaultShortcuts( mSetToNewerVersionAction, KStandardShortcut::redo() );
 
-    connect( mSetToNewerVersionAction, SIGNAL(triggered(bool)),
-             SLOT(onSetToNewerVersionTriggered()) );
-    connect( mSetToNewerVersionAction->menu(), SIGNAL(aboutToShow()),
-             SLOT(onNewerVersionMenuAboutToShow()) );
-    connect( mSetToNewerVersionAction->menu(), SIGNAL(triggered(QAction*)),
-             SLOT(onNewerVersionMenuTriggered(QAction*)) );
+    connect( mSetToNewerVersionAction, &QAction::triggered,
+             this, &VersionController::onSetToNewerVersionTriggered );
+    connect( mSetToNewerVersionAction->menu(), &QMenu::aboutToShow,
+             this, &VersionController::onNewerVersionMenuAboutToShow );
+    connect( mSetToNewerVersionAction->menu(), &QMenu::triggered,
+             this, &VersionController::onNewerVersionMenuTriggered );
 
     setTargetModel( 0 );
 }
@@ -88,7 +88,8 @@ void VersionController::setTargetModel( AbstractModel* model )
     {
         connect( versionedModel, SIGNAL(revertedToVersionIndex(int)), SLOT(onVersionIndexChanged(int)) );
         connect( versionedModel, SIGNAL(headVersionChanged(int)),     SLOT(onVersionIndexChanged(int)) );
-        connect( mModel, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
+        connect( mModel, &AbstractModel::readOnlyChanged,
+                 this, &VersionController::onReadOnlyChanged );
     }
     else
         mModel = 0;

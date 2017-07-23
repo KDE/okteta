@@ -66,7 +66,8 @@ InsertController::InsertController( ModelCodecViewManager* modelCodecViewManager
     mInsertSelectAction->setText( i18nc("@title:menu","Insert") );
 //     mInsertSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("insert-text") ) );
     mInsertSelectAction->setToolBarMode( KSelectAction::MenuMode );
-    connect( mInsertSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
+    connect( mInsertSelectAction, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered),
+             this, &InsertController::onActionTriggered );
 
     setTargetModel( 0 );
 }
@@ -81,7 +82,8 @@ void InsertController::setTargetModel( AbstractModel* model )
     if( mSelectedDataWriteableControl )
     {
         // TODO: only fill the list on menu call...
-        connect( mModel, SIGNAL(readOnlyChanged(bool)), SLOT(onReadOnlyChanged(bool)) );
+        connect( mModel, &AbstractModel::readOnlyChanged,
+                 this, &InsertController::onReadOnlyChanged );
     }
 
     updateActions();

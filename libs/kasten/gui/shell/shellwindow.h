@@ -69,14 +69,6 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
     MultiViewAreas* viewArea() const;
     ViewManager* viewManager() const;
 
-  private:
-    Q_PRIVATE_SLOT( d_func(), void onTitleChanged( const QString& newTitle ) )
-    Q_PRIVATE_SLOT( d_func(), void onContentFlagsChanged( Kasten::ContentFlags contentFlags ) )
-    Q_PRIVATE_SLOT( d_func(), void onLocalSyncStateChanged( Kasten::LocalSyncState newState ) )
-    Q_PRIVATE_SLOT( d_func(), void onViewFocusChanged( Kasten::AbstractView* view ) )
-    Q_PRIVATE_SLOT( d_func(), void onToolVisibilityChanged( bool isVisible ) )
-    Q_PRIVATE_SLOT( d_func(), void onSynchronizerDeleted( QObject* synchronizer ) )
-
   protected:
     ShellWindowPrivate* const d_ptr;
     Q_DECLARE_PRIVATE( ShellWindow )

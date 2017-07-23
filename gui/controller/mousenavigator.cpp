@@ -51,8 +51,8 @@ MouseNavigator::MouseNavigator( AbstractByteArrayView* view, AbstractMouseContro
     mDragStartTimer = new QTimer( this );
     mTrippleClickTimer = new QTimer( this );
 
-    connect( mScrollTimer,      SIGNAL(timeout()), SLOT(autoScrollTimerDone()) );
-    connect( mDragStartTimer,   SIGNAL(timeout()), SLOT(startDrag()) );
+    connect( mScrollTimer,      &QTimer::timeout, this, &MouseNavigator::autoScrollTimerDone );
+    connect( mDragStartTimer,   &QTimer::timeout, this, &MouseNavigator::startDrag );
     mDragStartTimer->setSingleShot( true );
     mTrippleClickTimer->setSingleShot( true );
 }

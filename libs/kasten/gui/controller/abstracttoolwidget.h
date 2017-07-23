@@ -56,7 +56,6 @@ class KASTENGUI_EXPORT AbstractToolWidget : public QWidget
 
   private:
     AbstractToolWidgetPrivate* const d;
-    Q_PRIVATE_SLOT( d, void onReturnPressed() )
 };
 
 }

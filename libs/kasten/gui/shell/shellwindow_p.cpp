@@ -52,13 +52,13 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
 {
     parent->setCentralWidget( mGroupedViews->widget() );
 
-    QObject::connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),
-                      mGroupedViews, SLOT(addViews(QList<Kasten::AbstractView*>)) );
-    QObject::connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)),
-                      mGroupedViews, SLOT(removeViews(QList<Kasten::AbstractView*>)) );
+    QObject::connect( mViewManager, &ViewManager::opened,
+                      mGroupedViews, &AbstractGroupedViews::addViews );
+    QObject::connect( mViewManager, &ViewManager::closing,
+                      mGroupedViews, &AbstractGroupedViews::removeViews );
 
-    QObject::connect( mGroupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)),
-                      parent, SLOT(onViewFocusChanged(Kasten::AbstractView*)) );
+    QObject::connect( mGroupedViews, &AbstractGroupedViews::viewFocusChanged,
+                      parent, [&](Kasten::AbstractView* view) { onViewFocusChanged(view); } );
 }
 
 void ShellWindowPrivate::addTool( AbstractToolView* toolView )
@@ -75,8 +75,8 @@ void ShellWindowPrivate::addTool( AbstractToolView* toolView )
     if( dockWidget->isVisible() && mCurrentView )
         toolView->tool()->setTargetModel( mCurrentView );
 
-    QObject::connect( dockWidget, SIGNAL(visibilityChanged(bool)),
-                      q, SLOT(onToolVisibilityChanged(bool)) );
+    QObject::connect( dockWidget, &QDockWidget::visibilityChanged,
+                      q, [&](bool visible) { onToolVisibilityChanged(visible); } );
 }
 
 void ShellWindowPrivate::showDocument( AbstractDocument* document )
@@ -184,24 +184,24 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView* view )
     q->setCaption( title, hasChanges );
 
     if( view )
-        QObject::connect( view, SIGNAL(titleChanged(QString)),
-                          q, SLOT(onTitleChanged(QString)) );
+        QObject::connect( view, &AbstractModel::titleChanged,
+                          q, [&](const QString& Title) { onTitleChanged(Title); } );
 
     if( mCurrentSynchronizer )
     {
         if( isNewSynchronizer )
         {
-            QObject::connect( mCurrentSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                            q, SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
-            QObject::connect( mCurrentSynchronizer, SIGNAL(destroyed(QObject*)),
-                            q, SLOT(onSynchronizerDeleted(QObject*)) );
+            QObject::connect( mCurrentSynchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                              q, [&](LocalSyncState localSyncState) { onLocalSyncStateChanged(localSyncState); } );
+            QObject::connect( mCurrentSynchronizer, &QObject::destroyed,
+                              q, [&](QObject* object) { onSynchronizerDeleted(object); } );
         }
     }
     else if( mCurrentDocument )
     {
         if( isNewDocument )
-            QObject::connect( mCurrentDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
-                              q, SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
+            QObject::connect( mCurrentDocument, &AbstractDocument::contentFlagsChanged,
+                              q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); } );
     }
 }
 
@@ -227,8 +227,8 @@ void ShellWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
     mCurrentSynchronizer = 0;
 
     // switch to document state
-    QObject::connect( mCurrentDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
-                      q, SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
+    QObject::connect( mCurrentDocument, &AbstractDocument::contentFlagsChanged,
+                      q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); } );
 
     onContentFlagsChanged( mCurrentDocument->contentFlags() );
 }

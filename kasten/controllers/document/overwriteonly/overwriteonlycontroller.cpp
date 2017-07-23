@@ -41,7 +41,7 @@ OverwriteOnlyController::OverwriteOnlyController( KXMLGUIClient* guiClient )
 
     mSetOverwriteOnlyAction = actionCollection->add<KToggleAction>( "isoverwriteonly" );
     mSetOverwriteOnlyAction->setText( i18nc("@option:check","Overwrite only") );
-    connect( mSetOverwriteOnlyAction, SIGNAL(triggered(bool)), SLOT(setOverwriteOnly(bool)) );
+    connect( mSetOverwriteOnlyAction, &QAction::triggered, this, &OverwriteOnlyController::setOverwriteOnly );
 
     setTargetModel( 0 );
 }

@@ -436,10 +436,6 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     AbstractByteArrayView( AbstractByteArrayViewPrivate* d, QWidget* parent );
   private:
     Q_DECLARE_PRIVATE( AbstractByteArrayView )
-    Q_PRIVATE_SLOT( d_func(), void adaptController() )
-    Q_PRIVATE_SLOT( d_func(), void blinkCursor() )
-    Q_PRIVATE_SLOT( d_func(), void onByteArrayReadOnlyChange(bool isByteArrayReadOnly) )
-    Q_PRIVATE_SLOT( d_func(), void onContentsChanged( const Okteta::ArrayChangeMetricsList& changeList ) )
     Q_PRIVATE_SLOT( d_func(), void onBookmarksChange( const QList<Okteta::Bookmark>& bookmarks ) )
     Q_PRIVATE_SLOT( d_func(), void onRevertedToVersionIndex( int versionIndex ) )
 //     Q_PRIVATE_SLOT( d_func(), void onClipboardChanged() )

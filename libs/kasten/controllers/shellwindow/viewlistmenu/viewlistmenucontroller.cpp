@@ -55,10 +55,13 @@ ViewListMenuController::ViewListMenuController( ViewManager* viewManager, Abstra
 {
     mWindowsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
 //     mWindowsActionGroup->setExclusive( true );
-    connect( mWindowsActionGroup, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
+    connect( mWindowsActionGroup, &QActionGroup::triggered,
+             this, &ViewListMenuController::onActionTriggered );
 
-    connect( mViewManager, SIGNAL(opened(QList<Kasten::AbstractView*>)),  SLOT(updateActions()) );
-    connect( mViewManager, SIGNAL(closing(QList<Kasten::AbstractView*>)), SLOT(updateActions()) );
+    connect( mViewManager, &ViewManager::opened,
+             this, &ViewListMenuController::updateActions );
+    connect( mViewManager, &ViewManager::closing,
+             this, &ViewListMenuController::updateActions );
 
     updateActions();
 }

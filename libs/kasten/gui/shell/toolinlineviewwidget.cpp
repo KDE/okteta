@@ -44,7 +44,7 @@ ToolInlineViewWidget::ToolInlineViewWidget( AbstractToolInlineView* view, QWidge
     QToolButton* closeButton = new QToolButton( this );
     closeButton->setAutoRaise( true );
     closeButton->setIcon( QIcon::fromTheme( QStringLiteral("dialog-close") ) );
-    connect( closeButton, SIGNAL(clicked()), SIGNAL(done()) );
+    connect( closeButton, &QAbstractButton::clicked, this, &ToolInlineViewWidget::done );
     layout->addWidget( closeButton );
     layout->setAlignment( closeButton, (Qt::Alignment)(Qt::AlignLeft|Qt::AlignTop) );
 }

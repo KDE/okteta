@@ -97,23 +97,24 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
     q->setCaption( title, hasChanges );
 
     if( view )
-        q->connect( view, SIGNAL(titleChanged(QString)), SLOT(onTitleChanged(QString)) );
+        QObject::connect( view, &AbstractModel::titleChanged,
+                          q, [&](const QString& Title) { onTitleChanged(Title); } );
 
     if( mSynchronizer )
     {
         if( isNewSynchronizer )
         {
-            q->connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                        SLOT(onLocalSyncStateChanged(Kasten::LocalSyncState)) );
-            q->connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
-                        SLOT(onSynchronizerDeleted(QObject*)) );
+            QObject::connect( mSynchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                              q, [&](LocalSyncState localSyncState) { onLocalSyncStateChanged(localSyncState); } );
+            QObject::connect( mSynchronizer, &QObject::destroyed,
+                              q, [&](QObject* object) { onSynchronizerDeleted(object); } );
         }
     }
     else if( mDocument )
     {
         if( isNewDocument )
-            q->connect( mDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
-                        SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
+            QObject::connect( mDocument, &AbstractDocument::contentFlagsChanged,
+                              q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); } );
     }
 }
 
@@ -136,8 +137,8 @@ void SingleViewWindowPrivate::addTool( AbstractToolView* toolView )
     if( dockWidget->isVisible() && mView )
         toolView->tool()->setTargetModel( mView );
 
-    q->connect( dockWidget, SIGNAL(visibilityChanged(bool)),
-                SLOT(onToolVisibilityChanged(bool)) );
+    QObject::connect( dockWidget, &QDockWidget::visibilityChanged,
+                      q, [&](bool visible) { onToolVisibilityChanged(visible); } );
 }
 
 void SingleViewWindowPrivate::onTitleChanged( const QString& newTitle )
@@ -188,8 +189,8 @@ void SingleViewWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
     mSynchronizer = 0;
 
     // switch to document state
-    q->connect( mDocument, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)),
-                SLOT(onContentFlagsChanged(Kasten::ContentFlags)) );
+    QObject::connect( mDocument, &AbstractDocument::contentFlagsChanged,
+                      q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); } );
 
     onContentFlagsChanged( mDocument->contentFlags() );
 }

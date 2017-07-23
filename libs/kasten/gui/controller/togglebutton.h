@@ -49,7 +49,6 @@ class KASTENGUI_EXPORT ToggleButton : public QToolButton
 
   private:
     ToggleButtonPrivate* const d;
-    Q_PRIVATE_SLOT( d, void onToggled( bool ) )
 };
 
 }

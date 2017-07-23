@@ -66,10 +66,14 @@ ZoomSlider::ZoomSlider( QWidget* parent )
     layout->addWidget( mSlider );
     layout->addWidget( mZoomInButton );
 
-    connect( mZoomOutButton, SIGNAL(clicked()), SLOT(zoomOut()) );
-    connect( mZoomInButton, SIGNAL(clicked()), SLOT(zoomIn()) );
-    connect( mSlider, SIGNAL(valueChanged(int)), SLOT(onSliderValueChanged(int)) );
-    connect( mSlider, SIGNAL(sliderMoved(int)), SLOT(onSliderMoved(int)) );
+    connect( mZoomOutButton, &QAbstractButton::clicked,
+             this, &ZoomSlider::zoomOut );
+    connect( mZoomInButton, &QAbstractButton::clicked,
+             this, &ZoomSlider::zoomIn );
+    connect( mSlider, &QSlider::valueChanged,
+             this, &ZoomSlider::onSliderValueChanged );
+    connect( mSlider, &QSlider::sliderMoved,
+             this, &ZoomSlider::onSliderMoved );
 
     setFixedWidth( ZoomSliderWidth );
 
@@ -165,10 +169,12 @@ void ZoomSlider::onZoomLevelChange( double level )
     const int newSliderValue = 100-static_cast<int>( 50.0 / mZoomLevel + 0.5 );
     if( newSliderValue != mSlider->value() )
     {
-        disconnect( mSlider, SIGNAL(valueChanged(int)), this, 0 );
+        disconnect( mSlider, &QSlider::valueChanged,
+                    this, &ZoomSlider::onSliderValueChanged );
         mSlider->setSliderPosition( newSliderValue );
         updateToolTip( mSlider->value() );
-        connect( mSlider, SIGNAL(valueChanged(int)), SLOT(onSliderValueChanged(int)) );
+        connect( mSlider, &QSlider::valueChanged,
+                 this, &ZoomSlider::onSliderValueChanged );
     }
 }
 

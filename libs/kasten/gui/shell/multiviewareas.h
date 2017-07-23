@@ -91,10 +91,6 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
     int indexOf( AbstractView* view ) const;
 
   protected:
-    Q_PRIVATE_SLOT( d_func(), void onViewsRemoved() )
-    Q_PRIVATE_SLOT( d_func(), void onViewAreaFocusChanged( bool hasFocus ) )
-
-  protected:
     Q_DECLARE_PRIVATE( MultiViewAreas )
 };
 

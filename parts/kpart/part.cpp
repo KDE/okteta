@@ -161,8 +161,8 @@ bool OktetaPart::openFile()
     Kasten::AbstractModelSynchronizer* synchronizer = synchronizerFactory->createSynchronizer();
 
     Kasten::AbstractLoadJob* loadJob = synchronizer->startLoad( QUrl::fromLocalFile( localFilePath() ) );
-    connect( loadJob, SIGNAL(documentLoaded(Kasten::AbstractDocument*)),
-             SLOT(onDocumentLoaded(Kasten::AbstractDocument*)) );
+    connect( loadJob, &Kasten::AbstractLoadJob::documentLoaded,
+             this, &OktetaPart::onDocumentLoaded );
     Kasten::JobManager::executeJob( loadJob );
 
     delete synchronizerFactory;
@@ -194,8 +194,8 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
 
         mDocument = static_cast<Kasten::ByteArrayDocument*>( document );
         mDocument->setReadOnly( mModus != ReadWriteModus );
-        connect( mDocument->synchronizer(), SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                 SLOT(onModified(Kasten::LocalSyncState)) );
+        connect( mDocument->synchronizer(), &Kasten::AbstractModelSynchronizer::localSyncStateChanged,
+                 this, &OktetaPart::onModified );
 
         Kasten::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer =
             new Kasten::ByteArrayViewProfileSynchronizer( mViewProfileManager );

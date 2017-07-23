@@ -39,8 +39,8 @@ ToolViewDockWidget::ToolViewDockWidget( AbstractToolView* toolView, QWidget* par
     setObjectName( toolView->tool()->objectName() );
     setWidget( toolView->widget() );
 
-    connect( this, SIGNAL(visibilityChanged(bool)),
-             SLOT(onVisibilityChanged(bool)) );
+    connect( this, &QDockWidget::visibilityChanged,
+             this, &ToolViewDockWidget::onVisibilityChanged );
 }
 
 void ToolViewDockWidget::onVisibilityChanged( bool isVisible )

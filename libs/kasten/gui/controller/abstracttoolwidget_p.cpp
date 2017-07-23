@@ -37,7 +37,8 @@ AbstractToolWidgetPrivate::AbstractToolWidgetPrivate( AbstractToolWidget* parent
 {
     mReturnShortcut = new QShortcut( Qt::Key_Return, p ); //TODO: what about Enter?
     mReturnShortcut->setContext( Qt::WidgetWithChildrenShortcut );
-    p->connect( mReturnShortcut, SIGNAL(activated()), SLOT(onReturnPressed()) );
+    QObject::connect( mReturnShortcut, &QShortcut::activated,
+                      p, [&]() { onReturnPressed(); } );
 }
 
 

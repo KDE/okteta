@@ -65,8 +65,8 @@ void SynchronizeController::setTargetModel( AbstractModel* model )
 
     if( mDocument )
     {
-        connect( mDocument, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
-                            SLOT(onSynchronizerChanged(Kasten::AbstractModelSynchronizer*)) );
+        connect( mDocument, &AbstractDocument::synchronizerChanged,
+                 this, &SynchronizeController::onSynchronizerChanged );
     }
     onSynchronizerChanged( mDocument ? mDocument->synchronizer() : 0 );
 }
@@ -98,12 +98,12 @@ void SynchronizeController::onSynchronizerChanged( AbstractModelSynchronizer* ne
                   || ( remoteSyncState == RemoteHasChanges )
                   || ( remoteSyncState == RemoteUnknown );
 
-        connect( mSynchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                                SLOT(onSyncStateChanged()) );
-        connect( mSynchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
-                                SLOT(onSyncStateChanged()) );
-        connect( mSynchronizer, SIGNAL(destroyed(QObject*)),
-                                SLOT(onSynchronizerDeleted(QObject*)) );
+        connect( mSynchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                 this, &SynchronizeController::onSyncStateChanged );
+        connect( mSynchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
+                 this, &SynchronizeController::onSyncStateChanged );
+        connect( mSynchronizer, &QObject::destroyed,
+                 this, &SynchronizeController::onSynchronizerDeleted );
     }
 
     mSaveAction->setEnabled( canSync );

@@ -42,7 +42,8 @@ ReadOnlyBarController::ReadOnlyBarController( StatusBar* statusBar )
     mReadOnlyButton = new ToggleButton( QIcon::fromTheme( QStringLiteral("object-unlocked") ), QString(), readWriteText, statusBar );
     mReadOnlyButton->setCheckedState( QIcon::fromTheme( QStringLiteral("object-locked") ), QString(), readOnlyText );
     statusBar->addWidget( mReadOnlyButton );
-    connect( mReadOnlyButton, SIGNAL(clicked(bool)), SLOT(setReadOnly(bool)) );
+    connect( mReadOnlyButton, &QAbstractButton::clicked,
+             this, &ReadOnlyBarController::setReadOnly );
 
     setTargetModel( 0 );
 }
@@ -58,10 +59,10 @@ void ReadOnlyBarController::setTargetModel( AbstractModel* model )
     {
         mReadOnlyButton->setChecked( mDocument->isReadOnly() );
 
-        connect( mDocument, SIGNAL(readOnlyChanged(bool)),
-                 mReadOnlyButton, SLOT(setChecked(bool)) );
-        connect( mDocument, SIGNAL(modifiableChanged(bool)),
-                 mReadOnlyButton, SLOT(setEnabled(bool)) );
+        connect( mDocument, &AbstractModel::readOnlyChanged,
+                 mReadOnlyButton, &QAbstractButton::setChecked );
+        connect( mDocument, &AbstractModel::modifiableChanged,
+                 mReadOnlyButton, &QWidget::setEnabled );
     }
     else
     {

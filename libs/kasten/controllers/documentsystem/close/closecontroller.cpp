@@ -64,10 +64,10 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
         mCloseAllOtherAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
         mCloseAllOtherAction->setEnabled( false );
 
-        connect( mDocumentStrategy, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
-                SLOT(onDocumentsChanged()) );
-        connect( mDocumentStrategy, SIGNAL(closing(QList<Kasten::AbstractDocument*>)),
-                SLOT(onDocumentsChanged()) );
+        connect( mDocumentStrategy, &Kasten::AbstractDocumentStrategy::added,
+                 this, &CloseController::onDocumentsChanged );
+        connect( mDocumentStrategy, &Kasten::AbstractDocumentStrategy::closing,
+                 this, &CloseController::onDocumentsChanged );
     }
 }
 

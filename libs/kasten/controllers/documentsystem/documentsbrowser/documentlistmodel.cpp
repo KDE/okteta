@@ -40,12 +40,12 @@ DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* par
  : QAbstractTableModel( parent ),
    mDocumentsTool( documentsTool )
 {
-    connect( mDocumentsTool, SIGNAL(documentsAdded(QList<Kasten::AbstractDocument*>)),
-             SLOT(onDocumentsAdded(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentsTool, SIGNAL(documentsClosing(QList<Kasten::AbstractDocument*>)),
-             SLOT(onDocumentsClosing(QList<Kasten::AbstractDocument*>)) );
-    connect( mDocumentsTool, SIGNAL(focussedDocumentChanged(Kasten::AbstractDocument*)),
-             SLOT(onFocussedDocumentChanged(Kasten::AbstractDocument*)) );
+    connect( mDocumentsTool, &DocumentsTool::documentsAdded,
+             this, &DocumentListModel::onDocumentsAdded );
+    connect( mDocumentsTool, &DocumentsTool::documentsClosing,
+             this, &DocumentListModel::onDocumentsClosing );
+    connect( mDocumentsTool, &DocumentsTool::focussedDocumentChanged,
+             this, &DocumentListModel::onFocussedDocumentChanged );
 }
 
 int DocumentListModel::rowCount( const QModelIndex& parent ) const
@@ -165,15 +165,15 @@ void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>
 {
     foreach( AbstractDocument* document, documents )
     {
-        connect( document, SIGNAL(synchronizerChanged(Kasten::AbstractModelSynchronizer*)),
-                 SLOT(onSynchronizerChanged(Kasten::AbstractModelSynchronizer*)) );
+        connect( document, &AbstractDocument::synchronizerChanged,
+                 this, &DocumentListModel::onSynchronizerChanged );
         AbstractModelSynchronizer* synchronizer = document->synchronizer();
         if( synchronizer )
         {
-            connect( synchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                    SLOT(onSyncStatesChanged()) );
-            connect( synchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
-                    SLOT(onSyncStatesChanged()) );
+            connect( synchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                     this, &DocumentListModel::onSyncStatesChanged );
+            connect( synchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
+                     this, &DocumentListModel::onSyncStatesChanged );
         }
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
@@ -195,10 +195,10 @@ void DocumentListModel::onSynchronizerChanged( AbstractModelSynchronizer* synchr
     // TODO: what about the old synchronizer? assume it is deleted and that way disconnects?
     if( synchronizer )
     {
-        connect( synchronizer, SIGNAL(localSyncStateChanged(Kasten::LocalSyncState)),
-                 SLOT(onSyncStatesChanged()) );
-        connect( synchronizer, SIGNAL(remoteSyncStateChanged(Kasten::RemoteSyncState)),
-                 SLOT(onSyncStatesChanged()) );
+        connect( synchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                    this, &DocumentListModel::onSyncStatesChanged );
+        connect( synchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
+                    this, &DocumentListModel::onSyncStatesChanged );
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();

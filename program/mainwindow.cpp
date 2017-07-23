@@ -128,14 +128,14 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     setObjectName( QStringLiteral("Shell") );
 
     // there is only one mainwindow, so have this show the document if requested
-    connect( mProgram->documentManager(), SIGNAL(focusRequested(Kasten::AbstractDocument*)),
-             SLOT(showDocument(Kasten::AbstractDocument*)) );
-    connect( viewArea(), SIGNAL(dataOffered(const QMimeData*,bool&)),
-             SLOT(onDataOffered(const QMimeData*,bool&)) );
-    connect( viewArea(), SIGNAL(dataDropped(const QMimeData*)),
-             SLOT(onDataDropped(const QMimeData*)) );
-    connect( viewArea(), SIGNAL(closeRequest(QList<Kasten::AbstractView*>)),
-             SLOT(onCloseRequest(QList<Kasten::AbstractView*>)) );
+    connect( mProgram->documentManager(), &DocumentManager::focusRequested,
+             this, &OktetaMainWindow::showDocument );
+    connect( viewArea(), &MultiViewAreas::dataOffered,
+             this, &OktetaMainWindow::onDataOffered );
+    connect( viewArea(), &MultiViewAreas::dataDropped,
+             this, &OktetaMainWindow::onDataDropped );
+    connect( viewArea(), &AbstractGroupedViews::closeRequest,
+             this, &OktetaMainWindow::onCloseRequest );
 
     // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
     //      This state is taken from an oktetarc where the docker constellation was configured by hand.

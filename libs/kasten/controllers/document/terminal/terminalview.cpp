@@ -60,7 +60,8 @@ void TerminalView::createTerminalPart()
 
     if( mTerminalPart )
     {
-        connect( mTerminalPart, SIGNAL(destroyed(QObject*)), SLOT(onTerminalPartDestroyed()) );
+        connect( mTerminalPart, &QObject::destroyed,
+                 this, &TerminalView::onTerminalPartDestroyed );
 
         QWidget* terminalWidget = mTerminalPart->widget();
         terminalWidget->setFocusPolicy( Qt::WheelFocus );

@@ -71,9 +71,6 @@ class OKTETAKASTENGUI_EXPORT ByteArrayComboBox : public QWidget
     ByteArrayComboBoxPrivate* const d_ptr;
   private:
     Q_DECLARE_PRIVATE( ByteArrayComboBox )
-    Q_PRIVATE_SLOT( d_func(), void onFormatChanged( int index ) )
-    Q_PRIVATE_SLOT( d_func(), void onValueEdited( const QString& value ) )
-    Q_PRIVATE_SLOT( d_func(), void onValueActivated( int index ) )
 };
 
 }

@@ -60,7 +60,8 @@ ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager
     mExportSelectAction->setText( i18nc("@title:menu","Export") );
     mExportSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("document-export") ) );
     mExportSelectAction->setToolBarMode( KSelectAction::MenuMode );
-    connect( mExportSelectAction, SIGNAL(triggered(QAction*)), SLOT(onActionTriggered(QAction*)) );
+    connect( mExportSelectAction, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered),
+             this, &ExportController::onActionTriggered );
 
     setTargetModel( 0 );
 }

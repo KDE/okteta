@@ -47,7 +47,8 @@ ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
     const QString checkedText = i18nc( "@option:check set the document to read-write", "Set Read-write" );
     const KGuiItem checkedState( checkedText, QIcon::fromTheme( QStringLiteral("object-locked") ) );
     mSetReadOnlyAction->setCheckedState( checkedState );
-    connect( mSetReadOnlyAction, SIGNAL(triggered(bool)), SLOT(setReadOnly(bool)) );
+    connect( mSetReadOnlyAction, &QAction::triggered,
+             this, &ReadOnlyController::setReadOnly );
 
     setTargetModel( 0 );
 }
@@ -62,10 +63,10 @@ void ReadOnlyController::setTargetModel( AbstractModel* model )
     {
         mSetReadOnlyAction->setChecked( mDocument->isReadOnly() );
 
-        connect( mDocument, SIGNAL(readOnlyChanged(bool)),
-                 mSetReadOnlyAction, SLOT(setChecked(bool)) );
-        connect( mDocument, SIGNAL(modifiableChanged(bool)),
-                 mSetReadOnlyAction, SLOT(setEnabled(bool)) );
+        connect( mDocument, &AbstractModel::readOnlyChanged,
+                 mSetReadOnlyAction, &QAction::setChecked );
+        connect( mDocument, &AbstractModel::modifiableChanged,
+                 mSetReadOnlyAction, &QAction::setEnabled );
     }
 
     mSetReadOnlyAction->setEnabled( mDocument ? mDocument->isModifiable() : false );

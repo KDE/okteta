@@ -123,10 +123,10 @@ void ViewAreaSplitController::onViewAreaFocusChanged( AbstractViewArea* viewArea
 
     if( mCurrentViewArea )
     {
-        connect( mCurrentViewArea, SIGNAL(added(QList<Kasten::AbstractView*>)),
-                 SLOT(onViewsChanged()) );
-        connect( mCurrentViewArea, SIGNAL(removing(QList<Kasten::AbstractView*>)),
-                 SLOT(onViewsChanged()) );
+        connect( mCurrentViewArea, &AbstractGroupedViews::added,
+                 this, &ViewAreaSplitController::onViewsChanged );
+        connect( mCurrentViewArea, &AbstractGroupedViews::removing,
+                 this, &ViewAreaSplitController::onViewsChanged );
     }
     onViewsChanged();
 }

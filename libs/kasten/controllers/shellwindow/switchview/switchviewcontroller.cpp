@@ -24,6 +24,7 @@
 
 // lib
 #include <kasten/abstractgroupedviews.h>
+#include <kasten/abstractview.h>
 // KF5
 #include <KXMLGUIClient>
 #include <KActionCollection>
@@ -42,10 +43,12 @@ SwitchViewController::SwitchViewController( AbstractGroupedViews* groupedViews, 
     mForwardAction = actionCollection->addAction( KStandardAction::Forward, QStringLiteral("window_next"), this, SLOT(forward()) );
     mBackwardAction = actionCollection->addAction( KStandardAction::Back, QStringLiteral("window_previous"), this, SLOT(backward()) );
 
-    connect( groupedViews, SIGNAL(added(QList<Kasten::AbstractView*>)),  SLOT(updateActions()) );
-    connect( groupedViews, SIGNAL(removing(QList<Kasten::AbstractView*>)), SLOT(updateActions()) );
-
-    connect( groupedViews, SIGNAL(viewFocusChanged(Kasten::AbstractView*)), SLOT(updateActions()) );
+    connect( groupedViews, &AbstractGroupedViews::added,
+             this, &SwitchViewController::updateActions );
+    connect( groupedViews, &AbstractGroupedViews::removing,
+             this, &SwitchViewController::updateActions );
+    connect( groupedViews, &AbstractGroupedViews::viewFocusChanged,
+             this, &SwitchViewController::updateActions );
 
     updateActions();
 }

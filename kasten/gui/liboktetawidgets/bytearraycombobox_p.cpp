@@ -61,7 +61,8 @@ void ByteArrayComboBoxPrivate::init()
 
     mFormatComboBox = new KComboBox( q );
     mFormatComboBox->addItems( formatNames() );
-    q->connect( mFormatComboBox, SIGNAL(activated(int)), SLOT(onFormatChanged(int)) );
+    QObject::connect( mFormatComboBox, static_cast<void(QComboBox::*)(int)>(&QComboBox::activated),
+                      q, [&](int index) { onFormatChanged(index); } );
 
     mValueComboBox = new KComboBox( q );
     mValueComboBox->setEditable( true );
@@ -69,7 +70,8 @@ void ByteArrayComboBoxPrivate::init()
     mValueComboBox->setInsertPolicy( QComboBox::NoInsert );
     mValueComboBox->setDuplicatesEnabled( false );
     q->setFocusProxy( mValueComboBox );
-    q->connect( mValueComboBox->lineEdit(), SIGNAL(textEdited(QString)), SLOT(onValueEdited(QString)) );
+    QObject::connect( mValueComboBox->lineEdit(), &QLineEdit::textEdited,
+                      q, [&](const QString& text) { onValueEdited(text); } );
     QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
     QObject::connect( formatComboBoxListView, &QAbstractItemView::activated,
              mValueComboBox, static_cast<void (KComboBox::*)()>(&KComboBox::setFocus) );
@@ -82,7 +84,8 @@ void ByteArrayComboBoxPrivate::init()
     mValidator->setCodec( coding );
 
     mValueComboBox->setValidator( mValidator );
-    q->connect( mValueComboBox, SIGNAL(activated(int)), SLOT(onValueActivated(int)) );
+    QObject::connect( mValueComboBox,  static_cast<void(QComboBox::*)(int)>(&QComboBox::activated),
+                      q, [&](int index) { onValueActivated(index); } );
 
     baseLayout->addWidget( mFormatComboBox );
     baseLayout->addWidget( mValueComboBox, 1 );

@@ -38,14 +38,14 @@ void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
     if( ! mDirWatch )
     {
         mDirWatch = new KDirWatch( q );
-        QObject::connect( mDirWatch, SIGNAL(dirty(QString)),
-            q, SLOT(onFileDirty(QString)) );
+        QObject::connect( mDirWatch, &KDirWatch::dirty,
+                          q, [&](const QString& path) { onFileDirty(path); } );
 
-        QObject::connect( mDirWatch, SIGNAL(created(QString)),
-            q, SLOT(onFileCreated(QString)) );
+        QObject::connect( mDirWatch, &KDirWatch::created,
+                          q, [&](const QString& path) { onFileCreated(path); } );
 
-        QObject::connect( mDirWatch, SIGNAL(deleted(QString)),
-            q, SLOT(onFileDeleted(QString)) );
+        QObject::connect( mDirWatch, &KDirWatch::deleted,
+                          q, [&](const QString& path) { onFileDeleted(path); } );
     }
 
     mDirWatch->addFile( mUrl.toLocalFile() );
@@ -80,7 +80,8 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
     Q_Q( AbstractModelFileSystemSynchronizer );
 
     mNetworkConfigurationManager = new QNetworkConfigurationManager();
-    q->connect( mNetworkConfigurationManager, SIGNAL(onlineStateChanged(bool)), SLOT(onOnlineStateChanged(bool)) );
+    QObject::connect( mNetworkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged,
+                      q, [&](bool online) { onOnlineStateChanged(online); } );
 }
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 {
