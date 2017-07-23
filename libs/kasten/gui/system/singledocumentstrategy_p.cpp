@@ -54,6 +54,10 @@ void SingleDocumentStrategyPrivate::init()
                       mViewManager, &ViewManager::createViewsFor );
     QObject::connect( mDocumentManager, &DocumentManager::closing,
                       mViewManager, &ViewManager::removeViewsFor );
+    QObject::connect( mDocumentManager, &DocumentManager::added,
+                      q, &SingleDocumentStrategy::added );
+    QObject::connect( mDocumentManager, &DocumentManager::closing,
+                      q, &SingleDocumentStrategy::closing );
     QObject::connect( mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
                       q, &SingleDocumentStrategy::urlUsed );
 }
