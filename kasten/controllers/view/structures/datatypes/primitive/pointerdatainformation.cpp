@@ -34,7 +34,7 @@
 
 #include <limits>
 
-PointerDataInformation::PointerDataInformation(QString name, DataInformation* childType,
+PointerDataInformation::PointerDataInformation(const QString& name, DataInformation* childType,
         PrimitiveDataInformation* valueType, DataInformation* parent)
         : PrimitiveDataInformationWrapper(name, valueType, parent), mPointerTarget(childType)
 {

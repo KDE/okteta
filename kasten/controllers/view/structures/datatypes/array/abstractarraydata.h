@@ -72,7 +72,7 @@ public:
     virtual int indexOf(const DataInformation* data) const = 0;
     virtual BitCount64 offset(const DataInformation* child) const = 0;
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
-    virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining) = 0;
     virtual BitCount32 sizeAt(uint index) = 0;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) = 0;

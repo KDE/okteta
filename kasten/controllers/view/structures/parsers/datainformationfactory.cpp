@@ -145,8 +145,8 @@ T* newStructOrUnion(const StructOrUnionParsedData& supd)
     return structOrUnion;
 }
 
-QString generateLengthFunction(DataInformation* current, DataInformation* last, QString elemName,
-        QString currentString, const ParserInfo& info)
+QString generateLengthFunction(DataInformation* current, DataInformation* last, const QString& elemName,
+        const QString& currentString, const ParserInfo& info)
 {
     if (!current) //reached top
         return QString();

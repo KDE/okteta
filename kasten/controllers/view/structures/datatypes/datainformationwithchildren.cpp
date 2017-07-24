@@ -149,7 +149,7 @@ void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& n
     topLevelDataInformation()->_childCountChanged(this, 0, count);
 }
 
-void DataInformationWithChildren::setChildren(QScriptValue children)
+void DataInformationWithChildren::setChildren(const QScriptValue& children)
 {
     if (children.isNull() || children.isUndefined())
     {

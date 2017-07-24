@@ -68,7 +68,7 @@ BitCount64 StructureDataInformation::childPosition(const DataInformation* child,
         return mParent->asDataInformation()->childPosition(this, start) + offset;
 }
 
-bool StructureDataInformation::readChildren(const QVector<DataInformation*> children,
+bool StructureDataInformation::readChildren(const QVector<DataInformation*>& children,
         Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining,
         quint8* bitOffset, qint64* readBitsPtr, TopLevelDataInformation* top)
 {

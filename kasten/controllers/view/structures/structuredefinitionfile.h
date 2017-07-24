@@ -49,7 +49,7 @@ public:
      * @param info the information about this structure definition
      *      (passed by value so nothing bad can happen)
      */
-    explicit StructureDefinitionFile(KPluginInfo info);
+    explicit StructureDefinitionFile(const KPluginInfo& info);
     virtual ~StructureDefinitionFile();
 
     QVector<TopLevelDataInformation*> structures() const;

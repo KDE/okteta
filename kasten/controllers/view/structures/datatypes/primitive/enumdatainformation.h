@@ -38,7 +38,7 @@ public:
     virtual bool isEnum() const;
 
     EnumDefinition::Ptr enumValues() const;
-    void setEnumValues(QMap<AllPrimitiveTypes, QString> newValues);
+    void setEnumValues(const QMap<AllPrimitiveTypes, QString>& newValues);
 private:
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
     virtual QString valueStringImpl() const;
@@ -57,7 +57,7 @@ inline EnumDefinition::Ptr EnumDataInformation::enumValues() const
     return mEnum;
 }
 
-inline void EnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString> newValues)
+inline void EnumDataInformation::setEnumValues(const QMap<AllPrimitiveTypes, QString>& newValues)
 {
     mEnum->setValues(newValues);
 }

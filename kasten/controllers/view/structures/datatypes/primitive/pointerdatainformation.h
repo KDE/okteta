@@ -34,7 +34,7 @@ public:
     /** creates a new pointer
      *  takes ownership over @p childType and @p valueType
      */
-    PointerDataInformation(QString name, DataInformation* childType,
+    PointerDataInformation(const QString& name, DataInformation* childType,
             PrimitiveDataInformation* valueType, DataInformation* parent);
     virtual ~PointerDataInformation();
 

@@ -120,7 +120,7 @@ Q_DECLARE_METATYPE(Okteta::AbstractByteArrayModel*)
 Q_DECLARE_METATYPE(TopLevelDataInformation*)
 
 static inline void addRow(const char* tag, TopLevelDataInformation* structure, Okteta::Address addr,
-        Okteta::AbstractByteArrayModel* model, Okteta::ArrayChangeMetricsList changes, bool expected)
+        Okteta::AbstractByteArrayModel* model, const Okteta::ArrayChangeMetricsList& changes, bool expected)
 {
     QTest::newRow(tag) << structure << addr << model << changes << expected;
 }

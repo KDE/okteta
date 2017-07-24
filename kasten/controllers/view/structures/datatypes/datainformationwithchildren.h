@@ -69,7 +69,7 @@ public:
     /** Takes ownership of all elements */
     void appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal = true);
     void setChildren(const QVector<DataInformation*>& newChildren);
-    void setChildren(QScriptValue newChildren);
+    void setChildren(const QScriptValue& newChildren);
 
     static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
 protected:

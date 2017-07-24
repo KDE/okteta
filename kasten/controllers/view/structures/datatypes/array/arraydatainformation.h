@@ -84,7 +84,7 @@ public:
 
     QScriptValue childType() const;
     QScriptValue lengthFunction() const;
-    void setLengthFunction(QScriptValue newFunc);
+    void setLengthFunction(const QScriptValue& newFunc);
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
 private:
@@ -175,7 +175,7 @@ inline QScriptValue ArrayDataInformation::lengthFunction() const
     return mAdditionalData.get(AdditionalData::ArrayLengthFunction).value<QScriptValue>();
 }
 
-inline void ArrayDataInformation::setLengthFunction(QScriptValue newFunc)
+inline void ArrayDataInformation::setLengthFunction(const QScriptValue& newFunc)
 {
     setAdditionalFunction(AdditionalData::ArrayLengthFunction, newFunc, "array length function");
 }

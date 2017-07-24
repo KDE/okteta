@@ -554,7 +554,7 @@ TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xml
     return DataInformationFactory::newTaggedUnion(tpd);
 }
 
-OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, QDomElement firstChild)
+OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, const QDomElement& firstChild)
         : mInfo(info), mElem(firstChild)
 {
 }
@@ -595,7 +595,7 @@ void OsdChildrenParser::setParent(DataInformation* newParent)
     mInfo.parent = newParent;
 }
 
-SingleElementOsdChildrenParser::SingleElementOsdChildrenParser(const OsdParserInfo& info, QDomElement element)
+SingleElementOsdChildrenParser::SingleElementOsdChildrenParser(const OsdParserInfo& info, const QDomElement& element)
     : OsdChildrenParser(info, element), mParsed(false)
 {
     if (mElem.isNull())

@@ -155,7 +155,7 @@ qint64 ComplexArrayData::readData(Okteta::AbstractByteArrayModel* input, Okteta:
     return readBits;
 }
 
-bool ComplexArrayData::setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
+bool ComplexArrayData::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
         Okteta::Address address, BitCount64 bitsRemaining)
 {
     Q_ASSERT(row < unsigned(mChildren.size()));

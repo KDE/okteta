@@ -35,7 +35,7 @@
 
 namespace Kasten
 {
-StructureDefinitionFile::StructureDefinitionFile(KPluginInfo info)
+StructureDefinitionFile::StructureDefinitionFile(const KPluginInfo& info)
         : mPluginInfo(info)
 {
     const QFileInfo tmp(info.entryPath());

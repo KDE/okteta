@@ -59,7 +59,7 @@ public:
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
-    virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining);
 
     virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;

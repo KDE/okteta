@@ -42,7 +42,7 @@ public:
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
             BitCount64 bitsRemaining);
-    virtual bool setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
             Okteta::Address address, BitCount64 bitsRemaining);
 
     virtual DataInformation* childAt(unsigned int idx);

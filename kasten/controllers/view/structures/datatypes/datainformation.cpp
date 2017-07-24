@@ -92,7 +92,7 @@ DataInformation* DataInformation::mainStructure()
 
 }
 
-void DataInformation::setValidationError(QString errorMessage)
+void DataInformation::setValidationError(const QString& errorMessage)
 {
     if (errorMessage.isEmpty())
         mAdditionalData.remove(AdditionalData::ValidationError);

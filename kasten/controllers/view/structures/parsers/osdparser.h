@@ -43,7 +43,7 @@ class ScriptLogger;
 
 struct OsdParserInfo : public ParserInfo {
     inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
-            QScriptEngine* engine, QVector<EnumDefinition::Ptr> enums)
+            QScriptEngine* engine, const QVector<EnumDefinition::Ptr>& enums)
         : ParserInfo(name, logger, parent, engine), enums(enums) {}
     inline OsdParserInfo(const OsdParserInfo& i) : ParserInfo(i), enums(i.enums) {}
     inline ~OsdParserInfo() {}
@@ -99,7 +99,7 @@ private:
 
 class OsdChildrenParser : public ChildrenParser {
 public:
-    OsdChildrenParser(const OsdParserInfo& info, QDomElement firstChild);
+    OsdChildrenParser(const OsdParserInfo& info, const QDomElement& firstChild);
     virtual ~OsdChildrenParser();
     virtual DataInformation* next();
     virtual bool hasNext();
@@ -111,7 +111,7 @@ protected:
 
 class SingleElementOsdChildrenParser : public OsdChildrenParser {
 public:
-    SingleElementOsdChildrenParser(const OsdParserInfo& info, QDomElement element);
+    SingleElementOsdChildrenParser(const OsdParserInfo& info, const QDomElement& element);
     virtual ~SingleElementOsdChildrenParser();
     virtual DataInformation* next();
     virtual bool hasNext();

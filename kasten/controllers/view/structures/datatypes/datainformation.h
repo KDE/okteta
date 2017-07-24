@@ -230,7 +230,7 @@ private:
     /** So that this object can be wrapped by the correct javascript object*/
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const = 0;
 private:
-    void setValidationError(QString errorMessage); //only called by ScriptHandler
+    void setValidationError(const QString& errorMessage); //only called by ScriptHandler
     QSysInfo::Endian byteOrderFromSettings() const; //so there is no need to include structviewpreferences.h here
     QString customToString(const QScriptValue& func) const;
 protected:

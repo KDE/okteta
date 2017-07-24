@@ -102,7 +102,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::Abs
 }
 
 template<PrimitiveDataTypeEnum type>
-bool PrimitiveArrayData<type>::setChildData(uint row, QVariant value, Okteta::AbstractByteArrayModel* out,
+bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
         Okteta::Address address, BitCount64 bitsRemaining)
 {
     Q_ASSERT(row < length());
