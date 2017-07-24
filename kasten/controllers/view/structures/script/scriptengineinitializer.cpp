@@ -248,7 +248,7 @@ QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
     if (ctx->argumentCount() < 1)
-        return ctx->throwError(QLatin1String("child(): name of child must be passed as first parameter"));
+        return ctx->throwError(QStringLiteral("child(): name of child must be passed as first parameter"));
     QString nameString = ctx->argument(0).toString();
     QScriptValue ret = ctx->thisObject().property(ParserStrings::PROPERTY_CHILDREN()).property(nameString);
     if (ret.isValid())
