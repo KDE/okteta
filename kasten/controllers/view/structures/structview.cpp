@@ -153,16 +153,12 @@ void StructView::openSettingsDlg()
     KConfigDialog* dialog = new KConfigDialog(this, QStringLiteral("Structures Tool Settings"),
             StructViewPreferences::self());
     StructViewDisplaySettingsWidget* displaySettings = new StructViewDisplaySettingsWidget();
-    QWidget* structSelectionWrapper = new QWidget();
     StructuresManagerView* structureSettings = new StructuresManagerView(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
             QStringLiteral("configure"));
-    QHBoxLayout* hbox = new QHBoxLayout();
-    structSelectionWrapper->setLayout(hbox);
-    hbox->addWidget(structureSettings);
     Q_ASSERT(structureSettings->objectName() == QLatin1String("kcfg_LoadedStructures"));
-    dialog->addPage(structSelectionWrapper, i18n("Structures management"),
-                                                  QStringLiteral("preferences-plugin"));
+    dialog->addPage(structureSettings, i18n("Structures management"),
+                                       QStringLiteral("preferences-plugin"));
 
     //User edited the configuration - update your local copies of the configuration data
     connect(dialog, &KConfigDialog::settingsChanged, mTool, &StructTool::setSelectedStructuresInView);
