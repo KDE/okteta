@@ -40,7 +40,7 @@
 /** Implement the clone() method and add the copy constructor declaration
  * After this macro visibility will be set to protected */
 #define DATAINFORMATION_CLONE_DECL(type, supertype) public: \
-        virtual inline type* clone() const { return new type(*this); } \
+        inline type* clone() const override { return new type(*this); } \
     protected: \
         type(const type& d)
 
