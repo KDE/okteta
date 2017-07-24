@@ -72,7 +72,7 @@ BitCount32 DummyDataInformation::size() const
 
 void DummyDataInformation::setWidgetData(QWidget* w) const
 {
-    return parentHelper()->setChildWidgetData(mIndex, w);
+    parentHelper()->setChildWidgetData(mIndex, w);
 }
 
 QVariant DummyDataInformation::dataFromWidget(const QWidget* w) const
