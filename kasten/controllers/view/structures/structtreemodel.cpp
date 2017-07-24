@@ -61,7 +61,7 @@ void StructTreeModel::onChildrenRemoved(const DataInformation* sender, uint star
     Q_UNUSED(sender)
     Q_UNUSED(startIndex)
     Q_UNUSED(endIndex)
-    emit endRemoveRows();
+    endRemoveRows();
 }
 
 void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint startIndex,
@@ -73,7 +73,7 @@ void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint sta
     Q_UNUSED(sender)
     Q_UNUSED(startIndex)
     Q_UNUSED(endIndex)
-    emit endInsertRows();
+    endInsertRows();
 }
 
 void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
@@ -86,7 +86,7 @@ void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint s
     mLastSender = sender;
     mLastStartIndex = startIndex;
     mLastEndIndex = endIndex;
-    emit beginRemoveRows(idx, startIndex, endIndex);
+    beginRemoveRows(idx, startIndex, endIndex);
 }
 
 void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
@@ -99,7 +99,7 @@ void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint 
     mLastSender = sender;
     mLastStartIndex = startIndex;
     mLastEndIndex = endIndex;
-    emit beginInsertRows(idx, startIndex, endIndex);
+    beginInsertRows(idx, startIndex, endIndex);
 }
 
 int StructTreeModel::columnCount(const QModelIndex& parent) const
