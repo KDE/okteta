@@ -390,6 +390,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     //verify alternatives
     bool alternativesValid = true;
     QVector<TaggedUnionDataInformation::FieldInfo> altInfo;
+    altInfo.reserve(pd.alternatives.size());
     for(int i = 0; i < pd.alternatives.size(); ++i)
     {
         const TaggedUnionParsedData::Alternatives& fi = pd.alternatives.at(i);
