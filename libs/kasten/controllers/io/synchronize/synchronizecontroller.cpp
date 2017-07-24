@@ -41,8 +41,8 @@ namespace Kasten
 
 SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
   : mSyncManager( syncManager ),
-    mDocument( 0 ),
-    mSynchronizer( 0 )
+    mDocument( nullptr ),
+    mSynchronizer( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -54,21 +54,21 @@ SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, 
     mReloadAction->setIcon( QIcon::fromTheme( QStringLiteral("view-refresh") ) );
     actionCollection->setDefaultShortcuts( mReloadAction, KStandardShortcut::reload() );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void SynchronizeController::setTargetModel( AbstractModel* model )
 {
     if( mDocument ) mDocument->disconnect( this );
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
     if( mDocument )
     {
         connect( mDocument, &AbstractDocument::synchronizerChanged,
                  this, &SynchronizeController::onSynchronizerChanged );
     }
-    onSynchronizerChanged( mDocument ? mDocument->synchronizer() : 0 );
+    onSynchronizerChanged( mDocument ? mDocument->synchronizer() : nullptr );
 }
 
 void SynchronizeController::save()
@@ -115,7 +115,7 @@ void SynchronizeController::onSynchronizerDeleted( QObject* synchronizer )
     if( synchronizer != mSynchronizer )
         return;
 
-    mSynchronizer = 0;
+    mSynchronizer = nullptr;
 
     mSaveAction->setEnabled( false );
     mReloadAction->setEnabled( false );

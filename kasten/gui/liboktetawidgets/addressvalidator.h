@@ -59,7 +59,7 @@ class AddressValidator : public QValidator
     void setCodec( Coding codecId );
 
   public:
-    Address toAddress( const QString& string, AddressType* type = 0 ) const;
+    Address toAddress( const QString& string, AddressType* type = nullptr ) const;
     QString toString( Address address, AddressType addressType ) const;
 
   private:

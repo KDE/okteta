@@ -47,7 +47,7 @@ public:
         QVector<DataInformation*> fields;
     };
 
-    explicit TaggedUnionDataInformation(const QString& name, DataInformation* parent = 0);
+    explicit TaggedUnionDataInformation(const QString& name, DataInformation* parent = nullptr);
     virtual ~TaggedUnionDataInformation();
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input,

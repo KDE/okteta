@@ -48,7 +48,7 @@ inline QScriptClass* BasicPrimitiveDataInformation<T, C>::scriptClass(ScriptHand
 template<typename T, typename C>
 QScriptValue BasicPrimitiveDataInformation<T, C>::valueAsQScriptValue() const
 {
-    return C::asScriptValue(mValue, 0, 0);
+    return C::asScriptValue(mValue, nullptr, nullptr);
 }
 
 template<typename T, typename C>

@@ -75,7 +75,7 @@ DefaultScriptClass::~DefaultScriptClass()
 DataInformation* DefaultScriptClass::toDataInformation(const QScriptValue& obj)
 {
     if (!obj.scriptClass())
-        return 0;
+        return nullptr;
     Q_ASSERT(obj.data().isVariant());
     const QVariant variant = obj.data().toVariant();
     if (variant.isValid() && variant.canConvert<SafeReference>() && variant.userType() == qMetaTypeId<SafeReference>())
@@ -83,7 +83,7 @@ DataInformation* DefaultScriptClass::toDataInformation(const QScriptValue& obj)
         const SafeReference& ref = *reinterpret_cast<const SafeReference*>(variant.constData());
         return ref.data();
     }
-    return 0;
+    return nullptr;
 }
 
 QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& object,

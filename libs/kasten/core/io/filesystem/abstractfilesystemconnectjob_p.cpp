@@ -79,7 +79,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
 
             KIO::FileCopyJob* fileCopyJob =
                 KIO::file_copy( mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite );
-            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
 
             isWorkFileOk = fileCopyJob->exec();
             if( ! isWorkFileOk )
@@ -122,7 +122,7 @@ void AbstractFileSystemConnectJobPrivate::complete( bool success )
         {
             KIO::FileCopyJob* fileCopyJob =
                 KIO::file_copy( QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite );
-            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
 
             const bool uploaded = fileCopyJob->exec();
             if( ! uploaded )

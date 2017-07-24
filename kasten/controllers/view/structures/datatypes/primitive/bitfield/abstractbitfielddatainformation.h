@@ -32,7 +32,7 @@ public:
         Signed, Unsigned, Boolean
     };
 
-    AbstractBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0);
+    AbstractBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr);
     virtual ~AbstractBitfieldDataInformation();
 
     BitCount32 width() const;

@@ -46,7 +46,7 @@ class SelectRangeView : public AbstractToolWidget
   Q_OBJECT
 
   public:
-    explicit SelectRangeView( SelectRangeTool* tool, QWidget* parent = 0 );
+    explicit SelectRangeView( SelectRangeTool* tool, QWidget* parent = nullptr );
     virtual ~SelectRangeView();
 
   public:

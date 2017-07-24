@@ -40,7 +40,7 @@ class AbstractValue8Editor : public QSpinBox
   Q_OBJECT
 
   public:
-    explicit AbstractValue8Editor( Okteta::ValueCoding valueCoding, QWidget* parent = 0 );
+    explicit AbstractValue8Editor( Okteta::ValueCoding valueCoding, QWidget* parent = nullptr );
 
     virtual ~AbstractValue8Editor();
 

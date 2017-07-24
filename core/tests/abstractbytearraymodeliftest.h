@@ -84,7 +84,7 @@ class AbstractByteArrayModelIfTest : public QObject
     QSignalSpy* ContentsChangeListSpy;
 };
 
-inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest()  : mByteArrayModel( 0 ) {}
+inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest()  : mByteArrayModel( nullptr ) {}
 
 }
 

@@ -42,7 +42,7 @@ class ByteArrayPatternGeneratorConfigEditor : public AbstractModelDataGeneratorC
   Q_OBJECT
 
   public:
-    explicit ByteArrayPatternGeneratorConfigEditor( ByteArrayPatternGenerator* generator, QWidget* parent = 0 );
+    explicit ByteArrayPatternGeneratorConfigEditor( ByteArrayPatternGenerator* generator, QWidget* parent = nullptr );
 
     virtual ~ByteArrayPatternGeneratorConfigEditor();
 

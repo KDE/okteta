@@ -111,7 +111,7 @@ inline PieceTableChangeHistory::PieceTableChangeHistory()
     mAppliedChangesCount( 0 ),
     mBaseBeforeChangeIndex( 0 ),
     mAppliedChangesDataSize( 0 ),
-    mActiveGroupChange( 0 )
+    mActiveGroupChange( nullptr )
 {}
 
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }

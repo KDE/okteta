@@ -40,8 +40,8 @@ void ByteArrayDocumentFactoryTest::testCreate()
     AbstractDocument* document = factory->create();
     ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>( document );
 
-    QVERIFY( document != 0 );
-    QVERIFY( byteArrayDocument != 0 );
+    QVERIFY( document != nullptr );
+    QVERIFY( byteArrayDocument != nullptr );
     QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
 
     delete document;

@@ -50,7 +50,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
   Q_OBJECT
 
   public:
-    explicit ByteArrayColumnView( QWidget* parent = 0 );
+    explicit ByteArrayColumnView( QWidget* parent = nullptr );
     virtual ~ByteArrayColumnView();
 
   public: // AbstractByteArrayView API

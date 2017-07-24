@@ -74,7 +74,7 @@ inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate( A
     mModel( model ),
     mSelection( selection ),
     mUrl( url ),
-    mFile( 0 )
+    mFile( nullptr )
 {}
 
 inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate() {}

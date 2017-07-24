@@ -37,7 +37,7 @@ class StructTreeModel: public QAbstractItemModel
 {
 Q_OBJECT
 public:
-    explicit StructTreeModel(StructTool* tool, QObject* parent = NULL);
+    explicit StructTreeModel(StructTool* tool, QObject* parent = nullptr);
     virtual ~StructTreeModel();
     QVariant data(const QModelIndex& index, int role) const;
     Qt::ItemFlags flags(const QModelIndex& index) const;

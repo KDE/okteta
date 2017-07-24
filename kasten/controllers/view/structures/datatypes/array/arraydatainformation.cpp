@@ -52,7 +52,7 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
-        : DataInformationWithDummyChildren(d), mData(0)
+        : DataInformationWithDummyChildren(d), mData(nullptr)
 {
     uint length = d.mData->length();
     DataInformation* childType = d.mData.data()->childType();
@@ -125,7 +125,7 @@ QVariant ArrayDataInformation::childData(int row, int column, int role) const
 QWidget* ArrayDataInformation::createEditWidget(QWidget*) const
 {
     Q_ASSERT_X(false, "ArrayDataInformation::createEditWidget", "this should never happen!");
-    return 0;
+    return nullptr;
 }
 
 QVariant ArrayDataInformation::dataFromWidget(const QWidget*) const

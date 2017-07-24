@@ -37,7 +37,7 @@ class BytesPerGroupDialog : public QDialog
   Q_OBJECT
 
   public:
-    explicit BytesPerGroupDialog( QWidget* parent = 0 );
+    explicit BytesPerGroupDialog( QWidget* parent = nullptr );
 
     virtual ~BytesPerGroupDialog();
 

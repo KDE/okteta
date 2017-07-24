@@ -42,7 +42,7 @@ class DocumentsView : public QWidget
   Q_OBJECT
 
   public:
-    explicit DocumentsView( DocumentsTool* tool, QWidget* parent = 0 );
+    explicit DocumentsView( DocumentsTool* tool, QWidget* parent = nullptr );
     virtual ~DocumentsView();
 
   public:

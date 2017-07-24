@@ -41,7 +41,7 @@ class KASTENGUI_EXPORT StatusBar : public QStatusBar
     Q_OBJECT
 
   public:
-    explicit StatusBar( QWidget* parent = 0 );
+    explicit StatusBar( QWidget* parent = nullptr );
     virtual ~StatusBar();
 
   public: // overwrite QStatusBar API

@@ -40,8 +40,8 @@ SelectRangeTool::SelectRangeTool()
     mTargetEnd( -1 ),
     mIsEndRelative( false ),
     mIsEndBackwards( false ),
-    mByteArrayView( 0 ),
-    mByteArrayModel( 0 )
+    mByteArrayView( nullptr ),
+    mByteArrayModel( nullptr )
 {
     setObjectName( QStringLiteral( "SelectRange" ) );
 }
@@ -85,11 +85,11 @@ void SelectRangeTool::setTargetModel( AbstractModel* model )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArrayModel = document ? document->content() : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArrayModel = document ? document->content() : nullptr;
 
     if( mByteArrayView && mByteArrayModel )
     {

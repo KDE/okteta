@@ -39,7 +39,7 @@ namespace Kasten
 {
 
 ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()
- : mDocument( 0 )
+ : mDocument( nullptr )
 {
     connect( this, &ByteArrayRawFileSynchronizer::urlChanged, this, &ByteArrayRawFileSynchronizer::onUrlChange );
 }

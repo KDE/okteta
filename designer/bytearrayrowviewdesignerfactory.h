@@ -37,7 +37,7 @@ class ByteArrayRowViewDesignerFactory : public QObject,
   )
 
   public:
-    explicit ByteArrayRowViewDesignerFactory( QObject* parent = 0 );
+    explicit ByteArrayRowViewDesignerFactory( QObject* parent = nullptr );
 
   public: // QDesignerCustomWidgetInterface API
     virtual QWidget* createWidget( QWidget* parent );

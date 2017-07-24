@@ -42,7 +42,7 @@ class CopyAsDialog : public QDialog
 
   public:
     CopyAsDialog( const QString& remoteTypeName, AbstractModelStreamEncoderConfigEditor* configEditor,
-                  QWidget* parent = 0 );
+                  QWidget* parent = nullptr );
 
     virtual ~CopyAsDialog();
 

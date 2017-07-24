@@ -32,8 +32,8 @@ namespace Kasten
 
 SingleViewAreaPrivate::SingleViewAreaPrivate( SingleViewArea* parent )
   : AbstractViewAreaPrivate( parent ),
-    mViewAreaBox( 0 ),
-    mCurrentView( 0 )
+    mViewAreaBox( nullptr ),
+    mCurrentView( nullptr )
 {
 
 }
@@ -42,7 +42,7 @@ void SingleViewAreaPrivate::init()
 {
 //     Q_Q( SingleViewArea );
 
-    mViewAreaBox = new ViewAreaBox( 0 ); //TODO: atm cannot replace this
+    mViewAreaBox = new ViewAreaBox( nullptr ); //TODO: atm cannot replace this
 
 //     TODO: get drag/drop events
 //     q->connect( mTabWidget, SIGNAL(testCanDecode(const QDragMoveEvent*,bool&)),
@@ -56,12 +56,12 @@ void SingleViewAreaPrivate::setCurrentToolInlineView( AbstractToolInlineView* vi
     ToolInlineViewWidget* currentViewWidget =
         qobject_cast<ToolInlineViewWidget*>( mViewAreaBox->bottomWidget() );
     AbstractToolInlineView* currentToolInlineView =
-        currentViewWidget ? currentViewWidget->view() : 0;
+        currentViewWidget ? currentViewWidget->view() : nullptr;
 
     if( currentToolInlineView != view )
     {
         ToolInlineViewWidget* toolInlineViewWidget =
-            view ? new ToolInlineViewWidget( view/*->widget()*/ ) : 0;
+            view ? new ToolInlineViewWidget( view/*->widget()*/ ) : nullptr;
         mViewAreaBox->setBottomWidget( toolInlineViewWidget );
     }
 
@@ -75,7 +75,7 @@ void SingleViewAreaPrivate::setCurrentToolInlineView( AbstractToolInlineView* vi
 void SingleViewAreaPrivate::setView( AbstractView* view )
 {
     mCurrentView = view;
-    mViewAreaBox->setCentralWidget( view ? view->widget() : 0 );
+    mViewAreaBox->setCentralWidget( view ? view->widget() : nullptr );
 }
 
 SingleViewAreaPrivate::~SingleViewAreaPrivate()

@@ -74,7 +74,7 @@ void AbstractFileSystemExportJobPrivate::completeExport( bool success )
         {
             KIO::FileCopyJob* fileCopyJob =
                 KIO::file_copy( QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite );
-            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
 
             success = fileCopyJob->exec();
             if( ! success )

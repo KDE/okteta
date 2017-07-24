@@ -196,13 +196,13 @@ bool ByteArrayTableRanges::overlapsMarking( Address FirstIndex, Address LastInde
 
 const AddressRange *ByteArrayTableRanges::firstOverlappingSelection( const AddressRange &Range ) const
 {
-  return mSelection.range().overlaps(Range) ? &mSelection.range() : 0;
+  return mSelection.range().overlaps(Range) ? &mSelection.range() : nullptr;
 }
 
 
 const AddressRange *ByteArrayTableRanges::overlappingMarking( const AddressRange &Range ) const
 {
-  return mMarking.overlaps(Range) ? &mMarking : 0;
+  return mMarking.overlaps(Range) ? &mMarking : nullptr;
 }
 
 /*

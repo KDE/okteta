@@ -41,7 +41,7 @@ namespace Kasten
 
 ByteTableTool::ByteTableTool()
  : mByteTableModel( new ByteTableModel(this) ),
-   mByteArrayView( 0 ), mByteArrayModel( 0 )
+   mByteArrayView( nullptr ), mByteArrayModel( nullptr )
 {
     setObjectName( QStringLiteral( "ByteTable" ) );
 }
@@ -62,11 +62,11 @@ void ByteTableTool::setTargetModel( AbstractModel* model )
         mByteArrayView->disconnect( this );
     }
 
-    mByteArrayView = model ? qobject_cast<ByteArrayView*>( model ) : 0;
+    mByteArrayView = model ? qobject_cast<ByteArrayView*>( model ) : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArrayModel = document ? document->content() : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArrayModel = document ? document->content() : nullptr;
 
     const bool hasView = ( mByteArrayView && mByteArrayModel );
     if( hasView )

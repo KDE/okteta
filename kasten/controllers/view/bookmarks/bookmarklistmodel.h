@@ -53,7 +53,7 @@ class BookmarkListModel : public QAbstractTableModel
     };
 
   public:
-    explicit BookmarkListModel( BookmarksTool* tool, QObject* parent = 0 );
+    explicit BookmarkListModel( BookmarksTool* tool, QObject* parent = nullptr );
     virtual ~BookmarkListModel();
 
   public: // QAbstractTableModel API

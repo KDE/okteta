@@ -41,7 +41,7 @@ namespace Okteta
 AddressValidator::AddressValidator( QObject* parent, Coding codecId )
   : QValidator( parent ),
     mCodecId( InvalidCoding ),
-    mValueCodec( 0 )
+    mValueCodec( nullptr )
 {
     setCodec( codecId );
 }
@@ -132,7 +132,7 @@ Address AddressValidator::toAddress( const QString& string, AddressType* address
     {
         const bool isHexadecimal = ( mCodecId == HexadecimalCoding );
         const int base = isHexadecimal ? 16 : 10;
-        address = expression.toInt( 0, base );
+        address = expression.toInt( nullptr, base );
     }
 
     return address;

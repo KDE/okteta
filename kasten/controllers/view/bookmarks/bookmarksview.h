@@ -43,7 +43,7 @@ class BookmarksView : public QWidget
   Q_OBJECT
 
   public:
-    explicit BookmarksView( BookmarksTool* tool, QWidget* parent = 0 );
+    explicit BookmarksView( BookmarksTool* tool, QWidget* parent = nullptr );
     virtual ~BookmarksView();
 
   public:

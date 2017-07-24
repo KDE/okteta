@@ -37,7 +37,7 @@
 
 struct ExpectedResults {
 	ExpectedResults()
-	: parent(0), size(0),isTopLevel(false), isEnum(false), isStruct(false), isUnion(false), isArray(false),
+	: parent(nullptr), size(0),isTopLevel(false), isEnum(false), isStruct(false), isUnion(false), isArray(false),
         isBitfield(false), isPrimitive(false), isString(false), isDummy(false), canHaveChildren(false), hasChildren(false)
 		{
 			columnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
@@ -138,8 +138,8 @@ template<typename T> void castChecker(bool isValid, DataInformationBase* data, c
     }
     else
     {
-        QCOMPARE(constValue, static_cast<const T*>(0));
-        QCOMPARE(nonConstValue, static_cast<T*>(0));
+        QCOMPARE(constValue, static_cast<const T*>(nullptr));
+        QCOMPARE(nonConstValue, static_cast<T*>(nullptr));
     }
 }
 #define CAST_CHECKER(isValid, value, func, type) do {\
@@ -237,7 +237,7 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
     QCOMPARE(top->actualDataInformation(), clone1);
 
     QScopedPointer<DataInformation> clone2(clone1->clone());
-    QVERIFY(clone2->parent() == 0); //cloning should reset parent to NULL, else we get dangling pointers
+    QVERIFY(clone2->parent() == nullptr); //cloning should reset parent to NULL, else we get dangling pointers
 
     QCOMPARE(dataInf->flags(DataInformation::ColumnName, true), expected.columnFlags[DataInformation::ColumnName]);
     QCOMPARE(dataInf->flags(DataInformation::ColumnType, true), expected.columnFlags[DataInformation::ColumnType]);
@@ -253,14 +253,14 @@ void BasicDataInformationTest::initTestCase()
 {
 //	qRegisterMetaType<const DataInformation*>();
 //	qRegisterMetaType<DataInformation*>();
-    LoggerWithContext lwc(0, QString());
+    LoggerWithContext lwc(nullptr, QString());
 
 	for (int i = Type_START; i < Type_Bitfield; ++i) {
 		primitives.append(PrimitiveFactory::newInstance(QStringLiteral("prim"),
 		        PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i)), lwc));
 	}
-	QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), Type_Bitfield, lwc), static_cast<PrimitiveDataInformation*>(0));
-	QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), QStringLiteral("invalid_type"), lwc), static_cast<PrimitiveDataInformation*>(0));
+	QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), Type_Bitfield, lwc), static_cast<PrimitiveDataInformation*>(nullptr));
+	QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), QStringLiteral("invalid_type"), lwc), static_cast<PrimitiveDataInformation*>(nullptr));
 	bitfields.append(new BoolBitfieldDataInformation(QStringLiteral("bitfield"), 24));
 	bitfields.append(new UnsignedBitfieldDataInformation(QStringLiteral("bitfield"), 24));
 	bitfields.append(new SignedBitfieldDataInformation(QStringLiteral("bitfield"), 24));
@@ -290,8 +290,8 @@ void BasicDataInformationTest::initTestCase()
 	flagData = new FlagDataInformation(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc), edef);
 	enumData = new EnumDataInformation(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc), edef);
     emptyString = new StringDataInformation(QStringLiteral("string"), StringDataInformation::ASCII);
-    dummy = new DummyDataInformation(0);
-    topLevel = new TopLevelDataInformation(new DummyDataInformation(0));
+    dummy = new DummyDataInformation(nullptr);
+    topLevel = new TopLevelDataInformation(new DummyDataInformation(nullptr));
 }
 
 void BasicDataInformationTest::testBitfields()

@@ -55,7 +55,7 @@ bool StatusBarLayout::isEmpty() const
 QLayoutItem* StatusBarLayout::itemAt( int index ) const
 {
     if( index < 0 || mWidgetList.count() <= index )
-        return 0;
+        return nullptr;
 
     return mWidgetList.at( index );
 }
@@ -99,7 +99,7 @@ Q_UNUSED( item )
 QLayoutItem* StatusBarLayout::takeAt( int index )
 {
     if( index < 0 || mWidgetList.count() <= index )
-        return 0;
+        return nullptr;
 
     QWidgetItem* item = mWidgetList.takeAt( index );
 
@@ -115,7 +115,7 @@ void StatusBarLayout::invalidate()
     QLayout::invalidate();
 }
 
-Qt::Orientations StatusBarLayout::expandingDirections() const { return Qt::Orientations(0); }
+Qt::Orientations StatusBarLayout::expandingDirections() const { return Qt::Orientations(); }
 
 void StatusBarLayout::addWidget( QWidget* widget )
 {

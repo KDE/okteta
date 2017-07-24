@@ -30,7 +30,7 @@ class StructureDataInformation : public DataInformationWithChildren
     DATAINFORMATION_CLONE(StructureDataInformation, DataInformationWithChildren) {}
 public:
     explicit StructureDataInformation(const QString& name, const QVector<DataInformation*>& children =
-            QVector<DataInformation*>(), DataInformation* parent = 0);
+            QVector<DataInformation*>(), DataInformation* parent = nullptr);
     virtual ~StructureDataInformation();
 
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,

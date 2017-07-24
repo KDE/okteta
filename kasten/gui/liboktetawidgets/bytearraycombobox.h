@@ -47,7 +47,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayComboBox : public QWidget
     enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4, Utf8Coding=5 };
 
   public:
-    explicit ByteArrayComboBox( QWidget* parent = 0 );
+    explicit ByteArrayComboBox( QWidget* parent = nullptr );
     virtual ~ByteArrayComboBox();
 
   public: // set

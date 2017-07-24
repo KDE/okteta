@@ -69,7 +69,7 @@ inline AbstractFileSystemSyncToRemoteJobPrivate::AbstractFileSystemSyncToRemoteJ
     AbstractModelFileSystemSynchronizer* synchronizer )
   : AbstractSyncToRemoteJobPrivate( parent ),
     mSynchronizer( synchronizer ),
-    mFile( 0 )
+    mFile( nullptr )
 {}
 
 inline QFile* AbstractFileSystemSyncToRemoteJobPrivate::file()     const { return mFile; }

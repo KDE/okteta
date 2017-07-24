@@ -52,7 +52,7 @@ namespace Kasten
 PODDelegate::PODDelegate( PODDecoderTool* tool, QObject* parent )
   : QStyledItemDelegate( parent ),
     mTool( tool ),
-    mEditor( 0 )
+    mEditor( nullptr )
 {
     qRegisterMetaType<Binary8>();
     qRegisterMetaType<Octal8>();
@@ -477,7 +477,7 @@ QString PODDelegate::displayText( const QVariant& data, const QLocale& locale ) 
 void PODDelegate::onEditorDone()
 {
     QWidget* editor = qobject_cast<QWidget*>( sender() );
-    mEditor = 0;
+    mEditor = nullptr;
     emit commitData( editor );
     emit closeEditor( editor );
 }

@@ -62,7 +62,7 @@ void UnionDataInformationTest::initTestCase()
 
 void UnionDataInformationTest::testSize()
 {
-    LoggerWithContext lwc(0, QString());
+    LoggerWithContext lwc(nullptr, QString());
 
     UnionDataInformation empty(QStringLiteral("empty"));
     QCOMPARE(empty.size(), BitCount32(0));
@@ -77,7 +77,7 @@ void UnionDataInformationTest::testSize()
 
 void UnionDataInformationTest::testReadData1()
 {
-    LoggerWithContext lwc(0, QString());
+    LoggerWithContext lwc(nullptr, QString());
 
     PrimitiveDataInformation* b8 = PrimitiveFactory::newInstance(QStringLiteral("8"), Type_Bool8, lwc);
     PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QStringLiteral("32"), Type_UInt32, lwc);

@@ -47,7 +47,7 @@ void TextCharCodecTest::testCreateCodec()
 
     CharCodec* codec = TextCharCodec::createCodec( codecName );
 
-    QVERIFY( codec != 0 );
+    QVERIFY( codec != nullptr );
     QCOMPARE( codec->name(), codecName );
 
     delete codec;
@@ -56,7 +56,7 @@ void TextCharCodecTest::testCreateCodec()
 void TextCharCodecTest::testCreateLocalCodec()
 {
     TextCharCodec* codec = TextCharCodec::createLocalCodec();
-    QVERIFY( codec != 0 );
+    QVERIFY( codec != nullptr );
     delete codec;
 }
 
@@ -64,7 +64,7 @@ void TextCharCodecTest::testCreateLocalCodec()
 void TextCharCodecTest::testCreateNonexistingCodec()
 {
     TextCharCodec* codec = TextCharCodec::createCodec( QStringLiteral("NonexistingCode") );
-    QVERIFY( codec == 0 );
+    QVERIFY( codec == nullptr );
 }
 
 }

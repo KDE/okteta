@@ -45,8 +45,8 @@ CharsetConversionTool::CharsetConversionTool()
   : mConversionDirection( ConvertFrom ),
     mSubstitutingMissingChars(false),
     mSubstituteByte( 0 ),
-    mByteArrayView( 0 ),
-    mByteArrayModel( 0 )
+    mByteArrayView( nullptr ),
+    mByteArrayModel( nullptr )
 {
     setObjectName( QStringLiteral("CharsetConversion") );
 }
@@ -90,11 +90,11 @@ void CharsetConversionTool::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArrayModel = document ? document->content() : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArrayModel = document ? document->content() : nullptr;
 
     if( mByteArrayView && mByteArrayModel )
     {

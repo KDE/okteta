@@ -77,13 +77,13 @@ enum PODTypes
 
 
 PODDecoderTool::PODDecoderTool()
-  : mByteArrayView( 0 ),
-    mByteArrayModel( 0 ),
+  : mByteArrayView( nullptr ),
+    mByteArrayModel( nullptr ),
     mCursorIndex( 0 ),
     mReadOnly( true ),
     mIsPodMarked( false ),
     mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
-    mDifferentSizeDialog( 0 ),
+    mDifferentSizeDialog( nullptr ),
     mUnsignedAsHex( true )
 {
     setObjectName( QStringLiteral( "PODDecoder" ) );
@@ -93,7 +93,7 @@ PODDecoderTool::PODDecoderTool()
 
 QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding Table"); }
 bool PODDecoderTool::isReadOnly() const { return mReadOnly; }
-bool PODDecoderTool::isApplyable() const { return (mByteArrayModel != 0); }
+bool PODDecoderTool::isApplyable() const { return (mByteArrayModel != nullptr); }
 
 void PODDecoderTool::setTargetModel( AbstractModel* model )
 {
@@ -107,10 +107,10 @@ void PODDecoderTool::setTargetModel( AbstractModel* model )
     }
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
     ByteArrayDocument *document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArrayModel = document ? document->content() : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArrayModel = document ? document->content() : nullptr;
 
     if( mByteArrayModel && mByteArrayView )
     {

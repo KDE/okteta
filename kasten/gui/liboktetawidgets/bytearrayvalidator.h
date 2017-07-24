@@ -52,7 +52,7 @@ class ByteArrayValidator : public QValidator
     };
 
   public:
-    explicit ByteArrayValidator( QObject* parent = 0,
+    explicit ByteArrayValidator( QObject* parent = nullptr,
                                  Coding codecId = CharCoding,
                                  int charCodecId = LocalEncoding );
 

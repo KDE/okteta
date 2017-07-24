@@ -44,7 +44,7 @@ class OKTETACORE_EXPORT FileByteArrayModel : public AbstractByteArrayModel
 
   public:
     /** default is only 50*4k = 200k memory image */
-    explicit FileByteArrayModel( int pageNumber = 50, int pageSize = 4096, QObject* parent = 0 );
+    explicit FileByteArrayModel( int pageNumber = 50, int pageSize = 4096, QObject* parent = nullptr );
     virtual ~FileByteArrayModel();
 
   public: // AbstractByteArrayModel API

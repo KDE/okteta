@@ -42,7 +42,7 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
     Q_OBJECT
 
   protected:
-    explicit AbstractModel( AbstractModel* baseModel = 0 );
+    explicit AbstractModel( AbstractModel* baseModel = nullptr );
     explicit AbstractModel( AbstractModelPrivate* d );
 
   public:
@@ -102,7 +102,7 @@ T AbstractModel::findBaseModel() const
     }
     while( model );
 
-    return 0;
+    return nullptr;
 }
 
 template <typename T>
@@ -118,7 +118,7 @@ AbstractModel* AbstractModel::findBaseModelWithInterface() const
     }
     while( model );
 
-    return 0;
+    return nullptr;
 }
 
 }

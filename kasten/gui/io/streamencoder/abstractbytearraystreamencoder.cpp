@@ -49,7 +49,7 @@ Q_UNUSED( selection )
 
     const ByteArrayDocument* byteArrayDocument = model->findBaseModel<const ByteArrayDocument*>();
 
-    return ( byteArrayDocument == 0 ) ? QString() : byteArrayDocument->typeName();
+    return byteArrayDocument ? byteArrayDocument->typeName() : QString();
 }
 
 
@@ -59,14 +59,14 @@ bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
     const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>( model );
 
     const ByteArrayDocument* byteArrayDocument =
-        byteArrayView ? qobject_cast<const ByteArrayDocument*>( byteArrayView->baseModel() ) : 0;
-    if( byteArrayDocument == 0 )
+        byteArrayView ? qobject_cast<const ByteArrayDocument*>( byteArrayView->baseModel() ) : nullptr;
+    if( ! byteArrayDocument )
         return false;
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
     const ByteArraySelection* byteArraySelection =
-        selection ? static_cast<const ByteArraySelection*>( selection ) : 0;
+        selection ? static_cast<const ByteArraySelection*>( selection ) : nullptr;
 
     const Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
         byteArraySelection->range() :
@@ -82,14 +82,14 @@ QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const
     const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>( model );
 
     const ByteArrayDocument* byteArrayDocument =
-        byteArrayView ? qobject_cast<const ByteArrayDocument*>( byteArrayView->baseModel() ) : 0;
-    if( byteArrayDocument == 0 )
+        byteArrayView ? qobject_cast<const ByteArrayDocument*>( byteArrayView->baseModel() ) : nullptr;
+    if( ! byteArrayDocument )
         return QString();
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
     const ByteArraySelection* byteArraySelection =
-        selection ? static_cast<const ByteArraySelection*>( selection ) : 0;
+        selection ? static_cast<const ByteArraySelection*>( selection ) : nullptr;
 
     Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
         byteArraySelection->range() :

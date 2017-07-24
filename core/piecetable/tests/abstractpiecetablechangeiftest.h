@@ -62,7 +62,7 @@ class AbstractPieceTableChangeIfTest : public QObject
     AbstractPieceTableChange *mPieceTableChange;
 };
 
-inline AbstractPieceTableChangeIfTest::AbstractPieceTableChangeIfTest() : mPieceTableChange( 0 ) {}
+inline AbstractPieceTableChangeIfTest::AbstractPieceTableChangeIfTest() : mPieceTableChange( nullptr ) {}
 
 }
 

@@ -33,7 +33,7 @@
 namespace Kasten
 {
 StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
-    QAbstractItemModel(parent), mTool(tool), mLastSender(0), mLastStartIndex(0), mLastEndIndex(0)
+    QAbstractItemModel(parent), mTool(tool), mLastSender(nullptr), mLastStartIndex(0), mLastEndIndex(0)
 {
     connect(mTool, &StructTool::dataChanged, this, &StructTreeModel::onToolDataChange);
     connect(mTool, &StructTool::dataCleared, this, &StructTreeModel::onToolDataClear);
@@ -180,7 +180,7 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
     if (!hasIndex(row, column, parent))
         return QModelIndex();
 
-    DataInformation* childItem = NULL;
+    DataInformation* childItem = nullptr;
 
     if (!parent.isValid())
         childItem = mTool->childAt(row);

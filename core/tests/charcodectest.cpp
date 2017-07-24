@@ -49,7 +49,7 @@ void CharCodecTest::testCreateCodec()
 
     CharCodec* codec = CharCodec::createCodec( codecName );
 
-    QVERIFY( codec != 0 );
+    QVERIFY( codec != nullptr );
     QCOMPARE( codec->name(), codecName );
 
     delete codec;

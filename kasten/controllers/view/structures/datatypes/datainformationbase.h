@@ -116,12 +116,12 @@ CAST_FUNCS_2(DataInformationWithDummyChildren, DataInformationWithDummyChildren)
 //this is not handled by the macro
 inline DataInformation* DataInformationBase::asDataInformation()
 {
-    return isTopLevel() ? 0 : reinterpret_cast<DataInformation*>(this);
+    return isTopLevel() ? nullptr : reinterpret_cast<DataInformation*>(this);
 }
 
 inline const DataInformation* DataInformationBase::asDataInformation() const
 {
-    return isTopLevel() ? 0 : reinterpret_cast<const DataInformation*>(this);
+    return isTopLevel() ? nullptr : reinterpret_cast<const DataInformation*>(this);
 }
 
 #undef CAST_FUNCS_2

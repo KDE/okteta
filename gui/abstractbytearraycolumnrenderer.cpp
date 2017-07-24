@@ -59,8 +59,8 @@ AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer( AbstractColumn
    mByteSpacingWidth( DefaultByteSpacingWidth ),
    mGroupSpacingWidth( DefaultGroupSpacingWidth ),
    mNoOfGroupedBytes( DefaultNoOfGroupedBytes ),
-   mLinePosLeftPixelX( 0 ),
-   mLinePosRightPixelX( 0 ),
+   mLinePosLeftPixelX( nullptr ),
+   mLinePosRightPixelX( nullptr ),
    mLastLinePos( 0 ),
    mByteTypeColored( true )
 {
@@ -501,7 +501,7 @@ void AbstractByteArrayColumnRenderer::renderPlain( QPainter* painter, const Line
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
 
-    const bool hasBookmarks = ( mBookmarks != 0 );
+    const bool hasBookmarks = ( mBookmarks != nullptr );
     if( hasBookmarks )
     {
         bit = mBookmarks->createBookmarksConstIterator();
@@ -546,7 +546,7 @@ void AbstractByteArrayColumnRenderer::renderSelection( QPainter* painter, const 
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
 
-    const bool hasBookmarks = ( mBookmarks != 0 );
+    const bool hasBookmarks = ( mBookmarks != nullptr );
     if( hasBookmarks )
     {
         bit = mBookmarks->createBookmarksConstIterator();

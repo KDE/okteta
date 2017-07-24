@@ -67,7 +67,7 @@ class VersionableIfTest : public QObject
     QSignalSpy *mHeadVersionChangedSpy;
 };
 
-inline VersionableIfTest::VersionableIfTest() : mObject( 0 ), mVersionableControl( 0 ) {}
+inline VersionableIfTest::VersionableIfTest() : mObject( nullptr ), mVersionableControl( nullptr ) {}
 
 }
 

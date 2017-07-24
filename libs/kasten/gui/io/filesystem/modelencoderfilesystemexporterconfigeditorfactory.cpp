@@ -40,7 +40,7 @@ ModelEncoderFileSystemExporterConfigEditorFactory::ModelEncoderFileSystemExporte
 
 AbstractModelExporterConfigEditor* ModelEncoderFileSystemExporterConfigEditorFactory::tryCreateConfigEditor( AbstractModelExporter* exporter ) const
 {
-    AbstractModelExporterConfigEditor* result = 0;
+    AbstractModelExporterConfigEditor* result = nullptr;
 
     ModelEncoderFileSystemExporter* modelEncoderFileSystemExporter =
         qobject_cast<ModelEncoderFileSystemExporter*>( exporter );

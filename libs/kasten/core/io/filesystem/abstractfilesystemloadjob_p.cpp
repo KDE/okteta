@@ -58,7 +58,7 @@ void AbstractFileSystemLoadJobPrivate::load()
 
         KIO::FileCopyJob* fileCopyJob =
             KIO::file_copy( mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite );
-        KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+        KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
 
         isWorkFileOk = fileCopyJob->exec();
         if( ! isWorkFileOk )
@@ -79,7 +79,7 @@ void AbstractFileSystemLoadJobPrivate::load()
     {
         q->setError( KJob::KilledJobError );
         // TODO: should we rather skip setDocument in the API?
-        q->AbstractLoadJob::setDocument( 0 );
+        q->AbstractLoadJob::setDocument( nullptr );
     }
 }
 

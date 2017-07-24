@@ -28,7 +28,7 @@ namespace Kasten
 
 AbstractModelExporterConfigEditor::AbstractModelExporterConfigEditor( QWidget* parent )
   : QWidget( parent ),
-    d( 0 )
+    d( nullptr )
 {}
 
 bool AbstractModelExporterConfigEditor::isValid() const
@@ -38,7 +38,7 @@ bool AbstractModelExporterConfigEditor::isValid() const
 
 AbstractSelectionView* AbstractModelExporterConfigEditor::createPreviewView() const
 {
-    return 0;
+    return nullptr;
 }
 
 AbstractModelExporterConfigEditor::~AbstractModelExporterConfigEditor()

@@ -35,7 +35,7 @@ class PrimitiveDataInformation : public DataInformation
 {
     friend class PrimitiveDataInformationTest; //that unit test needs to change mWasAbleToRead
 public:
-    explicit PrimitiveDataInformation(const QString& name, DataInformation* parent = 0);
+    explicit PrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
     virtual ~PrimitiveDataInformation();
     virtual PrimitiveDataInformation* clone() const = 0;
 
@@ -48,7 +48,7 @@ public:
     virtual PrimitiveDataType type() const = 0;
 
     virtual unsigned int childCount() const { return 0; }
-    virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return 0; }
+    virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return nullptr; }
     virtual bool canHaveChildren() const { return false; }
     virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
     virtual int indexOf(const DataInformation* const) const {Q_ASSERT(false); return -1; }
@@ -78,7 +78,7 @@ protected:
 public:
     /** takes ownership of @p valueType */
     PrimitiveDataInformationWrapper(const QString& name, PrimitiveDataInformation* valueType,
-            DataInformation* parent = 0);
+            DataInformation* parent = nullptr);
     virtual ~PrimitiveDataInformationWrapper() {}
 
     //delegate all these to the underlying object:

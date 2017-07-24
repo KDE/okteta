@@ -43,7 +43,7 @@ PrintController::PrintController( KXMLGUIClient* guiClient )
     connect( mPrintTool, &PrintTool::viewChanged,
              mPrintAction, &QAction::setEnabled );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void PrintController::setTargetModel( AbstractModel* model )

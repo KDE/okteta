@@ -31,7 +31,7 @@ class Utf8CharValidator : public QValidator
   Q_OBJECT
 
   public:
-    explicit Utf8CharValidator( QObject* parent = 0 );
+    explicit Utf8CharValidator( QObject* parent = nullptr );
 
     virtual ~Utf8CharValidator();
 

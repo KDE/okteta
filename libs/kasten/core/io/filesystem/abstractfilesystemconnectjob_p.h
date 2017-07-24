@@ -79,7 +79,7 @@ inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate(
     mDocument( document ),
     mUrl( url ),
     mOption( option ),
-    mFile( 0 )
+    mFile( nullptr )
 {}
 
 inline AbstractFileSystemConnectJobPrivate::~AbstractFileSystemConnectJobPrivate() {}

@@ -41,10 +41,10 @@ namespace Kasten
 ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient )
   : mViewManager( viewManager ),
     mGroupedViews( groupedViews ),
-    mViewAreaSplitable( 0 ),
-    mCurrentViewArea( 0 )
+    mViewAreaSplitable( nullptr ),
+    mCurrentViewArea( nullptr )
 {
-    mViewAreaSplitable = mGroupedViews ? qobject_cast<If::ViewAreaSplitable*>( mGroupedViews ) : 0;
+    mViewAreaSplitable = mGroupedViews ? qobject_cast<If::ViewAreaSplitable*>( mGroupedViews ) : nullptr;
     if( mViewAreaSplitable )
     {
         connect( mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten::AbstractViewArea*)),
@@ -62,14 +62,14 @@ ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, Abst
     mSplitVerticallyAction->setText( i18nc("@title:menu","Split Vertically") );
     mSplitVerticallyAction->setIcon( QIcon::fromTheme( QStringLiteral("view-split-left-right") ) );
     actionCollection->setDefaultShortcut( mSplitVerticallyAction, Qt::CTRL + Qt::SHIFT + Qt::Key_L );
-    mSplitVerticallyAction->setEnabled( mViewAreaSplitable != 0 );
+    mSplitVerticallyAction->setEnabled( mViewAreaSplitable != nullptr );
 
     mSplitHorizontallyAction = actionCollection->addAction( QStringLiteral("view_area_split_horizontally"),
                                                             this, SLOT(splitHorizontally()) );
     mSplitHorizontallyAction->setText( i18nc("@title:menu","Split Horizontal") );
     mSplitHorizontallyAction->setIcon( QIcon::fromTheme( QStringLiteral("view-split-top-bottom") ) );
     actionCollection->setDefaultShortcut( mSplitHorizontallyAction, Qt::CTRL + Qt::SHIFT + Qt::Key_T );
-    mSplitHorizontallyAction->setEnabled( mViewAreaSplitable != 0 );
+    mSplitHorizontallyAction->setEnabled( mViewAreaSplitable != nullptr );
 
     mCloseAction = actionCollection->addAction( QStringLiteral("view_area_close"),
                                                 this, SLOT(close()) );
@@ -77,7 +77,7 @@ ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, Abst
     mCloseAction->setIcon( QIcon::fromTheme( QStringLiteral("view-close") ) );
     actionCollection->setDefaultShortcut( mCloseAction, Qt::CTRL + Qt::SHIFT + Qt::Key_R );
 
-    onViewAreaFocusChanged( mViewAreaSplitable ? mViewAreaSplitable->viewAreaFocus() : 0 );
+    onViewAreaFocusChanged( mViewAreaSplitable ? mViewAreaSplitable->viewAreaFocus() : nullptr );
     onViewAreasChanged();
 }
 

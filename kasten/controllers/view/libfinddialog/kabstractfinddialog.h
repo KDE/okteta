@@ -48,7 +48,7 @@ class KAbstractFindDialog : public QDialog
   Q_OBJECT
 
   public:
-    explicit KAbstractFindDialog( QWidget* parent = 0 );
+    explicit KAbstractFindDialog( QWidget* parent = nullptr );
     virtual ~KAbstractFindDialog();
 
   public: // set
@@ -73,8 +73,8 @@ class KAbstractFindDialog : public QDialog
                        const QString& buttonToolTip, const QString& buttonWhatsThis );
     void setFindButtonEnabled( bool enabled );
     void setupFindBox();
-    void setupOperationBox( QGroupBox *operationBox = 0 );
-    void setupCheckBoxes( QCheckBox *optionCheckBox = 0 );
+    void setupOperationBox( QGroupBox *operationBox = nullptr );
+    void setupCheckBoxes( QCheckBox *optionCheckBox = nullptr );
 
   protected: // API to be implemented
     virtual void onFindButtonClicked();

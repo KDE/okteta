@@ -38,7 +38,7 @@ class PODDelegate : public QStyledItemDelegate
   Q_OBJECT
 
   public:
-    explicit PODDelegate( PODDecoderTool* tool, QObject* parent = 0 );
+    explicit PODDelegate( PODDecoderTool* tool, QObject* parent = nullptr );
 
     virtual ~PODDelegate();
 

@@ -39,7 +39,7 @@ class ViewProfileEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ViewProfileEditDialog( QWidget* parent = 0 );
+    explicit ViewProfileEditDialog( QWidget* parent = nullptr );
 
     virtual ~ViewProfileEditDialog();
 

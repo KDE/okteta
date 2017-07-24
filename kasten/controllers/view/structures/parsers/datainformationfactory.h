@@ -91,7 +91,7 @@ private:
 };
 
 struct ArrayParsedData : public ParserInfo {
-    inline explicit ArrayParsedData(const ParserInfo& i) : ParserInfo(i), arrayType(0) {}
+    inline explicit ArrayParsedData(const ParserInfo& i) : ParserInfo(i), arrayType(nullptr) {}
     QScriptValue length;
     DataInformation* arrayType;
 private:
@@ -99,7 +99,7 @@ private:
 };
 
 struct PointerParsedData : public ParserInfo {
-    inline explicit PointerParsedData(const ParserInfo& i) : ParserInfo(i), valueType(0), pointerTarget(0) {}
+    inline explicit PointerParsedData(const ParserInfo& i) : ParserInfo(i), valueType(nullptr), pointerTarget(nullptr) {}
     DataInformation* valueType;
     DataInformation* pointerTarget;
 private:

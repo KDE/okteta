@@ -47,7 +47,7 @@ static const int exampleInitialDataSize = sizeof(exampleInitialData) / sizeof(ex
 class Widget : public QWidget
 {
   public:
-    explicit Widget( QWidget* parent = 0 );
+    explicit Widget( QWidget* parent = nullptr );
     virtual ~Widget();
 
   private:

@@ -45,7 +45,7 @@ class CharsetConversionView : public QWidget
   Q_OBJECT
 
   public:
-    explicit CharsetConversionView( CharsetConversionTool* tool, QWidget* parent = 0 );
+    explicit CharsetConversionView( CharsetConversionTool* tool, QWidget* parent = nullptr );
     virtual ~CharsetConversionView();
 
   public:

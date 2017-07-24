@@ -71,7 +71,7 @@ TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name)
 {
     Q_CHECK_PTR(mParser);
     QVector<TopLevelDataInformation*> list = mParser->parseStructures();
-    TopLevelDataInformation* ret = 0;
+    TopLevelDataInformation* ret = nullptr;
     for (int i = 0; i < list.size(); ++i)
     {
         if (list.at(i)->actualDataInformation()->name() == name)

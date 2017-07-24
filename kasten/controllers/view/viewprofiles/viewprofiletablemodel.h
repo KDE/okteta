@@ -50,7 +50,7 @@ class ViewProfileTableModel : public QAbstractTableModel
 
   public:
     explicit ViewProfileTableModel( const ByteArrayViewProfileManager* viewProfileManager,
-                                    QObject* parent = 0 );
+                                    QObject* parent = nullptr );
     virtual ~ViewProfileTableModel();
 
   public: // QAbstractTableModel API

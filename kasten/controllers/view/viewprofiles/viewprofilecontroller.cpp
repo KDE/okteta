@@ -48,8 +48,8 @@ ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewP
   , mGuiClient( guiClient )
   , mViewProfileManager( viewProfileManager )
   , mParentWidget( parentWidget )
-  , mByteArrayView( 0 )
-  , mByteArrayViewProfileSynchronizer( 0 )
+  , mByteArrayView( nullptr )
+  , mByteArrayViewProfileSynchronizer( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -96,7 +96,7 @@ ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewP
 
     onViewProfilesChanged();
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void ViewProfileController::setTargetModel( AbstractModel* model )
@@ -104,10 +104,10 @@ void ViewProfileController::setTargetModel( AbstractModel* model )
     if( mByteArrayViewProfileSynchronizer )
         mByteArrayViewProfileSynchronizer->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
-    mByteArrayViewProfileSynchronizer = mByteArrayView ? mByteArrayView->synchronizer() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
+    mByteArrayViewProfileSynchronizer = mByteArrayView ? mByteArrayView->synchronizer() : nullptr;
 
-    const bool hasSynchronizer = ( mByteArrayViewProfileSynchronizer != 0 );
+    const bool hasSynchronizer = ( mByteArrayViewProfileSynchronizer != nullptr );
     if( hasSynchronizer )
     {
         onViewProfileChanged( mByteArrayViewProfileSynchronizer->viewProfileId() );

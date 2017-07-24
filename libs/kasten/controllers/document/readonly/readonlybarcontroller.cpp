@@ -35,7 +35,7 @@ namespace Kasten
 {
 
 ReadOnlyBarController::ReadOnlyBarController( StatusBar* statusBar )
- : mDocument( 0 )
+ : mDocument( nullptr )
 {
     const QString readWriteText = i18nc( "@option:check the document is read-write", "Read-write" );
     const QString readOnlyText = i18nc( "@option:check the document is read-only", "Read-only" );
@@ -45,7 +45,7 @@ ReadOnlyBarController::ReadOnlyBarController( StatusBar* statusBar )
     connect( mReadOnlyButton, &QAbstractButton::clicked,
              this, &ReadOnlyBarController::setReadOnly );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 
@@ -53,7 +53,7 @@ void ReadOnlyBarController::setTargetModel( AbstractModel* model )
 {
     if( mDocument ) mDocument->disconnect( mReadOnlyButton );
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
     if( mDocument )
     {

@@ -67,7 +67,7 @@ void ModelCodecViewManager::setGeneratorConfigEditorFactories( const QList<Abstr
 
 AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelStreamEncoder* encoder ) const
 {
-    AbstractModelStreamEncoderConfigEditor* result = 0;
+    AbstractModelStreamEncoderConfigEditor* result = nullptr;
 
     foreach( const AbstractModelStreamEncoderConfigEditorFactory* factory, mEncoderFactoryList )
     {
@@ -81,7 +81,7 @@ AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEdito
 
 AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelExporter* exporter ) const
 {
-    AbstractModelExporterConfigEditor* result = 0;
+    AbstractModelExporterConfigEditor* result = nullptr;
 
     foreach( const AbstractModelExporterConfigEditorFactory* factory, mExporterFactoryList )
     {
@@ -95,7 +95,7 @@ AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor( Ab
 
 AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelDataGenerator* generator ) const
 {
-    AbstractModelDataGeneratorConfigEditor* result = 0;
+    AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
     foreach( const AbstractModelDataGeneratorConfigEditorFactory* factory, mGeneratorFactoryList )
     {

@@ -91,7 +91,7 @@ StructureDefinitionFile* StructuresManager::definition(QString& pluginName)
     if (!mDefs.contains(pluginName))
     {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not find structuredefinitionFile with name=" << pluginName;
-        return NULL;
+        return nullptr;
     }
     return mDefs.value(pluginName);
 }

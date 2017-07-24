@@ -58,7 +58,7 @@ InsertController::InsertController( ModelCodecViewManager* modelCodecViewManager
   : AbstractXmlGuiController(),
     mModelCodecViewManager( modelCodecViewManager ),
     mModelCodecManager( modelCodecManager ),
-    mModel( 0 )
+    mModel( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -69,15 +69,15 @@ InsertController::InsertController( ModelCodecViewManager* modelCodecViewManager
     connect( mInsertSelectAction, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered),
              this, &InsertController::onActionTriggered );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void InsertController::setTargetModel( AbstractModel* model )
 {
     if( mModel ) mModel->disconnect( this );
 
-    mModel = model ? model->findBaseModelWithInterface<If::SelectedDataWriteable*>() : 0;
-    mSelectedDataWriteableControl = mModel ? qobject_cast<If::SelectedDataWriteable*>( mModel ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<If::SelectedDataWriteable*>() : nullptr;
+    mSelectedDataWriteableControl = mModel ? qobject_cast<If::SelectedDataWriteable*>( mModel ) : nullptr;
 
     if( mSelectedDataWriteableControl )
     {

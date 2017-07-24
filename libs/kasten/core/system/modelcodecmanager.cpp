@@ -45,7 +45,7 @@ namespace Kasten
 
 ModelCodecManager::ModelCodecManager( DocumentManager* manager )
   : mManager( manager ),
-    mOverwriteDialog( 0 )
+    mOverwriteDialog( nullptr )
 {
 }
 
@@ -115,7 +115,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
         i18nc( "@title:window", "Export" );
     do
     {
-        QFileDialog exportFileDialog(/*mWidget*/0, dialogTitle );
+        QFileDialog exportFileDialog(/*mWidget*/nullptr, dialogTitle );
 
         exportFileDialog.setAcceptMode( QFileDialog::AcceptSave );
         exportFileDialog.setFileMode( QFileDialog::AnyFile );
@@ -134,7 +134,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
 
             KIO::StatJob* statJob = KIO::stat( exportUrl );
             statJob->setSide(  KIO::StatJob::DestinationSide );
-            KJobWidgets::setWindow( statJob, /*mWidget*/0 );
+            KJobWidgets::setWindow( statJob, /*mWidget*/nullptr );
 
             const bool isUrlInUse = statJob->exec();
 

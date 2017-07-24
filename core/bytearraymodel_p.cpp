@@ -67,7 +67,7 @@ ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
 ByteArrayModelPrivate::ByteArrayModelPrivate( ByteArrayModel *parent,
                                               int size, int maxSize )
  : p( parent ),
-   mData( (size>0) ? new Byte[size] : 0 ),
+   mData( (size>0) ? new Byte[size] : nullptr ),
    mSize( size ),
    mRawSize( size ),
    mMaxSize( maxSize ),
@@ -201,7 +201,7 @@ Size ByteArrayModelPrivate::replace( const AddressRange& _removeRange, const Byt
     {
         // create new buffer
         Byte* newData = new Byte[newSize];
-        if( newData == 0 )
+        if( ! newData )
             return 0;
 
         // move old data to its (new) places

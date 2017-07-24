@@ -49,7 +49,7 @@ Q_OBJECT
 
 public:
     Q_PROPERTY(QStringList values READ values USER true)
-    explicit StructuresManagerView(Kasten::StructTool* manager, QWidget* parent = 0);
+    explicit StructuresManagerView(Kasten::StructTool* manager, QWidget* parent = nullptr);
 
     virtual ~StructuresManagerView();
     QStringList values();

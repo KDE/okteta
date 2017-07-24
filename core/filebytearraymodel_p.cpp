@@ -79,7 +79,7 @@ bool FileByteArrayModelPrivate::open( const QString& fileName )
     // initialize Page pointers
     mData.resize( noOfPages );
     for( KPageOfChar::iterator D=mData.begin(); D!=mData.end(); ++D )
-        *D = 0;
+        *D = nullptr;
 
     mFirstPage = mLastPage = 0;
 
@@ -113,7 +113,7 @@ bool FileByteArrayModelPrivate::ensurePageLoaded( unsigned int pageIndex ) const
     if( !isOpen() )
         return false;
     // page loaded?
-    if( mData[pageIndex] != 0 )
+    if( mData[pageIndex] )
     {
         mActualPage = mData[pageIndex];
         mOffsetOfActualPage = pageIndex * mPageSize;
@@ -167,7 +167,7 @@ bool FileByteArrayModelPrivate::freePage( unsigned int pageIndex ) const
         return false;
 
     delete [] mData[pageIndex];
-    mData[pageIndex] = 0;
+    mData[pageIndex] = nullptr;
     ++mNoOfFreePages;
     return true;
 }

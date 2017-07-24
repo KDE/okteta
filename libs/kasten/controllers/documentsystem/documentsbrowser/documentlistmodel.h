@@ -50,7 +50,7 @@ class DocumentListModel : public QAbstractTableModel
     };
 
   public:
-    explicit DocumentListModel( DocumentsTool* documentsTool, QObject* parent = 0 );
+    explicit DocumentListModel( DocumentsTool* documentsTool, QObject* parent = nullptr );
     virtual ~DocumentListModel();
 
   public: // QAbstractTableModel API

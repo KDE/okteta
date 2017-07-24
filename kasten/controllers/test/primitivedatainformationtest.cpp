@@ -112,7 +112,7 @@ void PrimitiveDataInformationTest::initTestCase()
     locale.setNumberOptions(QLocale::OmitGroupSeparator);
     QLocale::setDefault(locale);
 
-    LoggerWithContext lwc(0, QString());
+    LoggerWithContext lwc(nullptr, QString());
 
     for (int i = Type_START; i < Type_Bitfield; ++i)
     {

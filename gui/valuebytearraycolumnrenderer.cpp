@@ -43,7 +43,7 @@ namespace Okteta
 ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,
     AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
  : AbstractByteArrayColumnRenderer( stylist, byteArrayModel, layout, ranges ),
-   mValueCodec( 0 ),
+   mValueCodec( nullptr ),
    mBinaryGapWidth( DefaultBinaryGapWidth )
 {
 }

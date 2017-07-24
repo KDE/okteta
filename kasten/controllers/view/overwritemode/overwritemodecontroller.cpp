@@ -35,7 +35,7 @@ namespace Kasten
 {
 
 OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
- : mByteArrayView( 0 )
+ : mByteArrayView( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -49,14 +49,14 @@ OverwriteModeController::OverwriteModeController( KXMLGUIClient* guiClient )
     actionCollection->setDefaultShortcut( mSetOverWriteAction, QKeySequence(Qt::Key_Insert) );
     connect( mSetOverWriteAction, &KToggleAction::triggered, this, &OverwriteModeController::setOverWrite );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void OverwriteModeController::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( mSetOverWriteAction );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     if( mByteArrayView )
     {

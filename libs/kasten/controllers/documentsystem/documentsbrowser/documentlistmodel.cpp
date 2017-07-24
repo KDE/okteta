@@ -81,7 +81,7 @@ QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
     {
         const int documentIndex = index.row();
         const AbstractDocument* document = mDocumentsTool->documents().at( documentIndex );
-        const AbstractModelSynchronizer* synchronizer = document ? document->synchronizer() : 0;
+        const AbstractModelSynchronizer* synchronizer = document ? document->synchronizer() : nullptr;
 
         const int tableColumn = index.column();
         switch( tableColumn )

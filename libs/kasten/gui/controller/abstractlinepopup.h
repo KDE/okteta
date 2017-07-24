@@ -48,7 +48,7 @@ class KASTENGUI_EXPORT AbstractLinePopup : public QWidget
   Q_OBJECT
 
   public:
-    explicit AbstractLinePopup( QWidget* parent = 0 );
+    explicit AbstractLinePopup( QWidget* parent = nullptr );
     virtual ~AbstractLinePopup();
 
   public:

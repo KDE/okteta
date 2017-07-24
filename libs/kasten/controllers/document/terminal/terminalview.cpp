@@ -42,8 +42,8 @@ namespace Kasten
 TerminalView::TerminalView( TerminalTool* tool, QWidget* parent )
   : QWidget( parent ),
     mTool( tool ),
-    mTerminalPart( 0 ),
-    mTerminalInterface( 0 )
+    mTerminalPart( nullptr ),
+    mTerminalInterface( nullptr )
 {
     QVBoxLayout* layout = new QVBoxLayout( this );
     layout->setMargin( 0 );
@@ -93,8 +93,8 @@ void TerminalView::onCurrentUrlChanged( const QUrl& currentUrl )
 
 void TerminalView::onTerminalPartDestroyed()
 {
-    mTerminalPart = 0;
-    mTerminalInterface = 0;
+    mTerminalPart = nullptr;
+    mTerminalInterface = nullptr;
 
     createTerminalPart();
 }

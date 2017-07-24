@@ -76,7 +76,7 @@ void ValueCodecTest::testCreateCodec()
 
     ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
 
-    QVERIFY( codec != 0 );
+    QVERIFY( codec != nullptr );
     QCOMPARE( codec->encodingWidth(), encodingWidth );
 
     delete codec;

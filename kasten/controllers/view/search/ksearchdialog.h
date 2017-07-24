@@ -38,7 +38,7 @@ class KSearchDialog : public KAbstractFindDialog
   Q_OBJECT
 
   public:
-    explicit KSearchDialog( SearchTool* tool, QWidget* parent = 0 );
+    explicit KSearchDialog( SearchTool* tool, QWidget* parent = nullptr );
     virtual ~KSearchDialog();
 
   protected: // KAbstractFindDialog API

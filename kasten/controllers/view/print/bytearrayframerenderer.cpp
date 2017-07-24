@@ -60,8 +60,8 @@ static const int BAFInitialWidth = 50;
 ByteArrayFrameRenderer::ByteArrayFrameRenderer()
  : mHeight( BAFInitialHeight ),
    mWidth( BAFInitialWidth ),
-   mByteArrayModel( 0 ),
-   mCharCodec( 0 ),
+   mByteArrayModel( nullptr ),
+   mCharCodec( nullptr ),
    mResizeStyle( DefaultResizeStyle )
 {
     mLayout = new Okteta::ByteArrayTableLayout( DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0 );
@@ -143,7 +143,7 @@ void ByteArrayFrameRenderer::setByteArrayModel( Okteta::AbstractByteArrayModel* 
                                                 Okteta::Address offset, Okteta::Size length )
 {
     mByteArrayModel = byteArrayModel;
-    length = ( byteArrayModel == 0 ) ?                      0 :
+    length = ( ! byteArrayModel ) ?                         0 :
              ( length == -1 ) ?                             byteArrayModel->size()-offset :
              ( length <= byteArrayModel->size()-offset ) ?  length :
                                                             byteArrayModel->size()-offset;
@@ -278,7 +278,7 @@ void ByteArrayFrameRenderer::setValueCoding( Okteta::ValueCoding valueCoding )
 
     Okteta::ValueCodec* newValueCodec =
         Okteta::ValueCodec::createCodec( valueCoding );
-    if( newValueCodec == 0 )
+    if( ! newValueCodec )
         return;
 
     delete mValueCodec;
@@ -301,7 +301,7 @@ void ByteArrayFrameRenderer::setCharCoding( Okteta::CharCoding charCoding )
         return;
 
     Okteta::CharCodec* newCharCodec = Okteta::CharCodec::createCodec( charCoding );
-    if( newCharCodec == 0 )
+    if( ! newCharCodec )
         return;
 
     delete mCharCodec;
@@ -319,7 +319,7 @@ void ByteArrayFrameRenderer::setCharCoding( const QString& newCharCodingName )
         return;
 
     Okteta::CharCodec* newCharCodec = Okteta::CharCodec::createCodec( newCharCodingName );
-    if( newCharCodec == 0 )
+    if( ! newCharCodec )
         return;
 
     delete mCharCodec;

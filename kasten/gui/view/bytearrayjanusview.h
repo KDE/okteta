@@ -46,7 +46,7 @@ class ByteArrayJanusView : public QWidget
     enum { ColumnViewId = 0, RowViewId };
 
   public:
-    explicit ByteArrayJanusView( QWidget* parent = 0 );
+    explicit ByteArrayJanusView( QWidget* parent = nullptr );
     virtual ~ByteArrayJanusView();
 
   public:

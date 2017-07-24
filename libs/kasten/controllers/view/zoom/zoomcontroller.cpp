@@ -39,7 +39,7 @@ namespace Kasten
 {
 
 ZoomController::ZoomController( KXMLGUIClient* guiClient )
- : mModel( 0 ), mZoomControl( 0 )
+ : mModel( nullptr ), mZoomControl( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -73,15 +73,15 @@ ZoomController::ZoomController( KXMLGUIClient* guiClient )
     FitToSizeAction = new KAction( i18n( "&Fit to Size" ), ActionCollection, "fit_to_size" );
     connect( FitToSizeAction, SIGNAL(triggered(bool) ), SLOT(fitToSize()));
 #endif
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void ZoomController::setTargetModel( AbstractModel* model )
 {
     if( mModel ) mModel->disconnect( this );
 
-    mModel = model ? model->findBaseModelWithInterface<If::Zoomable*>() : 0;
-    mZoomControl = mModel ? qobject_cast<If::Zoomable *>( mModel ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<If::Zoomable*>() : nullptr;
+    mZoomControl = mModel ? qobject_cast<If::Zoomable *>( mModel ) : nullptr;
 
     if( mZoomControl )
     {
@@ -89,7 +89,7 @@ void ZoomController::setTargetModel( AbstractModel* model )
         connect( mModel, SIGNAL(zoomLevelChanged(double)), SLOT(onZoomLevelChange(double)) );
     }
 
-    const bool hasView = ( mZoomControl != 0 );
+    const bool hasView = ( mZoomControl != nullptr );
     mZoomInAction->setEnabled( hasView );
     mZoomOutAction->setEnabled( hasView );
 }

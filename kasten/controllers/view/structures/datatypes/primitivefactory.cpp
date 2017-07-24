@@ -100,7 +100,7 @@ PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType typ
         return new PrimitiveInfo<Type_Double>::Class(name, parent);
     default:
         logger.error().nospace() << "could not convert '" << type << "' to a primitive type";
-        return 0; //invalid type
+        return nullptr; //invalid type
     }
 }
 

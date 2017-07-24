@@ -187,7 +187,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiController( new SwitchViewController(viewArea,this) );
     addXmlGuiController( new ViewAreaSplitController(viewManager,viewArea,this) );
     addXmlGuiController( new FullScreenController(this) );
-    addXmlGuiController( new QuitController(0,this) );
+    addXmlGuiController( new QuitController(nullptr,this) );
 
     addXmlGuiController( new ZoomController(this) );
     addXmlGuiController( new SelectController(this) );

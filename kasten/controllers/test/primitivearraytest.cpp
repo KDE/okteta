@@ -199,7 +199,7 @@ QScriptValue customToStringFunc(QScriptContext *context, QScriptEngine *engine)
 template<PrimitiveDataTypeEnum primType, typename T>
 void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
 {
-    LoggerWithContext lwc(0, QString());
+    LoggerWithContext lwc(nullptr, QString());
     QScriptEngine* engine = ScriptEngineInitializer::newEngine();
 
     PrimitiveDataInformation* primInfo(PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
@@ -210,7 +210,7 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
             endianModel->size() / sizeof(T),
             primInfo);
-    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, 0, engine));
+    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr, engine));
 
     QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
     quint8 bitOffs = 0;
@@ -249,12 +249,12 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
 template<PrimitiveDataTypeEnum primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
-    LoggerWithContext lwc(0, QString());
+    LoggerWithContext lwc(nullptr, QString());
     ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
             model->size() / sizeof(T),
             PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
-    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, 0,
+    QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr,
             ScriptEngineInitializer::newEngine()));
     QCOMPARE(dataInf->childCount(), uint(SIZE / sizeof(T)));
     quint8 bitOffs = 0;

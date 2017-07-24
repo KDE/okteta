@@ -75,7 +75,7 @@ inline AbstractFileSystemSyncWithRemoteJobPrivate::AbstractFileSystemSyncWithRem
     mSynchronizer( synchronizer ),
     mUrl( url ),
     mOption( option ),
-    mFile( 0 )
+    mFile( nullptr )
 {}
 
 inline AbstractFileSystemSyncWithRemoteJobPrivate::~AbstractFileSystemSyncWithRemoteJobPrivate() {}

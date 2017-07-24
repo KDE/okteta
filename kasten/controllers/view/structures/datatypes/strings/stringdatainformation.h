@@ -46,7 +46,7 @@ public:
         InvalidEncoding = -1, ASCII = 0, Latin1, UTF8, UTF16_LE, UTF16_BE, UTF32_LE, UTF32_BE, EBCDIC
     };
 
-    StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = 0);
+    StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = nullptr);
     virtual ~StringDataInformation();
 
     virtual bool canHaveChildren() const;

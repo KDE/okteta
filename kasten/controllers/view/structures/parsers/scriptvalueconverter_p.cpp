@@ -41,7 +41,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     if (!value.isValid())
     {
         oldInfo.error() << "invalid value passed!";
-        return 0;
+        return nullptr;
     }
     ParserInfo info(oldInfo);
     QString nameOverride = value.property(PROPERTY_NAME()).toString();
@@ -53,27 +53,27 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     {
         //apparently regexp is a function
         info.error() << "Cannot convert a RegExp object to DataInformation!";
-        return 0;
+        return nullptr;
     }
     if (value.isFunction())
     {
         info.error() << "Cannot convert a Function object to DataInformation!";
-        return 0;
+        return nullptr;
     }
     if (value.isArray())
     {
         info.error() << "Cannot convert a Array object to DataInformation!";
-        return 0;
+        return nullptr;
     }
     if (value.isDate())
     {
         info.error() << "Cannot convert a Date object to DataInformation!";
-        return 0;
+        return nullptr;
     }
     if (value.isError())
     {
         info.error() << "Cannot convert a Error object to DataInformation!";
-        return 0;
+        return nullptr;
     }
     //variant and qobject are also object types, however they cannot appear from user code, no need to check
 
@@ -94,16 +94,16 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         else
             info.error() << "Cannot convert object of unknown type to DataInformation!";
 
-        return 0; //no point trying to convert
+        return nullptr; //no point trying to convert
     }
 
     QString type = value.property(PROPERTY_INTERNAL_TYPE()).toString();
     if (type.isEmpty())
     {
         info.error() << "Cannot convert object since type of object could not be determined!";
-        return 0;
+        return nullptr;
     }
-    DataInformation* returnVal = 0;
+    DataInformation* returnVal = nullptr;
 
     if (type == TYPE_ARRAY())
         returnVal = toArray(value, info);
@@ -152,7 +152,7 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         if (!DataInformationFactory::commonInitialization(returnVal, cpd))
         {
             delete returnVal; //error message has already been logged
-            return 0;
+            return nullptr;
         }
     }
     return returnVal;
@@ -250,7 +250,7 @@ TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const Parse
     if (!alternatives.isArray())
     {
         info.error() << "Alternatives must be an array!";
-        return 0;
+        return nullptr;
     }
     int length = alternatives.property(PROPERTY_LENGTH()).toInt32();
     for (int i = 0; i < length; ++i)

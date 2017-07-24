@@ -33,7 +33,7 @@ namespace Kasten
 
 DocumentCreateManager::DocumentCreateManager( DocumentManager* manager )
   : mManager( manager ),
-    mFactory( 0 )
+    mFactory( nullptr )
 {
 }
 

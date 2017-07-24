@@ -56,7 +56,7 @@ class CharCodecIfTest : public QObject
 };
 
 
-inline CharCodecIfTest::CharCodecIfTest() : mCharCodec( 0 ) {}
+inline CharCodecIfTest::CharCodecIfTest() : mCharCodec( nullptr ) {}
 
 }
 

@@ -67,7 +67,7 @@ inline ModelDataGenerateThread::ModelDataGenerateThread( QObject* parent,
     AbstractModelDataGenerator* generator )
   : QThread( parent ),
     mGenerator( generator ),
-    mMimeData( 0 )
+    mMimeData( nullptr )
 {}
 
 inline QMimeData* ModelDataGenerateThread::data() const { return mMimeData; }

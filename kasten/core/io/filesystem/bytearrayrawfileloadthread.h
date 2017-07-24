@@ -65,7 +65,7 @@ class ByteArrayRawFileLoadThread : public QThread
 inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread( QObject* parent, QFile* file )
   : QThread( parent ),
     mFile( file ),
-    mDocument( 0 )
+    mDocument( nullptr )
 {}
 
 inline ByteArrayDocument* ByteArrayRawFileLoadThread::document() const { return mDocument; }

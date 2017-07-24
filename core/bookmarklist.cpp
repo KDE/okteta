@@ -182,7 +182,7 @@ const Bookmark& BookmarkList::bookmark( Address offset ) const
         if( it->offset() == offset )
             return *it;
     }
-    static const Bookmark* const noBookmark = 0;
+    static const Bookmark* const noBookmark = nullptr;
 
     return (const Bookmark&)*noBookmark;
 }
@@ -215,7 +215,7 @@ const Bookmark& BookmarkList::at( unsigned int index ) const
         if( i == index )
             return *it;
     }
-    static const Bookmark* const noBookmark = 0;
+    static const Bookmark* const noBookmark = nullptr;
     return (const Bookmark&)*noBookmark;
 }
 

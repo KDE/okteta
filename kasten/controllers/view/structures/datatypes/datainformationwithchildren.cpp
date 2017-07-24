@@ -34,7 +34,7 @@
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
 {
     if (idx >= (unsigned) mChildren.size())
-        return 0;
+        return nullptr;
     return mChildren[idx];
 }
 

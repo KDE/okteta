@@ -39,7 +39,7 @@ namespace Kasten
 VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
  : QWidget( parent ), mTool( tool )
 {
-    mVersionTableModel = new VersionTableModel( 0, 0, this );
+    mVersionTableModel = new VersionTableModel( nullptr, nullptr, this );
 
     QVBoxLayout *baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -62,7 +62,7 @@ VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
 
 void VersionView::setModel( AbstractModel* model )
 {
-    If::Versionable* versionControl = model ? qobject_cast<If::Versionable*>( model ) : 0;
+    If::Versionable* versionControl = model ? qobject_cast<If::Versionable*>( model ) : nullptr;
 
     mVersionTableModel->setModel( model, versionControl );
 

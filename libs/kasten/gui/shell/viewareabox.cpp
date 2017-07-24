@@ -33,7 +33,7 @@ namespace Kasten
 ViewAreaBox::ViewAreaBox( QWidget* centralWidget, QWidget* parent )
   : QWidget( parent ),
     mCentralWidget( centralWidget ),
-    mBottomWidget( 0 )
+    mBottomWidget( nullptr )
 {
     setFocusProxy( mCentralWidget );
 
@@ -102,19 +102,19 @@ void ViewAreaBox::setBottomWidget( QWidget* bottomWidget )
     else
         setFocusProxy( mCentralWidget );
 
-    mEscapeShortcut->setEnabled( (bottomWidget != 0) );
+    mEscapeShortcut->setEnabled( (bottomWidget != nullptr) );
 }
 
 void ViewAreaBox::onDone()
 {
-    setBottomWidget( 0 );
+    setBottomWidget( nullptr );
 }
 
 ViewAreaBox::~ViewAreaBox()
 {
     delete mBottomWidget;
     if( mCentralWidget )
-        mCentralWidget->setParent( 0 );
+        mCentralWidget->setParent( nullptr );
 }
 
 }

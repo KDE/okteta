@@ -162,16 +162,16 @@ void AbstractByteArrayViewPrivate::init()
     mCharCodec = CharCodec::createCodec( (CharCoding)DefaultCharCoding );
     mCharCoding = DefaultCharCoding;
 
-    mTabController = new KTabController( q, 0 );
+    mTabController = new KTabController( q, nullptr );
     mNavigator = new KNavigator( q, mTabController );
     mValueEditor = new KValueEditor( mTableCursor, q, mNavigator );
     mCharEditor = new KCharEditor( mTableCursor, q, mNavigator );
 
-    mMousePaster = new MousePaster( q, 0 );
+    mMousePaster = new MousePaster( q, nullptr );
     mMouseNavigator = new MouseNavigator( q, mMousePaster );
     mMouseController = mMouseNavigator;
 
-    mZoomWheelController = new ZoomWheelController( q, 0 );
+    mZoomWheelController = new ZoomWheelController( q, nullptr );
     mDropper = new Dropper( q );
 
     setWheelController( mZoomWheelController );
@@ -522,7 +522,7 @@ void AbstractByteArrayViewPrivate::setValueCoding( AbstractByteArrayView::ValueC
 
     ValueCodec* newValueCodec
         = ValueCodec::createCodec( (ValueCoding)valueCoding );
-    if( newValueCodec == 0 )
+    if( ! newValueCodec )
         return;
 
     delete mValueCodec;
@@ -536,7 +536,7 @@ void AbstractByteArrayViewPrivate::setCharCoding( AbstractByteArrayView::CharCod
 
     CharCodec* newCharCodec
         = CharCodec::createCodec( (CharCoding)charCoding );
-    if( newCharCodec == 0 )
+    if( ! newCharCodec )
         return;
 
     delete mCharCodec;
@@ -550,7 +550,7 @@ void AbstractByteArrayViewPrivate::setCharCoding( const QString& charCodingName 
 
     CharCodec *newCharCodec =
         CharCodec::createCodec( charCodingName );
-    if( newCharCodec == 0 )
+    if( ! newCharCodec )
         return;
 
     delete mCharCodec;
@@ -762,7 +762,7 @@ QByteArray AbstractByteArrayViewPrivate::selectedData() const
 QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
 {
     if( !mTableRanges->hasSelection() )
-        return 0;
+        return nullptr;
 
     QMimeData* mimeData = new QMimeData;
     mimeData->setData( octetStreamFormatName(), selectedData() );

@@ -78,8 +78,8 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
 inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent )
   : AbstractModelSynchronizerPrivate( parent ),
     mRemoteState( RemoteUnknown ),
-    mNetworkConfigurationManager( 0 ),
-    mDirWatch( 0 )
+    mNetworkConfigurationManager( nullptr ),
+    mDirWatch( nullptr )
 {
 }
 inline RemoteSyncState AbstractModelFileSystemSynchronizerPrivate::remoteSyncState() const { return mRemoteState; }

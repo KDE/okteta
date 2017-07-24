@@ -41,7 +41,7 @@ class ToolInlineViewWidget : public QWidget
     enum Area { TopArea, BottomArea };
 
   public:
-    explicit ToolInlineViewWidget( AbstractToolInlineView* view, QWidget* parent = 0 );
+    explicit ToolInlineViewWidget( AbstractToolInlineView* view, QWidget* parent = nullptr );
     virtual ~ToolInlineViewWidget();
 
   public:

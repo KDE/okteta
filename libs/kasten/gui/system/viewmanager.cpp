@@ -54,7 +54,7 @@ QList<AbstractView*> ViewManager::views() const
 
 AbstractView* ViewManager::viewByWidget( QWidget* widget ) const
 {
-    AbstractView* result = 0;
+    AbstractView* result = nullptr;
 
     QListIterator<AbstractView*> it( mViewList );
     while( it.hasNext() )

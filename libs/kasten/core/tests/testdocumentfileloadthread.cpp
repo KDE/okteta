@@ -47,7 +47,7 @@ void TestDocumentFileLoadThread::run()
     QByteArray header( headerSize, ' ' );
     const int headerResult = inStream.readRawData( header.data(), headerSize );
     if( headerResult == -1 || header != mHeader )
-        mDocument = 0;
+        mDocument = nullptr;
     else
     {
         QByteArray byteArray( fileSize, ' ' );
@@ -66,7 +66,7 @@ void TestDocumentFileLoadThread::run()
         }
         else
         {
-            mDocument = 0;
+            mDocument = nullptr;
         }
     }
 

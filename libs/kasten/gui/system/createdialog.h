@@ -38,7 +38,7 @@ class CreateDialog : public QDialog
   Q_OBJECT
 
   public:
-    explicit CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent = 0 );
+    explicit CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent = nullptr );
 
     virtual ~CreateDialog();
 

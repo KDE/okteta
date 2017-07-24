@@ -52,7 +52,7 @@ class StatisticTableModel : public QAbstractTableModel
     };
 
   public:
-    explicit StatisticTableModel( int *byteCount, QObject *parent = 0 );
+    explicit StatisticTableModel( int *byteCount, QObject *parent = nullptr );
     virtual ~StatisticTableModel();
 
   public: // QAbstractTableModel API

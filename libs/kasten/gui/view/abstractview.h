@@ -40,7 +40,7 @@ class KASTENGUI_EXPORT AbstractView : public AbstractModel
     Q_OBJECT
 
   public:
-    explicit AbstractView( AbstractModel* baseModel = 0 );
+    explicit AbstractView( AbstractModel* baseModel = nullptr );
     virtual ~AbstractView();
 
   public: // API to be implemented

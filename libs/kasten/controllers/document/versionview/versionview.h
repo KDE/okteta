@@ -43,7 +43,7 @@ class VersionView : public QWidget
   Q_OBJECT
 
   public:
-    explicit VersionView( VersionViewTool* tool, QWidget* parent = 0 );
+    explicit VersionView( VersionViewTool* tool, QWidget* parent = nullptr );
     virtual ~VersionView();
 
   public:

@@ -35,8 +35,8 @@ static inline void copyInvertedBytes( Byte* data, const Byte* sourceData, const 
 
 
 PODData::PODData()
- : mCurrentOriginalData( 0 ),
-   mCurrentEndiannessSetData( 0 ),
+ : mCurrentOriginalData( nullptr ),
+   mCurrentEndiannessSetData( nullptr ),
    mCurrentSize( 0 ),
    mByteOrder( QSysInfo::ByteOrder )
 {
@@ -132,8 +132,8 @@ bool PODData::updateRawData( int size )
     }
     else
     {
-        mCurrentOriginalData = 0;
-        mCurrentEndiannessSetData = 0;
+        mCurrentOriginalData = nullptr;
+        mCurrentEndiannessSetData = nullptr;
         mCurrentSize = 0;
     }
 
@@ -148,10 +148,10 @@ void PODData::getPointers( const void** P8Bit, const void** P16Bit, const void**
     const int* offsets = ( mByteOrder == QSysInfo::ByteOrder ) ? MachineOffsets : ReversedOffsets;
     const Byte* data = mByteOrderSetAligned64Bit.mBytes;
 
-    *P8Bit =  (mCurrentSize>=1) ? data + offsets[0] : 0;
-    *P16Bit = (mCurrentSize>=2) ? data + offsets[1] : 0;
-    *P32Bit = (mCurrentSize>=4) ? data + offsets[2] : 0;
-    *P64Bit = (mCurrentSize>=8) ? data + offsets[3] : 0;
+    *P8Bit =  (mCurrentSize>=1) ? data + offsets[0] : nullptr;
+    *P16Bit = (mCurrentSize>=2) ? data + offsets[1] : nullptr;
+    *P32Bit = (mCurrentSize>=4) ? data + offsets[2] : nullptr;
+    *P64Bit = (mCurrentSize>=8) ? data + offsets[3] : nullptr;
 }
 
 const void* PODData::pointer( int byteCount ) const
@@ -162,7 +162,7 @@ const void* PODData::pointer( int byteCount ) const
     const int offset = ( mByteOrder == QSysInfo::ByteOrder ) ? 0 : 8-byteCount;
     const Byte* data = mByteOrderSetAligned64Bit.mBytes;
 
-    return (byteCount>0) ? data + offset : 0;
+    return (byteCount>0) ? data + offset : nullptr;
 }
 
 }

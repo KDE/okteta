@@ -58,8 +58,8 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
   friend class PieceTableByteArrayModelPrivate;
 
   public:
-    explicit PieceTableByteArrayModel( const QByteArray& data, QObject* parent = 0 );
-    explicit PieceTableByteArrayModel( int size = 0, Byte fillByte = '\0', QObject* parent = 0 );
+    explicit PieceTableByteArrayModel( const QByteArray& data, QObject* parent = nullptr );
+    explicit PieceTableByteArrayModel( int size = 0, Byte fillByte = '\0', QObject* parent = nullptr );
 
     virtual ~PieceTableByteArrayModel();
 

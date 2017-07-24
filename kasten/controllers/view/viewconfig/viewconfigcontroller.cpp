@@ -40,7 +40,7 @@ namespace Kasten
 {
 
 ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
- : mByteArrayView( 0 )
+ : mByteArrayView( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -118,16 +118,16 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     mToggleColumnsAction->setItems( list );
     connect( mToggleColumnsAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::toggleValueCharColumns );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void ViewConfigController::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
-    const bool hasView = ( mByteArrayView != 0 );
+    const bool hasView = ( mByteArrayView != nullptr );
     if( hasView )
     {
         onOffsetColumnVisibleChanged( mByteArrayView->offsetColumnVisible() );

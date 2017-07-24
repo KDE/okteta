@@ -43,18 +43,18 @@ static const char Description[] = "description";
 
 void GroupPieceTableChangeTest::testConstructor()
 {
-    GroupPieceTableChange groupPieceTableChange( 0, QLatin1String(Description) );
+    GroupPieceTableChange groupPieceTableChange( nullptr, QLatin1String(Description) );
 
 //     QCOMPARE( groupPieceTableChange.count(), 0 );
     QCOMPARE( groupPieceTableChange.appliedChangesCount(), 0 );
-    QCOMPARE( groupPieceTableChange.parent(), (GroupPieceTableChange*)0 );
+    QCOMPARE( groupPieceTableChange.parent(), (GroupPieceTableChange*)nullptr );
     QCOMPARE( groupPieceTableChange.dataSize(), 0 );
     QCOMPARE( groupPieceTableChange.description(), QLatin1String(Description) );
 }
 
 void GroupPieceTableChangeTest::testAppendChange()
 {
-    GroupPieceTableChange groupPieceTableChange( 0, QLatin1String(Description) );
+    GroupPieceTableChange groupPieceTableChange( nullptr, QLatin1String(Description) );
 
     const int type1Id = 1;
     const int type2Id = 2;

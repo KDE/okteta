@@ -30,7 +30,7 @@ class UnionDataInformation : public DataInformationWithChildren
     DATAINFORMATION_CLONE(UnionDataInformation, DataInformationWithChildren) {}
 public:
     explicit UnionDataInformation(const QString& name, const QVector<DataInformation*>& children
-            = QVector<DataInformation*>(), DataInformation* parent = 0);
+            = QVector<DataInformation*>(), DataInformation* parent = nullptr);
     virtual ~UnionDataInformation();
 
     virtual bool isUnion() const;

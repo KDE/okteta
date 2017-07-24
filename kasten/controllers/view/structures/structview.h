@@ -46,7 +46,7 @@ class StructView: public QWidget
 Q_OBJECT
 
 public:
-    explicit StructView(StructTool* tool, QWidget* parent = 0);
+    explicit StructView(StructTool* tool, QWidget* parent = nullptr);
     virtual ~StructView();
 
 public:

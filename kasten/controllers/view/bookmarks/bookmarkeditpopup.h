@@ -38,7 +38,7 @@ class BookmarkEditPopup : public AbstractLinePopup
   Q_OBJECT
 
   public:
-    explicit BookmarkEditPopup( QWidget* parent = 0 );
+    explicit BookmarkEditPopup( QWidget* parent = nullptr );
     virtual ~BookmarkEditPopup();
 
   public:

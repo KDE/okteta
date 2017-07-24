@@ -40,10 +40,10 @@ QWidget* StructViewItemDelegate::createEditor(QWidget* parent, const QStyleOptio
 {
     Q_UNUSED(option)
     if (!index.isValid())
-        return 0;
+        return nullptr;
     DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
     if (!dataB || dataB->isTopLevel())
-        return 0;
+        return nullptr;
     DataInformation* data = dataB->asDataInformation();
     QWidget* ret = data->createEditWidget(parent);
     ret->setFocusPolicy(Qt::WheelFocus);

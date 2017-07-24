@@ -53,7 +53,7 @@ TaggedUnionDataInformation::TaggedUnionDataInformation(const QString& name, Data
 TaggedUnionDataInformation::TaggedUnionDataInformation(const TaggedUnionDataInformation& d)
     : DataInformationWithChildren(d), mDefaultFields(cloneList(d.mDefaultFields, this)), mLastIndex(-1)
 {
-    Q_ASSERT(mDefaultFields.isEmpty() || mDefaultFields.at(0) != 0);
+    Q_ASSERT(mDefaultFields.isEmpty() || mDefaultFields.at(0) != nullptr);
     Q_FOREACH(const FieldInfo& fi, d.mAlternatives)
     {
         mAlternatives.append(FieldInfo(fi.name, fi.selectIf, cloneList(fi.fields, this)));
@@ -269,7 +269,7 @@ DataInformation* TaggedUnionDataInformation::childAt(unsigned int index) const
     if (index < permanentChildCount + others.size())
         return others.at(index - permanentChildCount);
     Q_ASSERT(false); //should never happen
-    return 0;
+    return nullptr;
 }
 
 unsigned int TaggedUnionDataInformation::childCount() const

@@ -35,7 +35,7 @@ namespace Kasten
 {
 
 ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
- : mByteArrayView( 0 )
+ : mByteArrayView( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -48,16 +48,16 @@ ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
     mViewModeAction->setItems( list );
     connect( mViewModeAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewModeController::setViewMode );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void ViewModeController::setTargetModel( AbstractModel* model )
 {
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
-    const bool hasView = ( mByteArrayView != 0 );
+    const bool hasView = ( mByteArrayView != nullptr );
     if( hasView )
     {
         mViewModeAction->setCurrentItem( (int)mByteArrayView->viewModus() );

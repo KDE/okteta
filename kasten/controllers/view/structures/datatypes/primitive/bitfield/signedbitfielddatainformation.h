@@ -30,7 +30,7 @@ class SignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
     DATAINFORMATION_CLONE(SignedBitfieldDataInformation, AbstractBitfieldDataInformation) {}
 public:
-    SignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = 0)
+    SignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
             : AbstractBitfieldDataInformation(name, width, parent) {}
     virtual ~SignedBitfieldDataInformation() {}
     virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;

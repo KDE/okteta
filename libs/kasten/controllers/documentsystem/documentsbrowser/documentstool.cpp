@@ -33,7 +33,7 @@ namespace Kasten
 {
 
 DocumentsTool::DocumentsTool( DocumentManager* documentManager )
- : mDocumentManager( documentManager ), mFocussedDocument( 0 )
+ : mDocumentManager( documentManager ), mFocussedDocument( nullptr )
 {
     setObjectName( QStringLiteral( "Documents" ) );
 
@@ -50,7 +50,7 @@ QString DocumentsTool::title() const { return i18nc("@title:window", "Documents"
 // TODO: this is an abuse of setTargetModel. Find other way to get focused model
 void DocumentsTool::setTargetModel( AbstractModel* model )
 {
-    mFocussedDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    mFocussedDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
     emit focussedDocumentChanged( mFocussedDocument );
 }
 

@@ -73,8 +73,8 @@ class AbstractLinePopupPrivate
 
 inline AbstractLinePopupPrivate::AbstractLinePopupPrivate( AbstractLinePopup* parent )
   : p( parent ),
-    mWidget( 0 ),
-    mEventLoop( 0 ),
+    mWidget( nullptr ),
+    mEventLoop( nullptr ),
     mResult( 0 )
 {
 }

@@ -37,7 +37,7 @@ class ByteArrayColumnViewDesignerFactory : public QObject,
   )
 
   public:
-    explicit ByteArrayColumnViewDesignerFactory( QObject* parent = 0 );
+    explicit ByteArrayColumnViewDesignerFactory( QObject* parent = nullptr );
 
   public: // QDesignerCustomWidgetInterface API
     virtual QWidget* createWidget( QWidget* parent );

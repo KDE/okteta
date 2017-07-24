@@ -55,12 +55,12 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
     QScriptValue value = loadScriptValue(logger, engine);
     DataInformation* dataInf;
     if (!value.isValid())
-        dataInf = new DummyDataInformation(0, mPluginName);
+        dataInf = new DummyDataInformation(nullptr, mPluginName);
     else
         dataInf = ScriptValueConverter::convert(value, mPluginName, logger);
 
     if (!dataInf)
-        dataInf = new DummyDataInformation(0, mPluginName);
+        dataInf = new DummyDataInformation(nullptr, mPluginName);
     const QFileInfo fileInfo(mAbsolutePath);
     TopLevelDataInformation* top = new TopLevelDataInformation(dataInf, logger, engine, fileInfo);
     //handle default lock offset

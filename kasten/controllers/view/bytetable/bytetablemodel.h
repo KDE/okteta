@@ -51,7 +51,7 @@ class ByteTableModel : public QAbstractTableModel
     };
 
   public:
-    explicit ByteTableModel( QObject *parent = 0 );
+    explicit ByteTableModel( QObject *parent = nullptr );
     virtual ~ByteTableModel();
 
   public: // QAbstractTableModel API

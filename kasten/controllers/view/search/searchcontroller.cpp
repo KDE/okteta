@@ -41,7 +41,7 @@ namespace Kasten
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 SearchController::SearchController( KXMLGUIClient* guiClient, QWidget* parentWidget )
   : mParentWidget( parentWidget ),
-    mSearchDialog( 0 )
+    mSearchDialog( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 

@@ -59,7 +59,7 @@ class AbstractDocumentPrivate : public AbstractModelPrivate
 
 inline AbstractDocumentPrivate::AbstractDocumentPrivate( AbstractDocument* parent )
   : AbstractModelPrivate( parent ),
-    mSynchronizer( 0 )
+    mSynchronizer( nullptr )
 {}
 
 inline const QString& AbstractDocumentPrivate::id() const { return mId; }

@@ -42,7 +42,7 @@ void PieceTableChangeHistory::clear()
     mBaseBeforeChangeIndex = 0;
     mAppliedChangesDataSize = 0;
 
-    mActiveGroupChange = 0;
+    mActiveGroupChange = nullptr;
 }
 
 void PieceTableChangeHistory::getChangeData( ArrayChangeMetrics* metrics, Address* storageOffset,
@@ -70,7 +70,7 @@ void PieceTableChangeHistory::openGroupedChange( const QString& description )
 
 void PieceTableChangeHistory::closeGroupedChange(const QString & description )
 {
-    if( mActiveGroupChange != 0 )
+    if( mActiveGroupChange )
     {
         if( !description.isEmpty() )
             mActiveGroupChange->setDescription( description );
@@ -80,7 +80,7 @@ void PieceTableChangeHistory::closeGroupedChange(const QString & description )
 
 void PieceTableChangeHistory::finishChange()
 {
-    if( mActiveGroupChange != 0 )
+    if( mActiveGroupChange )
         mActiveGroupChange->finishChange();
     else
         mTryToMergeAppendedChange = false;
@@ -105,7 +105,7 @@ bool PieceTableChangeHistory::appendChange( AbstractPieceTableChange* change )
     mAppliedChangesDataSize += change->dataSize();
 
     bool isNotMerged = true;
-    if( mActiveGroupChange != 0 )
+    if( mActiveGroupChange )
     {
         mActiveGroupChange->appendChange( change );
         isNotMerged = false; // TODO: hack for as long as subgroups are not undoable
@@ -140,7 +140,7 @@ bool PieceTableChangeHistory::revertBeforeChange( PieceTable* pieceTable, int ch
         return false;
 
     // close any grouped changes
-    while( mActiveGroupChange != 0 )
+    while( mActiveGroupChange )
         mActiveGroupChange = mActiveGroupChange->parent();
 
     if( currentChangeId < changeId )

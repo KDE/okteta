@@ -189,7 +189,7 @@ TextCharCodec* TextCharCodec::createCodec( const QString& codecName )
     QTextCodec* codec = KCharsets::charsets()->codecForName( codecName, isOk );
     if( isOk )
         isOk = is8Bit( codec );
-    return isOk ? new TextCharCodec( codec ) : 0;
+    return isOk ? new TextCharCodec( codec ) : nullptr;
 }
 
 

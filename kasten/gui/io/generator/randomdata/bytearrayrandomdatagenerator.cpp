@@ -57,7 +57,7 @@ ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
 // TODO: use different RNG, with multiple characteristics and offer them in the config
 QMimeData* ByteArrayRandomDataGenerator::generateData()
 {
-    qsrand( (unsigned int)time(0) );
+    qsrand( (unsigned int)time(nullptr) );
 
     const int insertDataSize = mSettings.size;
     QByteArray insertData( insertDataSize, '\0' );

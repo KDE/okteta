@@ -39,7 +39,7 @@ namespace Kasten
 TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )
   : AbstractTool(),
     mDocumentSyncManager( documentSyncManager ),
-    mDocument( 0 )
+    mDocument( nullptr )
 {
     setObjectName( QStringLiteral( "Terminal" ) );
 }
@@ -62,7 +62,7 @@ void TerminalTool::setTargetModel( AbstractModel* model )
 {
     const QUrl oldCurrentUrl = currentUrl();
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
     const QUrl newCurrentUrl = currentUrl();
 

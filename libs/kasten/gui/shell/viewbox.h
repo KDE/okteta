@@ -41,7 +41,7 @@ class ViewBox : public QWidget
     enum Area { TopArea, BottomArea };
 
   public:
-    explicit ViewBox( AbstractView* view, QWidget* parent = 0 );
+    explicit ViewBox( AbstractView* view, QWidget* parent = nullptr );
     virtual ~ViewBox();
 
   public:

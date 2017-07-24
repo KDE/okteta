@@ -46,7 +46,7 @@ namespace Kasten
 PODTableView::PODTableView( PODDecoderTool* tool, QWidget* parent )
   : QWidget( parent ),
     mTool( tool ),
-    mPODTableViewFocusChild( 0 )
+    mPODTableViewFocusChild( nullptr )
 {
     QBoxLayout* baseLayout = new QVBoxLayout( this );
     baseLayout->setMargin( 0 );
@@ -196,7 +196,7 @@ bool PODTableView::eventFilter( QObject* object, QEvent* event )
             if( ! mPODTableView->hasFocus() && mTool->isApplyable() )
                 mTool->unmarkPOD();
             mPODTableViewFocusChild->removeEventFilter( this );
-            mPODTableViewFocusChild = 0;
+            mPODTableViewFocusChild = nullptr;
         }
     }
 

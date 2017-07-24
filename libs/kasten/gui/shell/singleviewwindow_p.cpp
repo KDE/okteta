@@ -40,9 +40,9 @@ namespace Kasten
 SingleViewWindowPrivate::SingleViewWindowPrivate( SingleViewWindow* parent,
                                                   AbstractView* view )
   : q_ptr( parent )
-  , mView( 0 )
-  , mDocument( 0 )
-  , mSynchronizer( 0 )
+  , mView( nullptr )
+  , mDocument( nullptr )
+  , mSynchronizer( nullptr )
   , mViewArea( new SingleViewArea() )
 {
     parent->setCentralWidget( mViewArea->widget() );
@@ -73,11 +73,11 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
     }
 
     AbstractDocument* oldDocument = mDocument;
-    mDocument = view ? view->findBaseModel<AbstractDocument*>() : 0;
+    mDocument = view ? view->findBaseModel<AbstractDocument*>() : nullptr;
     const bool isNewDocument = (mDocument != oldDocument);
 
     AbstractModelSynchronizer* oldSynchronizer = mSynchronizer;
-    mSynchronizer = mDocument ? mDocument->synchronizer() : 0;
+    mSynchronizer = mDocument ? mDocument->synchronizer() : nullptr;
     const bool isNewSynchronizer = (mSynchronizer != oldSynchronizer);
 
     if( oldSynchronizer )
@@ -186,7 +186,7 @@ void SingleViewWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
     if( synchronizer != mSynchronizer )
         return;
 
-    mSynchronizer = 0;
+    mSynchronizer = nullptr;
 
     // switch to document state
     QObject::connect( mDocument, &AbstractDocument::contentFlagsChanged,
@@ -203,7 +203,7 @@ void SingleViewWindowPrivate::onToolVisibilityChanged( bool isVisible )
     ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget *>( q->sender() );
     if( dockWidget )
     {
-        AbstractView* view = isVisible ? mView : 0;
+        AbstractView* view = isVisible ? mView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel( view );
     }
 }
@@ -216,7 +216,7 @@ SingleViewWindowPrivate::~SingleViewWindowPrivate()
     // The other option would be to first delete the view, but for reasons if do not
     // remember currently I prefer the destruction in this order
     // TODO: make this call unneeded
-    mViewArea->setCurrentToolInlineView( 0 );
+    mViewArea->setCurrentToolInlineView( nullptr );
 
     qDeleteAll( mControllers );
     qDeleteAll( mDockWidgets );

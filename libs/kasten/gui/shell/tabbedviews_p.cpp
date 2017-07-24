@@ -38,7 +38,7 @@ namespace Kasten
 
 TabbedViewsPrivate::TabbedViewsPrivate( TabbedViews* parent )
   : AbstractGroupedViewsPrivate( parent ),
-    mCurrentView( 0 )
+    mCurrentView( nullptr )
 {
 }
 
@@ -163,12 +163,12 @@ void TabbedViewsPrivate::setCurrentToolInlineView( AbstractToolInlineView* view 
     ToolInlineViewWidget* currentViewWidget =
         qobject_cast<ToolInlineViewWidget*>( mViewAreaBox->bottomWidget() );
     AbstractToolInlineView* currentToolInlineView =
-        currentViewWidget ? currentViewWidget->view() : 0;
+        currentViewWidget ? currentViewWidget->view() : nullptr;
 
     if( currentToolInlineView != view )
     {
         ToolInlineViewWidget* toolInlineViewWidget =
-            view ? new ToolInlineViewWidget( view/*->widget()*/ ) : 0;
+            view ? new ToolInlineViewWidget( view/*->widget()*/ ) : nullptr;
         mViewAreaBox->setBottomWidget( toolInlineViewWidget );
     }
 
@@ -185,12 +185,12 @@ void TabbedViewsPrivate::onCurrentChanged( int index )
     Q_Q( TabbedViews );
 
     const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(index) );
-    AbstractView* view = viewBox ? viewBox->view() : 0;
+    AbstractView* view = viewBox ? viewBox->view() : nullptr;
 
     if( view == mCurrentView )
         return;
 
-    mViewAreaBox->setBottomWidget( 0 );
+    mViewAreaBox->setBottomWidget( nullptr );
 
     if( mCurrentView )
         mCurrentView->disconnect( q );

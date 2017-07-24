@@ -45,7 +45,7 @@ class TerminalView : public QWidget
   Q_OBJECT
 
   public:
-    explicit TerminalView( TerminalTool* tool, QWidget* parent = 0 );
+    explicit TerminalView( TerminalTool* tool, QWidget* parent = nullptr );
     virtual ~TerminalView();
 
   public:

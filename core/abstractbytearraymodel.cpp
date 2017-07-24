@@ -52,7 +52,7 @@ Size AbstractByteArrayModel::insert( Address offset, const Byte* insertData, int
 
 Size AbstractByteArrayModel::remove( const AddressRange& removeRange )
 {
-    replace( removeRange, 0, 0 );
+    replace( removeRange, nullptr, 0 );
     return removeRange.width(); // TODO: check if this is true
 }
 

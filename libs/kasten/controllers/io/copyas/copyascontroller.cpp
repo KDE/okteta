@@ -57,7 +57,7 @@ CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager
   : AbstractXmlGuiController(),
     mModelCodecViewManager( modelCodecViewManager ),
     mModelCodecManager( modelCodecManager ),
-    mModel( 0 )
+    mModel( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -68,15 +68,15 @@ CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager
     connect( mCopyAsSelectAction, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered),
              this, &CopyAsController::onActionTriggered );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void CopyAsController::setTargetModel( AbstractModel* model )
 {
     if( mModel ) mModel->disconnect( this );
 
-    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : 0;
-    mSelectionControl = mModel ? qobject_cast<If::DataSelectable*>( mModel ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
+    mSelectionControl = mModel ? qobject_cast<If::DataSelectable*>( mModel ) : nullptr;
 
     if( mSelectionControl )
     {
@@ -92,7 +92,7 @@ void CopyAsController::updateActions()
 {
     mCopyAsSelectAction->removeAllActions();
 
-    const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
+    const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     const QList<AbstractModelStreamEncoder*> encoderList =
         mModelCodecManager->encoderList( mModel, selection );

@@ -49,7 +49,7 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
    Q_OBJECT
 
   public:
-    explicit ColumnsView( /*bool R = false,*/ QWidget* parent = 0 );
+    explicit ColumnsView( /*bool R = false,*/ QWidget* parent = nullptr );
     virtual ~ColumnsView();
 
   public: // data-wise sizes

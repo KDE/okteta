@@ -39,7 +39,7 @@ class ByteArrayRandomDataGeneratorConfigEditor : public AbstractModelDataGenerat
   Q_OBJECT
 
   public:
-    explicit ByteArrayRandomDataGeneratorConfigEditor( ByteArrayRandomDataGenerator* generator, QWidget* parent = 0 );
+    explicit ByteArrayRandomDataGeneratorConfigEditor( ByteArrayRandomDataGenerator* generator, QWidget* parent = nullptr );
 
     virtual ~ByteArrayRandomDataGeneratorConfigEditor();
 

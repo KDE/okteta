@@ -93,7 +93,7 @@ void TestDocumentFileSynchronizerTest::checkFileContent( const QUrl& fileUrl, co
 
     Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
 
-    QVERIFY( testDocument != 0 );
+    QVERIFY( testDocument != nullptr );
     QCOMPARE( *testDocument->data(), data );
 
     delete document;
@@ -112,9 +112,9 @@ void TestDocumentFileSynchronizerTest::testLoadFromFile()
 
     Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
 
-    QVERIFY( document != 0 );
-    QVERIFY( testDocument != 0 );
-    QVERIFY( document->synchronizer() != 0 );
+    QVERIFY( document != nullptr );
+    QVERIFY( testDocument != nullptr );
+    QVERIFY( document->synchronizer() != nullptr );
     QCOMPARE( document->synchronizer()->document(), document );
     QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
     QCOMPARE( *testDocument->data(), testData );
@@ -132,7 +132,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromNotExistingUrl()
     loadJob->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
-    QVERIFY( document == 0 );
+    QVERIFY( document == nullptr );
     delete synchronizer;
 }
 
@@ -143,7 +143,7 @@ void TestDocumentFileSynchronizerTest::testLoadFromNotExistingFile()
     synchronizer->startLoad( fileUrl )->exec();
     Kasten::AbstractDocument* document = synchronizer->document();
 
-    QVERIFY( document == 0 );
+    QVERIFY( document == nullptr );
     delete synchronizer;
 }
 
@@ -156,7 +156,7 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
     Kasten::AbstractDocument* document = synchronizer->document();
 
     Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
-    QVERIFY( testDocument != 0 );
+    QVERIFY( testDocument != nullptr );
     // change and save
     testDocument->setData( otherData );
     document->synchronizer()->startSyncToRemote()->exec();
@@ -178,7 +178,7 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
     Kasten::AbstractDocument* document = synchronizer->document();
 
     Kasten::TestDocument* testDocument = qobject_cast<Kasten::TestDocument* >( document );
-    QVERIFY( testDocument != 0 );
+    QVERIFY( testDocument != nullptr );
 
     // change on disc and reload
     writeToFile( filePath, otherData );

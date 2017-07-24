@@ -42,7 +42,7 @@ namespace Kasten
 
 InfoTool::InfoTool()
  : mStatisticTableModel( new StatisticTableModel(mByteCount,this) ),
-   mByteArrayView( 0 ), mByteArrayModel( 0 ), mSourceByteArrayModelUptodate( false ), mSourceByteArrayModel( 0 )
+   mByteArrayView( nullptr ), mByteArrayModel( nullptr ), mSourceByteArrayModelUptodate( false ), mSourceByteArrayModel( nullptr )
 {
     setObjectName( QStringLiteral( "Info" ) );
     updateStatistic();
@@ -50,7 +50,7 @@ InfoTool::InfoTool()
 
 QString InfoTool::title() const { return i18nc("@title:window", "Statistics"); }
 StatisticTableModel *InfoTool::statisticTableModel() const { return mStatisticTableModel; }
-int InfoTool::size() const { return (mByteArrayModel!=0) ? mByteArrayModel->size() : -1; }
+int InfoTool::size() const { return (mByteArrayModel!=nullptr) ? mByteArrayModel->size() : -1; }
 bool InfoTool::isApplyable() const
 {
     return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && !isStatisticUptodate() );
@@ -71,11 +71,11 @@ void InfoTool::setTargetModel( AbstractModel* model )
         mByteArrayView->disconnect( this );
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArrayModel = document ? document->content() : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArrayModel = document ? document->content() : nullptr;
 
     if( mByteArrayView && mByteArrayModel )
     {
@@ -113,7 +113,7 @@ void InfoTool::onSourceChanged()
 
 void InfoTool::onSourceDestroyed()
 {
-    mSourceByteArrayModel = 0;
+    mSourceByteArrayModel = nullptr;
     onSourceChanged();
 }
 

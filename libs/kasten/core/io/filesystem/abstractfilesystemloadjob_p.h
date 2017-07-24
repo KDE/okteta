@@ -71,7 +71,7 @@ inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate( Abstr
   : AbstractLoadJobPrivate( parent ),
     mSynchronizer( synchronizer ),
     mUrl( url ),
-    mFile( 0 )
+    mFile( nullptr )
 {}
 
 inline AbstractFileSystemLoadJobPrivate::~AbstractFileSystemLoadJobPrivate() {}

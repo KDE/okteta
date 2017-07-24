@@ -59,7 +59,7 @@ namespace Kasten
 
 StructView::StructView(StructTool* tool, QWidget* parent) :
     QWidget(parent), mTool(tool), mDelegate(new StructViewItemDelegate(this)),
-            mStructTreeViewFocusChild(0)
+            mStructTreeViewFocusChild(nullptr)
 {
     QBoxLayout* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
@@ -208,7 +208,7 @@ bool StructView::eventFilter(QObject* object, QEvent* event)
             if (!mStructTreeView->hasFocus())
                 mTool->unmark();
             mStructTreeViewFocusChild->removeEventFilter(this);
-            mStructTreeViewFocusChild = 0;
+            mStructTreeViewFocusChild = nullptr;
         }
     }
 
@@ -297,7 +297,7 @@ void StructView::openScriptConsole()
 
 void StructView::onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model)
 {
-    const bool validModel = model != 0;
+    const bool validModel = ( model != nullptr );
     QModelIndex current = mStructTreeView->currentIndex();
     mLockStructureButton->setEnabled(mTool->canStructureBeLocked(current));
     setLockButtonState(mTool->isStructureLocked(current));

@@ -42,7 +42,7 @@ namespace Kasten
 static const int MaxMenuEntries = 10;
 
 VersionController::VersionController( KXMLGUIClient* guiClient )
- : mModel( 0 )
+ : mModel( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -68,7 +68,7 @@ VersionController::VersionController( KXMLGUIClient* guiClient )
     connect( mSetToNewerVersionAction->menu(), &QMenu::triggered,
              this, &VersionController::onNewerVersionMenuTriggered );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void VersionController::setTargetModel( AbstractModel* model )
@@ -81,8 +81,8 @@ void VersionController::setTargetModel( AbstractModel* model )
     }
 
     mModel = model;
-    AbstractModel* versionedModel = mModel ? mModel->findBaseModelWithInterface<If::Versionable*>() : 0;
-    mVersionControl = versionedModel ? qobject_cast<If::Versionable*>( versionedModel ) : 0;
+    AbstractModel* versionedModel = mModel ? mModel->findBaseModelWithInterface<If::Versionable*>() : nullptr;
+    mVersionControl = versionedModel ? qobject_cast<If::Versionable*>( versionedModel ) : nullptr;
 
     if( mVersionControl )
     {
@@ -92,9 +92,9 @@ void VersionController::setTargetModel( AbstractModel* model )
                  this, &VersionController::onReadOnlyChanged );
     }
     else
-        mModel = 0;
+        mModel = nullptr;
 
-    const bool isVersionable = ( mVersionControl != 0 && !mModel->isReadOnly() );
+    const bool isVersionable = ( mVersionControl && !mModel->isReadOnly() );
 
     if( isVersionable )
         onVersionIndexChanged( mVersionControl->versionIndex() );

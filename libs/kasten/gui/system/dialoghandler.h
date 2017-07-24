@@ -39,7 +39,7 @@ class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog,
                                        public AbstractSaveDiscardDialog
 {
   public:
-    explicit DialogHandler( QWidget* widget = 0 );
+    explicit DialogHandler( QWidget* widget = nullptr );
 
     virtual ~DialogHandler();
 

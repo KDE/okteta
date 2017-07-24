@@ -51,7 +51,7 @@ Q_OBJECT
 
     QStringList mValues;
 public:
-    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten::StructTool* tool, QWidget* parent = 0);
+    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten::StructTool* tool, QWidget* parent = nullptr);
     ~StructureAddRemoveWidget();
     QStringList values() const;
 public Q_SLOTS:

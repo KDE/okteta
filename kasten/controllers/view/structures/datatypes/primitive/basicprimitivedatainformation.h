@@ -33,7 +33,7 @@ template<typename T, class C>
 class BasicPrimitiveDataInformation : public PrimitiveDataInformation
 {
 public:
-    BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = 0);
+    BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
     virtual ~BasicPrimitiveDataInformation();
     virtual PrimitiveDataType type() const;
     virtual AllPrimitiveTypes value() const;

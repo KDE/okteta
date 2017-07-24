@@ -167,7 +167,7 @@ inline void MultiViewAreasPrivate::removeViews( const QList<AbstractView*>& view
 inline void MultiViewAreasPrivate::setCurrentToolInlineView( AbstractToolInlineView* view )
 {
     if( mCurrentInlineToolViewArea && mCurrentInlineToolViewArea != mCurrentViewArea )
-        mCurrentInlineToolViewArea->setCurrentToolInlineView( 0 );
+        mCurrentInlineToolViewArea->setCurrentToolInlineView( nullptr );
 
     mCurrentInlineToolViewArea = mCurrentViewArea;
 

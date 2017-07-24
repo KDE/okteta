@@ -63,10 +63,10 @@ CharCodec* CharCodec::createCodec( const QString& name )
     else if( JISX0201CharCodec::codecName() == name )
         result = JISX0201CharCodec::create();
     else
-        result = 0;
+        result = nullptr;
 
     // ensure at least a codec
-    if( result == 0 )
+    if( ! result )
         result = TextCharCodec::createLocalCodec();
 
     return result;
@@ -83,10 +83,10 @@ CharCodec* CharCodec::createCodec( CharCoding charCoding )
         result = TextCharCodec::createCodec( QStringLiteral("ISO-8859-1") );
     // LocalEncoding
     else
-        result = 0;
+        result = nullptr;
 
     // ensure at least a codec
-    if( result == 0 )
+    if( ! result )
         result = TextCharCodec::createLocalCodec();
 
     return result;

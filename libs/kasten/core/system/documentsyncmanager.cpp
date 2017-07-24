@@ -50,9 +50,9 @@ namespace Kasten
 
 DocumentSyncManager::DocumentSyncManager( DocumentManager* manager )
   : mManager( manager ),
-    mSynchronizerFactory( 0 ),
-    mSaveDiscardDialog( 0 ),
-    mOverwriteDialog( 0 )
+    mSynchronizerFactory( nullptr ),
+    mSaveDiscardDialog( nullptr ),
+    mOverwriteDialog( nullptr )
 {}
 
 void DocumentSyncManager::setSaveDiscardDialog( AbstractSaveDiscardDialog* saveDiscardDialog )
@@ -125,21 +125,21 @@ bool DocumentSyncManager::setSynchronizer( AbstractDocument* document )
         i18nc( "@title:window", "Save As" );
     do
     {
-        QFileDialog dialog( /*mWidget*/0, processTitle, /*mWorkingUrl.url()*/QString() );
+        QFileDialog dialog( /*mWidget*/nullptr, processTitle, /*mWorkingUrl.url()*/QString() );
         dialog.setMimeTypeFilters( supportedRemoteTypes() );
         dialog.setAcceptMode( QFileDialog::AcceptSave );
         const QUrl newUrl = dialog.exec() ? dialog.selectedUrls().value(0) : QUrl();
 
         if( newUrl.isValid() )
         {
-            const bool isNewUrl = ( currentSynchronizer == 0 )
+            const bool isNewUrl = ( ! currentSynchronizer )
                                   || ( newUrl != currentSynchronizer->url() );
 
             if( isNewUrl )
             {
                 KIO::StatJob* statJob = KIO::stat( newUrl );
                 statJob->setSide(  KIO::StatJob::DestinationSide );
-                KJobWidgets::setWindow( statJob, /*mWidget*/0 );
+                KJobWidgets::setWindow( statJob, /*mWidget*/nullptr );
 
                 const bool isUrlInUse = statJob->exec();
 

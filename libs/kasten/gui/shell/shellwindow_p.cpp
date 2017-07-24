@@ -45,9 +45,9 @@ ShellWindowPrivate::ShellWindowPrivate( ShellWindow* parent,
                                         ViewManager* viewManager )
   : q_ptr( parent )
   , mGroupedViews( new MultiViewAreas() )// TabbedViews() )
-  , mCurrentView( 0 )
-  , mCurrentDocument( 0 )
-  , mCurrentSynchronizer( 0 )
+  , mCurrentView( nullptr )
+  , mCurrentDocument( nullptr )
+  , mCurrentSynchronizer( nullptr )
   , mViewManager( viewManager )
 {
     parent->setCentralWidget( mGroupedViews->widget() );
@@ -84,7 +84,7 @@ void ShellWindowPrivate::showDocument( AbstractDocument* document )
     AbstractGroupedViews* currentGroupedViews = static_cast<AbstractGroupedViews*>( mGroupedViews->viewAreaFocus() );
     const QList<AbstractView*> viewList = currentGroupedViews->viewList();
 
-    AbstractView* viewOfDocument = 0;
+    AbstractView* viewOfDocument = nullptr;
     foreach( AbstractView* view, viewList )
     {
         if( view->findBaseModel<AbstractDocument*>() == document )
@@ -160,11 +160,11 @@ void ShellWindowPrivate::onViewFocusChanged( AbstractView* view )
     updateControllers( view );
 
     AbstractDocument* oldDocument = mCurrentDocument;
-    mCurrentDocument = view ? view->findBaseModel<AbstractDocument*>() : 0;
+    mCurrentDocument = view ? view->findBaseModel<AbstractDocument*>() : nullptr;
     const bool isNewDocument = (mCurrentDocument != oldDocument);
 
     AbstractModelSynchronizer* oldSynchronizer = mCurrentSynchronizer;
-    mCurrentSynchronizer = mCurrentDocument ? mCurrentDocument->synchronizer() : 0;
+    mCurrentSynchronizer = mCurrentDocument ? mCurrentDocument->synchronizer() : nullptr;
     const bool isNewSynchronizer = (mCurrentSynchronizer != oldSynchronizer);
 
     if( oldSynchronizer )
@@ -212,7 +212,7 @@ void ShellWindowPrivate::onToolVisibilityChanged( bool isVisible )
     ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget *>( q->sender() );
     if( dockWidget )
     {
-        AbstractView* view = isVisible ? mCurrentView : 0;
+        AbstractView* view = isVisible ? mCurrentView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel( view );
     }
 }
@@ -224,7 +224,7 @@ void ShellWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
     if( synchronizer != mCurrentSynchronizer )
         return;
 
-    mCurrentSynchronizer = 0;
+    mCurrentSynchronizer = nullptr;
 
     // switch to document state
     QObject::connect( mCurrentDocument, &AbstractDocument::contentFlagsChanged,
@@ -241,7 +241,7 @@ ShellWindowPrivate::~ShellWindowPrivate()
     // The other option would be to first delete the view, but for reasons if do not
     // remember currently I prefer the destruction in this order
     // TODO: make this call unneeded
-    mGroupedViews->setCurrentToolInlineView( 0 );
+    mGroupedViews->setCurrentToolInlineView( nullptr );
 
     qDeleteAll( mControllers );
     qDeleteAll( mDockWidgets );

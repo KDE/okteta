@@ -40,7 +40,7 @@ class  ByteArrayModelIoDevice : public QIODevice
   Q_OBJECT
 
   public:
-    explicit ByteArrayModelIoDevice( AbstractByteArrayModel* byteArrayModel, QObject* parent = 0 );
+    explicit ByteArrayModelIoDevice( AbstractByteArrayModel* byteArrayModel, QObject* parent = nullptr );
     virtual ~ByteArrayModelIoDevice();
 
   public: // QIODevice API

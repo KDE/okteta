@@ -54,7 +54,7 @@ class AbstractLoadJobPrivate
 
 inline AbstractLoadJobPrivate::AbstractLoadJobPrivate( AbstractLoadJob* parent )
   : q_ptr( parent ),
-    mDocument( 0 )
+    mDocument( nullptr )
 {}
 inline AbstractLoadJobPrivate::~AbstractLoadJobPrivate() {}
 

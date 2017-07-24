@@ -57,7 +57,7 @@ ToolInlineViewWidget::~ToolInlineViewWidget()
 {
     // TODO: crashes on close of the program if view is still open, because the view is already deleted
     layout()->removeWidget( mView->widget() );
-    mView->widget()->setParent( 0 );
+    mView->widget()->setParent( nullptr );
 }
 
 }

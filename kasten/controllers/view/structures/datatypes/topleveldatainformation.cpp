@@ -42,9 +42,9 @@ const quint64 TopLevelDataInformation::INVALID_OFFSET = std::numeric_limits<quin
 
 TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLogger* logger,
         QScriptEngine* engine, const QFileInfo& structureFile)
-        : QObject(0), mData(data), mLogger(logger), mStructureFile(structureFile),
+        : QObject(nullptr), mData(data), mLogger(logger), mStructureFile(structureFile),
           mIndex(-1), mValid(!data->isDummy()), mChildDataChanged(false),
-          mDefaultLockOffset(INVALID_OFFSET), mLastReadOffset(INVALID_OFFSET), mLastModel(0)
+          mDefaultLockOffset(INVALID_OFFSET), mLastReadOffset(INVALID_OFFSET), mLastModel(nullptr)
 {
     Q_CHECK_PTR(mData);
     mData->setParent(this);

@@ -133,7 +133,7 @@ void ScriptClassesTest::initTestCase()
             << pair("float") << pair("double") << pair("int64high32") << pair("int64low32")
             << pair("uint64high32") << pair("uint64low32") << pair("type");
     std::sort(primitiveProperties.begin(), primitiveProperties.end());
-    LoggerWithContext lwc(0, QString());
+    LoggerWithContext lwc(nullptr, QString());
     for (int i = Type_START; i < Type_Bitfield; ++i)
     {
         PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(
@@ -156,23 +156,23 @@ void ScriptClassesTest::initTestCase()
     enumData = new EnumDataInformation(QStringLiteral("enumData"),
             PrimitiveFactory::newInstance(QStringLiteral("dummy"), Type_Int32, lwc), enumDef);
     enumDataTop.reset(
-            new TopLevelDataInformation(enumData, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(enumData, nullptr, ScriptEngineInitializer::newEngine()));
     flagData = new FlagDataInformation(QStringLiteral("flagData"),
             PrimitiveFactory::newInstance(QStringLiteral("dummy"), Type_Int32, lwc), enumDef);
     flagDataTop.reset(
-            new TopLevelDataInformation(flagData, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(flagData, nullptr, ScriptEngineInitializer::newEngine()));
 
     bitfieldProperties << primitiveProperties << pair("width", QScriptValue::Undeletable);
     std::sort(bitfieldProperties.begin(), bitfieldProperties.end());
     unsignedBitfield = new UnsignedBitfieldDataInformation(QStringLiteral("unsignedBit"), 42);
     unsignedBitfieldTop.reset(
-            new TopLevelDataInformation(unsignedBitfield, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(unsignedBitfield, nullptr, ScriptEngineInitializer::newEngine()));
     signedBitfield = new SignedBitfieldDataInformation(QStringLiteral("signedBit"), 42);
     signedBitfieldTop.reset(
-            new TopLevelDataInformation(signedBitfield, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(signedBitfield, nullptr, ScriptEngineInitializer::newEngine()));
     boolBitfield = new BoolBitfieldDataInformation(QStringLiteral("boolBit"), 42);
     boolBitfieldTop.reset(
-            new TopLevelDataInformation(boolBitfield, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(boolBitfield, nullptr, ScriptEngineInitializer::newEngine()));
 
     stringProperties << commonProperties << pair("terminatedBy", QScriptValue::Undeletable)
             << pair("byteCount") << pair("maxCharCount", QScriptValue::Undeletable)
@@ -181,7 +181,7 @@ void ScriptClassesTest::initTestCase()
     std::sort(stringProperties.begin(), stringProperties.end());
     stringData = new StringDataInformation(QStringLiteral("string"), StringDataInformation::Latin1);
     stringDataTop.reset(
-            new TopLevelDataInformation(stringData, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(stringData, nullptr, ScriptEngineInitializer::newEngine()));
 
     arrayProperties << commonProperties << pair("length", QScriptValue::Undeletable)
             << pair("type", QScriptValue::Undeletable);
@@ -189,16 +189,16 @@ void ScriptClassesTest::initTestCase()
     arrayData = new ArrayDataInformation(QStringLiteral("array"), 20,
             PrimitiveFactory::newInstance(QStringLiteral("inner"), Type_Int32, lwc));
     arrayDataTop.reset(
-            new TopLevelDataInformation(arrayData, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(arrayData, nullptr, ScriptEngineInitializer::newEngine()));
 
     structUnionProperties << commonProperties << pair("childCount");
     //property children is only writable -> it is not in the iterator
     structData = new StructureDataInformation(QStringLiteral("struct"));
     structDataTop.reset(
-            new TopLevelDataInformation(structData, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(structData, nullptr, ScriptEngineInitializer::newEngine()));
     unionData = new UnionDataInformation(QStringLiteral("union"));
     unionDataTop.reset(
-            new TopLevelDataInformation(unionData, 0, ScriptEngineInitializer::newEngine()));
+            new TopLevelDataInformation(unionData, nullptr, ScriptEngineInitializer::newEngine()));
     std::sort(structUnionProperties.begin(), structUnionProperties.end());
 
 }
@@ -314,7 +314,7 @@ void ScriptClassesTest::testReplaceObject()
             QT_UNICODE_LITERAL("});\n"));
     QScriptValue val = eng->evaluate(unionDef);
     QVERIFY(val.isObject());
-    DataInformation* main = ScriptValueConverter::convert(val, QStringLiteral("container"), logger, 0);
+    DataInformation* main = ScriptValueConverter::convert(val, QStringLiteral("container"), logger, nullptr);
     QVERIFY(main);
     QCOMPARE(logger->rowCount(), 0);
     TopLevelDataInformation top(main, logger, eng);
@@ -403,11 +403,11 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
     arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Updating);
     QScriptValue v0 = eng->evaluate(QStringLiteral("myArray[0]"));
     QCOMPARE(Utils::property(v0, "name").toString(), QString::number(0));
-    QVERIFY(DefaultScriptClass::toDataInformation(v0) != 0);
+    QVERIFY(DefaultScriptClass::toDataInformation(v0) != nullptr);
     //access index 1 -> index 0 should become invalid, since there is only one object available
     QScriptValue v1 = eng->evaluate(QStringLiteral("myArray[1]"));
-    QVERIFY(DefaultScriptClass::toDataInformation(v1) != 0);
-    QVERIFY(DefaultScriptClass::toDataInformation(v0) == 0);
+    QVERIFY(DefaultScriptClass::toDataInformation(v1) != nullptr);
+    QVERIFY(DefaultScriptClass::toDataInformation(v0) == nullptr);
     QVERIFY(!eng->hasUncaughtException());
     QCOMPARE(Utils::property(v1, "name").toString(), QString::number(1));
     QVERIFY(!eng->hasUncaughtException());
@@ -430,7 +430,7 @@ void ScriptClassesTest::testSafeReferenceDeleteObject()
     QVERIFY(name.isValid());
     QVERIFY(!name.isError());
     QCOMPARE(name.toString(), QString(QStringLiteral("foo")));
-    top->setActualDataInformation(new DummyDataInformation(0));
+    top->setActualDataInformation(new DummyDataInformation(nullptr));
     //val should now point to an invalid reference -> accessing name should throw an error
     name = Utils::property(val, "name");
     QVERIFY(name.isValid());

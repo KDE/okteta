@@ -39,7 +39,7 @@ class ByteArrayIHexStreamEncoderConfigEditor : public AbstractModelStreamEncoder
   Q_OBJECT
 
   public:
-    explicit ByteArrayIHexStreamEncoderConfigEditor( ByteArrayIHexStreamEncoder* encoder, QWidget* parent = 0 );
+    explicit ByteArrayIHexStreamEncoderConfigEditor( ByteArrayIHexStreamEncoder* encoder, QWidget* parent = nullptr );
     virtual ~ByteArrayIHexStreamEncoderConfigEditor();
 
   public: // AbstractModelStreamEncoderConfigEditor API

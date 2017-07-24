@@ -37,14 +37,14 @@ AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const Bitfi
             pd.error() << "Bitfield is missing width.";
         else
             pd.error() << "Width of bitfield is not a valid number: " << pd.width.string;
-        return 0;
+        return nullptr;
     }
     if (pd.width.value <= 0 || pd.width.value > 64)
     {
         pd.error() << "Width of bitfield is not a value from 1-64:" << pd.width.value;
-        return 0;
+        return nullptr;
     }
-    AbstractBitfieldDataInformation* bitf = 0;
+    AbstractBitfieldDataInformation* bitf = nullptr;
     const QString type = pd.type.toLower();
     if (type.isEmpty())
     {
@@ -60,7 +60,7 @@ AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const Bitfi
     else
     {
         pd.error() << "invalid bitfield type attribute given:" << type;
-        return 0;
+        return nullptr;
     }
     return bitf;
 }
@@ -70,14 +70,14 @@ PrimitiveDataInformation* DataInformationFactory::newPrimitive(const PrimitivePa
     if (pd.type.isEmpty())
     {
         pd.error() << "Type of primitive not specified, cannot create it!";
-        return 0;
+        return nullptr;
     }
     LoggerWithContext lwc(pd.logger, pd.context());
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
     if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
     {
         pd.error() << "Unrecognized primitive type: " << pd.type;
-        return 0;
+        return nullptr;
     }
     return PrimitiveFactory::newInstance(pd.name, primitiveType, lwc, pd.parent);
 }
@@ -92,12 +92,12 @@ T* newEnumOrFlags(const EnumParsedData& pd)
     if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
     {
         pd.error() << "Unrecognized enum type: " << pd.type;
-        return 0;
+        return nullptr;
     }
     if (primitiveType == Type_Float || primitiveType == Type_Double)
     {
         pd.error() << "Floating-point enums are not allowed since they make little sense.";
-        return 0;
+        return nullptr;
     }
     EnumDefinition::Ptr definition = pd.enumDef;
     if (!definition)
@@ -107,7 +107,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
         if (enumValues.isEmpty())
         {
             pd.error() << "No enum values specified!";
-            return 0;
+            return nullptr;
         }
         definition = EnumDefinition::Ptr(new EnumDefinition(enumValues, pd.enumName, primitiveType));
     }
@@ -115,14 +115,14 @@ T* newEnumOrFlags(const EnumParsedData& pd)
     {
         pd.error().nospace() << "Enum type (" << definition->type() << ") and value type (" << primitiveType
                 << ") do not match!";
-        return 0;
+        return nullptr;
     }
     PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(pd.name, primitiveType, lwc);
     //TODO allow bitfields?
     if (!primData)
     {
         pd.error() << "Could not create a value object for this enum!";
-        return 0;
+        return nullptr;
     }
     return new T(pd.name, primData, definition, pd.parent);
 }
@@ -138,7 +138,7 @@ T* newStructOrUnion(const StructOrUnionParsedData& supd)
         if (data)
             structOrUnion->appendChild(data, false);
         else
-            return 0; //error message should be logged already
+            return nullptr; //error message should be logged already
     }
     if (structOrUnion->childCount() == 0)
         supd.info() << "No children were found, this is probably a mistake.";
@@ -205,12 +205,12 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
     if (!pd.arrayType)
     {
         pd.error() << "Failed to parse array type!";
-        return 0;
+        return nullptr;
     }
     if (!pd.length.isValid())
     {
         pd.error() << "No array length specified!";
-        return 0;
+        return nullptr;
     }
     const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
     if (fixedLength.isValid)
@@ -229,17 +229,17 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
         {
             pd.error() << "Toplevel array has length depending on other field (" << lengthStr
                     << "). This is not possible.";
-            return 0;
+            return nullptr;
         }
         if (lengthStr.contains(QLatin1Char('.')))
         {
             pd.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
-            return 0; //TODO maybe add possible shorthand length="this.parent.length"
+            return nullptr; //TODO maybe add possible shorthand length="this.parent.length"
         }
-        QString lengthFunctionString = generateLengthFunction(pd.parent, 0, lengthStr, QString(), pd);
+        QString lengthFunctionString = generateLengthFunction(pd.parent, nullptr, lengthStr, QString(), pd);
         if (lengthFunctionString.isEmpty()) {
             pd.error() << "Could not find element " << lengthStr << " referenced as array length!";
-            return 0;
+            return nullptr;
         }
         QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
         return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, lengthFunction);
@@ -251,14 +251,14 @@ StringDataInformation* DataInformationFactory::newString(const StringParsedData&
     if (pd.maxByteCount.isValid && pd.maxCharCount.isValid)
     {
         pd.error() << "Both maxCharCount and maxByteCount are set, only one is allowed.";
-        return 0;
+        return nullptr;
     }
     StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(pd.encoding,
             LoggerWithContext(pd.logger, pd.context()));
     if (encoding == StringDataInformation::InvalidEncoding)
     {
         pd.error() << "Bad string encoding given:" << pd.encoding;
-        return 0;
+        return nullptr;
     }
     StringDataInformation* data = new StringDataInformation(pd.name, encoding, pd.parent);
     bool modeSet = false;
@@ -348,24 +348,24 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
     if (!pd.pointerTarget)
     {
         pd.error() << "Missing pointer target";
-        return 0;
+        return nullptr;
     }
     if (!pd.valueType)
     {
         pd.error() << "Missing pointer type";
-        return 0;
+        return nullptr;
     }
     if (!pd.valueType->isPrimitive())
     {
         pd.error() << "Bad pointer type, only unsigned integers are allowed";
-        return 0;
+        return nullptr;
     }
     PrimitiveDataInformation* primValue = pd.valueType->asPrimitive();
     if (!(primValue->type() == Type_UInt8 || primValue->type() == Type_UInt16
             || primValue->type() == Type_UInt32 || primValue->type() == Type_UInt64))
     {
         pd.error() << "Bad pointer type, only unsigned integers are allowed"; //TODO offsets (signed int + bitfields)
-        return 0;
+        return nullptr;
     }
     return new PointerDataInformation(pd.name, pd.pointerTarget, primValue, pd.parent);
 }
@@ -380,12 +380,12 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
         if (data)
             tagged->appendChild(data, false);
         else
-            return 0; //error message should be logged already
+            return nullptr; //error message should be logged already
     }
     if (tagged->childCount() == 0)
     {
         pd.error() << "No children in tagged union. At least one is required so that tag can be evaluated.";
-        return 0;
+        return nullptr;
     }
     //verify alternatives
     bool alternativesValid = true;
@@ -428,7 +428,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     {
         for (int i = 0; i < altInfo.size(); ++i)
             qDeleteAll(altInfo.at(i).fields);
-        return 0;
+        return nullptr;
     }
     tagged->setAlternatives(altInfo, false);
 
@@ -439,7 +439,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
         if (data)
             tagged->appendDefaultField(data, false);
         else
-            return 0; //error message should be logged already
+            return nullptr; //error message should be logged already
     }
     return tagged.take();
 }

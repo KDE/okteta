@@ -105,7 +105,7 @@ void TestDocumentFileSynchronizerFactoryTest::testCreate()
 {
     Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
 
-    QVERIFY( factory != 0 );
+    QVERIFY( factory != nullptr );
 
     delete factory;
 }

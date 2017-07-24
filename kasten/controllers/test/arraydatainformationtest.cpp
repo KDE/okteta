@@ -52,7 +52,7 @@ void ArrayDataInformationTest::initTestCase()
 {
     qRegisterMetaType<const DataInformation*>();
     qRegisterMetaType<DataInformation*>();
-    LoggerWithContext lwc(0, QString());
+    LoggerWithContext lwc(nullptr, QString());
 
     primitive = new ArrayDataInformation(QStringLiteral("primitives"), 0,
             PrimitiveFactory::newInstance(QStringLiteral("child"), Type_UInt32, lwc));

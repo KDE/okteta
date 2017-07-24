@@ -38,24 +38,24 @@ namespace Kasten
 {
 
 SelectController::SelectController( KXMLGUIClient* guiClient )
- : mModel( 0 ), mSelectControl( 0 )
+ : mModel( nullptr ), mSelectControl( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mSelectAllAction = KStandardAction::selectAll( this, SLOT(selectAll()), actionCollection );
     mDeselectAction =  KStandardAction::deselect(  this, SLOT(unselect()),  actionCollection );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void SelectController::setTargetModel( AbstractModel* model )
 {
     if( mModel ) mModel->disconnect( this );
 
-    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : 0;
-    mSelectControl = mModel ? qobject_cast<If::DataSelectable *>( mModel ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
+    mSelectControl = mModel ? qobject_cast<If::DataSelectable *>( mModel ) : nullptr;
 
-    const bool hasSelectionControl = ( mSelectControl != 0 );
+    const bool hasSelectionControl = ( mSelectControl != nullptr );
     if( hasSelectionControl )
     {
         connect( mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(onHasSelectedDataChanged(bool)) );

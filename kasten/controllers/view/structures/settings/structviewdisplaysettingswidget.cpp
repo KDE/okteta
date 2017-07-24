@@ -28,7 +28,7 @@
 
 
 StructViewDisplaySettingsWidget::StructViewDisplaySettingsWidget() :
-    QWidget(NULL)
+    QWidget(nullptr)
 {
     ui.setupUi(this);
     ui.combo_CharDisplayBase->setEnabled(ui.kcfg_ShowCharNumericalValue->isChecked());

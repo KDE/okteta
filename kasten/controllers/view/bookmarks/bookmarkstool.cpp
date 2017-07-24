@@ -46,7 +46,7 @@ namespace Kasten
 {
 
 BookmarksTool::BookmarksTool()
- : mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 ), mCanCreateBookmark( false )
+ : mByteArrayView( nullptr ), mByteArray( nullptr ), mBookmarks( nullptr ), mCanCreateBookmark( false )
 {
     setObjectName( QStringLiteral( "Bookmarks" ) );
 }
@@ -83,14 +83,14 @@ void BookmarksTool::setTargetModel( AbstractModel* model )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArray ) mByteArray->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArray = document ? document->content() : 0;
-    mBookmarks = ( mByteArray && mByteArrayView ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArray = document ? document->content() : nullptr;
+    mBookmarks = ( mByteArray && mByteArrayView ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : nullptr;
 
-    const bool hasViewWithBookmarks = ( mBookmarks != 0 );
+    const bool hasViewWithBookmarks = ( mBookmarks != nullptr );
     if( hasViewWithBookmarks )
     {
         onCursorPositionChanged( mByteArrayView->cursorPosition() );

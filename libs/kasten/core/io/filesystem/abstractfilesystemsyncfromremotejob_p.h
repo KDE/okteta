@@ -71,7 +71,7 @@ inline AbstractFileSystemSyncFromRemoteJobPrivate::AbstractFileSystemSyncFromRem
     AbstractModelFileSystemSynchronizer* synchronizer )
   : AbstractSyncFromRemoteJobPrivate( parent ),
     mSynchronizer( synchronizer ),
-    mFile( 0 )
+    mFile( nullptr )
 {
 }
 

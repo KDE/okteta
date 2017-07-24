@@ -59,9 +59,9 @@ ChecksumTool::ChecksumTool()
     mChecksumUptodate( false ),
     mSourceByteArrayModelUptodate( false ),
     mAlgorithmId( 0 ),
-    mByteArrayView( 0 ), mByteArrayModel( 0 ),
+    mByteArrayView( nullptr ), mByteArrayModel( nullptr ),
     mSourceAlgorithmId( -1 ),
-    mSourceByteArrayModel( 0 )
+    mSourceByteArrayModel( nullptr )
 {
     setObjectName( QStringLiteral( "Checksum" ) );
 
@@ -89,18 +89,18 @@ AbstractByteArrayChecksumParameterSet* ChecksumTool::parameterSet()
 {
     AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at( mAlgorithmId );
 
-    return algorithm ? algorithm->parameterSet() : 0;
+    return algorithm ? algorithm->parameterSet() : nullptr;
 }
 
 void ChecksumTool::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArrayModel = document ? document->content() : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArrayModel = document ? document->content() : nullptr;
 
     if( mByteArrayView && mByteArrayModel )
     {
@@ -196,7 +196,7 @@ void ChecksumTool::onSourceChanged()
 
 void ChecksumTool::onSourceDestroyed()
 {
-    mSourceByteArrayModel = 0;
+    mSourceByteArrayModel = nullptr;
     onSourceChanged();
 }
 

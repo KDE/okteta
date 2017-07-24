@@ -40,8 +40,8 @@ static const int modifiedPixmapWidth = 16;
 
 
 ModifiedBarController::ModifiedBarController( StatusBar* statusBar )
-  : mDocument( 0 )
-  , mSynchronizer( 0 )
+  : mDocument( nullptr )
+  , mSynchronizer( nullptr )
 {
     // TODO: depend an statusbar height
     const QSize modifiedPixmapSize = QSize(modifiedPixmapWidth, modifiedPixmapWidth);
@@ -56,13 +56,13 @@ ModifiedBarController::ModifiedBarController( StatusBar* statusBar )
     mRemoteStateLabel->setFixedSize( modifiedPixmapSize );
     statusBar->addWidget( mRemoteStateLabel );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 
 void ModifiedBarController::setTargetModel( AbstractModel* model )
 {
-    AbstractDocument* newDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    AbstractDocument* newDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
     if( mDocument == newDocument )
         return;
@@ -80,7 +80,7 @@ void ModifiedBarController::setTargetModel( AbstractModel* model )
     mLocalStateLabel->setEnabled( mDocument );
     mRemoteStateLabel->setEnabled( mDocument );
 
-    onSynchronizerChanged( mDocument ? mDocument->synchronizer() : 0 );
+    onSynchronizerChanged( mDocument ? mDocument->synchronizer() : nullptr );
 }
 
 
@@ -109,12 +109,12 @@ void ModifiedBarController::onLocalSyncStateChanged( LocalSyncState localSyncSta
 void ModifiedBarController::onRemoteSyncStateChanged( RemoteSyncState remoteSyncState )
 {
     const char* const iconName =
-        ( mSynchronizer == 0 ) ?                   "document-new" :
+        ( ! mSynchronizer ) ?                      "document-new" :
         ( remoteSyncState == RemoteHasChanges ) ?  "document-save" :
         ( remoteSyncState == RemoteDeleted ) ?     "edit-delete" :
         ( remoteSyncState == RemoteUnknown ) ?     "flag-yellow" :
         ( remoteSyncState == RemoteUnreachable ) ? "network-disconnect" :
-        /* else */                                 0;
+        /* else */                                 nullptr;
 
     // TODO: depend an statusbar height
     const QPixmap pixmap = iconName ?
@@ -176,7 +176,7 @@ void ModifiedBarController::onSynchronizerDeleted( QObject* synchronizer )
     if( synchronizer != mSynchronizer )
         return;
 
-    mSynchronizer = 0;
+    mSynchronizer = nullptr;
 
     // switch to document state
     connect( mDocument, &Kasten::AbstractDocument::contentFlagsChanged,

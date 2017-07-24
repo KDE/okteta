@@ -45,7 +45,7 @@ namespace Kasten
 {
 
 ViewStatusController::ViewStatusController( StatusBar* statusBar )
- : mByteArrayView( 0 ), mStatusBar( statusBar )
+ : mByteArrayView( nullptr ), mStatusBar( statusBar )
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction( Okteta::OffsetFormat::Hexadecimal );
 
@@ -85,7 +85,7 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
 
     fixWidths( 0 );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 
@@ -154,9 +154,9 @@ void ViewStatusController::setTargetModel( AbstractModel* model )
         mByteArrayView->disconnect( mOverwriteModeToggleButton );
     }
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
-    const bool hasView = ( mByteArrayView != 0 );
+    const bool hasView = ( mByteArrayView != nullptr );
     if( hasView )
     {
         mStartOffset = mByteArrayView->startOffset();

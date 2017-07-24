@@ -35,7 +35,7 @@ class NoByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParamete
     static const char Id[];
 
   public:
-    explicit NoByteArrayFilterParameterSetEdit( QWidget* parent = 0 );
+    explicit NoByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
     virtual ~NoByteArrayFilterParameterSetEdit();
 
   public: // AbstractByteArrayFilterParameterSetEdit API

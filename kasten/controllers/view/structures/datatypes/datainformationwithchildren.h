@@ -33,7 +33,7 @@ protected:
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
 public:
     explicit DataInformationWithChildren(const QString& name, const QVector<DataInformation*>& children
-            = QVector<DataInformation*>(), DataInformation* parent = 0);
+            = QVector<DataInformation*>(), DataInformation* parent = nullptr);
     virtual ~DataInformationWithChildren();
 
     virtual QVariant childData(int row, int column, int role) const;

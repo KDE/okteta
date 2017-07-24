@@ -51,7 +51,7 @@ public:
 
     virtual bool canHaveChildren() const { return false; }
     virtual unsigned int childCount() const { return 0; }
-    virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return 0; }
+    virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return nullptr; }
     virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
     virtual int indexOf(const DataInformation* const) const { Q_ASSERT(false); return -1; }
 
@@ -60,7 +60,7 @@ public:
     inline uint dummyIndex() const { return mIndex; }
 
 private:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo*) const { Q_ASSERT(false); return 0; }
+    virtual QScriptClass* scriptClass(ScriptHandlerInfo*) const { Q_ASSERT(false); return nullptr; }
     virtual QString typeNameImpl() const;
 private:
     uint mIndex;
@@ -75,7 +75,7 @@ class DataInformationWithDummyChildren : public DataInformation
 protected:
     DataInformationWithDummyChildren(const DataInformationWithDummyChildren& d) : DataInformation(d) {}
 public:
-    explicit DataInformationWithDummyChildren(const QString& name, DataInformationBase* parent = 0)
+    explicit DataInformationWithDummyChildren(const QString& name, DataInformationBase* parent = nullptr)
             : DataInformation(name, parent) {}
     virtual ~DataInformationWithDummyChildren() {}
 

@@ -44,7 +44,7 @@ namespace Kasten
 {
 
 FilterTool::FilterTool()
- : mByteArrayView( 0 ), mByteArrayModel( 0 ), mHasWritable( false )
+ : mByteArrayView( nullptr ), mByteArrayModel( nullptr ), mHasWritable( false )
 {
     setObjectName( QStringLiteral( "BinaryFilter" ) );
 
@@ -64,18 +64,18 @@ AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
 {
     AbstractByteArrayFilter *byteArrayFilter = mFilterList.at( filterId );
 
-    return byteArrayFilter ? byteArrayFilter->parameterSet() : 0;
+    return byteArrayFilter ? byteArrayFilter->parameterSet() : nullptr;
 }
 
 void FilterTool::setTargetModel( AbstractModel* model )
 {
     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument *document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArrayModel = document ? document->content() : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArrayModel = document ? document->content() : nullptr;
 
     const bool hasByteArray = ( mByteArrayModel && mByteArrayView );
     QString newCharCodecName;

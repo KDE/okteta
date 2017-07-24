@@ -188,7 +188,7 @@ void JsParserTest::testCommon(DataInformation** dataPtr) {
 
 void JsParserTest::testByteOrder()
 {
-    DataInformation* data = 0;
+    DataInformation* data = nullptr;
     testCommon(&data);
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
@@ -222,7 +222,7 @@ void JsParserTest::testUpdateFunc_data()
 
 void JsParserTest::testUpdateFunc()
 {
-    DataInformation* data = 0;
+    DataInformation* data = nullptr;
     testCommon(&data);
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
@@ -259,7 +259,7 @@ void JsParserTest::testValidationFunc_data()
 
 void JsParserTest::testValidationFunc()
 {
-    DataInformation* data = 0;
+    DataInformation* data = nullptr;
     testCommon(&data);
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
@@ -288,7 +288,7 @@ void JsParserTest::testName_data()
 
 void JsParserTest::testName()
 {
-    DataInformation* data = 0;
+    DataInformation* data = nullptr;
     testCommon(&data);
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
@@ -314,7 +314,7 @@ void JsParserTest::testCustomTypeName_data()
 
 void JsParserTest::testCustomTypeName()
 {
-    DataInformation* data = 0;
+    DataInformation* data = nullptr;
     testCommon(&data);
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call

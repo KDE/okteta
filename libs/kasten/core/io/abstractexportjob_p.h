@@ -49,7 +49,7 @@ class AbstractExportJobPrivate
 
 inline AbstractExportJobPrivate::AbstractExportJobPrivate( AbstractExportJob* parent)
   : q_ptr( parent ),
-    mDocument( 0 )
+    mDocument( nullptr )
 {}
 
 inline AbstractDocument* AbstractExportJobPrivate::document() const { return mDocument; }

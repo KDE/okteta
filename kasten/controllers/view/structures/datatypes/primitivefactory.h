@@ -39,10 +39,10 @@ namespace PrimitiveFactory
 PrimitiveDataType typeStringToType(const QString& typeStr, const LoggerWithContext& logger);
 
 PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
-        const LoggerWithContext& logger, DataInformation* parent = 0);
+        const LoggerWithContext& logger, DataInformation* parent = nullptr);
 
 inline PrimitiveDataInformation* newInstance(const QString& name, const QString& typeString,
-        const LoggerWithContext& logger, DataInformation* parent = 0)
+        const LoggerWithContext& logger, DataInformation* parent = nullptr)
 {
     return newInstance(name, typeStringToType(typeString, logger), logger, parent);
 }

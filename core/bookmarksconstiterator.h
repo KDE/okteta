@@ -36,7 +36,7 @@ namespace Okteta
 class OKTETACORE_EXPORT BookmarksConstIterator
 {
   public:
-    explicit BookmarksConstIterator( BookmarksConstIteratorAdapter* adapter = 0 );
+    explicit BookmarksConstIterator( BookmarksConstIteratorAdapter* adapter = nullptr );
 
   public:
     bool hasList() const;

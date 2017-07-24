@@ -34,7 +34,7 @@ class Char8Validator : public QValidator
   Q_OBJECT
 
   public:
-    Char8Validator( Okteta::CharCodec* charCodec, QObject* parent = 0 );
+    Char8Validator( Okteta::CharCodec* charCodec, QObject* parent = nullptr );
 
     virtual ~Char8Validator();
 

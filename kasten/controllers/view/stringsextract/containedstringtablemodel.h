@@ -46,7 +46,7 @@ class ContainedStringTableModel : public QAbstractTableModel
 
   public:
     ContainedStringTableModel( const QList<ContainedString> *containedStringList, int offsetCoding,
-                               QObject *parent = 0 );
+                               QObject *parent = nullptr );
     virtual ~ContainedStringTableModel();
 
   public: // QAbstractTableModel API

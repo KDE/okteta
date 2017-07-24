@@ -41,7 +41,7 @@ namespace Kasten
 FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncManager )
   : AbstractTool(),
     mDocumentSyncManager( documentSyncManager ),
-    mDocument( 0 )
+    mDocument( nullptr )
 {
     setObjectName( QStringLiteral( "FileSystemBrowser" ) );
 }
@@ -62,14 +62,14 @@ QUrl FileSystemBrowserTool::currentUrl() const
 
 bool FileSystemBrowserTool::hasCurrentUrl() const
 {
-    return ( mDocument && mDocument->synchronizer() != 0 );
+    return ( mDocument && mDocument->synchronizer() );
 }
 
 void FileSystemBrowserTool::setTargetModel( AbstractModel* model )
 {
     const bool oldHasCurrentUrl = hasCurrentUrl();
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
     const bool newHasCurrentUrl = hasCurrentUrl();
 

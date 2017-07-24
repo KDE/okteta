@@ -43,15 +43,15 @@ SetRemoteController::SetRemoteController( DocumentSyncManager* syncManager, KXML
 
     mSaveAsAction = KStandardAction::saveAs( this, SLOT(saveAs()), actionCollection );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void SetRemoteController::setTargetModel( AbstractModel* model )
 {
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
     const bool canBeSaved = mDocument ?
-                                ( mDocument->synchronizer() != 0 ||
+                                ( mDocument->synchronizer() ||
                                   mSyncManager->hasSynchronizerForLocal(mDocument->mimeType()) ) :
                                 false;
 

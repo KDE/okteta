@@ -54,8 +54,8 @@ public:
      *  @param engine the script engine to use. If null this object contains no dynamic elements
      *  @param structureFile the file which this was loaded from
      */
-    explicit TopLevelDataInformation(DataInformation* data, ScriptLogger* logger = 0,
-            QScriptEngine* engine = 0, const QFileInfo& structureFile = QFileInfo());
+    explicit TopLevelDataInformation(DataInformation* data, ScriptLogger* logger = nullptr,
+            QScriptEngine* engine = nullptr, const QFileInfo& structureFile = QFileInfo());
     virtual ~TopLevelDataInformation();
 
     typedef QSharedPointer<TopLevelDataInformation> Ptr;

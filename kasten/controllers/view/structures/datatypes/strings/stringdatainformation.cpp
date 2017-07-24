@@ -43,13 +43,13 @@
 #include <KLocalizedString>
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
-    : DataInformationWithDummyChildren(name, parent), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
+    : DataInformationWithDummyChildren(name, parent), mDummy(new DummyDataInformation(this)), mData(nullptr), mEncoding(InvalidEncoding)
 {
     setEncoding(encoding); //sets mData
 }
 
 StringDataInformation::StringDataInformation(const StringDataInformation& d)
-    : DataInformationWithDummyChildren(d), mDummy(new DummyDataInformation(this)), mData(0), mEncoding(InvalidEncoding)
+    : DataInformationWithDummyChildren(d), mDummy(new DummyDataInformation(this)), mData(nullptr), mEncoding(InvalidEncoding)
 {
     setEncoding(d.mEncoding); //sets mData
     mData->copyTerminationFrom(d.mData.data());
@@ -125,7 +125,7 @@ QWidget* StringDataInformation::createEditWidget(QWidget*) const
 {
     //TODO
     Q_ASSERT(false);
-    return 0;
+    return nullptr;
 }
 
 QString StringDataInformation::typeNameImpl() const
@@ -198,7 +198,7 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
     }
     else
     {
-        StringData* data = 0;
+        StringData* data = nullptr;
         switch (encoding) {
             case ASCII:
                 data = new AsciiStringData(this);
@@ -273,7 +273,7 @@ QWidget* StringDataInformation::createChildEditWidget(uint index, QWidget* paren
     Q_ASSERT(false);
     Q_UNUSED(parent)
     Q_UNUSED(index)
-    return 0;
+    return nullptr;
 }
 
 QScriptValue StringDataInformation::childToScriptValue(uint index, QScriptEngine*, ScriptHandlerInfo*) const

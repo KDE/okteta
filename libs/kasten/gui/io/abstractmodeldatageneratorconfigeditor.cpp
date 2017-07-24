@@ -28,7 +28,7 @@ namespace Kasten
 
 AbstractModelDataGeneratorConfigEditor::AbstractModelDataGeneratorConfigEditor( QWidget* parent )
   : QWidget( parent ),
-    d( 0 )
+    d( nullptr )
 {}
 
 bool AbstractModelDataGeneratorConfigEditor::isValid() const

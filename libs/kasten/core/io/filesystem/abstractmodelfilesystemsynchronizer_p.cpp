@@ -86,7 +86,7 @@ void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 {
     delete mNetworkConfigurationManager;
-    mNetworkConfigurationManager = 0;
+    mNetworkConfigurationManager = nullptr;
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )

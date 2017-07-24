@@ -50,7 +50,7 @@ class OKTETAKASTENGUI_EXPORT AddressComboBox : public QWidget
     enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
 
   public:
-    explicit AddressComboBox( QWidget* parent = 0 );
+    explicit AddressComboBox( QWidget* parent = nullptr );
     virtual ~AddressComboBox();
 
   public: // set

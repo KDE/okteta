@@ -140,7 +140,7 @@ uint PointerDataInformation::childCount() const
 DataInformation* PointerDataInformation::childAt(uint index) const
 {
     Q_ASSERT(index == 0);
-    return index == 0 ? mPointerTarget.data() : 0;
+    return index == 0 ? mPointerTarget.data() : nullptr;
 }
 
 bool PointerDataInformation::setPointerType(DataInformation* type)

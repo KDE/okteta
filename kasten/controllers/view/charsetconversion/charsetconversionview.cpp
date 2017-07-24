@@ -221,14 +221,14 @@ void CharsetConversionView::onConversionDone( bool success, int convertedBytesCo
                 i18nc( "@info", "No bytes substituted.") :
                 i18ncp( "@info", "1 byte substituted.", "%1 bytes substituted.", totalFailedByteCount );
         }
-        KMessageBox::information( /*mParentWidget*/0,
+        KMessageBox::information( /*mParentWidget*/nullptr,
                                   conversionReport,
                                   messageBoxTitle );
     }
     else
     {
         // TODO: show/goto byte which on which conversion fails
-        KMessageBox::sorry( /*mParentWidget*/0,
+        KMessageBox::sorry( /*mParentWidget*/nullptr,
                             i18nc("@info",
                                   "Conversion cancelled because of chars which are not "
                                   "in the target charset."),

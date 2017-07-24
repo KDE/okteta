@@ -44,7 +44,7 @@
 
 
 StructuresManagerView::StructuresManagerView(Kasten::StructTool* tool, QWidget* parent)
-    : QWidget(parent), mTool(tool), mStructuresSelector(0), mRebuildingPluginsList(false)
+    : QWidget(parent), mTool(tool), mStructuresSelector(nullptr), mRebuildingPluginsList(false)
 {
     KConfigDialogManager::changedMap()->insert(QStringLiteral("StructuresManagerView"), SIGNAL(changed(QStringList)));
     setObjectName(QStringLiteral("kcfg_LoadedStructures"));

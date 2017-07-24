@@ -34,7 +34,7 @@ class SIntSpinBox : public QAbstractSpinBox
 Q_OBJECT
 Q_PROPERTY( qint64 value READ value WRITE setValue USER true )
   public:
-    explicit SIntSpinBox( QWidget* parent = 0, int base = 10 );
+    explicit SIntSpinBox( QWidget* parent = nullptr, int base = 10 );
 
     virtual ~SIntSpinBox();
 
@@ -48,10 +48,10 @@ Q_PROPERTY( qint64 value READ value WRITE setValue USER true )
     void setRange( qint64 minimum, qint64 maximum );
     void setBase( int base );
 
-    static SIntSpinBox* createSInt64Spinbox( QWidget* parent = 0 );
-    static SIntSpinBox* createSInt32Spinbox( QWidget* parent = 0 );
-    static SIntSpinBox* createSInt16Spinbox( QWidget* parent = 0 );
-    static SIntSpinBox* createSInt8Spinbox( QWidget* parent = 0 );
+    static SIntSpinBox* createSInt64Spinbox( QWidget* parent = nullptr );
+    static SIntSpinBox* createSInt32Spinbox( QWidget* parent = nullptr );
+    static SIntSpinBox* createSInt16Spinbox( QWidget* parent = nullptr );
+    static SIntSpinBox* createSInt8Spinbox( QWidget* parent = nullptr );
 
   protected: // QAbstractSpinBox API
     virtual QValidator::State validate( QString& input, int& pos ) const;
@@ -131,7 +131,7 @@ inline void SIntSpinBox::setBase( int base )
         (base == 16) ? "0x" :
         (base ==  8) ? "0o" :
         (base ==  2) ? "0b" :
-        /* else */     0 );
+        /* else */     nullptr );
 }
 
 inline SIntSpinBox::~SIntSpinBox() {}

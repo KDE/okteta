@@ -76,7 +76,7 @@ protected:
 
 public:
     virtual DataInformation* clone() const = 0;
-    explicit DataInformation(const QString& name, DataInformationBase* parent = NULL);
+    explicit DataInformation(const QString& name, DataInformationBase* parent = nullptr);
     virtual ~DataInformation();
 
     enum Columns
@@ -267,7 +267,7 @@ inline void DataInformation::setName(const QString& newName)
 
 inline DataInformation* DataInformation::childAt(unsigned int) const
 {
-    return 0;
+    return nullptr;
 }
 
 inline bool DataInformation::canHaveChildren() const

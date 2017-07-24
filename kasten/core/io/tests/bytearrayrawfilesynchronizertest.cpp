@@ -99,9 +99,9 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 
     ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>( document );
 
-    QVERIFY( document != 0 );
-    QVERIFY( byteArrayDocument != 0 );
-    QVERIFY( document->synchronizer() != 0 );
+    QVERIFY( document != nullptr );
+    QVERIFY( byteArrayDocument != nullptr );
+    QVERIFY( document->synchronizer() != nullptr );
     QCOMPARE( document->synchronizer()->document(), document );
     QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
     QCOMPARE( document->synchronizer()->localSyncState(), Kasten::LocalInSync );
@@ -120,7 +120,7 @@ void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
     synchronizer->startLoad( fileUrl )->exec();
     AbstractDocument* document = synchronizer->document();
 
-    QVERIFY( document == 0 );
+    QVERIFY( document == nullptr );
     delete synchronizer;
 }
 

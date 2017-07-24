@@ -38,7 +38,7 @@ AbstractDocument* AbstractDocumentFactory::createFromData( const QMimeData* mime
     Q_UNUSED( mimeData );
     Q_UNUSED( setModified );
 
-    return 0;
+    return nullptr;
 }
 
 AbstractDocumentFactory::~AbstractDocumentFactory() {}

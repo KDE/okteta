@@ -47,9 +47,9 @@ static const int mimeTypeUpdateTimeInterval = 500; // msec
 
 
 DocumentInfoTool::DocumentInfoTool( DocumentSyncManager* syncManager )
-  : mDocument( 0 ),
-    mByteArrayModel( 0 ),
-    mSynchronizer( 0 ),
+  : mDocument( nullptr ),
+    mByteArrayModel( nullptr ),
+    mSynchronizer( nullptr ),
     mDocumentSyncManager( syncManager ),
     mMimeTypeUpdateTimer( new QTimer(this) ),
     mMimeType()
@@ -94,11 +94,11 @@ void DocumentInfoTool::setTargetModel( AbstractModel* model )
     if( mDocument ) mDocument->disconnect( this );
     if( mByteArrayModel ) mByteArrayModel->disconnect( this );
 
-    mDocument = model ? model->findBaseModel<ByteArrayDocument*>() : 0;
-    mByteArrayModel = mDocument ? mDocument->content() : 0;
+    mDocument = model ? model->findBaseModel<ByteArrayDocument*>() : nullptr;
+    mByteArrayModel = mDocument ? mDocument->content() : nullptr;
 
-    const bool hasDocument = ( mDocument != 0 );
-    AbstractModelSynchronizer* synchronizer = 0;
+    const bool hasDocument = ( mDocument != nullptr );
+    AbstractModelSynchronizer* synchronizer = nullptr;
     QString documentTitle;
     int documentSize = -1;
     if( hasDocument )

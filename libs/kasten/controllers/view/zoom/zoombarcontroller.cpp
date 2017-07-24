@@ -36,7 +36,7 @@ ZoomBarController::ZoomBarController( StatusBar* statusBar )
     mZoomSlider = new ZoomSlider( statusBar );
     statusBar->addWidget( mZoomSlider );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 

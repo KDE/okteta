@@ -87,7 +87,7 @@ void CustomToStringTest::testUuid()
     QScriptEngine* eng = ScriptEngineInitializer::newEngine();
     ScriptLogger* logger = new ScriptLogger();
     logger->setLogToStdOut(true);
-    DataInformation* structure = 0;
+    DataInformation* structure = nullptr;
     if (isGUID)
         structure = Utils::evalAndParse(eng, "var u = importScript('uuid.js'); u.GUID();", logger);
     else

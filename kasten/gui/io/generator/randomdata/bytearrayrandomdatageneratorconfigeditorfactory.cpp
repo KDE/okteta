@@ -37,7 +37,7 @@ ByteArrayRandomDataGeneratorConfigEditorFactory::ByteArrayRandomDataGeneratorCon
 
 AbstractModelDataGeneratorConfigEditor* ByteArrayRandomDataGeneratorConfigEditorFactory::tryCreateConfigEditor( AbstractModelDataGenerator* generator ) const
 {
-    AbstractModelDataGeneratorConfigEditor* result = 0;
+    AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
     ByteArrayRandomDataGenerator* randomDataGenerator =
         qobject_cast<ByteArrayRandomDataGenerator*>( generator );

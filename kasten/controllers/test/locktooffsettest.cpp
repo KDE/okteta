@@ -143,7 +143,7 @@ void LockToOffsetTest::testReadingNecessary_data()
     QTest::addColumn<bool>("expected");
     Okteta::ArrayChangeMetricsList noChanges;
 
-    TopLevelDataInformation* top = newStructure(0, 5);
+    TopLevelDataInformation* top = newStructure(nullptr, 5);
     addRow("new model, same offset, no changes", top, 5, model, noChanges, true);
 
     top = newStructure(model, 5);

@@ -52,7 +52,7 @@ ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager
   : AbstractXmlGuiController(),
     mModelCodecViewManager( modelCodecViewManager ),
     mModelCodecManager( modelCodecManager ),
-    mModel( 0 )
+    mModel( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -63,15 +63,15 @@ ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager
     connect( mExportSelectAction, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered),
              this, &ExportController::onActionTriggered );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void ExportController::setTargetModel( AbstractModel* model )
 {
     if( mModel ) mModel->disconnect( this );
 
-    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : 0;
-    mSelectionControl = mModel ? qobject_cast<If::DataSelectable *>( mModel ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
+    mSelectionControl = mModel ? qobject_cast<If::DataSelectable *>( mModel ) : nullptr;
 
     if( mSelectionControl )
     {
@@ -87,7 +87,7 @@ void ExportController::updateActions()
 {
     mExportSelectAction->removeAllActions();
 
-    const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
+    const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     const QList<AbstractModelExporter*> exporterList =
         mModelCodecManager->exporterList( mModel, selection );
@@ -112,14 +112,14 @@ void ExportController::updateActions()
         mExportSelectAction->addAction( noneAction );
     }
 
-    mExportSelectAction->setEnabled( mModel != 0 );
+    mExportSelectAction->setEnabled( mModel != nullptr );
 }
 
 void ExportController::onActionTriggered( QAction *action )
 {
     AbstractModelExporter* exporter = action->data().value<AbstractModelExporter* >();
 
-    const AbstractModelSelection* selection = ( mSelectionControl != 0 ) ? mSelectionControl->modelSelection() : 0;
+    const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     AbstractModelExporterConfigEditor* configEditor =
         mModelCodecViewManager->createConfigEditor( exporter );

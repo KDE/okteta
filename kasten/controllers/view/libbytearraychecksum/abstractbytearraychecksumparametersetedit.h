@@ -34,7 +34,7 @@ class AbstractByteArrayChecksumParameterSetEdit : public QWidget
   Q_OBJECT
 
   protected:
-    explicit AbstractByteArrayChecksumParameterSetEdit( QWidget* parent = 0 );
+    explicit AbstractByteArrayChecksumParameterSetEdit( QWidget* parent = nullptr );
   public:
     virtual ~AbstractByteArrayChecksumParameterSetEdit();
 

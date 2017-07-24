@@ -38,7 +38,7 @@ class KReplaceDialog : public KAbstractFindDialog
   Q_OBJECT
 
   public:
-    explicit KReplaceDialog( ReplaceTool* tool, QWidget* parent = 0 );
+    explicit KReplaceDialog( ReplaceTool* tool, QWidget* parent = nullptr );
     virtual ~KReplaceDialog();
 
   public: // set

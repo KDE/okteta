@@ -52,7 +52,7 @@ class VersionTableModel : public QAbstractTableModel
     };
 
   public:
-    VersionTableModel( AbstractModel* model, If::Versionable* versionControl, QObject* parent = 0 );
+    VersionTableModel( AbstractModel* model, If::Versionable* versionControl, QObject* parent = nullptr );
     virtual ~VersionTableModel();
 
   public: // QAbstractTableModel API

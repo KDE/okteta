@@ -55,7 +55,7 @@ void ViewBox::add( ViewBox::Area area )
 
 ViewBox::~ViewBox()
 {
-    mView->widget()->setParent( 0 );
+    mView->widget()->setParent( nullptr );
 }
 
 }

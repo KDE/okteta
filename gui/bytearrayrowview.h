@@ -37,7 +37,7 @@ class OKTETAGUI_EXPORT ByteArrayRowView : public AbstractByteArrayView
   Q_OBJECT
 
   public:
-    explicit ByteArrayRowView( QWidget* parent = 0 );
+    explicit ByteArrayRowView( QWidget* parent = nullptr );
     virtual ~ByteArrayRowView();
 
   public: // AbstractByteArrayView API

@@ -41,7 +41,7 @@ ByteArrayViewFactory::ByteArrayViewFactory( ByteArrayViewProfileManager* byteArr
 
 AbstractView* ByteArrayViewFactory::createViewFor( AbstractDocument* _document )
 {
-    ByteArrayView* result = 0;
+    ByteArrayView* result = nullptr;
 
     ByteArrayDocument* document = static_cast<ByteArrayDocument*>( _document );
     if( document )
@@ -59,7 +59,7 @@ AbstractView* ByteArrayViewFactory::createViewFor( AbstractDocument* _document )
 
 AbstractView* ByteArrayViewFactory::createCopyOfView( AbstractView* _view, Qt::Alignment alignment )
 {
-    ByteArrayView* result = 0;
+    ByteArrayView* result = nullptr;
 
     ByteArrayView* view = qobject_cast<ByteArrayView*>( _view );
     if( view )

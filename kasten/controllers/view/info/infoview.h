@@ -42,7 +42,7 @@ class InfoView : public QWidget
   Q_OBJECT
 
   public:
-    explicit InfoView( InfoTool *tool, QWidget* parent = 0 );
+    explicit InfoView( InfoTool *tool, QWidget* parent = nullptr );
     virtual ~InfoView();
 
   public:

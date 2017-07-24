@@ -60,7 +60,7 @@ void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
 
         KIO::FileCopyJob* fileCopyJob =
             KIO::file_copy( url, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite );
-        KJobWidgets::setWindow( fileCopyJob, /*mWidget*/0 );
+        KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
 
         isWorkFileOk = fileCopyJob->exec();
         if( ! isWorkFileOk )

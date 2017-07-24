@@ -46,7 +46,7 @@ class KASTENGUI_EXPORT AbstractToolWidget : public QWidget
     enum DefaultType { AutoDefault, Default };
 
   public:
-    explicit AbstractToolWidget( QWidget* parent = 0 );
+    explicit AbstractToolWidget( QWidget* parent = nullptr );
 
     virtual ~AbstractToolWidget();
 

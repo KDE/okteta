@@ -42,11 +42,11 @@ void ByteArrayDocumentTest::testCreateNew()
 {
     ByteArrayDocument* document = new ByteArrayDocument(QStringLiteral("New created for test."));
 
-    QVERIFY( document != 0 );
+    QVERIFY( document != nullptr );
     QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
 
     Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
-    QVERIFY( byteArray != 0 );
+    QVERIFY( byteArray != nullptr );
     QCOMPARE( byteArray->size(), 0 );
     QVERIFY( !byteArray->isModified() );
 

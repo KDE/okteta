@@ -42,8 +42,8 @@ namespace Kasten
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
 ReplaceController::ReplaceController( KXMLGUIClient* guiClient, QWidget* parentWidget )
   : mParentWidget( parentWidget ),
-    mReplaceDialog( 0 ),
-    mReplacePrompt( 0 )
+    mReplaceDialog( nullptr ),
+    mReplacePrompt( nullptr )
 {
     KActionCollection* ActionCollection = guiClient->actionCollection();
 

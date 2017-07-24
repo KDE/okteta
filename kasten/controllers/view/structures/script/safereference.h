@@ -67,7 +67,7 @@ private:
 
 Q_DECLARE_METATYPE(SafeReference)
 
-inline SafeReference::SafeReference() : mData(0)
+inline SafeReference::SafeReference() : mData(nullptr)
 {
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "default constructed safe reference";
 }
@@ -94,7 +94,7 @@ inline DataInformation* SafeReference::data() const
 
 inline void SafeReference::invalidate()
 {
-    mData = 0;
+    mData = nullptr;
 }
 
 inline void SafeReferenceHolder::safeReferenceDestroyed(SafeReference* ref)

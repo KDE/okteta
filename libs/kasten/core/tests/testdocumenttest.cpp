@@ -56,7 +56,7 @@ void TestDocumentTest::testPlainConstructor()
 {
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QVERIFY( document != 0 );
+    QVERIFY( document != nullptr );
     QCOMPARE( *document->data(), QByteArray() );
     QCOMPARE( document->title(), QString() );
     QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
@@ -69,7 +69,7 @@ void TestDocumentTest::testDataConstructor()
     const QByteArray testData( TestData );
     Kasten::TestDocument* document = new Kasten::TestDocument( testData );
 
-    QVERIFY( document != 0 );
+    QVERIFY( document != nullptr );
     QCOMPARE( *document->data(), testData );
     QCOMPARE( document->title(), QString() );
     QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );

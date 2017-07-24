@@ -32,7 +32,7 @@ namespace Kasten
 
 ByteArrayViewProfileSynchronizer::ByteArrayViewProfileSynchronizer( ByteArrayViewProfileManager* viewProfileManager )
   : QObject()
-  , mView( 0 )
+  , mView( nullptr )
   , mViewProfileId()
   , mDirtyFlags( 0 )
   , mUpdatingView( false )
@@ -111,7 +111,7 @@ void ByteArrayViewProfileSynchronizer::setViewProfileId( const ByteArrayViewProf
 void
 ByteArrayViewProfileSynchronizer::syncToRemote()
 {
-    if( (mView == 0) || (mViewProfileId.isEmpty()) )
+    if( (! mView) || (mViewProfileId.isEmpty()) )
         return;
 
     ByteArrayViewProfile viewProfile = mViewProfileManager->viewProfile( mViewProfileId );
@@ -130,7 +130,7 @@ ByteArrayViewProfileSynchronizer::syncToRemote()
 void
 ByteArrayViewProfileSynchronizer::syncFromRemote()
 {
-    if( (mView == 0) || (mViewProfileId.isEmpty()) )
+    if( (! mView) || (mViewProfileId.isEmpty()) )
         return;
 
     const ByteArrayViewProfile viewProfile = mViewProfileManager->viewProfile( mViewProfileId );
@@ -146,7 +146,7 @@ ByteArrayViewProfileSynchronizer::syncFromRemote()
 void
 ByteArrayViewProfileSynchronizer::onViewProfilesChanged( const QList<ByteArrayViewProfile>& viewProfiles )
 {
-    if( mView == 0 )
+    if( ! mView )
         return;
 
     foreach( const ByteArrayViewProfile& viewProfile, viewProfiles )
@@ -277,7 +277,7 @@ void ByteArrayViewProfileSynchronizer::connectViewSignals()
 
 void ByteArrayViewProfileSynchronizer::onViewProfilesRemoved( const QList<ByteArrayViewProfile::Id>& viewProfileIds )
 {
-    if( mView == 0 )
+    if( ! mView )
         return;
 
     foreach( const ByteArrayViewProfile::Id& viewProfileId, viewProfileIds )

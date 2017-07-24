@@ -47,7 +47,7 @@ class PODTableModel : public QAbstractTableModel
     };
 
   public:
-    explicit PODTableModel( PODDecoderTool* tool, QObject* parent = 0 );
+    explicit PODTableModel( PODDecoderTool* tool, QObject* parent = nullptr );
     virtual ~PODTableModel();
 
   public: // QAbstractItemModel API

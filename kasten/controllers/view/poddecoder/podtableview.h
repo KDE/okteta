@@ -46,7 +46,7 @@ class PODTableView : public QWidget, public AbstractDifferentSizeDialog
   Q_OBJECT
 
   public:
-    explicit PODTableView( PODDecoderTool* tool, QWidget* parent = 0 );
+    explicit PODTableView( PODDecoderTool* tool, QWidget* parent = nullptr );
     virtual ~PODTableView();
 
   public:

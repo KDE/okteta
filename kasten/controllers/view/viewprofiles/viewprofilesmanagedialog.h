@@ -46,7 +46,7 @@ class ViewProfilesManageDialog : public QDialog
 
   public:
     explicit ViewProfilesManageDialog( ByteArrayViewProfileManager* viewProfileManager,
-                                       QWidget* parent = 0 );
+                                       QWidget* parent = nullptr );
 
     virtual ~ViewProfilesManageDialog();
 

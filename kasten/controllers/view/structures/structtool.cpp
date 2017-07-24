@@ -49,7 +49,7 @@ namespace Kasten
 class StructToolPrivate
 {
 public:
-    StructToolPrivate() : mByteArrayView(0), mByteArrayModel(0), mCursorIndex(0),
+    StructToolPrivate() : mByteArrayView(nullptr), mByteArrayModel(nullptr), mCursorIndex(0),
             mByteOrder(StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
             mWritingData(false), mCurrentItemDataChanged(false) {}
 
@@ -112,10 +112,10 @@ void StructTool::setTargetModel(AbstractModel* model)
     if (d->mByteArrayModel)
         d->mByteArrayModel->disconnect(this);
 
-    d->mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    d->mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
     ByteArrayDocument* document = d->mByteArrayView ?
-            qobject_cast<ByteArrayDocument*>(d->mByteArrayView->baseModel()) : 0;
-    d->mByteArrayModel = document ? document->content() : 0;
+            qobject_cast<ByteArrayDocument*>(d->mByteArrayView->baseModel()) : nullptr;
+    d->mByteArrayModel = document ? document->content() : nullptr;
 
     if (d->mByteArrayModel && d->mByteArrayView)
     {
@@ -233,7 +233,7 @@ DataInformation* StructTool::childAt(int idx) const
 {
     if (idx >= d->mData.size() || idx < 0)
     {
-        return 0;
+        return nullptr;
     }
     //don't expose the topLevelDataInformation, since this may cause crashes
     return d->mData.at(idx)->actualDataInformation();
@@ -363,7 +363,7 @@ void StructTool::validateAllStructures()
 
 bool StructTool::isFileLoaded() const
 {
-    return d->mByteArrayModel != NULL;
+    return ( d->mByteArrayModel != nullptr );
 }
 
 void StructTool::lockStructure(const QModelIndex& idx)

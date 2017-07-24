@@ -39,8 +39,8 @@ class KASTENGUI_EXPORT ToggleButton : public QToolButton
     Q_OBJECT
 
   public:
-    ToggleButton( const QString& text, const QString& toolTip, QWidget* parent = 0 );
-    ToggleButton( const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent = 0 );
+    ToggleButton( const QString& text, const QString& toolTip, QWidget* parent = nullptr );
+    ToggleButton( const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent = nullptr );
     virtual ~ToggleButton();
 
   public:

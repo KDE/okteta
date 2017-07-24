@@ -60,7 +60,7 @@ class TestDocumentFileLoadThread : public QThread
 
 
 inline TestDocumentFileLoadThread::TestDocumentFileLoadThread( QObject* parent, const QByteArray& header, QFile* file )
- : QThread( parent ), mFile( file ), mHeader( header ), mDocument( 0 )
+ : QThread( parent ), mFile( file ), mHeader( header ), mDocument( nullptr )
 {}
 
 inline TestDocument* TestDocumentFileLoadThread::document() const { return mDocument; }

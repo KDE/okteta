@@ -35,7 +35,7 @@ namespace Okteta
 
 ByteArrayJanusView::ByteArrayJanusView( QWidget* parent )
   : QWidget( parent ),
-    mView( 0 ),
+    mView( nullptr ),
     mViewModus( -1 )
 {
     mLayout = new QHBoxLayout( this );

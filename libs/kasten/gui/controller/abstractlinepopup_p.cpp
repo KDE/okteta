@@ -83,7 +83,7 @@ int AbstractLinePopupPrivate::exec()
     QEventLoop eventLoop;
     mEventLoop = &eventLoop;
     eventLoop.exec();
-    mEventLoop = 0;
+    mEventLoop = nullptr;
 
     return mResult;
 }

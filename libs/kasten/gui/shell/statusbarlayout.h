@@ -38,7 +38,7 @@ class StatusBarLayout : public QLayout
   Q_OBJECT
 
   public:
-    explicit StatusBarLayout( QWidget* parent = 0 );
+    explicit StatusBarLayout( QWidget* parent = nullptr );
     virtual ~StatusBarLayout();
 
   public:

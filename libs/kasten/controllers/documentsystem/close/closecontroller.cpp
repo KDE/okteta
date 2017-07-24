@@ -43,7 +43,7 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
                                   bool supportMultiple )
   : AbstractXmlGuiController()
   , mDocumentStrategy( documentStrategy )
-  , mDocument( 0 )
+  , mDocument( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -73,8 +73,8 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
 
 void CloseController::setTargetModel( AbstractModel* model )
 {
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
-    const bool hasDocument = ( mDocument != 0 );
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
+    const bool hasDocument = ( mDocument != nullptr );
 
     mCloseAction->setEnabled( hasDocument );
 }

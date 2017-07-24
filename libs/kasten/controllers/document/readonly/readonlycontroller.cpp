@@ -36,7 +36,7 @@ namespace Kasten
 {
 
 ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
- : mDocument( 0 )
+ : mDocument( nullptr )
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
@@ -50,14 +50,14 @@ ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
     connect( mSetReadOnlyAction, &QAction::triggered,
              this, &ReadOnlyController::setReadOnly );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void ReadOnlyController::setTargetModel( AbstractModel* model )
 {
     if( mDocument ) mDocument->disconnect( mSetReadOnlyAction );
 
-    mDocument = model ? model->findBaseModel<AbstractDocument*>() : 0;
+    mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
     if( mDocument )
     {

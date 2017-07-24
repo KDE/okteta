@@ -37,7 +37,7 @@ ByteArraySourceCodeStreamEncoderConfigEditorFactory::ByteArraySourceCodeStreamEn
 
 AbstractModelStreamEncoderConfigEditor* ByteArraySourceCodeStreamEncoderConfigEditorFactory::tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const
 {
-    AbstractModelStreamEncoderConfigEditor* result = 0;
+    AbstractModelStreamEncoderConfigEditor* result = nullptr;
     ByteArraySourceCodeStreamEncoder* sourceCodeStreamEncoder =
         qobject_cast<ByteArraySourceCodeStreamEncoder*>( encoder );
 

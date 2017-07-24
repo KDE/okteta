@@ -37,7 +37,7 @@ class BytesPerLineDialog : public QDialog
   Q_OBJECT
 
   public:
-    explicit BytesPerLineDialog( QWidget* parent = 0 );
+    explicit BytesPerLineDialog( QWidget* parent = nullptr );
 
     virtual ~BytesPerLineDialog();
 

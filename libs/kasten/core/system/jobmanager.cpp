@@ -45,7 +45,7 @@ bool JobManager::executeJob( KJob* job )
     QGuiApplication::restoreOverrideCursor();
 
     if( !success )
-        KMessageBox::error( 0, job->errorText() ); // TODO: feed into notification system
+        KMessageBox::error( nullptr, job->errorText() ); // TODO: feed into notification system
 
     return success;
 }

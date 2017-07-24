@@ -45,7 +45,7 @@ class FileSystemBrowserView : public QWidget
   Q_OBJECT
 
   public:
-    explicit FileSystemBrowserView( FileSystemBrowserTool* tool, QWidget* parent = 0 );
+    explicit FileSystemBrowserView( FileSystemBrowserTool* tool, QWidget* parent = nullptr );
     virtual ~FileSystemBrowserView();
 
   public:

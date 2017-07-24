@@ -42,7 +42,7 @@ class ExportDialog : public QDialog
 
   public:
     ExportDialog( const QString& remoteTypeName, AbstractModelExporterConfigEditor* configEditor,
-                  QWidget* parent = 0 );
+                  QWidget* parent = nullptr );
 
     virtual ~ExportDialog();
 

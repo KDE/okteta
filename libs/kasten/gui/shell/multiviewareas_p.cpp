@@ -38,7 +38,7 @@ namespace Kasten
 // TODO: catch area focues change!
 MultiViewAreasPrivate::MultiViewAreasPrivate( MultiViewAreas* parent )
   : AbstractGroupedViewsPrivate( parent ),
-    mCurrentInlineToolViewArea( 0 )
+    mCurrentInlineToolViewArea( nullptr )
 {
 }
 
@@ -153,7 +153,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
             const QList<int> baseOfBaseSplitterSizes = baseOfBaseSplitter->sizes();
             const int indexOfBaseSplitter = baseOfBaseSplitter->indexOf( baseSplitter );
             baseOfBaseSplitter->insertWidget( indexOfBaseSplitter, otherWidget );
-            viewAreaWidget->setParent( 0 );
+            viewAreaWidget->setParent( nullptr );
             delete baseSplitter;
             baseOfBaseSplitter->setSizes( baseOfBaseSplitterSizes );
         }
@@ -161,7 +161,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
         mViewAreaList.removeOne( viewArea );
 
         if( mCurrentInlineToolViewArea == viewArea )
-            mCurrentInlineToolViewArea = 0;
+            mCurrentInlineToolViewArea = nullptr;
 
         if( mCurrentViewArea == viewArea )
         {
@@ -203,7 +203,7 @@ void MultiViewAreasPrivate::onViewAreaFocusChanged( bool hasFocus )
         return;
 
     if( mCurrentInlineToolViewArea && mCurrentInlineToolViewArea == mCurrentViewArea )
-        mCurrentInlineToolViewArea->setCurrentToolInlineView( 0 );
+        mCurrentInlineToolViewArea->setCurrentToolInlineView( nullptr );
 
     // TODO: care for ! hasFocus?
     if( hasFocus )

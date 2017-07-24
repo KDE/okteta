@@ -65,11 +65,11 @@ ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer( AbstractColumnStylist* s
    mByteSpacingWidth( DefaultByteSpacingWidth ),
    mGroupSpacingWidth( DefaultGroupSpacingWidth ),
    mNoOfGroupedBytes( DefaultNoOfGroupedBytes ),
-   mLinePosLeftPixelX( 0 ),
-   mLinePosRightPixelX( 0 ),
+   mLinePosLeftPixelX( nullptr ),
+   mLinePosRightPixelX( nullptr ),
    mLastLinePos( 0 ),
    mByteTypeColored( true ),
-   mValueCodec( 0 ),
+   mValueCodec( nullptr ),
    mBinaryGapWidth( DefaultBinaryGapWidth ),
    mShowingNonprinting( DefaultShowingNonprinting ),
    mSubstituteChar( DefaultSubstituteChar ),
@@ -654,7 +654,7 @@ void ByteArrayRowColumnRenderer::renderPlain( QPainter* painter, const LinePosit
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
 
-    const bool hasBookmarks = ( mBookmarks != 0 );
+    const bool hasBookmarks = ( mBookmarks != nullptr );
     if( hasBookmarks )
     {
         bit = mBookmarks->createBookmarksConstIterator();
@@ -699,7 +699,7 @@ void ByteArrayRowColumnRenderer::renderSelection( QPainter* painter, const LineP
     BookmarksConstIterator bit;
     Address nextBookmarkOffset = -1;
 
-    const bool hasBookmarks = ( mBookmarks != 0 );
+    const bool hasBookmarks = ( mBookmarks != nullptr );
     if( hasBookmarks )
     {
         bit = mBookmarks->createBookmarksConstIterator();

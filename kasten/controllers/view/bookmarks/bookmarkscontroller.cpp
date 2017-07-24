@@ -55,7 +55,7 @@ static const char BookmarkListActionListId[] = "bookmark_list";
 // TODO: Sortieren nach Offset oder Zeit
 
 BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
- : mGuiClient( guiClient ), mByteArrayView( 0 ), mByteArray( 0 ), mBookmarks( 0 )
+ : mGuiClient( guiClient ), mByteArrayView( nullptr ), mByteArray( nullptr ), mBookmarks( nullptr )
 {
     KActionCollection* actionCollection = mGuiClient->actionCollection();
 
@@ -86,7 +86,7 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
     connect( mBookmarksActionGroup, &QActionGroup::triggered,
              this, &BookmarksController::onBookmarkTriggered );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 void BookmarksController::setTargetModel( AbstractModel* model )
@@ -94,14 +94,14 @@ void BookmarksController::setTargetModel( AbstractModel* model )
     if( mByteArrayView ) mByteArrayView->disconnect( this );
     if( mByteArray ) mByteArray->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArray = document ? document->content() : 0;
-    mBookmarks = ( mByteArray && mByteArrayView ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : 0;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArray = document ? document->content() : nullptr;
+    mBookmarks = ( mByteArray && mByteArrayView ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : nullptr;
 
-    const bool hasViewWithBookmarks = ( mBookmarks != 0 );
+    const bool hasViewWithBookmarks = ( mBookmarks != nullptr );
     int bookmarksCount = 0;
     if( hasViewWithBookmarks )
     {
@@ -139,7 +139,7 @@ void BookmarksController::updateBookmarks()
 
     qDeleteAll( mBookmarksActionGroup->actions() );
 
-    if( mBookmarks == 0 )
+    if( ! mBookmarks )
         return;
 
     const int startOffset = mByteArrayView->startOffset();

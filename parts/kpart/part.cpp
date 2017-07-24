@@ -187,7 +187,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
     if( document )
     {
         foreach( Kasten::AbstractXmlGuiController* controller, mControllers )
-            controller->setTargetModel( 0 );
+            controller->setTargetModel( nullptr );
 
         delete mByteArrayView;
         delete mDocument;

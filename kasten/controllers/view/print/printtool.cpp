@@ -49,7 +49,7 @@ namespace Kasten
 {
 
 PrintTool::PrintTool()
- : mDocument( 0 ), mByteArrayView( 0 ), mByteArrayModel( 0 )
+ : mDocument( nullptr ), mByteArrayView( nullptr ), mByteArrayModel( nullptr )
 {
 }
 
@@ -57,10 +57,10 @@ void PrintTool::setTargetModel( AbstractModel* model )
 {
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
-    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : 0;
+    mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
-    mDocument = mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : 0;
-    mByteArrayModel = mDocument ? mDocument->content() : 0;
+    mDocument = mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    mByteArrayModel = mDocument ? mDocument->content() : nullptr;
 
     const bool hasView = ( mByteArrayView && mByteArrayModel );
     emit viewChanged( hasView );
@@ -73,9 +73,9 @@ void PrintTool::print()
     QPrinter printer;
 
 //     LayoutDialogPage* layoutPage = new LayoutDialogPage();
-    QList<QWidget*> customDialogPages;
+//     QList<QWidget*> customDialogPages;
 //     customDialogPages << layoutPage;
-    QPrintDialog *printDialog = new QPrintDialog( &printer, 0 );
+    QPrintDialog *printDialog = new QPrintDialog( &printer, nullptr );
     // Disable PrintPageRange, this tells Qt we can't do client-side page selection,
     // so it will try do server-side page selection if supported
     printDialog->setOption(QPrintDialog::PrintPageRange, false);
@@ -173,7 +173,7 @@ void PrintTool::print()
         {
             const QString message = i18nc( "@info","Could not print." );
 
-            KMessageBox::sorry( 0, message, processTitle );
+            KMessageBox::sorry( nullptr, message, processTitle );
         }
     }
 

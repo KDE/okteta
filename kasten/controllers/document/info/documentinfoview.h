@@ -43,7 +43,7 @@ class DocumentInfoView : public QWidget
   Q_OBJECT
 
   public:
-    explicit DocumentInfoView( DocumentInfoTool* tool, QWidget* parent = 0 );
+    explicit DocumentInfoView( DocumentInfoTool* tool, QWidget* parent = nullptr );
     virtual ~DocumentInfoView();
 
   public:

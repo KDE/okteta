@@ -47,7 +47,7 @@ static const int ZoomSliderWidth = 150;
 // where to put this, behind interface? or better into a zoomtool?
 
 ZoomSlider::ZoomSlider( QWidget* parent )
-  : QWidget( parent ), mModel( 0 ), mZoomControl( 0 )
+  : QWidget( parent ), mModel( nullptr ), mZoomControl( nullptr )
 {
     mZoomOutButton = new QToolButton( this );
     mZoomOutButton->setIcon( QIcon::fromTheme( QStringLiteral("zoom-out") ) );
@@ -77,7 +77,7 @@ ZoomSlider::ZoomSlider( QWidget* parent )
 
     setFixedWidth( ZoomSliderWidth );
 
-    setTargetModel( 0 );
+    setTargetModel( nullptr );
 }
 
 
@@ -85,10 +85,10 @@ void ZoomSlider::setTargetModel( AbstractModel* model )
 {
     if( mModel ) mModel->disconnect( this );
 
-    mModel = model ? model->findBaseModelWithInterface<If::Zoomable*>() : 0;
-    mZoomControl = mModel ? qobject_cast<If::Zoomable *>( mModel ) : 0;
+    mModel = model ? model->findBaseModelWithInterface<If::Zoomable*>() : nullptr;
+    mZoomControl = mModel ? qobject_cast<If::Zoomable *>( mModel ) : nullptr;
 
-    const bool hasView = ( mZoomControl != 0 );
+    const bool hasView = ( mZoomControl != nullptr );
     if( hasView )
     {
         mSlider->setSingleStep( 1 ); // mZoomControl->zoomLevelSingleStep()?

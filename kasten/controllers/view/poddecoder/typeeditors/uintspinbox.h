@@ -34,7 +34,7 @@ class UIntSpinBox : public QAbstractSpinBox
 Q_OBJECT
 Q_PROPERTY( quint64 value READ value WRITE setValue USER true )
   public:
-    explicit UIntSpinBox( QWidget* parent = 0, int base = 10 );
+    explicit UIntSpinBox( QWidget* parent = nullptr, int base = 10 );
 
     virtual ~UIntSpinBox();
 
@@ -49,10 +49,10 @@ Q_PROPERTY( quint64 value READ value WRITE setValue USER true )
     void setMaximum( quint64 max );
     void setBase( int base );
 
-    static UIntSpinBox* createUInt64Spinbox( QWidget* parent = 0 );
-    static UIntSpinBox* createUInt32Spinbox( QWidget* parent = 0 );
-    static UIntSpinBox* createUInt16Spinbox( QWidget* parent = 0 );
-    static UIntSpinBox* createUInt8Spinbox( QWidget* parent = 0 );
+    static UIntSpinBox* createUInt64Spinbox( QWidget* parent = nullptr );
+    static UIntSpinBox* createUInt32Spinbox( QWidget* parent = nullptr );
+    static UIntSpinBox* createUInt16Spinbox( QWidget* parent = nullptr );
+    static UIntSpinBox* createUInt8Spinbox( QWidget* parent = nullptr );
 
   protected: // QAbstractSpinBox API
     virtual QValidator::State validate( QString& input, int& pos ) const;
@@ -126,7 +126,7 @@ inline void UIntSpinBox::setBase( int base )
         (base == 16) ? "0x" :
         (base ==  8) ? "0o" :
         (base ==  2) ? "0b" :
-        /* else */     0 );
+        /* else */     nullptr );
 }
 
 inline UIntSpinBox::~UIntSpinBox() {}

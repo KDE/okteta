@@ -39,7 +39,7 @@ class KASTENGUI_EXPORT AbstractModelDataGeneratorConfigEditor : public QWidget
   Q_OBJECT
 
   protected:
-    explicit AbstractModelDataGeneratorConfigEditor( QWidget* parent = 0 );
+    explicit AbstractModelDataGeneratorConfigEditor( QWidget* parent = nullptr );
 
   public:
     virtual ~AbstractModelDataGeneratorConfigEditor();

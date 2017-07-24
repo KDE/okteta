@@ -44,7 +44,7 @@ class ViewProfileEdit : public QWidget
     Q_OBJECT
 
 public:
-    explicit ViewProfileEdit( QWidget* parent = 0 );
+    explicit ViewProfileEdit( QWidget* parent = nullptr );
 
     virtual ~ViewProfileEdit();
 

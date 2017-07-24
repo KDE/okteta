@@ -41,7 +41,7 @@ DataInformation::DataInformation(const QString& name, DataInformationBase* paren
 }
 
 DataInformation::DataInformation(const DataInformation& d)
-        : mAdditionalData(d.mAdditionalData), mParent(0), mName(d.mName),
+        : mAdditionalData(d.mAdditionalData), mParent(nullptr), mName(d.mName),
           mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
           mWasAbleToRead(false), mByteOrder(d.mByteOrder), mLoggedData(ScriptLogger::LogInvalid)
 {
@@ -234,7 +234,7 @@ DataInformation* DataInformation::child(const QString& name) const
         if (child->name() == name)
             return child;
     }
-    return 0;
+    return nullptr;
 }
 
 TopLevelDataInformation* DataInformation::topLevelDataInformation() const

@@ -37,7 +37,7 @@ ByteArrayPatternGeneratorConfigEditorFactory::ByteArrayPatternGeneratorConfigEdi
 
 AbstractModelDataGeneratorConfigEditor* ByteArrayPatternGeneratorConfigEditorFactory::tryCreateConfigEditor( AbstractModelDataGenerator* generator ) const
 {
-    AbstractModelDataGeneratorConfigEditor* result = 0;
+    AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
     ByteArrayPatternGenerator* patternGenerator =
         qobject_cast<ByteArrayPatternGenerator*>( generator );
