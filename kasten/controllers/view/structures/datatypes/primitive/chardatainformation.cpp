@@ -96,7 +96,7 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
             {
                 //hex escape:
                 bool okay;
-                QString valStr = text.mid(2, 2); //only 2 chars
+                const QStringRef valStr = text.midRef(2, 2); //only 2 chars
                 quint8 val = valStr.toInt(&okay, 16);
                 if (okay)
                     return val;
@@ -119,7 +119,7 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
             {
                 //octal escape:
                 bool okay;
-                QString valStr = text.mid(1, 3); //only 2 chars
+                const QStringRef valStr = text.midRef(1, 3); //only 2 chars
                 quint8 val = valStr.toInt(&okay, 8);
                 if (okay)
                     return val;

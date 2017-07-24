@@ -142,7 +142,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         bool ok = false;
         if (valueString.startsWith(QLatin1String("0x")))
         {
-            intValue = valueString.mid(2).toULongLong(&ok, 16);
+            intValue = valueString.midRef(2).toULongLong(&ok, 16);
         }
         else
         {

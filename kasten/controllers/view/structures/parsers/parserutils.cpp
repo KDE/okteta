@@ -107,13 +107,13 @@ ParsedNumber<int> ParserUtils::intFromString(const QString& str)
     int value = 0;
     bool okay = false;
     if (str.startsWith(QLatin1String("0x")))
-        value = str.mid(2).toInt(&okay, 16);
+        value = str.midRef(2).toInt(&okay, 16);
     else if (str.startsWith(QLatin1String("-0x")))
     {
         //special case for minimum possible value
         if (str == QLatin1String("-0x80000000"))
             return ParsedNumber<int>(-0x80000000, str, true);
-        value = -str.mid(3).toInt(&okay, 16);
+        value = -str.midRef(3).toInt(&okay, 16);
     }
     else
         value = str.toInt(&okay, 10);
@@ -125,7 +125,7 @@ ParsedNumber<uint> ParserUtils::uintFromString(const QString& str)
     uint value = 0;
     bool okay;
     if (str.startsWith(QLatin1String("0x")))
-        value = str.mid(2).toUInt(&okay, 16);
+        value = str.midRef(2).toUInt(&okay, 16);
     else
         value = str.toUInt(&okay, 10);
     return ParsedNumber<uint>(value, str, okay);
@@ -136,7 +136,7 @@ ParsedNumber<quint64> ParserUtils::uint64FromString(const QString& str)
     quint64 value = 0;
     bool okay;
     if (str.startsWith(QLatin1String("0x")))
-        value = str.mid(2).toULongLong(&okay, 16);
+        value = str.midRef(2).toULongLong(&okay, 16);
     else
         value = str.toULongLong(&okay, 10);
     return ParsedNumber<quint64>(value, str, okay);
