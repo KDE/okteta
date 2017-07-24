@@ -32,10 +32,10 @@ class ModSumByteArrayChecksumParameterSet : public AbstractByteArrayChecksumPara
 {
   public:
     ModSumByteArrayChecksumParameterSet();
-    virtual ~ModSumByteArrayChecksumParameterSet();
+    ~ModSumByteArrayChecksumParameterSet() override;
 
   public: // AbstractByteArrayChecksumParameterSet API
-    virtual const char* id() const;
+    const char* id() const override;
 
   public:
     void setEndianness( Endianness endianness );

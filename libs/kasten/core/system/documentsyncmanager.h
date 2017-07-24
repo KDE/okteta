@@ -48,7 +48,7 @@ class KASTENCORE_EXPORT DocumentSyncManager : public QObject
 
   public:
     explicit DocumentSyncManager( DocumentManager* manager );
-    virtual ~DocumentSyncManager();
+    ~DocumentSyncManager() override;
 
   public:
     void load( const QUrl& url );

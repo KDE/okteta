@@ -45,7 +45,7 @@ class KASTENCONTROLLERS_EXPORT ReadOnlyBarController : public AbstractXmlGuiCont
     explicit ReadOnlyBarController( StatusBar* statusBar );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void setReadOnly( bool isReadOnly );

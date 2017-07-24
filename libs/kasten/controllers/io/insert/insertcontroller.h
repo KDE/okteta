@@ -53,7 +53,7 @@ class KASTENCONTROLLERS_EXPORT InsertController : public AbstractXmlGuiControlle
                       KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private:
     void updateActions();

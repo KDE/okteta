@@ -51,13 +51,13 @@ class DocumentListModel : public QAbstractTableModel
 
   public:
     explicit DocumentListModel( DocumentsTool* documentsTool, QObject* parent = nullptr );
-    virtual ~DocumentListModel();
+    ~DocumentListModel() override;
 
   public: // QAbstractTableModel API
-    virtual int rowCount( const QModelIndex& parent ) const;
-    virtual int columnCount( const QModelIndex& parent ) const;
-    virtual QVariant data( const QModelIndex& index, int role ) const;
-    virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+    int rowCount( const QModelIndex& parent ) const override;
+    int columnCount( const QModelIndex& parent ) const override;
+    QVariant data( const QModelIndex& index, int role ) const override;
+    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
 
   private Q_SLOTS:
     void onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents );

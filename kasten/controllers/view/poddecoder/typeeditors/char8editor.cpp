@@ -36,10 +36,10 @@ class Char8Validator : public QValidator
   public:
     Char8Validator( Okteta::CharCodec* charCodec, QObject* parent = nullptr );
 
-    virtual ~Char8Validator();
+    ~Char8Validator() override;
 
   public: // QValidator API
-    virtual QValidator::State validate( QString& input, int& pos ) const;
+    QValidator::State validate( QString& input, int& pos ) const override;
 
   protected:
     Okteta::CharCodec* mCharCodec;

@@ -58,10 +58,10 @@ public:
     OsdParser(const QString& pluginName, const QString& absolutePath);
     /** construct a parser from an in-memory string */
     explicit OsdParser(const QString& xml);
-    virtual ~OsdParser();
+    ~OsdParser() override;
 
-    virtual QStringList parseStructureNames() const;
-    virtual QVector<TopLevelDataInformation*> parseStructures() const;
+    QStringList parseStructureNames() const override;
+    QVector<TopLevelDataInformation*> parseStructures() const override;
 
     static DataInformation* parseElement(const QDomElement& node, const OsdParserInfo& info);
 private:
@@ -100,10 +100,10 @@ private:
 class OsdChildrenParser : public ChildrenParser {
 public:
     OsdChildrenParser(const OsdParserInfo& info, const QDomElement& firstChild);
-    virtual ~OsdChildrenParser();
-    virtual DataInformation* next();
-    virtual bool hasNext();
-    virtual void setParent(DataInformation* newParent);
+    ~OsdChildrenParser() override;
+    DataInformation* next() override;
+    bool hasNext() override;
+    void setParent(DataInformation* newParent) override;
 protected:
     OsdParserInfo mInfo;
     QDomElement mElem;
@@ -112,9 +112,9 @@ protected:
 class SingleElementOsdChildrenParser : public OsdChildrenParser {
 public:
     SingleElementOsdChildrenParser(const OsdParserInfo& info, const QDomElement& element);
-    virtual ~SingleElementOsdChildrenParser();
-    virtual DataInformation* next();
-    virtual bool hasNext();
+    ~SingleElementOsdChildrenParser() override;
+    DataInformation* next() override;
+    bool hasNext() override;
 protected:
     bool mParsed;
 };

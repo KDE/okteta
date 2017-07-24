@@ -40,12 +40,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT FilterToolView : public AbstractToolView
 {
   public:
     explicit FilterToolView( FilterTool* tool );
-    virtual ~FilterToolView();
+    ~FilterToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     FilterView* mWidget;

@@ -37,10 +37,10 @@ class ByteArrayRandomDataGeneratorConfigEditorFactory : public AbstractModelData
   public:
     ByteArrayRandomDataGeneratorConfigEditorFactory();
 
-    virtual ~ByteArrayRandomDataGeneratorConfigEditorFactory();
+    ~ByteArrayRandomDataGeneratorConfigEditorFactory() override;
 
   public:
-    virtual AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor( AbstractModelDataGenerator* generator ) const;
+    AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor( AbstractModelDataGenerator* generator ) const override;
 };
 
 }

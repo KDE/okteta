@@ -45,7 +45,7 @@ class KASTENGUI_EXPORT AbstractSelectionView : public QObject
   protected:
     AbstractSelectionView();
   public:
-    virtual ~AbstractSelectionView();
+    ~AbstractSelectionView() override;
 
   public: // API to be implemented
     virtual QWidget* widget() const = 0;

@@ -36,11 +36,11 @@ class RotateByteArrayFilter : public AbstractByteArrayFilter
   public:
     RotateByteArrayFilter();
 
-    virtual ~RotateByteArrayFilter();
+    ~RotateByteArrayFilter() override;
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayFilterParameterSet *parameterSet();
+    bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayFilterParameterSet *parameterSet() override;
 
   protected:
     RotateByteArrayFilterParameterSet mParameterSet;

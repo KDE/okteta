@@ -41,7 +41,7 @@ class KASTENCONTROLLERS_EXPORT DocumentsTool : public AbstractTool
 
   public:
     explicit DocumentsTool( DocumentManager* documentManager );
-    virtual ~DocumentsTool();
+    ~DocumentsTool() override;
 
   public:
     AbstractDocument* focussedDocument() const;
@@ -51,8 +51,8 @@ class KASTENCONTROLLERS_EXPORT DocumentsTool : public AbstractTool
     void setFocussedDocument( AbstractDocument* document );
 
   public: // AbstractTool API
-    virtual QString title() const;
-    virtual void setTargetModel( AbstractModel* model );
+    QString title() const override;
+    void setTargetModel( AbstractModel* model ) override;
 
   Q_SIGNALS:
     void documentsAdded( const QList<Kasten::AbstractDocument*>& documents );

@@ -47,7 +47,7 @@ class KASTENGUI_EXPORT AbstractDocumentStrategy : public QObject
     AbstractDocumentStrategy();
     explicit AbstractDocumentStrategy( AbstractDocumentStrategyPrivate* d );
   public:
-    virtual ~AbstractDocumentStrategy();
+    ~AbstractDocumentStrategy() override;
 
   public: // API to be implemented
     virtual void createNew() = 0;

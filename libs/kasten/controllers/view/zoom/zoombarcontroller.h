@@ -47,7 +47,7 @@ class KASTENCONTROLLERS_EXPORT ZoomBarController : public AbstractXmlGuiControll
     explicit ZoomBarController( StatusBar* statusBar );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private:
     ZoomSlider* mZoomSlider;

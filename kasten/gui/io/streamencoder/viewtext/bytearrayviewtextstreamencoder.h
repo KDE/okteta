@@ -62,13 +62,13 @@ class ByteArrayViewTextStreamEncoder : public AbstractByteArrayStreamEncoder
 
   public:
     ByteArrayViewTextStreamEncoder();
-    virtual ~ByteArrayViewTextStreamEncoder();
+    ~ByteArrayViewTextStreamEncoder() override;
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice* device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range );
+    bool encodeDataToStream( QIODevice* device,
+                             const ByteArrayView* byteArrayView,
+                             const Okteta::AbstractByteArrayModel* byteArrayModel,
+                             const Okteta::AddressRange& range ) override;
 
   protected:
     ByteArrayViewTextStreamEncoderSettings mSettings;

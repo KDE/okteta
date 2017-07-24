@@ -45,10 +45,10 @@ class KValueEditor: public KEditor
 
   public:
     KValueEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent );
-    virtual ~KValueEditor();
+    ~KValueEditor() override;
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent *keyEvent );
+    bool handleKeyPress( QKeyEvent *keyEvent ) override;
 
   public:
     void reset();

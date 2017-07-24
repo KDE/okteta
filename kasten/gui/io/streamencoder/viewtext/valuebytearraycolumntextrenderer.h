@@ -43,10 +43,10 @@ class ValueByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRende
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         Okteta::ValueCoding valueCoding );
 
-    virtual ~ValueByteArrayColumnTextRenderer();
+    ~ValueByteArrayColumnTextRenderer() override;
 
   protected: // AbstractByteArrayColumnTextRenderer API
-    virtual void renderLine( QTextStream* stream, bool isSubline ) const;
+    void renderLine( QTextStream* stream, bool isSubline ) const override;
 
   protected:
     const Okteta::ValueCodec* mValueCodec;

@@ -44,7 +44,7 @@ class KASTENCORE_EXPORT AbstractSyncToRemoteJob : public KJob
   public:
     AbstractSyncToRemoteJob();
 
-    virtual ~AbstractSyncToRemoteJob();
+    ~AbstractSyncToRemoteJob() override;
 
   protected:
     AbstractSyncToRemoteJobPrivate* const d_ptr;

@@ -35,11 +35,11 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresToolFactory: public AbstractToolF
 {
 public:
     StructuresToolFactory();
-    virtual ~StructuresToolFactory();
+    ~StructuresToolFactory() override;
 
 public:
     // AbstractToolFactory API
-    virtual AbstractTool* create();
+    AbstractTool* create() override;
 };
 
 }

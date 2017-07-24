@@ -43,7 +43,7 @@ class KNavigator : public KController
     KNavigator( AbstractByteArrayView* view, KController* parent );
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent* keyEvent );
+    bool handleKeyPress( QKeyEvent* keyEvent ) override;
 
   protected:
     /** moves the cursor according to the action, handles all drawing */

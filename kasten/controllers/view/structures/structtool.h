@@ -53,12 +53,12 @@ Q_OBJECT
 
 public:
     StructTool();
-    virtual ~StructTool();
+    ~StructTool() override;
 
     // AbstractTool API
     // virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
-    virtual void setTargetModel(AbstractModel* model);
+    QString title() const override;
+    void setTargetModel(AbstractModel* model) override;
 
 public:
     QSysInfo::Endian byteOrder() const;

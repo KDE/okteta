@@ -31,19 +31,19 @@ class StructureDataInformation : public DataInformationWithChildren
 public:
     explicit StructureDataInformation(const QString& name, const QVector<DataInformation*>& children =
             QVector<DataInformation*>(), DataInformation* parent = nullptr);
-    virtual ~StructureDataInformation();
+    ~StructureDataInformation() override;
 
-    virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset);
-    virtual bool isStruct() const;
+    qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
+    bool isStruct() const override;
 
-    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
+    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
     static bool readChildren(const QVector<DataInformation*>& children, Okteta::AbstractByteArrayModel *input,
             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,
             TopLevelDataInformation* top);
 private:
-    virtual QString typeNameImpl() const;
+    QString typeNameImpl() const override;
 };
 
 inline bool StructureDataInformation::isStruct() const

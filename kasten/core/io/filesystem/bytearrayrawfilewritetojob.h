@@ -40,10 +40,10 @@ class ByteArrayRawFileWriteToJob : public AbstractFileSystemSyncWithRemoteJob
   public:
     ByteArrayRawFileWriteToJob( ByteArrayRawFileSynchronizer *synchronizer,
                                 const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
-    virtual ~ByteArrayRawFileWriteToJob();
+    ~ByteArrayRawFileWriteToJob() override;
 
   protected: // AbstractFileSystemSyncWithRemoteJob API
-    virtual void startSyncWithRemote();
+    void startSyncWithRemote() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

@@ -52,10 +52,10 @@ class ByteArrayPatternGenerator : public AbstractModelDataGenerator
   public:
     ByteArrayPatternGenerator();
 
-    virtual ~ByteArrayPatternGenerator();
+    ~ByteArrayPatternGenerator() override;
 
   public: // AbstractModelDataGenerator API
-    virtual QMimeData* generateData();
+    QMimeData* generateData() override;
 
   public:
     ByteArrayPatternGeneratorSettings settings() const;

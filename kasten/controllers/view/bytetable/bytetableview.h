@@ -44,7 +44,7 @@ class ByteTableView : public AbstractToolWidget
 
   public:
     explicit ByteTableView( ByteTableTool *tool, QWidget* parent = nullptr );
-    virtual ~ByteTableView();
+    ~ByteTableView() override;
 
   public:
     ByteTableTool* tool() const;

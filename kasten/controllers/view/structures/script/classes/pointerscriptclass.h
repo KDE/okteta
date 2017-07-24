@@ -30,11 +30,11 @@ class PointerScriptClass : public PrimitiveScriptClass {
     Q_DISABLE_COPY(PointerScriptClass)
 public:
     PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
-    virtual ~PointerScriptClass();
+    ~PointerScriptClass() override;
 protected:
-    virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id);
-    virtual QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id);
-    virtual bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value);
+    bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
+    QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;
+    bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
 protected:
     QScriptString s_target;

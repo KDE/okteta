@@ -51,42 +51,42 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 
   public:
     explicit ByteArrayColumnView( QWidget* parent = nullptr );
-    virtual ~ByteArrayColumnView();
+    ~ByteArrayColumnView() override;
 
   public: // AbstractByteArrayView API
   // value column
-    virtual int/*PixelX*/ byteSpacingWidth() const;
-    virtual int noOfGroupedBytes() const;
-    virtual int/*PixelX*/ groupSpacingWidth() const;
-    virtual int/*PixelX*/ binaryGapWidth() const;
+    int/*PixelX*/ byteSpacingWidth() const override;
+    int noOfGroupedBytes() const override;
+    int/*PixelX*/ groupSpacingWidth() const override;
+    int/*PixelX*/ binaryGapWidth() const override;
 
   // char column
-    virtual bool showsNonprinting() const;
-    virtual QChar substituteChar() const;
-    virtual QChar undefinedChar() const;
+    bool showsNonprinting() const override;
+    QChar substituteChar() const override;
+    QChar undefinedChar() const override;
 
-    virtual bool isByteTypeColored() const;
+    bool isByteTypeColored() const override;
 
-    virtual void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
-    virtual void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) ;
-    virtual void setNoOfGroupedBytes( int noOfGroupedBytes );
-    virtual void setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth );
-    virtual void setBinaryGapWidth( int binaryGapWidth );
-    virtual void setBufferSpacing( int/*PixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*PixelX*/ groupSpacingWidth = 0 );
-    virtual void setValueCoding( ValueCoding valueCoding );
+    void setByteArrayModel( AbstractByteArrayModel* byteArrayModel ) override;
+    void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) override ;
+    void setNoOfGroupedBytes( int noOfGroupedBytes ) override;
+    void setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth ) override;
+    void setBinaryGapWidth( int binaryGapWidth ) override;
+    void setBufferSpacing( int/*PixelX*/ byteSpacingWidth, int noOfGroupedBytes = 0, int/*PixelX*/ groupSpacingWidth = 0 ) override;
+    void setValueCoding( ValueCoding valueCoding ) override;
   // char column parameters
-    virtual void setShowsNonprinting( bool showsNonprinting = true );
-    virtual void setSubstituteChar( QChar substituteChar );
-    virtual void setUndefinedChar( QChar undefinedChar );
-    virtual void setCharCoding( CharCoding charCoding );
-    virtual void setCharCoding( const QString& charCodingName );
-    virtual void setByteTypeColored( bool isColored );
+    void setShowsNonprinting( bool showsNonprinting = true ) override;
+    void setSubstituteChar( QChar substituteChar ) override;
+    void setUndefinedChar( QChar undefinedChar ) override;
+    void setCharCoding( CharCoding charCoding ) override;
+    void setCharCoding( const QString& charCodingName ) override;
+    void setByteTypeColored( bool isColored ) override;
 
   public: // ColumnsView API
-    virtual void renderColumns( QPainter* painter, int cx, int cy, int cw, int ch );
+    void renderColumns( QPainter* painter, int cx, int cy, int cw, int ch ) override;
 
   public: // QWidget API
-    virtual QSize minimumSizeHint() const;
+    QSize minimumSizeHint() const override;
 
   public: // logic value service
     /** calculates the number of bytes per line that fit into a widget with the given size
@@ -103,7 +103,7 @@ class OKTETAGUI_EXPORT ByteArrayColumnView : public AbstractByteArrayView
 //    void ensureByteVisible( int row, int column );
 
   protected: // Q_SLOTS QWidget API
-    virtual void changeEvent( QEvent* event );
+    void changeEvent( QEvent* event ) override;
 
   private:
     Q_DECLARE_PRIVATE( ByteArrayColumnView )

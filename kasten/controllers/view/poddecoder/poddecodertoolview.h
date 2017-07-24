@@ -40,12 +40,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderToolView : public AbstractToolVie
 {
   public:
     explicit PODDecoderToolView( PODDecoderTool *tool );
-    virtual ~PODDecoderToolView();
+    ~PODDecoderToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     PODTableView* mWidget;

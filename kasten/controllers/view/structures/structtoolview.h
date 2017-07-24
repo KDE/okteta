@@ -37,13 +37,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructToolView: public AbstractToolView
 {
 public:
     explicit StructToolView(StructTool *tool);
-    virtual ~StructToolView();
+    ~StructToolView() override;
 
 public:
     // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
 protected:
     StructView* mWidget;

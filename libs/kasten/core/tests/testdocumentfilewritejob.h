@@ -39,10 +39,10 @@ class TestDocumentFileWriteJob : public AbstractFileSystemSyncToRemoteJob
 
   public:
     TestDocumentFileWriteJob( TestDocumentFileSynchronizer* synchronizer );
-    virtual ~TestDocumentFileWriteJob();
+    ~TestDocumentFileWriteJob() override;
 
   protected: // AbstractFileSystemSyncToRemoteJob API
-    virtual void startWriteToFile();
+    void startWriteToFile() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

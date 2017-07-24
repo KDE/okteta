@@ -40,7 +40,7 @@ class ModelEncoderFileSystemExportJobPrivate : public AbstractFileSystemExportJo
                                             const QUrl& url,
                                             AbstractModelStreamEncoder* encoder );
 
-    virtual ~ModelEncoderFileSystemExportJobPrivate();
+    ~ModelEncoderFileSystemExportJobPrivate() override;
 
   public: // AbstractFileSystemExportJob API
     void startExportToFile();

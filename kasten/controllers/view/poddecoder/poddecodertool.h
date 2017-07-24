@@ -60,13 +60,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
   public:
     PODDecoderTool();
 
-    virtual ~PODDecoderTool();
+    ~PODDecoderTool() override;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public:
     bool isApplyable() const; // candidate for AbstractTool API

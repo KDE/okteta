@@ -41,7 +41,7 @@ class ViewProfileEditDialog : public QDialog
 public:
     explicit ViewProfileEditDialog( QWidget* parent = nullptr );
 
-    virtual ~ViewProfileEditDialog();
+    ~ViewProfileEditDialog() override;
 
 public:
     ByteArrayViewProfile viewProfile() const;

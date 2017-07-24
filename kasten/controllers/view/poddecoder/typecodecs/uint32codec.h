@@ -35,13 +35,13 @@ class UInt32Codec : public AbstractTypeCodec
   public:
     UInt32Codec();
 
-    virtual ~UInt32Codec();
+    ~UInt32Codec() override;
 
   public: // AbstractTypeCodec API
-    virtual QVariant value( const PODData& data, int* byteCount ) const;
-    virtual QByteArray valueToBytes( const QVariant& value ) const;
+    QVariant value( const PODData& data, int* byteCount ) const override;
+    QByteArray valueToBytes( const QVariant& value ) const override;
 
-    virtual bool areEqual( const QVariant& value, QVariant& otherValue ) const;
+    bool areEqual( const QVariant& value, QVariant& otherValue ) const override;
 };
 
 }

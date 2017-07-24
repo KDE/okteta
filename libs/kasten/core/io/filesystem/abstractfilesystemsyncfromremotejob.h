@@ -44,10 +44,10 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJob : public AbstractSyn
   public:
     explicit AbstractFileSystemSyncFromRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
 
-    virtual ~AbstractFileSystemSyncFromRemoteJob();
+    ~AbstractFileSystemSyncFromRemoteJob() override;
 
   public: // KJob API
-    virtual void start();
+    void start() override;
 
   protected: // API to be implemented
     virtual void startReadFromFile() = 0;

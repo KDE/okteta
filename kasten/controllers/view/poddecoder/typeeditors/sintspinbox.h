@@ -36,7 +36,7 @@ Q_PROPERTY( qint64 value READ value WRITE setValue USER true )
   public:
     explicit SIntSpinBox( QWidget* parent = nullptr, int base = 10 );
 
-    virtual ~SIntSpinBox();
+    ~SIntSpinBox() override;
 
   public:
     qint64 value() const;
@@ -54,10 +54,10 @@ Q_PROPERTY( qint64 value READ value WRITE setValue USER true )
     static SIntSpinBox* createSInt8Spinbox( QWidget* parent = nullptr );
 
   protected: // QAbstractSpinBox API
-    virtual QValidator::State validate( QString& input, int& pos ) const;
-    virtual void stepBy( int steps );
-    virtual void fixup( QString& input ) const;
-    virtual StepEnabled stepEnabled () const;
+    QValidator::State validate( QString& input, int& pos ) const override;
+    void stepBy( int steps ) override;
+    void fixup( QString& input ) const override;
+    StepEnabled stepEnabled() const override;
 
   protected:
     void updateEditLine() const;

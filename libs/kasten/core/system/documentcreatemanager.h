@@ -44,7 +44,7 @@ class KASTENCORE_EXPORT DocumentCreateManager : public QObject
 
   public:
     explicit DocumentCreateManager( DocumentManager* manager );
-    virtual ~DocumentCreateManager();
+    ~DocumentCreateManager() override;
 
   public:
     bool canCreateNewFromData( const QMimeData* mimeData ) const;

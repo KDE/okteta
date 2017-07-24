@@ -47,7 +47,7 @@ class FilterView : public AbstractToolWidget
 
   public:
     explicit FilterView( FilterTool *tool, QWidget* parent = nullptr );
-    virtual ~FilterView();
+    ~FilterView() override;
 
   public:
     FilterTool* tool() const;

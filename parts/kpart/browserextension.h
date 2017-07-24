@@ -42,8 +42,8 @@ class OktetaBrowserExtension : public KParts::BrowserExtension
     explicit OktetaBrowserExtension( OktetaPart* part );
 
   public: // KParts::BrowserExtension API
-    virtual void saveState( QDataStream& stream );
-    virtual void restoreState( QDataStream& stream );
+    void saveState( QDataStream& stream ) override;
+    void restoreState( QDataStream& stream ) override;
 
   public Q_SLOTS:
     /** copy text to clipboard */

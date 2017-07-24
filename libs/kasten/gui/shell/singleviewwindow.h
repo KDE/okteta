@@ -52,7 +52,7 @@ class KASTENGUI_EXPORT SingleViewWindow : public KXmlGuiWindow,
 
   public:
     explicit SingleViewWindow( AbstractView* view );
-    virtual ~SingleViewWindow();
+    ~SingleViewWindow() override;
 
   public:
     void addXmlGuiController( AbstractXmlGuiController* controller );
@@ -61,7 +61,7 @@ class KASTENGUI_EXPORT SingleViewWindow : public KXmlGuiWindow,
     void setView( AbstractView* view );
 
   public: // If::WidgetsDockable API
-    virtual QList<ToolViewDockWidget*> dockWidgets() const;
+    QList<ToolViewDockWidget*> dockWidgets() const override;
 
   protected:
     AbstractView* view() const;

@@ -39,10 +39,10 @@ class ByteArrayRawFileReloadJob : public AbstractFileSystemSyncFromRemoteJob
 
   public:
     explicit ByteArrayRawFileReloadJob( ByteArrayRawFileSynchronizer *synchronizer );
-    virtual ~ByteArrayRawFileReloadJob();
+    ~ByteArrayRawFileReloadJob() override;
 
   protected: // AbstractFileSystemSyncFromRemoteJob API
-    virtual void startReadFromFile();
+    void startReadFromFile() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

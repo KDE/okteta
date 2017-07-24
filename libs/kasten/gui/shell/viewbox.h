@@ -42,7 +42,7 @@ class ViewBox : public QWidget
 
   public:
     explicit ViewBox( AbstractView* view, QWidget* parent = nullptr );
-    virtual ~ViewBox();
+    ~ViewBox() override;
 
   public:
     AbstractView* view() const;

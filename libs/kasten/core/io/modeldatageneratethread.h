@@ -44,10 +44,10 @@ class KASTENCORE_EXPORT ModelDataGenerateThread : public QThread
     ModelDataGenerateThread( QObject* parent,
                              AbstractModelDataGenerator* generator );
 
-    virtual ~ModelDataGenerateThread();
+    ~ModelDataGenerateThread() override;
 
   public: // QThread API
-    virtual void run();
+    void run() override;
 
   public:
     /// the result of the thread, if successful. Needs to be deleted by the thread::run() caller

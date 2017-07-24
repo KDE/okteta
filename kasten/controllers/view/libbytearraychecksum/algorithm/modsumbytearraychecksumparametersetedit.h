@@ -38,12 +38,12 @@ class ModSumByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksum
 
   public:
     explicit ModSumByteArrayChecksumParameterSetEdit( QWidget* parent = nullptr );
-    virtual ~ModSumByteArrayChecksumParameterSetEdit();
+    ~ModSumByteArrayChecksumParameterSetEdit() override;
 
   public: // AbstractByteArrayFilterParameterSetEdit API
-    virtual void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet );
-    virtual void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const;
-    virtual bool isValid() const;
+    void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet ) override;
+    void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const override;
+    bool isValid() const override;
 
   protected:
     KComboBox* mByteOrderComboBox;

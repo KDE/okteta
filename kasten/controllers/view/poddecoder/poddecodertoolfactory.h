@@ -36,10 +36,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT PodDecoderToolFactory : public AbstractTool
 {
   public:
     PodDecoderToolFactory();
-    virtual ~PodDecoderToolFactory();
+    ~PodDecoderToolFactory() override;
 
   public: // AbstractToolFactory API
-    virtual AbstractTool* create();
+    AbstractTool* create() override;
 };
 
 }

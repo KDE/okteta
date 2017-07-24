@@ -42,10 +42,10 @@ class ByteArrayRawFileWriteThread : public QThread
     ByteArrayRawFileWriteThread( QObject* parent,
                                  ByteArrayDocument* document, QFile* file );
 
-    virtual ~ByteArrayRawFileWriteThread();
+    ~ByteArrayRawFileWriteThread() override;
 
   public: // QThread API
-    virtual void run();
+    void run() override;
 
   public:
     bool success() const;

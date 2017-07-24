@@ -75,7 +75,7 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
   public:
     AbstractModelSynchronizer();
 
-    virtual ~AbstractModelSynchronizer();
+    ~AbstractModelSynchronizer() override;
 
   public:
     QUrl url() const;

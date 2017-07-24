@@ -45,7 +45,7 @@ class KASTENCONTROLLERS_EXPORT QuitController : public AbstractXmlGuiController
     QuitController( KProgram *program, KXmlGuiWindow *window );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS:
     void quit();

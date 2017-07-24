@@ -54,13 +54,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
 
   public:
     StringsExtractTool();
-    virtual ~StringsExtractTool();
+    ~StringsExtractTool() override;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public: // status
     const QList<ContainedString> *containedStringList() const;

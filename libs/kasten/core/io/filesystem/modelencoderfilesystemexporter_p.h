@@ -40,7 +40,7 @@ class ModelEncoderFileSystemExporterPrivate : public AbstractModelExporterPrivat
                                            const QString& remoteTypeName, const QString& remoteMimeType,
                                            AbstractModelStreamEncoder* encoder );
 
-    virtual ~ModelEncoderFileSystemExporterPrivate();
+    ~ModelEncoderFileSystemExporterPrivate() override;
 
   public: // AbstractModelExporter API
     AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,

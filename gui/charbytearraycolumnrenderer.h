@@ -39,7 +39,7 @@ class OKTETAGUI_EXPORT CharByteArrayColumnRenderer : public AbstractByteArrayCol
   public:
     CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,
         AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
-    virtual ~CharByteArrayColumnRenderer();
+    ~CharByteArrayColumnRenderer() override;
 
 
   public: // modification access
@@ -71,7 +71,7 @@ class OKTETAGUI_EXPORT CharByteArrayColumnRenderer : public AbstractByteArrayCol
 
 
   protected: // AbstractByteArrayColumnRenderer API
-    virtual void renderByteText( QPainter *painter, Byte byte, Character byteChar, const QColor& color ) const;
+    void renderByteText( QPainter *painter, Byte byte, Character byteChar, const QColor& color ) const override;
 
   protected:
     /** */

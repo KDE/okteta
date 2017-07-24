@@ -35,11 +35,11 @@ class Qca2ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 
   public:
     Qca2ByteArrayChecksumAlgorithm( const QString& name, const QString& type );
-    virtual ~Qca2ByteArrayChecksumAlgorithm();
+    ~Qca2ByteArrayChecksumAlgorithm() override;
 
   public: // AbstractByteArrayChecksumAlgorithm API
-    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayChecksumParameterSet* parameterSet();
+    bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
   protected:
     NoByteArrayChecksumParameterSet mParameterSet;

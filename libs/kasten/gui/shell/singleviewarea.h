@@ -48,15 +48,15 @@ class KASTENGUI_EXPORT SingleViewArea : public AbstractViewArea,
   public:
     explicit SingleViewArea();
 
-    virtual ~SingleViewArea();
+    ~SingleViewArea() override;
 
   public: // AbstractViewArea API
-    virtual void setFocus();
-    virtual QWidget* widget() const;
-    virtual bool hasFocus() const;
+    void setFocus() override;
+    QWidget* widget() const override;
+    bool hasFocus() const override;
 
   public: // If::ToolInlineViewable API
-    virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
+    void setCurrentToolInlineView( AbstractToolInlineView* view ) override;
 
   public:
     void setView( AbstractView* view );

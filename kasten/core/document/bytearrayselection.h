@@ -38,7 +38,7 @@ class OKTETAKASTENCORE_EXPORT ByteArraySelection : public AbstractModelSelection
 {
   public:
     ByteArraySelection();
-    virtual ~ByteArraySelection();
+    ~ByteArraySelection() override;
 
   public:
     void setRange( const Okteta::AddressRange& range );

@@ -47,7 +47,7 @@ class KASTENCORE_EXPORT AbstractLoadJob : public KJob
   public:
     AbstractLoadJob();
 
-    virtual ~AbstractLoadJob();
+    ~AbstractLoadJob() override;
 
   public:
     AbstractDocument* document() const;

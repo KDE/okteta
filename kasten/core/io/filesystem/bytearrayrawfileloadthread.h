@@ -41,10 +41,10 @@ class ByteArrayRawFileLoadThread : public QThread
   public:
     ByteArrayRawFileLoadThread( QObject* parent,
                                 QFile* file );
-    virtual ~ByteArrayRawFileLoadThread();
+    ~ByteArrayRawFileLoadThread() override;
 
   public: // QThread API
-    virtual void run();
+    void run() override;
 
   public:
     ByteArrayDocument* document() const;

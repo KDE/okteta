@@ -58,7 +58,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 
   public:
     ByteArrayFrameRenderer();
-    virtual ~ByteArrayFrameRenderer();
+    ~ByteArrayFrameRenderer() override;
 
   public: // AbstractColumnFrameRenderer API
 //     virtual void drawColumns( QPainter *painter, int cx, int cy, int cw, int ch );
@@ -67,12 +67,12 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     // make this flags?
 //     virtual bool hasFixedWidth() const;
 //     virtual bool hasFixedHeight() const;
-    virtual int height() const;
-    virtual int width() const;
+    int height() const override;
+    int width() const override;
 //     virtual QSize sizeHint( const QSize &maxSize ) const;
 
-    virtual void prepare();
-    virtual void renderFrame( QPainter* painter, int frameIndex );
+    void prepare() override;
+    void renderFrame( QPainter* painter, int frameIndex ) override;
 
   public: // AbstractSerialFramePrinter
     // only vertical for now...

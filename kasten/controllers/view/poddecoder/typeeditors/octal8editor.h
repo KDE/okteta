@@ -36,7 +36,7 @@ class Octal8Editor : public AbstractValue8Editor
   public:
     explicit Octal8Editor( QWidget* parent );
 
-    virtual ~Octal8Editor();
+    ~Octal8Editor() override;
 
   public:
     void setData( Octal8 data );

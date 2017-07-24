@@ -35,8 +35,8 @@ class PieceTableByteArrayModelAbstractByteArrayModelIfTest : public AbstractByte
   Q_OBJECT
 
   protected: // AbstractByteArrayModelIfTest API
-    AbstractByteArrayModel* createByteArrayModel();
-    void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel );
+    AbstractByteArrayModel* createByteArrayModel() override;
+    void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel ) override;
 };
 
 }

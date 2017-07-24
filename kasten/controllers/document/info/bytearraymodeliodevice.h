@@ -41,18 +41,18 @@ class  ByteArrayModelIoDevice : public QIODevice
 
   public:
     explicit ByteArrayModelIoDevice( AbstractByteArrayModel* byteArrayModel, QObject* parent = nullptr );
-    virtual ~ByteArrayModelIoDevice();
+    ~ByteArrayModelIoDevice() override;
 
   public: // QIODevice API
-    virtual qint64 size() const;
-    virtual bool canReadLine() const;
+    qint64 size() const override;
+    bool canReadLine() const override;
 
-    virtual bool open( OpenMode openMode );
-    virtual bool seek( qint64 pos );
+    bool open( OpenMode openMode ) override;
+    bool seek( qint64 pos ) override;
 
   protected:
-    virtual qint64 readData( char* data, qint64 maxlength );
-    virtual qint64 writeData( const char* data, qint64 length );
+    qint64 readData( char* data, qint64 maxlength ) override;
+    qint64 writeData( const char* data, qint64 length ) override;
 
   protected:
     AbstractByteArrayModel* mByteArrayModel;

@@ -52,17 +52,17 @@ class ByteArrayValuesStreamEncoder : public AbstractByteArrayStreamEncoder
 
   public:
     ByteArrayValuesStreamEncoder();
-    virtual ~ByteArrayValuesStreamEncoder();
+    ~ByteArrayValuesStreamEncoder() override;
 
   public:
     ValuesStreamEncoderSettings settings() const;
     void setSettings( const ValuesStreamEncoderSettings& settings );
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice* device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range );
+    bool encodeDataToStream( QIODevice* device,
+                             const ByteArrayView* byteArrayView,
+                             const Okteta::AbstractByteArrayModel* byteArrayModel,
+                             const Okteta::AddressRange& range ) override;
 
   protected:
     ValuesStreamEncoderSettings mSettings;

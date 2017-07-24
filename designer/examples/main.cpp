@@ -48,7 +48,7 @@ class Widget : public QWidget
 {
   public:
     explicit Widget( QWidget* parent = nullptr );
-    virtual ~Widget();
+    ~Widget() override;
 
   private:
     Ui::Example_Widget ui;

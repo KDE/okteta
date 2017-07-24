@@ -68,43 +68,43 @@ class OKTETAKASTENGUI_EXPORT ByteArrayView : public AbstractView,
     ByteArrayView( ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
                    Qt::Alignment alignment = {} );
 
-    virtual ~ByteArrayView();
+    ~ByteArrayView() override;
 
   public:
 //     KCursorObject *cursor() const;
 
   public: // AbstractModel API
-    virtual QString title() const;
-    virtual bool isModifiable() const;
-    virtual bool isReadOnly() const;
-    virtual void setReadOnly( bool isReadOnly );
+    QString title() const override;
+    bool isModifiable() const override;
+    bool isReadOnly() const override;
+    void setReadOnly( bool isReadOnly ) override;
 
   public: // AbstractView API
-    virtual void setFocus();
-    virtual QWidget* widget() const;
-    virtual bool hasFocus() const;
+    void setFocus() override;
+    QWidget* widget() const override;
+    bool hasFocus() const override;
 
   public: // If::Zoomable API TODO: make all such methods slots?
-    virtual void setZoomLevel( double Level );
-    virtual double zoomLevel() const;
+    void setZoomLevel( double Level ) override;
+    double zoomLevel() const override;
   Q_SIGNALS:
-    /*virtual*/ void zoomLevelChanged( double Level );
+    void zoomLevelChanged( double Level ) override;
 
   public: // If::DataSelectable API
-    virtual void selectAllData( bool selectAll );
-    virtual bool hasSelectedData() const;
-    virtual QMimeData* copySelectedData() const;
-    virtual const AbstractModelSelection* modelSelection() const;
+    void selectAllData( bool selectAll ) override;
+    bool hasSelectedData() const override;
+    QMimeData* copySelectedData() const override;
+    const AbstractModelSelection* modelSelection() const override;
 //     virtual void setSelection();
   Q_SIGNALS:
-    /*virtual*/ void hasSelectedDataChanged( bool hasSelectedData );
-    /*virtual*/ void selectedDataChanged( const Kasten::AbstractModelSelection* modelSelection );
+    void hasSelectedDataChanged( bool hasSelectedData ) override;
+    void selectedDataChanged( const Kasten::AbstractModelSelection* modelSelection ) override;
 
   public: // If::SelectedDataWriteable API
-    virtual void insertData( const QMimeData* data );
-    virtual QMimeData* cutSelectedData();
-    virtual void deleteSelectedData();
-    virtual bool canReadData( const QMimeData* data ) const;
+    void insertData( const QMimeData* data ) override;
+    QMimeData* cutSelectedData() override;
+    void deleteSelectedData() override;
+    bool canReadData( const QMimeData* data ) const override;
 
   public: // cursor API
     void setCursorPosition( Okteta::Address cursorPosition );

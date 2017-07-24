@@ -43,13 +43,13 @@ class OktetaMainWindow : public ShellWindow
 
   public:
     explicit OktetaMainWindow( OktetaProgram* program );
-    virtual ~OktetaMainWindow();
+    ~OktetaMainWindow() override;
 
   protected: // KMainWindow API
-    virtual bool queryClose();
+    bool queryClose() override;
 
-    virtual void saveProperties( KConfigGroup& configGroup );
-    virtual void readProperties( const KConfigGroup& configGroup );
+    void saveProperties( KConfigGroup& configGroup ) override;
+    void readProperties( const KConfigGroup& configGroup ) override;
 
   protected:
     void setupControllers();

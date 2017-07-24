@@ -50,7 +50,7 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
 
   public:
     explicit ColumnsView( /*bool R = false,*/ QWidget* parent = nullptr );
-    virtual ~ColumnsView();
+    ~ColumnsView() override;
 
   public: // data-wise sizes
     /** returns the number of all lines */
@@ -102,10 +102,10 @@ class OKTETAGUI_EXPORT ColumnsView : public QAbstractScrollArea
     void setColumnsPos( PixelX x, PixelY y );
 
   protected: // QAbstractScrollArea API
-    virtual bool event( QEvent* event );
-    virtual void resizeEvent( QResizeEvent* event );
-    virtual void paintEvent( QPaintEvent* paintEvent );
-    virtual void scrollContentsBy( int dx, int dy );
+    bool event( QEvent* event ) override;
+    void resizeEvent( QResizeEvent* event ) override;
+    void paintEvent( QPaintEvent* paintEvent ) override;
+    void scrollContentsBy( int dx, int dy ) override;
 
   protected: // our API
     /** draws all columns in columns coordinates */

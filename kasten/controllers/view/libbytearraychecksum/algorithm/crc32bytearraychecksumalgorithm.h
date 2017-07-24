@@ -35,11 +35,11 @@ class Crc32ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorith
 
   public:
     Crc32ByteArrayChecksumAlgorithm();
-    virtual ~Crc32ByteArrayChecksumAlgorithm();
+    ~Crc32ByteArrayChecksumAlgorithm() override;
 
   public: // AbstractByteArrayChecksumAlgorithm API
-    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayChecksumParameterSet* parameterSet();
+    bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
   protected:
     NoByteArrayChecksumParameterSet mParameterSet;

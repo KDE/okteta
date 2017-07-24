@@ -44,11 +44,11 @@ class ByteArrayPatternGeneratorConfigEditor : public AbstractModelDataGeneratorC
   public:
     explicit ByteArrayPatternGeneratorConfigEditor( ByteArrayPatternGenerator* generator, QWidget* parent = nullptr );
 
-    virtual ~ByteArrayPatternGeneratorConfigEditor();
+    ~ByteArrayPatternGeneratorConfigEditor() override;
 
   public: // AbstractModelDataGeneratorConfigEditor API
-    virtual bool isValid() const;
-    virtual QString name() const;
+    bool isValid() const override;
+    QString name() const override;
 
   public:
     void rememberCurrentSettings();

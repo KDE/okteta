@@ -47,7 +47,7 @@ class SelectRangeView : public AbstractToolWidget
 
   public:
     explicit SelectRangeView( SelectRangeTool* tool, QWidget* parent = nullptr );
-    virtual ~SelectRangeView();
+    ~SelectRangeView() override;
 
   public:
     SelectRangeTool* tool() const;

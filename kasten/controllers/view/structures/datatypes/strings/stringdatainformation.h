@@ -47,36 +47,36 @@ public:
     };
 
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = nullptr);
-    virtual ~StringDataInformation();
+    ~StringDataInformation() override;
 
-    virtual bool canHaveChildren() const;
-    virtual DataInformation* childAt(unsigned int) const;
+    bool canHaveChildren() const override;
+    DataInformation* childAt(unsigned int) const override;
 
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset);
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* input,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+    bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                      Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
 
-    virtual BitCount32 size() const;
-    virtual void setWidgetData(QWidget* w) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual unsigned int childCount() const;
-    virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
-    virtual bool isString() const;
+    BitCount32 size() const override;
+    void setWidgetData(QWidget* w) const override;
+    QVariant dataFromWidget(const QWidget* w) const override;
+    QWidget* createEditWidget(QWidget* parent) const override;
+    unsigned int childCount() const override;
+    Qt::ItemFlags flags(int column, bool fileLoaded = true) const override;
+    bool isString() const override;
 
-    virtual QVariant data(int column, int role) const;
-    virtual QVariant childData(int row, int column, int role) const;
-    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
-    virtual BitCount32 childSize(uint index) const;
-    virtual QString childTypeName(uint index) const;
-    virtual void setChildWidgetData(uint index, QWidget* w) const;
-    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
-    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
-    virtual QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
-    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
+    QVariant data(int column, int role) const override;
+    QVariant childData(int row, int column, int role) const override;
+    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const override;
+    BitCount32 childSize(uint index) const override;
+    QString childTypeName(uint index) const override;
+    void setChildWidgetData(uint index, QWidget* w) const override;
+    QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
+    QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
+    QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const override;
+    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
     StringType encoding() const;
     void setEncoding(StringType encoding);
@@ -95,9 +95,9 @@ public:
      */
     void unsetTerminationMode(StringData::TerminationMode mode);
 private:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
-    virtual QString typeNameImpl() const;
-    virtual QString valueStringImpl() const;
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
+    QString typeNameImpl() const override;
+    QString valueStringImpl() const override;
 private:
     QScopedPointer<DummyDataInformation> mDummy;
     QScopedPointer<StringData> mData;

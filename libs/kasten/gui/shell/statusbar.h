@@ -42,7 +42,7 @@ class KASTENGUI_EXPORT StatusBar : public QStatusBar
 
   public:
     explicit StatusBar( QWidget* parent = nullptr );
-    virtual ~StatusBar();
+    ~StatusBar() override;
 
   public: // overwrite QStatusBar API
     void addWidget( QWidget* widget );
@@ -51,7 +51,7 @@ class KASTENGUI_EXPORT StatusBar : public QStatusBar
     void updateLayout();
 
   protected: // QWidget API
-    virtual void changeEvent( QEvent* changeEvent ) Q_DECL_OVERRIDE;
+    void changeEvent( QEvent* changeEvent ) override;
 
   protected:
     StatusBarLayout* mLayout;

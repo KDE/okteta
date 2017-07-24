@@ -42,13 +42,13 @@ class AbstractValue8Editor : public QSpinBox
   public:
     explicit AbstractValue8Editor( Okteta::ValueCoding valueCoding, QWidget* parent = nullptr );
 
-    virtual ~AbstractValue8Editor();
+    ~AbstractValue8Editor() override;
 
   protected: // QSpinBox API
-    virtual QString textFromValue( int value ) const;
-    virtual int valueFromText( const QString& text ) const;
+    QString textFromValue( int value ) const override;
+    int valueFromText( const QString& text ) const override;
 
-    virtual QValidator::State validate( QString& text, int& pos ) const;
+    QValidator::State validate( QString& text, int& pos ) const override;
 
   protected:
     Okteta::ValueCodec* mValueCodec;

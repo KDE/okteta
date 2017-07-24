@@ -41,10 +41,10 @@ class TestDocumentFileConnectJob : public AbstractFileSystemConnectJob
   public:
     TestDocumentFileConnectJob( TestDocumentFileSynchronizer* synchronizer, AbstractDocument* document,
                                 const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
-    virtual ~TestDocumentFileConnectJob();
+    ~TestDocumentFileConnectJob() override;
 
   protected: // AbstractFileSystemLoadJob API
-    virtual void startConnectWithFile();
+    void startConnectWithFile() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

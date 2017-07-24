@@ -36,10 +36,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksToolFactory : public AbstractToolF
 {
   public:
     BookmarksToolFactory();
-    virtual ~BookmarksToolFactory();
+    ~BookmarksToolFactory() override;
 
   public: // AbstractToolFactory API
-    virtual AbstractTool* create();
+    AbstractTool* create() override;
 };
 
 }

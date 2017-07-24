@@ -40,7 +40,7 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
 
   public:
     explicit ByteArrayRowViewPrivate( ByteArrayRowView* parent );
-    virtual ~ByteArrayRowViewPrivate();
+    ~ByteArrayRowViewPrivate() override;
 
   public:
     void init();
@@ -66,12 +66,12 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
     void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
 
   public: // AbstractByteArrayViewPrivate API
-    virtual void ensureVisible( const AddressRange& range, bool ensureStartVisible );
-    virtual void ensureCursorVisible();
-    virtual void placeCursor( const QPoint& point );
-    virtual QRect cursorRect() const;
-    virtual Address indexByPoint( const QPoint& point ) const;
-    virtual void blinkCursor();
+    void ensureVisible( const AddressRange& range, bool ensureStartVisible ) override;
+    void ensureCursorVisible() override;
+    void placeCursor( const QPoint& point ) override;
+    QRect cursorRect() const override;
+    Address indexByPoint( const QPoint& point ) const override;
+    void blinkCursor() override;
 
   public:
   // setting parameters
@@ -110,18 +110,18 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
 
   protected: // AbstractByteArrayViewPrivate API
   // cursor control
-    virtual void pauseCursor();
-    virtual void updateCursors();
+    void pauseCursor() override;
+    void updateCursors() override;
 
-    virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId );
-    virtual void setVisibleCodings( int visibleCodings );
+    void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId ) override;
+    void setVisibleCodings( int visibleCodings ) override;
 
   protected: // AbstractByteArrayViewPrivate API
-    virtual AbstractByteArrayView::CodingTypeId activeCoding() const;
-    virtual AbstractByteArrayView::CodingTypes visibleCodings() const;
-    virtual int fittingBytesPerLine() const;
-    virtual void adjustToLayoutNoOfBytesPerLine();
-    virtual void updateChanged();
+    AbstractByteArrayView::CodingTypeId activeCoding() const override;
+    AbstractByteArrayView::CodingTypes visibleCodings() const override;
+    int fittingBytesPerLine() const override;
+    void adjustToLayoutNoOfBytesPerLine() override;
+    void updateChanged() override;
 
   protected:
     ByteArrayRowColumnRenderer*   mByteArrayColumn;

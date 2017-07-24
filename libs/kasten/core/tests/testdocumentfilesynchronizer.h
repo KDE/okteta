@@ -46,16 +46,16 @@ class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
     explicit TestDocumentFileSynchronizer( const QByteArray& header = QByteArray() );
 
   public: // AbstractModelSynchronizer API
-    virtual AbstractLoadJob* startLoad( const QUrl& url ) Q_DECL_OVERRIDE;
-    virtual AbstractSyncToRemoteJob* startSyncToRemote() Q_DECL_OVERRIDE;
-    virtual AbstractSyncFromRemoteJob* startSyncFromRemote() Q_DECL_OVERRIDE;
-    virtual AbstractSyncWithRemoteJob* startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) Q_DECL_OVERRIDE;
-    virtual AbstractConnectJob* startConnect( AbstractDocument* document,
-                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) Q_DECL_OVERRIDE;
+    AbstractLoadJob* startLoad( const QUrl& url ) override;
+    AbstractSyncToRemoteJob* startSyncToRemote() override;
+    AbstractSyncFromRemoteJob* startSyncFromRemote() override;
+    AbstractSyncWithRemoteJob* startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) override;
+    AbstractConnectJob* startConnect( AbstractDocument* document,
+                                      const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) override;
 
-    virtual AbstractDocument* document() const;
+    AbstractDocument* document() const override;
 
-    virtual LocalSyncState localSyncState() const;
+    LocalSyncState localSyncState() const override;
 
   public:
     const QByteArray& header() const;

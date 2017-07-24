@@ -44,7 +44,7 @@ class AbstractByteArrayChecksumAlgorithm : public QObject
   protected:
     explicit AbstractByteArrayChecksumAlgorithm( const QString& name );
   public:
-    virtual ~AbstractByteArrayChecksumAlgorithm();
+    ~AbstractByteArrayChecksumAlgorithm() override;
 
   public: // API to be implemented
     virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const = 0;

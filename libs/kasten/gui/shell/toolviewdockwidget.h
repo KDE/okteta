@@ -39,7 +39,7 @@ class ToolViewDockWidget : public QDockWidget
 
   public:
     ToolViewDockWidget( AbstractToolView* mToolView, QWidget* parent );
-    virtual ~ToolViewDockWidget();
+    ~ToolViewDockWidget() override;
 
   public:
     AbstractToolView* toolView() const;

@@ -41,7 +41,7 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
   public:
     ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,
         AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
-    virtual ~ValueByteArrayColumnRenderer();
+    ~ValueByteArrayColumnRenderer() override;
 
   public:
     void renderEditedByte( QPainter* painter, Byte byte, const QString& editBuffer );
@@ -59,8 +59,8 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
     PixelX binaryGapWidth() const;
 
   protected: // AbstractByteArrayColumnRenderer API
-    virtual void renderByteText( QPainter* painter, Byte byte, Character byteChar, const QColor& color ) const;
-    virtual void recalcByteWidth();
+    void renderByteText( QPainter* painter, Byte byte, Character byteChar, const QColor& color ) const override;
+    void recalcByteWidth() override;
 
   protected:
     void renderCode( QPainter *painter, const QString &code, const QColor& color ) const;

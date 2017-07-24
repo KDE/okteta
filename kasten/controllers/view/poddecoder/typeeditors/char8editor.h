@@ -40,7 +40,7 @@ class Char8Editor : public KLineEdit
   public:
     Char8Editor( Okteta::CharCodec* charCodec, QWidget* parent );
 
-    virtual ~Char8Editor();
+    ~Char8Editor() override;
 
   public:
     void setData( Char8 data );

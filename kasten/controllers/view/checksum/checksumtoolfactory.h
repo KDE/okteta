@@ -36,10 +36,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumToolFactory : public AbstractToolFa
 {
   public:
     ChecksumToolFactory();
-    virtual ~ChecksumToolFactory();
+    ~ChecksumToolFactory() override;
 
   public: // AbstractToolFactory API
-    virtual AbstractTool* create();
+    AbstractTool* create() override;
 };
 
 }

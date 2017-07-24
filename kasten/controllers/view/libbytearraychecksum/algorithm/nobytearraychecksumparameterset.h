@@ -31,10 +31,10 @@ class NoByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParamete
 {
   public:
     NoByteArrayChecksumParameterSet();
-    virtual ~NoByteArrayChecksumParameterSet();
+    ~NoByteArrayChecksumParameterSet() override;
 
   public: // AbstractByteArrayChecksumParameterSet API
-    virtual const char* id() const;
+    const char* id() const override;
 };
 
 #endif

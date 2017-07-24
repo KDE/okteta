@@ -40,7 +40,7 @@ class CreateDialog : public QDialog
   public:
     explicit CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent = nullptr );
 
-    virtual ~CreateDialog();
+    ~CreateDialog() override;
 
   private:
     AbstractModelDataGeneratorConfigEditor* mConfigEditor;

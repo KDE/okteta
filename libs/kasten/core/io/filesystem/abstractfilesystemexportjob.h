@@ -50,10 +50,10 @@ class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
     AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
                                  const QUrl& url );
 
-    virtual ~AbstractFileSystemExportJob();
+    ~AbstractFileSystemExportJob() override;
 
   public: // KJob API
-    virtual void start();
+    void start() override;
 
   protected: // API to be implemented
     virtual void startExportToFile() = 0;

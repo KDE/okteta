@@ -44,7 +44,7 @@ class KASTENCORE_EXPORT AbstractModelSynchronizerFactory : public QObject
   Q_OBJECT
 
   public:
-    virtual ~AbstractModelSynchronizerFactory();
+    ~AbstractModelSynchronizerFactory() override;
 
   public: // API to be implemented
     virtual AbstractModelSynchronizer* createSynchronizer() const = 0;

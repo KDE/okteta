@@ -49,7 +49,7 @@ class KASTENCONTROLLERS_EXPORT ClipboardController : public AbstractXmlGuiContro
     explicit ClipboardController( KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void cut();

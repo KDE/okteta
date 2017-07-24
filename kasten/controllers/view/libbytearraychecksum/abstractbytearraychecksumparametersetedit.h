@@ -36,7 +36,7 @@ class AbstractByteArrayChecksumParameterSetEdit : public QWidget
   protected:
     explicit AbstractByteArrayChecksumParameterSetEdit( QWidget* parent = nullptr );
   public:
-    virtual ~AbstractByteArrayChecksumParameterSetEdit();
+    ~AbstractByteArrayChecksumParameterSetEdit() override;
 
   public: // API to be implemented
     virtual void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet ) = 0;

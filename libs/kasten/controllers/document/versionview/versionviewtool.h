@@ -40,16 +40,16 @@ class KASTENCONTROLLERS_EXPORT VersionViewTool : public AbstractTool
 
   public:
     VersionViewTool();
-    virtual ~VersionViewTool();
+    ~VersionViewTool() override;
 
   public:
     AbstractModel* model() const;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   Q_SIGNALS:
     void modelChanged( Kasten::AbstractModel* model );

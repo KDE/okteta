@@ -36,11 +36,11 @@ class AndByteArrayFilter : public AbstractByteArrayFilter
   public:
     AndByteArrayFilter();
 
-    virtual ~AndByteArrayFilter();
+    ~AndByteArrayFilter() override;
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayFilterParameterSet *parameterSet();
+    bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayFilterParameterSet *parameterSet() override;
 
   protected:
     OperandByteArrayFilterParameterSet mParameterSet;

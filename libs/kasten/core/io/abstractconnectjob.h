@@ -45,7 +45,7 @@ class KASTENCORE_EXPORT AbstractConnectJob : public KJob
   public:
     AbstractConnectJob();
 
-    virtual ~AbstractConnectJob();
+    ~AbstractConnectJob() override;
 
   protected:
     // emits documentLoaded()

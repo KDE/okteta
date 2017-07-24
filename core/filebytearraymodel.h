@@ -45,25 +45,25 @@ class OKTETACORE_EXPORT FileByteArrayModel : public AbstractByteArrayModel
   public:
     /** default is only 50*4k = 200k memory image */
     explicit FileByteArrayModel( int pageNumber = 50, int pageSize = 4096, QObject* parent = nullptr );
-    virtual ~FileByteArrayModel();
+    ~FileByteArrayModel() override;
 
   public: // AbstractByteArrayModel API
-    virtual Byte byte( Address offset ) const;
-    virtual Size size() const;
-    virtual bool isReadOnly() const;
-    virtual bool isModified() const;
+    Byte byte( Address offset ) const override;
+    Size size() const override;
+    bool isReadOnly() const override;
+    bool isModified() const override;
 
-    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
-    virtual Size remove( const AddressRange& removeRange );
-    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
-    virtual bool swap( Address firstStart, const AddressRange& secondRange );
-    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 );
-    virtual void setByte( Address offset, Byte byte );
+    Size insert( Address offset, const Byte* insertData, int insertLength ) override;
+    Size remove( const AddressRange& removeRange ) override;
+    Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength ) override;
+    bool swap( Address firstStart, const AddressRange& secondRange ) override;
+    Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) override;
+    void setByte( Address offset, Byte byte ) override;
 
-    virtual void setModified( bool modified = true );
+    void setModified( bool modified = true ) override;
 
   public:
-    void setReadOnly( bool readOnly = true );
+    void setReadOnly( bool readOnly = true ) override;
     bool isOpen() const;
     bool open( const QString &filename );
     bool close();

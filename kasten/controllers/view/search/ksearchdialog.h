@@ -39,13 +39,13 @@ class KSearchDialog : public KAbstractFindDialog
 
   public:
     explicit KSearchDialog( SearchTool* tool, QWidget* parent = nullptr );
-    virtual ~KSearchDialog();
+    ~KSearchDialog() override;
 
   protected: // KAbstractFindDialog API
-    virtual void onFindButtonClicked();
+    void onFindButtonClicked() override;
 
   protected: // QWidget API
-    virtual void showEvent( QShowEvent* showEvent );
+    void showEvent( QShowEvent* showEvent ) override;
 
   protected:
     SearchTool* mTool;

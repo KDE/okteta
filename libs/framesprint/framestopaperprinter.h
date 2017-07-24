@@ -37,7 +37,7 @@ class FramesToPaperPrinter : public QObject
 
   public:
     FramesToPaperPrinter();
-    ~FramesToPaperPrinter();
+    ~FramesToPaperPrinter() override;
 
   public:
     void setPaperRect( const QRect &paperRect );

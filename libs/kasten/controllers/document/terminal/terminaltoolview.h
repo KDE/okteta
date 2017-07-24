@@ -40,12 +40,12 @@ class KASTENCONTROLLERS_EXPORT TerminalToolView : public AbstractToolView
 {
   public:
     explicit TerminalToolView( TerminalTool* tool );
-    virtual ~TerminalToolView();
+    ~TerminalToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     TerminalView* mWidget;

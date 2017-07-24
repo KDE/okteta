@@ -87,17 +87,17 @@ class ByteArraySRecStreamEncoder : public AbstractByteArrayStreamEncoder
 
   public:
     ByteArraySRecStreamEncoder();
-    virtual ~ByteArraySRecStreamEncoder();
+    ~ByteArraySRecStreamEncoder() override;
 
   public:
     SRecStreamEncoderSettings settings() const;
     void setSettings( const SRecStreamEncoderSettings& settings );
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice* device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range );
+    bool encodeDataToStream( QIODevice* device,
+                             const ByteArrayView* byteArrayView,
+                             const Okteta::AbstractByteArrayModel* byteArrayModel,
+                             const Okteta::AddressRange& range ) override;
 
   protected:
     SRecStreamEncoderSettings mSettings;

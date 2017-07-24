@@ -40,18 +40,18 @@ class KASTENGUI_EXPORT DummyView : public AbstractView
   public:
     explicit DummyView( AbstractDocument* document );
 
-    virtual ~DummyView();
+    ~DummyView() override;
 
   public:
 //     KCursorObject *cursor() const;
 
   public: // AbstractModel API
-    virtual QString title() const;
+    QString title() const override;
 
   public: // AbstractView API
-    virtual void setFocus();
-    virtual QWidget* widget() const;
-    virtual bool hasFocus() const;
+    void setFocus() override;
+    QWidget* widget() const override;
+    bool hasFocus() const override;
 
   private Q_SLOTS:
     void onTitleChange( const QString &newTitle );

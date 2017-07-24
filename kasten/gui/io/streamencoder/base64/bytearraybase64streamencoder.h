@@ -50,13 +50,13 @@ class ByteArrayBase64StreamEncoder : public AbstractByteArrayStreamEncoder
 
   public:
     ByteArrayBase64StreamEncoder();
-    virtual ~ByteArrayBase64StreamEncoder();
+    ~ByteArrayBase64StreamEncoder() override;
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice* device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range );
+    bool encodeDataToStream( QIODevice* device,
+                             const ByteArrayView* byteArrayView,
+                             const Okteta::AbstractByteArrayModel* byteArrayModel,
+                             const Okteta::AddressRange& range ) override;
 };
 
 }

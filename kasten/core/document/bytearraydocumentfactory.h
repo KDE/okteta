@@ -37,10 +37,10 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocumentFactory : public AbstractDocument
     Q_OBJECT
 
   public: // AbstractDocumentFactory API
-    virtual bool canCreateFromData( const QMimeData* mimeData );
+    bool canCreateFromData( const QMimeData* mimeData ) override;
 
-    virtual AbstractDocument* create();
-    virtual AbstractDocument* createFromData( const QMimeData* mimeData, bool setModified );
+    AbstractDocument* create() override;
+    AbstractDocument* createFromData( const QMimeData* mimeData, bool setModified ) override;
 };
 
 }

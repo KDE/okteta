@@ -52,24 +52,24 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
   public:
     TabbedViews();
 
-    virtual ~TabbedViews();
+    ~TabbedViews() override;
 
   public: // AbstractViewArea API
-    virtual void setFocus();
-    virtual QWidget* widget() const;
-    virtual bool hasFocus() const;
+    void setFocus() override;
+    QWidget* widget() const override;
+    bool hasFocus() const override;
 
   public: // AbstractGroupedViews API
-    virtual void addViews( const QList<AbstractView*>& views );
-    virtual void removeViews( const QList<AbstractView*>& views );
-    virtual void setViewFocus( AbstractView* view );
+    void addViews( const QList<AbstractView*>& views ) override;
+    void removeViews( const QList<AbstractView*>& views ) override;
+    void setViewFocus( AbstractView* view ) override;
 
-    virtual QList<AbstractView*> viewList() const;
-    virtual int viewCount() const;
-    virtual AbstractView* viewFocus() const;
+    QList<AbstractView*> viewList() const override;
+    int viewCount() const override;
+    AbstractView* viewFocus() const override;
 
   public: // If::ToolInlineViewable API
-    virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
+    void setCurrentToolInlineView( AbstractToolInlineView* view ) override;
 
   public:
     int indexOf( AbstractView* view ) const;

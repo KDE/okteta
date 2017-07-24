@@ -36,7 +36,7 @@ class AbstractGroupedViewsPrivate : public AbstractViewAreaPrivate
   public:
     explicit AbstractGroupedViewsPrivate( AbstractGroupedViews* parent );
 
-    virtual ~AbstractGroupedViewsPrivate();
+    ~AbstractGroupedViewsPrivate() override;
 };
 
 

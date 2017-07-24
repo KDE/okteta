@@ -39,10 +39,10 @@ class TestDocumentFileLoadJob : public AbstractFileSystemLoadJob
 
   public:
     TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const QUrl& url );
-    virtual ~TestDocumentFileLoadJob();
+    ~TestDocumentFileLoadJob() override;
 
   protected: // AbstractFileSystemLoadJob API
-    virtual void startLoadFromFile();
+    void startLoadFromFile() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

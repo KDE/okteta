@@ -48,11 +48,11 @@ class OKTETAKASTENGUI_EXPORT AbstractByteArrayStreamEncoder : public AbstractMod
 
   public:
     AbstractByteArrayStreamEncoder( const QString& remoteTypeName, const QString& remoteMimeType );
-    virtual ~AbstractByteArrayStreamEncoder();
+    ~AbstractByteArrayStreamEncoder() override;
 
   public: // AbstractModelStreamEncoder API
-    virtual bool encodeToStream( QIODevice *device, AbstractModel* model, const AbstractModelSelection* selection );
-    virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const;
+    bool encodeToStream( QIODevice *device, AbstractModel* model, const AbstractModelSelection* selection ) override;
+    QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const override;
 
   public:
     QString previewData( AbstractModel* model, const AbstractModelSelection* selection );

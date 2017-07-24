@@ -46,7 +46,7 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
     explicit AbstractModel( AbstractModelPrivate* d );
 
   public:
-    virtual ~AbstractModel();
+    ~AbstractModel() override;
 
   public:
 // TODO: just one baseModel, or can there be multiple? Better name?

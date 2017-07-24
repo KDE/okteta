@@ -48,7 +48,7 @@ class SearchJob : public QObject // not yet: KJob
                Okteta::Address startIndex, Okteta::Address endIndex,
                Qt::CaseSensitivity caseSensitivity, const QString& charCodecName );
 
-    virtual ~SearchJob();
+    ~SearchJob() override;
 
   public:
     Okteta::Address exec();

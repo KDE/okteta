@@ -35,8 +35,8 @@ class PieceTableByteArrayModelVersionableIfTest : public VersionableIfTest
   Q_OBJECT
 
   protected: // VersionableIfTest API
-    virtual QObject *createVersionable();
-    virtual void deleteVersionable( QObject *versionable );
+    QObject *createVersionable() override;
+    void deleteVersionable( QObject *versionable ) override;
 };
 
 }

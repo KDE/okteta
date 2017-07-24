@@ -42,7 +42,7 @@ class ViewAreaBox : public QWidget
   public:
     /// does not take ownership of @p centralWidget, can be 0.
     explicit ViewAreaBox( QWidget* centralWidget, QWidget* parent = nullptr );
-    virtual ~ViewAreaBox();
+    ~ViewAreaBox() override;
 
   public:
     QWidget* centralWidget() const;

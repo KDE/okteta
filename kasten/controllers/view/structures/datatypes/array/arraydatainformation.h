@@ -44,36 +44,36 @@ public:
      */
     ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
             DataInformation* parent = nullptr, const QScriptValue& lengthFuntion = QScriptValue());
-    virtual ~ArrayDataInformation();
+    ~ArrayDataInformation() override;
 public:
     uint length() const;
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
+    QWidget* createEditWidget(QWidget* parent) const override;
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
 
-    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
-    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
-    virtual void setChildWidgetData(uint index, QWidget* w) const;
+    QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
+    QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
+    void setChildWidgetData(uint index, QWidget* w) const override;
 
-    virtual BitCount32 size() const;
+    BitCount32 size() const override;
 
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset);
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
+    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+    bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                      Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
-    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const;
-    virtual QVariant childData(int row, int column, int role) const;
-    virtual DataInformation* childAt(unsigned int idx) const;
-    virtual unsigned int childCount() const;
-    virtual bool canHaveChildren() const;
-    virtual QString childTypeName(uint index) const;
-    virtual int indexOf(const DataInformation* const data) const;
-    BitCount32 childSize(uint index) const;
+    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded = true) const override;
+    QVariant childData(int row, int column, int role) const override;
+    DataInformation* childAt(unsigned int idx) const override;
+    unsigned int childCount() const override;
+    bool canHaveChildren() const override;
+    QString childTypeName(uint index) const override;
+    int indexOf(const DataInformation* const data) const override;
+    BitCount32 childSize(uint index) const override;
 
-    virtual bool isArray() const;
+    bool isArray() const override;
 
     bool setArrayLength(uint newLength);
     /** Sets the new array type
@@ -85,11 +85,11 @@ public:
     QScriptValue childType() const;
     QScriptValue lengthFunction() const;
     void setLengthFunction(const QScriptValue& newFunc);
-    QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const;
-    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
+    QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const override;
+    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 private:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
-    virtual QString typeNameImpl() const;
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
+    QString typeNameImpl() const override;
 private:
     QScopedPointer<AbstractArrayData> mData;
     static const uint MAX_LEN = 10000;

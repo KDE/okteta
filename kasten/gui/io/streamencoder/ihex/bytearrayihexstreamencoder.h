@@ -87,17 +87,17 @@ class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
 
   public:
     ByteArrayIHexStreamEncoder();
-    virtual ~ByteArrayIHexStreamEncoder();
+    ~ByteArrayIHexStreamEncoder() override;
 
   public:
     IHexStreamEncoderSettings settings() const;
     void setSettings( const IHexStreamEncoderSettings& settings );
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice* device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range );
+    bool encodeDataToStream( QIODevice* device,
+                             const ByteArrayView* byteArrayView,
+                             const Okteta::AbstractByteArrayModel* byteArrayModel,
+                             const Okteta::AddressRange& range ) override;
 
   protected:
     IHexStreamEncoderSettings mSettings;

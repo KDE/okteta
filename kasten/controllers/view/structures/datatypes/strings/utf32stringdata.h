@@ -30,16 +30,16 @@ class Utf32StringData : public StringData
 {
 public:
     explicit Utf32StringData(StringDataInformation* parent);
-    virtual ~Utf32StringData();
+    ~Utf32StringData() override;
 
-    virtual QString charType() const;
-    virtual QString completeString(bool skipInvalid = false) const;
-    virtual uint count() const;
-    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
-    virtual BitCount32 size() const;
-    virtual BitCount32 sizeAt(uint i) const;
-    virtual QString stringValue(int row) const;
-    virtual QString typeName() const;
+    QString charType() const override;
+    QString completeString(bool skipInvalid = false) const override;
+    uint count() const override;
+    qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
+    BitCount32 size() const override;
+    BitCount32 sizeAt(uint i) const override;
+    QString stringValue(int row) const override;
+    QString typeName() const override;
 private:
     QVector<quint32> mCodePoints;
     int mNonBMPCount;

@@ -47,10 +47,10 @@ class KASTENCONTROLLERS_EXPORT CloseController : public AbstractXmlGuiController
     CloseController( AbstractDocumentStrategy* documentStrategy,
                      KXMLGUIClient* guiClient,
                      bool supportMultiple = true );
-    virtual ~CloseController();
+    ~CloseController() override;
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS:
     void close();

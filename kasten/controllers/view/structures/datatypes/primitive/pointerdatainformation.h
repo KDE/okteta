@@ -36,16 +36,16 @@ public:
      */
     PointerDataInformation(const QString& name, DataInformation* childType,
             PrimitiveDataInformation* valueType, DataInformation* parent);
-    virtual ~PointerDataInformation();
+    ~PointerDataInformation() override;
 
-    virtual bool canHaveChildren() const;
-    virtual uint childCount() const;
-    virtual DataInformation* childAt(uint index) const;
-    virtual bool isPointer() const;
-    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
-    virtual int indexOf(const DataInformation* const data) const;
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset);
+    bool canHaveChildren() const override;
+    uint childCount() const override;
+    DataInformation* childAt(uint index) const override;
+    bool isPointer() const override;
+    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
+    int indexOf(const DataInformation* const data) const override;
+    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
     /** Called once the whole structure has been read. Now we can evaluate what we are pointing at.
      * @param input the input
      * @param address the address of the root structure start */
@@ -64,9 +64,9 @@ public:
      */
     bool setPointerType(DataInformation* type);
 private:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
-    virtual QString valueStringImpl() const;
-    virtual QString typeNameImpl() const;
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
+    QString valueStringImpl() const override;
+    QString typeNameImpl() const override;
 protected:
     QScopedPointer<DataInformation> mPointerTarget;
 };

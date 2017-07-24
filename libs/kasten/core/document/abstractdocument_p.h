@@ -38,7 +38,7 @@ class AbstractDocumentPrivate : public AbstractModelPrivate
   public:
       explicit AbstractDocumentPrivate( AbstractDocument* parent );
 
-      ~AbstractDocumentPrivate();
+      ~AbstractDocumentPrivate() override;
 
   public:
     const QString& id() const;

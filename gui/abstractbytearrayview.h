@@ -108,7 +108,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     Q_ENUM(CodingTypes)
 
   public:
-    virtual ~AbstractByteArrayView();
+    ~AbstractByteArrayView() override;
 
   public: // value access
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
@@ -348,7 +348,7 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     QRect cursorRect() const;
 
   public: // QWidget API
-    virtual QSize sizeHint() const;
+    QSize sizeHint() const override;
 
   public: // logic value service
     /** detects the index of the byte at the given point
@@ -408,32 +408,32 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
     ByteArrayTableLayout* layout() const;
 
   protected: // QWidget API
-    virtual void keyPressEvent( QKeyEvent* keyEvent );
-    virtual void mousePressEvent( QMouseEvent* mousePressEvent );
-    virtual void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent );
-    virtual void mouseMoveEvent( QMouseEvent* mouseMoveEvent );
-    virtual void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent );
+    void keyPressEvent( QKeyEvent* keyEvent ) override;
+    void mousePressEvent( QMouseEvent* mousePressEvent ) override;
+    void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent ) override;
+    void mouseMoveEvent( QMouseEvent* mouseMoveEvent ) override;
+    void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent ) override;
     /// reimplemented to catch Tab and BackTab keys, which otherwise gets stolen
-    virtual bool event( QEvent* event );
-    virtual void showEvent( QShowEvent* showEvent );
-    virtual void focusInEvent( QFocusEvent* focusEvent );
-    virtual void focusOutEvent( QFocusEvent* focusEvent );
-    virtual void resizeEvent( QResizeEvent* resizeEvent );
-    virtual void dragEnterEvent( QDragEnterEvent* dragEnterEvent );
-    virtual void dragMoveEvent( QDragMoveEvent* dragMoveEvent) ;
-    virtual void dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent );
-    virtual void dropEvent( QDropEvent* dropEvent );
+    bool event( QEvent* event ) override;
+    void showEvent( QShowEvent* showEvent ) override;
+    void focusInEvent( QFocusEvent* focusEvent ) override;
+    void focusOutEvent( QFocusEvent* focusEvent ) override;
+    void resizeEvent( QResizeEvent* resizeEvent ) override;
+    void dragEnterEvent( QDragEnterEvent* dragEnterEvent ) override;
+    void dragMoveEvent( QDragMoveEvent* dragMoveEvent) override ;
+    void dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent ) override;
+    void dropEvent( QDropEvent* dropEvent ) override;
 //    virtual void contextMenuEvent( QContextMenuEvent* contextMenuEvent );
 
   protected: // QAbstractScrollArea API
-    virtual void wheelEvent( QWheelEvent *e );
-    virtual bool viewportEvent( QEvent* event );
+    void wheelEvent( QWheelEvent *e ) override;
+    bool viewportEvent( QEvent* event ) override;
 
   protected: // ColumnsView API
-    virtual void setNoOfLines( int newNoOfLines );
+    void setNoOfLines( int newNoOfLines ) override;
 
   protected: // Q_SLOTS QWidget API
-    virtual void changeEvent( QEvent* event );
+    void changeEvent( QEvent* event ) override;
 
   protected:
     AbstractByteArrayViewPrivate* const d_ptr;

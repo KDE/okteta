@@ -64,7 +64,7 @@ class PrintTool : public QObject
 
   public:
     PrintTool();
-    virtual ~PrintTool();
+    ~PrintTool() override;
 
   public:
     void setTargetModel( AbstractModel* model );

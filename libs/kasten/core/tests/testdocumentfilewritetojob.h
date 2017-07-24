@@ -40,10 +40,10 @@ class TestDocumentFileWriteToJob : public AbstractFileSystemSyncWithRemoteJob
   public:
     TestDocumentFileWriteToJob( TestDocumentFileSynchronizer* synchronizer,
                                 const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
-    virtual ~TestDocumentFileWriteToJob();
+    ~TestDocumentFileWriteToJob() override;
 
   protected: // AbstractFileSystemSyncWithRemoteJob API
-    virtual void startSyncWithRemote();
+    void startSyncWithRemote() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

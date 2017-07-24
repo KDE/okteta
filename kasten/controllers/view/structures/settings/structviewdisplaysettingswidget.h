@@ -31,7 +31,7 @@ class StructViewDisplaySettingsWidget: public QWidget
 Q_OBJECT
 public:
     explicit StructViewDisplaySettingsWidget();
-    ~StructViewDisplaySettingsWidget();
+    ~StructViewDisplaySettingsWidget() override;
 private:
     void setupBasesCombo(QComboBox* box, KConfigSkeletonItem* configItem,
             int currentValue, const char* slot);

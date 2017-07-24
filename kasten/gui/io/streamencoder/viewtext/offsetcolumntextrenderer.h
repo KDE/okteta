@@ -36,11 +36,11 @@ class OffsetColumnTextRenderer : public AbstractColumnTextRenderer
 {
   public:
     OffsetColumnTextRenderer( int offsetFormat, int firstLineOffset, int delta );
-    virtual ~OffsetColumnTextRenderer();
+    ~OffsetColumnTextRenderer() override;
 
   public: // AbstractColumnTextRenderer API
-    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const;
-    virtual void renderNextLine( QTextStream* stream, bool isSubline ) const;
+    void renderFirstLine( QTextStream *stream, int lineIndex ) const override;
+    void renderNextLine( QTextStream* stream, bool isSubline ) const override;
 
   protected:
     void renderLine( QTextStream* stream, bool isSubline ) const;

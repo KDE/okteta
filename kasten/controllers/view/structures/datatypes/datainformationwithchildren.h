@@ -34,13 +34,13 @@ protected:
 public:
     explicit DataInformationWithChildren(const QString& name, const QVector<DataInformation*>& children
             = QVector<DataInformation*>(), DataInformation* parent = nullptr);
-    virtual ~DataInformationWithChildren();
+    ~DataInformationWithChildren() override;
 
     virtual QVariant childData(int row, int column, int role) const;
 
-    virtual BitCount32 size() const;
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
+    BitCount32 size() const override;
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
     /** replaces child at @p index with @p newChild.
      * @param index the index of the child
@@ -48,21 +48,21 @@ public:
      *  otherwise it must be deleted)
      * @return true if replacing was successful, false otherwise */
     virtual bool replaceChildAt(unsigned int index, DataInformation* newChild);
-    virtual int indexOf(const DataInformation* const data) const;
+    int indexOf(const DataInformation* const data) const override;
 
-    virtual DataInformation* childAt(unsigned int index) const;
-    virtual bool canHaveChildren() const;
-    virtual unsigned int childCount() const;
-    virtual QString tooltipString() const;
+    DataInformation* childAt(unsigned int index) const override;
+    bool canHaveChildren() const override;
+    unsigned int childCount() const override;
+    QString tooltipString() const override;
 
-    virtual QWidget* createEditWidget(QWidget* parent) const;
+    QWidget* createEditWidget(QWidget* parent) const override;
     /** get the needed data from the widget */
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
-    virtual void resetValidationState();
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
+    void resetValidationState() override;
     virtual void calculateValidationState();
 
-    virtual bool isDataInformationWithChildren() const;
+    bool isDataInformationWithChildren() const override;
 
     /** Takes ownership! */
     void appendChild(DataInformation* child, bool emitSignal = true);
@@ -73,7 +73,7 @@ public:
 
     static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
 protected:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 };
 
 inline unsigned int DataInformationWithChildren::childCount() const

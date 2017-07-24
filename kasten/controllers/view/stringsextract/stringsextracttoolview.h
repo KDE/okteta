@@ -40,12 +40,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolView : public AbstractToo
 {
   public:
     explicit StringsExtractToolView( StringsExtractTool *tool );
-    virtual ~StringsExtractToolView();
+    ~StringsExtractToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool *tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool *tool() const override;
 
   private:
     StringsExtractView *mWidget;

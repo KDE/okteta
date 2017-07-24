@@ -51,7 +51,7 @@ class OKTETAKASTENGUI_EXPORT AddressComboBox : public QWidget
 
   public:
     explicit AddressComboBox( QWidget* parent = nullptr );
-    virtual ~AddressComboBox();
+    ~AddressComboBox() override;
 
   public: // set
     void rememberCurrentAddress();

@@ -47,7 +47,7 @@ class GotoOffsetView : public AbstractToolWidget
 
   public:
     explicit GotoOffsetView( GotoOffsetTool* tool, QWidget* parent = nullptr );
-    virtual ~GotoOffsetView();
+    ~GotoOffsetView() override;
 
   public:
     GotoOffsetTool* tool() const;

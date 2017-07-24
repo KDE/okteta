@@ -45,7 +45,7 @@ class AbstractByteArrayFilter : public QObject
   protected:
     explicit AbstractByteArrayFilter( const QString& name );
   public:
-    virtual ~AbstractByteArrayFilter();
+    ~AbstractByteArrayFilter() override;
 
   public: // API to be implemented
     virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const = 0;

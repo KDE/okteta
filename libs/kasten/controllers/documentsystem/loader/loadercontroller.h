@@ -46,10 +46,10 @@ class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiControlle
   public:
     LoaderController( AbstractDocumentStrategy* documentStrategy,
                       KXMLGUIClient* guiClient );
-    virtual ~LoaderController();
+    ~LoaderController() override;
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS:
     void load();

@@ -51,13 +51,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
 
   public:
     explicit DocumentInfoTool( DocumentSyncManager* syncManager );
-    virtual ~DocumentInfoTool();
+    ~DocumentInfoTool() override;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public:
     QString documentTitle() const;

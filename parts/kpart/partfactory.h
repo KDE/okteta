@@ -43,14 +43,14 @@ class OktetaPartFactory : public KPluginFactory
   public:
     OktetaPartFactory();
 
-    virtual ~OktetaPartFactory();
+    ~OktetaPartFactory() override;
 
   public: // KPluginFactory API
-    virtual QObject* create( const char* iface,
-                             QWidget* parentWidget,
-                             QObject* parent,
-                             const QVariantList& args,
-                             const QString& keyword );
+    QObject* create( const char* iface,
+                     QWidget* parentWidget,
+                     QObject* parent,
+                     const QVariantList& args,
+                     const QString& keyword ) override;
 
   private:
     KAboutData mAboutData;

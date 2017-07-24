@@ -46,7 +46,7 @@ class KASTENCONTROLLERS_EXPORT SwitchViewController : public AbstractXmlGuiContr
     SwitchViewController( AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS:
     void forward();

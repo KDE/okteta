@@ -33,10 +33,10 @@ class OperandByteArrayFilterParameterSet : public AbstractByteArrayFilterParamet
 {
   public:
     OperandByteArrayFilterParameterSet();
-    virtual ~OperandByteArrayFilterParameterSet();
+    ~OperandByteArrayFilterParameterSet() override;
 
   public: // AbstractByteArrayFilterParameterSet API
-    virtual const char* id() const;
+    const char* id() const override;
 
   public:
     void setOperand( const QByteArray &operand );

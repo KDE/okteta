@@ -31,14 +31,14 @@ class PrimitiveScriptClass : public DefaultScriptClass
     Q_DISABLE_COPY(PrimitiveScriptClass)
 public:
     PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
-    virtual ~PrimitiveScriptClass();
-    virtual QScriptValue prototype() const;
+    ~PrimitiveScriptClass() override;
+    QScriptValue prototype() const override;
 
 protected:
-    virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id);
-    virtual bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags);
-    virtual QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id);
-    virtual bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value);
+    bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
+    bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags) override;
+    QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;
+    bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
     static QScriptValue Primitive_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
 protected:

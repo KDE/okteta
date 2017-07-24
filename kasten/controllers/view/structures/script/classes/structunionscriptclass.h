@@ -31,14 +31,14 @@ class StructUnionScriptClass : public DefaultScriptClass
     Q_DISABLE_COPY(StructUnionScriptClass)
 public:
     StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
-    virtual ~StructUnionScriptClass();
-    virtual QScriptValue prototype() const;
+    ~StructUnionScriptClass() override;
+    QScriptValue prototype() const override;
 
 protected:
-    virtual bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id);
-    virtual bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags);
-    virtual QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id);
-    virtual bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value);
+    bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
+    bool additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint, QScriptValue::PropertyFlags* flags) override;
+    QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;
+    bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
     static QScriptValue StructUnion_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
     static QScriptValue StructUnion_proto_setChildren(QScriptContext* ctx, QScriptEngine* eng);

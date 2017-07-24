@@ -44,16 +44,16 @@ class KASTENCONTROLLERS_EXPORT TerminalTool : public AbstractTool
 
   public:
     explicit TerminalTool( DocumentSyncManager* documentSyncManager );
-    virtual ~TerminalTool();
+    ~TerminalTool() override;
 
   public:
     QUrl currentUrl() const;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   Q_SIGNALS:
     void currentUrlChanged( const QUrl& currentUrl );

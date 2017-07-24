@@ -31,14 +31,14 @@ class StructViewItemDelegate: public QStyledItemDelegate
 
 public:
     explicit StructViewItemDelegate(QObject * parent = nullptr);
-    virtual ~StructViewItemDelegate();
-    virtual void setModelData(QWidget * editor, QAbstractItemModel * model,
-            const QModelIndex & index) const;
-    virtual void setEditorData(QWidget * editor, const QModelIndex & index) const;
-    virtual QWidget * createEditor(QWidget * parent,
-            const QStyleOptionViewItem & option, const QModelIndex & index) const;
-    virtual QSize sizeHint(const QStyleOptionViewItem & option,
-            const QModelIndex & index) const;
+    ~StructViewItemDelegate() override;
+    void setModelData(QWidget* editor, QAbstractItemModel* model,
+                      const QModelIndex& index) const override;
+    void setEditorData(QWidget* editor, const QModelIndex& index) const override;
+    QWidget* createEditor(QWidget* parent,
+                          const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    QSize sizeHint(const QStyleOptionViewItem& option,
+                   const QModelIndex& index) const override;
 };
 
 #endif /* STRUCTVIEWITEMDELEGATE_H_ */

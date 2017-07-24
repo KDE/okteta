@@ -33,11 +33,11 @@ class Template_ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgo
   public:
     Template_ByteArrayChecksumAlgorithm();
 
-    virtual ~Template_ByteArrayChecksumAlgorithm();
+    ~Template_ByteArrayChecksumAlgorithm() override;
 
   public: // AbstractByteArrayChecksumAlgorithm API
-    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayChecksumParameterSet* parameterSet();
+    bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
   protected:
 //// ADAPT(start)

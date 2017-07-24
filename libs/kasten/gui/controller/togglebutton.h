@@ -41,7 +41,7 @@ class KASTENGUI_EXPORT ToggleButton : public QToolButton
   public:
     ToggleButton( const QString& text, const QString& toolTip, QWidget* parent = nullptr );
     ToggleButton( const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent = nullptr );
-    virtual ~ToggleButton();
+    ~ToggleButton() override;
 
   public:
     void setCheckedState( const QIcon& icon, const QString& text, const QString& toolTip );

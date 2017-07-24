@@ -47,7 +47,7 @@ class ByteArrayJanusView : public QWidget
 
   public:
     explicit ByteArrayJanusView( QWidget* parent = nullptr );
-    virtual ~ByteArrayJanusView();
+    ~ByteArrayJanusView() override;
 
   public:
     void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );

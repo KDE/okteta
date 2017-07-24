@@ -44,10 +44,10 @@ class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRender
         int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
         const QString& charCodecName, QChar substituteChar, QChar undefinedChar );
 
-    virtual ~CharByteArrayColumnTextRenderer();
+    ~CharByteArrayColumnTextRenderer() override;
 
   protected: // AbstractByteArrayColumnTextRenderer API
-    virtual void renderLine( QTextStream* stream, bool isSubline ) const;
+    void renderLine( QTextStream* stream, bool isSubline ) const override;
 
   protected:
     const Okteta::CharCodec* mCharCodec;

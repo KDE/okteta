@@ -41,15 +41,15 @@ class KASTENGUI_EXPORT DialogHandler : public AbstractOverwriteDialog,
   public:
     explicit DialogHandler( QWidget* widget = nullptr );
 
-    virtual ~DialogHandler();
+    ~DialogHandler() override;
 
   public: // AbstractOverwriteDialog API
-    virtual Answer queryOverwrite( const QUrl& url, const QString& title ) const;
+    Answer queryOverwrite( const QUrl& url, const QString& title ) const override;
 
   public: // AbstractSaveDiscardDialog API
-    virtual Answer queryDiscardOnReload( const AbstractDocument* document, const QString& title ) const;
-    virtual Answer querySaveDiscard( const AbstractDocument* document, const QString& title ) const;
-    virtual Answer queryDiscard( const AbstractDocument* document, const QString& title ) const;
+    Answer queryDiscardOnReload( const AbstractDocument* document, const QString& title ) const override;
+    Answer querySaveDiscard( const AbstractDocument* document, const QString& title ) const override;
+    Answer queryDiscard( const AbstractDocument* document, const QString& title ) const override;
 
   public:
     void setWidget( QWidget* widget );

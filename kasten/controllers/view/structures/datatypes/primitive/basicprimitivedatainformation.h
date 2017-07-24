@@ -34,28 +34,28 @@ class BasicPrimitiveDataInformation : public PrimitiveDataInformation
 {
 public:
     BasicPrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
-    virtual ~BasicPrimitiveDataInformation();
-    virtual PrimitiveDataType type() const;
-    virtual AllPrimitiveTypes value() const;
-    virtual void setValue(AllPrimitiveTypes newVal);
-    virtual BasicPrimitiveDataInformation<T, C>* clone() const;
+    ~BasicPrimitiveDataInformation() override;
+    PrimitiveDataType type() const override;
+    AllPrimitiveTypes value() const override;
+    void setValue(AllPrimitiveTypes newVal) override;
+    BasicPrimitiveDataInformation<T, C>* clone() const override;
 
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
+    QWidget* createEditWidget(QWidget* parent) const override;
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
 
-    virtual QScriptValue valueAsQScriptValue() const;
-    virtual BitCount32 size() const; //TODO declare final with c++11 so it can be inlined
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
-    virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset);
+    QScriptValue valueAsQScriptValue() const override;
+    BitCount32 size() const override; //TODO declare final with c++11 so it can be inlined
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
+    qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
 protected:
     BasicPrimitiveDataInformation(const BasicPrimitiveDataInformation<T, C>& d);
 private:
-    virtual QString valueStringImpl() const;
-    virtual QString typeNameImpl() const;
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
+    QString valueStringImpl() const override;
+    QString typeNameImpl() const override;
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 protected:
     T mValue;
 };

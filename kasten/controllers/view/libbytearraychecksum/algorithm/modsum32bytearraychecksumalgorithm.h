@@ -35,11 +35,11 @@ class ModSum32ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgor
 
   public:
     ModSum32ByteArrayChecksumAlgorithm();
-    virtual ~ModSum32ByteArrayChecksumAlgorithm();
+    ~ModSum32ByteArrayChecksumAlgorithm() override;
 
   public: // AbstractByteArrayChecksumAlgorithm API
-    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayChecksumParameterSet* parameterSet();
+    bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
   protected:
     quint32 calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;

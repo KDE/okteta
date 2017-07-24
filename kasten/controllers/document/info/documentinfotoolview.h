@@ -40,12 +40,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoToolView : public AbstractToolV
 {
   public:
     explicit DocumentInfoToolView( DocumentInfoTool* tool );
-    virtual ~DocumentInfoToolView();
+    ~DocumentInfoToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     DocumentInfoView* mWidget;

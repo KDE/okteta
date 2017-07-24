@@ -41,7 +41,7 @@ class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
   public:
     explicit TabbedViewsPrivate( TabbedViews* parent );
 
-    virtual ~TabbedViewsPrivate();
+    ~TabbedViewsPrivate() override;
 
   public:
     void init();

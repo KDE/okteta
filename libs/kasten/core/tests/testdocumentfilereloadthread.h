@@ -39,10 +39,10 @@ class TestDocumentFileReloadThread : public QThread
   public:
     TestDocumentFileReloadThread( QObject* parent, const QByteArray& header,
                                   /*TestDocument* document, */QFile* file );
-    virtual ~TestDocumentFileReloadThread();
+    ~TestDocumentFileReloadThread() override;
 
   public: // QThread API
-    virtual void run();
+    void run() override;
 
   public:
     bool success() const;

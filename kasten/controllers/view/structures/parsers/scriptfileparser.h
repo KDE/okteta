@@ -36,10 +36,10 @@ class ScriptFileParser: public AbstractStructureParser
     Q_DISABLE_COPY(ScriptFileParser)
 public:
     ScriptFileParser(const QString& pluginName, const QString& absolutePath);
-    virtual ~ScriptFileParser();
+    ~ScriptFileParser() override;
 
-    virtual QStringList parseStructureNames() const;
-    virtual QVector<TopLevelDataInformation*> parseStructures() const;
+    QStringList parseStructureNames() const override;
+    QVector<TopLevelDataInformation*> parseStructures() const override;
 
 private:
     QScriptValue loadScriptValue(ScriptLogger* logger, QScriptEngine* engine) const;

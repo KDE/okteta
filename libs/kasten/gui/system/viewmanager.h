@@ -44,7 +44,7 @@ class KASTENGUI_EXPORT ViewManager : public QObject
   public:
     ViewManager();
 
-    virtual ~ViewManager();
+    ~ViewManager() override;
 
   public:
     void setViewFactory( AbstractViewFactory* factory );

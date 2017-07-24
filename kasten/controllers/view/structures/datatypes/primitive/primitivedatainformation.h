@@ -36,22 +36,22 @@ class PrimitiveDataInformation : public DataInformation
     friend class PrimitiveDataInformationTest; //that unit test needs to change mWasAbleToRead
 public:
     explicit PrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
-    virtual ~PrimitiveDataInformation();
-    virtual PrimitiveDataInformation* clone() const = 0;
+    ~PrimitiveDataInformation() override;
+    PrimitiveDataInformation* clone() const override = 0;
 
-    virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
+    Qt::ItemFlags flags(int column, bool fileLoaded = true) const override;
 
-    virtual bool isPrimitive() const;
+    bool isPrimitive() const override;
     virtual AllPrimitiveTypes value() const = 0;
     virtual void setValue(AllPrimitiveTypes newValue) = 0;
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual PrimitiveDataType type() const = 0;
 
-    virtual unsigned int childCount() const { return 0; }
-    virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return nullptr; }
-    virtual bool canHaveChildren() const { return false; }
-    virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
-    virtual int indexOf(const DataInformation* const) const {Q_ASSERT(false); return -1; }
+    unsigned int childCount() const override { return 0; }
+    DataInformation* childAt(unsigned int) const override { Q_ASSERT(false); return nullptr; }
+    bool canHaveChildren() const override { return false; }
+    BitCount64 childPosition(const DataInformation*, Okteta::Address) const override { Q_ASSERT(false); return 0; }
+    int indexOf(const DataInformation* const) const override {Q_ASSERT(false); return -1; }
 
     /** @return the matching prefix for the base (nothing, '0x', '0b' or '0o') */
     static QString basePrefix(int base);
@@ -79,37 +79,37 @@ public:
     /** takes ownership of @p valueType */
     PrimitiveDataInformationWrapper(const QString& name, PrimitiveDataInformation* valueType,
             DataInformation* parent = nullptr);
-    virtual ~PrimitiveDataInformationWrapper() {}
+    ~PrimitiveDataInformationWrapper() override {}
 
     //delegate all these to the underlying object:
 
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override
     { return mValue->setData(value, out, address, bitsRemaining, bitOffset); }
 
 
 
-    virtual BitCount32 size() const { return mValue->size(); }
+    BitCount32 size() const override { return mValue->size(); }
 
-    virtual void setWidgetData(QWidget* w) const {mValue->setWidgetData(w); }
+    void setWidgetData(QWidget* w) const override {mValue->setWidgetData(w); }
 
-    virtual QVariant dataFromWidget(const QWidget* w) const { return mValue->dataFromWidget(w); }
+    QVariant dataFromWidget(const QWidget* w) const override { return mValue->dataFromWidget(w); }
 
-    virtual QWidget* createEditWidget(QWidget* parent) const { return mValue->createEditWidget(parent); }
+    QWidget* createEditWidget(QWidget* parent) const override { return mValue->createEditWidget(parent); }
 
-    virtual AllPrimitiveTypes value() const { return mValue->value(); }
+    AllPrimitiveTypes value() const override { return mValue->value(); }
 
-    virtual void setValue(AllPrimitiveTypes newValue) { mValue->setValue(newValue); }
+    void setValue(AllPrimitiveTypes newValue) override { mValue->setValue(newValue); }
 
     //classes derived from this are not true primitive types (they provide additional information)
-    virtual PrimitiveDataType type() const { return Type_Invalid; }
+    PrimitiveDataType type() const override { return Type_Invalid; }
 
 
-    virtual QScriptValue valueAsQScriptValue() const;
+    QScriptValue valueAsQScriptValue() const override;
 
     //we have to do slightly more than just forward with this method
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset);
+    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
 protected:
     QScopedPointer<PrimitiveDataInformation> mValue;
 };

@@ -37,13 +37,13 @@ class Utf8Codec : public AbstractTypeCodec
   public:
     Utf8Codec();
 
-    virtual ~Utf8Codec();
+    ~Utf8Codec() override;
 
   public: // AbstractTypeCodec API
-    virtual QVariant value( const PODData& data, int* byteCount ) const;
-    virtual QByteArray valueToBytes( const QVariant& value ) const;
+    QVariant value( const PODData& data, int* byteCount ) const override;
+    QByteArray valueToBytes( const QVariant& value ) const override;
 
-    virtual bool areEqual( const QVariant& value, QVariant& otherValue ) const;
+    bool areEqual( const QVariant& value, QVariant& otherValue ) const override;
 
   protected:
     QTextCodec* mUtf8Codec;

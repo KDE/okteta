@@ -68,7 +68,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject
 
   public:
     ByteArrayViewProfileManager();
-    virtual ~ByteArrayViewProfileManager();
+    ~ByteArrayViewProfileManager() override;
 
   public:
     QList<ByteArrayViewProfile> viewProfiles() const;

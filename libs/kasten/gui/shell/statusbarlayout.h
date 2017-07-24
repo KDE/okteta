@@ -39,27 +39,27 @@ class StatusBarLayout : public QLayout
 
   public:
     explicit StatusBarLayout( QWidget* parent = nullptr );
-    virtual ~StatusBarLayout();
+    ~StatusBarLayout() override;
 
   public:
     void addWidget( QWidget* widget );
 
   public: // QLayout API
-    virtual int count() const;
-    virtual QLayoutItem* itemAt( int index ) const;
-    virtual int indexOf( QWidget* widget ) const;
+    int count() const override;
+    QLayoutItem* itemAt( int index ) const override;
+    int indexOf( QWidget* widget ) const override;
 
-    virtual void addItem( QLayoutItem* item );
-    virtual QLayoutItem* takeAt( int index );
+    void addItem( QLayoutItem* item ) override;
+    QLayoutItem* takeAt( int index ) override;
 
   public: // QLayoutItem API
-    virtual Qt::Orientations expandingDirections() const;
-    virtual bool isEmpty() const;
-    virtual QSize sizeHint() const;
-    virtual QSize minimumSize () const;
+    Qt::Orientations expandingDirections() const override;
+    bool isEmpty() const override;
+    QSize sizeHint() const override;
+    QSize minimumSize () const override;
 
-    virtual void invalidate();
-    virtual void setGeometry( const QRect& rect );
+    void invalidate() override;
+    void setGeometry( const QRect& rect ) override;
 
   protected:
 //     void updateMarginAndSpacing();

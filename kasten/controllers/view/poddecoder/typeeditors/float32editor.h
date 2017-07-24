@@ -37,7 +37,7 @@ class Float32Editor : public KLineEdit
   public:
     explicit Float32Editor( QWidget* parent );
 
-    virtual ~Float32Editor();
+    ~Float32Editor() override;
 
   public:
     void setData( Float32 data );

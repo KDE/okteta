@@ -54,7 +54,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileController : public AbstractXmlG
                            KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // update slots
     void onViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );

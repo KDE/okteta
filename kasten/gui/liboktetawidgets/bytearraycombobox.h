@@ -48,7 +48,7 @@ class OKTETAKASTENGUI_EXPORT ByteArrayComboBox : public QWidget
 
   public:
     explicit ByteArrayComboBox( QWidget* parent = nullptr );
-    virtual ~ByteArrayComboBox();
+    ~ByteArrayComboBox() override;
 
   public: // set
     void setByteArray( const QByteArray& byteArray );

@@ -40,12 +40,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksToolView : public AbstractToolView
 {
   public:
     explicit BookmarksToolView( BookmarksTool* tool );
-    virtual ~BookmarksToolView();
+    ~BookmarksToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     BookmarksView* mWidget;

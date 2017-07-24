@@ -36,10 +36,10 @@ class PrintColumnStylist : public Okteta::AbstractColumnStylist
 {
   public:
     PrintColumnStylist();
-    virtual ~PrintColumnStylist();
+    ~PrintColumnStylist() override;
 
   public: // AbstractColumnStylist API
-    virtual const QPalette& palette() const;
+    const QPalette& palette() const override;
 
   protected:
     QPalette mPalette;

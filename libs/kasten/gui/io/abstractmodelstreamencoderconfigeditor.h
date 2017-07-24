@@ -42,7 +42,7 @@ class KASTENGUI_EXPORT AbstractModelStreamEncoderConfigEditor : public QWidget
   protected:
     explicit AbstractModelStreamEncoderConfigEditor( QWidget* parent = nullptr );
   public:
-    virtual ~AbstractModelStreamEncoderConfigEditor();
+    ~AbstractModelStreamEncoderConfigEditor() override;
 
   public: // API to be implemented
     /// default returns true

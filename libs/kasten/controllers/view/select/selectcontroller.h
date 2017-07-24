@@ -48,7 +48,7 @@ class KASTENCONTROLLERS_EXPORT SelectController : public AbstractXmlGuiControlle
     explicit SelectController( KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void selectAll();

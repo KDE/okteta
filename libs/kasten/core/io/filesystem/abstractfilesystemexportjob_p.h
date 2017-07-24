@@ -39,7 +39,7 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
     AbstractFileSystemExportJobPrivate( AbstractFileSystemExportJob* parent,
                                         AbstractModel* model, const AbstractModelSelection* selection, const QUrl& url );
 
-    virtual ~AbstractFileSystemExportJobPrivate();
+    ~AbstractFileSystemExportJobPrivate() override;
 
   public: // KJob API
     virtual void start();

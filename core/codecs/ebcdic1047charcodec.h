@@ -37,10 +37,10 @@ class EBCDIC1047CharCodec : public CharCodec
     EBCDIC1047CharCodec();
 
   public: // CharCodec API
-    virtual Character decode( Byte byte ) const;
-    virtual bool encode( Byte* byte, const QChar& _char ) const;
-    virtual bool canEncode( const QChar& _char ) const;
-    virtual const QString& name() const;
+    Character decode( Byte byte ) const override;
+    bool encode( Byte* byte, const QChar& _char ) const override;
+    bool canEncode( const QChar& _char ) const override;
+    const QString& name() const override;
 
   public:
     static EBCDIC1047CharCodec* create();

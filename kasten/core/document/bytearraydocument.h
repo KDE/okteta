@@ -58,28 +58,28 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
   public:
     explicit ByteArrayDocument( const QString &initDescription );
     ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription );
-    virtual ~ByteArrayDocument();
+    ~ByteArrayDocument() override;
 
   public: // AbstractModel API
-    virtual QString title() const;
-    virtual bool isModifiable() const;
-    virtual bool isReadOnly() const;
-    virtual void setReadOnly( bool isReadOnly );
+    QString title() const override;
+    bool isModifiable() const override;
+    bool isReadOnly() const override;
+    void setReadOnly( bool isReadOnly ) override;
 
   public: // AbstractDocument API
-    virtual QString typeName() const;
-    virtual QString mimeType() const;
-    virtual ContentFlags contentFlags() const;
+    QString typeName() const override;
+    QString mimeType() const override;
+    ContentFlags contentFlags() const override;
 
   public: // If::Versionable
-    virtual int versionIndex() const;
-    virtual DocumentVersionData versionData( int versionIndex ) const;
-    virtual int versionCount() const;
-    virtual void revertToVersionByIndex( int versionIndex );
+    int versionIndex() const override;
+    DocumentVersionData versionData( int versionIndex ) const override;
+    int versionCount() const override;
+    void revertToVersionByIndex( int versionIndex ) override;
 
   public: // If::UserListable
-    virtual Person owner() const;
-    virtual QList<Person> userList() const;
+    Person owner() const override;
+    QList<Person> userList() const override;
 
   public: // If::ByteArray
     virtual Okteta::AbstractByteArrayModel *content() const;
@@ -92,13 +92,13 @@ class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
     void removeUsers( const QList<Person>& users );
 
   Q_SIGNALS: // If::Versionable
-    /*virtual*/ void revertedToVersionIndex( int versionIndex );
-    /*virtual*/ void headVersionDataChanged( const Kasten::DocumentVersionData &versionData );
-    /*virtual*/ void headVersionChanged( int newHeadVersionIndex );
+    void revertedToVersionIndex( int versionIndex ) override;
+    void headVersionDataChanged( const Kasten::DocumentVersionData &versionData ) override;
+    void headVersionChanged( int newHeadVersionIndex ) override;
 
   Q_SIGNALS: // If::UserListable
-    /*virtual*/ void usersAdded( const QList<Person>& newUserList );
-    /*virtual*/ void usersRemoved( const QList<Person>& newUserList );
+    void usersAdded( const QList<Person>& newUserList ) override;
+    void usersRemoved( const QList<Person>& newUserList ) override;
 
   private Q_SLOTS:
     void onModelModified( bool newState );

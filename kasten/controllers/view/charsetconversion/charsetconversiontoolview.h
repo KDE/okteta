@@ -40,12 +40,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionToolView : public Abstract
 {
   public:
     explicit CharsetConversionToolView( CharsetConversionTool* tool );
-    virtual ~CharsetConversionToolView();
+    ~CharsetConversionToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     CharsetConversionView* mWidget;

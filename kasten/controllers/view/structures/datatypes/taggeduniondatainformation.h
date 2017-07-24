@@ -48,25 +48,25 @@ public:
     };
 
     explicit TaggedUnionDataInformation(const QString& name, DataInformation* parent = nullptr);
-    virtual ~TaggedUnionDataInformation();
+    ~TaggedUnionDataInformation() override;
 
-    virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
-    virtual bool isTaggedUnion() const;
+    qint64 readData(Okteta::AbstractByteArrayModel *input,
+                    Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset) override;
+    bool isTaggedUnion() const override;
 
-    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
+    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
-    virtual BitCount32 size() const;
+    BitCount32 size() const override;
 
-    virtual bool replaceChildAt(unsigned int index, DataInformation* newChild);
-    virtual int indexOf(const DataInformation* const data) const;
+    bool replaceChildAt(unsigned int index, DataInformation* newChild) override;
+    int indexOf(const DataInformation* const data) const override;
 
-    virtual DataInformation* childAt(unsigned int index) const;
-    virtual unsigned int childCount() const;
+    DataInformation* childAt(unsigned int index) const override;
+    unsigned int childCount() const override;
     void appendDefaultField(DataInformation* field, bool emitSignal);
     void setAlternatives(const QVector<FieldInfo>& alternatives, bool emitSignal);
 private:
-    virtual QString typeNameImpl() const;
+    QString typeNameImpl() const override;
 private:
     const QVector<DataInformation*>& currentChildren() const;
     int determineSelection(TopLevelDataInformation* top);

@@ -40,7 +40,7 @@ class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobP
   public:
     AbstractFileSystemSyncToRemoteJobPrivate( AbstractFileSystemSyncToRemoteJob* parent, AbstractModelFileSystemSynchronizer* synchronizer );
 
-    virtual ~AbstractFileSystemSyncToRemoteJobPrivate();
+    ~AbstractFileSystemSyncToRemoteJobPrivate() override;
 
   public: // KJob API
     void start();

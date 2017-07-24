@@ -56,12 +56,12 @@ class ByteArrayRowsColumnTextRenderer : public AbstractColumnTextRenderer
         int visibleCodings,
         Okteta::ValueCoding valueCoding,
         const QString& charCodecName, QChar substituteChar, QChar undefinedChar );
-    virtual ~ByteArrayRowsColumnTextRenderer();
+    ~ByteArrayRowsColumnTextRenderer() override;
 
   public: // AbstractColumnTextRenderer API
-    virtual void renderFirstLine( QTextStream* stream, int lineIndex ) const;
-    virtual void renderNextLine( QTextStream* stream, bool isSubline ) const;
-    virtual int noOfSublinesNeeded() const;
+    void renderFirstLine( QTextStream* stream, int lineIndex ) const override;
+    void renderNextLine( QTextStream* stream, bool isSubline ) const override;
+    int noOfSublinesNeeded() const override;
 
   protected:
     void renderLine( QTextStream* stream, bool isSubline ) const;

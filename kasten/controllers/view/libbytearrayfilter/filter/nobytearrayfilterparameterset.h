@@ -30,10 +30,10 @@ class NoByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 {
   public:
     NoByteArrayFilterParameterSet();
-    virtual ~NoByteArrayFilterParameterSet();
+    ~NoByteArrayFilterParameterSet() override;
 
   public: // AbstractByteArrayFilterParameterSet API
-    virtual const char* id() const;
+    const char* id() const override;
 };
 
 #endif

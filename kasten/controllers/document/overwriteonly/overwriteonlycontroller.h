@@ -46,7 +46,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT OverwriteOnlyController : public AbstractXm
     explicit OverwriteOnlyController( KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void setOverwriteOnly( bool isOverwriteOnly );

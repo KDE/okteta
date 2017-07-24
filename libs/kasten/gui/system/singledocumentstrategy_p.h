@@ -44,7 +44,7 @@ class SingleDocumentStrategyPrivate : public AbstractDocumentStrategyPrivate
     SingleDocumentStrategyPrivate( SingleDocumentStrategy* parent,
                                    DocumentManager* documentManager,
                                    ViewManager* viewManager );
-    virtual ~SingleDocumentStrategyPrivate();
+    ~SingleDocumentStrategyPrivate() override;
 
   public:
     void init();

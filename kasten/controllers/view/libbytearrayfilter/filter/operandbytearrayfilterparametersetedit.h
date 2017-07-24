@@ -41,14 +41,14 @@ class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
 
   public:
     explicit OperandByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
-    virtual ~OperandByteArrayFilterParameterSetEdit();
+    ~OperandByteArrayFilterParameterSetEdit() override;
 
   public: // AbstractByteArrayFilterParameterSetEdit API
-    virtual void setValues( const AbstractByteArrayFilterParameterSet *parameterSet );
-    virtual void setCharCodec( const QString &charCodecName );
-    virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
-    virtual bool isValid() const;
-    virtual void rememberCurrentSettings();
+    void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) override;
+    void setCharCodec( const QString &charCodecName ) override;
+    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const override;
+    bool isValid() const override;
+    void rememberCurrentSettings() override;
 
   protected Q_SLOTS:
     void onInputChanged( const QByteArray &data );

@@ -51,7 +51,7 @@ class KASTENCORE_EXPORT ModelCodecManager : public QObject
 
   public:
     explicit ModelCodecManager( DocumentManager* manager );
-    virtual ~ModelCodecManager();
+    ~ModelCodecManager() override;
 
   public:
     // or use the viewmodel here? on what should the export be based?

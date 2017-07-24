@@ -41,7 +41,7 @@ class KASTENGUI_EXPORT AbstractView : public AbstractModel
 
   public:
     explicit AbstractView( AbstractModel* baseModel = nullptr );
-    virtual ~AbstractView();
+    ~AbstractView() override;
 
   public: // API to be implemented
     virtual void setFocus() = 0;

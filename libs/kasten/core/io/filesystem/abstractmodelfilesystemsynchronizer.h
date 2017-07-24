@@ -52,10 +52,10 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
   public:
     AbstractModelFileSystemSynchronizer();
 
-    virtual ~AbstractModelFileSystemSynchronizer();
+    ~AbstractModelFileSystemSynchronizer() override;
 
   public: // AbstractModelSynchronizer API
-    virtual RemoteSyncState remoteSyncState() const;
+    RemoteSyncState remoteSyncState() const override;
 
   protected:
 //     QDataTime lastModifed() const;

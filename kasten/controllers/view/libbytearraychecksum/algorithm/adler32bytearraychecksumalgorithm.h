@@ -35,11 +35,11 @@ class Adler32ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgori
 
   public:
     Adler32ByteArrayChecksumAlgorithm();
-    virtual ~Adler32ByteArrayChecksumAlgorithm();
+    ~Adler32ByteArrayChecksumAlgorithm() override;
 
   public: // AbstractByteArrayChecksumAlgorithm API
-    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayChecksumParameterSet* parameterSet();
+    bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
   protected:
     NoByteArrayChecksumParameterSet mParameterSet;

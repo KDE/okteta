@@ -49,7 +49,7 @@ class KAbstractFindDialog : public QDialog
 
   public:
     explicit KAbstractFindDialog( QWidget* parent = nullptr );
-    virtual ~KAbstractFindDialog();
+    ~KAbstractFindDialog() override;
 
   public: // set
     void setDirection( KFindDirection Direction );
@@ -66,7 +66,7 @@ class KAbstractFindDialog : public QDialog
     void setCharCodec( const QString& codecName );
 
   protected: // QWidget API
-    virtual void showEvent( QShowEvent *e );
+    void showEvent( QShowEvent *e ) override;
 
   protected:
     void setFindButton(const QString& buttonText, const QString& buttonIconName,

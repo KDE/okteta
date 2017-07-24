@@ -33,10 +33,10 @@ class Utf8CharValidator : public QValidator
   public:
     explicit Utf8CharValidator( QObject* parent = nullptr );
 
-    virtual ~Utf8CharValidator();
+    ~Utf8CharValidator() override;
 
   public: // QValidator API
-    virtual QValidator::State validate( QString& input, int& pos ) const;
+    QValidator::State validate( QString& input, int& pos ) const override;
 };
 
 inline Utf8CharValidator::Utf8CharValidator( QObject* parent ) : QValidator( parent ) {}

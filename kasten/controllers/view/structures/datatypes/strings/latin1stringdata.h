@@ -34,16 +34,16 @@ class Latin1StringData : public StringData
 {
 public:
     explicit Latin1StringData(StringDataInformation* parent);
-    virtual ~Latin1StringData();
+    ~Latin1StringData() override;
 
-    virtual qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining);
-    virtual BitCount32 sizeAt(uint i) const;
-    virtual BitCount32 size() const;
-    virtual QString completeString(bool skipInvalid = false) const;
-    virtual QString stringValue(int row) const;
-    virtual QString charType() const;
-    virtual uint count() const;
-    virtual QString typeName() const;
+    qint64 read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
+    BitCount32 sizeAt(uint i) const override;
+    BitCount32 size() const override;
+    QString completeString(bool skipInvalid = false) const override;
+    QString stringValue(int row) const override;
+    QString charType() const override;
+    uint count() const override;
+    QString typeName() const override;
 private:
     QVector<quint8> mData;
 };

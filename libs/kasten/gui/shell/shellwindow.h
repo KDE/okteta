@@ -52,7 +52,7 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
 
   public:
     explicit ShellWindow( ViewManager* viewManager );
-    virtual ~ShellWindow();
+    ~ShellWindow() override;
 
   public Q_SLOTS:
     void showDocument( Kasten::AbstractDocument* document ); // TODO: better name
@@ -63,7 +63,7 @@ class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
     void addTool( AbstractToolView* toolView );
 
   public: // If::WidgetsDockable API
-    virtual QList<ToolViewDockWidget*> dockWidgets() const;
+    QList<ToolViewDockWidget*> dockWidgets() const override;
 
   protected:
     MultiViewAreas* viewArea() const;

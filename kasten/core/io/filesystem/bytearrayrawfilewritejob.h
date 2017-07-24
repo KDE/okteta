@@ -39,10 +39,10 @@ class ByteArrayRawFileWriteJob : public AbstractFileSystemSyncToRemoteJob
 
   public:
     explicit ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer *synchronizer );
-    virtual ~ByteArrayRawFileWriteJob();
+    ~ByteArrayRawFileWriteJob() override;
 
   protected: // AbstractFileSystemSyncToRemoteJob API
-    virtual void startWriteToFile();
+    void startWriteToFile() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

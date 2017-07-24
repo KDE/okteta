@@ -32,19 +32,19 @@ class SignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 public:
     SignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
             : AbstractBitfieldDataInformation(name, width, parent) {}
-    virtual ~SignedBitfieldDataInformation() {}
-    virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
+    ~SignedBitfieldDataInformation() override {}
+    AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const override;
 
-    virtual QScriptValue valueAsQScriptValue() const;
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
+    QScriptValue valueAsQScriptValue() const override;
+    QWidget* createEditWidget(QWidget* parent) const override;
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
     /** sign extend the value if it is negative, so it can always be treated as a plain qint64 */
-    virtual void setValue(AllPrimitiveTypes newVal);
-    virtual Type bitfieldType() const;
+    void setValue(AllPrimitiveTypes newVal) override;
+    Type bitfieldType() const override;
 private:
-    virtual QString valueStringImpl() const;
-    virtual QString typeNameImpl() const;
+    QString valueStringImpl() const override;
+    QString typeNameImpl() const override;
 };
 
 inline QString SignedBitfieldDataInformation::typeNameImpl() const

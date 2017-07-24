@@ -77,7 +77,7 @@ protected:
 public:
     virtual DataInformation* clone() const = 0;
     explicit DataInformation(const QString& name, DataInformationBase* parent = nullptr);
-    virtual ~DataInformation();
+    ~DataInformation() override;
 
     enum Columns
     {
@@ -148,7 +148,7 @@ public:
      * @return the number of bits read or @c -1 if none were read
      */
     virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset) = 0;
+                            BitCount64 bitsRemaining, quint8* bitOffset) = 0;
     /** sets mWasAbleToRead to false for all children and this object.
      *  Gets called once before the reading of the whole structure starts. */
     void beginRead();
@@ -163,9 +163,9 @@ public:
      *  @return @c true on success, @c false otherwise
      */
     virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
+                         Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
 
-    virtual bool isTopLevel() const;
+    bool isTopLevel() const override;
     TopLevelDataInformation* topLevelDataInformation() const;
     DataInformation* mainStructure();
 

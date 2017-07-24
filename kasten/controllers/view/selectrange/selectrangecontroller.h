@@ -48,10 +48,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT SelectRangeController : public AbstractXmlG
 
   public:
     explicit SelectRangeController( If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient );
-    virtual ~SelectRangeController();
+    ~SelectRangeController() override;
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void select();

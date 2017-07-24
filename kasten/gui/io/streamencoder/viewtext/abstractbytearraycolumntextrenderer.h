@@ -49,11 +49,11 @@ class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
     AbstractByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
         const Okteta::CoordRange& coordRange,
         int noOfBytesPerLine );
-    virtual ~AbstractByteArrayColumnTextRenderer();
+    ~AbstractByteArrayColumnTextRenderer() override;
 
   public: // AbstractColumnTextRenderer API
-    virtual void renderFirstLine( QTextStream* stream, int lineIndex ) const;
-    virtual void renderNextLine( QTextStream* stream, bool isSubline ) const;
+    void renderFirstLine( QTextStream* stream, int lineIndex ) const override;
+    void renderNextLine( QTextStream* stream, bool isSubline ) const override;
 
   protected: // API to be reimplemented by subclasses
     virtual void renderLine( QTextStream* stream, bool isSubline ) const = 0;

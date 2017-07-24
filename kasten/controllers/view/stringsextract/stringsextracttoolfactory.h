@@ -36,10 +36,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolFactory : public Abstract
 {
   public:
     StringsExtractToolFactory();
-    virtual ~StringsExtractToolFactory();
+    ~StringsExtractToolFactory() override;
 
   public: // AbstractToolFactory API
-    virtual AbstractTool* create();
+    AbstractTool* create() override;
 };
 
 }

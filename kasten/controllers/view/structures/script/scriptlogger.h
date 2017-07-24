@@ -37,7 +37,7 @@ class ScriptLogger : public QAbstractTableModel {
     Q_OBJECT
 public:
     explicit ScriptLogger();
-    virtual ~ScriptLogger();
+    ~ScriptLogger() override;
 
     enum Columns {
         ColumnTime = 0, ColumnOrigin, ColumnMessage, COLUMN_COUNT
@@ -58,10 +58,10 @@ public:
 		QString origin;
 		QTime time;
 	};
-	virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
-	virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
-	virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
-	virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
+	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+	int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const override;
 
 	inline QDebug info(const DataInformation* origin) { return log(LogInfo, origin); }
 	inline QDebug warn(const DataInformation* origin) { return log(LogWarning, origin); }

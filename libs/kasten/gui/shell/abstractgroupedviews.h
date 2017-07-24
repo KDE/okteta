@@ -43,7 +43,7 @@ class KASTENGUI_EXPORT AbstractGroupedViews : public AbstractViewArea
     explicit AbstractGroupedViews( AbstractGroupedViewsPrivate* d );
 
   public:
-    virtual ~AbstractGroupedViews();
+    ~AbstractGroupedViews() override;
 
   public Q_SLOTS: // set/action API to be implemented
     virtual void addViews( const QList<Kasten::AbstractView*>& views ) = 0;

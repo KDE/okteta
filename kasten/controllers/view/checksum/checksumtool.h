@@ -54,13 +54,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
 
   public:
     ChecksumTool();
-    virtual ~ChecksumTool();
+    ~ChecksumTool() override;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public: // status
     QString checkSum() const;

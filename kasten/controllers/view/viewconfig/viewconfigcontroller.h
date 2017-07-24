@@ -48,7 +48,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGu
     explicit ViewConfigController( KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void setValueCoding( int valueCoding );

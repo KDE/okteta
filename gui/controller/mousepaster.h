@@ -35,11 +35,11 @@ class MousePaster : public AbstractMouseController
   public:
     MousePaster( AbstractByteArrayView* view, AbstractMouseController* parent );
 
-    virtual ~MousePaster();
+    ~MousePaster() override;
 
   public: // AbstractMouseController API
-    virtual bool handleMousePressEvent( QMouseEvent* mouseEvent );
-    virtual bool handleMouseReleaseEvent( QMouseEvent* mouseEvent );
+    bool handleMousePressEvent( QMouseEvent* mouseEvent ) override;
+    bool handleMouseReleaseEvent( QMouseEvent* mouseEvent ) override;
 
   protected:
 };

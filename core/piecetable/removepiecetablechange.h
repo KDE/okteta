@@ -39,15 +39,15 @@ class RemovePieceTableChange : public AbstractPieceTableChange
 {
   public:
     RemovePieceTableChange( const AddressRange& removeRange, const PieceList& removedPieces );
-    virtual ~RemovePieceTableChange();
+    ~RemovePieceTableChange() override;
 
   public: // AbstractPieceTableChange API
-    virtual int type() const;
-    virtual QString description() const;
-    virtual bool merge( const AbstractPieceTableChange* other );
-    virtual AddressRange apply( PieceTable* pieceTable ) const;
-    virtual AddressRange revert( PieceTable* pieceTable ) const;
-    virtual ArrayChangeMetrics metrics() const;
+    int type() const override;
+    QString description() const override;
+    bool merge( const AbstractPieceTableChange* other ) override;
+    AddressRange apply( PieceTable* pieceTable ) const override;
+    AddressRange revert( PieceTable* pieceTable ) const override;
+    ArrayChangeMetrics metrics() const override;
 
   protected:
     AddressRange mRemoveRange;

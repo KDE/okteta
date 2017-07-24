@@ -43,13 +43,13 @@ class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 {
   public:
     OffsetColumnRenderer( AbstractColumnStylist* stylist, ByteArrayTableLayout* layout, OffsetFormat::Format format );
-    virtual ~OffsetColumnRenderer();
+    ~OffsetColumnRenderer() override;
 
   public:  // AbstractColumnRenderer API
-    virtual void renderFirstLine( QPainter* painter, const PixelXRange& Xs, Line firstLineIndex );
-    virtual void renderNextLine( QPainter* painter );
-    virtual void renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
-    virtual void renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys );
+    void renderFirstLine( QPainter* painter, const PixelXRange& Xs, Line firstLineIndex ) override;
+    void renderNextLine( QPainter* painter ) override;
+    void renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys ) override;
+    void renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys ) override;
 
   public:
     void setFormat( OffsetFormat::Format format, const QFontMetrics& fontMetrics );

@@ -39,10 +39,10 @@ class TestDocumentFileReloadJob : public AbstractFileSystemSyncFromRemoteJob
 
   public:
     explicit TestDocumentFileReloadJob( TestDocumentFileSynchronizer* synchronizer );
-    virtual ~TestDocumentFileReloadJob();
+    ~TestDocumentFileReloadJob() override;
 
   protected: // AbstractFileSystemSyncFromRemoteJob API
-    virtual void startReadFromFile();
+    void startReadFromFile() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

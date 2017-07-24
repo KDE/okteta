@@ -42,7 +42,7 @@ class KASTENCORE_EXPORT AbstractDocumentFactory : public QObject
   Q_OBJECT
 
   public:
-    virtual ~AbstractDocumentFactory();
+    ~AbstractDocumentFactory() override;
 
   public: // API to be implemented
     /// default returns false

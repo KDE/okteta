@@ -38,12 +38,12 @@ class GotoOffsetToolView : public AbstractToolInlineView
 {
   public:
     explicit GotoOffsetToolView( GotoOffsetTool* tool );
-    virtual ~GotoOffsetToolView();
+    ~GotoOffsetToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     GotoOffsetView* mWidget;

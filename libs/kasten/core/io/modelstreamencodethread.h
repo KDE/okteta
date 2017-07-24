@@ -47,10 +47,10 @@ class KASTENCORE_EXPORT ModelStreamEncodeThread : public QThread
                              QIODevice* ioDevice,
                              AbstractModel* model, const AbstractModelSelection* selection,
                              AbstractModelStreamEncoder* encoder );
-    virtual ~ModelStreamEncodeThread();
+    ~ModelStreamEncodeThread() override;
 
   public: // QThread API
-    virtual void run();
+    void run() override;
 
   public:
     bool success() const;

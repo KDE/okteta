@@ -49,7 +49,7 @@ class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiCont
     SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS:
     void save();

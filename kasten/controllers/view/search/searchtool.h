@@ -50,13 +50,13 @@ class SearchTool : public AbstractTool
 
   public:
     SearchTool();
-    virtual ~SearchTool();
+    ~SearchTool() override;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public: // status
     QByteArray searchData() const;

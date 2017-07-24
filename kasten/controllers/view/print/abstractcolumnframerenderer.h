@@ -51,12 +51,12 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 {
   public:
     AbstractColumnFrameRenderer();
-    virtual ~AbstractColumnFrameRenderer();
+    ~AbstractColumnFrameRenderer() override;
 
   public: // AbstractFrameRenderer API
 //     virtual int height() const;
 //     virtual int width() const;
-    virtual void renderFrame( QPainter* painter, int frameIndex );
+    void renderFrame( QPainter* painter, int frameIndex ) override;
 
   public: // data-wise sizes
     /** returns the number of all lines */

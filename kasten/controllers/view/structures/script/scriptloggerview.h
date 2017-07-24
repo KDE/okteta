@@ -35,7 +35,7 @@ Q_OBJECT
     Q_DISABLE_COPY(ScriptLoggerView)
 public:
     explicit ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent = nullptr);
-    virtual ~ScriptLoggerView();
+    ~ScriptLoggerView() override;
 
 protected Q_SLOTS:
     void updateModel(int index);

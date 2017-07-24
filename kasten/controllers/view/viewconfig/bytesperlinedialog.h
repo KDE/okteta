@@ -39,7 +39,7 @@ class BytesPerLineDialog : public QDialog
   public:
     explicit BytesPerLineDialog( QWidget* parent = nullptr );
 
-    virtual ~BytesPerLineDialog();
+    ~BytesPerLineDialog() override;
 
   public:
     void setBytesPerLine( int bytesPerLine );

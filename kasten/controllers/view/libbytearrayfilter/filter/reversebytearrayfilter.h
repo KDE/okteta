@@ -36,11 +36,11 @@ class ReverseByteArrayFilter : public AbstractByteArrayFilter
   public:
     ReverseByteArrayFilter();
 
-    virtual ~ReverseByteArrayFilter();
+    ~ReverseByteArrayFilter() override;
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayFilterParameterSet *parameterSet();
+    bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayFilterParameterSet *parameterSet() override;
 
   protected:
     ReverseByteArrayFilterParameterSet mParameterSet;

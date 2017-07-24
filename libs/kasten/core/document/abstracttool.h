@@ -44,7 +44,7 @@ class KASTENCORE_EXPORT AbstractTool : public QObject
   protected:
     AbstractTool();
   public:
-    virtual ~AbstractTool();
+    ~AbstractTool() override;
 
   public: // API to be implemented
 //     virtual AbstractModel* targetModel() const = 0;

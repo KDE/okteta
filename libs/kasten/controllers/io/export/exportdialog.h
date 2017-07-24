@@ -44,7 +44,7 @@ class ExportDialog : public QDialog
     ExportDialog( const QString& remoteTypeName, AbstractModelExporterConfigEditor* configEditor,
                   QWidget* parent = nullptr );
 
-    virtual ~ExportDialog();
+    ~ExportDialog() override;
 
   public:
     void setData( AbstractModel* model, const AbstractModelSelection* selection );

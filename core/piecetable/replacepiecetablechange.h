@@ -41,17 +41,17 @@ class ReplacePieceTableChange : public AbstractPieceTableChange
     ReplacePieceTableChange( const AddressRange& removeRange, Size insertLength, Address storageOffset,
                              const PieceList& removedPieces );
 
-    virtual ~ReplacePieceTableChange();
+    ~ReplacePieceTableChange() override;
 
   public: // AbstractPieceTableChange API
-    virtual int type() const;
-    virtual QString description() const;
-    virtual Address storageOffset() const;
-    virtual bool merge( const AbstractPieceTableChange* other );
-    virtual AddressRange apply( PieceTable* pieceTable ) const;
-    virtual AddressRange revert( PieceTable* pieceTable ) const;
-    virtual ArrayChangeMetrics metrics() const;
-    virtual Size dataSize() const;
+    int type() const override;
+    QString description() const override;
+    Address storageOffset() const override;
+    bool merge( const AbstractPieceTableChange* other ) override;
+    AddressRange apply( PieceTable* pieceTable ) const override;
+    AddressRange revert( PieceTable* pieceTable ) const override;
+    ArrayChangeMetrics metrics() const override;
+    Size dataSize() const override;
 
   protected:
     AddressRange mRemoveRange;

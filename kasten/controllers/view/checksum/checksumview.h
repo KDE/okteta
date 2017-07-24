@@ -47,7 +47,7 @@ class ChecksumView : public AbstractToolWidget
 
   public:
     explicit ChecksumView( ChecksumTool* tool, QWidget* parent = nullptr );
-    virtual ~ChecksumView();
+    ~ChecksumView() override;
 
   public:
     ChecksumTool* tool() const;

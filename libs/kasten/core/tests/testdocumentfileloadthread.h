@@ -40,10 +40,10 @@ class TestDocumentFileLoadThread : public QThread
   public:
     TestDocumentFileLoadThread( QObject* parent, const QByteArray& header,
                                 QFile* file );
-    virtual ~TestDocumentFileLoadThread();
+    ~TestDocumentFileLoadThread() override;
 
   public: // QThread API
-    virtual void run();
+    void run() override;
 
   public:
     TestDocument* document() const;

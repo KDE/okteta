@@ -36,10 +36,10 @@ class ByteArraySourceCodeStreamEncoderConfigEditorFactory : public AbstractModel
 {
   public:
     ByteArraySourceCodeStreamEncoderConfigEditorFactory();
-    virtual ~ByteArraySourceCodeStreamEncoderConfigEditorFactory();
+    ~ByteArraySourceCodeStreamEncoderConfigEditorFactory() override;
 
   public:
-    virtual AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const;
+    AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const override;
 };
 
 }

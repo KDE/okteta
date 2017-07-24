@@ -40,16 +40,16 @@ class TestPieceTableChange : public AbstractPieceTableChange
                           int position = 0, int storagePosition = 0, int storageId = Piece::ChangeStorage,
                           int replacedStoragePosition = 0, int replacedStorageId = Piece::ChangeStorage );
 
-    virtual ~TestPieceTableChange();
+    ~TestPieceTableChange() override;
 
   public: // AbstractPieceTableChange API
-    virtual int type() const;
-    virtual QString description() const;
-    virtual bool merge( const AbstractPieceTableChange* other );
-    virtual AddressRange apply( PieceTable* pieceTable ) const;
-    virtual AddressRange revert( PieceTable* pieceTable ) const;
-    virtual ArrayChangeMetrics metrics() const;
-    virtual int dataSize() const;
+    int type() const override;
+    QString description() const override;
+    bool merge( const AbstractPieceTableChange* other ) override;
+    AddressRange apply( PieceTable* pieceTable ) const override;
+    AddressRange revert( PieceTable* pieceTable ) const override;
+    ArrayChangeMetrics metrics() const override;
+    int dataSize() const override;
 
   protected:
     int mTypeId;

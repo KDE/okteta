@@ -44,7 +44,7 @@ class VersionView : public QWidget
 
   public:
     explicit VersionView( VersionViewTool* tool, QWidget* parent = nullptr );
-    virtual ~VersionView();
+    ~VersionView() override;
 
   public:
     VersionViewTool* tool() const;

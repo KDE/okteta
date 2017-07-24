@@ -66,7 +66,7 @@ class ByteArraySourceCodeStreamEncoder : public AbstractByteArrayStreamEncoder
 
   public:
     ByteArraySourceCodeStreamEncoder();
-    virtual ~ByteArraySourceCodeStreamEncoder();
+    ~ByteArraySourceCodeStreamEncoder() override;
 
   public:
     SourceCodeStreamEncoderSettings settings() const;
@@ -77,10 +77,10 @@ class ByteArraySourceCodeStreamEncoder : public AbstractByteArrayStreamEncoder
     int dataTypesCount() const;
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice* device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range );
+    bool encodeDataToStream( QIODevice* device,
+                             const ByteArrayView* byteArrayView,
+                             const Okteta::AbstractByteArrayModel* byteArrayModel,
+                             const Okteta::AddressRange& range ) override;
 
   protected:
     QString printFormatted( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset, unsigned int dataSize ) const;

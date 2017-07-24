@@ -42,7 +42,7 @@ class ToolInlineViewWidget : public QWidget
 
   public:
     explicit ToolInlineViewWidget( AbstractToolInlineView* view, QWidget* parent = nullptr );
-    virtual ~ToolInlineViewWidget();
+    ~ToolInlineViewWidget() override;
 
   public:
     AbstractToolInlineView* view() const;

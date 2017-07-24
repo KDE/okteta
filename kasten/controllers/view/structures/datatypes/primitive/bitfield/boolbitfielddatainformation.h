@@ -33,17 +33,17 @@ class BoolBitfieldDataInformation : public AbstractBitfieldDataInformation
 public:
     BoolBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
             : AbstractBitfieldDataInformation(name, width, parent) {}
-    virtual ~BoolBitfieldDataInformation() {}
+    ~BoolBitfieldDataInformation() override {}
 
-    virtual QScriptValue valueAsQScriptValue() const;
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual void setWidgetData(QWidget* w) const;
-    virtual Type bitfieldType() const;
+    QScriptValue valueAsQScriptValue() const override;
+    QWidget* createEditWidget(QWidget* parent) const override;
+    QVariant dataFromWidget(const QWidget* w) const override;
+    void setWidgetData(QWidget* w) const override;
+    Type bitfieldType() const override;
 
 private:
-    virtual QString valueStringImpl() const;
-    virtual QString typeNameImpl() const;
+    QString valueStringImpl() const override;
+    QString typeNameImpl() const override;
 };
 
 inline QString BoolBitfieldDataInformation::typeNameImpl() const

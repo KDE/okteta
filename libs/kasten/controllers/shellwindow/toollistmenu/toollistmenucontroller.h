@@ -52,7 +52,7 @@ class KASTENCONTROLLERS_EXPORT ToolListMenuController : public AbstractXmlGuiCon
     ToolListMenuController( If::WidgetsDockable* widgetsDockable, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private:
     void updateActions();

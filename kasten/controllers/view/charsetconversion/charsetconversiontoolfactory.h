@@ -36,10 +36,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionToolFactory : public Abstr
 {
   public:
     CharsetConversionToolFactory();
-    virtual ~CharsetConversionToolFactory();
+    ~CharsetConversionToolFactory() override;
 
   public: // AbstractToolFactory API
-    virtual AbstractTool* create();
+    AbstractTool* create() override;
 };
 
 }

@@ -46,7 +46,7 @@ class ZoomSlider : public QWidget
 
   public:
     explicit ZoomSlider( QWidget* parent );
-    virtual ~ZoomSlider();
+    ~ZoomSlider() override;
 
   public:
     void setTargetModel( AbstractModel* model );

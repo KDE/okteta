@@ -56,10 +56,10 @@ class ByteArrayValidator : public QValidator
                                  Coding codecId = CharCoding,
                                  int charCodecId = LocalEncoding );
 
-    virtual ~ByteArrayValidator();
+    ~ByteArrayValidator() override;
 
   public: // QValidator API
-    virtual QValidator::State validate( QString& input, int& pos ) const;
+    QValidator::State validate( QString& input, int& pos ) const override;
 
   public:
     /// Sets one of the value codecs or the current char codec.

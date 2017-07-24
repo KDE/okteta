@@ -39,7 +39,7 @@ class KTabController : public KController
     KTabController( AbstractByteArrayView* view, KController* parent );
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent* keyEvent );
+    bool handleKeyPress( QKeyEvent* keyEvent ) override;
 
   public:
     bool tabChangesFocus() const;

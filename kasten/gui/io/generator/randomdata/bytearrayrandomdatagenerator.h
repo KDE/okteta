@@ -51,10 +51,10 @@ class ByteArrayRandomDataGenerator : public AbstractModelDataGenerator
   public:
     ByteArrayRandomDataGenerator();
 
-    virtual ~ByteArrayRandomDataGenerator();
+    ~ByteArrayRandomDataGenerator() override;
 
   public: // AbstractModelDataGenerator API
-    virtual QMimeData* generateData();
+    QMimeData* generateData() override;
 
   public:
     ByteArrayRandomDataGeneratorSettings settings() const;

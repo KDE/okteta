@@ -38,22 +38,22 @@ class BookmarkListConstIteratorAdapter : public BookmarksConstIteratorAdapter
 {
   public:
     explicit BookmarkListConstIteratorAdapter( const BookmarkList& list );
-    virtual ~BookmarkListConstIteratorAdapter();
+    ~BookmarkListConstIteratorAdapter() override;
 
   public: // BookmarksConstIteratorAdapter API
-    virtual bool hasNext() const;
-    virtual bool hasPrevious() const;
-    virtual const Bookmark& peekNext() const;
-    virtual const Bookmark& peekPrevious() const;
+    bool hasNext() const override;
+    bool hasPrevious() const override;
+    const Bookmark& peekNext() const override;
+    const Bookmark& peekPrevious() const override;
 
-    virtual bool findNext( const Bookmark& bookmark );
-    virtual bool findPrevious( const Bookmark& bookmark );
-    virtual bool findNextFrom( Address offset );
-    virtual bool findPreviousFrom( Address offset );
-    virtual const Bookmark& next();
-    virtual const Bookmark& previous();
-    virtual void toBack();
-    virtual void toFront();
+    bool findNext( const Bookmark& bookmark ) override;
+    bool findPrevious( const Bookmark& bookmark ) override;
+    bool findNextFrom( Address offset ) override;
+    bool findPreviousFrom( Address offset ) override;
+    const Bookmark& next() override;
+    const Bookmark& previous() override;
+    void toBack() override;
+    void toFront() override;
 
   protected:
     QLinkedListIterator<Bookmark> mIterator;

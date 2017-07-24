@@ -59,10 +59,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
 
   public:
     explicit BookmarksController( KXMLGUIClient* guiClient );
-    virtual ~BookmarksController();
+    ~BookmarksController() override;
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void createBookmark();

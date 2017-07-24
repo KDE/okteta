@@ -47,11 +47,11 @@ Q_OBJECT
 
 public:
     explicit StructView(StructTool* tool, QWidget* parent = nullptr);
-    virtual ~StructView();
+    ~StructView() override;
 
 public:
     StructTool* tool() const;
-    virtual bool eventFilter(QObject* object, QEvent* event);
+    bool eventFilter(QObject* object, QEvent* event) override;
 
 protected:
     StructTool* mTool;

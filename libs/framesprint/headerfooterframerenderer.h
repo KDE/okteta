@@ -67,20 +67,20 @@ class HeaderFooterFrameRenderer : public AbstractFrameRenderer
 
   public:
     explicit HeaderFooterFrameRenderer( const PrintInfo* info );
-    virtual ~HeaderFooterFrameRenderer();
+    ~HeaderFooterFrameRenderer() override;
 
   public: // AbstractFrameRenderer API
     // make this flags?
 //     virtual bool hasFixedWidth() const;
 //     virtual bool hasFixedHeight() const;
-    virtual int height() const;
-    virtual int width() const;
+    int height() const override;
+    int width() const override;
 //     virtual QSize sizeHint( const QSize &maxSize ) const;
     // only vertical for now...
 //     virtual int framesCount() const;
 
-    virtual void prepare();
-    virtual void renderFrame( QPainter *painter, int frameIndex );
+    void prepare() override;
+    void renderFrame( QPainter *painter, int frameIndex ) override;
 
   public:
     void setWidth( int width );

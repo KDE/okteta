@@ -36,10 +36,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolFactory : public AbstractToolF
 {
   public:
     ByteTableToolFactory();
-    virtual ~ByteTableToolFactory();
+    ~ByteTableToolFactory() override;
 
   public: // AbstractToolFactory API
-    virtual AbstractTool* create();
+    AbstractTool* create() override;
 };
 
 }

@@ -36,15 +36,15 @@ class Template_ByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterP
   public:
     explicit Template_ByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
 
-    virtual ~Template_ByteArrayFilterParameterSetEdit();
+    ~Template_ByteArrayFilterParameterSetEdit() override;
 
   public: // AbstractByteArrayFilterParameterSetEdit API
-    virtual void setValues( const AbstractByteArrayFilterParameterSet* parameterSet );
-    virtual void getParameterSet( AbstractByteArrayFilterParameterSet* parameterSet ) const;
+    void setValues( const AbstractByteArrayFilterParameterSet* parameterSet ) override;
+    void getParameterSet( AbstractByteArrayFilterParameterSet* parameterSet ) const override;
 //// ADAPT(start)
 //// if the values in the widget can reach invalid states, which should not be used for the parameters,
 //// keep the declaration of "isValid()", otherwise remove the next line
-    virtual bool isValid() const;
+    bool isValid() const override;
 //// ADAPT(end)
 
 //// ADAPT(start)

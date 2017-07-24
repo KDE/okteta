@@ -37,7 +37,7 @@ class Utf8Editor : public KLineEdit
   public:
     explicit Utf8Editor( QWidget* parent );
 
-    virtual ~Utf8Editor();
+    ~Utf8Editor() override;
 
   public:
     void setData( Utf8 data );

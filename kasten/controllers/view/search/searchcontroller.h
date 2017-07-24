@@ -50,13 +50,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT SearchController : public AbstractXmlGuiCon
 
   public:
     SearchController( KXMLGUIClient* guiClient, QWidget* parentWidget );
-    virtual ~SearchController();
+    ~SearchController() override;
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public: // SearchUserQueryable API
-    virtual bool queryContinue( KFindDirection direction ) const;
+    bool queryContinue( KFindDirection direction ) const override;
 
   private:
     void showDialog( KFindDirection Direction );

@@ -41,10 +41,10 @@ class ByteArrayRawFileConnectJob : public AbstractFileSystemConnectJob
   public:
     ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer, AbstractDocument* document,
                                 const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
-    virtual ~ByteArrayRawFileConnectJob();
+    ~ByteArrayRawFileConnectJob() override;
 
   protected: // AbstractFileSystemLoadJob API
-    virtual void startConnectWithFile();
+    void startConnectWithFile() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

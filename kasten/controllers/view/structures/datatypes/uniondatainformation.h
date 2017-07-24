@@ -31,15 +31,15 @@ class UnionDataInformation : public DataInformationWithChildren
 public:
     explicit UnionDataInformation(const QString& name, const QVector<DataInformation*>& children
             = QVector<DataInformation*>(), DataInformation* parent = nullptr);
-    virtual ~UnionDataInformation();
+    ~UnionDataInformation() override;
 
-    virtual bool isUnion() const;
-    virtual BitCount32 size() const;
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset);
-    virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const;
+    bool isUnion() const override;
+    BitCount32 size() const override;
+    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
+    BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 private:
-    virtual QString typeNameImpl() const;
+    QString typeNameImpl() const override;
 };
 
 inline bool UnionDataInformation::isUnion() const

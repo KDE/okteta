@@ -43,10 +43,10 @@ TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const Parse
 class ScriptValueChildrenParser : public ChildrenParser {
 public:
     ScriptValueChildrenParser(const ParserInfo& info, const QScriptValue& children);
-    virtual ~ScriptValueChildrenParser();
-    virtual DataInformation* next();
-    virtual bool hasNext();
-    virtual void setParent(DataInformation* newParent);
+    ~ScriptValueChildrenParser() override;
+    DataInformation* next() override;
+    bool hasNext() override;
+    void setParent(DataInformation* newParent) override;
 private:
     QScriptValue mValue;
     QScriptValueIterator mIter;

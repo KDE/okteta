@@ -36,15 +36,15 @@ class Template_ByteArrayChecksumParameterSetEdit : public AbstractByteArrayCheck
   public:
     explicit Template_ByteArrayChecksumParameterSetEdit( QWidget* parent = nullptr );
 
-    virtual ~Template_ByteArrayChecksumParameterSetEdit();
+    ~Template_ByteArrayChecksumParameterSetEdit() override;
 
   public: // AbstractByteArrayFilterParameterSetEdit API
-    virtual void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet );
-    virtual void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const;
+    void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet ) override;
+    void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const override;
 //// ADAPT(start)
 //// if the values in the widget can reach invalid states, which should not be used for the parameters,
 //// keep the declaration of "isValid()", otherwise remove the next line
-    virtual bool isValid() const;
+    bool isValid() const override;
 //// ADAPT(end)
 
 //// ADAPT(start)

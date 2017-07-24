@@ -41,7 +41,7 @@ class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractCon
                                          AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
                                          const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
 
-    virtual ~AbstractFileSystemConnectJobPrivate();
+    ~AbstractFileSystemConnectJobPrivate() override;
 
   public: // KJob API
     void start();

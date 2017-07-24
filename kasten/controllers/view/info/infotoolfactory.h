@@ -36,10 +36,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoToolFactory : public AbstractToolFactor
 {
   public:
     InfoToolFactory();
-    virtual ~InfoToolFactory();
+    ~InfoToolFactory() override;
 
   public: // AbstractToolFactory API
-    virtual AbstractTool* create();
+    AbstractTool* create() override;
 };
 
 }

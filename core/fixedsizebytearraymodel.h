@@ -46,23 +46,23 @@ class FixedSizeByteArrayModel : public AbstractByteArrayModel
     /** creates a writeable buffer which is deleted at the end */
     explicit FixedSizeByteArrayModel( int size, Byte fillUpChar = '\0', QObject* parent = nullptr );
 
-    virtual ~FixedSizeByteArrayModel();
+    ~FixedSizeByteArrayModel() override;
 
   public: // AbstractByteArrayModel API
-    virtual Byte byte( Address offset ) const;
-    virtual Size size() const;
-    virtual bool isReadOnly() const;
-    virtual bool isModified() const;
+    Byte byte( Address offset ) const override;
+    Size size() const override;
+    bool isReadOnly() const override;
+    bool isModified() const override;
 
-    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
-    virtual Size remove( const AddressRange& removeRange );
-    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
-    virtual bool swap( Address firstStart, const AddressRange& secondRange );
-    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 );
-    virtual void setByte( Address offset, Byte byte );
+    Size insert( Address offset, const Byte* insertData, int insertLength ) override;
+    Size remove( const AddressRange& removeRange ) override;
+    Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength ) override;
+    bool swap( Address firstStart, const AddressRange& secondRange ) override;
+    Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) override;
+    void setByte( Address offset, Byte byte ) override;
 
-    virtual void setModified( bool modified = true );
-    virtual void setReadOnly( bool readOnly = true );
+    void setModified( bool modified = true ) override;
+    void setReadOnly( bool readOnly = true ) override;
 
   public:
     int compare( const AbstractByteArrayModel& other, const AddressRange& otherRange, Address offset = 0 );

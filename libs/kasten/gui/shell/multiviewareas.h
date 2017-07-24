@@ -52,36 +52,36 @@ class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
   public:
     explicit MultiViewAreas();
 
-    virtual ~MultiViewAreas();
+    ~MultiViewAreas() override;
 
   public: // AbstractViewArea API
-    virtual void setFocus();
-    virtual QWidget* widget() const;
-    virtual bool hasFocus() const;
+    void setFocus() override;
+    QWidget* widget() const override;
+    bool hasFocus() const override;
 
   public: // AbstractGroupedViews API
-    virtual void addViews( const QList<AbstractView*>& views );
-    virtual void removeViews( const QList<AbstractView*>& views );
-    virtual void setViewFocus( AbstractView* view );
+    void addViews( const QList<AbstractView*>& views ) override;
+    void removeViews( const QList<AbstractView*>& views ) override;
+    void setViewFocus( AbstractView* view ) override;
 
-    virtual QList<AbstractView*> viewList() const;
-    virtual int viewCount() const;
-    virtual AbstractView* viewFocus() const;
+    QList<AbstractView*> viewList() const override;
+    int viewCount() const override;
+    AbstractView* viewFocus() const override;
 
   public: // If::ToolInlineViewable API
-    virtual void setCurrentToolInlineView( AbstractToolInlineView* view );
+    void setCurrentToolInlineView( AbstractToolInlineView* view ) override;
 
   public: // If::ViewAreaSplitable API
-    virtual AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation );
-    virtual void closeViewArea( AbstractViewArea* viewArea );
-    virtual void setViewAreaFocus( AbstractViewArea* viewArea );
-    virtual AbstractViewArea* viewAreaFocus() const;
-    virtual int viewAreasCount() const;
+    AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation ) override;
+    void closeViewArea( AbstractViewArea* viewArea ) override;
+    void setViewAreaFocus( AbstractViewArea* viewArea ) override;
+    AbstractViewArea* viewAreaFocus() const override;
+    int viewAreasCount() const override;
 
   Q_SIGNALS: // If::ViewAreaSplitable API
-    /*virtual*/ void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas );
-    /*virtual*/ void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas );
-    /*virtual*/ void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
+    void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas ) override;
+    void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas ) override;
+    void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea ) override;
 
   Q_SIGNALS:
     void dataOffered( const QMimeData* mimeData, bool& accepted );

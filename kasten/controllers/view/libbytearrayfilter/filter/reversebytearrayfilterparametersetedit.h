@@ -38,11 +38,11 @@ class ReverseByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
 
   public:
     explicit ReverseByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
-    virtual ~ReverseByteArrayFilterParameterSetEdit();
+    ~ReverseByteArrayFilterParameterSetEdit() override;
 
   public: // AbstractByteArrayFilterParameterSetEdit API
-    virtual void setValues( const AbstractByteArrayFilterParameterSet *parameterSet );
-    virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
+    void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) override;
+    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const override;
 
   protected:
     QCheckBox *mInvertsBitsCheckBox;

@@ -38,14 +38,14 @@ class SwapRangesPieceTableChange : public AbstractPieceTableChange
 {
   public:
     SwapRangesPieceTableChange( Address firstStart, const AddressRange& secondRange );
-    virtual ~SwapRangesPieceTableChange();
+    ~SwapRangesPieceTableChange() override;
 
   public: // AbstractPieceTableChange API
-    virtual int type() const;
-    virtual QString description() const;
-    virtual AddressRange apply( PieceTable* pieceTable ) const;
-    virtual AddressRange revert( PieceTable* pieceTable ) const;
-    virtual ArrayChangeMetrics metrics() const;
+    int type() const override;
+    QString description() const override;
+    AddressRange apply( PieceTable* pieceTable ) const override;
+    AddressRange revert( PieceTable* pieceTable ) const override;
+    ArrayChangeMetrics metrics() const override;
 
   protected:
     Address mFirstStart;

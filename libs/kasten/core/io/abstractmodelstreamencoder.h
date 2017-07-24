@@ -58,7 +58,7 @@ class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
     AbstractModelStreamEncoder( const QString& remoteTypeName, const QString& remoteMimeType,
                                 const QString& remoteClipboardMimeType = QString() );
 
-    virtual ~AbstractModelStreamEncoder();
+    ~AbstractModelStreamEncoder() override;
 
   public: // API to be implemented
     virtual bool encodeToStream( QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection ) = 0;

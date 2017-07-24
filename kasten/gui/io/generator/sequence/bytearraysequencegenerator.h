@@ -52,10 +52,10 @@ class ByteArraySequenceGenerator : public AbstractModelDataGenerator
   public:
     ByteArraySequenceGenerator();
 
-    virtual ~ByteArraySequenceGenerator();
+    ~ByteArraySequenceGenerator() override;
 
   public: // AbstractModelDataGenerator API
-    virtual QMimeData* generateData();
+    QMimeData* generateData() override;
 
   public:
     ByteArraySequenceGeneratorSettings settings() const;

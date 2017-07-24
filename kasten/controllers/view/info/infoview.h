@@ -43,7 +43,7 @@ class InfoView : public QWidget
 
   public:
     explicit InfoView( InfoTool *tool, QWidget* parent = nullptr );
-    virtual ~InfoView();
+    ~InfoView() override;
 
   public:
     InfoTool* tool() const;

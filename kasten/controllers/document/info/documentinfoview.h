@@ -44,7 +44,7 @@ class DocumentInfoView : public QWidget
 
   public:
     explicit DocumentInfoView( DocumentInfoTool* tool, QWidget* parent = nullptr );
-    virtual ~DocumentInfoView();
+    ~DocumentInfoView() override;
 
   public:
     DocumentInfoTool* tool() const;

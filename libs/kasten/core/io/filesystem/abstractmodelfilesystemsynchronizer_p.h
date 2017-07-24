@@ -41,7 +41,7 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
   public:
     explicit AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent );
 
-    virtual ~AbstractModelFileSystemSynchronizerPrivate();
+    ~AbstractModelFileSystemSynchronizerPrivate() override;
 
   public:
     RemoteSyncState remoteSyncState() const;

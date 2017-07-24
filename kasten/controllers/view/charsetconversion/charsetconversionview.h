@@ -46,7 +46,7 @@ class CharsetConversionView : public QWidget
 
   public:
     explicit CharsetConversionView( CharsetConversionTool* tool, QWidget* parent = nullptr );
-    virtual ~CharsetConversionView();
+    ~CharsetConversionView() override;
 
   public:
     CharsetConversionTool* tool() const;

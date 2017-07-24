@@ -31,10 +31,10 @@ class ReverseByteArrayFilterParameterSet : public AbstractByteArrayFilterParamet
 {
   public:
     ReverseByteArrayFilterParameterSet();
-    virtual ~ReverseByteArrayFilterParameterSet();
+    ~ReverseByteArrayFilterParameterSet() override;
 
   public: // AbstractByteArrayFilterParameterSet API
-    virtual const char* id() const;
+    const char* id() const override;
 
   public:
     void setInvertsBits( bool invertsBits );

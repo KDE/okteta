@@ -41,26 +41,26 @@ class KASTENGUI_EXPORT MultiDocumentStrategy : public AbstractDocumentStrategy
   public:
     MultiDocumentStrategy( DocumentManager* documentManager,
                            ViewManager* viewManager );
-    virtual ~MultiDocumentStrategy();
+    ~MultiDocumentStrategy() override;
 
   public: // AbstractDocumentStrategy API
-    virtual void createNew();
-    virtual void createNewFromClipboard();
-    virtual void createNewWithGenerator( AbstractModelDataGenerator* generator );
+    void createNew() override;
+    void createNewFromClipboard() override;
+    void createNewWithGenerator( AbstractModelDataGenerator* generator ) override;
 
-    virtual void load( const QUrl& url );
+    void load( const QUrl& url ) override;
 
-    virtual void closeDocument( AbstractDocument* document );
-    virtual void closeAll();
-    virtual void closeAllOther( AbstractDocument* document );
+    void closeDocument( AbstractDocument* document ) override;
+    void closeAll() override;
+    void closeAllOther( AbstractDocument* document ) override;
 
   public: // const AbstractDocumentStrategy API
-    virtual QList<AbstractDocument*> documents() const;
-    virtual QStringList supportedRemoteTypes() const;
+    QList<AbstractDocument*> documents() const override;
+    QStringList supportedRemoteTypes() const override;
 
-    virtual bool canClose( AbstractDocument* document ) const;
-    virtual bool canCloseAll() const;
-    virtual bool canCloseAllOther( AbstractDocument* document ) const;
+    bool canClose( AbstractDocument* document ) const override;
+    bool canCloseAll() const override;
+    bool canCloseAllOther( AbstractDocument* document ) const override;
 
   protected:
     Q_DECLARE_PRIVATE( MultiDocumentStrategy )

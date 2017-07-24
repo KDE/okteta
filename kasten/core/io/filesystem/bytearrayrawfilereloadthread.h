@@ -40,10 +40,10 @@ class ByteArrayRawFileReloadThread : public QThread
   public:
     ByteArrayRawFileReloadThread( QObject* parent, QFile* file );
 
-    virtual ~ByteArrayRawFileReloadThread();
+    ~ByteArrayRawFileReloadThread() override;
 
   public: // QThread API
-    virtual void run();
+    void run() override;
 
   public:
     bool success() const;

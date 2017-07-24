@@ -43,7 +43,7 @@ class DocumentsView : public QWidget
 
   public:
     explicit DocumentsView( DocumentsTool* tool, QWidget* parent = nullptr );
-    virtual ~DocumentsView();
+    ~DocumentsView() override;
 
   public:
     DocumentsTool* tool() const;

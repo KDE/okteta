@@ -38,13 +38,13 @@ class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizerFactory : public Abstr
 
   public:
     ByteArrayRawFileSynchronizerFactory();
-    virtual ~ByteArrayRawFileSynchronizerFactory();
+    ~ByteArrayRawFileSynchronizerFactory() override;
 
   public: // AbstractModelSynchronizerFactory API
-    virtual AbstractModelSynchronizer* createSynchronizer() const;
+    AbstractModelSynchronizer* createSynchronizer() const override;
 
-    virtual QString supportedWorkType() const;
-    virtual QString supportedRemoteType() const;
+    QString supportedWorkType() const override;
+    QString supportedRemoteType() const override;
 };
 
 }

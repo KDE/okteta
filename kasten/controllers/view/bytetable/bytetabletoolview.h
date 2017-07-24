@@ -39,12 +39,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolView : public AbstractToolView
 {
   public:
     explicit ByteTableToolView( ByteTableTool* tool );
-    virtual ~ByteTableToolView();
+    ~ByteTableToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     ByteTableView* mWidget;

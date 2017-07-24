@@ -39,10 +39,10 @@ class ByteArrayRawFileLoadJob : public AbstractFileSystemLoadJob
 
   public:
     ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer* synchronizer, const QUrl& url );
-    virtual ~ByteArrayRawFileLoadJob();
+    ~ByteArrayRawFileLoadJob() override;
 
   protected: // AbstractFileSystemLoadJob API
-    virtual void startLoadFromFile();
+    void startLoadFromFile() override;
 
   protected Q_SLOTS:
 //     void onDataPulled();

@@ -53,13 +53,13 @@ class VersionTableModel : public QAbstractTableModel
 
   public:
     VersionTableModel( AbstractModel* model, If::Versionable* versionControl, QObject* parent = nullptr );
-    virtual ~VersionTableModel();
+    ~VersionTableModel() override;
 
   public: // QAbstractTableModel API
-    virtual int rowCount( const QModelIndex &parent ) const;
-    virtual int columnCount( const QModelIndex &parent ) const;
-    virtual QVariant data( const QModelIndex &index, int role ) const;
-    virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+    int rowCount( const QModelIndex &parent ) const override;
+    int columnCount( const QModelIndex &parent ) const override;
+    QVariant data( const QModelIndex &index, int role ) const override;
+    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
 
   public:
     void setModel( AbstractModel* model, If::Versionable* versionControl );

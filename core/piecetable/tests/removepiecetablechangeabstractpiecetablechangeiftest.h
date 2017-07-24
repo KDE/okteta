@@ -35,9 +35,9 @@ class RemovePieceTableChangeAbstractPieceTableChangeIfTest : public AbstractPiec
   Q_OBJECT
 
   protected: // AbstractPieceTableChangeIfTest API
-    virtual AbstractPieceTableChange *createPieceTableChange();
-    virtual void deletePieceTableChange( AbstractPieceTableChange *pieceTableChange );
-    virtual void changePieceTable( PieceTable *pieceTable );
+    AbstractPieceTableChange *createPieceTableChange() override;
+    void deletePieceTableChange( AbstractPieceTableChange *pieceTableChange ) override;
+    void changePieceTable( PieceTable *pieceTable ) override;
 };
 
 }

@@ -43,13 +43,13 @@ class MouseNavigator : public QObject, public AbstractMouseController
   public:
     MouseNavigator( AbstractByteArrayView* view, AbstractMouseController* parent );
 
-    virtual ~MouseNavigator();
+    ~MouseNavigator() override;
 
   public: // AbstractMouseController API
-    virtual bool handleMousePressEvent( QMouseEvent* mouseEvent );
-    virtual bool handleMouseMoveEvent( QMouseEvent* mouseEvent );
-    virtual bool handleMouseReleaseEvent( QMouseEvent* mouseEvent );
-    virtual bool handleMouseDoubleClickEvent( QMouseEvent* mouseEvent );
+    bool handleMousePressEvent( QMouseEvent* mouseEvent ) override;
+    bool handleMouseMoveEvent( QMouseEvent* mouseEvent ) override;
+    bool handleMouseReleaseEvent( QMouseEvent* mouseEvent ) override;
+    bool handleMouseDoubleClickEvent( QMouseEvent* mouseEvent ) override;
 
   protected:
      /** handles the move of the mouse with pressed buttons */

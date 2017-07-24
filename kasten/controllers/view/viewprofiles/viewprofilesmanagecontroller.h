@@ -47,7 +47,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewProfilesManageController : public Abstr
                                            QWidget* parentWidget );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void manageProfiles();

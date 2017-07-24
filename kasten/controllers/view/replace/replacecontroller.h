@@ -52,14 +52,14 @@ class OKTETAKASTENCONTROLLERS_EXPORT ReplaceController : public AbstractXmlGuiCo
   public:
     ReplaceController( KXMLGUIClient* guiClient, QWidget* parentWidget );
 
-    virtual ~ReplaceController();
+    ~ReplaceController() override;
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public: // If::ReplaceUserQueryable API
-    virtual bool queryContinue( KFindDirection direction, int noOfReplacements ) const;
-    virtual ReplaceBehaviour queryReplaceCurrent() const;
+    bool queryContinue( KFindDirection direction, int noOfReplacements ) const override;
+    ReplaceBehaviour queryReplaceCurrent() const override;
 
   private Q_SLOTS: // action slots
     void replace();

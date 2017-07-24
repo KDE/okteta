@@ -37,10 +37,10 @@ class KASTENGUI_EXPORT ModelEncoderFileSystemExporterConfigEditorFactory : publi
 {
   public:
     explicit ModelEncoderFileSystemExporterConfigEditorFactory( AbstractModelStreamEncoderConfigEditorFactory* encoderConfigEditorFactory );
-    virtual ~ModelEncoderFileSystemExporterConfigEditorFactory();
+    ~ModelEncoderFileSystemExporterConfigEditorFactory() override;
 
   public:
-    virtual AbstractModelExporterConfigEditor* tryCreateConfigEditor( AbstractModelExporter* exporter ) const;
+    AbstractModelExporterConfigEditor* tryCreateConfigEditor( AbstractModelExporter* exporter ) const override;
 
   protected:
     AbstractModelStreamEncoderConfigEditorFactory* mEncoderConfigEditorFactory;

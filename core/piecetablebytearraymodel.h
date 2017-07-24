@@ -61,75 +61,75 @@ class OKTETACORE_EXPORT PieceTableByteArrayModel : public AbstractByteArrayModel
     explicit PieceTableByteArrayModel( const QByteArray& data, QObject* parent = nullptr );
     explicit PieceTableByteArrayModel( int size = 0, Byte fillByte = '\0', QObject* parent = nullptr );
 
-    virtual ~PieceTableByteArrayModel();
+    ~PieceTableByteArrayModel() override;
 
   public: // AbstractByteArrayModel API
-    virtual Byte byte( Address offset ) const;
-    virtual Size size() const;
-    virtual bool isReadOnly() const;
-    virtual bool isModified() const;
+    Byte byte( Address offset ) const override;
+    Size size() const override;
+    bool isReadOnly() const override;
+    bool isModified() const override;
 
-    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
-    virtual Size remove( const AddressRange& removeRange );
-    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
-    virtual bool swap( Address firstStart, const AddressRange& secondRange );
-    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 );
-    virtual void setByte( Address offset, Byte byte );
+    Size insert( Address offset, const Byte* insertData, int insertLength ) override;
+    Size remove( const AddressRange& removeRange ) override;
+    Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength ) override;
+    bool swap( Address firstStart, const AddressRange& secondRange ) override;
+    Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) override;
+    void setByte( Address offset, Byte byte ) override;
 
-    virtual void setModified( bool modified = true );
-    virtual void setReadOnly( bool isReadOnly = true );
+    void setModified( bool modified = true ) override;
+    void setReadOnly( bool isReadOnly = true ) override;
 
 //     virtual int indexOf( const char *searchString, int length, int from  = 0 ) const;
 //     virtual int lastIndexOf( const char *searchString, int length, int from = -1 ) const;
 
   public: // Versionable API
-    virtual int versionIndex() const;
-    virtual int versionCount() const;
-    virtual QString versionDescription( int versionIndex ) const;
+    int versionIndex() const override;
+    int versionCount() const override;
+    QString versionDescription( int versionIndex ) const override;
 
   public: // set/action
-    virtual void revertToVersionByIndex( int versionIndex );
+    void revertToVersionByIndex( int versionIndex ) override;
 
   public: // Bookmarkable API
-    virtual void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
-    virtual void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
-    virtual void removeAllBookmarks();
-    virtual void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark );
+    void addBookmarks( const QList<Okteta::Bookmark>& bookmarks ) override;
+    void removeBookmarks( const QList<Okteta::Bookmark>& bookmarks ) override;
+    void removeAllBookmarks() override;
+    void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark ) override;
 
-    virtual Okteta::BookmarksConstIterator createBookmarksConstIterator() const;
-    virtual const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
-    virtual const Okteta::Bookmark& bookmarkFor( int offset ) const;
-    virtual bool containsBookmarkFor( int offset ) const;
-    virtual unsigned int bookmarksCount() const;
+    Okteta::BookmarksConstIterator createBookmarksConstIterator() const override;
+    const Okteta::Bookmark& bookmarkAt( unsigned int index ) const override;
+    const Okteta::Bookmark& bookmarkFor( int offset ) const override;
+    bool containsBookmarkFor( int offset ) const override;
+    unsigned int bookmarksCount() const override;
 
   public: // ChangesDescribable API
-    virtual void openGroupedChange( const QString &description );
-    virtual void cancelGroupedChange();
-    virtual void closeGroupedChange( const QString &description );
+    void openGroupedChange( const QString& description ) override;
+    void cancelGroupedChange() override;
+    void closeGroupedChange( const QString& description ) override;
 
   public: // ChangeHistory API
-    virtual QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const;
-    virtual QByteArray initialData() const;
-    virtual void doChanges( const QList<Okteta::ByteArrayChange>& changes,
-                            int oldVersionIndex, int newVersionIndex );
+    QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const override;
+    QByteArray initialData() const override;
+    void doChanges( const QList<Okteta::ByteArrayChange>& changes,
+                            int oldVersionIndex, int newVersionIndex ) override;
 
   public:
     void setData( const QByteArray& data );
 
   Q_SIGNALS: // Versionable signals
-    /*virtual*/ void revertedToVersionIndex( int versionIndex );
-    /*virtual*/ void headVersionDescriptionChanged( const QString& versionDescription );
-    /*virtual*/ void headVersionChanged( int newHeadVersionIndex );
+    void revertedToVersionIndex( int versionIndex ) override;
+    void headVersionDescriptionChanged( const QString& versionDescription ) override;
+    void headVersionChanged( int newHeadVersionIndex ) override;
 
   Q_SIGNALS: // Bookmarkable signals
-    /*virtual*/ void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
-    /*virtual*/ void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
-    /*virtual*/ void bookmarksModified( bool modified );
-    /*virtual*/ void bookmarksModified( const QList<int>& indizes );
+    void bookmarksAdded( const QList<Okteta::Bookmark>& bookmarks ) override;
+    void bookmarksRemoved( const QList<Okteta::Bookmark>& bookmarks ) override;
+    void bookmarksModified( bool modified ) override;
+    void bookmarksModified( const QList<int>& indizes ) override;
 
   Q_SIGNALS: // ChangeHistory signals
-    /*virtual*/ void changesDone( const QList<Okteta::ByteArrayChange>& changes,
-                                  int oldVersionIndex, int newVersionIndex );
+    void changesDone( const QList<Okteta::ByteArrayChange>& changes,
+                      int oldVersionIndex, int newVersionIndex ) override;
 
   protected:
     PieceTableByteArrayModelPrivate* const d;

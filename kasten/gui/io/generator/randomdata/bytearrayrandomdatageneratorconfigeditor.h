@@ -41,10 +41,10 @@ class ByteArrayRandomDataGeneratorConfigEditor : public AbstractModelDataGenerat
   public:
     explicit ByteArrayRandomDataGeneratorConfigEditor( ByteArrayRandomDataGenerator* generator, QWidget* parent = nullptr );
 
-    virtual ~ByteArrayRandomDataGeneratorConfigEditor();
+    ~ByteArrayRandomDataGeneratorConfigEditor() override;
 
   public: // AbstractModelDataGeneratorConfigEditor API
-    virtual QString name() const;
+    QString name() const override;
 
   public:
     void rememberCurrentSettings();

@@ -39,7 +39,7 @@ class InsertDialog : public QDialog
 
   public:
     explicit InsertDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent = nullptr );
-    virtual ~InsertDialog();
+    ~InsertDialog() override;
 
   private:
     AbstractModelDataGeneratorConfigEditor* mConfigEditor;

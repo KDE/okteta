@@ -36,7 +36,7 @@ class Binary8Editor : public AbstractValue8Editor
   public:
     explicit Binary8Editor( QWidget* parent );
 
-    virtual ~Binary8Editor();
+    ~Binary8Editor() override;
 
   public:
     void setData( Binary8 data );

@@ -38,12 +38,12 @@ class SelectRangeToolView : public AbstractToolInlineView
 {
   public:
     explicit SelectRangeToolView( SelectRangeTool* tool );
-    virtual ~SelectRangeToolView();
+    ~SelectRangeToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     SelectRangeView* mWidget;

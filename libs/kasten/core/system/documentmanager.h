@@ -49,7 +49,7 @@ class KASTENCORE_EXPORT DocumentManager : public QObject
 
   public:
     DocumentManager();
-    virtual ~DocumentManager();
+    ~DocumentManager() override;
 
   public:
     void addDocument( AbstractDocument* document );

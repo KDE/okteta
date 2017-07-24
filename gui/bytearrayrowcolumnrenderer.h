@@ -66,12 +66,12 @@ class OKTETAGUI_EXPORT ByteArrayRowColumnRenderer : public AbstractColumnRendere
   public:
     ByteArrayRowColumnRenderer( AbstractColumnStylist* stylist,
         AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
-    virtual ~ByteArrayRowColumnRenderer();
+    ~ByteArrayRowColumnRenderer() override;
 
 
   public: // AbstractColumnRenderer API
-    virtual void renderFirstLine( QPainter* painter, const PixelXRange& Xs, Line firstLineIndex );
-    virtual void renderNextLine( QPainter* painter );
+    void renderFirstLine( QPainter* painter, const PixelXRange& Xs, Line firstLineIndex ) override;
+    void renderNextLine( QPainter* painter ) override;
 
   public:
     void prepareRendering( const PixelXRange &Xs );

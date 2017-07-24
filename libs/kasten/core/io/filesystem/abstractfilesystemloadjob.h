@@ -45,13 +45,13 @@ class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
   public:
     AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url );
 
-    virtual ~AbstractFileSystemLoadJob();
+    ~AbstractFileSystemLoadJob() override;
 
   public: // KJob API
-    virtual void start();
+    void start() override;
 
   protected: // AbstractLoadJob API
-    virtual void setDocument( AbstractDocument* document );
+    void setDocument( AbstractDocument* document ) override;
 
   protected: // API to be implemented
     virtual void startLoadFromFile() = 0;

@@ -40,12 +40,12 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumToolView : public AbstractToolView
 {
   public:
     explicit ChecksumToolView( ChecksumTool* tool );
-    virtual ~ChecksumToolView();
+    ~ChecksumToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     ChecksumView* mWidget;

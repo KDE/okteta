@@ -40,12 +40,12 @@ class KASTENCONTROLLERS_EXPORT DocumentsToolView : public AbstractToolView
 {
   public:
     explicit DocumentsToolView( DocumentsTool* tool );
-    virtual ~DocumentsToolView();
+    ~DocumentsToolView() override;
 
   public: // AbstractToolView API
-    virtual QWidget* widget() const;
-    virtual QString title() const;
-    virtual AbstractTool* tool() const;
+    QWidget* widget() const override;
+    QString title() const override;
+    AbstractTool* tool() const override;
 
   private:
     DocumentsView* mWidget;

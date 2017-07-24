@@ -45,7 +45,7 @@ class MultiViewAreasPrivate : public AbstractGroupedViewsPrivate
   public:
     explicit MultiViewAreasPrivate( MultiViewAreas* parent );
 
-    virtual ~MultiViewAreasPrivate();
+    ~MultiViewAreasPrivate() override;
 
   public:
     void init();

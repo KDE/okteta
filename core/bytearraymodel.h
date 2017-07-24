@@ -53,41 +53,41 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel,
     ByteArrayModel( const Byte* data, int size, QObject* parent = nullptr );
     explicit ByteArrayModel( int size = 0, int maxSize = -1, QObject* parent = nullptr );
 
-    virtual ~ByteArrayModel();
+    ~ByteArrayModel() override;
 
   public: // AbstractByteArrayModel API
-    virtual Byte byte( Address offset ) const;
-    virtual Size size() const;
-    virtual bool isReadOnly() const;
-    virtual bool isModified() const;
+    Byte byte( Address offset ) const override;
+    Size size() const override;
+    bool isReadOnly() const override;
+    bool isModified() const override;
 
-    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
-    virtual Size remove( const AddressRange& removeRange );
-    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength );
-    virtual bool swap( Address firstStart, const AddressRange& secondRange );
-    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 );
-    virtual void setByte( Address offset, Byte byte );
+    Size insert( Address offset, const Byte* insertData, int insertLength ) override;
+    Size remove( const AddressRange& removeRange ) override;
+    Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength ) override;
+    bool swap( Address firstStart, const AddressRange& secondRange ) override;
+    Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) override;
+    void setByte( Address offset, Byte byte ) override;
 
-    virtual void setModified( bool modified = true );
-    virtual void setReadOnly( bool isReadOnly = true );
+    void setModified( bool modified = true ) override;
+    void setReadOnly( bool isReadOnly = true ) override;
 
   public: // Okteta::Bookmarkable API
-    virtual void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
-    virtual void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
-    virtual void removeAllBookmarks();
-    virtual void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark );
+    void addBookmarks( const QList<Okteta::Bookmark> &bookmarks ) override;
+    void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks ) override;
+    void removeAllBookmarks() override;
+    void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark ) override;
 
-    virtual Okteta::BookmarksConstIterator createBookmarksConstIterator() const;
-    virtual const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
-    virtual const Okteta::Bookmark& bookmarkFor( int offset ) const;
-    virtual bool containsBookmarkFor( int offset ) const;
-    virtual unsigned int bookmarksCount() const;
+    Okteta::BookmarksConstIterator createBookmarksConstIterator() const override;
+    const Okteta::Bookmark& bookmarkAt( unsigned int index ) const override;
+    const Okteta::Bookmark& bookmarkFor( int offset ) const override;
+    bool containsBookmarkFor( int offset ) const override;
+    unsigned int bookmarksCount() const override;
 
   Q_SIGNALS: // Okteta::Bookmarkable API
-    /*virtual*/ void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
-    /*virtual*/ void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
-    /*virtual*/ void bookmarksModified( bool modified );
-    /*virtual*/ void bookmarksModified( const QList<int>& indizes );
+    void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks ) override;
+    void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks ) override;
+    void bookmarksModified( bool modified ) override;
+    void bookmarksModified( const QList<int>& indizes ) override;
 
   public:
     void setMaxSize( int maxSize );

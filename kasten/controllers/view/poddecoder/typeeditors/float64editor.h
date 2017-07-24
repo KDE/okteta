@@ -37,7 +37,7 @@ class Float64Editor : public KLineEdit
   public:
     explicit Float64Editor( QWidget* parent );
 
-    virtual ~Float64Editor();
+    ~Float64Editor() override;
 
   public:
     void setData( Float64 data );

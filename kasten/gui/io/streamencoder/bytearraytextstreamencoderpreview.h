@@ -45,11 +45,11 @@ class ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
 
   public:
     explicit ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder );
-    virtual ~ByteArrayTextStreamEncoderPreview();
+    ~ByteArrayTextStreamEncoderPreview() override;
 
   public: // AbstractSelectionView API
-    virtual QWidget* widget() const;
-    virtual void setData( AbstractModel* model, const AbstractModelSelection* selection );
+    QWidget* widget() const override;
+    void setData( AbstractModel* model, const AbstractModelSelection* selection ) override;
 
   public Q_SLOTS:
     void update();

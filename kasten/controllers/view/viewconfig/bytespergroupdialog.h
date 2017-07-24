@@ -39,7 +39,7 @@ class BytesPerGroupDialog : public QDialog
   public:
     explicit BytesPerGroupDialog( QWidget* parent = nullptr );
 
-    virtual ~BytesPerGroupDialog();
+    ~BytesPerGroupDialog() override;
 
   public:
     void setGroupedBytesCount( int groupedBytesCount );

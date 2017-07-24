@@ -36,10 +36,10 @@ class ZoomWheelController : public AbstractWheelController
 {
   public:
     ZoomWheelController( AbstractByteArrayView* view, AbstractWheelController* parent );
-    virtual ~ZoomWheelController();
+    ~ZoomWheelController() override;
 
   public: // AbstractWheelController API
-    virtual bool handleWheelEvent( QWheelEvent* wheelEvent );
+    bool handleWheelEvent( QWheelEvent* wheelEvent ) override;
 
   protected:
     AbstractByteArrayView* mView;

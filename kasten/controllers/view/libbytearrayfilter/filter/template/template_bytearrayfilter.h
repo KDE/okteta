@@ -33,11 +33,11 @@ class Template_ByteArrayFilter : public AbstractByteArrayFilter
   public:
     Template_ByteArrayFilter();
 
-    virtual ~Template_ByteArrayFilter();
+    ~Template_ByteArrayFilter() override;
 
   public: // AbstractByteArrayFilter API
-    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;
-    virtual AbstractByteArrayFilterParameterSet* parameterSet();
+    bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+    AbstractByteArrayFilterParameterSet* parameterSet() override;
 
   protected:
 //// ADAPT(start)

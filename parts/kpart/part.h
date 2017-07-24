@@ -55,22 +55,22 @@ class OktetaPart : public KParts::ReadWritePart
                 Modus modus,
                 Kasten::ByteArrayViewProfileManager* viewProfileManager );
 
-    virtual ~OktetaPart();
+    ~OktetaPart() override;
 
   public:
     Kasten::PrintController* printController() const;
 
   public: // KParts::ReadWritePart API
-    virtual void setReadWrite( bool readWrite = true );
+    void setReadWrite( bool readWrite = true ) override;
 
   Q_SIGNALS:
     void hasSelectedDataChanged( bool hasSelectedData );
 
   protected: // KParts::ReadWritePart API
-    virtual bool saveFile();
+    bool saveFile() override;
 
   protected: // KParts::ReadOnlyPart API
-    virtual bool openFile();
+    bool openFile() override;
 
   protected:
     void setupActions( bool browserViewWanted );

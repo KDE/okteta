@@ -48,7 +48,7 @@ class ViewProfilesManageDialog : public QDialog
     explicit ViewProfilesManageDialog( ByteArrayViewProfileManager* viewProfileManager,
                                        QWidget* parent = nullptr );
 
-    virtual ~ViewProfilesManageDialog();
+    ~ViewProfilesManageDialog() override;
 
   protected Q_SLOTS:
     void onViewProfileSelectionChanged();

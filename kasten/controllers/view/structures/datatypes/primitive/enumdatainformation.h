@@ -33,16 +33,16 @@ public:
     /** this object takes ownership of @p type */
     EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
             EnumDefinition::Ptr enumDef, DataInformation* parent = nullptr);
-    virtual ~EnumDataInformation();
+    ~EnumDataInformation() override;
 
-    virtual bool isEnum() const;
+    bool isEnum() const override;
 
     EnumDefinition::Ptr enumValues() const;
     void setEnumValues(const QMap<AllPrimitiveTypes, QString>& newValues);
 private:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
-    virtual QString valueStringImpl() const;
-    virtual QString typeNameImpl() const;
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
+    QString valueStringImpl() const override;
+    QString typeNameImpl() const override;
 protected:
     EnumDefinition::Ptr mEnum;
 };

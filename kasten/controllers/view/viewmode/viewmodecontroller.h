@@ -46,7 +46,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewModeController : public AbstractXmlGuiC
     explicit ViewModeController( KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS: // action slots
     void setViewMode( int viewMode );

@@ -40,7 +40,7 @@ class StructuresManager: public QObject
 Q_OBJECT
 public:
     explicit StructuresManager();
-    virtual ~StructuresManager();
+    ~StructuresManager() override;
 
 public Q_SLOTS:
     void reloadPaths();

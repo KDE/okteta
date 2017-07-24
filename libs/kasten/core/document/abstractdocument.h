@@ -51,7 +51,7 @@ class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
     AbstractDocument();
 
   public:
-    virtual ~AbstractDocument();
+    ~AbstractDocument() override;
 
   public: // API to be implemented
     // TODO: what about plurals?

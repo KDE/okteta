@@ -41,10 +41,10 @@ class KEditor : public KController
   protected:
     KEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent );
   public:
-    virtual ~KEditor();
+    ~KEditor() override;
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent* keyEvent );
+    bool handleKeyPress( QKeyEvent* keyEvent ) override;
 
   protected:
     /** executes keyboard Action \a Action. This is normally called by a key event handler. */

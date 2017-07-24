@@ -55,7 +55,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGu
     explicit ViewStatusController( StatusBar* statusBar );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private:
     void fixWidths( int offsetCoding );

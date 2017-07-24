@@ -44,7 +44,7 @@ class CopyAsDialog : public QDialog
     CopyAsDialog( const QString& remoteTypeName, AbstractModelStreamEncoderConfigEditor* configEditor,
                   QWidget* parent = nullptr );
 
-    virtual ~CopyAsDialog();
+    ~CopyAsDialog() override;
 
   public:
     void setData( AbstractModel* model, const AbstractModelSelection* selection );

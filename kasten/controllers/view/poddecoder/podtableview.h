@@ -47,16 +47,16 @@ class PODTableView : public QWidget, public AbstractDifferentSizeDialog
 
   public:
     explicit PODTableView( PODDecoderTool* tool, QWidget* parent = nullptr );
-    virtual ~PODTableView();
+    ~PODTableView() override;
 
   public:
     PODDecoderTool* tool() const;
 
   public: // QObject API
-    virtual bool eventFilter( QObject* object, QEvent* event );
+    bool eventFilter( QObject* object, QEvent* event ) override;
 
   public: // AbstractDifferentSizeDialog API
-    virtual Answer query( int newValueSize, int oldValueSize, int sizeLeft );
+    Answer query( int newValueSize, int oldValueSize, int sizeLeft ) override;
 
   private Q_SLOTS:
     void onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous );

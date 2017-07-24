@@ -46,7 +46,7 @@ class TerminalView : public QWidget
 
   public:
     explicit TerminalView( TerminalTool* tool, QWidget* parent = nullptr );
-    virtual ~TerminalView();
+    ~TerminalView() override;
 
   public:
     TerminalTool* tool() const;

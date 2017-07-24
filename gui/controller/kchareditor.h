@@ -35,10 +35,10 @@ class KCharEditor : public KEditor
 {
   public:
     KCharEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent );
-    virtual ~KCharEditor();
+    ~KCharEditor() override;
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent* keyEvent );
+    bool handleKeyPress( QKeyEvent* keyEvent ) override;
 };
 
 }

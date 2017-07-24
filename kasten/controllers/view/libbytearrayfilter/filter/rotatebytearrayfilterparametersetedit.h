@@ -38,12 +38,12 @@ class RotateByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPara
 
   public:
     explicit RotateByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
-    virtual ~RotateByteArrayFilterParameterSetEdit();
+    ~RotateByteArrayFilterParameterSetEdit() override;
 
   public: // AbstractByteArrayFilterParameterSetEdit API
-    virtual void setValues( const AbstractByteArrayFilterParameterSet *parameterSet );
-    virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
-    virtual bool isValid() const;
+    void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) override;
+    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const override;
+    bool isValid() const override;
 
   protected Q_SLOTS:
     void onValueChanged( int value );

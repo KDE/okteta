@@ -46,7 +46,7 @@ class MultiDocumentStrategyPrivate : public AbstractDocumentStrategyPrivate
     MultiDocumentStrategyPrivate( MultiDocumentStrategy* parent,
                                   DocumentManager* documentManager,
                                   ViewManager* viewManager );
-    virtual ~MultiDocumentStrategyPrivate();
+    ~MultiDocumentStrategyPrivate() override;
 
   public:
     void init();

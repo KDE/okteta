@@ -52,7 +52,7 @@ class KASTENCORE_EXPORT AbstractModelExporter : public QObject
   public:
     AbstractModelExporter( const QString& remoteTypeName, const QString& remoteMimeType );
 
-    virtual ~AbstractModelExporter();
+    ~AbstractModelExporter() override;
 
   public: // API to be implemented
     virtual AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,

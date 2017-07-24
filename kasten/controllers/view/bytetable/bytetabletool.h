@@ -47,13 +47,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT ByteTableTool : public AbstractTool
 
   public:
     ByteTableTool();
-    virtual ~ByteTableTool();
+    ~ByteTableTool() override;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public:
     void insert( unsigned char byte, int count );

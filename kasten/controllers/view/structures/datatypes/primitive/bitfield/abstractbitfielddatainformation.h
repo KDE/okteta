@@ -33,29 +33,29 @@ public:
     };
 
     AbstractBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr);
-    virtual ~AbstractBitfieldDataInformation();
+    ~AbstractBitfieldDataInformation() override;
 
     BitCount32 width() const;
     void setWidth(BitCount32 newWidth);
-    virtual BitCount32 size() const;
+    BitCount32 size() const override;
     quint64 mask() const;
-    virtual AllPrimitiveTypes value() const;
-    virtual void setValue(AllPrimitiveTypes newVal);
-    virtual PrimitiveDataType type() const;
-    virtual QString sizeString() const;
-    virtual bool isBitfield() const;
+    AllPrimitiveTypes value() const override;
+    void setValue(AllPrimitiveTypes newVal) override;
+    PrimitiveDataType type() const override;
+    QString sizeString() const override;
+    bool isBitfield() const override;
     virtual Type bitfieldType() const = 0;
-    virtual Qt::ItemFlags flags(int column, bool fileLoaded) const;
-    virtual qint64 readData(Okteta::AbstractByteArrayModel *input,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset);
+    Qt::ItemFlags flags(int column, bool fileLoaded) const override;
+    qint64 readData(Okteta::AbstractByteArrayModel *input,
+                    Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset) override;
     bool setData(const QVariant& valueVariant, Okteta::AbstractByteArrayModel *out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
 protected:
     AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
     virtual AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const;
 private:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const;
+    QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 protected:
     AllPrimitiveTypes mValue;
     quint8 mWidth; //cannot be more than 64 since a quint64 is used for storage

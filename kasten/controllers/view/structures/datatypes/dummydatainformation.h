@@ -32,36 +32,36 @@ class DummyDataInformation : public DataInformation
     DATAINFORMATION_CLONE(DummyDataInformation, DataInformation), mIndex(d.mIndex) {}
 public:
     explicit DummyDataInformation(DataInformationBase* parent, const QString& name = QString());
-    virtual ~DummyDataInformation() {}
-    virtual QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
+    ~DummyDataInformation() override {}
+    QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) override;
 
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            BitCount64 bitsRemaining, quint8* bitOffset);
-    virtual bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset);
+    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining, quint8* bitOffset) override;
+    bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
-    virtual BitCount32 size() const;
-    virtual void setWidgetData(QWidget* w) const;
-    virtual QVariant dataFromWidget(const QWidget* w) const;
-    virtual QWidget* createEditWidget(QWidget* parent) const;
-    virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
-    virtual bool isDummy() const;
-    virtual QVariant data(int column, int role) const;
+    BitCount32 size() const override;
+    void setWidgetData(QWidget* w) const override;
+    QVariant dataFromWidget(const QWidget* w) const override;
+    QWidget* createEditWidget(QWidget* parent) const override;
+    Qt::ItemFlags flags(int column, bool fileLoaded = true) const override;
+    bool isDummy() const override;
+    QVariant data(int column, int role) const override;
 
 
-    virtual bool canHaveChildren() const { return false; }
-    virtual unsigned int childCount() const { return 0; }
-    virtual DataInformation* childAt(unsigned int) const { Q_ASSERT(false); return nullptr; }
-    virtual BitCount64 childPosition(const DataInformation*, Okteta::Address) const { Q_ASSERT(false); return 0; }
-    virtual int indexOf(const DataInformation* const) const { Q_ASSERT(false); return -1; }
+    bool canHaveChildren() const override { return false; }
+    unsigned int childCount() const override { return 0; }
+    DataInformation* childAt(unsigned int) const override { Q_ASSERT(false); return nullptr; }
+    BitCount64 childPosition(const DataInformation*, Okteta::Address) const override { Q_ASSERT(false); return 0; }
+    int indexOf(const DataInformation* const) const override { Q_ASSERT(false); return -1; }
 
 
     inline void setDummyIndex(uint newIndex) { mIndex = newIndex; }
     inline uint dummyIndex() const { return mIndex; }
 
 private:
-    virtual QScriptClass* scriptClass(ScriptHandlerInfo*) const { Q_ASSERT(false); return nullptr; }
-    virtual QString typeNameImpl() const;
+    QScriptClass* scriptClass(ScriptHandlerInfo*) const override { Q_ASSERT(false); return nullptr; }
+    QString typeNameImpl() const override;
 private:
     uint mIndex;
     DataInformationWithDummyChildren* parentHelper() const;
@@ -77,7 +77,7 @@ protected:
 public:
     explicit DataInformationWithDummyChildren(const QString& name, DataInformationBase* parent = nullptr)
             : DataInformation(name, parent) {}
-    virtual ~DataInformationWithDummyChildren() {}
+    ~DataInformationWithDummyChildren() override {}
 
     /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
     virtual QVariant childData(int row, int column, int role) const = 0;
@@ -91,10 +91,10 @@ public:
     virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
     virtual QString childTypeName(uint index) const = 0;
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
+                              Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) = 0;
     virtual QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const = 0;
-    virtual int indexOf(const DataInformation* const data) const;
-    virtual bool isDataInformationWithDummyChildren() const;
+    int indexOf(const DataInformation* const data) const override;
+    bool isDataInformationWithDummyChildren() const override;
 };
 
 

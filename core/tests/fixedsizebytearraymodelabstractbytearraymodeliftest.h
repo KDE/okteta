@@ -34,9 +34,9 @@ class FixedSizeByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteA
   Q_OBJECT
 
   protected: // AbstractByteArrayModelIfTest API
-    AbstractByteArrayModel* createByteArrayModel();
-    void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel );
-    bool byteArrayModelSizeCanBeChanged() const;
+    AbstractByteArrayModel* createByteArrayModel() override;
+    void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel ) override;
+    bool byteArrayModelSizeCanBeChanged() const override;
 };
 
 }

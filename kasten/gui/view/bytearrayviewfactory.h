@@ -40,8 +40,8 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewFactory : public AbstractViewFactory
     explicit ByteArrayViewFactory( ByteArrayViewProfileManager* byteArrayViewProfileManager );
 
   public:
-    virtual AbstractView* createViewFor( AbstractDocument* document );
-    virtual AbstractView* createCopyOfView( AbstractView* view, Qt::Alignment alignment );
+    AbstractView* createViewFor( AbstractDocument* document ) override;
+    AbstractView* createCopyOfView( AbstractView* view, Qt::Alignment alignment ) override;
 
   private:
     ByteArrayViewProfileManager* const mByteArrayViewProfileManager;

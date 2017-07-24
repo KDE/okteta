@@ -26,10 +26,10 @@ class Template_ByteArrayFilterParameterSet : public AbstractByteArrayFilterParam
   public:
     Template_ByteArrayFilterParameterSet();
 
-    virtual ~Template_ByteArrayFilterParameterSet();
+    ~Template_ByteArrayFilterParameterSet() override;
 
   public: // AbstractByteArrayFilterParameterSet API
-    virtual const char* id() const;
+    const char* id() const override;
 
 //// ADAPT(start)
 //// declare the parameters and the corresponding getters and setters

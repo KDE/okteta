@@ -36,7 +36,7 @@ class Hexadecimal8Editor : public AbstractValue8Editor
   public:
     explicit Hexadecimal8Editor( QWidget* parent );
 
-    virtual ~Hexadecimal8Editor();
+    ~Hexadecimal8Editor() override;
 
   public:
     void setData( Hexadecimal8 data );

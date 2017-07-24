@@ -53,7 +53,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
 
   public:
     BookmarksTool();
-    virtual ~BookmarksTool();
+    ~BookmarksTool() override;
 
   public:
     bool hasBookmarks() const;
@@ -65,9 +65,9 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public:
     Okteta::Bookmark createBookmark();

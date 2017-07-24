@@ -53,7 +53,7 @@ class KASTENGUI_EXPORT ModelCodecViewManager : public QObject
 
   public:
     ModelCodecViewManager();
-    virtual ~ModelCodecViewManager();
+    ~ModelCodecViewManager() override;
 
   public:
     AbstractModelStreamEncoderConfigEditor* createConfigEditor( AbstractModelStreamEncoder* encoder ) const;

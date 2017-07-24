@@ -40,14 +40,14 @@ class ByteArrayRowViewDesignerFactory : public QObject,
     explicit ByteArrayRowViewDesignerFactory( QObject* parent = nullptr );
 
   public: // QDesignerCustomWidgetInterface API
-    virtual QWidget* createWidget( QWidget* parent );
-    virtual QString group() const;
-    virtual QIcon icon() const;
-    virtual QString includeFile() const;
-    virtual bool isContainer() const;
-    virtual QString name() const;
-    virtual QString toolTip() const;
-    virtual QString whatsThis() const;
+    QWidget* createWidget( QWidget* parent ) override;
+    QString group() const override;
+    QIcon icon() const override;
+    QString includeFile() const override;
+    bool isContainer() const override;
+    QString name() const override;
+    QString toolTip() const override;
+    QString whatsThis() const override;
 };
 
 

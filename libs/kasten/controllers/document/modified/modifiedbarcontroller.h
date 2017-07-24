@@ -48,7 +48,7 @@ class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiCont
     explicit ModifiedBarController( StatusBar* statusBar );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS:
     void onContentFlagsChanged( Kasten::ContentFlags contentFlags );

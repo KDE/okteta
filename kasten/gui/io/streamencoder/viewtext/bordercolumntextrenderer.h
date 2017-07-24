@@ -34,11 +34,11 @@ namespace Kasten
 class BorderColumnTextRenderer : public AbstractColumnTextRenderer
 {
   public:
-    virtual ~BorderColumnTextRenderer() {}
+    ~BorderColumnTextRenderer() override {}
 
   public: // AbstractColumnTextRenderer API
-    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const;
-    virtual void renderNextLine( QTextStream* stream, bool isSubline ) const;
+    void renderFirstLine( QTextStream *stream, int lineIndex ) const override;
+    void renderNextLine( QTextStream* stream, bool isSubline ) const override;
 
   protected:
     void render( QTextStream *stream ) const;

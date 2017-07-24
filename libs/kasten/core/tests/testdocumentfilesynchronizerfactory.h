@@ -38,13 +38,13 @@ class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFact
 
   public:
     TestDocumentFileSynchronizerFactory( const QByteArray& header = QByteArray() );
-    virtual ~TestDocumentFileSynchronizerFactory();
+    ~TestDocumentFileSynchronizerFactory() override;
 
   public: // AbstractModelSynchronizerFactory API
-    virtual AbstractModelSynchronizer* createSynchronizer() const;
+    AbstractModelSynchronizer* createSynchronizer() const override;
 
-    virtual QString supportedWorkType() const;
-    virtual QString supportedRemoteType() const;
+    QString supportedWorkType() const override;
+    QString supportedRemoteType() const override;
 
   protected:
     QByteArray mHeader;

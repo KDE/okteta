@@ -36,11 +36,11 @@ class NoByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParamete
 
   public:
     explicit NoByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
-    virtual ~NoByteArrayFilterParameterSetEdit();
+    ~NoByteArrayFilterParameterSetEdit() override;
 
   public: // AbstractByteArrayFilterParameterSetEdit API
-    virtual void setValues( const AbstractByteArrayFilterParameterSet *parameterSet );
-    virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
+    void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) override;
+    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const override;
 
 };
 

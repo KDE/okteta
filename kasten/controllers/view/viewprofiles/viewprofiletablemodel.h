@@ -51,12 +51,12 @@ class ViewProfileTableModel : public QAbstractTableModel
   public:
     explicit ViewProfileTableModel( const ByteArrayViewProfileManager* viewProfileManager,
                                     QObject* parent = nullptr );
-    virtual ~ViewProfileTableModel();
+    ~ViewProfileTableModel() override;
 
   public: // QAbstractTableModel API
-    virtual int rowCount( const QModelIndex& parent ) const;
-    virtual int columnCount( const QModelIndex& parent ) const;
-    virtual QVariant data( const QModelIndex& index, int role ) const;
+    int rowCount( const QModelIndex& parent ) const override;
+    int columnCount( const QModelIndex& parent ) const override;
+    QVariant data( const QModelIndex& index, int role ) const override;
 
   public:
     ByteArrayViewProfile::Id viewProfileId( const QModelIndex& index ) const;

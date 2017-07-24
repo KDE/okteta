@@ -44,7 +44,7 @@ class BookmarksView : public QWidget
 
   public:
     explicit BookmarksView( BookmarksTool* tool, QWidget* parent = nullptr );
-    virtual ~BookmarksView();
+    ~BookmarksView() override;
 
   public:
     BookmarksTool* tool() const;

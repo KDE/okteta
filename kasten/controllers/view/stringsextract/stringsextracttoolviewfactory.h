@@ -36,15 +36,15 @@ class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolViewFactory : public Abst
 {
   public:
     StringsExtractToolViewFactory();
-    virtual ~StringsExtractToolViewFactory();
+    ~StringsExtractToolViewFactory() override;
 
   public: // AbstractToolViewFactory API
-    virtual AbstractToolView* create( AbstractTool* tool );
+    AbstractToolView* create( AbstractTool* tool ) override;
 
-    virtual QString iconName() const;
-    virtual QString title() const;
-    virtual QString id() const;
-    virtual SidePosition defaultPosition() const;
+    QString iconName() const override;
+    QString title() const override;
+    QString id() const override;
+    SidePosition defaultPosition() const override;
 };
 
 }

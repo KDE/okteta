@@ -41,15 +41,15 @@ public:
     typedef DataInformation* DataInfPtr;
     typedef QVector<QPair<QScriptString, QScriptValue::PropertyFlags> > PropertyInfoList;
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
-    virtual ~DefaultScriptClass();
+    ~DefaultScriptClass() override;
 
-    virtual QueryFlags queryProperty(const QScriptValue& object, const QScriptString& name, QueryFlags flags, uint* id);
-    virtual QScriptValue::PropertyFlags propertyFlags(const QScriptValue& object, const QScriptString& name, uint id);
-    virtual QScriptValue property(const QScriptValue& object, const QScriptString& name, uint id);
-    virtual void setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value);
-    virtual QScriptValue prototype() const;
+    QueryFlags queryProperty(const QScriptValue& object, const QScriptString& name, QueryFlags flags, uint* id) override;
+    QScriptValue::PropertyFlags propertyFlags(const QScriptValue& object, const QScriptString& name, uint id) override;
+    QScriptValue property(const QScriptValue& object, const QScriptString& name, uint id) override;
+    void setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value) override;
+    QScriptValue prototype() const override;
 
-    virtual QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
+    QScriptClassPropertyIterator* newIterator(const QScriptValue& object) override;
 
     /** Convert a QScriptValue to DataInformation than qscriptvalue_cast, since we know exactly what to expect
      * @param val the value to convert. Do not call .data() on it.
@@ -88,16 +88,16 @@ protected:
 class DefaultscriptClassIterator : public QScriptClassPropertyIterator {
 public:
     DefaultscriptClassIterator(const QScriptValue& object, DefaultScriptClass* cls);
-    virtual ~DefaultscriptClassIterator();
-    virtual bool hasNext() const;
-    virtual bool hasPrevious() const;
-    virtual QScriptString name() const;
-    virtual QScriptValue::PropertyFlags flags() const;
-    virtual uint id() const;
-    virtual void next();
-    virtual void previous();
-    virtual void toBack();
-    virtual void toFront();
+    ~DefaultscriptClassIterator() override;
+    bool hasNext() const override;
+    bool hasPrevious() const override;
+    QScriptString name() const override;
+    QScriptValue::PropertyFlags flags() const override;
+    uint id() const override;
+    void next() override;
+    void previous() override;
+    void toBack() override;
+    void toFront() override;
 private:
     int mCurrent;
     DefaultScriptClass* mClass;

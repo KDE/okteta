@@ -33,8 +33,8 @@ public:
     FlagDataInformation(const QString& name, PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef,
             DataInformation* parent = nullptr);
 private:
-    virtual QString valueStringImpl() const;
-    virtual QString typeNameImpl() const;
+    QString valueStringImpl() const override;
+    QString typeNameImpl() const override;
 };
 
 #endif // FLAGDATAINFORMATION_H

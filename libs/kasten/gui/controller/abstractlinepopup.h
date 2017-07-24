@@ -49,7 +49,7 @@ class KASTENGUI_EXPORT AbstractLinePopup : public QWidget
 
   public:
     explicit AbstractLinePopup( QWidget* parent = nullptr );
-    virtual ~AbstractLinePopup();
+    ~AbstractLinePopup() override;
 
   public:
     void setIcon( const QIcon& icon );
@@ -59,10 +59,10 @@ class KASTENGUI_EXPORT AbstractLinePopup : public QWidget
     int exec();
 
   protected: // QObject API
-    virtual bool eventFilter( QObject* object, QEvent* event );
+    bool eventFilter( QObject* object, QEvent* event ) override;
 
   protected: // QWidget API
-    virtual void setVisible( bool visible );
+    void setVisible( bool visible ) override;
 
   protected:
     void setResult( int result );

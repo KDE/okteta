@@ -51,7 +51,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
 
   public:
     InfoTool();
-    virtual ~InfoTool();
+    ~InfoTool() override;
 
   public:
     StatisticTableModel *statisticTableModel() const;
@@ -61,9 +61,9 @@ class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public Q_SLOTS:
     void updateStatistic();

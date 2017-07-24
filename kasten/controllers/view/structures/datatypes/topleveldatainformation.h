@@ -56,7 +56,7 @@ public:
      */
     explicit TopLevelDataInformation(DataInformation* data, ScriptLogger* logger = nullptr,
             QScriptEngine* engine = nullptr, const QFileInfo& structureFile = QFileInfo());
-    virtual ~TopLevelDataInformation();
+    ~TopLevelDataInformation() override;
 
     typedef QSharedPointer<TopLevelDataInformation> Ptr;
     typedef QVector<Ptr> List;
@@ -94,7 +94,7 @@ public:
     void setChildDataChanged();
     void enqueueReadData(PointerDataInformation* toRead);
 
-    virtual bool isTopLevel() const;
+    bool isTopLevel() const override;
 
     //only public so that DataInformation and subclasses can call them (TODO move)
     void _childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount);

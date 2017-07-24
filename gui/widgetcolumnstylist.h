@@ -39,10 +39,10 @@ class OKTETAGUI_EXPORT WidgetColumnStylist : public AbstractColumnStylist
 {
   public:
     explicit WidgetColumnStylist( QWidget* parent );
-    virtual ~WidgetColumnStylist();
+    ~WidgetColumnStylist() override;
 
   public: // AbstractColumnStylist API
-    virtual const QPalette& palette() const;
+    const QPalette& palette() const override;
 
   protected:
     Q_DECLARE_PRIVATE( WidgetColumnStylist )

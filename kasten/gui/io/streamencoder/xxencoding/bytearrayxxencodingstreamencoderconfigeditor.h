@@ -41,10 +41,10 @@ class ByteArrayXxencodingStreamEncoderConfigEditor : public AbstractModelStreamE
 
   public:
     explicit ByteArrayXxencodingStreamEncoderConfigEditor( ByteArrayXxencodingStreamEncoder* encoder, QWidget* parent = nullptr );
-    virtual ~ByteArrayXxencodingStreamEncoderConfigEditor();
+    ~ByteArrayXxencodingStreamEncoderConfigEditor() override;
 
   public: // AbstractModelStreamEncoderConfigEditor API
-    virtual AbstractSelectionView* createPreviewView() const;
+    AbstractSelectionView* createPreviewView() const override;
 
   protected Q_SLOTS:
     void onSettingsChanged();

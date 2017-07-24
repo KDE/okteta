@@ -51,7 +51,7 @@ class KASTENCORE_EXPORT AbstractModelDataGenerator : public QObject
   public:
     AbstractModelDataGenerator( const QString& typeName, const QString& mimeType, Flags flags );
 
-    virtual ~AbstractModelDataGenerator();
+    ~AbstractModelDataGenerator() override;
 
   public: // API to be implemented
     virtual QMimeData* generateData() = 0;

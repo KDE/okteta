@@ -56,17 +56,17 @@ class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
 
   public:
     ByteArrayUuencodingStreamEncoder();
-    virtual ~ByteArrayUuencodingStreamEncoder();
+    ~ByteArrayUuencodingStreamEncoder() override;
 
   public:
     UuencodingStreamEncoderSettings settings() const;
     void setSettings( const UuencodingStreamEncoderSettings& settings );
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice* device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range );
+    bool encodeDataToStream( QIODevice* device,
+                             const ByteArrayView* byteArrayView,
+                             const Okteta::AbstractByteArrayModel* byteArrayModel,
+                             const Okteta::AddressRange& range ) override;
 
   protected:
     UuencodingStreamEncoderSettings mSettings;

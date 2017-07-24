@@ -40,13 +40,13 @@ class TestDocument : public AbstractDocument
   public:
     TestDocument();
     explicit TestDocument( const QByteArray& data );
-    virtual ~TestDocument();
+    ~TestDocument() override;
 
   public: // API to be implemented
-    virtual QString title() const;
-    virtual QString typeName() const;
-    virtual QString mimeType() const;
-    virtual ContentFlags contentFlags() const;
+    QString title() const override;
+    QString typeName() const override;
+    QString mimeType() const override;
+    ContentFlags contentFlags() const override;
 
   public:
     const QByteArray* data() const;

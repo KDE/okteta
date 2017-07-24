@@ -46,7 +46,7 @@ class ViewProfileEdit : public QWidget
 public:
     explicit ViewProfileEdit( QWidget* parent = nullptr );
 
-    virtual ~ViewProfileEdit();
+    ~ViewProfileEdit() override;
 
 public:
     ByteArrayViewProfile viewProfile() const;

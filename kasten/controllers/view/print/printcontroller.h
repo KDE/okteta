@@ -44,10 +44,10 @@ class OKTETAKASTENCONTROLLERS_EXPORT PrintController : public AbstractXmlGuiCont
 
   public:
     explicit PrintController( KXMLGUIClient* guiClient );
-    virtual ~PrintController();
+    ~PrintController() override;
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public: // TODO: this is a hack to enable the browser extension of the KPart to execute printing, rethink it
     void print();

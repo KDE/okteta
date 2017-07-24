@@ -48,17 +48,17 @@ class PODTableModel : public QAbstractTableModel
 
   public:
     explicit PODTableModel( PODDecoderTool* tool, QObject* parent = nullptr );
-    virtual ~PODTableModel();
+    ~PODTableModel() override;
 
   public: // QAbstractItemModel API
-    virtual int rowCount( const QModelIndex& parent ) const;
-    virtual int columnCount( const QModelIndex& parent ) const;
-    virtual QVariant data( const QModelIndex& index, int role ) const;
-    virtual Qt::ItemFlags flags( const QModelIndex& index ) const;
-    virtual QModelIndex buddy( const QModelIndex& index ) const;
-    virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+    int rowCount( const QModelIndex& parent ) const override;
+    int columnCount( const QModelIndex& parent ) const override;
+    QVariant data( const QModelIndex& index, int role ) const override;
+    Qt::ItemFlags flags( const QModelIndex& index ) const override;
+    QModelIndex buddy( const QModelIndex& index ) const override;
+    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
 
-    virtual bool setData(const QModelIndex& index, const QVariant& value, int role );
+    bool setData(const QModelIndex& index, const QVariant& value, int role ) override;
 
   private Q_SLOTS:
     void onDataChanged();

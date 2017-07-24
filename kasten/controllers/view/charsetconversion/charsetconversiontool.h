@@ -56,13 +56,13 @@ class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionTool : public AbstractTool
 
   public:
     CharsetConversionTool();
-    virtual ~CharsetConversionTool();
+    ~CharsetConversionTool() override;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public: // status
     bool isApplyable() const; // candidate for AbstractTool API

@@ -74,21 +74,21 @@ class NullModel : public AbstractByteArrayModel
 
   public:
     NullModel();
-    virtual ~NullModel();
+    ~NullModel() override;
 
   public: // data access API
-    virtual Byte byte( Address offset ) const;
-    virtual Size size() const;
+    Byte byte( Address offset ) const override;
+    Size size() const override;
 
   public: // state read API
-    virtual bool isModified() const;
+    bool isModified() const override;
 
   public: // modification API
-    virtual Size replace( const AddressRange& removeSection, const Byte* insertData, int insertLength );
-    virtual bool swap( Address firstStart, const AddressRange& secondRange);
-    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 );
-    virtual void setByte( Address offset, Byte byte );
-    virtual void setModified( bool modified );
+    Size replace( const AddressRange& removeSection, const Byte* insertData, int insertLength ) override;
+    bool swap( Address firstStart, const AddressRange& secondRange) override;
+    Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) override;
+    void setByte( Address offset, Byte byte ) override;
+    void setModified( bool modified ) override;
 };
 
 NullModel::NullModel() {}

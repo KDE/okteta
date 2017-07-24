@@ -39,7 +39,7 @@ class KReplaceDialog : public KAbstractFindDialog
 
   public:
     explicit KReplaceDialog( ReplaceTool* tool, QWidget* parent = nullptr );
-    virtual ~KReplaceDialog();
+    ~KReplaceDialog() override;
 
   public: // set
 //     void setDirection( KReplaceDirection Direction );
@@ -50,11 +50,11 @@ class KReplaceDialog : public KAbstractFindDialog
     bool prompt() const;
 
   protected: // KAbstractFindDialog API
-    virtual void onFindButtonClicked();
-    virtual void rememberCurrentSettings();
+    void onFindButtonClicked() override;
+    void rememberCurrentSettings() override;
 
   protected: // QWidget API
-    virtual void showEvent( QShowEvent* showEvent );
+    void showEvent( QShowEvent* showEvent ) override;
 
   private:
     Okteta::ByteArrayComboBox* ReplaceDataEdit;

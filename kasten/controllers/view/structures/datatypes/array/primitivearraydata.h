@@ -38,34 +38,34 @@ public:
 
     explicit PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,
             ArrayDataInformation* parent);
-    virtual ~PrimitiveArrayData();
+    ~PrimitiveArrayData() override;
 
-    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            BitCount64 bitsRemaining);
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-            Okteta::Address address, BitCount64 bitsRemaining);
+    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining) override;
+    bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                      Okteta::Address address, BitCount64 bitsRemaining) override;
 
-    virtual DataInformation* childAt(unsigned int idx);
-    virtual QVariant dataAt(uint index, int column, int role);
+    DataInformation* childAt(unsigned int idx) override;
+    QVariant dataAt(uint index, int column, int role) override;
     AllPrimitiveTypes valueAt(int index) const;
-    virtual int indexOf(const DataInformation* data) const;
-    virtual unsigned int length() const;
-    virtual void setLength(uint newLength);
-    virtual BitCount64 offset(const DataInformation* child) const;
-    virtual BitCount32 size() const;
-    virtual PrimitiveDataType primitiveType() const;
-    virtual BitCount32 sizeAt(uint index);
-    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded);
+    int indexOf(const DataInformation* data) const override;
+    unsigned int length() const override;
+    void setLength(uint newLength) override;
+    BitCount64 offset(const DataInformation* child) const override;
+    BitCount32 size() const override;
+    PrimitiveDataType primitiveType() const override;
+    BitCount32 sizeAt(uint index) override;
+    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) override;
 
-    virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
-    virtual QString typeName() const;
+    QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) override;
+    QString typeName() const override;
 
-    virtual bool isComplex() const;
+    bool isComplex() const override;
 
 
-    virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const;
-    virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const;
-    virtual void setChildWidgetData(uint index, QWidget* w) const;
+    QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
+    QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
+    void setChildWidgetData(uint index, QWidget* w) const override;
 
     static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, bool littleEndian);
 protected:
@@ -75,7 +75,7 @@ protected:
     void readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
     void readDataNonNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
-    virtual void setNewParentForChildren();
+    void setNewParentForChildren() override;
 
     QVector<T> mData;
     uint mNumReadValues; //the number of values read before EOF

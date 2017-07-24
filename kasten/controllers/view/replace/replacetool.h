@@ -51,13 +51,13 @@ class ReplaceTool : public AbstractTool
 
   public:
     ReplaceTool();
-    virtual ~ReplaceTool();
+    ~ReplaceTool() override;
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   public: // status
     QByteArray searchData() const;

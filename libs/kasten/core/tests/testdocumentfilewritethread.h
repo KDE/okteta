@@ -42,10 +42,10 @@ class TestDocumentFileWriteThread : public QThread
   public:
     TestDocumentFileWriteThread( QObject* parent, const QByteArray& header,
                                  TestDocument* document, QFile* file );
-    virtual ~TestDocumentFileWriteThread();
+    ~TestDocumentFileWriteThread() override;
 
   public: // QThread API
-    virtual void run();
+    void run() override;
 
   public:
     bool success() const;

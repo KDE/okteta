@@ -61,17 +61,17 @@ class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder
 
   public:
     ByteArrayBase32StreamEncoder();
-    virtual ~ByteArrayBase32StreamEncoder();
+    ~ByteArrayBase32StreamEncoder() override;
 
   public:
     Base32StreamEncoderSettings settings() const;
     void setSettings( const Base32StreamEncoderSettings& settings );
 
   protected: // AbstractByteArrayStreamEncoder API
-    virtual bool encodeDataToStream( QIODevice* device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range );
+    bool encodeDataToStream( QIODevice* device,
+                             const ByteArrayView* byteArrayView,
+                             const Okteta::AbstractByteArrayModel* byteArrayModel,
+                             const Okteta::AddressRange& range ) override;
 
   protected:
     Base32StreamEncoderSettings mSettings;

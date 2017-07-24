@@ -47,7 +47,7 @@ class KASTENGUI_EXPORT AbstractViewArea : public QObject
     explicit AbstractViewArea( AbstractViewAreaPrivate* d );
 
   public:
-    virtual ~AbstractViewArea();
+    ~AbstractViewArea() override;
 
   public: // API to be implemented
     virtual void setFocus() = 0;

@@ -46,10 +46,10 @@ class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiControll
     CreatorController( ModelCodecManager* modelCodecManager,
                        AbstractDocumentStrategy* documentStrategy,
                        KXMLGUIClient* guiClient );
-    virtual ~CreatorController();
+    ~CreatorController() override;
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private Q_SLOTS:
     void onNewActionTriggered();

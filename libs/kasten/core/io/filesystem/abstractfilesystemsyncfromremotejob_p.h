@@ -42,7 +42,7 @@ class KASTENCORE_EXPORT AbstractFileSystemSyncFromRemoteJobPrivate : public Abst
     AbstractFileSystemSyncFromRemoteJobPrivate( AbstractFileSystemSyncFromRemoteJob* parent,
                                                 AbstractModelFileSystemSynchronizer* synchronizer );
 
-    virtual ~AbstractFileSystemSyncFromRemoteJobPrivate();
+    ~AbstractFileSystemSyncFromRemoteJobPrivate() override;
 
   public: // KJob API
     void start();

@@ -48,13 +48,13 @@ class StringsExtractView : public QWidget
 
   public:
     explicit StringsExtractView( StringsExtractTool *tool, QWidget* parent = nullptr );
-    virtual ~StringsExtractView();
+    ~StringsExtractView() override;
 
   public:
     StringsExtractTool *tool() const;
 
   public: // QObject API
-    virtual bool eventFilter( QObject* object, QEvent* event );
+    bool eventFilter( QObject* object, QEvent* event ) override;
 
   private Q_SLOTS: // gui
     void onStringDoubleClicked( const QModelIndex &index );

@@ -48,10 +48,10 @@ class AddressValidator : public QValidator
 
   public:
     explicit AddressValidator( QObject* parent, Coding codecId = HexadecimalCoding );
-    virtual ~AddressValidator();
+    ~AddressValidator() override;
 
   public: // QValidator API
-    virtual QValidator::State validate( QString& input, int& pos ) const;
+    QValidator::State validate( QString& input, int& pos ) const override;
 
   public:
     AddressType addressType() const;

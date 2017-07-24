@@ -42,15 +42,15 @@ class HexadecimalByteCodec : public ValueCodec
     bool isLowerCaseDigits() const;
 
   public: // ValueCodec API
-    virtual unsigned int encodingWidth() const;
-    virtual Byte digitsFilledLimit() const;
+    unsigned int encodingWidth() const override;
+    Byte digitsFilledLimit() const override;
 
-    virtual void encode( QString& digits, unsigned int pos, Byte byte ) const;
-    virtual void encodeShort( QString& digits, unsigned int pos, Byte byte ) const;
-    virtual bool appendDigit( Byte* byte, unsigned char digit ) const;
-    virtual void removeLastDigit( Byte* byte ) const;
-    virtual bool isValidDigit( unsigned char digit ) const;
-    virtual bool turnToValue( unsigned char* digit ) const;
+    void encode( QString& digits, unsigned int pos, Byte byte ) const override;
+    void encodeShort( QString& digits, unsigned int pos, Byte byte ) const override;
+    bool appendDigit( Byte* byte, unsigned char digit ) const override;
+    void removeLastDigit( Byte* byte ) const override;
+    bool isValidDigit( unsigned char digit ) const override;
+    bool turnToValue( unsigned char* digit ) const override;
 
   protected:
     const QChar* mDigits;

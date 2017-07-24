@@ -38,7 +38,7 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
   public:
     AbstractFileSystemLoadJobPrivate( AbstractFileSystemLoadJob* parent, AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url );
 
-    virtual ~AbstractFileSystemLoadJobPrivate();
+    ~AbstractFileSystemLoadJobPrivate() override;
 
   public: // KJob API
     void start();

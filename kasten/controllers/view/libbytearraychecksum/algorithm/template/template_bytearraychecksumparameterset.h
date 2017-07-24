@@ -26,10 +26,10 @@ class Template_ByteArrayChecksumParameterSet : public AbstractByteArrayChecksumP
   public:
     Template_ByteArrayChecksumParameterSet();
 
-    virtual ~Template_ByteArrayChecksumParameterSet();
+    ~Template_ByteArrayChecksumParameterSet() override;
 
   public: // AbstractByteArrayChecksumParameterSet API
-    virtual const char* id() const;
+    const char* id() const override;
 
 //// ADAPT(start)
 //// declare the parameters and the corresponding getters and setters

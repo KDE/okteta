@@ -39,11 +39,11 @@ class KASTENGUI_EXPORT ModelEncoderFileSystemExporterConfigEditor : public Abstr
 
   public:
     explicit ModelEncoderFileSystemExporterConfigEditor( AbstractModelStreamEncoderConfigEditor* encoderConfigEditor );
-    virtual ~ModelEncoderFileSystemExporterConfigEditor();
+    ~ModelEncoderFileSystemExporterConfigEditor() override;
 
   public: // AbstractModelExporterConfigEditor API
-    virtual bool isValid() const;
-    virtual AbstractSelectionView* createPreviewView() const;
+    bool isValid() const override;
+    AbstractSelectionView* createPreviewView() const override;
 
   protected:
     AbstractModelStreamEncoderConfigEditor* mEncoderConfigEditor;

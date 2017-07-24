@@ -41,7 +41,7 @@ class SingleViewAreaPrivate : public AbstractViewAreaPrivate
   public:
     explicit SingleViewAreaPrivate( SingleViewArea* parent );
 
-    virtual ~SingleViewAreaPrivate();
+    ~SingleViewAreaPrivate() override;
 
   public:
     void init();

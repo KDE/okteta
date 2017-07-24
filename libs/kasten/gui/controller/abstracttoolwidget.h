@@ -48,7 +48,7 @@ class KASTENGUI_EXPORT AbstractToolWidget : public QWidget
   public:
     explicit AbstractToolWidget( QWidget* parent = nullptr );
 
-    virtual ~AbstractToolWidget();
+    ~AbstractToolWidget() override;
 
   public:
     // TODO: think about making this a factory template, similar to KActionCollection::addAction

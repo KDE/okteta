@@ -51,7 +51,7 @@ class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiCo
     ViewAreaSplitController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient );
 
   public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   private:
     void splitViewArea( Qt::Orientation orientation );

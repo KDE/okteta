@@ -44,7 +44,7 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
 
   public:
     explicit FileSystemBrowserTool( DocumentSyncManager* documentSyncManager );
-    virtual ~FileSystemBrowserTool();
+    ~FileSystemBrowserTool() override;
 
   public:
     void open( const QUrl& url );
@@ -55,9 +55,9 @@ class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
 
   public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
-    virtual QString title() const;
+    QString title() const override;
 
-    virtual void setTargetModel( AbstractModel* model );
+    void setTargetModel( AbstractModel* model ) override;
 
   Q_SIGNALS:
     void hasCurrentUrlChanged( bool hasCurrentUrl );
