@@ -262,6 +262,7 @@ QList<ByteArrayChange> PieceTableByteArrayModelPrivate::changes( int firstVersio
 {
     QList<ByteArrayChange> result;
 
+    result.reserve(lastVersionIndex-firstVersionIndex);
     for( int i=firstVersionIndex; i<lastVersionIndex; ++i )
     {
         ArrayChangeMetrics metrics;

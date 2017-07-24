@@ -170,6 +170,7 @@ void ByteTableView::onInsertClicked()
 ByteTableView::~ByteTableView()
 {
     QList<int> columnsWidth;
+    columnsWidth.reserve(ByteTableModel::NoOfIds);
     const QHeaderView* header = mByteTableView->header();
     for (int i = 0 ; i < ByteTableModel::NoOfIds; ++i)
     {

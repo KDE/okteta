@@ -69,6 +69,7 @@ QList<AbstractView*> TabbedViewsPrivate::viewList() const
     QList<AbstractView*> result;
 
     const int count = mTabWidget->count();
+    result.reserve(count);
     for( int i=0; i<count; ++i )
     {
         const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(i) );

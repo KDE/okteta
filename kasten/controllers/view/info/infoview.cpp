@@ -166,6 +166,7 @@ void InfoView::setFixedFontByGlobalSettings()
 InfoView::~InfoView() 
 {
     QList<int> columnsWidth;
+    columnsWidth.reserve(StatisticTableModel::NoOfIds);
     const QHeaderView* header = mStatisticTableView->header();
     for (int i = 0 ; i < StatisticTableModel::NoOfIds; ++i)
     {
