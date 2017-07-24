@@ -163,7 +163,7 @@ void StructView::openSettingsDlg()
     //User edited the configuration - update your local copies of the configuration data
     connect(dialog, &KConfigDialog::settingsChanged, mTool, &StructTool::setSelectedStructuresInView);
 
-#pragma message("TODO: kconfig_compiler signals work now, use those signals and not the generic KConfigDialog::settingsChanged")
+    // TODO: kconfig_compiler signals work now, use those signals and not the generic KConfigDialog::settingsChanged
     dialog->setCurrentPage(displ);
     dialog->show();
 }
