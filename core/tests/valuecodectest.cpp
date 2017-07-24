@@ -40,14 +40,15 @@ struct ValueCodecDescription
     const char* name;
     int id;
     uint encodingWidth;
+    const char* validDigits;
 };
 
 static const ValueCodecDescription valueCodecDescriptions[] =
 {
-    {"HexadecimalByteCodec", HexadecimalCoding, 2},
-    {"DecimalByteCodec", DecimalCoding, 3},
-    {"OctalByteCodec", OctalCoding, 3},
-    {"BinaryByteCodec", BinaryCoding, 8}
+    {"HexadecimalByteCodec", HexadecimalCoding, 2, "0123456789ABCDEFabcdef"},
+    {"DecimalByteCodec", DecimalCoding, 3, "0123456789"},
+    {"OctalByteCodec", OctalCoding, 3, "01234567"},
+    {"BinaryByteCodec", BinaryCoding, 8, "01"}
 };
 static const int valueCodecDescriptionCount =
     sizeof(valueCodecDescriptions)/sizeof(valueCodecDescriptions[0]);
@@ -260,17 +261,6 @@ void ValueCodecTest::testRemoveLastDigit()
     delete codec;
 }
 
-// keep in order with ValueCoding
-static const char * const validDigitsPerCodec[] =
-{
-    "0123456789ABCDEFabcdef",
-    "0123456789",
-    "01234567",
-    "01"
-};
-static const int validDigitsPerCodecCount =
-    sizeof(validDigitsPerCodec)/sizeof(validDigitsPerCodec[0]);
-
 void ValueCodecTest::testIsValidDigit_data()
 {
     QTest::addColumn<int>("codecId");
@@ -286,7 +276,7 @@ void ValueCodecTest::testIsValidDigit_data()
 
         QBitArray validnessPerDigitField = QBitArray( digitCount, false );
         const QByteArray validDigits =
-            QByteArray(validDigitsPerCodec[c]);
+            QByteArray(valueCodecDescription.validDigits);
 
         for( int j = 0; j < validDigits.count(); ++j )
             validnessPerDigitField.setBit( validDigits[j], true );
