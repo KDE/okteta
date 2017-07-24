@@ -66,8 +66,7 @@ static const AbstractByteArrayView::CharCoding DefaultCharCoding = AbstractByteA
 
 static const AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
 
-static const char OctetStreamFormatName[] = "application/octet-stream";
-
+inline QString octetStreamFormatName() { return QStringLiteral("application/octet-stream"); }
 
 class NullModel : public AbstractByteArrayModel
 {
@@ -766,7 +765,7 @@ QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
         return 0;
 
     QMimeData* mimeData = new QMimeData;
-    mimeData->setData( QLatin1String(OctetStreamFormatName), selectedData() );
+    mimeData->setData( octetStreamFormatName(), selectedData() );
     return mimeData;
 }
 
@@ -821,10 +820,9 @@ void AbstractByteArrayViewPrivate::pasteData( const QMimeData* data )
     // TODO: this may not be, what is expected, think about it, if we just
     // take byte array descriptions, like encodings in chars or values
     // would need the movement of the encoders into the core library
-    const QString octetStreamFormatName = QString::fromLatin1( OctetStreamFormatName );
-    const QString dataFormatName = ( data->hasFormat(octetStreamFormatName) ) ?
-        octetStreamFormatName :
-        data->formats()[0];
+    QString dataFormatName = octetStreamFormatName();
+    if ( ! data->hasFormat(dataFormatName) )
+        dataFormatName = data->formats()[0];
 
     const QByteArray byteArray = data->data( dataFormatName );
 

@@ -129,7 +129,7 @@ void ByteArraySRecStreamEncoder::streamBlockEnd( QTextStream& textStream, unsign
 
 
 ByteArraySRecStreamEncoder::ByteArraySRecStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","S-Record"), QString::fromLatin1("text/x-srecord") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","S-Record"), QStringLiteral("text/x-srecord") )
 {}
 
 

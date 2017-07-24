@@ -33,8 +33,6 @@
 
 namespace Kasten
 {
-static const char SequenceMimeType[] = "application/octet-stream";
-
 
 ByteArraySequenceGeneratorSettings::ByteArraySequenceGeneratorSettings()
   : pattern("test"), count( 1 )
@@ -49,7 +47,7 @@ ByteArraySequenceGeneratorSettings::ByteArraySequenceGeneratorSettings()
 ByteArraySequenceGenerator::ByteArraySequenceGenerator()
   : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Sequence"),
-        QString::fromLatin1(SequenceMimeType),
+        QStringLiteral("application/octet-stream"),
         StaticGeneration )
 {}
 

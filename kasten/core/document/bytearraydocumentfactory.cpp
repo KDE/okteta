@@ -38,8 +38,6 @@ namespace Kasten
 {
 
 static int newByteArrayDocumentCounter = 0;
-//TODO QStringLiteral
-static const char OctetStreamFormatName[] = "application/octet-stream";
 
 bool ByteArrayDocumentFactory::canCreateFromData( const QMimeData* mimeData )
 {
@@ -76,7 +74,7 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData( const QMimeData* mim
     // TODO: this may not be, what is expected, think about it, if we just
     // take byte array descriptions, like encodings in chars or values
     // would need the movement of the encoders into the core library
-    const QString octetStreamFormatName = QString::fromLatin1( OctetStreamFormatName );
+    const QString octetStreamFormatName = QStringLiteral( "application/octet-stream" );
     const QString dataFormatName = ( mimeData->hasFormat(octetStreamFormatName) ) ?
         octetStreamFormatName :
         mimeData->formats()[0];

@@ -34,9 +34,9 @@ namespace Kasten
 
 CharsetConversionToolViewFactory::CharsetConversionToolViewFactory() {}
 
-QString CharsetConversionToolViewFactory::iconName() const { return QString::fromLatin1("okteta"); }
+QString CharsetConversionToolViewFactory::iconName() const { return QStringLiteral("okteta"); }
 QString CharsetConversionToolViewFactory::title()    const { return i18nc("@title:window", "Charset Conversion"); }
-QString CharsetConversionToolViewFactory::id()       const { return QString::fromLatin1("org.kde.okteta.CharsetConversionToolView"); }
+QString CharsetConversionToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.CharsetConversionToolView"); }
 SidePosition CharsetConversionToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* CharsetConversionToolViewFactory::create( AbstractTool* tool )

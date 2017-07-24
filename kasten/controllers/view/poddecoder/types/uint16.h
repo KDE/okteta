@@ -47,7 +47,7 @@ inline UInt16::UInt16( quint16 v ) : value( v ) {}
 
 inline QString UInt16::toString( bool asHex ) const
 {
-    return asHex ? QString::fromLatin1( "0x%1" ).arg( value, 4, 16, QChar::fromLatin1('0') ) :
+    return asHex ? QStringLiteral( "0x%1" ).arg( value, 4, 16, QChar::fromLatin1('0') ) :
                    QString::number( value );
 }
 

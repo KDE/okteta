@@ -36,8 +36,8 @@ TestDocument::TestDocument( const QByteArray& data )
 {
 }
 
-QString TestDocument::mimeType() const { return QString::fromLatin1("TestDocument"); }
-QString TestDocument::typeName() const { return QString::fromLatin1("Test Document"); }
+QString TestDocument::mimeType() const { return QStringLiteral("TestDocument"); }
+QString TestDocument::typeName() const { return QStringLiteral("Test Document"); }
 QString TestDocument::title() const { return mTitle; }
 ContentFlags TestDocument::contentFlags() const { return mContentFlags; }
 const QByteArray* TestDocument::data() const { return &mData; }

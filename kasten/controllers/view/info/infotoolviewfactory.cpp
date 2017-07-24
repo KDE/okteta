@@ -34,9 +34,9 @@ namespace Kasten
 
 InfoToolViewFactory::InfoToolViewFactory() {}
 
-QString InfoToolViewFactory::iconName() const { return QString::fromLatin1("okteta"); }
+QString InfoToolViewFactory::iconName() const { return QStringLiteral("okteta"); }
 QString InfoToolViewFactory::title()       const { return i18nc("@title:window", "Statistics"); }
-QString InfoToolViewFactory::id()       const { return QString::fromLatin1("org.kde.okteta.StatisticsToolView"); }
+QString InfoToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.StatisticsToolView"); }
 SidePosition InfoToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* InfoToolViewFactory::create( AbstractTool* tool )

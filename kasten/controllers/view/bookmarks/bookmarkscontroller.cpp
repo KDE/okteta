@@ -160,7 +160,7 @@ void BookmarksController::updateBookmarks()
         QString title = i18nc( "@item description of bookmark", "%1: %2", QString::fromUtf8(codedOffset),bookmark.name() );
         if( b <= lastWithNumericShortCut )
         {
-            title = QString::fromLatin1("&%1 %2").arg( b ).arg( title );
+            title = QStringLiteral("&%1 %2").arg( b ).arg( title );
         // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
             ++b;
         }

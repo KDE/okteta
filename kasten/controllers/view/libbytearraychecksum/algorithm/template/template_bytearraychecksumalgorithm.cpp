@@ -52,7 +52,7 @@ bool Template_ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
         }
     }
 
-    *result = QString::fromLatin1("%1").arg( sum );
+    *result = QStringLiteral("%1").arg( sum );
 //// ADAPT(end)
 
     return success;

@@ -56,7 +56,7 @@ ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
 {}
 
 ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","View in Plain Text"), QString::fromLatin1("text/plain") )
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","View in Plain Text"), QStringLiteral("text/plain") )
 {}
 
 

@@ -105,7 +105,7 @@ bool Crc32ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     }
     crcBits ^= 0xffffffff;
 
-    *result = QString::fromLatin1("%1").arg( crcBits, 8, 16, QChar::fromLatin1('0') );
+    *result = QStringLiteral("%1").arg( crcBits, 8, 16, QChar::fromLatin1('0') );
 
     return true;
 }

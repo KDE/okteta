@@ -31,9 +31,6 @@
 namespace Okteta
 {
 
-static const char JISX0201CharCodecName[] = "JIS X 0201";
-
-
 bool JISX0201CharCodec::encode( Byte* byte, const QChar& _char ) const
 {
     const ushort charUnicode = _char.unicode();
@@ -90,7 +87,7 @@ const QString& JISX0201CharCodec::name() const
 
 const QString& JISX0201CharCodec::codecName()
 {
-    static const QString name = QString::fromLatin1( JISX0201CharCodecName );
+    static const QString name = QStringLiteral("JIS X 0201");
     return name;
 }
 

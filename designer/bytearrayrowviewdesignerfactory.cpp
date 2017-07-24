@@ -43,7 +43,7 @@ QWidget* ByteArrayRowViewDesignerFactory::createWidget( QWidget* parent )
 
 QString ByteArrayRowViewDesignerFactory::group() const
 {
-    return QString::fromLatin1("Okteta (KDE)");
+    return QStringLiteral("Okteta (KDE)");
 }
 
 QIcon ByteArrayRowViewDesignerFactory::icon() const
@@ -53,17 +53,17 @@ QIcon ByteArrayRowViewDesignerFactory::icon() const
 
 QString ByteArrayRowViewDesignerFactory::includeFile() const
 {
-    return QString::fromLatin1("okteta/bytearrayrowview.h");
+    return QStringLiteral("okteta/bytearrayrowview.h");
 }
 
 QString ByteArrayRowViewDesignerFactory::toolTip() const
 {
-    return QString::fromLatin1("Row oriented Viewer/Editor for Byte Arrays");
+    return QStringLiteral("Row oriented Viewer/Editor for Byte Arrays");
 }
 
 QString ByteArrayRowViewDesignerFactory::whatsThis() const
 {
-    return QString::fromLatin1("A widget to show and edit byte arrays provided by subclasses of Okteta::AbstractByteArrayModel");
+    return QStringLiteral("A widget to show and edit byte arrays provided by subclasses of Okteta::AbstractByteArrayModel");
 }
 
 bool ByteArrayRowViewDesignerFactory::isContainer() const
@@ -73,5 +73,5 @@ bool ByteArrayRowViewDesignerFactory::isContainer() const
 
 QString ByteArrayRowViewDesignerFactory::name() const
 {
-    return QString::fromLatin1("Okteta::ByteArrayRowView");
+    return QStringLiteral("Okteta::ByteArrayRowView");
 }

@@ -41,7 +41,7 @@ ValuesStreamEncoderSettings::ValuesStreamEncoderSettings()
 {}
 
 ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values"), QString::fromLatin1("text/plain") )
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values"), QStringLiteral("text/plain") )
 {}
 
 

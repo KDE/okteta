@@ -47,7 +47,7 @@ inline Octal8::Octal8( quint8 v ) : value( v ) {}
 
 inline QString Octal8::toString() const
 {
-    return QString::fromLatin1( "%1" ).arg( value, 3, 8, QChar::fromLatin1('0') );
+    return QStringLiteral( "%1" ).arg( value, 3, 8, QChar::fromLatin1('0') );
 }
 
 Q_DECLARE_METATYPE( Octal8 )

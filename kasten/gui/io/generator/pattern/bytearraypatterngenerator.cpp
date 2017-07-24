@@ -31,8 +31,6 @@
 
 namespace Kasten
 {
-static const char PatternMimeType[] = "application/octet-stream";
-
 
 ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings()
   : pattern( 1, 0 ), count( 1 )
@@ -47,7 +45,7 @@ ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings()
 ByteArrayPatternGenerator::ByteArrayPatternGenerator()
   : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Pattern..."),
-        QString::fromLatin1(PatternMimeType),
+        QStringLiteral("application/octet-stream"),
         DynamicGeneration )
 {}
 

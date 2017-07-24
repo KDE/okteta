@@ -37,7 +37,7 @@ StructuresToolViewFactory::StructuresToolViewFactory()
 
 QString StructuresToolViewFactory::iconName() const
 {
-    return QString::fromLatin1("okteta");
+    return QStringLiteral("okteta");
 }
 QString StructuresToolViewFactory::title() const
 {
@@ -45,7 +45,7 @@ QString StructuresToolViewFactory::title() const
 }
 QString StructuresToolViewFactory::id() const
 {
-    return QString::fromLatin1("org.kde.okteta.StructuresToolView");
+    return QStringLiteral("org.kde.okteta.StructuresToolView");
 }
 SidePosition StructuresToolViewFactory::defaultPosition() const
 {

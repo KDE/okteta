@@ -152,7 +152,7 @@ void InfoView::resizeColumnsWidth()
 void InfoView::setByteArraySize( int size )
 {
     const QString sizeText = ( size < 1 ) ? // -1 is default, 0 should not happen
-        QString::fromLatin1( "-" ) :
+        QStringLiteral( "-" ) :
         i18np( "1 byte", "%1 bytes", size );
 
     mSizeLabel->setText( sizeText );

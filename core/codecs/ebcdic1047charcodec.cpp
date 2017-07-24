@@ -103,9 +103,6 @@ static const unsigned char EBCDICChars[256] =
   0x70, 0xDD, 0xDE, 0xDB, 0xDC, 0x8D, 0x8E, 0xDF
 };
 
-static const char EBCDIC1047CharCodecName[] = "EBCDIC 1047";
-
-
 bool EBCDIC1047CharCodec::encode( Byte* byte, const QChar& _char ) const
 {
     const int unicodeValue = _char.unicode();
@@ -136,7 +133,7 @@ const QString& EBCDIC1047CharCodec::name() const
 
 const QString& EBCDIC1047CharCodec::codecName()
 {
-    static const QString name = QString::fromLatin1( EBCDIC1047CharCodecName );
+    static const QString name = QStringLiteral("EBCDIC 1047");
     return name;
 }
 

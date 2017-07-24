@@ -63,7 +63,7 @@ void CharCodecTest::testEncodeDecode_data()
     foreach( const QString& codecName, CharCodec::codecNames() )
         for( int i = 0; i < 256; ++i )
         {
-            const QString rowTitle = codecName+QString::fromLatin1(" - %1").arg(i);
+            const QString rowTitle = codecName + QStringLiteral(" - %1").arg(i);
             QTest::newRow(rowTitle.toLatin1().constData()) << codecName << i;
         }
 }

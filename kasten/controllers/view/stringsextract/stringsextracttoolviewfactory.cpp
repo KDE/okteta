@@ -34,9 +34,9 @@ namespace Kasten
 
 StringsExtractToolViewFactory::StringsExtractToolViewFactory() {}
 
-QString StringsExtractToolViewFactory::iconName() const { return QString::fromLatin1("text-plain"); }
+QString StringsExtractToolViewFactory::iconName() const { return QStringLiteral("text-plain"); }
 QString StringsExtractToolViewFactory::title()       const { return i18nc("@title:window", "Strings"); }
-QString StringsExtractToolViewFactory::id()       const { return QString::fromLatin1("org.kde.okteta.StringsToolView"); }
+QString StringsExtractToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.StringsToolView"); }
 SidePosition StringsExtractToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* StringsExtractToolViewFactory::create( AbstractTool* tool )

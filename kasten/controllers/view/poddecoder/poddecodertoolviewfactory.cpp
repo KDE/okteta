@@ -34,9 +34,9 @@ namespace Kasten
 
 PodDecoderToolViewFactory::PodDecoderToolViewFactory() {}
 
-QString PodDecoderToolViewFactory::iconName() const { return QString::fromLatin1("okteta"); }
+QString PodDecoderToolViewFactory::iconName() const { return QStringLiteral("okteta"); }
 QString PodDecoderToolViewFactory::title()       const { return i18nc("@title:window", "Decoding Table"); }
-QString PodDecoderToolViewFactory::id()       const { return QString::fromLatin1("org.kde.okteta.PodDecoderToolView"); }
+QString PodDecoderToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.PodDecoderToolView"); }
 SidePosition PodDecoderToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
 AbstractToolView* PodDecoderToolViewFactory::create( AbstractTool* tool )

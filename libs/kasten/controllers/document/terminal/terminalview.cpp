@@ -56,7 +56,7 @@ void TerminalView::createTerminalPart()
 {
     mTerminalPart =
         KServiceTypeTrader::createInstanceFromQuery<KParts::ReadOnlyPart>(
-            QString::fromLatin1("TerminalEmulator"), this, this );
+            QStringLiteral("TerminalEmulator"), this, this );
 
     if( mTerminalPart )
     {

@@ -50,7 +50,7 @@ void CharCodecIfTest::testEncodeDecode_data()
 
     for( int i = 0; i < 256; ++i )
     {
-        const QString rowTitle = QString::fromLatin1( "byte %1" ).arg( i );
+        const QString rowTitle = QStringLiteral( "byte %1" ).arg( i );
         QTest::newRow(rowTitle.toLatin1().constData()) << i;
     }
 }

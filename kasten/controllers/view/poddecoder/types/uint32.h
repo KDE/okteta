@@ -47,7 +47,7 @@ inline UInt32::UInt32( quint32 v ) : value( v ) {}
 
 inline QString UInt32::toString( bool asHex ) const
 {
-    return asHex ? QString::fromLatin1( "0x%1" ).arg( value, 8, 16, QChar::fromLatin1('0') ) :
+    return asHex ? QStringLiteral( "0x%1" ).arg( value, 8, 16, QChar::fromLatin1('0') ) :
                    QString::number( value );
 }
 

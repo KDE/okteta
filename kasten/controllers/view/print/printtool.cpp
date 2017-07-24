@@ -84,7 +84,7 @@ void PrintTool::print()
     printDialog->setWindowTitle( processTitle );
     if( printDialog->exec() )
     {
-        QString creator = QString::fromLatin1( "Print Plugin for Okteta " ); // no i18n(), keep space at end as separator
+        QString creator = QStringLiteral( "Print Plugin for Okteta " ); // no i18n(), keep space at end as separator
 //         creator += KDEUTILS_VERSION_STRING; // TODO: change to OKTETA_VERSION_STRING
         printer.setCreator( creator );
 

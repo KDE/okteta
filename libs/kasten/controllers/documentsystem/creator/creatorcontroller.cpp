@@ -98,7 +98,7 @@ CreatorController::CreatorController( ModelCodecManager* modelCodecManager,
         foreach( AbstractModelDataGenerator* generator, generatorList )
         {
             const QString title = generator->typeName();
-            const QString iconName = QString::fromLatin1( "document-new" );//generator->iconName();
+            const QString iconName = QStringLiteral( "document-new" );//generator->iconName();
 
             QAction* action = new QAction( QIcon::fromTheme(iconName), title, this );
             action->setData( QVariant::fromValue(generator) );

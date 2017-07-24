@@ -50,7 +50,7 @@ bool ModSum64ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     if( useLittleEndian )
         modSum = qbswap( modSum );
 
-    *result = QString::fromLatin1("%1").arg( modSum, 16, 16, QChar::fromLatin1('0') );
+    *result = QStringLiteral("%1").arg( modSum, 16, 16, QChar::fromLatin1('0') );
     return true;
 }
 

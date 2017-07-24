@@ -44,7 +44,7 @@ CharsStreamEncoderSettings::CharsStreamEncoderSettings()
 {}
 
 ByteArrayCharsStreamEncoder::ByteArrayCharsStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Characters"), QString::fromLatin1("text/plain") )
+ : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Characters"), QStringLiteral("text/plain") )
 {}
 
 

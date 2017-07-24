@@ -31,9 +31,6 @@
 namespace Okteta
 {
 
-static const char USASCIICharCodecName[] = "US-ASCII";
-
-
 bool USASCIICharCodec::encode( Byte* byte, const QChar& _char ) const
 {
     const int unicodeValue = _char.unicode();
@@ -64,7 +61,7 @@ const QString& USASCIICharCodec::name() const
 
 const QString& USASCIICharCodec::codecName()
 {
-    static const QString name = QString::fromLatin1( USASCIICharCodecName );
+    static const QString name = QStringLiteral( "US-ASCII" );
     return name;
 }
 

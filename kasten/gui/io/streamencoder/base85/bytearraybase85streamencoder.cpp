@@ -63,7 +63,7 @@ static inline void streamEncoded( QTextStream& textStream, int& outputBytesPerLi
 // TODO: for now this is just the Adobe/Ascii85 implementation, so present as that
 // later also add btoa with different version, e.g. 4.2 added a "y" for 4 spaces
 ByteArrayBase85StreamEncoder::ByteArrayBase85StreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Ascii85"), QString::fromLatin1("text/x-ascii85") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Ascii85"), QStringLiteral("text/x-ascii85") )
 {}
 
 

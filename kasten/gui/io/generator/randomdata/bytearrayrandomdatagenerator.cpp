@@ -35,8 +35,6 @@
 
 namespace Kasten
 {
-static const char RandomDataMimeType[] = "application/octet-stream";
-
 
 ByteArrayRandomDataGeneratorSettings::ByteArrayRandomDataGeneratorSettings()
   : size( 256 )
@@ -51,7 +49,7 @@ ByteArrayRandomDataGeneratorSettings::ByteArrayRandomDataGeneratorSettings()
 ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
   : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Random Data..."),
-        QString::fromLatin1(RandomDataMimeType),
+        QStringLiteral("application/octet-stream"),
         DynamicGeneration )
 {}
 

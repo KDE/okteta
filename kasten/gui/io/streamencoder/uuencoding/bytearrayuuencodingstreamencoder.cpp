@@ -78,11 +78,11 @@ static const UumapEncodeData base64UumapEncodeData =
 
 
 UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
- : fileName( QString::fromLatin1("okteta-export")), algorithmId( Base64Id )
+ : fileName( QStringLiteral("okteta-export")), algorithmId( Base64Id )
 {}
 
 ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Uuencoding"), QString::fromLatin1("text/x-uuencode") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Uuencoding"), QStringLiteral("text/x-uuencode") )
 {}
 
 

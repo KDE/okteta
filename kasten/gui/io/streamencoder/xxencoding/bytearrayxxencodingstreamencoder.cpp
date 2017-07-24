@@ -61,11 +61,11 @@ static inline const char* xxpadding( ByteArrayXxencodingStreamEncoder::InputByte
 
 
 XxencodingStreamEncoderSettings::XxencodingStreamEncoderSettings()
- : fileName( QString::fromLatin1("okteta-export"))
+ : fileName( QStringLiteral("okteta-export"))
 {}
 
 ByteArrayXxencodingStreamEncoder::ByteArrayXxencodingStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Xxencoding"), QString::fromLatin1("text/x-xxencode") )
+  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Xxencoding"), QStringLiteral("text/x-xxencode") )
 {}
 
 // TODO: make this algorithm shared with ByteArrayUuencodingStreamEncoder again
