@@ -30,7 +30,7 @@
 #include "../../script/scriptlogger.h"
 
 EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
-        EnumDefinition::Ptr enumDef, DataInformation* parent)
+        const EnumDefinition::Ptr& enumDef, DataInformation* parent)
         : PrimitiveDataInformationWrapper(name, type, parent), mEnum(enumDef)
 {
     Q_CHECK_PTR(type);

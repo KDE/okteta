@@ -28,7 +28,7 @@
 
 
 FlagDataInformation::FlagDataInformation(const QString& name, PrimitiveDataInformation* type,
-        EnumDefinition::Ptr enumDef, DataInformation* parent)
+        const EnumDefinition::Ptr& enumDef, DataInformation* parent)
     : EnumDataInformation(name, type, enumDef, parent)
 {
     Q_ASSERT_X(type->type() != Type_Double && type->type() != Type_Float && type->type() != Type_Invalid,

@@ -30,7 +30,7 @@ class FlagDataInformation : public EnumDataInformation
 {
     DATAINFORMATION_CLONE(FlagDataInformation, EnumDataInformation) {}
 public:
-    FlagDataInformation(const QString& name, PrimitiveDataInformation* type, EnumDefinition::Ptr enumDef,
+    FlagDataInformation(const QString& name, PrimitiveDataInformation* type, const EnumDefinition::Ptr& enumDef,
             DataInformation* parent = nullptr);
 private:
     QString valueStringImpl() const override;

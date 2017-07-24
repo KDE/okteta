@@ -32,7 +32,7 @@ class EnumDataInformation: public PrimitiveDataInformationWrapper
 public:
     /** this object takes ownership of @p type */
     EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
-            EnumDefinition::Ptr enumDef, DataInformation* parent = nullptr);
+            const EnumDefinition::Ptr& enumDef, DataInformation* parent = nullptr);
     ~EnumDataInformation() override;
 
     bool isEnum() const override;
