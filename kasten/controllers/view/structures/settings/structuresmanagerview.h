@@ -60,7 +60,7 @@ protected Q_SLOTS:
     void advancedSelection();
 Q_SIGNALS:
     void selectedPluginsChanged();
-    void changed(QStringList newValues);
+    void changed(const QStringList& newValues);
 private:
     void rebuildPluginSelectorEntries();
     void reloadSelectedItems();
