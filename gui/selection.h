@@ -48,6 +48,7 @@ class Selection
       * @param index index in front of which the selection begins
       */
     explicit Selection( Address index );
+    Selection( const Selection& other );
     /** creates an invalid selection */
     Selection();
 
@@ -124,6 +125,7 @@ class Selection
 
 
 inline Selection::Selection() : mAnchor( -1 ) {}
+inline Selection::Selection( const Selection& other ) = default;
 inline Selection::Selection( Address index ) : mAnchor( index )  {}
 inline Selection::~Selection() {}
 
