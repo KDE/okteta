@@ -225,7 +225,6 @@ void ByteArrayViewProfileManager::saveViewProfiles( QList<ByteArrayViewProfile>&
     {
         ByteArrayViewProfile& viewProfile = *it;
         const ByteArrayViewProfile::Id viewProfileId = viewProfile.id();
-        const ByteArrayViewProfile::Id oldViewProfileId = viewProfile.id();
 
         bool needsId = true;
         if( ! viewProfileId.isEmpty() )
