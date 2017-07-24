@@ -80,7 +80,6 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
   Q_PROPERTY( bool OffsetColumnVisible READ offsetColumnVisible WRITE toggleOffsetColumn )
   Q_PROPERTY( OffsetCoding OffsetCoding READ offsetCoding WRITE setOffsetCoding )
   Q_PROPERTY( CodingTypes VisibleCodings READ visibleCodings WRITE setVisibleCodings )
-  Q_ENUMS( OffsetCoding ValueCoding CharCoding LayoutStyle CodingTypes )
 
   Q_PROPERTY( bool ByteTypeColored READ isByteTypeColored WRITE setByteTypeColored )
   // value column
@@ -95,13 +94,18 @@ class OKTETAGUI_EXPORT AbstractByteArrayView : public ColumnsView
 
   public:
     enum OffsetCoding { HexadecimalOffset=0, DecimalOffset=1, MaxOffsetCodingId=0xFF };
+    Q_ENUM(OffsetCoding)
     enum ValueCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, MaxCodingId=0xFFFF };
+    Q_ENUM(ValueCoding)
     enum CharCoding { LocalEncoding=0, ISO8859_1Encoding=1, EBCDIC1047Encoding=2,
                      StartOfOwnEncoding=0x8000, MaxEncodingId=0xFFFF };
+    Q_ENUM(CharCoding)
     enum LayoutStyle { FixedLayoutStyle=0, WrapOnlyByteGroupsLayoutStyle=1, FullSizeLayoutStyle=2, LastUserLayout=0xFF };
+    Q_ENUM(LayoutStyle)
 
     enum CodingTypeId { NoCodingId=0, ValueCodingId=1, CharCodingId=2 };
     enum CodingTypes { OnlyValueCoding = ValueCodingId, OnlyCharCoding = CharCodingId, ValueAndCharCodings=ValueCodingId|CharCodingId };
+    Q_ENUM(CodingTypes)
 
   public:
     virtual ~AbstractByteArrayView();
