@@ -47,7 +47,9 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
+    const QIcon documentCloseIcon = QIcon::fromTheme( QStringLiteral("document-close") );
     mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
+    mCloseAction->setIcon( documentCloseIcon );
     mCloseAction->setEnabled( false );
 
     if( supportMultiple )
@@ -55,13 +57,13 @@ CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
         mCloseAllAction = actionCollection->addAction( QStringLiteral("file_close_all"),
                                                        this, SLOT(closeAll()) );
         mCloseAllAction->setText( i18nc("@title:menu","Close All") );
-        mCloseAllAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
+        mCloseAllAction->setIcon( documentCloseIcon );
         mCloseAllAction->setEnabled( false );
 
         mCloseAllOtherAction = actionCollection->addAction( QStringLiteral("file_close_all_other"),
                                                             this, SLOT(closeAllOther()) );
         mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
-        mCloseAllOtherAction->setIcon( QIcon::fromTheme( QStringLiteral("window-close") ) );
+        mCloseAllOtherAction->setIcon( documentCloseIcon );
         mCloseAllOtherAction->setEnabled( false );
 
         connect( mDocumentStrategy, SIGNAL(added(QList<Kasten::AbstractDocument*>)),
