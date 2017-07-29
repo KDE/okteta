@@ -33,7 +33,7 @@
 namespace Kasten
 {
 
-class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJobPrivate : public AbstractSyncWithRemoteJobPrivate
+class AbstractFileSystemSyncWithRemoteJobPrivate : public AbstractSyncWithRemoteJobPrivate
 {
   public:
     AbstractFileSystemSyncWithRemoteJobPrivate( AbstractFileSystemSyncWithRemoteJob* parent,

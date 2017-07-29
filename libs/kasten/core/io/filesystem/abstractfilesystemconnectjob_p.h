@@ -34,7 +34,7 @@
 namespace Kasten
 {
 
-class KASTENCORE_EXPORT AbstractFileSystemConnectJobPrivate : public AbstractConnectJobPrivate
+class AbstractFileSystemConnectJobPrivate : public AbstractConnectJobPrivate
 {
   public:
     AbstractFileSystemConnectJobPrivate( AbstractFileSystemConnectJob* parent,
