@@ -144,13 +144,9 @@ int OktetaProgram::execute()
         // take arguments
         if( ! urls.isEmpty() )
         {
-            const QRegExp withProtocolChecker( QStringLiteral("^[a-zA-Z]+:") );
+            const QString currentPath = QDir::currentPath();
             foreach (const QString &url, urls) {
-                const QUrl u = (withProtocolChecker.indexIn(url) == 0) ?
-                    QUrl::fromUserInput( url ) :
-                    QUrl::fromLocalFile(QDir::current().absoluteFilePath(url));
-
-                mDocumentStrategy->load( u );
+                mDocumentStrategy->load( QUrl::fromUserInput(url, currentPath, QUrl::AssumeLocalFile) );
             }
         }
 
