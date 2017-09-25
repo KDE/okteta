@@ -474,7 +474,7 @@
   <url type="homepage">https://userbase.kde.org/Okteta/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=okteta</url>
   <url type="help">https://docs.kde.org/stable/en/kdesdk/okteta/index.html</url>
-  <url type="donation">https://www.kde.org/community/donations/</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=okteta</url>
   <screenshots>
     <screenshot type="default">
       <image>https://kde.org/images/screenshots/okteta.png</image>
