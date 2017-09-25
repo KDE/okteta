@@ -114,7 +114,7 @@ ViewProfilesManageDialog::ViewProfilesManageDialog( ByteArrayViewProfileManager*
     KGuiItem::assign( mDeleteButton,
             KGuiItem(i18nc("@action:button",
                            "&Delete"),
-                     QStringLiteral("edit-delete-shred"),
+                     QStringLiteral("edit-delete"),
                      i18nc("@info:tooltip",
                            "Deletes the selected view profile."),
                      xi18nc("@info:whatsthis",
