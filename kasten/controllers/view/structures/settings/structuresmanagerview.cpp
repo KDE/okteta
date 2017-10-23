@@ -47,7 +47,6 @@ StructuresManagerView::StructuresManagerView(Kasten::StructTool* tool, QWidget* 
     : QWidget(parent), mTool(tool), mStructuresSelector(0), mRebuildingPluginsList(false)
 {
     KConfigDialogManager::changedMap()->insert(QStringLiteral("StructuresManagerView"), SIGNAL(changed(QStringList)));
-    setObjectName(QStringLiteral("kcfg_LoadedStructures"));
     mSelectedStructures = Kasten::StructViewPreferences::loadedStructures();
 
     QVBoxLayout* pageLayout = new QVBoxLayout();
