@@ -152,13 +152,21 @@ void StructView::openSettingsDlg()
     //KConfigDialog didn't find an instance of this dialog, so lets create it :
     KConfigDialog* dialog = new KConfigDialog(this, QStringLiteral("Structures Tool Settings"),
             StructViewPreferences::self());
+
     StructViewDisplaySettingsWidget* displaySettings = new StructViewDisplaySettingsWidget();
-    StructuresManagerView* structureSettings = new StructuresManagerView(mTool, this);
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18n("Value Display"),
             QStringLiteral("configure"));
-    Q_ASSERT(structureSettings->objectName() == QLatin1String("kcfg_LoadedStructures"));
-    dialog->addPage(structureSettings, i18n("Structures management"),
-                                       QStringLiteral("preferences-plugin"));
+
+    // cannot use StructuresManagerView directly as page even if the only element
+    // because KConfigDialogManager only scans the children of the page for kcfg_ elements
+    QWidget* structSelectionPage = new QWidget();
+    QHBoxLayout* hbox = new QHBoxLayout();
+    structSelectionPage->setLayout(hbox);
+    StructuresManagerView* structureSettings = new StructuresManagerView(mTool, this);
+    structureSettings->setObjectName(QStringLiteral("kcfg_LoadedStructures"));
+    hbox->addWidget(structureSettings);
+    dialog->addPage(structSelectionPage, i18n("Structures management"),
+                    QStringLiteral("preferences-plugin"));
 
     //User edited the configuration - update your local copies of the configuration data
     connect(dialog, &KConfigDialog::settingsChanged, mTool, &StructTool::setSelectedStructuresInView);
