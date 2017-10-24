@@ -34,6 +34,7 @@
 #include <KPluginInfo>
 #include <KLocalizedString>
 #include <KNS3/Button>
+#include <kconfigwidgets_version.h>
 // Qt
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -46,7 +47,11 @@
 StructuresManagerView::StructuresManagerView(Kasten::StructTool* tool, QWidget* parent)
     : QWidget(parent), mTool(tool), mStructuresSelector(nullptr), mRebuildingPluginsList(false)
 {
+    // since 5.32 the signal is by default taken as set for the used property
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5,32,0)
     KConfigDialogManager::changedMap()->insert(QStringLiteral("StructuresManagerView"), SIGNAL(changed(QStringList)));
+#endif
+
     mSelectedStructures = Kasten::StructViewPreferences::loadedStructures();
 
     QVBoxLayout* pageLayout = new QVBoxLayout();
