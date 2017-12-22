@@ -221,7 +221,7 @@ install( FILES ${kastencore_LIB_CCHDRS}
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KastenCore")
 
-ecm_configure_package_config_file(
+configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KastenCoreConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/KastenCoreConfig.cmake"
   INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}

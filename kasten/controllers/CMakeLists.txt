@@ -696,7 +696,7 @@ install( FILES view/structures/gccxml-to-osd.xsl DESTINATION ${KDE_INSTALL_DATAD
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/OktetaKastenControllers")
 
-ecm_configure_package_config_file(
+configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/OktetaKastenControllersConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/OktetaKastenControllersConfig.cmake"
   INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}

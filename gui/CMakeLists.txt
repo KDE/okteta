@@ -158,7 +158,7 @@ install( FILES ${oktetagui_LIB_CCHDRS}
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/OktetaGui")
 
-ecm_configure_package_config_file(
+configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/OktetaGuiConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/OktetaGuiConfig.cmake"
   INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
