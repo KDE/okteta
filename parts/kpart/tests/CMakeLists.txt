@@ -1,9 +1,3 @@
-if (NOT Qt5Test_FOUND)
-  return()
-endif()
-
-include(ECMAddTests)
-
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/..
 )

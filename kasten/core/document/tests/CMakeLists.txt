@@ -1,9 +1,3 @@
-if (NOT Qt5Test_FOUND)
-  return()
-endif()
-
-include(ECMAddTests)
-
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/.. )
 
 # make sure to not use KDE_EXPORT or KDE_IMPORT because we link statically

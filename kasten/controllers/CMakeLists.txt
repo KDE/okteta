@@ -548,9 +548,8 @@ set( OKTETA_KASTEN_CONTROLLERS_SRCS
 )
 
 
-if (Qt5Test_FOUND)
+if(BUILD_TESTING)
   #structures view unit tests
-  include(ECMAddTests)
   ecm_add_tests(
     test/primitivearraytest.cpp
     test/arraydatainformationtest.cpp

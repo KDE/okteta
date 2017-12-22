@@ -21,8 +21,13 @@ include(ECMAddAppIcon)
 # CMake macros
 include(FeatureSummary)
 include(GenerateExportHeader)
+if(BUILD_TESTING)
+  include(ECMAddTests)
+endif()
 
-
+if(BUILD_TESTING)
+    set(ADDITIONAL_REQUIRED_QT_COMPONENTS Test)
+endif()
 set(REQUIRED_QT_VERSION "5.6.0")
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     COMPONENTS
@@ -33,11 +38,8 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     ScriptTools
     Widgets
     Xml
+    ${ADDITIONAL_REQUIRED_QT_COMPONENTS}
 )
-find_package(Qt5Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
-if (NOT Qt5Test_FOUND)
-  message(STATUS "Qt5Test not found, unit tests will not be built.")
-endif()
 
 find_package(Qt5Designer ${REQUIRED_QT_VERSION} CONFIG QUIET)
 set_package_properties(Qt5Designer PROPERTIES TYPE OPTIONAL
