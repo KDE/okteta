@@ -31,8 +31,8 @@
 // Qt
 #include <QString>
 #include <QRegExp>
-#include <QScriptEngine>
-#include <QScriptValue>
+#include <QJSEngine>
+#include <QJSValue>
 
 
 namespace Okteta
@@ -116,14 +116,14 @@ Address AddressValidator::toAddress( const QString& string, AddressType* address
 
     if( mCodecId == ExpressionCoding )
     {
-        QScriptEngine evaluator;
-        QScriptValue value = evaluator.evaluate( expression );
-        address = value.toInt32();
+        QJSEngine evaluator;
+        QJSValue value = evaluator.evaluate( expression );
+        address = value.toInt();
         qCDebug(LOG_KASTEN_OKTETA_GUI) << "expression " << expression << " evaluated to: " << address;
 
-        if( evaluator.hasUncaughtException() )
+        if( value.isError() )
         {
-            qCWarning(LOG_KASTEN_OKTETA_GUI) << "evaluation error: " << evaluator.uncaughtExceptionBacktrace();
+            qCWarning(LOG_KASTEN_OKTETA_GUI) << "evaluation error: " << value.toString();
             if( addressType )
                 *addressType = InvalidAddressType;
         }

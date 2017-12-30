@@ -235,7 +235,7 @@ PUBLIC
   KastenGui
   OktetaGui
 PRIVATE
-  Qt5::Script
+  Qt5::Qml
   KF5::I18n
   KF5::Completion
 )
