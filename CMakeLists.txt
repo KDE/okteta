@@ -25,6 +25,21 @@ if(BUILD_TESTING)
   include(ECMAddTests)
 endif()
 
+# control build scope, default to examples if BUILD_TESTING is ON
+if( NOT DEFINED OMIT_EXAMPLES AND NOT BUILD_TESTING )
+    set( OMIT_EXAMPLES TRUE )
+endif()
+if( NOT DEFINED OMIT_INTERNAL_TEMPLATES AND NOT BUILD_TESTING )
+    set( OMIT_INTERNAL_TEMPLATES TRUE )
+endif()
+
+if( NOT OMIT_EXAMPLES )
+    set( OKTETA_BUILD_EXAMPLES TRUE )
+endif()
+if( NOT OMIT_INTERNAL_TEMPLATES )
+    set( KASTEN_BUILD_INTERNAL_TEMPLATES TRUE )
+endif()
+
 option(BUILD_DESIGNERPLUGIN "Build the Designer plugin." ON)
 
 if(BUILD_TESTING)
@@ -72,21 +87,6 @@ find_package(Qca-qt5 2.1.0)
 set_package_properties(Qca-qt5 PROPERTIES DESCRIPTION "Qt Cryptographic Architecture"
                        URL "http:/download.kde.org/stable/qca-qt5" TYPE OPTIONAL
                        PURPOSE "Needed for most of the algorithms of the checksum tool")
-
-# control build scope, default to examples if BUILD_TESTING is ON
-if( NOT DEFINED OMIT_EXAMPLES AND NOT BUILD_TESTING )
-    set( OMIT_EXAMPLES TRUE )
-endif()
-if( NOT DEFINED OMIT_INTERNAL_TEMPLATES AND NOT BUILD_TESTING )
-    set( OMIT_INTERNAL_TEMPLATES TRUE )
-endif()
-
-if( NOT OMIT_EXAMPLES )
-    set( OKTETA_BUILD_EXAMPLES TRUE )
-endif()
-if( NOT OMIT_INTERNAL_TEMPLATES )
-    set( KASTEN_BUILD_INTERNAL_TEMPLATES TRUE )
-endif()
 
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
