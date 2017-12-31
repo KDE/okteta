@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/kxmlgui5/oktetapart">
+        <file>oktetapartreadonlyui.rc</file>
+        <file>oktetapartreadwriteui.rc</file>
+        <file>oktetapartbrowserui.rc</file>
+    </qresource>
+</RCC>

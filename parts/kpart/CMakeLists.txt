@@ -6,6 +6,10 @@ set( oktetapart_SRCS
   partfactory.cpp
 )
 
+qt5_add_resources(oktetapart_SRCS
+    oktetapart.qrc
+)
+
 add_library( oktetapart  MODULE ${oktetapart_SRCS} )
 
 
@@ -22,11 +26,6 @@ target_link_libraries( oktetapart
 
 install( TARGETS oktetapart  DESTINATION ${KDE_INSTALL_PLUGINDIR})
 kcoreaddons_desktop_to_json(oktetapart oktetapart.desktop  SERVICE_TYPES kpart.desktop)
-
-install(
-  FILES oktetapartreadonlyui.rc oktetapartbrowserui.rc oktetapartreadwriteui.rc
-  DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/oktetapart
-)
 
 if(BUILD_TESTING)
     add_subdirectory(tests)

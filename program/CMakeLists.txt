@@ -5,6 +5,10 @@ set( okteta_SRCS
   mainwindow.cpp
 )
 
+qt5_add_resources(okteta_SRCS
+    okteta.qrc
+)
+
 ecm_add_app_icon(okteta_SRCS
   ICONS
     ${CMAKE_CURRENT_SOURCE_DIR}/16-apps-okteta.png
@@ -32,7 +36,6 @@ install( TARGETS okteta  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 
 install( PROGRAMS org.kde.okteta.desktop  DESTINATION ${KDE_INSTALL_APPDIR} )
-install( FILES oktetaui.rc  DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/okteta )
 install( FILES org.kde.okteta.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
 
 ecm_install_icons(
