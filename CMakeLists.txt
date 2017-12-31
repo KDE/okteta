@@ -25,8 +25,13 @@ if(BUILD_TESTING)
   include(ECMAddTests)
 endif()
 
+option(BUILD_DESIGNERPLUGIN "Build the Designer plugin." ON)
+
 if(BUILD_TESTING)
     set(ADDITIONAL_REQUIRED_QT_COMPONENTS Test)
+endif()
+if( BUILD_DESIGNERPLUGIN )
+    list(APPEND ADDITIONAL_REQUIRED_QT_COMPONENTS UiPlugin)
 endif()
 set(REQUIRED_QT_VERSION "5.6.0")
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
@@ -40,11 +45,6 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     Widgets
     Xml
     ${ADDITIONAL_REQUIRED_QT_COMPONENTS}
-)
-
-find_package(Qt5UiPlugin ${REQUIRED_QT_VERSION} CONFIG QUIET)
-set_package_properties(Qt5UiPlugin PROPERTIES TYPE OPTIONAL
-    PURPOSE "Required to build Qt Designer plugins"
 )
 
 set(REQUIRED_KF5_VERSION "5.18.0")
@@ -119,7 +119,7 @@ set( OKTETALIBS_LIB_VERSION ${OKTETALIBS_VERSION} )
 add_subdirectory( core )
 add_subdirectory( gui )
 
-if( Qt5UiPlugin_FOUND )
+if( BUILD_DESIGNERPLUGIN )
     add_subdirectory( designer )
 endif()
 
