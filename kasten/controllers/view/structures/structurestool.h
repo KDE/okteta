@@ -26,6 +26,7 @@
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.h>
+#include <kasten/okteta/bytearrayview.h>
 // tool
 #include "datatypes/topleveldatainformation.h"
 // Kasten core
@@ -114,7 +115,18 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
     Okteta::Address startAddress(const TopLevelDataInformation* data);
 
   private:
-    QScopedPointer<StructuresToolPrivate> d;
+    // source
+    ByteArrayView* mByteArrayView;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
+    Okteta::Address mCursorIndex;
+
+    // settings
+    QSysInfo::Endian mByteOrder;
+    QScopedPointer<StructuresManager> mManager;
+    TopLevelDataInformation::List mData;
+    TopLevelDataInformation::List mInvalidData;
+    bool mWritingData :1;
+    bool mCurrentItemDataChanged :1;
 };
 
 }
