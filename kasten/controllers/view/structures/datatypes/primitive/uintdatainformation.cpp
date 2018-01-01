@@ -30,7 +30,7 @@
 #include <QLocale>
 
 #include "../../../poddecoder/typeeditors/uintspinbox.h"
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 
 
 template<typename T>
@@ -56,7 +56,7 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
     QString num = QString::number(value, base);
     if (base == 10)
     {
-        if (Kasten::StructViewPreferences::localeAwareDecimalFormatting())
+        if (Kasten::StructureViewPreferences::localeAwareDecimalFormatting())
             num = QLocale().toString(value);
     }
     else
@@ -73,7 +73,7 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
 template<typename T>
 inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox(parent, Kasten::StructViewPreferences::unsignedDisplayBase());
+    UIntSpinBox* ret = new UIntSpinBox(parent, Kasten::StructureViewPreferences::unsignedDisplayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }

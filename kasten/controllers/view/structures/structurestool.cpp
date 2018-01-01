@@ -21,7 +21,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structtool.h"
+#include "structurestool.h"
 #include "structuredefinitionfile.h"
 #include "structuresmanager.h"
 #include "structlogging.h"
@@ -40,17 +40,17 @@
 
 #include "script/scripthandler.h"
 #include "datatypes/datainformation.h"
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 
 
 namespace Kasten
 {
 
-class StructToolPrivate
+class StructuresToolPrivate
 {
 public:
-    StructToolPrivate() : mByteArrayView(nullptr), mByteArrayModel(nullptr), mCursorIndex(0),
-            mByteOrder(StructViewPreferences::byteOrder()), mManager(new StructuresManager()),
+    StructuresToolPrivate() : mByteArrayView(nullptr), mByteArrayModel(nullptr), mCursorIndex(0),
+            mByteOrder(StructureViewPreferences::byteOrder()), mManager(new StructuresManager()),
             mWritingData(false), mCurrentItemDataChanged(false) {}
 
     // source
@@ -67,44 +67,44 @@ public:
     bool mCurrentItemDataChanged :1;
 };
 
-StructTool::StructTool()
-        : d(new StructToolPrivate())
+StructuresTool::StructuresTool()
+        : d(new StructuresToolPrivate())
 {
     //leave mLoadedFiles empty for now, since otherwise loading slot will not work
-    setObjectName(QStringLiteral("StructTool"));
+    setObjectName(QStringLiteral("StructuresTool"));
     d->mManager->reloadPaths();
     setSelectedStructuresInView();
     //	mUtf8Codec = QTextCodec::codecForName("UTF-8");
 
-    connect(this, &StructTool::byteOrderChanged, this, &StructTool::onByteOrderChanged);
+    connect(this, &StructuresTool::byteOrderChanged, this, &StructuresTool::onByteOrderChanged);
 }
 
-void StructTool::onByteOrderChanged()
+void StructuresTool::onByteOrderChanged()
 {
     updateData(Okteta::ArrayChangeMetricsList());
 }
 
-StructTool::~StructTool()
+StructuresTool::~StructuresTool()
 {
 }
 
-void StructTool::setByteOrder(QSysInfo::Endian order)
+void StructuresTool::setByteOrder(QSysInfo::Endian order)
 {
-    if (order != StructViewPreferences::byteOrder() || order != d->mByteOrder)
+    if (order != StructureViewPreferences::byteOrder() || order != d->mByteOrder)
     {
         emit byteOrderChanged();
-        StructViewPreferences::setByteOrder(order);
+        StructureViewPreferences::setByteOrder(order);
         d->mByteOrder = order;
         updateData(Okteta::ArrayChangeMetricsList());
     }
 }
 
-QString StructTool::title() const
+QString StructuresTool::title() const
 {
     return i18nc("@title:window", "Structures");
 }
 
-void StructTool::setTargetModel(AbstractModel* model)
+void StructuresTool::setTargetModel(AbstractModel* model)
 {
     //just a copy of the code in poddecodertool.h
     if (d->mByteArrayView)
@@ -121,15 +121,15 @@ void StructTool::setTargetModel(AbstractModel* model)
     {
         d->mCursorIndex = d->mByteArrayView->cursorPosition();
         connect(d->mByteArrayView, &ByteArrayView::cursorPositionChanged,
-                this, &StructTool::onCursorPositionChange);
+                this, &StructuresTool::onCursorPositionChange);
         connect(d->mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
-                this, &StructTool::onContentsChange);
+                this, &StructuresTool::onContentsChange);
     }
     emit byteArrayModelChanged(d->mByteArrayModel);
     updateData(Okteta::ArrayChangeMetricsList());
 }
 
-void StructTool::onCursorPositionChange(Okteta::Address pos)
+void StructuresTool::onCursorPositionChange(Okteta::Address pos)
 {
     if (d->mCursorIndex != pos)
     {
@@ -139,7 +139,7 @@ void StructTool::onCursorPositionChange(Okteta::Address pos)
     }
 }
 
-void StructTool::setByteOrder(int order)
+void StructuresTool::setByteOrder(int order)
 {
     if (order == QSysInfo::LittleEndian)
         setByteOrder(QSysInfo::LittleEndian);
@@ -151,7 +151,7 @@ void StructTool::setByteOrder(int order)
     }
 }
 
-void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
+void StructuresTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
 {
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "contents changed";
     for (int i = 0; i < list.size(); ++i) {
@@ -161,7 +161,7 @@ void StructTool::onContentsChange(const Okteta::ArrayChangeMetricsList& list)
     updateData(list);
 }
 
-bool StructTool::setData(const QVariant& value, int role, DataInformation* item, uint row)
+bool StructuresTool::setData(const QVariant& value, int role, DataInformation* item, uint row)
 {
     Q_UNUSED(row)
     if (!d->mByteArrayModel)
@@ -184,7 +184,7 @@ bool StructTool::setData(const QVariant& value, int role, DataInformation* item,
     return ret;
 }
 
-void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
+void StructuresTool::updateData(const Okteta::ArrayChangeMetricsList& list)
 {
     if (d->mWritingData)
     {
@@ -205,7 +205,7 @@ void StructTool::updateData(const Okteta::ArrayChangeMetricsList& list)
 }
 
 //model interface:
-QVariant StructTool::headerData(int column, int role)
+QVariant StructuresTool::headerData(int column, int role)
 {
     if (role == Qt::DisplayRole)
     {
@@ -224,12 +224,12 @@ QVariant StructTool::headerData(int column, int role)
     return QVariant();
 }
 
-int StructTool::childCount() const
+int StructuresTool::childCount() const
 {
     return d->mData.size();
 }
 
-DataInformation* StructTool::childAt(int idx) const
+DataInformation* StructuresTool::childAt(int idx) const
 {
     if (idx >= d->mData.size() || idx < 0)
     {
@@ -239,23 +239,23 @@ DataInformation* StructTool::childAt(int idx) const
     return d->mData.at(idx)->actualDataInformation();
 }
 
-void StructTool::addChildItem(TopLevelDataInformation* child)
+void StructuresTool::addChildItem(TopLevelDataInformation* child)
 {
     Q_CHECK_PTR(child);
     child->setParent(this);
     if (child->isValid())
     {
         child->setIndex(d->mData.size());
-        connect(child, &TopLevelDataInformation::dataChanged, this, &StructTool::onChildItemDataChanged);
+        connect(child, &TopLevelDataInformation::dataChanged, this, &StructuresTool::onChildItemDataChanged);
         connect(child, &TopLevelDataInformation::childrenAboutToBeInserted,
-                this, &StructTool::childrenAboutToBeInserted);
+                this, &StructuresTool::childrenAboutToBeInserted);
         connect(child, &TopLevelDataInformation::childrenInserted,
-                this, &StructTool::childrenInserted);
+                this, &StructuresTool::childrenInserted);
         connect(child, &TopLevelDataInformation::childrenAboutToBeRemoved,
-                this, &StructTool::childrenAboutToBeRemoved);
+                this, &StructuresTool::childrenAboutToBeRemoved);
         connect(child, &TopLevelDataInformation::childrenRemoved,
-                this, &StructTool::childrenRemoved);
-        connect(this, &StructTool::byteArrayModelChanged,
+                this, &StructuresTool::childrenRemoved);
+        connect(this, &StructuresTool::byteArrayModelChanged,
                 child, &TopLevelDataInformation::newModelActivated);
         d->mData.append(QSharedPointer<TopLevelDataInformation>(child));
         //ensure that locking gets set up properly
@@ -269,14 +269,14 @@ void StructTool::addChildItem(TopLevelDataInformation* child)
     }
 }
 
-void StructTool::setSelectedStructuresInView()
+void StructuresTool::setSelectedStructuresInView()
 {
     d->mData.clear();
     d->mInvalidData.clear();
     emit dataCleared();
 
     QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
-    QStringList loadedStructs = StructViewPreferences::loadedStructures();
+    QStringList loadedStructs = StructureViewPreferences::loadedStructures();
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "loadedStructs " << loadedStructs;
     for (int i = 0; i < loadedStructs.size(); ++i)
     {
@@ -318,7 +318,7 @@ void StructTool::setSelectedStructuresInView()
 
 }
 
-Okteta::Address StructTool::startAddress(const TopLevelDataInformation* data)
+Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data)
 {
     if (data->isLockedFor(d->mByteArrayModel))
         return Okteta::Address(data->lockPositionFor(d->mByteArrayModel));
@@ -326,7 +326,7 @@ Okteta::Address StructTool::startAddress(const TopLevelDataInformation* data)
         return d->mCursorIndex;
 }
 
-void StructTool::mark(const QModelIndex& idx)
+void StructuresTool::mark(const QModelIndex& idx)
 {
     if (!d->mByteArrayModel || !d->mByteArrayView || !idx.isValid())
         return;
@@ -344,13 +344,13 @@ void StructTool::mark(const QModelIndex& idx)
     d->mByteArrayView->setMarking(markingRange, true);
 }
 
-void StructTool::unmark(/*const QModelIndex& idx*/)
+void StructuresTool::unmark(/*const QModelIndex& idx*/)
 {
     if (d->mByteArrayView)
         d->mByteArrayView->setMarking(Okteta::AddressRange());
 }
 
-void StructTool::validateAllStructures()
+void StructuresTool::validateAllStructures()
 {
     if (!d->mByteArrayModel)
         return; //no point validating
@@ -361,12 +361,12 @@ void StructTool::validateAllStructures()
     }
 }
 
-bool StructTool::isFileLoaded() const
+bool StructuresTool::isFileLoaded() const
 {
     return ( d->mByteArrayModel != nullptr );
 }
 
-void StructTool::lockStructure(const QModelIndex& idx)
+void StructuresTool::lockStructure(const QModelIndex& idx)
 {
     if (!d->mByteArrayModel) //no point without ByteArrayModel
         return;
@@ -379,7 +379,7 @@ void StructTool::lockStructure(const QModelIndex& idx)
         top->lockPositionToOffset(d->mCursorIndex, d->mByteArrayModel);
 }
 
-void StructTool::unlockStructure(const QModelIndex& idx)
+void StructuresTool::unlockStructure(const QModelIndex& idx)
 {
     if (!d->mByteArrayModel) //no point without ByteArrayModel
         return;
@@ -396,7 +396,7 @@ void StructTool::unlockStructure(const QModelIndex& idx)
     mark(idx); //we have to change the marked range, otherwise it stays at the previous locked offset
 }
 
-bool StructTool::isStructureLocked(const QModelIndex& idx) const
+bool StructuresTool::isStructureLocked(const QModelIndex& idx) const
 {
     if (!d->mByteArrayModel) //no point without ByteArrayModel
         return false;
@@ -410,33 +410,33 @@ bool StructTool::isStructureLocked(const QModelIndex& idx) const
     return false;
 }
 
-bool StructTool::canStructureBeLocked(const QModelIndex& idx) const
+bool StructuresTool::canStructureBeLocked(const QModelIndex& idx) const
 {
     //we need a valid model and a valid index
     return d->mByteArrayModel && idx.isValid() && idx.internalPointer();
 }
 
-void StructTool::onChildItemDataChanged()
+void StructuresTool::onChildItemDataChanged()
 {
     d->mCurrentItemDataChanged = true;
 }
 
-Okteta::AbstractByteArrayModel* StructTool::byteArrayModel() const
+Okteta::AbstractByteArrayModel* StructuresTool::byteArrayModel() const
 {
     return d->mByteArrayModel;
 }
 
-StructuresManager* StructTool::manager() const
+StructuresManager* StructuresTool::manager() const
 {
     return d->mManager.data();
 }
 
-QSysInfo::Endian StructTool::byteOrder() const
+QSysInfo::Endian StructuresTool::byteOrder() const
 {
     return d->mByteOrder;
 }
 
-TopLevelDataInformation::List StructTool::allData() const
+TopLevelDataInformation::List StructuresTool::allData() const
 {
     TopLevelDataInformation::List ret;
     ret << d->mData << d->mInvalidData;

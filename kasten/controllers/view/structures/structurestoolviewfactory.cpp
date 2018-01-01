@@ -23,8 +23,8 @@
 #include "structurestoolviewfactory.h"
 
 // lib
-#include "structtoolview.h"
-#include "structtool.h"
+#include "structurestoolview.h"
+#include "structurestool.h"
 // KF5
 #include <KLocalizedString>
 
@@ -54,7 +54,7 @@ SidePosition StructuresToolViewFactory::defaultPosition() const
 
 AbstractToolView* StructuresToolViewFactory::create(AbstractTool* tool)
 {
-    return new StructToolView(qobject_cast<StructTool*> (tool));
+    return new StructuresToolView(qobject_cast<StructuresTool*> (tool));
 }
 
 StructuresToolViewFactory::~StructuresToolViewFactory()

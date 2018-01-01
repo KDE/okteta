@@ -20,7 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "primitivedatatype.h"
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 
 #include <KLocalizedString>
 #include <QDebug>
@@ -67,7 +67,7 @@ static const char* const typeNames[Type_END + 1] =
 
 QString PrimitiveType::typeName(PrimitiveDataType type)
 {
-    if (Kasten::StructViewPreferences::shortTypeNames())
+    if (Kasten::StructureViewPreferences::shortTypeNames())
         return standardTypeName(type);
     else
         return longTypeName(type);

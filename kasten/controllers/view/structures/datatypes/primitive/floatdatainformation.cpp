@@ -29,7 +29,7 @@
 #include <QDoubleSpinBox>
 #include <QLocale>
 
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 
 QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
@@ -65,7 +65,7 @@ QScriptValue FloatDataInformationMethods::asScriptValue(float value, QScriptEngi
 
 QString FloatDataInformationMethods::staticValueString(float value)
 {
-    return (Kasten::StructViewPreferences::localeAwareFloatFormatting())
-        ? QLocale().toString(value, 'g', Kasten::StructViewPreferences::floatPrecision())
-        : QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
+    return (Kasten::StructureViewPreferences::localeAwareFloatFormatting())
+        ? QLocale().toString(value, 'g', Kasten::StructureViewPreferences::floatPrecision())
+        : QString::number(value, 'g', Kasten::StructureViewPreferences::floatPrecision());
 }

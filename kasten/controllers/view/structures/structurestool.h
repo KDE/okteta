@@ -20,8 +20,9 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef STRUCTTOOL_H_
-#define STRUCTTOOL_H_
+
+#ifndef STRUCTURESTOOL_H
+#define STRUCTURESTOOL_H
 
 // lib
 #include <kasten/okteta/oktetakastencontrollers_export.h>
@@ -31,10 +32,11 @@
 #include <kasten/abstracttool.h>
 // Okteta core
 #include <okteta/address.h>
-//Qt
+
 class QModelIndex;
 
 class DataInformation;
+
 namespace Okteta
 {
 class ArrayChangeMetricsList;
@@ -44,23 +46,22 @@ class AbstractByteArrayModel;
 namespace Kasten
 {
 class StructuresManager;
-class StructToolPrivate;
+class StructuresToolPrivate;
 
-class OKTETAKASTENCONTROLLERS_EXPORT StructTool : public AbstractTool
+class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
 {
-Q_OBJECT
-    Q_DISABLE_COPY(StructTool)
+  Q_OBJECT
 
-public:
-    StructTool();
-    ~StructTool() override;
+  public:
+    StructuresTool();
+    ~StructuresTool() override;
 
-    // AbstractTool API
+  public: // AbstractTool API
     // virtual AbstractModel* targetModel() const;
     QString title() const override;
     void setTargetModel(AbstractModel* model) override;
 
-public:
+  public:
     QSysInfo::Endian byteOrder() const;
     void setByteOrder(QSysInfo::Endian order);
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
@@ -79,7 +80,7 @@ public:
     DataInformation* childAt(int idx) const;
     TopLevelDataInformation::List allData() const;
 
-Q_SIGNALS:
+  Q_SIGNALS:
     void dataChanged(int row, void* data); //actually a DataInformation*
     void dataCleared();
     void byteOrderChanged();
@@ -94,7 +95,7 @@ Q_SIGNALS:
     /** items are inserted before @p startIndex */
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 
-public Q_SLOTS:
+  public Q_SLOTS:
     void setByteOrder(int order);
     void mark(const QModelIndex& idx);
     void unmark(/*const QModelIndex& idx*/);
@@ -103,18 +104,19 @@ public Q_SLOTS:
     void setSelectedStructuresInView();
     void validateAllStructures();
 
-protected Q_SLOTS:
+  private Q_SLOTS:
     void onByteOrderChanged();
     void onCursorPositionChange(Okteta::Address pos);
     void onContentsChange(const Okteta::ArrayChangeMetricsList&);
     void onChildItemDataChanged();
 
-private:
+  private:
     Okteta::Address startAddress(const TopLevelDataInformation* data);
 
-protected:
-    QScopedPointer<StructToolPrivate> d;
+  private:
+    QScopedPointer<StructuresToolPrivate> d;
 };
 
 }
-#endif /* STRUCTTOOL_H_ */
+
+#endif

@@ -40,7 +40,7 @@ class Button;
 namespace Kasten
 {
 class StructuresManager;
-class StructTool;
+class StructuresTool;
 }
 
 class StructuresManagerView: public QWidget
@@ -49,7 +49,7 @@ Q_OBJECT
 
 public:
     Q_PROPERTY(QStringList values READ values NOTIFY changed USER true)
-    explicit StructuresManagerView(Kasten::StructTool* manager, QWidget* parent = nullptr);
+    explicit StructuresManagerView(Kasten::StructuresTool* manager, QWidget* parent = nullptr);
 
     ~StructuresManagerView() override;
     QStringList values();
@@ -65,7 +65,7 @@ private:
     void rebuildPluginSelectorEntries();
     void reloadSelectedItems();
 private:
-    Kasten::StructTool* mTool;
+    Kasten::StructuresTool* mTool;
     QStringList mSelectedStructures;
     KNS3::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;

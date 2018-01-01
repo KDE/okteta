@@ -28,7 +28,7 @@
 #include <QLocale>
 #include <QDoubleSpinBox>
 
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 
 
 QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
@@ -64,7 +64,7 @@ QScriptValue DoubleDataInformationMethods::asScriptValue(double value, QScriptEn
 
 QString DoubleDataInformationMethods::staticValueString(double value)
 {
-    return (Kasten::StructViewPreferences::localeAwareFloatFormatting())
-        ? QLocale().toString(value, 'g', Kasten::StructViewPreferences::floatPrecision())
-        : QString::number(value, 'g', Kasten::StructViewPreferences::floatPrecision());
+    return (Kasten::StructureViewPreferences::localeAwareFloatFormatting())
+        ? QLocale().toString(value, 'g', Kasten::StructureViewPreferences::floatPrecision())
+        : QString::number(value, 'g', Kasten::StructureViewPreferences::floatPrecision());
 }

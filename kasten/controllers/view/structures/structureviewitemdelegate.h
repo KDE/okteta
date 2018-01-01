@@ -20,35 +20,27 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structtoolview.h"
-// tool
-#include "structview.h"
-#include "structtool.h"
+#ifndef STRUCTUREVIEWITEMDELEGATE_H
+#define STRUCTUREVIEWITEMDELEGATE_H
 
-namespace Kasten
-{
+#include <QStyledItemDelegate>
 
-StructToolView::StructToolView(StructTool *tool) :
-    mWidget(new StructView(tool))
+class StructureViewItemDelegate: public QStyledItemDelegate
 {
-}
+  Q_OBJECT
 
-QWidget* StructToolView::widget() const
-{
-    return mWidget;
-}
-QString StructToolView::title() const
-{
-    return mWidget->tool()->title();
-}
-AbstractTool *StructToolView::tool() const
-{
-    return mWidget->tool();
-}
+  public:
+    explicit StructureViewItemDelegate(QObject* parent = nullptr);
+    ~StructureViewItemDelegate() override;
 
-StructToolView::~StructToolView()
-{
-    delete mWidget;
-}
+  public: // QStyledItemDelegate API
+    void setModelData(QWidget* editor, QAbstractItemModel* model,
+                      const QModelIndex& index) const override;
+    void setEditorData(QWidget* editor, const QModelIndex& index) const override;
+    QWidget* createEditor(QWidget* parent,
+                          const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+    QSize sizeHint(const QStyleOptionViewItem& option,
+                   const QModelIndex& index) const override;
+};
 
-}
+#endif

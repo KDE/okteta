@@ -22,7 +22,7 @@
 #include "primitivedatainformation.h"
 #include "../datainformation.h"
 #include "../topleveldatainformation.h"
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {

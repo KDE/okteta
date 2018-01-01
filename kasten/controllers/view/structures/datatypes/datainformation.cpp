@@ -22,7 +22,7 @@
 #include "datainformation.h"
 #include "topleveldatainformation.h"
 #include "additionaldata.h"
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 #include "../script/scriptlogger.h"
 #include "../script/safereference.h"
 
@@ -280,7 +280,7 @@ QScriptValue DataInformation::toScriptValue(QScriptEngine* engine, ScriptHandler
 
 QSysInfo::Endian DataInformation::byteOrderFromSettings() const
 {
-    return Kasten::StructViewPreferences::byteOrder();
+    return Kasten::StructureViewPreferences::byteOrder();
 }
 
 

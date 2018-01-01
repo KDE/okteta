@@ -20,25 +20,35 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTVIEWITEMDELEGATE_H_
-#define STRUCTVIEWITEMDELEGATE_H_
+#include "structurestoolview.h"
+// tool
+#include "structureview.h"
+#include "structurestool.h"
 
-#include <QStyledItemDelegate>
-
-class StructViewItemDelegate: public QStyledItemDelegate
+namespace Kasten
 {
-  Q_OBJECT
 
-public:
-    explicit StructViewItemDelegate(QObject * parent = nullptr);
-    ~StructViewItemDelegate() override;
-    void setModelData(QWidget* editor, QAbstractItemModel* model,
-                      const QModelIndex& index) const override;
-    void setEditorData(QWidget* editor, const QModelIndex& index) const override;
-    QWidget* createEditor(QWidget* parent,
-                          const QStyleOptionViewItem& option, const QModelIndex& index) const override;
-    QSize sizeHint(const QStyleOptionViewItem& option,
-                   const QModelIndex& index) const override;
-};
+StructuresToolView::StructuresToolView(StructuresTool *tool) :
+    mWidget(new StructureView(tool))
+{
+}
 
-#endif /* STRUCTVIEWITEMDELEGATE_H_ */
+QWidget* StructuresToolView::widget() const
+{
+    return mWidget;
+}
+QString StructuresToolView::title() const
+{
+    return mWidget->tool()->title();
+}
+AbstractTool *StructuresToolView::tool() const
+{
+    return mWidget->tool();
+}
+
+StructuresToolView::~StructuresToolView()
+{
+    delete mWidget;
+}
+
+}

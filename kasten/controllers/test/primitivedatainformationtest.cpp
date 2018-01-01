@@ -30,7 +30,7 @@
 #include "view/structures/datatypes/primitive/bitfield/unsignedbitfielddatainformation.h"
 #include "view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.h"
 #include "view/structures/datatypes/primitivefactory.h"
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 
 class PrimitiveDataInformationTest : public QObject
 {
@@ -106,8 +106,8 @@ int PrimitiveDataInformationTest::minimumUnsignedBits(quint64 value)
 void PrimitiveDataInformationTest::initTestCase()
 {
     KLocalizedString::setLanguages(QStringList() << QStringLiteral("C"));
-    Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
-    Kasten::StructViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
+    Kasten::StructureViewPreferences::setLocaleAwareDecimalFormatting(false); //this could mess with our expected results
+    Kasten::StructureViewPreferences::setLocaleAwareFloatFormatting(false); //this could mess with our expected results
     QLocale locale(QLocale::C);
     locale.setNumberOptions(QLocale::OmitGroupSeparator);
     QLocale::setDefault(locale);
@@ -170,7 +170,7 @@ void PrimitiveDataInformationTest::testValueStringInt()
     //run once with locale aware, and once without
     for (int i = 0; i <= 1; ++i)
     {
-        Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
+        Kasten::StructureViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
             valueCompareHelper<Type_Int8>(qint8(value), binStr, hexStr, decStr, octStr);
@@ -188,13 +188,13 @@ void PrimitiveDataInformationTest::testValueStringInt()
         {
             bitfield.setWidth(width);
             bitfield.mWasAbleToRead = true;
-            Kasten::StructViewPreferences::setSignedDisplayBase(2);
+            Kasten::StructureViewPreferences::setSignedDisplayBase(2);
             QCOMPARE(bitfield.valueString(), binStr);
-            Kasten::StructViewPreferences::setSignedDisplayBase(16);
+            Kasten::StructureViewPreferences::setSignedDisplayBase(16);
             QCOMPARE(bitfield.valueString(), hexStr);
-            Kasten::StructViewPreferences::setSignedDisplayBase(10);
+            Kasten::StructureViewPreferences::setSignedDisplayBase(10);
             QCOMPARE(bitfield.valueString(), decStr);
-            Kasten::StructViewPreferences::setSignedDisplayBase(8);
+            Kasten::StructureViewPreferences::setSignedDisplayBase(8);
             QCOMPARE(bitfield.valueString(), octStr);
         }
     }
@@ -323,7 +323,7 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
     //run once with locale aware, and once without
     for (int i = 0; i <= 1; ++i)
     {
-        Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
+        Kasten::StructureViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
             valueCompareHelperUnsigned<Type_UInt8, Type_Bool8>(quint8(value), binStr, hexStr,
@@ -349,16 +349,16 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
         {
             bitfield.setWidth(width);
             bitfield.setWidth(width);
-            Kasten::StructViewPreferences::setUnsignedDisplayBase(2);
+            Kasten::StructureViewPreferences::setUnsignedDisplayBase(2);
             QCOMPARE(bitfield.valueString(), binStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(binStr) : boolBase);
-            Kasten::StructViewPreferences::setUnsignedDisplayBase(16);
+            Kasten::StructureViewPreferences::setUnsignedDisplayBase(16);
             QCOMPARE(bitfield.valueString(), hexStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(hexStr) : boolBase);
-            Kasten::StructViewPreferences::setUnsignedDisplayBase(10);
+            Kasten::StructureViewPreferences::setUnsignedDisplayBase(10);
             QCOMPARE(bitfield.valueString(), decStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(decStr) : boolBase);
-            Kasten::StructViewPreferences::setUnsignedDisplayBase(8);
+            Kasten::StructureViewPreferences::setUnsignedDisplayBase(8);
             QCOMPARE(bitfield.valueString(), octStr);
             QCOMPARE(boolBitfield.valueString(), value > 1 ? boolBase.arg(octStr) : boolBase);
         }
@@ -436,37 +436,37 @@ static QString charString(quint32 i)
 
 void PrimitiveDataInformationTest::testValueStringChar()
 {
-    Kasten::StructViewPreferences::setShowCharNumericalValue(false);
-    Kasten::StructViewPreferences::setLocaleAwareDecimalFormatting(false);
+    Kasten::StructureViewPreferences::setShowCharNumericalValue(false);
+    Kasten::StructureViewPreferences::setLocaleAwareDecimalFormatting(false);
     //we don't want the numeric value now
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1'")).arg(charString(i));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten::StructViewPreferences::setShowCharNumericalValue(true);
-    Kasten::StructViewPreferences::setCharDisplayBase(16);
+    Kasten::StructureViewPreferences::setShowCharNumericalValue(true);
+    Kasten::StructureViewPreferences::setCharDisplayBase(16);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1' (0x%2)")).arg(charString(i),
                 QString::number(i, 16));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten::StructViewPreferences::setCharDisplayBase(10);
+    Kasten::StructureViewPreferences::setCharDisplayBase(10);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1' (%2)")).arg(charString(i),
                 QString::number(i, 10));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten::StructViewPreferences::setCharDisplayBase(2);
+    Kasten::StructureViewPreferences::setCharDisplayBase(2);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1' (0b%2)")).arg(charString(i),
                 QString::number(i, 2));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
-    Kasten::StructViewPreferences::setCharDisplayBase(8);
+    Kasten::StructureViewPreferences::setCharDisplayBase(8);
     for (int i = 0; i < 256; ++i)
     {
         QString expected = QString(QStringLiteral("'%1' (0o%2)")).arg(charString(i),

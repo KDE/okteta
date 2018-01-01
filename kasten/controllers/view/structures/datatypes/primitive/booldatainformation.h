@@ -32,7 +32,7 @@ class BoolDataInformationMethods
 {
 public:
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
-    static QString staticValueString(T val, int base = Kasten::StructViewPreferences::unsignedDisplayBase());
+    static QString staticValueString(T val, int base = Kasten::StructureViewPreferences::unsignedDisplayBase());
     static PrimitiveDataType staticType();
     static T fromVariant(const QVariant& value, bool* ok);
 

@@ -23,7 +23,7 @@
 #include "structuresmanager.h"
 
 // tool
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 #include "structuredefinitionfile.h"
 #include "structlogging.h"
 // Qt

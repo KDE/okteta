@@ -31,7 +31,7 @@ class KListWidget;
 
 namespace Kasten
 {
-class StructTool;
+class StructuresTool;
 }
 class StructureAddRemoveWidget: public QWidget
 {
@@ -51,7 +51,7 @@ Q_OBJECT
 
     QStringList mValues;
 public:
-    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten::StructTool* tool, QWidget* parent = nullptr);
+    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten::StructuresTool* tool, QWidget* parent = nullptr);
     ~StructureAddRemoveWidget() override;
     QStringList values() const;
 public Q_SLOTS:
@@ -63,7 +63,7 @@ public Q_SLOTS:
 private:
     void buildAvailableList();
     void syncData();
-    const Kasten::StructTool* mTool;
+    const Kasten::StructuresTool* mTool;
 };
 
 inline QStringList StructureAddRemoveWidget::values() const

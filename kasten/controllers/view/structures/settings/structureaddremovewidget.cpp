@@ -20,7 +20,7 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "structureaddremovewidget.h"
-#include "../structtool.h"
+#include "../structurestool.h"
 #include "../structuresmanager.h"
 #include "../structuredefinitionfile.h"
 #include "../structlogging.h"
@@ -36,7 +36,7 @@
 #include <KConfigDialogManager>
 
 using namespace Kasten;
-StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, Kasten::StructTool* tool, QWidget* parent) :
+StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, Kasten::StructuresTool* tool, QWidget* parent) :
     QWidget(parent), mTool(tool)
 {
     QHBoxLayout* baseLayout;

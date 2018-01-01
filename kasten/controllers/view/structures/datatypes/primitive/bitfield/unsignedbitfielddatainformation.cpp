@@ -36,7 +36,7 @@ QString UnsignedBitfieldDataInformation::valueStringImpl() const
 QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     UIntSpinBox* ret = new UIntSpinBox(parent);
-    ret->setBase(Kasten::StructViewPreferences::unsignedDisplayBase());
+    ret->setBase(Kasten::StructureViewPreferences::unsignedDisplayBase());
     ret->setMaximum(mask());
     return ret;
 }

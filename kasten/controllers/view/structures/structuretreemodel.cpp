@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structtreemodel.h"
-#include "structtool.h"
+#include "structuretreemodel.h"
+#include "structurestool.h"
 #include "structlogging.h"
 #include "datatypes/datainformationwithchildren.h"
 #include "datatypes/topleveldatainformation.h"
@@ -32,27 +32,32 @@
 
 namespace Kasten
 {
-StructTreeModel::StructTreeModel(StructTool* tool, QObject *parent) :
-    QAbstractItemModel(parent), mTool(tool), mLastSender(nullptr), mLastStartIndex(0), mLastEndIndex(0)
+
+StructureTreeModel::StructureTreeModel(StructuresTool* tool, QObject *parent)
+  : QAbstractItemModel(parent),
+    mTool(tool),
+    mLastSender(nullptr),
+    mLastStartIndex(0),
+    mLastEndIndex(0)
 {
-    connect(mTool, &StructTool::dataChanged, this, &StructTreeModel::onToolDataChange);
-    connect(mTool, &StructTool::dataCleared, this, &StructTreeModel::onToolDataClear);
-    connect(mTool, &StructTool::childrenAboutToBeInserted,
-            this, &StructTreeModel::onChildrenAboutToBeInserted);
-    connect(mTool, &StructTool::childrenAboutToBeRemoved,
-            this, &StructTreeModel::onChildrenAboutToBeRemoved);
-    connect(mTool, &StructTool::childrenInserted,
-            this, &StructTreeModel::onChildrenInserted);
-    connect(mTool, &StructTool::childrenRemoved,
-            this, &StructTreeModel::onChildrenRemoved);
+    connect(mTool, &StructuresTool::dataChanged, this, &StructureTreeModel::onToolDataChange);
+    connect(mTool, &StructuresTool::dataCleared, this, &StructureTreeModel::onToolDataClear);
+    connect(mTool, &StructuresTool::childrenAboutToBeInserted,
+            this, &StructureTreeModel::onChildrenAboutToBeInserted);
+    connect(mTool, &StructuresTool::childrenAboutToBeRemoved,
+            this, &StructureTreeModel::onChildrenAboutToBeRemoved);
+    connect(mTool, &StructuresTool::childrenInserted,
+            this, &StructureTreeModel::onChildrenInserted);
+    connect(mTool, &StructuresTool::childrenRemoved,
+            this, &StructureTreeModel::onChildrenRemoved);
 
 }
 
-StructTreeModel::~StructTreeModel()
+StructureTreeModel::~StructureTreeModel()
 {
 }
 
-void StructTreeModel::onChildrenRemoved(const DataInformation* sender, uint startIndex,
+void StructureTreeModel::onChildrenRemoved(const DataInformation* sender, uint startIndex,
         uint endIndex)
 {
     Q_ASSERT(sender == mLastSender);
@@ -64,7 +69,7 @@ void StructTreeModel::onChildrenRemoved(const DataInformation* sender, uint star
     endRemoveRows();
 }
 
-void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint startIndex,
+void StructureTreeModel::onChildrenInserted(const DataInformation* sender, uint startIndex,
         uint endIndex)
 {
     Q_ASSERT(sender == mLastSender);
@@ -76,7 +81,7 @@ void StructTreeModel::onChildrenInserted(const DataInformation* sender, uint sta
     endInsertRows();
 }
 
-void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
+void StructureTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
     //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": removing "
@@ -89,7 +94,7 @@ void StructTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint s
     beginRemoveRows(idx, startIndex, endIndex);
 }
 
-void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
+void StructureTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
         uint endIndex)
 {
     //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": inserting "
@@ -102,13 +107,13 @@ void StructTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint 
     beginInsertRows(idx, startIndex, endIndex);
 }
 
-int StructTreeModel::columnCount(const QModelIndex& parent) const
+int StructureTreeModel::columnCount(const QModelIndex& parent) const
 {
     Q_UNUSED(parent)
     return DataInformation::COLUMN_COUNT;
 }
 
-QVariant StructTreeModel::data(const QModelIndex& index, int role) const
+QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
 {
     if (!index.isValid())
         return QVariant();
@@ -136,7 +141,7 @@ QVariant StructTreeModel::data(const QModelIndex& index, int role) const
     return item->data(column, role);
 }
 
-bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
+bool StructureTreeModel::setData(const QModelIndex& index, const QVariant& value,
         int role)
 {
     if (!index.isValid())
@@ -157,7 +162,7 @@ bool StructTreeModel::setData(const QModelIndex& index, const QVariant& value,
     return change;
 }
 
-Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
+Qt::ItemFlags StructureTreeModel::flags(const QModelIndex& index) const
 {
     if (!index.isValid())
         return Qt::NoItemFlags;
@@ -165,7 +170,7 @@ Qt::ItemFlags StructTreeModel::flags(const QModelIndex& index) const
     return item->flags(index.column(), mTool->isFileLoaded());
 }
 
-QVariant StructTreeModel::headerData(int section, Qt::Orientation orientation,
+QVariant StructureTreeModel::headerData(int section, Qt::Orientation orientation,
         int role) const
 {
     if (orientation == Qt::Horizontal)
@@ -175,7 +180,7 @@ QVariant StructTreeModel::headerData(int section, Qt::Orientation orientation,
     return QVariant();
 }
 
-QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (!hasIndex(row, column, parent))
         return QModelIndex();
@@ -199,7 +204,7 @@ QModelIndex StructTreeModel::index(int row, int column, const QModelIndex &paren
         return QModelIndex();
 }
 
-QModelIndex StructTreeModel::parent(const QModelIndex& index) const
+QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
 {
     if (!index.isValid())
         return QModelIndex();
@@ -216,7 +221,7 @@ QModelIndex StructTreeModel::parent(const QModelIndex& index) const
     return createIndex(parent->row(), 0, parent);
 }
 
-int StructTreeModel::rowCount(const QModelIndex& parent) const
+int StructureTreeModel::rowCount(const QModelIndex& parent) const
 {
     if (!parent.isValid())
         return mTool->childCount();
@@ -232,7 +237,7 @@ int StructTreeModel::rowCount(const QModelIndex& parent) const
     return parentItem->childCount();
 }
 
-bool StructTreeModel::hasChildren(const QModelIndex& parent) const
+bool StructureTreeModel::hasChildren(const QModelIndex& parent) const
 {
     if (!parent.isValid())
         return mTool->childCount() > 0;
@@ -244,7 +249,7 @@ bool StructTreeModel::hasChildren(const QModelIndex& parent) const
         return parentItem->childCount() > 0;
 }
 
-QModelIndex StructTreeModel::findItemInModel(DataInformationBase* data) const
+QModelIndex StructureTreeModel::findItemInModel(DataInformationBase* data) const
 {
     Q_CHECK_PTR(data);
     if (!data || data->isTopLevel())
@@ -252,12 +257,12 @@ QModelIndex StructTreeModel::findItemInModel(DataInformationBase* data) const
     return createIndex(data->asDataInformation()->row(), 0, data);
 }
 
-void StructTreeModel::onToolDataChange(int row, void* data)
+void StructureTreeModel::onToolDataChange(int row, void* data)
 {
     emit dataChanged(createIndex(row, 0, data), createIndex(row, 2, data));
 }
 
-void StructTreeModel::onToolDataClear()
+void StructureTreeModel::onToolDataClear()
 {
     beginResetModel();
     endResetModel();

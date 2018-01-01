@@ -46,9 +46,9 @@
 #include <kasten/okteta/bookmarkstoolview.h>
 #include <kasten/okteta/bookmarkstool.h>
 
-#include <kasten/okteta/structtoolview.h>
 // see comment in kasten/controllers/CMakeLists.txt
-#include <view/structures/structtool.h>
+#include <view/structures/structurestoolview.h>
+#include <view/structures/structurestool.h>
 
 // Kasten tools
 #include <kasten/versionviewtoolview.h>
@@ -232,7 +232,7 @@ void OktetaMainWindow::setupControllers()
     addTool( new ByteTableToolView(new ByteTableTool()) );
     addTool( new InfoToolView(new InfoTool()) );
     addTool( new PODDecoderToolView(new PODDecoderTool()) );
-    addTool( new StructToolView(new StructTool()) );
+    addTool( new StructuresToolView(new StructuresTool()) );
     addTool( new BookmarksToolView(new BookmarksTool()) );
 }
 

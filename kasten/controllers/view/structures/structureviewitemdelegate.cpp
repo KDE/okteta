@@ -20,22 +20,22 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "structviewitemdelegate.h"
+#include "structureviewitemdelegate.h"
 #include "datatypes/datainformation.h"
 #include <QLineEdit>
 #include <QScopedPointer>
 
 
-StructViewItemDelegate::StructViewItemDelegate(QObject * parent) :
+StructureViewItemDelegate::StructureViewItemDelegate(QObject * parent) :
     QStyledItemDelegate(parent)
 {
 }
 
-StructViewItemDelegate::~StructViewItemDelegate()
+StructureViewItemDelegate::~StructureViewItemDelegate()
 {
 }
 
-QWidget* StructViewItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option,
+QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option,
         const QModelIndex& index) const
 {
     Q_UNUSED(option)
@@ -50,7 +50,7 @@ QWidget* StructViewItemDelegate::createEditor(QWidget* parent, const QStyleOptio
     return ret;
 }
 
-void StructViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model,
+void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model,
         const QModelIndex& index) const
 {
     if (!index.isValid())
@@ -63,7 +63,7 @@ void StructViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* m
     model->setData(index, value, Qt::EditRole);
 }
 
-void StructViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
+void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
 
     if (!index.isValid())
@@ -75,7 +75,7 @@ void StructViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex& i
     data->setWidgetData(editor);
 }
 
-QSize StructViewItemDelegate::sizeHint(const QStyleOptionViewItem& option,
+QSize StructureViewItemDelegate::sizeHint(const QStyleOptionViewItem& option,
         const QModelIndex& index) const
 {
     return QStyledItemDelegate::sizeHint(option, index) + QSize(0, 8);

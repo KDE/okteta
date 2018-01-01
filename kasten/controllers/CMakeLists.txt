@@ -406,27 +406,27 @@ set( STRUCTVIEW_OTHER_SRCS
   view/structures/structurestoolfactory.cpp
   view/structures/structurestoolviewfactory.cpp
   view/structures/structuresmanager.cpp
-  view/structures/structtool.cpp
-  view/structures/structtreemodel.cpp
+  view/structures/structurestool.cpp
+  view/structures/structuretreemodel.cpp
   view/structures/structuredefinitionfile.cpp
 #   view/structures/modeltest.cpp
-  view/structures/structview.cpp
-  view/structures/structtoolview.cpp
-  view/structures/structviewitemdelegate.cpp
+  view/structures/structureview.cpp
+  view/structures/structurestoolview.cpp
+  view/structures/structureviewitemdelegate.cpp
   view/structures/settings/structureaddremovewidget.cpp
-  view/structures/settings/structviewdisplaysettingswidget.cpp
+  view/structures/settings/structureviewsettingswidget.cpp
   view/structures/settings/structuresmanagerview.cpp
 )
 
-kconfig_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structviewpreferences.kcfgc )
-ki18n_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structviewdisplaysettingswidget.ui )
-# structtool.h cannot be installed as it pulls (too) many private uninstalled headers
+kconfig_add_kcfg_files( STRUCTVIEW_TESTED_SRCS view/structures/settings/structureviewpreferences.kcfgc )
+ki18n_wrap_ui( STRUCTVIEW_OTHER_SRCS view/structures/settings/structureviewsettingswidget.ui )
+# structurestool.h cannot be installed as it pulls (too) many private uninstalled headers
 # KF5 TODO: any tools/controllers and views should be created by the resp. factories
 # since some time, no more directly.
 # So on next ABI change depublish tools/controllers & their views
 # For now keeping all installed, in case someone is using them still/already.
-oktetakastencontrollers_generate_headers(structview_other view/structures
-#   StructTool
+# structtoolview.h is not useful, but we keep installing the header just in case someone includes it
+oktetakastencontrollers_generate_headers(structureview_other view/structures
   StructToolView
   StructuresToolFactory
   StructuresToolViewFactory
@@ -502,9 +502,9 @@ PRIVATE
   KF5::Completion
 )
 
-add_library( structview-tested-srcs STATIC ${STRUCTVIEW_TESTED_SRCS} )
-set_target_properties( structview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
-target_link_libraries( structview-tested-srcs
+add_library( structureview-tested-srcs STATIC ${STRUCTVIEW_TESTED_SRCS} )
+set_target_properties( structureview-tested-srcs PROPERTIES POSITION_INDEPENDENT_CODE TRUE )
+target_link_libraries( structureview-tested-srcs
 PUBLIC
   OktetaCore
   KF5::ConfigGui
@@ -566,7 +566,7 @@ if(BUILD_TESTING)
     test/locktooffsettest.cpp
 
     NAME_PREFIX structures-
-    LINK_LIBRARIES structview-tested-srcs Qt5::Test poddecoder-typeeditors
+    LINK_LIBRARIES structureview-tested-srcs Qt5::Test poddecoder-typeeditors
   )
 endif()
 
@@ -596,7 +596,7 @@ set( okteta_kastencontrollers_LIB_HDRS
   ${viewprofilescontroller_HDRS}
   ${viewprofilesmanagecontroller_HDRS}
   ${poddecodercontroller_HDRS}
-  ${structview_other_HDRS}
+  ${structureview_other_HDRS}
 )
 set( okteta_kastencontrollers_LIB_CCHDRS
 #   ${overwriteonlycontroller_CCHDRS}
@@ -622,7 +622,7 @@ set( okteta_kastencontrollers_LIB_CCHDRS
   ${viewprofilescontroller_CCHDRS}
   ${viewprofilesmanagecontroller_CCHDRS}
   ${poddecodercontroller_CCHDRS}
-  ${structview_other_CCHDRS}
+  ${structureview_other_CCHDRS}
 )
 
 add_library( OktetaKastenControllers  SHARED ${OKTETA_KASTEN_CONTROLLERS_SRCS} )
@@ -636,7 +636,7 @@ PUBLIC
   KastenGui
   KastenCore
 PRIVATE
-  structview-tested-srcs
+  structureview-tested-srcs
   poddecoder-typeeditors
   KF5::NewStuff
   KF5::I18n
@@ -687,7 +687,7 @@ set( png_structure_FILES
 )
 install( FILES ${png_structure_FILES}  DESTINATION  ${KDE_INSTALL_DATADIR}/okteta/structures/png )
 install( FILES view/structures/examples/okteta/structures/uuid.js  DESTINATION  ${KDE_INSTALL_DATADIR}/okteta/structures/ )
-install( FILES view/structures/settings/structviewpreferences.kcfg  DESTINATION  ${KDE_INSTALL_KCFGDIR} )
+install( FILES view/structures/settings/structureviewpreferences.kcfg  DESTINATION  ${KDE_INSTALL_KCFGDIR} )
 
 configure_file( view/structures/struct2osd.in ${CMAKE_CURRENT_BINARY_DIR}/struct2osd @ONLY )
 install( PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/struct2osd DESTINATION ${KDE_INSTALL_BINDIR} )

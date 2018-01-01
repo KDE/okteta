@@ -19,29 +19,35 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef STRUCTVIEWDISPLAYSETTINGSWIDGET_H_
-#define STRUCTVIEWDISPLAYSETTINGSWIDGET_H_
-#include "ui_structviewdisplaysettingswidget.h"
+
+#ifndef STRUCTUREVIEWSETTINGSWIDGET_H
+#define STRUCTUREVIEWSETTINGSWIDGET_H
+
+#include "ui_structureviewsettingswidget.h"
 #include <QWidget>
 
 class KConfigSkeletonItem;
 
-class StructViewDisplaySettingsWidget: public QWidget
+class StructureViewSettingsWidget : public QWidget
 {
-Q_OBJECT
-public:
-    explicit StructViewDisplaySettingsWidget();
-    ~StructViewDisplaySettingsWidget() override;
-private:
+  Q_OBJECT
+
+  public:
+    explicit StructureViewSettingsWidget();
+    ~StructureViewSettingsWidget() override;
+
+  private:
     void setupBasesCombo(QComboBox* box, KConfigSkeletonItem* configItem,
             int currentValue, const char* slot);
     void handleMapping(int index, QComboBox* box, QSpinBox* spin);
-private:
-    Ui_StructViewSettings ui;
-private Q_SLOTS:
+
+  private Q_SLOTS:
     void setCharDisplay(int index);
     void setSignedDisplay(int index);
     void setUnsignedDisplay(int index);
+
+  private:
+    Ui_StructureViewSettingsWidget ui;
 };
 
-#endif /* STRUCTVIEWDISPLAYSETTINGSWIDGET_H_ */
+#endif

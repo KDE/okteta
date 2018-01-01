@@ -20,8 +20,8 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTTREEMODEL_H_
-#define STRUCTTREEMODEL_H_
+#ifndef STRUCTURETREEMODEL_H
+#define STRUCTURETREEMODEL_H
 
 #include <QAbstractItemModel>
 #include <QSet>
@@ -31,14 +31,17 @@ class DataInformation;
 
 namespace Kasten
 {
-class StructTool;
+class StructuresTool;
 
-class StructTreeModel: public QAbstractItemModel
+class StructureTreeModel: public QAbstractItemModel
 {
-Q_OBJECT
-public:
-    explicit StructTreeModel(StructTool* tool, QObject* parent = nullptr);
-    ~StructTreeModel() override;
+  Q_OBJECT
+
+  public:
+    explicit StructureTreeModel(StructuresTool* tool, QObject* parent = nullptr);
+    ~StructureTreeModel() override;
+
+  public: // QAbstractItemModel API
     QVariant data(const QModelIndex& index, int role) const override;
     Qt::ItemFlags flags(const QModelIndex& index) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -48,21 +51,26 @@ public:
     int columnCount(const QModelIndex& parent = QModelIndex()) const override;
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
     bool hasChildren(const QModelIndex& parent = QModelIndex()) const override;
-private:
+
+  private:
     QModelIndex findItemInModel(DataInformationBase* data) const;
-public Q_SLOTS:
+
+  private Q_SLOTS:
     void onToolDataChange(int row, void* data);
     void onToolDataClear();
     void onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
     void onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex, uint endIndex);
     void onChildrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
     void onChildrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
-private:
-    StructTool* mTool;
+
+  private:
+    StructuresTool* mTool;
     //just for checking in debug mode:
     DataInformation* mLastSender;
     uint mLastStartIndex;
     uint mLastEndIndex;
 };
+
 }
-#endif /* STRUCTTREEMODEL_H_ */
+
+#endif

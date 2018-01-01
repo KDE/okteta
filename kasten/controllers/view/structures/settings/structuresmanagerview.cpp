@@ -24,9 +24,9 @@
 #include "structuresmanagerview.h"
 #include "structureaddremovewidget.h"
 
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 #include "../structuresmanager.h"
-#include "../structtool.h"
+#include "../structurestool.h"
 #include "../structlogging.h"
 // KF5
 #include <KPluginSelector>
@@ -44,7 +44,7 @@
 #include <QSizePolicy>
 
 
-StructuresManagerView::StructuresManagerView(Kasten::StructTool* tool, QWidget* parent)
+StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidget* parent)
     : QWidget(parent), mTool(tool), mStructuresSelector(nullptr), mRebuildingPluginsList(false)
 {
     // since 5.32 the signal is by default taken as set for the used property
@@ -52,7 +52,7 @@ StructuresManagerView::StructuresManagerView(Kasten::StructTool* tool, QWidget* 
     KConfigDialogManager::changedMap()->insert(QStringLiteral("StructuresManagerView"), SIGNAL(changed(QStringList)));
 #endif
 
-    mSelectedStructures = Kasten::StructViewPreferences::loadedStructures();
+    mSelectedStructures = Kasten::StructureViewPreferences::loadedStructures();
 
     QVBoxLayout* pageLayout = new QVBoxLayout();
     setLayout(pageLayout);

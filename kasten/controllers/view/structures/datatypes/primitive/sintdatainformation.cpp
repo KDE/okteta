@@ -35,7 +35,7 @@ QString SIntDataInformationMethods<T>::staticValueString(T val, int base)
     QString num;
     if (base == 10)
     {
-        return Kasten::StructViewPreferences::localeAwareDecimalFormatting()
+        return Kasten::StructureViewPreferences::localeAwareDecimalFormatting()
             ? QLocale().toString(val)
             : QString::number(val, base);
     }
@@ -80,7 +80,7 @@ QScriptValue SIntDataInformationMethods<qint64>::asScriptValue(qint64 value, QSc
 template<typename T>
 inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox(parent, Kasten::StructViewPreferences::signedDisplayBase());
+    SIntSpinBox* ret = new SIntSpinBox(parent, Kasten::StructureViewPreferences::signedDisplayBase());
     ret->setRange(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
     return ret;
 }

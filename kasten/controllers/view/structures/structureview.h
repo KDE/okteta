@@ -21,53 +21,37 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef STRUCTVIEW_H_
-#define STRUCTVIEW_H_
+#ifndef STRUCTUREVIEW_H
+#define STRUCTUREVIEW_H
+
 #include <QWidget>
-#include "structviewitemdelegate.h"
+#include "structureviewitemdelegate.h"
 
 namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-class KComboBox;
 class QTreeView;
 class QPushButton;
-class KTextEdit;
-//class ModelTest;
 
 namespace Kasten
 {
-class StructTool;
-class StructTreeModel;
+class StructuresTool;
+class StructureTreeModel;
 
-class StructView: public QWidget
+class StructureView : public QWidget
 {
-Q_OBJECT
+  Q_OBJECT
 
-public:
-    explicit StructView(StructTool* tool, QWidget* parent = nullptr);
-    ~StructView() override;
+  public:
+    explicit StructureView(StructuresTool* tool, QWidget* parent = nullptr);
+    ~StructureView() override;
 
-public:
-    StructTool* tool() const;
+  public:
+    StructuresTool* tool() const;
     bool eventFilter(QObject* object, QEvent* event) override;
 
-protected:
-    StructTool* mTool;
-
-    StructTreeModel* mStructTreeModel;
-//    ModelTest* mModeltest;
-
-    QTreeView* mStructTreeView;
-    QPushButton* mValidateButton;
-    QPushButton* mSettingsButton;
-    QPushButton* mScriptConsoleButton;
-    StructViewItemDelegate* mDelegate;
-    QPushButton* mLockStructureButton;
-    QWidget* mStructTreeViewFocusChild;
-
-protected Q_SLOTS:
+  private Q_SLOTS:
     void openSettingsDlg();
     void openScriptConsole();
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
@@ -75,14 +59,33 @@ protected Q_SLOTS:
     void lockButtonToggled();
     void setLockButtonState(bool structureLocked);
     void onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
-private:
+
+  private:
     void setLockButtonState(const QModelIndex& current);
+
+  private:
+    StructuresTool* mTool;
+
+    StructureTreeModel* mStructureTreeModel;
+
+    StructureViewItemDelegate* mDelegate;
+
+    QTreeView* mStructTreeView;
+
+    QPushButton* mValidateButton;
+    QPushButton* mSettingsButton;
+    QPushButton* mScriptConsoleButton;
+    QPushButton* mLockStructureButton;
+
+    QWidget* mStructTreeViewFocusChild;
 };
 
-inline StructTool* StructView::tool() const
+
+inline StructuresTool* StructureView::tool() const
 {
     return mTool;
 }
 
 }
-#endif /* STRUCTVIEW_H_ */
+
+#endif

@@ -29,7 +29,7 @@
 #include <QScriptValue>
 
 
-#include "structviewpreferences.h"
+#include "structureviewpreferences.h"
 
 namespace {
     QString charString(quint8 value)
@@ -56,10 +56,10 @@ namespace {
 QString CharDataInformationMethods::staticValueString(quint8 value)
 {
     QString charStr = charString(value);
-    if (Kasten::StructViewPreferences::showCharNumericalValue())
+    if (Kasten::StructureViewPreferences::showCharNumericalValue())
     {
-        int base = Kasten::StructViewPreferences::charDisplayBase();
-        const QString num = (base == 10 && Kasten::StructViewPreferences::localeAwareDecimalFormatting())
+        int base = Kasten::StructureViewPreferences::charDisplayBase();
+        const QString num = (base == 10 && Kasten::StructureViewPreferences::localeAwareDecimalFormatting())
             ? QLocale().toString(value)
             : QString::number(value, base);
         charStr += QLatin1String(" (") + PrimitiveDataInformation::basePrefix(base)
