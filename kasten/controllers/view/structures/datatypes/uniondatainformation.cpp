@@ -29,6 +29,11 @@ QString UnionDataInformation::typeNameImpl() const
     return i18nc("data type in C/C++, then name", "union %1", name());
 }
 
+bool UnionDataInformation::isUnion() const
+{
+    return true;
+}
+
 BitCount32 UnionDataInformation::size() const
 {
     //since this is a union return size of biggest element

@@ -266,3 +266,18 @@ QVector<DataInformation*> DataInformationWithChildren::cloneList(const QVector<D
     }
     return ret;
 }
+
+unsigned int DataInformationWithChildren::childCount() const
+{
+    return mChildren.size();
+}
+
+bool DataInformationWithChildren::canHaveChildren() const
+{
+    return true;
+}
+
+bool DataInformationWithChildren::isDataInformationWithChildren() const
+{
+    return true;
+}

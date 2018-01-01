@@ -97,22 +97,4 @@ public:
     bool isDataInformationWithDummyChildren() const override;
 };
 
-
-inline int DataInformationWithDummyChildren::indexOf(const DataInformation* const data) const
-{
-    Q_ASSERT(data->isDummy());
-    Q_ASSERT(data->parent() == this);
-    return data->asDummy()->dummyIndex();
-}
-
-inline bool DummyDataInformation::isDummy() const
-{
-    return true;
-}
-
-inline bool DataInformationWithDummyChildren::isDataInformationWithDummyChildren() const
-{
-    return true;
-}
-
 #endif // DUMMYDATAINFORMATION_H

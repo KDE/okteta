@@ -41,6 +41,11 @@ StructureDataInformation::StructureDataInformation(const QString& name,
 {
 }
 
+bool StructureDataInformation::isStruct() const
+{
+    return true;
+}
+
 qint64 StructureDataInformation::readData(Okteta::AbstractByteArrayModel *input,
         Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {

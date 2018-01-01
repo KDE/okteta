@@ -104,11 +104,6 @@ private:
     StringType mEncoding;
 };
 
-inline bool StringDataInformation::canHaveChildren() const
-{
-    return true;
-}
-
 inline StringDataInformation::StringType StringDataInformation::encoding() const
 {
     return mEncoding;

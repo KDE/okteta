@@ -69,13 +69,9 @@ protected:
     void setNewParentForChildren() override;
 private:
     void appendChildren(uint from, uint to);
+
 private:
     QVector<DataInformation*> mChildren;
 };
-
-inline bool ComplexArrayData::isComplex() const
-{
-    return true;
-}
 
 #endif // COMPLEXARRAYDATA_H

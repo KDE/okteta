@@ -47,3 +47,8 @@ void StringData::setTerminationCodePoint(uint term)
     mTerminationCodePoint = term;
     mMode |= Sequence;
 }
+
+void StringData::setLittleEndian(bool littleEndian)
+{
+    mLittleEndian = littleEndian;
+}

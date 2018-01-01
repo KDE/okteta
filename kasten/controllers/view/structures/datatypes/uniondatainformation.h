@@ -42,9 +42,4 @@ private:
     QString typeNameImpl() const override;
 };
 
-inline bool UnionDataInformation::isUnion() const
-{
-    return true;
-}
-
 #endif /* UNIONDATAINFORMATION_H_ */

@@ -24,8 +24,6 @@
 
 #include "abstractbitfielddatainformation.h"
 
-#include <KLocalizedString>
-
 class UnsignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
     DATAINFORMATION_CLONE(UnsignedBitfieldDataInformation, AbstractBitfieldDataInformation) {}
@@ -39,20 +37,10 @@ public:
     QVariant dataFromWidget(const QWidget* w) const override;
     void setWidgetData(QWidget* w) const override;
     Type bitfieldType() const override;
+
 private:
     QString valueStringImpl() const override;
     QString typeNameImpl() const override;
 };
-
-inline QString UnsignedBitfieldDataInformation::typeNameImpl() const
-{
-    return i18ncp("Data type", "unsigned bitfield (%1 bit wide)",
-            "unsigned bitfield (%1 bits wide)", width());
-}
-
-inline AbstractBitfieldDataInformation::Type UnsignedBitfieldDataInformation::bitfieldType() const
-{
-    return AbstractBitfieldDataInformation::Unsigned;
-}
 
 #endif /* UNSIGNEDBITFIELDDATAINFORMATION_H_ */

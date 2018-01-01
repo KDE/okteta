@@ -145,10 +145,4 @@ inline bool StringData::wasEof() const
     return mEofReached;
 }
 
-
-inline void StringData::setLittleEndian(bool littleEndian)
-{
-    mLittleEndian = littleEndian;
-}
-
 #endif // STRINGDATA_H

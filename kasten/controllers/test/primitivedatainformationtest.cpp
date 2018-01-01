@@ -18,9 +18,12 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <KLocalizedString>
+
 #include <QTest>
 #include <QtGlobal>
 #include <QLocale>
+
 #include <limits>
 #include <okteta/bytearraymodel.h>
 

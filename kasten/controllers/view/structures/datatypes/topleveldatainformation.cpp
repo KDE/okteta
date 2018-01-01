@@ -266,3 +266,8 @@ void TopLevelDataInformation::setActualDataInformation(DataInformation* newData)
     Q_ASSERT(newData);
     mData.reset(newData);
 }
+
+bool TopLevelDataInformation::isTopLevel() const
+{
+    return true;
+}

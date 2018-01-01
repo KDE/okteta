@@ -30,11 +30,23 @@ DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QS
 {
 }
 
-inline DataInformationWithDummyChildren* DummyDataInformation::parentHelper() const
+DataInformationWithDummyChildren* DummyDataInformation::parentHelper() const
 {
     DataInformationWithDummyChildren* parent = mParent->asDataInformationWithDummyChildren();
     Q_CHECK_PTR(parent);
     return parent;
+}
+
+int DataInformationWithDummyChildren::indexOf(const DataInformation* const data) const
+{
+    Q_ASSERT(data->isDummy());
+    Q_ASSERT(data->parent() == this);
+    return data->asDummy()->dummyIndex();
+}
+
+bool DataInformationWithDummyChildren::isDataInformationWithDummyChildren() const
+{
+    return true;
 }
 
 QVariant DummyDataInformation::data(int column, int role) const
@@ -88,4 +100,9 @@ QWidget* DummyDataInformation::createEditWidget(QWidget* parent) const
 QString DummyDataInformation::typeNameImpl() const
 {
     return parentHelper()->childTypeName(mIndex);
+}
+
+bool DummyDataInformation::isDummy() const
+{
+    return true;
 }

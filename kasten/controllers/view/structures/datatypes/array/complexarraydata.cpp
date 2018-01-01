@@ -90,6 +90,11 @@ unsigned int ComplexArrayData::length() const
     return mChildren.size();
 }
 
+bool ComplexArrayData::isComplex() const
+{
+    return true;
+}
+
 BitCount32 ComplexArrayData::size() const
 {
     int max = mChildren.size();

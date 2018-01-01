@@ -21,7 +21,9 @@
  */
 #include "boolbitfielddatainformation.h"
 
+#include <KLocalizedString>
 #include <KComboBox>
+
 #include <QScriptValue>
 
 #include "../booldatainformation.h"
@@ -79,3 +81,13 @@ QScriptValue BoolBitfieldDataInformation::valueAsQScriptValue() const
     return (mValue.value<quint64>()) != 0;
 }
 
+QString BoolBitfieldDataInformation::typeNameImpl() const
+{
+    return i18ncp("Data type", "boolean bitfield (%1 bit wide)", "boolean bitfield (%1 bits wide)",
+            width());
+}
+
+AbstractBitfieldDataInformation::Type BoolBitfieldDataInformation::bitfieldType() const
+{
+    return AbstractBitfieldDataInformation::Boolean;
+}

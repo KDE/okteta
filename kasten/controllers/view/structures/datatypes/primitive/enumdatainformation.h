@@ -47,11 +47,6 @@ protected:
     EnumDefinition::Ptr mEnum;
 };
 
-inline bool EnumDataInformation::isEnum() const
-{
-    return true;
-}
-
 inline EnumDefinition::Ptr EnumDataInformation::enumValues() const
 {
     return mEnum;

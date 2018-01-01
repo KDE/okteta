@@ -65,3 +65,8 @@ QScriptClass* EnumDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) c
 {
     return handlerInfo->mEnumClass.data();
 }
+
+bool EnumDataInformation::isEnum() const
+{
+    return true;
+}

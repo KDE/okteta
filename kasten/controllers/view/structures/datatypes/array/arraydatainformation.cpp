@@ -198,3 +198,68 @@ QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine*
 {
     return mData->toScriptValue(index, engine, handlerInfo);
 }
+
+QString ArrayDataInformation::typeNameImpl() const
+{
+    return mData->typeName();
+}
+
+BitCount32 ArrayDataInformation::size() const
+{
+    return mData->size();
+}
+
+bool ArrayDataInformation::isArray() const
+{
+    return true;
+}
+
+DataInformation* ArrayDataInformation::childAt(unsigned int idx) const
+{
+    return mData->childAt(idx);
+}
+
+unsigned int ArrayDataInformation::childCount() const
+{
+    return mData->length();
+}
+
+bool ArrayDataInformation::canHaveChildren() const
+{
+    return true;
+}
+
+QString ArrayDataInformation::childTypeName(uint index) const
+{
+    return mData->dataAt(index, DataInformation::ColumnType, Qt::DisplayRole).toString();
+}
+
+int ArrayDataInformation::indexOf(const DataInformation*const data) const
+{
+    return mData->indexOf(data);
+}
+
+BitCount32 ArrayDataInformation::childSize(uint index) const
+{
+    return mData->sizeAt(index);
+}
+
+Qt::ItemFlags ArrayDataInformation::childFlags(int row, int column, bool fileLoaded) const
+{
+    return mData->childFlags(row, column, fileLoaded);
+}
+
+QWidget* ArrayDataInformation::createChildEditWidget(uint index, QWidget* parent) const
+{
+    return mData->createChildEditWidget(index, parent);
+}
+
+QVariant ArrayDataInformation::dataFromChildWidget(uint index, const QWidget* w) const
+{
+    return mData->dataFromChildWidget(index, w);
+}
+
+void ArrayDataInformation::setChildWidgetData(uint index, QWidget* w) const
+{
+    mData->setChildWidgetData(index, w);
+}

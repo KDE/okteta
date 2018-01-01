@@ -22,6 +22,8 @@
 
 #include "unsignedbitfielddatainformation.h"
 
+#include <KLocalizedString>
+
 #include <QScriptValue>
 
 #include "../poddecoder/typeeditors/uintspinbox.h"
@@ -63,4 +65,15 @@ QScriptValue UnsignedBitfieldDataInformation::valueAsQScriptValue() const
         return  mValue.value<quint32>() & quint32(mask()); //32 bit or less -> can be put in as value
     else
         return QString::number(mValue.value<quint64>());
+}
+
+QString UnsignedBitfieldDataInformation::typeNameImpl() const
+{
+    return i18ncp("Data type", "unsigned bitfield (%1 bit wide)",
+            "unsigned bitfield (%1 bits wide)", width());
+}
+
+AbstractBitfieldDataInformation::Type UnsignedBitfieldDataInformation::bitfieldType() const
+{
+    return AbstractBitfieldDataInformation::Unsigned;
 }

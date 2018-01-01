@@ -166,11 +166,6 @@ inline void TopLevelDataInformation::setChildDataChanged()
     mChildDataChanged = true;
 }
 
-inline bool TopLevelDataInformation::isTopLevel() const
-{
-    return true;
-}
-
 inline ScriptLogger* TopLevelDataInformation::logger() const
 {
     return mLogger.data();

@@ -47,11 +47,11 @@ public:
     virtual QScriptValue valueAsQScriptValue() const = 0;
     virtual PrimitiveDataType type() const = 0;
 
-    unsigned int childCount() const override { return 0; }
-    DataInformation* childAt(unsigned int) const override { Q_ASSERT(false); return nullptr; }
-    bool canHaveChildren() const override { return false; }
-    BitCount64 childPosition(const DataInformation*, Okteta::Address) const override { Q_ASSERT(false); return 0; }
-    int indexOf(const DataInformation* const) const override {Q_ASSERT(false); return -1; }
+    unsigned int childCount() const override;
+    DataInformation* childAt(unsigned int) const override;
+    bool canHaveChildren() const override;
+    BitCount64 childPosition(const DataInformation*, Okteta::Address) const override;
+    int indexOf(const DataInformation* const) const override;
 
     /** @return the matching prefix for the base (nothing, '0x', '0b' or '0o') */
     static QString basePrefix(int base);
@@ -84,25 +84,21 @@ public:
     //delegate all these to the underlying object:
 
     bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override
-    { return mValue->setData(value, out, address, bitsRemaining, bitOffset); }
+                 Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
+    BitCount32 size() const override;
 
+    void setWidgetData(QWidget* w) const override;
 
-    BitCount32 size() const override { return mValue->size(); }
+    QVariant dataFromWidget(const QWidget* w) const override;
 
-    void setWidgetData(QWidget* w) const override {mValue->setWidgetData(w); }
+    QWidget* createEditWidget(QWidget* parent) const override;
 
-    QVariant dataFromWidget(const QWidget* w) const override { return mValue->dataFromWidget(w); }
+    AllPrimitiveTypes value() const override;
 
-    QWidget* createEditWidget(QWidget* parent) const override { return mValue->createEditWidget(parent); }
+    void setValue(AllPrimitiveTypes newValue) override;
 
-    AllPrimitiveTypes value() const override { return mValue->value(); }
-
-    void setValue(AllPrimitiveTypes newValue) override { mValue->setValue(newValue); }
-
-    //classes derived from this are not true primitive types (they provide additional information)
-    PrimitiveDataType type() const override { return Type_Invalid; }
+    PrimitiveDataType type() const override;
 
 
     QScriptValue valueAsQScriptValue() const override;
@@ -114,18 +110,6 @@ protected:
     QScopedPointer<PrimitiveDataInformation> mValue;
 };
 
-
-inline BitCount32 PrimitiveDataInformation::offset(unsigned int index) const
-{
-    Q_UNUSED(index)
-    Q_ASSERT_X(false, "PrimitiveDataInformation::offset", "This should never be called");
-    return 0;
-}
-
-inline bool PrimitiveDataInformation::isPrimitive() const
-{
-    return true;
-}
 
 inline PrimitiveDataInformation::PrimitiveDataInformation(const QString& name,
         DataInformation* parent)

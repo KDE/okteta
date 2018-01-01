@@ -82,12 +82,12 @@ bool DataInformationBase::isTaggedUnion() const
     return false;
 }
 
-inline bool DataInformationBase::isDataInformationWithChildren() const
+bool DataInformationBase::isDataInformationWithChildren() const
 {
     return false;
 }
 
-inline bool DataInformationBase::isDataInformationWithDummyChildren() const
+bool DataInformationBase::isDataInformationWithDummyChildren() const
 {
     return false;
 }

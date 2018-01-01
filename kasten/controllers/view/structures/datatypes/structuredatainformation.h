@@ -46,9 +46,4 @@ private:
     QString typeNameImpl() const override;
 };
 
-inline bool StructureDataInformation::isStruct() const
-{
-    return true;
-}
-
 #endif /* STRUCTUREDATAINFORMATION_H_ */

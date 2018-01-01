@@ -116,3 +116,21 @@ QScriptClass* AbstractBitfieldDataInformation::scriptClass(ScriptHandlerInfo* ha
 {
     return handlerInfo->mBitfieldClass.data();
 }
+
+BitCount32 AbstractBitfieldDataInformation::size() const
+{
+    return mWidth;
+}
+
+bool AbstractBitfieldDataInformation::isBitfield() const
+{
+    return true;
+}
+
+Qt::ItemFlags AbstractBitfieldDataInformation::flags(int column, bool fileLoaded) const
+{
+    if (column == (int) DataInformation::ColumnValue && fileLoaded)
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
+    else
+        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+}

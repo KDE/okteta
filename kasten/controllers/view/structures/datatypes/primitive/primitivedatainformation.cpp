@@ -32,6 +32,39 @@ Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
 }
 
+bool PrimitiveDataInformation::isPrimitive() const
+{
+    return true;
+}
+
+unsigned int PrimitiveDataInformation::childCount() const
+{
+    return 0;
+}
+
+DataInformation* PrimitiveDataInformation::childAt(unsigned int) const
+{
+    Q_ASSERT(false);
+    return nullptr;
+}
+
+bool PrimitiveDataInformation::canHaveChildren() const
+{
+    return false;
+}
+
+BitCount64 PrimitiveDataInformation::childPosition(const DataInformation*, Okteta::Address) const
+{
+    Q_ASSERT(false);
+    return 0;
+}
+
+int PrimitiveDataInformation::indexOf(const DataInformation* const) const
+{
+    Q_ASSERT(false);
+    return -1; 
+}
+
 // The inline destructor makes the compiler unhappy
 PrimitiveDataInformation::~PrimitiveDataInformation()
 {
@@ -65,4 +98,53 @@ qint64 PrimitiveDataInformationWrapper::readData(Okteta::AbstractByteArrayModel*
     qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
     mWasAbleToRead = mValue->wasAbleToRead();
     return retVal;
+}
+
+BitCount32 PrimitiveDataInformation::offset(unsigned int index) const
+{
+    Q_UNUSED(index)
+    Q_ASSERT_X(false, "PrimitiveDataInformation::offset", "This should never be called");
+    return 0;
+}
+
+bool PrimitiveDataInformationWrapper::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                                       Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
+{
+    return mValue->setData(value, out, address, bitsRemaining, bitOffset);
+}
+
+BitCount32 PrimitiveDataInformationWrapper::size() const
+{
+    return mValue->size();
+}
+
+void PrimitiveDataInformationWrapper::setWidgetData(QWidget* w) const
+{
+    mValue->setWidgetData(w);
+}
+
+QVariant PrimitiveDataInformationWrapper::dataFromWidget(const QWidget* w) const
+{
+    return mValue->dataFromWidget(w);
+}
+
+QWidget* PrimitiveDataInformationWrapper::createEditWidget(QWidget* parent) const
+{
+    return mValue->createEditWidget(parent);
+}
+
+AllPrimitiveTypes PrimitiveDataInformationWrapper::value() const
+{
+    return mValue->value();
+}
+
+void PrimitiveDataInformationWrapper::setValue(AllPrimitiveTypes newValue)
+{
+    mValue->setValue(newValue);
+}
+
+//classes derived from this are not true primitive types (they provide additional information)
+PrimitiveDataType PrimitiveDataInformationWrapper::type() const
+{
+    return Type_Invalid;
 }

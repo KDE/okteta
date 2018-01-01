@@ -76,19 +76,4 @@ protected:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 };
 
-inline unsigned int DataInformationWithChildren::childCount() const
-{
-    return mChildren.size();
-}
-
-inline bool DataInformationWithChildren::canHaveChildren() const
-{
-    return true;
-}
-
-inline bool DataInformationWithChildren::isDataInformationWithChildren() const
-{
-    return true;
-}
-
 #endif /* DATAINFORMATIONWITHCHILDREN_H_ */

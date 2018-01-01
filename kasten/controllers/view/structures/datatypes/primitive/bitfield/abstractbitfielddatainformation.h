@@ -61,14 +61,6 @@ protected:
     quint8 mWidth; //cannot be more than 64 since a quint64 is used for storage
 };
 
-inline Qt::ItemFlags AbstractBitfieldDataInformation::flags(int column, bool fileLoaded) const
-{
-    if (column == (int) DataInformation::ColumnValue && fileLoaded)
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-    else
-        return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-}
-
 inline quint64 AbstractBitfieldDataInformation::mask() const
 {
     /* same as:
@@ -83,11 +75,6 @@ inline quint64 AbstractBitfieldDataInformation::mask() const
     return (quint64(1) << mWidth) - 1;
 }
 
-inline BitCount32 AbstractBitfieldDataInformation::size() const
-{
-    return mWidth;
-}
-
 inline BitCount32 AbstractBitfieldDataInformation::width() const
 {
     return mWidth;
@@ -97,11 +84,6 @@ inline void AbstractBitfieldDataInformation::setWidth(BitCount32 newWidth)
 {
     Q_ASSERT(newWidth > 0 && newWidth <= 64);
     mWidth = qMin(newWidth, BitCount32(64u)); //maximum width is 64 bits
-}
-
-inline bool AbstractBitfieldDataInformation::isBitfield() const
-{
-    return true;
 }
 
 #endif /* ABSTRACTBITFIELDDATAINFORMATION_H_ */

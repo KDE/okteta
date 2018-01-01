@@ -71,16 +71,6 @@ protected:
     QScopedPointer<DataInformation> mPointerTarget;
 };
 
-inline bool PointerDataInformation::canHaveChildren() const
-{
-    return true;
-}
-
-inline bool PointerDataInformation::isPointer() const
-{
-    return true;
-}
-
 inline DataInformation* PointerDataInformation::pointerTarget() const
 {
     return mPointerTarget.data();

@@ -82,11 +82,6 @@ private:
     int mLastIndex;
 };
 
-inline bool TaggedUnionDataInformation::isTaggedUnion() const
-{
-    return true;
-}
-
 inline const QVector<DataInformation*>& TaggedUnionDataInformation::currentChildren() const
 {
     Q_ASSERT(mLastIndex < mAlternatives.size());

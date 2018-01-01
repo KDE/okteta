@@ -276,3 +276,8 @@ unsigned int TaggedUnionDataInformation::childCount() const
 {
     return mChildren.size() + currentChildren().size();
 }
+
+bool TaggedUnionDataInformation::isTaggedUnion() const
+{
+    return true;
+}

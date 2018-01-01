@@ -24,11 +24,10 @@
 
 #include "abstractbitfielddatainformation.h"
 
-#include <KLocalizedString>
-
 class SignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
     DATAINFORMATION_CLONE(SignedBitfieldDataInformation, AbstractBitfieldDataInformation) {}
+
 public:
     SignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
             : AbstractBitfieldDataInformation(name, width, parent) {}
@@ -42,20 +41,10 @@ public:
     /** sign extend the value if it is negative, so it can always be treated as a plain qint64 */
     void setValue(AllPrimitiveTypes newVal) override;
     Type bitfieldType() const override;
+
 private:
     QString valueStringImpl() const override;
     QString typeNameImpl() const override;
 };
-
-inline QString SignedBitfieldDataInformation::typeNameImpl() const
-{
-    return i18ncp("Data type", "signed bitfield (%1 bit wide)", "signed bitfield (%1 bits wide)",
-            width());
-}
-
-inline AbstractBitfieldDataInformation::Type SignedBitfieldDataInformation::bitfieldType() const
-{
-    return AbstractBitfieldDataInformation::Signed;
-}
 
 #endif /* SIGNEDBITFIELDDATAINFORMATION_H_ */

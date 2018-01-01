@@ -24,9 +24,6 @@
 
 #include "abstractbitfielddatainformation.h"
 
-#include <KLocalizedString>
-
-
 class BoolBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
     DATAINFORMATION_CLONE(BoolBitfieldDataInformation, AbstractBitfieldDataInformation) {}
@@ -45,16 +42,5 @@ private:
     QString valueStringImpl() const override;
     QString typeNameImpl() const override;
 };
-
-inline QString BoolBitfieldDataInformation::typeNameImpl() const
-{
-    return i18ncp("Data type", "boolean bitfield (%1 bit wide)", "boolean bitfield (%1 bits wide)",
-            width());
-}
-
-inline AbstractBitfieldDataInformation::Type BoolBitfieldDataInformation::bitfieldType() const
-{
-    return AbstractBitfieldDataInformation::Boolean;
-}
 
 #endif /* BOOLBITFIELDDATAINFORMATION_H_ */

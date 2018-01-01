@@ -21,6 +21,8 @@
  */
 #include "signedbitfielddatainformation.h"
 
+#include <KLocalizedString>
+
 #include <QScriptValue>
 
 #include "../poddecoder/typeeditors/sintspinbox.h"
@@ -80,4 +82,15 @@ void SignedBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 AllPrimitiveTypes SignedBitfieldDataInformation::fromVariant(const QVariant& variant, bool* ok) const
 {
     return AllPrimitiveTypes(variant.toLongLong(ok));
+}
+
+QString SignedBitfieldDataInformation::typeNameImpl() const
+{
+    return i18ncp("Data type", "signed bitfield (%1 bit wide)", "signed bitfield (%1 bits wide)",
+            width());
+}
+
+AbstractBitfieldDataInformation::Type SignedBitfieldDataInformation::bitfieldType() const
+{
+    return AbstractBitfieldDataInformation::Signed;
 }
