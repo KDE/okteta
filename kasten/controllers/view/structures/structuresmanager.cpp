@@ -78,13 +78,15 @@ void StructuresManager::reloadPaths()
 
 void StructuresManager::addStructDef(const KPluginInfo& info)
 {
+    const QString pluginName = info.pluginName();
+    if (mDefs.contains(pluginName))
+    {
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Skipping structure already loaded: " << pluginName;
+        return;
+    }
 
     StructureDefinitionFile* def = new StructureDefinitionFile(info);
-    QString pluginName = info.pluginName();
-    if (!mDefs.contains(pluginName))
-        mDefs.insert(pluginName, def);
-    else
-        delete def;
+    mDefs.insert(pluginName, def);
 }
 
 StructureDefinitionFile* StructuresManager::definition(const QString& pluginName) const
