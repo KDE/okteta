@@ -89,12 +89,14 @@ void StructuresManager::addStructDef(const KPluginInfo& info)
 
 StructureDefinitionFile* StructuresManager::definition(const QString& pluginName) const
 {
-    if (!mDefs.contains(pluginName))
+    const auto definitionIt = mDefs.find(pluginName);
+    if (definitionIt != mDefs.end())
     {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not find structuredefinitionFile with name=" << pluginName;
         return nullptr;
     }
-    return mDefs.value(pluginName);
+
+    return definitionIt.value();
 }
 
 }
