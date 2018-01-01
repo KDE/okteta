@@ -101,4 +101,15 @@ StructureDefinitionFile* StructuresManager::definition(const QString& pluginName
     return definitionIt.value();
 }
 
+
+QMap<QString, StructureDefinitionFile*> StructuresManager::structureDefs() const
+{
+    return mDefs;
+}
+
+KSharedConfig::Ptr StructuresManager::config() const
+{
+    return mConfig;
+}
+
 }

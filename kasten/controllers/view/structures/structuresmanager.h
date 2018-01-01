@@ -44,21 +44,11 @@ public:
 
 public Q_SLOTS:
     void reloadPaths();
+
 public:
-    inline const QStringList paths() const
-    {
-        return mDefs.keys();
-    }
+    QMap<QString, StructureDefinitionFile*> structureDefs() const;
 
-    inline const QList<StructureDefinitionFile*> structureDefs() const
-    {
-        return mDefs.values();
-    }
-
-    inline KSharedConfig::Ptr config() const
-    {
-        return mConfig;
-    }
+    KSharedConfig::Ptr config() const;
 
     StructureDefinitionFile* definition(const QString& pluginName) const;
 

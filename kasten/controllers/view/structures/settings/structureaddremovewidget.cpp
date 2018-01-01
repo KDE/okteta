@@ -139,7 +139,7 @@ StructureAddRemoveWidget::~StructureAddRemoveWidget()
 
 void StructureAddRemoveWidget::buildAvailableList()
 {
-    const QList<StructureDefinitionFile*> loadedDefs = mTool->manager()->structureDefs();
+    const auto loadedDefs = mTool->manager()->structureDefs();
     QList<QTreeWidgetItem*> availableItems;
     foreach(StructureDefinitionFile* def,loadedDefs)
     {
@@ -256,7 +256,7 @@ void StructureAddRemoveWidget::updateAvailable()
 
     //remove any structs that references not loaded files
     QStringList plugins;
-    const QList<StructureDefinitionFile*> loadedDefs = mTool->manager()->structureDefs();
+    const auto loadedDefs = mTool->manager()->structureDefs();
     foreach(const StructureDefinitionFile* def, loadedDefs)
     {
         QString pluginName = def->pluginInfo().pluginName();
