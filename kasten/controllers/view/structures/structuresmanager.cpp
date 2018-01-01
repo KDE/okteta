@@ -87,7 +87,7 @@ void StructuresManager::addStructDef(const KPluginInfo& info)
         delete def;
 }
 
-StructureDefinitionFile* StructuresManager::definition(QString& pluginName)
+StructureDefinitionFile* StructuresManager::definition(const QString& pluginName) const
 {
     if (!mDefs.contains(pluginName))
     {

@@ -59,9 +59,12 @@ public:
     {
         return mConfig;
     }
-    StructureDefinitionFile* definition(QString& pluginName);
+
+    StructureDefinitionFile* definition(const QString& pluginName) const;
+
 private:
     void addStructDef(const KPluginInfo& info);
+
 private:
     QMap<QString, StructureDefinitionFile*> mDefs;
     QStringList mLoadedFiles;

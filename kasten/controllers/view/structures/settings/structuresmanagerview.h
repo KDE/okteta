@@ -52,7 +52,9 @@ public:
     explicit StructuresManagerView(Kasten::StructuresTool* manager, QWidget* parent = nullptr);
 
     ~StructuresManagerView() override;
-    QStringList values();
+
+public:
+    QStringList values() const;
 
 protected Q_SLOTS:
     void onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries);

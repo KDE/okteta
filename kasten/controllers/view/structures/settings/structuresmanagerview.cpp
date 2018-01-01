@@ -98,7 +98,7 @@ void StructuresManagerView::onGetNewStructuresClicked(const KNS3::Entry::List& c
     }
 }
 
-QStringList StructuresManagerView::values()
+QStringList StructuresManagerView::values() const
 {
     return mSelectedStructures;
 }
