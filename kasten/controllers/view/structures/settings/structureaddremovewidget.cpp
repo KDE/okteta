@@ -137,6 +137,11 @@ StructureAddRemoveWidget::~StructureAddRemoveWidget()
 {
 }
 
+QStringList StructureAddRemoveWidget::values() const
+{
+    return mValues;
+}
+
 void StructureAddRemoveWidget::buildAvailableList()
 {
     const auto loadedDefs = mTool->manager()->structureDefs();

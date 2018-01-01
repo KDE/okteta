@@ -46,3 +46,17 @@ ScriptHandlerInfo::~ScriptHandlerInfo()
 {
 }
 
+ScriptHandlerInfo::Mode ScriptHandlerInfo::mode() const
+{
+    return mMode;
+}
+
+void ScriptHandlerInfo::setMode(Mode m)
+{
+    mMode = m;
+}
+
+ScriptLogger* ScriptHandlerInfo::logger() const
+{
+    return mLogger;
+}

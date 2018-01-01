@@ -19,6 +19,7 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
+
 #ifndef STRUCTUREDEFINITIONFILE_H_
 #define STRUCTUREDEFINITIONFILE_H_
 
@@ -43,7 +44,7 @@ namespace Kasten
 class StructureDefinitionFile
 {
     Q_DISABLE_COPY(StructureDefinitionFile)
-public:
+  public:
     /**
      * This class uses lazy parsing
      * @param info the information about this structure definition
@@ -52,27 +53,19 @@ public:
     explicit StructureDefinitionFile(const KPluginInfo& info);
     virtual ~StructureDefinitionFile();
 
+  public:
     QVector<TopLevelDataInformation*> structures() const;
     QStringList structureNames() const;
     TopLevelDataInformation* structure(const QString& name) const;
     /** @return the absolute path to the directory containing the .desktop file */
     QString absolutePath() const;
-    const KPluginInfo& pluginInfo() const;
+    KPluginInfo pluginInfo() const;
     bool isValid() const;
-private:
+
+  private:
     KPluginInfo mPluginInfo;
     QScopedPointer<AbstractStructureParser> mParser;
 };
-
-inline const KPluginInfo& StructureDefinitionFile::pluginInfo() const
-{
-    return mPluginInfo;
-}
-
-inline bool StructureDefinitionFile::isValid() const
-{
-    return !mParser.isNull();
-}
 
 } //namespace Kasten
 

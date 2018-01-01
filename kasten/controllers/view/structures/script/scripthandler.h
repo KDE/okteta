@@ -39,10 +39,11 @@ class ScriptHandler
 {
     Q_DISABLE_COPY(ScriptHandler)
 
-public:
+  public:
     ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* topLevel);
     virtual ~ScriptHandler();
 
+  public:
     void validateData(DataInformation* data);
     /** The pointer may be changed while updating, CHECK AS SOON AS FUNCTION RETURNS! */
     void updateDataInformation(DataInformation* data);
@@ -53,20 +54,11 @@ public:
     ScriptHandlerInfo* handlerInfo();
 
     QScriptValue callFunction(QScriptValue func, DataInformation* data, ScriptHandlerInfo::Mode mode);
-private:
+
+  private:
     QScopedPointer<QScriptEngine> mEngine;
     TopLevelDataInformation* mTopLevel;
     ScriptHandlerInfo mHandlerInfo;
 };
-
-inline QScriptEngine* ScriptHandler::engine() const
-{
-    return mEngine.data();
-}
-
-inline ScriptHandlerInfo* ScriptHandler::handlerInfo()
-{
-    return &mHandlerInfo;
-}
 
 #endif /* SCRIPTHANDLER_H_ */

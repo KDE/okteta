@@ -80,12 +80,6 @@ class StructureView : public QWidget
     QWidget* mStructTreeViewFocusChild;
 };
 
-
-inline StructuresTool* StructureView::tool() const
-{
-    return mTool;
-}
-
 }
 
 #endif

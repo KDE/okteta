@@ -61,6 +61,16 @@ StructureDefinitionFile::~StructureDefinitionFile()
 {
 }
 
+KPluginInfo StructureDefinitionFile::pluginInfo() const
+{
+    return mPluginInfo;
+}
+
+bool StructureDefinitionFile::isValid() const
+{
+    return !mParser.isNull();
+}
+
 QVector<TopLevelDataInformation*> StructureDefinitionFile::structures() const
 {
     Q_CHECK_PTR(mParser);

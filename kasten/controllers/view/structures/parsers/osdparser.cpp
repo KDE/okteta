@@ -391,14 +391,14 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
     return DataInformationFactory::newBitfield(bpd);
 }
 
-inline UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
     supd.children.reset(new OsdChildrenParser(info, xmlElem.firstChildElement()));
     return DataInformationFactory::newUnion(supd);
 }
 
-inline StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
     supd.children.reset(new OsdChildrenParser(info, xmlElem.firstChildElement()));

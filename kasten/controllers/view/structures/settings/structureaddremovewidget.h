@@ -74,9 +74,4 @@ class StructureAddRemoveWidget: public QWidget
     QStringList mValues;
 };
 
-inline QStringList StructureAddRemoveWidget::values() const
-{
-    return mValues;
-}
-
 #endif // STRUCTUREADDREMOVEWIDGET_H

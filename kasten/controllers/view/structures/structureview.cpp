@@ -136,6 +136,11 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     connect(mTool, &StructuresTool::cursorIndexChanged, this, &StructureView::onCursorIndexChange);
 }
 
+StructuresTool* StructureView::tool() const
+{
+    return mTool;
+}
+
 void StructureView::onCursorIndexChange()
 {
     QModelIndex idx = mStructTreeView->currentIndex();

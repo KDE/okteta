@@ -45,6 +45,17 @@ ScriptHandler::~ScriptHandler()
 {
 }
 
+
+QScriptEngine* ScriptHandler::engine() const
+{
+    return mEngine.data();
+}
+
+ScriptHandlerInfo* ScriptHandler::handlerInfo()
+{
+    return &mHandlerInfo;
+}
+
 void ScriptHandler::validateData(DataInformation* data)
 {
     Q_CHECK_PTR(data);
