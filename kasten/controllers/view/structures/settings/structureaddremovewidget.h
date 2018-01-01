@@ -33,9 +33,31 @@ namespace Kasten
 {
 class StructuresTool;
 }
+
 class StructureAddRemoveWidget: public QWidget
 {
-Q_OBJECT
+  Q_OBJECT
+
+  public:
+    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten::StructuresTool* tool, QWidget* parent = nullptr);
+    ~StructureAddRemoveWidget() override;
+
+  public:
+    QStringList values() const;
+
+  private Q_SLOTS:
+    void updateAvailable();
+    void moveLeft();
+    void moveRight();
+    void moveUp();
+    void moveDown();
+
+  private:
+    void buildAvailableList();
+    void syncData();
+
+  private:
+    const Kasten::StructuresTool* mTool;
 
     QLabel* mTree1Label;
     QTreeWidget* mTreeAvailable;
@@ -50,20 +72,6 @@ Q_OBJECT
     QPushButton* mDownButton;
 
     QStringList mValues;
-public:
-    explicit StructureAddRemoveWidget(const QStringList& selected, Kasten::StructuresTool* tool, QWidget* parent = nullptr);
-    ~StructureAddRemoveWidget() override;
-    QStringList values() const;
-public Q_SLOTS:
-    void updateAvailable();
-    void moveLeft();
-    void moveRight();
-    void moveUp();
-    void moveDown();
-private:
-    void buildAvailableList();
-    void syncData();
-    const Kasten::StructuresTool* mTool;
 };
 
 inline QStringList StructureAddRemoveWidget::values() const
