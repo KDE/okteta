@@ -50,7 +50,7 @@ StructuresTool::StructuresTool()
     mByteArrayModel(nullptr),
     mCursorIndex(0),
     mByteOrder(StructureViewPreferences::byteOrder()),
-    mManager(new StructuresManager()),
+    mManager(new StructuresManager(this)),
     mWritingData(false),
     mCurrentItemDataChanged(false)
 {

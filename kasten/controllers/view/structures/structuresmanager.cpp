@@ -38,7 +38,8 @@ StructuresManager::~StructuresManager()
     qDeleteAll(mDefs);
 }
 
-StructuresManager::StructuresManager()
+StructuresManager::StructuresManager(QObject* parent)
+  : QObject(parent)
 {
     mConfig = KSharedConfig::openConfig(QStringLiteral("oktetastructuresrc"),
             KSharedConfig::FullConfig, QStandardPaths::ConfigLocation);

@@ -39,7 +39,7 @@ class StructuresManager: public QObject
 {
 Q_OBJECT
 public:
-    explicit StructuresManager();
+    explicit StructuresManager(QObject* parent = nullptr);
     ~StructuresManager() override;
 
 public Q_SLOTS:
