@@ -92,9 +92,9 @@ public:
 };
 
 #define CAST_FUNCS_2(typename, name) inline typename* DataInformationBase::as##name() {\
-        return is##name() ? reinterpret_cast<typename*>(this) : 0; }\
+        return is##name() ? reinterpret_cast<typename*>(this) : nullptr; }\
     inline const typename* DataInformationBase::as##name() const {\
-        return is##name() ? reinterpret_cast<const typename*>(this) : 0; }
+        return is##name() ? reinterpret_cast<const typename*>(this) : nullptr; }
 
 #define CAST_FUNCS(type) CAST_FUNCS_2(type##DataInformation, type)
 //we have to use reinterpret_cast<> since it does not seem to be possible to declare inheritance
