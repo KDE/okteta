@@ -292,7 +292,7 @@ void PieceTableByteArrayModelPrivate::doChanges( const QList<ByteArrayChange>& c
 
     beginChanges();
 
-    foreach( const ByteArrayChange& change, changes )
+    for( const ByteArrayChange& change : changes )
     {
         const ArrayChangeMetrics& metrics = change.metrics();
         switch( metrics.type() )

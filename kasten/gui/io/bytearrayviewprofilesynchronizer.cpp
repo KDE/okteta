@@ -149,7 +149,7 @@ ByteArrayViewProfileSynchronizer::onViewProfilesChanged( const QList<ByteArrayVi
     if( ! mView )
         return;
 
-    foreach( const ByteArrayViewProfile& viewProfile, viewProfiles )
+    for( const ByteArrayViewProfile& viewProfile : viewProfiles )
     {
         if( viewProfile.id() == mViewProfileId )
         {
@@ -280,7 +280,7 @@ void ByteArrayViewProfileSynchronizer::onViewProfilesRemoved( const QList<ByteAr
     if( ! mView )
         return;
 
-    foreach( const ByteArrayViewProfile::Id& viewProfileId, viewProfileIds )
+    for( const ByteArrayViewProfile::Id& viewProfileId : viewProfileIds )
     {
         if( viewProfileId == mViewProfileId )
         {

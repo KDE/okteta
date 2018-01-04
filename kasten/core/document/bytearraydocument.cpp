@@ -118,7 +118,7 @@ void ByteArrayDocument::setOwner( const Person& owner )
 
 void ByteArrayDocument::addUsers( const QList<Person>& users )
 {
-    foreach( const Person& user, users )
+    for( const Person& user : users )
         mUserList.append( user );
 
     emit usersAdded( users );
@@ -126,7 +126,7 @@ void ByteArrayDocument::addUsers( const QList<Person>& users )
 
 void ByteArrayDocument::removeUsers( const QList<Person>& users )
 {
-    foreach( const Person& user, users )
+    for( const Person& user : users )
         mUserList.removeOne( user );
 
     emit usersRemoved( users );

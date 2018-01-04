@@ -81,7 +81,7 @@ void AddressRangeList::addAddressRange( const AddressRange& newAddressRange )
 void AddressRangeList::addAddressRangeList( const AddressRangeList& addressRangeList )
 {
     // TODO: optimize with two parallel iterators
-    foreach( const AddressRange& addressRange, addressRangeList )
+    for( const AddressRange& addressRange : addressRangeList )
         addAddressRange( addressRange );
 }
 

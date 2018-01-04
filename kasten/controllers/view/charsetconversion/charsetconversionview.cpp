@@ -213,7 +213,7 @@ void CharsetConversionView::onConversionDone( bool success, int convertedBytesCo
         if( mTool->isSubstitutingMissingChars() )
         {
             int totalFailedByteCount = 0;
-            foreach( int failedByteCount, failedPerByteCount )
+            for( int failedByteCount : failedPerByteCount )
                 totalFailedByteCount += failedByteCount;
             //TODO: show table with failed bytes and their number.
             conversionReport += QLatin1String( "<br />" );

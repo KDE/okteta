@@ -113,7 +113,7 @@ AddressRangeList GroupPieceTableChange::applyGroup( PieceTable* pieceTable ) con
 {
     AddressRangeList result;
 
-    foreach( AbstractPieceTableChange* change, mChangeStack )
+    for( const AbstractPieceTableChange* change : mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {
@@ -154,7 +154,7 @@ ArrayChangeMetricsList GroupPieceTableChange::groupMetrics( bool reverted ) cons
 {
     ArrayChangeMetricsList result;
 
-    foreach( AbstractPieceTableChange* change, mChangeStack )
+    for( const AbstractPieceTableChange* change : mChangeStack )
     {
         if( change->type() == AbstractPieceTableChange::GroupId )
         {

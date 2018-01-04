@@ -59,7 +59,7 @@ void ToolListMenuController::updateActions()
 
     const QList<ToolViewDockWidget*> dockWidgets = mWidgetsDockable->dockWidgets();
 
-    foreach( const ToolViewDockWidget* dockWidget, dockWidgets )
+    for( const ToolViewDockWidget* dockWidget : dockWidgets )
     {
         QAction *action = dockWidget->toggleViewAction();
         action->setText( dockWidget->windowTitle() );

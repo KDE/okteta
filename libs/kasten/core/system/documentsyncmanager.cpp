@@ -91,7 +91,8 @@ void DocumentSyncManager::setDocumentSynchronizerFactory( AbstractModelSynchroni
 
 void DocumentSyncManager::load( const QUrl& url )
 {
-    foreach( AbstractDocument* document, mManager->documents() )
+    const auto loadedDocuments = mManager->documents();
+    for( AbstractDocument* document : loadedDocuments )
     {
         if( url == urlOf(document) )
         {

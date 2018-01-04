@@ -103,7 +103,7 @@ void InsertController::updateActions()
 
     if( hasGenerators )
     {
-        foreach( AbstractModelDataGenerator* generator, generatorList )
+        for( AbstractModelDataGenerator* generator : generatorList )
         {
             const QString title = generator->typeName();
             QAction* action = new QAction( title, mInsertSelectAction );

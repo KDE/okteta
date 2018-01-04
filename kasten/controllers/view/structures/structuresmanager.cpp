@@ -54,23 +54,23 @@ void StructuresManager::reloadPaths()
     QStringList paths;
     const QStringList structuresDirs = QStandardPaths::locateAll( QStandardPaths::GenericDataLocation,
             QStringLiteral("okteta/structures"), QStandardPaths::LocateDirectory );
-    foreach( const QString& structuresDir, structuresDirs )
+    for( const QString& structuresDir : structuresDirs )
     {
         const QStringList entries = QDir( structuresDir ).entryList( QDir::Dirs );
-        foreach( const QString& e, entries )
+        for( const QString& e : entries )
         {
             const QString structureBasePath = structuresDir + QLatin1Char('/') + e;
             const QStringList desktopFiles =
                 QDir(structureBasePath).entryList( QStringList(QStringLiteral("*.desktop")) );
-            foreach(const QString& desktopFile, desktopFiles)
+            for(const QString& desktopFile : desktopFiles )
             {
                 paths << structureBasePath + QLatin1Char('/') + desktopFile;
             }
         }
     }
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "found structures: " << paths;
-    KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));
-    foreach(const KPluginInfo& info, plugins)
+    const KPluginInfo::List plugins = KPluginInfo::fromFiles(paths, mConfig->group("Plugins"));
+    for( const KPluginInfo& info : plugins )
     {
         addStructDef(info);
     }

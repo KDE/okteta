@@ -145,7 +145,7 @@ int OktetaProgram::execute()
         if( ! urls.isEmpty() )
         {
             const QString currentPath = QDir::currentPath();
-            foreach (const QString &url, urls) {
+            for (const QString &url : urls) {
                 mDocumentStrategy->load( QUrl::fromUserInput(url, currentPath, QUrl::AssumeLocalFile) );
             }
         }

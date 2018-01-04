@@ -107,7 +107,7 @@ void TabbedViewsPrivate::addViews( const QList<AbstractView*>& views )
         return;
 
     int insertIndex = mTabWidget->currentIndex() + 1;
-    foreach( AbstractView* view, views )
+    for( AbstractView* view : views )
     {
         QObject::connect( view, &AbstractModel::titleChanged,
                           q, [&]( const QString& title ) { onTitleChanged( title ); } );
@@ -134,7 +134,7 @@ void TabbedViewsPrivate::removeViews( const QList<AbstractView*>& views )
     int index = -1;
 
     // TODO: check if contained
-    foreach( AbstractView* view, views )
+    for( AbstractView* view : views )
     {
         view->disconnect( q );
 

@@ -241,7 +241,7 @@ void StringsExtractView::onCopyButtonClicked()
     const QList<ContainedString> *containedStringList = mTool->containedStringList();
 
     QString strings;
-    foreach( const QModelIndex &index, selectedRows )
+    for( const QModelIndex& index : selectedRows )
     {
         const int i = mSortFilterProxyModel->mapToSource(index).row();
         strings += containedStringList->at( i ).string();

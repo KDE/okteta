@@ -99,7 +99,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
 
     //already loaded defs:
     QRegExp regex(QStringLiteral("'(.+)':'(.+)'"));
-    foreach(const QString& s, selected)
+    for(const QString& s : selected)
     {
         int pos = regex.indexIn(s);
         if (pos > -1)
@@ -146,7 +146,7 @@ void StructureAddRemoveWidget::buildAvailableList()
 {
     const auto loadedDefs = mTool->manager()->structureDefs();
     QList<QTreeWidgetItem*> availableItems;
-    foreach(StructureDefinitionFile* def,loadedDefs)
+    for( StructureDefinitionFile* def : loadedDefs )
     {
         if (!def->isValid())
             continue;
@@ -169,9 +169,9 @@ void StructureAddRemoveWidget::buildAvailableList()
 
 void StructureAddRemoveWidget::moveLeft()
 {
-    QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
+    const QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
     bool changed = false;
-    foreach(QTreeWidgetItem* item,selected)
+    for(QTreeWidgetItem* item : selected)
         {
             delete mTreeSelected->takeTopLevelItem(
                     mTreeSelected->indexOfTopLevelItem(item));
@@ -183,9 +183,9 @@ void StructureAddRemoveWidget::moveLeft()
 
 void StructureAddRemoveWidget::moveRight()
 {
-    QList<QTreeWidgetItem*> selected = mTreeAvailable->selectedItems();
+    const QList<QTreeWidgetItem*> selected = mTreeAvailable->selectedItems();
     bool changed = false;
-    foreach(const QTreeWidgetItem* item,selected)
+    for( const QTreeWidgetItem* item : selected )
         {
             if (!item->parent())
                 continue; //maybe sometime add all subitems
@@ -202,10 +202,10 @@ void StructureAddRemoveWidget::moveRight()
 
 void StructureAddRemoveWidget::moveUp()
 {
-    QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
+    const QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
     bool changed = false;
     int firstIndex = -1;
-    foreach(QTreeWidgetItem* item,selected)
+    for(QTreeWidgetItem* item : selected)
         {
             int idx = mTreeSelected->indexOfTopLevelItem(item);
             int newIdx = qMax(0, idx - 1);
@@ -222,11 +222,11 @@ void StructureAddRemoveWidget::moveUp()
 
 void StructureAddRemoveWidget::moveDown()
 {
-    QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
+    const QList<QTreeWidgetItem*> selected = mTreeSelected->selectedItems();
     bool changed = false;
     int firstIndex = -1;
     int maxItmCount = mTreeSelected->topLevelItemCount();
-    foreach(QTreeWidgetItem* item,selected)
+    for( QTreeWidgetItem* item : selected )
         {
             int idx = mTreeSelected->indexOfTopLevelItem(item);
             int newIdx = qMin(idx + 1, maxItmCount - 1);
@@ -262,7 +262,7 @@ void StructureAddRemoveWidget::updateAvailable()
     //remove any structs that references not loaded files
     QStringList plugins;
     const auto loadedDefs = mTool->manager()->structureDefs();
-    foreach(const StructureDefinitionFile* def, loadedDefs)
+    for( const StructureDefinitionFile* def : loadedDefs )
     {
         QString pluginName = def->pluginInfo().pluginName();
         if (def->pluginInfo().isValid() && !def->pluginInfo().isPluginEnabled())

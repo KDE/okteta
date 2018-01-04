@@ -163,7 +163,7 @@ Q_UNUSED( document )
 
 void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
 {
-    foreach( AbstractDocument* document, documents )
+    for( AbstractDocument* document : documents )
     {
         connect( document, &AbstractDocument::synchronizerChanged,
                  this, &DocumentListModel::onSynchronizerChanged );

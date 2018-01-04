@@ -54,7 +54,7 @@ TaggedUnionDataInformation::TaggedUnionDataInformation(const TaggedUnionDataInfo
     : DataInformationWithChildren(d), mDefaultFields(cloneList(d.mDefaultFields, this)), mLastIndex(-1)
 {
     Q_ASSERT(mDefaultFields.isEmpty() || mDefaultFields.at(0) != nullptr);
-    Q_FOREACH(const FieldInfo& fi, d.mAlternatives)
+    for( const FieldInfo& fi : d.mAlternatives )
     {
         mAlternatives.append(FieldInfo(fi.name, fi.selectIf, cloneList(fi.fields, this)));
     }

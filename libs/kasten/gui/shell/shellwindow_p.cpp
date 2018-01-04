@@ -85,7 +85,7 @@ void ShellWindowPrivate::showDocument( AbstractDocument* document )
     const QList<AbstractView*> viewList = currentGroupedViews->viewList();
 
     AbstractView* viewOfDocument = nullptr;
-    foreach( AbstractView* view, viewList )
+    for( AbstractView* view : viewList )
     {
         if( view->findBaseModel<AbstractDocument*>() == document )
         {

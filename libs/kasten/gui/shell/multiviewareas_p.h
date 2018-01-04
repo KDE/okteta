@@ -103,7 +103,7 @@ inline QList<AbstractView*> MultiViewAreasPrivate::viewList() const
 {
     QList<AbstractView*> result;
 
-    foreach( TabbedViews* viewArea, mViewAreaList )
+    for( const TabbedViews* viewArea : mViewAreaList )
         result.append( viewArea->viewList() );
 
     return result;
@@ -113,7 +113,7 @@ inline int MultiViewAreasPrivate::viewCount() const
 {
     int result = 0;
 
-    foreach( TabbedViews* viewArea, mViewAreaList )
+    for( const TabbedViews* viewArea : mViewAreaList )
         result += viewArea->viewCount();
 
     return result;
@@ -124,7 +124,7 @@ inline int MultiViewAreasPrivate::indexOf( AbstractView* view ) const
     int result = -1;
 
     int globalBaseIndex = 0;
-    foreach( TabbedViews* viewArea, mViewAreaList )
+    for( const TabbedViews* viewArea : mViewAreaList )
     {
         const int localIndexOf = viewArea->indexOf( view );
         if( localIndexOf != -1 )

@@ -39,7 +39,7 @@ void CharCodecTest::testCreateCodec_data()
 {
     QTest::addColumn<QString>("codecName");
 
-    foreach( const QString& codecName, CharCodec::codecNames() )
+    for( const QString& codecName : CharCodec::codecNames() )
         QTest::newRow(codecName.toLatin1().constData()) << codecName;
 }
 
@@ -60,7 +60,7 @@ void CharCodecTest::testEncodeDecode_data()
     QTest::addColumn<QString>("codecName");
     QTest::addColumn<int>("byteValue");
 
-    foreach( const QString& codecName, CharCodec::codecNames() )
+    for( const QString& codecName : CharCodec::codecNames() )
         for( int i = 0; i < 256; ++i )
         {
             const QString rowTitle = codecName + QStringLiteral(" - %1").arg(i);

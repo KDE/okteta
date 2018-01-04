@@ -74,7 +74,7 @@ void LoaderController::load()
     {
         const QList<QUrl> urls = dialog.selectedUrls();
 
-        foreach( const QUrl& url, urls )
+        for( const QUrl& url : urls )
             mDocumentStrategy->load( url );
     }
 }

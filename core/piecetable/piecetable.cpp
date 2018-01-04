@@ -50,7 +50,7 @@ bool PieceTable::getStorageData( int* storageId, Address* storageOffset, Address
 
     // TODO: use width or offset from current and next?
     AddressRange dataRange( 0, -1 );
-    foreach( const Piece& piece, mList )
+    for( const Piece& piece : mList )
     {
         dataRange.setEndByWidth( piece.width() );
 

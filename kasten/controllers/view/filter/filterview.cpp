@@ -119,7 +119,7 @@ void FilterView::addFilters()
 {
     // 
     const QList<AbstractByteArrayFilter*> filterList = mTool->filterList();
-    foreach( AbstractByteArrayFilter* filter, filterList )
+    for( AbstractByteArrayFilter* filter : filterList )
     {
         mOperationComboBox->addItem( filter->name() );
 

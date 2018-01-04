@@ -69,7 +69,7 @@ AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEdito
 {
     AbstractModelStreamEncoderConfigEditor* result = nullptr;
 
-    foreach( const AbstractModelStreamEncoderConfigEditorFactory* factory, mEncoderFactoryList )
+    for( const AbstractModelStreamEncoderConfigEditorFactory* factory : mEncoderFactoryList )
     {
         result = factory->tryCreateConfigEditor( encoder );
         if( result )
@@ -83,7 +83,7 @@ AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor( Ab
 {
     AbstractModelExporterConfigEditor* result = nullptr;
 
-    foreach( const AbstractModelExporterConfigEditorFactory* factory, mExporterFactoryList )
+    for( const AbstractModelExporterConfigEditorFactory* factory : mExporterFactoryList )
     {
         result = factory->tryCreateConfigEditor( exporter );
         if( result )
@@ -97,7 +97,7 @@ AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEdito
 {
     AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
-    foreach( const AbstractModelDataGeneratorConfigEditorFactory* factory, mGeneratorFactoryList )
+    for( const AbstractModelDataGeneratorConfigEditorFactory* factory : mGeneratorFactoryList )
     {
         result = factory->tryCreateConfigEditor( generator );
         if( result )

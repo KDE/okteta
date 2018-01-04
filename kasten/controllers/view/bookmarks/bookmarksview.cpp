@@ -174,7 +174,7 @@ void BookmarksView::onDeleteBookmarkButtonClicked()
     const QModelIndexList selectedRows = mBookmarkListView->selectionModel()->selectedRows();
 
     QList<Okteta::Bookmark> bookmarksToBeDeleted;
-    foreach( const QModelIndex& index, selectedRows )
+    for( const QModelIndex& index : selectedRows )
     {
         const Okteta::Bookmark& bookmark = mBookmarkListModel->bookmark( index );
         bookmarksToBeDeleted.append( bookmark );

@@ -128,7 +128,7 @@ ByteArrayViewProfileManager::ByteArrayViewProfileManager()
     const QStringList dataFolderPaths =
             QStandardPaths::standardLocations( QStandardPaths::GenericDataLocation );
 
-    foreach( const QString& dataFolderPath, dataFolderPaths )
+    for( const QString& dataFolderPath : dataFolderPaths )
     {
         const QString viewProfileFolderPath = dataFolderPath + viewProfileDirSubPath;
         // watch folder for changes
@@ -173,7 +173,7 @@ ByteArrayViewProfileManager::viewProfile( const ByteArrayViewProfile::Id& viewPr
 {
     ByteArrayViewProfile result;
 
-    foreach( const ByteArrayViewProfile& viewProfile, mViewProfiles )
+    for( const ByteArrayViewProfile& viewProfile : mViewProfiles )
     {
         if( viewProfile.id() == viewProfileId )
         {
@@ -203,7 +203,7 @@ ByteArrayViewProfileManager::isViewProfileLocked( const ByteArrayViewProfile::Id
     bool result = false;
 
     // search in all folders for the info
-    foreach( const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup, mViewProfileFileInfoLookupPerFolder )
+    for( const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup : mViewProfileFileInfoLookupPerFolder )
     {
         ByteArrayViewProfileFileInfoLookup::ConstIterator it =
             viewProfileFileInfoLookup.find( viewProfileId );
@@ -254,7 +254,7 @@ void ByteArrayViewProfileManager::saveViewProfiles( QList<ByteArrayViewProfile>&
 void
 ByteArrayViewProfileManager::removeViewProfiles( const QList<ByteArrayViewProfile::Id>& viewProfileIds )
 {
-    foreach( const ByteArrayViewProfile::Id& viewProfileId, viewProfileIds )
+    for( const ByteArrayViewProfile::Id& viewProfileId : viewProfileIds )
     {
         removeViewProfile( viewProfileId );
     }
@@ -442,7 +442,7 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged( const QString& viewPro
     const QFileInfoList viewProfileFileInfoList =
         QDir( viewProfileFolderPath ).entryInfoList( viewProfileFileNameFilter(), QDir::Files );
 
-    foreach( const QFileInfo& viewProfileFileInfo, viewProfileFileInfoList )
+    for( const QFileInfo& viewProfileFileInfo : viewProfileFileInfoList )
     {
        // a lock file ?
        if( viewProfileFileInfo.suffix() == QLatin1String("olock") )

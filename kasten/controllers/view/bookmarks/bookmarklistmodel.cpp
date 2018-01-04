@@ -196,7 +196,7 @@ void BookmarkListModel::onBookmarksChanged()
 
 void BookmarkListModel::onBookmarksChanged( const QList<int>& bookmarkIndizes )
 {
-    foreach( int row, bookmarkIndizes )
+    for( int row : bookmarkIndizes )
         emit dataChanged( index(row,OffsetColumnId), index(row,TitleColumnId) );
 }
 

@@ -63,7 +63,7 @@ void BookmarkList::addBookmark( const Bookmark &bookmark )
 
 void BookmarkList::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
-    foreach( const Bookmark &bookmark, bookmarks )
+    for( const Bookmark& bookmark : bookmarks )
         addBookmark( bookmark );
 }
 
@@ -85,7 +85,7 @@ void BookmarkList::removeBookmark( const Bookmark &bookmark )
 
 void BookmarkList::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
 {
-    foreach( const Bookmark &bookmark, bookmarks )
+    for( const Bookmark& bookmark : bookmarks )
         removeBookmark( bookmark );
 }
 
@@ -168,7 +168,7 @@ QList<Okteta::Bookmark> BookmarkList::list() const
 {
     QList<Okteta::Bookmark> result;
 
-    foreach( const Bookmark &bookmark, *this )
+    for( const Bookmark& bookmark : *this )
         result.append( bookmark );
 
     return result;

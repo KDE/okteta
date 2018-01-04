@@ -128,7 +128,7 @@ void ChecksumView::addAlgorithms()
 {
     // 
     const QList<AbstractByteArrayChecksumAlgorithm*> algorithmList = mTool->algorithmList();
-    foreach( AbstractByteArrayChecksumAlgorithm* algorithm, algorithmList )
+    for( AbstractByteArrayChecksumAlgorithm* algorithm : algorithmList )
     {
         mAlgorithmComboBox->addItem( algorithm->name() );
 

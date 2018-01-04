@@ -311,7 +311,7 @@ void ByteArrayTableRanges::setFirstWordSelection( const AddressRange& range )
 
 void ByteArrayTableRanges::adaptToChanges( const ArrayChangeMetricsList& changeList, Size oldLength )
 {
-    foreach( const ArrayChangeMetrics& change, changeList )
+    for( const ArrayChangeMetrics& change : changeList )
     {
         //TODO: change parameters to ArrayChangeMetrics
         switch( change.type() )

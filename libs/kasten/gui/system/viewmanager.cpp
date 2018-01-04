@@ -90,7 +90,7 @@ void ViewManager::createViewsFor( const QList<Kasten::AbstractDocument*>& docume
 {
     QList<Kasten::AbstractView*> openedViews;
 
-    foreach( AbstractDocument* document, documents )
+    for( AbstractDocument* document : documents )
     {
         AbstractView* view = mFactory->createViewFor( document );
         if( ! view )
@@ -110,7 +110,7 @@ void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& docume
     QList<Kasten::AbstractView*> closedViews;
 
     QMutableListIterator<AbstractView*> it( mViewList );
-    foreach( AbstractDocument* document, documents )
+    for( AbstractDocument* document : documents )
     {
         while( it.hasNext() )
         {
@@ -136,12 +136,12 @@ void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& docume
 
 void ViewManager::removeViews( const QList<AbstractView*>& views )
 {
-    foreach( AbstractView* view, views )
+    for( AbstractView* view : views )
         mViewList.removeOne( view );
 
     emit closing( views );
 
-    foreach( AbstractView* view, views )
+    for( AbstractView* view : views )
     {
 //         qCDebug(LOG_KASTEN_GUI)<<view->title();
         delete view;

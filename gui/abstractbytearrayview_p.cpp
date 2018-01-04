@@ -1172,7 +1172,7 @@ void AbstractByteArrayViewPrivate::dropEvent( QDropEvent* dropEvent )
 
 void AbstractByteArrayViewPrivate::onBookmarksChange( const QList<Bookmark>& bookmarks )
 {
-    foreach( const Bookmark& bookmark, bookmarks )
+    for( const Bookmark& bookmark : bookmarks )
     {
         const Address position = bookmark.offset();
         mTableRanges->addChangedRange( position, position );

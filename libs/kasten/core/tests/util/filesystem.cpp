@@ -54,7 +54,8 @@ QString TestFileSystem::createFilePath( const QString& fileName, const QString& 
 void TestFileSystem::_removeDir( const QString& path )
 {
     QDir localDir( path );
-    foreach( const QString& fileName, localDir.entryList(QDir::Files) )
+    const auto filesInDir = localDir.entryList(QDir::Files);
+    for( const QString& fileName : filesInDir )
     {
         if( !localDir.remove(fileName) )
             qWarning("%s: removing failed", qPrintable( fileName ));

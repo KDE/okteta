@@ -76,7 +76,7 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
 
 void StructuresManagerView::onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries)
 {
-    foreach (const KNS3::Entry& e, changedEntries)
+    for( const KNS3::Entry& e : changedEntries )
         {
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Changed Entry: " << e.name();
             if (e.status() == KNS3::Entry::Installed)
@@ -143,7 +143,8 @@ void StructuresManagerView::onPluginSelectorChange(bool change)
 
 void StructuresManagerView::reloadSelectedItems() {
     QStringList newVals;
-    foreach(const Kasten::StructureDefinitionFile* def, mTool->manager()->structureDefs())
+    const auto structureDefs = mTool->manager()->structureDefs();
+    for( const Kasten::StructureDefinitionFile* def : structureDefs )
     {
         KPluginInfo info = def->pluginInfo();
         if (info.isPluginEnabled())
@@ -166,7 +167,8 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     QStringList newVals;
     KPluginInfo::List plugins;
     KPluginInfo::List dynamicPlugins;
-    foreach(const Kasten::StructureDefinitionFile* def, mTool->manager()->structureDefs())
+    const auto structureDefs = mTool->manager()->structureDefs();
+    for( const Kasten::StructureDefinitionFile* def : structureDefs )
         {
             KPluginInfo info = def->pluginInfo();
             if (info.category() == QLatin1String("structure"))

@@ -135,7 +135,7 @@ void ViewProfileController::onViewProfileChanged( const Kasten::ByteArrayViewPro
 {
     const QList<QAction*> actions = mViewProfilesActionGroup->actions();
 
-    foreach( QAction* action, actions )
+    for( QAction* action : actions )
     {
         if( action->data().toString() == viewProfileId )
         {
@@ -158,7 +158,7 @@ void ViewProfileController::onViewProfilesChanged()
         mViewProfileActionMenu->addSeparator();
 
     bool isCurrentViewProfileExisting = false;
-    foreach( const ByteArrayViewProfile& viewProfile, viewProfiles )
+    for( const ByteArrayViewProfile& viewProfile : viewProfiles )
     {
         const QString title = viewProfile.viewProfileTitle();
         QAction* action = new QAction( title, mViewProfilesActionGroup );

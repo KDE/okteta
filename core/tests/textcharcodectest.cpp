@@ -37,7 +37,7 @@ void TextCharCodecTest::testCreateCodec_data()
 {
     QTest::addColumn<QString>("codecName");
 
-    foreach( const QString& codecName, TextCharCodec::codecNames() )
+    for( const QString& codecName : TextCharCodec::codecNames() )
         QTest::newRow(codecName.toLatin1().constData()) << codecName;
 }
 

@@ -95,7 +95,7 @@ CreatorController::CreatorController( ModelCodecManager* modelCodecManager,
 
         // TODO: ask factory which mimetypes it can read
         // AbstractDocumentFactory->canCreateFromData( QMimeData() ) needs already data
-        foreach( AbstractModelDataGenerator* generator, generatorList )
+        for( AbstractModelDataGenerator* generator : generatorList )
         {
             const QString title = generator->typeName();
             const QString iconName = QStringLiteral( "document-new" );//generator->iconName();

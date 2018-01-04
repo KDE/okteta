@@ -346,7 +346,7 @@ bool ByteArrayTableCursor::atLineEnd()   const { return mLayout->atLastLinePosit
 // TODO: oldLength is a hack, as DataLayout is already updated and used by e.g. gotoCIndex
 void ByteArrayTableCursor::adaptToChanges( const ArrayChangeMetricsList& changeList, Size oldLength )
 {
-    foreach( const ArrayChangeMetrics& change, changeList )
+    for( const ArrayChangeMetrics& change : changeList )
     {
         // cursor affected?
         if( mIndex >= change.offset() )

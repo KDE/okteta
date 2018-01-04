@@ -249,7 +249,7 @@ void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
     const QList<AbstractDocument*> documents = documentManager->documents();
 
     QStringList urls;
-    foreach( AbstractDocument* document, documents )
+    for( AbstractDocument* document : documents )
         urls.append( syncManager->urlOf(document).url() );
 
     configGroup.writePathEntry( LoadedUrlsKey, urls );
@@ -262,7 +262,7 @@ void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
     DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
     DocumentCreateManager* const createManager = documentManager->createManager();
-    foreach( const QString& url, urls )
+    for( const QString& url : urls )
     {
         if( url.isEmpty() )
             createManager->createNew();
@@ -288,7 +288,7 @@ void OktetaMainWindow::onDataDropped( const QMimeData* mimeData )
     {
         DocumentSyncManager* const syncManager = documentManager->syncManager();
 
-        foreach( const QUrl& url, urls )
+        for( const QUrl& url : urls )
             syncManager->load( url );
     }
     else
@@ -299,7 +299,7 @@ void OktetaMainWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views
 {
     // group views per document
     QHash<AbstractDocument*,QList<AbstractView*> > viewsToClosePerDocument;
-    foreach( AbstractView* view, views )
+    for( AbstractView* view : views )
     {
         AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
         viewsToClosePerDocument[document].append( view );
@@ -307,7 +307,7 @@ void OktetaMainWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views
 
     // find documents which lose all views
     const QList<AbstractView*> allViews = viewManager()->views();
-    foreach( AbstractView* view, allViews )
+    for( AbstractView* view : allViews )
     {
         AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
         QHash<AbstractDocument*,QList<AbstractView*> >::Iterator it =
