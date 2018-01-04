@@ -37,7 +37,7 @@
 
 namespace Kasten
 {
-QStringList viewProfileFileNameFilter() { return QStringList() << QStringLiteral( "*.obavp" ) << QStringLiteral( "*.olock" ); }
+QStringList viewProfileFileNameFilter() { return QStringList { QStringLiteral( "*.obavp" ), QStringLiteral( "*.olock" ) }; }
 static const QLatin1String viewProfileFileSuffix = QLatin1String( ".obavp" );
 static const QLatin1String viewProfileDirSubPath = QLatin1String( "/okteta/viewprofiles" );
 static const QLatin1String defaultViewProfileFileSubPath = QLatin1String( "/okteta/defaultviewprofile" );

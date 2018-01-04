@@ -50,13 +50,14 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
                "Encoding:" );
 
     mEncodingSelect = new KComboBox( this );
-    QStringList list;
-    list.append( i18nc("@item:inmenu Doing the base32 using the classical encoding",
-                       "Classic") );
-    list.append( i18nc("@item:inmenu Doing the base32 using the Base32hex encoding",
-                       "Base32hex") );
-    list.append( i18nc("@item:inmenu Doing the base32 using the z-base-32 encoding",
-                       "z-base-32") );
+    const QStringList list {
+        i18nc("@item:inmenu Doing the base32 using the classical encoding",
+              "Classic"),
+        i18nc("@item:inmenu Doing the base32 using the Base32hex encoding",
+              "Base32hex"),
+        i18nc("@item:inmenu Doing the base32 using the z-base-32 encoding",
+              "z-base-32"),
+    };
     mEncodingSelect->addItems( list );
     mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
     connect( mEncodingSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged );

@@ -50,13 +50,14 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( 
                "Address size:" );
 
     mAddressSizeSelect = new KComboBox( this );
-    QStringList list;
-    list.append( i18nc("@item:inmenu address size",
-                       "32-bit") );
-    list.append( i18nc("@item:inmenu address size",
-                       "24-bit") );
-    list.append( i18nc("@item:inmenu address size",
-                       "16-bit") );
+    const QStringList list {
+        i18nc("@item:inmenu address size",
+              "32-bit"),
+        i18nc("@item:inmenu address size",
+              "24-bit"),
+        i18nc("@item:inmenu address size",
+              "16-bit"),
+    };
     mAddressSizeSelect->addItems( list );
     mAddressSizeSelect->setCurrentIndex( mSettings.addressSizeId );
     connect( mAddressSizeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged );

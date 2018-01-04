@@ -47,27 +47,29 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     // Offset coding
     mOffsetCodingAction = actionCollection->add<KSelectAction>( QStringLiteral("view_offsetcoding") );
     mOffsetCodingAction->setText( i18nc("@title:menu","&Offset Coding") );
-    QStringList list;
-    list.append( i18nc("@item:inmenu offset in the hexadecimal format",
-                       "&Hexadecimal") );
-    list.append( i18nc("@item:inmenu offset in the decimal format",
-                       "&Decimal") );
-    mOffsetCodingAction->setItems( list );
+    const QStringList offsetCodingList {
+        i18nc("@item:inmenu offset in the hexadecimal format",
+              "&Hexadecimal"),
+        i18nc("@item:inmenu offset in the decimal format",
+              "&Decimal"),
+    };
+    mOffsetCodingAction->setItems( offsetCodingList );
     connect( mOffsetCodingAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setOffsetCoding );
 
     // value valueCoding
     mCodingAction = actionCollection->add<KSelectAction>( QStringLiteral("view_valuecoding") );
     mCodingAction->setText( i18nc("@title:menu","&Value Coding") );
-    list.clear();
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format",
-                       "&Hexadecimal") );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",
-                       "&Decimal") );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",
-                       "&Octal") );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",
-                       "&Binary") );
-    mCodingAction->setItems( list );
+    const QStringList codingList {
+        i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format",
+                       "&Hexadecimal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the decimal format",
+                       "&Decimal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the octal format",
+                       "&Octal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the binary format",
+                       "&Binary"),
+    };
+    mCodingAction->setItems( codingList );
     connect( mCodingAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setValueCoding );
 
     // char valueCoding
@@ -93,14 +95,15 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     // resize style
     mResizeStyleAction = actionCollection->add<KSelectAction>( QStringLiteral("resizestyle") );
     mResizeStyleAction->setText( i18nc("@title:menu","&Dynamic Layout") );
-    list.clear();
-    list.append( i18nc("@item:inmenu  The layout will not change on size changes.",
-                       "&Off") );
-    list.append( i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
-                       "&Wrap Only Complete Byte Groups") );
-    list.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
-                       "&On") );
-    mResizeStyleAction->setItems( list );
+    const QStringList resizeStyleList {
+        i18nc("@item:inmenu  The layout will not change on size changes.",
+              "&Off"),
+        i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
+              "&Wrap Only Complete Byte Groups"),
+        i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
+              "&On"),
+    };
+    mResizeStyleAction->setItems( resizeStyleList );
     connect( mResizeStyleAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setLayoutStyle );
 
     mShowOffsetColumnAction = actionCollection->add<KToggleAction>( QStringLiteral("view_lineoffset") );
@@ -111,11 +114,12 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
     // show buffer columns
     mToggleColumnsAction = actionCollection->add<KSelectAction>( QStringLiteral("togglecolumns") );
     mToggleColumnsAction->setText( i18nc("@title:menu","&Show Values or Chars") );
-    list.clear();
-    list.append( i18nc("@item:inmenu","&Values") );
-    list.append( i18nc("@item:inmenu","&Chars") );
-    list.append( i18nc("@item:inmenu","Values && Chars") );
-    mToggleColumnsAction->setItems( list );
+    const QStringList toggleColumnsList {
+        i18nc("@item:inmenu","&Values"),
+        i18nc("@item:inmenu","&Chars"),
+        i18nc("@item:inmenu","Values && Chars"),
+    };
+    mToggleColumnsAction->setItems( toggleColumnsList );
     connect( mToggleColumnsAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::toggleValueCharColumns );
 
     setTargetModel( nullptr );

@@ -120,7 +120,7 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
 
         exportFileDialog.setAcceptMode( QFileDialog::AcceptSave );
         exportFileDialog.setFileMode( QFileDialog::AnyFile );
-        const QStringList mimeTypes = QStringList() << exporter->remoteMimeType();
+        const QStringList mimeTypes = QStringList { exporter->remoteMimeType() };
         exportFileDialog.setMimeTypeFilters( mimeTypes );
 
         exportFileDialog.setLabelText(QFileDialog::Accept, i18nc("@action:button", "&Export"));

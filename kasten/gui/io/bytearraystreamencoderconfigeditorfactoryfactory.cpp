@@ -44,23 +44,20 @@ namespace Kasten
 
 QList<AbstractModelStreamEncoderConfigEditorFactory*> ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys()
 {
-    QList<AbstractModelStreamEncoderConfigEditorFactory*> result;
-
-    result
-        << new ByteArraySourceCodeStreamEncoderConfigEditorFactory()
-        << new ByteArrayValuesStreamEncoderConfigEditorFactory()
-        << new ByteArrayBase32StreamEncoderConfigEditorFactory()
-        << new ByteArraySRecStreamEncoderConfigEditorFactory()
-        << new ByteArrayIHexStreamEncoderConfigEditorFactory()
-        << new ByteArrayUuencodingStreamEncoderConfigEditorFactory()
-        << new ByteArrayXxencodingStreamEncoderConfigEditorFactory();
+    QList<AbstractModelStreamEncoderConfigEditorFactory*> result {
+        new ByteArraySourceCodeStreamEncoderConfigEditorFactory(),
+        new ByteArrayValuesStreamEncoderConfigEditorFactory(),
+        new ByteArrayBase32StreamEncoderConfigEditorFactory(),
+        new ByteArraySRecStreamEncoderConfigEditorFactory(),
+        new ByteArrayIHexStreamEncoderConfigEditorFactory(),
+        new ByteArrayUuencodingStreamEncoderConfigEditorFactory(),
+        new ByteArrayXxencodingStreamEncoderConfigEditorFactory(),
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
 //// e.g.
-////     result
-////         << new My_ByteArrayStreamEncoderConfigEditorFactory();
+////         new My_ByteArrayStreamEncoderConfigEditorFactory(),
 //// NEWBYTEARRAYSTREAMENCODERCONFIGEDITORFACTORY(end)
-
+    };
     return result;
 }
 

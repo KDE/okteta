@@ -48,27 +48,24 @@ namespace Kasten
 
 QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEncoders()
 {
-    QList<AbstractModelStreamEncoder*> result;
-
-    result
-        << new ByteArrayValuesStreamEncoder()
-        << new ByteArrayCharsStreamEncoder()
-        << new ByteArrayBase64StreamEncoder()
-        << new ByteArrayBase32StreamEncoder()
-        << new ByteArrayBase85StreamEncoder()
-        << new ByteArrayUuencodingStreamEncoder()
-        << new ByteArrayXxencodingStreamEncoder()
-        << new ByteArrayIHexStreamEncoder()
-        << new ByteArraySRecStreamEncoder()
-        << new ByteArraySourceCodeStreamEncoder()
-        << new ByteArrayViewTextStreamEncoder();
+    QList<AbstractModelStreamEncoder*> result {
+        new ByteArrayValuesStreamEncoder(),
+        new ByteArrayCharsStreamEncoder(),
+        new ByteArrayBase64StreamEncoder(),
+        new ByteArrayBase32StreamEncoder(),
+        new ByteArrayBase85StreamEncoder(),
+        new ByteArrayUuencodingStreamEncoder(),
+        new ByteArrayXxencodingStreamEncoder(),
+        new ByteArrayIHexStreamEncoder(),
+        new ByteArraySRecStreamEncoder(),
+        new ByteArraySourceCodeStreamEncoder(),
+        new ByteArrayViewTextStreamEncoder(),
 //// NEWBYTEARRAYSTREAMENCODER(start)
 //// Here add the creation of an object of your streamencoder class and add it to the list,
 //// e.g.
-////     result
-////         << new My_ByteArrayStreamEncoder();
+////         new My_ByteArrayStreamEncoder(),
 //// NEWBYTEARRAYSTREAMENCODER(end)
-
+    };
     return result;
 }
 

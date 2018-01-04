@@ -51,14 +51,14 @@ ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor( 
 
     mAddressSizeSelect = new KComboBox( this );
     // keep order in sync with IHexStreamEncoderSettings::AddressSizeId
-    QStringList addressSizeList;
-    addressSizeList
-        << i18nc("@item:inmenu address size",
-                 "32-bit")
-        << i18nc("@item:inmenu address size",
-                 "16-bit")
-        << i18nc("@item:inmenu address size",
-                 "8-bit");
+    const QStringList addressSizeList {
+        i18nc("@item:inmenu address size",
+              "32-bit"),
+        i18nc("@item:inmenu address size",
+              "16-bit"),
+        i18nc("@item:inmenu address size",
+              "8-bit"),
+    };
     mAddressSizeSelect->addItems( addressSizeList );
     mAddressSizeSelect->setCurrentIndex( mSettings.addressSizeId );
     connect( mAddressSizeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged );

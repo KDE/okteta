@@ -65,11 +65,12 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
     connect( mOverwriteModeToggleButton, &ToggleButton::clicked, this, &ViewStatusController::setOverwriteMode );
 
     mValueCodingComboBox = new KComboBox( statusBar );
-    QStringList list;
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","Hexadecimal") );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "Decimal")     );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "Octal")       );
-    list.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "Binary")      );
+    const QStringList list {
+        i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format","Hexadecimal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the decimal format",    "Decimal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the octal format",      "Octal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the binary format",     "Binary"),
+    };
     mValueCodingComboBox->addItems( list );
     mValueCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Coding of the value interpretation in the current view.") );

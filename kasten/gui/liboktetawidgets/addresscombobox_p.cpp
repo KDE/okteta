@@ -41,14 +41,12 @@ namespace Okteta
 
 static const QStringList& formatStrings()
 {
-    static QStringList list;
-    if( list.isEmpty() )
-    {
-//         list.append( i18nc("@item:inlistbox guessing the format of the address by the input",      "Auto") );
-        list.append( i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hex" ) );
-        list.append( i18nc( "@item:inlistbox coding of offset in the decimal format",     "Dec" ) );
-        list.append( i18nc( "@item:inlistbox coding of offset in the expression format",     "Expr" ) );
-    }
+    static QStringList list = QStringList {
+//         i18nc("@item:inlistbox guessing the format of the address by the input",      "Auto"),
+        i18nc( "@item:inlistbox coding of offset in the hexadecimal format", "Hex" ),
+        i18nc( "@item:inlistbox coding of offset in the decimal format",     "Dec" ),
+        i18nc( "@item:inlistbox coding of offset in the expression format",  "Expr" ),
+    };
     return list;
 }
 

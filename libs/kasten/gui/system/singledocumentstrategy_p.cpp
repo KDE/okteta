@@ -71,7 +71,7 @@ void SingleDocumentStrategyPrivate::createNew()
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters = QStringList() << QStringLiteral( "-c" );
+        const QStringList parameters { QStringLiteral( "-c" ) };
         KProcess::startDetached( executable, parameters );
     }
 }
@@ -90,10 +90,11 @@ void SingleDocumentStrategyPrivate::createNewFromClipboard()
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters = QStringList()
-            << QStringLiteral( "-c" )
-            << QStringLiteral( "-g" )
-            << QStringLiteral( "FromClipboard" );
+        const QStringList parameters {
+            QStringLiteral( "-c" ),
+            QStringLiteral( "-g" ),
+            QStringLiteral( "FromClipboard" ),
+        };
         KProcess::startDetached( executable, parameters );
     }
 }
@@ -110,10 +111,11 @@ void SingleDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGen
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
         // TODO: add id to AbstractModelDataGenerator, to use instead of className
-        const QStringList parameters = QStringList()
-            << QStringLiteral( "-c" )
-            << QStringLiteral( "-g" )
-            << QLatin1String(generator->metaObject()->className());
+        const QStringList parameters {
+            QStringLiteral( "-c" ),
+            QStringLiteral( "-g" ),
+            QLatin1String(generator->metaObject()->className()),
+        };
         KProcess::startDetached( executable, parameters );
         return;
     }
@@ -157,7 +159,7 @@ void SingleDocumentStrategyPrivate::load( const QUrl& url )
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters = QStringList() << url.url();
+        const QStringList parameters { url.url() };
         KProcess::startDetached( executable, parameters );
     }
 }

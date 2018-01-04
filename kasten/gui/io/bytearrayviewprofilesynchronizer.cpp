@@ -119,8 +119,9 @@ ByteArrayViewProfileSynchronizer::syncToRemote()
 
     mDirtyFlags = 0;
 
-    QList<ByteArrayViewProfile> viewProfiles;
-    viewProfiles << viewProfile;
+    QList<ByteArrayViewProfile> viewProfiles {
+        viewProfile
+    };
     mViewProfileManager->saveViewProfiles( viewProfiles );
 
     if( mView )

@@ -222,8 +222,9 @@ void ViewProfileController::onCreateNewActionTriggered()
 
     if( answer == QDialog::Accepted )
     {
-        QList<ByteArrayViewProfile> viewProfiles;
-        viewProfiles << dialog->viewProfile();
+        QList<ByteArrayViewProfile> viewProfiles {
+            dialog->viewProfile()
+        };
         mViewProfileManager->saveViewProfiles( viewProfiles );
 
         mByteArrayViewProfileSynchronizer->setViewProfileId( viewProfiles.at(0).id() );

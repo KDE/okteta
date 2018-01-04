@@ -36,17 +36,15 @@ namespace Okteta
 
 const QStringList& formatNames()
 {
-    static QStringList list;
-    if( list.isEmpty() )
-    {
-//         list.append( i18nc("@item:inlistbox guessing the coding of the bytes by the input",      "Auto") );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the hexadecimal format","Hex")  );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the decimal format",    "Dec")      );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the octal format",      "Oct")        );
-        list.append( i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Bin")       );
-        list.append( i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Char") );
-        list.append( i18nc("@item:inlistbox coding of the bytes as UTF-8 characters with the values","UTF-8") );
-    }
+    static QStringList list = QStringList {
+//         i18nc("@item:inlistbox guessing the coding of the bytes by the input",      "Auto"),
+        i18nc("@item:inlistbox coding of the bytes as values in the hexadecimal format","Hex"),
+        i18nc("@item:inlistbox coding of the bytes as values in the decimal format",    "Dec"),
+        i18nc("@item:inlistbox coding of the bytes as values in the octal format",      "Oct"),
+        i18nc("@item:inlistbox coding of the bytes as values in the binary format",     "Bin"),
+        i18nc("@item:inlistbox coding of the bytes as characters with the values",      "Char"),
+        i18nc("@item:inlistbox coding of the bytes as UTF-8 characters with the values","UTF-8"),
+    };
     return list;
 }
 

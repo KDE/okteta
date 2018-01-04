@@ -42,9 +42,10 @@ ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
     // view style
     mViewModeAction = actionCollection->add<KSelectAction>( QStringLiteral("viewmode") );
     mViewModeAction->setText( i18nc("@title:menu","&View Mode") );
-    QStringList list;
-    list.append( i18nc("@item:inmenu","&Columns") );
-    list.append( i18nc("@item:inmenu","&Rows") );
+    const QStringList list {
+        i18nc("@item:inmenu","&Columns"),
+        i18nc("@item:inmenu","&Rows"),
+    };
     mViewModeAction->setItems( list );
     connect( mViewModeAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewModeController::setViewMode );
 

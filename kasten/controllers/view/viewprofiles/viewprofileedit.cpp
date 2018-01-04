@@ -77,19 +77,19 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     displayBoxFormLayout->addRow( i18n("Show Line Offset:"), mLineOffsetShownCheckBox );
     // offset coding
     mOffsetCodingComboBox = new KComboBox( displayBox );
-    QStringList offsetCodingList;
-    offsetCodingList.append( i18nc("@item:inmenu offset in the hexadecimal format",
-                             "Hexadecimal") );
-    offsetCodingList.append( i18nc("@item:inmenu offset in the decimal format",
-                             "Decimal") );
+    const QStringList offsetCodingList {
+        i18nc("@item:inmenu offset in the hexadecimal format", "Hexadecimal"),
+        i18nc("@item:inmenu offset in the decimal format", "Decimal"),
+    };
     mOffsetCodingComboBox->addItems( offsetCodingList );
     displayBoxFormLayout->addRow( i18n("Offset Coding:"), mOffsetCodingComboBox );
     // values or char shown
     mValuesCharsShownComboBox = new KComboBox( displayBox );
-    QStringList valuesCharsList;
-    valuesCharsList.append( i18nc("@item:","Values") );
-    valuesCharsList.append( i18nc("@item:","Chars") );
-    valuesCharsList.append( i18nc("@item:","Values & Chars") );
+    const QStringList valuesCharsList {
+        i18nc("@item:","Values"),
+        i18nc("@item:","Chars"),
+        i18nc("@item:","Values & Chars"),
+    };
     mValuesCharsShownComboBox->addItems( valuesCharsList );
     displayBoxFormLayout->addRow( i18n("Show Values or Chars:"), mValuesCharsShownComboBox );
     // display mode
@@ -97,9 +97,10 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
         i18nc( "@label:listbox ",
                "Show with Rows or Columns:" );
     mDisplayModeComboBox = new KComboBox( displayBox );
-    QStringList displayModeList;
-    displayModeList.append( i18nc("@item:","Columns") );
-    displayModeList.append( i18nc("@item:","Rows") );
+    const QStringList displayModeList {
+        i18nc("@item:","Columns"),
+        i18nc("@item:","Rows"),
+    };
     mDisplayModeComboBox->addItems( displayModeList );
     displayBoxFormLayout->addRow( displayModeLabel, mDisplayModeComboBox );
 
@@ -109,13 +110,14 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     QFormLayout* layoutBoxFormLayout = new QFormLayout( layoutBox );
     // line break
     mLineBreakComboBox = new KComboBox( layoutBox );
-    QStringList lineBreakList;
-    lineBreakList.append( i18nc("@item:inmenu  The layout will not change on size changes.",
-                                "Off") );
-    lineBreakList.append( i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
-                                "Wrap Only Complete Byte Groups") );
-    lineBreakList.append( i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
-                                "On") );
+    const QStringList lineBreakList {
+        i18nc("@item:inmenu  The layout will not change on size changes.",
+              "Off"),
+        i18nc("@item:inmenu  The layout will adapt to the size, but only with complete groups of bytes.",
+              "Wrap Only Complete Byte Groups"),
+        i18nc("@item:inmenu  The layout will adapt to the size and fit in as much bytes per line as possible.",
+              "On"),
+    };
     mLineBreakComboBox->addItems( lineBreakList );
     connect( mLineBreakComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::currentIndexChanged),
              this, &ViewProfileEdit::onLineBreakIndexChanged );
@@ -144,15 +146,16 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     QFormLayout* valuesBoxFormLayout = new QFormLayout( valuesBox );
     // coding
     mValueCodingComboBox = new KComboBox( valuesBox );
-    QStringList valueCodingList;
-    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format",
-                                  "Hexadecimal") );
-    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the decimal format",
-                                  "Decimal")     );
-    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the octal format",
-                                  "Octal")       );
-    valueCodingList.append( i18nc("@item:inmenu encoding of the bytes as values in the binary format",
-                                  "Binary")      );
+    const QStringList valueCodingList {
+        i18nc("@item:inmenu encoding of the bytes as values in the hexadecimal format",
+              "Hexadecimal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the decimal format",
+              "Decimal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the octal format",
+              "Octal"),
+        i18nc("@item:inmenu encoding of the bytes as values in the binary format",
+              "Binary"),
+    };
     mValueCodingComboBox->addItems( valueCodingList );
     valuesBoxFormLayout->addRow( i18n("Coding:"), mValueCodingComboBox );
 

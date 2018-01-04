@@ -56,11 +56,12 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
     QHBoxLayout* directionCharsetLayout = new QHBoxLayout();
 
     mDirectionComboBox = new KComboBox( this );
-    const QStringList directionList = QStringList()
-        << i18nc("@item:inmenu Is converted _from_ charset (selected in combobox next to this)",
-                 "From")
-        << i18nc("@item:inmenu Is converted _to_ charset (selected in combobox next to this)",
-                 "To");
+    const QStringList directionList {
+        i18nc("@item:inmenu Is converted _from_ charset (selected in combobox next to this)",
+              "From"),
+        i18nc("@item:inmenu Is converted _to_ charset (selected in combobox next to this)",
+              "To"),
+    };
     mDirectionComboBox->addItems( directionList );
     mDirectionComboBox->setCurrentIndex( mTool->conversionDirection() );
 

@@ -39,22 +39,19 @@
 
 QList<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
 {
-    QList<AbstractByteArrayFilter*> result;
-
-    result
-        << new AndByteArrayFilter()
-        << new OrByteArrayFilter()
-        << new XOrByteArrayFilter()
-        << new InvertByteArrayFilter()
-        << new ReverseByteArrayFilter()
-        << new RotateByteArrayFilter()
-        << new ShiftByteArrayFilter();
+    QList<AbstractByteArrayFilter*> result {
+        new AndByteArrayFilter(),
+        new OrByteArrayFilter(),
+        new XOrByteArrayFilter(),
+        new InvertByteArrayFilter(),
+        new ReverseByteArrayFilter(),
+        new RotateByteArrayFilter(),
+        new ShiftByteArrayFilter(),
 // NEWFILTER(start)
 // Here add the creation of an object of your filter class and add it to the list,
 // e.g.
-//     result
-//         << new My_ByteArrayFilter();
+//         new My_ByteArrayFilter(),
 // NEWFILTER(end)
-
+    };
     return result;
 }

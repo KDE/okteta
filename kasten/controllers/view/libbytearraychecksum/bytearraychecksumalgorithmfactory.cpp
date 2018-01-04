@@ -63,21 +63,19 @@ static inline void addQca2Algorithm( QList<AbstractByteArrayChecksumAlgorithm*>&
 
 QList<AbstractByteArrayChecksumAlgorithm*> ByteArrayChecksumAlgorithmFactory::createAlgorithms()
 {
-    QList<AbstractByteArrayChecksumAlgorithm*> result;
-
-    result
-        << new ModSum8ByteArrayChecksumAlgorithm()
-        << new ModSum16ByteArrayChecksumAlgorithm()
-        << new ModSum32ByteArrayChecksumAlgorithm()
-        << new ModSum64ByteArrayChecksumAlgorithm()
-        << new Adler32ByteArrayChecksumAlgorithm()
-        << new Crc32ByteArrayChecksumAlgorithm();
+    QList<AbstractByteArrayChecksumAlgorithm*> result {
+        new ModSum8ByteArrayChecksumAlgorithm(),
+        new ModSum16ByteArrayChecksumAlgorithm(),
+        new ModSum32ByteArrayChecksumAlgorithm(),
+        new ModSum64ByteArrayChecksumAlgorithm(),
+        new Adler32ByteArrayChecksumAlgorithm(),
+        new Crc32ByteArrayChecksumAlgorithm(),
 // NEWCHECKSUM(start)
 // Here add the creation of an object of your checksum algorithm class and add it to the list,
 // e.g.
-//     result
-//         << new MyByteArrayChecksumAlgorithm();
+//         new MyByteArrayChecksumAlgorithm(),
 // NEWCHECKSUM(end)
+    };
 
 #ifdef HAVE_QCA2
     addQca2Algorithm( result, i18nc( "name of the hash algorithm", "SHA-0"),     "sha0" );

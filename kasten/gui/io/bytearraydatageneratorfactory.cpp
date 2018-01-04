@@ -40,19 +40,16 @@ namespace Kasten
 
 QList<AbstractModelDataGenerator*> ByteArrayDataGeneratorFactory::createDataGenerators()
 {
-    QList<AbstractModelDataGenerator*> result;
-
-    result
-        << new ByteArrayPatternGenerator()
-        << new ByteArrayRandomDataGenerator()
-        << new ByteArraySequenceGenerator();
+    QList<AbstractModelDataGenerator*> result {
+        new ByteArrayPatternGenerator(),
+        new ByteArrayRandomDataGenerator(),
+        new ByteArraySequenceGenerator(),
 //// NEWBYTEARRAYDATAGENERATOR(start)
 //// Here add the creation of an object of your datagenerator class and add it to the list,
 //// e.g.
-////     result
-////         << new My_ByteArrayDataGenerator();
+////         new My_ByteArrayDataGenerator(),
 //// NEWBYTEARRAYDATAGENERATOR(end)
-
+    };
     return result;
 }
 

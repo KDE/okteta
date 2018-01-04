@@ -199,8 +199,9 @@ ViewProfilesManageDialog::onCreateNewButtonClicked()
 
     if( answer == QDialog::Accepted )
     {
-        QList<ByteArrayViewProfile> viewProfiles;
-        viewProfiles << dialog->viewProfile();
+        QList<ByteArrayViewProfile> viewProfiles {
+            dialog->viewProfile()
+        };
         mViewProfileManager->saveViewProfiles( viewProfiles );
     }
 
@@ -232,8 +233,9 @@ ViewProfilesManageDialog::onEditButtonClicked()
     const int answer = dialog->exec();
     if( answer == QDialog::Accepted )
     {
-        QList<ByteArrayViewProfile> viewProfiles;
-        viewProfiles << dialog->viewProfile();
+        QList<ByteArrayViewProfile> viewProfiles {
+            dialog->viewProfile()
+        };
         mViewProfileManager->saveViewProfiles( viewProfiles );
     }
 
@@ -260,8 +262,9 @@ ViewProfilesManageDialog::onDeleteButtonClicked()
         return;
 
     // TODO: ask user if she really wants to delete
-    QList<ByteArrayViewProfile::Id> viewProfileIds;
-    viewProfileIds << mCurrentViewProfileId;
+    const QList<ByteArrayViewProfile::Id> viewProfileIds {
+        mCurrentViewProfileId
+    };
     mViewProfileManager->removeViewProfiles( viewProfileIds );
 
     mCloseButton->setDefault( true );

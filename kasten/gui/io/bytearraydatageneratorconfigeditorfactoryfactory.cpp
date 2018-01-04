@@ -39,17 +39,15 @@ namespace Kasten
 
 QList<AbstractModelDataGeneratorConfigEditorFactory*> ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys()
 {
-    QList<AbstractModelDataGeneratorConfigEditorFactory*> result;
-
-    result
-        << new ByteArrayPatternGeneratorConfigEditorFactory()
-        << new ByteArrayRandomDataGeneratorConfigEditorFactory();
+    QList<AbstractModelDataGeneratorConfigEditorFactory*> result {
+        new ByteArrayPatternGeneratorConfigEditorFactory(),
+        new ByteArrayRandomDataGeneratorConfigEditorFactory(),
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(start)
 //// Here add the creation of an object of your configeditorfactory class and add it to the list,
 //// e.g.
-////     result
-////         << new My_ByteArrayDataGeneratorConfigEditorFactory();
+////         new My_ByteArrayDataGeneratorConfigEditorFactory();,
 //// NEWBYTEARRAYDATAGENERATORCONFIGEDITORFACTORY(end)
+    };
 
     return result;
 }

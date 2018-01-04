@@ -61,11 +61,12 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
                "Encoding:" );
 
     mEncodingSelect = new KComboBox( this );
-    QStringList list;
-    list.append( i18nc("@item:inmenu Doing the uuencoding using the historical encoding",
-                       "Historical") );
-    list.append( i18nc("@item:inmenu Doing the uuencoding using the base64 encoding",
-                       "Base64") );
+    const QStringList list {
+        i18nc("@item:inmenu Doing the uuencoding using the historical encoding",
+              "Historical"),
+        i18nc("@item:inmenu Doing the uuencoding using the base64 encoding",
+              "Base64"),
+    };
     mEncodingSelect->addItems( list );
     mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
     connect( mEncodingSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged );
