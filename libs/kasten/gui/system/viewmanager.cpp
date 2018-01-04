@@ -90,6 +90,8 @@ void ViewManager::createViewsFor( const QList<Kasten::AbstractDocument*>& docume
 {
     QList<Kasten::AbstractView*> openedViews;
 
+    openedViews.reserve(documents.size());
+    mViewList.reserve(mViewList.size() + documents.size());
     for( AbstractDocument* document : documents )
     {
         AbstractView* view = mFactory->createViewFor( document );

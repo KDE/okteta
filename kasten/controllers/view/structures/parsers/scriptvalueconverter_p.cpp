@@ -253,6 +253,7 @@ TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const Parse
         return nullptr;
     }
     int length = alternatives.property(PROPERTY_LENGTH()).toInt32();
+    tpd.alternatives.reserve(length);
     for (int i = 0; i < length; ++i)
     {
         TaggedUnionParsedData::Alternatives alt;

@@ -41,6 +41,7 @@ const QStringList& CharCodec::codecNames()
     if( codecNames.isEmpty() )
     {
         codecNames = TextCharCodec::codecNames();
+        codecNames.reserve(codecNames.size() + 3);
         codecNames.append( USASCIICharCodec::codecName() );
         codecNames.append( EBCDIC1047CharCodec::codecName() );
         codecNames.append( JISX0201CharCodec::codecName() );

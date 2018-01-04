@@ -31,6 +31,7 @@
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
+    mIterableProperties.reserve(mIterableProperties.size() + 20);
     s_value = engine->toStringHandle(QStringLiteral("value"));
     mIterableProperties.append(qMakePair(s_value, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     s_type = engine->toStringHandle(QStringLiteral("type"));

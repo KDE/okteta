@@ -249,6 +249,7 @@ void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
     const QList<AbstractDocument*> documents = documentManager->documents();
 
     QStringList urls;
+    urls.reserve(documents.size());
     for( AbstractDocument* document : documents )
         urls.append( syncManager->urlOf(document).url() );
 

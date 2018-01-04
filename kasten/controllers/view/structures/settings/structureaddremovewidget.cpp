@@ -242,8 +242,10 @@ void StructureAddRemoveWidget::moveDown()
 }
 void StructureAddRemoveWidget::syncData()
 {
+    const auto topLevelItemCount = mTreeSelected->topLevelItemCount();
     QStringList strings;
-    for (int i = 0; i < mTreeSelected->topLevelItemCount(); ++i)
+    strings.reserve(topLevelItemCount);
+    for (int i = 0; i < topLevelItemCount; ++i)
     {
         QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
         QString dataStr = QStringLiteral("\'%1\':\'%2\'").arg(item->text(1), item->text(0));

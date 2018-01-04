@@ -103,6 +103,7 @@ inline QList<AbstractView*> MultiViewAreasPrivate::viewList() const
 {
     QList<AbstractView*> result;
 
+    result.reserve(mViewAreaList.size());
     for( const TabbedViews* viewArea : mViewAreaList )
         result.append( viewArea->viewList() );
 

@@ -30,6 +30,7 @@
 StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(eng, handlerInfo)
 {
+    mIterableProperties.reserve(mIterableProperties.size() + 6);
     //read-only properties
     s_lengthInCodepoints = eng->toStringHandle(ParserStrings::PROPERTY_CHAR_COUNT());
     mIterableProperties.append(qMakePair(s_lengthInCodepoints, QScriptValue::ReadOnly | QScriptValue::Undeletable));

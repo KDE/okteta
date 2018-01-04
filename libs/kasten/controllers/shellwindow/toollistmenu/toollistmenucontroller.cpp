@@ -59,6 +59,7 @@ void ToolListMenuController::updateActions()
 
     const QList<ToolViewDockWidget*> dockWidgets = mWidgetsDockable->dockWidgets();
 
+    mToolActionList.reserve(dockWidgets.size());
     for( const ToolViewDockWidget* dockWidget : dockWidgets )
     {
         QAction *action = dockWidget->toggleViewAction();

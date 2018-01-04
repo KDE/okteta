@@ -45,6 +45,7 @@ ComplexArrayData::~ComplexArrayData()
 
 void ComplexArrayData::appendChildren(uint from, uint to)
 {
+    mChildren.reserve(mChildren.size() + to - from);
     for (uint i = from; i < to; ++i)
     {
         DataInformation* arrayElem = mChildType->clone();

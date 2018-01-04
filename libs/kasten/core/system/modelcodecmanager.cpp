@@ -81,6 +81,7 @@ void ModelCodecManager::setEncoders( const QList<AbstractModelStreamEncoder*>& e
     qDeleteAll( mExporterList );
     mExporterList.clear();
 
+    mExporterList.reserve(mEncoderList.size());
     foreach( AbstractModelStreamEncoder* encoder, mEncoderList )
         mExporterList << new ModelEncoderFileSystemExporter( encoder );
 }

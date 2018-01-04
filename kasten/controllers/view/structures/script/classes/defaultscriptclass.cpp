@@ -55,6 +55,7 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     mDefaultPrototype = engine->newObject();
     mDefaultPrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Default_proto_toString));
     //add all our properties
+    mIterableProperties.reserve(11);
     mIterableProperties.append(qMakePair(s_parent, QScriptValue::ReadOnly | QScriptValue::Undeletable));
     mIterableProperties.append(qMakePair(s_name, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     mIterableProperties.append(qMakePair(s_wasAbleToRead, QScriptValue::ReadOnly | QScriptValue::Undeletable));

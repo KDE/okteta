@@ -167,6 +167,7 @@ bool BookmarkList::adjustToSwapped( Address firstPartStart, Address secondPartSt
 QList<Okteta::Bookmark> BookmarkList::list() const
 {
     QList<Okteta::Bookmark> result;
+    result.reserve(size());
 
     for( const Bookmark& bookmark : *this )
         result.append( bookmark );
