@@ -30,8 +30,8 @@
 namespace Okteta
 {
 
-typedef qint32 Line;
-typedef qint32 LineSize;
+using Line = qint32;
+using LineSize = qint32;
 
 }
 

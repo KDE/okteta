@@ -39,7 +39,7 @@ class ByteArrayViewProfilePrivate;
 class OKTETAKASTENGUI_EXPORT ByteArrayViewProfile
 {
   public:
-    typedef QString Id;
+    using Id = QString;
 
   public:
     explicit ByteArrayViewProfile();

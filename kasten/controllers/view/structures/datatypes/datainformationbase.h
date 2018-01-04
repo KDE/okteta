@@ -40,8 +40,8 @@ class DataInformationWithDummyChildren;
 
 #include <QtGlobal>
 
-typedef quint32 BitCount32;
-typedef quint64 BitCount64;
+using BitCount32 = quint32;
+using BitCount64 = quint64;
 
 class DataInformationBase
 {

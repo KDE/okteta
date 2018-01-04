@@ -30,9 +30,9 @@
 namespace KPieceTable
 {
 
-typedef Okteta::Size Size;
-typedef Okteta::Address Address;
-typedef Okteta::AddressRange AddressRange;
+using Size = Okteta::Size;
+using Address = Okteta::Address;
+using AddressRange = Okteta::AddressRange;
 
 
 class Piece : public AddressRange

@@ -56,7 +56,7 @@ class ScriptClassesTest : public QObject
 {
 Q_OBJECT
 
-    typedef QPair<QString, QScriptValue::PropertyFlags> PropertyPair;
+    using PropertyPair = QPair<QString, QScriptValue::PropertyFlags>;
 
 private:
     static void checkProperties(const QVector<PropertyPair>& expected, DataInformation* data,

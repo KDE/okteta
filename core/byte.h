@@ -26,7 +26,7 @@
 namespace Okteta
 {
 
-typedef unsigned char Byte;
+using Byte = unsigned char;
 
 }
 

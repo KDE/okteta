@@ -34,7 +34,7 @@
 namespace KDE
 {
 
-typedef Range<Okteta::Coord> KBaseCoordRange;
+using KBaseCoordRange = Range<Okteta::Coord>;
 
 template<>
 inline const Okteta::Coord KBaseCoordRange::null() const

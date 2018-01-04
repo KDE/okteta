@@ -59,7 +59,7 @@ private:
 //     bool mUserOwned;
 };
 
-typedef QHash<ByteArrayViewProfile::Id, ByteArrayViewProfileFileInfo> ByteArrayViewProfileFileInfoLookup;
+using ByteArrayViewProfileFileInfoLookup = QHash<ByteArrayViewProfile::Id, ByteArrayViewProfileFileInfo>;
 
 
 class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject

@@ -41,7 +41,7 @@ public:
     void registerSafeReference(SafeReference* ref, DataInformation* data);
     static SafeReferenceHolder instance;
 private:
-    typedef QMultiHash<DataInformation*, SafeReference*> Container;
+    using Container = QMultiHash<DataInformation*, SafeReference*>;
     int safeRefDestroyCnt;
     int safeRefRegisterCnt;
     Container mRefs;

@@ -31,7 +31,7 @@ namespace Okteta
 {
 
 // Address needs to be <= int, as long as we use QByteArray and its int parameters
-typedef qint32 Address;
+using Address = qint32;
 
 }
 

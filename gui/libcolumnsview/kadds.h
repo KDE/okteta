@@ -31,11 +31,11 @@ namespace Okteta
 // some possibly useful additions to KDE
 
 // these are to emphasize that measuring unit is pixel and which direction
-typedef int PixelX;
-typedef int PixelY;
+using PixelX = int;
+using PixelY = int;
 
-typedef KDE::NumberRange<PixelX> PixelXRange;
-typedef KDE::NumberRange<PixelY> PixelYRange;
+using PixelXRange = KDE::NumberRange<PixelX>;
+using PixelYRange = KDE::NumberRange<PixelY>;
 
 }
 

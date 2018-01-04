@@ -38,7 +38,7 @@ class OKTETAGUI_EXPORT OffsetFormat
 {
   public:
     /** */
-    typedef void (*print)( char *Buffer, unsigned int Offset );
+    using print = void (*)( char *Buffer, unsigned int Offset );
     /** */
     enum Format { Hexadecimal=0, Decimal };
     /** */

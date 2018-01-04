@@ -30,8 +30,8 @@
 namespace Okteta
 {
 
-typedef qint32 LinePosition;
-typedef qint32 LinePositionSize;
+using LinePosition = qint32;
+using LinePositionSize = qint32;
 
 }
 

@@ -35,7 +35,7 @@ FlagDataInformation::FlagDataInformation(const QString& name, PrimitiveDataInfor
         "FlagDataInformation::FlagDataInformation", "Bitflags only work with integers!");
 }
 
-typedef QPair<QString, quint64> FlagPair;
+using FlagPair = QPair<QString, quint64>;
 
 template<typename T, int len>
 static void removeFromArray(QVarLengthArray<T, len>& array, int index) {

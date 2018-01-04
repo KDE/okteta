@@ -57,11 +57,11 @@ class PODData
 
   protected:
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
-    typedef union
+    using Aligned64Bit = union
     {
         double mDummy;
         Byte mBytes[Size];
-    } Aligned64Bit;
+    };
 
   protected:
     Byte* mCurrentOriginalData;

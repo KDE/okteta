@@ -26,7 +26,7 @@
 namespace Kasten
 {
 
-typedef int DocumentVersionId;
+using DocumentVersionId = int;
 
 }
 

@@ -35,7 +35,7 @@ namespace Okteta
 
 class FileByteArrayModelPrivate
 {
-    typedef QVector<char*> KPageOfChar;
+    using KPageOfChar = QVector<char*>;
 
   public:
     FileByteArrayModelPrivate( int pageNumber, int pageSize );

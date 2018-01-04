@@ -32,7 +32,7 @@
 namespace Okteta
 {
 
-typedef KDE::NumberRange<Address,Size> AddressRange;
+using AddressRange = KDE::NumberRange<Address,Size>;
 
 }
 

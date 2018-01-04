@@ -30,7 +30,7 @@
 namespace Okteta
 {
 
-typedef qint32 Size;
+using Size = qint32;
 
 }
 

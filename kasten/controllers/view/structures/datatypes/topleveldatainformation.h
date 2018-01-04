@@ -58,8 +58,8 @@ public:
             QScriptEngine* engine = nullptr, const QFileInfo& structureFile = QFileInfo());
     ~TopLevelDataInformation() override;
 
-    typedef QSharedPointer<TopLevelDataInformation> Ptr;
-    typedef QVector<Ptr> List;
+    using Ptr = QSharedPointer<TopLevelDataInformation>;
+    using List = QVector<Ptr>;
     static const quint64 INVALID_OFFSET;
 
 public:

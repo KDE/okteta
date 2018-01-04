@@ -29,7 +29,7 @@
 #include <functional>
 
 struct JsTestData {
-    typedef std::function<void(DataInformation*)> CheckCallback;
+    using CheckCallback = std::function<void(DataInformation*)>;
     JsTestData() {}
     JsTestData(const char* tag, const char* constructor, CheckCallback check)
             : tag(tag), constructorCall(QString::fromUtf8(constructor)), check(check) {}

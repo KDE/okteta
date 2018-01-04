@@ -37,9 +37,11 @@ class DefaultScriptClass : public QScriptClass
 {
     friend class DefaultscriptClassIterator;
     Q_DISABLE_COPY(DefaultScriptClass)
+
 public:
-    typedef DataInformation* DataInfPtr;
-    typedef QVector<QPair<QScriptString, QScriptValue::PropertyFlags> > PropertyInfoList;
+    using DataInfPtr = DataInformation*;
+    using PropertyInfoList = QVector<QPair<QScriptString, QScriptValue::PropertyFlags>>;
+
     DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~DefaultScriptClass() override;
 

@@ -36,7 +36,7 @@ namespace KPieceTable
 
 class PieceTable;
 
-typedef Okteta::ArrayChangeMetrics ArrayChangeMetrics;
+using ArrayChangeMetrics = Okteta::ArrayChangeMetrics;
 
 /** class
   *@author Friedrich W. H. Kossebau

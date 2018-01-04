@@ -37,7 +37,8 @@ struct LoggerWithContext;
 class EnumDefinition: public QSharedData
 {
 public:
-    typedef QSharedDataPointer<EnumDefinition> Ptr;
+    using Ptr = QSharedDataPointer<EnumDefinition>;
+
     EnumDefinition(const QMap<AllPrimitiveTypes, QString>& values, const QString& name,
             PrimitiveDataType type) :
         QSharedData(), mName(name), mValues(values), mType(type) {}

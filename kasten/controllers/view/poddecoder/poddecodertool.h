@@ -55,7 +55,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
   public:
     static const int MaxPODSize = sizeof(double);
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
-    typedef union { unsigned char Data[MaxPODSize]; double Dummy; } Aligned64Bit;
+    using Aligned64Bit = union { unsigned char Data[MaxPODSize]; double Dummy; };
 
   public:
     PODDecoderTool();

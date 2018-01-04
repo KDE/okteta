@@ -38,8 +38,8 @@ class ArrayChangeMetricsList;
 namespace KPieceTable
 {
 
-  typedef Okteta::AddressRangeList AddressRangeList;
-  typedef Okteta::ArrayChangeMetricsList ArrayChangeMetricsList;
+  using AddressRangeList = Okteta::AddressRangeList;
+  using ArrayChangeMetricsList = Okteta::ArrayChangeMetricsList;
 
 
 /** class
