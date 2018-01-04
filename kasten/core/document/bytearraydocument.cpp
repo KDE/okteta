@@ -118,8 +118,7 @@ void ByteArrayDocument::setOwner( const Person& owner )
 
 void ByteArrayDocument::addUsers( const QList<Person>& users )
 {
-    for( const Person& user : users )
-        mUserList.append( user );
+    mUserList.append( users );
 
     emit usersAdded( users );
 }
