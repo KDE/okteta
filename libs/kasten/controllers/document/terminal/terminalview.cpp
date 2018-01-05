@@ -99,6 +99,13 @@ void TerminalView::onTerminalPartDestroyed()
     createTerminalPart();
 }
 
-TerminalView::~TerminalView() {}
+TerminalView::~TerminalView()
+{
+    if( mTerminalPart )
+    {
+        disconnect( mTerminalPart, &QObject::destroyed,
+                    this, &TerminalView::onTerminalPartDestroyed );
+    }
+}
 
 }
