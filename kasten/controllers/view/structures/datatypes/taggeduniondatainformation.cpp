@@ -104,7 +104,7 @@ int TaggedUnionDataInformation::determineSelection(TopLevelDataInformation* top)
         if (fi.selectIf.isFunction())
         {
             QScriptValue result = top->scriptHandler()->callFunction(fi.selectIf, this,
-                    ScriptHandlerInfo::TaggedUnionSelection);
+                    ScriptHandlerInfo::Mode::TaggedUnionSelection);
             if (!result.isBool())
             {
                 logError() << "Evaluating select function for alternative" << i

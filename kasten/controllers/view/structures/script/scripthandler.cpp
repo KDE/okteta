@@ -70,7 +70,7 @@ void ScriptHandler::validateData(DataInformation* data)
     QScriptValue validationFunc = data->validationFunc();
     if (validationFunc.isValid())
     {
-        QScriptValue result = callFunction(validationFunc, data, ScriptHandlerInfo::Validating);
+        QScriptValue result = callFunction(validationFunc, data, ScriptHandlerInfo::Mode::Validating);
         if (result.isError())
         {
             mTopLevel->logger()->error(data) << "Error occurred while validating element: "
@@ -111,7 +111,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
     if (updateFunc.isValid())
     {
         QString context = data->fullObjectPath(); //we mustn't use data after updateFunc.call(), save context
-        QScriptValue result = callFunction(updateFunc, data, ScriptHandlerInfo::Updating);
+        QScriptValue result = callFunction(updateFunc, data, ScriptHandlerInfo::Mode::Updating);
         if (result.isError())
         {
             mTopLevel->logger()->error(context) << "Error occurred while updating element: "
@@ -133,7 +133,7 @@ void ScriptHandler::updateLength(ArrayDataInformation* array)
     {
         Q_ASSERT(lengthFunc.isFunction());
 
-        QScriptValue result = callFunction(lengthFunc, array, ScriptHandlerInfo::DeterminingLength);
+        QScriptValue result = callFunction(lengthFunc, array, ScriptHandlerInfo::Mode::DeterminingLength);
         if (mEngine->hasUncaughtException())
         {
             mTopLevel->logger()->error(array) << "Error occurred while calculating length:"
@@ -155,7 +155,7 @@ QString ScriptHandler::customToString(const DataInformation* data, const QScript
     Q_ASSERT(data->wasAbleToRead()); //this should never be called if EOF was reached
     //it is effectively const, since nothing may be modified while mode is CustomToString
     //const_cast is okay in this case
-    QScriptValue result = callFunction(func, const_cast<DataInformation*>(data), ScriptHandlerInfo::CustomToString);
+    QScriptValue result = callFunction(func, const_cast<DataInformation*>(data), ScriptHandlerInfo::Mode::CustomToString);
     if (result.isError())
         data->logError() << "toStringFunc caused an error:" << result.toString();
     return result.toString();
@@ -174,7 +174,7 @@ QScriptValue ScriptHandler::callFunction(QScriptValue func, DataInformation* dat
     //ensure we get the right properties
     mHandlerInfo.setMode(mode);
     QScriptValue result = func.call(thisObject, args);
-    mHandlerInfo.setMode(ScriptHandlerInfo::None);
+    mHandlerInfo.setMode(ScriptHandlerInfo::Mode::None);
     return result;
 }
 

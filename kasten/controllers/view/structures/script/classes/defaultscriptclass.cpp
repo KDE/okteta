@@ -91,7 +91,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
             const QScriptString& name, QScriptClass::QueryFlags flags, uint* id)
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
-    Q_ASSERT(mode != ScriptHandlerInfo::None);
+    Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
     DataInformation* data = toDataInformation(object);
     if (!data)
     {
@@ -102,9 +102,9 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     }
     if (name == s_valid || name == s_validationError)
     {
-        return mode == ScriptHandlerInfo::Validating ? flags : flags & ~HandlesWriteAccess;
+        return mode == ScriptHandlerInfo::Mode::Validating ? flags : flags & ~HandlesWriteAccess;
     }
-    if (mode != ScriptHandlerInfo::Updating)
+    if (mode != ScriptHandlerInfo::Mode::Updating)
     {
         //the only properties that are possibly writable when not updating are valid and validationError
         //but we checked them before so we remove handlesWriteAccess from the flags
@@ -135,7 +135,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
 
 QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScriptString& name, uint id)
 {
-    Q_ASSERT(mHandlerInfo->mode() != ScriptHandlerInfo::None);
+    Q_ASSERT(mHandlerInfo->mode() != ScriptHandlerInfo::Mode::None);
     DataInformation* data = toDataInformation(object);
     if (!data)
     {
@@ -282,7 +282,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
 void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value)
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
-    Q_ASSERT(mode != ScriptHandlerInfo::None);
+    Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
     DataInformation* data = toDataInformation(object);
     if (!data)
     {
@@ -291,7 +291,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
                 QStringLiteral("Attempting to access an invalid object"));
         return;
     }
-    if (mode == ScriptHandlerInfo::Validating)
+    if (mode == ScriptHandlerInfo::Mode::Validating)
     {
         //only way write access is allowed is when validating: valid and validationError
         if (data->hasBeenValidated())
@@ -305,12 +305,12 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         return;
     }
 
-    if (mode != ScriptHandlerInfo::Updating)
+    if (mode != ScriptHandlerInfo::Mode::Updating)
     {
         data->logError() << "Writing to property" << name.toString() << "is only allowed when updating.";
         return;
     }
-    Q_ASSERT(mode == ScriptHandlerInfo::Updating);
+    Q_ASSERT(mode == ScriptHandlerInfo::Mode::Updating);
 
     if (name == s_byteOrder)
     {
@@ -363,7 +363,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
 {
     QScriptValue::PropertyFlags result;
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
-    Q_ASSERT(mode != ScriptHandlerInfo::None);
+    Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
     DataInformation* data = toDataInformation(object);
     if (!data)
     {
@@ -374,10 +374,10 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     }
     if (name == s_valid || name == s_validationError)
     {
-        if (mode != ScriptHandlerInfo::Validating)
+        if (mode != ScriptHandlerInfo::Mode::Validating)
             result |= QScriptValue::ReadOnly;
     }
-    else if (mode != ScriptHandlerInfo::Updating)
+    else if (mode != ScriptHandlerInfo::Mode::Updating)
     {
         result |= QScriptValue::ReadOnly;
     }

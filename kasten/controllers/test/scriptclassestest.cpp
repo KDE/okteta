@@ -247,7 +247,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
 {
     //check in updating mode
     //TODO check also in other modes
-    data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Updating);
+    data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::Updating);
     QScriptValue value = data->toScriptValue(data->topLevelDataInformation()->scriptEngine(),
             data->topLevelDataInformation()->scriptHandler()->handlerInfo());
 
@@ -258,7 +258,7 @@ void ScriptClassesTest::checkProperties(const QVector<PropertyPair>& expected,
         it.next();
         foundProperties.append(qMakePair(it.name(), it.flags()));
     }
-    data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::None);
+    data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::None);
     std::sort(foundProperties.begin(), foundProperties.end());
     if (foundProperties.size() != expected.size()) {
         for (int i = 0; i < qMin(foundProperties.size(), expected.size()); ++i)
@@ -401,7 +401,7 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
     eng->pushContext();
     eng->currentContext()->activationObject().setProperty(QStringLiteral("myArray"),
             arrayData->toScriptValue(arrayDataTop.data()));
-    arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Updating);
+    arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::Updating);
     QScriptValue v0 = eng->evaluate(QStringLiteral("myArray[0]"));
     QCOMPARE(Utils::property(v0, "name").toString(), QString::number(0));
     QVERIFY(DefaultScriptClass::toDataInformation(v0) != nullptr);
@@ -417,7 +417,7 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
     //even after accessing a v0 property (which will fail), v1 properties should remain valid
     QCOMPARE(Utils::property(v1, "name").toString(), QString::number(1));
     QVERIFY(!eng->hasUncaughtException());
-    arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::None);
+    arrayDataTop->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::None);
     eng->popContext();
 }
 
@@ -425,7 +425,7 @@ void ScriptClassesTest::testSafeReferenceDeleteObject()
 {
     QScopedPointer<TopLevelDataInformation> top(Utils::evalAndParse("struct({bar: uint8()}).set({name: 'foo'});"));
     QVERIFY(top->actualDataInformation()->isStruct());
-    top->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::TaggedUnionSelection);
+    top->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::TaggedUnionSelection);
     QScriptValue val = top->actualDataInformation()->toScriptValue(top.data());
     QScriptValue name = Utils::property(val, "name");
     QVERIFY(name.isValid());
