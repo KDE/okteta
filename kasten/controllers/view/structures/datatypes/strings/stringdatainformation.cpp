@@ -186,7 +186,7 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
 {
     if (mData && mEncoding == encoding)
         return;
-    if (mData && ((mEncoding == UTF16_LE && encoding == UTF16_BE) || (mEncoding == UTF16_BE || encoding == UTF16_LE)))
+    if (mData && ((mEncoding == UTF16_LE && encoding == UTF16_BE) || (mEncoding == UTF16_BE && encoding == UTF16_LE)))
     {
         //only set endianess, since is already utf 16
         mData->setLittleEndian(encoding == UTF16_LE);
