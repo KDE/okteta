@@ -66,7 +66,7 @@ public:
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine,
             ScriptHandlerInfo* handlerInfo) = 0;
-    /** the primitive type or Type_Invalid for structs etc */
+    /** the primitive type or PrimitiveDataType::Invalid for structs etc */
     virtual PrimitiveDataType primitiveType() const = 0;
 
     virtual int indexOf(const DataInformation* data) const = 0;

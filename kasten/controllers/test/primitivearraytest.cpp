@@ -37,9 +37,9 @@ Q_OBJECT
 
 private:
     /** Tests user defined overrides of byteOrder, typeName, and toStringFunc. */
-    template<PrimitiveDataTypeEnum primType, typename T> void testReadCustomizedPrimitiveInternal();
-    template<PrimitiveDataTypeEnum primType, typename T> void testReadPrimitiveInternal();
-    template<PrimitiveDataTypeEnum primType> void testReadPrimitive();
+    template<PrimitiveDataType primType, typename T> void testReadCustomizedPrimitiveInternal();
+    template<PrimitiveDataType primType, typename T> void testReadPrimitiveInternal();
+    template<PrimitiveDataType primType> void testReadPrimitive();
     template<typename T> bool compareItems(T first, T second, uint index);
 
 private Q_SLOTS:
@@ -182,7 +182,7 @@ bool PrimitiveArrayTest::compareItems(double first, double second, uint index)
     return first == second;
 }
 
-template<PrimitiveDataTypeEnum primType>
+template<PrimitiveDataType primType>
 inline void PrimitiveArrayTest::testReadPrimitive()
 {
     testReadPrimitiveInternal<primType, typename PrimitiveInfo<primType>::valueType>();
@@ -196,7 +196,7 @@ QScriptValue customToStringFunc(QScriptContext *context, QScriptEngine *engine)
     return QStringLiteral("myvalue");
 }
 
-template<PrimitiveDataTypeEnum primType, typename T>
+template<PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
 {
     LoggerWithContext lwc(nullptr, QString());
@@ -246,7 +246,7 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
              QStringLiteral("myvalue"));
 }
 
-template<PrimitiveDataTypeEnum primType, typename T>
+template<PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
     LoggerWithContext lwc(nullptr, QString());
@@ -282,77 +282,77 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
 
 void PrimitiveArrayTest::testReadFloat()
 {
-    testReadPrimitive<Type_Float>();
+    testReadPrimitive<PrimitiveDataType::Float>();
 }
 
 void PrimitiveArrayTest::testReadDouble()
 {
-    testReadPrimitive<Type_Double>();
+    testReadPrimitive<PrimitiveDataType::Double>();
 }
 
 void PrimitiveArrayTest::testReadChar()
 {
-    testReadPrimitive<Type_Char>();
+    testReadPrimitive<PrimitiveDataType::Char>();
 }
 
 void PrimitiveArrayTest::testReadInt8()
 {
-    testReadPrimitive<Type_Int8>();
+    testReadPrimitive<PrimitiveDataType::Int8>();
 }
 
 void PrimitiveArrayTest::testReadInt16()
 {
-    testReadPrimitive<Type_Int16>();
+    testReadPrimitive<PrimitiveDataType::Int16>();
 }
 
 void PrimitiveArrayTest::testReadInt32()
 {
-    testReadPrimitive<Type_Int32>();
+    testReadPrimitive<PrimitiveDataType::Int32>();
 }
 
 void PrimitiveArrayTest::testReadInt64()
 {
-    testReadPrimitive<Type_Int64>();
+    testReadPrimitive<PrimitiveDataType::Int64>();
 }
 
 void PrimitiveArrayTest::testReadUInt8()
 {
-    testReadPrimitive<Type_UInt8>();
+    testReadPrimitive<PrimitiveDataType::UInt8>();
 }
 
 void PrimitiveArrayTest::testReadUInt16()
 {
-    testReadPrimitive<Type_UInt16>();
+    testReadPrimitive<PrimitiveDataType::UInt16>();
 }
 
 void PrimitiveArrayTest::testReadUInt32()
 {
-    testReadPrimitive<Type_UInt32>();
+    testReadPrimitive<PrimitiveDataType::UInt32>();
 }
 
 void PrimitiveArrayTest::testReadUInt64()
 {
-    testReadPrimitive<Type_UInt64>();
+    testReadPrimitive<PrimitiveDataType::UInt64>();
 }
 
 void PrimitiveArrayTest::testReadBool8()
 {
-    testReadPrimitive<Type_Bool8>();
+    testReadPrimitive<PrimitiveDataType::Bool8>();
 }
 
 void PrimitiveArrayTest::testReadBool16()
 {
-    testReadPrimitive<Type_Bool16>();
+    testReadPrimitive<PrimitiveDataType::Bool16>();
 }
 
 void PrimitiveArrayTest::testReadBool32()
 {
-    testReadPrimitive<Type_Bool32>();
+    testReadPrimitive<PrimitiveDataType::Bool32>();
 }
 
 void PrimitiveArrayTest::testReadBool64()
 {
-    testReadPrimitive<Type_Bool64>();
+    testReadPrimitive<PrimitiveDataType::Bool64>();
 }
 
 QTEST_GUILESS_MAIN(PrimitiveArrayTest)

@@ -35,15 +35,20 @@
 #include "view/structures/datatypes/primitivefactory.h"
 #include "structureviewpreferences.h"
 
+inline uint qHash(PrimitiveDataType type)
+{
+    return ::qHash(static_cast<int>(type));
+}
+
 class PrimitiveDataInformationTest : public QObject
 {
 Q_OBJECT
 
 private:
     template<typename s, typename u>
-    void addRowsGetAndSetSigned(PrimitiveDataTypeEnum type, const char* name);
+    void addRowsGetAndSetSigned(PrimitiveDataType type, const char* name);
     template<typename T>
-    void addRowsGetAndSetUnsigned(PrimitiveDataTypeEnum type, const char* name);
+    void addRowsGetAndSetUnsigned(PrimitiveDataType type, const char* name);
     void checkSignedDisplayBase(int expected);
     void checkUnsignedDisplayBase(int expected);
     int minimumSignedBits(qint64 value); //get the least number of bits this can be represented in
@@ -63,7 +68,7 @@ private Q_SLOTS:
     void testFromVariant();
     void cleanupTestCase();
     private:
-    QVector<PrimitiveDataInformation*> basic;
+    QHash<PrimitiveDataType, PrimitiveDataInformation*> basic;
     SignedBitfieldDataInformation* signedBitfield;
     UnsignedBitfieldDataInformation* unsignedBitfield;
     BoolBitfieldDataInformation* boolBitfield;
@@ -117,10 +122,11 @@ void PrimitiveDataInformationTest::initTestCase()
 
     LoggerWithContext lwc(nullptr, QString());
 
-    for (int i = Type_START; i < Type_Bitfield; ++i)
+    PrimitiveDataType type = PrimitiveDataType::START;
+    while( type < PrimitiveDataType::Bitfield )
     {
-        basic.append(PrimitiveFactory::newInstance(QStringLiteral("prim"),
-                        static_cast<PrimitiveDataTypeEnum>(i), lwc));
+        basic.insert(type, PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
+        type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
     boolBitfield = new BoolBitfieldDataInformation(QStringLiteral("bitfield"), 24);
     unsignedBitfield = new UnsignedBitfieldDataInformation(QStringLiteral("bitfield"), 24);
@@ -129,7 +135,7 @@ void PrimitiveDataInformationTest::initTestCase()
 
 namespace
 {
-template<PrimitiveDataTypeEnum Type>
+template<PrimitiveDataType Type>
 void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, QString bin,
         QString hex, QString dec, QString oct)
 {
@@ -139,7 +145,7 @@ void valueCompareHelper(typename PrimitiveInfo<Type>::valueType value, QString b
     QCOMPARE(PrimitiveInfo<Type>::Methods::staticValueString(value, 8), oct);
 }
 
-template<PrimitiveDataTypeEnum first, PrimitiveDataTypeEnum second>
+template<PrimitiveDataType first, PrimitiveDataType second>
 void valueCompareHelperUnsigned(typename PrimitiveInfo<first>::valueType value, QString bin,
         QString hex, QString dec, QString oct, QString boolBase)
 {
@@ -176,13 +182,13 @@ void PrimitiveDataInformationTest::testValueStringInt()
         Kasten::StructureViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
-            valueCompareHelper<Type_Int8>(qint8(value), binStr, hexStr, decStr, octStr);
+            valueCompareHelper<PrimitiveDataType::Int8>(qint8(value), binStr, hexStr, decStr, octStr);
         if (minSize <= 16)
-            valueCompareHelper<Type_Int16>(qint16(value), binStr, hexStr, decStr, octStr);
+            valueCompareHelper<PrimitiveDataType::Int16>(qint16(value), binStr, hexStr, decStr, octStr);
         if (minSize <= 32)
-            valueCompareHelper<Type_Int32>(qint32(value), binStr, hexStr, decStr, octStr);
+            valueCompareHelper<PrimitiveDataType::Int32>(qint32(value), binStr, hexStr, decStr, octStr);
         if (minSize <= 64)
-            valueCompareHelper<Type_Int64>(qint64(value), binStr, hexStr, decStr, octStr);
+            valueCompareHelper<PrimitiveDataType::Int64>(qint64(value), binStr, hexStr, decStr, octStr);
 
         //check bitfield now
         SignedBitfieldDataInformation bitfield(QStringLiteral("signed"), minSize);
@@ -329,16 +335,16 @@ void PrimitiveDataInformationTest::testValueStringUIntAndBool()
         Kasten::StructureViewPreferences::setLocaleAwareDecimalFormatting(bool(i));
 
         if (minSize <= 8)
-            valueCompareHelperUnsigned<Type_UInt8, Type_Bool8>(quint8(value), binStr, hexStr,
+            valueCompareHelperUnsigned<PrimitiveDataType::UInt8, PrimitiveDataType::Bool8>(quint8(value), binStr, hexStr,
                     decStr, octStr, boolBase);
         if (minSize <= 16)
-            valueCompareHelperUnsigned<Type_UInt16, Type_Bool16>(quint16(value), binStr, hexStr,
+            valueCompareHelperUnsigned<PrimitiveDataType::UInt16, PrimitiveDataType::Bool16>(quint16(value), binStr, hexStr,
                     decStr, octStr, boolBase);
         if (minSize <= 32)
-            valueCompareHelperUnsigned<Type_UInt32, Type_Bool32>(quint32(value), binStr, hexStr,
+            valueCompareHelperUnsigned<PrimitiveDataType::UInt32, PrimitiveDataType::Bool32>(quint32(value), binStr, hexStr,
                     decStr, octStr, boolBase);
         if (minSize <= 64)
-            valueCompareHelperUnsigned<Type_UInt64, Type_Bool64>(quint64(value), binStr, hexStr,
+            valueCompareHelperUnsigned<PrimitiveDataType::UInt64, PrimitiveDataType::Bool64>(quint64(value), binStr, hexStr,
                     decStr, octStr, boolBase);
 
         //check bitfield now
@@ -506,7 +512,7 @@ void PrimitiveDataInformationTest::testGetAndSetValue()
 }
 
 template<typename signedType, typename unsignedType>
-void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataTypeEnum type, const char* name)
+void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataType type, const char* name)
 {
     QString msg = QString::fromUtf8(name);
     QTest::newRow(msg.arg(QStringLiteral("-325")).toUtf8().constData())
@@ -533,7 +539,7 @@ void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataTypeEnum 
 }
 
 template<typename signedType>
-void PrimitiveDataInformationTest::addRowsGetAndSetUnsigned(PrimitiveDataTypeEnum type, const char* name)
+void PrimitiveDataInformationTest::addRowsGetAndSetUnsigned(PrimitiveDataType type, const char* name)
 {
     QString msg = QString::fromUtf8(name);
     QTest::newRow(msg.arg(QStringLiteral("-325")).toUtf8().constData())
@@ -559,10 +565,10 @@ void PrimitiveDataInformationTest::testGetAndSetValue_data()
     QTest::addColumn<AllPrimitiveTypes>("newVal");
     QTest::addColumn<AllPrimitiveTypes>("expected");
 
-    addRowsGetAndSetSigned<qint8, quint8>(Type_Int8, "int8: %1");
-    addRowsGetAndSetSigned<qint16, quint16>(Type_Int16, "int8: %1");
-    addRowsGetAndSetSigned<qint32, quint32>(Type_Int32, "int8: %1");
-    addRowsGetAndSetSigned<qint64, quint64>(Type_Int64, "int8: %1");
+    addRowsGetAndSetSigned<qint8, quint8>(PrimitiveDataType::Int8, "int8: %1");
+    addRowsGetAndSetSigned<qint16, quint16>(PrimitiveDataType::Int16, "int8: %1");
+    addRowsGetAndSetSigned<qint32, quint32>(PrimitiveDataType::Int32, "int8: %1");
+    addRowsGetAndSetSigned<qint64, quint64>(PrimitiveDataType::Int64, "int8: %1");
 }
 
 void PrimitiveDataInformationTest::cleanupTestCase()

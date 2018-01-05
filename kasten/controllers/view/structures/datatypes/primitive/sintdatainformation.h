@@ -42,22 +42,22 @@ public:
 template<>
 inline PrimitiveDataType SIntDataInformationMethods<qint8>::staticType()
 {
-    return Type_Int8;
+    return PrimitiveDataType::Int8;
 }
 template<>
 inline PrimitiveDataType SIntDataInformationMethods<qint16>::staticType()
 {
-    return Type_Int16;
+    return PrimitiveDataType::Int16;
 }
 template<>
 inline PrimitiveDataType SIntDataInformationMethods<qint32>::staticType()
 {
-    return Type_Int32;
+    return PrimitiveDataType::Int32;
 }
 template<>
 inline PrimitiveDataType SIntDataInformationMethods<qint64>::staticType()
 {
-    return Type_Int64;
+    return PrimitiveDataType::Int64;
 }
 
 template<typename T>

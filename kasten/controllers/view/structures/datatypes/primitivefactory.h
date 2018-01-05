@@ -34,7 +34,7 @@ namespace PrimitiveFactory
 {
 
 /** Converts @p typeStr to a PrimitiveDataType case-insensitively
- * @return The corresponding type or PrimitiveDataTypeEnum::Type_Invalid if string is not regcognized
+ * @return The corresponding type or PrimitiveDataType::Invalid if string is not regcognized
  */
 PrimitiveDataType typeStringToType(const QString& typeStr, const LoggerWithContext& logger);
 

@@ -34,7 +34,7 @@
 #include <KLocalizedString>
 
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,
         ArrayDataInformation* parent)
         : AbstractArrayData(childType, parent), mNumReadValues(0), mDummy(parent)
@@ -44,7 +44,7 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, 
     mData.resize(initialLength);
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
     BitCount64 bitsRemaining)
 {
@@ -69,7 +69,7 @@ qint64 PrimitiveArrayData<type>::readData(Okteta::AbstractByteArrayModel* input,
     return maxNumItems * sizeof(T) * 8;
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input,
         Okteta::Address address)
 {
@@ -83,7 +83,7 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems, Okteta::Abstra
     Q_UNUSED(numCopied);
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::AbstractByteArrayModel* input,
         Okteta::Address address)
 {
@@ -101,7 +101,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems, Okteta::Abs
     }
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
         Okteta::Address address, BitCount64 bitsRemaining)
 {
@@ -132,7 +132,7 @@ bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okt
 
 
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
         Okteta::AbstractByteArrayModel* out, bool littleEndian)
 {
@@ -157,26 +157,26 @@ void PrimitiveArrayData<type>::writeOneItem(T value, Okteta::Address addr,
 }
 
 template<>
-void PrimitiveArrayData<Type_Float>::writeOneItem(float value, Okteta::Address addr,
+void PrimitiveArrayData<PrimitiveDataType::Float>::writeOneItem(float value, Okteta::Address addr,
         Okteta::AbstractByteArrayModel* out, bool littleEndian)
 {
     Q_ASSERT(sizeof(float) == sizeof(quint32));
     union { quint32 intVal; float floatVal; } un;
     un.floatVal = value;
-    PrimitiveArrayData<Type_UInt32>::writeOneItem(un.intVal, addr, out, littleEndian);
+    PrimitiveArrayData<PrimitiveDataType::UInt32>::writeOneItem(un.intVal, addr, out, littleEndian);
 }
 
 template<>
-void PrimitiveArrayData<Type_Double>::writeOneItem(double value, Okteta::Address addr,
+void PrimitiveArrayData<PrimitiveDataType::Double>::writeOneItem(double value, Okteta::Address addr,
         Okteta::AbstractByteArrayModel* out, bool littleEndian)
 {
     Q_ASSERT(sizeof(double) == sizeof(quint64));
     union { quint64 intVal; double doubleVal; } un;
     un.doubleVal = value;
-    PrimitiveArrayData<Type_UInt64>::writeOneItem(un.intVal, addr, out, littleEndian);
+    PrimitiveArrayData<PrimitiveDataType::UInt64>::writeOneItem(un.intVal, addr, out, littleEndian);
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 void PrimitiveArrayData<type>::activateIndex(uint index)
 {
     Q_ASSERT(index < length());
@@ -188,7 +188,7 @@ void PrimitiveArrayData<type>::activateIndex(uint index)
     mDummy.setDummyIndex(index);
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
 {
     Q_ASSERT(index < length());
@@ -215,14 +215,14 @@ QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
     return QVariant();
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 QString PrimitiveArrayData<type>::typeName() const
 {
     return QString(mChildType->typeName() + QLatin1Char('[')
             + QString::number(this->length()) + QLatin1Char(']'));
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
 {
     if (data == &mDummy)
@@ -233,14 +233,14 @@ int PrimitiveArrayData<type>::indexOf(const DataInformation* data) const
     return -1;
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
     activateIndex(index);
     return mChildType->toScriptValue(engine, handlerInfo);
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 QWidget* PrimitiveArrayData<type>::createChildEditWidget(uint index, QWidget* parent) const
 {
     Q_ASSERT(index < length());
@@ -248,7 +248,7 @@ QWidget* PrimitiveArrayData<type>::createChildEditWidget(uint index, QWidget* pa
     return DisplayClass::staticCreateEditWidget(parent);
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 QVariant PrimitiveArrayData<type>::dataFromChildWidget(uint index, const QWidget* w) const
 {
     Q_ASSERT(index < length());
@@ -256,7 +256,7 @@ QVariant PrimitiveArrayData<type>::dataFromChildWidget(uint index, const QWidget
     return DisplayClass::staticDataFromWidget(w);
 }
 
-template<PrimitiveDataTypeEnum type>
+template<PrimitiveDataType type>
 void PrimitiveArrayData<type>::setChildWidgetData(uint index, QWidget* w) const
 {
     Q_ASSERT(index < length());
@@ -266,18 +266,18 @@ void PrimitiveArrayData<type>::setChildWidgetData(uint index, QWidget* w) const
 
 
 //now instantiate all the template instances
-template class PrimitiveArrayData<Type_Bool8>;
-template class PrimitiveArrayData<Type_Bool16>;
-template class PrimitiveArrayData<Type_Bool32>;
-template class PrimitiveArrayData<Type_Bool64>;
-template class PrimitiveArrayData<Type_Int8>;
-template class PrimitiveArrayData<Type_Int16>;
-template class PrimitiveArrayData<Type_Int32>;
-template class PrimitiveArrayData<Type_Int64>;
-template class PrimitiveArrayData<Type_UInt8>;
-template class PrimitiveArrayData<Type_UInt16>;
-template class PrimitiveArrayData<Type_UInt32>;
-template class PrimitiveArrayData<Type_UInt64>;
-template class PrimitiveArrayData<Type_Char>;
-template class PrimitiveArrayData<Type_Float>;
-template class PrimitiveArrayData<Type_Double>;
+template class PrimitiveArrayData<PrimitiveDataType::Bool8>;
+template class PrimitiveArrayData<PrimitiveDataType::Bool16>;
+template class PrimitiveArrayData<PrimitiveDataType::Bool32>;
+template class PrimitiveArrayData<PrimitiveDataType::Bool64>;
+template class PrimitiveArrayData<PrimitiveDataType::Int8>;
+template class PrimitiveArrayData<PrimitiveDataType::Int16>;
+template class PrimitiveArrayData<PrimitiveDataType::Int32>;
+template class PrimitiveArrayData<PrimitiveDataType::Int64>;
+template class PrimitiveArrayData<PrimitiveDataType::UInt8>;
+template class PrimitiveArrayData<PrimitiveDataType::UInt16>;
+template class PrimitiveArrayData<PrimitiveDataType::UInt32>;
+template class PrimitiveArrayData<PrimitiveDataType::UInt64>;
+template class PrimitiveArrayData<PrimitiveDataType::Char>;
+template class PrimitiveArrayData<PrimitiveDataType::Float>;
+template class PrimitiveArrayData<PrimitiveDataType::Double>;

@@ -42,7 +42,7 @@ PointerDataInformation::PointerDataInformation(const QString& name, DataInformat
 
     //currently only absolute unsigned pointers are allowed
     const PrimitiveDataType pdt = mValue->type();
-    Q_ASSERT(pdt == Type_UInt8 || pdt == Type_UInt16 || pdt == Type_UInt32 || pdt == Type_UInt64);
+    Q_ASSERT(pdt == PrimitiveDataType::UInt8 || pdt == PrimitiveDataType::UInt16 || pdt == PrimitiveDataType::UInt32 || pdt == PrimitiveDataType::UInt64);
     Q_UNUSED(pdt)
     mPointerTarget->setParent(this);
 }
@@ -153,7 +153,7 @@ bool PointerDataInformation::setPointerType(DataInformation* type)
     }
     PrimitiveDataInformation* prim = type->asPrimitive();
     const PrimitiveDataType pdt = prim->type();
-    if (pdt == Type_UInt8 || pdt == Type_UInt16 || pdt == Type_UInt32 || pdt == Type_UInt64)
+    if (pdt == PrimitiveDataType::UInt8 || pdt == PrimitiveDataType::UInt16 || pdt == PrimitiveDataType::UInt32 || pdt == PrimitiveDataType::UInt64)
     {
         mValue.reset(prim);
         mValue->setParent(this);

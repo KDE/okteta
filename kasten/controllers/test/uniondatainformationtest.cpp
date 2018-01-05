@@ -67,9 +67,9 @@ void UnionDataInformationTest::testSize()
     UnionDataInformation empty(QStringLiteral("empty"));
     QCOMPARE(empty.size(), BitCount32(0));
     QVector<DataInformation*> size54;
-    size54 << PrimitiveFactory::newInstance(QStringLiteral("8"), Type_Bool8, lwc);
-    size54 << PrimitiveFactory::newInstance(QStringLiteral("16"), Type_Int16, lwc);
-    size54 << PrimitiveFactory::newInstance(QStringLiteral("32"), Type_Float, lwc);
+    size54 << PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc);
+    size54 << PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
+    size54 << PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::Float, lwc);
     size54 << new UnsignedBitfieldDataInformation(QStringLiteral("54"), 54);
     UnionDataInformation fourChildren(QStringLiteral("four"), size54);
     QCOMPARE(fourChildren.size(), BitCount32(54));
@@ -79,9 +79,9 @@ void UnionDataInformationTest::testReadData1()
 {
     LoggerWithContext lwc(nullptr, QString());
 
-    PrimitiveDataInformation* b8 = PrimitiveFactory::newInstance(QStringLiteral("8"), Type_Bool8, lwc);
-    PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QStringLiteral("32"), Type_UInt32, lwc);
-    PrimitiveDataInformation* i16 = PrimitiveFactory::newInstance(QStringLiteral("16"), Type_Int16, lwc);
+    PrimitiveDataInformation* b8 = PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc);
+    PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::UInt32, lwc);
+    PrimitiveDataInformation* i16 = PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
     UnsignedBitfieldDataInformation* u54 = new UnsignedBitfieldDataInformation(QStringLiteral("54"),
             54);
     QVector<DataInformation*> children;

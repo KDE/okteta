@@ -55,7 +55,7 @@ void ArrayDataInformationTest::initTestCase()
     LoggerWithContext lwc(nullptr, QString());
 
     primitive = new ArrayDataInformation(QStringLiteral("primitives"), 0,
-            PrimitiveFactory::newInstance(QStringLiteral("child"), Type_UInt32, lwc));
+            PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
     primitiveSize = 32;
     primitiveTop = new TopLevelDataInformation(primitive);
 
@@ -77,8 +77,8 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->topLevelDataInformation(), primitiveTop);
 
     QVector<DataInformation*> structsChildren;
-    structsChildren << PrimitiveFactory::newInstance(QStringLiteral("first"), Type_UInt32, lwc)
-            << PrimitiveFactory::newInstance(QStringLiteral("second"), Type_UInt32, lwc);
+    structsChildren << PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc)
+            << PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc);
 
     StructureDataInformation* structs = new StructureDataInformation(QStringLiteral("vals"), structsChildren);
 

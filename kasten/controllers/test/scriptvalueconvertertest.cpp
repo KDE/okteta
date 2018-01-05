@@ -101,9 +101,9 @@ void ScriptValueConverterTest::basicConverterTest()
     QVERIFY(converted[0]->isPrimitive());
     QVERIFY(converted[1]->isPrimitive());
     QVERIFY(converted[2]->isPrimitive());
-    QVERIFY(converted[0]->asPrimitive()->type() == Type_UInt8);
-    QVERIFY(converted[1]->asPrimitive()->type() == Type_UInt16);
-    QVERIFY(converted[2]->asPrimitive()->type() == Type_UInt32);
+    QVERIFY(converted[0]->asPrimitive()->type() == PrimitiveDataType::UInt8);
+    QVERIFY(converted[1]->asPrimitive()->type() == PrimitiveDataType::UInt16);
+    QVERIFY(converted[2]->asPrimitive()->type() == PrimitiveDataType::UInt32);
     QCOMPARE(converted[0]->name(), QStringLiteral("0"));
     QCOMPARE(converted[1]->name(), QStringLiteral("1"));
     QCOMPARE(converted[2]->name(), QStringLiteral("2"));
@@ -177,21 +177,21 @@ void ScriptValueConverterTest::testPrimitives_data()
     QTest::addColumn<QString>("typeString");
     QTest::addColumn<int>("expectedType");
 
-    QTest::newRow("uint8") << "uint8()" << "new uint8()" << "UInt8" << (int) Type_UInt8;
-    QTest::newRow("uint16") << "uint16()" << "new uint16()" << "UInt16" << (int) Type_UInt16;
-    QTest::newRow("uint32") << "uint32()" << "new uint32()" << "UInt32" << (int) Type_UInt32;
-    QTest::newRow("uint64") << "uint64()" << "new uint64()" << "UInt64" << (int) Type_UInt64;
-    QTest::newRow("int8") << "int8()" << "new int8()" << "Int8" << (int) Type_Int8;
-    QTest::newRow("int16") << "int16()" << "new int16()" << "Int16" << (int) Type_Int16;
-    QTest::newRow("int32") << "int32()" << "new int32()" << "Int32" << (int) Type_Int32;
-    QTest::newRow("int64") << "int64()" << "new int64()" << "Int64" << (int) Type_Int64;
-    QTest::newRow("bool8") << "bool8()" << "new bool8()" << "Bool8" << (int) Type_Bool8;
-    QTest::newRow("bool16") << "bool16()" << "new bool16()" << "Bool16" << (int) Type_Bool16;
-    QTest::newRow("bool32") << "bool32()" << "new bool32()" << "Bool32" << (int) Type_Bool32;
-    QTest::newRow("bool64") << "bool64()" << "new bool64()" << "Bool64" << (int) Type_Bool64;
-    QTest::newRow("char") << "char()" << "new char()" << "Char" << (int) Type_Char;
-    QTest::newRow("float") << "float()" << "new float()" << "Float" << (int) Type_Float;
-    QTest::newRow("double") << "double()" << "new double()" << "Double" << (int) Type_Double;
+    QTest::newRow("uint8") << "uint8()" << "new uint8()" << "UInt8" << (int) PrimitiveDataType::UInt8;
+    QTest::newRow("uint16") << "uint16()" << "new uint16()" << "UInt16" << (int) PrimitiveDataType::UInt16;
+    QTest::newRow("uint32") << "uint32()" << "new uint32()" << "UInt32" << (int) PrimitiveDataType::UInt32;
+    QTest::newRow("uint64") << "uint64()" << "new uint64()" << "UInt64" << (int) PrimitiveDataType::UInt64;
+    QTest::newRow("int8") << "int8()" << "new int8()" << "Int8" << (int) PrimitiveDataType::Int8;
+    QTest::newRow("int16") << "int16()" << "new int16()" << "Int16" << (int) PrimitiveDataType::Int16;
+    QTest::newRow("int32") << "int32()" << "new int32()" << "Int32" << (int) PrimitiveDataType::Int32;
+    QTest::newRow("int64") << "int64()" << "new int64()" << "Int64" << (int) PrimitiveDataType::Int64;
+    QTest::newRow("bool8") << "bool8()" << "new bool8()" << "Bool8" << (int) PrimitiveDataType::Bool8;
+    QTest::newRow("bool16") << "bool16()" << "new bool16()" << "Bool16" << (int) PrimitiveDataType::Bool16;
+    QTest::newRow("bool32") << "bool32()" << "new bool32()" << "Bool32" << (int) PrimitiveDataType::Bool32;
+    QTest::newRow("bool64") << "bool64()" << "new bool64()" << "Bool64" << (int) PrimitiveDataType::Bool64;
+    QTest::newRow("char") << "char()" << "new char()" << "Char" << (int) PrimitiveDataType::Char;
+    QTest::newRow("float") << "float()" << "new float()" << "Float" << (int) PrimitiveDataType::Float;
+    QTest::newRow("double") << "double()" << "new double()" << "Double" << (int) PrimitiveDataType::Double;
 }
 
 void ScriptValueConverterTest::testPrimitives()
@@ -201,7 +201,7 @@ void ScriptValueConverterTest::testPrimitives()
     QFETCH(QString, typeString);
     QFETCH(int, expectedType);
     logger->clear();
-    PrimitiveDataType type = static_cast<PrimitiveDataTypeEnum>(expectedType);
+    PrimitiveDataType type = static_cast<PrimitiveDataType>(expectedType);
 
     QScriptValue val1 = engine->evaluate(code);
     QScriptValue val2 = engine->evaluate(code2);
@@ -210,7 +210,7 @@ void ScriptValueConverterTest::testPrimitives()
     QCOMPARE(val1.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), ParserStrings::TYPE_PRIMITIVE());
     QCOMPARE(val2.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), ParserStrings::TYPE_PRIMITIVE());
 
-    if (type == Type_Invalid)
+    if (type == PrimitiveDataType::Invalid)
         return; //the cast will fail
     QScopedPointer<DataInformation> data1(ScriptValueConverter::convert(val1, QStringLiteral("val1"),
             logger.data()));
@@ -224,7 +224,7 @@ void ScriptValueConverterTest::testPrimitives()
     QVERIFY(p2);
     QCOMPARE(p1->type(), type);
     QCOMPARE(p2->type(), type);
-    if (type == Type_Bitfield)
+    if (type == PrimitiveDataType::Bitfield)
         return; //the following tests don't work with bitfields
     QScopedPointer<DataInformation> data3(convert(QString(QStringLiteral("\"%1\"")).arg(typeString)));
     QVERIFY(data3);

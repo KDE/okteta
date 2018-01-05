@@ -146,5 +146,5 @@ void PrimitiveDataInformationWrapper::setValue(AllPrimitiveTypes newValue)
 //classes derived from this are not true primitive types (they provide additional information)
 PrimitiveDataType PrimitiveDataInformationWrapper::type() const
 {
-    return Type_Invalid;
+    return PrimitiveDataType::Invalid;
 }

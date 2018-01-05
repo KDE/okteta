@@ -50,21 +50,21 @@ void OsdParserTest::testPrimitive_data()
     QString base(
             QStringLiteral(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\"?><data><primitive name=\"foo\" type=\"%1\" /></data>"));
-    QTest::newRow("uint8") << arg(base, "uint8") << arg(base, "UInt8") << (int) Type_UInt8;
-    QTest::newRow("uint16") << arg(base, "uint16") << arg(base, "UInt16") << (int) Type_UInt16;
-    QTest::newRow("uint32") << arg(base, "uint32") << arg(base, "UInt32") << (int) Type_UInt32;
-    QTest::newRow("uint64") << arg(base, "uint64") << arg(base, "UInt64") << (int) Type_UInt64;
-    QTest::newRow("int8") << arg(base, "int8") << arg(base, "Int8") << (int) Type_Int8;
-    QTest::newRow("int16") << arg(base, "int16") << arg(base, "Int16") << (int) Type_Int16;
-    QTest::newRow("int32") << arg(base, "int32") << arg(base, "Int32") << (int) Type_Int32;
-    QTest::newRow("int64") << arg(base, "int64") << arg(base, "Int64") << (int) Type_Int64;
-    QTest::newRow("bool8") << arg(base, "bool8") << arg(base, "Bool8") << (int) Type_Bool8;
-    QTest::newRow("bool16") << arg(base, "bool16") << arg(base, "Bool16") << (int) Type_Bool16;
-    QTest::newRow("bool32") << arg(base, "bool32") << arg(base, "Bool32") << (int) Type_Bool32;
-    QTest::newRow("bool64") << arg(base, "bool64") << arg(base, "Bool64") << (int) Type_Bool64;
-    QTest::newRow("char") << arg(base, "char") << arg(base, "Char") << (int) Type_Char;
-    QTest::newRow("float") << arg(base, "float") << arg(base, "Float") << (int) Type_Float;
-    QTest::newRow("double") << arg(base, "double") << arg(base, "Double") << (int) Type_Double;
+    QTest::newRow("uint8") << arg(base, "uint8") << arg(base, "UInt8") << (int) PrimitiveDataType::UInt8;
+    QTest::newRow("uint16") << arg(base, "uint16") << arg(base, "UInt16") << (int) PrimitiveDataType::UInt16;
+    QTest::newRow("uint32") << arg(base, "uint32") << arg(base, "UInt32") << (int) PrimitiveDataType::UInt32;
+    QTest::newRow("uint64") << arg(base, "uint64") << arg(base, "UInt64") << (int) PrimitiveDataType::UInt64;
+    QTest::newRow("int8") << arg(base, "int8") << arg(base, "Int8") << (int) PrimitiveDataType::Int8;
+    QTest::newRow("int16") << arg(base, "int16") << arg(base, "Int16") << (int) PrimitiveDataType::Int16;
+    QTest::newRow("int32") << arg(base, "int32") << arg(base, "Int32") << (int) PrimitiveDataType::Int32;
+    QTest::newRow("int64") << arg(base, "int64") << arg(base, "Int64") << (int) PrimitiveDataType::Int64;
+    QTest::newRow("bool8") << arg(base, "bool8") << arg(base, "Bool8") << (int) PrimitiveDataType::Bool8;
+    QTest::newRow("bool16") << arg(base, "bool16") << arg(base, "Bool16") << (int) PrimitiveDataType::Bool16;
+    QTest::newRow("bool32") << arg(base, "bool32") << arg(base, "Bool32") << (int) PrimitiveDataType::Bool32;
+    QTest::newRow("bool64") << arg(base, "bool64") << arg(base, "Bool64") << (int) PrimitiveDataType::Bool64;
+    QTest::newRow("char") << arg(base, "char") << arg(base, "Char") << (int) PrimitiveDataType::Char;
+    QTest::newRow("float") << arg(base, "float") << arg(base, "Float") << (int) PrimitiveDataType::Float;
+    QTest::newRow("double") << arg(base, "double") << arg(base, "Double") << (int) PrimitiveDataType::Double;
 }
 
 void OsdParserTest::testPrimitive()
@@ -72,7 +72,7 @@ void OsdParserTest::testPrimitive()
     QFETCH(QString, xml);
     QFETCH(QString, secondXml);
     QFETCH(int, expectedType);
-    PrimitiveDataType type(static_cast<PrimitiveDataTypeEnum>(expectedType));
+    PrimitiveDataType type(static_cast<PrimitiveDataType>(expectedType));
 
     OsdParser parser(xml);
     QVector<TopLevelDataInformation*> tds = parser.parseStructures();

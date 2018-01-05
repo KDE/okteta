@@ -46,7 +46,7 @@ void AbstractBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 
 PrimitiveDataType AbstractBitfieldDataInformation::type() const
 {
-    return Type_Bitfield;
+    return PrimitiveDataType::Bitfield;
 }
 
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,

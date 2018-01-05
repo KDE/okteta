@@ -44,22 +44,22 @@ public:
 template<>
 inline PrimitiveDataType BoolDataInformationMethods<quint8>::staticType()
 {
-    return Type_Bool8;
+    return PrimitiveDataType::Bool8;
 }
 template<>
 inline PrimitiveDataType BoolDataInformationMethods<quint16>::staticType()
 {
-    return Type_Bool16;
+    return PrimitiveDataType::Bool16;
 }
 template<>
 inline PrimitiveDataType BoolDataInformationMethods<quint32>::staticType()
 {
-    return Type_Bool32;
+    return PrimitiveDataType::Bool32;
 }
 template<>
 inline PrimitiveDataType BoolDataInformationMethods<quint64>::staticType()
 {
-    return Type_Bool64;
+    return PrimitiveDataType::Bool64;
 }
 
 template<typename T>

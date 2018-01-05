@@ -39,7 +39,7 @@ public:
 
 inline PrimitiveDataType FloatDataInformationMethods::staticType()
 {
-    return Type_Float;
+    return PrimitiveDataType::Float;
 }
 
 inline float FloatDataInformationMethods::fromVariant(const QVariant& value, bool* ok)

@@ -176,9 +176,9 @@ bool ComplexArrayData::setChildData(uint row, const QVariant& value, Okteta::Abs
 PrimitiveDataType ComplexArrayData::primitiveType() const
 {
     if (mChildType->isBitfield())
-        return Type_Bitfield;
+        return PrimitiveDataType::Bitfield;
     else
-        return Type_Invalid;
+        return PrimitiveDataType::Invalid;
 }
 
 BitCount32 ComplexArrayData::sizeAt(uint index)

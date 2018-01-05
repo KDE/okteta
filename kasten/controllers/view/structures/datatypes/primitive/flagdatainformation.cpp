@@ -31,7 +31,7 @@ FlagDataInformation::FlagDataInformation(const QString& name, PrimitiveDataInfor
         const EnumDefinition::Ptr& enumDef, DataInformation* parent)
     : EnumDataInformation(name, type, enumDef, parent)
 {
-    Q_ASSERT_X(type->type() != Type_Double && type->type() != Type_Float && type->type() != Type_Invalid,
+    Q_ASSERT_X(type->type() != PrimitiveDataType::Double && type->type() != PrimitiveDataType::Float && type->type() != PrimitiveDataType::Invalid,
         "FlagDataInformation::FlagDataInformation", "Bitflags only work with integers!");
 }
 

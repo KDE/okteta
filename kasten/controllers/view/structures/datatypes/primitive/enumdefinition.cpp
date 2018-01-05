@@ -63,50 +63,50 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
     //name must not be empty, else default constructed return would be valid!
     quint64 maxValue = 0.0;
     qint64 minValue;
-    switch (type.value)
+    switch (type)
     {
-    case Type_Bitfield:
+    case PrimitiveDataType::Bitfield:
         //assume all 64 bits are used, we do not have the necessary information here
         maxValue = std::numeric_limits<quint64>::max();
         minValue = std::numeric_limits<qint64>::min();
         break;
-    case Type_Bool8:
+    case PrimitiveDataType::Bool8:
         //fall through
-    case Type_UInt8:
+    case PrimitiveDataType::UInt8:
         maxValue = std::numeric_limits<quint8>::max();
         minValue = 0;
         break;
-    case Type_Bool16:
+    case PrimitiveDataType::Bool16:
         //fall through
-    case Type_UInt16:
+    case PrimitiveDataType::UInt16:
         maxValue = std::numeric_limits<quint16>::max();
         minValue = 0;
         break;
-    case Type_Bool32:
+    case PrimitiveDataType::Bool32:
         //fall through
-    case Type_UInt32:
+    case PrimitiveDataType::UInt32:
         maxValue = std::numeric_limits<quint32>::max();
         minValue = 0;
         break;
-    case Type_Bool64:
+    case PrimitiveDataType::Bool64:
         //fall through
-    case Type_UInt64:
+    case PrimitiveDataType::UInt64:
         maxValue = std::numeric_limits<quint64>::max();
         minValue = 0;
         break;
-    case Type_Int8:
+    case PrimitiveDataType::Int8:
         maxValue = std::numeric_limits<qint8>::max();
         minValue = std::numeric_limits<qint8>::min();
         break;
-    case Type_Int16:
+    case PrimitiveDataType::Int16:
         maxValue = std::numeric_limits<qint16>::max();
         minValue = std::numeric_limits<qint16>::min();
         break;
-    case Type_Int32:
+    case PrimitiveDataType::Int32:
         maxValue = std::numeric_limits<qint32>::max();
         minValue = std::numeric_limits<qint32>::min();
         break;
-    case Type_Int64:
+    case PrimitiveDataType::Int64:
         maxValue = std::numeric_limits<qint64>::max();
         minValue = std::numeric_limits<qint64>::min();
         break;
@@ -146,7 +146,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         }
         else
         {
-            if (type == Type_UInt64 || type == Type_Bool64)
+            if (type == PrimitiveDataType::UInt64 || type == PrimitiveDataType::Bool64)
                 intValue = valueString.toULongLong(&ok, 10);
             else
                 intValue = valueString.toLongLong(&ok, 10);

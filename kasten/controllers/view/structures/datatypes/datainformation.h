@@ -70,7 +70,7 @@ class DataInformation : public DataInformationBase
     friend class PrimitiveDataInformationWrapper; //to set mHasBeenUpdated
     friend class PointerDataInformation; //to set mWasAbleToRead on pointer target
     friend class DefaultScriptClass; //to set mValidationSucessful and validationError
-    template<PrimitiveDataTypeEnum type> friend class PrimitiveArrayData; //to set mWasAbleToRead (when returning a script value)
+    template<PrimitiveDataType type> friend class PrimitiveArrayData; //to set mWasAbleToRead (when returning a script value)
 protected:
     explicit DataInformation(const DataInformation&);
 

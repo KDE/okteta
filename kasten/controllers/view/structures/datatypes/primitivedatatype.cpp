@@ -25,7 +25,7 @@
 #include <KLocalizedString>
 #include <QDebug>
 
-static const char* const longTypeNames[Type_END + 1] =
+static const char* const longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] =
         {
                 I18N_NOOP2("data type", "bool (1 byte)"),
                 I18N_NOOP2("data type", "signed byte"),
@@ -45,7 +45,7 @@ static const char* const longTypeNames[Type_END + 1] =
                 I18N_NOOP2("data type", "bitfield"),
         };
 
-static const char* const typeNames[Type_END + 1] =
+static const char* const typeNames[static_cast<int>(PrimitiveDataType::END) + 1] =
         {
                 "bool8",
                 "int8",
@@ -73,20 +73,18 @@ QString PrimitiveType::typeName(PrimitiveDataType type)
         return longTypeName(type);
 }
 
-QString PrimitiveType::standardTypeName(PrimitiveDataType type_)
+QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 {
-    PrimitiveDataTypeEnum type = type_.value;
-    if (type >= Type_START && type <= Type_END)
-        return QLatin1String(typeNames[type]);
+    if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END)
+        return QLatin1String(typeNames[static_cast<int>(type)]);
     else
         return QStringLiteral("invalid");
 }
 
-QString PrimitiveType::longTypeName(PrimitiveDataType type_)
+QString PrimitiveType::longTypeName(PrimitiveDataType type)
 {
-    PrimitiveDataTypeEnum type = type_.value;
-    if (type >= Type_START && type <= Type_END)
-        return i18n(longTypeNames[type]);
+    if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END)
+        return i18n(longTypeNames[static_cast<int>(type)]);
     else
         return i18n("invalid type");
 }

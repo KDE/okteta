@@ -134,12 +134,13 @@ void ScriptClassesTest::initTestCase()
             << pair("uint64high32") << pair("uint64low32") << pair("type");
     std::sort(primitiveProperties.begin(), primitiveProperties.end());
     LoggerWithContext lwc(nullptr, QString());
-    for (int i = Type_START; i < Type_Bitfield; ++i)
+    PrimitiveDataType type = PrimitiveDataType::START;
+    while( type < PrimitiveDataType::Bitfield )
     {
-        PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(
-                QStringLiteral("prim"), static_cast<PrimitiveDataTypeEnum>(i), lwc);
+        PrimitiveDataInformation* prim = PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc);
         prim->setValue(10);
         primitives << new TopLevelDataInformation(prim);
+        type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
 
     enumProperties << primitiveProperties << pair("enumValues", QScriptValue::Undeletable);
@@ -152,13 +153,13 @@ void ScriptClassesTest::initTestCase()
     enumValues.insert(2, QStringLiteral("tow"));
     enumValues.insert(4, QStringLiteral("four"));
     EnumDefinition::Ptr enumDef(new EnumDefinition(enumValues,
-            QStringLiteral("theEnum"), Type_Int32));
+            QStringLiteral("theEnum"), PrimitiveDataType::Int32));
     enumData = new EnumDataInformation(QStringLiteral("enumData"),
-            PrimitiveFactory::newInstance(QStringLiteral("dummy"), Type_Int32, lwc), enumDef);
+            PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
     enumDataTop.reset(
             new TopLevelDataInformation(enumData, nullptr, ScriptEngineInitializer::newEngine()));
     flagData = new FlagDataInformation(QStringLiteral("flagData"),
-            PrimitiveFactory::newInstance(QStringLiteral("dummy"), Type_Int32, lwc), enumDef);
+            PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
     flagDataTop.reset(
             new TopLevelDataInformation(flagData, nullptr, ScriptEngineInitializer::newEngine()));
 
@@ -187,7 +188,7 @@ void ScriptClassesTest::initTestCase()
             << pair("type", QScriptValue::Undeletable);
     std::sort(arrayProperties.begin(), arrayProperties.end());
     arrayData = new ArrayDataInformation(QStringLiteral("array"), 20,
-            PrimitiveFactory::newInstance(QStringLiteral("inner"), Type_Int32, lwc));
+            PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc));
     arrayDataTop.reset(
             new TopLevelDataInformation(arrayData, nullptr, ScriptEngineInitializer::newEngine()));
 
@@ -349,13 +350,13 @@ void ScriptClassesTest::testReplaceObject()
 
     //now just call update
     QCOMPARE(structData->childCount(), 2u);
-    QCOMPARE((int)structData->childAt(0)->asPrimitive()->type().value, (int)Type_UInt8);
+    QCOMPARE((int)structData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::UInt8);
     QCOMPARE(structData->childAt(0)->name(), QString(QStringLiteral("first")));
     QCOMPARE(structData->childAt(1)->name(), QString(QStringLiteral("second")));
     top.scriptHandler()->updateDataInformation(structData);
     //now structdata should have different children
     QCOMPARE(structData->childCount(), 2u);
-    QCOMPARE((int)structData->childAt(0)->asPrimitive()->type().value, (int)Type_Int32); //different now
+    QCOMPARE((int)structData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::Int32); //different now
     QCOMPARE(structData->childAt(0)->name(), QString(QStringLiteral("changed"))); //different now
     QCOMPARE(structData->childAt(1)->name(), QString(QStringLiteral("second"))); //still the same
 

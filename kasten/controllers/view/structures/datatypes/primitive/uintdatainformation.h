@@ -40,13 +40,13 @@ public:
 };
 
 template<>
-inline PrimitiveDataType UIntDataInformationMethods<quint8>::staticType() { return Type_UInt8; }
+inline PrimitiveDataType UIntDataInformationMethods<quint8>::staticType() { return PrimitiveDataType::UInt8; }
 template<>
-inline PrimitiveDataType UIntDataInformationMethods<quint16>::staticType() { return Type_UInt16; }
+inline PrimitiveDataType UIntDataInformationMethods<quint16>::staticType() { return PrimitiveDataType::UInt16; }
 template<>
-inline PrimitiveDataType UIntDataInformationMethods<quint32>::staticType() { return Type_UInt32; }
+inline PrimitiveDataType UIntDataInformationMethods<quint32>::staticType() { return PrimitiveDataType::UInt32; }
 template<>
-inline PrimitiveDataType UIntDataInformationMethods<quint64>::staticType() { return Type_UInt64; }
+inline PrimitiveDataType UIntDataInformationMethods<quint64>::staticType() { return PrimitiveDataType::UInt64; }
 
 template<typename T>
 inline T UIntDataInformationMethods<T>::fromVariant(const QVariant& value, bool* ok)

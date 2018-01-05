@@ -25,49 +25,30 @@
 class QDebug;
 class QString;
 
-enum PrimitiveDataTypeEnum
+enum class PrimitiveDataType
 {
 //!!! DO NOT CHANGE ORDER OF ITEMS !!!
-    Type_Invalid = -1,
-    Type_START = 0,
-    Type_Bool8 = 0,
-    Type_Int8 = 1,
-    Type_UInt8 = 2,
-    Type_Char = 3,
-    Type_Bool16 = 4,
-    Type_Int16 = 5,
-    Type_UInt16 = 6,
-    Type_Bool32 = 7,
-    Type_Int32 = 8,
-    Type_UInt32 = 9,
-    Type_Bool64 = 10,
-    Type_Int64 = 11,
-    Type_UInt64 = 12,
-    Type_Float = 13,
-    Type_Double = 14,
-    Type_Bitfield = 15,
-    Type_END = Type_Bitfield
+    Invalid = -1,
+    START = 0,
+    Bool8 = 0,
+    Int8 = 1,
+    UInt8 = 2,
+    Char = 3,
+    Bool16 = 4,
+    Int16 = 5,
+    UInt16 = 6,
+    Bool32 = 7,
+    Int32 = 8,
+    UInt32 = 9,
+    Bool64 = 10,
+    Int64 = 11,
+    UInt64 = 12,
+    Float = 13,
+    Double = 14,
+    Bitfield = 15,
+    END = Bitfield
 };
 
-//a wrapper struct to prevent implicit conversion to int/bool
-//TODO remove once we compile with C++11 (enum class) and rename PrimitiveDataTypeEnum again
-struct PrimitiveDataType
-{
-    PrimitiveDataTypeEnum value;
-
-    //allow implicit conversion
-    PrimitiveDataType(PrimitiveDataTypeEnum e) : value(e) {}
-
-    inline bool operator==(const PrimitiveDataType& other) const
-    {
-        return value == other.value;
-    }
-
-    inline bool operator!=(const PrimitiveDataType& other) const
-    {
-        return value != other.value;
-    }
-};
 
 namespace PrimitiveType
 {

@@ -74,7 +74,7 @@ PrimitiveDataInformation* DataInformationFactory::newPrimitive(const PrimitivePa
     }
     LoggerWithContext lwc(pd.logger, pd.context());
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
-    if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
+    if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield)
     {
         pd.error() << "Unrecognized primitive type: " << pd.type;
         return nullptr;
@@ -89,12 +89,12 @@ T* newEnumOrFlags(const EnumParsedData& pd)
 {
     LoggerWithContext lwc(pd.logger, pd.context() + QLatin1String(" (type)"));
     const PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
-    if (primitiveType == Type_Invalid || primitiveType == Type_Bitfield)
+    if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield)
     {
         pd.error() << "Unrecognized enum type: " << pd.type;
         return nullptr;
     }
-    if (primitiveType == Type_Float || primitiveType == Type_Double)
+    if (primitiveType == PrimitiveDataType::Float || primitiveType == PrimitiveDataType::Double)
     {
         pd.error() << "Floating-point enums are not allowed since they make little sense.";
         return nullptr;
@@ -361,8 +361,8 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
         return nullptr;
     }
     PrimitiveDataInformation* primValue = pd.valueType->asPrimitive();
-    if (!(primValue->type() == Type_UInt8 || primValue->type() == Type_UInt16
-            || primValue->type() == Type_UInt32 || primValue->type() == Type_UInt64))
+    if (!(primValue->type() == PrimitiveDataType::UInt8 || primValue->type() == PrimitiveDataType::UInt16
+            || primValue->type() == PrimitiveDataType::UInt32 || primValue->type() == PrimitiveDataType::UInt64))
     {
         pd.error() << "Bad pointer type, only unsigned integers are allowed"; //TODO offsets (signed int + bitfields)
         return nullptr;

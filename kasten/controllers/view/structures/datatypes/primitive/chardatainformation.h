@@ -39,7 +39,7 @@ public:
 
 inline PrimitiveDataType CharDataInformationMethods::staticType()
 {
-    return Type_Char;
+    return PrimitiveDataType::Char;
 }
 
 inline quint8 CharDataInformationMethods::fromVariant(const QVariant& value, bool* ok)

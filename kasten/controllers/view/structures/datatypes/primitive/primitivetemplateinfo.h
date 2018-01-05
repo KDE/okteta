@@ -52,89 +52,89 @@ using DoubleDataInformation = BasicPrimitiveDataInformation<double, DoubleDataIn
 
 
 //just to simplify usage of those classes (no need to specify two template parameters)
-template<PrimitiveDataTypeEnum T> struct PrimitiveInfo {
+template<PrimitiveDataType T> struct PrimitiveInfo {
     using valueType = void;
-    using Class =     void; //to cause compiler errors with e.g. Type_NotPrimitive
-    using Methods =   void; //to cause compiler errors with e.g. Type_NotPrimitive
+    using Class =     void; //to cause compiler errors with e.g. PrimitiveDataType::NotPrimitive
+    using Methods =   void; //to cause compiler errors with e.g. PrimitiveDataType::NotPrimitive
 };
 
-template<> struct PrimitiveInfo<Type_Bool8> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Bool8> {
     using valueType = quint8;
     using Class =     Bool8DataInformation;
     using Methods =   BoolDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_Bool16> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Bool16> {
     using valueType = quint16;
     using Class =     Bool16DataInformation;
     using Methods =   BoolDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_Bool32> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Bool32> {
     using valueType = quint32;
     using Class =     Bool32DataInformation;
     using Methods =   BoolDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_Bool64> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Bool64> {
     using valueType = quint64;
     using Class =     Bool64DataInformation;
     using Methods =   BoolDataInformationMethods<valueType>;
 };
 
 
-template<> struct PrimitiveInfo<Type_UInt8> {
+template<> struct PrimitiveInfo<PrimitiveDataType::UInt8> {
     using valueType = quint8;
     using Class =     UInt8DataInformation;
     using Methods =   UIntDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_UInt16> {
+template<> struct PrimitiveInfo<PrimitiveDataType::UInt16> {
     using valueType = quint16;
     using Class =     UInt16DataInformation;
     using Methods =   UIntDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_UInt32> {
+template<> struct PrimitiveInfo<PrimitiveDataType::UInt32> {
     using valueType = quint32;
     using Class =     UInt32DataInformation;
     using Methods =   UIntDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_UInt64> {
+template<> struct PrimitiveInfo<PrimitiveDataType::UInt64> {
     using valueType = quint64;
     using Class =     UInt64DataInformation;
     using Methods =   UIntDataInformationMethods<valueType>;
 };
 
 
-template<> struct PrimitiveInfo<Type_Int8> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Int8> {
     using valueType = qint8;
     using Class =     SInt8DataInformation;
     using Methods =   SIntDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_Int16> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Int16> {
     using valueType = qint16;
     using Class =     SInt16DataInformation;
     using Methods =   SIntDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_Int32> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Int32> {
     using valueType = qint32;
     using Class =     SInt32DataInformation;
     using Methods =   SIntDataInformationMethods<valueType>;
 };
-template<> struct PrimitiveInfo<Type_Int64> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Int64> {
     using valueType = qint64;
     using Class =     SInt64DataInformation;
     using Methods =   SIntDataInformationMethods<valueType>;
 };
 
 
-template<> struct PrimitiveInfo<Type_Char> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Char> {
     using valueType = quint8;
     using Class =     CharDataInformation;
     using Methods =   CharDataInformationMethods;
 };
-template<> struct PrimitiveInfo<Type_Float> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Float> {
     using valueType = float;
     using Class =     FloatDataInformation;
     using Methods =   FloatDataInformationMethods;
 };
-template<> struct PrimitiveInfo<Type_Double> {
+template<> struct PrimitiveInfo<PrimitiveDataType::Double> {
     using valueType = double;
     using Class =     DoubleDataInformation;
     using Methods =   DoubleDataInformationMethods;

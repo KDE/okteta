@@ -69,10 +69,10 @@ private:
 };
 
 
-static JsTestData::CheckCallback primitiveTypeCheck(PrimitiveDataTypeEnum type) {
+static JsTestData::CheckCallback primitiveTypeCheck(PrimitiveDataType type) {
     return [type](DataInformation* data) {
         QVERIFY(data->isPrimitive());
-        QCOMPARE(data->asPrimitive()->type().value, type);
+        QCOMPARE(data->asPrimitive()->type(), type);
     };
 }
 
@@ -88,24 +88,24 @@ void JsParserTest::initTestCase()
     ScriptEngineInitializer::addFuctionsToScriptEngine(&engine);
 
     primitiveData
-        << JsTestData("float", "float()", primitiveTypeCheck(Type_Float))
-        << JsTestData("double", "double()", primitiveTypeCheck(Type_Double))
-        << JsTestData("char", "char()", primitiveTypeCheck(Type_Char))
+        << JsTestData("float", "float()", primitiveTypeCheck(PrimitiveDataType::Float))
+        << JsTestData("double", "double()", primitiveTypeCheck(PrimitiveDataType::Double))
+        << JsTestData("char", "char()", primitiveTypeCheck(PrimitiveDataType::Char))
 
-        << JsTestData("uint8", "uint8()", primitiveTypeCheck(Type_UInt8))
-        << JsTestData("uint16", "uint16()", primitiveTypeCheck(Type_UInt16))
-        << JsTestData("uint32", "uint32()", primitiveTypeCheck(Type_UInt32))
-        << JsTestData("uint64", "uint64()", primitiveTypeCheck(Type_UInt64))
+        << JsTestData("uint8", "uint8()", primitiveTypeCheck(PrimitiveDataType::UInt8))
+        << JsTestData("uint16", "uint16()", primitiveTypeCheck(PrimitiveDataType::UInt16))
+        << JsTestData("uint32", "uint32()", primitiveTypeCheck(PrimitiveDataType::UInt32))
+        << JsTestData("uint64", "uint64()", primitiveTypeCheck(PrimitiveDataType::UInt64))
 
-        << JsTestData("int8", "int8()", primitiveTypeCheck(Type_Int8))
-        << JsTestData("int16", "int16()", primitiveTypeCheck(Type_Int16))
-        << JsTestData("int32", "int32()", primitiveTypeCheck(Type_Int32))
-        << JsTestData("int64", "int64()", primitiveTypeCheck(Type_Int64))
+        << JsTestData("int8", "int8()", primitiveTypeCheck(PrimitiveDataType::Int8))
+        << JsTestData("int16", "int16()", primitiveTypeCheck(PrimitiveDataType::Int16))
+        << JsTestData("int32", "int32()", primitiveTypeCheck(PrimitiveDataType::Int32))
+        << JsTestData("int64", "int64()", primitiveTypeCheck(PrimitiveDataType::Int64))
 
-        << JsTestData("bool8", "bool8()", primitiveTypeCheck(Type_Bool8))
-        << JsTestData("bool16", "bool16()", primitiveTypeCheck(Type_Bool16))
-        << JsTestData("bool32", "bool32()", primitiveTypeCheck(Type_Bool32))
-        << JsTestData("bool64", "bool64()", primitiveTypeCheck(Type_Bool64));
+        << JsTestData("bool8", "bool8()", primitiveTypeCheck(PrimitiveDataType::Bool8))
+        << JsTestData("bool16", "bool16()", primitiveTypeCheck(PrimitiveDataType::Bool16))
+        << JsTestData("bool32", "bool32()", primitiveTypeCheck(PrimitiveDataType::Bool32))
+        << JsTestData("bool64", "bool64()", primitiveTypeCheck(PrimitiveDataType::Bool64));
 
     bitfieldData
         << JsTestData("signed bitfield", "bitfield(\"signed\", 5)",

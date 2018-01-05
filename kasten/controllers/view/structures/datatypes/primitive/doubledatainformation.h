@@ -39,7 +39,7 @@ public:
 
 inline PrimitiveDataType DoubleDataInformationMethods::staticType()
 {
-    return Type_Double;
+    return PrimitiveDataType::Double;
 }
 
 inline double DoubleDataInformationMethods::fromVariant(const QVariant& value, bool* ok)

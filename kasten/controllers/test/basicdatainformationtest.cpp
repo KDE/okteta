@@ -255,11 +255,12 @@ void BasicDataInformationTest::initTestCase()
 //	qRegisterMetaType<DataInformation*>();
     LoggerWithContext lwc(nullptr, QString());
 
-	for (int i = Type_START; i < Type_Bitfield; ++i) {
-		primitives.append(PrimitiveFactory::newInstance(QStringLiteral("prim"),
-		        PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i)), lwc));
+	PrimitiveDataType type = PrimitiveDataType::START;
+	while( type < PrimitiveDataType::Bitfield ) {
+		primitives.append(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
+		type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
 	}
-	QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), Type_Bitfield, lwc), static_cast<PrimitiveDataInformation*>(nullptr));
+	QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), PrimitiveDataType::Bitfield, lwc), static_cast<PrimitiveDataInformation*>(nullptr));
 	QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), QStringLiteral("invalid_type"), lwc), static_cast<PrimitiveDataInformation*>(nullptr));
 	bitfields.append(new BoolBitfieldDataInformation(QStringLiteral("bitfield"), 24));
 	bitfields.append(new UnsignedBitfieldDataInformation(QStringLiteral("bitfield"), 24));
@@ -267,28 +268,28 @@ void BasicDataInformationTest::initTestCase()
 
 	emptyStruct = new StructureDataInformation(QStringLiteral("emptyStruct"));
 	QVector<DataInformation*> structChildren;
-	structChildren << PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc)
-	        << PrimitiveFactory::newInstance(QStringLiteral("prim2"), Type_UInt64, lwc);
+	structChildren << PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)
+	        << PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc);
 	structWithChildren = new StructureDataInformation(QStringLiteral("structWithChildren"), structChildren);
 
 	emptyUnion = new UnionDataInformation(QStringLiteral("emptyUnion"));
     QVector<DataInformation*> unionChildren;
-    unionChildren << PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc)
-            << PrimitiveFactory::newInstance(QStringLiteral("prim2"), Type_UInt64, lwc);
+    unionChildren << PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)
+            << PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc);
 	unionWithChildren = new UnionDataInformation(QStringLiteral("unionWithChildren"), unionChildren);
 
-	emptyPrimitiveArray = new ArrayDataInformation(QStringLiteral("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc));
+	emptyPrimitiveArray = new ArrayDataInformation(QStringLiteral("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
 	emptyComplexArray = new ArrayDataInformation(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone());
-	primitiveArrayWithChildren = new ArrayDataInformation(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc));
+	primitiveArrayWithChildren = new ArrayDataInformation(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
 	complexArrayWithChildren = new ArrayDataInformation(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone());
 
 	QMap<AllPrimitiveTypes, QString> enumVals;
 	enumVals[1] = QStringLiteral("one");
 	enumVals[2] = QStringLiteral("two");
 	enumVals[4] = QStringLiteral("four");
-	EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QStringLiteral("eDef"), Type_UInt32));
-	flagData = new FlagDataInformation(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc), edef);
-	enumData = new EnumDataInformation(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc), edef);
+	EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QStringLiteral("eDef"), PrimitiveDataType::UInt32));
+	flagData = new FlagDataInformation(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
+	enumData = new EnumDataInformation(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
     emptyString = new StringDataInformation(QStringLiteral("string"), StringDataInformation::StringType::ASCII);
     dummy = new DummyDataInformation(nullptr);
     topLevel = new TopLevelDataInformation(new DummyDataInformation(nullptr));
@@ -314,15 +315,15 @@ void BasicDataInformationTest::testPrimitives()
 	for (int i = 0; i < primitives.size(); ++i) {
 		PrimitiveDataInformation* data = primitives.at(i);
 		PrimitiveDataType t = data->type();
-		QCOMPARE(t, PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i)));
-		QCOMPARE(data->type(), PrimitiveDataType(static_cast<PrimitiveDataTypeEnum>(i)));
-		if (t == Type_Bool8 || t ==  Type_Int8 || t == Type_UInt8 || t == Type_Char)
+		QCOMPARE(t, PrimitiveDataType(static_cast<PrimitiveDataType>(i)));
+		QCOMPARE(data->type(), PrimitiveDataType(static_cast<PrimitiveDataType>(i)));
+		if (t == PrimitiveDataType::Bool8 || t ==  PrimitiveDataType::Int8 || t == PrimitiveDataType::UInt8 || t == PrimitiveDataType::Char)
 			exp.size = 8;
-		else if (t == Type_Bool16 || t == Type_Int16 || t == Type_UInt16)
+		else if (t == PrimitiveDataType::Bool16 || t == PrimitiveDataType::Int16 || t == PrimitiveDataType::UInt16)
 			exp.size = 16;
-		else if (t == Type_Bool32 || t == Type_Int32 || t == Type_UInt32 || t == Type_Float)
+		else if (t == PrimitiveDataType::Bool32 || t == PrimitiveDataType::Int32 || t == PrimitiveDataType::UInt32 || t == PrimitiveDataType::Float)
 			exp.size = 32;
-		else if (t == Type_Bool64 || t == Type_Int64 || t == Type_UInt64 || t == Type_Double)
+		else if (t == PrimitiveDataType::Bool64 || t == PrimitiveDataType::Int64 || t == PrimitiveDataType::UInt64 || t == PrimitiveDataType::Double)
 			exp.size = 64;
 		else
 			QVERIFY(false);
