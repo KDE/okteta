@@ -30,7 +30,7 @@
 class AdditionalData
 {
 public:
-    enum AdditionalDataType {
+    enum class AdditionalDataType {
         UpdateFunction, ValidationFunction, ValidationError, ArrayLengthFunction, CustomTypeName, ToStringFunction
     };
     explicit AdditionalData();

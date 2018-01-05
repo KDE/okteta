@@ -353,37 +353,37 @@ inline bool DataInformation::hasBeenValidated() const
 
 inline QScriptValue DataInformation::updateFunc() const
 {
-    return mAdditionalData.get(AdditionalData::UpdateFunction).value<QScriptValue>();
+    return mAdditionalData.get(AdditionalData::AdditionalDataType::UpdateFunction).value<QScriptValue>();
 }
 
 inline QScriptValue DataInformation::validationFunc() const
 {
-    return mAdditionalData.get(AdditionalData::ValidationFunction).value<QScriptValue>();
+    return mAdditionalData.get(AdditionalData::AdditionalDataType::ValidationFunction).value<QScriptValue>();
 }
 
 inline QScriptValue DataInformation::toStringFunction() const
 {
-    return mAdditionalData.get(AdditionalData::ToStringFunction).value<QScriptValue>();
+    return mAdditionalData.get(AdditionalData::AdditionalDataType::ToStringFunction).value<QScriptValue>();
 }
 
 inline void DataInformation::setUpdateFunc(const QScriptValue& func)
 {
-    setAdditionalFunction(AdditionalData::UpdateFunction, func, "update function");
+    setAdditionalFunction(AdditionalData::AdditionalDataType::UpdateFunction, func, "update function");
 }
 
 inline void DataInformation::setValidationFunc(const QScriptValue& func)
 {
-    setAdditionalFunction(AdditionalData::ValidationFunction, func, "validation function");
+    setAdditionalFunction(AdditionalData::AdditionalDataType::ValidationFunction, func, "validation function");
 }
 
 inline void DataInformation::setToStringFunction(const QScriptValue& func)
 {
-    setAdditionalFunction(AdditionalData::ToStringFunction, func, "to string function");
+    setAdditionalFunction(AdditionalData::AdditionalDataType::ToStringFunction, func, "to string function");
 }
 
 inline QString DataInformation::validationError() const
 {
-    return mAdditionalData.get(AdditionalData::ValidationError).toString();
+    return mAdditionalData.get(AdditionalData::AdditionalDataType::ValidationError).toString();
 }
 
 inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
@@ -405,7 +405,7 @@ inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
 
 inline QString DataInformation::typeName() const
 {
-    QVariant v = mAdditionalData.get(AdditionalData::CustomTypeName);
+    QVariant v = mAdditionalData.get(AdditionalData::AdditionalDataType::CustomTypeName);
     if (Q_UNLIKELY(v.isValid())) //custom type names will be used rarely
         return v.toString();
     return typeNameImpl();
@@ -413,7 +413,7 @@ inline QString DataInformation::typeName() const
 
 inline QString DataInformation::valueString() const
 {
-    QVariant v = mAdditionalData.get(AdditionalData::ToStringFunction);
+    QVariant v = mAdditionalData.get(AdditionalData::AdditionalDataType::ToStringFunction);
     if (Q_UNLIKELY(v.isValid())) //custom to string functions will be used rarely
         return customToString(v.value<QScriptValue>());
     return valueStringImpl();

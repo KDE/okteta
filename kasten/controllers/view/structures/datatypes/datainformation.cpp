@@ -95,22 +95,22 @@ DataInformation* DataInformation::mainStructure()
 void DataInformation::setValidationError(const QString& errorMessage)
 {
     if (errorMessage.isEmpty())
-        mAdditionalData.remove(AdditionalData::ValidationError);
+        mAdditionalData.remove(AdditionalData::AdditionalDataType::ValidationError);
     else
-        mAdditionalData.set(AdditionalData::ValidationError, errorMessage);
+        mAdditionalData.set(AdditionalData::AdditionalDataType::ValidationError, errorMessage);
 }
 
 void DataInformation::setCustomTypeName(const QString& customTypeName)
 {
     if (customTypeName.isEmpty())
-        mAdditionalData.remove(AdditionalData::CustomTypeName);
+        mAdditionalData.remove(AdditionalData::AdditionalDataType::CustomTypeName);
     else
-        mAdditionalData.set(AdditionalData::CustomTypeName, customTypeName);
+        mAdditionalData.set(AdditionalData::AdditionalDataType::CustomTypeName, customTypeName);
 }
 
 void DataInformation::resetValidationState()
 {
-    mAdditionalData.remove(AdditionalData::ValidationError);
+    mAdditionalData.remove(AdditionalData::AdditionalDataType::ValidationError);
     mHasBeenValidated = false;
     mValidationSuccessful = false;
 }

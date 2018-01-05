@@ -107,12 +107,12 @@ inline DataInformation* ArrayDataInformation::arrayType() const
 
 inline QScriptValue ArrayDataInformation::lengthFunction() const
 {
-    return mAdditionalData.get(AdditionalData::ArrayLengthFunction).value<QScriptValue>();
+    return mAdditionalData.get(AdditionalData::AdditionalDataType::ArrayLengthFunction).value<QScriptValue>();
 }
 
 inline void ArrayDataInformation::setLengthFunction(const QScriptValue& newFunc)
 {
-    setAdditionalFunction(AdditionalData::ArrayLengthFunction, newFunc, "array length function");
+    setAdditionalFunction(AdditionalData::AdditionalDataType::ArrayLengthFunction, newFunc, "array length function");
 }
 
 #endif /* ARRAYDATAINFORMATION_H_ */
