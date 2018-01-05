@@ -179,7 +179,7 @@ void ScriptClassesTest::initTestCase()
             << pair("charCount") << pair("encoding", QScriptValue::Undeletable)
             << pair("maxByteCount", QScriptValue::Undeletable);
     std::sort(stringProperties.begin(), stringProperties.end());
-    stringData = new StringDataInformation(QStringLiteral("string"), StringDataInformation::Latin1);
+    stringData = new StringDataInformation(QStringLiteral("string"), StringDataInformation::StringType::Latin1);
     stringDataTop.reset(
             new TopLevelDataInformation(stringData, nullptr, ScriptEngineInitializer::newEngine()));
 

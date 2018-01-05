@@ -117,7 +117,7 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
     else if (name == s_lengthInBytes)
         return sData->stringByteLength();
     else if (name == s_encoding)
-        return stringEncodings[sData->encoding()];
+        return stringEncodings[static_cast<int>(sData->encoding())];
     else if (name == s_maxCharCount)
         return sData->maxCharCount();
     else if (name == s_maxByteCount)
@@ -200,7 +200,7 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
         QString enc = value.toString();
         StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(enc,
                 LoggerWithContext(sData->logger(), sData->fullObjectPath()));
-        if (encoding == StringDataInformation::InvalidEncoding)
+        if (encoding == StringDataInformation::StringType::InvalidEncoding)
             sData->logError() << "Attempting to set invalid encoding:" << enc;
         else
             sData->setEncoding(encoding);

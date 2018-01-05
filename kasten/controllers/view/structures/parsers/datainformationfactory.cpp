@@ -255,7 +255,7 @@ StringDataInformation* DataInformationFactory::newString(const StringParsedData&
     }
     StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(pd.encoding,
             LoggerWithContext(pd.logger, pd.context()));
-    if (encoding == StringDataInformation::InvalidEncoding)
+    if (encoding == StringDataInformation::StringType::InvalidEncoding)
     {
         pd.error() << "Bad string encoding given:" << pd.encoding;
         return nullptr;

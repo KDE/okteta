@@ -227,38 +227,38 @@ StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& s
 {
     QString enc = str.toLower();
     if (enc == QLatin1String("ascii"))
-        return StringDataInformation::ASCII;
+        return StringDataInformation::StringType::ASCII;
     else if (enc == QLatin1String("ebcdic"))
-        return StringDataInformation::EBCDIC;
+        return StringDataInformation::StringType::EBCDIC;
     else if (enc == QLatin1String("latin1") || enc == QLatin1String("latin-1"))
-        return StringDataInformation::Latin1;
+        return StringDataInformation::StringType::Latin1;
     else if (enc.startsWith(QLatin1String("utf")))
     {
         QStringRef ref = enc.midRef(3);
         if (ref.at(0) == QLatin1Char('-'))
             ref = enc.midRef(4); //strip '-'
         if (ref == QLatin1String("8"))
-            return StringDataInformation::UTF8;
+            return StringDataInformation::StringType::UTF8;
 
         if (ref == QLatin1String("16") || ref == QLatin1String("16le") || ref == QLatin1String("16-le"))
         {
-            return StringDataInformation::UTF16_LE;
+            return StringDataInformation::StringType::UTF16_LE;
         }
         if (ref == QLatin1String("16be") || ref == QLatin1String("16-be"))
         {
-            return StringDataInformation::UTF16_BE;
+            return StringDataInformation::StringType::UTF16_BE;
         }
         if (ref == QLatin1String("32") || ref == QLatin1String("32le") || ref == QLatin1String("32-le"))
         {
-            return StringDataInformation::UTF32_LE;
+            return StringDataInformation::StringType::UTF32_LE;
         }
         if (ref == QLatin1String("32be") || ref == QLatin1String("32-be"))
         {
-            return StringDataInformation::UTF32_BE;
+            return StringDataInformation::StringType::UTF32_BE;
         }
     }
     logger.warn() << "Unrecognized string encoding: " << enc;
-    return StringDataInformation::InvalidEncoding;
+    return StringDataInformation::StringType::InvalidEncoding;
 }
 
 QScriptValue ParserUtils::functionSafeEval(QScriptEngine* engine, const QString& str)

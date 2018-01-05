@@ -289,7 +289,7 @@ void BasicDataInformationTest::initTestCase()
 	EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QStringLiteral("eDef"), Type_UInt32));
 	flagData = new FlagDataInformation(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc), edef);
 	enumData = new EnumDataInformation(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), Type_UInt32, lwc), edef);
-    emptyString = new StringDataInformation(QStringLiteral("string"), StringDataInformation::ASCII);
+    emptyString = new StringDataInformation(QStringLiteral("string"), StringDataInformation::StringType::ASCII);
     dummy = new DummyDataInformation(nullptr);
     topLevel = new TopLevelDataInformation(new DummyDataInformation(nullptr));
 }

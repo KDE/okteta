@@ -43,13 +43,13 @@
 #include <KLocalizedString>
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
-    : DataInformationWithDummyChildren(name, parent), mDummy(new DummyDataInformation(this)), mData(nullptr), mEncoding(InvalidEncoding)
+    : DataInformationWithDummyChildren(name, parent), mDummy(new DummyDataInformation(this)), mData(nullptr), mEncoding(StringType::InvalidEncoding)
 {
     setEncoding(encoding); //sets mData
 }
 
 StringDataInformation::StringDataInformation(const StringDataInformation& d)
-    : DataInformationWithDummyChildren(d), mDummy(new DummyDataInformation(this)), mData(nullptr), mEncoding(InvalidEncoding)
+    : DataInformationWithDummyChildren(d), mDummy(new DummyDataInformation(this)), mData(nullptr), mEncoding(StringType::InvalidEncoding)
 {
     setEncoding(d.mEncoding); //sets mData
     mData->copyTerminationFrom(d.mData.data());
@@ -186,46 +186,48 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
 {
     if (mData && mEncoding == encoding)
         return;
-    if (mData && ((mEncoding == UTF16_LE && encoding == UTF16_BE) || (mEncoding == UTF16_BE && encoding == UTF16_LE)))
+    if (mData && ((mEncoding == StringType::UTF16_LE && encoding == StringType::UTF16_BE) ||
+                  (mEncoding == StringType::UTF16_BE && encoding == StringType::UTF16_LE)))
     {
         //only set endianess, since is already utf 16
-        mData->setLittleEndian(encoding == UTF16_LE);
+        mData->setLittleEndian(encoding == StringType::UTF16_LE);
     }
-    else if (mData && ((mEncoding == UTF32_LE && encoding == UTF32_BE) || (mEncoding == UTF32_BE && encoding == UTF32_LE)))
+    else if (mData && ((mEncoding == StringType::UTF32_LE && encoding == StringType::UTF32_BE) ||
+                       (mEncoding == StringType::UTF32_BE && encoding == StringType::UTF32_LE)))
     {
         //only set endianess, since is already utf 32
-        mData->setLittleEndian(encoding == UTF32_LE);
+        mData->setLittleEndian(encoding == StringType::UTF32_LE);
     }
     else
     {
         StringData* data = nullptr;
         switch (encoding) {
-            case ASCII:
+            case StringType::ASCII:
                 data = new AsciiStringData(this);
                 break;
-            case Latin1:
+            case StringType::Latin1:
                 data = new Latin1StringData(this);
                 break;
-            case UTF8:
+            case StringType::UTF8:
                 data = new Utf8StringData(this);
                 break;
-            case UTF16_LE:
+            case StringType::UTF16_LE:
                 data = new Utf16StringData(this);
                 data->setLittleEndian(true);
                 break;
-            case UTF16_BE:
+            case StringType::UTF16_BE:
                 data = new Utf16StringData(this);
                 data->setLittleEndian(false);
                 break;
-            case UTF32_LE:
+            case StringType::UTF32_LE:
                 data = new Utf32StringData(this);
                 data->setLittleEndian(true);
                 break;
-            case UTF32_BE:
+            case StringType::UTF32_BE:
                 data = new Utf32StringData(this);
                 data->setLittleEndian(false);
                 break;
-            case EBCDIC:
+            case StringType::EBCDIC:
                 data = new EbcdicStringData(this);
                 break;
             default:
