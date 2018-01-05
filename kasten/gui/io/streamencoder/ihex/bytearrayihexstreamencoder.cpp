@@ -77,7 +77,7 @@ void ByteArrayIHexStreamEncoder::streamExtendedSegmentAddress( QTextStream& text
 
     line[byteCountLineOffset] = upperSegmentBaseAddressSize;
     writeBigEndian( &line[addressLineOffset], nullAddress, addressLineSize );
-    line[recordTypeLineOffset] = ExtendedSegmentAddressRecord;
+    line[recordTypeLineOffset] = extendedSegmentAddressRecordCode;
     line[dataLineOffset] = upperSegmentBaseAddress >> 8;
     line[dataLineOffset+1] = upperSegmentBaseAddress;
 
@@ -93,7 +93,7 @@ void ByteArrayIHexStreamEncoder::streamExtendedLinearAddress( QTextStream& textS
 
     line[byteCountLineOffset] = upperLinearBaseAddressSize;
     writeBigEndian( &line[addressLineOffset], nullAddress, addressLineSize );
-    line[recordTypeLineOffset] = ExtendedLinearAddressRecord;
+    line[recordTypeLineOffset] = extendedLinearAddressRecordCode;
     line[dataLineOffset] = upperLinearBaseAddress >> 8;
     line[dataLineOffset+1] = upperLinearBaseAddress;
 
@@ -108,7 +108,7 @@ void ByteArrayIHexStreamEncoder::streamEndOfFile( QTextStream& textStream,
 
     line[byteCountLineOffset] = endOfFileByteCount;
     writeBigEndian( &line[addressLineOffset], startAddress, addressLineSize );
-    line[recordTypeLineOffset] = EndOfFileRecord;
+    line[recordTypeLineOffset] = endOfFileRecordCode;
 
     streamLine( textStream, line );
 }
@@ -175,7 +175,7 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream( QIODevice* device,
         {
             line[byteCountLineOffset] = d;
             writeBigEndian( &line[addressLineOffset], lineOffset, addressLineSize );
-            line[recordTypeLineOffset] = DataRecord;
+            line[recordTypeLineOffset] = dataRecordCode;
 
             streamLine( textStream, line );
 

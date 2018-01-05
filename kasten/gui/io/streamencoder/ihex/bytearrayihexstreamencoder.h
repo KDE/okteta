@@ -53,15 +53,12 @@ class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
   private:
-    enum IHexRecordType
-    {
-        DataRecord=0,
-        EndOfFileRecord=1,
-        ExtendedSegmentAddressRecord=2,
-        StartSegmentAddressRecord=3,
-        ExtendedLinearAddressRecord=4,
-        StartLinearAddressRecord=5
-    };
+    static const unsigned char dataRecordCode = 0x0;
+    static const unsigned char endOfFileRecordCode = 0x1;
+    static const unsigned char extendedSegmentAddressRecordCode = 0x2;
+    static const unsigned char startSegmentAddressRecordCode = 0x3;
+    static const unsigned char extendedLinearAddressRecordCode = 0x4;
+    static const unsigned char startLinearAddressRecordCode = 0x5;
 
     static const char startCode = ':';
 
