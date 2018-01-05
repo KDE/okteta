@@ -48,7 +48,7 @@ class ByteArrayXxencodingStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
   public:
-    enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
+    enum class InputByteIndex { First = 0, Second, Third };
 
   public:
     ByteArrayXxencodingStreamEncoder();

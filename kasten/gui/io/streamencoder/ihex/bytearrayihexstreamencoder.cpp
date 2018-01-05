@@ -38,7 +38,7 @@ namespace Kasten
 {
 
 IHexStreamEncoderSettings::IHexStreamEncoderSettings()
- : addressSizeId( Bits32Id )
+ : addressSizeId( AddressSizeId::Bits32 )
 {}
 
 
@@ -153,12 +153,12 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream( QIODevice* device,
                             qMin(firstDataEnd,nextUpperAddressChangeDataEnd) );
 
     // data
-    if( mSettings.addressSizeId == IHexStreamEncoderSettings::Bits32Id )
+    if( mSettings.addressSizeId == IHexStreamEncoderSettings::AddressSizeId::Bits32 )
     {
         const quint16 upperLinearBaseAddress = (range.start() >> 16);
         streamExtendedLinearAddress( textStream, line, upperLinearBaseAddress );
     }
-    else if( mSettings.addressSizeId == IHexStreamEncoderSettings::Bits16Id )
+    else if( mSettings.addressSizeId == IHexStreamEncoderSettings::AddressSizeId::Bits16 )
     {
         const quint16 upperSegmentBaseAddress = (range.start() >> 4) & 0xF000;
         streamExtendedSegmentAddress( textStream, line, upperSegmentBaseAddress );
@@ -183,12 +183,12 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream( QIODevice* device,
 
             if( d == nextUpperAddressChangeDataEnd )
             {
-                if( mSettings.addressSizeId == IHexStreamEncoderSettings::Bits32Id )
+                if( mSettings.addressSizeId == IHexStreamEncoderSettings::AddressSizeId::Bits32 )
                 {
                     const quint16 upperLinearBaseAddress = (i >> 16);
                     streamExtendedLinearAddress( textStream, line, upperLinearBaseAddress );
                 }
-                else if( mSettings.addressSizeId == IHexStreamEncoderSettings::Bits16Id )
+                else if( mSettings.addressSizeId == IHexStreamEncoderSettings::AddressSizeId::Bits16 )
                 {
                     const quint16 upperSegmentBaseAddress = (i >> 4) & 0xF000;
                     streamExtendedSegmentAddress( textStream, line, upperSegmentBaseAddress );

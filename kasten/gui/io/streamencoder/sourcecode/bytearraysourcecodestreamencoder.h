@@ -35,16 +35,16 @@ namespace Kasten
 class SourceCodeStreamEncoderSettings
 {
   public:
-    enum PrimitiveDataType
+    enum class PrimitiveDataType
     {
-        CharType = 0,
-        UnsignedCharType,
-        ShortType,
-        UnsignedShortType,
-        IntegerType,
-        UnsignedIntegerType,
-        FloatType,
-        DoubleType
+        Char = 0,
+        UnsignedChar,
+        Short,
+        UnsignedShort,
+        Integer,
+        UnsignedInteger,
+        Float,
+        Double,
     };
 
   public:
@@ -52,7 +52,7 @@ class SourceCodeStreamEncoderSettings
 
   public:
     QString variableName;
-    int  dataType;
+    PrimitiveDataType dataType;
     int elementsPerLine;
     bool unsignedAsHexadecimal;
 };

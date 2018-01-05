@@ -65,7 +65,7 @@ static const char* const base32PaddingData[4] =
 
 static inline const char* base32Padding( ByteArrayBase32StreamEncoder::InputByteIndex index )
 {
-    return base32PaddingData[index - 1];
+    return base32PaddingData[static_cast<int>(index) - 1];
 }
 static inline const char* noPadding( ByteArrayBase32StreamEncoder::InputByteIndex index )
 {
@@ -90,7 +90,7 @@ base32EncodingData[3] =
 
 
 Base32StreamEncoderSettings::Base32StreamEncoderSettings()
- : algorithmId( ClassicId )
+ : algorithmId(AlgorithmId::Classic )
 {}
 
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
@@ -111,10 +111,11 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
-    const char* const base32EncodeMap = base32EncodingData[mSettings.algorithmId].encodeMap;
-    const char* (*base32Padding)( InputByteIndex ) = base32EncodingData[mSettings.algorithmId].padding;
+    const auto& algorithmEncodingData = base32EncodingData[static_cast<int>(mSettings.algorithmId)];
+    const char* const base32EncodeMap = algorithmEncodingData.encodeMap;
+    const char* (*base32Padding)( InputByteIndex ) = algorithmEncodingData.padding;
 
-    InputByteIndex inputByteIndex = FirstByte;
+    InputByteIndex inputByteIndex = InputByteIndex::First;
     int outputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
@@ -124,44 +125,44 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream( QIODevice* device,
 
         switch( inputByteIndex )
         {
-        case FirstByte:
+        case InputByteIndex::First:
             // bits 7..3
             textStream << base32EncodeMap[( byte >> 3 )];
             // bits 2..0 -> 4..2 for next
             bitsFromLastByte = (byte & 0x7) << 2;
-            inputByteIndex = SecondByte;
+            inputByteIndex = InputByteIndex::Second;
             break;
-        case SecondByte:
+        case InputByteIndex::Second:
             // from last and bits 7..6 as 1..0 from this
             textStream << base32EncodeMap[( bitsFromLastByte | byte >> 6 )];
             // bits 5..1 as 4..0
             textStream << base32EncodeMap[( byte & 0x3E )>>1];
             // bits 0 -> 4 for next
             bitsFromLastByte = (byte & 0x1) << 4;
-            inputByteIndex = ThirdByte;
+            inputByteIndex = InputByteIndex::Third;
             break;
-        case ThirdByte:
+        case InputByteIndex::Third:
             // from last and bits 7..4 as 3..0 from this
             textStream << base32EncodeMap[( bitsFromLastByte | byte >> 4 )];
             // bits 3..0 -> 4..1 for next
             bitsFromLastByte = (byte & 0xF) << 1;
-            inputByteIndex = FourthByte;
+            inputByteIndex = InputByteIndex::Fourth;
             break;
-        case FourthByte:
+        case InputByteIndex::Fourth:
             // from last and bit 7 as 0 from this
             textStream << base32EncodeMap[( bitsFromLastByte | byte >> 7 )];
             // bits 6..2 as 4..0
             textStream << base32EncodeMap[( byte & 0x7C )>>2];
             // bits 1..0 -> 4..3 for next
             bitsFromLastByte = (byte & 0x3) << 3;
-            inputByteIndex = FifthByte;
+            inputByteIndex = InputByteIndex::Fifth;
             break;
-        case FifthByte:
+        case InputByteIndex::Fifth:
             // from last and bits 7..5 as 2..0 from this
             textStream << base32EncodeMap[( bitsFromLastByte | byte >> 5 )];
             // bits 4..0
             textStream << base32EncodeMap[( byte & 0x1F )];
-            inputByteIndex = FirstByte;
+            inputByteIndex = InputByteIndex::First;
             ++outputGroupsPerLine;
             if( outputGroupsPerLine >= maxOutputGroupsPerLine && i<range.end() )
             {
@@ -171,7 +172,7 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream( QIODevice* device,
             break;
         }
     }
-    const bool hasBitsLeft = ( inputByteIndex != FirstByte );
+    const bool hasBitsLeft = ( inputByteIndex != InputByteIndex::First );
     if( hasBitsLeft )
         textStream << base32EncodeMap[bitsFromLastByte]
                    << base32Padding(inputByteIndex);

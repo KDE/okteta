@@ -39,7 +39,7 @@ namespace Kasten
 class SRecStreamEncoderSettings
 {
   public:
-    enum AddressSizeId { FourBytesId = 0, ThreeBytesId = 1, TwoBytesId = 2 };
+    enum class AddressSizeId { FourBytes = 0, ThreeBytes = 1, TwoBytes = 2 };
 
   public:
     SRecStreamEncoderSettings();
@@ -53,7 +53,7 @@ class ByteArraySRecStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
   private:
-    enum RecordType
+    enum class RecordType
     {
         BlockHeader=0,
         DataSequence2B=1,
@@ -74,6 +74,9 @@ class ByteArraySRecStreamEncoder : public AbstractByteArrayStreamEncoder
     static const char hexDigits[16];
 
   private:
+    static RecordType dataSequenceRecordType( SRecStreamEncoderSettings::AddressSizeId id );
+    static RecordType endOfBlockRecordType( SRecStreamEncoderSettings::AddressSizeId id );
+    static int endOfBlockAddressSize( RecordType type );
     static char charOfRecordType( RecordType type );
     static char hexValueOfNibble( int nibble );
     static void writeBigEndian( unsigned char* line, quint32 value, int byteSize );
@@ -112,7 +115,7 @@ inline void ByteArraySRecStreamEncoder::setSettings( const SRecStreamEncoderSett
 }
 
 inline char ByteArraySRecStreamEncoder::charOfRecordType( RecordType type )
-{ return (char)('0'+type); }
+{ return static_cast<char>('0'+static_cast<int>(type)); }
 inline char ByteArraySRecStreamEncoder::hexValueOfNibble( int nibble )
 { return hexDigits[nibble & 0xF]; }
 
@@ -125,6 +128,23 @@ inline void ByteArraySRecStreamEncoder::writeBigEndian( unsigned char* line,
         line[byteSize] = value;
         value >>= 8;
     }
+}
+
+inline ByteArraySRecStreamEncoder::RecordType
+ByteArraySRecStreamEncoder::dataSequenceRecordType( SRecStreamEncoderSettings::AddressSizeId id )
+{
+    return static_cast<RecordType>( static_cast<int>(RecordType::DataSequence4B) - static_cast<int>(id) );
+}
+
+inline ByteArraySRecStreamEncoder::RecordType
+ByteArraySRecStreamEncoder::endOfBlockRecordType( SRecStreamEncoderSettings::AddressSizeId id )
+{
+    return static_cast<RecordType>( static_cast<int>(RecordType::EndOfBlock4B) + static_cast<int>(id) );
+}
+
+inline int ByteArraySRecStreamEncoder::endOfBlockAddressSize( RecordType type )
+{
+    return 11 - static_cast<int>(type);
 }
 
 }

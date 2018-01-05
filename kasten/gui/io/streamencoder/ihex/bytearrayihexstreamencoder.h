@@ -39,7 +39,7 @@ namespace Kasten
 class IHexStreamEncoderSettings
 {
   public:
-    enum AddressSizeId { Bits32Id = 0, Bits16Id = 1, Bits8Id = 2 };
+    enum class AddressSizeId { Bits32 = 0, Bits16 = 1, Bits8 = 2 };
 
   public:
     IHexStreamEncoderSettings();

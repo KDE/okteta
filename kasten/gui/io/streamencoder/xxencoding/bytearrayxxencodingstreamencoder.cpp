@@ -56,7 +56,7 @@ static inline const char* xxpadding( ByteArrayXxencodingStreamEncoder::InputByte
 {
     const char* const paddingData[2] = {"++","+"};
 
-    return paddingData[index - 1];
+    return paddingData[static_cast<int>(index) - 1];
 }
 
 
@@ -85,7 +85,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
-    InputByteIndex inputByteIndex = FirstByte;
+    InputByteIndex inputByteIndex = InputByteIndex::First;
     int inputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
@@ -105,26 +105,26 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
 
         switch( inputByteIndex )
         {
-        case FirstByte:
+        case InputByteIndex::First:
             // bits 7..2
             textStream << xxmapByte( byte >> 2 );
             // bits 1..0 -> 5..4 for next
             bitsFromLastByte = (byte & 0x3) << 4;
-            inputByteIndex = SecondByte;
+            inputByteIndex = InputByteIndex::Second;
             break;
-        case SecondByte:
+        case InputByteIndex::Second:
             // from last and bits 7..4 as 3..0 from this
             textStream << xxmapByte( bitsFromLastByte | byte >> 4 );
             // bits 3..0 -> 5..2 for next
             bitsFromLastByte = (byte & 0xf) << 2;
-            inputByteIndex = ThirdByte;
+            inputByteIndex = InputByteIndex::Third;
             break;
-        case ThirdByte:
+        case InputByteIndex::Third:
             // from last and bits 7..6 as 1..0 from this
             textStream << xxmapByte( bitsFromLastByte | byte >> 6 );
             // bits 5..0
             textStream << xxmapByte( byte & 0x3F );
-            inputByteIndex = FirstByte;
+            inputByteIndex = InputByteIndex::First;
             ++inputGroupsPerLine;
             if( inputGroupsPerLine >= maxXxInputGroupsPerLine && i<range.end() )
             {
@@ -137,7 +137,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
             break;
         }
     }
-    const bool hasBitsLeft = ( inputByteIndex != FirstByte );
+    const bool hasBitsLeft = ( inputByteIndex != InputByteIndex::First );
     if( hasBitsLeft )
         textStream << xxmapByte(bitsFromLastByte)
                    << xxpadding(inputByteIndex);

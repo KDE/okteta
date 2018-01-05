@@ -80,7 +80,7 @@ bool ByteArrayBase85StreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
-    InputByteIndex inputByteIndex = FirstByte;
+    InputByteIndex inputByteIndex = InputByteIndex::First;
     quint32 tuple = 0;
 
     // header
@@ -93,19 +93,19 @@ bool ByteArrayBase85StreamEncoder::encodeDataToStream( QIODevice* device,
 
         switch( inputByteIndex )
         {
-        case FirstByte:
+        case InputByteIndex::First:
             tuple |= (byte << 24);
-            inputByteIndex = SecondByte;
+            inputByteIndex = InputByteIndex::Second;
             break;
-        case SecondByte:
+        case InputByteIndex::Second:
             tuple |= (byte << 16);
-            inputByteIndex = ThirdByte;
+            inputByteIndex = InputByteIndex::Third;
             break;
-        case ThirdByte:
+        case InputByteIndex::Third:
             tuple |= (byte <<  8);
-            inputByteIndex = FourthByte;
+            inputByteIndex = InputByteIndex::Fourth;
             break;
-        case FourthByte:
+        case InputByteIndex::Fourth:
             tuple |= byte;
             if( tuple == 0 )
             {
@@ -118,15 +118,15 @@ bool ByteArrayBase85StreamEncoder::encodeDataToStream( QIODevice* device,
                 }
             }
             else
-                streamEncoded( textStream, outputBytesPerLine, tuple, inputByteIndex+1 );
+                streamEncoded( textStream, outputBytesPerLine, tuple, static_cast<int>(inputByteIndex)+1 );
             tuple = 0;
-            inputByteIndex = FirstByte;
+            inputByteIndex = InputByteIndex::First;
             break;
         }
     }
-    const bool hasBitsLeft = ( inputByteIndex != FirstByte );
+    const bool hasBitsLeft = ( inputByteIndex != InputByteIndex::First );
     if( hasBitsLeft )
-        streamEncoded( textStream, outputBytesPerLine, tuple, inputByteIndex );
+        streamEncoded( textStream, outputBytesPerLine, tuple, static_cast<int>(inputByteIndex) );
 
     // footer
     if( outputBytesPerLine + 2 > maxOutputBytesPerLine )

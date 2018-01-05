@@ -37,7 +37,7 @@ namespace Kasten
 class UuencodingStreamEncoderSettings
 {
   public:
-    enum AlgorithmId { HistoricalId = 0, Base64Id = 1 };
+    enum class AlgorithmId { Historical = 0, Base64 = 1 };
 
   public:
     UuencodingStreamEncoderSettings();
@@ -52,7 +52,7 @@ class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
   public:
-    enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
+    enum class InputByteIndex { First = 0, Second, Third };
 
   public:
     ByteArrayUuencodingStreamEncoder();

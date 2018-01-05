@@ -46,7 +46,7 @@ class ByteArrayBase64StreamEncoder : public AbstractByteArrayStreamEncoder
     static const int outputGroupLength = 4;
     static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
 
-    enum InputByteIndex { FirstByte, SecondByte, ThirdByte };
+    enum class InputByteIndex { First = 0, Second, Third };
 
   public:
     ByteArrayBase64StreamEncoder();

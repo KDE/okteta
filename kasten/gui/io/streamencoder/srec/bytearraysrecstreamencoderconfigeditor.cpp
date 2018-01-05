@@ -59,7 +59,7 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( 
               "16-bit"),
     };
     mAddressSizeSelect->addItems( list );
-    mAddressSizeSelect->setCurrentIndex( mSettings.addressSizeId );
+    mAddressSizeSelect->setCurrentIndex( static_cast<int>(mSettings.addressSizeId) );
     connect( mAddressSizeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
 }
@@ -71,7 +71,7 @@ AbstractSelectionView* ByteArraySRecStreamEncoderConfigEditor::createPreviewView
 
 void ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged()
 {
-    mSettings.addressSizeId = (SRecStreamEncoderSettings::AddressSizeId) mAddressSizeSelect->currentIndex();
+    mSettings.addressSizeId = static_cast<SRecStreamEncoderSettings::AddressSizeId>(mAddressSizeSelect->currentIndex());
 
     mEncoder->setSettings( mSettings );
 }

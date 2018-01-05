@@ -37,7 +37,7 @@ namespace Kasten
 class Base32StreamEncoderSettings
 {
   public:
-    enum AlgorithmId { ClassicId = 0, HexId = 1, ZHexId = 2 };
+    enum class AlgorithmId { Classic = 0, Hex = 1, ZHex = 2 };
 
   public:
     Base32StreamEncoderSettings();
@@ -57,7 +57,7 @@ class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder
     static const int outputGroupLength = 8;
     static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
 
-    enum InputByteIndex { FirstByte = 0, SecondByte, ThirdByte, FourthByte, FifthByte };
+    enum class InputByteIndex { First = 0, Second, Third, Fourth, Fifth };
 
   public:
     ByteArrayBase32StreamEncoder();

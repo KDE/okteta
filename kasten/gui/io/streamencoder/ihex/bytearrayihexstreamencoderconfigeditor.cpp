@@ -60,7 +60,7 @@ ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor( 
               "8-bit"),
     };
     mAddressSizeSelect->addItems( addressSizeList );
-    mAddressSizeSelect->setCurrentIndex( mSettings.addressSizeId );
+    mAddressSizeSelect->setCurrentIndex( static_cast<int>(mSettings.addressSizeId) );
     connect( mAddressSizeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
 }
@@ -73,7 +73,7 @@ AbstractSelectionView* ByteArrayIHexStreamEncoderConfigEditor::createPreviewView
 
 void ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged()
 {
-    mSettings.addressSizeId = (IHexStreamEncoderSettings::AddressSizeId) mAddressSizeSelect->currentIndex();
+    mSettings.addressSizeId = static_cast<IHexStreamEncoderSettings::AddressSizeId>(mAddressSizeSelect->currentIndex());
 
     mEncoder->setSettings( mSettings );
 }

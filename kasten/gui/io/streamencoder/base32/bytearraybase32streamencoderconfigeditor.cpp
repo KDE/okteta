@@ -59,7 +59,7 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
               "z-base-32"),
     };
     mEncodingSelect->addItems( list );
-    mEncodingSelect->setCurrentIndex( mSettings.algorithmId );
+    mEncodingSelect->setCurrentIndex( static_cast<int>(mSettings.algorithmId) );
     connect( mEncodingSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
 }
@@ -71,7 +71,7 @@ AbstractSelectionView* ByteArrayBase32StreamEncoderConfigEditor::createPreviewVi
 
 void ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged()
 {
-    mSettings.algorithmId = (Base32StreamEncoderSettings::AlgorithmId) mEncodingSelect->currentIndex();
+    mSettings.algorithmId = static_cast<Base32StreamEncoderSettings::AlgorithmId>(mEncodingSelect->currentIndex());
 
     mEncoder->setSettings( mSettings );
 }

@@ -47,7 +47,7 @@ class OktetaPart : public KParts::ReadWritePart
     friend class OktetaBrowserExtension;
 
   public:
-    enum Modus { ReadOnlyModus = 0, BrowserViewModus = 1, ReadWriteModus = 2 };
+    enum Modus { ReadOnly = 0, BrowserView = 1, ReadWrite = 2 };
 
   public:
     OktetaPart( QObject* parent,

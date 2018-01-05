@@ -63,7 +63,10 @@ inline QString decimalFormattedNumberPlaceHolder() { return QStringLiteral("%1")
 inline QString hexadecimalFormattedNumberPlaceHolder() { return QStringLiteral("0x%1"); }
 
 SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings()
- : variableName( QStringLiteral("array") ), dataType( UnsignedCharType ), elementsPerLine( 4 ), unsignedAsHexadecimal( true )
+   : variableName( QStringLiteral("array") ),
+     dataType( PrimitiveDataType::UnsignedChar ),
+     elementsPerLine( 4 ),
+     unsignedAsHexadecimal( true )
 {}
 
 
@@ -89,10 +92,10 @@ Q_UNUSED( byteArrayView )
 //     textStream << "// from File , selection \n";
 
     const int size = range.width();
-    const int dataTypeSize = SizeOfPrimitiveDataType[mSettings.dataType];
+    const int dataTypeSize = SizeOfPrimitiveDataType[static_cast<int>(mSettings.dataType)];
     const int sizeOfArray = (size+dataTypeSize-1) / dataTypeSize;
 
-    textStream << "const " << QLatin1String(PrimitiveDataTypeName[mSettings.dataType]) << ' '
+    textStream << "const " << QLatin1String(PrimitiveDataTypeName[static_cast<int>(mSettings.dataType)]) << ' '
                << mSettings.variableName << '[' << sizeOfArray << "] =" << endl
                << '{' << endl;
 
@@ -126,7 +129,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
     QString result;
     switch( mSettings.dataType )
     {
-    case SourceCodeStreamEncoderSettings::CharType:
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::Char:
     {
         char e = 0;
         byteArrayModel->copyTo( reinterpret_cast<Okteta::Byte*>(&e), offset, qMin<size_t>(sizeof(e),dataSize) );
@@ -134,7 +137,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
         result = decimalFormattedNumberPlaceHolder().arg( (int)e, fieldWidth );
         break;
     }
-    case SourceCodeStreamEncoderSettings::UnsignedCharType:
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedChar:
     {
         unsigned char e = 0;
         byteArrayModel->copyTo( reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)),dataSize) );
@@ -146,7 +149,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
         result = formattedNumberPlaceHolder.arg( e, fieldWidth, base, stuffChar );
         break;
     }
-    case SourceCodeStreamEncoderSettings::ShortType:
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::Short:
     {
         short e = 0;
         byteArrayModel->copyTo( reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)),dataSize) );
@@ -154,7 +157,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
         result = decimalFormattedNumberPlaceHolder().arg( e, fieldWidth );
         break;
     }
-    case SourceCodeStreamEncoderSettings::UnsignedShortType:
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedShort:
     {
         unsigned short e = 0;
         byteArrayModel->copyTo( reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)),dataSize) );
@@ -166,7 +169,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
         result = formattedNumberPlaceHolder.arg( e, fieldWidth, base, stuffChar );
         break;
     }
-    case SourceCodeStreamEncoderSettings::IntegerType:
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::Integer:
     {
         int e = 0;
         byteArrayModel->copyTo( reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)),dataSize) );
@@ -174,7 +177,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
         result = decimalFormattedNumberPlaceHolder().arg( e, fieldWidth );
         break;
     }
-    case SourceCodeStreamEncoderSettings::UnsignedIntegerType:
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::UnsignedInteger:
     {
         unsigned int e = 0;
         byteArrayModel->copyTo( reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)),dataSize) );
@@ -186,7 +189,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
         result = formattedNumberPlaceHolder.arg( e, fieldWidth, base, stuffChar );
         break;
     }
-    case SourceCodeStreamEncoderSettings::FloatType:
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::Float:
     {
         float e = 0;
         byteArrayModel->copyTo( reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)),dataSize) );
@@ -194,7 +197,7 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
         result = decimalFormattedNumberPlaceHolder().arg( e, fieldWidth );
         break;
     }
-    case SourceCodeStreamEncoderSettings::DoubleType:
+    case SourceCodeStreamEncoderSettings::PrimitiveDataType::Double:
     {
         double e = 0;
         byteArrayModel->copyTo( reinterpret_cast<Okteta::Byte*>(&e), offset, qMin(uint(sizeof(e)),dataSize) );
@@ -202,8 +205,6 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted( const Okteta::Abstract
         result = decimalFormattedNumberPlaceHolder().arg( e, fieldWidth );
         break;
     }
-    default:
-        break;
     }
 
     return result;

@@ -54,7 +54,7 @@ struct UumapEncodeData
 
     inline const char* padding( ByteArrayUuencodingStreamEncoder::InputByteIndex index ) const
     {
-        return paddingData[(int)(index) - 1];
+        return paddingData[static_cast<int>(index) - 1];
     }
 };
 
@@ -78,7 +78,8 @@ static const UumapEncodeData base64UumapEncodeData =
 
 
 UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings()
- : fileName( QStringLiteral("okteta-export")), algorithmId( Base64Id )
+  : fileName( QStringLiteral("okteta-export")),
+    algorithmId( AlgorithmId::Base64 )
 {}
 
 ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
@@ -99,12 +100,12 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
-    InputByteIndex inputByteIndex = FirstByte;
+    InputByteIndex inputByteIndex = InputByteIndex::First;
     int inputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
     const UumapEncodeData* encodeData =
-        (mSettings.algorithmId == UuencodingStreamEncoderSettings::HistoricalId ) ?
+        (mSettings.algorithmId == UuencodingStreamEncoderSettings::AlgorithmId::Historical ) ?
             &historicalUumapEncodeData :
         /* else */
             &base64UumapEncodeData;
@@ -126,26 +127,26 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
 
         switch( inputByteIndex )
         {
-        case FirstByte:
+        case InputByteIndex::First:
             // bits 7..2
             textStream << encodeData->mapByte( byte >> 2 );
             // bits 1..0 -> 5..4 for next
             bitsFromLastByte = (byte & 0x3) << 4;
-            inputByteIndex = SecondByte;
+            inputByteIndex = InputByteIndex::Second;
             break;
-        case SecondByte:
+        case InputByteIndex::Second:
             // from last and bits 7..4 as 3..0 from this
             textStream << encodeData->mapByte( bitsFromLastByte | byte >> 4 );
             // bits 3..0 -> 5..2 for next
             bitsFromLastByte = (byte & 0xf) << 2;
-            inputByteIndex = ThirdByte;
+            inputByteIndex = InputByteIndex::Third;
             break;
-        case ThirdByte:
+        case InputByteIndex::Third:
             // from last and bits 7..6 as 1..0 from this
             textStream << encodeData->mapByte( bitsFromLastByte | byte >> 6 );
             // bits 5..0
             textStream << encodeData->mapByte( byte & 0x3F );
-            inputByteIndex = FirstByte;
+            inputByteIndex = InputByteIndex::First;
             ++inputGroupsPerLine;
             if( inputGroupsPerLine >= maxInputGroupsPerLine && i<range.end() )
             {
@@ -159,7 +160,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream( QIODevice* device,
             break;
         }
     }
-    const bool hasBitsLeft = ( inputByteIndex != FirstByte );
+    const bool hasBitsLeft = ( inputByteIndex != InputByteIndex::First );
     if( hasBitsLeft )
         textStream << encodeData->mapByte(bitsFromLastByte)
                    << encodeData->padding(inputByteIndex);

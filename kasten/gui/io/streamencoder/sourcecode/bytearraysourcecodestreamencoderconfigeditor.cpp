@@ -80,7 +80,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     for( int i=0; i<dataTypesCount; ++i )
         dataTypeNameStrings << QLatin1String(dataTypeNames[i]);
     mDataTypeSelect->addItems( dataTypeNameStrings );
-    mDataTypeSelect->setCurrentIndex( mSettings.dataType );
+    mDataTypeSelect->setCurrentIndex( static_cast<int>(mSettings.dataType) );
     connect( mDataTypeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( dataTypeLabel, mDataTypeSelect );
 
@@ -110,7 +110,7 @@ void ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged()
 {
     mSettings.variableName = mVariableNameEdit->text();
     mSettings.elementsPerLine = mItemsPerLineEdit->value();
-    mSettings.dataType = mDataTypeSelect->currentIndex();
+    mSettings.dataType = static_cast<SourceCodeStreamEncoderSettings::PrimitiveDataType>(mDataTypeSelect->currentIndex());
     mSettings.unsignedAsHexadecimal = mUnsignedAsHexadecimalCheck->isChecked();
     mEncoder->setSettings( mSettings );
 }

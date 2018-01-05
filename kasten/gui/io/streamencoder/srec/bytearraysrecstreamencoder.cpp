@@ -37,13 +37,18 @@
 namespace Kasten
 {
 
+static inline
+int addressSize(SRecStreamEncoderSettings::AddressSizeId id)
+{
+    return 4 - static_cast<int>(id);
+}
+
 SRecStreamEncoderSettings::SRecStreamEncoderSettings()
- : addressSizeId( FourBytesId )
+ : addressSizeId( AddressSizeId::FourBytes )
 {}
 
 const char ByteArraySRecStreamEncoder::hexDigits[16] =
 { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
-
 
 void ByteArraySRecStreamEncoder::streamLine( QTextStream& textStream, RecordType recordType,
                                              const unsigned char* line )
@@ -89,7 +94,7 @@ void ByteArraySRecStreamEncoder::streamBlockHeader( QTextStream& textStream, uns
     // leave data empty for now
     line[byteCountLineOffset] = headerByteCount;
 
-    streamLine( textStream, BlockHeader, line );
+    streamLine( textStream, RecordType::BlockHeader, line );
 }
 
 void ByteArraySRecStreamEncoder::streamRecordCount( QTextStream& textStream, unsigned char* line,
@@ -101,7 +106,7 @@ void ByteArraySRecStreamEncoder::streamRecordCount( QTextStream& textStream, uns
     line[byteCountLineOffset] = recordCountByteCount;
     writeBigEndian( &line[addressLineOffset], recordCount, recordCountLineSize );
 
-    streamLine( textStream, RecordCount, line );
+    streamLine( textStream, RecordType::RecordCount, line );
 }
 
 // from M68000PRM.pdf:
@@ -118,7 +123,7 @@ void ByteArraySRecStreamEncoder::streamRecordCount( QTextStream& textStream, uns
 void ByteArraySRecStreamEncoder::streamBlockEnd( QTextStream& textStream, unsigned char* line,
                                                  RecordType recordType, quint32 startAddress )
 {
-    const int addressLineSize = 11 - recordType;
+    const int addressLineSize = endOfBlockAddressSize(recordType);
     const int blockEndByteCount = byteCountLineSize + addressLineSize;
 
     line[byteCountLineOffset] = blockEndByteCount;
@@ -147,7 +152,7 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
 
     // prepare
     static const int maxLineLength = 64 / 2;
-    const int addressLineSize = 4 - mSettings.addressSizeId;
+    const int addressLineSize = addressSize(mSettings.addressSizeId);
     const int maxDataPerLineCount = maxLineLength - byteCountLineSize - addressLineSize;
     const int dataLineOffset = addressLineOffset + addressLineSize;
 
@@ -158,10 +163,8 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
     const Okteta::Coord startCoord = layout.coordOfIndex( range.start() );
     const int lastLinePosition = layout.lastLinePosition( startCoord.line() );
     const int dataPerLineCount = qMin( byteArrayView->noOfBytesPerLine(), maxDataPerLineCount );
-    const RecordType dataSequenceType =
-        static_cast<RecordType>( DataSequence4B - mSettings.addressSizeId );
-    const RecordType endOfBlockType =
-        static_cast<RecordType>( EndOfBlock4B + mSettings.addressSizeId );
+    const RecordType dataSequenceType = dataSequenceRecordType( mSettings.addressSizeId );
+    const RecordType endOfBlockType = endOfBlockRecordType( mSettings.addressSizeId );
 
     unsigned char line[maxLineLength];
 

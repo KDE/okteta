@@ -93,23 +93,23 @@ OktetaPart::OktetaPart( QObject* parent,
 
     setXMLFile( QLatin1String(UIFileName[modus]) );
 
-    if( modus == ReadWriteModus )
+    if( modus == Modus::ReadWrite )
         mControllers.append( new Kasten::VersionController(this) );
-    if( modus == ReadWriteModus )
+    if( modus == Modus::ReadWrite )
         mControllers.append( new Kasten::ReadOnlyController(this) );
     // TODO: save_as
 //     mControllers.append( new ExportController(mProgram->viewManager(),mProgram->documentManager(),this) );
     mControllers.append( new Kasten::ZoomController(this) );
     mControllers.append( new Kasten::SelectController(this) );
-    if( modus != BrowserViewModus )
+    if( modus != Modus::BrowserView )
         mControllers.append( new Kasten::ClipboardController(this) );
 //     if( modus != BrowserViewModus )
 //         mControllers.append( new Kasten::InsertController(mProgram->viewManager(),mProgram->documentManager(),this) );
 //     mControllers.append( new Kasten::CopyAsController(mProgram->viewManager(),mProgram->documentManager(),this) );
-    if( modus == ReadWriteModus )
+    if( modus == Modus::ReadWrite )
         mControllers.append( new Kasten::OverwriteModeController(this) );
     mControllers.append( new Kasten::SearchController(this,widget) );
-    if( modus == ReadWriteModus )
+    if( modus == Modus::ReadWrite )
         mControllers.append( new Kasten::ReplaceController(this,widget) );
 //     mControllers.append( new Kasten::GotoOffsetController(mGroupedViews,this) );
 //     mControllers.append( new Kasten::SelectRangeController(mGroupedViews,this) );
@@ -141,7 +141,7 @@ OktetaPart::OktetaPart( QObject* parent,
         new Kasten::ByteArrayViewProfileSynchronizer( viewProfileManager );
     mByteArrayView = new Kasten::ByteArrayView( mDocument, viewProfileSynchronizer );
 
-    if( modus == BrowserViewModus )
+    if( modus == Modus::BrowserView )
         new OktetaBrowserExtension( this );
 }
 
@@ -193,7 +193,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
         delete mDocument;
 
         mDocument = static_cast<Kasten::ByteArrayDocument*>( document );
-        mDocument->setReadOnly( mModus != ReadWriteModus );
+        mDocument->setReadOnly( mModus != Modus::ReadWrite );
         connect( mDocument->synchronizer(), &Kasten::AbstractModelSynchronizer::localSyncStateChanged,
                  this, &OktetaPart::onModified );
 

@@ -44,7 +44,7 @@ class ByteArrayBase85StreamEncoder : public AbstractByteArrayStreamEncoder
     static const int outputLineLength = 72;
     static const int maxOutputBytesPerLine = outputLineLength;
 
-    enum InputByteIndex { FirstByte=0, SecondByte, ThirdByte, FourthByte };
+    enum class InputByteIndex { First = 0, Second, Third, Fourth };
 
   public:
     ByteArrayBase85StreamEncoder();

@@ -52,7 +52,7 @@ static const char* const base64PaddingData[2] =
 };
 static inline const char* base64Padding( ByteArrayBase64StreamEncoder::InputByteIndex index )
 {
-    return base64PaddingData[(int)(index) - 1];
+    return base64PaddingData[static_cast<int>(index) - 1];
 }
 
 
@@ -74,7 +74,7 @@ bool ByteArrayBase64StreamEncoder::encodeDataToStream( QIODevice* device,
     QTextStream textStream( device );
 
     // prepare
-    InputByteIndex inputByteIndex = FirstByte;
+    InputByteIndex inputByteIndex = InputByteIndex::First;
     int outputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
@@ -84,26 +84,26 @@ bool ByteArrayBase64StreamEncoder::encodeDataToStream( QIODevice* device,
 
         switch( inputByteIndex )
         {
-        case FirstByte:
+        case InputByteIndex::First:
             // bits 7..2
             textStream << base64EncodeMap[( byte >> 2 )];
             // bits 1..0 -> 5..4 for next
             bitsFromLastByte = (byte & 0x3) << 4;
-            inputByteIndex = SecondByte;
+            inputByteIndex = InputByteIndex::Second;
             break;
-        case SecondByte:
+        case InputByteIndex::Second:
             // from last and bits 7..4 as 3..0 from this
             textStream << base64EncodeMap[( bitsFromLastByte | byte >> 4 )];
             // bits 3..0 -> 5..2 for next
             bitsFromLastByte = (byte & 0xf) << 2;
-            inputByteIndex = ThirdByte;
+            inputByteIndex = InputByteIndex::Third;
             break;
-        case ThirdByte:
+        case InputByteIndex::Third:
             // from last and bits 7..6 as 1..0 from this
             textStream << base64EncodeMap[( bitsFromLastByte | byte >> 6 )];
             // bits 5..0
             textStream << base64EncodeMap[( byte & 0x3F )];
-            inputByteIndex = FirstByte;
+            inputByteIndex = InputByteIndex::First;
             ++outputGroupsPerLine;
             if( outputGroupsPerLine >= maxOutputGroupsPerLine && i<range.end() )
             {
@@ -113,7 +113,7 @@ bool ByteArrayBase64StreamEncoder::encodeDataToStream( QIODevice* device,
             break;
         }
     }
-    const bool hasBitsLeft = ( inputByteIndex != FirstByte );
+    const bool hasBitsLeft = ( inputByteIndex != InputByteIndex::First );
     if( hasBitsLeft )
         textStream << base64EncodeMap[bitsFromLastByte]
                    << base64Padding(inputByteIndex);
