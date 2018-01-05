@@ -92,5 +92,5 @@ QString SignedBitfieldDataInformation::typeNameImpl() const
 
 AbstractBitfieldDataInformation::Type SignedBitfieldDataInformation::bitfieldType() const
 {
-    return AbstractBitfieldDataInformation::Signed;
+    return AbstractBitfieldDataInformation::Type::Signed;
 }

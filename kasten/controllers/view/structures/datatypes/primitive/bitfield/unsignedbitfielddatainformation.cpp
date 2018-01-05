@@ -75,5 +75,5 @@ QString UnsignedBitfieldDataInformation::typeNameImpl() const
 
 AbstractBitfieldDataInformation::Type UnsignedBitfieldDataInformation::bitfieldType() const
 {
-    return AbstractBitfieldDataInformation::Unsigned;
+    return AbstractBitfieldDataInformation::Type::Unsigned;
 }

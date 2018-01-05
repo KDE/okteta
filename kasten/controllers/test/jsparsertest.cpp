@@ -109,11 +109,11 @@ void JsParserTest::initTestCase()
 
     bitfieldData
         << JsTestData("signed bitfield", "bitfield(\"signed\", 5)",
-                bitfieldCheck(AbstractBitfieldDataInformation::Signed))
+                bitfieldCheck(AbstractBitfieldDataInformation::Type::Signed))
         << JsTestData("unsigned bitfield", "bitfield(\"unsigned\", 5)",
-                bitfieldCheck(AbstractBitfieldDataInformation::Unsigned))
+                bitfieldCheck(AbstractBitfieldDataInformation::Type::Unsigned))
         << JsTestData("bool bitfield", "bitfield(\"bool\", 5)",
-                bitfieldCheck(AbstractBitfieldDataInformation::Boolean));
+                bitfieldCheck(AbstractBitfieldDataInformation::Type::Boolean));
 
     allData << primitiveData << bitfieldData;
     //TODO struct, union, taggedUnion, pointer, flags, enum, array, string

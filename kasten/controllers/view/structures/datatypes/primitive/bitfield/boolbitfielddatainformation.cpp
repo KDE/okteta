@@ -89,5 +89,5 @@ QString BoolBitfieldDataInformation::typeNameImpl() const
 
 AbstractBitfieldDataInformation::Type BoolBitfieldDataInformation::bitfieldType() const
 {
-    return AbstractBitfieldDataInformation::Boolean;
+    return AbstractBitfieldDataInformation::Type::Boolean;
 }

@@ -28,7 +28,7 @@
 class AbstractBitfieldDataInformation : public PrimitiveDataInformation
 {
 public:
-    enum Type {
+    enum class Type {
         Signed, Unsigned, Boolean
     };
 
