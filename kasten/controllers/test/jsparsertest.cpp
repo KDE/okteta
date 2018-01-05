@@ -138,35 +138,35 @@ void JsParserTest::testByteOrder_data()
         //default should be inherit
         QString codeStr = QStringLiteral("%1;");
         QTest::newRow(data.tag.constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessInherit;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessInherit;
 
         //use set() function to specify byteOrder
         codeStr = QStringLiteral("%1.set({byteOrder: \"inherit\"})");
         QTest::newRow((data.tag + " set() inherit").constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessInherit;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessInherit;
         codeStr = QStringLiteral("%1.set({byteOrder: \"littleEndian\"})");
         QTest::newRow((data.tag + " set() little endian").constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessLittle;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessLittle;
         codeStr = QStringLiteral("%1.set({byteOrder: \"bigEndian\"})");
         QTest::newRow((data.tag + " set() big endian").constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessBig;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessBig;
         codeStr = QStringLiteral("%1.set({byteOrder: \"fromSettings\"})");
         QTest::newRow((data.tag + " set() from settings").constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessFromSettings;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessFromSettings;
 
         //direct property access to specify byteOrder
         codeStr = QStringLiteral("var obj = %1; obj.byteOrder = \"inherit\"; obj;");
         QTest::newRow((data.tag + " property assign inherit").constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessInherit;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessInherit;
         codeStr = QStringLiteral("var obj = %1; obj.byteOrder = \"little-endian\"; obj;");
         QTest::newRow((data.tag + " property assign little endian").constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessLittle;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessLittle;
         codeStr = QStringLiteral("var obj = %1; obj.byteOrder = \"big-endian\"; obj;");
         QTest::newRow((data.tag + " property assign big endian").constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessBig;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessBig;
         codeStr = QStringLiteral("var obj = %1; obj.byteOrder = \"from-settings\"; obj;");
         QTest::newRow((data.tag + " property assign from settings").constData()) << codeStr.arg(data.constructorCall)
-            << data.check << (int)DataInformation::EndianessFromSettings;
+            << data.check << (int)DataInformation::DataInformationEndianess::EndianessFromSettings;
     }
 }
 

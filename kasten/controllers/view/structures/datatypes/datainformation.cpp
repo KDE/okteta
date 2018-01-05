@@ -36,7 +36,9 @@
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
         : mParent(parent), mName(name), mValidationSuccessful(false), mHasBeenValidated(false), mHasBeenUpdated(false),
-          mWasAbleToRead(false), mByteOrder(EndianessInherit), mLoggedData(ScriptLogger::LogInvalid)
+          mWasAbleToRead(false),
+          mByteOrder(DataInformationEndianess::EndianessInherit),
+          mLoggedData(ScriptLogger::LogInvalid)
 {
 }
 

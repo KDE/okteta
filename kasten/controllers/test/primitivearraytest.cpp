@@ -68,11 +68,11 @@ private:
 };
 
 #if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
-#define CURRENT_BYTE_ORDER (DataInformation::EndianessLittle)
-#define NON_CURRENT_BYTE_ORDER (DataInformation::EndianessBig)
+#define CURRENT_BYTE_ORDER (DataInformation::DataInformationEndianess::EndianessLittle)
+#define NON_CURRENT_BYTE_ORDER (DataInformation::DataInformationEndianess::EndianessBig)
 #elif Q_BYTE_ORDER == Q_BIG_ENDIAN
-#define CURRENT_BYTE_ORDER (DataInformation::EndianessBig)
-#define NON_CURRENT_BYTE_ORDER (DataInformation::EndianessLittle)
+#define CURRENT_BYTE_ORDER (DataInformation::DataInformationEndianess::EndianessBig)
+#define NON_CURRENT_BYTE_ORDER (DataInformation::DataInformationEndianess::EndianessLittle)
 #else
 #error unknown byte order
 #endif

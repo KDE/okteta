@@ -43,7 +43,7 @@
 
 struct CommonParsedData : public ParserInfo {
     inline explicit CommonParsedData(const ParserInfo& i)
-        : ParserInfo(i), endianess(DataInformation::EndianessInherit) {}
+        : ParserInfo(i), endianess(DataInformation::DataInformationEndianess::EndianessInherit) {}
     QScriptValue updateFunc;
     QScriptValue validationFunc;
     QScriptValue toStringFunc;

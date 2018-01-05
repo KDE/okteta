@@ -147,17 +147,17 @@ DataInformation::DataInformationEndianess ParserUtils::byteOrderFromString(const
 {
     const QString lower = string.toLower();
     if (lower == QLatin1String("bigendian") || lower == QLatin1String("big-endian"))
-        return DataInformation::EndianessBig;
+        return DataInformation::DataInformationEndianess::EndianessBig;
     else if (lower == QLatin1String("littleendian") || lower == QLatin1String("little-endian"))
-        return DataInformation::EndianessLittle;
+        return DataInformation::DataInformationEndianess::EndianessLittle;
     else if (lower == QLatin1String("fromsettings") || lower == QLatin1String("from-settings"))
-        return DataInformation::EndianessFromSettings;
+        return DataInformation::DataInformationEndianess::EndianessFromSettings;
     else if (lower == QLatin1String("inherit"))
-        return DataInformation::EndianessInherit;
+        return DataInformation::DataInformationEndianess::EndianessInherit;
     else
     {
         logger.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
-        return DataInformation::EndianessInherit;
+        return DataInformation::DataInformationEndianess::EndianessInherit;
     }
 }
 
@@ -214,11 +214,11 @@ ParsedNumber<quint64> ParserUtils::uint64FromScriptValue(const QScriptValue& val
 
 QString ParserUtils::byteOrderToString(DataInformation::DataInformationEndianess order)
 {
-    if (order == DataInformation::EndianessLittle)
+    if (order == DataInformation::DataInformationEndianess::EndianessLittle)
         return QStringLiteral("littleEndian");
-    if (order == DataInformation::EndianessBig)
+    if (order == DataInformation::DataInformationEndianess::EndianessBig)
         return QStringLiteral("bigEndian");
-    if (order == DataInformation::EndianessFromSettings)
+    if (order == DataInformation::DataInformationEndianess::EndianessFromSettings)
         return QStringLiteral("fromSettings");
     return QStringLiteral("inherit");
 }

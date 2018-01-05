@@ -83,7 +83,7 @@ public:
     {
         ColumnName = 0, ColumnType, ColumnValue, COLUMN_COUNT
     };
-    enum DataInformationEndianess
+    enum class DataInformationEndianess
     {
         EndianessFromSettings = 0, EndianessInherit, EndianessLittle, EndianessBig
     };
@@ -241,7 +241,7 @@ protected:
     bool mHasBeenValidated :1;
     bool mHasBeenUpdated :1;
     bool mWasAbleToRead :1;
-    DataInformationEndianess mByteOrder :2;
+    DataInformationEndianess mByteOrder;
     mutable ScriptLogger::LogLevel mLoggedData :2; //mutable is ugly but i guess it is the best solution
 };
 
@@ -390,11 +390,11 @@ inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
 {
     switch (mByteOrder)
     {
-    case EndianessBig:
+    case DataInformationEndianess::EndianessBig:
         return QSysInfo::BigEndian;
-    case EndianessLittle:
+    case DataInformationEndianess::EndianessLittle:
         return QSysInfo::LittleEndian;
-    case EndianessFromSettings:
+    case DataInformationEndianess::EndianessFromSettings:
         return byteOrderFromSettings();
     default: //inherit
         if (mParent && !mParent->isTopLevel())
