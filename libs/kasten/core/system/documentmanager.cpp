@@ -57,8 +57,7 @@ void DocumentManager::addDocument( AbstractDocument* document )
     document->setId( QString::number(++lastDocumentId) );
     mList.append( document );
     // TODO: only emit if document was not included before
-    QList<AbstractDocument*> addedDocuments;
-    addedDocuments.append( document );
+    const QList<AbstractDocument*> addedDocuments { document };
     emit added( addedDocuments );
 }
 
@@ -72,8 +71,7 @@ void DocumentManager::closeDocument( AbstractDocument* document )
 
         iterator.remove();
 
-        QList<AbstractDocument*> closedDocuments;
-        closedDocuments.append( document );
+        const QList<AbstractDocument*> closedDocuments { document };
         emit closing( closedDocuments );
 
         delete document;

@@ -256,8 +256,7 @@ void BookmarksController::createBookmark()
         Okteta::Bookmark bookmark( cursorPosition );
         bookmark.setName( bookmarkEditPopup->name() );
 
-        QList<Okteta::Bookmark> bookmarks;
-        bookmarks.append( bookmark );
+        const QList<Okteta::Bookmark> bookmarks { bookmark };
         mBookmarks->addBookmarks( bookmarks );
     }
     delete bookmarkEditPopup;
@@ -266,8 +265,7 @@ void BookmarksController::createBookmark()
 void BookmarksController::deleteBookmark()
 {
     const int cursorPosition = mByteArrayView->cursorPosition();
-    QList<Okteta::Bookmark> bookmarks;
-    bookmarks.append( cursorPosition );
+    const QList<Okteta::Bookmark> bookmarks { cursorPosition };
     mBookmarks->removeBookmarks( bookmarks );
 }
 

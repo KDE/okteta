@@ -147,8 +147,7 @@ Okteta::Bookmark BookmarksTool::createBookmark()
         bookmark.setOffset( mByteArrayView->cursorPosition() );
         bookmark.setName( bookmarkName );
 
-        QList<Okteta::Bookmark> bookmarksToBeCreated;
-        bookmarksToBeCreated.append( bookmark );
+        const QList<Okteta::Bookmark> bookmarksToBeCreated { bookmark };
         mBookmarks->addBookmarks( bookmarksToBeCreated );
     }
 

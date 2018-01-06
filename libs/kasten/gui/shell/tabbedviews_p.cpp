@@ -215,9 +215,7 @@ void TabbedViewsPrivate::onTabCloseRequest( int tabIndex )
     const ViewBox* viewBox = static_cast<const ViewBox*>( widget );
     AbstractView* view = viewBox->view();
 
-    QList<Kasten::AbstractView*> views;
-    views.append( view );
-
+    const QList<Kasten::AbstractView*> views { view };
     emit q->closeRequest( views );
 }
 

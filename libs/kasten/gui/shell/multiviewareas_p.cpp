@@ -117,8 +117,7 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea( AbstractViewArea* _viewA
     splitterSizes[1] = splitterSizes[0] = equalSize;
     splitter->setSizes( splitterSizes );
 
-    QList<AbstractViewArea*> viewAreas;
-    viewAreas.append( secondViewArea );
+    const QList<AbstractViewArea*> viewAreas { secondViewArea };
     emit q->viewAreasAdded( viewAreas );
     emit q->viewAreaFocusChanged( secondViewArea );
 
@@ -185,8 +184,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
             }
         }
 
-        QList<AbstractViewArea*> viewAreas;
-        viewAreas.append( viewArea );
+        const QList<AbstractViewArea*> viewAreas { viewArea };
         emit q->viewAreasRemoved( viewAreas );
 
         delete viewArea;

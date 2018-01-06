@@ -169,8 +169,7 @@ QScriptValue ScriptHandler::callFunction(QScriptValue func, DataInformation* dat
     //value exists, we assume it has been checked to be a function
     QScriptValue thisObject = data->toScriptValue(mEngine.data(), &mHandlerInfo);
     QScriptValue mainStruct = data->mainStructure()->toScriptValue(mEngine.data(), &mHandlerInfo);
-    QScriptValueList args;
-    args << mainStruct;
+    const QScriptValueList args { mainStruct };
     //ensure we get the right properties
     mHandlerInfo.setMode(mode);
     QScriptValue result = func.call(thisObject, args);

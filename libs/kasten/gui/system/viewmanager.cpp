@@ -80,9 +80,7 @@ void ViewManager::createCopyOfView( AbstractView* view, Qt::Alignment alignment 
 
     mViewList.append( viewCopy );
 
-    QList<Kasten::AbstractView*> views;
-    views.append( viewCopy );
-
+    const QList<Kasten::AbstractView*> views { viewCopy };
     emit opened( views );
 }
 

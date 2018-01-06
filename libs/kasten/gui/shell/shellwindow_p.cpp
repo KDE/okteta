@@ -98,8 +98,7 @@ void ShellWindowPrivate::showDocument( AbstractDocument* document )
         mGroupedViews->setViewFocus( viewOfDocument );
     else
     {
-        QList<Kasten::AbstractDocument*> documents;
-        documents.append( document );
+        const QList<Kasten::AbstractDocument*> documents { document };
         mViewManager->createViewsFor( documents );
     }
 }
