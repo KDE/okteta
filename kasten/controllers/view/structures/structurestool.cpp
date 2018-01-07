@@ -189,7 +189,7 @@ void StructuresTool::updateData(const Okteta::ArrayChangeMetricsList& list)
 }
 
 //model interface:
-QVariant StructuresTool::headerData(int column, int role)
+QVariant StructuresTool::headerData(int column, int role) const
 {
     if (role == Qt::DisplayRole)
     {
@@ -302,7 +302,7 @@ void StructuresTool::setSelectedStructuresInView()
 
 }
 
-Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data)
+Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data) const
 {
     if (data->isLockedFor(mByteArrayModel))
         return Okteta::Address(data->lockPositionFor(mByteArrayModel));

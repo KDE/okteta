@@ -76,7 +76,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
     bool isFileLoaded() const;
 
     //interface for model
-    QVariant headerData(int column, int role);
+    QVariant headerData(int column, int role) const;
     int childCount() const;
     DataInformation* childAt(int idx) const;
     TopLevelDataInformation::List allData() const;
@@ -112,7 +112,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
     void onChildItemDataChanged();
 
   private:
-    Okteta::Address startAddress(const TopLevelDataInformation* data);
+    Okteta::Address startAddress(const TopLevelDataInformation* data) const;
 
   private:
     // source
