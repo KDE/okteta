@@ -72,7 +72,7 @@ bool BitfieldScriptClass::setAdditionalProperty(DataInformation* data, const QSc
         if (width <= 0 || width > 64)
         {
             engine()->currentContext()->throwError(QScriptContext::RangeError,
-                    QString(QStringLiteral("bitfield.width must be between 1 and 64! Given: %1")).arg(width));
+                    QStringLiteral("bitfield.width must be between 1 and 64! Given: %1").arg(width));
             return true;
         }
         AbstractBitfieldDataInformation* pData = data->asBitfield();

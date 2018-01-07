@@ -95,7 +95,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
             aData->logError() << "attempting to access out of bounds child: index was" << pos
                     << ", length is" << data->childCount();
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
-                QString(QStringLiteral("Attempting to access array index %1, but length is %2")).arg(
+                QStringLiteral("Attempting to access array index %1, but length is %2").arg(
                     QString::number(pos), QString::number(data->childCount())));
         }
         else

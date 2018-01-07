@@ -104,7 +104,7 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
         if (pos >= uint(sData->stringLength()))
         {
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
-                QString(QStringLiteral("Attempting to access string index %1, but length is %2")).arg(
+                QStringLiteral("Attempting to access string index %1, but length is %2").arg(
                     QString::number(pos), QString::number(sData->stringLength())));
         }
         else

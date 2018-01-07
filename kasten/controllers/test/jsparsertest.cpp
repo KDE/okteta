@@ -293,7 +293,7 @@ void JsParserTest::testName()
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
 
-    QCOMPARE(data->name(), QString(QStringLiteral("expectedName")));
+    QCOMPARE(data->name(), QStringLiteral("expectedName"));
 }
 
 void JsParserTest::testCustomTypeName_data()
@@ -319,14 +319,14 @@ void JsParserTest::testCustomTypeName()
     if (QTest::currentTestFailed())
         return; //Qt doesn't use exceptions, we must manually check after each call
 
-    QCOMPARE(data->typeName(), QString(QStringLiteral("myCustomType")));
+    QCOMPARE(data->typeName(), QStringLiteral("myCustomType"));
 }
 
 void JsParserTest::testImport()
 {
     QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
     QScriptValue val = eng->evaluate(QStringLiteral("s = importScript('simpleImport.js');s.foo()"));
-    QCOMPARE(val.toString(), QString(QStringLiteral("100")));
+    QCOMPARE(val.toString(), QStringLiteral("100"));
 }
 
 void JsParserTest::testImportPathTraversal()
@@ -334,7 +334,7 @@ void JsParserTest::testImportPathTraversal()
     QScopedPointer<QScriptEngine> eng(ScriptEngineInitializer::newEngine());
     QScriptValue val = eng->evaluate(QStringLiteral("s = importScript('../../pathtraversal.js');s.foo()"));
     QVERIFY(val.isError());
-    QCOMPARE(val.toString(), QString(QStringLiteral("Error: importScript(): You may only access installed structure files! Path traversal detected.")));
+    QCOMPARE(val.toString(), QStringLiteral("Error: importScript(): You may only access installed structure files! Path traversal detected."));
 }
 
 

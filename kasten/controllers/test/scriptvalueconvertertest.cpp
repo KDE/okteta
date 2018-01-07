@@ -226,7 +226,7 @@ void ScriptValueConverterTest::testPrimitives()
     QCOMPARE(p2->type(), type);
     if (type == PrimitiveDataType::Bitfield)
         return; //the following tests don't work with bitfields
-    QScopedPointer<DataInformation> data3(convert(QString(QStringLiteral("\"%1\"")).arg(typeString)));
+    QScopedPointer<DataInformation> data3(convert(QStringLiteral("\"%1\"").arg(typeString)));
     QVERIFY(data3);
     PrimitiveDataInformation* p3 = data3->asPrimitive();
     QVERIFY(p3);
@@ -245,7 +245,7 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(!val.isNull());
     QVERIFY(!val.isUndefined());
     QVERIFY(val.isObject());
-    QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), QString(QStringLiteral("enum")));
+    QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), QStringLiteral("enum"));
 
     QScopedPointer<DataInformation> data (ScriptValueConverter::convert(val, QStringLiteral("val"), logger.data()));
     if (expectedCount > 0)

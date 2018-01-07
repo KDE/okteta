@@ -91,7 +91,7 @@ void OsdParserTest::testPrimitive()
     QCOMPARE(tds2.size(), 1);
     const TopLevelDataInformation* td2 = tds2.at(0);
     DataInformation* data2 = td2->actualDataInformation();
-    QCOMPARE(data2->name(), QString(QStringLiteral("foo")));
+    QCOMPARE(data2->name(), QStringLiteral("foo"));
     PrimitiveDataInformation* prim2 = data2->asPrimitive();
     QVERIFY(prim2);
     QCOMPARE(prim2->type(), type);
@@ -107,11 +107,11 @@ void OsdParserTest::testScriptFuntion()
     QVERIFY(functionWrong2.isError());
     QScriptValue function = engine.evaluate(QStringLiteral("x = function() { return 2; }"));
     QVERIFY(function.isFunction());
-    QCOMPARE(function.toString(), QString(QStringLiteral("function () { return 2; }")));
+    QCOMPARE(function.toString(), QStringLiteral("function () { return 2; }"));
     //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
     QScriptValue betterFunction = engine.evaluate(QStringLiteral("(function() { return 2; })"));
     QVERIFY(betterFunction.isFunction());
-    QCOMPARE(betterFunction.toString(), QString(QStringLiteral("function () { return 2; }")));
+    QCOMPARE(betterFunction.toString(), QStringLiteral("function () { return 2; }"));
 }
 
 QTEST_GUILESS_MAIN(OsdParserTest)

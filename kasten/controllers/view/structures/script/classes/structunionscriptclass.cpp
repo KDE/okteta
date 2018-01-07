@@ -139,7 +139,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
             dataW->logError() << "attempting to access out of bounds child: index was" << pos
                     << ", maximum is" << (data->childCount() - 1);
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
-                QString(QStringLiteral("Attempting to access struct index %1, but length is %2")).arg(
+                QStringLiteral("Attempting to access struct index %1, but length is %2").arg(
                     QString::number(pos), QString::number(data->childCount())));
         }
         else

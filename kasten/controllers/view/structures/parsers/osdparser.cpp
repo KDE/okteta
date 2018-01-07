@@ -73,8 +73,8 @@ QDomDocument OsdParser::openDocFromString(ScriptLogger * logger) const
     QDomDocument doc;
     if (!doc.setContent(mXmlString, false, &errorMsg, &errorLine, &errorColumn))
     {
-        const QString errorOutput = QString(
-                QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3"))
+        const QString errorOutput =
+                QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3")
                 .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
         logger->error() << errorOutput;
         logger->info() << "XML was:" << mXmlString;
@@ -105,8 +105,8 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
     QDomDocument doc;
     if (!doc.setContent(&file, false, &errorMsg, &errorLine, &errorColumn))
     {
-        const QString errorOutput = QString(
-                QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3"))
+        const QString errorOutput =
+                QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3")
                 .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
         logger->error() << errorOutput;
         logger->info() << "File was:" << mAbsolutePath;

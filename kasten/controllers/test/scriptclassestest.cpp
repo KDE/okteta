@@ -328,7 +328,7 @@ void ScriptClassesTest::testReplaceObject()
     StructureDataInformation* structData = main->childAt(0)->asStruct();
     QVERIFY(structData);
     structData->setUpdateFunc(structUpdate);
-    QCOMPARE(structData->name(), QString(QStringLiteral("innerStruct")));
+    QCOMPARE(structData->name(), QStringLiteral("innerStruct"));
 
     // array changes its own type, this is the critical one
     //access it again after changing to ensure it was set properly
@@ -351,41 +351,41 @@ void ScriptClassesTest::testReplaceObject()
     //now just call update
     QCOMPARE(structData->childCount(), 2u);
     QCOMPARE((int)structData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::UInt8);
-    QCOMPARE(structData->childAt(0)->name(), QString(QStringLiteral("first")));
-    QCOMPARE(structData->childAt(1)->name(), QString(QStringLiteral("second")));
+    QCOMPARE(structData->childAt(0)->name(), QStringLiteral("first"));
+    QCOMPARE(structData->childAt(1)->name(), QStringLiteral("second"));
     top.scriptHandler()->updateDataInformation(structData);
     //now structdata should have different children
     QCOMPARE(structData->childCount(), 2u);
     QCOMPARE((int)structData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::Int32); //different now
-    QCOMPARE(structData->childAt(0)->name(), QString(QStringLiteral("changed"))); //different now
-    QCOMPARE(structData->childAt(1)->name(), QString(QStringLiteral("second"))); //still the same
+    QCOMPARE(structData->childAt(0)->name(), QStringLiteral("changed")); //different now
+    QCOMPARE(structData->childAt(1)->name(), QStringLiteral("second")); //still the same
 
-    QCOMPARE(arrayData->name(), QString(QStringLiteral("innerArray")));
+    QCOMPARE(arrayData->name(), QStringLiteral("innerArray"));
     top.scriptHandler()->updateDataInformation(arrayData);
     QVERIFY(main->childAt(1)->hasBeenUpdated());
     QVERIFY(main->childAt(1)->isPrimitive());
-    QCOMPARE(main->childAt(1)->name(), QString(QStringLiteral("changedToFloat")));
+    QCOMPARE(main->childAt(1)->name(), QStringLiteral("changedToFloat"));
 
-    QCOMPARE(ptrData->name(), QString(QStringLiteral("innerPointer")));
+    QCOMPARE(ptrData->name(), QStringLiteral("innerPointer"));
     QVERIFY(main->childAt(2)->isPointer());
     QVERIFY(main->childAt(2)->asPointer()->pointerTarget()->isPrimitive());
     top.scriptHandler()->updateDataInformation(ptrData->pointerTarget());
     QVERIFY(main->childAt(2)->isPointer());
     QVERIFY(main->childAt(2)->asPointer()->pointerTarget()->isArray());
-    QCOMPARE(main->childAt(2)->name(), QString(QStringLiteral("changedToArrayPointer")));
+    QCOMPARE(main->childAt(2)->name(), QStringLiteral("changedToArrayPointer"));
 
 
     //now reset to state before
-    QCOMPARE(main->name(), QString(QStringLiteral("container")));
+    QCOMPARE(main->name(), QStringLiteral("container"));
     top.scriptHandler()->updateDataInformation(main);
     //main is now a dangling pointer
     main = top.actualDataInformation();
-    QString nnnname = QString(QStringLiteral("newContainer"));
+    QString nnnname = QStringLiteral("newContainer");
     QCOMPARE(main->name(), nnnname);
     QVERIFY(main->childAt(0)->isStruct());
-    QCOMPARE(main->childAt(0)->name(), QString(QStringLiteral("innerStruct")));
-    QCOMPARE(main->childAt(1)->name(), QString(QStringLiteral("innerArray")));
-    QCOMPARE(main->childAt(2)->name(), QString(QStringLiteral("innerPointer")));
+    QCOMPARE(main->childAt(0)->name(), QStringLiteral("innerStruct"));
+    QCOMPARE(main->childAt(1)->name(), QStringLiteral("innerArray"));
+    QCOMPARE(main->childAt(2)->name(), QStringLiteral("innerPointer"));
 }
 
 namespace {
@@ -430,7 +430,7 @@ void ScriptClassesTest::testSafeReferenceDeleteObject()
     QScriptValue name = Utils::property(val, "name");
     QVERIFY(name.isValid());
     QVERIFY(!name.isError());
-    QCOMPARE(name.toString(), QString(QStringLiteral("foo")));
+    QCOMPARE(name.toString(), QStringLiteral("foo"));
     top->setActualDataInformation(new DummyDataInformation(nullptr));
     //val should now point to an invalid reference -> accessing name should throw an error
     name = Utils::property(val, "name");

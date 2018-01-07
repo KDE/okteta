@@ -450,35 +450,35 @@ void PrimitiveDataInformationTest::testValueStringChar()
     //we don't want the numeric value now
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QStringLiteral("'%1'")).arg(charString(i));
+        QString expected = QStringLiteral("'%1'").arg(charString(i));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     Kasten::StructureViewPreferences::setShowCharNumericalValue(true);
     Kasten::StructureViewPreferences::setCharDisplayBase(16);
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QStringLiteral("'%1' (0x%2)")).arg(charString(i),
+        QString expected = QStringLiteral("'%1' (0x%2)").arg(charString(i),
                 QString::number(i, 16));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     Kasten::StructureViewPreferences::setCharDisplayBase(10);
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QStringLiteral("'%1' (%2)")).arg(charString(i),
+        QString expected = QStringLiteral("'%1' (%2)").arg(charString(i),
                 QString::number(i, 10));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     Kasten::StructureViewPreferences::setCharDisplayBase(2);
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QStringLiteral("'%1' (0b%2)")).arg(charString(i),
+        QString expected = QStringLiteral("'%1' (0b%2)").arg(charString(i),
                 QString::number(i, 2));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
     Kasten::StructureViewPreferences::setCharDisplayBase(8);
     for (int i = 0; i < 256; ++i)
     {
-        QString expected = QString(QStringLiteral("'%1' (0o%2)")).arg(charString(i),
+        QString expected = QStringLiteral("'%1' (0o%2)").arg(charString(i),
                 QString::number(i, 8));
         QCOMPARE(CharDataInformationMethods::staticValueString(i), expected);
     }
