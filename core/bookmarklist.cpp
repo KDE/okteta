@@ -153,7 +153,7 @@ bool BookmarkList::adjustToSwapped( Address firstPartStart, Address secondPartSt
     // append bookmarks from first part as second
     if( !bookmarksInFirstPart.isEmpty() )
     {
-        foreach( Bookmark bookmark, bookmarksInFirstPart ) // krazy:exclude=foreach
+        for( Bookmark bookmark : qAsConst(bookmarksInFirstPart) ) // krazy:exclude=foreach
         {
             bookmark.move( secondPartLength );
             insert( bIt, bookmark );

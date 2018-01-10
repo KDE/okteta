@@ -155,7 +155,8 @@ void StructureAddRemoveWidget::buildAvailableList()
             continue;
         QTreeWidgetItem* item = new QTreeWidgetItem(mTreeAvailable,
                 QStringList { def->pluginInfo().pluginName(), pluginName });
-        foreach(const QString& name, def->structureNames())
+        const auto structureNames = def->structureNames();
+        for( const QString& name : structureNames )
             {
                 QTreeWidgetItem* subItem = new QTreeWidgetItem(item,
                         QStringList { name, pluginName });
@@ -294,7 +295,7 @@ void StructureAddRemoveWidget::updateAvailable()
                     item->text(0)) << "still loaded -> keep";
         }
     }
-    foreach(QTreeWidgetItem* itm,toRemove)
+    for( QTreeWidgetItem* itm : qAsConst(toRemove) )
     {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
                 << "item " << QStringLiteral("\'%1\':\'%2\'").arg(itm->text(1),

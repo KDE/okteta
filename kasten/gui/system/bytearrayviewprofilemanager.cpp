@@ -518,7 +518,7 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged( const QString& viewPro
                 ++it;
         }
     }
-    foreach( const ByteArrayViewProfile::Id& viewProfileId, removedViewProfileIds )
+    for( const ByteArrayViewProfile::Id& viewProfileId : qAsConst(removedViewProfileIds) )
     {
         viewProfileFileInfoLookup.remove( viewProfileId );
         if( viewProfileId == mDefaultViewProfileId )
@@ -572,7 +572,7 @@ void ByteArrayViewProfileManager::onDefaultViewProfileChanged( const QString& pa
         return;
 
     bool isExisting = false;
-    foreach( const ByteArrayViewProfile& viewProfile, mViewProfiles )
+    for( const ByteArrayViewProfile& viewProfile : qAsConst(mViewProfiles) )
     {
         if( viewProfile.id() == viewProfileId )
         {

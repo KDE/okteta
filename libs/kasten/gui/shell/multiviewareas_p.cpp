@@ -174,7 +174,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
                     break;
             }
 
-            foreach( TabbedViews* viewArea, mViewAreaList )
+            for( TabbedViews* viewArea : qAsConst(mViewAreaList) )
             {
                 if( viewArea->widget() == otherWidget )
                 {

@@ -39,7 +39,7 @@ QString TaggedUnionDataInformation::typeNameImpl() const
 TaggedUnionDataInformation::~TaggedUnionDataInformation()
 {
     qDeleteAll(mDefaultFields);
-    Q_FOREACH(const FieldInfo& fi, mAlternatives)
+    for( const FieldInfo& fi : qAsConst(mAlternatives) )
     {
         qDeleteAll(fi.fields);
     }
@@ -79,14 +79,14 @@ void TaggedUnionDataInformation::setAlternatives(const QVector<FieldInfo>& alter
     if (emitSignal)
         topLevelDataInformation()->_childCountAboutToChange(this, oldChildCount, newChidCount);
     //remove them all
-    Q_FOREACH(const FieldInfo& fi, mAlternatives)
+    for( const FieldInfo& fi : qAsConst(mAlternatives) )
     {
         qDeleteAll(fi.fields);
     }
     mAlternatives.clear();
     mAlternatives = alternatives;
     //set parent
-    Q_FOREACH(const FieldInfo& fi, mAlternatives)
+    for (const FieldInfo& fi : qAsConst(mAlternatives) )
     {
         for (int i = 0; i <  fi.fields.size(); ++i)
             fi.fields.at(i)->setParent(this);

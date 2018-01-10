@@ -237,7 +237,7 @@ void BookmarkListTest::testAdjustToSwapped()
     QVERIFY( !bookmarkList.isEmpty() );
     QCOMPARE( bookmarkList.count(), 5 );
     QList<int>::ConstIterator oit = newOffsets.constBegin();
-    foreach( const Bookmark &bookmark, bookmarkList )
+    for( const Bookmark& bookmark : qAsConst(bookmarkList) )
         QCOMPARE( bookmark.offset(), *oit++ );
 }
 

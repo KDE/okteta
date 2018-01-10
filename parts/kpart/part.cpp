@@ -186,7 +186,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
 {
     if( document )
     {
-        foreach( Kasten::AbstractXmlGuiController* controller, mControllers )
+        for( Kasten::AbstractXmlGuiController* controller : qAsConst(mControllers) )
             controller->setTargetModel( nullptr );
 
         delete mByteArrayView;
@@ -208,7 +208,7 @@ void OktetaPart::onDocumentLoaded( Kasten::AbstractDocument* document )
         mLayout->addWidget( displayWidget );
         mLayout->parentWidget()->setFocusProxy( displayWidget );
 
-        foreach( Kasten::AbstractXmlGuiController* controller, mControllers )
+        for( Kasten::AbstractXmlGuiController* controller : qAsConst(mControllers) )
             controller->setTargetModel( mByteArrayView );
 
         setModified( false );

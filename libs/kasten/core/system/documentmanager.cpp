@@ -115,7 +115,7 @@ void DocumentManager::closeAllOther( AbstractDocument* keptDocument )
 
     emit closing( closedDocuments );
 
-    foreach( AbstractDocument* document, closedDocuments )
+    for( AbstractDocument* document : qAsConst(closedDocuments) )
     {
         delete document;
     }
@@ -146,7 +146,7 @@ bool DocumentManager::canCloseAll()
 {
     bool canCloseAll = true;
 
-    foreach( AbstractDocument* document, mList )
+    for( AbstractDocument* document : qAsConst(mList) )
     {
         if( !mSyncManager->canClose(document) )
         {
@@ -162,7 +162,7 @@ bool DocumentManager::canCloseAllOther( AbstractDocument* keptDocument )
 {
     bool canCloseAll = true;
 
-    foreach( AbstractDocument* document, mList )
+    for( AbstractDocument* document : qAsConst(mList) )
     {
         if( ( document != keptDocument ) &&
             ! mSyncManager->canClose(document) )

@@ -50,7 +50,7 @@ void ModelCodecViewManager::setEncoderConfigEditorFactories( const QList<Abstrac
     mExporterFactoryList.clear();
 
     mExporterFactoryList.reserve(mEncoderFactoryList.size());
-    foreach( AbstractModelStreamEncoderConfigEditorFactory* factory, mEncoderFactoryList )
+    for( AbstractModelStreamEncoderConfigEditorFactory* factory : qAsConst(mEncoderFactoryList) )
         mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory( factory );
 }
 

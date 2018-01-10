@@ -127,7 +127,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     }
 
     int subLinesCount = 1;
-    foreach( const AbstractColumnTextRenderer* renderer, columnTextRendererList )
+    for( const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList) )
         if( renderer->noOfSublinesNeeded() > subLinesCount )
             subLinesCount = renderer->noOfSublinesNeeded();
 
@@ -135,7 +135,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     QTextStream textStream( device );
 
     int l = coordRange.start().line();
-    foreach( const AbstractColumnTextRenderer* renderer, columnTextRendererList )
+    for( const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList) )
         renderer->renderFirstLine( &textStream, l );
     textStream << endl;
 
@@ -150,7 +150,7 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
             subLine = 0;
         }
         const bool isSubline = ( subLine > 0 );
-        foreach( const AbstractColumnTextRenderer* renderer, columnTextRendererList )
+        for( const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList) )
             renderer->renderNextLine( &textStream, isSubline );
         textStream << endl;
         ++subLine;

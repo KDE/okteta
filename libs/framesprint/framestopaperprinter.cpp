@@ -45,7 +45,7 @@ bool FramesToPaperPrinter::print( QPrinter *printer, int firstPageIndex, int las
 {
     bool success = true;
 
-    foreach( AbstractFrameRenderer *frameRenderer, mFrameRendererList )
+    for( AbstractFrameRenderer *frameRenderer : qAsConst(mFrameRendererList) )
     {
         frameRenderer->prepare();
     }
@@ -54,7 +54,7 @@ bool FramesToPaperPrinter::print( QPrinter *printer, int firstPageIndex, int las
     int pageIndex = firstPageIndex;
     while( true )
     {
-        foreach( AbstractFrameRenderer *frameRenderer, mFrameRendererList )
+        for( AbstractFrameRenderer *frameRenderer : qAsConst(mFrameRendererList) )
         {
             const int x = frameRenderer->x();
             const int y = frameRenderer->y();

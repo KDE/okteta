@@ -158,7 +158,7 @@ inline void MultiViewAreasPrivate::removeViews( const QList<AbstractView*>& view
     Q_Q( MultiViewAreas );
 
     // TODO: possible to just send the views of the given area?
-    foreach( TabbedViews* viewArea, mViewAreaList )
+    for( TabbedViews* viewArea : qAsConst(mViewAreaList) )
         viewArea->removeViews( views );
 
     // TODO: above might trigger removal of areas before, is this a problem?
@@ -178,7 +178,7 @@ inline void MultiViewAreasPrivate::setCurrentToolInlineView( AbstractToolInlineV
 inline void MultiViewAreasPrivate::setViewFocus( AbstractView *view )
 {
     // TODO: makes this more efficient!
-    foreach( TabbedViews* viewArea, mViewAreaList )
+    for( TabbedViews* viewArea : qAsConst(mViewAreaList) )
     {
         const int localIndex = viewArea->indexOf( view );
         if( localIndex != -1 )

@@ -127,7 +127,7 @@ void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& docume
 
     emit closing( closedViews );
 
-    foreach( AbstractView* view, closedViews )
+    for( AbstractView* view : qAsConst(closedViews) )
     {
 //         qCDebug(LOG_KASTEN_GUI) << view->title();
         delete view;

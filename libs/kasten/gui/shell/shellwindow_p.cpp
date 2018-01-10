@@ -105,10 +105,10 @@ void ShellWindowPrivate::showDocument( AbstractDocument* document )
 
 void ShellWindowPrivate::updateControllers( AbstractView* view )
 {
-    foreach( AbstractXmlGuiController* controller, mControllers )
+    for( AbstractXmlGuiController* controller : qAsConst(mControllers) )
         controller->setTargetModel( view );
 
-    foreach( ToolViewDockWidget* dockWidget, mDockWidgets )
+    for( ToolViewDockWidget* dockWidget : qAsConst(mDockWidgets) )
     {
         if( dockWidget->isShown() )
             dockWidget->toolView()->tool()->setTargetModel( view );
