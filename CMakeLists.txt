@@ -20,7 +20,6 @@ include(ECMAddAppIcon)
 # CMake macros
 include(FeatureSummary)
 include(GenerateExportHeader)
-include(CMakeFindDependencyMacro)
 if(BUILD_TESTING)
   include(ECMAddTests)
 endif()
