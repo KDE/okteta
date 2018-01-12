@@ -1,5 +1,7 @@
 @PACKAGE_INIT@
 
+include(CMakeFindDependencyMacro)
+
 find_dependency(Qt5Gui @REQUIRED_QT_VERSION@)
 find_dependency(KF5KIO @KF5_VERSION@)
 

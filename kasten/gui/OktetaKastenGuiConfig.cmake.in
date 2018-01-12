@@ -1,5 +1,7 @@
 @PACKAGE_INIT@
 
+include(CMakeFindDependencyMacro)
+
 find_dependency(OktetaKastenCore @OKTETAKASTEN_LIB_VERSION@)
 find_dependency(KastenGui @KASTEN_LIB_VERSION@)
 find_dependency(OktetaGui @OKTETALIBS_LIB_VERSION@)
