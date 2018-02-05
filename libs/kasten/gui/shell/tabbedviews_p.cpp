@@ -55,6 +55,8 @@ void TabbedViewsPrivate::init()
                       q, [&]( int index ) { onTabCloseRequest( index ); } );
     QObject::connect( mTabWidget, &QTabWidget::currentChanged,
                       q, [&]( int index ) { onCurrentChanged( index ); } );
+    q->connect( mViewAreaBox, SIGNAL(receivedDropEvent(QDropEvent*)),
+                SLOT(onDropEvent(QDropEvent*)) );
 // TODO: restore
 //     q->connect( mTabWidget, SIGNAL(mouseMiddleClick(QWidget*)), SLOT(onCloseRequest(QWidget*)) );
 //     q->connect( mTabWidget, SIGNAL(mouseMiddleClick()), SLOT(onMouseMiddleClick()) );

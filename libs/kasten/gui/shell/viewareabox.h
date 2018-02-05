@@ -54,8 +54,15 @@ class ViewAreaBox : public QWidget
     /// takes ownership of @p bottomWidget, deletes current bottom widget. Can be 0.
     void setBottomWidget( QWidget* bottomWidget );
 
+  Q_SIGNALS:
+    void receivedDropEvent( QDropEvent* event );
+
   protected Q_SLOTS:
     void onDone();
+
+  protected:
+    void dragEnterEvent( QDragEnterEvent* event ) override;
+    void dropEvent( QDropEvent* event ) override;
 
   protected:
     QWidget* mCentralWidget;

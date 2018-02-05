@@ -25,6 +25,7 @@
 // Qt
 #include <QVBoxLayout>
 #include <QShortcut>
+#include <QDragEnterEvent>
 
 
 namespace Kasten
@@ -45,6 +46,7 @@ ViewAreaBox::ViewAreaBox( QWidget* centralWidget, QWidget* parent )
 
     mEscapeShortcut = new QShortcut( Qt::Key_Escape, this );
     mEscapeShortcut->setEnabled( false );
+    setAcceptDrops(true);
     connect( mEscapeShortcut, &QShortcut::activated, this, &ViewAreaBox::onDone ); // TODO: better use onCancelled
 }
 
@@ -108,6 +110,16 @@ void ViewAreaBox::setBottomWidget( QWidget* bottomWidget )
 void ViewAreaBox::onDone()
 {
     setBottomWidget( nullptr );
+}
+
+void ViewAreaBox::dragEnterEvent(QDragEnterEvent *event)
+{
+    event->acceptProposedAction();
+}
+
+void ViewAreaBox::dropEvent(QDropEvent *event)
+{
+    emit receivedDropEvent(event);
 }
 
 ViewAreaBox::~ViewAreaBox()
