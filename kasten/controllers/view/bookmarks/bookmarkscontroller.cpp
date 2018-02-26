@@ -64,6 +64,7 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
     mDeleteAction = actionCollection->addAction( QStringLiteral("bookmark_remove"),
                                                  this, SLOT(deleteBookmark()) );
     mDeleteAction->setText( i18nc("@action:inmenu","Remove Bookmark") );
+    mDeleteAction->setIcon( QIcon::fromTheme( QStringLiteral("bookmark-remove") ) );
     actionCollection->setDefaultShortcut( mDeleteAction, Qt::CTRL + Qt::SHIFT + Qt::Key_B );
 
     mDeleteAllAction = actionCollection->addAction( QStringLiteral("bookmark_remove_all"),
@@ -74,11 +75,13 @@ BookmarksController::BookmarksController( KXMLGUIClient* guiClient )
     mGotoNextBookmarkAction = actionCollection->addAction( QStringLiteral("bookmark_next"),
                                                            this, SLOT(gotoNextBookmark()) );
     mGotoNextBookmarkAction->setText( i18nc("@action:inmenu","Go to Next Bookmark") );
+    mGotoNextBookmarkAction->setIcon( QIcon::fromTheme( QStringLiteral("go-next") ) );
     actionCollection->setDefaultShortcut( mGotoNextBookmarkAction, Qt::ALT + Qt::Key_Down );
 
     mGotoPreviousBookmarkAction = actionCollection->addAction( QStringLiteral("bookmark_previous"),
                                                                this, SLOT(gotoPreviousBookmark()) );
     mGotoPreviousBookmarkAction->setText( i18nc("@action:inmenu","Go to Previous Bookmark") );
+    mGotoPreviousBookmarkAction->setIcon( QIcon::fromTheme( QStringLiteral("go-previous") ) );
     actionCollection->setDefaultShortcut( mGotoPreviousBookmarkAction, Qt::ALT + Qt::Key_Up );
 
     mBookmarksActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
