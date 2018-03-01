@@ -28,6 +28,7 @@
 #include <QIcon>
 #include <QHBoxLayout>
 #include <QToolButton>
+#include <QStyle>
 
 
 namespace Kasten
@@ -43,7 +44,7 @@ ToolInlineViewWidget::ToolInlineViewWidget( AbstractToolInlineView* view, QWidge
     //TODO: use style buttons instead, like QDockWidget
     QToolButton* closeButton = new QToolButton( this );
     closeButton->setAutoRaise( true );
-    closeButton->setIcon( QIcon::fromTheme( QStringLiteral("dialog-close") ) );
+    closeButton->setIcon( style()->standardIcon( QStyle::SP_DialogCloseButton ) );
     connect( closeButton, &QAbstractButton::clicked, this, &ToolInlineViewWidget::done );
     layout->addWidget( closeButton );
     layout->setAlignment( closeButton, (Qt::Alignment)(Qt::AlignLeft|Qt::AlignTop) );
