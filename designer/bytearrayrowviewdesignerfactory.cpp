@@ -43,7 +43,7 @@ QWidget* ByteArrayRowViewDesignerFactory::createWidget( QWidget* parent )
 
 QString ByteArrayRowViewDesignerFactory::group() const
 {
-    return QStringLiteral("Okteta (KDE)");
+    return QStringLiteral("Okteta");
 }
 
 QIcon ByteArrayRowViewDesignerFactory::icon() const
