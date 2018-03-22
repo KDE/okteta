@@ -576,7 +576,6 @@ Support for strings (various Unicode encodings) in definitions
         Our metadata file looks like this:
         <screen>
         [Desktop Entry]
-        Encoding=UTF-8
         Icon=arrow-up<co id="icon" />
         Type=Service
         ServiceTypes=KPluginInfo
