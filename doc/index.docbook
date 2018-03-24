@@ -1,11 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY Friedrich.Kossebau
-"<personname><firstname>Friedrich</firstname><othername>W. H.</othername><surname>Kossebau</surname></personname>">
-  <!ENTITY Friedrich.Kossebau.email "<email>kossebau@kde.org</email>">
-  <!ENTITY Alex.Richardson
-"<personname><firstname>Alex</firstname><surname>Richardson</surname></personname>">
-  <!ENTITY Alex.Richardson.email "<email>arichardson.kde@gmail.com</email>">
   <!ENTITY % English "INCLUDE">
   <!ENTITY % addindex "IGNORE">
 ]>
@@ -37,8 +31,8 @@
 </copyright>
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2016-07-29</date>
-<releaseinfo>0.20 (Applications 16.08)</releaseinfo>
+<date>2018-03-2018</date>
+<releaseinfo>&okteta; 0.24.60</releaseinfo>
 
 <abstract>
   <para>&okteta; is a simple editor for the raw data of files. This type of program
@@ -47,7 +41,6 @@
 
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>kdesdk</keyword>
 <keyword>Okteta</keyword>
 <keyword>view</keyword>
 <keyword>edit</keyword>
