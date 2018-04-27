@@ -45,6 +45,7 @@ Name[sv]=Javascript-test
 Name[tr]=JavaScript testi
 Name[uk]=Тест JavaScript
 Name[x-test]=xxJavaScript testxx
+Name[zh_CN]=JavaScript 测试
 Name[zh_TW]=JavaScript 測試
 Comment=Just testing structures defined in JS
 Comment[bs]=Isprobavanje struktura definisanih u javaskriptu
@@ -83,6 +84,7 @@ Comment[sv]=Bara test av strukturer definierade med Javascript
 Comment[tr]=JS'de tanımlanmış sadece yapılar test ediliyor
 Comment[uk]=Проста перевірка структур, визначених у JS
 Comment[x-test]=xxJust testing structures defined in JSxx
+Comment[zh_CN]=测试 JS 中定义的结构
 Comment[zh_TW]=測試定義於 JS 中的結構
 
 X-KDE-PluginInfo-Author=Alex Richardson

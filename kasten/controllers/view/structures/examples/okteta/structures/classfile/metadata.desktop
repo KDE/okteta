@@ -35,6 +35,7 @@ Name[sv]=Java .class-filformat
 Name[tr]=Java .class dosya biçimi
 Name[uk]=Формат файлів .class Java
 Name[x-test]=xxJava .class file formatxx
+Name[zh_CN]=Java .class 文件格式
 Name[zh_TW]=Java .class 檔案格式
 Comment=still very incomplete!!!
 Comment[ca]=Encara està molt incomplet!
@@ -67,6 +68,7 @@ Comment[sv]=Fortfarande mycket ofullständigt!
 Comment[tr]=hala çok eksik!!!
 Comment[uk]=Все ще доволі неповний!
 Comment[x-test]=xxstill very incomplete!!!xx
+Comment[zh_CN]=仍非常不完整！！！
 Comment[zh_TW]=仍然不完整！
 
 X-KDE-PluginInfo-Author=Alex Richardson

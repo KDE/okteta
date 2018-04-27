@@ -41,6 +41,7 @@ Name[sv]=Bitfälttest
 Name[tr]=Bit alanı testi
 Name[uk]=Перевірка полів бітів
 Name[x-test]=xxBitfields testxx
+Name[zh_CN]=位域测试
 Name[zh_TW]=Bitfields 測試
 
 X-KDE-PluginInfo-Author=Alex Richardson

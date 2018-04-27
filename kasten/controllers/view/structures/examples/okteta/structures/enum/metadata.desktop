@@ -41,6 +41,7 @@ Name[sv]=Testar uppräkningsvärden
 Name[tr]=Enum'lar test ediliyor
 Name[uk]=Тестування переліків
 Name[x-test]=xxTesting enumsxx
+Name[zh_CN]=测试枚举
 Name[zh_TW]=測試列舉
 Comment=A test structure for enums
 Comment[bs]=Probna struktura za nabrajanja
@@ -79,6 +80,7 @@ Comment[sv]=En teststruktur för uppräkningsvärden
 Comment[tr]=Enum'lar için bir test yapısı
 Comment[uk]=Тестова структура для переліків (enum)
 Comment[x-test]=xxA test structure for enumsxx
+Comment[zh_CN]=枚举测试结构
 Comment[zh_TW]=列舉的測試結構
 
 X-KDE-PluginInfo-Author=Alex Richardson
