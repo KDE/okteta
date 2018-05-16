@@ -47,7 +47,8 @@ ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
         i18nc("@item:inmenu","&Rows"),
     };
     mViewModeAction->setItems( list );
-    connect( mViewModeAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewModeController::setViewMode );
+    connect( mViewModeAction, QOverload<int>::of(&KSelectAction::triggered),
+             this, &ViewModeController::setViewMode );
 
     setTargetModel( nullptr );
 }

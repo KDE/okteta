@@ -56,7 +56,7 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     QHBoxLayout *operationLayout = new QHBoxLayout();
     QLabel *label = new QLabel( i18nc("@label:listbox operation to use by the filter","Operation:"), this );
     mOperationComboBox = new KComboBox( this );
-    connect( mOperationComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+    connect( mOperationComboBox, QOverload<int>::of(&KComboBox::activated),
              this, &FilterView::onOperationChange );
 
     label->setBuddy( mOperationComboBox );
@@ -106,10 +106,10 @@ FilterView::FilterView( FilterTool *tool, QWidget* parent )
     // automatically set focus to the parameters if a operation has been selected
     QAbstractItemView* operationComboBoxListView = mOperationComboBox->view();
     QObject::connect( operationComboBoxListView, &QAbstractItemView::activated,
-             mParameterSetEditStack, static_cast<void (QStackedWidget::*)()>(&QStackedWidget::setFocus) );
+             mParameterSetEditStack, QOverload<>::of(&QStackedWidget::setFocus) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
     QObject::connect( operationComboBoxListView, &QAbstractItemView::pressed,
-             mParameterSetEditStack, static_cast<void (QStackedWidget::*)()>(&QStackedWidget::setFocus) );
+             mParameterSetEditStack, QOverload<>::of(&QStackedWidget::setFocus) );
     // TODO: goto filter button if there are no parameters
 
     addFilters();

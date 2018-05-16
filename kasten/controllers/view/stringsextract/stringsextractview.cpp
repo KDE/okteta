@@ -65,7 +65,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     mMinLengthSpinBox = new QSpinBox( this );
     mMinLengthSpinBox->setValue( mTool->minLength() );
     mMinLengthSpinBox->setMinimum( MinimumStringLength );
-    connect( mMinLengthSpinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect( mMinLengthSpinBox, QOverload<int>::of(&QSpinBox::valueChanged),
             mTool, &StringsExtractTool::setMinLength );
     label->setBuddy( mMinLengthSpinBox );
     updateLayout->addWidget( mMinLengthSpinBox );

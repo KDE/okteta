@@ -60,7 +60,8 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( 
     };
     mAddressSizeSelect->addItems( list );
     mAddressSizeSelect->setCurrentIndex( static_cast<int>(mSettings.addressSizeId) );
-    connect( mAddressSizeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged );
+    connect( mAddressSizeSelect, QOverload<int>::of(&KComboBox::activated),
+             this, &ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
 }
 

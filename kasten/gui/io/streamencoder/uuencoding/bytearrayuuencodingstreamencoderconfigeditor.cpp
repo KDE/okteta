@@ -69,7 +69,8 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
     };
     mEncodingSelect->addItems( list );
     mEncodingSelect->setCurrentIndex( static_cast<int>(mSettings.algorithmId) );
-    connect( mEncodingSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged );
+    connect( mEncodingSelect, QOverload<int>::of(&KComboBox::activated),
+             this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
 }
 

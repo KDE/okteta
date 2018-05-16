@@ -65,7 +65,8 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( By
     mNumberInput = new QSpinBox( this );
     mNumberInput->setRange( 1, INT_MAX );
     mNumberInput->setValue( mSettings.count );
-    connect( mNumberInput, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged );
+    connect( mNumberInput, QOverload<int>::of(&QSpinBox::valueChanged),
+             this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter the number of times the pattern should be inserted." );

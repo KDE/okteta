@@ -74,14 +74,16 @@ ViewStatusController::ViewStatusController( StatusBar* statusBar )
     mValueCodingComboBox->addItems( list );
     mValueCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Coding of the value interpretation in the current view.") );
-    connect( mValueCodingComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ViewStatusController::setValueCoding );
+    connect( mValueCodingComboBox, QOverload<int>::of(&KComboBox::activated),
+             this, &ViewStatusController::setValueCoding );
     statusBar->addWidget( mValueCodingComboBox );
 
     mCharCodingComboBox = new KComboBox( statusBar );
     mCharCodingComboBox->addItems( Okteta::CharCodec::codecNames() );
     mCharCodingComboBox->setToolTip(
         i18nc("@info:tooltip","Encoding in the character column of the current view.") );
-    connect( mCharCodingComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ViewStatusController::setCharCoding );
+    connect( mCharCodingComboBox, QOverload<int>::of(&KComboBox::activated),
+             this, &ViewStatusController::setCharCoding );
     statusBar->addWidget( mCharCodingComboBox );
 
     fixWidths( 0 );

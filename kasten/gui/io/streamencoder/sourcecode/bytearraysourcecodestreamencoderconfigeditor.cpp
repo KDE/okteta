@@ -64,7 +64,8 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     mItemsPerLineEdit = new QSpinBox( this );
     mItemsPerLineEdit->setMinimum( 1 );
     mItemsPerLineEdit->setValue( mSettings.elementsPerLine );
-    connect( mItemsPerLineEdit, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
+    connect( mItemsPerLineEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+             this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( itemsPerLineLabel, mItemsPerLineEdit );
 
     // data type
@@ -81,7 +82,8 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
         dataTypeNameStrings << QLatin1String(dataTypeNames[i]);
     mDataTypeSelect->addItems( dataTypeNameStrings );
     mDataTypeSelect->setCurrentIndex( static_cast<int>(mSettings.dataType) );
-    connect( mDataTypeSelect, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated), this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
+    connect( mDataTypeSelect, QOverload<int>::of(&KComboBox::activated),
+             this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( dataTypeLabel, mDataTypeSelect );
 
     // unsigned as hexadezimal

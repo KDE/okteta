@@ -59,7 +59,7 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     QHBoxLayout* algorithmLayout = new QHBoxLayout();
     QLabel* label = new QLabel( i18nc("@label:listbox algorithm to use for the checksum","Algorithm:"), this );
     mAlgorithmComboBox = new KComboBox( this );
-    connect( mAlgorithmComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+    connect( mAlgorithmComboBox, QOverload<int>::of(&KComboBox::activated),
              this, &ChecksumView::onOperationChange );
 
     label->setBuddy( mAlgorithmComboBox );
@@ -115,10 +115,10 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     // automatically set focus to the parameters if a operation has been selected
     QAbstractItemView* algorithmComboBoxListView = mAlgorithmComboBox->view();
     QObject::connect( algorithmComboBoxListView, &QAbstractItemView::activated,
-             mParameterSetEditStack, static_cast<void (QStackedWidget::*)()>(&QStackedWidget::setFocus) );
+             mParameterSetEditStack, QOverload<>::of(&QStackedWidget::setFocus) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
     QObject::connect( algorithmComboBoxListView, &QAbstractItemView::pressed,
-             mParameterSetEditStack, static_cast<void (QStackedWidget::*)()>(&QStackedWidget::setFocus) );
+             mParameterSetEditStack, QOverload<>::of(&QStackedWidget::setFocus) );
     // TODO: goto filter button if there are no parameters
 
     addAlgorithms();

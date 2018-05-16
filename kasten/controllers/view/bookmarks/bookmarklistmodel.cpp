@@ -42,11 +42,11 @@ BookmarkListModel::BookmarkListModel( BookmarksTool* tool, QObject* parent )
     connect( mTool, &BookmarksTool::hasBookmarksChanged,
              this, &BookmarkListModel::onHasBookmarksChanged );
     connect( mTool, &BookmarksTool::bookmarksAdded,
-             this, static_cast<void (BookmarkListModel::*)()>(&BookmarkListModel::onBookmarksChanged) );
+             this, QOverload<>::of(&BookmarkListModel::onBookmarksChanged) );
     connect( mTool, &BookmarksTool::bookmarksRemoved,
-             this, static_cast<void (BookmarkListModel::*)()>(&BookmarkListModel::onBookmarksChanged) );
+             this, QOverload<>::of(&BookmarkListModel::onBookmarksChanged) );
     connect( mTool, &BookmarksTool::bookmarksModified,
-             this, static_cast<void (BookmarkListModel::*)(const QList<int>&)>(&BookmarkListModel::onBookmarksChanged) );
+             this, QOverload<const QList<int>&>::of(&BookmarkListModel::onBookmarksChanged) );
     connect( mTool, &BookmarksTool::offsetCodingChanged,
              this, &BookmarkListModel::onOffsetCodingChanged );
 }

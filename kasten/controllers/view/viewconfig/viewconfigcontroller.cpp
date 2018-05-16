@@ -54,7 +54,8 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
               "&Decimal"),
     };
     mOffsetCodingAction->setItems( offsetCodingList );
-    connect( mOffsetCodingAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setOffsetCoding );
+    connect( mOffsetCodingAction, QOverload<int>::of(&KSelectAction::triggered),
+             this, &ViewConfigController::setOffsetCoding );
 
     // value valueCoding
     mCodingAction = actionCollection->add<KSelectAction>( QStringLiteral("view_valuecoding") );
@@ -70,13 +71,15 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
                        "&Binary"),
     };
     mCodingAction->setItems( codingList );
-    connect( mCodingAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setValueCoding );
+    connect( mCodingAction, QOverload<int>::of(&KSelectAction::triggered),
+             this, &ViewConfigController::setValueCoding );
 
     // char valueCoding
     mEncodingAction = actionCollection->add<KSelectAction>( QStringLiteral("view_charencoding") );
     mEncodingAction->setText( i18nc("@title:menu","&Char Coding") );
     mEncodingAction->setItems( Okteta::CharCodec::codecNames() );
-    connect( mEncodingAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setCharCoding );
+    connect( mEncodingAction, QOverload<int>::of(&KSelectAction::triggered),
+             this, &ViewConfigController::setCharCoding );
 
     mShowsNonprintingAction = actionCollection->add<KToggleAction>( QStringLiteral("view_showsnonprinting") );
     mShowsNonprintingAction->setText( i18nc("@option:check","Show &Non-printing Chars") );
@@ -104,7 +107,8 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
               "&On"),
     };
     mResizeStyleAction->setItems( resizeStyleList );
-    connect( mResizeStyleAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::setLayoutStyle );
+    connect( mResizeStyleAction, QOverload<int>::of(&KSelectAction::triggered),
+             this, &ViewConfigController::setLayoutStyle );
 
     mShowOffsetColumnAction = actionCollection->add<KToggleAction>( QStringLiteral("view_lineoffset") );
     mShowOffsetColumnAction->setText( i18nc("@option:check","Show &Line Offset") );
@@ -120,7 +124,8 @@ ViewConfigController::ViewConfigController( KXMLGUIClient* guiClient )
         i18nc("@item:inmenu","Values && Chars"),
     };
     mToggleColumnsAction->setItems( toggleColumnsList );
-    connect( mToggleColumnsAction, static_cast<void (KSelectAction::*)(int)>(&KSelectAction::triggered), this, &ViewConfigController::toggleValueCharColumns );
+    connect( mToggleColumnsAction, QOverload<int>::of(&KSelectAction::triggered),
+             this, &ViewConfigController::toggleValueCharColumns );
 
     setTargetModel( nullptr );
 }

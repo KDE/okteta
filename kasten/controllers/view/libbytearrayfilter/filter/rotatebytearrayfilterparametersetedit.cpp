@@ -59,7 +59,7 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QW
 
     mMoveBitWidthEdit = new QSpinBox( this );
     mMoveBitWidthEdit->setRange( INT_MIN, INT_MAX );
-    connect( mMoveBitWidthEdit, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+    connect( mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),
              this, &RotateByteArrayFilterParameterSetEdit::onValueChanged );
 
     const QString moveBitWidthLabelText =

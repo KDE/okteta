@@ -73,7 +73,7 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
         i18nc( "@info:whatsthis",
                "Select the direction the bytes are converted, to or from the selected charset." );
     mDirectionComboBox->setWhatsThis( directionWhatsThis );
-    connect( mDirectionComboBox, static_cast<void (KComboBox::*)(int)>(&KComboBox::activated),
+    connect( mDirectionComboBox, QOverload<int>::of(&KComboBox::activated),
              mTool, &CharsetConversionTool::setConversionDirection );
 
     directionCharsetLayout->addWidget( mDirectionComboBox );
@@ -92,7 +92,7 @@ CharsetConversionView::CharsetConversionView( CharsetConversionTool* tool, QWidg
         i18nc( "@info:whatsthis",
                "Select the charset the bytes are converted to." );
     mOtherCharSetComboBox->setWhatsThis( targetCharsetWhatsThis );
-    connect( mOtherCharSetComboBox, static_cast<void (KComboBox::*)(const QString&)>(&KComboBox::activated),
+    connect( mOtherCharSetComboBox, QOverload<const QString&>::of(&KComboBox::activated),
              mTool, &CharsetConversionTool::setOtherCharCodecName );
 
     directionCharsetLayout->addWidget( mOtherCharSetComboBox, 10 );

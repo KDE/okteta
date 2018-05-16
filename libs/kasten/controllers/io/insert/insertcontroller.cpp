@@ -66,7 +66,7 @@ InsertController::InsertController( ModelCodecViewManager* modelCodecViewManager
     mInsertSelectAction->setText( i18nc("@title:menu","Insert") );
 //     mInsertSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("insert-text") ) );
     mInsertSelectAction->setToolBarMode( KSelectAction::MenuMode );
-    connect( mInsertSelectAction, static_cast<void(KSelectAction::*)(QAction*)>(&KSelectAction::triggered),
+    connect( mInsertSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
              this, &InsertController::onActionTriggered );
 
     setTargetModel( nullptr );

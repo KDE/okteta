@@ -48,7 +48,8 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
     mSizeInput = new QSpinBox( this );
     mSizeInput->setRange( 1, INT_MAX );
     mSizeInput->setValue( mSettings.size );
-    connect( mSizeInput, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged );
+    connect( mSizeInput, QOverload<int>::of(&QSpinBox::valueChanged),
+             this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged );
     const QString numberWhatsThis =
         i18nc( "@info:whatsthis",
                "Enter the size of the bytearray to generate." );

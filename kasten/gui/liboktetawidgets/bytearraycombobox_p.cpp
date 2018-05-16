@@ -59,7 +59,7 @@ void ByteArrayComboBoxPrivate::init()
 
     mFormatComboBox = new KComboBox( q );
     mFormatComboBox->addItems( formatNames() );
-    QObject::connect( mFormatComboBox, static_cast<void(QComboBox::*)(int)>(&QComboBox::activated),
+    QObject::connect( mFormatComboBox, QOverload<int>::of(&QComboBox::activated),
                       q, [&](int index) { onFormatChanged(index); } );
 
     mValueComboBox = new KComboBox( q );
@@ -72,17 +72,17 @@ void ByteArrayComboBoxPrivate::init()
                       q, [&](const QString& text) { onValueEdited(text); } );
     QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
     QObject::connect( formatComboBoxListView, &QAbstractItemView::activated,
-             mValueComboBox, static_cast<void (KComboBox::*)()>(&KComboBox::setFocus) );
+             mValueComboBox, QOverload<>::of(&KComboBox::setFocus) );
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
     QObject::connect( formatComboBoxListView, &QAbstractItemView::pressed,
-             mValueComboBox, static_cast<void (KComboBox::*)()>(&KComboBox::setFocus) );
+             mValueComboBox, QOverload<>::of(&KComboBox::setFocus) );
     mValidator = new ByteArrayValidator( mValueComboBox );
     const ByteArrayValidator::Coding coding =
         static_cast<ByteArrayValidator::Coding>( mFormatComboBox->currentIndex() );
     mValidator->setCodec( coding );
 
     mValueComboBox->setValidator( mValidator );
-    QObject::connect( mValueComboBox,  static_cast<void(QComboBox::*)(int)>(&QComboBox::activated),
+    QObject::connect( mValueComboBox, QOverload<int>::of(&QComboBox::activated),
                       q, [&](int index) { onValueActivated(index); } );
 
     baseLayout->addWidget( mFormatComboBox );
