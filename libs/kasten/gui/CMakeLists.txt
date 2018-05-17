@@ -121,18 +121,20 @@ ecm_generate_headers(kastengui_shell_CCHDRS
     AbstractViewArea
     AbstractGroupedViews
     StatusBar
-    ViewAreaBox
-    ViewBox
     SingleViewArea
     SingleViewWindow
     TabbedViews
     MultiViewAreas
-    ToolInlineViewWidget
     ToolViewDockWidget
-    StatusBarLayout
     ToolInlineViewable
     WidgetsDockable
     ViewAreaSplitable
+
+    # remove on next API change, accidentally here
+    StatusBarLayout
+    ToolInlineViewWidget
+    ViewAreaBox
+    ViewBox
   RELATIVE shell
   PREFIX Kasten
   REQUIRED_HEADERS kastengui_shell_HDRS
