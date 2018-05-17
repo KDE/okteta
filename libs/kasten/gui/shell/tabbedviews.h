@@ -33,8 +33,6 @@ class QMimeData;
 namespace Kasten
 {
 
-class ViewAreaBox;
-
 class TabbedViewsPrivate;
 
 
