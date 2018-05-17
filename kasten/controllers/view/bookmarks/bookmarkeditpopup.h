@@ -27,7 +27,7 @@
 #include <kasten/abstractlinepopup.h>
 
 // class Bookmark;
-class KLineEdit;
+class QLineEdit;
 
 
 namespace Kasten
@@ -51,7 +51,7 @@ class BookmarkEditPopup : public AbstractLinePopup
     void onReturnPressed();
 
   private:
-    KLineEdit* mBookmarkNameLineEdit;
+    QLineEdit* mBookmarkNameLineEdit;
 };
 
 }

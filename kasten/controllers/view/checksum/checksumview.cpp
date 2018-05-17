@@ -31,13 +31,13 @@
 #include <abstractbytearraychecksumalgorithm.h>
 // KF5
 #include <KComboBox>
-#include <KLineEdit>
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
 #include <QLabel>
 #include <QGroupBox>
 #include <QStackedWidget>
+#include <QLineEdit>
 #include <QPushButton>
 #include <QLayout>
 #include <QClipboard>
@@ -101,10 +101,10 @@ ChecksumView::ChecksumView( ChecksumTool* tool, QWidget* parent )
     calculateLayout->addWidget( mCalculateButton );
     baseLayout->addLayout( calculateLayout );
 
-    mChecksumLabel = new KLineEdit( this );
+    mChecksumLabel = new QLineEdit( this );
     mChecksumLabel->setReadOnly( true );
     mChecksumLabel->setText( mTool->checkSum() );
-    connect( mTool, &ChecksumTool::checksumChanged, mChecksumLabel, &KLineEdit::setText );
+    connect( mTool, &ChecksumTool::checksumChanged, mChecksumLabel, &QLineEdit::setText );
     baseLayout->addWidget( mChecksumLabel, 10 );
 
     baseLayout->addStretch( 10 );

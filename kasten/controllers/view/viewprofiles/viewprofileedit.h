@@ -27,11 +27,11 @@
 #include <QWidget>
 
 // KF5
-class KLineEdit;
 class KComboBox;
 // Qt
 class QCheckBox;
 class QSpinBox;
+class QLineEdit;
 
 
 namespace Kasten
@@ -61,7 +61,7 @@ protected Q_SLOTS:
     void onLineBreakIndexChanged( int lineBreakIndex );
 
 protected: // title
-    KLineEdit* mTitleEdit;
+    QLineEdit* mTitleEdit;
 protected: // display
     QCheckBox* mLineOffsetShownCheckBox;
     KComboBox* mOffsetCodingComboBox;
@@ -76,8 +76,8 @@ protected: // value
 protected: // char
     KComboBox* mCharCodingComboBox;
     QCheckBox* mNonPrintableShownCheckBox;
-    KLineEdit* mUndefinedCharEdit;
-    KLineEdit* mNonPrintableCharEdit;
+    QLineEdit* mUndefinedCharEdit;
+    QLineEdit* mNonPrintableCharEdit;
 };
 
 }

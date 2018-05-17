@@ -25,14 +25,14 @@
 
 // lib
 #include "../types/char8.h"
-// KF5
-#include <KLineEdit>
+// Qt
+#include <QLineEdit>
 
 namespace Okteta {
 class CharCodec;
 }
 
-class Char8Editor : public KLineEdit
+class Char8Editor : public QLineEdit
 {
   Q_OBJECT
   Q_PROPERTY( Char8 data READ data WRITE setData USER true )

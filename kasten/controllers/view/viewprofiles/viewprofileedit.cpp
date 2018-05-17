@@ -29,13 +29,13 @@
 // KF5
 #include <KLocalizedString>
 #include <KComboBox>
-#include <KLineEdit>
 // Qt
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QFormLayout>
 #include <QCheckBox>
 #include <QSpinBox>
+#include <QLineEdit>
 
 
 namespace Kasten
@@ -63,7 +63,8 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     // titel
     QFormLayout* titleFormLayout = new QFormLayout;
     // char for non-printable bytes
-    mTitleEdit = new KLineEdit( this );
+    mTitleEdit = new QLineEdit( this );
+    mTitleEdit->setClearButtonEnabled( true );
     connect( mTitleEdit, &QLineEdit::textChanged,
              this, &ViewProfileEdit::profileTitleChanged );
     titleFormLayout->addRow( i18n("Title:"), mTitleEdit );
@@ -171,11 +172,13 @@ ViewProfileEdit::ViewProfileEdit( QWidget* parent )
     mNonPrintableShownCheckBox = new QCheckBox( charsBox );
     charsBoxFormLayout->addRow( i18n("Show Non-printable:"), mNonPrintableShownCheckBox );
     // char for non-printable bytes
-    mNonPrintableCharEdit = new KLineEdit( charsBox ); // TODO: use a validator to ensure always one char
+    mNonPrintableCharEdit = new QLineEdit( charsBox ); // TODO: use a validator to ensure always one char
+    mNonPrintableCharEdit->setClearButtonEnabled( true );
     mNonPrintableCharEdit->setMaxLength( 1 );
     charsBoxFormLayout->addRow( i18n("Char for non-printable bytes:"), mNonPrintableCharEdit );
     // char for undefined bytes
-    mUndefinedCharEdit = new KLineEdit( charsBox ); // TODO: use a validator to ensure always one char
+    mUndefinedCharEdit = new QLineEdit( charsBox ); // TODO: use a validator to ensure always one char
+    mUndefinedCharEdit->setClearButtonEnabled( true );
     mUndefinedCharEdit->setMaxLength( 1 );
     charsBoxFormLayout->addRow( i18n("Char for undefined bytes:"), mUndefinedCharEdit );
 

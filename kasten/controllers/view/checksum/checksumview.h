@@ -30,7 +30,7 @@ class AbstractByteArrayChecksumParameterSet;
 
 class KComboBox;
 class QPushButton;
-class KLineEdit;
+class QLineEdit;
 
 class QStackedWidget;
 
@@ -73,7 +73,7 @@ class ChecksumView : public AbstractToolWidget
 
     KComboBox* mAlgorithmComboBox;
     QStackedWidget* mParameterSetEditStack;
-    KLineEdit* mChecksumLabel;
+    QLineEdit* mChecksumLabel;
     QPushButton* mCalculateButton;
 };
 

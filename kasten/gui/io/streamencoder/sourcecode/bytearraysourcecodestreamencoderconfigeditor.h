@@ -28,10 +28,10 @@
 // Kasten gui
 #include <kasten/abstractmodelstreamencoderconfigeditor.h>
 
-class KLineEdit;
 class KComboBox;
 class QSpinBox;
 class QCheckBox;
+class QLineEdit;
 
 
 namespace Kasten
@@ -56,7 +56,7 @@ class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamE
     ByteArraySourceCodeStreamEncoder* mEncoder;
     SourceCodeStreamEncoderSettings mSettings;
 
-    KLineEdit* mVariableNameEdit;
+    QLineEdit* mVariableNameEdit;
     QSpinBox* mItemsPerLineEdit;
     KComboBox* mDataTypeSelect;
     QCheckBox* mUnsignedAsHexadecimalCheck;

@@ -54,10 +54,11 @@ Utf8CharValidator::~Utf8CharValidator() {}
 
 
 Utf8Editor::Utf8Editor( QWidget* parent )
-  : KLineEdit( parent )
+  : QLineEdit( parent )
 {
     setValidator( new Utf8CharValidator(this) );
     setMaxLength( 1 );
+    setClearButtonEnabled( true );
 }
 
 void Utf8Editor::setData( Utf8 data )

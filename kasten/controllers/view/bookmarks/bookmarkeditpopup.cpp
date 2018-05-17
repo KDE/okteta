@@ -24,8 +24,8 @@
 
 // Okteta core
 // #include <okteta/bookmark.h>
-// KF5
-#include <KLineEdit>
+// Qt
+#include <QLineEdit>
 #include <QIcon>
 
 
@@ -37,8 +37,9 @@ BookmarkEditPopup::BookmarkEditPopup( QWidget* parent )
 {
     setIcon( QIcon::fromTheme( QStringLiteral("bookmark-new") ) );
 
-    mBookmarkNameLineEdit = new KLineEdit( this );
-    connect( mBookmarkNameLineEdit, &KLineEdit::returnPressed, this, &BookmarkEditPopup::onReturnPressed );
+    mBookmarkNameLineEdit = new QLineEdit( this );
+    mBookmarkNameLineEdit->setClearButtonEnabled( true );
+    connect( mBookmarkNameLineEdit, &QLineEdit::returnPressed, this, &BookmarkEditPopup::onReturnPressed );
 
     setWidget( mBookmarkNameLineEdit );
 }

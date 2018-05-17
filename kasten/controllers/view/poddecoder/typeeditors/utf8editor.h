@@ -25,11 +25,11 @@
 
 // lib
 #include "../types/utf8.h"
-// KF5
-#include <KLineEdit>
+// Qt
+#include <QLineEdit>
 
 
-class Utf8Editor : public KLineEdit
+class Utf8Editor : public QLineEdit
 {
   Q_OBJECT
   Q_PROPERTY( Utf8 data READ data WRITE setData USER true )

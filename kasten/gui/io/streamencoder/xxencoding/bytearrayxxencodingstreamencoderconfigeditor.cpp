@@ -26,10 +26,10 @@
 #include "bytearraytextstreamencoderpreview.h"
 // KF5
 #include <KLocalizedString>
-#include <KLineEdit>
 // Qt
 #include <QFormLayout>
 #include <QLabel>
+#include <QLineEdit>
 
 
 namespace Kasten
@@ -49,9 +49,10 @@ ByteArrayXxencodingStreamEncoderConfigEditor::ByteArrayXxencodingStreamEncoderCo
         i18nc( "@label:textbox file name internally given to the encoded data",
                "Internal name of file:" );
 
-    mFileNameEdit = new KLineEdit( this );
+    mFileNameEdit = new QLineEdit( this );
+    mFileNameEdit->setClearButtonEnabled( true );
     mFileNameEdit->setText( mSettings.fileName );
-    connect( mFileNameEdit, &KLineEdit::textChanged, this, &ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged );
+    connect( mFileNameEdit, &QLineEdit::textChanged, this, &ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( fileNameLabel, mFileNameEdit );
 }
 

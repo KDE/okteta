@@ -27,12 +27,13 @@
 
 
 Float64Editor::Float64Editor( QWidget* parent )
-  : KLineEdit( parent )
+  : QLineEdit( parent )
 {
     QDoubleValidator* validator = new QDoubleValidator( this );
     validator->setNotation( QDoubleValidator::ScientificNotation );
 
     setValidator( validator );
+    setClearButtonEnabled( true );
 }
 
 void Float64Editor::setData( Float64 data )

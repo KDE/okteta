@@ -26,11 +26,11 @@
 #include "bytearraytextstreamencoderpreview.h"
 // KF5
 #include <KLocalizedString>
-#include <KLineEdit>
 // #include <KComboBox>
 // Qt
 #include <QLayout>
 #include <QLabel>
+#include <QLineEdit>
 
 
 namespace Kasten
@@ -67,9 +67,10 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     QLabel* label = new QLabel( i18nc("@label:textbox substring which separates the values","Separation:"), this );
     pageLayout->addWidget( label, 0, 0, Qt::AlignRight);
 
-    mSeparationEdit = new KLineEdit( this );
+    mSeparationEdit = new QLineEdit( this );
+    mSeparationEdit->setClearButtonEnabled( true );
     mSeparationEdit->setText( mSettings.separation );
-    connect( mSeparationEdit, &KLineEdit::textChanged, this, &ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged );
+    connect( mSeparationEdit, &QLineEdit::textChanged, this, &ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addWidget( mSeparationEdit, 0, 1);
 
 

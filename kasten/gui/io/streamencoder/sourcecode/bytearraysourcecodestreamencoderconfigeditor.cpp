@@ -26,12 +26,12 @@
 #include "bytearraytextstreamencoderpreview.h"
 // KF5
 #include <KLocalizedString>
-#include <KLineEdit>
 #include <KComboBox>
 // Qt
 #include <QSpinBox>
 #include <QFormLayout>
 #include <QCheckBox>
+#include <QLineEdit>
 
 
 namespace Kasten
@@ -51,9 +51,10 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
         i18nc( "@label:textbox name of the created variable",
                "Name of variable:" );
 
-    mVariableNameEdit = new KLineEdit( this );
+    mVariableNameEdit = new QLineEdit( this );
+    mVariableNameEdit->setClearButtonEnabled( true );
     mVariableNameEdit->setText( mSettings.variableName );
-    connect( mVariableNameEdit, &KLineEdit::textChanged, this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
+    connect( mVariableNameEdit, &QLineEdit::textChanged, this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
     pageLayout->addRow( variableNameLabel, mVariableNameEdit );
 
     // items per line

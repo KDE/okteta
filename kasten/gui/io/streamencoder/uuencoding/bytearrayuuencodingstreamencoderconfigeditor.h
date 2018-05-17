@@ -28,8 +28,8 @@
 // Kasten gui
 #include <kasten/abstractmodelstreamencoderconfigeditor.h>
 
-class KLineEdit;
 class KComboBox;
+class QLineEdit;
 
 
 namespace Kasten
@@ -54,7 +54,7 @@ class ByteArrayUuencodingStreamEncoderConfigEditor : public AbstractModelStreamE
     UuencodingStreamEncoderSettings mSettings;
 
     KComboBox* mEncodingSelect;
-    KLineEdit* mFileNameEdit;
+    QLineEdit* mFileNameEdit;
 };
 
 }

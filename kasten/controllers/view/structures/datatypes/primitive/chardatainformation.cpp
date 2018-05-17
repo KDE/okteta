@@ -22,11 +22,11 @@
 #include "chardatainformation.h"
 
 // KF5
-#include <KLineEdit>
 #include <KLocalizedString>
 // Qt
 #include <QLocale>
 #include <QScriptValue>
+#include <QLineEdit>
 
 
 #include "structureviewpreferences.h"
@@ -70,13 +70,15 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
 
 QWidget* CharDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    return new KLineEdit(parent);
+    auto * editWidget = new QLineEdit(parent);
+    editWidget->setClearButtonEnabled( true );
+    return editWidget;
 }
 
 QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     //TODO fix this code!!
-    const KLineEdit* edit = qobject_cast<const KLineEdit*> (w);
+    const QLineEdit* edit = qobject_cast<const QLineEdit*> (w);
     if (edit)
     {
         QString text = edit->text();
@@ -133,7 +135,7 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
 {
-    KLineEdit* edit = qobject_cast<KLineEdit*> (w);
+    QLineEdit* edit = qobject_cast<QLineEdit*> (w);
     if (edit)
     {
         QChar qchar(value, 0);

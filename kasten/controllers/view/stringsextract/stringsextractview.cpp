@@ -26,13 +26,13 @@
 #include "containedstringtablemodel.h"
 #include "stringsextracttool.h"
 // KF5
-#include <KLineEdit>
 #include <KGuiItem>
 #include <KLocalizedString>
 // Qt
 #include <QFontDatabase>
 #include <QLabel>
 #include <QLayout>
+#include <QLineEdit>
 #include <QSpinBox>
 #include <QPushButton>
 #include <QSortFilterProxyModel>
@@ -93,8 +93,8 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     label = new QLabel( i18nc("@label:lineedit filter term for displayed strings","Filter:"), this );
     filterLayout->addWidget( label );
 
-    KLineEdit *mFilterEdit = new KLineEdit( this );
-    mFilterEdit->setClearButtonShown( true );
+    QLineEdit *mFilterEdit = new QLineEdit( this );
+    mFilterEdit->setClearButtonEnabled( true );
     mFilterEdit->setPlaceholderText( i18n("Enter a term to limit the list.") );
     label->setBuddy( mFilterEdit );
     filterLayout->addWidget( mFilterEdit, 10 );
@@ -112,7 +112,7 @@ StringsExtractView::StringsExtractView( StringsExtractTool *tool, QWidget* paren
     mSortFilterProxyModel->setSourceModel( mContainedStringTableModel );
     mSortFilterProxyModel->setFilterKeyColumn( ContainedStringTableModel::StringColumnId );
     mSortFilterProxyModel->setFilterCaseSensitivity( Qt::CaseInsensitive );
-    connect( mFilterEdit, &KLineEdit::textChanged,
+    connect( mFilterEdit, &QLineEdit::textChanged,
              mSortFilterProxyModel, &QSortFilterProxyModel::setFilterFixedString );
 
     mContainedStringTableView = new QTreeView( this );

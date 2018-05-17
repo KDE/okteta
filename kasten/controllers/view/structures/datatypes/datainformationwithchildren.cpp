@@ -27,9 +27,9 @@
 #include "../script/classes/structunionscriptclass.h"
 #include "../script/scriptlogger.h"
 
-#include <KLineEdit>
 #include <KLocalizedString>
 #include <QScriptEngine>
+#include <QLineEdit>
 
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
 {
@@ -66,7 +66,9 @@ DataInformationWithChildren::DataInformationWithChildren(const DataInformationWi
 QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const
 {
     Q_ASSERT(false);
-    return new KLineEdit(parent);
+    auto * editWidget = new QLineEdit(parent);
+    editWidget->setClearButtonEnabled( true );
+    return editWidget;
 }
 
 QVariant DataInformationWithChildren::dataFromWidget(const QWidget* w) const

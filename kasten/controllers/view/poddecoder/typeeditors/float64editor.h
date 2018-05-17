@@ -25,11 +25,11 @@
 
 // lib
 #include "../types/float64.h"
-// KF5
-#include <KLineEdit>
+// Qt
+#include <QLineEdit>
 
 
-class Float64Editor : public KLineEdit
+class Float64Editor : public QLineEdit
 {
   Q_OBJECT
   Q_PROPERTY( Float64 data READ data WRITE setData USER true )

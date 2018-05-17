@@ -74,9 +74,10 @@ Char8Validator::~Char8Validator() {}
 
 
 Char8Editor::Char8Editor( Okteta::CharCodec* charCodec, QWidget* parent )
-  : KLineEdit( parent )
+  : QLineEdit( parent )
 {
     setValidator( new Char8Validator(charCodec,this) );
+    setClearButtonEnabled( true );
     setMaxLength( 1 );
 }
 
