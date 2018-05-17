@@ -22,7 +22,7 @@
 
 #include "structureviewitemdelegate.h"
 #include "datatypes/datainformation.h"
-#include <QLineEdit>
+
 #include <QScopedPointer>
 
 

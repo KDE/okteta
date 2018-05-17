@@ -31,7 +31,6 @@
 #include <QIcon>
 
 #include <KLocalizedString>
-#include <KLineEdit>
 #include <KColorScheme>
 
 DataInformation::DataInformation(const QString& name, DataInformationBase* parent)
