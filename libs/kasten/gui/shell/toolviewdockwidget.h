@@ -23,6 +23,8 @@
 #ifndef TOOLVIEWDOCKWIDGET_H
 #define TOOLVIEWDOCKWIDGET_H
 
+// lib
+#include <kasten/kastengui_export.h>
 // Qt
 #include <QDockWidget>
 
@@ -33,7 +35,7 @@ namespace Kasten
 class AbstractToolView;
 
 
-class ToolViewDockWidget : public QDockWidget
+class KASTENGUI_EXPORT ToolViewDockWidget : public QDockWidget
 {
    Q_OBJECT
 
