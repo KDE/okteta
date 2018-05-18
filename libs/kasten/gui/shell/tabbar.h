@@ -42,6 +42,7 @@ class TabBar : public QTabBar
     void receivedDropEvent( QDropEvent* event );
 
   protected:
+    void mouseReleaseEvent( QMouseEvent* event ) override;
     void dragEnterEvent( QDragEnterEvent* event ) override;
     void dragMoveEvent( QDragMoveEvent* event ) override;
     void dropEvent( QDropEvent* event ) override;

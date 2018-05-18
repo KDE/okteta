@@ -61,7 +61,6 @@ void TabbedViewsPrivate::init()
                       q, [&](QDropEvent* event) { onDropEvent(event); } );
 
 // TODO: restore
-//     q->connect( mTabWidget, SIGNAL(mouseMiddleClick(QWidget*)), SLOT(onCloseRequest(QWidget*)) );
 //     q->connect( mTabWidget, SIGNAL(mouseMiddleClick()), SLOT(onMouseMiddleClick()) );
 }
 
