@@ -79,8 +79,6 @@ class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
   protected:
 //     Q_PRIVATE_SLOT( d_func(), void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates ) )
     Q_PRIVATE_SLOT( d_func(), void onMouseMiddleClick() )
-    Q_PRIVATE_SLOT( d_func(), void onDragMoveEvent( const QDragMoveEvent*, bool& ) )
-    Q_PRIVATE_SLOT( d_func(), void onDropEvent( QDropEvent* event ) )
 
   protected:
     Q_DECLARE_PRIVATE( TabbedViews )

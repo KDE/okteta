@@ -29,8 +29,7 @@
 #include "viewareabox.h"
 #include "viewbox.h"
 #include <abstractview.h>
-// Qt
-#include <QTabWidget>
+#include "tabwidget.h"
 
 
 namespace Kasten
@@ -81,7 +80,7 @@ class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
 
   protected:
     ViewAreaBox* mViewAreaBox;
-    QTabWidget* mTabWidget;
+    TabWidget* mTabWidget;
 
     AbstractView* mCurrentView;
 };

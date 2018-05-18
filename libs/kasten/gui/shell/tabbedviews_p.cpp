@@ -46,24 +46,23 @@ void TabbedViewsPrivate::init()
 {
     Q_Q( TabbedViews );
 
-    mTabWidget = new QTabWidget();
-    mTabWidget->setTabsClosable( true );
-    mTabWidget->setDocumentMode( true );
+    mTabWidget = new TabWidget();
+
     mViewAreaBox = new ViewAreaBox( mTabWidget );
 
     QObject::connect( mTabWidget, &QTabWidget::tabCloseRequested,
                       q, [&]( int index ) { onTabCloseRequest( index ); } );
     QObject::connect( mTabWidget, &QTabWidget::currentChanged,
                       q, [&]( int index ) { onCurrentChanged( index ); } );
-    q->connect( mViewAreaBox, SIGNAL(receivedDropEvent(QDropEvent*)),
-                SLOT(onDropEvent(QDropEvent*)) );
+
+    QObject::connect( mTabWidget, &TabWidget::testCanDecode,
+                      q, [&](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); } );
+    QObject::connect( mTabWidget, &TabWidget::receivedDropEvent,
+                      q, [&](QDropEvent* event) { onDropEvent(event); } );
+
 // TODO: restore
 //     q->connect( mTabWidget, SIGNAL(mouseMiddleClick(QWidget*)), SLOT(onCloseRequest(QWidget*)) );
 //     q->connect( mTabWidget, SIGNAL(mouseMiddleClick()), SLOT(onMouseMiddleClick()) );
-//     q->connect( mTabWidget, SIGNAL(testCanDecode(const QDragMoveEvent*,bool&)),
-//                 SLOT(onDragMoveEvent(const QDragMoveEvent*,bool&)) );
-//     q->connect( mTabWidget, SIGNAL(receivedDropEvent(QDropEvent*)),
-//                 SLOT(onDropEvent(QDropEvent*)) );
 }
 
 QList<AbstractView*> TabbedViewsPrivate::viewList() const

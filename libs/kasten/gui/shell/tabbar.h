@@ -1,7 +1,7 @@
 /*
     This file is part of the Kasten Framework, made within the KDE community.
 
-    Copyright 2009 Friedrich W. H. Kossebau <kossebau@kde.org>
+    Copyright 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,48 +20,31 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef VIEWAREABOX_H
-#define VIEWAREABOX_H
+#ifndef TABBAR_H
+#define TABBAR_H
 
 // Qt
-#include <QWidget>
-
-class QShortcut;
-
+#include <QTabBar>
 
 namespace Kasten
 {
 
-class ViewAreaBox : public QWidget
+class TabBar : public QTabBar
 {
     Q_OBJECT
 
   public:
-    enum Area { TopArea, BottomArea };
+    explicit TabBar( QWidget* parent = nullptr );
+    ~TabBar() override;
 
-  public:
-    /// does not take ownership of @p centralWidget, can be 0.
-    explicit ViewAreaBox( QWidget* centralWidget, QWidget* parent = nullptr );
-    ~ViewAreaBox() override;
-
-  public:
-    QWidget* centralWidget() const;
-    QWidget* bottomWidget() const;
-
-  public:
-    /// does not take ownership of @p centralWidget, can be 0.
-    void setCentralWidget( QWidget* centralWidget );
-    /// takes ownership of @p bottomWidget, deletes current bottom widget. Can be 0.
-    void setBottomWidget( QWidget* bottomWidget );
-
-  protected Q_SLOTS:
-    void onDone();
+  Q_SIGNALS:
+    void testCanDecode( const QDragMoveEvent* event, bool& accept );
+    void receivedDropEvent( QDropEvent* event );
 
   protected:
-    QWidget* mCentralWidget;
-
-    QWidget* mBottomWidget;
-    QShortcut* mEscapeShortcut;
+    void dragEnterEvent( QDragEnterEvent* event ) override;
+    void dragMoveEvent( QDragMoveEvent* event ) override;
+    void dropEvent( QDropEvent* event ) override;
 };
 
 }

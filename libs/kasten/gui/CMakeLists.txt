@@ -97,6 +97,8 @@ ecm_generate_headers(kastengui_system_CCHDRS
 
 set( kastengui_shell_SRCS
   shell/viewbox.cpp
+  shell/tabbar.cpp
+  shell/tabwidget.cpp
   shell/toolinlineviewwidget.cpp
   shell/toolviewdockwidget.cpp
   shell/abstractviewarea.cpp
