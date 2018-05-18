@@ -39,10 +39,12 @@ class TabWidget : public QTabWidget
     ~TabWidget() override;
 
   Q_SIGNALS:
+    void mouseMiddleClick();
     void testCanDecode( const QDragMoveEvent* event, bool& accept );
     void receivedDropEvent( QDropEvent* event );
 
   protected:
+    void mouseReleaseEvent( QMouseEvent* event ) override;
     void dragEnterEvent( QDragEnterEvent* event ) override;
     void dragMoveEvent( QDragMoveEvent* event ) override;
     void dropEvent( QDropEvent* event ) override;

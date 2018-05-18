@@ -38,6 +38,7 @@ class TabBar : public QTabBar
     ~TabBar() override;
 
   Q_SIGNALS:
+    void mouseMiddleClick();
     void testCanDecode( const QDragMoveEvent* event, bool& accept );
     void receivedDropEvent( QDropEvent* event );
 

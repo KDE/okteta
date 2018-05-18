@@ -44,8 +44,11 @@ void TabBar::mouseReleaseEvent( QMouseEvent* event )
             const int tabIndex = tabAt( event->pos() );
             if (tabIndex != -1) {
                 emit tabCloseRequested( tabIndex );
-                event->setAccepted( true );
+            } else {
+                emit mouseMiddleClick();
             }
+            event->setAccepted( true );
+            return;
         }
     }
 

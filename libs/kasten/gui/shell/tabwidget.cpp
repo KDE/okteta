@@ -25,6 +25,7 @@
 // lib
 #include "tabbar.h"
 // Qt
+#include <QMouseEvent>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 
@@ -42,10 +43,25 @@ TabWidget::TabWidget( QWidget* parent )
              this, &TabWidget::testCanDecode );
     connect( tabBar, &TabBar::receivedDropEvent,
              this, &TabWidget::receivedDropEvent );
+    connect( tabBar, &TabBar::mouseMiddleClick,
+             this, &TabWidget::mouseMiddleClick );
 
     setTabsClosable( true );
     setDocumentMode( true );
     setAcceptDrops( true );
+}
+
+void TabWidget::mouseReleaseEvent( QMouseEvent* event )
+{
+    if (event->button() == Qt::MidButton) {
+        if (count() == 0) {
+            emit mouseMiddleClick();
+            event->setAccepted( true );
+            return;
+        }
+    }
+
+    QTabWidget::mouseReleaseEvent(event);
 }
 
 void TabWidget::dragEnterEvent( QDragEnterEvent* event )

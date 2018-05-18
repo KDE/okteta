@@ -59,9 +59,8 @@ void TabbedViewsPrivate::init()
                       q, [&](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); } );
     QObject::connect( mTabWidget, &TabWidget::receivedDropEvent,
                       q, [&](QDropEvent* event) { onDropEvent(event); } );
-
-// TODO: restore
-//     q->connect( mTabWidget, SIGNAL(mouseMiddleClick()), SLOT(onMouseMiddleClick()) );
+    QObject::connect( mTabWidget, &TabWidget::mouseMiddleClick,
+                      q, [&]() { onMouseMiddleClick(); } );
 }
 
 QList<AbstractView*> TabbedViewsPrivate::viewList() const
