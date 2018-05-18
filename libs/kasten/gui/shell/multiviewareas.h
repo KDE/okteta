@@ -34,8 +34,6 @@ class QMimeData;
 namespace Kasten
 {
 
-class TabbedViews;
-
 class MultiViewAreasPrivate;
 
 
