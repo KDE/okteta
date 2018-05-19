@@ -22,12 +22,11 @@
 
 #include "documentversiondata.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-DocumentVersionData::DocumentVersionData( DocumentVersionId id, const QString& changeComment )
- : mId( id ), mChangeComment( changeComment )
+DocumentVersionData::DocumentVersionData(DocumentVersionId id, const QString& changeComment)
+    : mId(id)
+    , mChangeComment(changeComment)
 {}
 
 DocumentVersionId DocumentVersionData::id() const { return mId; }

@@ -40,30 +40,27 @@
 // Qt
 #include <QTextStream>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 // static const Okteta::OffsetFormat::Format DefaultOffsetFormat = Okteta::OffsetFormat::Hexadecimal;
 
 ByteArrayViewTextStreamEncoderSettings::ByteArrayViewTextStreamEncoderSettings()
-  : /*offsetFormat(DefaultOffsetFormat),*/
-  valueCoding( Okteta::HexadecimalCoding),
-  codecName(),
-  undefinedChar( QLatin1Char('?') ),
-  substituteChar( QLatin1Char('.') ),
-  separation( QStringLiteral(" ") )
+    // : offsetFormat(DefaultOffsetFormat)
+    : valueCoding(Okteta::HexadecimalCoding)
+    , codecName()
+    , undefinedChar(QLatin1Char('?'))
+    , substituteChar(QLatin1Char('.'))
+    , separation(QStringLiteral(" "))
 {}
 
 ByteArrayViewTextStreamEncoder::ByteArrayViewTextStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","View in Plain Text"), QStringLiteral("text/plain") )
+    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "View in Plain Text"), QStringLiteral("text/plain"))
 {}
 
-
-bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                         const ByteArrayView* byteArrayView,
-                                                         const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                         const Okteta::AddressRange& range )
+bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
+                                                        const ByteArrayView* byteArrayView,
+                                                        const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                        const Okteta::AddressRange& range)
 {
     bool success = true;
 
@@ -78,11 +75,11 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
     const int viewModus = byteArrayView->viewModus();
 
     // setup
-    Okteta::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(), mSettings.firstLineOffset,
-                                        mSettings.startOffset, 0, byteArrayModel->size() );
+    Okteta::ByteArrayTableLayout layout(byteArrayView->noOfBytesPerLine(), mSettings.firstLineOffset,
+                                        mSettings.startOffset, 0, byteArrayModel->size());
 
     Okteta::CoordRange coordRange;
-    coordRange.set( layout.coordRangeOfIndizes(range) );
+    coordRange.set(layout.coordRangeOfIndizes(range));
 
     const int noOfBytesPerLine = byteArrayView->noOfBytesPerLine();
     const int byteSpacingWidth = byteArrayView->byteSpacingWidth();
@@ -91,73 +88,75 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream( QIODevice *device,
 
     QList<AbstractColumnTextRenderer*> columnTextRendererList;
 
-    if( byteArrayView->offsetColumnVisible() )
-    {
+    if (byteArrayView->offsetColumnVisible()) {
         columnTextRendererList.append(
-            new OffsetColumnTextRenderer(Okteta::OffsetFormat::Hexadecimal,mSettings.firstLineOffset,mSettings.delta) );
-        columnTextRendererList.append( new BorderColumnTextRenderer() );
+            new OffsetColumnTextRenderer(Okteta::OffsetFormat::Hexadecimal, mSettings.firstLineOffset, mSettings.delta));
+        columnTextRendererList.append(new BorderColumnTextRenderer());
     }
 
-    if( viewModus == 0 )
-    {
-        if( visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId )
+    if (viewModus == 0) {
+        if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
             columnTextRendererList.append(
-                new ValueByteArrayColumnTextRenderer(byteArrayModel,range.start(),coordRange,
-                                                    noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
-                                                    mSettings.valueCoding) );
-
-        if( visibleByteArrayCodings & Okteta::AbstractByteArrayView::CharCodingId )
-        {
-            if( visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId )
-                columnTextRendererList.append( new BorderColumnTextRenderer() );
-            columnTextRendererList.append(
-                new CharByteArrayColumnTextRenderer(byteArrayModel,range.start(),coordRange,
-                                                    noOfBytesPerLine, 0, 0,
-                                                    mSettings.codecName,mSettings.substituteChar,mSettings.undefinedChar) );
+                new ValueByteArrayColumnTextRenderer(byteArrayModel, range.start(), coordRange,
+                                                     noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
+                                                     mSettings.valueCoding));
         }
-    }
-    else
-    {
+
+        if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::CharCodingId) {
+            if (visibleByteArrayCodings & Okteta::AbstractByteArrayView::ValueCodingId) {
+                columnTextRendererList.append(new BorderColumnTextRenderer());
+            }
             columnTextRendererList.append(
-                new ByteArrayRowsColumnTextRenderer(byteArrayModel,range.start(),coordRange,
-                                                    noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
-                                                    visibleByteArrayCodings,
-                                                    mSettings.valueCoding,
-                                                    mSettings.codecName,mSettings.substituteChar,mSettings.undefinedChar) );
+                new CharByteArrayColumnTextRenderer(byteArrayModel, range.start(), coordRange,
+                                                    noOfBytesPerLine, 0, 0,
+                                                    mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
+        }
+    } else {
+        columnTextRendererList.append(
+            new ByteArrayRowsColumnTextRenderer(byteArrayModel, range.start(), coordRange,
+                                                noOfBytesPerLine, byteSpacingWidth, noOfGroupedBytes,
+                                                visibleByteArrayCodings,
+                                                mSettings.valueCoding,
+                                                mSettings.codecName, mSettings.substituteChar, mSettings.undefinedChar));
     }
 
     int subLinesCount = 1;
-    for( const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList) )
-        if( renderer->noOfSublinesNeeded() > subLinesCount )
+    for (const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList)) {
+        if (renderer->noOfSublinesNeeded() > subLinesCount) {
             subLinesCount = renderer->noOfSublinesNeeded();
+        }
+    }
 
     // encode
-    QTextStream textStream( device );
+    QTextStream textStream(device);
 
     int l = coordRange.start().line();
-    for( const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList) )
-        renderer->renderFirstLine( &textStream, l );
+    for (const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList)) {
+        renderer->renderFirstLine(&textStream, l);
+    }
+
     textStream << endl;
 
     int subLine = 1;
-    while( true )
-    {
-        if( subLine == subLinesCount )
-        {
+    while (true) {
+        if (subLine == subLinesCount) {
             ++l;
-            if( l > coordRange.end().line() )
+            if (l > coordRange.end().line()) {
                 break;
+            }
             subLine = 0;
         }
-        const bool isSubline = ( subLine > 0 );
-        for( const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList) )
-            renderer->renderNextLine( &textStream, isSubline );
+        const bool isSubline = (subLine > 0);
+        for (const AbstractColumnTextRenderer* renderer : qAsConst(columnTextRendererList)) {
+            renderer->renderNextLine(&textStream, isSubline);
+        }
+
         textStream << endl;
         ++subLine;
     }
 
     // clean up
-    qDeleteAll( columnTextRendererList );
+    qDeleteAll(columnTextRendererList);
 
     return success;
 }

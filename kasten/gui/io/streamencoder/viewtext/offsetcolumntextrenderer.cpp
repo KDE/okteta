@@ -26,39 +26,35 @@
 #include <QString>
 #include <QTextStream>
 
+namespace Kasten {
 
-namespace Kasten
+OffsetColumnTextRenderer::OffsetColumnTextRenderer(int offsetFormat, int firstLineOffset, int delta)
+    : mFirstLineOffset(firstLineOffset)
+    , mDelta(delta)
+    , printFunction(Okteta::OffsetFormat::printFunction(offsetFormat))
+    , mCodingWidth(Okteta::OffsetFormat::codingWidth(offsetFormat))
 {
-
-OffsetColumnTextRenderer::OffsetColumnTextRenderer( int offsetFormat, int firstLineOffset, int delta )
-  : mFirstLineOffset( firstLineOffset),
-    mDelta( delta ),
-    printFunction( Okteta::OffsetFormat::printFunction(offsetFormat) ),
-    mCodingWidth( Okteta::OffsetFormat::codingWidth(offsetFormat) )
-{
-    mEncodedOffsetBuffer = new char[mCodingWidth+1];
+    mEncodedOffsetBuffer = new char[mCodingWidth + 1];
 }
 
-
-void OffsetColumnTextRenderer::renderFirstLine( QTextStream *stream, int lineIndex ) const
+void OffsetColumnTextRenderer::renderFirstLine(QTextStream* stream, int lineIndex) const
 {
     mRenderLine = lineIndex;
-    renderLine( stream, false );
+    renderLine(stream, false);
 }
 
-void OffsetColumnTextRenderer::renderNextLine( QTextStream* stream, bool isSubline ) const
+void OffsetColumnTextRenderer::renderNextLine(QTextStream* stream, bool isSubline) const
 {
-    renderLine( stream, isSubline );
+    renderLine(stream, isSubline);
 }
 
-void OffsetColumnTextRenderer::renderLine( QTextStream* stream, bool isSubline ) const
+void OffsetColumnTextRenderer::renderLine(QTextStream* stream, bool isSubline) const
 {
-    if( isSubline )
-        *stream << whiteSpace( mCodingWidth );
-    else
-    {
+    if (isSubline) {
+        *stream << whiteSpace(mCodingWidth);
+    } else {
         // TODO: fix me (no more printFunction)
-        printFunction( mEncodedOffsetBuffer, mFirstLineOffset + mDelta*mRenderLine );
+        printFunction(mEncodedOffsetBuffer, mFirstLineOffset + mDelta * mRenderLine);
         *stream << mEncodedOffsetBuffer;
 
         ++mRenderLine;

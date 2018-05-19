@@ -29,35 +29,31 @@
 
 class QByteArray;
 
-
-namespace Okteta
-{
+namespace Okteta {
 class PODData;
-
 
 class AbstractTypeCodec
 {
-  protected:
-    explicit AbstractTypeCodec( const QString& name );
+protected:
+    explicit AbstractTypeCodec(const QString& name);
 
-  public:
+public:
     virtual ~AbstractTypeCodec();
 
-  public: // API to be implemented
-    virtual QVariant value( const PODData& data, int* byteCount ) const = 0;
-    virtual QByteArray valueToBytes( const QVariant& value ) const = 0;
+public: // API to be implemented
+    virtual QVariant value(const PODData& data, int* byteCount) const = 0;
+    virtual QByteArray valueToBytes(const QVariant& value) const = 0;
 
-    virtual bool areEqual( const QVariant& value, QVariant& otherValue ) const = 0;
+    virtual bool areEqual(const QVariant& value, QVariant& otherValue) const = 0;
 
-  public:
+public:
     const QString& name() const;
 
-  private:
+private:
     QString mName;
 };
 
-
-inline AbstractTypeCodec::AbstractTypeCodec( const QString& name ) : mName( name ) {}
+inline AbstractTypeCodec::AbstractTypeCodec(const QString& name) : mName(name) {}
 inline AbstractTypeCodec::~AbstractTypeCodec() {}
 
 inline const QString& AbstractTypeCodec::name() const { return mName; }

@@ -20,6 +20,7 @@
  *   You should have received a copy of the GNU Lesser General Public
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <QTest>
 #include <QScriptValue>
 #include <QScriptEngine>
@@ -29,7 +30,7 @@
 
 class CommonParserTest : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 private Q_SLOTS:
     void testIntFromString();
@@ -87,8 +88,7 @@ void CommonParserTest::testIntFromString()
     ParsedNumber<int> result = ParserUtils::intFromString(str);
     QCOMPARE(result.string, str);
     QCOMPARE(result.isValid, okay);
-    if (result.isValid)
-    {
+    if (result.isValid) {
         QFETCH(int, value);
         QCOMPARE(result.value, value);
     }
@@ -123,8 +123,7 @@ void CommonParserTest::testUIntFromString()
     ParsedNumber<uint> result = ParserUtils::uintFromString(str);
     QCOMPARE(result.string, str);
     QCOMPARE(result.isValid, okay);
-    if (result.isValid)
-    {
+    if (result.isValid) {
         QFETCH(uint, value);
         QCOMPARE(result.value, value);
     }
@@ -161,7 +160,7 @@ void CommonParserTest::testIntFromScriptValue_data()
     QTest::newRow("max double") << QScriptValue(double(maxInt)) << true << maxInt;
     QTest::newRow("max string") << QScriptValue(QStringLiteral("2147483647")) << true << maxInt;
     QTest::newRow("max hex string") << QScriptValue(QStringLiteral("0x7fffffff")) << true << maxInt;
-    //to int32 wraps around
+    // to int32 wraps around
     QTest::newRow("max+1") << QScriptValue(double(maxInt) + 1) << false;
     QTest::newRow("max+1 string") << QScriptValue(QStringLiteral("2147483648")) << false;
     QTest::newRow("max+1 hex string") << QScriptValue(QStringLiteral("0x80000000")) << false;
@@ -185,14 +184,12 @@ void CommonParserTest::testIntFromScriptValue()
 
     ParsedNumber<int> result = ParserUtils::intFromScriptValue(scriptValue);
     QCOMPARE(result.string, scriptValue.toString());
-    if (result.isValid != okay)
-    {
+    if (result.isValid != okay) {
         qDebug() << scriptValue.toString() << ", int =" << scriptValue.toInt32() << ", double = "
-                << scriptValue.toNumber();
+                 << scriptValue.toNumber();
     }
     QCOMPARE(result.isValid, okay);
-    if (result.isValid)
-    {
+    if (result.isValid) {
         QFETCH(int, value);
         QCOMPARE(result.value, value);
     }
@@ -241,14 +238,12 @@ void CommonParserTest::testUIntFromScriptValue()
 
     ParsedNumber<uint> result = ParserUtils::uintFromScriptValue(scriptValue);
     QCOMPARE(result.string, scriptValue.toString());
-    if (result.isValid != okay)
-    {
+    if (result.isValid != okay) {
         qDebug() << scriptValue.toString() << ", uint =" << scriptValue.toUInt32() << ", double = "
-                << scriptValue.toNumber();
+                 << scriptValue.toNumber();
     }
     QCOMPARE(result.isValid, okay);
-    if (result.isValid)
-    {
+    if (result.isValid) {
         QFETCH(uint, value);
         QCOMPARE(result.value, value);
     }
@@ -260,7 +255,7 @@ inline void CommonParserTest::testToStringEncoding()
     QFETCH(int, expected);
     QScopedPointer<ScriptLogger> logger(new ScriptLogger());
     StringDataInformation::StringType type =
-            ParserUtils::toStringEncoding(str, LoggerWithContext(logger.data(), QString()));
+        ParserUtils::toStringEncoding(str, LoggerWithContext(logger.data(), QString()));
     QCOMPARE((int)type, expected);
 }
 
@@ -304,6 +299,5 @@ inline void CommonParserTest::testToStringEncoding_data()
 }
 
 QTEST_GUILESS_MAIN(CommonParserTest)
-
 
 #include "commonparsertest.moc"

@@ -29,34 +29,32 @@
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TabWidget::TabWidget( QWidget* parent )
-  : QTabWidget( parent )
+TabWidget::TabWidget(QWidget* parent)
+    : QTabWidget(parent)
 {
     auto* tabBar = new TabBar(this);
-    setTabBar( tabBar );
-    // slightly fragile as the relative pos of the event is not adapted, but currently not used anyway 
-    connect( tabBar, &TabBar::testCanDecode,
-             this, &TabWidget::testCanDecode );
-    connect( tabBar, &TabBar::receivedDropEvent,
-             this, &TabWidget::receivedDropEvent );
-    connect( tabBar, &TabBar::mouseMiddleClick,
-             this, &TabWidget::mouseMiddleClick );
+    setTabBar(tabBar);
+    // slightly fragile as the relative pos of the event is not adapted, but currently not used anyway
+    connect(tabBar, &TabBar::testCanDecode,
+            this, &TabWidget::testCanDecode);
+    connect(tabBar, &TabBar::receivedDropEvent,
+            this, &TabWidget::receivedDropEvent);
+    connect(tabBar, &TabBar::mouseMiddleClick,
+            this, &TabWidget::mouseMiddleClick);
 
-    setTabsClosable( true );
-    setDocumentMode( true );
-    setAcceptDrops( true );
+    setTabsClosable(true);
+    setDocumentMode(true);
+    setAcceptDrops(true);
 }
 
-void TabWidget::mouseReleaseEvent( QMouseEvent* event )
+void TabWidget::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::MidButton) {
         if (count() == 0) {
             emit mouseMiddleClick();
-            event->setAccepted( true );
+            event->setAccepted(true);
             return;
         }
     }
@@ -64,7 +62,7 @@ void TabWidget::mouseReleaseEvent( QMouseEvent* event )
     QTabWidget::mouseReleaseEvent(event);
 }
 
-void TabWidget::dragEnterEvent( QDragEnterEvent* event )
+void TabWidget::dragEnterEvent(QDragEnterEvent* event)
 {
     if (count() == 0) {
         bool accept = false;
@@ -78,7 +76,7 @@ void TabWidget::dragEnterEvent( QDragEnterEvent* event )
     QTabWidget::dragEnterEvent(event);
 }
 
-void TabWidget::dragMoveEvent( QDragMoveEvent* event )
+void TabWidget::dragMoveEvent(QDragMoveEvent* event)
 {
     if (count() == 0) {
         bool accept = false;
@@ -93,9 +91,9 @@ void TabWidget::dragMoveEvent( QDragMoveEvent* event )
     QTabWidget::dragMoveEvent(event);
 }
 
-void TabWidget::dropEvent( QDropEvent* event )
+void TabWidget::dropEvent(QDropEvent* event)
 {
-   if (count() == 0) {
+    if (count() == 0) {
         emit receivedDropEvent(event);
         return;
     }

@@ -8,7 +8,7 @@
     published by the Free Software Foundation; either version 2 of
     the License or (at your option) version 3 or any later version
     accepted by the membership of KDE e.V. (or its successor approved
-    by the membership of KDE e.V.), which shall act as a proxy 
+    by the membership of KDE e.V.), which shall act as a proxy
     defined in Section 14 of version 3 of the license.
 
     This program is distributed in the hope that it will be useful,
@@ -26,40 +26,37 @@
 // Kasten gui
 #include <kasten/shellwindow.h>
 
-template<class T> class QList;
+template <class T> class QList;
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class OktetaProgram;
 class DocumentManager;
 
-
 class OktetaMainWindow : public ShellWindow
 {
-   Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit OktetaMainWindow( OktetaProgram* program );
+public:
+    explicit OktetaMainWindow(OktetaProgram* program);
     ~OktetaMainWindow() override;
 
-  protected: // KMainWindow API
+protected: // KMainWindow API
     bool queryClose() override;
 
-    void saveProperties( KConfigGroup& configGroup ) override;
-    void readProperties( const KConfigGroup& configGroup ) override;
+    void saveProperties(KConfigGroup& configGroup) override;
+    void readProperties(const KConfigGroup& configGroup) override;
 
-  protected:
+protected:
     void setupControllers();
 
-  protected Q_SLOTS:
-    void onDataOffered( const QMimeData* mimeData, bool& accept );
-    void onDataDropped( const QMimeData* mimeData );
-    void onCloseRequest( const QList<Kasten::AbstractView*>& views );
+protected Q_SLOTS:
+    void onDataOffered(const QMimeData* mimeData, bool& accept);
+    void onDataDropped(const QMimeData* mimeData);
+    void onCloseRequest(const QList<Kasten::AbstractView*>& views);
 
-  protected:
+protected:
     OktetaProgram* mProgram;
 };
 

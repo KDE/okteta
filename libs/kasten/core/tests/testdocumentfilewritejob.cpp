@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "testdocumentfilewritejob.h"
 
 // lib
@@ -30,28 +29,27 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TestDocumentFileWriteJob::TestDocumentFileWriteJob( TestDocumentFileSynchronizer* synchronizer )
- : AbstractFileSystemSyncToRemoteJob( synchronizer )
+TestDocumentFileWriteJob::TestDocumentFileWriteJob(TestDocumentFileSynchronizer* synchronizer)
+    : AbstractFileSystemSyncToRemoteJob(synchronizer)
 {}
 
 void TestDocumentFileWriteJob::startWriteToFile()
 {
-    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
-    TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
+    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    TestDocument* document = qobject_cast<TestDocument*>(synchronizer()->document());
 
-    TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(),  document, file() );
+    TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread(this, testSynchronizer->header(),  document, file());
     writeThread->start();
-    while( !writeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!writeThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     const bool success = writeThread->success();
     delete writeThread;
 
-    completeWrite( success );
+    completeWrite(success);
 }
 
 TestDocumentFileWriteJob::~TestDocumentFileWriteJob()

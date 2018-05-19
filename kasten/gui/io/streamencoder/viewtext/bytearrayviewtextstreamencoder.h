@@ -32,15 +32,14 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayViewTextStreamEncoderSettings
 {
-  public:
+public:
     ByteArrayViewTextStreamEncoderSettings();
-  public:
+
+public:
 //     Okteta::OffsetFormat::Format offsetFormat;
     int codingWidth;
     int firstLineOffset;
@@ -60,17 +59,17 @@ class ByteArrayViewTextStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
+public:
     ByteArrayViewTextStreamEncoder();
     ~ByteArrayViewTextStreamEncoder() override;
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 
-  protected:
+protected:
     ByteArrayViewTextStreamEncoderSettings mSettings;
 };
 

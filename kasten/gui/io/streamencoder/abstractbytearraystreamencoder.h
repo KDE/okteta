@@ -34,37 +34,34 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 // TODO: make display model an interface, so these encoders can stay in core
 class ByteArrayView;
-
 
 class OKTETAKASTENGUI_EXPORT AbstractByteArrayStreamEncoder : public AbstractModelStreamEncoder
 {
     Q_OBJECT
 
-  public:
-    AbstractByteArrayStreamEncoder( const QString& remoteTypeName, const QString& remoteMimeType );
+public:
+    AbstractByteArrayStreamEncoder(const QString& remoteTypeName, const QString& remoteMimeType);
     ~AbstractByteArrayStreamEncoder() override;
 
-  public: // AbstractModelStreamEncoder API
-    bool encodeToStream( QIODevice *device, AbstractModel* model, const AbstractModelSelection* selection ) override;
-    QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const override;
+public: // AbstractModelStreamEncoder API
+    bool encodeToStream(QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection) override;
+    QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const override;
 
-  public:
-    QString previewData( AbstractModel* model, const AbstractModelSelection* selection );
+public:
+    QString previewData(AbstractModel* model, const AbstractModelSelection* selection);
 
-  Q_SIGNALS:
+Q_SIGNALS:
     void settingsChanged();
 
-  protected: // API to be implemented
-    virtual bool encodeDataToStream( QIODevice *device,
-                                     const ByteArrayView* byteArrayView,
-                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                     const Okteta::AddressRange& range ) = 0;
+protected: // API to be implemented
+    virtual bool encodeDataToStream(QIODevice* device,
+                                    const ByteArrayView* byteArrayView,
+                                    const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                    const Okteta::AddressRange& range) = 0;
 };
 
 }

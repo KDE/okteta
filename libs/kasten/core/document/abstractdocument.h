@@ -29,12 +29,9 @@
 // lib
 #include <kasten/abstractmodel.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelSynchronizer;
 class AbstractDocumentPrivate;
-
 
 // TODO: store creation time? And time of last modification or access?
 // last both might be too much overhead, unless modification and access are grained enough
@@ -42,39 +39,39 @@ class AbstractDocumentPrivate;
 // we would end with a in-memory file/document system, why not?
 class KASTENCORE_EXPORT AbstractDocument : public AbstractModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  friend class AbstractModelSynchronizer;
-  friend class DocumentManager;
+    friend class AbstractModelSynchronizer;
+    friend class DocumentManager;
 
-  protected:
+protected:
     AbstractDocument();
 
-  public:
+public:
     ~AbstractDocument() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     // TODO: what about plurals?
     virtual QString typeName() const = 0;
     virtual QString mimeType() const = 0;
     virtual ContentFlags contentFlags() const = 0;
 
-  public:
-    void setSynchronizer( AbstractModelSynchronizer* synchronizer );
+public:
+    void setSynchronizer(AbstractModelSynchronizer* synchronizer);
 
-  public: // helper or basic?
+public: // helper or basic?
     AbstractModelSynchronizer* synchronizer() const;
     QString id() const;
 
-  Q_SIGNALS:
-    void synchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
-    void contentFlagsChanged( Kasten::ContentFlags contentFlags );
+Q_SIGNALS:
+    void synchronizerChanged(Kasten::AbstractModelSynchronizer* newSynchronizer);
+    void contentFlagsChanged(Kasten::ContentFlags contentFlags);
 
-  protected:
-    void setId( const QString& id );
+protected:
+    void setId(const QString& id);
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractDocument )
+protected:
+    Q_DECLARE_PRIVATE(AbstractDocument)
 };
 
 }

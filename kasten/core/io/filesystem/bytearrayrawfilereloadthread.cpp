@@ -32,14 +32,12 @@
 // C++
 #include <limits>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread( QObject* parent, QFile* file )
-  : QThread( parent ),
-    mFile( file ),
-    mSuccess( false )
+ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread(QObject* parent, QFile* file)
+    : QThread(parent)
+    , mFile(file)
+    , mSuccess(false)
 {
 }
 
@@ -51,30 +49,29 @@ void ByteArrayRawFileReloadThread::run()
     // check if the file content can be addressed with Okteta::Address
     const Okteta::Address maxAddress = std::numeric_limits<Okteta::Address>::max();
 
-    mSuccess = ( fileSize <= maxAddress );
+    mSuccess = (fileSize <= maxAddress);
 
-    if( mSuccess )
-    {
-        mData.resize( fileSize );
-        mSuccess = ( mData.size() == fileSize );
+    if (mSuccess) {
+        mData.resize(fileSize);
+        mSuccess = (mData.size() == fileSize);
 
-        if( mSuccess )
-        {
-            QDataStream inStream( mFile );
-            inStream.readRawData( mData.data(), fileSize );
+        if (mSuccess) {
+            QDataStream inStream(mFile);
+            inStream.readRawData(mData.data(), fileSize);
 
-            mSuccess = ( inStream.status() == QDataStream::Ok );
+            mSuccess = (inStream.status() == QDataStream::Ok);
 
-            if( ! mSuccess )
+            if (!mSuccess) {
                 mErrorString = mFile->errorString();
+            }
+        } else {
+            mErrorString = i18n("There is not enough free working memory to load this file.");
         }
-        else
-            mErrorString = i18n( "There is not enough free working memory to load this file." );
+    } else {
+        mErrorString = i18n("Support to load files larger than 2 GiB has not yet been implemented.");
     }
-    else
-        mErrorString = i18n( "Support to load files larger than 2 GiB has not yet been implemented." );
 
-    emit documentReloaded( mSuccess );
+    emit documentReloaded(mSuccess);
 }
 
 ByteArrayRawFileReloadThread::~ByteArrayRawFileReloadThread() {}

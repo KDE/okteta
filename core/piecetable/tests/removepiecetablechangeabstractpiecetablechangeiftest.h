@@ -26,18 +26,16 @@
 // test
 #include "abstractpiecetablechangeiftest.h"
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 class RemovePieceTableChangeAbstractPieceTableChangeIfTest : public AbstractPieceTableChangeIfTest
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected: // AbstractPieceTableChangeIfTest API
-    AbstractPieceTableChange *createPieceTableChange() override;
-    void deletePieceTableChange( AbstractPieceTableChange *pieceTableChange ) override;
-    void changePieceTable( PieceTable *pieceTable ) override;
+protected: // AbstractPieceTableChangeIfTest API
+    AbstractPieceTableChange* createPieceTableChange() override;
+    void deletePieceTableChange(AbstractPieceTableChange* pieceTableChange) override;
+    void changePieceTable(PieceTable* pieceTable) override;
 };
 
 }

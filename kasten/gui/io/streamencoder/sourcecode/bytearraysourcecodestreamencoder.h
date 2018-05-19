@@ -28,13 +28,11 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SourceCodeStreamEncoderSettings
 {
-  public:
+public:
     enum class PrimitiveDataType
     {
         Char = 0,
@@ -47,16 +45,15 @@ class SourceCodeStreamEncoderSettings
         Double,
     };
 
-  public:
+public:
     SourceCodeStreamEncoderSettings();
 
-  public:
+public:
     QString variableName;
     PrimitiveDataType dataType;
     int elementsPerLine;
     bool unsignedAsHexadecimal;
 };
-
 
 // TODO: General synchronizer would load matching encoder and decoder
 // manually defined by desktopfile
@@ -64,34 +61,33 @@ class ByteArraySourceCodeStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
+public:
     ByteArraySourceCodeStreamEncoder();
     ~ByteArraySourceCodeStreamEncoder() override;
 
-  public:
+public:
     SourceCodeStreamEncoderSettings settings() const;
-    void setSettings( const SourceCodeStreamEncoderSettings& settings );
+    void setSettings(const SourceCodeStreamEncoderSettings& settings);
 
-  public:
+public:
     const char* const* dataTypeNames() const;
     int dataTypesCount() const;
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 
-  protected:
-    QString printFormatted( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset, unsigned int dataSize ) const;
+protected:
+    QString printFormatted(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset, unsigned int dataSize) const;
 
-  protected:
+protected:
     SourceCodeStreamEncoderSettings mSettings;
 };
 
-
 inline SourceCodeStreamEncoderSettings ByteArraySourceCodeStreamEncoder::settings() const { return mSettings; }
-inline void ByteArraySourceCodeStreamEncoder::setSettings( const SourceCodeStreamEncoderSettings& settings )
+inline void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoderSettings& settings)
 {
     mSettings = settings;
     emit settingsChanged();

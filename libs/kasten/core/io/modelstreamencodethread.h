@@ -30,9 +30,7 @@
 
 class QIODevice;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelStreamEncoder;
 class AbstractModel;
@@ -41,24 +39,25 @@ class AbstractModelSelection;
 // TODO: instead of doubling all data just read them from the job?
 class KASTENCORE_EXPORT ModelStreamEncodeThread : public QThread
 {
-  Q_OBJECT
-  public:
-    ModelStreamEncodeThread( QObject* parent,
-                             QIODevice* ioDevice,
-                             AbstractModel* model, const AbstractModelSelection* selection,
-                             AbstractModelStreamEncoder* encoder );
+    Q_OBJECT
+
+public:
+    ModelStreamEncodeThread(QObject* parent,
+                            QIODevice* ioDevice,
+                            AbstractModel* model, const AbstractModelSelection* selection,
+                            AbstractModelStreamEncoder* encoder);
     ~ModelStreamEncodeThread() override;
 
-  public: // QThread API
+public: // QThread API
     void run() override;
 
-  public:
+public:
     bool success() const;
 
-  Q_SIGNALS:
-    void modelExported( bool success );
+Q_SIGNALS:
+    void modelExported(bool success);
 
-  protected:
+protected:
     QIODevice* mIODevice;
     AbstractModel* mModel;
     const AbstractModelSelection* mSelection;
@@ -67,14 +66,16 @@ class KASTENCORE_EXPORT ModelStreamEncodeThread : public QThread
     bool mSuccess;
 };
 
-
-inline ModelStreamEncodeThread::ModelStreamEncodeThread( QObject* parent,
-    QIODevice* ioDevice,
-    AbstractModel* model, const AbstractModelSelection* selection,
-    AbstractModelStreamEncoder* encoder )
- : QThread( parent ),
-   mIODevice( ioDevice ), mModel( model ), mSelection( selection ), mEncoder( encoder ),
-   mSuccess( false )
+inline ModelStreamEncodeThread::ModelStreamEncodeThread(QObject* parent,
+                                                        QIODevice* ioDevice,
+                                                        AbstractModel* model, const AbstractModelSelection* selection,
+                                                        AbstractModelStreamEncoder* encoder)
+    : QThread(parent)
+    , mIODevice(ioDevice)
+    , mModel(model)
+    , mSelection(selection)
+    , mEncoder(encoder)
+    , mSuccess(false)
 {}
 
 inline bool ModelStreamEncodeThread::success() const { return mSuccess; }

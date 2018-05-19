@@ -32,35 +32,33 @@
 #include <QApplication>
 #include <QClipboard>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TabbedViewsPrivate::TabbedViewsPrivate( TabbedViews* parent )
-  : AbstractGroupedViewsPrivate( parent ),
-    mCurrentView( nullptr )
+TabbedViewsPrivate::TabbedViewsPrivate(TabbedViews* parent)
+    : AbstractGroupedViewsPrivate(parent)
+    , mCurrentView(nullptr)
 {
 }
 
 void TabbedViewsPrivate::init()
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
     mTabWidget = new TabWidget();
 
-    mViewAreaBox = new ViewAreaBox( mTabWidget );
+    mViewAreaBox = new ViewAreaBox(mTabWidget);
 
-    QObject::connect( mTabWidget, &QTabWidget::tabCloseRequested,
-                      q, [&]( int index ) { onTabCloseRequest( index ); } );
-    QObject::connect( mTabWidget, &QTabWidget::currentChanged,
-                      q, [&]( int index ) { onCurrentChanged( index ); } );
+    QObject::connect(mTabWidget, &QTabWidget::tabCloseRequested,
+                     q, [&](int index) { onTabCloseRequest(index); });
+    QObject::connect(mTabWidget, &QTabWidget::currentChanged,
+                     q, [&](int index) { onCurrentChanged(index); });
 
-    QObject::connect( mTabWidget, &TabWidget::testCanDecode,
-                      q, [&](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); } );
-    QObject::connect( mTabWidget, &TabWidget::receivedDropEvent,
-                      q, [&](QDropEvent* event) { onDropEvent(event); } );
-    QObject::connect( mTabWidget, &TabWidget::mouseMiddleClick,
-                      q, [&]() { onMouseMiddleClick(); } );
+    QObject::connect(mTabWidget, &TabWidget::testCanDecode,
+                     q, [&](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
+    QObject::connect(mTabWidget, &TabWidget::receivedDropEvent,
+                     q, [&](QDropEvent* event) { onDropEvent(event); });
+    QObject::connect(mTabWidget, &TabWidget::mouseMiddleClick,
+                     q, [&]() { onMouseMiddleClick(); });
 }
 
 QList<AbstractView*> TabbedViewsPrivate::viewList() const
@@ -69,26 +67,23 @@ QList<AbstractView*> TabbedViewsPrivate::viewList() const
 
     const int count = mTabWidget->count();
     result.reserve(count);
-    for( int i=0; i<count; ++i )
-    {
-        const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(i) );
+    for (int i = 0; i < count; ++i) {
+        const ViewBox* viewBox = static_cast<const ViewBox*>(mTabWidget->widget(i));
         AbstractView* view = viewBox->view();
-        result.append( view );
+        result.append(view);
     }
 
     return result;
 }
 
-int TabbedViewsPrivate::indexOf( AbstractView* view ) const
+int TabbedViewsPrivate::indexOf(AbstractView* view) const
 {
     int result = -1;
 
     const int tabCount = mTabWidget->count();
-    for( int i=0; i<tabCount; ++i )
-    {
-        const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(i) );
-        if( view == viewBox->view() )
-        {
+    for (int i = 0; i < tabCount; ++i) {
+        const ViewBox* viewBox = static_cast<const ViewBox*>(mTabWidget->widget(i));
+        if (view == viewBox->view()) {
             result = i;
             break;
         }
@@ -97,52 +92,50 @@ int TabbedViewsPrivate::indexOf( AbstractView* view ) const
     return result;
 }
 
-
-void TabbedViewsPrivate::addViews( const QList<AbstractView*>& views )
+void TabbedViewsPrivate::addViews(const QList<AbstractView*>& views)
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
-    if( views.count() == 0 )
+    if (views.count() == 0) {
         return;
+    }
 
     int insertIndex = mTabWidget->currentIndex() + 1;
-    for( AbstractView* view : views )
-    {
-        QObject::connect( view, &AbstractModel::titleChanged,
-                          q, [&]( const QString& title ) { onTitleChanged( title ); } );
+    for (AbstractView* view : views) {
+        QObject::connect(view, &AbstractModel::titleChanged,
+                         q, [&](const QString& title) { onTitleChanged(title); });
 
-        ViewBox* viewBox = new ViewBox( view, mTabWidget );
-        mTabWidget->insertTab( insertIndex, viewBox, view->title() );
+        ViewBox* viewBox = new ViewBox(view, mTabWidget);
+        mTabWidget->insertTab(insertIndex, viewBox, view->title());
         ++insertIndex;
     }
 
-    mTabWidget->setCurrentIndex( insertIndex - 1 );
+    mTabWidget->setCurrentIndex(insertIndex - 1);
 
     // fix for Qt bug:
-    if( mTabWidget->count() == 1 )
+    if (mTabWidget->count() == 1) {
         // simulate signal reaction
-        onCurrentChanged( 0 );
+        onCurrentChanged(0);
+    }
 
-    emit q->added( views );
+    emit q->added(views);
 }
 
-void TabbedViewsPrivate::removeViews( const QList<AbstractView*>& views )
+void TabbedViewsPrivate::removeViews(const QList<AbstractView*>& views)
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
     int index = -1;
 
     // TODO: check if contained
-    for( AbstractView* view : views )
-    {
-        view->disconnect( q );
+    for (AbstractView* view : views) {
+        view->disconnect(q);
 
-        index = indexOf( view );
-        if( index != -1 )
-        {
-            ViewBox* viewBox = static_cast<ViewBox*>( mTabWidget->widget(index) );
+        index = indexOf(view);
+        if (index != -1) {
+            ViewBox* viewBox = static_cast<ViewBox*>(mTabWidget->widget(index));
 
-            mTabWidget->removeTab( index );
+            mTabWidget->removeTab(index);
             delete viewBox;
         }
     }
@@ -150,101 +143,100 @@ void TabbedViewsPrivate::removeViews( const QList<AbstractView*>& views )
     // fix for Qt bug:
     const int currentIndex = mTabWidget->currentIndex();
     // last removed or no change in index (not bound to widget)?
-    if( currentIndex == -1 || currentIndex == index )
+    if (currentIndex == -1 || currentIndex == index) {
         // simulate signal reaction
-        onCurrentChanged( currentIndex );
+        onCurrentChanged(currentIndex);
+    }
 
-    emit q->removing( views );
+    emit q->removing(views);
 }
 
-void TabbedViewsPrivate::setCurrentToolInlineView( AbstractToolInlineView* view )
+void TabbedViewsPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
     ToolInlineViewWidget* currentViewWidget =
-        qobject_cast<ToolInlineViewWidget*>( mViewAreaBox->bottomWidget() );
+        qobject_cast<ToolInlineViewWidget*>(mViewAreaBox->bottomWidget());
     AbstractToolInlineView* currentToolInlineView =
         currentViewWidget ? currentViewWidget->view() : nullptr;
 
-    if( currentToolInlineView != view )
-    {
+    if (currentToolInlineView != view) {
         ToolInlineViewWidget* toolInlineViewWidget =
-            view ? new ToolInlineViewWidget( view/*->widget()*/ ) : nullptr;
-        mViewAreaBox->setBottomWidget( toolInlineViewWidget );
+            view ? new ToolInlineViewWidget(view /*->widget()*/) : nullptr;
+        mViewAreaBox->setBottomWidget(toolInlineViewWidget);
     }
 
-    if( view )
+    if (view) {
         view->widget()->setFocus();
+    }
 //     else
 //         if( mCurrentView )
 //             mCurrentView->setFocus();
 }
 
-
-void TabbedViewsPrivate::onCurrentChanged( int index )
+void TabbedViewsPrivate::onCurrentChanged(int index)
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
-    const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->widget(index) );
+    const ViewBox* viewBox = static_cast<const ViewBox*>(mTabWidget->widget(index));
     AbstractView* view = viewBox ? viewBox->view() : nullptr;
 
-    if( view == mCurrentView )
+    if (view == mCurrentView) {
         return;
+    }
 
-    mViewAreaBox->setBottomWidget( nullptr );
+    mViewAreaBox->setBottomWidget(nullptr);
 
-    if( mCurrentView )
-        mCurrentView->disconnect( q );
+    if (mCurrentView) {
+        mCurrentView->disconnect(q);
+    }
 
     mCurrentView = view;
 
-    if( view )
-    {
-        QObject::connect( view, &AbstractView::focusChanged,
-                          q, [&]( bool hasFocus ) { onViewFocusChanged( hasFocus ); } );
+    if (view) {
+        QObject::connect(view, &AbstractView::focusChanged,
+                         q, [&](bool hasFocus) { onViewFocusChanged(hasFocus); });
         view->widget()->setFocus();
     }
 
-    emit q->viewFocusChanged( view );
+    emit q->viewFocusChanged(view);
 }
 
-void TabbedViewsPrivate::onTabCloseRequest( int tabIndex )
+void TabbedViewsPrivate::onTabCloseRequest(int tabIndex)
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
-    const QWidget* widget = mTabWidget->widget( tabIndex );
-    const ViewBox* viewBox = static_cast<const ViewBox*>( widget );
+    const QWidget* widget = mTabWidget->widget(tabIndex);
+    const ViewBox* viewBox = static_cast<const ViewBox*>(widget);
     AbstractView* view = viewBox->view();
 
     const QList<Kasten::AbstractView*> views { view };
-    emit q->closeRequest( views );
+    emit q->closeRequest(views);
 }
 
-void TabbedViewsPrivate::onTitleChanged( const QString& newTitle )
+void TabbedViewsPrivate::onTitleChanged(const QString& newTitle)
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
-    AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
-    if( view )
-    {
-        const int index = indexOf( view );
-        if( index != -1 )
-            mTabWidget->setTabText( index, newTitle );
+    AbstractView* view = qobject_cast<AbstractView*>(q->sender());
+    if (view) {
+        const int index = indexOf(view);
+        if (index != -1) {
+            mTabWidget->setTabText(index, newTitle);
+        }
     }
 }
 
-
 #if 0
-void TabbedViewsPrivate::onModifiedChanged( AbstractDocument::SyncStates newStates )
+void TabbedViewsPrivate::onModifiedChanged(AbstractDocument::SyncStates newStates)
 {
-Q_UNUSED( newStates )
-    AbstractView* view = qobject_cast<AbstractView *>( sender() );
-    if( view )
-    {
-        const int index = indexOf( view );
-        if( index != -1 )
-        {
+    Q_UNUSED(newStates)
+    AbstractView * view = qobject_cast<AbstractView*>(sender());
+    if (view) {
+        const int index = indexOf(view);
+        if (index != -1) {
 //             mViewsTab->setIcon( index, newTitle ); //modificationSymbol
-            if( index == mViewsTab->currentIndex() )
-                setCaption( view->title(), view->document()->hasLocalChanges() );
+            if (index == mViewsTab->currentIndex()) {
+                setCaption(view->title(), view->document()->hasLocalChanges());
+            }
         }
     }
 
@@ -252,41 +244,41 @@ Q_UNUSED( newStates )
 #endif
 
 // TODO: could be just a signal forwarder
-void TabbedViewsPrivate::onViewFocusChanged( bool hasFocus )
+void TabbedViewsPrivate::onViewFocusChanged(bool hasFocus)
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
 //     AbstractView* view = qobject_cast<AbstractView *>( q->sender() );
 // qCDebug(LOG_KASTEN_GUI)<<view<<view->title()<<hasFocus;
 
-    emit q->focusChanged( hasFocus );
+    emit q->focusChanged(hasFocus);
 }
 
 void TabbedViewsPrivate::onMouseMiddleClick()
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
-    const QMimeData* mimeData = QApplication::clipboard()->mimeData( QClipboard::Selection );
+    const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
 
-    emit q->dataDropped( mimeData );
+    emit q->dataDropped(mimeData);
 }
 
-void TabbedViewsPrivate::onDragMoveEvent( const QDragMoveEvent* event, bool& accepted )
+void TabbedViewsPrivate::onDragMoveEvent(const QDragMoveEvent* event, bool& accepted)
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
     const QMimeData* mimeData = event->mimeData();
 
-    emit q->dataOffered( mimeData, accepted );
+    emit q->dataOffered(mimeData, accepted);
 }
 
-void TabbedViewsPrivate::onDropEvent( QDropEvent* event )
+void TabbedViewsPrivate::onDropEvent(QDropEvent* event)
 {
-    Q_Q( TabbedViews );
+    Q_Q(TabbedViews);
 
     const QMimeData* mimeData = event->mimeData();
 
-    emit q->dataDropped( mimeData );
+    emit q->dataDropped(mimeData);
 }
 
 TabbedViewsPrivate::~TabbedViewsPrivate()

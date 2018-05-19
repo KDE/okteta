@@ -31,25 +31,23 @@
 #include <QFormLayout>
 #include <QLabel>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( ByteArraySRecStreamEncoder* encoder, QWidget* parent )
- : AbstractModelStreamEncoderConfigEditor( parent ),
-   mEncoder( encoder )
+ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor(ByteArraySRecStreamEncoder* encoder, QWidget* parent)
+    : AbstractModelStreamEncoderConfigEditor(parent)
+    , mEncoder(encoder)
 {
     mSettings = mEncoder->settings();
 
-    QFormLayout* pageLayout = new QFormLayout( this );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout(this);
+    pageLayout->setMargin(0);
 
     // data type
     const QString addressSizeLabel =
-        i18nc( "@label:listbox the size in bits of the addresses.",
-               "Address size:" );
+        i18nc("@label:listbox the size in bits of the addresses.",
+              "Address size:");
 
-    mAddressSizeSelect = new KComboBox( this );
+    mAddressSizeSelect = new KComboBox(this);
     const QStringList list {
         i18nc("@item:inmenu address size",
               "32-bit"),
@@ -58,23 +56,23 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor( 
         i18nc("@item:inmenu address size",
               "16-bit"),
     };
-    mAddressSizeSelect->addItems( list );
-    mAddressSizeSelect->setCurrentIndex( static_cast<int>(mSettings.addressSizeId) );
-    connect( mAddressSizeSelect, QOverload<int>::of(&KComboBox::activated),
-             this, &ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
+    mAddressSizeSelect->addItems(list);
+    mAddressSizeSelect->setCurrentIndex(static_cast<int>(mSettings.addressSizeId));
+    connect(mAddressSizeSelect, QOverload<int>::of(&KComboBox::activated),
+            this, &ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(addressSizeLabel, mAddressSizeSelect);
 }
 
 AbstractSelectionView* ByteArraySRecStreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArrayTextStreamEncoderPreview( mEncoder );
+    return new ByteArrayTextStreamEncoderPreview(mEncoder);
 }
 
 void ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged()
 {
     mSettings.addressSizeId = static_cast<SRecStreamEncoderSettings::AddressSizeId>(mAddressSizeSelect->currentIndex());
 
-    mEncoder->setSettings( mSettings );
+    mEncoder->setSettings(mSettings);
 }
 
 ByteArraySRecStreamEncoderConfigEditor::~ByteArraySRecStreamEncoderConfigEditor()

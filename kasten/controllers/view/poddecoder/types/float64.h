@@ -27,30 +27,27 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct Float64
 {
-  public:
-    Float64( double v );
+public:
+    Float64(double v);
     Float64();
 
-  public:
+public:
     QString toString() const;
 
-  public:
+public:
     double value;
 };
 
-
-inline Float64::Float64() : value( 0 ) {}
-inline Float64::Float64( double v ) : value( v ) {}
+inline Float64::Float64() : value(0) {}
+inline Float64::Float64(double v) : value(v) {}
 
 inline QString Float64::toString() const
 {
-    return QString::number( value, 'e', 16 );
+    return QString::number(value, 'e', 16);
 }
 
-
-Q_DECLARE_METATYPE( Float64 )
+Q_DECLARE_METATYPE(Float64)
 
 #endif

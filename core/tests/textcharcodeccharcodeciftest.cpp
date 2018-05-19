@@ -27,22 +27,19 @@
 // Qt
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 CharCodec* TextCharCodecCharCodecIfTest::createCodec()
 {
-    return TextCharCodec::createCodec( QStringLiteral("ISO8859-1") );
+    return TextCharCodec::createCodec(QStringLiteral("ISO8859-1"));
     // TODO: test for some more, e.g. KOI8-R
 }
 
-
-void TextCharCodecCharCodecIfTest::deleteCodec( CharCodec* codec )
+void TextCharCodecCharCodecIfTest::deleteCodec(CharCodec* codec)
 {
     delete codec;
 }
 
 }
 
-QTEST_MAIN( Okteta::TextCharCodecCharCodecIfTest )
+QTEST_MAIN(Okteta::TextCharCodecCharCodecIfTest)

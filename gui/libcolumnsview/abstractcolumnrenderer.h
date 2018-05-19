@@ -29,57 +29,56 @@
 
 class QPainter;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class AbstractColumnStylist;
 
 class AbstractColumnRendererPrivate;
 
 /** base class for columns of the ColumnsView
-  *
-  *
-  *@author Friedrich W. H. Kossebau
-  */
+ *
+ *
+ * @author Friedrich W. H. Kossebau
+*/
 
 class OKTETAGUI_EXPORT AbstractColumnRenderer
 {
 //    friend class ColumnsView;
-  public:
-    explicit AbstractColumnRenderer( AbstractColumnStylist* stylist );
+
+public:
+    explicit AbstractColumnRenderer(AbstractColumnStylist* stylist);
     virtual ~AbstractColumnRenderer();
 
-  public: // API to be reimplemented in the subclasses
+public: // API to be reimplemented in the subclasses
     /** Before an update of the columns view each column that intersects with the area to be painted
-      * will be called with this function. As often multiple lines of a column are affected
-      * for each lines the same values (like first and last char positions) might be calculated.
-      * This function enables a one-time-calculation for such data that must be stored in some
-      * class members, though.
-      * @param painter painter variable
-      * @param xSpan
-      * @param firstLineIndex no of the first of the range of lines to paint
-      */
-    virtual void renderFirstLine( QPainter* painter, const PixelXRange& xSpan, int firstLineIndex );
+     * will be called with this function. As often multiple lines of a column are affected
+     * for each lines the same values (like first and last char positions) might be calculated.
+     * This function enables a one-time-calculation for such data that must be stored in some
+     * class members, though.
+     * @param painter painter variable
+     * @param xSpan
+     * @param firstLineIndex no of the first of the range of lines to paint
+     */
+    virtual void renderFirstLine(QPainter* painter, const PixelXRange& xSpan, int firstLineIndex);
     /** the actual painting call for a column's line.
-      * The default implementation simply paints the background
-      */
-    virtual void renderNextLine( QPainter* painter );
+     * The default implementation simply paints the background
+     */
+    virtual void renderNextLine(QPainter* painter);
 
     /** */
-    virtual void renderColumn( QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan );
+    virtual void renderColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan);
     /** */
-    virtual void renderEmptyColumn( QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan );
+    virtual void renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan);
 
-  public: // modification access
+public: // modification access
     /** sets starting point of the column */
-    void setX( PixelX x );
+    void setX(PixelX x);
     /** sets visibily */
-    void setVisible( bool isVisible );
+    void setVisible(bool isVisible);
     /** buffer actual line height in column */
-    void setLineHeight( PixelY lineHeight );
+    void setLineHeight(PixelY lineHeight);
 
-  public: // value access
+public: // value access
     /** */
     AbstractColumnStylist* stylist() const;
     /** left offset x in pixel */
@@ -95,20 +94,20 @@ class OKTETAGUI_EXPORT AbstractColumnRenderer
     /** */
     PixelY lineHeight() const;
 
-  public: // functional logic
+public: // functional logic
     /** true if column overlaps with pixels between x-positions x1, x2 */
-    bool overlaps( const PixelXRange& xSpan ) const;
+    bool overlaps(const PixelXRange& xSpan) const;
 
-  protected:
+protected:
     /** sets width of the column */
-    void setWidth( PixelX width );
+    void setWidth(PixelX width);
     /** */
-    void restrictToXSpan( PixelXRange* xSpan ) const;
+    void restrictToXSpan(PixelXRange* xSpan) const;
     /** */
-    void renderBlankLine( QPainter* painter ) const;
+    void renderBlankLine(QPainter* painter) const;
 
-  private:
-     AbstractColumnRendererPrivate* const d; // TODO: shared d
+private:
+    AbstractColumnRendererPrivate* const d;  // TODO: shared d
 };
 
 }

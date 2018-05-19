@@ -31,24 +31,23 @@
 // Qt
 #include <QAction>
 
-namespace Kasten
-{
+namespace Kasten {
 
-PrintController::PrintController( KXMLGUIClient* guiClient )
- : mPrintTool( new PrintTool() )
+PrintController::PrintController(KXMLGUIClient* guiClient)
+    : mPrintTool(new PrintTool())
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mPrintAction = KStandardAction::print( mPrintTool, SLOT(print()), actionCollection );
-    connect( mPrintTool, &PrintTool::viewChanged,
-             mPrintAction, &QAction::setEnabled );
+    mPrintAction = KStandardAction::print(mPrintTool, SLOT(print()), actionCollection);
+    connect(mPrintTool, &PrintTool::viewChanged,
+            mPrintAction, &QAction::setEnabled);
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void PrintController::setTargetModel( AbstractModel* model )
+void PrintController::setTargetModel(AbstractModel* model)
 {
-    mPrintTool->setTargetModel( model );
+    mPrintTool->setTargetModel(model);
 }
 
 void PrintController::print()

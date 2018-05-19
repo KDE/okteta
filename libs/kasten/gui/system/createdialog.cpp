@@ -34,26 +34,24 @@
 #include <QFont>
 #include <QDialogButtonBox>
 
+namespace Kasten {
 
-namespace Kasten
+CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent)
+    : QDialog(parent)
+    , mConfigEditor(configEditor)
 {
-
-CreateDialog::CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent )
-  : QDialog( parent ),
-    mConfigEditor( configEditor )
-{
-    setWindowTitle( i18nc("@title:window","Create") );
+    setWindowTitle(i18nc("@title:window", "Create"));
 
     // editor
-    QLabel* editorLabel = new QLabel( mConfigEditor->name() );
+    QLabel* editorLabel = new QLabel(mConfigEditor->name());
     QFont font = editorLabel->font();
-    font.setBold( true );
-    editorLabel->setFont( font );
+    font.setBold(true);
+    editorLabel->setFont(font);
 
     // dialog buttons
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     QPushButton* createButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-new")),
-                                                i18nc("@action:button create the new document","&Create"));
+                                                i18nc("@action:button create the new document", "&Create"));
     createButton->setToolTip(i18nc("@info:tooltip",
                                    "Create a new document with the generated data."));
     createButton->setWhatsThis(xi18nc("@info:whatsthis",
@@ -61,23 +59,23 @@ CreateDialog::CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor
                                       "the data will be generated with the settings you entered above "
                                       "and inserted in a new document."));
 
-    dialogButtonBox->addButton( createButton, QDialogButtonBox::AcceptRole );
-    connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );
-    dialogButtonBox->addButton( QDialogButtonBox::Cancel );
-    connect( dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
+    dialogButtonBox->addButton(createButton, QDialogButtonBox::AcceptRole);
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    dialogButtonBox->addButton(QDialogButtonBox::Cancel);
+    connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    createButton->setEnabled( configEditor->isValid() );
-    connect( configEditor, &AbstractModelDataGeneratorConfigEditor::validityChanged,
-             createButton, &QWidget::setEnabled );
+    createButton->setEnabled(configEditor->isValid());
+    connect(configEditor, &AbstractModelDataGeneratorConfigEditor::validityChanged,
+            createButton, &QWidget::setEnabled);
 
     // main layout
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget( editorLabel );
-    layout->addWidget( mConfigEditor );
+    layout->addWidget(editorLabel);
+    layout->addWidget(mConfigEditor);
     layout->addStretch();
-    layout->addWidget( dialogButtonBox );
+    layout->addWidget(dialogButtonBox);
 
-    setLayout( layout );
+    setLayout(layout);
 }
 
 CreateDialog::~CreateDialog()

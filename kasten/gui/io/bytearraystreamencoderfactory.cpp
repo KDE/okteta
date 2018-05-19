@@ -42,9 +42,7 @@
 // Qt
 #include <QList>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 QList<AbstractModelStreamEncoder*> ByteArrayStreamEncoderFactory::createStreamEncoders()
 {

@@ -31,9 +31,7 @@
 class KXMLGUIClient;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 namespace If {
 class ViewAreaSplitable;
@@ -42,30 +40,29 @@ class AbstractGroupedViews;
 class AbstractViewArea;
 class ViewManager;
 
-
 class KASTENCONTROLLERS_EXPORT ViewAreaSplitController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ViewAreaSplitController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient );
+public:
+    ViewAreaSplitController(ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private:
-    void splitViewArea( Qt::Orientation orientation );
+private:
+    void splitViewArea(Qt::Orientation orientation);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void splitVertically();
     void splitHorizontally();
     void close();
 
-    void onViewAreaFocusChanged( Kasten::AbstractViewArea* viewArea );
+    void onViewAreaFocusChanged(Kasten::AbstractViewArea* viewArea);
     void onViewAreasChanged();
     void onViewsChanged();
 
-  private:
+private:
     ViewManager* mViewManager;
     AbstractGroupedViews* mGroupedViews;
     If::ViewAreaSplitable* mViewAreaSplitable;

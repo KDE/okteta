@@ -27,16 +27,14 @@
 // Qt
 #include <QLayout>
 
+namespace Kasten {
 
-namespace Kasten
+ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfigEditor(AbstractModelStreamEncoderConfigEditor* encoderConfigEditor)
+    : mEncoderConfigEditor(encoderConfigEditor)
 {
-
-ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfigEditor( AbstractModelStreamEncoderConfigEditor* encoderConfigEditor )
- : mEncoderConfigEditor( encoderConfigEditor )
-{
-    QHBoxLayout* layout = new QHBoxLayout( this );
-    layout->setSpacing( 0 );
-    layout->addWidget( mEncoderConfigEditor );
+    QHBoxLayout* layout = new QHBoxLayout(this);
+    layout->setSpacing(0);
+    layout->addWidget(mEncoderConfigEditor);
 }
 
 bool ModelEncoderFileSystemExporterConfigEditor::isValid() const

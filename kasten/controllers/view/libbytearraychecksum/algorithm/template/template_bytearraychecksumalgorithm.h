@@ -21,25 +21,24 @@
 //// ADAPT(end)
 #include <abstractbytearraychecksumalgorithm.h>
 
-
 //// ADAPT(start)
 //// rename the class name from Template_ByteArrayFilter to a proper name, both here and in the .cpp file
 //// e.g. MyByteArrayFilter
 class Template_ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 //// ADAPT(end)
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     Template_ByteArrayChecksumAlgorithm();
 
     ~Template_ByteArrayChecksumAlgorithm() override;
 
-  public: // AbstractByteArrayChecksumAlgorithm API
-    bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+public: // AbstractByteArrayChecksumAlgorithm API
+    bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
-  protected:
+protected:
 //// ADAPT(start)
 //// change "Template_ByteArrayChecksumParameterSet" to the name of the class of the used parameterset
 //// in case of no parameters use "NoByteArrayChecksumParameterSet"

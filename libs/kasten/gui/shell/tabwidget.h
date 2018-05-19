@@ -26,28 +26,27 @@
 // Qt
 #include <QTabWidget>
 
-namespace Kasten
-{
+namespace Kasten {
 
 class TabWidget : public QTabWidget
 {
     Q_OBJECT
 
-  public:
-    explicit TabWidget( QWidget* parent = nullptr );
+public:
+    explicit TabWidget(QWidget* parent = nullptr);
 
     ~TabWidget() override;
 
-  Q_SIGNALS:
+Q_SIGNALS:
     void mouseMiddleClick();
-    void testCanDecode( const QDragMoveEvent* event, bool& accept );
-    void receivedDropEvent( QDropEvent* event );
+    void testCanDecode(const QDragMoveEvent* event, bool& accept);
+    void receivedDropEvent(QDropEvent* event);
 
-  protected:
-    void mouseReleaseEvent( QMouseEvent* event ) override;
-    void dragEnterEvent( QDragEnterEvent* event ) override;
-    void dragMoveEvent( QDragMoveEvent* event ) override;
-    void dropEvent( QDropEvent* event ) override;
+protected:
+    void mouseReleaseEvent(QMouseEvent* event) override;
+    void dragEnterEvent(QDragEnterEvent* event) override;
+    void dragMoveEvent(QDragMoveEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
 };
 
 }

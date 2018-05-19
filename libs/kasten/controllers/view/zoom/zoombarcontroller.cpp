@@ -24,25 +24,22 @@
 
 // lib
 #include "zoomslider.h"
-// 
+//
 #include <kasten/statusbar.h>
 
+namespace Kasten {
 
-namespace Kasten
+ZoomBarController::ZoomBarController(StatusBar* statusBar)
 {
+    mZoomSlider = new ZoomSlider(statusBar);
+    statusBar->addWidget(mZoomSlider);
 
-ZoomBarController::ZoomBarController( StatusBar* statusBar )
-{
-    mZoomSlider = new ZoomSlider( statusBar );
-    statusBar->addWidget( mZoomSlider );
-
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-
-void ZoomBarController::setTargetModel( AbstractModel* model )
+void ZoomBarController::setTargetModel(AbstractModel* model)
 {
-    mZoomSlider->setTargetModel( model );
+    mZoomSlider->setTargetModel(model);
 }
 
 }

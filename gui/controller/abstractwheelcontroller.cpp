@@ -22,18 +22,16 @@
 
 #include "abstractwheelcontroller.h"
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-AbstractWheelController::AbstractWheelController( AbstractWheelController* parent )
-  : mParent( parent )
+AbstractWheelController::AbstractWheelController(AbstractWheelController* parent)
+    : mParent(parent)
 {
 }
 
-bool AbstractWheelController::handleWheelEvent( QWheelEvent* wheelEvent )
+bool AbstractWheelController::handleWheelEvent(QWheelEvent* wheelEvent)
 {
-    return mParent ? mParent->handleWheelEvent( wheelEvent ) : false;
+    return mParent ? mParent->handleWheelEvent(wheelEvent) : false;
 }
 AbstractWheelController::~AbstractWheelController() {}
 

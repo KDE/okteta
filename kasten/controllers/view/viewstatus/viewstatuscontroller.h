@@ -37,41 +37,38 @@ class KSqueezedTextLabel;
 class QLabel;
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 class ToggleButton;
 class StatusBar;
 class AbstractModelSelection;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT ViewStatusController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ViewStatusController( StatusBar* statusBar );
+public:
+    explicit ViewStatusController(StatusBar* statusBar);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private:
-    void fixWidths( int offsetCoding );
+private:
+    void fixWidths(int offsetCoding);
 
-  private Q_SLOTS:
-    void setOverwriteMode( bool overwrite );
-    void setValueCoding( int valueCoding );
-    void setCharCoding( int charCoding );
+private Q_SLOTS:
+    void setOverwriteMode(bool overwrite);
+    void setValueCoding(int valueCoding);
+    void setCharCoding(int charCoding);
 
-    void onCursorPositionChanged( Okteta::Address offset );
-    void onSelectedDataChanged( const Kasten::AbstractModelSelection* modelSelection );
-    void onOffsetCodingChanged( int offsetCoding );
-    void onValueCodingChanged( int valueCoding );
-    void onCharCodecChanged( const QString& charCodecName );
+    void onCursorPositionChanged(Okteta::Address offset);
+    void onSelectedDataChanged(const Kasten::AbstractModelSelection* modelSelection);
+    void onOffsetCodingChanged(int offsetCoding);
+    void onValueCodingChanged(int valueCoding);
+    void onCharCodecChanged(const QString& charCodecName);
 
-  private:
+private:
     ByteArrayView* mByteArrayView;
 
     StatusBar* mStatusBar;

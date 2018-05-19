@@ -34,60 +34,58 @@
 #include "documentsyncmanager.h"
 #include "modelcodecmanager.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static int lastDocumentId = 0;
 
-
 DocumentManager::DocumentManager()
-  : mCreateManager( new DocumentCreateManager(this) ),
-    mSyncManager( new DocumentSyncManager(this) ),
-    mCodecManager( new ModelCodecManager(this) )
+    : mCreateManager(new DocumentCreateManager(this))
+    , mSyncManager(new DocumentSyncManager(this))
+    , mCodecManager(new ModelCodecManager(this))
 {
 }
 
 QList<AbstractDocument*> DocumentManager::documents() const { return mList; }
 bool DocumentManager::isEmpty() const { return mList.isEmpty(); }
 
-void DocumentManager::addDocument( AbstractDocument* document )
+void DocumentManager::addDocument(AbstractDocument* document)
 {
     // TODO: check for double insert
-    document->setId( QString::number(++lastDocumentId) );
-    mList.append( document );
+    document->setId(QString::number(++lastDocumentId));
+    mList.append(document);
     // TODO: only emit if document was not included before
     const QList<AbstractDocument*> addedDocuments { document };
-    emit added( addedDocuments );
+    emit added(addedDocuments);
 }
 
-void DocumentManager::closeDocument( AbstractDocument* document )
+void DocumentManager::closeDocument(AbstractDocument* document)
 {
-    QMutableListIterator<AbstractDocument*> iterator( mList );
+    QMutableListIterator<AbstractDocument*> iterator(mList);
 
-    if( iterator.findNext(document) )
-    {
-    // TODO: first check if unsaved and ask, only then close
+    if (iterator.findNext(document)) {
+        // TODO: first check if unsaved and ask, only then close
 
         iterator.remove();
 
         const QList<AbstractDocument*> closedDocuments { document };
-        emit closing( closedDocuments );
+        emit closing(closedDocuments);
 
         delete document;
     }
 }
 
-void DocumentManager::closeDocuments( const QList<AbstractDocument*>& documents )
+void DocumentManager::closeDocuments(const QList<AbstractDocument*>& documents)
 {
     // TODO: optimize
-    for( AbstractDocument* document : documents )
-        mList.removeOne( document );
+    for (AbstractDocument* document : documents) {
+        mList.removeOne(document);
+    }
 
-    emit closing( documents );
+    emit closing(documents);
 
-    for( AbstractDocument* document : documents )
+    for (AbstractDocument* document : documents) {
         delete document;
+    }
 }
 
 void DocumentManager::closeAll()
@@ -97,43 +95,41 @@ void DocumentManager::closeAll()
     const QList<AbstractDocument*> closedDocuments = mList;
     mList.clear();
 
-    emit closing( closedDocuments );
+    emit closing(closedDocuments);
 
-    for( AbstractDocument* document : closedDocuments )
-        delete document;
-}
-
-void DocumentManager::closeAllOther( AbstractDocument* keptDocument )
-{
-    // TODO: is it better for remove the document from the list before emitting closing(document)?
-    // TODO: or better emit close(documentList)? who would use this?
-    QList<AbstractDocument*> closedDocuments = mList;
-    closedDocuments.removeOne( keptDocument );
-
-    mList.clear();
-    mList.append( keptDocument );
-
-    emit closing( closedDocuments );
-
-    for( AbstractDocument* document : qAsConst(closedDocuments) )
-    {
+    for (AbstractDocument* document : closedDocuments) {
         delete document;
     }
 }
 
-bool DocumentManager::canClose( AbstractDocument* document )
+void DocumentManager::closeAllOther(AbstractDocument* keptDocument)
 {
-    return mSyncManager->canClose( document );
+    // TODO: is it better for remove the document from the list before emitting closing(document)?
+    // TODO: or better emit close(documentList)? who would use this?
+    QList<AbstractDocument*> closedDocuments = mList;
+    closedDocuments.removeOne(keptDocument);
+
+    mList.clear();
+    mList.append(keptDocument);
+
+    emit closing(closedDocuments);
+
+    for (AbstractDocument* document : qAsConst(closedDocuments)) {
+        delete document;
+    }
 }
 
-bool DocumentManager::canClose( const QList<AbstractDocument*>& documents )
+bool DocumentManager::canClose(AbstractDocument* document)
+{
+    return mSyncManager->canClose(document);
+}
+
+bool DocumentManager::canClose(const QList<AbstractDocument*>& documents)
 {
     bool canClose = true;
 
-    for( AbstractDocument* document : documents )
-    {
-        if( ! mSyncManager->canClose(document) )
-        {
+    for (AbstractDocument* document : documents) {
+        if (!mSyncManager->canClose(document)) {
             canClose = false;
             break;
         }
@@ -146,10 +142,8 @@ bool DocumentManager::canCloseAll()
 {
     bool canCloseAll = true;
 
-    for( AbstractDocument* document : qAsConst(mList) )
-    {
-        if( !mSyncManager->canClose(document) )
-        {
+    for (AbstractDocument* document : qAsConst(mList)) {
+        if (!mSyncManager->canClose(document)) {
             canCloseAll = false;
             break;
         }
@@ -158,15 +152,13 @@ bool DocumentManager::canCloseAll()
     return canCloseAll;
 }
 
-bool DocumentManager::canCloseAllOther( AbstractDocument* keptDocument )
+bool DocumentManager::canCloseAllOther(AbstractDocument* keptDocument)
 {
     bool canCloseAll = true;
 
-    for( AbstractDocument* document : qAsConst(mList) )
-    {
-        if( ( document != keptDocument ) &&
-            ! mSyncManager->canClose(document) )
-        {
+    for (AbstractDocument* document : qAsConst(mList)) {
+        if ((document != keptDocument) &&
+            !mSyncManager->canClose(document)) {
             canCloseAll = false;
             break;
         }
@@ -175,19 +167,19 @@ bool DocumentManager::canCloseAllOther( AbstractDocument* keptDocument )
     return canCloseAll;
 }
 
-void DocumentManager::requestFocus( AbstractDocument* document )
+void DocumentManager::requestFocus(AbstractDocument* document)
 {
-    emit focusRequested( document );
+    emit focusRequested(document);
 }
 
 DocumentManager::~DocumentManager()
 {
     // TODO: emit signal here, too?
-    qDeleteAll( mList );
+    qDeleteAll(mList);
 
     delete mCreateManager;
     delete mSyncManager;
     delete mCodecManager;
-} //TODO: destroy all documents?
+} // TODO: destroy all documents?
 
 }

@@ -31,79 +31,77 @@
 
 using Okteta::PieceTableByteArrayModel;
 
-namespace Kasten
-{
+namespace Kasten {
 
-ByteArrayDocument::ByteArrayDocument( const QString &initDescription )
-  : mByteArray( new Okteta::PieceTableByteArrayModel() ),
-    mInitDescription( initDescription )
+ByteArrayDocument::ByteArrayDocument(const QString& initDescription)
+    : mByteArray(new Okteta::PieceTableByteArrayModel())
+    , mInitDescription(initDescription)
 {
-    connect( mByteArray, &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified );
-    connect( mByteArray, &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged );
-    connect( mByteArray, &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex );
-    connect( mByteArray, &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged );
-    connect( mByteArray, &PieceTableByteArrayModel::headVersionDescriptionChanged,
-             this, &ByteArrayDocument::onHeadVersionDescriptionChanged );
+    connect(mByteArray, &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified);
+    connect(mByteArray, &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged);
+    connect(mByteArray, &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex);
+    connect(mByteArray, &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged);
+    connect(mByteArray, &PieceTableByteArrayModel::headVersionDescriptionChanged,
+            this, &ByteArrayDocument::onHeadVersionDescriptionChanged);
 }
 
-ByteArrayDocument::ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription )
-  : mByteArray( byteArray ),
-    mInitDescription( initDescription )
+ByteArrayDocument::ByteArrayDocument(Okteta::PieceTableByteArrayModel* byteArray, const QString& initDescription)
+    : mByteArray(byteArray)
+    , mInitDescription(initDescription)
 {
-    connect( mByteArray, &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified );
-    connect( mByteArray, &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged );
-    connect( mByteArray, &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex );
-    connect( mByteArray, &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged );
-    connect( mByteArray, &PieceTableByteArrayModel::headVersionDescriptionChanged,
-             this, &ByteArrayDocument::onHeadVersionDescriptionChanged );
+    connect(mByteArray, &PieceTableByteArrayModel::modifiedChanged, this, &ByteArrayDocument::onModelModified);
+    connect(mByteArray, &PieceTableByteArrayModel::readOnlyChanged, this, &ByteArrayDocument::readOnlyChanged);
+    connect(mByteArray, &PieceTableByteArrayModel::revertedToVersionIndex, this, &ByteArrayDocument::revertedToVersionIndex);
+    connect(mByteArray, &PieceTableByteArrayModel::headVersionChanged, this, &ByteArrayDocument::headVersionChanged);
+    connect(mByteArray, &PieceTableByteArrayModel::headVersionDescriptionChanged,
+            this, &ByteArrayDocument::onHeadVersionDescriptionChanged);
 }
 
 Okteta::AbstractByteArrayModel* ByteArrayDocument::content() const { return mByteArray; }
 
 QString ByteArrayDocument::title() const { return mTitle; }
 QString ByteArrayDocument::mimeType() const { return QStringLiteral("ByteArrayDocument"); }
-QString ByteArrayDocument::typeName() const { return i18nc( "name of the data type", "Byte Array" ); }
+QString ByteArrayDocument::typeName() const { return i18nc("name of the data type", "Byte Array"); }
 
 bool ByteArrayDocument::isModifiable() const { return true; }
 bool ByteArrayDocument::isReadOnly()   const { return mByteArray->isReadOnly(); }
-void ByteArrayDocument::setReadOnly( bool isReadOnly ) { mByteArray->setReadOnly( isReadOnly ); }
+void ByteArrayDocument::setReadOnly(bool isReadOnly) { mByteArray->setReadOnly(isReadOnly); }
 
 ContentFlags ByteArrayDocument::contentFlags() const
 {
     return (mByteArray->isModified() ? ContentHasUnstoredChanges : ContentStateNormal);
 }
 
-void ByteArrayDocument::setTitle( const QString &title )
+void ByteArrayDocument::setTitle(const QString& title)
 {
     mTitle = title;
-    emit titleChanged( mTitle );
+    emit titleChanged(mTitle);
 }
-
 
 int ByteArrayDocument::versionIndex() const { return mByteArray->versionIndex(); }
 int ByteArrayDocument::versionCount() const { return mByteArray->versionCount(); }
-DocumentVersionData ByteArrayDocument::versionData( int versionIndex ) const
+DocumentVersionData ByteArrayDocument::versionData(int versionIndex) const
 {
-    const QString changeComment = ( versionIndex == 0 ) ? mInitDescription : mByteArray->versionDescription(versionIndex);
-    return DocumentVersionData( versionIndex, changeComment );
+    const QString changeComment = (versionIndex == 0) ? mInitDescription : mByteArray->versionDescription(versionIndex);
+    return DocumentVersionData(versionIndex, changeComment);
 }
 
-void ByteArrayDocument::revertToVersionByIndex( int versionIndex ) { mByteArray->revertToVersionByIndex( versionIndex ); }
+void ByteArrayDocument::revertToVersionByIndex(int versionIndex) { mByteArray->revertToVersionByIndex(versionIndex); }
 
-void ByteArrayDocument::onModelModified( bool isModified )
+void ByteArrayDocument::onModelModified(bool isModified)
 {
-    emit contentFlagsChanged( (isModified ? ContentHasUnstoredChanges : ContentStateNormal) );
+    emit contentFlagsChanged((isModified ? ContentHasUnstoredChanges : ContentStateNormal));
 }
 
-void ByteArrayDocument::onHeadVersionDescriptionChanged( const QString &newDescription )
+void ByteArrayDocument::onHeadVersionDescriptionChanged(const QString& newDescription)
 {
-    const DocumentVersionData data( mByteArray->versionIndex(), newDescription );
-    emit headVersionDataChanged( data );
+    const DocumentVersionData data(mByteArray->versionIndex(), newDescription);
+    emit headVersionDataChanged(data);
 }
 
 Person ByteArrayDocument::owner() const
 {
-    return mUserList.size()>0 ? mUserList.at( 0 ) : Person();
+    return mUserList.size() > 0 ? mUserList.at(0) : Person();
 }
 
 QList<Person> ByteArrayDocument::userList() const
@@ -111,24 +109,25 @@ QList<Person> ByteArrayDocument::userList() const
     return mUserList;
 }
 
-void ByteArrayDocument::setOwner( const Person& owner )
+void ByteArrayDocument::setOwner(const Person& owner)
 {
-    mUserList.append( owner );
+    mUserList.append(owner);
 }
 
-void ByteArrayDocument::addUsers( const QList<Person>& users )
+void ByteArrayDocument::addUsers(const QList<Person>& users)
 {
-    mUserList.append( users );
+    mUserList.append(users);
 
-    emit usersAdded( users );
+    emit usersAdded(users);
 }
 
-void ByteArrayDocument::removeUsers( const QList<Person>& users )
+void ByteArrayDocument::removeUsers(const QList<Person>& users)
 {
-    for( const Person& user : users )
-        mUserList.removeOne( user );
+    for (const Person& user : users) {
+        mUserList.removeOne(user);
+    }
 
-    emit usersRemoved( users );
+    emit usersRemoved(users);
 }
 
 ByteArrayDocument::~ByteArrayDocument()

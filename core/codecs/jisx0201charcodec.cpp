@@ -27,11 +27,9 @@
 // Qt
 #include <QString>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-bool JISX0201CharCodec::encode( Byte* byte, const QChar& _char ) const
+bool JISX0201CharCodec::encode(Byte* byte, const QChar& _char) const
 {
     const ushort charUnicode = _char.unicode();
 
@@ -44,32 +42,33 @@ bool JISX0201CharCodec::encode( Byte* byte, const QChar& _char ) const
         /* else */                                         0;
 
     // not covered?
-    if( _byte == 0 )
+    if (_byte == 0) {
         return false;
+    }
 
     *byte = _byte;
 
     return true;
 }
 
-Character JISX0201CharCodec::decode( Byte byte ) const
+Character JISX0201CharCodec::decode(Byte byte) const
 {
     const ushort unicode =
         (32 <= byte && byte <= 91) ||
         (93 <= byte && byte <= 125)
-            ?  ushort( byte ) :
+            ?  ushort(byte) :
         (92 == byte)
             ?  ushort(0x00A5) :
         (126 == byte)
             ?  ushort(0x203E) :
         (161 <= byte && byte <= 223)
             ? ushort(0xFF61 - 161 + byte) :
-        /* else */ ushort( 0 );
+        /* else */ ushort(0);
 
     return Character(QChar(unicode), unicode == 0);
 }
 
-bool JISX0201CharCodec::canEncode( const QChar& _char ) const
+bool JISX0201CharCodec::canEncode(const QChar& _char) const
 {
     const ushort charUnicode = _char.unicode();
     return
@@ -78,7 +77,6 @@ bool JISX0201CharCodec::canEncode( const QChar& _char ) const
         (charUnicode == 0x00A5) || (charUnicode == 0x203E) ||
         (0xFF61 <= charUnicode && charUnicode <= 0xFF9F);
 }
-
 
 const QString& JISX0201CharCodec::name() const
 {

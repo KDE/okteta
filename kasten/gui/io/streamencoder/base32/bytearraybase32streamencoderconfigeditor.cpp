@@ -31,25 +31,23 @@
 #include <QFormLayout>
 #include <QLabel>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEditor( ByteArrayBase32StreamEncoder* encoder, QWidget* parent )
- : AbstractModelStreamEncoderConfigEditor( parent ),
-   mEncoder( encoder )
+ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEditor(ByteArrayBase32StreamEncoder* encoder, QWidget* parent)
+    : AbstractModelStreamEncoderConfigEditor(parent)
+    , mEncoder(encoder)
 {
     mSettings = mEncoder->settings();
 
-    QFormLayout* pageLayout = new QFormLayout( this );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout(this);
+    pageLayout->setMargin(0);
 
     // data type
     const QString encodingTypeLabel =
-        i18nc( "@label:listbox the type of the used encoding: Classic, Base32hex or z-base-32.",
-               "Encoding:" );
+        i18nc("@label:listbox the type of the used encoding: Classic, Base32hex or z-base-32.",
+              "Encoding:");
 
-    mEncodingSelect = new KComboBox( this );
+    mEncodingSelect = new KComboBox(this);
     const QStringList list {
         i18nc("@item:inmenu Doing the base32 using the classical encoding",
               "Classic"),
@@ -58,23 +56,23 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
         i18nc("@item:inmenu Doing the base32 using the z-base-32 encoding",
               "z-base-32"),
     };
-    mEncodingSelect->addItems( list );
-    mEncodingSelect->setCurrentIndex( static_cast<int>(mSettings.algorithmId) );
-    connect( mEncodingSelect, QOverload<int>::of(&KComboBox::activated),
-             this, &ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
+    mEncodingSelect->addItems(list);
+    mEncodingSelect->setCurrentIndex(static_cast<int>(mSettings.algorithmId));
+    connect(mEncodingSelect, QOverload<int>::of(&KComboBox::activated),
+            this, &ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(encodingTypeLabel, mEncodingSelect);
 }
 
 AbstractSelectionView* ByteArrayBase32StreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArrayTextStreamEncoderPreview( mEncoder );
+    return new ByteArrayTextStreamEncoderPreview(mEncoder);
 }
 
 void ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged()
 {
     mSettings.algorithmId = static_cast<Base32StreamEncoderSettings::AlgorithmId>(mEncodingSelect->currentIndex());
 
-    mEncoder->setSettings( mSettings );
+    mEncoder->setSettings(mSettings);
 }
 
 ByteArrayBase32StreamEncoderConfigEditor::~ByteArrayBase32StreamEncoderConfigEditor()

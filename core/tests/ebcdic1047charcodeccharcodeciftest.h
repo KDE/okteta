@@ -26,17 +26,15 @@
 // test
 #include "charcodeciftest.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class EBCDIC1047CharCodecCharCodecIfTest : public CharCodecIfTest
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected: // CharCodecIfTest API
+protected: // CharCodecIfTest API
     CharCodec* createCodec() override;
-    void deleteCodec( CharCodec* codec ) override;
+    void deleteCodec(CharCodec* codec) override;
 };
 
 }

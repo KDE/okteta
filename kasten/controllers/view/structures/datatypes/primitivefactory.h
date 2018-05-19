@@ -30,8 +30,7 @@ struct LoggerWithContext;
 class QString;
 class DataInformation;
 
-namespace PrimitiveFactory
-{
+namespace PrimitiveFactory {
 
 /** Converts @p typeStr to a PrimitiveDataType case-insensitively
  * @return The corresponding type or PrimitiveDataType::Invalid if string is not regcognized
@@ -39,10 +38,10 @@ namespace PrimitiveFactory
 PrimitiveDataType typeStringToType(const QString& typeStr, const LoggerWithContext& logger);
 
 PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
-        const LoggerWithContext& logger, DataInformation* parent = nullptr);
+                                      const LoggerWithContext& logger, DataInformation* parent = nullptr);
 
 inline PrimitiveDataInformation* newInstance(const QString& name, const QString& typeString,
-        const LoggerWithContext& logger, DataInformation* parent = nullptr)
+                                             const LoggerWithContext& logger, DataInformation* parent = nullptr)
 {
     return newInstance(name, typeStringToType(typeString, logger), logger, parent);
 }

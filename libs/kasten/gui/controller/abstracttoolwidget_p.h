@@ -28,25 +28,22 @@
 
 class QShortcut;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractToolWidget;
 
-
 class AbstractToolWidgetPrivate
 {
-  public:
-    explicit AbstractToolWidgetPrivate( AbstractToolWidget* parent );
+public:
+    explicit AbstractToolWidgetPrivate(AbstractToolWidget* parent);
 
-  public:
-    void addButton( QPushButton* button, AbstractToolWidget::DefaultType defaultType );
+public:
+    void addButton(QPushButton* button, AbstractToolWidget::DefaultType defaultType);
 
-  public:
+public:
     void onReturnPressed();
 
-  private:
+private:
     AbstractToolWidget* const p;
 
     QPushButton* mDefaultButton;

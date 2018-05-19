@@ -26,12 +26,10 @@
 #include "bookmarksview.h"
 #include "bookmarkstool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-BookmarksToolView::BookmarksToolView( BookmarksTool* tool )
- : mWidget( new BookmarksView(tool) )
+BookmarksToolView::BookmarksToolView(BookmarksTool* tool)
+    : mWidget(new BookmarksView(tool))
 {
 }
 

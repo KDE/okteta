@@ -27,9 +27,7 @@
 // Qt
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 void ByteArrayModelTest::testNothing()
 {
@@ -37,4 +35,4 @@ void ByteArrayModelTest::testNothing()
 
 }
 
-QTEST_MAIN( Okteta::ByteArrayModelTest )
+QTEST_MAIN(Okteta::ByteArrayModelTest)

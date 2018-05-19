@@ -22,41 +22,37 @@
 
 #include "modelencoderfilesystemexporterconfigeditorfactory.h"
 
-// lib 
+// lib
 #include "modelencoderfilesystemexporterconfigeditor.h"
 #include <abstractmodelstreamencoderconfigeditorfactory.h>
 // Kasten core
 #include <kasten/modelencoderfilesystemexporter.h>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ModelEncoderFileSystemExporterConfigEditorFactory::ModelEncoderFileSystemExporterConfigEditorFactory( AbstractModelStreamEncoderConfigEditorFactory* encoderConfigEditorFactory )
- : mEncoderConfigEditorFactory( encoderConfigEditorFactory )
+ModelEncoderFileSystemExporterConfigEditorFactory::ModelEncoderFileSystemExporterConfigEditorFactory(AbstractModelStreamEncoderConfigEditorFactory* encoderConfigEditorFactory)
+    : mEncoderConfigEditorFactory(encoderConfigEditorFactory)
 {
 }
 
-
-AbstractModelExporterConfigEditor* ModelEncoderFileSystemExporterConfigEditorFactory::tryCreateConfigEditor( AbstractModelExporter* exporter ) const
+AbstractModelExporterConfigEditor* ModelEncoderFileSystemExporterConfigEditorFactory::tryCreateConfigEditor(AbstractModelExporter* exporter) const
 {
     AbstractModelExporterConfigEditor* result = nullptr;
 
     ModelEncoderFileSystemExporter* modelEncoderFileSystemExporter =
-        qobject_cast<ModelEncoderFileSystemExporter*>( exporter );
+        qobject_cast<ModelEncoderFileSystemExporter*>(exporter);
 
-    if( modelEncoderFileSystemExporter )
-    {
+    if (modelEncoderFileSystemExporter) {
         AbstractModelStreamEncoderConfigEditor* encoderConfigEditor =
-            mEncoderConfigEditorFactory->tryCreateConfigEditor( modelEncoderFileSystemExporter->encoder() );
+            mEncoderConfigEditorFactory->tryCreateConfigEditor(modelEncoderFileSystemExporter->encoder());
 
-        if( encoderConfigEditor )
-            result = new ModelEncoderFileSystemExporterConfigEditor( encoderConfigEditor );
+        if (encoderConfigEditor) {
+            result = new ModelEncoderFileSystemExporterConfigEditor(encoderConfigEditor);
+        }
     }
 
     return result;
 }
-
 
 ModelEncoderFileSystemExporterConfigEditorFactory::~ModelEncoderFileSystemExporterConfigEditorFactory()
 {

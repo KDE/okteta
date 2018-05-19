@@ -28,36 +28,33 @@
 // Kasten core
 #include <kasten/abstracttool.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 /**
 */
 class KASTENCONTROLLERS_EXPORT VersionViewTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     VersionViewTool();
     ~VersionViewTool() override;
 
-  public:
+public:
     AbstractModel* model() const;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  Q_SIGNALS:
-    void modelChanged( Kasten::AbstractModel* model );
+Q_SIGNALS:
+    void modelChanged(Kasten::AbstractModel* model);
 
-  private: // sources
+private: // sources
     AbstractModel* mModel;
 };
-
 
 inline AbstractModel* VersionViewTool::model() const { return mModel; }
 

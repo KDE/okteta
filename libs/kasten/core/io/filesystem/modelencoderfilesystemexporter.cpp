@@ -23,36 +23,34 @@
 #include "modelencoderfilesystemexporter.h"
 #include "modelencoderfilesystemexporter_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter( AbstractModelStreamEncoder* encoder )
-  : AbstractModelExporter( new ModelEncoderFileSystemExporterPrivate(this,encoder->remoteTypeName(),encoder->remoteMimeType(),encoder) )
+ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter(AbstractModelStreamEncoder* encoder)
+    : AbstractModelExporter(new ModelEncoderFileSystemExporterPrivate(this, encoder->remoteTypeName(), encoder->remoteMimeType(), encoder))
 {
 }
 
 AbstractModelStreamEncoder* ModelEncoderFileSystemExporter::encoder() const
 {
-    Q_D( const ModelEncoderFileSystemExporter );
+    Q_D(const ModelEncoderFileSystemExporter);
 
     return d->encoder();
 }
 
-AbstractExportJob* ModelEncoderFileSystemExporter::startExport( AbstractModel* model,
-                                                                const AbstractModelSelection* selection,
-                                                                const QUrl& url )
+AbstractExportJob* ModelEncoderFileSystemExporter::startExport(AbstractModel* model,
+                                                               const AbstractModelSelection* selection,
+                                                               const QUrl& url)
 {
-    Q_D( ModelEncoderFileSystemExporter );
+    Q_D(ModelEncoderFileSystemExporter);
 
-    return d->startExport( model, selection, url );
+    return d->startExport(model, selection, url);
 }
 
-QString ModelEncoderFileSystemExporter::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
+QString ModelEncoderFileSystemExporter::modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const
 {
-    Q_D( const ModelEncoderFileSystemExporter );
+    Q_D(const ModelEncoderFileSystemExporter);
 
-    return d->modelTypeName( model, selection );
+    return d->modelTypeName(model, selection);
 }
 
 ModelEncoderFileSystemExporter::~ModelEncoderFileSystemExporter() {}

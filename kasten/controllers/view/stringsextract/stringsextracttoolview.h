@@ -28,27 +28,24 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class StringsExtractView;
 class StringsExtractTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractToolView : public AbstractToolView
 {
-  public:
-    explicit StringsExtractToolView( StringsExtractTool *tool );
+public:
+    explicit StringsExtractToolView(StringsExtractTool* tool);
     ~StringsExtractToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
-    AbstractTool *tool() const override;
+    AbstractTool* tool() const override;
 
-  private:
-    StringsExtractView *mWidget;
+private:
+    StringsExtractView* mWidget;
 };
 
 }

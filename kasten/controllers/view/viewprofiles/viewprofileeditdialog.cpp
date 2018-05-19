@@ -31,53 +31,51 @@
 #include <QPushButton>
 #include <QDialogButtonBox>
 
+namespace Kasten {
 
-namespace Kasten
+ViewProfileEditDialog::ViewProfileEditDialog(QWidget* parent)
+    : QDialog(parent)
 {
-
-ViewProfileEditDialog::ViewProfileEditDialog( QWidget* parent )
-  : QDialog( parent )
-{
-    mViewProfileEdit = new ViewProfileEdit( this );
+    mViewProfileEdit = new ViewProfileEdit(this);
 
     // dialog buttons
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok
                                                              | QDialogButtonBox::Cancel);
-    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );
-    connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     // main layout
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget( mViewProfileEdit );
+    layout->addWidget(mViewProfileEdit);
     layout->addStretch();
-    layout->addWidget( dialogButtonBox );
-    setLayout( layout );
+    layout->addWidget(dialogButtonBox);
+    setLayout(layout);
 
-    dialogButtonBox->button( QDialogButtonBox::Cancel )->setDefault( true );
+    dialogButtonBox->button(QDialogButtonBox::Cancel)->setDefault(true);
 
-    connect( mViewProfileEdit, &ViewProfileEdit::profileTitleChanged,
-             this, &ViewProfileEditDialog::onProfileTitleChanged );
+    connect(mViewProfileEdit, &ViewProfileEdit::profileTitleChanged,
+            this, &ViewProfileEditDialog::onProfileTitleChanged);
     // Disable it by default
-    mOkButton = dialogButtonBox->button( QDialogButtonBox::Ok );
-    mOkButton->setEnabled( false );
+    mOkButton = dialogButtonBox->button(QDialogButtonBox::Ok);
+    mOkButton->setEnabled(false);
 }
 
 ByteArrayViewProfile ViewProfileEditDialog::viewProfile() const
 {
     ByteArrayViewProfile result = mViewProfileEdit->viewProfile();
-    result.setId( mId );
+    result.setId(mId);
     return result;
 }
 
-void ViewProfileEditDialog::setViewProfile( const ByteArrayViewProfile& viewProfile )
+void ViewProfileEditDialog::setViewProfile(const ByteArrayViewProfile& viewProfile)
 {
-    mViewProfileEdit->setViewProfile( viewProfile );
+    mViewProfileEdit->setViewProfile(viewProfile);
     mId = viewProfile.id();
 }
 
 void ViewProfileEditDialog::onProfileTitleChanged(const QString& title)
 {
-    mOkButton->setEnabled( !title.isEmpty() );
+    mOkButton->setEnabled(!title.isEmpty());
 }
 
 ViewProfileEditDialog::~ViewProfileEditDialog()

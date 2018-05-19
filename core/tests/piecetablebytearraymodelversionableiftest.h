@@ -23,20 +23,18 @@
 #ifndef PIECETABLEBYTEARRAYMODELVERSIONABLEIFTEST_H
 #define PIECETABLEBYTEARRAYMODELVERSIONABLEIFTEST_H
 
-
 // test
 #include "versionableiftest.h"
 
-namespace Okteta
-{
+namespace Okteta {
 
 class PieceTableByteArrayModelVersionableIfTest : public VersionableIfTest
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected: // VersionableIfTest API
-    QObject *createVersionable() override;
-    void deleteVersionable( QObject *versionable ) override;
+protected: // VersionableIfTest API
+    QObject* createVersionable() override;
+    void deleteVersionable(QObject* versionable) override;
 };
 
 }

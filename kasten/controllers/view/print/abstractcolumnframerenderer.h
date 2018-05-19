@@ -23,7 +23,6 @@
 #ifndef ABSTRACTCOLUMNFRAMERENDERER_H
 #define ABSTRACTCOLUMNFRAMERENDERER_H
 
-
 // lib
 #include "abstractframerenderer.h"
 // Okteta gui
@@ -38,35 +37,34 @@ namespace Okteta {
 class AbstractColumnRenderer;
 }
 
-
 class AbstractColumnFrameRendererPrivate;
 
 /** class to render columns with the same lineheight for all lines
-  *
-  * lines are only completely rendered, so contentHeight <= framesCount*height
-  *@author Friedrich W. H. Kossebau
-  */
+ *
+ * lines are only completely rendered, so contentHeight <= framesCount*height
+ * @author Friedrich W. H. Kossebau
+ */
 
 class AbstractColumnFrameRenderer : public AbstractFrameRenderer
 {
-  public:
+public:
     AbstractColumnFrameRenderer();
     ~AbstractColumnFrameRenderer() override;
 
-  public: // AbstractFrameRenderer API
+public: // AbstractFrameRenderer API
 //     virtual int height() const;
 //     virtual int width() const;
-    void renderFrame( QPainter* painter, int frameIndex ) override;
+    void renderFrame(QPainter* painter, int frameIndex) override;
 
-  public: // data-wise sizes
+public: // data-wise sizes
     /** returns the number of all lines */
     Okteta::LineSize noOfLines() const;
     /** returns number of fully visible lines, at least 1 (as needed by page down/up)
-      * doesn't care about the total height being smaller than the display height
-      */
+     * doesn't care about the total height being smaller than the display height
+     */
     Okteta::LineSize noOfLinesPerFrame() const;
 
-  public: // pixel-wise sizes
+public: // pixel-wise sizes
     /** returns the height of each line */
     Okteta::PixelY lineHeight() const;
     /** returns the width of all visible columns together */
@@ -74,36 +72,36 @@ class AbstractColumnFrameRenderer : public AbstractFrameRenderer
     /** returns the height of all lines together */
     Okteta::PixelY columnsHeight() const;
 
-  public:
+public:
     /**  */
-    void setColumnsPos( Okteta::PixelX x, Okteta::PixelY y );
+    void setColumnsPos(Okteta::PixelX x, Okteta::PixelY y);
 
-  protected: // our API
+protected: // our API
     /** draws area without columns in columns coordinates */
-    virtual void drawEmptyArea( QPainter* painter, int cx, int cy, int cw, int ch );
+    virtual void drawEmptyArea(QPainter* painter, int cx, int cy, int cw, int ch);
 
-  protected: //
+protected:
     /** sets height of all lines and propagates this information to all columns
-      * doesn't update the content size
-      * @param NewLineHeight height in pixels
-      */
-    virtual void setLineHeight( Okteta::PixelY NewLineHeight );
+     * doesn't update the content size
+     * @param NewLineHeight height in pixels
+     */
+    virtual void setLineHeight(Okteta::PixelY NewLineHeight);
     /** sets the number of lines
-      * doesn't update the content size
-      * @param NewNoOfLines new number of lines to display
-      */
-    virtual void setNoOfLines( Okteta::LineSize NewNoOfLines );
+     * doesn't update the content size
+     * @param NewNoOfLines new number of lines to display
+     */
+    virtual void setNoOfLines(Okteta::LineSize NewNoOfLines);
 
-  protected:
+protected:
     /** takes ownership of column renderer */
-    void addColumn( Okteta::AbstractColumnRenderer* column );
-    void removeColumn( Okteta::AbstractColumnRenderer* column );
+    void addColumn(Okteta::AbstractColumnRenderer* column);
+    void removeColumn(Okteta::AbstractColumnRenderer* column);
 
-  protected: // recalculations
+protected: // recalculations
     /** recalculates the positions of the columns and the total width */
     void updateWidths();
 
-  private:
+private:
     AbstractColumnFrameRendererPrivate* const d;
 };
 

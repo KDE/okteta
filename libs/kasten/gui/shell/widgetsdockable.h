@@ -27,28 +27,24 @@
 #include <QtPlugin>
 #include <QList>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ToolViewDockWidget;
 
-
-namespace If
-{
+namespace If {
 
 class WidgetsDockable
 {
-  public:
+public:
     virtual ~WidgetsDockable();
 
-  public: // set/action
+public: // set/action
 //     virtual void setViewFocus( AbstractView *view ) = 0;
 
-  public: // get
+public: // get
     virtual QList<ToolViewDockWidget*> dockWidgets() const = 0;
 
-  public: // signal
+public: // signal
 //     virtual void viewFocusChanged( AbstractView *view ) = 0;
 };
 
@@ -57,6 +53,6 @@ inline WidgetsDockable::~WidgetsDockable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::WidgetsDockable, "org.kde.kasten.if.widgetsdockable/1.0" )
+Q_DECLARE_INTERFACE(Kasten::If::WidgetsDockable, "org.kde.kasten.if.widgetsdockable/1.0")
 
 #endif

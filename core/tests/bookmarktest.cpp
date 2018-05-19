@@ -29,43 +29,41 @@
 
 using namespace Okteta;
 
-
 static const int Offset1 = 7;
 static const int Offset2 = 23;
 
 void BookmarkTest::testSimpleConstructor()
 {
-  Bookmark bookmark;
+    Bookmark bookmark;
 
-  QVERIFY( !bookmark.isValid() );
+    QVERIFY(!bookmark.isValid());
 }
 
 void BookmarkTest::testConstructor()
 {
-  Bookmark bookmark( Offset1 );
+    Bookmark bookmark(Offset1);
 
-  QVERIFY( bookmark.isValid() );
-  QCOMPARE( bookmark.offset(), Offset1 );
+    QVERIFY(bookmark.isValid());
+    QCOMPARE(bookmark.offset(), Offset1);
 }
 
 void BookmarkTest::testCompare()
 {
-  Bookmark bookmark1( Offset1 );
-  Bookmark bookmark2( Offset1 );
-  Bookmark bookmark3( Offset2 );
+    Bookmark bookmark1(Offset1);
+    Bookmark bookmark2(Offset1);
+    Bookmark bookmark3(Offset2);
 
-  QVERIFY( bookmark1 == bookmark2 );
-  QVERIFY( !(bookmark1 == bookmark3) );
+    QVERIFY(bookmark1 == bookmark2);
+    QVERIFY(!(bookmark1 == bookmark3));
 }
 
 void BookmarkTest::testMove()
 {
-  Bookmark bookmark( Offset1 );
-  bookmark.move( Offset2 );
+    Bookmark bookmark(Offset1);
+    bookmark.move(Offset2);
 
-  QVERIFY( bookmark.isValid() );
-  QCOMPARE( bookmark.offset(), Offset1+Offset2 );
+    QVERIFY(bookmark.isValid());
+    QCOMPARE(bookmark.offset(), Offset1 + Offset2);
 }
 
-
-QTEST_MAIN( BookmarkTest )
+QTEST_MAIN(BookmarkTest)

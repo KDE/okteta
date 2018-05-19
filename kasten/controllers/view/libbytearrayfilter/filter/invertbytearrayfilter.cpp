@@ -27,29 +27,26 @@
 // KF5
 #include <KLocalizedString>
 
-
 InvertByteArrayFilter::InvertByteArrayFilter()
- : AbstractByteArrayFilter(
-     i18nc("name of the filter; it switches all bits from 0 to 1 and 1 to 0 respectivly, so 01111110 becomes 10000001",
-           "INVERT data") )
+    : AbstractByteArrayFilter(
+        i18nc("name of the filter; it switches all bits from 0 to 1 and 1 to 0 respectivly, so 01111110 becomes 10000001",
+              "INVERT data"))
 {}
 
-AbstractByteArrayFilterParameterSet *InvertByteArrayFilter::parameterSet() { return &mNoParameterSet; }
+AbstractByteArrayFilterParameterSet* InvertByteArrayFilter::parameterSet() { return &mNoParameterSet; }
 
-bool InvertByteArrayFilter::filter( Okteta::Byte* result,
-                                    Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const
+bool InvertByteArrayFilter::filter(Okteta::Byte* result,
+                                   Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
     int r = 0;
     Okteta::Address m = range.start();
     int nextBlockEnd = FilteredByteCountSignalLimit;
-    while( m <= range.end() )
-    {
-        result[r++] = ~model->byte( m++ );
+    while (m <= range.end()) {
+        result[r++] = ~model->byte(m++);
 
-        if( r >= nextBlockEnd )
-        {
+        if (r >= nextBlockEnd) {
             nextBlockEnd += FilteredByteCountSignalLimit;
-            emit filteredBytes( r );
+            emit filteredBytes(r);
         }
     }
 

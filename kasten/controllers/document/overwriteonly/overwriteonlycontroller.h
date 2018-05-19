@@ -34,27 +34,25 @@ class AbstractByteArrayModel;
 class KXMLGUIClient;
 class KToggleAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class OKTETAKASTENCONTROLLERS_EXPORT OverwriteOnlyController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit OverwriteOnlyController( KXMLGUIClient* guiClient );
+public:
+    explicit OverwriteOnlyController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
-    void setOverwriteOnly( bool isOverwriteOnly );
+private Q_SLOTS: // action slots
+    void setOverwriteOnly(bool isOverwriteOnly);
 
-  private:
-    Okteta::AbstractByteArrayModel *mByteArrayModel;
+private:
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 
-    KToggleAction *mSetOverwriteOnlyAction;
+    KToggleAction* mSetOverwriteOnlyAction;
 };
 
 }

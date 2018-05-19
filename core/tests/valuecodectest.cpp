@@ -28,9 +28,7 @@
 #include <QTest>
 #include <QBitArray>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 //---------------------------------------------------------------------------- Tests -----
 
@@ -51,16 +49,14 @@ static const ValueCodecDescription valueCodecDescriptions[] =
     {"BinaryByteCodec", BinaryCoding, 8, "01"}
 };
 static const int valueCodecDescriptionCount =
-    sizeof(valueCodecDescriptions)/sizeof(valueCodecDescriptions[0]);
-
+    sizeof(valueCodecDescriptions) / sizeof(valueCodecDescriptions[0]);
 
 void ValueCodecTest::testCreateCodec_data()
 {
     QTest::addColumn<int>("codecId");
     QTest::addColumn<uint>("encodingWidth");
 
-    for( int c = 0; c < valueCodecDescriptionCount; ++c )
-    {
+    for (int c = 0; c < valueCodecDescriptionCount; ++c) {
         const ValueCodecDescription& valueCodecDescription =
             valueCodecDescriptions[c];
 
@@ -75,10 +71,10 @@ void ValueCodecTest::testCreateCodec()
     QFETCH(int, codecId);
     QFETCH(uint, encodingWidth);
 
-    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
-    QVERIFY( codec != nullptr );
-    QCOMPARE( codec->encodingWidth(), encodingWidth );
+    QVERIFY(codec != nullptr);
+    QCOMPARE(codec->encodingWidth(), encodingWidth);
 
     delete codec;
 }
@@ -88,15 +84,13 @@ void ValueCodecTest::testEncodeDecode_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for( int c = 0; c < valueCodecDescriptionCount; ++c )
-    {
+    for (int c = 0; c < valueCodecDescriptionCount; ++c) {
         const ValueCodecDescription& valueCodecDescription =
             valueCodecDescriptions[c];
-        for( int j = 0; j < 256; ++j )
-        {
+        for (int j = 0; j < 256; ++j) {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
-                QString(QStringLiteral(" - %1")).arg( j );
+                QString(QStringLiteral(" - %1")).arg(j);
 
             QTest::newRow(rowTitle.toLatin1().constData())
                 << valueCodecDescription.id
@@ -110,16 +104,16 @@ void ValueCodecTest::testEncodeDecode()
     QFETCH(int, codecId);
     QFETCH(Byte, byte);
 
-    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
-    codec->encode( digits, 0, byte );
-    QCOMPARE( digits.length(), (int)codec->encodingWidth() );
+    codec->encode(digits, 0, byte);
+    QCOMPARE(digits.length(), (int)codec->encodingWidth());
 
     Byte decodedByte;
-    const int usedDigits = codec->decode( &decodedByte, digits, 0 );
-    QCOMPARE( usedDigits, digits.length() );
-    QCOMPARE( decodedByte, byte );
+    const int usedDigits = codec->decode(&decodedByte, digits, 0);
+    QCOMPARE(usedDigits, digits.length());
+    QCOMPARE(decodedByte, byte);
 
     delete codec;
 }
@@ -129,13 +123,11 @@ void ValueCodecTest::testEncodeShortDecode_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for( int c = 0; c < valueCodecDescriptionCount; ++c )
-    {
+    for (int c = 0; c < valueCodecDescriptionCount; ++c) {
         const ValueCodecDescription& valueCodecDescription =
             valueCodecDescriptions[c];
 
-        for( int j = 0; j < 256; ++j )
-        {
+        for (int j = 0; j < 256; ++j) {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
                 QString(QStringLiteral(" - %1")).arg(j);
@@ -152,17 +144,17 @@ void ValueCodecTest::testEncodeShortDecode()
     QFETCH(int, codecId);
     QFETCH(Byte, byte);
 
-    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
-    codec->encodeShort( digits, 0, byte );
-    QVERIFY( ! digits.isEmpty() );
-    QVERIFY( digits.length() <= (int)codec->encodingWidth() );
+    codec->encodeShort(digits, 0, byte);
+    QVERIFY(!digits.isEmpty());
+    QVERIFY(digits.length() <= (int)codec->encodingWidth());
 
     Byte decodedByte;
-    const int usedDigits = codec->decode( &decodedByte, digits, 0 );
-    QCOMPARE( usedDigits, digits.length() );
-    QCOMPARE( decodedByte, byte );
+    const int usedDigits = codec->decode(&decodedByte, digits, 0);
+    QCOMPARE(usedDigits, digits.length());
+    QCOMPARE(decodedByte, byte);
 
     delete codec;
 }
@@ -172,13 +164,11 @@ void ValueCodecTest::testAppendDigit_data()
     QTest::addColumn<int>("codecId");
     QTest::addColumn<Byte>("byte");
 
-    for( int c = 0; c < valueCodecDescriptionCount; ++c )
-    {
+    for (int c = 0; c < valueCodecDescriptionCount; ++c) {
         const ValueCodecDescription& valueCodecDescription =
             valueCodecDescriptions[c];
 
-        for( int j = 0; j < 256; ++j )
-        {
+        for (int j = 0; j < 256; ++j) {
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
                 QString(QStringLiteral(" - %1")).arg(j);
@@ -195,16 +185,17 @@ void ValueCodecTest::testAppendDigit()
     QFETCH(int, codecId);
     QFETCH(Byte, byte);
 
-    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
-    codec->encode( digits, 0, byte );
+    codec->encode(digits, 0, byte);
 
     Byte decodedByte = 0;
-    for( int i = 0; i < digits.length(); ++i )
-        codec->appendDigit( &decodedByte, digits[i].toLatin1() );
+    for (int i = 0; i < digits.length(); ++i) {
+        codec->appendDigit(&decodedByte, digits[i].toLatin1());
+    }
 
-    QCOMPARE( decodedByte, byte );
+    QCOMPARE(decodedByte, byte);
 
     delete codec;
 }
@@ -215,15 +206,12 @@ void ValueCodecTest::testRemoveLastDigit_data()
     QTest::addColumn<Byte>("byte");
     QTest::addColumn<uint>("removedDigitCount");
 
-    for( int c = 0; c < valueCodecDescriptionCount; ++c )
-    {
+    for (int c = 0; c < valueCodecDescriptionCount; ++c) {
         const ValueCodecDescription& valueCodecDescription =
             valueCodecDescriptions[c];
 
-        for( int b = 0; b < 256; ++b )
-        {
-            for( uint r = 1; r <= valueCodecDescription.encodingWidth; ++r )
-            {
+        for (int b = 0; b < 256; ++b) {
+            for (uint r = 1; r <= valueCodecDescription.encodingWidth; ++r) {
                 const QString rowTitle =
                     QLatin1String(valueCodecDescription.name) +
                     QString(QStringLiteral(" - %1 - removed last %2")).arg(b).arg(r);
@@ -243,20 +231,21 @@ void ValueCodecTest::testRemoveLastDigit()
     QFETCH(Byte, byte);
     QFETCH(uint, removedDigitCount);
 
-    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
     QString digits;
-    codec->encode( digits, 0, byte );
+    codec->encode(digits, 0, byte);
 
     Byte modifiedByte = byte;
-    for( uint i = 0; i < removedDigitCount; ++i )
-        codec->removeLastDigit( &modifiedByte );
+    for (uint i = 0; i < removedDigitCount; ++i) {
+        codec->removeLastDigit(&modifiedByte);
+    }
 
     QString modifiedDigits;
-    codec->encode( modifiedDigits, 0, modifiedByte );
+    codec->encode(modifiedDigits, 0, modifiedByte);
 
-    QVERIFY( digits.startsWith(modifiedDigits.mid(removedDigitCount)) );
-    QVERIFY( modifiedDigits.startsWith(QString(removedDigitCount,QLatin1Char('0'))) );
+    QVERIFY(digits.startsWith(modifiedDigits.mid(removedDigitCount)));
+    QVERIFY(modifiedDigits.startsWith(QString(removedDigitCount, QLatin1Char('0'))));
 
     delete codec;
 }
@@ -269,22 +258,21 @@ void ValueCodecTest::testIsValidDigit_data()
 
     static const int digitCount = 256;
 
-    for( int c = 0; c < valueCodecDescriptionCount; ++c )
-    {
+    for (int c = 0; c < valueCodecDescriptionCount; ++c) {
         const ValueCodecDescription& valueCodecDescription =
             valueCodecDescriptions[c];
 
-        QBitArray validnessPerDigitField = QBitArray( digitCount, false );
+        QBitArray validnessPerDigitField = QBitArray(digitCount, false);
         const QByteArray validDigits =
             QByteArray(valueCodecDescription.validDigits);
 
-        for( int j = 0; j < validDigits.count(); ++j )
-            validnessPerDigitField.setBit( validDigits[j], true );
+        for (int j = 0; j < validDigits.count(); ++j) {
+            validnessPerDigitField.setBit(validDigits[j], true);
+        }
 
-        for( int j = 0; j < validnessPerDigitField.count(); ++j )
-        {
-            const uchar digit = uchar( j );
-            const bool isValid = validnessPerDigitField.testBit( j );
+        for (int j = 0; j < validnessPerDigitField.count(); ++j) {
+            const uchar digit = uchar(j);
+            const bool isValid = validnessPerDigitField.testBit(j);
             const QString rowTitle =
                 QLatin1String(valueCodecDescription.name) +
                 QString(QStringLiteral(" - \"%1\" is ")).arg(QLatin1Char(digit)) +
@@ -304,13 +292,13 @@ void ValueCodecTest::testIsValidDigit()
     QFETCH(uchar, digit);
     QFETCH(bool, isValid);
 
-    ValueCodec* codec = ValueCodec::createCodec( (ValueCoding)codecId);
+    ValueCodec* codec = ValueCodec::createCodec((ValueCoding)codecId);
 
-    QCOMPARE( codec->isValidDigit(digit), isValid );
+    QCOMPARE(codec->isValidDigit(digit), isValid);
 
     delete codec;
 }
 
 }
 
-QTEST_GUILESS_MAIN( Okteta::ValueCodecTest )
+QTEST_GUILESS_MAIN(Okteta::ValueCodecTest)

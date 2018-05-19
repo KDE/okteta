@@ -39,14 +39,14 @@
 #include <QApplication>
 #include <QByteArray>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 FilterTool::FilterTool()
- : mByteArrayView( nullptr ), mByteArrayModel( nullptr ), mHasWritable( false )
+    : mByteArrayView(nullptr)
+    , mByteArrayModel(nullptr)
+    , mHasWritable(false)
 {
-    setObjectName( QStringLiteral( "BinaryFilter" ) );
+    setObjectName(QStringLiteral("BinaryFilter"));
 
     mFilterList = ByteArrayFilterFactory::createFilters();
 }
@@ -60,67 +60,67 @@ QString FilterTool::charCodecName() const
 
 bool FilterTool::hasWriteable() const { return mHasWritable; }
 
-AbstractByteArrayFilterParameterSet *FilterTool::parameterSet( int filterId )
+AbstractByteArrayFilterParameterSet* FilterTool::parameterSet(int filterId)
 {
-    AbstractByteArrayFilter *byteArrayFilter = mFilterList.at( filterId );
+    AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(filterId);
 
     return byteArrayFilter ? byteArrayFilter->parameterSet() : nullptr;
 }
 
-void FilterTool::setTargetModel( AbstractModel* model )
+void FilterTool::setTargetModel(AbstractModel* model)
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
-    ByteArrayDocument *document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    ByteArrayDocument* document =
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
-    const bool hasByteArray = ( mByteArrayModel && mByteArrayView );
+    const bool hasByteArray = (mByteArrayModel && mByteArrayView);
     QString newCharCodecName;
-    if( hasByteArray )
-    {
+    if (hasByteArray) {
         newCharCodecName = mByteArrayView->charCodingName();
-        connect( mByteArrayView, &ByteArrayView::hasSelectedDataChanged, this, &FilterTool::onApplyableChanged );
-        connect( mByteArrayView, &ByteArrayView::readOnlyChanged,        this, &FilterTool::onApplyableChanged );
-        connect( mByteArrayView, &ByteArrayView::charCodecChanged,
-                 this, &FilterTool::charCodecChanged );
+        connect(mByteArrayView, &ByteArrayView::hasSelectedDataChanged, this, &FilterTool::onApplyableChanged);
+        connect(mByteArrayView, &ByteArrayView::readOnlyChanged,        this, &FilterTool::onApplyableChanged);
+        connect(mByteArrayView, &ByteArrayView::charCodecChanged,
+                this, &FilterTool::charCodecChanged);
     }
 
     onApplyableChanged();
-    emit charCodecChanged( newCharCodecName );
+    emit charCodecChanged(newCharCodecName);
 }
 
-
-void FilterTool::filter( int filterId ) const
+void FilterTool::filter(int filterId) const
 {
-    AbstractByteArrayFilter *byteArrayFilter = mFilterList.at( filterId );
+    AbstractByteArrayFilter* byteArrayFilter = mFilterList.at(filterId);
 
-    if( byteArrayFilter )
-    {
+    if (byteArrayFilter) {
         const Okteta::AddressRange filteredSection = mByteArrayView->selection();
 
         QByteArray filterResult;
-        filterResult.resize( filteredSection.width() );
+        filterResult.resize(filteredSection.width());
 
-        QApplication::setOverrideCursor( Qt::WaitCursor );
+        QApplication::setOverrideCursor(Qt::WaitCursor);
 
-        FilterJob* filterJob = new FilterJob( byteArrayFilter, reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection );
+        FilterJob* filterJob = new FilterJob(byteArrayFilter, reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
         const bool success = filterJob->exec();
 
         QApplication::restoreOverrideCursor();
 
-        if( success )
-        {
-            Okteta::ChangesDescribable *changesDescribable =
-                qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
+        if (success) {
+            Okteta::ChangesDescribable* changesDescribable =
+                qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
-            if( changesDescribable )
-                changesDescribable->openGroupedChange( byteArrayFilter->name() );
-            mByteArrayModel->replace( filteredSection, filterResult );
-            if( changesDescribable )
+            if (changesDescribable) {
+                changesDescribable->openGroupedChange(byteArrayFilter->name());
+            }
+            mByteArrayModel->replace(filteredSection, filterResult);
+            if (changesDescribable) {
                 changesDescribable->closeGroupedChange();
+            }
         }
     }
 
@@ -129,18 +129,17 @@ void FilterTool::filter( int filterId ) const
 
 void FilterTool::onApplyableChanged()
 {
-    const bool newHasWriteable = ( mByteArrayModel && mByteArrayView
-                                   && !mByteArrayView->isReadOnly() && mByteArrayView->hasSelectedData() );
-    if( newHasWriteable != mHasWritable )
-    {
+    const bool newHasWriteable = (mByteArrayModel && mByteArrayView
+                                  && !mByteArrayView->isReadOnly() && mByteArrayView->hasSelectedData());
+    if (newHasWriteable != mHasWritable) {
         mHasWritable = newHasWriteable;
-        emit hasWriteableChanged( newHasWriteable );
+        emit hasWriteableChanged(newHasWriteable);
     }
 }
 
 FilterTool::~FilterTool()
 {
-    qDeleteAll( mFilterList );
+    qDeleteAll(mFilterList);
 }
 
 }

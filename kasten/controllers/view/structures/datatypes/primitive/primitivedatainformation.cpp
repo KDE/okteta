@@ -26,10 +26,11 @@
 
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {
-    if (column == (int) DataInformation::ColumnValue && fileLoaded)
+    if (column == (int) DataInformation::ColumnValue && fileLoaded) {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-    else
+    } else {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+    }
 }
 
 bool PrimitiveDataInformation::isPrimitive() const
@@ -62,7 +63,7 @@ BitCount64 PrimitiveDataInformation::childPosition(const DataInformation*, Oktet
 int PrimitiveDataInformation::indexOf(const DataInformation* const) const
 {
     Q_ASSERT(false);
-    return -1; 
+    return -1;
 }
 
 // The inline destructor makes the compiler unhappy
@@ -71,14 +72,16 @@ PrimitiveDataInformation::~PrimitiveDataInformation()
 }
 
 PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d)
-        : PrimitiveDataInformation(d), mValue(d.mValue->clone())
+    : PrimitiveDataInformation(d)
+    , mValue(d.mValue->clone())
 {
     mValue->setParent(this);
 }
 
 PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const QString& name,
-        PrimitiveDataInformation* valueType, DataInformation* parent)
-        : PrimitiveDataInformation(name, parent), mValue(valueType)
+                                                                 PrimitiveDataInformation* valueType, DataInformation* parent)
+    : PrimitiveDataInformation(name, parent)
+    , mValue(valueType)
 {
     Q_CHECK_PTR(valueType);
     mValue->setParent(this);
@@ -91,10 +94,10 @@ QScriptValue PrimitiveDataInformationWrapper::valueAsQScriptValue() const
 }
 
 qint64 PrimitiveDataInformationWrapper::readData(Okteta::AbstractByteArrayModel* input,
-        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
+                                                 Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
-    mValue->mHasBeenUpdated = true; //value does not get updated
+    Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
+    mValue->mHasBeenUpdated = true; // value does not get updated
     qint64 retVal = mValue->readData(input, address, bitsRemaining, bitOffset);
     mWasAbleToRead = mValue->wasAbleToRead();
     return retVal;
@@ -108,7 +111,7 @@ BitCount32 PrimitiveDataInformation::offset(unsigned int index) const
 }
 
 bool PrimitiveDataInformationWrapper::setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
-                                       Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
+                                              Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     return mValue->setData(value, out, address, bitsRemaining, bitOffset);
 }
@@ -143,7 +146,7 @@ void PrimitiveDataInformationWrapper::setValue(AllPrimitiveTypes newValue)
     mValue->setValue(newValue);
 }
 
-//classes derived from this are not true primitive types (they provide additional information)
+// classes derived from this are not true primitive types (they provide additional information)
 PrimitiveDataType PrimitiveDataInformationWrapper::type() const
 {
     return PrimitiveDataType::Invalid;

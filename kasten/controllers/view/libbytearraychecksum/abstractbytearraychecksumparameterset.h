@@ -23,18 +23,18 @@
 #ifndef ABSTRACTBYTEARRAYCHECKSUMPARAMETERSET_H
 #define ABSTRACTBYTEARRAYCHECKSUMPARAMETERSET_H
 
-
 class AbstractByteArrayChecksumParameterSet
 {
-  protected:
+protected:
     AbstractByteArrayChecksumParameterSet();
-  public:
+
+public:
     virtual ~AbstractByteArrayChecksumParameterSet();
 
-  public:
+public:
     virtual const char* id() const = 0;
 
-  protected:
+protected:
     class Private;
     Private* const d;
 };

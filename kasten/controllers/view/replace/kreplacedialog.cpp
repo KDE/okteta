@@ -34,53 +34,50 @@
 #include <QLayout>
 #include <QPushButton>
 
+namespace Kasten {
 
-namespace Kasten
+KReplaceDialog::KReplaceDialog(ReplaceTool* tool, QWidget* parent)
+    : KAbstractFindDialog(parent)
+    , mTool(tool)
 {
+    setWindowTitle(i18nc("@title:window", "Replace Bytes"));
 
-KReplaceDialog::KReplaceDialog( ReplaceTool* tool, QWidget* parent )
-  : KAbstractFindDialog( parent ),
-    mTool( tool )
-{
-    setWindowTitle( i18nc("@title:window","Replace Bytes") );
-
-    setFindButton( i18nc("@action;button", "&Replace"),
-                   QStringLiteral("edit-find-replace"),
-                   i18nc("@info:tooltip","Start replace"),
-                   xi18nc("@info:whatsthis",
-                          "If you press the <interface>Replace</interface> button, "
-                          "the bytes you entered above are searched for within "
-                          "the byte array and any occurrence is replaced with "
-                          "the replacement bytes.") );
+    setFindButton(i18nc("@action;button", "&Replace"),
+                  QStringLiteral("edit-find-replace"),
+                  i18nc("@info:tooltip", "Start replace"),
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Replace</interface> button, "
+                         "the bytes you entered above are searched for within "
+                         "the byte array and any occurrence is replaced with "
+                         "the replacement bytes."));
 
     setupFindBox();
 
     // replace term
-    QGroupBox *ReplaceBox = new QGroupBox( i18nc("@title:group","Replace With") );
+    QGroupBox* ReplaceBox = new QGroupBox(i18nc("@title:group", "Replace With"));
 
-    QVBoxLayout *ReplaceBoxLayout = new QVBoxLayout;
+    QVBoxLayout* ReplaceBoxLayout = new QVBoxLayout;
 
-    ReplaceDataEdit = new Okteta::ByteArrayComboBox( ReplaceBox );
+    ReplaceDataEdit = new Okteta::ByteArrayComboBox(ReplaceBox);
     const QString toolTip =
         i18nc("@info:tooltip",
               "Enter the bytes to replace with, or select bytes previously replaced with from the list.");
-    ReplaceDataEdit->setToolTip( toolTip );
+    ReplaceDataEdit->setToolTip(toolTip);
 
-    ReplaceBoxLayout->addWidget( ReplaceDataEdit );
+    ReplaceBoxLayout->addWidget(ReplaceDataEdit);
 
-    ReplaceBox->setLayout( ReplaceBoxLayout );
-    setupOperationBox( ReplaceBox );
+    ReplaceBox->setLayout(ReplaceBoxLayout);
+    setupOperationBox(ReplaceBox);
 
     //
-    PromptCheckBox = new QCheckBox( i18nc("@option:check","&Prompt on replace") );
-    PromptCheckBox->setWhatsThis( i18nc("@info:whatsthis","Ask before replacing each match found.") );
+    PromptCheckBox = new QCheckBox(i18nc("@option:check", "&Prompt on replace"));
+    PromptCheckBox->setWhatsThis(i18nc("@info:whatsthis", "Ask before replacing each match found."));
 
-    setupCheckBoxes( PromptCheckBox );
+    setupCheckBoxes(PromptCheckBox);
 
-    setFindButtonEnabled( false );
-    setModal( true );
+    setFindButtonEnabled(false);
+    setModal(true);
 }
-
 
 QByteArray KReplaceDialog::replaceData()  const
 {
@@ -92,12 +89,11 @@ bool KReplaceDialog::prompt() const
     return PromptCheckBox->isChecked();
 }
 
-void KReplaceDialog::setCharCodec( const QString &codecName )
+void KReplaceDialog::setCharCodec(const QString& codecName)
 {
-    ReplaceDataEdit->setCharCodec( codecName );
-    KAbstractFindDialog::setCharCodec( codecName );
+    ReplaceDataEdit->setCharCodec(codecName);
+    KAbstractFindDialog::setCharCodec(codecName);
 }
-
 
 void KReplaceDialog::onFindButtonClicked()
 {
@@ -105,20 +101,20 @@ void KReplaceDialog::onFindButtonClicked()
 
     rememberCurrentSettings();
 
-    mTool->setSearchData( data() );
-    mTool->setReplaceData( replaceData() );
-    mTool->setCaseSensitivity( caseSensitivity() );
-    mTool->setDoPrompt( prompt() );
+    mTool->setSearchData(data());
+    mTool->setReplaceData(replaceData());
+    mTool->setCaseSensitivity(caseSensitivity());
+    mTool->setDoPrompt(prompt());
 
-    mTool->replace( direction(), fromCursor(), inSelection() );
+    mTool->replace(direction(), fromCursor(), inSelection());
 }
 
-void KReplaceDialog::showEvent( QShowEvent* showEvent )
+void KReplaceDialog::showEvent(QShowEvent* showEvent)
 {
-    KAbstractFindDialog::showEvent( showEvent );
+    KAbstractFindDialog::showEvent(showEvent);
 
-    setInSelection( mTool->hasSelectedData() );
-    setCharCodec( mTool->charCodingName() );
+    setInSelection(mTool->hasSelectedData());
+    setCharCodec(mTool->charCodingName());
 }
 
 void KReplaceDialog::rememberCurrentSettings()

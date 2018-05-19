@@ -28,9 +28,7 @@
 
 template <class T> class QList;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class BookmarksConstIterator;
 class Bookmark;
@@ -38,35 +36,35 @@ class Bookmark;
 //
 class Bookmarkable
 {
-  public:
+public:
     virtual ~Bookmarkable();
 
-  public: // set/action
-    virtual void addBookmarks( const QList<Okteta::Bookmark> &bookmarks ) = 0;
-    virtual void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks ) = 0;
+public: // set/action
+    virtual void addBookmarks(const QList<Okteta::Bookmark>& bookmarks) = 0;
+    virtual void removeBookmarks(const QList<Okteta::Bookmark>& bookmarks) = 0;
     virtual void removeAllBookmarks() = 0;
-    virtual void setBookmark( unsigned int index, const Okteta::Bookmark& bookmark ) = 0;
+    virtual void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) = 0;
 
-  public: // get
+public: // get
     virtual Okteta::BookmarksConstIterator createBookmarksConstIterator() const = 0;
 //     virtual BookmarksMutableIterator createBookmarksMutableIterator() const = 0;
-    virtual const Okteta::Bookmark& bookmarkAt( unsigned int index ) const = 0;
-    virtual const Okteta::Bookmark& bookmarkFor( int offset ) const = 0;
-    virtual bool containsBookmarkFor( int offset ) const = 0;
+    virtual const Okteta::Bookmark& bookmarkAt(unsigned int index) const = 0;
+    virtual const Okteta::Bookmark& bookmarkFor(int offset) const = 0;
+    virtual bool containsBookmarkFor(int offset) const = 0;
     virtual unsigned int bookmarksCount() const = 0;
 
-  public: // signal
+public: // signal
     // TODO: use also QList<int> for added?
-    virtual void bookmarksAdded( const QList<Okteta::Bookmark> &bookmarks ) = 0;
-    virtual void bookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks ) = 0;
-    virtual void bookmarksModified( const QList<int>& indizes ) = 0;
-    virtual void bookmarksModified( bool modified ) = 0;
+    virtual void bookmarksAdded(const QList<Okteta::Bookmark>& bookmarks) = 0;
+    virtual void bookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks) = 0;
+    virtual void bookmarksModified(const QList<int>& indizes) = 0;
+    virtual void bookmarksModified(bool modified) = 0;
 };
 
 inline Bookmarkable::~Bookmarkable() {}
 
 }
 
-Q_DECLARE_INTERFACE( Okteta::Bookmarkable, "org.kde.khecore.bookmarkable/1.0" )
+Q_DECLARE_INTERFACE(Okteta::Bookmarkable, "org.kde.khecore.bookmarkable/1.0")
 
 #endif

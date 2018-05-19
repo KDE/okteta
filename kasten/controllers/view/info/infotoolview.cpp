@@ -26,12 +26,10 @@
 #include "infoview.h"
 #include "infotool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-InfoToolView::InfoToolView( InfoTool* tool )
- : mWidget( new InfoView(tool) )
+InfoToolView::InfoToolView(InfoTool* tool)
+    : mWidget(new InfoView(tool))
 {
 }
 

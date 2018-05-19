@@ -32,39 +32,36 @@
 class QDragMoveEvent;
 class QDropEvent;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SingleViewAreaPrivate : public AbstractViewAreaPrivate
 {
-  public:
-    explicit SingleViewAreaPrivate( SingleViewArea* parent );
+public:
+    explicit SingleViewAreaPrivate(SingleViewArea* parent);
 
     ~SingleViewAreaPrivate() override;
 
-  public:
+public:
     void init();
 
-  public: // AbstractViewArea API
+public: // AbstractViewArea API
     void setFocus();
     QWidget* widget() const;
     bool hasFocus() const;
 
-  public: // If::ToolInlineViewable API
-    void setCurrentToolInlineView( AbstractToolInlineView* view );
+public: // If::ToolInlineViewable API
+    void setCurrentToolInlineView(AbstractToolInlineView* view);
 
-  public:
-    void setView( AbstractView* view );
+public:
+    void setView(AbstractView* view);
 
-  protected:
-    Q_DECLARE_PUBLIC( SingleViewArea )
+protected:
+    Q_DECLARE_PUBLIC(SingleViewArea)
 
-  protected:
+protected:
     ViewAreaBox* mViewAreaBox;
     AbstractView* mCurrentView;
 };
-
 
 inline QWidget* SingleViewAreaPrivate::widget()  const { return mViewAreaBox; }
 inline bool SingleViewAreaPrivate::hasFocus()    const

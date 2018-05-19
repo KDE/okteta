@@ -44,13 +44,13 @@ QIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)
 
 QVariant ScriptLogger::data(const QModelIndex& index, int role) const
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return QVariant();
+    }
     int row = index.row();
     Q_ASSERT(row < mData.size());
     Q_ASSERT(!index.parent().isValid());
-    if (role == Qt::DisplayRole)
-    {
+    if (role == Qt::DisplayRole) {
         const Data& data = mData.at(row);
         switch (index.column())
         {
@@ -64,15 +64,17 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
             return QVariant();
         }
     }
-    if (role == Qt::DecorationRole && index.column() == ColumnTime)
+    if (role == Qt::DecorationRole && index.column() == ColumnTime) {
         return iconForLevel(mData.at(row).level);
+    }
     return QVariant();
 }
 
 int ScriptLogger::rowCount(const QModelIndex& parent) const
 {
-    if (parent.isValid())
+    if (parent.isValid()) {
         return 0;
+    }
     return mData.size();
 }
 
@@ -84,8 +86,7 @@ int ScriptLogger::columnCount(const QModelIndex& parent) const
 
 QVariant ScriptLogger::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
-    {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         switch (section)
         {
         case ColumnTime:
@@ -104,16 +105,18 @@ QVariant ScriptLogger::headerData(int section, Qt::Orientation orientation, int 
 QDebug ScriptLogger::log(LogLevel level, const DataInformation* origin)
 {
     Q_CHECK_PTR(origin);
-    if (origin->loggedData() < level)
+    if (origin->loggedData() < level) {
         origin->setLoggedData(level);
+    }
     return log(level, origin->fullObjectPath());
 }
 
 QDebug ScriptLogger::log(LogLevel level, const QString& origin)
 {
     Q_ASSERT(level != LogInvalid);
-    if (mLogToStdOut)
+    if (mLogToStdOut) {
         return (level == LogInvalid || level == LogInfo) ? qDebug() : qWarning();
+    }
 
     beginInsertRows(QModelIndex(), mData.size(), mData.size());
     mData.append(Data(level, origin));
@@ -129,7 +132,7 @@ void ScriptLogger::clear()
 }
 
 ScriptLogger::ScriptLogger()
-        : mLogToStdOut(false)
+    : mLogToStdOut(false)
 {
 }
 
@@ -140,11 +143,12 @@ ScriptLogger::~ScriptLogger()
 QStringList ScriptLogger::messages(LogLevel minLevel) const
 {
     QStringList ret;
-    for (int i = 0; i < mData.size(); ++i)
-    {
+    for (int i = 0; i < mData.size(); ++i) {
         const Data& d = mData.at(i);
-        if (d.level >= minLevel)
+        if (d.level >= minLevel) {
             ret << d.message;
+        }
     }
+
     return ret;
 }

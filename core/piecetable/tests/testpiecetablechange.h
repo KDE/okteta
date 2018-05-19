@@ -29,29 +29,27 @@
 // Qt
 #include <QString>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 class TestPieceTableChange : public AbstractPieceTableChange
 {
-  public:
-    TestPieceTableChange( int typeId = -1, const QString& description = QString(),
-                          int position = 0, int storagePosition = 0, int storageId = Piece::ChangeStorage,
-                          int replacedStoragePosition = 0, int replacedStorageId = Piece::ChangeStorage );
+public:
+    TestPieceTableChange(int typeId = -1, const QString& description = QString(),
+                         int position = 0, int storagePosition = 0, int storageId = Piece::ChangeStorage,
+                         int replacedStoragePosition = 0, int replacedStorageId = Piece::ChangeStorage);
 
     ~TestPieceTableChange() override;
 
-  public: // AbstractPieceTableChange API
+public: // AbstractPieceTableChange API
     int type() const override;
     QString description() const override;
-    bool merge( const AbstractPieceTableChange* other ) override;
-    AddressRange apply( PieceTable* pieceTable ) const override;
-    AddressRange revert( PieceTable* pieceTable ) const override;
+    bool merge(const AbstractPieceTableChange* other) override;
+    AddressRange apply(PieceTable* pieceTable) const override;
+    AddressRange revert(PieceTable* pieceTable) const override;
     ArrayChangeMetrics metrics() const override;
     int dataSize() const override;
 
-  protected:
+protected:
     int mTypeId;
     QString mDescription;
     int mPosition;
@@ -62,12 +60,16 @@ class TestPieceTableChange : public AbstractPieceTableChange
     int mReplacedStorageId;
 };
 
-inline TestPieceTableChange::TestPieceTableChange( int typeId, const QString& description,
-                                                   int position, int storagePosition, int storageId,
-                                                   int replacedStoragePosition, int replacedStorageId )
- : mTypeId( typeId ), mDescription( description),
-   mPosition( position ), mStoragePosition( storagePosition ), mStorageId( storageId ),
-   mReplacedStoragePosition( replacedStoragePosition ), mReplacedStorageId( replacedStorageId )
+inline TestPieceTableChange::TestPieceTableChange(int typeId, const QString& description,
+                                                  int position, int storagePosition, int storageId,
+                                                  int replacedStoragePosition, int replacedStorageId)
+    : mTypeId(typeId)
+    , mDescription(description)
+    , mPosition(position)
+    , mStoragePosition(storagePosition)
+    , mStorageId(storageId)
+    , mReplacedStoragePosition(replacedStoragePosition)
+    , mReplacedStorageId(replacedStorageId)
 {}
 
 }

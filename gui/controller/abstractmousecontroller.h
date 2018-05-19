@@ -25,25 +25,25 @@
 
 class QMouseEvent;
 
-namespace Okteta
-{
+namespace Okteta {
 
 class AbstractByteArrayView;
 
 class AbstractMouseController
 {
-  protected:
-    AbstractMouseController( AbstractByteArrayView* view, AbstractMouseController* parent );
-  public:
+protected:
+    AbstractMouseController(AbstractByteArrayView* view, AbstractMouseController* parent);
+
+public:
     virtual ~AbstractMouseController();
 
-  public: // API to be implemented
-    virtual bool handleMousePressEvent( QMouseEvent* mouseEvent );
-    virtual bool handleMouseMoveEvent( QMouseEvent* mouseEvent );
-    virtual bool handleMouseReleaseEvent( QMouseEvent* mouseEvent );
-    virtual bool handleMouseDoubleClickEvent( QMouseEvent* mouseEvent );
+public: // API to be implemented
+    virtual bool handleMousePressEvent(QMouseEvent* mouseEvent);
+    virtual bool handleMouseMoveEvent(QMouseEvent* mouseEvent);
+    virtual bool handleMouseReleaseEvent(QMouseEvent* mouseEvent);
+    virtual bool handleMouseDoubleClickEvent(QMouseEvent* mouseEvent);
 
-  protected:
+protected:
     AbstractMouseController* mParent;
     AbstractByteArrayView* mView;
 };

@@ -25,65 +25,62 @@
 // Qt
 #include <QTextStream>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel *byteArrayModel, Okteta::Address offset, const Okteta::CoordRange& coordRange,
-    int noOfBytesPerLine )
- : mByteArrayModel( byteArrayModel ),
-   mCoordRange( coordRange ),
-   mNoOfBytesPerLine( noOfBytesPerLine ),
-   mOffset( offset ),
-   mNoOfCharsPerLine( 0 ),
-   mLinePositions( new int[mNoOfBytesPerLine] )
+AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset, const Okteta::CoordRange& coordRange,
+                                                                         int noOfBytesPerLine)
+    : mByteArrayModel(byteArrayModel)
+    , mCoordRange(coordRange)
+    , mNoOfBytesPerLine(noOfBytesPerLine)
+    , mOffset(offset)
+    , mNoOfCharsPerLine(0)
+    , mLinePositions(new int[mNoOfBytesPerLine])
 {
 }
 
-void AbstractByteArrayColumnTextRenderer::setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes )
+void AbstractByteArrayColumnTextRenderer::setWidths(int byteWidth, int byteSpacingWidth, int noOfGroupedBytes)
 {
     // TODO: remove this hack and make it more general
-    if( byteSpacingWidth > 0 )
+    if (byteSpacingWidth > 0) {
         byteSpacingWidth = DefaultTRByteSpacingWidth;
+    }
 
-    int spacingTrigger = noOfGroupedBytes-1;
-    if( spacingTrigger < 0 )
+    int spacingTrigger = noOfGroupedBytes - 1;
+    if (spacingTrigger < 0) {
         spacingTrigger = mNoOfBytesPerLine; // ensures to never trigger the group spacing
 
+    }
     int N = 0;
     int p = 0;
     int gs = 0;
-    int *P = mLinePositions;
-    for( ; P<&mLinePositions[mNoOfBytesPerLine]; ++P, ++p, ++gs )
-    {
+    int* P = mLinePositions;
+    for (; P < &mLinePositions[mNoOfBytesPerLine]; ++P, ++p, ++gs) {
         *P = N;
         N += byteWidth;
 
         // is there a space behind the actual byte (if it is not the last)?
-        if( gs == spacingTrigger )
-        {
+        if (gs == spacingTrigger) {
             N += TRGroupSpacingWidth;
             gs = -1;
-        }
-        else
+        } else {
             N += byteSpacingWidth;
+        }
     }
-    N -= (gs==0)?TRGroupSpacingWidth:byteSpacingWidth;
+
+    N -= (gs == 0) ? TRGroupSpacingWidth : byteSpacingWidth;
 
     mNoOfCharsPerLine = N;
 }
 
-
-void AbstractByteArrayColumnTextRenderer::renderFirstLine( QTextStream *stream, int lineIndex ) const
+void AbstractByteArrayColumnTextRenderer::renderFirstLine(QTextStream* stream, int lineIndex) const
 {
     mRenderLine = lineIndex;
-    renderLine( stream, false );
+    renderLine(stream, false);
 }
 
-
-void AbstractByteArrayColumnTextRenderer::renderNextLine( QTextStream* stream, bool isSubline ) const
+void AbstractByteArrayColumnTextRenderer::renderNextLine(QTextStream* stream, bool isSubline) const
 {
-    renderLine( stream, isSubline );
+    renderLine(stream, isSubline);
 }
 
 AbstractByteArrayColumnTextRenderer::~AbstractByteArrayColumnTextRenderer()

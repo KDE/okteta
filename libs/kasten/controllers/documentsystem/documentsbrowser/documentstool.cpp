@@ -28,19 +28,18 @@
 // KF5
 #include <KLocalizedString>
 
+namespace Kasten {
 
-namespace Kasten
+DocumentsTool::DocumentsTool(DocumentManager* documentManager)
+    : mDocumentManager(documentManager)
+    , mFocussedDocument(nullptr)
 {
+    setObjectName(QStringLiteral("Documents"));
 
-DocumentsTool::DocumentsTool( DocumentManager* documentManager )
- : mDocumentManager( documentManager ), mFocussedDocument( nullptr )
-{
-    setObjectName( QStringLiteral( "Documents" ) );
-
-    connect( mDocumentManager, &DocumentManager::added,
-             this, &DocumentsTool::documentsAdded );
-    connect( mDocumentManager, &DocumentManager::closing,
-             this, &DocumentsTool::documentsClosing );
+    connect(mDocumentManager, &DocumentManager::added,
+            this, &DocumentsTool::documentsAdded);
+    connect(mDocumentManager, &DocumentManager::closing,
+            this, &DocumentsTool::documentsClosing);
 }
 
 QList<AbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }
@@ -48,16 +47,15 @@ QList<AbstractDocument*> DocumentsTool::documents() const { return mDocumentMana
 QString DocumentsTool::title() const { return i18nc("@title:window", "Documents"); }
 
 // TODO: this is an abuse of setTargetModel. Find other way to get focused model
-void DocumentsTool::setTargetModel( AbstractModel* model )
+void DocumentsTool::setTargetModel(AbstractModel* model)
 {
     mFocussedDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
-    emit focussedDocumentChanged( mFocussedDocument );
+    emit focussedDocumentChanged(mFocussedDocument);
 }
 
-
-void DocumentsTool::setFocussedDocument( AbstractDocument* document )
+void DocumentsTool::setFocussedDocument(AbstractDocument* document)
 {
-    mDocumentManager->requestFocus( document );
+    mDocumentManager->requestFocus(document);
 }
 
 DocumentsTool::~DocumentsTool() {}

@@ -33,70 +33,70 @@
 #include <QCheckBox>
 #include <QLineEdit>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderConfigEditor( ByteArraySourceCodeStreamEncoder* encoder, QWidget* parent )
- : AbstractModelStreamEncoderConfigEditor( parent ),
-   mEncoder( encoder )
+ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderConfigEditor(ByteArraySourceCodeStreamEncoder* encoder, QWidget* parent)
+    : AbstractModelStreamEncoderConfigEditor(parent)
+    , mEncoder(encoder)
 {
     mSettings = mEncoder->settings();
 
-    QFormLayout* pageLayout = new QFormLayout( this );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout(this);
+    pageLayout->setMargin(0);
 
     // variable name
     const QString variableNameLabel =
-        i18nc( "@label:textbox name of the created variable",
-               "Name of variable:" );
+        i18nc("@label:textbox name of the created variable",
+              "Name of variable:");
 
-    mVariableNameEdit = new QLineEdit( this );
-    mVariableNameEdit->setClearButtonEnabled( true );
-    mVariableNameEdit->setText( mSettings.variableName );
-    connect( mVariableNameEdit, &QLineEdit::textChanged, this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( variableNameLabel, mVariableNameEdit );
+    mVariableNameEdit = new QLineEdit(this);
+    mVariableNameEdit->setClearButtonEnabled(true);
+    mVariableNameEdit->setText(mSettings.variableName);
+    connect(mVariableNameEdit, &QLineEdit::textChanged, this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(variableNameLabel, mVariableNameEdit);
 
     // items per line
     const QString itemsPerLineLabel =
-        i18nc( "@label:textbox to define after how many items the list is wrapped",
-               "Items per line:" );
+        i18nc("@label:textbox to define after how many items the list is wrapped",
+              "Items per line:");
 
-    mItemsPerLineEdit = new QSpinBox( this );
-    mItemsPerLineEdit->setMinimum( 1 );
-    mItemsPerLineEdit->setValue( mSettings.elementsPerLine );
-    connect( mItemsPerLineEdit, QOverload<int>::of(&QSpinBox::valueChanged),
-             this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( itemsPerLineLabel, mItemsPerLineEdit );
+    mItemsPerLineEdit = new QSpinBox(this);
+    mItemsPerLineEdit->setMinimum(1);
+    mItemsPerLineEdit->setValue(mSettings.elementsPerLine);
+    connect(mItemsPerLineEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(itemsPerLineLabel, mItemsPerLineEdit);
 
     // data type
     const QString dataTypeLabel =
-        i18nc( "@label:listbox the type of the data: char, integer, etc.",
-               "Data type:" );
+        i18nc("@label:listbox the type of the data: char, integer, etc.",
+              "Data type:");
 
-    mDataTypeSelect = new KComboBox( this );
+    mDataTypeSelect = new KComboBox(this);
     const char* const* dataTypeNames = mEncoder->dataTypeNames();
     const int dataTypesCount = mEncoder->dataTypesCount();
     QStringList dataTypeNameStrings;
     dataTypeNameStrings.reserve(dataTypesCount);
-    for( int i=0; i<dataTypesCount; ++i )
+    for (int i = 0; i < dataTypesCount; ++i) {
         dataTypeNameStrings << QLatin1String(dataTypeNames[i]);
-    mDataTypeSelect->addItems( dataTypeNameStrings );
-    mDataTypeSelect->setCurrentIndex( static_cast<int>(mSettings.dataType) );
-    connect( mDataTypeSelect, QOverload<int>::of(&KComboBox::activated),
-             this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( dataTypeLabel, mDataTypeSelect );
+    }
+
+    mDataTypeSelect->addItems(dataTypeNameStrings);
+    mDataTypeSelect->setCurrentIndex(static_cast<int>(mSettings.dataType));
+    connect(mDataTypeSelect, QOverload<int>::of(&KComboBox::activated),
+            this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(dataTypeLabel, mDataTypeSelect);
 
     // unsigned as hexadezimal
     const QString unsignedAsHexadecimalLabel =
-        i18nc( "@option:check Encode the values in hexadecimal instead of decimal, "
-               "if the datatype has the property Unsigned",
-               "Unsigned as hexadecimal:" );
+        i18nc("@option:check Encode the values in hexadecimal instead of decimal, "
+              "if the datatype has the property Unsigned",
+              "Unsigned as hexadecimal:");
 
-    mUnsignedAsHexadecimalCheck = new QCheckBox( this );
-    mUnsignedAsHexadecimalCheck->setChecked( mSettings.unsignedAsHexadecimal );
-    connect( mUnsignedAsHexadecimalCheck, &QCheckBox::toggled, this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( unsignedAsHexadecimalLabel, mUnsignedAsHexadecimalCheck );
+    mUnsignedAsHexadecimalCheck = new QCheckBox(this);
+    mUnsignedAsHexadecimalCheck->setChecked(mSettings.unsignedAsHexadecimal);
+    connect(mUnsignedAsHexadecimalCheck, &QCheckBox::toggled, this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(unsignedAsHexadecimalLabel, mUnsignedAsHexadecimalCheck);
 }
 
 bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
@@ -106,7 +106,7 @@ bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
 
 AbstractSelectionView* ByteArraySourceCodeStreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArrayTextStreamEncoderPreview( mEncoder );
+    return new ByteArrayTextStreamEncoderPreview(mEncoder);
 }
 
 void ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged()
@@ -115,7 +115,7 @@ void ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.elementsPerLine = mItemsPerLineEdit->value();
     mSettings.dataType = static_cast<SourceCodeStreamEncoderSettings::PrimitiveDataType>(mDataTypeSelect->currentIndex());
     mSettings.unsignedAsHexadecimal = mUnsignedAsHexadecimalCheck->isChecked();
-    mEncoder->setSettings( mSettings );
+    mEncoder->setSettings(mSettings);
 }
 
 ByteArraySourceCodeStreamEncoderConfigEditor::~ByteArraySourceCodeStreamEncoderConfigEditor()

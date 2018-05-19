@@ -32,23 +32,22 @@ namespace Okteta {
 class ValueCodec;
 }
 
-namespace Kasten
-{
+namespace Kasten {
 
 class ValueByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
-  public:
-    ValueByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
-        const Okteta::CoordRange& coordRange,
-        int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        Okteta::ValueCoding valueCoding );
+public:
+    ValueByteArrayColumnTextRenderer(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+                                     const Okteta::CoordRange& coordRange,
+                                     int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
+                                     Okteta::ValueCoding valueCoding);
 
     ~ValueByteArrayColumnTextRenderer() override;
 
-  protected: // AbstractByteArrayColumnTextRenderer API
-    void renderLine( QTextStream* stream, bool isSubline ) const override;
+protected: // AbstractByteArrayColumnTextRenderer API
+    void renderLine(QTextStream* stream, bool isSubline) const override;
 
-  protected:
+protected:
     const Okteta::ValueCodec* mValueCodec;
 };
 

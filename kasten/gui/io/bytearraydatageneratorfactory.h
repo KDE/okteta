@@ -26,20 +26,17 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.h>
 
-template<class T> class QList;
+template <class T> class QList;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelDataGenerator;
-
 
 class OKTETAKASTENGUI_EXPORT ByteArrayDataGeneratorFactory
 {
-  private:
+private:
     ByteArrayDataGeneratorFactory();
 
-  public:
+public:
     static QList<AbstractModelDataGenerator*> createDataGenerators();
 };
 

@@ -32,70 +32,68 @@
 #include <QVector>
 #include <QIcon>
 
+namespace Kasten {
 
-namespace Kasten
+ViewProfileTableModel::ViewProfileTableModel(const ByteArrayViewProfileManager* viewProfileManager,
+                                             QObject* parent)
+    : QAbstractTableModel(parent)
+    , mViewProfileManager(viewProfileManager)
 {
-
-ViewProfileTableModel::ViewProfileTableModel( const ByteArrayViewProfileManager* viewProfileManager,
-                                              QObject* parent )
-  : QAbstractTableModel( parent )
-  , mViewProfileManager( viewProfileManager )
-{
-    connect( viewProfileManager, &ByteArrayViewProfileManager::viewProfilesChanged,
-             this, &ViewProfileTableModel::onViewProfilesChanged );
-    connect( viewProfileManager, &ByteArrayViewProfileManager::viewProfilesRemoved,
-             this, &ViewProfileTableModel::onViewProfilesChanged );
-    connect( viewProfileManager, &ByteArrayViewProfileManager::defaultViewProfileChanged,
-             this, &ViewProfileTableModel::onDefaultIndexChanged );
-    connect( viewProfileManager, &ByteArrayViewProfileManager::viewProfilesLocked,
-             this, &ViewProfileTableModel::onViewProfilesChanged );
-    connect( viewProfileManager, &ByteArrayViewProfileManager::viewProfilesUnlocked,
-             this, &ViewProfileTableModel::onViewProfileLocksChanged );
+    connect(viewProfileManager, &ByteArrayViewProfileManager::viewProfilesChanged,
+            this, &ViewProfileTableModel::onViewProfilesChanged);
+    connect(viewProfileManager, &ByteArrayViewProfileManager::viewProfilesRemoved,
+            this, &ViewProfileTableModel::onViewProfilesChanged);
+    connect(viewProfileManager, &ByteArrayViewProfileManager::defaultViewProfileChanged,
+            this, &ViewProfileTableModel::onDefaultIndexChanged);
+    connect(viewProfileManager, &ByteArrayViewProfileManager::viewProfilesLocked,
+            this, &ViewProfileTableModel::onViewProfilesChanged);
+    connect(viewProfileManager, &ByteArrayViewProfileManager::viewProfilesUnlocked,
+            this, &ViewProfileTableModel::onViewProfileLocksChanged);
 }
 
-int ViewProfileTableModel::rowCount( const QModelIndex &parent ) const
+int ViewProfileTableModel::rowCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid() ) ? mViewProfileManager->viewProfilesCount() : 0;
+    return (!parent.isValid()) ? mViewProfileManager->viewProfilesCount() : 0;
 }
 
-int ViewProfileTableModel::columnCount( const QModelIndex &parent ) const
+int ViewProfileTableModel::columnCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? NoOfColumnIds : 0;
+    return (!parent.isValid()) ? NoOfColumnIds : 0;
 }
 
-QVariant ViewProfileTableModel::data( const QModelIndex &index, int role ) const
+QVariant ViewProfileTableModel::data(const QModelIndex& index, int role) const
 {
     QVariant result;
-    switch( role )
+    switch (role)
     {
     case Qt::DisplayRole:
     {
         const int viewProfileIndex = index.row();
 
         const int tableColumn = index.column();
-        switch( tableColumn )
+        switch (tableColumn)
         {
-            case NameColumnId:
-            {
-                result = mViewProfileManager->viewProfiles().at(viewProfileIndex).viewProfileTitle();
-                break;
-            }
-            default:
-                ;
+        case NameColumnId:
+        {
+            result = mViewProfileManager->viewProfiles().at(viewProfileIndex).viewProfileTitle();
+            break;
+        }
+        default:
+            ;
         }
         break;
     }
     case Qt::DecorationRole:
     {
         const int tableColumn = index.column();
-        if( tableColumn == CurrentColumnId )
-        {
+        if (tableColumn == CurrentColumnId) {
             const int viewProfileIndex = index.row();
             const ByteArrayViewProfile::Id viewProfileId =
                 mViewProfileManager->viewProfiles().at(viewProfileIndex).id();
 
-            if( mViewProfileManager->defaultViewProfileId() == viewProfileId )
-                result = QIcon::fromTheme( QStringLiteral("arrow-right") );
+            if (mViewProfileManager->defaultViewProfileId() == viewProfileId) {
+                result = QIcon::fromTheme(QStringLiteral("arrow-right"));
+            }
         }
         break;
     }
@@ -105,11 +103,10 @@ QVariant ViewProfileTableModel::data( const QModelIndex &index, int role ) const
         const ByteArrayViewProfile::Id viewProfileId =
             mViewProfileManager->viewProfiles().at(viewProfileIndex).id();
 
-        if( mViewProfileManager->isViewProfileLocked(viewProfileId) )
-        {
+        if (mViewProfileManager->isViewProfileLocked(viewProfileId)) {
             const QPalette& palette = QApplication::palette();
-            const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
-            result = colorScheme.foreground( KColorScheme::InactiveText );
+            const KColorScheme colorScheme(palette.currentColorGroup(), KColorScheme::View);
+            result = colorScheme.foreground(KColorScheme::InactiveText);
         }
         break;
     }
@@ -119,7 +116,7 @@ QVariant ViewProfileTableModel::data( const QModelIndex &index, int role ) const
 }
 
 ByteArrayViewProfile::Id
-ViewProfileTableModel::viewProfileId( const QModelIndex& index ) const
+ViewProfileTableModel::viewProfileId(const QModelIndex& index) const
 {
     const int viewProfileIndex = index.row();
     const bool isValidIndex =
@@ -129,16 +126,14 @@ ViewProfileTableModel::viewProfileId( const QModelIndex& index ) const
 }
 
 int
-ViewProfileTableModel::row( const ByteArrayViewProfile::Id& viewProfileId ) const
+ViewProfileTableModel::row(const ByteArrayViewProfile::Id& viewProfileId) const
 {
     int result = -1;
 
     const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const int viewProfilesCount = viewProfiles.count();
-    for( int i = 0; i< viewProfilesCount; ++i )
-    {
-        if( viewProfileId == viewProfiles.at( i ).id() )
-        {
+    for (int i = 0; i < viewProfilesCount; ++i) {
+        if (viewProfileId == viewProfiles.at(i).id()) {
             result = i;
             break;
         }
@@ -147,12 +142,11 @@ ViewProfileTableModel::row( const ByteArrayViewProfile::Id& viewProfileId ) cons
     return result;
 }
 
-
 void ViewProfileTableModel::onDefaultIndexChanged()
 {
     // simply reset the whole column, does not happen often and not worth to cache the old default
-    emit dataChanged( index(CurrentColumnId, 0),
-                      index(CurrentColumnId, mViewProfileManager->viewProfiles().count()-1) );
+    emit dataChanged(index(CurrentColumnId, 0),
+        index(CurrentColumnId, mViewProfileManager->viewProfiles().count() - 1));
 }
 
 void ViewProfileTableModel::onViewProfilesChanged()
@@ -161,17 +155,17 @@ void ViewProfileTableModel::onViewProfilesChanged()
     endResetModel();
 }
 
-void ViewProfileTableModel::onViewProfileLocksChanged(const QList<ByteArrayViewProfile::Id>& viewProfileIds )
+void ViewProfileTableModel::onViewProfileLocksChanged(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const int viewProfilesCount = viewProfiles.count();
-    for( int i = 0; i< viewProfilesCount; ++i )
-    {
-        const ByteArrayViewProfile::Id viewProfileId = viewProfiles.at( i ).id();
+    for (int i = 0; i < viewProfilesCount; ++i) {
+        const ByteArrayViewProfile::Id viewProfileId = viewProfiles.at(i).id();
 
-        if( viewProfileIds.contains(viewProfileId) )
-            emit dataChanged( index(CurrentColumnId, i),
-                              index(NameColumnId,    i) );
+        if (viewProfileIds.contains(viewProfileId)) {
+            emit dataChanged(index(CurrentColumnId, i),
+                index(NameColumnId,    i));
+        }
     }
 }
 

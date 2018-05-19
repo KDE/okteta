@@ -29,48 +29,45 @@
 class QUrl;
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModel;
 class AbstractModelSelection;
 
 class AbstractFileSystemExportJobPrivate;
 
-
 class KASTENCORE_EXPORT AbstractFileSystemExportJob : public AbstractExportJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    AbstractFileSystemExportJob( AbstractFileSystemExportJobPrivate* d );
+protected:
+    AbstractFileSystemExportJob(AbstractFileSystemExportJobPrivate* d);
 
-  public:
-    AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
-                                 const QUrl& url );
+public:
+    AbstractFileSystemExportJob(AbstractModel* model, const AbstractModelSelection* selection,
+                                const QUrl& url);
 
     ~AbstractFileSystemExportJob() override;
 
-  public: // KJob API
+public: // KJob API
     void start() override;
 
-  protected: // API to be implemented
+protected: // API to be implemented
     virtual void startExportToFile() = 0;
 
-  protected:
-    void completeExport( bool success );
+protected:
+    void completeExport(bool success);
 
-  protected:
+protected:
     AbstractModel* model() const;
     const AbstractModelSelection* selection() const;
     QFile* file() const;
 
-  protected:
-    Q_PRIVATE_SLOT( d_func(), void exportToFile() )
+protected:
+    Q_PRIVATE_SLOT(d_func(), void exportToFile())
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractFileSystemExportJob )
+protected:
+    Q_DECLARE_PRIVATE(AbstractFileSystemExportJob)
 };
 
 }

@@ -27,42 +27,39 @@
 #include "abstractfilesystemexportjob_p.h"
 #include "modelencoderfilesystemexportjob.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ModelEncoderFileSystemExportJobPrivate : public AbstractFileSystemExportJobPrivate
 {
-  public:
-    ModelEncoderFileSystemExportJobPrivate( ModelEncoderFileSystemExportJob* parent,
-                                            AbstractModel* model,
-                                            const AbstractModelSelection* selection,
-                                            const QUrl& url,
-                                            AbstractModelStreamEncoder* encoder );
+public:
+    ModelEncoderFileSystemExportJobPrivate(ModelEncoderFileSystemExportJob* parent,
+                                           AbstractModel* model,
+                                           const AbstractModelSelection* selection,
+                                           const QUrl& url,
+                                           AbstractModelStreamEncoder* encoder);
 
     ~ModelEncoderFileSystemExportJobPrivate() override;
 
-  public: // AbstractFileSystemExportJob API
+public: // AbstractFileSystemExportJob API
     void startExportToFile();
 
-  public:
+public:
     AbstractModelStreamEncoder* encoder() const;
 
-  protected:
-    Q_DECLARE_PUBLIC( ModelEncoderFileSystemExportJob )
+protected:
+    Q_DECLARE_PUBLIC(ModelEncoderFileSystemExportJob)
 
-  protected:
+protected:
     AbstractModelStreamEncoder* const mEncoder;
 };
 
-
-inline ModelEncoderFileSystemExportJobPrivate::ModelEncoderFileSystemExportJobPrivate( ModelEncoderFileSystemExportJob* parent,
-    AbstractModel* model,
-    const AbstractModelSelection* selection,
-    const QUrl& url,
-    AbstractModelStreamEncoder* encoder )
-  : AbstractFileSystemExportJobPrivate( parent, model, selection, url ),
-    mEncoder( encoder )
+inline ModelEncoderFileSystemExportJobPrivate::ModelEncoderFileSystemExportJobPrivate(ModelEncoderFileSystemExportJob* parent,
+                                                                                      AbstractModel* model,
+                                                                                      const AbstractModelSelection* selection,
+                                                                                      const QUrl& url,
+                                                                                      AbstractModelStreamEncoder* encoder)
+    : AbstractFileSystemExportJobPrivate(parent, model, selection, url)
+    , mEncoder(encoder)
 {}
 
 inline ModelEncoderFileSystemExportJobPrivate::~ModelEncoderFileSystemExportJobPrivate() {}

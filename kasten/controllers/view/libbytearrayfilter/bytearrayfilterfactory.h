@@ -24,14 +24,14 @@
 #define BYTEARRAYFILTERFACTORY_H
 
 class AbstractByteArrayFilter;
-template<class T> class QList;
-
+template <class T> class QList;
 
 class ByteArrayFilterFactory
 {
-  protected:
+protected:
     ByteArrayFilterFactory();
-  public:
+
+public:
     static QList<AbstractByteArrayFilter*> createFilters();
 
 };

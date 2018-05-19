@@ -33,26 +33,24 @@ class QSpinBox;
 class QCheckBox;
 class QLineEdit;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArraySourceCodeStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteArraySourceCodeStreamEncoderConfigEditor( ByteArraySourceCodeStreamEncoder* encoder, QWidget* parent = nullptr );
+public:
+    explicit ByteArraySourceCodeStreamEncoderConfigEditor(ByteArraySourceCodeStreamEncoder* encoder, QWidget* parent = nullptr);
     ~ByteArraySourceCodeStreamEncoderConfigEditor() override;
 
-  public: // AbstractModelStreamEncoderConfigEditor API
+public: // AbstractModelStreamEncoderConfigEditor API
     bool isValid() const override;
     AbstractSelectionView* createPreviewView() const override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onSettingsChanged();
 
-  protected:
+protected:
     ByteArraySourceCodeStreamEncoder* mEncoder;
     SourceCodeStreamEncoderSettings mSettings;
 

@@ -32,42 +32,42 @@
 #include <QLayout>
 #include <QTreeView>
 
+namespace Kasten {
 
-namespace Kasten
+VersionView::VersionView(VersionViewTool* tool, QWidget* parent)
+    : QWidget(parent)
+    , mTool(tool)
 {
+    mVersionTableModel = new VersionTableModel(nullptr, nullptr, this);
 
-VersionView::VersionView( VersionViewTool* tool, QWidget* parent )
- : QWidget( parent ), mTool( tool )
-{
-    mVersionTableModel = new VersionTableModel( nullptr, nullptr, this );
+    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    baseLayout->setMargin(0);
 
-    QVBoxLayout *baseLayout = new QVBoxLayout( this );
-    baseLayout->setMargin( 0 );
+    mVersionTableView = new QTreeView(this);
+    mVersionTableView->setObjectName(QStringLiteral("VersionsTable"));
+    mVersionTableView->setRootIsDecorated(false);
+    mVersionTableView->setItemsExpandable(false);
+    mVersionTableView->setUniformRowHeights(true);
+    mVersionTableView->setAllColumnsShowFocus(true);
+    mVersionTableView->setModel(mVersionTableModel);
 
-    mVersionTableView = new QTreeView( this );
-    mVersionTableView->setObjectName( QStringLiteral( "VersionsTable" ) );
-    mVersionTableView->setRootIsDecorated( false );
-    mVersionTableView->setItemsExpandable( false );
-    mVersionTableView->setUniformRowHeights( true );
-    mVersionTableView->setAllColumnsShowFocus( true );
-    mVersionTableView->setModel( mVersionTableModel );
+    baseLayout->addWidget(mVersionTableView, 10);
 
-    baseLayout->addWidget( mVersionTableView, 10 );
+    connect(mTool, &Kasten::VersionViewTool::modelChanged,
+            this, &VersionView::setModel);
 
-    connect( mTool, &Kasten::VersionViewTool::modelChanged,
-             this, &VersionView::setModel );
-
-    setModel( mTool->model() );
+    setModel(mTool->model());
 }
 
-void VersionView::setModel( AbstractModel* model )
+void VersionView::setModel(AbstractModel* model)
 {
-    If::Versionable* versionControl = model ? qobject_cast<If::Versionable*>( model ) : nullptr;
+    If::Versionable* versionControl = model ? qobject_cast<If::Versionable*>(model) : nullptr;
 
-    mVersionTableModel->setModel( model, versionControl );
+    mVersionTableModel->setModel(model, versionControl);
 
-    for( int c = 0; c<VersionTableModel::NoOfColumnIds; ++c )
-        mVersionTableView->resizeColumnToContents( c );
+    for (int c = 0; c < VersionTableModel::NoOfColumnIds; ++c) {
+        mVersionTableView->resizeColumnToContents(c);
+    }
 }
 
 VersionView::~VersionView() {}

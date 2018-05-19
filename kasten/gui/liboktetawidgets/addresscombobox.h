@@ -33,44 +33,51 @@
 class QString;
 class QByteArray;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class AddressComboBoxPrivate;
 
 class OKTETAKASTENGUI_EXPORT AddressComboBox : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     // TODO: same as in kbytearrayvalidator.h, we need a global enum containing both value and char codings...
     // matching Okteta::ValueCoding
     // TODO: turn into flags, so the codings to be used can be defined
-    enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3, CharCoding=4 };
+    enum Coding
+    {
+        InvalidCoding = -1,
+        HexadecimalCoding = 0,
+        DecimalCoding = 1,
+        OctalCoding = 2,
+        BinaryCoding = 3,
+        CharCoding = 4
+    };
 
-  public:
-    explicit AddressComboBox( QWidget* parent = nullptr );
+public:
+    explicit AddressComboBox(QWidget* parent = nullptr);
     ~AddressComboBox() override;
 
-  public: // set
+public: // set
     void rememberCurrentAddress();
 
-  public: // get
+public: // get
     Address address() const;
     int format() const;
     /** Is actually of type AddressValidator::AddressType */
     int addressType() const;
 
-  Q_SIGNALS:
-    void addressChanged( Okteta::Address address );
-    void addressTypeChanged( int newAddressType );
-    void formatChanged( int index );
+Q_SIGNALS:
+    void addressChanged(Okteta::Address address);
+    void addressTypeChanged(int newAddressType);
+    void formatChanged(int index);
 
-  protected:
+protected:
     AddressComboBoxPrivate* const d_ptr;
-  private:
-    Q_DECLARE_PRIVATE( AddressComboBox )
+
+private:
+    Q_DECLARE_PRIVATE(AddressComboBox)
 };
 
 }

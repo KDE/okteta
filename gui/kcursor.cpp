@@ -22,33 +22,28 @@
 
 #include "kcursor.h"
 
-
 namespace Okteta {
 
 KCursor::KCursor()
-: CursorX( 0 ),
-  CursorW( -1 )
+    : CursorX(0)
+    , CursorW(-1)
 {
 }
-
 
 KCursor::~KCursor() {}
 
-
-void KCursor::setSize( PixelX Width, PixelY Height )
+void KCursor::setSize(PixelX Width, PixelY Height)
 {
-  if( Width != OnPixmap.width() || Height != OnPixmap.height() )
-  {
-    OnPixmap = QPixmap( Width, Height );
-    OffPixmap = QPixmap( Width, Height );
-  }
+    if (Width != OnPixmap.width() || Height != OnPixmap.height()) {
+        OnPixmap = QPixmap(Width, Height);
+        OffPixmap = QPixmap(Width, Height);
+    }
 }
 
-
-void KCursor::setShape( PixelX X, PixelX W )
+void KCursor::setShape(PixelX X, PixelX W)
 {
-  CursorX = X;
-  CursorW = W;
+    CursorX = X;
+    CursorW = W;
 }
 
 }

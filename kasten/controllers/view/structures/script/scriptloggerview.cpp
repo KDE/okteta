@@ -30,12 +30,15 @@
 #include "scriptlogger.h"
 
 ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent)
-        : QWidget(parent), mSelector(new KComboBox(this)), mView(new QTableView(this)), mList(data)
+    : QWidget(parent)
+    , mSelector(new KComboBox(this))
+    , mView(new QTableView(this))
+    , mList(data)
 {
-    for (int i = 0; i < mList.size(); ++i)
-    {
+    for (int i = 0; i < mList.size(); ++i) {
         mSelector->addItem(mList.at(i)->objectName());
     }
+
     mView->setShowGrid(false);
     mView->setSelectionBehavior(QAbstractItemView::SelectRows);
     mView->setWordWrap(false);
@@ -44,8 +47,7 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     horizHeader->setSectionResizeMode(QHeaderView::Interactive);
     horizHeader->setSortIndicatorShown(false);
     horizHeader->setStretchLastSection(true);
-    if (!mList.isEmpty())
-    {
+    if (!mList.isEmpty()) {
         mView->setModel(mList.at(0)->logger());
         mView->resizeRowsToContents();
     }

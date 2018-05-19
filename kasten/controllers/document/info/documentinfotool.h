@@ -36,51 +36,48 @@ class AbstractByteArrayModel;
 class QString;
 class QTimer;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayDocument;
 class AbstractModelSynchronizer;
 class DocumentSyncManager;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit DocumentInfoTool( DocumentSyncManager* syncManager );
+public:
+    explicit DocumentInfoTool(DocumentSyncManager* syncManager);
     ~DocumentInfoTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public:
+public:
     QString documentTitle() const;
     QMimeType mimeType() const;
     QString location() const;
     int documentSize() const;
 
-  Q_SIGNALS:
-    void documentTitleChanged( const QString& documentTitle );
-    void documentMimeTypeChanged(const QMimeType& mimeType );
-    void locationChanged( const QString& location );
-    void documentSizeChanged( int newSize );
+Q_SIGNALS:
+    void documentTitleChanged(const QString& documentTitle);
+    void documentMimeTypeChanged(const QMimeType& mimeType);
+    void locationChanged(const QString& location);
+    void documentSizeChanged(int newSize);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void updateMimeType();
 
     void onContentsChanged();
-    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* synchronizer );
-    void onUrlChanged( const QUrl& url );
+    void onSynchronizerChanged(Kasten::AbstractModelSynchronizer* synchronizer);
+    void onUrlChanged(const QUrl& url);
 
-  private:
+private:
     ByteArrayDocument* mDocument;
-    Okteta::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     AbstractModelSynchronizer* mSynchronizer;
 
@@ -89,7 +86,6 @@ class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoTool : public AbstractTool
     QTimer* mMimeTypeUpdateTimer;
     QMimeType mMimeType;
 };
-
 
 inline QMimeType DocumentInfoTool::mimeType() const { return mMimeType; }
 

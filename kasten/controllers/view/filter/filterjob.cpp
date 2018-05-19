@@ -27,16 +27,14 @@
 // Qt
 #include <QCoreApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 bool FilterJob::exec()
 {
-    //TODO: what kind of signal could a filter send?
-    connect( mByteArrayFilter, &AbstractByteArrayFilter::filteredBytes, this, &FilterJob::onFilteredBytes );
+    // TODO: what kind of signal could a filter send?
+    connect(mByteArrayFilter, &AbstractByteArrayFilter::filteredBytes, this, &FilterJob::onFilteredBytes);
 
-    const bool result = mByteArrayFilter->filter( mResult, mModel, mRange );
+    const bool result = mByteArrayFilter->filter(mResult, mModel, mRange);
 
     deleteLater();
 
@@ -45,7 +43,7 @@ bool FilterJob::exec()
 
 void FilterJob::onFilteredBytes()
 {
-    QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
 }
 
 }

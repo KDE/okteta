@@ -28,32 +28,30 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 UInt64Codec::UInt64Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Unsigned 64-bit") )
+    : AbstractTypeCodec(i18nc("@label:textbox", "Unsigned 64-bit"))
 {}
 
-QVariant UInt64Codec::value( const PODData& data, int* byteCount ) const
+QVariant UInt64Codec::value(const PODData& data, int* byteCount) const
 {
-    const quint64* pointer = (quint64*)data.pointer( 8 );
+    const quint64* pointer = (quint64*)data.pointer(8);
 
     *byteCount = pointer ? 8 : 0;
-    return pointer ? QVariant::fromValue<UInt64>( UInt64(*pointer) ) : QVariant();
+    return pointer ? QVariant::fromValue<UInt64>(UInt64(*pointer)) : QVariant();
 }
 
-QByteArray UInt64Codec::valueToBytes( const QVariant& value ) const
+QByteArray UInt64Codec::valueToBytes(const QVariant& value) const
 {
     const quint64 number = value.value<UInt64>().value;
 
-    return QByteArray( (const char*)&number, sizeof(quint64) );
+    return QByteArray((const char*)&number, sizeof(quint64));
 }
 
-bool UInt64Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+bool UInt64Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
-    return ( value.value<UInt64>().value == otherValue.value<UInt64>().value );
+    return (value.value<UInt64>().value == otherValue.value<UInt64>().value);
 }
 
 UInt64Codec::~UInt64Codec() {}

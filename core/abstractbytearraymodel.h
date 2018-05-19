@@ -32,23 +32,20 @@
 #include <QObject>
 #include <QByteArray>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class ArrayChangeMetricsList;
 class CharCodec;
 
-
 /** could it be useful to hide the data access behind an iterator? *
 class KDataBufferIterator
 {
-  public:
+public:
     bool hasNext();
     char next();
-  protected:
+protected:
 
-  protected:
+protected:
     char *
     int Length;
 }
@@ -59,125 +56,126 @@ bool KDataBufferIterator::hasNext()
 // this function should be simple as possible
 char KDataBufferIterator::next()
 {
-  // if next span is empty
-  if(  )
-    return *NextChar++;
+   // if next span is empty
+   if(  )
+        return *NextChar++;
 }
-*/
+ */
+
 /** base class for all Data buffers that are used to display
-  * TODO: think about a way to inform KHexEdit that there has been
-  * a change in the buffer outside. what kind of changes are possible?
-  *
-  * Operations on the data:
-  *
-  * Finding: is implemented stateless. FindNext has to be done by perhaps a FindManager
-  * Replacing: not available. Implement within a ReplaceManager
-  *
-  *@author Friedrich W. H. Kossebau
-  */
+ * TODO: think about a way to inform KHexEdit that there has been
+ * a change in the buffer outside. what kind of changes are possible?
+ *
+ * Operations on the data:
+ *
+ * Finding: is implemented stateless. FindNext has to be done by perhaps a FindManager
+ * Replacing: not available. Implement within a ReplaceManager
+ *
+ * @author Friedrich W. H. Kossebau
+ */
 
 class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
 {
-  friend class KAbstractByteArrayModelIterator;
+    friend class KAbstractByteArrayModelIterator;
 
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    explicit AbstractByteArrayModel( QObject* parent = nullptr );
-  public:
+protected:
+    explicit AbstractByteArrayModel(QObject* parent = nullptr);
+
+public:
     ~AbstractByteArrayModel() override;
 
-
-  public: // data access API
+public: // data access API
     /** locates working range
-      * The idea behind is to tell buffer which range will be requested in the following time,
-      * so that e.g. the corresponding pages will be loaded in advance
-      * TODO: do we really need this? Where will this lead to real enhancements?
-      * @param Range
-      * @return @c true if successfully, @c false otherwise
-      */
-    //virtual bool prepareRange( const Section &Range ) const = 0;
+     * The idea behind is to tell buffer which range will be requested in the following time,
+     * so that e.g. the corresponding pages will be loaded in advance
+     * TODO: do we really need this? Where will this lead to real enhancements?
+     * @param Range
+     * @return @c true if successfully, @c false otherwise
+     */
+    // virtual bool prepareRange( const Section &Range ) const = 0;
     /** convenience function, same as above */
-    //bool prepareRange( int Offset, int Length ) const;
+    // bool prepareRange( int Offset, int Length ) const;
 
     /** creates an iterator to */
-    //virtual KDataBufferIterator *iterator() const = 0;
+    // virtual KDataBufferIterator *iterator() const = 0;
     /** expects pointer to memory, should be in prepared range
-      * it is only expected to be a valid pointer until any further call
-      * to this or any modifying function
-      * @param Section 
-      * @return pointer to 
-      */
-    //virtual const char *dataSet( const Section &Section ) const = 0;
+     * it is only expected to be a valid pointer until any further call
+     * to this or any modifying function
+     * @param Section
+     * @return pointer to
+     */
+    // virtual const char *dataSet( const Section &Section ) const = 0;
     /** convenience function, same as above */
-    //const char *dataSet( int Offset, int Length ) const;
+    // const char *dataSet( int Offset, int Length ) const;
 
     /** requests a single byte
-      * if the offset is not valid the behaviour is undefined
-      * @param offset offset of the datum requested
-      */
-    virtual Byte byte( Address offset ) const = 0;
+     * if the offset is not valid the behaviour is undefined
+     * @param offset offset of the datum requested
+     */
+    virtual Byte byte(Address offset) const = 0;
 
     /**
-      * @return the size of the data
-      */
+     * @return the size of the data
+     */
     virtual Size size() const = 0;
 
-
-  public: // state read API
+public: // state read API
     /**
-      * Default returns @c true.
-      * @return @c true if the buffer can only be read, @c false if writing is allowed
-      */
+     * Default returns @c true.
+     * @return @c true if the buffer can only be read, @c false if writing is allowed
+     */
     virtual bool isReadOnly() const;
     /**
-      * @return @c true if the buffer has been modified, @c false otherwise
-      */
+     * @return @c true if the buffer has been modified, @c false otherwise
+     */
     virtual bool isModified() const = 0;
 
 // TODO: for data outside the model using char* and int as well as QByteArray should always work, no?
-  public: // modification API
+
+public: // modification API
     /** inserts bytes copied from the given source at Position.
-      * The original data beginnung at the position is moved
-      * with the buffer enlarged as needed
-      * If the buffer is readOnly this is a noop and returns 0.
-      * @param offset
-      * @param insertData data source
-      * @param insertLength number of bytes to copy
-      * @return length of inserted data
-      */
-    virtual Size insert( Address offset, const Byte* insertData, int insertLength );
-    Size insert( Address offset, const QByteArray& insertData );
+     * The original data beginnung at the position is moved
+     * with the buffer enlarged as needed
+     * If the buffer is readOnly this is a noop and returns 0.
+     * @param offset
+     * @param insertData data source
+     * @param insertLength number of bytes to copy
+     * @return length of inserted data
+     */
+    virtual Size insert(Address offset, const Byte* insertData, int insertLength);
+    Size insert(Address offset, const QByteArray& insertData);
 
     /** removes beginning with position as much as possible
-      * @param removeRange
-      * @return length of removed data
-      */
-    virtual Size remove( const AddressRange& removeRange );
+     * @param removeRange
+     * @return length of removed data
+     */
+    virtual Size remove(const AddressRange& removeRange);
     /** convenience function, behaves as above */
-    Size remove( Address offset, Size removeLength );
+    Size remove(Address offset, Size removeLength);
 
     /** replaces as much as possible
-      * @param removeRange
-      * @param insertData
-      * @param insertLength
-      * @return length of inserted data
-      */
-    virtual Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength ) = 0;
+     * @param removeRange
+     * @param insertData
+     * @param insertLength
+     * @return length of inserted data
+     */
+    virtual Size replace(const AddressRange& removeRange, const Byte* insertData, int insertLength) = 0;
     /** convenience function, behaves as above */
-    Size replace( const AddressRange& removeRange, const QByteArray& insertData );
+    Size replace(const AddressRange& removeRange, const QByteArray& insertData);
     /** convenience function, behaves as above */
-    Size replace( Address offset, Size removeLength,
-                  const Byte* insertData, Size insertLength );
+    Size replace(Address offset, Size removeLength,
+                 const Byte* insertData, Size insertLength);
 
     // todo use parameters grouped differrently?
     /** moves the second section before the start of the first
-      * which is the same as moving the first behind the second.
-      * @param firstStart position of the data where the section should be moved behind
-      * @param secondRange data range to be moved
-      * @return @true if operation was successful, @false otherwise
-      */
-    virtual bool swap( Address firstStart, const AddressRange& secondRange ) = 0;
+     * which is the same as moving the first behind the second.
+     * @param firstStart position of the data where the section should be moved behind
+     * @param secondRange data range to be moved
+     * @return @true if operation was successful, @false otherwise
+     */
+    virtual bool swap(Address firstStart, const AddressRange& secondRange) = 0;
 
     /**
      * fills the buffer with the FillChar. If the buffer is to small it will be extended as much as possible.
@@ -186,108 +184,106 @@ class OKTETACORE_EXPORT AbstractByteArrayModel : public QObject
      * @param fillLength number of bytes to fill. If Length is -1, the buffer is filled till the end.
      * @return number of filled bytes
      */
-    virtual Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) = 0;
-    Size fill( Byte fillChar, const AddressRange& fillRange );
+    virtual Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1) = 0;
+    Size fill(Byte fillChar, const AddressRange& fillRange);
 
     /** sets a single byte
      * if the offset is not valid the behaviour is undefined
      * @param offset offset of the datum requested
      * @param byte new byte value
      */
-    virtual void setByte( Address offset, Byte byte ) = 0;
+    virtual void setByte(Address offset, Byte byte) = 0;
 
     /** sets the modified flag for the buffer
-      * @param modified
-      */
-    virtual void setModified( bool modified ) = 0;
+     * @param modified
+     */
+    virtual void setModified(bool modified) = 0;
 
     /** sets the readonly flag for the byte array if this is possible.
-      * Default implementation does not do anything.
-      * @param isReadOnly new state
-      */
-    virtual void setReadOnly( bool isReadOnly );
+     * Default implementation does not do anything.
+     * @param isReadOnly new state
+     */
+    virtual void setReadOnly(bool isReadOnly);
 
-
-  public: // service functions
+public: // service functions
     /** copies the data of the section into a given array Dest. If the section extends the buffers range
-      * the section is limited to the buffer's end. If the section is invalid the behaviour is undefined.
-      * @param dest pointer to a char array large enough to hold the copied section
-      * @param copyRange
-      * @return number of copied bytes
-      */
-    virtual Size copyTo( Byte* dest, const AddressRange& copyRange ) const;
+     * the section is limited to the buffer's end. If the section is invalid the behaviour is undefined.
+     * @param dest pointer to a char array large enough to hold the copied section
+     * @param copyRange
+     * @return number of copied bytes
+     */
+    virtual Size copyTo(Byte* dest, const AddressRange& copyRange) const;
     /** convenience function, behaves as above */
-    Size copyTo( Byte* dest, Address offset, Size copyLength ) const;
+    Size copyTo(Byte* dest, Address offset, Size copyLength) const;
 
-
-  public: // finding API
+public: // finding API
     /** searches beginning with byte at Pos.
-      * @param pattern
-      * @param patternLength length of search string
-      * @param fromOffset the position to start the search
-      * @return index of the first  or -1
-      */
-    virtual Address indexOf( const Byte* pattern, int patternLength, Address fromOffset = 0, Address toOffset = -1 ) const;
-    Address indexOf( const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1 ) const;
-    Address indexOfCaseInsensitive( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1 ) const;
+     * @param pattern
+     * @param patternLength length of search string
+     * @param fromOffset the position to start the search
+     * @return index of the first  or -1
+     */
+    virtual Address indexOf(const Byte* pattern, int patternLength, Address fromOffset = 0, Address toOffset = -1) const;
+    Address indexOf(const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1) const;
+    Address indexOfCaseInsensitive(const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = 0, Address toOffset = -1) const;
 
     /** searches for a given data string
-      * The section limits the data within which the key has to be found
-      * If the end of the section is lower than the start the search continues at the start???
-      * @param 
-      * @param Length length of search string
-      * @param Section section within the keydata is to be found
-      * @return index of the first occurrence or -1
-      */
+     * The section limits the data within which the key has to be found
+     * If the end of the section is lower than the start the search continues at the start???
+     * @param
+     * @param Length length of search string
+     * @param Section section within the keydata is to be found
+     * @return index of the first occurrence or -1
+     */
 //     virtual int indexOf( const char*KeyData, int Length, const Section &Section ) const { return -1; }//= 0;
     /** searches backward beginning with byte at Pos.
-      * @param pattern
-      * @param patternLength length of search string
-      * @param fromOffset the position to start the search. If -1 the search starts at the end.
-      * @return index of the first  or -1
-      */
-    virtual Address lastIndexOf( const Byte* pattern, int patternLength, Address fromOffset = -1, Address toOffset = 0 ) const;
-    Address lastIndexOf( const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0 ) const;
-    Address lastIndexOfCaseInsensitive( const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0 ) const;
+     * @param pattern
+     * @param patternLength length of search string
+     * @param fromOffset the position to start the search. If -1 the search starts at the end.
+     * @return index of the first  or -1
+     */
+    virtual Address lastIndexOf(const Byte* pattern, int patternLength, Address fromOffset = -1, Address toOffset = 0) const;
+    Address lastIndexOf(const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0) const;
+    Address lastIndexOfCaseInsensitive(const CharCodec* charCodec, const QByteArray& pattern, Address fromOffset = -1, Address toOffset = 0) const;
 
 /*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
-  Q_SIGNALS:
+Q_SIGNALS:
     // TODO: how to deal replacing with fixed size of buffer?
-    void contentsChanged( const Okteta::ArrayChangeMetricsList& changeList );
+    void contentsChanged(const Okteta::ArrayChangeMetricsList& changeList);
 
-    void readOnlyChanged( bool isReadOnly );
-    void modifiedChanged( bool isModified );
+    void readOnlyChanged(bool isReadOnly);
+    void modifiedChanged(bool isModified);
 
     // TODO: how to handle a typedef with signals
-    void searchedBytes( Okteta::Size bytes ) const;
+    void searchedBytes(Okteta::Size bytes) const;
 };
 
 // TODO: find why static_cast fails
-inline Size AbstractByteArrayModel::insert( Address offset, const QByteArray& insertData )
-{ return insert( offset, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size() ); }
+inline Size AbstractByteArrayModel::insert(Address offset, const QByteArray& insertData)
+{ return insert(offset, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size()); }
 
-inline Size AbstractByteArrayModel::remove( Address offset, Size removeLength )
-{ return remove( AddressRange::fromWidth(offset,removeLength) ); }
+inline Size AbstractByteArrayModel::remove(Address offset, Size removeLength)
+{ return remove(AddressRange::fromWidth(offset, removeLength)); }
 
-inline Size AbstractByteArrayModel::replace( const AddressRange& removeRange, const QByteArray& insertData )
-{ return replace( removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size() );}
+inline Size AbstractByteArrayModel::replace(const AddressRange& removeRange, const QByteArray& insertData)
+{ return replace(removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size());}
 
-inline Size AbstractByteArrayModel::replace( Address offset, Size removeLength,
-                                             const Byte* insertData, Size insertLength )
-{ return replace( AddressRange::fromWidth(offset,removeLength), insertData, insertLength ); }
+inline Size AbstractByteArrayModel::replace(Address offset, Size removeLength,
+                                            const Byte* insertData, Size insertLength)
+{ return replace(AddressRange::fromWidth(offset, removeLength), insertData, insertLength); }
 
-inline Size AbstractByteArrayModel::fill( const Byte fillChar, const AddressRange& fillRange )
-{ return fill( fillChar, fillRange.start(), fillRange.width() ); }
+inline Size AbstractByteArrayModel::fill(const Byte fillChar, const AddressRange& fillRange)
+{ return fill(fillChar, fillRange.start(), fillRange.width()); }
 
-inline Size AbstractByteArrayModel::copyTo( Byte* dest, Address offset, Size copyLength ) const
-{ return copyTo( dest, AddressRange::fromWidth(offset,copyLength) ); }
+inline Size AbstractByteArrayModel::copyTo(Byte* dest, Address offset, Size copyLength) const
+{ return copyTo(dest, AddressRange::fromWidth(offset, copyLength)); }
 
-inline Address AbstractByteArrayModel::indexOf( const QByteArray& pattern, Address fromOffset, Address toOffset ) const
-{ return indexOf( reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset, toOffset ); }
+inline Address AbstractByteArrayModel::indexOf(const QByteArray& pattern, Address fromOffset, Address toOffset) const
+{ return indexOf(reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset, toOffset); }
 
-inline Address AbstractByteArrayModel::lastIndexOf( const QByteArray& pattern, Address fromOffset, Address toOffset ) const
-{ return lastIndexOf( reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset, toOffset ); }
+inline Address AbstractByteArrayModel::lastIndexOf(const QByteArray& pattern, Address fromOffset, Address toOffset) const
+{ return lastIndexOf(reinterpret_cast<const Byte*>(pattern.constData()), pattern.size(), fromOffset, toOffset); }
 
 }
 

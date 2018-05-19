@@ -28,25 +28,21 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 VersionViewTool::VersionViewTool()
- : mModel( nullptr )
+    : mModel(nullptr)
 {
-    setObjectName( QStringLiteral( "Versions" ) );
+    setObjectName(QStringLiteral("Versions"));
 }
-
 
 QString VersionViewTool::title() const { return i18nc("@title:window", "Versions"); }
 
-void VersionViewTool::setTargetModel( AbstractModel* model )
+void VersionViewTool::setTargetModel(AbstractModel* model)
 {
     mModel = model ? model->findBaseModelWithInterface<If::Versionable*>() : nullptr;
-    emit modelChanged( mModel );
+    emit modelChanged(mModel);
 }
-
 
 VersionViewTool::~VersionViewTool() {}
 

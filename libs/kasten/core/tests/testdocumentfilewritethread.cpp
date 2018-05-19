@@ -28,25 +28,23 @@
 #include <QDataStream>
 #include <QFile>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void TestDocumentFileWriteThread::run()
 {
     const QByteArray* byteArray = mDocument->data();
 
-    QDataStream outStream( mFile );
-    outStream.writeRawData( mHeader.data(), mHeader.size() );
-    outStream.writeRawData( byteArray->data(), byteArray->size() );
+    QDataStream outStream(mFile);
+    outStream.writeRawData(mHeader.data(), mHeader.size());
+    outStream.writeRawData(byteArray->data(), byteArray->size());
 
 //     byteArray->setModified( false );
 
-    //registerDiskModifyTime( file );TODO move into synchronizer
+    // registerDiskModifyTime( file );TODO move into synchronizer
 
-    mSuccess = ( outStream.status() == QDataStream::Ok );
+    mSuccess = (outStream.status() == QDataStream::Ok);
 
-    emit documentWritten( mSuccess );
+    emit documentWritten(mSuccess);
 }
 
 TestDocumentFileWriteThread::~TestDocumentFileWriteThread() {}

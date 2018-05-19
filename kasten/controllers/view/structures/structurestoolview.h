@@ -29,23 +29,22 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-namespace Kasten
-{
+namespace Kasten {
 class StructureView;
 class StructuresTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT StructuresToolView: public AbstractToolView
+class OKTETAKASTENCONTROLLERS_EXPORT StructuresToolView : public AbstractToolView
 {
-  public:
-    explicit StructuresToolView(StructuresTool *tool);
+public:
+    explicit StructuresToolView(StructuresTool* tool);
     ~StructuresToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     StructureView* mWidget;
 };
 

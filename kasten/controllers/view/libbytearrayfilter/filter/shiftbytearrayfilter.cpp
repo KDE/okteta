@@ -35,96 +35,85 @@
 static const int ShiftBitsPerByte = 8;
 
 ShiftByteArrayFilter::ShiftByteArrayFilter()
- : AbstractByteArrayFilter(
-     i18nc("name of the filter; it moves the bits, setting freed ones to zero",
-           "SHIFT data") )
+    : AbstractByteArrayFilter(
+        i18nc("name of the filter; it moves the bits, setting freed ones to zero",
+              "SHIFT data"))
 {}
 
-AbstractByteArrayFilterParameterSet *ShiftByteArrayFilter::parameterSet() { return &mParameterSet; }
+AbstractByteArrayFilterParameterSet* ShiftByteArrayFilter::parameterSet() { return &mParameterSet; }
 
-bool ShiftByteArrayFilter::filter( Okteta::Byte* result,
-                                   Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const
+bool ShiftByteArrayFilter::filter(Okteta::Byte* result,
+                                  Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
     const int groupSize = mParameterSet.groupSize();
-    const int groupBitCount = (groupSize * ShiftBitsPerByte );
-    const int groupShiftBitWidth = std::abs( mParameterSet.moveBitWidth() ) % groupBitCount;
+    const int groupBitCount = (groupSize * ShiftBitsPerByte);
+    const int groupShiftBitWidth = std::abs(mParameterSet.moveBitWidth()) % groupBitCount;
 
     const int shiftByteWidth = groupShiftBitWidth / ShiftBitsPerByte;
     const int shiftBitWidth = groupShiftBitWidth - shiftByteWidth * ShiftBitsPerByte;
     const int otherShiftBitWidth = ShiftBitsPerByte - shiftBitWidth;
     int filteredBytesCount = 0;
 
-    const bool toRight = ( mParameterSet.moveBitWidth() > 0 );
-    if( toRight )
-    {
+    const bool toRight = (mParameterSet.moveBitWidth() > 0);
+    if (toRight) {
         int r = 0;
         Okteta::Address m = range.start();
-        while( m <= range.end() )
-        {
+        while (m <= range.end()) {
             int g = 0;
             // full free bytes
-            while( g < shiftByteWidth && m <= range.end() )
-            {
+            while (g < shiftByteWidth && m <= range.end()) {
                 result[r++] = 0;
                 ++m;
                 ++g;
             }
             // byte layer shift
-            while( g < groupSize && m <= range.end() )
-            {
-                result[r++] = model->byte( (m++)-shiftByteWidth );
+            while (g < groupSize && m <= range.end()) {
+                result[r++] = model->byte((m++) - shiftByteWidth);
                 ++g;
             }
             // bit layer shift
-            for( int b=1; b <= g; ++b )
-            {
-                result[r-b] = (unsigned char)result[r-b]>>shiftBitWidth;
-                if( b < g )
-                    result[r-b] |= (unsigned char)result[r-b-1] << otherShiftBitWidth;
+            for (int b = 1; b <= g; ++b) {
+                result[r - b] = (unsigned char)result[r - b] >> shiftBitWidth;
+                if (b < g) {
+                    result[r - b] |= (unsigned char)result[r - b - 1] << otherShiftBitWidth;
+                }
             }
 
             filteredBytesCount += g;
-            if( filteredBytesCount >= FilteredByteCountSignalLimit )
-            {
+            if (filteredBytesCount >= FilteredByteCountSignalLimit) {
                 filteredBytesCount = 0;
-                emit filteredBytes( m-range.start() );
+                emit filteredBytes(m - range.start());
             }
         }
-    }
-    else
-    {
+    } else {
         int r = 0;
         Okteta::Address m = range.start();
-        while( m <= range.end() )
-        {
+        while (m <= range.end()) {
             int g = 0;
             // byte layer shift
-            while( g+shiftByteWidth < groupSize && m+shiftByteWidth <= range.end() )
-            {
-                result[r++] = model->byte( (m++)+shiftByteWidth );
+            while (g + shiftByteWidth < groupSize && m + shiftByteWidth <= range.end()) {
+                result[r++] = model->byte((m++) + shiftByteWidth);
                 ++g;
             }
             // full free bytes
-            while( g < groupSize && m <= range.end() )
-            {
+            while (g < groupSize && m <= range.end()) {
                 result[r++] = 0;
                 ++m;
                 ++g;
             }
 
             // bit layer shift
-            for( int b=g; b>0; --b )
-            {
-                result[r-b] = (unsigned char)result[r-b] << shiftBitWidth;
-                if( b>1 )
-                    result[r-b] |= (unsigned char)result[r-b+1] >> otherShiftBitWidth;
+            for (int b = g; b > 0; --b) {
+                result[r - b] = (unsigned char)result[r - b] << shiftBitWidth;
+                if (b > 1) {
+                    result[r - b] |= (unsigned char)result[r - b + 1] >> otherShiftBitWidth;
+                }
             }
 
             filteredBytesCount += g;
-            if( filteredBytesCount >= FilteredByteCountSignalLimit )
-            {
+            if (filteredBytesCount >= FilteredByteCountSignalLimit) {
                 filteredBytesCount = 0;
-                emit filteredBytes( m-range.start() );
+                emit filteredBytes(m - range.start());
             }
         }
     }

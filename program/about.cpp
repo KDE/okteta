@@ -25,24 +25,23 @@
 // KF5
 #include <KLocalizedString>
 
-
 OktetaAboutData::OktetaAboutData()
-: KAboutData( QStringLiteral("okteta"),
-              i18n("Okteta"), // name
-              QStringLiteral("0.24.60"),
-              i18n("Hex editor"), // description
-              KAboutLicense::GPL_V2,
-              i18n("Copyright 2006-2018 Friedrich W. H. Kossebau"), //copyright
-              i18n("Edit the raw data of files"), // comment
-              QStringLiteral("https://userbase.kde.org/Okteta") )
+    : KAboutData(QStringLiteral("okteta"),
+                 i18n("Okteta"), // name
+                 QStringLiteral("0.24.60"),
+                 i18n("Hex editor"), // description
+                 KAboutLicense::GPL_V2,
+                 i18n("Copyright 2006-2018 Friedrich W. H. Kossebau"), // copyright
+                 i18n("Edit the raw data of files"), // comment
+                 QStringLiteral("https://userbase.kde.org/Okteta"))
 {
     addLicense(KAboutLicense::GPL_V3);
-    setOrganizationDomain( "kde.org" );
-    addAuthor( i18n("Friedrich W. H. Kossebau"), // name
-               i18n("Author"), // task
-               QStringLiteral("kossebau@kde.org") );
-    addAuthor( i18nc("Author","Alexander Richardson"),// name
-               i18nc("Task description","Structures tool"), // task
-               QStringLiteral("alex.richardson@gmx.de") );
+    setOrganizationDomain("kde.org");
+    addAuthor(i18n("Friedrich W. H. Kossebau"), // name
+              i18n("Author"), // task
+              QStringLiteral("kossebau@kde.org"));
+    addAuthor(i18nc("Author", "Alexander Richardson"), // name
+              i18nc("Task description", "Structures tool"), // task
+              QStringLiteral("alex.richardson@gmx.de"));
     setDesktopFileName(QStringLiteral("org.kde.okteta"));
 }

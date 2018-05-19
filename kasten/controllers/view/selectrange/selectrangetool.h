@@ -32,30 +32,27 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 /**
-*/
+ */
 class SelectRangeTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     SelectRangeTool();
     ~SelectRangeTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // status
+public: // status
     int currentSelectionStart() const;
     int currentSelectionEnd() const;
     int targetSelectionStart() const;
@@ -66,41 +63,40 @@ class SelectRangeTool : public AbstractTool
     bool isUsable() const;
     bool isApplyable() const; // candidate for AbstractTool API
 
-  public Q_SLOTS: // settings
-    void setTargetStart( Okteta::Address start );
-    void setTargetEnd( Okteta::Address end );
-    void setIsEndRelative( bool isEndRelative );
-    void setIsEndBackwards( bool isEndBackwards );
+public Q_SLOTS: // settings
+    void setTargetStart(Okteta::Address start);
+    void setTargetEnd(Okteta::Address end);
+    void setIsEndRelative(bool isEndRelative);
+    void setIsEndBackwards(bool isEndBackwards);
 
-  public Q_SLOTS: // actions
+public Q_SLOTS: // actions
     void select();
 
-  Q_SIGNALS:
-    void isUsableChanged( bool isUsable );
-    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
+Q_SIGNALS:
+    void isUsableChanged(bool isUsable);
+    void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
     // TODO: isAtLine useful, to prevent noop actions, or should they be allowed, too?
 
-  private:
+private:
     int finalTargetSelectionStart() const;
     int finalTargetSelectionEnd() const;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onContentsChanged();
 
-  private: // settings
+private: // settings
     int mTargetStart;
     int mTargetEnd;
-    bool mIsEndRelative :1;
-    bool mIsEndBackwards :1;
+    bool mIsEndRelative : 1;
+    bool mIsEndBackwards : 1;
 
-  private: // target
+private: // target
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 
-
-inline int  SelectRangeTool::targetSelectionStart()   const { return mTargetStart; }
-inline int  SelectRangeTool::targetSelectionEnd()     const { return mTargetEnd; }
+inline int SelectRangeTool::targetSelectionStart()   const { return mTargetStart; }
+inline int SelectRangeTool::targetSelectionEnd()     const { return mTargetEnd; }
 inline bool SelectRangeTool::isEndRelative() const { return mIsEndRelative; }
 inline bool SelectRangeTool::isEndBackwards() const { return mIsEndBackwards; }
 

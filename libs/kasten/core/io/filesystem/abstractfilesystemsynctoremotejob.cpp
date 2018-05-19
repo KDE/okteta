@@ -23,43 +23,40 @@
 #include "abstractfilesystemsynctoremotejob.h"
 #include "abstractfilesystemsynctoremotejob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractFileSystemSyncToRemoteJob::AbstractFileSystemSyncToRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer )
-  : AbstractSyncToRemoteJob( new AbstractFileSystemSyncToRemoteJobPrivate(this,synchronizer) )
+AbstractFileSystemSyncToRemoteJob::AbstractFileSystemSyncToRemoteJob(AbstractModelFileSystemSynchronizer* synchronizer)
+    : AbstractSyncToRemoteJob(new AbstractFileSystemSyncToRemoteJobPrivate(this, synchronizer))
 {
 }
 
 AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncToRemoteJob::synchronizer() const
 {
-    Q_D( const AbstractFileSystemSyncToRemoteJob );
+    Q_D(const AbstractFileSystemSyncToRemoteJob);
 
     return d->synchronizer();
 }
 
 QFile* AbstractFileSystemSyncToRemoteJob::file() const
 {
-    Q_D( const AbstractFileSystemSyncToRemoteJob );
+    Q_D(const AbstractFileSystemSyncToRemoteJob);
 
     return d->file();
 }
 
 void AbstractFileSystemSyncToRemoteJob::start()
 {
-    Q_D( AbstractFileSystemSyncToRemoteJob );
+    Q_D(AbstractFileSystemSyncToRemoteJob);
 
     d->start();
 }
 
-void AbstractFileSystemSyncToRemoteJob::completeWrite( bool success )
+void AbstractFileSystemSyncToRemoteJob::completeWrite(bool success)
 {
-    Q_D( AbstractFileSystemSyncToRemoteJob );
+    Q_D(AbstractFileSystemSyncToRemoteJob);
 
-    d->completeWrite( success );
+    d->completeWrite(success);
 }
-
 
 AbstractFileSystemSyncToRemoteJob::~AbstractFileSystemSyncToRemoteJob()
 {
@@ -67,5 +64,5 @@ AbstractFileSystemSyncToRemoteJob::~AbstractFileSystemSyncToRemoteJob()
 
 }
 
-//have to include this because of Q_PRIVATE_SLOT
+// have to include this because of Q_PRIVATE_SLOT
 #include "moc_abstractfilesystemsynctoremotejob.cpp"

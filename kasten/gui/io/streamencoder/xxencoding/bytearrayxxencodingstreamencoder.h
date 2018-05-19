@@ -30,47 +30,49 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class XxencodingStreamEncoderSettings
 {
-  public:
+public:
     XxencodingStreamEncoderSettings();
-  public:
+
+public:
     QString fileName;
 };
-
 
 class ByteArrayXxencodingStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
-    enum class InputByteIndex { First = 0, Second, Third };
+public:
+    enum class InputByteIndex
+    {
+        First = 0,
+        Second,
+        Third
+    };
 
-  public:
+public:
     ByteArrayXxencodingStreamEncoder();
     ~ByteArrayXxencodingStreamEncoder() override;
 
-  public:
+public:
     XxencodingStreamEncoderSettings settings() const;
-    void setSettings( const XxencodingStreamEncoderSettings& settings );
+    void setSettings(const XxencodingStreamEncoderSettings& settings);
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 
-  protected:
+protected:
     XxencodingStreamEncoderSettings mSettings;
 };
 
-
 inline XxencodingStreamEncoderSettings ByteArrayXxencodingStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayXxencodingStreamEncoder::setSettings( const XxencodingStreamEncoderSettings& settings )
+inline void ByteArrayXxencodingStreamEncoder::setSettings(const XxencodingStreamEncoderSettings& settings)
 {
     mSettings = settings;
     emit settingsChanged();

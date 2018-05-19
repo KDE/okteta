@@ -31,12 +31,11 @@
 #include <QList>
 #include <QAbstractTableModel>
 
-
 class ContainedStringTableModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ColumnIds
     {
         OffsetColumnId = 0,
@@ -44,26 +43,26 @@ class ContainedStringTableModel : public QAbstractTableModel
         NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
     };
 
-  public:
-    ContainedStringTableModel( const QList<ContainedString> *containedStringList, int offsetCoding,
-                               QObject *parent = nullptr );
+public:
+    ContainedStringTableModel(const QList<ContainedString>* containedStringList, int offsetCoding,
+                              QObject* parent = nullptr);
     ~ContainedStringTableModel() override;
 
-  public: // QAbstractTableModel API
-    int rowCount( const QModelIndex &parent ) const override;
-    int columnCount( const QModelIndex &parent ) const override;
-    QVariant data( const QModelIndex &index, int role ) const override;
-    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
+public: // QAbstractTableModel API
+    int rowCount(const QModelIndex& parent) const override;
+    int columnCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void update();
-    void setOffsetCoding( int offsetCoding );
+    void setOffsetCoding(int offsetCoding);
 
-  protected:
-    const QList<ContainedString> * const mContainedStringList;
+protected:
+    const QList<ContainedString>* const mContainedStringList;
 
     Okteta::OffsetFormat::print mPrintFunction;
-    mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
+    mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];
 };
 
 #endif

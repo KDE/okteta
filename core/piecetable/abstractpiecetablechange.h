@@ -30,21 +30,19 @@
 
 class QString;
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 class PieceTable;
 
 using ArrayChangeMetrics = Okteta::ArrayChangeMetrics;
 
 /** class
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 
 class AbstractPieceTableChange
 {
-  public:
+public:
     enum TypeId
     {
         InsertId,
@@ -56,10 +54,10 @@ class AbstractPieceTableChange
         GroupId
     };
 
-  public:
+public:
     virtual ~AbstractPieceTableChange();
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual int type() const = 0;
 
     virtual QString description() const = 0;
@@ -68,10 +66,10 @@ class AbstractPieceTableChange
     virtual Address storageOffset() const;
 
     /// returns true if successful, false otherwise. Default returns false.
-    virtual bool merge( const AbstractPieceTableChange* other );
+    virtual bool merge(const AbstractPieceTableChange* other);
 
-    virtual AddressRange apply( PieceTable* pieceTable ) const = 0;
-    virtual AddressRange revert( PieceTable* pieceTable ) const = 0;
+    virtual AddressRange apply(PieceTable* pieceTable) const = 0;
+    virtual AddressRange revert(PieceTable* pieceTable) const = 0;
 
     virtual ArrayChangeMetrics metrics() const = 0;
     /// returns the size of the added data. Default returns 0.

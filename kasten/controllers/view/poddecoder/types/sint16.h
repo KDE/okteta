@@ -27,26 +27,24 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct SInt16
 {
-  public:
-    SInt16( qint16 v );
+public:
+    SInt16(qint16 v);
     SInt16();
 
-  public:
+public:
     QString toString() const;
 
-  public:
+public:
     qint16 value;
 };
 
+inline SInt16::SInt16() : value(0) {}
+inline SInt16::SInt16(qint16 v) : value(v) {}
 
-inline SInt16::SInt16() : value( 0 ) {}
-inline SInt16::SInt16( qint16 v ) : value( v ) {}
+inline QString SInt16::toString() const { return QString::number(value); }
 
-inline QString SInt16::toString() const { return QString::number( value ); }
-
-Q_DECLARE_METATYPE( SInt16 )
+Q_DECLARE_METATYPE(SInt16)
 
 #endif

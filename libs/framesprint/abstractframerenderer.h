@@ -31,11 +31,11 @@ class QPainter;
 // frame only horizontal duplicated or also vertical?
 class AbstractFrameRenderer
 {
-  public:
+public:
     AbstractFrameRenderer();
     virtual ~AbstractFrameRenderer();
 
-  public: // API to be implemented
+public: // API to be implemented
     // make this flags?
 //     virtual bool hasFixedWidth() const = 0;
 //     virtual bool hasFixedHeight() const = 0;
@@ -47,22 +47,22 @@ class AbstractFrameRenderer
 
     /** painting will start, fix all things like Time and Data */
     virtual void prepare() = 0;
-    virtual void renderFrame( QPainter *painter, int frameIndex ) = 0;
+    virtual void renderFrame(QPainter* painter, int frameIndex) = 0;
 
-  public:
-    void setPos( int x, int y );
-    void setPos( const QPoint &point );
+public:
+    void setPos(int x, int y);
+    void setPos(const QPoint& point);
 
-  public:
+public:
     QPoint pos () const;
     QRect rect () const;
     QSize size () const;
     int x() const;
     int y() const;
 
-  protected:
+protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 #endif

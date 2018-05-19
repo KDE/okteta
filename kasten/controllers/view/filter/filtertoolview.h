@@ -28,26 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class FilterView;
 class FilterTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT FilterToolView : public AbstractToolView
 {
-  public:
-    explicit FilterToolView( FilterTool* tool );
+public:
+    explicit FilterToolView(FilterTool* tool);
     ~FilterToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     FilterView* mWidget;
 };
 

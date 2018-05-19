@@ -46,31 +46,34 @@ QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) cons
 QVariant UnsignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
     const UIntSpinBox* spin = qobject_cast<const UIntSpinBox*> (w);
-    if (spin)
+    if (spin) {
         return spin->value();
-    else
+    } else {
         return QVariant();
+    }
 }
 
 void UnsignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = qobject_cast<UIntSpinBox*> (w);
-    if (spin)
+    if (spin) {
         spin->setValue(mValue.value<quint64>());
+    }
 }
 
 QScriptValue UnsignedBitfieldDataInformation::valueAsQScriptValue() const
 {
-    if (width() <= 32)
-        return  mValue.value<quint32>() & quint32(mask()); //32 bit or less -> can be put in as value
-    else
+    if (width() <= 32) {
+        return mValue.value<quint32>() & quint32(mask());  // 32 bit or less -> can be put in as value
+    } else {
         return QString::number(mValue.value<quint64>());
+    }
 }
 
 QString UnsignedBitfieldDataInformation::typeNameImpl() const
 {
     return i18ncp("Data type", "unsigned bitfield (%1 bit wide)",
-            "unsigned bitfield (%1 bits wide)", width());
+                  "unsigned bitfield (%1 bits wide)", width());
 }
 
 AbstractBitfieldDataInformation::Type UnsignedBitfieldDataInformation::bitfieldType() const

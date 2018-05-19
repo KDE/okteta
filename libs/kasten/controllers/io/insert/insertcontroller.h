@@ -32,9 +32,7 @@ class KXMLGUIClient;
 class KSelectAction;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ModelCodecViewManager;
 class ModelCodecManager;
@@ -42,27 +40,26 @@ namespace If {
 class SelectedDataWriteable;
 }
 
-
 class KASTENCONTROLLERS_EXPORT InsertController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    InsertController( ModelCodecViewManager* modelCodecViewManager,
-                      ModelCodecManager* modelCodecManager,
-                      KXMLGUIClient* guiClient );
+public:
+    InsertController(ModelCodecViewManager* modelCodecViewManager,
+                     ModelCodecManager* modelCodecManager,
+                     KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private:
+private:
     void updateActions();
 
-  private Q_SLOTS:
-    void onReadOnlyChanged( bool isReadOnly );
-    void onActionTriggered( QAction* action );
+private Q_SLOTS:
+    void onReadOnlyChanged(bool isReadOnly);
+    void onActionTriggered(QAction* action);
 
-  private:
+private:
     ModelCodecViewManager* mModelCodecViewManager;
     ModelCodecManager* mModelCodecManager;
 

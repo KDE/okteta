@@ -30,77 +30,74 @@
 #include <QFormLayout>
 #include <QSpinBox>
 
-
 const char RotateByteArrayFilterParameterSetEdit::Id[] = "Rotate";
 
-
-RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit( QWidget* parent )
- : AbstractByteArrayFilterParameterSetEdit( parent )
+RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWidget* parent)
+    : AbstractByteArrayFilterParameterSetEdit(parent)
 {
-    QFormLayout* baseLayout = new QFormLayout( this );
-    baseLayout->setMargin( 0 );
+    QFormLayout* baseLayout = new QFormLayout(this);
+    baseLayout->setMargin(0);
 
-    mGroupSizeEdit = new QSpinBox( this );
-    mGroupSizeEdit->setRange( 1, INT_MAX );
+    mGroupSizeEdit = new QSpinBox(this);
+    mGroupSizeEdit->setRange(1, INT_MAX);
 
     const QString groupSizeLabelText =
-         i18nc( "@label:spinbox number of bytes the movement is done within",
-                "&Group size (bytes):" );
+        i18nc("@label:spinbox number of bytes the movement is done within",
+              "&Group size (bytes):");
     const QString groupSizeToolTip =
-        i18nc( "@info:tooltip",
-               "The number of bytes within which each movement is made." );
-    mGroupSizeEdit->setToolTip( groupSizeToolTip );
+        i18nc("@info:tooltip",
+              "The number of bytes within which each movement is made.");
+    mGroupSizeEdit->setToolTip(groupSizeToolTip);
     const QString groupSizeWhatsThis =
-        i18nc( "@info:whatsthis",
-               "Control the number of bytes within which each movement is made." );
-    mGroupSizeEdit->setWhatsThis( groupSizeWhatsThis );
+        i18nc("@info:whatsthis",
+              "Control the number of bytes within which each movement is made.");
+    mGroupSizeEdit->setWhatsThis(groupSizeWhatsThis);
 
-    baseLayout->addRow( groupSizeLabelText, mGroupSizeEdit );
+    baseLayout->addRow(groupSizeLabelText, mGroupSizeEdit);
 
-    mMoveBitWidthEdit = new QSpinBox( this );
-    mMoveBitWidthEdit->setRange( INT_MIN, INT_MAX );
-    connect( mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),
-             this, &RotateByteArrayFilterParameterSetEdit::onValueChanged );
+    mMoveBitWidthEdit = new QSpinBox(this);
+    mMoveBitWidthEdit->setRange(INT_MIN, INT_MAX);
+    connect(mMoveBitWidthEdit, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &RotateByteArrayFilterParameterSetEdit::onValueChanged);
 
     const QString moveBitWidthLabelText =
-        i18nc( "@label:spinbox width (in number of bits) the bits are moved",
-               "S&hift width (bits):" );
+        i18nc("@label:spinbox width (in number of bits) the bits are moved",
+              "S&hift width (bits):");
     const QString moveBitWidthToolTip =
-        i18nc( "@info:tooltip",
-               "The width of the shift. Positive numbers move the bits to the right, negative to the left." );
-    mMoveBitWidthEdit->setToolTip( moveBitWidthToolTip );
+        i18nc("@info:tooltip",
+              "The width of the shift. Positive numbers move the bits to the right, negative to the left.");
+    mMoveBitWidthEdit->setToolTip(moveBitWidthToolTip);
     const QString moveBitWidthWhatsThis =
-        i18nc( "@info:whatsthis",
-               "Control the width of the shift. Positive numbers move the bits to the right, negative to the left." );
-    mMoveBitWidthEdit->setWhatsThis( moveBitWidthWhatsThis );
+        i18nc("@info:whatsthis",
+              "Control the width of the shift. Positive numbers move the bits to the right, negative to the left.");
+    mMoveBitWidthEdit->setWhatsThis(moveBitWidthWhatsThis);
 
-    baseLayout->addRow( moveBitWidthLabelText, mMoveBitWidthEdit );
+    baseLayout->addRow(moveBitWidthLabelText, mMoveBitWidthEdit);
 }
 
 bool RotateByteArrayFilterParameterSetEdit::isValid() const { return mMoveBitWidthEdit->value() != 0; }
 
-void RotateByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayFilterParameterSet *parameterSet )
+void RotateByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const RotateByteArrayFilterParameterSet *rotateParameterSet =
-        static_cast<const RotateByteArrayFilterParameterSet *>( parameterSet );
+    const RotateByteArrayFilterParameterSet* rotateParameterSet =
+        static_cast<const RotateByteArrayFilterParameterSet*>(parameterSet);
 
-    mGroupSizeEdit->setValue( rotateParameterSet->groupSize() );
-    mMoveBitWidthEdit->setValue( rotateParameterSet->moveBitWidth() );
+    mGroupSizeEdit->setValue(rotateParameterSet->groupSize());
+    mMoveBitWidthEdit->setValue(rotateParameterSet->moveBitWidth());
 }
 
-void RotateByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
+void RotateByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    RotateByteArrayFilterParameterSet *rotateParameterSet =
-        static_cast<RotateByteArrayFilterParameterSet *>( parameterSet );
+    RotateByteArrayFilterParameterSet* rotateParameterSet =
+        static_cast<RotateByteArrayFilterParameterSet*>(parameterSet);
 
-    rotateParameterSet->setGroupSize( mGroupSizeEdit->value() );
-    rotateParameterSet->setMoveBitWidth( mMoveBitWidthEdit->value() );
+    rotateParameterSet->setGroupSize(mGroupSizeEdit->value());
+    rotateParameterSet->setMoveBitWidth(mMoveBitWidthEdit->value());
 }
 
-
-void RotateByteArrayFilterParameterSetEdit::onValueChanged( int value )
+void RotateByteArrayFilterParameterSetEdit::onValueChanged(int value)
 {
-    emit validityChanged( value != 0 );
+    emit validityChanged(value != 0);
 }
 
 RotateByteArrayFilterParameterSetEdit::~RotateByteArrayFilterParameterSetEdit()

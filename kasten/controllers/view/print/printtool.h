@@ -30,56 +30,53 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 class ByteArrayDocument;
 class AbstractModel;
 
-
 /**
-This tool cares for the printing of the byte array to a series of papers.
-This is done by creating a series of print commands, which may also
-be in form of a pdf document. We don't care for this, it's done
-by Qt and the print dialog.
+   This tool cares for the printing of the byte array to a series of papers.
+   This is done by creating a series of print commands, which may also
+   be in form of a pdf document. We don't care for this, it's done
+   by Qt and the print dialog.
 
-The content is printed into a series of frames. By default there are
-a header frame, the content frame and the footer frame on each page.
+   The content is printed into a series of frames. By default there are
+   a header frame, the content frame and the footer frame on each page.
 
 
--> Header printer, footer printer, content printer
--> called by a pageprinter which knows about the layout
--> pageprinter controls the page settings and informs the embedded printer
--> frameprinter return number of frames they need for their content
--> endless frames vs. ending frames
--> vars for each frame: see KWrite
--> 
+   -> Header printer, footer printer, content printer
+   -> called by a pageprinter which knows about the layout
+   -> pageprinter controls the page settings and informs the embedded printer
+   -> frameprinter return number of frames they need for their content
+   -> endless frames vs. ending frames
+   -> vars for each frame: see KWrite
+   ->
 
-*/
+ */
 class PrintTool : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     PrintTool();
     ~PrintTool() override;
 
-  public:
-    void setTargetModel( AbstractModel* model );
+public:
+    void setTargetModel(AbstractModel* model);
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void print();
 
-  Q_SIGNALS:
-    void viewChanged( bool hasView );
+Q_SIGNALS:
+    void viewChanged(bool hasView);
 
-  protected:
-    ByteArrayDocument *mDocument;
+protected:
+    ByteArrayDocument* mDocument;
 
     ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 
 }

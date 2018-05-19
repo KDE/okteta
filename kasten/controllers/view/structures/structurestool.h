@@ -38,31 +38,29 @@ class QModelIndex;
 
 class DataInformation;
 
-namespace Okteta
-{
+namespace Okteta {
 class ArrayChangeMetricsList;
 class AbstractByteArrayModel;
 }
 
-namespace Kasten
-{
+namespace Kasten {
 class StructuresManager;
 class StructuresToolPrivate;
 
 class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     StructuresTool();
     ~StructuresTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
     // virtual AbstractModel* targetModel() const;
     QString title() const override;
     void setTargetModel(AbstractModel* model) override;
 
-  public:
+public:
     QSysInfo::Endian byteOrder() const;
     void setByteOrder(QSysInfo::Endian order);
     bool setData(const QVariant& value, int role, DataInformation* item, uint row);
@@ -75,14 +73,14 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
     bool canStructureBeLocked(const QModelIndex& idx) const;
     bool isFileLoaded() const;
 
-    //interface for model
+    // interface for model
     QVariant headerData(int column, int role) const;
     int childCount() const;
     DataInformation* childAt(int idx) const;
     TopLevelDataInformation::List allData() const;
 
-  Q_SIGNALS:
-    void dataChanged(int row, void* data); //actually a DataInformation*
+Q_SIGNALS:
+    void dataChanged(int row, void* data); // actually a DataInformation*
     void dataCleared();
     void byteOrderChanged();
     void cursorIndexChanged();
@@ -96,7 +94,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
     /** items are inserted before @p startIndex */
     void childrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void setByteOrder(int order);
     void mark(const QModelIndex& idx);
     void unmark(/*const QModelIndex& idx*/);
@@ -105,16 +103,16 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
     void setSelectedStructuresInView();
     void validateAllStructures();
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onByteOrderChanged();
     void onCursorPositionChange(Okteta::Address pos);
     void onContentsChange(const Okteta::ArrayChangeMetricsList&);
     void onChildItemDataChanged();
 
-  private:
+private:
     Okteta::Address startAddress(const TopLevelDataInformation* data) const;
 
-  private:
+private:
     // source
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
@@ -125,8 +123,8 @@ class OKTETAKASTENCONTROLLERS_EXPORT StructuresTool : public AbstractTool
     QScopedPointer<StructuresManager> mManager;
     TopLevelDataInformation::List mData;
     TopLevelDataInformation::List mInvalidData;
-    bool mWritingData :1;
-    bool mCurrentItemDataChanged :1;
+    bool mWritingData : 1;
+    bool mCurrentItemDataChanged : 1;
 };
 
 }

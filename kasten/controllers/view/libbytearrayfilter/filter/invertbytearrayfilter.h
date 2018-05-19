@@ -28,21 +28,20 @@
 //
 #include <abstractbytearrayfilter.h>
 
-
 class InvertByteArrayFilter : public AbstractByteArrayFilter
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     InvertByteArrayFilter();
 
     ~InvertByteArrayFilter() override;
 
-  public: // AbstractByteArrayFilter API
-    bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const override;
-    AbstractByteArrayFilterParameterSet *parameterSet() override;
+public: // AbstractByteArrayFilter API
+    bool filter(Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
+    AbstractByteArrayFilterParameterSet* parameterSet() override;
 
-  protected:
+protected:
     NoByteArrayFilterParameterSet mNoParameterSet;
 };
 

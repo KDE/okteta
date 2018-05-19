@@ -26,22 +26,19 @@
 // lib
 #include "abstractwheelcontroller.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayView;
-
 
 class ZoomWheelController : public AbstractWheelController
 {
-  public:
-    ZoomWheelController( AbstractByteArrayView* view, AbstractWheelController* parent );
+public:
+    ZoomWheelController(AbstractByteArrayView* view, AbstractWheelController* parent);
     ~ZoomWheelController() override;
 
-  public: // AbstractWheelController API
-    bool handleWheelEvent( QWheelEvent* wheelEvent ) override;
+public: // AbstractWheelController API
+    bool handleWheelEvent(QWheelEvent* wheelEvent) override;
 
-  protected:
+protected:
     AbstractByteArrayView* mView;
 };
 

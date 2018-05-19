@@ -8,7 +8,7 @@
     published by the Free Software Foundation; either version 2 of
     the License or (at your option) version 3 or any later version
     accepted by the membership of KDE e.V. (or its successor approved
-    by the membership of KDE e.V.), which shall act as a proxy 
+    by the membership of KDE e.V.), which shall act as a proxy
     defined in Section 14 of version 3 of the license.
 
     This program is distributed in the hope that it will be useful,
@@ -56,30 +56,28 @@
 #include <QDir>
 #include <QLoggingCategory>
 
-namespace Kasten
-{
+namespace Kasten {
 
 // static const char OffsetOptionId[] = "offset";
 // static const char OffsetOptionShortId[] = "o";
 
-OktetaProgram::OktetaProgram( int &argc, char* argv[] )
-  : mApp( argc, argv )
+OktetaProgram::OktetaProgram(int& argc, char* argv[])
+    : mApp(argc, argv)
 {
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-    KLocalizedString::setApplicationDomain( "okteta" );
+    KLocalizedString::setApplicationDomain("okteta");
     KCrash::initialize();
 }
-
 
 int OktetaProgram::execute()
 {
     mDocumentManager = new DocumentManager();
     mViewManager = new ViewManager();
-    mDocumentStrategy = new MultiDocumentStrategy( mDocumentManager, mViewManager );
+    mDocumentStrategy = new MultiDocumentStrategy(mDocumentManager, mViewManager);
     mDialogHandler = new DialogHandler();
 
     OktetaAboutData aboutData;
-    KAboutData::setApplicationData( aboutData );
+    KAboutData::setApplicationData(aboutData);
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("okteta")));
 
     QCommandLineParser parser;
@@ -88,7 +86,7 @@ int OktetaProgram::execute()
     parser.addVersionOption();
 
     // urls to open
-    parser.addPositionalArgument( QStringLiteral("urls"), i18n("File(s) to load."), QStringLiteral("[urls...]") );
+    parser.addPositionalArgument(QStringLiteral("urls"), i18n("File(s) to load."), QStringLiteral("[urls...]"));
 
     // offset option
 //     programOptions.add( OffsetOptionShortId );
@@ -102,7 +100,7 @@ int OktetaProgram::execute()
 
     // TODO:
     mByteArrayViewProfileManager = new ByteArrayViewProfileManager();
-    //mModelManagerManager->addModelManager( byteArrayViewProfileManager );
+    // mModelManagerManager->addModelManager( byteArrayViewProfileManager );
 
     const QList<AbstractModelStreamEncoder*> encoderList =
         ByteArrayStreamEncoderFactory::createStreamEncoders();
@@ -116,37 +114,33 @@ int OktetaProgram::execute()
     const QList<AbstractModelDataGeneratorConfigEditorFactory*> generatorConfigEditorFactoryList =
         ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys();
 
-    mDocumentManager->codecManager()->setEncoders( encoderList );
-    mDocumentManager->codecManager()->setGenerators( generatorList );
-    mDocumentManager->codecManager()->setOverwriteDialog( mDialogHandler );
-    mDocumentManager->createManager()->setDocumentFactory( new ByteArrayDocumentFactory() );
-    mDocumentManager->syncManager()->setDocumentSynchronizerFactory( new ByteArrayRawFileSynchronizerFactory() );
-    mDocumentManager->syncManager()->setOverwriteDialog( mDialogHandler );
-    mDocumentManager->syncManager()->setSaveDiscardDialog( mDialogHandler );
+    mDocumentManager->codecManager()->setEncoders(encoderList);
+    mDocumentManager->codecManager()->setGenerators(generatorList);
+    mDocumentManager->codecManager()->setOverwriteDialog(mDialogHandler);
+    mDocumentManager->createManager()->setDocumentFactory(new ByteArrayDocumentFactory());
+    mDocumentManager->syncManager()->setDocumentSynchronizerFactory(new ByteArrayRawFileSynchronizerFactory());
+    mDocumentManager->syncManager()->setOverwriteDialog(mDialogHandler);
+    mDocumentManager->syncManager()->setSaveDiscardDialog(mDialogHandler);
 
-    mViewManager->setViewFactory( new ByteArrayViewFactory(mByteArrayViewProfileManager) );
-    mViewManager->codecViewManager()->setEncoderConfigEditorFactories( encoderConfigEditorFactoryList );
-    mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
+    mViewManager->setViewFactory(new ByteArrayViewFactory(mByteArrayViewProfileManager));
+    mViewManager->codecViewManager()->setEncoderConfigEditorFactories(encoderConfigEditorFactoryList);
+    mViewManager->codecViewManager()->setGeneratorConfigEditorFactories(generatorConfigEditorFactoryList);
 
-    OktetaMainWindow* mainWindow = new OktetaMainWindow( this );
-    mDialogHandler->setWidget( mainWindow );
+    OktetaMainWindow* mainWindow = new OktetaMainWindow(this);
+    mDialogHandler->setWidget(mainWindow);
 
     // started by session management?
-    if( mApp.isSessionRestored() && KMainWindow::canBeRestored(1) )
-    {
-        mainWindow->restore( 1 );
-    }
-    else
-    {
+    if (mApp.isSessionRestored() && KMainWindow::canBeRestored(1)) {
+        mainWindow->restore(1);
+    } else {
         // no session.. just start up normally
         const QStringList urls = parser.positionalArguments();
 
         // take arguments
-        if( ! urls.isEmpty() )
-        {
+        if (!urls.isEmpty()) {
             const QString currentPath = QDir::currentPath();
-            for (const QString &url : urls) {
-                mDocumentStrategy->load( QUrl::fromUserInput(url, currentPath, QUrl::AssumeLocalFile) );
+            for (const QString& url : urls) {
+                mDocumentStrategy->load(QUrl::fromUserInput(url, currentPath, QUrl::AssumeLocalFile));
             }
         }
 
@@ -157,12 +151,10 @@ int OktetaProgram::execute()
     return mApp.exec();
 }
 
-
 void OktetaProgram::quit()
 {
     qApp->quit();
 }
-
 
 OktetaProgram::~OktetaProgram()
 {

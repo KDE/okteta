@@ -31,31 +31,28 @@
 class KAction;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ViewManager;
 
-
 class KASTENCONTROLLERS_EXPORT CloseController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    CloseController( ViewManager* viewManager, KXMLGUIClient* guiClient );
+public:
+    CloseController(ViewManager* viewManager, KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    virtual void setTargetModel( AbstractModel* model );
+public: // AbstractXmlGuiController API
+    virtual void setTargetModel(AbstractModel* model);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void close();
 
-  private:
-    ViewManager *mViewManager;
+private:
+    ViewManager* mViewManager;
 
-    AbstractView *mView;
-    KAction *mCloseAction;
+    AbstractView* mView;
+    KAction* mCloseAction;
 };
 
 }

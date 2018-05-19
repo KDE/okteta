@@ -22,7 +22,7 @@
 
 // QCA
 // need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
-#include <config-qca2.h> //krazy:excludeall=includes
+#include <config-qca2.h> // krazy:excludeall=includes
 #ifdef HAVE_QCA2
 // disable QT_NO_CAST_FROM_ASCII
 #ifdef QT_NO_CAST_FROM_ASCII
@@ -38,18 +38,17 @@
 // Qt
 #include <QByteArray>
 
-
-Qca2ByteArrayChecksumAlgorithm::Qca2ByteArrayChecksumAlgorithm( const QString& name, const QString& type )
-  : AbstractByteArrayChecksumAlgorithm( name ),
-    mType( type )
+Qca2ByteArrayChecksumAlgorithm::Qca2ByteArrayChecksumAlgorithm(const QString& name, const QString& type)
+    : AbstractByteArrayChecksumAlgorithm(name)
+    , mType(type)
 {}
 
 AbstractByteArrayChecksumParameterSet* Qca2ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
-bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                        const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
+bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
+                                                       const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
-    QCA::Hash hash( mType );
+    QCA::Hash hash(mType);
 
     // TODO: find a way without needing to copy, perhaps by smart iterator which can return spans of original data
     // TODO: see if buffer size could be a value which matches the algorithm and qca2
@@ -57,23 +56,22 @@ bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
     char buffer[CalculatedByteCountSignalLimit];
     int bufferLength = CalculatedByteCountSignalLimit;
     Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
-    for( Okteta::Address i = range.start(); i<=range.end(); i+=CalculatedByteCountSignalLimit )
-    {
-        if( range.end() < i+CalculatedByteCountSignalLimit )
+    for (Okteta::Address i = range.start(); i <= range.end(); i += CalculatedByteCountSignalLimit) {
+        if (range.end() < i + CalculatedByteCountSignalLimit) {
             bufferLength = range.end() - i + 1;
-        model->copyTo( reinterpret_cast<Okteta::Byte*>(buffer), i, bufferLength );
-        hash.update( buffer, bufferLength );
+        }
+        model->copyTo(reinterpret_cast<Okteta::Byte*>(buffer), i, bufferLength);
+        hash.update(buffer, bufferLength);
 
-        if( i >= nextBlockEnd )
-        {
+        if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( range.localIndex(i)+1 );
+            emit calculatedBytes(range.localIndex(i) + 1);
         }
     }
 
-    const QByteArray hashResult = hash.final().toByteArray();
+    const QByteArray hashResult = hash.final ().toByteArray();
 
-    *result = QCA::arrayToHex( hashResult );
+    *result = QCA::arrayToHex(hashResult);
     return true;
 }
 

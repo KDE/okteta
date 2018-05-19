@@ -30,19 +30,16 @@
 class QUrl;
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KASTENCORE_EXPORT AbstractOverwriteDialog
 {
-  public:
+public:
     virtual ~AbstractOverwriteDialog();
 
-  public: // API to be implemented
-    virtual Answer queryOverwrite( const QUrl& url, const QString& title ) const = 0;
+public: // API to be implemented
+    virtual Answer queryOverwrite(const QUrl& url, const QString& title) const = 0;
 };
-
 
 inline AbstractOverwriteDialog::~AbstractOverwriteDialog() {}
 

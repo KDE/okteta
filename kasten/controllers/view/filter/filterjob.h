@@ -35,25 +35,23 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class FilterJob : public QObject // not yet: KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    FilterJob( AbstractByteArrayFilter* byteArrayFilter,
-               Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range );
+public:
+    FilterJob(AbstractByteArrayFilter* byteArrayFilter,
+              Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range);
 
-  public:
+public:
     bool exec();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onFilteredBytes();
 
-  protected:
+protected:
     AbstractByteArrayFilter* mByteArrayFilter;
 
     Okteta::Byte* mResult;
@@ -61,10 +59,13 @@ class FilterJob : public QObject // not yet: KJob
     const Okteta::AddressRange mRange;
 };
 
-
-inline FilterJob::FilterJob( AbstractByteArrayFilter* byteArrayFilter,
-               Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range )
- : mByteArrayFilter( byteArrayFilter ), mResult( result ), mModel( model ), mRange( range )
+inline FilterJob::FilterJob(AbstractByteArrayFilter* byteArrayFilter,
+                            Okteta::Byte* result, Okteta::AbstractByteArrayModel* model,
+                            const Okteta::AddressRange& range)
+    : mByteArrayFilter(byteArrayFilter)
+    , mResult(result)
+    , mModel(model)
+    , mRange(range)
 {}
 
 }

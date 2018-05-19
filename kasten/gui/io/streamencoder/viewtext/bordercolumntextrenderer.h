@@ -23,25 +23,22 @@
 #ifndef BORDERCOLUMNTEXTRENDERER_H
 #define BORDERCOLUMNTEXTRENDERER_H
 
-
 // lib
 #include "abstractcolumntextrenderer.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class BorderColumnTextRenderer : public AbstractColumnTextRenderer
 {
-  public:
+public:
     ~BorderColumnTextRenderer() override {}
 
-  public: // AbstractColumnTextRenderer API
-    void renderFirstLine( QTextStream *stream, int lineIndex ) const override;
-    void renderNextLine( QTextStream* stream, bool isSubline ) const override;
+public: // AbstractColumnTextRenderer API
+    void renderFirstLine(QTextStream* stream, int lineIndex) const override;
+    void renderNextLine(QTextStream* stream, bool isSubline) const override;
 
-  protected:
-    void render( QTextStream *stream ) const;
+protected:
+    void render(QTextStream* stream) const;
 };
 
 }

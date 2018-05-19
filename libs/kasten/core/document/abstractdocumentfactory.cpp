@@ -22,21 +22,19 @@
 
 #include "abstractdocumentfactory.h"
 
+namespace Kasten {
 
-namespace Kasten
+bool AbstractDocumentFactory::canCreateFromData(const QMimeData* mimeData)
 {
-
-bool AbstractDocumentFactory::canCreateFromData( const QMimeData* mimeData )
-{
-    Q_UNUSED( mimeData );
+    Q_UNUSED(mimeData);
 
     return false;
 }
 
-AbstractDocument* AbstractDocumentFactory::createFromData( const QMimeData* mimeData, bool setModified )
+AbstractDocument* AbstractDocumentFactory::createFromData(const QMimeData* mimeData, bool setModified)
 {
-    Q_UNUSED( mimeData );
-    Q_UNUSED( setModified );
+    Q_UNUSED(mimeData);
+    Q_UNUSED(setModified);
 
     return nullptr;
 }

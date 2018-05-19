@@ -31,30 +31,27 @@
 class KXMLGUIClient;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractGroupedViews;
 
-
 class KASTENCONTROLLERS_EXPORT SwitchViewController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    SwitchViewController( AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient );
+public:
+    SwitchViewController(AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void forward();
     void backward();
 
     void updateActions();
 
-  private:
+private:
     AbstractGroupedViews* mGroupedViews;
 
     QAction* mForwardAction;

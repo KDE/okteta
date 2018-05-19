@@ -29,28 +29,26 @@
 // class Bookmark;
 class QLineEdit;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class BookmarkEditPopup : public AbstractLinePopup
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit BookmarkEditPopup( QWidget* parent = nullptr );
+public:
+    explicit BookmarkEditPopup(QWidget* parent = nullptr);
     ~BookmarkEditPopup() override;
 
-  public:
+public:
     QString name() const;
 
-  public:
-    void setName( const QString& name );
+public:
+    void setName(const QString& name);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onReturnPressed();
 
-  private:
+private:
     QLineEdit* mBookmarkNameLineEdit;
 };
 

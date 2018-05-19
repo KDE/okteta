@@ -26,47 +26,44 @@
 // lib
 #include "abstractloadjob.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractLoadJobPrivate
 {
-  public:
-    explicit AbstractLoadJobPrivate( AbstractLoadJob* parent );
+public:
+    explicit AbstractLoadJobPrivate(AbstractLoadJob* parent);
 
     virtual ~AbstractLoadJobPrivate();
 
-  public:
+public:
     AbstractDocument* document() const;
 
-  public:
-    void setDocument( AbstractDocument* document );
+public:
+    void setDocument(AbstractDocument* document);
 
-  protected:
-    Q_DECLARE_PUBLIC( AbstractLoadJob )
-  protected:
+protected:
+    Q_DECLARE_PUBLIC(AbstractLoadJob)
+
+protected:
     AbstractLoadJob* const q_ptr;
 
     AbstractDocument* mDocument;
 };
 
-
-inline AbstractLoadJobPrivate::AbstractLoadJobPrivate( AbstractLoadJob* parent )
-  : q_ptr( parent ),
-    mDocument( nullptr )
+inline AbstractLoadJobPrivate::AbstractLoadJobPrivate(AbstractLoadJob* parent)
+    : q_ptr(parent)
+    , mDocument(nullptr)
 {}
 inline AbstractLoadJobPrivate::~AbstractLoadJobPrivate() {}
 
 inline AbstractDocument* AbstractLoadJobPrivate::document() const { return mDocument; }
-inline void AbstractLoadJobPrivate::setDocument( AbstractDocument* document )
+inline void AbstractLoadJobPrivate::setDocument(AbstractDocument* document)
 {
-    Q_Q( AbstractLoadJob );
+    Q_Q(AbstractLoadJob);
 
-    if( document )
-    {
+    if (document) {
         mDocument = document;
-        emit q->documentLoaded( document );
+        emit q->documentLoaded(document);
     }
 
     q->emitResult();

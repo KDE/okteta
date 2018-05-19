@@ -26,27 +26,24 @@
 #include "bytearraysrecstreamencoderconfigeditor.h"
 #include "bytearraysrecstreamencoder.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArraySRecStreamEncoderConfigEditorFactory::ByteArraySRecStreamEncoderConfigEditorFactory()
 {
 }
 
-
-AbstractModelStreamEncoderConfigEditor* ByteArraySRecStreamEncoderConfigEditorFactory::tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const
+AbstractModelStreamEncoderConfigEditor* ByteArraySRecStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     AbstractModelStreamEncoderConfigEditor* result = nullptr;
     ByteArraySRecStreamEncoder* srecStreamEncoder =
-        qobject_cast<ByteArraySRecStreamEncoder*>( encoder );
+        qobject_cast<ByteArraySRecStreamEncoder*>(encoder);
 
-    if( srecStreamEncoder )
-        result = new ByteArraySRecStreamEncoderConfigEditor( srecStreamEncoder );
+    if (srecStreamEncoder) {
+        result = new ByteArraySRecStreamEncoderConfigEditor(srecStreamEncoder);
+    }
 
     return result;
 }
-
 
 ByteArraySRecStreamEncoderConfigEditorFactory::~ByteArraySRecStreamEncoderConfigEditorFactory() {}
 

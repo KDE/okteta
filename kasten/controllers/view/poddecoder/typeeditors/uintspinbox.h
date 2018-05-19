@@ -28,133 +28,134 @@
 // C++
 #include <limits>
 
-
 class UIntSpinBox : public QAbstractSpinBox
 {
-Q_OBJECT
-Q_PROPERTY( quint64 value READ value WRITE setValue USER true )
-  public:
-    explicit UIntSpinBox( QWidget* parent = nullptr, int base = 10 );
+    Q_OBJECT
+    Q_PROPERTY(quint64 value READ value WRITE setValue USER true)
+
+public:
+    explicit UIntSpinBox(QWidget* parent = nullptr, int base = 10);
 
     ~UIntSpinBox() override;
 
-  public:
+public:
     quint64 value() const;
 
     quint64 maximum() const;
 
-  public:
-    void setValue( quint64 value );
+public:
+    void setValue(quint64 value);
 
-    void setMaximum( quint64 max );
-    void setBase( int base );
+    void setMaximum(quint64 max);
+    void setBase(int base);
 
-    static UIntSpinBox* createUInt64Spinbox( QWidget* parent = nullptr );
-    static UIntSpinBox* createUInt32Spinbox( QWidget* parent = nullptr );
-    static UIntSpinBox* createUInt16Spinbox( QWidget* parent = nullptr );
-    static UIntSpinBox* createUInt8Spinbox( QWidget* parent = nullptr );
+    static UIntSpinBox* createUInt64Spinbox(QWidget* parent = nullptr);
+    static UIntSpinBox* createUInt32Spinbox(QWidget* parent = nullptr);
+    static UIntSpinBox* createUInt16Spinbox(QWidget* parent = nullptr);
+    static UIntSpinBox* createUInt8Spinbox(QWidget* parent = nullptr);
 
-  protected: // QAbstractSpinBox API
-    QValidator::State validate( QString& input, int& pos ) const override;
-    void stepBy( int steps ) override;
-    void fixup( QString& input ) const override;
+protected: // QAbstractSpinBox API
+    QValidator::State validate(QString& input, int& pos) const override;
+    void stepBy(int steps) override;
+    void fixup(QString& input) const override;
     StepEnabled stepEnabled() const override;
 
-  protected:
+protected:
     void updateEditLine() const;
 
-  protected:
+protected:
     mutable quint64 mValue;
 
     quint64 mMaximum;
-    //TODO minimum
+    // TODO minimum
     int mBase;
 
     QString mPrefix;
 };
 
-
-inline UIntSpinBox::UIntSpinBox( QWidget *parent, int base )
-  : QAbstractSpinBox( parent ),
-    mValue( 0 ),
-    mMaximum( std::numeric_limits<quint64>::max() ),
-    mBase( 0 )
+inline UIntSpinBox::UIntSpinBox(QWidget* parent, int base)
+    : QAbstractSpinBox(parent)
+    , mValue(0)
+    , mMaximum(std::numeric_limits<quint64>::max())
+    , mBase(0)
 {
-    setBase( base );
+    setBase(base);
 }
 
 inline quint64 UIntSpinBox::value()   const { return mValue; }
 inline quint64 UIntSpinBox::maximum() const { return mMaximum; }
 
-inline void UIntSpinBox::setMaximum( quint64 maximum )
+inline void UIntSpinBox::setMaximum(quint64 maximum)
 {
-    if( mMaximum == maximum )
+    if (mMaximum == maximum) {
         return;
+    }
 
     mMaximum = maximum;
 
-    if( mValue > mMaximum )
-    {
+    if (mValue > mMaximum) {
         mValue = mMaximum;
 
         updateEditLine();
     }
 }
 
-inline void UIntSpinBox::setValue( quint64 value )
+inline void UIntSpinBox::setValue(quint64 value)
 {
-    if( value > mMaximum )
+    if (value > mMaximum) {
         value = mMaximum;
+    }
 
-    if( mValue == value )
+    if (mValue == value) {
         return;
+    }
 
     mValue = value;
 
     updateEditLine();
 }
 
-inline void UIntSpinBox::setBase( int base )
+inline void UIntSpinBox::setBase(int base)
 {
-    base = qBound( 2, base, 36 );
+    base = qBound(2, base, 36);
 
-    if( mBase == base )
+    if (mBase == base) {
         return;
+    }
 
     mBase = base;
     mPrefix = QString::fromLatin1(
         (base == 16) ? "0x" :
         (base ==  8) ? "0o" :
         (base ==  2) ? "0b" :
-        /* else */     nullptr );
+        /* else */     nullptr);
 }
 
 inline UIntSpinBox::~UIntSpinBox() {}
 
-
-inline UIntSpinBox* UIntSpinBox::createUInt64Spinbox( QWidget* parent )
+inline UIntSpinBox* UIntSpinBox::createUInt64Spinbox(QWidget* parent)
 {
-    return new UIntSpinBox( parent );
+    return new UIntSpinBox(parent);
 }
 
-inline UIntSpinBox* UIntSpinBox::createUInt32Spinbox( QWidget* parent )
+inline UIntSpinBox* UIntSpinBox::createUInt32Spinbox(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox( parent );
-    ret->setMaximum( std::numeric_limits<quint32>::max() );
+    UIntSpinBox* ret = new UIntSpinBox(parent);
+    ret->setMaximum(std::numeric_limits<quint32>::max());
     return ret;
 }
 
-inline UIntSpinBox* UIntSpinBox::createUInt16Spinbox( QWidget* parent )
+inline UIntSpinBox* UIntSpinBox::createUInt16Spinbox(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox( parent );
-    ret->setMaximum( std::numeric_limits<quint16>::max() );
+    UIntSpinBox* ret = new UIntSpinBox(parent);
+    ret->setMaximum(std::numeric_limits<quint16>::max());
     return ret;
 }
 
-inline UIntSpinBox* UIntSpinBox::createUInt8Spinbox( QWidget* parent )
+inline UIntSpinBox* UIntSpinBox::createUInt8Spinbox(QWidget* parent)
 {
-    UIntSpinBox* ret = new UIntSpinBox( parent );
-    ret->setMaximum( std::numeric_limits<quint8>::max() );
+    UIntSpinBox* ret = new UIntSpinBox(parent);
+    ret->setMaximum(std::numeric_limits<quint8>::max());
     return ret;
 }
 

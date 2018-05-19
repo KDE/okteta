@@ -31,9 +31,7 @@
 
 class QUrl;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractLoadJob;
 class AbstractConnectJob;
@@ -44,7 +42,7 @@ class AbstractDocument;
 
 class AbstractModelSynchronizerPrivate;
 
-// TODO: better names? Active Translator? 
+// TODO: better names? Active Translator?
 // synchronizers are created by factory functions (like plugins)
 
 // TODO: should synchronizers set the document to readonly if remote is readonly? or who?
@@ -52,47 +50,48 @@ class AbstractModelSynchronizerPrivate;
 // TODO: allow synchronizers which can read-only, perhaps also write-only (usecase?)
 
 /**
-possible actions:
-1. synchronizer loads document and synchronizes until closing
+   possible actions:
+   1. synchronizer loads document and synchronizes until closing
    -> done by factory functions
-2. synchronizer gets attached to a document new created or with other synchronizer
-3. synchronizer used to export a model
-*/
+   2. synchronizer gets attached to a document new created or with other synchronizer
+   3. synchronizer used to export a model
+ */
 class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ConnectOption // TODO: better names
     {
-      SyncLocalAndRemote = 0,
-      ReplaceRemote = 1,
-      ReplaceLocal = 2
+        SyncLocalAndRemote = 0,
+        ReplaceRemote = 1,
+        ReplaceLocal = 2
     };
-  protected:
-    explicit AbstractModelSynchronizer( AbstractModelSynchronizerPrivate* d );
 
-  public:
+protected:
+    explicit AbstractModelSynchronizer(AbstractModelSynchronizerPrivate* d);
+
+public:
     AbstractModelSynchronizer();
 
     ~AbstractModelSynchronizer() override;
 
-  public:
+public:
     QUrl url() const;
 
-  public: // API to be implemented
+public: // API to be implemented
     // TODO: makes this a job, too
     // TODO: filesystem synchronizer (or: to-passive-storage) does not need this: subclass or interface?
 //     virtual void startOffering( AbstractDocument* document ) = 0;
     // TODO: once the synchronizer is attached to a document, this function should not be called
     // is there a way to ensure this?
-    virtual AbstractLoadJob* startLoad( const QUrl& url ) = 0;
+    virtual AbstractLoadJob* startLoad(const QUrl& url) = 0;
     /** */
     // TODO: not in constructor? cannot be called twice, each synchronizer is attached to its document
 //     virtual AbstractDocument* createWorkingCopy( const QUrl& originUrl, int* success ) const = 0;
 
     /** */
-    // TODO: static? or by function? or another class? but 
+    // TODO: static? or by function? or another class? but
 //     virtual void copyTo( const QUrl& url, AbstractDocument* document, int* success ) const = 0;
 
     /** overwrite remote with local (save) */
@@ -101,10 +100,10 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     virtual AbstractSyncFromRemoteJob* startSyncFromRemote() = 0;
 
     /** changes the  */ // TODO: better name for replace: overwrite?
-    virtual AbstractSyncWithRemoteJob* startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) = 0;
+    virtual AbstractSyncWithRemoteJob* startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option) = 0;
 
-    virtual AbstractConnectJob* startConnect( AbstractDocument* document,
-                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) = 0;
+    virtual AbstractConnectJob* startConnect(AbstractDocument* document,
+                                             const QUrl& url, AbstractModelSynchronizer::ConnectOption option) = 0;
 //     virtual bool syncBiDirectly() = 0;
 //     virtual bool canSyncBiDirectly() const = 0;
 //     virtual bool deleteDocument();
@@ -113,25 +112,25 @@ class KASTENCORE_EXPORT AbstractModelSynchronizer : public QObject
     virtual LocalSyncState localSyncState() const = 0;
     virtual RemoteSyncState remoteSyncState() const = 0;
 
-
-  Q_SIGNALS:
-    void urlChanged( const QUrl& url );
+Q_SIGNALS:
+    void urlChanged(const QUrl& url);
     // TODO: next two could be part of an interface? parameter quite specific
-    void dataPulled( int ) const;
-    void dataPushed( int ) const;
+    void dataPulled(int) const;
+    void dataPushed(int) const;
 
     // TODO: should be signal the diff? how to say then remote is in synch again?
     // could be done by pairs of flags instead of notset = isnot
     // TODO: this signal should be part of AbstractModel?
-    void localSyncStateChanged( Kasten::LocalSyncState newState );
-    void remoteSyncStateChanged( Kasten::RemoteSyncState newState );
+    void localSyncStateChanged(Kasten::LocalSyncState newState);
+    void remoteSyncStateChanged(Kasten::RemoteSyncState newState);
 
-  protected: // get
-    void setUrl( const QUrl& url );
+protected: // get
+    void setUrl(const QUrl& url);
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractModelSynchronizer )
-  protected:
+protected:
+    Q_DECLARE_PRIVATE(AbstractModelSynchronizer)
+
+protected:
     AbstractModelSynchronizerPrivate* const d_ptr;
 };
 

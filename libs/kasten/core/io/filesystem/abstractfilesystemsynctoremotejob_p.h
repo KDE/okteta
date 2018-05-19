@@ -32,44 +32,41 @@
 #include <QUrl>
 #include <QTemporaryFile>
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractFileSystemSyncToRemoteJobPrivate : public AbstractSyncToRemoteJobPrivate
 {
-  public:
-    AbstractFileSystemSyncToRemoteJobPrivate( AbstractFileSystemSyncToRemoteJob* parent, AbstractModelFileSystemSynchronizer* synchronizer );
+public:
+    AbstractFileSystemSyncToRemoteJobPrivate(AbstractFileSystemSyncToRemoteJob* parent, AbstractModelFileSystemSynchronizer* synchronizer);
 
     ~AbstractFileSystemSyncToRemoteJobPrivate() override;
 
-  public: // KJob API
+public: // KJob API
     void start();
 
-  public:
+public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QFile* file() const;
 
-  public:
-    void completeWrite( bool success );
+public:
+    void completeWrite(bool success);
 
-  public: // slots
+public: // slots
     void syncToRemote();
 
-  protected:
-    Q_DECLARE_PUBLIC( AbstractFileSystemSyncToRemoteJob )
+protected:
+    Q_DECLARE_PUBLIC(AbstractFileSystemSyncToRemoteJob)
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     QFile* mFile;
     QString mWorkFilePath;
 };
 
-
-inline AbstractFileSystemSyncToRemoteJobPrivate::AbstractFileSystemSyncToRemoteJobPrivate( AbstractFileSystemSyncToRemoteJob* parent,
-    AbstractModelFileSystemSynchronizer* synchronizer )
-  : AbstractSyncToRemoteJobPrivate( parent ),
-    mSynchronizer( synchronizer ),
-    mFile( nullptr )
+inline AbstractFileSystemSyncToRemoteJobPrivate::AbstractFileSystemSyncToRemoteJobPrivate(AbstractFileSystemSyncToRemoteJob* parent,
+                                                                                          AbstractModelFileSystemSynchronizer* synchronizer)
+    : AbstractSyncToRemoteJobPrivate(parent)
+    , mSynchronizer(synchronizer)
+    , mFile(nullptr)
 {}
 
 inline QFile* AbstractFileSystemSyncToRemoteJobPrivate::file()     const { return mFile; }
@@ -81,11 +78,10 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncToRemoteJobPri
 
 inline void AbstractFileSystemSyncToRemoteJobPrivate::start()
 {
-    Q_Q( AbstractFileSystemSyncToRemoteJob );
+    Q_Q(AbstractFileSystemSyncToRemoteJob);
 
-    QMetaObject::invokeMethod( q, "syncToRemote", Qt::QueuedConnection );
+    QMetaObject::invokeMethod(q, "syncToRemote", Qt::QueuedConnection);
 }
-
 
 }
 

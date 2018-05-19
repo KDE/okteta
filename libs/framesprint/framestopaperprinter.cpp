@@ -28,55 +28,50 @@
 #include <QPainter>
 #include <QPrinter>
 
-
 FramesToPaperPrinter::FramesToPaperPrinter() {}
 
 QRect FramesToPaperPrinter::pageRect() const { return mPageRect; }
 
-void FramesToPaperPrinter::setPaperRect( const QRect &paperRect ) { mPaperRect = paperRect; }
-void FramesToPaperPrinter::setPageRect( const QRect &pageRect ) { mPageRect = pageRect; }
+void FramesToPaperPrinter::setPaperRect(const QRect& paperRect) { mPaperRect = paperRect; }
+void FramesToPaperPrinter::setPageRect(const QRect& pageRect) { mPageRect = pageRect; }
 
-void FramesToPaperPrinter::addFrameRenderer( AbstractFrameRenderer *frameRenderer )
+void FramesToPaperPrinter::addFrameRenderer(AbstractFrameRenderer* frameRenderer)
 {
-    mFrameRendererList.append( frameRenderer );
+    mFrameRendererList.append(frameRenderer);
 }
 
-bool FramesToPaperPrinter::print( QPrinter *printer, int firstPageIndex, int lastPageIndex )
+bool FramesToPaperPrinter::print(QPrinter* printer, int firstPageIndex, int lastPageIndex)
 {
     bool success = true;
 
-    for( AbstractFrameRenderer *frameRenderer : qAsConst(mFrameRendererList) )
-    {
+    for (AbstractFrameRenderer* frameRenderer : qAsConst(mFrameRendererList)) {
         frameRenderer->prepare();
     }
 
-    QPainter painter( printer );
+    QPainter painter(printer);
     int pageIndex = firstPageIndex;
-    while( true )
-    {
-        for( AbstractFrameRenderer *frameRenderer : qAsConst(mFrameRendererList) )
-        {
+    while (true) {
+        for (AbstractFrameRenderer* frameRenderer : qAsConst(mFrameRendererList)) {
             const int x = frameRenderer->x();
             const int y = frameRenderer->y();
-            painter.translate( x, y );
-            frameRenderer->renderFrame( &painter, pageIndex );
-            painter.translate( -x, -y );
+            painter.translate(x, y);
+            frameRenderer->renderFrame(&painter, pageIndex);
+            painter.translate(-x, -y);
         }
-        emit printedPage( pageIndex );
-        if( pageIndex < lastPageIndex )
-        {
+
+        emit printedPage(pageIndex);
+        if (pageIndex < lastPageIndex) {
             printer->newPage();
             ++pageIndex;
-        }
-        else
+        } else {
             break;
+        }
     }
 
     return success;
 }
 
-
 FramesToPaperPrinter::~FramesToPaperPrinter()
 {
-    qDeleteAll( mFrameRendererList );
+    qDeleteAll(mFrameRendererList);
 }

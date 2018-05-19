@@ -32,17 +32,14 @@
 // temporary
 #include "modelcodecviewmanager.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ViewManager::ViewManager()
-  : mCodecViewManager( new ModelCodecViewManager() )
+    : mCodecViewManager(new ModelCodecViewManager())
 {
 }
 
-
-void ViewManager::setViewFactory( AbstractViewFactory* factory )
+void ViewManager::setViewFactory(AbstractViewFactory* factory)
 {
     mFactory = factory;
 }
@@ -52,16 +49,14 @@ QList<AbstractView*> ViewManager::views() const
     return mViewList;
 }
 
-AbstractView* ViewManager::viewByWidget( QWidget* widget ) const
+AbstractView* ViewManager::viewByWidget(QWidget* widget) const
 {
     AbstractView* result = nullptr;
 
-    QListIterator<AbstractView*> it( mViewList );
-    while( it.hasNext() )
-    {
+    QListIterator<AbstractView*> it(mViewList);
+    while (it.hasNext()) {
         AbstractView* view = it.next();
-        if( view->widget() == widget)
-        {
+        if (view->widget() == widget) {
             result = view;
             break;
         }
@@ -69,90 +64,84 @@ AbstractView* ViewManager::viewByWidget( QWidget* widget ) const
     return result;
 }
 
-void ViewManager::createCopyOfView( AbstractView* view, Qt::Alignment alignment )
+void ViewManager::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
 {
-    AbstractView* viewCopy = mFactory->createCopyOfView( view, alignment );
-    if( ! viewCopy )
-    {
+    AbstractView* viewCopy = mFactory->createCopyOfView(view, alignment);
+    if (!viewCopy) {
         AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
-        viewCopy = new DummyView( documentOfView );
+        viewCopy = new DummyView(documentOfView);
     }
 
-    mViewList.append( viewCopy );
+    mViewList.append(viewCopy);
 
     const QList<Kasten::AbstractView*> views { viewCopy };
-    emit opened( views );
+    emit opened(views);
 }
 
-void ViewManager::createViewsFor( const QList<Kasten::AbstractDocument*>& documents )
+void ViewManager::createViewsFor(const QList<Kasten::AbstractDocument*>& documents)
 {
     QList<Kasten::AbstractView*> openedViews;
 
     openedViews.reserve(documents.size());
     mViewList.reserve(mViewList.size() + documents.size());
-    for( AbstractDocument* document : documents )
-    {
-        AbstractView* view = mFactory->createViewFor( document );
-        if( ! view )
-            view = new DummyView( document );
+    for (AbstractDocument* document : documents) {
+        AbstractView* view = mFactory->createViewFor(document);
+        if (!view) {
+            view = new DummyView(document);
+        }
 
-        mViewList.append( view );
-        openedViews.append( view );
+        mViewList.append(view);
+        openedViews.append(view);
     }
 
-    if( ! openedViews.isEmpty() )
-        emit opened( openedViews );
+    if (!openedViews.isEmpty()) {
+        emit opened(openedViews);
+    }
 }
 
-
-void ViewManager::removeViewsFor( const QList<Kasten::AbstractDocument*>& documents )
+void ViewManager::removeViewsFor(const QList<Kasten::AbstractDocument*>& documents)
 {
     QList<Kasten::AbstractView*> closedViews;
 
-    QMutableListIterator<AbstractView*> it( mViewList );
-    for( AbstractDocument* document : documents )
-    {
-        while( it.hasNext() )
-        {
+    QMutableListIterator<AbstractView*> it(mViewList);
+    for (AbstractDocument* document : documents) {
+        while (it.hasNext()) {
             AbstractView* view = it.next();
             AbstractDocument* documentOfView = view->findBaseModel<AbstractDocument*>();
-            if( documentOfView == document )
-            {
+            if (documentOfView == document) {
                 it.remove();
-                closedViews.append( view );
+                closedViews.append(view);
             }
         }
         it.toFront();
     }
 
-    emit closing( closedViews );
+    emit closing(closedViews);
 
-    for( AbstractView* view : qAsConst(closedViews) )
-    {
+    for (AbstractView* view : qAsConst(closedViews)) {
 //         qCDebug(LOG_KASTEN_GUI) << view->title();
         delete view;
     }
 }
 
-void ViewManager::removeViews( const QList<AbstractView*>& views )
+void ViewManager::removeViews(const QList<AbstractView*>& views)
 {
-    for( AbstractView* view : views )
-        mViewList.removeOne( view );
+    for (AbstractView* view : views) {
+        mViewList.removeOne(view);
+    }
 
-    emit closing( views );
+    emit closing(views);
 
-    for( AbstractView* view : views )
-    {
+    for (AbstractView* view : views) {
 //         qCDebug(LOG_KASTEN_GUI)<<view->title();
         delete view;
     }
 }
 
-
 ViewManager::~ViewManager()
 {
     // TODO: signal closing here, too?
-    qDeleteAll( mViewList );
+    qDeleteAll(mViewList);
 
     delete mCodecViewManager;
     delete mFactory;

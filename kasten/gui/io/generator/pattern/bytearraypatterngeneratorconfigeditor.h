@@ -33,31 +33,29 @@ class ByteArrayComboBox;
 }
 class QSpinBox;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayPatternGeneratorConfigEditor : public AbstractModelDataGeneratorConfigEditor
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteArrayPatternGeneratorConfigEditor( ByteArrayPatternGenerator* generator, QWidget* parent = nullptr );
+public:
+    explicit ByteArrayPatternGeneratorConfigEditor(ByteArrayPatternGenerator* generator, QWidget* parent = nullptr);
 
     ~ByteArrayPatternGeneratorConfigEditor() override;
 
-  public: // AbstractModelDataGeneratorConfigEditor API
+public: // AbstractModelDataGeneratorConfigEditor API
     bool isValid() const override;
     QString name() const override;
 
-  public:
+public:
     void rememberCurrentSettings();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onSettingsChanged();
-    void onPatternChanged( const QByteArray& pattern );
+    void onPatternChanged(const QByteArray& pattern);
 
-  protected:
+protected:
     ByteArrayPatternGenerator* mGenerator;
     ByteArrayPatternGeneratorSettings mSettings;
 

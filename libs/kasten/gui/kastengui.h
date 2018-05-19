@@ -29,27 +29,27 @@
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_KASTEN_GUI)
 
+namespace Kasten {
 
-namespace Kasten
+// keep in sync with both DockWidgetAre a and ToolBarArea
+enum SidePosition
 {
-    // keep in sync with both DockWidgetAre a and ToolBarArea
-    enum SidePosition
-    {
-        LeftSidePosition = 0x1,
-        RightSidePosition = 0x2,
-        TopSidePosition = 0x4,
-        BottomSidePosition = 0x8,
+    LeftSidePosition = 0x1,
+    RightSidePosition = 0x2,
+    TopSidePosition = 0x4,
+    BottomSidePosition = 0x8,
 
-        SidePositionMask = 0xF,
-        AllSidePositions = SidePositionMask,
-        NoSidePosition = 0
-    };
-    enum SidePositionSizes
-    {
-        SidePositionCount = 4
-    };
+    SidePositionMask = 0xF,
+    AllSidePositions = SidePositionMask,
+    NoSidePosition = 0
+};
+enum SidePositionSizes
+{
+    SidePositionCount = 4
+};
 
-    Q_DECLARE_FLAGS( SidePositions, SidePosition )
+Q_DECLARE_FLAGS(SidePositions, SidePosition)
+
 }
 
 #endif

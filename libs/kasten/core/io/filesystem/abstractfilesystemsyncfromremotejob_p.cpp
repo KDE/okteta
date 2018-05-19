@@ -33,76 +33,73 @@
 #include <QUrl>
 #include <QTemporaryFile>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void AbstractFileSystemSyncFromRemoteJobPrivate::syncFromRemote()
 {
-    Q_Q( AbstractFileSystemSyncFromRemoteJob );
+    Q_Q(AbstractFileSystemSyncFromRemoteJob);
 
     const QUrl url = mSynchronizer->url();
 
     bool isWorkFileOk;
 
-    if( url.isLocalFile() )
-    {
+    if (url.isLocalFile()) {
         // file protocol. We do not need the network
         mWorkFilePath = url.toLocalFile();
         isWorkFileOk = true;
     } else {
         QTemporaryFile tmpFile;
-        tmpFile.setAutoRemove( false );
+        tmpFile.setAutoRemove(false);
         tmpFile.open();
 
         mWorkFilePath = tmpFile.fileName();
         mTempFilePath = mWorkFilePath;
 
         KIO::FileCopyJob* fileCopyJob =
-            KIO::file_copy( url, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite );
-        KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
+            KIO::file_copy(url, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite);
+        KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 
         isWorkFileOk = fileCopyJob->exec();
-        if( ! isWorkFileOk )
-            q->setErrorText( fileCopyJob->errorString() );
+        if (!isWorkFileOk) {
+            q->setErrorText(fileCopyJob->errorString());
+        }
     }
 
-    if( isWorkFileOk )
-    {
-        mFile = new QFile( mWorkFilePath );
-        isWorkFileOk = mFile->open( QIODevice::ReadOnly );
-        if( ! isWorkFileOk )
-            q->setErrorText( mFile->errorString() );
+    if (isWorkFileOk) {
+        mFile = new QFile(mWorkFilePath);
+        isWorkFileOk = mFile->open(QIODevice::ReadOnly);
+        if (!isWorkFileOk) {
+            q->setErrorText(mFile->errorString());
+        }
     }
 
-    if( isWorkFileOk )
+    if (isWorkFileOk) {
         q->startReadFromFile();
-    else
-    {
-        q->setError( KJob::KilledJobError );
+    } else {
+        q->setError(KJob::KilledJobError);
         delete mFile;
         q->emitResult();
     }
 }
 
-void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead( bool success )
+void AbstractFileSystemSyncFromRemoteJobPrivate::completeRead(bool success)
 {
-    Q_Q( AbstractFileSystemSyncFromRemoteJob );
+    Q_Q(AbstractFileSystemSyncFromRemoteJob);
 
-    if( success )
-    {
+    if (success) {
         const QUrl url = mSynchronizer->url();
         const bool isLocalFile = url.isLocalFile();
 
-        QFileInfo fileInfo( mWorkFilePath );
-        mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
-        mSynchronizer->setRemoteState( isLocalFile ? RemoteInSync : RemoteUnknown );
+        QFileInfo fileInfo(mWorkFilePath);
+        mSynchronizer->setFileDateTimeOnSync(fileInfo.lastModified());
+        mSynchronizer->setRemoteState(isLocalFile ? RemoteInSync : RemoteUnknown);
     }
 
     delete mFile;
 
-    if( ! mTempFilePath.isEmpty() )
-        QFile::remove( mTempFilePath );
+    if (!mTempFilePath.isEmpty()) {
+        QFile::remove(mTempFilePath);
+    }
 
     q->emitResult();
 }

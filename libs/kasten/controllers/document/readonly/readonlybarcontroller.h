@@ -28,29 +28,26 @@
 // Kasten gui
 #include <kasten/abstractxmlguicontroller.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ToggleButton;
 class AbstractDocument;
 class StatusBar;
 
-
 class KASTENCONTROLLERS_EXPORT ReadOnlyBarController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ReadOnlyBarController( StatusBar* statusBar );
+public:
+    explicit ReadOnlyBarController(StatusBar* statusBar);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
-    void setReadOnly( bool isReadOnly );
+private Q_SLOTS: // action slots
+    void setReadOnly(bool isReadOnly);
 
-  private:
+private:
     AbstractDocument* mDocument;
 
     ToggleButton* mReadOnlyButton;

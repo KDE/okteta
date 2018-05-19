@@ -31,15 +31,13 @@ class CharCodec;
 class ValueCodec;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteTableModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ColumnIds
     {
         DecimalId = 0,
@@ -50,26 +48,26 @@ class ByteTableModel : public QAbstractTableModel
         NoOfIds = 5 // TODO: what pattern is usually used to mark number of ids?
     };
 
-  public:
-    explicit ByteTableModel( QObject *parent = nullptr );
+public:
+    explicit ByteTableModel(QObject* parent = nullptr);
     ~ByteTableModel() override;
 
-  public: // QAbstractTableModel API
-    int rowCount( const QModelIndex &parent ) const override;
-    int columnCount( const QModelIndex &parent ) const override;
-    QVariant data( const QModelIndex &index, int role ) const override;
-    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
+public: // QAbstractTableModel API
+    int rowCount(const QModelIndex& parent) const override;
+    int columnCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-  public Q_SLOTS:
-    void setCharCodec( const QString &codecName );
-    void setUndefinedChar( QChar undefinedChar );
+public Q_SLOTS:
+    void setCharCodec(const QString& codecName);
+    void setUndefinedChar(QChar undefinedChar);
 
-  private:
+private:
     static const int NofOfValueCodings = 4;
 
-  private:
-    Okteta::ValueCodec *mValueCodec[NofOfValueCodings];
-    Okteta::CharCodec *mCharCodec;
+private:
+    Okteta::ValueCodec* mValueCodec[NofOfValueCodings];
+    Okteta::CharCodec* mCharCodec;
     QChar mUndefinedChar;
 };
 

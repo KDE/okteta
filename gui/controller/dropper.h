@@ -26,45 +26,41 @@
 // Okteta core
 #include <okteta/address.h>
 
-
 class QDragEnterEvent;
 class QDragMoveEvent;
 class QDragLeaveEvent;
 class QDropEvent;
 
-
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayView;
-
 
 class Dropper
 {
-  public:
-    explicit Dropper( AbstractByteArrayView* view );
+public:
+    explicit Dropper(AbstractByteArrayView* view);
 
     ~Dropper();
 
-  public: // AbstractMouseController API
-    bool handleDragEnterEvent( QDragEnterEvent* dragEnterEvent );
-    bool handleDragMoveEvent( QDragMoveEvent* dragMoveEvent );
-    bool handleDragLeaveEvent( QDragLeaveEvent* dragLeaveEvent );
-    bool handleDropEvent( QDropEvent* dropEvent );
+public: // AbstractMouseController API
+    bool handleDragEnterEvent(QDragEnterEvent* dragEnterEvent);
+    bool handleDragMoveEvent(QDragMoveEvent* dragMoveEvent);
+    bool handleDragLeaveEvent(QDragLeaveEvent* dragLeaveEvent);
+    bool handleDropEvent(QDropEvent* dropEvent);
 
-  public:
+public:
     bool isActive() const;
 
-  protected:
-    void handleInternalDrag( QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView );
+protected:
+    void handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView);
 
-  protected:
+protected:
     AbstractByteArrayView* mByteArrayView;
 
     Address mBeforeDragCursorPos;
-    bool mBeforeDragCursorIsBehind:1;
-    bool mCursorIsMovedByDrag:1;
+    bool mBeforeDragCursorIsBehind : 1;
+    bool mCursorIsMovedByDrag : 1;
 
-    bool mIsActive:1;
+    bool mIsActive : 1;
 };
 
 }

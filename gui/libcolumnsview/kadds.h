@@ -26,8 +26,7 @@
 // Okteta core
 #include <okteta/numberrange.h>
 
-namespace Okteta
-{
+namespace Okteta {
 // some possibly useful additions to KDE
 
 // these are to emphasize that measuring unit is pixel and which direction

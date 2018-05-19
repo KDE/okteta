@@ -22,15 +22,14 @@
 
 #include "binary8editor.h"
 
-
-Binary8Editor::Binary8Editor( QWidget* parent )
-  : AbstractValue8Editor( Okteta::BinaryCoding, parent )
+Binary8Editor::Binary8Editor(QWidget* parent)
+    : AbstractValue8Editor(Okteta::BinaryCoding, parent)
 {
 }
 
-void Binary8Editor::setData( Binary8 data )
+void Binary8Editor::setData(Binary8 data)
 {
-    setValue( data.value );
+    setValue(data.value);
 }
 
 Binary8 Binary8Editor::data() const

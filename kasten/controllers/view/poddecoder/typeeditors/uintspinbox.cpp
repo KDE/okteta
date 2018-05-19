@@ -25,28 +25,23 @@
 // Qt
 #include <QLineEdit>
 
-
-QValidator::State UIntSpinBox::validate( QString& input, int& pos ) const
+QValidator::State UIntSpinBox::validate(QString& input, int& pos) const
 {
-    Q_UNUSED( pos );
+    Q_UNUSED(pos);
 
     QValidator::State result;
 
-    if( input.isEmpty()
-        || mPrefix.startsWith(input) )
-    {
+    if (input.isEmpty()
+        || mPrefix.startsWith(input)) {
         mValue = 0;
         result = QValidator::Intermediate;
-    }
-    else
-    {
+    } else {
         bool ok;
-        quint64 newValue = input.toULongLong( &ok, mBase );
-        if( !ok
-            || (newValue > mMaximum) )
+        quint64 newValue = input.toULongLong(&ok, mBase);
+        if (!ok
+            || (newValue > mMaximum)) {
             result = QValidator::Invalid;
-        else
-        {
+        } else {
             mValue = newValue;
             result = QValidator::Acceptable;
         }
@@ -55,28 +50,25 @@ QValidator::State UIntSpinBox::validate( QString& input, int& pos ) const
     return result;
 }
 
-
-void UIntSpinBox::fixup( QString& input ) const
+void UIntSpinBox::fixup(QString& input) const
 {
-    Q_UNUSED( input );
+    Q_UNUSED(input);
 
     // TODO: what can be done here? remove localized stuff?
 }
 
-void UIntSpinBox::stepBy( int steps )
+void UIntSpinBox::stepBy(int steps)
 {
-    if( steps == 0 )
+    if (steps == 0) {
         return;
-
-    if( steps > 0 )
-    {
-        const quint64 left = mMaximum - mValue;
-        mValue = ( static_cast<quint64>(steps) > left ) ? mMaximum : mValue + steps;
     }
-    else
-    {
+
+    if (steps > 0) {
+        const quint64 left = mMaximum - mValue;
+        mValue = (static_cast<quint64>(steps) > left) ? mMaximum : mValue + steps;
+    } else {
         const quint64 left = mValue;
-        mValue = ( static_cast<quint64>(-steps) > left ) ? 0 : mValue + steps;
+        mValue = (static_cast<quint64>(-steps) > left) ? 0 : mValue + steps;
     }
 
     updateEditLine();
@@ -86,17 +78,18 @@ QAbstractSpinBox::StepEnabled UIntSpinBox::stepEnabled() const
 {
     StepEnabled result;
 
-    if( mValue > 0 )
+    if (mValue > 0) {
         result |= StepDownEnabled;
-    if( mValue < mMaximum )
+    }
+    if (mValue < mMaximum) {
         result |= StepUpEnabled;
+    }
 
     return result;
 }
 
-
 void UIntSpinBox::updateEditLine() const
 {
-    const QString text = mPrefix + QString::number( mValue, mBase );
-    lineEdit()->setText( text );
+    const QString text = mPrefix + QString::number(mValue, mBase);
+    lineEdit()->setText(text);
 }

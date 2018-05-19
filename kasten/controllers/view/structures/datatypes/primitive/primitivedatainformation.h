@@ -33,7 +33,8 @@ union AllPrimitiveTypes;
  */
 class PrimitiveDataInformation : public DataInformation
 {
-    friend class PrimitiveDataInformationTest; //that unit test needs to change mWasAbleToRead
+    friend class PrimitiveDataInformationTest; // that unit test needs to change mWasAbleToRead
+
 public:
     explicit PrimitiveDataInformation(const QString& name, DataInformation* parent = nullptr);
     ~PrimitiveDataInformation() override;
@@ -75,13 +76,14 @@ class PrimitiveDataInformationWrapper : public PrimitiveDataInformation
 {
 protected:
     PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d);
+
 public:
     /** takes ownership of @p valueType */
     PrimitiveDataInformationWrapper(const QString& name, PrimitiveDataInformation* valueType,
-            DataInformation* parent = nullptr);
+                                    DataInformation* parent = nullptr);
     ~PrimitiveDataInformationWrapper() override {}
 
-    //delegate all these to the underlying object:
+    // delegate all these to the underlying object:
 
     bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
                  Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
@@ -100,40 +102,38 @@ public:
 
     PrimitiveDataType type() const override;
 
-
     QScriptValue valueAsQScriptValue() const override;
 
-    //we have to do slightly more than just forward with this method
+    // we have to do slightly more than just forward with this method
     qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
+
 protected:
     QScopedPointer<PrimitiveDataInformation> mValue;
 };
 
-
 inline PrimitiveDataInformation::PrimitiveDataInformation(const QString& name,
-        DataInformation* parent)
-        : DataInformation(name, parent)
+                                                          DataInformation* parent)
+    : DataInformation(name, parent)
 {
 }
 
 inline PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d)
-        : DataInformation(d)
+    : DataInformation(d)
 {
 }
 
 inline QString PrimitiveDataInformation::basePrefix(int base)
 {
     switch (base) {
-        case 10: return QString();
-        case 2: return QStringLiteral("0b");
-        case 8: return QStringLiteral("0o");
-        case 16: return QStringLiteral("0x");
-        default:
-            Q_ASSERT_X(false, "PrimitiveDataInformation::basePrefix()", "Invalid argument!");
-            return QString();
+    case 10: return QString();
+    case 2: return QStringLiteral("0b");
+    case 8: return QStringLiteral("0o");
+    case 16: return QStringLiteral("0x");
+    default:
+        Q_ASSERT_X(false, "PrimitiveDataInformation::basePrefix()", "Invalid argument!");
+        return QString();
     }
 }
-
 
 #endif /* PRIMITIVEDATAINFORMATION_H_ */

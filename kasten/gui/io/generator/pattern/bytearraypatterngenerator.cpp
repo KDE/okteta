@@ -28,58 +28,58 @@
 #include <QMimeData>
 #include <QByteArray>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArrayPatternGeneratorSettings::ByteArrayPatternGeneratorSettings()
-  : pattern( 1, 0 ), count( 1 )
+    : pattern(1, 0)
+    , count(1)
 {
 }
 
-
-//TODO: support insert to selection, cmp. fill in painting program
+// TODO: support insert to selection, cmp. fill in painting program
 // there are two kinds of generated datam fixed size (e.g. sequence) and endless size?
 // perhaps by option fill selection? or a separate menu entry fill, which only works on selections?
 
 ByteArrayPatternGenerator::ByteArrayPatternGenerator()
-  : AbstractModelDataGenerator(
+    : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Pattern..."),
         QStringLiteral("application/octet-stream"),
-        DynamicGeneration )
+        DynamicGeneration)
 {}
 
-
 // TODO: optimize and check if pattern is just one byte, so memset can be used
-// TODO: see if copying larger chunks with memcpy is faster, so 
+// TODO: see if copying larger chunks with memcpy is faster, so
 QMimeData* ByteArrayPatternGenerator::generateData()
 {
     const int patternSize = mSettings.pattern.size();
 
     const int insertDataSize = mSettings.count * patternSize;
 
-    QByteArray insertData( insertDataSize, '\0' );
+    QByteArray insertData(insertDataSize, '\0');
 
     char* rawInsertData = insertData.data();
     const char* rawPatternData = mSettings.pattern.constData();
 
-    for( int i=0; i < insertDataSize; i+= patternSize )
-        memcpy( &rawInsertData[i], rawPatternData, patternSize );
+    for (int i = 0; i < insertDataSize; i += patternSize) {
+        memcpy(&rawInsertData[i], rawPatternData, patternSize);
+    }
 
     QMimeData* mimeData = new QMimeData;
-    mimeData->setData( mimeType(), insertData );
+    mimeData->setData(mimeType(), insertData);
 
-// TODO: a method to get the description of the change, e.g. 
+// TODO: a method to get the description of the change, e.g.
 #if 0
-    Okteta::ChangesDescribable *changesDescribable =
-        qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
+    Okteta::ChangesDescribable* changesDescribable =
+        qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
-    if( changesDescribable )
-        changesDescribable->openGroupedChange( i18n("Pattern inserted.") );
-    mByteArrayView->insert( insertData );
+    if (changesDescribable) {
+        changesDescribable->openGroupedChange(i18n("Pattern inserted."));
+    }
+    mByteArrayView->insert(insertData);
 //     mByteArrayModel->replace( filteredSection, filterResult );
-    if( changesDescribable )
+    if (changesDescribable) {
         changesDescribable->closeGroupedChange();
+    }
 #endif
 
     return mimeData;

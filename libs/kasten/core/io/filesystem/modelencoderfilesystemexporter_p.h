@@ -29,37 +29,34 @@
 #include <abstractmodelstreamencoder.h>
 #include <abstractmodelexporter_p.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ModelEncoderFileSystemExporterPrivate : public AbstractModelExporterPrivate
 {
-  public:
-    ModelEncoderFileSystemExporterPrivate( ModelEncoderFileSystemExporter* parent,
-                                           const QString& remoteTypeName, const QString& remoteMimeType,
-                                           AbstractModelStreamEncoder* encoder );
+public:
+    ModelEncoderFileSystemExporterPrivate(ModelEncoderFileSystemExporter* parent,
+                                          const QString& remoteTypeName, const QString& remoteMimeType,
+                                          AbstractModelStreamEncoder* encoder);
 
     ~ModelEncoderFileSystemExporterPrivate() override;
 
-  public: // AbstractModelExporter API
-    AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,
-                                    const QUrl& url );
-    QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const;
+public: // AbstractModelExporter API
+    AbstractExportJob* startExport(AbstractModel* model, const AbstractModelSelection* selection,
+                                   const QUrl& url);
+    QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const;
 
-  public:
+public:
     AbstractModelStreamEncoder* encoder() const;
 
-  protected:
+protected:
     AbstractModelStreamEncoder* const mEncoder;
 };
 
-
-inline ModelEncoderFileSystemExporterPrivate::ModelEncoderFileSystemExporterPrivate( ModelEncoderFileSystemExporter* parent,
-    const QString& remoteTypeName, const QString& remoteMimeType,
-    AbstractModelStreamEncoder* encoder )
-  : AbstractModelExporterPrivate( parent, remoteTypeName, remoteMimeType ),
-    mEncoder( encoder )
+inline ModelEncoderFileSystemExporterPrivate::ModelEncoderFileSystemExporterPrivate(ModelEncoderFileSystemExporter* parent,
+                                                                                    const QString& remoteTypeName, const QString& remoteMimeType,
+                                                                                    AbstractModelStreamEncoder* encoder)
+    : AbstractModelExporterPrivate(parent, remoteTypeName, remoteMimeType)
+    , mEncoder(encoder)
 {
 }
 
@@ -67,16 +64,16 @@ inline ModelEncoderFileSystemExporterPrivate::~ModelEncoderFileSystemExporterPri
 
 inline AbstractModelStreamEncoder* ModelEncoderFileSystemExporterPrivate::encoder() const { return mEncoder; }
 
-inline AbstractExportJob* ModelEncoderFileSystemExporterPrivate::startExport( AbstractModel* model,
-    const AbstractModelSelection* selection,
-    const QUrl& url )
+inline AbstractExportJob* ModelEncoderFileSystemExporterPrivate::startExport(AbstractModel* model,
+                                                                             const AbstractModelSelection* selection,
+                                                                             const QUrl& url)
 {
-    return new ModelEncoderFileSystemExportJob( model, selection, url, mEncoder );
+    return new ModelEncoderFileSystemExportJob(model, selection, url, mEncoder);
 }
 
-inline QString ModelEncoderFileSystemExporterPrivate::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
+inline QString ModelEncoderFileSystemExporterPrivate::modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const
 {
-    return mEncoder->modelTypeName( model, selection );
+    return mEncoder->modelTypeName(model, selection);
 }
 
 }

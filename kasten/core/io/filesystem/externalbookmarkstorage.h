@@ -26,23 +26,21 @@
 class KBookmarkManager;
 class QUrl;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayDocument;
 
 class ExternalBookmarkStorage
 {
-  public:
+public:
     ExternalBookmarkStorage();
 
     ~ExternalBookmarkStorage();
 
-  public:
-    void readBookmarks( ByteArrayDocument* document, const QUrl& url );
-    void writeBookmarks( ByteArrayDocument* document, const QUrl& url );
+public:
+    void readBookmarks(ByteArrayDocument* document, const QUrl& url);
+    void writeBookmarks(ByteArrayDocument* document, const QUrl& url);
 
-  protected:
+protected:
     KBookmarkManager* mBookmarkManager;
 };
 

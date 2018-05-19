@@ -28,24 +28,25 @@
 
 class TestFileSystem;
 
-
 class ByteArrayRawFileSynchronizerFactoryTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testCreate();
 #if 0
     void testLoadFromUrl();
-  private: // not working tests
+
+private: // not working tests
     void testLoadFromNotExistingUrl();
 #endif
-  private:
-    TestFileSystem *mFileSystem;
+
+private:
+    TestFileSystem* mFileSystem;
 };
 
 #endif

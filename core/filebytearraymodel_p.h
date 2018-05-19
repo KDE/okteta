@@ -29,42 +29,39 @@
 #include <QVector>
 #include <QFile>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class FileByteArrayModelPrivate
 {
     using KPageOfChar = QVector<char*>;
 
-  public:
-    FileByteArrayModelPrivate( int pageNumber, int pageSize );
+public:
+    FileByteArrayModelPrivate(int pageNumber, int pageSize);
 
     ~FileByteArrayModelPrivate();
 
-  public:
-    Byte byte( Address offset ) const;
+public:
+    Byte byte(Address offset) const;
     Size size() const;
     bool isReadOnly() const;
-    void setReadOnly( bool readonly );
+    void setReadOnly(bool readonly);
 
-  public:
+public:
     bool isOpen() const;
-    bool open( const QString& fileName );
+    bool open(const QString& fileName);
     bool close();
 
-  protected:
-    bool ensurePageLoaded( unsigned int pageIndex ) const;
-    bool freePage( unsigned int pageIndex ) const;
+protected:
+    bool ensurePageLoaded(unsigned int pageIndex) const;
+    bool freePage(unsigned int pageIndex) const;
 
-
-  protected:
+protected:
     /** */
     mutable QFile mFile;
     /**  */
-    bool mReadOnly :1;
-    bool mIsOpen :1;
-    bool mAtEof :1;
+    bool mReadOnly : 1;
+    bool mIsOpen : 1;
+    bool mAtEof : 1;
     /** maximum number of pages which could be currently loaded */
     unsigned int mNoOfUsedPages;
     /**  number of actually not used pages (in terms of NoOfUsedPages) */
@@ -86,10 +83,9 @@ class FileByteArrayModelPrivate
     mutable char* mActualPage;
 };
 
-
-inline Size FileByteArrayModelPrivate::size()        const   { return mSize; }
-inline bool FileByteArrayModelPrivate::isReadOnly() const   { return mReadOnly; }
-inline void FileByteArrayModelPrivate::setReadOnly( bool readonly ) { mReadOnly = readonly; }
+inline Size FileByteArrayModelPrivate::size()        const { return mSize; }
+inline bool FileByteArrayModelPrivate::isReadOnly() const { return mReadOnly; }
+inline void FileByteArrayModelPrivate::setReadOnly(bool readonly) { mReadOnly = readonly; }
 
 inline bool FileByteArrayModelPrivate::isOpen() const { return mFile.isOpen(); }
 

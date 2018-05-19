@@ -26,29 +26,27 @@
 // Kasten core
 #include <kasten/abstractfilesystemsynctoremotejob.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayRawFileSynchronizer;
 class ByteArrayRawFileWriteThread;
 
 class ByteArrayRawFileWriteJob : public AbstractFileSystemSyncToRemoteJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer *synchronizer );
+public:
+    explicit ByteArrayRawFileWriteJob(ByteArrayRawFileSynchronizer* synchronizer);
     ~ByteArrayRawFileWriteJob() override;
 
-  protected: // AbstractFileSystemSyncToRemoteJob API
+protected: // AbstractFileSystemSyncToRemoteJob API
     void startWriteToFile() override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
 //     void onDataPulled();
 
-  protected:
-    ByteArrayRawFileWriteThread *mWriteThread;
+protected:
+    ByteArrayRawFileWriteThread* mWriteThread;
 };
 
 }

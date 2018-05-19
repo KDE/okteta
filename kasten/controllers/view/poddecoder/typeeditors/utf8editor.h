@@ -28,19 +28,18 @@
 // Qt
 #include <QLineEdit>
 
-
 class Utf8Editor : public QLineEdit
 {
-  Q_OBJECT
-  Q_PROPERTY( Utf8 data READ data WRITE setData USER true )
+    Q_OBJECT
+    Q_PROPERTY(Utf8 data READ data WRITE setData USER true)
 
-  public:
-    explicit Utf8Editor( QWidget* parent );
+public:
+    explicit Utf8Editor(QWidget* parent);
 
     ~Utf8Editor() override;
 
-  public:
-    void setData( Utf8 data );
+public:
+    void setData(Utf8 data);
     Utf8 data() const;
 };
 

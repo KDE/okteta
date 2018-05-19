@@ -34,32 +34,29 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 namespace If {
 class ReplaceUserQueryable;
 }
 class ByteArrayView;
 
-
 // TODO: is queryAgent needed, or should the tool better be a state machine? same with search tool
 class ReplaceTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ReplaceTool();
     ~ReplaceTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // status
+public: // status
     QByteArray searchData() const;
     QByteArray replaceData() const;
 //     Qt::CaseSensitivity caseSensitivity() const;
@@ -68,48 +65,47 @@ class ReplaceTool : public AbstractTool
 
     bool isApplyable() const; // candidate for AbstractTool API
 
-  public: // actions
-    void replace( KFindDirection direction, bool fromCursor, bool inSelection );
+public: // actions
+    void replace(KFindDirection direction, bool fromCursor, bool inSelection);
 
-  public:
-    void setUserQueryAgent( If::ReplaceUserQueryable* userQueryAgent );
+public:
+    void setUserQueryAgent(If::ReplaceUserQueryable* userQueryAgent);
 
-  public Q_SLOTS: // settings
-    void setSearchData( const QByteArray& searchData );
-    void setReplaceData( const QByteArray& replaceData );
-    void setCaseSensitivity( Qt::CaseSensitivity caseSensitivity );
-    void setDoPrompt( int doPrompt );
+public Q_SLOTS: // settings
+    void setSearchData(const QByteArray& searchData);
+    void setReplaceData(const QByteArray& replaceData);
+    void setCaseSensitivity(Qt::CaseSensitivity caseSensitivity);
+    void setDoPrompt(int doPrompt);
 
-  Q_SIGNALS:
-    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
-    void finished( bool previousFound, int noOfReplacements );
+Q_SIGNALS:
+    void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
+    void finished(bool previousFound, int noOfReplacements);
 
-  protected:
-    void doReplace( KFindDirection direction, Okteta::Address startIndex );
+protected:
+    void doReplace(KFindDirection direction, Okteta::Address startIndex);
 
-  protected Q_SLOTS:
-    void onReadOnlyChanged( bool isReadOnly );
+protected Q_SLOTS:
+    void onReadOnlyChanged(bool isReadOnly);
 
-  protected: // settings
+protected: // settings
     QByteArray mSearchData;
     QByteArray mReplaceData;
     Qt::CaseSensitivity mCaseSensitivity;
-    bool mDoPrompt :1;
+    bool mDoPrompt : 1;
 
-  protected: // status
-    bool mPreviousFound :1;
-    bool mDoWrap :1;
+protected: // status
+    bool mPreviousFound : 1;
+    bool mDoWrap : 1;
     Okteta::Address mReplaceFirstIndex;
     Okteta::Address mReplaceLastIndex;
 
-  protected: //
+protected:
     If::ReplaceUserQueryable* mUserQueryAgent;
 
-  protected: // target
+protected: // target
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
-
 
 inline QByteArray ReplaceTool::searchData() const { return mSearchData; }
 inline QByteArray ReplaceTool::replaceData() const { return mReplaceData; }

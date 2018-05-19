@@ -20,8 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #ifndef UTF16STRINGDATA_H
 #define UTF16STRINGDATA_H
 
@@ -43,6 +41,7 @@ public:
     BitCount32 sizeAt(uint i) const override;
     QString stringValue(int row) const override;
     QString typeName() const override;
+
 private:
     QVector<quint32> mCodePoints;
     int mNonBMPCount;

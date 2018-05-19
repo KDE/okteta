@@ -28,30 +28,27 @@
 // KF5
 #include <KJob>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractConnectJobPrivate;
 
-
 class KASTENCORE_EXPORT AbstractConnectJob : public KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    explicit AbstractConnectJob( AbstractConnectJobPrivate* d );
+protected:
+    explicit AbstractConnectJob(AbstractConnectJobPrivate* d);
 
-  public:
+public:
     AbstractConnectJob();
 
     ~AbstractConnectJob() override;
 
-  protected:
+protected:
     // emits documentLoaded()
     // TODO: or better name property LoadedDocument?
 
-  protected:
+protected:
     AbstractConnectJobPrivate* const d_ptr;
 };
 

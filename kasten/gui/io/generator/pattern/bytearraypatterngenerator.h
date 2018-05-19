@@ -29,45 +29,40 @@
 #include <QObject>
 #include <QString>
 
-
-namespace Kasten
-{
-
+namespace Kasten {
 
 class ByteArrayPatternGeneratorSettings
 {
-  public:
+public:
     ByteArrayPatternGeneratorSettings();
 
-  public:
+public:
     QByteArray pattern;
     int count;
 };
-
 
 class ByteArrayPatternGenerator : public AbstractModelDataGenerator
 {
     Q_OBJECT
 
-  public:
+public:
     ByteArrayPatternGenerator();
 
     ~ByteArrayPatternGenerator() override;
 
-  public: // AbstractModelDataGenerator API
+public: // AbstractModelDataGenerator API
     QMimeData* generateData() override;
 
-  public:
+public:
     ByteArrayPatternGeneratorSettings settings() const;
-    void setSettings( const ByteArrayPatternGeneratorSettings& settings );
+    void setSettings(const ByteArrayPatternGeneratorSettings& settings);
 
-  protected:
+protected:
     ByteArrayPatternGeneratorSettings mSettings;
 };
 
-
 inline ByteArrayPatternGeneratorSettings ByteArrayPatternGenerator::settings() const { return mSettings; }
-inline void ByteArrayPatternGenerator::setSettings( const ByteArrayPatternGeneratorSettings& settings )
+inline void ByteArrayPatternGenerator::setSettings(const ByteArrayPatternGeneratorSettings& settings)
 {
     mSettings = settings;
 //     emit settingsChanged();

@@ -25,23 +25,21 @@
 // Qt
 #include <QTextStream>
 
+namespace Kasten {
 
-namespace Kasten
+void BorderColumnTextRenderer::renderFirstLine(QTextStream* stream, int lineIndex) const
 {
-
-void BorderColumnTextRenderer::renderFirstLine( QTextStream *stream, int lineIndex ) const
-{
-Q_UNUSED( lineIndex )
-    render( stream );
+    Q_UNUSED(lineIndex)
+    render(stream);
 }
 
-void BorderColumnTextRenderer::renderNextLine( QTextStream* stream, bool isSubline ) const
+void BorderColumnTextRenderer::renderNextLine(QTextStream* stream, bool isSubline) const
 {
-Q_UNUSED( isSubline )
-    render( stream );
+    Q_UNUSED(isSubline)
+    render(stream);
 }
 
-void BorderColumnTextRenderer::render( QTextStream *stream ) const
+void BorderColumnTextRenderer::render(QTextStream* stream) const
 {
     *stream << " | ";
 }

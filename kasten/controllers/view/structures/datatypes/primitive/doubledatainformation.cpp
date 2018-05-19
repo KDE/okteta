@@ -30,7 +30,6 @@
 
 #include "structureviewpreferences.h"
 
-
 QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
     QDoubleSpinBox* ret = new QDoubleSpinBox(parent);
@@ -41,18 +40,19 @@ QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     const QDoubleSpinBox* spin = qobject_cast<const QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
-    if (spin)
+    if (spin) {
         return spin->value();
+    }
     return QVariant();
 }
-
 
 void DoubleDataInformationMethods::staticSetWidgetData(double value, QWidget* w)
 {
     QDoubleSpinBox* spin = qobject_cast<QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
-    if (spin)
+    if (spin) {
         spin->setValue(value);
+    }
 }
 
 QScriptValue DoubleDataInformationMethods::asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler)
@@ -65,6 +65,6 @@ QScriptValue DoubleDataInformationMethods::asScriptValue(double value, QScriptEn
 QString DoubleDataInformationMethods::staticValueString(double value)
 {
     return (Kasten::StructureViewPreferences::localeAwareFloatFormatting())
-        ? QLocale().toString(value, 'g', Kasten::StructureViewPreferences::floatPrecision())
-        : QString::number(value, 'g', Kasten::StructureViewPreferences::floatPrecision());
+           ? QLocale().toString(value, 'g', Kasten::StructureViewPreferences::floatPrecision())
+           : QString::number(value, 'g', Kasten::StructureViewPreferences::floatPrecision());
 }

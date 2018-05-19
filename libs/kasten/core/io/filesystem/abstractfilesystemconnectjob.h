@@ -27,47 +27,43 @@
 #include <kasten/abstractconnectjob.h>
 #include <kasten/abstractmodelsynchronizer.h>
 
-
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelFileSystemSynchronizer;
 
 class AbstractFileSystemConnectJobPrivate;
 
-
 class KASTENCORE_EXPORT AbstractFileSystemConnectJob : public AbstractConnectJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
-                                  const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
+public:
+    AbstractFileSystemConnectJob(AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
+                                 const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
 
     ~AbstractFileSystemConnectJob() override;
 
-  public: // KJob API
+public: // KJob API
     void start() override;
 
-  protected: // API to be implemented
+protected: // API to be implemented
     virtual void startConnectWithFile() = 0;
 
-  protected:
-    void complete( bool success );
+protected:
+    void complete(bool success);
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     AbstractDocument* document() const;
     QFile* file() const;
 
-  protected:
-    Q_PRIVATE_SLOT( d_func(), void connectWithFile() )
+protected:
+    Q_PRIVATE_SLOT(d_func(), void connectWithFile())
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractFileSystemConnectJob )
+protected:
+    Q_DECLARE_PRIVATE(AbstractFileSystemConnectJob)
 };
 
 }

@@ -31,44 +31,41 @@
 class KXMLGUIClient;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 namespace If {
 class DataSelectable;
 class SelectedDataWriteable;
 }
 
-
 class KASTENCONTROLLERS_EXPORT ClipboardController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ClipboardController( KXMLGUIClient* guiClient );
+public:
+    explicit ClipboardController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void cut();
     void copy();
     void paste();
 
-  private Q_SLOTS:
-    void onHasSelectedDataChanged( bool hasSelectedData );
-    void onReadOnlyChanged( bool isReadOnly );
+private Q_SLOTS:
+    void onHasSelectedDataChanged(bool hasSelectedData);
+    void onReadOnlyChanged(bool isReadOnly);
     void onClipboardDataChanged();
 
-  private:
+private:
     AbstractModel* mModel;
-    If::DataSelectable *mSelectionControl;
-    If::SelectedDataWriteable *mMimeDataControl;
+    If::DataSelectable* mSelectionControl;
+    If::SelectedDataWriteable* mMimeDataControl;
 
-    QAction *mCutAction;
-    QAction *mCopyAction;
-    QAction *mPasteAction;
+    QAction* mCutAction;
+    QAction* mCopyAction;
+    QAction* mPasteAction;
 };
 
 }

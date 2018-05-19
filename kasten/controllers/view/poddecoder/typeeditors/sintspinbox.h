@@ -28,41 +28,41 @@
 // C++
 #include <limits>
 
-
 class SIntSpinBox : public QAbstractSpinBox
 {
-Q_OBJECT
-Q_PROPERTY( qint64 value READ value WRITE setValue USER true )
-  public:
-    explicit SIntSpinBox( QWidget* parent = nullptr, int base = 10 );
+    Q_OBJECT
+    Q_PROPERTY(qint64 value READ value WRITE setValue USER true)
+
+public:
+    explicit SIntSpinBox(QWidget* parent = nullptr, int base = 10);
 
     ~SIntSpinBox() override;
 
-  public:
+public:
     qint64 value() const;
 
-  public:
-    void setValue( qint64 value );
+public:
+    void setValue(qint64 value);
 
-    //TODO getters + setters
-    void setRange( qint64 minimum, qint64 maximum );
-    void setBase( int base );
+    // TODO getters + setters
+    void setRange(qint64 minimum, qint64 maximum);
+    void setBase(int base);
 
-    static SIntSpinBox* createSInt64Spinbox( QWidget* parent = nullptr );
-    static SIntSpinBox* createSInt32Spinbox( QWidget* parent = nullptr );
-    static SIntSpinBox* createSInt16Spinbox( QWidget* parent = nullptr );
-    static SIntSpinBox* createSInt8Spinbox( QWidget* parent = nullptr );
+    static SIntSpinBox* createSInt64Spinbox(QWidget* parent = nullptr);
+    static SIntSpinBox* createSInt32Spinbox(QWidget* parent = nullptr);
+    static SIntSpinBox* createSInt16Spinbox(QWidget* parent = nullptr);
+    static SIntSpinBox* createSInt8Spinbox(QWidget* parent = nullptr);
 
-  protected: // QAbstractSpinBox API
-    QValidator::State validate( QString& input, int& pos ) const override;
-    void stepBy( int steps ) override;
-    void fixup( QString& input ) const override;
+protected: // QAbstractSpinBox API
+    QValidator::State validate(QString& input, int& pos) const override;
+    void stepBy(int steps) override;
+    void fixup(QString& input) const override;
     StepEnabled stepEnabled() const override;
 
-  protected:
+protected:
     void updateEditLine() const;
 
-  protected:
+protected:
     mutable qint64 mValue;
 
     qint64 mMinimum;
@@ -72,93 +72,92 @@ Q_PROPERTY( qint64 value READ value WRITE setValue USER true )
     QString mPrefix;
 };
 
-
-inline SIntSpinBox::SIntSpinBox( QWidget *parent, int base)
-  : QAbstractSpinBox( parent ),
-    mValue( 0 ),
-    mMinimum( std::numeric_limits<qint64>::min() ),
-    mMaximum( std::numeric_limits<qint64>::max() ),
-    mBase(0)
+inline SIntSpinBox::SIntSpinBox(QWidget* parent, int base)
+    : QAbstractSpinBox(parent)
+    , mValue(0)
+    , mMinimum(std::numeric_limits<qint64>::min())
+    , mMaximum(std::numeric_limits<qint64>::max())
+    , mBase(0)
 {
-    setBase( base );
+    setBase(base);
 }
 
 inline qint64 SIntSpinBox::value() const { return mValue; }
 
-inline void SIntSpinBox::setValue( qint64 value )
+inline void SIntSpinBox::setValue(qint64 value)
 {
-    if( value > mMaximum )
+    if (value > mMaximum) {
         value = mMaximum;
-    else if( value < mMinimum )
+    } else if (value < mMinimum) {
         value = mMinimum;
+    }
 
-    if( mValue == value )
+    if (mValue == value) {
         return;
+    }
 
     mValue = value;
 
     updateEditLine();
 }
 
-inline void SIntSpinBox::setRange( qint64 minimum, qint64 maximum )
+inline void SIntSpinBox::setRange(qint64 minimum, qint64 maximum)
 {
     mMinimum = minimum;
-    mMaximum = (maximum>minimum) ? maximum : minimum;
+    mMaximum = (maximum > minimum) ? maximum : minimum;
 
-    if( mValue > mMaximum )
-    {
+    if (mValue > mMaximum) {
         mValue = mMaximum;
 
         updateEditLine();
-    }
-    else if( mValue < mMinimum )
-    {
+    } else if (mValue < mMinimum) {
         mValue = mMinimum;
 
         updateEditLine();
     }
 }
 
-inline void SIntSpinBox::setBase( int base )
+inline void SIntSpinBox::setBase(int base)
 {
-    base = qBound( 2, base, 36 );
+    base = qBound(2, base, 36);
 
-    if( mBase == base )
+    if (mBase == base) {
         return;
+    }
 
     mBase = base;
     mPrefix = QString::fromLatin1(
         (base == 16) ? "0x" :
         (base ==  8) ? "0o" :
         (base ==  2) ? "0b" :
-        /* else */     nullptr );
+        /* else */     nullptr);
 }
 
 inline SIntSpinBox::~SIntSpinBox() {}
 
-inline SIntSpinBox* SIntSpinBox::createSInt64Spinbox( QWidget* parent )
+inline SIntSpinBox* SIntSpinBox::createSInt64Spinbox(QWidget* parent)
 {
-    return new SIntSpinBox( parent );
+    return new SIntSpinBox(parent);
 }
 
-inline SIntSpinBox* SIntSpinBox::createSInt32Spinbox( QWidget* parent )
+inline SIntSpinBox* SIntSpinBox::createSInt32Spinbox(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox( parent );
-    ret->setRange( std::numeric_limits<qint32>::min(), std::numeric_limits<qint32>::max() );
+    SIntSpinBox* ret = new SIntSpinBox(parent);
+    ret->setRange(std::numeric_limits<qint32>::min(), std::numeric_limits<qint32>::max());
     return ret;
 }
 
-inline SIntSpinBox* SIntSpinBox::createSInt16Spinbox( QWidget* parent )
+inline SIntSpinBox* SIntSpinBox::createSInt16Spinbox(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox( parent );
-    ret->setRange( std::numeric_limits<qint16>::min(), std::numeric_limits<qint16>::max() );
+    SIntSpinBox* ret = new SIntSpinBox(parent);
+    ret->setRange(std::numeric_limits<qint16>::min(), std::numeric_limits<qint16>::max());
     return ret;
 }
 
-inline SIntSpinBox* SIntSpinBox::createSInt8Spinbox( QWidget* parent )
+inline SIntSpinBox* SIntSpinBox::createSInt8Spinbox(QWidget* parent)
 {
-    SIntSpinBox* ret = new SIntSpinBox( parent );
-    ret->setRange( std::numeric_limits<qint8>::min(), std::numeric_limits<qint8>::max() );
+    SIntSpinBox* ret = new SIntSpinBox(parent);
+    ret->setRange(std::numeric_limits<qint8>::min(), std::numeric_limits<qint8>::max());
     return ret;
 }
 

@@ -26,31 +26,35 @@
 // lib
 #include "kcontroller.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayView;
 class ByteArrayTableCursor;
 
-
 class KEditor : public KController
 {
-  protected:
-    enum KEditAction { CharDelete, WordDelete, CharBackspace, WordBackspace };
+protected:
+    enum KEditAction
+    {
+        CharDelete,
+        WordDelete,
+        CharBackspace,
+        WordBackspace
+    };
 
-  protected:
-    KEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent );
-  public:
+protected:
+    KEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
+
+public:
     ~KEditor() override;
 
-  public: // KController API
-    bool handleKeyPress( QKeyEvent* keyEvent ) override;
+public: // KController API
+    bool handleKeyPress(QKeyEvent* keyEvent) override;
 
-  protected:
+protected:
     /** executes keyboard Action \a Action. This is normally called by a key event handler. */
-    void doEditAction( KEditAction Action );
+    void doEditAction(KEditAction Action);
 
-  protected:
+protected:
     ByteArrayTableCursor* mCursor;
     AbstractByteArrayView* mView;
 };

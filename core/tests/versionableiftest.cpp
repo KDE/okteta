@@ -28,8 +28,7 @@
 #include <QTest>
 #include <QSignalSpy>
 
-namespace Okteta
-{
+namespace Okteta {
 
 // ---------------------------------------------------------------- Tests -----
 
@@ -37,19 +36,19 @@ void VersionableIfTest::init()
 {
     mObject = createVersionable();
 
-    mVersionableControl = qobject_cast<Okteta::Versionable*>( mObject );
+    mVersionableControl = qobject_cast<Okteta::Versionable*>(mObject);
 
     mRevertedToVersionIndexSpy =
-        new QSignalSpy( mObject, SIGNAL(revertedToVersionIndex(int)) );
+        new QSignalSpy(mObject, SIGNAL(revertedToVersionIndex(int)));
     mHeadVersionDescriptionChangedSpy =
-        new QSignalSpy( mObject, SIGNAL(headVersionDescriptionChanged(QString)) );
+        new QSignalSpy(mObject, SIGNAL(headVersionDescriptionChanged(QString)));
     mHeadVersionChangedSpy =
-        new QSignalSpy( mObject, SIGNAL(headVersionChanged(int)) );
+        new QSignalSpy(mObject, SIGNAL(headVersionChanged(int)));
 }
 
 void VersionableIfTest::cleanup()
 {
-    deleteVersionable( mObject );
+    deleteVersionable(mObject);
 
     delete mRevertedToVersionIndexSpy;
     delete mHeadVersionDescriptionChangedSpy;
@@ -63,115 +62,110 @@ void VersionableIfTest::clearSignalSpys()
     mHeadVersionChangedSpy->clear();
 }
 
-void VersionableIfTest::checkRevertedToVersionIndex( int versionIndex )
+void VersionableIfTest::checkRevertedToVersionIndex(int versionIndex)
 {
-    QVERIFY( mRevertedToVersionIndexSpy->isValid() );
-    QCOMPARE( mRevertedToVersionIndexSpy->count(), 1 );
+    QVERIFY(mRevertedToVersionIndexSpy->isValid());
+    QCOMPARE(mRevertedToVersionIndexSpy->count(), 1);
     const QList<QVariant> arguments = mRevertedToVersionIndexSpy->takeFirst();
-    QCOMPARE( arguments.at(0).toInt(), versionIndex );
+    QCOMPARE(arguments.at(0).toInt(), versionIndex);
 }
 
-void VersionableIfTest::checkHeadVersionDescriptionChanged( const QString &versionDescription )
+void VersionableIfTest::checkHeadVersionDescriptionChanged(const QString& versionDescription)
 {
-    QVERIFY( mHeadVersionDescriptionChangedSpy->isValid() );
-    QCOMPARE( mHeadVersionDescriptionChangedSpy->count(), 1 );
+    QVERIFY(mHeadVersionDescriptionChangedSpy->isValid());
+    QCOMPARE(mHeadVersionDescriptionChangedSpy->count(), 1);
     const QList<QVariant> arguments = mHeadVersionDescriptionChangedSpy->takeFirst();
-    QCOMPARE( arguments.at(0).toString(), versionDescription );
+    QCOMPARE(arguments.at(0).toString(), versionDescription);
 }
 
-void VersionableIfTest::checkHeadVersionChanged( int newHeadVersionIndex )
+void VersionableIfTest::checkHeadVersionChanged(int newHeadVersionIndex)
 {
-    QVERIFY( mHeadVersionChangedSpy->isValid() );
-    QCOMPARE( mHeadVersionChangedSpy->count(), 1 );
+    QVERIFY(mHeadVersionChangedSpy->isValid());
+    QCOMPARE(mHeadVersionChangedSpy->count(), 1);
     QList<QVariant> arguments = mHeadVersionChangedSpy->takeFirst();
-    QCOMPARE( arguments.at(0).toInt(), newHeadVersionIndex );
+    QCOMPARE(arguments.at(0).toInt(), newHeadVersionIndex);
 }
-
 
 // ---------------------------------------------------------------- Tests -----
 
 void VersionableIfTest::testBegin()
 {
-    QCOMPARE( mVersionableControl->versionIndex(), 0 );
-    QCOMPARE( mVersionableControl->versionCount(), 1 );
+    QCOMPARE(mVersionableControl->versionIndex(), 0);
+    QCOMPARE(mVersionableControl->versionCount(), 1);
 }
 
 #if 0
 void VersionableIfTest::testFill()
 {
 
+    weiter an ende
+    1. neue Version
+    2. Versionsänderung
+    weiter in mitte
+    weiter an anfang
 
-weiter an ende
-1. neue Version
-2. Versionsänderung
-weiter in mitte
-weiter an anfang
+    // can we alter the buffer at all?
+    if (mVersionable->isReadOnly()) {
+        // skip
+        return;
+    }
 
+    static const unsigned int FillSize = 10;
+    unsigned int Size = mVersionable->size();
+    Section FillSection = Section::fromWidth(0, Size);
 
+    FixedSizeByteArrayModel Copy(Size, PaintChar);
 
+    // fill() all
+    mVersionable->setModified(false);
+    mVersionable->fill(BlankChar);
+    clearSignalSpys();
 
+    mVersionable->fill(PaintChar);
+    QCOMPARE(Copy.compare(*mVersionable), 0);
+    QVERIFY(mVersionable->isModified());
+    checkContentsReplaced(FillSection, FillSection.width());
+    checkContentsChanged(0, mVersionable->size() - 1);
 
-  // can we alter the buffer at all?
-  if( mVersionable->isReadOnly() )
-    // skip
-    return;
+    // fill() at begin
+    FillSection.set(0, FillSize);
+    mVersionable->setModified(false);
+    mVersionable->fill(BlankChar);
+    clearSignalSpys();
 
-  static const unsigned int FillSize = 10;
-  unsigned int Size = mVersionable->size();
-  Section FillSection = Section::fromWidth( 0, Size );
+    mVersionable->fill(PaintChar, FillSection);
+    QCOMPARE(Copy.compare(*mVersionable, FillSection), 0);
+    QCOMPARE(mVersionable->datum(FillSection.nextBehindEnd()), BlankChar);
+    QVERIFY(mVersionable->isModified());
+    checkContentsReplaced(FillSection, FillSection.width());
+    checkContentsChanged(FillSection);
 
-  FixedSizeByteArrayModel Copy( Size, PaintChar );
+    // fill() at end
+    mVersionable->setModified(false);
+    mVersionable->fill(BlankChar);
+    FillSection.moveToEnd(Size - 1);
+    clearSignalSpys();
 
-  // fill() all
-  mVersionable->setModified( false );
-  mVersionable->fill( BlankChar );
-  clearSignalSpys();
+    mVersionable->fill(PaintChar, FillSection);
+    QCOMPARE(mVersionable->datum(FillSection.nextBeforeStart()), BlankChar);
+    QCOMPARE(Copy.compare(*mVersionable, FillSection, FillSection.start()), 0);
+    QVERIFY(mVersionable->isModified());
+    checkContentsReplaced(FillSection, FillSection.width());
+    checkContentsChanged(FillSection);
 
-  mVersionable->fill( PaintChar );
-  QCOMPARE( Copy.compare(*mVersionable), 0 );
-  QVERIFY( mVersionable->isModified() );
-  checkContentsReplaced( FillSection, FillSection.width() );
-  checkContentsChanged( 0, mVersionable->size()-1 );
+    // fill() at mid
+    mVersionable->setModified(false);
+    mVersionable->fill(BlankChar);
+    FillSection.moveToStart(Size / 2);
+    clearSignalSpys();
 
-  // fill() at begin
-  FillSection.set( 0, FillSize );
-  mVersionable->setModified( false );
-  mVersionable->fill( BlankChar );
-  clearSignalSpys();
-
-  mVersionable->fill( PaintChar, FillSection );
-  QCOMPARE( Copy.compare(*mVersionable, FillSection), 0 );
-  QCOMPARE( mVersionable->datum(FillSection.nextBehindEnd()), BlankChar );
-  QVERIFY( mVersionable->isModified() );
-  checkContentsReplaced( FillSection, FillSection.width() );
-  checkContentsChanged( FillSection );
-
-  // fill() at end
-  mVersionable->setModified( false );
-  mVersionable->fill( BlankChar );
-  FillSection.moveToEnd( Size - 1 );
-  clearSignalSpys();
-
-  mVersionable->fill( PaintChar, FillSection );
-  QCOMPARE( mVersionable->datum(FillSection.nextBeforeStart()), BlankChar );
-  QCOMPARE( Copy.compare(*mVersionable, FillSection, FillSection.start()), 0 );
-  QVERIFY( mVersionable->isModified() );
-  checkContentsReplaced( FillSection, FillSection.width() );
-  checkContentsChanged( FillSection );
-
-  // fill() at mid
-  mVersionable->setModified( false );
-  mVersionable->fill( BlankChar );
-  FillSection.moveToStart( Size/2 );
-  clearSignalSpys();
-
-  mVersionable->fill( PaintChar, FillSection );
-  QCOMPARE( mVersionable->datum(FillSection.nextBeforeStart()), BlankChar );
-  QCOMPARE( Copy.compare(*mVersionable, FillSection, FillSection.start()), 0 );
-  QCOMPARE( mVersionable->datum(FillSection.nextBehindEnd()), BlankChar );
-  QVERIFY( mVersionable->isModified() );
-  checkContentsReplaced( FillSection, FillSection.width() );
-  checkContentsChanged( FillSection );
+    mVersionable->fill(PaintChar, FillSection);
+    QCOMPARE(mVersionable->datum(FillSection.nextBeforeStart()), BlankChar);
+    QCOMPARE(Copy.compare(*mVersionable, FillSection, FillSection.start()), 0);
+    QCOMPARE(mVersionable->datum(FillSection.nextBehindEnd()), BlankChar);
+    QVERIFY(mVersionable->isModified());
+    checkContentsReplaced(FillSection, FillSection.width());
+    checkContentsChanged(FillSection);
 }
 #endif
 

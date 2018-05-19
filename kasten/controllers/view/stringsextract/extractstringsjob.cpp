@@ -29,9 +29,7 @@
 // Qt
 #include <QCoreApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const int ExtractStringBlockSize = 100000;
 
@@ -42,8 +40,7 @@ void ExtractStringsJob::exec()
     mContainedStringList->clear();
 
     // check
-    if( !mByteArrayModel || !mSelection.isValid() )
-    {
+    if (!mByteArrayModel || !mSelection.isValid()) {
         deleteLater(); // TODO: could be reused on next operation
 
         return;
@@ -55,48 +52,43 @@ void ExtractStringsJob::exec()
 
     Okteta::Address i = mSelection.start();
     Okteta::Address blockEnd = mSelection.start();
-    while( i<=mSelection.end() )
-    {
+    while (i <= mSelection.end()) {
         blockEnd += ExtractStringBlockSize;
-        if( blockEnd > mSelection.end() )
+        if (blockEnd > mSelection.end()) {
             blockEnd = mSelection.end();
+        }
 
-        for( ; i<=blockEnd; ++i )
-        {
-            const Okteta::Character decodedChar = mCharCodec->decode( mByteArrayModel->byte(i) );
+        for (; i <= blockEnd; ++i) {
+            const Okteta::Character decodedChar = mCharCodec->decode(mByteArrayModel->byte(i));
             // TODO: Zeilenumbrüche ausnehmen
-            const bool isStringChar = ( !decodedChar.isUndefined() &&
-                                        (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()) );
+            const bool isStringChar = (!decodedChar.isUndefined() &&
+                                       (decodedChar.isLetterOrNumber() || decodedChar.isSpace() || decodedChar.isPunct()));
 
-            if( isStringChar )
-            {
-                if( !stringStarted )
-                {
+            if (isStringChar) {
+                if (!stringStarted) {
                     stringStart = i;
                     stringStarted = true;
                     string.clear();
                 }
-                string.append( decodedChar );
-            }
-            else
-            {
-                if( stringStarted )
-                {
-                    if( i-stringStart >= mMinLength )
-                        mContainedStringList->append( ContainedString(string,stringStart) );
+                string.append(decodedChar);
+            } else {
+                if (stringStarted) {
+                    if (i - stringStart >= mMinLength) {
+                        mContainedStringList->append(ContainedString(string, stringStart));
+                    }
                     stringStarted = false;
                 }
             }
         }
 
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
     // last string not ended?
-    if( stringStarted )
-    {
-        if( i-stringStart >= mMinLength )
-            mContainedStringList->append( ContainedString(string,stringStart) );
+    if (stringStarted) {
+        if (i - stringStart >= mMinLength) {
+            mContainedStringList->append(ContainedString(string, stringStart));
+        }
         stringStarted = false;
     }
 

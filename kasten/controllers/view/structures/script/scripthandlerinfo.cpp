@@ -30,15 +30,15 @@
 #include "classes/pointerscriptclass.h"
 
 ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger)
-    : mArrayClass(new ArrayScriptClass(engine, this)),
-      mPrimitiveClass(new PrimitiveScriptClass(engine, this)),
-      mEnumClass(new EnumScriptClass(engine, this)),
-      mStructUnionClass(new StructUnionScriptClass(engine, this)),
-      mStringClass(new StringScriptClass(engine, this)),
-      mBitfieldClass(new BitfieldScriptClass(engine, this)),
-      mPointerClass(new PointerScriptClass(engine, this)),
-      mLogger(logger),
-      mMode(Mode::None)
+    : mArrayClass(new ArrayScriptClass(engine, this))
+    , mPrimitiveClass(new PrimitiveScriptClass(engine, this))
+    , mEnumClass(new EnumScriptClass(engine, this))
+    , mStructUnionClass(new StructUnionScriptClass(engine, this))
+    , mStringClass(new StringScriptClass(engine, this))
+    , mBitfieldClass(new BitfieldScriptClass(engine, this))
+    , mPointerClass(new PointerScriptClass(engine, this))
+    , mLogger(logger)
+    , mMode(Mode::None)
 {
     Q_CHECK_PTR(mLogger);
 }

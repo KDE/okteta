@@ -22,16 +22,16 @@
 
 #include "abstractbytearrayfilterparametersetedit.h"
 
-
 class AbstractByteArrayFilterParameterSetEdit::Private
 {
 };
 
-AbstractByteArrayFilterParameterSetEdit::AbstractByteArrayFilterParameterSetEdit( QWidget* parent )
- : QWidget( parent ), d( new Private() )
+AbstractByteArrayFilterParameterSetEdit::AbstractByteArrayFilterParameterSetEdit(QWidget* parent)
+    : QWidget(parent)
+    , d(new Private())
 {}
 
-void AbstractByteArrayFilterParameterSetEdit::setCharCodec( const QString &charCodecName ) { Q_UNUSED(charCodecName) }
+void AbstractByteArrayFilterParameterSetEdit::setCharCodec(const QString& charCodecName) { Q_UNUSED(charCodecName) }
 bool AbstractByteArrayFilterParameterSetEdit::isValid() const { return true; }
 void AbstractByteArrayFilterParameterSetEdit::rememberCurrentSettings() {}
 

@@ -29,15 +29,16 @@
 #include <QPainter>
 #include <QListIterator>
 
-
 class AbstractColumnFrameRendererPrivate
 {
-  public:
+public:
     AbstractColumnFrameRendererPrivate();
     ~AbstractColumnFrameRendererPrivate();
-  public:
+
+public:
     void updateWidths();
-  public: // calculated
+
+public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
     QList<Okteta::AbstractColumnRenderer*> mColumns;
     /** the number of lines which the columnRenderer view has */
@@ -48,206 +49,202 @@ class AbstractColumnFrameRendererPrivate
     Okteta::PixelX mColumnsWidth;
 };
 
-
 AbstractColumnFrameRendererPrivate::AbstractColumnFrameRendererPrivate()
- : mNoOfLines( 0 ),
-   mLineHeight( 1 ),
-   mColumnsWidth( 0 )
+    : mNoOfLines(0)
+    , mLineHeight(1)
+    , mColumnsWidth(0)
 {}
 
 void AbstractColumnFrameRendererPrivate::updateWidths()
 {
     mColumnsWidth = 0;
-    QListIterator<Okteta::AbstractColumnRenderer*> it( mColumns );
-    while( it.hasNext() )
-    {
-        Okteta::AbstractColumnRenderer *columnRenderer = it.next();
-        columnRenderer->setX( mColumnsWidth );
+    QListIterator<Okteta::AbstractColumnRenderer*> it(mColumns);
+    while (it.hasNext()) {
+        Okteta::AbstractColumnRenderer* columnRenderer = it.next();
+        columnRenderer->setX(mColumnsWidth);
         mColumnsWidth += columnRenderer->visibleWidth();
     }
 }
 
 AbstractColumnFrameRendererPrivate::~AbstractColumnFrameRendererPrivate()
 {
-   qDeleteAll( mColumns );
+    qDeleteAll(mColumns);
 }
 
 AbstractColumnFrameRenderer::AbstractColumnFrameRenderer()
- : d( new AbstractColumnFrameRendererPrivate() )
+    : d(new AbstractColumnFrameRendererPrivate())
 {
 }
-
 
 Okteta::LineSize AbstractColumnFrameRenderer::noOfLines()          const { return d->mNoOfLines; }
 Okteta::PixelY AbstractColumnFrameRenderer::lineHeight()     const { return d->mLineHeight; }
 
-Okteta::PixelY AbstractColumnFrameRenderer::columnsHeight() const { return d->mNoOfLines*d->mLineHeight; }
+Okteta::PixelY AbstractColumnFrameRenderer::columnsHeight() const { return d->mNoOfLines * d->mLineHeight; }
 Okteta::PixelX AbstractColumnFrameRenderer::columnsWidth()  const { return d->mColumnsWidth; }
 
-void AbstractColumnFrameRenderer::setNoOfLines( Okteta::LineSize noOfLines )
+void AbstractColumnFrameRenderer::setNoOfLines(Okteta::LineSize noOfLines)
 {
-    if( d->mNoOfLines == noOfLines )
+    if (d->mNoOfLines == noOfLines) {
         return;
+    }
 
     d->mNoOfLines = noOfLines;
 }
 
-
-void AbstractColumnFrameRenderer::setLineHeight( Okteta::PixelY newLineHeight )
+void AbstractColumnFrameRenderer::setLineHeight(Okteta::PixelY newLineHeight)
 {
-    if( newLineHeight == d->mLineHeight )
+    if (newLineHeight == d->mLineHeight) {
         return;
+    }
 
-    if( newLineHeight < 1 )
+    if (newLineHeight < 1) {
         newLineHeight = 1;
+    }
     d->mLineHeight = newLineHeight;
 
-    QListIterator<Okteta::AbstractColumnRenderer*> it( d->mColumns );
-    while( it.hasNext() )
-        it.next()->setLineHeight( d->mLineHeight );
+    QListIterator<Okteta::AbstractColumnRenderer*> it(d->mColumns);
+    while (it.hasNext()) {
+        it.next()->setLineHeight(d->mLineHeight);
+    }
 }
-
 
 void AbstractColumnFrameRenderer::updateWidths()
 {
     d->updateWidths();
 }
 
-
 Okteta::LineSize AbstractColumnFrameRenderer::noOfLinesPerFrame() const
 {
     // TODO: the right reaction?
-    if( d->mLineHeight < 1 )
+    if (d->mLineHeight < 1) {
         return 1;
+    }
 
     Okteta::LineSize noOfLinesPerFrame = height() / d->mLineHeight;
 
-    if( noOfLinesPerFrame < 1 )
+    if (noOfLinesPerFrame < 1) {
         // ensure at least one line, so there aren't endless frames TODO: think about
         noOfLinesPerFrame = 1;
+    }
 
     return noOfLinesPerFrame;
 }
 
-
-void AbstractColumnFrameRenderer::addColumn( Okteta::AbstractColumnRenderer *columnRenderer )
+void AbstractColumnFrameRenderer::addColumn(Okteta::AbstractColumnRenderer* columnRenderer)
 {
-    d->mColumns.append( columnRenderer );
+    d->mColumns.append(columnRenderer);
 
     updateWidths();
 }
 
-
-void AbstractColumnFrameRenderer::removeColumn( Okteta::AbstractColumnRenderer *columnRenderer )
+void AbstractColumnFrameRenderer::removeColumn(Okteta::AbstractColumnRenderer* columnRenderer)
 {
-    const int columnPos = d->mColumns.indexOf( columnRenderer );
-    if( columnPos != -1 )
-        d->mColumns.removeAt( columnPos );
+    const int columnPos = d->mColumns.indexOf(columnRenderer);
+    if (columnPos != -1) {
+        d->mColumns.removeAt(columnPos);
+    }
 
     delete columnRenderer;
 
     updateWidths();
 }
 
-
-void AbstractColumnFrameRenderer::renderFrame( QPainter *painter, int frameIndex )
+void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
 {
-    Okteta::PixelXRange renderedXs = Okteta::PixelXRange::fromWidth( 0, width() );
+    Okteta::PixelXRange renderedXs = Okteta::PixelXRange::fromWidth(0, width());
 
     // content to be shown?
-    if( renderedXs.startsBefore(d->mColumnsWidth) )
-    {
+    if (renderedXs.startsBefore(d->mColumnsWidth)) {
         // collect affected columns
         QList<Okteta::AbstractColumnRenderer*> columnRenderers;
-        QListIterator<Okteta::AbstractColumnRenderer*> it( d->mColumns );
-        while( it.hasNext() )
-        {
-            Okteta::AbstractColumnRenderer *columnRenderer = it.next();
-            if( columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs) )
-                columnRenderers.append( columnRenderer );
+        QListIterator<Okteta::AbstractColumnRenderer*> it(d->mColumns);
+        while (it.hasNext()) {
+            Okteta::AbstractColumnRenderer* columnRenderer = it.next();
+            if (columnRenderer->isVisible() && columnRenderer->overlaps(renderedXs)) {
+                columnRenderers.append(columnRenderer);
+            }
         }
 
         // calculate affected lines
         const Okteta::Line baseLine = frameIndex * noOfLinesPerFrame();
-        Okteta::LineRange renderedLines = Okteta::LineRange::fromWidth( baseLine, noOfLinesPerFrame() );
-        renderedLines.restrictEndTo( noOfLines()-1 );
+        Okteta::LineRange renderedLines = Okteta::LineRange::fromWidth(baseLine, noOfLinesPerFrame());
+        renderedLines.restrictEndTo(noOfLines() - 1);
 
-        Okteta::PixelYRange renderedYs = Okteta::PixelYRange::fromWidth( 0, renderedLines.width()*d->mLineHeight );
+        Okteta::PixelYRange renderedYs = Okteta::PixelYRange::fromWidth(0, renderedLines.width() * d->mLineHeight);
 
         // any lines of any columns to be drawn?
-        if( renderedLines.isValid() )
-        {
+        if (renderedLines.isValid()) {
             // paint full columns
-            QListIterator<Okteta::AbstractColumnRenderer*> fit( columnRenderers ); // TODO: reuse later, see some lines below
-            while( fit.hasNext() )
-                fit.next()->renderColumn( painter, renderedXs, renderedYs );
+            QListIterator<Okteta::AbstractColumnRenderer*> fit(columnRenderers);   // TODO: reuse later, see some lines below
+            while (fit.hasNext()) {
+                fit.next()->renderColumn(painter, renderedXs, renderedYs);
+            }
 
             Okteta::PixelY cy = 0;
             // starting painting with the first line
             Okteta::Line line = renderedLines.start();
-            QListIterator<Okteta::AbstractColumnRenderer*> it( columnRenderers );
-            Okteta::AbstractColumnRenderer *columnRenderer = it.next();
-            painter->translate( columnRenderer->x(), cy );
+            QListIterator<Okteta::AbstractColumnRenderer*> it(columnRenderers);
+            Okteta::AbstractColumnRenderer* columnRenderer = it.next();
+            painter->translate(columnRenderer->x(), cy);
 
-            while( true )
-            {
-                columnRenderer->renderFirstLine( painter, renderedXs, line );
-                if( !it.hasNext() )
+            while (true) {
+                columnRenderer->renderFirstLine(painter, renderedXs, line);
+                if (!it.hasNext()) {
                     break;
-                painter->translate( columnRenderer->width(), 0 );
+                }
+                painter->translate(columnRenderer->width(), 0);
                 columnRenderer = it.next();
             }
-            painter->translate( -columnRenderer->x(), 0 );
+            painter->translate(-columnRenderer->x(), 0);
 
             // Go through the other lines
-            while( true )
-            {
+            while (true) {
                 ++line;
 
-                if( line > renderedLines.end() )
+                if (line > renderedLines.end()) {
                     break;
+                }
 
-                QListIterator<Okteta::AbstractColumnRenderer*> it( columnRenderers );
+                QListIterator<Okteta::AbstractColumnRenderer*> it(columnRenderers);
                 columnRenderer = it.next();
-                painter->translate( columnRenderer->x(), d->mLineHeight );
+                painter->translate(columnRenderer->x(), d->mLineHeight);
 
-                while( true )
-                {
-                    columnRenderer->renderNextLine( painter );
-                    if( !it.hasNext() )
+                while (true) {
+                    columnRenderer->renderNextLine(painter);
+                    if (!it.hasNext()) {
                         break;
-                    painter->translate( columnRenderer->width(), 0 );
+                    }
+                    painter->translate(columnRenderer->width(), 0);
                     columnRenderer = it.next();
                 }
-                painter->translate( -columnRenderer->x(), 0 );
+                painter->translate(-columnRenderer->x(), 0);
             }
-            cy = (renderedLines.width()-1)*d->mLineHeight;
+            cy = (renderedLines.width() - 1) * d->mLineHeight;
 
-            painter->translate( 0, -cy );
+            painter->translate(0, -cy);
         }
 
         // draw empty columns?
-       renderedYs.set( renderedYs.nextBehindEnd(), height()-1 );
-        if( renderedYs.isValid() )
-        {
-            QListIterator<Okteta::AbstractColumnRenderer*> it( columnRenderers );
-            while( it.hasNext() )
-                it.next()->renderEmptyColumn( painter, renderedXs, renderedYs );
+        renderedYs.set(renderedYs.nextBehindEnd(), height() - 1);
+        if (renderedYs.isValid()) {
+            QListIterator<Okteta::AbstractColumnRenderer*> it(columnRenderers);
+            while (it.hasNext()) {
+                it.next()->renderEmptyColumn(painter, renderedXs, renderedYs);
+            }
         }
     }
 
     // painter empty rects
-    renderedXs.setStart( d->mColumnsWidth );
-    if( renderedXs.isValid() )
-        drawEmptyArea( painter, renderedXs.start(), 0, renderedXs.width(), height() );
+    renderedXs.setStart(d->mColumnsWidth);
+    if (renderedXs.isValid()) {
+        drawEmptyArea(painter, renderedXs.start(), 0, renderedXs.width(), height());
+    }
 }
 
-
-void AbstractColumnFrameRenderer::drawEmptyArea( QPainter *painter, int cx ,int cy, int cw, int ch )
+void AbstractColumnFrameRenderer::drawEmptyArea(QPainter* painter, int cx, int cy, int cw, int ch)
 {
-    painter->fillRect( cx,cy, cw,ch, Qt::white );
+    painter->fillRect(cx, cy, cw, ch, Qt::white);
 }
-
 
 AbstractColumnFrameRenderer::~AbstractColumnFrameRenderer()
 {

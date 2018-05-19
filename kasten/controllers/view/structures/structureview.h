@@ -34,24 +34,23 @@ class AbstractByteArrayModel;
 class QTreeView;
 class QPushButton;
 
-namespace Kasten
-{
+namespace Kasten {
 class StructuresTool;
 class StructureTreeModel;
 
 class StructureView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     explicit StructureView(StructuresTool* tool, QWidget* parent = nullptr);
     ~StructureView() override;
 
-  public:
+public:
     StructuresTool* tool() const;
     bool eventFilter(QObject* object, QEvent* event) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void openSettingsDlg();
     void openScriptConsole();
     void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
@@ -60,10 +59,10 @@ class StructureView : public QWidget
     void setLockButtonState(bool structureLocked);
     void onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
 
-  private:
+private:
     void setLockButtonState(const QModelIndex& current);
 
-  private:
+private:
     StructuresTool* mTool;
 
     StructureTreeModel* mStructureTreeModel;

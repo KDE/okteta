@@ -30,72 +30,67 @@
 
 class QFontMetrics;
 
-
-namespace Okteta
-{
+namespace Okteta {
 class ByteArrayTableLayout;
 
 /**
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 
 class OKTETAGUI_EXPORT OffsetColumnRenderer : public AbstractColumnRenderer
 {
-  public:
-    OffsetColumnRenderer( AbstractColumnStylist* stylist, ByteArrayTableLayout* layout, OffsetFormat::Format format );
+public:
+    OffsetColumnRenderer(AbstractColumnStylist* stylist, ByteArrayTableLayout* layout, OffsetFormat::Format format);
     ~OffsetColumnRenderer() override;
 
-  public:  // AbstractColumnRenderer API
-    void renderFirstLine( QPainter* painter, const PixelXRange& Xs, Line firstLineIndex ) override;
-    void renderNextLine( QPainter* painter ) override;
-    void renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys ) override;
-    void renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys ) override;
+public:    // AbstractColumnRenderer API
+    void renderFirstLine(QPainter* painter, const PixelXRange& Xs, Line firstLineIndex) override;
+    void renderNextLine(QPainter* painter) override;
+    void renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
+    void renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
 
-  public:
-    void setFormat( OffsetFormat::Format format, const QFontMetrics& fontMetrics );
-    OKTETAGUI_DEPRECATED void setFormat( OffsetFormat::Format format );
-    void setFontMetrics( const QFontMetrics& fontMetrics );
+public:
+    void setFormat(OffsetFormat::Format format, const QFontMetrics& fontMetrics);
+    OKTETAGUI_DEPRECATED void setFormat(OffsetFormat::Format format);
+    void setFontMetrics(const QFontMetrics& fontMetrics);
 
-  public: // read access
+public: // read access
 //     int delta() const;
     OffsetFormat::Format format() const;
     OffsetFormat::print printFunction() const;
 
-
-  protected:
+protected:
     /** recalculates all x values */
     void recalcX();
     /** paints full line */
-    void renderLine( QPainter *painter, Line lineIndex );
+    void renderLine(QPainter* painter, Line lineIndex);
     /** */
-    void renderColumnBackground( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
+    void renderColumnBackground(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
 
-  protected: // user settings
+protected: // user settings
     ByteArrayTableLayout* mLayout;
 
-  protected: // pixel related
+protected: // pixel related
     /** */
     PixelX mOffsetTextWidth;
     /** */
     PixelY mDigitBaseLine;
 
-  protected: // general layout
+protected: // general layout
     OffsetFormat::Format mFormat;
 
     OffsetFormat::print PrintFunction;
 
     /** buffer to hold the formatted coding */
-    mutable char mCodedOffset[OffsetFormat::MaxFormatWidth+1];
+    mutable char mCodedOffset[OffsetFormat::MaxFormatWidth + 1];
 
-  protected: // firstnext trips related
+protected: // firstnext trips related
     /** */
     Line mRenderLineIndex;
 };
 
-
 inline OffsetFormat::print OffsetColumnRenderer::printFunction()    const { return PrintFunction; }
 inline OffsetFormat::Format OffsetColumnRenderer::format()          const { return mFormat; }
-
 
 }
 

@@ -26,20 +26,17 @@
 // Qt
 #include <QAbstractTableModel>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class DocumentsTool;
 class AbstractModelSynchronizer;
 class AbstractDocument;
 
-
 class DocumentListModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ColumnIds
     {
         CurrentColumnId = 0,
@@ -49,24 +46,24 @@ class DocumentListModel : public QAbstractTableModel
         NoOfColumnIds = 4 // TODO: what pattern is usually used to mark number of ids?
     };
 
-  public:
-    explicit DocumentListModel( DocumentsTool* documentsTool, QObject* parent = nullptr );
+public:
+    explicit DocumentListModel(DocumentsTool* documentsTool, QObject* parent = nullptr);
     ~DocumentListModel() override;
 
-  public: // QAbstractTableModel API
-    int rowCount( const QModelIndex& parent ) const override;
-    int columnCount( const QModelIndex& parent ) const override;
-    QVariant data( const QModelIndex& index, int role ) const override;
-    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
+public: // QAbstractTableModel API
+    int rowCount(const QModelIndex& parent) const override;
+    int columnCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-  private Q_SLOTS:
-    void onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents );
-    void onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents );
-    void onFocussedDocumentChanged( Kasten::AbstractDocument* document );
+private Q_SLOTS:
+    void onDocumentsAdded(const QList<Kasten::AbstractDocument*>& documents);
+    void onDocumentsClosing(const QList<Kasten::AbstractDocument*>& documents);
+    void onFocussedDocumentChanged(Kasten::AbstractDocument* document);
     void onSyncStatesChanged();
-    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* synchronizer );
+    void onSynchronizerChanged(Kasten::AbstractModelSynchronizer* synchronizer);
 
-  private:
+private:
     DocumentsTool* mDocumentsTool;
 };
 

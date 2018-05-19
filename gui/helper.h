@@ -30,27 +30,25 @@
 // Qt
 #include <QColor>
 
-
 // temporary solution until syntax highlighting is implemented
-static inline QColor colorForChar( const Okteta::Character byteChar )
+static inline QColor colorForChar(const Okteta::Character byteChar)
 {
-  return byteChar.isUndefined() ? Qt::yellow :
-         byteChar.isPunct() ?     Qt::red :
-         byteChar.isPrint() ?     Qt::black :
-         (byteChar == QLatin1Char(0x0A) || byteChar == QLatin1Char(0x0D)) ?
-                                  Qt::darkCyan :
-                                  Qt::blue;
+    return byteChar.isUndefined() ? Qt::yellow :
+           byteChar.isPunct() ?     Qt::red :
+           byteChar.isPrint() ?     Qt::black :
+           (byteChar == QLatin1Char(0x0A) || byteChar == QLatin1Char(0x0D)) ?
+                                    Qt::darkCyan :
+                                    Qt::blue;
 }
 
-
-static inline KColorScheme::ForegroundRole foregroundRoleForChar( const Okteta::Character byteChar )
+static inline KColorScheme::ForegroundRole foregroundRoleForChar(const Okteta::Character byteChar)
 {
-  return byteChar.isUndefined() ? KColorScheme::NegativeText :
-         byteChar.isPunct() ?     KColorScheme::InactiveText :
-         byteChar.isPrint() ?     KColorScheme::NormalText :
-         (byteChar == QLatin1Char(0x0A) || byteChar == QLatin1Char(0x0D)) ?
-                                  KColorScheme::VisitedText :
-                                  KColorScheme::ActiveText;
+    return byteChar.isUndefined() ? KColorScheme::NegativeText :
+           byteChar.isPunct() ?     KColorScheme::InactiveText :
+           byteChar.isPrint() ?     KColorScheme::NormalText :
+           (byteChar == QLatin1Char(0x0A) || byteChar == QLatin1Char(0x0D)) ?
+                                    KColorScheme::VisitedText :
+                                    KColorScheme::ActiveText;
 }
 
 #endif

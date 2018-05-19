@@ -28,9 +28,7 @@
 // Kasten core
 #include <kasten/abstractmodelfilesystemsynchronizer.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayDocument;
 
@@ -38,33 +36,33 @@ class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizer : public AbstractMode
 {
     Q_OBJECT
 
-  friend class ByteArrayRawFileLoadJob;
-  friend class ByteArrayRawFileConnectJob;
+    friend class ByteArrayRawFileLoadJob;
+    friend class ByteArrayRawFileConnectJob;
 
-  public:
+public:
     ByteArrayRawFileSynchronizer();
 
-  public: // AbstractModelSynchronizer API
-    AbstractLoadJob *startLoad( const QUrl &url ) override;
-    AbstractSyncToRemoteJob *startSyncToRemote() override;
-    AbstractSyncFromRemoteJob *startSyncFromRemote() override;
-    AbstractSyncWithRemoteJob *startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) override;
-    AbstractConnectJob *startConnect( AbstractDocument* document,
-                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) override;
+public: // AbstractModelSynchronizer API
+    AbstractLoadJob* startLoad(const QUrl& url) override;
+    AbstractSyncToRemoteJob* startSyncToRemote() override;
+    AbstractSyncFromRemoteJob* startSyncFromRemote() override;
+    AbstractSyncWithRemoteJob* startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
+    AbstractConnectJob* startConnect(AbstractDocument* document,
+                                     const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
 
     AbstractDocument* document() const override;
 
     LocalSyncState localSyncState() const override;
 
-  protected:
-    void setDocument( ByteArrayDocument *document );
+protected:
+    void setDocument(ByteArrayDocument* document);
 
-  private Q_SLOTS:
-    void onUrlChange( const QUrl &url );
-    void onModelModified( bool isModified );
+private Q_SLOTS:
+    void onUrlChange(const QUrl& url);
+    void onModelModified(bool isModified);
 
-  private:
-    ByteArrayDocument *mDocument;
+private:
+    ByteArrayDocument* mDocument;
 };
 
 }

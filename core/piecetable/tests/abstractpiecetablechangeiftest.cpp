@@ -30,15 +30,12 @@
 // Qt
 #include <QTest>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 static const Size BaseSize = 100;
 static const Address ChangeStorageOffset = 23;
 
-// ---------------------------------------------------------------- Tests -----
-
+//---------------------------------------------------------------- Tests -----
 
 void AbstractPieceTableChangeIfTest::init()
 {
@@ -47,10 +44,10 @@ void AbstractPieceTableChangeIfTest::init()
 
 void AbstractPieceTableChangeIfTest::cleanup()
 {
-    deletePieceTableChange( mPieceTableChange );
+    deletePieceTableChange(mPieceTableChange);
 }
 
-// ---------------------------------------------------------------- Tests -----
+//---------------------------------------------------------------- Tests -----
 
 void AbstractPieceTableChangeIfTest::testMerge()
 {
@@ -58,49 +55,47 @@ void AbstractPieceTableChangeIfTest::testMerge()
 
     int typeId = mPieceTableChange->type();
     QString description = mPieceTableChange->description();
-    bool result = mPieceTableChange->merge( &testChange );
+    bool result = mPieceTableChange->merge(&testChange);
 
-    QVERIFY( !result );
-    QCOMPARE( mPieceTableChange->type(), typeId );
-    QCOMPARE( mPieceTableChange->description(), description );
+    QVERIFY(!result);
+    QCOMPARE(mPieceTableChange->type(), typeId);
+    QCOMPARE(mPieceTableChange->description(), description);
 }
 
 void AbstractPieceTableChangeIfTest::testRevertApply()
 {
     PieceTable pieceTable;
-    pieceTable.init( 0 );
-    pieceTable.insert( 0, BaseSize, ChangeStorageOffset );
+    pieceTable.init(0);
+    pieceTable.insert(0, BaseSize, ChangeStorageOffset);
 
     // do change which creates this
-    changePieceTable ( &pieceTable );
-    mPieceTableChange->revert( &pieceTable );
+    changePieceTable(&pieceTable);
+    mPieceTableChange->revert(&pieceTable);
 
-    QCOMPARE( pieceTable.size(), BaseSize );
-    for( int i=0; i<BaseSize; ++i )
-    {
+    QCOMPARE(pieceTable.size(), BaseSize);
+    for (int i = 0; i < BaseSize; ++i) {
         int storageId;
         Address storageOffset;
-        bool result = pieceTable.getStorageData( &storageId, &storageOffset, i );
+        bool result = pieceTable.getStorageData(&storageId, &storageOffset, i);
 
-        QVERIFY( result );
-        QCOMPARE( storageOffset, i+ChangeStorageOffset );
-        QCOMPARE( storageId, (int)Piece::ChangeStorage );
+        QVERIFY(result);
+        QCOMPARE(storageOffset, i + ChangeStorageOffset);
+        QCOMPARE(storageId, (int)Piece::ChangeStorage);
     }
 
     // now replay changes
-    mPieceTableChange->apply( &pieceTable );
-    mPieceTableChange->revert( &pieceTable );
+    mPieceTableChange->apply(&pieceTable);
+    mPieceTableChange->revert(&pieceTable);
 
-    QCOMPARE( pieceTable.size(), BaseSize );
-    for( Address i=0; i<BaseSize; ++i )
-    {
+    QCOMPARE(pieceTable.size(), BaseSize);
+    for (Address i = 0; i < BaseSize; ++i) {
         int storageId;
         Address storageOffset;
-        bool result = pieceTable.getStorageData( &storageId, &storageOffset, i );
+        bool result = pieceTable.getStorageData(&storageId, &storageOffset, i);
 
-        QVERIFY( result );
-        QCOMPARE( storageOffset, i+ChangeStorageOffset );
-        QCOMPARE( storageId, (int)Piece::ChangeStorage );
+        QVERIFY(result);
+        QCOMPARE(storageOffset, i + ChangeStorageOffset);
+        QCOMPARE(storageId, (int)Piece::ChangeStorage);
     }
 }
 

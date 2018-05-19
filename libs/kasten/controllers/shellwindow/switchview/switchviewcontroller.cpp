@@ -31,31 +31,29 @@
 // Qt
 #include <QActionGroup>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-SwitchViewController::SwitchViewController( AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient )
-   : mGroupedViews( groupedViews )
+SwitchViewController::SwitchViewController(AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient)
+    : mGroupedViews(groupedViews)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mForwardAction = actionCollection->addAction( KStandardAction::Forward, QStringLiteral("window_next"), this, SLOT(forward()) );
-    mBackwardAction = actionCollection->addAction( KStandardAction::Back, QStringLiteral("window_previous"), this, SLOT(backward()) );
+    mForwardAction = actionCollection->addAction(KStandardAction::Forward, QStringLiteral("window_next"), this, SLOT(forward()));
+    mBackwardAction = actionCollection->addAction(KStandardAction::Back, QStringLiteral("window_previous"), this, SLOT(backward()));
 
-    connect( groupedViews, &AbstractGroupedViews::added,
-             this, &SwitchViewController::updateActions );
-    connect( groupedViews, &AbstractGroupedViews::removing,
-             this, &SwitchViewController::updateActions );
-    connect( groupedViews, &AbstractGroupedViews::viewFocusChanged,
-             this, &SwitchViewController::updateActions );
+    connect(groupedViews, &AbstractGroupedViews::added,
+            this, &SwitchViewController::updateActions);
+    connect(groupedViews, &AbstractGroupedViews::removing,
+            this, &SwitchViewController::updateActions);
+    connect(groupedViews, &AbstractGroupedViews::viewFocusChanged,
+            this, &SwitchViewController::updateActions);
 
     updateActions();
 }
 
-void SwitchViewController::setTargetModel( AbstractModel* model )
+void SwitchViewController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED(model)
+    Q_UNUSED(model)
 }
 
 // TODO: think about moving this properties/abilities (hasNext/Previous,switchToNext/Previous) into a interface for the groupedview
@@ -64,42 +62,37 @@ void SwitchViewController::updateActions()
     bool hasNext;
     bool hasPrevious;
     const QList<AbstractView*> viewList = mGroupedViews->viewList();
-    if( viewList.isEmpty() )
-    {
+    if (viewList.isEmpty()) {
         hasNext = false;
         hasPrevious = false;
-    }
-    else
-    {
+    } else {
         AbstractView* focussedView = mGroupedViews->viewFocus();
-        const int indexOfFocussedView = viewList.indexOf( focussedView );
+        const int indexOfFocussedView = viewList.indexOf(focussedView);
 
-        hasNext = ( indexOfFocussedView+1 < viewList.count() );
-        hasPrevious = ( indexOfFocussedView > 0 );
+        hasNext = (indexOfFocussedView + 1 < viewList.count());
+        hasPrevious = (indexOfFocussedView > 0);
     }
 
-    mForwardAction->setEnabled( hasNext );
-    mBackwardAction->setEnabled( hasPrevious );
+    mForwardAction->setEnabled(hasNext);
+    mBackwardAction->setEnabled(hasPrevious);
 }
-
 
 void SwitchViewController::forward()
 {
     const QList<AbstractView*> viewList = mGroupedViews->viewList();
     AbstractView* focussedView = mGroupedViews->viewFocus();
-    const int indexOfFocussedView = viewList.indexOf( focussedView );
-    AbstractView* nextView = viewList.at( indexOfFocussedView + 1 );
-    mGroupedViews->setViewFocus( nextView );
+    const int indexOfFocussedView = viewList.indexOf(focussedView);
+    AbstractView* nextView = viewList.at(indexOfFocussedView + 1);
+    mGroupedViews->setViewFocus(nextView);
 }
-
 
 void SwitchViewController::backward()
 {
     const QList<AbstractView*> viewList = mGroupedViews->viewList();
     AbstractView* focussedView = mGroupedViews->viewFocus();
-    const int indexOfFocussedView = viewList.indexOf( focussedView );
-    AbstractView* previousView = viewList.at( indexOfFocussedView - 1 );
-    mGroupedViews->setViewFocus( previousView );
+    const int indexOfFocussedView = viewList.indexOf(focussedView);
+    AbstractView* previousView = viewList.at(indexOfFocussedView - 1);
+    mGroupedViews->setViewFocus(previousView);
 }
 
 }

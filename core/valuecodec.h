@@ -30,30 +30,28 @@
 
 class QString;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 /** Class that is able to convert codings to and from
-  * hexadecimal, decimal, octal, and binary.
-  *
-  * The buffer will be always filled up to CodingWidth, if not using shortCodingFunction.
-  *
-  *@author Friedrich W. H. Kossebau
-  */
+ * hexadecimal, decimal, octal, and binary.
+ *
+ * The buffer will be always filled up to CodingWidth, if not using shortCodingFunction.
+ *
+ * @author Friedrich W. H. Kossebau
+ */
 
 class OKTETACORE_EXPORT ValueCodec
 {
-  public:
-    static ValueCodec* createCodec( ValueCoding valueCoding );
+public:
+    static ValueCodec* createCodec(ValueCoding valueCoding);
 
-  public:
+public:
     virtual ~ValueCodec();
 
-  protected:
+protected:
     ValueCodec();
 
-  public: // API to be implemented
+public: // API to be implemented
     /**
      * @return number of digits the greatest byte gets decoded into
      */
@@ -70,7 +68,7 @@ class OKTETACORE_EXPORT ValueCodec
      * @param pos offset in digits where to write the code to
      * @param byte data to encode
      */
-    virtual void encode( QString& digits, unsigned int pos, Byte byte ) const = 0;
+    virtual void encode(QString& digits, unsigned int pos, Byte byte) const = 0;
     // TODO: make this QString* digits
     /**
      * Encodes the byte and writes the result to digits, no leading 0s.
@@ -78,7 +76,7 @@ class OKTETACORE_EXPORT ValueCodec
      * @param pos offset in digits where to write the code to
      * @param byte data to encode
      */
-    virtual void encodeShort( QString& digits, unsigned int pos, Byte byte ) const = 0;
+    virtual void encodeShort(QString& digits, unsigned int pos, Byte byte) const = 0;
     // TODO: make this QString* digits
 
     /**
@@ -88,28 +86,27 @@ class OKTETACORE_EXPORT ValueCodec
      * @param pos offset in digits where to write the code to
      * @return true if successful, false otherwise
      */
-    virtual bool appendDigit( Byte* byte, unsigned char digit ) const = 0;
+    virtual bool appendDigit(Byte* byte, unsigned char digit) const = 0;
     /**
      * Tries to remove the last (least significant) digit from byte.
      * @param byte value to remove the last digit from
      * @return true if successful, false otherwise
      */
-    virtual void removeLastDigit( Byte* byte ) const = 0;
+    virtual void removeLastDigit(Byte* byte) const = 0;
     /**
      * Checks if the given digit is used in the encoding.
      * @param digit value to check
      * @return true if digit is valid, false otherwise
      */
-    virtual bool isValidDigit( unsigned char digit ) const = 0;
+    virtual bool isValidDigit(unsigned char digit) const = 0;
     /**
      * Turns the digit into a byte with the value of the digit.
      * @param digit digit to turn into the value
      * @return true if successful, false otherwise
      */
-    virtual bool turnToValue( unsigned char* digit ) const = 0;
+    virtual bool turnToValue(unsigned char* digit) const = 0;
 
-
-  public:
+public:
     /**
      * Tries to decode the digits in the text into a byte.
      * @param byte pointer to the variable to store the result in
@@ -117,9 +114,8 @@ class OKTETACORE_EXPORT ValueCodec
      * @param pos offset in the text to start with decoding
      * @return used chars of the string for the decoding, beginning with pos
      */
-    unsigned int decode( Byte* byte, const QString& text, unsigned int pos = 0 ) const;
+    unsigned int decode(Byte* byte, const QString& text, unsigned int pos = 0) const;
 };
-
 
 inline ValueCodec::ValueCodec() {}
 

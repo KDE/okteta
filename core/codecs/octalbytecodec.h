@@ -26,22 +26,20 @@
 // lib
 #include <valuecodec.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class OctalByteCodec : public ValueCodec
 {
-  public: // ValueCodec API
+public: // ValueCodec API
     unsigned int encodingWidth() const override;
     Byte digitsFilledLimit() const override;
 
-    void encode( QString& digits, unsigned int pos, Byte byte ) const override;
-    void encodeShort( QString& digits, unsigned int pos, Byte byte ) const override;
-    bool appendDigit( Byte* byte, unsigned char digit ) const override;
-    void removeLastDigit( Byte* byte ) const override;
-    bool isValidDigit( unsigned char digit ) const override;
-    bool turnToValue( unsigned char* digit ) const override;
+    void encode(QString& digits, unsigned int pos, Byte byte) const override;
+    void encodeShort(QString& digits, unsigned int pos, Byte byte) const override;
+    bool appendDigit(Byte* byte, unsigned char digit) const override;
+    void removeLastDigit(Byte* byte) const override;
+    bool isValidDigit(unsigned char digit) const override;
+    bool turnToValue(unsigned char* digit) const override;
 };
 
 }

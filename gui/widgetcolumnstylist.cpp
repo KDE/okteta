@@ -26,18 +26,16 @@
 // Qt
 #include <QWidget>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-WidgetColumnStylist::WidgetColumnStylist( QWidget* parent )
-  : AbstractColumnStylist( new WidgetColumnStylistPrivate(parent) )
+WidgetColumnStylist::WidgetColumnStylist(QWidget* parent)
+    : AbstractColumnStylist(new WidgetColumnStylistPrivate(parent))
 {
 }
 
 const QPalette& WidgetColumnStylist::palette() const
 {
-    Q_D( const WidgetColumnStylist );
+    Q_D(const WidgetColumnStylist);
 
     return d->widget()->palette();
 }

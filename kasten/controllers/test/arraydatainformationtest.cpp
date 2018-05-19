@@ -18,7 +18,6 @@
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-
 #include <QTest>
 #include <QSignalSpy>
 
@@ -32,13 +31,16 @@
 class ArrayDataInformationTest : public QObject
 {
     Q_OBJECT
+
 private:
     void testResizeHelper(ArrayDataInformation* array, TopLevelDataInformation* top);
+
 private Q_SLOTS:
     void initTestCase();
     void testResize();
     void testResize_data();
     void cleanupTestCase();
+
 private:
     ArrayDataInformation* primitive;
     ArrayDataInformation* complex;
@@ -55,7 +57,7 @@ void ArrayDataInformationTest::initTestCase()
     LoggerWithContext lwc(nullptr, QString());
 
     primitive = new ArrayDataInformation(QStringLiteral("primitives"), 0,
-            PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
+                                         PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
     primitiveSize = 32;
     primitiveTop = new TopLevelDataInformation(primitive);
 
@@ -78,7 +80,7 @@ void ArrayDataInformationTest::initTestCase()
 
     QVector<DataInformation*> structsChildren;
     structsChildren << PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc)
-            << PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc);
+                    << PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc);
 
     StructureDataInformation* structs = new StructureDataInformation(QStringLiteral("vals"), structsChildren);
 
@@ -118,8 +120,7 @@ void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, Top
 
     array->setArrayLength(newsize);
     QCOMPARE(array->length(), postsize);
-    if (insertCalled)
-    {
+    if (insertCalled) {
         QCOMPARE(spyAboutToInsert.size(), 1);
         QCOMPARE(spyInserted.size(), 1);
 
@@ -131,8 +132,7 @@ void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, Top
         QCOMPARE(spyInserted[0][1].toUInt(), insertFirstArg);
         QCOMPARE(spyInserted[0][2].toUInt(), insertSecondArg);
     }
-    if (removeCalled)
-    {
+    if (removeCalled) {
         QCOMPARE(spyAboutToRemove.size(), 1);
         QCOMPARE(spyRemoved.size(), 1);
 
@@ -145,7 +145,6 @@ void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, Top
         QCOMPARE(spyRemoved[0][2].toUInt(), removeSecondArg);
     }
 }
-
 
 void ArrayDataInformationTest::testResize()
 {
@@ -180,9 +179,6 @@ void ArrayDataInformationTest::cleanupTestCase()
     delete primitiveTop;
 }
 
-
-
 QTEST_GUILESS_MAIN(ArrayDataInformationTest)
-
 
 #include "arraydatainformationtest.moc"

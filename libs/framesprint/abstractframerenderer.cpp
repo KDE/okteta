@@ -29,25 +29,28 @@
 
 class AbstractFrameRenderer::Private
 {
-  public:
+public:
     Private();
-  public:
+
+public:
     int mX;
     int mY;
 };
-AbstractFrameRenderer::Private::Private() : mX( 0 ), mY( 0 ) {}
+AbstractFrameRenderer::Private::Private()
+    : mX(0)
+    , mY(0)
+{}
 
+AbstractFrameRenderer::AbstractFrameRenderer() : d(new Private()) {}
 
-AbstractFrameRenderer::AbstractFrameRenderer() : d( new Private() ) {}
-
-QPoint AbstractFrameRenderer::pos () const { return QPoint(d->mX, d->mY); }
-QSize AbstractFrameRenderer::size () const { return QSize(width(),height()); }
-QRect AbstractFrameRenderer::rect () const { return QRect(pos(),size()); }
+QPoint AbstractFrameRenderer::pos() const { return QPoint(d->mX, d->mY); }
+QSize AbstractFrameRenderer::size() const { return QSize(width(), height()); }
+QRect AbstractFrameRenderer::rect() const { return QRect(pos(), size()); }
 
 int AbstractFrameRenderer::x() const { return d->mX; }
 int AbstractFrameRenderer::y() const { return d->mY; }
 
-void AbstractFrameRenderer::setPos( int x, int y ) { d->mX = x; d->mY = y; }
-void AbstractFrameRenderer::setPos( const QPoint &point ) { d->mX = point.x(); d->mY = point.y(); }
+void AbstractFrameRenderer::setPos(int x, int y) { d->mX = x; d->mY = y; }
+void AbstractFrameRenderer::setPos(const QPoint& point) { d->mX = point.x(); d->mY = point.y(); }
 
 AbstractFrameRenderer::~AbstractFrameRenderer() { delete d; }

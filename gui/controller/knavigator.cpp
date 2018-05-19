@@ -31,26 +31,23 @@
 // Qt
 #include <QKeyEvent>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-KNavigator::KNavigator( AbstractByteArrayView* view, KController* parent )
-  : KController( parent ),
-    mView( view )
+KNavigator::KNavigator(AbstractByteArrayView* view, KController* parent)
+    : KController(parent)
+    , mView(view)
 {
 }
 
-bool KNavigator::handleKeyPress( QKeyEvent *keyEvent )
+bool KNavigator::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed;
 
     const bool altPressed = keyEvent->modifiers() & Qt::ALT;
-    if( altPressed )
+    if (altPressed) {
         // currently there is no input with the Alt modifier used, so ignore them all
         keyUsed = false;
-    else
-    {
+    } else {
         keyUsed = true;
 
         const bool shiftPressed =  keyEvent->modifiers() & Qt::SHIFT;
@@ -60,31 +57,31 @@ bool KNavigator::handleKeyPress( QKeyEvent *keyEvent )
         // we also don't check whether the commands are allowed
         // as the commands are also available as API so the check has to be done
         // in each command anyway
-        switch( keyEvent->key() )
+        switch (keyEvent->key())
         {
         case Qt::Key_Left:
-            moveCursor( controlPressed ? MoveWordBackward : MoveBackward, shiftPressed );
+            moveCursor(controlPressed ? MoveWordBackward : MoveBackward, shiftPressed);
             break;
         case Qt::Key_Right:
-            moveCursor( controlPressed ? MoveWordForward : MoveForward, shiftPressed );
+            moveCursor(controlPressed ? MoveWordForward : MoveForward, shiftPressed);
             break;
         case Qt::Key_Up:
-            moveCursor( controlPressed ? MovePgUp : MoveUp, shiftPressed );
+            moveCursor(controlPressed ? MovePgUp : MoveUp, shiftPressed);
             break;
         case Qt::Key_Down:
-            moveCursor( controlPressed ? MovePgDown : MoveDown, shiftPressed );
+            moveCursor(controlPressed ? MovePgDown : MoveDown, shiftPressed);
             break;
         case Qt::Key_Home:
-            moveCursor( controlPressed ? MoveHome : MoveLineStart, shiftPressed );
+            moveCursor(controlPressed ? MoveHome : MoveLineStart, shiftPressed);
             break;
         case Qt::Key_End:
-            moveCursor( controlPressed ? MoveEnd : MoveLineEnd, shiftPressed );
+            moveCursor(controlPressed ? MoveEnd : MoveLineEnd, shiftPressed);
             break;
         case Qt::Key_PageUp:
-            moveCursor( MovePgUp, shiftPressed );
+            moveCursor(MovePgUp, shiftPressed);
             break;
         case Qt::Key_PageDown:
-            moveCursor( MovePgDown, shiftPressed );
+            moveCursor(MovePgDown, shiftPressed);
             break;
         default:
             keyUsed = false;
@@ -94,8 +91,7 @@ bool KNavigator::handleKeyPress( QKeyEvent *keyEvent )
     return keyUsed ? true : KController::handleKeyPress(keyEvent);
 }
 
-
-void KNavigator::moveCursor( KMoveAction action, bool select )
+void KNavigator::moveCursor(KMoveAction action, bool select)
 {
     mView->pauseCursor();
     mView->finishByteEdit();
@@ -103,30 +99,30 @@ void KNavigator::moveCursor( KMoveAction action, bool select )
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
-    if( select )
-    {
-        if( !tableRanges->selectionStarted() )
-            tableRanges->setSelectionStart( tableCursor->realIndex() );
-    }
-    else
+    if (select) {
+        if (!tableRanges->selectionStarted()) {
+            tableRanges->setSelectionStart(tableCursor->realIndex());
+        }
+    } else {
         tableRanges->removeSelection();
+    }
 
-    switch( action )
+    switch (action)
     {
     case MoveBackward:     tableCursor->gotoPreviousByte(); break;
     case MoveWordBackward: {
-            const Okteta::WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
-            const int newIndex = WBS.indexOfPreviousWordStart( tableCursor->realIndex() );
-            tableCursor->gotoIndex( newIndex );
-        }
+        const Okteta::WordByteArrayService WBS(mView->byteArrayModel(), mView->charCodec());
+        const int newIndex = WBS.indexOfPreviousWordStart(tableCursor->realIndex());
+        tableCursor->gotoIndex(newIndex);
         break;
+    }
     case MoveForward:      tableCursor->gotoNextByte();     break;
     case MoveWordForward:  {
-            const Okteta::WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
-            const int newIndex = WBS.indexOfNextWordStart( tableCursor->realIndex() );
-            tableCursor->gotoCIndex( newIndex );
-        }
+        const Okteta::WordByteArrayService WBS(mView->byteArrayModel(), mView->charCodec());
+        const int newIndex = WBS.indexOfNextWordStart(tableCursor->realIndex());
+        tableCursor->gotoCIndex(newIndex);
         break;
+    }
     case MoveUp:           tableCursor->gotoUp();             break;
     case MovePgUp:         tableCursor->gotoPageUp();         break;
     case MoveDown:         tableCursor->gotoDown();           break;
@@ -137,12 +133,14 @@ void KNavigator::moveCursor( KMoveAction action, bool select )
     case MoveEnd:          tableCursor->gotoEnd();            break;
     }
 
-    if( select )
-        tableRanges->setSelectionEnd( tableCursor->realIndex() );
+    if (select) {
+        tableRanges->setSelectionEnd(tableCursor->realIndex());
+    }
 
-    if( tableRanges->isModified() )
+    if (tableRanges->isModified()) {
         mView->emitSelectionSignals(); // TODO: can this be moved somewhere
-    emit mView->cursorPositionChanged( tableCursor->realIndex() );
+    }
+    emit mView->cursorPositionChanged(tableCursor->realIndex());
     mView->updateChanged();
     mView->ensureCursorVisible();
 

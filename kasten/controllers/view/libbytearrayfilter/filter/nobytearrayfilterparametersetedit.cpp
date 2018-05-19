@@ -22,22 +22,20 @@
 
 #include "nobytearrayfilterparametersetedit.h"
 
-
 const char NoByteArrayFilterParameterSetEdit::Id[] = "None";
 
-
-NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit( QWidget* parent )
- : AbstractByteArrayFilterParameterSetEdit( parent )
+NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit(QWidget* parent)
+    : AbstractByteArrayFilterParameterSetEdit(parent)
 {}
 
-void NoByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayFilterParameterSet *parameterSet )
+void NoByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    Q_UNUSED( parameterSet );
+    Q_UNUSED(parameterSet);
 }
 
-void NoByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
+void NoByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    Q_UNUSED( parameterSet );
+    Q_UNUSED(parameterSet);
 }
 
 NoByteArrayFilterParameterSetEdit::~NoByteArrayFilterParameterSetEdit()

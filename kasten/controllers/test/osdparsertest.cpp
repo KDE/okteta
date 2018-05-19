@@ -29,14 +29,14 @@
 class OsdParserTest : public QObject
 {
     Q_OBJECT
+
 private Q_SLOTS:
     void testPrimitive();
     void testPrimitive_data();
     void testScriptFuntion();
 };
 
-namespace
-{
+namespace {
 inline QString arg(const QString& str, const char* argument)
 {
     return str.arg(QString::fromUtf8(argument));
@@ -48,8 +48,8 @@ void OsdParserTest::testPrimitive_data()
     QTest::addColumn<QString>("secondXml");
     QTest::addColumn<int>("expectedType");
     QString base(
-            QStringLiteral(
-                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?><data><primitive name=\"foo\" type=\"%1\" /></data>"));
+        QStringLiteral(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><data><primitive name=\"foo\" type=\"%1\" /></data>"));
     QTest::newRow("uint8") << arg(base, "uint8") << arg(base, "UInt8") << (int) PrimitiveDataType::UInt8;
     QTest::newRow("uint16") << arg(base, "uint16") << arg(base, "UInt16") << (int) PrimitiveDataType::UInt16;
     QTest::newRow("uint32") << arg(base, "uint32") << arg(base, "UInt32") << (int) PrimitiveDataType::UInt32;
@@ -85,7 +85,7 @@ void OsdParserTest::testPrimitive()
     QCOMPARE(prim->type(), type);
     qDeleteAll(tds);
 
-    //just to ensure comparison is case insensitive
+    // just to ensure comparison is case insensitive
     OsdParser parser2(secondXml);
     QVector<TopLevelDataInformation*> tds2 = parser2.parseStructures();
     QCOMPARE(tds2.size(), 1);
@@ -108,7 +108,7 @@ void OsdParserTest::testScriptFuntion()
     QScriptValue function = engine.evaluate(QStringLiteral("x = function() { return 2; }"));
     QVERIFY(function.isFunction());
     QCOMPARE(function.toString(), QStringLiteral("function () { return 2; }"));
-    //must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
+    // must wrap in parentheses, see https://bugreports.qt-project.org/browse/QTBUG-5757
     QScriptValue betterFunction = engine.evaluate(QStringLiteral("(function() { return 2; })"));
     QVERIFY(betterFunction.isFunction());
     QCOMPARE(betterFunction.toString(), QStringLiteral("function () { return 2; }"));

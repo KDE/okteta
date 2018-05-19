@@ -35,84 +35,83 @@
 // Qt
 #include <QAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-CloseController::CloseController( AbstractDocumentStrategy* documentStrategy,
-                                  KXMLGUIClient* guiClient,
-                                  bool supportMultiple )
-  : AbstractXmlGuiController()
-  , mDocumentStrategy( documentStrategy )
-  , mDocument( nullptr )
+CloseController::CloseController(AbstractDocumentStrategy* documentStrategy,
+                                 KXMLGUIClient* guiClient,
+                                 bool supportMultiple)
+    : AbstractXmlGuiController()
+    , mDocumentStrategy(documentStrategy)
+    , mDocument(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    const QIcon documentCloseIcon = QIcon::fromTheme( QStringLiteral("document-close") );
-    mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
+    const QIcon documentCloseIcon = QIcon::fromTheme(QStringLiteral("document-close"));
+    mCloseAction  = KStandardAction::close(this, SLOT(close()),  actionCollection);
 #if KCOREADDONS_VERSION < 0x053800
-    mCloseAction->setIcon( documentCloseIcon );
+    mCloseAction->setIcon(documentCloseIcon);
 #endif
-    mCloseAction->setEnabled( false );
+    mCloseAction->setEnabled(false);
 
-    if( supportMultiple )
-    {
-        mCloseAllAction = actionCollection->addAction( QStringLiteral("file_close_all"),
-                                                       this, SLOT(closeAll()) );
-        mCloseAllAction->setText( i18nc("@title:menu","Close All") );
-        mCloseAllAction->setIcon( documentCloseIcon );
-        mCloseAllAction->setEnabled( false );
+    if (supportMultiple) {
+        mCloseAllAction = actionCollection->addAction(QStringLiteral("file_close_all"),
+                                                      this, SLOT(closeAll()));
+        mCloseAllAction->setText(i18nc("@title:menu", "Close All"));
+        mCloseAllAction->setIcon(documentCloseIcon);
+        mCloseAllAction->setEnabled(false);
 
-        mCloseAllOtherAction = actionCollection->addAction( QStringLiteral("file_close_all_other"),
-                                                            this, SLOT(closeAllOther()) );
-        mCloseAllOtherAction->setText( i18nc("@title:menu","Close All Other") );
-        mCloseAllOtherAction->setIcon( documentCloseIcon );
-        mCloseAllOtherAction->setEnabled( false );
+        mCloseAllOtherAction = actionCollection->addAction(QStringLiteral("file_close_all_other"),
+                                                           this, SLOT(closeAllOther()));
+        mCloseAllOtherAction->setText(i18nc("@title:menu", "Close All Other"));
+        mCloseAllOtherAction->setIcon(documentCloseIcon);
+        mCloseAllOtherAction->setEnabled(false);
 
-        connect( mDocumentStrategy, &Kasten::AbstractDocumentStrategy::added,
-                 this, &CloseController::onDocumentsChanged );
-        connect( mDocumentStrategy, &Kasten::AbstractDocumentStrategy::closing,
-                 this, &CloseController::onDocumentsChanged );
+        connect(mDocumentStrategy, &Kasten::AbstractDocumentStrategy::added,
+                this, &CloseController::onDocumentsChanged);
+        connect(mDocumentStrategy, &Kasten::AbstractDocumentStrategy::closing,
+                this, &CloseController::onDocumentsChanged);
     }
 }
 
-void CloseController::setTargetModel( AbstractModel* model )
+void CloseController::setTargetModel(AbstractModel* model)
 {
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
-    const bool hasDocument = ( mDocument != nullptr );
+    const bool hasDocument = (mDocument != nullptr);
 
-    mCloseAction->setEnabled( hasDocument );
+    mCloseAction->setEnabled(hasDocument);
 }
-
 
 void CloseController::close()
 {
-    if( mDocumentStrategy->canClose(mDocument) )
-        mDocumentStrategy->closeDocument( mDocument );
+    if (mDocumentStrategy->canClose(mDocument)) {
+        mDocumentStrategy->closeDocument(mDocument);
+    }
 }
 
 void CloseController::closeAll()
 {
-    if( mDocumentStrategy->canCloseAll() )
+    if (mDocumentStrategy->canCloseAll()) {
         mDocumentStrategy->closeAll();
+    }
 }
 
 void CloseController::closeAllOther()
 {
-    if( mDocumentStrategy->canCloseAllOther(mDocument) )
-        mDocumentStrategy->closeAllOther( mDocument );
+    if (mDocumentStrategy->canCloseAllOther(mDocument)) {
+        mDocumentStrategy->closeAllOther(mDocument);
+    }
 }
 
 void CloseController::onDocumentsChanged()
 {
     const QList<AbstractDocument*> documents = mDocumentStrategy->documents();
 
-    const bool hasDocuments = ! documents.isEmpty();
+    const bool hasDocuments = !documents.isEmpty();
     // TODO: there could be just one, but not set for this tool?
-    const bool hasOtherDocuments = ( documents.size() > 1 );
+    const bool hasOtherDocuments = (documents.size() > 1);
 
-    mCloseAllAction->setEnabled( hasDocuments );
-    mCloseAllOtherAction->setEnabled( hasOtherDocuments );
+    mCloseAllAction->setEnabled(hasDocuments);
+    mCloseAllOtherAction->setEnabled(hasOtherDocuments);
 }
 
 CloseController::~CloseController()

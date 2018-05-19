@@ -25,12 +25,11 @@
 // Qt
 #include <Qt>
 
-namespace KPieceTable
-{
+namespace KPieceTable {
 
-bool AbstractPieceTableChange::merge( const AbstractPieceTableChange* other )
+bool AbstractPieceTableChange::merge(const AbstractPieceTableChange* other)
 {
-Q_UNUSED( other )
+    Q_UNUSED(other)
     return false;
 }
 

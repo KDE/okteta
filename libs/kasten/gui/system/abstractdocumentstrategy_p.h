@@ -25,27 +25,23 @@
 
 #include "abstractdocumentstrategy.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocumentStrategyPrivate
 {
-  public:
-      explicit AbstractDocumentStrategyPrivate( AbstractDocumentStrategy* parent );
+public:
+    explicit AbstractDocumentStrategyPrivate(AbstractDocumentStrategy* parent);
 
-      virtual ~AbstractDocumentStrategyPrivate();
+    virtual ~AbstractDocumentStrategyPrivate();
 
-  protected:
+protected:
     AbstractDocumentStrategy* const q_ptr;
-    Q_DECLARE_PUBLIC( AbstractDocumentStrategy )
+    Q_DECLARE_PUBLIC(AbstractDocumentStrategy)
 };
 
-
-inline AbstractDocumentStrategyPrivate::AbstractDocumentStrategyPrivate( AbstractDocumentStrategy* parent )
-  : q_ptr( parent )
+inline AbstractDocumentStrategyPrivate::AbstractDocumentStrategyPrivate(AbstractDocumentStrategy* parent)
+    : q_ptr(parent)
 {}
-
 
 inline AbstractDocumentStrategyPrivate::~AbstractDocumentStrategyPrivate() {}
 

@@ -27,21 +27,18 @@
 // Qt
 #include <QLabel>
 
+namespace Kasten {
 
-namespace Kasten
+DummyView::DummyView(AbstractDocument* document)
+    : AbstractView(document)
+    , mLabel(new QLabel())
+    , mDocument(document)
 {
+    mLabel->setText(mDocument->title());
 
-DummyView::DummyView( AbstractDocument* document )
-  : AbstractView( document ),
-    mLabel( new QLabel() ),
-    mDocument( document )
-{
-    mLabel->setText( mDocument->title() );
-
-    connect( document, &Kasten::AbstractDocument::titleChanged,
-             this, &DummyView::onTitleChange );
+    connect(document, &Kasten::AbstractDocument::titleChanged,
+            this, &DummyView::onTitleChange);
 }
-
 
 bool DummyView::hasFocus()               const { return mLabel->hasFocus(); } // TODO: make sure, label really holds focus after setFocus()
 QWidget* DummyView::widget()             const { return mLabel; }
@@ -52,11 +49,10 @@ void DummyView::setFocus()
     mLabel->setFocus();
 }
 
-void DummyView::onTitleChange( const QString &newTitle )
+void DummyView::onTitleChange(const QString& newTitle)
 {
-    mLabel->setText( newTitle );
+    mLabel->setText(newTitle);
 }
-
 
 DummyView::~DummyView()
 {

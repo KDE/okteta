@@ -38,63 +38,62 @@
 #include <QMimeData>
 #include <QUrl>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void MultiDocumentStrategyPrivate::init()
 {
-    Q_Q( MultiDocumentStrategy );
+    Q_Q(MultiDocumentStrategy);
 
     // setup
-    QObject::connect( mDocumentManager, &DocumentManager::added,
-                      mViewManager, &ViewManager::createViewsFor );
-    QObject::connect( mDocumentManager, &DocumentManager::closing,
-                      mViewManager, &ViewManager::removeViewsFor );
-    QObject::connect( mDocumentManager, &DocumentManager::added,
-                      q, &MultiDocumentStrategy::added );
-    QObject::connect( mDocumentManager, &DocumentManager::closing,
-                      q, &MultiDocumentStrategy::closing );
-    QObject::connect( mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
-                      q, &MultiDocumentStrategy::urlUsed );
+    QObject::connect(mDocumentManager, &DocumentManager::added,
+                     mViewManager, &ViewManager::createViewsFor);
+    QObject::connect(mDocumentManager, &DocumentManager::closing,
+                     mViewManager, &ViewManager::removeViewsFor);
+    QObject::connect(mDocumentManager, &DocumentManager::added,
+                     q, &MultiDocumentStrategy::added);
+    QObject::connect(mDocumentManager, &DocumentManager::closing,
+                     q, &MultiDocumentStrategy::closing);
+    QObject::connect(mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
+                     q, &MultiDocumentStrategy::urlUsed);
 }
 
 void MultiDocumentStrategyPrivate::createNewFromClipboard()
 {
-    const QMimeData* mimeData = QApplication::clipboard()->mimeData( QClipboard::Clipboard );
+    const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
 
-    mDocumentManager->createManager()->createNewFromData( mimeData, true );
+    mDocumentManager->createManager()->createNewFromData(mimeData, true);
 }
 
-void MultiDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGenerator* generator )
+void MultiDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGenerator* generator)
 {
-    Q_Q( MultiDocumentStrategy );
+    Q_Q(MultiDocumentStrategy);
 
     AbstractModelDataGeneratorConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor( generator );
+        mViewManager->codecViewManager()->createConfigEditor(generator);
 
-    if( configEditor )
-    {
-        CreateDialog* dialog = new CreateDialog( configEditor );
+    if (configEditor) {
+        CreateDialog* dialog = new CreateDialog(configEditor);
 //         dialog->setData( mModel, selection ); TODO
-        if( ! dialog->exec() )
+        if (!dialog->exec()) {
             return;
+        }
     }
 
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread( q, generator );
+        new ModelDataGenerateThread(q, generator);
     generateThread->start();
-    while( !generateThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!generateThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     QMimeData* mimeData = generateThread->data();
 
     delete generateThread;
 
-    const bool setModified = ( generator->flags() & AbstractModelDataGenerator::DynamicGeneration );
-    mDocumentManager->createManager()->createNewFromData( mimeData, setModified );
+    const bool setModified = (generator->flags() & AbstractModelDataGenerator::DynamicGeneration);
+    mDocumentManager->createManager()->createNewFromData(mimeData, setModified);
 
     QApplication::restoreOverrideCursor();
 }

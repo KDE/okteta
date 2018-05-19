@@ -29,44 +29,39 @@
 #include <QObject>
 #include <QString>
 
-
-namespace Kasten
-{
-
+namespace Kasten {
 
 class ByteArrayRandomDataGeneratorSettings
 {
-  public:
+public:
     ByteArrayRandomDataGeneratorSettings();
 
-  public:
+public:
     int size;
 };
-
 
 class ByteArrayRandomDataGenerator : public AbstractModelDataGenerator
 {
     Q_OBJECT
 
-  public:
+public:
     ByteArrayRandomDataGenerator();
 
     ~ByteArrayRandomDataGenerator() override;
 
-  public: // AbstractModelDataGenerator API
+public: // AbstractModelDataGenerator API
     QMimeData* generateData() override;
 
-  public:
+public:
     ByteArrayRandomDataGeneratorSettings settings() const;
-    void setSettings( const ByteArrayRandomDataGeneratorSettings& settings );
+    void setSettings(const ByteArrayRandomDataGeneratorSettings& settings);
 
-  protected:
+protected:
     ByteArrayRandomDataGeneratorSettings mSettings;
 };
 
-
 inline ByteArrayRandomDataGeneratorSettings ByteArrayRandomDataGenerator::settings() const { return mSettings; }
-inline void ByteArrayRandomDataGenerator::setSettings( const ByteArrayRandomDataGeneratorSettings& settings )
+inline void ByteArrayRandomDataGenerator::setSettings(const ByteArrayRandomDataGeneratorSettings& settings)
 {
     mSettings = settings;
 //     emit settingsChanged();

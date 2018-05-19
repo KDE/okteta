@@ -28,51 +28,49 @@
 // Qt
 #include <QTextStream>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ValueByteArrayColumnTextRenderer::ValueByteArrayColumnTextRenderer(
     const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
-        const Okteta::CoordRange& coordRange,
-        int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        Okteta::ValueCoding valueCoding )
-  : AbstractByteArrayColumnTextRenderer( byteArrayModel, offset, coordRange,
-    noOfBytesPerLine ),
-   mValueCodec( Okteta::ValueCodec::createCodec(valueCoding) )
+    const Okteta::CoordRange& coordRange,
+    int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
+    Okteta::ValueCoding valueCoding)
+    : AbstractByteArrayColumnTextRenderer(byteArrayModel, offset, coordRange,
+        noOfBytesPerLine)
+    , mValueCodec(Okteta::ValueCodec::createCodec(valueCoding))
 {
-    setWidths( mValueCodec->encodingWidth(), byteSpacingWidth, noOfGroupedBytes );
+    setWidths(mValueCodec->encodingWidth(), byteSpacingWidth, noOfGroupedBytes);
 }
 
-
-void ValueByteArrayColumnTextRenderer::renderLine( QTextStream* stream, bool isSubline ) const
+void ValueByteArrayColumnTextRenderer::renderLine(QTextStream* stream, bool isSubline) const
 {
-Q_UNUSED( isSubline )
+    Q_UNUSED(isSubline)
 
     int p = 0;
     int pEnd = mNoOfBytesPerLine;
     // correct boundaries
-    if( mRenderLine == mCoordRange.start().line() )
+    if (mRenderLine == mCoordRange.start().line()) {
         p = mCoordRange.start().pos();
-    if( mRenderLine == mCoordRange.end().line() )
-        pEnd = mCoordRange.end().pos()+1;
+    }
+    if (mRenderLine == mCoordRange.end().line()) {
+        pEnd = mCoordRange.end().pos() + 1;
+    }
 
     QString E;
-    E.resize( mValueCodec->encodingWidth() );
+    E.resize(mValueCodec->encodingWidth());
     // draw individual chars
     uint e = 0;
-    for( ; p<pEnd; ++p, ++mOffset )
-    {
+    for (; p < pEnd; ++p, ++mOffset) {
         // get next position
         const uint t = mLinePositions[p];
         // clear spacing
-        *stream << whiteSpace( t-e );
-        mValueCodec->encode( E, 0, mByteArrayModel->byte(mOffset) );
+        *stream << whiteSpace(t - e);
+        mValueCodec->encode(E, 0, mByteArrayModel->byte(mOffset));
         *stream << E;
         e = t + mValueCodec->encodingWidth();
     }
 
-    *stream << whiteSpace( mNoOfCharsPerLine-e );
+    *stream << whiteSpace(mNoOfCharsPerLine - e);
     ++mRenderLine;
 }
 

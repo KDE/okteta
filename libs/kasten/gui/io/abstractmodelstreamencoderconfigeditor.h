@@ -28,32 +28,30 @@
 // Qt
 #include <QWidget>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractSelectionView;
 
-
 class KASTENGUI_EXPORT AbstractModelStreamEncoderConfigEditor : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    explicit AbstractModelStreamEncoderConfigEditor( QWidget* parent = nullptr );
-  public:
+protected:
+    explicit AbstractModelStreamEncoderConfigEditor(QWidget* parent = nullptr);
+
+public:
     ~AbstractModelStreamEncoderConfigEditor() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     /// default returns true
     virtual bool isValid() const;
     /// default returns none
     virtual AbstractSelectionView* createPreviewView() const;
 
-  Q_SIGNALS:
-    void validityChanged( bool isValid );
+Q_SIGNALS:
+    void validityChanged(bool isValid);
 
-  protected:
+protected:
     class Private;
     Private* const d;
 };

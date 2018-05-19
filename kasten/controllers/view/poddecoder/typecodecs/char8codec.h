@@ -26,35 +26,31 @@
 // tool
 #include "../abstracttypecodec.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 class CharCodec;
-
 
 class Char8Codec : public AbstractTypeCodec
 {
-  public:
-    explicit Char8Codec( CharCodec* charCodec );
+public:
+    explicit Char8Codec(CharCodec* charCodec);
 
     ~Char8Codec() override;
 
-  public: // AbstractTypeCodec API
-    QVariant value( const PODData& data, int* byteCount ) const override;
-    QByteArray valueToBytes( const QVariant& value ) const override;
+public: // AbstractTypeCodec API
+    QVariant value(const PODData& data, int* byteCount) const override;
+    QByteArray valueToBytes(const QVariant& value) const override;
 
-    bool areEqual( const QVariant& value, QVariant& otherValue ) const override;
+    bool areEqual(const QVariant& value, QVariant& otherValue) const override;
 
-  public:
-    void setCharCodec( CharCodec* charCodec );
+public:
+    void setCharCodec(CharCodec* charCodec);
 
-  protected:
+protected:
     CharCodec* mCharCodec;
     QChar mUndefinedChar;
 };
 
-
-inline void Char8Codec::setCharCodec( CharCodec* charCodec ) { mCharCodec = charCodec; }
+inline void Char8Codec::setCharCodec(CharCodec* charCodec) { mCharCodec = charCodec; }
 
 }
 

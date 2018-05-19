@@ -26,26 +26,23 @@
 // Kasten gui
 #include <kasten/abstracttoolinlineview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class GotoOffsetView;
 class GotoOffsetTool;
 
-
 class GotoOffsetToolView : public AbstractToolInlineView
 {
-  public:
-    explicit GotoOffsetToolView( GotoOffsetTool* tool );
+public:
+    explicit GotoOffsetToolView(GotoOffsetTool* tool);
     ~GotoOffsetToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     GotoOffsetView* mWidget;
 };
 

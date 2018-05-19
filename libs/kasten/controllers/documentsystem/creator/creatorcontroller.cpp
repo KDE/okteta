@@ -38,81 +38,77 @@
 #include <QApplication>
 #include <QMimeData>
 
-
 #ifndef ABSTRACTMODELDATAGENERATOR_METATYPE
 #define ABSTRACTMODELDATAGENERATOR_METATYPE
 Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
 #endif
 
-namespace Kasten
-{
+namespace Kasten {
 
-CreatorController::CreatorController( ModelCodecManager* modelCodecManager,
-                                      AbstractDocumentStrategy* documentStrategy,
-                                      KXMLGUIClient* guiClient )
-  : AbstractXmlGuiController(),
-    mModelCodecManager( modelCodecManager ),
-    mDocumentStrategy( documentStrategy )
+CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
+                                     AbstractDocumentStrategy* documentStrategy,
+                                     KXMLGUIClient* guiClient)
+    : AbstractXmlGuiController()
+    , mModelCodecManager(modelCodecManager)
+    , mDocumentStrategy(documentStrategy)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    KActionMenu* newMenuAction = actionCollection->add<KActionMenu>( QStringLiteral("file_new"), this, SLOT(onNewActionTriggered()) );
-    newMenuAction->setText( i18nc("@title:menu create new byte arrays from different sources", "New" ) );
-    newMenuAction->setIcon( QIcon::fromTheme( QStringLiteral("document-new") ) );
-    newMenuAction->setStickyMenu( false );
-    newMenuAction->setDelayed( false );
-    actionCollection->setDefaultShortcuts( newMenuAction, KStandardShortcut::openNew() );
+    KActionMenu* newMenuAction = actionCollection->add<KActionMenu>(QStringLiteral("file_new"), this, SLOT(onNewActionTriggered()));
+    newMenuAction->setText(i18nc("@title:menu create new byte arrays from different sources", "New"));
+    newMenuAction->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+    newMenuAction->setStickyMenu(false);
+    newMenuAction->setDelayed(false);
+    actionCollection->setDefaultShortcuts(newMenuAction, KStandardShortcut::openNew());
 
     QAction* newEmptyDocumentAction =
-        new QAction( QIcon::fromTheme( QStringLiteral("document-new") ), i18nc("@title:menu create a new empty document", "Empty" ), this );
+        new QAction(QIcon::fromTheme(QStringLiteral("document-new")), i18nc("@title:menu create a new empty document", "Empty"), this);
 //     newEmptyDocumentAction->setToolTip( factory-toolTip() );
 //         i18nc( "@info:tooltip", "Create an empty document" ) );
 //     newEmptyDocumentAction->setHelpText( factory->helpText() );
 //         i18nc( "@info:status", "Create an new, empty document" ) );
 //     newEmptyDocumentAction->setWhatsThis( factory->whatsThis() );
 //         i18nc( "@info:whatsthis", "." ) );
-    connect( newEmptyDocumentAction, &QAction::triggered,
-             this, &CreatorController::onNewActionTriggered );
+    connect(newEmptyDocumentAction, &QAction::triggered,
+            this, &CreatorController::onNewActionTriggered);
 
     QAction* newFromClipboardDocumentAction =
-        new QAction( QIcon::fromTheme( QStringLiteral("edit-paste") ), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard" ), this );
-    connect( newFromClipboardDocumentAction, &QAction::triggered,
-             this, &CreatorController::onNewFromClipboardActionTriggered );
+        new QAction(QIcon::fromTheme(QStringLiteral("edit-paste")), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard"), this);
+    connect(newFromClipboardDocumentAction, &QAction::triggered,
+            this, &CreatorController::onNewFromClipboardActionTriggered);
 
-    newMenuAction->addAction( newEmptyDocumentAction );
+    newMenuAction->addAction(newEmptyDocumentAction);
     newMenuAction->addSeparator();
-    newMenuAction->addAction( newFromClipboardDocumentAction );
+    newMenuAction->addAction(newFromClipboardDocumentAction);
 
     // generators
     const QList<AbstractModelDataGenerator*> generatorList =
         mModelCodecManager->generatorList();
 
-    const bool hasGenerators = ( generatorList.size() > 0 );
+    const bool hasGenerators = (generatorList.size() > 0);
 
-    if( hasGenerators )
-    {
+    if (hasGenerators) {
         newMenuAction->addSeparator();
 
         // TODO: ask factory which mimetypes it can read
         // AbstractDocumentFactory->canCreateFromData( QMimeData() ) needs already data
-        for( AbstractModelDataGenerator* generator : generatorList )
-        {
+        for (AbstractModelDataGenerator* generator : generatorList) {
             const QString title = generator->typeName();
-            const QString iconName = QStringLiteral( "document-new" );//generator->iconName();
+            const QString iconName = QStringLiteral("document-new");  // generator->iconName();
 
-            QAction* action = new QAction( QIcon::fromTheme(iconName), title, this );
-            action->setData( QVariant::fromValue(generator) );
-            connect( action, &QAction::triggered,
-                     this, &CreatorController::onNewFromGeneratorActionTriggered );
+            QAction* action = new QAction(QIcon::fromTheme(iconName), title, this);
+            action->setData(QVariant::fromValue(generator));
+            connect(action, &QAction::triggered,
+                    this, &CreatorController::onNewFromGeneratorActionTriggered);
 
-            newMenuAction->addAction( action );
+            newMenuAction->addAction(action);
         }
     }
 }
 
-void CreatorController::setTargetModel( AbstractModel* model )
+void CreatorController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED( model )
+    Q_UNUSED(model)
 }
 
 void CreatorController::onNewActionTriggered()
@@ -127,11 +123,11 @@ void CreatorController::onNewFromClipboardActionTriggered()
 
 void CreatorController::onNewFromGeneratorActionTriggered()
 {
-    QAction* action = static_cast<QAction*>( sender() );
+    QAction* action = static_cast<QAction*>(sender());
 
-    AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator* >();
+    AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator*>();
 
-    mDocumentStrategy->createNewWithGenerator( generator );
+    mDocumentStrategy->createNewWithGenerator(generator);
 }
 
 CreatorController::~CreatorController() {}

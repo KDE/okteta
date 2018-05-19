@@ -26,7 +26,8 @@
 #include <QVariant>
 
 DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QString& name)
-    : DataInformation(name, parent), mIndex(0)
+    : DataInformation(name, parent)
+    , mIndex(0)
 {
 }
 
@@ -65,15 +66,15 @@ QScriptValue DummyDataInformation::toScriptValue(QScriptEngine* engine, ScriptHa
 }
 
 bool DummyDataInformation::setData(const QVariant& v, Okteta::AbstractByteArrayModel* out,
-        Okteta::Address addr, BitCount64 remaining, quint8 offset)
+                                   Okteta::Address addr, BitCount64 remaining, quint8 offset)
 {
     return parentHelper()->setChildData(mIndex, v, out, addr, remaining, offset);
 }
 
 qint64 DummyDataInformation::readData(Okteta::AbstractByteArrayModel*, Okteta::Address,
-        BitCount64, quint8*)
+                                      BitCount64, quint8*)
 {
-    Q_ASSERT(false); //should never be called
+    Q_ASSERT(false); // should never be called
     return -1;
 }
 

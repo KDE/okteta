@@ -26,15 +26,13 @@
 // Qt
 #include <QObject>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 class PieceTableChangeHistoryTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testSimpleConstructor();
     void testAppendChange();
     void testRevertBeforeChange();

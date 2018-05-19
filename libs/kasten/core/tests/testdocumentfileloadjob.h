@@ -26,28 +26,26 @@
 // Kasten core
 #include <abstractfilesystemloadjob.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TestDocumentFileSynchronizer;
 class TestDocumentFileLoadThread;
 
 class TestDocumentFileLoadJob : public AbstractFileSystemLoadJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const QUrl& url );
+public:
+    TestDocumentFileLoadJob(TestDocumentFileSynchronizer* synchronizer, const QUrl& url);
     ~TestDocumentFileLoadJob() override;
 
-  protected: // AbstractFileSystemLoadJob API
+protected: // AbstractFileSystemLoadJob API
     void startLoadFromFile() override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
 //     void onDataPulled();
 
-  protected:
+protected:
     TestDocumentFileLoadThread* mLoadThread;
 };
 

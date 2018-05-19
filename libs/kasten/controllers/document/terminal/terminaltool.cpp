@@ -33,32 +33,30 @@
 // Qt
 #include <QUrl>
 
-namespace Kasten
-{
+namespace Kasten {
 
-TerminalTool::TerminalTool( DocumentSyncManager* documentSyncManager )
-  : AbstractTool(),
-    mDocumentSyncManager( documentSyncManager ),
-    mDocument( nullptr )
+TerminalTool::TerminalTool(DocumentSyncManager* documentSyncManager)
+    : AbstractTool()
+    , mDocumentSyncManager(documentSyncManager)
+    , mDocument(nullptr)
 {
-    setObjectName( QStringLiteral( "Terminal" ) );
+    setObjectName(QStringLiteral("Terminal"));
 }
 
-
 QString TerminalTool::title() const { return i18nc("@title:window", "Terminal"); }
-
 
 QUrl TerminalTool::currentUrl() const
 {
     QUrl result;
 
-    if( mDocument )
-        result = KIO::upUrl( mDocumentSyncManager->urlOf( mDocument ) );
+    if (mDocument) {
+        result = KIO::upUrl(mDocumentSyncManager->urlOf(mDocument));
+    }
 
     return result;
 }
 
-void TerminalTool::setTargetModel( AbstractModel* model )
+void TerminalTool::setTargetModel(AbstractModel* model)
 {
     const QUrl oldCurrentUrl = currentUrl();
 
@@ -66,8 +64,9 @@ void TerminalTool::setTargetModel( AbstractModel* model )
 
     const QUrl newCurrentUrl = currentUrl();
 
-    if( oldCurrentUrl != newCurrentUrl )
-        emit currentUrlChanged( newCurrentUrl );
+    if (oldCurrentUrl != newCurrentUrl) {
+        emit currentUrlChanged(newCurrentUrl);
+    }
 }
 
 TerminalTool::~TerminalTool() {}

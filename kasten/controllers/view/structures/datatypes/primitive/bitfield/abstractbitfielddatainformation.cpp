@@ -50,8 +50,10 @@ PrimitiveDataType AbstractBitfieldDataInformation::type() const
 }
 
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,
-        DataInformation* parent)
-        : PrimitiveDataInformation(name, parent), mValue(0), mWidth(qMin(width, 64u))
+                                                                 DataInformation* parent)
+    : PrimitiveDataInformation(name, parent)
+    , mValue(0)
+    , mWidth(qMin(width, 64u))
 {
     Q_ASSERT(width <= 64);
 }
@@ -61,16 +63,17 @@ AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation()
 }
 
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d)
-        : PrimitiveDataInformation(d), mValue(d.mValue), mWidth(d.mWidth)
+    : PrimitiveDataInformation(d)
+    , mValue(d.mValue)
+    , mWidth(d.mWidth)
 {
 }
 
-qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel *input,
-        Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
+qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel* input,
+                                                 Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
-    if (bitsRemaining < BitCount64(width()))
-    {
+    Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
+    if (bitsRemaining < BitCount64(width())) {
         mWasAbleToRead = false;
         mValue = 0;
         return -1;
@@ -80,10 +83,9 @@ qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel 
     AllPrimitiveTypes newVal(mValue);
 
     mWasAbleToRead = newVal.readBits(size(), input, effectiveByteOrder(), address, bitsRemaining,
-            bitOffset);
+                                     bitOffset);
 
-    if (oldVal != newVal || wasValid != mWasAbleToRead)
-    {
+    if (oldVal != newVal || wasValid != mWasAbleToRead) {
         topLevelDataInformation()->setChildDataChanged();
         mValue = newVal;
     }
@@ -91,19 +93,20 @@ qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel 
 }
 
 bool AbstractBitfieldDataInformation::setData(const QVariant& valueVariant,
-        Okteta::AbstractByteArrayModel *out, Okteta::Address address, BitCount64 bitsRemaining,
-        quint8 bitOffset)
+                                              Okteta::AbstractByteArrayModel* out, Okteta::Address address, BitCount64 bitsRemaining,
+                                              quint8 bitOffset)
 {
     AllPrimitiveTypes oldVal(mValue);
     bool ok;
     AllPrimitiveTypes valToWrite = valueVariant.toULongLong(&ok);
     Q_ASSERT(ok);
-    if (!ok)
+    if (!ok) {
         return false;
+    }
     AllPrimitiveTypes newVal(oldVal);
-    //this handles remaining < size() for us
+    // this handles remaining < size() for us
     bool wasAbleToWrite = newVal.writeBits(width(), valToWrite, out, effectiveByteOrder(), address,
-            bitsRemaining, &bitOffset);
+                                           bitsRemaining, &bitOffset);
     return wasAbleToWrite;
 }
 
@@ -129,8 +132,9 @@ bool AbstractBitfieldDataInformation::isBitfield() const
 
 Qt::ItemFlags AbstractBitfieldDataInformation::flags(int column, bool fileLoaded) const
 {
-    if (column == (int) DataInformation::ColumnValue && fileLoaded)
+    if (column == (int) DataInformation::ColumnValue && fileLoaded) {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-    else
+    } else {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+    }
 }

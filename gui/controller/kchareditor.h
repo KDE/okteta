@@ -23,22 +23,19 @@
 #ifndef OKTETA_KCHAREDITOR_H
 #define OKTETA_KCHAREDITOR_H
 
-
 // lib
 #include "keditor.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class KCharEditor : public KEditor
 {
-  public:
-    KCharEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent );
+public:
+    KCharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
     ~KCharEditor() override;
 
-  public: // KController API
-    bool handleKeyPress( QKeyEvent* keyEvent ) override;
+public: // KController API
+    bool handleKeyPress(QKeyEvent* keyEvent) override;
 };
 
 }

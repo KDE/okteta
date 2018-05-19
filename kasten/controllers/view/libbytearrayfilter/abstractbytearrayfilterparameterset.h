@@ -23,20 +23,20 @@
 #ifndef ABSTRACTBYTEARRAYFILTERPARAMETERSET_H
 #define ABSTRACTBYTEARRAYFILTERPARAMETERSET_H
 
-
 class AbstractByteArrayFilterParameterSet
 {
-  protected:
+protected:
     AbstractByteArrayFilterParameterSet();
-  public:
+
+public:
     virtual ~AbstractByteArrayFilterParameterSet();
 
-  public:
+public:
     virtual const char* id() const = 0;
 
-  protected:
+protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 #endif

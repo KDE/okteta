@@ -27,19 +27,18 @@
 #include "../types/hexadecimal8.h"
 #include "abstractvalue8editor.h"
 
-
 class Hexadecimal8Editor : public AbstractValue8Editor
 {
-  Q_OBJECT
-  Q_PROPERTY( Hexadecimal8 data READ data WRITE setData USER true )
+    Q_OBJECT
+    Q_PROPERTY(Hexadecimal8 data READ data WRITE setData USER true)
 
-  public:
-    explicit Hexadecimal8Editor( QWidget* parent );
+public:
+    explicit Hexadecimal8Editor(QWidget* parent);
 
     ~Hexadecimal8Editor() override;
 
-  public:
-    void setData( Hexadecimal8 data );
+public:
+    void setData(Hexadecimal8 data);
     Hexadecimal8 data() const;
 };
 

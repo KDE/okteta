@@ -25,25 +25,23 @@
 
 #include "abstractmodelstreamencoder.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelStreamEncoderPrivate
 {
-  public:
-    explicit AbstractModelStreamEncoderPrivate( AbstractModelStreamEncoder* parent,
-                                                const QString& remoteTypeName, const QString& remoteMimeType,
-                                                const QString& remoteClipboardMimeType );
+public:
+    explicit AbstractModelStreamEncoderPrivate(AbstractModelStreamEncoder* parent,
+                                               const QString& remoteTypeName, const QString& remoteMimeType,
+                                               const QString& remoteClipboardMimeType);
 
     virtual ~AbstractModelStreamEncoderPrivate();
 
-  public:
+public:
     const QString& remoteTypeName() const;
     const QString& remoteMimeType() const;
     const QString& remoteClipboardMimeType() const;
 
-  protected:
+protected:
     AbstractModelStreamEncoder* const q_ptr;
 
     const QString mRemoteTypeName;
@@ -51,13 +49,12 @@ class AbstractModelStreamEncoderPrivate
     const QString mRemoteClipboardMimeType;
 };
 
-
-inline AbstractModelStreamEncoderPrivate::AbstractModelStreamEncoderPrivate( AbstractModelStreamEncoder* parent,
-    const QString& remoteTypeName, const QString& remoteMimeType, const QString& remoteClipboardMimeType )
-  : q_ptr( parent ),
-    mRemoteTypeName( remoteTypeName ),
-    mRemoteMimeType( remoteMimeType ),
-    mRemoteClipboardMimeType( remoteClipboardMimeType.isEmpty() ? remoteMimeType : remoteClipboardMimeType )
+inline AbstractModelStreamEncoderPrivate::AbstractModelStreamEncoderPrivate(AbstractModelStreamEncoder* parent,
+                                                                            const QString& remoteTypeName, const QString& remoteMimeType, const QString& remoteClipboardMimeType)
+    : q_ptr(parent)
+    , mRemoteTypeName(remoteTypeName)
+    , mRemoteMimeType(remoteMimeType)
+    , mRemoteClipboardMimeType(remoteClipboardMimeType.isEmpty() ? remoteMimeType : remoteClipboardMimeType)
 {}
 
 inline AbstractModelStreamEncoderPrivate::~AbstractModelStreamEncoderPrivate()

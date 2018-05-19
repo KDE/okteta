@@ -33,25 +33,22 @@
 // Qt
 #include <QTextStream>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 CharsStreamEncoderSettings::CharsStreamEncoderSettings()
-  : codecName(),
-    undefinedChar( QLatin1Char('?') ),
-    substituteChar( QLatin1Char('.') )
+    : codecName()
+    , undefinedChar(QLatin1Char('?'))
+    , substituteChar(QLatin1Char('.'))
 {}
 
 ByteArrayCharsStreamEncoder::ByteArrayCharsStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Characters"), QStringLiteral("text/plain") )
+    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Characters"), QStringLiteral("text/plain"))
 {}
 
-
-bool ByteArrayCharsStreamEncoder::encodeDataToStream( QIODevice* device,
-                                                      const ByteArrayView* byteArrayView,
-                                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                      const Okteta::AddressRange& range )
+bool ByteArrayCharsStreamEncoder::encodeDataToStream(QIODevice* device,
+                                                     const ByteArrayView* byteArrayView,
+                                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                     const Okteta::AddressRange& range)
 {
     bool success = true;
 
@@ -61,15 +58,14 @@ bool ByteArrayCharsStreamEncoder::encodeDataToStream( QIODevice* device,
     mSettings.substituteChar = byteArrayView->substituteChar();
 
     // encode
-    QTextStream textStream( device );
+    QTextStream textStream(device);
 
-    Okteta::CharCodec *charCodec = Okteta::CharCodec::createCodec( mSettings.codecName );
-    const QChar tabChar = QLatin1Char( '\t' );
-    const QChar returnChar = QLatin1Char( '\n' );
+    Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(mSettings.codecName);
+    const QChar tabChar = QLatin1Char('\t');
+    const QChar returnChar = QLatin1Char('\n');
 
-    for( Okteta::Address i=range.start(); i<=range.end(); ++i )
-    {
-        const Okteta::Character byteChar = charCodec->decode( byteArrayModel->byte(i) );
+    for (Okteta::Address i = range.start(); i <= range.end(); ++i) {
+        const Okteta::Character byteChar = charCodec->decode(byteArrayModel->byte(i));
 
         const QChar streamChar = byteChar.isUndefined() ?      mSettings.undefinedChar :
                                  (!byteChar.isPrint()
@@ -78,6 +74,7 @@ bool ByteArrayCharsStreamEncoder::encodeDataToStream( QIODevice* device,
                                                                (QChar)byteChar;
         textStream << streamChar;
     }
+
     // clean up
     delete charCodec;
 

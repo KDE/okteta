@@ -28,9 +28,7 @@
 // Qt
 #include <QString>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 int TestPieceTableChange::type() const { return mTypeId; }
 
@@ -39,12 +37,11 @@ QString TestPieceTableChange::description() const
     return mDescription;
 }
 
-bool TestPieceTableChange::merge( const AbstractPieceTableChange* other )
+bool TestPieceTableChange::merge(const AbstractPieceTableChange* other)
 {
     bool result = false;
-    if( other->type() == mTypeId )
-    {
-        const TestPieceTableChange* otherTestChange = static_cast<const TestPieceTableChange*>( other );
+    if (other->type() == mTypeId) {
+        const TestPieceTableChange* otherTestChange = static_cast<const TestPieceTableChange*>(other);
         mDescription += otherTestChange->mDescription;
         result = true;
     }
@@ -52,23 +49,23 @@ bool TestPieceTableChange::merge( const AbstractPieceTableChange* other )
     return result;
 }
 
-AddressRange TestPieceTableChange::apply( PieceTable* pieceTable ) const
+AddressRange TestPieceTableChange::apply(PieceTable* pieceTable) const
 {
-    pieceTable->replaceOne( mPosition, mStoragePosition, mStorageId );
+    pieceTable->replaceOne(mPosition, mStoragePosition, mStorageId);
 
-    return AddressRange( mPosition, mPosition );
+    return AddressRange(mPosition, mPosition);
 }
 
-AddressRange TestPieceTableChange::revert( PieceTable* pieceTable ) const
+AddressRange TestPieceTableChange::revert(PieceTable* pieceTable) const
 {
-    const Piece replaced = pieceTable->replaceOne( mPosition, mReplacedStoragePosition, mReplacedStorageId );
+    const Piece replaced = pieceTable->replaceOne(mPosition, mReplacedStoragePosition, mReplacedStorageId);
 
-    return AddressRange( mPosition, mPosition );
+    return AddressRange(mPosition, mPosition);
 }
 
 ArrayChangeMetrics TestPieceTableChange::metrics() const
 {
-    return ArrayChangeMetrics::asReplacement( mPosition, 1, 1 );
+    return ArrayChangeMetrics::asReplacement(mPosition, 1, 1);
 }
 
 int TestPieceTableChange::dataSize() const { return 1; }

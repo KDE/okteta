@@ -28,34 +28,30 @@
 
 template <class T> class QList;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class Person;
 
-
-namespace If
-{
+namespace If {
 
 // TODO: can owner change? Later perhaps, if storage will be movable
 class UserListable
 {
-  public:
+public:
     virtual ~UserListable();
 
-  public: // get
+public: // get
     virtual Person owner() const = 0;
     virtual QList<Person> userList() const = 0;
 
-  public: // set/action
+public: // set/action
 //     virtual void setVersion( DocumentVersionId id ) = 0;
 //     virtual void revertToVersionByIndex( int versionIndex ) = 0;
 
-  public: // signal
+public: // signal
 //     virtual void ownerChange( const Person& newOwner ) = 0;
-    virtual void usersAdded( const QList<Person>& newUserList ) = 0;
-    virtual void usersRemoved( const QList<Person>& newUserList ) = 0;
+    virtual void usersAdded(const QList<Person>& newUserList) = 0;
+    virtual void usersRemoved(const QList<Person>& newUserList) = 0;
 };
 
 inline UserListable::~UserListable() {}
@@ -63,6 +59,6 @@ inline UserListable::~UserListable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::UserListable, "org.kde.kasten.if.userlistable/1.0" )
+Q_DECLARE_INTERFACE(Kasten::If::UserListable, "org.kde.kasten.if.userlistable/1.0")
 
 #endif

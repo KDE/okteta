@@ -32,19 +32,16 @@
 // Qt
 #include <QKeyEvent>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-KEditor::KEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController *parent )
-  : KController( parent ),
-    mCursor( cursor ),
-    mView( view )
+KEditor::KEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
+    : KController(parent)
+    , mCursor(cursor)
+    , mView(view)
 {
 }
 
-
-bool KEditor::handleKeyPress( QKeyEvent* keyEvent )
+bool KEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     const bool shiftPressed =   keyEvent->modifiers() & Qt::SHIFT;
     const bool controlPressed = keyEvent->modifiers() & Qt::CTRL;
@@ -55,34 +52,35 @@ bool KEditor::handleKeyPress( QKeyEvent* keyEvent )
     // we also don't check whether the commands are allowed
     // as the commands are also available as API so the check has to be done
     // in each command anyway
-    switch( keyEvent->key() )
+    switch (keyEvent->key())
     {
     case Qt::Key_Delete:
-        if( shiftPressed )
+        if (shiftPressed) {
             mView->cut();
-        else if( mView->hasSelectedData() )
+        } else if (mView->hasSelectedData()) {
             mView->removeSelectedData();
-        else
-            doEditAction( controlPressed ? WordDelete : CharDelete );
+        } else {
+            doEditAction(controlPressed ? WordDelete : CharDelete);
+        }
         break;
     case Qt::Key_Insert:
-        if( shiftPressed )
+        if (shiftPressed) {
             mView->paste();
-        else if( controlPressed )
+        } else if (controlPressed) {
             mView->copy();
-        else
-            mView->setOverwriteMode( !mView->isOverwriteMode() );
+        } else {
+            mView->setOverwriteMode(!mView->isOverwriteMode());
+        }
         break;
     case Qt::Key_Backspace:
-        if( altPressed )
+        if (altPressed) {
             break;
-        else if( mView->hasSelectedData() )
-        {
+        } else if (mView->hasSelectedData()) {
             mView->removeSelectedData();
             break;
         }
 
-        doEditAction( controlPressed ? WordBackspace : CharBackspace );
+        doEditAction(controlPressed ? WordBackspace : CharBackspace);
         break;
     case Qt::Key_F16: // "Copy" key on Sun keyboards
         mView->copy();
@@ -95,64 +93,58 @@ bool KEditor::handleKeyPress( QKeyEvent* keyEvent )
         break;
     default:
         keyUsed = false;
-  }
+    }
 
     return keyUsed ? true : KController::handleKeyPress(keyEvent);
 }
 
-
-
-void KEditor::doEditAction( KEditAction action )
+void KEditor::doEditAction(KEditAction action)
 {
     Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
-    switch( action )
+    switch (action)
     {
     case CharDelete:
-        if( !mView->isOverwriteMode() )
-        {
+        if (!mView->isOverwriteMode()) {
             const Address index = mCursor->realIndex();
-            if( index < mView->layout()->length() )
-                byteArrayModel->remove( AddressRange::fromWidth(index,1) );
+            if (index < mView->layout()->length()) {
+                byteArrayModel->remove(AddressRange::fromWidth(index, 1));
+            }
         }
         break;
     case WordDelete: // kills data until the start of the next word
-        if( !mView->isOverwriteMode() )
-        {
+        if (!mView->isOverwriteMode()) {
             const Address index = mCursor->realIndex();
-            if( index < mView->layout()->length() )
-            {
-                const WordByteArrayService WBS( byteArrayModel, mView->charCodec() );
-                const Address end = WBS.indexOfBeforeNextWordStart( index );
-                byteArrayModel->remove( AddressRange(index,end) );
+            if (index < mView->layout()->length()) {
+                const WordByteArrayService WBS(byteArrayModel, mView->charCodec());
+                const Address end = WBS.indexOfBeforeNextWordStart(index);
+                byteArrayModel->remove(AddressRange(index, end));
             }
         }
         break;
     case CharBackspace:
-        if( mView->isOverwriteMode() )
-        {
+        if (mView->isOverwriteMode()) {
             mView->pauseCursor();
             mCursor->gotoPreviousByte();
             mView->ensureCursorVisible();
             mView->unpauseCursor();
-        }
-        else
-        {
+        } else {
             const Address deleteIndex = mCursor->realIndex() - 1;
-            if( deleteIndex >= 0 )
-                byteArrayModel->remove( AddressRange::fromWidth(deleteIndex,1) );
+            if (deleteIndex >= 0) {
+                byteArrayModel->remove(AddressRange::fromWidth(deleteIndex, 1));
+            }
         }
         break;
     case WordBackspace:
-        {
-            const int leftIndex = mCursor->realIndex() - 1;
-            if( leftIndex >= 0 )
-            {
-                const WordByteArrayService WBS( byteArrayModel, mView->charCodec() );
-                const Address wordStart = WBS.indexOfPreviousWordStart( leftIndex );
-                if( !mView->isOverwriteMode() )
-                    byteArrayModel->remove( AddressRange(wordStart,leftIndex) );
+    {
+        const int leftIndex = mCursor->realIndex() - 1;
+        if (leftIndex >= 0) {
+            const WordByteArrayService WBS(byteArrayModel, mView->charCodec());
+            const Address wordStart = WBS.indexOfPreviousWordStart(leftIndex);
+            if (!mView->isOverwriteMode()) {
+                byteArrayModel->remove(AddressRange(wordStart, leftIndex));
             }
         }
+    }
     }
 }
 

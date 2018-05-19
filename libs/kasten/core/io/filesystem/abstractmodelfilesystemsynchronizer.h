@@ -26,43 +26,39 @@
 // lib
 #include <kasten/abstractmodelsynchronizer.h>
 
-
 class KDirWatch;
 class QDateTime;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelFileSystemSynchronizerPrivate;
-
 
 class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractModelSynchronizer
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  friend class AbstractFileSystemLoadJobPrivate;
-  friend class AbstractFileSystemConnectJobPrivate;
-  friend class AbstractFileSystemSyncFromRemoteJobPrivate;
-  friend class AbstractFileSystemSyncWithRemoteJobPrivate;
-  friend class AbstractFileSystemSyncToRemoteJobPrivate;
+    friend class AbstractFileSystemLoadJobPrivate;
+    friend class AbstractFileSystemConnectJobPrivate;
+    friend class AbstractFileSystemSyncFromRemoteJobPrivate;
+    friend class AbstractFileSystemSyncWithRemoteJobPrivate;
+    friend class AbstractFileSystemSyncToRemoteJobPrivate;
 
-  protected:
-    explicit AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d );
+protected:
+    explicit AbstractModelFileSystemSynchronizer(AbstractModelFileSystemSynchronizerPrivate* d);
 
-  public:
+public:
     AbstractModelFileSystemSynchronizer();
 
     ~AbstractModelFileSystemSynchronizer() override;
 
-  public: // AbstractModelSynchronizer API
+public: // AbstractModelSynchronizer API
     RemoteSyncState remoteSyncState() const override;
 
-  protected:
+protected:
 //     QDataTime lastModifed() const;
 
-  protected:
-    void setRemoteState( RemoteSyncState remoteState );
-    void setFileDateTimeOnSync( const QDateTime& fileDateTime );
+protected:
+    void setRemoteState(RemoteSyncState remoteState);
+    void setFileDateTimeOnSync(const QDateTime& fileDateTime);
 
     void startFileWatching();
     void stopFileWatching();
@@ -72,8 +68,8 @@ class KASTENCORE_EXPORT AbstractModelFileSystemSynchronizer : public AbstractMod
     void startNetworkWatching();
     void stopNetworkWatching();
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractModelFileSystemSynchronizer )
+protected:
+    Q_DECLARE_PRIVATE(AbstractModelFileSystemSynchronizer)
 };
 
 }

@@ -28,15 +28,14 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class CharsStreamEncoderSettings
 {
-  public:
+public:
     CharsStreamEncoderSettings();
-  public:
+
+public:
     QString codecName;
     QChar undefinedChar;
     QChar substituteChar;
@@ -47,17 +46,17 @@ class ByteArrayCharsStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
+public:
     ByteArrayCharsStreamEncoder();
     ~ByteArrayCharsStreamEncoder() override;
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 
-  protected:
+protected:
     CharsStreamEncoderSettings mSettings;
 };
 

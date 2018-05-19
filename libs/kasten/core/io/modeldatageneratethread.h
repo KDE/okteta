@@ -30,44 +30,42 @@
 
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelDataGenerator;
 
 // TODO: instead of doubling all data just read them from the job?
 class KASTENCORE_EXPORT ModelDataGenerateThread : public QThread
 {
-  Q_OBJECT
-  public:
-    ModelDataGenerateThread( QObject* parent,
-                             AbstractModelDataGenerator* generator );
+    Q_OBJECT
+
+public:
+    ModelDataGenerateThread(QObject* parent,
+                            AbstractModelDataGenerator* generator);
 
     ~ModelDataGenerateThread() override;
 
-  public: // QThread API
+public: // QThread API
     void run() override;
 
-  public:
+public:
     /// the result of the thread, if successful. Needs to be deleted by the thread::run() caller
     QMimeData* data() const;
 
-  Q_SIGNALS:
-    void generated( QMimeData* data );
+Q_SIGNALS:
+    void generated(QMimeData* data);
 
-  protected:
+protected:
     AbstractModelDataGenerator* mGenerator;
 
     QMimeData* mMimeData;
 };
 
-
-inline ModelDataGenerateThread::ModelDataGenerateThread( QObject* parent,
-    AbstractModelDataGenerator* generator )
-  : QThread( parent ),
-    mGenerator( generator ),
-    mMimeData( nullptr )
+inline ModelDataGenerateThread::ModelDataGenerateThread(QObject* parent,
+                                                        AbstractModelDataGenerator* generator)
+    : QThread(parent)
+    , mGenerator(generator)
+    , mMimeData(nullptr)
 {}
 
 inline QMimeData* ModelDataGenerateThread::data() const { return mMimeData; }

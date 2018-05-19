@@ -27,24 +27,23 @@
 // C++
 #include <limits>
 
-
-Float32Editor::Float32Editor( QWidget* parent )
-  : QLineEdit( parent )
+Float32Editor::Float32Editor(QWidget* parent)
+    : QLineEdit(parent)
 {
     const float floatMax = std::numeric_limits<float>::max();
     const float floatMin = std::numeric_limits<float>::min();
 
-    QDoubleValidator* validator = new QDoubleValidator( this );
-    validator->setNotation( QDoubleValidator::ScientificNotation );
-    validator->setRange( floatMin, floatMax );
+    QDoubleValidator* validator = new QDoubleValidator(this);
+    validator->setNotation(QDoubleValidator::ScientificNotation);
+    validator->setRange(floatMin, floatMax);
 
-    setValidator( validator );
-    setClearButtonEnabled( true );
+    setValidator(validator);
+    setClearButtonEnabled(true);
 }
 
-void Float32Editor::setData( Float32 data )
+void Float32Editor::setData(Float32 data)
 {
-    setText( data.toString() );
+    setText(data.toString());
 }
 
 Float32 Float32Editor::data() const

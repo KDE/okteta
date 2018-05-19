@@ -28,26 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class BookmarksView;
 class BookmarksTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT BookmarksToolView : public AbstractToolView
 {
-  public:
-    explicit BookmarksToolView( BookmarksTool* tool );
+public:
+    explicit BookmarksToolView(BookmarksTool* tool);
     ~BookmarksToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     BookmarksView* mWidget;
 };
 

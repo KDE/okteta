@@ -29,9 +29,7 @@
 // Qt
 #include <QTextCodec>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 // static const char QTextCodecWhiteSpace = 63;
 
@@ -73,20 +71,17 @@ const encodingDataList[] =
     { KOI8_REncoding, "KOI8-R" },
     { KOI8_UEncoding, "KOI8-U" }
 };
-//TODO: WS2
+// TODO: WS2
 static const unsigned int encodingDataListSize =
-    sizeof(encodingDataList)/sizeof(struct EncodingData);
+    sizeof(encodingDataList) / sizeof(struct EncodingData);
 
-
-static bool is8Bit( QTextCodec* codec )
+static bool is8Bit(QTextCodec* codec)
 {
     bool result = false;
 
     const QByteArray& codecName = codec->name();
-    for( unsigned int i = 0; i < encodingDataListSize; ++i )
-    {
-        if( qstrcmp(codecName,encodingDataList[i].name) == 0 )
-        {
+    for (unsigned int i = 0; i < encodingDataListSize; ++i) {
+        if (qstrcmp(codecName, encodingDataList[i].name) == 0) {
             result = true;
             break;
         }
@@ -97,167 +92,160 @@ static bool is8Bit( QTextCodec* codec )
 
 static QTextCodec* createLatin1()
 {
-    return KCharsets::charsets()->codecForName( QLatin1String(encodingDataList[0].name) );
+    return KCharsets::charsets()->codecForName(QLatin1String(encodingDataList[0].name));
 }
 
 /* heuristic seems to be doomed :(
 static bool is8Bit( QTextCodec *Codec )
 {
-  bool Result = true;
+    bool Result = true;
 
-  // first test different for 0
-  unsigned char c[4];
-  c[0] = 0;
-  c[1] = c[2] = c[3] = 230;
-  QString S = Codec->toUnicode( (const char*)&c,4 );
-  int Length = 1;
-  QCString CS = Codec->fromUnicode( S, Length );
-  //qCDebug(LOG_OKTETA_CORE) << Codec->name() << " "<<Length ;
-  if( Length > 0 )
-    Result = false;
-  // test if all chars survive the recoding
-  else
-  do
-  {
-    ++c[0];
-    S = Codec->toUnicode( (const char*)&c,4 );
-    Length = 1;
-    CS = Codec->fromUnicode( S, Length );
-    //qCDebug(LOG_OKTETA_CORE) << Codec->name() << " "<<c[0]<<"->"<<CS[0]<<":"<<Length ;
-    if( Length != 1 || (CS[0] != (char)c[0] && CS[0] != QTextCodecWhiteSpace) )
-    {
-      Result = false;
-      break;
-    }
-  }
-  while( c[0] < 255 );
-  return Result;
+    // first test different for 0
+    unsigned char c[4];
+    c[0] = 0;
+    c[1] = c[2] = c[3] = 230;
+    QString S = Codec->toUnicode( (const char*)&c,4 );
+    int Length = 1;
+    QCString CS = Codec->fromUnicode( S, Length );
+    //qCDebug(LOG_OKTETA_CORE) << Codec->name() << " "<<Length ;
+    if( Length > 0 )
+        Result = false;
+    // test if all chars survive the recoding
+    else
+    do {
+        ++c[0];
+        S = Codec->toUnicode( (const char*)&c,4 );
+        Length = 1;
+        CS = Codec->fromUnicode( S, Length );
+        //qCDebug(LOG_OKTETA_CORE) << Codec->name() << " "<<c[0]<<"->"<<CS[0]<<":"<<Length ;
+        if( Length != 1 || (CS[0] != (char)c[0] && CS[0] != QTextCodecWhiteSpace) ) {
+            Result = false;
+            break;
+        }
+    } while( c[0] < 255 );
+    return Result;
 }
 const QStringList &TextCharCodec::codecNames()
-{
-  // first call?
-  if( CodecNames.isEmpty() )
-{
-    const QStringList &CharSets = KCharsets::charsets()->availableEncodingNames();
+    {
+    // first call?
+    if( CodecNames.isEmpty() ) {
+        const QStringList &CharSets = KCharsets::charsets()->availableEncodingNames();
 
-    for( QStringList::ConstIterator it = CharSets.begin(); it != CharSets.end(); ++it )
-{
-      bool Found = true;
-      QTextCodec* Codec = KCharsets::charsets()->codecForName( *it, Found );
-      if( Found && is8Bit(Codec) )
-        CodecNames.append( QString::fromLatin1(Codec->name()) );
-}
-}
+        for( QStringList::ConstIterator it = CharSets.begin(); it != CharSets.end(); ++it ) {
+            bool Found = true;
+            QTextCodec* Codec = KCharsets::charsets()->codecForName( *it, Found );
+            if( Found && is8Bit(Codec) )
+                CodecNames.append( QString::fromLatin1(Codec->name()) );
+        }
+    }
 
-  return CodecNames;
+    return CodecNames;
 }
 
 QString TextCharCodec::nameOfEncoding( CharCoding _char )
 {
-  TextCharCodec *Codec = 0;
+    TextCharCodec *Codec = 0;
 
-  const char* N = 0;
-  for( unsigned int i=0; i<NoOfEncodings; ++i )
-  {
-    if( EncodingNames[i].Encoding == _char )
+    const char* N = 0;
+    for( unsigned int i=0; i<NoOfEncodings; ++i )
     {
-      N = EncodingNames[i].Name;
-      break;
+        if( EncodingNames[i].Encoding == _char )
+        {
+            N = EncodingNames[i].Name;
+            break;
+        }
     }
-  }
 
-  if( N != 0 )
-  {
-    QString CodeName = QString::fromLatin1( N );
-  }
-  return Codec;
+    if( N != 0 )
+    {
+        QString CodeName = QString::fromLatin1( N );
+    }
+    return Codec;
 }
  */
 
 TextCharCodec* TextCharCodec::createLocalCodec()
 {
     QTextCodec* codec = QTextCodec::codecForLocale();
-    if( ! is8Bit(codec) )
+    if (!is8Bit(codec)) {
         codec = createLatin1();
-    return new TextCharCodec( codec );
+    }
+    return new TextCharCodec(codec);
 }
 
-
-TextCharCodec* TextCharCodec::createCodec( const QString& codecName )
+TextCharCodec* TextCharCodec::createCodec(const QString& codecName)
 {
     bool isOk = false;
-    QTextCodec* codec = KCharsets::charsets()->codecForName( codecName, isOk );
-    if( isOk )
-        isOk = is8Bit( codec );
-    return isOk ? new TextCharCodec( codec ) : nullptr;
+    QTextCodec* codec = KCharsets::charsets()->codecForName(codecName, isOk);
+    if (isOk) {
+        isOk = is8Bit(codec);
+    }
+    return isOk ? new TextCharCodec(codec) : nullptr;
 }
-
 
 const QStringList& TextCharCodec::codecNames()
 {
     static QStringList textCodecNames;
 
     // first call?
-    if( textCodecNames.isEmpty() )
-    {
+    if (textCodecNames.isEmpty()) {
         KCharsets* charsets = KCharsets::charsets();
-        for( unsigned int i = 0; i < encodingDataListSize; ++i )
-        {
+        for (unsigned int i = 0; i < encodingDataListSize; ++i) {
             bool isCodecFound = false;
-            const QString codecName = QString::fromLatin1( encodingDataList[i].name );
-            QTextCodec* codec = charsets->codecForName( codecName, isCodecFound );
-            if( isCodecFound )
-                textCodecNames.append( QString::fromLatin1(codec->name()) );
+            const QString codecName = QString::fromLatin1(encodingDataList[i].name);
+            QTextCodec* codec = charsets->codecForName(codecName, isCodecFound);
+            if (isCodecFound) {
+                textCodecNames.append(QString::fromLatin1(codec->name()));
             }
+        }
     }
 
     return textCodecNames;
 }
 
-
-TextCharCodec::TextCharCodec( QTextCodec* textCodec )
-  : mCodec( textCodec ),
-    mDecoder( textCodec->makeDecoder() ),
-    mEncoder( textCodec->makeEncoder() )
+TextCharCodec::TextCharCodec(QTextCodec* textCodec)
+    : mCodec(textCodec)
+    , mDecoder(textCodec->makeDecoder())
+    , mEncoder(textCodec->makeEncoder())
 {
 }
 
-bool TextCharCodec::canEncode( const QChar& _char ) const
+bool TextCharCodec::canEncode(const QChar& _char) const
 {
-    return mCodec->canEncode( _char );
+    return mCodec->canEncode(_char);
 }
 
-bool TextCharCodec::encode( Byte* byte, const QChar& _char ) const
+bool TextCharCodec::encode(Byte* byte, const QChar& _char) const
 {
-    if( !mCodec->canEncode(_char) ) // TODO: do we really need the codec?
+    if (!mCodec->canEncode(_char)) { // TODO: do we really need the codec?
         return false;
+    }
 
-    const QByteArray encoded = mEncoder->fromUnicode( QString(_char) );
-    if( encoded.size() > 0 )
-    {
-        *byte = encoded.at( 0 );
+    const QByteArray encoded = mEncoder->fromUnicode(QString(_char));
+    if (encoded.size() > 0) {
+        *byte = encoded.at(0);
         return true;
-    } else
+    } else {
         return false;
+    }
 }
 
-
-Character TextCharCodec::decode( Byte byte ) const
+Character TextCharCodec::decode(Byte byte) const
 {
     // QTextCodecs "use this codepoint when input data cannot be represented in Unicode." (Qt docs)
-    static const QChar replacementChar = QChar( QChar::ReplacementCharacter );
+    static const QChar replacementChar = QChar(QChar::ReplacementCharacter);
     const QString string =
-        mDecoder->toUnicode( reinterpret_cast<const char*>(&byte), 1 );
-    const QChar qchar = string.at( 0 );
+        mDecoder->toUnicode(reinterpret_cast<const char*>(&byte), 1);
+    const QChar qchar = string.at(0);
     const bool isDecoded = (qchar != replacementChar);
-    return Character( qchar, ! isDecoded );
+    return Character(qchar, !isDecoded);
 }
-
 
 const QString& TextCharCodec::name() const
 {
-    if( mName.isNull() )
-        mName = QString::fromLatin1( mCodec->name() );
+    if (mName.isNull()) {
+        mName = QString::fromLatin1(mCodec->name());
+    }
 
     return mName;
 }

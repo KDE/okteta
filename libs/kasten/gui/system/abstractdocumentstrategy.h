@@ -28,68 +28,66 @@
 // Qt
 #include <QObject>
 
-template<typename C> class QList;
+template <typename C> class QList;
 class QUrl;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractDocument;
 class AbstractModelDataGenerator;
 class AbstractDocumentStrategyPrivate;
 
-
 class KASTENGUI_EXPORT AbstractDocumentStrategy : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
+protected:
     AbstractDocumentStrategy();
-    explicit AbstractDocumentStrategy( AbstractDocumentStrategyPrivate* d );
-  public:
+    explicit AbstractDocumentStrategy(AbstractDocumentStrategyPrivate* d);
+
+public:
     ~AbstractDocumentStrategy() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual void createNew() = 0;
     virtual void createNewFromClipboard() = 0;
-    virtual void createNewWithGenerator( AbstractModelDataGenerator* generator ) = 0;
+    virtual void createNewWithGenerator(AbstractModelDataGenerator* generator) = 0;
 
-    virtual void load( const QUrl& url ) = 0;
+    virtual void load(const QUrl& url) = 0;
 
-    virtual void closeDocument( AbstractDocument* document ) = 0;
+    virtual void closeDocument(AbstractDocument* document) = 0;
 //     virtual void closeDocuments( const QList<AbstractDocument*>& documents ) = 0;
     virtual void closeAll() = 0;
 // TODO: think about if a more general close( documentList, theseOrOthers ) is better, same with canCloseAllOther()
-    virtual void closeAllOther( AbstractDocument* document ) = 0;
+    virtual void closeAllOther(AbstractDocument* document) = 0;
 
 //     virtual void requestFocus( AbstractDocument* document ) = 0;
 
-  public: // const API to be implemented
-    /// Returns \c true if there 
+public: // const API to be implemented
+    /// Returns \c true if there
 //     virtual bool allowsMultipleDocuments() const = 0;
     virtual QList<AbstractDocument*> documents() const = 0;
     virtual QStringList supportedRemoteTypes() const = 0;
 
     // TODO: what to do for documents not added?
-    virtual bool canClose( AbstractDocument* document ) const = 0;
+    virtual bool canClose(AbstractDocument* document) const = 0;
 //     virtual bool canClose( const QList<AbstractDocument*>& documents ) const = 0;
     virtual bool canCloseAll() const = 0;
-    virtual bool canCloseAllOther( AbstractDocument* document ) const = 0;
+    virtual bool canCloseAllOther(AbstractDocument* document) const = 0;
 
-  Q_SIGNALS:
+Q_SIGNALS:
     // documents got added
-    void added( const QList<Kasten::AbstractDocument*>& documents );
+    void added(const QList<Kasten::AbstractDocument*>& documents);
     /// documents are about to be closed, cannot be stopped
-    void closing( const QList<Kasten::AbstractDocument*>& documents );
+    void closing(const QList<Kasten::AbstractDocument*>& documents);
 
     // TODO: or should the document be able to emit this?
-    void focusRequested( Kasten::AbstractDocument* document );
+    void focusRequested(Kasten::AbstractDocument* document);
 
-    void urlUsed( const QUrl& url );
+    void urlUsed(const QUrl& url);
 
-  protected:
+protected:
     AbstractDocumentStrategyPrivate* const d_ptr;
-    Q_DECLARE_PRIVATE( AbstractDocumentStrategy )
+    Q_DECLARE_PRIVATE(AbstractDocumentStrategy)
 };
 
 }

@@ -23,43 +23,38 @@
 #ifndef VERSIONVIEW_H
 #define VERSIONVIEW_H
 
-
 // Qt
 #include <QWidget>
 
 class QTreeView;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class VersionTableModel;
 class VersionViewTool;
 class AbstractModel;
 
-
 class VersionView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit VersionView( VersionViewTool* tool, QWidget* parent = nullptr );
+public:
+    explicit VersionView(VersionViewTool* tool, QWidget* parent = nullptr);
     ~VersionView() override;
 
-  public:
+public:
     VersionViewTool* tool() const;
 
-  public Q_SLOTS:
-    void setModel( Kasten::AbstractModel* model );
+public Q_SLOTS:
+    void setModel(Kasten::AbstractModel* model);
 
-  private:
+private:
     VersionViewTool* mTool;
 
     VersionTableModel* mVersionTableModel;
 
     QTreeView* mVersionTableView;
 };
-
 
 inline VersionViewTool* VersionView::tool() const { return mTool; }
 

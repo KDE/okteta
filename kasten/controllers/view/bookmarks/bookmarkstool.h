@@ -37,57 +37,54 @@ class AbstractByteArrayModel;
 }
 template <class T> class QList;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT BookmarksTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private:
+private:
     static const int MaxBookmarkNameSize = 40;
 
-  public:
+public:
     BookmarksTool();
     ~BookmarksTool() override;
 
-  public:
+public:
     bool hasBookmarks() const;
     bool canCreateBookmark() const;
-    const Okteta::Bookmark& bookmarkAt( unsigned int index ) const;
-    int indexOf( const Okteta::Bookmark& bookmark ) const;
+    const Okteta::Bookmark& bookmarkAt(unsigned int index) const;
+    int indexOf(const Okteta::Bookmark& bookmark) const;
     unsigned int bookmarksCount() const;
     int offsetCoding() const;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public:
+public:
     Okteta::Bookmark createBookmark();
-    void gotoBookmark( const Okteta::Bookmark& bookmark );
-    void setBookmarkName( unsigned int bookmarkIndex, const QString& name );
-    void deleteBookmarks( const QList<Okteta::Bookmark>& bookmarks );
+    void gotoBookmark(const Okteta::Bookmark& bookmark);
+    void setBookmarkName(unsigned int bookmarkIndex, const QString& name);
+    void deleteBookmarks(const QList<Okteta::Bookmark>& bookmarks);
 
-  Q_SIGNALS:
-    void hasBookmarksChanged( bool hasBookmarks );
-    void bookmarksAdded( const QList<Okteta::Bookmark>& bookmarks );
-    void bookmarksRemoved( const QList<Okteta::Bookmark>& bookmarks );
-    void bookmarksModified( const QList<int>& indizes );
-    void canCreateBookmarkChanged( bool canCreateBookmark );
-    void offsetCodingChanged( int offsetCoding );
+Q_SIGNALS:
+    void hasBookmarksChanged(bool hasBookmarks);
+    void bookmarksAdded(const QList<Okteta::Bookmark>& bookmarks);
+    void bookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks);
+    void bookmarksModified(const QList<int>& indizes);
+    void canCreateBookmarkChanged(bool canCreateBookmark);
+    void offsetCodingChanged(int offsetCoding);
 
-  private Q_SLOTS:
-    void onCursorPositionChanged( Okteta::Address newPosition );
+private Q_SLOTS:
+    void onCursorPositionChanged(Okteta::Address newPosition);
     void onBookmarksModified();
 
-  private: // sources
+private: // sources
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArray;
     Okteta::Bookmarkable* mBookmarks;

@@ -8,7 +8,7 @@
     published by the Free Software Foundation; either version 2 of
     the License or (at your option) version 3 or any later version
     accepted by the membership of KDE e.V. (or its successor approved
-    by the membership of KDE e.V.), which shall act as a proxy 
+    by the membership of KDE e.V.), which shall act as a proxy
     defined in Section 14 of version 3 of the license.
 
     This program is distributed in the hope that it will be useful,
@@ -26,9 +26,7 @@
 // Qt
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class DialogHandler;
 class DocumentManager;
@@ -37,24 +35,23 @@ class MultiDocumentStrategy;
 // tmp
 class ByteArrayViewProfileManager;
 
-
 class OktetaProgram
 {
-  public:
-    OktetaProgram( int &argc, char* argv[] );
+public:
+    OktetaProgram(int& argc, char* argv[]);
     ~OktetaProgram();
 
-  public:
+public:
     int execute();
     void quit();
 
-  public:
+public:
     DocumentManager* documentManager();
     ViewManager* viewManager();
     MultiDocumentStrategy* documentStrategy();
     ByteArrayViewProfileManager* byteArrayViewProfileManager();
 
-  protected:
+protected:
     QApplication mApp;
 
     DocumentManager* mDocumentManager;
@@ -65,7 +62,6 @@ class OktetaProgram
 
     ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };
-
 
 inline DocumentManager* OktetaProgram::documentManager() { return mDocumentManager; }
 inline ViewManager* OktetaProgram::viewManager()         { return mViewManager; }

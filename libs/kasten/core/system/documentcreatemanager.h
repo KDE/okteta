@@ -30,33 +30,30 @@
 
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocumentFactory;
 class DocumentManager;
 
-
 class KASTENCORE_EXPORT DocumentCreateManager : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit DocumentCreateManager( DocumentManager* manager );
+public:
+    explicit DocumentCreateManager(DocumentManager* manager);
     ~DocumentCreateManager() override;
 
-  public:
-    bool canCreateNewFromData( const QMimeData* mimeData ) const;
+public:
+    bool canCreateNewFromData(const QMimeData* mimeData) const;
 
-  public:
+public:
     void createNew();
-    void createNewFromData( const QMimeData* mimeData, bool setModified );
+    void createNewFromData(const QMimeData* mimeData, bool setModified);
 
-  public:
-    void setDocumentFactory( AbstractDocumentFactory* factory );
+public:
+    void setDocumentFactory(AbstractDocumentFactory* factory);
 
-  private:
+private:
     // unless there is a singleton
     DocumentManager* mManager;
 

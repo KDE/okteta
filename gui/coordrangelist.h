@@ -28,22 +28,20 @@
 // Qt
 #include <QLinkedList>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 /**
-@author Friedrich W. H.  Kossebau
-*/
+   @author Friedrich W. H.  Kossebau
+ */
 class CoordRangeList : public QLinkedList<CoordRange>
 {
-  public:
+public:
     CoordRangeList();
 
     ~CoordRangeList();
 
-  public:
-    void addCoordRange( const CoordRange& coordRange );
+public:
+    void addCoordRange(const CoordRange& coordRange);
 };
 
 }

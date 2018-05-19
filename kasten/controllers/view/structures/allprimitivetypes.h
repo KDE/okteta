@@ -31,8 +31,7 @@
 
 #include "datatypes/datainformationbase.h"
 
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -46,8 +45,9 @@ class AbstractByteArrayModel;
  * This means we need to add padding equal to 8-sizeof(T) before the value in the big endian case.
  * On little endian padding gets added at the end (not strictly necessary)
  */
-template<typename T, int padCount>
-struct EndianIndependentBase {
+template <typename T, int padCount>
+struct EndianIndependentBase
+{
 #if Q_BYTE_ORDER == Q_BIG_ENDIAN
     char padding[padCount];
 #endif
@@ -56,13 +56,16 @@ struct EndianIndependentBase {
     char padding[padCount];
 #endif
 } PACKED_STRUCT;
-template<typename T>
-struct EndianIndependentBase<T, 0> {
+template <typename T>
+struct EndianIndependentBase<T, 0>
+{
     T value;
 };
 
-template<typename T>
-struct EndianIndependent : public EndianIndependentBase<T, 8 - sizeof(T)> {
+template <typename T>
+struct EndianIndependent : public EndianIndependentBase<T
+        , 8 - sizeof(T)>
+{
 };
 
 /** This union holds the value of one primitive datatype. Maximum size of a datatype is currently 64 bits.
@@ -80,13 +83,14 @@ private:
     EndianIndependent<quint64> _ulong;
     EndianIndependent<float> _float;
     EndianIndependent<double> _double;
+
 public:
     qint8 allBytes[8];
     inline AllPrimitiveTypes() { _ulong.value = 0; }
-    inline AllPrimitiveTypes(const AllPrimitiveTypes& a) { _ulong.value = a._ulong.value; }
-    inline AllPrimitiveTypes(quint64 val) { _ulong.value = val;}
-    inline AllPrimitiveTypes(qint64 val) { _long.value = val;}
-    //set all to zero first with smaller data types
+    inline AllPrimitiveTypes(const AllPrimitiveTypes &a) { _ulong.value = a._ulong.value; }
+    inline AllPrimitiveTypes(quint64 val) { _ulong.value = val; }
+    inline AllPrimitiveTypes(qint64 val) { _long.value = val; }
+    // set all to zero first with smaller data types
     inline AllPrimitiveTypes(qint32 val) { _long.value = (val < 0 ? -1 : 0); _int.value = val; }
     inline AllPrimitiveTypes(quint32 val) { _ulong.value = 0; _uint.value = val; }
     inline AllPrimitiveTypes(qint16 val) { _long.value = (val < 0 ? -1 : 0);  _short.value = val; }
@@ -127,8 +131,8 @@ public:
      *  @return @c true on success, @c false otherwise
      */
     bool writeBits(quint8 bitCount, AllPrimitiveTypes newValue,
-            Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8* const bitOffset);
+                   Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder,
+                   Okteta::Address address, BitCount64 bitsRemaining, quint8 * const bitOffset);
     /** Reads given number of bits from @p input and sets value of this union to
      *  the new value.
      *  @p bitOffset is changed in this method so it does not have to be handled later.
@@ -146,10 +150,10 @@ public:
      *  @return @c true on success, @c false otherwise
      */
     bool readBits(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
-            QSysInfo::Endian byteOrder, Okteta::Address address, BitCount64 bitsRemaining,
-            quint8* const bitOffset);
+                  QSysInfo::Endian byteOrder, Okteta::Address address, BitCount64 bitsRemaining,
+                  quint8 * const bitOffset);
 
-    template<typename T> T value() const;
+    template <typename T> T value() const;
     /**
      * Read data of type @p T from the model. Range checking must have been performed before
      * @param input the input to read from
@@ -158,56 +162,55 @@ public:
      * @param bitOffset the number of bits into the first byte (different depending on endianess)
      * @return the read value
      */
-    //TODO bool* ok parameter for when reading from model can cause errors (or exceptions sometime?)
-    template<typename T> static T readValue(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            QSysInfo::Endian endianess, quint8 bitOffset);
-    //TODO add writeValue
+    // TODO bool* ok parameter for when reading from model can cause errors (or exceptions sometime?)
+    template <typename T> static T readValue(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+        QSysInfo::Endian endianess, quint8 bitOffset);
+    // TODO add writeValue
 
 private:
-    template<int size> static typename QIntegerForSize<size>::Unsigned readValuePrivate(
-            const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            QSysInfo::Endian endianess, quint8 bitOffset);
-    template<int size> static typename QIntegerForSize<size>::Unsigned readRawBytes(
-            const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
+    template <int size> static typename QIntegerForSize<size>::Unsigned readValuePrivate(
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+        QSysInfo::Endian endianess, quint8 bitOffset);
+    template <int size> static typename QIntegerForSize<size>::Unsigned readRawBytes(
+        const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
 
     void readDataLittleEndian(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, quint8 bo);
+                              Okteta::Address address, quint8 bo);
     void writeDataLittleEndian(quint8 bitCount, AllPrimitiveTypes newValue,
-            Okteta::AbstractByteArrayModel *out, Okteta::Address address, quint8 bo) const;
+                               Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint8 bo) const;
 
     void readDataBigEndian(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
-            Okteta::Address address, quint8 bo);
+                           Okteta::Address address, quint8 bo);
     void writeDataBigEndian(quint8 bitCount, AllPrimitiveTypes newValue,
-            Okteta::AbstractByteArrayModel *out, Okteta::Address address, quint8 bo) const;
+                            Okteta::AbstractByteArrayModel* out, Okteta::Address address, quint8 bo) const;
 
-    //optimised methods for reading/writing full bytes
+    // optimised methods for reading/writing full bytes
     void readFullBytes(quint8 byteCount, const Okteta::AbstractByteArrayModel* input,
-            QSysInfo::Endian byteOrder, Okteta::Address address);
+                       QSysInfo::Endian byteOrder, Okteta::Address address);
     void writeFullBytes(quint8 byteCount, AllPrimitiveTypes newValue,
-            Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder,
-            Okteta::Address address);
+                        Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder,
+                        Okteta::Address address);
 };
 
-template<> inline quint8 AllPrimitiveTypes::value<quint8>() const { return _ubyte.value; }
-template<> inline quint16 AllPrimitiveTypes::value<quint16>() const { return _ushort.value; }
-template<> inline quint32 AllPrimitiveTypes::value<quint32>() const { return _uint.value; }
-template<> inline quint64 AllPrimitiveTypes::value<quint64>() const { return _ulong.value; }
-template<> inline qint8 AllPrimitiveTypes::value<qint8>() const { return _byte.value; }
-template<> inline qint16 AllPrimitiveTypes::value<qint16>() const { return _short.value; }
-template<> inline qint32 AllPrimitiveTypes::value<qint32>() const { return _int.value; }
-template<> inline qint64 AllPrimitiveTypes::value<qint64>() const { return _long.value; }
-template<> inline float AllPrimitiveTypes::value<float>() const { return _float.value; }
-template<> inline double AllPrimitiveTypes::value<double>() const { return _double.value; }
+template <> inline quint8 AllPrimitiveTypes::value<quint8>() const { return _ubyte.value; }
+template <> inline quint16 AllPrimitiveTypes::value<quint16>() const { return _ushort.value; }
+template <> inline quint32 AllPrimitiveTypes::value<quint32>() const { return _uint.value; }
+template <> inline quint64 AllPrimitiveTypes::value<quint64>() const { return _ulong.value; }
+template <> inline qint8 AllPrimitiveTypes::value<qint8>() const { return _byte.value; }
+template <> inline qint16 AllPrimitiveTypes::value<qint16>() const { return _short.value; }
+template <> inline qint32 AllPrimitiveTypes::value<qint32>() const { return _int.value; }
+template <> inline qint64 AllPrimitiveTypes::value<qint64>() const { return _long.value; }
+template <> inline float AllPrimitiveTypes::value<float>() const { return _float.value; }
+template <> inline double AllPrimitiveTypes::value<double>() const { return _double.value; }
 
-
-template<typename T>
+template <typename T>
 inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* input,
-        Okteta::Address address, QSysInfo::Endian endianess, quint8 bitOffset)
+                                      Okteta::Address address, QSysInfo::Endian endianess, quint8 bitOffset)
 {
-    //check for out of bounds
+    // check for out of bounds
     Q_ASSERT(BitCount64(input->size() - address) * 8 - bitOffset >= sizeof(T) * 8);
     Q_ASSERT(bitOffset < 8);
-    //this union exists to force unsigned shifts
+    // this union exists to force unsigned shifts
     union {
         T value;
         typename QIntegerForSizeof<T>::Unsigned unsignedValue;
@@ -216,34 +219,29 @@ inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* inpu
     return u.value;
 }
 
-template<int size>
+template <int size>
 inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValuePrivate(
-        const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-        QSysInfo::Endian endianess, quint8 bitOffset)
+    const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    QSysInfo::Endian endianess, quint8 bitOffset)
 {
     typename QIntegerForSize<size>::Unsigned unsignedValue = readRawBytes<size>(input, address);
-    if (endianess != QSysInfo::ByteOrder)
-    {
-        //swap the byte order if machine endianess does not match requested endianess
+    if (endianess != QSysInfo::ByteOrder) {
+        // swap the byte order if machine endianess does not match requested endianess
         unsignedValue = qbswap(unsignedValue);
     }
-    if (Q_UNLIKELY(bitOffset != 0))
-    {
+    if (Q_UNLIKELY(bitOffset != 0)) {
         quint8 lastByte = input->byte(address + size);
-        //handle the remaining bits
-        if (endianess == QSysInfo::BigEndian)
-        {
-            //the coming bits are the least significant, and range from bit (8-bitOffset)..7
+        // handle the remaining bits
+        if (endianess == QSysInfo::BigEndian) {
+            // the coming bits are the least significant, and range from bit (8-bitOffset)..7
             unsignedValue <<= bitOffset;
-            lastByte >>= 8 - bitOffset; //unsigned shift
-            Q_ASSERT((unsignedValue & lastByte) == 0); //must not overlap
+            lastByte >>= 8 - bitOffset; // unsigned shift
+            Q_ASSERT((unsignedValue & lastByte) == 0); // must not overlap
             unsignedValue |= lastByte;
-        }
-        else
-        {
-            //the coming bits are the most significant bits and range from 0..bitOffset
+        } else {
+            // the coming bits are the most significant bits and range from 0..bitOffset
             unsignedValue >>= bitOffset;
-            //promote lastByte to unsigned T and mask off the interesting bits
+            // promote lastByte to unsigned T and mask off the interesting bits
             typename QIntegerForSize<size>::Unsigned tmp = lastByte & ((1u << bitOffset) - 1);
             tmp <<= (size * 8) - bitOffset;
             unsignedValue |= tmp;
@@ -252,9 +250,9 @@ inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readValuePriv
     return unsignedValue;
 }
 
-template<int size>
+template <int size>
 inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readRawBytes(
-        const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
+    const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
     union {
         typename QIntegerForSize<size>::Unsigned value;
@@ -266,10 +264,10 @@ inline typename QIntegerForSize<size>::Unsigned AllPrimitiveTypes::readRawBytes(
     return buf.value;
 }
 
-//specialize it for the case where we only need to read one byte
-template<>
+// specialize it for the case where we only need to read one byte
+template <>
 inline quint8 AllPrimitiveTypes::readRawBytes<1>(
-        const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
+    const Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
     return input->byte(address);
 }

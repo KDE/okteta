@@ -28,46 +28,44 @@
 #include <QSpinBox>
 #include <QFormLayout>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEditor( ByteArrayRandomDataGenerator* generator, QWidget* parent )
-  : AbstractModelDataGeneratorConfigEditor( parent ),
-    mGenerator( generator )
+ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEditor(ByteArrayRandomDataGenerator* generator, QWidget* parent)
+    : AbstractModelDataGeneratorConfigEditor(parent)
+    , mGenerator(generator)
 {
     mSettings = mGenerator->settings();
 
-    QFormLayout* pageLayout = new QFormLayout( this );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout(this);
+    pageLayout->setMargin(0);
 
     // number
     const QString numberInputLabel =
-        i18nc( "@label:spinbox size of the bytearray to generate",
-               "&Size (bytes):" );
-    mSizeInput = new QSpinBox( this );
-    mSizeInput->setRange( 1, INT_MAX );
-    mSizeInput->setValue( mSettings.size );
-    connect( mSizeInput, QOverload<int>::of(&QSpinBox::valueChanged),
-             this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged );
+        i18nc("@label:spinbox size of the bytearray to generate",
+              "&Size (bytes):");
+    mSizeInput = new QSpinBox(this);
+    mSizeInput->setRange(1, INT_MAX);
+    mSizeInput->setValue(mSettings.size);
+    connect(mSizeInput, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged);
     const QString numberWhatsThis =
-        i18nc( "@info:whatsthis",
-               "Enter the size of the bytearray to generate." );
-    mSizeInput->setWhatsThis( numberWhatsThis );
+        i18nc("@info:whatsthis",
+              "Enter the size of the bytearray to generate.");
+    mSizeInput->setWhatsThis(numberWhatsThis);
 
-    pageLayout->addRow( numberInputLabel, mSizeInput );
+    pageLayout->addRow(numberInputLabel, mSizeInput);
 }
 
 QString ByteArrayRandomDataGeneratorConfigEditor::name() const
 {
-    return i18nc("@item name of the generated data","Random Data");
+    return i18nc("@item name of the generated data", "Random Data");
 }
 
 // TODO: get char codec
 #if 0
-void InsertRandomDataDialog::setCharCodec( const QString& codecName )
+void InsertRandomDataDialog::setCharCodec(const QString& codecName)
 {
-    mRandomDataEdit->setCharCodec( codecName );
+    mRandomDataEdit->setCharCodec(codecName);
 }
 #endif
 
@@ -75,7 +73,7 @@ void ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged()
 {
     mSettings.size = mSizeInput->value();
 
-    mGenerator->setSettings( mSettings );
+    mGenerator->setSettings(mSettings);
 }
 
 ByteArrayRandomDataGeneratorConfigEditor::~ByteArrayRandomDataGeneratorConfigEditor()

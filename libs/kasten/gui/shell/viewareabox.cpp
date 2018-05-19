@@ -26,95 +26,95 @@
 #include <QVBoxLayout>
 #include <QShortcut>
 
+namespace Kasten {
 
-namespace Kasten
+ViewAreaBox::ViewAreaBox(QWidget* centralWidget, QWidget* parent)
+    : QWidget(parent)
+    , mCentralWidget(centralWidget)
+    , mBottomWidget(nullptr)
 {
+    setFocusProxy(mCentralWidget);
 
-ViewAreaBox::ViewAreaBox( QWidget* centralWidget, QWidget* parent )
-  : QWidget( parent ),
-    mCentralWidget( centralWidget ),
-    mBottomWidget( nullptr )
-{
-    setFocusProxy( mCentralWidget );
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->setMargin(0);
+    layout->setSpacing(0);
+    if (mCentralWidget) {
+        layout->addWidget(mCentralWidget);
+    }
 
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin( 0 );
-    layout->setSpacing( 0 );
-    if( mCentralWidget )
-        layout->addWidget( mCentralWidget );
-
-    mEscapeShortcut = new QShortcut( Qt::Key_Escape, this );
-    mEscapeShortcut->setEnabled( false );
-    connect( mEscapeShortcut, &QShortcut::activated, this, &ViewAreaBox::onDone ); // TODO: better use onCancelled
+    mEscapeShortcut = new QShortcut(Qt::Key_Escape, this);
+    mEscapeShortcut->setEnabled(false);
+    connect(mEscapeShortcut, &QShortcut::activated, this, &ViewAreaBox::onDone);   // TODO: better use onCancelled
 }
-
 
 QWidget* ViewAreaBox::centralWidget() const { return mCentralWidget; }
 QWidget* ViewAreaBox::bottomWidget()  const { return mBottomWidget; }
 
-void ViewAreaBox::setCentralWidget( QWidget* centralWidget )
+void ViewAreaBox::setCentralWidget(QWidget* centralWidget)
 {
-    if( mCentralWidget == centralWidget )
+    if (mCentralWidget == centralWidget) {
         return;
+    }
 
-    QVBoxLayout* layout = static_cast<QVBoxLayout*>( this->layout() );
+    QVBoxLayout* layout = static_cast<QVBoxLayout*>(this->layout());
     const bool centralWidgetIsFocusProxy =
-        mCentralWidget ? ( focusProxy() == mCentralWidget ) : false;
+        mCentralWidget ? (focusProxy() == mCentralWidget) : false;
     // TODO: works if focus is on childwidget?
     const bool centralWidgetHasFocus =
         mCentralWidget ? mCentralWidget->hasFocus() : false;
-    if( mCentralWidget )
-        layout->removeWidget( mCentralWidget );
+    if (mCentralWidget) {
+        layout->removeWidget(mCentralWidget);
+    }
 
     mCentralWidget = centralWidget;
 
-    if( mCentralWidget )
-    {
-        layout->insertWidget( 0, mCentralWidget );
+    if (mCentralWidget) {
+        layout->insertWidget(0, mCentralWidget);
         mCentralWidget->show(); // TODO: needed?
-        if( centralWidgetHasFocus )
+        if (centralWidgetHasFocus) {
             mCentralWidget->setFocus();
-        if( centralWidgetIsFocusProxy )
-            setFocusProxy( mCentralWidget );
+        }
+        if (centralWidgetIsFocusProxy) {
+            setFocusProxy(mCentralWidget);
+        }
     }
 }
 
-void ViewAreaBox::setBottomWidget( QWidget* bottomWidget )
+void ViewAreaBox::setBottomWidget(QWidget* bottomWidget)
 {
-    QVBoxLayout* layout = static_cast<QVBoxLayout*>( this->layout() );
+    QVBoxLayout* layout = static_cast<QVBoxLayout*>(this->layout());
 
-    if( mBottomWidget )
-    {
-        mBottomWidget->disconnect( this );
-        layout->removeWidget( mBottomWidget );
+    if (mBottomWidget) {
+        mBottomWidget->disconnect(this);
+        layout->removeWidget(mBottomWidget);
         delete mBottomWidget;
     }
 
     mBottomWidget = bottomWidget;
-    if( bottomWidget )
-    {
-        setFocusProxy( bottomWidget );
-        connect( bottomWidget, SIGNAL(done()), SLOT(onDone()) );
-        layout->addWidget( bottomWidget );
+    if (bottomWidget) {
+        setFocusProxy(bottomWidget);
+        connect(bottomWidget, SIGNAL(done()), SLOT(onDone()));
+        layout->addWidget(bottomWidget);
         bottomWidget->show();
         bottomWidget->setFocus();
+    } else {
+        setFocusProxy(mCentralWidget);
     }
-    else
-        setFocusProxy( mCentralWidget );
 
-    mEscapeShortcut->setEnabled( (bottomWidget != nullptr) );
+    mEscapeShortcut->setEnabled((bottomWidget != nullptr));
 }
 
 void ViewAreaBox::onDone()
 {
-    setBottomWidget( nullptr );
+    setBottomWidget(nullptr);
 }
 
 ViewAreaBox::~ViewAreaBox()
 {
     delete mBottomWidget;
-    if( mCentralWidget )
-        mCentralWidget->setParent( nullptr );
+    if (mCentralWidget) {
+        mCentralWidget->setParent(nullptr);
+    }
 }
 
 }

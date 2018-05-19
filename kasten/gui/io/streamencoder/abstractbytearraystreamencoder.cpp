@@ -31,76 +31,74 @@
 // Qt
 #include <QBuffer>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const int MaxPreviewSize = 100;
 
-
-AbstractByteArrayStreamEncoder::AbstractByteArrayStreamEncoder( const QString &remoteTypeName,
-                                                                const QString &remoteMimeType )
- : AbstractModelStreamEncoder( remoteTypeName, remoteMimeType, QStringLiteral("text/plain") )
+AbstractByteArrayStreamEncoder::AbstractByteArrayStreamEncoder(const QString& remoteTypeName,
+                                                               const QString& remoteMimeType)
+    : AbstractModelStreamEncoder(remoteTypeName, remoteMimeType, QStringLiteral("text/plain"))
 {}
 
-QString AbstractByteArrayStreamEncoder::modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const
+QString AbstractByteArrayStreamEncoder::modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const
 {
-Q_UNUSED( selection )
+    Q_UNUSED(selection)
 
-    const ByteArrayDocument* byteArrayDocument = model->findBaseModel<const ByteArrayDocument*>();
+    const ByteArrayDocument * byteArrayDocument = model->findBaseModel<const ByteArrayDocument*>();
 
     return byteArrayDocument ? byteArrayDocument->typeName() : QString();
 }
 
-
-bool AbstractByteArrayStreamEncoder::encodeToStream( QIODevice* device,
-                                                     AbstractModel* model, const AbstractModelSelection* selection )
+bool AbstractByteArrayStreamEncoder::encodeToStream(QIODevice* device,
+                                                    AbstractModel* model, const AbstractModelSelection* selection)
 {
-    const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>( model );
+    const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
     const ByteArrayDocument* byteArrayDocument =
-        byteArrayView ? qobject_cast<const ByteArrayDocument*>( byteArrayView->baseModel() ) : nullptr;
-    if( ! byteArrayDocument )
+        byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;
+    if (!byteArrayDocument) {
         return false;
+    }
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
     const ByteArraySelection* byteArraySelection =
-        selection ? static_cast<const ByteArraySelection*>( selection ) : nullptr;
+        selection ? static_cast<const ByteArraySelection*>(selection) : nullptr;
 
     const Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
-        byteArraySelection->range() :
-        Okteta::AddressRange::fromWidth( 0, byteArray->size() );
+                                       byteArraySelection->range() :
+                                       Okteta::AddressRange::fromWidth(0, byteArray->size());
 
-    const bool success = encodeDataToStream( device, byteArrayView, byteArray, range );
+    const bool success = encodeDataToStream(device, byteArrayView, byteArray, range);
 
     return success;
 }
 
-QString AbstractByteArrayStreamEncoder::previewData( AbstractModel* model, const AbstractModelSelection* selection )
+QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const AbstractModelSelection* selection)
 {
-    const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>( model );
+    const ByteArrayView* byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
     const ByteArrayDocument* byteArrayDocument =
-        byteArrayView ? qobject_cast<const ByteArrayDocument*>( byteArrayView->baseModel() ) : nullptr;
-    if( ! byteArrayDocument )
+        byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;
+    if (!byteArrayDocument) {
         return QString();
+    }
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
     const ByteArraySelection* byteArraySelection =
-        selection ? static_cast<const ByteArraySelection*>( selection ) : nullptr;
+        selection ? static_cast<const ByteArraySelection*>(selection) : nullptr;
 
     Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
-        byteArraySelection->range() :
-        Okteta::AddressRange::fromWidth( 0, byteArray->size() );
-    range.restrictEndByWidth( MaxPreviewSize );
+                                 byteArraySelection->range() :
+                                 Okteta::AddressRange::fromWidth(0, byteArray->size());
+    range.restrictEndByWidth(MaxPreviewSize);
 
     QByteArray data;
-    QBuffer dataBuffer( &data );
-    dataBuffer.open( QIODevice::WriteOnly );
+    QBuffer dataBuffer(&data);
+    dataBuffer.open(QIODevice::WriteOnly);
 
-    const bool success = encodeDataToStream( &dataBuffer, byteArrayView, byteArray, range );
+    const bool success = encodeDataToStream(&dataBuffer, byteArrayView, byteArray, range);
     dataBuffer.close();
 
     return success ? QString::fromLatin1(data) : QString();

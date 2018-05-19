@@ -30,31 +30,28 @@
 #include <KActionCollection>
 #include <KToggleAction>
 
+namespace Kasten {
 
-namespace Kasten
+OverwriteOnlyController::OverwriteOnlyController(KXMLGUIClient* guiClient)
+    : mByteArrayModel(0)
 {
+    KActionCollection* actionCollection = guiClient->actionCollection();
 
-OverwriteOnlyController::OverwriteOnlyController( KXMLGUIClient* guiClient )
- : mByteArrayModel( 0 )
-{
-    KActionCollection *actionCollection = guiClient->actionCollection();
+    mSetOverwriteOnlyAction = actionCollection->add<KToggleAction>("isoverwriteonly");
+    mSetOverwriteOnlyAction->setText(i18nc("@option:check", "Overwrite only"));
+    connect(mSetOverwriteOnlyAction, &QAction::triggered, this, &OverwriteOnlyController::setOverwriteOnly);
 
-    mSetOverwriteOnlyAction = actionCollection->add<KToggleAction>( "isoverwriteonly" );
-    mSetOverwriteOnlyAction->setText( i18nc("@option:check","Overwrite only") );
-    connect( mSetOverwriteOnlyAction, &QAction::triggered, this, &OverwriteOnlyController::setOverwriteOnly );
-
-    setTargetModel( 0 );
+    setTargetModel(0);
 }
 
-void OverwriteOnlyController::setTargetModel( AbstractModel* model )
+void OverwriteOnlyController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED( model )
+    Q_UNUSED(model)
 //     if( mByteArrayModel ) mByteArrayModel->disconnect( mSetOverwriteOnlyAction );
 
-    mByteArrayModel = 0; //view ? view->baseModel() : 0;
+    mByteArrayModel = 0; // view ? view->baseModel() : 0;
 
-    if( mByteArrayModel )
-    {
+    if (mByteArrayModel) {
 //         mSetOverwriteOnlyAction->setChecked( mByteArrayModel->isOverwriteOnly() );
 
 //         connect( mByteArrayModel, SIGNAL(overwriteOnlyChanged(bool)),
@@ -63,13 +60,12 @@ Q_UNUSED( model )
 //                  mSetOverwriteOnlyAction, SLOT(setEnabled(bool)) );
     }
 
-    mSetOverwriteOnlyAction->setEnabled( false );//mByteArrayModel ? mByteArrayModel->isModifiable() : false );
+    mSetOverwriteOnlyAction->setEnabled(false);  // mByteArrayModel ? mByteArrayModel->isModifiable() : false );
 }
 
-
-void OverwriteOnlyController::setOverwriteOnly( bool isOverwriteOnly )
+void OverwriteOnlyController::setOverwriteOnly(bool isOverwriteOnly)
 {
-Q_UNUSED( isOverwriteOnly )
+    Q_UNUSED(isOverwriteOnly)
 //     mByteArrayModel->setOverwriteOnly( isOverwriteOnly );
 }
 

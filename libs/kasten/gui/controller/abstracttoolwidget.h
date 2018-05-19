@@ -30,9 +30,7 @@
 
 class QPushButton;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractToolWidgetPrivate;
 
@@ -42,19 +40,23 @@ class KASTENGUI_EXPORT AbstractToolWidget : public QWidget
 {
     Q_OBJECT
 
-  public:
-    enum DefaultType { AutoDefault, Default };
+public:
+    enum DefaultType
+    {
+        AutoDefault,
+        Default
+    };
 
-  public:
-    explicit AbstractToolWidget( QWidget* parent = nullptr );
+public:
+    explicit AbstractToolWidget(QWidget* parent = nullptr);
 
     ~AbstractToolWidget() override;
 
-  public:
+public:
     // TODO: think about making this a factory template, similar to KActionCollection::addAction
-    void addButton( QPushButton* button, DefaultType defaultType = AutoDefault );
+    void addButton(QPushButton* button, DefaultType defaultType = AutoDefault);
 
-  private:
+private:
     AbstractToolWidgetPrivate* const d;
 };
 

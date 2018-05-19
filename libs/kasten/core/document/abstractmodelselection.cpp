@@ -22,16 +22,14 @@
 
 #include "abstractmodelselection.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class Q_DECL_HIDDEN AbstractModelSelection::Private
 {
 };
 
 AbstractModelSelection::AbstractModelSelection()
- : d( new Private() )
+    : d(new Private())
 {}
 
 AbstractModelSelection::~AbstractModelSelection()

@@ -28,7 +28,6 @@
 #include <QVector>
 #include <QHash>
 
-
 class Utf8StringData : public StringData
 {
 public:
@@ -43,6 +42,7 @@ public:
     QString charType() const override;
     uint count() const override;
     QString typeName() const override;
+
 private:
     QHash<int, quint8> mErrorIndices;
     QVector<quint32> mCodePoints;

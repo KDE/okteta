@@ -30,63 +30,61 @@
 #include <QSpinBox>
 #include <QFormLayout>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor( ByteArrayPatternGenerator* generator, QWidget* parent )
-  : AbstractModelDataGeneratorConfigEditor( parent ),
-    mGenerator( generator )
+ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor(ByteArrayPatternGenerator* generator, QWidget* parent)
+    : AbstractModelDataGeneratorConfigEditor(parent)
+    , mGenerator(generator)
 {
     mSettings = mGenerator->settings();
 
-    QFormLayout* pageLayout = new QFormLayout( this );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout(this);
+    pageLayout->setMargin(0);
 
     // pattern
     const QString patternEditLabel =
-        i18nc( "@label:textbox",
-               "Pattern:" );
-    mPatternEdit = new Okteta::ByteArrayComboBox( this );
-    mPatternEdit->setByteArray( mSettings.pattern );
-    connect( mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged );
-    connect( mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onPatternChanged );
+        i18nc("@label:textbox",
+              "Pattern:");
+    mPatternEdit = new Okteta::ByteArrayComboBox(this);
+    mPatternEdit->setByteArray(mSettings.pattern);
+    connect(mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged);
+    connect(mPatternEdit, &Okteta::ByteArrayComboBox::byteArrayChanged, this, &ByteArrayPatternGeneratorConfigEditor::onPatternChanged);
     const QString inputWhatsThis =
-        i18nc( "@info:whatsthis",
-               "Enter a pattern to search for, or select a previous pattern from the list." );
-    mPatternEdit->setWhatsThis( inputWhatsThis );
+        i18nc("@info:whatsthis",
+              "Enter a pattern to search for, or select a previous pattern from the list.");
+    mPatternEdit->setWhatsThis(inputWhatsThis);
 
-    pageLayout->addRow( patternEditLabel, mPatternEdit );
+    pageLayout->addRow(patternEditLabel, mPatternEdit);
 
     // number
     const QString numberInputLabel =
-        i18nc( "@label:spinbox number of times to insert the pattern",
-               "&Number:" );
-    mNumberInput = new QSpinBox( this );
-    mNumberInput->setRange( 1, INT_MAX );
-    mNumberInput->setValue( mSettings.count );
-    connect( mNumberInput, QOverload<int>::of(&QSpinBox::valueChanged),
-             this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged );
+        i18nc("@label:spinbox number of times to insert the pattern",
+              "&Number:");
+    mNumberInput = new QSpinBox(this);
+    mNumberInput->setRange(1, INT_MAX);
+    mNumberInput->setValue(mSettings.count);
+    connect(mNumberInput, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &ByteArrayPatternGeneratorConfigEditor::onSettingsChanged);
     const QString numberWhatsThis =
-        i18nc( "@info:whatsthis",
-               "Enter the number of times the pattern should be inserted." );
-    mNumberInput->setWhatsThis( numberWhatsThis );
+        i18nc("@info:whatsthis",
+              "Enter the number of times the pattern should be inserted.");
+    mNumberInput->setWhatsThis(numberWhatsThis);
 
-    pageLayout->addRow( numberInputLabel, mNumberInput );
+    pageLayout->addRow(numberInputLabel, mNumberInput);
 }
 
-bool ByteArrayPatternGeneratorConfigEditor::isValid() const { return ( ! mSettings.pattern.isEmpty() ); }
+bool ByteArrayPatternGeneratorConfigEditor::isValid() const { return (!mSettings.pattern.isEmpty()); }
 
 QString ByteArrayPatternGeneratorConfigEditor::name() const
 {
-    return i18nc("@item name of the generated data","Pattern");
+    return i18nc("@item name of the generated data", "Pattern");
 }
 
 // TODO: get char codec
 #if 0
-void InsertPatternDialog::setCharCodec( const QString& codecName )
+void InsertPatternDialog::setCharCodec(const QString& codecName)
 {
-    mPatternEdit->setCharCodec( codecName );
+    mPatternEdit->setCharCodec(codecName);
 }
 #endif
 
@@ -95,12 +93,12 @@ void ByteArrayPatternGeneratorConfigEditor::onSettingsChanged()
     mSettings.pattern = mPatternEdit->byteArray();
     mSettings.count = mNumberInput->value();
 
-    mGenerator->setSettings( mSettings );
+    mGenerator->setSettings(mSettings);
 }
 
-void ByteArrayPatternGeneratorConfigEditor::onPatternChanged( const QByteArray& pattern )
+void ByteArrayPatternGeneratorConfigEditor::onPatternChanged(const QByteArray& pattern)
 {
-    emit validityChanged( ! pattern.isEmpty() );
+    emit validityChanged(!pattern.isEmpty());
 }
 
 ByteArrayPatternGeneratorConfigEditor::~ByteArrayPatternGeneratorConfigEditor()

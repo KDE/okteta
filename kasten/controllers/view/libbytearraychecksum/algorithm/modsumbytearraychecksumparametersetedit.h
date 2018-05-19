@@ -28,24 +28,23 @@
 
 class KComboBox;
 
-
 class ModSumByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksumParameterSetEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const char Id[];
 
-  public:
-    explicit ModSumByteArrayChecksumParameterSetEdit( QWidget* parent = nullptr );
+public:
+    explicit ModSumByteArrayChecksumParameterSetEdit(QWidget* parent = nullptr);
     ~ModSumByteArrayChecksumParameterSetEdit() override;
 
-  public: // AbstractByteArrayFilterParameterSetEdit API
-    void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet ) override;
-    void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const override;
+public: // AbstractByteArrayFilterParameterSetEdit API
+    void setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet) override;
+    void getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const override;
     bool isValid() const override;
 
-  protected:
+protected:
     KComboBox* mByteOrderComboBox;
 };
 

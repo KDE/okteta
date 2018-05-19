@@ -28,9 +28,7 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 StringsExtractToolViewFactory::StringsExtractToolViewFactory() {}
 
@@ -39,9 +37,9 @@ QString StringsExtractToolViewFactory::title()       const { return i18nc("@titl
 QString StringsExtractToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.StringsToolView"); }
 SidePosition StringsExtractToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* StringsExtractToolViewFactory::create( AbstractTool* tool )
+AbstractToolView* StringsExtractToolViewFactory::create(AbstractTool* tool)
 {
-    return new StringsExtractToolView( qobject_cast<StringsExtractTool*>(tool) );
+    return new StringsExtractToolView(qobject_cast<StringsExtractTool*>(tool));
 }
 
 StringsExtractToolViewFactory::~StringsExtractToolViewFactory() {}

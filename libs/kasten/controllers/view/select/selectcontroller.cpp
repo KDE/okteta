@@ -33,53 +33,51 @@
 // Qt
 #include <QAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-SelectController::SelectController( KXMLGUIClient* guiClient )
- : mModel( nullptr ), mSelectControl( nullptr )
+SelectController::SelectController(KXMLGUIClient* guiClient)
+    : mModel(nullptr)
+    , mSelectControl(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSelectAllAction = KStandardAction::selectAll( this, SLOT(selectAll()), actionCollection );
-    mDeselectAction =  KStandardAction::deselect(  this, SLOT(unselect()),  actionCollection );
+    mSelectAllAction = KStandardAction::selectAll(this, SLOT(selectAll()), actionCollection);
+    mDeselectAction =  KStandardAction::deselect(this, SLOT(unselect()),  actionCollection);
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void SelectController::setTargetModel( AbstractModel* model )
+void SelectController::setTargetModel(AbstractModel* model)
 {
-    if( mModel ) mModel->disconnect( this );
-
-    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
-    mSelectControl = mModel ? qobject_cast<If::DataSelectable *>( mModel ) : nullptr;
-
-    const bool hasSelectionControl = ( mSelectControl != nullptr );
-    if( hasSelectionControl )
-    {
-        connect( mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(onHasSelectedDataChanged(bool)) );
+    if (mModel) {
+        mModel->disconnect(this);
     }
 
-    mSelectAllAction->setEnabled( hasSelectionControl );
-    mDeselectAction->setEnabled( hasSelectionControl ? mSelectControl->hasSelectedData() : false );
+    mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
+    mSelectControl = mModel ? qobject_cast<If::DataSelectable*>(mModel) : nullptr;
+
+    const bool hasSelectionControl = (mSelectControl != nullptr);
+    if (hasSelectionControl) {
+        connect(mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(onHasSelectedDataChanged(bool)));
+    }
+
+    mSelectAllAction->setEnabled(hasSelectionControl);
+    mDeselectAction->setEnabled(hasSelectionControl ? mSelectControl->hasSelectedData() : false);
 }
 
-
-void SelectController::onHasSelectedDataChanged( bool hasSelectedData )
+void SelectController::onHasSelectedDataChanged(bool hasSelectedData)
 {
-    mDeselectAction->setEnabled( hasSelectedData );
+    mDeselectAction->setEnabled(hasSelectedData);
 }
-
 
 void SelectController::selectAll()
 {
-    mSelectControl->selectAllData( true );
+    mSelectControl->selectAllData(true);
 }
 
 void SelectController::unselect()
 {
-    mSelectControl->selectAllData( false );
+    mSelectControl->selectAllData(false);
 }
 
 }

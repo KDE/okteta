@@ -28,20 +28,17 @@
 // Qt
 #include <QtPlugin>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-namespace If
-{
+namespace If {
 
 class SearchUserQueryable
 {
-  public:
+public:
     virtual ~SearchUserQueryable();
 
-  public: // API to be implemented
-    virtual bool queryContinue( KFindDirection direction ) const = 0;
+public: // API to be implemented
+    virtual bool queryContinue(KFindDirection direction) const = 0;
 };
 
 inline SearchUserQueryable::~SearchUserQueryable() {}

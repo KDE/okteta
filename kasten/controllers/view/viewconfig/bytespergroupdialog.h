@@ -28,26 +28,24 @@
 
 class QSpinBox;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class BytesPerGroupDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit BytesPerGroupDialog( QWidget* parent = nullptr );
+public:
+    explicit BytesPerGroupDialog(QWidget* parent = nullptr);
 
     ~BytesPerGroupDialog() override;
 
-  public:
-    void setGroupedBytesCount( int groupedBytesCount );
+public:
+    void setGroupedBytesCount(int groupedBytesCount);
 
-  public:
+public:
     int groupedBytesCount() const;
 
-  protected:
+protected:
     QSpinBox* mGroupedBytesCountEdit;
 };
 

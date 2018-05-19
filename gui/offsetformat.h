@@ -23,56 +23,56 @@
 #ifndef OKTETA_OFFSETFORMAT_H
 #define OKTETA_OFFSETFORMAT_H
 
-
 // lib
 #include <okteta/oktetagui_export.h>
 
-namespace Okteta
-{
+namespace Okteta {
 
 /**
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 
 class OKTETAGUI_EXPORT OffsetFormat
 {
-  public:
+public:
     /** */
-    using print = void (*)( char *Buffer, unsigned int Offset );
+    using print = void (*)(char* Buffer, unsigned int Offset);
     /** */
-    enum Format { Hexadecimal=0, Decimal };
+    enum Format
+    {
+        Hexadecimal = 0,
+        Decimal
+    };
     /** */
     static const int MaxFormatWidth = 10;
 
-  private:
+private:
     OffsetFormat();
     ~OffsetFormat();
 
-  public:
+public:
     /** */
-    static unsigned int codingWidth( int i );
+    static unsigned int codingWidth(int i);
     /** */
-    static print printFunction( int i );
+    static print printFunction(int i);
 
-  public:
-    static void printHexadecimalOffset( char *Buffer, unsigned int Offset );
-    static void printHexadecimalSmallOffset( char *Buffer, unsigned int Offset );
-    static void printDecimalOffset( char *Buffer, unsigned int Offset );
+public:
+    static void printHexadecimalOffset(char* Buffer, unsigned int Offset);
+    static void printHexadecimalSmallOffset(char* Buffer, unsigned int Offset);
+    static void printDecimalOffset(char* Buffer, unsigned int Offset);
 
-  protected:
+protected:
     /** */
-    static const unsigned int CodingWidth[2]; //TODO: would sizeof(Coding} work?
+    static const unsigned int CodingWidth[2]; // TODO: would sizeof(Coding} work?
     /** */
     static const print PrintFunction[2];
 };
 
-
-inline unsigned int OffsetFormat::codingWidth( int i )
+inline unsigned int OffsetFormat::codingWidth(int i)
 { return CodingWidth[i]; }
 
-inline OffsetFormat::print OffsetFormat::printFunction( int i )
+inline OffsetFormat::print OffsetFormat::printFunction(int i)
 { return PrintFunction[i]; }
-
 
 }
 

@@ -28,23 +28,18 @@
 // Qt
 #include <QTemporaryFile>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void AbstractFileSystemExportJobPrivate::exportToFile()
 {
-    Q_Q( AbstractFileSystemExportJob );
+    Q_Q(AbstractFileSystemExportJob);
 
     bool isWorkFileOk;
-    if( mUrl.isLocalFile() )
-    {
+    if (mUrl.isLocalFile()) {
         mWorkFilePath = mUrl.toLocalFile();
-        mFile = new QFile( mWorkFilePath );
-        isWorkFileOk = mFile->open( QIODevice::WriteOnly );
-    }
-    else
-    {
+        mFile = new QFile(mWorkFilePath);
+        isWorkFileOk = mFile->open(QIODevice::WriteOnly);
+    } else {
 
         QTemporaryFile* temporaryFile = new QTemporaryFile();
         isWorkFileOk = temporaryFile->open();
@@ -53,41 +48,35 @@ void AbstractFileSystemExportJobPrivate::exportToFile()
         mFile = temporaryFile;
     }
 
-    if( isWorkFileOk )
+    if (isWorkFileOk) {
         q->startExportToFile();
-    else
-    {
-        q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile->errorString() );
+    } else {
+        q->setError(KJob::KilledJobError);
+        q->setErrorText(mFile->errorString());
 
-        q->completeExport( false );
+        q->completeExport(false);
     }
 }
 
-void AbstractFileSystemExportJobPrivate::completeExport( bool success )
+void AbstractFileSystemExportJobPrivate::completeExport(bool success)
 {
-    Q_Q( AbstractFileSystemExportJob );
+    Q_Q(AbstractFileSystemExportJob);
 
-    if( success )
-    {
-        if( ! mUrl.isLocalFile() )
-        {
+    if (success) {
+        if (!mUrl.isLocalFile()) {
             KIO::FileCopyJob* fileCopyJob =
-                KIO::file_copy( QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite );
-            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
+                KIO::file_copy(QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite);
+            KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 
             success = fileCopyJob->exec();
-            if( ! success )
-            {
-                q->setError( KJob::KilledJobError );
-                q->setErrorText( fileCopyJob->errorString() );
+            if (!success) {
+                q->setError(KJob::KilledJobError);
+                q->setErrorText(fileCopyJob->errorString());
             }
         }
-    }
-    else
-    {
-        q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile->errorString() );
+    } else {
+        q->setError(KJob::KilledJobError);
+        q->setErrorText(mFile->errorString());
     }
 
     delete mFile;

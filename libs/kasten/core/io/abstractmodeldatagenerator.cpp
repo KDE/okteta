@@ -23,38 +23,36 @@
 #include "abstractmodeldatagenerator.h"
 #include "abstractmodeldatagenerator_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModelDataGenerator::AbstractModelDataGenerator( AbstractModelDataGeneratorPrivate* d )
-  : d_ptr( d )
+AbstractModelDataGenerator::AbstractModelDataGenerator(AbstractModelDataGeneratorPrivate* d)
+    : d_ptr(d)
 {
 }
 
-AbstractModelDataGenerator::AbstractModelDataGenerator( const QString& typeName,
-                                                        const QString& mimeType, Flags flags )
-  : d_ptr( new AbstractModelDataGeneratorPrivate(this,typeName,mimeType,flags) )
+AbstractModelDataGenerator::AbstractModelDataGenerator(const QString& typeName,
+                                                       const QString& mimeType, Flags flags)
+    : d_ptr(new AbstractModelDataGeneratorPrivate(this, typeName, mimeType, flags))
 {
 }
 
 QString AbstractModelDataGenerator::typeName() const
 {
-    Q_D( const AbstractModelDataGenerator );
+    Q_D(const AbstractModelDataGenerator);
 
     return d->typeName();
 }
 
 QString AbstractModelDataGenerator::mimeType() const
 {
-    Q_D( const AbstractModelDataGenerator );
+    Q_D(const AbstractModelDataGenerator);
 
     return d->mimeType();
 }
 
 AbstractModelDataGenerator::Flags AbstractModelDataGenerator::flags() const
 {
-    Q_D( const AbstractModelDataGenerator );
+    Q_D(const AbstractModelDataGenerator);
 
     return d->flags();
 }

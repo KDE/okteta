@@ -31,20 +31,18 @@
 #include <QPainter>
 #include <QPalette>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class AbstractColumnRendererPrivate
 {
-  public:
-    explicit AbstractColumnRendererPrivate( AbstractColumnStylist* stylist );
+public:
+    explicit AbstractColumnRendererPrivate(AbstractColumnStylist* stylist);
 
-  public:
-    void renderBlankLine( QPainter* painter ) const;
-    void renderEmptyColumn( QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan );
+public:
+    void renderBlankLine(QPainter* painter) const;
+    void renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan);
 
-  public: // general column data
+public: // general column data
     /** pointer to the view */
     AbstractColumnStylist* mStylist;
     /** should Column be displayed? */
@@ -57,31 +55,29 @@ class AbstractColumnRendererPrivate
     PixelXRange mXSpan;
 };
 
-
-inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate( AbstractColumnStylist* stylist )
- : mStylist( stylist ),
-   mIsVisible( true ),  //TODO: would false be better?
-   mLineHeight( 0 ),
-   mXSpan( PixelXRange::fromWidth(0,0) )
+inline AbstractColumnRendererPrivate::AbstractColumnRendererPrivate(AbstractColumnStylist* stylist)
+    : mStylist(stylist)
+    , mIsVisible(true)  // TODO: would false be better?
+    , mLineHeight(0)
+    , mXSpan(PixelXRange::fromWidth(0, 0))
 {
 }
 
-inline void AbstractColumnRendererPrivate::renderBlankLine( QPainter* painter ) const
+inline void AbstractColumnRendererPrivate::renderBlankLine(QPainter* painter) const
 {
-    if( mLineHeight > 0 )
-    {
-        painter->fillRect( 0,0, mXSpan.width(),mLineHeight,
-                           mStylist->palette().brush(QPalette::Base) );
+    if (mLineHeight > 0) {
+        painter->fillRect(0, 0, mXSpan.width(), mLineHeight,
+                          mStylist->palette().brush(QPalette::Base));
     }
 }
 
-inline void AbstractColumnRendererPrivate::renderEmptyColumn( QPainter* painter, const PixelXRange& _xSpan, const PixelYRange& ySpan )
+inline void AbstractColumnRendererPrivate::renderEmptyColumn(QPainter* painter, const PixelXRange& _xSpan, const PixelYRange& ySpan)
 {
-    PixelXRange xSpan( _xSpan );
-    xSpan.restrictTo( mXSpan );
+    PixelXRange xSpan(_xSpan);
+    xSpan.restrictTo(mXSpan);
 
-    painter->fillRect( xSpan.start(),ySpan.start(), xSpan.width(),ySpan.width(),
-                       mStylist->palette().brush(QPalette::Base) );
+    painter->fillRect(xSpan.start(), ySpan.start(), xSpan.width(), ySpan.width(),
+                      mStylist->palette().brush(QPalette::Base));
 }
 
 }

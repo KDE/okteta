@@ -28,33 +28,30 @@
 // Qt
 #include <QIODevice>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class AbstractByteArrayModel;
 
-
-class  ByteArrayModelIoDevice : public QIODevice
+class ByteArrayModelIoDevice : public QIODevice
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteArrayModelIoDevice( AbstractByteArrayModel* byteArrayModel, QObject* parent = nullptr );
+public:
+    explicit ByteArrayModelIoDevice(AbstractByteArrayModel* byteArrayModel, QObject* parent = nullptr);
     ~ByteArrayModelIoDevice() override;
 
-  public: // QIODevice API
+public: // QIODevice API
     qint64 size() const override;
     bool canReadLine() const override;
 
-    bool open( OpenMode openMode ) override;
-    bool seek( qint64 pos ) override;
+    bool open(OpenMode openMode) override;
+    bool seek(qint64 pos) override;
 
-  protected:
-    qint64 readData( char* data, qint64 maxlength ) override;
-    qint64 writeData( const char* data, qint64 length ) override;
+protected:
+    qint64 readData(char* data, qint64 maxlength) override;
+    qint64 writeData(const char* data, qint64 length) override;
 
-  protected:
+protected:
     AbstractByteArrayModel* mByteArrayModel;
     Address mReadOffset;
 };

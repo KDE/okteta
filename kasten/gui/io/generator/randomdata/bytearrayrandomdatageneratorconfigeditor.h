@@ -30,29 +30,27 @@
 
 class QSpinBox;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayRandomDataGeneratorConfigEditor : public AbstractModelDataGeneratorConfigEditor
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteArrayRandomDataGeneratorConfigEditor( ByteArrayRandomDataGenerator* generator, QWidget* parent = nullptr );
+public:
+    explicit ByteArrayRandomDataGeneratorConfigEditor(ByteArrayRandomDataGenerator* generator, QWidget* parent = nullptr);
 
     ~ByteArrayRandomDataGeneratorConfigEditor() override;
 
-  public: // AbstractModelDataGeneratorConfigEditor API
+public: // AbstractModelDataGeneratorConfigEditor API
     QString name() const override;
 
-  public:
+public:
     void rememberCurrentSettings();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onSettingsChanged();
 
-  protected:
+protected:
     ByteArrayRandomDataGenerator* mGenerator;
     ByteArrayRandomDataGeneratorSettings mSettings;
 

@@ -28,32 +28,30 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 Octal8Codec::Octal8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox encoding of one byte as value in the octal format","Octal 8-bit") )
+    : AbstractTypeCodec(i18nc("@label:textbox encoding of one byte as value in the octal format", "Octal 8-bit"))
 {}
 
-QVariant Octal8Codec::value( const PODData& data, int* byteCount ) const
+QVariant Octal8Codec::value(const PODData& data, int* byteCount) const
 {
-    const unsigned char* pointer = (unsigned char*)data.pointer( 1 );
+    const unsigned char* pointer = (unsigned char*)data.pointer(1);
 
     *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<Octal8>( Octal8(*pointer) ) : QVariant();
+    return pointer ? QVariant::fromValue<Octal8>(Octal8(*pointer)) : QVariant();
 }
 
-QByteArray Octal8Codec::valueToBytes( const QVariant& value ) const
+QByteArray Octal8Codec::valueToBytes(const QVariant& value) const
 {
     const quint8 number = value.value<Octal8>().value;
 
-    return QByteArray( (const char*)&number, sizeof(quint8) );
+    return QByteArray((const char*)&number, sizeof(quint8));
 }
 
-bool Octal8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+bool Octal8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
-    return ( value.value<Octal8>().value == otherValue.value<Octal8>().value );
+    return (value.value<Octal8>().value == otherValue.value<Octal8>().value);
 }
 
 Octal8Codec::~Octal8Codec() {}

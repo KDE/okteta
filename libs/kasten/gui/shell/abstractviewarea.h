@@ -30,26 +30,23 @@
 
 class QWidget;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractViewAreaPrivate;
-
 
 // TODO: rename abstractdocumentviewarea?
 class KASTENGUI_EXPORT AbstractViewArea : public QObject
 {
     Q_OBJECT
 
-  protected:
+protected:
     AbstractViewArea();
-    explicit AbstractViewArea( AbstractViewAreaPrivate* d );
+    explicit AbstractViewArea(AbstractViewAreaPrivate* d);
 
-  public:
+public:
     ~AbstractViewArea() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual void setFocus() = 0;
 
     virtual QWidget* widget() const = 0;
@@ -57,13 +54,13 @@ class KASTENGUI_EXPORT AbstractViewArea : public QObject
 //     virtual AbstractTool* tool() const = 0;
     virtual bool hasFocus() const = 0;
 
-  Q_SIGNALS:
+Q_SIGNALS:
     // area has focus in the window
-    void focusChanged( bool hasFocus );
+    void focusChanged(bool hasFocus);
 
-  protected:
+protected:
     AbstractViewAreaPrivate* const d_ptr;
-    Q_DECLARE_PRIVATE( AbstractViewArea )
+    Q_DECLARE_PRIVATE(AbstractViewArea)
 };
 
 }

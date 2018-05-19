@@ -27,130 +27,122 @@
 // Qt
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 // local variables
 static const Address Start = 15;
 static const Address End = 27;
 
-
 void SelectionTest::testPlainConstructor()
 {
     const Selection selection;
-    QVERIFY( !selection.isValid() );
-    QVERIFY( !selection.started() );
-    QVERIFY( !selection.justStarted() );
+    QVERIFY(!selection.isValid());
+    QVERIFY(!selection.started());
+    QVERIFY(!selection.justStarted());
 }
 
 void SelectionTest::testAnchorConstructor()
 {
-    const Selection selection( Start );
-    QCOMPARE( selection.anchor(), Start );
-    QVERIFY( !selection.isValid() );
-    QVERIFY( selection.started() );
-    QVERIFY( selection.justStarted() );
+    const Selection selection(Start);
+    QCOMPARE(selection.anchor(), Start);
+    QVERIFY(!selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(selection.justStarted());
 }
-
 
 void SelectionTest::testSetStart()
 {
     Selection selection;
-    selection.setStart( Start );
-    QCOMPARE( selection.anchor(), Start );
-    QVERIFY( !selection.isValid() );
-    QVERIFY( selection.started() );
-    QVERIFY( selection.justStarted() );
+    selection.setStart(Start);
+    QCOMPARE(selection.anchor(), Start);
+    QVERIFY(!selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(selection.justStarted());
 }
-
 
 void SelectionTest::testSetStartEnd()
 {
     Selection selection;
-    selection.setStart( Start );
-    selection.setEnd( End );
-    QCOMPARE( selection.start(), Start );
-    QCOMPARE( selection.end(), End-1 );
-    QCOMPARE( selection.anchor(), Start );
-    QVERIFY( selection.isValid() );
-    QVERIFY( selection.started() );
-    QVERIFY( !selection.justStarted() );
-    QVERIFY( selection.isForward() );
+    selection.setStart(Start);
+    selection.setEnd(End);
+    QCOMPARE(selection.start(), Start);
+    QCOMPARE(selection.end(), End - 1);
+    QCOMPARE(selection.anchor(), Start);
+    QVERIFY(selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(!selection.justStarted());
+    QVERIFY(selection.isForward());
 
-    selection.setStart( End );
-    selection.setEnd( Start );
-    QCOMPARE( selection.start(), Start );
-    QCOMPARE( selection.end(), End-1 );
-    QCOMPARE( selection.anchor(), End );
-    QVERIFY( selection.isValid() );
-    QVERIFY( selection.started() );
-    QVERIFY( !selection.justStarted() );
-    QVERIFY( !selection.isForward() );
+    selection.setStart(End);
+    selection.setEnd(Start);
+    QCOMPARE(selection.start(), Start);
+    QCOMPARE(selection.end(), End - 1);
+    QCOMPARE(selection.anchor(), End);
+    QVERIFY(selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(!selection.justStarted());
+    QVERIFY(!selection.isForward());
 }
-
 
 void SelectionTest::testCancel()
 {
     Selection selection;
-    selection.setStart( Start );
-    selection.setEnd( End );
+    selection.setStart(Start);
+    selection.setEnd(End);
     selection.cancel();
-    QVERIFY( !selection.isValid() );
-    QVERIFY( !selection.started() );
-    QVERIFY( !selection.justStarted() );
+    QVERIFY(!selection.isValid());
+    QVERIFY(!selection.started());
+    QVERIFY(!selection.justStarted());
 }
-
 
 void SelectionTest::testSetForward()
 {
     Selection selection;
-    selection.setStart( Start );
-    selection.setEnd( End );
-    selection.setForward( false );
-    QCOMPARE( selection.start(), Start );
-    QCOMPARE( selection.end(), End-1 );
-    QCOMPARE( selection.anchor(), End );
-    QVERIFY( selection.isValid() );
-    QVERIFY( selection.started() );
-    QVERIFY( !selection.justStarted() );
-    QVERIFY( !selection.isForward() );
+    selection.setStart(Start);
+    selection.setEnd(End);
+    selection.setForward(false);
+    QCOMPARE(selection.start(), Start);
+    QCOMPARE(selection.end(), End - 1);
+    QCOMPARE(selection.anchor(), End);
+    QVERIFY(selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(!selection.justStarted());
+    QVERIFY(!selection.isForward());
 
-    selection.setForward( true );
-    QCOMPARE( selection.start(), Start );
-    QCOMPARE( selection.end(), End-1 );
-    QCOMPARE( selection.anchor(), Start );
-    QVERIFY( selection.isValid() );
-    QVERIFY( selection.started() );
-    QVERIFY( !selection.justStarted() );
-    QVERIFY( selection.isForward() );
+    selection.setForward(true);
+    QCOMPARE(selection.start(), Start);
+    QCOMPARE(selection.end(), End - 1);
+    QCOMPARE(selection.anchor(), Start);
+    QVERIFY(selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(!selection.justStarted());
+    QVERIFY(selection.isForward());
 }
-
 
 void SelectionTest::testReverse()
 {
     Selection selection;
-    selection.setStart( Start );
-    selection.setEnd( End );
+    selection.setStart(Start);
+    selection.setEnd(End);
     selection.reverse();
-    QCOMPARE( selection.start(), Start );
-    QCOMPARE( selection.end(), End-1 );
-    QCOMPARE( selection.anchor(), End );
-    QVERIFY( selection.isValid() );
-    QVERIFY( selection.started() );
-    QVERIFY( !selection.justStarted() );
-    QVERIFY( !selection.isForward() );
+    QCOMPARE(selection.start(), Start);
+    QCOMPARE(selection.end(), End - 1);
+    QCOMPARE(selection.anchor(), End);
+    QVERIFY(selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(!selection.justStarted());
+    QVERIFY(!selection.isForward());
 
     selection.reverse();
-    QCOMPARE( selection.start(), Start );
-    QCOMPARE( selection.end(), End-1 );
-    QCOMPARE( selection.anchor(), Start );
-    QVERIFY( selection.isValid() );
-    QVERIFY( selection.started() );
-    QVERIFY( !selection.justStarted() );
-    QVERIFY( selection.isForward() );
+    QCOMPARE(selection.start(), Start);
+    QCOMPARE(selection.end(), End - 1);
+    QCOMPARE(selection.anchor(), Start);
+    QVERIFY(selection.isValid());
+    QVERIFY(selection.started());
+    QVERIFY(!selection.justStarted());
+    QVERIFY(selection.isForward());
 }
 
 }
 
-QTEST_MAIN( Okteta::SelectionTest )
+QTEST_MAIN(Okteta::SelectionTest)

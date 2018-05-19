@@ -28,7 +28,6 @@ class AbstractByteArrayModel;
 }
 class QObject;
 
-
-extern Okteta::AbstractByteArrayModel* createFillerByteArrayModel( QObject* parent );
+extern Okteta::AbstractByteArrayModel* createFillerByteArrayModel(QObject* parent);
 
 #endif

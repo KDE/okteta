@@ -30,37 +30,35 @@
 #include <QUrl>
 #include <QTemporaryFile>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractFileSystemConnectJobPrivate : public AbstractConnectJobPrivate
 {
-  public:
-    AbstractFileSystemConnectJobPrivate( AbstractFileSystemConnectJob* parent,
-                                         AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
-                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
+public:
+    AbstractFileSystemConnectJobPrivate(AbstractFileSystemConnectJob* parent,
+                                        AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
+                                        const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
 
     ~AbstractFileSystemConnectJobPrivate() override;
 
-  public: // KJob API
+public: // KJob API
     void start();
 
-  public:
-    void complete( bool success );
+public:
+    void complete(bool success);
 
-  public:
+public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     AbstractDocument* document() const;
     QFile* file() const;
 
-  public:
+public:
     void connectWithFile();
 
-  protected:
-    Q_DECLARE_PUBLIC( AbstractFileSystemConnectJob )
+protected:
+    Q_DECLARE_PUBLIC(AbstractFileSystemConnectJob)
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     AbstractDocument* const mDocument;
     const QUrl mUrl;
@@ -70,16 +68,15 @@ class AbstractFileSystemConnectJobPrivate : public AbstractConnectJobPrivate
     QString mTempFilePath;
 };
 
-
-inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate( AbstractFileSystemConnectJob* parent,
-    AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
-    const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
-  : AbstractConnectJobPrivate( parent ),
-    mSynchronizer( synchronizer ),
-    mDocument( document ),
-    mUrl( url ),
-    mOption( option ),
-    mFile( nullptr )
+inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate(AbstractFileSystemConnectJob* parent,
+                                                                                AbstractModelFileSystemSynchronizer* synchronizer, AbstractDocument* document,
+                                                                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
+    : AbstractConnectJobPrivate(parent)
+    , mSynchronizer(synchronizer)
+    , mDocument(document)
+    , mUrl(url)
+    , mOption(option)
+    , mFile(nullptr)
 {}
 
 inline AbstractFileSystemConnectJobPrivate::~AbstractFileSystemConnectJobPrivate() {}
@@ -94,9 +91,9 @@ inline QFile* AbstractFileSystemConnectJobPrivate::file()                  const
 
 inline void AbstractFileSystemConnectJobPrivate::start()
 {
-    Q_Q( AbstractFileSystemConnectJob );
+    Q_Q(AbstractFileSystemConnectJob);
 
-    QMetaObject::invokeMethod( q, "connectWithFile", Qt::QueuedConnection );
+    QMetaObject::invokeMethod(q, "connectWithFile", Qt::QueuedConnection);
 }
 
 }

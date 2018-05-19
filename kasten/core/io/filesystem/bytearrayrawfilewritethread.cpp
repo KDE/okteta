@@ -30,31 +30,28 @@
 #include <QDataStream>
 #include <QFile>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void ByteArrayRawFileWriteThread::run()
 {
-    Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( mDocument->content() );
+    Okteta::PieceTableByteArrayModel* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(mDocument->content());
 
-    QDataStream outStream( mFile );
+    QDataStream outStream(mFile);
 
-    //TODO: this was
+    // TODO: this was
 //     outStream.writeRawData( byteArray->data(), byteArray->size() );
     // make it quicker again by writing spans -> spaniterator
 
-    for( int i = 0; i<byteArray->size(); ++i )
-    {
+    for (int i = 0; i < byteArray->size(); ++i) {
         const Okteta::Byte byte = byteArray->byte(i);
-        outStream.writeRawData( reinterpret_cast<const char*>(&byte), 1 );
+        outStream.writeRawData(reinterpret_cast<const char*>(&byte), 1);
     }
 
-    byteArray->setModified( false );
+    byteArray->setModified(false);
 
-    mSuccess = ( outStream.status() == QDataStream::Ok );
+    mSuccess = (outStream.status() == QDataStream::Ok);
 
-    emit documentWritten( mSuccess );
+    emit documentWritten(mSuccess);
 }
 
 ByteArrayRawFileWriteThread::~ByteArrayRawFileWriteThread() {}

@@ -26,44 +26,40 @@
 // lib
 #include "abstractpiecetablechange.h"
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 /** class
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 
 class InsertPieceTableChange : public AbstractPieceTableChange
 {
-  public:
-    InsertPieceTableChange( Address insertOffset, Size insertLength, Address storageOffset );
+public:
+    InsertPieceTableChange(Address insertOffset, Size insertLength, Address storageOffset);
 
     ~InsertPieceTableChange() override;
 
-  public: // AbstractPieceTableChange API
+public: // AbstractPieceTableChange API
     int type() const override;
     QString description() const override;
     Address storageOffset() const override;
-    bool merge( const AbstractPieceTableChange* other ) override;
-    AddressRange apply( PieceTable* pieceTable ) const override;
-    AddressRange revert( PieceTable* pieceTable ) const override;
+    bool merge(const AbstractPieceTableChange* other) override;
+    AddressRange apply(PieceTable* pieceTable) const override;
+    AddressRange revert(PieceTable* pieceTable) const override;
     ArrayChangeMetrics metrics() const override;
     Size dataSize() const override;
 
-  protected:
+protected:
     Address mInsertOffset;
     Size mInsertLength;
     Address mStorageOffset;
 };
 
-
-inline InsertPieceTableChange::InsertPieceTableChange( Address insertOffset, Size insertLength, Address storageOffset )
-  : mInsertOffset( insertOffset ),
-    mInsertLength( insertLength ),
-    mStorageOffset( storageOffset )
+inline InsertPieceTableChange::InsertPieceTableChange(Address insertOffset, Size insertLength, Address storageOffset)
+    : mInsertOffset(insertOffset)
+    , mInsertLength(insertLength)
+    , mStorageOffset(storageOffset)
 {}
-
 
 }
 

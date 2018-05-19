@@ -30,12 +30,12 @@ class QScriptContext;
 class QScriptEngine;
 union AllPrimitiveTypes;
 
-namespace ScriptUtils
-{
-    QString qScriptValueToString(const QScriptValue& val);
+namespace ScriptUtils {
 
-    void wrapAllPrimitiveTypes(QScriptValue& out, AllPrimitiveTypes allPrim,
-            PrimitiveDataType actualType);
+QString qScriptValueToString(const QScriptValue& val);
+
+void wrapAllPrimitiveTypes(QScriptValue& out, AllPrimitiveTypes allPrim,
+                           PrimitiveDataType actualType);
 
 }
 

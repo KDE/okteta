@@ -26,19 +26,17 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.h>
 
-template<class T> class QList;
+template <class T> class QList;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelStreamEncoderConfigEditorFactory;
-
 
 class OKTETAKASTENGUI_EXPORT ByteArrayStreamEncoderConfigEditorFactoryFactory
 {
-  private:
+private:
     ByteArrayStreamEncoderConfigEditorFactoryFactory();
-  public:
+
+public:
     static QList<AbstractModelStreamEncoderConfigEditorFactory*> createFactorys();
 
 };

@@ -30,40 +30,36 @@ class QPushButton;
 class QLabel;
 class QTreeView;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class InfoTool;
 
-
 class InfoView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit InfoView( InfoTool *tool, QWidget* parent = nullptr );
+public:
+    explicit InfoView(InfoTool* tool, QWidget* parent = nullptr);
     ~InfoView() override;
 
-  public:
+public:
     InfoTool* tool() const;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void updateHeader();
-    void setByteArraySize( int size );
+    void setByteArraySize(int size);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void setFixedFontByGlobalSettings();
     void resizeColumnsWidth();
 
-  private:
-    InfoTool *mTool;
+private:
+    InfoTool* mTool;
 
-    QLabel *mSizeLabel;
-    QTreeView *mStatisticTableView;
-    QPushButton *mUpdateButton;
+    QLabel* mSizeLabel;
+    QTreeView* mStatisticTableView;
+    QPushButton* mUpdateButton;
 };
-
 
 inline InfoTool* InfoView::tool() const { return mTool; }
 

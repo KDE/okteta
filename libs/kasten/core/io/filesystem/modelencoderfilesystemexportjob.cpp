@@ -23,22 +23,19 @@
 #include "modelencoderfilesystemexportjob.h"
 #include "modelencoderfilesystemexportjob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob( AbstractModel* model,
-                                                                  const AbstractModelSelection* selection,
-                                                                  const QUrl& url,
-                                                                  AbstractModelStreamEncoder* encoder )
-  : AbstractFileSystemExportJob( new ModelEncoderFileSystemExportJobPrivate(this,model,selection,url,encoder) )
+ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob(AbstractModel* model,
+                                                                 const AbstractModelSelection* selection,
+                                                                 const QUrl& url,
+                                                                 AbstractModelStreamEncoder* encoder)
+    : AbstractFileSystemExportJob(new ModelEncoderFileSystemExportJobPrivate(this, model, selection, url, encoder))
 {
 }
 
-
 void ModelEncoderFileSystemExportJob::startExportToFile()
 {
-    Q_D( ModelEncoderFileSystemExportJob );
+    Q_D(ModelEncoderFileSystemExportJob);
 
     d->startExportToFile();
 }

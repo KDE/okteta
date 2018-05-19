@@ -26,54 +26,49 @@
 // lib
 #include <okteta/abstractbytearraycolumnrenderer.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 /** buffer column that interprets the bytes as chars
-  *
-  *@author Friedrich W. H. Kossebau
-  */
+ *
+ * @author Friedrich W. H. Kossebau
+ */
 class OKTETAGUI_EXPORT CharByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
-  public:
-    CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+public:
+    CharByteArrayColumnRenderer(AbstractColumnStylist* stylist,
+                                AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges);
     ~CharByteArrayColumnRenderer() override;
 
-
-  public: // modification access
+public: // modification access
     /** sets whether "unprintable" chars (>32) should be displayed in the char column
-      * with their corresponding character.
-      * @param showingNonprinting
-      * returns true if there was a change
-      */
-    bool setShowingNonprinting( bool showingNonprinting = true );
+     * with their corresponding character.
+     * @param showingNonprinting
+     * returns true if there was a change
+     */
+    bool setShowingNonprinting(bool showingNonprinting = true);
     /** sets the substitute character for "unprintable" chars
-      * returns true if there was a change
-      */
-    bool setSubstituteChar( QChar substituteChar );
+     * returns true if there was a change
+     */
+    bool setSubstituteChar(QChar substituteChar);
     /** sets the undefined character for "undefined" chars
-      * returns true if there was a change
-      */
-    bool setUndefinedChar( QChar undefinedChar );
+     * returns true if there was a change
+     */
+    bool setUndefinedChar(QChar undefinedChar);
 
-
-  public: // value access
+public: // value access
     /** returns true if "unprintable" chars (>32) are displayed in the char column
-      * with their corresponding character, default is false
-      */
+     * with their corresponding character, default is false
+     */
     bool isShowingNonprinting() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
     QChar substituteChar() const;
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
     QChar undefinedChar() const;
 
+protected: // AbstractByteArrayColumnRenderer API
+    void renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const override;
 
-  protected: // AbstractByteArrayColumnRenderer API
-    void renderByteText( QPainter *painter, Byte byte, Character byteChar, const QColor& color ) const override;
-
-  protected:
+protected:
     /** */
     bool mShowingNonprinting;
     /** */
@@ -82,33 +77,35 @@ class OKTETAGUI_EXPORT CharByteArrayColumnRenderer : public AbstractByteArrayCol
     QChar mUndefinedChar;
 };
 
-
 inline bool CharByteArrayColumnRenderer::isShowingNonprinting()  const { return mShowingNonprinting; }
 inline QChar CharByteArrayColumnRenderer::substituteChar()       const { return mSubstituteChar; }
 inline QChar CharByteArrayColumnRenderer::undefinedChar()        const { return mUndefinedChar; }
 
-inline bool CharByteArrayColumnRenderer::setSubstituteChar( QChar substituteChar )
+inline bool CharByteArrayColumnRenderer::setSubstituteChar(QChar substituteChar)
 {
-    if( mSubstituteChar == substituteChar )
+    if (mSubstituteChar == substituteChar) {
         return false;
+    }
 
     mSubstituteChar = substituteChar;
     return true;
 }
 
-inline bool CharByteArrayColumnRenderer::setUndefinedChar( QChar undefinedChar )
+inline bool CharByteArrayColumnRenderer::setUndefinedChar(QChar undefinedChar)
 {
-    if( mUndefinedChar == undefinedChar )
+    if (mUndefinedChar == undefinedChar) {
         return false;
+    }
 
     mUndefinedChar = undefinedChar;
     return true;
 }
 
-inline bool CharByteArrayColumnRenderer::setShowingNonprinting( bool showingNonprinting )
+inline bool CharByteArrayColumnRenderer::setShowingNonprinting(bool showingNonprinting)
 {
-    if( mShowingNonprinting == showingNonprinting )
+    if (mShowingNonprinting == showingNonprinting) {
         return false;
+    }
 
     mShowingNonprinting = showingNonprinting;
     return true;

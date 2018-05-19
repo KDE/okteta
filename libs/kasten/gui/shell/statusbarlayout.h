@@ -29,47 +29,45 @@
 
 class QWidgetItem;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class StatusBarLayout : public QLayout
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit StatusBarLayout( QWidget* parent = nullptr );
+public:
+    explicit StatusBarLayout(QWidget* parent = nullptr);
     ~StatusBarLayout() override;
 
-  public:
-    void addWidget( QWidget* widget );
+public:
+    void addWidget(QWidget* widget);
 
-  public: // QLayout API
+public: // QLayout API
     int count() const override;
-    QLayoutItem* itemAt( int index ) const override;
-    int indexOf( QWidget* widget ) const override;
+    QLayoutItem* itemAt(int index) const override;
+    int indexOf(QWidget* widget) const override;
 
-    void addItem( QLayoutItem* item ) override;
-    QLayoutItem* takeAt( int index ) override;
+    void addItem(QLayoutItem* item) override;
+    QLayoutItem* takeAt(int index) override;
 
-  public: // QLayoutItem API
+public: // QLayoutItem API
     Qt::Orientations expandingDirections() const override;
     bool isEmpty() const override;
     QSize sizeHint() const override;
     QSize minimumSize () const override;
 
     void invalidate() override;
-    void setGeometry( const QRect& rect ) override;
+    void setGeometry(const QRect& rect) override;
 
-  protected:
+protected:
 //     void updateMarginAndSpacing();
     void updateLayoutStructs() const;
 
-  protected:
+protected:
     QList<QWidgetItem*> mWidgetList;
 
-    bool mIsDirty :1;
-    bool mIsEmpty :1;
+    bool mIsDirty : 1;
+    bool mIsEmpty : 1;
     QSize mSizeHint;
 };
 

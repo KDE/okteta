@@ -22,88 +22,86 @@
 
 #include "fill.h"
 
-// 
+//
 #include <abstractbytearraymodel.h>
 // Qt
 #include <QByteArray>
 
-
 using namespace Okteta;
 
-
 // fills the buffer with char from b to e
-void textureByteArrayModel( AbstractByteArrayModel *byteArrayModel,
-                            unsigned char b, unsigned char e,
-                            unsigned int From, int To )
+void textureByteArrayModel(AbstractByteArrayModel* byteArrayModel,
+                           unsigned char b, unsigned char e,
+                           unsigned int From, int To)
 {
     const Size size = byteArrayModel->size();
 
     // check
-    if( To == -1 || To >= size )
-      To = size-1;
-    if( b > e )
-      b = e;
+    if (To == -1 || To >= size) {
+        To = size - 1;
+    }
+    if (b > e) {
+        b = e;
+    }
 
     // do
     unsigned char c = b;
-    for( int i=From; i<=To; ++i )
-    {
-        byteArrayModel->setByte(i, c );
-        if( c == e )
+    for (int i = From; i <= To; ++i) {
+        byteArrayModel->setByte(i, c);
+        if (c == e) {
             c = b;
-        else
+        } else {
             c++;
+        }
     }
 }
 
-
-void textureByteArrayModel( AbstractByteArrayModel *byteArrayModel,
-                            unsigned char b, unsigned char e,
-                            const AddressRange& range )
+void textureByteArrayModel(AbstractByteArrayModel* byteArrayModel,
+                           unsigned char b, unsigned char e,
+                           const AddressRange& range)
 {
-    textureByteArrayModel( byteArrayModel, b, e, range.start(), range.end() );
+    textureByteArrayModel(byteArrayModel, b, e, range.start(), range.end());
 }
 
-
-void textureByteArray( QByteArray *byteArray,
-                       unsigned char b, unsigned char e,
-                       unsigned int From, int To )
+void textureByteArray(QByteArray* byteArray,
+                      unsigned char b, unsigned char e,
+                      unsigned int From, int To)
 {
     const int size = byteArray->size();
 
     // check
-    if( To == -1 || To >= size )
-      To = size-1;
-    if( b > e )
-      b = e;
+    if (To == -1 || To >= size) {
+        To = size - 1;
+    }
+    if (b > e) {
+        b = e;
+    }
 
     // do
     unsigned char c = b;
-    for( int i=From; i<=To; ++i )
-    {
+    for (int i = From; i <= To; ++i) {
         (*byteArray)[i] = c;
-        if( c == e )
+        if (c == e) {
             c = b;
-        else
+        } else {
             c++;
+        }
     }
 }
 
-
-void textureByteArray( QByteArray *byteArray,
-                       unsigned char b, unsigned char e,
-                       const AddressRange& range )
+void textureByteArray(QByteArray* byteArray,
+                      unsigned char b, unsigned char e,
+                      const AddressRange& range)
 {
-    textureByteArray( byteArray, b, e, range.start(), range.end() );
+    textureByteArray(byteArray, b, e, range.start(), range.end());
 }
 
 /*
-static void list( AbstractByteArrayModel *byteArrayModel, const char* Name )
+static void list(AbstractByteArrayModel* byteArrayModel, const char* Name)
 {
-  unsigned int size = byteArrayModel->size();
-  for( unsigned int i=0; i<size; ++i )
-  {
-    kdDebug() << Name<<":"<<i<<":"<<byteArrayModel->datum(i) << endl;
-  }
+   unsigned int size = byteArrayModel->size();
+   for (unsigned int i=0; i<size; ++i) {
+        kdDebug() << Name<<":"<<i<<":"<<byteArrayModel->datum(i) << endl;
+   }
 }
 */

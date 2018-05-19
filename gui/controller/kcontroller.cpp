@@ -22,18 +22,16 @@
 
 #include "kcontroller.h"
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-KController::KController( KController *parent )
-  : mParent( parent )
+KController::KController(KController* parent)
+    : mParent(parent)
 {
 }
 
-bool KController::handleKeyPress( QKeyEvent* keyEvent )
+bool KController::handleKeyPress(QKeyEvent* keyEvent)
 {
-    return mParent ? mParent->handleKeyPress( keyEvent ) : false;
+    return mParent ? mParent->handleKeyPress(keyEvent) : false;
 }
 
 KController::~KController() {}

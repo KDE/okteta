@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef STRINGDATA_H
 #define STRINGDATA_H
 
@@ -30,21 +29,23 @@
 class StringDataInformation;
 
 namespace Okteta {
-    class AbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 class StringData
 {
 private:
     Q_DISABLE_COPY(StringData)
+
 public:
-    enum TerminationMode {
+    enum TerminationMode
+    {
         None = 0x0,
-        Sequence = 0x1, //termination sequence (i.e. '\0')
-        CharCount = 0x2, //numer of unicode code points
-        ByteCount = 0x4, //maximum number of bytes
-        SeqOrCharCount = CharCount + Sequence, //whatever comes first
-        SeqOrByteCount = ByteCount + Sequence //whatever comes first
+        Sequence = 0x1, // termination sequence (i.e. '\0')
+        CharCount = 0x2, // numer of unicode code points
+        ByteCount = 0x4, // maximum number of bytes
+        SeqOrCharCount = CharCount + Sequence, // whatever comes first
+        SeqOrByteCount = ByteCount + Sequence // whatever comes first
     };
     Q_DECLARE_FLAGS(TerminationModes, TerminationMode)
 
@@ -78,6 +79,7 @@ public:
     static const uint UNICODE_MAX = 0x10ffff;
     static const uint BMP_MAX = 0xffff;
     static const char ASCII_MAX = 0x7f;
+
 protected:
     StringDataInformation* mParent;
     union {
@@ -92,7 +94,6 @@ protected:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(StringData::TerminationModes)
-
 
 inline uint StringData::terminationCodePoint() const
 {

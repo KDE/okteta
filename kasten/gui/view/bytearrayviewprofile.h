@@ -31,66 +31,64 @@
 class QChar;
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayViewProfilePrivate;
 
 class OKTETAKASTENGUI_EXPORT ByteArrayViewProfile
 {
-  public:
+public:
     using Id = QString;
 
-  public:
+public:
     explicit ByteArrayViewProfile();
-    ByteArrayViewProfile( const ByteArrayViewProfile& other );
+    ByteArrayViewProfile(const ByteArrayViewProfile& other);
 
     ~ByteArrayViewProfile();
 
-  public:
-    ByteArrayViewProfile& operator=( const ByteArrayViewProfile& other );
+public:
+    ByteArrayViewProfile& operator=(const ByteArrayViewProfile& other);
 
-  public:
-    void setId( const Id& id );
+public:
+    void setId(const Id& id);
     Id id() const;
 
-  public: // AbstractModel API
-    void setViewProfileTitle( const QString& title );
+public: // AbstractModel API
+    void setViewProfileTitle(const QString& title);
     QString viewProfileTitle() const;
 
-  public: // codings
-    void setOffsetCoding( int offsetCoding );
+public: // codings
+    void setOffsetCoding(int offsetCoding);
     int offsetCoding() const;
-    void setValueCoding( int valueCoding );
-    void setCharCoding( const QString& charCodingName );
+    void setValueCoding(int valueCoding);
+    void setCharCoding(const QString& charCodingName);
     int valueCoding() const;
     QString charCodingName() const;
-    void setShowsNonprinting( bool showsNonprinting );
+    void setShowsNonprinting(bool showsNonprinting);
     bool showsNonprinting() const;
-    void setSubstituteChar( const QChar& substituteChar );
-    void setUndefinedChar( const QChar& undefinedChar );
+    void setSubstituteChar(const QChar& substituteChar);
+    void setUndefinedChar(const QChar& undefinedChar);
     QChar substituteChar() const;
     QChar undefinedChar() const;
 
-  public: // elements
-    void setOffsetColumnVisible( bool visible );
-    void setVisibleByteArrayCodings( int columns );
+public: // elements
+    void setOffsetColumnVisible(bool visible);
+    void setVisibleByteArrayCodings(int columns);
     bool offsetColumnVisible() const;
     int visibleByteArrayCodings() const;
 
-  public: // table layout
-    void setLayoutStyle( int layoutStyle );
-    void setNoOfBytesPerLine( int noOfBytesPerLine );
-    void setNoOfGroupedBytes( int noOfGroupedBytes );
+public: // table layout
+    void setLayoutStyle(int layoutStyle);
+    void setNoOfBytesPerLine(int noOfBytesPerLine);
+    void setNoOfGroupedBytes(int noOfGroupedBytes);
     int noOfBytesPerLine() const;
     int layoutStyle() const;
     int noOfGroupedBytes() const;
 
-  public:
-    void setViewModus( int viewModus );
+public:
+    void setViewModus(int viewModus);
     int viewModus() const;
 
-  private:
+private:
     QSharedDataPointer<ByteArrayViewProfilePrivate> d;
 };
 

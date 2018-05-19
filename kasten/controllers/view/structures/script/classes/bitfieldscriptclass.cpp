@@ -25,7 +25,7 @@
 #include "../../parsers/parserutils.h"
 
 BitfieldScriptClass::BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-: PrimitiveScriptClass(engine, handlerInfo)
+    : PrimitiveScriptClass(engine, handlerInfo)
 {
     s_width = engine->toStringHandle(ParserStrings::PROPERTY_WIDTH());
     mIterableProperties.append(qMakePair(s_width, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
@@ -38,12 +38,9 @@ BitfieldScriptClass::~BitfieldScriptClass()
 QScriptValue BitfieldScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
     const AbstractBitfieldDataInformation* pData = data->asBitfield();
-    if (name == s_width)
-    {
+    if (name == s_width) {
         return pData->width();
-    }
-    else if (name == s_type)
-    {
+    } else if (name == s_type) {
         return pData->typeName();
     }
     return PrimitiveScriptClass::additionalProperty(data, name, id);
@@ -51,8 +48,7 @@ QScriptValue BitfieldScriptClass::additionalProperty(const DataInformation* data
 
 bool BitfieldScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
-    if (name == s_width)
-    {
+    if (name == s_width) {
         *flags = QScriptClass::HandlesReadAccess | QScriptClass::HandlesWriteAccess;
         return true;
     }
@@ -61,18 +57,15 @@ bool BitfieldScriptClass::queryAdditionalProperty(const DataInformation* data, c
 
 bool BitfieldScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value)
 {
-    if (name == s_width)
-    {
-        if (!value.isNumber())
-        {
+    if (name == s_width) {
+        if (!value.isNumber()) {
             engine()->currentContext()->throwError(QScriptContext::TypeError, QStringLiteral("bitfield.width must be an integer!"));
             return true;
         }
         BitCount32 width = value.toUInt32();
-        if (width <= 0 || width > 64)
-        {
+        if (width <= 0 || width > 64) {
             engine()->currentContext()->throwError(QScriptContext::RangeError,
-                    QStringLiteral("bitfield.width must be between 1 and 64! Given: %1").arg(width));
+                                                   QStringLiteral("bitfield.width must be between 1 and 64! Given: %1").arg(width));
             return true;
         }
         AbstractBitfieldDataInformation* pData = data->asBitfield();

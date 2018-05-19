@@ -31,138 +31,144 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 GotoOffsetTool::GotoOffsetTool()
-  : mTargetOffset( 0 ),
-    mIsRelative( false ),
-    mIsSelectionToExtent( false ),
-    mIsBackwards( false ),
-    mByteArrayView( nullptr ),
-    mByteArrayModel( nullptr )
+    : mTargetOffset(0)
+    , mIsRelative(false)
+    , mIsSelectionToExtent(false)
+    , mIsBackwards(false)
+    , mByteArrayView(nullptr)
+    , mByteArrayModel(nullptr)
 {
-    setObjectName( QStringLiteral( "GotoOffset" ) );
+    setObjectName(QStringLiteral("GotoOffset"));
 }
 
 int GotoOffsetTool::currentOffset() const
 {
     return mByteArrayView ?
-        mByteArrayView->startOffset() + mByteArrayView->cursorPosition() :
-        -1;
+           mByteArrayView->startOffset() + mByteArrayView->cursorPosition() :
+           -1;
 }
 
 bool GotoOffsetTool::isUsable() const
 {
-    return ( mByteArrayView && mByteArrayModel && (mByteArrayModel->size() > 0) );
+    return (mByteArrayView && mByteArrayModel && (mByteArrayModel->size() > 0));
 }
 
 bool GotoOffsetTool::isApplyable() const
 {
     const int newPosition = finalTargetOffset();
 
-    return ( mByteArrayView && mByteArrayModel
-             && (0 <= newPosition) && (newPosition <= mByteArrayModel->size()) );
+    return (mByteArrayView && mByteArrayModel
+            && (0 <= newPosition) && (newPosition <= mByteArrayModel->size()));
 }
 
 QString GotoOffsetTool::title() const { return i18nc("@title:window of the tool to set a new offset for the cursor", "Goto"); }
 
-void GotoOffsetTool::setTargetModel( AbstractModel* model )
+void GotoOffsetTool::setTargetModel(AbstractModel* model)
 {
     const bool oldIsUsable = isUsable();
     const bool oldIsApplyable = isApplyable();
 
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
-    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+    }
+    if (mByteArrayModel) {
+        mByteArrayModel->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
-    if( mByteArrayView && mByteArrayModel )
-    {
-        connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
-                 this, &GotoOffsetTool::onContentsChanged );
+    if (mByteArrayView && mByteArrayModel) {
+        connect(mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                this, &GotoOffsetTool::onContentsChanged);
         // TODO: update isApplyable on cursor movement and size changes
     }
 
     const bool newIsUsable = isUsable();
     const bool newIsApplyable = isApplyable();
-    if( oldIsUsable != newIsUsable )
-        emit isUsableChanged( newIsUsable );
-    if( oldIsApplyable != newIsApplyable )
-        emit isApplyableChanged( newIsApplyable );
+    if (oldIsUsable != newIsUsable) {
+        emit isUsableChanged(newIsUsable);
+    }
+    if (oldIsApplyable != newIsApplyable) {
+        emit isApplyableChanged(newIsApplyable);
+    }
 }
 
-void GotoOffsetTool::setTargetOffset( Okteta::Address targetOffset )
+void GotoOffsetTool::setTargetOffset(Okteta::Address targetOffset)
 {
     const bool oldIsApplyable = isApplyable();
 
     mTargetOffset = targetOffset;
 
     const bool newIsApplyable = isApplyable();
-    if( oldIsApplyable != newIsApplyable )
-        emit isApplyableChanged( newIsApplyable );
+    if (oldIsApplyable != newIsApplyable) {
+        emit isApplyableChanged(newIsApplyable);
+    }
 }
 
-void GotoOffsetTool::setIsRelative( bool isRelative )
+void GotoOffsetTool::setIsRelative(bool isRelative)
 {
     const bool oldIsApplyable = isApplyable();
 
     mIsRelative = isRelative;
 
     const bool newIsApplyable = isApplyable();
-    if( oldIsApplyable != newIsApplyable )
-        emit isApplyableChanged( newIsApplyable );
+    if (oldIsApplyable != newIsApplyable) {
+        emit isApplyableChanged(newIsApplyable);
+    }
 }
 
-void GotoOffsetTool::setIsSelectionToExtent( bool isSelectionToExtent )
+void GotoOffsetTool::setIsSelectionToExtent(bool isSelectionToExtent)
 {
     const bool oldIsApplyable = isApplyable();
 
     mIsSelectionToExtent = isSelectionToExtent;
 
     const bool newIsApplyable = isApplyable();
-    if( oldIsApplyable != newIsApplyable )
-        emit isApplyableChanged( newIsApplyable );
+    if (oldIsApplyable != newIsApplyable) {
+        emit isApplyableChanged(newIsApplyable);
+    }
 }
 
-void GotoOffsetTool::setIsBackwards( bool isBackwards )
+void GotoOffsetTool::setIsBackwards(bool isBackwards)
 {
     const bool oldIsApplyable = isApplyable();
 
     mIsBackwards = isBackwards;
 
     const bool newIsApplyable = isApplyable();
-    if( oldIsApplyable != newIsApplyable )
-        emit isApplyableChanged( newIsApplyable );
+    if (oldIsApplyable != newIsApplyable) {
+        emit isApplyableChanged(newIsApplyable);
+    }
 }
-
 
 void GotoOffsetTool::gotoOffset()
 {
     const int newPosition = finalTargetOffset();
 
-    if( mIsSelectionToExtent )
-        mByteArrayView->setSelectionCursorPosition( newPosition );
-    else
-        mByteArrayView->setCursorPosition( newPosition );
+    if (mIsSelectionToExtent) {
+        mByteArrayView->setSelectionCursorPosition(newPosition);
+    } else {
+        mByteArrayView->setCursorPosition(newPosition);
+    }
     mByteArrayView->setFocus();
 }
-
 
 int GotoOffsetTool::finalTargetOffset() const
 {
     const int newPosition =
-        (! mByteArrayView) ? -1 :
+        (!mByteArrayView) ? -1 :
         mIsRelative ?
-            ( mIsBackwards ? mByteArrayView->cursorPosition() - mTargetOffset :
-                             mByteArrayView->cursorPosition() + mTargetOffset ) :
-            ( mIsBackwards ? mByteArrayModel->size() - mTargetOffset :
-                             mTargetOffset );
+            (mIsBackwards ? mByteArrayView->cursorPosition() - mTargetOffset :
+                            mByteArrayView->cursorPosition() + mTargetOffset) :
+            (mIsBackwards ? mByteArrayModel->size() - mTargetOffset :
+                            mTargetOffset);
 
     return newPosition;
 }
@@ -170,7 +176,7 @@ int GotoOffsetTool::finalTargetOffset() const
 void GotoOffsetTool::onContentsChanged()
 {
     // TODO: find status before content changed, e.g. by caching
-    emit isUsableChanged( isUsable() );
+    emit isUsableChanged(isUsable());
 }
 
 GotoOffsetTool::~GotoOffsetTool()

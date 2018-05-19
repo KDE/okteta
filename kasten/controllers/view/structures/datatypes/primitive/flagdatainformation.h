@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef FLAGDATAINFORMATION_H
 #define FLAGDATAINFORMATION_H
 
@@ -29,9 +28,11 @@
 class FlagDataInformation : public EnumDataInformation
 {
     DATAINFORMATION_CLONE(FlagDataInformation, EnumDataInformation) {}
+
 public:
     FlagDataInformation(const QString& name, PrimitiveDataInformation* type, const EnumDefinition::Ptr& enumDef,
-            DataInformation* parent = nullptr);
+                        DataInformation* parent = nullptr);
+
 private:
     QString valueStringImpl() const override;
     QString typeNameImpl() const override;

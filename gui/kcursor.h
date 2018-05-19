@@ -23,39 +23,35 @@
 #ifndef OKTETA_KCURSOR_H
 #define OKTETA_KCURSOR_H
 
-
 // lib
 #include "kadds.h"
 // Qt
 #include <QPixmap>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 /**
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 class KCursor
 {
-  public:
+public:
     KCursor();
     virtual ~KCursor();
 
-  public:
+public:
     /** sets size of the full cursor */
-    void setSize( PixelX Width, PixelY Height );
+    void setSize(PixelX Width, PixelY Height);
     /** sets the shape of the cursor to be drawn */
-    void setShape( PixelX X, PixelX W );
+    void setShape(PixelX X, PixelX W);
 
-  public: // access
-    QPixmap &onPixmap();
-    QPixmap &offPixmap();
+public: // access
+    QPixmap& onPixmap();
+    QPixmap& offPixmap();
     PixelX cursorX() const;
     PixelX cursorW() const;
 
-
-  protected:
+protected:
     QPixmap OnPixmap;
     QPixmap OffPixmap;
 
@@ -63,9 +59,8 @@ class KCursor
     PixelX CursorW;
 };
 
-
-inline QPixmap &KCursor::onPixmap()  { return OnPixmap; }
-inline QPixmap &KCursor::offPixmap() { return OffPixmap; }
+inline QPixmap& KCursor::onPixmap()  { return OnPixmap; }
+inline QPixmap& KCursor::offPixmap() { return OffPixmap; }
 
 inline PixelX KCursor::cursorX() const { return CursorX; }
 inline PixelX KCursor::cursorW() const { return CursorW; }

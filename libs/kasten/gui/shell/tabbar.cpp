@@ -27,35 +27,33 @@
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 
+namespace Kasten {
 
-namespace Kasten
+TabBar::TabBar(QWidget* parent)
+    : QTabBar(parent)
 {
-
-TabBar::TabBar( QWidget* parent )
-  : QTabBar( parent )
-{
-    setAcceptDrops( true );
+    setAcceptDrops(true);
 }
 
-void TabBar::mouseReleaseEvent( QMouseEvent* event )
+void TabBar::mouseReleaseEvent(QMouseEvent* event)
 {
     if (tabsClosable()) {
         if (event->button() == Qt::MidButton) {
-            const int tabIndex = tabAt( event->pos() );
+            const int tabIndex = tabAt(event->pos());
             if (tabIndex != -1) {
-                emit tabCloseRequested( tabIndex );
+                emit tabCloseRequested(tabIndex);
             } else {
                 emit mouseMiddleClick();
             }
-            event->setAccepted( true );
+            event->setAccepted(true);
             return;
         }
     }
 
-    QTabBar::mouseReleaseEvent( event );
+    QTabBar::mouseReleaseEvent(event);
 }
 
-void TabBar::dragEnterEvent( QDragEnterEvent* event )
+void TabBar::dragEnterEvent(QDragEnterEvent* event)
 {
     // accept the entering in general, independent of being over a tab or not
     // as rejecting here seems not revertable in moveevents
@@ -67,7 +65,7 @@ void TabBar::dragEnterEvent( QDragEnterEvent* event )
     event->setAccepted(accept);
 }
 
-void TabBar::dragMoveEvent( QDragMoveEvent* event )
+void TabBar::dragMoveEvent(QDragMoveEvent* event)
 {
     bool accept = false;
     if (tabAt(event->pos()) == -1) {
@@ -79,14 +77,14 @@ void TabBar::dragMoveEvent( QDragMoveEvent* event )
     event->setAccepted(accept);
 }
 
-void TabBar::dropEvent( QDropEvent* event )
+void TabBar::dropEvent(QDropEvent* event)
 {
-   if (tabAt(event->pos()) == -1) {
+    if (tabAt(event->pos()) == -1) {
         emit receivedDropEvent(event);
         return;
     }
 
-    QTabBar::dropEvent( event );
+    QTabBar::dropEvent(event);
 }
 
 TabBar::~TabBar()

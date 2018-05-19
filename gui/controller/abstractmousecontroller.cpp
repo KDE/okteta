@@ -22,31 +22,29 @@
 
 #include "abstractmousecontroller.h"
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-AbstractMouseController::AbstractMouseController( AbstractByteArrayView* view, AbstractMouseController* parent )
-  : mParent( parent ),
-    mView( view )
+AbstractMouseController::AbstractMouseController(AbstractByteArrayView* view, AbstractMouseController* parent)
+    : mParent(parent)
+    , mView(view)
 {
 }
 
-bool AbstractMouseController::handleMousePressEvent( QMouseEvent* mouseEvent )
+bool AbstractMouseController::handleMousePressEvent(QMouseEvent* mouseEvent)
 {
-    return mParent ? mParent->handleMousePressEvent( mouseEvent ) : false;
+    return mParent ? mParent->handleMousePressEvent(mouseEvent) : false;
 }
-bool AbstractMouseController::handleMouseMoveEvent( QMouseEvent* mouseEvent )
+bool AbstractMouseController::handleMouseMoveEvent(QMouseEvent* mouseEvent)
 {
-    return mParent ? mParent->handleMouseMoveEvent( mouseEvent ) : false;
+    return mParent ? mParent->handleMouseMoveEvent(mouseEvent) : false;
 }
-bool AbstractMouseController::handleMouseReleaseEvent( QMouseEvent* mouseEvent )
+bool AbstractMouseController::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 {
-    return mParent ? mParent->handleMouseReleaseEvent( mouseEvent ) : false;
+    return mParent ? mParent->handleMouseReleaseEvent(mouseEvent) : false;
 }
-bool AbstractMouseController::handleMouseDoubleClickEvent( QMouseEvent* mouseEvent )
+bool AbstractMouseController::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
 {
-    return mParent ? mParent->handleMouseDoubleClickEvent( mouseEvent ) : false;
+    return mParent ? mParent->handleMouseDoubleClickEvent(mouseEvent) : false;
 }
 
 AbstractMouseController::~AbstractMouseController() {}

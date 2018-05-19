@@ -30,47 +30,43 @@
 #include <KActionCollection>
 #include <KSelectAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ViewModeController::ViewModeController( KXMLGUIClient* guiClient )
- : mByteArrayView( nullptr )
+ViewModeController::ViewModeController(KXMLGUIClient* guiClient)
+    : mByteArrayView(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     // view style
-    mViewModeAction = actionCollection->add<KSelectAction>( QStringLiteral("viewmode") );
-    mViewModeAction->setText( i18nc("@title:menu","&View Mode") );
+    mViewModeAction = actionCollection->add<KSelectAction>(QStringLiteral("viewmode"));
+    mViewModeAction->setText(i18nc("@title:menu", "&View Mode"));
     const QStringList list {
-        i18nc("@item:inmenu","&Columns"),
-        i18nc("@item:inmenu","&Rows"),
+        i18nc("@item:inmenu", "&Columns"),
+        i18nc("@item:inmenu", "&Rows"),
     };
-    mViewModeAction->setItems( list );
-    connect( mViewModeAction, QOverload<int>::of(&KSelectAction::triggered),
-             this, &ViewModeController::setViewMode );
+    mViewModeAction->setItems(list);
+    connect(mViewModeAction, QOverload<int>::of(&KSelectAction::triggered),
+            this, &ViewModeController::setViewMode);
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void ViewModeController::setTargetModel( AbstractModel* model )
+void ViewModeController::setTargetModel(AbstractModel* model)
 {
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
-    const bool hasView = ( mByteArrayView != nullptr );
-    if( hasView )
-    {
-        mViewModeAction->setCurrentItem( (int)mByteArrayView->viewModus() );
+    const bool hasView = (mByteArrayView != nullptr);
+    if (hasView) {
+        mViewModeAction->setCurrentItem((int)mByteArrayView->viewModus());
     }
-    mViewModeAction->setEnabled( hasView );
+    mViewModeAction->setEnabled(hasView);
 }
 
-
-void ViewModeController::setViewMode( int viewMode )
+void ViewModeController::setViewMode(int viewMode)
 {
-    mByteArrayView->setViewModus( viewMode );
+    mByteArrayView->setViewModus(viewMode);
 }
 
 }

@@ -28,9 +28,7 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ChecksumToolViewFactory::ChecksumToolViewFactory() {}
 
@@ -39,9 +37,9 @@ QString ChecksumToolViewFactory::title()       const { return i18nc("@title:wind
 QString ChecksumToolViewFactory:: id()      const { return QStringLiteral("org.kde.okteta.ChecksumToolView"); }
 SidePosition ChecksumToolViewFactory::defaultPosition() const { return BottomSidePosition; }
 
-AbstractToolView* ChecksumToolViewFactory::create( AbstractTool* tool )
+AbstractToolView* ChecksumToolViewFactory::create(AbstractTool* tool)
 {
-    return new ChecksumToolView( qobject_cast<ChecksumTool*>(tool) );
+    return new ChecksumToolView(qobject_cast<ChecksumTool*>(tool));
 }
 
 ChecksumToolViewFactory::~ChecksumToolViewFactory() {}

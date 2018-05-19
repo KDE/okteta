@@ -26,27 +26,24 @@
 #include "bytearraybase32streamencoderconfigeditor.h"
 #include "bytearraybase32streamencoder.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArrayBase32StreamEncoderConfigEditorFactory::ByteArrayBase32StreamEncoderConfigEditorFactory()
 {
 }
 
-
-AbstractModelStreamEncoderConfigEditor* ByteArrayBase32StreamEncoderConfigEditorFactory::tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const
+AbstractModelStreamEncoderConfigEditor* ByteArrayBase32StreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     AbstractModelStreamEncoderConfigEditor* result = nullptr;
     ByteArrayBase32StreamEncoder* base32StreamEncoder =
-        qobject_cast<ByteArrayBase32StreamEncoder*>( encoder );
+        qobject_cast<ByteArrayBase32StreamEncoder*>(encoder);
 
-    if( base32StreamEncoder )
-        result = new ByteArrayBase32StreamEncoderConfigEditor( base32StreamEncoder );
+    if (base32StreamEncoder) {
+        result = new ByteArrayBase32StreamEncoderConfigEditor(base32StreamEncoder);
+    }
 
     return result;
 }
-
 
 ByteArrayBase32StreamEncoderConfigEditorFactory::~ByteArrayBase32StreamEncoderConfigEditorFactory() {}
 

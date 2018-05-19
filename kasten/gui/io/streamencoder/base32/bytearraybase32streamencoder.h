@@ -30,56 +30,65 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class Base32StreamEncoderSettings
 {
-  public:
-    enum class AlgorithmId { Classic = 0, Hex = 1, ZHex = 2 };
+public:
+    enum class AlgorithmId
+    {
+        Classic = 0,
+        Hex = 1,
+        ZHex = 2
+    };
 
-  public:
+public:
     Base32StreamEncoderSettings();
-  public:
+
+public:
     AlgorithmId algorithmId;
 };
-
 
 class ByteArrayBase32StreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
+public:
     static const int inputGroupLength = 5;
 
     static const int outputLineLength = 76;
     static const int outputGroupLength = 8;
-    static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
+    static const int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
 
-    enum class InputByteIndex { First = 0, Second, Third, Fourth, Fifth };
+    enum class InputByteIndex
+    {
+        First = 0,
+        Second,
+        Third,
+        Fourth,
+        Fifth
+    };
 
-  public:
+public:
     ByteArrayBase32StreamEncoder();
     ~ByteArrayBase32StreamEncoder() override;
 
-  public:
+public:
     Base32StreamEncoderSettings settings() const;
-    void setSettings( const Base32StreamEncoderSettings& settings );
+    void setSettings(const Base32StreamEncoderSettings& settings);
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 
-  protected:
+protected:
     Base32StreamEncoderSettings mSettings;
 };
 
-
 inline Base32StreamEncoderSettings ByteArrayBase32StreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayBase32StreamEncoder::setSettings( const Base32StreamEncoderSettings& settings )
+inline void ByteArrayBase32StreamEncoder::setSettings(const Base32StreamEncoderSettings& settings)
 {
     mSettings = settings;
     emit settingsChanged();

@@ -25,19 +25,17 @@
 
 #include <kasten/kastengui.h>
 
-namespace Kasten
-{
+namespace Kasten {
 class AbstractToolView;
 class AbstractTool;
 
-
 class AbstractToolViewFactory
 {
-  public:
+public:
     virtual ~AbstractToolViewFactory();
 
-  public: // API to be implemented
-    virtual AbstractToolView* create( AbstractTool* tool ) = 0;
+public: // API to be implemented
+    virtual AbstractToolView* create(AbstractTool* tool) = 0;
 
     // TODO: find out of iconName an id can be QByteArray
     virtual QString iconName() const = 0;
@@ -45,7 +43,6 @@ class AbstractToolViewFactory
     virtual QString id() const = 0;
     virtual SidePosition defaultPosition() const = 0;
 };
-
 
 inline AbstractToolViewFactory::~AbstractToolViewFactory() {}
 

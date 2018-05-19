@@ -22,13 +22,11 @@
 
 #include "abstractmodelstreamencoderconfigeditor.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModelStreamEncoderConfigEditor::AbstractModelStreamEncoderConfigEditor( QWidget* parent )
-  : QWidget( parent ),
-    d( nullptr )
+AbstractModelStreamEncoderConfigEditor::AbstractModelStreamEncoderConfigEditor(QWidget* parent)
+    : QWidget(parent)
+    , d(nullptr)
 {}
 
 bool AbstractModelStreamEncoderConfigEditor::isValid() const

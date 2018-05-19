@@ -26,16 +26,16 @@
 
 #include "primitivedatainformation.h"
 
-
 class PointerDataInformation : public PrimitiveDataInformationWrapper
 {
     DATAINFORMATION_CLONE_DECL(PointerDataInformation, PrimitiveDataInformationWrapper);
+
 public:
     /** creates a new pointer
      *  takes ownership over @p childType and @p valueType
      */
     PointerDataInformation(const QString& name, DataInformation* childType,
-            PrimitiveDataInformation* valueType, DataInformation* parent);
+                           PrimitiveDataInformation* valueType, DataInformation* parent);
     ~PointerDataInformation() override;
 
     bool canHaveChildren() const override;
@@ -63,10 +63,12 @@ public:
      * @return true if type was set, false if not
      */
     bool setPointerType(DataInformation* type);
+
 private:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
     QString valueStringImpl() const override;
     QString typeNameImpl() const override;
+
 protected:
     QScopedPointer<DataInformation> mPointerTarget;
 };

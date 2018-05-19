@@ -26,28 +26,26 @@
 // Kasten core
 #include <kasten/abstractfilesystemloadjob.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayRawFileSynchronizer;
 class ByteArrayRawFileLoadThread;
 
 class ByteArrayRawFileLoadJob : public AbstractFileSystemLoadJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer* synchronizer, const QUrl& url );
+public:
+    ByteArrayRawFileLoadJob(ByteArrayRawFileSynchronizer* synchronizer, const QUrl& url);
     ~ByteArrayRawFileLoadJob() override;
 
-  protected: // AbstractFileSystemLoadJob API
+protected: // AbstractFileSystemLoadJob API
     void startLoadFromFile() override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
 //     void onDataPulled();
 
-  protected:
+protected:
     ByteArrayRawFileLoadThread* mLoadThread;
 };
 

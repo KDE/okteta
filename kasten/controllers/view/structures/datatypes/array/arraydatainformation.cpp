@@ -32,18 +32,16 @@
 #include "primitivearraydata.h"
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
-        DataInformation* parent, const QScriptValue& lengthFunction)
-        : DataInformationWithDummyChildren(name, parent)
+                                           DataInformation* parent, const QScriptValue& lengthFunction)
+    : DataInformationWithDummyChildren(name, parent)
 {
-    if (lengthFunction.isValid())
-    {
+    if (lengthFunction.isValid()) {
         Q_ASSERT(lengthFunction.isFunction());
         setLengthFunction(lengthFunction);
     }
-    if (length > MAX_LEN)
-    {
+    if (length > MAX_LEN) {
         logWarn() << length << "exceeds maximum length of" << MAX_LEN
-                << ". Setting it to" << MAX_LEN << "instead";
+                  << ". Setting it to" << MAX_LEN << "instead";
         length = MAX_LEN;
     }
     Q_CHECK_PTR(childType);
@@ -52,7 +50,8 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
-        : DataInformationWithDummyChildren(d), mData(nullptr)
+    : DataInformationWithDummyChildren(d)
+    , mData(nullptr)
 {
     uint length = d.mData->length();
     DataInformation* childType = d.mData.data()->childType();
@@ -65,10 +64,9 @@ ArrayDataInformation::~ArrayDataInformation()
 
 bool ArrayDataInformation::setArrayLength(uint newLength)
 {
-    if (newLength > MAX_LEN)
-    {
+    if (newLength > MAX_LEN) {
         logWarn() << QStringLiteral("new array length is too large (%1), limiting to (%2)")
-                .arg(QString::number(newLength), QString::number(MAX_LEN));
+            .arg(QString::number(newLength), QString::number(MAX_LEN));
         newLength = MAX_LEN;
     }
     uint oldLength = mData->length();
@@ -81,9 +79,8 @@ bool ArrayDataInformation::setArrayLength(uint newLength)
 void ArrayDataInformation::setArrayType(DataInformation* newChildType)
 {
     Q_CHECK_PTR(newChildType);
-    if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType())
-    {
-        //there is no need to change the type
+    if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType()) {
+        // there is no need to change the type
         logInfo() << "New and old child type are identical, skipping: " << mData->primitiveType();
         delete newChildType;
         return;
@@ -91,9 +88,8 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
     newChildType->setParent(this);
     uint len = mData->length();
     TopLevelDataInformation* topLevel = topLevelDataInformation();
-    if (len > 0)
-    {
-        //first create with length of 0, then change length to actual length (to ensure model is correct)
+    if (len > 0) {
+        // first create with length of 0, then change length to actual length (to ensure model is correct)
         topLevel->_childCountAboutToChange(this, len, 0);
         mData.reset(AbstractArrayData::newArrayData(0, newChildType, this));
         topLevel->_childCountChanged(this, len, 0);
@@ -101,12 +97,10 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
         topLevel->_childCountAboutToChange(this, 0, len);
         mData->setLength(len);
         topLevel->_childCountChanged(this, 0, len);
-    }
-    else
-    {
-        //no need to emit the signals, which cause expensive model update
+    } else {
+        // no need to emit the signals, which cause expensive model update
         mData.reset(AbstractArrayData::newArrayData(len, newChildType, this));
-        //only the type of the array changed -> emit that this has changed data
+        // only the type of the array changed -> emit that this has changed data
         topLevel->setChildDataChanged();
     }
 }
@@ -141,40 +135,39 @@ void ArrayDataInformation::setWidgetData(QWidget*) const
 
 BitCount64 ArrayDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
-    if (mParent->isTopLevel())
+    if (mParent->isTopLevel()) {
         return start * 8 + mData->offset(child);
-    else
+    } else {
         return mParent->asDataInformation()->childPosition(this, start) + mData->offset(child);
+    }
 }
 
 qint64 ArrayDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-        BitCount64 bitsRemaining, quint8* bitOffset)
+                                      BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    if (*bitOffset != 0)
-    {
-        //TODO remove this, it will probably cause issues
+    if (*bitOffset != 0) {
+        // TODO remove this, it will probably cause issues
         logWarn() << "bit offset != 0 (" << *bitOffset << "), adding padding,"
-                " arrays always start at full bytes";
-        bitsRemaining &= BitCount64(~7); //unset lower 3 bits to make it divisible by 8
+            " arrays always start at full bytes";
+        bitsRemaining &= BitCount64(~7); // unset lower 3 bits to make it divisible by 8
         address++;
     }
 
-    //update the length of the array
+    // update the length of the array
     topLevelDataInformation()->scriptHandler()->updateLength(this);
 
-    //FIXME do not add this padding
+    // FIXME do not add this padding
     qint64 ret = mData->readData(input, address, bitsRemaining);
-    mWasAbleToRead = ret >= 0; //if ret is -1 reading failed
+    mWasAbleToRead = ret >= 0; // if ret is -1 reading failed
     return ret;
 }
 
 bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-        Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
+                                        Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
-    if (bitOffset != 0)
-    {
+    if (bitOffset != 0) {
         logWarn() << "bit offset != 0 (" << bitOffset << "), adding padding,"
-                " arrays always start at full bytes";
+            " arrays always start at full bytes";
         bitsRemaining -= bitOffset;
         address++;
     }
@@ -182,7 +175,7 @@ bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta:
 }
 
 bool ArrayDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, BitCount64, quint8)
+                                   Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT_X(false, "ArrayDataInformation::setData()", "this should never be called");
     return false;
@@ -194,7 +187,7 @@ QScriptClass* ArrayDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) 
 }
 
 QScriptValue ArrayDataInformation::childToScriptValue(uint index, QScriptEngine* engine,
-        ScriptHandlerInfo* handlerInfo) const
+                                                      ScriptHandlerInfo* handlerInfo) const
 {
     return mData->toScriptValue(index, engine, handlerInfo);
 }
@@ -234,7 +227,7 @@ QString ArrayDataInformation::childTypeName(uint index) const
     return mData->dataAt(index, DataInformation::ColumnType, Qt::DisplayRole).toString();
 }
 
-int ArrayDataInformation::indexOf(const DataInformation*const data) const
+int ArrayDataInformation::indexOf(const DataInformation* const data) const
 {
     return mData->indexOf(data);
 }

@@ -25,9 +25,8 @@
 
 #include <QScopedPointer>
 
-
-StructureViewItemDelegate::StructureViewItemDelegate(QObject * parent) :
-    QStyledItemDelegate(parent)
+StructureViewItemDelegate::StructureViewItemDelegate(QObject* parent)
+    : QStyledItemDelegate(parent)
 {
 }
 
@@ -36,14 +35,16 @@ StructureViewItemDelegate::~StructureViewItemDelegate()
 }
 
 QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option,
-        const QModelIndex& index) const
+                                                 const QModelIndex& index) const
 {
     Q_UNUSED(option)
-    if (!index.isValid())
+    if (!index.isValid()) {
         return nullptr;
+    }
     DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel())
+    if (!dataB || dataB->isTopLevel()) {
         return nullptr;
+    }
     DataInformation* data = dataB->asDataInformation();
     QWidget* ret = data->createEditWidget(parent);
     ret->setFocusPolicy(Qt::WheelFocus);
@@ -51,13 +52,15 @@ QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOp
 }
 
 void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model,
-        const QModelIndex& index) const
+                                             const QModelIndex& index) const
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return;
+    }
     DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel())
+    if (!dataB || dataB->isTopLevel()) {
         return;
+    }
     DataInformation* data = dataB->asDataInformation();
     QVariant value = data->dataFromWidget(editor);
     model->setData(index, value, Qt::EditRole);
@@ -66,17 +69,19 @@ void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel
 void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 {
 
-    if (!index.isValid())
+    if (!index.isValid()) {
         return;
+    }
     DataInformationBase* dataB = static_cast<DataInformationBase*> (index.internalPointer());
-    if (!dataB || dataB->isTopLevel())
+    if (!dataB || dataB->isTopLevel()) {
         return;
+    }
     DataInformation* data = dataB->asDataInformation();
     data->setWidgetData(editor);
 }
 
 QSize StructureViewItemDelegate::sizeHint(const QStyleOptionViewItem& option,
-        const QModelIndex& index) const
+                                          const QModelIndex& index) const
 {
     return QStyledItemDelegate::sizeHint(option, index) + QSize(0, 8);
 }

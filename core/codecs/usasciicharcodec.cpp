@@ -27,32 +27,30 @@
 // Qt
 #include <QString>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-bool USASCIICharCodec::encode( Byte* byte, const QChar& _char ) const
+bool USASCIICharCodec::encode(Byte* byte, const QChar& _char) const
 {
     const int unicodeValue = _char.unicode();
     // not in range?
-    if( 0x007F < unicodeValue )
+    if (0x007F < unicodeValue) {
         return false;
+    }
 
     *byte = unicodeValue;
 
     return true;
 }
 
-Character USASCIICharCodec::decode( Byte byte ) const
+Character USASCIICharCodec::decode(Byte byte) const
 {
-    return Character( QChar(ushort( byte )), (byte > 0x007F) );
+    return Character(QChar(ushort(byte)), (byte > 0x007F));
 }
 
-bool USASCIICharCodec::canEncode( const QChar& _char ) const
+bool USASCIICharCodec::canEncode(const QChar& _char) const
 {
-    return ( _char.unicode() <= 0x007F );
+    return (_char.unicode() <= 0x007F);
 }
-
 
 const QString& USASCIICharCodec::name() const
 {
@@ -61,7 +59,7 @@ const QString& USASCIICharCodec::name() const
 
 const QString& USASCIICharCodec::codecName()
 {
-    static const QString name = QStringLiteral( "US-ASCII" );
+    static const QString name = QStringLiteral("US-ASCII");
     return name;
 }
 

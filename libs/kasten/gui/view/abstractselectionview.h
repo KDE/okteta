@@ -30,30 +30,28 @@
 
 class QWidget;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModel;
 class AbstractModelSelection;
 
-
 class KASTENGUI_EXPORT AbstractSelectionView : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
+protected:
     AbstractSelectionView();
-  public:
+
+public:
     ~AbstractSelectionView() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual QWidget* widget() const = 0;
-    virtual void setData( AbstractModel* model, const AbstractModelSelection* selection ) = 0;
+    virtual void setData(AbstractModel* model, const AbstractModelSelection* selection) = 0;
 
-  protected:
+protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 }

@@ -31,8 +31,7 @@
 #include "datainformationbase.h"
 #include "../script/scripthandler.h"
 
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayModel;
 } // namespace Okteta
 
@@ -43,10 +42,12 @@ class ScriptHandler;
 class DataInformation;
 class PointerDataInformation;
 
-class TopLevelDataInformation : public QObject, public DataInformationBase
+class TopLevelDataInformation : public QObject
+                              , public DataInformationBase
 {
     Q_DISABLE_COPY(TopLevelDataInformation)
     Q_OBJECT
+
 public:
     /** create a new TopLevelDataInformation wrapping @p data
      *  @param data the object to wrap (takes ownership). If data is dummy then this object is invalid
@@ -55,7 +56,7 @@ public:
      *  @param structureFile the file which this was loaded from
      */
     explicit TopLevelDataInformation(DataInformation* data, ScriptLogger* logger = nullptr,
-            QScriptEngine* engine = nullptr, const QFileInfo& structureFile = QFileInfo());
+                                     QScriptEngine* engine = nullptr, const QFileInfo& structureFile = QFileInfo());
     ~TopLevelDataInformation() override;
 
     using Ptr = QSharedPointer<TopLevelDataInformation>;
@@ -74,7 +75,7 @@ public:
      * @param forceRead whether to always read data, ignoring the change list
      */
     void read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            const Okteta::ArrayChangeMetricsList& changesList, bool forceRead);
+              const Okteta::ArrayChangeMetricsList& changesList, bool forceRead);
     QScriptEngine* scriptEngine() const;
 
     DataInformation* actualDataInformation() const;
@@ -96,7 +97,7 @@ public:
 
     bool isTopLevel() const override;
 
-    //only public so that DataInformation and subclasses can call them (TODO move)
+    // only public so that DataInformation and subclasses can call them (TODO move)
     void _childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount);
     void _childCountChanged(DataInformation* sender, uint oldCount, uint newCount);
 
@@ -107,6 +108,7 @@ private:
 public Q_SLOTS:
     void resetValidationState();
     void newModelActivated(Okteta::AbstractByteArrayModel* model);
+
 private Q_SLOTS:
     void removeByteArrayModelFromList(QObject* model);
 Q_SIGNALS:
@@ -131,14 +133,14 @@ private:
      */
     QHash<const Okteta::AbstractByteArrayModel*, quint64> mLockedPositions;
     int mIndex;
-    bool mValid :1;
-    bool mChildDataChanged :1;
+    bool mValid : 1;
+    bool mChildDataChanged : 1;
     quint64 mDefaultLockOffset;
     quint64 mLastReadOffset;
     Okteta::AbstractByteArrayModel* mLastModel;
     QQueue<PointerDataInformation*> mDelayedRead;
 
-    friend class LockToOffsetTest; //needs to call isReadingNecessary()
+    friend class LockToOffsetTest; // needs to call isReadingNecessary()
 };
 
 inline DataInformation* TopLevelDataInformation::actualDataInformation() const
@@ -178,18 +180,20 @@ inline ScriptHandler* TopLevelDataInformation::scriptHandler() const
 
 inline void TopLevelDataInformation::_childCountAboutToChange(DataInformation* sender, uint oldCount, uint newCount)
 {
-    if (newCount < oldCount)  //newCount is smaller so oldCount is at least 1 -> no underflow
+    if (newCount < oldCount) { // newCount is smaller so oldCount is at least 1 -> no underflow
         emit childrenAboutToBeRemoved(sender, newCount, oldCount - 1);
-    else if (newCount > oldCount) //newCount is larger so it is at least 1 -> no underflow
+    } else if (newCount > oldCount) { // newCount is larger so it is at least 1 -> no underflow
         emit childrenAboutToBeInserted(sender, oldCount, newCount - 1);
+    }
 }
 
 inline void TopLevelDataInformation::_childCountChanged(DataInformation* sender, uint oldCount, uint newCount)
 {
-    if (newCount < oldCount)  //newCount is smaller so oldCount is at least 1 -> no underflow
+    if (newCount < oldCount) { // newCount is smaller so oldCount is at least 1 -> no underflow
         emit childrenRemoved(sender, newCount, oldCount - 1);
-    else if (newCount > oldCount) //newCount is larger so it is at least 1 -> no underflow
+    } else if (newCount > oldCount) { // newCount is larger so it is at least 1 -> no underflow
         emit childrenInserted(sender, oldCount, newCount - 1);
+    }
 }
 
 #endif /* TOPLEVELDATAINFORMATION_H_ */

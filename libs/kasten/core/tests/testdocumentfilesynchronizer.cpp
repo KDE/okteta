@@ -32,12 +32,11 @@
 // Qt
 #include <QUrl>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TestDocumentFileSynchronizer::TestDocumentFileSynchronizer( const QByteArray& header )
- :  mDocument(nullptr), mHeader( header )
+TestDocumentFileSynchronizer::TestDocumentFileSynchronizer(const QByteArray& header)
+    : mDocument(nullptr)
+    , mHeader(header)
 {
     // TODO: where to catch this? who decides about this?
 //     mDocument->setTitle( url.fileName() );
@@ -50,31 +49,30 @@ LocalSyncState TestDocumentFileSynchronizer::localSyncState() const
         ((mDocument->contentFlags() & ContentHasUnstoredChanges) ? LocalHasChanges : LocalInSync) : LocalInSync;
 }
 
-
-AbstractLoadJob* TestDocumentFileSynchronizer::startLoad( const QUrl& url )
+AbstractLoadJob* TestDocumentFileSynchronizer::startLoad(const QUrl& url)
 {
-    return new TestDocumentFileLoadJob( this, url );
+    return new TestDocumentFileLoadJob(this, url);
 }
 
 AbstractSyncToRemoteJob* TestDocumentFileSynchronizer::startSyncToRemote()
 {
-    return new TestDocumentFileWriteJob( this );
+    return new TestDocumentFileWriteJob(this);
 }
 
 AbstractSyncFromRemoteJob* TestDocumentFileSynchronizer::startSyncFromRemote()
 {
-    return new TestDocumentFileReloadJob( this );
+    return new TestDocumentFileReloadJob(this);
 }
 
-AbstractSyncWithRemoteJob* TestDocumentFileSynchronizer::startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob* TestDocumentFileSynchronizer::startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
 {
-    return new TestDocumentFileWriteToJob( this, url, option );
+    return new TestDocumentFileWriteToJob(this, url, option);
 }
 
-AbstractConnectJob* TestDocumentFileSynchronizer::startConnect( AbstractDocument* document,
-                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
+AbstractConnectJob* TestDocumentFileSynchronizer::startConnect(AbstractDocument* document,
+                                                               const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
 {
-    return new TestDocumentFileConnectJob( this, document, url, option );
+    return new TestDocumentFileConnectJob(this, document, url, option);
 }
 
 }

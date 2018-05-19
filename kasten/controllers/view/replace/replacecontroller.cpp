@@ -35,91 +35,93 @@
 // Qt
 #include <QAction>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-ReplaceController::ReplaceController( KXMLGUIClient* guiClient, QWidget* parentWidget )
-  : mParentWidget( parentWidget ),
-    mReplaceDialog( nullptr ),
-    mReplacePrompt( nullptr )
+ReplaceController::ReplaceController(KXMLGUIClient* guiClient, QWidget* parentWidget)
+    : mParentWidget(parentWidget)
+    , mReplaceDialog(nullptr)
+    , mReplacePrompt(nullptr)
 {
     KActionCollection* ActionCollection = guiClient->actionCollection();
 
-    mReplaceAction = KStandardAction::replace( this, SLOT(replace()), ActionCollection );
+    mReplaceAction = KStandardAction::replace(this, SLOT(replace()), ActionCollection);
 
     mTool = new ReplaceTool();
-    mTool->setUserQueryAgent( this );
+    mTool->setUserQueryAgent(this);
 
-    connect( mTool, &ReplaceTool::isApplyableChanged,
-             mReplaceAction, &QAction::setEnabled );
+    connect(mTool, &ReplaceTool::isApplyableChanged,
+            mReplaceAction, &QAction::setEnabled);
 
-    connect( mTool, &ReplaceTool::finished, this, &ReplaceController::onFinished );
+    connect(mTool, &ReplaceTool::finished, this, &ReplaceController::onFinished);
 
-    mReplaceAction->setEnabled( false );
+    mReplaceAction->setEnabled(false);
 }
 
-void ReplaceController::setTargetModel( AbstractModel* model )
+void ReplaceController::setTargetModel(AbstractModel* model)
 {
-    mTool->setTargetModel( model );
+    mTool->setTargetModel(model);
 }
 
 void ReplaceController::replace()
 {
     // ensure dialog
-    if( !mReplaceDialog )
-        mReplaceDialog = new KReplaceDialog( mTool, mParentWidget );
+    if (!mReplaceDialog) {
+        mReplaceDialog = new KReplaceDialog(mTool, mParentWidget);
+    }
 
     mReplaceDialog->show();
 }
 
-
-void ReplaceController::onFinished( bool previousFound, int noOfReplacements )
+void ReplaceController::onFinished(bool previousFound, int noOfReplacements)
 {
-    if( mReplacePrompt )
+    if (mReplacePrompt) {
         mReplacePrompt->hide();
+    }
 
-    const QString messageBoxTitle = i18nc( "@title:window", "Replace" );
-    const QString replacementReport = (noOfReplacements==0) ?
-            i18nc( "@info", "No replacements made.") :
-            i18ncp( "@info", "1 replacement made.", "%1 replacements made.", noOfReplacements );
+    const QString messageBoxTitle = i18nc("@title:window", "Replace");
+    const QString replacementReport = (noOfReplacements == 0) ?
+                                      i18nc("@info", "No replacements made.") :
+                                      i18ncp("@info", "1 replacement made.", "%1 replacements made.", noOfReplacements);
 
-    if( ! previousFound )
-        KMessageBox::sorry( mParentWidget, i18nc("@info","Replace pattern not found in byte array."), messageBoxTitle );
-    else
-        KMessageBox::information( mParentWidget, replacementReport, messageBoxTitle );
+    if (!previousFound) {
+        KMessageBox::sorry(mParentWidget, i18nc("@info", "Replace pattern not found in byte array."), messageBoxTitle);
+    } else {
+        KMessageBox::information(mParentWidget, replacementReport, messageBoxTitle);
+    }
 }
 
-bool ReplaceController::queryContinue( KFindDirection direction, int noOfReplacements ) const
+bool ReplaceController::queryContinue(KFindDirection direction, int noOfReplacements) const
 {
-    const QString messageBoxTitle = i18nc( "@title:window", "Replace" );
-    const QString replacementReport = (noOfReplacements==0) ?
-            i18nc( "@info", "No replacements made.") :
-            i18ncp( "@info", "1 replacement made.", "%1 replacements made.", noOfReplacements );
-    const QString question = ( direction == FindForward ) ?
-        xi18nc( "@info", "End of byte array reached.<nl/>Continue from the beginning?" ) :
-        xi18nc( "@info", "Beginning of byte array reached.<nl/>Continue from the end?" );
+    const QString messageBoxTitle = i18nc("@title:window", "Replace");
+    const QString replacementReport = (noOfReplacements == 0) ?
+                                      i18nc("@info", "No replacements made.") :
+                                      i18ncp("@info", "1 replacement made.", "%1 replacements made.", noOfReplacements);
+    const QString question = (direction == FindForward) ?
+                             xi18nc("@info", "End of byte array reached.<nl/>Continue from the beginning?") :
+                             xi18nc("@info", "Beginning of byte array reached.<nl/>Continue from the end?");
 
     const QString message = replacementReport + QLatin1String("<br /><br />") + question;
-    const int answer = KMessageBox::questionYesNo( mParentWidget, message, messageBoxTitle,
-                                                   KStandardGuiItem::cont(), KStandardGuiItem::cancel() );
+    const int answer = KMessageBox::questionYesNo(mParentWidget, message, messageBoxTitle,
+                                                  KStandardGuiItem::cont(), KStandardGuiItem::cancel());
 
-    const bool result = ( answer != KMessageBox::No );
+    const bool result = (answer != KMessageBox::No);
 
     return result;
 }
 
 ReplaceBehaviour ReplaceController::queryReplaceCurrent() const
 {
-    if( !mReplacePrompt )
-        mReplacePrompt = new KReplacePrompt( mParentWidget );
+    if (!mReplacePrompt) {
+        mReplacePrompt = new KReplacePrompt(mParentWidget);
+    }
 
     mReplacePrompt->show();
     const ReplaceBehaviour answer = mReplacePrompt->query();
 
-    if( answer == ReplaceAll || answer == CancelReplacing )
+    if (answer == ReplaceAll || answer == CancelReplacing) {
         mReplacePrompt->hide();
+    }
 
     return answer;
 }

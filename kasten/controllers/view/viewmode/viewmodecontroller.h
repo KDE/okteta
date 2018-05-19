@@ -31,27 +31,24 @@
 class KXMLGUIClient;
 class KSelectAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT ViewModeController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ViewModeController( KXMLGUIClient* guiClient );
+public:
+    explicit ViewModeController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
-    void setViewMode( int viewMode );
+private Q_SLOTS: // action slots
+    void setViewMode(int viewMode);
 
-  private:
+private:
     ByteArrayView* mByteArrayView;
 
     KSelectAction* mViewModeAction;

@@ -27,12 +27,10 @@
 #include <addressrange.h>
 #include <byte.h>
 
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 class QByteArray;
-
 
 // some defines
 static const Okteta::Byte FirstMarkChar = 2;
@@ -40,20 +38,20 @@ static const Okteta::Byte SecondMarkChar = 3;
 static const Okteta::Byte PaintChar = 1;
 static const Okteta::Byte BlankChar = '\0';
 
-void textureByteArrayModel( Okteta::AbstractByteArrayModel *ByteArrayModel,
-                            unsigned char b = 1, unsigned char e = 255,
-                            unsigned int From = 0, int To = -1 );
+void textureByteArrayModel(Okteta::AbstractByteArrayModel* ByteArrayModel,
+                           unsigned char b = 1, unsigned char e = 255,
+                           unsigned int From = 0, int To = -1);
 
-void textureByteArrayModel( Okteta::AbstractByteArrayModel *byteArrayModel,
-                            unsigned char b, unsigned char e,
-                            const Okteta::AddressRange& range );
+void textureByteArrayModel(Okteta::AbstractByteArrayModel* byteArrayModel,
+                           unsigned char b, unsigned char e,
+                           const Okteta::AddressRange& range);
 
-void textureByteArray( QByteArray *byteArray,
-                       unsigned char b = 1, unsigned char e = 255,
-                       unsigned int From = 0, int To = -1 );
+void textureByteArray(QByteArray* byteArray,
+                      unsigned char b = 1, unsigned char e = 255,
+                      unsigned int From = 0, int To = -1);
 
-void textureByteArray( QByteArray *byteArray,
-                       unsigned char b, unsigned char e,
-                       const Okteta::AddressRange& range );
+void textureByteArray(QByteArray* byteArray,
+                      unsigned char b, unsigned char e,
+                      const Okteta::AddressRange& range);
 
 #endif

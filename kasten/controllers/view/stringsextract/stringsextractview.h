@@ -35,56 +35,52 @@ class QSortFilterProxyModel;
 class QModelIndex;
 class QSpinBox;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class StringsExtractTool;
 
-
 class StringsExtractView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit StringsExtractView( StringsExtractTool *tool, QWidget* parent = nullptr );
+public:
+    explicit StringsExtractView(StringsExtractTool* tool, QWidget* parent = nullptr);
     ~StringsExtractView() override;
 
-  public:
-    StringsExtractTool *tool() const;
+public:
+    StringsExtractTool* tool() const;
 
-  public: // QObject API
-    bool eventFilter( QObject* object, QEvent* event ) override;
+public: // QObject API
+    bool eventFilter(QObject* object, QEvent* event) override;
 
-  private Q_SLOTS: // gui
-    void onStringDoubleClicked( const QModelIndex &index );
+private Q_SLOTS: // gui
+    void onStringDoubleClicked(const QModelIndex& index);
     void onStringSelectionChanged();
     void onGotoButtonClicked();
     void onCopyButtonClicked();
 
-  private Q_SLOTS: // tool
-    void onStringsUptodateChanged( bool stringUptodate );
-    void onApplyableChanged( bool isApplyable );
-    void onCanHighlightStringChanged( bool isSelectable );
+private Q_SLOTS: // tool
+    void onStringsUptodateChanged(bool stringUptodate);
+    void onApplyableChanged(bool isApplyable);
+    void onCanHighlightStringChanged(bool isSelectable);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void setFixedFontByGlobalSettings();
 
-  private:
-    StringsExtractTool *mTool;
+private:
+    StringsExtractTool* mTool;
 
-    ContainedStringTableModel *mContainedStringTableModel;
-    QSortFilterProxyModel *mSortFilterProxyModel;
+    ContainedStringTableModel* mContainedStringTableModel;
+    QSortFilterProxyModel* mSortFilterProxyModel;
 
-    QTreeView *mContainedStringTableView;
-    QSpinBox *mMinLengthSpinBox;
-    QPushButton *mUpdateButton;
-    QPushButton *mCopyButton;
-    QPushButton *mGotoButton;
+    QTreeView* mContainedStringTableView;
+    QSpinBox* mMinLengthSpinBox;
+    QPushButton* mUpdateButton;
+    QPushButton* mCopyButton;
+    QPushButton* mGotoButton;
 };
 
-
-inline StringsExtractTool *StringsExtractView::tool() const { return mTool; }
+inline StringsExtractTool* StringsExtractView::tool() const { return mTool; }
 
 }
 

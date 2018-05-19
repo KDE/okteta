@@ -26,41 +26,38 @@
 #include <QPushButton>
 #include <QShortcut>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractToolWidgetPrivate::AbstractToolWidgetPrivate( AbstractToolWidget* parent )
-  : p( parent ),
-    mDefaultButton( nullptr )
+AbstractToolWidgetPrivate::AbstractToolWidgetPrivate(AbstractToolWidget* parent)
+    : p(parent)
+    , mDefaultButton(nullptr)
 
 {
-    mReturnShortcut = new QShortcut( Qt::Key_Return, p ); //TODO: what about Enter?
-    mReturnShortcut->setContext( Qt::WidgetWithChildrenShortcut );
-    QObject::connect( mReturnShortcut, &QShortcut::activated,
-                      p, [&]() { onReturnPressed(); } );
+    mReturnShortcut = new QShortcut(Qt::Key_Return, p);   // TODO: what about Enter?
+    mReturnShortcut->setContext(Qt::WidgetWithChildrenShortcut);
+    QObject::connect(mReturnShortcut, &QShortcut::activated,
+                     p, [&]() { onReturnPressed(); });
 }
 
-
-void AbstractToolWidgetPrivate::addButton( QPushButton* button, AbstractToolWidget::DefaultType defaultType )
+void AbstractToolWidgetPrivate::addButton(QPushButton* button, AbstractToolWidget::DefaultType defaultType)
 {
-    button->setAutoDefault( true );
-    if( defaultType == AbstractToolWidget::Default )
-    {
-        if( mDefaultButton )
-            mDefaultButton->setDefault( false );
+    button->setAutoDefault(true);
+    if (defaultType == AbstractToolWidget::Default) {
+        if (mDefaultButton) {
+            mDefaultButton->setDefault(false);
+        }
 
         // TODO: catch button deletion
         mDefaultButton = button;
-        button->setDefault( true );
+        button->setDefault(true);
     }
 }
 
-
 void AbstractToolWidgetPrivate::onReturnPressed()
 {
-    if( mDefaultButton )
+    if (mDefaultButton) {
         mDefaultButton->click();
+    }
 }
 
 }

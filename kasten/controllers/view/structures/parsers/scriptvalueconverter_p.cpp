@@ -33,125 +33,109 @@
 
 using namespace ParserStrings;
 
-namespace ScriptValueConverter
-{
+namespace ScriptValueConverter {
 
 DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& oldInfo)
 {
-    if (!value.isValid())
-    {
+    if (!value.isValid()) {
         oldInfo.error() << "invalid value passed!";
         return nullptr;
     }
     ParserInfo info(oldInfo);
     QString nameOverride = value.property(PROPERTY_NAME()).toString();
-    if (!nameOverride.isEmpty())
+    if (!nameOverride.isEmpty()) {
         info.name = nameOverride;
+    }
 
-    //check function array and date, since they are objects too
-    if (value.isRegExp())
-    {
-        //apparently regexp is a function
+    // check function array and date, since they are objects too
+    if (value.isRegExp()) {
+        // apparently regexp is a function
         info.error() << "Cannot convert a RegExp object to DataInformation!";
         return nullptr;
     }
-    if (value.isFunction())
-    {
+    if (value.isFunction()) {
         info.error() << "Cannot convert a Function object to DataInformation!";
         return nullptr;
     }
-    if (value.isArray())
-    {
+    if (value.isArray()) {
         info.error() << "Cannot convert a Array object to DataInformation!";
         return nullptr;
     }
-    if (value.isDate())
-    {
+    if (value.isDate()) {
         info.error() << "Cannot convert a Date object to DataInformation!";
         return nullptr;
     }
-    if (value.isError())
-    {
+    if (value.isError()) {
         info.error() << "Cannot convert a Error object to DataInformation!";
         return nullptr;
     }
-    //variant and qobject are also object types, however they cannot appear from user code, no need to check
+    // variant and qobject are also object types, however they cannot appear from user code, no need to check
 
-    //if it is a string, we convert to primitive type, if not it has to be an object
-    if (value.isString())
-        return toPrimitive(value, info); //a type string is also okay
+    // if it is a string, we convert to primitive type, if not it has to be an object
+    if (value.isString()) {
+        return toPrimitive(value, info); // a type string is also okay
 
-    if (!value.isObject())
-    {
-        if (value.isBool())
+    }
+    if (!value.isObject()) {
+        if (value.isBool()) {
             info.error() << "Cannot convert Boolean to DataInformation!";
-        else if (value.isNull())
+        } else if (value.isNull()) {
             info.error() << "Cannot convert null to DataInformation!";
-        else if (value.isUndefined())
+        } else if (value.isUndefined()) {
             info.error() << "Cannot convert undefined to DataInformation!";
-        else if (value.isNumber())
+        } else if (value.isNumber()) {
             info.error() << "Cannot convert Number to DataInformation!";
-        else
+        } else {
             info.error() << "Cannot convert object of unknown type to DataInformation!";
+        }
 
-        return nullptr; //no point trying to convert
+        return nullptr; // no point trying to convert
     }
 
     QString type = value.property(PROPERTY_INTERNAL_TYPE()).toString();
-    if (type.isEmpty())
-    {
+    if (type.isEmpty()) {
         info.error() << "Cannot convert object since type of object could not be determined!";
         return nullptr;
     }
     DataInformation* returnVal = nullptr;
 
-    if (type == TYPE_ARRAY())
+    if (type == TYPE_ARRAY()) {
         returnVal = toArray(value, info);
-
-    else if (type == TYPE_STRUCT())
+    } else if (type == TYPE_STRUCT()) {
         returnVal = toStruct(value, info);
-
-    else if (type == TYPE_UNION())
+    } else if (type == TYPE_UNION()) {
         returnVal = toUnion(value, info);
-
-    else if (type == TYPE_BITFIELD())
+    } else if (type == TYPE_BITFIELD()) {
         returnVal = toBitfield(value, info);
-
-    else if (type == TYPE_ENUM())
+    } else if (type == TYPE_ENUM()) {
         returnVal = toEnum(value, false, info);
-
-    else if (type == TYPE_FLAGS())
+    } else if (type == TYPE_FLAGS()) {
         returnVal = toEnum(value, true, info);
-
-    else if (type == TYPE_STRING())
+    } else if (type == TYPE_STRING()) {
         returnVal = toString(value, info);
-
-    else if (type == TYPE_POINTER())
+    } else if (type == TYPE_POINTER()) {
         returnVal = toPointer(value, info);
-
-    else if (type == TYPE_TAGGED_UNION())
+    } else if (type == TYPE_TAGGED_UNION()) {
         returnVal = toTaggedUnion(value, info);
-
-    else if (type == TYPE_PRIMITIVE())
+    } else if (type == TYPE_PRIMITIVE()) {
         returnVal = toPrimitive(value, info);
-
-    else
+    } else {
         info.error() << "Unknown type:" << type;
+    }
 
-    if (returnVal)
-    {
+    if (returnVal) {
         CommonParsedData cpd(info);
         QString byteOrderStr = value.property(PROPERTY_BYTEORDER()).toString();
-        if (!byteOrderStr.isEmpty())
+        if (!byteOrderStr.isEmpty()) {
             cpd.endianess = ParserUtils::byteOrderFromString(byteOrderStr,
-                    LoggerWithContext(info.logger, info.context()));
+                                                             LoggerWithContext(info.logger, info.context()));
+        }
         cpd.updateFunc = value.property(PROPERTY_UPDATE_FUNC());
         cpd.validationFunc = value.property(PROPERTY_VALIDATION_FUNC());
         cpd.toStringFunc = value.property(PROPERTY_TO_STRING_FUNC());
         cpd.customTypeName = value.property(PROPERTY_CUSTOM_TYPE_NAME()).toString();
-        if (!DataInformationFactory::commonInitialization(returnVal, cpd))
-        {
-            delete returnVal; //error message has already been logged
+        if (!DataInformationFactory::commonInitialization(returnVal, cpd)) {
+            delete returnVal; // error message has already been logged
             return nullptr;
         }
     }
@@ -197,7 +181,8 @@ UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
     supd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN())));
-    return DataInformationFactory::newUnion(supd);}
+    return DataInformationFactory::newUnion(supd);
+}
 
 PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info)
 {
@@ -218,18 +203,20 @@ EnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserI
 {
     EnumParsedData epd(info);
     QScriptValue enumType = value.property(PROPERTY_TYPE());
-    if (enumType.isString())
+    if (enumType.isString()) {
         epd.type = enumType.toString();
-    else if (enumType.isObject())
+    } else if (enumType.isObject()) {
         epd.type = enumType.property(PROPERTY_TYPE()).toString();
-    //else it stays empty
+    }
+    // else it stays empty
     epd.enumName = value.property(PROPERTY_ENUM_NAME()).toString();
     epd.enumValuesObject = value.property(PROPERTY_ENUM_VALUES());
 
-    if (flags)
+    if (flags) {
         return DataInformationFactory::newFlags(epd);
-    else
+    } else {
         return DataInformationFactory::newEnum(epd);
+    }
 
 }
 
@@ -247,32 +234,34 @@ TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const Parse
 {
     TaggedUnionParsedData tpd(info);
     QScriptValue alternatives = value.property(PROPERTY_ALTERNATIVES());
-    if (!alternatives.isArray())
-    {
+    if (!alternatives.isArray()) {
         info.error() << "Alternatives must be an array!";
         return nullptr;
     }
     int length = alternatives.property(PROPERTY_LENGTH()).toInt32();
     tpd.alternatives.reserve(length);
-    for (int i = 0; i < length; ++i)
-    {
+    for (int i = 0; i < length; ++i) {
         TaggedUnionParsedData::Alternatives alt;
         QScriptValue current = alternatives.property(i);
         alt.name = current.property(PROPERTY_STRUCT_NAME()).toString();
         alt.selectIf = current.property(PROPERTY_SELECT_IF());
         alt.fields = QSharedPointer<ChildrenParser>(
-                new ScriptValueChildrenParser(info, current.property(PROPERTY_CHILDREN())));
+            new ScriptValueChildrenParser(info, current.property(PROPERTY_CHILDREN())));
         tpd.alternatives.append(alt);
     }
+
     tpd.children.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_CHILDREN())));
     tpd.defaultFields.reset(new ScriptValueChildrenParser(info, value.property(PROPERTY_DEFAULT_CHILDREN())));
     return DataInformationFactory::newTaggedUnion(tpd);
 }
 
-} //namespace ScriptValueConverter
+} // namespace ScriptValueConverter
 
 ScriptValueConverter::ScriptValueChildrenParser::ScriptValueChildrenParser(const ParserInfo& info,
-        const QScriptValue& children) : mValue(children), mIter(children), mInfo(info)
+                                                                           const QScriptValue& children)
+    : mValue(children)
+    , mIter(children)
+    , mInfo(info)
 {
 }
 
@@ -284,32 +273,28 @@ DataInformation* ScriptValueConverter::ScriptValueChildrenParser::next()
 {
     Q_ASSERT(hasNext());
     mIter.next();
-    if (mValue.isArray() && mIter.name() == QLatin1String("length"))
-        mIter.next(); //skip length property
+    if (mValue.isArray() && mIter.name() == QLatin1String("length")) {
+        mIter.next(); // skip length property
+    }
     mInfo.name = mIter.name();
     return toDataInformation(mIter.value(), mInfo);
 }
 
 bool ScriptValueConverter::ScriptValueChildrenParser::hasNext()
 {
-    if (!mIter.hasNext())
+    if (!mIter.hasNext()) {
         return false;
-    if (mValue.isArray())
-    {
-        //check if next element is length property
-        mIter.next();
-        if (mIter.name() != QLatin1String("length"))
-        {
-            mIter.previous(); //go back and return true
-            return true;
-        }
-        else
-        {
-            return mIter.hasNext(); //skipped length
-        }
     }
-    else
-    {
+    if (mValue.isArray()) {
+        // check if next element is length property
+        mIter.next();
+        if (mIter.name() != QLatin1String("length")) {
+            mIter.previous(); // go back and return true
+            return true;
+        } else {
+            return mIter.hasNext(); // skipped length
+        }
+    } else {
         return true;
     }
 }

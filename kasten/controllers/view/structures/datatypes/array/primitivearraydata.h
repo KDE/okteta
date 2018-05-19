@@ -28,16 +28,17 @@
 #include "../topleveldatainformation.h"
 #include "../primitive/primitivetemplateinfo.h"
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 class PrimitiveArrayData : public AbstractArrayData
 {
     Q_DISABLE_COPY(PrimitiveArrayData)
+
 public:
     using T = typename PrimitiveInfo<type>::valueType;
     using DisplayClass = typename PrimitiveInfo<type>::Methods;
 
     explicit PrimitiveArrayData(unsigned int initialLength, PrimitiveDataInformation* childType,
-            ArrayDataInformation* parent);
+                                ArrayDataInformation* parent);
     ~PrimitiveArrayData() override;
 
     qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -62,12 +63,12 @@ public:
 
     bool isComplex() const override;
 
-
     QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
 
     static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, bool littleEndian);
+
 protected:
     /** sets mChildType and mDummy as @p index, which must have been checked before calling this method!! */
     void activateIndex(uint index);
@@ -78,17 +79,16 @@ protected:
     void setNewParentForChildren() override;
 
     QVector<T> mData;
-    uint mNumReadValues; //the number of values read before EOF
+    uint mNumReadValues; // the number of values read before EOF
     DummyDataInformation mDummy;
 };
 
-
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline PrimitiveArrayData<type>::~PrimitiveArrayData()
 {
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline BitCount64 PrimitiveArrayData<type>::offset(const DataInformation* data) const
 {
     Q_ASSERT(data->isDummy());
@@ -97,7 +97,7 @@ inline BitCount64 PrimitiveArrayData<type>::offset(const DataInformation* data) 
     return index * sizeof(T) * 8;
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
 {
     Q_ASSERT(idx < length());
@@ -107,37 +107,37 @@ inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
     return &mDummy;
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline void PrimitiveArrayData<type>::setNewParentForChildren()
 {
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline unsigned int PrimitiveArrayData<type>::length() const
 {
     return mData.size();
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline BitCount32 PrimitiveArrayData<type>::size() const
 {
     return mData.size() * sizeof(T) * 8;
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 void PrimitiveArrayData<type>::setLength(uint newLength)
 {
     mData.resize(newLength);
     mData.squeeze();
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline PrimitiveDataType PrimitiveArrayData<type>::primitiveType() const
 {
     return type;
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline BitCount32 PrimitiveArrayData<type>::sizeAt(uint index)
 {
     Q_ASSERT(index < length());
@@ -145,24 +145,25 @@ inline BitCount32 PrimitiveArrayData<type>::sizeAt(uint index)
     return sizeof(T) * 8;
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 inline Qt::ItemFlags PrimitiveArrayData<type>::childFlags(int row, int column, bool fileLoaded)
 {
     Q_ASSERT(row >= 0 && uint(row) < length());
     Q_UNUSED(row)
-    if (column == 2 && fileLoaded)
+    if (column == 2 && fileLoaded) {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
-    else
+    } else {
         return Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+    }
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 bool PrimitiveArrayData<type>::isComplex() const
 {
     return false;
 }
 
-template<PrimitiveDataType type>
+template <PrimitiveDataType type>
 AllPrimitiveTypes PrimitiveArrayData<type>::valueAt(int index) const
 {
     Q_ASSERT(index >= 0 && index < mData.size());

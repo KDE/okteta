@@ -30,49 +30,47 @@
 
 static const char TestData[] = "TestData";
 
-
-void TestDocumentTest::checkTitleChanged( QSignalSpy* titleChangedSpy, const QString& title )
+void TestDocumentTest::checkTitleChanged(QSignalSpy* titleChangedSpy, const QString& title)
 {
-   QVERIFY( titleChangedSpy->isValid() );
-   QCOMPARE( titleChangedSpy->count(), 1 );
-   QList<QVariant> arguments = titleChangedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).toString(), title );
+    QVERIFY(titleChangedSpy->isValid());
+    QCOMPARE(titleChangedSpy->count(), 1);
+    QList<QVariant> arguments = titleChangedSpy->takeFirst();
+    QCOMPARE(arguments.at(0).toString(), title);
 }
 
-Q_DECLARE_METATYPE ( Kasten::ContentFlags )
+Q_DECLARE_METATYPE(Kasten::ContentFlags)
 
-void TestDocumentTest::checkContentFlagsChanged( QSignalSpy* changedSpy, Kasten::ContentFlags contentFlags )
+void TestDocumentTest::checkContentFlagsChanged(QSignalSpy* changedSpy, Kasten::ContentFlags contentFlags)
 {
-   QVERIFY( changedSpy->isValid() );
-   QCOMPARE( changedSpy->count(), 1 );
-   QList<QVariant> arguments = changedSpy->takeFirst();
-   QCOMPARE( arguments.at(0).value<Kasten::ContentFlags>(), contentFlags );
+    QVERIFY(changedSpy->isValid());
+    QCOMPARE(changedSpy->count(), 1);
+    QList<QVariant> arguments = changedSpy->takeFirst();
+    QCOMPARE(arguments.at(0).value<Kasten::ContentFlags>(), contentFlags);
 }
 
-
-// ------------------------------------------------------------------ tests ----
+//------------------------------------------------------------------ tests ----
 
 void TestDocumentTest::testPlainConstructor()
 {
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QVERIFY( document != nullptr );
-    QCOMPARE( *document->data(), QByteArray() );
-    QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
+    QVERIFY(document != nullptr);
+    QCOMPARE(*document->data(), QByteArray());
+    QCOMPARE(document->title(), QString());
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
 
     delete document;
 }
 
 void TestDocumentTest::testDataConstructor()
 {
-    const QByteArray testData( TestData );
-    Kasten::TestDocument* document = new Kasten::TestDocument( testData );
+    const QByteArray testData(TestData);
+    Kasten::TestDocument* document = new Kasten::TestDocument(testData);
 
-    QVERIFY( document != nullptr );
-    QCOMPARE( *document->data(), testData );
-    QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
+    QVERIFY(document != nullptr);
+    QCOMPARE(*document->data(), testData);
+    QCOMPARE(document->title(), QString());
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
 
     delete document;
 }
@@ -80,21 +78,21 @@ void TestDocumentTest::testDataConstructor()
 void TestDocumentTest::testChangeData()
 {
     qRegisterMetaType<Kasten::ContentFlags>("Kasten::ContentFlags");
-    const QByteArray testData( TestData );
+    const QByteArray testData(TestData);
 
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)) );
+    QSignalSpy* changedSpy = new QSignalSpy(document, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)));
 
-    QCOMPARE( *document->data(), QByteArray() );
-    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
+    QCOMPARE(*document->data(), QByteArray());
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
 
-    document->setData( testData );
+    document->setData(testData);
 
     const Kasten::ContentFlags contentFlags = Kasten::ContentHasUnstoredChanges;
-    QCOMPARE( *document->data(), testData );
-    QCOMPARE( document->contentFlags(), contentFlags );
-    checkContentFlagsChanged( changedSpy, contentFlags );
+    QCOMPARE(*document->data(), testData);
+    QCOMPARE(document->contentFlags(), contentFlags);
+    checkContentFlagsChanged(changedSpy, contentFlags);
 
     delete document;
     delete changedSpy;
@@ -104,14 +102,14 @@ void TestDocumentTest::testSetTitle()
 {
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy* titleChangedSpy = new QSignalSpy( document, SIGNAL(titleChanged(QString)) );
+    QSignalSpy* titleChangedSpy = new QSignalSpy(document, SIGNAL(titleChanged(QString)));
 
-    const QLatin1String title( "title" ); //TODO QStringLiteral
-    document->setTitle( title );
+    const QLatin1String title("title");   // TODO QStringLiteral
+    document->setTitle(title);
 
-    QCOMPARE( document->title(), title );
-    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
-    checkTitleChanged( titleChangedSpy, title );
+    QCOMPARE(document->title(), title);
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
+    checkTitleChanged(titleChangedSpy, title);
 
     delete document;
     delete titleChangedSpy;
@@ -123,17 +121,17 @@ void TestDocumentTest::testSetContentFlags()
 
     Kasten::TestDocument* document = new Kasten::TestDocument();
 
-    QSignalSpy* changedSpy = new QSignalSpy( document, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)) );
+    QSignalSpy* changedSpy = new QSignalSpy(document, SIGNAL(contentFlagsChanged(Kasten::ContentFlags)));
 
     const Kasten::ContentFlags contentFlags = Kasten::ContentHasUnstoredChanges;
-    document->setContentFlags( contentFlags );
+    document->setContentFlags(contentFlags);
 
-    QCOMPARE( document->title(), QString() );
-    QCOMPARE( document->contentFlags(), contentFlags );
-    checkContentFlagsChanged( changedSpy, contentFlags );
+    QCOMPARE(document->title(), QString());
+    QCOMPARE(document->contentFlags(), contentFlags);
+    checkContentFlagsChanged(changedSpy, contentFlags);
 
     delete document;
     delete changedSpy;
 }
 
-QTEST_MAIN( TestDocumentTest )
+QTEST_MAIN(TestDocumentTest)

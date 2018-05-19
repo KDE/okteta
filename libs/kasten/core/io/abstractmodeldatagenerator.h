@@ -31,39 +31,41 @@
 
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelDataGeneratorPrivate;
 
-
 class KASTENCORE_EXPORT AbstractModelDataGenerator : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    enum Flags { StaticGeneration, DynamicGeneration };
+public:
+    enum Flags
+    {
+        StaticGeneration,
+        DynamicGeneration
+    };
 
-  protected:
-    AbstractModelDataGenerator( AbstractModelDataGeneratorPrivate* d );
+protected:
+    AbstractModelDataGenerator(AbstractModelDataGeneratorPrivate* d);
 
-  public:
-    AbstractModelDataGenerator( const QString& typeName, const QString& mimeType, Flags flags );
+public:
+    AbstractModelDataGenerator(const QString& typeName, const QString& mimeType, Flags flags);
 
     ~AbstractModelDataGenerator() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual QMimeData* generateData() = 0;
 
-  public:
+public:
     QString typeName() const;
     QString mimeType() const;
     Flags flags() const;
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractModelDataGenerator )
-  protected:
+protected:
+    Q_DECLARE_PRIVATE(AbstractModelDataGenerator)
+
+protected:
     AbstractModelDataGeneratorPrivate* const d_ptr;
 };
 

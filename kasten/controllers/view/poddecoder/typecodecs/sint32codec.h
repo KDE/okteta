@@ -26,22 +26,20 @@
 // tool
 #include "../abstracttypecodec.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class SInt32Codec : public AbstractTypeCodec
 {
-  public:
+public:
     SInt32Codec();
 
     ~SInt32Codec() override;
 
-  public: // AbstractTypeCodec API
-    QVariant value( const PODData& data, int* byteCount ) const override;
-    QByteArray valueToBytes( const QVariant& value ) const override;
+public: // AbstractTypeCodec API
+    QVariant value(const PODData& data, int* byteCount) const override;
+    QByteArray valueToBytes(const QVariant& value) const override;
 
-    bool areEqual( const QVariant& value, QVariant& otherValue ) const override;
+    bool areEqual(const QVariant& value, QVariant& otherValue) const override;
 };
 
 }

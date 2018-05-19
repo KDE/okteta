@@ -31,37 +31,34 @@
 #include <QCoreApplication>
 #include <QUrl>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob( ByteArrayRawFileSynchronizer *synchronizer, const QUrl &url )
- : AbstractFileSystemLoadJob( synchronizer, url )
+ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob(ByteArrayRawFileSynchronizer* synchronizer, const QUrl& url)
+    : AbstractFileSystemLoadJob(synchronizer, url)
 {}
 
 void ByteArrayRawFileLoadJob::startLoadFromFile()
 {
-    ByteArrayRawFileLoadThread *loadThread = new ByteArrayRawFileLoadThread( this, file() );
+    ByteArrayRawFileLoadThread* loadThread = new ByteArrayRawFileLoadThread(this, file());
     loadThread->start();
-    while( !loadThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!loadThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     ByteArrayDocument* document = loadThread->document();
-    qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( document );
+    qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument(document);
 
-    if( document )
+    if (document) {
 //         ExternalBookmarkStorage().readBookmarks( document, url() );
-        {}
-    else
-    {
+    } else {
         // TODO: these reports should go to a notification system, for log or popup
-        setError( KJob::KilledJobError );
-        setErrorText( loadThread->errorString() );
+        setError(KJob::KilledJobError);
+        setErrorText(loadThread->errorString());
     }
 
     delete loadThread;
 
-    setDocument( document );
+    setDocument(document);
 }
 
 ByteArrayRawFileLoadJob::~ByteArrayRawFileLoadJob() {}

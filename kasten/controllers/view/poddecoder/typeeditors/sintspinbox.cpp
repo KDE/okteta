@@ -25,29 +25,24 @@
 // Qt
 #include <QLineEdit>
 
-
-QValidator::State SIntSpinBox::validate( QString& input, int& pos ) const
+QValidator::State SIntSpinBox::validate(QString& input, int& pos) const
 {
-    Q_UNUSED( pos );
+    Q_UNUSED(pos);
 
     QValidator::State result;
 
-    if( input.isEmpty()
-        || (mMinimum < 0 && input == QLatin1String("-")) )
-    {
+    if (input.isEmpty()
+        || (mMinimum < 0 && input == QLatin1String("-"))) {
         mValue = 0;
         result = QValidator::Intermediate;
-    }
-    else
-    {
+    } else {
         bool ok;
-        qint64 newValue = input.toLongLong( &ok );
-        if( !ok
+        qint64 newValue = input.toLongLong(&ok);
+        if (!ok
             || (newValue > mMaximum)
-            || (newValue < mMinimum) )
+            || (newValue < mMinimum)) {
             result = QValidator::Invalid;
-        else
-        {
+        } else {
             mValue = newValue;
             result = QValidator::Acceptable;
         }
@@ -56,28 +51,25 @@ QValidator::State SIntSpinBox::validate( QString& input, int& pos ) const
     return result;
 }
 
-
-void SIntSpinBox::fixup( QString& input ) const
+void SIntSpinBox::fixup(QString& input) const
 {
-    Q_UNUSED( input );
+    Q_UNUSED(input);
 
     // TODO: what can be done here? remove localized stuff?
 }
 
-void SIntSpinBox::stepBy( int steps )
+void SIntSpinBox::stepBy(int steps)
 {
-    if( steps == 0 )
+    if (steps == 0) {
         return;
-
-    if( steps > 0 )
-    {
-        const qint64 left = mMaximum - mValue;
-        mValue = ( static_cast<qint64>(steps) > left ) ? mMaximum : mValue + steps;
     }
-    else
-    {
+
+    if (steps > 0) {
+        const qint64 left = mMaximum - mValue;
+        mValue = (static_cast<qint64>(steps) > left) ? mMaximum : mValue + steps;
+    } else {
         const qint64 left = mValue - mMinimum;
-        mValue = ( static_cast<qint64>(-steps) > left ) ? mMinimum : mValue + steps;
+        mValue = (static_cast<qint64>(-steps) > left) ? mMinimum : mValue + steps;
     }
 
     updateEditLine();
@@ -87,17 +79,18 @@ QAbstractSpinBox::StepEnabled SIntSpinBox::stepEnabled() const
 {
     StepEnabled result;
 
-    if( mValue > mMinimum )
+    if (mValue > mMinimum) {
         result |= StepDownEnabled;
-    if( mValue < mMaximum )
+    }
+    if (mValue < mMaximum) {
         result |= StepUpEnabled;
+    }
 
     return result;
 }
 
-
 void SIntSpinBox::updateEditLine() const
 {
-    const QString text = QString::number( mValue, mBase );
-    lineEdit()->setText( text );
+    const QString text = QString::number(mValue, mBase);
+    lineEdit()->setText(text);
 }

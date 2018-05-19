@@ -29,28 +29,27 @@
 class QWidget;
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractTool;
 
 // TODO: is there a common base for view and document?
 class KASTENGUI_EXPORT AbstractToolView
 {
-  protected:
+protected:
     AbstractToolView();
-  public:
+
+public:
     virtual ~AbstractToolView();
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual QWidget* widget() const = 0;
     virtual QString title() const = 0;
-    virtual AbstractTool *tool() const = 0;
+    virtual AbstractTool* tool() const = 0;
 
-  protected:
+protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 }

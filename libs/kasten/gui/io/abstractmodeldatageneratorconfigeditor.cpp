@@ -22,13 +22,11 @@
 
 #include "abstractmodeldatageneratorconfigeditor.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModelDataGeneratorConfigEditor::AbstractModelDataGeneratorConfigEditor( QWidget* parent )
-  : QWidget( parent ),
-    d( nullptr )
+AbstractModelDataGeneratorConfigEditor::AbstractModelDataGeneratorConfigEditor(QWidget* parent)
+    : QWidget(parent)
+    , d(nullptr)
 {}
 
 bool AbstractModelDataGeneratorConfigEditor::isValid() const

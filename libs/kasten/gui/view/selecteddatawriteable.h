@@ -28,12 +28,9 @@
 
 class QMimeData;
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-namespace If
-{
+namespace If {
 // TODO: this interface is strongly related to the selection interface
 // needs further thinking
 // for now the mimedata is the write extension to the selection interface
@@ -42,17 +39,17 @@ namespace If
 // TODO: cut does not work on overwrite modus (for me), how to generalize this?
 class SelectedDataWriteable
 {
-  public:
+public:
     virtual ~SelectedDataWriteable();
 
-  public: // operate
+public: // operate
     // TODO: inserting works on selection if available
-    virtual void insertData( const QMimeData *data ) = 0;
-    virtual QMimeData *cutSelectedData() = 0;
+    virtual void insertData(const QMimeData* data) = 0;
+    virtual QMimeData* cutSelectedData() = 0;
     virtual void deleteSelectedData() = 0;
 
-  public: // 
-    virtual bool canReadData( const QMimeData *data ) const = 0;
+public:
+    virtual bool canReadData(const QMimeData* data) const = 0;
 };
 
 inline SelectedDataWriteable::~SelectedDataWriteable() {}
@@ -60,6 +57,6 @@ inline SelectedDataWriteable::~SelectedDataWriteable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::SelectedDataWriteable, "org.kde.kasten.if.selecteddatawriteable/1.0" )
+Q_DECLARE_INTERFACE(Kasten::If::SelectedDataWriteable, "org.kde.kasten.if.selecteddatawriteable/1.0")
 
 #endif

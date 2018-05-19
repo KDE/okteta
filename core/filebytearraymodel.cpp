@@ -27,13 +27,11 @@
 // C
 #include <stdlib.h>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-FileByteArrayModel::FileByteArrayModel( int pageNumber, int pageSize, QObject* parent )
-  : AbstractByteArrayModel( parent ),
-    d( new FileByteArrayModelPrivate(pageNumber,pageSize) )
+FileByteArrayModel::FileByteArrayModel(int pageNumber, int pageSize, QObject* parent)
+    : AbstractByteArrayModel(parent)
+    , d(new FileByteArrayModelPrivate(pageNumber, pageSize))
 {
 }
 
@@ -42,18 +40,18 @@ bool FileByteArrayModel::isReadOnly() const { return d->isReadOnly(); }
 bool FileByteArrayModel::isModified() const { return false; }
 bool FileByteArrayModel::isOpen()     const { return d->isOpen(); }
 
-void FileByteArrayModel::setReadOnly( bool readOnly ) { d->setReadOnly( readOnly ); }
-void FileByteArrayModel::setModified( bool )  {}
-void FileByteArrayModel::setByte( Address, Byte )  {}
-Byte FileByteArrayModel::byte( Address offset ) const { return d->byte( offset ); }
+void FileByteArrayModel::setReadOnly(bool readOnly) { d->setReadOnly(readOnly); }
+void FileByteArrayModel::setModified(bool)  {}
+void FileByteArrayModel::setByte(Address, Byte)  {}
+Byte FileByteArrayModel::byte(Address offset) const { return d->byte(offset); }
 
-Size FileByteArrayModel::insert( Address /*Pos*/, const Byte*, int /*Length*/ ) {  return 0; }
-Size FileByteArrayModel::remove( const AddressRange& /*Section*/ ) {  return 0; }
-Size FileByteArrayModel::replace( const AddressRange& /*Section*/, const Byte*, int /*Length*/ ) {  return 0; }
-Size FileByteArrayModel::fill( Byte /*FillChar*/, Address /*Pos*/, Size /*Length*/ ) {  return 0; }
-bool FileByteArrayModel::swap( Address /*DestPos*/, const AddressRange& /*SourceSection*/ ) { return false; }
+Size FileByteArrayModel::insert(Address /*Pos*/, const Byte*, int /*Length*/) {  return 0; }
+Size FileByteArrayModel::remove(const AddressRange& /*Section*/) {  return 0; }
+Size FileByteArrayModel::replace(const AddressRange& /*Section*/, const Byte*, int /*Length*/) {  return 0; }
+Size FileByteArrayModel::fill(Byte /*FillChar*/, Address /*Pos*/, Size /*Length*/) {  return 0; }
+bool FileByteArrayModel::swap(Address /*DestPos*/, const AddressRange& /*SourceSection*/) { return false; }
 
-bool FileByteArrayModel::open( const QString& fileName ) { return d->open( fileName ); }
+bool FileByteArrayModel::open(const QString& fileName) { return d->open(fileName); }
 bool FileByteArrayModel::close() { return d->close(); }
 
 FileByteArrayModel::~FileByteArrayModel()

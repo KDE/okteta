@@ -27,29 +27,27 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct Octal8
 {
-  public:
-    Octal8( quint8 v );
+public:
+    Octal8(quint8 v);
     Octal8();
 
-  public:
+public:
     QString toString() const;
 
-  public:
+public:
     quint8 value;
 };
 
-
-inline Octal8::Octal8() : value( 0 ) {}
-inline Octal8::Octal8( quint8 v ) : value( v ) {}
+inline Octal8::Octal8() : value(0) {}
+inline Octal8::Octal8(quint8 v) : value(v) {}
 
 inline QString Octal8::toString() const
 {
-    return QStringLiteral( "%1" ).arg( value, 3, 8, QChar::fromLatin1('0') );
+    return QStringLiteral("%1").arg(value, 3, 8, QChar::fromLatin1('0'));
 }
 
-Q_DECLARE_METATYPE( Octal8 )
+Q_DECLARE_METATYPE(Octal8)
 
 #endif

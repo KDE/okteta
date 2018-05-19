@@ -17,20 +17,19 @@
 // KF5
 #include <KLocalizedString>
 
-
 Template_ByteArrayFilter::Template_ByteArrayFilter()
-  : AbstractByteArrayFilter(
+    : AbstractByteArrayFilter(
 //// ADAPT(start)
 //// change "TEMPLATE OPERATION ON" to a short and descriptive name of the operation of this filter, also in upper case
         i18nc("name of the filter; it does a TEMPLATE OPERATION ON operation",
-              "TEMPLATE OPERATION ON data") )
+              "TEMPLATE OPERATION ON data"))
 //// ADAPT(end)
 {}
 
 AbstractByteArrayFilterParameterSet* Template_ByteArrayFilter::parameterSet() { return &mParameterSet; }
 
-bool Template_ByteArrayFilter::filter( Okteta::Byte* result,
-                                       Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
+bool Template_ByteArrayFilter::filter(Okteta::Byte* result,
+                                      Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
     bool success = true;
 
@@ -43,17 +42,15 @@ bool Template_ByteArrayFilter::filter( Okteta::Byte* result,
     int r = 0;
     Okteta::Address m = range.start();
     int nextBlockEnd = FilteredByteCountSignalLimit;
-    while( m <= range.end() )
-    {
+    while (m <= range.end()) {
         // example code turns all bytes larger than level into 255, the others to 0
-        const Okteta::Byte byte = model->byte( m++ );
-        const Okteta::Byte resultByte = ( byte > level ) ? 255 : 0;
+        const Okteta::Byte byte = model->byte(m++);
+        const Okteta::Byte resultByte = (byte > level) ? 255 : 0;
         result[r++] = resultByte;
 
-        if( r >= nextBlockEnd )
-        {
+        if (r >= nextBlockEnd) {
             nextBlockEnd += FilteredByteCountSignalLimit;
-            emit filteredBytes( r );
+            emit filteredBytes(r);
         }
     }
 //// ADAPT(end)

@@ -34,16 +34,16 @@ class CharCodec;
 
 class Char8Editor : public QLineEdit
 {
-  Q_OBJECT
-  Q_PROPERTY( Char8 data READ data WRITE setData USER true )
+    Q_OBJECT
+    Q_PROPERTY(Char8 data READ data WRITE setData USER true)
 
-  public:
-    Char8Editor( Okteta::CharCodec* charCodec, QWidget* parent );
+public:
+    Char8Editor(Okteta::CharCodec* charCodec, QWidget* parent);
 
     ~Char8Editor() override;
 
-  public:
-    void setData( Char8 data );
+public:
+    void setData(Char8 data);
     Char8 data() const;
 };
 

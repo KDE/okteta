@@ -30,39 +30,36 @@
 
 class QUrl;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class DocumentSyncManager;
 class AbstractDocument;
 
-
 class KASTENCONTROLLERS_EXPORT FileSystemBrowserTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit FileSystemBrowserTool( DocumentSyncManager* documentSyncManager );
+public:
+    explicit FileSystemBrowserTool(DocumentSyncManager* documentSyncManager);
     ~FileSystemBrowserTool() override;
 
-  public:
-    void open( const QUrl& url );
+public:
+    void open(const QUrl& url);
 
-  public:
+public:
     QUrl currentUrl() const;
     bool hasCurrentUrl() const;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  Q_SIGNALS:
-    void hasCurrentUrlChanged( bool hasCurrentUrl );
+Q_SIGNALS:
+    void hasCurrentUrlChanged(bool hasCurrentUrl);
 
-  private: // sources
+private: // sources
     DocumentSyncManager* mDocumentSyncManager;
 
     AbstractDocument* mDocument;

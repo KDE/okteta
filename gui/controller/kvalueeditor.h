@@ -23,7 +23,6 @@
 #ifndef OKTETA_KVALUEEDITOR_H
 #define OKTETA_KVALUEEDITOR_H
 
-
 // lib
 #include "keditor.h"
 // Okteta core
@@ -31,51 +30,56 @@
 // Qt
 #include <QString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayView;
 
-
-class KValueEditor: public KEditor
+class KValueEditor : public KEditor
 {
-  protected:
+protected:
     enum KValueEditAction
-    { EnterValue, IncValue, DecValue, ValueAppend, ValueEdit, LeaveValue, ValueBackspace };
+    {
+        EnterValue,
+        IncValue,
+        DecValue,
+        ValueAppend,
+        ValueEdit,
+        LeaveValue,
+        ValueBackspace
+    };
 
-  public:
-    KValueEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent );
+public:
+    KValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent);
     ~KValueEditor() override;
 
-  public: // KController API
-    bool handleKeyPress( QKeyEvent *keyEvent ) override;
+public: // KController API
+    bool handleKeyPress(QKeyEvent* keyEvent) override;
 
-  public:
+public:
     void reset();
 
     void adaptToValueCodecChange();
     void finishEdit();
-    void cancelEdit( bool undoChanges = true );
+    void cancelEdit(bool undoChanges = true);
 
-  public:
+public:
     bool isInEditMode() const;
     Byte value() const;
     QString valueAsString() const;
 
-  protected:
-    void startEdit( const QString &description );
+protected:
+    void startEdit(const QString& description);
     /**
      * executes keyboard Action \a Action. This is normally called by a key event handler.
      * @param action action to be done
      * @param input data to be used for the action
      */
-    void doValueEditAction( KValueEditAction action, int input = -1 );
+    void doValueEditAction(KValueEditAction action, int input = -1);
 
-  protected:
+protected:
     /** flag whether we are in editing mode */
-    bool mInEditMode:1;
+    bool mInEditMode : 1;
     /** flag whether byte edit mode was reached by inserting */
-    bool mEditModeByInsert:1;
+    bool mEditModeByInsert : 1;
     /** */
     Byte mEditValue;
     /** stores the old byte value */

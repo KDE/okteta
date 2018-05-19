@@ -28,19 +28,17 @@
 // Kasten core
 #include <kasten/abstractmodelsynchronizerfactory.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class OKTETAKASTENCORE_EXPORT ByteArrayRawFileSynchronizerFactory : public AbstractModelSynchronizerFactory
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ByteArrayRawFileSynchronizerFactory();
     ~ByteArrayRawFileSynchronizerFactory() override;
 
-  public: // AbstractModelSynchronizerFactory API
+public: // AbstractModelSynchronizerFactory API
     AbstractModelSynchronizer* createSynchronizer() const override;
 
     QString supportedWorkType() const override;

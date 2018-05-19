@@ -23,30 +23,28 @@
 #include "abstractexportjob.h"
 #include "abstractexportjob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractExportJob::AbstractExportJob( AbstractExportJobPrivate* d )
-  : d_ptr( d )
+AbstractExportJob::AbstractExportJob(AbstractExportJobPrivate* d)
+    : d_ptr(d)
 {}
 
 AbstractExportJob::AbstractExportJob()
-  : d_ptr( new AbstractExportJobPrivate(this) )
+    : d_ptr(new AbstractExportJobPrivate(this))
 {}
 
 AbstractDocument* AbstractExportJob::document() const
 {
-    Q_D( const AbstractExportJob );
+    Q_D(const AbstractExportJob);
 
     return d->document();
 }
 
-void AbstractExportJob::setDocument( AbstractDocument* document )
+void AbstractExportJob::setDocument(AbstractDocument* document)
 {
-    Q_D( AbstractExportJob );
+    Q_D(AbstractExportJob);
 
-    d->setDocument( document );
+    d->setDocument(document);
 }
 
 AbstractExportJob::~AbstractExportJob()

@@ -37,9 +37,7 @@
 
 class QTimer;
 
-
-namespace Okteta
-{
+namespace Okteta {
 class KNavigator;
 class KCharEditor;
 
@@ -55,14 +53,13 @@ class WidgetColumnStylist;
 class KCursor;
 class BorderColumnRenderer;
 
-
 class AbstractByteArrayViewPrivate
 {
-  public:
-    explicit AbstractByteArrayViewPrivate( AbstractByteArrayView* parent );
+public:
+    explicit AbstractByteArrayViewPrivate(AbstractByteArrayView* parent);
     virtual ~AbstractByteArrayViewPrivate();
 
-  public: // value access
+public: // value access
     AbstractByteArrayModel* byteArrayModel() const;
 
     // TODO: needed?
@@ -114,121 +111,121 @@ class AbstractByteArrayViewPrivate
 
     double zoomLevel() const;
 
-  public:
+public:
     void init();
-    void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
+    void setByteArrayModel(AbstractByteArrayModel* byteArrayModel);
     // TODO: delete old controller?
-    void setController( KController* controller );
-    void setWheelController( AbstractWheelController* wheelController );
-    void setReadOnly( bool readOnly );
-    void setOverwriteOnly( bool overwriteOnly );
-    void setOverwriteMode( bool overwriteMode );
+    void setController(KController* controller);
+    void setWheelController(AbstractWheelController* wheelController);
+    void setReadOnly(bool readOnly);
+    void setOverwriteOnly(bool overwriteOnly);
+    void setOverwriteMode(bool overwriteMode);
 
-  public: // setting parameters
-    void setValueCoding( AbstractByteArrayView::ValueCoding valueCoding );
-    void setCharCoding( AbstractByteArrayView::CharCoding charCoding );
-    void setCharCoding( const QString& charCodingName );
-    void setLayoutStyle( AbstractByteArrayView::LayoutStyle layoutStyle );
-    void setNoOfBytesPerLine( int noOfBytesPerLine );
-    void setStartOffset( Address startOffset );
-    void setFirstLineOffset( Address firstLineOffset );
-    void setModified( bool modified );
+public: // setting parameters
+    void setValueCoding(AbstractByteArrayView::ValueCoding valueCoding);
+    void setCharCoding(AbstractByteArrayView::CharCoding charCoding);
+    void setCharCoding(const QString& charCodingName);
+    void setLayoutStyle(AbstractByteArrayView::LayoutStyle layoutStyle);
+    void setNoOfBytesPerLine(int noOfBytesPerLine);
+    void setStartOffset(Address startOffset);
+    void setFirstLineOffset(Address firstLineOffset);
+    void setModified(bool modified);
 
-    void setTabChangesFocus( bool tabChangesFocus = true );
+    void setTabChangesFocus(bool tabChangesFocus = true);
 
-    void setMarking( Address start, Address end );
-    void setMarking( const AddressRange& marking );
+    void setMarking(Address start, Address end);
+    void setMarking(const AddressRange& marking);
 
-    void toggleOffsetColumn( bool offsetColumnVisible );
-    void setOffsetCoding( AbstractByteArrayView::OffsetCoding offsetCoding );
+    void toggleOffsetColumn(bool offsetColumnVisible);
+    void setOffsetCoding(AbstractByteArrayView::OffsetCoding offsetCoding);
 
-  public: // zooming
-    void zoomIn( int pointInc );
+public: // zooming
+    void zoomIn(int pointInc);
     void zoomIn();
-    void zoomOut( int pointDec );
+    void zoomOut(int pointDec);
     void zoomOut();
-    void zoomTo( int pointSize );
+    void zoomTo(int pointSize);
     void unZoom();
-    void setZoomLevel( double level );
+    void setZoomLevel(double level);
 
-  public: // interaction
-    void selectAll( bool select );
-    bool selectWord( Address index /*, Chartype*/ );
-    void setSelection( const AddressRange& selection );
+public: // interaction
+    void selectAll(bool select);
+    bool selectWord(Address index /*, Chartype*/);
+    void setSelection(const AddressRange& selection);
 
-    void setCursorPosition( Address index, bool isBehind );
-    void setSelectionCursorPosition( Address index );
+    void setCursorPosition(Address index, bool isBehind);
+    void setSelectionCursorPosition(Address index);
 
-  public: // API to be implemented
-    virtual void ensureVisible( const AddressRange& range, bool ensureStartVisible ) = 0;
+public: // API to be implemented
+    virtual void ensureVisible(const AddressRange& range, bool ensureStartVisible) = 0;
     virtual void ensureCursorVisible() = 0;
-    virtual void placeCursor( const QPoint& point ) = 0;
+    virtual void placeCursor(const QPoint& point) = 0;
     virtual QRect cursorRect() const = 0;
-    virtual Address indexByPoint( const QPoint& point ) const = 0;
+    virtual Address indexByPoint(const QPoint& point) const = 0;
     virtual void blinkCursor() = 0;
 
-  public: // events
-    bool event( QEvent* event );
-    void changeEvent( QEvent* event );
-    void resizeEvent( QResizeEvent* resizeEvent );
-    void focusInEvent( QFocusEvent* focusEvent );
-    void focusOutEvent( QFocusEvent* focusEvent );
-    void dragEnterEvent( QDragEnterEvent* dragEnterEvent );
-    void dragMoveEvent( QDragMoveEvent* dragMoveEvent );
-    void dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent );
-    void dropEvent( QDropEvent* dropEvent );
-    bool viewportEvent( QEvent* event );
+public: // events
+    bool event(QEvent* event);
+    void changeEvent(QEvent* event);
+    void resizeEvent(QResizeEvent* resizeEvent);
+    void focusInEvent(QFocusEvent* focusEvent);
+    void focusOutEvent(QFocusEvent* focusEvent);
+    void dragEnterEvent(QDragEnterEvent* dragEnterEvent);
+    void dragMoveEvent(QDragMoveEvent* dragMoveEvent);
+    void dragLeaveEvent(QDragLeaveEvent* dragLeaveEvent);
+    void dropEvent(QDropEvent* dropEvent);
+    bool viewportEvent(QEvent* event);
 
-    void mousePressEvent( QMouseEvent* mousePressEvent );
-    void mouseReleaseEvent( QMouseEvent* mouseReleaseEvent );
-    void mouseMoveEvent( QMouseEvent* mouseMoveEvent );
-    void mouseDoubleClickEvent( QMouseEvent* mouseDoubleClickEvent );
+    void mousePressEvent(QMouseEvent* mousePressEvent);
+    void mouseReleaseEvent(QMouseEvent* mouseReleaseEvent);
+    void mouseMoveEvent(QMouseEvent* mouseMoveEvent);
+    void mouseDoubleClickEvent(QMouseEvent* mouseDoubleClickEvent);
 
-  public: // slots
-    void onContentsChanged( const ArrayChangeMetricsList& changeList );
-    void onBookmarksChange( const QList<Bookmark>& bookmarks );
-    void onRevertedToVersionIndex( int versionIndex );
-    void onByteArrayReadOnlyChange( bool isByteArrayReadOnly );
+public: // slots
+    void onContentsChanged(const ArrayChangeMetricsList& changeList);
+    void onBookmarksChange(const QList<Bookmark>& bookmarks);
+    void onRevertedToVersionIndex(int versionIndex);
+    void onByteArrayReadOnlyChange(bool isByteArrayReadOnly);
 //     void onClipboardChanged();
 
-  protected:
+protected:
     /** handles screen update in case of a change to any of the width sizes
-      */
+     */
     void updateViewByWidth();
     void adjustLayoutToSize();
     void adaptController();
     void cancelByteEditor();
     void finishByteEditor();
 
-  protected:
-    bool getNextChangedRange( CoordRange* changedRange, const CoordRange& visibleRange ) const;
+protected:
+    bool getNextChangedRange(CoordRange* changedRange, const CoordRange& visibleRange) const;
     bool isByteEditorActive() const;
 
-  protected: // 
+protected:
     void removeSelectedData();
-    void insert( const QByteArray& data );
-    void pasteData( const QMimeData* data );
-    bool canReadData( const QMimeData* data ) const;
+    void insert(const QByteArray& data);
+    void pasteData(const QMimeData* data);
+    bool canReadData(const QMimeData* data) const;
 
-  protected: // clipboard interaction
-    void cutToClipboard( QClipboard::Mode mode = QClipboard::Clipboard );
-    void copyToClipboard( QClipboard::Mode mode = QClipboard::Clipboard ) const;
-    void pasteFromClipboard( QClipboard::Mode mode = QClipboard::Clipboard );
+protected: // clipboard interaction
+    void cutToClipboard(QClipboard::Mode mode = QClipboard::Clipboard);
+    void copyToClipboard(QClipboard::Mode mode = QClipboard::Clipboard) const;
+    void pasteFromClipboard(QClipboard::Mode mode = QClipboard::Clipboard);
 
-  protected: // cursor control
+protected: // cursor control
     void startCursor();
     void stopCursor();
     void unpauseCursor();
 
-  protected: // API to be implemented
-  // cursor control
+protected: // API to be implemented
+    // cursor control
     virtual void pauseCursor() = 0;
     virtual void updateCursors() = 0;
 
-    virtual void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId ) = 0;
-    virtual void setVisibleCodings( int visibleCodings ) = 0;
+    virtual void setActiveCoding(AbstractByteArrayView::CodingTypeId codingId) = 0;
+    virtual void setVisibleCodings(int visibleCodings) = 0;
 
-  protected: // API to be implemented
+protected: // API to be implemented
     virtual AbstractByteArrayView::CodingTypeId activeCoding() const = 0;
     virtual AbstractByteArrayView::CodingTypes visibleCodings() const = 0;
     virtual int fittingBytesPerLine() const = 0;
@@ -237,7 +234,7 @@ class AbstractByteArrayViewPrivate
     /** repaints all the parts that are signed as changed */
     virtual void updateChanged() = 0;
 
-  protected:
+protected:
     AbstractByteArrayModel* mByteArrayModel;
 
     /** the current input controller */
@@ -255,7 +252,7 @@ class AbstractByteArrayViewPrivate
     OffsetColumnRenderer* mOffsetColumn;
     BorderColumnRenderer* mOffsetBorderColumn;
 
-  protected:
+protected:
     /** */
     KTabController* mTabController;
     /** */
@@ -274,26 +271,26 @@ class AbstractByteArrayViewPrivate
 
     WidgetColumnStylist* mStylist;
 
-  protected:
+protected:
     /** Timer that controls the blinking of the cursor */
     QTimer* mCursorBlinkTimer;
 
     /** object to store the blinking cursor pixmaps */
     KCursor* mCursorPixmaps;
 
-  protected:
+protected:
     /** flag whether the widget is set to readonly. Cannot override the databuffer's setting, of course. */
-    bool mReadOnly:1;
+    bool mReadOnly : 1;
     /** flag if only overwrite is allowed */
-    bool mOverWriteOnly:1;
+    bool mOverWriteOnly : 1;
     /** flag if overwrite mode is active */
-    bool mOverWrite:1;
+    bool mOverWrite : 1;
     /** flag whether the font is changed due to a zooming */
-    bool mInZooming:1;
+    bool mInZooming : 1;
     /** flag if the cursor should be invisible */
-    bool mCursorPaused:1;
+    bool mCursorPaused : 1;
     /** flag if the cursor is visible */
-    bool mBlinkCursorVisible:1;
+    bool mBlinkCursorVisible : 1;
 
     /** font size as set by user (used for zooming) */
     int mDefaultFontSize;
@@ -311,11 +308,10 @@ class AbstractByteArrayViewPrivate
     /** style of resizing */
     AbstractByteArrayView::LayoutStyle mResizeStyle;
 
-  protected: // 
+protected:
     AbstractByteArrayView* const q_ptr;
-    Q_DECLARE_PUBLIC( AbstractByteArrayView )
+    Q_DECLARE_PUBLIC(AbstractByteArrayView)
 };
-
 
 inline AbstractByteArrayModel* AbstractByteArrayViewPrivate::byteArrayModel() const { return mByteArrayModel; }
 inline KController* AbstractByteArrayViewPrivate::controller() const { return mController; }
@@ -362,23 +358,22 @@ inline AbstractByteArrayView::OffsetCoding AbstractByteArrayViewPrivate::offsetC
     return (AbstractByteArrayView::OffsetCoding)mOffsetColumn->format();
 }
 
-
 inline void AbstractByteArrayViewPrivate::cancelByteEditor()
 {
-    mValueEditor->cancelEdit( false );
+    mValueEditor->cancelEdit(false);
 }
 inline void AbstractByteArrayViewPrivate::finishByteEditor()
 {
     mValueEditor->finishEdit();
 }
-inline void AbstractByteArrayViewPrivate::setTabChangesFocus( bool tabChangesFocus )
+inline void AbstractByteArrayViewPrivate::setTabChangesFocus(bool tabChangesFocus)
 {
-    mTabController->setTabChangesFocus( tabChangesFocus );
+    mTabController->setTabChangesFocus(tabChangesFocus);
 }
 
-inline void AbstractByteArrayViewPrivate::setController( KController* controller ) { mController = controller; }
-inline void AbstractByteArrayViewPrivate::setWheelController( AbstractWheelController* wheelController ) { mWheelController = wheelController; }
-inline void AbstractByteArrayViewPrivate::setModified( bool modified ) { mByteArrayModel->setModified( modified ); }
+inline void AbstractByteArrayViewPrivate::setController(KController* controller) { mController = controller; }
+inline void AbstractByteArrayViewPrivate::setWheelController(AbstractWheelController* wheelController) { mWheelController = wheelController; }
+inline void AbstractByteArrayViewPrivate::setModified(bool modified) { mByteArrayModel->setModified(modified); }
 
 }
 

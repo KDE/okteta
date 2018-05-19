@@ -49,11 +49,9 @@
 #include <QMimeData>
 #include <QTimer>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-static const Address DefaultStartOffset = 0;//5;
+static const Address DefaultStartOffset = 0;// 5;
 static const Address DefaultFirstLineOffset = 0;
 
 // zooming is done in steps of font size points
@@ -70,156 +68,155 @@ inline QString octetStreamFormatName() { return QStringLiteral("application/octe
 
 class NullModel : public AbstractByteArrayModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     NullModel();
     ~NullModel() override;
 
-  public: // data access API
-    Byte byte( Address offset ) const override;
+public: // data access API
+    Byte byte(Address offset) const override;
     Size size() const override;
 
-  public: // state read API
+public: // state read API
     bool isModified() const override;
 
-  public: // modification API
-    Size replace( const AddressRange& removeSection, const Byte* insertData, int insertLength ) override;
-    bool swap( Address firstStart, const AddressRange& secondRange) override;
-    Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) override;
-    void setByte( Address offset, Byte byte ) override;
-    void setModified( bool modified ) override;
+public: // modification API
+    Size replace(const AddressRange& removeSection, const Byte* insertData, int insertLength) override;
+    bool swap(Address firstStart, const AddressRange& secondRange) override;
+    Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1) override;
+    void setByte(Address offset, Byte byte) override;
+    void setModified(bool modified) override;
 };
 
 NullModel::NullModel() {}
 NullModel::~NullModel() {}
 
-Byte NullModel::byte( Address offset ) const { Q_UNUSED(offset) return 0; }
+Byte NullModel::byte(Address offset) const { Q_UNUSED(offset) return 0; }
 Size NullModel::size() const { return 0; }
 bool NullModel::isModified() const { return false; }
-Size NullModel::replace( const AddressRange& removeSection, const Byte* insertData, int insertLength )
+Size NullModel::replace(const AddressRange& removeSection, const Byte* insertData, int insertLength)
 {
-Q_UNUSED(removeSection) Q_UNUSED(insertData) Q_UNUSED(insertLength)
+    Q_UNUSED(removeSection) Q_UNUSED(insertData) Q_UNUSED(insertLength)
     return 0;
 }
-bool NullModel::swap( Address firstStart, const AddressRange& secondRange )
+bool NullModel::swap(Address firstStart, const AddressRange& secondRange)
 {
-Q_UNUSED(firstStart) Q_UNUSED(secondRange)
+    Q_UNUSED(firstStart) Q_UNUSED(secondRange)
     return false;
 }
-Size NullModel::fill( Byte fillByte, Address offset, Size fillLength )
+Size NullModel::fill(Byte fillByte, Address offset, Size fillLength)
 {
-Q_UNUSED(fillByte) Q_UNUSED(offset) Q_UNUSED(fillLength)
+    Q_UNUSED(fillByte) Q_UNUSED(offset) Q_UNUSED(fillLength)
     return 0;
 }
-void NullModel::setByte( Address offset, Byte byte )
+void NullModel::setByte(Address offset, Byte byte)
 {
-Q_UNUSED(offset) Q_UNUSED(byte)
+    Q_UNUSED(offset) Q_UNUSED(byte)
 }
-void NullModel::setModified( bool modified )
+void NullModel::setModified(bool modified)
 {
-Q_UNUSED(modified)
+    Q_UNUSED(modified)
 }
 
 Q_GLOBAL_STATIC(NullModel, nullModel)
 
-AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate( AbstractByteArrayView* parent )
- : mByteArrayModel( nullModel() ),
-   mTableLayout( new ByteArrayTableLayout(DefaultNoOfBytesPerLine,DefaultFirstLineOffset,DefaultStartOffset,0,0) ),
-   mTableCursor( new ByteArrayTableCursor(mTableLayout) ),
-   mTableRanges( new ByteArrayTableRanges(mTableLayout) ),
-   mCursorPixmaps( new KCursor() ),
-   mReadOnly( false ),
-   mOverWriteOnly( false ),
-   mOverWrite( true ),
-   mInZooming( false ),
-   mCursorPaused( false ),
-   mBlinkCursorVisible( false ),
-//    mDefaultFontSize( p->font().pointSize() ), crashes in font()
-   mZoomLevel( 1.0 ),
-   mResizeStyle( DefaultResizeStyle ),
-   q_ptr( parent )
+AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView* parent)
+    : mByteArrayModel(nullModel())
+    , mTableLayout(new ByteArrayTableLayout(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
+    , mTableCursor(new ByteArrayTableCursor(mTableLayout))
+    , mTableRanges(new ByteArrayTableRanges(mTableLayout))
+    , mCursorPixmaps(new KCursor())
+    , mReadOnly(false)
+    , mOverWriteOnly(false)
+    , mOverWrite(true)
+    , mInZooming(false)
+    , mCursorPaused(false)
+    , mBlinkCursorVisible(false)
+    ,//    mDefaultFontSize( p->font().pointSize() ), crashes in font()
+    mZoomLevel(1.0)
+    , mResizeStyle(DefaultResizeStyle)
+    , q_ptr(parent)
 {
 }
 
 void AbstractByteArrayViewPrivate::init()
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     // initialize layout
-    mTableLayout->setLength( mByteArrayModel->size() );
-    mTableLayout->setNoOfLinesPerPage( q->noOfLinesPerPage() );
+    mTableLayout->setLength(mByteArrayModel->size());
+    mTableLayout->setNoOfLinesPerPage(q->noOfLinesPerPage());
 
-    mStylist = new WidgetColumnStylist( q );
+    mStylist = new WidgetColumnStylist(q);
 
     mOffsetColumn =
-        new OffsetColumnRenderer( mStylist, mTableLayout, OffsetFormat::Hexadecimal );
+        new OffsetColumnRenderer(mStylist, mTableLayout, OffsetFormat::Hexadecimal);
     mOffsetBorderColumn =
-        new BorderColumnRenderer( mStylist, false );
+        new BorderColumnRenderer(mStylist, false);
 
-    mValueCodec = ValueCodec::createCodec( (ValueCoding)DefaultValueCoding );
+    mValueCodec = ValueCodec::createCodec((ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
-    mCharCodec = CharCodec::createCodec( (CharCoding)DefaultCharCoding );
+    mCharCodec = CharCodec::createCodec((CharCoding)DefaultCharCoding);
     mCharCoding = DefaultCharCoding;
 
-    mTabController = new KTabController( q, nullptr );
-    mNavigator = new KNavigator( q, mTabController );
-    mValueEditor = new KValueEditor( mTableCursor, q, mNavigator );
-    mCharEditor = new KCharEditor( mTableCursor, q, mNavigator );
+    mTabController = new KTabController(q, nullptr);
+    mNavigator = new KNavigator(q, mTabController);
+    mValueEditor = new KValueEditor(mTableCursor, q, mNavigator);
+    mCharEditor = new KCharEditor(mTableCursor, q, mNavigator);
 
-    mMousePaster = new MousePaster( q, nullptr );
-    mMouseNavigator = new MouseNavigator( q, mMousePaster );
+    mMousePaster = new MousePaster(q, nullptr);
+    mMouseNavigator = new MouseNavigator(q, mMousePaster);
     mMouseController = mMouseNavigator;
 
-    mZoomWheelController = new ZoomWheelController( q, nullptr );
-    mDropper = new Dropper( q );
+    mZoomWheelController = new ZoomWheelController(q, nullptr);
+    mDropper = new Dropper(q);
 
-    setWheelController( mZoomWheelController );
+    setWheelController(mZoomWheelController);
 
-    mCursorBlinkTimer = new QTimer( q );
+    mCursorBlinkTimer = new QTimer(q);
 
-    QObject::connect( mCursorBlinkTimer, &QTimer::timeout,
-                      q, [&]() { blinkCursor(); } );
+    QObject::connect(mCursorBlinkTimer, &QTimer::timeout,
+                     q, [&]() { blinkCursor(); });
 
-    q->setAcceptDrops( true );
+    q->setAcceptDrops(true);
 }
 
-void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* byteArrayModel )
+void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byteArrayModel)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    mByteArrayModel->disconnect( q );
+    mByteArrayModel->disconnect(q);
     mCursorPaused = true;
 
     mByteArrayModel = byteArrayModel ? byteArrayModel : nullModel();
 
     // affected:
     // length -> no of lines -> width
-    mTableLayout->setLength( mByteArrayModel->size() );
+    mTableLayout->setLength(mByteArrayModel->size());
     adjustLayoutToSize();
 
     // if the model is readonly make the view too, per default
-    if( mByteArrayModel->isReadOnly() )
-        setReadOnly( true );
-
-    QObject::connect( mByteArrayModel, &AbstractByteArrayModel::readOnlyChanged,
-                      q, [&](bool isReadOnly) { onByteArrayReadOnlyChange(isReadOnly); } );
-    QObject::connect( mByteArrayModel, &AbstractByteArrayModel::contentsChanged,
-                      q, [&](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); } );
-
-    Bookmarkable *bookmarks = qobject_cast<Bookmarkable*>( mByteArrayModel );
-    if( bookmarks )
-    {
-        q->connect( mByteArrayModel, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                    q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)) );
-        q->connect( mByteArrayModel, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                    q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)) );
+    if (mByteArrayModel->isReadOnly()) {
+        setReadOnly(true);
     }
-    Versionable* versionControl = qobject_cast<Versionable*>( mByteArrayModel );
-    if( versionControl )
-    {
-        q->connect( mByteArrayModel, SIGNAL(revertedToVersionIndex(int)),
-                    q, SLOT(onRevertedToVersionIndex(int)) );
+
+    QObject::connect(mByteArrayModel, &AbstractByteArrayModel::readOnlyChanged,
+                     q, [&](bool isReadOnly) { onByteArrayReadOnlyChange(isReadOnly); });
+    QObject::connect(mByteArrayModel, &AbstractByteArrayModel::contentsChanged,
+                     q, [&](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); });
+
+    Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
+    if (bookmarks) {
+        q->connect(mByteArrayModel, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+                   q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)));
+        q->connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+                   q, SLOT(onBookmarksChange(QList<Okteta::Bookmark>)));
+    }
+    Versionable* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
+    if (versionControl) {
+        q->connect(mByteArrayModel, SIGNAL(revertedToVersionIndex(int)),
+                   q, SLOT(onRevertedToVersionIndex(int)));
     }
 
     q->viewport()->update();
@@ -228,171 +225,173 @@ void AbstractByteArrayViewPrivate::setByteArrayModel( AbstractByteArrayModel* by
     ensureCursorVisible();
     unpauseCursor();
 
-    emit q->cursorPositionChanged( cursorPosition() );
+    emit q->cursorPositionChanged(cursorPosition());
 }
 
-
-void AbstractByteArrayViewPrivate::toggleOffsetColumn( bool showOffsetColumn )
+void AbstractByteArrayViewPrivate::toggleOffsetColumn(bool showOffsetColumn)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     const bool isVisible = mOffsetColumn->isVisible();
     // no change?
-    if( isVisible == showOffsetColumn )
+    if (isVisible == showOffsetColumn) {
         return;
+    }
 
-    mOffsetColumn->setVisible( showOffsetColumn );
+    mOffsetColumn->setVisible(showOffsetColumn);
 
     updateViewByWidth();
 
-    emit q->offsetColumnVisibleChanged( showOffsetColumn );
+    emit q->offsetColumnVisibleChanged(showOffsetColumn);
 }
 
-
-void AbstractByteArrayViewPrivate::setOffsetCoding( AbstractByteArrayView::OffsetCoding offsetCoding )
+void AbstractByteArrayViewPrivate::setOffsetCoding(AbstractByteArrayView::OffsetCoding offsetCoding)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     const OffsetFormat::Format format = (OffsetFormat::Format)offsetCoding;
     const OffsetFormat::Format currentFormat = mOffsetColumn->format();
     // no change?
-    if( currentFormat == format )
+    if (currentFormat == format) {
         return;
+    }
 
-    mOffsetColumn->setFormat( format, q->fontMetrics() );
+    mOffsetColumn->setFormat(format, q->fontMetrics());
 
     updateViewByWidth();
 
-    emit q->offsetCodingChanged( offsetCoding );
+    emit q->offsetCodingChanged(offsetCoding);
 }
 
-
-void AbstractByteArrayViewPrivate::changeEvent( QEvent* event )
+void AbstractByteArrayViewPrivate::changeEvent(QEvent* event)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    q->ColumnsView::changeEvent( event );
+    q->ColumnsView::changeEvent(event);
 
-    if( event->type() == QEvent::FontChange
-        && !mInZooming )
-    {
+    if (event->type() == QEvent::FontChange
+        && !mInZooming) {
         mDefaultFontSize = q->font().pointSize();
         // TODO: why reset zoomlevel here? should this not rather recalculate the new applied font size?
         mZoomLevel = 1.0;
     }
 }
 
-void AbstractByteArrayViewPrivate::zoomIn()  { zoomIn( DefaultZoomStep ); }
-void AbstractByteArrayViewPrivate::zoomOut() { zoomOut( DefaultZoomStep ); }
+void AbstractByteArrayViewPrivate::zoomIn()  { zoomIn(DefaultZoomStep); }
+void AbstractByteArrayViewPrivate::zoomOut() { zoomOut(DefaultZoomStep); }
 
-void AbstractByteArrayViewPrivate::zoomIn( int pointIncrement )
+void AbstractByteArrayViewPrivate::zoomIn(int pointIncrement)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    QFont newFont( q->font() );
+    QFont newFont(q->font());
     int newPointSize = QFontInfo(newFont).pointSize() + pointIncrement;
-    if( newPointSize > MaxFontPointSize )
+    if (newPointSize > MaxFontPointSize) {
         newPointSize = MaxFontPointSize;
+    }
 
-    mZoomLevel = (double)newPointSize/mDefaultFontSize;
-    newFont.setPointSize( newPointSize );
+    mZoomLevel = (double)newPointSize / mDefaultFontSize;
+    newFont.setPointSize(newPointSize);
 
     mInZooming = true;
-    q->setFont( newFont );
+    q->setFont(newFont);
     mInZooming = false;
 
-    emit q->zoomLevelChanged( mZoomLevel );
+    emit q->zoomLevelChanged(mZoomLevel);
 }
 
-void AbstractByteArrayViewPrivate::zoomOut( int pointDecrement )
+void AbstractByteArrayViewPrivate::zoomOut(int pointDecrement)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    QFont newFont( q->font() );
+    QFont newFont(q->font());
     int newPointSize = QFontInfo(newFont).pointSize() - pointDecrement;
-    if( newPointSize < MinFontPointSize )
+    if (newPointSize < MinFontPointSize) {
         newPointSize = MinFontPointSize;
+    }
 
-    mZoomLevel = (double)newPointSize/mDefaultFontSize;
-    newFont.setPointSize( newPointSize );
+    mZoomLevel = (double)newPointSize / mDefaultFontSize;
+    newFont.setPointSize(newPointSize);
 
     mInZooming = true;
-    q->setFont( newFont );
+    q->setFont(newFont);
     mInZooming = false;
 
-    emit q->zoomLevelChanged( mZoomLevel );
+    emit q->zoomLevelChanged(mZoomLevel);
 }
 
-
-void AbstractByteArrayViewPrivate::zoomTo( int newPointSize )
+void AbstractByteArrayViewPrivate::zoomTo(int newPointSize)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( newPointSize < MinFontPointSize )
+    if (newPointSize < MinFontPointSize) {
         newPointSize = MinFontPointSize;
-    else if( newPointSize > MaxFontPointSize )
+    } else if (newPointSize > MaxFontPointSize) {
         newPointSize = MaxFontPointSize;
+    }
 
-    QFont newFont( q->font() );
-    if( QFontInfo(newFont).pointSize() == newPointSize )
+    QFont newFont(q->font());
+    if (QFontInfo(newFont).pointSize() == newPointSize) {
         return;
+    }
 
-    newFont.setPointSize( newPointSize );
-    mZoomLevel = (double)newPointSize/mDefaultFontSize;
+    newFont.setPointSize(newPointSize);
+    mZoomLevel = (double)newPointSize / mDefaultFontSize;
 
     mInZooming = true;
-    q->setFont( newFont );
+    q->setFont(newFont);
     mInZooming = false;
 
-    emit q->zoomLevelChanged( mZoomLevel );
+    emit q->zoomLevelChanged(mZoomLevel);
 }
-
 
 void AbstractByteArrayViewPrivate::unZoom()
 {
-    zoomTo( mDefaultFontSize );
+    zoomTo(mDefaultFontSize);
 }
 
-void AbstractByteArrayViewPrivate::setZoomLevel( double zoomLevel )
+void AbstractByteArrayViewPrivate::setZoomLevel(double zoomLevel)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     const int currentPointSize = q->fontInfo().pointSize();
 
     // TODO: here we catch any new zoomlevels which are out of bounds and the zoom already at that bound
-    if( (currentPointSize <= MinFontPointSize && zoomLevel < (double)MinFontPointSize/mDefaultFontSize)
-        || (MaxFontPointSize <= currentPointSize && (double)MaxFontPointSize/mDefaultFontSize < zoomLevel) )
+    if ((currentPointSize <= MinFontPointSize && zoomLevel < (double)MinFontPointSize / mDefaultFontSize)
+        || (MaxFontPointSize <= currentPointSize && (double)MaxFontPointSize / mDefaultFontSize < zoomLevel)) {
         return;
+    }
 
-    int newPointSize = (int)(zoomLevel*mDefaultFontSize);
-    if( newPointSize < MinFontPointSize )
+    int newPointSize = (int)(zoomLevel * mDefaultFontSize);
+    if (newPointSize < MinFontPointSize) {
         newPointSize = MinFontPointSize;
-    else if( newPointSize > MaxFontPointSize )
+    } else if (newPointSize > MaxFontPointSize) {
         newPointSize = MaxFontPointSize;
+    }
 
-    QFont newFont( q->font() );
+    QFont newFont(q->font());
 
     // other than in zoomTo(), where the new zoomlevel is calculated from the integers, here
     // use the passed zoomlevel value, to avoid getting trapped inside a small integer value,
     // if the zoom tool operates relatively
     // think about, if this is the right approach
     mZoomLevel = zoomLevel;
-    newFont.setPointSize( newPointSize );
+    newFont.setPointSize(newPointSize);
 
     mInZooming = true;
-    q->setFont( newFont );
+    q->setFont(newFont);
     mInZooming = false;
 
     emit q->zoomLevelChanged(mZoomLevel);
 }
 
-
-void AbstractByteArrayViewPrivate::setStartOffset( Address startOffset )
+void AbstractByteArrayViewPrivate::setStartOffset(Address startOffset)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( !mTableLayout->setStartOffset(startOffset) )
+    if (!mTableLayout->setStartOffset(startOffset)) {
         return;
+    }
 
     pauseCursor();
     // affects:
@@ -404,15 +403,16 @@ void AbstractByteArrayViewPrivate::setStartOffset( Address startOffset )
     mTableCursor->updateCoord();
     ensureCursorVisible();
     unpauseCursor();
-    emit q->cursorPositionChanged( cursorPosition() );
+    emit q->cursorPositionChanged(cursorPosition());
 }
 
-void AbstractByteArrayViewPrivate::setFirstLineOffset( Address firstLineOffset )
+void AbstractByteArrayViewPrivate::setFirstLineOffset(Address firstLineOffset)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( !mTableLayout->setFirstLineOffset(firstLineOffset) )
+    if (!mTableLayout->setFirstLineOffset(firstLineOffset)) {
         return;
+    }
 
     pauseCursor();
     // affects:
@@ -424,189 +424,202 @@ void AbstractByteArrayViewPrivate::setFirstLineOffset( Address firstLineOffset )
     mTableCursor->updateCoord();
     ensureCursorVisible();
     unpauseCursor();
-    emit q->cursorPositionChanged( cursorPosition() );
+    emit q->cursorPositionChanged(cursorPosition());
 }
 
-void AbstractByteArrayViewPrivate::setLayoutStyle( AbstractByteArrayView::LayoutStyle layoutStyle )
+void AbstractByteArrayViewPrivate::setLayoutStyle(AbstractByteArrayView::LayoutStyle layoutStyle)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    const bool isChanged = ( mResizeStyle != layoutStyle );
+    const bool isChanged = (mResizeStyle != layoutStyle);
 
-    if( !isChanged )
+    if (!isChanged) {
         return;
+    }
 
     mResizeStyle = layoutStyle;
     updateViewByWidth();
 
-    emit q->layoutStyleChanged( mResizeStyle );
+    emit q->layoutStyleChanged(mResizeStyle);
 }
 
-void AbstractByteArrayViewPrivate::setNoOfBytesPerLine( int noOfBytesPerLine )
+void AbstractByteArrayViewPrivate::setNoOfBytesPerLine(int noOfBytesPerLine)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     // if the number is explicitly set we expect a wish for no automatic resize
-    setLayoutStyle( AbstractByteArrayView::FixedLayoutStyle );
+    setLayoutStyle(AbstractByteArrayView::FixedLayoutStyle);
 
-    if( !mTableLayout->setNoOfBytesPerLine(noOfBytesPerLine) )
+    if (!mTableLayout->setNoOfBytesPerLine(noOfBytesPerLine)) {
         return;
+    }
 
     updateViewByWidth();
 
-    emit q->noOfBytesPerLineChanged( mTableLayout->noOfBytesPerLine() );
+    emit q->noOfBytesPerLineChanged(mTableLayout->noOfBytesPerLine());
 }
 
-
-void AbstractByteArrayViewPrivate::setReadOnly( bool readOnly )
+void AbstractByteArrayViewPrivate::setReadOnly(bool readOnly)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    const bool isChanged = ( mReadOnly != readOnly );
+    const bool isChanged = (mReadOnly != readOnly);
 
-    if( !isChanged )
+    if (!isChanged) {
         return;
+    }
 
     mReadOnly = readOnly;
 
     adaptController();
 
-    if( mByteArrayModel->isReadOnly() )
-        emit q->readOnlyChanged( mReadOnly );
+    if (mByteArrayModel->isReadOnly()) {
+        emit q->readOnlyChanged(mReadOnly);
+    }
 }
 
-void AbstractByteArrayViewPrivate::setOverwriteMode( bool overwriteMode )
+void AbstractByteArrayViewPrivate::setOverwriteMode(bool overwriteMode)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    const bool isChanged = ( (mOverWrite != overwriteMode)
-                             && (!mOverWriteOnly || overwriteMode) );
+    const bool isChanged = ((mOverWrite != overwriteMode)
+                            && (!mOverWriteOnly || overwriteMode));
 
-    if( !isChanged )
+    if (!isChanged) {
         return;
+    }
 
     mOverWrite = overwriteMode;
 
     // affected:
     // cursor shape
-    const bool changeCursor = !( mCursorPaused || isByteEditorActive() );
-    if( changeCursor )
+    const bool changeCursor = !(mCursorPaused || isByteEditorActive());
+    if (changeCursor) {
         pauseCursor();
+    }
 
-    mTableCursor->setAppendPosEnabled( !mOverWrite );
+    mTableCursor->setAppendPosEnabled(!mOverWrite);
 
-    if( changeCursor )
+    if (changeCursor) {
         unpauseCursor();
+    }
 
-    emit q->overwriteModeChanged( mOverWrite );
-    emit q->cutAvailable( !mOverWrite && mTableRanges->hasSelection() );
+    emit q->overwriteModeChanged(mOverWrite);
+    emit q->cutAvailable(!mOverWrite && mTableRanges->hasSelection());
 }
 
-void AbstractByteArrayViewPrivate::setOverwriteOnly( bool overwriteOnly )
+void AbstractByteArrayViewPrivate::setOverwriteOnly(bool overwriteOnly)
 {
-    const bool isChanged = ( mOverWriteOnly != overwriteOnly );
+    const bool isChanged = (mOverWriteOnly != overwriteOnly);
 
-    if( !isChanged )
+    if (!isChanged) {
         return;
+    }
 
     mOverWriteOnly = overwriteOnly;
 
-    if( mOverWriteOnly )
-        setOverwriteMode( true );
+    if (mOverWriteOnly) {
+        setOverwriteMode(true);
+    }
 }
 
-void AbstractByteArrayViewPrivate::setValueCoding( AbstractByteArrayView::ValueCoding valueCoding )
+void AbstractByteArrayViewPrivate::setValueCoding(AbstractByteArrayView::ValueCoding valueCoding)
 {
-    if( mValueCoding == valueCoding )
+    if (mValueCoding == valueCoding) {
         return;
+    }
 
     ValueCodec* newValueCodec
-        = ValueCodec::createCodec( (ValueCoding)valueCoding );
-    if( ! newValueCodec )
+        = ValueCodec::createCodec((ValueCoding)valueCoding);
+    if (!newValueCodec) {
         return;
+    }
 
     delete mValueCodec;
     mValueCodec = newValueCodec;
     mValueCoding = valueCoding;
 }
-void AbstractByteArrayViewPrivate::setCharCoding( AbstractByteArrayView::CharCoding charCoding )
+void AbstractByteArrayViewPrivate::setCharCoding(AbstractByteArrayView::CharCoding charCoding)
 {
-    if( mCharCoding == charCoding )
+    if (mCharCoding == charCoding) {
         return;
+    }
 
     CharCodec* newCharCodec
-        = CharCodec::createCodec( (CharCoding)charCoding );
-    if( ! newCharCodec )
+        = CharCodec::createCodec((CharCoding)charCoding);
+    if (!newCharCodec) {
         return;
+    }
 
     delete mCharCodec;
     mCharCodec = newCharCodec;
     mCharCoding = charCoding;
 }
-void AbstractByteArrayViewPrivate::setCharCoding( const QString& charCodingName )
+void AbstractByteArrayViewPrivate::setCharCoding(const QString& charCodingName)
 {
-    if( mCharCodec->name() == charCodingName )
+    if (mCharCodec->name() == charCodingName) {
         return;
+    }
 
-    CharCodec *newCharCodec =
-        CharCodec::createCodec( charCodingName );
-    if( ! newCharCodec )
+    CharCodec* newCharCodec =
+        CharCodec::createCodec(charCodingName);
+    if (!newCharCodec) {
         return;
+    }
 
     delete mCharCodec;
     mCharCodec = newCharCodec;
     mCharCoding = AbstractByteArrayView::LocalEncoding; // TODO: add encoding no to every known codec
 }
 
-void AbstractByteArrayViewPrivate::setMarking( const AddressRange& _marking )
+void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)
 {
-    AddressRange marking( _marking );
-    marking.restrictEndTo( mTableLayout->length()-1 );
+    AddressRange marking(_marking);
+    marking.restrictEndTo(mTableLayout->length() - 1);
 
     const AddressRange oldMarking = mTableRanges->marking();
 
-    if( marking == oldMarking )
+    if (marking == oldMarking) {
         return;
+    }
 
-    mTableRanges->setMarking( marking );
+    mTableRanges->setMarking(marking);
 
     updateChanged();
 }
 
-
 // TODO: make this use select( start, end )
-bool AbstractByteArrayViewPrivate::selectWord( Address index )
+bool AbstractByteArrayViewPrivate::selectWord(Address index)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     bool result = false;
 
-    if( 0 <= index && index < mTableLayout->length()  )
-    {
-        const WordByteArrayService WBS( mByteArrayModel, mCharCodec );
-        const AddressRange wordSection = WBS.wordSection( index );
-        if( wordSection.isValid() )
-        {
+    if (0 <= index && index < mTableLayout->length()) {
+        const WordByteArrayService WBS(mByteArrayModel, mCharCodec);
+        const AddressRange wordSection = WBS.wordSection(index);
+        if (wordSection.isValid()) {
             const bool oldHasSelection = mTableRanges->hasSelection();
 
             pauseCursor();
             finishByteEditor();
 
-            mTableRanges->setFirstWordSelection( wordSection );
-            mTableCursor->gotoIndex( wordSection.nextBehindEnd() );
+            mTableRanges->setFirstWordSelection(wordSection);
+            mTableCursor->gotoIndex(wordSection.nextBehindEnd());
             updateChanged();
 
             unpauseCursor();
 
             const bool newHasSelection = mTableRanges->hasSelection();
-            emit q->selectionChanged( wordSection );
-            if( oldHasSelection != newHasSelection )
-            {
-                if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
-                emit q->copyAvailable( newHasSelection );
-                emit q->hasSelectedDataChanged( newHasSelection );
+            emit q->selectionChanged(wordSection);
+            if (oldHasSelection != newHasSelection) {
+                if (!mOverWrite) {
+                    emit q->cutAvailable(newHasSelection);
+                }
+                emit q->copyAvailable(newHasSelection);
+                emit q->hasSelectedDataChanged(newHasSelection);
             }
-            emit q->cursorPositionChanged( cursorPosition() );
+            emit q->cursorPositionChanged(cursorPosition());
 
             result = true;
         }
@@ -614,205 +627,210 @@ bool AbstractByteArrayViewPrivate::selectWord( Address index )
     return result;
 }
 
-
 // TODO: make this use select( start, end )
-void AbstractByteArrayViewPrivate::selectAll( bool select )
+void AbstractByteArrayViewPrivate::selectAll(bool select)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     const bool oldHasSelection = mTableRanges->hasSelection();
 
     pauseCursor();
     finishByteEditor();
 
-    if( select )
-    {
-        mTableRanges->setSelection( AddressRange(0,mTableLayout->length()-1) );
+    if (select) {
+        mTableRanges->setSelection(AddressRange(0, mTableLayout->length() - 1));
         mTableCursor->gotoEnd();
-    }
-    else
+    } else {
         mTableRanges->removeSelection();
+    }
 
     updateChanged();
 
     unpauseCursor();
 
     const bool newHasSelection = mTableRanges->hasSelection();
-    emit q->selectionChanged( mTableRanges->selection() );
-    if( oldHasSelection != newHasSelection )
-    {
-        if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
-        emit q->copyAvailable( newHasSelection );
-        emit q->hasSelectedDataChanged( newHasSelection );
+    emit q->selectionChanged(mTableRanges->selection());
+    if (oldHasSelection != newHasSelection) {
+        if (!mOverWrite) {
+            emit q->cutAvailable(newHasSelection);
+        }
+        emit q->copyAvailable(newHasSelection);
+        emit q->hasSelectedDataChanged(newHasSelection);
     }
-    emit q->cursorPositionChanged( cursorPosition() );
+    emit q->cursorPositionChanged(cursorPosition());
 }
 
-
-void AbstractByteArrayViewPrivate::setCursorPosition( Address index, bool behind )
+void AbstractByteArrayViewPrivate::setCursorPosition(Address index, bool behind)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     const bool oldHasSelection = mTableRanges->hasSelection();
 
     pauseCursor();
     finishByteEditor();
 
-    if( behind ) --index;
-    mTableCursor->gotoCIndex( index );
-    if( behind )
+    if (behind) {
+        --index;
+    }
+    mTableCursor->gotoCIndex(index);
+    if (behind) {
         mTableCursor->stepBehind();
+    }
 
     mTableRanges->removeSelection();
-    if( mTableRanges->isModified() )
-    {
+    if (mTableRanges->isModified()) {
         updateChanged();
 
         const bool newHasSelection = mTableRanges->hasSelection();
-        emit q->selectionChanged( mTableRanges->selection() );
-        if( oldHasSelection != newHasSelection )
-        {
-            if( !mOverWrite ) emit q->cutAvailable( newHasSelection );
-            emit q->copyAvailable( newHasSelection );
-            emit q->hasSelectedDataChanged( newHasSelection );
+        emit q->selectionChanged(mTableRanges->selection());
+        if (oldHasSelection != newHasSelection) {
+            if (!mOverWrite) {
+                emit q->cutAvailable(newHasSelection);
+            }
+            emit q->copyAvailable(newHasSelection);
+            emit q->hasSelectedDataChanged(newHasSelection);
         }
     }
     ensureCursorVisible();
 
     unpauseCursor();
-    emit q->cursorPositionChanged( cursorPosition() );
+    emit q->cursorPositionChanged(cursorPosition());
 }
 
-
-
-void AbstractByteArrayViewPrivate::setSelectionCursorPosition( Address index )
+void AbstractByteArrayViewPrivate::setSelectionCursorPosition(Address index)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     pauseCursor();
     finishByteEditor();
 
-    if( !mTableRanges->selectionStarted() )
-        mTableRanges->setSelectionStart( mTableCursor->realIndex() );
+    if (!mTableRanges->selectionStarted()) {
+        mTableRanges->setSelectionStart(mTableCursor->realIndex());
+    }
 
-    mTableCursor->gotoCIndex( index );
+    mTableCursor->gotoCIndex(index);
 
-    mTableRanges->setSelectionEnd( mTableCursor->realIndex() );
+    mTableRanges->setSelectionEnd(mTableCursor->realIndex());
 
     ensureCursorVisible();
     updateChanged();
 
     unpauseCursor();
 
-    if( mTableRanges->isModified() )
+    if (mTableRanges->isModified()) {
         q->emitSelectionSignals(); // TODO: can this be moved somewhere
-    emit q->cursorPositionChanged( mTableCursor->realIndex() );
+    }
+    emit q->cursorPositionChanged(mTableCursor->realIndex());
 }
 
-
-
-void AbstractByteArrayViewPrivate::setSelection( const AddressRange& _selection )
+void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    AddressRange selection( _selection );
-    selection.restrictEndTo( mTableLayout->length()-1 );
+    AddressRange selection(_selection);
+    selection.restrictEndTo(mTableLayout->length() - 1);
 
     const AddressRange oldSelection = mTableRanges->selection();
 
-    if( ! selection.isValid()
-        || selection == oldSelection )
+    if (!selection.isValid()
+        || selection == oldSelection) {
         return;
+    }
 
     pauseCursor();
     finishByteEditor();
 
-    mTableRanges->setSelection( selection );
-    mTableCursor->gotoCIndex( selection.nextBehindEnd() );
+    mTableRanges->setSelection(selection);
+    mTableCursor->gotoCIndex(selection.nextBehindEnd());
 // TODO:            ensureVisible( *mActiveColumn, mTableLayout->coordOfIndex(selection.start()) );
     ensureCursorVisible();
     updateChanged();
 
     unpauseCursor();
 
-    emit q->selectionChanged( selection );
-    if( oldSelection.isEmpty() )
-    {
-        if( !mOverWrite ) emit q->cutAvailable( true );
-        emit q->copyAvailable( true );
-        emit q->hasSelectedDataChanged( true );
+    emit q->selectionChanged(selection);
+    if (oldSelection.isEmpty()) {
+        if (!mOverWrite) {
+            emit q->cutAvailable(true);
+        }
+        emit q->copyAvailable(true);
+        emit q->hasSelectedDataChanged(true);
     }
-    emit q->cursorPositionChanged( cursorPosition() );
+    emit q->cursorPositionChanged(cursorPosition());
 }
-
 
 QByteArray AbstractByteArrayViewPrivate::selectedData() const
 {
-    if( !mTableRanges->hasSelection() )
+    if (!mTableRanges->hasSelection()) {
         return QByteArray();
+    }
 
     const AddressRange selection = mTableRanges->selection();
     QByteArray data;
-    data.resize( selection.width() );
-    byteArrayModel()->copyTo( reinterpret_cast<Byte*>(data.data()), selection.start(), selection.width() );
+    data.resize(selection.width());
+    byteArrayModel()->copyTo(reinterpret_cast<Byte*>(data.data()), selection.start(), selection.width());
     return data;
 }
 
-
 QMimeData* AbstractByteArrayViewPrivate::selectionAsMimeData() const
 {
-    if( !mTableRanges->hasSelection() )
+    if (!mTableRanges->hasSelection()) {
         return nullptr;
+    }
 
     QMimeData* mimeData = new QMimeData;
-    mimeData->setData( octetStreamFormatName(), selectedData() );
+    mimeData->setData(octetStreamFormatName(), selectedData());
     return mimeData;
 }
 
-void AbstractByteArrayViewPrivate::cutToClipboard( QClipboard::Mode mode )
+void AbstractByteArrayViewPrivate::cutToClipboard(QClipboard::Mode mode)
 {
-    if( isEffectiveReadOnly() || mOverWrite )
+    if (isEffectiveReadOnly() || mOverWrite) {
         return;
+    }
 
     QMimeData* cutData = selectionAsMimeData();
-    if( !cutData )
+    if (!cutData) {
         return;
+    }
 
-    QApplication::clipboard()->setMimeData( cutData, mode );
+    QApplication::clipboard()->setMimeData(cutData, mode);
 
     removeSelectedData();
 }
 
-void AbstractByteArrayViewPrivate::copyToClipboard( QClipboard::Mode mode ) const
+void AbstractByteArrayViewPrivate::copyToClipboard(QClipboard::Mode mode) const
 {
     QMimeData* cutData = selectionAsMimeData();
-    if( !cutData )
+    if (!cutData) {
         return;
+    }
 
 //     if( mode == QClipboard::Selection )
 //         q->disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
 
-    QApplication::clipboard()->setMimeData( cutData, mode );
+    QApplication::clipboard()->setMimeData(cutData, mode);
 
-    //TODO: why did we do this? And why does the disconnect above not work?
+    // TODO: why did we do this? And why does the disconnect above not work?
     // got connected multiple times after a few selections by mouse
 //         connect( QApplication::clipboard(), SIGNAL(selectionChanged()), SLOT(clipboardChanged()) );
 }
 
-void AbstractByteArrayViewPrivate::pasteFromClipboard( QClipboard::Mode mode )
+void AbstractByteArrayViewPrivate::pasteFromClipboard(QClipboard::Mode mode)
 {
-    if( isEffectiveReadOnly() )
+    if (isEffectiveReadOnly()) {
         return;
+    }
 
-    const QMimeData* data = QApplication::clipboard()->mimeData( mode );
-    pasteData( data );
+    const QMimeData* data = QApplication::clipboard()->mimeData(mode);
+    pasteData(data);
 }
 
-
-void AbstractByteArrayViewPrivate::pasteData( const QMimeData* data )
+void AbstractByteArrayViewPrivate::pasteData(const QMimeData* data)
 {
-    if( ! data || data->formats().isEmpty() )
+    if (!data || data->formats().isEmpty()) {
         return;
+    }
 
     // SYNC: with bytearraydocumentfactory.cpp
     // if there is a octet stream, use it, otherwise take the dump of the format
@@ -821,119 +839,112 @@ void AbstractByteArrayViewPrivate::pasteData( const QMimeData* data )
     // take byte array descriptions, like encodings in chars or values
     // would need the movement of the encoders into the core library
     QString dataFormatName = octetStreamFormatName();
-    if ( ! data->hasFormat(dataFormatName) )
+    if (!data->hasFormat(dataFormatName)) {
         dataFormatName = data->formats()[0];
+    }
 
-    const QByteArray byteArray = data->data( dataFormatName );
+    const QByteArray byteArray = data->data(dataFormatName);
 
-    if( !byteArray.isEmpty() )
-        insert( byteArray );
+    if (!byteArray.isEmpty()) {
+        insert(byteArray);
+    }
 }
 
-bool AbstractByteArrayViewPrivate::canReadData( const QMimeData* data ) const
+bool AbstractByteArrayViewPrivate::canReadData(const QMimeData* data) const
 {
-Q_UNUSED( data )
+    Q_UNUSED(data)
     // taking all for now, see comment in pasteData above
-    return true;//data->hasFormat( OctetStreamFormatName );
+    return true;// data->hasFormat( OctetStreamFormatName );
 }
 
-
-void AbstractByteArrayViewPrivate::insert( const QByteArray& data )
+void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     const bool oldHasSelection = mTableRanges->hasSelection();
 
-    if( mOverWrite )
-    {
+    if (mOverWrite) {
         Size lengthOfInserted;
-        if( mTableRanges->hasSelection() )
-        {
+        if (mTableRanges->hasSelection()) {
             // replacing the selection:
             // we restrict the replacement to the minimum length of selection and input
             AddressRange selection = mTableRanges->removeSelection();
-            selection.restrictEndByWidth( data.size() );
-            lengthOfInserted = mByteArrayModel->replace( selection, reinterpret_cast<const Byte*>(data.constData()), selection.width() );
-        }
-        else
-        {
+            selection.restrictEndByWidth(data.size());
+            lengthOfInserted = mByteArrayModel->replace(selection, reinterpret_cast<const Byte*>(data.constData()), selection.width());
+        } else {
             const Size length = mTableLayout->length();
-            if( !isCursorBehind() && length > 0 )
-            {
+            if (!isCursorBehind() && length > 0) {
                 // replacing the normal data, at least until the end
-                AddressRange insertRange = AddressRange::fromWidth( cursorPosition(), data.size() );
-                insertRange.restrictEndTo( length-1 );
-                lengthOfInserted = mByteArrayModel->replace( insertRange, reinterpret_cast<const Byte*>(data.constData()), insertRange.width() );
-            }
-            else
+                AddressRange insertRange = AddressRange::fromWidth(cursorPosition(), data.size());
+                insertRange.restrictEndTo(length - 1);
+                lengthOfInserted = mByteArrayModel->replace(insertRange, reinterpret_cast<const Byte*>(data.constData()), insertRange.width());
+            } else {
                 lengthOfInserted = 0;
+            }
         }
         // if inserting ourself we want to place the cursor at the end of the inserted data
-        if( lengthOfInserted > 0 )
-        {
+        if (lengthOfInserted > 0) {
             pauseCursor();
             mTableCursor->gotoNextByte(lengthOfInserted);
             unpauseCursor();
-            emit q->cursorPositionChanged( cursorPosition() );
+            emit q->cursorPositionChanged(cursorPosition());
         }
-    }
-    else
-    {
-        if( mTableRanges->hasSelection() )
-        {
+    } else {
+        if (mTableRanges->hasSelection()) {
             // replacing the selection
             const AddressRange selection = mTableRanges->removeSelection();
-            mByteArrayModel->replace( selection, data );
+            mByteArrayModel->replace(selection, data);
+        } else {
+            mByteArrayModel->insert(cursorPosition(), data);
         }
-        else
-            mByteArrayModel->insert( cursorPosition(), data );
     }
 
     const bool newHasSelection = mTableRanges->hasSelection();
-    emit q->selectionChanged( mTableRanges->selection() );
-    if( oldHasSelection != newHasSelection )
-        emit q->hasSelectedDataChanged( newHasSelection );
+    emit q->selectionChanged(mTableRanges->selection());
+    if (oldHasSelection != newHasSelection) {
+        emit q->hasSelectedDataChanged(newHasSelection);
+    }
 }
-
 
 void AbstractByteArrayViewPrivate::removeSelectedData()
 {
     // Can't we do this?
-    if( isEffectiveReadOnly() || mOverWrite ) //TODO: || mValueEditor->isInEditMode() )
+    if (isEffectiveReadOnly() || mOverWrite) { // TODO: || mValueEditor->isInEditMode() )
         return;
+    }
 
     const AddressRange selection = mTableRanges->removeSelection();
 
-    mByteArrayModel->remove( selection );
+    mByteArrayModel->remove(selection);
 
 //     clearUndoRedo();
 
-  //emit q->selectionChanged( -1, -1 );
+    // emit q->selectionChanged( -1, -1 );
 }
 
-bool AbstractByteArrayViewPrivate::getNextChangedRange( CoordRange* changedRange, const CoordRange& visibleRange ) const
+bool AbstractByteArrayViewPrivate::getNextChangedRange(CoordRange* changedRange, const CoordRange& visibleRange) const
 {
-    const bool result = mTableRanges->overlapsChanges( visibleRange, changedRange );
+    const bool result = mTableRanges->overlapsChanges(visibleRange, changedRange);
 
-    if( result )
-        changedRange->restrictTo( visibleRange );
+    if (result) {
+        changedRange->restrictTo(visibleRange);
+    }
 
     return result;
 }
-
 
 void AbstractByteArrayViewPrivate::adaptController()
 {
     KController* controller =
         isEffectiveReadOnly() ?                                 (KController*)mNavigator :
         activeCoding() == AbstractByteArrayView::CharCodingId ? (KController*)mCharEditor :
-                                                                (KController*)mValueEditor;
-    setController( controller );
+        (KController*)mValueEditor;
+    setController(controller);
 }
 
 void AbstractByteArrayViewPrivate::updateViewByWidth()
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     pauseCursor();
 
@@ -949,23 +960,22 @@ void AbstractByteArrayViewPrivate::updateViewByWidth()
     // ensureCursorVisible();
 
     unpauseCursor();
-    emit q->cursorPositionChanged( cursorPosition() );
+    emit q->cursorPositionChanged(cursorPosition());
 }
-
 
 void AbstractByteArrayViewPrivate::adjustLayoutToSize()
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     // check whether there is a change with the numbers of fitting bytes per line
-    if( mResizeStyle != AbstractByteArrayView::FixedLayoutStyle )
-    {
+    if (mResizeStyle != AbstractByteArrayView::FixedLayoutStyle) {
         // changes?
-        if( mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine()) )
+        if (mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine())) {
             adjustToLayoutNoOfBytesPerLine();
+        }
     }
 
-    q->setNoOfLines( mTableLayout->noOfLines() );
+    q->setNoOfLines(mTableLayout->noOfLines());
 }
 
 void AbstractByteArrayViewPrivate::startCursor()
@@ -974,9 +984,8 @@ void AbstractByteArrayViewPrivate::startCursor()
 
     updateCursors();
 
-    mCursorBlinkTimer->start( QApplication::cursorFlashTime()/2 );
+    mCursorBlinkTimer->start(QApplication::cursorFlashTime() / 2);
 }
-
 
 void AbstractByteArrayViewPrivate::stopCursor()
 {
@@ -985,224 +994,223 @@ void AbstractByteArrayViewPrivate::stopCursor()
     pauseCursor();
 }
 
-
 void AbstractByteArrayViewPrivate::unpauseCursor()
 {
     mCursorPaused = false;
 
-    if( mCursorBlinkTimer->isActive() )
+    if (mCursorBlinkTimer->isActive()) {
         updateCursors();
+    }
 }
 
-
-void AbstractByteArrayViewPrivate::mousePressEvent( QMouseEvent* mouseEvent )
+void AbstractByteArrayViewPrivate::mousePressEvent(QMouseEvent* mouseEvent)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( mMouseController->handleMousePressEvent(mouseEvent) )
+    if (mMouseController->handleMousePressEvent(mouseEvent)) {
         mouseEvent->accept();
-    else
-        q->ColumnsView::mousePressEvent( mouseEvent );
+    } else {
+        q->ColumnsView::mousePressEvent(mouseEvent);
+    }
 }
 
-void AbstractByteArrayViewPrivate::mouseMoveEvent( QMouseEvent *mouseEvent )
+void AbstractByteArrayViewPrivate::mouseMoveEvent(QMouseEvent* mouseEvent)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( mMouseController->handleMouseMoveEvent(mouseEvent) )
+    if (mMouseController->handleMouseMoveEvent(mouseEvent)) {
         mouseEvent->accept();
-    else
-        q->ColumnsView::mouseMoveEvent( mouseEvent );
+    } else {
+        q->ColumnsView::mouseMoveEvent(mouseEvent);
+    }
 }
 
-void AbstractByteArrayViewPrivate::mouseReleaseEvent( QMouseEvent* mouseEvent )
+void AbstractByteArrayViewPrivate::mouseReleaseEvent(QMouseEvent* mouseEvent)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( mMouseController->handleMouseReleaseEvent(mouseEvent) )
+    if (mMouseController->handleMouseReleaseEvent(mouseEvent)) {
         mouseEvent->accept();
-    else
-        q->ColumnsView::mouseReleaseEvent( mouseEvent );
+    } else {
+        q->ColumnsView::mouseReleaseEvent(mouseEvent);
+    }
 }
 
 // gets called after press and release instead of a plain press event (?)
-void AbstractByteArrayViewPrivate::mouseDoubleClickEvent( QMouseEvent* mouseEvent )
+void AbstractByteArrayViewPrivate::mouseDoubleClickEvent(QMouseEvent* mouseEvent)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( mMouseController->handleMouseDoubleClickEvent(mouseEvent) )
+    if (mMouseController->handleMouseDoubleClickEvent(mouseEvent)) {
         mouseEvent->accept();
-    else
-        q->ColumnsView::mouseDoubleClickEvent( mouseEvent );
+    } else {
+        q->ColumnsView::mouseDoubleClickEvent(mouseEvent);
+    }
 }
 
-
-bool AbstractByteArrayViewPrivate::event( QEvent* event )
+bool AbstractByteArrayViewPrivate::event(QEvent* event)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    // 
-    if( event->type() == QEvent::KeyPress )
-    {
-        QKeyEvent* keyEvent = static_cast<QKeyEvent*>( event );
-        if( keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Backtab )
-        {
-            q->keyPressEvent( keyEvent );
-            if( keyEvent->isAccepted() )
+    //
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+        if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Backtab) {
+            q->keyPressEvent(keyEvent);
+            if (keyEvent->isAccepted()) {
                 return true;
+            }
         }
     }
 
-    return q->ColumnsView::event( event );
+    return q->ColumnsView::event(event);
 }
 
-bool AbstractByteArrayViewPrivate::viewportEvent( QEvent* event )
+bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( event->type() == QEvent::ToolTip )
-    {
-        QHelpEvent* helpEvent = static_cast<QHelpEvent*>( event );
+    if (event->type() == QEvent::ToolTip) {
+        QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
 
         QString toolTip;
 
-        Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>( mByteArrayModel );
-        if( bookmarks )
-        {
-            const Address index = indexByPoint( q->viewportToColumns(helpEvent->pos()) );
-            if( index != -1 )
-            {
-                if( bookmarks->containsBookmarkFor(index) )
-                    toolTip = bookmarks->bookmarkFor( index ).name();
+        Bookmarkable* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
+        if (bookmarks) {
+            const Address index = indexByPoint(q->viewportToColumns(helpEvent->pos()));
+            if (index != -1) {
+                if (bookmarks->containsBookmarkFor(index)) {
+                    toolTip = bookmarks->bookmarkFor(index).name();
+                }
             }
         }
 
-        if( ! toolTip.isNull() )
-            QToolTip::showText( helpEvent->globalPos(), toolTip );
-        else
-        {
+        if (!toolTip.isNull()) {
+            QToolTip::showText(helpEvent->globalPos(), toolTip);
+        } else {
             QToolTip::hideText();
             event->ignore();
         }
 
         return true;
-     }
+    }
 
-    return q->ColumnsView::viewportEvent( event );
+    return q->ColumnsView::viewportEvent(event);
 }
 
-void AbstractByteArrayViewPrivate::resizeEvent( QResizeEvent* resizeEvent )
+void AbstractByteArrayViewPrivate::resizeEvent(QResizeEvent* resizeEvent)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    if( mResizeStyle != AbstractByteArrayView::FixedLayoutStyle )
-    {
+    if (mResizeStyle != AbstractByteArrayView::FixedLayoutStyle) {
         // changes?
-        if( mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine()) )
-        {
-            q->setNoOfLines( mTableLayout->noOfLines() );
+        if (mTableLayout->setNoOfBytesPerLine(fittingBytesPerLine())) {
+            q->setNoOfLines(mTableLayout->noOfLines());
             updateViewByWidth();
         }
     }
 
-    q->ColumnsView::resizeEvent( resizeEvent );
+    q->ColumnsView::resizeEvent(resizeEvent);
 
-    mTableLayout->setNoOfLinesPerPage( q->noOfLinesPerPage() ); // TODO: doesn't work with the new size!!!
+    mTableLayout->setNoOfLinesPerPage(q->noOfLinesPerPage());   // TODO: doesn't work with the new size!!!
 }
 
-void AbstractByteArrayViewPrivate::focusInEvent( QFocusEvent* focusEvent )
+void AbstractByteArrayViewPrivate::focusInEvent(QFocusEvent* focusEvent)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
-    q->ColumnsView::focusInEvent( focusEvent );
+    q->ColumnsView::focusInEvent(focusEvent);
     startCursor();
 
     const Qt::FocusReason focusReason = focusEvent->reason();
-    if( focusReason != Qt::ActiveWindowFocusReason
-        && focusReason != Qt::PopupFocusReason )
-        emit q->focusChanged( true );
+    if (focusReason != Qt::ActiveWindowFocusReason
+        && focusReason != Qt::PopupFocusReason) {
+        emit q->focusChanged(true);
+    }
 }
 
-void AbstractByteArrayViewPrivate::focusOutEvent( QFocusEvent* focusEvent )
+void AbstractByteArrayViewPrivate::focusOutEvent(QFocusEvent* focusEvent)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     stopCursor();
-    q->ColumnsView::focusOutEvent( focusEvent );
+    q->ColumnsView::focusOutEvent(focusEvent);
 
     const Qt::FocusReason focusReason = focusEvent->reason();
-    if( focusReason != Qt::ActiveWindowFocusReason
-        && focusReason != Qt::PopupFocusReason )
-        emit q->focusChanged( false );
+    if (focusReason != Qt::ActiveWindowFocusReason
+        && focusReason != Qt::PopupFocusReason) {
+        emit q->focusChanged(false);
+    }
 }
 
-
-void AbstractByteArrayViewPrivate::dragEnterEvent( QDragEnterEvent* dragEnterEvent )
+void AbstractByteArrayViewPrivate::dragEnterEvent(QDragEnterEvent* dragEnterEvent)
 {
-    if( mDropper->handleDragEnterEvent(dragEnterEvent) )
+    if (mDropper->handleDragEnterEvent(dragEnterEvent)) {
         dragEnterEvent->accept();
-    else
+    } else {
         dragEnterEvent->ignore();
+    }
 }
 
-void AbstractByteArrayViewPrivate::dragMoveEvent( QDragMoveEvent* dragMoveEvent )
+void AbstractByteArrayViewPrivate::dragMoveEvent(QDragMoveEvent* dragMoveEvent)
 {
-    if( mDropper->handleDragMoveEvent(dragMoveEvent) )
+    if (mDropper->handleDragMoveEvent(dragMoveEvent)) {
         dragMoveEvent->accept();
-    else
+    } else {
         dragMoveEvent->ignore();
+    }
 }
 
-void AbstractByteArrayViewPrivate::dragLeaveEvent( QDragLeaveEvent* dragLeaveEvent )
+void AbstractByteArrayViewPrivate::dragLeaveEvent(QDragLeaveEvent* dragLeaveEvent)
 {
-    if( mDropper->handleDragLeaveEvent(dragLeaveEvent) )
+    if (mDropper->handleDragLeaveEvent(dragLeaveEvent)) {
         dragLeaveEvent->accept();
-    else
+    } else {
         dragLeaveEvent->ignore();
+    }
 }
 
-void AbstractByteArrayViewPrivate::dropEvent( QDropEvent* dropEvent )
+void AbstractByteArrayViewPrivate::dropEvent(QDropEvent* dropEvent)
 {
-    if( mDropper->handleDropEvent(dropEvent) )
+    if (mDropper->handleDropEvent(dropEvent)) {
         dropEvent->accept();
-    else
+    } else {
         dropEvent->ignore();
+    }
 }
 
-
-void AbstractByteArrayViewPrivate::onBookmarksChange( const QList<Bookmark>& bookmarks )
+void AbstractByteArrayViewPrivate::onBookmarksChange(const QList<Bookmark>& bookmarks)
 {
-    for( const Bookmark& bookmark : bookmarks )
-    {
+    for (const Bookmark& bookmark : bookmarks) {
         const Address position = bookmark.offset();
-        mTableRanges->addChangedRange( position, position );
+        mTableRanges->addChangedRange(position, position);
     }
 
     unpauseCursor();
     updateChanged();
 }
 
-void AbstractByteArrayViewPrivate::onRevertedToVersionIndex( int versionIndex )
+void AbstractByteArrayViewPrivate::onRevertedToVersionIndex(int versionIndex)
 {
-Q_UNUSED( versionIndex )
+    Q_UNUSED(versionIndex)
     // TODO: only call this if needed
     cancelByteEditor();
 }
 
-void AbstractByteArrayViewPrivate::onByteArrayReadOnlyChange( bool isByteArrayReadOnly )
+void AbstractByteArrayViewPrivate::onByteArrayReadOnlyChange(bool isByteArrayReadOnly)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     adaptController();
 
-    if( !mReadOnly )
-        emit q->readOnlyChanged( isByteArrayReadOnly );
+    if (!mReadOnly) {
+        emit q->readOnlyChanged(isByteArrayReadOnly);
+    }
 }
 
-
-void AbstractByteArrayViewPrivate::onContentsChanged( const ArrayChangeMetricsList& changeList )
+void AbstractByteArrayViewPrivate::onContentsChanged(const ArrayChangeMetricsList& changeList)
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     pauseCursor();
 
@@ -1210,24 +1218,24 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const ArrayChangeMetricsLi
     const Size oldLength = mTableLayout->length(); // TODO: hack for mDataCursor->adaptSelectionToChange
     // update lengths
     int oldNoOfLines = q->noOfLines();
-    mTableLayout->setLength( mByteArrayModel->size() );
+    mTableLayout->setLength(mByteArrayModel->size());
     const int newNoOfLines = mTableLayout->noOfLines();
-    if( oldNoOfLines != newNoOfLines )
-    {
-        q->setNoOfLines( newNoOfLines );
+    if (oldNoOfLines != newNoOfLines) {
+        q->setNoOfLines(newNoOfLines);
         const LineRange changedLines = (oldNoOfLines < newNoOfLines) ?
-            LineRange( oldNoOfLines, newNoOfLines-1 ) :
-            LineRange( newNoOfLines, oldNoOfLines-1 );
-        mTableRanges->addChangedOffsetLines( changedLines );
+                                       LineRange(oldNoOfLines, newNoOfLines - 1) :
+                                       LineRange(newNoOfLines, oldNoOfLines - 1);
+        mTableRanges->addChangedOffsetLines(changedLines);
     }
 
     // adapt cursor(s)
-    if( atEnd )
+    if (atEnd) {
         mTableCursor->gotoEnd();
-    else
-        mTableCursor->adaptToChanges( changeList, oldLength );
+    } else {
+        mTableCursor->adaptToChanges(changeList, oldLength);
+    }
 
-    mTableRanges->adaptToChanges( changeList, oldLength );
+    mTableRanges->adaptToChanges(changeList, oldLength);
     // qCDebug(LOG_OKTETA_GUI) << "Cursor:"<<mDataCursor->index()<<", selection:"<<mTableRanges->selectionStart()<<"-"<<mTableRanges->selectionEnd()
     //          <<", BytesPerLine: "<<mTableLayout->noOfBytesPerLine()<<endl;
 
@@ -1235,18 +1243,17 @@ void AbstractByteArrayViewPrivate::onContentsChanged( const ArrayChangeMetricsLi
     updateChanged();
     unpauseCursor();
 
-    emit q->cursorPositionChanged( cursorPosition() );
+    emit q->cursorPositionChanged(cursorPosition());
 }
-
 
 #if 0
 void AbstractByteArrayViewPrivate::onClipboardChanged()
 {
-    Q_Q( AbstractByteArrayView );
+    Q_Q(AbstractByteArrayView);
 
     // don't listen to selection changes
-    q->disconnect( QApplication::clipboard(), SIGNAL(selectionChanged()) );
-    selectAll( false );
+    q->disconnect(QApplication::clipboard(), SIGNAL(selectionChanged()));
+    selectAll(false);
 }
 #endif
 

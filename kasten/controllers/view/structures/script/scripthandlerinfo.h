@@ -36,15 +36,21 @@ class PointerScriptClass;
 class QScriptEngine;
 class ScriptLogger;
 
-class ScriptHandlerInfo {
+class ScriptHandlerInfo
+{
 public:
     explicit ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger);
     ~ScriptHandlerInfo();
 
     /** The type of function that is being evaluated (most writing is only allowed when updating) */
-    enum class Mode {
-        None = 0, Validating = 1, Updating = 2, DeterminingLength = 4,
-        TaggedUnionSelection = 8, CustomToString = 16
+    enum class Mode
+    {
+        None = 0,
+        Validating = 1,
+        Updating = 2,
+        DeterminingLength = 4,
+        TaggedUnionSelection = 8,
+        CustomToString = 16
     };
 
     QScopedPointer<ArrayScriptClass> mArrayClass;

@@ -26,15 +26,13 @@
 // Qt
 #include <QObject>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class AddressRangeListTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testSimpleConstructor();
     void testAddSingleRange();
     void testAddJoinableRanges();

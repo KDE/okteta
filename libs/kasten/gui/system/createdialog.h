@@ -26,23 +26,20 @@
 // Qt
 #include <QDialog>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelDataGeneratorConfigEditor;
 
-
 class CreateDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit CreateDialog( AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent = nullptr );
+public:
+    explicit CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor, QWidget* parent = nullptr);
 
     ~CreateDialog() override;
 
-  private:
+private:
     AbstractModelDataGeneratorConfigEditor* mConfigEditor;
 };
 

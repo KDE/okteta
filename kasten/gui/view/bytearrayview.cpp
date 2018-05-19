@@ -33,114 +33,110 @@
 // Qt
 #include <QFontDatabase>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayView::ByteArrayView( ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer )
-  : AbstractView( document )
-  , mDocument( document )
-  , mByteArrayViewProfileSynchronizer( synchronizer )
+ByteArrayView::ByteArrayView(ByteArrayDocument* document, ByteArrayViewProfileSynchronizer* synchronizer)
+    : AbstractView(document)
+    , mDocument(document)
+    , mByteArrayViewProfileSynchronizer(synchronizer)
 {
     init();
-    synchronizer->setView( this );
+    synchronizer->setView(this);
 }
 
-ByteArrayView::ByteArrayView( ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
-                              Qt::Alignment alignment )
-  : AbstractView( static_cast<ByteArrayDocument*>(other->baseModel()) )
-  , mDocument( static_cast<ByteArrayDocument*>(other->baseModel()) )
-  , mByteArrayViewProfileSynchronizer( synchronizer )
+ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchronizer* synchronizer,
+                             Qt::Alignment alignment)
+    : AbstractView(static_cast<ByteArrayDocument*>(other->baseModel()))
+    , mDocument(static_cast<ByteArrayDocument*>(other->baseModel()))
+    , mByteArrayViewProfileSynchronizer(synchronizer)
 {
     init();
 
-    mWidget->setStartOffset( other->startOffset() );
-    mWidget->setFirstLineOffset( other->firstLineOffset() );
+    mWidget->setStartOffset(other->startOffset());
+    mWidget->setFirstLineOffset(other->firstLineOffset());
 
-    setViewModus( other->viewModus() );
-    setVisibleByteArrayCodings( other->visibleByteArrayCodings() );
-    toggleOffsetColumn( other->offsetColumnVisible() );
-    setOffsetCoding( other->offsetCoding() );
+    setViewModus(other->viewModus());
+    setVisibleByteArrayCodings(other->visibleByteArrayCodings());
+    toggleOffsetColumn(other->offsetColumnVisible());
+    setOffsetCoding(other->offsetCoding());
 
-    setCharCoding( other->charCodingName() );
-    setShowsNonprinting( other->showsNonprinting() );
-    setSubstituteChar( other->substituteChar() );
-    setUndefinedChar( other->undefinedChar() );
+    setCharCoding(other->charCodingName());
+    setShowsNonprinting(other->showsNonprinting());
+    setSubstituteChar(other->substituteChar());
+    setUndefinedChar(other->undefinedChar());
 
-    setValueCoding( other->valueCoding() );
+    setValueCoding(other->valueCoding());
 
-    setNoOfGroupedBytes( other->noOfGroupedBytes() );
-    setNoOfBytesPerLine( other->noOfBytesPerLine() );
+    setNoOfGroupedBytes(other->noOfGroupedBytes());
+    setNoOfBytesPerLine(other->noOfBytesPerLine());
     // TODO: this can lead to different layouts due to possible one-pixel difference in width!
-    setLayoutStyle( other->layoutStyle() );
+    setLayoutStyle(other->layoutStyle());
 
     const Okteta::AddressRange selection = other->selection();
-    setSelection( selection.start(), selection.end() );
-    setZoomLevel( other->zoomLevel() );
-    setCursorPosition( other->cursorPosition() );
+    setSelection(selection.start(), selection.end());
+    setZoomLevel(other->zoomLevel());
+    setCursorPosition(other->cursorPosition());
 
-    setOverwriteMode( other->isOverwriteMode() );
-    setReadOnly( other->isReadOnly() );
+    setOverwriteMode(other->isOverwriteMode());
+    setReadOnly(other->isReadOnly());
     // TODO: all width
 
     const QRect otherViewRect = other->mWidget->viewRect();
 
     QPoint viewPos = otherViewRect.topLeft();
-    if( alignment == Qt::AlignBottom )
-    {
-        viewPos.setY( otherViewRect.bottom() + 1 );
+    if (alignment == Qt::AlignBottom) {
+        viewPos.setY(otherViewRect.bottom() + 1);
     }
     // TODO: care for resize style
-    else if( alignment == Qt::AlignRight )
-    {
-        viewPos.setX( otherViewRect.right() + 1 );
+    else if (alignment == Qt::AlignRight) {
+        viewPos.setX(otherViewRect.right() + 1);
     }
     // TODO: doesn't really work at this stage, because the widget will get resized when inserted
     // and then ensureCursorVisible destroys the fun
-    mWidget->setViewPos( viewPos );
+    mWidget->setViewPos(viewPos);
 
-    synchronizer->setView( this );
+    synchronizer->setView(this);
 }
 
 void ByteArrayView::init()
 {
     Okteta::AbstractByteArrayModel* content = mDocument->content();
     mWidget = new Okteta::ByteArrayJanusView();
-    mWidget->setByteArrayModel( content );
+    mWidget->setByteArrayModel(content);
 
     // TODO: find a signal/event emitted when fixedfont changes
 //     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
 //              this, &ByteArrayView::setFontByGlobalSettings );
     setFontByGlobalSettings();
 
-    mWidget->setNoOfBytesPerLine( 16 );
+    mWidget->setNoOfBytesPerLine(16);
 
-    const bool useOverwriteAsDefault = ( content->size() > 0 );
-    mWidget->setOverwriteMode( useOverwriteAsDefault );
+    const bool useOverwriteAsDefault = (content->size() > 0);
+    mWidget->setOverwriteMode(useOverwriteAsDefault);
 
     // propagate signals
     using Okteta::ByteArrayJanusView;
-    connect( mDocument, &ByteArrayDocument::titleChanged, this, &ByteArrayView::titleChanged );
-    connect( mWidget, &ByteArrayJanusView::hasSelectedDataChanged, this, &ByteArrayView::hasSelectedDataChanged );
-    connect( mWidget, &ByteArrayJanusView::readOnlyChanged, this, &ByteArrayView::readOnlyChanged );
-    connect( mWidget, &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::overwriteModeChanged );
-    connect( mWidget, &ByteArrayJanusView::selectionChanged, this, &ByteArrayView::onSelectionChanged );
-    connect( mWidget, &ByteArrayJanusView::cursorPositionChanged, this, &ByteArrayView::cursorPositionChanged );
-    connect( mWidget, &ByteArrayJanusView::valueCodingChanged, this, &ByteArrayView::valueCodingChanged );
-    connect( mWidget, &ByteArrayJanusView::charCodecChanged, this, &ByteArrayView::charCodecChanged );
-    connect( mWidget, &ByteArrayJanusView::focusChanged, this, &ByteArrayView::focusChanged );
+    connect(mDocument, &ByteArrayDocument::titleChanged, this, &ByteArrayView::titleChanged);
+    connect(mWidget, &ByteArrayJanusView::hasSelectedDataChanged, this, &ByteArrayView::hasSelectedDataChanged);
+    connect(mWidget, &ByteArrayJanusView::readOnlyChanged, this, &ByteArrayView::readOnlyChanged);
+    connect(mWidget, &ByteArrayJanusView::overwriteModeChanged, this, &ByteArrayView::overwriteModeChanged);
+    connect(mWidget, &ByteArrayJanusView::selectionChanged, this, &ByteArrayView::onSelectionChanged);
+    connect(mWidget, &ByteArrayJanusView::cursorPositionChanged, this, &ByteArrayView::cursorPositionChanged);
+    connect(mWidget, &ByteArrayJanusView::valueCodingChanged, this, &ByteArrayView::valueCodingChanged);
+    connect(mWidget, &ByteArrayJanusView::charCodecChanged, this, &ByteArrayView::charCodecChanged);
+    connect(mWidget, &ByteArrayJanusView::focusChanged, this, &ByteArrayView::focusChanged);
 
-    connect( mWidget, &ByteArrayJanusView::offsetColumnVisibleChanged, this, &ByteArrayView::offsetColumnVisibleChanged );
-    connect( mWidget, &ByteArrayJanusView::offsetCodingChanged, this, &ByteArrayView::offsetCodingChanged );
-    connect( mWidget, &ByteArrayJanusView::visibleByteArrayCodingsChanged, this, &ByteArrayView::visibleByteArrayCodingsChanged );
-    connect( mWidget, &ByteArrayJanusView::layoutStyleChanged, this, &ByteArrayView::layoutStyleChanged );
-    connect( mWidget, &ByteArrayJanusView::noOfBytesPerLineChanged, this, &ByteArrayView::noOfBytesPerLineChanged );
-    connect( mWidget, &ByteArrayJanusView::showsNonprintingChanged, this, &ByteArrayView::showsNonprintingChanged );
-    connect( mWidget, &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged );
-    connect( mWidget, &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged );
-    connect( mWidget, &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged );
-    connect( mWidget, &ByteArrayJanusView::zoomLevelChanged, this, &ByteArrayView::zoomLevelChanged );
-    connect( mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged );
+    connect(mWidget, &ByteArrayJanusView::offsetColumnVisibleChanged, this, &ByteArrayView::offsetColumnVisibleChanged);
+    connect(mWidget, &ByteArrayJanusView::offsetCodingChanged, this, &ByteArrayView::offsetCodingChanged);
+    connect(mWidget, &ByteArrayJanusView::visibleByteArrayCodingsChanged, this, &ByteArrayView::visibleByteArrayCodingsChanged);
+    connect(mWidget, &ByteArrayJanusView::layoutStyleChanged, this, &ByteArrayView::layoutStyleChanged);
+    connect(mWidget, &ByteArrayJanusView::noOfBytesPerLineChanged, this, &ByteArrayView::noOfBytesPerLineChanged);
+    connect(mWidget, &ByteArrayJanusView::showsNonprintingChanged, this, &ByteArrayView::showsNonprintingChanged);
+    connect(mWidget, &ByteArrayJanusView::substituteCharChanged, this, &ByteArrayView::substituteCharChanged);
+    connect(mWidget, &ByteArrayJanusView::undefinedCharChanged, this, &ByteArrayView::undefinedCharChanged);
+    connect(mWidget, &ByteArrayJanusView::noOfGroupedBytesChanged, this, &ByteArrayView::noOfGroupedBytesChanged);
+    connect(mWidget, &ByteArrayJanusView::zoomLevelChanged, this, &ByteArrayView::zoomLevelChanged);
+    connect(mWidget, &ByteArrayJanusView::viewModusChanged, this, &ByteArrayView::viewModusChanged);
 }
 
 ByteArrayViewProfileSynchronizer* ByteArrayView::synchronizer() const { return mByteArrayViewProfileSynchronizer; }
@@ -154,17 +150,16 @@ QString ByteArrayView::title()               const { return mDocument->title(); 
 bool ByteArrayView::isModifiable()           const { return true; }
 bool ByteArrayView::isReadOnly()             const { return mWidget->isReadOnly(); }
 
-
 void ByteArrayView::setFocus()
 {
     mWidget->setFocus();
 }
 
-void ByteArrayView::setReadOnly( bool isReadOnly ) { mWidget->setReadOnly( isReadOnly ); }
+void ByteArrayView::setReadOnly(bool isReadOnly) { mWidget->setReadOnly(isReadOnly); }
 
-void ByteArrayView::setZoomLevel( double Level )
+void ByteArrayView::setZoomLevel(double Level)
 {
-    mWidget->setZoomLevel( Level );
+    mWidget->setZoomLevel(Level);
 }
 
 double ByteArrayView::zoomLevel() const
@@ -172,9 +167,9 @@ double ByteArrayView::zoomLevel() const
     return mWidget->zoomLevel();
 }
 
-void ByteArrayView::selectAllData( bool selectAll )
+void ByteArrayView::selectAllData(bool selectAll)
 {
-    mWidget->selectAll( selectAll );
+    mWidget->selectAll(selectAll);
 }
 
 bool ByteArrayView::hasSelectedData() const
@@ -187,9 +182,9 @@ QMimeData* ByteArrayView::copySelectedData() const
     return mWidget->selectionAsMimeData();
 }
 
-void ByteArrayView::insertData( const QMimeData* data )
+void ByteArrayView::insertData(const QMimeData* data)
 {
-    mWidget->pasteData( data );
+    mWidget->pasteData(data);
 }
 
 QMimeData* ByteArrayView::cutSelectedData()
@@ -204,26 +199,26 @@ void ByteArrayView::deleteSelectedData()
     mWidget->removeSelectedData();
 }
 
-bool ByteArrayView::canReadData( const QMimeData* data ) const
+bool ByteArrayView::canReadData(const QMimeData* data) const
 {
-    return mWidget->canReadData( data );
+    return mWidget->canReadData(data);
 }
 
-void ByteArrayView::onSelectionChanged( const Okteta::AddressRange& selection )
+void ByteArrayView::onSelectionChanged(const Okteta::AddressRange& selection)
 {
     // TODO: how to make sure the signal hasSelectedDataChanged() is not emitted before?
-    mSelection.setRange( selection );
-    emit selectedDataChanged( &mSelection );
+    mSelection.setRange(selection);
+    emit selectedDataChanged(&mSelection);
 }
 
-void ByteArrayView::setCursorPosition( Okteta::Address cursorPosition )
+void ByteArrayView::setCursorPosition(Okteta::Address cursorPosition)
 {
-    mWidget->setCursorPosition( cursorPosition );
+    mWidget->setCursorPosition(cursorPosition);
 }
 
-void ByteArrayView::setSelectionCursorPosition( Okteta::Address index )
+void ByteArrayView::setSelectionCursorPosition(Okteta::Address index)
 {
-    mWidget->setSelectionCursorPosition( index );
+    mWidget->setSelectionCursorPosition(index);
 }
 
 Okteta::Address ByteArrayView::cursorPosition() const
@@ -248,7 +243,6 @@ int ByteArrayView::noOfBytesPerLine() const
     return mWidget->noOfBytesPerLine();
 }
 
-
 int ByteArrayView::valueCoding() const
 {
     return mWidget->valueCoding();
@@ -259,30 +253,29 @@ QString ByteArrayView::charCodingName() const
     return mWidget->charCodingName();
 }
 
-void ByteArrayView::setValueCoding( int valueCoding )
+void ByteArrayView::setValueCoding(int valueCoding)
 {
-    mWidget->setValueCoding( (Okteta::AbstractByteArrayView::ValueCoding)valueCoding );
+    mWidget->setValueCoding((Okteta::AbstractByteArrayView::ValueCoding)valueCoding);
 }
 
-void ByteArrayView::setCharCoding( const QString& charCodingName )
+void ByteArrayView::setCharCoding(const QString& charCodingName)
 {
-    mWidget->setCharCoding( charCodingName );
+    mWidget->setCharCoding(charCodingName);
 }
-
 
 Okteta::AddressRange ByteArrayView::selection() const
 {
     return mWidget->selection();
 }
 
-void ByteArrayView::setSelection( Okteta::Address start, Okteta::Address end )
+void ByteArrayView::setSelection(Okteta::Address start, Okteta::Address end)
 {
-    mWidget->setSelection( start, end );
+    mWidget->setSelection(start, end);
 }
 
-void ByteArrayView::insert( const QByteArray& byteArray )
+void ByteArrayView::insert(const QByteArray& byteArray)
 {
-    mWidget->insert( byteArray );
+    mWidget->insert(byteArray);
 }
 
 bool ByteArrayView::showsNonprinting() const
@@ -315,58 +308,58 @@ bool ByteArrayView::isOverwriteMode() const
     return mWidget->isOverwriteMode();
 }
 
-void ByteArrayView::setShowsNonprinting( bool on )
+void ByteArrayView::setShowsNonprinting(bool on)
 {
-    mWidget->setShowsNonprinting( on );
+    mWidget->setShowsNonprinting(on);
 }
 
-void ByteArrayView::setNoOfGroupedBytes( int noOfGroupedBytes )
+void ByteArrayView::setNoOfGroupedBytes(int noOfGroupedBytes)
 {
-    mWidget->setNoOfGroupedBytes( noOfGroupedBytes );
+    mWidget->setNoOfGroupedBytes(noOfGroupedBytes);
 }
 
-void ByteArrayView::toggleOffsetColumn( bool on )
+void ByteArrayView::toggleOffsetColumn(bool on)
 {
-    mWidget->toggleOffsetColumn( on );
+    mWidget->toggleOffsetColumn(on);
 }
 
-void ByteArrayView::setOffsetCoding( int offsetCoding )
+void ByteArrayView::setOffsetCoding(int offsetCoding)
 {
-    mWidget->setOffsetCoding( offsetCoding );
+    mWidget->setOffsetCoding(offsetCoding);
 }
 
-void ByteArrayView::setLayoutStyle( int layoutStyle )
+void ByteArrayView::setLayoutStyle(int layoutStyle)
 {
-    mWidget->setLayoutStyle( (Okteta::AbstractByteArrayView::LayoutStyle)layoutStyle );
+    mWidget->setLayoutStyle((Okteta::AbstractByteArrayView::LayoutStyle)layoutStyle);
 }
 
-void ByteArrayView::setNoOfBytesPerLine( int noOfBytesPerLine )
+void ByteArrayView::setNoOfBytesPerLine(int noOfBytesPerLine)
 {
-    mWidget->setNoOfBytesPerLine( noOfBytesPerLine );
+    mWidget->setNoOfBytesPerLine(noOfBytesPerLine);
 }
 
-void ByteArrayView::setVisibleByteArrayCodings( int visibleColumns )
+void ByteArrayView::setVisibleByteArrayCodings(int visibleColumns)
 {
-    mWidget->setVisibleCodings( visibleColumns );
+    mWidget->setVisibleCodings(visibleColumns);
 }
 
-void ByteArrayView::setMarking( const Okteta::AddressRange& range, bool ensureVisible )
+void ByteArrayView::setMarking(const Okteta::AddressRange& range, bool ensureVisible)
 {
-    mWidget->setMarking( range );
-    if( ensureVisible )
-        mWidget->ensureVisible( range );
+    mWidget->setMarking(range);
+    if (ensureVisible) {
+        mWidget->ensureVisible(range);
+    }
 }
 
-void ByteArrayView::setSubstituteChar( QChar substituteChar )
+void ByteArrayView::setSubstituteChar(QChar substituteChar)
 {
-    mWidget->setSubstituteChar( substituteChar );
+    mWidget->setSubstituteChar(substituteChar);
 }
 
-void ByteArrayView::setUndefinedChar( QChar undefinedChar )
+void ByteArrayView::setUndefinedChar(QChar undefinedChar)
 {
-    mWidget->setUndefinedChar( undefinedChar );
+    mWidget->setUndefinedChar(undefinedChar);
 }
-
 
 QChar ByteArrayView::substituteChar() const
 {
@@ -399,14 +392,14 @@ bool ByteArrayView::isOverwriteOnly() const
     return mWidget->isOverwriteOnly();
 }
 
-void ByteArrayView::setOverwriteMode( bool overwriteMode )
+void ByteArrayView::setOverwriteMode(bool overwriteMode)
 {
-    mWidget->setOverwriteMode( overwriteMode );
+    mWidget->setOverwriteMode(overwriteMode);
 }
 
-void ByteArrayView::setViewModus( int viewModus )
+void ByteArrayView::setViewModus(int viewModus)
 {
-    mWidget->setViewModus( viewModus );
+    mWidget->setViewModus(viewModus);
 }
 int ByteArrayView::viewModus() const
 {
@@ -415,7 +408,7 @@ int ByteArrayView::viewModus() const
 
 void ByteArrayView::setFontByGlobalSettings()
 {
-    mWidget->propagateFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
+    mWidget->propagateFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
 ByteArrayView::~ByteArrayView()

@@ -43,52 +43,50 @@
 #include <QMimeData>
 #include <QApplication>
 
-
 #ifndef ABSTRACTMODELDATAGENERATOR_METATYPE
 #define ABSTRACTMODELDATAGENERATOR_METATYPE
 Q_DECLARE_METATYPE(Kasten::AbstractModelDataGenerator*)
 #endif
 
-namespace Kasten
-{
+namespace Kasten {
 
-InsertController::InsertController( ModelCodecViewManager* modelCodecViewManager,
-                                    ModelCodecManager* modelCodecManager,
-                                    KXMLGUIClient* guiClient )
-  : AbstractXmlGuiController(),
-    mModelCodecViewManager( modelCodecViewManager ),
-    mModelCodecManager( modelCodecManager ),
-    mModel( nullptr )
+InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
+                                   ModelCodecManager* modelCodecManager,
+                                   KXMLGUIClient* guiClient)
+    : AbstractXmlGuiController()
+    , mModelCodecViewManager(modelCodecViewManager)
+    , mModelCodecManager(modelCodecManager)
+    , mModel(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mInsertSelectAction = actionCollection->add<KSelectAction>( QStringLiteral("insert") ); //TODO: find better id
-    mInsertSelectAction->setText( i18nc("@title:menu","Insert") );
+    mInsertSelectAction = actionCollection->add<KSelectAction>(QStringLiteral("insert"));   // TODO: find better id
+    mInsertSelectAction->setText(i18nc("@title:menu", "Insert"));
 //     mInsertSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("insert-text") ) );
-    mInsertSelectAction->setToolBarMode( KSelectAction::MenuMode );
-    connect( mInsertSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
-             this, &InsertController::onActionTriggered );
+    mInsertSelectAction->setToolBarMode(KSelectAction::MenuMode);
+    connect(mInsertSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
+            this, &InsertController::onActionTriggered);
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void InsertController::setTargetModel( AbstractModel* model )
+void InsertController::setTargetModel(AbstractModel* model)
 {
-    if( mModel ) mModel->disconnect( this );
+    if (mModel) {
+        mModel->disconnect(this);
+    }
 
     mModel = model ? model->findBaseModelWithInterface<If::SelectedDataWriteable*>() : nullptr;
-    mSelectedDataWriteableControl = mModel ? qobject_cast<If::SelectedDataWriteable*>( mModel ) : nullptr;
+    mSelectedDataWriteableControl = mModel ? qobject_cast<If::SelectedDataWriteable*>(mModel) : nullptr;
 
-    if( mSelectedDataWriteableControl )
-    {
+    if (mSelectedDataWriteableControl) {
         // TODO: only fill the list on menu call...
-        connect( mModel, &AbstractModel::readOnlyChanged,
-                 this, &InsertController::onReadOnlyChanged );
+        connect(mModel, &AbstractModel::readOnlyChanged,
+                this, &InsertController::onReadOnlyChanged);
     }
 
     updateActions();
 }
-
 
 void InsertController::updateActions()
 {
@@ -99,69 +97,65 @@ void InsertController::updateActions()
     // TODO: it this depend on the current selection/focus? So it needs to be updated on every change?
     const QList<AbstractModelDataGenerator*> generatorList =
         mModelCodecManager->generatorList();
-    const bool hasGenerators = ( generatorList.size() > 0 );
+    const bool hasGenerators = (generatorList.size() > 0);
 
-    if( hasGenerators )
-    {
-        for( AbstractModelDataGenerator* generator : generatorList )
-        {
+    if (hasGenerators) {
+        for (AbstractModelDataGenerator* generator : generatorList) {
             const QString title = generator->typeName();
-            QAction* action = new QAction( title, mInsertSelectAction );
+            QAction* action = new QAction(title, mInsertSelectAction);
 
-            action->setData( QVariant::fromValue(generator) );
-            mInsertSelectAction->addAction( action );
+            action->setData(QVariant::fromValue(generator));
+            mInsertSelectAction->addAction(action);
         }
-    }
-    else
-    {
-        QAction* noneAction = new QAction( i18nc("@item There are no generators.","Not available."), mInsertSelectAction );
-        noneAction->setEnabled( false );
-        mInsertSelectAction->addAction( noneAction );
+    } else {
+        QAction* noneAction = new QAction(i18nc("@item There are no generators.", "Not available."), mInsertSelectAction);
+        noneAction->setEnabled(false);
+        mInsertSelectAction->addAction(noneAction);
     }
 
     // TODO: need a call AbstractModelSelection::isEmpty
-    const bool isWriteable = ( mSelectedDataWriteableControl && ! mModel->isReadOnly() );
-    mInsertSelectAction->setEnabled( isWriteable );
+    const bool isWriteable = (mSelectedDataWriteableControl && !mModel->isReadOnly());
+    mInsertSelectAction->setEnabled(isWriteable);
 }
 
-void InsertController::onActionTriggered( QAction *action )
+void InsertController::onActionTriggered(QAction* action)
 {
-    AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator* >();
+    AbstractModelDataGenerator* generator = action->data().value<AbstractModelDataGenerator*>();
 
     AbstractModelDataGeneratorConfigEditor* configEditor =
-        mModelCodecViewManager->createConfigEditor( generator );
+        mModelCodecViewManager->createConfigEditor(generator);
 
-    if( configEditor )
-    {
-        InsertDialog* dialog = new InsertDialog( configEditor );
+    if (configEditor) {
+        InsertDialog* dialog = new InsertDialog(configEditor);
 //         dialog->setData( mModel, selection ); TODO
-        if( ! dialog->exec() )
+        if (!dialog->exec()) {
             return;
+        }
     }
 
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread( this, generator );
+        new ModelDataGenerateThread(this, generator);
     generateThread->start();
-    while( !generateThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!generateThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     QMimeData* mimeData = generateThread->data();
 
     delete generateThread;
 
-    mSelectedDataWriteableControl->insertData( mimeData );
+    mSelectedDataWriteableControl->insertData(mimeData);
 
     QApplication::restoreOverrideCursor();
 }
 
-
-void InsertController::onReadOnlyChanged( bool isReadOnly )
+void InsertController::onReadOnlyChanged(bool isReadOnly)
 {
-    const bool isWriteable = ( ! isReadOnly );
+    const bool isWriteable = (!isReadOnly);
 
-    mInsertSelectAction->setEnabled( isWriteable );
+    mInsertSelectAction->setEnabled(isWriteable);
 }
 
 }

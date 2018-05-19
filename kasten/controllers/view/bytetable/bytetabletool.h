@@ -32,47 +32,45 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteTableModel;
 class ByteArrayView;
 
 /**
-*/
+ */
 class OKTETAKASTENCONTROLLERS_EXPORT ByteTableTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ByteTableTool();
     ~ByteTableTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public:
-    void insert( unsigned char byte, int count );
+public:
+    void insert(unsigned char byte, int count);
 
-  public:
-    ByteTableModel *byteTableModel() const;
+public:
+    ByteTableModel* byteTableModel() const;
     bool hasWriteable() const;
 
-  Q_SIGNALS:
-    void hasWriteableChanged( bool hasWriteable );
+Q_SIGNALS:
+    void hasWriteableChanged(bool hasWriteable);
 
-  private Q_SLOTS:
-    void onReadOnlyChanged( bool isReadOnly );
+private Q_SLOTS:
+    void onReadOnlyChanged(bool isReadOnly);
 
-  private:
-    ByteTableModel *mByteTableModel;
+private:
+    ByteTableModel* mByteTableModel;
 
     ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 
 }

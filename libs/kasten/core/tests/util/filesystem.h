@@ -14,7 +14,6 @@
 *                                                                         *
 ***************************************************************************/
 
-
 #ifndef OKTETATEST_FILESYSTEM_H
 #define OKTETATEST_FILESYSTEM_H
 
@@ -24,26 +23,24 @@
 class TestFileSystem
 {
 public:
-    explicit TestFileSystem( const QString& name );
+    explicit TestFileSystem(const QString& name);
     ~TestFileSystem();
 
 public:
     /// tries to remove the given subPath
-    void removeDir( const QString& subPath );
+    void removeDir(const QString& subPath);
     /// tries to create the given subPath
-    void createDir( const QString& subPath );
+    void createDir(const QString& subPath);
     ///
-    QString createFilePath( const QString& fileName, const QString& subPath = QString() );
+    QString createFilePath(const QString& fileName, const QString& subPath = QString());
 
 private:
-    void _removeDir( const QString& path );
+    void _removeDir(const QString& path);
     /// tries to create the given subPath
-    void _createDir( const QString& path );
+    void _createDir(const QString& path);
 
 private:
     QString mBasePath;
 };
 
-
 #endif
-

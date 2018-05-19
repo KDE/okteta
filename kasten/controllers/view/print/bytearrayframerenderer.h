@@ -47,23 +47,31 @@ class ValueCodec;
 class CharCodec;
 }
 
-
-enum LayoutStyle { FixedLayoutStyle=0, WrapOnlyByteGroupsLayoutStyle=1, FullSizeLayoutStyle=2, LastUserLayout=0xFF };
-
+enum LayoutStyle
+{
+    FixedLayoutStyle = 0,
+    WrapOnlyByteGroupsLayoutStyle = 1,
+    FullSizeLayoutStyle = 2,
+    LastUserLayout = 0xFF
+};
 
 class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 {
-  public:
-    enum KDataColumnId { ValueCodingId=1, CharCodingId=2 };
+public:
+    enum KDataColumnId
+    {
+        ValueCodingId = 1,
+        CharCodingId = 2
+    };
 
-  public:
+public:
     ByteArrayFrameRenderer();
     ~ByteArrayFrameRenderer() override;
 
-  public: // AbstractColumnFrameRenderer API
+public: // AbstractColumnFrameRenderer API
 //     virtual void drawColumns( QPainter *painter, int cx, int cy, int cw, int ch );
 
-  public: // AbstractFrameRenderer API
+public: // AbstractFrameRenderer API
     // make this flags?
 //     virtual bool hasFixedWidth() const;
 //     virtual bool hasFixedHeight() const;
@@ -72,13 +80,13 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 //     virtual QSize sizeHint( const QSize &maxSize ) const;
 
     void prepare() override;
-    void renderFrame( QPainter* painter, int frameIndex ) override;
+    void renderFrame(QPainter* painter, int frameIndex) override;
 
-  public: // AbstractSerialFramePrinter
+public: // AbstractSerialFramePrinter
     // only vertical for now...
     virtual int framesCount() const;
 
-  public:
+public:
     Okteta::AbstractByteArrayModel* byteArrayModel() const;
     Okteta::Address offset() const;
     Okteta::Size length() const;
@@ -101,54 +109,53 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     bool offsetColumnVisible() const;
     int visibleByteArrayCodings() const;
 
-  public:
-    void setByteArrayModel( Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset = 0, Okteta::Size length = -1 );
-    void setHeight( int height );
-    void setWidth( int width );
-    void setFont( const QFont& font );
-    void setFirstLineOffset( Okteta::Address firstLineOffset );
-    void setStartOffset( Okteta::Address startOffset );
-    void setBufferSpacing( Okteta::PixelX byteSpacing, int noOfGroupedBytes, Okteta::PixelX groupSpacing );
-    void setValueCoding( Okteta::ValueCoding valueCoding );
-    void setLayoutStyle( LayoutStyle style );
-    void setNoOfBytesPerLine( int noOfBytesPerLine );
-    void setByteSpacingWidth( Okteta::PixelX byteSpacingWidth );
-    void setNoOfGroupedBytes( int noOfGroupedBytes );
-    void setGroupSpacingWidth( Okteta::PixelX groupSpacingWidth );
-    void setBinaryGapWidth( Okteta::PixelX binaryGapWidth );
-    void setSubstituteChar( QChar substituteChar );
-    void setUndefinedChar( QChar undefinedChar );
-    void setShowsNonprinting( bool showsNonprinting );
-    void setCharCoding( Okteta::CharCoding charCoding );
-    void setCharCoding( const QString &charCodingName );
-    void showByteArrayColumns( int CCs );
-    void showOffsetColumn( bool visible );
+public:
+    void setByteArrayModel(Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset = 0, Okteta::Size length = -1);
+    void setHeight(int height);
+    void setWidth(int width);
+    void setFont(const QFont& font);
+    void setFirstLineOffset(Okteta::Address firstLineOffset);
+    void setStartOffset(Okteta::Address startOffset);
+    void setBufferSpacing(Okteta::PixelX byteSpacing, int noOfGroupedBytes, Okteta::PixelX groupSpacing);
+    void setValueCoding(Okteta::ValueCoding valueCoding);
+    void setLayoutStyle(LayoutStyle style);
+    void setNoOfBytesPerLine(int noOfBytesPerLine);
+    void setByteSpacingWidth(Okteta::PixelX byteSpacingWidth);
+    void setNoOfGroupedBytes(int noOfGroupedBytes);
+    void setGroupSpacingWidth(Okteta::PixelX groupSpacingWidth);
+    void setBinaryGapWidth(Okteta::PixelX binaryGapWidth);
+    void setSubstituteChar(QChar substituteChar);
+    void setUndefinedChar(QChar undefinedChar);
+    void setShowsNonprinting(bool showsNonprinting);
+    void setCharCoding(Okteta::CharCoding charCoding);
+    void setCharCoding(const QString& charCodingName);
+    void showByteArrayColumns(int CCs);
+    void showOffsetColumn(bool visible);
 
-  protected: // AbstractColumnFrameRenderer API
+protected: // AbstractColumnFrameRenderer API
 //     virtual void setNoOfLines( int newNoOfLines );
 
-  protected:
+protected:
     void adjustToWidth();
     void adjustLayoutToSize();
     void adjustToLayoutNoOfBytesPerLine();
 
-
-  protected:
+protected:
     int fittingBytesPerLine() const;
 
-  protected:
+protected:
     int mHeight;
     int mWidth;
     QFont mFont;
 
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 
-  protected:
+protected:
     /** holds the logical layout */
     Okteta::ByteArrayTableLayout* mLayout;
     Okteta::ByteArrayTableRanges* mTableRanges;
 
-  protected:
+protected:
     Okteta::OffsetColumnRenderer*         mOffsetColumnRenderer;
     Okteta::BorderColumnRenderer*         mFirstBorderColumnRenderer;
     Okteta::ValueByteArrayColumnRenderer* mValueColumnRenderer;
@@ -156,7 +163,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     Okteta::CharByteArrayColumnRenderer*  mCharColumnRenderer;
     Okteta::PrintColumnStylist* mStylist;
 
-  protected:
+protected:
     /** */
     Okteta::ValueCodec* mValueCodec;
     /** */
@@ -166,7 +173,7 @@ class ByteArrayFrameRenderer : public AbstractColumnFrameRenderer
     /** */
     Okteta::CharCoding mCharCoding;
 
-  protected: // parameters
+protected: // parameters
     LayoutStyle mResizeStyle;
 };
 

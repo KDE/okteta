@@ -27,15 +27,11 @@
 #include <QtPlugin>
 #include <QList>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractViewArea;
 
-
-namespace If
-{
+namespace If {
 
 // TODO: should split(Qt::Orientation) be a method of AbstractViewArea?
 // TODO: split or add? difference in semantics?
@@ -45,32 +41,31 @@ namespace If
 // TODO: where to decide what to do on a split, e.g. add a new view copy of the current one?
 class ViewAreaSplitable
 {
-  public:
+public:
     virtual ~ViewAreaSplitable();
 
-  public: // set/action
+public: // set/action
     /// returns the new view area
-    virtual AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation ) = 0;
-    virtual void closeViewArea( AbstractViewArea* viewArea ) = 0; // TODO: or report success with bool?
-    virtual void setViewAreaFocus( AbstractViewArea* viewArea ) = 0;
+    virtual AbstractViewArea* splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation) = 0;
+    virtual void closeViewArea(AbstractViewArea* viewArea) = 0;   // TODO: or report success with bool?
+    virtual void setViewAreaFocus(AbstractViewArea* viewArea) = 0;
 
-  public: // get
+public: // get
     virtual AbstractViewArea* viewAreaFocus() const = 0;
 //     virtual QList<Kasten::AbstractViewArea*> viewAreas() const = 0;
     virtual int viewAreasCount() const = 0;
 
-  public: // signal
-    virtual void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas ) = 0;
-    virtual void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas ) = 0;
-    virtual void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea ) = 0;
+public: // signal
+    virtual void viewAreasAdded(const QList<Kasten::AbstractViewArea*>& viewAreas) = 0;
+    virtual void viewAreasRemoved(const QList<Kasten::AbstractViewArea*>& viewAreas) = 0;
+    virtual void viewAreaFocusChanged(Kasten::AbstractViewArea* viewArea) = 0;
 };
-
 
 inline ViewAreaSplitable::~ViewAreaSplitable() {}
 
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::ViewAreaSplitable, "org.kde.kasten.if.viewareasplitable/1.0" )
+Q_DECLARE_INTERFACE(Kasten::If::ViewAreaSplitable, "org.kde.kasten.if.viewareasplitable/1.0")
 
 #endif

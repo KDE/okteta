@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "externalbookmarkstorage.h"
 
 // lib
@@ -35,97 +34,93 @@
 // Qt
 #include <QStandardPaths>
 
-namespace Kasten
-{
+namespace Kasten {
 
 ExternalBookmarkStorage::ExternalBookmarkStorage()
 {
     const QString bookmarksFileName =
         QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/okteta/bookmarks.xml");
-    mBookmarkManager = KBookmarkManager::managerForFile( bookmarksFileName, QStringLiteral("okteta") );
+    mBookmarkManager = KBookmarkManager::managerForFile(bookmarksFileName, QStringLiteral("okteta"));
 }
 
- 
-void ExternalBookmarkStorage::readBookmarks( ByteArrayDocument* document, const QUrl& url )
+void ExternalBookmarkStorage::readBookmarks(ByteArrayDocument* document, const QUrl& url)
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
-    Okteta::Bookmarkable* bookmarkable = qobject_cast<Okteta::Bookmarkable*>( byteArray );
+    Okteta::Bookmarkable* bookmarkable = qobject_cast<Okteta::Bookmarkable*>(byteArray);
 
     bookmarkable->removeAllBookmarks();
 
-    const QString urlString = url.toDisplayString(QUrl::PrettyDecoded|QUrl::PreferLocalFile);
+    const QString urlString = url.toDisplayString(QUrl::PrettyDecoded | QUrl::PreferLocalFile);
 
     KBookmarkGroup root = mBookmarkManager->root();
 
-    for( KBookmark bm = root.first(); ! bm.isNull(); bm = root.next(bm) )
-    {
-        if( bm.isSeparator() || ! bm.isGroup() )
+    for (KBookmark bm = root.first(); !bm.isNull(); bm = root.next(bm)) {
+        if (bm.isSeparator() || !bm.isGroup()) {
             continue;
+        }
 
-        if( bm.fullText() == urlString )
-        {
+        if (bm.fullText() == urlString) {
             KBookmarkGroup bmGroup = bm.toGroup();
 
             QList<Okteta::Bookmark> bookmarksToBeCreated;
             Okteta::Bookmark bookmark;
-            for( bm = bmGroup.first(); ! bm.isNull(); bm = bmGroup.next(bm) )
-            {
-                if( bm.isSeparator() || bm.isGroup() )
+            for (bm = bmGroup.first(); !bm.isNull(); bm = bmGroup.next(bm)) {
+                if (bm.isSeparator() || bm.isGroup()) {
                     continue;
+                }
 
-                bookmark.setOffset( bm.url().fragment().toULongLong() );
-                bookmark.setName( bm.fullText() );
+                bookmark.setOffset(bm.url().fragment().toULongLong());
+                bookmark.setName(bm.fullText());
 
-                bookmarksToBeCreated.append( bookmark );
+                bookmarksToBeCreated.append(bookmark);
             }
 
-            bookmarkable->addBookmarks( bookmarksToBeCreated );
+            bookmarkable->addBookmarks(bookmarksToBeCreated);
 
             break;
         }
     }
 }
 
-void ExternalBookmarkStorage::writeBookmarks( ByteArrayDocument* document, const QUrl& url )
+void ExternalBookmarkStorage::writeBookmarks(ByteArrayDocument* document, const QUrl& url)
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
-    Okteta::Bookmarkable* bookmarkable = qobject_cast<Okteta::Bookmarkable*>( byteArray );
+    Okteta::Bookmarkable* bookmarkable = qobject_cast<Okteta::Bookmarkable*>(byteArray);
 
-    if( ! bookmarkable )
+    if (!bookmarkable) {
         return;
+    }
 
-    const QString urlString = url.toDisplayString(QUrl::PrettyDecoded|QUrl::PreferLocalFile);
+    const QString urlString = url.toDisplayString(QUrl::PrettyDecoded | QUrl::PreferLocalFile);
 
     KBookmarkGroup root = mBookmarkManager->root();
 
     // rm old bookmarkable
     KBookmark bm = root.first();
-    while( ! bm.isNull() )
-    {
-        if( bm.isSeparator() || ! bm.isGroup() )
+    while (!bm.isNull()) {
+        if (bm.isSeparator() || !bm.isGroup()) {
             continue;
+        }
 
-        if( bm.fullText() == urlString )
-        {
-            root.deleteBookmark( bm );
+        if (bm.fullText() == urlString) {
+            root.deleteBookmark(bm);
             break;
         }
 
-        bm = root.next( bm );
+        bm = root.next(bm);
     }
 
     // store current bookmarks
-    KBookmarkGroup bookmarkGroup = root.createNewFolder( urlString );
+    KBookmarkGroup bookmarkGroup = root.createNewFolder(urlString);
     Okteta::BookmarksConstIterator bit = bookmarkable->createBookmarksConstIterator();
-    while( bit.hasNext() )
-    {
+    while (bit.hasNext()) {
         const Okteta::Bookmark& bookmark = bit.next();
         QUrl bookmarkUrl = url;
-        bookmarkUrl.setFragment( QString::number(bookmark.offset()) );
-        bookmarkGroup.addBookmark( bookmark.name(), bookmarkUrl, QString() );
+        bookmarkUrl.setFragment(QString::number(bookmark.offset()));
+        bookmarkGroup.addBookmark(bookmark.name(), bookmarkUrl, QString());
     }
 
-    mBookmarkManager->save( false );
+    mBookmarkManager->save(false);
 }
 
 ExternalBookmarkStorage::~ExternalBookmarkStorage() {}

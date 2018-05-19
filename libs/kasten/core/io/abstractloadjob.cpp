@@ -23,32 +23,30 @@
 #include "abstractloadjob.h"
 #include "abstractloadjob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractLoadJob::AbstractLoadJob( AbstractLoadJobPrivate* d )
-  : d_ptr( d )
+AbstractLoadJob::AbstractLoadJob(AbstractLoadJobPrivate* d)
+    : d_ptr(d)
 {
 }
 
 AbstractLoadJob::AbstractLoadJob()
-  : d_ptr( new AbstractLoadJobPrivate(this) )
+    : d_ptr(new AbstractLoadJobPrivate(this))
 {
 }
 
 AbstractDocument* AbstractLoadJob::document() const
 {
-    Q_D( const AbstractLoadJob );
+    Q_D(const AbstractLoadJob);
 
     return d->document();
 }
 
-void AbstractLoadJob::setDocument( AbstractDocument* document )
+void AbstractLoadJob::setDocument(AbstractDocument* document)
 {
-    Q_D( AbstractLoadJob );
+    Q_D(AbstractLoadJob);
 
-    d->setDocument( document );
+    d->setDocument(document);
 }
 
 AbstractLoadJob::~AbstractLoadJob()

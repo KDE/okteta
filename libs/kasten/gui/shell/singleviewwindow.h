@@ -29,12 +29,10 @@
 // KF5
 #include <KXmlGuiWindow>
 
-template<class T> class QList;
+template <class T> class QList;
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SingleViewWindowPrivate;
 
@@ -43,33 +41,34 @@ class AbstractToolView;
 class AbstractXmlGuiController;
 class SingleViewArea;
 
-
-class KASTENGUI_EXPORT SingleViewWindow : public KXmlGuiWindow,
-                                          public If::WidgetsDockable
+class KASTENGUI_EXPORT SingleViewWindow : public KXmlGuiWindow
+                                        , public If::WidgetsDockable
 {
-   Q_OBJECT
-   Q_INTERFACES( Kasten::If::WidgetsDockable )
+    Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::WidgetsDockable
+    )
 
-  public:
-    explicit SingleViewWindow( AbstractView* view );
+public:
+    explicit SingleViewWindow(AbstractView* view);
     ~SingleViewWindow() override;
 
-  public:
-    void addXmlGuiController( AbstractXmlGuiController* controller );
-    void addTool( AbstractToolView* toolView );
+public:
+    void addXmlGuiController(AbstractXmlGuiController* controller);
+    void addTool(AbstractToolView* toolView);
 
-    void setView( AbstractView* view );
+    void setView(AbstractView* view);
 
-  public: // If::WidgetsDockable API
+public: // If::WidgetsDockable API
     QList<ToolViewDockWidget*> dockWidgets() const override;
 
-  protected:
+protected:
     AbstractView* view() const;
     SingleViewArea* viewArea() const;
 
-  protected:
+protected:
     SingleViewWindowPrivate* const d_ptr;
-    Q_DECLARE_PRIVATE( SingleViewWindow )
+    Q_DECLARE_PRIVATE(SingleViewWindow)
 };
 
 }

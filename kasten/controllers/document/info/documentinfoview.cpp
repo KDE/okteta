@@ -22,7 +22,7 @@
 
 #include "documentinfoview.h"
 
-// 
+//
 #include "documentinfotool.h"
 // KF5
 #include <KLocalizedString>
@@ -38,158 +38,153 @@
 #include <QLocale>
 #include <QMimeType>
 
+namespace Kasten {
 
-namespace Kasten
+DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
+    : QWidget(parent)
+    , mTool(tool)
 {
-
-DocumentInfoView::DocumentInfoView( DocumentInfoTool* tool, QWidget* parent )
-  : QWidget( parent ), mTool( tool )
-{
-    QVBoxLayout* baseLayout = new QVBoxLayout( this );
-    baseLayout->setMargin( 0 );
+    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    baseLayout->setMargin(0);
 
     // icon
-    mIconLabel = new QLabel( this );
+    mIconLabel = new QLabel(this);
 //     int bsize = 66 + 2 * mIconLabel->style()->pixelMetric( QStyle::PM_ButtonMargin );
 //     mIconLabel->setFixedSize(bsize, bsize);
-	mIconLabel->setFixedHeight( KIconLoader::SizeEnormous );
-	mIconLabel->setMinimumWidth( KIconLoader::SizeEnormous );
-    mIconLabel->setAlignment( Qt::AlignHCenter );
-    baseLayout->addWidget( mIconLabel );
+    mIconLabel->setFixedHeight(KIconLoader::SizeEnormous);
+    mIconLabel->setMinimumWidth(KIconLoader::SizeEnormous);
+    mIconLabel->setAlignment(Qt::AlignHCenter);
+    baseLayout->addWidget(mIconLabel);
 
     // file label
-    mDocumentTitleLabel = new QLabel( this );
+    mDocumentTitleLabel = new QLabel(this);
     QFont font = mDocumentTitleLabel->font();
     font.setBold(true);
-    mDocumentTitleLabel->setFont( font );
-    mDocumentTitleLabel->setAlignment( Qt::AlignHCenter );
-    mDocumentTitleLabel->setWordWrap( true );
-    mDocumentTitleLabel->setSizePolicy( QSizePolicy::Preferred, QSizePolicy::Fixed );
-    baseLayout->addWidget( mDocumentTitleLabel );
+    mDocumentTitleLabel->setFont(font);
+    mDocumentTitleLabel->setAlignment(Qt::AlignHCenter);
+    mDocumentTitleLabel->setWordWrap(true);
+    mDocumentTitleLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    baseLayout->addWidget(mDocumentTitleLabel);
 
     // separator
-    KSeparator* separator = new KSeparator( Qt::Horizontal, this );
-    baseLayout->addWidget( separator );
+    KSeparator* separator = new KSeparator(Qt::Horizontal, this);
+    baseLayout->addWidget(separator);
 
     // property grid
-    QGridLayout *propertyGrid = new QGridLayout(); // unknown rows
-    propertyGrid->setColumnStretch( 0, 0 );
-    propertyGrid->setColumnStretch( 1, 1 );
+    QGridLayout* propertyGrid = new QGridLayout(); // unknown rows
+    propertyGrid->setColumnStretch(0, 0);
+    propertyGrid->setColumnStretch(1, 1);
 
     int currentPropertyRow = 0;
 
     // type property
-    QLabel* label = new QLabel( i18n("Type:"), this );
-    propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight);
+    QLabel* label = new QLabel(i18n("Type:"), this);
+    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
 
-    mMimeTypeLabel = new QLabel( QString(), this );
-    propertyGrid->addWidget( mMimeTypeLabel, currentPropertyRow++, 1);
+    mMimeTypeLabel = new QLabel(QString(), this);
+    propertyGrid->addWidget(mMimeTypeLabel, currentPropertyRow++, 1);
 
     // location property
-    label = new QLabel( i18n("Location:"), this );
-    propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight);
+    label = new QLabel(i18n("Location:"), this);
+    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
 
-    mLocationLabel = new KSqueezedTextLabel( this );
+    mLocationLabel = new KSqueezedTextLabel(this);
     // force the layout direction to be always LTR
-    mLocationLabel->setLayoutDirection( Qt::LeftToRight );
+    mLocationLabel->setLayoutDirection(Qt::LeftToRight);
     // but if we are in RTL mode, align the text to the right
     // otherwise the text is on the wrong side of the dialog
-    if( layoutDirection() == Qt::RightToLeft )
-	   mLocationLabel->setAlignment( Qt::AlignRight );
+    if (layoutDirection() == Qt::RightToLeft) {
+        mLocationLabel->setAlignment(Qt::AlignRight);
+    }
     // TODO: for some reason if building with enable_final flag the compiler sees
     // an ambiguous conversion without the explicit Qt::TextInteractionFlags(...)
-    mLocationLabel->setTextInteractionFlags( Qt::TextInteractionFlags(Qt::TextSelectableByMouse|Qt::TextSelectableByKeyboard) );
-    propertyGrid->addWidget( mLocationLabel, currentPropertyRow++, 1 );
+    mLocationLabel->setTextInteractionFlags(Qt::TextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard));
+    propertyGrid->addWidget(mLocationLabel, currentPropertyRow++, 1);
 
     // size property
-    label = new QLabel( i18n("Size:"), this );
-    propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight );
+    label = new QLabel(i18n("Size:"), this);
+    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
 
-    mSizeLabel = new QLabel( this );
-    propertyGrid->addWidget( mSizeLabel, currentPropertyRow++, 1 );
+    mSizeLabel = new QLabel(this);
+    propertyGrid->addWidget(mSizeLabel, currentPropertyRow++, 1);
 
 #if 0
-    label = new QLabel( i18n("Created/Loaded:"), this ); // TODO: make adjustable depending on document
-    propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight);
+    label = new QLabel(i18n("Created/Loaded:"), this);   // TODO: make adjustable depending on document
+    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
     currentPropertyRow++;
 
-    label = new QLabel( i18n("Last modified:"), this );
-    propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight);
+    label = new QLabel(i18n("Last modified:"), this);
+    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
     currentPropertyRow++;
 
-    label = new QLabel( i18n("Last synchronized:"), this );
-    propertyGrid->addWidget( label, currentPropertyRow, 0, Qt::AlignRight);
+    label = new QLabel(i18n("Last synchronized:"), this);
+    propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
     currentPropertyRow++;
 // last accessed from remote
 
     KDateTime dt;// = item.time(KFileItem::CreationTime);
-    if ( !dt.isNull() )
-    {
-      label = new QLabel(i18n("Created:"), this );
-      propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
+    if (!dt.isNull()) {
+        label = new QLabel(i18n("Created:"), this);
+        propertyGrid->addWidget(label, currentPropertyRow, 0, Qt::AlignRight);
 
-      label = new QLabel(KLocale::global()->formatDateTime(dt), this );
-      propertyGrid->addWidget(label, currentPropertyRow++, 2);
+        label = new QLabel(KLocale::global()->formatDateTime(dt), this);
+        propertyGrid->addWidget(label, currentPropertyRow++, 2);
     }
 #endif
 
-    baseLayout->addLayout( propertyGrid );
-    baseLayout->addStretch( 10 );
+    baseLayout->addLayout(propertyGrid);
+    baseLayout->addStretch(10);
 
-    connect( mTool, &DocumentInfoTool::documentTitleChanged,
-             this, &DocumentInfoView::onDocumentTitleChanged );
-    connect( mTool, &DocumentInfoTool::documentMimeTypeChanged,
-             this, &DocumentInfoView::onMimeTypeChanged );
-    connect( mTool, &DocumentInfoTool::locationChanged,
-             this, &DocumentInfoView::onLocationChanged );
-    connect( mTool, &DocumentInfoTool::documentSizeChanged,
-             this, &DocumentInfoView::onDocumentSizeChanged );
-    onDocumentTitleChanged( mTool->documentTitle() );
-    onMimeTypeChanged( mTool->mimeType() );
-    onLocationChanged( mTool->location() );
-    onDocumentSizeChanged( mTool->documentSize() );
+    connect(mTool, &DocumentInfoTool::documentTitleChanged,
+            this, &DocumentInfoView::onDocumentTitleChanged);
+    connect(mTool, &DocumentInfoTool::documentMimeTypeChanged,
+            this, &DocumentInfoView::onMimeTypeChanged);
+    connect(mTool, &DocumentInfoTool::locationChanged,
+            this, &DocumentInfoView::onLocationChanged);
+    connect(mTool, &DocumentInfoTool::documentSizeChanged,
+            this, &DocumentInfoView::onDocumentSizeChanged);
+    onDocumentTitleChanged(mTool->documentTitle());
+    onMimeTypeChanged(mTool->mimeType());
+    onLocationChanged(mTool->location());
+    onDocumentSizeChanged(mTool->documentSize());
 }
 
-
-void DocumentInfoView::onDocumentTitleChanged( const QString& documentTitle )
+void DocumentInfoView::onDocumentTitleChanged(const QString& documentTitle)
 {
-    mDocumentTitleLabel->setText( documentTitle );
+    mDocumentTitleLabel->setText(documentTitle);
 }
 
-void DocumentInfoView::onMimeTypeChanged( const QMimeType& mimeType )
+void DocumentInfoView::onMimeTypeChanged(const QMimeType& mimeType)
 {
     QString mimeTypeComment;
     QPixmap mimeTypeIcon;
 
-    if( !mimeType.isValid() )
-    {
-        mimeTypeComment = QStringLiteral( "-" );
+    if (!mimeType.isValid()) {
+        mimeTypeComment = QStringLiteral("-");
 //         mimeTypeIcon = ?
-    }
-    else
-    {
+    } else {
         mimeTypeComment = mimeType.comment();
-        mimeTypeIcon = KIconLoader::global()->loadIcon( mimeType.iconName(), KIconLoader::Desktop, KIconLoader::SizeEnormous );
+        mimeTypeIcon = KIconLoader::global()->loadIcon(mimeType.iconName(), KIconLoader::Desktop, KIconLoader::SizeEnormous);
     }
 
-    mIconLabel->setPixmap( mimeTypeIcon );
-    mMimeTypeLabel->setText( mimeTypeComment );
+    mIconLabel->setPixmap(mimeTypeIcon);
+    mMimeTypeLabel->setText(mimeTypeComment);
 }
 
-void DocumentInfoView::onLocationChanged( const QString& location )
+void DocumentInfoView::onLocationChanged(const QString& location)
 {
     const QString entry = location.isEmpty() ?
-        i18nc( "There is no storage location assigned to yet.", "[None]" ) :
-        location;
-    mLocationLabel->setText( entry );
+                          i18nc("There is no storage location assigned to yet.", "[None]") :
+                          location;
+    mLocationLabel->setText(entry);
 }
 
-void DocumentInfoView::onDocumentSizeChanged( int newSize )
+void DocumentInfoView::onDocumentSizeChanged(int newSize)
 {
-    const QString size = ( newSize != -1 ) ?
-        KIO::convertSize(newSize) + QLatin1String(" (") + QLocale().toString(newSize) + QLatin1Char(')') :
-        QStringLiteral("-");
-    mSizeLabel->setText( size );
+    const QString size = (newSize != -1) ?
+                         KIO::convertSize(newSize) + QLatin1String(" (") + QLocale().toString(newSize) + QLatin1Char(')') :
+                         QStringLiteral("-");
+    mSizeLabel->setText(size);
 }
 
 DocumentInfoView::~DocumentInfoView() {}

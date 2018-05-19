@@ -27,32 +27,30 @@
 // Qt
 #include <QWheelEvent>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-ZoomWheelController::ZoomWheelController( AbstractByteArrayView* view, AbstractWheelController* parent )
-  : AbstractWheelController( parent ),
-    mView( view )
+ZoomWheelController::ZoomWheelController(AbstractByteArrayView* view, AbstractWheelController* parent)
+    : AbstractWheelController(parent)
+    , mView(view)
 {
 }
 
-bool ZoomWheelController::handleWheelEvent( QWheelEvent* wheelEvent )
+bool ZoomWheelController::handleWheelEvent(QWheelEvent* wheelEvent)
 {
     bool eventUsed = false;
 
-    if( wheelEvent->modifiers() & Qt::CTRL )
-    {
+    if (wheelEvent->modifiers() & Qt::CTRL) {
         const int delta = wheelEvent->delta();
-        if( delta > 0 )
+        if (delta > 0) {
             mView->zoomIn();
-        else if( delta < 0 )
+        } else if (delta < 0) {
             mView->zoomOut();
+        }
 
         eventUsed = true;
     }
 
-    return eventUsed ? true : AbstractWheelController::handleWheelEvent( wheelEvent );
+    return eventUsed ? true : AbstractWheelController::handleWheelEvent(wheelEvent);
 }
 
 ZoomWheelController::~ZoomWheelController() {}

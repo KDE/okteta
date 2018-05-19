@@ -28,12 +28,10 @@
 // Qt
 #include <QPainter>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-AbstractColumnRenderer::AbstractColumnRenderer( AbstractColumnStylist* stylist )
- : d( new AbstractColumnRendererPrivate(stylist) )
+AbstractColumnRenderer::AbstractColumnRenderer(AbstractColumnStylist* stylist)
+    : d(new AbstractColumnRendererPrivate(stylist))
 {
 }
 
@@ -42,47 +40,46 @@ AbstractColumnStylist* AbstractColumnRenderer::stylist() const { return d->mStyl
 PixelX AbstractColumnRenderer::x()            const { return d->mXSpan.start(); }
 PixelX AbstractColumnRenderer::rightX()       const { return d->mXSpan.end(); }
 PixelX AbstractColumnRenderer::width()        const { return d->mXSpan.width(); }
-bool   AbstractColumnRenderer::isVisible()    const { return d->mIsVisible; }
-PixelX AbstractColumnRenderer::visibleWidth() const { return d->mIsVisible ? d->mXSpan.width(): 0; }
+bool AbstractColumnRenderer::isVisible()      const { return d->mIsVisible; }
+PixelX AbstractColumnRenderer::visibleWidth() const { return d->mIsVisible ? d->mXSpan.width() : 0; }
 PixelY AbstractColumnRenderer::lineHeight()   const { return d->mLineHeight; }
 
-void AbstractColumnRenderer::setX( PixelX x )                    { d->mXSpan.moveToStart( x ); }
-void AbstractColumnRenderer::setWidth( PixelX width )            { d->mXSpan.setEndByWidth( width ); }
-void AbstractColumnRenderer::setVisible( bool isVisible )        { d->mIsVisible = isVisible; }
-void AbstractColumnRenderer::setLineHeight( PixelY lineHeight )  { d->mLineHeight = lineHeight; }
+void AbstractColumnRenderer::setX(PixelX x)                    { d->mXSpan.moveToStart(x); }
+void AbstractColumnRenderer::setWidth(PixelX width)            { d->mXSpan.setEndByWidth(width); }
+void AbstractColumnRenderer::setVisible(bool isVisible)        { d->mIsVisible = isVisible; }
+void AbstractColumnRenderer::setLineHeight(PixelY lineHeight)  { d->mLineHeight = lineHeight; }
 
-void AbstractColumnRenderer::restrictToXSpan( PixelXRange* xSpan ) const { xSpan->restrictTo( d->mXSpan ); }
+void AbstractColumnRenderer::restrictToXSpan(PixelXRange* xSpan) const { xSpan->restrictTo(d->mXSpan); }
 
-bool AbstractColumnRenderer::overlaps( const PixelXRange& xSpan ) const { return d->mXSpan.overlaps(xSpan); }
+bool AbstractColumnRenderer::overlaps(const PixelXRange& xSpan) const { return d->mXSpan.overlaps(xSpan); }
 
-
-void AbstractColumnRenderer::renderFirstLine( QPainter* painter, const PixelXRange& xSpan, int firstLineIndex )
+void AbstractColumnRenderer::renderFirstLine(QPainter* painter, const PixelXRange& xSpan, int firstLineIndex)
 {
-Q_UNUSED( xSpan )
-Q_UNUSED( firstLineIndex )
-Q_UNUSED( painter )
+    Q_UNUSED(xSpan)
+    Q_UNUSED(firstLineIndex)
+    Q_UNUSED(painter)
 //     d->renderBlankLine( painter );
 }
 
-void AbstractColumnRenderer::renderNextLine( QPainter* painter )
+void AbstractColumnRenderer::renderNextLine(QPainter* painter)
 {
-Q_UNUSED( painter )
+    Q_UNUSED(painter)
 //     d->renderBlankLine( painter );
 }
 
-void AbstractColumnRenderer::renderBlankLine( QPainter* painter ) const
+void AbstractColumnRenderer::renderBlankLine(QPainter* painter) const
 {
-    d->renderBlankLine( painter );
+    d->renderBlankLine(painter);
 }
 
-void AbstractColumnRenderer::renderColumn( QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan )
+void AbstractColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan)
 {
-    d->renderEmptyColumn( painter, xSpan, ySpan );
+    d->renderEmptyColumn(painter, xSpan, ySpan);
 }
 
-void AbstractColumnRenderer::renderEmptyColumn( QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan )
+void AbstractColumnRenderer::renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan)
 {
-    d->renderEmptyColumn( painter, xSpan, ySpan );
+    d->renderEmptyColumn(painter, xSpan, ySpan);
 }
 
 AbstractColumnRenderer::~AbstractColumnRenderer()

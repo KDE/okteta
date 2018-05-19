@@ -45,48 +45,46 @@
 #include <QClipboard>
 #include <QApplication>
 
-
 Q_DECLARE_METATYPE(Kasten::AbstractModelStreamEncoder*)
 
-namespace Kasten
-{
+namespace Kasten {
 
-CopyAsController::CopyAsController( ModelCodecViewManager* modelCodecViewManager,
-                                    ModelCodecManager* modelCodecManager,
-                                    KXMLGUIClient* guiClient )
-  : AbstractXmlGuiController(),
-    mModelCodecViewManager( modelCodecViewManager ),
-    mModelCodecManager( modelCodecManager ),
-    mModel( nullptr )
+CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,
+                                   ModelCodecManager* modelCodecManager,
+                                   KXMLGUIClient* guiClient)
+    : AbstractXmlGuiController()
+    , mModelCodecViewManager(modelCodecViewManager)
+    , mModelCodecManager(modelCodecManager)
+    , mModel(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mCopyAsSelectAction = actionCollection->add<KSelectAction>( QStringLiteral("copy_as") );
-    mCopyAsSelectAction->setText( i18nc("@title:menu","Copy As") );
-    mCopyAsSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("edit-copy") ) );
-    mCopyAsSelectAction->setToolBarMode( KSelectAction::MenuMode );
-    connect( mCopyAsSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
-             this, &CopyAsController::onActionTriggered );
+    mCopyAsSelectAction = actionCollection->add<KSelectAction>(QStringLiteral("copy_as"));
+    mCopyAsSelectAction->setText(i18nc("@title:menu", "Copy As"));
+    mCopyAsSelectAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+    mCopyAsSelectAction->setToolBarMode(KSelectAction::MenuMode);
+    connect(mCopyAsSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
+            this, &CopyAsController::onActionTriggered);
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void CopyAsController::setTargetModel( AbstractModel* model )
+void CopyAsController::setTargetModel(AbstractModel* model)
 {
-    if( mModel ) mModel->disconnect( this );
+    if (mModel) {
+        mModel->disconnect(this);
+    }
 
     mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
-    mSelectionControl = mModel ? qobject_cast<If::DataSelectable*>( mModel ) : nullptr;
+    mSelectionControl = mModel ? qobject_cast<If::DataSelectable*>(mModel) : nullptr;
 
-    if( mSelectionControl )
-    {
+    if (mSelectionControl) {
         // TODO: only fill the list on menu call...
-        connect( mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(updateActions()) );
+        connect(mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(updateActions()));
     }
 
     updateActions();
 }
-
 
 void CopyAsController::updateActions()
 {
@@ -95,68 +93,65 @@ void CopyAsController::updateActions()
     const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     const QList<AbstractModelStreamEncoder*> encoderList =
-        mModelCodecManager->encoderList( mModel, selection );
-    const bool hasEncoders = ( encoderList.size() > 0 );
+        mModelCodecManager->encoderList(mModel, selection);
+    const bool hasEncoders = (encoderList.size() > 0);
 
-    if( hasEncoders )
-    {
-        for( int c = 0; c < encoderList.size(); ++c )
-        {
-            AbstractModelStreamEncoder* encoder = encoderList.at( c );
+    if (hasEncoders) {
+        for (int c = 0; c < encoderList.size(); ++c) {
+            AbstractModelStreamEncoder* encoder = encoderList.at(c);
             const QString title = encoder->remoteTypeName();
-            QAction* action = new QAction( title, mCopyAsSelectAction );
+            QAction* action = new QAction(title, mCopyAsSelectAction);
 
-            action->setData( QVariant::fromValue(encoder) );
-            mCopyAsSelectAction->addAction( action );
+            action->setData(QVariant::fromValue(encoder));
+            mCopyAsSelectAction->addAction(action);
         }
-    }
-    else
-    {
-        QAction* noneAction = new QAction( i18nc("@item There are no encoders.","Not available."), mCopyAsSelectAction );
-        noneAction->setEnabled( false );
-        mCopyAsSelectAction->addAction( noneAction );
+    } else {
+        QAction* noneAction = new QAction(i18nc("@item There are no encoders.", "Not available."), mCopyAsSelectAction);
+        noneAction->setEnabled(false);
+        mCopyAsSelectAction->addAction(noneAction);
     }
 
     // TODO: need a call AbstractModelSelection::isEmpty
-    mCopyAsSelectAction->setEnabled( mSelectionControl && mSelectionControl->hasSelectedData() );
+    mCopyAsSelectAction->setEnabled(mSelectionControl && mSelectionControl->hasSelectedData());
 }
 
-void CopyAsController::onActionTriggered( QAction *action )
+void CopyAsController::onActionTriggered(QAction* action)
 {
-    AbstractModelStreamEncoder* encoder = action->data().value<AbstractModelStreamEncoder* >();
+    AbstractModelStreamEncoder* encoder = action->data().value<AbstractModelStreamEncoder*>();
 
     const AbstractModelSelection* selection = mSelectionControl->modelSelection();
 
     AbstractModelStreamEncoderConfigEditor* configEditor =
-        mModelCodecViewManager->createConfigEditor( encoder );
+        mModelCodecViewManager->createConfigEditor(encoder);
 
-    if( configEditor )
-    {
-        CopyAsDialog* dialog = new CopyAsDialog( encoder->remoteTypeName(), configEditor );
-        dialog->setData( mModel, selection );
-        if( !dialog->exec() )
+    if (configEditor) {
+        CopyAsDialog* dialog = new CopyAsDialog(encoder->remoteTypeName(), configEditor);
+        dialog->setData(mModel, selection);
+        if (!dialog->exec()) {
             return;
+        }
     }
 
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     QByteArray exportData;
-    QBuffer exportDataBuffer( &exportData );
-    exportDataBuffer.open( QIODevice::WriteOnly );
+    QBuffer exportDataBuffer(&exportData);
+    exportDataBuffer.open(QIODevice::WriteOnly);
 
-    ModelStreamEncodeThread *encodeThread =
-        new ModelStreamEncodeThread( this, &exportDataBuffer, mModel, selection, encoder );
+    ModelStreamEncodeThread* encodeThread =
+        new ModelStreamEncodeThread(this, &exportDataBuffer, mModel, selection, encoder);
     encodeThread->start();
-    while( !encodeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!encodeThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     delete encodeThread;
 
     exportDataBuffer.close();
 
-    QMimeData *mimeData = new QMimeData;
-    mimeData->setData( encoder->remoteClipboardMimeType(), exportData );
-    QApplication::clipboard()->setMimeData( mimeData, QClipboard::Clipboard );
+    QMimeData* mimeData = new QMimeData;
+    mimeData->setData(encoder->remoteClipboardMimeType(), exportData);
+    QApplication::clipboard()->setMimeData(mimeData, QClipboard::Clipboard);
 
     QApplication::restoreOverrideCursor();
 }

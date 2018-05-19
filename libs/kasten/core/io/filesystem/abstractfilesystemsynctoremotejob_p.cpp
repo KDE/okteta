@@ -29,26 +29,22 @@
 #include <QFileInfo>
 #include <QDateTime>
 
-namespace Kasten
-{
+namespace Kasten {
 
 void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
 {
-    Q_Q( AbstractFileSystemSyncToRemoteJob );
+    Q_Q(AbstractFileSystemSyncToRemoteJob);
 
     bool isWorkFileOk;
     const QUrl url = mSynchronizer->url();
 
-    if( url.isLocalFile() )
-    {
+    if (url.isLocalFile()) {
         mWorkFilePath = url.toLocalFile();
-        mFile = new QFile( mWorkFilePath );
-        isWorkFileOk = mFile->open( QIODevice::WriteOnly );
+        mFile = new QFile(mWorkFilePath);
+        isWorkFileOk = mFile->open(QIODevice::WriteOnly);
 
         mSynchronizer->pauseFileWatching();
-    }
-    else
-    {
+    } else {
         QTemporaryFile* temporaryFile = new QTemporaryFile;
         isWorkFileOk = temporaryFile->open();
 
@@ -56,55 +52,47 @@ void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
         mFile = temporaryFile;
     }
 
-    if( isWorkFileOk )
+    if (isWorkFileOk) {
         q->startWriteToFile();
-    else
-    {
-        q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile->errorString() );
+    } else {
+        q->setError(KJob::KilledJobError);
+        q->setErrorText(mFile->errorString());
         delete mFile;
         q->emitResult();
     }
 }
 
-void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite( bool success )
+void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite(bool success)
 {
-    Q_Q( AbstractFileSystemSyncToRemoteJob );
+    Q_Q(AbstractFileSystemSyncToRemoteJob);
 
-    if( success )
-    {
+    if (success) {
         mFile->close(); // TODO: when is new time written, on close?
-        QFileInfo fileInfo( *mFile );
-        mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
+        QFileInfo fileInfo(*mFile);
+        mSynchronizer->setFileDateTimeOnSync(fileInfo.lastModified());
 
         const QUrl url = mSynchronizer->url();
         const bool isLocalFile = url.isLocalFile();
 
-        if( ! isLocalFile )
-        {
+        if (!isLocalFile) {
             KIO::FileCopyJob* fileCopyJob =
-                KIO::file_copy( QUrl::fromLocalFile(mWorkFilePath), url, -1, KIO::Overwrite );
-            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
+                KIO::file_copy(QUrl::fromLocalFile(mWorkFilePath), url, -1, KIO::Overwrite);
+            KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 
             success = fileCopyJob->exec();
-            if( ! success )
-            {
-                q->setError( KJob::KilledJobError );
-                q->setErrorText( fileCopyJob->errorString() );
+            if (!success) {
+                q->setError(KJob::KilledJobError);
+                q->setErrorText(fileCopyJob->errorString());
+            } else {
+                mSynchronizer->setRemoteState(RemoteUnknown);
             }
-            else
-                mSynchronizer->setRemoteState( RemoteUnknown );
-        }
-        else
-        {
+        } else {
             mSynchronizer->unpauseFileWatching();
-            mSynchronizer->setRemoteState( RemoteInSync );
+            mSynchronizer->setRemoteState(RemoteInSync);
         }
-    }
-    else
-    {
-        q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile->errorString() );
+    } else {
+        q->setError(KJob::KilledJobError);
+        q->setErrorText(mFile->errorString());
     }
 
     delete mFile;

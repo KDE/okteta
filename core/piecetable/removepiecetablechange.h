@@ -27,37 +27,34 @@
 #include "abstractpiecetablechange.h"
 #include "piecelist.h"
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 /** class
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 
 class RemovePieceTableChange : public AbstractPieceTableChange
 {
-  public:
-    RemovePieceTableChange( const AddressRange& removeRange, const PieceList& removedPieces );
+public:
+    RemovePieceTableChange(const AddressRange& removeRange, const PieceList& removedPieces);
     ~RemovePieceTableChange() override;
 
-  public: // AbstractPieceTableChange API
+public: // AbstractPieceTableChange API
     int type() const override;
     QString description() const override;
-    bool merge( const AbstractPieceTableChange* other ) override;
-    AddressRange apply( PieceTable* pieceTable ) const override;
-    AddressRange revert( PieceTable* pieceTable ) const override;
+    bool merge(const AbstractPieceTableChange* other) override;
+    AddressRange apply(PieceTable* pieceTable) const override;
+    AddressRange revert(PieceTable* pieceTable) const override;
     ArrayChangeMetrics metrics() const override;
 
-  protected:
+protected:
     AddressRange mRemoveRange;
     PieceList mRemovedPieces;
 };
 
-
-inline RemovePieceTableChange::RemovePieceTableChange( const AddressRange& removeRange, const PieceList& removedPieces )
-  : mRemoveRange( removeRange ),
-    mRemovedPieces( removedPieces )
+inline RemovePieceTableChange::RemovePieceTableChange(const AddressRange& removeRange, const PieceList& removedPieces)
+    : mRemoveRange(removeRange)
+    , mRemovedPieces(removedPieces)
 {}
 }
 

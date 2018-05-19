@@ -47,9 +47,8 @@ inline quint8 CharDataInformationMethods::fromVariant(const QVariant& value, boo
     Q_CHECK_PTR(ok);
     quint32 tmp = value.toUInt(ok);
     quint8 result = quint8(tmp);
-    if (tmp != quint32(result))
-    {
-        *ok = false; //out of bounds
+    if (tmp != quint32(result)) {
+        *ok = false; // out of bounds
         return 0;
     }
     return result;

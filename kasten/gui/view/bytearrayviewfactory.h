@@ -28,25 +28,21 @@
 // Kasten gui
 #include <kasten/abstractviewfactory.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayViewProfileManager;
-
 
 class OKTETAKASTENGUI_EXPORT ByteArrayViewFactory : public AbstractViewFactory
 {
-  public:
-    explicit ByteArrayViewFactory( ByteArrayViewProfileManager* byteArrayViewProfileManager );
+public:
+    explicit ByteArrayViewFactory(ByteArrayViewProfileManager* byteArrayViewProfileManager);
 
-  public:
-    AbstractView* createViewFor( AbstractDocument* document ) override;
-    AbstractView* createCopyOfView( AbstractView* view, Qt::Alignment alignment ) override;
+public:
+    AbstractView* createViewFor(AbstractDocument* document) override;
+    AbstractView* createCopyOfView(AbstractView* view, Qt::Alignment alignment) override;
 
-  private:
+private:
     ByteArrayViewProfileManager* const mByteArrayViewProfileManager;
 };
-
 
 }
 

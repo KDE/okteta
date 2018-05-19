@@ -31,47 +31,45 @@
 // KF5
 #include <KLocalizedString>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-Char8Codec::Char8Codec( CharCodec* charCodec )
-  : AbstractTypeCodec( i18nc("@label:textbox encoding of one byte as character","Character 8-bit") ),
-    mCharCodec( charCodec )
+Char8Codec::Char8Codec(CharCodec* charCodec)
+    : AbstractTypeCodec(i18nc("@label:textbox encoding of one byte as character", "Character 8-bit"))
+    , mCharCodec(charCodec)
 {}
 
-QVariant Char8Codec::value( const PODData& data, int* byteCount ) const
+QVariant Char8Codec::value(const PODData& data, int* byteCount) const
 {
-    const unsigned char* pointer = (unsigned char*)data.pointer( 1 );
+    const unsigned char* pointer = (unsigned char*)data.pointer(1);
 
     *byteCount = pointer ? 1 : 0;
     QVariant result;
-    if( pointer )
-    {
-        const Okteta::Character decodedChar = mCharCodec->decode( *pointer );
+    if (pointer) {
+        const Okteta::Character decodedChar = mCharCodec->decode(*pointer);
 
-        result = QVariant::fromValue<Char8>( Char8(decodedChar) );
+        result = QVariant::fromValue<Char8>(Char8(decodedChar));
     }
 
     return result;
 }
 
-QByteArray Char8Codec::valueToBytes( const QVariant& value ) const
+QByteArray Char8Codec::valueToBytes(const QVariant& value) const
 {
     const Okteta::Character character = value.value<Char8>().character;
 
-    bool success = ( ! character.isUndefined() );
+    bool success = (!character.isUndefined());
     Okteta::Byte byte;
 
-    if( success )
-        success = mCharCodec->encode( &byte, character );
+    if (success) {
+        success = mCharCodec->encode(&byte, character);
+    }
 
-    return success ? QByteArray( 1, byte ) : QByteArray();
+    return success ? QByteArray(1, byte) : QByteArray();
 }
 
-bool Char8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+bool Char8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
-    return ( value.value<Char8>().character == otherValue.value<Char8>().character );
+    return (value.value<Char8>().character == otherValue.value<Char8>().character);
 }
 
 Char8Codec::~Char8Codec() {}

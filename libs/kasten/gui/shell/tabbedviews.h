@@ -29,55 +29,52 @@
 
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TabbedViewsPrivate;
 
-
-class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews,
-                                     public If::ToolInlineViewable
+class KASTENGUI_EXPORT TabbedViews : public AbstractGroupedViews
+                                   , public If::ToolInlineViewable
 {
-  Q_OBJECT
-  Q_INTERFACES(
-    Kasten::If::ToolInlineViewable
-  )
+    Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::ToolInlineViewable
+    )
 
-  protected:
-    explicit TabbedViews( TabbedViewsPrivate* d );
+protected:
+    explicit TabbedViews(TabbedViewsPrivate* d);
 
-  public:
+public:
     TabbedViews();
 
     ~TabbedViews() override;
 
-  public: // AbstractViewArea API
+public: // AbstractViewArea API
     void setFocus() override;
     QWidget* widget() const override;
     bool hasFocus() const override;
 
-  public: // AbstractGroupedViews API
-    void addViews( const QList<AbstractView*>& views ) override;
-    void removeViews( const QList<AbstractView*>& views ) override;
-    void setViewFocus( AbstractView* view ) override;
+public: // AbstractGroupedViews API
+    void addViews(const QList<AbstractView*>& views) override;
+    void removeViews(const QList<AbstractView*>& views) override;
+    void setViewFocus(AbstractView* view) override;
 
     QList<AbstractView*> viewList() const override;
     int viewCount() const override;
     AbstractView* viewFocus() const override;
 
-  public: // If::ToolInlineViewable API
-    void setCurrentToolInlineView( AbstractToolInlineView* view ) override;
+public: // If::ToolInlineViewable API
+    void setCurrentToolInlineView(AbstractToolInlineView* view) override;
 
-  public:
-    int indexOf( AbstractView* view ) const;
+public:
+    int indexOf(AbstractView* view) const;
 
-  Q_SIGNALS:
-    void dataOffered( const QMimeData* mimeData, bool& accepted );
-    void dataDropped( const QMimeData* mimeData );
+Q_SIGNALS:
+    void dataOffered(const QMimeData* mimeData, bool& accepted);
+    void dataDropped(const QMimeData* mimeData);
 
-  protected:
-    Q_DECLARE_PRIVATE( TabbedViews )
+protected:
+    Q_DECLARE_PRIVATE(TabbedViews)
 };
 
 }

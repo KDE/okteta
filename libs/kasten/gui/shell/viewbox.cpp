@@ -27,35 +27,31 @@
 // Qt
 #include <QVBoxLayout>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ViewBox::ViewBox( AbstractView* view, QWidget* parent )
-  : QWidget( parent ),
-    mView( view )
+ViewBox::ViewBox(AbstractView* view, QWidget* parent)
+    : QWidget(parent)
+    , mView(view)
 {
     QWidget* widget = view->widget();
-    setFocusProxy( widget );
+    setFocusProxy(widget);
 
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin (0);
-    layout->setSpacing (0);
-    layout->addWidget( widget );
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->setMargin(0);
+    layout->setSpacing(0);
+    layout->addWidget(widget);
 }
-
 
 AbstractView* ViewBox::view() const { return mView; }
 
-
-void ViewBox::add( ViewBox::Area area )
+void ViewBox::add(ViewBox::Area area)
 {
-    Q_UNUSED( area );
+    Q_UNUSED(area);
 }
 
 ViewBox::~ViewBox()
 {
-    mView->widget()->setParent( nullptr );
+    mView->widget()->setParent(nullptr);
 }
 
 }

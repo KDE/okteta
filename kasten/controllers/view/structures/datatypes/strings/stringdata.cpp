@@ -20,14 +20,17 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "stringdata.h"
 #include "stringdatainformation.h"
 
 StringData::StringData(StringDataInformation* parent)
-    : mParent(parent), mTerminationCodePoint(0), mMode(None), mLittleEndian(true), mEofReached(false)
+    : mParent(parent)
+    , mTerminationCodePoint(0)
+    , mMode(None)
+    , mLittleEndian(true)
+    , mEofReached(false)
 {
-    //default to zero terminated strings
+    // default to zero terminated strings
     mLength.maxBytes = 0;
 }
 
@@ -38,10 +41,9 @@ StringData::~StringData()
 
 void StringData::setTerminationCodePoint(uint term)
 {
-    if (term > UNICODE_MAX)
-    {
+    if (term > UNICODE_MAX) {
         mParent->logError() << "Attempting to set termination code point which is larger"
-                " than 0x10ffff (max unicode):" << term;
+            " than 0x10ffff (max unicode):" << term;
         return;
     }
     mTerminationCodePoint = term;

@@ -27,26 +27,24 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct SInt64
 {
-  public:
-    SInt64( qint64 v );
+public:
+    SInt64(qint64 v);
     SInt64();
 
-  public:
+public:
     QString toString() const;
 
-  public:
+public:
     qint64 value;
 };
 
+inline SInt64::SInt64() : value(0) {}
+inline SInt64::SInt64(qint64 v) : value(v) {}
 
-inline SInt64::SInt64() : value( 0 ) {}
-inline SInt64::SInt64( qint64 v ) : value( v ) {}
+inline QString SInt64::toString() const { return QString::number(value); }
 
-inline QString SInt64::toString() const { return QString::number( value ); }
-
-Q_DECLARE_METATYPE( SInt64 )
+Q_DECLARE_METATYPE(SInt64)
 
 #endif

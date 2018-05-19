@@ -27,9 +27,11 @@
 class BoolBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
     DATAINFORMATION_CLONE(BoolBitfieldDataInformation, AbstractBitfieldDataInformation) {}
+
 public:
     BoolBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
-            : AbstractBitfieldDataInformation(name, width, parent) {}
+        : AbstractBitfieldDataInformation(name, width, parent)
+    {}
     ~BoolBitfieldDataInformation() override {}
 
     QScriptValue valueAsQScriptValue() const override;

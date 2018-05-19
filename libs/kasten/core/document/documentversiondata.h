@@ -29,20 +29,18 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KASTENCORE_EXPORT DocumentVersionData
 {
-  public:
-    DocumentVersionData( DocumentVersionId id, const QString& changeComment );
+public:
+    DocumentVersionData(DocumentVersionId id, const QString& changeComment);
 
-  public:
+public:
     DocumentVersionId id() const;
     QString changeComment() const;
 
-  protected:
+protected:
     DocumentVersionId mId;
     QString mChangeComment;
 };

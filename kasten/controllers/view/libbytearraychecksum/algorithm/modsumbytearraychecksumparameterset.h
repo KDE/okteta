@@ -27,23 +27,22 @@
 #include "abstractbytearraychecksumparameterset.h"
 #include "endianness.h"
 
-
 class ModSumByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
 {
-  public:
+public:
     ModSumByteArrayChecksumParameterSet();
     ~ModSumByteArrayChecksumParameterSet() override;
 
-  public: // AbstractByteArrayChecksumParameterSet API
+public: // AbstractByteArrayChecksumParameterSet API
     const char* id() const override;
 
-  public:
-    void setEndianness( Endianness endianness );
+public:
+    void setEndianness(Endianness endianness);
 
-  public:
+public:
     Endianness endianness() const;
 
-  protected:
+protected:
     Endianness mEndianness;
 };
 

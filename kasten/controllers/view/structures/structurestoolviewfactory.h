@@ -28,10 +28,9 @@
 // Kasten gui
 #include <kasten/abstracttoolviewfactory.h>
 
-namespace Kasten
-{
+namespace Kasten {
 
-class OKTETAKASTENCONTROLLERS_EXPORT StructuresToolViewFactory: public AbstractToolViewFactory
+class OKTETAKASTENCONTROLLERS_EXPORT StructuresToolViewFactory : public AbstractToolViewFactory
 {
 public:
     StructuresToolViewFactory();

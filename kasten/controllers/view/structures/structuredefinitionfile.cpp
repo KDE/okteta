@@ -33,10 +33,10 @@
 #include "parsers/osdparser.h"
 #include "parsers/scriptfileparser.h"
 
-namespace Kasten
-{
+namespace Kasten {
+
 StructureDefinitionFile::StructureDefinitionFile(const KPluginInfo& info)
-        : mPluginInfo(info)
+    : mPluginInfo(info)
 {
     const QFileInfo tmp(info.entryPath());
     const QString absoluteDir = tmp.absolutePath();
@@ -45,16 +45,16 @@ StructureDefinitionFile::StructureDefinitionFile(const KPluginInfo& info)
     if (category == QLatin1String("structure/js")) {
         const QString filename = absoluteDir + QLatin1String("/main.js");
         mParser.reset(new ScriptFileParser(mPluginInfo.pluginName(), filename));
-    }
-    else if (category == QLatin1String("structure")) {
-        //by default use main.osd, only if it doesn't exist fall back to old behaviour
+    } else if (category == QLatin1String("structure")) {
+        // by default use main.osd, only if it doesn't exist fall back to old behaviour
         QString filename = absoluteDir + QLatin1String("/main.osd");
-        if (!QFile::exists(filename))
+        if (!QFile::exists(filename)) {
             filename = absoluteDir + QLatin1Char('/') + mPluginInfo.pluginName() + QLatin1String(".osd");
+        }
         mParser.reset(new OsdParser(mPluginInfo.pluginName(), filename));
-    }
-    else
+    } else {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no valid parser found for plugin category '" << category << "'";
+    }
 }
 
 StructureDefinitionFile::~StructureDefinitionFile()
@@ -82,15 +82,17 @@ TopLevelDataInformation* StructureDefinitionFile::structure(const QString& name)
     Q_CHECK_PTR(mParser);
     QVector<TopLevelDataInformation*> list = mParser->parseStructures();
     TopLevelDataInformation* ret = nullptr;
-    for (int i = 0; i < list.size(); ++i)
-    {
-        if (list.at(i)->actualDataInformation()->name() == name)
+    for (int i = 0; i < list.size(); ++i) {
+        if (list.at(i)->actualDataInformation()->name() == name) {
             ret = list.at(i);
-        else
-            delete list.at(i); //we have no use for this element
+        } else {
+            delete list.at(i); // we have no use for this element
+        }
     }
-    if (!ret)
+
+    if (!ret) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not find structure with name=" << name;
+    }
     return ret; // not found
 }
 

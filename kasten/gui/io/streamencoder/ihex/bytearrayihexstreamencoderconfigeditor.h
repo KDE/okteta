@@ -30,25 +30,23 @@
 
 class KComboBox;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayIHexStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteArrayIHexStreamEncoderConfigEditor( ByteArrayIHexStreamEncoder* encoder, QWidget* parent = nullptr );
+public:
+    explicit ByteArrayIHexStreamEncoderConfigEditor(ByteArrayIHexStreamEncoder* encoder, QWidget* parent = nullptr);
     ~ByteArrayIHexStreamEncoderConfigEditor() override;
 
-  public: // AbstractModelStreamEncoderConfigEditor API
+public: // AbstractModelStreamEncoderConfigEditor API
     AbstractSelectionView* createPreviewView() const override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onSettingsChanged();
 
-  protected:
+protected:
     ByteArrayIHexStreamEncoder* mEncoder;
     IHexStreamEncoderSettings mSettings;
 

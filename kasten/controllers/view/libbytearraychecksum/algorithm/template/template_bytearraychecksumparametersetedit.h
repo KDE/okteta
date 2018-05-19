@@ -21,26 +21,25 @@
 class QSpinBox;
 //// ADAPT(end)
 
-
 //// ADAPT(start)
 //// rename the class name from Template_ByteArrayChecksumParameterSetEdit to a proper name, both here and in the .cpp file
 //// e.g. MyByteArrayChecksumParameterSetEdit
 class Template_ByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksumParameterSetEdit
 //// ADAPT(end)
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const char Id[];
 
-  public:
-    explicit Template_ByteArrayChecksumParameterSetEdit( QWidget* parent = nullptr );
+public:
+    explicit Template_ByteArrayChecksumParameterSetEdit(QWidget* parent = nullptr);
 
     ~Template_ByteArrayChecksumParameterSetEdit() override;
 
-  public: // AbstractByteArrayFilterParameterSetEdit API
-    void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet ) override;
-    void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const override;
+public: // AbstractByteArrayFilterParameterSetEdit API
+    void setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet) override;
+    void getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const override;
 //// ADAPT(start)
 //// if the values in the widget can reach invalid states, which should not be used for the parameters,
 //// keep the declaration of "isValid()", otherwise remove the next line
@@ -50,16 +49,18 @@ class Template_ByteArrayChecksumParameterSetEdit : public AbstractByteArrayCheck
 //// ADAPT(start)
 //// define slots to catch changes in the values to check if the current state is valid or not
 //// not needed if there cannot be invalid states
-  protected Q_SLOTS:
-    void onBitNumberChanged( int value );
+
+protected Q_SLOTS:
+    void onBitNumberChanged(int value);
 //// ADAPT(end)
 
 //// ADAPT(start)
 //// here list the UI elements as usual
-  protected:
+
+protected:
     QSpinBox* mBitNumberEdit;
 
-    bool mIsValid :1;
+    bool mIsValid : 1;
 //// ADAPT(end)
 };
 

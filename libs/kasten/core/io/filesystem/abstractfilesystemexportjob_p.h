@@ -29,36 +29,34 @@
 // Qt
 #include <QUrl>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
 {
-  public:
-    AbstractFileSystemExportJobPrivate( AbstractFileSystemExportJob* parent,
-                                        AbstractModel* model, const AbstractModelSelection* selection, const QUrl& url );
+public:
+    AbstractFileSystemExportJobPrivate(AbstractFileSystemExportJob* parent,
+                                       AbstractModel* model, const AbstractModelSelection* selection, const QUrl& url);
 
     ~AbstractFileSystemExportJobPrivate() override;
 
-  public: // KJob API
+public: // KJob API
     virtual void start();
 
-  public:
-    void completeExport( bool success );
+public:
+    void completeExport(bool success);
 
-  public:
+public:
     AbstractModel* model() const;
     const AbstractModelSelection* selection() const;
     QFile* file() const;
 
-  public: // slot
+public: // slot
     void exportToFile();
 
-  protected:
-    Q_DECLARE_PUBLIC( AbstractFileSystemExportJob )
+protected:
+    Q_DECLARE_PUBLIC(AbstractFileSystemExportJob)
 
-  protected:
+protected:
     AbstractModel* const mModel;
     const AbstractModelSelection* const mSelection;
     const QUrl mUrl;
@@ -66,15 +64,14 @@ class AbstractFileSystemExportJobPrivate : public AbstractExportJobPrivate
     QString mWorkFilePath;
 };
 
-
-inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate( AbstractFileSystemExportJob* parent,
-                                        AbstractModel* model, const AbstractModelSelection* selection,
-                                        const QUrl& url)
-  : AbstractExportJobPrivate( parent ),
-    mModel( model ),
-    mSelection( selection ),
-    mUrl( url ),
-    mFile( nullptr )
+inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate(AbstractFileSystemExportJob* parent,
+                                                                              AbstractModel* model, const AbstractModelSelection* selection,
+                                                                              const QUrl& url)
+    : AbstractExportJobPrivate(parent)
+    , mModel(model)
+    , mSelection(selection)
+    , mUrl(url)
+    , mFile(nullptr)
 {}
 
 inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate() {}
@@ -83,12 +80,11 @@ inline AbstractModel* AbstractFileSystemExportJobPrivate::model()               
 inline const AbstractModelSelection* AbstractFileSystemExportJobPrivate::selection() const { return mSelection; }
 inline QFile* AbstractFileSystemExportJobPrivate::file()                             const { return mFile; }
 
-
 inline void AbstractFileSystemExportJobPrivate::start()
 {
-    Q_Q( AbstractFileSystemExportJob );
+    Q_Q(AbstractFileSystemExportJob);
 
-    QMetaObject::invokeMethod( q, "exportToFile", Qt::QueuedConnection );
+    QMetaObject::invokeMethod(q, "exportToFile", Qt::QueuedConnection);
 }
 
 }

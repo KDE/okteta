@@ -27,12 +27,9 @@
 // Qt
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 static const Size FixedSizeByteArrayModelSize = 60;
-
 
 bool FixedSizeByteArrayModelAbstractByteArrayModelIfTest::byteArrayModelSizeCanBeChanged() const
 {
@@ -41,14 +38,14 @@ bool FixedSizeByteArrayModelAbstractByteArrayModelIfTest::byteArrayModelSizeCanB
 
 AbstractByteArrayModel* FixedSizeByteArrayModelAbstractByteArrayModelIfTest::createByteArrayModel()
 {
-    return new FixedSizeByteArrayModel( FixedSizeByteArrayModelSize );
+    return new FixedSizeByteArrayModel(FixedSizeByteArrayModelSize);
 }
 
-void FixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel )
+void FixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(AbstractByteArrayModel* byteArrayModel)
 {
     delete byteArrayModel;
 }
 
 }
 
-QTEST_MAIN( Okteta::FixedSizeByteArrayModelAbstractByteArrayModelIfTest )
+QTEST_MAIN(Okteta::FixedSizeByteArrayModelAbstractByteArrayModelIfTest)

@@ -31,28 +31,25 @@
 class QAction;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocument;
 class DocumentSyncManager;
 
-
 class KASTENCONTROLLERS_EXPORT SetRemoteController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    SetRemoteController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
+public:
+    SetRemoteController(DocumentSyncManager* syncManager, KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void saveAs();
 
-  private:
+private:
     QAction* mSaveAsAction;
 
     DocumentSyncManager* mSyncManager;

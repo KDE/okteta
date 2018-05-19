@@ -32,74 +32,72 @@
 #include <QCheckBox>
 #include <QFormLayout>
 
-
 const char OperandByteArrayFilterParameterSetEdit::Id[] = "Operand";
 
-
-OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit( QWidget* parent )
- : AbstractByteArrayFilterParameterSetEdit( parent )
+OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit(QWidget* parent)
+    : AbstractByteArrayFilterParameterSetEdit(parent)
 {
-    QFormLayout *baseLayout = new QFormLayout( this );
-    baseLayout->setMargin( 0 );
+    QFormLayout* baseLayout = new QFormLayout(this);
+    baseLayout->setMargin(0);
 
     const QString operandLabelText =
-        i18nc( "@label:textbox operand to the arithmetic filter function",
-               "Operand:" );
-    mOperandEdit = new Okteta::ByteArrayComboBox( this );
-    connect( mOperandEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
-             this, &OperandByteArrayFilterParameterSetEdit::onInputChanged );
+        i18nc("@label:textbox operand to the arithmetic filter function",
+              "Operand:");
+    mOperandEdit = new Okteta::ByteArrayComboBox(this);
+    connect(mOperandEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
+            this, &OperandByteArrayFilterParameterSetEdit::onInputChanged);
     const QString operandToolTip =
-        i18nc( "@info:tooltip",
-               "The operand to do the operation with." );
+        i18nc("@info:tooltip",
+              "The operand to do the operation with.");
     const QString operandWhatsThis =
-        i18nc( "@info:whatsthis",
-               "Enter an operand, or select a previous operand from the list." );
-    mOperandEdit->setToolTip( operandToolTip );
-    mOperandEdit->setWhatsThis( operandWhatsThis );
+        i18nc("@info:whatsthis",
+              "Enter an operand, or select a previous operand from the list.");
+    mOperandEdit->setToolTip(operandToolTip);
+    mOperandEdit->setWhatsThis(operandWhatsThis);
 
-    baseLayout->addRow( operandLabelText, mOperandEdit );
+    baseLayout->addRow(operandLabelText, mOperandEdit);
 
     const QString alignAtEndLabelText =
-        i18nc( "@option:check",
-                "Align at end:" );
-    mAlignAtEndCheckBox = new QCheckBox( this );
-    mAlignAtEndCheckBox->setChecked( false );
+        i18nc("@option:check",
+              "Align at end:");
+    mAlignAtEndCheckBox = new QCheckBox(this);
+    mAlignAtEndCheckBox->setChecked(false);
     const QString alignToolTip =
-        i18nc( "@info:tooltip",
-               "Sets if the operation will be aligned to the end of the data instead of to the begin." );
+        i18nc("@info:tooltip",
+              "Sets if the operation will be aligned to the end of the data instead of to the begin.");
     const QString alignWhatsThis =
-        i18nc( "@info:whatsthis",
-               "If set, the operation will be aligned to the end of the data." );
-    mAlignAtEndCheckBox->setToolTip( alignToolTip );
-    mAlignAtEndCheckBox->setWhatsThis( alignWhatsThis );
+        i18nc("@info:whatsthis",
+              "If set, the operation will be aligned to the end of the data.");
+    mAlignAtEndCheckBox->setToolTip(alignToolTip);
+    mAlignAtEndCheckBox->setWhatsThis(alignWhatsThis);
 
-    baseLayout->addRow( alignAtEndLabelText, mAlignAtEndCheckBox );
+    baseLayout->addRow(alignAtEndLabelText, mAlignAtEndCheckBox);
 }
 
 bool OperandByteArrayFilterParameterSetEdit::isValid() const { return !mOperandEdit->byteArray().isEmpty(); }
 
-void OperandByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayFilterParameterSet *parameterSet )
+void OperandByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const OperandByteArrayFilterParameterSet *operandParameterSet =
-        static_cast<const OperandByteArrayFilterParameterSet *>( parameterSet );
+    const OperandByteArrayFilterParameterSet* operandParameterSet =
+        static_cast<const OperandByteArrayFilterParameterSet*>(parameterSet);
 
 //     mOperandEdit->setValue( operandParameterSet->operand() ); TODO: not yet implemented
-    mAlignAtEndCheckBox->setChecked( operandParameterSet->alignAtEnd() );
+    mAlignAtEndCheckBox->setChecked(operandParameterSet->alignAtEnd());
 }
 
-void OperandByteArrayFilterParameterSetEdit::setCharCodec( const QString &charCodecName )
+void OperandByteArrayFilterParameterSetEdit::setCharCodec(const QString& charCodecName)
 {
-    mOperandEdit->setCharCodec( charCodecName );
+    mOperandEdit->setCharCodec(charCodecName);
 }
 
-void OperandByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
+void OperandByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    OperandByteArrayFilterParameterSet *operandParameterSet =
-        static_cast<OperandByteArrayFilterParameterSet *>( parameterSet );
+    OperandByteArrayFilterParameterSet* operandParameterSet =
+        static_cast<OperandByteArrayFilterParameterSet*>(parameterSet);
 
-    operandParameterSet->setOperand( mOperandEdit->byteArray() );
-    operandParameterSet->setOperandFormat( mOperandEdit->format() );
-    operandParameterSet->setAlignAtEnd( mAlignAtEndCheckBox->isChecked() );
+    operandParameterSet->setOperand(mOperandEdit->byteArray());
+    operandParameterSet->setOperandFormat(mOperandEdit->format());
+    operandParameterSet->setAlignAtEnd(mAlignAtEndCheckBox->isChecked());
 }
 
 void OperandByteArrayFilterParameterSetEdit::rememberCurrentSettings()
@@ -107,9 +105,9 @@ void OperandByteArrayFilterParameterSetEdit::rememberCurrentSettings()
     mOperandEdit->rememberCurrentByteArray();
 }
 
-void OperandByteArrayFilterParameterSetEdit::onInputChanged( const QByteArray &data )
+void OperandByteArrayFilterParameterSetEdit::onInputChanged(const QByteArray& data)
 {
-    emit validityChanged( !data.isEmpty() );
+    emit validityChanged(!data.isEmpty());
 }
 
 OperandByteArrayFilterParameterSetEdit::~OperandByteArrayFilterParameterSetEdit()

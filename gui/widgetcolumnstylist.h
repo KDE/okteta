@@ -28,24 +28,21 @@
 
 class QWidget;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class WidgetColumnStylistPrivate;
 
-
 class OKTETAGUI_EXPORT WidgetColumnStylist : public AbstractColumnStylist
 {
-  public:
-    explicit WidgetColumnStylist( QWidget* parent );
+public:
+    explicit WidgetColumnStylist(QWidget* parent);
     ~WidgetColumnStylist() override;
 
-  public: // AbstractColumnStylist API
+public: // AbstractColumnStylist API
     const QPalette& palette() const override;
 
-  protected:
-    Q_DECLARE_PRIVATE( WidgetColumnStylist )
+protected:
+    Q_DECLARE_PRIVATE(WidgetColumnStylist)
 };
 
 }

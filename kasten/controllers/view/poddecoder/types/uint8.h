@@ -27,31 +27,28 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct UInt8
 {
-  public:
-    UInt8( quint8 v );
+public:
+    UInt8(quint8 v);
     UInt8();
 
-  public:
-    QString toString( bool asHex ) const;
+public:
+    QString toString(bool asHex) const;
 
-  public:
+public:
     quint8 value;
 };
 
+inline UInt8::UInt8() : value(0) {}
+inline UInt8::UInt8(quint8 v) : value(v) {}
 
-inline UInt8::UInt8() : value( 0 ) {}
-inline UInt8::UInt8( quint8 v ) : value( v ) {}
-
-inline QString UInt8::toString( bool asHex ) const
+inline QString UInt8::toString(bool asHex) const
 {
-    return asHex ? QStringLiteral( "0x%1" ).arg( value, 2, 16, QChar::fromLatin1('0') ) :
-                   QString::number( value );
+    return asHex ? QStringLiteral("0x%1").arg(value, 2, 16, QChar::fromLatin1('0')) :
+                   QString::number(value);
 }
 
-
-Q_DECLARE_METATYPE( UInt8 )
+Q_DECLARE_METATYPE(UInt8)
 
 #endif

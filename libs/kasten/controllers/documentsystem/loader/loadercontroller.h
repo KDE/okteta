@@ -32,32 +32,29 @@ class KRecentFilesAction;
 class KXMLGUIClient;
 class QUrl;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocumentStrategy;
 
-
 class KASTENCONTROLLERS_EXPORT LoaderController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    LoaderController( AbstractDocumentStrategy* documentStrategy,
-                      KXMLGUIClient* guiClient );
+public:
+    LoaderController(AbstractDocumentStrategy* documentStrategy,
+                     KXMLGUIClient* guiClient);
     ~LoaderController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void load();
-    void loadRecent( const QUrl& url );
+    void loadRecent(const QUrl& url);
 
-    void onUrlUsed( const QUrl& url );
+    void onUrlUsed(const QUrl& url);
 
-  private:
+private:
     AbstractDocumentStrategy* mDocumentStrategy;
 
     KRecentFilesAction* mOpenRecentAction;

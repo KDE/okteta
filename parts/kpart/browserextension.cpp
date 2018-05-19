@@ -33,27 +33,27 @@
 #include <QApplication>
 #include <QDataStream>
 
-
-OktetaBrowserExtension::OktetaBrowserExtension( OktetaPart* part )
-  : KParts::BrowserExtension( part ),
-    mPart( part )
+OktetaBrowserExtension::OktetaBrowserExtension(OktetaPart* part)
+    : KParts::BrowserExtension(part)
+    , mPart(part)
 {
-    setObjectName( QStringLiteral( "oktetapartbrowserextension" ) );
+    setObjectName(QStringLiteral("oktetapartbrowserextension"));
 
-    connect( mPart, SIGNAL(hasSelectedDataChanged(bool)),
-             SLOT(onSelectionChanged(bool)) );
+    connect(mPart, SIGNAL(hasSelectedDataChanged(bool)),
+            SLOT(onSelectionChanged(bool)));
 
-    emit enableAction( "copy", false );
-    emit enableAction( "print", true);
+    emit enableAction("copy", false);
+    emit enableAction("print", true);
 }
 
 void OktetaBrowserExtension::copy()
 {
     QMimeData* data = mPart->byteArrayView()->copySelectedData();
-    if( !data )
-      return;
+    if (!data) {
+        return;
+    }
 
-    QApplication::clipboard()->setMimeData( data, QClipboard::Clipboard );
+    QApplication::clipboard()->setMimeData(data, QClipboard::Clipboard);
 }
 
 void OktetaBrowserExtension::print()
@@ -61,33 +61,30 @@ void OktetaBrowserExtension::print()
     mPart->printController()->print();
 }
 
-
-void OktetaBrowserExtension::onSelectionChanged( bool hasSelection )
+void OktetaBrowserExtension::onSelectionChanged(bool hasSelection)
 {
-    emit enableAction( "copy", hasSelection );
+    emit enableAction("copy", hasSelection);
 }
 
-
-void OktetaBrowserExtension::saveState( QDataStream& stream )
+void OktetaBrowserExtension::saveState(QDataStream& stream)
 {
-    KParts::BrowserExtension::saveState( stream );
+    KParts::BrowserExtension::saveState(stream);
 
     Kasten::ByteArrayView* view = mPart->byteArrayView();
 
     stream << (int)view->offsetColumnVisible() << view->visibleByteArrayCodings()
-        << (int)view->layoutStyle() << (int)view->valueCoding() 
-        << view->charCodingName() << (int)view->showsNonprinting()
+           << (int)view->layoutStyle() << (int)view->valueCoding()
+           << view->charCodingName() << (int)view->showsNonprinting()
 //         << view->xOffset() << view->yOffset()
-        << view->cursorPosition()
+           << view->cursorPosition()
 //         << (int)view->isCursorBehind()
 //         << view->activeCoding()
-        ;
+    ;
 }
 
-
-void OktetaBrowserExtension::restoreState( QDataStream& stream )
+void OktetaBrowserExtension::restoreState(QDataStream& stream)
 {
-    KParts::BrowserExtension::restoreState( stream );
+    KParts::BrowserExtension::restoreState(stream);
 
     int offsetColumnVisible;
     int visibleCodings;
@@ -102,20 +99,20 @@ void OktetaBrowserExtension::restoreState( QDataStream& stream )
 
     stream >> offsetColumnVisible >> visibleCodings >> layoutStyle >> valueCoding >> charCodingName >> showsNonprinting
 //            >> x >> y
-           >> position
+    >> position
 //            >> cursorBehind
 //            >> activeCoding
-           ;
+    ;
 
     Kasten::ByteArrayView* view = mPart->byteArrayView();
 
-    view->toggleOffsetColumn( offsetColumnVisible );
-    view->setVisibleByteArrayCodings( visibleCodings );
-    view->setLayoutStyle( layoutStyle );
-    view->setValueCoding( valueCoding );
-    view->setCharCoding( charCodingName );
-    view->setShowsNonprinting( showsNonprinting );
+    view->toggleOffsetColumn(offsetColumnVisible);
+    view->setVisibleByteArrayCodings(visibleCodings);
+    view->setLayoutStyle(layoutStyle);
+    view->setValueCoding(valueCoding);
+    view->setCharCoding(charCodingName);
+    view->setShowsNonprinting(showsNonprinting);
 //     view->setColumnsPos( x, y );
-    view->setCursorPosition( position );//, cursorBehind );
+    view->setCursorPosition(position);  // , cursorBehind );
 //     view->setActiveCoding( (Okteta::ByteArrayColumnView::CodingTypeId)activeCoding );
 }

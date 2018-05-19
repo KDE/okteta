@@ -36,39 +36,37 @@ class KXMLGUIClient;
 class QAction;
 class QWidget;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KSearchDialog;
 class SearchTool;
 
-
-class OKTETAKASTENCONTROLLERS_EXPORT SearchController : public AbstractXmlGuiController, public If::SearchUserQueryable
+class OKTETAKASTENCONTROLLERS_EXPORT SearchController : public AbstractXmlGuiController
+                                                      , public If::SearchUserQueryable
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    SearchController( KXMLGUIClient* guiClient, QWidget* parentWidget );
+public:
+    SearchController(KXMLGUIClient* guiClient, QWidget* parentWidget);
     ~SearchController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // SearchUserQueryable API
-    bool queryContinue( KFindDirection direction ) const override;
+public: // SearchUserQueryable API
+    bool queryContinue(KFindDirection direction) const override;
 
-  private:
-    void showDialog( KFindDirection Direction );
+private:
+    void showDialog(KFindDirection Direction);
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void find();
     void findNext();
     void findPrevious();
 
     void onDataNotFound();
 
-  private:
+private:
     QWidget* mParentWidget;
 
     QAction* mFindAction;

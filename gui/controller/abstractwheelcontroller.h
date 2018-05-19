@@ -23,24 +23,22 @@
 #ifndef OKTETA_ABSTRACTWHEELCONTROLLER_H
 #define OKTETA_ABSTRACTWHEELCONTROLLER_H
 
-
 class QWheelEvent;
 
-namespace Okteta
-{
-
+namespace Okteta {
 
 class AbstractWheelController
 {
-  protected:
-    explicit AbstractWheelController( AbstractWheelController* parent );
-  public:
+protected:
+    explicit AbstractWheelController(AbstractWheelController* parent);
+
+public:
     virtual ~AbstractWheelController();
 
-  public: // API to be implemented
-    virtual bool handleWheelEvent( QWheelEvent* wheelEvent );
+public: // API to be implemented
+    virtual bool handleWheelEvent(QWheelEvent* wheelEvent);
 
-  protected:
+protected:
     AbstractWheelController* mParent;
 };
 

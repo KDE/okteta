@@ -19,7 +19,6 @@
 // Qt
 #include <QApplication>
 
-
 //// some static data so the bytearray model is not empty on start
 //// and the widgets not just white after the start of the example program :)
 static const char exampleInitialData[] =
@@ -43,14 +42,13 @@ static const char exampleInitialData[] =
 
 static const int exampleInitialDataSize = sizeof(exampleInitialData) / sizeof(exampleInitialData[0]);
 
-
 class Widget : public QWidget
 {
-  public:
-    explicit Widget( QWidget* parent = nullptr );
+public:
+    explicit Widget(QWidget* parent = nullptr);
     ~Widget() override;
 
-  private:
+private:
     Ui::Example_Widget ui;
 
     //// the bytearray, by a class subclassing Okteta::AbstractByteArrayModel,
@@ -59,28 +57,26 @@ class Widget : public QWidget
     Okteta::PieceTableByteArrayModel* mByteArrayModel;
 };
 
-
-Widget::Widget( QWidget* parent )
-  : QWidget(parent)
+Widget::Widget(QWidget* parent)
+    : QWidget(parent)
 {
     //// initialize as usual when using UI files
-    ui.setupUi( this );
+    ui.setupUi(this);
 
     //// create the bytearray
     mByteArrayModel =
-        new Okteta::PieceTableByteArrayModel( QByteArray::fromRawData(exampleInitialData,exampleInitialDataSize), this );
+        new Okteta::PieceTableByteArrayModel(QByteArray::fromRawData(exampleInitialData, exampleInitialDataSize), this);
 
     //// then set it to the bytearray view
     //// the same bytearray object can be set to multiple views
     //// they will share it, as the Okteta classes implement the MVC pattern
-    ui.mByteArrayColumnView->setByteArrayModel( mByteArrayModel );
-    ui.mByteArrayRowView->setByteArrayModel( mByteArrayModel );
+    ui.mByteArrayColumnView->setByteArrayModel(mByteArrayModel);
+    ui.mByteArrayRowView->setByteArrayModel(mByteArrayModel);
 }
 
 Widget::~Widget() {}
 
-
-int main( int argc, char* argv[] )
+int main(int argc, char* argv[])
 {
     QApplication programCore(argc, argv);
 

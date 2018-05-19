@@ -23,79 +23,76 @@
 #include "bytearraycombobox.h"
 #include "bytearraycombobox_p.h"
 
+namespace Okteta {
 
-namespace Okteta
+ByteArrayComboBox::ByteArrayComboBox(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new ByteArrayComboBoxPrivate(this))
 {
-
-ByteArrayComboBox::ByteArrayComboBox( QWidget* parent )
-  : QWidget( parent ),
-    d_ptr( new ByteArrayComboBoxPrivate(this) )
-{
-    Q_D( ByteArrayComboBox );
+    Q_D(ByteArrayComboBox);
 
     d->init();
 }
 
-void ByteArrayComboBox::setByteArray( const QByteArray& byteArray )
+void ByteArrayComboBox::setByteArray(const QByteArray& byteArray)
 {
-    Q_D( ByteArrayComboBox );
+    Q_D(ByteArrayComboBox);
 
-    d->setByteArray( byteArray );
+    d->setByteArray(byteArray);
 }
 
-void ByteArrayComboBox::setCharCodec( const QString& charCodecName )
+void ByteArrayComboBox::setCharCodec(const QString& charCodecName)
 {
-    Q_D( ByteArrayComboBox );
+    Q_D(ByteArrayComboBox);
 
-    d->setCharCodec( charCodecName );
+    d->setCharCodec(charCodecName);
 }
 
-void ByteArrayComboBox::setMaxLength( int maxLength )
+void ByteArrayComboBox::setMaxLength(int maxLength)
 {
-    Q_D( ByteArrayComboBox );
+    Q_D(ByteArrayComboBox);
 
-    d->setMaxLength( maxLength );
+    d->setMaxLength(maxLength);
 }
 
-void ByteArrayComboBox::setMinLength( int minLength )
+void ByteArrayComboBox::setMinLength(int minLength)
 {
-    Q_D( ByteArrayComboBox );
+    Q_D(ByteArrayComboBox);
 
-    d->setMinLength( minLength );
+    d->setMinLength(minLength);
 }
 
 void ByteArrayComboBox::rememberCurrentByteArray()
 {
-    Q_D( ByteArrayComboBox );
+    Q_D(ByteArrayComboBox);
 
     d->rememberCurrentByteArray();
 }
 
-
 QByteArray ByteArrayComboBox::byteArray() const
 {
-    Q_D( const ByteArrayComboBox );
+    Q_D(const ByteArrayComboBox);
 
     return d->byteArray();
 }
 
 int ByteArrayComboBox::format() const
 {
-    Q_D( const ByteArrayComboBox );
+    Q_D(const ByteArrayComboBox);
 
     return d->format();
 }
 
 int ByteArrayComboBox::maxLength() const
 {
-    Q_D( const ByteArrayComboBox );
+    Q_D(const ByteArrayComboBox);
 
     return d->maxLength();
 }
 
 int ByteArrayComboBox::minLength() const
 {
-    Q_D( const ByteArrayComboBox );
+    Q_D(const ByteArrayComboBox);
 
     return d->minLength();
 }

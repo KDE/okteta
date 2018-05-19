@@ -33,15 +33,13 @@
 // Qt
 #include <QMimeData>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static int newByteArrayDocumentCounter = 0;
 
-bool ByteArrayDocumentFactory::canCreateFromData( const QMimeData* mimeData )
+bool ByteArrayDocumentFactory::canCreateFromData(const QMimeData* mimeData)
 {
-    Q_UNUSED( mimeData );
+    Q_UNUSED(mimeData);
 
     // we currently take everything, see createFromData()
     return true;
@@ -49,24 +47,25 @@ bool ByteArrayDocumentFactory::canCreateFromData( const QMimeData* mimeData )
 
 AbstractDocument* ByteArrayDocumentFactory::create()
 {
-    ByteArrayDocument* document = new ByteArrayDocument( i18nc("The byte array was new created.","New created.") );
+    ByteArrayDocument* document = new ByteArrayDocument(i18nc("The byte array was new created.", "New created."));
 
     ++newByteArrayDocumentCounter;
 
     // TODO: use document->typeName() ?
     document->setTitle(
         i18ncp("numbered title for a created document without a filename",
-               "[New Byte Array]","[New Byte Array %1]",newByteArrayDocumentCounter) );
+               "[New Byte Array]", "[New Byte Array %1]", newByteArrayDocumentCounter));
 
-    document->setOwner( Person::createEgo() );
+    document->setOwner(Person::createEgo());
 
     return document;
 }
 
-AbstractDocument* ByteArrayDocumentFactory::createFromData( const QMimeData* mimeData, bool setModified )
+AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mimeData, bool setModified)
 {
-    if( ! mimeData || mimeData->formats().isEmpty() )
+    if (!mimeData || mimeData->formats().isEmpty()) {
         return create();
+    }
 
     // SYNC: with abstractbytearrayview_p.cpp
     // if there is a octet stream, use it, otherwise take the dump of the format
@@ -74,28 +73,28 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData( const QMimeData* mim
     // TODO: this may not be, what is expected, think about it, if we just
     // take byte array descriptions, like encodings in chars or values
     // would need the movement of the encoders into the core library
-    const QString octetStreamFormatName = QStringLiteral( "application/octet-stream" );
-    const QString dataFormatName = ( mimeData->hasFormat(octetStreamFormatName) ) ?
-        octetStreamFormatName :
-        mimeData->formats()[0];
+    const QString octetStreamFormatName = QStringLiteral("application/octet-stream");
+    const QString dataFormatName = (mimeData->hasFormat(octetStreamFormatName)) ?
+                                   octetStreamFormatName :
+                                   mimeData->formats()[0];
 
-    const QByteArray data = mimeData->data( dataFormatName );
+    const QByteArray data = mimeData->data(dataFormatName);
 
     Okteta::PieceTableByteArrayModel* byteArray =
-        new Okteta::PieceTableByteArrayModel( data );
-    byteArray->setModified( setModified );
+        new Okteta::PieceTableByteArrayModel(data);
+    byteArray->setModified(setModified);
 
     // TODO: pass name of generator
-    ByteArrayDocument* document = new ByteArrayDocument( byteArray, i18nc("origin of the byte array", "Created from data.") );
+    ByteArrayDocument* document = new ByteArrayDocument(byteArray, i18nc("origin of the byte array", "Created from data."));
 
     ++newByteArrayDocumentCounter;
 
     // TODO: use document->typeName() ?
     document->setTitle(
         i18ncp("numbered title for a created document without a filename",
-               "[New Byte Array]","[New Byte Array %1]",newByteArrayDocumentCounter) );
+               "[New Byte Array]", "[New Byte Array %1]", newByteArrayDocumentCounter));
 
-    document->setOwner( Person::createEgo() );
+    document->setOwner(Person::createEgo());
 
     return document;
 }

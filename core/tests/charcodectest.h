@@ -26,15 +26,13 @@
 // Qt
 #include <QObject>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class CharCodecTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testCreateCodec_data();
     void testCreateCodec();
     void testEncodeDecode_data();

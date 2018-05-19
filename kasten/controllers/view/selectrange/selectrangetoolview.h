@@ -26,26 +26,23 @@
 // Kasten gui
 #include <kasten/abstracttoolinlineview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SelectRangeView;
 class SelectRangeTool;
 
-
 class SelectRangeToolView : public AbstractToolInlineView
 {
-  public:
-    explicit SelectRangeToolView( SelectRangeTool* tool );
+public:
+    explicit SelectRangeToolView(SelectRangeTool* tool);
     ~SelectRangeToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     SelectRangeView* mWidget;
 };
 

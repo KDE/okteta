@@ -22,22 +22,19 @@
 
 #include "checksumcalculatejob.h"
 
-// 
+//
 #include <abstractbytearraychecksumalgorithm.h>
 // Okteta core
 #include <okteta/abstractbytearraymodel.h>
 // Qt
 #include <QCoreApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void ChecksumCalculateJob::exec()
 {
     // check
-    if( !mByteArrayModel || !mSelection.isValid() )
-    {
+    if (!mByteArrayModel || !mSelection.isValid()) {
         // reset
         mChecksum->clear();
 
@@ -46,16 +43,16 @@ void ChecksumCalculateJob::exec()
         return;
     }
 
-    connect( mAlgorithm, &AbstractByteArrayChecksumAlgorithm::calculatedBytes, this, &ChecksumCalculateJob::onCalculatedBytes );
+    connect(mAlgorithm, &AbstractByteArrayChecksumAlgorithm::calculatedBytes, this, &ChecksumCalculateJob::onCalculatedBytes);
 
-    mAlgorithm->calculateChecksum( mChecksum, mByteArrayModel, mSelection );
+    mAlgorithm->calculateChecksum(mChecksum, mByteArrayModel, mSelection);
 
     deleteLater(); // TODO: could be reused on next operation
 }
 
 void ChecksumCalculateJob::onCalculatedBytes()
 {
-    QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
 }
 
 }

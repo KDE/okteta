@@ -26,21 +26,20 @@
 // lib
 #include "abstractbytearraychecksumparametersetedit.h"
 
-
 class NoByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksumParameterSetEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const char Id[];
 
-  public:
-    explicit NoByteArrayChecksumParameterSetEdit( QWidget* parent = nullptr );
+public:
+    explicit NoByteArrayChecksumParameterSetEdit(QWidget* parent = nullptr);
     ~NoByteArrayChecksumParameterSetEdit() override;
 
-  public: // AbstractByteArrayChecksumParameterSetEdit API
-    void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet ) override;
-    void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const override;
+public: // AbstractByteArrayChecksumParameterSetEdit API
+    void setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet) override;
+    void getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const override;
 };
 
 #endif

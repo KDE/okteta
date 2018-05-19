@@ -20,37 +20,35 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #ifndef PERSON_P_H
 #define PERSON_P_H
 
 #include "person.h"
 
-//Qt
+// Qt
 #include <QString>
 #include <QIcon>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class Q_DECL_HIDDEN Person::Private : public QSharedData
 {
-  public:
-    Private( const QString& name, const QIcon& faceIcon );
+public:
+    Private(const QString& name, const QIcon& faceIcon);
     ~Private();
 
-  public:
+public:
     QString name() const;
     QIcon faceIcon() const;
 
-  protected:
+protected:
     QString mName;
     QIcon mFaceIcon;
 };
 
-inline Person::Private::Private( const QString& name, const QIcon& faceIcon )
- : mName( name ), mFaceIcon( faceIcon ) {}
+inline Person::Private::Private(const QString& name, const QIcon& faceIcon)
+    : mName(name)
+    , mFaceIcon(faceIcon) {}
 
 inline QString Person::Private::name()   const { return mName; }
 inline QIcon Person::Private::faceIcon() const { return mFaceIcon; }

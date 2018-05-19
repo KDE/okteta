@@ -32,34 +32,31 @@ class QAction;
 class QActionGroup;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ViewManager;
 class AbstractGroupedViews;
 
-
 class KASTENCONTROLLERS_EXPORT ViewListMenuController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ViewListMenuController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient );
+public:
+    ViewListMenuController(ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void updateActions();
-    void onActionTriggered( QAction *action );
+    void onActionTriggered(QAction* action);
 
-  private:
-    ViewManager *mViewManager;
+private:
+    ViewManager* mViewManager;
     AbstractGroupedViews* mGroupedViews;
     KXMLGUIClient* mGuiClient;
 
-    QActionGroup *mWindowsActionGroup;
+    QActionGroup* mWindowsActionGroup;
 };
 
 }

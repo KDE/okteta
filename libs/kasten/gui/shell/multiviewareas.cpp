@@ -23,129 +23,127 @@
 #include "multiviewareas.h"
 #include "multiviewareas_p.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 // TODO: catch area focues change!
 MultiViewAreas::MultiViewAreas()
-  : AbstractGroupedViews( new MultiViewAreasPrivate(this) )
+    : AbstractGroupedViews(new MultiViewAreasPrivate(this))
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
     d->init();
 }
 
 QList<AbstractView*> MultiViewAreas::viewList() const
 {
-    Q_D( const MultiViewAreas );
+    Q_D(const MultiViewAreas);
 
     return d->viewList();
 }
 
 int MultiViewAreas::viewCount() const
 {
-    Q_D( const MultiViewAreas );
+    Q_D(const MultiViewAreas);
 
     return d->viewCount();
 }
 
-int MultiViewAreas::indexOf( AbstractView* view ) const
+int MultiViewAreas::indexOf(AbstractView* view) const
 {
-    Q_D( const MultiViewAreas );
+    Q_D(const MultiViewAreas);
 
-    return d->indexOf( view );
+    return d->indexOf(view);
 }
 
 QWidget* MultiViewAreas::widget() const
 {
-    Q_D( const MultiViewAreas );
+    Q_D(const MultiViewAreas);
 
     return d->widget();
 }
 
 bool MultiViewAreas::hasFocus() const
 {
-    Q_D( const MultiViewAreas );
+    Q_D(const MultiViewAreas);
 
     return d->hasFocus();
 }
 
 AbstractView* MultiViewAreas::viewFocus() const
 {
-    Q_D( const MultiViewAreas );
+    Q_D(const MultiViewAreas);
 
     return d->viewFocus();
 }
 
 AbstractViewArea* MultiViewAreas::viewAreaFocus() const
 {
-    Q_D( const MultiViewAreas );
+    Q_D(const MultiViewAreas);
 
     return d->viewAreaFocus();
 }
 
 int MultiViewAreas::viewAreasCount() const
 {
-    Q_D( const MultiViewAreas );
+    Q_D(const MultiViewAreas);
 
-    return d->viewAreasCount(); }
-
+    return d->viewAreasCount();
+}
 
 void MultiViewAreas::setFocus()
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
     d->setFocus();
 }
 
-void MultiViewAreas::addViews( const QList<AbstractView*>& views )
+void MultiViewAreas::addViews(const QList<AbstractView*>& views)
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
-    d->addViews( views );
+    d->addViews(views);
 }
 
-void MultiViewAreas::removeViews( const QList<AbstractView*>& views )
+void MultiViewAreas::removeViews(const QList<AbstractView*>& views)
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
-    d->removeViews( views );
+    d->removeViews(views);
 }
 
-void MultiViewAreas::setCurrentToolInlineView( AbstractToolInlineView* view )
+void MultiViewAreas::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
-    d->setCurrentToolInlineView( view );
+    d->setCurrentToolInlineView(view);
 }
 
-void MultiViewAreas::setViewFocus( AbstractView* view )
+void MultiViewAreas::setViewFocus(AbstractView* view)
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
-    d->setViewFocus( view );
+    d->setViewFocus(view);
 }
 
- //TODO: this method could be removed, as it is the same as viewArea->setFocus(), or?
-void MultiViewAreas::setViewAreaFocus( AbstractViewArea* viewArea )
+// TODO: this method could be removed, as it is the same as viewArea->setFocus(), or?
+void MultiViewAreas::setViewAreaFocus(AbstractViewArea* viewArea)
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
-    d->setViewAreaFocus( viewArea );
+    d->setViewAreaFocus(viewArea);
 }
 
-AbstractViewArea* MultiViewAreas::splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation )
+AbstractViewArea* MultiViewAreas::splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation)
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
-    return d->splitViewArea( viewArea, orientation );
+    return d->splitViewArea(viewArea, orientation);
 }
 
-void MultiViewAreas::closeViewArea( AbstractViewArea* viewArea )
+void MultiViewAreas::closeViewArea(AbstractViewArea* viewArea)
 {
-    Q_D( MultiViewAreas );
+    Q_D(MultiViewAreas);
 
-    d->closeViewArea( viewArea );
+    d->closeViewArea(viewArea);
 }
 
 MultiViewAreas::~MultiViewAreas()

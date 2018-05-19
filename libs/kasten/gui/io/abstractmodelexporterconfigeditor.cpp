@@ -22,13 +22,11 @@
 
 #include "abstractmodelexporterconfigeditor.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModelExporterConfigEditor::AbstractModelExporterConfigEditor( QWidget* parent )
-  : QWidget( parent ),
-    d( nullptr )
+AbstractModelExporterConfigEditor::AbstractModelExporterConfigEditor(QWidget* parent)
+    : QWidget(parent)
+    , d(nullptr)
 {}
 
 bool AbstractModelExporterConfigEditor::isValid() const

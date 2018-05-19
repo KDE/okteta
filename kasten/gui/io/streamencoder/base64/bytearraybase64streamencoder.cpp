@@ -29,94 +29,88 @@
 // Qt
 #include <QTextStream>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-const char base64EncodeMap[64] =
-{
-  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-  'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-  'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-  'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
-  'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-  'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-  'w', 'x', 'y', 'z', '0', '1', '2', '3',
-  '4', '5', '6', '7', '8', '9', '+', '/'
+const char base64EncodeMap[64] = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+    'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+    'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+    'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+    'w', 'x', 'y', 'z', '0', '1', '2', '3',
+    '4', '5', '6', '7', '8', '9', '+', '/'
 };
 
-static const char* const base64PaddingData[2] =
-{
+static const char* const base64PaddingData[2] = {
     "==",
     "="
 };
-static inline const char* base64Padding( ByteArrayBase64StreamEncoder::InputByteIndex index )
+static inline const char* base64Padding(ByteArrayBase64StreamEncoder::InputByteIndex index)
 {
     return base64PaddingData[static_cast<int>(index) - 1];
 }
 
-
 ByteArrayBase64StreamEncoder::ByteArrayBase64StreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base64"), QStringLiteral("application/base64") )
+    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Base64"), QStringLiteral("application/base64"))
 {}
 
-
-bool ByteArrayBase64StreamEncoder::encodeDataToStream( QIODevice* device,
-                                                       const ByteArrayView* byteArrayView,
-                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                       const Okteta::AddressRange& range )
+bool ByteArrayBase64StreamEncoder::encodeDataToStream(QIODevice* device,
+                                                      const ByteArrayView* byteArrayView,
+                                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                      const Okteta::AddressRange& range)
 {
-    Q_UNUSED( byteArrayView );
+    Q_UNUSED(byteArrayView);
 
     bool success = true;
 
     // encode
-    QTextStream textStream( device );
+    QTextStream textStream(device);
 
     // prepare
     InputByteIndex inputByteIndex = InputByteIndex::First;
     int outputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
-    for( Okteta::Address i=range.start(); i<=range.end(); ++i )
-    {
-        const Okteta::Byte byte = byteArrayModel->byte( i );
+    for (Okteta::Address i = range.start(); i <= range.end(); ++i) {
+        const Okteta::Byte byte = byteArrayModel->byte(i);
 
-        switch( inputByteIndex )
+        switch (inputByteIndex)
         {
         case InputByteIndex::First:
             // bits 7..2
-            textStream << base64EncodeMap[( byte >> 2 )];
+            textStream << base64EncodeMap[(byte >> 2)];
             // bits 1..0 -> 5..4 for next
             bitsFromLastByte = (byte & 0x3) << 4;
             inputByteIndex = InputByteIndex::Second;
             break;
         case InputByteIndex::Second:
             // from last and bits 7..4 as 3..0 from this
-            textStream << base64EncodeMap[( bitsFromLastByte | byte >> 4 )];
+            textStream << base64EncodeMap[(bitsFromLastByte | byte >> 4)];
             // bits 3..0 -> 5..2 for next
             bitsFromLastByte = (byte & 0xf) << 2;
             inputByteIndex = InputByteIndex::Third;
             break;
         case InputByteIndex::Third:
             // from last and bits 7..6 as 1..0 from this
-            textStream << base64EncodeMap[( bitsFromLastByte | byte >> 6 )];
+            textStream << base64EncodeMap[(bitsFromLastByte | byte >> 6)];
             // bits 5..0
-            textStream << base64EncodeMap[( byte & 0x3F )];
+            textStream << base64EncodeMap[(byte & 0x3F)];
             inputByteIndex = InputByteIndex::First;
             ++outputGroupsPerLine;
-            if( outputGroupsPerLine >= maxOutputGroupsPerLine && i<range.end() )
-            {
+            if (outputGroupsPerLine >= maxOutputGroupsPerLine && i < range.end()) {
                 textStream << "\r\n";
                 outputGroupsPerLine = 0;
             }
             break;
         }
     }
-    const bool hasBitsLeft = ( inputByteIndex != InputByteIndex::First );
-    if( hasBitsLeft )
+
+    const bool hasBitsLeft = (inputByteIndex != InputByteIndex::First);
+    if (hasBitsLeft) {
         textStream << base64EncodeMap[bitsFromLastByte]
                    << base64Padding(inputByteIndex);
+    }
 
     return success;
 }

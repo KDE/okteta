@@ -26,78 +26,76 @@
 // lib
 #include <abstractdocument.h>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer( AbstractModelFileSystemSynchronizerPrivate* d )
-  : AbstractModelSynchronizer( d )
+AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer(AbstractModelFileSystemSynchronizerPrivate* d)
+    : AbstractModelSynchronizer(d)
 {
 }
 
 AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
-  : AbstractModelSynchronizer( new AbstractModelFileSystemSynchronizerPrivate(this) )
+    : AbstractModelSynchronizer(new AbstractModelFileSystemSynchronizerPrivate(this))
 {}
 
 RemoteSyncState AbstractModelFileSystemSynchronizer::remoteSyncState() const
 {
-    Q_D( const AbstractModelFileSystemSynchronizer );
+    Q_D(const AbstractModelFileSystemSynchronizer);
 
     return d->remoteSyncState();
 }
 
-void AbstractModelFileSystemSynchronizer::setRemoteState( RemoteSyncState remoteState )
+void AbstractModelFileSystemSynchronizer::setRemoteState(RemoteSyncState remoteState)
 {
-    Q_D( AbstractModelFileSystemSynchronizer );
+    Q_D(AbstractModelFileSystemSynchronizer);
 
-    d->setRemoteState( remoteState );
+    d->setRemoteState(remoteState);
 }
 
-void AbstractModelFileSystemSynchronizer::setFileDateTimeOnSync( const QDateTime& fileDateTime )
+void AbstractModelFileSystemSynchronizer::setFileDateTimeOnSync(const QDateTime& fileDateTime)
 {
-    Q_D( AbstractModelFileSystemSynchronizer );
+    Q_D(AbstractModelFileSystemSynchronizer);
 
-    d->setFileDateTimeOnSync( fileDateTime );
+    d->setFileDateTimeOnSync(fileDateTime);
 }
 
 void AbstractModelFileSystemSynchronizer::startFileWatching()
 {
-    Q_D( AbstractModelFileSystemSynchronizer );
+    Q_D(AbstractModelFileSystemSynchronizer);
 
     d->startFileWatching();
 }
 
 void AbstractModelFileSystemSynchronizer::stopFileWatching()
 {
-    Q_D( AbstractModelFileSystemSynchronizer );
+    Q_D(AbstractModelFileSystemSynchronizer);
 
     d->stopFileWatching();
 }
 
 void AbstractModelFileSystemSynchronizer::pauseFileWatching()
 {
-    Q_D( AbstractModelFileSystemSynchronizer );
+    Q_D(AbstractModelFileSystemSynchronizer);
 
     d->pauseFileWatching();
 }
 
 void AbstractModelFileSystemSynchronizer::unpauseFileWatching()
 {
-    Q_D( AbstractModelFileSystemSynchronizer );
+    Q_D(AbstractModelFileSystemSynchronizer);
 
     d->unpauseFileWatching();
 }
 
 void AbstractModelFileSystemSynchronizer::startNetworkWatching()
 {
-    Q_D( AbstractModelFileSystemSynchronizer );
+    Q_D(AbstractModelFileSystemSynchronizer);
 
     d->startNetworkWatching();
 }
 
 void AbstractModelFileSystemSynchronizer::stopNetworkWatching()
 {
-    Q_D( AbstractModelFileSystemSynchronizer );
+    Q_D(AbstractModelFileSystemSynchronizer);
 
     d->stopNetworkWatching();
 }

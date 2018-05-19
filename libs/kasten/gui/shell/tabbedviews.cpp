@@ -23,104 +23,100 @@
 #include "tabbedviews.h"
 #include "tabbedviews_p.h"
 
+namespace Kasten {
 
-namespace Kasten
+TabbedViews::TabbedViews(TabbedViewsPrivate* _d)
+    : AbstractGroupedViews(_d)
 {
-
-TabbedViews::TabbedViews( TabbedViewsPrivate* _d )
-  : AbstractGroupedViews( _d )
-{
-    Q_D( TabbedViews );
+    Q_D(TabbedViews);
 
     d->init();
 }
 
 TabbedViews::TabbedViews()
-  : AbstractGroupedViews( new TabbedViewsPrivate(this) )
+    : AbstractGroupedViews(new TabbedViewsPrivate(this))
 {
-    Q_D( TabbedViews );
+    Q_D(TabbedViews);
 
     d->init();
 }
 
 QList<AbstractView*> TabbedViews::viewList() const
 {
-    Q_D( const TabbedViews );
+    Q_D(const TabbedViews);
 
     return d->viewList();
 }
 
 int TabbedViews::viewCount() const
 {
-    Q_D( const TabbedViews );
+    Q_D(const TabbedViews);
 
     return d->viewCount();
 }
 
-int TabbedViews::indexOf( AbstractView* view ) const
+int TabbedViews::indexOf(AbstractView* view) const
 {
-    Q_D( const TabbedViews );
+    Q_D(const TabbedViews);
 
-    return d->indexOf( view );
+    return d->indexOf(view);
 }
 
 QWidget* TabbedViews::widget() const
 {
-    Q_D( const TabbedViews );
+    Q_D(const TabbedViews);
 
     return d->widget();
 }
 
 AbstractView* TabbedViews::viewFocus() const
 {
-    Q_D( const TabbedViews );
+    Q_D(const TabbedViews);
 
     return d->viewFocus();
 }
 
 bool TabbedViews::hasFocus() const
 {
-    Q_D( const TabbedViews );
+    Q_D(const TabbedViews);
 
     return d->hasFocus();
 }
 
-
-void TabbedViews::addViews( const QList<AbstractView*>& views )
+void TabbedViews::addViews(const QList<AbstractView*>& views)
 {
-    Q_D( TabbedViews );
+    Q_D(TabbedViews);
 
-    d->addViews( views );
+    d->addViews(views);
 }
 
-void TabbedViews::removeViews( const QList<AbstractView*>& views )
+void TabbedViews::removeViews(const QList<AbstractView*>& views)
 {
-    Q_D( TabbedViews );
+    Q_D(TabbedViews);
 
-    d->removeViews( views );
+    d->removeViews(views);
 }
 
-void TabbedViews::setCurrentToolInlineView( AbstractToolInlineView* view )
+void TabbedViews::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
-    Q_D( TabbedViews );
+    Q_D(TabbedViews);
 
-    d->setCurrentToolInlineView( view );
+    d->setCurrentToolInlineView(view);
 }
 
-void TabbedViews::setViewFocus( AbstractView* view )
+void TabbedViews::setViewFocus(AbstractView* view)
 {
-    Q_D( TabbedViews );
+    Q_D(TabbedViews);
 
-    d->setViewFocus( view );
+    d->setViewFocus(view);
 }
 
 void TabbedViews::setFocus()
 {
-    Q_D( TabbedViews );
+    Q_D(TabbedViews);
 
     d->setFocus();
 }
-
 
 TabbedViews::~TabbedViews()
 {

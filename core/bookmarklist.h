@@ -30,36 +30,34 @@
 
 template <class T> class QList;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 /**
-@author Friedrich W. H.  Kossebau
-*/
+   @author Friedrich W. H.  Kossebau
+ */
 class BookmarkList : public QLinkedList<Bookmark>
 {
-  public:
+public:
     BookmarkList();
     ~BookmarkList();
 
-  public:
-    void addBookmark( const Bookmark &bookmark );
-    void addBookmarks( const QList<Okteta::Bookmark> &bookmarks );
-    void removeBookmark( const Bookmark &bookmark );
-    void removeBookmarks( const QList<Okteta::Bookmark> &bookmarks );
-    void setBookmark( unsigned int index, const Bookmark& bookmark );
+public:
+    void addBookmark(const Bookmark& bookmark);
+    void addBookmarks(const QList<Okteta::Bookmark>& bookmarks);
+    void removeBookmark(const Bookmark& bookmark);
+    void removeBookmarks(const QList<Okteta::Bookmark>& bookmarks);
+    void setBookmark(unsigned int index, const Bookmark& bookmark);
 
-    bool adjustToReplaced( Address offset, Size removedLength, Size insertedLength );
-    bool adjustToSwapped( Address firstPartStart, Address secondPartStart, Size secondPartLength );
+    bool adjustToReplaced(Address offset, Size removedLength, Size insertedLength);
+    bool adjustToSwapped(Address firstPartStart, Address secondPartStart, Size secondPartLength);
 
-  public:
+public:
     // TODO: this function needs to be called with a valid offset, will return a reference to a zero pointer else
     // want a reference for speed, perhaps need a global static dummy invalid bookmark
-    const Bookmark& bookmark( Address offset ) const;
-    bool contains( Address offset ) const;
+    const Bookmark& bookmark(Address offset) const;
+    bool contains(Address offset) const;
     using QLinkedList<Bookmark>::contains;
-    const Bookmark& at( unsigned int index ) const;
+    const Bookmark& at(unsigned int index) const;
     QList<Okteta::Bookmark> list() const;
 };
 

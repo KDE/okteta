@@ -34,63 +34,60 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class StatisticTableModel;
 
 class ByteArrayView;
 
-
 /**
-*/
+ */
 class OKTETAKASTENCONTROLLERS_EXPORT InfoTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     InfoTool();
     ~InfoTool() override;
 
-  public:
-    StatisticTableModel *statisticTableModel() const;
+public:
+    StatisticTableModel* statisticTableModel() const;
     int size() const;
     bool isApplyable() const;
     bool isStatisticUptodate() const;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void updateStatistic();
 
-  Q_SIGNALS:
-    void isApplyableChanged( bool isApplyable );
-    void statisticDirty( bool dirty );
+Q_SIGNALS:
+    void isApplyableChanged(bool isApplyable);
+    void statisticDirty(bool dirty);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onSelectionChanged();
     void onSourceChanged();
     void onSourceDestroyed();
 
-  private:
+private:
     int mByteCount[256]; // TODO: here or in statistic model?
 
-    StatisticTableModel *mStatisticTableModel;
+    StatisticTableModel* mStatisticTableModel;
 
     ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     //
     bool mSourceByteArrayModelUptodate;
     // selection source
     Okteta::AddressRange mSourceSelection;
     // source of strings
-    Okteta::AbstractByteArrayModel *mSourceByteArrayModel;
+    Okteta::AbstractByteArrayModel* mSourceByteArrayModel;
 };
 
 }

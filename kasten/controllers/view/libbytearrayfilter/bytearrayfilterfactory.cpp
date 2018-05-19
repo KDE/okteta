@@ -36,7 +36,6 @@
 // #include "filter/my_bytearrayfilter.h"
 // NEWFILTER(end)
 
-
 QList<AbstractByteArrayFilter*> ByteArrayFilterFactory::createFilters()
 {
     QList<AbstractByteArrayFilter*> result {

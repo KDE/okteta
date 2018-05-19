@@ -29,34 +29,30 @@
 // Qt
 #include <QTest>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 static const Address InsertOffset = 30;
 static const Size InsertLength = 80;
 static const Address StorageOffset = 67;
 
-
 AbstractPieceTableChange* InsertPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
     InsertPieceTableChange* pieceTableChange =
-        new InsertPieceTableChange( InsertOffset, InsertLength, StorageOffset );
+        new InsertPieceTableChange(InsertOffset, InsertLength, StorageOffset);
 
     return pieceTableChange;
 }
 
-void InsertPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable* pieceTable )
+void InsertPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(PieceTable* pieceTable)
 {
-    pieceTable->insert( InsertOffset, InsertLength, StorageOffset );
+    pieceTable->insert(InsertOffset, InsertLength, StorageOffset);
 }
 
-void InsertPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange( AbstractPieceTableChange* pieceTableChange )
+void InsertPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(AbstractPieceTableChange* pieceTableChange)
 {
     delete pieceTableChange;
 }
 
 }
 
-QTEST_MAIN( KPieceTable::InsertPieceTableChangeAbstractPieceTableChangeIfTest )
-
+QTEST_MAIN(KPieceTable::InsertPieceTableChangeAbstractPieceTableChangeIfTest)

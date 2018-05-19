@@ -27,44 +27,43 @@
 // C++
 #include <limits>
 
-
-AbstractValue8Editor::AbstractValue8Editor( Okteta::ValueCoding valueCoding, QWidget* parent )
-  : QSpinBox( parent )
+AbstractValue8Editor::AbstractValue8Editor(Okteta::ValueCoding valueCoding, QWidget* parent)
+    : QSpinBox(parent)
 {
     const quint8 int8Max = std::numeric_limits<quint8>::max();
     const quint8 int8Min = std::numeric_limits<quint8>::min();
 
-    setRange( int8Min, int8Max );
+    setRange(int8Min, int8Max);
 
-    mValueCodec = Okteta::ValueCodec::createCodec( valueCoding );
+    mValueCodec = Okteta::ValueCodec::createCodec(valueCoding);
 }
 
-QString AbstractValue8Editor::textFromValue( int value ) const
+QString AbstractValue8Editor::textFromValue(int value) const
 {
     QString result;
 
-    mValueCodec->encodeShort( result, 0, (Okteta::Byte)value );
+    mValueCodec->encodeShort(result, 0, (Okteta::Byte)value);
 
     return result;
 }
 
-int AbstractValue8Editor::valueFromText( const QString& text ) const
+int AbstractValue8Editor::valueFromText(const QString& text) const
 {
     Okteta::Byte byte;
-    mValueCodec->decode( &byte, text );
+    mValueCodec->decode(&byte, text);
 
     return byte;
 }
 
-QValidator::State AbstractValue8Editor::validate( QString& text, int& pos ) const
+QValidator::State AbstractValue8Editor::validate(QString& text, int& pos) const
 {
-    Q_UNUSED( pos );
+    Q_UNUSED(pos);
 
     Okteta::Byte byte;
     const int textLength = text.length();
-    const int usedChars = mValueCodec->decode( &byte, text );
+    const int usedChars = mValueCodec->decode(&byte, text);
 
-    const bool isCompleteTextUsed = ( textLength == usedChars );
+    const bool isCompleteTextUsed = (textLength == usedChars);
 
     return isCompleteTextUsed ? QValidator::Acceptable : QValidator::Invalid;
 }

@@ -31,7 +31,7 @@
 #include <KLocalizedString>
 #include <QVarLengthArray>
 
-Latin1StringData::Latin1StringData(StringDataInformation* parent): StringData(parent)
+Latin1StringData::Latin1StringData(StringDataInformation* parent) : StringData(parent)
 {
 }
 
@@ -42,8 +42,7 @@ Latin1StringData::~Latin1StringData()
 qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {
     const int oldSize = count();
-    if (mMode == CharCount || mMode == ByteCount) //same for ascii
-    {
+    if (mMode == CharCount || mMode == ByteCount) { // same for ascii
         mData.reserve(mLength.maxChars);
     }
     mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, oldSize, 0);
@@ -54,56 +53,59 @@ qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Add
     int count = 0;
     mEofReached = false;
     const int oldMax = mData.size();
-    if (((mMode & CharCount) && mLength.maxChars == 0) || ((mMode & ByteCount) && mLength.maxBytes == 0))
-        return 0; //nothing to read
+    if (((mMode & CharCount) && mLength.maxChars == 0) || ((mMode & ByteCount) && mLength.maxBytes == 0)) {
+        return 0; // nothing to read
 
+    }
     bool eofAtStart = false;
-    if (bitsRemaining < 8)
+    if (bitsRemaining < 8) {
         eofAtStart = true;
+    }
 
-    while (true)
-    {
-        if (remaining < 8)
-        {
+    while (true) {
+        if (remaining < 8) {
             mEofReached = true;
             break;
         }
         uchar val = input->byte(addr);
         bool terminate = false;
 
-        if (count < oldMax)
+        if (count < oldMax) {
             mData[count] = val;
-        else
+        } else {
             mData.append(val);
+        }
 
         remaining -= 8;
         addr++;
         count++;
 
-        //now check if we have to terminate
-        if (mMode & Sequence)
-        {
-            if ((quint32(val) & 0xff) == mTerminationCodePoint)
+        // now check if we have to terminate
+        if (mMode & Sequence) {
+            if ((quint32(val) & 0xff) == mTerminationCodePoint) {
                 terminate = true;
+            }
         }
-        if ((mMode & CharCount)  || (mMode & ByteCount))
-        {
-            if ((unsigned)count >= mLength.maxChars)
+        if ((mMode & CharCount)  || (mMode & ByteCount)) {
+            if ((unsigned)count >= mLength.maxChars) {
                 terminate = true;
+            }
         }
         if (mMode == None) {
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no termination mode set!!";
             Q_ASSERT(false);
         }
-        if (terminate)
+        if (terminate) {
             break;
+        }
     }
     mData.resize(count);
     mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, 0, count);
     mParent->topLevelDataInformation()->_childCountChanged(mParent, 0, count);
 
-    if (eofAtStart)
+    if (eofAtStart) {
         return -1;
+    }
     return (addr - address) * 8;
 }
 
@@ -128,6 +130,7 @@ QString Latin1StringData::completeString(bool skipInvalid) const
         uchar val = mData.at(i);
         buf[i] = QChar::fromLatin1(val);
     }
+
     return QString(buf.constData(), max);
 }
 

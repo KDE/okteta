@@ -27,19 +27,18 @@
 #include "../types/octal8.h"
 #include "abstractvalue8editor.h"
 
-
 class Octal8Editor : public AbstractValue8Editor
 {
-  Q_OBJECT
-  Q_PROPERTY( Octal8 data READ data WRITE setData USER true )
+    Q_OBJECT
+    Q_PROPERTY(Octal8 data READ data WRITE setData USER true)
 
-  public:
-    explicit Octal8Editor( QWidget* parent );
+public:
+    explicit Octal8Editor(QWidget* parent);
 
     ~Octal8Editor() override;
 
-  public:
-    void setData( Octal8 data );
+public:
+    void setData(Octal8 data);
     Octal8 data() const;
 };
 

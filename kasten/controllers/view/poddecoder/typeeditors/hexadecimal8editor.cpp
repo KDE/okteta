@@ -22,15 +22,14 @@
 
 #include "hexadecimal8editor.h"
 
-
-Hexadecimal8Editor::Hexadecimal8Editor( QWidget* parent )
-  : AbstractValue8Editor( Okteta::HexadecimalCoding, parent )
+Hexadecimal8Editor::Hexadecimal8Editor(QWidget* parent)
+    : AbstractValue8Editor(Okteta::HexadecimalCoding, parent)
 {
 }
 
-void Hexadecimal8Editor::setData( Hexadecimal8 data )
+void Hexadecimal8Editor::setData(Hexadecimal8 data)
 {
-    setValue( data.value );
+    setValue(data.value);
 }
 
 Hexadecimal8 Hexadecimal8Editor::data() const

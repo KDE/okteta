@@ -28,26 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TerminalView;
 class TerminalTool;
 
-
 class KASTENCONTROLLERS_EXPORT TerminalToolView : public AbstractToolView
 {
-  public:
-    explicit TerminalToolView( TerminalTool* tool );
+public:
+    explicit TerminalToolView(TerminalTool* tool);
     ~TerminalToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     TerminalView* mWidget;
 };
 

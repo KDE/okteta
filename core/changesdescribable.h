@@ -27,28 +27,27 @@
 #include <QtPlugin>
 #include <QString>
 
-namespace Okteta
-{
+namespace Okteta {
 
 class ChangesDescribable
 {
-  public:
+public:
     virtual ~ChangesDescribable();
 
-  public: // set/action
-    virtual void openGroupedChange( const QString &description = QString() ) = 0;
+public: // set/action
+    virtual void openGroupedChange(const QString& description = QString()) = 0;
     virtual void cancelGroupedChange() = 0;
-    virtual void closeGroupedChange( const QString &description = QString() ) = 0;
+    virtual void closeGroupedChange(const QString& description = QString()) = 0;
 
-  public: // get
+public: // get
 
-  public: // signal
+public: // signal
 };
 
 inline ChangesDescribable::~ChangesDescribable() {}
 
 }
 
-Q_DECLARE_INTERFACE( Okteta::ChangesDescribable, "org.kde.khecore.changesdescribable/1.0" )
+Q_DECLARE_INTERFACE(Okteta::ChangesDescribable, "org.kde.khecore.changesdescribable/1.0")
 
 #endif

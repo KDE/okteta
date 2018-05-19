@@ -21,26 +21,25 @@
 class QSpinBox;
 //// ADAPT(end)
 
-
 //// ADAPT(start)
 //// rename the class name from Template_ByteArrayFilterParameterSetEdit to a proper name, both here and in the .cpp file
 //// e.g. MyByteArrayFilterParameterSetEdit
 class Template_ByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 //// ADAPT(end)
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const char Id[];
 
-  public:
-    explicit Template_ByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
+public:
+    explicit Template_ByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);
 
     ~Template_ByteArrayFilterParameterSetEdit() override;
 
-  public: // AbstractByteArrayFilterParameterSetEdit API
-    void setValues( const AbstractByteArrayFilterParameterSet* parameterSet ) override;
-    void getParameterSet( AbstractByteArrayFilterParameterSet* parameterSet ) const override;
+public: // AbstractByteArrayFilterParameterSetEdit API
+    void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) override;
+    void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
 //// ADAPT(start)
 //// if the values in the widget can reach invalid states, which should not be used for the parameters,
 //// keep the declaration of "isValid()", otherwise remove the next line
@@ -50,16 +49,18 @@ class Template_ByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterP
 //// ADAPT(start)
 //// define slots to catch changes in the values to check if the current state is valid or not
 //// not needed if there cannot be invalid states
-  protected Q_SLOTS:
-    void onLevelChanged( int value );
+
+protected Q_SLOTS:
+    void onLevelChanged(int value);
 //// ADAPT(end)
 
 //// ADAPT(start)
 //// here list the UI elements as usual
-  protected:
+
+protected:
     QSpinBox* mLevelEdit;
 
-    bool mIsValid :1;
+    bool mIsValid : 1;
 //// ADAPT(end)
 };
 

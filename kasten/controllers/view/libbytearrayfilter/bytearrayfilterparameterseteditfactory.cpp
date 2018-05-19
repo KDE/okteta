@@ -33,26 +33,27 @@
 //// #include "filter/my_bytearrayfilterparametersetedit.h"
 //// NEWFILTERPARAMETERSET(end)
 
-
-AbstractByteArrayFilterParameterSetEdit* ByteArrayFilterParameterSetEditFactory::createEdit( const char* id )
+AbstractByteArrayFilterParameterSetEdit* ByteArrayFilterParameterSetEditFactory::createEdit(const char* id)
 {
     AbstractByteArrayFilterParameterSetEdit* result;
 
-    if( qstrcmp(id,OperandByteArrayFilterParameterSetEdit::Id) == 0 )
+    if (qstrcmp(id, OperandByteArrayFilterParameterSetEdit::Id) == 0) {
         result = new OperandByteArrayFilterParameterSetEdit();
-    else if( qstrcmp(id,ReverseByteArrayFilterParameterSetEdit::Id) == 0 )
+    } else if (qstrcmp(id, ReverseByteArrayFilterParameterSetEdit::Id) == 0) {
         result = new ReverseByteArrayFilterParameterSetEdit();
-    else if( qstrcmp(id,RotateByteArrayFilterParameterSetEdit::Id) == 0 )
+    } else if (qstrcmp(id, RotateByteArrayFilterParameterSetEdit::Id) == 0) {
         result = new RotateByteArrayFilterParameterSetEdit();
+    }
 //// NEWFILTERPARAMETERSET(start)
 //// Here add the check for the id of your parameter set
 //// and if it matches the creation of the widget
 //// e.g.
-////     else if( qstrcmp(id,My_ByteArrayFilterParameterSetEdit::Id) == 0 )
+////     else if (qstrcmp(id, My_ByteArrayFilterParameterSetEdit::Id) == 0)
 ////         result = new My_ByteArrayFilterParameterSetEdit();
 //// NEWFILTERPARAMETERSET(end)
-    else //if( qstrcmp(id,NoByteArrayFilterParameterSetEdit::Id) == 0 ) TODO: default should be a message "Not found"
+    else { // if (qstrcmp(id, NoByteArrayFilterParameterSetEdit::Id) == 0) TODO: default should be a message "Not found"
         result = new NoByteArrayFilterParameterSetEdit();
+    }
 
     return result;
 }

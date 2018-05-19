@@ -23,47 +23,43 @@
 #ifndef ZOOMSLIDER_H
 #define ZOOMSLIDER_H
 
-
 // Qt
 #include <QWidget>
 
 class QSlider;
 class QToolButton;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModel;
 namespace If {
 class Zoomable;
 }
 
-
 class ZoomSlider : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ZoomSlider( QWidget* parent );
+public:
+    explicit ZoomSlider(QWidget* parent);
     ~ZoomSlider() override;
 
-  public:
-    void setTargetModel( AbstractModel* model );
+public:
+    void setTargetModel(AbstractModel* model);
 
-  private:
-    void updateToolTip( int sliderValue );
+private:
+    void updateToolTip(int sliderValue);
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void zoomIn();
     void zoomOut();
-    void onSliderValueChanged( int sliderValue );
-    void onSliderMoved( int sliderValue );
+    void onSliderValueChanged(int sliderValue);
+    void onSliderMoved(int sliderValue);
 
-  private Q_SLOTS:
-    void onZoomLevelChange( double level );
+private Q_SLOTS:
+    void onZoomLevelChange(double level);
 
-  private:
+private:
     AbstractModel* mModel;
     If::Zoomable* mZoomControl;
 

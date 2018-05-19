@@ -25,32 +25,28 @@
 // lib
 #include "bookmarklist.h"
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-BookmarkListConstIteratorAdapter::BookmarkListConstIteratorAdapter( const BookmarkList& list )
- : mIterator( list )
+BookmarkListConstIteratorAdapter::BookmarkListConstIteratorAdapter(const BookmarkList& list)
+    : mIterator(list)
 {
 }
 
-bool BookmarkListConstIteratorAdapter::hasNext() const     { return mIterator.hasNext(); }
+bool BookmarkListConstIteratorAdapter::hasNext() const { return mIterator.hasNext(); }
 bool BookmarkListConstIteratorAdapter::hasPrevious() const { return mIterator.hasPrevious(); }
-const Bookmark& BookmarkListConstIteratorAdapter::peekNext() const     { return mIterator.peekNext(); }
+const Bookmark& BookmarkListConstIteratorAdapter::peekNext() const { return mIterator.peekNext(); }
 const Bookmark& BookmarkListConstIteratorAdapter::peekPrevious() const { return mIterator.peekPrevious(); }
 
-bool BookmarkListConstIteratorAdapter::findNext( const Bookmark& bookmark )     { return mIterator.findNext( bookmark ); }
-bool BookmarkListConstIteratorAdapter::findPrevious( const Bookmark& bookmark ) { return mIterator.findPrevious( bookmark ); }
+bool BookmarkListConstIteratorAdapter::findNext(const Bookmark& bookmark)     { return mIterator.findNext(bookmark); }
+bool BookmarkListConstIteratorAdapter::findPrevious(const Bookmark& bookmark) { return mIterator.findPrevious(bookmark); }
 
-bool BookmarkListConstIteratorAdapter::findNextFrom( Address offset )
+bool BookmarkListConstIteratorAdapter::findNextFrom(Address offset)
 {
     bool result = false;
 
     mIterator.toFront();
-    while( mIterator.hasNext() )
-    {
-        if( offset <= mIterator.peekNext().offset() )
-        {
+    while (mIterator.hasNext()) {
+        if (offset <= mIterator.peekNext().offset()) {
             result = true;
             break;
         }
@@ -60,15 +56,13 @@ bool BookmarkListConstIteratorAdapter::findNextFrom( Address offset )
     return result;
 }
 
-bool BookmarkListConstIteratorAdapter::findPreviousFrom( Address offset )
+bool BookmarkListConstIteratorAdapter::findPreviousFrom(Address offset)
 {
     bool result = false;
 
     mIterator.toBack();
-    while( mIterator.hasPrevious() )
-    {
-        if( mIterator.peekPrevious().offset() <= offset )
-        {
+    while (mIterator.hasPrevious()) {
+        if (mIterator.peekPrevious().offset() <= offset) {
             result = true;
             break;
         }
@@ -83,7 +77,6 @@ const Bookmark& BookmarkListConstIteratorAdapter::previous() { return mIterator.
 
 void BookmarkListConstIteratorAdapter::toBack()  { mIterator.toBack(); }
 void BookmarkListConstIteratorAdapter::toFront() { mIterator.toFront(); }
-
 
 BookmarkListConstIteratorAdapter::~BookmarkListConstIteratorAdapter() {}
 

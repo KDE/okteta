@@ -30,8 +30,14 @@
 class AdditionalData
 {
 public:
-    enum class AdditionalDataType {
-        UpdateFunction, ValidationFunction, ValidationError, ArrayLengthFunction, CustomTypeName, ToStringFunction
+    enum class AdditionalDataType
+    {
+        UpdateFunction,
+        ValidationFunction,
+        ValidationError,
+        ArrayLengthFunction,
+        CustomTypeName,
+        ToStringFunction
     };
     explicit AdditionalData();
     AdditionalData(const AdditionalData& data);
@@ -39,6 +45,7 @@ public:
     QVariant get(AdditionalDataType entry) const;
     void set(AdditionalDataType entry, const QVariant& value);
     void remove(AdditionalDataType entry);
+
 private:
     QHash<int, QVariant> mData;
 };

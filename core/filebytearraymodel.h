@@ -26,49 +26,47 @@
 // lib
 #include <okteta/abstractbytearraymodel.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class FileByteArrayModelPrivate;
 
 /**
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 
 class OKTETACORE_EXPORT FileByteArrayModel : public AbstractByteArrayModel
 {
     friend class FileByteArrayModelPrivate;
 
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     /** default is only 50*4k = 200k memory image */
-    explicit FileByteArrayModel( int pageNumber = 50, int pageSize = 4096, QObject* parent = nullptr );
+    explicit FileByteArrayModel(int pageNumber = 50, int pageSize = 4096, QObject* parent = nullptr);
     ~FileByteArrayModel() override;
 
-  public: // AbstractByteArrayModel API
-    Byte byte( Address offset ) const override;
+public: // AbstractByteArrayModel API
+    Byte byte(Address offset) const override;
     Size size() const override;
     bool isReadOnly() const override;
     bool isModified() const override;
 
-    Size insert( Address offset, const Byte* insertData, int insertLength ) override;
-    Size remove( const AddressRange& removeRange ) override;
-    Size replace( const AddressRange& removeRange, const Byte* insertData, int insertLength ) override;
-    bool swap( Address firstStart, const AddressRange& secondRange ) override;
-    Size fill( Byte fillByte, Address offset = 0, Size fillLength = -1 ) override;
-    void setByte( Address offset, Byte byte ) override;
+    Size insert(Address offset, const Byte* insertData, int insertLength) override;
+    Size remove(const AddressRange& removeRange) override;
+    Size replace(const AddressRange& removeRange, const Byte* insertData, int insertLength) override;
+    bool swap(Address firstStart, const AddressRange& secondRange) override;
+    Size fill(Byte fillByte, Address offset = 0, Size fillLength = -1) override;
+    void setByte(Address offset, Byte byte) override;
 
-    void setModified( bool modified = true ) override;
+    void setModified(bool modified = true) override;
 
-  public:
-    void setReadOnly( bool readOnly = true ) override;
+public:
+    void setReadOnly(bool readOnly = true) override;
     bool isOpen() const;
-    bool open( const QString &filename );
+    bool open(const QString& filename);
     bool close();
 
-  protected:
+protected:
     FileByteArrayModelPrivate* const d;
 };
 

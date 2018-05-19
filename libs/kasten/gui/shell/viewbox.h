@@ -26,31 +26,32 @@
 // Qt
 #include <QWidget>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractView;
-
 
 class ViewBox : public QWidget
 {
     Q_OBJECT
 
-  public:
-    enum Area { TopArea, BottomArea };
+public:
+    enum Area
+    {
+        TopArea,
+        BottomArea
+    };
 
-  public:
-    explicit ViewBox( AbstractView* view, QWidget* parent = nullptr );
+public:
+    explicit ViewBox(AbstractView* view, QWidget* parent = nullptr);
     ~ViewBox() override;
 
-  public:
+public:
     AbstractView* view() const;
 
-  public:
-    void add( ViewBox::Area area );
+public:
+    void add(ViewBox::Area area);
 
-  protected:
+protected:
     AbstractView* mView;
 };
 

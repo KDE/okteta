@@ -33,35 +33,33 @@ class QTreeView;
 class QCheckBox;
 class QModelIndex;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class PODTableModel;
 class PODDecoderTool;
 
-
-class PODTableView : public QWidget, public AbstractDifferentSizeDialog
+class PODTableView : public QWidget
+                   , public AbstractDifferentSizeDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit PODTableView( PODDecoderTool* tool, QWidget* parent = nullptr );
+public:
+    explicit PODTableView(PODDecoderTool* tool, QWidget* parent = nullptr);
     ~PODTableView() override;
 
-  public:
+public:
     PODDecoderTool* tool() const;
 
-  public: // QObject API
-    bool eventFilter( QObject* object, QEvent* event ) override;
+public: // QObject API
+    bool eventFilter(QObject* object, QEvent* event) override;
 
-  public: // AbstractDifferentSizeDialog API
-    Answer query( int newValueSize, int oldValueSize, int sizeLeft ) override;
+public: // AbstractDifferentSizeDialog API
+    Answer query(int newValueSize, int oldValueSize, int sizeLeft) override;
 
-  private Q_SLOTS:
-    void onCurrentRowChanged( const QModelIndex& current, const QModelIndex& previous );
+private Q_SLOTS:
+    void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
 
-  private:
+private:
     PODDecoderTool* mTool;
 
     PODTableModel* mPODTableModel;
@@ -72,7 +70,6 @@ class PODTableView : public QWidget, public AbstractDifferentSizeDialog
 
     QWidget* mPODTableViewFocusChild;
 };
-
 
 inline PODDecoderTool* PODTableView::tool() const { return mTool; }
 

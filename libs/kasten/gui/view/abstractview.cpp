@@ -22,12 +22,10 @@
 
 #include "abstractview.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractView::AbstractView( AbstractModel* baseModel)
-  : AbstractModel( baseModel )
+AbstractView::AbstractView(AbstractModel* baseModel)
+    : AbstractModel(baseModel)
 {
 }
 

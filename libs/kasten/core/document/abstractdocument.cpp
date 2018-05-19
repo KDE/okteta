@@ -23,36 +23,34 @@
 #include "abstractdocument.h"
 #include "abstractdocument_p.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 AbstractDocument::AbstractDocument()
-  : AbstractModel( new AbstractDocumentPrivate(this) )
+    : AbstractModel(new AbstractDocumentPrivate(this))
 {}
 
 QString AbstractDocument::id() const
 {
-    Q_D( const AbstractDocument );
+    Q_D(const AbstractDocument);
 
     return d->id();
 }
 AbstractModelSynchronizer* AbstractDocument::synchronizer() const
 {
-    Q_D( const AbstractDocument );
+    Q_D(const AbstractDocument);
 
     return d->synchronizer();
 }
 
-void AbstractDocument::setId( const QString& id )
+void AbstractDocument::setId(const QString& id)
 {
-    Q_D( AbstractDocument );
+    Q_D(AbstractDocument);
 
     d->setId(id);
 }
-void AbstractDocument::setSynchronizer( AbstractModelSynchronizer* synchronizer )
+void AbstractDocument::setSynchronizer(AbstractModelSynchronizer* synchronizer)
 {
-    Q_D( AbstractDocument );
+    Q_D(AbstractDocument);
 
     d->setSynchronizer(synchronizer);
 }

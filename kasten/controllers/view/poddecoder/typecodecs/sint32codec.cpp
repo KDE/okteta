@@ -28,32 +28,30 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 SInt32Codec::SInt32Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Signed 32-bit") )
+    : AbstractTypeCodec(i18nc("@label:textbox", "Signed 32-bit"))
 {}
 
-QVariant SInt32Codec::value( const PODData& data, int* byteCount ) const
+QVariant SInt32Codec::value(const PODData& data, int* byteCount) const
 {
-    const qint32* pointer = (qint32*)data.pointer( 4 );
+    const qint32* pointer = (qint32*)data.pointer(4);
 
     *byteCount = pointer ? 4 : 0;
-    return pointer ? QVariant::fromValue<SInt32>( SInt32(*pointer) ) : QVariant();
+    return pointer ? QVariant::fromValue<SInt32>(SInt32(*pointer)) : QVariant();
 }
 
-QByteArray SInt32Codec::valueToBytes( const QVariant& value ) const
+QByteArray SInt32Codec::valueToBytes(const QVariant& value) const
 {
     const qint32 number = value.value<SInt32>().value;
 
-    return QByteArray( (const char*)&number, sizeof(qint32) );
+    return QByteArray((const char*)&number, sizeof(qint32));
 }
 
-bool SInt32Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+bool SInt32Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
-    return ( value.value<SInt32>().value == otherValue.value<SInt32>().value );
+    return (value.value<SInt32>().value == otherValue.value<SInt32>().value);
 }
 
 SInt32Codec::~SInt32Codec() {}

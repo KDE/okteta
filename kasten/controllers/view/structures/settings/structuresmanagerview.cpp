@@ -43,12 +43,14 @@
 #include <QLayout>
 #include <QSizePolicy>
 
-
 StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidget* parent)
-    : QWidget(parent), mTool(tool), mStructuresSelector(nullptr), mRebuildingPluginsList(false)
+    : QWidget(parent)
+    , mTool(tool)
+    , mStructuresSelector(nullptr)
+    , mRebuildingPluginsList(false)
 {
     // since 5.32 the signal is by default taken as set for the used property
-#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5,32,0)
+#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 32, 0)
     KConfigDialogManager::changedMap()->insert(QStringLiteral("StructuresManagerView"), SIGNAL(changed(QStringList)));
 #endif
 
@@ -58,7 +60,6 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     setLayout(pageLayout);
 
     rebuildPluginSelectorEntries();
-
 
     QHBoxLayout* buttonsLayout = new QHBoxLayout();
     pageLayout->addLayout(buttonsLayout);
@@ -76,22 +77,19 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
 
 void StructuresManagerView::onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries)
 {
-    for( const KNS3::Entry& e : changedEntries )
-        {
-            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Changed Entry: " << e.name();
-            if (e.status() == KNS3::Entry::Installed)
-            {
-                //new element installed
-                qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed files:" << e.installedFiles();
-            }
-            if (e.status() == KNS3::Entry::Deleted)
-            {
-                //element uninstalled
-                qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "deleted files:" << e.uninstalledFiles();
-            }
+    for (const KNS3::Entry& e : changedEntries) {
+        qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Changed Entry: " << e.name();
+        if (e.status() == KNS3::Entry::Installed) {
+            // new element installed
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed files:" << e.installedFiles();
         }
-    if (!changedEntries.isEmpty())
-    {
+        if (e.status() == KNS3::Entry::Deleted) {
+            // element uninstalled
+            qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "deleted files:" << e.uninstalledFiles();
+        }
+    }
+
+    if (!changedEntries.isEmpty()) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed structures changed ->  rebuilding list of installed structures";
         mTool->manager()->reloadPaths();
         rebuildPluginSelectorEntries();
@@ -103,11 +101,10 @@ QStringList StructuresManagerView::values() const
     return mSelectedStructures;
 }
 
-
 void StructuresManagerView::advancedSelection()
 {
     StructureAddRemoveWidget* advancedSelectionWidget = new StructureAddRemoveWidget(mSelectedStructures, mTool, this);
-    QPointer<QDialog> dlg = new QDialog(this); //the dlg-on-heap-variant
+    QPointer<QDialog> dlg = new QDialog(this); // the dlg-on-heap-variant
     QVBoxLayout* layout = new QVBoxLayout;
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->addButton(QDialogButtonBox::Ok);
@@ -121,7 +118,7 @@ void StructuresManagerView::advancedSelection()
         QStringList newVals = advancedSelectionWidget->values();
         if (newVals != mSelectedStructures) {
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-                    << "selection changed from " << mSelectedStructures << "to" << newVals;
+                << "selection changed from " << mSelectedStructures << "to" << newVals;
             mSelectedStructures = newVals;
             emit changed(newVals);
         }
@@ -131,32 +128,35 @@ void StructuresManagerView::advancedSelection()
 
 void StructuresManagerView::onPluginSelectorChange(bool change)
 {
-    if (mRebuildingPluginsList)
+    if (mRebuildingPluginsList) {
         return;
+    }
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-            << "pluginselector changed: " << change;
-    if (!change)
+        << "pluginselector changed: " << change;
+    if (!change) {
         return;
+    }
     mStructuresSelector->save();
     reloadSelectedItems();
 }
 
-void StructuresManagerView::reloadSelectedItems() {
+void StructuresManagerView::reloadSelectedItems()
+{
     QStringList newVals;
     const auto structureDefs = mTool->manager()->structureDefs();
-    for( const Kasten::StructureDefinitionFile* def : structureDefs )
-    {
+    for (const Kasten::StructureDefinitionFile* def : structureDefs) {
         KPluginInfo info = def->pluginInfo();
-        if (info.isPluginEnabled())
+        if (info.isPluginEnabled()) {
             newVals.append(QString(QStringLiteral("\'%1\':\'*\'")).arg(info.pluginName()));
+        }
     }
+
     if (newVals != mSelectedStructures) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-                << "selection changed from " << mSelectedStructures << "to" << newVals;
+            << "selection changed from " << mSelectedStructures << "to" << newVals;
         mSelectedStructures = newVals;
         emit changed(newVals);
-    }
-    else {
+    } else {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no change:" << mSelectedStructures;
     }
 }
@@ -168,20 +168,19 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     KPluginInfo::List plugins;
     KPluginInfo::List dynamicPlugins;
     const auto structureDefs = mTool->manager()->structureDefs();
-    for( const Kasten::StructureDefinitionFile* def : structureDefs )
-        {
-            KPluginInfo info = def->pluginInfo();
-            if (info.category() == QLatin1String("structure"))
-                plugins.append(info);
-            else if (info.category() == QLatin1String("structure/js"))
-                dynamicPlugins.append(info);
+    for (const Kasten::StructureDefinitionFile* def : structureDefs) {
+        KPluginInfo info = def->pluginInfo();
+        if (info.category() == QLatin1String("structure")) {
+            plugins.append(info);
+        } else if (info.category() == QLatin1String("structure/js")) {
+            dynamicPlugins.append(info);
         }
+    }
 
-    //XXX is there any way to clear the plugins selector?
+    // XXX is there any way to clear the plugins selector?
     QBoxLayout* layoutObj = qobject_cast<QBoxLayout*>(layout());
     Q_CHECK_PTR(layoutObj);
-    if (mStructuresSelector)
-    {
+    if (mStructuresSelector) {
         layoutObj->removeWidget(mStructuresSelector);
         delete mStructuresSelector;
     }
@@ -190,11 +189,12 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
             this, &StructuresManagerView::onPluginSelectorChange);
     layoutObj->insertWidget(0, mStructuresSelector);
 
-    mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile, i18n(
-            "Structure Definitions"), QStringLiteral("structure"), mTool->manager()->config());
+    mStructuresSelector->addPlugins(plugins, KPluginSelector::ReadConfigFile,
+                                    i18n("Structure Definitions"), QStringLiteral("structure"),
+                                    mTool->manager()->config());
     mStructuresSelector->addPlugins(dynamicPlugins, KPluginSelector::ReadConfigFile,
-            i18n("Dynamic Structure Definitions"), QStringLiteral("structure/js"),
-            mTool->manager()->config());
+                                    i18n("Dynamic Structure Definitions"), QStringLiteral("structure/js"),
+                                    mTool->manager()->config());
     mStructuresSelector->load();
     mStructuresSelector->updatePluginsState();
     mRebuildingPluginsList = false;

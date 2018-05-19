@@ -28,24 +28,23 @@
 //
 #include <abstractbytearraychecksumalgorithm.h>
 
-
 class ModSum16ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ModSum16ByteArrayChecksumAlgorithm();
     ~ModSum16ByteArrayChecksumAlgorithm() override;
 
-  public: // AbstractByteArrayChecksumAlgorithm API
-    bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+public: // AbstractByteArrayChecksumAlgorithm API
+    bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
-  protected:
-    quint16 calculateModSumWithBigEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;
-    quint16 calculateModSumWithLittleEndian( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const;
+protected:
+    quint16 calculateModSumWithBigEndian(const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const;
+    quint16 calculateModSumWithLittleEndian(const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const;
 
-  protected:
+protected:
     ModSumByteArrayChecksumParameterSet mParameterSet;
 };
 

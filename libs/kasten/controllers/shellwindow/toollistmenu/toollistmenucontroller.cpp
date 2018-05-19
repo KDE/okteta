@@ -31,43 +31,42 @@
 // Qt
 #include <QAction>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const char ToolListActionListId[] = "tools_list";
 
-ToolListMenuController::ToolListMenuController( If::WidgetsDockable* widgetsDockable,
-                                                KXMLGUIClient* guiClient )
- : mWidgetsDockable( widgetsDockable ), mGuiClient( guiClient )
+ToolListMenuController::ToolListMenuController(If::WidgetsDockable* widgetsDockable,
+                                               KXMLGUIClient* guiClient)
+    : mWidgetsDockable(widgetsDockable)
+    , mGuiClient(guiClient)
 {
     // TODO: for now this is only called on start, so first create all tools/views before this controller
     updateActions();
 }
 
-void ToolListMenuController::setTargetModel( AbstractModel* model )
+void ToolListMenuController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED(model)
+    Q_UNUSED(model)
 }
 
 void ToolListMenuController::updateActions()
 {
-    mGuiClient->unplugActionList( QLatin1String(ToolListActionListId) );
+    mGuiClient->unplugActionList(QLatin1String(ToolListActionListId));
 
-    qDeleteAll( mToolActionList );
+    qDeleteAll(mToolActionList);
     mToolActionList.clear();
 
     const QList<ToolViewDockWidget*> dockWidgets = mWidgetsDockable->dockWidgets();
 
     mToolActionList.reserve(dockWidgets.size());
-    for( const ToolViewDockWidget* dockWidget : dockWidgets )
-    {
-        QAction *action = dockWidget->toggleViewAction();
-        action->setText( dockWidget->windowTitle() );
+    for (const ToolViewDockWidget* dockWidget : dockWidgets) {
+        QAction* action = dockWidget->toggleViewAction();
+        action->setText(dockWidget->windowTitle());
 //         action->setText( mToolView->title() );
-        mToolActionList.append( action );
+        mToolActionList.append(action);
     }
-    mGuiClient->plugActionList( QLatin1String(ToolListActionListId), mToolActionList );
+
+    mGuiClient->plugActionList(QLatin1String(ToolListActionListId), mToolActionList);
 }
 
 }

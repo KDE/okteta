@@ -24,47 +24,61 @@
 #include "primitive/primitivetemplateinfo.h"
 #include "../script/scriptlogger.h"
 
-namespace PrimitiveFactory
-{
+namespace PrimitiveFactory {
 
 PrimitiveDataType typeStringToType(const QString& string, const LoggerWithContext& logger)
 {
     const QString typeStr = string.trimmed().toLower();
-    if (typeStr == QLatin1String("bool8"))
+    if (typeStr == QLatin1String("bool8")) {
         return PrimitiveDataType::Bool8;
-    if (typeStr == QLatin1String("bool16"))
+    }
+    if (typeStr == QLatin1String("bool16")) {
         return PrimitiveDataType::Bool16;
-    if (typeStr == QLatin1String("bool32"))
+    }
+    if (typeStr == QLatin1String("bool32")) {
         return PrimitiveDataType::Bool32;
-    if (typeStr == QLatin1String("bool64"))
+    }
+    if (typeStr == QLatin1String("bool64")) {
         return PrimitiveDataType::Bool64;
-    if (typeStr == QLatin1String("int8"))
+    }
+    if (typeStr == QLatin1String("int8")) {
         return PrimitiveDataType::Int8;
-    if (typeStr == QLatin1String("uint8"))
+    }
+    if (typeStr == QLatin1String("uint8")) {
         return PrimitiveDataType::UInt8;
-    if (typeStr == QLatin1String("int16"))
+    }
+    if (typeStr == QLatin1String("int16")) {
         return PrimitiveDataType::Int16;
-    if (typeStr == QLatin1String("uint16"))
+    }
+    if (typeStr == QLatin1String("uint16")) {
         return PrimitiveDataType::UInt16;
-    if (typeStr == QLatin1String("int32"))
+    }
+    if (typeStr == QLatin1String("int32")) {
         return PrimitiveDataType::Int32;
-    if (typeStr == QLatin1String("uint32"))
+    }
+    if (typeStr == QLatin1String("uint32")) {
         return PrimitiveDataType::UInt32;
-    if (typeStr == QLatin1String("int64"))
+    }
+    if (typeStr == QLatin1String("int64")) {
         return PrimitiveDataType::Int64;
-    if (typeStr == QLatin1String("uint64"))
+    }
+    if (typeStr == QLatin1String("uint64")) {
         return PrimitiveDataType::UInt64;
-    if (typeStr == QLatin1String("char"))
+    }
+    if (typeStr == QLatin1String("char")) {
         return PrimitiveDataType::Char;
-    if (typeStr == QLatin1String("float"))
+    }
+    if (typeStr == QLatin1String("float")) {
         return PrimitiveDataType::Float;
-    if (typeStr == QLatin1String("double"))
+    }
+    if (typeStr == QLatin1String("double")) {
         return PrimitiveDataType::Double;
+    }
     logger.warn() << typeStr << "does not name a valid primitive type";
-    return PrimitiveDataType::Invalid; //just return a default value
+    return PrimitiveDataType::Invalid; // just return a default value
 }
 PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
-        const LoggerWithContext& logger, DataInformation* parent)
+                                      const LoggerWithContext& logger, DataInformation* parent)
 {
     switch (type)
     {
@@ -100,7 +114,7 @@ PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType typ
         return new PrimitiveInfo<PrimitiveDataType::Double>::Class(name, parent);
     default:
         logger.error().nospace() << "could not convert '" << type << "' to a primitive type";
-        return nullptr; //invalid type
+        return nullptr; // invalid type
     }
 }
 

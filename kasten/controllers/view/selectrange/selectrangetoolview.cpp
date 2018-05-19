@@ -26,12 +26,10 @@
 #include "selectrangeview.h"
 #include "selectrangetool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-SelectRangeToolView::SelectRangeToolView( SelectRangeTool* tool )
- : mWidget( new SelectRangeView(tool) )
+SelectRangeToolView::SelectRangeToolView(SelectRangeTool* tool)
+    : mWidget(new SelectRangeView(tool))
 {
 }
 

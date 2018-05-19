@@ -28,35 +28,33 @@
 // Qt
 #include <QLinkedList>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 class PieceTable
 {
-  public:
-    explicit PieceTable( Size size = 0 );
+public:
+    explicit PieceTable(Size size = 0);
 
-  public:
-    void init( Size size );
-    void insert( Address insertDataOffset, Size insertLength, Address storageOffset );
+public:
+    void init(Size size);
+    void insert(Address insertDataOffset, Size insertLength, Address storageOffset);
     /// for use to reapply
-    void insert( Address insertDataOffset, const PieceList& insertPieceList );
-    PieceList remove( const AddressRange& removeRange );
-    PieceList replace( const AddressRange& removeRange,
-                       Size insertLength, Address storageOffset );
+    void insert(Address insertDataOffset, const PieceList& insertPieceList);
+    PieceList remove(const AddressRange& removeRange);
+    PieceList replace(const AddressRange& removeRange,
+                      Size insertLength, Address storageOffset);
     /// for use to reapply
-    void replace( const AddressRange& removeRange, const PieceList& insertPieceList );
-    void swap( Address firstStart, const AddressRange& secondRange );
-    Piece replaceOne( Address dataOffset, Address storageOffset, int storageId = Piece::ChangeStorage );
+    void replace(const AddressRange& removeRange, const PieceList& insertPieceList);
+    void swap(Address firstStart, const AddressRange& secondRange);
+    Piece replaceOne(Address dataOffset, Address storageOffset, int storageId = Piece::ChangeStorage);
 
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated
 
-  public:
-    bool getStorageData( int* storageId, Address* storageOffset, Address dataOffset ) const;
+public:
+    bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
     Size size() const;
 
-  protected:
+protected:
     QLinkedList<Piece> mList;
     Size mSize;
 };

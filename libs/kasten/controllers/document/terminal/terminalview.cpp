@@ -35,59 +35,59 @@
 #include <QUrl>
 #include <QDir>
 
+namespace Kasten {
 
-namespace Kasten
+TerminalView::TerminalView(TerminalTool* tool, QWidget* parent)
+    : QWidget(parent)
+    , mTool(tool)
+    , mTerminalPart(nullptr)
+    , mTerminalInterface(nullptr)
 {
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->setMargin(0);
 
-TerminalView::TerminalView( TerminalTool* tool, QWidget* parent )
-  : QWidget( parent ),
-    mTool( tool ),
-    mTerminalPart( nullptr ),
-    mTerminalInterface( nullptr )
-{
-    QVBoxLayout* layout = new QVBoxLayout( this );
-    layout->setMargin( 0 );
-
-    connect( mTool, &TerminalTool::currentUrlChanged, this, &TerminalView::onCurrentUrlChanged );
-    QMetaObject::invokeMethod( this, "createTerminalPart", Qt::QueuedConnection );
+    connect(mTool, &TerminalTool::currentUrlChanged, this, &TerminalView::onCurrentUrlChanged);
+    QMetaObject::invokeMethod(this, "createTerminalPart", Qt::QueuedConnection);
 }
 
 void TerminalView::createTerminalPart()
 {
     mTerminalPart =
         KServiceTypeTrader::createInstanceFromQuery<KParts::ReadOnlyPart>(
-            QStringLiteral("TerminalEmulator"), this, this );
+            QStringLiteral("TerminalEmulator"), this, this);
 
-    if( mTerminalPart )
-    {
-        connect( mTerminalPart, &QObject::destroyed,
-                 this, &TerminalView::onTerminalPartDestroyed );
+    if (mTerminalPart) {
+        connect(mTerminalPart, &QObject::destroyed,
+                this, &TerminalView::onTerminalPartDestroyed);
 
         QWidget* terminalWidget = mTerminalPart->widget();
-        terminalWidget->setFocusPolicy( Qt::WheelFocus );
+        terminalWidget->setFocusPolicy(Qt::WheelFocus);
         terminalWidget->setFocus();
-        setFocusProxy( terminalWidget );
+        setFocusProxy(terminalWidget);
 
-        QFrame* frame = qobject_cast<QFrame*>( terminalWidget );
-        if( frame )
-            frame->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+        QFrame* frame = qobject_cast<QFrame*>(terminalWidget);
+        if (frame) {
+            frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+        }
 
-        QVBoxLayout* layout = static_cast<QVBoxLayout*>( this->layout() );
-        layout->addWidget( terminalWidget );
+        QVBoxLayout* layout = static_cast<QVBoxLayout*>(this->layout());
+        layout->addWidget(terminalWidget);
         terminalWidget->show();
 
-        mTerminalInterface = qobject_cast<TerminalInterface*>( mTerminalPart );
+        mTerminalInterface = qobject_cast<TerminalInterface*>(mTerminalPart);
         QUrl currentUrl = mTool->currentUrl();
-        if( currentUrl.isEmpty() )
-            currentUrl = QUrl::fromLocalFile( QDir::homePath() );
-        onCurrentUrlChanged( currentUrl );
+        if (currentUrl.isEmpty()) {
+            currentUrl = QUrl::fromLocalFile(QDir::homePath());
+        }
+        onCurrentUrlChanged(currentUrl);
     }
 }
 
-void TerminalView::onCurrentUrlChanged( const QUrl& currentUrl )
+void TerminalView::onCurrentUrlChanged(const QUrl& currentUrl)
 {
-    if( mTerminalInterface && currentUrl.isLocalFile() )
-        mTerminalInterface->showShellInDir( currentUrl.path() );
+    if (mTerminalInterface && currentUrl.isLocalFile()) {
+        mTerminalInterface->showShellInDir(currentUrl.path());
+    }
     // TODO: Konsole currently seems to ignore this call if shell is running?
 }
 
@@ -101,10 +101,9 @@ void TerminalView::onTerminalPartDestroyed()
 
 TerminalView::~TerminalView()
 {
-    if( mTerminalPart )
-    {
-        disconnect( mTerminalPart, &QObject::destroyed,
-                    this, &TerminalView::onTerminalPartDestroyed );
+    if (mTerminalPart) {
+        disconnect(mTerminalPart, &QObject::destroyed,
+                   this, &TerminalView::onTerminalPartDestroyed);
     }
 }
 

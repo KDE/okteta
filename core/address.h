@@ -26,9 +26,7 @@
 // Qt
 #include <QtGlobal>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 // Address needs to be <= int, as long as we use QByteArray and its int parameters
 using Address = qint32;

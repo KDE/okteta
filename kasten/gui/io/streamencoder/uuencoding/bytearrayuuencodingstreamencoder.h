@@ -30,51 +30,57 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class UuencodingStreamEncoderSettings
 {
-  public:
-    enum class AlgorithmId { Historical = 0, Base64 = 1 };
+public:
+    enum class AlgorithmId
+    {
+        Historical = 0,
+        Base64 = 1
+    };
 
-  public:
+public:
     UuencodingStreamEncoderSettings();
-  public:
+
+public:
     QString fileName;
     AlgorithmId algorithmId;
 };
-
 
 class ByteArrayUuencodingStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
-    enum class InputByteIndex { First = 0, Second, Third };
+public:
+    enum class InputByteIndex
+    {
+        First = 0,
+        Second,
+        Third
+    };
 
-  public:
+public:
     ByteArrayUuencodingStreamEncoder();
     ~ByteArrayUuencodingStreamEncoder() override;
 
-  public:
+public:
     UuencodingStreamEncoderSettings settings() const;
-    void setSettings( const UuencodingStreamEncoderSettings& settings );
+    void setSettings(const UuencodingStreamEncoderSettings& settings);
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 
-  protected:
+protected:
     UuencodingStreamEncoderSettings mSettings;
 };
 
-
 inline UuencodingStreamEncoderSettings ByteArrayUuencodingStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayUuencodingStreamEncoder::setSettings( const UuencodingStreamEncoderSettings& settings )
+inline void ByteArrayUuencodingStreamEncoder::setSettings(const UuencodingStreamEncoderSettings& settings)
 {
     mSettings = settings;
     emit settingsChanged();

@@ -30,91 +30,87 @@
 // Qt
 #include <QApplication>
 
+namespace Kasten {
 
-namespace Kasten
+PODTableModel::PODTableModel(PODDecoderTool* tool, QObject* parent)
+    : QAbstractTableModel(parent)
+    , mTool(tool)
+    , mEmptyNote(QLatin1Char('-'))
 {
-
-PODTableModel::PODTableModel( PODDecoderTool* tool, QObject *parent )
- : QAbstractTableModel( parent ),
-   mTool( tool ),
-   mEmptyNote( QLatin1Char('-') )
-{
-    connect( mTool, &PODDecoderTool::dataChanged, this, &PODTableModel::onDataChanged );
+    connect(mTool, &PODDecoderTool::dataChanged, this, &PODTableModel::onDataChanged);
 }
 
 void PODTableModel::onDataChanged()
 {
-    emit dataChanged( index(0,ValueId), index(mTool->podCount()-1,ValueId) );
+    emit dataChanged(index(0, ValueId), index(mTool->podCount() - 1, ValueId));
 }
 
-int PODTableModel::rowCount( const QModelIndex& parent ) const
+int PODTableModel::rowCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? mTool->podCount() : 0;
+    return (!parent.isValid()) ? mTool->podCount() : 0;
 }
 
-int PODTableModel::columnCount( const QModelIndex& parent ) const
+int PODTableModel::columnCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? NoOfColumnIds : 0;
+    return (!parent.isValid()) ? NoOfColumnIds : 0;
 }
 
-QVariant PODTableModel::data( const QModelIndex& index, int role ) const
+QVariant PODTableModel::data(const QModelIndex& index, int role) const
 {
     QVariant result;
-    switch( role )
+    switch (role)
     {
     case Qt::DisplayRole:
     {
         const int podId = index.row();
         const int column = index.column();
-        switch( column )
+        switch (column)
         {
-            case NameId:
-            {
-                result = mTool->nameOfPOD( podId );
-                break;
+        case NameId:
+        {
+            result = mTool->nameOfPOD(podId);
+            break;
+        }
+        case ValueId:
+        {
+            QVariant value = mTool->value(podId);
+            if (value.isNull()) {
+                value = mEmptyNote;
             }
-            case ValueId:
-            {
-                QVariant value = mTool->value( podId );
-                if( value.isNull() )
-                    value = mEmptyNote;
-                result = value;
-                break;
-            }
-            default:
-                ;
+            result = value;
+            break;
+        }
+        default:
+            ;
         }
         break;
     }
     case Qt::EditRole:
     {
         const int column = index.column();
-        if( column == ValueId )
-        {
+        if (column == ValueId) {
             const int podId = index.row();
-            result = mTool->value( podId );
+            result = mTool->value(podId);
         }
         break;
     }
     case Qt::TextAlignmentRole:
     {
         const int column = index.column();
-        result = ( column==NameId ) ? Qt::AlignRight: Qt::AlignLeft;
+        result = (column == NameId) ? Qt::AlignRight : Qt::AlignLeft;
         break;
     }
     case Qt::ForegroundRole:
     {
         const int column = index.column();
-        if( column == ValueId )
-        {
+        if (column == ValueId) {
             const int podId = index.row();
-            const QVariant value = mTool->value( podId );
+            const QVariant value = mTool->value(podId);
 
-            if( value.isNull() )
-            {
-                const QPalette &palette = QApplication::palette();
-                const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
-                result = colorScheme.foreground( KColorScheme::InactiveText );
+            if (value.isNull()) {
+                const QPalette& palette = QApplication::palette();
+                const KColorScheme colorScheme(palette.currentColorGroup(), KColorScheme::View);
+                result = colorScheme.foreground(KColorScheme::InactiveText);
             }
         }
     }
@@ -125,82 +121,76 @@ QVariant PODTableModel::data( const QModelIndex& index, int role ) const
     return result;
 }
 
-Qt::ItemFlags PODTableModel::flags( const QModelIndex& index ) const
+Qt::ItemFlags PODTableModel::flags(const QModelIndex& index) const
 {
-    Qt::ItemFlags result = QAbstractTableModel::flags( index );
+    Qt::ItemFlags result = QAbstractTableModel::flags(index);
     const int column = index.column();
-    if( column == ValueId )
-    {
+    if (column == ValueId) {
         const int podId = index.row();
-        const QVariant value = mTool->value( podId );
+        const QVariant value = mTool->value(podId);
 
         // TODO: this check does not match types with dynamic byte length, e.g. utf-8!
-        if( ! value.isNull() )
+        if (!value.isNull()) {
             result |= Qt::ItemIsEditable;
+        }
     }
 
     return result;
 }
 
-QModelIndex PODTableModel::buddy( const QModelIndex& index ) const
+QModelIndex PODTableModel::buddy(const QModelIndex& index) const
 {
     QModelIndex result;
 
     const int column = index.column();
-    if( column == NameId )
-    {
+    if (column == NameId) {
         const int row = index.row();
-        result = createIndex( row, ValueId );
-    }
-    else
+        result = createIndex(row, ValueId);
+    } else {
         result = index;
+    }
 
     return result;
 }
 
-
-QVariant PODTableModel::headerData( int section, Qt::Orientation orientation, int role ) const
+QVariant PODTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     QVariant result;
 
-    if( role == Qt::DisplayRole )
-    {
+    if (role == Qt::DisplayRole) {
         const QString titel =
             section == NameId ?   i18nc("@title:column name of the datatype",                "Type") :
             section == ValueId ?  i18nc("@title:column value of the bytes for the datatype", "Value") :
-            QString();
+                                  QString();
         result = titel;
-    }
-    else if( role == Qt::ToolTipRole )
-    {
+    } else if (role == Qt::ToolTipRole) {
         const QString titel =
             section == NameId ?
-                    i18nc("@info:tooltip for column Type",    "The type of data") :
+                i18nc("@info:tooltip for column Type",    "The type of data") :
             section == ValueId ?
-                    i18nc("@info:tooltip for column Value",   "The value of the bytes for the datatype") :
-            QString();
+                i18nc("@info:tooltip for column Value",   "The value of the bytes for the datatype") :
+                QString();
         result = titel;
+    } else {
+        result = QAbstractTableModel::headerData(section, orientation, role);
     }
-    else
-        result = QAbstractTableModel::headerData( section, orientation, role );
 
     return result;
 }
 
-bool PODTableModel::setData( const QModelIndex& index, const QVariant& data, int role )
+bool PODTableModel::setData(const QModelIndex& index, const QVariant& data, int role)
 {
     bool result;
 
-    if( index.isValid() && role == Qt::EditRole )
-    {
+    if (index.isValid() && role == Qt::EditRole) {
         const int podId = index.row();
 
-        mTool->setData( data, podId );
+        mTool->setData(data, podId);
 
         result = true;
-    }
-    else
+    } else {
         result = false;
+    }
 
     return result;
 }

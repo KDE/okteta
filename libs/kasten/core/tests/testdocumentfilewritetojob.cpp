@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "testdocumentfilewritetojob.h"
 
 // lib
@@ -30,28 +29,27 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TestDocumentFileWriteToJob::TestDocumentFileWriteToJob( TestDocumentFileSynchronizer* synchronizer,
-                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
- : AbstractFileSystemSyncWithRemoteJob( synchronizer, url, option )
+TestDocumentFileWriteToJob::TestDocumentFileWriteToJob(TestDocumentFileSynchronizer* synchronizer,
+                                                       const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
+    : AbstractFileSystemSyncWithRemoteJob(synchronizer, url, option)
 {}
 
 void TestDocumentFileWriteToJob::startSyncWithRemote()
 {
-    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
-    TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
-    TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread( this, testSynchronizer->header(), document, file() );
+    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    TestDocument* document = qobject_cast<TestDocument*>(synchronizer()->document());
+    TestDocumentFileWriteThread* writeThread = new TestDocumentFileWriteThread(this, testSynchronizer->header(), document, file());
     writeThread->start();
-    while( !writeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!writeThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     const bool success = writeThread->success();
     delete writeThread;
 
-    completeSync( success );
+    completeSync(success);
 }
 
 TestDocumentFileWriteToJob::~TestDocumentFileWriteToJob()

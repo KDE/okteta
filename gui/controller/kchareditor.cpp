@@ -29,35 +29,29 @@
 // Qt
 #include <QKeyEvent>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-KCharEditor::KCharEditor( ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent )
-  : KEditor( cursor, view, parent )
+KCharEditor::KCharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KController* parent)
+    : KEditor(cursor, view, parent)
 {
 }
 
-
-bool KCharEditor::handleKeyPress( QKeyEvent* keyEvent )
+bool KCharEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
     const QString text = keyEvent->text();
 
     // some input that should be inserted?
-    if( text.length() > 0
-        && !(keyEvent->modifiers()&( Qt::CTRL | Qt::ALT | Qt::META )) )
-    {
+    if (text.length() > 0
+        && !(keyEvent->modifiers() & (Qt::CTRL | Qt::ALT | Qt::META))) {
 
         const QChar enteredChar = text.at(0);
-        if( enteredChar.isPrint() )
-        {
+        if (enteredChar.isPrint()) {
             Byte byte;
-            if( mView->charCodec()->encode(&byte,enteredChar) )
-            {
-                QByteArray data( 1, byte );
-                mView->insert( data );
+            if (mView->charCodec()->encode(&byte, enteredChar)) {
+                QByteArray data(1, byte);
+                mView->insert(data);
 
                 keyUsed = true;
             }

@@ -27,19 +27,18 @@
 #include "../types/binary8.h"
 #include "abstractvalue8editor.h"
 
-
 class Binary8Editor : public AbstractValue8Editor
 {
-  Q_OBJECT
-  Q_PROPERTY( Binary8 data READ data WRITE setData USER true )
+    Q_OBJECT
+    Q_PROPERTY(Binary8 data READ data WRITE setData USER true)
 
-  public:
-    explicit Binary8Editor( QWidget* parent );
+public:
+    explicit Binary8Editor(QWidget* parent);
 
     ~Binary8Editor() override;
 
-  public:
-    void setData( Binary8 data );
+public:
+    void setData(Binary8 data);
     Binary8 data() const;
 };
 

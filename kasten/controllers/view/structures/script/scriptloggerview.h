@@ -31,8 +31,9 @@ class KComboBox;
 
 class ScriptLoggerView : public QWidget
 {
-Q_OBJECT
+    Q_OBJECT
     Q_DISABLE_COPY(ScriptLoggerView)
+
 public:
     explicit ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent = nullptr);
     ~ScriptLoggerView() override;
@@ -43,8 +44,8 @@ protected Q_SLOTS:
 private:
     KComboBox* mSelector;
     QTableView* mView;
-    //QSharedPointers so they remain valid until this widget is deleted
-    //even if the backing data has changed
+    // QSharedPointers so they remain valid until this widget is deleted
+    // even if the backing data has changed
     const TopLevelDataInformation::List mList;
 };
 

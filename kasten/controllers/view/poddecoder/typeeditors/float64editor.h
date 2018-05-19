@@ -28,19 +28,18 @@
 // Qt
 #include <QLineEdit>
 
-
 class Float64Editor : public QLineEdit
 {
-  Q_OBJECT
-  Q_PROPERTY( Float64 data READ data WRITE setData USER true )
+    Q_OBJECT
+    Q_PROPERTY(Float64 data READ data WRITE setData USER true)
 
-  public:
-    explicit Float64Editor( QWidget* parent );
+public:
+    explicit Float64Editor(QWidget* parent);
 
     ~Float64Editor() override;
 
-  public:
-    void setData( Float64 data );
+public:
+    void setData(Float64 data);
     Float64 data() const;
 };
 

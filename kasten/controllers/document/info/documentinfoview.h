@@ -31,31 +31,28 @@ class QString;
 class QMimeType;
 class QLabel;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class DocumentInfoTool;
 
-
 class DocumentInfoView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit DocumentInfoView( DocumentInfoTool* tool, QWidget* parent = nullptr );
+public:
+    explicit DocumentInfoView(DocumentInfoTool* tool, QWidget* parent = nullptr);
     ~DocumentInfoView() override;
 
-  public:
+public:
     DocumentInfoTool* tool() const;
 
-  private Q_SLOTS:
-    void onDocumentTitleChanged( const QString& documentTitle );
-    void onMimeTypeChanged( const QMimeType& mimeType );
-    void onLocationChanged( const QString& location );
-    void onDocumentSizeChanged( int newSize );
+private Q_SLOTS:
+    void onDocumentTitleChanged(const QString& documentTitle);
+    void onMimeTypeChanged(const QMimeType& mimeType);
+    void onLocationChanged(const QString& location);
+    void onDocumentSizeChanged(int newSize);
 
-  private:
+private:
     DocumentInfoTool* mTool;
 
     QLabel* mIconLabel;
@@ -64,7 +61,6 @@ class DocumentInfoView : public QWidget
     KSqueezedTextLabel* mLocationLabel;
     QLabel* mSizeLabel;
 };
-
 
 inline DocumentInfoTool* DocumentInfoView::tool() const { return mTool; }
 

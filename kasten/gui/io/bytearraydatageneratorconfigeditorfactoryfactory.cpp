@@ -33,9 +33,7 @@
 // Qt
 #include <QList>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 QList<AbstractModelDataGeneratorConfigEditorFactory*> ByteArrayDataGeneratorConfigEditorFactoryFactory::createFactorys()
 {

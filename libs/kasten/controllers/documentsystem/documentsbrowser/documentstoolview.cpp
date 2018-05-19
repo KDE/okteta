@@ -26,12 +26,10 @@
 #include "documentsview.h"
 #include "documentstool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-DocumentsToolView::DocumentsToolView( DocumentsTool* tool )
- : mWidget( new DocumentsView(tool) )
+DocumentsToolView::DocumentsToolView(DocumentsTool* tool)
+    : mWidget(new DocumentsView(tool))
 {
 }
 

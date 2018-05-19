@@ -23,19 +23,17 @@
 #ifndef GROUPPIECETABLECHANGEABSTRACTPIECETABLECHANGEIFTEST_H
 #define GROUPPIECETABLECHANGEABSTRACTPIECETABLECHANGEIFTEST_H
 
-
 // test
 #include "abstractpiecetablechangeiftest.h"
 
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 class GroupPieceTableChangeAbstractPieceTableChangeIfTest : public AbstractPieceTableChangeIfTest
 {
-  protected: // AbstractPieceTableChangeIfTest API
-    virtual AbstractPieceTableChange *createPieceTableChange();
-    virtual void deletePieceTableChange( AbstractPieceTableChange *pieceTableChange );
-    virtual void changePieceTable( PieceTable *pieceTable );
+protected: // AbstractPieceTableChangeIfTest API
+    virtual AbstractPieceTableChange* createPieceTableChange();
+    virtual void deletePieceTableChange(AbstractPieceTableChange* pieceTableChange);
+    virtual void changePieceTable(PieceTable* pieceTable);
 };
 
 }

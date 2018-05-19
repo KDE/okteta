@@ -30,34 +30,31 @@ class QPushButton;
 class QTreeView;
 class QModelIndex;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class BookmarkListModel;
 class BookmarksTool;
 
-
 class BookmarksView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit BookmarksView( BookmarksTool* tool, QWidget* parent = nullptr );
+public:
+    explicit BookmarksView(BookmarksTool* tool, QWidget* parent = nullptr);
     ~BookmarksView() override;
 
-  public:
+public:
     BookmarksTool* tool() const;
 
-  private Q_SLOTS:
-    void onBookmarkDoubleClicked( const QModelIndex& index );
+private Q_SLOTS:
+    void onBookmarkDoubleClicked(const QModelIndex& index);
     void onBookmarkSelectionChanged();
     void onCreateBookmarkButtonClicked();
     void onDeleteBookmarkButtonClicked();
     void onGotoBookmarkButtonClicked();
     void onRenameBookmarkButtonClicked();
 
-  private:
+private:
     BookmarksTool* mTool;
 
     BookmarkListModel* mBookmarkListModel;
@@ -68,7 +65,6 @@ class BookmarksView : public QWidget
     QPushButton* mGotoBookmarkButton;
     QPushButton* mRenameBookmarkButton;
 };
-
 
 inline BookmarksTool* BookmarksView::tool() const { return mTool; }
 

@@ -29,30 +29,29 @@
 // Qt
 #include <QString>
 
-
 class ContainedString
 {
-  public:
-    ContainedString( const QString &string, Okteta::Address offset );
+public:
+    ContainedString(const QString& string, Okteta::Address offset);
 
-  public:
-    void move( Okteta::Size offset );
+public:
+    void move(Okteta::Size offset);
 
-  public:
+public:
     const QString& string() const;
     Okteta::Address offset() const;
 
-  protected:
+protected:
     QString mString;
     Okteta::Address mOffset;
 };
 
-
-inline ContainedString::ContainedString( const QString &string, Okteta::Address offset )
- : mString( string ), mOffset( offset )
+inline ContainedString::ContainedString(const QString& string, Okteta::Address offset)
+    : mString(string)
+    , mOffset(offset)
 {}
 
-inline void ContainedString::move( Okteta::Size offset ) { mOffset += offset; }
+inline void ContainedString::move(Okteta::Size offset) { mOffset += offset; }
 
 inline const QString& ContainedString::string()  const { return mString; }
 inline Okteta::Address ContainedString::offset() const { return mOffset; }

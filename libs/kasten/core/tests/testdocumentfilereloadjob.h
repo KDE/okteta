@@ -26,28 +26,26 @@
 // Kasten core
 #include <abstractfilesystemsyncfromremotejob.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TestDocumentFileSynchronizer;
 class TestDocumentFileReloadThread;
 
 class TestDocumentFileReloadJob : public AbstractFileSystemSyncFromRemoteJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit TestDocumentFileReloadJob( TestDocumentFileSynchronizer* synchronizer );
+public:
+    explicit TestDocumentFileReloadJob(TestDocumentFileSynchronizer* synchronizer);
     ~TestDocumentFileReloadJob() override;
 
-  protected: // AbstractFileSystemSyncFromRemoteJob API
+protected: // AbstractFileSystemSyncFromRemoteJob API
     void startReadFromFile() override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
 //     void onDataPulled();
 
-  protected:
+protected:
     TestDocumentFileReloadThread* mLoadThread;
 };
 

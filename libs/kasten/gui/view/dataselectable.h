@@ -28,35 +28,31 @@
 
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelSelection;
 
-
-namespace If
-{
+namespace If {
 
 // TODO: this interface is strongly related to the selecteddatawriteable interface
 class DataSelectable
 {
-  public:
+public:
     virtual ~DataSelectable();
 
-  public: // set
-    virtual void selectAllData( bool selectAll ) = 0;
+public: // set
+    virtual void selectAllData(bool selectAll) = 0;
 
-  public: // get
+public: // get
     virtual bool hasSelectedData() const = 0;
-    virtual QMimeData *copySelectedData() const = 0; // TODO: move into AbstractModelSelection
+    virtual QMimeData* copySelectedData() const = 0; // TODO: move into AbstractModelSelection
     virtual const AbstractModelSelection* modelSelection() const = 0;
 
-  public: // signal
+public: // signal
     /// emitted if there is a change in whether selected data is available or not
-    virtual void hasSelectedDataChanged( bool hasSelectedData ) = 0;
+    virtual void hasSelectedDataChanged(bool hasSelectedData) = 0;
     /// emitted if the selection changes, to other data or none
-    virtual void selectedDataChanged( const AbstractModelSelection* modelSelection ) = 0;
+    virtual void selectedDataChanged(const AbstractModelSelection* modelSelection) = 0;
 };
 
 inline DataSelectable::~DataSelectable() {}
@@ -64,6 +60,6 @@ inline DataSelectable::~DataSelectable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::DataSelectable, "org.kde.kasten.if.dataselectable/1.0" )
+Q_DECLARE_INTERFACE(Kasten::If::DataSelectable, "org.kde.kasten.if.dataselectable/1.0")
 
 #endif

@@ -23,32 +23,30 @@
 #include "abstractmodelsynchronizer.h"
 #include "abstractmodelsynchronizer_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModelSynchronizer::AbstractModelSynchronizer( AbstractModelSynchronizerPrivate* d )
-  : d_ptr( d )
+AbstractModelSynchronizer::AbstractModelSynchronizer(AbstractModelSynchronizerPrivate* d)
+    : d_ptr(d)
 {
 }
 
 AbstractModelSynchronizer::AbstractModelSynchronizer()
-  : d_ptr( new AbstractModelSynchronizerPrivate(this) )
+    : d_ptr(new AbstractModelSynchronizerPrivate(this))
 {
 }
 
 QUrl AbstractModelSynchronizer::url() const
 {
-    Q_D( const AbstractModelSynchronizer );
+    Q_D(const AbstractModelSynchronizer);
 
     return d->url();
 }
 
-void AbstractModelSynchronizer::setUrl( const QUrl& url )
+void AbstractModelSynchronizer::setUrl(const QUrl& url)
 {
-    Q_D( AbstractModelSynchronizer );
+    Q_D(AbstractModelSynchronizer);
 
-    d->setUrl( url );
+    d->setUrl(url);
 }
 
 AbstractModelSynchronizer::~AbstractModelSynchronizer()

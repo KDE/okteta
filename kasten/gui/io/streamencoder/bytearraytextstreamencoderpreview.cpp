@@ -30,28 +30,28 @@
 #include <QFontDatabase>
 #include <QTextEdit>
 
-namespace Kasten
-{
+namespace Kasten {
 
-ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder )
- : mEncoder( encoder ), mModel( nullptr )
+ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview(AbstractByteArrayStreamEncoder* encoder)
+    : mEncoder(encoder)
+    , mModel(nullptr)
 {
     mWidget = new QTextEdit(); // TODO: use Kate for syntax highlighting
-    mWidget->setReadOnly( true );
-    mWidget->setLineWrapMode( QTextEdit::NoWrap );
-    mWidget->setToolTip( i18n("The preview uses maximal the first 100 bytes.") );
+    mWidget->setReadOnly(true);
+    mWidget->setLineWrapMode(QTextEdit::NoWrap);
+    mWidget->setToolTip(i18n("The preview uses maximal the first 100 bytes."));
 
     // TODO: find a signal/event emitted when fixedfont changes
 //     connect( KGlobalSettings::self(), &KGlobalSettings::kdisplayFontChanged,
 //              this, &ByteArrayTextStreamEncoderPreview::setFixedFontByGlobalSettings );
     setFixedFontByGlobalSettings();
 
-    connect( mEncoder, &AbstractByteArrayStreamEncoder::settingsChanged, this, &ByteArrayTextStreamEncoderPreview::update );
+    connect(mEncoder, &AbstractByteArrayStreamEncoder::settingsChanged, this, &ByteArrayTextStreamEncoderPreview::update);
 }
 
 QWidget* ByteArrayTextStreamEncoderPreview::widget() const { return mWidget; }
 
-void ByteArrayTextStreamEncoderPreview::setData( AbstractModel* model, const AbstractModelSelection* selection )
+void ByteArrayTextStreamEncoderPreview::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {
     mModel = model;
     mSelection = selection;
@@ -59,16 +59,16 @@ void ByteArrayTextStreamEncoderPreview::setData( AbstractModel* model, const Abs
     update();
 }
 
-
 void ByteArrayTextStreamEncoderPreview::update()
 {
-    if( mModel )
-        mWidget->setText( mEncoder->previewData(mModel,mSelection) );
+    if (mModel) {
+        mWidget->setText(mEncoder->previewData(mModel, mSelection));
+    }
 }
 
 void ByteArrayTextStreamEncoderPreview::setFixedFontByGlobalSettings()
 {
-    mWidget->setFont( QFontDatabase::systemFont(QFontDatabase::FixedFont) );
+    mWidget->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
 ByteArrayTextStreamEncoderPreview::~ByteArrayTextStreamEncoderPreview()

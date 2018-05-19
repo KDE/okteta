@@ -26,41 +26,38 @@
 #include "bytearraymodel_p.h"
 #include "arraychangemetricslist.h"
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-ByteArrayModel::ByteArrayModel( Byte* data, int size, int rawSize, bool keepMemory, QObject* parent )
-  : AbstractByteArrayModel( parent ),
-    d( new ByteArrayModelPrivate(this,data,size,rawSize,keepMemory) )
+ByteArrayModel::ByteArrayModel(Byte* data, int size, int rawSize, bool keepMemory, QObject* parent)
+    : AbstractByteArrayModel(parent)
+    , d(new ByteArrayModelPrivate(this, data, size, rawSize, keepMemory))
 {}
 
-ByteArrayModel::ByteArrayModel( const Byte* data, int size, QObject* parent )
-  : AbstractByteArrayModel( parent ),
-    d( new ByteArrayModelPrivate(this,data,size) )
+ByteArrayModel::ByteArrayModel(const Byte* data, int size, QObject* parent)
+    : AbstractByteArrayModel(parent)
+    , d(new ByteArrayModelPrivate(this, data, size))
 {}
 
-ByteArrayModel::ByteArrayModel( int size, int maxSize, QObject* parent )
-  : AbstractByteArrayModel( parent ),
-    d( new ByteArrayModelPrivate(this,size,maxSize) )
+ByteArrayModel::ByteArrayModel(int size, int maxSize, QObject* parent)
+    : AbstractByteArrayModel(parent)
+    , d(new ByteArrayModelPrivate(this, size, maxSize))
 {}
 
-
-Byte ByteArrayModel::byte( Address offset ) const { return d->byte(offset); }
-Size ByteArrayModel::size()                 const { return d->size(); }
+Byte ByteArrayModel::byte(Address offset) const { return d->byte(offset); }
+Size ByteArrayModel::size()               const { return d->size(); }
 
 bool ByteArrayModel::isReadOnly()   const { return d->isReadOnly(); }
 bool ByteArrayModel::isModified()   const { return d->isModified(); }
 
-void ByteArrayModel::setReadOnly( bool readOnly )       { d->setReadOnly( readOnly ); }
-void ByteArrayModel::setModified( bool modified )       { d->setModified( modified ); }
-void ByteArrayModel::setMaxSize( int maxSize )          { d->setMaxSize( maxSize ); }
-void ByteArrayModel::setKeepsMemory( bool keepsMemory ) { d->setKeepsMemory( keepsMemory ); }
-void ByteArrayModel::setAutoDelete( bool autoDelete )   { d->setAutoDelete( autoDelete ); }
+void ByteArrayModel::setReadOnly(bool readOnly)       { d->setReadOnly(readOnly); }
+void ByteArrayModel::setModified(bool modified)       { d->setModified(modified); }
+void ByteArrayModel::setMaxSize(int maxSize)          { d->setMaxSize(maxSize); }
+void ByteArrayModel::setKeepsMemory(bool keepsMemory) { d->setKeepsMemory(keepsMemory); }
+void ByteArrayModel::setAutoDelete(bool autoDelete)   { d->setAutoDelete(autoDelete); }
 
-void ByteArrayModel::setData( Byte* data, int size, int rawSize, bool keepMemory )
+void ByteArrayModel::setData(Byte* data, int size, int rawSize, bool keepMemory)
 {
-    d->setData( data, size, rawSize, keepMemory );
+    d->setData(data, size, rawSize, keepMemory);
 }
 
 Byte* ByteArrayModel::data()       const { return d->data(); }
@@ -68,51 +65,50 @@ int ByteArrayModel::maxSize()      const { return d->maxSize(); }
 bool ByteArrayModel::keepsMemory() const { return d->keepsMemory(); }
 bool ByteArrayModel::autoDelete()  const { return d->autoDelete(); }
 
-void ByteArrayModel::signalContentsChanged( int start, int end )
+void ByteArrayModel::signalContentsChanged(int start, int end)
 {
     const int length = end - start + 1;
-    emit contentsChanged( ArrayChangeMetricsList::oneReplacement(start,length,length) );
+    emit contentsChanged(ArrayChangeMetricsList::oneReplacement(start, length, length));
 }
 
-
-void ByteArrayModel::setByte( Address offset, Byte byte )
+void ByteArrayModel::setByte(Address offset, Byte byte)
 {
-    d->setByte( offset, byte );
+    d->setByte(offset, byte);
 }
 
-Size ByteArrayModel::insert( Address offset, const Byte* insertData, int insertLength )
+Size ByteArrayModel::insert(Address offset, const Byte* insertData, int insertLength)
 {
-    return d->insert( offset, insertData, insertLength );
+    return d->insert(offset, insertData, insertLength);
 }
 
-Size ByteArrayModel::remove( const AddressRange& removeRange )
+Size ByteArrayModel::remove(const AddressRange& removeRange)
 {
-    return d->remove( removeRange );
+    return d->remove(removeRange);
 }
 
-Size ByteArrayModel::replace( const AddressRange& removeRange, const Byte* insertData, int insertLength )
+Size ByteArrayModel::replace(const AddressRange& removeRange, const Byte* insertData, int insertLength)
 {
-    return d->replace( removeRange, insertData, insertLength );
+    return d->replace(removeRange, insertData, insertLength);
 }
 
-bool ByteArrayModel::swap( Address firstStart, const AddressRange& secondRange )
+bool ByteArrayModel::swap(Address firstStart, const AddressRange& secondRange)
 {
-    return d->swap( firstStart, secondRange );
+    return d->swap(firstStart, secondRange);
 }
 
-Size ByteArrayModel::fill( Byte fillByte, Address offset, Size fillLength )
+Size ByteArrayModel::fill(Byte fillByte, Address offset, Size fillLength)
 {
-    return d->fill( fillByte, offset, fillLength );
+    return d->fill(fillByte, offset, fillLength);
 }
 
-void ByteArrayModel::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
+void ByteArrayModel::addBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
-    d->addBookmarks( bookmarks );
+    d->addBookmarks(bookmarks);
 }
 
-void ByteArrayModel::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
+void ByteArrayModel::removeBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
-    d->removeBookmarks( bookmarks );
+    d->removeBookmarks(bookmarks);
 }
 
 void ByteArrayModel::removeAllBookmarks()
@@ -120,9 +116,9 @@ void ByteArrayModel::removeAllBookmarks()
     d->removeAllBookmarks();
 }
 
-void ByteArrayModel::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
+void ByteArrayModel::setBookmark(unsigned int index, const Okteta::Bookmark& bookmark)
 {
-    d->setBookmark( index, bookmark );
+    d->setBookmark(index, bookmark);
 }
 
 Okteta::BookmarksConstIterator ByteArrayModel::createBookmarksConstIterator() const
@@ -130,19 +126,19 @@ Okteta::BookmarksConstIterator ByteArrayModel::createBookmarksConstIterator() co
     return d->createBookmarksConstIterator();
 }
 
-const Okteta::Bookmark& ByteArrayModel::bookmarkFor( int offset ) const
+const Okteta::Bookmark& ByteArrayModel::bookmarkFor(int offset) const
 {
-    return d->bookmarkFor( offset );
+    return d->bookmarkFor(offset);
 }
 
-const Okteta::Bookmark& ByteArrayModel::bookmarkAt( unsigned int index ) const
+const Okteta::Bookmark& ByteArrayModel::bookmarkAt(unsigned int index) const
 {
-    return d->bookmarkAt( index );
+    return d->bookmarkAt(index);
 }
 
-bool ByteArrayModel::containsBookmarkFor( int offset ) const
+bool ByteArrayModel::containsBookmarkFor(int offset) const
 {
-    return d->containsBookmarkFor( offset );
+    return d->containsBookmarkFor(offset);
 }
 
 unsigned int ByteArrayModel::bookmarksCount() const

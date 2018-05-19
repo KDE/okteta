@@ -23,7 +23,6 @@
 #ifndef ABSTRACTBYTEARRAYFILTERPARAMETERSETEDIT_H
 #define ABSTRACTBYTEARRAYFILTERPARAMETERSETEDIT_H
 
-
 // Qt
 #include <QWidget>
 
@@ -31,30 +30,30 @@ class AbstractByteArrayFilterParameterSet;
 
 class AbstractByteArrayFilterParameterSetEdit : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    explicit AbstractByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
-  public:
+protected:
+    explicit AbstractByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);
+
+public:
     ~AbstractByteArrayFilterParameterSetEdit() override;
 
-  public: // API to be implemented
-    virtual void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) = 0;
+public: // API to be implemented
+    virtual void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) = 0;
     /// default does nothing
-    virtual void setCharCodec( const QString &charCodecName );
-    virtual void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const = 0;
+    virtual void setCharCodec(const QString& charCodecName);
+    virtual void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const = 0;
     /// default returns true
     virtual bool isValid() const;
     /// default is a noop
     virtual void rememberCurrentSettings();
 
+Q_SIGNALS:
+    void validityChanged(bool isValid);
 
-  Q_SIGNALS:
-    void validityChanged( bool isValid );
-
-  protected:
+protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 #endif

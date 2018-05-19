@@ -28,20 +28,18 @@
 // Qt
 #include <QPalette>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class PrintColumnStylist : public Okteta::AbstractColumnStylist
 {
-  public:
+public:
     PrintColumnStylist();
     ~PrintColumnStylist() override;
 
-  public: // AbstractColumnStylist API
+public: // AbstractColumnStylist API
     const QPalette& palette() const override;
 
-  protected:
+protected:
     QPalette mPalette;
 };
 

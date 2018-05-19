@@ -42,29 +42,26 @@ class KAction;
 class QActionGroup;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private:
+private:
     static const int MaxEntryLength = 150;
     static const int MaxBookmarkNameSize = 40;
 
-  public:
-    explicit BookmarksController( KXMLGUIClient* guiClient );
+public:
+    explicit BookmarksController(KXMLGUIClient* guiClient);
     ~BookmarksController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void createBookmark();
     void deleteBookmark();
     void deleteAllBookmarks();
@@ -72,18 +69,18 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
     void gotoPreviousBookmark();
 
     void updateBookmarks();
-    void onBookmarkTriggered( QAction* );
+    void onBookmarkTriggered(QAction*);
 
-  private Q_SLOTS:
-    void onBookmarksAdded( const QList<Okteta::Bookmark> &bookmarks );
-    void onBookmarksRemoved( const QList<Okteta::Bookmark> &bookmarks );
-    void onCursorPositionChanged( Okteta::Address newPosition );
+private Q_SLOTS:
+    void onBookmarksAdded(const QList<Okteta::Bookmark>& bookmarks);
+    void onBookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks);
+    void onCursorPositionChanged(Okteta::Address newPosition);
 
-  private:
+private:
     KXMLGUIClient* mGuiClient;
     ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel *mByteArray;
-    Okteta::Bookmarkable *mBookmarks;
+    Okteta::AbstractByteArrayModel* mByteArray;
+    Okteta::Bookmarkable* mBookmarks;
 
     QAction* mCreateAction;
     QAction* mDeleteAction;
@@ -92,7 +89,7 @@ class OKTETAKASTENCONTROLLERS_EXPORT BookmarksController : public AbstractXmlGui
     QAction* mGotoNextBookmarkAction;
     QAction* mGotoPreviousBookmarkAction;
 
-    QActionGroup *mBookmarksActionGroup;
+    QActionGroup* mBookmarksActionGroup;
 };
 
 }

@@ -28,9 +28,7 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 CharsetConversionToolViewFactory::CharsetConversionToolViewFactory() {}
 
@@ -39,9 +37,9 @@ QString CharsetConversionToolViewFactory::title()    const { return i18nc("@titl
 QString CharsetConversionToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.CharsetConversionToolView"); }
 SidePosition CharsetConversionToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* CharsetConversionToolViewFactory::create( AbstractTool* tool )
+AbstractToolView* CharsetConversionToolViewFactory::create(AbstractTool* tool)
 {
-    return new CharsetConversionToolView( qobject_cast<CharsetConversionTool*>(tool) );
+    return new CharsetConversionToolView(qobject_cast<CharsetConversionTool*>(tool));
 }
 
 CharsetConversionToolViewFactory::~CharsetConversionToolViewFactory() {}

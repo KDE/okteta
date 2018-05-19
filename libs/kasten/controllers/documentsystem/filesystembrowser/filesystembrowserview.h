@@ -33,33 +33,30 @@ class KFileItem;
 class KActionCollection;
 class KToolBar;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class FileSystemBrowserTool;
 
-
 class FileSystemBrowserView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit FileSystemBrowserView( FileSystemBrowserTool* tool, QWidget* parent = nullptr );
+public:
+    explicit FileSystemBrowserView(FileSystemBrowserTool* tool, QWidget* parent = nullptr);
     ~FileSystemBrowserView() override;
 
-  public:
+public:
     FileSystemBrowserTool* tool() const;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void init();
 
-    void setDirOperatorUrl( const QUrl& url );
-    void setNavigatorUrl( const QUrl& url );
+    void setDirOperatorUrl(const QUrl& url);
+    void setNavigatorUrl(const QUrl& url);
     void syncCurrentDocumentDirectory();
-    void openFile( const KFileItem& fileItem );
+    void openFile(const KFileItem& fileItem);
 
-  private:
+private:
     FileSystemBrowserTool* const mTool;
 
     KActionCollection* mActionCollection;
@@ -67,7 +64,6 @@ class FileSystemBrowserView : public QWidget
     KDirOperator* mDirOperator;
     KUrlNavigator* mUrlNavigator;
 };
-
 
 inline FileSystemBrowserTool* FileSystemBrowserView::tool() const { return mTool; }
 

@@ -30,12 +30,9 @@
 
 class QIcon;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractLinePopupPrivate;
-
 
 // TODO: find better name then popup for this kind of view
 // TODO: add cancel/ok button concept of KDialog, add to the right end
@@ -45,29 +42,29 @@ class AbstractLinePopupPrivate;
 // a minimal dialog
 class KASTENGUI_EXPORT AbstractLinePopup : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit AbstractLinePopup( QWidget* parent = nullptr );
+public:
+    explicit AbstractLinePopup(QWidget* parent = nullptr);
     ~AbstractLinePopup() override;
 
-  public:
-    void setIcon( const QIcon& icon );
-    void setPosition( const QPoint& globalPosition );
-    void setWidget( QWidget* widget );
+public:
+    void setIcon(const QIcon& icon);
+    void setPosition(const QPoint& globalPosition);
+    void setWidget(QWidget* widget);
 
     int exec();
 
-  protected: // QObject API
-    bool eventFilter( QObject* object, QEvent* event ) override;
+protected: // QObject API
+    bool eventFilter(QObject* object, QEvent* event) override;
 
-  protected: // QWidget API
-    void setVisible( bool visible ) override;
+protected: // QWidget API
+    void setVisible(bool visible) override;
 
-  protected:
-    void setResult( int result );
+protected:
+    void setResult(int result);
 
-  private:
+private:
     AbstractLinePopupPrivate* const d;
 };
 

@@ -23,99 +23,102 @@
 #ifndef KDE_RANGE_H
 #define KDE_RANGE_H
 
-
-namespace KDE
-{
+namespace KDE {
 
 /** This template describes a range.
-  * A range is something with a start and an end.
-  * The start is a value relative before the end.
-  * The distance cannot be estimated.
-  *
-  *@author Friedrich W. H.  Kossebau
-  */
-template<typename T>
+ * A range is something with a start and an end.
+ * The start is a value relative before the end.
+ * The distance cannot be estimated.
+ *
+ * @author Friedrich W. H.  Kossebau
+*/
+template <typename T>
 class Range
 {
-  public:
-    Range( T S, T E ) : Start( S ), End( E )  {}
-    Range() : Start( null() ), End( null() )  {}
+public:
+    Range(T S, T E)
+        : Start(S)
+        , End(E)
+    {}
+    Range()
+        : Start(null())
+        , End(null())
+    {}
     ~Range() {}
 
-  public:
-    Range &operator=( const Range &R ) { Start = R.Start; End = R.End; return *this; }
+public:
+    Range& operator=(const Range& R) { Start = R.Start; End = R.End; return *this; }
 
-  public:
-    bool operator==( const Range &R ) const
-         { return (Start == R.Start && End == R.End) || (!isValid() && !R.isValid()); }
+public:
+    bool operator==(const Range& R) const
+    { return (Start == R.Start && End == R.End) || (!isValid() && !R.isValid()); }
 
-  public: // modification access
+public: // modification access
     /** sets the first and the last index of the range */
-    void set( T S, T E ) { Start = S; End = E; }
+    void set(T S, T E) { Start = S; End = E; }
     /** sets the first and the last index of the range */
-    void set( const Range &R ) { Start = R.Start; End = R.End; }
+    void set(const Range& R) { Start = R.Start; End = R.End; }
     /** sets the first index of the range */
-    void setStart( T S )  { Start = S; }
+    void setStart(T S)  { Start = S; }
     /** sets the last index of the range */
-    void setEnd( T E )    { End = E; }
+    void setEnd(T E)    { End = E; }
     /** sets the range to null */
     void unset()           { Start = End = null(); }
     /** restricts the range to Limit. If one of both ranges is invalid the behaviour is undefined */
-    void restrictTo( const Range &Limit )
-    { if( Start < Limit.start() ) Start = Limit.start(); if( End > Limit.end() ) End = Limit.end(); }
+    void restrictTo(const Range& Limit)
+    { if (Start < Limit.start()) {Start = Limit.start();} if (End > Limit.end()) {End = Limit.end();}}
     /** restricts the start to Limit. If the range is invalid the behaviour is undefined */
-    void restrictStartTo( T Limit )  { if( Start < Limit ) Start = Limit; }
+    void restrictStartTo(T Limit)  { if (Start < Limit) {Start = Limit;}}
     /** restricts the end to Limit. If the range is invalid the behaviour is undefined */
-    void restrictEndTo( T Limit )    { if( End > Limit ) End = Limit; }
+    void restrictEndTo(T Limit)    { if (End > Limit) {End = Limit;}}
     /** extends the range to Limit. If one of both is invalid the behaviour is undefined */
-    void extendTo( const Range &Limit )
-    { if( Start > Limit.start() ) Start = Limit.start(); if( End < Limit.end() ) End = Limit.end(); }
+    void extendTo(const Range& Limit)
+    { if (Start > Limit.start()) {Start = Limit.start();} if (End < Limit.end()) {End = Limit.end();}}
     /** extends the start to Limit. If the range is invalid the behaviour is undefined */
-    void extendStartTo( T Limit )  { if( Start > Limit ) Start = Limit; }
+    void extendStartTo(T Limit)  { if (Start > Limit) {Start = Limit;}}
     /** extends the end to Limit. If the range is invalid the behaviour is undefined */
-    void extendEndTo( T Limit )    { if( End < Limit ) End = Limit; }
+    void extendEndTo(T Limit)    { if (End < Limit) {End = Limit;}}
     /** moves the start by D. If the range is invalid the behaviour is undefined */
-    void moveStartBy( T D )  { Start += D; }
+    void moveStartBy(T D)  { Start += D; }
     /** moves the end by D. If the range is invalid the behaviour is undefined */
-    void moveEndBy( T D )    { End += D; }
+    void moveEndBy(T D)    { End += D; }
     /** moves the range by D. If the range is invalid the behaviour is undefined */
-    void moveBy( T D )      { Start += D; End += D; }
+    void moveBy(T D)      { Start += D; End += D; }
 
-  public: // value access
+public: // value access
     /** @return start */
     T start() const { return Start; }
     /** @return end */
-    T end() const   { return End; }
+    T end()   const { return End; }
 
-
-  public: // logic access
+public: // logic access
     /** returns true if Value is covered */
-    bool includes( T Value )     const { return Start <= Value && Value <= End; }
+    bool includes(T Value)       const { return Start <= Value && Value <= End; }
     /** returns true if Value is covered and not at a side */
-    bool includesInside( T Value )     const { return Start < Value && Value < End; }
+    bool includesInside(T Value) const { return Start < Value && Value < End; }
     /** returns true if range is behind index. if range is invalid the behaviour is undefined */
-    bool startsBehind( T Value ) const { return Value < Start; }
+    bool startsBehind(T Value)   const { return Value < Start; }
     /** returns true is the range starts before index. If the range is invalid the behaviour is undefined */
-    bool startsBefore( T Value ) const { return Start < Value; }
+    bool startsBefore(T Value)   const { return Start < Value; }
     /** returns true if the range ends later than index. If the range is invalid the behaviour is undefined */
-    bool endsBehind( T Value )   const { return Value < End; }
+    bool endsBehind(T Value)     const { return Value < End; }
     /** returns true if range is before index. if range is invalid the behaviour is undefined */
-    bool endsBefore( T Value )   const { return End < Value; }
+    bool endsBefore(T Value)     const { return End < Value; }
 
     /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
-    bool includes( const Range &R )     const { return R.End <= End && Start <= R.Start; }
+    bool includes(const Range& R)       const { return R.End <= End && Start <= R.Start; }
     /** returns true is the range covers R. If one of both is invalid the behaviour is undefined */
-    bool includesInside( const Range &R ) const { return R.End < End && Start < R.Start; }
+    bool includesInside(const Range& R) const { return R.End < End && Start < R.Start; }
     /** returns true is the range ends before R starts. If one of both is invalid the behaviour is undefined */
-    bool endsBefore( const Range &R )   const { return End < R.Start; }
+    bool endsBefore(const Range& R)     const { return End < R.Start; }
     /** returns true is the range starts later than R ends. If one of both is invalid the behaviour is undefined */
-    bool startsBehind( const Range &R ) const { return R.End < Start; }
+    bool startsBehind(const Range& R) const { return R.End < Start; }
     /** returns true is the range starts prior than R. If one of both is invalid the behaviour is undefined */
-    bool startsBefore( const Range &R ) const { return Start < R.Start; }
+    bool startsBefore(const Range& R) const { return Start < R.Start; }
     /** returns true is the range ends later than R. If one of both is invalid the behaviour is undefined */
-    bool endsBehind( const Range &R )   const { return R.End < End; }
+    bool endsBehind(const Range& R)   const { return R.End < End; }
     /** returns true is the range shares at least one index with R. If one of both is invalid the behaviour is undefined */
-    bool overlaps( const Range &R ) const { return Start <= R.End && R.Start <= End; }
+    bool overlaps(const Range& R) const { return Start <= R.End && R.Start <= End; }
 
     // TODO: this is wrong, a empty range is valid, too
     /** returns true if the range covers at least one index */
@@ -123,12 +126,11 @@ class Range
     /** returns true if the range has not been set */
     bool isEmpty() const { return Start == null() && End == null(); }
 
-
-  protected:
+protected:
     /** delivers a null element. Should be specialiced for complexer types. */
-    const T null () const { return T(-1);}
+    const T null() const { return T(-1);}
 
-  protected:
+protected:
     /** first value of the range */
     T Start;
     /** last value of the range */

@@ -33,18 +33,15 @@ class Bookmark;
 }
 template <class T> class QList;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class BookmarksTool;
 
-
 class BookmarkListModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ColumnIds
     {
         OffsetColumnId = 0,
@@ -52,36 +49,36 @@ class BookmarkListModel : public QAbstractTableModel
         NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
     };
 
-  public:
-    explicit BookmarkListModel( BookmarksTool* tool, QObject* parent = nullptr );
+public:
+    explicit BookmarkListModel(BookmarksTool* tool, QObject* parent = nullptr);
     ~BookmarkListModel() override;
 
-  public: // QAbstractTableModel API
-    int rowCount( const QModelIndex& parent ) const override;
-    int columnCount( const QModelIndex& parent ) const override;
-    QVariant data( const QModelIndex& index, int role ) const override;
-    Qt::ItemFlags flags( const QModelIndex& index ) const override;
-    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
-    bool setData( const QModelIndex& index, const QVariant& value, int role ) override;
+public: // QAbstractTableModel API
+    int rowCount(const QModelIndex& parent) const override;
+    int columnCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
+    Qt::ItemFlags flags(const QModelIndex& index) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    bool setData(const QModelIndex& index, const QVariant& value, int role) override;
 
-  public:
-    const Okteta::Bookmark& bookmark( const QModelIndex& index ) const;
-    QModelIndex index( const Okteta::Bookmark& bookmark, int column = BookmarkListModel::TitleColumnId ) const;
+public:
+    const Okteta::Bookmark& bookmark(const QModelIndex& index) const;
+    QModelIndex index(const Okteta::Bookmark& bookmark, int column = BookmarkListModel::TitleColumnId) const;
     using QAbstractTableModel::index;
 
-  private Q_SLOTS:
-    void onHasBookmarksChanged( bool hasBookmarks );
+private Q_SLOTS:
+    void onHasBookmarksChanged(bool hasBookmarks);
     void onBookmarksChanged();
-    void onBookmarksChanged( const QList<int>& bookmarkIndizes );
+    void onBookmarksChanged(const QList<int>& bookmarkIndizes);
 //     void onHeadVersionChanged( int newHeadVersionIndex );
 //     void onHeadVersionDataChanged( const DocumentVersionData &newVersionData );
-    void onOffsetCodingChanged( int offsetCoding );
+    void onOffsetCodingChanged(int offsetCoding);
 
-  private:
+private:
     BookmarksTool* mTool;
 
     Okteta::OffsetFormat::print mPrintFunction;
-    mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth+1];
+    mutable char mCodedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];
 };
 
 }

@@ -28,36 +28,38 @@
 
 class QShortcut;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ViewAreaBox : public QWidget
 {
     Q_OBJECT
 
-  public:
-    enum Area { TopArea, BottomArea };
+public:
+    enum Area
+    {
+        TopArea,
+        BottomArea
+    };
 
-  public:
+public:
     /// does not take ownership of @p centralWidget, can be 0.
-    explicit ViewAreaBox( QWidget* centralWidget, QWidget* parent = nullptr );
+    explicit ViewAreaBox(QWidget* centralWidget, QWidget* parent = nullptr);
     ~ViewAreaBox() override;
 
-  public:
+public:
     QWidget* centralWidget() const;
     QWidget* bottomWidget() const;
 
-  public:
+public:
     /// does not take ownership of @p centralWidget, can be 0.
-    void setCentralWidget( QWidget* centralWidget );
+    void setCentralWidget(QWidget* centralWidget);
     /// takes ownership of @p bottomWidget, deletes current bottom widget. Can be 0.
-    void setBottomWidget( QWidget* bottomWidget );
+    void setBottomWidget(QWidget* bottomWidget);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onDone();
 
-  protected:
+protected:
     QWidget* mCentralWidget;
 
     QWidget* mBottomWidget;

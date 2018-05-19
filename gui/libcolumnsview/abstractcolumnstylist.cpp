@@ -23,17 +23,15 @@
 #include "abstractcolumnstylist.h"
 #include "abstractcolumnstylist_p.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 AbstractColumnStylist::AbstractColumnStylist()
-  : d_ptr( new AbstractColumnStylistPrivate() )
+    : d_ptr(new AbstractColumnStylistPrivate())
 {
 }
 
-AbstractColumnStylist::AbstractColumnStylist( AbstractColumnStylistPrivate* d )
-  : d_ptr( d )
+AbstractColumnStylist::AbstractColumnStylist(AbstractColumnStylistPrivate* d)
+    : d_ptr(d)
 {
 }
 

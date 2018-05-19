@@ -41,93 +41,89 @@ class CharCodec;
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractDifferentSizeDialog;
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const int MaxPODSize = sizeof(double);
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
     using Aligned64Bit = union { unsigned char Data[MaxPODSize]; double Dummy; };
 
-  public:
+public:
     PODDecoderTool();
 
     ~PODDecoderTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public:
+public:
     bool isApplyable() const; // candidate for AbstractTool API
     bool isReadOnly() const;
-    QVariant value( int podId ) const;
-    QString nameOfPOD( int podId ) const;
+    QVariant value(int podId) const;
+    QString nameOfPOD(int podId) const;
     int podCount() const;
 
     bool isUnsignedAsHex() const;
     QSysInfo::Endian byteOrder() const;
     Okteta::CharCodec* charCodec() const;
 
-  public:
-    void setData( const QVariant& data, int podId );
-    void markPOD( int podId );
+public:
+    void setData(const QVariant& data, int podId);
+    void markPOD(int podId);
     void unmarkPOD();
 
-    void setDifferentSizeDialog( AbstractDifferentSizeDialog* differentSizeDialog );
+    void setDifferentSizeDialog(AbstractDifferentSizeDialog* differentSizeDialog);
 
-  public Q_SLOTS:
-    void setUnsignedAsHex( bool unsignedAsHex );
-    void setByteOrder( int byteOrder );
+public Q_SLOTS:
+    void setUnsignedAsHex(bool unsignedAsHex);
+    void setByteOrder(int byteOrder);
 
-  Q_SIGNALS: // changes to the setting currently not signalled, because only controlled by view
-    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
-    void readOnlyChanged( bool isReadOnly );
+Q_SIGNALS: // changes to the setting currently not signalled, because only controlled by view
+    void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
+    void readOnlyChanged(bool isReadOnly);
     void dataChanged();
 
-  private:
+private:
     void updateData();
     void setupDecoder();
 
-  private Q_SLOTS:
-    void onCursorPositionChange( Okteta::Address pos );
+private Q_SLOTS:
+    void onCursorPositionChange(Okteta::Address pos);
     void onContentsChange();
     void onReadOnlyChanged();
 
-    void onCharCodecChange( const QString& codecName );
+    void onCharCodecChange(const QString& codecName);
 //     void onUndefinedCharChanged( const QChar& undefinedChar );
 
-  private: // source
+private: // source
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
     Okteta::Address mCursorIndex;
 
-    bool mReadOnly :1;
-    bool mIsPodMarked :1;
+    bool mReadOnly : 1;
+    bool mIsPodMarked : 1;
 
     QVector<Okteta::AbstractTypeCodec*> mTypeCodecs;
     Okteta::CharCodec* mCharCodec;
     AbstractDifferentSizeDialog* mDifferentSizeDialog;
 
-  private: // settings
-    bool mUnsignedAsHex :1;
+private: // settings
+    bool mUnsignedAsHex : 1;
 
-  private: // decoded data
+private: // decoded data
     Okteta::PODData mPODData;
     QVector<QVariant> mDecodedValueList;
     QVector<int> mDecodedValueByteCountList;
 };
-
 
 inline bool PODDecoderTool::isUnsignedAsHex() const { return mUnsignedAsHex; }
 inline QSysInfo::Endian PODDecoderTool::byteOrder() const { return mPODData.byteOrder(); }

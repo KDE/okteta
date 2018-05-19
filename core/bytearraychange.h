@@ -29,55 +29,52 @@
 // Qt
 #include <QByteArray>
 
-namespace Okteta
-{
+namespace Okteta {
 
 // TODO: do we need the invalid status?
 // TODO: what about grouped changes
 // TODO: use change names from original? Only if local are not available
 class OKTETACORE_EXPORT ByteArrayChange
 {
-    friend QDataStream& operator<<( QDataStream& outStream, const ByteArrayChange& change );
-    friend QDataStream& operator>>( QDataStream& inStream, ByteArrayChange& change );
+    friend QDataStream& operator<<(QDataStream& outStream, const ByteArrayChange& change);
+    friend QDataStream& operator>>(QDataStream& inStream, ByteArrayChange& change);
 
-  public:
+public:
     ByteArrayChange();
-    explicit ByteArrayChange( const ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray() );
+    explicit ByteArrayChange(const ArrayChangeMetrics& metrics, const QByteArray& data = QByteArray());
 
-  public:
+public:
     const ArrayChangeMetrics& metrics() const;
     const QByteArray& data() const;
 
-  protected:
+protected:
     ArrayChangeMetrics mMetrics;
     QByteArray mData;
 //     UserId mUserId;
 //      mTime;
 };
 
-
 inline ByteArrayChange::ByteArrayChange()
 {}
 
-inline ByteArrayChange::ByteArrayChange( const ArrayChangeMetrics& metrics, const QByteArray& data )
-  : mMetrics( metrics ),
-    mData( data )
+inline ByteArrayChange::ByteArrayChange(const ArrayChangeMetrics& metrics, const QByteArray& data)
+    : mMetrics(metrics)
+    , mData(data)
 {}
 
 inline const ArrayChangeMetrics& ByteArrayChange::metrics() const { return mMetrics; }
 inline const QByteArray& ByteArrayChange::data()            const { return mData; }
 
+QDataStream& operator<<(QDataStream& outStream, const ByteArrayChange& change);
+QDataStream& operator>>(QDataStream& inStream, ByteArrayChange& change);
 
-QDataStream& operator<<( QDataStream& outStream, const ByteArrayChange& change );
-QDataStream& operator>>( QDataStream& inStream, ByteArrayChange& change );
-
-inline QDataStream& operator<<( QDataStream& outStream, const ByteArrayChange& change )
+inline QDataStream& operator<<(QDataStream& outStream, const ByteArrayChange& change)
 {
     outStream << change.mMetrics << change.mData;
     return outStream;
 }
 
-inline QDataStream& operator>>( QDataStream& inStream, ByteArrayChange& change )
+inline QDataStream& operator>>(QDataStream& inStream, ByteArrayChange& change)
 {
     inStream >> change.mMetrics >> change.mData;
     return inStream;

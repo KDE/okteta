@@ -31,42 +31,39 @@
 class QAction;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelSynchronizer;
 class AbstractModelFileSystemSynchronizer;
 class DocumentSyncManager;
 class AbstractDocument;
 
-
 class KASTENCONTROLLERS_EXPORT SynchronizeController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient );
+public:
+    SynchronizeController(DocumentSyncManager* syncManager, KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void save();
     void reload();
 
-  private Q_SLOTS:
-    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
-    void onSynchronizerDeleted( QObject* synchronizer );
+private Q_SLOTS:
+    void onSynchronizerChanged(Kasten::AbstractModelSynchronizer* newSynchronizer);
+    void onSynchronizerDeleted(QObject* synchronizer);
     void onSyncStateChanged();
 
-  private:
+private:
     DocumentSyncManager* mSyncManager;
     AbstractDocument* mDocument;
     AbstractModelFileSystemSynchronizer* mSynchronizer;
 
-    QAction *mSaveAction;
-    QAction *mReloadAction;
+    QAction* mSaveAction;
+    QAction* mReloadAction;
 };
 
 }

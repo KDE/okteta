@@ -25,8 +25,7 @@
 // lib
 #include "poddecodertool.h"
 
-namespace Kasten
-{
+namespace Kasten {
 
 PodDecoderToolFactory::PodDecoderToolFactory() {}
 

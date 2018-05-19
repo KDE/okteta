@@ -29,34 +29,32 @@
 #include <QByteArray>
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TestDocument : public AbstractDocument
 {
     Q_OBJECT
 
-  public:
+public:
     TestDocument();
-    explicit TestDocument( const QByteArray& data );
+    explicit TestDocument(const QByteArray& data);
     ~TestDocument() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     QString title() const override;
     QString typeName() const override;
     QString mimeType() const override;
     ContentFlags contentFlags() const override;
 
-  public:
+public:
     const QByteArray* data() const;
-    void setData( const QByteArray& data );
+    void setData(const QByteArray& data);
 
-  public: // instruction functions
-    void setTitle( const QString& title );
-    void setContentFlags( ContentFlags contentFlags );
+public: // instruction functions
+    void setTitle(const QString& title);
+    void setContentFlags(ContentFlags contentFlags);
 
-  protected:
+protected:
     QString mTitle;
     QByteArray mData;
     ContentFlags mContentFlags;

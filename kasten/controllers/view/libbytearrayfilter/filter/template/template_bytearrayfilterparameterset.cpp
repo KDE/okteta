@@ -12,17 +12,15 @@
 #include "template_bytearrayfilterparameterset.h"
 //// ADAPT(end)
 
-
 //// ADAPT(start)
 //// define the default values for all parameters
 static const unsigned int DefaultLevel = 127;
 //// ADAPT(end)
 
-
 Template_ByteArrayFilterParameterSet::Template_ByteArrayFilterParameterSet()
 //// ADAPT(start)
 //// set default values to all parameters
-  : mLevel( DefaultLevel )
+    : mLevel(DefaultLevel)
 //// ADAPT(end)
 {}
 
@@ -32,17 +30,14 @@ Template_ByteArrayFilterParameterSet::Template_ByteArrayFilterParameterSet()
 const char* Template_ByteArrayFilterParameterSet::id() const { return "Template_ParameterSetId"; }
 //// ADAPT(end)
 
-
 //// ADAPT(start)
 //// implement the getters for all parameters
 unsigned char Template_ByteArrayFilterParameterSet::level() const { return mLevel; }
 //// ADAPT(end)
 
-
 //// ADAPT(start)
 //// implement the setters for all parameters
-void Template_ByteArrayFilterParameterSet::setLevel( unsigned int level ) { mLevel = level; }
+void Template_ByteArrayFilterParameterSet::setLevel(unsigned int level) { mLevel = level; }
 //// ADAPT(end)
-
 
 Template_ByteArrayFilterParameterSet::~Template_ByteArrayFilterParameterSet() {}

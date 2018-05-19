@@ -34,33 +34,30 @@ class QPushButton;
 
 class QCheckBox;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class GotoOffsetTool;
 
-
 class GotoOffsetView : public AbstractToolWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit GotoOffsetView( GotoOffsetTool* tool, QWidget* parent = nullptr );
+public:
+    explicit GotoOffsetView(GotoOffsetTool* tool, QWidget* parent = nullptr);
     ~GotoOffsetView() override;
 
-  public:
+public:
     GotoOffsetTool* tool() const;
 
-  private Q_SLOTS: // gui
+private Q_SLOTS: // gui
     void onGotoButtonClicked();
-    void onFormatChanged( int index );
-    void onAddressTypeChanged( int newType );
+    void onFormatChanged(int index);
+    void onAddressTypeChanged(int newType);
 
-  private Q_SLOTS: // tool
-    void onApplyableChanged( bool isApplyable );
+private Q_SLOTS: // tool
+    void onApplyableChanged(bool isApplyable);
 
-  private:
+private:
     GotoOffsetTool* mTool;
 
     Okteta::AddressComboBox* mAddressEdit;
@@ -69,7 +66,6 @@ class GotoOffsetView : public AbstractToolWidget
     QCheckBox* mExtendSelectionCheckBox;
     QCheckBox* mBackwardsCheckBox;
 };
-
 
 inline GotoOffsetTool* GotoOffsetView::tool() const { return mTool; }
 

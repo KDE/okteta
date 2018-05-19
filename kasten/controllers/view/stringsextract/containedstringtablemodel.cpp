@@ -25,23 +25,21 @@
 // KF5
 #include <KLocalizedString>
 
-
-ContainedStringTableModel::ContainedStringTableModel( const QList<ContainedString> *containedStringList,
-                                                      int offsetCoding,
-                                                      QObject *parent )
- : QAbstractTableModel( parent ),
-   mContainedStringList( containedStringList )
+ContainedStringTableModel::ContainedStringTableModel(const QList<ContainedString>* containedStringList,
+                                                     int offsetCoding,
+                                                     QObject* parent)
+    : QAbstractTableModel(parent)
+    , mContainedStringList(containedStringList)
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)offsetCoding );
+    mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
 }
 
-void ContainedStringTableModel::setOffsetCoding( int offsetCoding )
+void ContainedStringTableModel::setOffsetCoding(int offsetCoding)
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction( (Okteta::OffsetFormat::Format)offsetCoding );
+    mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
     beginResetModel();
     endResetModel();
 }
-
 
 void ContainedStringTableModel::update()
 {
@@ -49,49 +47,45 @@ void ContainedStringTableModel::update()
     endResetModel();
 }
 
-
-int ContainedStringTableModel::rowCount( const QModelIndex &parent ) const
+int ContainedStringTableModel::rowCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? mContainedStringList->size() : 0;
+    return (!parent.isValid()) ? mContainedStringList->size() : 0;
 }
 
-int ContainedStringTableModel::columnCount( const QModelIndex &parent ) const
+int ContainedStringTableModel::columnCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? NoOfColumnIds : 0;
+    return (!parent.isValid()) ? NoOfColumnIds : 0;
 }
 
-QVariant ContainedStringTableModel::data( const QModelIndex &index, int role ) const
+QVariant ContainedStringTableModel::data(const QModelIndex& index, int role) const
 {
     QVariant result;
-    if( role == Qt::DisplayRole
-        || role == Qt::ToolTipRole )
-    {
+    if (role == Qt::DisplayRole
+        || role == Qt::ToolTipRole) {
         const int stringIndex = index.row();
 
-        if( 0 <= stringIndex && stringIndex < mContainedStringList->size() )
-        {
-            const ContainedString &string = mContainedStringList->at( stringIndex );
+        if (0 <= stringIndex && stringIndex < mContainedStringList->size()) {
+            const ContainedString& string = mContainedStringList->at(stringIndex);
 
             const int column = index.column();
-            switch( column )
+            switch (column)
             {
-                case OffsetColumnId:
-                {
-                    if( role == Qt::DisplayRole )
-                    {
-                        mPrintFunction( mCodedOffset, string.offset() );
+            case OffsetColumnId:
+            {
+                if (role == Qt::DisplayRole) {
+                    mPrintFunction(mCodedOffset, string.offset());
 
-                        result = QString::fromLatin1( mCodedOffset );
-                    }
-                    break;
+                    result = QString::fromLatin1(mCodedOffset);
                 }
-                case StringColumnId:
-                {
-                    result = string.string();
-                    break;
-                }
-                default:
-                    ;
+                break;
+            }
+            case StringColumnId:
+            {
+                result = string.string();
+                break;
+            }
+            default:
+                ;
             }
         }
     }
@@ -99,20 +93,19 @@ QVariant ContainedStringTableModel::data( const QModelIndex &index, int role ) c
     return result;
 }
 
-QVariant ContainedStringTableModel::headerData( int section, Qt::Orientation orientation, int role ) const
+QVariant ContainedStringTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     QVariant result;
 
-    if( role == Qt::DisplayRole )
-    {
+    if (role == Qt::DisplayRole) {
         const QString titel =
-            section == OffsetColumnId ?   i18nc("@title:column offset of the extracted string",       "Offset") :
-            section == StringColumnId ?   i18nc("@title:column string extracted from the byte array", "String") :
-            QString();
+            section == OffsetColumnId ? i18nc("@title:column offset of the extracted string",       "Offset") :
+            section == StringColumnId ? i18nc("@title:column string extracted from the byte array", "String") :
+                                        QString();
         result = titel;
+    } else {
+        result = QAbstractTableModel::headerData(section, orientation, role);
     }
-    else
-        result = QAbstractTableModel::headerData( section, orientation, role );
 
     return result;
 }

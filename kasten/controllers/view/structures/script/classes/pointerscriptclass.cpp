@@ -27,7 +27,7 @@
 #include "../../parsers/scriptvalueconverter.h"
 
 PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
-        : PrimitiveScriptClass(engine, handlerInfo)
+    : PrimitiveScriptClass(engine, handlerInfo)
 {
     s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE());
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
@@ -40,25 +40,21 @@ PointerScriptClass::~PointerScriptClass()
 }
 
 QScriptValue PointerScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name,
-        uint id)
+                                                    uint id)
 {
     Q_ASSERT(data->isPointer());
-    if (name == s_type)
-    {
+    if (name == s_type) {
         return PrimitiveType::standardTypeName(data->asPointer()->pointerType()->type());
-    }
-    else if (name == s_target)
-    {
+    } else if (name == s_target) {
         return data->asPointer()->pointerTarget()->toScriptValue(engine(), mHandlerInfo);
     }
     return PrimitiveScriptClass::additionalProperty(data, name, id);
 }
 
 bool PointerScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name,
-        QScriptClass::QueryFlags* flags, uint* id)
+                                                 QScriptClass::QueryFlags* flags, uint* id)
 {
-    if (name == s_type || name == s_target)
-    {
+    if (name == s_type || name == s_target) {
         *flags = QScriptClass::HandlesReadAccess | QScriptClass::HandlesWriteAccess;
         return true;
     }
@@ -66,29 +62,28 @@ bool PointerScriptClass::queryAdditionalProperty(const DataInformation* data, co
 }
 
 bool PointerScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id,
-        const QScriptValue& value)
+                                               const QScriptValue& value)
 {
-    if (name == s_type)
-    {
+    if (name == s_type) {
         DataInformation* newType = ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
-                data->logger(), data);
-        if (!newType)
+                                                                 data->logger(), data);
+        if (!newType) {
             data->logError() << "Could not set new pointer type.";
-        else if (!data->asPointer()->setPointerType(newType))
+        } else if (!data->asPointer()->setPointerType(newType)) {
             delete newType;
+        }
 
         return true;
     }
-    if (name == s_target)
-    {
+    if (name == s_target) {
         DataInformation* newTarget = ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
-                data->logger(), data);
-        if (!newTarget)
+                                                                   data->logger(), data);
+        if (!newTarget) {
             data->logError() << "Could not set new pointer target.";
-        else
+        } else {
             data->asPointer()->setPointerTarget(newTarget);
+        }
         return true;
     }
     return PrimitiveScriptClass::setAdditionalProperty(data, name, id, value);
 }
-

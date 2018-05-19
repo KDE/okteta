@@ -28,34 +28,32 @@
 #include <okteta/oktetacore.h>
 #include <QSysInfo>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class PODData
 {
-  public:
+public:
     static const int Size = sizeof(double);
 
-  public:
+public:
     PODData();
 
-  public:
-    void setByteOrder( QSysInfo::Endian byteOrder );
-    bool updateRawData( int size );
+public:
+    void setByteOrder(QSysInfo::Endian byteOrder);
+    bool updateRawData(int size);
     Byte* rawData();
 
-  public:
+public:
     const Byte* originalData() const;
     const Byte* byteOrderSetData() const;
     QSysInfo::Endian byteOrder() const;
 
-    unsigned long bitValue( int noOfBitsToRead ) const;
-    void getPointers( const void** P8Bit, const void** P16Bit, const void** P32Bit, const void** P64Bit ) const;
-    const void* pointer( int byteCount ) const;
+    unsigned long bitValue(int noOfBitsToRead) const;
+    void getPointers(const void** P8Bit, const void** P16Bit, const void** P32Bit, const void** P64Bit) const;
+    const void* pointer(int byteCount) const;
     int size() const;
 
-  protected:
+protected:
     // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
     using Aligned64Bit = union
     {
@@ -63,7 +61,7 @@ class PODData
         Byte mBytes[Size];
     };
 
-  protected:
+protected:
     Byte* mCurrentOriginalData;
     Byte* mCurrentEndiannessSetData;
 

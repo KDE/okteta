@@ -37,26 +37,24 @@
 // Qt
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 CharsetConversionTool::CharsetConversionTool()
-  : mConversionDirection( ConvertFrom ),
-    mSubstitutingMissingChars(false),
-    mSubstituteByte( 0 ),
-    mByteArrayView( nullptr ),
-    mByteArrayModel( nullptr )
+    : mConversionDirection(ConvertFrom)
+    , mSubstitutingMissingChars(false)
+    , mSubstituteByte(0)
+    , mByteArrayView(nullptr)
+    , mByteArrayModel(nullptr)
 {
-    setObjectName( QStringLiteral("CharsetConversion") );
+    setObjectName(QStringLiteral("CharsetConversion"));
 }
 
 bool CharsetConversionTool::isApplyable() const
 {
-    return ( mByteArrayModel &&
-             mByteArrayView && mByteArrayView->hasSelectedData() &&
-             ! mOtherCharCodecName.isEmpty() &&
-             mByteArrayView->charCodingName() != mOtherCharCodecName );
+    return (mByteArrayModel &&
+            mByteArrayView && mByteArrayView->hasSelectedData() &&
+            !mOtherCharCodecName.isEmpty() &&
+            mByteArrayView->charCodingName() != mOtherCharCodecName);
 }
 
 QString CharsetConversionTool::title() const
@@ -85,92 +83,91 @@ Okteta::Byte CharsetConversionTool::substituteByte() const
     return mSubstituteByte;
 }
 
-
-void CharsetConversionTool::setTargetModel( AbstractModel* model )
+void CharsetConversionTool::setTargetModel(AbstractModel* model)
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
-    if( mByteArrayView && mByteArrayModel )
-    {
-        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
-                 this, &CharsetConversionTool::onViewChanged );
-        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
-                 this, &CharsetConversionTool::onViewChanged );
+    if (mByteArrayView && mByteArrayModel) {
+        connect(mByteArrayView,  &ByteArrayView::charCodecChanged,
+                this, &CharsetConversionTool::onViewChanged);
+        connect(mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                this, &CharsetConversionTool::onViewChanged);
     }
 
     onViewChanged();
 }
 
-void CharsetConversionTool::setOtherCharCodecName( const QString& codecName )
+void CharsetConversionTool::setOtherCharCodecName(const QString& codecName)
 {
-    if( codecName == mOtherCharCodecName )
+    if (codecName == mOtherCharCodecName) {
         return;
+    }
 
     mOtherCharCodecName = codecName;
-    emit isApplyableChanged( isApplyable() );
+    emit isApplyableChanged(isApplyable());
 }
 
-void CharsetConversionTool::setConversionDirection( int conversionDirection )
+void CharsetConversionTool::setConversionDirection(int conversionDirection)
 {
     mConversionDirection = (ConversionDirection)conversionDirection;
 }
 
-void CharsetConversionTool::setSubstitutingMissingChars( bool isSubstitutingMissingChars )
+void CharsetConversionTool::setSubstitutingMissingChars(bool isSubstitutingMissingChars)
 {
     mSubstitutingMissingChars = isSubstitutingMissingChars;
 }
 
-void CharsetConversionTool::setSubstituteByte( int byte )
+void CharsetConversionTool::setSubstituteByte(int byte)
 {
     mSubstituteByte = (Okteta::Byte)byte;
 }
 
-
 void CharsetConversionTool::convertChars()
 {
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     const Okteta::AddressRange convertedSection = mByteArrayView->selection();
     QByteArray conversionResult;
-    conversionResult.resize( convertedSection.width() );
+    conversionResult.resize(convertedSection.width());
 
     Okteta::CharCodec* viewCharCodec =
-        Okteta::CharCodec::createCodec( mByteArrayView->charCodingName() );
+        Okteta::CharCodec::createCodec(mByteArrayView->charCodingName());
     Okteta::CharCodec* otherCharCodec =
-        Okteta::CharCodec::createCodec( mOtherCharCodecName );
+        Okteta::CharCodec::createCodec(mOtherCharCodecName);
     const bool convertToOther = (mConversionDirection == ConvertTo);
     Okteta::CharCodec* fromCharCodec = convertToOther ? viewCharCodec : otherCharCodec;
     Okteta::CharCodec* toCharCodec = convertToOther ? otherCharCodec : viewCharCodec;
     CharsetConversionJob* charsetConversionJob =
-        new CharsetConversionJob( reinterpret_cast<Okteta::Byte*>(conversionResult.data()),
-                                  mByteArrayModel, convertedSection,
-                                  convertToOther ? viewCharCodec : otherCharCodec,
-                                  convertToOther ? otherCharCodec : viewCharCodec,
-                                  mSubstitutingMissingChars, mSubstituteByte
-                                ); // TODO: report also actually converted bytes
+        new CharsetConversionJob(reinterpret_cast<Okteta::Byte*>(conversionResult.data()),
+                                 mByteArrayModel, convertedSection,
+                                 convertToOther ? viewCharCodec : otherCharCodec,
+                                 convertToOther ? otherCharCodec : viewCharCodec,
+                                 mSubstitutingMissingChars, mSubstituteByte
+                                 ); // TODO: report also actually converted bytes
     const bool success = charsetConversionJob->exec();
 
-    if( success ) //TODO: if nothing needed to be converted, just report and don't add change
-    {
-        Okteta::ChangesDescribable *changesDescribable =
-            qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
+    if (success) { // TODO: if nothing needed to be converted, just report and don't add change
+        Okteta::ChangesDescribable* changesDescribable =
+            qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
-        if( changesDescribable )
-        {
+        if (changesDescribable) {
             const QString description =
                 i18nc("Converted from charset 1 to charset 2",
                       "%1 to %2", fromCharCodec->name(), toCharCodec->name());
-            changesDescribable->openGroupedChange( description );
+            changesDescribable->openGroupedChange(description);
         }
-        mByteArrayModel->replace( convertedSection, conversionResult );
-        if( changesDescribable )
+        mByteArrayModel->replace(convertedSection, conversionResult);
+        if (changesDescribable) {
             changesDescribable->closeGroupedChange();
+        }
     }
 
     delete viewCharCodec;
@@ -183,13 +180,12 @@ void CharsetConversionTool::convertChars()
 
     mByteArrayView->setFocus();
 
-    emit conversionDone( success, convertedBytesCount, failedPerByteCount );
+    emit conversionDone(success, convertedBytesCount, failedPerByteCount);
 }
-
 
 void CharsetConversionTool::onViewChanged()
 {
-    emit isApplyableChanged( isApplyable() );
+    emit isApplyableChanged(isApplyable());
 }
 
 CharsetConversionTool::~CharsetConversionTool()

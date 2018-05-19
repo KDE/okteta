@@ -28,22 +28,22 @@
 
 class RotateByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 {
-  public:
+public:
     RotateByteArrayFilterParameterSet();
     ~RotateByteArrayFilterParameterSet() override;
 
-  public: // AbstractByteArrayFilterParameterSet API
+public: // AbstractByteArrayFilterParameterSet API
     const char* id() const override;
 
-  public:
-    void setGroupSize( int groupSize );
-    void setMoveBitWidth( int moveBitWidth );
+public:
+    void setGroupSize(int groupSize);
+    void setMoveBitWidth(int moveBitWidth);
 
-  public:
+public:
     int groupSize() const;
     int moveBitWidth() const;
 
-  protected:
+protected:
     int mGroupSize;
     int mMoveBitWidth;
 };

@@ -16,30 +16,30 @@
 // lib
 #include "abstractbytearraychecksumparameterset.h"
 
-
 //// ADAPT(start)
 //// rename the class name from Template_ByteArrayChecksumParameterSet to a proper name, both here and in the .cpp file
 //// e.g. MyByteArrayChecksumParameterSet
 class Template_ByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
 //// ADAPT(end)
 {
-  public:
+public:
     Template_ByteArrayChecksumParameterSet();
 
     ~Template_ByteArrayChecksumParameterSet() override;
 
-  public: // AbstractByteArrayChecksumParameterSet API
+public: // AbstractByteArrayChecksumParameterSet API
     const char* id() const override;
 
 //// ADAPT(start)
 //// declare the parameters and the corresponding getters and setters
-  public: // getters
+
+public: // getters
     int bitNumber() const;
 
-  public: // setters
-    void setBitNumber( int bitNumber );
+public: // setters
+    void setBitNumber(int bitNumber);
 
-  protected: // parameters
+protected: // parameters
     int mBitNumber;
 //// ADAPT(end)
 };

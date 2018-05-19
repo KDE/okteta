@@ -25,39 +25,36 @@
 
 #include "abstractexportjob.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractExportJobPrivate
 {
-  public:
-    explicit AbstractExportJobPrivate( AbstractExportJob* parent );
+public:
+    explicit AbstractExportJobPrivate(AbstractExportJob* parent);
 
     virtual ~AbstractExportJobPrivate();
 
-  public:
+public:
     AbstractDocument* document() const;
-    void setDocument( AbstractDocument* document );
+    void setDocument(AbstractDocument* document);
 
-  protected:
+protected:
     AbstractExportJob* const q_ptr;
 
     AbstractDocument* mDocument;
 };
 
-
-inline AbstractExportJobPrivate::AbstractExportJobPrivate( AbstractExportJob* parent)
-  : q_ptr( parent ),
-    mDocument( nullptr )
+inline AbstractExportJobPrivate::AbstractExportJobPrivate(AbstractExportJob* parent)
+    : q_ptr(parent)
+    , mDocument(nullptr)
 {}
 
 inline AbstractDocument* AbstractExportJobPrivate::document() const { return mDocument; }
-inline void AbstractExportJobPrivate::setDocument( AbstractDocument* document )
+inline void AbstractExportJobPrivate::setDocument(AbstractDocument* document)
 {
     mDocument = document;
 
-    emit q_ptr->documentLoaded( document );
+    emit q_ptr->documentLoaded(document);
     q_ptr->emitResult();
 }
 

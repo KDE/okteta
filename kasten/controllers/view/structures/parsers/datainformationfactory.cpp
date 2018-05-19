@@ -31,34 +31,30 @@
 
 AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const BitfieldParsedData& pd)
 {
-    if (!pd.width.isValid)
-    {
-        if (pd.width.string.isEmpty())
+    if (!pd.width.isValid) {
+        if (pd.width.string.isEmpty()) {
             pd.error() << "Bitfield is missing width.";
-        else
+        } else {
             pd.error() << "Width of bitfield is not a valid number: " << pd.width.string;
+        }
         return nullptr;
     }
-    if (pd.width.value <= 0 || pd.width.value > 64)
-    {
+    if (pd.width.value <= 0 || pd.width.value > 64) {
         pd.error() << "Width of bitfield is not a value from 1-64:" << pd.width.value;
         return nullptr;
     }
     AbstractBitfieldDataInformation* bitf = nullptr;
     const QString type = pd.type.toLower();
-    if (type.isEmpty())
-    {
+    if (type.isEmpty()) {
         pd.info() << "No bitfield type specified, defaulting to unsigned.";
         bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
-    }
-    else if (type == QLatin1String("bool"))
+    } else if (type == QLatin1String("bool")) {
         bitf = new BoolBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
-    else if (type == QLatin1String("unsigned"))
+    } else if (type == QLatin1String("unsigned")) {
         bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
-    else if (type == QLatin1String("signed"))
+    } else if (type == QLatin1String("signed")) {
         bitf = new SignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
-    else
-    {
+    } else {
         pd.error() << "invalid bitfield type attribute given:" << type;
         return nullptr;
     }
@@ -67,125 +63,119 @@ AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const Bitfi
 
 PrimitiveDataInformation* DataInformationFactory::newPrimitive(const PrimitiveParsedData& pd)
 {
-    if (pd.type.isEmpty())
-    {
+    if (pd.type.isEmpty()) {
         pd.error() << "Type of primitive not specified, cannot create it!";
         return nullptr;
     }
     LoggerWithContext lwc(pd.logger, pd.context());
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
-    if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield)
-    {
+    if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield) {
         pd.error() << "Unrecognized primitive type: " << pd.type;
         return nullptr;
     }
     return PrimitiveFactory::newInstance(pd.name, primitiveType, lwc, pd.parent);
 }
 
-namespace
-{
-template<class T>
+namespace {
+template <class T>
 T* newEnumOrFlags(const EnumParsedData& pd)
 {
     LoggerWithContext lwc(pd.logger, pd.context() + QLatin1String(" (type)"));
     const PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
-    if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield)
-    {
+    if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield) {
         pd.error() << "Unrecognized enum type: " << pd.type;
         return nullptr;
     }
-    if (primitiveType == PrimitiveDataType::Float || primitiveType == PrimitiveDataType::Double)
-    {
+    if (primitiveType == PrimitiveDataType::Float || primitiveType == PrimitiveDataType::Double) {
         pd.error() << "Floating-point enums are not allowed since they make little sense.";
         return nullptr;
     }
     EnumDefinition::Ptr definition = pd.enumDef;
-    if (!definition)
-    {
+    if (!definition) {
         QMap<AllPrimitiveTypes, QString> enumValues =
-                EnumDefinition::parseEnumValues(pd.enumValuesObject, lwc, primitiveType);
-        if (enumValues.isEmpty())
-        {
+            EnumDefinition::parseEnumValues(pd.enumValuesObject, lwc, primitiveType);
+        if (enumValues.isEmpty()) {
             pd.error() << "No enum values specified!";
             return nullptr;
         }
         definition = EnumDefinition::Ptr(new EnumDefinition(enumValues, pd.enumName, primitiveType));
     }
-    if (definition->type() != primitiveType)
-    {
+    if (definition->type() != primitiveType) {
         pd.error().nospace() << "Enum type (" << definition->type() << ") and value type (" << primitiveType
-                << ") do not match!";
+                             << ") do not match!";
         return nullptr;
     }
     PrimitiveDataInformation* primData = PrimitiveFactory::newInstance(pd.name, primitiveType, lwc);
-    //TODO allow bitfields?
-    if (!primData)
-    {
+    // TODO allow bitfields?
+    if (!primData) {
         pd.error() << "Could not create a value object for this enum!";
         return nullptr;
     }
     return new T(pd.name, primData, definition, pd.parent);
 }
 
-template<class T>
+template <class T>
 T* newStructOrUnion(const StructOrUnionParsedData& supd)
 {
     T* structOrUnion = new T(supd.name, QVector<DataInformation*>(), supd.parent);
     supd.children->setParent(structOrUnion);
-    while (supd.children->hasNext())
-    {
+    while (supd.children->hasNext()) {
         DataInformation* data = supd.children->next();
-        if (data)
+        if (data) {
             structOrUnion->appendChild(data, false);
-        else
-            return nullptr; //error message should be logged already
+        } else {
+            return nullptr; // error message should be logged already
+        }
     }
-    if (structOrUnion->childCount() == 0)
+    if (structOrUnion->childCount() == 0) {
         supd.info() << "No children were found, this is probably a mistake.";
+    }
     return structOrUnion;
 }
 
 QString generateLengthFunction(DataInformation* current, DataInformation* last, const QString& elemName,
-        const QString& currentString, const ParserInfo& info)
+                               const QString& currentString, const ParserInfo& info)
 {
-    if (!current) //reached top
+    if (!current) { // reached top
         return QString();
-    for (int i = current->childCount() - 1; i >= 0; --i)
-    {
-        DataInformation* child = current->childAt(i);
-        if (child == last)
-            return QString(); //don't go down again after going up one level
-
-        QString childName = child->name();
-        if (childName == elemName)
-        {
-            QString function = QLatin1String("function() { return this.parent.") + currentString
-                    + elemName + QLatin1String(".value; }");
-            info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
-                    << ", resulting function is: " << function;
-            return function;
-        }
-        else if (child->childCount() > 0)
-        {
-            QString func = generateLengthFunction(child, current, elemName,
-                    currentString + childName + QLatin1Char('.'), info);
-            //if func is empty no valid child was found, just continue
-            if (!func.isEmpty())
-                return func;
-        }
-        //has no children and was not the desired element -> continue loop
     }
-    //now check parents
+    for (int i = current->childCount() - 1; i >= 0; --i) {
+        DataInformation* child = current->childAt(i);
+        if (child == last) {
+            return QString(); // don't go down again after going up one level
+
+        }
+        QString childName = child->name();
+        if (childName == elemName) {
+            QString function = QLatin1String("function() { return this.parent.") + currentString
+                               + elemName + QLatin1String(".value; }");
+            info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
+                        << ", resulting function is: " << function;
+            return function;
+        } else if (child->childCount() > 0) {
+            QString func = generateLengthFunction(child, current, elemName,
+                                                  currentString + childName + QLatin1Char('.'), info);
+            // if func is empty no valid child was found, just continue
+            if (!func.isEmpty()) {
+                return func;
+            }
+        }
+        // has no children and was not the desired element -> continue loop
+    }
+
+    // now check parents
     DataInformationBase* nextBase = current->parent();
-    if (!nextBase)
+    if (!nextBase) {
         return QString();
+    }
 
     DataInformation* next = nextBase->asDataInformation();
-    if (next == last)
-        return QString(); //we moved one level down previously, don't move up again
-    else
+    if (next == last) {
+        return QString(); // we moved one level down previously, don't move up again
+    } else {
         return generateLengthFunction(current->parent()->asDataInformation(), current, elemName,
-                currentString + QLatin1String("parent."), info);
+                                      currentString + QLatin1String("parent."), info);
+    }
 }
 
 }
@@ -202,39 +192,30 @@ FlagDataInformation* DataInformationFactory::newFlags(const EnumParsedData& pd)
 
 ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd)
 {
-    if (!pd.arrayType)
-    {
+    if (!pd.arrayType) {
         pd.error() << "Failed to parse array type!";
         return nullptr;
     }
-    if (!pd.length.isValid())
-    {
+    if (!pd.length.isValid()) {
         pd.error() << "No array length specified!";
         return nullptr;
     }
     const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
-    if (fixedLength.isValid)
-    {
+    if (fixedLength.isValid) {
         return new ArrayDataInformation(pd.name, fixedLength.value, pd.arrayType, pd.parent, QScriptValue());
-    }
-    else if (pd.length.isFunction())
-    {
+    } else if (pd.length.isFunction()) {
         return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, pd.length);
-    }
-    else
-    {
-        //neither integer nor function, must be a string containing the name of another element.
+    } else {
+        // neither integer nor function, must be a string containing the name of another element.
         const QString lengthStr = pd.length.toString();
-        if (!pd.parent)
-        {
+        if (!pd.parent) {
             pd.error() << "Toplevel array has length depending on other field (" << lengthStr
-                    << "). This is not possible.";
+                       << "). This is not possible.";
             return nullptr;
         }
-        if (lengthStr.contains(QLatin1Char('.')))
-        {
+        if (lengthStr.contains(QLatin1Char('.'))) {
             pd.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
-            return nullptr; //TODO maybe add possible shorthand length="this.parent.length"
+            return nullptr; // TODO maybe add possible shorthand length="this.parent.length"
         }
         QString lengthFunctionString = generateLengthFunction(pd.parent, nullptr, lengthStr, QString(), pd);
         if (lengthFunctionString.isEmpty()) {
@@ -248,38 +229,32 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
 
 StringDataInformation* DataInformationFactory::newString(const StringParsedData& pd)
 {
-    if (pd.maxByteCount.isValid && pd.maxCharCount.isValid)
-    {
+    if (pd.maxByteCount.isValid && pd.maxCharCount.isValid) {
         pd.error() << "Both maxCharCount and maxByteCount are set, only one is allowed.";
         return nullptr;
     }
     StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(pd.encoding,
-            LoggerWithContext(pd.logger, pd.context()));
-    if (encoding == StringDataInformation::StringType::InvalidEncoding)
-    {
+                                                                               LoggerWithContext(pd.logger, pd.context()));
+    if (encoding == StringDataInformation::StringType::InvalidEncoding) {
         pd.error() << "Bad string encoding given:" << pd.encoding;
         return nullptr;
     }
     StringDataInformation* data = new StringDataInformation(pd.name, encoding, pd.parent);
     bool modeSet = false;
-    if (pd.termination.isValid)
-    {
+    if (pd.termination.isValid) {
         data->setTerminationCodePoint(pd.termination.value);
         modeSet = true;
     }
-    if (pd.maxByteCount.isValid)
-    {
+    if (pd.maxByteCount.isValid) {
         data->setMaxByteCount(pd.maxByteCount.value);
         modeSet = true;
     }
-    if (pd.maxCharCount.isValid)
-    {
+    if (pd.maxCharCount.isValid) {
         data->setMaxCharCount(pd.maxCharCount.value);
         modeSet = true;
     }
-    //if mode is None, we assume zero terminated strings
-    if (!modeSet)
-    {
+    // if mode is None, we assume zero terminated strings
+    if (!modeSet) {
         pd.info() << "No string termination mode set, assuming null terminated strings.";
         data->setTerminationCodePoint(0);
         Q_ASSERT(data->terminationMode() == StringData::Sequence);
@@ -301,42 +276,34 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
 {
     data->setByteOrder(pd.endianess);
 
-    if (data->name().isEmpty())
-    {
+    if (data->name().isEmpty()) {
         pd.warn() << "Name is empty!";
     }
-    if (pd.updateFunc.isValid())
-    {
-        if (!pd.updateFunc.isFunction())
-        {
+    if (pd.updateFunc.isValid()) {
+        if (!pd.updateFunc.isFunction()) {
             pd.error() << "Update function is not a function: " << pd.updateFunc.toString();
             return false;
-        }
-        else
+        } else {
             data->setUpdateFunc(pd.updateFunc);
+        }
     }
-    if (pd.validationFunc.isValid())
-    {
-        if (!pd.validationFunc.isFunction())
-        {
+    if (pd.validationFunc.isValid()) {
+        if (!pd.validationFunc.isFunction()) {
             pd.error() << "Validation function is not a function: " << pd.validationFunc.toString();
             return false;
-        }
-        else
+        } else {
             data->setValidationFunc(pd.validationFunc);
+        }
     }
-    if (pd.toStringFunc.isValid())
-    {
-        if (!pd.toStringFunc.isFunction())
-        {
+    if (pd.toStringFunc.isValid()) {
+        if (!pd.toStringFunc.isFunction()) {
             pd.error() << "To string function is not a function: " << pd.toStringFunc.toString();
             return false;
-        }
-        else
+        } else {
             data->setToStringFunction(pd.toStringFunc);
+        }
     }
-    if (!pd.customTypeName.isEmpty())
-    {
+    if (!pd.customTypeName.isEmpty()) {
         data->setCustomTypeName(pd.customTypeName);
     }
     return true;
@@ -345,26 +312,22 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
 
 PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedData& pd)
 {
-    if (!pd.pointerTarget)
-    {
+    if (!pd.pointerTarget) {
         pd.error() << "Missing pointer target";
         return nullptr;
     }
-    if (!pd.valueType)
-    {
+    if (!pd.valueType) {
         pd.error() << "Missing pointer type";
         return nullptr;
     }
-    if (!pd.valueType->isPrimitive())
-    {
+    if (!pd.valueType->isPrimitive()) {
         pd.error() << "Bad pointer type, only unsigned integers are allowed";
         return nullptr;
     }
     PrimitiveDataInformation* primValue = pd.valueType->asPrimitive();
     if (!(primValue->type() == PrimitiveDataType::UInt8 || primValue->type() == PrimitiveDataType::UInt16
-            || primValue->type() == PrimitiveDataType::UInt32 || primValue->type() == PrimitiveDataType::UInt64))
-    {
-        pd.error() << "Bad pointer type, only unsigned integers are allowed"; //TODO offsets (signed int + bitfields)
+          || primValue->type() == PrimitiveDataType::UInt32 || primValue->type() == PrimitiveDataType::UInt64)) {
+        pd.error() << "Bad pointer type, only unsigned integers are allowed"; // TODO offsets (signed int + bitfields)
         return nullptr;
     }
     return new PointerDataInformation(pd.name, pd.pointerTarget, primValue, pd.parent);
@@ -374,50 +337,43 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
 {
     QScopedPointer<TaggedUnionDataInformation> tagged(new TaggedUnionDataInformation(pd.name, pd.parent));
     pd.children->setParent(tagged.data());
-    while (pd.children->hasNext())
-    {
+    while (pd.children->hasNext()) {
         DataInformation* data = pd.children->next();
-        if (data)
+        if (data) {
             tagged->appendChild(data, false);
-        else
-            return nullptr; //error message should be logged already
+        } else {
+            return nullptr; // error message should be logged already
+        }
     }
-    if (tagged->childCount() == 0)
-    {
+    if (tagged->childCount() == 0) {
         pd.error() << "No children in tagged union. At least one is required so that tag can be evaluated.";
         return nullptr;
     }
-    //verify alternatives
+    // verify alternatives
     bool alternativesValid = true;
     QVector<TaggedUnionDataInformation::FieldInfo> altInfo;
     altInfo.reserve(pd.alternatives.size());
-    for(int i = 0; i < pd.alternatives.size(); ++i)
-    {
+    for (int i = 0; i < pd.alternatives.size(); ++i) {
         const TaggedUnionParsedData::Alternatives& fi = pd.alternatives.at(i);
-        if (!fi.selectIf.isFunction())
-        {
+        if (!fi.selectIf.isFunction()) {
             ParsedNumber<quint64> number = ParserUtils::uint64FromScriptValue(fi.selectIf);
-            if (!number.isValid)
-            {
+            if (!number.isValid) {
                 pd.error() << "Alternative number" << i << "is not valid. SelectIf is neither function nor number!";
                 alternativesValid = false;
             }
-            //number is valid -> there must be exactly one field
-            if (tagged->childCount() != 1)
-            {
+            // number is valid -> there must be exactly one field
+            if (tagged->childCount() != 1) {
                 pd.error() << "Alternative number" << i << "is not valid. SelectIf is number,"
-                        " but there is not exactly one child!";
+                    " but there is not exactly one child!";
                 alternativesValid = false;
             }
         }
         QVector<DataInformation*> children;
-        while (fi.fields->hasNext())
-        {
+        while (fi.fields->hasNext()) {
             DataInformation* next = fi.fields->next();
-            if (next)
+            if (next) {
                 children.append(next);
-            else
-            {
+            } else {
                 pd.error() << "Alternative number" << i << "has an invalid field!";
                 alternativesValid = false;
             }
@@ -425,22 +381,24 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
         altInfo.append(TaggedUnionDataInformation::FieldInfo(fi.name, fi.selectIf, children));
 
     }
-    if (!alternativesValid)
-    {
-        for (int i = 0; i < altInfo.size(); ++i)
+
+    if (!alternativesValid) {
+        for (int i = 0; i < altInfo.size(); ++i) {
             qDeleteAll(altInfo.at(i).fields);
+        }
+
         return nullptr;
     }
     tagged->setAlternatives(altInfo, false);
 
     pd.defaultFields->setParent(tagged.data());
-    while (pd.defaultFields->hasNext())
-    {
+    while (pd.defaultFields->hasNext()) {
         DataInformation* data = pd.defaultFields->next();
-        if (data)
+        if (data) {
             tagged->appendDefaultField(data, false);
-        else
-            return nullptr; //error message should be logged already
+        } else {
+            return nullptr; // error message should be logged already
+        }
     }
     return tagged.take();
 }

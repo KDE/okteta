@@ -28,9 +28,7 @@
 // Kasten gui
 #include <kasten/abstractxmlguicontroller.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ZoomSlider;
 namespace If {
@@ -38,18 +36,17 @@ class Zoomable;
 }
 class StatusBar;
 
-
 class KASTENCONTROLLERS_EXPORT ZoomBarController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ZoomBarController( StatusBar* statusBar );
+public:
+    explicit ZoomBarController(StatusBar* statusBar);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private:
+private:
     ZoomSlider* mZoomSlider;
 };
 

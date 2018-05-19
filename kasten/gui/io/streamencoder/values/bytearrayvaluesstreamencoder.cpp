@@ -32,23 +32,21 @@
 // Qt
 #include <QTextStream>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ValuesStreamEncoderSettings::ValuesStreamEncoderSettings()
- : valueCoding( Okteta::HexadecimalCoding), separation( QStringLiteral(" ") )
+    : valueCoding(Okteta::HexadecimalCoding)
+    , separation(QStringLiteral(" "))
 {}
 
 ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()
- : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Values"), QStringLiteral("text/plain") )
+    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Values"), QStringLiteral("text/plain"))
 {}
 
-
-bool ByteArrayValuesStreamEncoder::encodeDataToStream( QIODevice *device,
-                                                       const ByteArrayView* byteArrayView,
-                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                       const Okteta::AddressRange& range )
+bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
+                                                      const ByteArrayView* byteArrayView,
+                                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                      const Okteta::AddressRange& range)
 {
     bool success = true;
 
@@ -58,23 +56,24 @@ bool ByteArrayValuesStreamEncoder::encodeDataToStream( QIODevice *device,
     mSettings.valueCoding = (Okteta::ValueCoding)byteArrayView->valueCoding();
 
     // encode
-    QTextStream textStream( device );
+    QTextStream textStream(device);
 
-    Okteta::ValueCodec* valueCodec = Okteta::ValueCodec::createCodec( mSettings.valueCoding );
+    Okteta::ValueCodec* valueCodec = Okteta::ValueCodec::createCodec(mSettings.valueCoding);
 
-    // prepare 
+    // prepare
     QString valueString;
-    valueString.resize( valueCodec->encodingWidth() );
+    valueString.resize(valueCodec->encodingWidth());
 
-    for( Okteta::Address i=range.start(); i<=range.end(); ++i )
-    {
-        if( i > range.start() )
+    for (Okteta::Address i = range.start(); i <= range.end(); ++i) {
+        if (i > range.start()) {
             textStream << mSettings.separation;
+        }
 
-        valueCodec->encode( valueString, 0, byteArrayModel->byte(i) );
+        valueCodec->encode(valueString, 0, byteArrayModel->byte(i));
 
         textStream << valueString;
     }
+
     // clean up
     delete valueCodec;
 

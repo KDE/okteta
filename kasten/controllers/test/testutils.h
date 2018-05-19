@@ -17,6 +17,7 @@
  *    License along with this library; if not, write to the Free Software
  *    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
+
 #ifndef TESTUTILS_H_
 #define TESTUTILS_H_
 
@@ -33,19 +34,18 @@
 #include "view/structures/parsers/scriptvalueconverter.h"
 #include "view/structures/script/scriptengineinitializer.h"
 
-namespace Utils
-{
+namespace Utils {
 
 /** Converts a string to a binary number (spaces are ignored)
  * @param val the string representing a binary number
  * @return
  */
-template<typename T>
+template <typename T>
 T binary(const char* val)
 {
     QString value = QString::fromUtf8(val);
     value = value.remove(QLatin1Char(' '));
-    QTEST_ASSERT(unsigned(value.length()) <= sizeof(T) * 8); //otherwise we overflow
+    QTEST_ASSERT(unsigned(value.length()) <= sizeof(T) * 8); // otherwise we overflow
     bool ok = false;
     quint64 result = value.toULongLong(&ok, 2);
     QTEST_ASSERT(ok);
@@ -55,8 +55,9 @@ T binary(const char* val)
 DataInformation* evalAndParse(QScriptEngine* eng, const QString& code, ScriptLogger* logger)
 {
     QScriptValue result = eng->evaluate(code);
-    if (result.isError())
+    if (result.isError()) {
         qWarning() << "error parsing" << code << ":" << result.toString();
+    }
     return ScriptValueConverter::convert(result, QStringLiteral("result"), logger);
 }
 
@@ -84,8 +85,7 @@ TopLevelDataInformation* evalAndParse(const char* code)
 QScriptValue evaluate(QScriptEngine* engine, const QString& code)
 {
     QScriptValue ret = engine->evaluate(code);
-    if (engine->hasUncaughtException())
-    {
+    if (engine->hasUncaughtException()) {
         ret = engine->uncaughtException();
         engine->clearExceptions();
     }
@@ -101,8 +101,7 @@ QScriptValue evaluate(QScriptEngine* engine, const char* code)
 QScriptValue property(const QScriptValue& value, const char* property)
 {
     QScriptValue ret = value.property(QString::fromUtf8(property));
-    if (value.engine()->hasUncaughtException())
-    {
+    if (value.engine()->hasUncaughtException()) {
         ret = value.engine()->uncaughtException();
         value.engine()->clearExceptions();
     }

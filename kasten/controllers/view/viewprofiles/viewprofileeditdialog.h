@@ -28,9 +28,7 @@
 
 class QPushButton;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ViewProfileEdit;
 class ByteArrayViewProfile;
 
@@ -39,7 +37,7 @@ class ViewProfileEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ViewProfileEditDialog( QWidget* parent = nullptr );
+    explicit ViewProfileEditDialog(QWidget* parent = nullptr);
 
     ~ViewProfileEditDialog() override;
 
@@ -47,10 +45,10 @@ public:
     ByteArrayViewProfile viewProfile() const;
 
 public:
-    void setViewProfile( const ByteArrayViewProfile& viewProfile );
+    void setViewProfile(const ByteArrayViewProfile& viewProfile);
 
 private Q_SLOTS:
-    void onProfileTitleChanged( const QString& title );
+    void onProfileTitleChanged(const QString& title);
 
 private:
     ViewProfileEdit* mViewProfileEdit;

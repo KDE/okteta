@@ -26,28 +26,25 @@
 #include "bytearrayrandomdatageneratorconfigeditor.h"
 #include "bytearrayrandomdatagenerator.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArrayRandomDataGeneratorConfigEditorFactory::ByteArrayRandomDataGeneratorConfigEditorFactory()
 {
 }
 
-
-AbstractModelDataGeneratorConfigEditor* ByteArrayRandomDataGeneratorConfigEditorFactory::tryCreateConfigEditor( AbstractModelDataGenerator* generator ) const
+AbstractModelDataGeneratorConfigEditor* ByteArrayRandomDataGeneratorConfigEditorFactory::tryCreateConfigEditor(AbstractModelDataGenerator* generator) const
 {
     AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
     ByteArrayRandomDataGenerator* randomDataGenerator =
-        qobject_cast<ByteArrayRandomDataGenerator*>( generator );
+        qobject_cast<ByteArrayRandomDataGenerator*>(generator);
 
-    if( randomDataGenerator )
-        result = new ByteArrayRandomDataGeneratorConfigEditor( randomDataGenerator );
+    if (randomDataGenerator) {
+        result = new ByteArrayRandomDataGeneratorConfigEditor(randomDataGenerator);
+    }
 
     return result;
 }
-
 
 ByteArrayRandomDataGeneratorConfigEditorFactory::~ByteArrayRandomDataGeneratorConfigEditorFactory() {}
 

@@ -26,27 +26,24 @@
 #include "bytearrayuuencodingstreamencoderconfigeditor.h"
 #include "bytearrayuuencodingstreamencoder.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArrayUuencodingStreamEncoderConfigEditorFactory::ByteArrayUuencodingStreamEncoderConfigEditorFactory()
 {
 }
 
-
-AbstractModelStreamEncoderConfigEditor* ByteArrayUuencodingStreamEncoderConfigEditorFactory::tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const
+AbstractModelStreamEncoderConfigEditor* ByteArrayUuencodingStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     AbstractModelStreamEncoderConfigEditor* result = nullptr;
     ByteArrayUuencodingStreamEncoder* uuencodingStreamEncoder =
-        qobject_cast<ByteArrayUuencodingStreamEncoder*>( encoder );
+        qobject_cast<ByteArrayUuencodingStreamEncoder*>(encoder);
 
-    if( uuencodingStreamEncoder )
-        result = new ByteArrayUuencodingStreamEncoderConfigEditor( uuencodingStreamEncoder );
+    if (uuencodingStreamEncoder) {
+        result = new ByteArrayUuencodingStreamEncoderConfigEditor(uuencodingStreamEncoder);
+    }
 
     return result;
 }
-
 
 ByteArrayUuencodingStreamEncoderConfigEditorFactory::~ByteArrayUuencodingStreamEncoderConfigEditorFactory() {}
 

@@ -27,25 +27,22 @@
 #include <QIcon>
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ToggleButton;
 
-
 class ToggleButtonPrivate
 {
-  public:
-    explicit ToggleButtonPrivate( ToggleButton* parent );
+public:
+    explicit ToggleButtonPrivate(ToggleButton* parent);
 
-  public:
-    void setOtherState( const QIcon& icon, const QString& text, const QString& toolTip );
+public:
+    void setOtherState(const QIcon& icon, const QString& text, const QString& toolTip);
 
-  public:
-    void onToggled( bool );
+public:
+    void onToggled(bool);
 
-  private:
+private:
     QIcon mOtherIcon;
     QString mOtherText;
     QString mOtherToolTip;

@@ -23,54 +23,49 @@
 #include "singleviewarea.h"
 #include "singleviewarea_p.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 // TODO: catch area focues change!
 SingleViewArea::SingleViewArea()
-  : AbstractViewArea( new SingleViewAreaPrivate(this) )
+    : AbstractViewArea(new SingleViewAreaPrivate(this))
 {
-    Q_D( SingleViewArea );
+    Q_D(SingleViewArea);
 
     d->init();
 }
 
-
 QWidget* SingleViewArea::widget() const
 {
-    Q_D( const SingleViewArea );
+    Q_D(const SingleViewArea);
 
     return d->widget();
 }
 
 bool SingleViewArea::hasFocus() const
 {
-    Q_D( const SingleViewArea );
+    Q_D(const SingleViewArea);
 
     return d->hasFocus();
 }
 
-
 void SingleViewArea::setFocus()
 {
-    Q_D( SingleViewArea );
+    Q_D(SingleViewArea);
 
     d->setFocus();
 }
 
-
-void SingleViewArea::setCurrentToolInlineView( AbstractToolInlineView* view )
+void SingleViewArea::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
-    Q_D( SingleViewArea );
+    Q_D(SingleViewArea);
 
-    d->setCurrentToolInlineView( view );
+    d->setCurrentToolInlineView(view);
 }
 
-void SingleViewArea::setView( AbstractView* view )
+void SingleViewArea::setView(AbstractView* view)
 {
-    Q_D( SingleViewArea );
+    Q_D(SingleViewArea);
 
-    d->setView( view );
+    d->setView(view);
 }
 
 SingleViewArea::~SingleViewArea()

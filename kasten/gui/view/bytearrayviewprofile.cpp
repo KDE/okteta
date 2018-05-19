@@ -27,9 +27,7 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayViewProfilePrivate : public QSharedData
 {
@@ -55,9 +53,9 @@ public:
 };
 
 QString DefaultViewProfileCharCodingName() { return QStringLiteral("ISO-8859-1"); }
-static const bool  DefaultViewProfileShowingNonprinting = false;
-static const QChar DefaultViewProfileSubstituteChar =  QLatin1Char( '.' );
-static const QChar DefaultViewProfileUndefinedChar =   QChar( QChar::ReplacementCharacter );
+static const bool DefaultViewProfileShowingNonprinting = false;
+static const QChar DefaultViewProfileSubstituteChar =  QLatin1Char('.');
+static const QChar DefaultViewProfileUndefinedChar =   QChar(QChar::ReplacementCharacter);
 static const int DefaultViewProfileNoOfGroupedBytes = 4;
 static const int DefaultViewProfileNoOfBytesPerLine =  16;
 static const Okteta::AbstractByteArrayView::OffsetCoding DefaultViewProfileOffsetCoding =
@@ -69,36 +67,33 @@ static const Okteta::AbstractByteArrayView::LayoutStyle DefaultViewProfileResize
 static const Okteta::AbstractByteArrayView::CodingTypes DefaultViewProfileVisibleByteArrayCodings =
     Okteta::AbstractByteArrayView::ValueAndCharCodings;
 
-
 ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()
-  : QSharedData()
-  , mOffsetCoding( DefaultViewProfileOffsetCoding )
-  , mCharCodingName( DefaultViewProfileCharCodingName() )
-  , mValueCoding( DefaultViewProfileValueCoding )
-  , mOffsetColumnVisible( true )
-  , mVisibleByteArrayCodings( DefaultViewProfileVisibleByteArrayCodings )
-  , mNoOfBytesPerLine( DefaultViewProfileNoOfBytesPerLine )
-  , mLayoutStyle( DefaultViewProfileResizeStyle )
-  , mSubstituteChar( DefaultViewProfileSubstituteChar )
-  , mUndefinedChar( DefaultViewProfileUndefinedChar )
-  , mShowsNonprinting( DefaultViewProfileShowingNonprinting )
-  , mNoOfGroupedBytes( DefaultViewProfileNoOfGroupedBytes )
-  , mViewModus( 0 )
+    : QSharedData()
+    , mOffsetCoding(DefaultViewProfileOffsetCoding)
+    , mCharCodingName(DefaultViewProfileCharCodingName())
+    , mValueCoding(DefaultViewProfileValueCoding)
+    , mOffsetColumnVisible(true)
+    , mVisibleByteArrayCodings(DefaultViewProfileVisibleByteArrayCodings)
+    , mNoOfBytesPerLine(DefaultViewProfileNoOfBytesPerLine)
+    , mLayoutStyle(DefaultViewProfileResizeStyle)
+    , mSubstituteChar(DefaultViewProfileSubstituteChar)
+    , mUndefinedChar(DefaultViewProfileUndefinedChar)
+    , mShowsNonprinting(DefaultViewProfileShowingNonprinting)
+    , mNoOfGroupedBytes(DefaultViewProfileNoOfGroupedBytes)
+    , mViewModus(0)
 {
 }
-
-
 
 ByteArrayViewProfile::ByteArrayViewProfile()
-  : d( new ByteArrayViewProfilePrivate )
+    : d(new ByteArrayViewProfilePrivate)
 {
 }
-ByteArrayViewProfile::ByteArrayViewProfile( const ByteArrayViewProfile& other )
-  : d( other.d )
+ByteArrayViewProfile::ByteArrayViewProfile(const ByteArrayViewProfile& other)
+    : d(other.d)
 {
 }
 
-ByteArrayViewProfile& ByteArrayViewProfile::operator=( const ByteArrayViewProfile& other )
+ByteArrayViewProfile& ByteArrayViewProfile::operator=(const ByteArrayViewProfile& other)
 {
     d = other.d;
 
@@ -120,21 +115,20 @@ bool ByteArrayViewProfile::showsNonprinting()       const { return d->mShowsNonp
 int ByteArrayViewProfile::noOfGroupedBytes()        const { return d->mNoOfGroupedBytes; }
 int ByteArrayViewProfile::viewModus()               const { return d->mViewModus; }
 
-void ByteArrayViewProfile::setId( const Id& id ) { d->mId = id; }
-void ByteArrayViewProfile::setViewProfileTitle( const QString& title ) { d->mViewProfileTitle = title; }
-void ByteArrayViewProfile::setOffsetCoding( int offsetCoding ) { d->mOffsetCoding = offsetCoding; }
-void ByteArrayViewProfile::setValueCoding( int valueCoding ) { d->mValueCoding = valueCoding; }
-void ByteArrayViewProfile::setCharCoding( const QString& charCodingName ) { d->mCharCodingName = charCodingName; }
-void ByteArrayViewProfile::setSubstituteChar( const QChar& substituteChar ) { d->mSubstituteChar = substituteChar; }
-void ByteArrayViewProfile::setUndefinedChar( const QChar& undefinedChar ) { d->mUndefinedChar = undefinedChar; }
-void ByteArrayViewProfile::setOffsetColumnVisible( bool visible ) { d->mOffsetColumnVisible = visible; }
-void ByteArrayViewProfile::setVisibleByteArrayCodings( int columns ) { d->mVisibleByteArrayCodings = columns; }
-void ByteArrayViewProfile::setLayoutStyle( int layoutStyle ) { d->mLayoutStyle = layoutStyle; }
-void ByteArrayViewProfile::setNoOfBytesPerLine( int noOfBytesPerLine ) { d->mNoOfBytesPerLine = noOfBytesPerLine; }
-void ByteArrayViewProfile::setShowsNonprinting( bool showsNonprinting ) { d->mShowsNonprinting = showsNonprinting; }
-void ByteArrayViewProfile::setNoOfGroupedBytes( int noOfGroupedBytes ) { d->mNoOfGroupedBytes = noOfGroupedBytes; }
-void ByteArrayViewProfile::setViewModus( int viewModus ) { d->mViewModus = viewModus; }
-
+void ByteArrayViewProfile::setId(const Id& id) { d->mId = id; }
+void ByteArrayViewProfile::setViewProfileTitle(const QString& title) { d->mViewProfileTitle = title; }
+void ByteArrayViewProfile::setOffsetCoding(int offsetCoding) { d->mOffsetCoding = offsetCoding; }
+void ByteArrayViewProfile::setValueCoding(int valueCoding) { d->mValueCoding = valueCoding; }
+void ByteArrayViewProfile::setCharCoding(const QString& charCodingName) { d->mCharCodingName = charCodingName; }
+void ByteArrayViewProfile::setSubstituteChar(const QChar& substituteChar) { d->mSubstituteChar = substituteChar; }
+void ByteArrayViewProfile::setUndefinedChar(const QChar& undefinedChar) { d->mUndefinedChar = undefinedChar; }
+void ByteArrayViewProfile::setOffsetColumnVisible(bool visible) { d->mOffsetColumnVisible = visible; }
+void ByteArrayViewProfile::setVisibleByteArrayCodings(int columns) { d->mVisibleByteArrayCodings = columns; }
+void ByteArrayViewProfile::setLayoutStyle(int layoutStyle) { d->mLayoutStyle = layoutStyle; }
+void ByteArrayViewProfile::setNoOfBytesPerLine(int noOfBytesPerLine) { d->mNoOfBytesPerLine = noOfBytesPerLine; }
+void ByteArrayViewProfile::setShowsNonprinting(bool showsNonprinting) { d->mShowsNonprinting = showsNonprinting; }
+void ByteArrayViewProfile::setNoOfGroupedBytes(int noOfGroupedBytes) { d->mNoOfGroupedBytes = noOfGroupedBytes; }
+void ByteArrayViewProfile::setViewModus(int viewModus) { d->mViewModus = viewModus; }
 
 ByteArrayViewProfile::~ByteArrayViewProfile() {}
 

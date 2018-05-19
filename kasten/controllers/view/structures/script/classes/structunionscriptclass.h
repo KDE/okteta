@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef STRUCTUNIONSCRIPTCLASS_H
 #define STRUCTUNIONSCRIPTCLASS_H
 
@@ -29,6 +28,7 @@
 class StructUnionScriptClass : public DefaultScriptClass
 {
     Q_DISABLE_COPY(StructUnionScriptClass)
+
 public:
     StructUnionScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~StructUnionScriptClass() override;

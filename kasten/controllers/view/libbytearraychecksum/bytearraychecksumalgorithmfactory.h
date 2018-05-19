@@ -24,14 +24,14 @@
 #define BYTEARRAYCHECKSUMALGORITHMFACTORY_H
 
 class AbstractByteArrayChecksumAlgorithm;
-template<class T> class QList;
-
+template <class T> class QList;
 
 class ByteArrayChecksumAlgorithmFactory
 {
-  protected:
+protected:
     ByteArrayChecksumAlgorithmFactory();
-  public:
+
+public:
     static QList<AbstractByteArrayChecksumAlgorithm*> createAlgorithms();
 
 };

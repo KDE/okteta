@@ -36,41 +36,41 @@ class AbstractByteArrayModel;
 class CharCodec;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ExtractStringsJob : public QObject // not yet: KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ExtractStringsJob( const Okteta::AbstractByteArrayModel* model,
-                       const Okteta::AddressRange& selection,
-                       const Okteta::CharCodec* charCodec,
-                       int minLength,
-                       QList<ContainedString>* containedStringList );
+public:
+    ExtractStringsJob(const Okteta::AbstractByteArrayModel* model,
+                      const Okteta::AddressRange& selection,
+                      const Okteta::CharCodec* charCodec,
+                      int minLength,
+                      QList<ContainedString>* containedStringList);
 
-  public:
+public:
     void exec();
 
-  protected:
-    const Okteta::AbstractByteArrayModel *mByteArrayModel;
+protected:
+    const Okteta::AbstractByteArrayModel* mByteArrayModel;
     const Okteta::AddressRange mSelection;
-    const Okteta::CharCodec *mCharCodec;
+    const Okteta::CharCodec* mCharCodec;
     const int mMinLength;
 
-    QList<ContainedString> *mContainedStringList;
+    QList<ContainedString>* mContainedStringList;
 };
 
-
-inline ExtractStringsJob::ExtractStringsJob( const Okteta::AbstractByteArrayModel* model,
-                                             const Okteta::AddressRange& selection,
-                                             const Okteta::CharCodec* charCodec,
-                                             int minLength,
-                                             QList<ContainedString>* containedStringList )
- : mByteArrayModel( model ), mSelection( selection ), mCharCodec( charCodec ), mMinLength( minLength ),
-   mContainedStringList( containedStringList )
+inline ExtractStringsJob::ExtractStringsJob(const Okteta::AbstractByteArrayModel* model,
+                                            const Okteta::AddressRange& selection,
+                                            const Okteta::CharCodec* charCodec,
+                                            int minLength,
+                                            QList<ContainedString>* containedStringList)
+    : mByteArrayModel(model)
+    , mSelection(selection)
+    , mCharCodec(charCodec)
+    , mMinLength(minLength)
+    , mContainedStringList(containedStringList)
 {}
 
 }

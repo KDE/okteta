@@ -25,7 +25,6 @@
 // C
 #include <stdio.h>
 
-
 namespace Okteta {
 
 const unsigned int OffsetFormat::CodingWidth[2] = { 9, 10 };
@@ -33,23 +32,19 @@ const unsigned int OffsetFormat::CodingWidth[2] = { 9, 10 };
 const OffsetFormat::print OffsetFormat::PrintFunction[2] =
 { OffsetFormat::printHexadecimalOffset, OffsetFormat::printDecimalOffset };
 
-
-
-void OffsetFormat::printHexadecimalOffset( char *Buffer, unsigned int Offset )
+void OffsetFormat::printHexadecimalOffset(char* Buffer, unsigned int Offset)
 {
-  sprintf( Buffer, "%04X:%04X", Offset>>16, Offset&0x0000FFFF );
+    sprintf(Buffer, "%04X:%04X", Offset >> 16, Offset & 0x0000FFFF);
 }
 
-
-void OffsetFormat::printHexadecimalSmallOffset( char *Buffer, unsigned int Offset )
+void OffsetFormat::printHexadecimalSmallOffset(char* Buffer, unsigned int Offset)
 {
-  sprintf( Buffer, "%04x:%04x", Offset>>16, Offset&0x0000FFFF );
+    sprintf(Buffer, "%04x:%04x", Offset >> 16, Offset & 0x0000FFFF);
 }
 
-
-void OffsetFormat::printDecimalOffset( char *Buffer, unsigned int Offset )
+void OffsetFormat::printDecimalOffset(char* Buffer, unsigned int Offset)
 {
-  sprintf( Buffer, "%010u", Offset );
+    sprintf(Buffer, "%010u", Offset);
 }
 
 }

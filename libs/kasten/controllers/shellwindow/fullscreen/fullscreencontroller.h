@@ -30,26 +30,24 @@
 
 class KXmlGuiWindow;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KASTENCONTROLLERS_EXPORT FullScreenController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit FullScreenController( KXmlGuiWindow *window );
+public:
+    explicit FullScreenController(KXmlGuiWindow* window);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
-    void switchFullScreen( bool toFullScreen );
+private Q_SLOTS:
+    void switchFullScreen(bool toFullScreen);
 
-  private:
+private:
 //     KProgram *Program;
-    KXmlGuiWindow *mMainWindow;
+    KXmlGuiWindow* mMainWindow;
 };
 
 }

@@ -32,42 +32,41 @@ class FramesToPaperPrinter;
 
 class QPrinter;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class PrintThread;
 
-
 class PrintJob : public QObject // not yet: KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    PrintJob( FramesToPaperPrinter *framesPrinter, int firstPage, int lastPage, QPrinter *printer );
+public:
+    PrintJob(FramesToPaperPrinter* framesPrinter, int firstPage, int lastPage, QPrinter* printer);
 
-  public: // KJob API
+public: // KJob API
 //     virtual void start();
 
-  public:
+public:
     bool exec();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
 //     void onFinished();
     void onPagePrinted();
 
-  protected:
+protected:
 //     PrintThread *mPrintThread;
-    FramesToPaperPrinter *mFramesPrinter;
+    FramesToPaperPrinter* mFramesPrinter;
     const int mFirstPage;
     const int mLastPage;
 
-    QPrinter *mPrinter;
+    QPrinter* mPrinter;
 };
 
-
-inline PrintJob::PrintJob( FramesToPaperPrinter *framesPrinter, int firstPage, int lastPage, QPrinter *printer )
- : mFramesPrinter( framesPrinter ), mFirstPage( firstPage ), mLastPage( lastPage ), mPrinter( printer )
+inline PrintJob::PrintJob(FramesToPaperPrinter* framesPrinter, int firstPage, int lastPage, QPrinter* printer)
+    : mFramesPrinter(framesPrinter)
+    , mFirstPage(firstPage)
+    , mLastPage(lastPage)
+    , mPrinter(printer)
 {}
 
 }

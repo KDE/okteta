@@ -28,26 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class DocumentInfoView;
 class DocumentInfoTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT DocumentInfoToolView : public AbstractToolView
 {
-  public:
-    explicit DocumentInfoToolView( DocumentInfoTool* tool );
+public:
+    explicit DocumentInfoToolView(DocumentInfoTool* tool);
     ~DocumentInfoToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     DocumentInfoView* mWidget;
 };
 

@@ -34,30 +34,32 @@ class QByteArray;
 
 class TestDocumentFileSynchronizerFactoryTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private:
-    void writeToFile( const QString& filePath, const QByteArray& data, const QByteArray& header = QByteArray() );
-    void checkFileContent( const QUrl& fileUrl, const QByteArray& data, const QByteArray& header = QByteArray() );
+private:
+    void writeToFile(const QString& filePath, const QByteArray& data, const QByteArray& header = QByteArray());
+    void checkFileContent(const QUrl& fileUrl, const QByteArray& data, const QByteArray& header = QByteArray());
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
     void init();
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testCreate();
 #if 0
     void testLoadFromFile();
     void testLoadSaveFile();
     void testLoadReloadFile();
     void testConnectToFile();
-  private: // not working tests
+
+private: // not working tests
     // TODO: need a way besides popups to report problems
     void testLoadFromNotExistingUrl();
     void testLoadFromNotExistingFile();
 #endif
-  private:
+
+private:
     TestFileSystem* mFileSystem;
 };
 

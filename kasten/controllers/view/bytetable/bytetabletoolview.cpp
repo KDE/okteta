@@ -26,12 +26,10 @@
 #include "bytetableview.h"
 #include "bytetabletool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteTableToolView::ByteTableToolView( ByteTableTool* tool )
- : mWidget( new ByteTableView(tool) )
+ByteTableToolView::ByteTableToolView(ByteTableTool* tool)
+    : mWidget(new ByteTableView(tool))
 {
 }
 

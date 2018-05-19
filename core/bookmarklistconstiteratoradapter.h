@@ -28,34 +28,31 @@
 // Qt
 #include <QLinkedListIterator>
 
-
-namespace Okteta
-{
+namespace Okteta {
 class BookmarkList;
-
 
 class BookmarkListConstIteratorAdapter : public BookmarksConstIteratorAdapter
 {
-  public:
-    explicit BookmarkListConstIteratorAdapter( const BookmarkList& list );
+public:
+    explicit BookmarkListConstIteratorAdapter(const BookmarkList& list);
     ~BookmarkListConstIteratorAdapter() override;
 
-  public: // BookmarksConstIteratorAdapter API
+public: // BookmarksConstIteratorAdapter API
     bool hasNext() const override;
     bool hasPrevious() const override;
     const Bookmark& peekNext() const override;
     const Bookmark& peekPrevious() const override;
 
-    bool findNext( const Bookmark& bookmark ) override;
-    bool findPrevious( const Bookmark& bookmark ) override;
-    bool findNextFrom( Address offset ) override;
-    bool findPreviousFrom( Address offset ) override;
+    bool findNext(const Bookmark& bookmark) override;
+    bool findPrevious(const Bookmark& bookmark) override;
+    bool findNextFrom(Address offset) override;
+    bool findPreviousFrom(Address offset) override;
     const Bookmark& next() override;
     const Bookmark& previous() override;
     void toBack() override;
     void toFront() override;
 
-  protected:
+protected:
     QLinkedListIterator<Bookmark> mIterator;
 };
 

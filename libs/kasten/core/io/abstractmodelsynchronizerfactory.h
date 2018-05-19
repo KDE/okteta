@@ -28,9 +28,7 @@
 // Qt
 #include <QObject>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 // not really a classic factory, functions do some more, instead it is what?
 // TODO: improve the whole vodoo, especially linking document and synchronizer
@@ -41,12 +39,12 @@ namespace Kasten
 // in invalid states, like with simple constructor
 class KASTENCORE_EXPORT AbstractModelSynchronizerFactory : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ~AbstractModelSynchronizerFactory() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual AbstractModelSynchronizer* createSynchronizer() const = 0;
 
 //     virtual AbstractDocument* loadNewDocument( const QUrl& originUrl ) const = 0;

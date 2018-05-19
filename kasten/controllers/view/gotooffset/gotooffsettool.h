@@ -32,30 +32,27 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 /**
-*/
+ */
 class GotoOffsetTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     GotoOffsetTool();
     ~GotoOffsetTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // status
+public: // status
     int currentOffset() const;
     int targetOffset() const;
     bool isRelative() const;
@@ -65,39 +62,38 @@ class GotoOffsetTool : public AbstractTool
     bool isUsable() const;
     bool isApplyable() const; // candidate for AbstractTool API
 
-  public Q_SLOTS: // settings
-    void setTargetOffset( Okteta::Address targetOffset );
-    void setIsRelative( bool isRelative );
-    void setIsSelectionToExtent( bool isSelectionToExtent );
-    void setIsBackwards( bool isBackwards );
+public Q_SLOTS: // settings
+    void setTargetOffset(Okteta::Address targetOffset);
+    void setIsRelative(bool isRelative);
+    void setIsSelectionToExtent(bool isSelectionToExtent);
+    void setIsBackwards(bool isBackwards);
 
-  public Q_SLOTS: // actions
+public Q_SLOTS: // actions
     void gotoOffset();
 
-  Q_SIGNALS:
-    void isUsableChanged( bool isUsable );
-    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
+Q_SIGNALS:
+    void isUsableChanged(bool isUsable);
+    void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
     // TODO: isAtLine useful, to prevent noop actions, or should they be allowed, too?
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onContentsChanged();
 
-  private:
+private:
     int finalTargetOffset() const;
 
-  private: // settings
+private: // settings
     int mTargetOffset;
     bool mIsRelative;
     bool mIsSelectionToExtent;
     bool mIsBackwards;
 
-  private: // target
+private: // target
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
 
-
-inline int  GotoOffsetTool::targetOffset()        const { return mTargetOffset; }
+inline int GotoOffsetTool::targetOffset()         const { return mTargetOffset; }
 inline bool GotoOffsetTool::isRelative()          const { return mIsRelative; }
 inline bool GotoOffsetTool::isSelectionToExtent() const { return mIsSelectionToExtent; }
 inline bool GotoOffsetTool::isBackwards()         const { return mIsBackwards; }

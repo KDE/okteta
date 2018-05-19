@@ -27,26 +27,24 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct SInt8
 {
-  public:
-    SInt8( qint8 v );
+public:
+    SInt8(qint8 v);
     SInt8();
 
-  public:
+public:
     QString toString() const;
 
-  public:
+public:
     qint8 value;
 };
 
+inline SInt8::SInt8() : value(0) {}
+inline SInt8::SInt8(qint8 v) : value(v) {}
 
-inline SInt8::SInt8() : value( 0 ) {}
-inline SInt8::SInt8( qint8 v ) : value( v ) {}
+inline QString SInt8::toString() const { return QString::number(value); }
 
-inline QString SInt8::toString() const { return QString::number( value ); }
-
-Q_DECLARE_METATYPE( SInt8 )
+Q_DECLARE_METATYPE(SInt8)
 
 #endif

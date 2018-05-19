@@ -26,12 +26,10 @@
 #include "gotooffsetview.h"
 #include "gotooffsettool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-GotoOffsetToolView::GotoOffsetToolView( GotoOffsetTool* tool )
- : mWidget( new GotoOffsetView(tool) )
+GotoOffsetToolView::GotoOffsetToolView(GotoOffsetTool* tool)
+    : mWidget(new GotoOffsetView(tool))
 {
 }
 

@@ -29,40 +29,49 @@
 // Qt
 #include <QValidator>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class ValueCodec;
 
-
 class AddressValidator : public QValidator
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     // matching Okteta::ValueCoding
-    enum Coding { InvalidCoding = -1, HexadecimalCoding=0, DecimalCoding=1, ExpressionCoding=2 };
-    //XXX shouldn't this better be in address.h? Sometime later maybe
-    enum AddressType { InvalidAddressType = -1, AbsoluteAddress = 0, RelativeForwards, RelativeBackwards};
+    enum Coding
+    {
+        InvalidCoding = -1,
+        HexadecimalCoding = 0,
+        DecimalCoding = 1,
+        ExpressionCoding = 2
+    };
+    // XXX shouldn't this better be in address.h? Sometime later maybe
+    enum AddressType
+    {
+        InvalidAddressType = -1,
+        AbsoluteAddress = 0,
+        RelativeForwards,
+        RelativeBackwards
+    };
 
-  public:
-    explicit AddressValidator( QObject* parent, Coding codecId = HexadecimalCoding );
+public:
+    explicit AddressValidator(QObject* parent, Coding codecId = HexadecimalCoding);
     ~AddressValidator() override;
 
-  public: // QValidator API
-    QValidator::State validate( QString& input, int& pos ) const override;
+public: // QValidator API
+    QValidator::State validate(QString& input, int& pos) const override;
 
-  public:
+public:
     AddressType addressType() const;
     /** Sets one of the value codecs or any char codec */
-    void setCodec( Coding codecId );
+    void setCodec(Coding codecId);
 
-  public:
-    Address toAddress( const QString& string, AddressType* type = nullptr ) const;
-    QString toString( Address address, AddressType addressType ) const;
+public:
+    Address toAddress(const QString& string, AddressType* type = nullptr) const;
+    QString toString(Address address, AddressType addressType) const;
 
-  private:
+private:
     Coding mCodecId;
     ValueCodec* mValueCodec;
 

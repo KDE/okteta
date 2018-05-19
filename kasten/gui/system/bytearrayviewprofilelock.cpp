@@ -28,55 +28,53 @@
 #include <QLockFile>
 #include <QSharedPointer>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayViewProfileLockPrivate : public QSharedData
 {
 public:
-    ByteArrayViewProfileLockPrivate( const QString& fileName,
-                                     const ByteArrayViewProfile::Id& viewProfileId );
+    ByteArrayViewProfileLockPrivate(const QString& fileName,
+                                    const ByteArrayViewProfile::Id& viewProfileId);
+
 public:
     QSharedPointer<QLockFile> lockFile;
     ByteArrayViewProfile::Id viewProfileId;
 };
 
-
 static QString
-viewProfileFileLockPath( const QString& viewProfileFilePath)
+viewProfileFileLockPath(const QString& viewProfileFilePath)
 {
     // TODO: just ".lock" conflicts with KConfig(?) using the same
     return viewProfileFilePath + QLatin1String(".olock");
 }
 
-ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate( const QString& fileName,
-                                                                  const ByteArrayViewProfile::Id& id )
-  : lockFile(new QLockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName))),
-    viewProfileId( id )
+ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate(const QString& fileName,
+                                                                 const ByteArrayViewProfile::Id& id)
+    : lockFile(new QLockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName)))
+    , viewProfileId(id)
 {
-    if( !fileName.isEmpty() )
-    {
-        if ( !lockFile->tryLock( 1000 ) )
-            qCWarning(LOG_KASTEN_OKTETA_GUI) << "Failed to acquire lock file" << fileName
-                    << "error =" << lockFile->error();
+    if (!fileName.isEmpty()) {
+        if (!lockFile->tryLock(1000)) {
+            qCWarning(LOG_KASTEN_OKTETA_GUI)
+                << "Failed to acquire lock file" << fileName
+                << "error =" << lockFile->error();
+        }
     }
 }
 
-
-ByteArrayViewProfileLock::ByteArrayViewProfileLock( const QString& fileName,
-                                                    const ByteArrayViewProfile::Id& viewProfileId )
-  : d( new ByteArrayViewProfileLockPrivate(fileName, viewProfileId) )
+ByteArrayViewProfileLock::ByteArrayViewProfileLock(const QString& fileName,
+                                                   const ByteArrayViewProfile::Id& viewProfileId)
+    : d(new ByteArrayViewProfileLockPrivate(fileName, viewProfileId))
 {
 }
 
-ByteArrayViewProfileLock::ByteArrayViewProfileLock( const ByteArrayViewProfileLock& other )
-  : d( other.d )
+ByteArrayViewProfileLock::ByteArrayViewProfileLock(const ByteArrayViewProfileLock& other)
+    : d(other.d)
 {
 }
 
 ByteArrayViewProfileLock&
-ByteArrayViewProfileLock::operator=( const ByteArrayViewProfileLock& other )
+ByteArrayViewProfileLock::operator=(const ByteArrayViewProfileLock& other)
 {
     d = other.d;
 
@@ -100,7 +98,6 @@ ByteArrayViewProfileLock::viewProfileId() const
 {
     return d->viewProfileId;
 }
-
 
 ByteArrayViewProfileLock::~ByteArrayViewProfileLock()
 {

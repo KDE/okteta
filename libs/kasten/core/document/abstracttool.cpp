@@ -22,20 +22,18 @@
 
 #include "abstracttool.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class Q_DECL_HIDDEN AbstractTool::Private
 {
-  public:
-    explicit Private( AbstractTool* tool );
+public:
+    explicit Private(AbstractTool* tool);
 };
 
-AbstractTool::Private::Private( AbstractTool* tool ) { Q_UNUSED(tool) }
+AbstractTool::Private::Private(AbstractTool* tool) { Q_UNUSED(tool) }
 
 AbstractTool::AbstractTool()
- : d( new Private(this) )
+    : d(new Private(this))
 {}
 
 AbstractTool::~AbstractTool()

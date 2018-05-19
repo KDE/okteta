@@ -25,8 +25,7 @@
 // lib
 #include "filtertool.h"
 
-namespace Kasten
-{
+namespace Kasten {
 
 FilterToolFactory::FilterToolFactory() {}
 

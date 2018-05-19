@@ -28,27 +28,25 @@
 #include <KActionCollection>
 #include <KStandardAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-FullScreenController::FullScreenController( KXmlGuiWindow* window )
-  : mMainWindow( window )
+FullScreenController::FullScreenController(KXmlGuiWindow* window)
+    : mMainWindow(window)
 {
     KActionCollection* actionCollection = mMainWindow->actionCollection();
 
-    KStandardAction::fullScreen( this, SLOT(switchFullScreen(bool)),
-                                 window, actionCollection );
+    KStandardAction::fullScreen(this, SLOT(switchFullScreen(bool)),
+                                window, actionCollection);
 }
 
-void FullScreenController::setTargetModel( AbstractModel* model )
+void FullScreenController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED( model )
+    Q_UNUSED(model)
 }
 
-void FullScreenController::switchFullScreen( bool toFullScreen )
+void FullScreenController::switchFullScreen(bool toFullScreen)
 {
-    KToggleFullScreenAction::setFullScreen( mMainWindow, toFullScreen );
+    KToggleFullScreenAction::setFullScreen(mMainWindow, toFullScreen);
 }
 
 }

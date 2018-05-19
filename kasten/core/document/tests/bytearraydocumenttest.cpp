@@ -31,24 +31,21 @@
 #include <QSignalSpy>
 #include <QByteArray>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const char Title[] = "title";
-
 
 void ByteArrayDocumentTest::testCreateNew()
 {
     ByteArrayDocument* document = new ByteArrayDocument(QStringLiteral("New created for test."));
 
-    QVERIFY( document != nullptr );
-    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
+    QVERIFY(document != nullptr);
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
 
-    Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
-    QVERIFY( byteArray != nullptr );
-    QCOMPARE( byteArray->size(), 0 );
-    QVERIFY( !byteArray->isModified() );
+    Okteta::PieceTableByteArrayModel* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+    QVERIFY(byteArray != nullptr);
+    QCOMPARE(byteArray->size(), 0);
+    QVERIFY(!byteArray->isModified());
 
     delete document;
 }
@@ -56,15 +53,15 @@ void ByteArrayDocumentTest::testCreateNew()
 void ByteArrayDocumentTest::testSetTitle()
 {
     ByteArrayDocument* document = new ByteArrayDocument(QStringLiteral("New created for test."));
-    QSignalSpy* titleChangeSpy =  new QSignalSpy( document, SIGNAL(titleChanged(QString)) );
+    QSignalSpy* titleChangeSpy =  new QSignalSpy(document, SIGNAL(titleChanged(QString)));
 
-    const QLatin1String title( Title );
-    document->setTitle( title );
-    QCOMPARE( document->title(), title );
-    QVERIFY( titleChangeSpy->isValid() );
-    QCOMPARE( titleChangeSpy->count(), 1 );
+    const QLatin1String title(Title);
+    document->setTitle(title);
+    QCOMPARE(document->title(), title);
+    QVERIFY(titleChangeSpy->isValid());
+    QCOMPARE(titleChangeSpy->count(), 1);
     const QList<QVariant> arguments = titleChangeSpy->takeFirst();
-    QCOMPARE( arguments.at(0).toString(), title );
+    QCOMPARE(arguments.at(0).toString(), title);
 
     delete document;
     delete titleChangeSpy;
@@ -72,4 +69,4 @@ void ByteArrayDocumentTest::testSetTitle()
 
 }
 
-QTEST_MAIN( Kasten::ByteArrayDocumentTest )
+QTEST_MAIN(Kasten::ByteArrayDocumentTest)

@@ -28,24 +28,22 @@
 // Okteta gui
 #include <okteta/offsetformat.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class OffsetColumnTextRenderer : public AbstractColumnTextRenderer
 {
-  public:
-    OffsetColumnTextRenderer( int offsetFormat, int firstLineOffset, int delta );
+public:
+    OffsetColumnTextRenderer(int offsetFormat, int firstLineOffset, int delta);
     ~OffsetColumnTextRenderer() override;
 
-  public: // AbstractColumnTextRenderer API
-    void renderFirstLine( QTextStream *stream, int lineIndex ) const override;
-    void renderNextLine( QTextStream* stream, bool isSubline ) const override;
+public: // AbstractColumnTextRenderer API
+    void renderFirstLine(QTextStream* stream, int lineIndex) const override;
+    void renderNextLine(QTextStream* stream, bool isSubline) const override;
 
-  protected:
-    void renderLine( QTextStream* stream, bool isSubline ) const;
+protected:
+    void renderLine(QTextStream* stream, bool isSubline) const;
 
-  protected:
+protected:
     const int mFirstLineOffset;
     const int mDelta;
     const Okteta::OffsetFormat::print printFunction;

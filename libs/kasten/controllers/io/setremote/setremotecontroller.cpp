@@ -32,35 +32,33 @@
 // Qt
 #include <QAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-SetRemoteController::SetRemoteController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
-: mSyncManager( syncManager )
+SetRemoteController::SetRemoteController(DocumentSyncManager* syncManager, KXMLGUIClient* guiClient)
+    : mSyncManager(syncManager)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSaveAsAction = KStandardAction::saveAs( this, SLOT(saveAs()), actionCollection );
+    mSaveAsAction = KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection);
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void SetRemoteController::setTargetModel( AbstractModel* model )
+void SetRemoteController::setTargetModel(AbstractModel* model)
 {
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
     const bool canBeSaved = mDocument ?
-                                ( mDocument->synchronizer() ||
-                                  mSyncManager->hasSynchronizerForLocal(mDocument->mimeType()) ) :
-                                false;
+                            (mDocument->synchronizer() ||
+                             mSyncManager->hasSynchronizerForLocal(mDocument->mimeType())) :
+                            false;
 
-    mSaveAsAction->setEnabled( canBeSaved );
+    mSaveAsAction->setEnabled(canBeSaved);
 }
 
 void SetRemoteController::saveAs()
 {
-    mSyncManager->setSynchronizer( mDocument );
+    mSyncManager->setSynchronizer(mDocument);
 }
 
 }

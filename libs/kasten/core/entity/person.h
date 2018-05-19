@@ -31,33 +31,31 @@
 class QIcon;
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KASTENCORE_EXPORT Person
 {
-  public: // TODO: remove me again, hack!
+public: // TODO: remove me again, hack!
     static Person createEgo();
-    static void setEgoId( int egoId );
+    static void setEgoId(int egoId);
 
-  public:
-    Person( const QString& name, const QIcon& faceIcon );
+public:
+    Person(const QString& name, const QIcon& faceIcon);
     Person();
-    Person( const Person& other );
+    Person(const Person& other);
     ~Person();
 
-  public:
-    Person& operator=( const Person& other );
+public:
+    Person& operator=(const Person& other);
 
-  public:
-    bool operator==( const Person& other ) const;
+public:
+    bool operator==(const Person& other) const;
 
-  public:
+public:
     QString name() const;
     QIcon faceIcon() const;
 
-  protected:
+protected:
     class Private;
     QExplicitlySharedDataPointer<Private> d;
 };

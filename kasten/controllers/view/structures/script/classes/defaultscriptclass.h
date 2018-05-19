@@ -68,6 +68,7 @@ protected:
 
 private:
     void setDataType(const QScriptValue& value, DataInformation* data);
+
 protected:
     QScriptString s_valid;
     QScriptString s_wasAbleToRead;
@@ -87,7 +88,8 @@ protected:
 };
 
 /** Provide a default iterator for all properties. This should suffice for all classes that don't have children */
-class DefaultscriptClassIterator : public QScriptClassPropertyIterator {
+class DefaultscriptClassIterator : public QScriptClassPropertyIterator
+{
 public:
     DefaultscriptClassIterator(const QScriptValue& object, DefaultScriptClass* cls);
     ~DefaultscriptClassIterator() override;
@@ -100,6 +102,7 @@ public:
     void previous() override;
     void toBack() override;
     void toFront() override;
+
 private:
     int mCurrent;
     DefaultScriptClass* mClass;

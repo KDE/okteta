@@ -23,31 +23,28 @@
 #ifndef KSEARCHDIALOG_H
 #define KSEARCHDIALOG_H
 
-
 // lib
 #include <kabstractfinddialog.h>
 
-namespace Kasten
-{
+namespace Kasten {
 
 class SearchTool;
 
-
 class KSearchDialog : public KAbstractFindDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit KSearchDialog( SearchTool* tool, QWidget* parent = nullptr );
+public:
+    explicit KSearchDialog(SearchTool* tool, QWidget* parent = nullptr);
     ~KSearchDialog() override;
 
-  protected: // KAbstractFindDialog API
+protected: // KAbstractFindDialog API
     void onFindButtonClicked() override;
 
-  protected: // QWidget API
-    void showEvent( QShowEvent* showEvent ) override;
+protected: // QWidget API
+    void showEvent(QShowEvent* showEvent) override;
 
-  protected:
+protected:
     SearchTool* mTool;
 };
 

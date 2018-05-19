@@ -26,27 +26,26 @@
 // Qt
 #include <QTabBar>
 
-namespace Kasten
-{
+namespace Kasten {
 
 class TabBar : public QTabBar
 {
     Q_OBJECT
 
-  public:
-    explicit TabBar( QWidget* parent = nullptr );
+public:
+    explicit TabBar(QWidget* parent = nullptr);
     ~TabBar() override;
 
-  Q_SIGNALS:
+Q_SIGNALS:
     void mouseMiddleClick();
-    void testCanDecode( const QDragMoveEvent* event, bool& accept );
-    void receivedDropEvent( QDropEvent* event );
+    void testCanDecode(const QDragMoveEvent* event, bool& accept);
+    void receivedDropEvent(QDropEvent* event);
 
-  protected:
-    void mouseReleaseEvent( QMouseEvent* event ) override;
-    void dragEnterEvent( QDragEnterEvent* event ) override;
-    void dragMoveEvent( QDragMoveEvent* event ) override;
-    void dropEvent( QDropEvent* event ) override;
+protected:
+    void mouseReleaseEvent(QMouseEvent* event) override;
+    void dragEnterEvent(QDragEnterEvent* event) override;
+    void dragMoveEvent(QDragMoveEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
 };
 
 }

@@ -25,10 +25,9 @@
 #include "structureview.h"
 #include "structurestool.h"
 
-namespace Kasten
-{
+namespace Kasten {
 
-StructuresToolView::StructuresToolView(StructuresTool *tool) :
+StructuresToolView::StructuresToolView(StructuresTool* tool) :
     mWidget(new StructureView(tool))
 {
 }
@@ -41,7 +40,7 @@ QString StructuresToolView::title() const
 {
     return mWidget->tool()->title();
 }
-AbstractTool *StructuresToolView::tool() const
+AbstractTool* StructuresToolView::tool() const
 {
     return mWidget->tool();
 }

@@ -32,7 +32,7 @@
 #include <QScriptEngine>
 
 ScriptFileParser::ScriptFileParser(const QString& pluginName, const QString& absolutePath)
-        : AbstractStructureParser(pluginName, absolutePath)
+    : AbstractStructureParser(pluginName, absolutePath)
 {
 }
 
@@ -54,24 +54,26 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
 
     QScriptValue value = loadScriptValue(logger, engine);
     DataInformation* dataInf;
-    if (!value.isValid())
+    if (!value.isValid()) {
         dataInf = new DummyDataInformation(nullptr, mPluginName);
-    else
+    } else {
         dataInf = ScriptValueConverter::convert(value, mPluginName, logger);
+    }
 
-    if (!dataInf)
+    if (!dataInf) {
         dataInf = new DummyDataInformation(nullptr, mPluginName);
+    }
     const QFileInfo fileInfo(mAbsolutePath);
     TopLevelDataInformation* top = new TopLevelDataInformation(dataInf, logger, engine, fileInfo);
-    //handle default lock offset
+    // handle default lock offset
     QScriptValue lockOffset = value.property(ParserStrings::PROPERTY_DEFAULT_LOCK_OFFSET());
-    if (lockOffset.isValid())
-    {
+    if (lockOffset.isValid()) {
         ParsedNumber<quint64> offset = ParserUtils::uint64FromScriptValue(lockOffset);
-        if (!offset.isValid)
+        if (!offset.isValid) {
             dataInf->logError() << "Default lock offset is not a valid number:" << offset.string;
-        else
+        } else {
             top->setDefaultLockOffset(offset.value);
+        }
     }
     ret.append(top);
     return ret;
@@ -80,8 +82,7 @@ QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
 QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngine* engine) const
 {
     QFile scriptFile(mAbsolutePath);
-    if (!scriptFile.open(QIODevice::ReadOnly))
-    {
+    if (!scriptFile.open(QIODevice::ReadOnly)) {
         logger->error() << "Could not open file " << mAbsolutePath;
         return QScriptValue();
     }
@@ -90,20 +91,16 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
     QString contents = stream.readAll();
     scriptFile.close();
     engine->evaluate(contents, mAbsolutePath);
-    if (engine->hasUncaughtException())
-    {
-        //check if it was a syntax error:
+    if (engine->hasUncaughtException()) {
+        // check if it was a syntax error:
         QScriptSyntaxCheckResult syntaxError = QScriptEngine::checkSyntax(contents);
-        if (syntaxError.state() == QScriptSyntaxCheckResult::Error)
-        {
-            //give a detailed syntax error message
+        if (syntaxError.state() == QScriptSyntaxCheckResult::Error) {
+            // give a detailed syntax error message
             logger->error() << "Syntax error in script: " << syntaxError.errorMessage();
             logger->error() << "Line number: " << syntaxError.errorLineNumber()
-                    << "Column:" << syntaxError.errorColumnNumber();
-        }
-        else
-        {
-            //just print the generic exception message
+                            << "Column:" << syntaxError.errorColumnNumber();
+        } else {
+            // just print the generic exception message
             logger->error() << "Error evaluating script: " << engine->uncaughtException().toString();
             logger->error() << "Line number: " << engine->uncaughtExceptionLineNumber();
             logger->error() << "Backtrace: " << engine->uncaughtExceptionBacktrace();
@@ -112,8 +109,7 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
     }
     QScriptValue obj = engine->globalObject();
     QScriptValue initMethod = obj.property(QStringLiteral("init"));
-    if (!initMethod.isFunction())
-    {
+    if (!initMethod.isFunction()) {
         logger->error() << "Script has no 'init' function! Cannot evaluate script!";
         return QScriptValue();
     }
@@ -121,8 +117,7 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
     QScriptValue thisObj = engine->newObject();
     QScriptValueList args;
     QScriptValue result = initMethod.call(thisObj, args);
-    if (result.isError())
-    {
+    if (result.isError()) {
         logger->error() << "Exception occurred while calling init():" << result.toString();
         return QScriptValue();
     }

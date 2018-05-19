@@ -28,19 +28,17 @@
 // Kasten core
 #include <kasten/abstractdocumentfactory.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class OKTETAKASTENCORE_EXPORT ByteArrayDocumentFactory : public AbstractDocumentFactory
 {
     Q_OBJECT
 
-  public: // AbstractDocumentFactory API
-    bool canCreateFromData( const QMimeData* mimeData ) override;
+public: // AbstractDocumentFactory API
+    bool canCreateFromData(const QMimeData* mimeData) override;
 
     AbstractDocument* create() override;
-    AbstractDocument* createFromData( const QMimeData* mimeData, bool setModified ) override;
+    AbstractDocument* createFromData(const QMimeData* mimeData, bool setModified) override;
 };
 
 }

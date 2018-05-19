@@ -25,68 +25,69 @@
 #include <KLocalizedString>
 #include <QDebug>
 
-static const char* const longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] =
-        {
-                I18N_NOOP2("data type", "bool (1 byte)"),
-                I18N_NOOP2("data type", "signed byte"),
-                I18N_NOOP2("data type", "unsigned byte"),
-                I18N_NOOP2("data type", "char"),
-                I18N_NOOP2("data type", "bool (2 bytes)"),
-                I18N_NOOP2("data type", "signed short"),
-                I18N_NOOP2("data type", "unsigned short"),
-                I18N_NOOP2("data type", "bool (4 bytes)"),
-                I18N_NOOP2("data type", "signed int"),
-                I18N_NOOP2("data type", "unsigned int"),
-                I18N_NOOP2("data type", "bool (8 bytes)"),
-                I18N_NOOP2("data type", "signed long"),
-                I18N_NOOP2("data type", "unsigned long"),
-                I18N_NOOP2("data type", "float"),
-                I18N_NOOP2("data type", "double"),
-                I18N_NOOP2("data type", "bitfield"),
-        };
+static const char* const longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+    I18N_NOOP2("data type", "bool (1 byte)"),
+    I18N_NOOP2("data type", "signed byte"),
+    I18N_NOOP2("data type", "unsigned byte"),
+    I18N_NOOP2("data type", "char"),
+    I18N_NOOP2("data type", "bool (2 bytes)"),
+    I18N_NOOP2("data type", "signed short"),
+    I18N_NOOP2("data type", "unsigned short"),
+    I18N_NOOP2("data type", "bool (4 bytes)"),
+    I18N_NOOP2("data type", "signed int"),
+    I18N_NOOP2("data type", "unsigned int"),
+    I18N_NOOP2("data type", "bool (8 bytes)"),
+    I18N_NOOP2("data type", "signed long"),
+    I18N_NOOP2("data type", "unsigned long"),
+    I18N_NOOP2("data type", "float"),
+    I18N_NOOP2("data type", "double"),
+    I18N_NOOP2("data type", "bitfield"),
+};
 
-static const char* const typeNames[static_cast<int>(PrimitiveDataType::END) + 1] =
-        {
-                "bool8",
-                "int8",
-                "uint8",
-                "char",
-                "bool16",
-                "int16",
-                "uint16",
-                "bool32",
-                "int32",
-                "uint32",
-                "bool64",
-                "int64",
-                "uint64",
-                "float",
-                "double",
-                "bitfield",
-        };
+static const char* const typeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+    "bool8",
+    "int8",
+    "uint8",
+    "char",
+    "bool16",
+    "int16",
+    "uint16",
+    "bool32",
+    "int32",
+    "uint32",
+    "bool64",
+    "int64",
+    "uint64",
+    "float",
+    "double",
+    "bitfield",
+};
 
 QString PrimitiveType::typeName(PrimitiveDataType type)
 {
-    if (Kasten::StructureViewPreferences::shortTypeNames())
+    if (Kasten::StructureViewPreferences::shortTypeNames()) {
         return standardTypeName(type);
-    else
+    } else {
         return longTypeName(type);
+    }
 }
 
 QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 {
-    if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END)
+    if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
         return QLatin1String(typeNames[static_cast<int>(type)]);
-    else
+    } else {
         return QStringLiteral("invalid");
+    }
 }
 
 QString PrimitiveType::longTypeName(PrimitiveDataType type)
 {
-    if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END)
+    if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
         return i18n(longTypeNames[static_cast<int>(type)]);
-    else
+    } else {
         return i18n("invalid type");
+    }
 }
 
 QDebug operator<<(QDebug dbg, PrimitiveDataType type)
@@ -94,4 +95,3 @@ QDebug operator<<(QDebug dbg, PrimitiveDataType type)
     dbg.nospace() << "primitive type(" << PrimitiveType::standardTypeName(type) << ")";
     return dbg.space();
 }
-

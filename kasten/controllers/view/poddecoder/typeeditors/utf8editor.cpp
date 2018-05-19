@@ -25,51 +25,48 @@
 // Qt
 #include <QValidator>
 
-
 class Utf8CharValidator : public QValidator
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit Utf8CharValidator( QObject* parent = nullptr );
+public:
+    explicit Utf8CharValidator(QObject* parent = nullptr);
 
     ~Utf8CharValidator() override;
 
-  public: // QValidator API
-    QValidator::State validate( QString& input, int& pos ) const override;
+public: // QValidator API
+    QValidator::State validate(QString& input, int& pos) const override;
 };
 
-inline Utf8CharValidator::Utf8CharValidator( QObject* parent ) : QValidator( parent ) {}
+inline Utf8CharValidator::Utf8CharValidator(QObject* parent) : QValidator(parent) {}
 
-
-QValidator::State Utf8CharValidator::validate( QString& input, int& pos ) const
+QValidator::State Utf8CharValidator::validate(QString& input, int& pos) const
 {
-    Q_UNUSED( pos )
+    Q_UNUSED(pos)
 
     const int stringLength = input.length();
-    return ( stringLength == 0 ) ? QValidator::Intermediate : QValidator::Acceptable;
+    return (stringLength == 0) ? QValidator::Intermediate : QValidator::Acceptable;
 }
 
 Utf8CharValidator::~Utf8CharValidator() {}
 
-
-Utf8Editor::Utf8Editor( QWidget* parent )
-  : QLineEdit( parent )
+Utf8Editor::Utf8Editor(QWidget* parent)
+    : QLineEdit(parent)
 {
-    setValidator( new Utf8CharValidator(this) );
-    setMaxLength( 1 );
-    setClearButtonEnabled( true );
+    setValidator(new Utf8CharValidator(this));
+    setMaxLength(1);
+    setClearButtonEnabled(true);
 }
 
-void Utf8Editor::setData( Utf8 data )
+void Utf8Editor::setData(Utf8 data)
 {
-    setText( data.value );
+    setText(data.value);
 }
 
 Utf8 Utf8Editor::data() const
 {
     const QString t = text();
-    return Utf8( t.isEmpty() ? QChar(0) : t[0] );
+    return Utf8(t.isEmpty() ? QChar(0) : t[0]);
 }
 
 Utf8Editor::~Utf8Editor() {}

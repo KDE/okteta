@@ -31,16 +31,15 @@ class AbstractDocument;
 }
 class QSignalSpy;
 
-
 class DocumentManagerTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private:
-    void checkAdded( QSignalSpy* changedSpy, Kasten::AbstractDocument* document );
-    void checkRemoving( QSignalSpy* changedSpy, Kasten::AbstractDocument* document );
+private:
+    void checkAdded(QSignalSpy* changedSpy, Kasten::AbstractDocument* document);
+    void checkRemoving(QSignalSpy* changedSpy, Kasten::AbstractDocument* document);
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void initTestCase();
 
     void testConstructor();

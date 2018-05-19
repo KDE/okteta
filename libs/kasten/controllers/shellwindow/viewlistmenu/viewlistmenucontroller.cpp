@@ -36,82 +36,72 @@
 // Qt
 #include <QActionGroup>
 
-
-
 Q_DECLARE_METATYPE(Kasten::AbstractView*)
 
-namespace Kasten
-{
+namespace Kasten {
 
 static const int MaxEntryLength = 150;
 static const char WindowsListActionListId[] = "windows_list";
 
-
-ViewListMenuController::ViewListMenuController( ViewManager* viewManager, AbstractGroupedViews* groupedViews,
-                                                KXMLGUIClient* guiClient )
-  : mViewManager( viewManager ),
-    mGroupedViews( groupedViews ),
-    mGuiClient( guiClient )
+ViewListMenuController::ViewListMenuController(ViewManager* viewManager, AbstractGroupedViews* groupedViews,
+                                               KXMLGUIClient* guiClient)
+    : mViewManager(viewManager)
+    , mGroupedViews(groupedViews)
+    , mGuiClient(guiClient)
 {
-    mWindowsActionGroup = new QActionGroup( this ); // TODO: do we use this only for the signal mapping?
+    mWindowsActionGroup = new QActionGroup(this);   // TODO: do we use this only for the signal mapping?
 //     mWindowsActionGroup->setExclusive( true );
-    connect( mWindowsActionGroup, &QActionGroup::triggered,
-             this, &ViewListMenuController::onActionTriggered );
+    connect(mWindowsActionGroup, &QActionGroup::triggered,
+            this, &ViewListMenuController::onActionTriggered);
 
-    connect( mViewManager, &ViewManager::opened,
-             this, &ViewListMenuController::updateActions );
-    connect( mViewManager, &ViewManager::closing,
-             this, &ViewListMenuController::updateActions );
+    connect(mViewManager, &ViewManager::opened,
+            this, &ViewListMenuController::updateActions);
+    connect(mViewManager, &ViewManager::closing,
+            this, &ViewListMenuController::updateActions);
 
     updateActions();
 }
 
-void ViewListMenuController::setTargetModel( AbstractModel* model )
+void ViewListMenuController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED(model)
+    Q_UNUSED(model)
 }
-
 
 void ViewListMenuController::updateActions()
 {
-    mGuiClient->unplugActionList( QLatin1String(WindowsListActionListId) );
+    mGuiClient->unplugActionList(QLatin1String(WindowsListActionListId));
 
-    qDeleteAll( mWindowsActionGroup->actions() );
+    qDeleteAll(mWindowsActionGroup->actions());
 
     const QList<AbstractView*> views = mViewManager->views();
-    const bool hasViews = ( views.size() > 0 );
+    const bool hasViews = (views.size() > 0);
 
-    if( hasViews )
-    {
-        //TODO: sortieren nach namen und erste 10 mit Zahl, siehe unten
-        for( int v = 0; v < views.size(); ++v )
-        {
-            AbstractView *view = views.at( v );
-            const QString title = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
-            QAction *action = new QAction( v<9 ? QStringLiteral("&%1 %2").arg(v+1).arg(title) : title, mWindowsActionGroup );
-    //         action->setCheckable( true );
+    if (hasViews) {
+        // TODO: sortieren nach namen und erste 10 mit Zahl, siehe unten
+        for (int v = 0; v < views.size(); ++v) {
+            AbstractView* view = views.at(v);
+            const QString title = KStringHandler::rsqueeze(view->title(), MaxEntryLength);
+            QAction* action = new QAction(v < 9 ? QStringLiteral("&%1 %2").arg(v + 1).arg(title) : title, mWindowsActionGroup);
+            //         action->setCheckable( true );
 
-    //         if(m_viewManager->activeView() && doc == m_viewManager->activeView()->document())
-    //             action->setChecked(true);
-            action->setData( QVariant::fromValue(view) );
-            mWindowsActionGroup->addAction( action );
+            //         if(m_viewManager->activeView() && doc == m_viewManager->activeView()->document())
+            //             action->setChecked(true);
+            action->setData(QVariant::fromValue(view));
+            mWindowsActionGroup->addAction(action);
         }
+    } else {
+        QAction* noneAction = new QAction(i18nc("@item There are no windows.", "None."), mWindowsActionGroup);
+        mWindowsActionGroup->addAction(noneAction);
     }
-    else
-    {
-        QAction *noneAction = new QAction( i18nc("@item There are no windows.","None."), mWindowsActionGroup );
-        mWindowsActionGroup->addAction( noneAction );
-    }
-    mWindowsActionGroup->setEnabled( hasViews );
+    mWindowsActionGroup->setEnabled(hasViews);
 
-    mGuiClient->plugActionList( QLatin1String(WindowsListActionListId), mWindowsActionGroup->actions() );
+    mGuiClient->plugActionList(QLatin1String(WindowsListActionListId), mWindowsActionGroup->actions());
 }
 
-
-void ViewListMenuController::onActionTriggered( QAction *action )
+void ViewListMenuController::onActionTriggered(QAction* action)
 {
-    AbstractView *view = action->data().value<AbstractView *>();
-    mGroupedViews->setViewFocus( view );
+    AbstractView* view = action->data().value<AbstractView*>();
+    mGroupedViews->setViewFocus(view);
 }
 
 }

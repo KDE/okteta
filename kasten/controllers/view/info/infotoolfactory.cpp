@@ -25,9 +25,7 @@
 // lib
 #include "infotool.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 InfoToolFactory::InfoToolFactory() {}
 

@@ -34,31 +34,28 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 namespace If {
 class SearchUserQueryable;
 }
 class ByteArrayView;
 
-
 class SearchTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     SearchTool();
     ~SearchTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // status
+public: // status
     QByteArray searchData() const;
 //     Qt::CaseSensitivity caseSensitivity() const;
     bool hasSelectedData() const;
@@ -66,42 +63,41 @@ class SearchTool : public AbstractTool
 
     bool isApplyable() const; // candidate for AbstractTool API
 
-  public: // actions
-    void search( KFindDirection direction, bool fromCursor, bool inSelection );
+public: // actions
+    void search(KFindDirection direction, bool fromCursor, bool inSelection);
 
-  public:
-    void setUserQueryAgent( If::SearchUserQueryable* userQueryAgent );
+public:
+    void setUserQueryAgent(If::SearchUserQueryable* userQueryAgent);
 
-  public Q_SLOTS: // settings
-    void setSearchData( const QByteArray& searchData );
-    void setCaseSensitivity( Qt::CaseSensitivity caseSensitivity );
+public Q_SLOTS: // settings
+    void setSearchData(const QByteArray& searchData);
+    void setCaseSensitivity(Qt::CaseSensitivity caseSensitivity);
 
-  Q_SIGNALS:
-    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
-    void charCodecChanged( const QString& codecName );
+Q_SIGNALS:
+    void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
+    void charCodecChanged(const QString& codecName);
 
     void dataNotFound();
 
-  protected:
-    void doSearch( KFindDirection direction );
+protected:
+    void doSearch(KFindDirection direction);
 
-  protected: // settings
+protected: // settings
     QByteArray mSearchData;
     Qt::CaseSensitivity mCaseSensitivity;
 
-  protected: // status
-    bool mPreviousFound :1;
+protected: // status
+    bool mPreviousFound : 1;
     Okteta::Address mSearchFirstIndex;
     Okteta::Address mSearchLastIndex;
 
-  protected: //
+protected:
     If::SearchUserQueryable* mUserQueryAgent;
 
-  protected: // target
+protected: // target
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };
-
 
 inline QByteArray SearchTool::searchData() const { return mSearchData; }
 // inline Qt::CaseSensitivity SearchTool::caseSensitivity()       const { return mCaseSensitivity; }

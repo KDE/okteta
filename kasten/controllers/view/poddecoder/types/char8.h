@@ -31,29 +31,27 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct Char8
 {
-  public:
-    Char8( Okteta::Character c );
+public:
+    Char8(Okteta::Character c);
     Char8();
 
-  public:
-    QString toString( /** TODO: undefinedChar */) const;
+public:
+    QString toString(/** TODO: undefinedChar */) const;
 
-  public:
+public:
     Okteta::Character character;
 };
 
-
-inline Char8::Char8() : character( QChar(0) ) {}
-inline Char8::Char8( Okteta::Character c ) : character( c ) {}
+inline Char8::Char8() : character(QChar(0)) {}
+inline Char8::Char8(Okteta::Character c) : character(c) {}
 
 inline QString Char8::toString() const
 {
-    return QString( character.isUndefined() ? Okteta::DefaultUndefinedChar : (QChar)character );
+    return QString(character.isUndefined() ? Okteta::DefaultUndefinedChar : (QChar)character);
 }
 
-Q_DECLARE_METATYPE( Char8 )
+Q_DECLARE_METATYPE(Char8)
 
 #endif

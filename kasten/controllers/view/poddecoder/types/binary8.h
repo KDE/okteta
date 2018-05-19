@@ -27,29 +27,27 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct Binary8
 {
-  public:
-    Binary8( quint8 v );
+public:
+    Binary8(quint8 v);
     Binary8();
 
-  public:
+public:
     QString toString() const;
 
-  public:
+public:
     quint8 value;
 };
 
-
-inline Binary8::Binary8() : value( 0 ) {}
-inline Binary8::Binary8( quint8 v ) : value( v ) {}
+inline Binary8::Binary8() : value(0) {}
+inline Binary8::Binary8(quint8 v) : value(v) {}
 
 inline QString Binary8::toString() const
 {
-    return QStringLiteral( "%1" ).arg( value, 8, 2, QChar::fromLatin1('0') );
+    return QStringLiteral("%1").arg(value, 8, 2, QChar::fromLatin1('0'));
 }
 
-Q_DECLARE_METATYPE( Binary8 )
+Q_DECLARE_METATYPE(Binary8)
 
 #endif

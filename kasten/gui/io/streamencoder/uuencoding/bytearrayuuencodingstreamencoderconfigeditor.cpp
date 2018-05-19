@@ -32,52 +32,50 @@
 #include <QLabel>
 #include <QLineEdit>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderConfigEditor( ByteArrayUuencodingStreamEncoder* encoder, QWidget* parent )
- : AbstractModelStreamEncoderConfigEditor( parent ),
-   mEncoder( encoder )
+ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderConfigEditor(ByteArrayUuencodingStreamEncoder* encoder, QWidget* parent)
+    : AbstractModelStreamEncoderConfigEditor(parent)
+    , mEncoder(encoder)
 {
     mSettings = mEncoder->settings();
 
-    QFormLayout* pageLayout = new QFormLayout( this );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout(this);
+    pageLayout->setMargin(0);
 
     // internal file name
     const QString fileNameLabel =
-        i18nc( "@label:textbox file name internally given to the encoded data",
-               "Internal name of file:" );
+        i18nc("@label:textbox file name internally given to the encoded data",
+              "Internal name of file:");
 
-    mFileNameEdit = new QLineEdit( this );
-    mFileNameEdit->setClearButtonEnabled( true );
-    mFileNameEdit->setText( mSettings.fileName );
-    connect( mFileNameEdit, &QLineEdit::textChanged, this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( fileNameLabel, mFileNameEdit );
+    mFileNameEdit = new QLineEdit(this);
+    mFileNameEdit->setClearButtonEnabled(true);
+    mFileNameEdit->setText(mSettings.fileName);
+    connect(mFileNameEdit, &QLineEdit::textChanged, this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(fileNameLabel, mFileNameEdit);
 
     // data type
     const QString encodingTypeLabel =
-        i18nc( "@label:listbox the type of the used encoding: historical or Base64.",
-               "Encoding:" );
+        i18nc("@label:listbox the type of the used encoding: historical or Base64.",
+              "Encoding:");
 
-    mEncodingSelect = new KComboBox( this );
+    mEncodingSelect = new KComboBox(this);
     const QStringList list {
         i18nc("@item:inmenu Doing the uuencoding using the historical encoding",
               "Historical"),
         i18nc("@item:inmenu Doing the uuencoding using the base64 encoding",
               "Base64"),
     };
-    mEncodingSelect->addItems( list );
-    mEncodingSelect->setCurrentIndex( static_cast<int>(mSettings.algorithmId) );
-    connect( mEncodingSelect, QOverload<int>::of(&KComboBox::activated),
-             this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( encodingTypeLabel, mEncodingSelect );
+    mEncodingSelect->addItems(list);
+    mEncodingSelect->setCurrentIndex(static_cast<int>(mSettings.algorithmId));
+    connect(mEncodingSelect, QOverload<int>::of(&KComboBox::activated),
+            this, &ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(encodingTypeLabel, mEncodingSelect);
 }
 
 AbstractSelectionView* ByteArrayUuencodingStreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArrayTextStreamEncoderPreview( mEncoder );
+    return new ByteArrayTextStreamEncoderPreview(mEncoder);
 }
 
 void ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged()
@@ -85,7 +83,7 @@ void ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.algorithmId = static_cast<UuencodingStreamEncoderSettings::AlgorithmId>(mEncodingSelect->currentIndex());
     mSettings.fileName = mFileNameEdit->text();
 
-    mEncoder->setSettings( mSettings );
+    mEncoder->setSettings(mSettings);
 }
 
 ByteArrayUuencodingStreamEncoderConfigEditor::~ByteArrayUuencodingStreamEncoderConfigEditor()

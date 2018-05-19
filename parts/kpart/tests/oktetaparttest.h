@@ -28,10 +28,10 @@
 
 class OktetaPartTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
-    void testPartReuseWithAnotherUrl(); //bug #365523
+private Q_SLOTS: // test functions
+    void testPartReuseWithAnotherUrl(); // bug #365523
 };
 
 #endif

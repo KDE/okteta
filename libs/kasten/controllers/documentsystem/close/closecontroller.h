@@ -31,35 +31,32 @@
 class QAction;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocumentStrategy;
 class AbstractDocument;
 
-
 class KASTENCONTROLLERS_EXPORT CloseController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    CloseController( AbstractDocumentStrategy* documentStrategy,
-                     KXMLGUIClient* guiClient,
-                     bool supportMultiple = true );
+public:
+    CloseController(AbstractDocumentStrategy* documentStrategy,
+                    KXMLGUIClient* guiClient,
+                    bool supportMultiple = true);
     ~CloseController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void close();
     void closeAll();
     void closeAllOther();
 
     void onDocumentsChanged();
 
-  private:
+private:
     AbstractDocumentStrategy* mDocumentStrategy;
 
     AbstractDocument* mDocument;

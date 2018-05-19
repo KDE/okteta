@@ -28,43 +28,40 @@
 // Qt
 #include <QValidator>
 
-
 class Char8Validator : public QValidator
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    Char8Validator( Okteta::CharCodec* charCodec, QObject* parent = nullptr );
+public:
+    Char8Validator(Okteta::CharCodec* charCodec, QObject* parent = nullptr);
 
     ~Char8Validator() override;
 
-  public: // QValidator API
-    QValidator::State validate( QString& input, int& pos ) const override;
+public: // QValidator API
+    QValidator::State validate(QString& input, int& pos) const override;
 
-  protected:
+protected:
     Okteta::CharCodec* mCharCodec;
 };
 
-inline Char8Validator::Char8Validator( Okteta::CharCodec* charCodec, QObject* parent )
-  : QValidator( parent ),
-    mCharCodec( charCodec )
+inline Char8Validator::Char8Validator(Okteta::CharCodec* charCodec, QObject* parent)
+    : QValidator(parent)
+    , mCharCodec(charCodec)
 {}
 
-
-QValidator::State Char8Validator::validate( QString& input, int& pos ) const
+QValidator::State Char8Validator::validate(QString& input, int& pos) const
 {
-    Q_UNUSED( pos )
+    Q_UNUSED(pos)
 
     State result;
 
     const int stringLength = input.length();
-    if( stringLength == 0 )
+    if (stringLength == 0) {
         result = QValidator::Intermediate;
-    else
-    {
-        const QChar c = input.at( 0 );
+    } else {
+        const QChar c = input.at(0);
 
-        result = mCharCodec->canEncode( c ) ? QValidator::Acceptable : QValidator::Invalid;
+        result = mCharCodec->canEncode(c) ? QValidator::Acceptable : QValidator::Invalid;
     }
 
     return result;
@@ -72,24 +69,23 @@ QValidator::State Char8Validator::validate( QString& input, int& pos ) const
 
 Char8Validator::~Char8Validator() {}
 
-
-Char8Editor::Char8Editor( Okteta::CharCodec* charCodec, QWidget* parent )
-  : QLineEdit( parent )
+Char8Editor::Char8Editor(Okteta::CharCodec* charCodec, QWidget* parent)
+    : QLineEdit(parent)
 {
-    setValidator( new Char8Validator(charCodec,this) );
-    setClearButtonEnabled( true );
-    setMaxLength( 1 );
+    setValidator(new Char8Validator(charCodec, this));
+    setClearButtonEnabled(true);
+    setMaxLength(1);
 }
 
-void Char8Editor::setData( Char8 data )
+void Char8Editor::setData(Char8 data)
 {
-    setText( data.character.isUndefined() ? QString() : QString(data.character) );
+    setText(data.character.isUndefined() ? QString() : QString(data.character));
 }
 
 Char8 Char8Editor::data() const
 {
     const QString t = text();
-    return Char8( t.isEmpty() ? QChar(0) : t[0] );
+    return Char8(t.isEmpty() ? QChar(0) : t[0]);
 }
 
 Char8Editor::~Char8Editor() {}

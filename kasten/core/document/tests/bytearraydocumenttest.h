@@ -26,15 +26,13 @@
 // Qt
 #include <QObject>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayDocumentTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testCreateNew();
     void testSetTitle();
 };

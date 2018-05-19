@@ -34,14 +34,12 @@
 // Qt
 #include <QUrl>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArrayRawFileSynchronizer::ByteArrayRawFileSynchronizer()
- : mDocument( nullptr )
+    : mDocument(nullptr)
 {
-    connect( this, &ByteArrayRawFileSynchronizer::urlChanged, this, &ByteArrayRawFileSynchronizer::onUrlChange );
+    connect(this, &ByteArrayRawFileSynchronizer::urlChanged, this, &ByteArrayRawFileSynchronizer::onUrlChange);
 }
 
 AbstractDocument* ByteArrayRawFileSynchronizer::document() const { return mDocument; }
@@ -49,51 +47,52 @@ AbstractDocument* ByteArrayRawFileSynchronizer::document() const { return mDocum
 LocalSyncState ByteArrayRawFileSynchronizer::localSyncState() const
 {
     return mDocument ?
-        (mDocument->content()->isModified() ? LocalHasChanges : LocalInSync) : LocalInSync;
+           (mDocument->content()->isModified() ? LocalHasChanges : LocalInSync) : LocalInSync;
 }
 
-void ByteArrayRawFileSynchronizer::setDocument( ByteArrayDocument* document )
+void ByteArrayRawFileSynchronizer::setDocument(ByteArrayDocument* document)
 {
     mDocument = document;
-    if( mDocument )
-        connect( mDocument->content(), &Okteta::AbstractByteArrayModel::modifiedChanged,
-                 this, &ByteArrayRawFileSynchronizer::onModelModified );
+    if (mDocument) {
+        connect(mDocument->content(), &Okteta::AbstractByteArrayModel::modifiedChanged,
+                this, &ByteArrayRawFileSynchronizer::onModelModified);
+    }
 }
 
-AbstractLoadJob *ByteArrayRawFileSynchronizer::startLoad( const QUrl &url )
+AbstractLoadJob* ByteArrayRawFileSynchronizer::startLoad(const QUrl& url)
 {
-    return new ByteArrayRawFileLoadJob( this, url );
+    return new ByteArrayRawFileLoadJob(this, url);
 }
 
-AbstractSyncToRemoteJob *ByteArrayRawFileSynchronizer::startSyncToRemote()
+AbstractSyncToRemoteJob* ByteArrayRawFileSynchronizer::startSyncToRemote()
 {
-    return new ByteArrayRawFileWriteJob( this );
+    return new ByteArrayRawFileWriteJob(this);
 }
 
-AbstractSyncFromRemoteJob *ByteArrayRawFileSynchronizer::startSyncFromRemote()
+AbstractSyncFromRemoteJob* ByteArrayRawFileSynchronizer::startSyncFromRemote()
 {
-    return new ByteArrayRawFileReloadJob( this );
+    return new ByteArrayRawFileReloadJob(this);
 }
 
-AbstractSyncWithRemoteJob *ByteArrayRawFileSynchronizer::startSyncWithRemote( const QUrl &url, AbstractModelSynchronizer::ConnectOption option  )
+AbstractSyncWithRemoteJob* ByteArrayRawFileSynchronizer::startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
 {
-    return new ByteArrayRawFileWriteToJob( this, url, option );
+    return new ByteArrayRawFileWriteToJob(this, url, option);
 }
 
-AbstractConnectJob *ByteArrayRawFileSynchronizer::startConnect( AbstractDocument* document,
-                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
+AbstractConnectJob* ByteArrayRawFileSynchronizer::startConnect(AbstractDocument* document,
+                                                               const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
 {
-    return new ByteArrayRawFileConnectJob( this, document, url, option );
+    return new ByteArrayRawFileConnectJob(this, document, url, option);
 }
 
-void ByteArrayRawFileSynchronizer::onUrlChange( const QUrl &url )
+void ByteArrayRawFileSynchronizer::onUrlChange(const QUrl& url)
 {
-    mDocument->setTitle( url.fileName() );
+    mDocument->setTitle(url.fileName());
 }
 
-void ByteArrayRawFileSynchronizer::onModelModified( bool isModified )
+void ByteArrayRawFileSynchronizer::onModelModified(bool isModified)
 {
-    emit localSyncStateChanged( (isModified ? LocalHasChanges : LocalInSync) );
+    emit localSyncStateChanged((isModified ? LocalHasChanges : LocalInSync));
 }
 
 }

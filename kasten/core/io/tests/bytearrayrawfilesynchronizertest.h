@@ -26,30 +26,29 @@
 // Qt
 #include <QObject>
 
-
 // namespace Okteta {
 class TestFileSystem;
 // }
 
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayRawFileSynchronizerTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testLoadFromUrl();
     void testNewSaveAsToUrl();
-  private: // not working tests
+
+private: // not working tests
     void testLoadFromNotExistingUrl();
 
-  private:
-    TestFileSystem *mFileSystem;
+private:
+    TestFileSystem* mFileSystem;
 };
 
 }

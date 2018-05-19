@@ -33,44 +33,38 @@
 #include <QFile>
 #include <QCoreApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void TestDocumentFileLoadThread::run()
 {
-    QDataStream inStream( mFile );
+    QDataStream inStream(mFile);
     const int fileSize = mFile->size();
 
     // test header
     const int headerSize = mHeader.size();
-    QByteArray header( headerSize, ' ' );
-    const int headerResult = inStream.readRawData( header.data(), headerSize );
-    if( headerResult == -1 || header != mHeader )
+    QByteArray header(headerSize, ' ');
+    const int headerResult = inStream.readRawData(header.data(), headerSize);
+    if (headerResult == -1 || header != mHeader) {
         mDocument = nullptr;
-    else
-    {
-        QByteArray byteArray( fileSize, ' ' );
+    } else {
+        QByteArray byteArray(fileSize, ' ');
 
-        inStream.readRawData( byteArray.data(), fileSize );
+        inStream.readRawData(byteArray.data(), fileSize);
 
-        //registerDiskModifyTime( file ); TODO move into synchronizer
+        // registerDiskModifyTime( file ); TODO move into synchronizer
 
-        const bool streamIsOk = ( inStream.status() == QDataStream::Ok );
-    //     if( success )
-    //         *success = streamIsOk ? 0 : 1;
-        if( streamIsOk )
-        {
-            mDocument = new TestDocument( byteArray );
-            mDocument->moveToThread( QCoreApplication::instance()->thread() );
-        }
-        else
-        {
+        const bool streamIsOk = (inStream.status() == QDataStream::Ok);
+        //     if( success )
+        //         *success = streamIsOk ? 0 : 1;
+        if (streamIsOk) {
+            mDocument = new TestDocument(byteArray);
+            mDocument->moveToThread(QCoreApplication::instance()->thread());
+        } else {
             mDocument = nullptr;
         }
     }
 
-    emit documentRead( mDocument );
+    emit documentRead(mDocument);
 }
 
 TestDocumentFileLoadThread::~TestDocumentFileLoadThread() {}

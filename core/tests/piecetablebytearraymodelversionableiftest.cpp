@@ -27,25 +27,22 @@
 // Qt
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 static const Size ByteArrayModelSize = 60;
 
-
-QObject *PieceTableByteArrayModelVersionableIfTest::createVersionable()
+QObject* PieceTableByteArrayModelVersionableIfTest::createVersionable()
 {
-    PieceTableByteArrayModel *byteArrayModel = new PieceTableByteArrayModel( ByteArrayModelSize );
-    byteArrayModel->setReadOnly( false );
+    PieceTableByteArrayModel* byteArrayModel = new PieceTableByteArrayModel(ByteArrayModelSize);
+    byteArrayModel->setReadOnly(false);
 
     return byteArrayModel;
 }
 
-void PieceTableByteArrayModelVersionableIfTest::deleteVersionable( QObject *versionable )
+void PieceTableByteArrayModelVersionableIfTest::deleteVersionable(QObject* versionable)
 {
     delete versionable;
 }
 
 }
 
-QTEST_MAIN( Okteta::PieceTableByteArrayModelVersionableIfTest )
+QTEST_MAIN(Okteta::PieceTableByteArrayModelVersionableIfTest)

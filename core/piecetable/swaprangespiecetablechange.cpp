@@ -29,34 +29,32 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 int SwapRangesPieceTableChange::type() const { return SwapRangesId; }
 
 QString SwapRangesPieceTableChange::description() const
 {
-    return i18nc( "name of the change", "Swap Ranges" );
+    return i18nc("name of the change", "Swap Ranges");
 }
 
-AddressRange SwapRangesPieceTableChange::apply( PieceTable* pieceTable ) const
+AddressRange SwapRangesPieceTableChange::apply(PieceTable* pieceTable) const
 {
-    pieceTable->swap( mFirstStart, mSecondRange );
+    pieceTable->swap(mFirstStart, mSecondRange);
 
-    return AddressRange( mFirstStart, mSecondRange.end() );
+    return AddressRange(mFirstStart, mSecondRange.end());
 }
 
-AddressRange SwapRangesPieceTableChange::revert( PieceTable* pieceTable ) const
+AddressRange SwapRangesPieceTableChange::revert(PieceTable* pieceTable) const
 {
-    pieceTable->swap( mFirstStart, AddressRange(mFirstStart+mSecondRange.width(),mSecondRange.end()) );
+    pieceTable->swap(mFirstStart, AddressRange(mFirstStart + mSecondRange.width(), mSecondRange.end()));
 
-    return AddressRange( mFirstStart, mSecondRange.end() );
+    return AddressRange(mFirstStart, mSecondRange.end());
 }
 
 ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const
 {
-    return ArrayChangeMetrics::asSwapping( mFirstStart, mSecondRange.start(), mSecondRange.width() );
+    return ArrayChangeMetrics::asSwapping(mFirstStart, mSecondRange.start(), mSecondRange.width());
 }
 
 SwapRangesPieceTableChange::~SwapRangesPieceTableChange() {}

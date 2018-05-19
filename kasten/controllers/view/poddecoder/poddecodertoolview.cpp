@@ -26,22 +26,20 @@
 #include "podtableview.h"
 #include "poddecodertool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-PODDecoderToolView::PODDecoderToolView( PODDecoderTool *tool )
- : mWidget( new PODTableView(tool) )
+PODDecoderToolView::PODDecoderToolView(PODDecoderTool* tool)
+    : mWidget(new PODTableView(tool))
 {
 }
 
 QWidget* PODDecoderToolView::widget()    const { return mWidget; }
 QString PODDecoderToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool *PODDecoderToolView::tool() const { return mWidget->tool(); }
+AbstractTool* PODDecoderToolView::tool() const { return mWidget->tool(); }
 
 PODDecoderToolView::~PODDecoderToolView()
 {
-  delete mWidget;
+    delete mWidget;
 }
 
 }

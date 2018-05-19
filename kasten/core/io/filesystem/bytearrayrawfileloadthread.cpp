@@ -37,9 +37,7 @@
 // C++
 #include <limits>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void ByteArrayRawFileLoadThread::run()
 {
@@ -48,46 +46,44 @@ void ByteArrayRawFileLoadThread::run()
     // check if the file content can be addressed with Okteta::Address
     const Okteta::Address maxAddress = std::numeric_limits<Okteta::Address>::max();
 
-    bool success = ( fileSize <= maxAddress );
+    bool success = (fileSize <= maxAddress);
 
-    if( success )
-    {
+    if (success) {
         // allocate working memory
         QByteArray data;
-        data.resize( fileSize );
-        bool success = ( data.size() == fileSize );
+        data.resize(fileSize);
+        bool success = (data.size() == fileSize);
 
-        if( success )
-        {
-            QDataStream inStream( mFile );
-            inStream.readRawData( data.data(), fileSize );
+        if (success) {
+            QDataStream inStream(mFile);
+            inStream.readRawData(data.data(), fileSize);
 
-            success = ( inStream.status() == QDataStream::Ok );
+            success = (inStream.status() == QDataStream::Ok);
 
-            if( success )
-            {
-                Okteta::PieceTableByteArrayModel* byteArray = new Okteta::PieceTableByteArrayModel( data );
-                byteArray->setModified( false );
+            if (success) {
+                Okteta::PieceTableByteArrayModel* byteArray = new Okteta::PieceTableByteArrayModel(data);
+                byteArray->setModified(false);
 
-                mDocument = new ByteArrayDocument( byteArray, i18nc("destination of the byte array", "Loaded from file.") );
-                mDocument->setOwner( Person::createEgo() );
+                mDocument = new ByteArrayDocument(byteArray, i18nc("destination of the byte array", "Loaded from file."));
+                mDocument->setOwner(Person::createEgo());
                 // TODO: make PieceTableByteArrayModel a child by constructor argument parent
-                byteArray->moveToThread( QCoreApplication::instance()->thread() );
-                mDocument->moveToThread( QCoreApplication::instance()->thread() );
-            }
-            else
+                byteArray->moveToThread(QCoreApplication::instance()->thread());
+                mDocument->moveToThread(QCoreApplication::instance()->thread());
+            } else {
                 mErrorString = mFile->errorString();
+            }
+        } else {
+            mErrorString = i18n("There is not enough free working memory to load this file.");
         }
-        else
-            mErrorString = i18n( "There is not enough free working memory to load this file." );
+    } else {
+        mErrorString = i18n("Support to load files larger than 2 GiB has not yet been implemented.");
     }
-    else
-        mErrorString = i18n( "Support to load files larger than 2 GiB has not yet been implemented." );
 
-    if( ! success )
+    if (!success) {
         mDocument = nullptr;
+    }
 
-    emit documentRead( mDocument );
+    emit documentRead(mDocument);
 }
 
 ByteArrayRawFileLoadThread::~ByteArrayRawFileLoadThread() {}

@@ -28,44 +28,38 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-SearchJob::SearchJob( const Okteta::AbstractByteArrayModel* model,
-                      const QByteArray& searchData,
-                      Okteta::Address startIndex, Okteta::Address endIndex,
-                      Qt::CaseSensitivity caseSensitivity, const QString& charCodecName )
-  : mByteArrayModel( model ),
-    mSearchData( searchData ),
-    mStartIndex( startIndex),
-    mEndIndex( endIndex ),
-    mCaseSensitivity( caseSensitivity ),
-    mCharCodec( Okteta::CharCodec::createCodec(charCodecName) )
+SearchJob::SearchJob(const Okteta::AbstractByteArrayModel* model,
+                     const QByteArray& searchData,
+                     Okteta::Address startIndex, Okteta::Address endIndex,
+                     Qt::CaseSensitivity caseSensitivity, const QString& charCodecName)
+    : mByteArrayModel(model)
+    , mSearchData(searchData)
+    , mStartIndex(startIndex)
+    , mEndIndex(endIndex)
+    , mCaseSensitivity(caseSensitivity)
+    , mCharCodec(Okteta::CharCodec::createCodec(charCodecName))
 {
 }
 
-
 Okteta::Address SearchJob::exec()
 {
-    //TODO: what kind of signal could a filter send?
-    connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::searchedBytes, this, &SearchJob::onBytesSearched );
+    // TODO: what kind of signal could a filter send?
+    connect(mByteArrayModel, &Okteta::AbstractByteArrayModel::searchedBytes, this, &SearchJob::onBytesSearched);
 
     Okteta::Address result;
 
-    const bool searchForward = (mStartIndex < mEndIndex );
-    if( searchForward )
-    {
-        result = ( mCaseSensitivity == Qt::CaseSensitive )?
-                mByteArrayModel->indexOf( mSearchData, mStartIndex, mEndIndex ) :
-                mByteArrayModel->indexOfCaseInsensitive( mCharCodec, mSearchData, mStartIndex, mEndIndex );
-    }
-    else
-    {
+    const bool searchForward = (mStartIndex < mEndIndex);
+    if (searchForward) {
+        result = (mCaseSensitivity == Qt::CaseSensitive) ?
+                 mByteArrayModel->indexOf(mSearchData, mStartIndex, mEndIndex) :
+                 mByteArrayModel->indexOfCaseInsensitive(mCharCodec, mSearchData, mStartIndex, mEndIndex);
+    } else {
         const Okteta::Address lastFromIndex = mStartIndex - mSearchData.size() + 1;
-        result = ( mCaseSensitivity == Qt::CaseSensitive ) ?
-            mByteArrayModel->lastIndexOf( mSearchData, lastFromIndex, mEndIndex ) :
-            mByteArrayModel->lastIndexOfCaseInsensitive( mCharCodec, mSearchData, lastFromIndex, mEndIndex );
+        result = (mCaseSensitivity == Qt::CaseSensitive) ?
+                 mByteArrayModel->lastIndexOf(mSearchData, lastFromIndex, mEndIndex) :
+                 mByteArrayModel->lastIndexOfCaseInsensitive(mCharCodec, mSearchData, lastFromIndex, mEndIndex);
     }
 
     deleteLater(); // TODO: could be reused on next search
@@ -75,9 +69,8 @@ Okteta::Address SearchJob::exec()
 
 void SearchJob::onBytesSearched()
 {
-    QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
 }
-
 
 SearchJob::~SearchJob()
 {

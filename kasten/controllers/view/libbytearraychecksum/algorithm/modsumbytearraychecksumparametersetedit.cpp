@@ -30,51 +30,48 @@
 // Qt
 #include <QFormLayout>
 
-
 const char ModSumByteArrayChecksumParameterSetEdit::Id[] = "ModSum";
 
-
-ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit( QWidget* parent )
-  : AbstractByteArrayChecksumParameterSetEdit( parent )
+ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit(QWidget* parent)
+    : AbstractByteArrayChecksumParameterSetEdit(parent)
 {
-    QFormLayout* baseLayout = new QFormLayout( this );
-    baseLayout->setMargin( 0 );
+    QFormLayout* baseLayout = new QFormLayout(this);
+    baseLayout->setMargin(0);
 
-    mByteOrderComboBox = new KComboBox( this );
-    mByteOrderComboBox->addItem( i18nc("@item:inlistbox","Little-endian") ); // add first for index
-    mByteOrderComboBox->addItem( i18nc("@item:inlistbox","Big-endian") );    // add second for index
-    connect( mByteOrderComboBox, QOverload<int>::of(&KComboBox::activated),
-             this, &ModSumByteArrayChecksumParameterSetEdit::valuesChanged );
+    mByteOrderComboBox = new KComboBox(this);
+    mByteOrderComboBox->addItem(i18nc("@item:inlistbox", "Little-endian"));  // add first for index
+    mByteOrderComboBox->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add second for index
+    connect(mByteOrderComboBox, QOverload<int>::of(&KComboBox::activated),
+            this, &ModSumByteArrayChecksumParameterSetEdit::valuesChanged);
 
     const QString byteOrderLabelText =
-         i18nc( "@label:listbox byte order to use for decoding the bytes into integer values",
-                "Byte Order:" );
+        i18nc("@label:listbox byte order to use for decoding the bytes into integer values",
+              "Byte Order:");
     const QString groupSizeToolTip =
-        i18nc( "@info:tooltip",
-               "The byte order to use for decoding the bytes into integer values." );
-    mByteOrderComboBox->setToolTip( groupSizeToolTip );
+        i18nc("@info:tooltip",
+              "The byte order to use for decoding the bytes into integer values.");
+    mByteOrderComboBox->setToolTip(groupSizeToolTip);
 
-    baseLayout->addRow( byteOrderLabelText, mByteOrderComboBox );
+    baseLayout->addRow(byteOrderLabelText, mByteOrderComboBox);
 }
 
 bool ModSumByteArrayChecksumParameterSetEdit::isValid() const { return true; }
 
-void ModSumByteArrayChecksumParameterSetEdit::setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet )
+void ModSumByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
     const ModSumByteArrayChecksumParameterSet* modSumParameterSet =
-        static_cast<const ModSumByteArrayChecksumParameterSet *>( parameterSet );
+        static_cast<const ModSumByteArrayChecksumParameterSet*>(parameterSet);
 
-    mByteOrderComboBox->setCurrentIndex( modSumParameterSet->endianness() );
+    mByteOrderComboBox->setCurrentIndex(modSumParameterSet->endianness());
 }
 
-void ModSumByteArrayChecksumParameterSetEdit::getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const
+void ModSumByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
     ModSumByteArrayChecksumParameterSet* modSumParameterSet =
-        static_cast<ModSumByteArrayChecksumParameterSet *>( parameterSet );
+        static_cast<ModSumByteArrayChecksumParameterSet*>(parameterSet);
 
-    modSumParameterSet->setEndianness( static_cast<Endianness>( mByteOrderComboBox->currentIndex() ) );
+    modSumParameterSet->setEndianness(static_cast<Endianness>(mByteOrderComboBox->currentIndex()));
 }
-
 
 ModSumByteArrayChecksumParameterSetEdit::~ModSumByteArrayChecksumParameterSetEdit()
 {}

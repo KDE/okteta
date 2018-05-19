@@ -20,17 +20,19 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef POINTERSCRIPTCLASS_H
 #define POINTERSCRIPTCLASS_H
 
 #include "primitivescriptclass.h"
 
-class PointerScriptClass : public PrimitiveScriptClass {
+class PointerScriptClass : public PrimitiveScriptClass
+{
     Q_DISABLE_COPY(PointerScriptClass)
+
 public:
     PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~PointerScriptClass() override;
+
 protected:
     bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
     QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;

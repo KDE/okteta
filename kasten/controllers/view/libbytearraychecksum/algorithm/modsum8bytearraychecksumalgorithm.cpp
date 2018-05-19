@@ -29,37 +29,34 @@
 // Qt
 #include <QtGlobal>
 
-
-
 ModSum8ByteArrayChecksumAlgorithm::ModSum8ByteArrayChecksumAlgorithm()
-  : AbstractByteArrayChecksumAlgorithm(
-     i18nc("name of the checksum algorithm", "Modular sum 8-bit") )
+    : AbstractByteArrayChecksumAlgorithm(
+        i18nc("name of the checksum algorithm", "Modular sum 8-bit"))
 {}
 
 AbstractByteArrayChecksumParameterSet* ModSum8ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
-bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                          const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
+bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
+                                                          const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
     quint8 modSum = 0x00;
     Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
-    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
-    {
-        modSum += (quint8)( model->byte(i) );
+    for (Okteta::Address i = range.start(); i <= range.end(); ++i) {
+        modSum += (quint8)(model->byte(i));
 #if 0
-        const uchar value = (crcBits & 0xFF) + model->datum( i );
+        const uchar value = (crcBits & 0xFF) + model->datum(i);
         crcBits >>= 8;
         crcBits ^= lookupTable[value];
 #endif
-        if( i >= nextBlockEnd )
-        {
+        if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( range.localIndex(i)+1 );
+            emit calculatedBytes(range.localIndex(i) + 1);
         }
     }
+
     modSum = ~modSum + 1;
 
-    *result = QStringLiteral("%1").arg( modSum, 2, 16, QChar::fromLatin1('0') );
+    *result = QStringLiteral("%1").arg(modSum, 2, 16, QChar::fromLatin1('0'));
     return true;
 }
 

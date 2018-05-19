@@ -25,15 +25,13 @@
 // lib
 #include "abstractmodeldatagenerator.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void ModelDataGenerateThread::run()
 {
     mMimeData = mGenerator->generateData();
 
-    emit generated( mMimeData );
+    emit generated(mMimeData);
 }
 
 ModelDataGenerateThread::~ModelDataGenerateThread() {}

@@ -25,25 +25,23 @@
 
 #include "abstractmodeldatagenerator.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelDataGeneratorPrivate
 {
-  public:
-    explicit AbstractModelDataGeneratorPrivate( AbstractModelDataGenerator* parent,
-                                                const QString& typeName, const QString& mimeType,
-                                                AbstractModelDataGenerator::Flags flags );
+public:
+    explicit AbstractModelDataGeneratorPrivate(AbstractModelDataGenerator* parent,
+                                               const QString& typeName, const QString& mimeType,
+                                               AbstractModelDataGenerator::Flags flags);
 
     virtual ~AbstractModelDataGeneratorPrivate();
 
-  public:
+public:
     const QString& typeName() const;
     const QString& mimeType() const;
     AbstractModelDataGenerator::Flags flags() const;
 
-  protected:
+protected:
     AbstractModelDataGenerator* const q_ptr;
 
     const QString mTypeName;
@@ -51,13 +49,12 @@ class AbstractModelDataGeneratorPrivate
     AbstractModelDataGenerator::Flags mFlags;
 };
 
-
-inline AbstractModelDataGeneratorPrivate::AbstractModelDataGeneratorPrivate( AbstractModelDataGenerator* parent,
-    const QString& typeName, const QString& mimeType, AbstractModelDataGenerator::Flags flags )
-  : q_ptr( parent ),
-    mTypeName( typeName ),
-    mMimeType( mimeType ),
-    mFlags( flags )
+inline AbstractModelDataGeneratorPrivate::AbstractModelDataGeneratorPrivate(AbstractModelDataGenerator* parent,
+                                                                            const QString& typeName, const QString& mimeType, AbstractModelDataGenerator::Flags flags)
+    : q_ptr(parent)
+    , mTypeName(typeName)
+    , mMimeType(mimeType)
+    , mFlags(flags)
 {}
 
 inline AbstractModelDataGeneratorPrivate::~AbstractModelDataGeneratorPrivate()

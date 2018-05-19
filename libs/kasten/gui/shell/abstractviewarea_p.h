@@ -28,24 +28,21 @@
 // Qt
 #include <Qt>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractViewAreaPrivate
 {
-  public:
-    explicit AbstractViewAreaPrivate( AbstractViewArea* viewArea );
+public:
+    explicit AbstractViewAreaPrivate(AbstractViewArea* viewArea);
 
     virtual ~AbstractViewAreaPrivate();
 
-  protected:
+protected:
     AbstractViewArea* const q_ptr;
 };
 
-
-inline AbstractViewAreaPrivate::AbstractViewAreaPrivate( AbstractViewArea* parent )
-  : q_ptr( parent )
+inline AbstractViewAreaPrivate::AbstractViewAreaPrivate(AbstractViewArea* parent)
+    : q_ptr(parent)
 {
 }
 

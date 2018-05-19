@@ -25,24 +25,21 @@
 
 #include "abstractconnectjob.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractConnectJobPrivate
 {
-  public:
-    explicit AbstractConnectJobPrivate( AbstractConnectJob* parent );
+public:
+    explicit AbstractConnectJobPrivate(AbstractConnectJob* parent);
 
     virtual ~AbstractConnectJobPrivate();
 
-  protected:
+protected:
     AbstractConnectJob* const q_ptr;
 };
 
-
-inline AbstractConnectJobPrivate::AbstractConnectJobPrivate( AbstractConnectJob* parent )
-  : q_ptr( parent )
+inline AbstractConnectJobPrivate::AbstractConnectJobPrivate(AbstractConnectJob* parent)
+    : q_ptr(parent)
 {}
 
 inline AbstractConnectJobPrivate::~AbstractConnectJobPrivate()

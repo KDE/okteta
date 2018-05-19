@@ -27,294 +27,274 @@
 // Okteta core
 #include <okteta/arraychangemetricslist.h>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-ByteArrayTableRanges::ByteArrayTableRanges( ByteArrayTableLayout* layout )
- : mModified( false ),
-   mLayout( layout )
+ByteArrayTableRanges::ByteArrayTableRanges(ByteArrayTableLayout* layout)
+    : mModified(false)
+    , mLayout(layout)
 {
 }
-
 
 void ByteArrayTableRanges::reset()
 {
-  mSelection.cancel();
-  FirstWordSelection.unset();
-  mMarking.unset();
-  ChangedRanges.clear();
+    mSelection.cancel();
+    FirstWordSelection.unset();
+    mMarking.unset();
+    ChangedRanges.clear();
 }
 
-
-void ByteArrayTableRanges::setMarking( const AddressRange& marking )
+void ByteArrayTableRanges::setMarking(const AddressRange& marking)
 {
-    if( mMarking == marking )
+    if (mMarking == marking) {
         return;
+    }
 
     const bool hadMarking = mMarking.isValid();
-    if( hadMarking )
-        addChangedRange( mMarking );
+    if (hadMarking) {
+        addChangedRange(mMarking);
+    }
 
     mMarking = marking;
 
     const bool hasNewMarking = mMarking.isValid();
-    if( hasNewMarking )
-        addChangedRange( mMarking );
+    if (hasNewMarking) {
+        addChangedRange(mMarking);
+    }
 }
-
 
 void ByteArrayTableRanges::removeFurtherSelections()
 {
-  for( int i = 1; i < noOfSelections(); ++i )
-    removeSelection( i );
-}
-
-
-void ByteArrayTableRanges::setSelection( const AddressRange& selection )
-{
-  bool Changed = mSelection.isValid();
-  if( Changed )
-    addChangedRange( mSelection.range() );
-  mSelection = selection;
-  addChangedRange( mSelection.range() );
-}
-
-void ByteArrayTableRanges::setSelectionStart( Address startIndex )
-{
-  bool Changed = mSelection.isValid();
-  if( Changed )
-    addChangedRange( mSelection.range() );
-
-  mSelection.setStart( startIndex );
-}
-
-
-void ByteArrayTableRanges::setSelectionEnd( Address EndIndex )
-{
-  AddressRange OldSelection = mSelection.range();
-  mSelection.setEnd( EndIndex );
-
-  // TODO: think about rather building a diff of the sections
-  if( !OldSelection.isValid() )
-  {
-    addChangedRange( mSelection.range() );
-    return;
-  }
-  if( !mSelection.isValid() )
-  {
-    addChangedRange( OldSelection );
-    return;
-  }
-
-  if( OldSelection == mSelection.range() )
-    return;
-  Address CS;
-  Address CE;
-  // changes at the end?
-  if( mSelection.start() == OldSelection.start() )
-  {
-    CS = OldSelection.nextBehindEnd();
-    CE = mSelection.end();
-    if( CE < CS )
-    {
-      CS = mSelection.nextBehindEnd();
-      CE = OldSelection.end();
+    for (int i = 1; i < noOfSelections(); ++i) {
+        removeSelection(i);
     }
-  }
-  // changes at the start?
-  else if( mSelection.end() == OldSelection.end() )
-  {
-    CS = OldSelection.start();
-    CE = mSelection.nextBeforeStart();
-    if( CE < CS )
-    {
-      CS = mSelection.start();
-      CE = OldSelection.nextBeforeStart();
+}
+
+void ByteArrayTableRanges::setSelection(const AddressRange& selection)
+{
+    bool Changed = mSelection.isValid();
+    if (Changed) {
+        addChangedRange(mSelection.range());
     }
-  }
-  // change over the anchor
-  else
-  {
-    CS = OldSelection.start();
-    CE = mSelection.end();
-    if( CE < CS )
-    {
-      CS = mSelection.start();
-      CE = OldSelection.end();
+    mSelection = selection;
+    addChangedRange(mSelection.range());
+}
+
+void ByteArrayTableRanges::setSelectionStart(Address startIndex)
+{
+    bool Changed = mSelection.isValid();
+    if (Changed) {
+        addChangedRange(mSelection.range());
     }
-  }
-  AddressRange C( CS, CE );
 
-  bool Changed = C.isValid();
-  if( Changed )
-    addChangedRange( C );
-  return;
+    mSelection.setStart(startIndex);
 }
 
-
-AddressRange ByteArrayTableRanges::removeSelection( int id )
+void ByteArrayTableRanges::setSelectionEnd(Address EndIndex)
 {
-  if( id > 0 )
-    return AddressRange();
+    AddressRange OldSelection = mSelection.range();
+    mSelection.setEnd(EndIndex);
 
-  AddressRange range = mSelection.range();
-  bool Changed = range.isValid();
-  if( Changed )
-    addChangedRange( range );
+    // TODO: think about rather building a diff of the sections
+    if (!OldSelection.isValid()) {
+        addChangedRange(mSelection.range());
+        return;
+    }
+    if (!mSelection.isValid()) {
+        addChangedRange(OldSelection);
+        return;
+    }
 
-  mSelection.cancel();
-  FirstWordSelection.unset();
+    if (OldSelection == mSelection.range()) {
+        return;
+    }
+    Address CS;
+    Address CE;
+    // changes at the end?
+    if (mSelection.start() == OldSelection.start()) {
+        CS = OldSelection.nextBehindEnd();
+        CE = mSelection.end();
+        if (CE < CS) {
+            CS = mSelection.nextBehindEnd();
+            CE = OldSelection.end();
+        }
+    }
+    // changes at the start?
+    else if (mSelection.end() == OldSelection.end()) {
+        CS = OldSelection.start();
+        CE = mSelection.nextBeforeStart();
+        if (CE < CS) {
+            CS = mSelection.start();
+            CE = OldSelection.nextBeforeStart();
+        }
+    }
+    // change over the anchor
+    else {
+        CS = OldSelection.start();
+        CE = mSelection.end();
+        if (CE < CS) {
+            CS = mSelection.start();
+            CE = OldSelection.end();
+        }
+    }
+    AddressRange C(CS, CE);
 
-  return range;
+    bool Changed = C.isValid();
+    if (Changed) {
+        addChangedRange(C);
+    }
+    return;
 }
 
-
-bool ByteArrayTableRanges::overlapsSelection( Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex ) const
+AddressRange ByteArrayTableRanges::removeSelection(int id)
 {
-  if( mSelection.range().overlaps(AddressRange(FirstIndex,LastIndex)) )
-  {
-    *startIndex = mSelection.start();
-    *endIndex = mSelection.end();
-    return true;
-  }
-  return false;
+    if (id > 0) {
+        return AddressRange();
+    }
+
+    AddressRange range = mSelection.range();
+    bool Changed = range.isValid();
+    if (Changed) {
+        addChangedRange(range);
+    }
+
+    mSelection.cancel();
+    FirstWordSelection.unset();
+
+    return range;
 }
 
-
-bool ByteArrayTableRanges::overlapsMarking( Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex ) const
+bool ByteArrayTableRanges::overlapsSelection(Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex) const
 {
-  if( mMarking.overlaps(AddressRange(FirstIndex,LastIndex)) )
-  {
-    *startIndex = mMarking.start();
-    *endIndex = mMarking.end();
-    return true;
-  }
-  return false;
+    if (mSelection.range().overlaps(AddressRange(FirstIndex, LastIndex))) {
+        *startIndex = mSelection.start();
+        *endIndex = mSelection.end();
+        return true;
+    }
+    return false;
 }
 
-
-const AddressRange *ByteArrayTableRanges::firstOverlappingSelection( const AddressRange &Range ) const
+bool ByteArrayTableRanges::overlapsMarking(Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex) const
 {
-  return mSelection.range().overlaps(Range) ? &mSelection.range() : nullptr;
+    if (mMarking.overlaps(AddressRange(FirstIndex, LastIndex))) {
+        *startIndex = mMarking.start();
+        *endIndex = mMarking.end();
+        return true;
+    }
+    return false;
 }
 
-
-const AddressRange *ByteArrayTableRanges::overlappingMarking( const AddressRange &Range ) const
+const AddressRange* ByteArrayTableRanges::firstOverlappingSelection(const AddressRange& Range) const
 {
-  return mMarking.overlaps(Range) ? &mMarking : nullptr;
+    return mSelection.range().overlaps(Range) ? &mSelection.range() : nullptr;
+}
+
+const AddressRange* ByteArrayTableRanges::overlappingMarking(const AddressRange& Range) const
+{
+    return mMarking.overlaps(Range) ? &mMarking : nullptr;
 }
 
 /*
 bool ByteArrayTableRanges::overlapsChanges( Address FirstIndex, Address LastIndex, Address* startIndex, Address* endIndex ) const
 {
-  for( CoordRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
-  {
-    if( (*S).overlaps(KBuff(FirstIndex,LastIndex)) )
+    for( CoordRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
     {
-      *startIndex = (*S).start();
-      *endIndex = (*S).end();
-      return true;
+        if( (*S).overlaps(KBuff(FirstIndex,LastIndex)) )
+        {
+            *startIndex = (*S).start();
+            *endIndex = (*S).end();
+            return true;
+        }
     }
-  }
 
-  return false;
+    return false;
 }
 
 bool ByteArrayTableRanges::overlapsChanges( AddressRange Indizes, AddressRange *ChangedRange ) const
 {
-  for( AddressRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
-  {
-    if( (*S).overlaps(Indizes) )
+    for( AddressRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
     {
-      *ChangedRange = *S;
-      return true;
+        if( (*S).overlaps(Indizes) )
+        {
+            *ChangedRange = *S;
+            return true;
+        }
     }
-  }
 
-  return false;
+    return false;
 }
 */
-bool ByteArrayTableRanges::overlapsChanges( const CoordRange &Range, CoordRange *ChangedRange ) const
-{
-  // TODO: add a lastusedrange pointer for quicker access
-  for( CoordRangeList::ConstIterator R=ChangedRanges.begin(); R!=ChangedRanges.end(); ++R )
-  {
-    if( (*R).overlaps(Range) )
-    {
-      *ChangedRange = *R;
-      return true;
-    }
-  }
 
-  return false;
+bool ByteArrayTableRanges::overlapsChanges(const CoordRange& Range, CoordRange* ChangedRange) const
+{
+    // TODO: add a lastusedrange pointer for quicker access
+    for (CoordRangeList::ConstIterator R = ChangedRanges.begin(); R != ChangedRanges.end(); ++R) {
+        if ((*R).overlaps(Range)) {
+            *ChangedRange = *R;
+            return true;
+        }
+    }
+
+    return false;
 }
 
-void ByteArrayTableRanges::addChangedOffsetLines( const LineRange& changedLines )
+void ByteArrayTableRanges::addChangedOffsetLines(const LineRange& changedLines)
 {
-    if( mChangedOffsetLines.isEmpty() )
-    {
+    if (mChangedOffsetLines.isEmpty()) {
         mChangedOffsetLines = changedLines;
         mModified = true;
+    } else {
+        mChangedOffsetLines.extendTo(changedLines);
     }
-    else
-        mChangedOffsetLines.extendTo( changedLines );
 }
 
-void ByteArrayTableRanges::addChangedRange( Address startIndex, Address endIndex )
+void ByteArrayTableRanges::addChangedRange(Address startIndex, Address endIndex)
 {
-  addChangedRange( AddressRange(startIndex,endIndex) );
+    addChangedRange(AddressRange(startIndex, endIndex));
 }
 
-
-void ByteArrayTableRanges::addChangedRange( const AddressRange& range )
+void ByteArrayTableRanges::addChangedRange(const AddressRange& range)
 {
 // qCDebug(LOG_OKTETA_GUI) << "adding change range "<<S.start()<<","<<S.end();
-  addChangedRange( mLayout->coordRangeOfIndizes(range) );
+    addChangedRange(mLayout->coordRangeOfIndizes(range));
 }
 
-
-void ByteArrayTableRanges::addChangedRange( const CoordRange& range )
+void ByteArrayTableRanges::addChangedRange(const CoordRange& range)
 {
-  ChangedRanges.addCoordRange( range );
+    ChangedRanges.addCoordRange(range);
 // qCDebug(LOG_OKTETA_GUI) << "as range "<<NewRange.start().pos()<<","<<NewRange.start().line()<<"-"
 // <<NewRange.end().pos()<<","<<NewRange.end().line()<<endl;
 
-  mModified = true;
+    mModified = true;
 }
 
 void ByteArrayTableRanges::resetChangedRanges()
 {
     mChangedOffsetLines.unset();
-  ChangedRanges.clear();
-  mModified = false;
+    ChangedRanges.clear();
+    mModified = false;
 }
 
-
-void ByteArrayTableRanges::setFirstWordSelection( const AddressRange& range )
+void ByteArrayTableRanges::setFirstWordSelection(const AddressRange& range)
 {
-  FirstWordSelection = range;
-  setSelection( FirstWordSelection );
+    FirstWordSelection = range;
+    setSelection(FirstWordSelection);
 }
 
- void ByteArrayTableRanges::ensureWordSelectionForward( bool Forward )
- {
-   // in the anchor not on the right side?
-   if( mSelection.isForward() != Forward )
-   {
-     setSelectionEnd( Forward ? FirstWordSelection.start() : FirstWordSelection.nextBehindEnd() );
-
-     mSelection.setForward( Forward );
-   }
- }
-
-
-void ByteArrayTableRanges::adaptToChanges( const ArrayChangeMetricsList& changeList, Size oldLength )
+void ByteArrayTableRanges::ensureWordSelectionForward(bool Forward)
 {
-    for( const ArrayChangeMetrics& change : changeList )
-    {
-        //TODO: change parameters to ArrayChangeMetrics
-        switch( change.type() )
+    // in the anchor not on the right side?
+    if (mSelection.isForward() != Forward) {
+        setSelectionEnd(Forward ? FirstWordSelection.start() : FirstWordSelection.nextBehindEnd());
+
+        mSelection.setForward(Forward);
+    }
+}
+
+void ByteArrayTableRanges::adaptToChanges(const ArrayChangeMetricsList& changeList, Size oldLength)
+{
+    for (const ArrayChangeMetrics& change : changeList) {
+        // TODO: change parameters to ArrayChangeMetrics
+        switch (change.type())
         {
         case ArrayChangeMetrics::Replacement:
         {
@@ -324,20 +304,23 @@ void ByteArrayTableRanges::adaptToChanges( const ArrayChangeMetricsList& changeL
             const Address behindLast = (diff == 0) ? offset + change.insertLength() :
                                        (diff < 0) ?  oldLength - diff :
                                                      oldLength;
-            addChangedRange( offset, behindLast-1 );
+            addChangedRange(offset, behindLast - 1);
 
-            if( mSelection.isValid() )
-                mSelection.adaptToReplacement( offset, change.removeLength(), change.insertLength() );
-            if( mMarking.isValid() )
-                mMarking.adaptToReplacement( offset, change.removeLength(), change.insertLength() );
+            if (mSelection.isValid()) {
+                mSelection.adaptToReplacement(offset, change.removeLength(), change.insertLength());
+            }
+            if (mMarking.isValid()) {
+                mMarking.adaptToReplacement(offset, change.removeLength(), change.insertLength());
+            }
             break;
         }
         case ArrayChangeMetrics::Swapping:
-            addChangedRange( change.offset(), change.secondEnd() );
+            addChangedRange(change.offset(), change.secondEnd());
 
-            if( mSelection.isValid() )
-                mSelection.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
-            // TODO:
+            if (mSelection.isValid()) {
+                mSelection.adaptToSwap(change.offset(), change.secondStart(), change.secondLength());
+            }
+        // TODO:
 //             if( mMarking.isValid() )
 //                 mMarking.adaptToSwap( change.offset(), change.secondStart(), change.secondLength() );
         default:

@@ -29,16 +29,14 @@
 
 #include <QFont>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-StructureTreeModel::StructureTreeModel(StructuresTool* tool, QObject *parent)
-  : QAbstractItemModel(parent),
-    mTool(tool),
-    mLastSender(nullptr),
-    mLastStartIndex(0),
-    mLastEndIndex(0)
+StructureTreeModel::StructureTreeModel(StructuresTool* tool, QObject* parent)
+    : QAbstractItemModel(parent)
+    , mTool(tool)
+    , mLastSender(nullptr)
+    , mLastStartIndex(0)
+    , mLastEndIndex(0)
 {
     connect(mTool, &StructuresTool::dataChanged, this, &StructureTreeModel::onToolDataChange);
     connect(mTool, &StructuresTool::dataCleared, this, &StructureTreeModel::onToolDataClear);
@@ -58,10 +56,10 @@ StructureTreeModel::~StructureTreeModel()
 }
 
 void StructureTreeModel::onChildrenRemoved(const DataInformation* sender, uint startIndex,
-        uint endIndex)
+                                           uint endIndex)
 {
     Q_ASSERT(sender == mLastSender);
-    Q_ASSERT(startIndex== mLastStartIndex);
+    Q_ASSERT(startIndex == mLastStartIndex);
     Q_ASSERT(endIndex == mLastEndIndex);
     Q_UNUSED(sender)
     Q_UNUSED(startIndex)
@@ -70,10 +68,10 @@ void StructureTreeModel::onChildrenRemoved(const DataInformation* sender, uint s
 }
 
 void StructureTreeModel::onChildrenInserted(const DataInformation* sender, uint startIndex,
-        uint endIndex)
+                                            uint endIndex)
 {
     Q_ASSERT(sender == mLastSender);
-    Q_ASSERT(startIndex== mLastStartIndex);
+    Q_ASSERT(startIndex == mLastStartIndex);
     Q_ASSERT(endIndex == mLastEndIndex);
     Q_UNUSED(sender)
     Q_UNUSED(startIndex)
@@ -82,9 +80,9 @@ void StructureTreeModel::onChildrenInserted(const DataInformation* sender, uint 
 }
 
 void StructureTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex,
-        uint endIndex)
+                                                    uint endIndex)
 {
-    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": removing "
+    // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": removing "
     //        "children from index" << startIndex << "to" << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
@@ -95,9 +93,9 @@ void StructureTreeModel::onChildrenAboutToBeRemoved(DataInformation* sender, uin
 }
 
 void StructureTreeModel::onChildrenAboutToBeInserted(DataInformation* sender, uint startIndex,
-        uint endIndex)
+                                                     uint endIndex)
 {
-    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": inserting "
+    // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "data information" << sender->fullObjectPath() << ": inserting "
     //        "children from index" << startIndex << "to" << endIndex;
     QModelIndex idx = findItemInModel(sender);
     Q_ASSERT(idx.isValid());
@@ -115,26 +113,24 @@ int StructureTreeModel::columnCount(const QModelIndex& parent) const
 
 QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return QVariant();
+    }
 
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
     const int column = index.column();
-    if (role == Qt::FontRole)
-    {
-        if (column == 0 && item->parent()->isTopLevel())
-        {
+    if (role == Qt::FontRole) {
+        if (column == 0 && item->parent()->isTopLevel()) {
             // TODO: ideally here we would not take the default application font
             // (as given by QFont()) but the default of the view
             QFont font;
             font.setBold(true);
             return font;
-        }
-        else
+        } else {
             return QVariant();
+        }
     }
-    if (item->parent()->isArray())
-    {
+    if (item->parent()->isArray()) {
         ArrayDataInformation* array = item->parent()->asArray();
         return array->childData(index.row(), column, role);
     }
@@ -142,21 +138,20 @@ QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
 }
 
 bool StructureTreeModel::setData(const QModelIndex& index, const QVariant& value,
-        int role)
+                                 int role)
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return false;
+    }
 
-    if (!index.internalPointer())
-    {
+    if (!index.internalPointer()) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "item == NULL";
         return false;
     }
 
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
     bool change = mTool->setData(value, role, item, index.row());
-    if (change)
-    {
+    if (change) {
         emit dataChanged(index, index);
     }
     return change;
@@ -164,57 +159,59 @@ bool StructureTreeModel::setData(const QModelIndex& index, const QVariant& value
 
 Qt::ItemFlags StructureTreeModel::flags(const QModelIndex& index) const
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return Qt::NoItemFlags;
+    }
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
     return item->flags(index.column(), mTool->isFileLoaded());
 }
 
 QVariant StructureTreeModel::headerData(int section, Qt::Orientation orientation,
-        int role) const
+                                        int role) const
 {
-    if (orientation == Qt::Horizontal)
-    {
+    if (orientation == Qt::Horizontal) {
         return mTool->headerData(section, role);
     }
     return QVariant();
 }
 
-QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex& parent) const
 {
-    if (!hasIndex(row, column, parent))
+    if (!hasIndex(row, column, parent)) {
         return QModelIndex();
+    }
 
     DataInformation* childItem = nullptr;
 
-    if (!parent.isValid())
+    if (!parent.isValid()) {
         childItem = mTool->childAt(row);
-    else
-    {
-        if (parent.column() != 0)
+    } else {
+        if (parent.column() != 0) {
             return QModelIndex();
+        }
         DataInformation* parentItem = static_cast<DataInformation*> (parent.internalPointer());
         childItem = parentItem->childAt(row);
     }
-    if (childItem)
-    {
+    if (childItem) {
         return createIndex(row, column, childItem);
-    }
-    else
+    } else {
         return QModelIndex();
+    }
 }
 
 QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return QModelIndex();
+    }
 
     DataInformation* childItem = static_cast<DataInformation*> (index.internalPointer());
 
     DataInformationBase* parentObj = childItem->parent();
 
-    if (!parentObj || parentObj->isTopLevel())
+    if (!parentObj || parentObj->isTopLevel()) {
         return QModelIndex();
+    }
 
     // not null, not topleveldatainformation-> must be datainformation
     DataInformation* parent = parentObj->asDataInformation();
@@ -223,14 +220,15 @@ QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
 
 int StructureTreeModel::rowCount(const QModelIndex& parent) const
 {
-    if (!parent.isValid())
+    if (!parent.isValid()) {
         return mTool->childCount();
-    if (parent.column() != 0)
+    }
+    if (parent.column() != 0) {
         return 0;
+    }
     DataInformation* parentItem =
-            static_cast<DataInformation*> (parent.internalPointer());
-    if (!parentItem)
-    {
+        static_cast<DataInformation*> (parent.internalPointer());
+    if (!parentItem) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "parentItem is NULL";
         return mTool->childCount();
     }
@@ -239,21 +237,24 @@ int StructureTreeModel::rowCount(const QModelIndex& parent) const
 
 bool StructureTreeModel::hasChildren(const QModelIndex& parent) const
 {
-    if (!parent.isValid())
+    if (!parent.isValid()) {
         return mTool->childCount() > 0;
+    }
     DataInformation* parentItem =
-            static_cast<DataInformation*> (parent.internalPointer());
-    if (!parentItem)
+        static_cast<DataInformation*> (parent.internalPointer());
+    if (!parentItem) {
         return false;
-    else
+    } else {
         return parentItem->childCount() > 0;
+    }
 }
 
 QModelIndex StructureTreeModel::findItemInModel(DataInformationBase* data) const
 {
     Q_CHECK_PTR(data);
-    if (!data || data->isTopLevel())
-        return QModelIndex(); //invalid object
+    if (!data || data->isTopLevel()) {
+        return QModelIndex(); // invalid object
+    }
     return createIndex(data->asDataInformation()->row(), 0, data);
 }
 
@@ -267,6 +268,5 @@ void StructureTreeModel::onToolDataClear()
     beginResetModel();
     endResetModel();
 }
-
 
 }

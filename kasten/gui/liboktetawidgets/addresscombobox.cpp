@@ -23,45 +23,41 @@
 #include "addresscombobox.h"
 #include "addresscombobox_p.h"
 
+namespace Okteta {
 
-namespace Okteta
+AddressComboBox::AddressComboBox(QWidget* parent)
+    : QWidget(parent)
+    , d_ptr(new AddressComboBoxPrivate(this))
 {
-
-AddressComboBox::AddressComboBox( QWidget* parent )
-  : QWidget( parent ),
-    d_ptr( new AddressComboBoxPrivate(this) )
-{
-    Q_D( AddressComboBox );
+    Q_D(AddressComboBox);
 
     d->init();
 }
 
-
 Address AddressComboBox::address() const
 {
-    Q_D( const AddressComboBox );
+    Q_D(const AddressComboBox);
 
     return d->address();
 }
 
 int AddressComboBox::addressType() const
 {
-    Q_D( const AddressComboBox );
+    Q_D(const AddressComboBox);
 
     return d->addressType();
 }
 
 int AddressComboBox::format() const
 {
-    Q_D( const AddressComboBox );
+    Q_D(const AddressComboBox);
 
     return d->format();
 }
 
-
 void AddressComboBox::rememberCurrentAddress()
 {
-    Q_D( AddressComboBox );
+    Q_D(AddressComboBox);
 
     d->rememberCurrentAddress();
 }

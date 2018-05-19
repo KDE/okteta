@@ -28,6 +28,7 @@
 class StringScriptClass : public DefaultScriptClass
 {
     Q_DISABLE_COPY(StringScriptClass)
+
 public:
     StringScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~StringScriptClass() override;
@@ -40,6 +41,7 @@ protected:
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
     static QScriptValue String_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
+
 protected:
     QScriptString s_lengthInCodepoints;
     QScriptString s_lengthInBytes;

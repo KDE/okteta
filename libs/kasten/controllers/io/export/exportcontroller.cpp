@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "exportcontroller.h"
 
 // lib
@@ -40,48 +39,46 @@
 #include <KLocalizedString>
 #include <KSelectAction>
 
+Q_DECLARE_METATYPE(Kasten::AbstractModelExporter*)
 
-Q_DECLARE_METATYPE( Kasten::AbstractModelExporter* )
+namespace Kasten {
 
-namespace Kasten
-{
-
-ExportController::ExportController( ModelCodecViewManager* modelCodecViewManager,
-                                    ModelCodecManager* modelCodecManager,
-                                    KXMLGUIClient* guiClient )
-  : AbstractXmlGuiController(),
-    mModelCodecViewManager( modelCodecViewManager ),
-    mModelCodecManager( modelCodecManager ),
-    mModel( nullptr )
+ExportController::ExportController(ModelCodecViewManager* modelCodecViewManager,
+                                   ModelCodecManager* modelCodecManager,
+                                   KXMLGUIClient* guiClient)
+    : AbstractXmlGuiController()
+    , mModelCodecViewManager(modelCodecViewManager)
+    , mModelCodecManager(modelCodecManager)
+    , mModel(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mExportSelectAction = actionCollection->add<KSelectAction>( QStringLiteral("export") );
-    mExportSelectAction->setText( i18nc("@title:menu","Export") );
-    mExportSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("document-export") ) );
-    mExportSelectAction->setToolBarMode( KSelectAction::MenuMode );
-    connect( mExportSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
-             this, &ExportController::onActionTriggered );
+    mExportSelectAction = actionCollection->add<KSelectAction>(QStringLiteral("export"));
+    mExportSelectAction->setText(i18nc("@title:menu", "Export"));
+    mExportSelectAction->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
+    mExportSelectAction->setToolBarMode(KSelectAction::MenuMode);
+    connect(mExportSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
+            this, &ExportController::onActionTriggered);
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void ExportController::setTargetModel( AbstractModel* model )
+void ExportController::setTargetModel(AbstractModel* model)
 {
-    if( mModel ) mModel->disconnect( this );
+    if (mModel) {
+        mModel->disconnect(this);
+    }
 
     mModel = model ? model->findBaseModelWithInterface<If::DataSelectable*>() : nullptr;
-    mSelectionControl = mModel ? qobject_cast<If::DataSelectable *>( mModel ) : nullptr;
+    mSelectionControl = mModel ? qobject_cast<If::DataSelectable*>(mModel) : nullptr;
 
-    if( mSelectionControl )
-    {
+    if (mSelectionControl) {
         // TODO: only fill the list on menu call...
-        connect( mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(updateActions()) );
+        connect(mModel, SIGNAL(hasSelectedDataChanged(bool)), SLOT(updateActions()));
     }
 
     updateActions();
 }
-
 
 void ExportController::updateActions()
 {
@@ -90,49 +87,45 @@ void ExportController::updateActions()
     const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     const QList<AbstractModelExporter*> exporterList =
-        mModelCodecManager->exporterList( mModel, selection );
-    const bool hasExporters = ( exporterList.size() > 0 );
+        mModelCodecManager->exporterList(mModel, selection);
+    const bool hasExporters = (exporterList.size() > 0);
 
-    if( hasExporters )
-    {
-        for( int c = 0; c < exporterList.size(); ++c )
-        {
-            AbstractModelExporter* exporter = exporterList.at( c );
+    if (hasExporters) {
+        for (int c = 0; c < exporterList.size(); ++c) {
+            AbstractModelExporter* exporter = exporterList.at(c);
             const QString title = exporter->remoteTypeName();
-            QAction* action = new QAction( title, mExportSelectAction );
+            QAction* action = new QAction(title, mExportSelectAction);
 
-            action->setData( QVariant::fromValue(exporter) );
-            mExportSelectAction->addAction( action );
+            action->setData(QVariant::fromValue(exporter));
+            mExportSelectAction->addAction(action);
         }
-    }
-    else
-    {
-        QAction* noneAction = new QAction( i18nc("@item There are no exporters.","Not available."), mExportSelectAction );
-        noneAction->setEnabled( false );
-        mExportSelectAction->addAction( noneAction );
+    } else {
+        QAction* noneAction = new QAction(i18nc("@item There are no exporters.", "Not available."), mExportSelectAction);
+        noneAction->setEnabled(false);
+        mExportSelectAction->addAction(noneAction);
     }
 
-    mExportSelectAction->setEnabled( mModel != nullptr );
+    mExportSelectAction->setEnabled(mModel != nullptr);
 }
 
-void ExportController::onActionTriggered( QAction *action )
+void ExportController::onActionTriggered(QAction* action)
 {
-    AbstractModelExporter* exporter = action->data().value<AbstractModelExporter* >();
+    AbstractModelExporter* exporter = action->data().value<AbstractModelExporter*>();
 
     const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     AbstractModelExporterConfigEditor* configEditor =
-        mModelCodecViewManager->createConfigEditor( exporter );
+        mModelCodecViewManager->createConfigEditor(exporter);
 
-    if( configEditor )
-    {
-        ExportDialog* dialog = new ExportDialog( exporter->remoteTypeName(), configEditor );
-        dialog->setData( mModel, selection );
-        if( !dialog->exec() )
+    if (configEditor) {
+        ExportDialog* dialog = new ExportDialog(exporter->remoteTypeName(), configEditor);
+        dialog->setData(mModel, selection);
+        if (!dialog->exec()) {
             return;
+        }
     }
 
-    mModelCodecManager->exportDocument( exporter, mModel, selection );
+    mModelCodecManager->exportDocument(exporter, mModel, selection);
 }
 
 }

@@ -28,20 +28,18 @@
 // Qt
 #include <QValidator>
 
-
-namespace Okteta
-{
+namespace Okteta {
 class ValueCodec;
 class CharCodec;
 
-
 class ByteArrayValidator : public QValidator
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     // matching Okteta::ValueCoding
-    enum Coding {
+    enum Coding
+    {
         InvalidCoding = -1,
         HexadecimalCoding = 0,
         DecimalCoding = 1,
@@ -51,37 +49,37 @@ class ByteArrayValidator : public QValidator
         Utf8Coding = 5
     };
 
-  public:
-    explicit ByteArrayValidator( QObject* parent = nullptr,
-                                 Coding codecId = CharCoding,
-                                 int charCodecId = LocalEncoding );
+public:
+    explicit ByteArrayValidator(QObject* parent = nullptr,
+                                Coding codecId = CharCoding,
+                                int charCodecId = LocalEncoding);
 
     ~ByteArrayValidator() override;
 
-  public: // QValidator API
-    QValidator::State validate( QString& input, int& pos ) const override;
+public: // QValidator API
+    QValidator::State validate(QString& input, int& pos) const override;
 
-  public:
+public:
     /// Sets one of the value codecs or the current char codec.
-    void setCodec( Coding codecId );
+    void setCodec(Coding codecId);
     /// Sets the char codec to use. Does not change the current codec.
-    void setCharCodec( const QString& charCodecName );
+    void setCharCodec(const QString& charCodecName);
     /// Sets the maximal length of the edited bytearray to @p maxLength.
     /// If @p maxLength is negative, the behaviour is undefined. Default is @c 32767.
-    void setMaxLength( int maxLength );
+    void setMaxLength(int maxLength);
     /// Sets the maximal length of the edited bytearray to @p minLength.
     /// If @p minLength is negative, the behaviour is undefined. Default is @c 0.
-    void setMinLength( int minLength );
+    void setMinLength(int minLength);
 
-  public:
+public:
     int maxLength() const;
     int minLength() const;
 
-  public:
-    QByteArray toByteArray( const QString& string ) const;
-    QString toString( const QByteArray& byteArray ) const;
+public:
+    QByteArray toByteArray(const QString& string) const;
+    QString toString(const QByteArray& byteArray) const;
 
-  private:
+private:
     /**
      * Returns a string that is at least as long as @p destLen number of characters,
      * by adding zeroes to the left as necessary.
@@ -96,7 +94,6 @@ class ByteArrayValidator : public QValidator
     int mMaxLength;
     int mMinLength;
 };
-
 
 inline int ByteArrayValidator::maxLength() const { return mMaxLength; }
 inline int ByteArrayValidator::minLength() const { return mMinLength; }

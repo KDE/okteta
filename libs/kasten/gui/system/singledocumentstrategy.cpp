@@ -23,103 +23,101 @@
 #include "singledocumentstrategy.h"
 #include "singledocumentstrategy_p.h"
 
+namespace Kasten {
 
-namespace Kasten
+SingleDocumentStrategy::SingleDocumentStrategy(DocumentManager* documentManager,
+                                               ViewManager* viewManager)
+    : AbstractDocumentStrategy(new SingleDocumentStrategyPrivate(this,
+                                                                 documentManager,
+                                                                 viewManager))
 {
-
-SingleDocumentStrategy::SingleDocumentStrategy( DocumentManager* documentManager,
-                                                ViewManager* viewManager )
-  : AbstractDocumentStrategy( new SingleDocumentStrategyPrivate(this,
-                                                                documentManager,
-                                                                viewManager) )
-{
-    Q_D( SingleDocumentStrategy );
+    Q_D(SingleDocumentStrategy);
 
     d->init();
 }
 
 QList<AbstractDocument*> SingleDocumentStrategy::documents() const
 {
-    Q_D( const SingleDocumentStrategy );
+    Q_D(const SingleDocumentStrategy);
 
     return d->documents();
 }
 
 QStringList SingleDocumentStrategy::supportedRemoteTypes() const
 {
-    Q_D( const SingleDocumentStrategy );
+    Q_D(const SingleDocumentStrategy);
 
     return d->supportedRemoteTypes();
 }
 
-bool SingleDocumentStrategy::canClose( AbstractDocument* document ) const
+bool SingleDocumentStrategy::canClose(AbstractDocument* document) const
 {
-    Q_D( const SingleDocumentStrategy );
+    Q_D(const SingleDocumentStrategy);
 
-    return d->canClose( document );
+    return d->canClose(document);
 }
 
-bool SingleDocumentStrategy::canCloseAllOther( AbstractDocument* document ) const
+bool SingleDocumentStrategy::canCloseAllOther(AbstractDocument* document) const
 {
-    Q_D( const SingleDocumentStrategy );
+    Q_D(const SingleDocumentStrategy);
 
-    return d->canCloseAllOther( document );
+    return d->canCloseAllOther(document);
 }
 
 bool SingleDocumentStrategy::canCloseAll() const
 {
-    Q_D( const SingleDocumentStrategy );
+    Q_D(const SingleDocumentStrategy);
 
     return d->canCloseAll();
 }
 
 void SingleDocumentStrategy::createNew()
 {
-    Q_D( SingleDocumentStrategy );
+    Q_D(SingleDocumentStrategy);
 
     d->createNew();
 }
 
 void SingleDocumentStrategy::createNewFromClipboard()
 {
-    Q_D( SingleDocumentStrategy );
+    Q_D(SingleDocumentStrategy);
 
     d->createNewFromClipboard();
 }
 
-void SingleDocumentStrategy::createNewWithGenerator( AbstractModelDataGenerator* generator )
+void SingleDocumentStrategy::createNewWithGenerator(AbstractModelDataGenerator* generator)
 {
-    Q_D( SingleDocumentStrategy );
+    Q_D(SingleDocumentStrategy);
 
-    d->createNewWithGenerator( generator );
+    d->createNewWithGenerator(generator);
 }
 
-void SingleDocumentStrategy::load( const QUrl& url )
+void SingleDocumentStrategy::load(const QUrl& url)
 {
-    Q_D( SingleDocumentStrategy );
+    Q_D(SingleDocumentStrategy);
 
-    d->load( url );
+    d->load(url);
 }
 
 void SingleDocumentStrategy::closeAll()
 {
-    Q_D( SingleDocumentStrategy );
+    Q_D(SingleDocumentStrategy);
 
     d->closeAll();
 }
 
-void SingleDocumentStrategy::closeAllOther( AbstractDocument* document )
+void SingleDocumentStrategy::closeAllOther(AbstractDocument* document)
 {
-    Q_D( SingleDocumentStrategy );
+    Q_D(SingleDocumentStrategy);
 
-    d->closeAllOther( document );
+    d->closeAllOther(document);
 }
 
-void SingleDocumentStrategy::closeDocument( AbstractDocument* document )
+void SingleDocumentStrategy::closeDocument(AbstractDocument* document)
 {
-    Q_D( SingleDocumentStrategy );
+    Q_D(SingleDocumentStrategy);
 
-    d->closeDocument( document );
+    d->closeDocument(document);
 }
 
 SingleDocumentStrategy::~SingleDocumentStrategy()

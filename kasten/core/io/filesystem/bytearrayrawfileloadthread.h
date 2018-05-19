@@ -28,44 +28,41 @@
 
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayDocument;
 
-
 class ByteArrayRawFileLoadThread : public QThread
 {
-  Q_OBJECT
-  public:
-    ByteArrayRawFileLoadThread( QObject* parent,
-                                QFile* file );
+    Q_OBJECT
+
+public:
+    ByteArrayRawFileLoadThread(QObject* parent,
+                               QFile* file);
     ~ByteArrayRawFileLoadThread() override;
 
-  public: // QThread API
+public: // QThread API
     void run() override;
 
-  public:
+public:
     ByteArrayDocument* document() const;
 
     const QString& errorString() const;
 
-  Q_SIGNALS:
-    void documentRead( ByteArrayDocument* document );
+Q_SIGNALS:
+    void documentRead(ByteArrayDocument* document);
 
-  protected:
+protected:
     QFile* mFile;
 
     ByteArrayDocument* mDocument;
     QString mErrorString;
 };
 
-
-inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread( QObject* parent, QFile* file )
-  : QThread( parent ),
-    mFile( file ),
-    mDocument( nullptr )
+inline ByteArrayRawFileLoadThread::ByteArrayRawFileLoadThread(QObject* parent, QFile* file)
+    : QThread(parent)
+    , mFile(file)
+    , mDocument(nullptr)
 {}
 
 inline ByteArrayDocument* ByteArrayRawFileLoadThread::document() const { return mDocument; }

@@ -36,15 +36,16 @@
 class TopLevelDataInformation;
 class AbstractStructureParser;
 
-namespace Kasten
-{
+namespace Kasten {
+
 /**
  *  This class takes care of all the XML parsing and stores the result.
  */
 class StructureDefinitionFile
 {
     Q_DISABLE_COPY(StructureDefinitionFile)
-  public:
+
+public:
     /**
      * This class uses lazy parsing
      * @param info the information about this structure definition
@@ -53,7 +54,7 @@ class StructureDefinitionFile
     explicit StructureDefinitionFile(const KPluginInfo& info);
     virtual ~StructureDefinitionFile();
 
-  public:
+public:
     QVector<TopLevelDataInformation*> structures() const;
     QStringList structureNames() const;
     TopLevelDataInformation* structure(const QString& name) const;
@@ -62,11 +63,11 @@ class StructureDefinitionFile
     KPluginInfo pluginInfo() const;
     bool isValid() const;
 
-  private:
+private:
     KPluginInfo mPluginInfo;
     QScopedPointer<AbstractStructureParser> mParser;
 };
 
-} //namespace Kasten
+} // namespace Kasten
 
 #endif /* STRUCTUREDEFINITIONFILE_H_ */

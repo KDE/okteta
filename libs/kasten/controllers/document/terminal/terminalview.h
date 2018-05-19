@@ -27,44 +27,39 @@
 #include <QWidget>
 
 class TerminalInterface;
-namespace KParts
-{
+namespace KParts {
 class ReadOnlyPart;
 }
 class QUrl;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TerminalTool;
 
-
 class TerminalView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit TerminalView( TerminalTool* tool, QWidget* parent = nullptr );
+public:
+    explicit TerminalView(TerminalTool* tool, QWidget* parent = nullptr);
     ~TerminalView() override;
 
-  public:
+public:
     TerminalTool* tool() const;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void createTerminalPart();
 
-    void onCurrentUrlChanged( const QUrl& currentUrl );
+    void onCurrentUrlChanged(const QUrl& currentUrl);
 
     void onTerminalPartDestroyed();
 
-  private:
+private:
     TerminalTool* const mTool;
 
     KParts::ReadOnlyPart* mTerminalPart;
     TerminalInterface* mTerminalInterface;
 };
-
 
 inline TerminalTool* TerminalView::tool() const { return mTool; }
 

@@ -29,23 +29,19 @@
 
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractDocument;
-
 
 class KASTENCORE_EXPORT AbstractSaveDiscardDialog
 {
-  public:
+public:
     virtual ~AbstractSaveDiscardDialog();
 
-  public: // API to be implemented
-    virtual Answer queryDiscardOnReload( const AbstractDocument* document, const QString& title ) const = 0;
-    virtual Answer querySaveDiscard( const AbstractDocument* document, const QString& title ) const = 0;
-    virtual Answer queryDiscard( const AbstractDocument* document, const QString& title ) const = 0;
+public: // API to be implemented
+    virtual Answer queryDiscardOnReload(const AbstractDocument* document, const QString& title) const = 0;
+    virtual Answer querySaveDiscard(const AbstractDocument* document, const QString& title) const = 0;
+    virtual Answer queryDiscard(const AbstractDocument* document, const QString& title) const = 0;
 };
-
 
 inline AbstractSaveDiscardDialog::~AbstractSaveDiscardDialog() {}
 

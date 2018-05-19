@@ -28,55 +28,54 @@
 #include <QLabel>
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void AbstractLinePopupPrivate::init()
 {
     // TODO: what kind of border should there be? like a QMenu?
 
 //     setAttribute( Qt::WA_DeleteOnClose );
-    p->setMouseTracking( true );
+    p->setMouseTracking(true);
 
-    mBaseLayout = new QHBoxLayout( p );
-    mBaseLayout->setMargin( 0 );
-    mBaseLayout->setSpacing( 0 );
+    mBaseLayout = new QHBoxLayout(p);
+    mBaseLayout->setMargin(0);
+    mBaseLayout->setSpacing(0);
 
-    mIconLabel = new QLabel( p );
-    mBaseLayout->addWidget( mIconLabel );
+    mIconLabel = new QLabel(p);
+    mBaseLayout->addWidget(mIconLabel);
 
-    qApp->installEventFilter( p );
+    qApp->installEventFilter(p);
 }
 
-
-void AbstractLinePopupPrivate::setIcon( const QIcon& icon )
+void AbstractLinePopupPrivate::setIcon(const QIcon& icon)
 {
-    mIconLabel->setPixmap( icon.pixmap(22) ); // TODO: correct call, using KDE size
+    mIconLabel->setPixmap(icon.pixmap(22));   // TODO: correct call, using KDE size
 }
 
-void AbstractLinePopupPrivate::setWidget( QWidget* widget )
+void AbstractLinePopupPrivate::setWidget(QWidget* widget)
 {
     mWidget = widget;
-    mBaseLayout->addWidget( widget, 10 );
+    mBaseLayout->addWidget(widget, 10);
 }
 
-void AbstractLinePopupPrivate::setPosition( const QPoint& globalPosition )
+void AbstractLinePopupPrivate::setPosition(const QPoint& globalPosition)
 {
-    p->move( globalPosition.x(), globalPosition.y() - p->height() );
+    p->move(globalPosition.x(), globalPosition.y() - p->height());
 }
 
-void AbstractLinePopupPrivate::setVisible( bool visible )
+void AbstractLinePopupPrivate::setVisible(bool visible)
 {
-    p->QWidget::setVisible( visible );
-    if( mEventLoop )
+    p->QWidget::setVisible(visible);
+    if (mEventLoop) {
         mEventLoop->exit();
+    }
 }
 
 int AbstractLinePopupPrivate::exec()
 {
-    if( mWidget )
+    if (mWidget) {
         mWidget->setFocus();
+    }
     p->show();
 
     QEventLoop eventLoop;

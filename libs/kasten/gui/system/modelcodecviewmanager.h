@@ -31,9 +31,7 @@
 
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelStreamEncoderConfigEditorFactory;
 class AbstractModelStreamEncoderConfigEditor;
@@ -46,26 +44,25 @@ class AbstractModelDataGeneratorConfigEditor;
 class AbstractModelDataGenerator;
 class ViewManager;
 
-
 class KASTENGUI_EXPORT ModelCodecViewManager : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ModelCodecViewManager();
     ~ModelCodecViewManager() override;
 
-  public:
-    AbstractModelStreamEncoderConfigEditor* createConfigEditor( AbstractModelStreamEncoder* encoder ) const;
-    AbstractModelExporterConfigEditor* createConfigEditor( AbstractModelExporter* exporter ) const;
-    AbstractModelDataGeneratorConfigEditor* createConfigEditor( AbstractModelDataGenerator* generator ) const;
+public:
+    AbstractModelStreamEncoderConfigEditor* createConfigEditor(AbstractModelStreamEncoder* encoder) const;
+    AbstractModelExporterConfigEditor* createConfigEditor(AbstractModelExporter* exporter) const;
+    AbstractModelDataGeneratorConfigEditor* createConfigEditor(AbstractModelDataGenerator* generator) const;
 
-  public:
-    void setEncoderConfigEditorFactories( const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList );
-    void setExporterConfigEditorFactories( const QList<AbstractModelExporterConfigEditorFactory*>& factoryList );
-    void setGeneratorConfigEditorFactories( const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList );
+public:
+    void setEncoderConfigEditorFactories(const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList);
+    void setExporterConfigEditorFactories(const QList<AbstractModelExporterConfigEditorFactory*>& factoryList);
+    void setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList);
 
-  private:
+private:
     QList<AbstractModelStreamEncoderConfigEditorFactory*> mEncoderFactoryList;
     QList<AbstractModelExporterConfigEditorFactory*> mExporterFactoryList;
     QList<AbstractModelDataGeneratorConfigEditorFactory*> mGeneratorFactoryList;

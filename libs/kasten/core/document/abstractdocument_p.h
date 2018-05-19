@@ -29,55 +29,53 @@
 // lib
 #include "abstractmodelsynchronizer.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocumentPrivate : public AbstractModelPrivate
 {
-  public:
-      explicit AbstractDocumentPrivate( AbstractDocument* parent );
+public:
+    explicit AbstractDocumentPrivate(AbstractDocument* parent);
 
-      ~AbstractDocumentPrivate() override;
+    ~AbstractDocumentPrivate() override;
 
-  public:
+public:
     const QString& id() const;
     AbstractModelSynchronizer* synchronizer() const;
 
-  public:
-    void setId( const QString& id );
-    void setSynchronizer( AbstractModelSynchronizer* synchronizer );
+public:
+    void setId(const QString& id);
+    void setSynchronizer(AbstractModelSynchronizer* synchronizer);
 
-  protected:
-    Q_DECLARE_PUBLIC( AbstractDocument )
+protected:
+    Q_DECLARE_PUBLIC(AbstractDocument)
 
-  protected:
+protected:
     QString mId;
     AbstractModelSynchronizer* mSynchronizer; // TODO: should this be here, with public setters and getters?
 };
 
-
-inline AbstractDocumentPrivate::AbstractDocumentPrivate( AbstractDocument* parent )
-  : AbstractModelPrivate( parent ),
-    mSynchronizer( nullptr )
+inline AbstractDocumentPrivate::AbstractDocumentPrivate(AbstractDocument* parent)
+    : AbstractModelPrivate(parent)
+    , mSynchronizer(nullptr)
 {}
 
 inline const QString& AbstractDocumentPrivate::id() const { return mId; }
-inline void AbstractDocumentPrivate::setId( const QString& id ) { mId = id; }
+inline void AbstractDocumentPrivate::setId(const QString& id) { mId = id; }
 
 inline AbstractModelSynchronizer* AbstractDocumentPrivate::synchronizer() const { return mSynchronizer; }
-inline void AbstractDocumentPrivate::setSynchronizer( AbstractModelSynchronizer* synchronizer )
+inline void AbstractDocumentPrivate::setSynchronizer(AbstractModelSynchronizer* synchronizer)
 {
-    Q_Q( AbstractDocument );
+    Q_Q(AbstractDocument);
 
     // plugging the same more than once?
-    if( mSynchronizer == synchronizer )
+    if (mSynchronizer == synchronizer) {
         return;
+    }
 
     delete mSynchronizer;
     mSynchronizer = synchronizer;
 
-    emit q->synchronizerChanged( synchronizer );
+    emit q->synchronizerChanged(synchronizer);
 }
 
 inline AbstractDocumentPrivate::~AbstractDocumentPrivate()

@@ -30,23 +30,23 @@ class KConfigSkeletonItem;
 
 class StructureViewSettingsWidget : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     explicit StructureViewSettingsWidget();
     ~StructureViewSettingsWidget() override;
 
-  private:
+private:
     void setupBasesCombo(QComboBox* box, KConfigSkeletonItem* configItem,
-            int currentValue, const char* slot);
+                         int currentValue, const char* slot);
     void handleMapping(int index, QComboBox* box, QSpinBox* spin);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void setCharDisplay(int index);
     void setSignedDisplay(int index);
     void setUnsignedDisplay(int index);
 
-  private:
+private:
     Ui_StructureViewSettingsWidget ui;
 };
 

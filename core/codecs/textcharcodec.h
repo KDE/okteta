@@ -32,32 +32,31 @@ class QTextCodec;
 class QTextDecoder;
 class QTextEncoder;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 // used by all codecs with full char coping, i.e. there are no undefined chars
 class TextCharCodec : public CharCodec
 {
-  public:
-    static TextCharCodec* createCodec( const QString& codeName );
-    static TextCharCodec* createCodec( CharCoding charCoding );
+public:
+    static TextCharCodec* createCodec(const QString& codeName);
+    static TextCharCodec* createCodec(CharCoding charCoding);
     static TextCharCodec* createLocalCodec();
 
     static const QStringList& codecNames();
 
-  protected:
-    TextCharCodec( QTextCodec* textCodec );
-  public:
+protected:
+    TextCharCodec(QTextCodec* textCodec);
+
+public:
     ~TextCharCodec() override;
 
-  public: // CharCodec API
-    Character decode( Byte byte ) const override;
-    bool encode( Byte* byte, const QChar& _char ) const override;
-    bool canEncode( const QChar& _char ) const override;
+public: // CharCodec API
+    Character decode(Byte byte) const override;
+    bool encode(Byte* byte, const QChar& _char) const override;
+    bool canEncode(const QChar& _char) const override;
     const QString& name() const override;
 
-  protected:
+protected:
     QTextCodec* mCodec;
     /** decodes the chars to unicode */
     QTextDecoder* mDecoder;

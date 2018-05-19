@@ -25,67 +25,57 @@
 // Qt
 #include <QString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 unsigned int DecimalByteCodec::encodingWidth() const { return 3; }
 Byte DecimalByteCodec::digitsFilledLimit() const { return 26; }
 
-void DecimalByteCodec::encode( QString& digits, unsigned int pos, Byte byte ) const
+void DecimalByteCodec::encode(QString& digits, unsigned int pos, Byte byte) const
 {
     unsigned char digitValue = byte / 100;
-    digits[pos++] = QLatin1Char( '0'+digitValue );
+    digits[pos++] = QLatin1Char('0' + digitValue);
     byte -= digitValue * 100;
     digitValue = byte / 10;
-    digits[pos++] = QLatin1Char( '0'+digitValue );
+    digits[pos++] = QLatin1Char('0' + digitValue);
     byte -= digitValue * 10;
-    digits[pos] = QLatin1Char( '0'+byte );
+    digits[pos] = QLatin1Char('0' + byte);
 }
 
-
-void DecimalByteCodec::encodeShort( QString& digits, unsigned int pos, Byte byte ) const
+void DecimalByteCodec::encodeShort(QString& digits, unsigned int pos, Byte byte) const
 {
     const unsigned char firstDigitValue = byte / 100;
-    if( firstDigitValue > 0 )
-    {
-        digits[pos++] = QLatin1Char( '0'+firstDigitValue );
+    if (firstDigitValue > 0) {
+        digits[pos++] = QLatin1Char('0' + firstDigitValue);
         byte -= firstDigitValue * 100;
     }
     const unsigned char secondDigitValue = byte / 10;
-    if( secondDigitValue > 0 || firstDigitValue > 0 )
-    {
-        digits[pos++] = QLatin1Char( '0'+secondDigitValue );
+    if (secondDigitValue > 0 || firstDigitValue > 0) {
+        digits[pos++] = QLatin1Char('0' + secondDigitValue);
         byte -= secondDigitValue * 10;
     }
-    digits[pos] = QLatin1Char( '0'+byte );
+    digits[pos] = QLatin1Char('0' + byte);
 }
 
-
-bool DecimalByteCodec::isValidDigit( unsigned char digit ) const
+bool DecimalByteCodec::isValidDigit(unsigned char digit) const
 {
     return ('0' <= digit && digit <= '9');
 }
 
-bool DecimalByteCodec::turnToValue( unsigned char* digit ) const
+bool DecimalByteCodec::turnToValue(unsigned char* digit) const
 {
-    if( isValidDigit(*digit) )
-    {
+    if (isValidDigit(*digit)) {
         *digit -= '0';
         return true;
     }
     return false;
 }
 
-
-bool DecimalByteCodec::appendDigit( Byte* byte, unsigned char digit ) const
+bool DecimalByteCodec::appendDigit(Byte* byte, unsigned char digit) const
 {
-    if( turnToValue(&digit) )
-    {
+    if (turnToValue(&digit)) {
         Byte _byte = *byte;
-        if( _byte < 25 ||
-            (_byte == 25 && digit < 6) )
-        {
+        if (_byte < 25 ||
+            (_byte == 25 && digit < 6)) {
             _byte *= 10;
             _byte += digit;
             *byte = _byte;
@@ -95,7 +85,7 @@ bool DecimalByteCodec::appendDigit( Byte* byte, unsigned char digit ) const
     return false;
 }
 
-void DecimalByteCodec::removeLastDigit( Byte* byte ) const
+void DecimalByteCodec::removeLastDigit(Byte* byte) const
 {
     *byte /= 10;
 }

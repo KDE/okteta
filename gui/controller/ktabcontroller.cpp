@@ -27,44 +27,37 @@
 // Qt
 #include <QKeyEvent>
 
-namespace Okteta
-{
+namespace Okteta {
 
-KTabController::KTabController( AbstractByteArrayView* view, KController* parent )
-  : KController( parent ),
-    mView( view ),
-    mTabChangesFocus( true )
+KTabController::KTabController(AbstractByteArrayView* view, KController* parent)
+    : KController(parent)
+    , mView(view)
+    , mTabChangesFocus(true)
 {
 }
 
-
-bool KTabController::handleKeyPress( QKeyEvent* keyEvent )
+bool KTabController::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
-    const bool tabPressed = ( keyEvent->key() == Qt::Key_Tab );
-    const bool backTabPressed = ( keyEvent->key() == Qt::Key_Backtab );
+    const bool tabPressed = (keyEvent->key() == Qt::Key_Tab);
+    const bool backTabPressed = (keyEvent->key() == Qt::Key_Backtab);
 
-    if( tabPressed || backTabPressed )
-    {
+    if (tabPressed || backTabPressed) {
         const int visibleCodings = mView->visibleCodings();
         // are we in the char column?
-        if( mView->activeCoding() == AbstractByteArrayView::CharCodingId )
-        {
+        if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
             // in last column we care about tab changes focus
-            if( (visibleCodings&AbstractByteArrayView::ValueCodingId) && (!mTabChangesFocus || backTabPressed) )
-            {
-                mView->setActiveCoding( AbstractByteArrayView::ValueCodingId );
+            if ((visibleCodings & AbstractByteArrayView::ValueCodingId) && (!mTabChangesFocus || backTabPressed)) {
+                mView->setActiveCoding(AbstractByteArrayView::ValueCodingId);
                 keyUsed = true;
             }
         }
         // value column then
-        else
-        {
+        else {
             // in last column we care about tab changes focus
-            if( (visibleCodings&AbstractByteArrayView::CharCodingId) && (!mTabChangesFocus || tabPressed) )
-            {
-                mView->setActiveCoding( AbstractByteArrayView::CharCodingId );
+            if ((visibleCodings & AbstractByteArrayView::CharCodingId) && (!mTabChangesFocus || tabPressed)) {
+                mView->setActiveCoding(AbstractByteArrayView::CharCodingId);
                 keyUsed = true;
             }
         }

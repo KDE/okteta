@@ -26,12 +26,10 @@
 #include "filterview.h"
 #include "filtertool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-FilterToolView::FilterToolView( FilterTool* tool )
- : mWidget( new FilterView(tool) )
+FilterToolView::FilterToolView(FilterTool* tool)
+    : mWidget(new FilterView(tool))
 {
 }
 

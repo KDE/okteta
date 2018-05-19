@@ -26,23 +26,20 @@
 // lib
 #include <kasten/abstractmodelexporterconfigeditorfactory.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelStreamEncoderConfigEditorFactory;
 
-
 class KASTENGUI_EXPORT ModelEncoderFileSystemExporterConfigEditorFactory : public AbstractModelExporterConfigEditorFactory
 {
-  public:
-    explicit ModelEncoderFileSystemExporterConfigEditorFactory( AbstractModelStreamEncoderConfigEditorFactory* encoderConfigEditorFactory );
+public:
+    explicit ModelEncoderFileSystemExporterConfigEditorFactory(AbstractModelStreamEncoderConfigEditorFactory* encoderConfigEditorFactory);
     ~ModelEncoderFileSystemExporterConfigEditorFactory() override;
 
-  public:
-    AbstractModelExporterConfigEditor* tryCreateConfigEditor( AbstractModelExporter* exporter ) const override;
+public:
+    AbstractModelExporterConfigEditor* tryCreateConfigEditor(AbstractModelExporter* exporter) const override;
 
-  protected:
+protected:
     AbstractModelStreamEncoderConfigEditorFactory* mEncoderConfigEditorFactory;
 };
 

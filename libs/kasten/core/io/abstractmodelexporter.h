@@ -31,9 +31,7 @@
 
 class QUrl;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModel;
 class AbstractModelSelection;
@@ -41,31 +39,31 @@ class AbstractExportJob;
 
 class AbstractModelExporterPrivate;
 
-
 class KASTENCORE_EXPORT AbstractModelExporter : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    AbstractModelExporter( AbstractModelExporterPrivate* d );
+protected:
+    AbstractModelExporter(AbstractModelExporterPrivate* d);
 
-  public:
-    AbstractModelExporter( const QString& remoteTypeName, const QString& remoteMimeType );
+public:
+    AbstractModelExporter(const QString& remoteTypeName, const QString& remoteMimeType);
 
     ~AbstractModelExporter() override;
 
-  public: // API to be implemented
-    virtual AbstractExportJob* startExport( AbstractModel* model, const AbstractModelSelection* selection,
-                                            const QUrl& url ) = 0;
-    virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const = 0;
+public: // API to be implemented
+    virtual AbstractExportJob* startExport(AbstractModel* model, const AbstractModelSelection* selection,
+                                           const QUrl& url) = 0;
+    virtual QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const = 0;
 
-  public:
+public:
     QString remoteTypeName() const;
     QString remoteMimeType() const;
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractModelExporter )
-  protected:
+protected:
+    Q_DECLARE_PRIVATE(AbstractModelExporter)
+
+protected:
     AbstractModelExporterPrivate* const d_ptr;
 };
 

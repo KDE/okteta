@@ -26,36 +26,33 @@
 // lib
 #include "abstractpiecetablechange.h"
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 /** class
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 
 class SwapRangesPieceTableChange : public AbstractPieceTableChange
 {
-  public:
-    SwapRangesPieceTableChange( Address firstStart, const AddressRange& secondRange );
+public:
+    SwapRangesPieceTableChange(Address firstStart, const AddressRange& secondRange);
     ~SwapRangesPieceTableChange() override;
 
-  public: // AbstractPieceTableChange API
+public: // AbstractPieceTableChange API
     int type() const override;
     QString description() const override;
-    AddressRange apply( PieceTable* pieceTable ) const override;
-    AddressRange revert( PieceTable* pieceTable ) const override;
+    AddressRange apply(PieceTable* pieceTable) const override;
+    AddressRange revert(PieceTable* pieceTable) const override;
     ArrayChangeMetrics metrics() const override;
 
-  protected:
+protected:
     Address mFirstStart;
     AddressRange mSecondRange;
 };
 
-
-inline SwapRangesPieceTableChange::SwapRangesPieceTableChange( Address firstStart, const AddressRange& secondRange )
-  : mFirstStart( firstStart ),
-    mSecondRange( secondRange )
+inline SwapRangesPieceTableChange::SwapRangesPieceTableChange(Address firstStart, const AddressRange& secondRange)
+    : mFirstStart(firstStart)
+    , mSecondRange(secondRange)
 {}
 
 }

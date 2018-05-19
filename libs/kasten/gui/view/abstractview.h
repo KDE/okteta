@@ -30,28 +30,26 @@
 
 class QWidget;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 // TODO: is there a common base for view and document?
 class KASTENGUI_EXPORT AbstractView : public AbstractModel
 {
     Q_OBJECT
 
-  public:
-    explicit AbstractView( AbstractModel* baseModel = nullptr );
+public:
+    explicit AbstractView(AbstractModel* baseModel = nullptr);
     ~AbstractView() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual void setFocus() = 0;
 
     virtual QWidget* widget() const = 0;
     virtual bool hasFocus() const = 0;
 
-  Q_SIGNALS:
+Q_SIGNALS:
     // view has focus in the window
-    void focusChanged( bool hasFocus );
+    void focusChanged(bool hasFocus);
 };
 
 }

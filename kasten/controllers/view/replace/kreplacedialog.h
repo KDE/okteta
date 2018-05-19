@@ -26,39 +26,36 @@
 // lib
 #include <kabstractfinddialog.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ReplaceTool;
 
-
 class KReplaceDialog : public KAbstractFindDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit KReplaceDialog( ReplaceTool* tool, QWidget* parent = nullptr );
+public:
+    explicit KReplaceDialog(ReplaceTool* tool, QWidget* parent = nullptr);
     ~KReplaceDialog() override;
 
-  public: // set
+public: // set
 //     void setDirection( KReplaceDirection Direction );
-    void setCharCodec( const QString &codecName );
+    void setCharCodec(const QString& codecName);
 
-  public: // get 
+public: // get
     QByteArray replaceData() const;
     bool prompt() const;
 
-  protected: // KAbstractFindDialog API
+protected: // KAbstractFindDialog API
     void onFindButtonClicked() override;
     void rememberCurrentSettings() override;
 
-  protected: // QWidget API
-    void showEvent( QShowEvent* showEvent ) override;
+protected: // QWidget API
+    void showEvent(QShowEvent* showEvent) override;
 
-  private:
+private:
     Okteta::ByteArrayComboBox* ReplaceDataEdit;
-    QCheckBox *PromptCheckBox;
+    QCheckBox* PromptCheckBox;
 
     ReplaceTool* mTool;
 };

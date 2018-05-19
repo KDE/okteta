@@ -39,50 +39,54 @@ class AbstractDocument;
 class QVBoxLayout;
 template <class T> class QList;
 
-
 class OktetaPart : public KParts::ReadWritePart
 {
     Q_OBJECT
 
     friend class OktetaBrowserExtension;
 
-  public:
-    enum Modus { ReadOnly = 0, BrowserView = 1, ReadWrite = 2 };
+public:
+    enum Modus
+    {
+        ReadOnly = 0,
+        BrowserView = 1,
+        ReadWrite = 2
+    };
 
-  public:
-    OktetaPart( QObject* parent,
-                const KAboutData& componentData,
-                Modus modus,
-                Kasten::ByteArrayViewProfileManager* viewProfileManager );
+public:
+    OktetaPart(QObject* parent,
+               const KAboutData& componentData,
+               Modus modus,
+               Kasten::ByteArrayViewProfileManager* viewProfileManager);
 
     ~OktetaPart() override;
 
-  public:
+public:
     Kasten::PrintController* printController() const;
 
-  public: // KParts::ReadWritePart API
-    void setReadWrite( bool readWrite = true ) override;
+public: // KParts::ReadWritePart API
+    void setReadWrite(bool readWrite = true) override;
 
-  Q_SIGNALS:
-    void hasSelectedDataChanged( bool hasSelectedData );
+Q_SIGNALS:
+    void hasSelectedDataChanged(bool hasSelectedData);
 
-  protected: // KParts::ReadWritePart API
+protected: // KParts::ReadWritePart API
     bool saveFile() override;
 
-  protected: // KParts::ReadOnlyPart API
+protected: // KParts::ReadOnlyPart API
     bool openFile() override;
 
-  protected:
-    void setupActions( bool browserViewWanted );
+protected:
+    void setupActions(bool browserViewWanted);
 
-  protected:
+protected:
     Kasten::ByteArrayView* byteArrayView() const;
 
-  protected Q_SLOTS:
-    void onDocumentLoaded( Kasten::AbstractDocument* document );
-    void onModified( Kasten::LocalSyncState state );
+protected Q_SLOTS:
+    void onDocumentLoaded(Kasten::AbstractDocument* document);
+    void onModified(Kasten::LocalSyncState state);
 
-  private:
+private:
     const Modus mModus;
     QVBoxLayout* mLayout;
 
@@ -94,7 +98,6 @@ class OktetaPart : public KParts::ReadWritePart
 
     Kasten::ByteArrayViewProfileManager* mViewProfileManager;
 };
-
 
 inline Kasten::ByteArrayView* OktetaPart::byteArrayView() const { return mByteArrayView; }
 

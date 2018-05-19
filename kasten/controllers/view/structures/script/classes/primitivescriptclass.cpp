@@ -20,13 +20,11 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "primitivescriptclass.h"
 #include "../../datatypes/primitive/primitivedatainformation.h"
 #include "../../parsers/parserutils.h"
 #include "../../allprimitivetypes.h"
 #include "../../structlogging.h"
-
 
 PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
@@ -85,18 +83,15 @@ PrimitiveScriptClass::~PrimitiveScriptClass()
 bool PrimitiveScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint*)
 {
     Q_UNUSED(data)
-    //TODO assign ids to improve speed? cant have children, so it won't conflict
-    //no need to modify flags since both read and write are handled
-    if (name == s_value || name == s_type)
-    {
+    // TODO assign ids to improve speed? cant have children, so it won't conflict
+    // no need to modify flags since both read and write are handled
+    if (name == s_value || name == s_type) {
         *flags &= ~HandlesWriteAccess;
         return true;
-    }
-    else if (name == s_bool || name == s_char || name == s_int || name == s_uint || name == s_float
-            || name == s_double || name == s_int64 || name == s_uint64 || name == s_int64low32
-            || name == s_int64high32 || name == s_uint64low32 || name == s_uint64high32 || name == s_int8
-            || name == s_int16 || name == s_int32 || name == s_uint8 || name == s_uint16 || name == s_uint32)
-    {
+    } else if (name == s_bool || name == s_char || name == s_int || name == s_uint || name == s_float
+               || name == s_double || name == s_int64 || name == s_uint64 || name == s_int64low32
+               || name == s_int64high32 || name == s_uint64low32 || name == s_uint64high32 || name == s_int8
+               || name == s_int16 || name == s_int32 || name == s_uint8 || name == s_uint16 || name == s_uint32) {
         *flags &= ~HandlesWriteAccess;
         return true;
     }
@@ -108,62 +103,60 @@ bool PrimitiveScriptClass::additionalPropertyFlags(const DataInformation*, const
     return false;
 }
 
-
 QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint)
 {
     const PrimitiveDataInformation* pData = data->asPrimitive();
 
-    if (name == s_value)
-    {
-        if (pData->wasAbleToRead())
+    if (name == s_value) {
+        if (pData->wasAbleToRead()) {
             return pData->valueAsQScriptValue();
+        }
         QScriptValue callee = engine()->currentContext()->thisObject();
         DataInformation* cause = toDataInformation(callee);
-        if (cause)
+        if (cause) {
             pData->logError() << "Attempting to read from uninitialized value. Callee was " << cause->fullObjectPath();
-        else
+        } else {
             pData->logError() << "Attempting to read from uninitialized value. Callee could not be determined";
+        }
         return engine()->undefinedValue();
-    }
-    else if (name == s_type)
-    {
-        //bitfields are handled by own scriptclass and NotPrimitive indicates an error
+    } else if (name == s_type) {
+        // bitfields are handled by own scriptclass and NotPrimitive indicates an error
         Q_ASSERT(!pData->isBitfield());
         Q_ASSERT(pData->type() != PrimitiveDataType::Invalid);
         return PrimitiveType::standardTypeName(pData->type());
-    }
-    else {
+    } else {
         AllPrimitiveTypes value = pData->value();
-        if (name == s_bool)
+        if (name == s_bool) {
             return value.value<quint64>() != 0;
-        else if (name == s_char)
+        } else if (name == s_char) {
             return QString(value.value<quint8>() > 127 ? QChar::ReplacementCharacter : QChar(value.value<qint8>(), 0));
-        else if (name == s_float)
+        } else if (name == s_float) {
             return value.value<float>();
-        else if (name == s_double)
+        } else if (name == s_double) {
             return value.value<double>();
-        else if (name == s_int || name == s_int32 || name == s_int64low32)
+        } else if (name == s_int || name == s_int32 || name == s_int64low32) {
             return value.value<qint32>();
-        else if (name == s_uint || name == s_uint32 || name == s_uint64low32)
+        } else if (name == s_uint || name == s_uint32 || name == s_uint64low32) {
             return value.value<quint32>();
-        else if (name == s_int64)
+        } else if (name == s_int64) {
             return QString::number(value.value<qint64>());
-        else if (name == s_uint64)
+        } else if (name == s_uint64) {
             return QString::number(value.value<quint64>());
-        else if (name == s_int64high32)
+        } else if (name == s_int64high32) {
             return qint32(value.value<qint64>() >> 32);
-        else if (name == s_uint64high32)
+        } else if (name == s_uint64high32) {
             return quint32(value.value<quint64>() >> 32);
-        else if (name == s_int8)
+        } else if (name == s_int8) {
             return qint32(value.value<qint8>());
-        else if (name == s_int16)
+        } else if (name == s_int16) {
             return qint32(value.value<qint16>());
-        else if (name == s_uint8)
+        } else if (name == s_uint8) {
             return quint32(value.value<quint8>());
-        else if (name == s_uint16)
+        } else if (name == s_uint16) {
             return quint32(value.value<quint16>());
-        else
+        } else {
             return QScriptValue();
+        }
     }
 }
 
@@ -172,7 +165,7 @@ bool PrimitiveScriptClass::setAdditionalProperty(DataInformation* data, const QS
     Q_UNUSED(value);
     Q_UNUSED(data);
     Q_UNUSED(name);
-    //TODO allow changing type
+    // TODO allow changing type
     return false;
 }
 
@@ -184,12 +177,10 @@ QScriptValue PrimitiveScriptClass::prototype() const
 QScriptValue PrimitiveScriptClass::Primitive_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
     DataInformation* data = toDataInformation(ctx->thisObject());
-    if (!data)
-    {
+    if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
-    //this might allow proper comparison between values without having to call .value
+    // this might allow proper comparison between values without having to call .value
     return data->wasAbleToRead() ? data->valueString() : eng->undefinedValue();
 }
-

@@ -26,27 +26,24 @@
 // lib
 #include <charcodec.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 //
 class USASCIICharCodec : public CharCodec
 {
-  protected:
+protected:
     USASCIICharCodec();
 
-  public: // CharCodec API
-    Character decode( Byte byte ) const override;
-    bool encode( Byte* byte, const QChar& _char ) const override;
-    bool canEncode( const QChar& _char ) const override;
+public: // CharCodec API
+    Character decode(Byte byte) const override;
+    bool encode(Byte* byte, const QChar& _char) const override;
+    bool canEncode(const QChar& _char) const override;
     const QString& name() const override;
 
-  public:
+public:
     static USASCIICharCodec* create();
     static const QString& codecName();
 };
-
 
 inline USASCIICharCodec::USASCIICharCodec() {}
 

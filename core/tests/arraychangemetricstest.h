@@ -26,14 +26,13 @@
 // Qt
 #include <QObject>
 
-namespace Okteta
-{
+namespace Okteta {
 
 class ArrayChangeMetricsTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testConstructorAsReplacement();
     void testConstructorAsSwapping();
     void testRevert();

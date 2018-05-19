@@ -36,79 +36,77 @@
 // Qt
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 InfoTool::InfoTool()
- : mStatisticTableModel( new StatisticTableModel(mByteCount,this) ),
-   mByteArrayView( nullptr ), mByteArrayModel( nullptr ), mSourceByteArrayModelUptodate( false ), mSourceByteArrayModel( nullptr )
+    : mStatisticTableModel(new StatisticTableModel(mByteCount, this))
+    , mByteArrayView(nullptr)
+    , mByteArrayModel(nullptr)
+    , mSourceByteArrayModelUptodate(false)
+    , mSourceByteArrayModel(nullptr)
 {
-    setObjectName( QStringLiteral( "Info" ) );
+    setObjectName(QStringLiteral("Info"));
     updateStatistic();
 }
 
 QString InfoTool::title() const { return i18nc("@title:window", "Statistics"); }
-StatisticTableModel *InfoTool::statisticTableModel() const { return mStatisticTableModel; }
-int InfoTool::size() const { return (mByteArrayModel!=nullptr) ? mByteArrayModel->size() : -1; }
+StatisticTableModel* InfoTool::statisticTableModel() const { return mStatisticTableModel; }
+int InfoTool::size() const { return (mByteArrayModel != nullptr) ? mByteArrayModel->size() : -1; }
 bool InfoTool::isApplyable() const
 {
-    return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && !isStatisticUptodate() );
+    return (mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && !isStatisticUptodate());
 }
 bool InfoTool::isStatisticUptodate() const
 {
-    return ( mSourceByteArrayModelUptodate
-             && mSourceByteArrayModel == mByteArrayModel
-             && mByteArrayView && mSourceSelection == mByteArrayView->selection() );
+    return (mSourceByteArrayModelUptodate
+            && mSourceByteArrayModel == mByteArrayModel
+            && mByteArrayView && mSourceSelection == mByteArrayView->selection());
 }
 
-
-void InfoTool::setTargetModel( AbstractModel* model )
+void InfoTool::setTargetModel(AbstractModel* model)
 {
-    if( mByteArrayView )
-    {
-        mByteArrayView->disconnect( mStatisticTableModel );
-        mByteArrayView->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(mStatisticTableModel);
+        mByteArrayView->disconnect(this);
     }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
-    if( mByteArrayView && mByteArrayModel )
-    {
-        mStatisticTableModel->setCharCodec( mByteArrayView->charCodingName() );
-        mStatisticTableModel->setValueCoding( mByteArrayView->valueCoding() );
-        mStatisticTableModel->setUndefinedChar( mByteArrayView->undefinedChar() );
-        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
-                 mStatisticTableModel, &StatisticTableModel::setCharCodec );
-        connect( mByteArrayView,  &ByteArrayView::valueCodingChanged,
-                 mStatisticTableModel, &StatisticTableModel::setValueCoding );
-        connect( mByteArrayView,  &ByteArrayView::undefinedCharChanged,
-                 mStatisticTableModel, &StatisticTableModel::setUndefinedChar );
+    if (mByteArrayView && mByteArrayModel) {
+        mStatisticTableModel->setCharCodec(mByteArrayView->charCodingName());
+        mStatisticTableModel->setValueCoding(mByteArrayView->valueCoding());
+        mStatisticTableModel->setUndefinedChar(mByteArrayView->undefinedChar());
+        connect(mByteArrayView,  &ByteArrayView::charCodecChanged,
+                mStatisticTableModel, &StatisticTableModel::setCharCodec);
+        connect(mByteArrayView,  &ByteArrayView::valueCodingChanged,
+                mStatisticTableModel, &StatisticTableModel::setValueCoding);
+        connect(mByteArrayView,  &ByteArrayView::undefinedCharChanged,
+                mStatisticTableModel, &StatisticTableModel::setUndefinedChar);
 
-        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
-                 this, &InfoTool::onSelectionChanged );
+        connect(mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                this, &InfoTool::onSelectionChanged);
     }
 
-    emit statisticDirty( !isStatisticUptodate() );
-    emit isApplyableChanged( isApplyable() );
+    emit statisticDirty(!isStatisticUptodate());
+    emit isApplyableChanged(isApplyable());
 }
 
 void InfoTool::onSelectionChanged()
 {
 // TODO: could be quicker using the selection data
-    emit statisticDirty( !isStatisticUptodate() );
-    emit isApplyableChanged( isApplyable() );
+    emit statisticDirty(!isStatisticUptodate());
+    emit isApplyableChanged(isApplyable());
 }
 
 void InfoTool::onSourceChanged()
 {
     mSourceByteArrayModelUptodate = false;
-    emit statisticDirty( true );
-    emit isApplyableChanged( isApplyable() );
+    emit statisticDirty(true);
+    emit isApplyableChanged(isApplyable());
 }
 
 void InfoTool::onSourceDestroyed()
@@ -120,36 +118,38 @@ void InfoTool::onSourceDestroyed()
 void InfoTool::updateStatistic()
 {
     // forget old string source
-    if( mSourceByteArrayModel ) mSourceByteArrayModel->disconnect( this );
+    if (mSourceByteArrayModel) {
+        mSourceByteArrayModel->disconnect(this);
+    }
 
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    const Okteta::AddressRange selection = ( mByteArrayView ? mByteArrayView->selection() : Okteta::AddressRange() );
-    CreateStatisticJob *createStatisticJob =
-        new CreateStatisticJob( mByteArrayModel, selection, mByteCount );
+    const Okteta::AddressRange selection = (mByteArrayView ? mByteArrayView->selection() : Okteta::AddressRange());
+    CreateStatisticJob* createStatisticJob =
+        new CreateStatisticJob(mByteArrayModel, selection, mByteCount);
     const int selectionSize = createStatisticJob->exec();
 
     QApplication::restoreOverrideCursor();
 
-    mStatisticTableModel->update( selectionSize );
+    mStatisticTableModel->update(selectionSize);
 
     // remember new string source
     mSourceByteArrayModel = mByteArrayModel;
     mSourceSelection = selection;
-    if( mSourceByteArrayModel )
-    {
-        connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
-                 this, &InfoTool::onSourceChanged );
-        connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
-                 this, &InfoTool::onSourceDestroyed );
+    if (mSourceByteArrayModel) {
+        connect(mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
+                this, &InfoTool::onSourceChanged);
+        connect(mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
+                this, &InfoTool::onSourceDestroyed);
     }
 
     mSourceByteArrayModelUptodate = true;
-    emit statisticDirty( false );
-    emit isApplyableChanged( false );
+    emit statisticDirty(false);
+    emit isApplyableChanged(false);
 
-    if( mByteArrayView )
+    if (mByteArrayView) {
         mByteArrayView->setFocus();
+    }
 }
 
 InfoTool::~InfoTool() {}

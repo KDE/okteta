@@ -33,13 +33,14 @@
 
 DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
 {
-    if (idx >= (unsigned) mChildren.size())
+    if (idx >= (unsigned) mChildren.size()) {
         return nullptr;
+    }
     return mChildren[idx];
 }
 
 bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, BitCount64, quint8)
+                                          Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT_X(false, "DataInformationWithChildren::setData()", "this should never be called");
     return false;
@@ -51,23 +52,26 @@ DataInformationWithChildren::~DataInformationWithChildren()
 }
 
 DataInformationWithChildren::DataInformationWithChildren(const QString& name,
-        const QVector<DataInformation*>& children, DataInformation* parent)
-        : DataInformation(name, parent), mChildren(children)
+                                                         const QVector<DataInformation*>& children, DataInformation* parent)
+    : DataInformation(name, parent)
+    , mChildren(children)
 {
-    for (int i = 0; i < mChildren.size(); ++i)
+    for (int i = 0; i < mChildren.size(); ++i) {
         mChildren.at(i)->setParent(this);
+    }
 }
 
 DataInformationWithChildren::DataInformationWithChildren(const DataInformationWithChildren& d)
-        : DataInformation(d), mChildren(cloneList(d.mChildren, this))
+    : DataInformation(d)
+    , mChildren(cloneList(d.mChildren, this))
 {
 }
 
 QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const
 {
     Q_ASSERT(false);
-    auto * editWidget = new QLineEdit(parent);
-    editWidget->setClearButtonEnabled( true );
+    auto* editWidget = new QLineEdit(parent);
+    editWidget->setClearButtonEnabled(true);
     return editWidget;
 }
 
@@ -87,47 +91,43 @@ void DataInformationWithChildren::setWidgetData(QWidget* w) const
 BitCount32 DataInformationWithChildren::size() const
 {
     BitCount32 size = 0;
-    for (unsigned int i = 0; i < childCount(); ++i)
-    {
+    for (unsigned int i = 0; i < childCount(); ++i) {
         size += childAt(i)->size();
     }
+
     return size;
 }
 
 void DataInformationWithChildren::resetValidationState()
 {
     DataInformation::resetValidationState();
-    for (int i = 0; i < mChildren.size(); ++i)
-    {
+    for (int i = 0; i < mChildren.size(); ++i) {
         mChildren.at(i)->resetValidationState();
     }
 }
 
 void DataInformationWithChildren::calculateValidationState()
 {
-    if (childCount() > 0)
-    {
+    if (childCount() > 0) {
         bool hasValidatedChildren = false;
         bool allChildrenValid = true;
-        for (uint i = 0; i < childCount(); ++i)
-        {
+        for (uint i = 0; i < childCount(); ++i) {
             DataInformation* child = childAt(i);
             DataInformationWithChildren* childWithChildren = child->asDataInformationWithChildren();
-            if (childWithChildren)
+            if (childWithChildren) {
                 childWithChildren->calculateValidationState();
-            //first make sure the child item validation state has been set
-            if (child->hasBeenValidated())
-            {
+            }
+            // first make sure the child item validation state has been set
+            if (child->hasBeenValidated()) {
                 hasValidatedChildren = true;
-                if (!child->validationSuccessful())
-                {
+                if (!child->validationSuccessful()) {
                     allChildrenValid = false;
-                    break; //one is invalid -> whole structure is invalid
+                    break; // one is invalid -> whole structure is invalid
                 }
             }
         }
-        if (hasValidatedChildren)
-        {
+
+        if (hasValidatedChildren) {
             mValidationSuccessful = allChildrenValid;
         }
     }
@@ -135,8 +135,8 @@ void DataInformationWithChildren::calculateValidationState()
 
 void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& newChildren)
 {
-    //since we are replacing the children and the first few may be different emit
-    //change to length zero and then to new length so that model gets updated correctly
+    // since we are replacing the children and the first few may be different emit
+    // change to length zero and then to new length so that model gets updated correctly
     uint numChildren = childCount();
     topLevelDataInformation()->_childCountAboutToChange(this, numChildren, 0);
     qDeleteAll(mChildren);
@@ -146,74 +146,82 @@ void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& n
     const uint count = newChildren.size();
     topLevelDataInformation()->_childCountAboutToChange(this, 0, count);
     mChildren = newChildren;
-    for (int i = 0; i < mChildren.size(); ++i)
+    for (int i = 0; i < mChildren.size(); ++i) {
         mChildren.at(i)->setParent(this);
+    }
+
     topLevelDataInformation()->_childCountChanged(this, 0, count);
 }
 
 void DataInformationWithChildren::setChildren(const QScriptValue& children)
 {
-    if (children.isNull() || children.isUndefined())
-    {
+    if (children.isNull() || children.isUndefined()) {
         logError() << "attempting to set children to null/undefined.";
         return;
     }
     QVector<DataInformation*> convertedVals =
-            ScriptValueConverter::convertValues(children, topLevelDataInformation()->logger());
+        ScriptValueConverter::convertValues(children, topLevelDataInformation()->logger());
     setChildren(convertedVals);
 }
 
 int DataInformationWithChildren::indexOf(const DataInformation* const data) const
 {
     const int size = mChildren.size();
-    for (int i = 0; i < size; ++i)
-    {
-        if (mChildren.at(i) == data)
-        {
+    for (int i = 0; i < size; ++i) {
+        if (mChildren.at(i) == data) {
             return i;
         }
     }
-    Q_ASSERT(false); //should never reach this
+
+    Q_ASSERT(false); // should never reach this
     return -1;
 }
 
 QVariant DataInformationWithChildren::childData(int row, int column, int role) const
 {
     Q_ASSERT(row >= 0 && row < mChildren.size());
-    //just delegate to child
+    // just delegate to child
     return mChildren.at(row)->data(column, role);
 }
 
 void DataInformationWithChildren::appendChild(DataInformation* newChild, bool emitSignal)
 {
-    if (emitSignal)
+    if (emitSignal) {
         topLevelDataInformation()->_childCountAboutToChange(this, mChildren.size(), mChildren.size() + 1);
+    }
     newChild->setParent(this);
     mChildren.append(newChild);
-    if (emitSignal)
+    if (emitSignal) {
         topLevelDataInformation()->_childCountChanged(this, mChildren.size(), mChildren.size() + 1);
+    }
 }
 
 void DataInformationWithChildren::appendChildren(const QVector<DataInformation*>& newChildren, bool emitSignal)
 {
-    if (newChildren.isEmpty())
+    if (newChildren.isEmpty()) {
         return;
+    }
     const int added = newChildren.size();
-    if (emitSignal)
+    if (emitSignal) {
         topLevelDataInformation()->_childCountAboutToChange(this, mChildren.size(), mChildren.size() + added);
-    for (int i = 0; i < newChildren.size(); ++i)
+    }
+    for (int i = 0; i < newChildren.size(); ++i) {
         newChildren.at(i)->setParent(this);
+    }
+
     mChildren << newChildren;
-    if (emitSignal)
+    if (emitSignal) {
         topLevelDataInformation()->_childCountChanged(this, mChildren.size(), mChildren.size() + added);
+    }
 }
 
 bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInformation* newChild)
 {
     Q_ASSERT(index < uint(mChildren.size()));
     Q_CHECK_PTR(newChild);
-    if (index >= uint(mChildren.size()))
+    if (index >= uint(mChildren.size())) {
         return false;
+    }
 
     delete mChildren.at(index);
     mChildren[index] = newChild;
@@ -228,44 +236,38 @@ QScriptClass* DataInformationWithChildren::scriptClass(ScriptHandlerInfo* handle
 QString DataInformationWithChildren::tooltipString() const
 {
     QString valueStr = mWasAbleToRead ? valueString() : eofReachedData(Qt::DisplayRole).toString();
-    if (mHasBeenValidated && !mValidationSuccessful)
-    {
+    if (mHasBeenValidated && !mValidationSuccessful) {
         QString validationMsg = validationError();
-        if (validationMsg.isEmpty())
-        {
+        if (validationMsg.isEmpty()) {
             validationMsg = i18nc("not all values in this structure"
-                    " are as they should be", "Validation failed.");
-        }
-        else
-        {
+                                  " are as they should be", "Validation failed.");
+        } else {
             validationMsg = i18nc("not all values in this structure"
-                    " are as they should be", "Validation failed: \"%1\"", validationMsg);
+                                  " are as they should be", "Validation failed: \"%1\"", validationMsg);
         }
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)\n\n %6",
-                "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
-                childCount(), name(), valueStr, typeName(), sizeString(), validationMsg);
-    }
-    else
-    {
+                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)\n\n %6",
+                     childCount(), name(), valueStr, typeName(), sizeString(), validationMsg);
+    } else {
         return i18np("Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 child)",
-                "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
-                childCount(), name(), valueStr, typeName(), sizeString());
+                     "Name: %2\nValue: %3\n\nType: %4\nSize: %5 (%1 children)",
+                     childCount(), name(), valueStr, typeName(), sizeString());
     }
 }
 
 QVector<DataInformation*> DataInformationWithChildren::cloneList(const QVector<DataInformation*>& other,
-        DataInformation* parent)
+                                                                 DataInformation* parent)
 {
     int count = other.count();
     QVector<DataInformation*> ret;
     ret.reserve(count);
-    for (int i = 0; i < count; ++i)
-    {
+    for (int i = 0; i < count; ++i) {
         DataInformation* dat = other.at(i);
         DataInformation* newChild = dat->clone();
         newChild->setParent(parent);
         ret.append(newChild);
     }
+
     return ret;
 }
 

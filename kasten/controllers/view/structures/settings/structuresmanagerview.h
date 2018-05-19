@@ -33,19 +33,17 @@ class StructureAddRemoveWidget;
 class QPushButton;
 class KPluginSelector;
 
-namespace KNS3
-{
+namespace KNS3 {
 class Button;
 }
-namespace Kasten
-{
+namespace Kasten {
 class StructuresManager;
 class StructuresTool;
 }
 
-class StructuresManagerView: public QWidget
+class StructuresManagerView : public QWidget
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     Q_PROPERTY(QStringList values READ values NOTIFY changed USER true)
@@ -63,16 +61,18 @@ protected Q_SLOTS:
 Q_SIGNALS:
     void selectedPluginsChanged();
     void changed(const QStringList& newValues);
+
 private:
     void rebuildPluginSelectorEntries();
     void reloadSelectedItems();
+
 private:
     Kasten::StructuresTool* mTool;
     QStringList mSelectedStructures;
     KNS3::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;
     KPluginSelector* mStructuresSelector;
-    bool mRebuildingPluginsList :1;
+    bool mRebuildingPluginsList : 1;
 
 };
 

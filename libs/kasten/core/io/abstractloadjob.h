@@ -28,41 +28,39 @@
 // KF5
 #include <KJob>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocument;
 
 class AbstractLoadJobPrivate;
 
-
 class KASTENCORE_EXPORT AbstractLoadJob : public KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    explicit AbstractLoadJob( AbstractLoadJobPrivate* d );
+protected:
+    explicit AbstractLoadJob(AbstractLoadJobPrivate* d);
 
-  public:
+public:
     AbstractLoadJob();
 
     ~AbstractLoadJob() override;
 
-  public:
+public:
     AbstractDocument* document() const;
 
-  Q_SIGNALS:
-    void documentLoaded( Kasten::AbstractDocument* document );
+Q_SIGNALS:
+    void documentLoaded(Kasten::AbstractDocument* document);
 
-  protected:
+protected:
     // emits documentLoaded()
     // TODO: or better name property LoadedDocument?
-    virtual void setDocument( AbstractDocument* document );
+    virtual void setDocument(AbstractDocument* document);
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractLoadJob )
-  protected:
+protected:
+    Q_DECLARE_PRIVATE(AbstractLoadJob)
+
+protected:
     AbstractLoadJobPrivate* const d_ptr;
 };
 

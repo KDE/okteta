@@ -28,32 +28,29 @@
 // Qt
 #include <QWidget>
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelDataGeneratorConfigEditorPrivate;
-
 
 class KASTENGUI_EXPORT AbstractModelDataGeneratorConfigEditor : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    explicit AbstractModelDataGeneratorConfigEditor( QWidget* parent = nullptr );
+protected:
+    explicit AbstractModelDataGeneratorConfigEditor(QWidget* parent = nullptr);
 
-  public:
+public:
     ~AbstractModelDataGeneratorConfigEditor() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     /// default returns true
     virtual bool isValid() const;
 
     virtual QString name() const = 0;
 
-  Q_SIGNALS:
-    void validityChanged( bool isValid );
+Q_SIGNALS:
+    void validityChanged(bool isValid);
 
-  protected:
+protected:
     AbstractModelDataGeneratorConfigEditorPrivate* const d;
 };
 

@@ -46,9 +46,10 @@ inline float FloatDataInformationMethods::fromVariant(const QVariant& value, boo
 {
     Q_CHECK_PTR(ok);
     float result = value.toFloat(ok);
-    //result != result if value is NaN so check for that case too
-    if (double(result) != value.toDouble() && result == result)
+    // result != result if value is NaN so check for that case too
+    if (double(result) != value.toDouble() && result == result) {
         *ok = false;
+    }
     return result;
 }
 

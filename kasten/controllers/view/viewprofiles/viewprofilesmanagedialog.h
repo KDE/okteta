@@ -28,29 +28,26 @@
 // Qt
 #include <QDialog>
 
-template< class C > class QList;
+template <class C> class QList;
 class QTreeView;
 class QPushButton;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayViewProfileManager;
 class ViewProfileTableModel;
 
-
 class ViewProfilesManageDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ViewProfilesManageDialog( ByteArrayViewProfileManager* viewProfileManager,
-                                       QWidget* parent = nullptr );
+public:
+    explicit ViewProfilesManageDialog(ByteArrayViewProfileManager* viewProfileManager,
+                                      QWidget* parent = nullptr);
 
     ~ViewProfilesManageDialog() override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onViewProfileSelectionChanged();
 
     void onCreateNewButtonClicked();
@@ -59,11 +56,11 @@ class ViewProfilesManageDialog : public QDialog
     void onDeleteButtonClicked();
 
     void onModelReset();
-    void onViewProfilesLocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
-    void onViewProfilesUnlocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
-    void onDefaultViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
+    void onViewProfilesLocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void onViewProfilesUnlocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void onDefaultViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
 
-  private:
+private:
     ByteArrayViewProfileManager* mViewProfileManager;
     ViewProfileTableModel* mViewProfileTableModel;
     ByteArrayViewProfile::Id mCurrentViewProfileId;

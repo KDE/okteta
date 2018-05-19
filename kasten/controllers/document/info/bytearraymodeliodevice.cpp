@@ -25,16 +25,14 @@
 // Okteta core
 #include <okteta/abstractbytearraymodel.h>
 
+namespace Okteta {
 
-namespace Okteta
+ByteArrayModelIoDevice::ByteArrayModelIoDevice(AbstractByteArrayModel* byteArrayModel, QObject* parent)
+    : QIODevice(parent)
+    , mByteArrayModel(byteArrayModel)
+    , mReadOffset(0)
 {
-
-ByteArrayModelIoDevice::ByteArrayModelIoDevice( AbstractByteArrayModel* byteArrayModel, QObject* parent )
-  : QIODevice( parent ),
-    mByteArrayModel( byteArrayModel ),
-    mReadOffset( 0 )
-{
-    open( ReadOnly ); // krazy:exclude=syscalls
+    open(ReadOnly);   // krazy:exclude=syscalls
 }
 
 qint64 ByteArrayModelIoDevice::size() const
@@ -46,49 +44,51 @@ bool ByteArrayModelIoDevice::canReadLine() const
 {
     return
         isOpen()
-        && ( mByteArrayModel->indexOf("\n", 1, pos() ) != -1
-             || QIODevice::canReadLine() );
+        && (mByteArrayModel->indexOf("\n", 1, pos()) != -1
+            || QIODevice::canReadLine());
 }
 
-bool ByteArrayModelIoDevice::open( OpenMode openMode )
+bool ByteArrayModelIoDevice::open(OpenMode openMode)
 {
-    QIODevice::open( openMode );
+    QIODevice::open(openMode);
 
     openMode ^= WriteOnly | Append;
-    setOpenMode( openMode );
+    setOpenMode(openMode);
 
-    if( ! isReadable() )
+    if (!isReadable()) {
         return false;
+    }
 
-    seek( 0 );
+    seek(0);
 
     return true;
 }
 
-bool ByteArrayModelIoDevice::seek( qint64 pos )
+bool ByteArrayModelIoDevice::seek(qint64 pos)
 {
-    if( pos > mByteArrayModel->size() || pos < 0 )
+    if (pos > mByteArrayModel->size() || pos < 0) {
         return false;
+    }
 
     mReadOffset = pos;
 
-    return QIODevice::seek( pos );
+    return QIODevice::seek(pos);
 }
 
-qint64 ByteArrayModelIoDevice::readData( char* data, qint64 maxlength )
+qint64 ByteArrayModelIoDevice::readData(char* data, qint64 maxlength)
 {
     const Size copiedLength =
-        mByteArrayModel->copyTo( reinterpret_cast<Byte*>(data), mReadOffset, maxlength );
+        mByteArrayModel->copyTo(reinterpret_cast<Byte*>(data), mReadOffset, maxlength);
 
     mReadOffset += copiedLength;
 
     return copiedLength;
 }
 
-qint64 ByteArrayModelIoDevice::writeData( const char* data, qint64 length )
+qint64 ByteArrayModelIoDevice::writeData(const char* data, qint64 length)
 {
-    Q_UNUSED( data );
-    Q_UNUSED( length );
+    Q_UNUSED(data);
+    Q_UNUSED(length);
     return -1;
 }
 

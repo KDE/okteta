@@ -27,20 +27,19 @@
 #include <QDesignerCustomWidgetInterface>
 #include <QObject>
 
-
-class ByteArrayColumnViewDesignerFactory : public QObject,
-                                           public QDesignerCustomWidgetInterface
+class ByteArrayColumnViewDesignerFactory : public QObject
+                                         , public QDesignerCustomWidgetInterface
 {
-  Q_OBJECT
-  Q_INTERFACES(
-    QDesignerCustomWidgetInterface
-  )
+    Q_OBJECT
+    Q_INTERFACES(
+        QDesignerCustomWidgetInterface
+    )
 
-  public:
-    explicit ByteArrayColumnViewDesignerFactory( QObject* parent = nullptr );
+public:
+    explicit ByteArrayColumnViewDesignerFactory(QObject* parent = nullptr);
 
-  public: // QDesignerCustomWidgetInterface API
-    QWidget* createWidget( QWidget* parent ) override;
+public: // QDesignerCustomWidgetInterface API
+    QWidget* createWidget(QWidget* parent) override;
     QString group() const override;
     QIcon icon() const override;
     QString includeFile() const override;
@@ -49,6 +48,5 @@ class ByteArrayColumnViewDesignerFactory : public QObject,
     QString toolTip() const override;
     QString whatsThis() const override;
 };
-
 
 #endif

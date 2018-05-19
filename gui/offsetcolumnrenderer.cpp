@@ -31,106 +31,103 @@
 #include <QPalette>
 #include <QFontMetrics>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 static const PixelX leftOffsetMargin = 2;
 static const PixelX rightOffsetMargin = 2;
 
-
-OffsetColumnRenderer::OffsetColumnRenderer( AbstractColumnStylist* stylist,
-    ByteArrayTableLayout* layout, OffsetFormat::Format format )
- : AbstractColumnRenderer( stylist ),
-   mLayout( layout ),
-   mOffsetTextWidth( 0 ),
-   mDigitBaseLine( 0 ),
-   mFormat( format ),
-   PrintFunction( OffsetFormat::printFunction(format) )
+OffsetColumnRenderer::OffsetColumnRenderer(AbstractColumnStylist* stylist,
+                                           ByteArrayTableLayout* layout, OffsetFormat::Format format)
+    : AbstractColumnRenderer(stylist)
+    , mLayout(layout)
+    , mOffsetTextWidth(0)
+    , mDigitBaseLine(0)
+    , mFormat(format)
+    , PrintFunction(OffsetFormat::printFunction(format))
 {
     recalcX();
 }
 
-void OffsetColumnRenderer::renderLine( QPainter* painter, Line lineIndex )
+void OffsetColumnRenderer::renderLine(QPainter* painter, Line lineIndex)
 {
     const PixelX offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * lineIndex;
-    printFunction()( mCodedOffset, offset );
+    printFunction()(mCodedOffset, offset);
 
     const QColor& buttonColor = stylist()->palette().buttonText().color();
-    painter->setPen( buttonColor );
-    painter->drawText( leftOffsetMargin, mDigitBaseLine, QLatin1String(mCodedOffset) );
+    painter->setPen(buttonColor);
+    painter->drawText(leftOffsetMargin, mDigitBaseLine, QLatin1String(mCodedOffset));
 }
 
-void OffsetColumnRenderer::renderColumnBackground( QPainter* painter, const PixelXRange& _Xs, const PixelYRange& Ys )
+void OffsetColumnRenderer::renderColumnBackground(QPainter* painter, const PixelXRange& _Xs, const PixelYRange& Ys)
 {
-    PixelXRange Xs( _Xs );
-    restrictToXSpan( &Xs );
+    PixelXRange Xs(_Xs);
+    restrictToXSpan(&Xs);
 
     const QBrush& buttonBrush = stylist()->palette().button();
-    painter->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush );
+    painter->fillRect(Xs.start(), Ys.start(), Xs.width(), Ys.width(), buttonBrush);
 }
 
-void OffsetColumnRenderer::renderFirstLine( QPainter *painter, const PixelXRange &, Line firstLineIndex )
+void OffsetColumnRenderer::renderFirstLine(QPainter* painter, const PixelXRange&, Line firstLineIndex)
 {
     mRenderLineIndex = firstLineIndex;
-    renderLine( painter, mRenderLineIndex++ );
+    renderLine(painter, mRenderLineIndex++);
 }
 
-
-void OffsetColumnRenderer::renderNextLine( QPainter *painter )
+void OffsetColumnRenderer::renderNextLine(QPainter* painter)
 {
-    renderLine( painter, mRenderLineIndex++ );
+    renderLine(painter, mRenderLineIndex++);
 }
 
-
-void OffsetColumnRenderer::renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys )
+void OffsetColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
 {
-    renderColumnBackground( painter, Xs, Ys );
+    renderColumnBackground(painter, Xs, Ys);
 }
 
-
-void OffsetColumnRenderer::renderEmptyColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys )
+void OffsetColumnRenderer::renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
 {
-    renderColumnBackground( painter, Xs, Ys );
+    renderColumnBackground(painter, Xs, Ys);
 }
 
-void OffsetColumnRenderer::setFormat( OffsetFormat::Format format, const QFontMetrics& fontMetrics )
+void OffsetColumnRenderer::setFormat(OffsetFormat::Format format, const QFontMetrics& fontMetrics)
 {
     // no changes?
-    if( mFormat == format )
+    if (mFormat == format) {
         return;
+    }
 
     mFormat = format;
 
-    PrintFunction = OffsetFormat::printFunction( mFormat );
+    PrintFunction = OffsetFormat::printFunction(mFormat);
 
-    setFontMetrics( fontMetrics );
+    setFontMetrics(fontMetrics);
 }
 
-void OffsetColumnRenderer::setFormat( OffsetFormat::Format format )
+void OffsetColumnRenderer::setFormat(OffsetFormat::Format format)
 {
     // no changes?
-    if( mFormat == format )
+    if (mFormat == format) {
         return;
+    }
 
     mFormat = format;
 
-    PrintFunction = OffsetFormat::printFunction( mFormat );
+    PrintFunction = OffsetFormat::printFunction(mFormat);
 
     // TODO: without QFontMetrics this will fail. do we need to keep one around?
     recalcX();
 }
 
-void OffsetColumnRenderer::setFontMetrics( const QFontMetrics& fontMetrics )
+void OffsetColumnRenderer::setFontMetrics(const QFontMetrics& fontMetrics)
 {
     mDigitBaseLine = fontMetrics.ascent();
 
     // use 0 as reference, using a fixed font should always yield same width
-    printFunction()( mCodedOffset, 0 );
-    const int newOffsetTextWidth = fontMetrics.width( QLatin1String(mCodedOffset) );
+    printFunction()(mCodedOffset, 0);
+    const int newOffsetTextWidth = fontMetrics.width(QLatin1String(mCodedOffset));
 
-    if( newOffsetTextWidth == mOffsetTextWidth )
+    if (newOffsetTextWidth == mOffsetTextWidth) {
         return;
+    }
 
     mOffsetTextWidth = newOffsetTextWidth;
 
@@ -140,9 +137,8 @@ void OffsetColumnRenderer::setFontMetrics( const QFontMetrics& fontMetrics )
 void OffsetColumnRenderer::recalcX()
 {
     // recalculate depend sizes
-    setWidth( mOffsetTextWidth + leftOffsetMargin + rightOffsetMargin );
+    setWidth(mOffsetTextWidth + leftOffsetMargin + rightOffsetMargin);
 }
-
 
 OffsetColumnRenderer::~OffsetColumnRenderer() {}
 

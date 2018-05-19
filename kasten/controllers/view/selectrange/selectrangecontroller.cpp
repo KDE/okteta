@@ -34,43 +34,39 @@
 // Qt
 #include <QAction>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 // TODO: a tool(view) might perhaps be invoked indirectly by asking for a tool for the object, here select
 // so the status bar selection indicator can invoke the same tool, without knowing about it
-SelectRangeController::SelectRangeController( If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient )
-  : mToolInlineViewable( toolInlineViewable )
+SelectRangeController::SelectRangeController(If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient)
+    : mToolInlineViewable(toolInlineViewable)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSelectAction = actionCollection->addAction( QStringLiteral("edit_select"),
-                                                 this, SLOT(select()) );
-    mSelectAction->setText( i18nc("@action:inmenu","&Select range...") );
-    mSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("select-rectangular") ) );
-    actionCollection->setDefaultShortcut( mSelectAction, Qt::CTRL + Qt::Key_E );
+    mSelectAction = actionCollection->addAction(QStringLiteral("edit_select"),
+                                                this, SLOT(select()));
+    mSelectAction->setText(i18nc("@action:inmenu", "&Select range..."));
+    mSelectAction->setIcon(QIcon::fromTheme(QStringLiteral("select-rectangular")));
+    actionCollection->setDefaultShortcut(mSelectAction, Qt::CTRL + Qt::Key_E);
 
     mTool = new SelectRangeTool();
-    connect( mTool, &SelectRangeTool::isUsableChanged,
-             mSelectAction, &QAction::setEnabled );
-    mSelectAction->setEnabled( mTool->isUsable() );
+    connect(mTool, &SelectRangeTool::isUsableChanged,
+            mSelectAction, &QAction::setEnabled);
+    mSelectAction->setEnabled(mTool->isUsable());
 
-    mView = new SelectRangeToolView( mTool );
+    mView = new SelectRangeToolView(mTool);
 }
 
-void SelectRangeController::setTargetModel( AbstractModel* model )
+void SelectRangeController::setTargetModel(AbstractModel* model)
 {
-    mTool->setTargetModel( model );
+    mTool->setTargetModel(model);
 }
-
 
 void SelectRangeController::select()
 {
 //     mView->activate(); // TODO: show would be better here, or should instead toolInlineViewable be asked?
-    mToolInlineViewable->setCurrentToolInlineView( mView );
+    mToolInlineViewable->setCurrentToolInlineView(mView);
 }
-
 
 SelectRangeController::~SelectRangeController()
 {

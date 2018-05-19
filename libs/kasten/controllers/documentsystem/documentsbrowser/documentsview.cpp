@@ -29,41 +29,42 @@
 #include <QTreeView>
 #include <QLayout>
 
+namespace Kasten {
 
-namespace Kasten
+DocumentsView::DocumentsView(DocumentsTool* tool, QWidget* parent)
+    : QWidget(parent)
+    , mTool(tool)
 {
+    mDocumentListModel = new DocumentListModel(mTool, this);
 
-DocumentsView::DocumentsView( DocumentsTool* tool, QWidget* parent )
- : QWidget( parent ), mTool( tool )
-{
-    mDocumentListModel = new DocumentListModel( mTool, this );
+    QVBoxLayout* baseLayout = new QVBoxLayout(this);
+    baseLayout->setMargin(0);
+    baseLayout->setSpacing(0);
 
-    QVBoxLayout* baseLayout = new QVBoxLayout( this );
-    baseLayout->setMargin( 0 );
-    baseLayout->setSpacing( 0 );
+    mDocumentListView = new QTreeView(this);
+    mDocumentListView->setObjectName(QStringLiteral("DocumentListView"));
+    mDocumentListView->setRootIsDecorated(false);
+    mDocumentListView->setItemsExpandable(false);
+    mDocumentListView->setUniformRowHeights(true);
+    mDocumentListView->setAllColumnsShowFocus(true);
+    mDocumentListView->setModel(mDocumentListModel);
+    connect(mDocumentListView, &QAbstractItemView::activated,
+            this, &DocumentsView::onDocumentActivated);
+    for (int c = 0; c < DocumentListModel::NoOfColumnIds; ++c) {
+        mDocumentListView->resizeColumnToContents(c);
+    }
 
-    mDocumentListView = new QTreeView( this );
-    mDocumentListView->setObjectName( QStringLiteral( "DocumentListView" ) );
-    mDocumentListView->setRootIsDecorated( false );
-    mDocumentListView->setItemsExpandable( false );
-    mDocumentListView->setUniformRowHeights( true );
-    mDocumentListView->setAllColumnsShowFocus( true );
-    mDocumentListView->setModel( mDocumentListModel );
-    connect( mDocumentListView, &QAbstractItemView::activated,
-             this, &DocumentsView::onDocumentActivated );
-    for( int c = 0; c<DocumentListModel::NoOfColumnIds; ++c )
-        mDocumentListView->resizeColumnToContents( c );
-
-    baseLayout->addWidget( mDocumentListView, 10 );
+    baseLayout->addWidget(mDocumentListView, 10);
 }
 
-void DocumentsView::onDocumentActivated( const QModelIndex& index )
+void DocumentsView::onDocumentActivated(const QModelIndex& index)
 {
     const int documentIndex = index.row();
-    AbstractDocument* document = mTool->documents().at( documentIndex );
+    AbstractDocument* document = mTool->documents().at(documentIndex);
 
-    if( document )
-        mTool->setFocussedDocument( document );
+    if (document) {
+        mTool->setFocussedDocument(document);
+    }
 }
 
 DocumentsView::~DocumentsView() {}

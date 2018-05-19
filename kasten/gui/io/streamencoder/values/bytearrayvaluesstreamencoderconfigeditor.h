@@ -31,25 +31,23 @@
 class KComboBox;
 class QLineEdit;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayValuesStreamEncoderConfigEditor : public AbstractModelStreamEncoderConfigEditor
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteArrayValuesStreamEncoderConfigEditor( ByteArrayValuesStreamEncoder* encoder, QWidget* parent = nullptr );
+public:
+    explicit ByteArrayValuesStreamEncoderConfigEditor(ByteArrayValuesStreamEncoder* encoder, QWidget* parent = nullptr);
     ~ByteArrayValuesStreamEncoderConfigEditor() override;
 
-  public: // AbstractModelStreamEncoderConfigEditor API
+public: // AbstractModelStreamEncoderConfigEditor API
     AbstractSelectionView* createPreviewView() const override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onSettingsChanged();
 
-  protected:
+protected:
     ByteArrayValuesStreamEncoder* mEncoder;
     ValuesStreamEncoderSettings mSettings;
 

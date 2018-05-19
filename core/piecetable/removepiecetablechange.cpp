@@ -29,38 +29,33 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 int RemovePieceTableChange::type() const { return RemoveId; }
 
 QString RemovePieceTableChange::description() const
 {
-    return i18nc( "name of the change", "Remove" );
+    return i18nc("name of the change", "Remove");
 }
 
-bool RemovePieceTableChange::merge( const AbstractPieceTableChange* other )
+bool RemovePieceTableChange::merge(const AbstractPieceTableChange* other)
 {
 // TODO: remove me again after synching solved
 // return false;
     bool result = false;
 
-    if( other->type() == RemoveId )
-    {
-        const RemovePieceTableChange* otherRemoveChange = static_cast<const RemovePieceTableChange*>( other );
+    if (other->type() == RemoveId) {
+        const RemovePieceTableChange* otherRemoveChange = static_cast<const RemovePieceTableChange*>(other);
         // other removed at the same start?
-        if( mRemoveRange.start() == otherRemoveChange->mRemoveRange.start() )
-        {
-            mRemoveRange.moveEndBy( otherRemoveChange->mRemoveRange.width() );
-            mRemovedPieces.append( otherRemoveChange->mRemovedPieces );
+        if (mRemoveRange.start() == otherRemoveChange->mRemoveRange.start()) {
+            mRemoveRange.moveEndBy(otherRemoveChange->mRemoveRange.width());
+            mRemovedPieces.append(otherRemoveChange->mRemovedPieces);
             result = true;
         }
         // other removed before?
-        else if( otherRemoveChange->mRemoveRange.nextBehindEnd() == mRemoveRange.start() )
-        {
-            mRemoveRange.setStart( otherRemoveChange->mRemoveRange.start() );
-            mRemovedPieces.prepend( otherRemoveChange->mRemovedPieces );
+        else if (otherRemoveChange->mRemoveRange.nextBehindEnd() == mRemoveRange.start()) {
+            mRemoveRange.setStart(otherRemoveChange->mRemoveRange.start());
+            mRemovedPieces.prepend(otherRemoveChange->mRemovedPieces);
             result = true;
         }
     }
@@ -68,25 +63,25 @@ bool RemovePieceTableChange::merge( const AbstractPieceTableChange* other )
     return result;
 }
 
-AddressRange RemovePieceTableChange::apply( PieceTable* pieceTable ) const
+AddressRange RemovePieceTableChange::apply(PieceTable* pieceTable) const
 {
     const Address oldLast = pieceTable->size() - 1;
 
-    pieceTable->remove( mRemoveRange );
+    pieceTable->remove(mRemoveRange);
 
-    return AddressRange( mRemoveRange.start(), oldLast );
+    return AddressRange(mRemoveRange.start(), oldLast);
 }
 
-AddressRange RemovePieceTableChange::revert( PieceTable* pieceTable ) const
+AddressRange RemovePieceTableChange::revert(PieceTable* pieceTable) const
 {
-    pieceTable->insert( mRemoveRange.start(), mRemovedPieces );
+    pieceTable->insert(mRemoveRange.start(), mRemovedPieces);
 
-    return AddressRange( mRemoveRange.start(), pieceTable->size()-1 );
+    return AddressRange(mRemoveRange.start(), pieceTable->size() - 1);
 }
 
 ArrayChangeMetrics RemovePieceTableChange::metrics() const
 {
-    return ArrayChangeMetrics::asReplacement( mRemoveRange.start(), mRemoveRange.width(), 0 );
+    return ArrayChangeMetrics::asReplacement(mRemoveRange.start(), mRemoveRange.width(), 0);
 }
 
 RemovePieceTableChange::~RemovePieceTableChange() {}

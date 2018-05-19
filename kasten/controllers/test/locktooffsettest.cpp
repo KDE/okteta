@@ -30,13 +30,16 @@
 class LockToOffsetTest : public QObject
 {
     Q_OBJECT
+
 private Q_SLOTS:
     void initTestCase();
     void testReadingNecessary_data();
     void testReadingNecessary();
     void cleanupTestCase();
+
 private:
     TopLevelDataInformation* newStructure(Okteta::AbstractByteArrayModel* lastModel, quint64 lastReadOffset);
+
 private:
     Okteta::ByteArrayModel* model;
     Okteta::ByteArrayModel* model2;
@@ -82,9 +85,6 @@ const unsigned char testData2[128] =
     0xbf, 0xe8, 0x74, 0x34, 0xdc, 0x57, 0xbc, 0xf2
 };
 
-
-
-
 void LockToOffsetTest::initTestCase()
 {
     model = new Okteta::ByteArrayModel(testData, sizeof(testData));
@@ -99,7 +99,6 @@ void LockToOffsetTest::cleanupTestCase()
     delete model2;
 }
 
-
 TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArrayModel* lastModel, quint64 lastReadOffset)
 {
     QVector<DataInformation*> children;
@@ -109,8 +108,9 @@ TopLevelDataInformation* LockToOffsetTest::newStructure(Okteta::AbstractByteArra
     data->setByteOrder(DataInformation::DataInformationEndianess::EndianessBig);
     TopLevelDataInformation* top = new TopLevelDataInformation(data);
     top->mLastModel = lastModel;
-    if (lastModel)
+    if (lastModel) {
         top->newModelActivated(lastModel);
+    }
     top->mLastReadOffset = lastReadOffset;
     return top;
 }
@@ -120,7 +120,7 @@ Q_DECLARE_METATYPE(Okteta::AbstractByteArrayModel*)
 Q_DECLARE_METATYPE(TopLevelDataInformation*)
 
 static inline void addRow(const char* tag, TopLevelDataInformation* structure, Okteta::Address addr,
-        Okteta::AbstractByteArrayModel* model, const Okteta::ArrayChangeMetricsList& changes, bool expected)
+                          Okteta::AbstractByteArrayModel* model, const Okteta::ArrayChangeMetricsList& changes, bool expected)
 {
     QTest::newRow(tag) << structure << addr << model << changes << expected;
 }
@@ -131,8 +131,6 @@ static Okteta::ArrayChangeMetricsList oneReplacement(int start, int length, int 
     ret << Okteta::ArrayChangeMetrics::asReplacement(start, length, replacementSize);
     return ret;
 }
-
-
 
 void LockToOffsetTest::testReadingNecessary_data()
 {
@@ -163,13 +161,11 @@ void LockToOffsetTest::testReadingNecessary_data()
     top = newStructure(model, TopLevelDataInformation::INVALID_OFFSET);
     addRow("same model, invalid offset before, no changes", top, 5, model2, noChanges, true);
 
-
     top = newStructure(model, 5);
     addRow("same model, same offset, changes before", top, 5, model, oneReplacement(0, 4, 4), false);
 
     top = newStructure(model, 5);
     addRow("same model, same offset, changes before (right until start)", top, 5, model, oneReplacement(0, 5, 5), false);
-
 
     top = newStructure(model, 5);
     addRow("same model, same offset, changes before (1 byte removed!)", top, 5, model, oneReplacement(0, 5, 4), true);
@@ -196,11 +192,12 @@ void LockToOffsetTest::testReadingNecessary()
     QFETCH(Okteta::ArrayChangeMetricsList, changes);
     QFETCH(Okteta::Address, address);
     QFETCH(bool, expected);
-    if (!structure->mLockedPositions.contains(model))
-        structure->newModelActivated(model); //add the model, otherwise we crash
+    if (!structure->mLockedPositions.contains(model)) {
+        structure->newModelActivated(model); // add the model, otherwise we crash
+    }
     QCOMPARE(structure->isReadingNecessary(model, address, changes), expected);
     structure->read(model, address, changes, false);
-    //no changes after read -> no reading necessary
+    // no changes after read -> no reading necessary
     QVERIFY(!structure->isReadingNecessary(model, address, Okteta::ArrayChangeMetricsList()));
     delete structure;
 }

@@ -41,30 +41,28 @@
 // Qt
 #include <QWidget>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 BookmarksTool::BookmarksTool()
- : mByteArrayView( nullptr ), mByteArray( nullptr ), mBookmarks( nullptr ), mCanCreateBookmark( false )
+    : mByteArrayView(nullptr)
+    , mByteArray(nullptr)
+    , mBookmarks(nullptr)
+    , mCanCreateBookmark(false)
 {
-    setObjectName( QStringLiteral( "Bookmarks" ) );
+    setObjectName(QStringLiteral("Bookmarks"));
 }
-
 
 QString BookmarksTool::title() const { return i18nc("@title:window", "Bookmarks"); }
 bool BookmarksTool::canCreateBookmark() const { return mCanCreateBookmark; }
-const Okteta::Bookmark& BookmarksTool::bookmarkAt( unsigned int index ) const { return mBookmarks->bookmarkAt( index ); }
-int BookmarksTool::indexOf( const Okteta::Bookmark& bookmark ) const
+const Okteta::Bookmark& BookmarksTool::bookmarkAt(unsigned int index) const { return mBookmarks->bookmarkAt(index); }
+int BookmarksTool::indexOf(const Okteta::Bookmark& bookmark) const
 {
     int result = -1;
 
     Okteta::BookmarksConstIterator bit = mBookmarks->createBookmarksConstIterator();
     int i = 0;
-    while( bit.hasNext() )
-    {
-        if( bookmark == bit.next() )
-        {
+    while (bit.hasNext()) {
+        if (bookmark == bit.next()) {
             result = i;
             break;
         }
@@ -75,123 +73,122 @@ int BookmarksTool::indexOf( const Okteta::Bookmark& bookmark ) const
 unsigned int BookmarksTool::bookmarksCount() const { return mBookmarks ? mBookmarks->bookmarksCount() : 0; }
 int BookmarksTool::offsetCoding()            const { return mByteArrayView ? mByteArrayView->offsetCoding() : 0; }
 
-
-void BookmarksTool::setTargetModel( AbstractModel* model )
+void BookmarksTool::setTargetModel(AbstractModel* model)
 {
     const int oldOffsetCoding = offsetCoding();
 
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
-    if( mByteArray ) mByteArray->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+    }
+    if (mByteArray) {
+        mByteArray->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArray = document ? document->content() : nullptr;
-    mBookmarks = ( mByteArray && mByteArrayView ) ? qobject_cast<Okteta::Bookmarkable*>( mByteArray ) : nullptr;
+    mBookmarks = (mByteArray && mByteArrayView) ? qobject_cast<Okteta::Bookmarkable*>(mByteArray) : nullptr;
 
-    const bool hasViewWithBookmarks = ( mBookmarks != nullptr );
-    if( hasViewWithBookmarks )
-    {
-        onCursorPositionChanged( mByteArrayView->cursorPosition() );
+    const bool hasViewWithBookmarks = (mBookmarks != nullptr);
+    if (hasViewWithBookmarks) {
+        onCursorPositionChanged(mByteArrayView->cursorPosition());
 
-        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                 SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                 SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)) );
-        connect( mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
-                 SLOT(onBookmarksModified()) );
-        connect( mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
-                 SLOT(onBookmarksModified()) );
-        connect( mByteArray, SIGNAL(bookmarksModified(QList<int>)),
-                 SIGNAL(bookmarksModified(QList<int>)) );
-        connect( mByteArrayView, &ByteArrayView::cursorPositionChanged,
-                 this, &BookmarksTool::onCursorPositionChanged );
-        connect( mByteArrayView, &ByteArrayView::offsetCodingChanged,
-                 this, &BookmarksTool::offsetCodingChanged );
-    }
-    else
-    {
+        connect(mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+                SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)));
+        connect(mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+                SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)));
+        connect(mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+                SLOT(onBookmarksModified()));
+        connect(mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+                SLOT(onBookmarksModified()));
+        connect(mByteArray, SIGNAL(bookmarksModified(QList<int>)),
+                SIGNAL(bookmarksModified(QList<int>)));
+        connect(mByteArrayView, &ByteArrayView::cursorPositionChanged,
+                this, &BookmarksTool::onCursorPositionChanged);
+        connect(mByteArrayView, &ByteArrayView::offsetCodingChanged,
+                this, &BookmarksTool::offsetCodingChanged);
+    } else {
         static const bool cantCreateBookmark = false;
-        if( mCanCreateBookmark != cantCreateBookmark )
-        {
+        if (mCanCreateBookmark != cantCreateBookmark) {
             mCanCreateBookmark = cantCreateBookmark;
-            emit canCreateBookmarkChanged( cantCreateBookmark );
+            emit canCreateBookmarkChanged(cantCreateBookmark);
         }
     }
 
     const int newOffsetCoding = offsetCoding();
-    if( oldOffsetCoding != newOffsetCoding )
-        emit offsetCodingChanged( newOffsetCoding );
-    emit hasBookmarksChanged( hasViewWithBookmarks );
+    if (oldOffsetCoding != newOffsetCoding) {
+        emit offsetCodingChanged(newOffsetCoding);
+    }
+    emit hasBookmarksChanged(hasViewWithBookmarks);
 }
 
 Okteta::Bookmark BookmarksTool::createBookmark()
 {
     Okteta::Bookmark bookmark;
 
-    if( mBookmarks )
-    {
+    if (mBookmarks) {
         const int cursorPosition = mByteArrayView->cursorPosition();
 
         // search for text at cursor
-        const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec( mByteArrayView->charCodingName() );
-        const Okteta::WordByteArrayService textService( mByteArray, charCodec );
-        QString bookmarkName = textService.text( cursorPosition, cursorPosition+MaxBookmarkNameSize-1 );
+        const Okteta::CharCodec* charCodec = Okteta::CharCodec::createCodec(mByteArrayView->charCodingName());
+        const Okteta::WordByteArrayService textService(mByteArray, charCodec);
+        QString bookmarkName = textService.text(cursorPosition, cursorPosition + MaxBookmarkNameSize - 1);
         delete charCodec;
 
-        if( bookmarkName.isEmpty() )
-            bookmarkName = i18nc( "default name of a bookmark", "Bookmark" );
+        if (bookmarkName.isEmpty()) {
+            bookmarkName = i18nc("default name of a bookmark", "Bookmark");
+        }
         // %1").arg( 0 ) ); // TODO: use counter like with new file, globally
 
-        bookmark.setOffset( mByteArrayView->cursorPosition() );
-        bookmark.setName( bookmarkName );
+        bookmark.setOffset(mByteArrayView->cursorPosition());
+        bookmark.setName(bookmarkName);
 
         const QList<Okteta::Bookmark> bookmarksToBeCreated { bookmark };
-        mBookmarks->addBookmarks( bookmarksToBeCreated );
+        mBookmarks->addBookmarks(bookmarksToBeCreated);
     }
 
     return bookmark;
 }
 
-void BookmarksTool::deleteBookmarks( const QList<Okteta::Bookmark>& bookmarks )
+void BookmarksTool::deleteBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
-    if( mBookmarks )
-        mBookmarks->removeBookmarks( bookmarks );
+    if (mBookmarks) {
+        mBookmarks->removeBookmarks(bookmarks);
+    }
     mByteArrayView->widget()->setFocus();
 }
 
-void BookmarksTool::gotoBookmark( const Okteta::Bookmark& bookmark )
+void BookmarksTool::gotoBookmark(const Okteta::Bookmark& bookmark)
 {
-    if( mByteArrayView )
-    {
-        mByteArrayView->setCursorPosition( bookmark.offset() );
+    if (mByteArrayView) {
+        mByteArrayView->setCursorPosition(bookmark.offset());
         mByteArrayView->widget()->setFocus();
     }
 }
 
-void BookmarksTool::setBookmarkName( unsigned int bookmarkIndex, const QString& name )
+void BookmarksTool::setBookmarkName(unsigned int bookmarkIndex, const QString& name)
 {
-    Okteta::Bookmark bookmark = mBookmarks->bookmarkAt( bookmarkIndex );
+    Okteta::Bookmark bookmark = mBookmarks->bookmarkAt(bookmarkIndex);
 
-    bookmark.setName( name );
-    mBookmarks->setBookmark( bookmarkIndex, bookmark );
+    bookmark.setName(name);
+    mBookmarks->setBookmark(bookmarkIndex, bookmark);
 
     mByteArrayView->widget()->setFocus();
 }
 
-void BookmarksTool::onCursorPositionChanged( Okteta::Address newPosition )
+void BookmarksTool::onCursorPositionChanged(Okteta::Address newPosition)
 {
     const int bookmarksCount = mBookmarks->bookmarksCount();
-    const bool hasBookmarks = ( bookmarksCount != 0 );
-    const bool isInsideByteArray = ( newPosition < mByteArray->size() );
-    const bool isAtBookmark = hasBookmarks ? mBookmarks->containsBookmarkFor( newPosition ) : false;
-    const bool canCreateBookmark = ( !isAtBookmark && isInsideByteArray );
+    const bool hasBookmarks = (bookmarksCount != 0);
+    const bool isInsideByteArray = (newPosition < mByteArray->size());
+    const bool isAtBookmark = hasBookmarks ? mBookmarks->containsBookmarkFor(newPosition) : false;
+    const bool canCreateBookmark = (!isAtBookmark && isInsideByteArray);
 
-    if( canCreateBookmark != mCanCreateBookmark )
-    {
+    if (canCreateBookmark != mCanCreateBookmark) {
         mCanCreateBookmark = canCreateBookmark;
-        emit canCreateBookmarkChanged( canCreateBookmark );
+        emit canCreateBookmarkChanged(canCreateBookmark);
     }
 }
 
@@ -200,7 +197,7 @@ void BookmarksTool::onCursorPositionChanged( Okteta::Address newPosition )
 void BookmarksTool::onBookmarksModified()
 {
     const int cursorPosition = mByteArrayView->cursorPosition();
-    onCursorPositionChanged( cursorPosition );
+    onCursorPositionChanged(cursorPosition);
 }
 
 BookmarksTool::~BookmarksTool() {}

@@ -25,39 +25,36 @@
 
 #include "abstractmodel.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelPrivate
 {
-  public:
-      explicit AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel = nullptr );
+public:
+    explicit AbstractModelPrivate(AbstractModel* parent, AbstractModel* baseModel = nullptr);
 
-      virtual ~AbstractModelPrivate();
+    virtual ~AbstractModelPrivate();
 
-  public:
+public:
     AbstractModel* baseModel() const;
 
-  public:
-    void setBaseModel( AbstractModel* baseModel );
+public:
+    void setBaseModel(AbstractModel* baseModel);
 
-  protected:
+protected:
     AbstractModel* const q_ptr;
-    Q_DECLARE_PUBLIC( AbstractModel )
+    Q_DECLARE_PUBLIC(AbstractModel)
 
-  protected:
+protected:
     AbstractModel* mBaseModel;
 };
 
-
-inline AbstractModelPrivate::AbstractModelPrivate( AbstractModel* parent, AbstractModel* baseModel )
-  : q_ptr( parent ),
-    mBaseModel( baseModel )
+inline AbstractModelPrivate::AbstractModelPrivate(AbstractModel* parent, AbstractModel* baseModel)
+    : q_ptr(parent)
+    , mBaseModel(baseModel)
 {}
 
 inline AbstractModel* AbstractModelPrivate::baseModel() const { return mBaseModel; }
-inline void AbstractModelPrivate::setBaseModel( AbstractModel* baseModel ) { mBaseModel = baseModel; }
+inline void AbstractModelPrivate::setBaseModel(AbstractModel* baseModel) { mBaseModel = baseModel; }
 
 inline AbstractModelPrivate::~AbstractModelPrivate() {}
 

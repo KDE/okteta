@@ -21,8 +21,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #ifndef EBCDICSTRINGDATA_H
 #define EBCDICSTRINGDATA_H
 
@@ -30,7 +28,9 @@
 
 #include <QVector>
 
-namespace Okteta { class CharCodec; }
+namespace Okteta {
+class CharCodec;
+}
 
 class EbcdicStringData : public StringData
 {

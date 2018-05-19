@@ -23,40 +23,38 @@
 #include "abstractfilesystemsyncwithremotejob.h"
 #include "abstractfilesystemsyncwithremotejob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
-  : AbstractSyncWithRemoteJob( new AbstractFileSystemSyncWithRemoteJobPrivate(this,synchronizer,url,option) )
+AbstractFileSystemSyncWithRemoteJob::AbstractFileSystemSyncWithRemoteJob(AbstractModelFileSystemSynchronizer* synchronizer,
+                                                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
+    : AbstractSyncWithRemoteJob(new AbstractFileSystemSyncWithRemoteJobPrivate(this, synchronizer, url, option))
 {}
 
 AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJob::synchronizer() const
 {
-    Q_D( const AbstractFileSystemSyncWithRemoteJob );
+    Q_D(const AbstractFileSystemSyncWithRemoteJob);
 
     return d->synchronizer();
 }
 QFile* AbstractFileSystemSyncWithRemoteJob::file() const
 {
-    Q_D( const AbstractFileSystemSyncWithRemoteJob );
+    Q_D(const AbstractFileSystemSyncWithRemoteJob);
 
     return d->file();
 }
 
 void AbstractFileSystemSyncWithRemoteJob::start()
 {
-    Q_D( AbstractFileSystemSyncWithRemoteJob );
+    Q_D(AbstractFileSystemSyncWithRemoteJob);
 
     d->start();
 }
 
-void AbstractFileSystemSyncWithRemoteJob::completeSync( bool success )
+void AbstractFileSystemSyncWithRemoteJob::completeSync(bool success)
 {
-    Q_D( AbstractFileSystemSyncWithRemoteJob );
+    Q_D(AbstractFileSystemSyncWithRemoteJob);
 
-    d->completeSync( success );
+    d->completeSync(success);
 }
 
 AbstractFileSystemSyncWithRemoteJob::~AbstractFileSystemSyncWithRemoteJob()
@@ -65,5 +63,5 @@ AbstractFileSystemSyncWithRemoteJob::~AbstractFileSystemSyncWithRemoteJob()
 
 }
 
-//have to include this because of Q_PRIVATE_SLOT
+// have to include this because of Q_PRIVATE_SLOT
 #include "moc_abstractfilesystemsyncwithremotejob.cpp"

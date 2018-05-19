@@ -23,41 +23,38 @@
 #ifndef DUMMYVIEW_H
 #define DUMMYVIEW_H
 
-
 // lib
 #include <kasten/abstractview.h>
 
 class QLabel;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KASTENGUI_EXPORT DummyView : public AbstractView
 {
     Q_OBJECT
 
-  public:
-    explicit DummyView( AbstractDocument* document );
+public:
+    explicit DummyView(AbstractDocument* document);
 
     ~DummyView() override;
 
-  public:
+public:
 //     KCursorObject *cursor() const;
 
-  public: // AbstractModel API
+public: // AbstractModel API
     QString title() const override;
 
-  public: // AbstractView API
+public: // AbstractView API
     void setFocus() override;
     QWidget* widget() const override;
     bool hasFocus() const override;
 
-  private Q_SLOTS:
-    void onTitleChange( const QString &newTitle );
+private Q_SLOTS:
+    void onTitleChange(const QString& newTitle);
 
-  private:
-    QLabel *mLabel;
+private:
+    QLabel* mLabel;
     AbstractDocument* mDocument;
 };
 

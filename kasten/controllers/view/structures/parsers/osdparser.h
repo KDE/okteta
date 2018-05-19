@@ -41,11 +41,17 @@ class UnionDataInformation;
 class PrimitiveDataInformation;
 class ScriptLogger;
 
-struct OsdParserInfo : public ParserInfo {
+struct OsdParserInfo : public ParserInfo
+{
     inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
-            QScriptEngine* engine, const QVector<EnumDefinition::Ptr>& enums)
-        : ParserInfo(name, logger, parent, engine), enums(enums) {}
-    inline OsdParserInfo(const OsdParserInfo& i) : ParserInfo(i), enums(i.enums) {}
+                         QScriptEngine* engine, const QVector<EnumDefinition::Ptr>& enums)
+        : ParserInfo(name, logger, parent, engine)
+        , enums(enums)
+    {}
+    inline OsdParserInfo(const OsdParserInfo& i)
+        : ParserInfo(i)
+        , enums(i.enums)
+    {}
     inline ~OsdParserInfo() {}
     QVector<EnumDefinition::Ptr> enums;
 };
@@ -53,6 +59,7 @@ struct OsdParserInfo : public ParserInfo {
 class OsdParser : public AbstractStructureParser
 {
     Q_DISABLE_COPY(OsdParser)
+
 public:
     /** construct a parser which opens parses @p absolutePath */
     OsdParser(const QString& pluginName, const QString& absolutePath);
@@ -64,6 +71,7 @@ public:
     QVector<TopLevelDataInformation*> parseStructures() const override;
 
     static DataInformation* parseElement(const QDomElement& node, const OsdParserInfo& info);
+
 private:
     static PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static PointerDataInformation* pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
@@ -75,10 +83,10 @@ private:
     static ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static TaggedUnionDataInformation* taggedUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     /** Get the child type from the <type> element or type="" attribute.
-      * This handles both the case where it is passed as an XML element and as a primitive type string
-      * @param xmlElem the parent XML element
-      * @param info the parser info
-      * @return The parsed element or null if not possible. */
+     * This handles both the case where it is passed as an XML element and as a primitive type string
+     * @param xmlElem the parent XML element
+     * @param info the parser info
+     * @return The parsed element or null if not possible. */
     static DataInformation* parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
     static DataInformation* parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
 
@@ -97,24 +105,28 @@ private:
     const QString mXmlString;
 };
 
-class OsdChildrenParser : public ChildrenParser {
+class OsdChildrenParser : public ChildrenParser
+{
 public:
     OsdChildrenParser(const OsdParserInfo& info, const QDomElement& firstChild);
     ~OsdChildrenParser() override;
     DataInformation* next() override;
     bool hasNext() override;
     void setParent(DataInformation* newParent) override;
+
 protected:
     OsdParserInfo mInfo;
     QDomElement mElem;
 };
 
-class SingleElementOsdChildrenParser : public OsdChildrenParser {
+class SingleElementOsdChildrenParser : public OsdChildrenParser
+{
 public:
     SingleElementOsdChildrenParser(const OsdParserInfo& info, const QDomElement& element);
     ~SingleElementOsdChildrenParser() override;
     DataInformation* next() override;
     bool hasNext() override;
+
 protected:
     bool mParsed;
 };

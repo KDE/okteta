@@ -37,109 +37,102 @@
 // Qt
 #include <QAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ViewProfileController::ViewProfileController( ByteArrayViewProfileManager* viewProfileManager,
-                                              QWidget* parentWidget,
-                                              KXMLGUIClient* guiClient )
-  : AbstractXmlGuiController()
-  , mGuiClient( guiClient )
-  , mViewProfileManager( viewProfileManager )
-  , mParentWidget( parentWidget )
-  , mByteArrayView( nullptr )
-  , mByteArrayViewProfileSynchronizer( nullptr )
+ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewProfileManager,
+                                             QWidget* parentWidget,
+                                             KXMLGUIClient* guiClient)
+    : AbstractXmlGuiController()
+    , mGuiClient(guiClient)
+    , mViewProfileManager(viewProfileManager)
+    , mParentWidget(parentWidget)
+    , mByteArrayView(nullptr)
+    , mByteArrayViewProfileSynchronizer(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mViewProfileActionMenu = actionCollection->add<KActionMenu>( QStringLiteral("view_profile") );
-    mViewProfileActionMenu->setDelayed( false );
-    mViewProfileActionMenu->setText( i18nc("@title:menu submenu to select the view profile or change it",
-                                        "View Profile") );
+    mViewProfileActionMenu = actionCollection->add<KActionMenu>(QStringLiteral("view_profile"));
+    mViewProfileActionMenu->setDelayed(false);
+    mViewProfileActionMenu->setText(i18nc("@title:menu submenu to select the view profile or change it",
+                                          "View Profile"));
 
     mCreateNewAction =
-        new QAction( QIcon::fromTheme( QStringLiteral("document-new") ),
-                     i18nc("@title:menu create a new view profile",
-                            "Create new..." ),
-                     this );
-    connect( mCreateNewAction, &QAction::triggered, this, &ViewProfileController::onCreateNewActionTriggered );
+        new QAction(QIcon::fromTheme(QStringLiteral("document-new")),
+                    i18nc("@title:menu create a new view profile",
+                          "Create new..."),
+                    this);
+    connect(mCreateNewAction, &QAction::triggered, this, &ViewProfileController::onCreateNewActionTriggered);
 
     mSaveChangesAction =
-        new QAction( QIcon::fromTheme( QStringLiteral("document-save") ),
-                     i18nc("@title:menu save changed to the view profile to the base profile",
-                           "Save changes" ),
-                     this );
-    connect( mSaveChangesAction, &QAction::triggered, this, &ViewProfileController::onSaveChangesActionTriggered );
+        new QAction(QIcon::fromTheme(QStringLiteral("document-save")),
+                    i18nc("@title:menu save changed to the view profile to the base profile",
+                          "Save changes"),
+                    this);
+    connect(mSaveChangesAction, &QAction::triggered, this, &ViewProfileController::onSaveChangesActionTriggered);
 
     mResetChangesAction =
-        new QAction( QIcon::fromTheme( QStringLiteral("document-revert") ),
-                     i18nc("@title:menu reset settings back to those of the saved base profile",
-                           "Reset changes" ),
-                     this );
-    connect( mResetChangesAction, &QAction::triggered, this, &ViewProfileController::onResetChangesActionTriggered );
+        new QAction(QIcon::fromTheme(QStringLiteral("document-revert")),
+                    i18nc("@title:menu reset settings back to those of the saved base profile",
+                          "Reset changes"),
+                    this);
+    connect(mResetChangesAction, &QAction::triggered, this, &ViewProfileController::onResetChangesActionTriggered);
 
-    mViewProfileActionMenu->addAction( mCreateNewAction );
+    mViewProfileActionMenu->addAction(mCreateNewAction);
     mViewProfileActionMenu->addSeparator();
-    mViewProfileActionMenu->addAction( mSaveChangesAction );
-    mViewProfileActionMenu->addAction( mResetChangesAction );
+    mViewProfileActionMenu->addAction(mSaveChangesAction);
+    mViewProfileActionMenu->addAction(mResetChangesAction);
 
-    mViewProfilesActionGroup = new QActionGroup( this );
-    mViewProfilesActionGroup->setExclusive( true );
-    connect( mViewProfilesActionGroup, &QActionGroup::triggered,
-             this, &ViewProfileController::onViewProfileTriggered );
+    mViewProfilesActionGroup = new QActionGroup(this);
+    mViewProfilesActionGroup->setExclusive(true);
+    connect(mViewProfilesActionGroup, &QActionGroup::triggered,
+            this, &ViewProfileController::onViewProfileTriggered);
 
-    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesChanged,
-             this, &ViewProfileController::onViewProfilesChanged );
-    connect( mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesRemoved,
-             this, &ViewProfileController::onViewProfilesChanged );
+    connect(mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesChanged,
+            this, &ViewProfileController::onViewProfilesChanged);
+    connect(mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesRemoved,
+            this, &ViewProfileController::onViewProfilesChanged);
 
     onViewProfilesChanged();
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void ViewProfileController::setTargetModel( AbstractModel* model )
+void ViewProfileController::setTargetModel(AbstractModel* model)
 {
-    if( mByteArrayViewProfileSynchronizer )
-        mByteArrayViewProfileSynchronizer->disconnect( this );
+    if (mByteArrayViewProfileSynchronizer) {
+        mByteArrayViewProfileSynchronizer->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
     mByteArrayViewProfileSynchronizer = mByteArrayView ? mByteArrayView->synchronizer() : nullptr;
 
-    const bool hasSynchronizer = ( mByteArrayViewProfileSynchronizer != nullptr );
-    if( hasSynchronizer )
-    {
-        onViewProfileChanged( mByteArrayViewProfileSynchronizer->viewProfileId() );
+    const bool hasSynchronizer = (mByteArrayViewProfileSynchronizer != nullptr);
+    if (hasSynchronizer) {
+        onViewProfileChanged(mByteArrayViewProfileSynchronizer->viewProfileId());
 
-        connect( mByteArrayViewProfileSynchronizer, &ByteArrayViewProfileSynchronizer::viewProfileChanged,
-                 this, &ViewProfileController::onViewProfileChanged );
+        connect(mByteArrayViewProfileSynchronizer, &ByteArrayViewProfileSynchronizer::viewProfileChanged,
+                this, &ViewProfileController::onViewProfileChanged);
 
-        onLocalSyncStateChanged( mByteArrayViewProfileSynchronizer->localSyncState() );
+        onLocalSyncStateChanged(mByteArrayViewProfileSynchronizer->localSyncState());
 
-        connect( mByteArrayViewProfileSynchronizer, &ByteArrayViewProfileSynchronizer::localSyncStateChanged,
-                 this, &ViewProfileController::onLocalSyncStateChanged );
-    }
-    else
-    {
-        mSaveChangesAction->setEnabled( false );
-        mResetChangesAction->setEnabled( false );
+        connect(mByteArrayViewProfileSynchronizer, &ByteArrayViewProfileSynchronizer::localSyncStateChanged,
+                this, &ViewProfileController::onLocalSyncStateChanged);
+    } else {
+        mSaveChangesAction->setEnabled(false);
+        mResetChangesAction->setEnabled(false);
     }
 
-    mCreateNewAction->setEnabled( hasSynchronizer );
-    mViewProfileActionMenu->setEnabled( hasSynchronizer );
+    mCreateNewAction->setEnabled(hasSynchronizer);
+    mViewProfileActionMenu->setEnabled(hasSynchronizer);
 }
 
-
-void ViewProfileController::onViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId )
+void ViewProfileController::onViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId)
 {
     const QList<QAction*> actions = mViewProfilesActionGroup->actions();
 
-    for( QAction* action : actions )
-    {
-        if( action->data().toString() == viewProfileId )
-        {
-            action->setChecked( true );
+    for (QAction* action : actions) {
+        if (action->data().toString() == viewProfileId) {
+            action->setChecked(true);
             break;
         }
     }
@@ -147,87 +140,86 @@ void ViewProfileController::onViewProfileChanged( const Kasten::ByteArrayViewPro
 
 void ViewProfileController::onViewProfilesChanged()
 {
-    qDeleteAll( mViewProfilesActionGroup->actions() );
+    qDeleteAll(mViewProfilesActionGroup->actions());
 
     const QList<ByteArrayViewProfile> viewProfiles = mViewProfileManager->viewProfiles();
     const ByteArrayViewProfile::Id currentViewProfileId = mByteArrayViewProfileSynchronizer ?
-        mByteArrayViewProfileSynchronizer->viewProfileId() :
-        ByteArrayViewProfile::Id();
+                                                          mByteArrayViewProfileSynchronizer->viewProfileId() :
+                                                          ByteArrayViewProfile::Id();
 
-    if( ! viewProfiles.isEmpty() )
+    if (!viewProfiles.isEmpty()) {
         mViewProfileActionMenu->addSeparator();
+    }
 
     bool isCurrentViewProfileExisting = false;
-    for( const ByteArrayViewProfile& viewProfile : viewProfiles )
-    {
+    for (const ByteArrayViewProfile& viewProfile : viewProfiles) {
         const QString title = viewProfile.viewProfileTitle();
-        QAction* action = new QAction( title, mViewProfilesActionGroup );
-        action->setCheckable( true );
+        QAction* action = new QAction(title, mViewProfilesActionGroup);
+        action->setCheckable(true);
         const ByteArrayViewProfile::Id viewProfileId = viewProfile.id();
-        action->setData( viewProfileId );
-        const bool isCurrentViewProfile = ( viewProfileId == currentViewProfileId );
-        action->setChecked( isCurrentViewProfile );
-        if( isCurrentViewProfile )
+        action->setData(viewProfileId);
+        const bool isCurrentViewProfile = (viewProfileId == currentViewProfileId);
+        action->setChecked(isCurrentViewProfile);
+        if (isCurrentViewProfile) {
             isCurrentViewProfileExisting = true;
+        }
 
-        mViewProfilesActionGroup->addAction( action );
-        mViewProfileActionMenu->addAction( action );
+        mViewProfilesActionGroup->addAction(action);
+        mViewProfileActionMenu->addAction(action);
     }
 
     // reset id if no longer existing
-    if( ! isCurrentViewProfileExisting && mByteArrayViewProfileSynchronizer )
-            mByteArrayViewProfileSynchronizer->setViewProfileId( ByteArrayViewProfile::Id() );
+    if (!isCurrentViewProfileExisting && mByteArrayViewProfileSynchronizer) {
+        mByteArrayViewProfileSynchronizer->setViewProfileId(ByteArrayViewProfile::Id());
+    }
 }
 
-
-
-void ViewProfileController::onViewProfileTriggered( QAction* action )
+void ViewProfileController::onViewProfileTriggered(QAction* action)
 {
-    mByteArrayViewProfileSynchronizer->setViewProfileId( action->data().toString() );
+    mByteArrayViewProfileSynchronizer->setViewProfileId(action->data().toString());
 }
 
-void ViewProfileController::onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState )
+void ViewProfileController::onLocalSyncStateChanged(Kasten::LocalSyncState localSyncState)
 {
-    const bool hasDifference = ( localSyncState == LocalHasChanges );
+    const bool hasDifference = (localSyncState == LocalHasChanges);
 
-    mSaveChangesAction->setEnabled( hasDifference );
-    mResetChangesAction->setEnabled( hasDifference );
+    mSaveChangesAction->setEnabled(hasDifference);
+    mResetChangesAction->setEnabled(hasDifference);
 }
 
 void ViewProfileController::onCreateNewActionTriggered()
 {
-    ViewProfileEditDialog* dialog = new ViewProfileEditDialog( mParentWidget );
-    const QString dialogTitle = i18nc( "@window:title",
-                                       "New View Profile" );
-    dialog->setWindowTitle( dialogTitle );
+    ViewProfileEditDialog* dialog = new ViewProfileEditDialog(mParentWidget);
+    const QString dialogTitle = i18nc("@window:title",
+                                      "New View Profile");
+    dialog->setWindowTitle(dialogTitle);
 
     ByteArrayViewProfile viewProfile;
-    viewProfile.setId( QString() );
+    viewProfile.setId(QString());
 //     const QString modifiedTitle = i18n( "Modification of %1", newByteArrayViewProfile.viewProfileTitle() );
 //     viewProfile.setViewProfileTitle( modifiedTitle );
-    viewProfile.setOffsetColumnVisible( mByteArrayView->offsetColumnVisible() );
-    viewProfile.setVisibleByteArrayCodings( mByteArrayView->visibleByteArrayCodings() );
-    viewProfile.setViewModus( mByteArrayView->viewModus() );
-    viewProfile.setLayoutStyle( mByteArrayView->layoutStyle() );
-    viewProfile.setNoOfGroupedBytes( mByteArrayView->noOfGroupedBytes() );
-    viewProfile.setNoOfBytesPerLine( mByteArrayView->noOfBytesPerLine() );
-    viewProfile.setValueCoding( mByteArrayView->valueCoding() );
-    viewProfile.setCharCoding( mByteArrayView->charCodingName() );
-    viewProfile.setShowsNonprinting( mByteArrayView->showsNonprinting() );
-    viewProfile.setUndefinedChar( mByteArrayView->undefinedChar() );
-    viewProfile.setSubstituteChar( mByteArrayView->substituteChar() );
-    dialog->setViewProfile( viewProfile );
+    viewProfile.setOffsetColumnVisible(mByteArrayView->offsetColumnVisible());
+    viewProfile.setVisibleByteArrayCodings(mByteArrayView->visibleByteArrayCodings());
+    viewProfile.setViewModus(mByteArrayView->viewModus());
+    viewProfile.setLayoutStyle(mByteArrayView->layoutStyle());
+    viewProfile.setNoOfGroupedBytes(mByteArrayView->noOfGroupedBytes());
+    viewProfile.setNoOfBytesPerLine(mByteArrayView->noOfBytesPerLine());
+    viewProfile.setValueCoding(mByteArrayView->valueCoding());
+    viewProfile.setCharCoding(mByteArrayView->charCodingName());
+    viewProfile.setShowsNonprinting(mByteArrayView->showsNonprinting());
+    viewProfile.setUndefinedChar(mByteArrayView->undefinedChar());
+    viewProfile.setSubstituteChar(mByteArrayView->substituteChar());
+    dialog->setViewProfile(viewProfile);
 
     const int answer = dialog->exec();
 
-    if( answer == QDialog::Accepted )
-    {
+    if (answer == QDialog::Accepted) {
         QList<ByteArrayViewProfile> viewProfiles {
             dialog->viewProfile()
         };
-        mViewProfileManager->saveViewProfiles( viewProfiles );
+        mViewProfileManager->saveViewProfiles(viewProfiles);
 
-        mByteArrayViewProfileSynchronizer->setViewProfileId( viewProfiles.at(0).id() );
+        mByteArrayViewProfileSynchronizer->setViewProfileId(viewProfiles.at(0).id());
     }
 
     delete dialog;

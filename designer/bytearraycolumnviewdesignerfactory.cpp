@@ -27,17 +27,16 @@
 // Okteta gui
 #include <okteta/bytearraycolumnview.h>
 
-
 // TODO: add translations for visible names
-ByteArrayColumnViewDesignerFactory::ByteArrayColumnViewDesignerFactory( QObject* parent )
-  : QObject( parent )
+ByteArrayColumnViewDesignerFactory::ByteArrayColumnViewDesignerFactory(QObject* parent)
+    : QObject(parent)
 {
 }
 
-QWidget* ByteArrayColumnViewDesignerFactory::createWidget( QWidget* parent )
+QWidget* ByteArrayColumnViewDesignerFactory::createWidget(QWidget* parent)
 {
-    Okteta::ByteArrayColumnView* widget = new Okteta::ByteArrayColumnView( parent );
-    widget->setByteArrayModel( createFillerByteArrayModel(widget) );
+    Okteta::ByteArrayColumnView* widget = new Okteta::ByteArrayColumnView(parent);
+    widget->setByteArrayModel(createFillerByteArrayModel(widget));
     return widget;
 }
 

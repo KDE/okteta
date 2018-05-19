@@ -30,43 +30,41 @@
 #include <QCheckBox>
 #include <QFormLayout>
 
-
 const char ReverseByteArrayFilterParameterSetEdit::Id[] = "Reverse";
 
-
-ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit( QWidget* parent )
- : AbstractByteArrayFilterParameterSetEdit( parent )
+ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit(QWidget* parent)
+    : AbstractByteArrayFilterParameterSetEdit(parent)
 {
-    QFormLayout* baseLayout = new QFormLayout( this );
-    baseLayout->setMargin( 0 );
+    QFormLayout* baseLayout = new QFormLayout(this);
+    baseLayout->setMargin(0);
 
     const QString invertsBitsLabelText =
-        i18nc( "@option:check",
-               "Reverse also bits:" );
-    mInvertsBitsCheckBox = new QCheckBox( this );
-    mInvertsBitsCheckBox->setChecked( false );
+        i18nc("@option:check",
+              "Reverse also bits:");
+    mInvertsBitsCheckBox = new QCheckBox(this);
+    mInvertsBitsCheckBox->setChecked(false);
     const QString alignWhatsThis =
-        i18nc( "@info:whatsthis",
-               "If set, the bits are arranged in reverse order as well." );
-    mInvertsBitsCheckBox->setWhatsThis( alignWhatsThis );
+        i18nc("@info:whatsthis",
+              "If set, the bits are arranged in reverse order as well.");
+    mInvertsBitsCheckBox->setWhatsThis(alignWhatsThis);
 
-    baseLayout->addRow( invertsBitsLabelText, mInvertsBitsCheckBox );
+    baseLayout->addRow(invertsBitsLabelText, mInvertsBitsCheckBox);
 }
 
-void ReverseByteArrayFilterParameterSetEdit::setValues( const AbstractByteArrayFilterParameterSet *parameterSet )
+void ReverseByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const ReverseByteArrayFilterParameterSet *reverseParameterSet =
-        static_cast<const ReverseByteArrayFilterParameterSet *>( parameterSet );
+    const ReverseByteArrayFilterParameterSet* reverseParameterSet =
+        static_cast<const ReverseByteArrayFilterParameterSet*>(parameterSet);
 
-    mInvertsBitsCheckBox->setChecked( reverseParameterSet->invertsBits() );
+    mInvertsBitsCheckBox->setChecked(reverseParameterSet->invertsBits());
 }
 
-void ReverseByteArrayFilterParameterSetEdit::getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const
+void ReverseByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    ReverseByteArrayFilterParameterSet *reverseParameterSet =
-        static_cast<ReverseByteArrayFilterParameterSet *>( parameterSet );
+    ReverseByteArrayFilterParameterSet* reverseParameterSet =
+        static_cast<ReverseByteArrayFilterParameterSet*>(parameterSet);
 
-    reverseParameterSet->setInvertsBits( mInvertsBitsCheckBox->isChecked() );
+    reverseParameterSet->setInvertsBits(mInvertsBitsCheckBox->isChecked());
 }
 
 ReverseByteArrayFilterParameterSetEdit::~ReverseByteArrayFilterParameterSetEdit() {}

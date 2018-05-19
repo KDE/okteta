@@ -27,8 +27,7 @@
 // Qt
 #include <QTest>
 
-namespace Okteta
-{
+namespace Okteta {
 
 // local variables
 static const Address Offset = 15;
@@ -42,70 +41,68 @@ static const Address SecondOffset = Offset + FirstLength;
 static const Size SecondLength = 10;
 static const Address SecondEnd = SecondOffset + SecondLength - 1;
 
-
 void ArrayChangeMetricsTest::testConstructorAsReplacement()
 {
-    ArrayChangeMetrics change = ArrayChangeMetrics::asReplacement( Offset, SmallerRemoveLength, InsertLength );
+    ArrayChangeMetrics change = ArrayChangeMetrics::asReplacement(Offset, SmallerRemoveLength, InsertLength);
 
-    QVERIFY( change.isValid() );
-    QCOMPARE( change.offset(), Offset );
-    QCOMPARE( change.removeLength(), SmallerRemoveLength );
-    QCOMPARE( change.insertLength(), InsertLength );
-    QCOMPARE( change.lengthChange(), LengthDiff );
+    QVERIFY(change.isValid());
+    QCOMPARE(change.offset(), Offset);
+    QCOMPARE(change.removeLength(), SmallerRemoveLength);
+    QCOMPARE(change.insertLength(), InsertLength);
+    QCOMPARE(change.lengthChange(), LengthDiff);
 }
 
 void ArrayChangeMetricsTest::testConstructorAsSwapping()
 {
-    ArrayChangeMetrics change = ArrayChangeMetrics::asSwapping( Offset, SecondOffset, SecondLength );
+    ArrayChangeMetrics change = ArrayChangeMetrics::asSwapping(Offset, SecondOffset, SecondLength);
 
-    QVERIFY( change.isValid() );
-    QCOMPARE( change.offset(), Offset );
-    QCOMPARE( change.firstLength(), FirstLength );
-    QCOMPARE( change.secondStart(), SecondOffset );
-    QCOMPARE( change.secondEnd(), SecondEnd );
-    QCOMPARE( change.secondLength(), SecondLength );
+    QVERIFY(change.isValid());
+    QCOMPARE(change.offset(), Offset);
+    QCOMPARE(change.firstLength(), FirstLength);
+    QCOMPARE(change.secondStart(), SecondOffset);
+    QCOMPARE(change.secondEnd(), SecondEnd);
+    QCOMPARE(change.secondLength(), SecondLength);
 }
 
 void ArrayChangeMetricsTest::testRevert()
 {
-    ArrayChangeMetrics replacement = ArrayChangeMetrics::asReplacement( Offset, SmallerRemoveLength, InsertLength );
+    ArrayChangeMetrics replacement = ArrayChangeMetrics::asReplacement(Offset, SmallerRemoveLength, InsertLength);
     replacement.revert();
 
-    QVERIFY( replacement.isValid() );
-    QCOMPARE( replacement.offset(), Offset );
-    QCOMPARE( replacement.removeLength(), InsertLength );
-    QCOMPARE( replacement.insertLength(), SmallerRemoveLength );
-    QCOMPARE( replacement.lengthChange(), -LengthDiff );
+    QVERIFY(replacement.isValid());
+    QCOMPARE(replacement.offset(), Offset);
+    QCOMPARE(replacement.removeLength(), InsertLength);
+    QCOMPARE(replacement.insertLength(), SmallerRemoveLength);
+    QCOMPARE(replacement.lengthChange(), -LengthDiff);
 
     replacement.revert();
 
-    QVERIFY( replacement.isValid() );
-    QCOMPARE( replacement.offset(), Offset );
-    QCOMPARE( replacement.removeLength(), SmallerRemoveLength );
-    QCOMPARE( replacement.insertLength(), InsertLength );
-    QCOMPARE( replacement.lengthChange(), LengthDiff );
+    QVERIFY(replacement.isValid());
+    QCOMPARE(replacement.offset(), Offset);
+    QCOMPARE(replacement.removeLength(), SmallerRemoveLength);
+    QCOMPARE(replacement.insertLength(), InsertLength);
+    QCOMPARE(replacement.lengthChange(), LengthDiff);
 
-
-    ArrayChangeMetrics swapping = ArrayChangeMetrics::asSwapping( Offset, SecondOffset, SecondLength );
+    ArrayChangeMetrics swapping = ArrayChangeMetrics::asSwapping(Offset, SecondOffset, SecondLength);
     swapping.revert();
 
-    QVERIFY( swapping.isValid() );
-    QCOMPARE( swapping.offset(), Offset );
-    QCOMPARE( swapping.firstLength(), SecondLength );
-    QCOMPARE( swapping.secondStart(), Offset+SecondLength );
-    QCOMPARE( swapping.secondEnd(), SecondEnd );
-    QCOMPARE( swapping.secondLength(), FirstLength );
+    QVERIFY(swapping.isValid());
+    QCOMPARE(swapping.offset(), Offset);
+    QCOMPARE(swapping.firstLength(), SecondLength);
+    QCOMPARE(swapping.secondStart(), Offset + SecondLength);
+    QCOMPARE(swapping.secondEnd(), SecondEnd);
+    QCOMPARE(swapping.secondLength(), FirstLength);
 
     swapping.revert();
 
-    QVERIFY( swapping.isValid() );
-    QCOMPARE( swapping.offset(), Offset );
-    QCOMPARE( swapping.firstLength(), FirstLength );
-    QCOMPARE( swapping.secondStart(), SecondOffset );
-    QCOMPARE( swapping.secondEnd(), SecondEnd );
-    QCOMPARE( swapping.secondLength(), SecondLength );
+    QVERIFY(swapping.isValid());
+    QCOMPARE(swapping.offset(), Offset);
+    QCOMPARE(swapping.firstLength(), FirstLength);
+    QCOMPARE(swapping.secondStart(), SecondOffset);
+    QCOMPARE(swapping.secondEnd(), SecondEnd);
+    QCOMPARE(swapping.secondLength(), SecondLength);
 }
 
 }
 
-QTEST_MAIN( Okteta::ArrayChangeMetricsTest )
+QTEST_MAIN(Okteta::ArrayChangeMetricsTest)

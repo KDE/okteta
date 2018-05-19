@@ -22,8 +22,6 @@
 
 #include "piecelist.h"
 
-namespace KPieceTable
-{
-
+namespace KPieceTable {
 
 }

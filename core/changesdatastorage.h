@@ -26,59 +26,57 @@
 // Qt
 #include <QByteArray>
 
-namespace Okteta
-{
+namespace Okteta {
 
 class ChangesDataStorage
 {
-  public:
+public:
     ChangesDataStorage();
 
-  public: // set/action
-    void append( int from, char byte );
-    void append( int from, const char *data, int dataLength );
-    void appendFill( int from, char fillDatum, int fillLength );
+public: // set/action
+    void append(int from, char byte);
+    void append(int from, const char* data, int dataLength);
+    void appendFill(int from, char fillDatum, int fillLength);
 
     void clear();
 
-  public: // get
-    QByteArray data( int offset, int length ) const ;
-    char operator[]( int offset ) const;
+public: // get
+    QByteArray data(int offset, int length) const;
+    char operator[](int offset) const;
 
-  protected:
+protected:
     QByteArray mData;
 };
 
 inline ChangesDataStorage::ChangesDataStorage() {}
 
-inline QByteArray ChangesDataStorage::data( int offset, int length ) const
+inline QByteArray ChangesDataStorage::data(int offset, int length) const
 {
-    return mData.mid( offset, length );
+    return mData.mid(offset, length);
 }
 
-inline char ChangesDataStorage::operator[]( int offset ) const { return mData[offset]; }
+inline char ChangesDataStorage::operator[](int offset) const { return mData[offset]; }
 
 inline void ChangesDataStorage::clear() { mData.clear(); }
 
-inline void ChangesDataStorage::append( int from, char datum )
+inline void ChangesDataStorage::append(int from, char datum)
 {
-    mData.resize( from );
-    mData.append( datum );
+    mData.resize(from);
+    mData.append(datum);
 }
 
-inline void ChangesDataStorage::append( int from, const char *data, int dataLength )
+inline void ChangesDataStorage::append(int from, const char* data, int dataLength)
 {
-    mData.resize( from + dataLength );
-    memcpy( mData.data()+from, data, dataLength );
+    mData.resize(from + dataLength);
+    memcpy(mData.data() + from, data, dataLength);
 }
 
-inline void ChangesDataStorage::appendFill( int from, char fillDatum, int fillLength )
+inline void ChangesDataStorage::appendFill(int from, char fillDatum, int fillLength)
 {
-    mData.resize( from + fillLength );
-    memset( mData.data()+from, fillDatum, fillLength );
+    mData.resize(from + fillLength);
+    memset(mData.data() + from, fillDatum, fillLength);
 }
 
 }
-
 
 #endif

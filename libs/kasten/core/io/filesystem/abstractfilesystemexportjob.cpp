@@ -23,54 +23,51 @@
 #include "abstractfilesystemexportjob.h"
 #include "abstractfilesystemexportjob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
-                                 const QUrl& url )
-  : AbstractExportJob( new AbstractFileSystemExportJobPrivate(this,model,selection,url) )
+AbstractFileSystemExportJob::AbstractFileSystemExportJob(AbstractModel* model, const AbstractModelSelection* selection,
+                                                         const QUrl& url)
+    : AbstractExportJob(new AbstractFileSystemExportJobPrivate(this, model, selection, url))
 {
 }
 
-AbstractFileSystemExportJob::AbstractFileSystemExportJob( AbstractFileSystemExportJobPrivate* d )
-  : AbstractExportJob( d )
+AbstractFileSystemExportJob::AbstractFileSystemExportJob(AbstractFileSystemExportJobPrivate* d)
+    : AbstractExportJob(d)
 {
 }
 
 AbstractModel* AbstractFileSystemExportJob::model() const
 {
-    Q_D( const AbstractFileSystemExportJob );
+    Q_D(const AbstractFileSystemExportJob);
 
     return d->model();
 }
 const AbstractModelSelection* AbstractFileSystemExportJob::selection() const
 {
-    Q_D( const AbstractFileSystemExportJob );
+    Q_D(const AbstractFileSystemExportJob);
 
     return d->selection();
 }
 QFile* AbstractFileSystemExportJob::file() const
 {
-    Q_D( const AbstractFileSystemExportJob );
+    Q_D(const AbstractFileSystemExportJob);
 
     return d->file();
 }
 
 void AbstractFileSystemExportJob::start()
 {
-    Q_D( AbstractFileSystemExportJob );
+    Q_D(AbstractFileSystemExportJob);
 
     d->start();
 }
 
-void AbstractFileSystemExportJob::completeExport( bool success )
+void AbstractFileSystemExportJob::completeExport(bool success)
 {
-    Q_D( AbstractFileSystemExportJob );
+    Q_D(AbstractFileSystemExportJob);
 
-    d->completeExport( success );
+    d->completeExport(success);
 }
-
 
 AbstractFileSystemExportJob::~AbstractFileSystemExportJob()
 {
@@ -78,5 +75,5 @@ AbstractFileSystemExportJob::~AbstractFileSystemExportJob()
 
 }
 
-//have to include this because of Q_PRIVATE_SLOT
+// have to include this because of Q_PRIVATE_SLOT
 #include "moc_abstractfilesystemexportjob.cpp"

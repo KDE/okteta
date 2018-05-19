@@ -28,25 +28,22 @@
 // KF5
 #include <KJob>
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractSyncToRemoteJobPrivate;
-
 
 class KASTENCORE_EXPORT AbstractSyncToRemoteJob : public KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    explicit AbstractSyncToRemoteJob( AbstractSyncToRemoteJobPrivate* d );
+protected:
+    explicit AbstractSyncToRemoteJob(AbstractSyncToRemoteJobPrivate* d);
 
-  public:
+public:
     AbstractSyncToRemoteJob();
 
     ~AbstractSyncToRemoteJob() override;
 
-  protected:
+protected:
     AbstractSyncToRemoteJobPrivate* const d_ptr;
 };
 

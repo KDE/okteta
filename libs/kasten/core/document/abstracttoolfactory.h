@@ -23,22 +23,18 @@
 #ifndef ABSTRACTTOOLFACTORY_H
 #define ABSTRACTTOOLFACTORY_H
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractTool;
 
-
 class AbstractToolFactory
 {
-  public:
+public:
     virtual ~AbstractToolFactory();
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual AbstractTool* create() = 0;
 };
-
 
 inline AbstractToolFactory::~AbstractToolFactory() {}
 

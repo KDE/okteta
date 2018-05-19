@@ -23,17 +23,15 @@
 #include "abstractconnectjob.h"
 #include "abstractconnectjob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractConnectJob::AbstractConnectJob( AbstractConnectJobPrivate* d )
-  : d_ptr( d )
+AbstractConnectJob::AbstractConnectJob(AbstractConnectJobPrivate* d)
+    : d_ptr(d)
 {
 }
 
 AbstractConnectJob::AbstractConnectJob()
-  : d_ptr( new AbstractConnectJobPrivate(this) )
+    : d_ptr(new AbstractConnectJobPrivate(this))
 {}
 
 AbstractConnectJob::~AbstractConnectJob()

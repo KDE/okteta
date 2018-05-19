@@ -29,36 +29,32 @@
 class QTreeView;
 class QModelIndex;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class DocumentListModel;
 class DocumentsTool;
 
-
 class DocumentsView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit DocumentsView( DocumentsTool* tool, QWidget* parent = nullptr );
+public:
+    explicit DocumentsView(DocumentsTool* tool, QWidget* parent = nullptr);
     ~DocumentsView() override;
 
-  public:
+public:
     DocumentsTool* tool() const;
 
-  private Q_SLOTS:
-    void onDocumentActivated( const QModelIndex& index );
+private Q_SLOTS:
+    void onDocumentActivated(const QModelIndex& index);
 
-  private:
+private:
     DocumentsTool* mTool;
 
     DocumentListModel* mDocumentListModel;
 
     QTreeView* mDocumentListView;
 };
-
 
 inline DocumentsTool* DocumentsView::tool() const { return mTool; }
 

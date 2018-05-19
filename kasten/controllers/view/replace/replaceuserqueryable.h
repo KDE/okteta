@@ -28,23 +28,25 @@
 // Qt
 #include <QtPlugin>
 
+namespace Kasten {
 
-namespace Kasten
+enum ReplaceBehaviour
 {
+    ReplaceAll,
+    SkipCurrent,
+    ReplaceCurrent,
+    CancelReplacing
+};
 
-enum ReplaceBehaviour { ReplaceAll, SkipCurrent, ReplaceCurrent, CancelReplacing };
-
-
-namespace If
-{
+namespace If {
 
 class ReplaceUserQueryable
 {
-  public:
+public:
     virtual ~ReplaceUserQueryable();
 
-  public: // API to be implemented
-    virtual bool queryContinue( KFindDirection direction, int noOfReplacements ) const = 0;
+public: // API to be implemented
+    virtual bool queryContinue(KFindDirection direction, int noOfReplacements) const = 0;
     virtual ReplaceBehaviour queryReplaceCurrent() const = 0;
 };
 
@@ -53,6 +55,6 @@ inline ReplaceUserQueryable::~ReplaceUserQueryable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::ReplaceUserQueryable, "org.kde.kasten.if.userlistable/1.0" )
+Q_DECLARE_INTERFACE(Kasten::If::ReplaceUserQueryable, "org.kde.kasten.if.userlistable/1.0")
 
 #endif

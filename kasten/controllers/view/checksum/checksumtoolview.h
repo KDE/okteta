@@ -28,26 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ChecksumView;
 class ChecksumTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT ChecksumToolView : public AbstractToolView
 {
-  public:
-    explicit ChecksumToolView( ChecksumTool* tool );
+public:
+    explicit ChecksumToolView(ChecksumTool* tool);
     ~ChecksumToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     ChecksumView* mWidget;
 };
 

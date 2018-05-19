@@ -29,31 +29,29 @@
 
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TestDocument;
 
-
 class TestDocumentFileWriteThread : public QThread
 {
-  Q_OBJECT
-  public:
-    TestDocumentFileWriteThread( QObject* parent, const QByteArray& header,
-                                 TestDocument* document, QFile* file );
+    Q_OBJECT
+
+public:
+    TestDocumentFileWriteThread(QObject* parent, const QByteArray& header,
+                                TestDocument* document, QFile* file);
     ~TestDocumentFileWriteThread() override;
 
-  public: // QThread API
+public: // QThread API
     void run() override;
 
-  public:
+public:
     bool success() const;
 
-  Q_SIGNALS:
-    void documentWritten( bool success );
+Q_SIGNALS:
+    void documentWritten(bool success);
 
-  protected:
+protected:
     const QByteArray mHeader;
     const TestDocument* mDocument;
     QFile* mFile;
@@ -61,10 +59,13 @@ class TestDocumentFileWriteThread : public QThread
     bool mSuccess;
 };
 
-
-inline TestDocumentFileWriteThread::TestDocumentFileWriteThread( QObject* parent, const QByteArray& header,
-    TestDocument* document, QFile* file )
- : QThread( parent ), mHeader( header ), mDocument( document ), mFile( file ), mSuccess( false )
+inline TestDocumentFileWriteThread::TestDocumentFileWriteThread(QObject* parent, const QByteArray& header,
+                                                                TestDocument* document, QFile* file)
+    : QThread(parent)
+    , mHeader(header)
+    , mDocument(document)
+    , mFile(file)
+    , mSuccess(false)
 {}
 
 inline bool TestDocumentFileWriteThread::success() const { return mSuccess; }

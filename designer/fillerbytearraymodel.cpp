@@ -25,7 +25,6 @@
 // Okteta core
 #include <okteta/piecetablebytearraymodel.h>
 
-
 static const char fillerData[] =
     "This is some filler data for the Okteta byte array widgets:"
     "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
@@ -47,11 +46,10 @@ static const char fillerData[] =
 
 static const int fillerDataSize = sizeof(fillerData) / sizeof(fillerData[0]);
 
-
-Okteta::AbstractByteArrayModel* createFillerByteArrayModel( QObject* parent )
+Okteta::AbstractByteArrayModel* createFillerByteArrayModel(QObject* parent)
 {
     Okteta::PieceTableByteArrayModel* fillerByteArrayModel =
-        new Okteta::PieceTableByteArrayModel( QByteArray::fromRawData(fillerData, fillerDataSize), parent );
+        new Okteta::PieceTableByteArrayModel(QByteArray::fromRawData(fillerData, fillerDataSize), parent);
 
     return fillerByteArrayModel;
 }

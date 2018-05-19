@@ -43,9 +43,7 @@
 #include <QFile>
 #include <QDataStream>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const char TestDirectory[] = "bytearrayrawfilesynchronizertest";
 static const char TestFileName[] = "test.data";
@@ -53,20 +51,19 @@ static const char NotExistingUrl[] = "notexisting://";
 static const int TestDataSize = 50;
 static const char TestDataChar = 0;
 
-
 void ByteArrayRawFileSynchronizerTest::initTestCase()
 {
-    QByteArray byteArray( TestDataSize, TestDataChar );
-    ::textureByteArray( &byteArray );
+    QByteArray byteArray(TestDataSize, TestDataChar);
+    ::textureByteArray(&byteArray);
 
-    mFileSystem = new TestFileSystem( QLatin1String(TestDirectory) );
-    const QString filePath = mFileSystem->createFilePath( QLatin1String(TestFileName) );
+    mFileSystem = new TestFileSystem(QLatin1String(TestDirectory));
+    const QString filePath = mFileSystem->createFilePath(QLatin1String(TestFileName));
     QFile file;
-    file.setFileName( filePath );
-    file.open( QIODevice::WriteOnly );
+    file.setFileName(filePath);
+    file.open(QIODevice::WriteOnly);
 
-    QDataStream outStream( &file );
-    outStream.writeRawData( byteArray.data(), byteArray.size() );
+    QDataStream outStream(&file);
+    outStream.writeRawData(byteArray.data(), byteArray.size());
 
     file.close();
 
@@ -85,63 +82,62 @@ void ByteArrayRawFileSynchronizerTest::init()
 {
     ByteArrayModel = createByteArrayModel();
 
-    mModifiedSpy =  new QSignalSpy( ByteArrayModel, SIGNAL(modified(bool)) );
+    mModifiedSpy =  new QSignalSpy(ByteArrayModel, SIGNAL(modified(bool)));
 }
 #endif
 
-
 void ByteArrayRawFileSynchronizerTest::testLoadFromUrl()
 {
-    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
-    synchronizer->startLoad( fileUrl )->exec();
+    synchronizer->startLoad(fileUrl)->exec();
     AbstractDocument* document = synchronizer->document();
 
-    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>( document );
+    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
 
-    QVERIFY( document != nullptr );
-    QVERIFY( byteArrayDocument != nullptr );
-    QVERIFY( document->synchronizer() != nullptr );
-    QCOMPARE( document->synchronizer()->document(), document );
-    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
-    QCOMPARE( document->synchronizer()->localSyncState(), Kasten::LocalInSync );
-    QCOMPARE( document->synchronizer()->remoteSyncState(), Kasten::RemoteInSync );
+    QVERIFY(document != nullptr);
+    QVERIFY(byteArrayDocument != nullptr);
+    QVERIFY(document->synchronizer() != nullptr);
+    QCOMPARE(document->synchronizer()->document(), document);
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
+    QCOMPARE(document->synchronizer()->localSyncState(), Kasten::LocalInSync);
+    QCOMPARE(document->synchronizer()->remoteSyncState(), Kasten::RemoteInSync);
 
-    QCOMPARE( document->synchronizer()->url(), fileUrl );
+    QCOMPARE(document->synchronizer()->url(), fileUrl);
 
     delete document;
 }
 
 void ByteArrayRawFileSynchronizerTest::testLoadFromNotExistingUrl()
 {
-    const QUrl fileUrl = QUrl( QLatin1String(NotExistingUrl) );
+    const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrl));
 
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
-    synchronizer->startLoad( fileUrl )->exec();
+    synchronizer->startLoad(fileUrl)->exec();
     AbstractDocument* document = synchronizer->document();
 
-    QVERIFY( document == nullptr );
+    QVERIFY(document == nullptr);
     delete synchronizer;
 }
 
 void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 {
-    const QUrl fileUrl = QUrl::fromLocalFile( mFileSystem->createFilePath( QLatin1String(TestFileName) ) );
+    const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
 
     ByteArrayDocument* document =
         new Kasten::ByteArrayDocument(QStringLiteral("New created for test."));
     Okteta::PieceTableByteArrayModel* byteArray =
-        qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
+        qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
 
     // fill array
-    QByteArray testData( TestDataSize, TestDataChar );
-    ::textureByteArray( &testData );
-    byteArray->setData( testData );
+    QByteArray testData(TestDataSize, TestDataChar);
+    ::textureByteArray(&testData);
+    byteArray->setData(testData);
 
     // save
     ByteArrayRawFileSynchronizer* synchronizer = new ByteArrayRawFileSynchronizer();
-    synchronizer->startConnect( document, fileUrl, AbstractModelSynchronizer::ReplaceRemote )->exec();
-    QCOMPARE( synchronizer->document(), document );
+    synchronizer->startConnect(document, fileUrl, AbstractModelSynchronizer::ReplaceRemote)->exec();
+    QCOMPARE(synchronizer->document(), document);
 
 //     // load into other and...
 //     ByteArrayDocument* otherDocument = new ByteArrayDocument( filePath );
@@ -158,4 +154,4 @@ void ByteArrayRawFileSynchronizerTest::testNewSaveAsToUrl()
 
 }
 
-QTEST_GUILESS_MAIN( Kasten::ByteArrayRawFileSynchronizerTest )
+QTEST_GUILESS_MAIN(Kasten::ByteArrayRawFileSynchronizerTest)

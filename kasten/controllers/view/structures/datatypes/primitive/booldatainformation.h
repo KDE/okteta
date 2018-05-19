@@ -27,7 +27,7 @@
 
 #include "uintdatainformation.h"
 
-template<typename T>
+template <typename T>
 class BoolDataInformationMethods
 {
 public:
@@ -41,37 +41,37 @@ public:
     static void staticSetWidgetData(T value, QWidget* w);
 };
 
-template<>
+template <>
 inline PrimitiveDataType BoolDataInformationMethods<quint8>::staticType()
 {
     return PrimitiveDataType::Bool8;
 }
-template<>
+template <>
 inline PrimitiveDataType BoolDataInformationMethods<quint16>::staticType()
 {
     return PrimitiveDataType::Bool16;
 }
-template<>
+template <>
 inline PrimitiveDataType BoolDataInformationMethods<quint32>::staticType()
 {
     return PrimitiveDataType::Bool32;
 }
-template<>
+template <>
 inline PrimitiveDataType BoolDataInformationMethods<quint64>::staticType()
 {
     return PrimitiveDataType::Bool64;
 }
 
-template<typename T>
+template <typename T>
 inline QScriptValue BoolDataInformationMethods<T>::asScriptValue(T value, QScriptEngine* engine,
-        ScriptHandlerInfo* handler)
+                                                                 ScriptHandlerInfo* handler)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
     return QScriptValue(value != 0);
 }
 
-template<typename T>
+template <typename T>
 inline T BoolDataInformationMethods<T>::fromVariant(const QVariant& value, bool* ok)
 {
     return UIntDataInformationMethods<T>::fromVariant(value, ok);

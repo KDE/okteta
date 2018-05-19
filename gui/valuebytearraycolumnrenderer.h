@@ -26,46 +26,42 @@
 // lib
 #include <okteta/abstractbytearraycolumnrenderer.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 class ValueCodec;
 
-
 /** buffer column which displays the numerical values of the bytes
-  *
-  *@author Friedrich W. H. Kossebau
-  */
+ *
+ * @author Friedrich W. H. Kossebau
+ */
 class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayColumnRenderer
 {
-  public:
-    ValueByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges );
+public:
+    ValueByteArrayColumnRenderer(AbstractColumnStylist* stylist,
+                                 AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges);
     ~ValueByteArrayColumnRenderer() override;
 
-  public:
-    void renderEditedByte( QPainter* painter, Byte byte, const QString& editBuffer );
+public:
+    void renderEditedByte(QPainter* painter, Byte byte, const QString& editBuffer);
 
-  public: // modification access
-    void setValueCodec( ValueCoding valueCoding, const ValueCodec* valueCodec );
+public: // modification access
+    void setValueCodec(ValueCoding valueCoding, const ValueCodec* valueCodec);
     /** sets the spacing in the middle of a binary byte in the value column
-      * @param binaryGapWidth spacing in the middle of a binary in pixels
-      * returns true if there was a change
-      */
-    bool setBinaryGapWidth( PixelX binaryGapWidth );
+     * @param binaryGapWidth spacing in the middle of a binary in pixels
+     * returns true if there was a change
+     */
+    bool setBinaryGapWidth(PixelX binaryGapWidth);
 
-
-  public: // value access
+public: // value access
     PixelX binaryGapWidth() const;
 
-  protected: // AbstractByteArrayColumnRenderer API
-    void renderByteText( QPainter* painter, Byte byte, Character byteChar, const QColor& color ) const override;
+protected: // AbstractByteArrayColumnRenderer API
+    void renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const override;
     void recalcByteWidth() override;
 
-  protected:
-    void renderCode( QPainter *painter, const QString &code, const QColor& color ) const;
+protected:
+    void renderCode(QPainter* painter, const QString& code, const QColor& color) const;
 
-  protected: // settings
+protected: // settings
     /** */
     ValueCoding mValueCoding;
     /** */
@@ -73,13 +69,12 @@ class OKTETAGUI_EXPORT ValueByteArrayColumnRenderer : public AbstractByteArrayCo
     /** */
     PixelX mBinaryGapWidth;
 
-  protected: // buffered data
+protected: // buffered data
     /** buffer to hold the formatted valueCoding */
     mutable QString mDecodedByteText;
     /** calculated: Offset in pixels of the second half of the binary */
     PixelX mBinaryHalfOffset;
 };
-
 
 inline PixelX ValueByteArrayColumnRenderer::binaryGapWidth()                 const { return mBinaryGapWidth; }
 

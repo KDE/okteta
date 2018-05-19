@@ -31,9 +31,10 @@ class ScriptLogger;
 class QScriptEngine;
 class DataInformation;
 
-class ScriptFileParser: public AbstractStructureParser
+class ScriptFileParser : public AbstractStructureParser
 {
     Q_DISABLE_COPY(ScriptFileParser)
+
 public:
     ScriptFileParser(const QString& pluginName, const QString& absolutePath);
     ~ScriptFileParser() override;

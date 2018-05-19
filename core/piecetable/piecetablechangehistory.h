@@ -29,31 +29,28 @@
 #include <QStack>
 #include <QString>
 
-
 namespace Okteta {
 class AddressRangeList;
 class ArrayChangeMetricsList;
 }
 
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 using AddressRangeList = Okteta::AddressRangeList;
 using ArrayChangeMetricsList = Okteta::ArrayChangeMetricsList;
 class GroupPieceTableChange;
 
-
 class PieceTableChangeHistory
 {
-  public:
+public:
     PieceTableChangeHistory();
 
     ~PieceTableChangeHistory();
 
-  public:
+public:
     void clear();
     /// returns true, if a new change is appended, false if merged
-    bool appendChange( AbstractPieceTableChange* change );
+    bool appendChange(AbstractPieceTableChange* change);
 
     /**
      * @param pieceTable
@@ -62,24 +59,24 @@ class PieceTableChangeHistory
      * @param changeList
      * @return true if there were changes to revert, false otherwise
      */
-    bool revertBeforeChange( PieceTable* pieceTable, int changeId,
-                             AddressRangeList* changedRanges, ArrayChangeMetricsList* changeList );
+    bool revertBeforeChange(PieceTable* pieceTable, int changeId,
+                            AddressRangeList* changedRanges, ArrayChangeMetricsList* changeList);
 
-    /// 
-    void openGroupedChange( const QString& description ); // TODO: hand over description? user change id?
-    void closeGroupedChange( const QString& description );
+    ///
+    void openGroupedChange(const QString& description);   // TODO: hand over description? user change id?
+    void closeGroupedChange(const QString& description);
     /// closes the current change, so any following operation will not be tried to merge
     void finishChange();
 
-    void setBeforeCurrentChangeAsBase( bool hide );
+    void setBeforeCurrentChangeAsBase(bool hide);
 
-  public:
+public:
     /// @return number of changes in the history
     int count() const;
     /// @return number of changes currently applied
     int appliedChangesCount() const;
     /// @return description of the change with the id changeId
-    QString changeDescription( int changeId ) const;
+    QString changeDescription(int changeId) const;
     /// @return description of the change at the head, empty if there is none
     QString headChangeDescription() const;
     /// @return true if the current change is the base
@@ -87,9 +84,9 @@ class PieceTableChangeHistory
     /// @return size of the data used by the applied changes
     Size appliedChangesDataSize() const;
 
-    void getChangeData( ArrayChangeMetrics* metrics, Address* storageOffset, int versionIndex ) const;
+    void getChangeData(ArrayChangeMetrics* metrics, Address* storageOffset, int versionIndex) const;
 
-  protected:
+protected:
     /// if true, try to merge changes
     bool mTryToMergeAppendedChange;
     ///
@@ -102,30 +99,29 @@ class PieceTableChangeHistory
     Size mAppliedChangesDataSize;
 
     /// if 0, there is no
-    GroupPieceTableChange *mActiveGroupChange;
+    GroupPieceTableChange* mActiveGroupChange;
 };
 
-
 inline PieceTableChangeHistory::PieceTableChangeHistory()
-  : mTryToMergeAppendedChange( false ),
-    mAppliedChangesCount( 0 ),
-    mBaseBeforeChangeIndex( 0 ),
-    mAppliedChangesDataSize( 0 ),
-    mActiveGroupChange( nullptr )
+    : mTryToMergeAppendedChange(false)
+    , mAppliedChangesCount(0)
+    , mBaseBeforeChangeIndex(0)
+    , mAppliedChangesDataSize(0)
+    , mActiveGroupChange(nullptr)
 {}
 
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }
 inline int PieceTableChangeHistory::appliedChangesCount()       const { return mAppliedChangesCount; }
-inline QString PieceTableChangeHistory::headChangeDescription() const { return changeDescription( count()-1 ); }
+inline QString PieceTableChangeHistory::headChangeDescription() const { return changeDescription(count() - 1); }
 inline bool PieceTableChangeHistory::isAtBase()                 const
 {
-    return ( mBaseBeforeChangeIndex == mAppliedChangesCount );
+    return (mBaseBeforeChangeIndex == mAppliedChangesCount);
 }
 inline Size PieceTableChangeHistory::appliedChangesDataSize()    const { return mAppliedChangesDataSize; }
 
-inline QString PieceTableChangeHistory::changeDescription( int changeId ) const
+inline QString PieceTableChangeHistory::changeDescription(int changeId) const
 {
-    const AbstractPieceTableChange* change = mChangeStack.value( changeId );
+    const AbstractPieceTableChange* change = mChangeStack.value(changeId);
 
     return change ? change->description() : QString();
 }

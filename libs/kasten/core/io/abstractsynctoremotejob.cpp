@@ -23,17 +23,15 @@
 #include "abstractsynctoremotejob.h"
 #include "abstractsynctoremotejob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractSyncToRemoteJob::AbstractSyncToRemoteJob( AbstractSyncToRemoteJobPrivate* d )
- : d_ptr( d )
+AbstractSyncToRemoteJob::AbstractSyncToRemoteJob(AbstractSyncToRemoteJobPrivate* d)
+    : d_ptr(d)
 {
 }
 
 AbstractSyncToRemoteJob::AbstractSyncToRemoteJob()
- : d_ptr( new AbstractSyncToRemoteJobPrivate(this) )
+    : d_ptr(new AbstractSyncToRemoteJobPrivate(this))
 {
 }
 

@@ -31,40 +31,37 @@
 class KXMLGUIClient;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 namespace If {
 class Zoomable;
 }
 
-
 class KASTENCONTROLLERS_EXPORT ZoomController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ZoomController( KXMLGUIClient* guiClient );
+public:
+    explicit ZoomController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void zoomIn();
     void zoomOut();
 
-  private Q_SLOTS:
-    void onZoomLevelChange( double level );
+private Q_SLOTS:
+    void onZoomLevelChange(double level);
 
-  private:
+private:
     AbstractModel* mModel;
     If::Zoomable* mZoomControl;
 
     double mZoomLevel;
 
-    QAction *mZoomInAction;
-    QAction *mZoomOutAction;
+    QAction* mZoomInAction;
+    QAction* mZoomOutAction;
 };
 
 }

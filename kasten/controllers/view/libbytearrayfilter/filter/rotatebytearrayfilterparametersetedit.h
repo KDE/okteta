@@ -28,27 +28,26 @@
 
 class QSpinBox;
 
-
 class RotateByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const char Id[];
 
-  public:
-    explicit RotateByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
+public:
+    explicit RotateByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);
     ~RotateByteArrayFilterParameterSetEdit() override;
 
-  public: // AbstractByteArrayFilterParameterSetEdit API
-    void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) override;
-    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const override;
+public: // AbstractByteArrayFilterParameterSetEdit API
+    void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) override;
+    void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
     bool isValid() const override;
 
-  protected Q_SLOTS:
-    void onValueChanged( int value );
+protected Q_SLOTS:
+    void onValueChanged(int value);
 
-  protected:
+protected:
     QSpinBox* mGroupSizeEdit;
     QSpinBox* mMoveBitWidthEdit;
 };

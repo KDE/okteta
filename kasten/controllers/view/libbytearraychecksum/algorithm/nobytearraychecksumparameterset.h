@@ -26,14 +26,13 @@
 // lib
 #include "abstractbytearraychecksumparameterset.h"
 
-
 class NoByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
 {
-  public:
+public:
     NoByteArrayChecksumParameterSet();
     ~NoByteArrayChecksumParameterSet() override;
 
-  public: // AbstractByteArrayChecksumParameterSet API
+public: // AbstractByteArrayChecksumParameterSet API
     const char* id() const override;
 };
 

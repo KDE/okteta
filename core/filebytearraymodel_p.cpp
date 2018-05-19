@@ -25,17 +25,15 @@
 // C
 #include <cstdlib>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-FileByteArrayModelPrivate::FileByteArrayModelPrivate( int pageNumber, int pageSize )
- : mNoOfUsedPages( pageNumber ),
-   mNoOfFreePages( pageNumber ),
-   mPageSize( pageSize ),
-   mFirstPage( -1 ),
-   mLastPage( -1 ),
-   mSize( 0 )
+FileByteArrayModelPrivate::FileByteArrayModelPrivate(int pageNumber, int pageSize)
+    : mNoOfUsedPages(pageNumber)
+    , mNoOfFreePages(pageNumber)
+    , mPageSize(pageSize)
+    , mFirstPage(-1)
+    , mLastPage(-1)
+    , mSize(0)
 {
     mIsOpen = false;
 
@@ -43,63 +41,67 @@ FileByteArrayModelPrivate::FileByteArrayModelPrivate( int pageNumber, int pageSi
 //     open(filename);
 }
 
-
-Byte FileByteArrayModelPrivate::byte( Address offset ) const
+Byte FileByteArrayModelPrivate::byte(Address offset) const
 {
 //   std::cout << "reading datum " << offset << std::endl;
     int offsetInPage = offset - mOffsetOfActualPage;
     // there shouldn't be any need to check l
-    if( offsetInPage >= 0 && offsetInPage < (int)mPageSize )
+    if (offsetInPage >= 0 && offsetInPage < (int)mPageSize) {
         return mActualPage[offsetInPage];
+    }
 
     // load the page
     unsigned int pageIndex = offset / mPageSize;
-    ensurePageLoaded( pageIndex );
+    ensurePageLoaded(pageIndex);
 
-    return mActualPage[offset-mOffsetOfActualPage];
+    return mActualPage[offset - mOffsetOfActualPage];
 }
 
-
-bool FileByteArrayModelPrivate::open( const QString& fileName )
+bool FileByteArrayModelPrivate::open(const QString& fileName)
 {
     // clear old data
-    if( isOpen() && !close() ) // only occurs if close somehow fails.
+    if (isOpen() && !close()) { // only occurs if close somehow fails.
         return false;
+    }
 
-    mFile.setFileName( fileName );
-    if( !mFile.open(QIODevice::ReadOnly) )
+    mFile.setFileName(fileName);
+    if (!mFile.open(QIODevice::ReadOnly)) {
         return false;
+    }
 
     int fileSize = mFile.size();
     mSize = fileSize;
 
     // calculate necessary number of pages
-    int noOfPages = fileSize/mPageSize + 1;
+    int noOfPages = fileSize / mPageSize + 1;
 
     // initialize Page pointers
-    mData.resize( noOfPages );
-    for( KPageOfChar::iterator D=mData.begin(); D!=mData.end(); ++D )
+    mData.resize(noOfPages);
+    for (KPageOfChar::iterator D = mData.begin(); D != mData.end(); ++D) {
         *D = nullptr;
+    }
 
     mFirstPage = mLastPage = 0;
 
-    return ensurePageLoaded( 0 );
+    return ensurePageLoaded(0);
 }
-
 
 bool FileByteArrayModelPrivate::close()
 {
-    if( !isOpen() )
+    if (!isOpen()) {
         return false;
+    }
 
     mFile.close();
 
-    if( mFile.error() != QFile::NoError )
+    if (mFile.error() != QFile::NoError) {
         return false;
+    }
 
     // free pages
-    for( KPageOfChar::iterator D=mData.begin(); D!=mData.end(); ++D )
+    for (KPageOfChar::iterator D = mData.begin(); D != mData.end(); ++D) {
         delete [] *D;
+    }
 
     mFirstPage = mLastPage = -1;
     mNoOfFreePages = mNoOfUsedPages;
@@ -107,31 +109,30 @@ bool FileByteArrayModelPrivate::close()
     return true;
 }
 
-
-bool FileByteArrayModelPrivate::ensurePageLoaded( unsigned int pageIndex ) const
+bool FileByteArrayModelPrivate::ensurePageLoaded(unsigned int pageIndex) const
 {
-    if( !isOpen() )
+    if (!isOpen()) {
         return false;
+    }
     // page loaded?
-    if( mData[pageIndex] )
-    {
+    if (mData[pageIndex]) {
         mActualPage = mData[pageIndex];
         mOffsetOfActualPage = pageIndex * mPageSize;
         return true;
     }
 
     // no page available?
-    if( mNoOfFreePages < 1 )
-    {
+    if (mNoOfFreePages < 1) {
         // free the page which is the furthest away from the page we are loading
-        if( std::abs(mFirstPage-(long)pageIndex) > std::abs(mLastPage-(long)pageIndex) )
-            while( !freePage(mFirstPage++) ) {
+        if (std::abs(mFirstPage - (long)pageIndex) > std::abs(mLastPage - (long)pageIndex)) {
+            while (!freePage(mFirstPage++)) {
                 ;
             }
-        else
-            while( !freePage(mLastPage--) ) {
+        } else {
+            while (!freePage(mLastPage--)) {
                 ;
             }
+        }
     }
 
     // create Page
@@ -139,18 +140,20 @@ bool FileByteArrayModelPrivate::ensurePageLoaded( unsigned int pageIndex ) const
     --mNoOfFreePages;
 
     // jump to position and read the page's data in
-    bool success = mFile.seek( (unsigned long)(pageIndex*mPageSize) );
-    if( success )
-        success = mFile.read( mData[pageIndex], mPageSize ) > 0;
+    bool success = mFile.seek((unsigned long)(pageIndex * mPageSize));
+    if (success) {
+        success = mFile.read(mData[pageIndex], mPageSize) > 0;
+    }
 
-    if( success )
-    {
+    if (success) {
         // correct bounds
-        if( (int)pageIndex < mFirstPage )
+        if ((int)pageIndex < mFirstPage) {
             mFirstPage = pageIndex;
+        }
 
-        if( (int)pageIndex > mLastPage )
+        if ((int)pageIndex > mLastPage) {
             mLastPage = pageIndex;
+        }
 
         mActualPage = mData[pageIndex];
         mOffsetOfActualPage = pageIndex * mPageSize;
@@ -159,12 +162,12 @@ bool FileByteArrayModelPrivate::ensurePageLoaded( unsigned int pageIndex ) const
     return success;
 }
 
-
-bool FileByteArrayModelPrivate::freePage( unsigned int pageIndex ) const
+bool FileByteArrayModelPrivate::freePage(unsigned int pageIndex) const
 {
     // check range and if is loaded at all
-    if( (int)pageIndex >= mData.size() || !mData[pageIndex] )
+    if ((int)pageIndex >= mData.size() || !mData[pageIndex]) {
         return false;
+    }
 
     delete [] mData[pageIndex];
     mData[pageIndex] = nullptr;
@@ -172,11 +175,11 @@ bool FileByteArrayModelPrivate::freePage( unsigned int pageIndex ) const
     return true;
 }
 
-
 FileByteArrayModelPrivate::~FileByteArrayModelPrivate()
 {
-    if( mFile.isOpen() )
+    if (mFile.isOpen()) {
         close();
+    }
 }
 
 }

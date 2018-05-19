@@ -20,17 +20,19 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef ENUMSCRIPTCLASS_H
 #define ENUMSCRIPTCLASS_H
 
 #include "primitivescriptclass.h"
 
-class EnumScriptClass : public PrimitiveScriptClass {
+class EnumScriptClass : public PrimitiveScriptClass
+{
     Q_DISABLE_COPY(EnumScriptClass)
+
 public:
     EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~EnumScriptClass() override;
+
 protected:
     bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
     QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;

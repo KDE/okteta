@@ -28,11 +28,11 @@
 
 class NoByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 {
-  public:
+public:
     NoByteArrayFilterParameterSet();
     ~NoByteArrayFilterParameterSet() override;
 
-  public: // AbstractByteArrayFilterParameterSet API
+public: // AbstractByteArrayFilterParameterSet API
     const char* id() const override;
 };
 

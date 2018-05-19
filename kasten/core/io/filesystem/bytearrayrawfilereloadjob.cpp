@@ -32,40 +32,36 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayRawFileReloadJob::ByteArrayRawFileReloadJob( ByteArrayRawFileSynchronizer *synchronizer )
- : AbstractFileSystemSyncFromRemoteJob( synchronizer )
+ByteArrayRawFileReloadJob::ByteArrayRawFileReloadJob(ByteArrayRawFileSynchronizer* synchronizer)
+    : AbstractFileSystemSyncFromRemoteJob(synchronizer)
 {}
 
 void ByteArrayRawFileReloadJob::startReadFromFile()
 {
-    ByteArrayDocument *document = qobject_cast<ByteArrayDocument*>( synchronizer()->document() );
-    ByteArrayRawFileReloadThread* reloadThread = new ByteArrayRawFileReloadThread( this, /*document, */file() );
+    ByteArrayDocument* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
+    ByteArrayRawFileReloadThread* reloadThread = new ByteArrayRawFileReloadThread(this, /*document, */ file());
     reloadThread->start();
-    while( !reloadThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!reloadThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     bool success = reloadThread->success();
     // TODO: moved this here to avoid marshalling the change signals out of the thread. Good idea?
-    if( success )
-    {
-        Okteta::PieceTableByteArrayModel *byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>( document->content() );
-        byteArray->setData( reloadThread->data() );
+    if (success) {
+        Okteta::PieceTableByteArrayModel* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+        byteArray->setData(reloadThread->data());
 
 //         ExternalBookmarkStorage().readBookmarks( document, synchronizer()->url() );
-    }
-    else
-    {
-        setError( KJob::KilledJobError );
-        setErrorText( reloadThread->errorString() );
+    } else {
+        setError(KJob::KilledJobError);
+        setErrorText(reloadThread->errorString());
     }
 
     delete reloadThread;
 
-    completeRead( success );
+    completeRead(success);
 }
 
 ByteArrayRawFileReloadJob::~ByteArrayRawFileReloadJob() {}

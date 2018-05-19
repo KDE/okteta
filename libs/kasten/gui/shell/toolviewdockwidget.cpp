@@ -27,23 +27,21 @@
 // Kasten core
 #include <kasten/abstracttool.h>
 
+namespace Kasten {
 
-namespace Kasten
+ToolViewDockWidget::ToolViewDockWidget(AbstractToolView* toolView, QWidget* parent)
+    : QDockWidget(toolView->title(), parent)
+    , mToolView(toolView)
+    , mIsShown(false)
 {
+    setObjectName(toolView->tool()->objectName());
+    setWidget(toolView->widget());
 
-ToolViewDockWidget::ToolViewDockWidget( AbstractToolView* toolView, QWidget* parent )
-  : QDockWidget( toolView->title(), parent ),
-    mToolView( toolView ),
-    mIsShown( false )
-{
-    setObjectName( toolView->tool()->objectName() );
-    setWidget( toolView->widget() );
-
-    connect( this, &QDockWidget::visibilityChanged,
-             this, &ToolViewDockWidget::onVisibilityChanged );
+    connect(this, &QDockWidget::visibilityChanged,
+            this, &ToolViewDockWidget::onVisibilityChanged);
 }
 
-void ToolViewDockWidget::onVisibilityChanged( bool isVisible )
+void ToolViewDockWidget::onVisibilityChanged(bool isVisible)
 {
     mIsShown = isVisible;
 }

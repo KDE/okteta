@@ -28,26 +28,24 @@
 
 class QSpinBox;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class BytesPerLineDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit BytesPerLineDialog( QWidget* parent = nullptr );
+public:
+    explicit BytesPerLineDialog(QWidget* parent = nullptr);
 
     ~BytesPerLineDialog() override;
 
-  public:
-    void setBytesPerLine( int bytesPerLine );
+public:
+    void setBytesPerLine(int bytesPerLine);
 
-  public:
+public:
     int bytesPerLine() const;
 
-  protected:
+protected:
     QSpinBox* mBytesPerLineEdit;
 };
 

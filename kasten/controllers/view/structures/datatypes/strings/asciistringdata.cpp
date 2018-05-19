@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "asciistringdata.h"
 #include "stringdatainformation.h"
 #include "../topleveldatainformation.h"
@@ -31,8 +30,7 @@
 #include <KLocalizedString>
 #include <QVarLengthArray>
 
-
-AsciiStringData::AsciiStringData(StringDataInformation* parent): StringData(parent)
+AsciiStringData::AsciiStringData(StringDataInformation* parent) : StringData(parent)
 {
 }
 
@@ -43,69 +41,70 @@ AsciiStringData::~AsciiStringData()
 qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {
     const int oldSize = count();
-    if (mMode == CharCount || mMode == ByteCount) //same for ascii
-    {
+    if (mMode == CharCount || mMode == ByteCount) { // same for ascii
         mData.reserve(mLength.maxChars);
     }
     mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, oldSize, 0);
     mParent->topLevelDataInformation()->_childCountChanged(mParent, oldSize, 0);
-
 
     quint64 remaining = bitsRemaining;
     Okteta::Address addr = address;
     int count = 0;
     mEofReached = false;
     const int oldMax = mData.size();
-    if (((mMode & CharCount) && mLength.maxChars == 0) || ((mMode & ByteCount) && mLength.maxBytes == 0))
-        return 0; //nothing to read
+    if (((mMode & CharCount) && mLength.maxChars == 0) || ((mMode & ByteCount) && mLength.maxBytes == 0)) {
+        return 0; // nothing to read
 
+    }
     bool eofAtStart = false;
-    if (bitsRemaining < 8)
+    if (bitsRemaining < 8) {
         eofAtStart = true;
+    }
 
-    while (true)
-    {
-        if (remaining < 8)
-        {
+    while (true) {
+        if (remaining < 8) {
             mEofReached = true;
             break;
         }
         uchar val = input->byte(addr);
         bool terminate = false;
 
-        if (count < oldMax)
+        if (count < oldMax) {
             mData[count] = val;
-        else
+        } else {
             mData.append(val);
+        }
 
         remaining -= 8;
         addr++;
         count++;
 
-        //now check if we have to terminate
-        if (mMode & Sequence)
-        {
-            if ((quint32(val) & 0xff) == mTerminationCodePoint)
+        // now check if we have to terminate
+        if (mMode & Sequence) {
+            if ((quint32(val) & 0xff) == mTerminationCodePoint) {
                 terminate = true;
+            }
         }
-        if ((mMode & CharCount)  || (mMode & ByteCount))
-        {
-            if ((unsigned)count >= mLength.maxChars)
+        if ((mMode & CharCount)  || (mMode & ByteCount)) {
+            if ((unsigned)count >= mLength.maxChars) {
                 terminate = true;
+            }
         }
         if (mMode == None) {
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no termination mode set!!";
             Q_ASSERT(false);
         }
-        if (terminate)
+        if (terminate) {
             break;
+        }
     }
     mData.resize(count);
     mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, 0, count);
     mParent->topLevelDataInformation()->_childCountChanged(mParent, 0, count);
 
-    if (eofAtStart)
+    if (eofAtStart) {
         return -1;
+    }
     return (addr - address) * 8;
 }
 
@@ -127,23 +126,19 @@ QString AsciiStringData::completeString(bool skipInvalid) const
     QVarLengthArray<QChar> buf(max);
     for (int i = 0; i < max; ++i) {
         uchar val = mData.at(i);
-        if (val > ASCII_MAX)
-        {
+        if (val > ASCII_MAX) {
             if (skipInvalid) {
                 max--;
                 i--;
                 continue;
-            }
-            else
-            {
+            } else {
                 buf[i] = QChar::ReplacementCharacter;
             }
-        }
-        else
-        {
+        } else {
             buf[i] = QChar::fromLatin1(val);
         }
     }
+
     return QString(buf.constData(), max);
 }
 
@@ -151,10 +146,11 @@ QString AsciiStringData::stringValue(int row) const
 {
     Q_ASSERT(row >= 0 && row < mData.size());
     uchar val = mData.at(row);
-    if (val > ASCII_MAX)
+    if (val > ASCII_MAX) {
         return i18n("Non-ASCII char: 0x%1", val);
-    else
+    } else {
         return QChar::fromLatin1(val);
+    }
 }
 
 QString AsciiStringData::charType() const

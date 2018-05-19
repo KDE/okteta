@@ -26,27 +26,24 @@
 // lib
 #include <charcodec.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 //
 class EBCDIC1047CharCodec : public CharCodec
 {
-  protected:
+protected:
     EBCDIC1047CharCodec();
 
-  public: // CharCodec API
-    Character decode( Byte byte ) const override;
-    bool encode( Byte* byte, const QChar& _char ) const override;
-    bool canEncode( const QChar& _char ) const override;
+public: // CharCodec API
+    Character decode(Byte byte) const override;
+    bool encode(Byte* byte, const QChar& _char) const override;
+    bool canEncode(const QChar& _char) const override;
     const QString& name() const override;
 
-  public:
+public:
     static EBCDIC1047CharCodec* create();
     static const QString& codecName();
 };
-
 
 inline EBCDIC1047CharCodec::EBCDIC1047CharCodec() {}
 

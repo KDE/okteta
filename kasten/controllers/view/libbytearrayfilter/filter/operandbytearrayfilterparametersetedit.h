@@ -31,31 +31,30 @@ class ByteArrayComboBox;
 }
 class QCheckBox;
 
-
 class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const char Id[];
 
-  public:
-    explicit OperandByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
+public:
+    explicit OperandByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);
     ~OperandByteArrayFilterParameterSetEdit() override;
 
-  public: // AbstractByteArrayFilterParameterSetEdit API
-    void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) override;
-    void setCharCodec( const QString &charCodecName ) override;
-    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const override;
+public: // AbstractByteArrayFilterParameterSetEdit API
+    void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) override;
+    void setCharCodec(const QString& charCodecName) override;
+    void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
     bool isValid() const override;
     void rememberCurrentSettings() override;
 
-  protected Q_SLOTS:
-    void onInputChanged( const QByteArray &data );
+protected Q_SLOTS:
+    void onInputChanged(const QByteArray& data);
 
-  protected:
-    Okteta::ByteArrayComboBox *mOperandEdit;
-    QCheckBox *mAlignAtEndCheckBox;
+protected:
+    Okteta::ByteArrayComboBox* mOperandEdit;
+    QCheckBox* mAlignAtEndCheckBox;
 };
 
 #endif

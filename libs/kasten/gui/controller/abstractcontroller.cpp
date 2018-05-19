@@ -22,11 +22,9 @@
 
 #include "abstractcontroller.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-void AbstractController::setTargetModel( AbstractModel* model )
+void AbstractController::setTargetModel(AbstractModel* model)
 {
     Q_UNUSED(model)
 }

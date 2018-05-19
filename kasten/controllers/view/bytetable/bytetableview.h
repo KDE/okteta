@@ -31,40 +31,36 @@ class QSpinBox;
 class QTreeView;
 class QModelIndex;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteTableTool;
 
-
 class ByteTableView : public AbstractToolWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteTableView( ByteTableTool *tool, QWidget* parent = nullptr );
+public:
+    explicit ByteTableView(ByteTableTool* tool, QWidget* parent = nullptr);
     ~ByteTableView() override;
 
-  public:
+public:
     ByteTableTool* tool() const;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void onInsertClicked();
-    void onDoubleClicked( const QModelIndex &index );
+    void onDoubleClicked(const QModelIndex& index);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void setFixedFontByGlobalSettings();
     void resizeColumnsWidth();
 
-  private:
-    ByteTableTool *mTool;
+private:
+    ByteTableTool* mTool;
 
     QSpinBox* mInsertCountEdit;
-    QTreeView *mByteTableView;
-    QPushButton *mInsertButton;
+    QTreeView* mByteTableView;
+    QPushButton* mInsertButton;
 };
-
 
 inline ByteTableTool* ByteTableView::tool() const { return mTool; }
 

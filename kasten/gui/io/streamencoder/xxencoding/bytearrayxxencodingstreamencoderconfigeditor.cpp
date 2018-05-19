@@ -31,41 +31,39 @@
 #include <QLabel>
 #include <QLineEdit>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayXxencodingStreamEncoderConfigEditor::ByteArrayXxencodingStreamEncoderConfigEditor( ByteArrayXxencodingStreamEncoder* encoder, QWidget* parent )
- : AbstractModelStreamEncoderConfigEditor( parent ),
-   mEncoder( encoder )
+ByteArrayXxencodingStreamEncoderConfigEditor::ByteArrayXxencodingStreamEncoderConfigEditor(ByteArrayXxencodingStreamEncoder* encoder, QWidget* parent)
+    : AbstractModelStreamEncoderConfigEditor(parent)
+    , mEncoder(encoder)
 {
     mSettings = mEncoder->settings();
 
-    QFormLayout* pageLayout = new QFormLayout( this );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout(this);
+    pageLayout->setMargin(0);
 
     // internal file name
     const QString fileNameLabel =
-        i18nc( "@label:textbox file name internally given to the encoded data",
-               "Internal name of file:" );
+        i18nc("@label:textbox file name internally given to the encoded data",
+              "Internal name of file:");
 
-    mFileNameEdit = new QLineEdit( this );
-    mFileNameEdit->setClearButtonEnabled( true );
-    mFileNameEdit->setText( mSettings.fileName );
-    connect( mFileNameEdit, &QLineEdit::textChanged, this, &ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( fileNameLabel, mFileNameEdit );
+    mFileNameEdit = new QLineEdit(this);
+    mFileNameEdit->setClearButtonEnabled(true);
+    mFileNameEdit->setText(mSettings.fileName);
+    connect(mFileNameEdit, &QLineEdit::textChanged, this, &ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(fileNameLabel, mFileNameEdit);
 }
 
 AbstractSelectionView* ByteArrayXxencodingStreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArrayTextStreamEncoderPreview( mEncoder );
+    return new ByteArrayTextStreamEncoderPreview(mEncoder);
 }
 
 void ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged()
 {
     mSettings.fileName = mFileNameEdit->text();
 
-    mEncoder->setSettings( mSettings );
+    mEncoder->setSettings(mSettings);
 }
 
 ByteArrayXxencodingStreamEncoderConfigEditor::~ByteArrayXxencodingStreamEncoderConfigEditor()

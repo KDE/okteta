@@ -28,12 +28,10 @@
 // Qt
 #include <QString>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory( const QByteArray& header )
- : mHeader( header ) {}
+TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory(const QByteArray& header)
+    : mHeader(header) {}
 
 // could be set to base class as value, is only one object per factory at runtime
 // and settable in desktop file
@@ -44,7 +42,7 @@ QString TestDocumentFileSynchronizerFactory::supportedRemoteType() const { retur
 // or, if there is only one place which calls this, move there
 AbstractModelSynchronizer* TestDocumentFileSynchronizerFactory::createSynchronizer() const
 {
-    return new TestDocumentFileSynchronizer( mHeader );
+    return new TestDocumentFileSynchronizer(mHeader);
 }
 
 TestDocumentFileSynchronizerFactory::~TestDocumentFileSynchronizerFactory() {}

@@ -30,66 +30,63 @@
 
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class MultiViewAreasPrivate;
 
-
-class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews,
-                                        public If::ToolInlineViewable,
-                                        public If::ViewAreaSplitable
+class KASTENGUI_EXPORT MultiViewAreas : public AbstractGroupedViews
+                                      , public If::ToolInlineViewable
+                                      , public If::ViewAreaSplitable
 {
-  Q_OBJECT
-  Q_INTERFACES(
-    Kasten::If::ToolInlineViewable
-    Kasten::If::ViewAreaSplitable
-  )
+    Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::ToolInlineViewable
+        Kasten::If::ViewAreaSplitable
+    )
 
-  public:
+public:
     explicit MultiViewAreas();
 
     ~MultiViewAreas() override;
 
-  public: // AbstractViewArea API
+public: // AbstractViewArea API
     void setFocus() override;
     QWidget* widget() const override;
     bool hasFocus() const override;
 
-  public: // AbstractGroupedViews API
-    void addViews( const QList<AbstractView*>& views ) override;
-    void removeViews( const QList<AbstractView*>& views ) override;
-    void setViewFocus( AbstractView* view ) override;
+public: // AbstractGroupedViews API
+    void addViews(const QList<AbstractView*>& views) override;
+    void removeViews(const QList<AbstractView*>& views) override;
+    void setViewFocus(AbstractView* view) override;
 
     QList<AbstractView*> viewList() const override;
     int viewCount() const override;
     AbstractView* viewFocus() const override;
 
-  public: // If::ToolInlineViewable API
-    void setCurrentToolInlineView( AbstractToolInlineView* view ) override;
+public: // If::ToolInlineViewable API
+    void setCurrentToolInlineView(AbstractToolInlineView* view) override;
 
-  public: // If::ViewAreaSplitable API
-    AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation ) override;
-    void closeViewArea( AbstractViewArea* viewArea ) override;
-    void setViewAreaFocus( AbstractViewArea* viewArea ) override;
+public: // If::ViewAreaSplitable API
+    AbstractViewArea* splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation) override;
+    void closeViewArea(AbstractViewArea* viewArea) override;
+    void setViewAreaFocus(AbstractViewArea* viewArea) override;
     AbstractViewArea* viewAreaFocus() const override;
     int viewAreasCount() const override;
 
-  Q_SIGNALS: // If::ViewAreaSplitable API
-    void viewAreasAdded( const QList<Kasten::AbstractViewArea*>& viewAreas ) override;
-    void viewAreasRemoved( const QList<Kasten::AbstractViewArea*>& viewAreas ) override;
-    void viewAreaFocusChanged( Kasten::AbstractViewArea* viewArea ) override;
+Q_SIGNALS: // If::ViewAreaSplitable API
+    void viewAreasAdded(const QList<Kasten::AbstractViewArea*>& viewAreas) override;
+    void viewAreasRemoved(const QList<Kasten::AbstractViewArea*>& viewAreas) override;
+    void viewAreaFocusChanged(Kasten::AbstractViewArea* viewArea) override;
 
-  Q_SIGNALS:
-    void dataOffered( const QMimeData* mimeData, bool& accepted );
-    void dataDropped( const QMimeData* mimeData );
+Q_SIGNALS:
+    void dataOffered(const QMimeData* mimeData, bool& accepted);
+    void dataDropped(const QMimeData* mimeData);
 
-  protected:
-    int indexOf( AbstractView* view ) const;
+protected:
+    int indexOf(AbstractView* view) const;
 
-  protected:
-    Q_DECLARE_PRIVATE( MultiViewAreas )
+protected:
+    Q_DECLARE_PRIVATE(MultiViewAreas)
 };
 
 }

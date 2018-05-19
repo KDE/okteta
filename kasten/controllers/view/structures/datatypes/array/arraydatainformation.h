@@ -37,14 +37,16 @@ class ArrayDataInformation : public DataInformationWithDummyChildren
 {
     friend class PrimitiveArrayTest;
     DATAINFORMATION_CLONE_DECL(ArrayDataInformation, DataInformationWithDummyChildren);
+
 public:
     /** creates a new array with initial length @p length.
      *  takes ownership over @p childType
      *  length should be > 0
      */
     ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
-            DataInformation* parent = nullptr, const QScriptValue& lengthFuntion = QScriptValue());
+                         DataInformation* parent = nullptr, const QScriptValue& lengthFuntion = QScriptValue());
     ~ArrayDataInformation() override;
+
 public:
     uint length() const;
     QWidget* createEditWidget(QWidget* parent) const override;
@@ -87,9 +89,11 @@ public:
     void setLengthFunction(const QScriptValue& newFunc);
     QScriptValue childToScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) const override;
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
+
 private:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
     QString typeNameImpl() const override;
+
 private:
     QScopedPointer<AbstractArrayData> mData;
     static const uint MAX_LEN = 10000;

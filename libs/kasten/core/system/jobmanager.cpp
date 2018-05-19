@@ -28,25 +28,25 @@
 // Qt
 #include <QGuiApplication>
 
+namespace Kasten {
 
-namespace Kasten
+bool JobManager::executeJob(KJob* job)
 {
-
-bool JobManager::executeJob( KJob* job )
-{
-    if( ! job )
+    if (!job) {
         return false;
+    }
 
-    QGuiApplication::setOverrideCursor( Qt::WaitCursor );
+    QGuiApplication::setOverrideCursor(Qt::WaitCursor);
 
     job->exec();
-    const bool success = ( job->error() == KJob::NoError );
+    const bool success = (job->error() == KJob::NoError);
 
     QGuiApplication::restoreOverrideCursor();
 
-    if( !success )
-        KMessageBox::error( nullptr, job->errorText() ); // TODO: feed into notification system
+    if (!success) {
+        KMessageBox::error(nullptr, job->errorText());   // TODO: feed into notification system
 
+    }
     return success;
 }
 

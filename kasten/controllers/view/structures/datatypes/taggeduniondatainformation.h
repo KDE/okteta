@@ -31,6 +31,7 @@
 class TaggedUnionDataInformation : public DataInformationWithChildren
 {
     DATAINFORMATION_CLONE_DECL(TaggedUnionDataInformation, DataInformationWithChildren);
+
 public:
     /** If selector is a function and it evaluates to true these fields are chosen.
      *  If selector is a number then there must be exactly one field before that is then compared
@@ -39,7 +40,10 @@ public:
     struct FieldInfo
     {
         inline explicit FieldInfo(const QString& n, const QScriptValue& s, const QVector<DataInformation*>& f)
-                : name(n), selectIf(s), fields(f) {}
+            : name(n)
+            , selectIf(s)
+            , fields(f)
+        {}
         FieldInfo() {};
         /** The name this tagged union gets when this is selected */
         QString name;
@@ -50,7 +54,7 @@ public:
     explicit TaggedUnionDataInformation(const QString& name, DataInformation* parent = nullptr);
     ~TaggedUnionDataInformation() override;
 
-    qint64 readData(Okteta::AbstractByteArrayModel *input,
+    qint64 readData(Okteta::AbstractByteArrayModel* input,
                     Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset) override;
     bool isTaggedUnion() const override;
 
@@ -65,16 +69,18 @@ public:
     unsigned int childCount() const override;
     void appendDefaultField(DataInformation* field, bool emitSignal);
     void setAlternatives(const QVector<FieldInfo>& alternatives, bool emitSignal);
+
 private:
     QString typeNameImpl() const override;
+
 private:
     const QVector<DataInformation*>& currentChildren() const;
     int determineSelection(TopLevelDataInformation* top);
 
 private:
     QVector<FieldInfo> mAlternatives;
-    QVector<DataInformation*> mDefaultFields; //always sorted
-    //TODO
+    QVector<DataInformation*> mDefaultFields; // always sorted
+    // TODO
 //    /** If mUnion is non-null the children are displayed inside a union and the correct
 //     * child is highlighted. Otherwise only the correct fields will be appended after mChildren
 //     */

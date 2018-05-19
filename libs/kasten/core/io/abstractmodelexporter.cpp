@@ -23,30 +23,28 @@
 #include "abstractmodelexporter.h"
 #include "abstractmodelexporter_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModelExporter::AbstractModelExporter( AbstractModelExporterPrivate* d )
-  : d_ptr( d )
+AbstractModelExporter::AbstractModelExporter(AbstractModelExporterPrivate* d)
+    : d_ptr(d)
 {
 }
 
-AbstractModelExporter::AbstractModelExporter( const QString& remoteTypeName, const QString& remoteMimeType )
-  : d_ptr( new AbstractModelExporterPrivate(this,remoteTypeName,remoteMimeType) )
+AbstractModelExporter::AbstractModelExporter(const QString& remoteTypeName, const QString& remoteMimeType)
+    : d_ptr(new AbstractModelExporterPrivate(this, remoteTypeName, remoteMimeType))
 {
 }
 
 QString AbstractModelExporter::remoteTypeName() const
 {
-    Q_D( const AbstractModelExporter );
+    Q_D(const AbstractModelExporter);
 
     return d->remoteTypeName();
 }
 
 QString AbstractModelExporter::remoteMimeType() const
 {
-    Q_D( const AbstractModelExporter );
+    Q_D(const AbstractModelExporter);
 
     return d->remoteMimeType();
 }

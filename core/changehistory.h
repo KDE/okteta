@@ -31,33 +31,31 @@
 
 class QByteArray;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 // TODO: split readonly part into own interface
 class ChangeHistory
 {
-  public:
+public:
     virtual ~ChangeHistory();
 
-  public: // get
-    virtual QList<ByteArrayChange> changes( int firstVersionIndex, int lastVersionIndex ) const = 0;
+public: // get
+    virtual QList<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const = 0;
     virtual QByteArray initialData() const = 0;
 
-  public: // set
-    virtual void doChanges( const QList<Okteta::ByteArrayChange>& changes,
-                                  int oldVersionIndex, int newVersionIndex ) = 0;
+public: // set
+    virtual void doChanges(const QList<Okteta::ByteArrayChange>& changes,
+                           int oldVersionIndex, int newVersionIndex) = 0;
 
-  public: // signal
-    virtual void changesDone( const QList<Okteta::ByteArrayChange>& changes,
-                                    int oldVersionIndex, int newVersionIndex ) = 0;
+public: // signal
+    virtual void changesDone(const QList<Okteta::ByteArrayChange>& changes,
+                             int oldVersionIndex, int newVersionIndex) = 0;
 };
 
 inline ChangeHistory::~ChangeHistory() {}
 
 }
 
-Q_DECLARE_INTERFACE( Okteta::ChangeHistory, "org.kde.khecore.changehistory/1.0" )
+Q_DECLARE_INTERFACE(Okteta::ChangeHistory, "org.kde.khecore.changehistory/1.0")
 
 #endif

@@ -28,40 +28,37 @@
 // Okteta gui
 #include <okteta/coordrange.h>
 
-
 namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 // TODO: offset should be set in renderFirstLine, calculated using coordRange,
 // in constructor instead take startOffset
 class AbstractByteArrayColumnTextRenderer : public AbstractColumnTextRenderer
 {
-  private:
+private:
     static const int DefaultTRByteSpacingWidth = 1;
     static const int TRGroupSpacingWidth = 2;
 
-  public:
-    AbstractByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
-        const Okteta::CoordRange& coordRange,
-        int noOfBytesPerLine );
+public:
+    AbstractByteArrayColumnTextRenderer(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+                                        const Okteta::CoordRange& coordRange,
+                                        int noOfBytesPerLine);
     ~AbstractByteArrayColumnTextRenderer() override;
 
-  public: // AbstractColumnTextRenderer API
-    void renderFirstLine( QTextStream* stream, int lineIndex ) const override;
-    void renderNextLine( QTextStream* stream, bool isSubline ) const override;
+public: // AbstractColumnTextRenderer API
+    void renderFirstLine(QTextStream* stream, int lineIndex) const override;
+    void renderNextLine(QTextStream* stream, bool isSubline) const override;
 
-  protected: // API to be reimplemented by subclasses
-    virtual void renderLine( QTextStream* stream, bool isSubline ) const = 0;
+protected: // API to be reimplemented by subclasses
+    virtual void renderLine(QTextStream* stream, bool isSubline) const = 0;
 
-  protected:
-    void setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes );
+protected:
+    void setWidths(int byteWidth, int byteSpacingWidth, int noOfGroupedBytes);
 
-  protected:
+protected:
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     const Okteta::CoordRange mCoordRange;

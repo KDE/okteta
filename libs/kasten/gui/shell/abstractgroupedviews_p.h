@@ -27,21 +27,18 @@
 #include "abstractgroupedviews.h"
 #include "abstractviewarea_p.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractGroupedViewsPrivate : public AbstractViewAreaPrivate
 {
-  public:
-    explicit AbstractGroupedViewsPrivate( AbstractGroupedViews* parent );
+public:
+    explicit AbstractGroupedViewsPrivate(AbstractGroupedViews* parent);
 
     ~AbstractGroupedViewsPrivate() override;
 };
 
-
-inline AbstractGroupedViewsPrivate::AbstractGroupedViewsPrivate( AbstractGroupedViews* parent )
-  : AbstractViewAreaPrivate( parent )
+inline AbstractGroupedViewsPrivate::AbstractGroupedViewsPrivate(AbstractGroupedViews* parent)
+    : AbstractViewAreaPrivate(parent)
 {
 }
 

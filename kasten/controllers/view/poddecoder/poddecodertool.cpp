@@ -50,9 +50,7 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 enum PODTypes
 {
@@ -75,18 +73,17 @@ enum PODTypes
     PODTypeCount
 };
 
-
 PODDecoderTool::PODDecoderTool()
-  : mByteArrayView( nullptr ),
-    mByteArrayModel( nullptr ),
-    mCursorIndex( 0 ),
-    mReadOnly( true ),
-    mIsPodMarked( false ),
-    mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
-    mDifferentSizeDialog( nullptr ),
-    mUnsignedAsHex( true )
+    : mByteArrayView(nullptr)
+    , mByteArrayModel(nullptr)
+    , mCursorIndex(0)
+    , mReadOnly(true)
+    , mIsPodMarked(false)
+    , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
+    , mDifferentSizeDialog(nullptr)
+    , mUnsignedAsHex(true)
 {
-    setObjectName( QStringLiteral( "PODDecoder" ) );
+    setObjectName(QStringLiteral("PODDecoder"));
 
     setupDecoder();
 }
@@ -95,48 +92,49 @@ QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding 
 bool PODDecoderTool::isReadOnly() const { return mReadOnly; }
 bool PODDecoderTool::isApplyable() const { return (mByteArrayModel != nullptr); }
 
-void PODDecoderTool::setTargetModel( AbstractModel* model )
+void PODDecoderTool::setTargetModel(AbstractModel* model)
 {
     const bool oldIsApplyable = isApplyable();
 
-    if( mByteArrayView )
-    {
-        mByteArrayView->disconnect( this );
-        if( mIsPodMarked )
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+        if (mIsPodMarked) {
             unmarkPOD();
+        }
     }
-    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
+    if (mByteArrayModel) {
+        mByteArrayModel->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
-    ByteArrayDocument *document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+    ByteArrayDocument* document =
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
-    if( mByteArrayModel && mByteArrayView )
-    {
+    if (mByteArrayModel && mByteArrayView) {
         mCursorIndex = mByteArrayView->cursorPosition();
-        connect( mByteArrayView, &ByteArrayView::cursorPositionChanged,
-                 this, &PODDecoderTool::onCursorPositionChange );
-        connect( mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
-                 this, &PODDecoderTool::onContentsChange );
-        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
-                 this, &PODDecoderTool::onCharCodecChange );
-        connect( mByteArrayView, &ByteArrayView::readOnlyChanged,
-                 this, &PODDecoderTool::onReadOnlyChanged );
-        onCharCodecChange( mByteArrayView->charCodingName() );
+        connect(mByteArrayView, &ByteArrayView::cursorPositionChanged,
+                this, &PODDecoderTool::onCursorPositionChange);
+        connect(mByteArrayModel, &Okteta::AbstractByteArrayModel::contentsChanged,
+                this, &PODDecoderTool::onContentsChange);
+        connect(mByteArrayView,  &ByteArrayView::charCodecChanged,
+                this, &PODDecoderTool::onCharCodecChange);
+        connect(mByteArrayView, &ByteArrayView::readOnlyChanged,
+                this, &PODDecoderTool::onReadOnlyChanged);
+        onCharCodecChange(mByteArrayView->charCodingName());
     }
 
     updateData();
     onReadOnlyChanged();
     const bool newIsApplyable = isApplyable();
-    if( oldIsApplyable != newIsApplyable )
-        emit isApplyableChanged( newIsApplyable );
+    if (oldIsApplyable != newIsApplyable) {
+        emit isApplyableChanged(newIsApplyable);
+    }
 }
-
 
 void PODDecoderTool::setupDecoder()
 {
-    mTypeCodecs.resize( PODTypeCount );
+    mTypeCodecs.resize(PODTypeCount);
     mTypeCodecs[BinaryId] =        new Okteta::Binary8Codec();
     mTypeCodecs[OctalId] =         new Okteta::Octal8Codec();
     mTypeCodecs[HexadecimalId] =   new Okteta::Hexadecimal8Codec();
@@ -150,53 +148,54 @@ void PODDecoderTool::setupDecoder()
     mTypeCodecs[Unsigned64BitId] = new Okteta::UInt64Codec();
     mTypeCodecs[Float32BitId] =    new Okteta::Float32Codec();
     mTypeCodecs[Float64BitId] =    new Okteta::Float64Codec();
-    mTypeCodecs[Char8BitId] =      new Okteta::Char8Codec( mCharCodec );
+    mTypeCodecs[Char8BitId] =      new Okteta::Char8Codec(mCharCodec);
     mTypeCodecs[UTF8Id] =          new Okteta::Utf8Codec();
 
 #if 0
     mDecoderNameList[UTF16Id] =
-        i18nc("@label:textbox","UTF-16:");
+        i18nc("@label:textbox", "UTF-16:");
 #endif
 
-    mDecodedValueList.resize( PODTypeCount );
-    mDecodedValueByteCountList.resize( PODTypeCount );
+    mDecodedValueList.resize(PODTypeCount);
+    mDecodedValueByteCountList.resize(PODTypeCount);
 }
 
-void PODDecoderTool::setDifferentSizeDialog( AbstractDifferentSizeDialog* differentSizeDialog )
+void PODDecoderTool::setDifferentSizeDialog(AbstractDifferentSizeDialog* differentSizeDialog)
 {
     mDifferentSizeDialog = differentSizeDialog;
 }
 
-void PODDecoderTool::setUnsignedAsHex( bool unsignedAsHex )
+void PODDecoderTool::setUnsignedAsHex(bool unsignedAsHex)
 {
-    if( mUnsignedAsHex == unsignedAsHex )
+    if (mUnsignedAsHex == unsignedAsHex) {
         return;
+    }
 
     mUnsignedAsHex = unsignedAsHex;
 
     updateData();
 }
 
-void PODDecoderTool::setByteOrder( int byteOrder )
+void PODDecoderTool::setByteOrder(int byteOrder)
 {
     // TODO: test on no change is done in PODData, not this level
-    mPODData.setByteOrder( (QSysInfo::Endian)byteOrder );
+    mPODData.setByteOrder((QSysInfo::Endian)byteOrder);
     updateData();
 }
 
-void PODDecoderTool::onCharCodecChange( const QString& codecName )
+void PODDecoderTool::onCharCodecChange(const QString& codecName)
 {
-    if( codecName == mCharCodec->name() )
+    if (codecName == mCharCodec->name()) {
         return;
+    }
 
     delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec( codecName );
-    static_cast<Okteta::Char8Codec*>( mTypeCodecs[Char8BitId] )->setCharCodec( mCharCodec );
+    mCharCodec = Okteta::CharCodec::createCodec(codecName);
+    static_cast<Okteta::Char8Codec*>(mTypeCodecs[Char8BitId])->setCharCodec(mCharCodec);
     updateData();
 }
 
-
-void PODDecoderTool::onCursorPositionChange( Okteta::Address pos )
+void PODDecoderTool::onCursorPositionChange(Okteta::Address pos)
 {
     mCursorIndex = pos;
     updateData();
@@ -208,47 +207,43 @@ void PODDecoderTool::onContentsChange()
     updateData();
 }
 
-
 int PODDecoderTool::podCount() const { return mTypeCodecs.count(); }
 
-
-QString PODDecoderTool::nameOfPOD( int podId ) const
+QString PODDecoderTool::nameOfPOD(int podId) const
 {
     return mTypeCodecs[podId]->name();
 }
 
-
-QVariant PODDecoderTool::value( int podId ) const
+QVariant PODDecoderTool::value(int podId) const
 {
     // TODO: add caching here
     return mDecodedValueList[podId];
 }
 
-
-void PODDecoderTool::setData( const QVariant& data, int podId )
+void PODDecoderTool::setData(const QVariant& data, int podId)
 {
     Okteta::AbstractTypeCodec* typeCodec = mTypeCodecs[podId];
 
     // QVariant::operator=() only compares values' addresses for custom types,
     // so the comparison for values needs to be done by someone with knowledge about the type.
-    const bool isUnchangedValue = typeCodec->areEqual( data, mDecodedValueList[podId] );
+    const bool isUnchangedValue = typeCodec->areEqual(data, mDecodedValueList[podId]);
 
-    if( isUnchangedValue )
+    if (isUnchangedValue) {
         return;
+    }
 
-    QByteArray bytes = typeCodec->valueToBytes( data );
+    QByteArray bytes = typeCodec->valueToBytes(data);
 
     const int bytesSize = bytes.size();
-    if( bytesSize == 0 )
+    if (bytesSize == 0) {
         return;
+    }
 
     // need to swap the bytes
-    if( mPODData.byteOrder() != QSysInfo::ByteOrder )
-    {
-        const int firstHalfBytesCount = bytesSize/2;
+    if (mPODData.byteOrder() != QSysInfo::ByteOrder) {
+        const int firstHalfBytesCount = bytesSize / 2;
         int j = bytesSize - 1;
-        for( int i=0; i<firstHalfBytesCount; ++i,--j )
-        {
+        for (int i = 0; i < firstHalfBytesCount; ++i, --j) {
             const char helper = bytes[i];
             bytes[i] = bytes[j];
             bytes[j] = helper;
@@ -257,56 +252,60 @@ void PODDecoderTool::setData( const QVariant& data, int podId )
 
     const int oldValueSize = mDecodedValueByteCountList[podId];
     int removedBytesSize = bytesSize;
-    if( bytesSize != oldValueSize )
-    {
+    if (bytesSize != oldValueSize) {
 //         const int sizeLeft = mByteArrayModel->size() - mCursorIndex;
         const Answer answer = Cancel; // TODO: non-persistent editor closes on new dialog -> crash after dialog
 //             mDifferentSizeDialog ? mDifferentSizeDialog->query( bytesSize, oldValueSize, sizeLeft ) : Cancel;
-        if( answer == Cancel )
+        if (answer == Cancel) {
             return;
+        }
 
-        if( answer == AdaptSize )
+        if (answer == AdaptSize) {
             removedBytesSize = oldValueSize;
+        }
     }
 
     Okteta::ChangesDescribable* changesDescribable =
-        qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
+        qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
-    if( changesDescribable )
-        changesDescribable->openGroupedChange( i18nc("Edited as %datatype","Edited as %1", typeCodec->name()) );
-    mByteArrayModel->replace( Okteta::AddressRange::fromWidth(mCursorIndex,removedBytesSize), bytes );
-    if( changesDescribable )
+    if (changesDescribable) {
+        changesDescribable->openGroupedChange(i18nc("Edited as %datatype", "Edited as %1", typeCodec->name()));
+    }
+    mByteArrayModel->replace(Okteta::AddressRange::fromWidth(mCursorIndex, removedBytesSize), bytes);
+    if (changesDescribable) {
         changesDescribable->closeGroupedChange();
+    }
 }
 
 void PODDecoderTool::updateData()
 {
     int dataSize;
-    if( mByteArrayModel )
-    {
+    if (mByteArrayModel) {
         dataSize = mByteArrayModel->size() - mCursorIndex;
-        if( dataSize > mPODData.Size )
+        if (dataSize > mPODData.Size) {
             dataSize = mPODData.Size;
-        else if( dataSize < 0 )
+        } else if (dataSize < 0) {
             dataSize = 0;
-    }
-    else
+        }
+    } else {
         dataSize = 0;
+    }
 
-    const bool hasDataSet = ( dataSize > 0 );
-    if( hasDataSet )
-        mByteArrayModel->copyTo( mPODData.rawData(), mCursorIndex, mPODData.Size );
+    const bool hasDataSet = (dataSize > 0);
+    if (hasDataSet) {
+        mByteArrayModel->copyTo(mPODData.rawData(), mCursorIndex, mPODData.Size);
+    }
 
-    const bool hasChanged = mPODData.updateRawData( dataSize );
+    const bool hasChanged = mPODData.updateRawData(dataSize);
 
-    if( ! hasChanged )
+    if (!hasChanged) {
         return;
+    }
 
     // TODO: only calculate on demand + cache
-    for( int podId=0; podId<PODTypeCount; ++podId )
-    {
+    for (int podId = 0; podId < PODTypeCount; ++podId) {
         int byteCount = 0;
-        mDecodedValueList[podId] = mTypeCodecs[podId]->value( mPODData, &byteCount );
+        mDecodedValueList[podId] = mTypeCodecs[podId]->value(mPODData, &byteCount);
         mDecodedValueByteCountList[podId] = byteCount;
     }
 
@@ -314,37 +313,35 @@ void PODDecoderTool::updateData()
     emit dataChanged();
 }
 
-
-void PODDecoderTool::markPOD( int podId )
+void PODDecoderTool::markPOD(int podId)
 {
     const int length = mDecodedValueByteCountList[podId];
-    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth( mCursorIndex, length );
-    mByteArrayView->setMarking( markingRange, true );
+    const Okteta::AddressRange markingRange = Okteta::AddressRange::fromWidth(mCursorIndex, length);
+    mByteArrayView->setMarking(markingRange, true);
     mIsPodMarked = true;
 }
 
 void PODDecoderTool::unmarkPOD()
 {
 // TODO: marked region is property of document, not view?
-    mByteArrayView->setMarking( Okteta::AddressRange() );
+    mByteArrayView->setMarking(Okteta::AddressRange());
     mIsPodMarked = false;
 }
 
 void PODDecoderTool::onReadOnlyChanged()
 {
-    const bool newReadOnly = ( (! mByteArrayModel) || (! mByteArrayView)
-                               || mByteArrayView->isReadOnly() );
-    if( newReadOnly != mReadOnly )
-    {
+    const bool newReadOnly = ((!mByteArrayModel) || (!mByteArrayView)
+                              || mByteArrayView->isReadOnly());
+    if (newReadOnly != mReadOnly) {
         mReadOnly = newReadOnly;
-        emit readOnlyChanged( newReadOnly );
+        emit readOnlyChanged(newReadOnly);
     }
 }
 
 PODDecoderTool::~PODDecoderTool()
 {
     delete mCharCodec;
-    qDeleteAll( mTypeCodecs );
+    qDeleteAll(mTypeCodecs);
 }
 
 }

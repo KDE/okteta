@@ -29,9 +29,7 @@
 // Qt
 #include <QTextStream>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const char base32ClassicEncodeMap[32] =
 {
@@ -63,11 +61,11 @@ static const char* const base32PaddingData[4] =
     "="
 };
 
-static inline const char* base32Padding( ByteArrayBase32StreamEncoder::InputByteIndex index )
+static inline const char* base32Padding(ByteArrayBase32StreamEncoder::InputByteIndex index)
 {
     return base32PaddingData[static_cast<int>(index) - 1];
 }
-static inline const char* noPadding( ByteArrayBase32StreamEncoder::InputByteIndex index )
+static inline const char* noPadding(ByteArrayBase32StreamEncoder::InputByteIndex index)
 {
     Q_UNUSED(index);
 
@@ -77,105 +75,103 @@ static inline const char* noPadding( ByteArrayBase32StreamEncoder::InputByteInde
 struct Base32EncodingData
 {
     const char* const encodeMap;
-    const char* (*padding)( ByteArrayBase32StreamEncoder::InputByteIndex );
+    const char* (* padding)(ByteArrayBase32StreamEncoder::InputByteIndex);
 };
 
 static const Base32EncodingData
-base32EncodingData[3] =
+    base32EncodingData[3] =
 {
     {base32ClassicEncodeMap, &base32Padding},
     {base32HexEncodeMap, &base32Padding},
     {base32ZHexEncodeMap, &noPadding}
 };
 
-
 Base32StreamEncoderSettings::Base32StreamEncoderSettings()
- : algorithmId(AlgorithmId::Classic )
+    : algorithmId(AlgorithmId::Classic)
 {}
 
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Base32"), QStringLiteral("text/x-base32") )
+    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Base32"), QStringLiteral("text/x-base32"))
 {}
 
-
-bool ByteArrayBase32StreamEncoder::encodeDataToStream( QIODevice* device,
-                                                       const ByteArrayView* byteArrayView,
-                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                       const Okteta::AddressRange& range )
+bool ByteArrayBase32StreamEncoder::encodeDataToStream(QIODevice* device,
+                                                      const ByteArrayView* byteArrayView,
+                                                      const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                      const Okteta::AddressRange& range)
 {
-    Q_UNUSED( byteArrayView );
+    Q_UNUSED(byteArrayView);
 
     bool success = true;
 
     // encode
-    QTextStream textStream( device );
+    QTextStream textStream(device);
 
     // prepare
     const auto& algorithmEncodingData = base32EncodingData[static_cast<int>(mSettings.algorithmId)];
     const char* const base32EncodeMap = algorithmEncodingData.encodeMap;
-    const char* (*base32Padding)( InputByteIndex ) = algorithmEncodingData.padding;
+    const char* (* base32Padding)(InputByteIndex) = algorithmEncodingData.padding;
 
     InputByteIndex inputByteIndex = InputByteIndex::First;
     int outputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
-    for( Okteta::Address i=range.start(); i<=range.end(); ++i )
-    {
-        const Okteta::Byte byte = byteArrayModel->byte( i );
+    for (Okteta::Address i = range.start(); i <= range.end(); ++i) {
+        const Okteta::Byte byte = byteArrayModel->byte(i);
 
-        switch( inputByteIndex )
+        switch (inputByteIndex)
         {
         case InputByteIndex::First:
             // bits 7..3
-            textStream << base32EncodeMap[( byte >> 3 )];
+            textStream << base32EncodeMap[(byte >> 3)];
             // bits 2..0 -> 4..2 for next
             bitsFromLastByte = (byte & 0x7) << 2;
             inputByteIndex = InputByteIndex::Second;
             break;
         case InputByteIndex::Second:
             // from last and bits 7..6 as 1..0 from this
-            textStream << base32EncodeMap[( bitsFromLastByte | byte >> 6 )];
+            textStream << base32EncodeMap[(bitsFromLastByte | byte >> 6)];
             // bits 5..1 as 4..0
-            textStream << base32EncodeMap[( byte & 0x3E )>>1];
+            textStream << base32EncodeMap[(byte & 0x3E) >> 1];
             // bits 0 -> 4 for next
             bitsFromLastByte = (byte & 0x1) << 4;
             inputByteIndex = InputByteIndex::Third;
             break;
         case InputByteIndex::Third:
             // from last and bits 7..4 as 3..0 from this
-            textStream << base32EncodeMap[( bitsFromLastByte | byte >> 4 )];
+            textStream << base32EncodeMap[(bitsFromLastByte | byte >> 4)];
             // bits 3..0 -> 4..1 for next
             bitsFromLastByte = (byte & 0xF) << 1;
             inputByteIndex = InputByteIndex::Fourth;
             break;
         case InputByteIndex::Fourth:
             // from last and bit 7 as 0 from this
-            textStream << base32EncodeMap[( bitsFromLastByte | byte >> 7 )];
+            textStream << base32EncodeMap[(bitsFromLastByte | byte >> 7)];
             // bits 6..2 as 4..0
-            textStream << base32EncodeMap[( byte & 0x7C )>>2];
+            textStream << base32EncodeMap[(byte & 0x7C) >> 2];
             // bits 1..0 -> 4..3 for next
             bitsFromLastByte = (byte & 0x3) << 3;
             inputByteIndex = InputByteIndex::Fifth;
             break;
         case InputByteIndex::Fifth:
             // from last and bits 7..5 as 2..0 from this
-            textStream << base32EncodeMap[( bitsFromLastByte | byte >> 5 )];
+            textStream << base32EncodeMap[(bitsFromLastByte | byte >> 5)];
             // bits 4..0
-            textStream << base32EncodeMap[( byte & 0x1F )];
+            textStream << base32EncodeMap[(byte & 0x1F)];
             inputByteIndex = InputByteIndex::First;
             ++outputGroupsPerLine;
-            if( outputGroupsPerLine >= maxOutputGroupsPerLine && i<range.end() )
-            {
+            if (outputGroupsPerLine >= maxOutputGroupsPerLine && i < range.end()) {
                 textStream << "\r\n";
                 outputGroupsPerLine = 0;
             }
             break;
         }
     }
-    const bool hasBitsLeft = ( inputByteIndex != InputByteIndex::First );
-    if( hasBitsLeft )
+
+    const bool hasBitsLeft = (inputByteIndex != InputByteIndex::First);
+    if (hasBitsLeft) {
         textStream << base32EncodeMap[bitsFromLastByte]
                    << base32Padding(inputByteIndex);
+    }
 
     return success;
 }

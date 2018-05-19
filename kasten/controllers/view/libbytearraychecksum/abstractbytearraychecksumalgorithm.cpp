@@ -25,27 +25,26 @@
 // Qt
 #include <QString>
 
-
 class AbstractByteArrayChecksumAlgorithm::Private
 {
-  public:
-    explicit Private( const QString& name );
-  public:
+public:
+    explicit Private(const QString& name);
+
+public:
     QString name() const;
 
-  protected:
+protected:
     QString mName;
 };
 
-AbstractByteArrayChecksumAlgorithm::Private::Private( const QString& name )
-  : mName( name )
+AbstractByteArrayChecksumAlgorithm::Private::Private(const QString& name)
+    : mName(name)
 {}
 
 inline QString AbstractByteArrayChecksumAlgorithm::Private::name() const { return mName; }
 
-
-AbstractByteArrayChecksumAlgorithm::AbstractByteArrayChecksumAlgorithm( const QString& name )
-  : d( new Private(name) )
+AbstractByteArrayChecksumAlgorithm::AbstractByteArrayChecksumAlgorithm(const QString& name)
+    : d(new Private(name))
 {}
 
 QString AbstractByteArrayChecksumAlgorithm::name() const { return d->name(); }

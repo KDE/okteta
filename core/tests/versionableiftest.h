@@ -23,51 +23,52 @@
 #ifndef VERSIONABLEIFTEST_H
 #define VERSIONABLEIFTEST_H
 
-
 // Qt
 #include <QObject>
 
 class QSignalSpy;
 
-namespace Okteta
-{
+namespace Okteta {
 
 class Versionable;
 
 class VersionableIfTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
+protected:
     VersionableIfTest();
 
-  protected: // our API
-    virtual QObject *createVersionable() = 0;
-    virtual void deleteVersionable( QObject *versionable ) = 0;
+protected: // our API
+    virtual QObject* createVersionable() = 0;
+    virtual void deleteVersionable(QObject* versionable) = 0;
 
-  protected:
-    void checkRevertedToVersionIndex( int versionIndex );
-    void checkHeadVersionDescriptionChanged( const QString &versionDescription );
-    void checkHeadVersionChanged( int newHeadVersionIndex );
+protected:
+    void checkRevertedToVersionIndex(int versionIndex);
+    void checkHeadVersionDescriptionChanged(const QString& versionDescription);
+    void checkHeadVersionChanged(int newHeadVersionIndex);
     void clearSignalSpys();
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void init();
     void cleanup();
 
     void testBegin();
 
-  private: // used in all tests
+private: // used in all tests
     /** pointer to the class to test */
-    QObject *mObject;
-    Versionable *mVersionableControl;
+    QObject* mObject;
+    Versionable* mVersionableControl;
 
-    QSignalSpy *mRevertedToVersionIndexSpy;
-    QSignalSpy *mHeadVersionDescriptionChangedSpy;
-    QSignalSpy *mHeadVersionChangedSpy;
+    QSignalSpy* mRevertedToVersionIndexSpy;
+    QSignalSpy* mHeadVersionDescriptionChangedSpy;
+    QSignalSpy* mHeadVersionChangedSpy;
 };
 
-inline VersionableIfTest::VersionableIfTest() : mObject( nullptr ), mVersionableControl( nullptr ) {}
+inline VersionableIfTest::VersionableIfTest()
+    : mObject(nullptr)
+    , mVersionableControl(nullptr)
+{}
 
 }
 

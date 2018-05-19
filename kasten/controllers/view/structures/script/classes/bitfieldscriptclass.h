@@ -25,15 +25,19 @@
 
 #include "primitivescriptclass.h"
 
-class BitfieldScriptClass : public PrimitiveScriptClass {
+class BitfieldScriptClass : public PrimitiveScriptClass
+{
     Q_DISABLE_COPY(BitfieldScriptClass)
+
 public:
     BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~BitfieldScriptClass() override;
+
 protected:
     bool queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id) override;
     QScriptValue additionalProperty(const DataInformation* data, const QScriptString& name, uint id) override;
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
+
 protected:
     QScriptString s_width;
 };

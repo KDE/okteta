@@ -28,32 +28,30 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 Binary8Codec::Binary8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox encoding of one byte as value in the binary format","Binary 8-bit") )
+    : AbstractTypeCodec(i18nc("@label:textbox encoding of one byte as value in the binary format", "Binary 8-bit"))
 {}
 
-QVariant Binary8Codec::value( const PODData& data, int* byteCount ) const
+QVariant Binary8Codec::value(const PODData& data, int* byteCount) const
 {
-    const unsigned char* pointer = (unsigned char*)data.pointer( 1 );
+    const unsigned char* pointer = (unsigned char*)data.pointer(1);
 
     *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<Binary8>( Binary8(*pointer) ) : QVariant();
+    return pointer ? QVariant::fromValue<Binary8>(Binary8(*pointer)) : QVariant();
 }
 
-QByteArray Binary8Codec::valueToBytes( const QVariant& value ) const
+QByteArray Binary8Codec::valueToBytes(const QVariant& value) const
 {
     const quint8 number = value.value<Binary8>().value;
 
-    return QByteArray( (const char*)&number, sizeof(quint8) );
+    return QByteArray((const char*)&number, sizeof(quint8));
 }
 
-bool Binary8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+bool Binary8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
-    return ( value.value<Binary8>().value == otherValue.value<Binary8>().value );
+    return (value.value<Binary8>().value == otherValue.value<Binary8>().value);
 }
 
 Binary8Codec::~Binary8Codec() {}

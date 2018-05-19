@@ -28,19 +28,16 @@
 // Qt
 #include <QAbstractTableModel>
 
-template< class C > class QList;
+template <class C> class QList;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayViewProfileManager;
-
 
 class ViewProfileTableModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ColumnIds
     {
         CurrentColumnId = 0,
@@ -48,26 +45,26 @@ class ViewProfileTableModel : public QAbstractTableModel
         NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
     };
 
-  public:
-    explicit ViewProfileTableModel( const ByteArrayViewProfileManager* viewProfileManager,
-                                    QObject* parent = nullptr );
+public:
+    explicit ViewProfileTableModel(const ByteArrayViewProfileManager* viewProfileManager,
+                                   QObject* parent = nullptr);
     ~ViewProfileTableModel() override;
 
-  public: // QAbstractTableModel API
-    int rowCount( const QModelIndex& parent ) const override;
-    int columnCount( const QModelIndex& parent ) const override;
-    QVariant data( const QModelIndex& index, int role ) const override;
+public: // QAbstractTableModel API
+    int rowCount(const QModelIndex& parent) const override;
+    int columnCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
 
-  public:
-    ByteArrayViewProfile::Id viewProfileId( const QModelIndex& index ) const;
-    int row( const ByteArrayViewProfile::Id& viewProfileId ) const;
+public:
+    ByteArrayViewProfile::Id viewProfileId(const QModelIndex& index) const;
+    int row(const ByteArrayViewProfile::Id& viewProfileId) const;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onDefaultIndexChanged();
     void onViewProfilesChanged();
-    void onViewProfileLocksChanged(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+    void onViewProfileLocksChanged(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
-  protected:
+protected:
     const ByteArrayViewProfileManager* mViewProfileManager;
 };
 

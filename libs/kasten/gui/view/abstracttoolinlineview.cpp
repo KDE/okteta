@@ -25,27 +25,23 @@
 // Qt
 #include <Qt>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class Q_DECL_HIDDEN AbstractToolInlineView::Private
 {
-  public:
-    explicit Private( AbstractToolInlineView* view );
+public:
+    explicit Private(AbstractToolInlineView* view);
 };
 
-AbstractToolInlineView::Private::Private( AbstractToolInlineView* view ) { Q_UNUSED(view) }
+AbstractToolInlineView::Private::Private(AbstractToolInlineView* view) { Q_UNUSED(view) }
 
 AbstractToolInlineView::AbstractToolInlineView()
- : d( new Private(this) )
+    : d(new Private(this))
 {}
-
 
 void AbstractToolInlineView::activate()
 {
 }
-
 
 AbstractToolInlineView::~AbstractToolInlineView()
 {

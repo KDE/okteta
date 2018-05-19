@@ -34,38 +34,35 @@
 
 #include <QUrl>
 
+namespace Kasten {
 
-namespace Kasten
+FileSystemBrowserTool::FileSystemBrowserTool(DocumentSyncManager* documentSyncManager)
+    : AbstractTool()
+    , mDocumentSyncManager(documentSyncManager)
+    , mDocument(nullptr)
 {
-
-FileSystemBrowserTool::FileSystemBrowserTool( DocumentSyncManager* documentSyncManager )
-  : AbstractTool(),
-    mDocumentSyncManager( documentSyncManager ),
-    mDocument( nullptr )
-{
-    setObjectName( QStringLiteral( "FileSystemBrowser" ) );
+    setObjectName(QStringLiteral("FileSystemBrowser"));
 }
 
-
 QString FileSystemBrowserTool::title() const { return i18nc("@title:window", "Filesystem"); }
-
 
 QUrl FileSystemBrowserTool::currentUrl() const
 {
     QUrl result;
 
-    if( mDocument )
-        result = KIO::upUrl( mDocumentSyncManager->urlOf( mDocument ) );
+    if (mDocument) {
+        result = KIO::upUrl(mDocumentSyncManager->urlOf(mDocument));
+    }
 
     return result;
 }
 
 bool FileSystemBrowserTool::hasCurrentUrl() const
 {
-    return ( mDocument && mDocument->synchronizer() );
+    return (mDocument && mDocument->synchronizer());
 }
 
-void FileSystemBrowserTool::setTargetModel( AbstractModel* model )
+void FileSystemBrowserTool::setTargetModel(AbstractModel* model)
 {
     const bool oldHasCurrentUrl = hasCurrentUrl();
 
@@ -73,13 +70,14 @@ void FileSystemBrowserTool::setTargetModel( AbstractModel* model )
 
     const bool newHasCurrentUrl = hasCurrentUrl();
 
-    if( oldHasCurrentUrl != newHasCurrentUrl )
-        emit hasCurrentUrlChanged( newHasCurrentUrl );
+    if (oldHasCurrentUrl != newHasCurrentUrl) {
+        emit hasCurrentUrlChanged(newHasCurrentUrl);
+    }
 }
 
-void FileSystemBrowserTool::open( const QUrl& url )
+void FileSystemBrowserTool::open(const QUrl& url)
 {
-    mDocumentSyncManager->load( url );
+    mDocumentSyncManager->load(url);
 }
 
 FileSystemBrowserTool::~FileSystemBrowserTool() {}

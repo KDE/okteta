@@ -26,14 +26,15 @@
 
 #include <QVector>
 
-class DataInformationWithChildren: public DataInformation
+class DataInformationWithChildren : public DataInformation
 {
 protected:
     QVector<DataInformation*> mChildren;
     explicit DataInformationWithChildren(const DataInformationWithChildren& d);
+
 public:
     explicit DataInformationWithChildren(const QString& name, const QVector<DataInformation*>& children
-            = QVector<DataInformation*>(), DataInformation* parent = nullptr);
+                                             = QVector<DataInformation*>(), DataInformation* parent = nullptr);
     ~DataInformationWithChildren() override;
 
     virtual QVariant childData(int row, int column, int role) const;
@@ -72,6 +73,7 @@ public:
     void setChildren(const QScriptValue& newChildren);
 
     static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
+
 protected:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 };

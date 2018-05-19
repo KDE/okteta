@@ -28,33 +28,31 @@
 #include <QLineEdit>
 #include <QIcon>
 
+namespace Kasten {
 
-namespace Kasten
+BookmarkEditPopup::BookmarkEditPopup(QWidget* parent)
+    : AbstractLinePopup(parent)
 {
+    setIcon(QIcon::fromTheme(QStringLiteral("bookmark-new")));
 
-BookmarkEditPopup::BookmarkEditPopup( QWidget* parent )
-  : AbstractLinePopup( parent )
-{
-    setIcon( QIcon::fromTheme( QStringLiteral("bookmark-new") ) );
+    mBookmarkNameLineEdit = new QLineEdit(this);
+    mBookmarkNameLineEdit->setClearButtonEnabled(true);
+    connect(mBookmarkNameLineEdit, &QLineEdit::returnPressed, this, &BookmarkEditPopup::onReturnPressed);
 
-    mBookmarkNameLineEdit = new QLineEdit( this );
-    mBookmarkNameLineEdit->setClearButtonEnabled( true );
-    connect( mBookmarkNameLineEdit, &QLineEdit::returnPressed, this, &BookmarkEditPopup::onReturnPressed );
-
-    setWidget( mBookmarkNameLineEdit );
+    setWidget(mBookmarkNameLineEdit);
 }
 
 QString BookmarkEditPopup::name() const { return mBookmarkNameLineEdit->text(); }
 
-void BookmarkEditPopup::setName( const QString& name )
+void BookmarkEditPopup::setName(const QString& name)
 {
-    mBookmarkNameLineEdit->setText( name );
+    mBookmarkNameLineEdit->setText(name);
     mBookmarkNameLineEdit->selectAll();
 }
 
 void BookmarkEditPopup::onReturnPressed()
 {
-    setResult( 1 );
+    setResult(1);
     close();
 }
 

@@ -31,9 +31,7 @@
 class QUrl;
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocument;
 class AbstractModelSynchronizerFactory;
@@ -41,43 +39,42 @@ class DocumentManager;
 class AbstractSaveDiscardDialog;
 class AbstractOverwriteDialog;
 
-
 class KASTENCORE_EXPORT DocumentSyncManager : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit DocumentSyncManager( DocumentManager* manager );
+public:
+    explicit DocumentSyncManager(DocumentManager* manager);
     ~DocumentSyncManager() override;
 
-  public:
-    void load( const QUrl& url );
+public:
+    void load(const QUrl& url);
 // TODO: better name
-    bool setSynchronizer( AbstractDocument* document );
-    bool canClose( AbstractDocument* document );
-    void reload( AbstractDocument* document );
-    void save( AbstractDocument* document );
+    bool setSynchronizer(AbstractDocument* document);
+    bool canClose(AbstractDocument* document);
+    void reload(AbstractDocument* document);
+    void save(AbstractDocument* document);
 
-  public:
+public:
     QStringList supportedRemoteTypes() const;
-    bool hasSynchronizerForLocal( const QString& mimeType ) const;
-    QUrl urlOf( AbstractDocument* document ) const;
+    bool hasSynchronizerForLocal(const QString& mimeType) const;
+    QUrl urlOf(AbstractDocument* document) const;
 
-  public:
-    void setDocumentSynchronizerFactory( AbstractModelSynchronizerFactory* synchronizerFactory );
-    void setSaveDiscardDialog( AbstractSaveDiscardDialog* saveDiscardDialog );
-    void setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog );
+public:
+    void setDocumentSynchronizerFactory(AbstractModelSynchronizerFactory* synchronizerFactory);
+    void setSaveDiscardDialog(AbstractSaveDiscardDialog* saveDiscardDialog);
+    void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
-  Q_SIGNALS:
-    void urlUsed( const QUrl& url );
+Q_SIGNALS:
+    void urlUsed(const QUrl& url);
 
-  private Q_SLOTS:
-    void onDocumentLoaded( Kasten::AbstractDocument* document );
+private Q_SLOTS:
+    void onDocumentLoaded(Kasten::AbstractDocument* document);
 
-    void onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents );
-    void onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents );
+    void onDocumentsAdded(const QList<Kasten::AbstractDocument*>& documents);
+    void onDocumentsClosing(const QList<Kasten::AbstractDocument*>& documents);
 
-  private:
+private:
     // unless there is a singleton
     DocumentManager* mManager;
 

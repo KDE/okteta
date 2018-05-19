@@ -34,30 +34,31 @@ class AbstractByteArrayModel;
 }
 class QString;
 
-
 class AbstractByteArrayChecksumAlgorithm : public QObject
 {
     Q_OBJECT
 
-  protected:
+protected:
     static const int CalculatedByteCountSignalLimit = 10000;
-  protected:
-    explicit AbstractByteArrayChecksumAlgorithm( const QString& name );
-  public:
+
+protected:
+    explicit AbstractByteArrayChecksumAlgorithm(const QString& name);
+
+public:
     ~AbstractByteArrayChecksumAlgorithm() override;
 
-  public: // API to be implemented
-    virtual bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const = 0;
+public: // API to be implemented
+    virtual bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const = 0;
     /** used by the editor to get write access to the parameters */
     virtual AbstractByteArrayChecksumParameterSet* parameterSet() = 0;
 
-  public:
+public:
     QString name() const;
 
-  Q_SIGNALS: // TODO: add check for signal to tests
-    void calculatedBytes( int bytes ) const;
+Q_SIGNALS: // TODO: add check for signal to tests
+    void calculatedBytes(int bytes) const;
 
-  protected:
+protected:
     class Private;
     Private* const d;
 };

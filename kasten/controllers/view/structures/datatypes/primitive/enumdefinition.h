@@ -24,7 +24,7 @@
 #define ENUMDEFINITION_H_
 #include "../../allprimitivetypes.h"
 #include "../primitivedatatype.h"
-//Qt core
+// Qt core
 #include <QMap>
 #include <QSharedData>
 #include <QSharedDataPointer>
@@ -34,16 +34,23 @@
 class QScriptValue;
 struct LoggerWithContext;
 
-class EnumDefinition: public QSharedData
+class EnumDefinition : public QSharedData
 {
 public:
     using Ptr = QSharedDataPointer<EnumDefinition>;
 
     EnumDefinition(const QMap<AllPrimitiveTypes, QString>& values, const QString& name,
-            PrimitiveDataType type) :
-        QSharedData(), mName(name), mValues(values), mType(type) {}
-    EnumDefinition(const EnumDefinition& e) :
-        QSharedData(e), mValues(e.mValues), mType(e.mType) {}
+                   PrimitiveDataType type)
+        : QSharedData()
+        , mName(name)
+        , mValues(values)
+        , mType(type)
+    {}
+    EnumDefinition(const EnumDefinition& e)
+        : QSharedData(e)
+        , mValues(e.mValues)
+        , mType(e.mType)
+    {}
 
     const QMap<AllPrimitiveTypes, QString>& values() const;
     const AllPrimitiveTypes key(QString& value) const;
@@ -53,16 +60,16 @@ public:
     void setValues(const QMap<AllPrimitiveTypes, QString>& newValues);
 
     static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
-            const LoggerWithContext& logger, PrimitiveDataType type = PrimitiveDataType::UInt64);
+                                                            const LoggerWithContext& logger, PrimitiveDataType type = PrimitiveDataType::UInt64);
     /** @return a pair containing the converted value. A default constructed pair means error! */
     static QPair<AllPrimitiveTypes, QString> convertToEnumEntry(const QString& name, const QVariant& value,
-            const LoggerWithContext& logger, PrimitiveDataType type);
+                                                                const LoggerWithContext& logger, PrimitiveDataType type);
+
 protected:
     const QString mName;
     QMap<AllPrimitiveTypes, QString> mValues;
     const PrimitiveDataType mType;
 };
-
 
 inline const QMap<AllPrimitiveTypes, QString>& EnumDefinition::values() const
 {
@@ -91,8 +98,7 @@ inline const QString& EnumDefinition::name() const
 
 inline void EnumDefinition::setValues(const QMap<AllPrimitiveTypes, QString>& newValues)
 {
-    mValues = newValues; //causes the QSharedPointer to detach and copy
+    mValues = newValues; // causes the QSharedPointer to detach and copy
 }
-
 
 #endif /* ENUMDEFINITION_H_ */

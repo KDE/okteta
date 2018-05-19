@@ -26,9 +26,7 @@
 // Qt
 #include <QtGlobal>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 using LinePosition = qint32;
 using LinePositionSize = qint32;

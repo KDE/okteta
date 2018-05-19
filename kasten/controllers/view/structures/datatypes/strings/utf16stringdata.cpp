@@ -34,9 +34,9 @@
 #include "../dummydatainformation.h"
 #include "stringdatainformation.h"
 
-
 Utf16StringData::Utf16StringData(StringDataInformation* parent)
-    : StringData(parent), mNonBMPCount(0)
+    : StringData(parent)
+    , mNonBMPCount(0)
 {
 }
 
@@ -61,23 +61,24 @@ uint Utf16StringData::count() const
 
 QString Utf16StringData::stringValue(int row) const
 {
-    //TODO details
+    // TODO details
     Q_ASSERT((uint)row < count());
-    //TODO show invalid values
+    // TODO show invalid values
     uint val = mCodePoints.at(row);
     QString number = QString::number(val, 16).toUpper();
-    if (number.length() == 1)
+    if (number.length() == 1) {
         number = QLatin1Char('0') + number;
-    if (val > UNICODE_MAX)
+    }
+    if (val > UNICODE_MAX) {
         return i18n("Value too big: 0x%1", number);
-    else if (val > BMP_MAX) {
+    } else if (val > BMP_MAX) {
         QString ret(2, Qt::Uninitialized);
         ret[0] = QChar::highSurrogate(val);
         ret[1] = QChar::lowSurrogate(val);
         return i18n("%1 (U+%2)", ret, number);
-    }
-    else
+    } else {
         return i18n("%1 (U+%2)", QString(QChar(mCodePoints.at(row))), number);
+    }
 }
 
 QString Utf16StringData::completeString(bool skipInvalid) const
@@ -87,38 +88,33 @@ QString Utf16StringData::completeString(bool skipInvalid) const
     int i = 0;
     for (int idx = 0; idx < codePointCount; ++idx) {
         uint val = mCodePoints.at(idx);
-        if (val > UNICODE_MAX)
-        {
-            if (skipInvalid)
+        if (val > UNICODE_MAX) {
+            if (skipInvalid) {
                 continue;
-            else
+            } else {
                 data[i] = QChar::ReplacementCharacter;
-        }
-        else if (val > BMP_MAX) {
+            }
+        } else if (val > BMP_MAX) {
             data[i] = QChar::highSurrogate(val);
             i++;
             data[i] = QChar::lowSurrogate(val);
-        }
-        else
-        {
+        } else {
             data[i] = QChar((ushort)val);
         }
         i++;
     }
+
     return QString(data.constData(), i);
 }
 
 qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-            BitCount64 bitsRemaining)
+                             BitCount64 bitsRemaining)
 {
     const int oldSize = count();
     mNonBMPCount = 0;
-    if (mMode == CharCount)
-    {
+    if (mMode == CharCount) {
         mCodePoints.reserve(mLength.maxChars);
-    }
-    else if (mMode == ByteCount)
-    {
+    } else if (mMode == ByteCount) {
         mCodePoints.reserve(mLength.maxBytes / 2);
     }
 
@@ -131,17 +127,17 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
     uint count = 0;
     mEofReached = false;
     if (((mMode & CharCount) && mLength.maxChars == 0)
-            || ((mMode & ByteCount) && mLength.maxBytes < 2))
+        || ((mMode & ByteCount) && mLength.maxBytes < 2)) {
         return 0;
+    }
 
     bool eofAtStart = false;
-    if (bitsRemaining < 16)
+    if (bitsRemaining < 16) {
         eofAtStart = true;
+    }
 
-    while (true)
-    {
-        if (remaining < 16)
-        {
+    while (true) {
+        if (remaining < 16) {
             mEofReached = true;
             break;
         }
@@ -149,88 +145,86 @@ qint64 Utf16StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Addr
         ushort val;
         bool terminate = false;
 
-        if (mLittleEndian)
+        if (mLittleEndian) {
             val = input->byte(addr) | (input->byte(addr + 1) << 8);
-        else
+        } else {
             val = (input->byte(addr) << 8) | input->byte(addr + 1);
-        //high surrogate -> if is followed by low surrogate we have a 4 bit char
-        if (QChar::isHighSurrogate(val))
-        {
-            if (remaining < 32 || ((mMode & ByteCount) && (addr + 2 - address) / 2 >= Okteta::Address(mLength.maxBytes / 2)))
-            {
+        }
+        // high surrogate -> if is followed by low surrogate we have a 4 bit char
+        if (QChar::isHighSurrogate(val)) {
+            if (remaining < 32 || ((mMode & ByteCount) && (addr + 2 - address) / 2 >= Okteta::Address(mLength.maxBytes / 2))) {
                 codePoint = val;
                 mEofReached = true;
                 terminate = true;
-            }
-            else
-            {
+            } else {
                 ushort val2;
-                if (mLittleEndian)
+                if (mLittleEndian) {
                     val2 = input->byte(addr + 2) | (input->byte(addr + 3) << 8);
-                else
+                } else {
                     val2 = (input->byte(addr + 2) << 8) | input->byte(addr + 3);
+                }
 
-                if (QChar::isLowSurrogate(val2))
-                {
+                if (QChar::isLowSurrogate(val2)) {
                     codePoint = QChar::surrogateToUcs4(val, val2);
                     remaining -= 16;
                     addr += 2;
                     mNonBMPCount++; // codepoint > 0xffff -> non BMP
-                }
-                else
+                } else {
                     codePoint = val;
+                }
             }
-        }
-        else
-        {
+        } else {
             codePoint = val;
         }
 
-        if (count < oldMax)
+        if (count < oldMax) {
             mCodePoints[count] = codePoint;
-        else
+        } else {
             mCodePoints.append(codePoint);
+        }
 
         remaining -= 16;
         addr += 2;
         count++;
 
-        //now check if we have to terminate
-        if (mMode & Sequence)
-        {
-            if (codePoint == mTerminationCodePoint)
+        // now check if we have to terminate
+        if (mMode & Sequence) {
+            if (codePoint == mTerminationCodePoint) {
                 terminate = true;
+            }
         }
-        if (mMode & ByteCount)
-        {
+        if (mMode & ByteCount) {
             // divide by two in case someone set length to an odd number of bytes
-            if ((addr - address) / 2 >= Okteta::Address(mLength.maxBytes / 2))
+            if ((addr - address) / 2 >= Okteta::Address(mLength.maxBytes / 2)) {
                 terminate = true;
+            }
         }
-        if (mMode & CharCount)
-        {
-            if (count >= mLength.maxChars)
+        if (mMode & CharCount) {
+            if (count >= mLength.maxChars) {
                 terminate = true;
+            }
         }
         if (mMode == None) {
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "no termination mode set!!";
             Q_ASSERT(false);
         }
-        if (terminate)
+        if (terminate) {
             break;
+        }
     }
     mCodePoints.resize(count);
     mParent->topLevelDataInformation()->_childCountAboutToChange(mParent, 0, count);
     mParent->topLevelDataInformation()->_childCountChanged(mParent, 0, count);
 
-    if (eofAtStart)
+    if (eofAtStart) {
         return -1;
+    }
     return (addr - address) * 8;
 }
 
 BitCount32 Utf16StringData::size() const
 {
-    //add 16 for every non BMP char, since they use 32 bits
+    // add 16 for every non BMP char, since they use 32 bits
     return (mCodePoints.size() + mNonBMPCount) * 16;
 }
 

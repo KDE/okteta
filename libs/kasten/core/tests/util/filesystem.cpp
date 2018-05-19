@@ -21,64 +21,62 @@
 #include <QFile>
 #include <QTest>
 
-//TODO QStringLiteral
+// TODO QStringLiteral
 static const char basePath[] = "/.kde-unit-test/";
 
-
-TestFileSystem::TestFileSystem( const QString& name )
- : mBasePath( QDir::homePath() + QLatin1Char('/')
-              + QLatin1String(basePath) + QLatin1Char('/') + name )
+TestFileSystem::TestFileSystem(const QString& name)
+    : mBasePath(QDir::homePath() + QLatin1Char('/')
+        + QLatin1String(basePath) + QLatin1Char('/') + name)
 {
     // clean up
-    _removeDir( mBasePath );
+    _removeDir(mBasePath);
 
-    _createDir( mBasePath );
+    _createDir(mBasePath);
 }
 
-
-void TestFileSystem::removeDir( const QString& subPath )
+void TestFileSystem::removeDir(const QString& subPath)
 {
-    _removeDir( mBasePath + QLatin1Char('/') + subPath );
+    _removeDir(mBasePath + QLatin1Char('/') + subPath);
 }
 
-void TestFileSystem::createDir( const QString& subPath )
+void TestFileSystem::createDir(const QString& subPath)
 {
-    _createDir( mBasePath + QLatin1Char('/') + subPath );
+    _createDir(mBasePath + QLatin1Char('/') + subPath);
 }
 
-QString TestFileSystem::createFilePath( const QString& fileName, const QString& subPath )
+QString TestFileSystem::createFilePath(const QString& fileName, const QString& subPath)
 {
     return mBasePath + QLatin1Char('/') + subPath + QLatin1Char('/') + fileName;
 }
 
-void TestFileSystem::_removeDir( const QString& path )
+void TestFileSystem::_removeDir(const QString& path)
 {
-    QDir localDir( path );
+    QDir localDir(path);
     const auto filesInDir = localDir.entryList(QDir::Files);
-    for( const QString& fileName : filesInDir )
-    {
-        if( !localDir.remove(fileName) )
-            qWarning("%s: removing failed", qPrintable( fileName ));
+    for (const QString& fileName : filesInDir) {
+        if (!localDir.remove(fileName)) {
+            qWarning("%s: removing failed", qPrintable(fileName));
+        }
     }
-    QCOMPARE( (int)localDir.entryList(QDir::Files).count(), 0 );
+
+    QCOMPARE((int)localDir.entryList(QDir::Files).count(), 0);
     QString subDirectory = path;
-    subDirectory.remove( QRegExp(QStringLiteral("^.*/")) );
+    subDirectory.remove(QRegExp(QStringLiteral("^.*/")));
     localDir.cdUp();
-    localDir.rmpath( subDirectory );
+    localDir.rmpath(subDirectory);
 }
 
-void TestFileSystem::_createDir( const QString& path )
+void TestFileSystem::_createDir(const QString& path)
 {
-    QVERIFY( QDir().mkpath(path) );
+    QVERIFY(QDir().mkpath(path));
 }
 
 TestFileSystem::~TestFileSystem()
 {
-    _removeDir( mBasePath );
+    _removeDir(mBasePath);
 
 //     removeDir(QStringLiteral("kdatetimetest/Africa"));
 //     removeDir( QStringLiteral("share/config"));
 //     removeDir( QStringLiteral("share") );
 //     QDir().rmpath(QDir::homePath() + "/.kde-unit-test/share");
 }
-

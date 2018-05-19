@@ -31,13 +31,15 @@
 #include <QDataStream>
 #include <QFile>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject* parent, const QByteArray& header,
-    /*TestDocument* document,*/ QFile* file )
- : QThread( parent ), /*mDocument( document ),*/ mHeader( header), mFile( file ), mSuccess( false )
+TestDocumentFileReloadThread::TestDocumentFileReloadThread(QObject* parent, const QByteArray& header,
+                                                           /*TestDocument* document,*/ QFile* file)
+    : QThread(parent)
+//     , mDocument(document)
+    , mHeader(header)
+    , mFile(file)
+    , mSuccess(false)
 {
 //     mDocument->content()->moveToThread( this );
 //     mDocument->moveToThread( this );
@@ -45,25 +47,24 @@ TestDocumentFileReloadThread::TestDocumentFileReloadThread( QObject* parent, con
 
 void TestDocumentFileReloadThread::run()
 {
-    QDataStream inStream( mFile );
+    QDataStream inStream(mFile);
     const int fileSize = mFile->size();
 
     // test header
     const int headerSize = mHeader.size();
-    QByteArray header( headerSize, ' ' );
-    const int headerResult = inStream.readRawData( header.data(), headerSize );
-    if( headerResult == -1 || header != mHeader )
+    QByteArray header(headerSize, ' ');
+    const int headerResult = inStream.readRawData(header.data(), headerSize);
+    if (headerResult == -1 || header != mHeader) {
         mSuccess = false;
-    else
-    {
-        mByteArray = QByteArray( fileSize, ' ' );
+    } else {
+        mByteArray = QByteArray(fileSize, ' ');
 
-        inStream.readRawData( mByteArray.data(), fileSize );
+        inStream.readRawData(mByteArray.data(), fileSize);
 
-        mSuccess = ( inStream.status() == QDataStream::Ok );
+        mSuccess = (inStream.status() == QDataStream::Ok);
     }
 
-    emit documentReloaded( mSuccess );
+    emit documentReloaded(mSuccess);
 }
 
 TestDocumentFileReloadThread::~TestDocumentFileReloadThread() {}

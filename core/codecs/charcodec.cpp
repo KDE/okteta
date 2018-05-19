@@ -30,65 +30,65 @@
 // Qt
 #include <QStringList>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 const QStringList& CharCodec::codecNames()
 {
     static QStringList codecNames;
     // first call?
-    if( codecNames.isEmpty() )
-    {
+    if (codecNames.isEmpty()) {
         codecNames = TextCharCodec::codecNames();
         codecNames.reserve(codecNames.size() + 3);
-        codecNames.append( USASCIICharCodec::codecName() );
-        codecNames.append( EBCDIC1047CharCodec::codecName() );
-        codecNames.append( JISX0201CharCodec::codecName() );
+        codecNames.append(USASCIICharCodec::codecName());
+        codecNames.append(EBCDIC1047CharCodec::codecName());
+        codecNames.append(JISX0201CharCodec::codecName());
     }
 
     return codecNames;
 }
 
-
-CharCodec* CharCodec::createCodec( const QString& name )
+CharCodec* CharCodec::createCodec(const QString& name)
 {
     CharCodec* result;
 
-    if( TextCharCodec::codecNames().indexOf(name) != -1 )
-        result = TextCharCodec::createCodec( name );
-    else if( USASCIICharCodec::codecName() == name )
+    if (TextCharCodec::codecNames().indexOf(name) != -1) {
+        result = TextCharCodec::createCodec(name);
+    } else if (USASCIICharCodec::codecName() == name) {
         result = USASCIICharCodec::create();
-    else if( EBCDIC1047CharCodec::codecName() == name )
+    } else if (EBCDIC1047CharCodec::codecName() == name) {
         result = EBCDIC1047CharCodec::create();
-    else if( JISX0201CharCodec::codecName() == name )
+    } else if (JISX0201CharCodec::codecName() == name) {
         result = JISX0201CharCodec::create();
-    else
+    } else {
         result = nullptr;
+    }
 
     // ensure at least a codec
-    if( ! result )
+    if (!result) {
         result = TextCharCodec::createLocalCodec();
+    }
 
     return result;
 }
 
-
-CharCodec* CharCodec::createCodec( CharCoding charCoding )
+CharCodec* CharCodec::createCodec(CharCoding charCoding)
 {
     CharCodec* result;
 
-    if( charCoding == EBCDIC1047Encoding )
+    if (charCoding == EBCDIC1047Encoding) {
         result = EBCDIC1047CharCodec::create();
-    else if( charCoding == ISO8859_1Encoding )
-        result = TextCharCodec::createCodec( QStringLiteral("ISO-8859-1") );
+    } else if (charCoding == ISO8859_1Encoding) {
+        result = TextCharCodec::createCodec(QStringLiteral("ISO-8859-1"));
+    }
     // LocalEncoding
-    else
+    else {
         result = nullptr;
+    }
 
     // ensure at least a codec
-    if( ! result )
+    if (!result) {
         result = TextCharCodec::createLocalCodec();
+    }
 
     return result;
 }

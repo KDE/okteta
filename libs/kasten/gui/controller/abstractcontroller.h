@@ -28,11 +28,9 @@
 // Qt
 #include <QObject>
 
-
 class KXMLGUIClient;
 
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModel;
 
@@ -49,10 +47,10 @@ Controllers can plug into the
 */
 class KASTENGUI_EXPORT AbstractController : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public: // API to be implemented
-    virtual void setTargetModel( AbstractModel* model ); //= 0;
+public: // API to be implemented
+    virtual void setTargetModel(AbstractModel* model);   // = 0;
 };
 
 }

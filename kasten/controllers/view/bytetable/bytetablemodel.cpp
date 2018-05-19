@@ -29,131 +29,126 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const unsigned char ByteTableDefaultUndefinedChar = '?';
 static const int ByteSetSize = 256;
 
-
-ByteTableModel::ByteTableModel( QObject *parent )
- : QAbstractTableModel( parent ),
-   mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
-   mUndefinedChar( QLatin1Char(ByteTableDefaultUndefinedChar) )
+ByteTableModel::ByteTableModel(QObject* parent)
+    : QAbstractTableModel(parent)
+    , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
+    , mUndefinedChar(QLatin1Char(ByteTableDefaultUndefinedChar))
 {
-    static const Okteta::ValueCoding CodingIds[NofOfValueCodings] =
-    {
+    static const Okteta::ValueCoding CodingIds[NofOfValueCodings] = {
         Okteta::DecimalCoding,
         Okteta::HexadecimalCoding,
         Okteta::OctalCoding,
         Okteta::BinaryCoding
     };
-    for( int i=0; i<NofOfValueCodings; ++i )
-        mValueCodec[i] = Okteta::ValueCodec::createCodec( CodingIds[i] );
+    for (int i = 0; i < NofOfValueCodings; ++i) {
+        mValueCodec[i] = Okteta::ValueCodec::createCodec(CodingIds[i]);
+    }
 }
 
-void ByteTableModel::setUndefinedChar( QChar undefinedChar )
+void ByteTableModel::setUndefinedChar(QChar undefinedChar)
 {
     mUndefinedChar = undefinedChar;
 
-    emit dataChanged( index(0,CharacterId), index(ByteSetSize-1,CharacterId) );
+    emit dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
-void ByteTableModel::setCharCodec( const QString &codeName )
+void ByteTableModel::setCharCodec(const QString& codeName)
 {
-    if( codeName == mCharCodec->name() )
+    if (codeName == mCharCodec->name()) {
         return;
+    }
 
     delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec( codeName );
+    mCharCodec = Okteta::CharCodec::createCodec(codeName);
 
-    emit dataChanged( index(0,CharacterId), index(ByteSetSize-1,CharacterId) );
+    emit dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
-int ByteTableModel::rowCount( const QModelIndex &parent ) const
+int ByteTableModel::rowCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? ByteSetSize : 0;
+    return (!parent.isValid()) ? ByteSetSize : 0;
 }
 
-int ByteTableModel::columnCount( const QModelIndex &parent ) const
+int ByteTableModel::columnCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? NoOfIds : 0;
+    return (!parent.isValid()) ? NoOfIds : 0;
 }
 
-QVariant ByteTableModel::data( const QModelIndex &index, int role ) const
+QVariant ByteTableModel::data(const QModelIndex& index, int role) const
 {
     QVariant result;
-    if( role == Qt::DisplayRole )
-    {
+    if (role == Qt::DisplayRole) {
         QString content;
 
         const unsigned char byte = index.row();
         const int column = index.column();
-        if( column == CharacterId )
-        {
-            const Okteta::Character decodedChar = mCharCodec->decode( byte );
+        if (column == CharacterId) {
+            const Okteta::Character decodedChar = mCharCodec->decode(byte);
             content =
                 decodedChar.isUndefined() ?
-                    i18nc( "@item:intable character is not defined", "undef." ) :
+                    i18nc("@item:intable character is not defined", "undef.") :
                 (decodedChar.unicode() == 0x09) ? // tab only creates a wider column
                     QString() :
-                    QString( static_cast<QChar>(decodedChar) );
-             // TODO: show proper descriptions for all control values, incl. space and delete
-             // cmp. KCharSelect
+                    QString(static_cast<QChar>(decodedChar));
+            // TODO: show proper descriptions for all control values, incl. space and delete
+            // cmp. KCharSelect
+        } else if (column < CharacterId) {
+            mValueCodec[column]->encode(content, 0, byte);
         }
-        else if( column < CharacterId )
-            mValueCodec[column]->encode( content, 0, byte );
 
         result = content;
-    }
-    else if( role == Qt::TextAlignmentRole )
+    } else if (role == Qt::TextAlignmentRole) {
         result = Qt::AlignRight;
+    }
 
     return result;
 }
 
-QVariant ByteTableModel::headerData( int section, Qt::Orientation orientation, int role ) const
+QVariant ByteTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     QVariant result;
 
-    if( role == Qt::DisplayRole )
-    {
+    if (role == Qt::DisplayRole) {
         const QString titel =
-            section == DecimalId ?     i18nc("@title:column short for Decimal",    "Dec") :
-            section == HexadecimalId ? i18nc("@title:column short for Hexadecimal","Hex") :
-            section == OctalId ?       i18nc("@title:column short for Octal",      "Oct") :
-            section == BinaryId ?      i18nc("@title:column short for Binary",     "Bin") :
-            section == CharacterId ?   i18nc("@title:column short for Character",  "Char") :
+            section == DecimalId ?     i18nc("@title:column short for Decimal",     "Dec") :
+            section == HexadecimalId ? i18nc("@title:column short for Hexadecimal", "Hex") :
+            section == OctalId ?       i18nc("@title:column short for Octal",       "Oct") :
+            section == BinaryId ?      i18nc("@title:column short for Binary",      "Bin") :
+            section == CharacterId ?   i18nc("@title:column short for Character",   "Char") :
             QString();
         result = titel;
-    }
-    else if( role == Qt::ToolTipRole )
-    {
+    } else if (role == Qt::ToolTipRole) {
         const QString titel =
             section == DecimalId ?
-                i18nc("@info:tooltip column contains the value in decimal format",    "Decimal") :
+                i18nc("@info:tooltip column contains the value in decimal format",     "Decimal") :
             section == HexadecimalId ?
-                i18nc("@info:tooltip column contains the value in hexadecimal format","Hexadecimal") :
+                i18nc("@info:tooltip column contains the value in hexadecimal format", "Hexadecimal") :
             section == OctalId ?
-                i18nc("@info:tooltip column contains the value in octal format",      "Octal") :
+                i18nc("@info:tooltip column contains the value in octal format",       "Octal") :
             section == BinaryId ?
-                i18nc("@info:tooltip column contains the value in binary format",     "Binary") :
+                i18nc("@info:tooltip column contains the value in binary format",      "Binary") :
             section == CharacterId ?
-                i18nc("@info:tooltip column contains the character with the value",   "Character") :
-            QString();
+                i18nc("@info:tooltip column contains the character with the value",    "Character") :
+                QString();
         result = titel;
+    } else {
+        result = QAbstractTableModel::headerData(section, orientation, role);
     }
-    else
-        result = QAbstractTableModel::headerData( section, orientation, role );
 
     return result;
 }
 
 ByteTableModel::~ByteTableModel()
 {
-    for( int i=0; i<NofOfValueCodings; ++i )
+    for (int i = 0; i < NofOfValueCodings; ++i) {
         delete mValueCodec[i];
+    }
+
     delete mCharCodec;
 }
 

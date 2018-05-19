@@ -28,25 +28,23 @@
 // Qt
 #include <QByteArray>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TestDocumentFileSynchronizerFactory : public AbstractModelSynchronizerFactory
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    TestDocumentFileSynchronizerFactory( const QByteArray& header = QByteArray() );
+public:
+    TestDocumentFileSynchronizerFactory(const QByteArray& header = QByteArray());
     ~TestDocumentFileSynchronizerFactory() override;
 
-  public: // AbstractModelSynchronizerFactory API
+public: // AbstractModelSynchronizerFactory API
     AbstractModelSynchronizer* createSynchronizer() const override;
 
     QString supportedWorkType() const override;
     QString supportedRemoteType() const override;
 
-  protected:
+protected:
     QByteArray mHeader;
 };
 

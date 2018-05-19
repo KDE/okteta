@@ -36,22 +36,20 @@
 // Qt
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 SearchTool::SearchTool()
-  : mCaseSensitivity( Qt::CaseSensitive ),
-    mUserQueryAgent( nullptr ),
-    mByteArrayView( nullptr ),
-    mByteArrayModel( nullptr )
+    : mCaseSensitivity(Qt::CaseSensitive)
+    , mUserQueryAgent(nullptr)
+    , mByteArrayView(nullptr)
+    , mByteArrayModel(nullptr)
 {
-    setObjectName( QStringLiteral( "Search" ) );
+    setObjectName(QStringLiteral("Search"));
 }
 
 bool SearchTool::isApplyable() const
 {
-    return ( mByteArrayView && mByteArrayModel );
+    return (mByteArrayView && mByteArrayModel);
 //     const int newPosition = finalTargetOffset();
 
 //     return ( mByteArrayView && mByteArrayModel
@@ -63,38 +61,41 @@ QString SearchTool::title() const { return i18nc("@title", "Search"); }
 bool SearchTool::hasSelectedData()   const { return mByteArrayView->hasSelectedData(); }
 QString SearchTool::charCodingName() const { return mByteArrayView->charCodingName(); }
 
-void SearchTool::setTargetModel( AbstractModel* model )
+void SearchTool::setTargetModel(AbstractModel* model)
 {
     const bool oldIsApplyable = isApplyable();
 
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
-    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+    }
+    if (mByteArrayModel) {
+        mByteArrayModel->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
-    if( mByteArrayView && mByteArrayModel )
-    {
-        connect( mByteArrayView,  &ByteArrayView::charCodecChanged,
-                 this, &SearchTool::charCodecChanged );
+    if (mByteArrayView && mByteArrayModel) {
+        connect(mByteArrayView,  &ByteArrayView::charCodecChanged,
+                this, &SearchTool::charCodecChanged);
         // TODO: update isApplyable on cursor movement and size changes
     }
 
     const bool newIsApplyable = isApplyable();
-    if( oldIsApplyable != newIsApplyable )
-        emit isApplyableChanged( newIsApplyable );
+    if (oldIsApplyable != newIsApplyable) {
+        emit isApplyableChanged(newIsApplyable);
+    }
 }
 
-
-void SearchTool::setUserQueryAgent( If::SearchUserQueryable* userQueryAgent )
+void SearchTool::setUserQueryAgent(If::SearchUserQueryable* userQueryAgent)
 {
     mUserQueryAgent = userQueryAgent;
 }
 
-void SearchTool::setSearchData( const QByteArray& searchData )
+void SearchTool::setSearchData(const QByteArray& searchData)
 {
 //     const bool oldIsApplyable = isApplyable();
 
@@ -105,7 +106,7 @@ void SearchTool::setSearchData( const QByteArray& searchData )
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void SearchTool::setCaseSensitivity( Qt::CaseSensitivity caseSensitivity )
+void SearchTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 {
 //     const bool oldIsApplyable = isApplyable();
 
@@ -116,15 +117,13 @@ void SearchTool::setCaseSensitivity( Qt::CaseSensitivity caseSensitivity )
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelection )
+void SearchTool::search(KFindDirection direction, bool fromCursor, bool inSelection)
 {
     mPreviousFound = false;
 
-    if( inSelection )
-    {
+    if (inSelection) {
         const Okteta::AddressRange selection = mByteArrayView->selection();
-        if( ! selection.isValid() )
-        {
+        if (!selection.isValid()) {
             // nothing selected, so skip any search and finish now
             emit dataNotFound();
             return;
@@ -132,71 +131,62 @@ void SearchTool::search( KFindDirection direction, bool fromCursor, bool inSelec
 
         mSearchFirstIndex = selection.start();
         mSearchLastIndex =  selection.end();
-    }
-    else
-    {
+    } else {
         const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
-        if( fromCursor && (cursorPosition!=0) )
-        {
+        if (fromCursor && (cursorPosition != 0)) {
             mSearchFirstIndex = cursorPosition;
             mSearchLastIndex =  cursorPosition - 1;
-        }
-        else
-        {
+        } else {
             mSearchFirstIndex = 0;
             mSearchLastIndex =  mByteArrayModel->size() - 1;
         }
     }
 
-    doSearch( direction );
+    doSearch(direction);
 }
 
-void SearchTool::doSearch( KFindDirection direction )
+void SearchTool::doSearch(KFindDirection direction)
 {
     // TODO: should start at last
-    Okteta::Address startIndex = (direction==FindForward) ? mSearchFirstIndex : mSearchLastIndex/*-mSearchData.size()*/;
-    bool wrapEnabled = (direction==FindForward) ? (mSearchLastIndex<startIndex) : (startIndex<mSearchFirstIndex);
+    Okteta::Address startIndex = (direction == FindForward) ? mSearchFirstIndex : mSearchLastIndex /*-mSearchData.size()*/;
+    bool wrapEnabled = (direction == FindForward) ? (mSearchLastIndex < startIndex) : (startIndex < mSearchFirstIndex);
 
-    while( true )
-    {
-        QApplication::setOverrideCursor( Qt::WaitCursor );
+    while (true) {
+        QApplication::setOverrideCursor(Qt::WaitCursor);
 
         Okteta::Address endIndex = wrapEnabled ?
-            ( (direction==FindForward) ? mByteArrayModel->size()-1 : 0 ) :
-            ( (direction==FindForward) ? mSearchLastIndex : mSearchFirstIndex );
+                                   ((direction == FindForward) ? mByteArrayModel->size() - 1 : 0) :
+                                   ((direction == FindForward) ? mSearchLastIndex : mSearchFirstIndex);
 
         SearchJob* searchJob =
-            new SearchJob( mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName() );
+            new SearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
         const Okteta::Address pos = searchJob->exec();
 
         QApplication::restoreOverrideCursor();
 
-        if( pos != -1 )
-        {
+        if (pos != -1) {
             mPreviousFound = true;
-            mByteArrayView->setSelection( pos, pos+mSearchData.size()-1 );
+            mByteArrayView->setSelection(pos, pos + mSearchData.size() - 1);
             break;
         }
 
-        if( wrapEnabled )
-        {
-            const bool wrapping = mUserQueryAgent ? mUserQueryAgent->queryContinue( direction ) : true;
+        if (wrapEnabled) {
+            const bool wrapping = mUserQueryAgent ? mUserQueryAgent->queryContinue(direction) : true;
 
-            if( ! wrapping )
+            if (!wrapping) {
                 break;
-            startIndex = ( direction == FindForward ) ? 0 : mByteArrayModel->size()-1;
+            }
+            startIndex = (direction == FindForward) ? 0 : mByteArrayModel->size() - 1;
             wrapEnabled = false;
-        }
-        else
-        {
-            if( !mPreviousFound )
+        } else {
+            if (!mPreviousFound) {
                 emit dataNotFound();
+            }
             break;
         }
     }
     mByteArrayView->setFocus();
 }
-
 
 SearchTool::~SearchTool()
 {

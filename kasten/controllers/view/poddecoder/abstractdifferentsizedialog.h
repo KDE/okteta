@@ -26,22 +26,19 @@
 // Kasten core
 #include <kasten/kastencore.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDifferentSizeDialog
 {
-  protected:
+protected:
     AbstractDifferentSizeDialog();
 
-  public:
+public:
     virtual ~AbstractDifferentSizeDialog();
 
-  public: // API to be implemented
-    virtual Answer query( int newValueSize, int oldValueSize, int sizeLeft ) = 0;
+public: // API to be implemented
+    virtual Answer query(int newValueSize, int oldValueSize, int sizeLeft) = 0;
 };
-
 
 inline AbstractDifferentSizeDialog::AbstractDifferentSizeDialog() {}
 inline AbstractDifferentSizeDialog::~AbstractDifferentSizeDialog() {}

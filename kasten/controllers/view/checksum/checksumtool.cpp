@@ -22,7 +22,7 @@
 
 // QCA
 // need to have this first, as QCA needs QT_NO_CAST_FROM_ASCII disabled when included
-#include <config-qca2.h> //krazy:excludeall=includes
+#include <config-qca2.h> // krazy:excludeall=includes
 #ifdef HAVE_QCA2
 // disable QT_NO_CAST_FROM_ASCII
 #ifdef QT_NO_CAST_FROM_ASCII
@@ -39,7 +39,7 @@
 //
 #include <bytearraychecksumalgorithmfactory.h>
 #include <abstractbytearraychecksumalgorithm.h>
-// 
+//
 #include <kasten/okteta/bytearrayview.h>
 #include <kasten/okteta/bytearraydocument.h>
 // Okteta core
@@ -50,25 +50,24 @@
 // Qt
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ChecksumTool::ChecksumTool()
-  : AbstractTool(),
-    mChecksumUptodate( false ),
-    mSourceByteArrayModelUptodate( false ),
-    mAlgorithmId( 0 ),
-    mByteArrayView( nullptr ), mByteArrayModel( nullptr ),
-    mSourceAlgorithmId( -1 ),
-    mSourceByteArrayModel( nullptr )
+    : AbstractTool()
+    , mChecksumUptodate(false)
+    , mSourceByteArrayModelUptodate(false)
+    , mAlgorithmId(0)
+    , mByteArrayView(nullptr)
+    , mByteArrayModel(nullptr)
+    , mSourceAlgorithmId(-1)
+    , mSourceByteArrayModel(nullptr)
 {
-    setObjectName( QStringLiteral( "Checksum" ) );
+    setObjectName(QStringLiteral("Checksum"));
 
 // TODO: find a better place to do and store the initialization
 #ifdef HAVE_QCA2
-    mQcaInitializer = new QCA::Initializer( QCA::Practical, 64 );
-qCDebug(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM)<< QCA::supportedFeatures();//Hash::supportedTypes();
+    mQcaInitializer = new QCA::Initializer(QCA::Practical, 64);
+    qCDebug(LOG_OKTETA_KASTEN_CONTROLLER_CHECKSUM) << QCA::supportedFeatures();// Hash::supportedTypes();
 #endif
 
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
@@ -78,67 +77,65 @@ QList<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const {
 
 bool ChecksumTool::isApplyable() const
 {
-    return ( mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() );
+    return (mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData());
 }
-
 
 QString ChecksumTool::title() const { return i18nc("@title:window of the tool to calculate checksums", "Checksum"); }
 
-
 AbstractByteArrayChecksumParameterSet* ChecksumTool::parameterSet()
 {
-    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at( mAlgorithmId );
+    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
 
     return algorithm ? algorithm->parameterSet() : nullptr;
 }
 
-void ChecksumTool::setTargetModel( AbstractModel* model )
+void ChecksumTool::setTargetModel(AbstractModel* model)
 {
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
-    if( mByteArrayView && mByteArrayModel )
-    {
-        connect( mByteArrayView,  &ByteArrayView::selectedDataChanged,
-                 this, &ChecksumTool::onSelectionChanged );
+    if (mByteArrayView && mByteArrayModel) {
+        connect(mByteArrayView,  &ByteArrayView::selectedDataChanged,
+                this, &ChecksumTool::onSelectionChanged);
     }
 
     // TODO: if there is no view, there is nothing calculate a checksum from
     // or this could be the view where we did the checksum from and it did not change
     checkUptoDate();
-    emit uptodateChanged( mChecksumUptodate );
-    emit isApplyableChanged( isApplyable() );
+    emit uptodateChanged(mChecksumUptodate);
+    emit isApplyableChanged(isApplyable());
 }
-
 
 void ChecksumTool::checkUptoDate()
 {
     mChecksumUptodate =
-        ( mSourceByteArrayModel == mByteArrayModel
-          && mByteArrayView && mSourceSelection == mByteArrayView->selection()
-          && mSourceAlgorithmId == mAlgorithmId
-          && mSourceByteArrayModelUptodate );
+        (mSourceByteArrayModel == mByteArrayModel
+         && mByteArrayView && mSourceSelection == mByteArrayView->selection()
+         && mSourceAlgorithmId == mAlgorithmId
+         && mSourceByteArrayModelUptodate);
 }
-
 
 void ChecksumTool::calculateChecksum()
 {
-    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at( mAlgorithmId );
+    AbstractByteArrayChecksumAlgorithm* algorithm = mAlgorithmList.at(mAlgorithmId);
 
-    if( algorithm )
-    {
+    if (algorithm) {
         // forget old string source
-        if( mSourceByteArrayModel ) mSourceByteArrayModel->disconnect( this );
+        if (mSourceByteArrayModel) {
+            mSourceByteArrayModel->disconnect(this);
+        }
 
-        QApplication::setOverrideCursor( Qt::WaitCursor );
+        QApplication::setOverrideCursor(Qt::WaitCursor);
 
         ChecksumCalculateJob* checksumCalculateJob =
-            new ChecksumCalculateJob( &mCheckSum, algorithm, mByteArrayModel, mByteArrayView->selection() );
+            new ChecksumCalculateJob(&mCheckSum, algorithm, mByteArrayModel, mByteArrayView->selection());
         checksumCalculateJob->exec();
 
         QApplication::restoreOverrideCursor();
@@ -147,24 +144,24 @@ void ChecksumTool::calculateChecksum()
         mSourceAlgorithmId = mAlgorithmId;
         mSourceByteArrayModel = mByteArrayModel;
         mSourceSelection = mByteArrayView->selection();
-        connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
-                 this, &ChecksumTool::onSourceChanged );
-        connect( mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
-                 this, &ChecksumTool::onSourceDestroyed );
+        connect(mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::contentsChanged,
+                this, &ChecksumTool::onSourceChanged);
+        connect(mSourceByteArrayModel,  &Okteta::AbstractByteArrayModel::destroyed,
+                this, &ChecksumTool::onSourceDestroyed);
 
         mChecksumUptodate = true;
         mSourceByteArrayModelUptodate = true;
-        emit checksumChanged( mCheckSum );
-        emit uptodateChanged( true );
+        emit checksumChanged(mCheckSum);
+        emit uptodateChanged(true);
     }
 }
 
-void ChecksumTool::setAlgorithm( int algorithmId )
+void ChecksumTool::setAlgorithm(int algorithmId)
 {
     mAlgorithmId = algorithmId;
     checkUptoDate();
-    emit uptodateChanged( mChecksumUptodate );
-    emit isApplyableChanged( isApplyable() );
+    emit uptodateChanged(mChecksumUptodate);
+    emit isApplyableChanged(isApplyable());
 }
 
 // TODO: hack!
@@ -175,23 +172,23 @@ void ChecksumTool::resetSourceTool()
     mSourceAlgorithmId = -1;
 
     checkUptoDate();
-    emit uptodateChanged( mChecksumUptodate );
-    emit isApplyableChanged( isApplyable() );
+    emit uptodateChanged(mChecksumUptodate);
+    emit isApplyableChanged(isApplyable());
 }
 
 void ChecksumTool::onSelectionChanged()
 {
 // TODO: could be quicker using the selection data
     checkUptoDate();
-    emit uptodateChanged( mChecksumUptodate );
-    emit isApplyableChanged( isApplyable() );
+    emit uptodateChanged(mChecksumUptodate);
+    emit isApplyableChanged(isApplyable());
 }
 
 void ChecksumTool::onSourceChanged()
 {
     mChecksumUptodate = false;
     mSourceByteArrayModelUptodate = false;
-    emit uptodateChanged( false );
+    emit uptodateChanged(false);
 }
 
 void ChecksumTool::onSourceDestroyed()
@@ -202,7 +199,7 @@ void ChecksumTool::onSourceDestroyed()
 
 ChecksumTool::~ChecksumTool()
 {
-    qDeleteAll( mAlgorithmList );
+    qDeleteAll(mAlgorithmList);
 #ifdef HAVE_QCA2
     delete mQcaInitializer;
 #endif

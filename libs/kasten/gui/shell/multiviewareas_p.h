@@ -33,65 +33,61 @@
 class QDragMoveEvent;
 class QDropEvent;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TabbedViews;
 
-
 class MultiViewAreasPrivate : public AbstractGroupedViewsPrivate
 {
-  public:
-    explicit MultiViewAreasPrivate( MultiViewAreas* parent );
+public:
+    explicit MultiViewAreasPrivate(MultiViewAreas* parent);
 
     ~MultiViewAreasPrivate() override;
 
-  public:
+public:
     void init();
 
-  public: // AbstractViewArea API
+public: // AbstractViewArea API
     void setFocus();
     QWidget* widget() const;
     bool hasFocus() const;
 
-  public: // AbstractGroupedViews API
-    void addViews( const QList<AbstractView*>& views );
-    void removeViews( const QList<AbstractView*>& views );
-    void setViewFocus( AbstractView* view );
+public: // AbstractGroupedViews API
+    void addViews(const QList<AbstractView*>& views);
+    void removeViews(const QList<AbstractView*>& views);
+    void setViewFocus(AbstractView* view);
 
     QList<AbstractView*> viewList() const;
     int viewCount() const;
     AbstractView* viewFocus() const;
 
-  public: // If::ToolInlineViewable API
-    void setCurrentToolInlineView( AbstractToolInlineView* view );
+public: // If::ToolInlineViewable API
+    void setCurrentToolInlineView(AbstractToolInlineView* view);
 
-  public: // If::ViewAreaSplitable API
-    AbstractViewArea* splitViewArea( AbstractViewArea* viewArea, Qt::Orientation orientation );
-    void closeViewArea( AbstractViewArea* viewArea );
-    void setViewAreaFocus( AbstractViewArea* viewArea );
+public: // If::ViewAreaSplitable API
+    AbstractViewArea* splitViewArea(AbstractViewArea* viewArea, Qt::Orientation orientation);
+    void closeViewArea(AbstractViewArea* viewArea);
+    void setViewAreaFocus(AbstractViewArea* viewArea);
     AbstractViewArea* viewAreaFocus() const;
     int viewAreasCount() const;
 
-  protected:
-    int indexOf( AbstractView* view ) const;
+protected:
+    int indexOf(AbstractView* view) const;
 
-  protected:// slots
+protected:  // slots
     void onViewsRemoved();
-    void onViewAreaFocusChanged( bool hasFocus );
+    void onViewAreaFocusChanged(bool hasFocus);
 
-  protected:
-    Q_DECLARE_PUBLIC( MultiViewAreas )
+protected:
+    Q_DECLARE_PUBLIC(MultiViewAreas)
 
-  protected:
+protected:
     QList<TabbedViews*> mViewAreaList;
     QSplitter* mMainSplitter;
 
     TabbedViews* mCurrentViewArea;
     TabbedViews* mCurrentInlineToolViewArea;
 };
-
 
 inline QWidget* MultiViewAreasPrivate::widget()                 const { return mMainSplitter; }
 inline bool MultiViewAreasPrivate::hasFocus()                   const { return mCurrentViewArea->hasFocus(); }
@@ -104,8 +100,9 @@ inline QList<AbstractView*> MultiViewAreasPrivate::viewList() const
     QList<AbstractView*> result;
 
     result.reserve(mViewAreaList.size());
-    for( const TabbedViews* viewArea : mViewAreaList )
-        result.append( viewArea->viewList() );
+    for (const TabbedViews* viewArea : mViewAreaList) {
+        result.append(viewArea->viewList());
+    }
 
     return result;
 }
@@ -114,22 +111,21 @@ inline int MultiViewAreasPrivate::viewCount() const
 {
     int result = 0;
 
-    for( const TabbedViews* viewArea : mViewAreaList )
+    for (const TabbedViews* viewArea : mViewAreaList) {
         result += viewArea->viewCount();
+    }
 
     return result;
 }
 
-inline int MultiViewAreasPrivate::indexOf( AbstractView* view ) const
+inline int MultiViewAreasPrivate::indexOf(AbstractView* view) const
 {
     int result = -1;
 
     int globalBaseIndex = 0;
-    for( const TabbedViews* viewArea : mViewAreaList )
-    {
-        const int localIndexOf = viewArea->indexOf( view );
-        if( localIndexOf != -1 )
-        {
+    for (const TabbedViews* viewArea : mViewAreaList) {
+        const int localIndexOf = viewArea->indexOf(view);
+        if (localIndexOf != -1) {
             result = globalBaseIndex + localIndexOf;
             break;
         }
@@ -144,71 +140,73 @@ inline void MultiViewAreasPrivate::setFocus()
     mCurrentViewArea->setFocus();
 }
 
-inline void MultiViewAreasPrivate::addViews( const QList<AbstractView*>& views )
+inline void MultiViewAreasPrivate::addViews(const QList<AbstractView*>& views)
 {
-    Q_Q( MultiViewAreas );
+    Q_Q(MultiViewAreas);
 
-    mCurrentViewArea->addViews( views );
+    mCurrentViewArea->addViews(views);
 
-    emit q->added( views );
+    emit q->added(views);
 }
 
-inline void MultiViewAreasPrivate::removeViews( const QList<AbstractView*>& views )
+inline void MultiViewAreasPrivate::removeViews(const QList<AbstractView*>& views)
 {
-    Q_Q( MultiViewAreas );
+    Q_Q(MultiViewAreas);
 
     // TODO: possible to just send the views of the given area?
-    for( TabbedViews* viewArea : qAsConst(mViewAreaList) )
-        viewArea->removeViews( views );
+    for (TabbedViews* viewArea : qAsConst(mViewAreaList)) {
+        viewArea->removeViews(views);
+    }
 
     // TODO: above might trigger removal of areas before, is this a problem?
-    emit q->removing( views );
+    emit q->removing(views);
 }
 
-inline void MultiViewAreasPrivate::setCurrentToolInlineView( AbstractToolInlineView* view )
+inline void MultiViewAreasPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
-    if( mCurrentInlineToolViewArea && mCurrentInlineToolViewArea != mCurrentViewArea )
-        mCurrentInlineToolViewArea->setCurrentToolInlineView( nullptr );
+    if (mCurrentInlineToolViewArea && mCurrentInlineToolViewArea != mCurrentViewArea) {
+        mCurrentInlineToolViewArea->setCurrentToolInlineView(nullptr);
+    }
 
     mCurrentInlineToolViewArea = mCurrentViewArea;
 
-    mCurrentViewArea->setCurrentToolInlineView( view );
+    mCurrentViewArea->setCurrentToolInlineView(view);
 }
 
-inline void MultiViewAreasPrivate::setViewFocus( AbstractView *view )
+inline void MultiViewAreasPrivate::setViewFocus(AbstractView* view)
 {
     // TODO: makes this more efficient!
-    for( TabbedViews* viewArea : qAsConst(mViewAreaList) )
-    {
-        const int localIndex = viewArea->indexOf( view );
-        if( localIndex != -1 )
-        {
-            viewArea->setViewFocus( view );
+    for (TabbedViews* viewArea : qAsConst(mViewAreaList)) {
+        const int localIndex = viewArea->indexOf(view);
+        if (localIndex != -1) {
+            viewArea->setViewFocus(view);
             break;
         }
     }
 }
 
- //TODO: this method could be removed, as it is the same as _viewArea->setFocus(), or?
-inline void MultiViewAreasPrivate::setViewAreaFocus( AbstractViewArea* _viewArea )
+// TODO: this method could be removed, as it is the same as _viewArea->setFocus(), or?
+inline void MultiViewAreasPrivate::setViewAreaFocus(AbstractViewArea* _viewArea)
 {
-    TabbedViews* viewArea = static_cast<TabbedViews*>( _viewArea );
-    if( viewArea == mCurrentViewArea )
+    TabbedViews* viewArea = static_cast<TabbedViews*>(_viewArea);
+    if (viewArea == mCurrentViewArea) {
         return;
+    }
 
-    if( mViewAreaList.contains(viewArea) )
+    if (mViewAreaList.contains(viewArea)) {
         viewArea->setFocus();
+    }
 }
 
-inline void MultiViewAreasPrivate::closeViewArea( AbstractViewArea* _viewArea )
+inline void MultiViewAreasPrivate::closeViewArea(AbstractViewArea* _viewArea)
 {
-    Q_Q( MultiViewAreas );
+    Q_Q(MultiViewAreas);
 
-    TabbedViews* viewArea = static_cast<TabbedViews*>( _viewArea );
+    TabbedViews* viewArea = static_cast<TabbedViews*>(_viewArea);
 
     const QList<AbstractView*> views = viewArea->viewList();
 
-    emit q->closeRequest( views );
+    emit q->closeRequest(views);
 }
 
 }

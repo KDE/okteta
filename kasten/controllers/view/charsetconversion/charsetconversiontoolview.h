@@ -28,26 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class CharsetConversionView;
 class CharsetConversionTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionToolView : public AbstractToolView
 {
-  public:
-    explicit CharsetConversionToolView( CharsetConversionTool* tool );
+public:
+    explicit CharsetConversionToolView(CharsetConversionTool* tool);
     ~CharsetConversionToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     CharsetConversionView* mWidget;
 };
 

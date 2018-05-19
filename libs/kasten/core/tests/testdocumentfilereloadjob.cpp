@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "testdocumentfilereloadjob.h"
 
 // lib
@@ -30,33 +29,31 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TestDocumentFileReloadJob::TestDocumentFileReloadJob( TestDocumentFileSynchronizer* synchronizer )
- : AbstractFileSystemSyncFromRemoteJob( synchronizer )
+TestDocumentFileReloadJob::TestDocumentFileReloadJob(TestDocumentFileSynchronizer* synchronizer)
+    : AbstractFileSystemSyncFromRemoteJob(synchronizer)
 {}
 
 void TestDocumentFileReloadJob::startReadFromFile()
 {
-    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
-    TestDocument* document = qobject_cast<TestDocument*>( synchronizer()->document() );
+    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    TestDocument* document = qobject_cast<TestDocument*>(synchronizer()->document());
     TestDocumentFileReloadThread* reloadThread =
-        new TestDocumentFileReloadThread( this, testSynchronizer->header(), /*document, */file() );
+        new TestDocumentFileReloadThread(this, testSynchronizer->header(), /*document, */ file());
     reloadThread->start();
-    while( !reloadThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!reloadThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     const bool success = reloadThread->success();
     // TODO: moved this here to avoid marshalling the change signals out of the thread. Good idea?
-    if( success )
-    {
-        document->setData( reloadThread->byteArray() );
+    if (success) {
+        document->setData(reloadThread->byteArray());
     }
     delete reloadThread;
 
-    completeRead( success );
+    completeRead(success);
 }
 
 TestDocumentFileReloadJob::~TestDocumentFileReloadJob()

@@ -22,13 +22,12 @@
 
 #include "abstractbytearraychecksumparameterset.h"
 
-
 class AbstractByteArrayChecksumParameterSet::Private
 {
 };
 
 AbstractByteArrayChecksumParameterSet::AbstractByteArrayChecksumParameterSet()
-  : d( new Private() )
+    : d(new Private())
 {}
 
 AbstractByteArrayChecksumParameterSet::~AbstractByteArrayChecksumParameterSet()

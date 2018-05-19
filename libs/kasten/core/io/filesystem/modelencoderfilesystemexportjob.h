@@ -26,28 +26,26 @@
 // lib
 #include <kasten/abstractfilesystemexportjob.h>
 
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelStreamEncoder;
 
 class ModelEncoderFileSystemExportJobPrivate;
 
-
 class KASTENCORE_EXPORT ModelEncoderFileSystemExportJob : public AbstractFileSystemExportJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ModelEncoderFileSystemExportJob( AbstractModel* model, const AbstractModelSelection* selection,
-                                     const QUrl& url, AbstractModelStreamEncoder* encoder );
+public:
+    ModelEncoderFileSystemExportJob(AbstractModel* model, const AbstractModelSelection* selection,
+                                    const QUrl& url, AbstractModelStreamEncoder* encoder);
     ~ModelEncoderFileSystemExportJob() override;
 
-  protected: // AbstractFileSystemExportJob API
+protected: // AbstractFileSystemExportJob API
     void startExportToFile() override;
 
-  protected:
-    Q_DECLARE_PRIVATE( ModelEncoderFileSystemExportJob )
+protected:
+    Q_DECLARE_PRIVATE(ModelEncoderFileSystemExportJob)
 };
 
 }

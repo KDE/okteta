@@ -31,28 +31,25 @@
 class KXMLGUIClient;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayViewProfileManager;
-
 
 class OKTETAKASTENCONTROLLERS_EXPORT ViewProfilesManageController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ViewProfilesManageController( KXMLGUIClient* guiClient,
-                                           ByteArrayViewProfileManager* viewProfileManager,
-                                           QWidget* parentWidget );
+public:
+    explicit ViewProfilesManageController(KXMLGUIClient* guiClient,
+                                          ByteArrayViewProfileManager* viewProfileManager,
+                                          QWidget* parentWidget);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void manageProfiles();
 
-  private:
+private:
     QWidget* mParentWidget;
     ByteArrayViewProfileManager* mViewProfileManager;
 

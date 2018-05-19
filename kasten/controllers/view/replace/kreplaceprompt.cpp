@@ -30,39 +30,36 @@
 #include <QPushButton>
 #include <QEventLoop>
 
+namespace Kasten {
 
-namespace Kasten
+KReplacePrompt::KReplacePrompt(QWidget* parent)
+    : QDialog(parent)
 {
-
-KReplacePrompt::KReplacePrompt( QWidget* parent )
- : QDialog( parent )
-{
-    setModal( true );
-    setWindowTitle( i18nc("@title:window prompt for iterative replacement","Replace") );
+    setModal(true);
+    setWindowTitle(i18nc("@title:window prompt for iterative replacement", "Replace"));
 
     // dialog buttons
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
-    QPushButton* button = dialogButtonBox->addButton( i18nc("@action:button","Replace &All"),
-                                                      QDialogButtonBox::ApplyRole );
-    connect( button, &QAbstractButton::clicked, this, &KReplacePrompt::onReplaceAllButton );
-    button = dialogButtonBox->addButton( i18nc("@action:button","&Skip"),
-                                         QDialogButtonBox::ApplyRole );
-    connect( button, &QAbstractButton::clicked, this, &KReplacePrompt::onSkipButton );
-    QPushButton* replaceButton = dialogButtonBox->addButton( i18nc("@action:button","Replace"),
-                                                             QDialogButtonBox::ApplyRole );
-    connect( replaceButton, &QAbstractButton::clicked, this, &KReplacePrompt::onReplaceButton );
-    button = dialogButtonBox->addButton( QDialogButtonBox::Close );
-    connect( button, &QAbstractButton::clicked, this, &KReplacePrompt::onCloseButton );
-
+    QPushButton* button = dialogButtonBox->addButton(i18nc("@action:button", "Replace &All"),
+                                                     QDialogButtonBox::ApplyRole);
+    connect(button, &QAbstractButton::clicked, this, &KReplacePrompt::onReplaceAllButton);
+    button = dialogButtonBox->addButton(i18nc("@action:button", "&Skip"),
+                                        QDialogButtonBox::ApplyRole);
+    connect(button, &QAbstractButton::clicked, this, &KReplacePrompt::onSkipButton);
+    QPushButton* replaceButton = dialogButtonBox->addButton(i18nc("@action:button", "Replace"),
+                                                            QDialogButtonBox::ApplyRole);
+    connect(replaceButton, &QAbstractButton::clicked, this, &KReplacePrompt::onReplaceButton);
+    button = dialogButtonBox->addButton(QDialogButtonBox::Close);
+    connect(button, &QAbstractButton::clicked, this, &KReplacePrompt::onCloseButton);
 
     // main layout
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget( dialogButtonBox );
+    layout->addWidget(dialogButtonBox);
 
-    setLayout( layout );
+    setLayout(layout);
     resize(minimumSize());
 
-    replaceButton->setDefault( true );
+    replaceButton->setDefault(true);
 }
 
 ReplaceBehaviour KReplacePrompt::query()

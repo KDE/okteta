@@ -30,24 +30,22 @@
 #include <QSpinBox>
 #include <QDialogButtonBox>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-BytesPerGroupDialog::BytesPerGroupDialog( QWidget* parent )
-  : QDialog( parent )
+BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
+    : QDialog(parent)
 {
     QFormLayout* pageLayout = new QFormLayout();
 
-    mGroupedBytesCountEdit = new QSpinBox( this );
-    mGroupedBytesCountEdit->setRange( 0, INT_MAX );
-    const QString noGroupingText = i18nc( "@label",
-                                          "No grouping." );
-    mGroupedBytesCountEdit->setSpecialValueText( noGroupingText );
+    mGroupedBytesCountEdit = new QSpinBox(this);
+    mGroupedBytesCountEdit->setRange(0, INT_MAX);
+    const QString noGroupingText = i18nc("@label",
+                                         "No grouping.");
+    mGroupedBytesCountEdit->setSpecialValueText(noGroupingText);
     const QString groupedBytesCountLabel =
-        i18nc( "@label:spinbox number of bytes which are grouped",
-               "Bytes per Group:" );
-    pageLayout->addRow( groupedBytesCountLabel, mGroupedBytesCountEdit );
+        i18nc("@label:spinbox number of bytes which are grouped",
+              "Bytes per Group:");
+    pageLayout->addRow(groupedBytesCountLabel, mGroupedBytesCountEdit);
 
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
@@ -61,15 +59,15 @@ BytesPerGroupDialog::BytesPerGroupDialog( QWidget* parent )
     setLayout(layout);
 
     const QString caption =
-        i18nc("@title:window","Bytes per Group");
-    setWindowTitle( caption );
+        i18nc("@title:window", "Bytes per Group");
+    setWindowTitle(caption);
 }
 
 int BytesPerGroupDialog::groupedBytesCount() const { return mGroupedBytesCountEdit->value(); }
 
-void BytesPerGroupDialog::setGroupedBytesCount( int groupedBytesCount )
+void BytesPerGroupDialog::setGroupedBytesCount(int groupedBytesCount)
 {
-    mGroupedBytesCountEdit->setValue( groupedBytesCount );
+    mGroupedBytesCountEdit->setValue(groupedBytesCount);
 }
 
 BytesPerGroupDialog::~BytesPerGroupDialog() {}

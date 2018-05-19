@@ -26,28 +26,26 @@
 // Kasten core
 #include <abstractfilesystemsynctoremotejob.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TestDocumentFileSynchronizer;
 class TestDocumentFileWriteThread;
 
 class TestDocumentFileWriteJob : public AbstractFileSystemSyncToRemoteJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    TestDocumentFileWriteJob( TestDocumentFileSynchronizer* synchronizer );
+public:
+    TestDocumentFileWriteJob(TestDocumentFileSynchronizer* synchronizer);
     ~TestDocumentFileWriteJob() override;
 
-  protected: // AbstractFileSystemSyncToRemoteJob API
+protected: // AbstractFileSystemSyncToRemoteJob API
     void startWriteToFile() override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
 //     void onDataPulled();
 
-  protected:
+protected:
     TestDocumentFileWriteThread* mWriteThread;
 };
 

@@ -27,19 +27,18 @@
 
 #include <KLocalizedString>
 
-
 StructureViewSettingsWidget::StructureViewSettingsWidget()
-  : QWidget()
+    : QWidget()
 {
     ui.setupUi(this);
     ui.combo_CharDisplayBase->setEnabled(ui.kcfg_ShowCharNumericalValue->isChecked());
 
-    //no need for a hidden spinbox with byteOrder, since it is a simple sequential enum
+    // no need for a hidden spinbox with byteOrder, since it is a simple sequential enum
 
-    //setup the hidden spin boxes for the display bases
-    //these are needed since KConfigXT always uses the combo box index as the value
-    //we want the UserData of the current index instead
-    //maybe there is a nicer solution, but this works
+    // setup the hidden spin boxes for the display bases
+    // these are needed since KConfigXT always uses the combo box index as the value
+    // we want the UserData of the current index instead
+    // maybe there is a nicer solution, but this works
     ui.kcfg_CharDisplayBase->setValue(Kasten::StructureViewPreferences::charDisplayBase());
     ui.kcfg_CharDisplayBase->setHidden(true);
     ui.kcfg_SignedDisplayBase->setValue(Kasten::StructureViewPreferences::signedDisplayBase());
@@ -47,11 +46,11 @@ StructureViewSettingsWidget::StructureViewSettingsWidget()
     ui.kcfg_UnsignedDisplayBase->setValue(Kasten::StructureViewPreferences::unsignedDisplayBase());
     ui.kcfg_UnsignedDisplayBase->setHidden(true);
     setupBasesCombo(ui.combo_SignedDisplayBase, Kasten::StructureViewPreferences::self()->signedDisplayBaseItem(),
-        Kasten::StructureViewPreferences::signedDisplayBase(), SLOT(setSignedDisplay(int)));
+                    Kasten::StructureViewPreferences::signedDisplayBase(), SLOT(setSignedDisplay(int)));
     setupBasesCombo(ui.combo_UnsignedDisplayBase, Kasten::StructureViewPreferences::self()->unsignedDisplayBaseItem(),
-        Kasten::StructureViewPreferences::unsignedDisplayBase(), SLOT(setUnsignedDisplay(int)));
+                    Kasten::StructureViewPreferences::unsignedDisplayBase(), SLOT(setUnsignedDisplay(int)));
     setupBasesCombo(ui.combo_CharDisplayBase, Kasten::StructureViewPreferences::self()->charDisplayBaseItem(),
-        Kasten::StructureViewPreferences::charDisplayBase(), SLOT(setCharDisplay(int)));
+                    Kasten::StructureViewPreferences::charDisplayBase(), SLOT(setCharDisplay(int)));
 }
 
 StructureViewSettingsWidget::~StructureViewSettingsWidget()
@@ -59,7 +58,7 @@ StructureViewSettingsWidget::~StructureViewSettingsWidget()
 }
 
 void StructureViewSettingsWidget::setupBasesCombo(QComboBox* box, KConfigSkeletonItem* configItem,
-        int currentValue, const char* slot)
+                                                  int currentValue, const char* slot)
 {
     Q_ASSERT(box->count() == 0);
     Q_ASSERT(currentValue == 2 || currentValue == 8 || currentValue == 10 || currentValue == 16);
@@ -79,8 +78,9 @@ void StructureViewSettingsWidget::handleMapping(int index, QComboBox* box, QSpin
 {
     QVariant currentValue = box->itemData(index);
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "box changed to " << index << "value = " << currentValue;
-    if (spin->value() != currentValue.toInt())
+    if (spin->value() != currentValue.toInt()) {
         spin->setValue(currentValue.toInt());
+    }
 }
 
 void StructureViewSettingsWidget::setCharDisplay(int index)

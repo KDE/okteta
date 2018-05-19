@@ -37,22 +37,20 @@
 // Qt
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ReplaceTool::ReplaceTool()
-  : mCaseSensitivity( Qt::CaseSensitive ),
-    mUserQueryAgent( nullptr ),
-    mByteArrayView( nullptr ),
-    mByteArrayModel( nullptr )
+    : mCaseSensitivity(Qt::CaseSensitive)
+    , mUserQueryAgent(nullptr)
+    , mByteArrayView(nullptr)
+    , mByteArrayModel(nullptr)
 {
-    setObjectName( QStringLiteral( "Replace" ) );
+    setObjectName(QStringLiteral("Replace"));
 }
 
 bool ReplaceTool::isApplyable() const
 {
-    return ( mByteArrayView && mByteArrayModel && !mByteArrayView->isReadOnly() );
+    return (mByteArrayView && mByteArrayModel && !mByteArrayView->isReadOnly());
 //     const int newPosition = finalTargetOffset();
 
 //     return ( mByteArrayView && mByteArrayModel
@@ -64,38 +62,40 @@ QString ReplaceTool::title() const { return i18nc("@title", "Replace"); }
 bool ReplaceTool::hasSelectedData()   const { return mByteArrayView->hasSelectedData(); }
 QString ReplaceTool::charCodingName() const { return mByteArrayView->charCodingName(); }
 
-
-void ReplaceTool::setTargetModel( AbstractModel* model )
+void ReplaceTool::setTargetModel(AbstractModel* model)
 {
     const bool oldIsApplyable = isApplyable();
 
-    if( mByteArrayView ) mByteArrayView->disconnect( this );
-    if( mByteArrayModel ) mByteArrayModel->disconnect( this );
+    if (mByteArrayView) {
+        mByteArrayView->disconnect(this);
+    }
+    if (mByteArrayModel) {
+        mByteArrayModel->disconnect(this);
+    }
 
     mByteArrayView = model ? model->findBaseModel<ByteArrayView*>() : nullptr;
 
     ByteArrayDocument* document =
-        mByteArrayView ? qobject_cast<ByteArrayDocument*>( mByteArrayView->baseModel() ) : nullptr;
+        mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
-    if( mByteArrayView && mByteArrayModel )
-    {
-        connect( mByteArrayView, &ByteArrayView::readOnlyChanged, this, &ReplaceTool::onReadOnlyChanged );
+    if (mByteArrayView && mByteArrayModel) {
+        connect(mByteArrayView, &ByteArrayView::readOnlyChanged, this, &ReplaceTool::onReadOnlyChanged);
         // TODO: update isApplyable on cursor movement and size changes
     }
 
     const bool newIsApplyable = isApplyable();
-    if( oldIsApplyable != newIsApplyable )
-        emit isApplyableChanged( newIsApplyable );
+    if (oldIsApplyable != newIsApplyable) {
+        emit isApplyableChanged(newIsApplyable);
+    }
 }
 
-
-void ReplaceTool::setUserQueryAgent( If::ReplaceUserQueryable* userQueryAgent )
+void ReplaceTool::setUserQueryAgent(If::ReplaceUserQueryable* userQueryAgent)
 {
     mUserQueryAgent = userQueryAgent;
 }
 
-void ReplaceTool::setSearchData( const QByteArray& searchData )
+void ReplaceTool::setSearchData(const QByteArray& searchData)
 {
 //     const bool oldIsApplyable = isApplyable();
 
@@ -106,7 +106,7 @@ void ReplaceTool::setSearchData( const QByteArray& searchData )
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void ReplaceTool::setReplaceData( const QByteArray& replaceData )
+void ReplaceTool::setReplaceData(const QByteArray& replaceData)
 {
 //     const bool oldIsApplyable = isApplyable();
 
@@ -117,7 +117,7 @@ void ReplaceTool::setReplaceData( const QByteArray& replaceData )
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void ReplaceTool::setCaseSensitivity( Qt::CaseSensitivity caseSensitivity )
+void ReplaceTool::setCaseSensitivity(Qt::CaseSensitivity caseSensitivity)
 {
 //     const bool oldIsApplyable = isApplyable();
 
@@ -128,24 +128,22 @@ void ReplaceTool::setCaseSensitivity( Qt::CaseSensitivity caseSensitivity )
 //         emit isApplyableChanged( newIsApplyable );
 }
 
-void ReplaceTool::setDoPrompt( int doPrompt )
+void ReplaceTool::setDoPrompt(int doPrompt)
 {
     mDoPrompt = doPrompt;
 }
 
-void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSelection )
+void ReplaceTool::replace(KFindDirection direction, bool fromCursor, bool inSelection)
 {
     mPreviousFound = false;
 
     Okteta::Address startIndex;
 
-    if( inSelection )
-    {
+    if (inSelection) {
         const Okteta::AddressRange selection = mByteArrayView->selection();
-        if( ! selection.isValid() )
-        {
+        if (!selection.isValid()) {
             // nothing selected, so skip any search and finish now
-            emit finished( false, 0 );
+            emit finished(false, 0);
             return;
         }
 
@@ -154,65 +152,57 @@ void ReplaceTool::replace( KFindDirection direction, bool fromCursor, bool inSel
         startIndex = selection.start();
         mDoWrap = true; // TODO: no wrapping needed, or?
         direction = FindForward; // TODO: why only forward?
-    }
-    else
-    {
+    } else {
         const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
-        if( fromCursor && (cursorPosition!=0) )
-        {
+        if (fromCursor && (cursorPosition != 0)) {
             mReplaceFirstIndex = cursorPosition;
-            mReplaceLastIndex =  cursorPosition-1;
-        }
-        else
-        {
+            mReplaceLastIndex =  cursorPosition - 1;
+        } else {
             mReplaceFirstIndex = 0;
-            mReplaceLastIndex =  mByteArrayModel->size()-1;
+            mReplaceLastIndex =  mByteArrayModel->size() - 1;
         }
-        startIndex = (direction==FindForward) ? mReplaceFirstIndex : mReplaceLastIndex/*-mSearchData.size()*/;
-        mDoWrap = (direction==FindForward) ? (mReplaceLastIndex<startIndex) : (startIndex<mReplaceFirstIndex);
+        startIndex = (direction == FindForward) ? mReplaceFirstIndex : mReplaceLastIndex /*-mSearchData.size()*/;
+        mDoWrap = (direction == FindForward) ? (mReplaceLastIndex < startIndex) : (startIndex < mReplaceFirstIndex);
     }
 
-    doReplace( direction, startIndex );
+    doReplace(direction, startIndex);
 }
 
-void ReplaceTool::doReplace( KFindDirection direction, Okteta::Address startIndex )
+void ReplaceTool::doReplace(KFindDirection direction, Okteta::Address startIndex)
 {
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     int noOfReplacements = 0;
 
-    while( true )
-    {
-        const bool isForward = ( direction == FindForward );
+    while (true) {
+        const bool isForward = (direction == FindForward);
         Okteta::Address endIndex = mDoWrap ?
-            ( isForward ? mByteArrayModel->size()-1 : 0 ) :
-            ( isForward ? mReplaceLastIndex : mReplaceFirstIndex );
+                                   (isForward ? mByteArrayModel->size() - 1 : 0) :
+                                   (isForward ? mReplaceLastIndex : mReplaceFirstIndex);
 
         SearchJob* searchJob =
-            new SearchJob( mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName() );
+            new SearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
         const Okteta::Address pos = searchJob->exec();
 
-        if( pos != -1 )
-        {
+        if (pos != -1) {
             mPreviousFound = true;
 
             startIndex = pos;
             bool currentToBeReplaced;
             bool isCancelled;
 
-            if( mDoPrompt )
-            {
+            if (mDoPrompt) {
                 QApplication::restoreOverrideCursor();
 
-                mByteArrayView->setSelection( pos, pos+mSearchData.size()-1 );
+                mByteArrayView->setSelection(pos, pos + mSearchData.size() - 1);
 
                 const ReplaceBehaviour replaceBehaviour = mUserQueryAgent ?
-                     mUserQueryAgent->queryReplaceCurrent() :
-                     ReplaceAll;
+                                                          mUserQueryAgent->queryReplaceCurrent() :
+                                                          ReplaceAll;
 
-                mByteArrayView->selectAllData( false );
+                mByteArrayView->selectAllData(false);
 
-                switch( replaceBehaviour )
+                switch (replaceBehaviour)
                 {
                 case ReplaceAll:
                     mDoPrompt = false;
@@ -224,10 +214,11 @@ void ReplaceTool::doReplace( KFindDirection direction, Okteta::Address startInde
                     isCancelled = false;
                     break;
                 case SkipCurrent:
-                    if( isForward )
+                    if (isForward) {
                         ++startIndex;
-                    else
+                    } else {
                         --startIndex;
+                    }
                     currentToBeReplaced = false;
                     isCancelled = false;
                     break;
@@ -237,59 +228,56 @@ void ReplaceTool::doReplace( KFindDirection direction, Okteta::Address startInde
                     isCancelled = true;
                     mDoWrap = false;
                 }
-            }
-            else
-            {
+            } else {
                 currentToBeReplaced = true;
                 isCancelled = false;
             }
 
-            if( currentToBeReplaced )
-            {
+            if (currentToBeReplaced) {
                 ++noOfReplacements;
-                const Okteta::Size inserted = mByteArrayModel->replace( startIndex, mSearchData.size(),
-                                                                        reinterpret_cast<const Okteta::Byte*>(mReplaceData.constData()),
-                                                                        mReplaceData.size() );
-                if( isForward )
+                const Okteta::Size inserted = mByteArrayModel->replace(startIndex, mSearchData.size(),
+                                                                       reinterpret_cast<const Okteta::Byte*>(mReplaceData.constData()),
+                                                                       mReplaceData.size());
+                if (isForward) {
                     startIndex += inserted;
-                else
+                } else {
                     startIndex -= inserted;
+                }
             }
 
-            if( ! isCancelled )
+            if (!isCancelled) {
                 continue;
+            }
         }
 
         QApplication::restoreOverrideCursor();
         // reached end
-        if( mDoWrap )
-        {
-            const bool wrapping = mUserQueryAgent ? mUserQueryAgent->queryContinue( direction, noOfReplacements ) : true;
+        if (mDoWrap) {
+            const bool wrapping = mUserQueryAgent ? mUserQueryAgent->queryContinue(direction, noOfReplacements) : true;
 
-            if( ! wrapping )
+            if (!wrapping) {
                 break;
+            }
 
-            startIndex = (direction==FindForward) ? 0 : mByteArrayModel->size()-1;
+            startIndex = (direction == FindForward) ? 0 : mByteArrayModel->size() - 1;
             mDoWrap = false;
             noOfReplacements = 0;
 
-            QApplication::setOverrideCursor( Qt::WaitCursor );
-        }
-        else
-        {
-            emit finished( mPreviousFound, noOfReplacements );
+            QApplication::setOverrideCursor(Qt::WaitCursor);
+        } else {
+            emit finished(mPreviousFound, noOfReplacements);
 
             break;
         }
     }
 }
 
-void ReplaceTool::onReadOnlyChanged( bool isReadOnly )
+void ReplaceTool::onReadOnlyChanged(bool isReadOnly)
 {
-Q_UNUSED( isReadOnly )
+    Q_UNUSED(isReadOnly)
 
     // TODO: find out if isApplyable really changed, perhaps by caching the readonly state?
-    emit isApplyableChanged( isApplyable() );
+    emit isApplyableChanged(isApplyable());
 }
 
 ReplaceTool::~ReplaceTool()

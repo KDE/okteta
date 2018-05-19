@@ -33,18 +33,15 @@ class QCheckBox;
 class QSpinBox;
 class QLineEdit;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayViewProfile;
-
 
 class ViewProfileEdit : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ViewProfileEdit( QWidget* parent = nullptr );
+    explicit ViewProfileEdit(QWidget* parent = nullptr);
 
     ~ViewProfileEdit() override;
 
@@ -52,27 +49,31 @@ public:
     ByteArrayViewProfile viewProfile() const;
 
 public:
-    void setViewProfile( const ByteArrayViewProfile& viewProfile );
+    void setViewProfile(const ByteArrayViewProfile& viewProfile);
 
 Q_SIGNALS:
-    void profileTitleChanged( const QString& title );
+    void profileTitleChanged(const QString& title);
 
 protected Q_SLOTS:
-    void onLineBreakIndexChanged( int lineBreakIndex );
+    void onLineBreakIndexChanged(int lineBreakIndex);
 
 protected: // title
     QLineEdit* mTitleEdit;
+
 protected: // display
     QCheckBox* mLineOffsetShownCheckBox;
     KComboBox* mOffsetCodingComboBox;
     KComboBox* mValuesCharsShownComboBox;
     KComboBox* mDisplayModeComboBox;
+
 protected: // layout
     KComboBox* mLineBreakComboBox;
     QSpinBox* mGroupedBytesCountEdit;
     QSpinBox* mBytesPerLineEdit;
+
 protected: // value
     KComboBox* mValueCodingComboBox;
+
 protected: // char
     KComboBox* mCharCodingComboBox;
     QCheckBox* mNonPrintableShownCheckBox;

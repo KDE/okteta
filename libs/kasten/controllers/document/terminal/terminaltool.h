@@ -30,35 +30,32 @@
 
 class QUrl;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class DocumentSyncManager;
 class AbstractDocument;
 
-
 class KASTENCONTROLLERS_EXPORT TerminalTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit TerminalTool( DocumentSyncManager* documentSyncManager );
+public:
+    explicit TerminalTool(DocumentSyncManager* documentSyncManager);
     ~TerminalTool() override;
 
-  public:
+public:
     QUrl currentUrl() const;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  Q_SIGNALS:
-    void currentUrlChanged( const QUrl& currentUrl );
+Q_SIGNALS:
+    void currentUrlChanged(const QUrl& currentUrl);
 
-  private: // sources
+private: // sources
     DocumentSyncManager* mDocumentSyncManager;
 
     AbstractDocument* mDocument;

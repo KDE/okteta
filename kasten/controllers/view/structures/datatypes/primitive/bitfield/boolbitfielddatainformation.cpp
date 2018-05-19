@@ -29,7 +29,6 @@
 #include "../booldatainformation.h"
 #include "../../../../poddecoder/typeeditors/uintspinbox.h"
 
-
 QString BoolBitfieldDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
@@ -38,9 +37,8 @@ QString BoolBitfieldDataInformation::valueStringImpl() const
 
 QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
-    if (width() == 1)
-    {
-        //just a simple combobox
+    if (width() == 1) {
+        // just a simple combobox
         KComboBox* box = new KComboBox(false, parent);
         box->addItem(i18nc("boolean value", "false"));
         box->addItem(i18nc("boolean value", "true"));
@@ -55,25 +53,26 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
 
 QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
-    if (width() == 1)
-    {
+    if (width() == 1) {
         const KComboBox* box = qobject_cast<const KComboBox*>(w);
         Q_CHECK_PTR(box);
         return box->currentIndex();
     }
     const UIntSpinBox* spin = qobject_cast<const UIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
-    if (spin)
+    if (spin) {
         return spin->value();
-    else
+    } else {
         return QVariant();
+    }
 }
 
 void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     UIntSpinBox* spin = qobject_cast<UIntSpinBox*> (w);
-    if (spin)
+    if (spin) {
         spin->setValue(mValue.value<quint64>());
+    }
 }
 
 QScriptValue BoolBitfieldDataInformation::valueAsQScriptValue() const
@@ -84,7 +83,7 @@ QScriptValue BoolBitfieldDataInformation::valueAsQScriptValue() const
 QString BoolBitfieldDataInformation::typeNameImpl() const
 {
     return i18ncp("Data type", "boolean bitfield (%1 bit wide)", "boolean bitfield (%1 bits wide)",
-            width());
+                  width());
 }
 
 AbstractBitfieldDataInformation::Type BoolBitfieldDataInformation::bitfieldType() const

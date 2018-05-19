@@ -29,104 +29,101 @@
 #include "valuebytearraycolumnrenderer.h"
 #include "charbytearraycolumnrenderer.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 class Coord;
-
 
 class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
 {
-    Q_DECLARE_PUBLIC( ByteArrayColumnView )
+    Q_DECLARE_PUBLIC(ByteArrayColumnView)
 
-  public:
-    explicit ByteArrayColumnViewPrivate( ByteArrayColumnView* parent );
+public:
+    explicit ByteArrayColumnViewPrivate(ByteArrayColumnView* parent);
     ~ByteArrayColumnViewPrivate() override;
 
-  public:
+public:
     void init();
 
-  public:
-  // value column
-    int/*PixelX*/ byteSpacingWidth() const;
+public:
+    // value column
+    int /*PixelX*/ byteSpacingWidth() const;
     int noOfGroupedBytes() const;
-    int/*PixelX*/ groupSpacingWidth() const;
-    int/*PixelX*/ binaryGapWidth() const;
+    int /*PixelX*/ groupSpacingWidth() const;
+    int /*PixelX*/ binaryGapWidth() const;
 
-  // char column
+    // char column
     bool showsNonprinting() const;
     QChar substituteChar() const;
     QChar undefinedChar() const;
 
     bool isByteTypeColored() const;
 
-  public: // logic value service
+public: // logic value service
     QSize minimumSizeHint() const;
 
-  public: // modification access
-    void setByteArrayModel( AbstractByteArrayModel* byteArrayModel );
+public: // modification access
+    void setByteArrayModel(AbstractByteArrayModel* byteArrayModel);
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
-  public: // AbstractByteArrayViewPrivate API
-    void ensureVisible( const AddressRange& range, bool ensureStartVisible ) override;
+public: // AbstractByteArrayViewPrivate API
+    void ensureVisible(const AddressRange& range, bool ensureStartVisible) override;
     void ensureCursorVisible() override;
-    void placeCursor( const QPoint& point ) override;
+    void placeCursor(const QPoint& point) override;
     QRect cursorRect() const override;
-    Address indexByPoint( const QPoint& point ) const override;
+    Address indexByPoint(const QPoint& point) const override;
     void blinkCursor() override;
 
-  public:
-  // value column parameters
-    void setByteSpacingWidth( int/*PixelX*/ byteSpacingWidth ) ;
-    void setNoOfGroupedBytes( int noOfGroupedBytes );
-    void setGroupSpacingWidth( int/*PixelX*/ groupSpacingWidth );
-    void setBinaryGapWidth( int binaryGapWidth );
-    void setBufferSpacing( /*PixelX*/int byteSpacingWidth, int noOfGroupedBytes, /*PixelX*/int groupSpacingWidth );
-    void setValueCoding( AbstractByteArrayView::ValueCoding valueCoding );
-  // char column parameters
-    void setShowsNonprinting( bool showsNonprinting = true );
-    void setSubstituteChar( QChar substituteChar );
-    void setUndefinedChar( QChar undefinedChar );
-    void setCharCoding( AbstractByteArrayView::CharCoding charCoding );
-    void setCharCoding( const QString& charCodingName );
-    void setByteTypeColored( bool isColored );
+public:
+    // value column parameters
+    void setByteSpacingWidth(int /*PixelX*/ byteSpacingWidth);
+    void setNoOfGroupedBytes(int noOfGroupedBytes);
+    void setGroupSpacingWidth(int /*PixelX*/ groupSpacingWidth);
+    void setBinaryGapWidth(int binaryGapWidth);
+    void setBufferSpacing(/*PixelX*/ int byteSpacingWidth, int noOfGroupedBytes, /*PixelX*/ int groupSpacingWidth);
+    void setValueCoding(AbstractByteArrayView::ValueCoding valueCoding);
+    // char column parameters
+    void setShowsNonprinting(bool showsNonprinting = true);
+    void setSubstituteChar(QChar substituteChar);
+    void setUndefinedChar(QChar undefinedChar);
+    void setCharCoding(AbstractByteArrayView::CharCoding charCoding);
+    void setCharCoding(const QString& charCodingName);
+    void setByteTypeColored(bool isColored);
 
-  protected: // drawing related operations
+protected: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
     void createCursorPixmaps();
     /** draws the blinking cursor or removes it */
-    void drawActiveCursor( QPainter* painter );
-    void drawInactiveCursor( QPainter* painter );
-    void updateCursor( const AbstractByteArrayColumnRenderer& column );
+    void drawActiveCursor(QPainter* painter);
+    void drawInactiveCursor(QPainter* painter);
+    void updateCursor(const AbstractByteArrayColumnRenderer& column);
 
-  protected: // partial operations
-    void changeEvent( QEvent* event );
+protected: // partial operations
+    void changeEvent(QEvent* event);
 
-  protected:
+protected:
     /** recalcs a layout due to the resize style that fits into the view size
-      * and updates the dependant values
-      */
-    void ensureVisible( const AbstractByteArrayColumnRenderer& column, const Coord& coord );
-    void renderColumns( QPainter* painter, int cx, int cy, int cw, int ch );
+     * and updates the dependant values
+     */
+    void ensureVisible(const AbstractByteArrayColumnRenderer& column, const Coord& coord);
+    void renderColumns(QPainter* painter, int cx, int cy, int cw, int ch);
 
-  protected: // AbstractByteArrayViewPrivate API
-  // cursor control
+protected: // AbstractByteArrayViewPrivate API
+    // cursor control
     void pauseCursor() override;
     void updateCursors() override;
 
-    void setActiveCoding( AbstractByteArrayView::CodingTypeId codingId ) override;
-    void setVisibleCodings( int visibleCodings ) override;
+    void setActiveCoding(AbstractByteArrayView::CodingTypeId codingId) override;
+    void setVisibleCodings(int visibleCodings) override;
 
-  protected: // AbstractByteArrayViewPrivate API
+protected: // AbstractByteArrayViewPrivate API
     AbstractByteArrayView::CodingTypeId activeCoding() const override;
     AbstractByteArrayView::CodingTypes visibleCodings() const override;
     int fittingBytesPerLine() const override;
     void adjustToLayoutNoOfBytesPerLine() override;
     void updateChanged() override;
 
-  protected:
+protected:
     ValueByteArrayColumnRenderer* mValueColumn;
     BorderColumnRenderer*         mMiddleBorderColumn;
     CharByteArrayColumnRenderer*  mCharColumn;
@@ -136,7 +133,6 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
     /** points to the column without keyboard focus (if there is) */
     AbstractByteArrayColumnRenderer* mInactiveColumn;
 };
-
 
 inline PixelX ByteArrayColumnViewPrivate::byteSpacingWidth()  const { return mValueColumn->byteSpacingWidth(); }
 inline int ByteArrayColumnViewPrivate::noOfGroupedBytes()      const { return mValueColumn->noOfGroupedBytes(); }

@@ -26,18 +26,16 @@
 #include "filesystembrowserview.h"
 #include "filesystembrowsertool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-FileSystemBrowserToolView::FileSystemBrowserToolView( FileSystemBrowserTool *tool )
- : mWidget( new FileSystemBrowserView(tool) )
+FileSystemBrowserToolView::FileSystemBrowserToolView(FileSystemBrowserTool* tool)
+    : mWidget(new FileSystemBrowserView(tool))
 {
 }
 
 QWidget* FileSystemBrowserToolView::widget()    const { return mWidget; }
 QString FileSystemBrowserToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool *FileSystemBrowserToolView::tool() const { return mWidget->tool(); }
+AbstractTool* FileSystemBrowserToolView::tool() const { return mWidget->tool(); }
 
 FileSystemBrowserToolView::~FileSystemBrowserToolView() {}
 

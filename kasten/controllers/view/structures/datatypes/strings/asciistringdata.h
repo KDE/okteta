@@ -20,15 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #ifndef ASCIISTRINGDATA_H
 #define ASCIISTRINGDATA_H
 
 #include "stringdata.h"
 
 #include <QVector>
-
 
 class AsciiStringData : public StringData
 {

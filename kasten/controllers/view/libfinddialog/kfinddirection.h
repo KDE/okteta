@@ -23,10 +23,10 @@
 #ifndef KFINDDIRECTION_H
 #define KFINDDIRECTION_H
 
-namespace Kasten
-{
+namespace Kasten {
 
-enum KFindDirection {
+enum KFindDirection
+{
     FindForward = 0,
     FindBackward = 1
 };

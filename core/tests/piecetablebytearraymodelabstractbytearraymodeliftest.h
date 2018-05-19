@@ -26,17 +26,15 @@
 // test
 #include "abstractbytearraymodeliftest.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class PieceTableByteArrayModelAbstractByteArrayModelIfTest : public AbstractByteArrayModelIfTest
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected: // AbstractByteArrayModelIfTest API
+protected: // AbstractByteArrayModelIfTest API
     AbstractByteArrayModel* createByteArrayModel() override;
-    void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel ) override;
+    void deleteByteArrayModel(AbstractByteArrayModel* byteArrayModel) override;
 };
 
 }

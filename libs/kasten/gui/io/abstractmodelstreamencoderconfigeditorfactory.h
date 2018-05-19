@@ -26,23 +26,19 @@
 // lib
 #include <kasten/kastengui_export.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelStreamEncoderConfigEditor;
 class AbstractModelStreamEncoder;
 
-
 class KASTENGUI_EXPORT AbstractModelStreamEncoderConfigEditorFactory
 {
-  public:
+public:
     virtual ~AbstractModelStreamEncoderConfigEditorFactory();
 
-  public:
-    virtual AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const = 0;
+public:
+    virtual AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const = 0;
 };
-
 
 inline AbstractModelStreamEncoderConfigEditorFactory::~AbstractModelStreamEncoderConfigEditorFactory() {}
 

@@ -30,47 +30,44 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ValuesStreamEncoderSettings
 {
-  public:
+public:
     ValuesStreamEncoderSettings();
-  public:
+
+public:
     Okteta::ValueCoding valueCoding;
     QString separation;
     QChar undefinedChar;
     QChar substituteChar;
 };
 
-
 class ByteArrayValuesStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
+public:
     ByteArrayValuesStreamEncoder();
     ~ByteArrayValuesStreamEncoder() override;
 
-  public:
+public:
     ValuesStreamEncoderSettings settings() const;
-    void setSettings( const ValuesStreamEncoderSettings& settings );
+    void setSettings(const ValuesStreamEncoderSettings& settings);
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 
-  protected:
+protected:
     ValuesStreamEncoderSettings mSettings;
 };
 
-
 inline ValuesStreamEncoderSettings ByteArrayValuesStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayValuesStreamEncoder::setSettings( const ValuesStreamEncoderSettings& settings )
+inline void ByteArrayValuesStreamEncoder::setSettings(const ValuesStreamEncoderSettings& settings)
 {
     mSettings = settings;
     emit settingsChanged();

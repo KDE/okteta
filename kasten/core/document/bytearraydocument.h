@@ -39,73 +39,71 @@ class AbstractByteArrayModel;
 class PieceTableByteArrayModel;
 }
 
+namespace Kasten {
 
-namespace Kasten
+class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument
+                                                , public If::Versionable
+                                                , public If::UserListable
+                                                // ,public If::ByteArray
 {
+    Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::Versionable
+        Kasten::If::UserListable
+//         Kasten::If::ByteArray
+    )
 
-class OKTETAKASTENCORE_EXPORT ByteArrayDocument : public AbstractDocument,
-                                                  public If::Versionable,
-                                                  public If::UserListable//,
-//                                                    public If::ByteArray
-{
-  Q_OBJECT
-  Q_INTERFACES(
-    Kasten::If::Versionable
-    Kasten::If::UserListable
-//     Kasten::If::ByteArray
-  )
-
-  public:
-    explicit ByteArrayDocument( const QString &initDescription );
-    ByteArrayDocument( Okteta::PieceTableByteArrayModel *byteArray, const QString &initDescription );
+public:
+    explicit ByteArrayDocument(const QString& initDescription);
+    ByteArrayDocument(Okteta::PieceTableByteArrayModel* byteArray, const QString& initDescription);
     ~ByteArrayDocument() override;
 
-  public: // AbstractModel API
+public: // AbstractModel API
     QString title() const override;
     bool isModifiable() const override;
     bool isReadOnly() const override;
-    void setReadOnly( bool isReadOnly ) override;
+    void setReadOnly(bool isReadOnly) override;
 
-  public: // AbstractDocument API
+public: // AbstractDocument API
     QString typeName() const override;
     QString mimeType() const override;
     ContentFlags contentFlags() const override;
 
-  public: // If::Versionable
+public: // If::Versionable
     int versionIndex() const override;
-    DocumentVersionData versionData( int versionIndex ) const override;
+    DocumentVersionData versionData(int versionIndex) const override;
     int versionCount() const override;
-    void revertToVersionByIndex( int versionIndex ) override;
+    void revertToVersionByIndex(int versionIndex) override;
 
-  public: // If::UserListable
+public: // If::UserListable
     Person owner() const override;
     QList<Person> userList() const override;
 
-  public: // If::ByteArray
-    virtual Okteta::AbstractByteArrayModel *content() const;
+public: // If::ByteArray
+    virtual Okteta::AbstractByteArrayModel* content() const;
 
-  public:
-    void setTitle( const QString &title );
+public:
+    void setTitle(const QString& title);
 
-    void setOwner( const Person& owner );
-    void addUsers( const QList<Person>& users );
-    void removeUsers( const QList<Person>& users );
+    void setOwner(const Person& owner);
+    void addUsers(const QList<Person>& users);
+    void removeUsers(const QList<Person>& users);
 
-  Q_SIGNALS: // If::Versionable
-    void revertedToVersionIndex( int versionIndex ) override;
-    void headVersionDataChanged( const Kasten::DocumentVersionData &versionData ) override;
-    void headVersionChanged( int newHeadVersionIndex ) override;
+Q_SIGNALS: // If::Versionable
+    void revertedToVersionIndex(int versionIndex) override;
+    void headVersionDataChanged(const Kasten::DocumentVersionData& versionData) override;
+    void headVersionChanged(int newHeadVersionIndex) override;
 
-  Q_SIGNALS: // If::UserListable
-    void usersAdded( const QList<Person>& newUserList ) override;
-    void usersRemoved( const QList<Person>& newUserList ) override;
+Q_SIGNALS: // If::UserListable
+    void usersAdded(const QList<Person>& newUserList) override;
+    void usersRemoved(const QList<Person>& newUserList) override;
 
-  private Q_SLOTS:
-    void onModelModified( bool newState );
-    void onHeadVersionDescriptionChanged( const QString &newDescription );
+private Q_SLOTS:
+    void onModelModified(bool newState);
+    void onHeadVersionDescriptionChanged(const QString& newDescription);
 
-  private:
-    Okteta::PieceTableByteArrayModel *mByteArray;
+private:
+    Okteta::PieceTableByteArrayModel* mByteArray;
 
     mutable QString mTitle;
 

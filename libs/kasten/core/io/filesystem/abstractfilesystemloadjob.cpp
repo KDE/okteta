@@ -23,51 +23,48 @@
 #include "abstractfilesystemloadjob.h"
 #include "abstractfilesystemloadjob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractFileSystemLoadJob::AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                                      const QUrl& url )
-  : AbstractLoadJob( new AbstractFileSystemLoadJobPrivate(this,synchronizer,url) )
+AbstractFileSystemLoadJob::AbstractFileSystemLoadJob(AbstractModelFileSystemSynchronizer* synchronizer,
+                                                     const QUrl& url)
+    : AbstractLoadJob(new AbstractFileSystemLoadJobPrivate(this, synchronizer, url))
 {
 }
 
 AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::synchronizer() const
 {
-    Q_D( const AbstractFileSystemLoadJob );
+    Q_D(const AbstractFileSystemLoadJob);
 
     return d->synchronizer();
 }
 
 QUrl AbstractFileSystemLoadJob::url() const
 {
-    Q_D( const AbstractFileSystemLoadJob );
+    Q_D(const AbstractFileSystemLoadJob);
 
     return d->url();
 }
 
 QFile* AbstractFileSystemLoadJob::file() const
 {
-    Q_D( const AbstractFileSystemLoadJob );
+    Q_D(const AbstractFileSystemLoadJob);
 
     return d->file();
 }
 
 void AbstractFileSystemLoadJob::start()
 {
-    Q_D( AbstractFileSystemLoadJob );
+    Q_D(AbstractFileSystemLoadJob);
 
     d->start();
 }
 
-void AbstractFileSystemLoadJob::setDocument( AbstractDocument* document )
+void AbstractFileSystemLoadJob::setDocument(AbstractDocument* document)
 {
-    Q_D( AbstractFileSystemLoadJob );
+    Q_D(AbstractFileSystemLoadJob);
 
-    d->setDocument( document );
+    d->setDocument(document);
 }
-
 
 AbstractFileSystemLoadJob::~AbstractFileSystemLoadJob()
 {
@@ -75,5 +72,5 @@ AbstractFileSystemLoadJob::~AbstractFileSystemLoadJob()
 
 }
 
-//have to include this because of Q_PRIVATE_SLOT
+// have to include this because of Q_PRIVATE_SLOT
 #include "moc_abstractfilesystemloadjob.cpp"

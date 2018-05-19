@@ -31,67 +31,64 @@
 #include <abstractview.h>
 #include "tabwidget.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TabbedViewsPrivate : public AbstractGroupedViewsPrivate
 {
-  public:
-    explicit TabbedViewsPrivate( TabbedViews* parent );
+public:
+    explicit TabbedViewsPrivate(TabbedViews* parent);
 
     ~TabbedViewsPrivate() override;
 
-  public:
+public:
     void init();
 
-  public: // AbstractViewArea API
+public: // AbstractViewArea API
     void setFocus();
     QWidget* widget() const;
     bool hasFocus() const;
 
-  public: // AbstractGroupedViews API
-    void addViews( const QList<AbstractView*>& views );
-    void removeViews( const QList<AbstractView*>& views );
-    void setViewFocus( AbstractView *view );
+public: // AbstractGroupedViews API
+    void addViews(const QList<AbstractView*>& views);
+    void removeViews(const QList<AbstractView*>& views);
+    void setViewFocus(AbstractView* view);
 
     QList<AbstractView*> viewList() const;
     int viewCount() const;
     AbstractView* viewFocus() const;
 
-  public: // If::ToolInlineViewable API
-    void setCurrentToolInlineView( AbstractToolInlineView* view );
+public: // If::ToolInlineViewable API
+    void setCurrentToolInlineView(AbstractToolInlineView* view);
 
-  public:
-    int indexOf( AbstractView* view ) const;
+public:
+    int indexOf(AbstractView* view) const;
 
-  public: // Q_SLOTS:
-    void onCurrentChanged( int index );
-    void onTabCloseRequest( int tabIndex );
-    void onTitleChanged( const QString &newTitle );
+public: // Q_SLOTS:
+    void onCurrentChanged(int index);
+    void onTabCloseRequest(int tabIndex);
+    void onTitleChanged(const QString& newTitle);
 //     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
-    void onViewFocusChanged( bool focusChanged );
+    void onViewFocusChanged(bool focusChanged);
     void onMouseMiddleClick();
-    void onDragMoveEvent( const QDragMoveEvent* event, bool& accept );
-    void onDropEvent( QDropEvent* event );
+    void onDragMoveEvent(const QDragMoveEvent* event, bool& accept);
+    void onDropEvent(QDropEvent* event);
 
-  protected:
-    Q_DECLARE_PUBLIC( TabbedViews )
+protected:
+    Q_DECLARE_PUBLIC(TabbedViews)
 
-  protected:
+protected:
     ViewAreaBox* mViewAreaBox;
     TabWidget* mTabWidget;
 
     AbstractView* mCurrentView;
 };
 
-
 inline QWidget* TabbedViewsPrivate::widget() const { return mViewAreaBox; }
 inline int TabbedViewsPrivate::viewCount()   const { return mTabWidget->count(); }
 
 inline AbstractView* TabbedViewsPrivate::viewFocus() const
 {
-    const ViewBox* viewBox = static_cast<const ViewBox*>( mTabWidget->currentWidget() );
+    const ViewBox* viewBox = static_cast<const ViewBox*>(mTabWidget->currentWidget());
     return viewBox ? viewBox->view() : nullptr;
 }
 
@@ -100,17 +97,17 @@ inline bool TabbedViewsPrivate::hasFocus() const
     return mCurrentView ? mCurrentView->hasFocus() : false;
 }
 
-
-inline void TabbedViewsPrivate::setViewFocus( AbstractView *view )
+inline void TabbedViewsPrivate::setViewFocus(AbstractView* view)
 {
-    const int index = indexOf( view );
-    mTabWidget->setCurrentIndex( index );
+    const int index = indexOf(view);
+    mTabWidget->setCurrentIndex(index);
 }
 
 inline void TabbedViewsPrivate::setFocus()
 {
-    if( mCurrentView )
+    if (mCurrentView) {
         mCurrentView->setFocus();
+    }
     // TODO: would ensure the bottomwidget gets focus if there is one. Just, it didn't work at all
 //     mViewAreaBox->setFocus();
 }

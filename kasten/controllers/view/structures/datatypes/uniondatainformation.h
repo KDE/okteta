@@ -28,9 +28,11 @@
 class UnionDataInformation : public DataInformationWithChildren
 {
     DATAINFORMATION_CLONE(UnionDataInformation, DataInformationWithChildren) {}
+
 public:
-    explicit UnionDataInformation(const QString& name, const QVector<DataInformation*>& children
-            = QVector<DataInformation*>(), DataInformation* parent = nullptr);
+    explicit UnionDataInformation(const QString& name,
+                                  const QVector<DataInformation*>& children = QVector<DataInformation*>(),
+                                  DataInformation* parent = nullptr);
     ~UnionDataInformation() override;
 
     bool isUnion() const override;
@@ -38,6 +40,7 @@ public:
     qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
+
 private:
     QString typeNameImpl() const override;
 };

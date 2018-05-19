@@ -28,9 +28,7 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 BookmarksToolViewFactory::BookmarksToolViewFactory() {}
 
@@ -39,9 +37,9 @@ QString BookmarksToolViewFactory::title()       const { return i18nc("@title:win
 QString BookmarksToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.BookmarksToolView"); }
 SidePosition BookmarksToolViewFactory::defaultPosition() const { return LeftSidePosition; }
 
-AbstractToolView* BookmarksToolViewFactory::create( AbstractTool* tool )
+AbstractToolView* BookmarksToolViewFactory::create(AbstractTool* tool)
 {
-    return new BookmarksToolView( qobject_cast<BookmarksTool*>(tool) );
+    return new BookmarksToolView(qobject_cast<BookmarksTool*>(tool));
 }
 
 BookmarksToolViewFactory::~BookmarksToolViewFactory() {}

@@ -35,34 +35,31 @@
 #include <QDrag>
 #include <QTimer>
 
-namespace Okteta
-{
+namespace Okteta {
 static const int DefaultScrollTimerPeriod = 100;
 
-
-MouseNavigator::MouseNavigator( AbstractByteArrayView* view, AbstractMouseController* parent )
-  : AbstractMouseController( view, parent ),
-    mLMBPressed( false ),
-    mInLMBDoubleClick( false ),
-    mInDnD( false ),
-    mDragStartPossible( false )
+MouseNavigator::MouseNavigator(AbstractByteArrayView* view, AbstractMouseController* parent)
+    : AbstractMouseController(view, parent)
+    , mLMBPressed(false)
+    , mInLMBDoubleClick(false)
+    , mInDnD(false)
+    , mDragStartPossible(false)
 {
-    mScrollTimer = new QTimer( this );
-    mDragStartTimer = new QTimer( this );
-    mTrippleClickTimer = new QTimer( this );
+    mScrollTimer = new QTimer(this);
+    mDragStartTimer = new QTimer(this);
+    mTrippleClickTimer = new QTimer(this);
 
-    connect( mScrollTimer,      &QTimer::timeout, this, &MouseNavigator::autoScrollTimerDone );
-    connect( mDragStartTimer,   &QTimer::timeout, this, &MouseNavigator::startDrag );
-    mDragStartTimer->setSingleShot( true );
-    mTrippleClickTimer->setSingleShot( true );
+    connect(mScrollTimer,      &QTimer::timeout, this, &MouseNavigator::autoScrollTimerDone);
+    connect(mDragStartTimer,   &QTimer::timeout, this, &MouseNavigator::startDrag);
+    mDragStartTimer->setSingleShot(true);
+    mTrippleClickTimer->setSingleShot(true);
 }
 
-bool MouseNavigator::handleMousePressEvent( QMouseEvent* mouseEvent )
+bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
 
-    if( mouseEvent->button() == Qt::LeftButton )
-    {
+    if (mouseEvent->button() == Qt::LeftButton) {
         ByteArrayTableCursor* tableCursor = mView->tableCursor();
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
         ByteArrayTableLayout* tableLayout = mView->layout();
@@ -75,215 +72,201 @@ bool MouseNavigator::handleMousePressEvent( QMouseEvent* mouseEvent )
         mLMBPressed = true;
 
         // select whole line?
-        if( mTrippleClickTimer->isActive()
-            && (mouseEvent->globalPos()-mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance() )
-        {
+        if (mTrippleClickTimer->isActive()
+            && (mouseEvent->globalPos() - mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance()) {
             mTrippleClickTimer->stop();
-            const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition( mDoubleClickLine );
-            tableRanges->setSelectionStart( indexAtFirstDoubleClickLinePosition );
-            tableCursor->gotoIndex( indexAtFirstDoubleClickLinePosition );
+            const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
+            tableRanges->setSelectionStart(indexAtFirstDoubleClickLinePosition);
+            tableCursor->gotoIndex(indexAtFirstDoubleClickLinePosition);
             tableCursor->gotoLineEnd();
-            tableRanges->setSelectionEnd( mView->cursorPosition() );
+            tableRanges->setSelectionEnd(mView->cursorPosition());
             mView->updateChanged();
 
             mView->unpauseCursor();
 
             const bool newHasSelection = tableRanges->hasSelection();
-            emit mView->cursorPositionChanged( mView->cursorPosition() );
-            emit mView->selectionChanged( tableRanges->selection() );
-            if( oldHasSelection != newHasSelection )
-            {
-                if( ! mView->isOverwriteMode() ) emit mView->cutAvailable( newHasSelection );
-                emit mView->copyAvailable( newHasSelection );
-                emit mView->hasSelectedDataChanged( newHasSelection );
+            emit mView->cursorPositionChanged(mView->cursorPosition());
+            emit mView->selectionChanged(tableRanges->selection());
+            if (oldHasSelection != newHasSelection) {
+                if (!mView->isOverwriteMode()) {
+                    emit mView->cutAvailable(newHasSelection);
+                }
+                emit mView->copyAvailable(newHasSelection);
+                emit mView->hasSelectedDataChanged(newHasSelection);
             }
-        }
-        else
-        {
+        } else {
             // TODO: pos() is now, not at the moment of the event, use globalPos() for that,.says dox
-            const QPoint mousePoint = mView->viewportToColumns( mouseEvent->pos() );
+            const QPoint mousePoint = mView->viewportToColumns(mouseEvent->pos());
 
             // start of a drag perhaps?
-            if( tableRanges->hasSelection() && tableRanges->selectionIncludes(mView->indexByPoint( mousePoint )) )
-            {
+            if (tableRanges->hasSelection() && tableRanges->selectionIncludes(mView->indexByPoint(mousePoint))) {
                 mDragStartPossible = true;
-                mDragStartTimer->start( QApplication::startDragTime() );
+                mDragStartTimer->start(QApplication::startDragTime());
                 mDragStartPoint = mousePoint;
-            }
-            else
-            {
-                mView->placeCursor( mousePoint );
+            } else {
+                mView->placeCursor(mousePoint);
                 mView->ensureCursorVisible();
 
                 const Address realIndex = tableCursor->realIndex();
-                if( tableRanges->selectionStarted() )
-                {
-                    if( mouseEvent->modifiers() & Qt::SHIFT )
-                        tableRanges->setSelectionEnd( realIndex );
-                    else
-                    {
+                if (tableRanges->selectionStarted()) {
+                    if (mouseEvent->modifiers() & Qt::SHIFT) {
+                        tableRanges->setSelectionEnd(realIndex);
+                    } else {
                         tableRanges->removeSelection();
-                        tableRanges->setSelectionStart( realIndex );
+                        tableRanges->setSelectionStart(realIndex);
                     }
-                }
-                else // start of a new selection possible
-                {
-                    tableRanges->setSelectionStart( realIndex );
+                } else {   // start of a new selection possible
+                    tableRanges->setSelectionStart(realIndex);
 
-                    if( !mView->isReadOnly() && (mouseEvent->modifiers()&Qt::SHIFT) ) // TODO: why only for readwrite?
-                        tableRanges->setSelectionEnd( realIndex );
+                    if (!mView->isReadOnly() && (mouseEvent->modifiers() & Qt::SHIFT)) { // TODO: why only for readwrite?
+                        tableRanges->setSelectionEnd(realIndex);
+                    }
                 }
 
                 tableRanges->removeFurtherSelections();
             }
 
-            if( tableRanges->isModified() )
-            {
+            if (tableRanges->isModified()) {
                 mView->updateChanged();
-                mView->viewport()->setCursor( mView->isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
+                mView->viewport()->setCursor(mView->isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
             }
 
             mView->unpauseCursor();
 
             const bool newHasSelection = tableRanges->hasSelection();
-            emit mView->selectionChanged( tableRanges->selection() );
-            if( oldHasSelection != newHasSelection )
-            {
-                if( ! mView->isOverwriteMode() ) emit mView->cutAvailable( newHasSelection );
-                emit mView->copyAvailable( newHasSelection );
-                emit mView->hasSelectedDataChanged( newHasSelection );
+            emit mView->selectionChanged(tableRanges->selection());
+            if (oldHasSelection != newHasSelection) {
+                if (!mView->isOverwriteMode()) {
+                    emit mView->cutAvailable(newHasSelection);
+                }
+                emit mView->copyAvailable(newHasSelection);
+                emit mView->hasSelectedDataChanged(newHasSelection);
             }
         }
         eventUsed = true;
     }
 
-    return eventUsed ? true : AbstractMouseController::handleMousePressEvent( mouseEvent );
+    return eventUsed ? true : AbstractMouseController::handleMousePressEvent(mouseEvent);
 }
 
-bool MouseNavigator::handleMouseMoveEvent( QMouseEvent* mouseEvent )
+bool MouseNavigator::handleMouseMoveEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
 
-    if( mouseEvent->buttons() == Qt::LeftButton )
-    {
-        const QPoint movePoint = mView->viewportToColumns( mouseEvent->pos() );
+    if (mouseEvent->buttons() == Qt::LeftButton) {
+        const QPoint movePoint = mView->viewportToColumns(mouseEvent->pos());
 
-        if( mLMBPressed )
-        {
-            if( mDragStartPossible )
-            {
+        if (mLMBPressed) {
+            if (mDragStartPossible) {
                 mDragStartTimer->stop();
                 // moved enough for a drag?
-                if( (movePoint-mDragStartPoint).manhattanLength() > QApplication::startDragDistance() )
+                if ((movePoint - mDragStartPoint).manhattanLength() > QApplication::startDragDistance()) {
                     startDrag();
-                if( ! mView->isReadOnly() )
-                    mView->viewport()->setCursor( Qt::IBeamCursor );
-            }
-            else
+                }
+                if (!mView->isReadOnly()) {
+                    mView->viewport()->setCursor(Qt::IBeamCursor);
+                }
+            } else {
                 // selecting
-                handleMouseMove( movePoint );
-        }
-        else if( ! mView->isReadOnly() )
-        {
+                handleMouseMove(movePoint);
+            }
+        } else if (!mView->isReadOnly()) {
             ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
             // visual feedback for possible dragging
             const bool InSelection =
-                tableRanges->hasSelection() && tableRanges->selectionIncludes( mView->indexByPoint(movePoint) );
-            mView->viewport()->setCursor( InSelection ? Qt::ArrowCursor : Qt::IBeamCursor );
+                tableRanges->hasSelection() && tableRanges->selectionIncludes(mView->indexByPoint(movePoint));
+            mView->viewport()->setCursor(InSelection ? Qt::ArrowCursor : Qt::IBeamCursor);
         }
         eventUsed = true;
     }
 
-    return eventUsed ? true : AbstractMouseController::handleMouseMoveEvent( mouseEvent );
+    return eventUsed ? true : AbstractMouseController::handleMouseMoveEvent(mouseEvent);
 }
 
-bool MouseNavigator::handleMouseReleaseEvent( QMouseEvent* mouseEvent )
+bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
 
-    if( mouseEvent->button() == Qt::LeftButton )
-    {
+    if (mouseEvent->button() == Qt::LeftButton) {
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
         const bool oldHasSelection = tableRanges->hasSelection();
 //         const QPoint releasePoint = mView->viewportToColumns( mouseEvent->pos() );
 
         // this is not the release of a doubleclick so we need to process it?
-        if( ! mInLMBDoubleClick )
-        {
+        if (!mInLMBDoubleClick) {
 //             const int line = mView->lineAt( releasePoint.y() );
 //             const int pos = mActiveColumn->linePositionOfX( releasePoint.x() ); // TODO: can we be sure here about the active column?
 //             const Address index = tableLayout->indexAtCCoord( Coord(pos,line) ); // TODO: can this be another index than the one of the cursor???
 //             emit mView->clicked( index ); // TODO: who needs this?
         }
 
-        if( mLMBPressed )
-        {
+        if (mLMBPressed) {
             mLMBPressed = false;
 
-            if( mScrollTimer->isActive() )
+            if (mScrollTimer->isActive()) {
                 mScrollTimer->stop();
+            }
 
             // was only click inside selection, nothing dragged?
-            if( mDragStartPossible )
-            {
-                mView->selectAll( false );
+            if (mDragStartPossible) {
+                mView->selectAll(false);
                 mDragStartTimer->stop();
                 mDragStartPossible = false;
 
-                mView->placeCursor( mDragStartPoint );
+                mView->placeCursor(mDragStartPoint);
                 mView->ensureCursorVisible();
 
                 mView->unpauseCursor();
             }
             // was end of selection operation?
-            else if( tableRanges->hasSelection() )
-            {
-                if( QApplication::clipboard()->supportsSelection() )
-                    mView->copyToClipboard( QClipboard::Selection );
+            else if (tableRanges->hasSelection()) {
+                if (QApplication::clipboard()->supportsSelection()) {
+                    mView->copyToClipboard(QClipboard::Selection);
+                }
             }
         }
 
-        emit mView->cursorPositionChanged( mView->cursorPosition() );
+        emit mView->cursorPositionChanged(mView->cursorPosition());
 
         mInLMBDoubleClick = false;
 
-        if( tableRanges->selectionJustStarted() )
+        if (tableRanges->selectionJustStarted()) {
             tableRanges->removeSelection();
+        }
 
         const bool newHasSelection = tableRanges->hasSelection();
-        emit mView->selectionChanged( tableRanges->selection() );
-        if( oldHasSelection != newHasSelection )
-        {
-            if( ! mView->isOverwriteMode() ) emit mView->cutAvailable( newHasSelection );
-            emit mView->copyAvailable( newHasSelection );
-            emit mView->hasSelectedDataChanged( newHasSelection );
+        emit mView->selectionChanged(tableRanges->selection());
+        if (oldHasSelection != newHasSelection) {
+            if (!mView->isOverwriteMode()) {
+                emit mView->cutAvailable(newHasSelection);
+            }
+            emit mView->copyAvailable(newHasSelection);
+            emit mView->hasSelectedDataChanged(newHasSelection);
         }
         eventUsed = true;
     }
 
-    return eventUsed ? true : AbstractMouseController::handleMouseReleaseEvent( mouseEvent );
+    return eventUsed ? true : AbstractMouseController::handleMouseReleaseEvent(mouseEvent);
 }
 
-bool MouseNavigator::handleMouseDoubleClickEvent( QMouseEvent* mouseEvent )
+bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
 
-    if( mouseEvent->button() == Qt::LeftButton )
-    {
+    if (mouseEvent->button() == Qt::LeftButton) {
         ByteArrayTableCursor* tableCursor = mView->tableCursor();
 
         mDoubleClickLine = tableCursor->line();
 
         const Address index = tableCursor->validIndex();
 
-        if( mView->activeCoding() == AbstractByteArrayView::CharCodingId )
-        {
-            mView->selectWord( index );
+        if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+            mView->selectWord(index);
 
             // as we already have a doubleclick maybe it is a tripple click
-            mTrippleClickTimer->start( qApp->doubleClickInterval() );
+            mTrippleClickTimer->start(qApp->doubleClickInterval());
             mDoubleClickPoint = mouseEvent->globalPos();
         }
         //  else
@@ -292,22 +275,21 @@ bool MouseNavigator::handleMouseDoubleClickEvent( QMouseEvent* mouseEvent )
         mInLMBDoubleClick = true; //
         mLMBPressed = true;
 
-        emit mView->doubleClicked( index );
+        emit mView->doubleClicked(index);
         eventUsed = true;
     }
 
-    return eventUsed ? true : AbstractMouseController::handleMouseDoubleClickEvent( mouseEvent );
+    return eventUsed ? true : AbstractMouseController::handleMouseDoubleClickEvent(mouseEvent);
 }
-
 
 void MouseNavigator::autoScrollTimerDone()
 {
-    if( mLMBPressed )
-        handleMouseMove( mView->viewportToColumns(mView->viewport()->mapFromGlobal( QCursor::pos() )) );
+    if (mLMBPressed) {
+        handleMouseMove(mView->viewportToColumns(mView->viewport()->mapFromGlobal(QCursor::pos())));
+    }
 }
 
-
-void MouseNavigator::handleMouseMove( const QPoint& point ) // handles the move of the mouse with pressed buttons
+void MouseNavigator::handleMouseMove(const QPoint& point)   // handles the move of the mouse with pressed buttons
 {
     ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
@@ -316,68 +298,65 @@ void MouseNavigator::handleMouseMove( const QPoint& point ) // handles the move 
     const int yOffset = mView->yOffset();
     const int behindLastYOffset = yOffset + mView->visibleHeight();
     // scrolltimer but inside of viewport?
-    if( mScrollTimer->isActive() )
-    {
-        if( yOffset <= point.y() && point.y() < behindLastYOffset )
+    if (mScrollTimer->isActive()) {
+        if (yOffset <= point.y() && point.y() < behindLastYOffset) {
             mScrollTimer->stop();
+        }
     }
     // no scrolltimer and outside of viewport?
-    else
-    {
-        if( point.y() < yOffset || behindLastYOffset <= point.y() )
-            mScrollTimer->start( DefaultScrollTimerPeriod );
+    else {
+        if (point.y() < yOffset || behindLastYOffset <= point.y()) {
+            mScrollTimer->start(DefaultScrollTimerPeriod);
+        }
     }
     mView->pauseCursor();
 
-    mView->placeCursor( point );
+    mView->placeCursor(point);
     mView->ensureCursorVisible();
 
     // do wordwise selection?
-    if( mInLMBDoubleClick && tableRanges->hasFirstWordSelection() )
-    {
+    if (mInLMBDoubleClick && tableRanges->hasFirstWordSelection()) {
         Address newIndex = tableCursor->realIndex();
         const AddressRange firstWordSelection = tableRanges->firstWordSelection();
-        const WordByteArrayService WBS( mView->byteArrayModel(), mView->charCodec() );
+        const WordByteArrayService WBS(mView->byteArrayModel(), mView->charCodec());
         // are we before the selection?
-        if( firstWordSelection.startsBehind(newIndex) )
-        {
-            tableRanges->ensureWordSelectionForward( false );
-            newIndex = WBS.indexOfLeftWordSelect( newIndex );
+        if (firstWordSelection.startsBehind(newIndex)) {
+            tableRanges->ensureWordSelectionForward(false);
+            newIndex = WBS.indexOfLeftWordSelect(newIndex);
         }
         // or behind?
-        else if( firstWordSelection.endsBefore(newIndex) )
-        {
-            tableRanges->ensureWordSelectionForward( true );
-            newIndex = WBS.indexOfRightWordSelect( newIndex );
+        else if (firstWordSelection.endsBefore(newIndex)) {
+            tableRanges->ensureWordSelectionForward(true);
+            newIndex = WBS.indexOfRightWordSelect(newIndex);
         }
         // or inside?
-        else
-        {
-            tableRanges->ensureWordSelectionForward( true );
+        else {
+            tableRanges->ensureWordSelectionForward(true);
             newIndex = firstWordSelection.nextBehindEnd();
         }
 
-        tableCursor->gotoIndex( newIndex );
+        tableCursor->gotoIndex(newIndex);
     }
 
-    if( tableRanges->selectionStarted() )
-        tableRanges->setSelectionEnd( mView->cursorPosition() );
+    if (tableRanges->selectionStarted()) {
+        tableRanges->setSelectionEnd(mView->cursorPosition());
+    }
 
     mView->updateChanged();
 
     mView->unpauseCursor();
 
     const bool newHasSelection = tableRanges->hasSelection();
-    emit mView->cursorPositionChanged( mView->cursorPosition() );
-    emit mView->selectionChanged( tableRanges->selection() );
-    if( oldHasSelection != newHasSelection )
-    {
-        if( ! mView->isOverwriteMode() ) emit mView->cutAvailable( newHasSelection );
-        emit mView->copyAvailable( newHasSelection );
-        emit mView->hasSelectedDataChanged( newHasSelection );
+    emit mView->cursorPositionChanged(mView->cursorPosition());
+    emit mView->selectionChanged(tableRanges->selection());
+    if (oldHasSelection != newHasSelection) {
+        if (!mView->isOverwriteMode()) {
+            emit mView->cutAvailable(newHasSelection);
+        }
+        emit mView->copyAvailable(newHasSelection);
+        emit mView->hasSelectedDataChanged(newHasSelection);
     }
 }
-
 
 void MouseNavigator::startDrag()
 {
@@ -388,25 +367,25 @@ void MouseNavigator::startDrag()
 
     // create data
     QMimeData* dragData = mView->selectionAsMimeData();
-    if( ! dragData )
+    if (!dragData) {
         return;
+    }
 
-    QDrag* drag = new QDrag( mView );
-    drag->setMimeData( dragData );
+    QDrag* drag = new QDrag(mView);
+    drag->setMimeData(dragData);
 
-    Qt::DropActions request = (mView->isReadOnly()||mView->isOverwriteMode()) ? Qt::CopyAction : Qt::CopyAction|Qt::MoveAction;
-    Qt::DropAction dropAction = drag->exec( request );
+    Qt::DropActions request = (mView->isReadOnly() || mView->isOverwriteMode()) ? Qt::CopyAction : Qt::CopyAction | Qt::MoveAction;
+    Qt::DropAction dropAction = drag->exec(request);
 
-    if( dropAction == Qt::MoveAction )
-    {
-        AbstractByteArrayView* targetByteArrayView = qobject_cast<AbstractByteArrayView*>( drag->target() );
+    if (dropAction == Qt::MoveAction) {
+        AbstractByteArrayView* targetByteArrayView = qobject_cast<AbstractByteArrayView*>(drag->target());
         // Not inside this widget itself?
-        if( ! targetByteArrayView
-            || targetByteArrayView->byteArrayModel() != mView->byteArrayModel() )
+        if (!targetByteArrayView
+            || targetByteArrayView->byteArrayModel() != mView->byteArrayModel()) {
             mView->removeSelectedData();
+        }
     }
 }
-
 
 MouseNavigator::~MouseNavigator() {}
 

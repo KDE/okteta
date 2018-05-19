@@ -31,9 +31,7 @@
 class QAction;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class GotoOffsetToolView;
 class GotoOffsetTool;
@@ -41,22 +39,21 @@ namespace If {
 class ToolInlineViewable;
 }
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT GotoOffsetController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit GotoOffsetController( If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient );
+public:
+    explicit GotoOffsetController(If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient);
     ~GotoOffsetController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void gotoOffset();
 
-  private:
+private:
     QAction* mGotoOffsetAction;
 
     If::ToolInlineViewable* mToolInlineViewable;

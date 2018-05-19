@@ -31,32 +31,29 @@
 // Qt
 #include <QAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-CloseController::CloseController( ViewManager* viewManager, KXMLGUIClient* guiClient )
-: mViewManager( viewManager )
+CloseController::CloseController(ViewManager* viewManager, KXMLGUIClient* guiClient)
+    : mViewManager(viewManager)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mCloseAction  = KStandardAction::close(  this, SLOT(close()),  actionCollection );
-    setTargetModel( 0 );
+    mCloseAction  = KStandardAction::close(this, SLOT(close()),  actionCollection);
+    setTargetModel(0);
 }
 
-void CloseController::setTargetModel( AbstractModel* model )
+void CloseController::setTargetModel(AbstractModel* model)
 {
     mView = model ? model->findBaseModel<AbstractView*>() : 0;
 
-    const bool hasView = ( mView != 0 );
+    const bool hasView = (mView != 0);
 
-    mCloseAction->setEnabled( hasView );
+    mCloseAction->setEnabled(hasView);
 }
-
 
 void CloseController::close()
 {
-    mViewManager->closeView( mView );
+    mViewManager->closeView(mView);
 }
 
 }

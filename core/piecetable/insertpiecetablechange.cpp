@@ -22,7 +22,6 @@
 
 #include "insertpiecetablechange.h"
 
-
 // lib
 #include "piecetable.h"
 //
@@ -30,30 +29,26 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 int InsertPieceTableChange::type() const { return InsertId; }
 
 QString InsertPieceTableChange::description() const
 {
-    return i18nc( "name of the change", "Insert" );
+    return i18nc("name of the change", "Insert");
 }
 
 Address InsertPieceTableChange::storageOffset() const { return mStorageOffset; }
 
-bool InsertPieceTableChange::merge( const AbstractPieceTableChange* other )
+bool InsertPieceTableChange::merge(const AbstractPieceTableChange* other)
 {
 // TODO: remove me again after synching solved
 // return false;
     bool result = false;
 
-    if( other->type() == InsertId )
-    {
-        const InsertPieceTableChange* otherInsertChange = static_cast<const InsertPieceTableChange *>( other );
-        if( mInsertOffset+mInsertLength == otherInsertChange->mInsertOffset )
-        {
+    if (other->type() == InsertId) {
+        const InsertPieceTableChange* otherInsertChange = static_cast<const InsertPieceTableChange*>(other);
+        if (mInsertOffset + mInsertLength == otherInsertChange->mInsertOffset) {
             mInsertLength += otherInsertChange->mInsertLength;
             result = true;
         }
@@ -62,23 +57,23 @@ bool InsertPieceTableChange::merge( const AbstractPieceTableChange* other )
     return result;
 }
 
-AddressRange InsertPieceTableChange::apply( PieceTable* pieceTable ) const
+AddressRange InsertPieceTableChange::apply(PieceTable* pieceTable) const
 {
-    pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
+    pieceTable->insert(mInsertOffset, mInsertLength, mStorageOffset);
 
-    return AddressRange( mInsertOffset, pieceTable->size()-1 );
+    return AddressRange(mInsertOffset, pieceTable->size() - 1);
 }
 
-AddressRange InsertPieceTableChange::revert( PieceTable* pieceTable ) const
+AddressRange InsertPieceTableChange::revert(PieceTable* pieceTable) const
 {
     const Address oldLast = pieceTable->size() - 1;
-    pieceTable->remove( AddressRange::fromWidth(mInsertOffset,mInsertLength) );
-    return AddressRange( mInsertOffset, oldLast );
+    pieceTable->remove(AddressRange::fromWidth(mInsertOffset, mInsertLength));
+    return AddressRange(mInsertOffset, oldLast);
 }
 
 ArrayChangeMetrics InsertPieceTableChange::metrics() const
 {
-    return ArrayChangeMetrics::asReplacement( mInsertOffset, 0, mInsertLength );
+    return ArrayChangeMetrics::asReplacement(mInsertOffset, 0, mInsertLength);
 }
 
 Size InsertPieceTableChange::dataSize() const { return mInsertLength; }

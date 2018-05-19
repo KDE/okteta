@@ -21,25 +21,24 @@
 //// ADAPT(end)
 #include <abstractbytearrayfilter.h>
 
-
 //// ADAPT(start)
 //// rename the class name from Template_ByteArrayFilter to a proper name, both here and in the .cpp file
 //// e.g. MyByteArrayFilter
 class Template_ByteArrayFilter : public AbstractByteArrayFilter
 //// ADAPT(end)
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     Template_ByteArrayFilter();
 
     ~Template_ByteArrayFilter() override;
 
-  public: // AbstractByteArrayFilter API
-    bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+public: // AbstractByteArrayFilter API
+    bool filter(Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayFilterParameterSet* parameterSet() override;
 
-  protected:
+protected:
 //// ADAPT(start)
 //// change "Template_ByteArrayFilterParameterSet" to the name of the class of the used parameterset
 //// in case of no parameters use "NoByteArrayFilterParameterSet"

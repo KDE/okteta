@@ -30,24 +30,22 @@
 // Okteta core
 #include <okteta/addressrange.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class OKTETAKASTENCORE_EXPORT ByteArraySelection : public AbstractModelSelection
 {
-  public:
+public:
     ByteArraySelection();
     ~ByteArraySelection() override;
 
-  public:
-    void setRange( const Okteta::AddressRange& range );
+public:
+    void setRange(const Okteta::AddressRange& range);
 
-  public:
+public:
     Okteta::AddressRange range() const;
     bool isValid() const;
 
-  private:
+private:
     Okteta::AddressRange mRange;
 };
 

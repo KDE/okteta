@@ -28,45 +28,42 @@
 
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayDocument;
 
-
 class ByteArrayRawFileWriteThread : public QThread
 {
-  Q_OBJECT
-  public:
-    ByteArrayRawFileWriteThread( QObject* parent,
-                                 ByteArrayDocument* document, QFile* file );
+    Q_OBJECT
+
+public:
+    ByteArrayRawFileWriteThread(QObject* parent,
+                                ByteArrayDocument* document, QFile* file);
 
     ~ByteArrayRawFileWriteThread() override;
 
-  public: // QThread API
+public: // QThread API
     void run() override;
 
-  public:
+public:
     bool success() const;
 
-  Q_SIGNALS:
-    void documentWritten( bool success );
+Q_SIGNALS:
+    void documentWritten(bool success);
 
-  protected:
+protected:
     ByteArrayDocument* mDocument;
     QFile* mFile;
 
     bool mSuccess;
 };
 
-
-inline ByteArrayRawFileWriteThread::ByteArrayRawFileWriteThread( QObject* parent,
-    ByteArrayDocument* document, QFile* file )
-  : QThread( parent ),
-    mDocument( document ),
-    mFile( file ),
-    mSuccess( false )
+inline ByteArrayRawFileWriteThread::ByteArrayRawFileWriteThread(QObject* parent,
+                                                                ByteArrayDocument* document, QFile* file)
+    : QThread(parent)
+    , mDocument(document)
+    , mFile(file)
+    , mSuccess(false)
 {}
 
 inline bool ByteArrayRawFileWriteThread::success() const { return mSuccess; }

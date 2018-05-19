@@ -34,41 +34,37 @@
 // Qt
 #include <QAction>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 // TODO: for docked widgets signal widgets if embedded or floating, if horizontal/vertical
-GotoOffsetController::GotoOffsetController( If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient )
- : mToolInlineViewable( toolInlineViewable )
+GotoOffsetController::GotoOffsetController(If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient)
+    : mToolInlineViewable(toolInlineViewable)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mGotoOffsetAction = actionCollection->addAction( QStringLiteral("goto_offset"),
-                                                     this, SLOT(gotoOffset()) );
-    mGotoOffsetAction->setText( i18nc("@action:inmenu","&Go to Offset...") );
-    mGotoOffsetAction->setIcon( QIcon::fromTheme( QStringLiteral("go-jump") ) );
-    actionCollection->setDefaultShortcut( mGotoOffsetAction, Qt::CTRL + Qt::Key_G );
+    mGotoOffsetAction = actionCollection->addAction(QStringLiteral("goto_offset"),
+                                                    this, SLOT(gotoOffset()));
+    mGotoOffsetAction->setText(i18nc("@action:inmenu", "&Go to Offset..."));
+    mGotoOffsetAction->setIcon(QIcon::fromTheme(QStringLiteral("go-jump")));
+    actionCollection->setDefaultShortcut(mGotoOffsetAction, Qt::CTRL + Qt::Key_G);
 
     mTool = new GotoOffsetTool();
-    connect( mTool, &GotoOffsetTool::isUsableChanged,
-             mGotoOffsetAction, &QAction::setEnabled );
-    mGotoOffsetAction->setEnabled( mTool->isUsable() );
+    connect(mTool, &GotoOffsetTool::isUsableChanged,
+            mGotoOffsetAction, &QAction::setEnabled);
+    mGotoOffsetAction->setEnabled(mTool->isUsable());
 
-    mView = new GotoOffsetToolView( mTool );
+    mView = new GotoOffsetToolView(mTool);
 }
 
-void GotoOffsetController::setTargetModel( AbstractModel* model )
+void GotoOffsetController::setTargetModel(AbstractModel* model)
 {
-    mTool->setTargetModel( model );
+    mTool->setTargetModel(model);
 }
-
 
 void GotoOffsetController::gotoOffset()
 {
-    mToolInlineViewable->setCurrentToolInlineView( mView );
+    mToolInlineViewable->setCurrentToolInlineView(mView);
 }
-
 
 GotoOffsetController::~GotoOffsetController()
 {

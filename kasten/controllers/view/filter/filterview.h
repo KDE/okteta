@@ -34,44 +34,40 @@ class KComboBox;
 class QStackedWidget;
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class FilterTool;
 
-
 class FilterView : public AbstractToolWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit FilterView( FilterTool *tool, QWidget* parent = nullptr );
+public:
+    explicit FilterView(FilterTool* tool, QWidget* parent = nullptr);
     ~FilterView() override;
 
-  public:
+public:
     FilterTool* tool() const;
 
-  private: // get 
-    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const;
+private: // get
+    void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const;
 
-  private: // separation
+private: // separation
     void addFilters();
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onFilterClicked();
-    void onOperationChange( int index );
-    void onHasWriteableChanged( bool hasWriteable );
-    void onCharCodecChanged( const QString &charCodecName );
-    void onValidityChanged( bool isValid );
+    void onOperationChange(int index);
+    void onHasWriteableChanged(bool hasWriteable);
+    void onCharCodecChanged(const QString& charCodecName);
+    void onValidityChanged(bool isValid);
 
-  private:
-    FilterTool *mTool;
-    KComboBox *mOperationComboBox;
-    QStackedWidget *mParameterSetEditStack;
-    QPushButton *mFilterButton;
+private:
+    FilterTool* mTool;
+    KComboBox* mOperationComboBox;
+    QStackedWidget* mParameterSetEditStack;
+    QPushButton* mFilterButton;
 };
-
 
 inline FilterTool* FilterView::tool() const { return mTool; }
 

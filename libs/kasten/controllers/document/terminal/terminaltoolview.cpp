@@ -26,12 +26,10 @@
 #include "terminalview.h"
 #include "terminaltool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TerminalToolView::TerminalToolView( TerminalTool* tool )
-  : mWidget( new TerminalView(tool) )
+TerminalToolView::TerminalToolView(TerminalTool* tool)
+    : mWidget(new TerminalView(tool))
 {
 }
 

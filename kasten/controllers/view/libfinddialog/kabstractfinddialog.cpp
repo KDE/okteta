@@ -36,118 +36,118 @@
 #include <QPushButton>
 #include <QDialogButtonBox>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-KAbstractFindDialog::KAbstractFindDialog( QWidget* parent )
-  : QDialog( parent )
+KAbstractFindDialog::KAbstractFindDialog(QWidget* parent)
+    : QDialog(parent)
 {
     // main widget
     QWidget* mainWidget = new QWidget;
-    MainWidgetLayout = new QVBoxLayout( mainWidget );
-    MainWidgetLayout->setMargin( 0 );
+    MainWidgetLayout = new QVBoxLayout(mainWidget);
+    MainWidgetLayout->setMargin(0);
 
     // dialog buttons
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     FindButton = new QPushButton;
-    dialogButtonBox->addButton( FindButton, QDialogButtonBox::AcceptRole );
-    connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &KAbstractFindDialog::forwardFindButtonClicked );
-    dialogButtonBox->addButton( QDialogButtonBox::Cancel );
-    connect( dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
+    dialogButtonBox->addButton(FindButton, QDialogButtonBox::AcceptRole);
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &KAbstractFindDialog::forwardFindButtonClicked);
+    dialogButtonBox->addButton(QDialogButtonBox::Cancel);
+    connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     // main layout
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget( mainWidget );
+    layout->addWidget(mainWidget);
     layout->addStretch();
-    layout->addWidget( dialogButtonBox );
+    layout->addWidget(dialogButtonBox);
 
-    setLayout( layout );
+    setLayout(layout);
     // TODO: setting ok button to disabled as before done gets overwritten to true
     // if setting the button gui with an inline KGuiItem in the subclass,
     // which has no parameter for enabled and defaults to true
 }
 
-void KAbstractFindDialog::setFindButton( const QString& buttonText, const QString& buttonIconName,
-                                         const QString& buttonToolTip, const QString& buttonWhatsThis )
+void KAbstractFindDialog::setFindButton(const QString& buttonText, const QString& buttonIconName,
+                                        const QString& buttonToolTip, const QString& buttonWhatsThis)
 {
-    FindButton->setText( buttonText );
-    FindButton->setIcon( QIcon::fromTheme(buttonIconName) );
-    FindButton->setToolTip( buttonToolTip );
-    FindButton->setWhatsThis( buttonWhatsThis );
+    FindButton->setText(buttonText);
+    FindButton->setIcon(QIcon::fromTheme(buttonIconName));
+    FindButton->setToolTip(buttonToolTip);
+    FindButton->setWhatsThis(buttonWhatsThis);
 }
 
-void KAbstractFindDialog::setFindButtonEnabled( bool enabled )
+void KAbstractFindDialog::setFindButtonEnabled(bool enabled)
 {
-    FindButton->setEnabled( enabled );
+    FindButton->setEnabled(enabled);
 }
 
 void KAbstractFindDialog::setupFindBox()
 {
     // find term
-    QGroupBox *findBox = new QGroupBox( i18nc("@title:window","Find") );
-    MainWidgetLayout->addWidget( findBox );
+    QGroupBox* findBox = new QGroupBox(i18nc("@title:window", "Find"));
+    MainWidgetLayout->addWidget(findBox);
 
-    QVBoxLayout *findBoxLayout = new QVBoxLayout;
+    QVBoxLayout* findBoxLayout = new QVBoxLayout;
 
-    SearchDataEdit = new Okteta::ByteArrayComboBox( findBox );
-    connect( SearchDataEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
-             this, &KAbstractFindDialog::onSearchDataChanged );
-    connect( SearchDataEdit, &Okteta::ByteArrayComboBox::formatChanged,
-             this, &KAbstractFindDialog::onSearchDataFormatChanged );
+    SearchDataEdit = new Okteta::ByteArrayComboBox(findBox);
+    connect(SearchDataEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
+            this, &KAbstractFindDialog::onSearchDataChanged);
+    connect(SearchDataEdit, &Okteta::ByteArrayComboBox::formatChanged,
+            this, &KAbstractFindDialog::onSearchDataFormatChanged);
     const QString toolTip =
         i18nc("@info:tooltip",
               "Enter the bytes to search for, or select bytes previously searched for from the list.");
-    SearchDataEdit->setToolTip( toolTip );
+    SearchDataEdit->setToolTip(toolTip);
 
-    findBoxLayout->addWidget( SearchDataEdit );
-    findBox->setLayout( findBoxLayout );
+    findBoxLayout->addWidget(SearchDataEdit);
+    findBox->setLayout(findBoxLayout);
 }
 
-void KAbstractFindDialog::setupOperationBox( QGroupBox *operationBox )
+void KAbstractFindDialog::setupOperationBox(QGroupBox* operationBox)
 {
     // operation box
-    if( operationBox )
-        MainWidgetLayout->addWidget( operationBox );
+    if (operationBox) {
+        MainWidgetLayout->addWidget(operationBox);
+    }
 }
 
-void KAbstractFindDialog::setupCheckBoxes( QCheckBox *optionCheckBox )
+void KAbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
 {
     // options
-    QGroupBox *optionsBox = new QGroupBox( i18nc("@title:group","Options") );
-    MainWidgetLayout->addWidget( optionsBox );
+    QGroupBox* optionsBox = new QGroupBox(i18nc("@title:group", "Options"));
+    MainWidgetLayout->addWidget(optionsBox);
 
-    QGridLayout *optionsBoxLayout = new QGridLayout( optionsBox );
+    QGridLayout* optionsBoxLayout = new QGridLayout(optionsBox);
 
-    CaseSensitiveCheckBox = new QCheckBox( i18nc("@option:check","C&ase sensitive"),optionsBox);
-    CaseSensitiveCheckBox->setWhatsThis( i18nc("@info:whatsthis","Perform a case sensitive search: "
-            "entering the pattern 'Joe' will not match 'joe' or 'JOE', only 'Joe'.") );
-    WholeWordsCheckBox = new QCheckBox( i18nc("@option:check","&Whole words only"),optionsBox );
-    WholeWordsCheckBox->setWhatsThis( i18nc("@info:whatsthis","Require word boundaries in both ends of a match to succeed.") );
-    AtCursorCheckBox = new QCheckBox( i18nc("@option:check","From c&ursor"), optionsBox );
-    AtCursorCheckBox->setWhatsThis( i18nc("@info:whatsthis","Start searching at the current cursor location rather than at the top.") );
+    CaseSensitiveCheckBox = new QCheckBox(i18nc("@option:check", "C&ase sensitive"), optionsBox);
+    CaseSensitiveCheckBox->setWhatsThis(i18nc("@info:whatsthis", "Perform a case sensitive search: "
+                                              "entering the pattern 'Joe' will not match 'joe' or 'JOE', only 'Joe'."));
+    WholeWordsCheckBox = new QCheckBox(i18nc("@option:check", "&Whole words only"), optionsBox);
+    WholeWordsCheckBox->setWhatsThis(i18nc("@info:whatsthis", "Require word boundaries in both ends of a match to succeed."));
+    AtCursorCheckBox = new QCheckBox(i18nc("@option:check", "From c&ursor"), optionsBox);
+    AtCursorCheckBox->setWhatsThis(i18nc("@info:whatsthis", "Start searching at the current cursor location rather than at the top."));
 
-    BackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), optionsBox );
-    BackwardsCheckBox->setWhatsThis(i18nc("@info:whatsthis","Replace backwards.") );
-    SelectedCheckBox = new QCheckBox( i18nc("@option:check","&Selected bytes"), optionsBox );
-    SelectedCheckBox->setWhatsThis( i18nc("@info:whatsthis","Only search within the current selection.") );
+    BackwardsCheckBox = new QCheckBox(i18nc("@option:check", "&Backwards"), optionsBox);
+    BackwardsCheckBox->setWhatsThis(i18nc("@info:whatsthis", "Replace backwards."));
+    SelectedCheckBox = new QCheckBox(i18nc("@option:check", "&Selected bytes"), optionsBox);
+    SelectedCheckBox->setWhatsThis(i18nc("@info:whatsthis", "Only search within the current selection."));
 
-    optionsBoxLayout->addWidget( CaseSensitiveCheckBox, 0, 0 );
-    optionsBoxLayout->addWidget( WholeWordsCheckBox, 1, 0 );
-    optionsBoxLayout->addWidget( AtCursorCheckBox, 2, 0 );
-    optionsBoxLayout->addWidget( BackwardsCheckBox, 0, 1 );
-    optionsBoxLayout->addWidget( SelectedCheckBox, 1, 1 );
-    if( optionCheckBox )
-        optionsBoxLayout->addWidget( optionCheckBox, 2, 1 );
+    optionsBoxLayout->addWidget(CaseSensitiveCheckBox, 0, 0);
+    optionsBoxLayout->addWidget(WholeWordsCheckBox, 1, 0);
+    optionsBoxLayout->addWidget(AtCursorCheckBox, 2, 0);
+    optionsBoxLayout->addWidget(BackwardsCheckBox, 0, 1);
+    optionsBoxLayout->addWidget(SelectedCheckBox, 1, 1);
+    if (optionCheckBox) {
+        optionsBoxLayout->addWidget(optionCheckBox, 2, 1);
+    }
 
-    setTabOrder( CaseSensitiveCheckBox, WholeWordsCheckBox );
-    setTabOrder( WholeWordsCheckBox, AtCursorCheckBox );
-    setTabOrder( AtCursorCheckBox, BackwardsCheckBox );
-    setTabOrder( BackwardsCheckBox, SelectedCheckBox );
+    setTabOrder(CaseSensitiveCheckBox, WholeWordsCheckBox);
+    setTabOrder(WholeWordsCheckBox, AtCursorCheckBox);
+    setTabOrder(AtCursorCheckBox, BackwardsCheckBox);
+    setTabOrder(BackwardsCheckBox, SelectedCheckBox);
 //     if( optionCheckBox )
 //         setTabOrder( SelectedCheckBox, optionCheckBox );
 
-    onSearchDataFormatChanged( SearchDataEdit->format() );
+    onSearchDataFormatChanged(SearchDataEdit->format());
 }
 
 bool KAbstractFindDialog::fromCursor()            const { return AtCursorCheckBox->isChecked(); }
@@ -158,8 +158,8 @@ KFindDirection KAbstractFindDialog::direction() const
 }
 Qt::CaseSensitivity KAbstractFindDialog::caseSensitivity() const
 {
-    return ( SearchDataEdit->format() == Okteta::ByteArrayComboBox::CharCoding )
-           && ! CaseSensitiveCheckBox->isChecked() ? Qt::CaseInsensitive : Qt::CaseSensitive;
+    return (SearchDataEdit->format() == Okteta::ByteArrayComboBox::CharCoding)
+           && !CaseSensitiveCheckBox->isChecked() ? Qt::CaseInsensitive : Qt::CaseSensitive;
 }
 
 QByteArray KAbstractFindDialog::data()  const
@@ -167,19 +167,19 @@ QByteArray KAbstractFindDialog::data()  const
     return SearchDataEdit->byteArray();
 }
 
-void KAbstractFindDialog::setDirection( KFindDirection Direction )
+void KAbstractFindDialog::setDirection(KFindDirection Direction)
 {
-    BackwardsCheckBox->setChecked( Direction == FindBackward );
+    BackwardsCheckBox->setChecked(Direction == FindBackward);
 }
 
-void KAbstractFindDialog::setInSelection( bool InSelection )
+void KAbstractFindDialog::setInSelection(bool InSelection)
 {
-    SelectedCheckBox->setChecked( InSelection );
+    SelectedCheckBox->setChecked(InSelection);
 }
 
-void KAbstractFindDialog::setCharCodec( const QString &codecName )
+void KAbstractFindDialog::setCharCodec(const QString& codecName)
 {
-    SearchDataEdit->setCharCodec( codecName );
+    SearchDataEdit->setCharCodec(codecName);
 }
 
 void KAbstractFindDialog::rememberCurrentSettings()
@@ -191,16 +191,16 @@ void KAbstractFindDialog::onFindButtonClicked()
 {
 }
 
-void KAbstractFindDialog::onSearchDataFormatChanged( int index )
+void KAbstractFindDialog::onSearchDataFormatChanged(int index)
 {
-    const bool isCharCoding = ( index == Okteta::ByteArrayComboBox::CharCoding );
-    CaseSensitiveCheckBox->setEnabled( isCharCoding );
-    WholeWordsCheckBox->setEnabled( false );//isCharCoding ); TODO: not implemented!
+    const bool isCharCoding = (index == Okteta::ByteArrayComboBox::CharCoding);
+    CaseSensitiveCheckBox->setEnabled(isCharCoding);
+    WholeWordsCheckBox->setEnabled(false);  // isCharCoding ); TODO: not implemented!
 }
 
-void KAbstractFindDialog::onSearchDataChanged( const QByteArray &data )
+void KAbstractFindDialog::onSearchDataChanged(const QByteArray& data)
 {
-    FindButton->setEnabled( !data.isEmpty() );
+    FindButton->setEnabled(!data.isEmpty());
 }
 
 void KAbstractFindDialog::forwardFindButtonClicked()
@@ -208,13 +208,11 @@ void KAbstractFindDialog::forwardFindButtonClicked()
     onFindButtonClicked();
 }
 
-
-void KAbstractFindDialog::showEvent( QShowEvent *showEvent )
+void KAbstractFindDialog::showEvent(QShowEvent* showEvent)
 {
-  QDialog::showEvent(showEvent);
-  SearchDataEdit->setFocus();
+    QDialog::showEvent(showEvent);
+    SearchDataEdit->setFocus();
 }
-
 
 KAbstractFindDialog::~KAbstractFindDialog() {}
 

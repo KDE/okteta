@@ -35,41 +35,42 @@ class QString;
 
 class PrintInfo
 {
-  public:
+public:
     QUrl url() const;
     int noOfPages() const;
 
-  public:
-    void setUrl( const QUrl &url );
-    void setNoOfPages( int noOfPages );
+public:
+    void setUrl(const QUrl& url);
+    void setNoOfPages(int noOfPages);
 
-  protected:
+protected:
     QUrl mUrl;
     int mNoOfPages;
 };
 
 inline QUrl PrintInfo::url()      const { return mUrl; }
 inline int PrintInfo::noOfPages() const { return mNoOfPages; }
-inline void PrintInfo::setUrl( const QUrl &url ) { mUrl = url; }
-inline void PrintInfo::setNoOfPages( int noOfPages ) { mNoOfPages = noOfPages; }
-
+inline void PrintInfo::setUrl(const QUrl& url) { mUrl = url; }
+inline void PrintInfo::setNoOfPages(int noOfPages) { mNoOfPages = noOfPages; }
 
 class HeaderFooterFrameRenderer : public AbstractFrameRenderer
 {
-  public:
-    enum BoxStyle {
+public:
+    enum BoxStyle
+    {
         NoLines = 0,
         NoBackground = 0,
         NoBox = NoLines | NoBackground,
         BackgroundDrawn = 1,
         LineAbove = 2, LineBelow = 4, LinesAtSide = 8,
-        Box = LineAbove | LineBelow | LinesAtSide };
+        Box = LineAbove | LineBelow | LinesAtSide
+    };
 
-  public:
-    explicit HeaderFooterFrameRenderer( const PrintInfo* info );
+public:
+    explicit HeaderFooterFrameRenderer(const PrintInfo* info);
     ~HeaderFooterFrameRenderer() override;
 
-  public: // AbstractFrameRenderer API
+public: // AbstractFrameRenderer API
     // make this flags?
 //     virtual bool hasFixedWidth() const;
 //     virtual bool hasFixedHeight() const;
@@ -80,17 +81,17 @@ class HeaderFooterFrameRenderer : public AbstractFrameRenderer
 //     virtual int framesCount() const;
 
     void prepare() override;
-    void renderFrame( QPainter *painter, int frameIndex ) override;
+    void renderFrame(QPainter* painter, int frameIndex) override;
 
-  public:
-    void setWidth( int width );
-    void setTexts( const QString &leftText, const QString &centerText, const QString &rightText );
-    void setBoxStyle( int boxStyle );
+public:
+    void setWidth(int width);
+    void setTexts(const QString& leftText, const QString& centerText, const QString& rightText);
+    void setBoxStyle(int boxStyle);
 
-  protected:
+protected:
     void calculateHeight();
 
-  protected:
+protected:
     const PrintInfo* mInfo;
 
     int mHeight;

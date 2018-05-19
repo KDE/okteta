@@ -31,20 +31,20 @@
 #include <QStyle>
 #include <QScrollBar>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 static const int DefaultSingleStep = 20;
 
 class ColumnsViewPrivate
 {
-  public:
-    ColumnsViewPrivate( /*bool R,*/ );
+public:
+    ColumnsViewPrivate(/*bool R,*/);
     ~ColumnsViewPrivate();
-  public:
+
+public:
     void updateWidths();
-  public: // calculated
+
+public: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
     QList<AbstractColumnRenderer*> Columns;
     /** the number of lines which the column view has */
@@ -54,116 +54,112 @@ class ColumnsViewPrivate
     /** the width of all visible columns together */
     PixelX ColumnsWidth;
 
-  public:
+public:
 //    bool Reversed;
 };
 
-
-ColumnsViewPrivate::ColumnsViewPrivate( /*bool R,*/)
- : NoOfLines( 0 ),
-   LineHeight( 0 ),
-   ColumnsWidth( 0 )
+ColumnsViewPrivate::ColumnsViewPrivate(/*bool R,*/)
+    : NoOfLines(0)
+    , LineHeight(0)
+    , ColumnsWidth(0)
 //    Reversed( R )
 {}
 
 void ColumnsViewPrivate::updateWidths()
 {
     ColumnsWidth = 0;
-    QListIterator<AbstractColumnRenderer*> it( Columns );
-    while( it.hasNext() )
-    {
-        AbstractColumnRenderer *column = it.next();
-        column->setX( ColumnsWidth );
+    QListIterator<AbstractColumnRenderer*> it(Columns);
+    while (it.hasNext()) {
+        AbstractColumnRenderer* column = it.next();
+        column->setX(ColumnsWidth);
         ColumnsWidth += column->visibleWidth();
     }
 }
 
 ColumnsViewPrivate::~ColumnsViewPrivate()
 {
-    while( !Columns.isEmpty() )
+    while (!Columns.isEmpty()) {
         delete Columns.takeFirst();
+    }
 }
 
-ColumnsView::ColumnsView( /*bool R,*/ QWidget *parent )
- : QAbstractScrollArea( parent ),
-   d( new ColumnsViewPrivate() )
+ColumnsView::ColumnsView(/*bool R,*/ QWidget* parent)
+    : QAbstractScrollArea(parent)
+    , d(new ColumnsViewPrivate())
 {
-    viewport()->setAttribute( Qt::WA_StaticContents );
-    viewport()->setBackgroundRole ( QPalette::Base );
-    horizontalScrollBar()->setSingleStep( DefaultSingleStep );
-    verticalScrollBar()->setSingleStep( DefaultSingleStep );
+    viewport()->setAttribute(Qt::WA_StaticContents);
+    viewport()->setBackgroundRole(QPalette::Base);
+    horizontalScrollBar()->setSingleStep(DefaultSingleStep);
+    verticalScrollBar()->setSingleStep(DefaultSingleStep);
 
-    viewport()->setFocusProxy( this );
-    viewport()->setFocusPolicy( Qt::WheelFocus );
+    viewport()->setFocusProxy(this);
+    viewport()->setFocusPolicy(Qt::WheelFocus);
 }
-
 
 LineSize ColumnsView::noOfLines()    const { return d->NoOfLines; }
 PixelY ColumnsView::lineHeight()     const { return d->LineHeight; }
-Line ColumnsView::lineAt( PixelY y ) const { return (d->LineHeight!=0) ? y / d->LineHeight : 0; }
+Line ColumnsView::lineAt(PixelY y) const { return (d->LineHeight != 0) ? y / d->LineHeight : 0; }
 LineRange ColumnsView::visibleLines() const
 {
-    const PixelYRange ySpan = PixelYRange::fromWidth( yOffset(), visibleHeight() );
-    return LineRange( lineAt(ySpan.start()), lineAt(ySpan.end()) );
+    const PixelYRange ySpan = PixelYRange::fromWidth(yOffset(), visibleHeight());
+    return LineRange(lineAt(ySpan.start()), lineAt(ySpan.end()));
 }
-LineRange ColumnsView::visibleLines( const PixelYRange& yPixels ) const
+LineRange ColumnsView::visibleLines(const PixelYRange& yPixels) const
 {
-    return LineRange( lineAt(yPixels.start()), lineAt(yPixels.end()) );
+    return LineRange(lineAt(yPixels.start()), lineAt(yPixels.end()));
 }
 
 PixelX ColumnsView::visibleWidth()  const { return viewport()->width(); }
 PixelY ColumnsView::visibleHeight() const { return viewport()->height(); }
 
-PixelY ColumnsView::columnsHeight() const { return d->NoOfLines*d->LineHeight; }
+PixelY ColumnsView::columnsHeight() const { return d->NoOfLines * d->LineHeight; }
 PixelX ColumnsView::columnsWidth()  const { return d->ColumnsWidth; }
 
-QPoint ColumnsView::viewportToColumns( const QPoint& point ) const
+QPoint ColumnsView::viewportToColumns(const QPoint& point) const
 {
-    return QPoint(xOffset(),yOffset()) + point;
+    return QPoint(xOffset(), yOffset()) + point;
 }
-
 
 PixelX ColumnsView::xOffset() const { return horizontalScrollBar()->value(); }
 PixelY ColumnsView::yOffset() const { return verticalScrollBar()->value(); }
-PixelY ColumnsView::yOffsetOfLine( Line lineIndex ) const
+PixelY ColumnsView::yOffsetOfLine(Line lineIndex) const
 {
     return lineIndex * d->LineHeight - yOffset();
 }
 
-
-void ColumnsView::setColumnsPos( PixelX x, PixelY y )
+void ColumnsView::setColumnsPos(PixelX x, PixelY y)
 {
-    horizontalScrollBar()->setValue( x );
-    verticalScrollBar()->setValue( y );
+    horizontalScrollBar()->setValue(x);
+    verticalScrollBar()->setValue(y);
 }
 
-
-void ColumnsView::setNoOfLines( LineSize newNoOfLines )
+void ColumnsView::setNoOfLines(LineSize newNoOfLines)
 {
-    if( d->NoOfLines == newNoOfLines )
+    if (d->NoOfLines == newNoOfLines) {
         return;
+    }
 
     d->NoOfLines = newNoOfLines;
 
     updateScrollBars();
 }
 
-
-void ColumnsView::setLineHeight( PixelY newLineHeight )
+void ColumnsView::setLineHeight(PixelY newLineHeight)
 {
-    if( newLineHeight == d->LineHeight )
+    if (newLineHeight == d->LineHeight) {
         return;
+    }
 
     d->LineHeight = newLineHeight;
 
-    QListIterator<AbstractColumnRenderer*> it( d->Columns );
-    while( it.hasNext() )
-        it.next()->setLineHeight( d->LineHeight );
+    QListIterator<AbstractColumnRenderer*> it(d->Columns);
+    while (it.hasNext()) {
+        it.next()->setLineHeight(d->LineHeight);
+    }
 
-    verticalScrollBar()->setSingleStep( d->LineHeight );
+    verticalScrollBar()->setSingleStep(d->LineHeight);
     updateScrollBars();
 }
-
 
 void ColumnsView::updateWidths()
 {
@@ -172,236 +168,232 @@ void ColumnsView::updateWidths()
     updateScrollBars();
 }
 
-
 void ColumnsView::updateScrollBars()
 {
     QSize viewSize = maximumViewportSize();
 
-    const int scrollBarWidth = style()->pixelMetric( QStyle::PM_ScrollBarExtent );
+    const int scrollBarWidth = style()->pixelMetric(QStyle::PM_ScrollBarExtent);
     const PixelY usedHeight = columnsHeight();
     const PixelX usedWidth = columnsWidth();
 
-    const bool needsVerticalBarDefinitely = ( usedHeight > viewSize.height() );
-    const bool needsHorizontalBarDefinitely = ( usedWidth > viewSize.width() );
+    const bool needsVerticalBarDefinitely = (usedHeight > viewSize.height());
+    const bool needsHorizontalBarDefinitely = (usedWidth > viewSize.width());
 
-    if( needsVerticalBarDefinitely )
+    if (needsVerticalBarDefinitely) {
         viewSize.rwidth() -= scrollBarWidth;
-    if( needsHorizontalBarDefinitely )
+    }
+    if (needsHorizontalBarDefinitely) {
         viewSize.rheight() -= scrollBarWidth;
+    }
     // check again if bars are not needed now
-    if( !needsVerticalBarDefinitely && usedHeight > viewSize.height() )
+    if (!needsVerticalBarDefinitely && usedHeight > viewSize.height()) {
         viewSize.rwidth() -= scrollBarWidth;
-    if( !needsHorizontalBarDefinitely && usedWidth > viewSize.width() )
+    }
+    if (!needsHorizontalBarDefinitely && usedWidth > viewSize.width()) {
         viewSize.rheight() -= scrollBarWidth;
+    }
 
-    verticalScrollBar()->setRange( 0, usedHeight-viewSize.height() );
-    verticalScrollBar()->setPageStep( viewSize.height() );
-    horizontalScrollBar()->setRange( 0, usedWidth-viewSize.width() );
-    horizontalScrollBar()->setPageStep( viewSize.width() );
+    verticalScrollBar()->setRange(0, usedHeight - viewSize.height());
+    verticalScrollBar()->setPageStep(viewSize.height());
+    horizontalScrollBar()->setRange(0, usedWidth - viewSize.width());
+    horizontalScrollBar()->setPageStep(viewSize.width());
 }
 
-
-void ColumnsView::updateColumn( AbstractColumnRenderer& columnRenderer )
+void ColumnsView::updateColumn(AbstractColumnRenderer& columnRenderer)
 {
-    if( columnRenderer.isVisible() )
-        viewport()->update( columnRenderer.x()-xOffset(), 0, columnRenderer.width(), visibleHeight() );
+    if (columnRenderer.isVisible()) {
+        viewport()->update(columnRenderer.x() - xOffset(), 0, columnRenderer.width(), visibleHeight());
+    }
 }
 
-void ColumnsView::updateColumn( AbstractColumnRenderer& columnRenderer, const LineRange& lines )
+void ColumnsView::updateColumn(AbstractColumnRenderer& columnRenderer, const LineRange& lines)
 {
-    if( columnRenderer.isVisible() ) // TODO: catch hidden range && columnRenderer.overlaps(Xs) )
-    {
+    if (columnRenderer.isVisible()) { // TODO: catch hidden range && columnRenderer.overlaps(Xs) )
         LineRange linesToUpdate = visibleLines();
-        linesToUpdate.restrictTo( lines );
-        if( linesToUpdate.isValid() )
-        {
+        linesToUpdate.restrictTo(lines);
+        if (linesToUpdate.isValid()) {
             const PixelX x = columnRenderer.x() - xOffset();
-            const PixelY y = yOffsetOfLine( linesToUpdate.start() );
+            const PixelY y = yOffsetOfLine(linesToUpdate.start());
             const int width = columnRenderer.width();
             const int height = d->LineHeight * linesToUpdate.width();
-            viewport()->update( x, y, width, height );
+            viewport()->update(x, y, width, height);
         }
     }
 }
 
-
 LineSize ColumnsView::noOfLinesPerPage() const
 {
-    if( d->LineHeight < 1 )
+    if (d->LineHeight < 1) {
         return 1;
+    }
 
-    LineSize result = (visibleHeight()-1) / d->LineHeight; // -1 ensures to get always the last visible line
+    LineSize result = (visibleHeight() - 1) / d->LineHeight; // -1 ensures to get always the last visible line
 
-    if( result < 1 )
+    if (result < 1) {
         // ensure to move down at least one line
         result = 1;
+    }
 
     return result;
 }
 
-
-void ColumnsView::addColumn( AbstractColumnRenderer* columnRenderer )
+void ColumnsView::addColumn(AbstractColumnRenderer* columnRenderer)
 {
 //   if( Reversed )
 //     Columns.prepend( C );
 //   else
-    d->Columns.append( columnRenderer );
+    d->Columns.append(columnRenderer);
 
     updateWidths();
 }
 
-
-void ColumnsView::removeColumn( AbstractColumnRenderer* columnRenderer )
+void ColumnsView::removeColumn(AbstractColumnRenderer* columnRenderer)
 {
-    const int columnRendererIndex = d->Columns.indexOf( columnRenderer );
-    if( columnRendererIndex != -1 )
-        d->Columns.removeAt( columnRendererIndex );
+    const int columnRendererIndex = d->Columns.indexOf(columnRenderer);
+    if (columnRendererIndex != -1) {
+        d->Columns.removeAt(columnRendererIndex);
+    }
 
     delete columnRenderer;
 
     updateWidths();
 }
 
-
-void ColumnsView::scrollContentsBy( int dx, int dy )
+void ColumnsView::scrollContentsBy(int dx, int dy)
 {
-    viewport()->scroll( dx, dy );
+    viewport()->scroll(dx, dy);
 }
 
-bool ColumnsView::event( QEvent* event )
+bool ColumnsView::event(QEvent* event)
 {
-    if( event->type() == QEvent::StyleChange || event->type() == QEvent::LayoutRequest )
+    if (event->type() == QEvent::StyleChange || event->type() == QEvent::LayoutRequest) {
         updateScrollBars();
+    }
 
-    return QAbstractScrollArea::event( event );
+    return QAbstractScrollArea::event(event);
 }
 
-
-void ColumnsView::resizeEvent( QResizeEvent* event )
+void ColumnsView::resizeEvent(QResizeEvent* event)
 {
     updateScrollBars();
 
-    QAbstractScrollArea::resizeEvent( event );
+    QAbstractScrollArea::resizeEvent(event);
 }
 
-void ColumnsView::paintEvent( QPaintEvent* paintEvent )
+void ColumnsView::paintEvent(QPaintEvent* paintEvent)
 {
-    QAbstractScrollArea::paintEvent( paintEvent );
+    QAbstractScrollArea::paintEvent(paintEvent);
 
     const PixelX x = xOffset();
     const PixelY y = yOffset();
 
     QRect dirtyRect = paintEvent->rect();
-    dirtyRect.translate( x, y );
+    dirtyRect.translate(x, y);
 
-    QPainter painter( viewport() );
-    painter.translate( -x, -y );
+    QPainter painter(viewport());
+    painter.translate(-x, -y);
 
-    renderColumns( &painter, dirtyRect.x(),dirtyRect.y(), dirtyRect.width(), dirtyRect.height() );
+    renderColumns(&painter, dirtyRect.x(), dirtyRect.y(), dirtyRect.width(), dirtyRect.height());
 }
 
-
-void ColumnsView::renderColumns( QPainter* painter, int cx, int cy, int cw, int ch )
+void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int ch)
 {
-    PixelXRange dirtyXs = PixelXRange::fromWidth( cx, cw );
+    PixelXRange dirtyXs = PixelXRange::fromWidth(cx, cw);
 
     // content to be shown?
-    if( dirtyXs.startsBefore(d->ColumnsWidth) )
-    {
-        PixelYRange dirtyYs = PixelYRange::fromWidth( cy, ch );
+    if (dirtyXs.startsBefore(d->ColumnsWidth)) {
+        PixelYRange dirtyYs = PixelYRange::fromWidth(cy, ch);
 
         // collect affected columns
         QList<AbstractColumnRenderer*> dirtyColumns;
-        QListIterator<AbstractColumnRenderer*> it( d->Columns );
-        while( it.hasNext() )
-        {
-            AbstractColumnRenderer *column = it.next();
-            if( column->isVisible() && column->overlaps(dirtyXs) )
-                dirtyColumns.append( column );
+        QListIterator<AbstractColumnRenderer*> it(d->Columns);
+        while (it.hasNext()) {
+            AbstractColumnRenderer* column = it.next();
+            if (column->isVisible() && column->overlaps(dirtyXs)) {
+                dirtyColumns.append(column);
+            }
         }
 
         // any lines of any columns to be drawn?
-        if( d->NoOfLines > 0 )
-        {
+        if (d->NoOfLines > 0) {
             // calculate affected lines
-            LineRange dirtyLines = visibleLines( dirtyYs );
-            dirtyLines.restrictEndTo( d->NoOfLines - 1 );
+            LineRange dirtyLines = visibleLines(dirtyYs);
+            dirtyLines.restrictEndTo(d->NoOfLines - 1);
 
-            if( dirtyLines.isValid() )
-            {
+            if (dirtyLines.isValid()) {
                 // paint full columns
-                QListIterator<AbstractColumnRenderer*> fit( d->Columns ); // TODO: reuse later, see some lines below
-                while( fit.hasNext() )
-                    fit.next()->renderColumn( painter, dirtyXs, dirtyYs );
+                QListIterator<AbstractColumnRenderer*> fit(d->Columns);   // TODO: reuse later, see some lines below
+                while (fit.hasNext()) {
+                    fit.next()->renderColumn(painter, dirtyXs, dirtyYs);
+                }
 
                 PixelY cy = dirtyLines.start() * d->LineHeight;
-        //qCDebug(LOG_OKTETA_GUI)<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
+                // qCDebug(LOG_OKTETA_GUI)<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
                 // starting painting with the first line
                 Line line = dirtyLines.start();
-                QListIterator<AbstractColumnRenderer*> it( dirtyColumns );
-                AbstractColumnRenderer *column = it.next();
-                painter->translate( column->x(), cy );
+                QListIterator<AbstractColumnRenderer*> it(dirtyColumns);
+                AbstractColumnRenderer* column = it.next();
+                painter->translate(column->x(), cy);
 
-                while( true )
-                {
-                    column->renderFirstLine( painter, dirtyXs, line );
-                    if( !it.hasNext() )
+                while (true) {
+                    column->renderFirstLine(painter, dirtyXs, line);
+                    if (!it.hasNext()) {
                         break;
-                    painter->translate( column->width(), 0 );
+                    }
+                    painter->translate(column->width(), 0);
                     column = it.next();
                 }
-                painter->translate( -column->x(), 0 );
+                painter->translate(-column->x(), 0);
 
                 // Go through the other lines
-                while( true )
-                {
+                while (true) {
                     ++line;
 
-                    if( line > dirtyLines.end() )
+                    if (line > dirtyLines.end()) {
                         break;
+                    }
 
-                    QListIterator<AbstractColumnRenderer*> it( dirtyColumns );
+                    QListIterator<AbstractColumnRenderer*> it(dirtyColumns);
                     column = it.next();
-                    painter->translate( column->x(), d->LineHeight );
+                    painter->translate(column->x(), d->LineHeight);
 
-                    while( true )
-                    {
-                        column->renderNextLine( painter );
-                        if( !it.hasNext() )
+                    while (true) {
+                        column->renderNextLine(painter);
+                        if (!it.hasNext()) {
                             break;
-                        painter->translate( column->width(), 0 );
+                        }
+                        painter->translate(column->width(), 0);
                         column = it.next();
                     }
-                    painter->translate( -column->x(), 0 );
+                    painter->translate(-column->x(), 0);
                 }
                 cy = dirtyLines.end() * d->LineHeight;
 
-                painter->translate( 0, -cy );
+                painter->translate(0, -cy);
             }
         }
 
         // draw empty columns?
-        dirtyYs.setStart( columnsHeight() );
-        if( dirtyYs.isValid() )
-        {
-            QListIterator<AbstractColumnRenderer*> it( dirtyColumns );
-            while( it.hasNext() )
-                it.next()->renderEmptyColumn( painter, dirtyXs, dirtyYs );
+        dirtyYs.setStart(columnsHeight());
+        if (dirtyYs.isValid()) {
+            QListIterator<AbstractColumnRenderer*> it(dirtyColumns);
+            while (it.hasNext()) {
+                it.next()->renderEmptyColumn(painter, dirtyXs, dirtyYs);
+            }
         }
     }
 
     // painter empty rects
-    dirtyXs.setStart( d->ColumnsWidth );
-    if( dirtyXs.isValid() )
-        renderEmptyArea( painter, dirtyXs.start(), cy, dirtyXs.width(), ch );
+    dirtyXs.setStart(d->ColumnsWidth);
+    if (dirtyXs.isValid()) {
+        renderEmptyArea(painter, dirtyXs.start(), cy, dirtyXs.width(), ch);
+    }
 }
 
-
-void ColumnsView::renderEmptyArea( QPainter* painter, int cx ,int cy, int cw, int ch)
+void ColumnsView::renderEmptyArea(QPainter* painter, int cx, int cy, int cw, int ch)
 {
-    painter->fillRect( cx,cy, cw,ch, viewport()->palette().brush(QPalette::Base) ); // TODO: use stylist here, too
+    painter->fillRect(cx, cy, cw, ch, viewport()->palette().brush(QPalette::Base)); // TODO: use stylist here, too
 }
-
 
 ColumnsView::~ColumnsView()
 {

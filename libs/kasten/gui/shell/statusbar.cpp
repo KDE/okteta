@@ -27,26 +27,23 @@
 // Qt
 #include <QEvent>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-StatusBar::StatusBar( QWidget* parent )
-  : QStatusBar( parent )
+StatusBar::StatusBar(QWidget* parent)
+    : QStatusBar(parent)
 {
 //     setMinimumWidth( 1 );
 
-    QWidget* baseWidget = new QWidget( this );
+    QWidget* baseWidget = new QWidget(this);
 
-    mLayout = new StatusBarLayout( baseWidget );
-    mLayout->setSpacing( 6 ); // hard coded in QStatusBar
-    QStatusBar::addWidget( baseWidget, 1 );
+    mLayout = new StatusBarLayout(baseWidget);
+    mLayout->setSpacing(6);   // hard coded in QStatusBar
+    QStatusBar::addWidget(baseWidget, 1);
 }
 
-
-void StatusBar::addWidget( QWidget* widget )
+void StatusBar::addWidget(QWidget* widget)
 {
-    mLayout->addWidget( widget );
+    mLayout->addWidget(widget);
 }
 
 void StatusBar::updateLayout()
@@ -54,10 +51,9 @@ void StatusBar::updateLayout()
     mLayout->invalidate();
 }
 
-
-void StatusBar::changeEvent( QEvent* event )
+void StatusBar::changeEvent(QEvent* event)
 {
-    switch( event->type() )
+    switch (event->type())
     {
     case QEvent::StyleChange:
         mLayout->invalidate();
@@ -67,9 +63,8 @@ void StatusBar::changeEvent( QEvent* event )
         break;
     }
 
-    QStatusBar::changeEvent( event );
+    QStatusBar::changeEvent(event);
 }
-
 
 StatusBar::~StatusBar()
 {

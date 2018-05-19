@@ -21,4 +21,3 @@
 */
 
 #include "abstractxmlguicontroller.h"
-

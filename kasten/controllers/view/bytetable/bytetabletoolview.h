@@ -28,25 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteTableView;
 class ByteTableTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT ByteTableToolView : public AbstractToolView
 {
-  public:
-    explicit ByteTableToolView( ByteTableTool* tool );
+public:
+    explicit ByteTableToolView(ByteTableTool* tool);
     ~ByteTableToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     ByteTableView* mWidget;
 };
 

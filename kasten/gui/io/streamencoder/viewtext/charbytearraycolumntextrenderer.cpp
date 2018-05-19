@@ -29,51 +29,48 @@
 // Qt
 #include <QTextStream>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 CharByteArrayColumnTextRenderer::CharByteArrayColumnTextRenderer(
-        const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
-        const Okteta::CoordRange& coordRange,
-        int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        const QString& charCodecName, QChar substituteChar, QChar undefinedChar )
- : AbstractByteArrayColumnTextRenderer( byteArrayModel, offset, coordRange,
-        noOfBytesPerLine ),
-   mCharCodec( Okteta::CharCodec::createCodec(charCodecName) ),
-   mSubstituteChar( substituteChar ),
-   mUndefinedChar( undefinedChar )
+    const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+    const Okteta::CoordRange& coordRange,
+    int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
+    const QString& charCodecName, QChar substituteChar, QChar undefinedChar)
+    : AbstractByteArrayColumnTextRenderer(byteArrayModel, offset, coordRange, noOfBytesPerLine)
+    , mCharCodec(Okteta::CharCodec::createCodec(charCodecName))
+    , mSubstituteChar(substituteChar)
+    , mUndefinedChar(undefinedChar)
 {
-    setWidths( 1, byteSpacingWidth, noOfGroupedBytes );
+    setWidths(1, byteSpacingWidth, noOfGroupedBytes);
 }
 
-
-void CharByteArrayColumnTextRenderer::renderLine( QTextStream* stream, bool isSubline ) const
+void CharByteArrayColumnTextRenderer::renderLine(QTextStream* stream, bool isSubline) const
 {
-Q_UNUSED( isSubline )
+    Q_UNUSED(isSubline)
 
     int p = 0;
     int pEnd = mNoOfBytesPerLine;
     // correct boundaries
-    if( mRenderLine == mCoordRange.start().line() )
+    if (mRenderLine == mCoordRange.start().line()) {
         p = mCoordRange.start().pos();
-    if( mRenderLine == mCoordRange.end().line() )
-        pEnd = mCoordRange.end().pos()+1;
+    }
+    if (mRenderLine == mCoordRange.end().line()) {
+        pEnd = mCoordRange.end().pos() + 1;
+    }
 
-    const QChar tabChar = QLatin1Char( '\t' );
-    const QChar returnChar = QLatin1Char( '\n' );
+    const QChar tabChar = QLatin1Char('\t');
+    const QChar returnChar = QLatin1Char('\n');
 
     // draw individual chars
     uint e = 0;
-    for( ; p<pEnd; ++p, ++mOffset )
-    {
+    for (; p < pEnd; ++p, ++mOffset) {
         // get next position
         const uint t = mLinePositions[p];
         // clear spacing
-        *stream << whiteSpace( t-e );
+        *stream << whiteSpace(t - e);
 
         // print char
-        const Okteta::Character byteChar = mCharCodec->decode( mByteArrayModel->byte(mOffset) );
+        const Okteta::Character byteChar = mCharCodec->decode(mByteArrayModel->byte(mOffset));
 
         const QChar streamChar = byteChar.isUndefined() ?      Okteta::Character(mUndefinedChar) :
                                  (!byteChar.isPrint()
@@ -85,11 +82,10 @@ Q_UNUSED( isSubline )
         e = t + 1;
     }
 
-    *stream << whiteSpace( mNoOfCharsPerLine-e );
+    *stream << whiteSpace(mNoOfCharsPerLine - e);
 
     ++mRenderLine;
 }
-
 
 CharByteArrayColumnTextRenderer::~CharByteArrayColumnTextRenderer()
 {

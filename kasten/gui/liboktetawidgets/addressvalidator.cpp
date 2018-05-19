@@ -34,123 +34,117 @@
 #include <QJSEngine>
 #include <QJSValue>
 
+namespace Okteta {
 
-namespace Okteta
+AddressValidator::AddressValidator(QObject* parent, Coding codecId)
+    : QValidator(parent)
+    , mCodecId(InvalidCoding)
+    , mValueCodec(nullptr)
 {
-
-AddressValidator::AddressValidator( QObject* parent, Coding codecId )
-  : QValidator( parent ),
-    mCodecId( InvalidCoding ),
-    mValueCodec( nullptr )
-{
-    setCodec( codecId );
+    setCodec(codecId);
 }
 
-void AddressValidator::setCodec( Coding codecId )
+void AddressValidator::setCodec(Coding codecId)
 {
-    if( codecId == mCodecId )
+    if (codecId == mCodecId) {
         return;
+    }
 
     mCodecId = codecId;
 
     delete mValueCodec;
-    mValueCodec = ValueCodec::createCodec( (Okteta::ValueCoding)mCodecId );
+    mValueCodec = ValueCodec::createCodec((Okteta::ValueCoding)mCodecId);
 }
 
 const QRegExp AddressValidator::expressionRegex =
     QRegExp(QStringLiteral("[0-9a-fx\\+/\\s\\-\\*]+"),
-        Qt::CaseInsensitive, QRegExp::RegExp2); //FIXME this is way too simple, only there to test
+            Qt::CaseInsensitive, QRegExp::RegExp2); // FIXME this is way too simple, only there to test
 
-QValidator::State AddressValidator::validate( QString& string, int& pos ) const
+QValidator::State AddressValidator::validate(QString& string, int& pos) const
 {
-    Q_UNUSED( pos )
+    Q_UNUSED(pos)
 
     State result = QValidator::Acceptable;
-    if( mCodecId == ExpressionCoding )
-    {
+    if (mCodecId == ExpressionCoding) {
         string = string.trimmed();
-        if( ! expressionRegex.exactMatch(string) )
+        if (!expressionRegex.exactMatch(string)) {
             result = QValidator::Invalid;
-        //only prefix has been typed:
-        if( string == QLatin1String("+")
+        }
+        // only prefix has been typed:
+        if (string == QLatin1String("+")
             || string == QLatin1String("-")
-            || string.endsWith(QLatin1Char('x')) ) // 0x at end
+            || string.endsWith(QLatin1Char('x'))) { // 0x at end
             result = QValidator::Intermediate;
-    }
-    else
-    {
+        }
+    } else {
         const int stringLength = string.length();
-        for( int i=0; i<stringLength; ++i )
-        {
-            const QChar c = string.at( i );
-            if( !mValueCodec->isValidDigit( c.toLatin1() ) && !c.isSpace() )
-            {
+        for (int i = 0; i < stringLength; ++i) {
+            const QChar c = string.at(i);
+            if (!mValueCodec->isValidDigit(c.toLatin1()) && !c.isSpace()) {
                 result = QValidator::Invalid;
                 break;
             }
         }
     }
-    if( string.isEmpty() )
+    if (string.isEmpty()) {
         result = QValidator::Intermediate;
+    }
     return result;
 }
 
-Address AddressValidator::toAddress( const QString& string, AddressType* addressType) const
+Address AddressValidator::toAddress(const QString& string, AddressType* addressType) const
 {
     Address address;
 
     QString expression = string.trimmed();
 
-    if( addressType )
-    {
+    if (addressType) {
         const AddressType type =
             expression.startsWith(QLatin1Char('+')) ? RelativeForwards :
             expression.startsWith(QLatin1Char('-')) ? RelativeBackwards :
-            /* else */                   AbsoluteAddress;
+            /* else */                                AbsoluteAddress;
 
-        if( type != AbsoluteAddress )
-            expression.remove( 0, 1 );
+        if (type != AbsoluteAddress) {
+            expression.remove(0, 1);
+        }
 
         *addressType = type;
     }
 
-    if( mCodecId == ExpressionCoding )
-    {
+    if (mCodecId == ExpressionCoding) {
         QJSEngine evaluator;
-        QJSValue value = evaluator.evaluate( expression );
+        QJSValue value = evaluator.evaluate(expression);
         address = value.toInt();
         qCDebug(LOG_KASTEN_OKTETA_GUI) << "expression " << expression << " evaluated to: " << address;
 
-        if( value.isError() )
-        {
+        if (value.isError()) {
             qCWarning(LOG_KASTEN_OKTETA_GUI) << "evaluation error: " << value.toString();
-            if( addressType )
+            if (addressType) {
                 *addressType = InvalidAddressType;
+            }
         }
-    }
-    else
-    {
-        const bool isHexadecimal = ( mCodecId == HexadecimalCoding );
+    } else {
+        const bool isHexadecimal = (mCodecId == HexadecimalCoding);
         const int base = isHexadecimal ? 16 : 10;
-        address = expression.toInt( nullptr, base );
+        address = expression.toInt(nullptr, base);
     }
 
     return address;
 }
 
-
-QString AddressValidator::toString( Address address, AddressType addressType ) const
+QString AddressValidator::toString(Address address, AddressType addressType) const
 {
-    //ExpressionCoding just uses base 10 so no need to adjust this code
-    const int isHexadecimal = ( mCodecId == HexadecimalCoding );
+    // ExpressionCoding just uses base 10 so no need to adjust this code
+    const int isHexadecimal = (mCodecId == HexadecimalCoding);
     const int base = isHexadecimal ? 16 : 10;
 
-    QString string = QString::number( address, base );
+    QString string = QString::number(address, base);
 
-    if( addressType == RelativeForwards )
-        string.prepend( QLatin1Char('+') );
-    else if( addressType == RelativeBackwards )
-        string.prepend( QLatin1Char('-') );
+    if (addressType == RelativeForwards) {
+        string.prepend(QLatin1Char('+'));
+    } else if (addressType == RelativeBackwards) {
+        string.prepend(QLatin1Char('-'));
+    }
 
     return string;
 }

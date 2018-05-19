@@ -23,33 +23,42 @@
 #ifndef OKTETA_KNAVIGATOR_H
 #define OKTETA_KNAVIGATOR_H
 
-
 // lib
 #include "kcontroller.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayView;
-
 
 class KNavigator : public KController
 {
-  protected:
-    enum KMoveAction { MoveBackward, MoveWordBackward, MoveForward, MoveWordForward,
-                       MoveUp, MovePgUp, MoveDown, MovePgDown,
-                       MoveLineStart, MoveHome, MoveLineEnd, MoveEnd };
-  public:
-    KNavigator( AbstractByteArrayView* view, KController* parent );
+protected:
+    enum KMoveAction
+    {
+        MoveBackward,
+        MoveWordBackward,
+        MoveForward,
+        MoveWordForward,
+        MoveUp,
+        MovePgUp,
+        MoveDown,
+        MovePgDown,
+        MoveLineStart,
+        MoveHome,
+        MoveLineEnd,
+        MoveEnd
+    };
 
-  public: // KController API
-    bool handleKeyPress( QKeyEvent* keyEvent ) override;
+public:
+    KNavigator(AbstractByteArrayView* view, KController* parent);
 
-  protected:
+public: // KController API
+    bool handleKeyPress(QKeyEvent* keyEvent) override;
+
+protected:
     /** moves the cursor according to the action, handles all drawing */
-    void moveCursor( KMoveAction Action, bool Select );
+    void moveCursor(KMoveAction Action, bool Select);
 
-  protected:
+protected:
     AbstractByteArrayView* mView;
 };
 

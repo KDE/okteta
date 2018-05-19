@@ -38,33 +38,34 @@ class CharCodec;
 }
 template <class Key, class T> class QMap;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 /**
-*/
+ */
 class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    enum ConversionDirection { ConvertFrom, ConvertTo };
+public:
+    enum ConversionDirection
+    {
+        ConvertFrom,
+        ConvertTo
+    };
 
-  public:
+public:
     CharsetConversionTool();
     ~CharsetConversionTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // status
+public: // status
     bool isApplyable() const; // candidate for AbstractTool API
 
     QString otherCharCodecName() const;
@@ -72,30 +73,30 @@ class OKTETAKASTENCONTROLLERS_EXPORT CharsetConversionTool : public AbstractTool
     bool isSubstitutingMissingChars() const;
     Okteta::Byte substituteByte() const;
 
-  public Q_SLOTS: // settings
-    void setConversionDirection( int conversionDirection );
-    void setOtherCharCodecName( const QString& codecName );
-    void setSubstitutingMissingChars( bool isSubstitutingMissingChars );
-    void setSubstituteByte( int byte );
+public Q_SLOTS: // settings
+    void setConversionDirection(int conversionDirection);
+    void setOtherCharCodecName(const QString& codecName);
+    void setSubstitutingMissingChars(bool isSubstitutingMissingChars);
+    void setSubstituteByte(int byte);
 
-  public Q_SLOTS: // actions
+public Q_SLOTS: // actions
     void convertChars();
 
-  Q_SIGNALS:
-    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
-    void conversionDone( bool success, int convertedBytesCount,
-                         const QMap<Okteta::Byte, int>& failedPerByteCount );
+Q_SIGNALS:
+    void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
+    void conversionDone(bool success, int convertedBytesCount,
+                        const QMap<Okteta::Byte, int>& failedPerByteCount);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onViewChanged();
 
-  private: // settings
+private: // settings
     QString mOtherCharCodecName;
     ConversionDirection mConversionDirection;
     bool mSubstitutingMissingChars;
     Okteta::Byte mSubstituteByte;
 
-  private: // sources
+private: // sources
     ByteArrayView* mByteArrayView;
     Okteta::AbstractByteArrayModel* mByteArrayModel;
 };

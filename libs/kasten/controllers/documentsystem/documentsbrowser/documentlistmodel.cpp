@@ -32,122 +32,116 @@
 
 #include <QIcon>
 
+namespace Kasten {
 
-namespace Kasten
+DocumentListModel::DocumentListModel(DocumentsTool* documentsTool, QObject* parent)
+    : QAbstractTableModel(parent)
+    , mDocumentsTool(documentsTool)
 {
-
-DocumentListModel::DocumentListModel( DocumentsTool* documentsTool, QObject* parent )
- : QAbstractTableModel( parent ),
-   mDocumentsTool( documentsTool )
-{
-    connect( mDocumentsTool, &DocumentsTool::documentsAdded,
-             this, &DocumentListModel::onDocumentsAdded );
-    connect( mDocumentsTool, &DocumentsTool::documentsClosing,
-             this, &DocumentListModel::onDocumentsClosing );
-    connect( mDocumentsTool, &DocumentsTool::focussedDocumentChanged,
-             this, &DocumentListModel::onFocussedDocumentChanged );
+    connect(mDocumentsTool, &DocumentsTool::documentsAdded,
+            this, &DocumentListModel::onDocumentsAdded);
+    connect(mDocumentsTool, &DocumentsTool::documentsClosing,
+            this, &DocumentListModel::onDocumentsClosing);
+    connect(mDocumentsTool, &DocumentsTool::focussedDocumentChanged,
+            this, &DocumentListModel::onFocussedDocumentChanged);
 }
 
-int DocumentListModel::rowCount( const QModelIndex& parent ) const
+int DocumentListModel::rowCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? mDocumentsTool->documents().size() : 0;
+    return (!parent.isValid()) ? mDocumentsTool->documents().size() : 0;
 }
 
-int DocumentListModel::columnCount( const QModelIndex& parent ) const
+int DocumentListModel::columnCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? NoOfColumnIds : 0;
+    return (!parent.isValid()) ? NoOfColumnIds : 0;
 }
 
-QVariant DocumentListModel::data( const QModelIndex& index, int role ) const
+QVariant DocumentListModel::data(const QModelIndex& index, int role) const
 {
     QVariant result;
 
-    if( role == Qt::DisplayRole )
-    {
+    if (role == Qt::DisplayRole) {
         const int documentIndex = index.row();
-        const AbstractDocument* document = mDocumentsTool->documents().at( documentIndex );
+        const AbstractDocument* document = mDocumentsTool->documents().at(documentIndex);
 
         const int tableColumn = index.column();
-        switch( tableColumn )
+        switch (tableColumn)
         {
-            case TitleColumnId:
-                result = document->title();
-                break;
-            default:
-                ;
+        case TitleColumnId:
+            result = document->title();
+            break;
+        default:
+            ;
         }
-    }
-    else if( role == Qt::DecorationRole )
-    {
+    } else if (role == Qt::DecorationRole) {
         const int documentIndex = index.row();
-        const AbstractDocument* document = mDocumentsTool->documents().at( documentIndex );
+        const AbstractDocument* document = mDocumentsTool->documents().at(documentIndex);
         const AbstractModelSynchronizer* synchronizer = document ? document->synchronizer() : nullptr;
 
         const int tableColumn = index.column();
-        switch( tableColumn )
+        switch (tableColumn)
         {
-            case CurrentColumnId:
-                if( document == mDocumentsTool->focussedDocument() )
-                    result = QIcon::fromTheme( QStringLiteral("arrow-right") );
-                break;
-            case LocalStateColumnId:
-                if( synchronizer && synchronizer->localSyncState() == LocalHasChanges )
-                    result = QIcon::fromTheme( QStringLiteral("document-save") );
-                break;
-            case RemoteStateColumnId:
-                // TODO: use static map, syncState int -> iconname
-                if( ! synchronizer )
-                    result = QIcon::fromTheme( QStringLiteral("document-new") );
-                else
-                {
-                    const RemoteSyncState remoteSyncState = synchronizer->remoteSyncState();
-                    if( remoteSyncState == RemoteHasChanges )
-                        result = QIcon::fromTheme( QStringLiteral("document-save") );
-                    else if( remoteSyncState == RemoteDeleted )
-                        result = QIcon::fromTheme( QStringLiteral("edit-delete") );
-                    else if( remoteSyncState == RemoteUnknown )
-                        result = QIcon::fromTheme( QStringLiteral("flag-yellow") );
-                    else if( remoteSyncState == RemoteUnreachable )
-                        result = QIcon::fromTheme( QStringLiteral("network-disconnect") );
+        case CurrentColumnId:
+            if (document == mDocumentsTool->focussedDocument()) {
+                result = QIcon::fromTheme(QStringLiteral("arrow-right"));
+            }
+            break;
+        case LocalStateColumnId:
+            if (synchronizer && synchronizer->localSyncState() == LocalHasChanges) {
+                result = QIcon::fromTheme(QStringLiteral("document-save"));
+            }
+            break;
+        case RemoteStateColumnId:
+            // TODO: use static map, syncState int -> iconname
+            if (!synchronizer) {
+                result = QIcon::fromTheme(QStringLiteral("document-new"));
+            } else {
+                const RemoteSyncState remoteSyncState = synchronizer->remoteSyncState();
+                if (remoteSyncState == RemoteHasChanges) {
+                    result = QIcon::fromTheme(QStringLiteral("document-save"));
+                } else if (remoteSyncState == RemoteDeleted) {
+                    result = QIcon::fromTheme(QStringLiteral("edit-delete"));
+                } else if (remoteSyncState == RemoteUnknown) {
+                    result = QIcon::fromTheme(QStringLiteral("flag-yellow"));
+                } else if (remoteSyncState == RemoteUnreachable) {
+                    result = QIcon::fromTheme(QStringLiteral("network-disconnect"));
                 }
-                break;
-            default:
-                ;
+            }
+            break;
+        default:
+            ;
         }
     }
 
     return result;
 }
 
-QVariant DocumentListModel::headerData( int section, Qt::Orientation orientation, int role ) const
+QVariant DocumentListModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     QVariant result;
 
-    if( role == Qt::DisplayRole )
-    {
+    if (role == Qt::DisplayRole) {
         const QString titel =
 //             section == LocalStateColumnId ?  i18nc("@title:column Id of the version",         "Id") :
             section == TitleColumnId ?     i18nc("@title:column description of the change", "Title") :
             QString();
         result = titel;
-    }
-    else if( role == Qt::ToolTipRole )
-    {
+    } else if (role == Qt::ToolTipRole) {
         const QString titel =
 //             section == LocalStateColumnId ?                i18nc("@info:tooltip","Id of the version") :
-            section == TitleColumnId ? i18nc("@info:tooltip","Title of the document") :
+            section == TitleColumnId ? i18nc("@info:tooltip", "Title of the document") :
             QString();
         result = titel;
+    } else {
+        result = QAbstractTableModel::headerData(section, orientation, role);
     }
-    else
-        result = QAbstractTableModel::headerData( section, orientation, role );
 
     return result;
 }
 
-void DocumentListModel::onFocussedDocumentChanged( AbstractDocument* document )
+void DocumentListModel::onFocussedDocumentChanged(AbstractDocument* document)
 {
-Q_UNUSED( document )
+    Q_UNUSED(document)
 
     beginResetModel();
     endResetModel();
@@ -156,49 +150,46 @@ Q_UNUSED( document )
     const int oldVersionIndex = mVersionIndex;
     mVersionIndex = versionIndex;
 
-    emit dataChanged( index(versionIndex,CurrentColumnId), index(versionIndex,CurrentColumnId) );
-    emit dataChanged( index(oldVersionIndex,CurrentColumnId), index(oldVersionIndex,CurrentColumnId) );
+    emit dataChanged(index(versionIndex, CurrentColumnId), index(versionIndex, CurrentColumnId));
+    emit dataChanged(index(oldVersionIndex, CurrentColumnId), index(oldVersionIndex, CurrentColumnId));
 #endif
 }
 
-void DocumentListModel::onDocumentsAdded( const QList<Kasten::AbstractDocument*>& documents )
+void DocumentListModel::onDocumentsAdded(const QList<Kasten::AbstractDocument*>& documents)
 {
-    for( AbstractDocument* document : documents )
-    {
-        connect( document, &AbstractDocument::synchronizerChanged,
-                 this, &DocumentListModel::onSynchronizerChanged );
+    for (AbstractDocument* document : documents) {
+        connect(document, &AbstractDocument::synchronizerChanged,
+                this, &DocumentListModel::onSynchronizerChanged);
         AbstractModelSynchronizer* synchronizer = document->synchronizer();
-        if( synchronizer )
-        {
-            connect( synchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
-                     this, &DocumentListModel::onSyncStatesChanged );
-            connect( synchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
-                     this, &DocumentListModel::onSyncStatesChanged );
+        if (synchronizer) {
+            connect(synchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                    this, &DocumentListModel::onSyncStatesChanged);
+            connect(synchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
+                    this, &DocumentListModel::onSyncStatesChanged);
         }
     }
+
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();
     endResetModel();
 }
 
-void DocumentListModel::onDocumentsClosing( const QList<Kasten::AbstractDocument*>& documents )
+void DocumentListModel::onDocumentsClosing(const QList<Kasten::AbstractDocument*>& documents)
 {
-Q_UNUSED( documents )
+    Q_UNUSED(documents)
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();
     endResetModel();
 }
 
-
-void DocumentListModel::onSynchronizerChanged( AbstractModelSynchronizer* synchronizer )
+void DocumentListModel::onSynchronizerChanged(AbstractModelSynchronizer* synchronizer)
 {
     // TODO: what about the old synchronizer? assume it is deleted and that way disconnects?
-    if( synchronizer )
-    {
-        connect( synchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
-                    this, &DocumentListModel::onSyncStatesChanged );
-        connect( synchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
-                    this, &DocumentListModel::onSyncStatesChanged );
+    if (synchronizer) {
+        connect(synchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                this, &DocumentListModel::onSyncStatesChanged);
+        connect(synchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
+                this, &DocumentListModel::onSyncStatesChanged);
     }
     // TODO: try to understand how this whould be done with {begin,end}{Insert,Remove}Columns
     beginResetModel();
@@ -211,7 +202,6 @@ void DocumentListModel::onSyncStatesChanged()
     beginResetModel();
     endResetModel();
 }
-
 
 DocumentListModel::~DocumentListModel() {}
 

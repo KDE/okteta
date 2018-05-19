@@ -27,36 +27,33 @@
 // KF5
 #include <KLocalizedString>
 
+namespace Kasten {
 
-namespace Kasten
+KSearchDialog::KSearchDialog(SearchTool* tool, QWidget* parent)
+    : KAbstractFindDialog(parent)
+    , mTool(tool)
 {
+    setWindowTitle(i18nc("@title:window", "Find Bytes"));
 
-KSearchDialog::KSearchDialog( SearchTool* tool, QWidget* parent )
-  : KAbstractFindDialog( parent ),
-    mTool( tool )
-{
-    setWindowTitle( i18nc("@title:window","Find Bytes") );
-
-    setFindButton( i18nc("@action:button","&Find"),
-                   QStringLiteral("edit-find"),
-                   i18nc("@info:tooltip","Start searching"),
-                   xi18nc("@info:whatsthis",
-                          "If you press the <interface>Find</interface> button, "
-                          "the bytes you entered above are searched for within "
-                          "the byte array.") );
+    setFindButton(i18nc("@action:button", "&Find"),
+                  QStringLiteral("edit-find"),
+                  i18nc("@info:tooltip", "Start searching"),
+                  xi18nc("@info:whatsthis",
+                         "If you press the <interface>Find</interface> button, "
+                         "the bytes you entered above are searched for within "
+                         "the byte array."));
 
     setupFindBox();
     setupOperationBox();
     setupCheckBoxes();
 
-    setFindButtonEnabled( false );
-    setModal( false );
+    setFindButtonEnabled(false);
+    setModal(false);
 
-    setCharCodec( mTool->charCodingName() );
-    connect( mTool,  &SearchTool::charCodecChanged,
-             this, &KSearchDialog::setCharCodec );
+    setCharCodec(mTool->charCodingName());
+    connect(mTool,  &SearchTool::charCodecChanged,
+            this, &KSearchDialog::setCharCodec);
 }
-
 
 void KSearchDialog::onFindButtonClicked()
 {
@@ -64,17 +61,17 @@ void KSearchDialog::onFindButtonClicked()
 
     rememberCurrentSettings();
 
-    mTool->setSearchData( data() );
-    mTool->setCaseSensitivity( caseSensitivity() );
+    mTool->setSearchData(data());
+    mTool->setCaseSensitivity(caseSensitivity());
 
-    mTool->search( direction(), fromCursor(), inSelection() );
+    mTool->search(direction(), fromCursor(), inSelection());
 }
 
-void KSearchDialog::showEvent( QShowEvent* showEvent )
+void KSearchDialog::showEvent(QShowEvent* showEvent)
 {
-    KAbstractFindDialog::showEvent( showEvent );
+    KAbstractFindDialog::showEvent(showEvent);
 
-    setInSelection( mTool->hasSelectedData() );
+    setInSelection(mTool->hasSelectedData());
 }
 
 KSearchDialog::~KSearchDialog() {}

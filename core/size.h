@@ -26,9 +26,7 @@
 // Qt
 #include <QtGlobal>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 using Size = qint32;
 

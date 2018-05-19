@@ -33,32 +33,30 @@
 // Qt
 #include <QAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ViewProfilesManageController::ViewProfilesManageController( KXMLGUIClient* guiClient,
-                                                            ByteArrayViewProfileManager* viewProfileManager,
-                                                            QWidget* parentWidget )
-  : mParentWidget( parentWidget ),
-    mViewProfileManager( viewProfileManager )
+ViewProfilesManageController::ViewProfilesManageController(KXMLGUIClient* guiClient,
+                                                           ByteArrayViewProfileManager* viewProfileManager,
+                                                           QWidget* parentWidget)
+    : mParentWidget(parentWidget)
+    , mViewProfileManager(viewProfileManager)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mManageAction = actionCollection->addAction( QStringLiteral("settings_viewprofiles_manage"),
-                                                 this, SLOT(manageProfiles()) );
-    mManageAction->setText( i18nc("@action:inmenu",
-                                  "Manage View Profiles...") );
+    mManageAction = actionCollection->addAction(QStringLiteral("settings_viewprofiles_manage"),
+                                                this, SLOT(manageProfiles()));
+    mManageAction->setText(i18nc("@action:inmenu",
+                                 "Manage View Profiles..."));
 }
 
-void ViewProfilesManageController::setTargetModel( AbstractModel* model )
+void ViewProfilesManageController::setTargetModel(AbstractModel* model)
 {
-    Q_UNUSED( model );
+    Q_UNUSED(model);
 }
 
 void ViewProfilesManageController::manageProfiles()
 {
-    ViewProfilesManageDialog* dialog = new ViewProfilesManageDialog( mViewProfileManager, mParentWidget );
+    ViewProfilesManageDialog* dialog = new ViewProfilesManageDialog(mViewProfileManager, mParentWidget);
     dialog->exec();
 
     delete dialog;

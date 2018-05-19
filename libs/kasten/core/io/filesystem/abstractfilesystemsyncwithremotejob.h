@@ -27,46 +27,42 @@
 #include <kasten/abstractsyncwithremotejob.h>
 #include <kasten/abstractmodelsynchronizer.h>
 
-
 class QUrl;
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelFileSystemSynchronizer;
 
 class AbstractFileSystemSyncWithRemoteJobPrivate;
 
-
 class KASTENCORE_EXPORT AbstractFileSystemSyncWithRemoteJob : public AbstractSyncWithRemoteJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    AbstractFileSystemSyncWithRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                         const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
+public:
+    AbstractFileSystemSyncWithRemoteJob(AbstractModelFileSystemSynchronizer* synchronizer,
+                                        const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
     ~AbstractFileSystemSyncWithRemoteJob() override;
 
-  public: // KJob API
+public: // KJob API
     void start() override;
 
-  protected: // API to be implemented
+protected: // API to be implemented
     virtual void startSyncWithRemote() = 0;
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QFile* file() const;
 
-  protected:
-    void completeSync( bool success );
+protected:
+    void completeSync(bool success);
 
-  protected:
-    Q_PRIVATE_SLOT( d_func(), void syncWithRemote() )
+protected:
+    Q_PRIVATE_SLOT(d_func(), void syncWithRemote())
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractFileSystemSyncWithRemoteJob )
+protected:
+    Q_DECLARE_PRIVATE(AbstractFileSystemSyncWithRemoteJob)
 };
 
 }

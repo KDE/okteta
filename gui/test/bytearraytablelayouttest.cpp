@@ -27,27 +27,25 @@
 // Qt
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 // local variables
 static const Size NoOfBytesPerLine = 8;
 static const Address StartOffset = 22;
 static const Address FirstLineOffset = 10;
-static const Address RelativeStartOffset = StartOffset-FirstLineOffset;
+static const Address RelativeStartOffset = StartOffset - FirstLineOffset;
 static const Address ByteArrayOffset = 9;
 static const Size Length = 250;
-static const Address FinalOffset = (StartOffset+Length-1);
-static const Address RelativeFinalOffset = FinalOffset-FirstLineOffset;
+static const Address FinalOffset = (StartOffset + Length - 1);
+static const Address RelativeFinalOffset = FinalOffset - FirstLineOffset;
 
 static const Line StartLine = RelativeStartOffset / NoOfBytesPerLine;
 static const LinePosition StartLinePosition = RelativeStartOffset % NoOfBytesPerLine;
-static Coord StartCoord( StartLinePosition, StartLine );
+static Coord StartCoord(StartLinePosition, StartLine);
 
-static const Line FinalLine =  RelativeFinalOffset/ NoOfBytesPerLine;
+static const Line FinalLine =  RelativeFinalOffset / NoOfBytesPerLine;
 static const LinePosition FinalLinePosition = RelativeFinalOffset % NoOfBytesPerLine;
-static Coord FinalCoord( FinalLinePosition, FinalLine );
+static Coord FinalCoord(FinalLinePosition, FinalLine);
 
 static const LineSize NoOfLinesPerPage = 5;
 
@@ -56,142 +54,141 @@ static const LinePosition Pos2 = 25;
 static const Line Line1 = 10;
 static const LineSize LineCount = 10;
 static const Line Line2 = Line1 + LineCount - 1;
-static Coord Start( Pos1, Line1 );
-static Coord End(   Pos2, Line2 );
-
+static Coord Start(Pos1, Line1);
+static Coord End(Pos2, Line2);
 
 void ByteArrayTableLayoutTest::testConstructor()
 {
-    ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
+    ByteArrayTableLayout layout(NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length);
 
-    QCOMPARE( layout.noOfBytesPerLine(), NoOfBytesPerLine );
-    QCOMPARE( layout.startOffset(), StartOffset );
-    QCOMPARE( layout.byteArrayOffset(), ByteArrayOffset );
-    QCOMPARE( layout.length(), Length );
-    QCOMPARE( layout.startLine(), StartLine );
-    QCOMPARE( layout.firstStartLinePosition(), StartLinePosition );
-    QCOMPARE( layout.startCoord(), StartCoord );
-    QCOMPARE( layout.finalLine(), FinalLine );
-    QCOMPARE( layout.lastFinalLinePosition(), FinalLinePosition );
-    QCOMPARE( layout.finalCoord(), FinalCoord );
-    QCOMPARE( layout.noOfLines(), FinalLine+1 );
-    QCOMPARE( layout.noOfLinesPerPage(), 1 );
+    QCOMPARE(layout.noOfBytesPerLine(), NoOfBytesPerLine);
+    QCOMPARE(layout.startOffset(), StartOffset);
+    QCOMPARE(layout.byteArrayOffset(), ByteArrayOffset);
+    QCOMPARE(layout.length(), Length);
+    QCOMPARE(layout.startLine(), StartLine);
+    QCOMPARE(layout.firstStartLinePosition(), StartLinePosition);
+    QCOMPARE(layout.startCoord(), StartCoord);
+    QCOMPARE(layout.finalLine(), FinalLine);
+    QCOMPARE(layout.lastFinalLinePosition(), FinalLinePosition);
+    QCOMPARE(layout.finalCoord(), FinalCoord);
+    QCOMPARE(layout.noOfLines(), FinalLine + 1);
+    QCOMPARE(layout.noOfLinesPerPage(), 1);
 }
 
 void ByteArrayTableLayoutTest::testSetStartOffset()
 {
-    ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, 0, ByteArrayOffset, Length );
+    ByteArrayTableLayout layout(NoOfBytesPerLine, FirstLineOffset, 0, ByteArrayOffset, Length);
 
-    layout.setStartOffset( StartOffset );
-    QCOMPARE( layout.noOfBytesPerLine(), NoOfBytesPerLine );
-    QCOMPARE( layout.startOffset(), StartOffset );
-    QCOMPARE( layout.byteArrayOffset(), ByteArrayOffset );
-    QCOMPARE( layout.length(), Length );
-    QCOMPARE( layout.startLine(), StartLine );
-    QCOMPARE( layout.firstStartLinePosition(), StartLinePosition );
-    QCOMPARE( layout.startCoord(), StartCoord );
-    QCOMPARE( layout.finalLine(), FinalLine );
-    QCOMPARE( layout.lastFinalLinePosition(), FinalLinePosition );
-    QCOMPARE( layout.finalCoord(), FinalCoord );
-    QCOMPARE( layout.noOfLines(), FinalLine+1 );
-    QCOMPARE( layout.noOfLinesPerPage(), 1 );
+    layout.setStartOffset(StartOffset);
+    QCOMPARE(layout.noOfBytesPerLine(), NoOfBytesPerLine);
+    QCOMPARE(layout.startOffset(), StartOffset);
+    QCOMPARE(layout.byteArrayOffset(), ByteArrayOffset);
+    QCOMPARE(layout.length(), Length);
+    QCOMPARE(layout.startLine(), StartLine);
+    QCOMPARE(layout.firstStartLinePosition(), StartLinePosition);
+    QCOMPARE(layout.startCoord(), StartCoord);
+    QCOMPARE(layout.finalLine(), FinalLine);
+    QCOMPARE(layout.lastFinalLinePosition(), FinalLinePosition);
+    QCOMPARE(layout.finalCoord(), FinalCoord);
+    QCOMPARE(layout.noOfLines(), FinalLine + 1);
+    QCOMPARE(layout.noOfLinesPerPage(), 1);
 }
 
 void ByteArrayTableLayoutTest::testSetFirstLineOffset()
 {
-    ByteArrayTableLayout layout( NoOfBytesPerLine, 0, StartOffset, ByteArrayOffset, Length );
+    ByteArrayTableLayout layout(NoOfBytesPerLine, 0, StartOffset, ByteArrayOffset, Length);
 
-    layout.setFirstLineOffset( FirstLineOffset );
-    QCOMPARE( layout.noOfBytesPerLine(), NoOfBytesPerLine );
-    QCOMPARE( layout.startOffset(), StartOffset );
-    QCOMPARE( layout.byteArrayOffset(), ByteArrayOffset );
-    QCOMPARE( layout.length(), Length );
-    QCOMPARE( layout.startLine(), StartLine );
-    QCOMPARE( layout.firstStartLinePosition(), StartLinePosition );
-    QCOMPARE( layout.startCoord(), StartCoord );
-    QCOMPARE( layout.finalLine(), FinalLine );
-    QCOMPARE( layout.lastFinalLinePosition(), FinalLinePosition );
-    QCOMPARE( layout.finalCoord(), FinalCoord );
-    QCOMPARE( layout.noOfLines(), FinalLine+1 );
-    QCOMPARE( layout.noOfLinesPerPage(), 1 );
+    layout.setFirstLineOffset(FirstLineOffset);
+    QCOMPARE(layout.noOfBytesPerLine(), NoOfBytesPerLine);
+    QCOMPARE(layout.startOffset(), StartOffset);
+    QCOMPARE(layout.byteArrayOffset(), ByteArrayOffset);
+    QCOMPARE(layout.length(), Length);
+    QCOMPARE(layout.startLine(), StartLine);
+    QCOMPARE(layout.firstStartLinePosition(), StartLinePosition);
+    QCOMPARE(layout.startCoord(), StartCoord);
+    QCOMPARE(layout.finalLine(), FinalLine);
+    QCOMPARE(layout.lastFinalLinePosition(), FinalLinePosition);
+    QCOMPARE(layout.finalCoord(), FinalCoord);
+    QCOMPARE(layout.noOfLines(), FinalLine + 1);
+    QCOMPARE(layout.noOfLinesPerPage(), 1);
 }
 
 void ByteArrayTableLayoutTest::testSetNoOfBytesPerLine()
 {
-    ByteArrayTableLayout layout( 1, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
+    ByteArrayTableLayout layout(1, FirstLineOffset, StartOffset, ByteArrayOffset, Length);
 
-    layout.setNoOfBytesPerLine( NoOfBytesPerLine );
-    QCOMPARE( layout.noOfBytesPerLine(), NoOfBytesPerLine );
-    QCOMPARE( layout.startOffset(), StartOffset );
-    QCOMPARE( layout.byteArrayOffset(), ByteArrayOffset );
-    QCOMPARE( layout.length(), Length );
-    QCOMPARE( layout.startLine(), StartLine );
-    QCOMPARE( layout.firstStartLinePosition(), StartLinePosition );
-    QCOMPARE( layout.startCoord(), StartCoord );
-    QCOMPARE( layout.finalLine(), FinalLine );
-    QCOMPARE( layout.lastFinalLinePosition(), FinalLinePosition );
-    QCOMPARE( layout.finalCoord(), FinalCoord );
-    QCOMPARE( layout.noOfLines(), FinalLine+1 );
-    QCOMPARE( layout.noOfLinesPerPage(), 1 );
+    layout.setNoOfBytesPerLine(NoOfBytesPerLine);
+    QCOMPARE(layout.noOfBytesPerLine(), NoOfBytesPerLine);
+    QCOMPARE(layout.startOffset(), StartOffset);
+    QCOMPARE(layout.byteArrayOffset(), ByteArrayOffset);
+    QCOMPARE(layout.length(), Length);
+    QCOMPARE(layout.startLine(), StartLine);
+    QCOMPARE(layout.firstStartLinePosition(), StartLinePosition);
+    QCOMPARE(layout.startCoord(), StartCoord);
+    QCOMPARE(layout.finalLine(), FinalLine);
+    QCOMPARE(layout.lastFinalLinePosition(), FinalLinePosition);
+    QCOMPARE(layout.finalCoord(), FinalCoord);
+    QCOMPARE(layout.noOfLines(), FinalLine + 1);
+    QCOMPARE(layout.noOfLinesPerPage(), 1);
 }
 
 void ByteArrayTableLayoutTest::testSetLength()
 {
-    ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, 1 );
+    ByteArrayTableLayout layout(NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, 1);
 
-    layout.setLength( Length );
-    QCOMPARE( layout.noOfBytesPerLine(), NoOfBytesPerLine );
-    QCOMPARE( layout.startOffset(), StartOffset );
-    QCOMPARE( layout.byteArrayOffset(), ByteArrayOffset );
-    QCOMPARE( layout.length(), Length );
-    QCOMPARE( layout.startLine(), StartLine );
-    QCOMPARE( layout.firstStartLinePosition(), StartLinePosition );
-    QCOMPARE( layout.startCoord(), StartCoord );
-    QCOMPARE( layout.finalLine(), FinalLine );
-    QCOMPARE( layout.lastFinalLinePosition(), FinalLinePosition );
-    QCOMPARE( layout.finalCoord(), FinalCoord );
-    QCOMPARE( layout.noOfLines(), FinalLine+1 );
-    QCOMPARE( layout.noOfLinesPerPage(), 1 );
+    layout.setLength(Length);
+    QCOMPARE(layout.noOfBytesPerLine(), NoOfBytesPerLine);
+    QCOMPARE(layout.startOffset(), StartOffset);
+    QCOMPARE(layout.byteArrayOffset(), ByteArrayOffset);
+    QCOMPARE(layout.length(), Length);
+    QCOMPARE(layout.startLine(), StartLine);
+    QCOMPARE(layout.firstStartLinePosition(), StartLinePosition);
+    QCOMPARE(layout.startCoord(), StartCoord);
+    QCOMPARE(layout.finalLine(), FinalLine);
+    QCOMPARE(layout.lastFinalLinePosition(), FinalLinePosition);
+    QCOMPARE(layout.finalCoord(), FinalCoord);
+    QCOMPARE(layout.noOfLines(), FinalLine + 1);
+    QCOMPARE(layout.noOfLinesPerPage(), 1);
 }
 
 void ByteArrayTableLayoutTest::testSetByteArrayOffset()
 {
-    ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, 0, Length );
+    ByteArrayTableLayout layout(NoOfBytesPerLine, FirstLineOffset, StartOffset, 0, Length);
 
-    layout.setByteArrayOffset( ByteArrayOffset );
-    QCOMPARE( layout.noOfBytesPerLine(), NoOfBytesPerLine );
-    QCOMPARE( layout.startOffset(), StartOffset );
-    QCOMPARE( layout.byteArrayOffset(), ByteArrayOffset );
-    QCOMPARE( layout.length(), Length );
-    QCOMPARE( layout.startLine(), StartLine );
-    QCOMPARE( layout.firstStartLinePosition(), StartLinePosition );
-    QCOMPARE( layout.startCoord(), StartCoord );
-    QCOMPARE( layout.finalLine(), FinalLine );
-    QCOMPARE( layout.lastFinalLinePosition(), FinalLinePosition );
-    QCOMPARE( layout.finalCoord(), FinalCoord );
-    QCOMPARE( layout.noOfLines(), FinalLine+1 );
-    QCOMPARE( layout.noOfLinesPerPage(), 1 );
+    layout.setByteArrayOffset(ByteArrayOffset);
+    QCOMPARE(layout.noOfBytesPerLine(), NoOfBytesPerLine);
+    QCOMPARE(layout.startOffset(), StartOffset);
+    QCOMPARE(layout.byteArrayOffset(), ByteArrayOffset);
+    QCOMPARE(layout.length(), Length);
+    QCOMPARE(layout.startLine(), StartLine);
+    QCOMPARE(layout.firstStartLinePosition(), StartLinePosition);
+    QCOMPARE(layout.startCoord(), StartCoord);
+    QCOMPARE(layout.finalLine(), FinalLine);
+    QCOMPARE(layout.lastFinalLinePosition(), FinalLinePosition);
+    QCOMPARE(layout.finalCoord(), FinalCoord);
+    QCOMPARE(layout.noOfLines(), FinalLine + 1);
+    QCOMPARE(layout.noOfLinesPerPage(), 1);
 }
 
 void ByteArrayTableLayoutTest::testSetNoOfLinesPerPage()
 {
-    ByteArrayTableLayout layout( NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length );
+    ByteArrayTableLayout layout(NoOfBytesPerLine, FirstLineOffset, StartOffset, ByteArrayOffset, Length);
 
-    layout.setNoOfLinesPerPage( NoOfLinesPerPage );
-    QCOMPARE( layout.noOfBytesPerLine(), NoOfBytesPerLine );
-    QCOMPARE( layout.startOffset(), StartOffset );
-    QCOMPARE( layout.byteArrayOffset(), ByteArrayOffset );
-    QCOMPARE( layout.length(), Length );
-    QCOMPARE( layout.startLine(), StartLine );
-    QCOMPARE( layout.firstStartLinePosition(), StartLinePosition );
-    QCOMPARE( layout.startCoord(), StartCoord );
-    QCOMPARE( layout.finalLine(), FinalLine );
-    QCOMPARE( layout.lastFinalLinePosition(), FinalLinePosition );
-    QCOMPARE( layout.finalCoord(), FinalCoord );
-    QCOMPARE( layout.noOfLines(), FinalLine+1 );
-    QCOMPARE( layout.noOfLinesPerPage(), NoOfLinesPerPage );
+    layout.setNoOfLinesPerPage(NoOfLinesPerPage);
+    QCOMPARE(layout.noOfBytesPerLine(), NoOfBytesPerLine);
+    QCOMPARE(layout.startOffset(), StartOffset);
+    QCOMPARE(layout.byteArrayOffset(), ByteArrayOffset);
+    QCOMPARE(layout.length(), Length);
+    QCOMPARE(layout.startLine(), StartLine);
+    QCOMPARE(layout.firstStartLinePosition(), StartLinePosition);
+    QCOMPARE(layout.startCoord(), StartCoord);
+    QCOMPARE(layout.finalLine(), FinalLine);
+    QCOMPARE(layout.lastFinalLinePosition(), FinalLinePosition);
+    QCOMPARE(layout.finalCoord(), FinalCoord);
+    QCOMPARE(layout.noOfLines(), FinalLine + 1);
+    QCOMPARE(layout.noOfLinesPerPage(), NoOfLinesPerPage);
 }
 
 }
 
-QTEST_MAIN( Okteta::ByteArrayTableLayoutTest )
+QTEST_MAIN(Okteta::ByteArrayTableLayoutTest)

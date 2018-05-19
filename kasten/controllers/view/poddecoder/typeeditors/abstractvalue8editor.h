@@ -34,23 +34,22 @@ namespace Okteta {
 class ValueCodec;
 }
 
-
 class AbstractValue8Editor : public QSpinBox
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit AbstractValue8Editor( Okteta::ValueCoding valueCoding, QWidget* parent = nullptr );
+public:
+    explicit AbstractValue8Editor(Okteta::ValueCoding valueCoding, QWidget* parent = nullptr);
 
     ~AbstractValue8Editor() override;
 
-  protected: // QSpinBox API
-    QString textFromValue( int value ) const override;
-    int valueFromText( const QString& text ) const override;
+protected: // QSpinBox API
+    QString textFromValue(int value) const override;
+    int valueFromText(const QString& text) const override;
 
-    QValidator::State validate( QString& text, int& pos ) const override;
+    QValidator::State validate(QString& text, int& pos) const override;
 
-  protected:
+protected:
     Okteta::ValueCodec* mValueCodec;
 };
 

@@ -23,8 +23,7 @@
 #ifndef DOCUMENTVERSIONID_H
 #define DOCUMENTVERSIONID_H
 
-namespace Kasten
-{
+namespace Kasten {
 
 using DocumentVersionId = int;
 

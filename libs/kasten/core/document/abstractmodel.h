@@ -30,25 +30,22 @@
 
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelPrivate;
-
 
 // TODO: reasons not to name it AbstractObjectModel, but just as it is
 class KASTENCORE_EXPORT AbstractModel : public QObject
 {
     Q_OBJECT
 
-  protected:
-    explicit AbstractModel( AbstractModel* baseModel = nullptr );
-    explicit AbstractModel( AbstractModelPrivate* d );
+protected:
+    explicit AbstractModel(AbstractModel* baseModel = nullptr);
+    explicit AbstractModel(AbstractModelPrivate* d);
 
-  public:
+public:
     ~AbstractModel() override;
 
-  public:
+public:
 // TODO: just one baseModel, or can there be multiple? Better name?
     AbstractModel* baseModel() const;
     /**
@@ -64,7 +61,7 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
     template <typename T>
     AbstractModel* findBaseModelWithInterface() const;
 
-  public: // API to be implemented
+public: // API to be implemented
     virtual QString title() const = 0;
 
     /** Default returns false */
@@ -72,35 +69,33 @@ class KASTENCORE_EXPORT AbstractModel : public QObject
     /** default returns true */
     virtual bool isReadOnly() const;
     /** default does nothing */
-    virtual void setReadOnly( bool isReadOnly );
+    virtual void setReadOnly(bool isReadOnly);
 
-  Q_SIGNALS:
+Q_SIGNALS:
     // TODO: readonly and modifiable should be turned into flags, also get/set methods
-    void readOnlyChanged( bool isReadOnly );
-    void modifiableChanged( bool isModifiable );
-    void titleChanged( const QString& newTitle );
+    void readOnlyChanged(bool isReadOnly);
+    void modifiableChanged(bool isModifiable);
+    void titleChanged(const QString& newTitle);
 
-  protected:
-    void setBaseModel( AbstractModel* baseModel );
+protected:
+    void setBaseModel(AbstractModel* baseModel);
 
-  protected:
+protected:
     AbstractModelPrivate* const d_ptr;
-    Q_DECLARE_PRIVATE( AbstractModel )
+    Q_DECLARE_PRIVATE(AbstractModel)
 };
-
 
 template <typename T>
 T AbstractModel::findBaseModel() const
 {
-    AbstractModel* model = const_cast<AbstractModel*>( this );
-    do
-    {
+    AbstractModel* model = const_cast<AbstractModel*>(this);
+    do {
         T castedModel = qobject_cast<T>(model);
-        if( castedModel )
+        if (castedModel) {
             return castedModel;
+        }
         model = model->baseModel();
-    }
-    while( model );
+    } while (model);
 
     return nullptr;
 }
@@ -108,15 +103,14 @@ T AbstractModel::findBaseModel() const
 template <typename T>
 AbstractModel* AbstractModel::findBaseModelWithInterface() const
 {
-    AbstractModel* model = const_cast<AbstractModel*>( this );
-    do
-    {
+    AbstractModel* model = const_cast<AbstractModel*>(this);
+    do {
         T interface = qobject_cast<T>(model);
-        if( interface )
+        if (interface) {
             return model;
+        }
         model = model->baseModel();
-    }
-    while( model );
+    } while (model);
 
     return nullptr;
 }

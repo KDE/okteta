@@ -26,27 +26,23 @@
 // Qt
 #include <QtPlugin>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractToolInlineView;
 
-
-namespace If
-{
+namespace If {
 
 class ToolInlineViewable
 {
-  public:
+public:
     virtual ~ToolInlineViewable();
 
-  public: // set/action
-    virtual void setCurrentToolInlineView( AbstractToolInlineView* view ) = 0;
+public: // set/action
+    virtual void setCurrentToolInlineView(AbstractToolInlineView* view) = 0;
 
-  public: // get
+public: // get
 
-  public: // signal
+public: // signal
 };
 
 inline ToolInlineViewable::~ToolInlineViewable() {}
@@ -54,6 +50,6 @@ inline ToolInlineViewable::~ToolInlineViewable() {}
 }
 }
 
-Q_DECLARE_INTERFACE( Kasten::If::ToolInlineViewable, "org.kde.kasten.if.toolinlineviewable/1.0" )
+Q_DECLARE_INTERFACE(Kasten::If::ToolInlineViewable, "org.kde.kasten.if.toolinlineviewable/1.0")
 
 #endif

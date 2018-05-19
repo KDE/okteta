@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "testdocumentfileconnectjob.h"
 
 // lib
@@ -30,36 +29,36 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TestDocumentFileConnectJob::TestDocumentFileConnectJob( TestDocumentFileSynchronizer* synchronizer,
-                                                        AbstractDocument* document,
-                                                        const QUrl& url,
-                                                        AbstractModelSynchronizer::ConnectOption option )
- : AbstractFileSystemConnectJob( synchronizer, document, url, option )
+TestDocumentFileConnectJob::TestDocumentFileConnectJob(TestDocumentFileSynchronizer* synchronizer,
+                                                       AbstractDocument* document,
+                                                       const QUrl& url,
+                                                       AbstractModelSynchronizer::ConnectOption option)
+    : AbstractFileSystemConnectJob(synchronizer, document, url, option)
 {
 }
 
 void TestDocumentFileConnectJob::startConnectWithFile()
 {
-    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
-    TestDocument* testDocument = qobject_cast<TestDocument*>( document() );
+    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    TestDocument* testDocument = qobject_cast<TestDocument*>(document());
     TestDocumentFileWriteThread* writeThread =
-        new TestDocumentFileWriteThread( this, testSynchronizer->header(), testDocument, file() );
+        new TestDocumentFileWriteThread(this, testSynchronizer->header(), testDocument, file());
 
     writeThread->start();
-    while( !writeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!writeThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     const bool success = writeThread->success();
 
-    if( success )
-        testSynchronizer->setDocument( testDocument );
+    if (success) {
+        testSynchronizer->setDocument(testDocument);
+    }
     delete writeThread;
 
-    complete( success );
+    complete(success);
 }
 
 TestDocumentFileConnectJob::~TestDocumentFileConnectJob() {}

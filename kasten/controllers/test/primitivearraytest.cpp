@@ -33,14 +33,14 @@
 
 class PrimitiveArrayTest : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 private:
     /** Tests user defined overrides of byteOrder, typeName, and toStringFunc. */
-    template<PrimitiveDataType primType, typename T> void testReadCustomizedPrimitiveInternal();
-    template<PrimitiveDataType primType, typename T> void testReadPrimitiveInternal();
-    template<PrimitiveDataType primType> void testReadPrimitive();
-    template<typename T> bool compareItems(T first, T second, uint index);
+    template <PrimitiveDataType primType, typename T> void testReadCustomizedPrimitiveInternal();
+    template <PrimitiveDataType primType, typename T> void testReadPrimitiveInternal();
+    template <PrimitiveDataType primType> void testReadPrimitive();
+    template <typename T> bool compareItems(T first, T second, uint index);
 
 private Q_SLOTS:
     void initTestCase();
@@ -84,25 +84,25 @@ void PrimitiveArrayTest::initTestCase()
 {
     qsrand(QTime::currentTime().msec());
     data.reset(new Okteta::Byte[SIZE]);
-    //ensure that we have at least one NaN (quiet + signalling)
+    // ensure that we have at least one NaN (quiet + signalling)
     AllPrimitiveTypes quietDouble(std::numeric_limits<double>::quiet_NaN());
     AllPrimitiveTypes signallingDouble(std::numeric_limits<double>::signaling_NaN());
-    for (int i = 0; i < 8; ++i)
-    {
+    for (int i = 0; i < 8; ++i) {
         data[i] = quietDouble.allBytes[i];
         data[8 + i] = signallingDouble.allBytes[i];
     }
+
     AllPrimitiveTypes quietFloat(std::numeric_limits<float>::quiet_NaN());
     AllPrimitiveTypes signallingFloat(std::numeric_limits<float>::signaling_NaN());
-    for (int i = 0; i < 4; ++i)
-    {
+    for (int i = 0; i < 4; ++i) {
         data[16 + i] = quietFloat.allBytes[i];
         data[20 + i] = signallingFloat.allBytes[i];
     }
-    for (uint i = 24; i < SIZE; ++i)
-    {
-        data[i] = (char(qrand() & 0xff));
+
+    for (uint i = 24; i < SIZE; ++i) {
+        data[i] = char(qrand() & 0xff);
     }
+
     Okteta::Byte* copy = new Okteta::Byte[SIZE];
     memcpy(copy, data.data(), SIZE);
     model.reset(new Okteta::ByteArrayModel(copy, SIZE));
@@ -110,10 +110,10 @@ void PrimitiveArrayTest::initTestCase()
     QCOMPARE(model->size(), Okteta::Size(SIZE));
 
     endianData.reset(new Okteta::Byte[ENDIAN_SIZE]);
-    for (uint i = 0; i < ENDIAN_SIZE; ++i)
-    {
+    for (uint i = 0; i < ENDIAN_SIZE; ++i) {
         endianData[i] = i;
     }
+
     Okteta::Byte* endianCopy = new Okteta::Byte[SIZE];
     memcpy(endianCopy, endianData.data(), ENDIAN_SIZE);
     endianModel.reset(new Okteta::ByteArrayModel(endianCopy, ENDIAN_SIZE));
@@ -121,23 +121,21 @@ void PrimitiveArrayTest::initTestCase()
     QCOMPARE(endianModel->size(), Okteta::Size(ENDIAN_SIZE));
 }
 
-template<typename T>
+template <typename T>
 bool PrimitiveArrayTest::compareItems(T first, T second, uint index)
 {
     Q_UNUSED(index);
     return first == second;
 }
 
-template<>
+template <>
 bool PrimitiveArrayTest::compareItems(float first, float second, uint index)
 {
-    if (first != first)
-    {
+    if (first != first) {
         qDebug() << "first was NaN at index" << index;
-        //NaN
-        if (second != second)
-        {
-            //second is NaN too;
+        // NaN
+        if (second != second) {
+            // second is NaN too;
             union
             {
                 float floating;
@@ -146,25 +144,21 @@ bool PrimitiveArrayTest::compareItems(float first, float second, uint index)
             firstUn.floating = first;
             secondUn.floating = second;
             return firstUn.integer == secondUn.integer;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
     return first == second;
 }
 
-template<>
+template <>
 bool PrimitiveArrayTest::compareItems(double first, double second, uint index)
 {
-    if (first != first)
-    {
+    if (first != first) {
         qDebug() << "first was NaN at index" << index;
-        //NaN
-        if (second != second)
-        {
-            //second is NaN too;
+        // NaN
+        if (second != second) {
+            // second is NaN too;
             union
             {
                 double floating;
@@ -173,30 +167,28 @@ bool PrimitiveArrayTest::compareItems(double first, double second, uint index)
             firstUn.floating = first;
             secondUn.floating = second;
             return firstUn.integer == secondUn.integer;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
     return first == second;
 }
 
-template<PrimitiveDataType primType>
+template <PrimitiveDataType primType>
 inline void PrimitiveArrayTest::testReadPrimitive()
 {
     testReadPrimitiveInternal<primType, typename PrimitiveInfo<primType>::valueType>();
     testReadCustomizedPrimitiveInternal<primType, typename PrimitiveInfo<primType>::valueType>();
 }
 
-QScriptValue customToStringFunc(QScriptContext *context, QScriptEngine *engine)
+QScriptValue customToStringFunc(QScriptContext* context, QScriptEngine* engine)
 {
     Q_UNUSED(context);
     Q_UNUSED(engine);
     return QStringLiteral("myvalue");
 }
 
-template<PrimitiveDataType primType, typename T>
+template <PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
 {
     LoggerWithContext lwc(nullptr, QString());
@@ -208,8 +200,8 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     primInfo->setToStringFunction(engine->newFunction(customToStringFunc));
 
     ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
-            endianModel->size() / sizeof(T),
-            primInfo);
+                                                             endianModel->size() / sizeof(T),
+                                                             primInfo);
     QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr, engine));
 
     QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
@@ -219,21 +211,19 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     T* dataAsT = reinterpret_cast<T*>(endianData.data());
     QVERIFY(!dataInf->mData->isComplex());
     PrimitiveArrayData<primType>* arrayData =
-            static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
+        static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
 
     // Verify byteOrder of values. The data is set up without palindromes.
     if (sizeof(T) > 1) {
-        for (uint i = 0; i < dataInf->childCount(); ++i)
-        {
+        for (uint i = 0; i < dataInf->childCount(); ++i) {
             AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
             T childData = childDataAll.value<T>();
             T expected = dataAsT[i];
-            //TODO comparison for float and double: nan != nan
-            if (compareItems<T>(childData, expected, i))
-            {
+            // TODO comparison for float and double: nan != nan
+            if (compareItems<T>(childData, expected, i)) {
                 QByteArray desc = "i=" + QByteArray::number(i) + ", model[i]="
-                        + QByteArray::number(childData)
-                        + ", data[i]=" + QByteArray::number(expected);
+                                  + QByteArray::number(childData)
+                                  + ", data[i]=" + QByteArray::number(expected);
                 QVERIFY2(!compareItems<T>(childData, expected, i), desc.constData());
             }
         }
@@ -246,16 +236,16 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
              QStringLiteral("myvalue"));
 }
 
-template<PrimitiveDataType primType, typename T>
+template <PrimitiveDataType primType, typename T>
 void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
     LoggerWithContext lwc(nullptr, QString());
     ArrayDataInformation* dataInf = new ArrayDataInformation(QStringLiteral("values"),
-            model->size() / sizeof(T),
-            PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
+                                                             model->size() / sizeof(T),
+                                                             PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
     QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr,
-            ScriptEngineInitializer::newEngine()));
+                                                                            ScriptEngineInitializer::newEngine()));
     QCOMPARE(dataInf->childCount(), uint(SIZE / sizeof(T)));
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(model.data(), 0, model->size() * 8, &bitOffs);
@@ -263,18 +253,16 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     T* dataAsT = reinterpret_cast<T*>(data.data());
     QVERIFY(!dataInf->mData->isComplex());
     PrimitiveArrayData<primType>* arrayData =
-            static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
-    for (uint i = 0; i < dataInf->childCount(); ++i)
-    {
+        static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.data());
+    for (uint i = 0; i < dataInf->childCount(); ++i) {
         AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
         T childData = childDataAll.value<T>();
         T expected = dataAsT[i];
-        //TODO comparison for float and double: nan != nan
-        if (!compareItems<T>(childData, expected, i))
-        {
+        // TODO comparison for float and double: nan != nan
+        if (!compareItems<T>(childData, expected, i)) {
             QByteArray desc = "i=" + QByteArray::number(i) + ", model[i]="
-                    + QByteArray::number(childData)
-                    + ", data[i]=" + QByteArray::number(expected);
+                              + QByteArray::number(childData)
+                              + ", data[i]=" + QByteArray::number(expected);
             QVERIFY2(compareItems<T>(childData, expected, i), desc.constData());
         }
     }

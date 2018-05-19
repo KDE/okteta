@@ -31,9 +31,7 @@
 
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModel;
 class AbstractModelSelection;
@@ -44,37 +42,36 @@ class AbstractModelExporter;
 class DocumentManager;
 class AbstractOverwriteDialog;
 
-
 class KASTENCORE_EXPORT ModelCodecManager : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ModelCodecManager( DocumentManager* manager );
+public:
+    explicit ModelCodecManager(DocumentManager* manager);
     ~ModelCodecManager() override;
 
-  public:
+public:
     // or use the viewmodel here? on what should the export be based?
-    void encodeToStream( AbstractModelStreamEncoder* encoder,
-                         AbstractModel* model, const AbstractModelSelection* selection );
+    void encodeToStream(AbstractModelStreamEncoder* encoder,
+                        AbstractModel* model, const AbstractModelSelection* selection);
 
-    void exportDocument( AbstractModelExporter* exporter,
-                         AbstractModel* model, const AbstractModelSelection* selection );
+    void exportDocument(AbstractModelExporter* exporter,
+                        AbstractModel* model, const AbstractModelSelection* selection);
 
-  public:
-    QList<AbstractModelStreamEncoder*> encoderList( AbstractModel* model, const AbstractModelSelection* selection ) const;
+public:
+    QList<AbstractModelStreamEncoder*> encoderList(AbstractModel* model, const AbstractModelSelection* selection) const;
     QList<AbstractModelStreamDecoder*> decoderList() const;
     QList<AbstractModelDataGenerator*> generatorList() const;
 
-    QList<AbstractModelExporter*> exporterList( AbstractModel* model, const AbstractModelSelection* selection ) const;
+    QList<AbstractModelExporter*> exporterList(AbstractModel* model, const AbstractModelSelection* selection) const;
 
-  public:
-    void setEncoders( const QList<AbstractModelStreamEncoder*>& encoderList );
-    void setDecoders( const QList<AbstractModelStreamDecoder*>& decoderList );
-    void setGenerators( const QList<AbstractModelDataGenerator*>& generatorList );
-    void setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog );
+public:
+    void setEncoders(const QList<AbstractModelStreamEncoder*>& encoderList);
+    void setDecoders(const QList<AbstractModelStreamDecoder*>& decoderList);
+    void setGenerators(const QList<AbstractModelDataGenerator*>& generatorList);
+    void setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog);
 
-  private:
+private:
     // unless there is a singleton
     DocumentManager* mManager;
     // used for dialogs, TODO: create (or use?) global instance for this

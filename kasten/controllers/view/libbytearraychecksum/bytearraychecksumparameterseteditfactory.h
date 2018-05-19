@@ -25,13 +25,13 @@
 
 class AbstractByteArrayChecksumParameterSetEdit;
 
-
 class ByteArrayChecksumParameterSetEditFactory
 {
-  protected:
+protected:
     ByteArrayChecksumParameterSetEditFactory();
-  public:
-    static AbstractByteArrayChecksumParameterSetEdit* createEdit( const char* id );
+
+public:
+    static AbstractByteArrayChecksumParameterSetEdit* createEdit(const char* id);
 };
 
 #endif

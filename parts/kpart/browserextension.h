@@ -23,12 +23,10 @@
 #ifndef OKTETABROWSEREXTENSION_H
 #define OKTETABROWSEREXTENSION_H
 
-
 // KF5
 #include <KParts/BrowserExtension>
 
 class OktetaPart;
-
 
 /**
  * @short Extension for better support for embedding in browsers
@@ -38,23 +36,23 @@ class OktetaBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
 
-  public:
-    explicit OktetaBrowserExtension( OktetaPart* part );
+public:
+    explicit OktetaBrowserExtension(OktetaPart* part);
 
-  public: // KParts::BrowserExtension API
-    void saveState( QDataStream& stream ) override;
-    void restoreState( QDataStream& stream ) override;
+public: // KParts::BrowserExtension API
+    void saveState(QDataStream& stream) override;
+    void restoreState(QDataStream& stream) override;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     /** copy text to clipboard */
     void copy();
     void print();
 
-  private Q_SLOTS:
+private Q_SLOTS:
     /** selection has changed */
-    void onSelectionChanged( bool hasSelection );
+    void onSelectionChanged(bool hasSelection);
 
-  protected:
+protected:
     OktetaPart* mPart;
 };
 

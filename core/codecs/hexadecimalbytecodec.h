@@ -28,31 +28,29 @@
 
 class QChar;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class HexadecimalByteCodec : public ValueCodec
 {
-  public:
-    explicit HexadecimalByteCodec( bool lowerCaseDigits = false );
+public:
+    explicit HexadecimalByteCodec(bool lowerCaseDigits = false);
 
-  public:
-    bool setLowerCaseDigits( bool lowerCaseDigits );
+public:
+    bool setLowerCaseDigits(bool lowerCaseDigits);
     bool isLowerCaseDigits() const;
 
-  public: // ValueCodec API
+public: // ValueCodec API
     unsigned int encodingWidth() const override;
     Byte digitsFilledLimit() const override;
 
-    void encode( QString& digits, unsigned int pos, Byte byte ) const override;
-    void encodeShort( QString& digits, unsigned int pos, Byte byte ) const override;
-    bool appendDigit( Byte* byte, unsigned char digit ) const override;
-    void removeLastDigit( Byte* byte ) const override;
-    bool isValidDigit( unsigned char digit ) const override;
-    bool turnToValue( unsigned char* digit ) const override;
+    void encode(QString& digits, unsigned int pos, Byte byte) const override;
+    void encodeShort(QString& digits, unsigned int pos, Byte byte) const override;
+    bool appendDigit(Byte* byte, unsigned char digit) const override;
+    void removeLastDigit(Byte* byte) const override;
+    bool isValidDigit(unsigned char digit) const override;
+    bool turnToValue(unsigned char* digit) const override;
 
-  protected:
+protected:
     const QChar* mDigits;
 };
 

@@ -31,22 +31,23 @@
 //// #include "algorithm/mybytearraychecksumparametersetedit.h"
 //// NEWCHECKSUMPARAMETERSET(end)
 
-
-AbstractByteArrayChecksumParameterSetEdit* ByteArrayChecksumParameterSetEditFactory::createEdit( const char* id )
+AbstractByteArrayChecksumParameterSetEdit* ByteArrayChecksumParameterSetEditFactory::createEdit(const char* id)
 {
     AbstractByteArrayChecksumParameterSetEdit* result;
 
-    if( qstrcmp(id,ModSumByteArrayChecksumParameterSetEdit::Id) == 0 )
+    if (qstrcmp(id, ModSumByteArrayChecksumParameterSetEdit::Id) == 0) {
         result = new ModSumByteArrayChecksumParameterSetEdit();
+    }
 //// NEWCHECKSUMPARAMETERSET(start)
 //// Here add the check for the id of your parameter set
 //// and, if it matches, the creation of the widget
 //// e.g.
-////     else if( qstrcmp(id,MyByteArrayChecksumParameterSetEdit::Id) == 0 )
+////     else if (qstrcmp(id, MyByteArrayChecksumParameterSetEdit::Id) == 0)
 ////         result = new MyByteArrayChecksumParameterSetEdit();
 //// NEWCHECKSUMPARAMETERSET(end)
-    else //if( qstrcmp(id,NoByteArrayChecksumParameterSetEdit::Id) == 0 ) TODO: default should be a message "Not found"
+    else { // if (qstrcmp(id, NoByteArrayChecksumParameterSetEdit::Id) == 0) TODO: default should be a message "Not found"
         result = new NoByteArrayChecksumParameterSetEdit();
+    }
 
     return result;
 }

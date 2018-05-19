@@ -33,43 +33,40 @@ class KSelectAction;
 class KToggleAction;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT ViewConfigController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ViewConfigController( KXMLGUIClient* guiClient );
+public:
+    explicit ViewConfigController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
-    void setValueCoding( int valueCoding );
-    void setCharCoding( int valueCoding );
-    void setShowsNonprinting( bool on );
+private Q_SLOTS: // action slots
+    void setValueCoding(int valueCoding);
+    void setCharCoding(int valueCoding);
+    void setShowsNonprinting(bool on);
     void setBytesPerLine();
     void setBytesPerGroup();
-    void setLayoutStyle( int layoutStyle );
-    void setOffsetCoding( int offsetCoding );
-    void toggleOffsetColumn( bool on );
-    void toggleValueCharColumns( int visibleColunms );
+    void setLayoutStyle(int layoutStyle);
+    void setOffsetCoding(int offsetCoding);
+    void toggleOffsetColumn(bool on);
+    void toggleValueCharColumns(int visibleColunms);
 
-    void onOffsetColumnVisibleChanged( bool offsetColumnVisible );
-    void onOffsetCodingChanged( int offsetCoding );
-    void onShowsNonprintingChanged( bool showsNonprinting );
-    void onValueCodingChanged( int valueCoding );
-    void onCharCodecChanged( const QString& charCodecName );
-    void onLayoutStyleChanged( int layoutStyle );
-    void onVisibleByteArrayCodingsChanged( int visibleByteArrayCodings );
+    void onOffsetColumnVisibleChanged(bool offsetColumnVisible);
+    void onOffsetCodingChanged(int offsetCoding);
+    void onShowsNonprintingChanged(bool showsNonprinting);
+    void onValueCodingChanged(int valueCoding);
+    void onCharCodecChanged(const QString& charCodecName);
+    void onLayoutStyleChanged(int layoutStyle);
+    void onVisibleByteArrayCodingsChanged(int visibleByteArrayCodings);
 
-  private:
+private:
     ByteArrayView* mByteArrayView;
 
     // view menu

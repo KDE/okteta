@@ -28,32 +28,29 @@
 // Qt
 #include <QtGlobal>
 
-
 class QPalette;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class AbstractColumnStylistPrivate;
 
-
 class OKTETAGUI_EXPORT AbstractColumnStylist
 {
-  public:
+public:
     AbstractColumnStylist();
     virtual ~AbstractColumnStylist();
 
-  public: // API to be reimplemented in the subclasses
+public: // API to be reimplemented in the subclasses
     virtual const QPalette& palette() const = 0;
 
-  protected:
-    explicit AbstractColumnStylist( AbstractColumnStylistPrivate* d );
-  protected:
+protected:
+    explicit AbstractColumnStylist(AbstractColumnStylistPrivate* d);
+
+protected:
     AbstractColumnStylistPrivate* const d_ptr;
 
-  private:
-    Q_DECLARE_PRIVATE( AbstractColumnStylist )
+private:
+    Q_DECLARE_PRIVATE(AbstractColumnStylist)
 };
 
 }

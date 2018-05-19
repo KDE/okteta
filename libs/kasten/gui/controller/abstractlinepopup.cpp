@@ -26,38 +26,35 @@
 // Qt
 #include <QEvent>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractLinePopup::AbstractLinePopup( QWidget* parent )
-  : QWidget( parent, Qt::Popup ),
-    d( new AbstractLinePopupPrivate(this) )
+AbstractLinePopup::AbstractLinePopup(QWidget* parent)
+    : QWidget(parent, Qt::Popup)
+    , d(new AbstractLinePopupPrivate(this))
 {
     d->init();
 }
 
+void AbstractLinePopup::setPosition(const QPoint& globalPosition)
+{
+    d->setPosition(globalPosition);
+}
+void AbstractLinePopup::setIcon(const QIcon& icon)
+{
+    d->setIcon(icon);
+}
+void AbstractLinePopup::setWidget(QWidget* widget)
+{
+    d->setWidget(widget);
+}
+void AbstractLinePopup::setResult(int result)
+{
+    d->setResult(result);
+}
 
-void AbstractLinePopup::setPosition( const QPoint& globalPosition )
+void AbstractLinePopup::setVisible(bool visible)
 {
-    d->setPosition( globalPosition );
-}
-void AbstractLinePopup::setIcon( const QIcon& icon )
-{
-    d->setIcon( icon );
-}
-void AbstractLinePopup::setWidget( QWidget* widget )
-{
-    d->setWidget( widget );
-}
-void AbstractLinePopup::setResult( int result )
-{
-    d->setResult( result );
-}
-
-void AbstractLinePopup::setVisible( bool visible )
-{
-    d->setVisible( visible );
+    d->setVisible(visible);
 }
 
 int AbstractLinePopup::exec()
@@ -65,17 +62,18 @@ int AbstractLinePopup::exec()
     return d->exec();
 }
 
-bool AbstractLinePopup::eventFilter( QObject* object, QEvent* event )
+bool AbstractLinePopup::eventFilter(QObject* object, QEvent* event)
 {
-    switch( event->type() )
+    switch (event->type())
     {
     case QEvent::WindowDeactivate:
         close();
         break;
     case QEvent::MouseButtonPress:
     case QEvent::Wheel:
-        if( !d->isOrContainsObject(object) )
+        if (!d->isOrContainsObject(object)) {
             close();
+        }
         break;
     default:
         break;

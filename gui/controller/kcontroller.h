@@ -23,23 +23,22 @@
 #ifndef OKTETA_KCONTROLLER_H
 #define OKTETA_KCONTROLLER_H
 
-
 class QKeyEvent;
 
-namespace Okteta
-{
+namespace Okteta {
 
 class KController
 {
-  protected:
-    explicit KController( KController* parent );
-  public:
+protected:
+    explicit KController(KController* parent);
+
+public:
     virtual ~KController();
 
-  public: // API to be implemented
-    virtual bool handleKeyPress( QKeyEvent* keyEvent );
+public: // API to be implemented
+    virtual bool handleKeyPress(QKeyEvent* keyEvent);
 
-  protected:
+protected:
     KController* mParent;
 };
 

@@ -35,74 +35,73 @@
 #include <kasten/abstractmodeldatagenerator.h>
 #include <kasten/abstractmodelstreamencoder.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ModelCodecViewManager::ModelCodecViewManager() {}
 
-void ModelCodecViewManager::setEncoderConfigEditorFactories( const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList )
+void ModelCodecViewManager::setEncoderConfigEditorFactories(const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
 {
-    qDeleteAll( mEncoderFactoryList );
+    qDeleteAll(mEncoderFactoryList);
     mEncoderFactoryList = factoryList;
 
-    qDeleteAll( mExporterFactoryList );
+    qDeleteAll(mExporterFactoryList);
     mExporterFactoryList.clear();
 
     mExporterFactoryList.reserve(mEncoderFactoryList.size());
-    for( AbstractModelStreamEncoderConfigEditorFactory* factory : qAsConst(mEncoderFactoryList) )
-        mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory( factory );
+    for (AbstractModelStreamEncoderConfigEditorFactory* factory : qAsConst(mEncoderFactoryList)) {
+        mExporterFactoryList << new ModelEncoderFileSystemExporterConfigEditorFactory(factory);
+    }
 }
 
-void ModelCodecViewManager::setExporterConfigEditorFactories( const QList<AbstractModelExporterConfigEditorFactory*>& factoryList )
+void ModelCodecViewManager::setExporterConfigEditorFactories(const QList<AbstractModelExporterConfigEditorFactory*>& factoryList)
 {
-    qDeleteAll( mExporterFactoryList );
+    qDeleteAll(mExporterFactoryList);
     mExporterFactoryList = factoryList;
 }
 
-void ModelCodecViewManager::setGeneratorConfigEditorFactories( const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList )
+void ModelCodecViewManager::setGeneratorConfigEditorFactories(const QList<AbstractModelDataGeneratorConfigEditorFactory*>& factoryList)
 {
-    qDeleteAll( mGeneratorFactoryList );
+    qDeleteAll(mGeneratorFactoryList);
     mGeneratorFactoryList = factoryList;
 }
 
-AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelStreamEncoder* encoder ) const
+AbstractModelStreamEncoderConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     AbstractModelStreamEncoderConfigEditor* result = nullptr;
 
-    for( const AbstractModelStreamEncoderConfigEditorFactory* factory : mEncoderFactoryList )
-    {
-        result = factory->tryCreateConfigEditor( encoder );
-        if( result )
+    for (const AbstractModelStreamEncoderConfigEditorFactory* factory : mEncoderFactoryList) {
+        result = factory->tryCreateConfigEditor(encoder);
+        if (result) {
             break;
+        }
     }
 
     return result;
 }
 
-AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelExporter* exporter ) const
+AbstractModelExporterConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelExporter* exporter) const
 {
     AbstractModelExporterConfigEditor* result = nullptr;
 
-    for( const AbstractModelExporterConfigEditorFactory* factory : mExporterFactoryList )
-    {
-        result = factory->tryCreateConfigEditor( exporter );
-        if( result )
+    for (const AbstractModelExporterConfigEditorFactory* factory : mExporterFactoryList) {
+        result = factory->tryCreateConfigEditor(exporter);
+        if (result) {
             break;
+        }
     }
 
     return result;
 }
 
-AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEditor( AbstractModelDataGenerator* generator ) const
+AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEditor(AbstractModelDataGenerator* generator) const
 {
     AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
-    for( const AbstractModelDataGeneratorConfigEditorFactory* factory : mGeneratorFactoryList )
-    {
-        result = factory->tryCreateConfigEditor( generator );
-        if( result )
+    for (const AbstractModelDataGeneratorConfigEditorFactory* factory : mGeneratorFactoryList) {
+        result = factory->tryCreateConfigEditor(generator);
+        if (result) {
             break;
+        }
     }
 
     return result;
@@ -110,9 +109,9 @@ AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEdito
 
 ModelCodecViewManager::~ModelCodecViewManager()
 {
-    qDeleteAll( mEncoderFactoryList );
-    qDeleteAll( mExporterFactoryList );
-    qDeleteAll( mGeneratorFactoryList );
+    qDeleteAll(mEncoderFactoryList);
+    qDeleteAll(mExporterFactoryList);
+    qDeleteAll(mGeneratorFactoryList);
 }
 
 }

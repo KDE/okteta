@@ -23,8 +23,7 @@
 #ifndef OKTETA_BYTE_H
 #define OKTETA_BYTE_H
 
-namespace Okteta
-{
+namespace Okteta {
 
 using Byte = unsigned char;
 

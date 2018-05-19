@@ -31,38 +31,35 @@
 class KXMLGUIClient;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 namespace If {
 class DataSelectable;
 }
 
-
 class KASTENCONTROLLERS_EXPORT SelectController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit SelectController( KXMLGUIClient* guiClient );
+public:
+    explicit SelectController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void selectAll();
     void unselect();
 
-  private Q_SLOTS:
-    void onHasSelectedDataChanged( bool hasSelectedData );
+private Q_SLOTS:
+    void onHasSelectedDataChanged(bool hasSelectedData);
 
-  private:
+private:
     AbstractModel* mModel;
     If::DataSelectable* mSelectControl;
 
-    QAction *mSelectAllAction;
-    QAction *mDeselectAction;
+    QAction* mSelectAllAction;
+    QAction* mDeselectAction;
 };
 
 }

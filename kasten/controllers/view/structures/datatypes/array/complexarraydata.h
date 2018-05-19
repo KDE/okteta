@@ -33,11 +33,11 @@ class ScriptHandlerInfo;
 class ComplexArrayData : public AbstractArrayData
 {
     Q_DISABLE_COPY(ComplexArrayData)
+
 public:
     /** Takes ownership of @p data !*/
     ComplexArrayData(unsigned int initialLength, DataInformation* data, ArrayDataInformation* parent);
     ~ComplexArrayData() override;
-
 
     QVariant dataAt(uint index, int column, int role) override;
 
@@ -65,8 +65,10 @@ public:
     QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
+
 protected:
     void setNewParentForChildren() override;
+
 private:
     void appendChildren(uint from, uint to);
 

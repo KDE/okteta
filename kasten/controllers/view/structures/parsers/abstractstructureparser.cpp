@@ -29,7 +29,8 @@
 #include <QFile>
 
 AbstractStructureParser::AbstractStructureParser(const QString& pluginName, const QString& absolutePath)
-        : mPluginName(pluginName), mAbsolutePath(absolutePath)
+    : mPluginName(pluginName)
+    , mAbsolutePath(absolutePath)
 {
     if (!QFile::exists(absolutePath)) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "File" << absolutePath << "does not exist, parsing structure will fail!";

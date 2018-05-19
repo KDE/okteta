@@ -30,60 +30,56 @@
 // Qt
 #include <QMouseEvent>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-MousePaster::MousePaster( AbstractByteArrayView* view, AbstractMouseController* parent )
-  : AbstractMouseController( view, parent )
+MousePaster::MousePaster(AbstractByteArrayView* view, AbstractMouseController* parent)
+    : AbstractMouseController(view, parent)
 {
 }
 
-bool MousePaster::handleMousePressEvent( QMouseEvent* mouseEvent )
+bool MousePaster::handleMousePressEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
 
-    if( mouseEvent->button() == Qt::MidButton && ! mView->isReadOnly() )
-    {
+    if (mouseEvent->button() == Qt::MidButton && !mView->isReadOnly()) {
         mView->pauseCursor();
         mView->finishByteEdit();
 
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
         tableRanges->removeSelection();
 
-        if( tableRanges->isModified() )
-        {
+        if (tableRanges->isModified()) {
             mView->updateChanged();
-            mView->viewport()->setCursor( mView->isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor );
+            mView->viewport()->setCursor(mView->isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
         }
         mView->unpauseCursor();
 
         eventUsed = true;
     }
 
-    return eventUsed ? true : AbstractMouseController::handleMousePressEvent( mouseEvent );
+    return eventUsed ? true : AbstractMouseController::handleMousePressEvent(mouseEvent);
 }
 
-bool MousePaster::handleMouseReleaseEvent( QMouseEvent* mouseEvent )
+bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
     // middle mouse button paste?
-    if( mouseEvent->button() == Qt::MidButton && ! mView->isReadOnly() )
-    {
-        const QPoint releasePoint = mView->viewportToColumns( mouseEvent->pos() );
+    if (mouseEvent->button() == Qt::MidButton && !mView->isReadOnly()) {
+        const QPoint releasePoint = mView->viewportToColumns(mouseEvent->pos());
 
         mView->pauseCursor();
         mView->finishByteEdit();
 
-        mView->placeCursor( releasePoint );
+        mView->placeCursor(releasePoint);
 
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
         ByteArrayTableCursor* tableCursor = mView->tableCursor();
         // replace no selection?
-        if( tableRanges->hasSelection() && ! tableRanges->selectionIncludes(tableCursor->index()) )
+        if (tableRanges->hasSelection() && !tableRanges->selectionIncludes(tableCursor->index())) {
             tableRanges->removeSelection();
+        }
 
-        mView->pasteFromClipboard( QClipboard::Selection );
+        mView->pasteFromClipboard(QClipboard::Selection);
 
         // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
         mView->updateChanged();
@@ -91,19 +87,22 @@ bool MousePaster::handleMouseReleaseEvent( QMouseEvent* mouseEvent )
         mView->ensureCursorVisible();
         mView->unpauseCursor();
 
-        emit mView->cursorPositionChanged( tableCursor->realIndex() );
+        emit mView->cursorPositionChanged(tableCursor->realIndex());
 
-        if( tableRanges->selectionJustStarted() )
+        if (tableRanges->selectionJustStarted()) {
             tableRanges->removeSelection();
+        }
 
-        if( ! mView->isOverwriteMode() ) emit mView->cutAvailable( tableRanges->hasSelection() );
-        emit mView->copyAvailable( tableRanges->hasSelection() );
-        emit mView->hasSelectedDataChanged( tableRanges->hasSelection() );
+        if (!mView->isOverwriteMode()) {
+            emit mView->cutAvailable(tableRanges->hasSelection());
+        }
+        emit mView->copyAvailable(tableRanges->hasSelection());
+        emit mView->hasSelectedDataChanged(tableRanges->hasSelection());
 
         eventUsed = true;
     }
 
-    return eventUsed ? true : AbstractMouseController::handleMouseReleaseEvent( mouseEvent );
+    return eventUsed ? true : AbstractMouseController::handleMouseReleaseEvent(mouseEvent);
 }
 
 MousePaster::~MousePaster() {}

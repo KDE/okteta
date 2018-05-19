@@ -26,21 +26,18 @@
 // lib
 #include "abstractcolumnstylist.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class AbstractColumnStylistPrivate
 {
-  public:
+public:
     AbstractColumnStylistPrivate();
     ~AbstractColumnStylistPrivate();
 
-  public:
+public:
 
-  private:
+private:
 };
-
 
 inline AbstractColumnStylistPrivate::AbstractColumnStylistPrivate() {}
 inline AbstractColumnStylistPrivate::~AbstractColumnStylistPrivate() {}

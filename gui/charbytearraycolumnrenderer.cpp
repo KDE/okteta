@@ -27,33 +27,29 @@
 // Qt
 #include <QPainter>
 
+namespace Okteta {
 
-namespace Okteta
+CharByteArrayColumnRenderer::CharByteArrayColumnRenderer(AbstractColumnStylist* stylist,
+                                                         AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges)
+    : AbstractByteArrayColumnRenderer(stylist, byteArrayModel, layout, ranges)
+    , mShowingNonprinting(DefaultShowingNonprinting)
+    , mSubstituteChar(DefaultSubstituteChar)
+    , mUndefinedChar(DefaultUndefinedChar)
 {
-
-
-CharByteArrayColumnRenderer::CharByteArrayColumnRenderer( AbstractColumnStylist* stylist,
-        AbstractByteArrayModel* byteArrayModel, ByteArrayTableLayout* layout, ByteArrayTableRanges* ranges )
- : AbstractByteArrayColumnRenderer( stylist, byteArrayModel, layout, ranges ),
-   mShowingNonprinting( DefaultShowingNonprinting ),
-   mSubstituteChar( DefaultSubstituteChar ),
-   mUndefinedChar( DefaultUndefinedChar )
-{
-    setSpacing( 0, 0, 0 );
+    setSpacing(0, 0, 0);
 }
 
-
-void CharByteArrayColumnRenderer::renderByteText( QPainter* painter, Byte byte, Character byteChar, const QColor& color ) const
+void CharByteArrayColumnRenderer::renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const
 {
-Q_UNUSED( byte )
+    Q_UNUSED(byte)
 
     // turn into a drawable String
-    const QString text( byteChar.isUndefined() ?                      Okteta::Character(mUndefinedChar) :
+    const QString text(byteChar.isUndefined() ?                       Okteta::Character(mUndefinedChar) :
                        !(mShowingNonprinting || byteChar.isPrint()) ? Okteta::Character(mSubstituteChar) :
-                                                                      byteChar );
+                                                                      byteChar);
 
-    painter->setPen( color );
-    painter->drawText( 0, mDigitBaseLine, text );
+    painter->setPen(color);
+    painter->drawText(0, mDigitBaseLine, text);
 }
 
 CharByteArrayColumnRenderer::~CharByteArrayColumnRenderer() {}

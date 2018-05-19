@@ -42,125 +42,118 @@
 #include <QUrl>
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void SingleDocumentStrategyPrivate::init()
 {
-    Q_Q( SingleDocumentStrategy );
+    Q_Q(SingleDocumentStrategy);
     // setup
-    QObject::connect( mDocumentManager, &DocumentManager::added,
-                      mViewManager, &ViewManager::createViewsFor );
-    QObject::connect( mDocumentManager, &DocumentManager::closing,
-                      mViewManager, &ViewManager::removeViewsFor );
-    QObject::connect( mDocumentManager, &DocumentManager::added,
-                      q, &SingleDocumentStrategy::added );
-    QObject::connect( mDocumentManager, &DocumentManager::closing,
-                      q, &SingleDocumentStrategy::closing );
-    QObject::connect( mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
-                      q, &SingleDocumentStrategy::urlUsed );
+    QObject::connect(mDocumentManager, &DocumentManager::added,
+                     mViewManager, &ViewManager::createViewsFor);
+    QObject::connect(mDocumentManager, &DocumentManager::closing,
+                     mViewManager, &ViewManager::removeViewsFor);
+    QObject::connect(mDocumentManager, &DocumentManager::added,
+                     q, &SingleDocumentStrategy::added);
+    QObject::connect(mDocumentManager, &DocumentManager::closing,
+                     q, &SingleDocumentStrategy::closing);
+    QObject::connect(mDocumentManager->syncManager(), &DocumentSyncManager::urlUsed,
+                     q, &SingleDocumentStrategy::urlUsed);
 }
 
 void SingleDocumentStrategyPrivate::createNew()
 {
-    if( mDocumentManager->isEmpty() )
+    if (mDocumentManager->isEmpty()) {
         mDocumentManager->createManager()->createNew();
-    else
-    {
+    } else {
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
-        const QStringList parameters { QStringLiteral( "-c" ) };
-        KProcess::startDetached( executable, parameters );
+        const QStringList parameters { QStringLiteral("-c") };
+        KProcess::startDetached(executable, parameters);
     }
 }
 
 void SingleDocumentStrategyPrivate::createNewFromClipboard()
 {
-    if( mDocumentManager->isEmpty() )
-    {
+    if (mDocumentManager->isEmpty()) {
         const QMimeData* mimeData =
-            QApplication::clipboard()->mimeData( QClipboard::Clipboard );
+            QApplication::clipboard()->mimeData(QClipboard::Clipboard);
 
-        mDocumentManager->createManager()->createNewFromData( mimeData, true );
-    }
-    else
-    {
+        mDocumentManager->createManager()->createNewFromData(mimeData, true);
+    } else {
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
         const QStringList parameters {
-            QStringLiteral( "-c" ),
-            QStringLiteral( "-g" ),
-            QStringLiteral( "FromClipboard" ),
+            QStringLiteral("-c"),
+            QStringLiteral("-g"),
+            QStringLiteral("FromClipboard"),
         };
-        KProcess::startDetached( executable, parameters );
+        KProcess::startDetached(executable, parameters);
     }
 }
 
-void SingleDocumentStrategyPrivate::createNewWithGenerator( AbstractModelDataGenerator* generator )
+void SingleDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGenerator* generator)
 {
-    Q_Q( SingleDocumentStrategy );
+    Q_Q(SingleDocumentStrategy);
 
     // TODO: show dialog in this process, meanwhile start other process, but hidden,
     // on result of dialog pass on the parameters
-    if( ! mDocumentManager->isEmpty() )
-    {
+    if (!mDocumentManager->isEmpty()) {
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
         // TODO: add id to AbstractModelDataGenerator, to use instead of className
         const QStringList parameters {
-            QStringLiteral( "-c" ),
-            QStringLiteral( "-g" ),
+            QStringLiteral("-c"),
+            QStringLiteral("-g"),
             QLatin1String(generator->metaObject()->className()),
         };
-        KProcess::startDetached( executable, parameters );
+        KProcess::startDetached(executable, parameters);
         return;
     }
 
     AbstractModelDataGeneratorConfigEditor* configEditor =
-        mViewManager->codecViewManager()->createConfigEditor( generator );
+        mViewManager->codecViewManager()->createConfigEditor(generator);
 
-    if( configEditor )
-    {
+    if (configEditor) {
         // TODO: make dialog abstract for different UIs
-        CreateDialog* dialog = new CreateDialog( configEditor );
+        CreateDialog* dialog = new CreateDialog(configEditor);
 //         dialog->setData( mModel, selection ); TODO
-        if( ! dialog->exec() )
+        if (!dialog->exec()) {
             return;
+        }
     }
 
-    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     ModelDataGenerateThread* generateThread =
-        new ModelDataGenerateThread( q, generator );
+        new ModelDataGenerateThread(q, generator);
     generateThread->start();
-    while( !generateThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!generateThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     QMimeData* mimeData = generateThread->data();
 
     delete generateThread;
 
-    const bool setModified = ( generator->flags() & AbstractModelDataGenerator::DynamicGeneration );
-    mDocumentManager->createManager()->createNewFromData( mimeData, setModified );
+    const bool setModified = (generator->flags() & AbstractModelDataGenerator::DynamicGeneration);
+    mDocumentManager->createManager()->createNewFromData(mimeData, setModified);
 
     QApplication::restoreOverrideCursor();
 }
 
-void SingleDocumentStrategyPrivate::load( const QUrl& url )
+void SingleDocumentStrategyPrivate::load(const QUrl& url)
 {
-    if( mDocumentManager->isEmpty() )
-        mDocumentManager->syncManager()->load( url );
-    else
-    {
+    if (mDocumentManager->isEmpty()) {
+        mDocumentManager->syncManager()->load(url);
+    } else {
         const QString executable = QCoreApplication::applicationFilePath();
         // TODO: get parameters from common place with KCmdLineOptions
         // TODO: forward also interesting parameters passed to this program
         const QStringList parameters { url.url() };
-        KProcess::startDetached( executable, parameters );
+        KProcess::startDetached(executable, parameters);
     }
 }
 

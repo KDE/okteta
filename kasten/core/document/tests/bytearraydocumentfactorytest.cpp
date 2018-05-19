@@ -29,20 +29,18 @@
 // Qt
 #include <QTest>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void ByteArrayDocumentFactoryTest::testCreate()
 {
     ByteArrayDocumentFactory* factory = new ByteArrayDocumentFactory();
 
     AbstractDocument* document = factory->create();
-    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>( document );
+    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document);
 
-    QVERIFY( document != nullptr );
-    QVERIFY( byteArrayDocument != nullptr );
-    QCOMPARE( document->contentFlags(), Kasten::ContentStateNormal );
+    QVERIFY(document != nullptr);
+    QVERIFY(byteArrayDocument != nullptr);
+    QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
 
     delete document;
     delete factory;
@@ -50,4 +48,4 @@ void ByteArrayDocumentFactoryTest::testCreate()
 
 }
 
-QTEST_GUILESS_MAIN( Kasten::ByteArrayDocumentFactoryTest )
+QTEST_GUILESS_MAIN(Kasten::ByteArrayDocumentFactoryTest)

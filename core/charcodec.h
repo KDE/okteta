@@ -23,7 +23,6 @@
 #ifndef OKTETA_CHARCODEC_H
 #define OKTETA_CHARCODEC_H
 
-
 // lib
 #include <okteta/oktetacore.h>
 #include <okteta/oktetacore_export.h>
@@ -32,34 +31,30 @@
 class QStringList;
 class QChar;
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class Character;
 
-
 class OKTETACORE_EXPORT CharCodec
 {
-  public:
+public:
     virtual ~CharCodec() {}
 
-  public:
+public:
     /** */
-    static CharCodec* createCodec( CharCoding charCoding );
+    static CharCodec* createCodec(CharCoding charCoding);
     /** */
-    static CharCodec* createCodec( const QString& name );
+    static CharCodec* createCodec(const QString& name);
 
     static const QStringList& codecNames();
 
-  public: // API to be implemented
-    virtual Character decode( Byte byte ) const = 0;
-    virtual bool encode( Byte* byte, const QChar& _char ) const = 0;
-    virtual bool canEncode( const QChar& _char ) const = 0;
+public: // API to be implemented
+    virtual Character decode(Byte byte) const = 0;
+    virtual bool encode(Byte* byte, const QChar& _char) const = 0;
+    virtual bool canEncode(const QChar& _char) const = 0;
     virtual const QString& name() const = 0;
 };
 
 }
 
 #endif
-

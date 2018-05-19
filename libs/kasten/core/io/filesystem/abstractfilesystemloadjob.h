@@ -29,43 +29,40 @@
 class QUrl;
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelFileSystemSynchronizer;
 
 class AbstractFileSystemLoadJobPrivate;
 
-
 class KASTENCORE_EXPORT AbstractFileSystemLoadJob : public AbstractLoadJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    AbstractFileSystemLoadJob( AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url );
+public:
+    AbstractFileSystemLoadJob(AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url);
 
     ~AbstractFileSystemLoadJob() override;
 
-  public: // KJob API
+public: // KJob API
     void start() override;
 
-  protected: // AbstractLoadJob API
-    void setDocument( AbstractDocument* document ) override;
+protected: // AbstractLoadJob API
+    void setDocument(AbstractDocument* document) override;
 
-  protected: // API to be implemented
+protected: // API to be implemented
     virtual void startLoadFromFile() = 0;
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QUrl url() const;
     QFile* file() const;
 
-  protected:
-    Q_PRIVATE_SLOT( d_func(), void load() )
+protected:
+    Q_PRIVATE_SLOT(d_func(), void load())
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractFileSystemLoadJob )
+protected:
+    Q_DECLARE_PRIVATE(AbstractFileSystemLoadJob)
 };
 
 }

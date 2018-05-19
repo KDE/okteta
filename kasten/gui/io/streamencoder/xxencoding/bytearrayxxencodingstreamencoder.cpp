@@ -29,12 +29,9 @@
 // Qt
 #include <QTextStream>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-static const char xxencodeMap[64] =
-{
+static const char xxencodeMap[64] = {
     '+', '-', '0', '1', '2', '3', '4', '5',
     '6', '7', '8', '9', 'A', 'B', 'C', 'D',
     'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
@@ -48,33 +45,32 @@ static const char xxencodeMap[64] =
 static const int defaultxxInputLineLength = 45;
 static const int xxInputLineLength = defaultxxInputLineLength;
 static const int xxInputGroupLength = 3;
-static const int maxXxInputGroupsPerLine = xxInputLineLength/xxInputGroupLength;
+static const int maxXxInputGroupsPerLine = xxInputLineLength / xxInputGroupLength;
 
-static inline char xxmapByte( char byte )           { return xxencodeMap[(int)byte]; }
+static inline char xxmapByte(char byte) { return xxencodeMap[(int)byte]; }
 
-static inline const char* xxpadding( ByteArrayXxencodingStreamEncoder::InputByteIndex index )
+static inline const char* xxpadding(ByteArrayXxencodingStreamEncoder::InputByteIndex index)
 {
-    const char* const paddingData[2] = {"++","+"};
+    const char* const paddingData[2] = {"++", "+"};
 
     return paddingData[static_cast<int>(index) - 1];
 }
 
-
 XxencodingStreamEncoderSettings::XxencodingStreamEncoderSettings()
- : fileName( QStringLiteral("okteta-export"))
+    : fileName(QStringLiteral("okteta-export"))
 {}
 
 ByteArrayXxencodingStreamEncoder::ByteArrayXxencodingStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","Xxencoding"), QStringLiteral("text/x-xxencode") )
+    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Xxencoding"), QStringLiteral("text/x-xxencode"))
 {}
 
 // TODO: make this algorithm shared with ByteArrayUuencodingStreamEncoder again
-bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
-                                                           const ByteArrayView* byteArrayView,
-                                                           const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                           const Okteta::AddressRange& range )
+bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
+                                                          const ByteArrayView* byteArrayView,
+                                                          const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                          const Okteta::AddressRange& range)
 {
-    Q_UNUSED( byteArrayView );
+    Q_UNUSED(byteArrayView);
 
     const char header[] = "begin";
     const char footer[] = "\n+\nend\n";
@@ -82,7 +78,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     bool success = true;
 
     // encode
-    QTextStream textStream( device );
+    QTextStream textStream(device);
 
     // prepare
     InputByteIndex inputByteIndex = InputByteIndex::First;
@@ -92,55 +88,54 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream( QIODevice* device,
     // header
     textStream << header << " 644 " << mSettings.fileName.toLatin1();
 
-    const int firstLineLength = qMin( range.width(), xxInputLineLength );
-    if( firstLineLength > 0 )
-    {
+    const int firstLineLength = qMin(range.width(), xxInputLineLength);
+    if (firstLineLength > 0) {
         textStream << '\n';
-        textStream << xxmapByte( firstLineLength );
+        textStream << xxmapByte(firstLineLength);
     }
 
-    for( Okteta::Address i=range.start(); i<=range.end(); ++i )
-    {
-        const Okteta::Byte byte = byteArrayModel->byte( i );
+    for (Okteta::Address i = range.start(); i <= range.end(); ++i) {
+        const Okteta::Byte byte = byteArrayModel->byte(i);
 
-        switch( inputByteIndex )
+        switch (inputByteIndex)
         {
         case InputByteIndex::First:
             // bits 7..2
-            textStream << xxmapByte( byte >> 2 );
+            textStream << xxmapByte(byte >> 2);
             // bits 1..0 -> 5..4 for next
             bitsFromLastByte = (byte & 0x3) << 4;
             inputByteIndex = InputByteIndex::Second;
             break;
         case InputByteIndex::Second:
             // from last and bits 7..4 as 3..0 from this
-            textStream << xxmapByte( bitsFromLastByte | byte >> 4 );
+            textStream << xxmapByte(bitsFromLastByte | byte >> 4);
             // bits 3..0 -> 5..2 for next
             bitsFromLastByte = (byte & 0xf) << 2;
             inputByteIndex = InputByteIndex::Third;
             break;
         case InputByteIndex::Third:
             // from last and bits 7..6 as 1..0 from this
-            textStream << xxmapByte( bitsFromLastByte | byte >> 6 );
+            textStream << xxmapByte(bitsFromLastByte | byte >> 6);
             // bits 5..0
-            textStream << xxmapByte( byte & 0x3F );
+            textStream << xxmapByte(byte & 0x3F);
             inputByteIndex = InputByteIndex::First;
             ++inputGroupsPerLine;
-            if( inputGroupsPerLine >= maxXxInputGroupsPerLine && i<range.end() )
-            {
+            if (inputGroupsPerLine >= maxXxInputGroupsPerLine && i < range.end()) {
                 const int remainsCount = range.end() - i;
-                const int nextLineLength = qMin( remainsCount, xxInputLineLength );
+                const int nextLineLength = qMin(remainsCount, xxInputLineLength);
                 textStream << '\n';
-                textStream << xxmapByte( nextLineLength );
+                textStream << xxmapByte(nextLineLength);
                 inputGroupsPerLine = 0;
             }
             break;
         }
     }
-    const bool hasBitsLeft = ( inputByteIndex != InputByteIndex::First );
-    if( hasBitsLeft )
+
+    const bool hasBitsLeft = (inputByteIndex != InputByteIndex::First);
+    if (hasBitsLeft) {
         textStream << xxmapByte(bitsFromLastByte)
                    << xxpadding(inputByteIndex);
+    }
     // footer
     textStream << footer;
 

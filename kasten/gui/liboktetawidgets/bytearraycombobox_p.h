@@ -31,51 +31,48 @@
 // Qt
 #include <QByteArray>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class ByteArrayComboBoxPrivate
 {
-  public:
-    explicit ByteArrayComboBoxPrivate( ByteArrayComboBox* parent );
+public:
+    explicit ByteArrayComboBoxPrivate(ByteArrayComboBox* parent);
 
-  public:
+public:
     QByteArray byteArray() const;
     int format() const;
     int maxLength() const;
     int minLength() const;
 
-  public:
+public:
     void init();
-    void setByteArray( const QByteArray& byteArray );
-    void setCharCodec( const QString& charCodecName );
-    void setMaxLength( int maxLength );
-    void setMinLength( int minLength );
+    void setByteArray(const QByteArray& byteArray);
+    void setCharCodec(const QString& charCodecName);
+    void setMaxLength(int maxLength);
+    void setMinLength(int minLength);
     void rememberCurrentByteArray();
 
-    void onFormatChanged( int index );
-    void onValueEdited( const QString& value );
-    void onValueActivated( int index );
+    void onFormatChanged(int index);
+    void onValueEdited(const QString& value);
+    void onValueActivated(int index);
 
-  protected:
+protected:
     ByteArrayComboBox* const q_ptr;
-    Q_DECLARE_PUBLIC( ByteArrayComboBox )
+    Q_DECLARE_PUBLIC(ByteArrayComboBox)
 
-    KComboBox* mFormatComboBox;
+    KComboBox * mFormatComboBox;
     KComboBox* mValueComboBox;
 
     ByteArrayValidator* mValidator;
 };
 
-
-inline ByteArrayComboBoxPrivate::ByteArrayComboBoxPrivate( ByteArrayComboBox* parent )
-  : q_ptr( parent )
+inline ByteArrayComboBoxPrivate::ByteArrayComboBoxPrivate(ByteArrayComboBox* parent)
+    : q_ptr(parent)
 {}
 
 inline QByteArray ByteArrayComboBoxPrivate::byteArray() const
 {
-    return mValidator->toByteArray( mValueComboBox->currentText() );
+    return mValidator->toByteArray(mValueComboBox->currentText());
 }
 inline int ByteArrayComboBoxPrivate::format() const
 {

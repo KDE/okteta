@@ -30,35 +30,33 @@ class QLabel;
 class QHBoxLayout;
 class QEventLoop;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractLinePopupPrivate
 {
-  public:
-    explicit AbstractLinePopupPrivate( AbstractLinePopup* parent );
+public:
+    explicit AbstractLinePopupPrivate(AbstractLinePopup* parent);
     ~AbstractLinePopupPrivate();
 
-  public:
+public:
     void init();
 
-    void setPosition( const QPoint& globalPosition );
-    void setIcon( const QIcon& icon );
-    void setWidget( QWidget* widget );
+    void setPosition(const QPoint& globalPosition);
+    void setIcon(const QIcon& icon);
+    void setWidget(QWidget* widget);
 
-    void setResult( int result );
+    void setResult(int result);
     int exec();
 
-  public: // QWidget API
-    void setVisible( bool visible );
+public: // QWidget API
+    void setVisible(bool visible);
 
-  public:
-    bool isOrContainsObject( QObject* object ) const;
+public:
+    bool isOrContainsObject(QObject* object) const;
 
     void onReturnPressed();
 
-  private:
+private:
     AbstractLinePopup* const p;
 
     QHBoxLayout* mBaseLayout;
@@ -69,26 +67,22 @@ class AbstractLinePopupPrivate
     int mResult;
 };
 
-
-
-inline AbstractLinePopupPrivate::AbstractLinePopupPrivate( AbstractLinePopup* parent )
-  : p( parent ),
-    mWidget( nullptr ),
-    mEventLoop( nullptr ),
-    mResult( 0 )
+inline AbstractLinePopupPrivate::AbstractLinePopupPrivate(AbstractLinePopup* parent)
+    : p(parent)
+    , mWidget(nullptr)
+    , mEventLoop(nullptr)
+    , mResult(0)
 {
 }
 
-inline void AbstractLinePopupPrivate::setResult( int result ) { mResult = result; }
+inline void AbstractLinePopupPrivate::setResult(int result) { mResult = result; }
 
-inline bool AbstractLinePopupPrivate::isOrContainsObject( QObject* object ) const
+inline bool AbstractLinePopupPrivate::isOrContainsObject(QObject* object) const
 {
     bool result = false;
 
-    while( object )
-    {
-        if( object == p )
-        {
+    while (object) {
+        if (object == p) {
             result = true;
             break;
         }

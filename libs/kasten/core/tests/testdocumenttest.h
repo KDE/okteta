@@ -31,16 +31,15 @@
 class QSignalSpy;
 class QString;
 
-
 class TestDocumentTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private:
-    void checkTitleChanged( QSignalSpy* titleChangedSpy, const QString& title );
-    void checkContentFlagsChanged( QSignalSpy* changedSpy, Kasten::ContentFlags contentFlags );
+private:
+    void checkTitleChanged(QSignalSpy* titleChangedSpy, const QString& title);
+    void checkContentFlagsChanged(QSignalSpy* changedSpy, Kasten::ContentFlags contentFlags);
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testPlainConstructor();
     void testDataConstructor();
     void testChangeData();

@@ -28,39 +28,39 @@
 // Qt
 #include <QWidget>
 
-namespace Okteta { class ByteArrayComboBox; }
+namespace Okteta {
+class ByteArrayComboBox;
+}
 class KComboBox;
 class QPushButton;
 class QCheckBox;
 template <class Key, class T> class QMap;
 
-namespace Kasten
-{
+namespace Kasten {
 
 class CharsetConversionTool;
 
-
 class CharsetConversionView : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit CharsetConversionView( CharsetConversionTool* tool, QWidget* parent = nullptr );
+public:
+    explicit CharsetConversionView(CharsetConversionTool* tool, QWidget* parent = nullptr);
     ~CharsetConversionView() override;
 
-  public:
+public:
     CharsetConversionTool* tool() const;
 
-  private Q_SLOTS: // gui
-    void onDefaultByteEditChanged( const QByteArray& byteArray );
+private Q_SLOTS: // gui
+    void onDefaultByteEditChanged(const QByteArray& byteArray);
     void onConvertButtonClicked();
 
-  private Q_SLOTS: // tool
-    void onApplyableChanged( bool isApplyable );
-    void onConversionDone( bool success, int convertedBytesCount,
-                           const QMap<Okteta::Byte, int>& failedPerByteCount );
+private Q_SLOTS: // tool
+    void onApplyableChanged(bool isApplyable);
+    void onConversionDone(bool success, int convertedBytesCount,
+                          const QMap<Okteta::Byte, int>& failedPerByteCount);
 
-  private:
+private:
     CharsetConversionTool* mTool;
 
     KComboBox* mDirectionComboBox;
@@ -70,8 +70,7 @@ class CharsetConversionView : public QWidget
     QPushButton* mConvertButton;
 };
 
-
-inline CharsetConversionTool *CharsetConversionView::tool() const { return mTool; }
+inline CharsetConversionTool* CharsetConversionView::tool() const { return mTool; }
 
 }
 

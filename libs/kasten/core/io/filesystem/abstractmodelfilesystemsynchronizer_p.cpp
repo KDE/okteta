@@ -27,61 +27,61 @@
 // Qt
 #include <QNetworkConfigurationManager>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
 {
-    Q_Q( AbstractModelFileSystemSynchronizer );
+    Q_Q(AbstractModelFileSystemSynchronizer);
 
-    if( ! mDirWatch )
-    {
-        mDirWatch = new KDirWatch( q );
-        QObject::connect( mDirWatch, &KDirWatch::dirty,
-                          q, [&](const QString& path) { onFileDirty(path); } );
+    if (!mDirWatch) {
+        mDirWatch = new KDirWatch(q);
+        QObject::connect(mDirWatch, &KDirWatch::dirty,
+                         q, [&](const QString& path) { onFileDirty(path); });
 
-        QObject::connect( mDirWatch, &KDirWatch::created,
-                          q, [&](const QString& path) { onFileCreated(path); } );
+        QObject::connect(mDirWatch, &KDirWatch::created,
+                         q, [&](const QString& path) { onFileCreated(path); });
 
-        QObject::connect( mDirWatch, &KDirWatch::deleted,
-                          q, [&](const QString& path) { onFileDeleted(path); } );
+        QObject::connect(mDirWatch, &KDirWatch::deleted,
+                         q, [&](const QString& path) { onFileDeleted(path); });
     }
 
-    mDirWatch->addFile( mUrl.toLocalFile() );
+    mDirWatch->addFile(mUrl.toLocalFile());
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::stopFileWatching()
 {
-    if( ! mDirWatch )
+    if (!mDirWatch) {
         return;
+    }
 
-    mDirWatch->removeFile( mUrl.toLocalFile() );
+    mDirWatch->removeFile(mUrl.toLocalFile());
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::pauseFileWatching()
 {
-    if( ! mDirWatch )
+    if (!mDirWatch) {
         return;
+    }
 
     mDirWatch->stopScan();
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::unpauseFileWatching()
 {
-    if( ! mDirWatch )
+    if (!mDirWatch) {
         return;
+    }
 
     mDirWatch->startScan();
 }
 
 void AbstractModelFileSystemSynchronizerPrivate::startNetworkWatching()
 {
-    Q_Q( AbstractModelFileSystemSynchronizer );
+    Q_Q(AbstractModelFileSystemSynchronizer);
 
     mNetworkConfigurationManager = new QNetworkConfigurationManager();
-    QObject::connect( mNetworkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged,
-                      q, [&](bool online) { onOnlineStateChanged(online); } );
+    QObject::connect(mNetworkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged,
+                     q, [&](bool online) { onOnlineStateChanged(online); });
 }
 void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
 {
@@ -89,32 +89,32 @@ void AbstractModelFileSystemSynchronizerPrivate::stopNetworkWatching()
     mNetworkConfigurationManager = nullptr;
 }
 
-void AbstractModelFileSystemSynchronizerPrivate::onFileDirty( const QString& fileName )
+void AbstractModelFileSystemSynchronizerPrivate::onFileDirty(const QString& fileName)
 {
-    Q_UNUSED( fileName )
+    Q_UNUSED(fileName)
     qCDebug(LOG_KASTEN_CORE) << fileName;
-    setRemoteState( RemoteHasChanges );
+    setRemoteState(RemoteHasChanges);
 }
 
-void AbstractModelFileSystemSynchronizerPrivate::onFileCreated( const QString& fileName )
+void AbstractModelFileSystemSynchronizerPrivate::onFileCreated(const QString& fileName)
 {
-    Q_UNUSED( fileName )
+    Q_UNUSED(fileName)
     qCDebug(LOG_KASTEN_CORE) << fileName;
-    //TODO: could happen after a delete, what to do?
-    setRemoteState( RemoteHasChanges );
+    // TODO: could happen after a delete, what to do?
+    setRemoteState(RemoteHasChanges);
 }
 
-void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted( const QString& fileName )
+void AbstractModelFileSystemSynchronizerPrivate::onFileDeleted(const QString& fileName)
 {
-    Q_UNUSED( fileName )
+    Q_UNUSED(fileName)
     qCDebug(LOG_KASTEN_CORE) << fileName;
-    setRemoteState( RemoteDeleted );
+    setRemoteState(RemoteDeleted);
 }
 
-void AbstractModelFileSystemSynchronizerPrivate::onOnlineStateChanged( bool isOnline )
+void AbstractModelFileSystemSynchronizerPrivate::onOnlineStateChanged(bool isOnline)
 {
     qCDebug(LOG_KASTEN_CORE);
-    setRemoteState( isOnline ? RemoteUnknown : RemoteUnreachable );
+    setRemoteState(isOnline ? RemoteUnknown : RemoteUnreachable);
 }
 
 AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()

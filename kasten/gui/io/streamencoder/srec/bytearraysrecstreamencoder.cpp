@@ -33,9 +33,7 @@
 // Qt
 #include <QTextStream>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static inline
 int addressSize(SRecStreamEncoderSettings::AddressSizeId id)
@@ -44,14 +42,15 @@ int addressSize(SRecStreamEncoderSettings::AddressSizeId id)
 }
 
 SRecStreamEncoderSettings::SRecStreamEncoderSettings()
- : addressSizeId( AddressSizeId::FourBytes )
+    : addressSizeId(AddressSizeId::FourBytes)
 {}
 
-const char ByteArraySRecStreamEncoder::hexDigits[16] =
-{ '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
+const char ByteArraySRecStreamEncoder::hexDigits[16] = {
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+};
 
-void ByteArraySRecStreamEncoder::streamLine( QTextStream& textStream, RecordType recordType,
-                                             const unsigned char* line )
+void ByteArraySRecStreamEncoder::streamLine(QTextStream& textStream, RecordType recordType,
+                                            const unsigned char* line)
 {
     // checksum is ones' complement of sum of the values in the line
     unsigned char checksum = 0;
@@ -59,20 +58,18 @@ void ByteArraySRecStreamEncoder::streamLine( QTextStream& textStream, RecordType
     textStream << startCode << charOfRecordType(recordType);
 
     const uint length = line[0];
-    for( uint i = 0; i < length; ++i )
-    {
+    for (uint i = 0; i < length; ++i) {
         const unsigned char byte = line[i];
-        textStream << hexValueOfNibble( byte >> 4 )
-                   << hexValueOfNibble( byte );
+        textStream << hexValueOfNibble(byte >> 4)
+                   << hexValueOfNibble(byte);
         checksum += byte;
     }
 
     checksum = ~checksum;
-    textStream << hexValueOfNibble( checksum >> 4 ) << hexValueOfNibble( checksum ) << '\n';
+    textStream << hexValueOfNibble(checksum >> 4) << hexValueOfNibble(checksum) << '\n';
 }
 
-
-void ByteArraySRecStreamEncoder::streamBlockHeader( QTextStream& textStream, unsigned char* line )
+void ByteArraySRecStreamEncoder::streamBlockHeader(QTextStream& textStream, unsigned char* line)
 //                         const char* moduleName = 0, const char* description = 0,
 //                         quint8 version = 0, quint8 revision = 0 )
 {
@@ -89,28 +86,28 @@ void ByteArraySRecStreamEncoder::streamBlockHeader( QTextStream& textStream, uns
     static const int headerByteCount = 3;
 
     line[addressLineOffset] = 0; // address unused
-    line[addressLineOffset+1] = 0; // address unused
+    line[addressLineOffset + 1] = 0; // address unused
 
     // leave data empty for now
     line[byteCountLineOffset] = headerByteCount;
 
-    streamLine( textStream, RecordType::BlockHeader, line );
+    streamLine(textStream, RecordType::BlockHeader, line);
 }
 
-void ByteArraySRecStreamEncoder::streamRecordCount( QTextStream& textStream, unsigned char* line,
-                                                    quint16 recordCount )
+void ByteArraySRecStreamEncoder::streamRecordCount(QTextStream& textStream, unsigned char* line,
+                                                   quint16 recordCount)
 {
     static const int recordCountLineSize = 2;
     static const int recordCountByteCount = byteCountLineSize + recordCountLineSize;
 
     line[byteCountLineOffset] = recordCountByteCount;
-    writeBigEndian( &line[addressLineOffset], recordCount, recordCountLineSize );
+    writeBigEndian(&line[addressLineOffset], recordCount, recordCountLineSize);
 
-    streamLine( textStream, RecordType::RecordCount, line );
+    streamLine(textStream, RecordType::RecordCount, line);
 }
 
 // from M68000PRM.pdf:
-//comp. with tty 28 bytes are max (with 3b address)
+// comp. with tty 28 bytes are max (with 3b address)
 // terminated with CR if downloading
 // s-record may have some initial field, e.g. for line-number
 // end of x-block: The address ﬁeld may optionally contain the x-byte address of the instruction to which control is to be passed.
@@ -120,35 +117,33 @@ void ByteArraySRecStreamEncoder::streamRecordCount( QTextStream& textStream, uns
 // data ﬁeld.
 
 // TODO: recordType is not limited to valid values, also brings recalculation of addressLineSize
-void ByteArraySRecStreamEncoder::streamBlockEnd( QTextStream& textStream, unsigned char* line,
-                                                 RecordType recordType, quint32 startAddress )
+void ByteArraySRecStreamEncoder::streamBlockEnd(QTextStream& textStream, unsigned char* line,
+                                                RecordType recordType, quint32 startAddress)
 {
     const int addressLineSize = endOfBlockAddressSize(recordType);
     const int blockEndByteCount = byteCountLineSize + addressLineSize;
 
     line[byteCountLineOffset] = blockEndByteCount;
-    writeBigEndian( &line[addressLineOffset], startAddress, addressLineSize );
+    writeBigEndian(&line[addressLineOffset], startAddress, addressLineSize);
 
-    streamLine( textStream, recordType, line );
+    streamLine(textStream, recordType, line);
 }
 
-
 ByteArraySRecStreamEncoder::ByteArraySRecStreamEncoder()
-  : AbstractByteArrayStreamEncoder( i18nc("name of the encoding target","S-Record"), QStringLiteral("text/x-srecord") )
+    : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "S-Record"), QStringLiteral("text/x-srecord"))
 {}
 
-
-bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
-                                                     const ByteArrayView* byteArrayView,
-                                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
-                                                     const Okteta::AddressRange& range )
+bool ByteArraySRecStreamEncoder::encodeDataToStream(QIODevice* device,
+                                                    const ByteArrayView* byteArrayView,
+                                                    const Okteta::AbstractByteArrayModel* byteArrayModel,
+                                                    const Okteta::AddressRange& range)
 {
-    Q_UNUSED( byteArrayView );
+    Q_UNUSED(byteArrayView);
 
     bool success = true;
 
     // encode
-    QTextStream textStream( device );
+    QTextStream textStream(device);
 
     // prepare
     static const int maxLineLength = 64 / 2;
@@ -156,53 +151,51 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream( QIODevice* device,
     const int maxDataPerLineCount = maxLineLength - byteCountLineSize - addressLineSize;
     const int dataLineOffset = addressLineOffset + addressLineSize;
 
-    const Okteta::ByteArrayTableLayout layout( byteArrayView->noOfBytesPerLine(),
-                                               byteArrayView->firstLineOffset(),
-                                               byteArrayView->startOffset(), 0, byteArrayModel->size() );
+    const Okteta::ByteArrayTableLayout layout(byteArrayView->noOfBytesPerLine(),
+                                              byteArrayView->firstLineOffset(),
+                                              byteArrayView->startOffset(), 0, byteArrayModel->size());
 
-    const Okteta::Coord startCoord = layout.coordOfIndex( range.start() );
-    const int lastLinePosition = layout.lastLinePosition( startCoord.line() );
-    const int dataPerLineCount = qMin( byteArrayView->noOfBytesPerLine(), maxDataPerLineCount );
-    const RecordType dataSequenceType = dataSequenceRecordType( mSettings.addressSizeId );
-    const RecordType endOfBlockType = endOfBlockRecordType( mSettings.addressSizeId );
+    const Okteta::Coord startCoord = layout.coordOfIndex(range.start());
+    const int lastLinePosition = layout.lastLinePosition(startCoord.line());
+    const int dataPerLineCount = qMin(byteArrayView->noOfBytesPerLine(), maxDataPerLineCount);
+    const RecordType dataSequenceType = dataSequenceRecordType(mSettings.addressSizeId);
+    const RecordType endOfBlockType = endOfBlockRecordType(mSettings.addressSizeId);
 
     unsigned char line[maxLineLength];
 
     unsigned char* const lineData = &line[dataLineOffset];
     const int firstDataEnd = lastLinePosition - startCoord.pos() + 1;
     int d = 0;
-    int nextDataEnd = qMin( firstDataEnd, dataPerLineCount );
+    int nextDataEnd = qMin(firstDataEnd, dataPerLineCount);
     Okteta::Address recordOffset = range.start();
     int recordCount = 0;
 
     // header
-    streamBlockHeader( textStream, line );
+    streamBlockHeader(textStream, line);
 
     Okteta::Address i = range.start();
-    while( i<=range.end() )
-    {
-        const Okteta::Byte byte = byteArrayModel->byte( i );
+    while (i <= range.end()) {
+        const Okteta::Byte byte = byteArrayModel->byte(i);
         lineData[d] = byte;
 
         ++d;
         ++i;
-        if( d == nextDataEnd )
-        {
+        if (d == nextDataEnd) {
             line[byteCountLineOffset] = d + 1 + addressLineSize;
-            writeBigEndian( &line[addressLineOffset], recordOffset, addressLineSize );
+            writeBigEndian(&line[addressLineOffset], recordOffset, addressLineSize);
 
-            streamLine( textStream, dataSequenceType, line );
+            streamLine(textStream, dataSequenceType, line);
 
             ++recordCount;
             recordOffset = i;
             d = 0;
-            nextDataEnd = qMin( range.end()-i+1, dataPerLineCount );
+            nextDataEnd = qMin(range.end() - i + 1, dataPerLineCount);
         }
     }
 
     // footer
-    streamRecordCount( textStream, line, recordCount );
-    streamBlockEnd( textStream, line, endOfBlockType );
+    streamRecordCount(textStream, line, recordCount);
+    streamBlockEnd(textStream, line, endOfBlockType);
 
     return success;
 }

@@ -28,26 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class FileSystemBrowserView;
 class FileSystemBrowserTool;
 
-
 class KASTENCONTROLLERS_EXPORT FileSystemBrowserToolView : public AbstractToolView
 {
-  public:
-    explicit FileSystemBrowserToolView( FileSystemBrowserTool* tool );
+public:
+    explicit FileSystemBrowserToolView(FileSystemBrowserTool* tool);
     ~FileSystemBrowserToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     FileSystemBrowserView* mWidget;
 };
 

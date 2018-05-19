@@ -97,8 +97,8 @@ public:
         return is##name() ? reinterpret_cast<const typename*>(this) : nullptr; }
 
 #define CAST_FUNCS(type) CAST_FUNCS_2(type##DataInformation, type)
-//we have to use reinterpret_cast<> since it does not seem to be possible to declare inheritance
-//and including other headers would be overkill
+// we have to use reinterpret_cast<> since it does not seem to be possible to declare inheritance
+// and including other headers would be overkill
 
 CAST_FUNCS(Array)
 CAST_FUNCS(Union)
@@ -113,7 +113,7 @@ CAST_FUNCS(TaggedUnion)
 CAST_FUNCS_2(DataInformationWithChildren, DataInformationWithChildren)
 CAST_FUNCS_2(DataInformationWithDummyChildren, DataInformationWithDummyChildren)
 
-//this is not handled by the macro
+// this is not handled by the macro
 inline DataInformation* DataInformationBase::asDataInformation()
 {
     return isTopLevel() ? nullptr : reinterpret_cast<DataInformation*>(this);

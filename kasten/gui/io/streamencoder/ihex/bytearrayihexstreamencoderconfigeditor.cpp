@@ -31,25 +31,23 @@
 #include <QFormLayout>
 #include <QLabel>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor( ByteArrayIHexStreamEncoder* encoder, QWidget* parent )
- : AbstractModelStreamEncoderConfigEditor( parent ),
-   mEncoder( encoder )
+ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor(ByteArrayIHexStreamEncoder* encoder, QWidget* parent)
+    : AbstractModelStreamEncoderConfigEditor(parent)
+    , mEncoder(encoder)
 {
     mSettings = mEncoder->settings();
 
-    QFormLayout* pageLayout = new QFormLayout( this );
-    pageLayout->setMargin( 0 );
+    QFormLayout* pageLayout = new QFormLayout(this);
+    pageLayout->setMargin(0);
 
     // data type
     const QString addressSizeLabel =
-        i18nc( "@label:listbox the size in bits of the addresses.",
-               "Address size:" );
+        i18nc("@label:listbox the size in bits of the addresses.",
+              "Address size:");
 
-    mAddressSizeSelect = new KComboBox( this );
+    mAddressSizeSelect = new KComboBox(this);
     // keep order in sync with IHexStreamEncoderSettings::AddressSizeId
     const QStringList addressSizeList {
         i18nc("@item:inmenu address size",
@@ -59,24 +57,23 @@ ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor( 
         i18nc("@item:inmenu address size",
               "8-bit"),
     };
-    mAddressSizeSelect->addItems( addressSizeList );
-    mAddressSizeSelect->setCurrentIndex( static_cast<int>(mSettings.addressSizeId) );
-    connect( mAddressSizeSelect, QOverload<int>::of(&KComboBox::activated),
-             this, &ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged );
-    pageLayout->addRow( addressSizeLabel, mAddressSizeSelect );
+    mAddressSizeSelect->addItems(addressSizeList);
+    mAddressSizeSelect->setCurrentIndex(static_cast<int>(mSettings.addressSizeId));
+    connect(mAddressSizeSelect, QOverload<int>::of(&KComboBox::activated),
+            this, &ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged);
+    pageLayout->addRow(addressSizeLabel, mAddressSizeSelect);
 }
-
 
 AbstractSelectionView* ByteArrayIHexStreamEncoderConfigEditor::createPreviewView() const
 {
-    return new ByteArrayTextStreamEncoderPreview( mEncoder );
+    return new ByteArrayTextStreamEncoderPreview(mEncoder);
 }
 
 void ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged()
 {
     mSettings.addressSizeId = static_cast<IHexStreamEncoderSettings::AddressSizeId>(mAddressSizeSelect->currentIndex());
 
-    mEncoder->setSettings( mSettings );
+    mEncoder->setSettings(mSettings);
 }
 
 ByteArrayIHexStreamEncoderConfigEditor::~ByteArrayIHexStreamEncoderConfigEditor()

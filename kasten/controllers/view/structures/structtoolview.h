@@ -28,15 +28,14 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-namespace Kasten
-{
+namespace Kasten {
 class StructView;
 class StructTool;
 
-class OKTETAKASTENCONTROLLERS_EXPORT StructToolView: public AbstractToolView
+class OKTETAKASTENCONTROLLERS_EXPORT StructToolView : public AbstractToolView
 {
 public:
-    explicit StructToolView(StructTool *tool);
+    explicit StructToolView(StructTool* tool);
     ~StructToolView() override;
 
 public:

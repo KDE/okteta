@@ -23,63 +23,61 @@
 #include "shellwindow.h"
 #include "shellwindow_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ShellWindow::ShellWindow( ViewManager* viewManager )
-  : KXmlGuiWindow(),
-    d_ptr( new ShellWindowPrivate(this, viewManager) )
+ShellWindow::ShellWindow(ViewManager* viewManager)
+    : KXmlGuiWindow()
+    , d_ptr(new ShellWindowPrivate(this, viewManager))
 {
 }
 
 ViewManager* ShellWindow::viewManager() const
 {
-    Q_D( const ShellWindow );
+    Q_D(const ShellWindow);
 
     return d->viewManager();
 }
 
 MultiViewAreas* ShellWindow::viewArea() const
 {
-    Q_D( const ShellWindow );
+    Q_D(const ShellWindow);
 
     return d->viewArea();
 }
 
 QList<ToolViewDockWidget*> ShellWindow::dockWidgets() const
 {
-    Q_D( const ShellWindow );
+    Q_D(const ShellWindow);
 
     return d->dockWidgets();
 }
 
-void ShellWindow::addXmlGuiController( AbstractXmlGuiController* controller )
+void ShellWindow::addXmlGuiController(AbstractXmlGuiController* controller)
 {
-    Q_D( ShellWindow );
+    Q_D(ShellWindow);
 
-    d->addXmlGuiController( controller );
+    d->addXmlGuiController(controller);
 }
 
-void ShellWindow::addTool( AbstractToolView* toolView )
+void ShellWindow::addTool(AbstractToolView* toolView)
 {
-    Q_D( ShellWindow );
+    Q_D(ShellWindow);
 
-    d->addTool( toolView );
+    d->addTool(toolView);
 }
 
-void ShellWindow::showDocument( AbstractDocument* document )
+void ShellWindow::showDocument(AbstractDocument* document)
 {
-    Q_D( ShellWindow );
+    Q_D(ShellWindow);
 
-    d->showDocument( document );
+    d->showDocument(document);
 }
 
-void ShellWindow::updateControllers( AbstractView* view )
+void ShellWindow::updateControllers(AbstractView* view)
 {
-    Q_D( ShellWindow );
+    Q_D(ShellWindow);
 
-    d->updateControllers( view );
+    d->updateControllers(view);
 }
 
 ShellWindow::~ShellWindow()

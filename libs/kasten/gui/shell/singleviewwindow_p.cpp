@@ -32,44 +32,45 @@
 #include <kasten/abstracttool.h>
 #include <kasten/abstractmodelsynchronizer.h>
 
+namespace Kasten {
 
-
-namespace Kasten
+SingleViewWindowPrivate::SingleViewWindowPrivate(SingleViewWindow* parent,
+                                                 AbstractView* view)
+    : q_ptr(parent)
+    , mView(nullptr)
+    , mDocument(nullptr)
+    , mSynchronizer(nullptr)
+    , mViewArea(new SingleViewArea())
 {
+    parent->setCentralWidget(mViewArea->widget());
 
-SingleViewWindowPrivate::SingleViewWindowPrivate( SingleViewWindow* parent,
-                                                  AbstractView* view )
-  : q_ptr( parent )
-  , mView( nullptr )
-  , mDocument( nullptr )
-  , mSynchronizer( nullptr )
-  , mViewArea( new SingleViewArea() )
-{
-    parent->setCentralWidget( mViewArea->widget() );
-
-    setView( view );
+    setView(view);
 }
 
-void SingleViewWindowPrivate::setView( AbstractView* view )
+void SingleViewWindowPrivate::setView(AbstractView* view)
 {
-    Q_Q( SingleViewWindow );
+    Q_Q(SingleViewWindow);
 
-    if( mView == view )
+    if (mView == view) {
         return;
+    }
 
-    if( mView ) mView->disconnect( q );
+    if (mView) {
+        mView->disconnect(q);
+    }
 
     // TODO: what to do with the old one if existing?
     mView = view;
-    mViewArea->setView( view );
+    mViewArea->setView(view);
 
-    for( AbstractXmlGuiController* controller : qAsConst(mControllers) )
-        controller->setTargetModel( view );
+    for (AbstractXmlGuiController* controller : qAsConst(mControllers)) {
+        controller->setTargetModel(view);
+    }
 
-    for( ToolViewDockWidget* dockWidget : qAsConst(mDockWidgets) )
-    {
-        if( dockWidget->isShown() )
-            dockWidget->toolView()->tool()->setTargetModel( view );
+    for (ToolViewDockWidget* dockWidget : qAsConst(mDockWidgets)) {
+        if (dockWidget->isShown()) {
+            dockWidget->toolView()->tool()->setTargetModel(view);
+        }
     }
 
     AbstractDocument* oldDocument = mDocument;
@@ -80,13 +81,14 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
     mSynchronizer = mDocument ? mDocument->synchronizer() : nullptr;
     const bool isNewSynchronizer = (mSynchronizer != oldSynchronizer);
 
-    if( oldSynchronizer )
-    {
-        if( isNewSynchronizer ) oldSynchronizer->disconnect( q );
-    }
-    else
-    {
-        if( oldDocument && isNewDocument ) oldDocument->disconnect( q );
+    if (oldSynchronizer) {
+        if (isNewSynchronizer) {
+            oldSynchronizer->disconnect(q);
+        }
+    } else {
+        if (oldDocument && isNewDocument) {
+            oldDocument->disconnect(q);
+        }
     }
 
     const QString title = view ? view->title() : QString();
@@ -94,117 +96,112 @@ void SingleViewWindowPrivate::setView( AbstractView* view )
         mSynchronizer ? (mSynchronizer->localSyncState() == LocalHasChanges) :
         mDocument ?     mDocument->contentFlags().testFlag(ContentHasUnstoredChanges) :
                         false;
-    q->setCaption( title, hasChanges );
+    q->setCaption(title, hasChanges);
 
-    if( view )
-        QObject::connect( view, &AbstractModel::titleChanged,
-                          q, [&](const QString& Title) { onTitleChanged(Title); } );
+    if (view) {
+        QObject::connect(view, &AbstractModel::titleChanged,
+                         q, [&](const QString& Title) { onTitleChanged(Title); });
+    }
 
-    if( mSynchronizer )
-    {
-        if( isNewSynchronizer )
-        {
-            QObject::connect( mSynchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
-                              q, [&](LocalSyncState localSyncState) { onLocalSyncStateChanged(localSyncState); } );
-            QObject::connect( mSynchronizer, &QObject::destroyed,
-                              q, [&](QObject* object) { onSynchronizerDeleted(object); } );
+    if (mSynchronizer) {
+        if (isNewSynchronizer) {
+            QObject::connect(mSynchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                             q, [&](LocalSyncState localSyncState) { onLocalSyncStateChanged(localSyncState); });
+            QObject::connect(mSynchronizer, &QObject::destroyed,
+                             q, [&](QObject* object) { onSynchronizerDeleted(object); });
+        }
+    } else if (mDocument) {
+        if (isNewDocument) {
+            QObject::connect(mDocument, &AbstractDocument::contentFlagsChanged,
+                             q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); });
         }
     }
-    else if( mDocument )
-    {
-        if( isNewDocument )
-            QObject::connect( mDocument, &AbstractDocument::contentFlagsChanged,
-                              q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); } );
-    }
 }
 
-void SingleViewWindowPrivate::addXmlGuiController( AbstractXmlGuiController* controller )
+void SingleViewWindowPrivate::addXmlGuiController(AbstractXmlGuiController* controller)
 {
-    mControllers.append( controller );
+    mControllers.append(controller);
 }
 
-void SingleViewWindowPrivate::addTool( AbstractToolView* toolView )
+void SingleViewWindowPrivate::addTool(AbstractToolView* toolView)
 {
-    Q_Q( SingleViewWindow );
+    Q_Q(SingleViewWindow);
 
-    ToolViewDockWidget* dockWidget = new ToolViewDockWidget( toolView, q );
+    ToolViewDockWidget* dockWidget = new ToolViewDockWidget(toolView, q);
     // TODO: where to set the initial area?
-    q->addDockWidget( Qt::RightDockWidgetArea, dockWidget );
+    q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
 
-    mTools.append( toolView->tool() );
-    mDockWidgets.append( dockWidget );
+    mTools.append(toolView->tool());
+    mDockWidgets.append(dockWidget);
 
-    if( dockWidget->isVisible() && mView )
-        toolView->tool()->setTargetModel( mView );
+    if (dockWidget->isVisible() && mView) {
+        toolView->tool()->setTargetModel(mView);
+    }
 
-    QObject::connect( dockWidget, &QDockWidget::visibilityChanged,
-                      q, [&](bool visible) { onToolVisibilityChanged(visible); } );
+    QObject::connect(dockWidget, &QDockWidget::visibilityChanged,
+                     q, [&](bool visible) { onToolVisibilityChanged(visible); });
 }
 
-void SingleViewWindowPrivate::onTitleChanged( const QString& newTitle )
+void SingleViewWindowPrivate::onTitleChanged(const QString& newTitle)
 {
-    Q_Q( SingleViewWindow );
+    Q_Q(SingleViewWindow);
 
-    if( mView )
-    {
+    if (mView) {
         AbstractDocument* document = mView->findBaseModel<AbstractDocument*>();
         AbstractModelSynchronizer* synchronizer = document->synchronizer();
         const bool hasChanges =
             synchronizer ? (synchronizer->localSyncState() == LocalHasChanges) :
             document ?     document->contentFlags().testFlag(ContentHasUnstoredChanges) :
                            false;
-        q->setCaption( newTitle, hasChanges );
+        q->setCaption(newTitle, hasChanges);
     }
 }
 
-void SingleViewWindowPrivate::onContentFlagsChanged( ContentFlags contentFlags )
+void SingleViewWindowPrivate::onContentFlagsChanged(ContentFlags contentFlags)
 {
-    Q_Q( SingleViewWindow );
+    Q_Q(SingleViewWindow);
 
-    if( mView )
-    {
+    if (mView) {
         const bool hasChanges = (contentFlags & ContentHasUnstoredChanges);
-        q->setCaption( mView->title(), hasChanges );
+        q->setCaption(mView->title(), hasChanges);
     }
 }
 
-void SingleViewWindowPrivate::onLocalSyncStateChanged( LocalSyncState newState )
+void SingleViewWindowPrivate::onLocalSyncStateChanged(LocalSyncState newState)
 {
-    Q_Q( SingleViewWindow );
+    Q_Q(SingleViewWindow);
 
-    if( mView )
-    {
+    if (mView) {
         const bool hasChanges = (newState == LocalHasChanges);
-        q->setCaption( mView->title(), hasChanges );
+        q->setCaption(mView->title(), hasChanges);
     }
 }
 
-void SingleViewWindowPrivate::onSynchronizerDeleted( QObject* synchronizer )
+void SingleViewWindowPrivate::onSynchronizerDeleted(QObject* synchronizer)
 {
-    Q_Q( SingleViewWindow );
+    Q_Q(SingleViewWindow);
 
-    if( synchronizer != mSynchronizer )
+    if (synchronizer != mSynchronizer) {
         return;
+    }
 
     mSynchronizer = nullptr;
 
     // switch to document state
-    QObject::connect( mDocument, &AbstractDocument::contentFlagsChanged,
-                      q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); } );
+    QObject::connect(mDocument, &AbstractDocument::contentFlagsChanged,
+                     q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); });
 
-    onContentFlagsChanged( mDocument->contentFlags() );
+    onContentFlagsChanged(mDocument->contentFlags());
 }
 
-
-void SingleViewWindowPrivate::onToolVisibilityChanged( bool isVisible )
+void SingleViewWindowPrivate::onToolVisibilityChanged(bool isVisible)
 {
-    Q_Q( SingleViewWindow );
+    Q_Q(SingleViewWindow);
 
-    ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget *>( q->sender() );
-    if( dockWidget )
-    {
+    ToolViewDockWidget* dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
+    if (dockWidget) {
         AbstractView* view = isVisible ? mView : nullptr;
-        dockWidget->toolView()->tool()->setTargetModel( view );
+        dockWidget->toolView()->tool()->setTargetModel(view);
     }
 }
 
@@ -216,11 +213,11 @@ SingleViewWindowPrivate::~SingleViewWindowPrivate()
     // The other option would be to first delete the view, but for reasons if do not
     // remember currently I prefer the destruction in this order
     // TODO: make this call unneeded
-    mViewArea->setCurrentToolInlineView( nullptr );
+    mViewArea->setCurrentToolInlineView(nullptr);
 
-    qDeleteAll( mControllers );
-    qDeleteAll( mDockWidgets );
-    qDeleteAll( mTools );
+    qDeleteAll(mControllers);
+    qDeleteAll(mDockWidgets);
+    qDeleteAll(mTools);
 
     delete mViewArea;
 }

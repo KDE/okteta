@@ -20,15 +20,12 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #ifndef LATIN1STRINGDATA_H
 #define LATIN1STRINGDATA_H
 
 #include "stringdata.h"
 
 #include <QVector>
-
 
 class Latin1StringData : public StringData
 {
@@ -44,6 +41,7 @@ public:
     QString charType() const override;
     uint count() const override;
     QString typeName() const override;
+
 private:
     QVector<quint8> mData;
 };

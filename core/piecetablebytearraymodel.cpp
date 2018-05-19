@@ -23,64 +23,61 @@
 #include "piecetablebytearraymodel.h"
 #include "piecetablebytearraymodel_p.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 // TODO: a wrapper to a raw data, plus a function to dump the current version to the original data
 
-PieceTableByteArrayModel::PieceTableByteArrayModel( const QByteArray& data, QObject* parent )
-  : AbstractByteArrayModel( parent ),
-    d( new PieceTableByteArrayModelPrivate(this,data) )
+PieceTableByteArrayModel::PieceTableByteArrayModel(const QByteArray& data, QObject* parent)
+    : AbstractByteArrayModel(parent)
+    , d(new PieceTableByteArrayModelPrivate(this, data))
 {}
 
-PieceTableByteArrayModel::PieceTableByteArrayModel( int size, Byte fillByte, QObject* parent )
-  : AbstractByteArrayModel( parent ),
-    d( new PieceTableByteArrayModelPrivate(this,size,fillByte) )
+PieceTableByteArrayModel::PieceTableByteArrayModel(int size, Byte fillByte, QObject* parent)
+    : AbstractByteArrayModel(parent)
+    , d(new PieceTableByteArrayModelPrivate(this, size, fillByte))
 {}
 
-
-Byte PieceTableByteArrayModel::byte( Address offset ) const { return d->byte(offset); }
-Size PieceTableByteArrayModel::size()                 const { return d->size(); }
+Byte PieceTableByteArrayModel::byte(Address offset) const { return d->byte(offset); }
+Size PieceTableByteArrayModel::size()               const { return d->size(); }
 
 bool PieceTableByteArrayModel::isReadOnly()   const { return d->isReadOnly(); }
 bool PieceTableByteArrayModel::isModified()   const { return d->isModified(); }
 
-void PieceTableByteArrayModel::setReadOnly( bool readOnly )       { d->setReadOnly( readOnly ); }
-void PieceTableByteArrayModel::setModified( bool modified )       { d->setModified( modified ); }
+void PieceTableByteArrayModel::setReadOnly(bool readOnly)       { d->setReadOnly(readOnly); }
+void PieceTableByteArrayModel::setModified(bool modified)       { d->setModified(modified); }
 
-void PieceTableByteArrayModel::setData( const QByteArray& data )
+void PieceTableByteArrayModel::setData(const QByteArray& data)
 {
-    d->setData( data );
+    d->setData(data);
 }
 
-void PieceTableByteArrayModel::setByte( Address offset, Byte byte )
+void PieceTableByteArrayModel::setByte(Address offset, Byte byte)
 {
-    d->setByte( offset, byte );
+    d->setByte(offset, byte);
 }
 
-Size PieceTableByteArrayModel::insert( Address offset, const Byte* insertData, int insertLength )
+Size PieceTableByteArrayModel::insert(Address offset, const Byte* insertData, int insertLength)
 {
-    return d->insert( offset, insertData, insertLength );
+    return d->insert(offset, insertData, insertLength);
 }
 
-Size PieceTableByteArrayModel::remove( const AddressRange& removeRange )
+Size PieceTableByteArrayModel::remove(const AddressRange& removeRange)
 {
-    return d->remove( removeRange );
+    return d->remove(removeRange);
 }
 
-Size PieceTableByteArrayModel::replace( const AddressRange& removeRange, const Byte* insertData, int insertLength )
+Size PieceTableByteArrayModel::replace(const AddressRange& removeRange, const Byte* insertData, int insertLength)
 {
-    return d->replace( removeRange, insertData, insertLength );
+    return d->replace(removeRange, insertData, insertLength);
 }
 
-bool PieceTableByteArrayModel::swap( Address firstStart, const AddressRange& secondRange )
+bool PieceTableByteArrayModel::swap(Address firstStart, const AddressRange& secondRange)
 {
-    return d->swap( firstStart, secondRange );
+    return d->swap(firstStart, secondRange);
 }
 
-Size PieceTableByteArrayModel::fill( Byte fillByte, Address offset, Size fillLength )
+Size PieceTableByteArrayModel::fill(Byte fillByte, Address offset, Size fillLength)
 {
-    return d->fill( fillByte, offset, fillLength );
+    return d->fill(fillByte, offset, fillLength);
 }
 
 // int PieceTableByteArrayModel::indexOf( const char *searchString, int length, int from ) const
@@ -95,19 +92,19 @@ Size PieceTableByteArrayModel::fill( Byte fillByte, Address offset, Size fillLen
 
 int PieceTableByteArrayModel::versionIndex() const { return d->versionIndex(); }
 int PieceTableByteArrayModel::versionCount() const { return d->versionCount(); }
-QString PieceTableByteArrayModel::versionDescription( int versionIndex ) const { return d->versionDescription(versionIndex); }
+QString PieceTableByteArrayModel::versionDescription(int versionIndex) const { return d->versionDescription(versionIndex); }
 
-void PieceTableByteArrayModel::revertToVersionByIndex( int versionIndex )
-{ d->revertToVersionByIndex( versionIndex ); }
+void PieceTableByteArrayModel::revertToVersionByIndex(int versionIndex)
+{ d->revertToVersionByIndex(versionIndex); }
 
-void PieceTableByteArrayModel::addBookmarks( const QList<Okteta::Bookmark> &bookmarks )
+void PieceTableByteArrayModel::addBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
-    d->addBookmarks( bookmarks );
+    d->addBookmarks(bookmarks);
 }
 
-void PieceTableByteArrayModel::removeBookmarks( const QList<Okteta::Bookmark> &bookmarks )
+void PieceTableByteArrayModel::removeBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
-    d->removeBookmarks( bookmarks );
+    d->removeBookmarks(bookmarks);
 }
 
 void PieceTableByteArrayModel::removeAllBookmarks()
@@ -115,9 +112,9 @@ void PieceTableByteArrayModel::removeAllBookmarks()
     d->removeAllBookmarks();
 }
 
-void PieceTableByteArrayModel::setBookmark( unsigned int index, const Okteta::Bookmark& bookmark )
+void PieceTableByteArrayModel::setBookmark(unsigned int index, const Okteta::Bookmark& bookmark)
 {
-    d->setBookmark( index, bookmark );
+    d->setBookmark(index, bookmark);
 }
 
 Okteta::BookmarksConstIterator PieceTableByteArrayModel::createBookmarksConstIterator() const
@@ -125,19 +122,19 @@ Okteta::BookmarksConstIterator PieceTableByteArrayModel::createBookmarksConstIte
     return d->createBookmarksConstIterator();
 }
 
-const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkAt( unsigned int index ) const
+const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkAt(unsigned int index) const
 {
-    return d->bookmarkAt( index );
+    return d->bookmarkAt(index);
 }
 
-const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkFor( int offset ) const
+const Okteta::Bookmark& PieceTableByteArrayModel::bookmarkFor(int offset) const
 {
-    return d->bookmarkFor( offset );
+    return d->bookmarkFor(offset);
 }
 
-bool PieceTableByteArrayModel::containsBookmarkFor( int offset ) const
+bool PieceTableByteArrayModel::containsBookmarkFor(int offset) const
 {
-    return d->containsBookmarkFor( offset );
+    return d->containsBookmarkFor(offset);
 }
 
 unsigned int PieceTableByteArrayModel::bookmarksCount() const
@@ -145,9 +142,9 @@ unsigned int PieceTableByteArrayModel::bookmarksCount() const
     return d->bookmarksCount();
 }
 
-void PieceTableByteArrayModel::openGroupedChange( const QString &description )
+void PieceTableByteArrayModel::openGroupedChange(const QString& description)
 {
-    d->openGroupedChange( description );
+    d->openGroupedChange(description);
 }
 
 void PieceTableByteArrayModel::cancelGroupedChange()
@@ -155,14 +152,14 @@ void PieceTableByteArrayModel::cancelGroupedChange()
     d->cancelGroupedChange();
 }
 
-void PieceTableByteArrayModel::closeGroupedChange( const QString &description )
+void PieceTableByteArrayModel::closeGroupedChange(const QString& description)
 {
-    d->closeGroupedChange( description );
+    d->closeGroupedChange(description);
 }
 
-QList<ByteArrayChange> PieceTableByteArrayModel::changes( int firstVersionIndex, int lastVersionIndex ) const
+QList<ByteArrayChange> PieceTableByteArrayModel::changes(int firstVersionIndex, int lastVersionIndex) const
 {
-    return d->changes( firstVersionIndex, lastVersionIndex );
+    return d->changes(firstVersionIndex, lastVersionIndex);
 }
 
 QByteArray PieceTableByteArrayModel::initialData() const
@@ -170,12 +167,11 @@ QByteArray PieceTableByteArrayModel::initialData() const
     return d->initialData();
 }
 
-void PieceTableByteArrayModel::doChanges( const QList<Okteta::ByteArrayChange>& changes,
-                                           int oldVersionIndex, int newVersionIndex )
+void PieceTableByteArrayModel::doChanges(const QList<Okteta::ByteArrayChange>& changes,
+                                         int oldVersionIndex, int newVersionIndex)
 {
-    d->doChanges( changes, oldVersionIndex, newVersionIndex );
+    d->doChanges(changes, oldVersionIndex, newVersionIndex);
 }
-
 
 PieceTableByteArrayModel::~PieceTableByteArrayModel()
 {

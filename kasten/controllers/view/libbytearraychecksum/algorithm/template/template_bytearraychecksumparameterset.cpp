@@ -12,17 +12,15 @@
 #include "template_bytearraychecksumparameterset.h"
 //// ADAPT(end)
 
-
 //// ADAPT(start)
 //// define the default values for all parameters
 static const int DefaultBitNumber = 1;
 //// ADAPT(end)
 
-
 Template_ByteArrayChecksumParameterSet::Template_ByteArrayChecksumParameterSet()
 //// ADAPT(start)
 //// set default values to all parameters
-  : mBitNumber( DefaultBitNumber )
+    : mBitNumber(DefaultBitNumber)
 //// ADAPT(end)
 {}
 
@@ -32,16 +30,14 @@ Template_ByteArrayChecksumParameterSet::Template_ByteArrayChecksumParameterSet()
 const char* Template_ByteArrayChecksumParameterSet::id() const { return "Template_ParameterSetId"; }
 //// ADAPT(end)
 
-
 //// ADAPT(start)
 //// implement the getters for all parameters
 int Template_ByteArrayChecksumParameterSet::bitNumber() const { return mBitNumber; }
 //// ADAPT(end)
 
-
 //// ADAPT(start)
 //// implement the setters for all parameters
-void Template_ByteArrayChecksumParameterSet::setBitNumber( int bitNumber ) { mBitNumber = bitNumber; }
+void Template_ByteArrayChecksumParameterSet::setBitNumber(int bitNumber) { mBitNumber = bitNumber; }
 //// ADAPT(end)
 
 Template_ByteArrayChecksumParameterSet::~Template_ByteArrayChecksumParameterSet() {}

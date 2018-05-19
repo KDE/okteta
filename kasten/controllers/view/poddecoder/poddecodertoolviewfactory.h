@@ -28,18 +28,16 @@
 // Kasten gui
 #include <kasten/abstracttoolviewfactory.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class OKTETAKASTENCONTROLLERS_EXPORT PodDecoderToolViewFactory : public AbstractToolViewFactory
 {
-  public:
+public:
     PodDecoderToolViewFactory();
     ~PodDecoderToolViewFactory() override;
 
-  public: // AbstractToolViewFactory API
-    AbstractToolView* create( AbstractTool* tool ) override;
+public: // AbstractToolViewFactory API
+    AbstractToolView* create(AbstractTool* tool) override;
 
     QString iconName() const override;
     QString title() const override;

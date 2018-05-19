@@ -30,30 +30,27 @@
 
 class KToggleAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT OverwriteModeController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit OverwriteModeController( KXMLGUIClient* guiClient );
+public:
+    explicit OverwriteModeController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
-    void setOverWrite( bool isOverWrite );
+private Q_SLOTS: // action slots
+    void setOverWrite(bool isOverWrite);
 
-  private:
+private:
     ByteArrayView* mByteArrayView;
 
-    KToggleAction *mSetOverWriteAction;
+    KToggleAction* mSetOverWriteAction;
 };
 
 }

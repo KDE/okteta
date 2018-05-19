@@ -28,8 +28,7 @@
 // KF5
 #include <KLocalizedString>
 
-namespace Kasten
-{
+namespace Kasten {
 
 StructuresToolViewFactory::StructuresToolViewFactory()
 {

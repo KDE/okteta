@@ -35,32 +35,29 @@ class AbstractByteArrayModel;
 class CharCodec;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class CharsetConversionJob : public QObject // not yet: KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    CharsetConversionJob( Okteta::Byte* result,
-                          Okteta::AbstractByteArrayModel* model,
-                          const Okteta::AddressRange& range,
-                          const Okteta::CharCodec* sourceCharCodec,
-                          const Okteta::CharCodec* targetCharCodec,
-                          bool isSubstitutingMissingChars,
-                          Okteta::Byte substituteByte
-                        );
+public:
+    CharsetConversionJob(Okteta::Byte* result,
+                         Okteta::AbstractByteArrayModel* model,
+                         const Okteta::AddressRange& range,
+                         const Okteta::CharCodec* sourceCharCodec,
+                         const Okteta::CharCodec* targetCharCodec,
+                         bool isSubstitutingMissingChars,
+                         Okteta::Byte substituteByte);
 
-  public:
+public:
     bool exec();
 
-  public:
+public:
     int convertedBytesCount() const;
     const QMap<Okteta::Byte, int>& failedPerByteCount() const;
 
-  protected:
+protected:
     Okteta::Byte* const mResult;
     Okteta::AbstractByteArrayModel* const mByteArrayModel;
     const Okteta::AddressRange mRange;
@@ -75,21 +72,20 @@ class CharsetConversionJob : public QObject // not yet: KJob
     QMap<Okteta::Byte, int> mFailedPerByteCount;
 };
 
-
-inline CharsetConversionJob::CharsetConversionJob( Okteta::Byte* result,
-                                                   Okteta::AbstractByteArrayModel* model,
-                                                   const Okteta::AddressRange& range,
-                                                   const Okteta::CharCodec* sourceCharCodec,
-                                                   const Okteta::CharCodec* targetCharCodec,
-                                                   bool isSubstitutingMissingChars,
-                                                   Okteta::Byte substituteByte )
-  : mResult( result ),
-    mByteArrayModel( model ),
-    mRange( range ),
-    mSourceCharCodec( sourceCharCodec ),
-    mTargetCharCodec( targetCharCodec ),
-    mSubstitutingMissingChars( isSubstitutingMissingChars ),
-    mSubstituteByte( substituteByte )
+inline CharsetConversionJob::CharsetConversionJob(Okteta::Byte* result,
+                                                  Okteta::AbstractByteArrayModel* model,
+                                                  const Okteta::AddressRange& range,
+                                                  const Okteta::CharCodec* sourceCharCodec,
+                                                  const Okteta::CharCodec* targetCharCodec,
+                                                  bool isSubstitutingMissingChars,
+                                                  Okteta::Byte substituteByte)
+    : mResult(result)
+    , mByteArrayModel(model)
+    , mRange(range)
+    , mSourceCharCodec(sourceCharCodec)
+    , mTargetCharCodec(targetCharCodec)
+    , mSubstitutingMissingChars(isSubstitutingMissingChars)
+    , mSubstituteByte(substituteByte)
 {}
 
 inline int CharsetConversionJob::convertedBytesCount() const { return mConvertedBytesCount; }

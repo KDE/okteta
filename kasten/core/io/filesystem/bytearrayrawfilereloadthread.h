@@ -29,32 +29,30 @@
 
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayRawFileReloadThread : public QThread
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ByteArrayRawFileReloadThread( QObject* parent, QFile* file );
+public:
+    ByteArrayRawFileReloadThread(QObject* parent, QFile* file);
 
     ~ByteArrayRawFileReloadThread() override;
 
-  public: // QThread API
+public: // QThread API
     void run() override;
 
-  public:
+public:
     bool success() const;
     const QString& errorString() const;
 
     const QByteArray& data() const;
 
-  Q_SIGNALS:
-    void documentReloaded( bool success );
+Q_SIGNALS:
+    void documentReloaded(bool success);
 
-  protected:
+protected:
     QFile* mFile;
 
     bool mSuccess;
@@ -62,7 +60,6 @@ class ByteArrayRawFileReloadThread : public QThread
 
     QByteArray mData;
 };
-
 
 inline bool ByteArrayRawFileReloadThread::success()                const { return mSuccess; }
 inline const QString& ByteArrayRawFileReloadThread::errorString()  const { return mErrorString; }

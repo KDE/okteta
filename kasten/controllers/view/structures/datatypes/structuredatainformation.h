@@ -28,20 +28,23 @@
 class StructureDataInformation : public DataInformationWithChildren
 {
     DATAINFORMATION_CLONE(StructureDataInformation, DataInformationWithChildren) {}
+
 public:
-    explicit StructureDataInformation(const QString& name, const QVector<DataInformation*>& children =
-            QVector<DataInformation*>(), DataInformation* parent = nullptr);
+    explicit StructureDataInformation(const QString& name,
+                                      const QVector<DataInformation*>& children = QVector<DataInformation*>(),
+                                      DataInformation* parent = nullptr);
     ~StructureDataInformation() override;
 
-    qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+    qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining, quint8* bitOffset) override;
     bool isStruct() const override;
 
     BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const override;
 
-    static bool readChildren(const QVector<DataInformation*>& children, Okteta::AbstractByteArrayModel *input,
-            Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,
-            TopLevelDataInformation* top);
+    static bool readChildren(const QVector<DataInformation*>& children, Okteta::AbstractByteArrayModel* input,
+                             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,
+                             TopLevelDataInformation* top);
+
 private:
     QString typeNameImpl() const override;
 };

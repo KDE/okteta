@@ -29,40 +29,37 @@
 // Qt
 #include <QExplicitlySharedDataPointer>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class OKTETACORE_EXPORT BookmarksConstIterator
 {
-  public:
-    explicit BookmarksConstIterator( BookmarksConstIteratorAdapter* adapter = nullptr );
+public:
+    explicit BookmarksConstIterator(BookmarksConstIteratorAdapter* adapter = nullptr);
 
-  public:
+public:
     bool hasList() const;
 
-  public:
+public:
     bool hasNext() const;
     bool hasPrevious() const;
     const Okteta::Bookmark& peekNext() const;
     const Okteta::Bookmark& peekPrevious() const;
 
-  public:
-    bool findNext( const Okteta::Bookmark& bookmark );
-    bool findPrevious( const Okteta::Bookmark& bookmark );
-    bool findNextFrom( unsigned int offset );
-    bool findPreviousFrom( unsigned int offset );
+public:
+    bool findNext(const Okteta::Bookmark& bookmark);
+    bool findPrevious(const Okteta::Bookmark& bookmark);
+    bool findNextFrom(unsigned int offset);
+    bool findPreviousFrom(unsigned int offset);
     const Okteta::Bookmark& next();
     const Okteta::Bookmark& previous();
     void toBack();
     void toFront();
 
-  protected:
+protected:
     QExplicitlySharedDataPointer<BookmarksConstIteratorAdapter> mAdapter;
 };
 
-
-inline BookmarksConstIterator::BookmarksConstIterator( BookmarksConstIteratorAdapter* adapter ) : mAdapter( adapter ) {}
+inline BookmarksConstIterator::BookmarksConstIterator(BookmarksConstIteratorAdapter* adapter) : mAdapter(adapter) {}
 
 inline bool BookmarksConstIterator::hasList() const { return mAdapter; }
 
@@ -71,10 +68,10 @@ inline bool BookmarksConstIterator::hasPrevious() const { return mAdapter->hasPr
 inline const Okteta::Bookmark& BookmarksConstIterator::peekNext()     const { return mAdapter->peekNext(); }
 inline const Okteta::Bookmark& BookmarksConstIterator::peekPrevious() const { return mAdapter->peekPrevious(); }
 
-inline bool BookmarksConstIterator::findNext( const Okteta::Bookmark& bookmark )     { return mAdapter->findNext( bookmark ); }
-inline bool BookmarksConstIterator::findPrevious( const Okteta::Bookmark& bookmark ) { return mAdapter->findPrevious( bookmark ); }
-inline bool BookmarksConstIterator::findNextFrom( unsigned int offset )     { return mAdapter->findNextFrom( offset ); }
-inline bool BookmarksConstIterator::findPreviousFrom( unsigned int offset ) { return mAdapter->findPreviousFrom( offset ); }
+inline bool BookmarksConstIterator::findNext(const Okteta::Bookmark& bookmark)     { return mAdapter->findNext(bookmark); }
+inline bool BookmarksConstIterator::findPrevious(const Okteta::Bookmark& bookmark) { return mAdapter->findPrevious(bookmark); }
+inline bool BookmarksConstIterator::findNextFrom(unsigned int offset)     { return mAdapter->findNextFrom(offset); }
+inline bool BookmarksConstIterator::findPreviousFrom(unsigned int offset) { return mAdapter->findPreviousFrom(offset); }
 inline const Okteta::Bookmark& BookmarksConstIterator::next()     { return mAdapter->next(); }
 inline const Okteta::Bookmark& BookmarksConstIterator::previous() { return mAdapter->previous(); }
 inline void BookmarksConstIterator::toBack()  { mAdapter->toBack(); }

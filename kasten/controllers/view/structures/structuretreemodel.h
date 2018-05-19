@@ -29,19 +29,18 @@
 class DataInformationBase;
 class DataInformation;
 
-namespace Kasten
-{
+namespace Kasten {
 class StructuresTool;
 
-class StructureTreeModel: public QAbstractItemModel
+class StructureTreeModel : public QAbstractItemModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     explicit StructureTreeModel(StructuresTool* tool, QObject* parent = nullptr);
     ~StructureTreeModel() override;
 
-  public: // QAbstractItemModel API
+public: // QAbstractItemModel API
     QVariant data(const QModelIndex& index, int role) const override;
     Qt::ItemFlags flags(const QModelIndex& index) const override;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -52,10 +51,10 @@ class StructureTreeModel: public QAbstractItemModel
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
     bool hasChildren(const QModelIndex& parent = QModelIndex()) const override;
 
-  private:
+private:
     QModelIndex findItemInModel(DataInformationBase* data) const;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onToolDataChange(int row, void* data);
     void onToolDataClear();
     void onChildrenAboutToBeRemoved(DataInformation* sender, uint startIndex, uint endIndex);
@@ -63,9 +62,9 @@ class StructureTreeModel: public QAbstractItemModel
     void onChildrenRemoved(const DataInformation* sender, uint startIndex, uint endIndex);
     void onChildrenInserted(const DataInformation* sender, uint startIndex, uint endIndex);
 
-  private:
+private:
     StructuresTool* mTool;
-    //just for checking in debug mode:
+    // just for checking in debug mode:
     DataInformation* mLastSender;
     uint mLastStartIndex;
     uint mLastEndIndex;

@@ -26,29 +26,27 @@
 // lib
 #include <okteta/abstractcolumnrenderer.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 /** column that does nothing but draw a vertical line in the middle of the column
-  *
-  *@author Friedrich W. H. Kossebau
-  */
+ *
+ * @author Friedrich W. H. Kossebau
+ */
 
 class OKTETAGUI_EXPORT BorderColumnRenderer : public AbstractColumnRenderer
 {
-  public:
-    BorderColumnRenderer( AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty = true );
+public:
+    BorderColumnRenderer(AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty = true);
     ~BorderColumnRenderer() override;
 
-  public: // AbstractColumnRenderer-API
-    void renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys ) override;
-    void renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys ) override;
+public: // AbstractColumnRenderer-API
+    void renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
+    void renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys) override;
 
-  protected:
-    void renderBorderLine( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys );
+protected:
+    void renderBorderLine(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys);
 
-  protected:
+protected:
     /** true if we are between two columns and should show a line */
     bool mLineDrawn;
     /** true if the line is also drawn in empty space */

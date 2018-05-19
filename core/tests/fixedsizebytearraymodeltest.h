@@ -26,17 +26,15 @@
 // Qt
 #include <QObject>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class FixedSizeByteArrayModelTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testCompare();
-    //void testCopy();
+    // void testCopy();
 
 };
 

@@ -23,36 +23,33 @@
 #include "togglebutton.h"
 #include "togglebutton_p.h"
 
+namespace Kasten {
 
-namespace Kasten
+ToggleButton::ToggleButton(const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent)
+    : QToolButton(parent)
+    , d(new ToggleButtonPrivate(this))
 {
-
-ToggleButton::ToggleButton( const QIcon& icon, const QString& text, const QString& toolTip, QWidget* parent )
-  : QToolButton( parent ),
-    d( new ToggleButtonPrivate(this) )
-{
-    setIcon( icon );
-    setText( text );
-    setToolTip( toolTip );
+    setIcon(icon);
+    setText(text);
+    setToolTip(toolTip);
 }
 
-
-ToggleButton::ToggleButton( const QString& text, const QString& toolTip, QWidget* parent )
-  : QToolButton( parent ),
-    d( new ToggleButtonPrivate(this) )
+ToggleButton::ToggleButton(const QString& text, const QString& toolTip, QWidget* parent)
+    : QToolButton(parent)
+    , d(new ToggleButtonPrivate(this))
 {
-    setText( text );
-    setToolTip( toolTip );
+    setText(text);
+    setToolTip(toolTip);
 }
 
-void ToggleButton::setCheckedState( const QIcon& icon, const QString& text, const QString& toolTip )
+void ToggleButton::setCheckedState(const QIcon& icon, const QString& text, const QString& toolTip)
 {
-    d->setOtherState( icon, text, toolTip );
+    d->setOtherState(icon, text, toolTip);
 }
 
-void ToggleButton::setCheckedState( const QString& text, const QString& toolTip )
+void ToggleButton::setCheckedState(const QString& text, const QString& toolTip)
 {
-    d->setOtherState( QIcon(), text, toolTip );
+    d->setOtherState(QIcon(), text, toolTip);
 }
 
 ToggleButton::~ToggleButton()

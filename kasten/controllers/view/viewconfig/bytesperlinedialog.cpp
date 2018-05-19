@@ -30,21 +30,19 @@
 #include <QSpinBox>
 #include <QDialogButtonBox>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-BytesPerLineDialog::BytesPerLineDialog( QWidget* parent )
-  : QDialog( parent )
+BytesPerLineDialog::BytesPerLineDialog(QWidget* parent)
+    : QDialog(parent)
 {
     QFormLayout* pageLayout = new QFormLayout();
 
-    mBytesPerLineEdit = new QSpinBox( this );
-    mBytesPerLineEdit->setRange( 1, INT_MAX );
+    mBytesPerLineEdit = new QSpinBox(this);
+    mBytesPerLineEdit->setRange(1, INT_MAX);
     const QString bytesPerLineLabel =
-        i18nc( "@label:spinbox number of bytes which are shown per line",
-                "Bytes per Line:" );
-    pageLayout->addRow( bytesPerLineLabel, mBytesPerLineEdit );
+        i18nc("@label:spinbox number of bytes which are shown per line",
+              "Bytes per Line:");
+    pageLayout->addRow(bytesPerLineLabel, mBytesPerLineEdit);
 
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
@@ -58,15 +56,15 @@ BytesPerLineDialog::BytesPerLineDialog( QWidget* parent )
     setLayout(layout);
 
     const QString caption =
-        i18nc("@title:window","Bytes per Line");
-    setWindowTitle( caption );
+        i18nc("@title:window", "Bytes per Line");
+    setWindowTitle(caption);
 }
 
 int BytesPerLineDialog::bytesPerLine()      const { return mBytesPerLineEdit->value(); }
 
-void BytesPerLineDialog::setBytesPerLine( int bytesPerLine )
+void BytesPerLineDialog::setBytesPerLine(int bytesPerLine)
 {
-    mBytesPerLineEdit->setValue( bytesPerLine );
+    mBytesPerLineEdit->setValue(bytesPerLine);
 }
 
 BytesPerLineDialog::~BytesPerLineDialog() {}

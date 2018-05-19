@@ -30,21 +30,20 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayRawFileWriteJob::ByteArrayRawFileWriteJob( ByteArrayRawFileSynchronizer *synchronizer )
- : AbstractFileSystemSyncToRemoteJob( synchronizer )
+ByteArrayRawFileWriteJob::ByteArrayRawFileWriteJob(ByteArrayRawFileSynchronizer* synchronizer)
+    : AbstractFileSystemSyncToRemoteJob(synchronizer)
 {}
 
 void ByteArrayRawFileWriteJob::startWriteToFile()
 {
-    ByteArrayDocument *document = qobject_cast<ByteArrayDocument*>( synchronizer()->document() );
-    ByteArrayRawFileWriteThread* writeThread = new ByteArrayRawFileWriteThread( this, document, file() );
+    ByteArrayDocument* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
+    ByteArrayRawFileWriteThread* writeThread = new ByteArrayRawFileWriteThread(this, document, file());
     writeThread->start();
-    while( !writeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!writeThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     const bool success = writeThread->success();
     delete writeThread;
@@ -52,7 +51,7 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
 //     if( success )
 //         ExternalBookmarkStorage().writeBookmarks( document, synchronizer()->url() );
 
-    completeWrite( success );
+    completeWrite(success);
 }
 
 ByteArrayRawFileWriteJob::~ByteArrayRawFileWriteJob() {}

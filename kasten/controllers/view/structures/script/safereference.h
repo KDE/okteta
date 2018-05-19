@@ -30,16 +30,19 @@
 class DataInformation;
 class SafeReference;
 
-class SafeReferenceHolder {
+class SafeReferenceHolder
+{
     Q_DISABLE_COPY(SafeReferenceHolder)
     SafeReferenceHolder();
     ~SafeReferenceHolder();
+
 public:
     /** sets all refereces to this object to null */
     void invalidateAll(DataInformation* data);
     void safeReferenceDestroyed(SafeReference* ref);
     void registerSafeReference(SafeReference* ref, DataInformation* data);
     static SafeReferenceHolder instance;
+
 private:
     using Container = QMultiHash<DataInformation*, SafeReference*>;
     int safeRefDestroyCnt;
@@ -58,9 +61,11 @@ public:
     SafeReference(const SafeReference& other);
     ~SafeReference();
     inline DataInformation* data() const;
+
 private:
     friend class SafeReferenceHolder;
     inline void invalidate();
+
 private:
     DataInformation* mData;
 };
@@ -99,25 +104,25 @@ inline void SafeReference::invalidate()
 
 inline void SafeReferenceHolder::safeReferenceDestroyed(SafeReference* ref)
 {
-    if (!ref->data())
-        return; //has been invalidated -> was already removed
+    if (!ref->data()) {
+        return; // has been invalidated -> was already removed
+    }
     int removed = mRefs.remove(ref->data(), ref);
-    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "safe ref destroyed " << ref;
-    if (removed <= 0)
+    // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "safe ref destroyed " << ref;
+    if (removed <= 0) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "safe refenrece could not be removed:" << ref;
-    else
+    } else {
         safeRefDestroyCnt += removed;
+    }
 }
 
 inline void SafeReferenceHolder::registerSafeReference(SafeReference* ref, DataInformation* data)
 {
-    if (Q_LIKELY(data))
-    {
+    if (Q_LIKELY(data)) {
         mRefs.insert(data, ref);
-        //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "registered safe ref" << ref << data;
+        // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "registered safe ref" << ref << data;
         safeRefRegisterCnt++;
-    }
-    else {
+    } else {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalid ref copied";
     }
 }

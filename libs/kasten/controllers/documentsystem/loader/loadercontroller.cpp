@@ -36,63 +36,59 @@
 #include <QFileDialog>
 #include <QMimeDatabase>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const char CreatorConfigGroupId[] = "Recent Files";
 
-
-LoaderController::LoaderController( AbstractDocumentStrategy* documentStrategy,
-                                    KXMLGUIClient* guiClient )
-  : AbstractXmlGuiController()
-  , mDocumentStrategy( documentStrategy )
+LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
+                                   KXMLGUIClient* guiClient)
+    : AbstractXmlGuiController()
+    , mDocumentStrategy(documentStrategy)
 {
     KActionCollection* const actionCollection = guiClient->actionCollection();
 
-    KStandardAction::open( this, SLOT(load()), actionCollection );
+    KStandardAction::open(this, SLOT(load()), actionCollection);
     mOpenRecentAction =
-        KStandardAction::openRecent( this, SLOT(loadRecent(QUrl)), actionCollection );
+        KStandardAction::openRecent(this, SLOT(loadRecent(QUrl)), actionCollection);
 
-    KConfigGroup configGroup( KSharedConfig::openConfig(), CreatorConfigGroupId );
-    mOpenRecentAction->loadEntries( configGroup );
+    KConfigGroup configGroup(KSharedConfig::openConfig(), CreatorConfigGroupId);
+    mOpenRecentAction->loadEntries(configGroup);
 
-    connect( mDocumentStrategy, &AbstractDocumentStrategy::urlUsed, this, &LoaderController::onUrlUsed );
+    connect(mDocumentStrategy, &AbstractDocumentStrategy::urlUsed, this, &LoaderController::onUrlUsed);
 }
 
-
-void LoaderController::setTargetModel( AbstractModel* model )
+void LoaderController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED( model )
+    Q_UNUSED(model)
 }
 
 void LoaderController::load()
 {
     QFileDialog dialog;
-    dialog.setMimeTypeFilters( mDocumentStrategy->supportedRemoteTypes() );
-    if( dialog.exec() )
-    {
+    dialog.setMimeTypeFilters(mDocumentStrategy->supportedRemoteTypes());
+    if (dialog.exec()) {
         const QList<QUrl> urls = dialog.selectedUrls();
 
-        for( const QUrl& url : urls )
-            mDocumentStrategy->load( url );
+        for (const QUrl& url : urls) {
+            mDocumentStrategy->load(url);
+        }
     }
 }
 
-void LoaderController::loadRecent( const QUrl& url )
+void LoaderController::loadRecent(const QUrl& url)
 {
-    mDocumentStrategy->load( url );
+    mDocumentStrategy->load(url);
 }
 
-void LoaderController::onUrlUsed( const QUrl& url )
+void LoaderController::onUrlUsed(const QUrl& url)
 {
-    mOpenRecentAction->addUrl( url );
+    mOpenRecentAction->addUrl(url);
 }
 
 LoaderController::~LoaderController()
 {
-    KConfigGroup configGroup( KSharedConfig::openConfig(), CreatorConfigGroupId );
-    mOpenRecentAction->saveEntries( configGroup );
+    KConfigGroup configGroup(KSharedConfig::openConfig(), CreatorConfigGroupId);
+    mOpenRecentAction->saveEntries(configGroup);
 }
 
 }

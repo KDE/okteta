@@ -22,13 +22,13 @@
 #ifndef DATAINFORMATION_H_
 #define DATAINFORMATION_H_
 
-//Qt core
+// Qt core
 #include <QString>
 #include <QPair>
 #include <QScopedPointer>
 #include <QMetaType>
 
-//Okteta
+// Okteta
 #include <size.h>
 #include <okteta/address.h>
 
@@ -39,7 +39,8 @@
 
 /** Implement the clone() method and add the copy constructor declaration
  * After this macro visibility will be set to protected */
-#define DATAINFORMATION_CLONE_DECL(type, supertype) public: \
+#define DATAINFORMATION_CLONE_DECL(type, supertype) \
+    public: \
         inline type* clone() const override { return new type(*this); } \
     protected: \
         type(const type& d)
@@ -48,8 +49,7 @@
  *  After this macro visibility will be set to protected */
 #define DATAINFORMATION_CLONE(type, supertype) DATAINFORMATION_CLONE_DECL(type, supertype) : supertype(d)
 
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayModel;
 }
 
@@ -66,11 +66,12 @@ class ScriptHandlerInfo;
 /** Interface that must be implemented by all datatypes */
 class DataInformation : public DataInformationBase
 {
-    friend class ScriptHandler; //so mHasBeenUpdated/hasBeenValidated can be set
-    friend class PrimitiveDataInformationWrapper; //to set mHasBeenUpdated
-    friend class PointerDataInformation; //to set mWasAbleToRead on pointer target
-    friend class DefaultScriptClass; //to set mValidationSucessful and validationError
-    template<PrimitiveDataType type> friend class PrimitiveArrayData; //to set mWasAbleToRead (when returning a script value)
+    friend class ScriptHandler; // so mHasBeenUpdated/hasBeenValidated can be set
+    friend class PrimitiveDataInformationWrapper; // to set mHasBeenUpdated
+    friend class PointerDataInformation; // to set mWasAbleToRead on pointer target
+    friend class DefaultScriptClass; // to set mValidationSucessful and validationError
+    template <PrimitiveDataType type> friend class PrimitiveArrayData; // to set mWasAbleToRead (when returning a script value)
+
 protected:
     explicit DataInformation(const DataInformation&);
 
@@ -81,14 +82,20 @@ public:
 
     enum Columns
     {
-        ColumnName = 0, ColumnType, ColumnValue, COLUMN_COUNT
+        ColumnName = 0,
+        ColumnType,
+        ColumnValue,
+        COLUMN_COUNT
     };
     enum class DataInformationEndianess
     {
-        EndianessFromSettings = 0, EndianessInherit, EndianessLittle, EndianessBig
+        EndianessFromSettings = 0,
+        EndianessInherit,
+        EndianessLittle,
+        EndianessBig
     };
 
-    //methods for children:
+    // methods for children:
     /** true for unions and structs and arrays*/
     virtual bool canHaveChildren() const = 0;
     virtual unsigned int childCount() const = 0;
@@ -110,7 +117,7 @@ public:
      */
     virtual BitCount64 childPosition(const DataInformation* child, Okteta::Address start) const = 0;
 
-    //for the model:
+    // for the model:
     virtual Qt::ItemFlags flags(int column, bool fileLoaded = true) const;
     int row() const;
     /** get the necessary data (for the model) */
@@ -125,7 +132,7 @@ public:
     /** needs to be virtual for bitfields */
     virtual QString sizeString() const;
 
-    //delegate functions:
+    // delegate functions:
     /** create a QWidget for the QItemDelegate */
     virtual QWidget* createEditWidget(QWidget* parent) const = 0;
     /** get the needed data from the widget */
@@ -133,7 +140,7 @@ public:
     /** initialize the delegate widget with the correct data */
     virtual void setWidgetData(QWidget* w) const = 0;
 
-    //reading and writing
+    // reading and writing
     /** the size in bits of this element */
     virtual BitCount32 size() const = 0;
 
@@ -147,7 +154,7 @@ public:
      *
      * @return the number of bits read or @c -1 if none were read
      */
-    virtual qint64 readData(Okteta::AbstractByteArrayModel *input, Okteta::Address address,
+    virtual qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                             BitCount64 bitsRemaining, quint8* bitOffset) = 0;
     /** sets mWasAbleToRead to false for all children and this object.
      *  Gets called once before the reading of the whole structure starts. */
@@ -183,7 +190,7 @@ public:
     void setByteOrder(DataInformationEndianess newEndianess);
     QString fullObjectPath() const;
 
-    virtual void resetValidationState(); //virtual for DataInformationWithChildren
+    virtual void resetValidationState(); // virtual for DataInformationWithChildren
     bool wasAbleToRead() const;
     /**
      * This method is virtual since DummyDataInformation has to override it.
@@ -221,28 +228,32 @@ public:
     void setCustomTypeName(const QString& customTypeName);
     QScriptValue toStringFunction() const;
     void setToStringFunction(const QScriptValue& value);
+
 protected:
     static QVariant eofReachedData(int role);
     void setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value, const char* name);
+
 private:
     virtual QString valueStringImpl() const;
     virtual QString typeNameImpl() const = 0;
     /** So that this object can be wrapped by the correct javascript object*/
     virtual QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const = 0;
+
 private:
-    void setValidationError(const QString& errorMessage); //only called by ScriptHandler
-    QSysInfo::Endian byteOrderFromSettings() const; //so there is no need to include structureviewpreferences.h here
+    void setValidationError(const QString& errorMessage); // only called by ScriptHandler
+    QSysInfo::Endian byteOrderFromSettings() const; // so there is no need to include structureviewpreferences.h here
     QString customToString(const QScriptValue& func) const;
+
 protected:
     AdditionalData mAdditionalData;
     DataInformationBase* mParent;
     QString mName;
-    bool mValidationSuccessful :1;
-    bool mHasBeenValidated :1;
-    bool mHasBeenUpdated :1;
-    bool mWasAbleToRead :1;
+    bool mValidationSuccessful : 1;
+    bool mHasBeenValidated : 1;
+    bool mHasBeenUpdated : 1;
+    bool mWasAbleToRead : 1;
     DataInformationEndianess mByteOrder;
-    mutable ScriptLogger::LogLevel mLoggedData :2; //mutable is ugly but i guess it is the best solution
+    mutable ScriptLogger::LogLevel mLoggedData : 2; // mutable is ugly but i guess it is the best solution
 };
 
 Q_DECLARE_METATYPE(DataInformation*)
@@ -396,9 +407,10 @@ inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
         return QSysInfo::LittleEndian;
     case DataInformationEndianess::EndianessFromSettings:
         return byteOrderFromSettings();
-    default: //inherit
-        if (mParent && !mParent->isTopLevel())
+    default: // inherit
+        if (mParent && !mParent->isTopLevel()) {
             return mParent->asDataInformation()->effectiveByteOrder();
+        }
         return byteOrderFromSettings();
     }
 }
@@ -406,16 +418,18 @@ inline QSysInfo::Endian DataInformation::effectiveByteOrder() const
 inline QString DataInformation::typeName() const
 {
     QVariant v = mAdditionalData.get(AdditionalData::AdditionalDataType::CustomTypeName);
-    if (Q_UNLIKELY(v.isValid())) //custom type names will be used rarely
+    if (Q_UNLIKELY(v.isValid())) { // custom type names will be used rarely
         return v.toString();
+    }
     return typeNameImpl();
 }
 
 inline QString DataInformation::valueString() const
 {
     QVariant v = mAdditionalData.get(AdditionalData::AdditionalDataType::ToStringFunction);
-    if (Q_UNLIKELY(v.isValid())) //custom to string functions will be used rarely
+    if (Q_UNLIKELY(v.isValid())) { // custom to string functions will be used rarely
         return customToString(v.value<QScriptValue>());
+    }
     return valueStringImpl();
 }
 

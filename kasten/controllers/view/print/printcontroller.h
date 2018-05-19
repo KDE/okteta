@@ -31,32 +31,28 @@
 class QAction;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class PrintTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT PrintController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit PrintController( KXMLGUIClient* guiClient );
+public:
+    explicit PrintController(KXMLGUIClient* guiClient);
     ~PrintController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // TODO: this is a hack to enable the browser extension of the KPart to execute printing, rethink it
+public: // TODO: this is a hack to enable the browser extension of the KPart to execute printing, rethink it
     void print();
 
+private:
+    QAction* mPrintAction;
 
-  private:
-    QAction *mPrintAction;
-
-    PrintTool *mPrintTool;
+    PrintTool* mPrintTool;
 };
 
 }

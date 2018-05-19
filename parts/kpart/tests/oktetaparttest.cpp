@@ -28,10 +28,9 @@
 // Qt
 #include <QTest>
 
-
 void OktetaPartTest::testPartReuseWithAnotherUrl()
 {
-    KPluginFactory *factory = new OktetaPartFactory();
+    KPluginFactory* factory = new OktetaPartFactory();
     KParts::ReadOnlyPart* part = factory->create<KParts::ReadOnlyPart>(nullptr, nullptr);
     QVERIFY(part != nullptr);
 
@@ -47,5 +46,4 @@ void OktetaPartTest::testPartReuseWithAnotherUrl()
     delete factory;
 }
 
-
-QTEST_MAIN( OktetaPartTest )
+QTEST_MAIN(OktetaPartTest)

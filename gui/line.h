@@ -26,9 +26,7 @@
 // Qt
 #include <QtGlobal>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 using Line = qint32;
 using LineSize = qint32;

@@ -27,21 +27,18 @@
 // Qt
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 CharCodec* EBCDIC1047CharCodecCharCodecIfTest::createCodec()
 {
     return EBCDIC1047CharCodec::create();
 }
 
-
-void EBCDIC1047CharCodecCharCodecIfTest::deleteCodec( CharCodec* codec )
+void EBCDIC1047CharCodecCharCodecIfTest::deleteCodec(CharCodec* codec)
 {
     delete codec;
 }
 
 }
 
-QTEST_MAIN( Okteta::EBCDIC1047CharCodecCharCodecIfTest )
+QTEST_MAIN(Okteta::EBCDIC1047CharCodecCharCodecIfTest)

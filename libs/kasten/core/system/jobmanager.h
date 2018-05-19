@@ -28,17 +28,15 @@
 
 class KJob;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KASTENCORE_EXPORT JobManager
 {
-  public:
+public:
     // temporary, remove quickly
-    static bool executeJob( KJob* job );
+    static bool executeJob(KJob* job);
 
-  public:
+public:
 };
 
 }

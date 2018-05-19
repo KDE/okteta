@@ -30,34 +30,31 @@
 
 class QTextEdit;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractByteArrayStreamEncoder;
 class AbstractModelSelection;
 class AbstractModel;
 
-
 class ByteArrayTextStreamEncoderPreview : public AbstractSelectionView
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ByteArrayTextStreamEncoderPreview( AbstractByteArrayStreamEncoder* encoder );
+public:
+    explicit ByteArrayTextStreamEncoderPreview(AbstractByteArrayStreamEncoder* encoder);
     ~ByteArrayTextStreamEncoderPreview() override;
 
-  public: // AbstractSelectionView API
+public: // AbstractSelectionView API
     QWidget* widget() const override;
-    void setData( AbstractModel* model, const AbstractModelSelection* selection ) override;
+    void setData(AbstractModel* model, const AbstractModelSelection* selection) override;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     void update();
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void setFixedFontByGlobalSettings();
 
-  private:
+private:
     AbstractByteArrayStreamEncoder* const mEncoder;
 
     AbstractModel* mModel;

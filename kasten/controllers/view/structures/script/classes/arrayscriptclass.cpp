@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "arrayscriptclass.h"
 #include "../../datatypes/array/arraydatainformation.h"
 #include "../../parsers/parserutils.h"
@@ -28,14 +27,13 @@
 #include "../scriptlogger.h"
 #include "../../structlogging.h"
 
-
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo)
 {
     s_length = engine->toStringHandle(ParserStrings::PROPERTY_LENGTH());
     mIterableProperties.append(qMakePair(s_length, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
     s_childType = engine->toStringHandle(QStringLiteral("childType"));
-    //the preferred property (the same as childType)
+    // the preferred property (the same as childType)
     s_type = engine->toStringHandle(ParserStrings::PROPERTY_TYPE());
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 
@@ -50,65 +48,56 @@ ArrayScriptClass::~ArrayScriptClass()
 bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
     Q_UNUSED(data)
-    //no need to modify flags since both read and write are handled
-    if (name == s_length)
+    // no need to modify flags since both read and write are handled
+    if (name == s_length) {
         return true;
-    else if (name == s_type || name == s_childType)
+    } else if (name == s_type || name == s_childType) {
         return true;
-    else
-    {
+    } else {
         bool isArrayIndex;
         quint32 pos = name.toArrayIndex(&isArrayIndex);
-        if (isArrayIndex && pos <= data->childCount())
-        {
-            *id = pos + 1; //add 1 to distinguish from the default value of 0
-            *flags &= ~HandlesWriteAccess; //writing is not yet supported
+        if (isArrayIndex && pos <= data->childCount()) {
+            *id = pos + 1; // add 1 to distinguish from the default value of 0
+            *flags &= ~HandlesWriteAccess; // writing is not yet supported
             return true;
         }
     }
-    return false; //not found
+    return false; // not found
 }
 
 bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, const QScriptString& name, uint id, QScriptValue::PropertyFlags* flags)
 {
     Q_UNUSED(data)
     Q_UNUSED(name)
-    if (name == s_childType)
-        return true; //undeleteable is on by default
-    if (id != 0)
-    {
+    if (name == s_childType) {
+        return true; // undeleteable is on by default
+    }
+    if (id != 0) {
         *flags |= QScriptValue::ReadOnly;
         return true;
     }
     return false;
 }
 
-
 QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
     const ArrayDataInformation* aData = data->asArray();
-    if (id != 0)
-    {
+    if (id != 0) {
         quint32 pos = id - 1;
-        if (pos >= data->childCount())
-        {
+        if (pos >= data->childCount()) {
             aData->logError() << "attempting to access out of bounds child: index was" << pos
-                    << ", length is" << data->childCount();
+                              << ", length is" << data->childCount();
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
-                QStringLiteral("Attempting to access array index %1, but length is %2").arg(
-                    QString::number(pos), QString::number(data->childCount())));
-        }
-        else
-        {
+                                                          QStringLiteral("Attempting to access array index %1, but length is %2").arg(
+                                                              QString::number(pos), QString::number(data->childCount())));
+        } else {
             return aData->childToScriptValue(pos, engine(), mHandlerInfo);
         }
-    }
-    else if (name == s_length)
+    } else if (name == s_length) {
         return aData->length();
-    else if (name == s_type)
+    } else if (name == s_type) {
         return aData->childType();
-    else if (name == s_childType)
-    {
+    } else if (name == s_childType) {
         aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         return aData->childType();
     }
@@ -118,39 +107,32 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
 bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
     ArrayDataInformation* aData = data->asArray();
-    if (name == s_length)
-    {
-        if (value.isFunction())
-        {
+    if (name == s_length) {
+        if (value.isFunction()) {
             aData->setLengthFunction(value);
-        }
-        else
-        {
+        } else {
             ParsedNumber<uint> newLength = ParserUtils::uintFromScriptValue(value);
-            if (!newLength.isValid)
-            {
+            if (!newLength.isValid) {
                 aData->logError() << "new length of array is invalid:" << newLength.string;
                 aData->setArrayLength(0);
-            }
-            else
-            {
+            } else {
                 aData->setArrayLength(newLength.value);
             }
         }
         return true;
-    }
-    else if (name == s_type || name == s_childType)
-    {
-        if (name == s_childType)
+    } else if (name == s_type || name == s_childType) {
+        if (name == s_childType) {
             aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
+        }
 
         DataInformation* newChildType = ScriptValueConverter::convert(value,
-                aData->name(), aData->logger(), aData);
+                                                                      aData->name(), aData->logger(), aData);
 
-        if (!newChildType)
+        if (!newChildType) {
             aData->logError() << "Failed to parse new child type:" << value.toString();
-        else
+        } else {
             aData->setArrayType(newChildType);
+        }
         return true;
     }
     return false;
@@ -164,11 +146,9 @@ QScriptValue ArrayScriptClass::prototype() const
 QScriptValue ArrayScriptClass::Array_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
     DataInformation* data = toDataInformation(ctx->thisObject());
-    if (!data)
-    {
+    if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
     return data->typeName();
 }
-

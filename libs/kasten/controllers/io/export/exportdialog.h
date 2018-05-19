@@ -26,30 +26,27 @@
 // Qt
 #include <QDialog>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelExporterConfigEditor;
 class AbstractSelectionView;
 class AbstractModelSelection;
 class AbstractModel;
 
-
 class ExportDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ExportDialog( const QString& remoteTypeName, AbstractModelExporterConfigEditor* configEditor,
-                  QWidget* parent = nullptr );
+public:
+    ExportDialog(const QString& remoteTypeName, AbstractModelExporterConfigEditor* configEditor,
+                 QWidget* parent = nullptr);
 
     ~ExportDialog() override;
 
-  public:
-    void setData( AbstractModel* model, const AbstractModelSelection* selection );
+public:
+    void setData(AbstractModel* model, const AbstractModelSelection* selection);
 
-  private:
+private:
     AbstractModelExporterConfigEditor* mConfigEditor;
     AbstractSelectionView* mPreviewView;
 };

@@ -26,14 +26,13 @@
 // lib
 #include <kasten/abstractcontroller.h>
 
-namespace Kasten
-{
+namespace Kasten {
 
 class KASTENGUI_EXPORT AbstractXmlGuiController : public AbstractController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public: // API to be implemented
+public: // API to be implemented
 //    void plug( KXMLGUIClient* guiClient );
 };
 

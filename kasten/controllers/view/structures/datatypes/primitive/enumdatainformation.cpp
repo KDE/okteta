@@ -30,13 +30,15 @@
 #include "../../script/scriptlogger.h"
 
 EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInformation* type,
-        const EnumDefinition::Ptr& enumDef, DataInformation* parent)
-        : PrimitiveDataInformationWrapper(name, type, parent), mEnum(enumDef)
+                                         const EnumDefinition::Ptr& enumDef, DataInformation* parent)
+    : PrimitiveDataInformationWrapper(name, type, parent)
+    , mEnum(enumDef)
 {
     Q_CHECK_PTR(type);
-    if (enumDef->type() != type->type())
+    if (enumDef->type() != type->type()) {
         logWarn() << "incompatible types in definition and value: "
-                << enumDef->type() << "and " << type->type();
+                  << enumDef->type() << "and " << type->type();
+    }
     mValue->setParent(this);
 }
 
@@ -46,19 +48,18 @@ QString EnumDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
     QString enumVal = mEnum->value(mValue->value());
-    if (!enumVal.isEmpty())
-    {
+    if (!enumVal.isEmpty()) {
         return i18n("%1 (%2)", enumVal, mValue->valueString());
-    }
-    else
+    } else {
         return i18n("%1 (value not in enum)", mValue->valueString());
+    }
 }
 
 QString EnumDataInformation::typeNameImpl() const
 {
     return i18nc("Displayed in the type column. first comes the name "
-            "of the enum, then the underlying type (e.g. uint32)",
-            "enum %1 (%2)", mEnum->name(), mValue->typeName());
+                 "of the enum, then the underlying type (e.g. uint32)",
+                 "enum %1 (%2)", mEnum->name(), mValue->typeName());
 }
 
 QScriptClass* EnumDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const

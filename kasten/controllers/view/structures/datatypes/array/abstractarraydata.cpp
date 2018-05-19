@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "abstractarraydata.h"
 #include "arraydatainformation.h"
 #include "primitivearraydata.h"
@@ -28,7 +27,8 @@
 #include "../primitive/primitivedatainformation.h"
 
 AbstractArrayData::AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent)
-        : mParent(parent), mChildType(childType)
+    : mParent(parent)
+    , mChildType(childType)
 {
     Q_CHECK_PTR(childType);
     mChildType->setParent(parent);
@@ -48,8 +48,9 @@ void AbstractArrayData::setParent(ArrayDataInformation* parent)
 AbstractArrayData* AbstractArrayData::newArrayData(uint length, DataInformation* type, ArrayDataInformation* parent)
 {
     Q_CHECK_PTR(type);
-    if (!type->isPrimitive())
+    if (!type->isPrimitive()) {
         return new ComplexArrayData(length, type, parent);
+    }
     PrimitiveDataInformation* data = type->asPrimitive();
 
     switch (data->type())

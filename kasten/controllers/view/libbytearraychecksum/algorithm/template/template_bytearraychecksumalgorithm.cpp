@@ -17,42 +17,39 @@
 // KF5
 #include <KLocalizedString>
 
-
 Template_ByteArrayChecksumAlgorithm::Template_ByteArrayChecksumAlgorithm()
-  : AbstractByteArrayChecksumAlgorithm(
+    : AbstractByteArrayChecksumAlgorithm(
 //// ADAPT(start)
 //// change "TEMPLATE" to a short and descriptive name of the checksum algorithm
-     i18nc("name of the checksum algorithm", "Template") )
+        i18nc("name of the checksum algorithm", "Template"))
 //// ADAPT(end)
 {}
 
 AbstractByteArrayChecksumParameterSet* Template_ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
-bool Template_ByteArrayChecksumAlgorithm::calculateChecksum( QString* result,
-                                                           const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const
+bool Template_ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
+                                                            const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
     bool success = true;
 
 //// ADAPT(start)
 //// modify the following code to calculate the checksum/hashsum.
 //// The final checksum is passed as a QString to result.
-    const int mask = ( 1 << mParameterSet.bitNumber() );
+    const int mask = (1 << mParameterSet.bitNumber());
 
     int sum = 0;
 
     Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
-    for( Okteta::Address i = range.start(); i<=range.end(); ++i )
-    {
-        sum ^= ( model->byte(i) & mask );
+    for (Okteta::Address i = range.start(); i <= range.end(); ++i) {
+        sum ^= (model->byte(i) & mask);
 
-        if( i >= nextBlockEnd )
-        {
+        if (i >= nextBlockEnd) {
             nextBlockEnd += CalculatedByteCountSignalLimit;
-            emit calculatedBytes( range.localIndex(i)+1 );
+            emit calculatedBytes(range.localIndex(i) + 1);
         }
     }
 
-    *result = QStringLiteral("%1").arg( sum );
+    *result = QStringLiteral("%1").arg(sum);
 //// ADAPT(end)
 
     return success;

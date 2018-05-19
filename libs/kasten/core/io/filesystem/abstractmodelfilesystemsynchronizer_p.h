@@ -32,23 +32,21 @@
 
 class QNetworkConfigurationManager;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchronizerPrivate
 {
-  public:
-    explicit AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent );
+public:
+    explicit AbstractModelFileSystemSynchronizerPrivate(AbstractModelFileSystemSynchronizer* parent);
 
     ~AbstractModelFileSystemSynchronizerPrivate() override;
 
-  public:
+public:
     RemoteSyncState remoteSyncState() const;
 
-  public:
-    void setRemoteState( RemoteSyncState remoteState );
-    void setFileDateTimeOnSync( const QDateTime& fileDateTime );
+public:
+    void setRemoteState(RemoteSyncState remoteState);
+    void setFileDateTimeOnSync(const QDateTime& fileDateTime);
 
     void startFileWatching();
     void stopFileWatching();
@@ -58,43 +56,43 @@ class AbstractModelFileSystemSynchronizerPrivate : public AbstractModelSynchroni
     void startNetworkWatching();
     void stopNetworkWatching();
 
-  public:
-    void onFileDirty( const QString& fileName );
-    void onFileCreated( const QString& fileName );
-    void onFileDeleted( const QString& fileName );
-    void onOnlineStateChanged( bool isOnline );
+public:
+    void onFileDirty(const QString& fileName);
+    void onFileCreated(const QString& fileName);
+    void onFileDeleted(const QString& fileName);
+    void onOnlineStateChanged(bool isOnline);
 
-  protected:
+protected:
     QDateTime mFileDateTime;
     RemoteSyncState mRemoteState;
     QNetworkConfigurationManager* mNetworkConfigurationManager;
     mutable KDirWatch* mDirWatch;
 
-  protected:
-    Q_DECLARE_PUBLIC( AbstractModelFileSystemSynchronizer )
+protected:
+    Q_DECLARE_PUBLIC(AbstractModelFileSystemSynchronizer)
 };
 
-
-inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchronizerPrivate( AbstractModelFileSystemSynchronizer* parent )
-  : AbstractModelSynchronizerPrivate( parent ),
-    mRemoteState( RemoteUnknown ),
-    mNetworkConfigurationManager( nullptr ),
-    mDirWatch( nullptr )
+inline AbstractModelFileSystemSynchronizerPrivate::AbstractModelFileSystemSynchronizerPrivate(AbstractModelFileSystemSynchronizer* parent)
+    : AbstractModelSynchronizerPrivate(parent)
+    , mRemoteState(RemoteUnknown)
+    , mNetworkConfigurationManager(nullptr)
+    , mDirWatch(nullptr)
 {
 }
 inline RemoteSyncState AbstractModelFileSystemSynchronizerPrivate::remoteSyncState() const { return mRemoteState; }
 
-inline void AbstractModelFileSystemSynchronizerPrivate::setRemoteState( RemoteSyncState remoteState )
+inline void AbstractModelFileSystemSynchronizerPrivate::setRemoteState(RemoteSyncState remoteState)
 {
-    Q_Q( AbstractModelFileSystemSynchronizer );
+    Q_Q(AbstractModelFileSystemSynchronizer);
 
-    if( mRemoteState == remoteState )
+    if (mRemoteState == remoteState) {
         return;
+    }
 
     mRemoteState = remoteState;
-    emit q->remoteSyncStateChanged( remoteState );
+    emit q->remoteSyncStateChanged(remoteState);
 }
-inline void AbstractModelFileSystemSynchronizerPrivate::setFileDateTimeOnSync( const QDateTime& fileDateTime )
+inline void AbstractModelFileSystemSynchronizerPrivate::setFileDateTimeOnSync(const QDateTime& fileDateTime)
 {
     mFileDateTime = fileDateTime;
 }

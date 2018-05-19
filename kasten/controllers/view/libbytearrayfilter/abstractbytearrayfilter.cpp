@@ -27,24 +27,24 @@
 
 class AbstractByteArrayFilter::Private
 {
-  public:
-    explicit Private( const QString& name );
-  public:
+public:
+    explicit Private(const QString& name);
+
+public:
     QString name() const;
 
-  protected:
+protected:
     const QString mName;
 };
 
-inline AbstractByteArrayFilter::Private::Private( const QString& name )
- : mName( name )
+inline AbstractByteArrayFilter::Private::Private(const QString& name)
+    : mName(name)
 {}
 
 inline QString AbstractByteArrayFilter::Private::name() const { return mName; }
 
-
-AbstractByteArrayFilter::AbstractByteArrayFilter( const QString& name )
- : d( new Private(name) )
+AbstractByteArrayFilter::AbstractByteArrayFilter(const QString& name)
+    : d(new Private(name))
 {}
 
 QString AbstractByteArrayFilter::name() const { return d->name(); }

@@ -23,13 +23,10 @@
 #ifndef VERSIONTABLEMODEL_H
 #define VERSIONTABLEMODEL_H
 
-
 // Qt
 #include <QAbstractTableModel>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class DocumentVersionData;
 namespace If {
@@ -37,12 +34,11 @@ class Versionable;
 }
 class AbstractModel;
 
-
 class VersionTableModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ColumnIds
     {
         CurrentColumnId = 0,
@@ -51,27 +47,27 @@ class VersionTableModel : public QAbstractTableModel
         NoOfColumnIds = 3 // TODO: what pattern is usually used to mark number of ids?
     };
 
-  public:
-    VersionTableModel( AbstractModel* model, If::Versionable* versionControl, QObject* parent = nullptr );
+public:
+    VersionTableModel(AbstractModel* model, If::Versionable* versionControl, QObject* parent = nullptr);
     ~VersionTableModel() override;
 
-  public: // QAbstractTableModel API
-    int rowCount( const QModelIndex &parent ) const override;
-    int columnCount( const QModelIndex &parent ) const override;
-    QVariant data( const QModelIndex &index, int role ) const override;
-    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
+public: // QAbstractTableModel API
+    int rowCount(const QModelIndex& parent) const override;
+    int columnCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-  public:
-    void setModel( AbstractModel* model, If::Versionable* versionControl );
+public:
+    void setModel(AbstractModel* model, If::Versionable* versionControl);
 
-  private Q_SLOTS:
-    void onRevertedToVersionIndex( int versionIndex );
-    void onHeadVersionChanged( int newHeadVersionIndex );
-    void onHeadVersionDataChanged( const Kasten::DocumentVersionData& newVersionData );
+private Q_SLOTS:
+    void onRevertedToVersionIndex(int versionIndex);
+    void onHeadVersionChanged(int newHeadVersionIndex);
+    void onHeadVersionDataChanged(const Kasten::DocumentVersionData& newVersionData);
 
-  private:
+private:
     AbstractModel* mModel;
-    If::Versionable *mVersionControl;
+    If::Versionable* mVersionControl;
     /// holds the current version index
     int mVersionIndex;
 };

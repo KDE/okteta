@@ -22,17 +22,15 @@
 
 #include "modsumbytearraychecksumparameterset.h"
 
-
 ModSumByteArrayChecksumParameterSet::ModSumByteArrayChecksumParameterSet()
-  : mEndianness( ThisMachineEndianness )
+    : mEndianness(ThisMachineEndianness)
 {}
 
 const char* ModSumByteArrayChecksumParameterSet::id() const { return "ModSum"; }
 
 Endianness ModSumByteArrayChecksumParameterSet::endianness() const { return mEndianness; }
 
-void ModSumByteArrayChecksumParameterSet::setEndianness( Endianness endianness ) { mEndianness = endianness; }
-
+void ModSumByteArrayChecksumParameterSet::setEndianness(Endianness endianness) { mEndianness = endianness; }
 
 ModSumByteArrayChecksumParameterSet::~ModSumByteArrayChecksumParameterSet()
 {

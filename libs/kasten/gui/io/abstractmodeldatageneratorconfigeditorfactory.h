@@ -26,23 +26,19 @@
 // lib
 #include <kasten/kastengui_export.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelDataGeneratorConfigEditor;
 class AbstractModelDataGenerator;
 
-
 class KASTENGUI_EXPORT AbstractModelDataGeneratorConfigEditorFactory
 {
-  public:
+public:
     virtual ~AbstractModelDataGeneratorConfigEditorFactory();
 
-  public:
-    virtual AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor( AbstractModelDataGenerator* generator ) const = 0;
+public:
+    virtual AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor(AbstractModelDataGenerator* generator) const = 0;
 };
-
 
 inline AbstractModelDataGeneratorConfigEditorFactory::~AbstractModelDataGeneratorConfigEditorFactory() {}
 

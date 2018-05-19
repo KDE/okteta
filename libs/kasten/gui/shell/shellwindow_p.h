@@ -30,46 +30,43 @@
 // Qt
 #include <QList>
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelSynchronizer;
 class AbstractDocument;
 class AbstractTool;
 
-
 class ShellWindowPrivate
 {
-  public:
-    ShellWindowPrivate( ShellWindow* parent,
-                        ViewManager* viewManager );
+public:
+    ShellWindowPrivate(ShellWindow* parent,
+                       ViewManager* viewManager);
     ~ShellWindowPrivate();
 
-  public:
+public:
     MultiViewAreas* viewArea() const;
     ViewManager* viewManager() const;
 
-  public:
-    void updateControllers( AbstractView* view );
-    void addXmlGuiController( AbstractXmlGuiController* controller );
-    void addTool( AbstractToolView* toolView );
-    void showDocument( AbstractDocument* document );
+public:
+    void updateControllers(AbstractView* view);
+    void addXmlGuiController(AbstractXmlGuiController* controller);
+    void addTool(AbstractToolView* toolView);
+    void showDocument(AbstractDocument* document);
 
-  public: // If::WidgetsDockable API
+public: // If::WidgetsDockable API
     QList<ToolViewDockWidget*> dockWidgets() const;
 
-  private: // Q_SLOTS
-    void onTitleChanged( const QString& newTitle );
-    void onContentFlagsChanged( Kasten::ContentFlags contentFlags );
-    void onLocalSyncStateChanged( Kasten::LocalSyncState newState );
-    void onViewFocusChanged( Kasten::AbstractView* view );
-    void onToolVisibilityChanged( bool isVisible );
-    void onSynchronizerDeleted( QObject* synchronizer );
+private: // Q_SLOTS
+    void onTitleChanged(const QString& newTitle);
+    void onContentFlagsChanged(Kasten::ContentFlags contentFlags);
+    void onLocalSyncStateChanged(Kasten::LocalSyncState newState);
+    void onViewFocusChanged(Kasten::AbstractView* view);
+    void onToolVisibilityChanged(bool isVisible);
+    void onSynchronizerDeleted(QObject* synchronizer);
 
-  protected:
-    Q_DECLARE_PUBLIC( ShellWindow )
+protected:
+    Q_DECLARE_PUBLIC(ShellWindow)
 
-  protected:
+protected:
     ShellWindow* const q_ptr;
 
     MultiViewAreas* mGroupedViews;
@@ -86,14 +83,13 @@ class ShellWindowPrivate
     QList<AbstractTool*> mTools;
 };
 
-
 inline MultiViewAreas* ShellWindowPrivate::viewArea() const { return mGroupedViews; }
 inline ViewManager* ShellWindowPrivate::viewManager() const { return mViewManager; }
 inline QList<ToolViewDockWidget*> ShellWindowPrivate::dockWidgets() const { return mDockWidgets; }
 
-inline void ShellWindowPrivate::addXmlGuiController( AbstractXmlGuiController* controller )
+inline void ShellWindowPrivate::addXmlGuiController(AbstractXmlGuiController* controller)
 {
-    mControllers.append( controller );
+    mControllers.append(controller);
 }
 
 }

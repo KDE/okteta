@@ -34,116 +34,113 @@
 // Qt
 #include <QAction>
 
+namespace Kasten {
 
-namespace Kasten
+ViewAreaSplitController::ViewAreaSplitController(ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient)
+    : mViewManager(viewManager)
+    , mGroupedViews(groupedViews)
+    , mViewAreaSplitable(nullptr)
+    , mCurrentViewArea(nullptr)
 {
-
-ViewAreaSplitController::ViewAreaSplitController( ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient )
-  : mViewManager( viewManager ),
-    mGroupedViews( groupedViews ),
-    mViewAreaSplitable( nullptr ),
-    mCurrentViewArea( nullptr )
-{
-    mViewAreaSplitable = mGroupedViews ? qobject_cast<If::ViewAreaSplitable*>( mGroupedViews ) : nullptr;
-    if( mViewAreaSplitable )
-    {
-        connect( mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten::AbstractViewArea*)),
-                 SLOT(onViewAreaFocusChanged(Kasten::AbstractViewArea*)) );
-        connect( mGroupedViews, SIGNAL(viewAreasAdded(QList<Kasten::AbstractViewArea*>)),
-                 SLOT(onViewAreasChanged()) );
-        connect( mGroupedViews, SIGNAL(viewAreasRemoved(QList<Kasten::AbstractViewArea*>)),
-                 SLOT(onViewAreasChanged()) );
+    mViewAreaSplitable = mGroupedViews ? qobject_cast<If::ViewAreaSplitable*>(mGroupedViews) : nullptr;
+    if (mViewAreaSplitable) {
+        connect(mGroupedViews, SIGNAL(viewAreaFocusChanged(Kasten::AbstractViewArea*)),
+                SLOT(onViewAreaFocusChanged(Kasten::AbstractViewArea*)));
+        connect(mGroupedViews, SIGNAL(viewAreasAdded(QList<Kasten::AbstractViewArea*>)),
+                SLOT(onViewAreasChanged()));
+        connect(mGroupedViews, SIGNAL(viewAreasRemoved(QList<Kasten::AbstractViewArea*>)),
+                SLOT(onViewAreasChanged()));
     }
 
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSplitVerticallyAction = actionCollection->addAction( QStringLiteral("view_area_split_vertically"),
-                                                          this, SLOT(splitVertically()) );
-    mSplitVerticallyAction->setText( i18nc("@title:menu","Split Vertically") );
-    mSplitVerticallyAction->setIcon( QIcon::fromTheme( QStringLiteral("view-split-left-right") ) );
-    actionCollection->setDefaultShortcut( mSplitVerticallyAction, Qt::CTRL + Qt::SHIFT + Qt::Key_L );
-    mSplitVerticallyAction->setEnabled( mViewAreaSplitable != nullptr );
+    mSplitVerticallyAction = actionCollection->addAction(QStringLiteral("view_area_split_vertically"),
+                                                         this, SLOT(splitVertically()));
+    mSplitVerticallyAction->setText(i18nc("@title:menu", "Split Vertically"));
+    mSplitVerticallyAction->setIcon(QIcon::fromTheme(QStringLiteral("view-split-left-right")));
+    actionCollection->setDefaultShortcut(mSplitVerticallyAction, Qt::CTRL + Qt::SHIFT + Qt::Key_L);
+    mSplitVerticallyAction->setEnabled(mViewAreaSplitable != nullptr);
 
-    mSplitHorizontallyAction = actionCollection->addAction( QStringLiteral("view_area_split_horizontally"),
-                                                            this, SLOT(splitHorizontally()) );
-    mSplitHorizontallyAction->setText( i18nc("@title:menu","Split Horizontal") );
-    mSplitHorizontallyAction->setIcon( QIcon::fromTheme( QStringLiteral("view-split-top-bottom") ) );
-    actionCollection->setDefaultShortcut( mSplitHorizontallyAction, Qt::CTRL + Qt::SHIFT + Qt::Key_T );
-    mSplitHorizontallyAction->setEnabled( mViewAreaSplitable != nullptr );
+    mSplitHorizontallyAction = actionCollection->addAction(QStringLiteral("view_area_split_horizontally"),
+                                                           this, SLOT(splitHorizontally()));
+    mSplitHorizontallyAction->setText(i18nc("@title:menu", "Split Horizontal"));
+    mSplitHorizontallyAction->setIcon(QIcon::fromTheme(QStringLiteral("view-split-top-bottom")));
+    actionCollection->setDefaultShortcut(mSplitHorizontallyAction, Qt::CTRL + Qt::SHIFT + Qt::Key_T);
+    mSplitHorizontallyAction->setEnabled(mViewAreaSplitable != nullptr);
 
-    mCloseAction = actionCollection->addAction( QStringLiteral("view_area_close"),
-                                                this, SLOT(close()) );
-    mCloseAction->setText( i18nc("@title:menu","Close View Area") );
-    mCloseAction->setIcon( QIcon::fromTheme( QStringLiteral("view-close") ) );
-    actionCollection->setDefaultShortcut( mCloseAction, Qt::CTRL + Qt::SHIFT + Qt::Key_R );
+    mCloseAction = actionCollection->addAction(QStringLiteral("view_area_close"),
+                                               this, SLOT(close()));
+    mCloseAction->setText(i18nc("@title:menu", "Close View Area"));
+    mCloseAction->setIcon(QIcon::fromTheme(QStringLiteral("view-close")));
+    actionCollection->setDefaultShortcut(mCloseAction, Qt::CTRL + Qt::SHIFT + Qt::Key_R);
 
-    onViewAreaFocusChanged( mViewAreaSplitable ? mViewAreaSplitable->viewAreaFocus() : nullptr );
+    onViewAreaFocusChanged(mViewAreaSplitable ? mViewAreaSplitable->viewAreaFocus() : nullptr);
     onViewAreasChanged();
 }
 
-void ViewAreaSplitController::setTargetModel( AbstractModel* model )
+void ViewAreaSplitController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED(model)
+    Q_UNUSED(model)
 }
 
 void ViewAreaSplitController::splitVertically()
 {
-    splitViewArea( Qt::Vertical );
+    splitViewArea(Qt::Vertical);
 }
 
 void ViewAreaSplitController::splitHorizontally()
 {
-    splitViewArea( Qt::Horizontal );
+    splitViewArea(Qt::Horizontal);
 }
 
 void ViewAreaSplitController::close()
 {
-    mViewAreaSplitable->closeViewArea( mCurrentViewArea );
+    mViewAreaSplitable->closeViewArea(mCurrentViewArea);
 }
 
-void ViewAreaSplitController::splitViewArea( Qt::Orientation orientation )
+void ViewAreaSplitController::splitViewArea(Qt::Orientation orientation)
 {
     AbstractView* currentView = mCurrentViewArea->viewFocus();
 
-    mViewAreaSplitable->splitViewArea( mCurrentViewArea, orientation );
+    mViewAreaSplitable->splitViewArea(mCurrentViewArea, orientation);
 
     // TODO: ideal would be a new view which copies the existing one
     // and starts visually where the old one stops after the resize
-    const Qt::Alignment alignment = ( orientation == Qt::Horizontal ) ? Qt::AlignBottom : Qt::AlignRight;
-    mViewManager->createCopyOfView( currentView, alignment );
+    const Qt::Alignment alignment = (orientation == Qt::Horizontal) ? Qt::AlignBottom : Qt::AlignRight;
+    mViewManager->createCopyOfView(currentView, alignment);
 }
 
-void ViewAreaSplitController::onViewAreaFocusChanged( AbstractViewArea* viewArea )
+void ViewAreaSplitController::onViewAreaFocusChanged(AbstractViewArea* viewArea)
 {
-    if( mCurrentViewArea )
-        mCurrentViewArea->disconnect( this );
+    if (mCurrentViewArea) {
+        mCurrentViewArea->disconnect(this);
+    }
 
     // TODO: how to handle single view areas? examples, signals?
-    mCurrentViewArea = qobject_cast<AbstractGroupedViews*>( viewArea );
+    mCurrentViewArea = qobject_cast<AbstractGroupedViews*>(viewArea);
 
-    if( mCurrentViewArea )
-    {
-        connect( mCurrentViewArea, &AbstractGroupedViews::added,
-                 this, &ViewAreaSplitController::onViewsChanged );
-        connect( mCurrentViewArea, &AbstractGroupedViews::removing,
-                 this, &ViewAreaSplitController::onViewsChanged );
+    if (mCurrentViewArea) {
+        connect(mCurrentViewArea, &AbstractGroupedViews::added,
+                this, &ViewAreaSplitController::onViewsChanged);
+        connect(mCurrentViewArea, &AbstractGroupedViews::removing,
+                this, &ViewAreaSplitController::onViewsChanged);
     }
     onViewsChanged();
 }
 
 void ViewAreaSplitController::onViewAreasChanged()
 {
-    const bool hasMultipleViewArea = mViewAreaSplitable ? ( mViewAreaSplitable->viewAreasCount() > 1 ) : false;
+    const bool hasMultipleViewArea = mViewAreaSplitable ? (mViewAreaSplitable->viewAreasCount() > 1) : false;
 
-    mCloseAction->setEnabled( hasMultipleViewArea );
+    mCloseAction->setEnabled(hasMultipleViewArea);
 }
 
 void ViewAreaSplitController::onViewsChanged()
 {
-    const bool hasViews = mCurrentViewArea ? ( mCurrentViewArea->viewCount() > 0 ) : false;
+    const bool hasViews = mCurrentViewArea ? (mCurrentViewArea->viewCount() > 0) : false;
 
-    mSplitVerticallyAction->setEnabled( hasViews );
-    mSplitHorizontallyAction->setEnabled( hasViews );
+    mSplitVerticallyAction->setEnabled(hasViews);
+    mSplitHorizontallyAction->setEnabled(hasViews);
 }
 
 }

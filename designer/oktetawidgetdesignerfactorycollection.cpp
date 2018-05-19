@@ -26,12 +26,11 @@
 #include "bytearraycolumnviewdesignerfactory.h"
 #include "bytearrayrowviewdesignerfactory.h"
 
-
-OktetaWidgetDesignerFactoryCollection::OktetaWidgetDesignerFactoryCollection( QObject* parent )
-  : QObject( parent )
+OktetaWidgetDesignerFactoryCollection::OktetaWidgetDesignerFactoryCollection(QObject* parent)
+    : QObject(parent)
 {
-     mWidgetFactories.append( new ByteArrayColumnViewDesignerFactory(this) );
-     mWidgetFactories.append( new ByteArrayRowViewDesignerFactory(this) );
+    mWidgetFactories.append(new ByteArrayColumnViewDesignerFactory(this));
+    mWidgetFactories.append(new ByteArrayRowViewDesignerFactory(this));
 }
 
 QList<QDesignerCustomWidgetInterface*> OktetaWidgetDesignerFactoryCollection::customWidgets() const

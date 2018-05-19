@@ -30,32 +30,32 @@
 
 class QString;
 
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModel;
 
 // TODO: what is the difference to a plain dependent model?
-// 
+//
 class KASTENCORE_EXPORT AbstractTool : public QObject
 {
     Q_OBJECT
 
-  protected:
+protected:
     AbstractTool();
-  public:
+
+public:
     ~AbstractTool() override;
 
-  public: // API to be implemented
+public: // API to be implemented
 //     virtual AbstractModel* targetModel() const = 0;
     virtual QString title() const = 0;
 
-    virtual void setTargetModel( AbstractModel* model ) = 0;
+    virtual void setTargetModel(AbstractModel* model) = 0;
 
-  Q_SIGNALS:
-    void titleChanged( const QString& newTitle );
+Q_SIGNALS:
+    void titleChanged(const QString& newTitle);
 
-  protected:
+protected:
     class Private;
     Private* const d;
 };

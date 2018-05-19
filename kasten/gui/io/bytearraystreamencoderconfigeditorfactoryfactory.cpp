@@ -38,9 +38,7 @@
 // Qt
 #include <QList>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 QList<AbstractModelStreamEncoderConfigEditorFactory*> ByteArrayStreamEncoderConfigEditorFactoryFactory::createFactorys()
 {

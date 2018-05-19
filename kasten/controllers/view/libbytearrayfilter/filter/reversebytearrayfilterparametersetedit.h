@@ -28,24 +28,23 @@
 
 class QCheckBox;
 
-
 class ReverseByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const char Id[];
 
-  public:
-    explicit ReverseByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
+public:
+    explicit ReverseByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);
     ~ReverseByteArrayFilterParameterSetEdit() override;
 
-  public: // AbstractByteArrayFilterParameterSetEdit API
-    void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) override;
-    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const override;
+public: // AbstractByteArrayFilterParameterSetEdit API
+    void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) override;
+    void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
 
-  protected:
-    QCheckBox *mInvertsBitsCheckBox;
+protected:
+    QCheckBox* mInvertsBitsCheckBox;
 };
 
 #endif

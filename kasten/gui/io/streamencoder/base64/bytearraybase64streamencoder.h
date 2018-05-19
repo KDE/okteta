@@ -30,33 +30,36 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 extern const char base64EncodeMap[64];
 
 class ByteArrayBase64StreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
+public:
     static const int inputGroupLength = 3;
 
     static const int outputLineLength = 76;
     static const int outputGroupLength = 4;
-    static const int maxOutputGroupsPerLine = outputLineLength/outputGroupLength;
+    static const int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
 
-    enum class InputByteIndex { First = 0, Second, Third };
+    enum class InputByteIndex
+    {
+        First = 0,
+        Second,
+        Third
+    };
 
-  public:
+public:
     ByteArrayBase64StreamEncoder();
     ~ByteArrayBase64StreamEncoder() override;
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 };
 
 }

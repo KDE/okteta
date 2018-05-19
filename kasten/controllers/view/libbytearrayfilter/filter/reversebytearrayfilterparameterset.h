@@ -26,23 +26,22 @@
 // lib
 #include "abstractbytearrayfilterparameterset.h"
 
-
 class ReverseByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 {
-  public:
+public:
     ReverseByteArrayFilterParameterSet();
     ~ReverseByteArrayFilterParameterSet() override;
 
-  public: // AbstractByteArrayFilterParameterSet API
+public: // AbstractByteArrayFilterParameterSet API
     const char* id() const override;
 
-  public:
-    void setInvertsBits( bool invertsBits );
+public:
+    void setInvertsBits(bool invertsBits);
 
-  public:
+public:
     bool invertsBits() const;
 
-  protected:
+protected:
     bool mInvertsBits;
 };
 

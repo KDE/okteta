@@ -25,7 +25,7 @@
 #include "primitivedatainformation.h"
 #include "structureviewpreferences.h"
 
-template<typename T>
+template <typename T>
 class UIntDataInformationMethods
 {
 public:
@@ -39,23 +39,24 @@ public:
     static void staticSetWidgetData(T value, QWidget* w);
 };
 
-template<>
+template <>
 inline PrimitiveDataType UIntDataInformationMethods<quint8>::staticType() { return PrimitiveDataType::UInt8; }
-template<>
+template <>
 inline PrimitiveDataType UIntDataInformationMethods<quint16>::staticType() { return PrimitiveDataType::UInt16; }
-template<>
+template <>
 inline PrimitiveDataType UIntDataInformationMethods<quint32>::staticType() { return PrimitiveDataType::UInt32; }
-template<>
+template <>
 inline PrimitiveDataType UIntDataInformationMethods<quint64>::staticType() { return PrimitiveDataType::UInt64; }
 
-template<typename T>
+template <typename T>
 inline T UIntDataInformationMethods<T>::fromVariant(const QVariant& value, bool* ok)
 {
     Q_CHECK_PTR(ok);
     quint64 val = value.toULongLong(ok);
     T result = T(val);
-    if (val != quint64(result))
+    if (val != quint64(result)) {
         *ok = false;
+    }
     return result;
 }
 

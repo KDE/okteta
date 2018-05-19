@@ -26,18 +26,16 @@
 #include "stringsextractview.h"
 #include "stringsextracttool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-StringsExtractToolView::StringsExtractToolView( StringsExtractTool *tool )
- : mWidget( new StringsExtractView(tool) )
+StringsExtractToolView::StringsExtractToolView(StringsExtractTool* tool)
+    : mWidget(new StringsExtractView(tool))
 {
 }
 
 QWidget* StringsExtractToolView::widget()    const { return mWidget; }
 QString StringsExtractToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool *StringsExtractToolView::tool() const { return mWidget->tool(); }
+AbstractTool* StringsExtractToolView::tool() const { return mWidget->tool(); }
 
 StringsExtractToolView::~StringsExtractToolView()
 {

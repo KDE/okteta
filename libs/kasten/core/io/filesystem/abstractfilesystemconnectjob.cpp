@@ -23,48 +23,46 @@
 #include "abstractfilesystemconnectjob.h"
 #include "abstractfilesystemconnectjob_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractFileSystemConnectJob::AbstractFileSystemConnectJob( AbstractModelFileSystemSynchronizer* synchronizer,
-                                                            AbstractDocument* document,
-                                                            const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
-  : AbstractConnectJob( new AbstractFileSystemConnectJobPrivate(this,synchronizer,document,url,option) )
+AbstractFileSystemConnectJob::AbstractFileSystemConnectJob(AbstractModelFileSystemSynchronizer* synchronizer,
+                                                           AbstractDocument* document,
+                                                           const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
+    : AbstractConnectJob(new AbstractFileSystemConnectJobPrivate(this, synchronizer, document, url, option))
 {
 }
 
 AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJob::synchronizer() const
 {
-    Q_D( const AbstractFileSystemConnectJob );
+    Q_D(const AbstractFileSystemConnectJob);
 
     return d->synchronizer();
 }
 AbstractDocument* AbstractFileSystemConnectJob::document() const
 {
-    Q_D( const AbstractFileSystemConnectJob );
+    Q_D(const AbstractFileSystemConnectJob);
 
     return d->document();
 }
 QFile* AbstractFileSystemConnectJob::file() const
 {
-    Q_D( const AbstractFileSystemConnectJob );
+    Q_D(const AbstractFileSystemConnectJob);
 
     return d->file();
 }
 
 void AbstractFileSystemConnectJob::start()
 {
-    Q_D( AbstractFileSystemConnectJob );
+    Q_D(AbstractFileSystemConnectJob);
 
     d->start();
 }
 
-void AbstractFileSystemConnectJob::complete( bool success )
+void AbstractFileSystemConnectJob::complete(bool success)
 {
-    Q_D( AbstractFileSystemConnectJob );
+    Q_D(AbstractFileSystemConnectJob);
 
-    d->complete( success );
+    d->complete(success);
 }
 
 AbstractFileSystemConnectJob::~AbstractFileSystemConnectJob()
@@ -73,5 +71,5 @@ AbstractFileSystemConnectJob::~AbstractFileSystemConnectJob()
 
 }
 
-//have to include this because of Q_PRIVATE_SLOT
+// have to include this because of Q_PRIVATE_SLOT
 #include "moc_abstractfilesystemconnectjob.cpp"

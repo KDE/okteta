@@ -30,7 +30,8 @@ class SignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 
 public:
     SignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
-            : AbstractBitfieldDataInformation(name, width, parent) {}
+        : AbstractBitfieldDataInformation(name, width, parent)
+    {}
     ~SignedBitfieldDataInformation() override {}
     AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const override;
 

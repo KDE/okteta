@@ -26,13 +26,13 @@
 class AbstractByteArrayFilterParameterSetEdit;
 class QByteArray;
 
-
 class ByteArrayFilterParameterSetEditFactory
 {
-  protected:
+protected:
     ByteArrayFilterParameterSetEditFactory();
-  public:
-    static AbstractByteArrayFilterParameterSetEdit* createEdit( const char* id );
+
+public:
+    static AbstractByteArrayFilterParameterSetEdit* createEdit(const char* id);
 };
 
 #endif

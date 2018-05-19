@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef ABSTRACTARRAYDATA_H
 #define ABSTRACTARRAYDATA_H
 
@@ -38,7 +37,7 @@ class DataInformation;
 class ScriptHandlerInfo;
 
 namespace Okteta {
-    class AbstractByteArrayModel;
+class AbstractByteArrayModel;
 }
 
 class QVariant;
@@ -46,6 +45,7 @@ class QVariant;
 class AbstractArrayData
 {
     Q_DISABLE_COPY(AbstractArrayData)
+
 public:
     explicit AbstractArrayData(DataInformation* childType, ArrayDataInformation* parent);
     virtual ~AbstractArrayData();
@@ -65,7 +65,7 @@ public:
     virtual DataInformation* childAt(unsigned int idx) = 0;
 
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine,
-            ScriptHandlerInfo* handlerInfo) = 0;
+                                       ScriptHandlerInfo* handlerInfo) = 0;
     /** the primitive type or PrimitiveDataType::Invalid for structs etc */
     virtual PrimitiveDataType primitiveType() const = 0;
 
@@ -84,8 +84,10 @@ public:
 
     /** Takes ownership over @p type ! */
     static AbstractArrayData* newArrayData(uint length, DataInformation* type, ArrayDataInformation* parent);
+
 protected:
     virtual void setNewParentForChildren() = 0;
+
 protected:
     ArrayDataInformation* mParent;
     QScopedPointer<DataInformation> mChildType;

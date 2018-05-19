@@ -27,9 +27,7 @@
 // KF5
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 //---------------------------------------------------------------------------- Tests -----
 
@@ -37,18 +35,19 @@ void TextCharCodecTest::testCreateCodec_data()
 {
     QTest::addColumn<QString>("codecName");
 
-    for( const QString& codecName : TextCharCodec::codecNames() )
+    for (const QString& codecName : TextCharCodec::codecNames()) {
         QTest::newRow(codecName.toLatin1().constData()) << codecName;
+    }
 }
 
 void TextCharCodecTest::testCreateCodec()
 {
     QFETCH(QString, codecName);
 
-    CharCodec* codec = TextCharCodec::createCodec( codecName );
+    CharCodec* codec = TextCharCodec::createCodec(codecName);
 
-    QVERIFY( codec != nullptr );
-    QCOMPARE( codec->name(), codecName );
+    QVERIFY(codec != nullptr);
+    QCOMPARE(codec->name(), codecName);
 
     delete codec;
 }
@@ -56,17 +55,16 @@ void TextCharCodecTest::testCreateCodec()
 void TextCharCodecTest::testCreateLocalCodec()
 {
     TextCharCodec* codec = TextCharCodec::createLocalCodec();
-    QVERIFY( codec != nullptr );
+    QVERIFY(codec != nullptr);
     delete codec;
 }
 
-
 void TextCharCodecTest::testCreateNonexistingCodec()
 {
-    TextCharCodec* codec = TextCharCodec::createCodec( QStringLiteral("NonexistingCode") );
-    QVERIFY( codec == nullptr );
+    TextCharCodec* codec = TextCharCodec::createCodec(QStringLiteral("NonexistingCode"));
+    QVERIFY(codec == nullptr);
 }
 
 }
 
-QTEST_GUILESS_MAIN( Okteta::TextCharCodecTest )
+QTEST_GUILESS_MAIN(Okteta::TextCharCodecTest)

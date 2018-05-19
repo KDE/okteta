@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef ARRAYSCRIPTCLASS_H
 #define ARRAYSCRIPTCLASS_H
 
@@ -29,6 +28,7 @@
 class ArrayScriptClass : public DefaultScriptClass
 {
     Q_DISABLE_COPY(ArrayScriptClass)
+
 public:
     ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~ArrayScriptClass() override;
@@ -41,9 +41,10 @@ protected:
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
     static QScriptValue Array_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
+
 protected:
     QScriptString s_length;
-    QScriptString s_childType; //deprecated
+    QScriptString s_childType; // deprecated
     QScriptString s_type;
     QScriptValue mArrayPrototype;
 };

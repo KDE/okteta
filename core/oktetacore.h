@@ -31,17 +31,24 @@ Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_CORE)
 // here we collect all general data
 // let's see how much it gets ;)
 
-namespace Okteta
-{
-  enum ValueCoding { HexadecimalCoding=0, DecimalCoding=1, OctalCoding=2, BinaryCoding=3,
-                 InvalidCoding=0xFFFE,  MaxCodingId=0xFFFF };
-  static const int NoOfCodings = 4;
+namespace Okteta {
 
-  /** */
-  enum CharCoding
-  {
+enum ValueCoding
+{
+    HexadecimalCoding = 0,
+    DecimalCoding = 1,
+    OctalCoding = 2,
+    BinaryCoding = 3,
+    InvalidCoding = 0xFFFE,
+    MaxCodingId = 0xFFFF
+};
+static const int NoOfCodings = 4;
+
+/** */
+enum CharCoding
+{
     /** the coding of your shell */
-    LocalEncoding=0,
+    LocalEncoding = 0,
     /** ASCII encoding, also known as Latin1 */
     ISO8859_1Encoding,
     /**  */
@@ -105,11 +112,12 @@ namespace Okteta
     /** the most common EBCDIC codepage */
     EBCDIC1047Encoding,
     /** Offset for own encodings which are bound in by plugins */
-    StartOfOwnEncoding=0x8000,
-    InvalidEncoding=0xFFFE,
+    StartOfOwnEncoding = 0x8000,
+    InvalidEncoding = 0xFFFE,
     /** this should enable extension without breaking binary compatibility */
-    MaxEncodingId=0xFFFF
-  };
+    MaxEncodingId = 0xFFFF
+};
+
 }
 
 #endif

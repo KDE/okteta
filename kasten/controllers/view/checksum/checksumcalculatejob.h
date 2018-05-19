@@ -34,27 +34,25 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ChecksumCalculateJob : public QObject // not yet: KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ChecksumCalculateJob( QString* checksum,
-                          const AbstractByteArrayChecksumAlgorithm* algorithm,
-                          const Okteta::AbstractByteArrayModel* model,
-                          const Okteta::AddressRange& selection );
+public:
+    ChecksumCalculateJob(QString* checksum,
+                         const AbstractByteArrayChecksumAlgorithm* algorithm,
+                         const Okteta::AbstractByteArrayModel* model,
+                         const Okteta::AddressRange& selection);
 
-  public:
+public:
     void exec();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onCalculatedBytes();
 
-  protected:
+protected:
     QString* mChecksum;
 
     const AbstractByteArrayChecksumAlgorithm* mAlgorithm;
@@ -63,12 +61,14 @@ class ChecksumCalculateJob : public QObject // not yet: KJob
     const Okteta::AddressRange mSelection;
 };
 
-
-inline ChecksumCalculateJob::ChecksumCalculateJob( QString* checksum,
-                                                   const AbstractByteArrayChecksumAlgorithm* algorithm,
-                                                   const Okteta::AbstractByteArrayModel* model,
-                                                   const Okteta::AddressRange& selection )
- : mChecksum( checksum ), mAlgorithm( algorithm ), mByteArrayModel( model ), mSelection( selection )
+inline ChecksumCalculateJob::ChecksumCalculateJob(QString* checksum,
+                                                  const AbstractByteArrayChecksumAlgorithm* algorithm,
+                                                  const Okteta::AbstractByteArrayModel* model,
+                                                  const Okteta::AddressRange& selection)
+    : mChecksum(checksum)
+    , mAlgorithm(algorithm)
+    , mByteArrayModel(model)
+    , mSelection(selection)
 {}
 
 }

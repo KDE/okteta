@@ -29,36 +29,34 @@
 
 #include <QUrl>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractFileSystemSyncWithRemoteJobPrivate : public AbstractSyncWithRemoteJobPrivate
 {
-  public:
-    AbstractFileSystemSyncWithRemoteJobPrivate( AbstractFileSystemSyncWithRemoteJob* parent,
-                                                AbstractModelFileSystemSynchronizer* synchronizer,
-                                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
+public:
+    AbstractFileSystemSyncWithRemoteJobPrivate(AbstractFileSystemSyncWithRemoteJob* parent,
+                                               AbstractModelFileSystemSynchronizer* synchronizer,
+                                               const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
 
     ~AbstractFileSystemSyncWithRemoteJobPrivate() override;
 
-  public: // KJob API
+public: // KJob API
     void start();
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QFile* file() const;
 
-  protected:
-    void completeSync( bool success );
+protected:
+    void completeSync(bool success);
 
-  protected: // slots
+protected: // slots
     void syncWithRemote();
 
-  protected:
-    Q_DECLARE_PUBLIC( AbstractFileSystemSyncWithRemoteJob )
+protected:
+    Q_DECLARE_PUBLIC(AbstractFileSystemSyncWithRemoteJob)
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
@@ -67,15 +65,14 @@ class AbstractFileSystemSyncWithRemoteJobPrivate : public AbstractSyncWithRemote
     QString mTempFilePath;
 };
 
-
-inline AbstractFileSystemSyncWithRemoteJobPrivate::AbstractFileSystemSyncWithRemoteJobPrivate( AbstractFileSystemSyncWithRemoteJob* parent,
-    AbstractModelFileSystemSynchronizer* synchronizer,
-    const QUrl& url, AbstractModelSynchronizer::ConnectOption option )
-  : AbstractSyncWithRemoteJobPrivate( parent ),
-    mSynchronizer( synchronizer ),
-    mUrl( url ),
-    mOption( option ),
-    mFile( nullptr )
+inline AbstractFileSystemSyncWithRemoteJobPrivate::AbstractFileSystemSyncWithRemoteJobPrivate(AbstractFileSystemSyncWithRemoteJob* parent,
+                                                                                              AbstractModelFileSystemSynchronizer* synchronizer,
+                                                                                              const QUrl& url, AbstractModelSynchronizer::ConnectOption option)
+    : AbstractSyncWithRemoteJobPrivate(parent)
+    , mSynchronizer(synchronizer)
+    , mUrl(url)
+    , mOption(option)
+    , mFile(nullptr)
 {}
 
 inline AbstractFileSystemSyncWithRemoteJobPrivate::~AbstractFileSystemSyncWithRemoteJobPrivate() {}
@@ -89,9 +86,9 @@ inline AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncWithRemoteJobP
 
 inline void AbstractFileSystemSyncWithRemoteJobPrivate::start()
 {
-    Q_Q( AbstractFileSystemSyncWithRemoteJob );
+    Q_Q(AbstractFileSystemSyncWithRemoteJob);
 
-    QMetaObject::invokeMethod( q, "syncWithRemote", Qt::QueuedConnection );
+    QMetaObject::invokeMethod(q, "syncWithRemote", Qt::QueuedConnection);
 }
 
 }

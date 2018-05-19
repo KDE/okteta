@@ -26,44 +26,41 @@
 // Qt
 #include <QAbstractTableModel>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class PODDecoderTool;
 
-
 class PODTableModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ColumnIds
     {
         NameId = 0,
         ValueId = 1,
-        //UsedBytes = x,  TODO: add hint how many bytes a datatype uses
+        // UsedBytes = x,  TODO: add hint how many bytes a datatype uses
         NoOfColumnIds = 2 // TODO: what pattern is usually used to mark number of ids?
     };
 
-  public:
-    explicit PODTableModel( PODDecoderTool* tool, QObject* parent = nullptr );
+public:
+    explicit PODTableModel(PODDecoderTool* tool, QObject* parent = nullptr);
     ~PODTableModel() override;
 
-  public: // QAbstractItemModel API
-    int rowCount( const QModelIndex& parent ) const override;
-    int columnCount( const QModelIndex& parent ) const override;
-    QVariant data( const QModelIndex& index, int role ) const override;
-    Qt::ItemFlags flags( const QModelIndex& index ) const override;
-    QModelIndex buddy( const QModelIndex& index ) const override;
-    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
+public: // QAbstractItemModel API
+    int rowCount(const QModelIndex& parent) const override;
+    int columnCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
+    Qt::ItemFlags flags(const QModelIndex& index) const override;
+    QModelIndex buddy(const QModelIndex& index) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-    bool setData(const QModelIndex& index, const QVariant& value, int role ) override;
+    bool setData(const QModelIndex& index, const QVariant& value, int role) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onDataChanged();
 
-  private:
+private:
     PODDecoderTool* mTool;
     const QString mEmptyNote;
 };

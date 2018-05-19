@@ -38,38 +38,37 @@ class CharCodec;
 class AbstractByteArrayModel;
 }
 
-namespace Kasten
-{
+namespace Kasten {
 
 // TODO: offset should be set in renderFirstLine, calculated using coordRange,
 // in constructor instead take startOffset
 class ByteArrayRowsColumnTextRenderer : public AbstractColumnTextRenderer
 {
-  private:
+private:
     static const int DefaultTRByteSpacingWidth = 1;
     static const int TRGroupSpacingWidth = 2;
 
-  public:
-    ByteArrayRowsColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
-        const Okteta::CoordRange& coordRange,
-        int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        int visibleCodings,
-        Okteta::ValueCoding valueCoding,
-        const QString& charCodecName, QChar substituteChar, QChar undefinedChar );
+public:
+    ByteArrayRowsColumnTextRenderer(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+                                    const Okteta::CoordRange& coordRange,
+                                    int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
+                                    int visibleCodings,
+                                    Okteta::ValueCoding valueCoding,
+                                    const QString& charCodecName, QChar substituteChar, QChar undefinedChar);
     ~ByteArrayRowsColumnTextRenderer() override;
 
-  public: // AbstractColumnTextRenderer API
-    void renderFirstLine( QTextStream* stream, int lineIndex ) const override;
-    void renderNextLine( QTextStream* stream, bool isSubline ) const override;
+public: // AbstractColumnTextRenderer API
+    void renderFirstLine(QTextStream* stream, int lineIndex) const override;
+    void renderNextLine(QTextStream* stream, bool isSubline) const override;
     int noOfSublinesNeeded() const override;
 
-  protected:
-    void renderLine( QTextStream* stream, bool isSubline ) const;
+protected:
+    void renderLine(QTextStream* stream, bool isSubline) const;
 
-  protected:
-    void setWidths( int byteWidth, int byteSpacingWidth, int noOfGroupedBytes );
+protected:
+    void setWidths(int byteWidth, int byteSpacingWidth, int noOfGroupedBytes);
 
-  protected:
+protected:
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     const Okteta::CoordRange mCoordRange;

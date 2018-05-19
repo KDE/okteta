@@ -29,9 +29,7 @@
 // Qt
 #include <QTest>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 void CharCodecIfTest::init()
 {
@@ -40,17 +38,15 @@ void CharCodecIfTest::init()
 
 void CharCodecIfTest::cleanup()
 {
-    deleteCodec( mCharCodec );
+    deleteCodec(mCharCodec);
 }
-
 
 void CharCodecIfTest::testEncodeDecode_data()
 {
     QTest::addColumn<int>("byteValue");
 
-    for( int i = 0; i < 256; ++i )
-    {
-        const QString rowTitle = QStringLiteral( "byte %1" ).arg( i );
+    for (int i = 0; i < 256; ++i) {
+        const QString rowTitle = QStringLiteral("byte %1").arg(i);
         QTest::newRow(rowTitle.toLatin1().constData()) << i;
     }
 }
@@ -62,16 +58,15 @@ void CharCodecIfTest::testEncodeDecode()
     QFETCH(int, byteValue);
 
     // current assumption: the mapping of chars to byte values is biunique for all used charsets
-    const Byte byte = Byte( byteValue );
-    Character character = mCharCodec->decode( byte );
-    if( ! character.isUndefined() )
-    {
-        QVERIFY( mCharCodec->canEncode(character) );
+    const Byte byte = Byte(byteValue);
+    Character character = mCharCodec->decode(byte);
+    if (!character.isUndefined()) {
+        QVERIFY(mCharCodec->canEncode(character));
 
         Byte encodedByte;
-        const bool encodeSuccess = mCharCodec->encode( &encodedByte, character );
-        QVERIFY( encodeSuccess );
-        QCOMPARE( encodedByte, byte );
+        const bool encodeSuccess = mCharCodec->encode(&encodedByte, character);
+        QVERIFY(encodeSuccess);
+        QCOMPARE(encodedByte, byte);
     }
 }
 

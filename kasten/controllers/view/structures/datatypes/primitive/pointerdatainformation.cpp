@@ -35,12 +35,13 @@
 #include <limits>
 
 PointerDataInformation::PointerDataInformation(const QString& name, DataInformation* childType,
-        PrimitiveDataInformation* valueType, DataInformation* parent)
-        : PrimitiveDataInformationWrapper(name, valueType, parent), mPointerTarget(childType)
+                                               PrimitiveDataInformation* valueType, DataInformation* parent)
+    : PrimitiveDataInformationWrapper(name, valueType, parent)
+    , mPointerTarget(childType)
 {
     Q_CHECK_PTR(childType);
 
-    //currently only absolute unsigned pointers are allowed
+    // currently only absolute unsigned pointers are allowed
     const PrimitiveDataType pdt = mValue->type();
     Q_ASSERT(pdt == PrimitiveDataType::UInt8 || pdt == PrimitiveDataType::UInt16 || pdt == PrimitiveDataType::UInt32 || pdt == PrimitiveDataType::UInt64);
     Q_UNUSED(pdt)
@@ -52,22 +53,21 @@ PointerDataInformation::~PointerDataInformation()
 }
 
 PointerDataInformation::PointerDataInformation(const PointerDataInformation& d)
-        : PrimitiveDataInformationWrapper(d), mPointerTarget(d.mPointerTarget->clone())
+    : PrimitiveDataInformationWrapper(d)
+    , mPointerTarget(d.mPointerTarget->clone())
 {
     mPointerTarget->setParent(this);
 }
 
 qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-        BitCount64 bitsRemaining, quint8* bitOffset)
+                                        BitCount64 bitsRemaining, quint8* bitOffset)
 {
     qint64 ret = PrimitiveDataInformationWrapper::readData(input, address, bitsRemaining, bitOffset);
-    if (!mWasAbleToRead)
-    {
+    if (!mWasAbleToRead) {
         mPointerTarget->mWasAbleToRead = false;
     }
     // If the pointer it's outside the boundaries of the input simply ignore it
-    else if (mValue->value().value<quint64>() < quint64(input->size()))
-    {
+    else if (mValue->value().value<quint64>() < quint64(input->size())) {
         // Enqueue for later reading of the destination
         topLevelDataInformation()->enqueueReadData(this);
     }
@@ -77,7 +77,7 @@ qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, O
 BitCount64 PointerDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const
 {
     Q_UNUSED(start)
-    //TODO other pointer modes
+    // TODO other pointer modes
     Q_ASSERT(child == mPointerTarget.data());
     Q_UNUSED(child);
     return mWasAbleToRead ? mValue->value().value<quint64>() * 8 : 0;
@@ -89,32 +89,29 @@ int PointerDataInformation::indexOf(const DataInformation* const data) const
     return data == mPointerTarget.data() ? 0 : -1;
 }
 
-void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel *input, Okteta::Address address)
+void PointerDataInformation::delayedReadData(Okteta::AbstractByteArrayModel* input, Okteta::Address address)
 {
-    Q_UNUSED(address); //TODO offsets
-    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
+    Q_UNUSED(address); // TODO offsets
+    Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
     Q_ASSERT(mWasAbleToRead);
     quint8 childBitOffset = 0;
     // Compute the destination offset
     const quint64 pointer = mValue->value().value<quint64>();
-    if (pointer > quint64(std::numeric_limits<Okteta::Address>::max()))
-    {
+    if (pointer > quint64(std::numeric_limits<Okteta::Address>::max())) {
         logError() << "Pointer" << mValue->valueString() << "does not point to an existing address.";
         return;
     }
     Okteta::Address newAddress(pointer);
     // If the computed destination it's outside the boundaries of the input ignore it
-    if (newAddress < 0 || newAddress >= input->size())
-    {
+    if (newAddress < 0 || newAddress >= input->size()) {
         logError() << "Pointer" << mValue->valueString() << "does not point to an existing address.";
         return;
     }
-    //update the child now
+    // update the child now
     DataInformation* oldTarget = mPointerTarget.data();
     topLevelDataInformation()->scriptHandler()->updateDataInformation(mPointerTarget.data());
     // Let the child do the work (maybe different than before now)
-    if (mPointerTarget.data() != oldTarget)
-    {
+    if (mPointerTarget.data() != oldTarget) {
         logInfo() << "Pointer target was replaced.";
         topLevelDataInformation()->setChildDataChanged();
     }
@@ -146,21 +143,17 @@ DataInformation* PointerDataInformation::childAt(uint index) const
 bool PointerDataInformation::setPointerType(DataInformation* type)
 {
     Q_CHECK_PTR(type);
-    if (!type->isPrimitive())
-    {
+    if (!type->isPrimitive()) {
         logError() << "New pointer type is not primitive!";
         return false;
     }
     PrimitiveDataInformation* prim = type->asPrimitive();
     const PrimitiveDataType pdt = prim->type();
-    if (pdt == PrimitiveDataType::UInt8 || pdt == PrimitiveDataType::UInt16 || pdt == PrimitiveDataType::UInt32 || pdt == PrimitiveDataType::UInt64)
-    {
+    if (pdt == PrimitiveDataType::UInt8 || pdt == PrimitiveDataType::UInt16 || pdt == PrimitiveDataType::UInt32 || pdt == PrimitiveDataType::UInt64) {
         mValue.reset(prim);
         mValue->setParent(this);
         return true;
-    }
-    else
-    {
+    } else {
         logError() << "New pointer type is not an unsigned integer: " << pdt;
         return false;
     }

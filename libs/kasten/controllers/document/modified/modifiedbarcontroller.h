@@ -32,32 +32,29 @@
 
 class QLabel;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelSynchronizer;
 class AbstractDocument;
 class StatusBar;
 
-
 class KASTENCONTROLLERS_EXPORT ModifiedBarController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ModifiedBarController( StatusBar* statusBar );
+public:
+    explicit ModifiedBarController(StatusBar* statusBar);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
-    void onContentFlagsChanged( Kasten::ContentFlags contentFlags );
-    void onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState );
-    void onRemoteSyncStateChanged( Kasten::RemoteSyncState remoteSyncState );
-    void onSynchronizerChanged( Kasten::AbstractModelSynchronizer* newSynchronizer );
-    void onSynchronizerDeleted( QObject* synchronizer );
+private Q_SLOTS:
+    void onContentFlagsChanged(Kasten::ContentFlags contentFlags);
+    void onLocalSyncStateChanged(Kasten::LocalSyncState localSyncState);
+    void onRemoteSyncStateChanged(Kasten::RemoteSyncState remoteSyncState);
+    void onSynchronizerChanged(Kasten::AbstractModelSynchronizer* newSynchronizer);
+    void onSynchronizerDeleted(QObject* synchronizer);
 
-  private:
+private:
     AbstractDocument* mDocument;
     AbstractModelSynchronizer* mSynchronizer;
 

@@ -27,39 +27,36 @@
 #include <QStyledItemDelegate>
 #include <QPointer>
 
-
-namespace Kasten
-{
+namespace Kasten {
 class PODDecoderTool;
-
 
 class PODDelegate : public QStyledItemDelegate
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit PODDelegate( PODDecoderTool* tool, QObject* parent = nullptr );
+public:
+    explicit PODDelegate(PODDecoderTool* tool, QObject* parent = nullptr);
 
     ~PODDelegate() override;
 
-  public: // QAbstractItemDelegate
+public: // QAbstractItemDelegate
 //     virtual void paint( QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
 //     virtual QSize sizeHint( const QStyleOptionViewItem &option, const QModelIndex& index ) const;
 //     virtual void updateEditorGeometry( QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
 
-    QWidget* createEditor( QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index ) const override;
+    QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
-    void setEditorData( QWidget* editor, const QModelIndex& index ) const override;
-    void setModelData( QWidget* editor, QAbstractItemModel* model, const QModelIndex& index ) const override;
+    void setEditorData(QWidget* editor, const QModelIndex& index) const override;
+    void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
 
-  public: // QStyledItemDelegate API
-    QString displayText( const QVariant& value, const QLocale& locale ) const override;
+public: // QStyledItemDelegate API
+    QString displayText(const QVariant& value, const QLocale& locale) const override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onEditorDone();
-    void onReadOnlyChanged( bool isReadOnly ) const;
+    void onReadOnlyChanged(bool isReadOnly) const;
 
-  private:
+private:
     PODDecoderTool* mTool;
 
     mutable QPointer<QWidget> mEditor;

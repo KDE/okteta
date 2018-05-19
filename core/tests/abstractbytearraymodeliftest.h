@@ -30,34 +30,31 @@
 
 class QSignalSpy;
 
-
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayModel;
-
 
 class AbstractByteArrayModelIfTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
+protected:
     AbstractByteArrayModelIfTest();
 
-  protected: // our API
+protected: // our API
     virtual AbstractByteArrayModel* createByteArrayModel() = 0;
-    virtual void deleteByteArrayModel( AbstractByteArrayModel* byteArrayModel ) = 0;
+    virtual void deleteByteArrayModel(AbstractByteArrayModel* byteArrayModel) = 0;
     virtual bool byteArrayModelSizeCanBeChanged() const;
 
-  protected:
-    void checkContentsReplaced( Address Position, Size removedLength, int insertedLength );
-    void checkContentsReplaced( const AddressRange& removeSection, int insertedLength );
-    void checkContentsSwapped( Address firstStart, Address secondStart, Size secondLength );
-    void checkContentsSwapped( Address firstStart, const AddressRange& secondSection );
+protected:
+    void checkContentsReplaced(Address Position, Size removedLength, int insertedLength);
+    void checkContentsReplaced(const AddressRange& removeSection, int insertedLength);
+    void checkContentsSwapped(Address firstStart, Address secondStart, Size secondLength);
+    void checkContentsSwapped(Address firstStart, const AddressRange& secondSection);
     void clearSignalSpys();
 
     struct KTestData* prepareTestInsert();
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void init();
     void cleanup();
 
@@ -71,20 +68,20 @@ class AbstractByteArrayModelIfTest : public QObject
     void testInsertAtBegin();
     void testInsertAtMid();
     void testInsertAtEnd();
-    //void testReplace();
+    // void testReplace();
     void testSwap();
     void testReplaceEqual();
     void testReplaceLess();
     void testReplaceMore();
 
-  private: // used in all tests
+private: // used in all tests
     /** pointer to the model to test */
     AbstractByteArrayModel* mByteArrayModel;
 
     QSignalSpy* ContentsChangeListSpy;
 };
 
-inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest()  : mByteArrayModel( nullptr ) {}
+inline AbstractByteArrayModelIfTest::AbstractByteArrayModelIfTest()  : mByteArrayModel(nullptr) {}
 
 }
 

@@ -28,9 +28,7 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArrayRawFileSynchronizerFactory::ByteArrayRawFileSynchronizerFactory() {}
 
@@ -38,7 +36,6 @@ ByteArrayRawFileSynchronizerFactory::ByteArrayRawFileSynchronizerFactory() {}
 // and settable in desktop file
 QString ByteArrayRawFileSynchronizerFactory::supportedWorkType() const { return QStringLiteral("ByteArrayDocument");}
 QString ByteArrayRawFileSynchronizerFactory::supportedRemoteType() const { return QStringLiteral("application/octet-stream");}
-
 
 AbstractModelSynchronizer* ByteArrayRawFileSynchronizerFactory::createSynchronizer() const
 {

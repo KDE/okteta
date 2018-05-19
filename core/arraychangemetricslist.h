@@ -28,36 +28,34 @@
 //
 #include <QList>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 // TODO: do we need the invalid status?
 class ArrayChangeMetricsList : public QList<ArrayChangeMetrics>
 {
-  public:
-    static ArrayChangeMetricsList oneReplacement( Address offset, Size removeLength, Size insertLength );
-    static ArrayChangeMetricsList oneSwapping( Address firstOffset, Size secondOffset, Size secondLength );
+public:
+    static ArrayChangeMetricsList oneReplacement(Address offset, Size removeLength, Size insertLength);
+    static ArrayChangeMetricsList oneSwapping(Address firstOffset, Size secondOffset, Size secondLength);
 
-  public:
+public:
     ArrayChangeMetricsList();
-    explicit ArrayChangeMetricsList( const ArrayChangeMetrics& metrics );
+    explicit ArrayChangeMetricsList(const ArrayChangeMetrics& metrics);
 };
 
-inline ArrayChangeMetricsList ArrayChangeMetricsList::oneReplacement( Address offset, Size removeLength, Size insertLength )
+inline ArrayChangeMetricsList ArrayChangeMetricsList::oneReplacement(Address offset, Size removeLength, Size insertLength)
 {
-    return ArrayChangeMetricsList( ArrayChangeMetrics::asReplacement(offset,removeLength,insertLength) );
+    return ArrayChangeMetricsList(ArrayChangeMetrics::asReplacement(offset, removeLength, insertLength));
 }
 
-inline ArrayChangeMetricsList ArrayChangeMetricsList::oneSwapping( Address firstOffset, Size secondOffset, Size secondLength )
+inline ArrayChangeMetricsList ArrayChangeMetricsList::oneSwapping(Address firstOffset, Size secondOffset, Size secondLength)
 {
-    return ArrayChangeMetricsList( ArrayChangeMetrics::asSwapping(firstOffset,secondOffset,secondLength) );
+    return ArrayChangeMetricsList(ArrayChangeMetrics::asSwapping(firstOffset, secondOffset, secondLength));
 }
 
 inline ArrayChangeMetricsList::ArrayChangeMetricsList() {}
-inline ArrayChangeMetricsList::ArrayChangeMetricsList( const ArrayChangeMetrics& metrics )
+inline ArrayChangeMetricsList::ArrayChangeMetricsList(const ArrayChangeMetrics& metrics)
 {
-    append( metrics );
+    append(metrics);
 }
 
 }

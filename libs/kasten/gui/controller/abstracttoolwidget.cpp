@@ -23,19 +23,17 @@
 #include "abstracttoolwidget.h"
 #include "abstracttoolwidget_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractToolWidget::AbstractToolWidget( QWidget* parent )
-  : QWidget( parent ),
-    d( new AbstractToolWidgetPrivate(this) )
+AbstractToolWidget::AbstractToolWidget(QWidget* parent)
+    : QWidget(parent)
+    , d(new AbstractToolWidgetPrivate(this))
 {
 }
 
-void AbstractToolWidget::addButton( QPushButton* button, DefaultType defaultType )
+void AbstractToolWidget::addButton(QPushButton* button, DefaultType defaultType)
 {
-    d->addButton( button, defaultType );
+    d->addButton(button, defaultType);
 }
 
 AbstractToolWidget::~AbstractToolWidget()

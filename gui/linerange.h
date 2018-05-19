@@ -28,11 +28,9 @@
 // Okteta core
 #include <okteta/numberrange.h>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-using LineRange = KDE::NumberRange<Line,LineSize>;
+using LineRange = KDE::NumberRange<Line, LineSize>;
 
 }
 

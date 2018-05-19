@@ -27,9 +27,11 @@
 class UnsignedBitfieldDataInformation : public AbstractBitfieldDataInformation
 {
     DATAINFORMATION_CLONE(UnsignedBitfieldDataInformation, AbstractBitfieldDataInformation) {}
+
 public:
     UnsignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
-            : AbstractBitfieldDataInformation(name, width, parent) {}
+        : AbstractBitfieldDataInformation(name, width, parent)
+    {}
     ~UnsignedBitfieldDataInformation() override {}
 
     QScriptValue valueAsQScriptValue() const override;

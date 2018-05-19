@@ -29,35 +29,33 @@
 
 #include <QUrl>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
 {
-  public:
-    AbstractFileSystemLoadJobPrivate( AbstractFileSystemLoadJob* parent, AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url );
+public:
+    AbstractFileSystemLoadJobPrivate(AbstractFileSystemLoadJob* parent, AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url);
 
     ~AbstractFileSystemLoadJobPrivate() override;
 
-  public: // KJob API
+public: // KJob API
     void start();
 
-  public: // AbstractLoadJob API
-    void setDocument( AbstractDocument* document );
+public: // AbstractLoadJob API
+    void setDocument(AbstractDocument* document);
 
-  public:
+public:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     const QUrl& url() const;
     QFile* file() const;
 
-  public: // slots
+public: // slots
     void load();
 
-  protected:
-    Q_DECLARE_PUBLIC( AbstractFileSystemLoadJob )
+protected:
+    Q_DECLARE_PUBLIC(AbstractFileSystemLoadJob)
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     const QUrl mUrl;
     QFile* mFile;
@@ -65,13 +63,12 @@ class AbstractFileSystemLoadJobPrivate : public AbstractLoadJobPrivate
     QString mTempFilePath;
 };
 
-
-inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate( AbstractFileSystemLoadJob* parent,
-    AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url )
-  : AbstractLoadJobPrivate( parent ),
-    mSynchronizer( synchronizer ),
-    mUrl( url ),
-    mFile( nullptr )
+inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate(AbstractFileSystemLoadJob* parent,
+                                                                          AbstractModelFileSystemSynchronizer* synchronizer, const QUrl& url)
+    : AbstractLoadJobPrivate(parent)
+    , mSynchronizer(synchronizer)
+    , mUrl(url)
+    , mFile(nullptr)
 {}
 
 inline AbstractFileSystemLoadJobPrivate::~AbstractFileSystemLoadJobPrivate() {}
@@ -87,9 +84,9 @@ inline QFile* AbstractFileSystemLoadJobPrivate::file()     const { return mFile;
 
 inline void AbstractFileSystemLoadJobPrivate::start()
 {
-    Q_Q( AbstractFileSystemLoadJob );
+    Q_Q(AbstractFileSystemLoadJob);
 
-    QMetaObject::invokeMethod( q, "load", Qt::QueuedConnection );
+    QMetaObject::invokeMethod(q, "load", Qt::QueuedConnection);
 }
 
 }

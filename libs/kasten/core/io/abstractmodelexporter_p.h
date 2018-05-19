@@ -25,35 +25,32 @@
 
 #include "abstractmodelexporter.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelExporterPrivate
 {
-  public:
-    AbstractModelExporterPrivate( AbstractModelExporter* parent,
-                                  const QString& remoteTypeName, const QString& remoteMimeType );
+public:
+    AbstractModelExporterPrivate(AbstractModelExporter* parent,
+                                 const QString& remoteTypeName, const QString& remoteMimeType);
 
     virtual ~AbstractModelExporterPrivate();
 
-  public:
+public:
     const QString& remoteTypeName() const;
     const QString& remoteMimeType() const;
 
-  protected:
+protected:
     AbstractModelExporter* const q_ptr;
 
     const QString mRemoteTypeName;
     const QString mRemoteMimeType;
 };
 
-
-inline AbstractModelExporterPrivate::AbstractModelExporterPrivate( AbstractModelExporter* parent,
-    const QString& remoteTypeName, const QString& remoteMimeType )
-  : q_ptr( parent ),
-    mRemoteTypeName( remoteTypeName ),
-    mRemoteMimeType( remoteMimeType )
+inline AbstractModelExporterPrivate::AbstractModelExporterPrivate(AbstractModelExporter* parent,
+                                                                  const QString& remoteTypeName, const QString& remoteMimeType)
+    : q_ptr(parent)
+    , mRemoteTypeName(remoteTypeName)
+    , mRemoteMimeType(remoteMimeType)
 {}
 
 inline AbstractModelExporterPrivate::~AbstractModelExporterPrivate()

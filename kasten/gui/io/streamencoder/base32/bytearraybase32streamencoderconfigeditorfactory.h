@@ -28,18 +28,16 @@
 // Kasten gui
 #include <kasten/abstractmodelstreamencoderconfigeditorfactory.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayBase32StreamEncoderConfigEditorFactory : public AbstractModelStreamEncoderConfigEditorFactory
 {
-  public:
+public:
     ByteArrayBase32StreamEncoderConfigEditorFactory();
     ~ByteArrayBase32StreamEncoderConfigEditorFactory() override;
 
-  public:
-    AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor( AbstractModelStreamEncoder* encoder ) const override;
+public:
+    AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const override;
 };
 
 }

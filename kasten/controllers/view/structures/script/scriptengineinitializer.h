@@ -41,16 +41,14 @@ class QScriptValue;
  * @endcode
  * @note
  */
-namespace ScriptEngineInitializer
-{
+namespace ScriptEngineInitializer {
 
 /** @return a new QScriptEngine with the functions added to the global object */
 QScriptEngine* newEngine();
 /** add the necessary functions to the QScriptEngine */
 void addFuctionsToScriptEngine(QScriptEngine* engine);
 
-namespace Private
-{
+namespace Private {
 /** create a new enum:
  *  first parameter is the type, second parameter is a list of name - value pairs */
 QScriptValue scriptNewEnum(QScriptContext* ctx, QScriptEngine* eng);

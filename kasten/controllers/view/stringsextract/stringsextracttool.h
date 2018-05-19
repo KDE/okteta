@@ -39,85 +39,81 @@ class AbstractByteArrayModel;
 class CharCodec;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 /**
-*/
+ */
 class OKTETAKASTENCONTROLLERS_EXPORT StringsExtractTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     StringsExtractTool();
     ~StringsExtractTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // status
-    const QList<ContainedString> *containedStringList() const;
+public: // status
+    const QList<ContainedString>* containedStringList() const;
     int minLength() const;
     bool isApplyable() const; // candidate for AbstractTool API
     bool isUptodate() const;
     bool canHighlightString() const;
     int offsetCoding() const;
 
-  public Q_SLOTS: // settings
-    void setMinLength( int minLength );
-    void markString( int stringId );
+public Q_SLOTS: // settings
+    void setMinLength(int minLength);
+    void markString(int stringId);
     void unmarkString();
 
-  public Q_SLOTS: // actions
+public Q_SLOTS: // actions
     void extractStrings();
 
-  Q_SIGNALS:
-    void uptodateChanged( bool isUptodate );
-    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
-    void canHighlightStringChanged( bool canHighlightString );
-    void offsetCodingChanged( int offsetCoding );
+Q_SIGNALS:
+    void uptodateChanged(bool isUptodate);
+    void isApplyableChanged(bool isApplyable);    // candidate for AbstractTool API
+    void canHighlightStringChanged(bool canHighlightString);
+    void offsetCodingChanged(int offsetCoding);
 
-  private:
+private:
     void checkUptoDate();
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onSelectionChanged();
     void onSourceChanged();
     void onSourceDestroyed();
     void onSourceViewDestroyed();
 
-  private: // created data
+private: // created data
     QList<ContainedString> mContainedStringList;
-    bool mExtractedStringsUptodate:1;
-    bool mSourceByteArrayModelUptodate:1;
+    bool mExtractedStringsUptodate : 1;
+    bool mSourceByteArrayModelUptodate : 1;
 
-  private: // settings
+private: // settings
     int mMinLength;
 
-  private: // sources
+private: // sources
     ByteArrayView* mByteArrayView;
     // current
-    Okteta::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     // marked view
     ByteArrayView* mSourceByteArrayView;
     // selection source
     Okteta::AddressRange mSourceSelection;
     // source of strings
-    Okteta::AbstractByteArrayModel *mSourceByteArrayModel;
+    Okteta::AbstractByteArrayModel* mSourceByteArrayModel;
     // minLength source
     int mSourceMinLength;
 };
 
-
-inline const QList<ContainedString> *StringsExtractTool::containedStringList() const { return &mContainedStringList; }
+inline const QList<ContainedString>* StringsExtractTool::containedStringList() const { return &mContainedStringList; }
 inline int StringsExtractTool::minLength()     const { return mMinLength; }
 inline bool StringsExtractTool::isUptodate()   const { return mExtractedStringsUptodate; }
 

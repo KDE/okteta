@@ -31,51 +31,49 @@
 #include <KToggleAction>
 #include <KGuiItem>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ReadOnlyController::ReadOnlyController( KXMLGUIClient* guiClient )
- : mDocument( nullptr )
+ReadOnlyController::ReadOnlyController(KXMLGUIClient* guiClient)
+    : mDocument(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSetReadOnlyAction = actionCollection->add<KToggleAction>( QStringLiteral("isreadonly") );
-    const QString text = i18nc( "@option:check set the document to read-only", "Set Read-only" );
-    mSetReadOnlyAction->setText( text );
-    mSetReadOnlyAction->setIcon( QIcon::fromTheme( QStringLiteral("object-unlocked") ) );
-    const QString checkedText = i18nc( "@option:check set the document to read-write", "Set Read-write" );
-    const KGuiItem checkedState( checkedText, QIcon::fromTheme( QStringLiteral("object-locked") ) );
-    mSetReadOnlyAction->setCheckedState( checkedState );
-    connect( mSetReadOnlyAction, &QAction::triggered,
-             this, &ReadOnlyController::setReadOnly );
+    mSetReadOnlyAction = actionCollection->add<KToggleAction>(QStringLiteral("isreadonly"));
+    const QString text = i18nc("@option:check set the document to read-only", "Set Read-only");
+    mSetReadOnlyAction->setText(text);
+    mSetReadOnlyAction->setIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
+    const QString checkedText = i18nc("@option:check set the document to read-write", "Set Read-write");
+    const KGuiItem checkedState(checkedText, QIcon::fromTheme(QStringLiteral("object-locked")));
+    mSetReadOnlyAction->setCheckedState(checkedState);
+    connect(mSetReadOnlyAction, &QAction::triggered,
+            this, &ReadOnlyController::setReadOnly);
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void ReadOnlyController::setTargetModel( AbstractModel* model )
+void ReadOnlyController::setTargetModel(AbstractModel* model)
 {
-    if( mDocument ) mDocument->disconnect( mSetReadOnlyAction );
+    if (mDocument) {
+        mDocument->disconnect(mSetReadOnlyAction);
+    }
 
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
-    if( mDocument )
-    {
-        mSetReadOnlyAction->setChecked( mDocument->isReadOnly() );
+    if (mDocument) {
+        mSetReadOnlyAction->setChecked(mDocument->isReadOnly());
 
-        connect( mDocument, &AbstractModel::readOnlyChanged,
-                 mSetReadOnlyAction, &QAction::setChecked );
-        connect( mDocument, &AbstractModel::modifiableChanged,
-                 mSetReadOnlyAction, &QAction::setEnabled );
+        connect(mDocument, &AbstractModel::readOnlyChanged,
+                mSetReadOnlyAction, &QAction::setChecked);
+        connect(mDocument, &AbstractModel::modifiableChanged,
+                mSetReadOnlyAction, &QAction::setEnabled);
     }
 
-    mSetReadOnlyAction->setEnabled( mDocument ? mDocument->isModifiable() : false );
+    mSetReadOnlyAction->setEnabled(mDocument ? mDocument->isModifiable() : false);
 }
 
-
-void ReadOnlyController::setReadOnly( bool isReadOnly )
+void ReadOnlyController::setReadOnly(bool isReadOnly)
 {
-    mDocument->setReadOnly( isReadOnly );
+    mDocument->setReadOnly(isReadOnly);
 }
 
 }

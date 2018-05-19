@@ -22,17 +22,15 @@
 
 #include "testdocument.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 TestDocument::TestDocument()
-  : mContentFlags( ContentStateNormal )
+    : mContentFlags(ContentStateNormal)
 {
 }
-TestDocument::TestDocument( const QByteArray& data )
-  : mData( data ),
-    mContentFlags( ContentStateNormal )
+TestDocument::TestDocument(const QByteArray& data)
+    : mData(data)
+    , mContentFlags(ContentStateNormal)
 {
 }
 
@@ -42,7 +40,7 @@ QString TestDocument::title() const { return mTitle; }
 ContentFlags TestDocument::contentFlags() const { return mContentFlags; }
 const QByteArray* TestDocument::data() const { return &mData; }
 
-void TestDocument::setData( const QByteArray& data )
+void TestDocument::setData(const QByteArray& data)
 {
     const ContentFlags oldContentFlags = mContentFlags;
 
@@ -50,26 +48,25 @@ void TestDocument::setData( const QByteArray& data )
 
     mContentFlags = mContentFlags | ContentHasUnstoredChanges;
 
-    if( oldContentFlags != mContentFlags )
-        emit contentFlagsChanged( mContentFlags );
-}
-
-void TestDocument::setTitle( const QString& title )
-{
-    if( mTitle != title )
-    {
-        mTitle = title;
-        emit titleChanged( title );
+    if (oldContentFlags != mContentFlags) {
+        emit contentFlagsChanged(mContentFlags);
     }
 }
 
-void TestDocument::setContentFlags( ContentFlags contentFlags )
+void TestDocument::setTitle(const QString& title)
 {
-    if( mContentFlags != contentFlags )
-    {
+    if (mTitle != title) {
+        mTitle = title;
+        emit titleChanged(title);
+    }
+}
+
+void TestDocument::setContentFlags(ContentFlags contentFlags)
+{
+    if (mContentFlags != contentFlags) {
         mContentFlags = contentFlags;
 
-        emit contentFlagsChanged( contentFlags );
+        emit contentFlagsChanged(contentFlags);
     }
 }
 

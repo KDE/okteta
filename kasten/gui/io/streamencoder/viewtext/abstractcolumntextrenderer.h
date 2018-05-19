@@ -26,8 +26,7 @@
 class QTextStream;
 class QString;
 
-namespace Kasten
-{
+namespace Kasten {
 
 /**
  * interface for the text export of columns
@@ -35,15 +34,15 @@ namespace Kasten
  */
 class AbstractColumnTextRenderer
 {
-  protected:
-    static QString whiteSpace( unsigned int length );
+protected:
+    static QString whiteSpace(unsigned int length);
 
-  public:
+public:
     virtual ~AbstractColumnTextRenderer();
 
-  public: // API to be implemented
-    virtual void renderFirstLine( QTextStream *stream, int lineIndex ) const = 0;
-    virtual void renderNextLine( QTextStream* stream, bool isSubline = false ) const = 0;
+public: // API to be implemented
+    virtual void renderFirstLine(QTextStream* stream, int lineIndex) const = 0;
+    virtual void renderNextLine(QTextStream* stream, bool isSubline = false) const = 0;
     /// default returns 1
     virtual int noOfSublinesNeeded() const;
 };

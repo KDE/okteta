@@ -32,24 +32,22 @@ namespace Okteta {
 class CharCodec;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class CharByteArrayColumnTextRenderer : public AbstractByteArrayColumnTextRenderer
 {
-  public:
-    CharByteArrayColumnTextRenderer( const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
-        const Okteta::CoordRange& coordRange,
-        int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
-        const QString& charCodecName, QChar substituteChar, QChar undefinedChar );
+public:
+    CharByteArrayColumnTextRenderer(const Okteta::AbstractByteArrayModel* byteArrayModel, Okteta::Address offset,
+                                    const Okteta::CoordRange& coordRange,
+                                    int noOfBytesPerLine, int byteSpacingWidth, int noOfGroupedBytes,
+                                    const QString& charCodecName, QChar substituteChar, QChar undefinedChar);
 
     ~CharByteArrayColumnTextRenderer() override;
 
-  protected: // AbstractByteArrayColumnTextRenderer API
-    void renderLine( QTextStream* stream, bool isSubline ) const override;
+protected: // AbstractByteArrayColumnTextRenderer API
+    void renderLine(QTextStream* stream, bool isSubline) const override;
 
-  protected:
+protected:
     const Okteta::CharCodec* mCharCodec;
     const QChar mSubstituteChar;
     const QChar mUndefinedChar;

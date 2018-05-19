@@ -28,9 +28,7 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteTableToolViewFactory::ByteTableToolViewFactory() {}
 
@@ -39,9 +37,9 @@ QString ByteTableToolViewFactory::title()    const { return i18nc("@title:window
 QString ByteTableToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.ByteTableToolView"); }
 SidePosition ByteTableToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* ByteTableToolViewFactory::create( AbstractTool* tool )
+AbstractToolView* ByteTableToolViewFactory::create(AbstractTool* tool)
 {
-    return new ByteTableToolView( qobject_cast<ByteTableTool*>(tool) );
+    return new ByteTableToolView(qobject_cast<ByteTableTool*>(tool));
 }
 
 ByteTableToolViewFactory::~ByteTableToolViewFactory() {}

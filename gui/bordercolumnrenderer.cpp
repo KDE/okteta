@@ -28,49 +28,46 @@
 #include <QPainter>
 #include <QStyle>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 static const PixelX BorderMargin = 4;
 static const PixelX LineWidth = 1;
 static const PixelX BorderWidth = 2 * BorderMargin + LineWidth;
 static const PixelX LineX = BorderMargin;
 
-
-BorderColumnRenderer::BorderColumnRenderer( AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty )
-  : AbstractColumnRenderer( stylist ),
-    mLineDrawn( lineDrawn ),
-    mInEmpty( inEmpty )
+BorderColumnRenderer::BorderColumnRenderer(AbstractColumnStylist* stylist, bool lineDrawn, bool inEmpty)
+    : AbstractColumnRenderer(stylist)
+    , mLineDrawn(lineDrawn)
+    , mInEmpty(inEmpty)
 {
-    setWidth( mLineDrawn ? BorderWidth : BorderMargin );
+    setWidth(mLineDrawn ? BorderWidth : BorderMargin);
 }
 
-void BorderColumnRenderer::renderColumn( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys )
+void BorderColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
 {
-    AbstractColumnRenderer::renderColumn( painter, Xs,Ys );
+    AbstractColumnRenderer::renderColumn(painter, Xs, Ys);
 
-    renderBorderLine( painter, Xs,Ys );
+    renderBorderLine(painter, Xs, Ys);
 }
 
-void BorderColumnRenderer::renderEmptyColumn( QPainter *painter, const PixelXRange &Xs, const PixelYRange &Ys )
+void BorderColumnRenderer::renderEmptyColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
 {
-    AbstractColumnRenderer::renderEmptyColumn( painter, Xs,Ys );
+    AbstractColumnRenderer::renderEmptyColumn(painter, Xs, Ys);
 
-    if( mInEmpty )
-        renderBorderLine( painter, Xs,Ys );
+    if (mInEmpty) {
+        renderBorderLine(painter, Xs, Ys);
+    }
 }
 
-void BorderColumnRenderer::renderBorderLine( QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys )
+void BorderColumnRenderer::renderBorderLine(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
 {
     const PixelX viewGlobalLineX = x() + LineX;
 
-    if( mLineDrawn && Xs.includes(viewGlobalLineX) )
-    {
+    if (mLineDrawn && Xs.includes(viewGlobalLineX)) {
         const int lineColor = -1; // TODO: viewport->style()->styleHint( QStyle::SH_Table_GridLineColor, 0, viewport );
 
-        painter->setPen( lineColor != -1 ? (QRgb)lineColor : stylist()->palette().mid().color() );
-        painter->drawLine( viewGlobalLineX, Ys.start(), viewGlobalLineX, Ys.end() ) ;
+        painter->setPen(lineColor != -1 ? (QRgb)lineColor : stylist()->palette().mid().color());
+        painter->drawLine(viewGlobalLineX, Ys.start(), viewGlobalLineX, Ys.end());
     }
 }
 

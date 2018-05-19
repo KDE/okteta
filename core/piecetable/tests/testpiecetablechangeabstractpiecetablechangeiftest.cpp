@@ -29,34 +29,32 @@
 // Qt
 #include <QTest>
 
-
 static const int TestOffset = 30;
 static const int StorageOffset = 20;
 static const int ReplacedStorageOffset = 53;
 
-namespace KPieceTable
-{
+namespace KPieceTable {
 
-KPieceTable::AbstractPieceTableChange *TestPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
+KPieceTable::AbstractPieceTableChange* TestPieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    TestPieceTableChange *pieceTableChange =
-        new TestPieceTableChange( 0, QString(),
-                                           TestOffset, StorageOffset, Piece::ChangeStorage,
-                                           ReplacedStorageOffset );
+    TestPieceTableChange* pieceTableChange =
+        new TestPieceTableChange(0, QString(),
+                                 TestOffset, StorageOffset, Piece::ChangeStorage,
+                                 ReplacedStorageOffset);
 
     return pieceTableChange;
 }
-void TestPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable *pieceTable )
+void TestPieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(PieceTable* pieceTable)
 {
-    pieceTable->replaceOne( TestOffset, StorageOffset );
+    pieceTable->replaceOne(TestOffset, StorageOffset);
 }
 
 void TestPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(
-       AbstractPieceTableChange *pieceTableChange )
+    AbstractPieceTableChange* pieceTableChange)
 {
     delete pieceTableChange;
 }
 
 }
 
-QTEST_MAIN( KPieceTable::TestPieceTableChangeAbstractPieceTableChangeIfTest )
+QTEST_MAIN(KPieceTable::TestPieceTableChangeAbstractPieceTableChangeIfTest)

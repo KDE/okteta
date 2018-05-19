@@ -32,36 +32,35 @@
 class QMouseEvent;
 class QTimer;
 
+namespace Okteta {
 
-namespace Okteta
+class MouseNavigator : public QObject
+                     , public AbstractMouseController
 {
+    Q_OBJECT
 
-class MouseNavigator : public QObject, public AbstractMouseController
-{
-  Q_OBJECT
-
-  public:
-    MouseNavigator( AbstractByteArrayView* view, AbstractMouseController* parent );
+public:
+    MouseNavigator(AbstractByteArrayView* view, AbstractMouseController* parent);
 
     ~MouseNavigator() override;
 
-  public: // AbstractMouseController API
-    bool handleMousePressEvent( QMouseEvent* mouseEvent ) override;
-    bool handleMouseMoveEvent( QMouseEvent* mouseEvent ) override;
-    bool handleMouseReleaseEvent( QMouseEvent* mouseEvent ) override;
-    bool handleMouseDoubleClickEvent( QMouseEvent* mouseEvent ) override;
+public: // AbstractMouseController API
+    bool handleMousePressEvent(QMouseEvent* mouseEvent) override;
+    bool handleMouseMoveEvent(QMouseEvent* mouseEvent) override;
+    bool handleMouseReleaseEvent(QMouseEvent* mouseEvent) override;
+    bool handleMouseDoubleClickEvent(QMouseEvent* mouseEvent) override;
 
-  protected:
-     /** handles the move of the mouse with pressed buttons */
-    void handleMouseMove( const QPoint& point );
+protected:
+    /** handles the move of the mouse with pressed buttons */
+    void handleMouseMove(const QPoint& point);
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     /** gets called by the scroll timer (for mouse selection) */
     void autoScrollTimerDone();
     /** */
     void startDrag();
 
-  protected:
+protected:
     /** Timer that triggers ensureCursorVisible function calls */
     QTimer* mScrollTimer;
 /*     QTimer *ChangeIntervalTimer, */
@@ -70,7 +69,7 @@ class MouseNavigator : public QObject, public AbstractMouseController
     /** timer to measure whether the time between a double click and the following counts for a tripleclick */
     QTimer* mTrippleClickTimer;
 
-  protected:
+protected:
     /** point at which the current double click happended (used by TrippleClick) */
     QPoint mDoubleClickPoint;
     /** line in which the current double click happended (used by TrippleClick) */
@@ -78,15 +77,15 @@ class MouseNavigator : public QObject, public AbstractMouseController
     /** point at which the current dragging started */
     QPoint mDragStartPoint;
 
-  protected: // parameters
+protected: // parameters
     /** flag if the left mouse button is pressed */
-    bool mLMBPressed:1;
+    bool mLMBPressed : 1;
     /** flag if a double click is happening */
-    bool mInLMBDoubleClick:1;
+    bool mInLMBDoubleClick : 1;
     /** flag if a Drag'n'Drop is happening */
-    bool mInDnD:1;
+    bool mInDnD : 1;
     /** flag if a drag might have started */
-    bool mDragStartPossible:1;
+    bool mDragStartPossible : 1;
 };
 
 }

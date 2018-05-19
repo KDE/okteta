@@ -30,52 +30,47 @@
 // KF5
 #include <KLocalizedString>
 
+namespace Kasten {
 
-namespace Kasten
+ReadOnlyBarController::ReadOnlyBarController(StatusBar* statusBar)
+    : mDocument(nullptr)
 {
+    const QString readWriteText = i18nc("@option:check the document is read-write", "Read-write");
+    const QString readOnlyText = i18nc("@option:check the document is read-only", "Read-only");
+    mReadOnlyButton = new ToggleButton(QIcon::fromTheme(QStringLiteral("object-unlocked")), QString(), readWriteText, statusBar);
+    mReadOnlyButton->setCheckedState(QIcon::fromTheme(QStringLiteral("object-locked")), QString(), readOnlyText);
+    statusBar->addWidget(mReadOnlyButton);
+    connect(mReadOnlyButton, &QAbstractButton::clicked,
+            this, &ReadOnlyBarController::setReadOnly);
 
-ReadOnlyBarController::ReadOnlyBarController( StatusBar* statusBar )
- : mDocument( nullptr )
-{
-    const QString readWriteText = i18nc( "@option:check the document is read-write", "Read-write" );
-    const QString readOnlyText = i18nc( "@option:check the document is read-only", "Read-only" );
-    mReadOnlyButton = new ToggleButton( QIcon::fromTheme( QStringLiteral("object-unlocked") ), QString(), readWriteText, statusBar );
-    mReadOnlyButton->setCheckedState( QIcon::fromTheme( QStringLiteral("object-locked") ), QString(), readOnlyText );
-    statusBar->addWidget( mReadOnlyButton );
-    connect( mReadOnlyButton, &QAbstractButton::clicked,
-             this, &ReadOnlyBarController::setReadOnly );
-
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-
-void ReadOnlyBarController::setTargetModel( AbstractModel* model )
+void ReadOnlyBarController::setTargetModel(AbstractModel* model)
 {
-    if( mDocument ) mDocument->disconnect( mReadOnlyButton );
+    if (mDocument) {
+        mDocument->disconnect(mReadOnlyButton);
+    }
 
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
-    if( mDocument )
-    {
-        mReadOnlyButton->setChecked( mDocument->isReadOnly() );
+    if (mDocument) {
+        mReadOnlyButton->setChecked(mDocument->isReadOnly());
 
-        connect( mDocument, &AbstractModel::readOnlyChanged,
-                 mReadOnlyButton, &QAbstractButton::setChecked );
-        connect( mDocument, &AbstractModel::modifiableChanged,
-                 mReadOnlyButton, &QWidget::setEnabled );
-    }
-    else
-    {
-        mReadOnlyButton->setChecked( false );
+        connect(mDocument, &AbstractModel::readOnlyChanged,
+                mReadOnlyButton, &QAbstractButton::setChecked);
+        connect(mDocument, &AbstractModel::modifiableChanged,
+                mReadOnlyButton, &QWidget::setEnabled);
+    } else {
+        mReadOnlyButton->setChecked(false);
     }
 
-    mReadOnlyButton->setEnabled( mDocument ? mDocument->isModifiable() : false );
+    mReadOnlyButton->setEnabled(mDocument ? mDocument->isModifiable() : false);
 }
 
-
-void ReadOnlyBarController::setReadOnly( bool isReadOnly )
+void ReadOnlyBarController::setReadOnly(bool isReadOnly)
 {
-    mDocument->setReadOnly( isReadOnly );
+    mDocument->setReadOnly(isReadOnly);
 }
 
 }

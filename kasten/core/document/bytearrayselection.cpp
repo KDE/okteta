@@ -22,9 +22,7 @@
 
 #include "bytearrayselection.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArraySelection::ByteArraySelection()
 {}
@@ -32,7 +30,7 @@ ByteArraySelection::ByteArraySelection()
 bool ByteArraySelection::isValid() const { return mRange.isValid(); }
 Okteta::AddressRange ByteArraySelection::range() const { return mRange; }
 
-void ByteArraySelection::setRange( const Okteta::AddressRange& range ) { mRange = range; }
+void ByteArraySelection::setRange(const Okteta::AddressRange& range) { mRange = range; }
 
 ByteArraySelection::~ByteArraySelection() {}
 

@@ -26,18 +26,16 @@
 #include "versionview.h"
 #include "versionviewtool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-VersionViewToolView::VersionViewToolView( VersionViewTool *tool )
- : mWidget( new VersionView(tool) )
+VersionViewToolView::VersionViewToolView(VersionViewTool* tool)
+    : mWidget(new VersionView(tool))
 {
 }
 
 QWidget* VersionViewToolView::widget()    const { return mWidget; }
 QString VersionViewToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool *VersionViewToolView::tool() const { return mWidget->tool(); }
+AbstractTool* VersionViewToolView::tool() const { return mWidget->tool(); }
 
 VersionViewToolView::~VersionViewToolView() {}
 

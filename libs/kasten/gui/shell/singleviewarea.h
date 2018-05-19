@@ -29,44 +29,41 @@
 
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SingleViewAreaPrivate;
 class AbstractView;
 
-
-class KASTENGUI_EXPORT SingleViewArea : public AbstractViewArea,
-                                        public If::ToolInlineViewable
+class KASTENGUI_EXPORT SingleViewArea : public AbstractViewArea
+                                      , public If::ToolInlineViewable
 {
-  Q_OBJECT
-  Q_INTERFACES(
-    Kasten::If::ToolInlineViewable
-  )
+    Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::ToolInlineViewable
+    )
 
-  public:
+public:
     explicit SingleViewArea();
 
     ~SingleViewArea() override;
 
-  public: // AbstractViewArea API
+public: // AbstractViewArea API
     void setFocus() override;
     QWidget* widget() const override;
     bool hasFocus() const override;
 
-  public: // If::ToolInlineViewable API
-    void setCurrentToolInlineView( AbstractToolInlineView* view ) override;
+public: // If::ToolInlineViewable API
+    void setCurrentToolInlineView(AbstractToolInlineView* view) override;
 
-  public:
-    void setView( AbstractView* view );
+public:
+    void setView(AbstractView* view);
 
-  Q_SIGNALS:
-    void dataOffered( const QMimeData* mimeData, bool& accepted );
-    void dataDropped( const QMimeData* mimeData );
+Q_SIGNALS:
+    void dataOffered(const QMimeData* mimeData, bool& accepted);
+    void dataDropped(const QMimeData* mimeData);
 
-  protected:
-    Q_DECLARE_PRIVATE( SingleViewArea )
+protected:
+    Q_DECLARE_PRIVATE(SingleViewArea)
 };
 
 }

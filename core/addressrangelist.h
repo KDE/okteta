@@ -28,23 +28,21 @@
 // Qt
 #include <QLinkedList>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 /**
-@author Friedrich W. H.  Kossebau
-*/
+   @author Friedrich W. H.  Kossebau
+ */
 class AddressRangeList : public QLinkedList<AddressRange>
 {
-  public:
+public:
     AddressRangeList();
 
     ~AddressRangeList();
 
-  public:
-    void addAddressRange( const AddressRange& addressRange );
-    void addAddressRangeList( const AddressRangeList& addressRangeList );
+public:
+    void addAddressRange(const AddressRange& addressRange);
+    void addAddressRangeList(const AddressRangeList& addressRangeList);
 };
 
 }

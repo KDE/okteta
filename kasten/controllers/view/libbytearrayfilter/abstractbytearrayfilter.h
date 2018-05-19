@@ -35,32 +35,33 @@ class AbstractByteArrayModel;
 }
 class QString;
 
-
 class AbstractByteArrayFilter : public QObject
 {
     Q_OBJECT
 
-  protected:
+protected:
     static const int FilteredByteCountSignalLimit = 10000;
-  protected:
-    explicit AbstractByteArrayFilter( const QString& name );
-  public:
+
+protected:
+    explicit AbstractByteArrayFilter(const QString& name);
+
+public:
     ~AbstractByteArrayFilter() override;
 
-  public: // API to be implemented
-    virtual bool filter( Okteta::Byte* result, Okteta::AbstractByteArrayModel *model, const Okteta::AddressRange& range ) const = 0;
+public: // API to be implemented
+    virtual bool filter(Okteta::Byte* result, Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const = 0;
     /** used by the editor to get write access to the parameters */
-    virtual AbstractByteArrayFilterParameterSet *parameterSet() = 0;
+    virtual AbstractByteArrayFilterParameterSet* parameterSet() = 0;
 
-  public:
+public:
     QString name() const;
 
-  Q_SIGNALS: // TODO: add check for signal to tests
-    void filteredBytes( int bytes ) const;
+Q_SIGNALS: // TODO: add check for signal to tests
+    void filteredBytes(int bytes) const;
 
-  protected:
+protected:
     class Private;
-    Private * const d;
+    Private* const d;
 };
 
 #endif

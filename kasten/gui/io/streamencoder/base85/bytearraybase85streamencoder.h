@@ -30,31 +30,35 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayBase85StreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  public:
+public:
     static const int inputGroupLength = 4;
 
     static const int outputLineLength = 72;
     static const int maxOutputBytesPerLine = outputLineLength;
 
-    enum class InputByteIndex { First = 0, Second, Third, Fourth };
+    enum class InputByteIndex
+    {
+        First = 0,
+        Second,
+        Third,
+        Fourth
+    };
 
-  public:
+public:
     ByteArrayBase85StreamEncoder();
     ~ByteArrayBase85StreamEncoder() override;
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 };
 
 }

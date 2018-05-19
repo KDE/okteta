@@ -28,21 +28,20 @@
 // Qt
 #include <QObject>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KASTENCORE_EXPORT AbstractModelSelection
 {
-  protected:
+protected:
     AbstractModelSelection();
-  public:
+
+public:
     virtual ~AbstractModelSelection();
 
-  public: // API to be implemented
+public: // API to be implemented
 //     virtual bool isValid() const = 0;
 
-  protected:
+protected:
     class Private;
     Private* const d;
 };

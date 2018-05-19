@@ -32,73 +32,72 @@
 #include <QScriptValueIterator>
 #include <QStandardPaths>
 
+namespace ScriptEngineInitializer {
 
-namespace ScriptEngineInitializer
-{
 void addFuctionsToScriptEngine(QScriptEngine* engine)
 {
     engine->globalObject().setProperty(QStringLiteral("uint8"),
-            engine->newFunction(Private::scriptNewUInt8));
+                                       engine->newFunction(Private::scriptNewUInt8));
     engine->globalObject().setProperty(QStringLiteral("uint16"),
-            engine->newFunction(Private::scriptNewUInt16));
+                                       engine->newFunction(Private::scriptNewUInt16));
     engine->globalObject().setProperty(QStringLiteral("uint32"),
-            engine->newFunction(Private::scriptNewUInt32));
+                                       engine->newFunction(Private::scriptNewUInt32));
     engine->globalObject().setProperty(QStringLiteral("uint64"),
-            engine->newFunction(Private::scriptNewUInt64));
+                                       engine->newFunction(Private::scriptNewUInt64));
 
     engine->globalObject().setProperty(QStringLiteral("int8"),
-            engine->newFunction(Private::scriptNewInt8));
+                                       engine->newFunction(Private::scriptNewInt8));
     engine->globalObject().setProperty(QStringLiteral("int16"),
-            engine->newFunction(Private::scriptNewInt16));
+                                       engine->newFunction(Private::scriptNewInt16));
     engine->globalObject().setProperty(QStringLiteral("int32"),
-            engine->newFunction(Private::scriptNewInt32));
+                                       engine->newFunction(Private::scriptNewInt32));
     engine->globalObject().setProperty(QStringLiteral("int64"),
-            engine->newFunction(Private::scriptNewInt64));
+                                       engine->newFunction(Private::scriptNewInt64));
 
     engine->globalObject().setProperty(QStringLiteral("bool8"),
-            engine->newFunction(Private::scriptNewBool8));
+                                       engine->newFunction(Private::scriptNewBool8));
     engine->globalObject().setProperty(QStringLiteral("bool16"),
-            engine->newFunction(Private::scriptNewBool16));
+                                       engine->newFunction(Private::scriptNewBool16));
     engine->globalObject().setProperty(QStringLiteral("bool32"),
-            engine->newFunction(Private::scriptNewBool32));
+                                       engine->newFunction(Private::scriptNewBool32));
     engine->globalObject().setProperty(QStringLiteral("bool64"),
-            engine->newFunction(Private::scriptNewBool64));
+                                       engine->newFunction(Private::scriptNewBool64));
 
     engine->globalObject().setProperty(QStringLiteral("float"),
-            engine->newFunction(Private::scriptNewFloat));
+                                       engine->newFunction(Private::scriptNewFloat));
     engine->globalObject().setProperty(QStringLiteral("double"),
-            engine->newFunction(Private::scriptNewDouble));
+                                       engine->newFunction(Private::scriptNewDouble));
 
     engine->globalObject().setProperty(QStringLiteral("char"),
-            engine->newFunction(Private::scriptNewChar));
+                                       engine->newFunction(Private::scriptNewChar));
 
     engine->globalObject().setProperty(QStringLiteral("bitfield"),
-            engine->newFunction(Private::scriptNewBitfield));
+                                       engine->newFunction(Private::scriptNewBitfield));
 
     engine->globalObject().setProperty(QStringLiteral("array"),
-            engine->newFunction(Private::scriptNewArray));
+                                       engine->newFunction(Private::scriptNewArray));
     engine->globalObject().setProperty(QStringLiteral("struct"),
-            engine->newFunction(Private::scriptNewStruct));
+                                       engine->newFunction(Private::scriptNewStruct));
     engine->globalObject().setProperty(QStringLiteral("union"),
-            engine->newFunction(Private::scriptNewUnion));
+                                       engine->newFunction(Private::scriptNewUnion));
 
-    //enum is a reserved keyword in JavaScript, cannot use it
+    // enum is a reserved keyword in JavaScript, cannot use it
     engine->globalObject().setProperty(QStringLiteral("enumeration"),
-            engine->newFunction(Private::scriptNewEnum));
+                                       engine->newFunction(Private::scriptNewEnum));
     engine->globalObject().setProperty(QStringLiteral("flags"),
-            engine->newFunction(Private::scriptNewFlags));
+                                       engine->newFunction(Private::scriptNewFlags));
     engine->globalObject().setProperty(QStringLiteral("string"),
-            engine->newFunction(Private::scriptNewString));
+                                       engine->newFunction(Private::scriptNewString));
     engine->globalObject().setProperty(QStringLiteral("pointer"),
-            engine->newFunction(Private::scriptNewPointer));
+                                       engine->newFunction(Private::scriptNewPointer));
     engine->globalObject().setProperty(QStringLiteral("taggedUnion"),
-            engine->newFunction(Private::scriptNewTaggedUnion));
+                                       engine->newFunction(Private::scriptNewTaggedUnion));
 
     engine->globalObject().setProperty(QStringLiteral("alternative"),
-            engine->newFunction(Private::alternativeFunc));
+                                       engine->newFunction(Private::alternativeFunc));
 
     engine->globalObject().setProperty(QStringLiteral("importScript"),
-        engine->newFunction(Private::importScriptFunc));
+                                       engine->newFunction(Private::importScriptFunc));
 }
 
 QScriptEngine* newEngine()
@@ -108,21 +107,19 @@ QScriptEngine* newEngine()
     return ret;
 }
 
-namespace Private
-{
+namespace Private {
 
 QString setUpdatePropertyName() { return QStringLiteral("setUpdate"); }
 QString setValidationPropertyName() { return QStringLiteral("setValidation"); }
 QString setPropertyName() { return QStringLiteral("set"); }
 
-namespace
-{
+namespace {
 
 QScriptValue scriptNewCommon(QScriptContext* ctx, QScriptEngine* eng, const QString& typeName)
 {
     QScriptValue object = ctx->isCalledAsConstructor() ? ctx->thisObject() : eng->newObject();
     object.setProperty(ParserStrings::PROPERTY_INTERNAL_TYPE(), typeName);
-    //add the setUpdate() and setValidation() functions
+    // add the setUpdate() and setValidation() functions
     object.setProperty(setUpdatePropertyName(), eng->newFunction(addUpdateFunc, 1));
     object.setProperty(setValidationPropertyName(), eng->newFunction(addValidationFunc, 1));
     object.setProperty(setPropertyName(), eng->newFunction(addCustomPropertiesFunc, 1));
@@ -163,18 +160,18 @@ QScriptValue scriptNewBitfield(QScriptContext* ctx, QScriptEngine* eng)
 {
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_BITFIELD());
 
-    object.setProperty(ParserStrings::PROPERTY_TYPE(), ctx->argument(0)); //first argument is type
-    object.setProperty(ParserStrings::PROPERTY_WIDTH(), ctx->argument(1)); //second argument is width
+    object.setProperty(ParserStrings::PROPERTY_TYPE(), ctx->argument(0)); // first argument is type
+    object.setProperty(ParserStrings::PROPERTY_WIDTH(), ctx->argument(1)); // second argument is width
     return object;
 }
 
-//with children:
+// with children:
 QScriptValue scriptNewStruct(QScriptContext* ctx, QScriptEngine* eng)
 {
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_STRUCT());
     object.setProperty(ParserStrings::PROPERTY_CHILD(), eng->newFunction(getChild));
 
-    object.setProperty(ParserStrings::PROPERTY_CHILDREN(), ctx->argument(0)); //first argument is children
+    object.setProperty(ParserStrings::PROPERTY_CHILDREN(), ctx->argument(0)); // first argument is children
     return object;
 }
 
@@ -183,7 +180,7 @@ QScriptValue scriptNewUnion(QScriptContext* ctx, QScriptEngine* eng)
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_UNION());
     object.setProperty(ParserStrings::PROPERTY_TYPE(), eng->newFunction(getChild));
 
-    object.setProperty(ParserStrings::PROPERTY_CHILDREN(), ctx->argument(0)); //first argument is children
+    object.setProperty(ParserStrings::PROPERTY_CHILDREN(), ctx->argument(0)); // first argument is children
     return object;
 }
 
@@ -191,8 +188,8 @@ QScriptValue scriptNewArray(QScriptContext* ctx, QScriptEngine* eng)
 {
     QScriptValue object = scriptNewCommon(ctx, eng, ParserStrings::TYPE_ARRAY());
 
-    object.setProperty(ParserStrings::PROPERTY_TYPE(), ctx->argument(0)); //first argument is child type
-    object.setProperty(ParserStrings::PROPERTY_LENGTH(), ctx->argument(1)); //second argument is length
+    object.setProperty(ParserStrings::PROPERTY_TYPE(), ctx->argument(0)); // first argument is child type
+    object.setProperty(ParserStrings::PROPERTY_LENGTH(), ctx->argument(1)); // second argument is length
     return object;
 }
 
@@ -200,9 +197,9 @@ QScriptValue createEnumObject(QScriptContext* ctx, QScriptEngine* eng, const QSt
 {
     QScriptValue object = scriptNewCommon(ctx, eng, typeName);
 
-    object.setProperty(ParserStrings::PROPERTY_ENUM_NAME(), ctx->argument(0)); //first argument is the name of the underlying enum
-    object.setProperty(ParserStrings::PROPERTY_TYPE(), ctx->argument(1)); //second argument is the type of the enum
-    object.setProperty(ParserStrings::PROPERTY_ENUM_VALUES(), ctx->argument(2)); //third argument is the enum values
+    object.setProperty(ParserStrings::PROPERTY_ENUM_NAME(), ctx->argument(0)); // first argument is the name of the underlying enum
+    object.setProperty(ParserStrings::PROPERTY_TYPE(), ctx->argument(1)); // second argument is the type of the enum
+    object.setProperty(ParserStrings::PROPERTY_ENUM_VALUES(), ctx->argument(2)); // third argument is the enum values
     return object;
 }
 
@@ -247,28 +244,30 @@ QScriptValue scriptNewTaggedUnion(QScriptContext* ctx, QScriptEngine* eng)
 QScriptValue getChild(QScriptContext* ctx, QScriptEngine* eng)
 {
     Q_UNUSED(eng)
-    if (ctx->argumentCount() < 1)
+    if (ctx->argumentCount() < 1) {
         return ctx->throwError(QStringLiteral("child(): name of child must be passed as first parameter"));
+    }
     QString nameString = ctx->argument(0).toString();
     QScriptValue ret = ctx->thisObject().property(ParserStrings::PROPERTY_CHILDREN()).property(nameString);
-    if (ret.isValid())
+    if (ret.isValid()) {
         return ret;
-    else
+    } else {
         return ctx->throwError(
-                QString(QLatin1String("child(): could not find child with name=") + nameString));
+            QString(QLatin1String("child(): could not find child with name=") + nameString));
+    }
 }
 
 QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine*)
 {
-    if (ctx->argumentCount() != 1)
+    if (ctx->argumentCount() != 1) {
         return ctx->throwError(QStringLiteral("setUpdate(): needs one argument!"));
+    }
     QScriptValue thisObj = ctx->thisObject();
     Q_ASSERT(thisObj.isValid());
     QScriptValue func = ctx->argument(0);
-    if (!func.isFunction())
-    {
+    if (!func.isFunction()) {
         return ctx->throwError(QScriptContext::TypeError,
-                QStringLiteral("setUpdate(): argument must be a function!"));
+                               QStringLiteral("setUpdate(): argument must be a function!"));
     }
     thisObj.setProperty(ParserStrings::PROPERTY_UPDATE_FUNC(), func);
     return thisObj;
@@ -276,15 +275,15 @@ QScriptValue addUpdateFunc(QScriptContext* ctx, QScriptEngine*)
 
 QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine*)
 {
-    if (ctx->argumentCount() != 1)
+    if (ctx->argumentCount() != 1) {
         return ctx->throwError(QStringLiteral("setValidation(): needs one argument!"));
+    }
     QScriptValue thisObj = ctx->thisObject();
     Q_ASSERT(thisObj.isValid());
     QScriptValue func = ctx->argument(0);
-    if (!func.isFunction())
-    {
+    if (!func.isFunction()) {
         return ctx->throwError(QScriptContext::TypeError,
-                QStringLiteral("setValidation(): argument must be a function!"));
+                               QStringLiteral("setValidation(): argument must be a function!"));
     }
     thisObj.setProperty(ParserStrings::PROPERTY_VALIDATION_FUNC(), func);
     return thisObj;
@@ -292,67 +291,75 @@ QScriptValue addValidationFunc(QScriptContext* ctx, QScriptEngine*)
 
 QScriptValue addCustomPropertiesFunc(QScriptContext* ctx, QScriptEngine*)
 {
-    if (ctx->argumentCount() != 1)
+    if (ctx->argumentCount() != 1) {
         return ctx->throwError(QStringLiteral("set(): needs one argument!"));
+    }
     QScriptValue thisObj = ctx->thisObject();
     Q_ASSERT(thisObj.isValid());
     QScriptValue arg = ctx->argument(0);
-    if (!arg.isValid() || !arg.isObject())
+    if (!arg.isValid() || !arg.isObject()) {
         return ctx->throwError(QScriptContext::TypeError,
-                QStringLiteral("set(): argument must be an object!"));
+                               QStringLiteral("set(): argument must be an object!"));
+    }
     int count = 0;
     QScriptValueIterator it(arg);
-    while (it.hasNext())
-    {
+    while (it.hasNext()) {
         it.next();
         thisObj.setProperty(it.scriptName(), it.value());
         count++;
     }
-    if (count == 0)
+    if (count == 0) {
         return ctx->throwError(QStringLiteral("set(): must set at least one property!"));
+    }
     return thisObj;
 }
 
 QScriptValue alternativeFunc(QScriptContext* ctx, QScriptEngine* eng)
 {
-    if (ctx->argumentCount() < 2)
+    if (ctx->argumentCount() < 2) {
         return ctx->throwError(QStringLiteral("alternative(): needs at least 2 arguments!"));
+    }
     QScriptValue object = ctx->isCalledAsConstructor() ? ctx->thisObject() : eng->newObject();
     object.setProperty(ParserStrings::PROPERTY_SELECT_IF(), ctx->argument(0));
     object.setProperty(ParserStrings::PROPERTY_CHILDREN(), ctx->argument(1));
-    if (ctx->argumentCount() > 2)
+    if (ctx->argumentCount() > 2) {
         object.setProperty(ParserStrings::PROPERTY_STRUCT_NAME(), ctx->argument(2));
+    }
     return object;
 }
 
 QScriptValue importScriptFunc(QScriptContext* ctx, QScriptEngine* eng)
 {
-    if (ctx->argumentCount() != 1)
+    if (ctx->argumentCount() != 1) {
         return ctx->throwError(QStringLiteral("importScript(): expected one argument!"));
+    }
     QString arg = ctx->argument(0).toString();
-    if (arg.contains(QLatin1String("..")))
+    if (arg.contains(QLatin1String(".."))) {
         return ctx->throwError(QStringLiteral("importScript(): You may only access installed structure files! Path traversal detected."));
+    }
     const QString fileName = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("okteta/structures/") + arg);
-    if (fileName.isEmpty())
+    if (fileName.isEmpty()) {
         return ctx->throwError(QStringLiteral("importScript(): could not find file to import!"));
+    }
     QFile file(fileName);
-    if (!file.open(QFile::ReadOnly))
+    if (!file.open(QFile::ReadOnly)) {
         return ctx->throwError(QStringLiteral("importScript(): failed to open file!"));
+    }
     QTextStream s(&file);
     QString code = s.readAll();
     file.close();
-    //now push context so that we don't conflict with the current execution
+    // now push context so that we don't conflict with the current execution
     QScriptContext* newCtx = eng->pushContext();
     QScriptValue result = eng->evaluate(code);
-    if (result.isError())
+    if (result.isError()) {
         result = QScriptValue(QLatin1String("importScript(): failed due to exception: ") + result.toString());
-    else
+    } else {
         result = newCtx->activationObject();
+    }
     eng->popContext();
     return result;
 }
 
+} // namespace Private
 
-} //namespace Private
-
-} //namespace ScriptEngine Initializer
+} // namespace ScriptEngine Initializer

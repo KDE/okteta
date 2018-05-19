@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "enumscriptclass.h"
 
 #include "../../datatypes/primitive/enumdatainformation.h"
@@ -40,19 +39,16 @@ EnumScriptClass::~EnumScriptClass()
 
 QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
-    if (name == s_values)
-    {
+    if (name == s_values) {
         const EnumDataInformation* pData = data->asEnum();
         QScriptValue ret = engine()->newObject();
-        QMapIterator<AllPrimitiveTypes, QString> it(pData-> enumValues()->values());
-        while(it.hasNext()) {
+        QMapIterator<AllPrimitiveTypes, QString> it(pData->enumValues()->values());
+        while (it.hasNext()) {
             it.next();
-            ret.setProperty(it.value(), QString::number(it.key().value<quint64>())); //should always work
+            ret.setProperty(it.value(), QString::number(it.key().value<quint64>())); // should always work
         }
         return ret;
-    }
-    else if (name == s_type)
-    {
+    } else if (name == s_type) {
         return data->typeName();
     }
     return PrimitiveScriptClass::additionalProperty(data, name, id);
@@ -60,8 +56,7 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
 
 bool EnumScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {
-    if (name == s_values)
-    {
+    if (name == s_values) {
         *flags = QScriptClass::HandlesReadAccess | QScriptClass::HandlesWriteAccess;
         return true;
     }
@@ -70,16 +65,15 @@ bool EnumScriptClass::queryAdditionalProperty(const DataInformation* data, const
 
 bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value)
 {
-    if (name == s_values)
-    {
+    if (name == s_values) {
         EnumDataInformation* pData = data->asEnum();
         QMap<AllPrimitiveTypes, QString> newValues = EnumDefinition::parseEnumValues(value,
-                LoggerWithContext(pData->logger(), pData->fullObjectPath()) , pData->type());
-        if (newValues.isEmpty())
+                                                                                     LoggerWithContext(pData->logger(), pData->fullObjectPath()), pData->type());
+        if (newValues.isEmpty()) {
             pData->logWarn() << "attempting to set empty list of enum values!";
+        }
         pData->setEnumValues(newValues);
         return true;
     }
     return PrimitiveScriptClass::setAdditionalProperty(data, name, id, value);
 }
-

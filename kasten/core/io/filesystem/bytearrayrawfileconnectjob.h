@@ -26,9 +26,7 @@
 // Kasten core
 #include <kasten/abstractfilesystemconnectjob.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayRawFileSynchronizer;
 class ByteArrayDocument;
@@ -36,20 +34,20 @@ class ByteArrayDocument;
 
 class ByteArrayRawFileConnectJob : public AbstractFileSystemConnectJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer, AbstractDocument* document,
-                                const QUrl& url, AbstractModelSynchronizer::ConnectOption option );
+public:
+    ByteArrayRawFileConnectJob(ByteArrayRawFileSynchronizer* synchronizer, AbstractDocument* document,
+                               const QUrl& url, AbstractModelSynchronizer::ConnectOption option);
     ~ByteArrayRawFileConnectJob() override;
 
-  protected: // AbstractFileSystemLoadJob API
+protected: // AbstractFileSystemLoadJob API
     void startConnectWithFile() override;
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
 //     void onDataPulled();
 
-  protected:
+protected:
 //     ByteArrayRawFileWriteThread *mWriteThread;
 };
 

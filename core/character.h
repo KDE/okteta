@@ -28,27 +28,30 @@
 // Qt
 #include <QChar>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class OKTETACORE_EXPORT Character : public QChar
 {
-  public:
-    Character( QChar qchar ); // krazy:exclude=explicit
-    Character( QChar qchar, bool isUndefined );
+public:
+    Character(QChar qchar);   // krazy:exclude=explicit
+    Character(QChar qchar, bool isUndefined);
 
-  public:
+public:
     bool isUndefined() const;
 
-  protected:
+protected:
     // the byte is not defined
-    bool mIsUndefined:1;
+    bool mIsUndefined : 1;
 };
 
-
-inline Character::Character( QChar qchar ) : QChar( qchar ), mIsUndefined( false ) {}
-inline Character::Character( QChar qchar, bool isUndefined ) : QChar( qchar ), mIsUndefined( isUndefined ) {}
+inline Character::Character(QChar qchar)
+    : QChar(qchar)
+    , mIsUndefined(false)
+{}
+inline Character::Character(QChar qchar, bool isUndefined)
+    : QChar(qchar)
+    , mIsUndefined(isUndefined)
+{}
 inline bool Character::isUndefined() const { return mIsUndefined; }
 
 }

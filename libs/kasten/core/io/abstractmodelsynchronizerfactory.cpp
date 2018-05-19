@@ -22,9 +22,7 @@
 
 #include "abstractmodelsynchronizerfactory.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 AbstractModelSynchronizerFactory::~AbstractModelSynchronizerFactory() {}
 

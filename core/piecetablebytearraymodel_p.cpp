@@ -26,191 +26,200 @@
 // lib
 #include <addressrangelist.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 static const int InvalidVersionIndex = -1;
 
-PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate( PieceTableByteArrayModel* parent, const QByteArray& data )
-  : p( parent ),
-    mReadOnly( false ),
-    mInitialData( data )
+PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, const QByteArray& data)
+    : p(parent)
+    , mReadOnly(false)
+    , mInitialData(data)
 {
-    mPieceTable.init( data.size() );
+    mPieceTable.init(data.size());
 }
 
-PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate( PieceTableByteArrayModel *parent, int size, Byte fillByte )
-  : p( parent ),
-    mReadOnly( false ),
-    mInitialData( size, fillByte )
+PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, int size, Byte fillByte)
+    : p(parent)
+    , mReadOnly(false)
+    , mInitialData(size, fillByte)
 {
-    mPieceTable.init( size );
+    mPieceTable.init(size);
 }
-
 
 // TODO: getStorageData needs some caching, optimize for successive access
-Byte PieceTableByteArrayModelPrivate::byte( Address offset ) const
+Byte PieceTableByteArrayModelPrivate::byte(Address offset) const
 {
     int storageId;
     Address storageOffset;
-    mPieceTable.getStorageData( &storageId, &storageOffset, offset );
+    mPieceTable.getStorageData(&storageId, &storageOffset, offset);
 
-    const Byte result = ( storageId == KPieceTable::Piece::OriginalStorage ) ?
+    const Byte result = (storageId == KPieceTable::Piece::OriginalStorage) ?
                         mInitialData[storageOffset] :
                         mChangesDataStorage[storageOffset];
     return result;
 }
 
-void PieceTableByteArrayModelPrivate::setData( const QByteArray& data )
+void PieceTableByteArrayModelPrivate::setData(const QByteArray& data)
 {
     const int oldSize = mPieceTable.size();
     const bool wasModifiedBefore = isModified();
     const QList<Bookmark> bookmarks = mBookmarks.list();
 
     mInitialData = data;
-    mPieceTable.init( data.size() );
+    mPieceTable.init(data.size());
     mChangesDataStorage.clear();
     mBookmarks.clear();
 
     // TODO: how to tell this to the synchronizer?
-    emit p->contentsChanged( ArrayChangeMetricsList::oneReplacement(0,oldSize,data.size()) );
-    if( wasModifiedBefore ) emit p->modifiedChanged( false );
-    if( !bookmarks.empty() ) emit p->bookmarksRemoved( bookmarks );
-    emit p->headVersionChanged( 0 );
-    emit p->revertedToVersionIndex( 0 );
+    emit p->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, data.size()));
+    if (wasModifiedBefore) {
+        emit p->modifiedChanged(false);
+    }
+    if (!bookmarks.empty()) {
+        emit p->bookmarksRemoved(bookmarks);
+    }
+    emit p->headVersionChanged(0);
+    emit p->revertedToVersionIndex(0);
 }
 
-void PieceTableByteArrayModelPrivate::setByte( Address offset, Byte byte )
+void PieceTableByteArrayModelPrivate::setByte(Address offset, Byte byte)
 {
-    if( mReadOnly )
+    if (mReadOnly) {
         return;
+    }
 
     const bool wasModifiedBefore = isModified();
     const bool oldVersionIndex = versionIndex();
 
     Address storageOffset;
-    const bool newChange = mPieceTable.replaceOne( offset, &storageOffset );
-    mChangesDataStorage.append( storageOffset, byte );
+    const bool newChange = mPieceTable.replaceOne(offset, &storageOffset);
+    mChangesDataStorage.append(storageOffset, byte);
 
     const ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( offset, 1, 1 );
-    const ByteArrayChange modification( metrics, mChangesDataStorage.data(storageOffset,1) );
+        ArrayChangeMetrics::asReplacement(offset, 1, 1);
+    const ByteArrayChange modification(metrics, mChangesDataStorage.data(storageOffset, 1));
     QList<Okteta::ByteArrayChange> modificationsList;
-    modificationsList.append( modification );
+    modificationsList.append(modification);
 
-    emit p->contentsChanged( ArrayChangeMetricsList(metrics) );
-    emit p->changesDone( modificationsList, oldVersionIndex, versionIndex() );
-    if( ! wasModifiedBefore ) emit p->modifiedChanged( true );
-    if( newChange )
-        emit p->headVersionChanged( mPieceTable.changesCount() );
-    else
-        emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
+    emit p->contentsChanged(ArrayChangeMetricsList(metrics));
+    emit p->changesDone(modificationsList, oldVersionIndex, versionIndex());
+    if (!wasModifiedBefore) {
+        emit p->modifiedChanged(true);
+    }
+    if (newChange) {
+        emit p->headVersionChanged(mPieceTable.changesCount());
+    } else {
+        emit p->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
+    }
 }
 
-
-Size PieceTableByteArrayModelPrivate::insert( Address offset, const Byte* insertData, int insertLength )
+Size PieceTableByteArrayModelPrivate::insert(Address offset, const Byte* insertData, int insertLength)
 {
     // correct parameters
     const int oldSize = mPieceTable.size();
-    if( offset > oldSize )
+    if (offset > oldSize) {
         offset = oldSize;
+    }
     // check all parameters
-    if( mReadOnly || insertLength == 0 )
+    if (mReadOnly || insertLength == 0) {
         return 0;
+    }
 
     beginChanges();
 
-    doInsertChange( offset, insertData, insertLength );
+    doInsertChange(offset, insertData, insertLength);
 
     endChanges();
 
     return insertLength;
 }
 
-
-//TODO: is anyone interested in the removed data? so we need a signal beforeRemoving(section)?
-Size PieceTableByteArrayModelPrivate::remove( const AddressRange& _removeRange )
+// TODO: is anyone interested in the removed data? so we need a signal beforeRemoving(section)?
+Size PieceTableByteArrayModelPrivate::remove(const AddressRange& _removeRange)
 {
-    AddressRange removeRange( _removeRange );
+    AddressRange removeRange(_removeRange);
     // correct parameters
     const int oldSize = mPieceTable.size();
-    removeRange.restrictEndTo( oldSize-1 );
+    removeRange.restrictEndTo(oldSize - 1);
     // check parameters
-    if( removeRange.start() >= oldSize || removeRange.width() == 0 )
+    if (removeRange.start() >= oldSize || removeRange.width() == 0) {
         return 0;
+    }
 
     beginChanges();
 
-    doRemoveChange( removeRange );
+    doRemoveChange(removeRange);
 
     endChanges();
 
     return removeRange.width();
 }
 
-Size PieceTableByteArrayModelPrivate::replace( const AddressRange& _removeRange, const Byte* insertData, int insertLength )
+Size PieceTableByteArrayModelPrivate::replace(const AddressRange& _removeRange, const Byte* insertData, int insertLength)
 {
-    AddressRange removeRange( _removeRange );
+    AddressRange removeRange(_removeRange);
     // correct parameters
     const int oldSize = mPieceTable.size();
-    removeRange.restrictEndTo( oldSize-1 );
+    removeRange.restrictEndTo(oldSize - 1);
     // check parameters
-    if( (removeRange.startsBehind( oldSize-1 ) && removeRange.width()>0)
-        || (removeRange.width()==0 && insertLength==0) )
+    if ((removeRange.startsBehind(oldSize - 1) && removeRange.width() > 0)
+        || (removeRange.width() == 0 && insertLength == 0)) {
         return 0;
+    }
 
     beginChanges();
 
-    doReplaceChange( removeRange, insertData, insertLength );
+    doReplaceChange(removeRange, insertData, insertLength);
 
     endChanges();
 
     return insertLength;
 }
 
-
-bool PieceTableByteArrayModelPrivate::swap( Address firstStart, const AddressRange& _secondRange )
+bool PieceTableByteArrayModelPrivate::swap(Address firstStart, const AddressRange& _secondRange)
 {
-    AddressRange secondRange( _secondRange );
+    AddressRange secondRange(_secondRange);
     // correct parameters
-    secondRange.restrictEndTo( mPieceTable.size()-1 );
+    secondRange.restrictEndTo(mPieceTable.size() - 1);
     // check parameters
-    if( secondRange.start() >= mPieceTable.size() || secondRange.width() <= 0
-        || firstStart > mPieceTable.size() || secondRange.start() == firstStart )
+    if (secondRange.start() >= mPieceTable.size() || secondRange.width() <= 0
+        || firstStart > mPieceTable.size() || secondRange.start() == firstStart) {
         return false;
+    }
 
     beginChanges();
 
-    doSwapChange( firstStart, secondRange );
+    doSwapChange(firstStart, secondRange);
 
     endChanges();
 
     return true;
 }
 
-Size PieceTableByteArrayModelPrivate::fill( Byte fillByte, Address offset, Size fillLength )
+Size PieceTableByteArrayModelPrivate::fill(Byte fillByte, Address offset, Size fillLength)
 {
     // correct parameters
     const int lengthToEnd = mPieceTable.size() - offset;
-    if( fillLength < 0 )
+    if (fillLength < 0) {
         fillLength = lengthToEnd;
-    const int filledLength = ( fillLength < lengthToEnd ) ? fillLength : lengthToEnd;
+    }
+    const int filledLength = (fillLength < lengthToEnd) ? fillLength : lengthToEnd;
     // check parameters
-    const bool nothingToFill = ( ((int)offset >= mPieceTable.size()) || (fillLength == 0));
-    if( nothingToFill )
+    const bool nothingToFill = (((int)offset >= mPieceTable.size()) || (fillLength == 0));
+    if (nothingToFill) {
         return 0;
+    }
 
     beginChanges();
 
-    doFillChange( offset, filledLength, fillByte, fillLength );
+    doFillChange(offset, filledLength, fillByte, fillLength);
 
     endChanges();
 
     return fillLength;
 }
 
-void PieceTableByteArrayModelPrivate::revertToVersionByIndex( int versionIndex )
+void PieceTableByteArrayModelPrivate::revertToVersionByIndex(int versionIndex)
 {
     ArrayChangeMetricsList changeList;
     AddressRangeList changedRanges;
@@ -218,104 +227,110 @@ void PieceTableByteArrayModelPrivate::revertToVersionByIndex( int versionIndex )
     const bool oldModified = isModified();
 
     const bool anyChanges =
-        mPieceTable.revertBeforeChange( versionIndex, &changedRanges, &changeList ); // TODO: changedRanges no longer used
+        mPieceTable.revertBeforeChange(versionIndex, &changedRanges, &changeList);   // TODO: changedRanges no longer used
 
-    if( !anyChanges )
+    if (!anyChanges) {
         return;
+    }
 
     const bool newModified = isModified();
-    const bool isModificationChanged = ( oldModified != newModified );
+    const bool isModificationChanged = (oldModified != newModified);
 
-//TODO: what about the bookmarks? They need version support, too.
+// TODO: what about the bookmarks? They need version support, too.
 // Modell of the bookmarks. But shouldn't they be independent?
 
-    emit p->contentsChanged( changeList );
-    if( isModificationChanged ) emit p->modifiedChanged( newModified );
-    emit p->revertedToVersionIndex( versionIndex );
+    emit p->contentsChanged(changeList);
+    if (isModificationChanged) {
+        emit p->modifiedChanged(newModified);
+    }
+    emit p->revertedToVersionIndex(versionIndex);
 }
 
-void PieceTableByteArrayModelPrivate::openGroupedChange( const QString& description )
+void PieceTableByteArrayModelPrivate::openGroupedChange(const QString& description)
 {
     const bool isModifiedBefore = isModified();
     mBeforeGroupedChangeVersionIndex = mPieceTable.appliedChangesCount();
-    mPieceTable.openGroupedChange( description );
+    mPieceTable.openGroupedChange(description);
 
-    if( ! isModifiedBefore ) emit p->modifiedChanged( true );
-    emit p->headVersionChanged( mPieceTable.changesCount() );
+    if (!isModifiedBefore) {
+        emit p->modifiedChanged(true);
+    }
+    emit p->headVersionChanged(mPieceTable.changesCount());
 }
 
 void PieceTableByteArrayModelPrivate::cancelGroupedChange()
 {
-    if( mBeforeGroupedChangeVersionIndex != InvalidVersionIndex )
-        revertToVersionByIndex( mBeforeGroupedChangeVersionIndex );
+    if (mBeforeGroupedChangeVersionIndex != InvalidVersionIndex) {
+        revertToVersionByIndex(mBeforeGroupedChangeVersionIndex);
+    }
 }
 
-void PieceTableByteArrayModelPrivate::closeGroupedChange( const QString& description )
+void PieceTableByteArrayModelPrivate::closeGroupedChange(const QString& description)
 {
-    mPieceTable.closeGroupedChange( description );
+    mPieceTable.closeGroupedChange(description);
     mBeforeGroupedChangeVersionIndex = InvalidVersionIndex;
 
-    emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
+    emit p->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
 }
 
-QList<ByteArrayChange> PieceTableByteArrayModelPrivate::changes( int firstVersionIndex, int lastVersionIndex ) const
+QList<ByteArrayChange> PieceTableByteArrayModelPrivate::changes(int firstVersionIndex, int lastVersionIndex) const
 {
     QList<ByteArrayChange> result;
 
-    result.reserve(lastVersionIndex-firstVersionIndex);
-    for( int i=firstVersionIndex; i<lastVersionIndex; ++i )
-    {
+    result.reserve(lastVersionIndex - firstVersionIndex);
+    for (int i = firstVersionIndex; i < lastVersionIndex; ++i) {
         ArrayChangeMetrics metrics;
         Address storageOffset;
-        mPieceTable.getChangeData( &metrics, &storageOffset, i );
+        mPieceTable.getChangeData(&metrics, &storageOffset, i);
 
         QByteArray data;
-        if( metrics.type() == ArrayChangeMetrics::Replacement )
-            data = mChangesDataStorage.data( storageOffset, metrics.insertLength() );
-        result.append( ByteArrayChange(metrics,data) );
+        if (metrics.type() == ArrayChangeMetrics::Replacement) {
+            data = mChangesDataStorage.data(storageOffset, metrics.insertLength());
+        }
+        result.append(ByteArrayChange(metrics, data));
     }
 
     return result;
 }
 
-void PieceTableByteArrayModelPrivate::doChanges( const QList<ByteArrayChange>& changes,
-                                                 int oldVersionIndex, int newVersionIndex )
+void PieceTableByteArrayModelPrivate::doChanges(const QList<ByteArrayChange>& changes,
+                                                int oldVersionIndex, int newVersionIndex)
 {
 // qCDebug(LOG_OKTETA_CORE) << this<<" is at "<<versionIndex()<<", should from "<<oldVersionIndex<<" to "<<newVersionIndex;
     // changes already done? TODO: should this check be here?
-    if( newVersionIndex == versionIndex() )
+    if (newVersionIndex == versionIndex()) {
         return;
+    }
 
     // collision! TODO: what to do?
-    if( oldVersionIndex != versionIndex() )
+    if (oldVersionIndex != versionIndex()) {
         return;
+    }
 
     beginChanges();
 
-    for( const ByteArrayChange& change : changes )
-    {
+    for (const ByteArrayChange& change : changes) {
         const ArrayChangeMetrics& metrics = change.metrics();
-        switch( metrics.type() )
+        switch (metrics.type())
         {
         case ArrayChangeMetrics::Replacement:
         {
             const int oldSize = mPieceTable.size();
-            const AddressRange removeRange = AddressRange::fromWidth( metrics.offset(), metrics.removeLength() );
+            const AddressRange removeRange = AddressRange::fromWidth(metrics.offset(), metrics.removeLength());
             // check parameters
-            if( removeRange.startsBehind(oldSize-1) && (removeRange.width()>0) ) 
-            {
+            if (removeRange.startsBehind(oldSize - 1) && (removeRange.width() > 0)) {
                 // something is not matching
                 ; // TODO: set flag to undo all changes
             }
 
             const QByteArray& insertData = change.data();
-            doReplaceChange( removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size() );
+            doReplaceChange(removeRange, reinterpret_cast<const Byte*>(insertData.constData()), insertData.size());
             break;
         }
         case ArrayChangeMetrics::Swapping:
         {
-            const AddressRange secondRange( metrics.secondStart(), metrics.secondEnd() );
-            doSwapChange( metrics.offset(), secondRange );
+            const AddressRange secondRange(metrics.secondStart(), metrics.secondEnd());
+            doSwapChange(metrics.offset(), secondRange);
             break;
         }
         default:
@@ -340,18 +355,23 @@ void PieceTableByteArrayModelPrivate::beginChanges()
 void PieceTableByteArrayModelPrivate::endChanges()
 {
     const int currentVersionIndex = versionIndex();
-    const bool newChange = ( mBeforeChangesVersionIndex != currentVersionIndex );
+    const bool newChange = (mBeforeChangesVersionIndex != currentVersionIndex);
     const bool currentIsModified = isModified();
-    const bool modifiedChanged = ( mBeforeChangesModified != currentIsModified );
+    const bool modifiedChanged = (mBeforeChangesModified != currentIsModified);
 
-    emit p->contentsChanged( mChangeMetrics );
-    emit p->changesDone( mChanges, mBeforeChangesVersionIndex, currentVersionIndex );
-    if( mBookmarksModified ) emit p->bookmarksModified( true );
-    if( modifiedChanged ) emit p->modifiedChanged( currentIsModified );
-    if( newChange )
-        emit p->headVersionChanged( mPieceTable.changesCount() );
-    else
-        emit p->headVersionDescriptionChanged( mPieceTable.headChangeDescription() );
+    emit p->contentsChanged(mChangeMetrics);
+    emit p->changesDone(mChanges, mBeforeChangesVersionIndex, currentVersionIndex);
+    if (mBookmarksModified) {
+        emit p->bookmarksModified(true);
+    }
+    if (modifiedChanged) {
+        emit p->modifiedChanged(currentIsModified);
+    }
+    if (newChange) {
+        emit p->headVersionChanged(mPieceTable.changesCount());
+    } else {
+        emit p->headVersionDescriptionChanged(mPieceTable.headChangeDescription());
+    }
 
     // clean
     mChangeMetrics.clear();
@@ -359,83 +379,82 @@ void PieceTableByteArrayModelPrivate::endChanges()
     mBookmarksModified = false;
 }
 
-void PieceTableByteArrayModelPrivate::doInsertChange( Address offset,
-                                                      const Byte* insertData, int insertLength )
+void PieceTableByteArrayModelPrivate::doInsertChange(Address offset,
+                                                     const Byte* insertData, int insertLength)
 {
     Address storageOffset;
-    mPieceTable.insert( offset, insertLength, &storageOffset );
-    mChangesDataStorage.append( storageOffset, reinterpret_cast<const char*>(insertData), insertLength );
+    mPieceTable.insert(offset, insertLength, &storageOffset);
+    mChangesDataStorage.append(storageOffset, reinterpret_cast<const char*>(insertData), insertLength);
 
-    mBookmarksModified |= mBookmarks.adjustToReplaced( offset, 0, insertLength );
+    mBookmarksModified |= mBookmarks.adjustToReplaced(offset, 0, insertLength);
 
-    const ArrayChangeMetrics metrics = ArrayChangeMetrics::asReplacement( offset, 0, insertLength );
-    const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
+    const ArrayChangeMetrics metrics = ArrayChangeMetrics::asReplacement(offset, 0, insertLength);
+    const ByteArrayChange change(metrics, mChangesDataStorage.data(storageOffset, insertLength));
 
-    mChangeMetrics.append( metrics );
-    mChanges.append( change );
+    mChangeMetrics.append(metrics);
+    mChanges.append(change);
 }
 
-void PieceTableByteArrayModelPrivate::doRemoveChange( const AddressRange& removeRange )
+void PieceTableByteArrayModelPrivate::doRemoveChange(const AddressRange& removeRange)
 {
-    mPieceTable.remove( removeRange );
+    mPieceTable.remove(removeRange);
 
-    mBookmarksModified |= mBookmarks.adjustToReplaced( removeRange.start(), removeRange.width(), 0 );
+    mBookmarksModified |= mBookmarks.adjustToReplaced(removeRange.start(), removeRange.width(), 0);
 
     const ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( removeRange.start(), removeRange.width(), 0 );
-    const ByteArrayChange change( metrics );
+        ArrayChangeMetrics::asReplacement(removeRange.start(), removeRange.width(), 0);
+    const ByteArrayChange change(metrics);
 
-    mChangeMetrics.append( metrics );
-    mChanges.append( change );
+    mChangeMetrics.append(metrics);
+    mChanges.append(change);
 }
 
-void PieceTableByteArrayModelPrivate::doReplaceChange( const AddressRange& removeRange,
-                                                       const Byte* insertData, int insertLength )
-{
-    Address storageOffset;
-    mPieceTable.replace( removeRange, insertLength, &storageOffset );
-    mChangesDataStorage.append( storageOffset, reinterpret_cast<const char*>(insertData), insertLength );
-
-    mBookmarksModified |= mBookmarks.adjustToReplaced( removeRange.start(), removeRange.width(), insertLength );
-
-    const ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( removeRange.start(), removeRange.width(), insertLength );
-    const ByteArrayChange change( metrics, mChangesDataStorage.data(storageOffset,insertLength) );
-
-    mChangeMetrics.append( metrics );
-    mChanges.append( change );
-}
-
-void PieceTableByteArrayModelPrivate::doSwapChange( Address firstStart, const AddressRange& secondRange )
-{
-    mPieceTable.swap( firstStart, secondRange );
-
-    mBookmarksModified |= mBookmarks.adjustToSwapped( firstStart, secondRange.start(),secondRange.width() );
-
-    const ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asSwapping( firstStart, secondRange.start(), secondRange.width() );
-    const ByteArrayChange change( metrics );
-
-    mChangeMetrics.append( metrics );
-    mChanges.append( change );
-}
-
-void PieceTableByteArrayModelPrivate::doFillChange( Address offset, Size filledLength,
-                                                    Byte fillByte, int fillLength )
+void PieceTableByteArrayModelPrivate::doReplaceChange(const AddressRange& removeRange,
+                                                      const Byte* insertData, int insertLength)
 {
     Address storageOffset;
-    mPieceTable.replace( offset, filledLength, fillLength, &storageOffset );
+    mPieceTable.replace(removeRange, insertLength, &storageOffset);
+    mChangesDataStorage.append(storageOffset, reinterpret_cast<const char*>(insertData), insertLength);
 
-    mChangesDataStorage.appendFill( storageOffset, fillByte, fillLength );
+    mBookmarksModified |= mBookmarks.adjustToReplaced(removeRange.start(), removeRange.width(), insertLength);
 
     const ArrayChangeMetrics metrics =
-        ArrayChangeMetrics::asReplacement( offset, filledLength, fillLength );
-    const ByteArrayChange change( metrics );
+        ArrayChangeMetrics::asReplacement(removeRange.start(), removeRange.width(), insertLength);
+    const ByteArrayChange change(metrics, mChangesDataStorage.data(storageOffset, insertLength));
 
-    mChangeMetrics.append( metrics );
-    mChanges.append( change );
+    mChangeMetrics.append(metrics);
+    mChanges.append(change);
 }
 
+void PieceTableByteArrayModelPrivate::doSwapChange(Address firstStart, const AddressRange& secondRange)
+{
+    mPieceTable.swap(firstStart, secondRange);
+
+    mBookmarksModified |= mBookmarks.adjustToSwapped(firstStart, secondRange.start(), secondRange.width());
+
+    const ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asSwapping(firstStart, secondRange.start(), secondRange.width());
+    const ByteArrayChange change(metrics);
+
+    mChangeMetrics.append(metrics);
+    mChanges.append(change);
+}
+
+void PieceTableByteArrayModelPrivate::doFillChange(Address offset, Size filledLength,
+                                                   Byte fillByte, int fillLength)
+{
+    Address storageOffset;
+    mPieceTable.replace(offset, filledLength, fillLength, &storageOffset);
+
+    mChangesDataStorage.appendFill(storageOffset, fillByte, fillLength);
+
+    const ArrayChangeMetrics metrics =
+        ArrayChangeMetrics::asReplacement(offset, filledLength, fillLength);
+    const ByteArrayChange change(metrics);
+
+    mChangeMetrics.append(metrics);
+    mChanges.append(change);
+}
 
 PieceTableByteArrayModelPrivate::~PieceTableByteArrayModelPrivate()
 {

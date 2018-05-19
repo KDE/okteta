@@ -28,32 +28,30 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 Hexadecimal8Codec::Hexadecimal8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox encoding of one byte as value in the hexadecimal format","Hexadecimal 8-bit") )
+    : AbstractTypeCodec(i18nc("@label:textbox encoding of one byte as value in the hexadecimal format", "Hexadecimal 8-bit"))
 {}
 
-QVariant Hexadecimal8Codec::value( const PODData& data, int* byteCount ) const
+QVariant Hexadecimal8Codec::value(const PODData& data, int* byteCount) const
 {
-    const unsigned char* pointer = (unsigned char*)data.pointer( 1 );
+    const unsigned char* pointer = (unsigned char*)data.pointer(1);
 
     *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<Hexadecimal8>( Hexadecimal8(*pointer) ) : QVariant();
+    return pointer ? QVariant::fromValue<Hexadecimal8>(Hexadecimal8(*pointer)) : QVariant();
 }
 
-QByteArray Hexadecimal8Codec::valueToBytes( const QVariant& value ) const
+QByteArray Hexadecimal8Codec::valueToBytes(const QVariant& value) const
 {
     const quint8 number = value.value<Hexadecimal8>().value;
 
-    return QByteArray( (const char*)&number, sizeof(quint8) );
+    return QByteArray((const char*)&number, sizeof(quint8));
 }
 
-bool Hexadecimal8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+bool Hexadecimal8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
-    return ( value.value<Hexadecimal8>().value == otherValue.value<Hexadecimal8>().value );
+    return (value.value<Hexadecimal8>().value == otherValue.value<Hexadecimal8>().value);
 }
 
 Hexadecimal8Codec::~Hexadecimal8Codec() {}

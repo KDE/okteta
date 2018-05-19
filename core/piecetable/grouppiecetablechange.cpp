@@ -30,9 +30,7 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 int GroupPieceTableChange::type() const { return GroupId; }
 
@@ -41,139 +39,131 @@ QString GroupPieceTableChange::description() const
     return mDescription;
 }
 
-bool GroupPieceTableChange::merge( const AbstractPieceTableChange* other )
+bool GroupPieceTableChange::merge(const AbstractPieceTableChange* other)
 {
     bool result = false;
 
-    if( !mChangeStack.isEmpty() )
-        result = mChangeStack.last()->merge( other );
+    if (!mChangeStack.isEmpty()) {
+        result = mChangeStack.last()->merge(other);
+    }
 
     return result;
 }
 
-AddressRange GroupPieceTableChange::apply( PieceTable* pieceTable ) const
+AddressRange GroupPieceTableChange::apply(PieceTable* pieceTable) const
 {
-Q_UNUSED( pieceTable )
+    Q_UNUSED(pieceTable)
 //     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return AddressRange();//( mInsertOffset, pieceTable->size()-1 );
+    return AddressRange();// ( mInsertOffset, pieceTable->size()-1 );
 }
 
-AddressRange GroupPieceTableChange::revert( PieceTable* pieceTable ) const
+AddressRange GroupPieceTableChange::revert(PieceTable* pieceTable) const
 {
-Q_UNUSED( pieceTable )
+    Q_UNUSED(pieceTable)
 //     const int oldLast = pieceTable->size() - 1;
 //     pieceTable->remove( AddressRange::fromWidth(mInsertOffset,mInsertLength) );
-    return AddressRange();//( mInsertOffset, oldLast );
+    return AddressRange();// ( mInsertOffset, oldLast );
 }
 
 ArrayChangeMetrics GroupPieceTableChange::metrics() const
 {
-    return ArrayChangeMetrics::asReplacement( 0, 0, 0);
+    return ArrayChangeMetrics::asReplacement(0, 0, 0);
 }
 
-bool GroupPieceTableChange::appendChange( AbstractPieceTableChange* change )
+bool GroupPieceTableChange::appendChange(AbstractPieceTableChange* change)
 {
 #if 0
     // chop unapplied changes
-    if( mAppliedChangesCount < mChangeStack.count() )
-    {
+    if (mAppliedChangesCount < mChangeStack.count()) {
         // hide baseindex if needed
-        if( mBaseBeforeChangeIndex > mAppliedChangesCount )
+        if (mBaseBeforeChangeIndex > mAppliedChangesCount) {
             mBaseBeforeChangeIndex = -1;
+        }
         do
         {
-            AbstractPieceTableChange *droppedChange = mChangeStack.pop();
+            AbstractPieceTableChange* droppedChange = mChangeStack.pop();
             delete droppedChange;
         }
-        while( mAppliedChangesCount < mChangeStack.count() );
+        while (mAppliedChangesCount < mChangeStack.count());
     }
 #endif
     mAppliedChangesDataSize += change->dataSize();
 
     bool isNotMerged = true;
-    if( mTryToMergeAppendedChange && mAppliedChangesCount>0 )
-        isNotMerged = !mChangeStack.top()->merge( change );
-    else
+    if (mTryToMergeAppendedChange && mAppliedChangesCount > 0) {
+        isNotMerged = !mChangeStack.top()->merge(change);
+    } else {
         mTryToMergeAppendedChange = true;
-
-    if( isNotMerged )
-    {
-        mChangeStack.push( change );
-        ++mAppliedChangesCount;
     }
-    else
+
+    if (isNotMerged) {
+        mChangeStack.push(change);
+        ++mAppliedChangesCount;
+    } else {
         delete change;
+    }
 
     return isNotMerged;
 }
 
-
-AddressRangeList GroupPieceTableChange::applyGroup( PieceTable* pieceTable ) const
+AddressRangeList GroupPieceTableChange::applyGroup(PieceTable* pieceTable) const
 {
     AddressRangeList result;
 
-    for( const AbstractPieceTableChange* change : mChangeStack )
-    {
-        if( change->type() == AbstractPieceTableChange::GroupId )
-        {
+    for (const AbstractPieceTableChange* change : mChangeStack) {
+        if (change->type() == AbstractPieceTableChange::GroupId) {
             const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
-            const AddressRangeList changedRangeList = groupChange->applyGroup( pieceTable );
-            result.addAddressRangeList( changedRangeList );
+            const AddressRangeList changedRangeList = groupChange->applyGroup(pieceTable);
+            result.addAddressRangeList(changedRangeList);
+        } else {
+            result.append(change->apply(pieceTable));
         }
-        else
-            result.append( change->apply(pieceTable) );
     }
 
     return result;
 }
 
-AddressRangeList GroupPieceTableChange::revertGroup( PieceTable* pieceTable ) const
+AddressRangeList GroupPieceTableChange::revertGroup(PieceTable* pieceTable) const
 {
     AddressRangeList result;
 
     QStack<AbstractPieceTableChange*>::ConstIterator it = mChangeStack.end();
-    while( it != mChangeStack.begin() )
-    {
+    while (it != mChangeStack.begin()) {
         --it;
-        AbstractPieceTableChange *change = *it;
-        if( change->type() == AbstractPieceTableChange::GroupId )
-        {
+        AbstractPieceTableChange* change = *it;
+        if (change->type() == AbstractPieceTableChange::GroupId) {
             const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
-            const AddressRangeList changedRangeList = groupChange->revertGroup( pieceTable );
-            result.addAddressRangeList( changedRangeList );
+            const AddressRangeList changedRangeList = groupChange->revertGroup(pieceTable);
+            result.addAddressRangeList(changedRangeList);
+        } else {
+            result.append(change->revert(pieceTable));
         }
-        else
-            result.append( change->revert(pieceTable) );
     }
 
     return result;
 }
 
-ArrayChangeMetricsList GroupPieceTableChange::groupMetrics( bool reverted ) const
+ArrayChangeMetricsList GroupPieceTableChange::groupMetrics(bool reverted) const
 {
     ArrayChangeMetricsList result;
 
-    for( const AbstractPieceTableChange* change : mChangeStack )
-    {
-        if( change->type() == AbstractPieceTableChange::GroupId )
-        {
-            const GroupPieceTableChange *groupChange = static_cast<const GroupPieceTableChange*>(change);
-            const ArrayChangeMetricsList metricsList = groupChange->groupMetrics( reverted );
+    for (const AbstractPieceTableChange* change : mChangeStack) {
+        if (change->type() == AbstractPieceTableChange::GroupId) {
+            const GroupPieceTableChange* groupChange = static_cast<const GroupPieceTableChange*>(change);
+            const ArrayChangeMetricsList metricsList = groupChange->groupMetrics(reverted);
             result += metricsList;
-        }
-        else
-        {
+        } else {
             ArrayChangeMetrics changeMetrics = change->metrics();
-            if( reverted )
+            if (reverted) {
                 changeMetrics.revert();
-            result.append( changeMetrics );
+            }
+            result.append(changeMetrics);
         }
     }
 
     return result;
 }
-
 
 Size GroupPieceTableChange::dataSize() const
 {
@@ -182,8 +172,9 @@ Size GroupPieceTableChange::dataSize() const
 
 GroupPieceTableChange::~GroupPieceTableChange()
 {
-    while( ! mChangeStack.isEmpty() )
-         delete mChangeStack.pop();
+    while (!mChangeStack.isEmpty()) {
+        delete mChangeStack.pop();
+    }
 }
 
 }

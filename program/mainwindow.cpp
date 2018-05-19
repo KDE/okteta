@@ -115,27 +115,25 @@
 #include <QUrl>
 #include <QMimeData>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const char LoadedUrlsKey[] = "LoadedUrls";
 
-OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
-  : ShellWindow( program->viewManager() ),
-    mProgram( program )
+OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
+    : ShellWindow(program->viewManager())
+    , mProgram(program)
 {
-    setObjectName( QStringLiteral("Shell") );
+    setObjectName(QStringLiteral("Shell"));
 
     // there is only one mainwindow, so have this show the document if requested
-    connect( mProgram->documentManager(), &DocumentManager::focusRequested,
-             this, &OktetaMainWindow::showDocument );
-    connect( viewArea(), &MultiViewAreas::dataOffered,
-             this, &OktetaMainWindow::onDataOffered );
-    connect( viewArea(), &MultiViewAreas::dataDropped,
-             this, &OktetaMainWindow::onDataDropped );
-    connect( viewArea(), &AbstractGroupedViews::closeRequest,
-             this, &OktetaMainWindow::onCloseRequest );
+    connect(mProgram->documentManager(), &DocumentManager::focusRequested,
+            this, &OktetaMainWindow::showDocument);
+    connect(viewArea(), &MultiViewAreas::dataOffered,
+            this, &OktetaMainWindow::onDataOffered);
+    connect(viewArea(), &MultiViewAreas::dataDropped,
+            this, &OktetaMainWindow::onDataDropped);
+    connect(viewArea(), &AbstractGroupedViews::closeRequest,
+            this, &OktetaMainWindow::onCloseRequest);
 
     // XXX: Workaround for Qt 4.4's lacking of proper handling of the initial layout of dock widgets
     //      This state is taken from an oktetarc where the docker constellation was configured by hand.
@@ -143,13 +141,14 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     //      still the versioning problem to be accounted for.
     //      Hack borrowed from trunk/koffice/krita/ui/kis_view2.cpp:
     const QString mainWindowState = QStringLiteral(
-"AAAA/wAAAAD9AAAAAwAAAAAAAADPAAACg/wCAAAAAvsAAAAiAEYAaQBsAGUAUwB5AHMAdABlAG0AQgByAG8AdwBzAGUAcgAAAABJAAACgwAAAB4BAAAF+wAAABIARABvAGMAdQBtAGUAbgB0AHMAAAAASQAAAmMAAABeAQAABQAAAAEAAAGcAAACXPwCAAAACPsAAAAUAFAATwBEAEQAZQBjAG8AZABlAHIAAAAAQgAAARMAAAB9AQAABfsAAAAUAFMAdAByAHUAYwB0AFQAbwBvAGwAAAAAQgAAAlwAAAB9AQAABfsAAAAQAFYAZQByAHMAaQBvAG4AcwAAAABNAAAAVgAAAF4BAAAF+wAAABgAQgBpAG4AYQByAHkARgBpAGwAdABlAHIAAAABegAAAM0AAAC8AQAABfsAAAAQAEMAaABlAGMAawBzAHUAbQAAAAF8AAAAywAAAL0BAAAF/AAAAREAAADlAAAAAAD////6AAAAAAEAAAAE+wAAABAAQwBoAGUAYwBrAFMAdQBtAQAAAAD/////AAAAAAAAAAD7AAAAEgBCAG8AbwBrAG0AYQByAGsAcwIAAALBAAAAPQAAAT8AAAFk+wAAAA4AUwB0AHIAaQBuAGcAcwAAAAAA/////wAAAQ8BAAAF+wAAAAgASQBuAGYAbwAAAAGRAAABTAAAAIUBAAAF+wAAABIAQgB5AHQAZQBUAGEAYgBsAGUAAAAAUwAAAjkAAAB9AQAABfsAAAAYAEQAbwBjAHUAbQBlAG4AdABJAG4AZgBvAAAAAEkAAAJjAAAA+wEAAAUAAAADAAAAAAAAAAD8AQAAAAH7AAAAEABUAGUAcgBtAGkAbgBhAGwAAAAAAP////8AAABPAQAABQAABBUAAAGLAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAAAAAEBgAAAAAAAAAA");
+        "AAAA/wAAAAD9AAAAAwAAAAAAAADPAAACg/wCAAAAAvsAAAAiAEYAaQBsAGUAUwB5AHMAdABlAG0AQgByAG8AdwBzAGUAcgAAAABJAAACgwAAAB4BAAAF+wAAABIARABvAGMAdQBtAGUAbgB0AHMAAAAASQAAAmMAAABeAQAABQAAAAEAAAGcAAACXPwCAAAACPsAAAAUAFAATwBEAEQAZQBjAG8AZABlAHIAAAAAQgAAARMAAAB9AQAABfsAAAAUAFMAdAByAHUAYwB0AFQAbwBvAGwAAAAAQgAAAlwAAAB9AQAABfsAAAAQAFYAZQByAHMAaQBvAG4AcwAAAABNAAAAVgAAAF4BAAAF+wAAABgAQgBpAG4AYQByAHkARgBpAGwAdABlAHIAAAABegAAAM0AAAC8AQAABfsAAAAQAEMAaABlAGMAawBzAHUAbQAAAAF8AAAAywAAAL0BAAAF/AAAAREAAADlAAAAAAD////6AAAAAAEAAAAE+wAAABAAQwBoAGUAYwBrAFMAdQBtAQAAAAD/////AAAAAAAAAAD7AAAAEgBCAG8AbwBrAG0AYQByAGsAcwIAAALBAAAAPQAAAT8AAAFk+wAAAA4AUwB0AHIAaQBuAGcAcwAAAAAA/////wAAAQ8BAAAF+wAAAAgASQBuAGYAbwAAAAGRAAABTAAAAIUBAAAF+wAAABIAQgB5AHQAZQBUAGEAYgBsAGUAAAAAUwAAAjkAAAB9AQAABfsAAAAYAEQAbwBjAHUAbQBlAG4AdABJAG4AZgBvAAAAAEkAAAJjAAAA+wEAAAUAAAADAAAAAAAAAAD8AQAAAAH7AAAAEABUAGUAcgBtAGkAbgBhAGwAAAAAAP////8AAABPAQAABQAABBUAAAGLAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAAAAAEBgAAAAAAAAAA");
     const char mainWindowStateKey[] = "State";
-    KConfigGroup group( KSharedConfig::openConfig(), QStringLiteral("MainWindow") );
-    if( !group.hasKey(mainWindowStateKey) )
-        group.writeEntry( mainWindowStateKey, mainWindowState );
+    KConfigGroup group(KSharedConfig::openConfig(), QStringLiteral("MainWindow"));
+    if (!group.hasKey(mainWindowStateKey)) {
+        group.writeEntry(mainWindowStateKey, mainWindowState);
+    }
 
-    setStatusBar( new Kasten::StatusBar(this) );
+    setStatusBar(new Kasten::StatusBar(this));
 
     setupControllers();
     setupGUI();
@@ -157,8 +156,8 @@ OktetaMainWindow::OktetaMainWindow( OktetaProgram* program )
     // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
     // TODO: why is this so?
     // tmp
-    addXmlGuiController( new ToolListMenuController(this,this) );
-    addXmlGuiController( new ViewListMenuController(viewManager(),viewArea(),this) );
+    addXmlGuiController(new ToolListMenuController(this, this));
+    addXmlGuiController(new ViewListMenuController(viewManager(), viewArea(), this));
 }
 
 void OktetaMainWindow::setupControllers()
@@ -174,66 +173,66 @@ void OktetaMainWindow::setupControllers()
     ByteArrayViewProfileManager* const byteArrayViewProfileManager = mProgram->byteArrayViewProfileManager();
 
     // general, part of Kasten
-    addXmlGuiController( new CreatorController(codecManager,
-                                               documentStrategy,this) );
-    addXmlGuiController( new LoaderController(documentStrategy,this) );
-    addXmlGuiController( new SetRemoteController(syncManager,this) );
-    addXmlGuiController( new SynchronizeController(syncManager,this) );
-    addXmlGuiController( new ExportController(codecViewManager,
-                                              codecManager,this) );
-    addXmlGuiController( new CloseController(documentStrategy,this) );
-    addXmlGuiController( new VersionController(this) );
-    addXmlGuiController( new ReadOnlyController(this) );
-    addXmlGuiController( new SwitchViewController(viewArea,this) );
-    addXmlGuiController( new ViewAreaSplitController(viewManager,viewArea,this) );
-    addXmlGuiController( new FullScreenController(this) );
-    addXmlGuiController( new QuitController(nullptr,this) );
+    addXmlGuiController(new CreatorController(codecManager,
+                                              documentStrategy, this));
+    addXmlGuiController(new LoaderController(documentStrategy, this));
+    addXmlGuiController(new SetRemoteController(syncManager, this));
+    addXmlGuiController(new SynchronizeController(syncManager, this));
+    addXmlGuiController(new ExportController(codecViewManager,
+                                             codecManager, this));
+    addXmlGuiController(new CloseController(documentStrategy, this));
+    addXmlGuiController(new VersionController(this));
+    addXmlGuiController(new ReadOnlyController(this));
+    addXmlGuiController(new SwitchViewController(viewArea, this));
+    addXmlGuiController(new ViewAreaSplitController(viewManager, viewArea, this));
+    addXmlGuiController(new FullScreenController(this));
+    addXmlGuiController(new QuitController(nullptr, this));
 
-    addXmlGuiController( new ZoomController(this) );
-    addXmlGuiController( new SelectController(this) );
-    addXmlGuiController( new ClipboardController(this) );
-    addXmlGuiController( new InsertController(codecViewManager,
-                                              codecManager,this) );
-    addXmlGuiController( new CopyAsController(codecViewManager,
-                                              codecManager,this) );
+    addXmlGuiController(new ZoomController(this));
+    addXmlGuiController(new SelectController(this));
+    addXmlGuiController(new ClipboardController(this));
+    addXmlGuiController(new InsertController(codecViewManager,
+                                             codecManager, this));
+    addXmlGuiController(new CopyAsController(codecViewManager,
+                                             codecManager, this));
 
-    addTool( new FileSystemBrowserToolView(new FileSystemBrowserTool( syncManager )) );
-    addTool( new DocumentsToolView(new DocumentsTool( documentManager )) );
-    addTool( new TerminalToolView(new TerminalTool( syncManager )) );
+    addTool(new FileSystemBrowserToolView(new FileSystemBrowserTool(syncManager)));
+    addTool(new DocumentsToolView(new DocumentsTool(documentManager)));
+    addTool(new TerminalToolView(new TerminalTool(syncManager)));
 #ifndef NDEBUG
-    addTool( new VersionViewToolView(new VersionViewTool()) );
+    addTool(new VersionViewToolView(new VersionViewTool()));
 #endif
 
     // Okteta specific
 //     addXmlGuiController( new OverwriteOnlyController(this) );
-    addXmlGuiController( new OverwriteModeController(this) );
-    addXmlGuiController( new SearchController(this,this) );
-    addXmlGuiController( new ReplaceController(this,this) );
-    addXmlGuiController( new GotoOffsetController(viewArea,this) );
-    addXmlGuiController( new SelectRangeController(viewArea,this) );
-    addXmlGuiController( new BookmarksController(this) );
-    addXmlGuiController( new PrintController(this) );
-    addXmlGuiController( new ViewConfigController(this) );
-    addXmlGuiController( new ViewModeController(this) );
-    addXmlGuiController( new ViewProfileController(byteArrayViewProfileManager,this,this) );
-    addXmlGuiController( new ViewProfilesManageController(this,byteArrayViewProfileManager,this) );
+    addXmlGuiController(new OverwriteModeController(this));
+    addXmlGuiController(new SearchController(this, this));
+    addXmlGuiController(new ReplaceController(this, this));
+    addXmlGuiController(new GotoOffsetController(viewArea, this));
+    addXmlGuiController(new SelectRangeController(viewArea, this));
+    addXmlGuiController(new BookmarksController(this));
+    addXmlGuiController(new PrintController(this));
+    addXmlGuiController(new ViewConfigController(this));
+    addXmlGuiController(new ViewModeController(this));
+    addXmlGuiController(new ViewProfileController(byteArrayViewProfileManager, this, this));
+    addXmlGuiController(new ViewProfilesManageController(this, byteArrayViewProfileManager, this));
 
-    Kasten::StatusBar* const bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
-    addXmlGuiController( new ViewStatusController(bottomBar) );
-    addXmlGuiController( new ModifiedBarController(bottomBar) );
-    addXmlGuiController( new ReadOnlyBarController(bottomBar) );
-    addXmlGuiController( new ZoomBarController(bottomBar) );
+    Kasten::StatusBar* const bottomBar = static_cast<Kasten::StatusBar*>(statusBar());
+    addXmlGuiController(new ViewStatusController(bottomBar));
+    addXmlGuiController(new ModifiedBarController(bottomBar));
+    addXmlGuiController(new ReadOnlyBarController(bottomBar));
+    addXmlGuiController(new ZoomBarController(bottomBar));
 
-    addTool( new DocumentInfoToolView(new DocumentInfoTool(syncManager)) );
-    addTool( new ChecksumToolView(new ChecksumTool()) );
-    addTool( new FilterToolView(new FilterTool()) );
-    addTool( new CharsetConversionToolView(new CharsetConversionTool()) );
-    addTool( new StringsExtractToolView(new StringsExtractTool()) );
-    addTool( new ByteTableToolView(new ByteTableTool()) );
-    addTool( new InfoToolView(new InfoTool()) );
-    addTool( new PODDecoderToolView(new PODDecoderTool()) );
-    addTool( new StructuresToolView(new StructuresTool()) );
-    addTool( new BookmarksToolView(new BookmarksTool()) );
+    addTool(new DocumentInfoToolView(new DocumentInfoTool(syncManager)));
+    addTool(new ChecksumToolView(new ChecksumTool()));
+    addTool(new FilterToolView(new FilterTool()));
+    addTool(new CharsetConversionToolView(new CharsetConversionTool()));
+    addTool(new StringsExtractToolView(new StringsExtractTool()));
+    addTool(new ByteTableToolView(new ByteTableTool()));
+    addTool(new InfoToolView(new InfoTool()));
+    addTool(new PODDecoderToolView(new PODDecoderTool()));
+    addTool(new StructuresToolView(new StructuresTool()));
+    addTool(new BookmarksToolView(new BookmarksTool()));
 }
 
 bool OktetaMainWindow::queryClose()
@@ -242,7 +241,7 @@ bool OktetaMainWindow::queryClose()
     return mProgram->documentManager()->canCloseAll();
 }
 
-void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
+void OktetaMainWindow::saveProperties(KConfigGroup& configGroup)
 {
     DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
@@ -250,89 +249,86 @@ void OktetaMainWindow::saveProperties( KConfigGroup& configGroup )
 
     QStringList urls;
     urls.reserve(documents.size());
-    for( AbstractDocument* document : documents )
-        urls.append( syncManager->urlOf(document).url() );
+    for (AbstractDocument* document : documents) {
+        urls.append(syncManager->urlOf(document).url());
+    }
 
-    configGroup.writePathEntry( LoadedUrlsKey, urls );
+    configGroup.writePathEntry(LoadedUrlsKey, urls);
 }
 
-void OktetaMainWindow::readProperties( const KConfigGroup& configGroup )
+void OktetaMainWindow::readProperties(const KConfigGroup& configGroup)
 {
-    const QStringList urls = configGroup.readPathEntry( LoadedUrlsKey, QStringList() );
+    const QStringList urls = configGroup.readPathEntry(LoadedUrlsKey, QStringList());
 
     DocumentManager* const documentManager = mProgram->documentManager();
     DocumentSyncManager* const syncManager = documentManager->syncManager();
     DocumentCreateManager* const createManager = documentManager->createManager();
-    for( const QString& url : urls )
-    {
-        if( url.isEmpty() )
+    for (const QString& url : urls) {
+        if (url.isEmpty()) {
             createManager->createNew();
-        else
-            syncManager->load( QUrl(url, QUrl::TolerantMode) );
+        } else {
+            syncManager->load(QUrl(url, QUrl::TolerantMode));
+        }
         // TODO: set view to offset
         // if( offset != -1 )
     }
 }
 
-void OktetaMainWindow::onDataOffered( const QMimeData* mimeData, bool& accept )
+void OktetaMainWindow::onDataOffered(const QMimeData* mimeData, bool& accept)
 {
     accept = mimeData->hasUrls()
-             || mProgram->documentManager()->createManager()->canCreateNewFromData( mimeData );
+             || mProgram->documentManager()->createManager()->canCreateNewFromData(mimeData);
 }
 
-void OktetaMainWindow::onDataDropped( const QMimeData* mimeData )
+void OktetaMainWindow::onDataDropped(const QMimeData* mimeData)
 {
     const QList<QUrl> urls = mimeData->urls();
 
     DocumentManager* const documentManager = mProgram->documentManager();
-    if( ! urls.isEmpty() )
-    {
+    if (!urls.isEmpty()) {
         DocumentSyncManager* const syncManager = documentManager->syncManager();
 
-        for( const QUrl& url : urls )
-            syncManager->load( url );
+        for (const QUrl& url : urls) {
+            syncManager->load(url);
+        }
+    } else {
+        documentManager->createManager()->createNewFromData(mimeData, true);
     }
-    else
-        documentManager->createManager()->createNewFromData( mimeData, true );
 }
 
-void OktetaMainWindow::onCloseRequest( const QList<Kasten::AbstractView*>& views )
+void OktetaMainWindow::onCloseRequest(const QList<Kasten::AbstractView*>& views)
 {
     // group views per document
-    QHash<AbstractDocument*,QList<AbstractView*> > viewsToClosePerDocument;
-    for( AbstractView* view : views )
-    {
+    QHash<AbstractDocument*, QList<AbstractView*>> viewsToClosePerDocument;
+    for (AbstractView* view : views) {
         AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        viewsToClosePerDocument[document].append( view );
+        viewsToClosePerDocument[document].append(view);
     }
 
     // find documents which lose all views
     const QList<AbstractView*> allViews = viewManager()->views();
-    for( AbstractView* view : allViews )
-    {
+    for (AbstractView* view : allViews) {
         AbstractDocument* document = view->findBaseModel<AbstractDocument*>();
-        QHash<AbstractDocument*,QList<AbstractView*> >::Iterator it =
-            viewsToClosePerDocument.find( document );
+        QHash<AbstractDocument*, QList<AbstractView*>>::Iterator it =
+            viewsToClosePerDocument.find(document);
 
-        if( it != viewsToClosePerDocument.end() )
-        {
+        if (it != viewsToClosePerDocument.end()) {
             const QList<AbstractView*>& viewsOfDocument = it.value();
-            const bool isAnotherView = ! viewsOfDocument.contains( view );
-            if( isAnotherView )
-                viewsToClosePerDocument.erase( it );
+            const bool isAnotherView = !viewsOfDocument.contains(view);
+            if (isAnotherView) {
+                viewsToClosePerDocument.erase(it);
+            }
         }
     }
 
     const QList<AbstractDocument*> documentsWithoutViews = viewsToClosePerDocument.keys();
 
     DocumentManager* const documentManager = mProgram->documentManager();
-    if( documentManager->canClose(documentsWithoutViews) )
-    {
-        viewManager()->removeViews( views );
-        documentManager->closeDocuments( documentsWithoutViews );
+    if (documentManager->canClose(documentsWithoutViews)) {
+        viewManager()->removeViews(views);
+        documentManager->closeDocuments(documentsWithoutViews);
     }
 }
-
 
 OktetaMainWindow::~OktetaMainWindow() {}
 

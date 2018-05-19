@@ -27,8 +27,8 @@
 #include <QScriptValue>
 #include <QScriptValueIterator>
 
-namespace ScriptValueConverter
-{
+namespace ScriptValueConverter {
+
 DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& info);
 ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info);
 AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info);
@@ -40,13 +40,15 @@ PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& i
 EnumDataInformation* toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
 TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const ParserInfo& info);
 
-class ScriptValueChildrenParser : public ChildrenParser {
+class ScriptValueChildrenParser : public ChildrenParser
+{
 public:
     ScriptValueChildrenParser(const ParserInfo& info, const QScriptValue& children);
     ~ScriptValueChildrenParser() override;
     DataInformation* next() override;
     bool hasNext() override;
     void setParent(DataInformation* newParent) override;
+
 private:
     QScriptValue mValue;
     QScriptValueIterator mIter;
@@ -55,5 +57,4 @@ private:
 
 }
 
-#endif //SCRIPTVALUECONVERTER_P_H_
-
+#endif // SCRIPTVALUECONVERTER_P_H_

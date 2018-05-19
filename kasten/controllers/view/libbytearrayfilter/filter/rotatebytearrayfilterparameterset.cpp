@@ -22,7 +22,6 @@
 
 #include "rotatebytearrayfilterparameterset.h"
 
-
 RotateByteArrayFilterParameterSet::RotateByteArrayFilterParameterSet()
 {}
 
@@ -31,8 +30,8 @@ const char* RotateByteArrayFilterParameterSet::id() const { return "Rotate"; }
 int RotateByteArrayFilterParameterSet::groupSize() const { return mGroupSize; }
 int RotateByteArrayFilterParameterSet::moveBitWidth() const { return mMoveBitWidth; }
 
-void RotateByteArrayFilterParameterSet::setGroupSize( int groupSize ) { mGroupSize = groupSize; }
-void RotateByteArrayFilterParameterSet::setMoveBitWidth( int moveBitWidth ) { mMoveBitWidth = moveBitWidth; }
+void RotateByteArrayFilterParameterSet::setGroupSize(int groupSize) { mGroupSize = groupSize; }
+void RotateByteArrayFilterParameterSet::setMoveBitWidth(int moveBitWidth) { mMoveBitWidth = moveBitWidth; }
 
 RotateByteArrayFilterParameterSet::~RotateByteArrayFilterParameterSet()
 {

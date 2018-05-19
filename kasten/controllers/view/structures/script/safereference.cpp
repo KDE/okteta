@@ -21,7 +21,7 @@
  */
 #include "safereference.h"
 #include "../structlogging.h"
-//#include "../datatypes/datainformation.h"
+// #include "../datatypes/datainformation.h"
 
 #include <cstdio>
 
@@ -29,31 +29,30 @@ SafeReferenceHolder SafeReferenceHolder::instance;
 
 void SafeReferenceHolder::invalidateAll(DataInformation* data)
 {
-    //this is called from DataInformation destructor, don't do anything with data!
+    // this is called from DataInformation destructor, don't do anything with data!
     Container::iterator i = mRefs.find(data);
-    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalidating all references to" << data->name();
+    // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalidating all references to" << data->name();
     while (i != mRefs.end() && i.key() == data) {
-        //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalidating" << i.value();
+        // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalidating" << i.value();
         i.value()->invalidate();
         ++i;
     }
-    //remove all this items from the list
+    // remove all this items from the list
     int removed = mRefs.remove(data);
     safeRefDestroyCnt += removed;
-    //qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "removed" << removed << "items";
+    // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "removed" << removed << "items";
 }
 
 SafeReferenceHolder::SafeReferenceHolder()
-    : safeRefDestroyCnt(0), safeRefRegisterCnt(0)
+    : safeRefDestroyCnt(0)
+    , safeRefRegisterCnt(0)
 {
 }
 
 SafeReferenceHolder::~SafeReferenceHolder()
 {
-    if (mRefs.size() > 0)
+    if (mRefs.size() > 0) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << mRefs.size() << "safe references were not removed";
+    }
     printf("register count: %d, destroy count %d: ", safeRefRegisterCnt, safeRefDestroyCnt);
 }
-
-
-

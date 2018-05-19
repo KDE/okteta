@@ -30,27 +30,24 @@
 
 class QMimeData;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocument;
 
-
 class KASTENCORE_EXPORT AbstractDocumentFactory : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ~AbstractDocumentFactory() override;
 
-  public: // API to be implemented
+public: // API to be implemented
     /// default returns false
-    virtual bool canCreateFromData( const QMimeData* mimeData );
+    virtual bool canCreateFromData(const QMimeData* mimeData);
 
     virtual AbstractDocument* create() = 0;
     /// default returns 0
-    virtual AbstractDocument* createFromData( const QMimeData* mimeData, bool setModified );
+    virtual AbstractDocument* createFromData(const QMimeData* mimeData, bool setModified);
 };
 
 }

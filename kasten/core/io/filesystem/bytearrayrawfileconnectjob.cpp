@@ -30,34 +30,33 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob( ByteArrayRawFileSynchronizer *synchronizer,
-                                                        AbstractDocument* document,
-                                                        const QUrl &url,
-                                                        AbstractModelSynchronizer::ConnectOption option )
- : AbstractFileSystemConnectJob( synchronizer, document, url, option )
+ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob(ByteArrayRawFileSynchronizer* synchronizer,
+                                                       AbstractDocument* document,
+                                                       const QUrl& url,
+                                                       AbstractModelSynchronizer::ConnectOption option)
+    : AbstractFileSystemConnectJob(synchronizer, document, url, option)
 {
 }
 
 void ByteArrayRawFileConnectJob::startConnectWithFile()
 {
-    ByteArrayDocument *byteArrayDocument = qobject_cast<ByteArrayDocument*>( document() );
-    ByteArrayRawFileWriteThread *writeThread = new ByteArrayRawFileWriteThread( this, byteArrayDocument, file() );
+    ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document());
+    ByteArrayRawFileWriteThread* writeThread = new ByteArrayRawFileWriteThread(this, byteArrayDocument, file());
     writeThread->start();
-    while( !writeThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!writeThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
-    qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument( byteArrayDocument );
+    qobject_cast<ByteArrayRawFileSynchronizer*>(synchronizer())->setDocument(byteArrayDocument);
     const bool success = writeThread->success();
     delete writeThread;
 
 //     if( success )
 //         ExternalBookmarkStorage().writeBookmarks( byteArrayDocument, synchronizer()->url() );
 
-    complete( success );
+    complete(success);
 }
 
 ByteArrayRawFileConnectJob::~ByteArrayRawFileConnectJob() {}

@@ -23,59 +23,55 @@
 #include "singleviewwindow.h"
 #include "singleviewwindow_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-SingleViewWindow::SingleViewWindow( AbstractView* view )
-  : KXmlGuiWindow(),
-    d_ptr( new SingleViewWindowPrivate(this, view) )
+SingleViewWindow::SingleViewWindow(AbstractView* view)
+    : KXmlGuiWindow()
+    , d_ptr(new SingleViewWindowPrivate(this, view))
 {
 }
 
 AbstractView* SingleViewWindow::view() const
 {
-    Q_D( const SingleViewWindow );
+    Q_D(const SingleViewWindow);
 
     return d->view();
 }
 
 SingleViewArea* SingleViewWindow::viewArea() const
 {
-    Q_D( const SingleViewWindow );
+    Q_D(const SingleViewWindow);
 
     return d->viewArea();
 }
 
 QList<ToolViewDockWidget*> SingleViewWindow::dockWidgets() const
 {
-    Q_D( const SingleViewWindow );
+    Q_D(const SingleViewWindow);
 
     return d->dockWidgets();
 }
 
-void SingleViewWindow::setView( AbstractView* view )
+void SingleViewWindow::setView(AbstractView* view)
 {
-    Q_D( SingleViewWindow );
+    Q_D(SingleViewWindow);
 
-    d->setView( view );
+    d->setView(view);
 }
 
-
-void SingleViewWindow::addXmlGuiController( AbstractXmlGuiController* controller )
+void SingleViewWindow::addXmlGuiController(AbstractXmlGuiController* controller)
 {
-    Q_D( SingleViewWindow );
+    Q_D(SingleViewWindow);
 
-    d->addXmlGuiController( controller );
+    d->addXmlGuiController(controller);
 }
 
-void SingleViewWindow::addTool( AbstractToolView* toolView )
+void SingleViewWindow::addTool(AbstractToolView* toolView)
 {
-    Q_D( SingleViewWindow );
+    Q_D(SingleViewWindow);
 
-    d->addTool( toolView );
+    d->addTool(toolView);
 }
-
 
 SingleViewWindow::~SingleViewWindow()
 {

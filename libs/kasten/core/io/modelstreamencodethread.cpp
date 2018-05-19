@@ -25,15 +25,13 @@
 // lib
 #include "abstractmodelstreamencoder.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void ModelStreamEncodeThread::run()
 {
-    mSuccess = mEncoder->encodeToStream( mIODevice, mModel, mSelection );
+    mSuccess = mEncoder->encodeToStream(mIODevice, mModel, mSelection);
 
-    emit modelExported( mSuccess );
+    emit modelExported(mSuccess);
 }
 
 ModelStreamEncodeThread::~ModelStreamEncodeThread() {}

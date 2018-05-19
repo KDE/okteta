@@ -29,34 +29,33 @@ class QLabel;
 class QTreeWidget;
 class KListWidget;
 
-namespace Kasten
-{
+namespace Kasten {
 class StructuresTool;
 }
 
-class StructureAddRemoveWidget: public QWidget
+class StructureAddRemoveWidget : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     explicit StructureAddRemoveWidget(const QStringList& selected, Kasten::StructuresTool* tool, QWidget* parent = nullptr);
     ~StructureAddRemoveWidget() override;
 
-  public:
+public:
     QStringList values() const;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void updateAvailable();
     void moveLeft();
     void moveRight();
     void moveUp();
     void moveDown();
 
-  private:
+private:
     void buildAvailableList();
     void syncData();
 
-  private:
+private:
     const Kasten::StructuresTool* mTool;
 
     QLabel* mTree1Label;

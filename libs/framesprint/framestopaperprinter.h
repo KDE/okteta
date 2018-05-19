@@ -33,27 +33,27 @@ class AbstractFrameRenderer;
 
 class FramesToPaperPrinter : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     FramesToPaperPrinter();
     ~FramesToPaperPrinter() override;
 
-  public:
-    void setPaperRect( const QRect &paperRect );
-    void setPageRect( const QRect &pageRect );
+public:
+    void setPaperRect(const QRect& paperRect);
+    void setPageRect(const QRect& pageRect);
 
-    void addFrameRenderer( AbstractFrameRenderer *frameRenderer );
+    void addFrameRenderer(AbstractFrameRenderer* frameRenderer);
 
-    bool print( QPrinter *printer, int firstPageIndex, int lastPageIndex );
+    bool print(QPrinter* printer, int firstPageIndex, int lastPageIndex);
 
-  public:
+public:
     QRect pageRect() const;
 
-  Q_SIGNALS:
-    void printedPage( int pageIndex );
+Q_SIGNALS:
+    void printedPage(int pageIndex);
 
-  protected:
+protected:
     QList<AbstractFrameRenderer*> mFrameRendererList;
     QRect mPaperRect;
     QRect mPageRect;

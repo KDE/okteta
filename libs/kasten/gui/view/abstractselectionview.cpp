@@ -25,20 +25,18 @@
 // Qt
 #include <Qt>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class Q_DECL_HIDDEN AbstractSelectionView::Private
 {
-  public:
-    explicit Private( AbstractSelectionView* view );
+public:
+    explicit Private(AbstractSelectionView* view);
 };
 
-AbstractSelectionView::Private::Private( AbstractSelectionView* view ) { Q_UNUSED(view) }
+AbstractSelectionView::Private::Private(AbstractSelectionView* view) { Q_UNUSED(view) }
 
 AbstractSelectionView::AbstractSelectionView()
- : d( new Private(this) )
+    : d(new Private(this))
 {}
 
 AbstractSelectionView::~AbstractSelectionView()

@@ -28,20 +28,19 @@
 //
 #include <abstractbytearraychecksumalgorithm.h>
 
-
 class Qca2ByteArrayChecksumAlgorithm : public AbstractByteArrayChecksumAlgorithm
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    Qca2ByteArrayChecksumAlgorithm( const QString& name, const QString& type );
+public:
+    Qca2ByteArrayChecksumAlgorithm(const QString& name, const QString& type);
     ~Qca2ByteArrayChecksumAlgorithm() override;
 
-  public: // AbstractByteArrayChecksumAlgorithm API
-    bool calculateChecksum( QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range ) const override;
+public: // AbstractByteArrayChecksumAlgorithm API
+    bool calculateChecksum(QString* result, const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const override;
     AbstractByteArrayChecksumParameterSet* parameterSet() override;
 
-  protected:
+protected:
     NoByteArrayChecksumParameterSet mParameterSet;
     QString mType;
 };

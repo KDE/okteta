@@ -23,17 +23,15 @@
 #include "abstractgroupedviews.h"
 #include "abstractgroupedviews_p.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 AbstractGroupedViews::AbstractGroupedViews()
-  : AbstractViewArea( new AbstractGroupedViewsPrivate(this) )
+    : AbstractViewArea(new AbstractGroupedViewsPrivate(this))
 {
 }
 
-AbstractGroupedViews::AbstractGroupedViews( AbstractGroupedViewsPrivate* d )
-  : AbstractViewArea( d )
+AbstractGroupedViews::AbstractGroupedViews(AbstractGroupedViewsPrivate* d)
+    : AbstractViewArea(d)
 {
 }
 

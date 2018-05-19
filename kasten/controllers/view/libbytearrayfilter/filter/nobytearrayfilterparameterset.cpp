@@ -22,7 +22,6 @@
 
 #include "nobytearrayfilterparameterset.h"
 
-
 NoByteArrayFilterParameterSet::NoByteArrayFilterParameterSet()
 {}
 

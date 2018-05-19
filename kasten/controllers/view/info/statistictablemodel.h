@@ -33,15 +33,13 @@ class CharCodec;
 class ValueCodec;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class StatisticTableModel : public QAbstractTableModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     enum ColumnIds
     {
         ValueId = 0,
@@ -51,35 +49,35 @@ class StatisticTableModel : public QAbstractTableModel
         NoOfIds = 4 // TODO: what pattern is usually used to mark number of ids?
     };
 
-  public:
-    explicit StatisticTableModel( int *byteCount, QObject *parent = nullptr );
+public:
+    explicit StatisticTableModel(int* byteCount, QObject* parent = nullptr);
     ~StatisticTableModel() override;
 
-  public: // QAbstractTableModel API
-    int rowCount( const QModelIndex &parent ) const override;
-    int columnCount( const QModelIndex &parent ) const override;
-    QVariant data( const QModelIndex &index, int role ) const override;
-    QVariant headerData( int section, Qt::Orientation orientation, int role ) const override;
+public: // QAbstractTableModel API
+    int rowCount(const QModelIndex& parent) const override;
+    int columnCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
-  public:
-    void update( int size );
+public:
+    void update(int size);
 
-  public Q_SLOTS:
-    void setCharCodec( const QString &codecName );
-    void setValueCoding( int valueCoding );
-    void setUndefinedChar( QChar undefinedChar );
+public Q_SLOTS:
+    void setCharCodec(const QString& codecName);
+    void setValueCoding(int valueCoding);
+    void setUndefinedChar(QChar undefinedChar);
 
-  Q_SIGNALS:
+Q_SIGNALS:
     void headerChanged();
-    void sizeChanged( int size );
+    void sizeChanged(int size);
 
-  private:
+private:
     int mSize;
-    int *mByteCount;
+    int* mByteCount;
 
     Okteta::ValueCoding mValueCoding;
-    Okteta::ValueCodec *mValueCodec;
-    Okteta::CharCodec *mCharCodec;
+    Okteta::ValueCodec* mValueCodec;
+    Okteta::CharCodec* mCharCodec;
     QChar mUndefinedChar;
 };
 

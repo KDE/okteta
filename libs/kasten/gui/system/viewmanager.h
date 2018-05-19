@@ -29,54 +29,50 @@
 #include <QList>
 #include <QObject>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ModelCodecViewManager;
 class AbstractViewFactory;
 
-
 class KASTENGUI_EXPORT ViewManager : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ViewManager();
 
     ~ViewManager() override;
 
-  public:
-    void setViewFactory( AbstractViewFactory* factory );
+public:
+    void setViewFactory(AbstractViewFactory* factory);
 
-    void createCopyOfView( AbstractView* view, Qt::Alignment alignment = {} );
-    void removeViews( const QList<AbstractView*>& views );
+    void createCopyOfView(AbstractView* view, Qt::Alignment alignment = {});
+    void removeViews(const QList<AbstractView*>& views);
 
-  public:
+public:
     QList<AbstractView*> views() const;
-    AbstractView *viewByWidget( QWidget* widget ) const;
+    AbstractView* viewByWidget(QWidget* widget) const;
 
-  public:
+public:
     ModelCodecViewManager* codecViewManager();
 
-  public Q_SLOTS:
-    void createViewsFor( const QList<Kasten::AbstractDocument*>& documents );
-    void removeViewsFor( const QList<Kasten::AbstractDocument*>& documents );
+public Q_SLOTS:
+    void createViewsFor(const QList<Kasten::AbstractDocument*>& documents);
+    void removeViewsFor(const QList<Kasten::AbstractDocument*>& documents);
 
-  Q_SIGNALS:
+Q_SIGNALS:
     // view was created and already added to the list
-    void opened( const QList<Kasten::AbstractView*>& views );
+    void opened(const QList<Kasten::AbstractView*>& views);
     // view will be closed, already removed from list
-    void closing( const QList<Kasten::AbstractView*>& views );
+    void closing(const QList<Kasten::AbstractView*>& views);
 
-  private:
+private:
     QList<AbstractView*> mViewList;
     AbstractViewFactory* mFactory;
 
     // TODO: remove into own singleton
     ModelCodecViewManager* mCodecViewManager;
 };
-
 
 inline ModelCodecViewManager* ViewManager::codecViewManager() { return mCodecViewManager; }
 

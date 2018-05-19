@@ -31,28 +31,29 @@ namespace Kasten {
 class ByteArrayViewProfileManager;
 }
 
-
 class OktetaPartFactory : public KPluginFactory
 {
     Q_OBJECT
 
     Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE "oktetapart.json")
 
-    Q_INTERFACES(KPluginFactory)
+    Q_INTERFACES(
+        KPluginFactory
+    )
 
-  public:
+public:
     OktetaPartFactory();
 
     ~OktetaPartFactory() override;
 
-  public: // KPluginFactory API
-    QObject* create( const char* iface,
-                     QWidget* parentWidget,
-                     QObject* parent,
-                     const QVariantList& args,
-                     const QString& keyword ) override;
+public: // KPluginFactory API
+    QObject* create(const char* iface,
+                    QWidget* parentWidget,
+                    QObject* parent,
+                    const QVariantList& args,
+                    const QString& keyword) override;
 
-  private:
+private:
     KAboutData mAboutData;
     Kasten::ByteArrayViewProfileManager* mByteArrayViewProfileManager;
 };

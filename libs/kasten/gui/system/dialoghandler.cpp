@@ -30,65 +30,62 @@
 // Qt
 #include <QUrl>
 
-namespace Kasten
-{
+namespace Kasten {
 
+DialogHandler::DialogHandler(QWidget* widget) : mWidget(widget) {}
 
-DialogHandler::DialogHandler( QWidget* widget ) : mWidget( widget ) {}
+void DialogHandler::setWidget(QWidget* widget) { mWidget = widget; }
 
-void DialogHandler::setWidget( QWidget* widget ) { mWidget = widget; }
-
-Answer DialogHandler::queryOverwrite( const QUrl& url, const QString& title ) const
+Answer DialogHandler::queryOverwrite(const QUrl& url, const QString& title) const
 {
     const QString message =
-        xi18nc( "@info",
-                "There is already a file at<nl/><filename>%1</filename>.<nl/>"
-                "Overwrite?", url.url() );
-    const int answer = KMessageBox::warningYesNoCancel( mWidget, message, title,
-                                                        KStandardGuiItem::overwrite(),
-                                                        KStandardGuiItem::back() );
+        xi18nc("@info",
+               "There is already a file at<nl/><filename>%1</filename>.<nl/>"
+               "Overwrite?", url.url());
+    const int answer = KMessageBox::warningYesNoCancel(mWidget, message, title,
+                                                       KStandardGuiItem::overwrite(),
+                                                       KStandardGuiItem::back());
 
     return (answer == KMessageBox::Yes) ? Overwrite :
            (answer == KMessageBox::No) ?  PreviousQuestion :
                                           Cancel;
 }
 
-
-Answer DialogHandler::queryDiscardOnReload( const AbstractDocument* document, const QString& title ) const
+Answer DialogHandler::queryDiscardOnReload(const AbstractDocument* document, const QString& title) const
 {
-    const QString message = xi18nc( "@info \"%title\" has been modified.",
-        "There are unsaved modifications to <filename>%1</filename>. "
-        "They will be lost if you reload the document.<nl/>"
-        "Do you want to discard them?", document->title() );
+    const QString message = xi18nc("@info \"%title\" has been modified.",
+                                   "There are unsaved modifications to <filename>%1</filename>. "
+                                   "They will be lost if you reload the document.<nl/>"
+                                   "Do you want to discard them?", document->title());
 
-    const int answer = KMessageBox::warningContinueCancel( mWidget, message, title,
-                                                           KStandardGuiItem::discard() );
+    const int answer = KMessageBox::warningContinueCancel(mWidget, message, title,
+                                                          KStandardGuiItem::discard());
 
     return (answer == KMessageBox::Cancel) ? Cancel : Discard;
 }
 
-Answer DialogHandler::querySaveDiscard( const AbstractDocument* document, const QString& title ) const
+Answer DialogHandler::querySaveDiscard(const AbstractDocument* document, const QString& title) const
 {
-    const QString message = xi18nc( "@info \"%title\" has been modified.",
-        "<filename>%1</filename> has been modified.<nl/>"
-        "Do you want to save your changes or discard them?", document->title() );
+    const QString message = xi18nc("@info \"%title\" has been modified.",
+                                   "<filename>%1</filename> has been modified.<nl/>"
+                                   "Do you want to save your changes or discard them?", document->title());
 
-    const int answer = KMessageBox::warningYesNoCancel( mWidget, message, title,
-                                                        KStandardGuiItem::save(), KStandardGuiItem::discard() );
+    const int answer = KMessageBox::warningYesNoCancel(mWidget, message, title,
+                                                       KStandardGuiItem::save(), KStandardGuiItem::discard());
 
     return (answer == KMessageBox::Yes) ? Save :
            (answer == KMessageBox::No) ?  Discard :
                                           Cancel;
 }
 
-Answer DialogHandler::queryDiscard( const AbstractDocument* document, const QString& title ) const
+Answer DialogHandler::queryDiscard(const AbstractDocument* document, const QString& title) const
 {
-    const QString message = xi18nc( "@info \"%title\" has been modified.",
-        "<filename>%1</filename> has been modified.<nl/>"
-        "Do you want to discard your changes?", document->title() );
+    const QString message = xi18nc("@info \"%title\" has been modified.",
+                                   "<filename>%1</filename> has been modified.<nl/>"
+                                   "Do you want to discard your changes?", document->title());
 
-    const int answer = KMessageBox::warningContinueCancel( mWidget, message, title,
-                                                           KStandardGuiItem::discard() );
+    const int answer = KMessageBox::warningContinueCancel(mWidget, message, title,
+                                                          KStandardGuiItem::discard());
 
     return (answer == KMessageBox::Cancel) ? Cancel : Discard;
 }

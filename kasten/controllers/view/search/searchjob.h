@@ -34,33 +34,31 @@ class AbstractByteArrayModel;
 class CharCodec;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SearchJob : public QObject // not yet: KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    SearchJob( const Okteta::AbstractByteArrayModel* model,
-               const QByteArray& searchData,
-               Okteta::Address startIndex, Okteta::Address endIndex,
-               Qt::CaseSensitivity caseSensitivity, const QString& charCodecName );
+public:
+    SearchJob(const Okteta::AbstractByteArrayModel* model,
+              const QByteArray& searchData,
+              Okteta::Address startIndex, Okteta::Address endIndex,
+              Qt::CaseSensitivity caseSensitivity, const QString& charCodecName);
 
     ~SearchJob() override;
 
-  public:
+public:
     Okteta::Address exec();
 
-  protected:
+protected:
     int indexOfIgnoreCase();
     int lastIndexOfIgnoreCase();
 
-  protected Q_SLOTS:
+protected Q_SLOTS:
     void onBytesSearched();
 
-  protected:
+protected:
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
 
     QByteArray mSearchData;

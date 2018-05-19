@@ -41,45 +41,56 @@
 #include "../script/scriptlogger.h"
 #include "parserutils.h"
 
-struct CommonParsedData : public ParserInfo {
+struct CommonParsedData : public ParserInfo
+{
     inline explicit CommonParsedData(const ParserInfo& i)
-        : ParserInfo(i), endianess(DataInformation::DataInformationEndianess::EndianessInherit) {}
+        : ParserInfo(i)
+        , endianess(DataInformation::DataInformationEndianess::EndianessInherit)
+    {}
     QScriptValue updateFunc;
     QScriptValue validationFunc;
     QScriptValue toStringFunc;
     QString customTypeName;
     DataInformation::DataInformationEndianess endianess;
+
 private:
     Q_DISABLE_COPY(CommonParsedData)
 };
 
-struct BitfieldParsedData : public ParserInfo {
+struct BitfieldParsedData : public ParserInfo
+{
     inline explicit BitfieldParsedData(const ParserInfo& i) : ParserInfo(i) {}
     QString type;
     ParsedNumber<int> width;
+
 private:
     Q_DISABLE_COPY(BitfieldParsedData)
 };
 
-struct PrimitiveParsedData : public ParserInfo {
+struct PrimitiveParsedData : public ParserInfo
+{
     inline explicit PrimitiveParsedData(const ParserInfo& i) : ParserInfo(i) {}
     QString type;
+
 private:
     Q_DISABLE_COPY(PrimitiveParsedData)
 };
 
-struct EnumParsedData : public ParserInfo {
+struct EnumParsedData : public ParserInfo
+{
     inline explicit EnumParsedData(const ParserInfo& i) : ParserInfo(i) {}
     QString type;
     QString enumName;
-    EnumDefinition::Ptr enumDef; //TODO QMap<QString, QScriptValue> instead
+    EnumDefinition::Ptr enumDef; // TODO QMap<QString, QScriptValue> instead
     /** only used if enumDef is null, to allow sharing (only possible in OSD) */
     QScriptValue enumValuesObject;
+
 private:
     Q_DISABLE_COPY(EnumParsedData)
 };
 
-struct StringParsedData : public ParserInfo {
+struct StringParsedData : public ParserInfo
+{
     inline explicit StringParsedData(const ParserInfo& i) : ParserInfo(i) {}
     QString encoding;
     ParsedNumber<quint32> termination;
@@ -90,24 +101,37 @@ private:
     Q_DISABLE_COPY(StringParsedData)
 };
 
-struct ArrayParsedData : public ParserInfo {
-    inline explicit ArrayParsedData(const ParserInfo& i) : ParserInfo(i), arrayType(nullptr) {}
+struct ArrayParsedData : public ParserInfo
+{
+    inline explicit ArrayParsedData(const ParserInfo& i)
+        : ParserInfo(i)
+        , arrayType(nullptr)
+    {}
     QScriptValue length;
     DataInformation* arrayType;
+
 private:
     Q_DISABLE_COPY(ArrayParsedData)
 };
 
-struct PointerParsedData : public ParserInfo {
-    inline explicit PointerParsedData(const ParserInfo& i) : ParserInfo(i), valueType(nullptr), pointerTarget(nullptr) {}
+struct PointerParsedData : public ParserInfo
+{
+    inline explicit PointerParsedData(const ParserInfo& i)
+        : ParserInfo(i)
+        , valueType(nullptr)
+        , pointerTarget(nullptr)
+    {}
     DataInformation* valueType;
     DataInformation* pointerTarget;
+
 private:
     Q_DISABLE_COPY(PointerParsedData)
 };
 
-struct TaggedUnionParsedData : public ParserInfo {
-    struct Alternatives {
+struct TaggedUnionParsedData : public ParserInfo
+{
+    struct Alternatives
+    {
         QString name;
         QScriptValue selectIf;
         QSharedPointer<ChildrenParser> fields;
@@ -116,19 +140,21 @@ struct TaggedUnionParsedData : public ParserInfo {
     QScopedPointer<ChildrenParser> children;
     QVector<Alternatives> alternatives;
     QScopedPointer<ChildrenParser> defaultFields;
+
 private:
     Q_DISABLE_COPY(TaggedUnionParsedData)
 };
 
-struct StructOrUnionParsedData : public ParserInfo {
+struct StructOrUnionParsedData : public ParserInfo
+{
     inline explicit StructOrUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
     QScopedPointer<ChildrenParser> children;
+
 private:
     Q_DISABLE_COPY(StructOrUnionParsedData)
 };
 
-namespace DataInformationFactory
-{
+namespace DataInformationFactory {
 AbstractBitfieldDataInformation* newBitfield(const BitfieldParsedData& pd);
 PrimitiveDataInformation* newPrimitive(const PrimitiveParsedData& pd);
 EnumDataInformation* newEnum(const EnumParsedData& pd);

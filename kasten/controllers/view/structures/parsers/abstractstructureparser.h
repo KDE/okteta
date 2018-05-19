@@ -28,19 +28,20 @@
 
 class TopLevelDataInformation;
 
-namespace Kasten
-{
+namespace Kasten {
 class StructureDefinitionFile;
 }
 
 class AbstractStructureParser
 {
     Q_DISABLE_COPY(AbstractStructureParser)
+
 public:
     AbstractStructureParser(const QString& pluginName, const QString& absolutePath);
     virtual ~AbstractStructureParser();
     virtual QStringList parseStructureNames() const = 0;
     virtual QVector<TopLevelDataInformation*> parseStructures() const = 0;
+
 protected:
     const QString mPluginName;
     const QString mAbsolutePath;

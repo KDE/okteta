@@ -27,29 +27,27 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct Hexadecimal8
 {
-  public:
-    Hexadecimal8( quint8 v );
+public:
+    Hexadecimal8(quint8 v);
     Hexadecimal8();
 
-  public:
+public:
     QString toString() const;
 
-  public:
+public:
     quint8 value;
 };
 
-
-inline Hexadecimal8::Hexadecimal8() : value( 0 ) {}
-inline Hexadecimal8::Hexadecimal8( quint8 v ) : value( v ) {}
+inline Hexadecimal8::Hexadecimal8() : value(0) {}
+inline Hexadecimal8::Hexadecimal8(quint8 v) : value(v) {}
 
 inline QString Hexadecimal8::toString() const
 {
-    return QStringLiteral( "%1" ).arg( value, 2, 16, QChar::fromLatin1('0') );
+    return QStringLiteral("%1").arg(value, 2, 16, QChar::fromLatin1('0'));
 }
 
-Q_DECLARE_METATYPE( Hexadecimal8 )
+Q_DECLARE_METATYPE(Hexadecimal8)
 
 #endif

@@ -26,15 +26,13 @@
 // Qt
 #include <QObject>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class CoordRangeTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void testConstructorByCoords();
     void testConstructorByPosLines();
     void testSimpleConstructor();

@@ -28,26 +28,23 @@
 // Kasten gui
 #include <kasten/abstracttoolview.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class PODTableView;
 class PODDecoderTool;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT PODDecoderToolView : public AbstractToolView
 {
-  public:
-    explicit PODDecoderToolView( PODDecoderTool *tool );
+public:
+    explicit PODDecoderToolView(PODDecoderTool* tool);
     ~PODDecoderToolView() override;
 
-  public: // AbstractToolView API
+public: // AbstractToolView API
     QWidget* widget() const override;
     QString title() const override;
     AbstractTool* tool() const override;
 
-  private:
+private:
     PODTableView* mWidget;
 };
 

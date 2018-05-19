@@ -20,7 +20,6 @@
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "testdocumentfileloadjob.h"
 
 // lib
@@ -30,30 +29,29 @@
 // Qt
 #include <QCoreApplication>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-TestDocumentFileLoadJob::TestDocumentFileLoadJob( TestDocumentFileSynchronizer* synchronizer, const QUrl& url )
- : AbstractFileSystemLoadJob( synchronizer, url )
+TestDocumentFileLoadJob::TestDocumentFileLoadJob(TestDocumentFileSynchronizer* synchronizer, const QUrl& url)
+    : AbstractFileSystemLoadJob(synchronizer, url)
 {}
 
 void TestDocumentFileLoadJob::startLoadFromFile()
 {
-    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>( synchronizer() );
+    TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
 
     TestDocumentFileLoadThread* loadThread =
-        new TestDocumentFileLoadThread( this, testSynchronizer->header(), file() );
+        new TestDocumentFileLoadThread(this, testSynchronizer->header(), file());
     loadThread->start();
-    while( !loadThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!loadThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     TestDocument* document = loadThread->document();
-    testSynchronizer->setDocument( document );
+    testSynchronizer->setDocument(document);
 
     delete loadThread;
 
-    setDocument( document );
+    setDocument(document);
 }
 
 TestDocumentFileLoadJob::~TestDocumentFileLoadJob()

@@ -29,11 +29,9 @@
 // KF5
 #include <KXmlGuiWindow>
 
-template<class T> class QList;
+template <class T> class QList;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ShellWindowPrivate;
 
 class ViewManager;
@@ -43,35 +41,36 @@ class AbstractToolView;
 class AbstractView;
 class AbstractDocument;
 
-
-class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow,
-                                     public If::WidgetsDockable
+class KASTENGUI_EXPORT ShellWindow : public KXmlGuiWindow
+                                   , public If::WidgetsDockable
 {
-   Q_OBJECT
-   Q_INTERFACES( Kasten::If::WidgetsDockable )
+    Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::WidgetsDockable
+    )
 
-  public:
-    explicit ShellWindow( ViewManager* viewManager );
+public:
+    explicit ShellWindow(ViewManager* viewManager);
     ~ShellWindow() override;
 
-  public Q_SLOTS:
-    void showDocument( Kasten::AbstractDocument* document ); // TODO: better name
+public Q_SLOTS:
+    void showDocument(Kasten::AbstractDocument* document);   // TODO: better name
 
-  public:
-    void updateControllers( AbstractView* view );
-    void addXmlGuiController( AbstractXmlGuiController* controller );
-    void addTool( AbstractToolView* toolView );
+public:
+    void updateControllers(AbstractView* view);
+    void addXmlGuiController(AbstractXmlGuiController* controller);
+    void addTool(AbstractToolView* toolView);
 
-  public: // If::WidgetsDockable API
+public: // If::WidgetsDockable API
     QList<ToolViewDockWidget*> dockWidgets() const override;
 
-  protected:
+protected:
     MultiViewAreas* viewArea() const;
     ViewManager* viewManager() const;
 
-  protected:
+protected:
     ShellWindowPrivate* const d_ptr;
-    Q_DECLARE_PRIVATE( ShellWindow )
+    Q_DECLARE_PRIVATE(ShellWindow)
 };
 
 }

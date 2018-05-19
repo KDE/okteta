@@ -43,8 +43,9 @@ QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     const QDoubleSpinBox* spin = qobject_cast<const QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
-    if (spin)
+    if (spin) {
         return ((float) spin->value());
+    }
     return QVariant();
 }
 
@@ -52,8 +53,9 @@ void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
 {
     QDoubleSpinBox* spin = qobject_cast<QDoubleSpinBox*> (w);
     Q_CHECK_PTR(spin);
-    if (spin)
+    if (spin) {
         spin->setValue(value);
+    }
 }
 
 QScriptValue FloatDataInformationMethods::asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler)
@@ -66,6 +68,6 @@ QScriptValue FloatDataInformationMethods::asScriptValue(float value, QScriptEngi
 QString FloatDataInformationMethods::staticValueString(float value)
 {
     return (Kasten::StructureViewPreferences::localeAwareFloatFormatting())
-        ? QLocale().toString(value, 'g', Kasten::StructureViewPreferences::floatPrecision())
-        : QString::number(value, 'g', Kasten::StructureViewPreferences::floatPrecision());
+           ? QLocale().toString(value, 'g', Kasten::StructureViewPreferences::floatPrecision())
+           : QString::number(value, 'g', Kasten::StructureViewPreferences::floatPrecision());
 }

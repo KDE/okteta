@@ -26,13 +26,11 @@
 // Qt
 #include <Qt>
 
-
 enum Endianness
 {
     LittleEndian = 0, // Intel, Alpha, ...
     BigEndian =    1 // Sun, Motorola, ...
 };
-
 
 static const Endianness ThisMachineEndianness =
 #if Q_BYTE_ORDER == Q_LITTLE_ENDIAN

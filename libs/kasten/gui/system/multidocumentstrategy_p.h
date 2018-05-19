@@ -33,59 +33,55 @@
 // Qt Core
 #include <QStringList>
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ViewManager;
 class MultiDocumentStrategy;
 
-
 class MultiDocumentStrategyPrivate : public AbstractDocumentStrategyPrivate
 {
-  public:
-    MultiDocumentStrategyPrivate( MultiDocumentStrategy* parent,
-                                  DocumentManager* documentManager,
-                                  ViewManager* viewManager );
+public:
+    MultiDocumentStrategyPrivate(MultiDocumentStrategy* parent,
+                                 DocumentManager* documentManager,
+                                 ViewManager* viewManager);
     ~MultiDocumentStrategyPrivate() override;
 
-  public:
+public:
     void init();
 
-  public: // AbstractDocumentStrategy API
+public: // AbstractDocumentStrategy API
     void createNew();
     void createNewFromClipboard();
-    void createNewWithGenerator( AbstractModelDataGenerator* generator );
+    void createNewWithGenerator(AbstractModelDataGenerator* generator);
 
-    void load( const QUrl& url );
+    void load(const QUrl& url);
 
-    void closeDocument( AbstractDocument* document );
+    void closeDocument(AbstractDocument* document);
     void closeAll();
-    void closeAllOther( AbstractDocument* document );
+    void closeAllOther(AbstractDocument* document);
 
-  public: // const AbstractDocumentStrategy API
+public: // const AbstractDocumentStrategy API
     QList<AbstractDocument*> documents() const;
     QStringList supportedRemoteTypes() const;
 
-    bool canClose( AbstractDocument* document ) const;
+    bool canClose(AbstractDocument* document) const;
     bool canCloseAll() const;
-    bool canCloseAllOther( AbstractDocument* document ) const;
+    bool canCloseAllOther(AbstractDocument* document) const;
 
-  protected:
-    Q_DECLARE_PUBLIC( MultiDocumentStrategy )
+protected:
+    Q_DECLARE_PUBLIC(MultiDocumentStrategy)
 
-  protected:
+protected:
     DocumentManager* mDocumentManager;
     ViewManager* mViewManager;
 };
 
-
 inline
-MultiDocumentStrategyPrivate::MultiDocumentStrategyPrivate( MultiDocumentStrategy* parent,
-                                                            DocumentManager* documentManager,
-                                                            ViewManager* viewManager )
-  : AbstractDocumentStrategyPrivate( parent )
-  , mDocumentManager( documentManager )
-  , mViewManager( viewManager )
+MultiDocumentStrategyPrivate::MultiDocumentStrategyPrivate(MultiDocumentStrategy* parent,
+                                                           DocumentManager* documentManager,
+                                                           ViewManager* viewManager)
+    : AbstractDocumentStrategyPrivate(parent)
+    , mDocumentManager(documentManager)
+    , mViewManager(viewManager)
 {
 }
 
@@ -99,14 +95,14 @@ inline QStringList MultiDocumentStrategyPrivate::supportedRemoteTypes() const
     return mDocumentManager->syncManager()->supportedRemoteTypes();
 }
 
-inline bool MultiDocumentStrategyPrivate::canClose( AbstractDocument* document ) const
+inline bool MultiDocumentStrategyPrivate::canClose(AbstractDocument* document) const
 {
-    return mDocumentManager->canClose( document );
+    return mDocumentManager->canClose(document);
 }
 
-inline bool MultiDocumentStrategyPrivate::canCloseAllOther( AbstractDocument* document ) const
+inline bool MultiDocumentStrategyPrivate::canCloseAllOther(AbstractDocument* document) const
 {
-    return mDocumentManager->canCloseAllOther( document );
+    return mDocumentManager->canCloseAllOther(document);
 }
 
 inline bool MultiDocumentStrategyPrivate::canCloseAll() const
@@ -119,9 +115,9 @@ inline void MultiDocumentStrategyPrivate::createNew()
     mDocumentManager->createManager()->createNew();
 }
 
-inline void MultiDocumentStrategyPrivate::load( const QUrl& url )
+inline void MultiDocumentStrategyPrivate::load(const QUrl& url)
 {
-    mDocumentManager->syncManager()->load( url );
+    mDocumentManager->syncManager()->load(url);
 }
 
 inline void MultiDocumentStrategyPrivate::closeAll()
@@ -129,14 +125,14 @@ inline void MultiDocumentStrategyPrivate::closeAll()
     mDocumentManager->closeAll();
 }
 
-inline void MultiDocumentStrategyPrivate::closeAllOther( AbstractDocument* document )
+inline void MultiDocumentStrategyPrivate::closeAllOther(AbstractDocument* document)
 {
-    mDocumentManager->closeAllOther( document );
+    mDocumentManager->closeAllOther(document);
 }
 
-inline void MultiDocumentStrategyPrivate::closeDocument( AbstractDocument* document )
+inline void MultiDocumentStrategyPrivate::closeDocument(AbstractDocument* document)
 {
-    mDocumentManager->closeDocument( document );
+    mDocumentManager->closeDocument(document);
 }
 
 inline MultiDocumentStrategyPrivate::~MultiDocumentStrategyPrivate() {}

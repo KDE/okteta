@@ -31,50 +31,47 @@
 class QDragMoveEvent;
 class QDropEvent;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SingleViewArea;
 class AbstractTool;
 class AbstractModelSynchronizer;
 class AbstractDocument;
 
-
 class SingleViewWindowPrivate
 {
-  public:
-    SingleViewWindowPrivate( SingleViewWindow* parent,
-                             AbstractView* view );
+public:
+    SingleViewWindowPrivate(SingleViewWindow* parent,
+                            AbstractView* view);
 
     ~SingleViewWindowPrivate();
 
-  public:
+public:
     void init();
 
-  public:
-    void setView( AbstractView* view );
-    void addXmlGuiController( AbstractXmlGuiController* controller );
-    void addTool( AbstractToolView* toolView );
+public:
+    void setView(AbstractView* view);
+    void addXmlGuiController(AbstractXmlGuiController* controller);
+    void addTool(AbstractToolView* toolView);
 
-  public: // If::WidgetsDockable API
+public: // If::WidgetsDockable API
     QList<ToolViewDockWidget*> dockWidgets() const;
 
-  protected:
+protected:
     AbstractView* view() const;
     SingleViewArea* viewArea() const;
 
-  private: // Q_SLOTS
-    void onTitleChanged( const QString& newTitle );
-    void onContentFlagsChanged( Kasten::ContentFlags contentFlags );
-    void onLocalSyncStateChanged( Kasten::LocalSyncState newState );
-    void onToolVisibilityChanged( bool isVisible );
-    void onSynchronizerDeleted( QObject* synchronizer );
+private: // Q_SLOTS
+    void onTitleChanged(const QString& newTitle);
+    void onContentFlagsChanged(Kasten::ContentFlags contentFlags);
+    void onLocalSyncStateChanged(Kasten::LocalSyncState newState);
+    void onToolVisibilityChanged(bool isVisible);
+    void onSynchronizerDeleted(QObject* synchronizer);
 
-  protected:
-    Q_DECLARE_PUBLIC( SingleViewWindow )
+protected:
+    Q_DECLARE_PUBLIC(SingleViewWindow)
 
-  protected:
+protected:
     SingleViewWindow* const q_ptr;
 
     AbstractView* mView;
@@ -86,7 +83,6 @@ class SingleViewWindowPrivate
     QList<ToolViewDockWidget*> mDockWidgets;
     QList<AbstractTool*> mTools;
 };
-
 
 inline QList<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
 inline AbstractView* SingleViewWindowPrivate::view() const { return mView; }

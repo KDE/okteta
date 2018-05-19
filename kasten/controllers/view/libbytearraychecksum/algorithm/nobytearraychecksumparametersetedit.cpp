@@ -22,22 +22,20 @@
 
 #include "nobytearraychecksumparametersetedit.h"
 
-
 const char NoByteArrayChecksumParameterSetEdit::Id[] = "None";
 
-
-NoByteArrayChecksumParameterSetEdit::NoByteArrayChecksumParameterSetEdit( QWidget* parent )
- : AbstractByteArrayChecksumParameterSetEdit( parent )
+NoByteArrayChecksumParameterSetEdit::NoByteArrayChecksumParameterSetEdit(QWidget* parent)
+    : AbstractByteArrayChecksumParameterSetEdit(parent)
 {}
 
-void NoByteArrayChecksumParameterSetEdit::setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet )
+void NoByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
-    Q_UNUSED( parameterSet );
+    Q_UNUSED(parameterSet);
 }
 
-void NoByteArrayChecksumParameterSetEdit::getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const
+void NoByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    Q_UNUSED( parameterSet );
+    Q_UNUSED(parameterSet);
 }
 
 NoByteArrayChecksumParameterSetEdit::~NoByteArrayChecksumParameterSetEdit()

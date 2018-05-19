@@ -26,37 +26,33 @@
 // Qt
 #include <QObject>
 
-
-namespace Okteta
-{
+namespace Okteta {
 class CharCodec;
-
 
 class CharCodecIfTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
+protected:
     CharCodecIfTest();
 
-  protected: // API to be implemented
+protected: // API to be implemented
     virtual CharCodec* createCodec() = 0;
-    virtual void deleteCodec( CharCodec* codec ) = 0;
+    virtual void deleteCodec(CharCodec* codec) = 0;
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void init();
     void cleanup();
 
     void testEncodeDecode_data();
     void testEncodeDecode();
 
-  private:
+private:
     /** pointer to the buffer to test */
     CharCodec* mCharCodec;
 };
 
-
-inline CharCodecIfTest::CharCodecIfTest() : mCharCodec( nullptr ) {}
+inline CharCodecIfTest::CharCodecIfTest() : mCharCodec(nullptr) {}
 
 }
 

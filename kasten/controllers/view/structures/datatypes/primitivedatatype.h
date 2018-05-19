@@ -27,7 +27,7 @@ class QString;
 
 enum class PrimitiveDataType
 {
-//!!! DO NOT CHANGE ORDER OF ITEMS !!!
+//! !! DO NOT CHANGE ORDER OF ITEMS !!!
     Invalid = -1,
     START = 0,
     Bool8 = 0,
@@ -49,16 +49,18 @@ enum class PrimitiveDataType
     END = Bitfield
 };
 
+namespace PrimitiveType {
 
-namespace PrimitiveType
-{
-    /** @return either PrimitiveType::longTypename() or
-     * PrimitiveType::standardTypeName() depending on settings */
-    QString typeName(PrimitiveDataType type);
-    /** @return the name of the type, e.g. "uint8", "double", etc. */
-    QString standardTypeName(PrimitiveDataType type);
-    /** @return the localized type name */
-    QString longTypeName(PrimitiveDataType type);
+/**
+ * @return either PrimitiveType::longTypename() or
+ * PrimitiveType::standardTypeName() depending on settings
+ */
+QString typeName(PrimitiveDataType type);
+/** @return the name of the type, e.g. "uint8", "double", etc. */
+QString standardTypeName(PrimitiveDataType type);
+/** @return the localized type name */
+QString longTypeName(PrimitiveDataType type);
+
 }
 
 QDebug operator<<(QDebug dbg, PrimitiveDataType type);

@@ -21,8 +21,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #ifndef STRINGDATAINFORMATION_H
 #define STRINGDATAINFORMATION_H
 
@@ -32,7 +30,7 @@
 
 class DummyDataInformation;
 
-//TODO QStringLiteral
+// TODO QStringLiteral
 const QLatin1String stringEncodings[] = {
     QLatin1String("ascii"), QLatin1String("latin1"), QLatin1String("utf-8"), QLatin1String("utf-16le"),
     QLatin1String("utf-16-be"), QLatin1String("utf32-le"), QLatin1String("utf32-be"), QLatin1String("ebcdic")
@@ -41,9 +39,19 @@ const QLatin1String stringEncodings[] = {
 class StringDataInformation : public DataInformationWithDummyChildren
 {
     DATAINFORMATION_CLONE_DECL(StringDataInformation, DataInformationWithDummyChildren);
+
 public:
-    enum class StringType {
-        InvalidEncoding = -1, ASCII = 0, Latin1, UTF8, UTF16_LE, UTF16_BE, UTF32_LE, UTF32_BE, EBCDIC
+    enum class StringType
+    {
+        InvalidEncoding = -1,
+        ASCII = 0,
+        Latin1,
+        UTF8,
+        UTF16_LE,
+        UTF16_BE,
+        UTF32_LE,
+        UTF32_BE,
+        EBCDIC
     };
 
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = nullptr);
@@ -94,10 +102,12 @@ public:
      * @param mode The mode to remove
      */
     void unsetTerminationMode(StringData::TerminationMode mode);
+
 private:
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
     QString typeNameImpl() const override;
     QString valueStringImpl() const override;
+
 private:
     QScopedPointer<DummyDataInformation> mDummy;
     QScopedPointer<StringData> mData;

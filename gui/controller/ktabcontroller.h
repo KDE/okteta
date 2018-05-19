@@ -23,38 +23,33 @@
 #ifndef OKTETA_KTABCONTROLLER_H
 #define OKTETA_KTABCONTROLLER_H
 
-
 // lib
 #include "kcontroller.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 class AbstractByteArrayView;
-
 
 class KTabController : public KController
 {
-  public:
-    KTabController( AbstractByteArrayView* view, KController* parent );
+public:
+    KTabController(AbstractByteArrayView* view, KController* parent);
 
-  public: // KController API
-    bool handleKeyPress( QKeyEvent* keyEvent ) override;
+public: // KController API
+    bool handleKeyPress(QKeyEvent* keyEvent) override;
 
-  public:
+public:
     bool tabChangesFocus() const;
     /// default is true
-    void setTabChangesFocus( bool tabChangesFocus );
+    void setTabChangesFocus(bool tabChangesFocus);
 
-  protected:
+protected:
     AbstractByteArrayView* mView;
     /** flag if tab key should be ignored */
-    bool mTabChangesFocus:1;
+    bool mTabChangesFocus : 1;
 };
 
-
 inline bool KTabController::tabChangesFocus()    const { return mTabChangesFocus; }
-inline void KTabController::setTabChangesFocus( bool tabChangesFocus ) { mTabChangesFocus = tabChangesFocus; }
+inline void KTabController::setTabChangesFocus(bool tabChangesFocus) { mTabChangesFocus = tabChangesFocus; }
 
 }
 

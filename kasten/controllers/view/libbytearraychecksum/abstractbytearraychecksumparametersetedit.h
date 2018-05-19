@@ -28,29 +28,29 @@
 
 class AbstractByteArrayChecksumParameterSet;
 
-
 class AbstractByteArrayChecksumParameterSetEdit : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
-    explicit AbstractByteArrayChecksumParameterSetEdit( QWidget* parent = nullptr );
-  public:
+protected:
+    explicit AbstractByteArrayChecksumParameterSetEdit(QWidget* parent = nullptr);
+
+public:
     ~AbstractByteArrayChecksumParameterSetEdit() override;
 
-  public: // API to be implemented
-    virtual void setParameterSet( const AbstractByteArrayChecksumParameterSet* parameterSet ) = 0;
+public: // API to be implemented
+    virtual void setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet) = 0;
     /// default does nothing
-    virtual void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const = 0;
+    virtual void getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const = 0;
     /// default returns true
     virtual bool isValid() const;
 
-  Q_SIGNALS:
-    void validityChanged( bool isValid );
+Q_SIGNALS:
+    void validityChanged(bool isValid);
     // TODO: hack, see checksum source
     void valuesChanged();
 
-  protected:
+protected:
     class Private;
     Private* const d;
 };

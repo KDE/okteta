@@ -30,33 +30,30 @@
 
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ModelCodecManager;
 class AbstractDocumentStrategy;
 
-
 class KASTENCONTROLLERS_EXPORT CreatorController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    CreatorController( ModelCodecManager* modelCodecManager,
-                       AbstractDocumentStrategy* documentStrategy,
-                       KXMLGUIClient* guiClient );
+public:
+    CreatorController(ModelCodecManager* modelCodecManager,
+                      AbstractDocumentStrategy* documentStrategy,
+                      KXMLGUIClient* guiClient);
     ~CreatorController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onNewActionTriggered();
     void onNewFromClipboardActionTriggered();
     void onNewFromGeneratorActionTriggered();
 
-  private:
+private:
     ModelCodecManager* mModelCodecManager;
     AbstractDocumentStrategy* mDocumentStrategy;
 };

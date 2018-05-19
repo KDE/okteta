@@ -28,27 +28,26 @@
 // Qt
 #include <QByteArray>
 
-
 class OperandByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 {
-  public:
+public:
     OperandByteArrayFilterParameterSet();
     ~OperandByteArrayFilterParameterSet() override;
 
-  public: // AbstractByteArrayFilterParameterSet API
+public: // AbstractByteArrayFilterParameterSet API
     const char* id() const override;
 
-  public:
-    void setOperand( const QByteArray &operand );
-    void setOperandFormat( int operandFormat );
-    void setAlignAtEnd( bool alignAtEnd );
+public:
+    void setOperand(const QByteArray& operand);
+    void setOperandFormat(int operandFormat);
+    void setAlignAtEnd(bool alignAtEnd);
 
-  public:
+public:
     QByteArray operand() const;
     int operandFormat() const;
     bool alignAtEnd() const;
 
-  protected:
+protected:
     QByteArray mOperand;
     int mOperandFormat;
     bool mAlignAtEnd;

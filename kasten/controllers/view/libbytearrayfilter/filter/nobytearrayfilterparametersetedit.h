@@ -26,21 +26,20 @@
 // lib
 #include "abstractbytearrayfilterparametersetedit.h"
 
-
 class NoByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterParameterSetEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     static const char Id[];
 
-  public:
-    explicit NoByteArrayFilterParameterSetEdit( QWidget* parent = nullptr );
+public:
+    explicit NoByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);
     ~NoByteArrayFilterParameterSetEdit() override;
 
-  public: // AbstractByteArrayFilterParameterSetEdit API
-    void setValues( const AbstractByteArrayFilterParameterSet *parameterSet ) override;
-    void getParameterSet( AbstractByteArrayFilterParameterSet *parameterSet ) const override;
+public: // AbstractByteArrayFilterParameterSetEdit API
+    void setValues(const AbstractByteArrayFilterParameterSet* parameterSet) override;
+    void getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const override;
 
 };
 

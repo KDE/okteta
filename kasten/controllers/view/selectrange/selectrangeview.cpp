@@ -35,122 +35,119 @@
 #include <QLabel>
 #include <QLayout>
 
+namespace Kasten {
 
-namespace Kasten
+SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
+    : AbstractToolWidget(parent)
+    , mTool(tool)
 {
-
-SelectRangeView::SelectRangeView( SelectRangeTool* tool, QWidget* parent )
-  : AbstractToolWidget( parent ),
-    mTool( tool )
-{
-    QHBoxLayout* baseLayout = new QHBoxLayout( this );
-    baseLayout->setMargin( 0 );
+    QHBoxLayout* baseLayout = new QHBoxLayout(this);
+    baseLayout->setMargin(0);
 
     // offsets
     QVBoxLayout* offsetLayout = new QVBoxLayout();
-    offsetLayout->setMargin( 0 );
+    offsetLayout->setMargin(0);
 
     // start offset
     QHBoxLayout* startOffsetLayout = new QHBoxLayout();
-    startOffsetLayout->setMargin( 0 );
+    startOffsetLayout->setMargin(0);
 
-    QLabel* label = new QLabel( i18nc("@label:listbox","Start offset:"), this );
-    mStartEdit = new Okteta::AddressComboBox( this );
-    connect( mStartEdit, &Okteta::AddressComboBox::addressChanged,
-             mTool, &SelectRangeTool::setTargetStart );
-    label->setBuddy( mStartEdit );
+    QLabel* label = new QLabel(i18nc("@label:listbox", "Start offset:"), this);
+    mStartEdit = new Okteta::AddressComboBox(this);
+    connect(mStartEdit, &Okteta::AddressComboBox::addressChanged,
+            mTool, &SelectRangeTool::setTargetStart);
+    label->setBuddy(mStartEdit);
     const QString startInputWhatsThis =
-        i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
-    label->setWhatsThis( startInputWhatsThis );
-    mStartEdit->setWhatsThis( startInputWhatsThis );
+        i18nc("@info:whatsthis", "Enter an offset to go to, or select a previous offset from the list.");
+    label->setWhatsThis(startInputWhatsThis);
+    mStartEdit->setWhatsThis(startInputWhatsThis);
 
-    startOffsetLayout->addWidget( label );
-    startOffsetLayout->addWidget( mStartEdit );
-    setFocusProxy( mStartEdit ); // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
+    startOffsetLayout->addWidget(label);
+    startOffsetLayout->addWidget(mStartEdit);
+    setFocusProxy(mStartEdit);   // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
 
-    offsetLayout->addLayout( startOffsetLayout );
+    offsetLayout->addLayout(startOffsetLayout);
 
     // end offset
     QHBoxLayout* endOffsetLayout = new QHBoxLayout();
-    endOffsetLayout->setMargin( 0 );
+    endOffsetLayout->setMargin(0);
 
-    label = new QLabel( i18nc("@label:listbox","End offset:"), this );
-    mEndEdit = new Okteta::AddressComboBox( this );
-    connect( mEndEdit, &Okteta::AddressComboBox::addressChanged,
-             mTool, &SelectRangeTool::setTargetEnd );
-    label->setBuddy( mEndEdit );
+    label = new QLabel(i18nc("@label:listbox", "End offset:"), this);
+    mEndEdit = new Okteta::AddressComboBox(this);
+    connect(mEndEdit, &Okteta::AddressComboBox::addressChanged,
+            mTool, &SelectRangeTool::setTargetEnd);
+    label->setBuddy(mEndEdit);
     const QString endInputWhatsThis =
-        i18nc( "@info:whatsthis","Enter an offset to go to, or select a previous offset from the list." );
-    label->setWhatsThis( endInputWhatsThis );
-    mEndEdit->setWhatsThis( endInputWhatsThis );
+        i18nc("@info:whatsthis", "Enter an offset to go to, or select a previous offset from the list.");
+    label->setWhatsThis(endInputWhatsThis);
+    mEndEdit->setWhatsThis(endInputWhatsThis);
 
-    endOffsetLayout->addWidget( label );
-    endOffsetLayout->addWidget( mEndEdit );
+    endOffsetLayout->addWidget(label);
+    endOffsetLayout->addWidget(mEndEdit);
 
-    offsetLayout->addLayout( endOffsetLayout );
-    baseLayout->addLayout( offsetLayout );
+    offsetLayout->addLayout(endOffsetLayout);
+    baseLayout->addLayout(offsetLayout);
 
     // options
     QVBoxLayout* optionsLayout = new QVBoxLayout();
-    optionsLayout->setMargin( 0 );
+    optionsLayout->setMargin(0);
 
-    mRelativeCheckBox = new QCheckBox( i18nc("@option:check","End relative"), this );
+    mRelativeCheckBox = new QCheckBox(i18nc("@option:check", "End relative"), this);
     mRelativeCheckBox->setWhatsThis(
-        i18nc("@info:whatsthis","Extend the selection by the cursor move.") );
-    connect( mRelativeCheckBox, &QCheckBox::toggled,
-             mTool, &SelectRangeTool::setIsEndRelative );
-    mRelativeCheckBox->setChecked( mTool->isEndRelative() );
-    mBackwardsCheckBox = new QCheckBox( i18nc("@option:check","&Backwards"), this );
+        i18nc("@info:whatsthis", "Extend the selection by the cursor move."));
+    connect(mRelativeCheckBox, &QCheckBox::toggled,
+            mTool, &SelectRangeTool::setIsEndRelative);
+    mRelativeCheckBox->setChecked(mTool->isEndRelative());
+    mBackwardsCheckBox = new QCheckBox(i18nc("@option:check", "&Backwards"), this);
     mBackwardsCheckBox->setWhatsThis(
-        i18nc("@info:whatsthis","Go backwards from the end or the current cursor location.") );
-    connect( mBackwardsCheckBox, &QCheckBox::toggled,
-             mTool, &SelectRangeTool::setIsEndBackwards );
-    mBackwardsCheckBox->setChecked( mTool->isEndBackwards() );
+        i18nc("@info:whatsthis", "Go backwards from the end or the current cursor location."));
+    connect(mBackwardsCheckBox, &QCheckBox::toggled,
+            mTool, &SelectRangeTool::setIsEndBackwards);
+    mBackwardsCheckBox->setChecked(mTool->isEndBackwards());
 
-    connect( mRelativeCheckBox, &QCheckBox::toggled, mBackwardsCheckBox, &QCheckBox::setEnabled );
-    mBackwardsCheckBox->setEnabled( mRelativeCheckBox->isChecked() );
+    connect(mRelativeCheckBox, &QCheckBox::toggled, mBackwardsCheckBox, &QCheckBox::setEnabled);
+    mBackwardsCheckBox->setEnabled(mRelativeCheckBox->isChecked());
 
-    optionsLayout->addWidget( mRelativeCheckBox );
-    optionsLayout->addWidget( mBackwardsCheckBox );
+    optionsLayout->addWidget(mRelativeCheckBox);
+    optionsLayout->addWidget(mBackwardsCheckBox);
 
-    baseLayout->addLayout( optionsLayout );
+    baseLayout->addLayout(optionsLayout);
 
     // Select button
     const KGuiItem selectGuiItem =
-        KGuiItem( i18nc("@action:button",
-                        "&Select"),
-                  QString(),
-                  i18nc("@info:tooltip",
-                        "Select the range."),
-                  xi18nc("@info:whatsthis",
-                         "If you press the <interface>Select</interface> "
-                         "button, the cursor will be moved in the document to or, "
-                         "on your option, by the offset you entered above.") );
-    mSelectButton = new QPushButton( this );
-    KGuiItem::assign( mSelectButton, selectGuiItem );
-    connect( mSelectButton, &QPushButton::clicked, this, &SelectRangeView::onSelectButtonClicked );
-    addButton( mSelectButton, AbstractToolWidget::Default );
-    baseLayout->addWidget( mSelectButton );
-    baseLayout->setAlignment( mSelectButton, Qt::AlignTop );
+        KGuiItem(i18nc("@action:button",
+                       "&Select"),
+                 QString(),
+                 i18nc("@info:tooltip",
+                       "Select the range."),
+                 xi18nc("@info:whatsthis",
+                        "If you press the <interface>Select</interface> "
+                        "button, the cursor will be moved in the document to or, "
+                        "on your option, by the offset you entered above."));
+    mSelectButton = new QPushButton(this);
+    KGuiItem::assign(mSelectButton, selectGuiItem);
+    connect(mSelectButton, &QPushButton::clicked, this, &SelectRangeView::onSelectButtonClicked);
+    addButton(mSelectButton, AbstractToolWidget::Default);
+    baseLayout->addWidget(mSelectButton);
+    baseLayout->setAlignment(mSelectButton, Qt::AlignTop);
 
     baseLayout->addStretch();
 
-    setTabOrder( mStartEdit, mEndEdit );
-    setTabOrder( mEndEdit, mRelativeCheckBox );
-    setTabOrder( mRelativeCheckBox, mBackwardsCheckBox );
-    setTabOrder( mBackwardsCheckBox, mSelectButton );
+    setTabOrder(mStartEdit, mEndEdit);
+    setTabOrder(mEndEdit, mRelativeCheckBox);
+    setTabOrder(mRelativeCheckBox, mBackwardsCheckBox);
+    setTabOrder(mBackwardsCheckBox, mSelectButton);
 
-    connect( mTool, &SelectRangeTool::isApplyableChanged, this, &SelectRangeView::onApplyableChanged );
+    connect(mTool, &SelectRangeTool::isApplyableChanged, this, &SelectRangeView::onApplyableChanged);
 
-    onApplyableChanged( mTool->isApplyable() );
+    onApplyableChanged(mTool->isApplyable());
 }
 
-
-void SelectRangeView::onApplyableChanged( bool isApplyable )
+void SelectRangeView::onApplyableChanged(bool isApplyable)
 {
     // TODO: set error tooltip, like offset out of range or no document
     // TODO: set color flag to offset input
-    mSelectButton->setEnabled( isApplyable );
+    mSelectButton->setEnabled(isApplyable);
 }
 
 void SelectRangeView::onSelectButtonClicked()
@@ -162,7 +159,6 @@ void SelectRangeView::onSelectButtonClicked()
     mTool->select();
 //     emit toolUsed();
 }
-
 
 SelectRangeView::~SelectRangeView() {}
 

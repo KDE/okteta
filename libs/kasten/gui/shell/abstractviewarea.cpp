@@ -26,16 +26,14 @@
 // Qt
 #include <Qt>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 AbstractViewArea::AbstractViewArea()
-  : d_ptr( new AbstractViewAreaPrivate(this) )
+    : d_ptr(new AbstractViewAreaPrivate(this))
 {}
 
-AbstractViewArea::AbstractViewArea( AbstractViewAreaPrivate* d )
-  : d_ptr( d )
+AbstractViewArea::AbstractViewArea(AbstractViewAreaPrivate* d)
+    : d_ptr(d)
 {
 }
 

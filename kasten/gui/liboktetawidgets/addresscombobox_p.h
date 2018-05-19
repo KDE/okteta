@@ -29,46 +29,43 @@
 // KF5
 #include <KComboBox>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class AddressComboBoxPrivate
 {
-  public:
-    explicit AddressComboBoxPrivate( AddressComboBox* parent );
+public:
+    explicit AddressComboBoxPrivate(AddressComboBox* parent);
 
-  public:
+public:
     Address address() const;
     int format() const;
     AddressValidator::AddressType addressType() const;
 
-  public:
+public:
     void init();
     void rememberCurrentAddress();
 
-    void onFormatChanged( int index );
-    void onValueEdited( const QString& value );
-    void onValueActivated( int index );
+    void onFormatChanged(int index);
+    void onValueEdited(const QString& value);
+    void onValueActivated(int index);
 
-  protected:
+protected:
     AddressComboBox* const q_ptr;
-    Q_DECLARE_PUBLIC( AddressComboBox )
+    Q_DECLARE_PUBLIC(AddressComboBox)
 
-    KComboBox* mFormatComboBox;
+    KComboBox * mFormatComboBox;
     KComboBox* mValueComboBox;
     AddressValidator::AddressType mAddressType;
     AddressValidator* mValidator;
 };
 
-
-inline AddressComboBoxPrivate::AddressComboBoxPrivate( AddressComboBox* parent )
-  : q_ptr( parent )
+inline AddressComboBoxPrivate::AddressComboBoxPrivate(AddressComboBox* parent)
+    : q_ptr(parent)
 {}
 
 inline Address AddressComboBoxPrivate::address() const
 {
-    return mValidator->toAddress( mValueComboBox->currentText() );
+    return mValidator->toAddress(mValueComboBox->currentText());
 }
 inline int AddressComboBoxPrivate::format() const
 {

@@ -28,9 +28,7 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 PodDecoderToolViewFactory::PodDecoderToolViewFactory() {}
 
@@ -39,9 +37,9 @@ QString PodDecoderToolViewFactory::title()       const { return i18nc("@title:wi
 QString PodDecoderToolViewFactory::id()       const { return QStringLiteral("org.kde.okteta.PodDecoderToolView"); }
 SidePosition PodDecoderToolViewFactory::defaultPosition() const { return RightSidePosition; }
 
-AbstractToolView* PodDecoderToolViewFactory::create( AbstractTool* tool )
+AbstractToolView* PodDecoderToolViewFactory::create(AbstractTool* tool)
 {
-    return new PODDecoderToolView( qobject_cast<PODDecoderTool*>(tool) );
+    return new PODDecoderToolView(qobject_cast<PODDecoderTool*>(tool));
 }
 
 PodDecoderToolViewFactory::~PodDecoderToolViewFactory() {}

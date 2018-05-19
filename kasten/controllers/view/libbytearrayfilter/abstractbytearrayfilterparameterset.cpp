@@ -22,13 +22,12 @@
 
 #include "abstractbytearrayfilterparameterset.h"
 
-
 class AbstractByteArrayFilterParameterSet::Private
 {
 };
 
 AbstractByteArrayFilterParameterSet::AbstractByteArrayFilterParameterSet()
- : d( new Private() )
+    : d(new Private())
 {}
 
 AbstractByteArrayFilterParameterSet::~AbstractByteArrayFilterParameterSet()

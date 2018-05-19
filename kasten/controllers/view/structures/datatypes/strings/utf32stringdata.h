@@ -17,14 +17,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-
 #ifndef UTF32STRINGDATA_H
 #define UTF32STRINGDATA_H
 
 #include "stringdata.h"
 
 #include <QVector>
-
 
 class Utf32StringData : public StringData
 {
@@ -40,6 +38,7 @@ public:
     BitCount32 sizeAt(uint i) const override;
     QString stringValue(int row) const override;
     QString typeName() const override;
+
 private:
     QVector<quint32> mCodePoints;
     int mNonBMPCount;

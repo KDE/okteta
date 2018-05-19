@@ -23,34 +23,34 @@
 #include "abstractmodel.h"
 #include "abstractmodel_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModel::AbstractModel( AbstractModel* baseModel )
-  : d_ptr( new AbstractModelPrivate(this,baseModel) )
+AbstractModel::AbstractModel(AbstractModel* baseModel)
+    : d_ptr(new AbstractModelPrivate(this, baseModel))
 {}
 
-AbstractModel::AbstractModel( AbstractModelPrivate* d )
-  : d_ptr( d )
+AbstractModel::AbstractModel(AbstractModelPrivate* d)
+    : d_ptr(d)
 {}
 
 bool AbstractModel::isModifiable()        const { return false; }
 bool AbstractModel::isReadOnly()          const { return true; }
+
 AbstractModel* AbstractModel::baseModel() const
 {
-    Q_D( const AbstractModel );
+    Q_D(const AbstractModel);
 
     return d->baseModel();
 }
 
-void AbstractModel::setBaseModel( AbstractModel* baseModel )
+void AbstractModel::setBaseModel(AbstractModel* baseModel)
 {
-    Q_D( AbstractModel );
+    Q_D(AbstractModel);
 
-    d->setBaseModel( baseModel );
+    d->setBaseModel(baseModel);
 }
-void AbstractModel::setReadOnly( bool isReadOnly ) { Q_UNUSED(isReadOnly) }
+
+void AbstractModel::setReadOnly(bool isReadOnly) { Q_UNUSED(isReadOnly) }
 
 AbstractModel::~AbstractModel()
 {

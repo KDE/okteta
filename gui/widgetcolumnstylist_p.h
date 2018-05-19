@@ -26,25 +26,22 @@
 // lib
 #include "abstractcolumnstylist_p.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class WidgetColumnStylistPrivate : public AbstractColumnStylistPrivate
 {
-  public:
-    explicit WidgetColumnStylistPrivate( QWidget* mWidget );
+public:
+    explicit WidgetColumnStylistPrivate(QWidget* mWidget);
     ~WidgetColumnStylistPrivate();
 
-  public:
+public:
     QWidget* widget() const;
 
-  private:
+private:
     QWidget* const mWidget;
 };
 
-
-inline WidgetColumnStylistPrivate::WidgetColumnStylistPrivate( QWidget* widget ) : mWidget( widget ) {}
+inline WidgetColumnStylistPrivate::WidgetColumnStylistPrivate(QWidget* widget) : mWidget(widget) {}
 inline WidgetColumnStylistPrivate::~WidgetColumnStylistPrivate() {}
 
 inline QWidget* WidgetColumnStylistPrivate::widget() const { return mWidget; }

@@ -36,42 +36,40 @@ class KXMLGUIClient;
 class QAction;
 class QWidget;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KReplaceDialog;
 class KReplacePrompt;
 class ReplaceTool;
 
-
-class OKTETAKASTENCONTROLLERS_EXPORT ReplaceController : public AbstractXmlGuiController, public If::ReplaceUserQueryable
+class OKTETAKASTENCONTROLLERS_EXPORT ReplaceController : public AbstractXmlGuiController
+                                                       , public If::ReplaceUserQueryable
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ReplaceController( KXMLGUIClient* guiClient, QWidget* parentWidget );
+public:
+    ReplaceController(KXMLGUIClient* guiClient, QWidget* parentWidget);
 
     ~ReplaceController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // If::ReplaceUserQueryable API
-    bool queryContinue( KFindDirection direction, int noOfReplacements ) const override;
+public: // If::ReplaceUserQueryable API
+    bool queryContinue(KFindDirection direction, int noOfReplacements) const override;
     ReplaceBehaviour queryReplaceCurrent() const override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void replace();
 
-    void onFinished( bool previousFound, int noOfReplacements );
+    void onFinished(bool previousFound, int noOfReplacements);
 
-  private:
+private:
     QWidget* mParentWidget;
 
-    QAction *mReplaceAction;
+    QAction* mReplaceAction;
 
-    KReplaceDialog *mReplaceDialog;
+    KReplaceDialog* mReplaceDialog;
     mutable KReplacePrompt* mReplacePrompt;
     ReplaceTool* mTool;
 };

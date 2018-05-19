@@ -26,22 +26,20 @@
 // lib
 #include "abstractmousecontroller.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 class MousePaster : public AbstractMouseController
 {
-  public:
-    MousePaster( AbstractByteArrayView* view, AbstractMouseController* parent );
+public:
+    MousePaster(AbstractByteArrayView* view, AbstractMouseController* parent);
 
     ~MousePaster() override;
 
-  public: // AbstractMouseController API
-    bool handleMousePressEvent( QMouseEvent* mouseEvent ) override;
-    bool handleMouseReleaseEvent( QMouseEvent* mouseEvent ) override;
+public: // AbstractMouseController API
+    bool handleMousePressEvent(QMouseEvent* mouseEvent) override;
+    bool handleMouseReleaseEvent(QMouseEvent* mouseEvent) override;
 
-  protected:
+protected:
 };
 
 }

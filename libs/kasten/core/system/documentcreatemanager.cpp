@@ -27,43 +27,39 @@
 #include "documentmanager.h"
 #include <abstractdocument.h>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-DocumentCreateManager::DocumentCreateManager( DocumentManager* manager )
-  : mManager( manager ),
-    mFactory( nullptr )
+DocumentCreateManager::DocumentCreateManager(DocumentManager* manager)
+    : mManager(manager)
+    , mFactory(nullptr)
 {
 }
 
-
-bool DocumentCreateManager::canCreateNewFromData( const QMimeData* mimeData ) const
+bool DocumentCreateManager::canCreateNewFromData(const QMimeData* mimeData) const
 {
-    return mFactory->canCreateFromData( mimeData );
+    return mFactory->canCreateFromData(mimeData);
 }
 
-
-void DocumentCreateManager::setDocumentFactory( AbstractDocumentFactory* factory )
+void DocumentCreateManager::setDocumentFactory(AbstractDocumentFactory* factory)
 {
     mFactory = factory;
 }
 
-
 void DocumentCreateManager::createNew()
 {
     AbstractDocument* document = mFactory->create();
-    if( document )
-        mManager->addDocument( document );
+    if (document) {
+        mManager->addDocument(document);
+    }
 }
 
-void DocumentCreateManager::createNewFromData( const QMimeData* mimeData, bool setModified )
+void DocumentCreateManager::createNewFromData(const QMimeData* mimeData, bool setModified)
 {
-    AbstractDocument* document = mFactory->createFromData( mimeData, setModified );
-    if( document )
-        mManager->addDocument( document );
+    AbstractDocument* document = mFactory->createFromData(mimeData, setModified);
+    if (document) {
+        mManager->addDocument(document);
+    }
 }
-
 
 DocumentCreateManager::~DocumentCreateManager()
 {

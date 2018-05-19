@@ -22,66 +22,62 @@
 
 #include "coordrangelist.h"
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 CoordRangeList::CoordRangeList()
 {
 }
 
-
-void CoordRangeList::addCoordRange( const CoordRange& coordRange )
+void CoordRangeList::addCoordRange(const CoordRange& coordRange)
 {
-    if( ! coordRange.isValid() )
+    if (!coordRange.isValid()) {
         return;
+    }
 
     // we try to insert it by ascending indizes
     // if sections are overlapping we combine them
     Iterator it = begin();
     Iterator endIt = end();
-    for( ; it != endIt; ++it )
-    {
-    // TODO: add bufferwidth to rangelist so consecutive ranges can be joined, cmp sectionlist
+    for (; it != endIt; ++it) {
+        // TODO: add bufferwidth to rangelist so consecutive ranges can be joined, cmp sectionlist
         // is next CoordRange behind the new CoordRange?
-        if( coordRange.endsBefore(*it) )
-        {
+        if (coordRange.endsBefore(*it)) {
             // put the new before it
-            insert( it, coordRange );
+            insert(it, coordRange);
             return;
         }
 
         // does the next CoordRange overlap?
-        if( (*it).overlaps(coordRange) )
-        {
-            CoordRange mergedCoordRange( coordRange );
+        if ((*it).overlaps(coordRange)) {
+            CoordRange mergedCoordRange(coordRange);
             // Start of the combined sections is the smaller one
-            mergedCoordRange.extendStartTo( (*it).start() );
+            mergedCoordRange.extendStartTo((*it).start());
             // next we search all the overlapping sections and keep the highest end index
-            Coord endCoord( (*it).end() );
+            Coord endCoord((*it).end());
             iterator it2 = it;
-            for( ++it2; it2 != endIt; ++it2 )
-            {
-                if( coordRange.endsBefore((*it2).start()) )
+            for (++it2; it2 != endIt; ++it2) {
+                if (coordRange.endsBefore((*it2).start())) {
                     break;
+                }
                 endCoord = (*it2).end();
             }
+
             // the higher end is the end of the combined CoordRange
-            mergedCoordRange.extendEndTo( endCoord );
+            mergedCoordRange.extendEndTo(endCoord);
             // remove all overlapping sections
-            it = erase( it, it2 );
+            it = erase(it, it2);
             // and instead insert the combined one
-            insert( it, mergedCoordRange );
+            insert(it, mergedCoordRange);
             return;
         }
     }
 
     // all others are before the new?
-    if( it == endIt )
+    if (it == endIt) {
         // add it at the end
-        append( coordRange );
+        append(coordRange);
+    }
 }
-
 
 CoordRangeList::~CoordRangeList()
 {

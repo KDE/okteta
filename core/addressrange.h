@@ -28,11 +28,9 @@
 #include <okteta/address.h>
 #include <okteta/size.h>
 
+namespace Okteta {
 
-namespace Okteta
-{
-
-using AddressRange = KDE::NumberRange<Address,Size>;
+using AddressRange = KDE::NumberRange<Address, Size>;
 
 }
 

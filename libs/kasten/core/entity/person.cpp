@@ -23,11 +23,13 @@
 #include "person.h"
 #include "person_p.h"
 
+namespace Kasten {
 
-namespace Kasten
+static const struct EgoDataStruct
 {
-
-static const struct EgoDataStruct { const char* name; const char* faceIconName; }
+    const char* name;
+    const char* faceIconName;
+}
 EgoData[] =
 {
     {"Ego", "face-smile"},
@@ -35,45 +37,45 @@ EgoData[] =
     {"Konqui", "face-laugh"},
     {"Hans Entwickler", "user-identity"}
 };
-static const int lastEgoDataIndex = sizeof(EgoData)/sizeof(EgoDataStruct) - 1;
+static const int lastEgoDataIndex = sizeof(EgoData) / sizeof(EgoDataStruct) - 1;
 static int currentEgoDataIndex = 0;
 
 Person Person::createEgo()
 {
     const EgoDataStruct* currentEgoData = &EgoData[currentEgoDataIndex];
-    const Person result( QLatin1String(currentEgoData->name),
-                         QIcon::fromTheme( QLatin1String(currentEgoData->faceIconName) ) );
+    const Person result(QLatin1String(currentEgoData->name),
+                        QIcon::fromTheme(QLatin1String(currentEgoData->faceIconName)));
 //     if( currentEgoDataIndex < lastEgoDataIndex )
 //         ++currentEgoDataIndex;
     return result;
 }
 
-void Person::setEgoId( int egoId )
+void Person::setEgoId(int egoId)
 {
-    if( lastEgoDataIndex < egoId )
+    if (lastEgoDataIndex < egoId) {
         egoId = lastEgoDataIndex;
+    }
     currentEgoDataIndex = egoId;
 }
 
-
-Person::Person( const QString& name, const QIcon& faceIcon )
- : d( new Private(name,faceIcon) )
+Person::Person(const QString& name, const QIcon& faceIcon)
+    : d(new Private(name, faceIcon))
 {
 }
 Person::Person()
- : d( new Private(QString(),QIcon()) )
+    : d(new Private(QString(), QIcon()))
 {
 }
-Person::Person( const Person& other )
- : d( other.d )
+Person::Person(const Person& other)
+    : d(other.d)
 {
 }
-bool Person::operator==( const Person& other ) const
+bool Person::operator==(const Person& other) const
 {
     return (name() == other.name()) && !name().isEmpty();
 }
 
-Person& Person::operator=( const Person& other )
+Person& Person::operator=(const Person& other)
 {
     d = other.d;
     return *this;

@@ -25,20 +25,19 @@
 // Qt
 #include <QDoubleValidator>
 
-
-Float64Editor::Float64Editor( QWidget* parent )
-  : QLineEdit( parent )
+Float64Editor::Float64Editor(QWidget* parent)
+    : QLineEdit(parent)
 {
-    QDoubleValidator* validator = new QDoubleValidator( this );
-    validator->setNotation( QDoubleValidator::ScientificNotation );
+    QDoubleValidator* validator = new QDoubleValidator(this);
+    validator->setNotation(QDoubleValidator::ScientificNotation);
 
-    setValidator( validator );
-    setClearButtonEnabled( true );
+    setValidator(validator);
+    setClearButtonEnabled(true);
 }
 
-void Float64Editor::setData( Float64 data )
+void Float64Editor::setData(Float64 data)
 {
-    setText( data.toString() );
+    setText(data.toString());
 }
 
 Float64 Float64Editor::data() const

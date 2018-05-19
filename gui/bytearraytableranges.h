@@ -30,53 +30,51 @@
 // Okteta core
 #include <okteta/addressrange.h>
 
-
-namespace Okteta
-{
+namespace Okteta {
 class ArrayChangeMetricsList;
 class ByteArrayTableLayout;
 
 /** a class to control all the ranges like marking and selections
-  * holds also all modified ranges and merges them so a repaint can take its info from here
-  *
-  * @author Friedrich W. H.  Kossebau
-  */
+ * holds also all modified ranges and merges them so a repaint can take its info from here
+ *
+ * @author Friedrich W. H.  Kossebau
+ */
 // TODO: split info about ranges from info about dirty ranges into a second class
 class OKTETAGUI_EXPORT ByteArrayTableRanges
 {
-  public:
-    explicit ByteArrayTableRanges( ByteArrayTableLayout* layout );
+public:
+    explicit ByteArrayTableRanges(ByteArrayTableLayout* layout);
     ~ByteArrayTableRanges();
 
-  public: // modifcation access
-    void setMarking( const AddressRange& marking );
-    void setSelectionStart( Address startIndex );
-    void setSelectionEnd( Address startIndex );
-    void setSelection( const AddressRange& selection );
+public: // modifcation access
+    void setMarking(const AddressRange& marking);
+    void setSelectionStart(Address startIndex);
+    void setSelectionEnd(Address startIndex);
+    void setSelection(const AddressRange& selection);
     /** */
-    void setFirstWordSelection( const AddressRange& selection );
+    void setFirstWordSelection(const AddressRange& selection);
     /** */
-    void ensureWordSelectionForward( bool Forward );
+    void ensureWordSelectionForward(bool Forward);
 
     /** removes selection with id and returns it */
-    AddressRange removeSelection( int id = 0 );
+    AddressRange removeSelection(int id = 0);
     /** removes all but the standard selection and returns true if something changed */
     void removeFurtherSelections();
 
     /** assumes all added lines to overlap */
-    void addChangedOffsetLines( const LineRange& changesLines );
+    void addChangedOffsetLines(const LineRange& changesLines);
 
-    void addChangedRange( const AddressRange& range );
-    void addChangedRange( Address start, Address end );
-    void addChangedRange( const CoordRange& range );
-    void adaptToChanges( const ArrayChangeMetricsList& changeList, Size oldLength );
+    void addChangedRange(const AddressRange& range);
+    void addChangedRange(Address start, Address end);
+    void addChangedRange(const CoordRange& range);
+    void adaptToChanges(const ArrayChangeMetricsList& changeList, Size oldLength);
     void resetChangedRanges();
 
-    void setModified( bool M = true );
+    void setModified(bool M = true);
     /** removes all ranges */
     void reset();
 
-  public: // value access
+public: // value access
     int noOfSelections() const;
     Address selectionStart() const;
     Address selectionEnd() const;
@@ -87,24 +85,24 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
     bool isModified() const;
     LineRange changedOffsetLines() const;
 
-  public: // calculated logic access
+public: // calculated logic access
     bool hasSelection() const;
     bool hasMarking() const;
     bool selectionStarted() const;
     bool selectionJustStarted() const;
     bool hasFirstWordSelection() const;
-    bool selectionIncludes( Address index ) const;
-    bool markingIncludes( Address index ) const;
+    bool selectionIncludes(Address index) const;
+    bool markingIncludes(Address index) const;
     // TODO: next three are deprecated
-    bool overlapsSelection( Address FirstIndex, Address LastIndex, Address* SI, Address* EI ) const;
-    bool overlapsMarking( Address FirstIndex, Address LastIndex, Address* SI, Address* EI ) const;
+    bool overlapsSelection(Address FirstIndex, Address LastIndex, Address* SI, Address* EI) const;
+    bool overlapsMarking(Address FirstIndex, Address LastIndex, Address* SI, Address* EI) const;
 //    bool overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const;
 //    bool overlapsChanges( AddressRange Indizes, AddressRange *ChangedRange ) const;
-    bool overlapsChanges( const CoordRange& range, CoordRange* ChangedRange ) const;
-    const AddressRange* firstOverlappingSelection( const AddressRange& range ) const;
-    const AddressRange* overlappingMarking( const AddressRange& range ) const;
+    bool overlapsChanges(const CoordRange& range, CoordRange* ChangedRange) const;
+    const AddressRange* firstOverlappingSelection(const AddressRange& range) const;
+    const AddressRange* overlappingMarking(const AddressRange& range) const;
 
-  protected:
+protected:
     /** true if something changed */
     bool mModified;
 
@@ -120,7 +118,6 @@ class OKTETAGUI_EXPORT ByteArrayTableRanges
 
     ByteArrayTableLayout* mLayout;
 };
-
 
 inline int ByteArrayTableRanges::noOfSelections()  const { return 1; }
 
@@ -138,10 +135,10 @@ inline bool ByteArrayTableRanges::selectionStarted()         const { return mSel
 inline bool ByteArrayTableRanges::selectionJustStarted()     const { return mSelection.justStarted(); }
 inline bool ByteArrayTableRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
 inline bool ByteArrayTableRanges::hasMarking()               const { return mMarking.isValid(); }
-inline bool ByteArrayTableRanges::selectionIncludes( Address index ) const { return mSelection.range().includes( index ); }
-inline bool ByteArrayTableRanges::markingIncludes( Address index )   const { return mMarking.includes( index ); }
+inline bool ByteArrayTableRanges::selectionIncludes(Address index) const { return mSelection.range().includes(index); }
+inline bool ByteArrayTableRanges::markingIncludes(Address index)   const { return mMarking.includes(index); }
 
-inline void ByteArrayTableRanges::setModified( bool M )           { mModified = M; }
+inline void ByteArrayTableRanges::setModified(bool M)           { mModified = M; }
 
 }
 

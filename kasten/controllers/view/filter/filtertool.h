@@ -38,45 +38,43 @@ class AbstractByteArrayModel;
 }
 class QString;
 
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT FilterTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     FilterTool();
     ~FilterTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public:
-    void filter( int filterId ) const;
+public:
+    void filter(int filterId) const;
     bool hasWriteable() const;
     QList<AbstractByteArrayFilter*> filterList() const;
 
-  public:
+public:
     QString charCodecName() const;
-    AbstractByteArrayFilterParameterSet *parameterSet( int filterId );
+    AbstractByteArrayFilterParameterSet* parameterSet(int filterId);
 
-  Q_SIGNALS:
-    void hasWriteableChanged( bool hasWriteable );
-    void charCodecChanged( const QString &charCodecName );
+Q_SIGNALS:
+    void hasWriteableChanged(bool hasWriteable);
+    void charCodecChanged(const QString& charCodecName);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onApplyableChanged();
 
-  private:
+private:
     ByteArrayView* mByteArrayView;
-    Okteta::AbstractByteArrayModel *mByteArrayModel;
+    Okteta::AbstractByteArrayModel* mByteArrayModel;
     bool mHasWritable;
 
     QList<AbstractByteArrayFilter*> mFilterList;

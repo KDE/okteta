@@ -34,41 +34,38 @@ class QLineEdit;
 
 class QStackedWidget;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ChecksumTool;
 
-
 class ChecksumView : public AbstractToolWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ChecksumView( ChecksumTool* tool, QWidget* parent = nullptr );
+public:
+    explicit ChecksumView(ChecksumTool* tool, QWidget* parent = nullptr);
     ~ChecksumView() override;
 
-  public:
+public:
     ChecksumTool* tool() const;
 
-  private:
-    void getParameterSet( AbstractByteArrayChecksumParameterSet* parameterSet ) const;
+private:
+    void getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const;
 
-  private:
+private:
     void addAlgorithms();
 
-  private Q_SLOTS: // gui
+private Q_SLOTS: // gui
 //     void setDirty( bool dirty );
-    void onOperationChange( int index );
+    void onOperationChange(int index);
     void onCalculateClicked();
 
-  private Q_SLOTS: // tool
-    void onChecksumUptodateChanged( bool checksumUptodate );
-    void onApplyableChanged( bool isApplyable );
-    void onValidityChanged( bool isValid );
+private Q_SLOTS: // tool
+    void onChecksumUptodateChanged(bool checksumUptodate);
+    void onApplyableChanged(bool isApplyable);
+    void onValidityChanged(bool isValid);
 
-  private:
+private:
     ChecksumTool* mTool;
 
     KComboBox* mAlgorithmComboBox;
@@ -76,7 +73,6 @@ class ChecksumView : public AbstractToolWidget
     QLineEdit* mChecksumLabel;
     QPushButton* mCalculateButton;
 };
-
 
 inline ChecksumTool* ChecksumView::tool() const { return mTool; }
 

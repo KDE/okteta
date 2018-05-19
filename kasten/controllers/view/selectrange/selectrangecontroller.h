@@ -31,9 +31,7 @@
 class QAction;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SelectRangeToolView;
 class SelectRangeTool;
@@ -41,22 +39,21 @@ namespace If {
 class ToolInlineViewable;
 }
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT SelectRangeController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit SelectRangeController( If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient );
+public:
+    explicit SelectRangeController(If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient);
     ~SelectRangeController() override;
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void select();
 
-  private:
+private:
     QAction* mSelectAction;
 
     If::ToolInlineViewable* mToolInlineViewable;

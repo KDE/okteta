@@ -32,34 +32,33 @@ namespace Okteta {
 class AbstractByteArrayModel;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class CreateStatisticJob : public QObject // not yet: KJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    CreateStatisticJob( const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& selection,
-                        int* byteCount );
+public:
+    CreateStatisticJob(const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& selection,
+                       int* byteCount);
 
-  public:
+public:
     // return size of selected byte array
     int exec();
 
-  protected:
+protected:
     const Okteta::AbstractByteArrayModel* mByteArrayModel;
     const Okteta::AddressRange mSelection;
 
     int* const mByteCount;
 };
 
-
-inline CreateStatisticJob::CreateStatisticJob( const Okteta::AbstractByteArrayModel* model,
-                                               const Okteta::AddressRange& selection,
-                                               int* byteCount )
- : mByteArrayModel( model ), mSelection( selection ), mByteCount( byteCount )
+inline CreateStatisticJob::CreateStatisticJob(const Okteta::AbstractByteArrayModel* model,
+                                              const Okteta::AddressRange& selection,
+                                              int* byteCount)
+    : mByteArrayModel(model)
+    , mSelection(selection)
+    , mByteCount(byteCount)
 {}
 
 }

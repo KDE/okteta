@@ -25,13 +25,11 @@
 // Qt
 #include <QWidget>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 PrintColumnStylist::PrintColumnStylist()
-  : AbstractColumnStylist(),
-    mPalette( Qt::white )
+    : AbstractColumnStylist()
+    , mPalette(Qt::white)
 {
 }
 

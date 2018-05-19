@@ -23,7 +23,6 @@
 #ifndef READONLYCONTROLLER_H
 #define READONLYCONTROLLER_H
 
-
 // lib
 #include <kasten/kastencontrollers_export.h>
 // Kasten gui
@@ -31,27 +30,24 @@
 
 class KToggleAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractDocument;
 
-
 class KASTENCONTROLLERS_EXPORT ReadOnlyController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ReadOnlyController( KXMLGUIClient* guiClient );
+public:
+    explicit ReadOnlyController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
-    void setReadOnly( bool isReadOnly );
+private Q_SLOTS: // action slots
+    void setReadOnly(bool isReadOnly);
 
-  private:
+private:
     AbstractDocument* mDocument;
 
     KToggleAction* mSetReadOnlyAction;

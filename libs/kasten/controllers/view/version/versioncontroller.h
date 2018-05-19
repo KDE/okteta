@@ -32,42 +32,39 @@ class KXMLGUIClient;
 class KToolBarPopupAction;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 namespace If {
 class Versionable;
 }
 
-
 class KASTENCONTROLLERS_EXPORT VersionController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit VersionController( KXMLGUIClient* guiClient );
+public:
+    explicit VersionController(KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void onSetToOlderVersionTriggered();
     void onSetToNewerVersionTriggered();
     void onOlderVersionMenuAboutToShow();
     void onNewerVersionMenuAboutToShow();
-    void onOlderVersionMenuTriggered( QAction *action );
-    void onNewerVersionMenuTriggered( QAction *action );
+    void onOlderVersionMenuTriggered(QAction* action);
+    void onNewerVersionMenuTriggered(QAction* action);
 
-    void onVersionIndexChanged( int versionIndex );
-    void onReadOnlyChanged( bool isReadOnly );
+    void onVersionIndexChanged(int versionIndex);
+    void onReadOnlyChanged(bool isReadOnly);
 
-  private:
+private:
     AbstractModel* mModel;
-    If::Versionable *mVersionControl;
+    If::Versionable* mVersionControl;
 
-    KToolBarPopupAction *mSetToOlderVersionAction;
-    KToolBarPopupAction *mSetToNewerVersionAction;
+    KToolBarPopupAction* mSetToOlderVersionAction;
+    KToolBarPopupAction* mSetToNewerVersionAction;
 };
 
 }

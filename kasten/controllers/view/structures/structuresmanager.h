@@ -32,12 +32,12 @@
 #include <KSharedConfig>
 #include <KPluginInfo>
 
-namespace Kasten
-{
+namespace Kasten {
 
-class StructuresManager: public QObject
+class StructuresManager : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
+
 public:
     explicit StructuresManager(QObject* parent = nullptr);
     ~StructuresManager() override;

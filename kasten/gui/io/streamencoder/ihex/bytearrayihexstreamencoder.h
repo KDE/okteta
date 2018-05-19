@@ -32,27 +32,30 @@
 
 class QTextStream;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class IHexStreamEncoderSettings
 {
-  public:
-    enum class AddressSizeId { Bits32 = 0, Bits16 = 1, Bits8 = 2 };
+public:
+    enum class AddressSizeId
+    {
+        Bits32 = 0,
+        Bits16 = 1,
+        Bits8 = 2
+    };
 
-  public:
+public:
     IHexStreamEncoderSettings();
-  public:
+
+public:
     AddressSizeId addressSizeId;
 };
-
 
 class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
 {
     Q_OBJECT
 
-  private:
+private:
     static const unsigned char dataRecordCode = 0x0;
     static const unsigned char endOfFileRecordCode = 0x1;
     static const unsigned char extendedSegmentAddressRecordCode = 0x2;
@@ -70,51 +73,50 @@ class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
     static const int recordTypeLineSize = 1;
     static const int dataLineOffset = recordTypeLineOffset + recordTypeLineSize;
     static const char hexDigits[16];
-  private:
-    static char hexValueOfNibble( int nibble );
-    static void writeBigEndian( unsigned char* line, quint32 value, int byteSize );
 
-    static void streamLine( QTextStream& textStream, const unsigned char* line );
-    static void streamExtendedSegmentAddress( QTextStream& textStream, unsigned char* line,
-                                              quint16 upperSegmentBaseAddress );
-    static void streamExtendedLinearAddress( QTextStream& textStream, unsigned char* line,
-                                             quint16 upperLinearBaseAddress );
-    static void streamEndOfFile( QTextStream& textStream, unsigned char* line,
-                                 quint16 startAddress = 0 );
+private:
+    static char hexValueOfNibble(int nibble);
+    static void writeBigEndian(unsigned char* line, quint32 value, int byteSize);
 
-  public:
+    static void streamLine(QTextStream& textStream, const unsigned char* line);
+    static void streamExtendedSegmentAddress(QTextStream& textStream, unsigned char* line,
+                                             quint16 upperSegmentBaseAddress);
+    static void streamExtendedLinearAddress(QTextStream& textStream, unsigned char* line,
+                                            quint16 upperLinearBaseAddress);
+    static void streamEndOfFile(QTextStream& textStream, unsigned char* line,
+                                quint16 startAddress = 0);
+
+public:
     ByteArrayIHexStreamEncoder();
     ~ByteArrayIHexStreamEncoder() override;
 
-  public:
+public:
     IHexStreamEncoderSettings settings() const;
-    void setSettings( const IHexStreamEncoderSettings& settings );
+    void setSettings(const IHexStreamEncoderSettings& settings);
 
-  protected: // AbstractByteArrayStreamEncoder API
-    bool encodeDataToStream( QIODevice* device,
-                             const ByteArrayView* byteArrayView,
-                             const Okteta::AbstractByteArrayModel* byteArrayModel,
-                             const Okteta::AddressRange& range ) override;
+protected: // AbstractByteArrayStreamEncoder API
+    bool encodeDataToStream(QIODevice* device,
+                            const ByteArrayView* byteArrayView,
+                            const Okteta::AbstractByteArrayModel* byteArrayModel,
+                            const Okteta::AddressRange& range) override;
 
-  protected:
+protected:
     IHexStreamEncoderSettings mSettings;
 };
 
-
 inline IHexStreamEncoderSettings ByteArrayIHexStreamEncoder::settings() const { return mSettings; }
-inline void ByteArrayIHexStreamEncoder::setSettings( const IHexStreamEncoderSettings& settings )
+inline void ByteArrayIHexStreamEncoder::setSettings(const IHexStreamEncoderSettings& settings)
 {
     mSettings = settings;
     emit settingsChanged();
 }
 
-inline char ByteArrayIHexStreamEncoder::hexValueOfNibble( int nibble )
+inline char ByteArrayIHexStreamEncoder::hexValueOfNibble(int nibble)
 { return hexDigits[nibble & 0xF]; }
 
-inline void ByteArrayIHexStreamEncoder::writeBigEndian( unsigned char* line, quint32 value, int byteSize )
+inline void ByteArrayIHexStreamEncoder::writeBigEndian(unsigned char* line, quint32 value, int byteSize)
 {
-    while( byteSize > 0 )
-    {
+    while (byteSize > 0) {
         --byteSize;
         line[byteSize] = value;
         value >>= 8;

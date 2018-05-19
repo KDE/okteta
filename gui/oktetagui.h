@@ -36,9 +36,7 @@
 
 Q_DECLARE_LOGGING_CATEGORY(LOG_OKTETA_GUI)
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 static const LinePosition NoByteFound = -1;
 
@@ -57,9 +55,9 @@ static const int DefaultBinaryGapWidth = 1;
 
 static const int InsertCursorWidth = 2;
 
-static const bool  DefaultShowingNonprinting = false;
-static const QChar DefaultSubstituteChar =  QLatin1Char( '.' );
-static const QChar DefaultUndefinedChar =   QChar( QChar::ReplacementCharacter );
+static const bool DefaultShowingNonprinting = false;
+static const QChar DefaultSubstituteChar =  QLatin1Char('.');
+static const QChar DefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
 
 }
 

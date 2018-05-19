@@ -30,27 +30,25 @@
 
 class QEventLoop;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KReplacePrompt : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit KReplacePrompt( QWidget* parent );
+public:
+    explicit KReplacePrompt(QWidget* parent);
 
-  public:
+public:
     ReplaceBehaviour query();
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onReplaceAllButton();
     void onSkipButton();
     void onReplaceButton();
     void onCloseButton();
 
-  private:
+private:
     QEventLoop* mEventLoop;
 
     ReplaceBehaviour mResult;

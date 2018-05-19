@@ -30,33 +30,31 @@
 
 class QString;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayViewProfileLockPrivate;
 
 class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileLock
 {
-  friend class ByteArrayViewProfileManager;
+    friend class ByteArrayViewProfileManager;
 
-  protected:
-    ByteArrayViewProfileLock( const QString& fileName,
-                              const ByteArrayViewProfile::Id& viewProfileId );
+protected:
+    ByteArrayViewProfileLock(const QString& fileName,
+                             const ByteArrayViewProfile::Id& viewProfileId);
 
-  public:
-    ByteArrayViewProfileLock( const ByteArrayViewProfileLock& other );
+public:
+    ByteArrayViewProfileLock(const ByteArrayViewProfileLock& other);
 
     ~ByteArrayViewProfileLock();
 
-  public:
-    ByteArrayViewProfileLock& operator=( const ByteArrayViewProfileLock& other );
+public:
+    ByteArrayViewProfileLock& operator=(const ByteArrayViewProfileLock& other);
 
-  public:
+public:
     void unlock();
     bool isLocked() const;
     ByteArrayViewProfile::Id viewProfileId() const;
 
-  private:
+private:
     QSharedDataPointer<ByteArrayViewProfileLockPrivate> d;
 };
 

@@ -29,29 +29,28 @@
 #include <QCoreApplication>
 // #include <QFontDatabase>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 #if 0
-PrintJob::PrintJob( FramesToPaperPrinter *framesPrinter, int firstPage, int lastPage, QPrinter *printer )
- : mPrintThread( new PrintThread(this,framesPrinter, firstPage, lastPage, printer) )
+PrintJob::PrintJob(FramesToPaperPrinter* framesPrinter, int firstPage, int lastPage, QPrinter* printer)
+    : mPrintThread(new PrintThread(this, framesPrinter, firstPage, lastPage, printer))
 {
-    connect( mPrintThread, SIGNAL(finished()), SLOT(onFinished()) );
+    connect(mPrintThread, SIGNAL(finished()), SLOT(onFinished()));
 }
 
 void PrintJob::start()
 {
-    if( QFontDatabase::supportsThreadedFontRendering() )
+    if (QFontDatabase::supportsThreadedFontRendering()) {
         mPrintThread->start();
+    }
 }
 #endif
 
 bool PrintJob::exec()
 {
-    connect( mFramesPrinter, &FramesToPaperPrinter::printedPage, this, &PrintJob::onPagePrinted );
+    connect(mFramesPrinter, &FramesToPaperPrinter::printedPage, this, &PrintJob::onPagePrinted);
 
-    const bool result = mFramesPrinter->print( mPrinter, mFirstPage, mLastPage );
+    const bool result = mFramesPrinter->print(mPrinter, mFirstPage, mLastPage);
 
     deleteLater();
 
@@ -60,7 +59,7 @@ bool PrintJob::exec()
 
 void PrintJob::onPagePrinted()
 {
-    QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
 }
 
 #if 0

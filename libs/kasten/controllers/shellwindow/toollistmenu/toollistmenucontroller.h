@@ -33,9 +33,7 @@
 class QAction;
 class KXMLGUIClient;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ViewManager;
 
@@ -43,21 +41,20 @@ namespace If {
 class WidgetsDockable;
 }
 
-
 class KASTENCONTROLLERS_EXPORT ToolListMenuController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ToolListMenuController( If::WidgetsDockable* widgetsDockable, KXMLGUIClient* guiClient );
+public:
+    ToolListMenuController(If::WidgetsDockable* widgetsDockable, KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private:
+private:
     void updateActions();
 
-  private:
+private:
     If::WidgetsDockable* mWidgetsDockable;
     KXMLGUIClient* mGuiClient;
 

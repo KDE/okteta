@@ -22,15 +22,14 @@
 
 #include "octal8editor.h"
 
-
-Octal8Editor::Octal8Editor( QWidget* parent )
-  : AbstractValue8Editor( Okteta::OctalCoding, parent )
+Octal8Editor::Octal8Editor(QWidget* parent)
+    : AbstractValue8Editor(Okteta::OctalCoding, parent)
 {
 }
 
-void Octal8Editor::setData( Octal8 data )
+void Octal8Editor::setData(Octal8 data)
 {
-    setValue( data.value );
+    setValue(data.value);
 }
 
 Octal8 Octal8Editor::data() const

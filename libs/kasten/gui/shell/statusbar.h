@@ -29,31 +29,28 @@
 #include <QList>
 #include <QStatusBar>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class StatusBarLayout;
-
 
 class KASTENGUI_EXPORT StatusBar : public QStatusBar
 {
     Q_OBJECT
 
-  public:
-    explicit StatusBar( QWidget* parent = nullptr );
+public:
+    explicit StatusBar(QWidget* parent = nullptr);
     ~StatusBar() override;
 
-  public: // overwrite QStatusBar API
-    void addWidget( QWidget* widget );
+public: // overwrite QStatusBar API
+    void addWidget(QWidget* widget);
 
-  public:
+public:
     void updateLayout();
 
-  protected: // QWidget API
-    void changeEvent( QEvent* changeEvent ) override;
+protected: // QWidget API
+    void changeEvent(QEvent* changeEvent) override;
 
-  protected:
+protected:
     StatusBarLayout* mLayout;
 };
 

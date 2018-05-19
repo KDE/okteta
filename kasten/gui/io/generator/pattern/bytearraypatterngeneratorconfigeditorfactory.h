@@ -28,19 +28,17 @@
 // Kasten gui
 #include <kasten/abstractmodeldatageneratorconfigeditorfactory.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayPatternGeneratorConfigEditorFactory : public AbstractModelDataGeneratorConfigEditorFactory
 {
-  public:
+public:
     ByteArrayPatternGeneratorConfigEditorFactory();
 
     ~ByteArrayPatternGeneratorConfigEditorFactory() override;
 
-  public:
-    AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor( AbstractModelDataGenerator* generator ) const override;
+public:
+    AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor(AbstractModelDataGenerator* generator) const override;
 };
 
 }

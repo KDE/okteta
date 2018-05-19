@@ -32,175 +32,166 @@
 // Qt
 #include <QApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const unsigned char StatisticsDefaultUndefinedChar = '?';
 static const Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding;
 static const int StatisticsByteSetSize = 256;
 
-
-StatisticTableModel::StatisticTableModel( int *byteCount, QObject *parent )
- : QAbstractTableModel( parent ),
-   mByteCount( byteCount ),
-   mValueCoding( DefaultValueCoding ),
-   mValueCodec( Okteta::ValueCodec::createCodec(DefaultValueCoding) ),
-   mCharCodec( Okteta::CharCodec::createCodec(Okteta::LocalEncoding) ),
-   mUndefinedChar( QLatin1Char(StatisticsDefaultUndefinedChar) )
+StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
+    : QAbstractTableModel(parent)
+    , mByteCount(byteCount)
+    , mValueCoding(DefaultValueCoding)
+    , mValueCodec(Okteta::ValueCodec::createCodec(DefaultValueCoding))
+    , mCharCodec(Okteta::CharCodec::createCodec(Okteta::LocalEncoding))
+    , mUndefinedChar(QLatin1Char(StatisticsDefaultUndefinedChar))
 {
 }
 
-void StatisticTableModel::update( int size )
+void StatisticTableModel::update(int size)
 {
     mSize = size;
-    emit dataChanged( index(0,CountId), index(StatisticsByteSetSize-1,PercentId) );
-    emit sizeChanged( mSize );
+    emit dataChanged(index(0, CountId), index(StatisticsByteSetSize - 1, PercentId));
+    emit sizeChanged(mSize);
 }
 
-void StatisticTableModel::setUndefinedChar( QChar undefinedChar )
+void StatisticTableModel::setUndefinedChar(QChar undefinedChar)
 {
     mUndefinedChar = undefinedChar;
 
-    emit dataChanged( index(0,CharacterId), index(StatisticsByteSetSize-1,CharacterId) );
+    emit dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
 }
 
-void StatisticTableModel::setValueCoding( int valueCoding )
+void StatisticTableModel::setValueCoding(int valueCoding)
 {
     // no changes?
-    if( mValueCoding == valueCoding )
+    if (mValueCoding == valueCoding) {
         return;
+    }
 
     delete mValueCodec;
 
     mValueCoding = (Okteta::ValueCoding)valueCoding;
-    mValueCodec = Okteta::ValueCodec::createCodec( mValueCoding );
+    mValueCodec = Okteta::ValueCodec::createCodec(mValueCoding);
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 
-    emit dataChanged( index(0,ValueId), index(StatisticsByteSetSize-1,ValueId) );
+    emit dataChanged(index(0, ValueId), index(StatisticsByteSetSize - 1, ValueId));
     emit headerChanged();
 }
 
-void StatisticTableModel::setCharCodec( const QString &codeName )
+void StatisticTableModel::setCharCodec(const QString& codeName)
 {
-    if( codeName == mCharCodec->name() )
+    if (codeName == mCharCodec->name()) {
         return;
+    }
 
     delete mCharCodec;
-    mCharCodec = Okteta::CharCodec::createCodec( codeName );
+    mCharCodec = Okteta::CharCodec::createCodec(codeName);
 
-    emit dataChanged( index(0,CharacterId), index(StatisticsByteSetSize-1,CharacterId) );
+    emit dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
 }
 
-
-int StatisticTableModel::rowCount( const QModelIndex &parent ) const
+int StatisticTableModel::rowCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? StatisticsByteSetSize : 0;
+    return (!parent.isValid()) ? StatisticsByteSetSize : 0;
 }
 
-int StatisticTableModel::columnCount( const QModelIndex &parent ) const
+int StatisticTableModel::columnCount(const QModelIndex& parent) const
 {
-    return (! parent.isValid()) ? NoOfIds : 0;
+    return (!parent.isValid()) ? NoOfIds : 0;
 }
 
-QVariant StatisticTableModel::data( const QModelIndex &index, int role ) const
+QVariant StatisticTableModel::data(const QModelIndex& index, int role) const
 {
     QVariant result;
-    if( role == Qt::DisplayRole )
-    {
+    if (role == Qt::DisplayRole) {
         const unsigned char byte = index.row();
         const int column = index.column();
-        switch( column )
+        switch (column)
         {
-            case CharacterId:
-            {
-                const Okteta::Character decodedChar = mCharCodec->decode( byte );
-                result =
-                    decodedChar.isUndefined() ?
-                        i18nc( "@item:intable character is not defined", "undef." ) :
-                    (decodedChar.unicode() == 0x09) ? // tab only creates a wider column
-                        QString() :
-                        QString( static_cast<QChar>(decodedChar) );
-                // TODO: show proper descriptions for all control values, incl. space and delete
-                // cmp. KCharSelect
-                break;
-            }
-            case ValueId:
-            {
-                QString value;
-                mValueCodec->encode( value, 0, byte );
-                result = value;
-                break;
-            }
-            case CountId:
-                result =  ( mSize == -1 ) ?
-                    QVariant( QStringLiteral("-") ) :
-                    QVariant( mByteCount[byte] );
-                break;
-            case PercentId:
-                result = ( mSize > 0 ) ?
-                          // TODO: before we printed only a string (which killed sorting) with QString::number( x, 'f', 6 )
-                          // Qt now cuts trailing 0s, results in unaligned numbers, not so beautiful.
-                          QVariant( 100.0*(double)mByteCount[byte]/mSize ) :
-                          QVariant( QStringLiteral("-") );
-                break;
-            default:
-                ;
+        case CharacterId:
+        {
+            const Okteta::Character decodedChar = mCharCodec->decode(byte);
+            result =
+                decodedChar.isUndefined() ?
+                i18nc("@item:intable character is not defined", "undef.") :
+                (decodedChar.unicode() == 0x09) ?     // tab only creates a wider column
+                QString() :
+                QString(static_cast<QChar>(decodedChar));
+            // TODO: show proper descriptions for all control values, incl. space and delete
+            // cmp. KCharSelect
+            break;
         }
-    }
-    else if( role == Qt::TextAlignmentRole )
-        result = Qt::AlignRight;
-    else if( role == Qt::ForegroundRole )
-    {
-        const int column = index.column();
-        bool isInactive = false;
-        switch( column )
+        case ValueId:
         {
+            QString value;
+            mValueCodec->encode(value, 0, byte);
+            result = value;
+            break;
+        }
         case CountId:
-            isInactive = ( mSize == -1 );
+            result =  (mSize == -1) ?
+                     QVariant(QStringLiteral("-")) :
+                     QVariant(mByteCount[byte]);
             break;
         case PercentId:
-            isInactive = ( mSize <= 0 );
+            result = (mSize > 0) ?
+                     // TODO: before we printed only a string (which killed sorting) with QString::number( x, 'f', 6 )
+                     // Qt now cuts trailing 0s, results in unaligned numbers, not so beautiful.
+                     QVariant(100.0 * (double)mByteCount[byte] / mSize) :
+                     QVariant(QStringLiteral("-"));
             break;
         default:
             ;
         }
-        if( isInactive )
+    } else if (role == Qt::TextAlignmentRole) {
+        result = Qt::AlignRight;
+    } else if (role == Qt::ForegroundRole) {
+        const int column = index.column();
+        bool isInactive = false;
+        switch (column)
         {
+        case CountId:
+            isInactive = (mSize == -1);
+            break;
+        case PercentId:
+            isInactive = (mSize <= 0);
+            break;
+        default:
+            ;
+        }
+        if (isInactive) {
             const QPalette& palette = QApplication::palette();
-            const KColorScheme colorScheme( palette.currentColorGroup(), KColorScheme::View );
-            result = colorScheme.foreground( KColorScheme::InactiveText );
+            const KColorScheme colorScheme(palette.currentColorGroup(), KColorScheme::View);
+            result = colorScheme.foreground(KColorScheme::InactiveText);
         }
     }
 
     return result;
 }
 
-QVariant StatisticTableModel::headerData( int section, Qt::Orientation orientation, int role ) const
+QVariant StatisticTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     QVariant result;
 
-    if( role == Qt::DisplayRole )
-    {
+    if (role == Qt::DisplayRole) {
         const QString titel =
             section == ValueId ? (
-                mValueCoding == Okteta::HexadecimalCoding ? i18nc("@title:column short for Hexadecimal","Hex") :
+                mValueCoding == Okteta::HexadecimalCoding ? i18nc("@title:column short for Hexadecimal", "Hex") :
                 mValueCoding == Okteta::DecimalCoding ?     i18nc("@title:column short for Decimal",    "Dec") :
                 mValueCoding == Okteta::OctalCoding ?       i18nc("@title:column short for Octal",      "Oct") :
                 mValueCoding == Okteta::BinaryCoding ?      i18nc("@title:column short for Binary",     "Bin") :
-                                                QString() ) :
+                                                            QString()) :
             section == CharacterId ?   i18nc("@title:column short for Character",      "Char") :
             section == CountId ?       i18nc("@title:column count of characters",      "Count") :
             section == PercentId ?     i18nc("@title:column Percent of byte in total", "Percent") :
-            QString();
+                                       QString();
         result = titel;
-    }
-    else if( role == Qt::ToolTipRole )
-    {
+    } else if (role == Qt::ToolTipRole) {
         const QString titel =
             section == ValueId ? (
                 mValueCoding == Okteta::HexadecimalCoding ?
-                    i18nc("@info:tooltip column contains the value in hexadecimal format","Hexadecimal") :
+                    i18nc("@info:tooltip column contains the value in hexadecimal format", "Hexadecimal") :
                 mValueCoding == Okteta::DecimalCoding ?
                     i18nc("@info:tooltip column contains the value in decimal format",    "Decimal") :
                 mValueCoding == Okteta::OctalCoding ?
@@ -208,16 +199,16 @@ QVariant StatisticTableModel::headerData( int section, Qt::Orientation orientati
                 mValueCoding == Okteta::BinaryCoding ?
                     i18nc("@info:tooltip column contains the value in binary format",     "Binary") :
                 // else
-                    QString() ) :
+                    QString()) :
             section == CharacterId ?
-                    i18nc("@info:tooltip column contains the character with the value",   "Character") :
+                i18nc("@info:tooltip column contains the character with the value",   "Character") :
 //             section == CountId ?       i18nc("@info:tooltip count of characters",      "Count") :
 //             section == PercentId ?     i18nc("@info:tooltip Percent of byte in total", "Percent") :
-            QString();
+                QString();
         result = titel;
+    } else {
+        result = QAbstractTableModel::headerData(section, orientation, role);
     }
-    else
-        result = QAbstractTableModel::headerData( section, orientation, role );
 
     return result;
 }

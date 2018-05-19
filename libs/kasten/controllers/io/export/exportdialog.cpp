@@ -37,51 +37,48 @@
 #include <QFont>
 #include <QDialogButtonBox>
 
+namespace Kasten {
 
-namespace Kasten
+ExportDialog::ExportDialog(const QString& remoteTypeName,
+                           AbstractModelExporterConfigEditor* configEditor,
+                           QWidget* parent)
+    : QDialog(parent)
+    , mConfigEditor(configEditor)
 {
+    setWindowTitle(i18nc("@title:window", "Export"));
 
-ExportDialog::ExportDialog( const QString& remoteTypeName,
-                            AbstractModelExporterConfigEditor* configEditor,
-                            QWidget* parent )
-  : QDialog( parent ),
-    mConfigEditor( configEditor )
-{
-    setWindowTitle( i18nc("@title:window","Export") );
-
-    QSplitter* splitter = new QSplitter( this );
+    QSplitter* splitter = new QSplitter(this);
 
     // config editor
-    QWidget* editorPage = new QWidget( splitter );
-    QVBoxLayout* editorPageLayout = new QVBoxLayout( editorPage );
-    QLabel* editorLabel = new QLabel( remoteTypeName );
+    QWidget* editorPage = new QWidget(splitter);
+    QVBoxLayout* editorPageLayout = new QVBoxLayout(editorPage);
+    QLabel* editorLabel = new QLabel(remoteTypeName);
     QFont font = editorLabel->font();
-    font.setBold( true );
-    editorLabel->setFont( font );
+    font.setBold(true);
+    editorLabel->setFont(font);
 
-    editorPageLayout->addWidget( editorLabel );
-    editorPageLayout->addWidget( mConfigEditor );
+    editorPageLayout->addWidget(editorLabel);
+    editorPageLayout->addWidget(mConfigEditor);
     editorPageLayout->addStretch();
 
-    splitter->addWidget( editorPage );
-    splitter->setCollapsible( 0, false );
+    splitter->addWidget(editorPage);
+    splitter->setCollapsible(0, false);
 
     mPreviewView = configEditor->createPreviewView();
 
-    if( mPreviewView )
-    {
-        QGroupBox* previewBox = new QGroupBox( i18nc("@title:group","Preview"), this );
-        splitter->addWidget( previewBox );
+    if (mPreviewView) {
+        QGroupBox* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
+        splitter->addWidget(previewBox);
 
-        QHBoxLayout* previewBoxLayout = new QHBoxLayout( previewBox );
+        QHBoxLayout* previewBoxLayout = new QHBoxLayout(previewBox);
 
-        previewBoxLayout->addWidget( mPreviewView->widget() );
+        previewBoxLayout->addWidget(mPreviewView->widget());
     }
 
     // dialog buttons
     QDialogButtonBox* dialogButtonBox = new QDialogButtonBox;
     QPushButton* exportButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-export")),
-                                                i18nc("@action:button","&Export to File..."));
+                                                i18nc("@action:button", "&Export to File..."));
     exportButton->setToolTip(i18nc("@info:tooltip",
                                    "Export the selected data to a file."));
     exportButton->setWhatsThis(xi18nc("@info:whatsthis",
@@ -89,28 +86,29 @@ ExportDialog::ExportDialog( const QString& remoteTypeName,
                                       "button, the selected data will be copied to a file "
                                       "with the settings you entered above."));
 
-    dialogButtonBox->addButton( exportButton, QDialogButtonBox::AcceptRole );
-    connect( dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept );
-    dialogButtonBox->addButton( QDialogButtonBox::Cancel );
-    connect( dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject );
+    dialogButtonBox->addButton(exportButton, QDialogButtonBox::AcceptRole);
+    connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    dialogButtonBox->addButton(QDialogButtonBox::Cancel);
+    connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    exportButton->setEnabled( configEditor->isValid() );
-    connect( configEditor, &AbstractModelExporterConfigEditor::validityChanged,
-             exportButton, &QWidget::setEnabled );
+    exportButton->setEnabled(configEditor->isValid());
+    connect(configEditor, &AbstractModelExporterConfigEditor::validityChanged,
+            exportButton, &QWidget::setEnabled);
 
     // main layout
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget( splitter );
+    layout->addWidget(splitter);
     layout->addStretch();
-    layout->addWidget( dialogButtonBox );
+    layout->addWidget(dialogButtonBox);
 
-    setLayout( layout );
+    setLayout(layout);
 }
 
-void ExportDialog::setData( AbstractModel* model, const AbstractModelSelection* selection )
+void ExportDialog::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {
-    if( mPreviewView )
-        mPreviewView->setData( model, selection );
+    if (mPreviewView) {
+        mPreviewView->setData(model, selection);
+    }
 }
 
 ExportDialog::~ExportDialog()

@@ -28,34 +28,30 @@
 // Qt
 #include <QDockWidget>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractToolView;
 
-
 class KASTENGUI_EXPORT ToolViewDockWidget : public QDockWidget
 {
-   Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ToolViewDockWidget( AbstractToolView* mToolView, QWidget* parent );
+public:
+    ToolViewDockWidget(AbstractToolView* mToolView, QWidget* parent);
     ~ToolViewDockWidget() override;
 
-  public:
+public:
     AbstractToolView* toolView() const;
     bool isShown() const;
 
-  protected Q_SLOTS:
-    void onVisibilityChanged( bool isVisible );
+protected Q_SLOTS:
+    void onVisibilityChanged(bool isVisible);
 
-  protected:
+protected:
     AbstractToolView* mToolView;
     // TODO: find out why isVisible does not work here
-    bool mIsShown; 
+    bool mIsShown;
 };
-
 
 inline AbstractToolView* ToolViewDockWidget::toolView() const { return mToolView; }
 inline bool ToolViewDockWidget::isShown() const { return mIsShown; }

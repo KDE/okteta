@@ -25,24 +25,21 @@
 
 #include "abstractsyncfromremotejob.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractSyncFromRemoteJobPrivate
 {
-  public:
-    explicit AbstractSyncFromRemoteJobPrivate( AbstractSyncFromRemoteJob* parent );
+public:
+    explicit AbstractSyncFromRemoteJobPrivate(AbstractSyncFromRemoteJob* parent);
 
     virtual ~AbstractSyncFromRemoteJobPrivate();
 
-  protected:
+protected:
     AbstractSyncFromRemoteJob* const q_ptr;
 };
 
-
-inline AbstractSyncFromRemoteJobPrivate::AbstractSyncFromRemoteJobPrivate( AbstractSyncFromRemoteJob* parent )
-  : q_ptr( parent )
+inline AbstractSyncFromRemoteJobPrivate::AbstractSyncFromRemoteJobPrivate(AbstractSyncFromRemoteJob* parent)
+    : q_ptr(parent)
 {}
 
 inline AbstractSyncFromRemoteJobPrivate::~AbstractSyncFromRemoteJobPrivate()

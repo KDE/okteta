@@ -26,12 +26,10 @@
 #include "charsetconversionview.h"
 #include "charsetconversiontool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-CharsetConversionToolView::CharsetConversionToolView( CharsetConversionTool* tool )
-  : mWidget( new CharsetConversionView(tool) )
+CharsetConversionToolView::CharsetConversionToolView(CharsetConversionTool* tool)
+    : mWidget(new CharsetConversionView(tool))
 {
 }
 

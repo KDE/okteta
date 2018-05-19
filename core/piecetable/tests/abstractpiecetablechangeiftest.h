@@ -23,46 +23,43 @@
 #ifndef ABSTRACTPIECETABLECHANGEIFTEST_H
 #define ABSTRACTPIECETABLECHANGEIFTEST_H
 
-
 // Qt
 #include <QObject>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 class AbstractPieceTableChange;
 class PieceTable;
 
 class AbstractPieceTableChangeIfTest : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  protected:
+protected:
     AbstractPieceTableChangeIfTest();
 
-  protected: // our API
-    virtual AbstractPieceTableChange *createPieceTableChange() = 0;
-    virtual void deletePieceTableChange( AbstractPieceTableChange *pieceTableChange ) = 0;
+protected: // our API
+    virtual AbstractPieceTableChange* createPieceTableChange() = 0;
+    virtual void deletePieceTableChange(AbstractPieceTableChange* pieceTableChange) = 0;
 
-    virtual void changePieceTable( PieceTable *pieceTable ) = 0;
+    virtual void changePieceTable(PieceTable* pieceTable) = 0;
 
-  protected:
-    struct KTestData *prepareTestInsert();
+protected:
+    struct KTestData* prepareTestInsert();
 
-  private Q_SLOTS: // test functions
+private Q_SLOTS: // test functions
     void init();
     void cleanup();
 
     void testMerge();
     void testRevertApply();
 
-  private: // used in all tests
+private: // used in all tests
     /** pointer to the change to test */
-    AbstractPieceTableChange *mPieceTableChange;
+    AbstractPieceTableChange* mPieceTableChange;
 };
 
-inline AbstractPieceTableChangeIfTest::AbstractPieceTableChangeIfTest() : mPieceTableChange( nullptr ) {}
+inline AbstractPieceTableChangeIfTest::AbstractPieceTableChangeIfTest() : mPieceTableChange(nullptr) {}
 
 }
 

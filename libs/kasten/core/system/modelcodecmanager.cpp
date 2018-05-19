@@ -39,20 +39,18 @@
 #include <QFileDialog>
 #include <QUrl>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ModelCodecManager::ModelCodecManager( DocumentManager* manager )
-  : mManager( manager ),
-    mOverwriteDialog( nullptr )
+ModelCodecManager::ModelCodecManager(DocumentManager* manager)
+    : mManager(manager)
+    , mOverwriteDialog(nullptr)
 {
 }
 
 QList<AbstractModelStreamEncoder*>
-ModelCodecManager::encoderList( AbstractModel* model, const AbstractModelSelection* selection ) const
+ModelCodecManager::encoderList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
-Q_UNUSED( selection )
+    Q_UNUSED(selection)
     return model ? mEncoderList : QList<AbstractModelStreamEncoder*>();
 }
 
@@ -63,65 +61,64 @@ QList<AbstractModelDataGenerator*>
 ModelCodecManager::generatorList() const { return mGeneratorList; }
 
 QList<AbstractModelExporter*>
-ModelCodecManager::exporterList( AbstractModel* model, const AbstractModelSelection* selection ) const
+ModelCodecManager::exporterList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
-Q_UNUSED( selection )
+    Q_UNUSED(selection)
     return model ? mExporterList : QList<AbstractModelExporter*>();
 }
 
-void ModelCodecManager::setOverwriteDialog( AbstractOverwriteDialog* overwriteDialog )
+void ModelCodecManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteDialog)
 {
     mOverwriteDialog = overwriteDialog;
 }
 
-void ModelCodecManager::setEncoders( const QList<AbstractModelStreamEncoder*>& encoderList )
+void ModelCodecManager::setEncoders(const QList<AbstractModelStreamEncoder*>& encoderList)
 {
     mEncoderList = encoderList;
 
-    qDeleteAll( mExporterList );
+    qDeleteAll(mExporterList);
     mExporterList.clear();
 
     mExporterList.reserve(mEncoderList.size());
-    for( AbstractModelStreamEncoder* encoder : qAsConst(mEncoderList) )
-        mExporterList << new ModelEncoderFileSystemExporter( encoder );
+    for (AbstractModelStreamEncoder* encoder : qAsConst(mEncoderList)) {
+        mExporterList << new ModelEncoderFileSystemExporter(encoder);
+    }
 }
 
-void ModelCodecManager::setDecoders( const QList<AbstractModelStreamDecoder*>& decoderList )
+void ModelCodecManager::setDecoders(const QList<AbstractModelStreamDecoder*>& decoderList)
 {
     mDecoderList = decoderList;
 }
 
-void ModelCodecManager::setGenerators( const QList<AbstractModelDataGenerator*>& generatorList )
+void ModelCodecManager::setGenerators(const QList<AbstractModelDataGenerator*>& generatorList)
 {
     mGeneratorList = generatorList;
 }
 
-void ModelCodecManager::encodeToStream( AbstractModelStreamEncoder* encoder,
-                                        AbstractModel* model, const AbstractModelSelection* selection )
+void ModelCodecManager::encodeToStream(AbstractModelStreamEncoder* encoder,
+                                       AbstractModel* model, const AbstractModelSelection* selection)
 {
-   Q_UNUSED( selection )
-   Q_UNUSED( model )
-   Q_UNUSED( encoder )
+    Q_UNUSED(selection)
+    Q_UNUSED(model)
+    Q_UNUSED(encoder)
 //    AbstractDocument* model = mFactory->create();
 //    mManager->addDocument( model );
 }
 
-
-void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
-                                        AbstractModel* model, const AbstractModelSelection* selection )
+void ModelCodecManager::exportDocument(AbstractModelExporter* exporter,
+                                       AbstractModel* model, const AbstractModelSelection* selection)
 {
     bool exportDone = false;
 
     const QString dialogTitle =
-        i18nc( "@title:window", "Export" );
-    do
-    {
-        QFileDialog exportFileDialog(/*mWidget*/nullptr, dialogTitle );
+        i18nc("@title:window", "Export");
+    do {
+        QFileDialog exportFileDialog(/*mWidget*/ nullptr, dialogTitle);
 
-        exportFileDialog.setAcceptMode( QFileDialog::AcceptSave );
-        exportFileDialog.setFileMode( QFileDialog::AnyFile );
+        exportFileDialog.setAcceptMode(QFileDialog::AcceptSave);
+        exportFileDialog.setFileMode(QFileDialog::AnyFile);
         const QStringList mimeTypes = QStringList { exporter->remoteMimeType() };
-        exportFileDialog.setMimeTypeFilters( mimeTypes );
+        exportFileDialog.setMimeTypeFilters(mimeTypes);
 
         exportFileDialog.setLabelText(QFileDialog::Accept, i18nc("@action:button", "&Export"));
 
@@ -129,48 +126,47 @@ void ModelCodecManager::exportDocument( AbstractModelExporter* exporter,
 
         const QList<QUrl> exportUrls = exportFileDialog.selectedUrls();
 
-        if( !exportUrls.isEmpty() )
-        {
+        if (!exportUrls.isEmpty()) {
             const QUrl& exportUrl = exportUrls.at(0);
 
-            KIO::StatJob* statJob = KIO::stat( exportUrl );
-            statJob->setSide(  KIO::StatJob::DestinationSide );
-            KJobWidgets::setWindow( statJob, /*mWidget*/nullptr );
+            KIO::StatJob* statJob = KIO::stat(exportUrl);
+            statJob->setSide(KIO::StatJob::DestinationSide);
+            KJobWidgets::setWindow(statJob, /*mWidget*/ nullptr);
 
             const bool isUrlInUse = statJob->exec();
 
-            if( isUrlInUse )
-            {
+            if (isUrlInUse) {
                 // TODO: care for case that file from url is already loaded by (only?) this program
 //                     const bool otherFileLoaded = mManager->documentByUrl( exportUrl );
                 // TODO: replace "file" with synchronizer->storageTypeName() or such
                 // TODO: offer "Synchronize" as alternative, if supported, see below
                 const Answer answer =
-                    mOverwriteDialog ? mOverwriteDialog->queryOverwrite( exportUrl, dialogTitle ) : Cancel;
-                if( answer == Cancel )
+                    mOverwriteDialog ? mOverwriteDialog->queryOverwrite(exportUrl, dialogTitle) : Cancel;
+                if (answer == Cancel) {
                     break;
-                if( answer == PreviousQuestion )
+                }
+                if (answer == PreviousQuestion) {
                     continue;
+                }
             }
 
-            AbstractExportJob* exportJob = exporter->startExport( model, selection, exportUrl );
-            exportDone = JobManager::executeJob( exportJob );
+            AbstractExportJob* exportJob = exporter->startExport(model, selection, exportUrl);
+            exportDone = JobManager::executeJob(exportJob);
 
 //                 if( exportDone )
 //                     emit urlUsed( exportUrl );
-        }
-        else
+        } else {
             break;
-    }
-    while( !exportDone );
+        }
+    } while (!exportDone);
 }
 
 ModelCodecManager::~ModelCodecManager()
 {
-    qDeleteAll( mExporterList );
-    qDeleteAll( mEncoderList );
+    qDeleteAll(mExporterList);
+    qDeleteAll(mEncoderList);
 //     qDeleteAll( mDecoderList );
-    qDeleteAll( mGeneratorList );
+    qDeleteAll(mGeneratorList);
 }
 
 }

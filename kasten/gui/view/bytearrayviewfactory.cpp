@@ -29,47 +29,43 @@
 // core
 #include <kasten/okteta/bytearraydocument.h>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ByteArrayViewFactory::ByteArrayViewFactory( ByteArrayViewProfileManager* byteArrayViewProfileManager )
-  : AbstractViewFactory()
-  , mByteArrayViewProfileManager( byteArrayViewProfileManager )
+ByteArrayViewFactory::ByteArrayViewFactory(ByteArrayViewProfileManager* byteArrayViewProfileManager)
+    : AbstractViewFactory()
+    , mByteArrayViewProfileManager(byteArrayViewProfileManager)
 {
 }
 
-AbstractView* ByteArrayViewFactory::createViewFor( AbstractDocument* _document )
+AbstractView* ByteArrayViewFactory::createViewFor(AbstractDocument* _document)
 {
     ByteArrayView* result = nullptr;
 
-    ByteArrayDocument* document = static_cast<ByteArrayDocument*>( _document );
-    if( document )
-    {
+    ByteArrayDocument* document = static_cast<ByteArrayDocument*>(_document);
+    if (document) {
         ByteArrayViewProfileSynchronizer* synchronizer =
-            new ByteArrayViewProfileSynchronizer( mByteArrayViewProfileManager );
+            new ByteArrayViewProfileSynchronizer(mByteArrayViewProfileManager);
 
-        synchronizer->setViewProfileId( mByteArrayViewProfileManager->defaultViewProfileId() );
+        synchronizer->setViewProfileId(mByteArrayViewProfileManager->defaultViewProfileId());
 
-        result = new ByteArrayView( document, synchronizer );
+        result = new ByteArrayView(document, synchronizer);
     }
 
     return result;
 }
 
-AbstractView* ByteArrayViewFactory::createCopyOfView( AbstractView* _view, Qt::Alignment alignment )
+AbstractView* ByteArrayViewFactory::createCopyOfView(AbstractView* _view, Qt::Alignment alignment)
 {
     ByteArrayView* result = nullptr;
 
-    ByteArrayView* view = qobject_cast<ByteArrayView*>( _view );
-    if( view )
-    {
+    ByteArrayView* view = qobject_cast<ByteArrayView*>(_view);
+    if (view) {
         ByteArrayViewProfileSynchronizer* synchronizer =
-            new ByteArrayViewProfileSynchronizer( mByteArrayViewProfileManager );
+            new ByteArrayViewProfileSynchronizer(mByteArrayViewProfileManager);
 
-        synchronizer->setViewProfileId( view->synchronizer()->viewProfileId() );
+        synchronizer->setViewProfileId(view->synchronizer()->viewProfileId());
 
-        result = new ByteArrayView( view, synchronizer, alignment );
+        result = new ByteArrayView(view, synchronizer, alignment);
     }
 
     return result;

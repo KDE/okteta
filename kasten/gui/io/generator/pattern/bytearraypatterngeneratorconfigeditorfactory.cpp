@@ -26,28 +26,25 @@
 #include "bytearraypatterngeneratorconfigeditor.h"
 #include "bytearraypatterngenerator.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArrayPatternGeneratorConfigEditorFactory::ByteArrayPatternGeneratorConfigEditorFactory()
 {
 }
 
-
-AbstractModelDataGeneratorConfigEditor* ByteArrayPatternGeneratorConfigEditorFactory::tryCreateConfigEditor( AbstractModelDataGenerator* generator ) const
+AbstractModelDataGeneratorConfigEditor* ByteArrayPatternGeneratorConfigEditorFactory::tryCreateConfigEditor(AbstractModelDataGenerator* generator) const
 {
     AbstractModelDataGeneratorConfigEditor* result = nullptr;
 
     ByteArrayPatternGenerator* patternGenerator =
-        qobject_cast<ByteArrayPatternGenerator*>( generator );
+        qobject_cast<ByteArrayPatternGenerator*>(generator);
 
-    if( patternGenerator )
-        result = new ByteArrayPatternGeneratorConfigEditor( patternGenerator );
+    if (patternGenerator) {
+        result = new ByteArrayPatternGeneratorConfigEditor(patternGenerator);
+    }
 
     return result;
 }
-
 
 ByteArrayPatternGeneratorConfigEditorFactory::~ByteArrayPatternGeneratorConfigEditorFactory() {}
 

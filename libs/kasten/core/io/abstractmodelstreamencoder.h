@@ -31,15 +31,12 @@
 
 class QIODevice;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModel;
 class AbstractModelSelection;
 
 class AbstractModelStreamEncoderPrivate;
-
 
 // TODO: General synchronizer would load matching encoder and decoder
 // manually defined by desktopfile
@@ -51,28 +48,29 @@ class KASTENCORE_EXPORT AbstractModelStreamEncoder : public QObject
 {
     Q_OBJECT
 
-  protected:
-    AbstractModelStreamEncoder( AbstractModelStreamEncoderPrivate* d );
+protected:
+    AbstractModelStreamEncoder(AbstractModelStreamEncoderPrivate* d);
 
-  public:
-    AbstractModelStreamEncoder( const QString& remoteTypeName, const QString& remoteMimeType,
-                                const QString& remoteClipboardMimeType = QString() );
+public:
+    AbstractModelStreamEncoder(const QString& remoteTypeName, const QString& remoteMimeType,
+                               const QString& remoteClipboardMimeType = QString());
 
     ~AbstractModelStreamEncoder() override;
 
-  public: // API to be implemented
-    virtual bool encodeToStream( QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection ) = 0;
-    virtual QString modelTypeName( AbstractModel* model, const AbstractModelSelection* selection ) const = 0;
+public: // API to be implemented
+    virtual bool encodeToStream(QIODevice* device, AbstractModel* model, const AbstractModelSelection* selection) = 0;
+    virtual QString modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const = 0;
 
-  public:
+public:
     QString remoteTypeName() const;
     QString remoteMimeType() const;
     // the clipboard does not yet understand mimetype inheritance
     QString remoteClipboardMimeType() const;
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractModelStreamEncoder )
-  protected:
+protected:
+    Q_DECLARE_PRIVATE(AbstractModelStreamEncoder)
+
+protected:
     AbstractModelStreamEncoderPrivate* const d_ptr;
 };
 

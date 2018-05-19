@@ -33,25 +33,22 @@
 
 class KDirWatch;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayViewProfileLock;
-
 
 class ByteArrayViewProfileFileInfo
 {
 public:
-    ByteArrayViewProfileFileInfo( const QDateTime& lastModified, bool  )
-      : mLastModified( lastModified )
-      , mLocked( false )
+    ByteArrayViewProfileFileInfo(const QDateTime& lastModified, bool)
+        : mLastModified(lastModified)
+        , mLocked(false)
     {}
 
     const QDateTime& lastModified() const { return mLastModified; }
     bool isLocked()                 const { return mLocked; }
 
-    void setLastModified( const QDateTime& lastModified )  { mLastModified = lastModified; }
-    void setLocked( bool isLocked ) { mLocked = isLocked; }
+    void setLastModified(const QDateTime& lastModified)  { mLastModified = lastModified; }
+    void setLocked(bool isLocked) { mLocked = isLocked; }
 
 private:
     QDateTime mLastModified;
@@ -61,50 +58,49 @@ private:
 
 using ByteArrayViewProfileFileInfoLookup = QHash<ByteArrayViewProfile::Id, ByteArrayViewProfileFileInfo>;
 
-
 class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileManager : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ByteArrayViewProfileManager();
     ~ByteArrayViewProfileManager() override;
 
-  public:
+public:
     QList<ByteArrayViewProfile> viewProfiles() const;
     int viewProfilesCount() const;
-    ByteArrayViewProfile viewProfile( const ByteArrayViewProfile::Id& id ) const;
+    ByteArrayViewProfile viewProfile(const ByteArrayViewProfile::Id& id) const;
     ByteArrayViewProfile::Id defaultViewProfileId() const;
     ByteArrayViewProfile defaultViewProfile() const;
-    bool isViewProfileLocked( const ByteArrayViewProfile::Id& id ) const;
+    bool isViewProfileLocked(const ByteArrayViewProfile::Id& id) const;
 
-  public:
-    void saveViewProfiles( QList<ByteArrayViewProfile>& viewProfiles );
-    void removeViewProfiles( const QList<ByteArrayViewProfile::Id>& viewProfileIds );
-    void setDefaultViewProfile( const ByteArrayViewProfile::Id& viewProfileId );
+public:
+    void saveViewProfiles(QList<ByteArrayViewProfile>& viewProfiles);
+    void removeViewProfiles(const QList<ByteArrayViewProfile::Id>& viewProfileIds);
+    void setDefaultViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 
-    ByteArrayViewProfileLock createLock( const ByteArrayViewProfile::Id& viewProfileId );
+    ByteArrayViewProfileLock createLock(const ByteArrayViewProfile::Id& viewProfileId);
 
-  Q_SIGNALS:
-    void viewProfilesChanged( const QList<Kasten::ByteArrayViewProfile>& viewProfiles );
-    void viewProfilesRemoved( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
-    void defaultViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
-    void viewProfilesLocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
-    void viewProfilesUnlocked( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+Q_SIGNALS:
+    void viewProfilesChanged(const QList<Kasten::ByteArrayViewProfile>& viewProfiles);
+    void viewProfilesRemoved(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void defaultViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
+    void viewProfilesLocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void viewProfilesUnlocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
-  private:
-    QString filePathOfViewProfile( const ByteArrayViewProfile::Id& viewProfileId ) const;
+private:
+    QString filePathOfViewProfile(const ByteArrayViewProfile::Id& viewProfileId) const;
     // Returns the viewProfile as loaded from the file with the given fileName.
     // If the loading fails the viewProfile has no id set.
-    ByteArrayViewProfile loadViewProfile( const QString& fileName ) const;
-    void saveViewProfile( const ByteArrayViewProfile& viewProfile ) const;
-    void removeViewProfile( const ByteArrayViewProfile::Id& viewProfileId );
+    ByteArrayViewProfile loadViewProfile(const QString& fileName) const;
+    void saveViewProfile(const ByteArrayViewProfile& viewProfile) const;
+    void removeViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 
-  private Q_SLOTS:
-    void onViewProfilesFolderChanged( const QString& path );
-    void onDefaultViewProfileChanged( const QString& path );
+private Q_SLOTS:
+    void onViewProfilesFolderChanged(const QString& path);
+    void onDefaultViewProfileChanged(const QString& path);
 
-  private:
+private:
     QList<ByteArrayViewProfile> mViewProfiles;
 
     ByteArrayViewProfile::Id mDefaultViewProfileId;

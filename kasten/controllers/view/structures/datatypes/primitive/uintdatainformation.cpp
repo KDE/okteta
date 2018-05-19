@@ -32,8 +32,7 @@
 #include "../../../poddecoder/typeeditors/uintspinbox.h"
 #include "structureviewpreferences.h"
 
-
-template<typename T>
+template <typename T>
 QScriptValue UIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
 {
     Q_UNUSED(engine);
@@ -41,36 +40,33 @@ QScriptValue UIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine
     return QScriptValue(value);
 }
 
-template<>
+template <>
 QScriptValue UIntDataInformationMethods<quint64>::asScriptValue(quint64 value, QScriptEngine* engine,
-        ScriptHandlerInfo* handlerInfo)
+                                                                ScriptHandlerInfo* handlerInfo)
 {
     Q_UNUSED(engine);
     Q_UNUSED(handlerInfo);
     return QScriptValue(QString::number(value, 10));
 }
 
-template<typename T>
+template <typename T>
 QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
 {
     QString num = QString::number(value, base);
-    if (base == 10)
-    {
-        if (Kasten::StructureViewPreferences::localeAwareDecimalFormatting())
+    if (base == 10) {
+        if (Kasten::StructureViewPreferences::localeAwareDecimalFormatting()) {
             num = QLocale().toString(value);
-    }
-    else
-    {
-        //add one space every 8 chars
-        for (int i = 8; i < num.length(); i += 9)
-        {
+        }
+    } else {
+        // add one space every 8 chars
+        for (int i = 8; i < num.length(); i += 9) {
             num.insert(num.length() - i, QLatin1Char(' '));
         }
     }
     return PrimitiveDataInformation::basePrefix(base) + num;
 }
 
-template<typename T>
+template <typename T>
 inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
     UIntSpinBox* ret = new UIntSpinBox(parent, Kasten::StructureViewPreferences::unsignedDisplayBase());
@@ -78,27 +74,29 @@ inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* p
     return ret;
 }
 
-template<typename T>
+template <typename T>
 inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
     const UIntSpinBox* spin = qobject_cast<const UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
-    if (spin)
+    if (spin) {
         return QVariant(spin->value());
+    }
     qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast widget";
     return QVariant();
 }
 
-template<typename T>
+template <typename T>
 inline void UIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
     UIntSpinBox* spin = qobject_cast<UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
-    if (spin)
+    if (spin) {
         spin->setValue(value);
+    }
 }
 
-//explicitly instantiate all valid classes (c++-faq-lite 35.12)
+// explicitly instantiate all valid classes (c++-faq-lite 35.12)
 template class UIntDataInformationMethods<quint8>;
 template class UIntDataInformationMethods<quint16>;
 template class UIntDataInformationMethods<quint32>;

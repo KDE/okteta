@@ -26,26 +26,23 @@
 // lib
 #include <kasten/abstractmodelexporterconfigeditor.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelStreamEncoderConfigEditor;
 
-
 class KASTENGUI_EXPORT ModelEncoderFileSystemExporterConfigEditor : public AbstractModelExporterConfigEditor
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit ModelEncoderFileSystemExporterConfigEditor( AbstractModelStreamEncoderConfigEditor* encoderConfigEditor );
+public:
+    explicit ModelEncoderFileSystemExporterConfigEditor(AbstractModelStreamEncoderConfigEditor* encoderConfigEditor);
     ~ModelEncoderFileSystemExporterConfigEditor() override;
 
-  public: // AbstractModelExporterConfigEditor API
+public: // AbstractModelExporterConfigEditor API
     bool isValid() const override;
     AbstractSelectionView* createPreviewView() const override;
 
-  protected:
+protected:
     AbstractModelStreamEncoderConfigEditor* mEncoderConfigEditor;
 };
 

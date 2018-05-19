@@ -25,16 +25,13 @@
 // Qt
 #include <QString>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const int DefaultNoOfSublines = 1;
 
-
-QString AbstractColumnTextRenderer::whiteSpace( unsigned int length )
+QString AbstractColumnTextRenderer::whiteSpace(unsigned int length)
 {
-    return QString().fill( QLatin1Char(' '), length );
+    return QString().fill(QLatin1Char(' '), length);
 }
 
 int AbstractColumnTextRenderer::noOfSublinesNeeded() const { return DefaultNoOfSublines; }

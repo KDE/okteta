@@ -31,9 +31,7 @@
 // Qt Core
 #include <QObject>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayViewProfileManager;
 class ByteArrayView;
@@ -58,10 +56,10 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
         OffsetCodingChanged = 1 << 11
     };
 
-  public:
-    explicit ByteArrayViewProfileSynchronizer( ByteArrayViewProfileManager* viewProfileManager );
+public:
+    explicit ByteArrayViewProfileSynchronizer(ByteArrayViewProfileManager* viewProfileManager);
 
-  public:
+public:
 //     AbstractLoadJob *startLoad( const QUrl &url );
     void syncToRemote();
     void syncFromRemote();
@@ -71,18 +69,18 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
     ByteArrayView* view() const;
     ByteArrayViewProfile::Id viewProfileId() const;
 
-    void setView( ByteArrayView* view );
-    void setViewProfileId( const ByteArrayViewProfile::Id& viewProfileId );
+    void setView(ByteArrayView* view);
+    void setViewProfileId(const ByteArrayViewProfile::Id& viewProfileId);
 
     LocalSyncState localSyncState() const;
 
-  Q_SIGNALS:
-    void localSyncStateChanged( Kasten::LocalSyncState newState );
-    void viewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
+Q_SIGNALS:
+    void localSyncStateChanged(Kasten::LocalSyncState newState);
+    void viewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
 
-  private Q_SLOTS:
-    void onViewProfilesChanged( const QList<Kasten::ByteArrayViewProfile>& viewProfiles );
-    void onViewProfilesRemoved( const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds );
+private Q_SLOTS:
+    void onViewProfilesChanged(const QList<Kasten::ByteArrayViewProfile>& viewProfiles);
+    void onViewProfilesRemoved(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
     // TODO: turn to one signal/slot with enum parameter for property and QVariant as new value
     void onShowsNonprintingChanged();
@@ -98,13 +96,13 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
     void onLayoutStyleChanged();
     void onViewModusChanged();
 
-  private:
-    void updateView( const ByteArrayViewProfile& viewProfile );
-    void updateViewProfile( ByteArrayViewProfile& viewProfile );
-    void setDirtyFlag( int dirtyFlag );
+private:
+    void updateView(const ByteArrayViewProfile& viewProfile);
+    void updateViewProfile(ByteArrayViewProfile& viewProfile);
+    void setDirtyFlag(int dirtyFlag);
     void connectViewSignals();
 
-  private:
+private:
     ByteArrayView* mView;
     ByteArrayViewProfile::Id mViewProfileId;
     int mDirtyFlags;
@@ -113,11 +111,9 @@ class OKTETAKASTENGUI_EXPORT ByteArrayViewProfileSynchronizer : public QObject
     ByteArrayViewProfileManager* mViewProfileManager;
 };
 
-
 inline ByteArrayView* ByteArrayViewProfileSynchronizer::view() const { return mView; }
 inline ByteArrayViewProfile::Id ByteArrayViewProfileSynchronizer::viewProfileId() const { return mViewProfileId; }
 
 }
-
 
 #endif

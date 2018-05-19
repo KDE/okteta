@@ -35,102 +35,103 @@
 #include <QUrl>
 #include <QAction>
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-SynchronizeController::SynchronizeController( DocumentSyncManager* syncManager, KXMLGUIClient* guiClient )
-  : mSyncManager( syncManager ),
-    mDocument( nullptr ),
-    mSynchronizer( nullptr )
+SynchronizeController::SynchronizeController(DocumentSyncManager* syncManager, KXMLGUIClient* guiClient)
+    : mSyncManager(syncManager)
+    , mDocument(nullptr)
+    , mSynchronizer(nullptr)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSaveAction = KStandardAction::save( this, SLOT(save()), actionCollection );
+    mSaveAction = KStandardAction::save(this, SLOT(save()), actionCollection);
 
-    mReloadAction = actionCollection->addAction( QStringLiteral("file_reload"),
-                                                 this, SLOT(reload()) );
-    mReloadAction->setText( i18nc("@title:menu","Reloa&d") );
-    mReloadAction->setIcon( QIcon::fromTheme( QStringLiteral("view-refresh") ) );
-    actionCollection->setDefaultShortcuts( mReloadAction, KStandardShortcut::reload() );
+    mReloadAction = actionCollection->addAction(QStringLiteral("file_reload"),
+                                                this, SLOT(reload()));
+    mReloadAction->setText(i18nc("@title:menu", "Reloa&d"));
+    mReloadAction->setIcon(QIcon::fromTheme(QStringLiteral("view-refresh")));
+    actionCollection->setDefaultShortcuts(mReloadAction, KStandardShortcut::reload());
 
-    setTargetModel( nullptr );
+    setTargetModel(nullptr);
 }
 
-void SynchronizeController::setTargetModel( AbstractModel* model )
+void SynchronizeController::setTargetModel(AbstractModel* model)
 {
-    if( mDocument ) mDocument->disconnect( this );
+    if (mDocument) {
+        mDocument->disconnect(this);
+    }
 
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
 
-    if( mDocument )
-    {
-        connect( mDocument, &AbstractDocument::synchronizerChanged,
-                 this, &SynchronizeController::onSynchronizerChanged );
+    if (mDocument) {
+        connect(mDocument, &AbstractDocument::synchronizerChanged,
+                this, &SynchronizeController::onSynchronizerChanged);
     }
-    onSynchronizerChanged( mDocument ? mDocument->synchronizer() : nullptr );
+    onSynchronizerChanged(mDocument ? mDocument->synchronizer() : nullptr);
 }
 
 void SynchronizeController::save()
 {
-    mSyncManager->save( mDocument );
+    mSyncManager->save(mDocument);
 }
 
 void SynchronizeController::reload()
 {
-    mSyncManager->reload( mDocument );
+    mSyncManager->reload(mDocument);
 }
 
-void SynchronizeController::onSynchronizerChanged( AbstractModelSynchronizer* newSynchronizer )
+void SynchronizeController::onSynchronizerChanged(AbstractModelSynchronizer* newSynchronizer)
 {
-    if( mSynchronizer ) mSynchronizer->disconnect( this );
+    if (mSynchronizer) {
+        mSynchronizer->disconnect(this);
+    }
 
-    mSynchronizer = qobject_cast<AbstractModelFileSystemSynchronizer*>( newSynchronizer );
-    // TODO: Storable interface should be used by Synchronizer 
+    mSynchronizer = qobject_cast<AbstractModelFileSystemSynchronizer*>(newSynchronizer);
+    // TODO: Storable interface should be used by Synchronizer
     // synchronizer should report about possible activities
     // TODO: check for access rights, may not write
     bool canSync = false;
-    if( mSynchronizer )
-    {
+    if (mSynchronizer) {
         const LocalSyncState localSyncState = mSynchronizer->localSyncState();
         const RemoteSyncState remoteSyncState = mSynchronizer->remoteSyncState();
-        canSync = ( localSyncState == LocalHasChanges )
-                  || ( remoteSyncState == RemoteHasChanges )
-                  || ( remoteSyncState == RemoteUnknown );
+        canSync = (localSyncState == LocalHasChanges)
+                  || (remoteSyncState == RemoteHasChanges)
+                  || (remoteSyncState == RemoteUnknown);
 
-        connect( mSynchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
-                 this, &SynchronizeController::onSyncStateChanged );
-        connect( mSynchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
-                 this, &SynchronizeController::onSyncStateChanged );
-        connect( mSynchronizer, &QObject::destroyed,
-                 this, &SynchronizeController::onSynchronizerDeleted );
+        connect(mSynchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
+                this, &SynchronizeController::onSyncStateChanged);
+        connect(mSynchronizer, &AbstractModelSynchronizer::remoteSyncStateChanged,
+                this, &SynchronizeController::onSyncStateChanged);
+        connect(mSynchronizer, &QObject::destroyed,
+                this, &SynchronizeController::onSynchronizerDeleted);
     }
 
-    mSaveAction->setEnabled( canSync );
-    mReloadAction->setEnabled( canSync );
+    mSaveAction->setEnabled(canSync);
+    mReloadAction->setEnabled(canSync);
 }
 
-void SynchronizeController::onSynchronizerDeleted( QObject* synchronizer )
+void SynchronizeController::onSynchronizerDeleted(QObject* synchronizer)
 {
-    if( synchronizer != mSynchronizer )
+    if (synchronizer != mSynchronizer) {
         return;
+    }
 
     mSynchronizer = nullptr;
 
-    mSaveAction->setEnabled( false );
-    mReloadAction->setEnabled( false );
+    mSaveAction->setEnabled(false);
+    mReloadAction->setEnabled(false);
 }
 
 void SynchronizeController::onSyncStateChanged()
 {
     const LocalSyncState localSyncState = mSynchronizer->localSyncState();
     const RemoteSyncState remoteSyncState = mSynchronizer->remoteSyncState();
-    const bool canSync = ( localSyncState == LocalHasChanges )
-                  || ( remoteSyncState == RemoteHasChanges )
-                  || ( remoteSyncState == RemoteUnknown );
+    const bool canSync = (localSyncState == LocalHasChanges)
+                         || (remoteSyncState == RemoteHasChanges)
+                         || (remoteSyncState == RemoteUnknown);
 
-    mSaveAction->setEnabled( canSync );
-    mReloadAction->setEnabled( canSync );
+    mSaveAction->setEnabled(canSync);
+    mReloadAction->setEnabled(canSync);
 }
 
 }

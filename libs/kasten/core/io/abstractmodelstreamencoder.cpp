@@ -23,39 +23,37 @@
 #include "abstractmodelstreamencoder.h"
 #include "abstractmodelstreamencoder_p.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-AbstractModelStreamEncoder::AbstractModelStreamEncoder( AbstractModelStreamEncoderPrivate* d )
-  : d_ptr( d )
+AbstractModelStreamEncoder::AbstractModelStreamEncoder(AbstractModelStreamEncoderPrivate* d)
+    : d_ptr(d)
 {
 }
 
-AbstractModelStreamEncoder::AbstractModelStreamEncoder( const QString& remoteTypeName,
-                                                        const QString& remoteMimeType,
-                                                        const QString& remoteClipboardMimeType )
-  : d_ptr( new AbstractModelStreamEncoderPrivate(this,remoteTypeName,remoteMimeType,remoteClipboardMimeType) )
+AbstractModelStreamEncoder::AbstractModelStreamEncoder(const QString& remoteTypeName,
+                                                       const QString& remoteMimeType,
+                                                       const QString& remoteClipboardMimeType)
+    : d_ptr(new AbstractModelStreamEncoderPrivate(this, remoteTypeName, remoteMimeType, remoteClipboardMimeType))
 {
 }
 
 QString AbstractModelStreamEncoder::remoteTypeName() const
 {
-    Q_D( const AbstractModelStreamEncoder );
+    Q_D(const AbstractModelStreamEncoder);
 
     return d->remoteTypeName();
 }
 
 QString AbstractModelStreamEncoder::remoteMimeType() const
 {
-    Q_D( const AbstractModelStreamEncoder );
+    Q_D(const AbstractModelStreamEncoder);
 
     return d->remoteMimeType();
 }
 
 QString AbstractModelStreamEncoder::remoteClipboardMimeType() const
 {
-    Q_D( const AbstractModelStreamEncoder );
+    Q_D(const AbstractModelStreamEncoder);
 
     return d->remoteClipboardMimeType();
 }

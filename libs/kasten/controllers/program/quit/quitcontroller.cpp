@@ -27,22 +27,20 @@
 #include <KActionCollection>
 #include <KStandardAction>
 
+namespace Kasten {
 
-namespace Kasten
+QuitController::QuitController(KProgram* program, KXmlGuiWindow* window)
+    : mMainWindow(window)
 {
+    Q_UNUSED(program)
 
-QuitController::QuitController( KProgram *program, KXmlGuiWindow *window )
-: mMainWindow( window )
-{
-Q_UNUSED( program )
-
-    KActionCollection *actionCollection = mMainWindow->actionCollection();
-    KStandardAction::quit( this, SLOT(quit()), actionCollection );
+    KActionCollection * actionCollection = mMainWindow->actionCollection();
+    KStandardAction::quit(this, SLOT(quit()), actionCollection);
 }
 
-void QuitController::setTargetModel( AbstractModel* model )
+void QuitController::setTargetModel(AbstractModel* model)
 {
-Q_UNUSED( model )
+    Q_UNUSED(model)
 }
 
 void QuitController::quit()

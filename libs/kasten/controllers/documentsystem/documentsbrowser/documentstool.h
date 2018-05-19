@@ -28,43 +28,40 @@
 // Kasten core
 #include <kasten/abstracttool.h>
 
-namespace Kasten
-{
+namespace Kasten {
 
 class DocumentManager;
 class AbstractDocument;
 
-
 class KASTENCONTROLLERS_EXPORT DocumentsTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit DocumentsTool( DocumentManager* documentManager );
+public:
+    explicit DocumentsTool(DocumentManager* documentManager);
     ~DocumentsTool() override;
 
-  public:
+public:
     AbstractDocument* focussedDocument() const;
     QList<AbstractDocument*> documents() const;
 
-  public:
-    void setFocussedDocument( AbstractDocument* document );
+public:
+    void setFocussedDocument(AbstractDocument* document);
 
-  public: // AbstractTool API
+public: // AbstractTool API
     QString title() const override;
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  Q_SIGNALS:
-    void documentsAdded( const QList<Kasten::AbstractDocument*>& documents );
-    void documentsClosing( const QList<Kasten::AbstractDocument*>& documents );
-    void focussedDocumentChanged( Kasten::AbstractDocument* document );
+Q_SIGNALS:
+    void documentsAdded(const QList<Kasten::AbstractDocument*>& documents);
+    void documentsClosing(const QList<Kasten::AbstractDocument*>& documents);
+    void focussedDocumentChanged(Kasten::AbstractDocument* document);
 
-  private: // sources
+private: // sources
     DocumentManager* mDocumentManager;
 
     AbstractDocument* mFocussedDocument;
 };
-
 
 inline AbstractDocument* DocumentsTool::focussedDocument() const { return mFocussedDocument; }
 

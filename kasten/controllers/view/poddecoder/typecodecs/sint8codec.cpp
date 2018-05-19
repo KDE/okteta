@@ -28,32 +28,30 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 SInt8Codec::SInt8Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Signed 8-bit") )
+    : AbstractTypeCodec(i18nc("@label:textbox", "Signed 8-bit"))
 {}
 
-QVariant SInt8Codec::value( const PODData& data, int* byteCount ) const
+QVariant SInt8Codec::value(const PODData& data, int* byteCount) const
 {
-    const qint8* pointer = (qint8*)data.pointer( 1 );
+    const qint8* pointer = (qint8*)data.pointer(1);
 
     *byteCount = pointer ? 1 : 0;
-    return pointer ? QVariant::fromValue<SInt8>( SInt8(*pointer) ) : QVariant();
+    return pointer ? QVariant::fromValue<SInt8>(SInt8(*pointer)) : QVariant();
 }
 
-QByteArray SInt8Codec::valueToBytes( const QVariant& value ) const
+QByteArray SInt8Codec::valueToBytes(const QVariant& value) const
 {
     const qint8 number = value.value<SInt8>().value;
 
-    return QByteArray( (const char*)&number, sizeof(qint8) );
+    return QByteArray((const char*)&number, sizeof(qint8));
 }
 
-bool SInt8Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+bool SInt8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
-    return ( value.value<SInt8>().value == otherValue.value<SInt8>().value );
+    return (value.value<SInt8>().value == otherValue.value<SInt8>().value);
 }
 
 SInt8Codec::~SInt8Codec() {}

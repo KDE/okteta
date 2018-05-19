@@ -21,8 +21,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 #include "stringdatainformation.h"
 #include "../dummydatainformation.h"
 #include "../topleveldatainformation.h"
@@ -43,15 +41,21 @@
 #include <KLocalizedString>
 
 StringDataInformation::StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent)
-    : DataInformationWithDummyChildren(name, parent), mDummy(new DummyDataInformation(this)), mData(nullptr), mEncoding(StringType::InvalidEncoding)
+    : DataInformationWithDummyChildren(name, parent)
+    , mDummy(new DummyDataInformation(this))
+    , mData(nullptr)
+    , mEncoding(StringType::InvalidEncoding)
 {
-    setEncoding(encoding); //sets mData
+    setEncoding(encoding); // sets mData
 }
 
 StringDataInformation::StringDataInformation(const StringDataInformation& d)
-    : DataInformationWithDummyChildren(d), mDummy(new DummyDataInformation(this)), mData(nullptr), mEncoding(StringType::InvalidEncoding)
+    : DataInformationWithDummyChildren(d)
+    , mDummy(new DummyDataInformation(this))
+    , mData(nullptr)
+    , mEncoding(StringType::InvalidEncoding)
 {
-    setEncoding(d.mEncoding); //sets mData
+    setEncoding(d.mEncoding); // sets mData
     mData->copyTerminationFrom(d.mData.data());
 }
 
@@ -61,13 +65,13 @@ StringDataInformation::~StringDataInformation()
 
 DataInformation* StringDataInformation::childAt(unsigned int index) const
 {
-	Q_ASSERT(index < childCount());
-	mDummy->setDummyIndex(index);
+    Q_ASSERT(index < childCount());
+    mDummy->setDummyIndex(index);
     return mDummy.data();
 }
 
 bool StringDataInformation::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
-        Okteta::Address, BitCount64, quint8)
+                                    Okteta::Address, BitCount64, quint8)
 {
     Q_ASSERT_X(false, "StringDataInformation::setData()", "this should never be called!");
     return false;
@@ -85,19 +89,17 @@ bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta
     return false;
 }
 
-
 qint64 StringDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-        BitCount64 bitsRemaining, quint8* bitOffset)
+                                       BitCount64 bitsRemaining, quint8* bitOffset)
 {
-    Q_ASSERT(mHasBeenUpdated); //update must have been called prior to reading
-    if (*bitOffset != 0)
-    {
+    Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
+    if (*bitOffset != 0) {
         logWarn() << "while reading string bit offset was: " << *bitOffset
-                << ", adding padding and continuing at next byte (address=" << address << ")";
+                  << ", adding padding and continuing at next byte (address=" << address << ")";
         bitsRemaining -= 8 - *bitOffset;
         *bitOffset = 0;
         address += 1;
-        Q_ASSERT((bitsRemaining % 8) == 0); //must be mod 8
+        Q_ASSERT((bitsRemaining % 8) == 0); // must be mod 8
     }
     qint64 ret = mData->read(input, address, bitsRemaining);
     mWasAbleToRead = ret >= 0;
@@ -111,19 +113,19 @@ BitCount32 StringDataInformation::size() const
 
 void StringDataInformation::setWidgetData(QWidget*) const
 {
-    //TODO
+    // TODO
 }
 
 QVariant StringDataInformation::dataFromWidget(const QWidget*) const
 {
-    //TODO
+    // TODO
     Q_ASSERT(false);
     return QVariant();
 }
 
 QWidget* StringDataInformation::createEditWidget(QWidget*) const
 {
-    //TODO
+    // TODO
     Q_ASSERT(false);
     return nullptr;
 }
@@ -147,23 +149,17 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
 {
     Q_ASSERT(row >= 0 && (unsigned)row < childCount());
     Q_ASSERT(column < COLUMN_COUNT);
-    if (role == Qt::DisplayRole)
-    {
-        if (column == ColumnName)
-        {
-            //TODO termination char
+    if (role == Qt::DisplayRole) {
+        if (column == ColumnName) {
+            // TODO termination char
             return QString(QLatin1Char('[') + QString::number(row) + QLatin1Char(']'));
-        }
-        else if (column == ColumnType)
-        {
+        } else if (column == ColumnType) {
             return mData->charType();
-        }
-        else if (column == ColumnValue)
-        {
+        } else if (column == ColumnValue) {
             return mData->stringValue(row);
         }
     }
-    //TODO mark eof reached, don't add extra item. i.e. add icon or colour
+    // TODO mark eof reached, don't add extra item. i.e. add icon or colour
     return QVariant();
 }
 
@@ -178,69 +174,66 @@ Qt::ItemFlags StringDataInformation::childFlags(int row, int column, bool fileLo
     Q_UNUSED(fileLoaded);
     Q_UNUSED(row);
     Q_UNUSED(column);
-    return Qt::ItemIsSelectable | Qt::ItemIsEnabled; //not editable atm
-    //TODO make editable
+    return Qt::ItemIsSelectable | Qt::ItemIsEnabled; // not editable atm
+    // TODO make editable
 }
 
 void StringDataInformation::setEncoding(StringDataInformation::StringType encoding)
 {
-    if (mData && mEncoding == encoding)
+    if (mData && mEncoding == encoding) {
         return;
+    }
     if (mData && ((mEncoding == StringType::UTF16_LE && encoding == StringType::UTF16_BE) ||
-                  (mEncoding == StringType::UTF16_BE && encoding == StringType::UTF16_LE)))
-    {
-        //only set endianess, since is already utf 16
+                  (mEncoding == StringType::UTF16_BE && encoding == StringType::UTF16_LE))) {
+        // only set endianess, since is already utf 16
         mData->setLittleEndian(encoding == StringType::UTF16_LE);
-    }
-    else if (mData && ((mEncoding == StringType::UTF32_LE && encoding == StringType::UTF32_BE) ||
-                       (mEncoding == StringType::UTF32_BE && encoding == StringType::UTF32_LE)))
-    {
-        //only set endianess, since is already utf 32
+    } else if (mData && ((mEncoding == StringType::UTF32_LE && encoding == StringType::UTF32_BE) ||
+                         (mEncoding == StringType::UTF32_BE && encoding == StringType::UTF32_LE))) {
+        // only set endianess, since is already utf 32
         mData->setLittleEndian(encoding == StringType::UTF32_LE);
-    }
-    else
-    {
+    } else {
         StringData* data = nullptr;
         switch (encoding) {
-            case StringType::ASCII:
-                data = new AsciiStringData(this);
-                break;
-            case StringType::Latin1:
-                data = new Latin1StringData(this);
-                break;
-            case StringType::UTF8:
-                data = new Utf8StringData(this);
-                break;
-            case StringType::UTF16_LE:
-                data = new Utf16StringData(this);
-                data->setLittleEndian(true);
-                break;
-            case StringType::UTF16_BE:
-                data = new Utf16StringData(this);
-                data->setLittleEndian(false);
-                break;
-            case StringType::UTF32_LE:
-                data = new Utf32StringData(this);
-                data->setLittleEndian(true);
-                break;
-            case StringType::UTF32_BE:
-                data = new Utf32StringData(this);
-                data->setLittleEndian(false);
-                break;
-            case StringType::EBCDIC:
-                data = new EbcdicStringData(this);
-                break;
-            default:
-                data = new AsciiStringData(this); //TODO add the other classes
-                break;
+        case StringType::ASCII:
+            data = new AsciiStringData(this);
+            break;
+        case StringType::Latin1:
+            data = new Latin1StringData(this);
+            break;
+        case StringType::UTF8:
+            data = new Utf8StringData(this);
+            break;
+        case StringType::UTF16_LE:
+            data = new Utf16StringData(this);
+            data->setLittleEndian(true);
+            break;
+        case StringType::UTF16_BE:
+            data = new Utf16StringData(this);
+            data->setLittleEndian(false);
+            break;
+        case StringType::UTF32_LE:
+            data = new Utf32StringData(this);
+            data->setLittleEndian(true);
+            break;
+        case StringType::UTF32_BE:
+            data = new Utf32StringData(this);
+            data->setLittleEndian(false);
+            break;
+        case StringType::EBCDIC:
+            data = new EbcdicStringData(this);
+            break;
+        default:
+            data = new AsciiStringData(this);     // TODO add the other classes
+            break;
         }
-        if (mData)
+        if (mData) {
             data->copyTerminationFrom(mData.data());
+        }
         mData.reset(data);
     }
     mEncoding = encoding;
 }
-//TODO implement string editing
+// TODO implement string editing
 
 BitCount32 StringDataInformation::childSize(uint index) const
 {
@@ -250,7 +243,7 @@ BitCount32 StringDataInformation::childSize(uint index) const
 QString StringDataInformation::childTypeName(uint index) const
 {
     Q_UNUSED(index)
-    return QString(); //XXX should there be something here?
+    return QString(); // XXX should there be something here?
 }
 
 void StringDataInformation::setChildWidgetData(uint index, QWidget* w) const
@@ -280,7 +273,7 @@ QWidget* StringDataInformation::createChildEditWidget(uint index, QWidget* paren
 
 QScriptValue StringDataInformation::childToScriptValue(uint index, QScriptEngine*, ScriptHandlerInfo*) const
 {
-    //just return as a string
+    // just return as a string
     return mData->stringValue(index);
 }
 
@@ -294,21 +287,21 @@ BitCount64 StringDataInformation::childPosition(const DataInformation* child, Ok
     uint index = mDummy->dummyIndex();
     Q_ASSERT(index < mData->count());
     BitCount32 offs = 0;
-    for (uint i = 0; i < index; ++i)
-    {
+    for (uint i = 0; i < index; ++i) {
         offs += mData->sizeAt(i);
     }
+
     return offs;
 }
 
 QVariant StringDataInformation::data(int column, int role) const
 {
-    if (mData->wasEof())
-    {
-        if (role == Qt::BackgroundRole)
+    if (mData->wasEof()) {
+        if (role == Qt::BackgroundRole) {
             return QBrush(Qt::yellow);
-        else if (role == Qt::ToolTipRole)
+        } else if (role == Qt::ToolTipRole) {
             return i18n("End of file reached prematurely");
+        }
     }
     return DataInformation::data(column, role);
 }
@@ -320,10 +313,11 @@ bool StringDataInformation::isString() const
 
 void StringDataInformation::unsetTerminationMode(StringData::TerminationMode mode)
 {
-    //clear the mode and set to null terminated of none is left
+    // clear the mode and set to null terminated of none is left
     mData->setTerminationMode(StringData::TerminationMode(mData->terminationMode() & ~mode));
-    if (mData->terminationMode() == StringData::None)
+    if (mData->terminationMode() == StringData::None) {
         mData->setTerminationCodePoint(0);
+    }
 }
 
 QScriptClass* StringDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const

@@ -36,39 +36,36 @@ class KActionMenu;
 class QActionGroup;
 class QAction;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class ByteArrayViewProfileManager;
 class ByteArrayViewProfileSynchronizer;
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT ViewProfileController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    ViewProfileController( ByteArrayViewProfileManager* viewProfileManager,
-                           QWidget* parentWidget,
-                           KXMLGUIClient* guiClient );
+public:
+    ViewProfileController(ByteArrayViewProfileManager* viewProfileManager,
+                          QWidget* parentWidget,
+                          KXMLGUIClient* guiClient);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS: // update slots
-    void onViewProfileChanged( const Kasten::ByteArrayViewProfile::Id& viewProfileId );
-    void onLocalSyncStateChanged( Kasten::LocalSyncState localSyncState );
+private Q_SLOTS: // update slots
+    void onViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
+    void onLocalSyncStateChanged(Kasten::LocalSyncState localSyncState);
 
     void onViewProfilesChanged();
 
-  private Q_SLOTS: // action slots
+private Q_SLOTS: // action slots
     void onCreateNewActionTriggered();
     void onResetChangesActionTriggered();
     void onSaveChangesActionTriggered();
-    void onViewProfileTriggered( QAction* action );
+    void onViewProfileTriggered(QAction* action);
 
-  private:
+private:
     KXMLGUIClient* mGuiClient;
     ByteArrayViewProfileManager* mViewProfileManager;
     QWidget* mParentWidget;

@@ -26,12 +26,10 @@
 #include "checksumview.h"
 #include "checksumtool.h"
 
+namespace Kasten {
 
-namespace Kasten
-{
-
-ChecksumToolView::ChecksumToolView( ChecksumTool* tool )
- : mWidget( new ChecksumView(tool) )
+ChecksumToolView::ChecksumToolView(ChecksumTool* tool)
+    : mWidget(new ChecksumView(tool))
 {
 }
 

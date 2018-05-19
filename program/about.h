@@ -26,7 +26,6 @@
 // KF5
 #include <KAboutData>
 
-
 class OktetaAboutData : public KAboutData
 {
 public:

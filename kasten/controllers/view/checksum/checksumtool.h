@@ -41,28 +41,25 @@ namespace QCA {
 class Initializer;
 }
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class ByteArrayView;
 
-
 class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     ChecksumTool();
     ~ChecksumTool() override;
 
-  public: // AbstractTool API
+public: // AbstractTool API
 //     virtual AbstractModel* targetModel() const;
     QString title() const override;
 
-    void setTargetModel( AbstractModel* model ) override;
+    void setTargetModel(AbstractModel* model) override;
 
-  public: // status
+public: // status
     QString checkSum() const;
     int algorithmId() const;
     bool isApplyable() const; // candidate for AbstractTool API
@@ -70,42 +67,42 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
 
     QList<AbstractByteArrayChecksumAlgorithm*> algorithmList() const;
 
-  public:
+public:
     AbstractByteArrayChecksumParameterSet* parameterSet();
 
-  public Q_SLOTS: // actions
+public Q_SLOTS: // actions
     void calculateChecksum();
 
-    void setAlgorithm( int algorithmId );
+    void setAlgorithm(int algorithmId);
     // TODO: hack, see checksum source
     void resetSourceTool();
 
-  Q_SIGNALS:
-    void checksumChanged( const QString& checksum );
-    void uptodateChanged( bool isUptodate );
-    void isApplyableChanged( bool isApplyable );  // candidate for AbstractTool API
+Q_SIGNALS:
+    void checksumChanged(const QString& checksum);
+    void uptodateChanged(bool isUptodate);
+    void isApplyableChanged(bool isApplyable); // candidate for AbstractTool API
 
-  private:
+private:
     void checkUptoDate();
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void onSelectionChanged();
     void onSourceChanged();
     void onSourceDestroyed();
 
-  private: // created data
+private: // created data
     QString mCheckSum;
-    bool mChecksumUptodate :1;
-    bool mSourceByteArrayModelUptodate :1;
+    bool mChecksumUptodate : 1;
+    bool mSourceByteArrayModelUptodate : 1;
 
-  private: // settings
+private: // settings
     QList<AbstractByteArrayChecksumAlgorithm*> mAlgorithmList;
 #ifdef HAVE_QCA2
     QCA::Initializer* mQcaInitializer;
 #endif
     int mAlgorithmId;
 
-  private: // sources
+private: // sources
     ByteArrayView* mByteArrayView;
     // current
     Okteta::AbstractByteArrayModel* mByteArrayModel;
@@ -114,7 +111,6 @@ class OKTETAKASTENCONTROLLERS_EXPORT ChecksumTool : public AbstractTool
     Okteta::AddressRange mSourceSelection;
     Okteta::AbstractByteArrayModel* mSourceByteArrayModel;
 };
-
 
 inline int ChecksumTool::algorithmId() const { return mAlgorithmId; }
 inline QString ChecksumTool::checkSum()  const { return mCheckSum; }

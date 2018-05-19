@@ -27,26 +27,24 @@
 #include <QMetaType>
 #include <QString>
 
-
 struct Utf8
 {
-  public:
-    Utf8( QChar v );
+public:
+    Utf8(QChar v);
     Utf8();
 
-  public:
+public:
     QString toString() const;
 
-  public:
+public:
     QChar value;
 };
 
-
 inline Utf8::Utf8() {}
-inline Utf8::Utf8( QChar v ) : value( v ) {}
+inline Utf8::Utf8(QChar v) : value(v) {}
 
-inline QString Utf8::toString() const { return QString( value ); }
+inline QString Utf8::toString() const { return QString(value); }
 
-Q_DECLARE_METATYPE( Utf8 )
+Q_DECLARE_METATYPE(Utf8)
 
 #endif

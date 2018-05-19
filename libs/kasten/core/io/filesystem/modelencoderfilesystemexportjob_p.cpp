@@ -28,24 +28,23 @@
 #include <QCoreApplication>
 #include <QFile>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 void ModelEncoderFileSystemExportJobPrivate::startExportToFile()
 {
-    Q_Q( ModelEncoderFileSystemExportJob );
+    Q_Q(ModelEncoderFileSystemExportJob);
 
     ModelStreamEncodeThread* exportThread =
-        new ModelStreamEncodeThread( q, file(), model(), selection(), mEncoder );
+        new ModelStreamEncodeThread(q, file(), model(), selection(), mEncoder);
     exportThread->start();
-    while( ! exportThread->wait(100) )
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+    while (!exportThread->wait(100)) {
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
+    }
 
     const bool success = exportThread->success();
     delete exportThread;
 
-    q->completeExport( success );
+    q->completeExport(success);
 }
 
 }

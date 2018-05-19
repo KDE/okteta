@@ -23,41 +23,40 @@
 
 #include <KLocalizedString>
 
-template<typename T>
+template <typename T>
 QString BoolDataInformationMethods<T>::staticValueString(T value, int base)
 {
-    if (value == 0)
+    if (value == 0) {
         return i18nc("boolean value", "false");
-    else if (value == 1)
+    } else if (value == 1) {
         return i18nc("boolean value", "true");
-    else
-    {
-        //we can reuse the uint valueString() here
+    } else {
+        // we can reuse the uint valueString() here
         QString num = UIntDataInformationMethods<T>::staticValueString(value, base);
         return i18nc("boolean value with actual value", "true (%1)", num);
     }
 }
 
-template<typename T>
+template <typename T>
 inline QWidget* BoolDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
     return UIntDataInformationMethods<T>::staticCreateEditWidget(parent);
 }
 
-template<typename T>
+template <typename T>
 inline QVariant BoolDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
     return UIntDataInformationMethods<T>::staticDataFromWidget(w);
 }
 
-template<typename T>
+template <typename T>
 inline void BoolDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
     UIntDataInformationMethods<T>::staticSetWidgetData(value, w);
 }
 
-//explicitly instantiate all valid classes (c++-faq-lite 35.12)
-template class BoolDataInformationMethods<quint8> ;
-template class BoolDataInformationMethods<quint16> ;
-template class BoolDataInformationMethods<quint32> ;
-template class BoolDataInformationMethods<quint64> ;
+// explicitly instantiate all valid classes (c++-faq-lite 35.12)
+template class BoolDataInformationMethods<quint8>;
+template class BoolDataInformationMethods<quint16>;
+template class BoolDataInformationMethods<quint32>;
+template class BoolDataInformationMethods<quint64>;

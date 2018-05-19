@@ -32,53 +32,53 @@
 // C++
 #include <time.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 ByteArrayRandomDataGeneratorSettings::ByteArrayRandomDataGeneratorSettings()
-  : size( 256 )
+    : size(256)
 {
 }
 
-
-//TODO: support insert to selection, cmp. fill in painting program
+// TODO: support insert to selection, cmp. fill in painting program
 // there are two kinds of generated datam fixed size (e.g. sequence) and endless size?
 // perhaps by option fill selection? or a separate menu entry fill, which only works on selections?
 
 ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
-  : AbstractModelDataGenerator(
+    : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Random Data..."),
         QStringLiteral("application/octet-stream"),
-        DynamicGeneration )
+        DynamicGeneration)
 {}
-
 
 // TODO: use different RNG, with multiple characteristics and offer them in the config
 QMimeData* ByteArrayRandomDataGenerator::generateData()
 {
-    qsrand( (unsigned int)time(nullptr) );
+    qsrand((unsigned int)time(nullptr));
 
     const int insertDataSize = mSettings.size;
-    QByteArray insertData( insertDataSize, '\0' );
+    QByteArray insertData(insertDataSize, '\0');
 
-    for( int i=0; i < insertDataSize; ++i )
+    for (int i = 0; i < insertDataSize; ++i) {
         insertData[i] = qrand() % 256; // TODO: modulo is expensive, even if easy to use
 
+    }
+
     QMimeData* mimeData = new QMimeData;
-    mimeData->setData( mimeType(), insertData );
+    mimeData->setData(mimeType(), insertData);
 
-// TODO: a method to get the description of the change, e.g. 
+// TODO: a method to get the description of the change, e.g.
 #if 0
-    Okteta::ChangesDescribable *changesDescribable =
-        qobject_cast<Okteta::ChangesDescribable*>( mByteArrayModel );
+    Okteta::ChangesDescribable* changesDescribable =
+        qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
-    if( changesDescribable )
-        changesDescribable->openGroupedChange( i18n("RandomData inserted.") );
-    mByteArrayView->insert( insertData );
+    if (changesDescribable) {
+        changesDescribable->openGroupedChange(i18n("RandomData inserted."));
+    }
+    mByteArrayView->insert(insertData);
 //     mByteArrayModel->replace( filteredSection, filterResult );
-    if( changesDescribable )
+    if (changesDescribable) {
         changesDescribable->closeGroupedChange();
+    }
 #endif
 
     return mimeData;

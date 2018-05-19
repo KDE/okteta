@@ -26,19 +26,17 @@
 // lib
 #include <kasten/okteta/oktetakastengui_export.h>
 
-template<class T> class QList;
+template <class T> class QList;
 
-
-namespace Kasten
-{
+namespace Kasten {
 class AbstractModelStreamEncoder;
-
 
 class OKTETAKASTENGUI_EXPORT ByteArrayStreamEncoderFactory
 {
-  private:
+private:
     ByteArrayStreamEncoderFactory();
-  public:
+
+public:
     static QList<AbstractModelStreamEncoder*> createStreamEncoders();
 
 };

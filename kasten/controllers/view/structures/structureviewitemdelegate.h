@@ -25,15 +25,15 @@
 
 #include <QStyledItemDelegate>
 
-class StructureViewItemDelegate: public QStyledItemDelegate
+class StructureViewItemDelegate : public QStyledItemDelegate
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     explicit StructureViewItemDelegate(QObject* parent = nullptr);
     ~StructureViewItemDelegate() override;
 
-  public: // QStyledItemDelegate API
+public: // QStyledItemDelegate API
     void setModelData(QWidget* editor, QAbstractItemModel* model,
                       const QModelIndex& index) const override;
     void setEditorData(QWidget* editor, const QModelIndex& index) const override;

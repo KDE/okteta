@@ -16,30 +16,30 @@
 // lib
 #include <abstractbytearrayfilterparameterset.h>
 
-
 //// ADAPT(start)
 //// rename the class name from Template_ByteArrayFilterParameterSet to a proper name, both here and in the .cpp file
 //// e.g. MyByteArrayFilterParameterSet
 class Template_ByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 //// ADAPT(end)
 {
-  public:
+public:
     Template_ByteArrayFilterParameterSet();
 
     ~Template_ByteArrayFilterParameterSet() override;
 
-  public: // AbstractByteArrayFilterParameterSet API
+public: // AbstractByteArrayFilterParameterSet API
     const char* id() const override;
 
 //// ADAPT(start)
 //// declare the parameters and the corresponding getters and setters
-  public: // getters
+
+public: // getters
     unsigned char level() const;
 
-  public: // setters
-    void setLevel( unsigned int level );
+public: // setters
+    void setLevel(unsigned int level);
 
-  protected: // parameters
+protected: // parameters
     unsigned char mLevel;
 //// ADAPT(end)
 };

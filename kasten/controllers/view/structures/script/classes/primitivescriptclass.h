@@ -20,7 +20,6 @@
  *   License along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #ifndef PRIMITIVESCRIPTCLASS_H
 #define PRIMITIVESCRIPTCLASS_H
 
@@ -29,6 +28,7 @@
 class PrimitiveScriptClass : public DefaultScriptClass
 {
     Q_DISABLE_COPY(PrimitiveScriptClass)
+
 public:
     PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo);
     ~PrimitiveScriptClass() override;
@@ -41,6 +41,7 @@ protected:
     bool setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value) override;
 
     static QScriptValue Primitive_proto_toString(QScriptContext* ctx, QScriptEngine* eng);
+
 protected:
     QScriptString s_value;
     QScriptString s_type;
@@ -62,7 +63,7 @@ protected:
     QScriptString s_float;
     QScriptString s_double;
     QScriptString s_char;
-    //TODO Bitfields probably better in own class?
+    // TODO Bitfields probably better in own class?
 
     QScriptValue mPrimitivePrototype;
 };

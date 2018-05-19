@@ -22,7 +22,6 @@
 
 #include "nobytearraychecksumparameterset.h"
 
-
 NoByteArrayChecksumParameterSet::NoByteArrayChecksumParameterSet()
 {}
 

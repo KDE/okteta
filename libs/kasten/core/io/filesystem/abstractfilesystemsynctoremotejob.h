@@ -28,42 +28,39 @@
 
 class QFile;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelFileSystemSynchronizer;
 
 class AbstractFileSystemSyncToRemoteJobPrivate;
 
-
 class KASTENCORE_EXPORT AbstractFileSystemSyncToRemoteJob : public AbstractSyncToRemoteJob
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit AbstractFileSystemSyncToRemoteJob( AbstractModelFileSystemSynchronizer* synchronizer );
+public:
+    explicit AbstractFileSystemSyncToRemoteJob(AbstractModelFileSystemSynchronizer* synchronizer);
 
     ~AbstractFileSystemSyncToRemoteJob() override;
 
-  public: // KJob API
+public: // KJob API
     void start() override;
 
-  protected: // API to be implemented
+protected: // API to be implemented
     virtual void startWriteToFile() = 0;
 
-  protected:
+protected:
     AbstractModelFileSystemSynchronizer* synchronizer() const;
     QFile* file() const;
 
-  protected:
-    void completeWrite( bool success );
+protected:
+    void completeWrite(bool success);
 
-  protected:
-    Q_PRIVATE_SLOT( d_func(), void syncToRemote() )
+protected:
+    Q_PRIVATE_SLOT(d_func(), void syncToRemote())
 
-  protected:
-    Q_DECLARE_PRIVATE( AbstractFileSystemSyncToRemoteJob )
+protected:
+    Q_DECLARE_PRIVATE(AbstractFileSystemSyncToRemoteJob)
 };
 
 }

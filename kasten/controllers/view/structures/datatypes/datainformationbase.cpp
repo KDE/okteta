@@ -94,12 +94,12 @@ bool DataInformationBase::isDataInformationWithDummyChildren() const
 
 TopLevelDataInformation* DataInformationBase::asTopLevel()
 {
-    //multiple inheritance -> we can't use reinterpret_cast -> we have to include the file
+    // multiple inheritance -> we can't use reinterpret_cast -> we have to include the file
     return isTopLevel() ? static_cast<TopLevelDataInformation*>(this) : nullptr;
 }
 
 const TopLevelDataInformation* DataInformationBase::asTopLevel() const
 {
-    //multiple inheritance -> we can't use reinterpret_cast -> we have to include the file
+    // multiple inheritance -> we can't use reinterpret_cast -> we have to include the file
     return isTopLevel() ? static_cast<const TopLevelDataInformation*>(this) : nullptr;
 }

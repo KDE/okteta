@@ -29,36 +29,33 @@
 // Qt
 #include <QTest>
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 static const Address Start = 32;
 static const Address End = 78;
-static const Size Width = End-Start+1;
+static const Size Width = End - Start + 1;
 
 static const Address ChangeStorageOffset = 23;
 
-
 AbstractPieceTableChange* RemovePieceTableChangeAbstractPieceTableChangeIfTest::createPieceTableChange()
 {
-    const Piece removedPiece( AddressRange::fromWidth(Start+ChangeStorageOffset,Width), Piece::ChangeStorage );
+    const Piece removedPiece(AddressRange::fromWidth(Start + ChangeStorageOffset, Width), Piece::ChangeStorage);
     RemovePieceTableChange* pieceTableChange =
-        new RemovePieceTableChange( AddressRange(Start,End), PieceList(removedPiece) );
+        new RemovePieceTableChange(AddressRange(Start, End), PieceList(removedPiece));
 
     return pieceTableChange;
 }
-void RemovePieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable( PieceTable* pieceTable )
+void RemovePieceTableChangeAbstractPieceTableChangeIfTest::changePieceTable(PieceTable* pieceTable)
 {
-    pieceTable->remove( AddressRange(Start,End) );
+    pieceTable->remove(AddressRange(Start, End));
 }
 
 void RemovePieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange(
-       AbstractPieceTableChange *pieceTableChange )
+    AbstractPieceTableChange* pieceTableChange)
 {
     delete pieceTableChange;
 }
 
 }
 
-QTEST_MAIN( KPieceTable::RemovePieceTableChangeAbstractPieceTableChangeIfTest )
+QTEST_MAIN(KPieceTable::RemovePieceTableChangeAbstractPieceTableChangeIfTest)

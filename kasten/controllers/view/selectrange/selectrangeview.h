@@ -34,31 +34,28 @@ class QPushButton;
 
 class QCheckBox;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class SelectRangeTool;
 
-
 class SelectRangeView : public AbstractToolWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit SelectRangeView( SelectRangeTool* tool, QWidget* parent = nullptr );
+public:
+    explicit SelectRangeView(SelectRangeTool* tool, QWidget* parent = nullptr);
     ~SelectRangeView() override;
 
-  public:
+public:
     SelectRangeTool* tool() const;
 
-  private Q_SLOTS: // gui
+private Q_SLOTS: // gui
     void onSelectButtonClicked();
 
-  private Q_SLOTS: // tool
-    void onApplyableChanged( bool isApplyable );
+private Q_SLOTS: // tool
+    void onApplyableChanged(bool isApplyable);
 
-  private:
+private:
     SelectRangeTool* mTool;
 
     Okteta::AddressComboBox* mStartEdit;
@@ -67,7 +64,6 @@ class SelectRangeView : public AbstractToolWidget
     QCheckBox* mBackwardsCheckBox;
     QPushButton* mSelectButton;
 };
-
 
 inline SelectRangeTool* SelectRangeView::tool() const { return mTool; }
 

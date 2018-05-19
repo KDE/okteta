@@ -39,60 +39,58 @@ class QCheckBox;
 class QPushButton;
 class QVBoxLayout;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KAbstractFindDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit KAbstractFindDialog( QWidget* parent = nullptr );
+public:
+    explicit KAbstractFindDialog(QWidget* parent = nullptr);
     ~KAbstractFindDialog() override;
 
-  public: // set
-    void setDirection( KFindDirection Direction );
-    void setInSelection( bool InSelection );
+public: // set
+    void setDirection(KFindDirection Direction);
+    void setInSelection(bool InSelection);
 
-  public: // get 
+public: // get
     QByteArray data() const;
     bool fromCursor() const;
     bool inSelection() const;
     Qt::CaseSensitivity caseSensitivity() const;
     KFindDirection direction() const;
 
-  public Q_SLOTS:
-    void setCharCodec( const QString& codecName );
+public Q_SLOTS:
+    void setCharCodec(const QString& codecName);
 
-  protected: // QWidget API
-    void showEvent( QShowEvent *e ) override;
+protected: // QWidget API
+    void showEvent(QShowEvent* e) override;
 
-  protected:
+protected:
     void setFindButton(const QString& buttonText, const QString& buttonIconName,
-                       const QString& buttonToolTip, const QString& buttonWhatsThis );
-    void setFindButtonEnabled( bool enabled );
+                       const QString& buttonToolTip, const QString& buttonWhatsThis);
+    void setFindButtonEnabled(bool enabled);
     void setupFindBox();
-    void setupOperationBox( QGroupBox *operationBox = nullptr );
-    void setupCheckBoxes( QCheckBox *optionCheckBox = nullptr );
+    void setupOperationBox(QGroupBox* operationBox = nullptr);
+    void setupCheckBoxes(QCheckBox* optionCheckBox = nullptr);
 
-  protected: // API to be implemented
+protected: // API to be implemented
     virtual void onFindButtonClicked();
     virtual void rememberCurrentSettings();
 
-  private Q_SLOTS:
-    void onSearchDataChanged( const QByteArray &ata );
-    void onSearchDataFormatChanged( int Format );
+private Q_SLOTS:
+    void onSearchDataChanged(const QByteArray& ata);
+    void onSearchDataFormatChanged(int Format);
     void forwardFindButtonClicked();
 
-  private:
+private:
     QVBoxLayout* MainWidgetLayout;
     Okteta::ByteArrayComboBox* SearchDataEdit;
-    QCheckBox *BackwardsCheckBox;
-    QCheckBox *AtCursorCheckBox;
-    QCheckBox *SelectedCheckBox;
-    QCheckBox *WholeWordsCheckBox;
-    QCheckBox *CaseSensitiveCheckBox;
+    QCheckBox* BackwardsCheckBox;
+    QCheckBox* AtCursorCheckBox;
+    QCheckBox* SelectedCheckBox;
+    QCheckBox* WholeWordsCheckBox;
+    QCheckBox* CaseSensitiveCheckBox;
     QPushButton* FindButton;
 };
 

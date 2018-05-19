@@ -25,60 +25,52 @@
 // Qt
 #include <QString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 static const Byte octalDigitsFilledLimit = 32;
 
 unsigned int OctalByteCodec::encodingWidth() const { return 3; }
 Byte OctalByteCodec::digitsFilledLimit() const { return octalDigitsFilledLimit; }
 
-
-void OctalByteCodec::encode( QString& digits, unsigned int pos, Byte byte ) const
+void OctalByteCodec::encode(QString& digits, unsigned int pos, Byte byte) const
 {
-    digits[pos++] = QLatin1Char( '0'+(byte>>6) );
-    digits[pos++] = QLatin1Char( '0'+((byte>>3)&0x07) );
-    digits[pos] =   QLatin1Char( '0'+((byte)   &0x07) );
+    digits[pos++] = QLatin1Char('0' + (byte >> 6));
+    digits[pos++] = QLatin1Char('0' + ((byte >> 3) & 0x07));
+    digits[pos] =   QLatin1Char('0' + ((byte)      & 0x07));
 }
 
-
-void OctalByteCodec::encodeShort( QString& digits, unsigned int pos, Byte byte ) const
+void OctalByteCodec::encodeShort(QString& digits, unsigned int pos, Byte byte) const
 {
-    const unsigned char firstDigitValue = byte>>6;
-    if( firstDigitValue > 0 )
-        digits[pos++] = QLatin1Char( '0'+firstDigitValue );
-    const unsigned char secondDigitValue = (byte>>3) & 0x07;
-    if( secondDigitValue > 0 || firstDigitValue > 0 )
-        digits[pos++] = QLatin1Char( '0'+secondDigitValue );
+    const unsigned char firstDigitValue = byte >> 6;
+    if (firstDigitValue > 0) {
+        digits[pos++] = QLatin1Char('0' + firstDigitValue);
+    }
+    const unsigned char secondDigitValue = (byte >> 3) & 0x07;
+    if (secondDigitValue > 0 || firstDigitValue > 0) {
+        digits[pos++] = QLatin1Char('0' + secondDigitValue);
+    }
     const unsigned char lastDigitValue = byte & 0x07;
-    digits[pos] = QLatin1Char( '0'+lastDigitValue );
+    digits[pos] = QLatin1Char('0' + lastDigitValue);
 }
 
-
-bool OctalByteCodec::isValidDigit( unsigned char digit ) const
+bool OctalByteCodec::isValidDigit(unsigned char digit) const
 {
     return ('0' <= digit && digit <= '7');
 }
 
-
-bool OctalByteCodec::turnToValue( unsigned char* digit ) const
+bool OctalByteCodec::turnToValue(unsigned char* digit) const
 {
-    if( isValidDigit(*digit) )
-    {
+    if (isValidDigit(*digit)) {
         *digit -= '0';
         return true;
     }
     return false;
 }
 
-
-bool OctalByteCodec::appendDigit( Byte* byte, unsigned char digit ) const
+bool OctalByteCodec::appendDigit(Byte* byte, unsigned char digit) const
 {
-    if( turnToValue(&digit) )
-    {
+    if (turnToValue(&digit)) {
         Byte _byte = *byte;
-        if( _byte < octalDigitsFilledLimit )
-        {
+        if (_byte < octalDigitsFilledLimit) {
             _byte <<= 3;
             _byte += digit;
             *byte = _byte;
@@ -88,8 +80,7 @@ bool OctalByteCodec::appendDigit( Byte* byte, unsigned char digit ) const
     return false;
 }
 
-
-void OctalByteCodec::removeLastDigit( Byte* byte ) const
+void OctalByteCodec::removeLastDigit(Byte* byte) const
 {
     *byte >>= 3;
 }

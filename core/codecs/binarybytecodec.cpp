@@ -25,57 +25,54 @@
 // Qt
 #include <QString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 static const Byte binaryDigitsFilledLimit = 128;
 
 unsigned int BinaryByteCodec::encodingWidth() const { return 8; }
 Byte BinaryByteCodec::digitsFilledLimit() const { return binaryDigitsFilledLimit; }
 
-void BinaryByteCodec::encode( QString& digits, unsigned int pos, Byte byte ) const
+void BinaryByteCodec::encode(QString& digits, unsigned int pos, Byte byte) const
 {
-    for( Byte mask = 1<<7; mask > 0; mask >>= 1 )
-        digits[pos++] = QLatin1Char( (byte & mask) ? '1' : '0' );
+    for (Byte mask = 1 << 7; mask > 0; mask >>= 1) {
+        digits[pos++] = QLatin1Char((byte & mask) ? '1' : '0');
+    }
 }
 
-void BinaryByteCodec::encodeShort( QString& digits, unsigned int pos, Byte byte ) const
+void BinaryByteCodec::encodeShort(QString& digits, unsigned int pos, Byte byte) const
 {
-    Byte mask = 1<<7;
+    Byte mask = 1 << 7;
     // find first set bit, at last break on LSB
-    for( ; mask > 1; mask >>= 1 )
-        if( byte & mask )
+    for (; mask > 1; mask >>= 1) {
+        if (byte & mask) {
             break;
+        }
+    }
+
     // now set the
-    for( ; mask > 0; mask >>= 1 )
-        digits[pos++] = QLatin1Char( (byte & mask) ? '1' : '0' );
+    for (; mask > 0; mask >>= 1) {
+        digits[pos++] = QLatin1Char((byte & mask) ? '1' : '0');
+    }
 }
 
-
-bool BinaryByteCodec::isValidDigit( unsigned char digit ) const
+bool BinaryByteCodec::isValidDigit(unsigned char digit) const
 {
     return digit == '0' || digit == '1';
 }
 
-
-bool BinaryByteCodec::turnToValue( unsigned char* digit ) const
+bool BinaryByteCodec::turnToValue(unsigned char* digit) const
 {
-    if( isValidDigit(*digit) )
-    {
+    if (isValidDigit(*digit)) {
         *digit -= '0';
         return true;
     }
     return false;
 }
 
-
-bool BinaryByteCodec::appendDigit( Byte* byte, unsigned char digit ) const
+bool BinaryByteCodec::appendDigit(Byte* byte, unsigned char digit) const
 {
-    if( turnToValue(&digit) )
-    {
+    if (turnToValue(&digit)) {
         Byte _byte = *byte;
-        if( _byte < binaryDigitsFilledLimit )
-        {
+        if (_byte < binaryDigitsFilledLimit) {
             _byte <<= 1;
             _byte += digit;
             *byte = _byte;
@@ -85,8 +82,7 @@ bool BinaryByteCodec::appendDigit( Byte* byte, unsigned char digit ) const
     return false;
 }
 
-
-void BinaryByteCodec::removeLastDigit( Byte* byte ) const
+void BinaryByteCodec::removeLastDigit(Byte* byte) const
 {
     *byte >>= 1;
 }

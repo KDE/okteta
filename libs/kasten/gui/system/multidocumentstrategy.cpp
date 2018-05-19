@@ -23,105 +23,102 @@
 #include "multidocumentstrategy.h"
 #include "multidocumentstrategy_p.h"
 
+namespace Kasten {
 
-namespace Kasten
+MultiDocumentStrategy::MultiDocumentStrategy(DocumentManager* documentManager,
+                                             ViewManager* viewManager)
+    : AbstractDocumentStrategy(new MultiDocumentStrategyPrivate(this,
+                                                                documentManager,
+                                                                viewManager))
 {
-
-MultiDocumentStrategy::MultiDocumentStrategy( DocumentManager* documentManager,
-                                              ViewManager* viewManager )
-  : AbstractDocumentStrategy( new MultiDocumentStrategyPrivate(this,
-                                                               documentManager,
-                                                               viewManager) )
-{
-    Q_D( MultiDocumentStrategy );
+    Q_D(MultiDocumentStrategy);
 
     d->init();
 }
 
 QList<AbstractDocument*> MultiDocumentStrategy::documents() const
 {
-    Q_D( const MultiDocumentStrategy );
+    Q_D(const MultiDocumentStrategy);
 
     return d->documents();
 }
 
 QStringList MultiDocumentStrategy::supportedRemoteTypes() const
 {
-    Q_D( const MultiDocumentStrategy );
+    Q_D(const MultiDocumentStrategy);
 
     return d->supportedRemoteTypes();
 }
 
-bool MultiDocumentStrategy::canClose( AbstractDocument* document ) const
+bool MultiDocumentStrategy::canClose(AbstractDocument* document) const
 {
-    Q_D( const MultiDocumentStrategy );
+    Q_D(const MultiDocumentStrategy);
 
-    return d->canClose( document );
+    return d->canClose(document);
 }
 
-bool MultiDocumentStrategy::canCloseAllOther( AbstractDocument* document ) const
+bool MultiDocumentStrategy::canCloseAllOther(AbstractDocument* document) const
 {
-     Q_D( const MultiDocumentStrategy );
+    Q_D(const MultiDocumentStrategy);
 
-   return d->canCloseAllOther( document );
+    return d->canCloseAllOther(document);
 }
 
 bool MultiDocumentStrategy::canCloseAll() const
 {
-    Q_D( const MultiDocumentStrategy );
+    Q_D(const MultiDocumentStrategy);
 
     return d->canCloseAll();
 }
 
 void MultiDocumentStrategy::createNew()
 {
-    Q_D( MultiDocumentStrategy );
+    Q_D(MultiDocumentStrategy);
 
     d->createNew();
 }
 
 void MultiDocumentStrategy::createNewFromClipboard()
 {
-    Q_D( MultiDocumentStrategy );
+    Q_D(MultiDocumentStrategy);
 
     d->createNewFromClipboard();
 }
 
-void MultiDocumentStrategy::createNewWithGenerator( AbstractModelDataGenerator* generator )
+void MultiDocumentStrategy::createNewWithGenerator(AbstractModelDataGenerator* generator)
 {
-    Q_D( MultiDocumentStrategy );
+    Q_D(MultiDocumentStrategy);
 
-    d->createNewWithGenerator( generator );
+    d->createNewWithGenerator(generator);
 }
 
-void MultiDocumentStrategy::load( const QUrl& url )
+void MultiDocumentStrategy::load(const QUrl& url)
 {
-    Q_D( MultiDocumentStrategy );
+    Q_D(MultiDocumentStrategy);
 
-    d->load( url );
+    d->load(url);
 }
 
 void MultiDocumentStrategy::closeAll()
 {
-    Q_D( MultiDocumentStrategy );
+    Q_D(MultiDocumentStrategy);
 
     d->closeAll();
 }
 
-void MultiDocumentStrategy::closeAllOther( AbstractDocument* document )
+void MultiDocumentStrategy::closeAllOther(AbstractDocument* document)
 {
-    Q_D( MultiDocumentStrategy );
+    Q_D(MultiDocumentStrategy);
 
-    d->closeAllOther( document );
+    d->closeAllOther(document);
 }
 
-void MultiDocumentStrategy::closeDocument( AbstractDocument* document )
+void MultiDocumentStrategy::closeDocument(AbstractDocument* document)
 {
-    Q_D( MultiDocumentStrategy );
+    Q_D(MultiDocumentStrategy);
 
-    d->closeDocument( document );
+    d->closeDocument(document);
 }
-
 
 MultiDocumentStrategy::~MultiDocumentStrategy()
 {

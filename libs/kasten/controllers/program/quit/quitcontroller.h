@@ -30,29 +30,26 @@
 
 class KXmlGuiWindow;
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class KProgram;
 
-
 class KASTENCONTROLLERS_EXPORT QuitController : public AbstractXmlGuiController
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    QuitController( KProgram *program, KXmlGuiWindow *window );
+public:
+    QuitController(KProgram* program, KXmlGuiWindow* window);
 
-  public: // AbstractXmlGuiController API
-    void setTargetModel( AbstractModel* model ) override;
+public: // AbstractXmlGuiController API
+    void setTargetModel(AbstractModel* model) override;
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void quit();
 
-  private:
+private:
 //     KProgram *Program;
-    KXmlGuiWindow *mMainWindow;
+    KXmlGuiWindow* mMainWindow;
 };
 
 }

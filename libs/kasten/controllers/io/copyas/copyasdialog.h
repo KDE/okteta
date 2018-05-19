@@ -26,34 +26,31 @@
 // Qt
 #include <QDialog>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelStreamEncoderConfigEditor;
 class AbstractSelectionView;
 class AbstractModelSelection;
 class AbstractModel;
 
-
 class CopyAsDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    CopyAsDialog( const QString& remoteTypeName, AbstractModelStreamEncoderConfigEditor* configEditor,
-                  QWidget* parent = nullptr );
+public:
+    CopyAsDialog(const QString& remoteTypeName, AbstractModelStreamEncoderConfigEditor* configEditor,
+                 QWidget* parent = nullptr);
 
     ~CopyAsDialog() override;
 
-  public:
-    void setData( AbstractModel* model, const AbstractModelSelection* selection );
+public:
+    void setData(AbstractModel* model, const AbstractModelSelection* selection);
 
-  private Q_SLOTS:
+private Q_SLOTS:
 //     void onSelectorChanged( int index );
 //     void onOffsetChanged( const QString &text );
 
-  private:
+private:
     AbstractModelStreamEncoderConfigEditor* mConfigEditor;
     AbstractSelectionView* mPreviewView;
 };

@@ -30,6 +30,7 @@ class DataInformationWithDummyChildren;
 class DummyDataInformation : public DataInformation
 {
     DATAINFORMATION_CLONE(DummyDataInformation, DataInformation), mIndex(d.mIndex) {}
+
 public:
     explicit DummyDataInformation(DataInformationBase* parent, const QString& name = QString());
     ~DummyDataInformation() override {}
@@ -48,13 +49,11 @@ public:
     bool isDummy() const override;
     QVariant data(int column, int role) const override;
 
-
     bool canHaveChildren() const override { return false; }
     unsigned int childCount() const override { return 0; }
     DataInformation* childAt(unsigned int) const override { Q_ASSERT(false); return nullptr; }
     BitCount64 childPosition(const DataInformation*, Okteta::Address) const override { Q_ASSERT(false); return 0; }
     int indexOf(const DataInformation* const) const override { Q_ASSERT(false); return -1; }
-
 
     inline void setDummyIndex(uint newIndex) { mIndex = newIndex; }
     inline uint dummyIndex() const { return mIndex; }
@@ -62,6 +61,7 @@ public:
 private:
     QScriptClass* scriptClass(ScriptHandlerInfo*) const override { Q_ASSERT(false); return nullptr; }
     QString typeNameImpl() const override;
+
 private:
     uint mIndex;
     DataInformationWithDummyChildren* parentHelper() const;
@@ -74,9 +74,11 @@ class DataInformationWithDummyChildren : public DataInformation
 {
 protected:
     DataInformationWithDummyChildren(const DataInformationWithDummyChildren& d) : DataInformation(d) {}
+
 public:
     explicit DataInformationWithDummyChildren(const QString& name, DataInformationBase* parent = nullptr)
-            : DataInformation(name, parent) {}
+        : DataInformation(name, parent)
+    {}
     ~DataInformationWithDummyChildren() override {}
 
     /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/

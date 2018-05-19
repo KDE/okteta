@@ -30,39 +30,39 @@
 #include <QScriptEngine>
 #include <QScriptValueIterator>
 
-namespace ScriptValueConverter
-{
+namespace ScriptValueConverter {
 
 DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
-        DataInformation* parent)
+                         DataInformation* parent)
 {
-    //TODO Q_CHECK_PTR(parent)
+    // TODO Q_CHECK_PTR(parent)
     const ParserInfo info(name, logger, parent, value.engine());
-    return toDataInformation(value, info); //could be NULL
+    return toDataInformation(value, info); // could be NULL
 }
 
 QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
-        DataInformation* parent)
+                                        DataInformation* parent)
 {
-    //TODO Q_CHECK_PTR(parent);
+    // TODO Q_CHECK_PTR(parent);
     QVector<DataInformation*> ret;
     QScriptValueIterator it(value);
     const bool isArray = value.isArray();
-    while (it.hasNext())
-    {
+    while (it.hasNext()) {
         it.next();
-        if (isArray && it.name() == QLatin1String("length"))
-            continue; //skip the length property of arrays
+        if (isArray && it.name() == QLatin1String("length")) {
+            continue; // skip the length property of arrays
+        }
         const ParserInfo info(it.name(), logger, parent, value.engine());
         DataInformation* inf = toDataInformation(it.value(), info);
 
-        if (inf)
+        if (inf) {
             ret.append(inf);
-        else //TODO remove the null check once parent must be nonnull
+        } else { // TODO remove the null check once parent must be nonnull
             logger->info(parent ? parent->fullObjectPath() : QString()).nospace()
                 << "Could not convert property '" << it.name() << "'.";
+        }
     }
     return ret;
 }
 
-} //namespace ScriptValueConverter
+} // namespace ScriptValueConverter

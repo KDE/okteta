@@ -28,49 +28,45 @@
 // Qt
 #include <QByteArray>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class TestDocument;
-
 
 class TestDocumentFileSynchronizer : public AbstractModelFileSystemSynchronizer
 {
     Q_OBJECT
 
-  friend class TestDocumentFileLoadJob;
-  friend class TestDocumentFileConnectJob;
+    friend class TestDocumentFileLoadJob;
+    friend class TestDocumentFileConnectJob;
 
-  public:
-    explicit TestDocumentFileSynchronizer( const QByteArray& header = QByteArray() );
+public:
+    explicit TestDocumentFileSynchronizer(const QByteArray& header = QByteArray());
 
-  public: // AbstractModelSynchronizer API
-    AbstractLoadJob* startLoad( const QUrl& url ) override;
+public: // AbstractModelSynchronizer API
+    AbstractLoadJob* startLoad(const QUrl& url) override;
     AbstractSyncToRemoteJob* startSyncToRemote() override;
     AbstractSyncFromRemoteJob* startSyncFromRemote() override;
-    AbstractSyncWithRemoteJob* startSyncWithRemote( const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) override;
-    AbstractConnectJob* startConnect( AbstractDocument* document,
-                                      const QUrl& url, AbstractModelSynchronizer::ConnectOption option ) override;
+    AbstractSyncWithRemoteJob* startSyncWithRemote(const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
+    AbstractConnectJob* startConnect(AbstractDocument* document,
+                                     const QUrl& url, AbstractModelSynchronizer::ConnectOption option) override;
 
     AbstractDocument* document() const override;
 
     LocalSyncState localSyncState() const override;
 
-  public:
+public:
     const QByteArray& header() const;
 
-  protected:
-    void setDocument( TestDocument* document );
+protected:
+    void setDocument(TestDocument* document);
 
-  protected:
+protected:
     TestDocument* mDocument;
     const QByteArray mHeader;
 };
 
-
-inline  const QByteArray& TestDocumentFileSynchronizer::header() const { return mHeader; }
-inline void TestDocumentFileSynchronizer::setDocument( TestDocument* document ) { mDocument = document; }
+inline const QByteArray& TestDocumentFileSynchronizer::header() const { return mHeader; }
+inline void TestDocumentFileSynchronizer::setDocument(TestDocument* document) { mDocument = document; }
 
 }
 

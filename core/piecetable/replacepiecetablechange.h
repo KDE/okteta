@@ -27,47 +27,44 @@
 #include "abstractpiecetablechange.h"
 #include "piecelist.h"
 
-
-namespace KPieceTable
-{
+namespace KPieceTable {
 
 /** class
-  *@author Friedrich W. H. Kossebau
-  */
+ * @author Friedrich W. H. Kossebau
+ */
 
 class ReplacePieceTableChange : public AbstractPieceTableChange
 {
-  public:
-    ReplacePieceTableChange( const AddressRange& removeRange, Size insertLength, Address storageOffset,
-                             const PieceList& removedPieces );
+public:
+    ReplacePieceTableChange(const AddressRange& removeRange, Size insertLength, Address storageOffset,
+                            const PieceList& removedPieces);
 
     ~ReplacePieceTableChange() override;
 
-  public: // AbstractPieceTableChange API
+public: // AbstractPieceTableChange API
     int type() const override;
     QString description() const override;
     Address storageOffset() const override;
-    bool merge( const AbstractPieceTableChange* other ) override;
-    AddressRange apply( PieceTable* pieceTable ) const override;
-    AddressRange revert( PieceTable* pieceTable ) const override;
+    bool merge(const AbstractPieceTableChange* other) override;
+    AddressRange apply(PieceTable* pieceTable) const override;
+    AddressRange revert(PieceTable* pieceTable) const override;
     ArrayChangeMetrics metrics() const override;
     Size dataSize() const override;
 
-  protected:
+protected:
     AddressRange mRemoveRange;
     Size mInsertLength;
     Address mStorageOffset;
     PieceList mRemovedPieces;
 };
 
-
-inline ReplacePieceTableChange::ReplacePieceTableChange( const AddressRange& removeRange,
-                                                         Size insertLength, Address storageOffset,
-                                                         const PieceList& removedPieces )
-  : mRemoveRange( removeRange ),
-    mInsertLength( insertLength ),
-    mStorageOffset( storageOffset ),
-    mRemovedPieces( removedPieces )
+inline ReplacePieceTableChange::ReplacePieceTableChange(const AddressRange& removeRange,
+                                                        Size insertLength, Address storageOffset,
+                                                        const PieceList& removedPieces)
+    : mRemoveRange(removeRange)
+    , mInsertLength(insertLength)
+    , mStorageOffset(storageOffset)
+    , mRemovedPieces(removedPieces)
 {}
 
 }

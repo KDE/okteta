@@ -33,24 +33,19 @@
 #include <QDateTime>
 #include <QTemporaryFile>
 
+namespace Kasten {
 
-namespace Kasten
-{
 void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
 {
-    Q_Q( AbstractFileSystemSyncWithRemoteJob );
+    Q_Q(AbstractFileSystemSyncWithRemoteJob);
 
     bool isWorkFileOk;
-    if( mOption == AbstractModelSynchronizer::ReplaceRemote )
-    {
-        if( mUrl.isLocalFile() )
-        {
+    if (mOption == AbstractModelSynchronizer::ReplaceRemote) {
+        if (mUrl.isLocalFile()) {
             mWorkFilePath = mUrl.toLocalFile();
-            mFile = new QFile( mWorkFilePath );
-            isWorkFileOk = mFile->open( QIODevice::WriteOnly );
-        }
-        else
-        {
+            mFile = new QFile(mWorkFilePath);
+            isWorkFileOk = mFile->open(QIODevice::WriteOnly);
+        } else {
             QTemporaryFile* temporaryFile = new QTemporaryFile;
             isWorkFileOk = temporaryFile->open();
 
@@ -58,112 +53,99 @@ void AbstractFileSystemSyncWithRemoteJobPrivate::syncWithRemote()
             mTempFilePath = mWorkFilePath;
             mFile = temporaryFile;
         }
-        if( ! isWorkFileOk )
-            q->setErrorText( mFile->errorString() );
-    }
-    else
-    {
-        if( mUrl.isLocalFile() )
-        {
+        if (!isWorkFileOk) {
+            q->setErrorText(mFile->errorString());
+        }
+    } else {
+        if (mUrl.isLocalFile()) {
             // file protocol. We do not need the network
             mWorkFilePath = mUrl.toLocalFile();
             isWorkFileOk = true;
         } else {
             QTemporaryFile tmpFile;
-            tmpFile.setAutoRemove( false );
+            tmpFile.setAutoRemove(false);
             tmpFile.open();
 
             mWorkFilePath = tmpFile.fileName();
             mTempFilePath = mWorkFilePath;
 
             KIO::FileCopyJob* fileCopyJob =
-                KIO::file_copy( mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite );
-            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
+                KIO::file_copy(mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite);
+            KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 
             isWorkFileOk = fileCopyJob->exec();
-            if( ! isWorkFileOk )
-                q->setErrorText( fileCopyJob->errorString() );
+            if (!isWorkFileOk) {
+                q->setErrorText(fileCopyJob->errorString());
+            }
         }
 
-        if( isWorkFileOk )
-        {
-            mFile = new QFile( mWorkFilePath );
-            isWorkFileOk = mFile->open( QIODevice::ReadWrite );
-            if( ! isWorkFileOk )
-                q->setErrorText( mFile->errorString() );
+        if (isWorkFileOk) {
+            mFile = new QFile(mWorkFilePath);
+            isWorkFileOk = mFile->open(QIODevice::ReadWrite);
+            if (!isWorkFileOk) {
+                q->setErrorText(mFile->errorString());
+            }
         }
     }
 
-    if( isWorkFileOk )
-    {
+    if (isWorkFileOk) {
         const QUrl oldUrl = mSynchronizer->url();
-        if( oldUrl.isLocalFile() )
+        if (oldUrl.isLocalFile()) {
             mSynchronizer->stopFileWatching();
-        else
+        } else {
             mSynchronizer->stopNetworkWatching();
+        }
 
         q->startSyncWithRemote();
-    }
-    else
-    {
-        q->setError( KJob::KilledJobError );
+    } else {
+        q->setError(KJob::KilledJobError);
         delete mFile;
         // TODO: should we rather skip completeSync in successthe API?
         q->emitResult();
     }
 }
 
-
-void AbstractFileSystemSyncWithRemoteJobPrivate::completeSync( bool success )
+void AbstractFileSystemSyncWithRemoteJobPrivate::completeSync(bool success)
 {
-    Q_Q( AbstractFileSystemSyncWithRemoteJob );
+    Q_Q(AbstractFileSystemSyncWithRemoteJob);
 
-    if( success )
-    {
+    if (success) {
         mFile->close(); // TODO: when is new time written, on close?
-        QFileInfo fileInfo( *mFile );
-        mSynchronizer->setFileDateTimeOnSync( fileInfo.lastModified() );
+        QFileInfo fileInfo(*mFile);
+        mSynchronizer->setFileDateTimeOnSync(fileInfo.lastModified());
 
-        mSynchronizer->setUrl( mUrl );
+        mSynchronizer->setUrl(mUrl);
 
-        if( ! mUrl.isLocalFile() )
-        {
+        if (!mUrl.isLocalFile()) {
             KIO::FileCopyJob* fileCopyJob =
-                KIO::file_copy( QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite );
-            KJobWidgets::setWindow( fileCopyJob, /*mWidget*/nullptr );
+                KIO::file_copy(QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite);
+            KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 
             const bool uploaded = fileCopyJob->exec();
-            if( ! uploaded )
-            {
-                q->setError( KJob::KilledJobError );
-                q->setErrorText( fileCopyJob->errorString() );
-            }
-            else
-            {
+            if (!uploaded) {
+                q->setError(KJob::KilledJobError);
+                q->setErrorText(fileCopyJob->errorString());
+            } else {
                 mSynchronizer->startNetworkWatching();
-                mSynchronizer->setRemoteState( RemoteUnknown );
+                mSynchronizer->setRemoteState(RemoteUnknown);
             }
-        }
-        else
-        {
+        } else {
             mSynchronizer->startFileWatching();
-            mSynchronizer->setRemoteState( RemoteInSync );
+            mSynchronizer->setRemoteState(RemoteInSync);
         }
 
-    }
-    else
-    {
-        q->setError( KJob::KilledJobError );
-        q->setErrorText( mFile->errorString() );
+    } else {
+        q->setError(KJob::KilledJobError);
+        q->setErrorText(mFile->errorString());
     }
 
     delete mFile;
 
-    if( ! mTempFilePath.isEmpty() )
-        QFile::remove( mTempFilePath );
+    if (!mTempFilePath.isEmpty()) {
+        QFile::remove(mTempFilePath);
+    }
 
     q->emitResult();
 }
 
 }
-

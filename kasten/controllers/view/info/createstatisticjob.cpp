@@ -27,35 +27,34 @@
 // Qt
 #include <QCoreApplication>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 static const int StatisticBlockSize = 100000;
 
 int CreateStatisticJob::exec()
 {
     // reset
-    memset( mByteCount, 0, 256*sizeof(int) );
+    memset(mByteCount, 0, 256 * sizeof(int));
 
     const Okteta::Address last = mByteArrayModel ? mSelection.end() : -1;
     Okteta::Address i = mByteArrayModel ? mSelection.start() : 0;
     Okteta::Address blockEnd = i;
-    while( i<=last )
-    {
+    while (i <= last) {
         blockEnd += StatisticBlockSize;
-        if( blockEnd > last )
+        if (blockEnd > last) {
             blockEnd = last;
+        }
 
-        for( ; i<=blockEnd; ++i )
+        for (; i <= blockEnd; ++i) {
             ++mByteCount[mByteArrayModel->byte(i)];
+        }
 
-        QCoreApplication::processEvents( QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers );
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
     }
 
     deleteLater(); // TODO: could be reused on next search
 
-    return ( mByteArrayModel ? mSelection.width() : -1 );
+    return (mByteArrayModel ? mSelection.width() : -1);
 }
 
 }

@@ -23,27 +23,25 @@
 #include "abstractdocumentstrategy.h"
 #include "abstractdocumentstrategy_p.h"
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 AbstractDocumentStrategy::AbstractDocumentStrategy()
-  : QObject()
-  , d_ptr( new AbstractDocumentStrategyPrivate(this) )
+    : QObject()
+    , d_ptr(new AbstractDocumentStrategyPrivate(this))
 
 {
 }
 
-AbstractDocumentStrategy::AbstractDocumentStrategy( AbstractDocumentStrategyPrivate* d )
-  : QObject()
-  , d_ptr( d )
+AbstractDocumentStrategy::AbstractDocumentStrategy(AbstractDocumentStrategyPrivate* d)
+    : QObject()
+    , d_ptr(d)
 
 {
 }
 
 AbstractDocumentStrategy::~AbstractDocumentStrategy()
 {
-  delete d_ptr;
+    delete d_ptr;
 }
 
 }

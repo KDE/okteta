@@ -28,34 +28,31 @@
 // Qt
 #include <QUrl>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class AbstractModelSynchronizerPrivate
 {
-  public:
-    explicit AbstractModelSynchronizerPrivate( AbstractModelSynchronizer* parent );
+public:
+    explicit AbstractModelSynchronizerPrivate(AbstractModelSynchronizer* parent);
 
     virtual ~AbstractModelSynchronizerPrivate();
 
-  public:
+public:
     const QUrl& url() const;
 
-  public:
-    void setUrl( const QUrl& url );
+public:
+    void setUrl(const QUrl& url);
 
-  protected:
+protected:
     AbstractModelSynchronizer* const q_ptr;
-    Q_DECLARE_PUBLIC( AbstractModelSynchronizer )
+    Q_DECLARE_PUBLIC(AbstractModelSynchronizer)
 
-  protected:
+protected:
     QUrl mUrl;
 };
 
-
-inline AbstractModelSynchronizerPrivate::AbstractModelSynchronizerPrivate( AbstractModelSynchronizer* parent )
-  : q_ptr( parent )
+inline AbstractModelSynchronizerPrivate::AbstractModelSynchronizerPrivate(AbstractModelSynchronizer* parent)
+    : q_ptr(parent)
 {
 }
 
@@ -63,12 +60,12 @@ inline AbstractModelSynchronizerPrivate::~AbstractModelSynchronizerPrivate() {}
 
 inline const QUrl& AbstractModelSynchronizerPrivate::url() const { return mUrl; }
 
-inline void AbstractModelSynchronizerPrivate::setUrl( const QUrl& url)
+inline void AbstractModelSynchronizerPrivate::setUrl(const QUrl& url)
 {
-    Q_Q( AbstractModelSynchronizer );
+    Q_Q(AbstractModelSynchronizer);
 
     mUrl = url;
-    emit q->urlChanged( url );
+    emit q->urlChanged(url);
 }
 
 }

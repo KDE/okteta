@@ -28,32 +28,30 @@
 // KF5
 #include <KLocalizedString>
 
-
-namespace Okteta
-{
+namespace Okteta {
 
 SInt16Codec::SInt16Codec()
-  : AbstractTypeCodec( i18nc("@label:textbox","Signed 16-bit") )
+    : AbstractTypeCodec(i18nc("@label:textbox", "Signed 16-bit"))
 {}
 
-QVariant SInt16Codec::value( const PODData& data, int* byteCount ) const
+QVariant SInt16Codec::value(const PODData& data, int* byteCount) const
 {
-    const qint16* pointer = (qint16*)data.pointer( 2 );
+    const qint16* pointer = (qint16*)data.pointer(2);
 
     *byteCount = pointer ? 2 : 0;
-    return pointer ? QVariant::fromValue<SInt16>( SInt16(*pointer) ) : QVariant();
+    return pointer ? QVariant::fromValue<SInt16>(SInt16(*pointer)) : QVariant();
 }
 
-QByteArray SInt16Codec::valueToBytes( const QVariant& value ) const
+QByteArray SInt16Codec::valueToBytes(const QVariant& value) const
 {
     const qint16 number = value.value<SInt16>().value;
 
-    return QByteArray( (const char*)&number, sizeof(qint16) );
+    return QByteArray((const char*)&number, sizeof(qint16));
 }
 
-bool SInt16Codec::areEqual( const QVariant& value, QVariant& otherValue ) const
+bool SInt16Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
-    return ( value.value<SInt16>().value == otherValue.value<SInt16>().value );
+    return (value.value<SInt16>().value == otherValue.value<SInt16>().value);
 }
 
 SInt16Codec::~SInt16Codec() {}

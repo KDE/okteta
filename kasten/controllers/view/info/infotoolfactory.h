@@ -28,17 +28,15 @@
 // Kasten core
 #include <kasten/abstracttoolfactory.h>
 
-
-namespace Kasten
-{
+namespace Kasten {
 
 class OKTETAKASTENCONTROLLERS_EXPORT InfoToolFactory : public AbstractToolFactory
 {
-  public:
+public:
     InfoToolFactory();
     ~InfoToolFactory() override;
 
-  public: // AbstractToolFactory API
+public: // AbstractToolFactory API
     AbstractTool* create() override;
 };
 

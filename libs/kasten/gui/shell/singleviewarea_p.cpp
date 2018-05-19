@@ -27,13 +27,12 @@
 #include <abstracttoolinlineview.h>
 #include <kasten/abstractdocument.h>
 
-namespace Kasten
-{
+namespace Kasten {
 
-SingleViewAreaPrivate::SingleViewAreaPrivate( SingleViewArea* parent )
-  : AbstractViewAreaPrivate( parent ),
-    mViewAreaBox( nullptr ),
-    mCurrentView( nullptr )
+SingleViewAreaPrivate::SingleViewAreaPrivate(SingleViewArea* parent)
+    : AbstractViewAreaPrivate(parent)
+    , mViewAreaBox(nullptr)
+    , mCurrentView(nullptr)
 {
 
 }
@@ -42,7 +41,7 @@ void SingleViewAreaPrivate::init()
 {
 //     Q_Q( SingleViewArea );
 
-    mViewAreaBox = new ViewAreaBox( nullptr ); //TODO: atm cannot replace this
+    mViewAreaBox = new ViewAreaBox(nullptr);   // TODO: atm cannot replace this
 
 //     TODO: get drag/drop events
 //     q->connect( mTabWidget, SIGNAL(testCanDecode(const QDragMoveEvent*,bool&)),
@@ -51,31 +50,30 @@ void SingleViewAreaPrivate::init()
 //                 SLOT(onDropEvent(QDropEvent*)) );
 }
 
-void SingleViewAreaPrivate::setCurrentToolInlineView( AbstractToolInlineView* view )
+void SingleViewAreaPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
     ToolInlineViewWidget* currentViewWidget =
-        qobject_cast<ToolInlineViewWidget*>( mViewAreaBox->bottomWidget() );
+        qobject_cast<ToolInlineViewWidget*>(mViewAreaBox->bottomWidget());
     AbstractToolInlineView* currentToolInlineView =
         currentViewWidget ? currentViewWidget->view() : nullptr;
 
-    if( currentToolInlineView != view )
-    {
+    if (currentToolInlineView != view) {
         ToolInlineViewWidget* toolInlineViewWidget =
-            view ? new ToolInlineViewWidget( view/*->widget()*/ ) : nullptr;
-        mViewAreaBox->setBottomWidget( toolInlineViewWidget );
+            view ? new ToolInlineViewWidget(view /*->widget()*/) : nullptr;
+        mViewAreaBox->setBottomWidget(toolInlineViewWidget);
     }
 
-    if( view )
+    if (view) {
         view->widget()->setFocus();
-    else
-        if( mCurrentView )
-            mCurrentView->setFocus();
+    } else if (mCurrentView) {
+        mCurrentView->setFocus();
+    }
 }
 
-void SingleViewAreaPrivate::setView( AbstractView* view )
+void SingleViewAreaPrivate::setView(AbstractView* view)
 {
     mCurrentView = view;
-    mViewAreaBox->setCentralWidget( view ? view->widget() : nullptr );
+    mViewAreaBox->setCentralWidget(view ? view->widget() : nullptr);
 }
 
 SingleViewAreaPrivate::~SingleViewAreaPrivate()
