@@ -35,4 +35,4 @@ void ByteArrayModelTest::testNothing()
 
 }
 
-QTEST_MAIN(Okteta::ByteArrayModelTest)
+QTEST_GUILESS_MAIN(Okteta::ByteArrayModelTest)

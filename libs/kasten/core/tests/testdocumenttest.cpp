@@ -134,4 +134,4 @@ void TestDocumentTest::testSetContentFlags()
     delete changedSpy;
 }
 
-QTEST_MAIN(TestDocumentTest)
+QTEST_GUILESS_MAIN(TestDocumentTest)

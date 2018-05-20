@@ -55,4 +55,4 @@ void InsertPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChang
 
 }
 
-QTEST_MAIN(KPieceTable::InsertPieceTableChangeAbstractPieceTableChangeIfTest)
+QTEST_GUILESS_MAIN(KPieceTable::InsertPieceTableChangeAbstractPieceTableChangeIfTest)

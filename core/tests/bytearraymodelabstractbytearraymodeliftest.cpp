@@ -46,4 +46,4 @@ void ByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(AbstractBy
 
 }
 
-QTEST_MAIN(Okteta::ByteArrayModelAbstractByteArrayModelIfTest)
+QTEST_GUILESS_MAIN(Okteta::ByteArrayModelAbstractByteArrayModelIfTest)

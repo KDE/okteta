@@ -42,4 +42,4 @@ void TextCharCodecCharCodecIfTest::deleteCodec(CharCodec* codec)
 
 }
 
-QTEST_MAIN(Okteta::TextCharCodecCharCodecIfTest)
+QTEST_GUILESS_MAIN(Okteta::TextCharCodecCharCodecIfTest)

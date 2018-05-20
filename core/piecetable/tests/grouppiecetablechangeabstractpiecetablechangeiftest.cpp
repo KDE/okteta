@@ -88,4 +88,4 @@ void GroupPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableChange
 
 }
 
-QTEST_MAIN(KPieceTable::GroupPieceTableChangeAbstractPieceTableChangeIfTest)
+QTEST_GUILESS_MAIN(KPieceTable::GroupPieceTableChangeAbstractPieceTableChangeIfTest)

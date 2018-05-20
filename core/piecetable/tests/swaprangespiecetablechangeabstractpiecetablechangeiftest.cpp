@@ -55,4 +55,4 @@ void SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest::deletePieceTableC
 
 }
 
-QTEST_MAIN(KPieceTable::SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest)
+QTEST_GUILESS_MAIN(KPieceTable::SwapRangesPieceTableChangeAbstractPieceTableChangeIfTest)

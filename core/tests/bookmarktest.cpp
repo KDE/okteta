@@ -66,4 +66,4 @@ void BookmarkTest::testMove()
     QCOMPARE(bookmark.offset(), Offset1 + Offset2);
 }
 
-QTEST_MAIN(BookmarkTest)
+QTEST_GUILESS_MAIN(BookmarkTest)

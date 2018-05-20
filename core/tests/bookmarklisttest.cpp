@@ -241,4 +241,4 @@ void BookmarkListTest::testAdjustToSwapped()
     }
 }
 
-QTEST_MAIN(BookmarkListTest)
+QTEST_GUILESS_MAIN(BookmarkListTest)

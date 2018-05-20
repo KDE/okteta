@@ -45,4 +45,4 @@ void PieceTableByteArrayModelVersionableIfTest::deleteVersionable(QObject* versi
 
 }
 
-QTEST_MAIN(Okteta::PieceTableByteArrayModelVersionableIfTest)
+QTEST_GUILESS_MAIN(Okteta::PieceTableByteArrayModelVersionableIfTest)

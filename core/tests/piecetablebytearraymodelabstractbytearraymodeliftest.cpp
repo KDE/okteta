@@ -46,4 +46,4 @@ void PieceTableByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(
 
 }
 
-QTEST_MAIN(Okteta::PieceTableByteArrayModelAbstractByteArrayModelIfTest)
+QTEST_GUILESS_MAIN(Okteta::PieceTableByteArrayModelAbstractByteArrayModelIfTest)

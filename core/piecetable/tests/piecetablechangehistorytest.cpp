@@ -205,4 +205,4 @@ void PieceTableChangeHistoryTest::testRevertBeforeChange()
 
 }
 
-QTEST_MAIN(KPieceTable::PieceTableChangeHistoryTest)
+QTEST_GUILESS_MAIN(KPieceTable::PieceTableChangeHistoryTest)

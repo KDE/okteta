@@ -757,4 +757,4 @@ void AddressRangeTest::testIsJoinable()
 
 }
 
-QTEST_MAIN(Okteta::AddressRangeTest)
+QTEST_GUILESS_MAIN(Okteta::AddressRangeTest)

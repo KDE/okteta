@@ -957,4 +957,4 @@ void PieceTableTest::testSwap()
 
 }
 
-QTEST_MAIN(KPieceTable::PieceTableTest)
+QTEST_GUILESS_MAIN(KPieceTable::PieceTableTest)

@@ -350,4 +350,4 @@ void PieceTest::testRemoveLocal()
 
 }
 
-QTEST_MAIN(KPieceTable::PieceTest)
+QTEST_GUILESS_MAIN(KPieceTable::PieceTest)

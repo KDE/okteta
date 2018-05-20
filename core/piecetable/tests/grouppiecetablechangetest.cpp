@@ -212,4 +212,4 @@ void GroupPieceTableChangeTest::testRevertBeforeChange()
 #endif
 }
 
-QTEST_MAIN(KPieceTable::GroupPieceTableChangeTest)
+QTEST_GUILESS_MAIN(KPieceTable::GroupPieceTableChangeTest)

@@ -48,4 +48,4 @@ void FixedSizeByteArrayModelAbstractByteArrayModelIfTest::deleteByteArrayModel(A
 
 }
 
-QTEST_MAIN(Okteta::FixedSizeByteArrayModelAbstractByteArrayModelIfTest)
+QTEST_GUILESS_MAIN(Okteta::FixedSizeByteArrayModelAbstractByteArrayModelIfTest)

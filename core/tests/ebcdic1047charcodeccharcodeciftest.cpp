@@ -41,4 +41,4 @@ void EBCDIC1047CharCodecCharCodecIfTest::deleteCodec(CharCodec* codec)
 
 }
 
-QTEST_MAIN(Okteta::EBCDIC1047CharCodecCharCodecIfTest)
+QTEST_GUILESS_MAIN(Okteta::EBCDIC1047CharCodecCharCodecIfTest)

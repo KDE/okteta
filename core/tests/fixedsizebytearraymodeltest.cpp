@@ -116,4 +116,4 @@ void KDataBufferIfTest::testCopy()
 */
 }
 
-QTEST_MAIN(Okteta::FixedSizeByteArrayModelTest)
+QTEST_GUILESS_MAIN(Okteta::FixedSizeByteArrayModelTest)

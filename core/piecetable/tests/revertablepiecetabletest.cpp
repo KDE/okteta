@@ -1020,4 +1020,4 @@ void RevertablePieceTableTest::testSwap()
 
 }
 
-QTEST_MAIN(KPieceTable::RevertablePieceTableTest)
+QTEST_GUILESS_MAIN(KPieceTable::RevertablePieceTableTest)

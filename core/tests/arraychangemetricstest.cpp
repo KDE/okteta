@@ -105,4 +105,4 @@ void ArrayChangeMetricsTest::testRevert()
 
 }
 
-QTEST_MAIN(Okteta::ArrayChangeMetricsTest)
+QTEST_GUILESS_MAIN(Okteta::ArrayChangeMetricsTest)

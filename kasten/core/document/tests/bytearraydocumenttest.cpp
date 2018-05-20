@@ -69,4 +69,4 @@ void ByteArrayDocumentTest::testSetTitle()
 
 }
 
-QTEST_MAIN(Kasten::ByteArrayDocumentTest)
+QTEST_GUILESS_MAIN(Kasten::ByteArrayDocumentTest)

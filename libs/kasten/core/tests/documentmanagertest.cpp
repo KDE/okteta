@@ -112,4 +112,4 @@ void DocumentManagerTest::testCanClose()
     delete documentManager;
 }
 
-QTEST_MAIN(DocumentManagerTest)
+QTEST_GUILESS_MAIN(DocumentManagerTest)

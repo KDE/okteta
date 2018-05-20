@@ -71,4 +71,4 @@ void TestPieceTableChangeTest::testMerge()
 
 }
 
-QTEST_MAIN(KPieceTable::TestPieceTableChangeTest)
+QTEST_GUILESS_MAIN(KPieceTable::TestPieceTableChangeTest)
