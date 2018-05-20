@@ -31,7 +31,6 @@
 #include <KStandardAction>
 #include <KXMLGUIClient>
 #include <KLocalizedString>
-#include <kcoreaddons_version.h>
 // Qt
 #include <QAction>
 
@@ -48,9 +47,6 @@ CloseController::CloseController(AbstractDocumentStrategy* documentStrategy,
 
     const QIcon documentCloseIcon = QIcon::fromTheme(QStringLiteral("document-close"));
     mCloseAction  = KStandardAction::close(this, SLOT(close()),  actionCollection);
-#if KCOREADDONS_VERSION < 0x053800
-    mCloseAction->setIcon(documentCloseIcon);
-#endif
     mCloseAction->setEnabled(false);
 
     if (supportMultiple) {

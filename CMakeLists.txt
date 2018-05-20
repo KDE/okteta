@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project( okteta )
 
-set(REQUIRED_ECM_VERSION "5.18.0")
+set(REQUIRED_ECM_VERSION "5.38.0")
 find_package(ECM ${REQUIRED_ECM_VERSION} REQUIRED NO_MODULE)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
@@ -61,7 +61,7 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
     ${ADDITIONAL_REQUIRED_QT_COMPONENTS}
 )
 
-set(REQUIRED_KF5_VERSION "5.18.0")
+set(REQUIRED_KF5_VERSION "5.38.0")
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED
     COMPONENTS
     Bookmarks
