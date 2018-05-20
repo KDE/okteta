@@ -22,12 +22,12 @@
 
 #include "reversebytearrayfilterparameterset.h"
 
-ReverseByteArrayFilterParameterSet::ReverseByteArrayFilterParameterSet() {}
+ReverseByteArrayFilterParameterSet::ReverseByteArrayFilterParameterSet() = default;
+
+ReverseByteArrayFilterParameterSet::~ReverseByteArrayFilterParameterSet() = default;
 
 const char* ReverseByteArrayFilterParameterSet::id() const { return "Reverse"; }
 
 bool ReverseByteArrayFilterParameterSet::invertsBits() const { return mInvertsBits; }
 
 void ReverseByteArrayFilterParameterSet::setInvertsBits(bool invertsBits) { mInvertsBits = invertsBits; }
-
-ReverseByteArrayFilterParameterSet::~ReverseByteArrayFilterParameterSet() {}

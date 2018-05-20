@@ -30,6 +30,8 @@ AbstractMouseController::AbstractMouseController(AbstractByteArrayView* view, Ab
 {
 }
 
+AbstractMouseController::~AbstractMouseController() = default;
+
 bool AbstractMouseController::handleMousePressEvent(QMouseEvent* mouseEvent)
 {
     return mParent ? mParent->handleMousePressEvent(mouseEvent) : false;
@@ -46,7 +48,5 @@ bool AbstractMouseController::handleMouseDoubleClickEvent(QMouseEvent* mouseEven
 {
     return mParent ? mParent->handleMouseDoubleClickEvent(mouseEvent) : false;
 }
-
-AbstractMouseController::~AbstractMouseController() {}
 
 }

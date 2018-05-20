@@ -52,7 +52,7 @@ public: // signal
                              int oldVersionIndex, int newVersionIndex) = 0;
 };
 
-inline ChangeHistory::~ChangeHistory() {}
+inline ChangeHistory::~ChangeHistory() = default;
 
 }
 

@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-CharsetConversionToolViewFactory::CharsetConversionToolViewFactory() {}
+CharsetConversionToolViewFactory::CharsetConversionToolViewFactory() = default;
+
+CharsetConversionToolViewFactory::~CharsetConversionToolViewFactory() = default;
 
 QString CharsetConversionToolViewFactory::iconName() const { return QStringLiteral("okteta"); }
 QString CharsetConversionToolViewFactory::title()    const { return i18nc("@title:window", "Charset Conversion"); }
@@ -41,7 +43,5 @@ AbstractToolView* CharsetConversionToolViewFactory::create(AbstractTool* tool)
 {
     return new CharsetConversionToolView(qobject_cast<CharsetConversionTool*>(tool));
 }
-
-CharsetConversionToolViewFactory::~CharsetConversionToolViewFactory() {}
 
 }

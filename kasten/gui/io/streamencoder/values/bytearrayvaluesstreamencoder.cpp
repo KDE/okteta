@@ -43,6 +43,8 @@ ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Values"), QStringLiteral("text/plain"))
 {}
 
+ByteArrayValuesStreamEncoder::~ByteArrayValuesStreamEncoder() = default;
+
 bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
                                                       const ByteArrayView* byteArrayView,
                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
@@ -79,7 +81,5 @@ bool ByteArrayValuesStreamEncoder::encodeDataToStream(QIODevice* device,
 
     return success;
 }
-
-ByteArrayValuesStreamEncoder::~ByteArrayValuesStreamEncoder() {}
 
 }

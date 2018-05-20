@@ -119,6 +119,8 @@ PODTableView::PODTableView(PODDecoderTool* tool, QWidget* parent)
     header->resizeSection(1, metrics.width(QStringLiteral("1.01234567890123456789e-111")) + 15);
 }
 
+PODTableView::~PODTableView() = default;
+
 Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
 {
     Q_UNUSED(sizeLeft);
@@ -207,7 +209,5 @@ void PODTableView::onCurrentRowChanged(const QModelIndex& current, const QModelI
         mTool->unmarkPOD();
     }
 }
-
-PODTableView::~PODTableView() {}
 
 }

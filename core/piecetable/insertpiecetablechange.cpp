@@ -31,6 +31,8 @@
 
 namespace KPieceTable {
 
+InsertPieceTableChange::~InsertPieceTableChange() = default;
+
 int InsertPieceTableChange::type() const { return InsertId; }
 
 QString InsertPieceTableChange::description() const
@@ -77,7 +79,5 @@ ArrayChangeMetrics InsertPieceTableChange::metrics() const
 }
 
 Size InsertPieceTableChange::dataSize() const { return mInsertLength; }
-
-InsertPieceTableChange::~InsertPieceTableChange() {}
 
 }

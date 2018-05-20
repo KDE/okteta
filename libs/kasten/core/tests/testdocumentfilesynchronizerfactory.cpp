@@ -31,7 +31,10 @@
 namespace Kasten {
 
 TestDocumentFileSynchronizerFactory::TestDocumentFileSynchronizerFactory(const QByteArray& header)
-    : mHeader(header) {}
+    : mHeader(header)
+{}
+
+TestDocumentFileSynchronizerFactory::~TestDocumentFileSynchronizerFactory() = default;
 
 // could be set to base class as value, is only one object per factory at runtime
 // and settable in desktop file
@@ -44,7 +47,5 @@ AbstractModelSynchronizer* TestDocumentFileSynchronizerFactory::createSynchroniz
 {
     return new TestDocumentFileSynchronizer(mHeader);
 }
-
-TestDocumentFileSynchronizerFactory::~TestDocumentFileSynchronizerFactory() {}
 
 }

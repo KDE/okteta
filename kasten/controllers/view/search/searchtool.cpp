@@ -47,6 +47,8 @@ SearchTool::SearchTool()
     setObjectName(QStringLiteral("Search"));
 }
 
+SearchTool::~SearchTool() = default;
+
 bool SearchTool::isApplyable() const
 {
     return (mByteArrayView && mByteArrayModel);
@@ -186,10 +188,6 @@ void SearchTool::doSearch(KFindDirection direction)
         }
     }
     mByteArrayView->setFocus();
-}
-
-SearchTool::~SearchTool()
-{
 }
 
 }

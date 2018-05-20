@@ -33,15 +33,13 @@ WidgetColumnStylist::WidgetColumnStylist(QWidget* parent)
 {
 }
 
+WidgetColumnStylist::~WidgetColumnStylist() = default;
+
 const QPalette& WidgetColumnStylist::palette() const
 {
     Q_D(const WidgetColumnStylist);
 
     return d->widget()->palette();
-}
-
-WidgetColumnStylist::~WidgetColumnStylist()
-{
 }
 
 }

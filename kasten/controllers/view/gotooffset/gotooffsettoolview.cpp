@@ -33,13 +33,13 @@ GotoOffsetToolView::GotoOffsetToolView(GotoOffsetTool* tool)
 {
 }
 
-QWidget* GotoOffsetToolView::widget()    const { return mWidget; }
-QString GotoOffsetToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* GotoOffsetToolView::tool() const { return mWidget->tool(); }
-
 GotoOffsetToolView::~GotoOffsetToolView()
 {
     delete mWidget;
 }
+
+QWidget* GotoOffsetToolView::widget()    const { return mWidget; }
+QString GotoOffsetToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* GotoOffsetToolView::tool() const { return mWidget->tool(); }
 
 }

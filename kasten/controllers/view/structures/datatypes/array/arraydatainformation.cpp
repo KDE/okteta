@@ -58,9 +58,7 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
     mData.reset(AbstractArrayData::newArrayData(length, childType->clone(), this));
 }
 
-ArrayDataInformation::~ArrayDataInformation()
-{
-}
+ArrayDataInformation::~ArrayDataInformation() = default;
 
 bool ArrayDataInformation::setArrayLength(uint newLength)
 {

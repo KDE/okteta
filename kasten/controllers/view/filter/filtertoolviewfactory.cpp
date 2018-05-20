@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-FilterToolViewFactory::FilterToolViewFactory() {}
+FilterToolViewFactory::FilterToolViewFactory() = default;
+
+FilterToolViewFactory::~FilterToolViewFactory() = default;
 
 QString FilterToolViewFactory::iconName() const { return QStringLiteral("okteta"); }
 QString FilterToolViewFactory::title()       const { return i18nc("@title:window", "Binary Filter"); }
@@ -41,7 +43,5 @@ AbstractToolView* FilterToolViewFactory::create(AbstractTool* tool)
 {
     return new FilterToolView(qobject_cast<FilterTool*>(tool));
 }
-
-FilterToolViewFactory::~FilterToolViewFactory() {}
 
 }

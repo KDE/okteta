@@ -31,26 +31,6 @@
 #include <QScriptEngine>
 #include <QLineEdit>
 
-DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
-{
-    if (idx >= (unsigned) mChildren.size()) {
-        return nullptr;
-    }
-    return mChildren[idx];
-}
-
-bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
-                                          Okteta::Address, BitCount64, quint8)
-{
-    Q_ASSERT_X(false, "DataInformationWithChildren::setData()", "this should never be called");
-    return false;
-}
-
-DataInformationWithChildren::~DataInformationWithChildren()
-{
-    qDeleteAll(mChildren);
-}
-
 DataInformationWithChildren::DataInformationWithChildren(const QString& name,
                                                          const QVector<DataInformation*>& children, DataInformation* parent)
     : DataInformation(name, parent)
@@ -65,6 +45,26 @@ DataInformationWithChildren::DataInformationWithChildren(const DataInformationWi
     : DataInformation(d)
     , mChildren(cloneList(d.mChildren, this))
 {
+}
+
+DataInformationWithChildren::~DataInformationWithChildren()
+{
+    qDeleteAll(mChildren);
+}
+
+DataInformation* DataInformationWithChildren::childAt(unsigned int idx) const
+{
+    if (idx >= (unsigned) mChildren.size()) {
+        return nullptr;
+    }
+    return mChildren[idx];
+}
+
+bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteArrayModel*,
+                                          Okteta::Address, BitCount64, quint8)
+{
+    Q_ASSERT_X(false, "DataInformationWithChildren::setData()", "this should never be called");
+    return false;
 }
 
 QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const

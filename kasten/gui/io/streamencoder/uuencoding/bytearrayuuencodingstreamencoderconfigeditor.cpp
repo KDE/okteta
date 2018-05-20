@@ -73,6 +73,8 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
     pageLayout->addRow(encodingTypeLabel, mEncodingSelect);
 }
 
+ByteArrayUuencodingStreamEncoderConfigEditor::~ByteArrayUuencodingStreamEncoderConfigEditor() = default;
+
 AbstractSelectionView* ByteArrayUuencodingStreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview(mEncoder);
@@ -84,10 +86,6 @@ void ByteArrayUuencodingStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.fileName = mFileNameEdit->text();
 
     mEncoder->setSettings(mSettings);
-}
-
-ByteArrayUuencodingStreamEncoderConfigEditor::~ByteArrayUuencodingStreamEncoderConfigEditor()
-{
 }
 
 }

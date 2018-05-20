@@ -30,6 +30,8 @@
 
 namespace Kasten {
 
+TestDocumentFileWriteThread::~TestDocumentFileWriteThread() = default;
+
 void TestDocumentFileWriteThread::run()
 {
     const QByteArray* byteArray = mDocument->data();
@@ -46,7 +48,5 @@ void TestDocumentFileWriteThread::run()
 
     emit documentWritten(mSuccess);
 }
-
-TestDocumentFileWriteThread::~TestDocumentFileWriteThread() {}
 
 }

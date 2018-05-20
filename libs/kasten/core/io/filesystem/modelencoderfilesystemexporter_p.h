@@ -60,7 +60,7 @@ inline ModelEncoderFileSystemExporterPrivate::ModelEncoderFileSystemExporterPriv
 {
 }
 
-inline ModelEncoderFileSystemExporterPrivate::~ModelEncoderFileSystemExporterPrivate() {}
+inline ModelEncoderFileSystemExporterPrivate::~ModelEncoderFileSystemExporterPrivate() = default;
 
 inline AbstractModelStreamEncoder* ModelEncoderFileSystemExporterPrivate::encoder() const { return mEncoder; }
 

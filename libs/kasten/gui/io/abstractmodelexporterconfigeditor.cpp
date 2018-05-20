@@ -29,6 +29,11 @@ AbstractModelExporterConfigEditor::AbstractModelExporterConfigEditor(QWidget* pa
     , d(nullptr)
 {}
 
+AbstractModelExporterConfigEditor::~AbstractModelExporterConfigEditor()
+{
+//     delete d;
+}
+
 bool AbstractModelExporterConfigEditor::isValid() const
 {
     return true;
@@ -37,11 +42,6 @@ bool AbstractModelExporterConfigEditor::isValid() const
 AbstractSelectionView* AbstractModelExporterConfigEditor::createPreviewView() const
 {
     return nullptr;
-}
-
-AbstractModelExporterConfigEditor::~AbstractModelExporterConfigEditor()
-{
-//     delete d;
 }
 
 }

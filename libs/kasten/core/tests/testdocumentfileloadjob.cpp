@@ -35,6 +35,8 @@ TestDocumentFileLoadJob::TestDocumentFileLoadJob(TestDocumentFileSynchronizer* s
     : AbstractFileSystemLoadJob(synchronizer, url)
 {}
 
+TestDocumentFileLoadJob::~TestDocumentFileLoadJob() = default;
+
 void TestDocumentFileLoadJob::startLoadFromFile()
 {
     TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
@@ -52,10 +54,6 @@ void TestDocumentFileLoadJob::startLoadFromFile()
     delete loadThread;
 
     setDocument(document);
-}
-
-TestDocumentFileLoadJob::~TestDocumentFileLoadJob()
-{
 }
 
 }

@@ -45,7 +45,7 @@ public:
     static const QString& codecName();
 };
 
-inline EBCDIC1047CharCodec::EBCDIC1047CharCodec() {}
+inline EBCDIC1047CharCodec::EBCDIC1047CharCodec() = default;
 
 inline EBCDIC1047CharCodec* EBCDIC1047CharCodec::create() { return new EBCDIC1047CharCodec(); }
 

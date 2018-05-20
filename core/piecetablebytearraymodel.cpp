@@ -36,6 +36,11 @@ PieceTableByteArrayModel::PieceTableByteArrayModel(int size, Byte fillByte, QObj
     , d(new PieceTableByteArrayModelPrivate(this, size, fillByte))
 {}
 
+PieceTableByteArrayModel::~PieceTableByteArrayModel()
+{
+    delete d;
+}
+
 Byte PieceTableByteArrayModel::byte(Address offset) const { return d->byte(offset); }
 Size PieceTableByteArrayModel::size()               const { return d->size(); }
 
@@ -171,11 +176,6 @@ void PieceTableByteArrayModel::doChanges(const QList<Okteta::ByteArrayChange>& c
                                          int oldVersionIndex, int newVersionIndex)
 {
     d->doChanges(changes, oldVersionIndex, newVersionIndex);
-}
-
-PieceTableByteArrayModel::~PieceTableByteArrayModel()
-{
-    delete d;
 }
 
 }

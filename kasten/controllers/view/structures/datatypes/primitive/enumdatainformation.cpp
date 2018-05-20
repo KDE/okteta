@@ -42,7 +42,7 @@ EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInfor
     mValue->setParent(this);
 }
 
-EnumDataInformation::~EnumDataInformation() {}
+EnumDataInformation::~EnumDataInformation() = default;
 
 QString EnumDataInformation::valueStringImpl() const
 {

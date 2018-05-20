@@ -33,6 +33,8 @@ OrByteArrayFilter::OrByteArrayFilter()
               "operand OR data"))
 {}
 
+OrByteArrayFilter::~OrByteArrayFilter() = default;
+
 AbstractByteArrayFilterParameterSet* OrByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool OrByteArrayFilter::filter(Okteta::Byte* result,
@@ -77,8 +79,4 @@ bool OrByteArrayFilter::filter(Okteta::Byte* result,
     }
 
     return true;
-}
-
-OrByteArrayFilter::~OrByteArrayFilter()
-{
 }

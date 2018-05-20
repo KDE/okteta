@@ -39,13 +39,13 @@ AbstractToolInlineView::AbstractToolInlineView()
     : d(new Private(this))
 {}
 
-void AbstractToolInlineView::activate()
-{
-}
-
 AbstractToolInlineView::~AbstractToolInlineView()
 {
     delete d;
+}
+
+void AbstractToolInlineView::activate()
+{
 }
 
 }

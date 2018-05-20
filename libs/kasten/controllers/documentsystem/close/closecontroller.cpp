@@ -73,6 +73,8 @@ CloseController::CloseController(AbstractDocumentStrategy* documentStrategy,
     }
 }
 
+CloseController::~CloseController() = default;
+
 void CloseController::setTargetModel(AbstractModel* model)
 {
     mDocument = model ? model->findBaseModel<AbstractDocument*>() : nullptr;
@@ -112,10 +114,6 @@ void CloseController::onDocumentsChanged()
 
     mCloseAllAction->setEnabled(hasDocuments);
     mCloseAllOtherAction->setEnabled(hasOtherDocuments);
-}
-
-CloseController::~CloseController()
-{
 }
 
 }

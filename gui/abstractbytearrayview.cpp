@@ -38,6 +38,11 @@ AbstractByteArrayView::AbstractByteArrayView(AbstractByteArrayViewPrivate* dd, Q
     d->init();
 }
 
+AbstractByteArrayView::~AbstractByteArrayView()
+{
+    delete d_ptr;
+}
+
 Okteta::AbstractByteArrayModel* AbstractByteArrayView::byteArrayModel() const
 {
     Q_D(const AbstractByteArrayView);
@@ -616,11 +621,6 @@ bool AbstractByteArrayView::viewportEvent(QEvent* event)
 {
     Q_D(AbstractByteArrayView);
     return d->viewportEvent(event);
-}
-
-AbstractByteArrayView::~AbstractByteArrayView()
-{
-    delete d_ptr;
 }
 
 }

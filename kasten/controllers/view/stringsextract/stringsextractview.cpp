@@ -180,6 +180,8 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     onStringSelectionChanged();
 }
 
+StringsExtractView::~StringsExtractView() = default;
+
 bool StringsExtractView::eventFilter(QObject* object, QEvent* event)
 {
     if (object == mContainedStringTableView) {
@@ -267,7 +269,5 @@ void StringsExtractView::onStringDoubleClicked(const QModelIndex& index)
         mTool->markString(mSortFilterProxyModel->mapToSource(index).row());
     }
 }
-
-StringsExtractView::~StringsExtractView() {}
 
 }

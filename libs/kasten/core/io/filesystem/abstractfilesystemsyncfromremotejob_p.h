@@ -72,7 +72,7 @@ inline AbstractFileSystemSyncFromRemoteJobPrivate::AbstractFileSystemSyncFromRem
 {
 }
 
-inline AbstractFileSystemSyncFromRemoteJobPrivate::~AbstractFileSystemSyncFromRemoteJobPrivate() {}
+inline AbstractFileSystemSyncFromRemoteJobPrivate::~AbstractFileSystemSyncFromRemoteJobPrivate() = default;
 
 inline QFile* AbstractFileSystemSyncFromRemoteJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system

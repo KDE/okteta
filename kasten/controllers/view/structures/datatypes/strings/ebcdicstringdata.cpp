@@ -33,7 +33,8 @@
 #include <KLocalizedString>
 #include <QVarLengthArray>
 
-EbcdicStringData::EbcdicStringData(StringDataInformation* parent) : StringData(parent)
+EbcdicStringData::EbcdicStringData(StringDataInformation* parent)
+    : StringData(parent)
     , mCodec(Okteta::EBCDIC1047CharCodec::create())
 {
 }

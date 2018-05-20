@@ -34,6 +34,16 @@ TestFileSystem::TestFileSystem(const QString& name)
     _createDir(mBasePath);
 }
 
+TestFileSystem::~TestFileSystem()
+{
+    _removeDir(mBasePath);
+
+//     removeDir(QStringLiteral("kdatetimetest/Africa"));
+//     removeDir( QStringLiteral("share/config"));
+//     removeDir( QStringLiteral("share") );
+//     QDir().rmpath(QDir::homePath() + "/.kde-unit-test/share");
+}
+
 void TestFileSystem::removeDir(const QString& subPath)
 {
     _removeDir(mBasePath + QLatin1Char('/') + subPath);
@@ -69,14 +79,4 @@ void TestFileSystem::_removeDir(const QString& path)
 void TestFileSystem::_createDir(const QString& path)
 {
     QVERIFY(QDir().mkpath(path));
-}
-
-TestFileSystem::~TestFileSystem()
-{
-    _removeDir(mBasePath);
-
-//     removeDir(QStringLiteral("kdatetimetest/Africa"));
-//     removeDir( QStringLiteral("share/config"));
-//     removeDir( QStringLiteral("share") );
-//     QDir().rmpath(QDir::homePath() + "/.kde-unit-test/share");
 }

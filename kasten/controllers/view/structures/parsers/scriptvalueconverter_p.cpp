@@ -265,9 +265,7 @@ ScriptValueConverter::ScriptValueChildrenParser::ScriptValueChildrenParser(const
 {
 }
 
-ScriptValueConverter::ScriptValueChildrenParser::~ScriptValueChildrenParser()
-{
-}
+ScriptValueConverter::ScriptValueChildrenParser::~ScriptValueChildrenParser() = default;
 
 DataInformation* ScriptValueConverter::ScriptValueChildrenParser::next()
 {

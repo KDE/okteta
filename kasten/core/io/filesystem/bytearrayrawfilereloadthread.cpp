@@ -41,6 +41,8 @@ ByteArrayRawFileReloadThread::ByteArrayRawFileReloadThread(QObject* parent, QFil
 {
 }
 
+ByteArrayRawFileReloadThread::~ByteArrayRawFileReloadThread() = default;
+
 void ByteArrayRawFileReloadThread::run()
 {
     const qint64 fileSize = mFile->size();
@@ -73,7 +75,5 @@ void ByteArrayRawFileReloadThread::run()
 
     emit documentReloaded(mSuccess);
 }
-
-ByteArrayRawFileReloadThread::~ByteArrayRawFileReloadThread() {}
 
 }

@@ -47,7 +47,7 @@ public: // signal
     virtual void zoomLevelChanged(double Level) = 0;
 };
 
-inline Zoomable::~Zoomable() {}
+inline Zoomable::~Zoomable() = default;
 
 }
 }

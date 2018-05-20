@@ -45,6 +45,8 @@ FileSystemBrowserView::FileSystemBrowserView(FileSystemBrowserTool* tool, QWidge
     QMetaObject::invokeMethod(this, "init", Qt::QueuedConnection);
 }
 
+FileSystemBrowserView::~FileSystemBrowserView() = default;
+
 void FileSystemBrowserView::init()
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
@@ -118,7 +120,5 @@ void FileSystemBrowserView::openFile(const KFileItem& fileItem)
 {
     mTool->open(fileItem.url());
 }
-
-FileSystemBrowserView::~FileSystemBrowserView() {}
 
 }

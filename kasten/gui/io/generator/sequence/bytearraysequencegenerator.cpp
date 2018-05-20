@@ -49,6 +49,8 @@ ByteArraySequenceGenerator::ByteArraySequenceGenerator()
         StaticGeneration)
 {}
 
+ByteArraySequenceGenerator::~ByteArraySequenceGenerator() = default;
+
 // TODO: optimize and check if pattern is just one byte, so memset can be used
 // TODO: see if copying larger chunks with memcpy is faster, so
 QMimeData* ByteArraySequenceGenerator::generateData()
@@ -84,7 +86,5 @@ QMimeData* ByteArraySequenceGenerator::generateData()
 
     return mimeData;
 }
-
-ByteArraySequenceGenerator::~ByteArraySequenceGenerator() {}
 
 }

@@ -35,6 +35,11 @@ AbstractLoadJob::AbstractLoadJob()
 {
 }
 
+AbstractLoadJob::~AbstractLoadJob()
+{
+    delete d_ptr;
+}
+
 AbstractDocument* AbstractLoadJob::document() const
 {
     Q_D(const AbstractLoadJob);
@@ -47,11 +52,6 @@ void AbstractLoadJob::setDocument(AbstractDocument* document)
     Q_D(AbstractLoadJob);
 
     d->setDocument(document);
-}
-
-AbstractLoadJob::~AbstractLoadJob()
-{
-    delete d_ptr;
 }
 
 }

@@ -80,6 +80,8 @@ ZoomSlider::ZoomSlider(QWidget* parent)
     setTargetModel(nullptr);
 }
 
+ZoomSlider::~ZoomSlider() = default;
+
 void ZoomSlider::setTargetModel(AbstractModel* model)
 {
     if (mModel) {
@@ -173,10 +175,6 @@ void ZoomSlider::onZoomLevelChange(double level)
         connect(mSlider, &QSlider::valueChanged,
                 this, &ZoomSlider::onSliderValueChanged);
     }
-}
-
-ZoomSlider::~ZoomSlider()
-{
 }
 
 }

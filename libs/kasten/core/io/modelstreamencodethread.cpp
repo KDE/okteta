@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
+ModelStreamEncodeThread::~ModelStreamEncodeThread() = default;
+
 void ModelStreamEncodeThread::run()
 {
     mSuccess = mEncoder->encodeToStream(mIODevice, mModel, mSelection);
 
     emit modelExported(mSuccess);
 }
-
-ModelStreamEncodeThread::~ModelStreamEncodeThread() {}
 
 }

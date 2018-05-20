@@ -49,6 +49,8 @@ inline Char8Validator::Char8Validator(Okteta::CharCodec* charCodec, QObject* par
     , mCharCodec(charCodec)
 {}
 
+Char8Validator::~Char8Validator() = default;
+
 QValidator::State Char8Validator::validate(QString& input, int& pos) const
 {
     Q_UNUSED(pos)
@@ -67,7 +69,6 @@ QValidator::State Char8Validator::validate(QString& input, int& pos) const
     return result;
 }
 
-Char8Validator::~Char8Validator() {}
 
 Char8Editor::Char8Editor(Okteta::CharCodec* charCodec, QWidget* parent)
     : QLineEdit(parent)
@@ -76,6 +77,8 @@ Char8Editor::Char8Editor(Okteta::CharCodec* charCodec, QWidget* parent)
     setClearButtonEnabled(true);
     setMaxLength(1);
 }
+
+Char8Editor::~Char8Editor() = default;
 
 void Char8Editor::setData(Char8 data)
 {
@@ -87,7 +90,5 @@ Char8 Char8Editor::data() const
     const QString t = text();
     return Char8(t.isEmpty() ? QChar(0) : t[0]);
 }
-
-Char8Editor::~Char8Editor() {}
 
 #include "char8editor.moc"

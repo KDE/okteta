@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
-CharsetConversionToolFactory::CharsetConversionToolFactory() {}
+CharsetConversionToolFactory::CharsetConversionToolFactory() = default;
+
+CharsetConversionToolFactory::~CharsetConversionToolFactory() = default;
 
 AbstractTool* CharsetConversionToolFactory::create()
 {
     return new CharsetConversionTool();
 }
-
-CharsetConversionToolFactory::~CharsetConversionToolFactory() {}
 
 }

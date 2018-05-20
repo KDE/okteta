@@ -32,6 +32,8 @@ AbstractFileSystemConnectJob::AbstractFileSystemConnectJob(AbstractModelFileSyst
 {
 }
 
+AbstractFileSystemConnectJob::~AbstractFileSystemConnectJob() = default;
+
 AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJob::synchronizer() const
 {
     Q_D(const AbstractFileSystemConnectJob);
@@ -63,10 +65,6 @@ void AbstractFileSystemConnectJob::complete(bool success)
     Q_D(AbstractFileSystemConnectJob);
 
     d->complete(success);
-}
-
-AbstractFileSystemConnectJob::~AbstractFileSystemConnectJob()
-{
 }
 
 }

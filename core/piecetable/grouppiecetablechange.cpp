@@ -32,6 +32,13 @@
 
 namespace KPieceTable {
 
+GroupPieceTableChange::~GroupPieceTableChange()
+{
+    while (!mChangeStack.isEmpty()) {
+        delete mChangeStack.pop();
+    }
+}
+
 int GroupPieceTableChange::type() const { return GroupId; }
 
 QString GroupPieceTableChange::description() const
@@ -168,13 +175,6 @@ ArrayChangeMetricsList GroupPieceTableChange::groupMetrics(bool reverted) const
 Size GroupPieceTableChange::dataSize() const
 {
     return mAppliedChangesDataSize;
-}
-
-GroupPieceTableChange::~GroupPieceTableChange()
-{
-    while (!mChangeStack.isEmpty()) {
-        delete mChangeStack.pop();
-    }
 }
 
 }

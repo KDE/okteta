@@ -49,6 +49,8 @@ BookmarkListModel::BookmarkListModel(BookmarksTool* tool, QObject* parent)
             this, &BookmarkListModel::onOffsetCodingChanged);
 }
 
+BookmarkListModel::~BookmarkListModel() = default;
+
 int BookmarkListModel::rowCount(const QModelIndex& parent) const
 {
     return (!parent.isValid()) ? mTool->bookmarksCount() : 0;
@@ -224,6 +226,5 @@ void BookmarkListModel::onHeadVersionDataChanged(const DocumentVersionData& vers
     emit dataChanged(index(headVersionIndex, CurrentColumnId), index(headVersionIndex, ChangeDescriptionColumnId));
 }
 #endif
-BookmarkListModel::~BookmarkListModel() {}
 
 }

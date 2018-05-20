@@ -24,6 +24,8 @@
 
 namespace Kasten {
 
+AbstractDocumentFactory::~AbstractDocumentFactory() = default;
+
 bool AbstractDocumentFactory::canCreateFromData(const QMimeData* mimeData)
 {
     Q_UNUSED(mimeData);
@@ -38,7 +40,5 @@ AbstractDocument* AbstractDocumentFactory::createFromData(const QMimeData* mimeD
 
     return nullptr;
 }
-
-AbstractDocumentFactory::~AbstractDocumentFactory() {}
 
 }

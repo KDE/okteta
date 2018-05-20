@@ -24,6 +24,8 @@ Template_ByteArrayChecksumParameterSet::Template_ByteArrayChecksumParameterSet()
 //// ADAPT(end)
 {}
 
+Template_ByteArrayChecksumParameterSet::~Template_ByteArrayChecksumParameterSet() = default;
+
 //// ADAPT(start)
 //// rename "Template_ParameterSetId" to a unique identifier,
 //// e.g. "MyParameterSet"
@@ -39,5 +41,3 @@ int Template_ByteArrayChecksumParameterSet::bitNumber() const { return mBitNumbe
 //// implement the setters for all parameters
 void Template_ByteArrayChecksumParameterSet::setBitNumber(int bitNumber) { mBitNumber = bitNumber; }
 //// ADAPT(end)
-
-Template_ByteArrayChecksumParameterSet::~Template_ByteArrayChecksumParameterSet() {}

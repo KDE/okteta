@@ -55,7 +55,7 @@ public: // signal
     virtual void selectedDataChanged(const AbstractModelSelection* modelSelection) = 0;
 };
 
-inline DataSelectable::~DataSelectable() {}
+inline DataSelectable::~DataSelectable() = default;
 
 }
 }

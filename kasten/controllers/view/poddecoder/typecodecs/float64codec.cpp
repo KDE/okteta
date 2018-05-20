@@ -34,6 +34,8 @@ Float64Codec::Float64Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Float 64-bit"))
 {}
 
+Float64Codec::~Float64Codec() = default;
+
 QVariant Float64Codec::value(const PODData& data, int* byteCount) const
 {
     const double* pointer = (double*)data.pointer(8);
@@ -53,7 +55,5 @@ bool Float64Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<Float64>().value == otherValue.value<Float64>().value);
 }
-
-Float64Codec::~Float64Codec() {}
 
 }

@@ -40,7 +40,7 @@ public:
     virtual AbstractModelDataGeneratorConfigEditor* tryCreateConfigEditor(AbstractModelDataGenerator* generator) const = 0;
 };
 
-inline AbstractModelDataGeneratorConfigEditorFactory::~AbstractModelDataGeneratorConfigEditorFactory() {}
+inline AbstractModelDataGeneratorConfigEditorFactory::~AbstractModelDataGeneratorConfigEditorFactory() = default;
 
 }
 

@@ -37,6 +37,4 @@ AbstractStructureParser::AbstractStructureParser(const QString& pluginName, cons
     }
 }
 
-AbstractStructureParser::~AbstractStructureParser()
-{
-}
+AbstractStructureParser::~AbstractStructureParser() = default;

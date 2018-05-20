@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
-ChecksumToolFactory::ChecksumToolFactory() {}
+ChecksumToolFactory::ChecksumToolFactory() = default;
+
+ChecksumToolFactory::~ChecksumToolFactory() = default;
 
 AbstractTool* ChecksumToolFactory::create()
 {
     return new ChecksumTool();
 }
-
-ChecksumToolFactory::~ChecksumToolFactory() {}
 
 }

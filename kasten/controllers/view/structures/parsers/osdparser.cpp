@@ -55,9 +55,7 @@ OsdParser::OsdParser(const QString& xml)
 {
 }
 
-OsdParser::~OsdParser()
-{
-}
+OsdParser::~OsdParser() = default;
 
 QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
 {
@@ -543,6 +541,8 @@ OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, const QDomElemen
 {
 }
 
+OsdChildrenParser::~OsdChildrenParser() = default;
+
 DataInformation* OsdChildrenParser::next()
 {
     Q_ASSERT(!mElem.isNull());
@@ -558,10 +558,6 @@ DataInformation* OsdChildrenParser::next()
     DataInformation* ret = OsdParser::parseElement(mElem, mInfo);
     mElem = mElem.nextSiblingElement();
     return ret;
-}
-
-OsdChildrenParser::~OsdChildrenParser()
-{
 }
 
 bool OsdChildrenParser::hasNext()
@@ -590,9 +586,7 @@ SingleElementOsdChildrenParser::SingleElementOsdChildrenParser(const OsdParserIn
     }
 }
 
-SingleElementOsdChildrenParser::~SingleElementOsdChildrenParser()
-{
-}
+SingleElementOsdChildrenParser::~SingleElementOsdChildrenParser() = default;
 
 DataInformation* SingleElementOsdChildrenParser::next()
 {

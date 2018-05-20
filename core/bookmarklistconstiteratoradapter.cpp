@@ -32,6 +32,8 @@ BookmarkListConstIteratorAdapter::BookmarkListConstIteratorAdapter(const Bookmar
 {
 }
 
+BookmarkListConstIteratorAdapter::~BookmarkListConstIteratorAdapter() = default;
+
 bool BookmarkListConstIteratorAdapter::hasNext() const { return mIterator.hasNext(); }
 bool BookmarkListConstIteratorAdapter::hasPrevious() const { return mIterator.hasPrevious(); }
 const Bookmark& BookmarkListConstIteratorAdapter::peekNext() const { return mIterator.peekNext(); }
@@ -77,7 +79,5 @@ const Bookmark& BookmarkListConstIteratorAdapter::previous() { return mIterator.
 
 void BookmarkListConstIteratorAdapter::toBack()  { mIterator.toBack(); }
 void BookmarkListConstIteratorAdapter::toFront() { mIterator.toFront(); }
-
-BookmarkListConstIteratorAdapter::~BookmarkListConstIteratorAdapter() {}
 
 }

@@ -29,6 +29,11 @@ AbstractModelStreamEncoderConfigEditor::AbstractModelStreamEncoderConfigEditor(Q
     , d(nullptr)
 {}
 
+AbstractModelStreamEncoderConfigEditor::~AbstractModelStreamEncoderConfigEditor()
+{
+//     delete d;
+}
+
 bool AbstractModelStreamEncoderConfigEditor::isValid() const
 {
     return true;
@@ -37,11 +42,6 @@ bool AbstractModelStreamEncoderConfigEditor::isValid() const
 AbstractSelectionView* AbstractModelStreamEncoderConfigEditor::createPreviewView() const
 {
     return nullptr;
-}
-
-AbstractModelStreamEncoderConfigEditor::~AbstractModelStreamEncoderConfigEditor()
-{
-//     delete d;
 }
 
 }

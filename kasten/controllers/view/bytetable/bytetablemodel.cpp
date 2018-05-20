@@ -50,6 +50,15 @@ ByteTableModel::ByteTableModel(QObject* parent)
     }
 }
 
+ByteTableModel::~ByteTableModel()
+{
+    for (int i = 0; i < NofOfValueCodings; ++i) {
+        delete mValueCodec[i];
+    }
+
+    delete mCharCodec;
+}
+
 void ByteTableModel::setUndefinedChar(QChar undefinedChar)
 {
     mUndefinedChar = undefinedChar;
@@ -141,15 +150,6 @@ QVariant ByteTableModel::headerData(int section, Qt::Orientation orientation, in
     }
 
     return result;
-}
-
-ByteTableModel::~ByteTableModel()
-{
-    for (int i = 0; i < NofOfValueCodings; ++i) {
-        delete mValueCodec[i];
-    }
-
-    delete mCharCodec;
 }
 
 }

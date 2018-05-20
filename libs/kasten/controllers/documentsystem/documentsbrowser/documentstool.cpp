@@ -42,6 +42,8 @@ DocumentsTool::DocumentsTool(DocumentManager* documentManager)
             this, &DocumentsTool::documentsClosing);
 }
 
+DocumentsTool::~DocumentsTool() = default;
+
 QList<AbstractDocument*> DocumentsTool::documents() const { return mDocumentManager->documents(); }
 
 QString DocumentsTool::title() const { return i18nc("@title:window", "Documents"); }
@@ -57,7 +59,5 @@ void DocumentsTool::setFocussedDocument(AbstractDocument* document)
 {
     mDocumentManager->requestFocus(document);
 }
-
-DocumentsTool::~DocumentsTool() {}
 
 }

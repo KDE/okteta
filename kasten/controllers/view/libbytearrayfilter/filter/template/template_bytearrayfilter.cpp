@@ -26,6 +26,8 @@ Template_ByteArrayFilter::Template_ByteArrayFilter()
 //// ADAPT(end)
 {}
 
+Template_ByteArrayFilter::~Template_ByteArrayFilter() = default;
+
 AbstractByteArrayFilterParameterSet* Template_ByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool Template_ByteArrayFilter::filter(Okteta::Byte* result,
@@ -57,5 +59,3 @@ bool Template_ByteArrayFilter::filter(Okteta::Byte* result,
 
     return success;
 }
-
-Template_ByteArrayFilter::~Template_ByteArrayFilter() {}

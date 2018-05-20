@@ -35,6 +35,11 @@ AbstractLinePopup::AbstractLinePopup(QWidget* parent)
     d->init();
 }
 
+AbstractLinePopup::~AbstractLinePopup()
+{
+    delete d;
+}
+
 void AbstractLinePopup::setPosition(const QPoint& globalPosition)
 {
     d->setPosition(globalPosition);
@@ -80,11 +85,6 @@ bool AbstractLinePopup::eventFilter(QObject* object, QEvent* event)
     }
 
     return false;
-}
-
-AbstractLinePopup::~AbstractLinePopup()
-{
-    delete d;
 }
 
 }

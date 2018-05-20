@@ -210,6 +210,12 @@ TextCharCodec::TextCharCodec(QTextCodec* textCodec)
 {
 }
 
+TextCharCodec::~TextCharCodec()
+{
+    delete mDecoder;
+    delete mEncoder;
+}
+
 bool TextCharCodec::canEncode(const QChar& _char) const
 {
     return mCodec->canEncode(_char);
@@ -248,12 +254,6 @@ const QString& TextCharCodec::name() const
     }
 
     return mName;
-}
-
-TextCharCodec::~TextCharCodec()
-{
-    delete mDecoder;
-    delete mEncoder;
 }
 
 }

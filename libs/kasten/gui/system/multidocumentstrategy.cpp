@@ -36,6 +36,8 @@ MultiDocumentStrategy::MultiDocumentStrategy(DocumentManager* documentManager,
     d->init();
 }
 
+MultiDocumentStrategy::~MultiDocumentStrategy() = default;
+
 QList<AbstractDocument*> MultiDocumentStrategy::documents() const
 {
     Q_D(const MultiDocumentStrategy);
@@ -118,10 +120,6 @@ void MultiDocumentStrategy::closeDocument(AbstractDocument* document)
     Q_D(MultiDocumentStrategy);
 
     d->closeDocument(document);
-}
-
-MultiDocumentStrategy::~MultiDocumentStrategy()
-{
 }
 
 }

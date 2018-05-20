@@ -42,6 +42,8 @@ BookmarkEditPopup::BookmarkEditPopup(QWidget* parent)
     setWidget(mBookmarkNameLineEdit);
 }
 
+BookmarkEditPopup::~BookmarkEditPopup() = default;
+
 QString BookmarkEditPopup::name() const { return mBookmarkNameLineEdit->text(); }
 
 void BookmarkEditPopup::setName(const QString& name)
@@ -55,7 +57,5 @@ void BookmarkEditPopup::onReturnPressed()
     setResult(1);
     close();
 }
-
-BookmarkEditPopup::~BookmarkEditPopup() {}
 
 }

@@ -149,6 +149,13 @@ OktetaPart::OktetaPart(QObject* parent,
     }
 }
 
+OktetaPart::~OktetaPart()
+{
+    qDeleteAll(mControllers);
+    delete mByteArrayView;
+    delete mDocument;
+}
+
 Kasten::PrintController* OktetaPart::printController() const { return mPrintController; }
 
 void OktetaPart::setReadWrite(bool readWrite)
@@ -222,11 +229,4 @@ void OktetaPart::onModified(Kasten::LocalSyncState state)
 {
     const bool isModified = (state != Kasten::LocalInSync);
     setModified(isModified);
-}
-
-OktetaPart::~OktetaPart()
-{
-    qDeleteAll(mControllers);
-    delete mByteArrayView;
-    delete mDocument;
 }

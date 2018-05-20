@@ -182,6 +182,8 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
             this, &CharsetConversionView::onConversionDone);
 }
 
+CharsetConversionView::~CharsetConversionView() = default;
+
 void CharsetConversionView::onApplyableChanged(bool isApplyable)
 {
     mConvertButton->setEnabled(isApplyable);
@@ -232,7 +234,5 @@ void CharsetConversionView::onConversionDone(bool success, int convertedBytesCou
 
     }
 }
-
-CharsetConversionView::~CharsetConversionView() {}
 
 }

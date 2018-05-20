@@ -31,6 +31,8 @@
 
 namespace Kasten {
 
+AbstractFileSystemSyncToRemoteJobPrivate::~AbstractFileSystemSyncToRemoteJobPrivate() = default;
+
 void AbstractFileSystemSyncToRemoteJobPrivate::syncToRemote()
 {
     Q_Q(AbstractFileSystemSyncToRemoteJob);
@@ -98,10 +100,6 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite(bool success)
     delete mFile;
 
     q->emitResult();
-}
-
-AbstractFileSystemSyncToRemoteJobPrivate::~AbstractFileSystemSyncToRemoteJobPrivate()
-{
 }
 
 }

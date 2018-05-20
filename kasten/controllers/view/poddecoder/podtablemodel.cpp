@@ -40,6 +40,8 @@ PODTableModel::PODTableModel(PODDecoderTool* tool, QObject* parent)
     connect(mTool, &PODDecoderTool::dataChanged, this, &PODTableModel::onDataChanged);
 }
 
+PODTableModel::~PODTableModel() = default;
+
 void PODTableModel::onDataChanged()
 {
     emit dataChanged(index(0, ValueId), index(mTool->podCount() - 1, ValueId));
@@ -194,7 +196,5 @@ bool PODTableModel::setData(const QModelIndex& index, const QVariant& data, int 
 
     return result;
 }
-
-PODTableModel::~PODTableModel() {}
 
 }

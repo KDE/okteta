@@ -104,16 +104,16 @@ CopyAsDialog::CopyAsDialog(const QString& remoteTypeName,
     setLayout(layout);
 }
 
+CopyAsDialog::~CopyAsDialog()
+{
+    delete mPreviewView;
+}
+
 void CopyAsDialog::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {
     if (mPreviewView) {
         mPreviewView->setData(model, selection);
     }
-}
-
-CopyAsDialog::~CopyAsDialog()
-{
-    delete mPreviewView;
 }
 
 }

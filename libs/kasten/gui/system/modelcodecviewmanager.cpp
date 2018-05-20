@@ -37,7 +37,14 @@
 
 namespace Kasten {
 
-ModelCodecViewManager::ModelCodecViewManager() {}
+ModelCodecViewManager::ModelCodecViewManager() = default;
+
+ModelCodecViewManager::~ModelCodecViewManager()
+{
+    qDeleteAll(mEncoderFactoryList);
+    qDeleteAll(mExporterFactoryList);
+    qDeleteAll(mGeneratorFactoryList);
+}
 
 void ModelCodecViewManager::setEncoderConfigEditorFactories(const QList<AbstractModelStreamEncoderConfigEditorFactory*>& factoryList)
 {
@@ -105,13 +112,6 @@ AbstractModelDataGeneratorConfigEditor* ModelCodecViewManager::createConfigEdito
     }
 
     return result;
-}
-
-ModelCodecViewManager::~ModelCodecViewManager()
-{
-    qDeleteAll(mEncoderFactoryList);
-    qDeleteAll(mExporterFactoryList);
-    qDeleteAll(mGeneratorFactoryList);
 }
 
 }

@@ -32,17 +32,17 @@
 
 namespace Kasten {
 
-StructuresManager::~StructuresManager()
-{
-    qDeleteAll(mDefs);
-}
-
 StructuresManager::StructuresManager(QObject* parent)
     : QObject(parent)
 {
     mConfig = KSharedConfig::openConfig(QStringLiteral("oktetastructuresrc"),
                                         KSharedConfig::FullConfig, QStandardPaths::ConfigLocation);
     reloadPaths();
+}
+
+StructuresManager::~StructuresManager()
+{
+    qDeleteAll(mDefs);
 }
 
 void StructuresManager::reloadPaths()

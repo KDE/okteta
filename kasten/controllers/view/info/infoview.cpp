@@ -129,6 +129,21 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     }
 }
 
+InfoView::~InfoView()
+{
+    QList<int> columnsWidth;
+    columnsWidth.reserve(StatisticTableModel::NoOfIds);
+    const QHeaderView* header = mStatisticTableView->header();
+    for (int i = 0; i < StatisticTableModel::NoOfIds; ++i) {
+        columnsWidth.append(header->sectionSize(i));
+    }
+
+    InfoViewSettings::setColumnsWidth(columnsWidth);
+    InfoViewSettings::setStyle(QApplication::style()->objectName());
+    InfoViewSettings::setFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont).toString());
+    InfoViewSettings::self()->save();
+}
+
 void InfoView::updateHeader()
 {
     mStatisticTableView->resizeColumnToContents(StatisticTableModel::ValueId);
@@ -155,21 +170,6 @@ void InfoView::setByteArraySize(int size)
 void InfoView::setFixedFontByGlobalSettings()
 {
     mStatisticTableView->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
-}
-
-InfoView::~InfoView()
-{
-    QList<int> columnsWidth;
-    columnsWidth.reserve(StatisticTableModel::NoOfIds);
-    const QHeaderView* header = mStatisticTableView->header();
-    for (int i = 0; i < StatisticTableModel::NoOfIds; ++i) {
-        columnsWidth.append(header->sectionSize(i));
-    }
-
-    InfoViewSettings::setColumnsWidth(columnsWidth);
-    InfoViewSettings::setStyle(QApplication::style()->objectName());
-    InfoViewSettings::setFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont).toString());
-    InfoViewSettings::self()->save();
 }
 
 }

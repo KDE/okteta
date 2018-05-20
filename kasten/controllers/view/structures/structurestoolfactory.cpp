@@ -27,17 +27,13 @@
 
 namespace Kasten {
 
-StructuresToolFactory::StructuresToolFactory()
-{
-}
+StructuresToolFactory::StructuresToolFactory() = default;
+
+StructuresToolFactory::~StructuresToolFactory() = default;
 
 AbstractTool* StructuresToolFactory::create()
 {
     return new StructuresTool();
-}
-
-StructuresToolFactory::~StructuresToolFactory()
-{
 }
 
 }

@@ -48,7 +48,7 @@ public: // signal
 //     virtual void viewFocusChanged( AbstractView *view ) = 0;
 };
 
-inline WidgetsDockable::~WidgetsDockable() {}
+inline WidgetsDockable::~WidgetsDockable() = default;
 
 }
 }

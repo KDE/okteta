@@ -35,6 +35,8 @@ Float64Editor::Float64Editor(QWidget* parent)
     setClearButtonEnabled(true);
 }
 
+Float64Editor::~Float64Editor() = default;
+
 void Float64Editor::setData(Float64 data)
 {
     setText(data.toString());
@@ -45,5 +47,3 @@ Float64 Float64Editor::data() const
 //     interpretText();
     return text().toDouble();
 }
-
-Float64Editor::~Float64Editor() {}

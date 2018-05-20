@@ -30,9 +30,9 @@
 
 namespace Kasten {
 
-StructuresToolViewFactory::StructuresToolViewFactory()
-{
-}
+StructuresToolViewFactory::StructuresToolViewFactory() = default;
+
+StructuresToolViewFactory::~StructuresToolViewFactory() = default;
 
 QString StructuresToolViewFactory::iconName() const
 {
@@ -54,10 +54,6 @@ SidePosition StructuresToolViewFactory::defaultPosition() const
 AbstractToolView* StructuresToolViewFactory::create(AbstractTool* tool)
 {
     return new StructuresToolView(qobject_cast<StructuresTool*> (tool));
-}
-
-StructuresToolViewFactory::~StructuresToolViewFactory()
-{
 }
 
 }

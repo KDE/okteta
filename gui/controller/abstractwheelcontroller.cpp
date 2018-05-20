@@ -29,10 +29,11 @@ AbstractWheelController::AbstractWheelController(AbstractWheelController* parent
 {
 }
 
+AbstractWheelController::~AbstractWheelController() = default;
+
 bool AbstractWheelController::handleWheelEvent(QWheelEvent* wheelEvent)
 {
     return mParent ? mParent->handleWheelEvent(wheelEvent) : false;
 }
-AbstractWheelController::~AbstractWheelController() {}
 
 }

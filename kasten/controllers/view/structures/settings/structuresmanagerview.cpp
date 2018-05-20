@@ -75,6 +75,8 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     buttonsLayout->addWidget(mAdvancedSelectionButton);
 }
 
+StructuresManagerView::~StructuresManagerView() = default;
+
 void StructuresManagerView::onGetNewStructuresClicked(const KNS3::Entry::List& changedEntries)
 {
     for (const KNS3::Entry& e : changedEntries) {
@@ -199,8 +201,4 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
     mStructuresSelector->updatePluginsState();
     mRebuildingPluginsList = false;
     reloadSelectedItems();
-}
-
-StructuresManagerView::~StructuresManagerView()
-{
 }

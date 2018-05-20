@@ -41,6 +41,8 @@ StatusBar::StatusBar(QWidget* parent)
     QStatusBar::addWidget(baseWidget, 1);
 }
 
+StatusBar::~StatusBar() = default;
+
 void StatusBar::addWidget(QWidget* widget)
 {
     mLayout->addWidget(widget);
@@ -64,10 +66,6 @@ void StatusBar::changeEvent(QEvent* event)
     }
 
     QStatusBar::changeEvent(event);
-}
-
-StatusBar::~StatusBar()
-{
 }
 
 }

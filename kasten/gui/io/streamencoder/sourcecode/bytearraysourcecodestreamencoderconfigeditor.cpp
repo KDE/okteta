@@ -99,6 +99,8 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     pageLayout->addRow(unsignedAsHexadecimalLabel, mUnsignedAsHexadecimalCheck);
 }
 
+ByteArraySourceCodeStreamEncoderConfigEditor::~ByteArraySourceCodeStreamEncoderConfigEditor() = default;
+
 bool ByteArraySourceCodeStreamEncoderConfigEditor::isValid() const
 {
     return true; // TODO: warn if not all selected bytes are used due to the data type length
@@ -116,10 +118,6 @@ void ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.dataType = static_cast<SourceCodeStreamEncoderSettings::PrimitiveDataType>(mDataTypeSelect->currentIndex());
     mSettings.unsignedAsHexadecimal = mUnsignedAsHexadecimalCheck->isChecked();
     mEncoder->setSettings(mSettings);
-}
-
-ByteArraySourceCodeStreamEncoderConfigEditor::~ByteArraySourceCodeStreamEncoderConfigEditor()
-{
 }
 
 }

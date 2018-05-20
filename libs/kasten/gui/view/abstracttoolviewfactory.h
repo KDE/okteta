@@ -44,7 +44,7 @@ public: // API to be implemented
     virtual SidePosition defaultPosition() const = 0;
 };
 
-inline AbstractToolViewFactory::~AbstractToolViewFactory() {}
+inline AbstractToolViewFactory::~AbstractToolViewFactory() = default;
 
 }
 

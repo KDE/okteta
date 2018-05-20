@@ -30,9 +30,7 @@ StructureViewItemDelegate::StructureViewItemDelegate(QObject* parent)
 {
 }
 
-StructureViewItemDelegate::~StructureViewItemDelegate()
-{
-}
+StructureViewItemDelegate::~StructureViewItemDelegate() = default;
 
 QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option,
                                                  const QModelIndex& index) const

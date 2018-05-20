@@ -33,6 +33,11 @@ AbstractModel::AbstractModel(AbstractModelPrivate* d)
     : d_ptr(d)
 {}
 
+AbstractModel::~AbstractModel()
+{
+    delete d_ptr;
+}
+
 bool AbstractModel::isModifiable()        const { return false; }
 bool AbstractModel::isReadOnly()          const { return true; }
 
@@ -51,10 +56,5 @@ void AbstractModel::setBaseModel(AbstractModel* baseModel)
 }
 
 void AbstractModel::setReadOnly(bool isReadOnly) { Q_UNUSED(isReadOnly) }
-
-AbstractModel::~AbstractModel()
-{
-    delete d_ptr;
-}
 
 }

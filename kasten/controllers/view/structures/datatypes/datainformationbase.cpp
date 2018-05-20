@@ -22,15 +22,9 @@
 #include "datainformationbase.h"
 #include "topleveldatainformation.h"
 
-DataInformationBase::DataInformationBase()
-{
+DataInformationBase::DataInformationBase() = default;
 
-}
-
-DataInformationBase::~DataInformationBase()
-{
-
-}
+DataInformationBase::~DataInformationBase() = default;
 
 bool DataInformationBase::isArray() const
 {

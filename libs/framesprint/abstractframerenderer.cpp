@@ -42,6 +42,7 @@ AbstractFrameRenderer::Private::Private()
 {}
 
 AbstractFrameRenderer::AbstractFrameRenderer() : d(new Private()) {}
+AbstractFrameRenderer::~AbstractFrameRenderer() { delete d; }
 
 QPoint AbstractFrameRenderer::pos() const { return QPoint(d->mX, d->mY); }
 QSize AbstractFrameRenderer::size() const { return QSize(width(), height()); }
@@ -53,4 +54,3 @@ int AbstractFrameRenderer::y() const { return d->mY; }
 void AbstractFrameRenderer::setPos(int x, int y) { d->mX = x; d->mY = y; }
 void AbstractFrameRenderer::setPos(const QPoint& point) { d->mX = point.x(); d->mY = point.y(); }
 
-AbstractFrameRenderer::~AbstractFrameRenderer() { delete d; }

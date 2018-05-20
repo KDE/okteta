@@ -68,9 +68,7 @@ DefaultScriptClass::DefaultScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     mIterableProperties.append(qMakePair(s_asStringFunc, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
-DefaultScriptClass::~DefaultScriptClass()
-{
-}
+DefaultScriptClass::~DefaultScriptClass() = default;
 
 DataInformation* DefaultScriptClass::toDataInformation(const QScriptValue& obj)
 {
@@ -362,9 +360,7 @@ DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& objec
     mData = data;
 }
 
-DefaultscriptClassIterator::~DefaultscriptClassIterator()
-{
-}
+DefaultscriptClassIterator::~DefaultscriptClassIterator() = default;
 
 bool DefaultscriptClassIterator::hasNext() const
 {

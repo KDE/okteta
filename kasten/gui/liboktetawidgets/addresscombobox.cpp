@@ -34,6 +34,11 @@ AddressComboBox::AddressComboBox(QWidget* parent)
     d->init();
 }
 
+AddressComboBox::~AddressComboBox()
+{
+    delete d_ptr;
+}
+
 Address AddressComboBox::address() const
 {
     Q_D(const AddressComboBox);
@@ -60,11 +65,6 @@ void AddressComboBox::rememberCurrentAddress()
     Q_D(AddressComboBox);
 
     d->rememberCurrentAddress();
-}
-
-AddressComboBox::~AddressComboBox()
-{
-    delete d_ptr;
 }
 
 }

@@ -149,6 +149,8 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     onDocumentSizeChanged(mTool->documentSize());
 }
 
+DocumentInfoView::~DocumentInfoView() = default;
+
 void DocumentInfoView::onDocumentTitleChanged(const QString& documentTitle)
 {
     mDocumentTitleLabel->setText(documentTitle);
@@ -186,7 +188,5 @@ void DocumentInfoView::onDocumentSizeChanged(int newSize)
                          QStringLiteral("-");
     mSizeLabel->setText(size);
 }
-
-DocumentInfoView::~DocumentInfoView() {}
 
 }

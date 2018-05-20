@@ -35,6 +35,8 @@ TestDocumentFileReloadJob::TestDocumentFileReloadJob(TestDocumentFileSynchronize
     : AbstractFileSystemSyncFromRemoteJob(synchronizer)
 {}
 
+TestDocumentFileReloadJob::~TestDocumentFileReloadJob() = default;
+
 void TestDocumentFileReloadJob::startReadFromFile()
 {
     TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
@@ -54,10 +56,6 @@ void TestDocumentFileReloadJob::startReadFromFile()
     delete reloadThread;
 
     completeRead(success);
-}
-
-TestDocumentFileReloadJob::~TestDocumentFileReloadJob()
-{
 }
 
 }

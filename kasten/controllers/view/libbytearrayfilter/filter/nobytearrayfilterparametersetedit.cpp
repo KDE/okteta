@@ -28,6 +28,8 @@ NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit(QWidget* pa
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {}
 
+NoByteArrayFilterParameterSetEdit::~NoByteArrayFilterParameterSetEdit() = default;
+
 void NoByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
     Q_UNUSED(parameterSet);
@@ -37,6 +39,3 @@ void NoByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterP
 {
     Q_UNUSED(parameterSet);
 }
-
-NoByteArrayFilterParameterSetEdit::~NoByteArrayFilterParameterSetEdit()
-{}

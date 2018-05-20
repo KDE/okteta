@@ -33,6 +33,11 @@ AbstractExportJob::AbstractExportJob()
     : d_ptr(new AbstractExportJobPrivate(this))
 {}
 
+AbstractExportJob::~AbstractExportJob()
+{
+    delete d_ptr;
+}
+
 AbstractDocument* AbstractExportJob::document() const
 {
     Q_D(const AbstractExportJob);
@@ -45,11 +50,6 @@ void AbstractExportJob::setDocument(AbstractDocument* document)
     Q_D(AbstractExportJob);
 
     d->setDocument(document);
-}
-
-AbstractExportJob::~AbstractExportJob()
-{
-    delete d_ptr;
 }
 
 }

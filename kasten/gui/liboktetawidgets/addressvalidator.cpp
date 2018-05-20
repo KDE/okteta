@@ -44,6 +44,11 @@ AddressValidator::AddressValidator(QObject* parent, Coding codecId)
     setCodec(codecId);
 }
 
+AddressValidator::~AddressValidator()
+{
+    delete mValueCodec;
+}
+
 void AddressValidator::setCodec(Coding codecId)
 {
     if (codecId == mCodecId) {
@@ -147,11 +152,6 @@ QString AddressValidator::toString(Address address, AddressType addressType) con
     }
 
     return string;
-}
-
-AddressValidator::~AddressValidator()
-{
-    delete mValueCodec;
 }
 
 }

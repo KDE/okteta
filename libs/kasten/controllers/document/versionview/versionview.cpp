@@ -59,6 +59,8 @@ VersionView::VersionView(VersionViewTool* tool, QWidget* parent)
     setModel(mTool->model());
 }
 
+VersionView::~VersionView() = default;
+
 void VersionView::setModel(AbstractModel* model)
 {
     If::Versionable* versionControl = model ? qobject_cast<If::Versionable*>(model) : nullptr;
@@ -69,7 +71,5 @@ void VersionView::setModel(AbstractModel* model)
         mVersionTableView->resizeColumnToContents(c);
     }
 }
-
-VersionView::~VersionView() {}
 
 }

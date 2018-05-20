@@ -52,6 +52,8 @@ BookmarksTool::BookmarksTool()
     setObjectName(QStringLiteral("Bookmarks"));
 }
 
+BookmarksTool::~BookmarksTool() = default;
+
 QString BookmarksTool::title() const { return i18nc("@title:window", "Bookmarks"); }
 bool BookmarksTool::canCreateBookmark() const { return mCanCreateBookmark; }
 const Okteta::Bookmark& BookmarksTool::bookmarkAt(unsigned int index) const { return mBookmarks->bookmarkAt(index); }
@@ -199,7 +201,5 @@ void BookmarksTool::onBookmarksModified()
     const int cursorPosition = mByteArrayView->cursorPosition();
     onCursorPositionChanged(cursorPosition);
 }
-
-BookmarksTool::~BookmarksTool() {}
 
 }

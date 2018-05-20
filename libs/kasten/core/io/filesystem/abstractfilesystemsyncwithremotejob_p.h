@@ -75,7 +75,7 @@ inline AbstractFileSystemSyncWithRemoteJobPrivate::AbstractFileSystemSyncWithRem
     , mFile(nullptr)
 {}
 
-inline AbstractFileSystemSyncWithRemoteJobPrivate::~AbstractFileSystemSyncWithRemoteJobPrivate() {}
+inline AbstractFileSystemSyncWithRemoteJobPrivate::~AbstractFileSystemSyncWithRemoteJobPrivate() = default;
 
 inline QFile* AbstractFileSystemSyncWithRemoteJobPrivate::file()     const { return mFile; }
 // TODO: setup a notification system

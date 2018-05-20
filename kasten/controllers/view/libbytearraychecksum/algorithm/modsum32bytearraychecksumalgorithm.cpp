@@ -34,6 +34,8 @@ ModSum32ByteArrayChecksumAlgorithm::ModSum32ByteArrayChecksumAlgorithm()
         i18nc("name of the checksum algorithm", "Modular sum 32-bit"))
 {}
 
+ModSum32ByteArrayChecksumAlgorithm::~ModSum32ByteArrayChecksumAlgorithm() = default;
+
 AbstractByteArrayChecksumParameterSet* ModSum32ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum32ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
@@ -121,5 +123,3 @@ quint32 ModSum32ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian(cons
 
     return modSum;
 }
-
-ModSum32ByteArrayChecksumAlgorithm::~ModSum32ByteArrayChecksumAlgorithm() {}

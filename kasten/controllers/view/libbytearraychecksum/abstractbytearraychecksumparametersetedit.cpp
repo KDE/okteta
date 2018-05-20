@@ -31,9 +31,9 @@ AbstractByteArrayChecksumParameterSetEdit::AbstractByteArrayChecksumParameterSet
     , d(new Private())
 {}
 
-bool AbstractByteArrayChecksumParameterSetEdit::isValid() const { return true; }
-
 AbstractByteArrayChecksumParameterSetEdit::~AbstractByteArrayChecksumParameterSetEdit()
 {
     delete d;
 }
+
+bool AbstractByteArrayChecksumParameterSetEdit::isValid() const { return true; }

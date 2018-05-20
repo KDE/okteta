@@ -31,6 +31,11 @@ SingleViewWindow::SingleViewWindow(AbstractView* view)
 {
 }
 
+SingleViewWindow::~SingleViewWindow()
+{
+    delete d_ptr;
+}
+
 AbstractView* SingleViewWindow::view() const
 {
     Q_D(const SingleViewWindow);
@@ -71,11 +76,6 @@ void SingleViewWindow::addTool(AbstractToolView* toolView)
     Q_D(SingleViewWindow);
 
     d->addTool(toolView);
-}
-
-SingleViewWindow::~SingleViewWindow()
-{
-    delete d_ptr;
 }
 
 }

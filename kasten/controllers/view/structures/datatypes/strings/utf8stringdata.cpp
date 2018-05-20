@@ -44,9 +44,7 @@ Utf8StringData::Utf8StringData(StringDataInformation* parent)
 {
 }
 
-Utf8StringData::~Utf8StringData()
-{
-}
+Utf8StringData::~Utf8StringData() = default;
 
 QString Utf8StringData::charType() const
 {

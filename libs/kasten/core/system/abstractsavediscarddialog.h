@@ -43,7 +43,7 @@ public: // API to be implemented
     virtual Answer queryDiscard(const AbstractDocument* document, const QString& title) const = 0;
 };
 
-inline AbstractSaveDiscardDialog::~AbstractSaveDiscardDialog() {}
+inline AbstractSaveDiscardDialog::~AbstractSaveDiscardDialog() = default;
 
 }
 

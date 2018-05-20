@@ -44,6 +44,8 @@ ByteArrayRowViewPrivate::ByteArrayRowViewPrivate(ByteArrayRowView* parent)
 {
 }
 
+ByteArrayRowViewPrivate::~ByteArrayRowViewPrivate() = default;
+
 void ByteArrayRowViewPrivate::init()
 {
     Q_Q(ByteArrayRowView);
@@ -819,10 +821,6 @@ void ByteArrayRowViewPrivate::ensureVisible(const ByteArrayRowColumnRenderer& co
 
     q->horizontalScrollBar()->setValue(visibleXs.startForInclude(byteXs));
     q->verticalScrollBar()->setValue(visibleYs.startForInclude(byteYs));
-}
-
-ByteArrayRowViewPrivate::~ByteArrayRowViewPrivate()
-{
 }
 
 }

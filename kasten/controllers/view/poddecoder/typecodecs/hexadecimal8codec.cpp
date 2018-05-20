@@ -34,6 +34,8 @@ Hexadecimal8Codec::Hexadecimal8Codec()
     : AbstractTypeCodec(i18nc("@label:textbox encoding of one byte as value in the hexadecimal format", "Hexadecimal 8-bit"))
 {}
 
+Hexadecimal8Codec::~Hexadecimal8Codec() = default;
+
 QVariant Hexadecimal8Codec::value(const PODData& data, int* byteCount) const
 {
     const unsigned char* pointer = (unsigned char*)data.pointer(1);
@@ -53,7 +55,5 @@ bool Hexadecimal8Codec::areEqual(const QVariant& value, QVariant& otherValue) co
 {
     return (value.value<Hexadecimal8>().value == otherValue.value<Hexadecimal8>().value);
 }
-
-Hexadecimal8Codec::~Hexadecimal8Codec() {}
 
 }

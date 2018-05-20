@@ -54,6 +54,8 @@ ByteArrayXxencodingStreamEncoderConfigEditor::ByteArrayXxencodingStreamEncoderCo
     pageLayout->addRow(fileNameLabel, mFileNameEdit);
 }
 
+ByteArrayXxencodingStreamEncoderConfigEditor::~ByteArrayXxencodingStreamEncoderConfigEditor() = default;
+
 AbstractSelectionView* ByteArrayXxencodingStreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview(mEncoder);
@@ -64,10 +66,6 @@ void ByteArrayXxencodingStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.fileName = mFileNameEdit->text();
 
     mEncoder->setSettings(mSettings);
-}
-
-ByteArrayXxencodingStreamEncoderConfigEditor::~ByteArrayXxencodingStreamEncoderConfigEditor()
-{
 }
 
 }

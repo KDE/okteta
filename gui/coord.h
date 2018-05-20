@@ -201,8 +201,10 @@ inline Coord::Coord(const Coord& other)
     : mPos(other.mPos)
     , mLine(other.mLine)
 {}
+
+inline Coord::~Coord() = default;
+
 inline Coord& Coord::operator=(const Coord& other) { mPos = other.mPos; mLine = other.mLine; return *this; }
-inline Coord::~Coord() {}
 
 inline bool Coord::operator==(const Coord& other) const { return mPos == other.mPos && mLine == other.mLine; }
 inline bool Coord::operator!=(const Coord& other) const { return !(*this == other); }

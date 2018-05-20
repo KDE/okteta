@@ -33,9 +33,7 @@ EnumScriptClass::EnumScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handl
     mIterableProperties.append(qMakePair(s_values, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
-EnumScriptClass::~EnumScriptClass()
-{
-}
+EnumScriptClass::~EnumScriptClass() = default;
 
 QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {

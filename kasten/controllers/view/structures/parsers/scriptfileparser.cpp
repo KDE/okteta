@@ -36,9 +36,7 @@ ScriptFileParser::ScriptFileParser(const QString& pluginName, const QString& abs
 {
 }
 
-ScriptFileParser::~ScriptFileParser()
-{
-}
+ScriptFileParser::~ScriptFileParser() = default;
 
 QStringList ScriptFileParser::parseStructureNames() const
 {

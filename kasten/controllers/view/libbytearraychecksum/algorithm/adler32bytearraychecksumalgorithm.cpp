@@ -34,6 +34,8 @@ Adler32ByteArrayChecksumAlgorithm::Adler32ByteArrayChecksumAlgorithm()
         i18nc("name of the checksum algorithm", "Adler-32"))
 {}
 
+Adler32ByteArrayChecksumAlgorithm::~Adler32ByteArrayChecksumAlgorithm() = default;
+
 AbstractByteArrayChecksumParameterSet* Adler32ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Adler32ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
@@ -59,5 +61,3 @@ bool Adler32ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
 
     return true;
 }
-
-Adler32ByteArrayChecksumAlgorithm::~Adler32ByteArrayChecksumAlgorithm() {}

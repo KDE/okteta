@@ -44,7 +44,7 @@ public: // get
 public: // signal
 };
 
-inline ChangesDescribable::~ChangesDescribable() {}
+inline ChangesDescribable::~ChangesDescribable() = default;
 
 }
 

@@ -47,6 +47,14 @@ ViewAreaBox::ViewAreaBox(QWidget* centralWidget, QWidget* parent)
     connect(mEscapeShortcut, &QShortcut::activated, this, &ViewAreaBox::onDone);   // TODO: better use onCancelled
 }
 
+ViewAreaBox::~ViewAreaBox()
+{
+    delete mBottomWidget;
+    if (mCentralWidget) {
+        mCentralWidget->setParent(nullptr);
+    }
+}
+
 QWidget* ViewAreaBox::centralWidget() const { return mCentralWidget; }
 QWidget* ViewAreaBox::bottomWidget()  const { return mBottomWidget; }
 
@@ -107,14 +115,6 @@ void ViewAreaBox::setBottomWidget(QWidget* bottomWidget)
 void ViewAreaBox::onDone()
 {
     setBottomWidget(nullptr);
-}
-
-ViewAreaBox::~ViewAreaBox()
-{
-    delete mBottomWidget;
-    if (mCentralWidget) {
-        mCentralWidget->setParent(nullptr);
-    }
 }
 
 }

@@ -27,6 +27,20 @@
 
 SafeReferenceHolder SafeReferenceHolder::instance;
 
+SafeReferenceHolder::SafeReferenceHolder()
+    : safeRefDestroyCnt(0)
+    , safeRefRegisterCnt(0)
+{
+}
+
+SafeReferenceHolder::~SafeReferenceHolder()
+{
+    if (mRefs.size() > 0) {
+        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << mRefs.size() << "safe references were not removed";
+    }
+    printf("register count: %d, destroy count %d: ", safeRefRegisterCnt, safeRefDestroyCnt);
+}
+
 void SafeReferenceHolder::invalidateAll(DataInformation* data)
 {
     // this is called from DataInformation destructor, don't do anything with data!
@@ -41,18 +55,4 @@ void SafeReferenceHolder::invalidateAll(DataInformation* data)
     int removed = mRefs.remove(data);
     safeRefDestroyCnt += removed;
     // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "removed" << removed << "items";
-}
-
-SafeReferenceHolder::SafeReferenceHolder()
-    : safeRefDestroyCnt(0)
-    , safeRefRegisterCnt(0)
-{
-}
-
-SafeReferenceHolder::~SafeReferenceHolder()
-{
-    if (mRefs.size() > 0) {
-        qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << mRefs.size() << "safe references were not removed";
-    }
-    printf("register count: %d, destroy count %d: ", safeRefRegisterCnt, safeRefDestroyCnt);
 }

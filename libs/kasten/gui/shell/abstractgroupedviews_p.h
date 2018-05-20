@@ -42,7 +42,7 @@ inline AbstractGroupedViewsPrivate::AbstractGroupedViewsPrivate(AbstractGroupedV
 {
 }
 
-inline AbstractGroupedViewsPrivate::~AbstractGroupedViewsPrivate() {}
+inline AbstractGroupedViewsPrivate::~AbstractGroupedViewsPrivate() = default;
 
 }
 

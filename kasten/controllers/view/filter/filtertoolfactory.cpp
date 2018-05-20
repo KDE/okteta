@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
-FilterToolFactory::FilterToolFactory() {}
+FilterToolFactory::FilterToolFactory() = default;
+
+FilterToolFactory::~FilterToolFactory() = default;
 
 AbstractTool* FilterToolFactory::create()
 {
     return new FilterTool();
 }
-
-FilterToolFactory::~FilterToolFactory() {}
 
 }

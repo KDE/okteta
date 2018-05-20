@@ -33,13 +33,11 @@ PrintColumnStylist::PrintColumnStylist()
 {
 }
 
+PrintColumnStylist::~PrintColumnStylist() = default;
+
 const QPalette& PrintColumnStylist::palette() const
 {
     return mPalette;
-}
-
-PrintColumnStylist::~PrintColumnStylist()
-{
 }
 
 }

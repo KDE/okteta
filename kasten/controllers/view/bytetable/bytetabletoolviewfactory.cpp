@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-ByteTableToolViewFactory::ByteTableToolViewFactory() {}
+ByteTableToolViewFactory::ByteTableToolViewFactory() = default;
+
+ByteTableToolViewFactory::~ByteTableToolViewFactory() = default;
 
 QString ByteTableToolViewFactory::iconName() const { return QStringLiteral("table"); }
 QString ByteTableToolViewFactory::title()    const { return i18nc("@title:window", "Value/Char Table"); }
@@ -41,7 +43,5 @@ AbstractToolView* ByteTableToolViewFactory::create(AbstractTool* tool)
 {
     return new ByteTableToolView(qobject_cast<ByteTableTool*>(tool));
 }
-
-ByteTableToolViewFactory::~ByteTableToolViewFactory() {}
 
 }

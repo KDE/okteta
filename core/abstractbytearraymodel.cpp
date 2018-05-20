@@ -34,6 +34,8 @@ AbstractByteArrayModel::AbstractByteArrayModel(QObject* parent)
     : QObject(parent)
 {}
 
+AbstractByteArrayModel::~AbstractByteArrayModel() = default;
+
 bool AbstractByteArrayModel::isReadOnly() const { return false; }
 
 void AbstractByteArrayModel::setReadOnly(bool isReadOnly)
@@ -248,7 +250,5 @@ Address AbstractByteArrayModel::lastIndexOfCaseInsensitive(const CharCodec* char
 
     return result;
 }
-
-AbstractByteArrayModel::~AbstractByteArrayModel() {}
 
 }

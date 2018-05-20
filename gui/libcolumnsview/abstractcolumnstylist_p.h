@@ -39,8 +39,8 @@ public:
 private:
 };
 
-inline AbstractColumnStylistPrivate::AbstractColumnStylistPrivate() {}
-inline AbstractColumnStylistPrivate::~AbstractColumnStylistPrivate() {}
+inline AbstractColumnStylistPrivate::AbstractColumnStylistPrivate() = default;
+inline AbstractColumnStylistPrivate::~AbstractColumnStylistPrivate() = default;
 
 }
 

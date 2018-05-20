@@ -50,10 +50,10 @@ inline Person::Private::Private(const QString& name, const QIcon& faceIcon)
     : mName(name)
     , mFaceIcon(faceIcon) {}
 
+inline Person::Private::~Private() = default;
+
 inline QString Person::Private::name()   const { return mName; }
 inline QIcon Person::Private::faceIcon() const { return mFaceIcon; }
-
-inline Person::Private::~Private() {}
 
 }
 

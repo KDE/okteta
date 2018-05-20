@@ -46,6 +46,8 @@ DocumentListModel::DocumentListModel(DocumentsTool* documentsTool, QObject* pare
             this, &DocumentListModel::onFocussedDocumentChanged);
 }
 
+DocumentListModel::~DocumentListModel() = default;
+
 int DocumentListModel::rowCount(const QModelIndex& parent) const
 {
     return (!parent.isValid()) ? mDocumentsTool->documents().size() : 0;
@@ -202,7 +204,5 @@ void DocumentListModel::onSyncStatesChanged()
     beginResetModel();
     endResetModel();
 }
-
-DocumentListModel::~DocumentListModel() {}
 
 }

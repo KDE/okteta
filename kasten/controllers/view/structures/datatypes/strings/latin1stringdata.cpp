@@ -31,13 +31,12 @@
 #include <KLocalizedString>
 #include <QVarLengthArray>
 
-Latin1StringData::Latin1StringData(StringDataInformation* parent) : StringData(parent)
+Latin1StringData::Latin1StringData(StringDataInformation* parent)
+    : StringData(parent)
 {
 }
 
-Latin1StringData::~Latin1StringData()
-{
-}
+Latin1StringData::~Latin1StringData() = default;
 
 qint64 Latin1StringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {

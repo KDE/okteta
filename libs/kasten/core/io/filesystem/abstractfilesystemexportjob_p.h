@@ -74,7 +74,7 @@ inline AbstractFileSystemExportJobPrivate::AbstractFileSystemExportJobPrivate(Ab
     , mFile(nullptr)
 {}
 
-inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate() {}
+inline AbstractFileSystemExportJobPrivate::~AbstractFileSystemExportJobPrivate() = default;
 
 inline AbstractModel* AbstractFileSystemExportJobPrivate::model()                    const { return mModel; }
 inline const AbstractModelSelection* AbstractFileSystemExportJobPrivate::selection() const { return mSelection; }

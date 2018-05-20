@@ -28,9 +28,9 @@
 
 namespace Kasten {
 
-ByteArraySRecStreamEncoderConfigEditorFactory::ByteArraySRecStreamEncoderConfigEditorFactory()
-{
-}
+ByteArraySRecStreamEncoderConfigEditorFactory::ByteArraySRecStreamEncoderConfigEditorFactory() = default;
+
+ByteArraySRecStreamEncoderConfigEditorFactory::~ByteArraySRecStreamEncoderConfigEditorFactory() = default;
 
 AbstractModelStreamEncoderConfigEditor* ByteArraySRecStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
@@ -44,7 +44,5 @@ AbstractModelStreamEncoderConfigEditor* ByteArraySRecStreamEncoderConfigEditorFa
 
     return result;
 }
-
-ByteArraySRecStreamEncoderConfigEditorFactory::~ByteArraySRecStreamEncoderConfigEditorFactory() {}
 
 }

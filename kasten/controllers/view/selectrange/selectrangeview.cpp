@@ -143,6 +143,8 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     onApplyableChanged(mTool->isApplyable());
 }
 
+SelectRangeView::~SelectRangeView() = default;
+
 void SelectRangeView::onApplyableChanged(bool isApplyable)
 {
     // TODO: set error tooltip, like offset out of range or no document
@@ -159,7 +161,5 @@ void SelectRangeView::onSelectButtonClicked()
     mTool->select();
 //     emit toolUsed();
 }
-
-SelectRangeView::~SelectRangeView() {}
 
 }

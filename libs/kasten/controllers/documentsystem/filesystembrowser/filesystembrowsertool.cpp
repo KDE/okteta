@@ -44,6 +44,8 @@ FileSystemBrowserTool::FileSystemBrowserTool(DocumentSyncManager* documentSyncMa
     setObjectName(QStringLiteral("FileSystemBrowser"));
 }
 
+FileSystemBrowserTool::~FileSystemBrowserTool() = default;
+
 QString FileSystemBrowserTool::title() const { return i18nc("@title:window", "Filesystem"); }
 
 QUrl FileSystemBrowserTool::currentUrl() const
@@ -79,7 +81,5 @@ void FileSystemBrowserTool::open(const QUrl& url)
 {
     mDocumentSyncManager->load(url);
 }
-
-FileSystemBrowserTool::~FileSystemBrowserTool() {}
 
 }

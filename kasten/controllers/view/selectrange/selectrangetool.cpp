@@ -44,6 +44,8 @@ SelectRangeTool::SelectRangeTool()
     setObjectName(QStringLiteral("SelectRange"));
 }
 
+SelectRangeTool::~SelectRangeTool() = default;
+
 int SelectRangeTool::currentSelectionStart() const
 {
     return mByteArrayView ?
@@ -198,10 +200,6 @@ void SelectRangeTool::onContentsChanged()
 {
     // TODO: find status before content changed, e.g. by caching
     emit isUsableChanged(isUsable());
-}
-
-SelectRangeTool::~SelectRangeTool()
-{
 }
 
 }

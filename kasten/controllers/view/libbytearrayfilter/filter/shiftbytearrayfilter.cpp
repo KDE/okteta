@@ -40,6 +40,8 @@ ShiftByteArrayFilter::ShiftByteArrayFilter()
               "SHIFT data"))
 {}
 
+ShiftByteArrayFilter::~ShiftByteArrayFilter() = default;
+
 AbstractByteArrayFilterParameterSet* ShiftByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool ShiftByteArrayFilter::filter(Okteta::Byte* result,
@@ -120,5 +122,3 @@ bool ShiftByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
-
-ShiftByteArrayFilter::~ShiftByteArrayFilter() {}

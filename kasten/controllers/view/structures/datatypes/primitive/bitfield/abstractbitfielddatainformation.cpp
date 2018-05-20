@@ -28,6 +28,24 @@
 #include "../../../script/classes/bitfieldscriptclass.h"
 #include "../../../script/scripthandlerinfo.h"
 
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,
+                                                                 DataInformation* parent)
+    : PrimitiveDataInformation(name, parent)
+    , mValue(0)
+    , mWidth(qMin(width, 64u))
+{
+    Q_ASSERT(width <= 64);
+}
+
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d)
+    : PrimitiveDataInformation(d)
+    , mValue(d.mValue)
+    , mWidth(d.mWidth)
+{
+}
+
+AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation() = default;
+
 QString AbstractBitfieldDataInformation::sizeString() const
 {
     return i18np("%1 bit", "%1 bits", width());
@@ -47,26 +65,6 @@ void AbstractBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 PrimitiveDataType AbstractBitfieldDataInformation::type() const
 {
     return PrimitiveDataType::Bitfield;
-}
-
-AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,
-                                                                 DataInformation* parent)
-    : PrimitiveDataInformation(name, parent)
-    , mValue(0)
-    , mWidth(qMin(width, 64u))
-{
-    Q_ASSERT(width <= 64);
-}
-
-AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation()
-{
-}
-
-AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d)
-    : PrimitiveDataInformation(d)
-    , mValue(d.mValue)
-    , mWidth(d.mWidth)
-{
 }
 
 qint64 AbstractBitfieldDataInformation::readData(Okteta::AbstractByteArrayModel* input,

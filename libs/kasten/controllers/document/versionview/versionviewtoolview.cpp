@@ -33,10 +33,10 @@ VersionViewToolView::VersionViewToolView(VersionViewTool* tool)
 {
 }
 
+VersionViewToolView::~VersionViewToolView() = default;
+
 QWidget* VersionViewToolView::widget()    const { return mWidget; }
 QString VersionViewToolView::title()      const { return mWidget->tool()->title(); }
 AbstractTool* VersionViewToolView::tool() const { return mWidget->tool(); }
-
-VersionViewToolView::~VersionViewToolView() {}
 
 }

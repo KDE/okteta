@@ -52,6 +52,13 @@ FixedSizeByteArrayModel::FixedSizeByteArrayModel(int size, Byte fillUpByte, QObj
     reset(0, size);
 }
 
+FixedSizeByteArrayModel::~FixedSizeByteArrayModel()
+{
+    if (mAutoDelete) {
+        delete [] mData;
+    }
+}
+
 void FixedSizeByteArrayModel::setByte(Address offset, Byte byte)
 {
     const bool wasModifiedBefore = mModified;
@@ -325,13 +332,6 @@ int FixedSizeByteArrayModel::compare(const AbstractByteArrayModel& other, const 
 void FixedSizeByteArrayModel::reset(unsigned int offset, unsigned int length)
 {
     memset(&mData[offset], mFillUpByte, length);
-}
-
-FixedSizeByteArrayModel::~FixedSizeByteArrayModel()
-{
-    if (mAutoDelete) {
-        delete [] mData;
-    }
 }
 
 }

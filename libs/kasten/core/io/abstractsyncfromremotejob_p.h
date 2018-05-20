@@ -42,8 +42,7 @@ inline AbstractSyncFromRemoteJobPrivate::AbstractSyncFromRemoteJobPrivate(Abstra
     : q_ptr(parent)
 {}
 
-inline AbstractSyncFromRemoteJobPrivate::~AbstractSyncFromRemoteJobPrivate()
-{}
+inline AbstractSyncFromRemoteJobPrivate::~AbstractSyncFromRemoteJobPrivate() = default;
 
 }
 

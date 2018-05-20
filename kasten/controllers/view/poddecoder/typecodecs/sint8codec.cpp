@@ -34,6 +34,8 @@ SInt8Codec::SInt8Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Signed 8-bit"))
 {}
 
+SInt8Codec::~SInt8Codec() = default;
+
 QVariant SInt8Codec::value(const PODData& data, int* byteCount) const
 {
     const qint8* pointer = (qint8*)data.pointer(1);
@@ -53,7 +55,5 @@ bool SInt8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<SInt8>().value == otherValue.value<SInt8>().value);
 }
-
-SInt8Codec::~SInt8Codec() {}
 
 }

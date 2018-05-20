@@ -42,16 +42,16 @@ ViewBox::ViewBox(AbstractView* view, QWidget* parent)
     layout->addWidget(widget);
 }
 
+ViewBox::~ViewBox()
+{
+    mView->widget()->setParent(nullptr);
+}
+
 AbstractView* ViewBox::view() const { return mView; }
 
 void ViewBox::add(ViewBox::Area area)
 {
     Q_UNUSED(area);
-}
-
-ViewBox::~ViewBox()
-{
-    mView->widget()->setParent(nullptr);
 }
 
 }

@@ -78,8 +78,6 @@ CreateDialog::CreateDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
     setLayout(layout);
 }
 
-CreateDialog::~CreateDialog()
-{
-}
+CreateDialog::~CreateDialog() = default;
 
 }

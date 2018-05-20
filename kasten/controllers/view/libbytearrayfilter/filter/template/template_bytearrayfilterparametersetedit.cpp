@@ -72,6 +72,8 @@ Template_ByteArrayFilterParameterSetEdit::Template_ByteArrayFilterParameterSetEd
 //// ADAPT(end)
 }
 
+Template_ByteArrayFilterParameterSetEdit::~Template_ByteArrayFilterParameterSetEdit() = default;
+
 //// ADAPT(start)
 //// if invalid states are possible implement here the check
 bool Template_ByteArrayFilterParameterSetEdit::isValid() const { return mLevelEdit->value() != -1; }
@@ -113,5 +115,3 @@ void Template_ByteArrayFilterParameterSetEdit::onLevelChanged(int value)
     emit validityChanged(isValid);
 }
 //// ADAPT(end)
-
-Template_ByteArrayFilterParameterSetEdit::~Template_ByteArrayFilterParameterSetEdit() {}

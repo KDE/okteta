@@ -33,6 +33,8 @@ XOrByteArrayFilter::XOrByteArrayFilter()
               "operand XOR data"))
 {}
 
+XOrByteArrayFilter::~XOrByteArrayFilter() = default;
+
 AbstractByteArrayFilterParameterSet* XOrByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool XOrByteArrayFilter::filter(Okteta::Byte* result,
@@ -77,8 +79,4 @@ bool XOrByteArrayFilter::filter(Okteta::Byte* result,
     }
 
     return true;
-}
-
-XOrByteArrayFilter::~XOrByteArrayFilter()
-{
 }

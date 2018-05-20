@@ -40,8 +40,8 @@ public: // API to be implemented
     virtual Answer query(int newValueSize, int oldValueSize, int sizeLeft) = 0;
 };
 
-inline AbstractDifferentSizeDialog::AbstractDifferentSizeDialog() {}
-inline AbstractDifferentSizeDialog::~AbstractDifferentSizeDialog() {}
+inline AbstractDifferentSizeDialog::AbstractDifferentSizeDialog() = default;
+inline AbstractDifferentSizeDialog::~AbstractDifferentSizeDialog() = default;
 
 }
 

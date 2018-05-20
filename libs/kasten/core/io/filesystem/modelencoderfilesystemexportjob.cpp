@@ -33,15 +33,13 @@ ModelEncoderFileSystemExportJob::ModelEncoderFileSystemExportJob(AbstractModel* 
 {
 }
 
+ModelEncoderFileSystemExportJob::~ModelEncoderFileSystemExportJob() = default;
+
 void ModelEncoderFileSystemExportJob::startExportToFile()
 {
     Q_D(ModelEncoderFileSystemExportJob);
 
     d->startExportToFile();
-}
-
-ModelEncoderFileSystemExportJob::~ModelEncoderFileSystemExportJob()
-{
 }
 
 }

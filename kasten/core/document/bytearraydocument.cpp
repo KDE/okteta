@@ -45,6 +45,11 @@ ByteArrayDocument::ByteArrayDocument(const QString& initDescription)
             this, &ByteArrayDocument::onHeadVersionDescriptionChanged);
 }
 
+ByteArrayDocument::~ByteArrayDocument()
+{
+    delete mByteArray;
+}
+
 ByteArrayDocument::ByteArrayDocument(Okteta::PieceTableByteArrayModel* byteArray, const QString& initDescription)
     : mByteArray(byteArray)
     , mInitDescription(initDescription)
@@ -128,11 +133,6 @@ void ByteArrayDocument::removeUsers(const QList<Person>& users)
     }
 
     emit usersRemoved(users);
-}
-
-ByteArrayDocument::~ByteArrayDocument()
-{
-    delete mByteArray;
 }
 
 }

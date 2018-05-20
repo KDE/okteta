@@ -117,7 +117,7 @@ public:
     unsigned int decode(Byte* byte, const QString& text, unsigned int pos = 0) const;
 };
 
-inline ValueCodec::ValueCodec() {}
+inline ValueCodec::ValueCodec() = default;
 
 }
 

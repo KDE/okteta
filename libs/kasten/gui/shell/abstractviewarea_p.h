@@ -46,7 +46,7 @@ inline AbstractViewAreaPrivate::AbstractViewAreaPrivate(AbstractViewArea* parent
 {
 }
 
-inline AbstractViewAreaPrivate::~AbstractViewAreaPrivate() {}
+inline AbstractViewAreaPrivate::~AbstractViewAreaPrivate() = default;
 
 }
 

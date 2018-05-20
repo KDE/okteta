@@ -71,6 +71,8 @@ PODDelegate::PODDelegate(PODDecoderTool* tool, QObject* parent)
     connect(mTool, &PODDecoderTool::readOnlyChanged, this, &PODDelegate::onReadOnlyChanged);
 }
 
+PODDelegate::~PODDelegate() = default;
+
 // make sure only editors are created which have a readOnly property
 // also beware that for subclasses of QLineEdit (all float editors) the signal
 // editingFinished() is only emitted if validator() returns QValidator::Acceptable
@@ -372,7 +374,5 @@ void PODDelegate::onReadOnlyChanged(bool isReadOnly) const
         mEditor->setProperty("readOnly", isReadOnly);
     }
 }
-
-PODDelegate::~PODDelegate() {}
 
 }

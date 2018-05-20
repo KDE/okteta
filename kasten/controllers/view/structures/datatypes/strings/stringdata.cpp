@@ -34,10 +34,7 @@ StringData::StringData(StringDataInformation* parent)
     mLength.maxBytes = 0;
 }
 
-StringData::~StringData()
-{
-
-}
+StringData::~StringData() = default;
 
 void StringData::setTerminationCodePoint(uint term)
 {

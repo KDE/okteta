@@ -42,7 +42,7 @@ private:
 };
 
 inline WidgetColumnStylistPrivate::WidgetColumnStylistPrivate(QWidget* widget) : mWidget(widget) {}
-inline WidgetColumnStylistPrivate::~WidgetColumnStylistPrivate() {}
+inline WidgetColumnStylistPrivate::~WidgetColumnStylistPrivate() = default;
 
 inline QWidget* WidgetColumnStylistPrivate::widget() const { return mWidget; }
 

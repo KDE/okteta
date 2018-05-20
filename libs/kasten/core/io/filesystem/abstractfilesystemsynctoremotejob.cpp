@@ -30,6 +30,8 @@ AbstractFileSystemSyncToRemoteJob::AbstractFileSystemSyncToRemoteJob(AbstractMod
 {
 }
 
+AbstractFileSystemSyncToRemoteJob::~AbstractFileSystemSyncToRemoteJob() = default;
+
 AbstractModelFileSystemSynchronizer* AbstractFileSystemSyncToRemoteJob::synchronizer() const
 {
     Q_D(const AbstractFileSystemSyncToRemoteJob);
@@ -56,10 +58,6 @@ void AbstractFileSystemSyncToRemoteJob::completeWrite(bool success)
     Q_D(AbstractFileSystemSyncToRemoteJob);
 
     d->completeWrite(success);
-}
-
-AbstractFileSystemSyncToRemoteJob::~AbstractFileSystemSyncToRemoteJob()
-{
 }
 
 }

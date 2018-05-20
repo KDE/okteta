@@ -51,6 +51,8 @@ ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit(Q
     baseLayout->addRow(invertsBitsLabelText, mInvertsBitsCheckBox);
 }
 
+ReverseByteArrayFilterParameterSetEdit::~ReverseByteArrayFilterParameterSetEdit() = default;
+
 void ReverseByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
     const ReverseByteArrayFilterParameterSet* reverseParameterSet =
@@ -66,5 +68,3 @@ void ReverseByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFi
 
     reverseParameterSet->setInvertsBits(mInvertsBitsCheckBox->isChecked());
 }
-
-ReverseByteArrayFilterParameterSetEdit::~ReverseByteArrayFilterParameterSetEdit() {}

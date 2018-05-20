@@ -128,6 +128,8 @@ GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
     onApplyableChanged(mTool->isApplyable());
 }
 
+GotoOffsetView::~GotoOffsetView() = default;
+
 void GotoOffsetView::onApplyableChanged(bool isApplyable)
 {
     // TODO: set error tooltip, like offset out of range or no document
@@ -180,7 +182,5 @@ void GotoOffsetView::onFormatChanged(int formatIndex)
     mAtCursorCheckBox->setEnabled(isNotExpression);
     mBackwardsCheckBox->setEnabled(isNotExpression);
 }
-
-GotoOffsetView::~GotoOffsetView() {}
 
 }

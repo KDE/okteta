@@ -44,6 +44,11 @@ CharByteArrayColumnTextRenderer::CharByteArrayColumnTextRenderer(
     setWidths(1, byteSpacingWidth, noOfGroupedBytes);
 }
 
+CharByteArrayColumnTextRenderer::~CharByteArrayColumnTextRenderer()
+{
+    delete mCharCodec;
+}
+
 void CharByteArrayColumnTextRenderer::renderLine(QTextStream* stream, bool isSubline) const
 {
     Q_UNUSED(isSubline)
@@ -85,11 +90,6 @@ void CharByteArrayColumnTextRenderer::renderLine(QTextStream* stream, bool isSub
     *stream << whiteSpace(mNoOfCharsPerLine - e);
 
     ++mRenderLine;
-}
-
-CharByteArrayColumnTextRenderer::~CharByteArrayColumnTextRenderer()
-{
-    delete mCharCodec;
 }
 
 }

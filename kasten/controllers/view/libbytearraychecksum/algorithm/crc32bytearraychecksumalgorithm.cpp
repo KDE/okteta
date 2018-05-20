@@ -81,6 +81,8 @@ Crc32ByteArrayChecksumAlgorithm::Crc32ByteArrayChecksumAlgorithm()
         i18nc("name of the checksum algorithm, Cyclic Redundancy Check 32", "CRC-32"))
 {}
 
+Crc32ByteArrayChecksumAlgorithm::~Crc32ByteArrayChecksumAlgorithm() = default;
+
 AbstractByteArrayChecksumParameterSet* Crc32ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Crc32ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
@@ -106,5 +108,3 @@ bool Crc32ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
 
     return true;
 }
-
-Crc32ByteArrayChecksumAlgorithm::~Crc32ByteArrayChecksumAlgorithm() {}

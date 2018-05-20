@@ -36,6 +36,8 @@ SingleDocumentStrategy::SingleDocumentStrategy(DocumentManager* documentManager,
     d->init();
 }
 
+SingleDocumentStrategy::~SingleDocumentStrategy() = default;
+
 QList<AbstractDocument*> SingleDocumentStrategy::documents() const
 {
     Q_D(const SingleDocumentStrategy);
@@ -118,10 +120,6 @@ void SingleDocumentStrategy::closeDocument(AbstractDocument* document)
     Q_D(SingleDocumentStrategy);
 
     d->closeDocument(document);
-}
-
-SingleDocumentStrategy::~SingleDocumentStrategy()
-{
 }
 
 }

@@ -33,6 +33,8 @@ ByteArrayColumnView::ByteArrayColumnView(QWidget* parent)
     d->init();
 }
 
+ByteArrayColumnView::~ByteArrayColumnView() = default;
+
 PixelX ByteArrayColumnView::byteSpacingWidth() const
 {
     Q_D(const ByteArrayColumnView);
@@ -171,10 +173,6 @@ void ByteArrayColumnView::renderColumns(QPainter* painter, int cx, int cy, int c
 {
     Q_D(ByteArrayColumnView);
     d->renderColumns(painter, cx, cy, cw, ch);
-}
-
-ByteArrayColumnView::~ByteArrayColumnView()
-{
 }
 
 }

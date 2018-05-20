@@ -33,6 +33,8 @@ AndByteArrayFilter::AndByteArrayFilter()
               "operand AND data"))
 {}
 
+AndByteArrayFilter::~AndByteArrayFilter() = default;
+
 AbstractByteArrayFilterParameterSet* AndByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool AndByteArrayFilter::filter(Okteta::Byte* result,
@@ -77,8 +79,4 @@ bool AndByteArrayFilter::filter(Okteta::Byte* result,
     }
 
     return true;
-}
-
-AndByteArrayFilter::~AndByteArrayFilter()
-{
 }

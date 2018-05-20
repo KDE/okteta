@@ -29,6 +29,11 @@
 
 namespace Kasten {
 
+AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()
+{
+    delete mNetworkConfigurationManager;
+}
+
 void AbstractModelFileSystemSynchronizerPrivate::startFileWatching()
 {
     Q_Q(AbstractModelFileSystemSynchronizer);
@@ -115,11 +120,6 @@ void AbstractModelFileSystemSynchronizerPrivate::onOnlineStateChanged(bool isOnl
 {
     qCDebug(LOG_KASTEN_CORE);
     setRemoteState(isOnline ? RemoteUnknown : RemoteUnreachable);
-}
-
-AbstractModelFileSystemSynchronizerPrivate::~AbstractModelFileSystemSynchronizerPrivate()
-{
-    delete mNetworkConfigurationManager;
 }
 
 }

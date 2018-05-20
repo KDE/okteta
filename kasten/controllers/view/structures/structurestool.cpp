@@ -60,13 +60,11 @@ StructuresTool::StructuresTool()
     connect(this, &StructuresTool::byteOrderChanged, this, &StructuresTool::onByteOrderChanged);
 }
 
+StructuresTool::~StructuresTool() = default;
+
 void StructuresTool::onByteOrderChanged()
 {
     updateData(Okteta::ArrayChangeMetricsList());
-}
-
-StructuresTool::~StructuresTool()
-{
 }
 
 void StructuresTool::setByteOrder(QSysInfo::Endian order)

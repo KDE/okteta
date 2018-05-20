@@ -44,7 +44,7 @@ public:
         : Start(null())
         , End(null())
     {}
-    ~Range() {}
+    ~Range() = default;
 
 public:
     Range& operator=(const Range& R) { Start = R.Start; End = R.End; return *this; }

@@ -133,9 +133,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
     syncData();
 }
 
-StructureAddRemoveWidget::~StructureAddRemoveWidget()
-{
-}
+StructureAddRemoveWidget::~StructureAddRemoveWidget() = default;
 
 QStringList StructureAddRemoveWidget::values() const
 {

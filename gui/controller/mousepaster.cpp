@@ -37,6 +37,8 @@ MousePaster::MousePaster(AbstractByteArrayView* view, AbstractMouseController* p
 {
 }
 
+MousePaster::~MousePaster() = default;
+
 bool MousePaster::handleMousePressEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
@@ -104,7 +106,5 @@ bool MousePaster::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
 
     return eventUsed ? true : AbstractMouseController::handleMouseReleaseEvent(mouseEvent);
 }
-
-MousePaster::~MousePaster() {}
 
 }

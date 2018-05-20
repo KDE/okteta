@@ -34,6 +34,8 @@ Float32Codec::Float32Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Float 32-bit"))
 {}
 
+Float32Codec::~Float32Codec() = default;
+
 QVariant Float32Codec::value(const PODData& data, int* byteCount) const
 {
     const float* pointer = (float*)data.pointer(4);
@@ -53,7 +55,5 @@ bool Float32Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<Float32>().value == otherValue.value<Float32>().value);
 }
-
-Float32Codec::~Float32Codec() {}
 
 }

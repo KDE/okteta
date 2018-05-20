@@ -25,6 +25,8 @@ Template_ByteArrayChecksumAlgorithm::Template_ByteArrayChecksumAlgorithm()
 //// ADAPT(end)
 {}
 
+Template_ByteArrayChecksumAlgorithm::~Template_ByteArrayChecksumAlgorithm() = default;
+
 AbstractByteArrayChecksumParameterSet* Template_ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Template_ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
@@ -54,5 +56,3 @@ bool Template_ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
 
     return success;
 }
-
-Template_ByteArrayChecksumAlgorithm::~Template_ByteArrayChecksumAlgorithm() {}

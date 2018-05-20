@@ -27,7 +27,9 @@
 
 namespace Okteta {
 
-BookmarkList::BookmarkList() {}
+BookmarkList::BookmarkList() = default;
+
+BookmarkList::~BookmarkList() = default;
 
 void BookmarkList::addBookmark(const Bookmark& bookmark)
 {
@@ -215,7 +217,5 @@ const Bookmark& BookmarkList::at(unsigned int index) const
     static const Bookmark* const noBookmark = nullptr;
     return (const Bookmark&)*noBookmark;
 }
-
-BookmarkList::~BookmarkList() {}
 
 }

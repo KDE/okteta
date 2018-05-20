@@ -48,6 +48,12 @@ StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
 {
 }
 
+StatisticTableModel::~StatisticTableModel()
+{
+    delete mValueCodec;
+    delete mCharCodec;
+}
+
 void StatisticTableModel::update(int size)
 {
     mSize = size;
@@ -211,12 +217,6 @@ QVariant StatisticTableModel::headerData(int section, Qt::Orientation orientatio
     }
 
     return result;
-}
-
-StatisticTableModel::~StatisticTableModel()
-{
-    delete mValueCodec;
-    delete mCharCodec;
 }
 
 }

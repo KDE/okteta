@@ -72,6 +72,8 @@ Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterS
 //// ADAPT(end)
 }
 
+Template_ByteArrayChecksumParameterSetEdit::~Template_ByteArrayChecksumParameterSetEdit() = default;
+
 //// ADAPT(start)
 //// if invalid states are possible implement here the check
 bool Template_ByteArrayChecksumParameterSetEdit::isValid() const { return mBitNumberEdit->value() != 0; }
@@ -113,5 +115,3 @@ void Template_ByteArrayChecksumParameterSetEdit::onBitNumberChanged(int value)
     emit validityChanged(isValid);
 }
 //// ADAPT(end)
-
-Template_ByteArrayChecksumParameterSetEdit::~Template_ByteArrayChecksumParameterSetEdit() {}

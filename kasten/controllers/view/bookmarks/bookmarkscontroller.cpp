@@ -93,6 +93,8 @@ BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
     setTargetModel(nullptr);
 }
 
+BookmarksController::~BookmarksController() = default;
+
 void BookmarksController::setTargetModel(AbstractModel* model)
 {
     if (mByteArrayView) {
@@ -305,7 +307,5 @@ void BookmarksController::onBookmarkTriggered(QAction* action)
     const int newPosition = action->data().toInt();
     mByteArrayView->setCursorPosition(newPosition);
 }
-
-BookmarksController::~BookmarksController() {}
 
 }

@@ -35,6 +35,11 @@ ModelEncoderFileSystemExporterConfigEditorFactory::ModelEncoderFileSystemExporte
 {
 }
 
+ModelEncoderFileSystemExporterConfigEditorFactory::~ModelEncoderFileSystemExporterConfigEditorFactory()
+{
+    // TODO: do not delete mEncoderConfigEditorFactory here, is deleted outside, no clear control that way
+}
+
 AbstractModelExporterConfigEditor* ModelEncoderFileSystemExporterConfigEditorFactory::tryCreateConfigEditor(AbstractModelExporter* exporter) const
 {
     AbstractModelExporterConfigEditor* result = nullptr;
@@ -52,11 +57,6 @@ AbstractModelExporterConfigEditor* ModelEncoderFileSystemExporterConfigEditorFac
     }
 
     return result;
-}
-
-ModelEncoderFileSystemExporterConfigEditorFactory::~ModelEncoderFileSystemExporterConfigEditorFactory()
-{
-    // TODO: do not delete mEncoderConfigEditorFactory here, is deleted outside, no clear control that way
 }
 
 }

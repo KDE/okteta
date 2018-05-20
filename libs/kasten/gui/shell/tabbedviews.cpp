@@ -41,6 +41,8 @@ TabbedViews::TabbedViews()
     d->init();
 }
 
+TabbedViews::~TabbedViews() = default;
+
 QList<AbstractView*> TabbedViews::viewList() const
 {
     Q_D(const TabbedViews);
@@ -116,10 +118,6 @@ void TabbedViews::setFocus()
     Q_D(TabbedViews);
 
     d->setFocus();
-}
-
-TabbedViews::~TabbedViews()
-{
 }
 
 }

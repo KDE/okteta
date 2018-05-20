@@ -39,6 +39,8 @@ CharByteArrayColumnRenderer::CharByteArrayColumnRenderer(AbstractColumnStylist* 
     setSpacing(0, 0, 0);
 }
 
+CharByteArrayColumnRenderer::~CharByteArrayColumnRenderer() = default;
+
 void CharByteArrayColumnRenderer::renderByteText(QPainter* painter, Byte byte, Character byteChar, const QColor& color) const
 {
     Q_UNUSED(byte)
@@ -51,7 +53,5 @@ void CharByteArrayColumnRenderer::renderByteText(QPainter* painter, Byte byte, C
     painter->setPen(color);
     painter->drawText(0, mDigitBaseLine, text);
 }
-
-CharByteArrayColumnRenderer::~CharByteArrayColumnRenderer() {}
 
 }

@@ -121,6 +121,21 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     }
 }
 
+ByteTableView::~ByteTableView()
+{
+    QList<int> columnsWidth;
+    columnsWidth.reserve(ByteTableModel::NoOfIds);
+    const QHeaderView* header = mByteTableView->header();
+    for (int i = 0; i < ByteTableModel::NoOfIds; ++i) {
+        columnsWidth.append(header->sectionSize(i));
+    }
+
+    ByteTableViewSettings::setColumnsWidth(columnsWidth);
+    ByteTableViewSettings::setStyle(QApplication::style()->objectName());
+    ByteTableViewSettings::setFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont).toString());
+    ByteTableViewSettings::self()->save();
+}
+
 void ByteTableView::resizeColumnsWidth()
 {
     QHeaderView* header = mByteTableView->header();
@@ -157,21 +172,6 @@ void ByteTableView::onInsertClicked()
 {
     const unsigned char byte = mByteTableView->currentIndex().row();
     mTool->insert(byte, mInsertCountEdit->value());
-}
-
-ByteTableView::~ByteTableView()
-{
-    QList<int> columnsWidth;
-    columnsWidth.reserve(ByteTableModel::NoOfIds);
-    const QHeaderView* header = mByteTableView->header();
-    for (int i = 0; i < ByteTableModel::NoOfIds; ++i) {
-        columnsWidth.append(header->sectionSize(i));
-    }
-
-    ByteTableViewSettings::setColumnsWidth(columnsWidth);
-    ByteTableViewSettings::setStyle(QApplication::style()->objectName());
-    ByteTableViewSettings::setFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont).toString());
-    ByteTableViewSettings::self()->save();
 }
 
 }

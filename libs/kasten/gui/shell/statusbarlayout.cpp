@@ -39,6 +39,15 @@ StatusBarLayout::StatusBarLayout(QWidget* parent)
     setMargin(0);
 }
 
+StatusBarLayout::~StatusBarLayout()
+{
+//     while( !mWidgetList.isEmpty() )
+//     {
+//         QWidgetItem *item = mWidgetList.takeFirst();
+//         delete item;
+//     }
+}
+
 int StatusBarLayout::count() const { return mWidgetList.count(); }
 
 bool StatusBarLayout::isEmpty() const
@@ -231,15 +240,6 @@ void StatusBarLayout::updateLayoutStructs() const
     that->mIsEmpty =         (visibleCount == 0);
     that->mSizeHint =        sizeHint;
     that->mIsDirty =         false;
-}
-
-StatusBarLayout::~StatusBarLayout()
-{
-//     while( !mWidgetList.isEmpty() )
-//     {
-//         QWidgetItem *item = mWidgetList.takeFirst();
-//         delete item;
-//     }
 }
 
 }

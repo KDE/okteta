@@ -73,6 +73,8 @@ ByteArrayViewProfileLock::ByteArrayViewProfileLock(const ByteArrayViewProfileLoc
 {
 }
 
+ByteArrayViewProfileLock::~ByteArrayViewProfileLock() = default;
+
 ByteArrayViewProfileLock&
 ByteArrayViewProfileLock::operator=(const ByteArrayViewProfileLock& other)
 {
@@ -97,10 +99,6 @@ ByteArrayViewProfile::Id
 ByteArrayViewProfileLock::viewProfileId() const
 {
     return d->viewProfileId;
-}
-
-ByteArrayViewProfileLock::~ByteArrayViewProfileLock()
-{
 }
 
 }

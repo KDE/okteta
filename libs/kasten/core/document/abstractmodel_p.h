@@ -53,10 +53,10 @@ inline AbstractModelPrivate::AbstractModelPrivate(AbstractModel* parent, Abstrac
     , mBaseModel(baseModel)
 {}
 
+inline AbstractModelPrivate::~AbstractModelPrivate() = default;
+
 inline AbstractModel* AbstractModelPrivate::baseModel() const { return mBaseModel; }
 inline void AbstractModelPrivate::setBaseModel(AbstractModel* baseModel) { mBaseModel = baseModel; }
-
-inline AbstractModelPrivate::~AbstractModelPrivate() {}
 
 }
 

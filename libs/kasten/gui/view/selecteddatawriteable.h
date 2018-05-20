@@ -52,7 +52,7 @@ public:
     virtual bool canReadData(const QMimeData* data) const = 0;
 };
 
-inline SelectedDataWriteable::~SelectedDataWriteable() {}
+inline SelectedDataWriteable::~SelectedDataWriteable() = default;
 
 }
 }

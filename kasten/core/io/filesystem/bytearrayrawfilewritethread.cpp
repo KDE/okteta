@@ -32,6 +32,8 @@
 
 namespace Kasten {
 
+ByteArrayRawFileWriteThread::~ByteArrayRawFileWriteThread() = default;
+
 void ByteArrayRawFileWriteThread::run()
 {
     Okteta::PieceTableByteArrayModel* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(mDocument->content());
@@ -53,7 +55,5 @@ void ByteArrayRawFileWriteThread::run()
 
     emit documentWritten(mSuccess);
 }
-
-ByteArrayRawFileWriteThread::~ByteArrayRawFileWriteThread() {}
 
 }

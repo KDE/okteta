@@ -39,6 +39,8 @@ RotateByteArrayFilter::RotateByteArrayFilter()
               "ROTATE data"))
 {}
 
+RotateByteArrayFilter::~RotateByteArrayFilter() = default;
+
 AbstractByteArrayFilterParameterSet* RotateByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool RotateByteArrayFilter::filter(Okteta::Byte* result,
@@ -124,5 +126,3 @@ bool RotateByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
-
-RotateByteArrayFilter::~RotateByteArrayFilter() {}

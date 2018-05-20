@@ -61,6 +61,8 @@ inline PieceList::PieceList(const Piece& piece)
     append(piece);
 }
 
+inline PieceList::~PieceList() = default;
+
 inline int PieceList::size()             const { return mList.size(); }
 inline bool PieceList::isEmpty()         const { return mList.isEmpty(); }
 inline Size PieceList::totalLength()     const { return mTotalLength; }
@@ -120,8 +122,6 @@ inline void PieceList::prepend(const PieceList& other)
 
     mTotalLength += other.mTotalLength;
 }
-
-inline PieceList::~PieceList() {}
 
 }
 

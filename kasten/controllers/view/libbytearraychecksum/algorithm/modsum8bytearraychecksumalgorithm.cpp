@@ -34,6 +34,8 @@ ModSum8ByteArrayChecksumAlgorithm::ModSum8ByteArrayChecksumAlgorithm()
         i18nc("name of the checksum algorithm", "Modular sum 8-bit"))
 {}
 
+ModSum8ByteArrayChecksumAlgorithm::~ModSum8ByteArrayChecksumAlgorithm() = default;
+
 AbstractByteArrayChecksumParameterSet* ModSum8ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
@@ -59,5 +61,3 @@ bool ModSum8ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
     *result = QStringLiteral("%1").arg(modSum, 2, 16, QChar::fromLatin1('0'));
     return true;
 }
-
-ModSum8ByteArrayChecksumAlgorithm::~ModSum8ByteArrayChecksumAlgorithm() {}

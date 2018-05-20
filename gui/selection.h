@@ -123,7 +123,7 @@ protected:
 inline Selection::Selection() : mAnchor(-1) {}
 inline Selection::Selection(const Selection& other) = default;
 inline Selection::Selection(Address index) : mAnchor(index)  {}
-inline Selection::~Selection() {}
+inline Selection::~Selection() = default;
 
 inline Selection& Selection::operator=(const Selection& other)
 {

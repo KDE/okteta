@@ -34,6 +34,8 @@ TestDocument::TestDocument(const QByteArray& data)
 {
 }
 
+TestDocument::~TestDocument() = default;
+
 QString TestDocument::mimeType() const { return QStringLiteral("TestDocument"); }
 QString TestDocument::typeName() const { return QStringLiteral("Test Document"); }
 QString TestDocument::title() const { return mTitle; }
@@ -68,10 +70,6 @@ void TestDocument::setContentFlags(ContentFlags contentFlags)
 
         emit contentFlagsChanged(contentFlags);
     }
-}
-
-TestDocument::~TestDocument()
-{
 }
 
 }

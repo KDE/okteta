@@ -34,6 +34,8 @@ SInt32Codec::SInt32Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Signed 32-bit"))
 {}
 
+SInt32Codec::~SInt32Codec() = default;
+
 QVariant SInt32Codec::value(const PODData& data, int* byteCount) const
 {
     const qint32* pointer = (qint32*)data.pointer(4);
@@ -53,7 +55,5 @@ bool SInt32Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<SInt32>().value == otherValue.value<SInt32>().value);
 }
-
-SInt32Codec::~SInt32Codec() {}
 
 }

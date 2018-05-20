@@ -38,7 +38,7 @@ class Character;
 class OKTETACORE_EXPORT CharCodec
 {
 public:
-    virtual ~CharCodec() {}
+    virtual ~CharCodec();
 
 public:
     /** */
@@ -54,6 +54,8 @@ public: // API to be implemented
     virtual bool canEncode(const QChar& _char) const = 0;
     virtual const QString& name() const = 0;
 };
+
+inline CharCodec::~CharCodec() = default;
 
 }
 

@@ -43,6 +43,8 @@ TerminalTool::TerminalTool(DocumentSyncManager* documentSyncManager)
     setObjectName(QStringLiteral("Terminal"));
 }
 
+TerminalTool::~TerminalTool() = default;
+
 QString TerminalTool::title() const { return i18nc("@title:window", "Terminal"); }
 
 QUrl TerminalTool::currentUrl() const
@@ -68,7 +70,5 @@ void TerminalTool::setTargetModel(AbstractModel* model)
         emit currentUrlChanged(newCurrentUrl);
     }
 }
-
-TerminalTool::~TerminalTool() {}
 
 }

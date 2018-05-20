@@ -24,6 +24,26 @@
 #include "../topleveldatainformation.h"
 #include "structureviewpreferences.h"
 
+PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d)
+    : PrimitiveDataInformation(d)
+    , mValue(d.mValue->clone())
+{
+    mValue->setParent(this);
+}
+
+PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const QString& name,
+                                                                 PrimitiveDataInformation* valueType, DataInformation* parent)
+    : PrimitiveDataInformation(name, parent)
+    , mValue(valueType)
+{
+    Q_CHECK_PTR(valueType);
+    mValue->setParent(this);
+
+}
+
+// The inline destructor makes the compiler unhappy
+PrimitiveDataInformation::~PrimitiveDataInformation() = default;
+
 Qt::ItemFlags PrimitiveDataInformation::flags(int column, bool fileLoaded) const
 {
     if (column == (int) DataInformation::ColumnValue && fileLoaded) {
@@ -64,28 +84,6 @@ int PrimitiveDataInformation::indexOf(const DataInformation* const) const
 {
     Q_ASSERT(false);
     return -1;
-}
-
-// The inline destructor makes the compiler unhappy
-PrimitiveDataInformation::~PrimitiveDataInformation()
-{
-}
-
-PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d)
-    : PrimitiveDataInformation(d)
-    , mValue(d.mValue->clone())
-{
-    mValue->setParent(this);
-}
-
-PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const QString& name,
-                                                                 PrimitiveDataInformation* valueType, DataInformation* parent)
-    : PrimitiveDataInformation(name, parent)
-    , mValue(valueType)
-{
-    Q_CHECK_PTR(valueType);
-    mValue->setParent(this);
-
 }
 
 QScriptValue PrimitiveDataInformationWrapper::valueAsQScriptValue() const

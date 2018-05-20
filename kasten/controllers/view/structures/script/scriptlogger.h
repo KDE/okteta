@@ -70,7 +70,7 @@ public:
             , origin(d.origin)
             , time(d.time)
         {}
-        inline ~Data() {}
+        inline ~Data() = default;
         ScriptLogger::LogLevel level;
         QString message;
         QString origin;

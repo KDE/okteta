@@ -63,6 +63,8 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
     pageLayout->addRow(encodingTypeLabel, mEncodingSelect);
 }
 
+ByteArrayBase32StreamEncoderConfigEditor::~ByteArrayBase32StreamEncoderConfigEditor() = default;
+
 AbstractSelectionView* ByteArrayBase32StreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview(mEncoder);
@@ -73,10 +75,6 @@ void ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged()
     mSettings.algorithmId = static_cast<Base32StreamEncoderSettings::AlgorithmId>(mEncodingSelect->currentIndex());
 
     mEncoder->setSettings(mSettings);
-}
-
-ByteArrayBase32StreamEncoderConfigEditor::~ByteArrayBase32StreamEncoderConfigEditor()
-{
 }
 
 }

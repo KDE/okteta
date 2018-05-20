@@ -28,23 +28,6 @@
 
 #include <KLocalizedString>
 
-QString TaggedUnionDataInformation::typeNameImpl() const
-{
-    if (mLastIndex >= 0) {
-        return i18nc("data type in C/C++, then name", "struct %1", mAlternatives.at(mLastIndex).name);
-    } else {
-        return i18nc("data type, then name", "tagged union %1", name());
-    }
-}
-
-TaggedUnionDataInformation::~TaggedUnionDataInformation()
-{
-    qDeleteAll(mDefaultFields);
-    for (const FieldInfo& fi : qAsConst(mAlternatives)) {
-        qDeleteAll(fi.fields);
-    }
-}
-
 TaggedUnionDataInformation::TaggedUnionDataInformation(const QString& name, DataInformation* parent)
     : DataInformationWithChildren(name, QVector<DataInformation*>(), parent)
     , mLastIndex(-1)
@@ -60,6 +43,23 @@ TaggedUnionDataInformation::TaggedUnionDataInformation(const TaggedUnionDataInfo
     mAlternatives.reserve(d.mAlternatives.size());
     for (const FieldInfo& fi : d.mAlternatives) {
         mAlternatives.append(FieldInfo(fi.name, fi.selectIf, cloneList(fi.fields, this)));
+    }
+}
+
+TaggedUnionDataInformation::~TaggedUnionDataInformation()
+{
+    qDeleteAll(mDefaultFields);
+    for (const FieldInfo& fi : qAsConst(mAlternatives)) {
+        qDeleteAll(fi.fields);
+    }
+}
+
+QString TaggedUnionDataInformation::typeNameImpl() const
+{
+    if (mLastIndex >= 0) {
+        return i18nc("data type in C/C++, then name", "struct %1", mAlternatives.at(mLastIndex).name);
+    } else {
+        return i18nc("data type, then name", "tagged union %1", name());
     }
 }
 

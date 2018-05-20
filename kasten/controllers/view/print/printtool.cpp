@@ -53,6 +53,8 @@ PrintTool::PrintTool()
 {
 }
 
+PrintTool::~PrintTool() = default;
+
 void PrintTool::setTargetModel(AbstractModel* model)
 {
 //     if( mByteArrayView ) mByteArrayView->disconnect( this );
@@ -177,7 +179,5 @@ void PrintTool::print()
 
     delete printDialog;
 }
-
-PrintTool::~PrintTool() {}
 
 }

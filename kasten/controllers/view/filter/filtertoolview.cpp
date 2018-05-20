@@ -33,13 +33,13 @@ FilterToolView::FilterToolView(FilterTool* tool)
 {
 }
 
-QWidget* FilterToolView::widget()    const { return mWidget; }
-QString FilterToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* FilterToolView::tool() const { return mWidget->tool(); }
-
 FilterToolView::~FilterToolView()
 {
     delete mWidget;
 }
+
+QWidget* FilterToolView::widget()    const { return mWidget; }
+QString FilterToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* FilterToolView::tool() const { return mWidget->tool(); }
 
 }

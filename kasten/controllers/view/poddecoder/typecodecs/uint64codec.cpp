@@ -34,6 +34,8 @@ UInt64Codec::UInt64Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Unsigned 64-bit"))
 {}
 
+UInt64Codec::~UInt64Codec() = default;
+
 QVariant UInt64Codec::value(const PODData& data, int* byteCount) const
 {
     const quint64* pointer = (quint64*)data.pointer(8);
@@ -53,7 +55,5 @@ bool UInt64Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<UInt64>().value == otherValue.value<UInt64>().value);
 }
-
-UInt64Codec::~UInt64Codec() {}
 
 }

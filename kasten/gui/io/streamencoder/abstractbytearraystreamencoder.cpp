@@ -40,6 +40,8 @@ AbstractByteArrayStreamEncoder::AbstractByteArrayStreamEncoder(const QString& re
     : AbstractModelStreamEncoder(remoteTypeName, remoteMimeType, QStringLiteral("text/plain"))
 {}
 
+AbstractByteArrayStreamEncoder::~AbstractByteArrayStreamEncoder() = default;
+
 QString AbstractByteArrayStreamEncoder::modelTypeName(AbstractModel* model, const AbstractModelSelection* selection) const
 {
     Q_UNUSED(selection)
@@ -103,7 +105,5 @@ QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const 
 
     return success ? QString::fromLatin1(data) : QString();
 }
-
-AbstractByteArrayStreamEncoder::~AbstractByteArrayStreamEncoder() {}
 
 }

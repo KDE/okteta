@@ -73,6 +73,14 @@ ChecksumTool::ChecksumTool()
     mAlgorithmList = ByteArrayChecksumAlgorithmFactory::createAlgorithms();
 }
 
+ChecksumTool::~ChecksumTool()
+{
+    qDeleteAll(mAlgorithmList);
+#ifdef HAVE_QCA2
+    delete mQcaInitializer;
+#endif
+}
+
 QList<AbstractByteArrayChecksumAlgorithm*> ChecksumTool::algorithmList() const { return mAlgorithmList; }
 
 bool ChecksumTool::isApplyable() const
@@ -195,14 +203,6 @@ void ChecksumTool::onSourceDestroyed()
 {
     mSourceByteArrayModel = nullptr;
     onSourceChanged();
-}
-
-ChecksumTool::~ChecksumTool()
-{
-    qDeleteAll(mAlgorithmList);
-#ifdef HAVE_QCA2
-    delete mQcaInitializer;
-#endif
 }
 
 }

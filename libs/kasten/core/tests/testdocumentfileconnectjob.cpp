@@ -39,6 +39,8 @@ TestDocumentFileConnectJob::TestDocumentFileConnectJob(TestDocumentFileSynchroni
 {
 }
 
+TestDocumentFileConnectJob::~TestDocumentFileConnectJob() = default;
+
 void TestDocumentFileConnectJob::startConnectWithFile()
 {
     TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
@@ -60,7 +62,5 @@ void TestDocumentFileConnectJob::startConnectWithFile()
 
     complete(success);
 }
-
-TestDocumentFileConnectJob::~TestDocumentFileConnectJob() {}
 
 }

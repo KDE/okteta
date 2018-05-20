@@ -44,7 +44,7 @@ public:
             , selectIf(s)
             , fields(f)
         {}
-        FieldInfo() {};
+        FieldInfo() = default;
         /** The name this tagged union gets when this is selected */
         QString name;
         QScriptValue selectIf;

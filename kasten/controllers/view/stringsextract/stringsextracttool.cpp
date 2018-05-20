@@ -52,6 +52,8 @@ StringsExtractTool::StringsExtractTool()
     setObjectName(QStringLiteral("Strings"));
 }
 
+StringsExtractTool::~StringsExtractTool() = default;
+
 bool StringsExtractTool::isApplyable() const
 {
     return (mByteArrayModel && mByteArrayView && mByteArrayView->hasSelectedData() && mMinLength > 0);
@@ -209,10 +211,6 @@ void StringsExtractTool::extractStrings()
     emit uptodateChanged(true);
     emit canHighlightStringChanged(true);
     emit offsetCodingChanged(mByteArrayView->offsetCoding());
-}
-
-StringsExtractTool::~StringsExtractTool()
-{
 }
 
 }

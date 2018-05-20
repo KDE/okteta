@@ -43,6 +43,11 @@ ByteArrayModel::ByteArrayModel(int size, int maxSize, QObject* parent)
     , d(new ByteArrayModelPrivate(this, size, maxSize))
 {}
 
+ByteArrayModel::~ByteArrayModel()
+{
+    delete d;
+}
+
 Byte ByteArrayModel::byte(Address offset) const { return d->byte(offset); }
 Size ByteArrayModel::size()               const { return d->size(); }
 
@@ -144,11 +149,6 @@ bool ByteArrayModel::containsBookmarkFor(int offset) const
 unsigned int ByteArrayModel::bookmarksCount() const
 {
     return d->bookmarksCount();
-}
-
-ByteArrayModel::~ByteArrayModel()
-{
-    delete d;
 }
 
 }

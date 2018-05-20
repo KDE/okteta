@@ -40,9 +40,7 @@ Utf16StringData::Utf16StringData(StringDataInformation* parent)
 {
 }
 
-Utf16StringData::~Utf16StringData()
-{
-}
+Utf16StringData::~Utf16StringData() = default;
 
 QString Utf16StringData::charType() const
 {

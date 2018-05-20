@@ -34,6 +34,8 @@ WordByteArrayService::WordByteArrayService(const AbstractByteArrayModel* byteArr
     , mCharCodec(charCodec)
 {}
 
+WordByteArrayService::~WordByteArrayService() = default;
+
 AddressRange WordByteArrayService::wordSection(Address index) const
 {
     return isWordChar(index) ?
@@ -258,7 +260,5 @@ QString WordByteArrayService::text(Address index, Address lastIndex) const
 
     return result;
 }
-
-WordByteArrayService::~WordByteArrayService() {}
 
 }

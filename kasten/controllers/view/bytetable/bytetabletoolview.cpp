@@ -33,13 +33,13 @@ ByteTableToolView::ByteTableToolView(ByteTableTool* tool)
 {
 }
 
-QWidget* ByteTableToolView::widget()    const { return mWidget; }
-QString ByteTableToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* ByteTableToolView::tool() const { return mWidget->tool(); }
-
 ByteTableToolView::~ByteTableToolView()
 {
     delete mWidget;
 }
+
+QWidget* ByteTableToolView::widget()    const { return mWidget; }
+QString ByteTableToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* ByteTableToolView::tool() const { return mWidget->tool(); }
 
 }

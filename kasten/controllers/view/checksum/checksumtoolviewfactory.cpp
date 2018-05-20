@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-ChecksumToolViewFactory::ChecksumToolViewFactory() {}
+ChecksumToolViewFactory::ChecksumToolViewFactory() = default;
+
+ChecksumToolViewFactory::~ChecksumToolViewFactory() = default;
 
 QString ChecksumToolViewFactory::iconName() const { return QStringLiteral("accessories-calculator"); }
 QString ChecksumToolViewFactory::title()       const { return i18nc("@title:window of the tool to calculate checksums", "Checksum"); }
@@ -41,7 +43,5 @@ AbstractToolView* ChecksumToolViewFactory::create(AbstractTool* tool)
 {
     return new ChecksumToolView(qobject_cast<ChecksumTool*>(tool));
 }
-
-ChecksumToolViewFactory::~ChecksumToolViewFactory() {}
 
 }

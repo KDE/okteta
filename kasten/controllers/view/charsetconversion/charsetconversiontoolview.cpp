@@ -33,13 +33,13 @@ CharsetConversionToolView::CharsetConversionToolView(CharsetConversionTool* tool
 {
 }
 
-QWidget* CharsetConversionToolView::widget()    const { return mWidget; }
-QString CharsetConversionToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* CharsetConversionToolView::tool() const { return mWidget->tool(); }
-
 CharsetConversionToolView::~CharsetConversionToolView()
 {
     delete mWidget;
 }
+
+QWidget* CharsetConversionToolView::widget()    const { return mWidget; }
+QString CharsetConversionToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* CharsetConversionToolView::tool() const { return mWidget->tool(); }
 
 }

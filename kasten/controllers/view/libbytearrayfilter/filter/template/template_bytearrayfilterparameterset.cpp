@@ -24,6 +24,8 @@ Template_ByteArrayFilterParameterSet::Template_ByteArrayFilterParameterSet()
 //// ADAPT(end)
 {}
 
+Template_ByteArrayFilterParameterSet::~Template_ByteArrayFilterParameterSet() = default;
+
 //// ADAPT(start)
 //// rename "Template_ParameterSetId" to a unique identifier,
 //// e.g. "MyParameterSet"
@@ -39,5 +41,3 @@ unsigned char Template_ByteArrayFilterParameterSet::level() const { return mLeve
 //// implement the setters for all parameters
 void Template_ByteArrayFilterParameterSet::setLevel(unsigned int level) { mLevel = level; }
 //// ADAPT(end)
-
-Template_ByteArrayFilterParameterSet::~Template_ByteArrayFilterParameterSet() {}

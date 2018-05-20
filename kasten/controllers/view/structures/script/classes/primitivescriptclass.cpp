@@ -76,9 +76,7 @@ PrimitiveScriptClass::PrimitiveScriptClass(QScriptEngine* engine, ScriptHandlerI
     mPrimitivePrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Primitive_proto_toString));
 }
 
-PrimitiveScriptClass::~PrimitiveScriptClass()
-{
-}
+PrimitiveScriptClass::~PrimitiveScriptClass() = default;
 
 bool PrimitiveScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint*)
 {

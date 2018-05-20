@@ -38,6 +38,8 @@ ByteArrayTableCursor::ByteArrayTableCursor(const ByteArrayTableLayout* layout)
 {
 }
 
+ByteArrayTableCursor::~ByteArrayTableCursor() = default;
+
 void ByteArrayTableCursor::setAppendPosEnabled(bool appendPosEnabled)
 {
     if (mAppendPosEnabled == appendPosEnabled) {
@@ -355,7 +357,5 @@ void ByteArrayTableCursor::adaptToChanges(const ArrayChangeMetricsList& changeLi
         stepToEnd();
     }
 }
-
-ByteArrayTableCursor::~ByteArrayTableCursor() {}
 
 }

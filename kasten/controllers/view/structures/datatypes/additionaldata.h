@@ -53,6 +53,14 @@ Q_STATIC_ASSERT(sizeof(AdditionalData) == sizeof(void*));
 
 Q_DECLARE_METATYPE(QScriptValue)
 
+inline AdditionalData::AdditionalData() = default;
+
+inline AdditionalData::AdditionalData(const AdditionalData& data)
+    : mData(data.mData)
+{}
+
+inline AdditionalData::~AdditionalData() = default;
+
 inline QVariant AdditionalData::get(AdditionalData::AdditionalDataType entry) const
 {
     return mData.value((int)entry);
@@ -66,19 +74,6 @@ inline void AdditionalData::set(AdditionalData::AdditionalDataType entry, const 
 inline void AdditionalData::remove(AdditionalData::AdditionalDataType entry)
 {
     mData.remove((int)entry);
-}
-
-inline AdditionalData::AdditionalData()
-{
-}
-
-inline AdditionalData::AdditionalData(const AdditionalData& data)
-    : mData(data.mData)
-{
-}
-
-inline AdditionalData::~AdditionalData()
-{
 }
 
 #endif /* ADDITIONALDATA_H_ */

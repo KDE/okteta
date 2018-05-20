@@ -49,9 +49,7 @@ StringScriptClass::StringScriptClass(QScriptEngine* eng, ScriptHandlerInfo* hand
     mStringPrototype.setProperty(QStringLiteral("toString"), eng->newFunction(String_proto_toString));
 }
 
-StringScriptClass::~StringScriptClass()
-{
-}
+StringScriptClass::~StringScriptClass() = default;
 
 bool StringScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {

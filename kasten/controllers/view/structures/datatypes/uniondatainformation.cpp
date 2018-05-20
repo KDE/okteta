@@ -24,6 +24,14 @@
 
 #include <KLocalizedString>
 
+UnionDataInformation::UnionDataInformation(const QString& name, const QVector<DataInformation*>& children,
+                                           DataInformation* parent)
+    : DataInformationWithChildren(name, children, parent)
+{
+}
+
+UnionDataInformation::~UnionDataInformation() = default;
+
 QString UnionDataInformation::typeNameImpl() const
 {
     return i18nc("data type in C/C++, then name", "union %1", name());
@@ -81,16 +89,6 @@ qint64 UnionDataInformation::readData(Okteta::AbstractByteArrayModel* input,
     *bitOffset = bitOffsetAfterUnion;
     mWasAbleToRead = !reachedEOF;
     return reachedEOF ? -1 : readBits;
-}
-
-UnionDataInformation::~UnionDataInformation()
-{
-}
-
-UnionDataInformation::UnionDataInformation(const QString& name, const QVector<DataInformation*>& children,
-                                           DataInformation* parent)
-    : DataInformationWithChildren(name, children, parent)
-{
 }
 
 BitCount64 UnionDataInformation::childPosition(const DataInformation* child, Okteta::Address start) const

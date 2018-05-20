@@ -41,6 +41,12 @@ ByteArrayValidator::ByteArrayValidator(QObject* parent, Coding codecId, int char
     setCodec(codecId);
 }
 
+ByteArrayValidator::~ByteArrayValidator()
+{
+    delete mValueCodec;
+    delete mCharCodec;
+}
+
 void ByteArrayValidator::setCharCodec(const QString& charCodecName)
 {
     if (charCodecName == mCharCodec->name()) {
@@ -187,12 +193,6 @@ QString ByteArrayValidator::toString(const QByteArray& byteArray) const
         }
     }
     return result;
-}
-
-ByteArrayValidator::~ByteArrayValidator()
-{
-    delete mValueCodec;
-    delete mCharCodec;
 }
 
 }

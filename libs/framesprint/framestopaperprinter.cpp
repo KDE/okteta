@@ -28,7 +28,12 @@
 #include <QPainter>
 #include <QPrinter>
 
-FramesToPaperPrinter::FramesToPaperPrinter() {}
+FramesToPaperPrinter::FramesToPaperPrinter() = default;
+
+FramesToPaperPrinter::~FramesToPaperPrinter()
+{
+    qDeleteAll(mFrameRendererList);
+}
 
 QRect FramesToPaperPrinter::pageRect() const { return mPageRect; }
 
@@ -69,9 +74,4 @@ bool FramesToPaperPrinter::print(QPrinter* printer, int firstPageIndex, int last
     }
 
     return success;
-}
-
-FramesToPaperPrinter::~FramesToPaperPrinter()
-{
-    qDeleteAll(mFrameRendererList);
 }

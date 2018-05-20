@@ -32,6 +32,8 @@
 
 namespace Okteta {
 
+ValueCodec::~ValueCodec() = default;
+
 ValueCodec* ValueCodec::createCodec(ValueCoding valueCoding)
 {
     ValueCodec* result;
@@ -69,7 +71,5 @@ unsigned int ValueCodec::decode(unsigned char* byte, const QString& digits, unsi
     *byte = result;
     return pos - oldPos;
 }
-
-ValueCodec::~ValueCodec() {}
 
 }

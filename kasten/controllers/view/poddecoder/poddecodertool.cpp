@@ -88,6 +88,12 @@ PODDecoderTool::PODDecoderTool()
     setupDecoder();
 }
 
+PODDecoderTool::~PODDecoderTool()
+{
+    delete mCharCodec;
+    qDeleteAll(mTypeCodecs);
+}
+
 QString PODDecoderTool::title() const { return i18nc("@title:window", "Decoding Table"); }
 bool PODDecoderTool::isReadOnly() const { return mReadOnly; }
 bool PODDecoderTool::isApplyable() const { return (mByteArrayModel != nullptr); }
@@ -336,12 +342,6 @@ void PODDecoderTool::onReadOnlyChanged()
         mReadOnly = newReadOnly;
         emit readOnlyChanged(newReadOnly);
     }
-}
-
-PODDecoderTool::~PODDecoderTool()
-{
-    delete mCharCodec;
-    qDeleteAll(mTypeCodecs);
 }
 
 }

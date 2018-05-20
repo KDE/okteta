@@ -93,6 +93,8 @@ ByteArrayViewProfile::ByteArrayViewProfile(const ByteArrayViewProfile& other)
 {
 }
 
+ByteArrayViewProfile::~ByteArrayViewProfile() = default;
+
 ByteArrayViewProfile& ByteArrayViewProfile::operator=(const ByteArrayViewProfile& other)
 {
     d = other.d;
@@ -129,7 +131,5 @@ void ByteArrayViewProfile::setNoOfBytesPerLine(int noOfBytesPerLine) { d->mNoOfB
 void ByteArrayViewProfile::setShowsNonprinting(bool showsNonprinting) { d->mShowsNonprinting = showsNonprinting; }
 void ByteArrayViewProfile::setNoOfGroupedBytes(int noOfGroupedBytes) { d->mNoOfGroupedBytes = noOfGroupedBytes; }
 void ByteArrayViewProfile::setViewModus(int viewModus) { d->mViewModus = viewModus; }
-
-ByteArrayViewProfile::~ByteArrayViewProfile() {}
 
 }

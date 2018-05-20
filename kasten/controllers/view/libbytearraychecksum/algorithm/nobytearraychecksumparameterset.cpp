@@ -22,11 +22,8 @@
 
 #include "nobytearraychecksumparameterset.h"
 
-NoByteArrayChecksumParameterSet::NoByteArrayChecksumParameterSet()
-{}
+NoByteArrayChecksumParameterSet::NoByteArrayChecksumParameterSet() = default;
+
+NoByteArrayChecksumParameterSet::~NoByteArrayChecksumParameterSet() = default;
 
 const char* NoByteArrayChecksumParameterSet::id() const { return "None"; }
-
-NoByteArrayChecksumParameterSet::~NoByteArrayChecksumParameterSet()
-{
-}

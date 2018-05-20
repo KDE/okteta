@@ -54,7 +54,8 @@ inline AbstractLoadJobPrivate::AbstractLoadJobPrivate(AbstractLoadJob* parent)
     : q_ptr(parent)
     , mDocument(nullptr)
 {}
-inline AbstractLoadJobPrivate::~AbstractLoadJobPrivate() {}
+
+inline AbstractLoadJobPrivate::~AbstractLoadJobPrivate() = default;
 
 inline AbstractDocument* AbstractLoadJobPrivate::document() const { return mDocument; }
 inline void AbstractLoadJobPrivate::setDocument(AbstractDocument* document)

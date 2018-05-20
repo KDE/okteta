@@ -33,6 +33,8 @@ SingleViewArea::SingleViewArea()
     d->init();
 }
 
+SingleViewArea::~SingleViewArea() = default;
+
 QWidget* SingleViewArea::widget() const
 {
     Q_D(const SingleViewArea);
@@ -66,10 +68,6 @@ void SingleViewArea::setView(AbstractView* view)
     Q_D(SingleViewArea);
 
     d->setView(view);
-}
-
-SingleViewArea::~SingleViewArea()
-{
 }
 
 }

@@ -32,6 +32,11 @@ StructuresToolView::StructuresToolView(StructuresTool* tool) :
 {
 }
 
+StructuresToolView::~StructuresToolView()
+{
+    delete mWidget;
+}
+
 QWidget* StructuresToolView::widget() const
 {
     return mWidget;
@@ -43,11 +48,6 @@ QString StructuresToolView::title() const
 AbstractTool* StructuresToolView::tool() const
 {
     return mWidget->tool();
-}
-
-StructuresToolView::~StructuresToolView()
-{
-    delete mWidget;
 }
 
 }

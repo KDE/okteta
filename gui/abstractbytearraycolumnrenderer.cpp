@@ -64,6 +64,12 @@ AbstractByteArrayColumnRenderer::AbstractByteArrayColumnRenderer(AbstractColumnS
 {
 }
 
+AbstractByteArrayColumnRenderer::~AbstractByteArrayColumnRenderer()
+{
+    delete [] mLinePosLeftPixelX;
+    delete [] mLinePosRightPixelX;
+}
+
 void AbstractByteArrayColumnRenderer::set(AbstractByteArrayModel* byteArrayModel)
 {
     mByteArrayModel = byteArrayModel;
@@ -776,12 +782,6 @@ bool AbstractByteArrayColumnRenderer::getNextMarkedAddressRange(AddressRange* _m
     *_markedSection = markedRange;
     *_flag = flag;
     return true;
-}
-
-AbstractByteArrayColumnRenderer::~AbstractByteArrayColumnRenderer()
-{
-    delete [] mLinePosLeftPixelX;
-    delete [] mLinePosRightPixelX;
 }
 
 }

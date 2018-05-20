@@ -57,9 +57,7 @@ StructureDefinitionFile::StructureDefinitionFile(const KPluginInfo& info)
     }
 }
 
-StructureDefinitionFile::~StructureDefinitionFile()
-{
-}
+StructureDefinitionFile::~StructureDefinitionFile() = default;
 
 KPluginInfo StructureDefinitionFile::pluginInfo() const
 {

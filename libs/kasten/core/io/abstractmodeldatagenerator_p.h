@@ -57,8 +57,7 @@ inline AbstractModelDataGeneratorPrivate::AbstractModelDataGeneratorPrivate(Abst
     , mFlags(flags)
 {}
 
-inline AbstractModelDataGeneratorPrivate::~AbstractModelDataGeneratorPrivate()
-{}
+inline AbstractModelDataGeneratorPrivate::~AbstractModelDataGeneratorPrivate() = default;
 
 inline const QString& AbstractModelDataGeneratorPrivate::typeName() const { return mTypeName; }
 inline const QString& AbstractModelDataGeneratorPrivate::mimeType() const { return mMimeType; }

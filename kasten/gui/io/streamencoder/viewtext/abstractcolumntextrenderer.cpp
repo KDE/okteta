@@ -29,13 +29,13 @@ namespace Kasten {
 
 static const int DefaultNoOfSublines = 1;
 
+AbstractColumnTextRenderer::~AbstractColumnTextRenderer() = default;
+
 QString AbstractColumnTextRenderer::whiteSpace(unsigned int length)
 {
     return QString().fill(QLatin1Char(' '), length);
 }
 
 int AbstractColumnTextRenderer::noOfSublinesNeeded() const { return DefaultNoOfSublines; }
-
-AbstractColumnTextRenderer::~AbstractColumnTextRenderer() {}
 
 }

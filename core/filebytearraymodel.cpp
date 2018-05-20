@@ -35,6 +35,11 @@ FileByteArrayModel::FileByteArrayModel(int pageNumber, int pageSize, QObject* pa
 {
 }
 
+FileByteArrayModel::~FileByteArrayModel()
+{
+    delete d;
+}
+
 Size FileByteArrayModel::size()        const { return d->size(); }
 bool FileByteArrayModel::isReadOnly() const { return d->isReadOnly(); }
 bool FileByteArrayModel::isModified() const { return false; }
@@ -53,10 +58,5 @@ bool FileByteArrayModel::swap(Address /*DestPos*/, const AddressRange& /*SourceS
 
 bool FileByteArrayModel::open(const QString& fileName) { return d->open(fileName); }
 bool FileByteArrayModel::close() { return d->close(); }
-
-FileByteArrayModel::~FileByteArrayModel()
-{
-    delete d;
-}
 
 }

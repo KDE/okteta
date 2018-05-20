@@ -35,6 +35,8 @@ ByteArrayModelIoDevice::ByteArrayModelIoDevice(AbstractByteArrayModel* byteArray
     open(ReadOnly);   // krazy:exclude=syscalls
 }
 
+ByteArrayModelIoDevice::~ByteArrayModelIoDevice() = default;
+
 qint64 ByteArrayModelIoDevice::size() const
 {
     return mByteArrayModel->size();
@@ -91,7 +93,5 @@ qint64 ByteArrayModelIoDevice::writeData(const char* data, qint64 length)
     Q_UNUSED(length);
     return -1;
 }
-
-ByteArrayModelIoDevice::~ByteArrayModelIoDevice() {}
 
 }

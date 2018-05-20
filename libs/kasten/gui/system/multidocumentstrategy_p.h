@@ -85,6 +85,8 @@ MultiDocumentStrategyPrivate::MultiDocumentStrategyPrivate(MultiDocumentStrategy
 {
 }
 
+inline MultiDocumentStrategyPrivate::~MultiDocumentStrategyPrivate() = default;
+
 inline QList<AbstractDocument*> MultiDocumentStrategyPrivate::documents() const
 {
     return mDocumentManager->documents();
@@ -134,8 +136,6 @@ inline void MultiDocumentStrategyPrivate::closeDocument(AbstractDocument* docume
 {
     mDocumentManager->closeDocument(document);
 }
-
-inline MultiDocumentStrategyPrivate::~MultiDocumentStrategyPrivate() {}
 
 }
 

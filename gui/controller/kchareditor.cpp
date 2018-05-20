@@ -36,6 +36,8 @@ KCharEditor::KCharEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* vi
 {
 }
 
+KCharEditor::~KCharEditor() = default;
+
 bool KCharEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
@@ -60,7 +62,5 @@ bool KCharEditor::handleKeyPress(QKeyEvent* keyEvent)
 
     return keyUsed ? true : KEditor::handleKeyPress(keyEvent);
 }
-
-KCharEditor::~KCharEditor() {}
 
 }

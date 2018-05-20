@@ -35,6 +35,6 @@ AbstractGroupedViews::AbstractGroupedViews(AbstractGroupedViewsPrivate* d)
 {
 }
 
-AbstractGroupedViews::~AbstractGroupedViews() {}
+AbstractGroupedViews::~AbstractGroupedViews() = default;
 
 }

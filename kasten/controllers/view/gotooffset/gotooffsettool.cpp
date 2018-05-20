@@ -44,6 +44,8 @@ GotoOffsetTool::GotoOffsetTool()
     setObjectName(QStringLiteral("GotoOffset"));
 }
 
+GotoOffsetTool::~GotoOffsetTool() = default;
+
 int GotoOffsetTool::currentOffset() const
 {
     return mByteArrayView ?
@@ -177,10 +179,6 @@ void GotoOffsetTool::onContentsChanged()
 {
     // TODO: find status before content changed, e.g. by caching
     emit isUsableChanged(isUsable());
-}
-
-GotoOffsetTool::~GotoOffsetTool()
-{
 }
 
 }

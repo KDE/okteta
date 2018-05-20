@@ -45,6 +45,16 @@ DocumentManager::DocumentManager()
 {
 }
 
+DocumentManager::~DocumentManager()
+{
+    // TODO: emit signal here, too?
+    qDeleteAll(mList);
+
+    delete mCreateManager;
+    delete mSyncManager;
+    delete mCodecManager;
+} // TODO: destroy all documents?
+
 QList<AbstractDocument*> DocumentManager::documents() const { return mList; }
 bool DocumentManager::isEmpty() const { return mList.isEmpty(); }
 
@@ -171,15 +181,5 @@ void DocumentManager::requestFocus(AbstractDocument* document)
 {
     emit focusRequested(document);
 }
-
-DocumentManager::~DocumentManager()
-{
-    // TODO: emit signal here, too?
-    qDeleteAll(mList);
-
-    delete mCreateManager;
-    delete mSyncManager;
-    delete mCodecManager;
-} // TODO: destroy all documents?
 
 }

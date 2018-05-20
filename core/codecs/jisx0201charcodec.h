@@ -45,7 +45,7 @@ public:
     static const QString& codecName();
 };
 
-inline JISX0201CharCodec::JISX0201CharCodec() {}
+inline JISX0201CharCodec::JISX0201CharCodec() = default;
 
 inline JISX0201CharCodec* JISX0201CharCodec::create() { return new JISX0201CharCodec(); }
 

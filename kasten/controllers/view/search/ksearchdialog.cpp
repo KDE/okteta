@@ -55,6 +55,8 @@ KSearchDialog::KSearchDialog(SearchTool* tool, QWidget* parent)
             this, &KSearchDialog::setCharCodec);
 }
 
+KSearchDialog::~KSearchDialog() = default;
+
 void KSearchDialog::onFindButtonClicked()
 {
     hide();
@@ -73,7 +75,5 @@ void KSearchDialog::showEvent(QShowEvent* showEvent)
 
     setInSelection(mTool->hasSelectedData());
 }
-
-KSearchDialog::~KSearchDialog() {}
 
 }

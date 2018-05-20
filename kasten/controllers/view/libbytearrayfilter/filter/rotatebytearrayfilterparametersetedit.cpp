@@ -75,6 +75,8 @@ RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWi
     baseLayout->addRow(moveBitWidthLabelText, mMoveBitWidthEdit);
 }
 
+RotateByteArrayFilterParameterSetEdit::~RotateByteArrayFilterParameterSetEdit() = default;
+
 bool RotateByteArrayFilterParameterSetEdit::isValid() const { return mMoveBitWidthEdit->value() != 0; }
 
 void RotateByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
@@ -99,6 +101,3 @@ void RotateByteArrayFilterParameterSetEdit::onValueChanged(int value)
 {
     emit validityChanged(value != 0);
 }
-
-RotateByteArrayFilterParameterSetEdit::~RotateByteArrayFilterParameterSetEdit()
-{}

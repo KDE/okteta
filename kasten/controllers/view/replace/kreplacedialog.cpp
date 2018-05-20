@@ -79,6 +79,8 @@ KReplaceDialog::KReplaceDialog(ReplaceTool* tool, QWidget* parent)
     setModal(true);
 }
 
+KReplaceDialog::~KReplaceDialog() = default;
+
 QByteArray KReplaceDialog::replaceData()  const
 {
     return ReplaceDataEdit->byteArray();
@@ -123,7 +125,5 @@ void KReplaceDialog::rememberCurrentSettings()
 
     ReplaceDataEdit->rememberCurrentByteArray();
 }
-
-KReplaceDialog::~KReplaceDialog() {}
 
 }

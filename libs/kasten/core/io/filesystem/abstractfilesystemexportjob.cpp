@@ -36,6 +36,8 @@ AbstractFileSystemExportJob::AbstractFileSystemExportJob(AbstractFileSystemExpor
 {
 }
 
+AbstractFileSystemExportJob::~AbstractFileSystemExportJob() = default;
+
 AbstractModel* AbstractFileSystemExportJob::model() const
 {
     Q_D(const AbstractFileSystemExportJob);
@@ -67,10 +69,6 @@ void AbstractFileSystemExportJob::completeExport(bool success)
     Q_D(AbstractFileSystemExportJob);
 
     d->completeExport(success);
-}
-
-AbstractFileSystemExportJob::~AbstractFileSystemExportJob()
-{
 }
 
 }

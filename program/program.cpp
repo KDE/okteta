@@ -69,6 +69,15 @@ OktetaProgram::OktetaProgram(int& argc, char* argv[])
     KCrash::initialize();
 }
 
+OktetaProgram::~OktetaProgram()
+{
+    delete mDocumentStrategy;
+    delete mDocumentManager;
+    delete mViewManager;
+    delete mDialogHandler;
+    delete mByteArrayViewProfileManager;
+}
+
 int OktetaProgram::execute()
 {
     mDocumentManager = new DocumentManager();
@@ -154,15 +163,6 @@ int OktetaProgram::execute()
 void OktetaProgram::quit()
 {
     qApp->quit();
-}
-
-OktetaProgram::~OktetaProgram()
-{
-    delete mDocumentStrategy;
-    delete mDocumentManager;
-    delete mViewManager;
-    delete mDialogHandler;
-    delete mByteArrayViewProfileManager;
 }
 
 }

@@ -40,7 +40,7 @@ public:
     QChar value;
 };
 
-inline Utf8::Utf8() {}
+inline Utf8::Utf8() = default;
 inline Utf8::Utf8(QChar v) : value(v) {}
 
 inline QString Utf8::toString() const { return QString(value); }

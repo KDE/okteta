@@ -55,6 +55,8 @@ ByteArrayBase64StreamEncoder::ByteArrayBase64StreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Base64"), QStringLiteral("application/base64"))
 {}
 
+ByteArrayBase64StreamEncoder::~ByteArrayBase64StreamEncoder() = default;
+
 bool ByteArrayBase64StreamEncoder::encodeDataToStream(QIODevice* device,
                                                       const ByteArrayView* byteArrayView,
                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
@@ -114,7 +116,5 @@ bool ByteArrayBase64StreamEncoder::encodeDataToStream(QIODevice* device,
 
     return success;
 }
-
-ByteArrayBase64StreamEncoder::~ByteArrayBase64StreamEncoder() {}
 
 }

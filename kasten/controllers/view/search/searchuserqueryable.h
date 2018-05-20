@@ -41,7 +41,7 @@ public: // API to be implemented
     virtual bool queryContinue(KFindDirection direction) const = 0;
 };
 
-inline SearchUserQueryable::~SearchUserQueryable() {}
+inline SearchUserQueryable::~SearchUserQueryable() = default;
 
 }
 }

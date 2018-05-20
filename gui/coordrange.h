@@ -93,9 +93,9 @@ inline CoordRange::CoordRange(const LinePositionRange& posRange, const LineRange
     : KDE::KBaseCoordRange(Coord(posRange.start(), lineRange.start()), Coord(posRange.end(), lineRange.end()))
 {}
 inline CoordRange::CoordRange(const CoordRange& other) = default;
-inline CoordRange::CoordRange()  {}
+inline CoordRange::CoordRange() = default;
 
-inline CoordRange::~CoordRange() {}
+inline CoordRange::~CoordRange() = default;
 
 inline CoordRange& CoordRange::operator=(const CoordRange& other) {  KDE::KBaseCoordRange::operator=(other); return *this; }
 

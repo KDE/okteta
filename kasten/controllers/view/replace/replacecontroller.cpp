@@ -58,6 +58,13 @@ ReplaceController::ReplaceController(KXMLGUIClient* guiClient, QWidget* parentWi
     mReplaceAction->setEnabled(false);
 }
 
+ReplaceController::~ReplaceController()
+{
+    delete mReplaceDialog;
+    delete mReplacePrompt;
+    delete mTool;
+}
+
 void ReplaceController::setTargetModel(AbstractModel* model)
 {
     mTool->setTargetModel(model);
@@ -124,13 +131,6 @@ ReplaceBehaviour ReplaceController::queryReplaceCurrent() const
     }
 
     return answer;
-}
-
-ReplaceController::~ReplaceController()
-{
-    delete mReplaceDialog;
-    delete mReplacePrompt;
-    delete mTool;
 }
 
 }

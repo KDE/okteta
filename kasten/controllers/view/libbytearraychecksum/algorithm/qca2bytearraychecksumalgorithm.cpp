@@ -43,6 +43,8 @@ Qca2ByteArrayChecksumAlgorithm::Qca2ByteArrayChecksumAlgorithm(const QString& na
     , mType(type)
 {}
 
+Qca2ByteArrayChecksumAlgorithm::~Qca2ByteArrayChecksumAlgorithm() = default;
+
 AbstractByteArrayChecksumParameterSet* Qca2ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
@@ -74,5 +76,3 @@ bool Qca2ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
     *result = QCA::arrayToHex(hashResult);
     return true;
 }
-
-Qca2ByteArrayChecksumAlgorithm::~Qca2ByteArrayChecksumAlgorithm() {}

@@ -33,13 +33,13 @@ StringsExtractToolView::StringsExtractToolView(StringsExtractTool* tool)
 {
 }
 
-QWidget* StringsExtractToolView::widget()    const { return mWidget; }
-QString StringsExtractToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* StringsExtractToolView::tool() const { return mWidget->tool(); }
-
 StringsExtractToolView::~StringsExtractToolView()
 {
     delete mWidget;
 }
+
+QWidget* StringsExtractToolView::widget()    const { return mWidget; }
+QString StringsExtractToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* StringsExtractToolView::tool() const { return mWidget->tool(); }
 
 }

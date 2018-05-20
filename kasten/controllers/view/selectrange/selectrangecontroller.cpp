@@ -57,6 +57,12 @@ SelectRangeController::SelectRangeController(If::ToolInlineViewable* toolInlineV
     mView = new SelectRangeToolView(mTool);
 }
 
+SelectRangeController::~SelectRangeController()
+{
+    delete mView;
+    delete mTool;
+}
+
 void SelectRangeController::setTargetModel(AbstractModel* model)
 {
     mTool->setTargetModel(model);
@@ -66,12 +72,6 @@ void SelectRangeController::select()
 {
 //     mView->activate(); // TODO: show would be better here, or should instead toolInlineViewable be asked?
     mToolInlineViewable->setCurrentToolInlineView(mView);
-}
-
-SelectRangeController::~SelectRangeController()
-{
-    delete mView;
-    delete mTool;
 }
 
 }

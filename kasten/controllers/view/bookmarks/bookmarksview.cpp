@@ -133,6 +133,8 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     onBookmarkSelectionChanged();
 }
 
+BookmarksView::~BookmarksView() = default;
+
 void BookmarksView::onBookmarkDoubleClicked(const QModelIndex& index)
 {
     const int column = index.column();
@@ -197,7 +199,5 @@ void BookmarksView::onRenameBookmarkButtonClicked()
         mBookmarkListView->edit(nameIndex);
     }
 }
-
-BookmarksView::~BookmarksView() {}
 
 }

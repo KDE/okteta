@@ -35,9 +35,7 @@ PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo*
     mIterableProperties.append(qMakePair(s_type, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
-PointerScriptClass::~PointerScriptClass()
-{
-}
+PointerScriptClass::~PointerScriptClass() = default;
 
 QScriptValue PointerScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name,
                                                     uint id)

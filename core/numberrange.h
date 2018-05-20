@@ -47,13 +47,11 @@ public:
      * @param startIndex starting index
      * @param endIndex end index
      */
-    // FIXME: gcc 3.4.5 on windows gives an internal_compiler_error if ctor/dtor are defined with the keyword inline
-    // thus put the function bodies here
-    NumberRange(N startIndex, N endIndex) : Range<N>(startIndex, endIndex) {}
-    NumberRange(const NumberRange& other) : Range<N>(other.start(), other.end()) {}
-    NumberRange() {}
+    NumberRange(N startIndex, N endIndex);
+    NumberRange(const NumberRange& other);
+    NumberRange();
 
-    ~NumberRange() {}
+    ~NumberRange();
 
 public:
     NumberRange& operator=(const NumberRange& other);
@@ -123,6 +121,16 @@ public:
     /** @returns true if both range . If one of both is invalid the behaviour is undefined */
     bool isJoinable(const NumberRange& other) const;
 };
+
+template <typename N, typename S>
+NumberRange<N, S>::NumberRange(N startIndex, N endIndex) : Range<N>(startIndex, endIndex) {}
+template <typename N, typename S>
+NumberRange<N, S>::NumberRange(const NumberRange& other) : Range<N>(other.start(), other.end()) {}
+template <typename N, typename S>
+NumberRange<N, S>::NumberRange() = default;
+
+template <typename N, typename S>
+NumberRange<N, S>::~NumberRange() = default;
 
 template <typename N, typename S>
 inline NumberRange<N, S> NumberRange<N, S>::fromWidth(N startIndex, S width) { return NumberRange(startIndex, startIndex + width - 1); }

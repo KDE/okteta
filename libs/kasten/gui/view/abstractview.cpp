@@ -29,6 +29,6 @@ AbstractView::AbstractView(AbstractModel* baseModel)
 {
 }
 
-AbstractView::~AbstractView() {}
+AbstractView::~AbstractView() = default;
 
 }

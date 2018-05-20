@@ -49,6 +49,8 @@ TabWidget::TabWidget(QWidget* parent)
     setAcceptDrops(true);
 }
 
+TabWidget::~TabWidget() = default;
+
 void TabWidget::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::MidButton) {
@@ -99,10 +101,6 @@ void TabWidget::dropEvent(QDropEvent* event)
     }
 
     QTabWidget::dropEvent(event);
-}
-
-TabWidget::~TabWidget()
-{
 }
 
 }

@@ -82,6 +82,8 @@ inline UIntSpinBox::UIntSpinBox(QWidget* parent, int base)
     setBase(base);
 }
 
+inline UIntSpinBox::~UIntSpinBox() = default;
+
 inline quint64 UIntSpinBox::value()   const { return mValue; }
 inline quint64 UIntSpinBox::maximum() const { return mMaximum; }
 
@@ -130,8 +132,6 @@ inline void UIntSpinBox::setBase(int base)
         (base ==  2) ? "0b" :
         /* else */     nullptr);
 }
-
-inline UIntSpinBox::~UIntSpinBox() {}
 
 inline UIntSpinBox* UIntSpinBox::createUInt64Spinbox(QWidget* parent)
 {

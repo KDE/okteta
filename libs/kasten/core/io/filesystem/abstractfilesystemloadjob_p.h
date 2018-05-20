@@ -71,7 +71,7 @@ inline AbstractFileSystemLoadJobPrivate::AbstractFileSystemLoadJobPrivate(Abstra
     , mFile(nullptr)
 {}
 
-inline AbstractFileSystemLoadJobPrivate::~AbstractFileSystemLoadJobPrivate() {}
+inline AbstractFileSystemLoadJobPrivate::~AbstractFileSystemLoadJobPrivate() = default;
 
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJobPrivate::synchronizer() const
 {

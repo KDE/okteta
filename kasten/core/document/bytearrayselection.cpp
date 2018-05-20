@@ -24,14 +24,13 @@
 
 namespace Kasten {
 
-ByteArraySelection::ByteArraySelection()
-{}
+ByteArraySelection::ByteArraySelection() = default;
+
+ByteArraySelection::~ByteArraySelection() = default;
 
 bool ByteArraySelection::isValid() const { return mRange.isValid(); }
 Okteta::AddressRange ByteArraySelection::range() const { return mRange; }
 
 void ByteArraySelection::setRange(const Okteta::AddressRange& range) { mRange = range; }
-
-ByteArraySelection::~ByteArraySelection() {}
 
 }

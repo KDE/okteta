@@ -50,7 +50,7 @@ public: // API to be implemented
     virtual ReplaceBehaviour queryReplaceCurrent() const = 0;
 };
 
-inline ReplaceUserQueryable::~ReplaceUserQueryable() {}
+inline ReplaceUserQueryable::~ReplaceUserQueryable() = default;
 
 }
 }

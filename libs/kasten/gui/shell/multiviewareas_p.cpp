@@ -41,6 +41,12 @@ MultiViewAreasPrivate::MultiViewAreasPrivate(MultiViewAreas* parent)
 {
 }
 
+MultiViewAreasPrivate::~MultiViewAreasPrivate()
+{
+    qDeleteAll(mViewAreaList);
+    delete mMainSplitter;
+}
+
 void MultiViewAreasPrivate::init()
 {
     Q_Q(MultiViewAreas);
@@ -224,11 +230,5 @@ void MultiViewAreasPrivate::onModifiedChanged(AbstractDocument::SyncStates newSt
 
 }
 #endif
-
-MultiViewAreasPrivate::~MultiViewAreasPrivate()
-{
-    qDeleteAll(mViewAreaList);
-    delete mMainSplitter;
-}
 
 }

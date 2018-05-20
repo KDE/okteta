@@ -37,6 +37,8 @@ AbstractModelFileSystemSynchronizer::AbstractModelFileSystemSynchronizer()
     : AbstractModelSynchronizer(new AbstractModelFileSystemSynchronizerPrivate(this))
 {}
 
+AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer() = default;
+
 RemoteSyncState AbstractModelFileSystemSynchronizer::remoteSyncState() const
 {
     Q_D(const AbstractModelFileSystemSynchronizer);
@@ -98,10 +100,6 @@ void AbstractModelFileSystemSynchronizer::stopNetworkWatching()
     Q_D(AbstractModelFileSystemSynchronizer);
 
     d->stopNetworkWatching();
-}
-
-AbstractModelFileSystemSynchronizer::~AbstractModelFileSystemSynchronizer()
-{
 }
 
 }

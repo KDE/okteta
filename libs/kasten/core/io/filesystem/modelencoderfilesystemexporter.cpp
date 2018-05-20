@@ -30,6 +30,8 @@ ModelEncoderFileSystemExporter::ModelEncoderFileSystemExporter(AbstractModelStre
 {
 }
 
+ModelEncoderFileSystemExporter::~ModelEncoderFileSystemExporter() = default;
+
 AbstractModelStreamEncoder* ModelEncoderFileSystemExporter::encoder() const
 {
     Q_D(const ModelEncoderFileSystemExporter);
@@ -52,7 +54,5 @@ QString ModelEncoderFileSystemExporter::modelTypeName(AbstractModel* model, cons
 
     return d->modelTypeName(model, selection);
 }
-
-ModelEncoderFileSystemExporter::~ModelEncoderFileSystemExporter() {}
 
 }

@@ -34,6 +34,8 @@ SInt16Codec::SInt16Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Signed 16-bit"))
 {}
 
+SInt16Codec::~SInt16Codec() = default;
+
 QVariant SInt16Codec::value(const PODData& data, int* byteCount) const
 {
     const qint16* pointer = (qint16*)data.pointer(2);
@@ -53,7 +55,5 @@ bool SInt16Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<SInt16>().value == otherValue.value<SInt16>().value);
 }
-
-SInt16Codec::~SInt16Codec() {}
 
 }

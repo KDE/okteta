@@ -38,6 +38,11 @@ AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer(const O
 {
 }
 
+AbstractByteArrayColumnTextRenderer::~AbstractByteArrayColumnTextRenderer()
+{
+    delete [] mLinePositions;
+}
+
 void AbstractByteArrayColumnTextRenderer::setWidths(int byteWidth, int byteSpacingWidth, int noOfGroupedBytes)
 {
     // TODO: remove this hack and make it more general
@@ -81,11 +86,6 @@ void AbstractByteArrayColumnTextRenderer::renderFirstLine(QTextStream* stream, i
 void AbstractByteArrayColumnTextRenderer::renderNextLine(QTextStream* stream, bool isSubline) const
 {
     renderLine(stream, isSubline);
-}
-
-AbstractByteArrayColumnTextRenderer::~AbstractByteArrayColumnTextRenderer()
-{
-    delete [] mLinePositions;
 }
 
 }

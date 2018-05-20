@@ -45,6 +45,8 @@ TestDocumentFileReloadThread::TestDocumentFileReloadThread(QObject* parent, cons
 //     mDocument->moveToThread( this );
 }
 
+TestDocumentFileReloadThread::~TestDocumentFileReloadThread() = default;
+
 void TestDocumentFileReloadThread::run()
 {
     QDataStream inStream(mFile);
@@ -66,7 +68,5 @@ void TestDocumentFileReloadThread::run()
 
     emit documentReloaded(mSuccess);
 }
-
-TestDocumentFileReloadThread::~TestDocumentFileReloadThread() {}
 
 }

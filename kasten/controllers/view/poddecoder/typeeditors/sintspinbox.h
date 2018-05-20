@@ -82,6 +82,8 @@ inline SIntSpinBox::SIntSpinBox(QWidget* parent, int base)
     setBase(base);
 }
 
+inline SIntSpinBox::~SIntSpinBox() = default;
+
 inline qint64 SIntSpinBox::value() const { return mValue; }
 
 inline void SIntSpinBox::setValue(qint64 value)
@@ -132,8 +134,6 @@ inline void SIntSpinBox::setBase(int base)
         (base ==  2) ? "0b" :
         /* else */     nullptr);
 }
-
-inline SIntSpinBox::~SIntSpinBox() {}
 
 inline SIntSpinBox* SIntSpinBox::createSInt64Spinbox(QWidget* parent)
 {

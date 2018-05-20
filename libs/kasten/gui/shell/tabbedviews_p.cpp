@@ -40,6 +40,11 @@ TabbedViewsPrivate::TabbedViewsPrivate(TabbedViews* parent)
 {
 }
 
+TabbedViewsPrivate::~TabbedViewsPrivate()
+{
+    delete mViewAreaBox;
+}
+
 void TabbedViewsPrivate::init()
 {
     Q_Q(TabbedViews);
@@ -279,11 +284,6 @@ void TabbedViewsPrivate::onDropEvent(QDropEvent* event)
     const QMimeData* mimeData = event->mimeData();
 
     emit q->dataDropped(mimeData);
-}
-
-TabbedViewsPrivate::~TabbedViewsPrivate()
-{
-    delete mViewAreaBox;
 }
 
 }

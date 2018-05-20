@@ -39,6 +39,15 @@ ViewManager::ViewManager()
 {
 }
 
+ViewManager::~ViewManager()
+{
+    // TODO: signal closing here, too?
+    qDeleteAll(mViewList);
+
+    delete mCodecViewManager;
+    delete mFactory;
+}
+
 void ViewManager::setViewFactory(AbstractViewFactory* factory)
 {
     mFactory = factory;
@@ -136,15 +145,6 @@ void ViewManager::removeViews(const QList<AbstractView*>& views)
 //         qCDebug(LOG_KASTEN_GUI)<<view->title();
         delete view;
     }
-}
-
-ViewManager::~ViewManager()
-{
-    // TODO: signal closing here, too?
-    qDeleteAll(mViewList);
-
-    delete mCodecViewManager;
-    delete mFactory;
 }
 
 }

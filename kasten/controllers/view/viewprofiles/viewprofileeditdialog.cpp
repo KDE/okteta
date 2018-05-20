@@ -60,6 +60,8 @@ ViewProfileEditDialog::ViewProfileEditDialog(QWidget* parent)
     mOkButton->setEnabled(false);
 }
 
+ViewProfileEditDialog::~ViewProfileEditDialog() = default;
+
 ByteArrayViewProfile ViewProfileEditDialog::viewProfile() const
 {
     ByteArrayViewProfile result = mViewProfileEdit->viewProfile();
@@ -76,10 +78,6 @@ void ViewProfileEditDialog::setViewProfile(const ByteArrayViewProfile& viewProfi
 void ViewProfileEditDialog::onProfileTitleChanged(const QString& title)
 {
     mOkButton->setEnabled(!title.isEmpty());
-}
-
-ViewProfileEditDialog::~ViewProfileEditDialog()
-{
 }
 
 }

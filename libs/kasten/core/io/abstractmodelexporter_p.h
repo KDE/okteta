@@ -53,8 +53,7 @@ inline AbstractModelExporterPrivate::AbstractModelExporterPrivate(AbstractModelE
     , mRemoteMimeType(remoteMimeType)
 {}
 
-inline AbstractModelExporterPrivate::~AbstractModelExporterPrivate()
-{}
+inline AbstractModelExporterPrivate::~AbstractModelExporterPrivate() = default;
 
 inline const QString& AbstractModelExporterPrivate::remoteTypeName() const { return mRemoteTypeName; }
 inline const QString& AbstractModelExporterPrivate::remoteMimeType() const { return mRemoteMimeType; }

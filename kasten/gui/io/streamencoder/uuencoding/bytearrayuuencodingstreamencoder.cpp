@@ -82,6 +82,8 @@ ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Uuencoding"), QStringLiteral("text/x-uuencode"))
 {}
 
+ByteArrayUuencodingStreamEncoder::~ByteArrayUuencodingStreamEncoder() = default;
+
 bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
                                                           const ByteArrayView* byteArrayView,
                                                           const Okteta::AbstractByteArrayModel* byteArrayModel,
@@ -165,7 +167,5 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
 
     return success;
 }
-
-ByteArrayUuencodingStreamEncoder::~ByteArrayUuencodingStreamEncoder() {}
 
 }

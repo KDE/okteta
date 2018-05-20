@@ -70,6 +70,8 @@ ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "C Array"), QStringLiteral("text/x-csrc"))
 {}
 
+ByteArraySourceCodeStreamEncoder::~ByteArraySourceCodeStreamEncoder() = default;
+
 const char* const* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
 int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
 
@@ -206,7 +208,5 @@ QString ByteArraySourceCodeStreamEncoder::printFormatted(const Okteta::AbstractB
 
     return result;
 }
-
-ByteArraySourceCodeStreamEncoder::~ByteArraySourceCodeStreamEncoder() {}
 
 }

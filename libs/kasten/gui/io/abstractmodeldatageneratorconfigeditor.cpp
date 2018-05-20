@@ -29,14 +29,14 @@ AbstractModelDataGeneratorConfigEditor::AbstractModelDataGeneratorConfigEditor(Q
     , d(nullptr)
 {}
 
-bool AbstractModelDataGeneratorConfigEditor::isValid() const
-{
-    return true;
-}
-
 AbstractModelDataGeneratorConfigEditor::~AbstractModelDataGeneratorConfigEditor()
 {
 //     delete d;
+}
+
+bool AbstractModelDataGeneratorConfigEditor::isValid() const
+{
+    return true;
 }
 
 }

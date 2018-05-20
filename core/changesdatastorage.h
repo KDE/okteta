@@ -48,7 +48,7 @@ protected:
     QByteArray mData;
 };
 
-inline ChangesDataStorage::ChangesDataStorage() {}
+inline ChangesDataStorage::ChangesDataStorage() = default;
 
 inline QByteArray ChangesDataStorage::data(int offset, int length) const
 {

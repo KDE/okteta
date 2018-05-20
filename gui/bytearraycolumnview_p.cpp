@@ -44,6 +44,8 @@ ByteArrayColumnViewPrivate::ByteArrayColumnViewPrivate(ByteArrayColumnView* pare
 {
 }
 
+ByteArrayColumnViewPrivate::~ByteArrayColumnViewPrivate() = default;
+
 void ByteArrayColumnViewPrivate::init()
 {
     Q_Q(ByteArrayColumnView);
@@ -859,10 +861,6 @@ void ByteArrayColumnViewPrivate::ensureVisible(const AbstractByteArrayColumnRend
 
     q->horizontalScrollBar()->setValue(visibleXs.startForInclude(byteXs));
     q->verticalScrollBar()->setValue(visibleYs.startForInclude(byteYs));
-}
-
-ByteArrayColumnViewPrivate::~ByteArrayColumnViewPrivate()
-{
 }
 
 }

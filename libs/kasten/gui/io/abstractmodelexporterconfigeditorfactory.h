@@ -40,7 +40,7 @@ public:
     virtual AbstractModelExporterConfigEditor* tryCreateConfigEditor(AbstractModelExporter* exporter) const = 0;
 };
 
-inline AbstractModelExporterConfigEditorFactory::~AbstractModelExporterConfigEditorFactory() {}
+inline AbstractModelExporterConfigEditorFactory::~AbstractModelExporterConfigEditorFactory() = default;
 
 }
 

@@ -38,6 +38,11 @@ AbstractValue8Editor::AbstractValue8Editor(Okteta::ValueCoding valueCoding, QWid
     mValueCodec = Okteta::ValueCodec::createCodec(valueCoding);
 }
 
+AbstractValue8Editor::~AbstractValue8Editor()
+{
+    delete mValueCodec;
+}
+
 QString AbstractValue8Editor::textFromValue(int value) const
 {
     QString result;
@@ -66,9 +71,4 @@ QValidator::State AbstractValue8Editor::validate(QString& text, int& pos) const
     const bool isCompleteTextUsed = (textLength == usedChars);
 
     return isCompleteTextUsed ? QValidator::Acceptable : QValidator::Invalid;
-}
-
-AbstractValue8Editor::~AbstractValue8Editor()
-{
-    delete mValueCodec;
 }

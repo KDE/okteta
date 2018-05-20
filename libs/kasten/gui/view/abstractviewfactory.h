@@ -44,6 +44,8 @@ public:
     virtual AbstractView* createCopyOfView(AbstractView* view, Qt::Alignment alignment = {});
 };
 
+inline AbstractViewFactory::~AbstractViewFactory() = default;
+
 // TODO: is this default implementation useful? Like, if the base is not a document, but a subdocument/model?
 inline AbstractView* AbstractViewFactory::createCopyOfView(AbstractView* view, Qt::Alignment alignment)
 {
@@ -56,8 +58,6 @@ inline AbstractView* AbstractViewFactory::createCopyOfView(AbstractView* view, Q
 
     return viewCopy;
 }
-
-inline AbstractViewFactory::~AbstractViewFactory() {}
 
 }
 

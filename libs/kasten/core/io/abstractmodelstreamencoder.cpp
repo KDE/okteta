@@ -37,6 +37,11 @@ AbstractModelStreamEncoder::AbstractModelStreamEncoder(const QString& remoteType
 {
 }
 
+AbstractModelStreamEncoder::~AbstractModelStreamEncoder()
+{
+    delete d_ptr;
+}
+
 QString AbstractModelStreamEncoder::remoteTypeName() const
 {
     Q_D(const AbstractModelStreamEncoder);
@@ -56,11 +61,6 @@ QString AbstractModelStreamEncoder::remoteClipboardMimeType() const
     Q_D(const AbstractModelStreamEncoder);
 
     return d->remoteClipboardMimeType();
-}
-
-AbstractModelStreamEncoder::~AbstractModelStreamEncoder()
-{
-    delete d_ptr;
 }
 
 }

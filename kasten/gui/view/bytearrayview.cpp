@@ -98,6 +98,12 @@ ByteArrayView::ByteArrayView(ByteArrayView* other, ByteArrayViewProfileSynchroni
     synchronizer->setView(this);
 }
 
+ByteArrayView::~ByteArrayView()
+{
+    delete mByteArrayViewProfileSynchronizer;
+    delete mWidget;
+}
+
 void ByteArrayView::init()
 {
     Okteta::AbstractByteArrayModel* content = mDocument->content();
@@ -409,12 +415,6 @@ int ByteArrayView::viewModus() const
 void ByteArrayView::setFontByGlobalSettings()
 {
     mWidget->propagateFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
-}
-
-ByteArrayView::~ByteArrayView()
-{
-    delete mByteArrayViewProfileSynchronizer;
-    delete mWidget;
 }
 
 }

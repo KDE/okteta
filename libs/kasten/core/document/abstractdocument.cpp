@@ -29,6 +29,8 @@ AbstractDocument::AbstractDocument()
     : AbstractModel(new AbstractDocumentPrivate(this))
 {}
 
+AbstractDocument::~AbstractDocument() = default;
+
 QString AbstractDocument::id() const
 {
     Q_D(const AbstractDocument);
@@ -53,10 +55,6 @@ void AbstractDocument::setSynchronizer(AbstractModelSynchronizer* synchronizer)
     Q_D(AbstractDocument);
 
     d->setSynchronizer(synchronizer);
-}
-
-AbstractDocument::~AbstractDocument()
-{
 }
 
 }

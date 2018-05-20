@@ -64,6 +64,8 @@ ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor(B
     pageLayout->addRow(addressSizeLabel, mAddressSizeSelect);
 }
 
+ByteArrayIHexStreamEncoderConfigEditor::~ByteArrayIHexStreamEncoderConfigEditor() = default;
+
 AbstractSelectionView* ByteArrayIHexStreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview(mEncoder);
@@ -74,10 +76,6 @@ void ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.addressSizeId = static_cast<IHexStreamEncoderSettings::AddressSizeId>(mAddressSizeSelect->currentIndex());
 
     mEncoder->setSettings(mSettings);
-}
-
-ByteArrayIHexStreamEncoderConfigEditor::~ByteArrayIHexStreamEncoderConfigEditor()
-{
 }
 
 }

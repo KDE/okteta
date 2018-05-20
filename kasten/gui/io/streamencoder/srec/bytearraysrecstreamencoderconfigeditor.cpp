@@ -63,6 +63,8 @@ ByteArraySRecStreamEncoderConfigEditor::ByteArraySRecStreamEncoderConfigEditor(B
     pageLayout->addRow(addressSizeLabel, mAddressSizeSelect);
 }
 
+ByteArraySRecStreamEncoderConfigEditor::~ByteArraySRecStreamEncoderConfigEditor() = default;
+
 AbstractSelectionView* ByteArraySRecStreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview(mEncoder);
@@ -73,10 +75,6 @@ void ByteArraySRecStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.addressSizeId = static_cast<SRecStreamEncoderSettings::AddressSizeId>(mAddressSizeSelect->currentIndex());
 
     mEncoder->setSettings(mSettings);
-}
-
-ByteArraySRecStreamEncoderConfigEditor::~ByteArraySRecStreamEncoderConfigEditor()
-{
 }
 
 }

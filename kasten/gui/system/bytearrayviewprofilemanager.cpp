@@ -153,6 +153,8 @@ ByteArrayViewProfileManager::ByteArrayViewProfileManager()
     // report any problems with existing view profiles?
 }
 
+ByteArrayViewProfileManager::~ByteArrayViewProfileManager() = default;
+
 int
 ByteArrayViewProfileManager::viewProfilesCount() const
 {
@@ -570,10 +572,6 @@ void ByteArrayViewProfileManager::onDefaultViewProfileChanged(const QString& pat
         mDefaultViewProfileId = viewProfileId;
         emit defaultViewProfileChanged(mDefaultViewProfileId);
     }
-}
-
-ByteArrayViewProfileManager::~ByteArrayViewProfileManager()
-{
 }
 
 }

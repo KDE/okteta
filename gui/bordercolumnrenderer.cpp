@@ -43,6 +43,8 @@ BorderColumnRenderer::BorderColumnRenderer(AbstractColumnStylist* stylist, bool 
     setWidth(mLineDrawn ? BorderWidth : BorderMargin);
 }
 
+BorderColumnRenderer::~BorderColumnRenderer() = default;
+
 void BorderColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& Xs, const PixelYRange& Ys)
 {
     AbstractColumnRenderer::renderColumn(painter, Xs, Ys);
@@ -70,7 +72,5 @@ void BorderColumnRenderer::renderBorderLine(QPainter* painter, const PixelXRange
         painter->drawLine(viewGlobalLineX, Ys.start(), viewGlobalLineX, Ys.end());
     }
 }
-
-BorderColumnRenderer::~BorderColumnRenderer() {}
 
 }

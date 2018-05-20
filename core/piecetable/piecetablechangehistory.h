@@ -110,6 +110,8 @@ inline PieceTableChangeHistory::PieceTableChangeHistory()
     , mActiveGroupChange(nullptr)
 {}
 
+inline PieceTableChangeHistory::~PieceTableChangeHistory() { clear(); }
+
 inline int PieceTableChangeHistory::count()                     const { return mChangeStack.count(); }
 inline int PieceTableChangeHistory::appliedChangesCount()       const { return mAppliedChangesCount; }
 inline QString PieceTableChangeHistory::headChangeDescription() const { return changeDescription(count() - 1); }
@@ -125,8 +127,6 @@ inline QString PieceTableChangeHistory::changeDescription(int changeId) const
 
     return change ? change->description() : QString();
 }
-
-inline PieceTableChangeHistory::~PieceTableChangeHistory() { clear(); }
 
 }
 

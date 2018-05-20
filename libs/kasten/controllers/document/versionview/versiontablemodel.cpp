@@ -46,6 +46,8 @@ VersionTableModel::VersionTableModel(AbstractModel* model, If::Versionable* vers
     }
 }
 
+VersionTableModel::~VersionTableModel() = default;
+
 void VersionTableModel::setModel(AbstractModel* model, If::Versionable* versionControl)
 {
     if (mModel) {
@@ -161,7 +163,5 @@ void VersionTableModel::onHeadVersionDataChanged(const DocumentVersionData& vers
     const int headVersionIndex = mVersionControl->versionCount() - 1;
     emit dataChanged(index(headVersionIndex, CurrentColumnId), index(headVersionIndex, ChangeDescriptionColumnId));
 }
-
-VersionTableModel::~VersionTableModel() {}
 
 }

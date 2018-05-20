@@ -48,6 +48,8 @@ ReplaceTool::ReplaceTool()
     setObjectName(QStringLiteral("Replace"));
 }
 
+ReplaceTool::~ReplaceTool() = default;
+
 bool ReplaceTool::isApplyable() const
 {
     return (mByteArrayView && mByteArrayModel && !mByteArrayView->isReadOnly());
@@ -278,10 +280,6 @@ void ReplaceTool::onReadOnlyChanged(bool isReadOnly)
 
     // TODO: find out if isApplyable really changed, perhaps by caching the readonly state?
     emit isApplyableChanged(isApplyable());
-}
-
-ReplaceTool::~ReplaceTool()
-{
 }
 
 }

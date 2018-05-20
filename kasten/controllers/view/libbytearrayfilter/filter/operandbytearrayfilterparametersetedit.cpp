@@ -74,6 +74,8 @@ OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit(Q
     baseLayout->addRow(alignAtEndLabelText, mAlignAtEndCheckBox);
 }
 
+OperandByteArrayFilterParameterSetEdit::~OperandByteArrayFilterParameterSetEdit() = default;
+
 bool OperandByteArrayFilterParameterSetEdit::isValid() const { return !mOperandEdit->byteArray().isEmpty(); }
 
 void OperandByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
@@ -109,6 +111,3 @@ void OperandByteArrayFilterParameterSetEdit::onInputChanged(const QByteArray& da
 {
     emit validityChanged(!data.isEmpty());
 }
-
-OperandByteArrayFilterParameterSetEdit::~OperandByteArrayFilterParameterSetEdit()
-{}

@@ -50,6 +50,14 @@ TerminalView::TerminalView(TerminalTool* tool, QWidget* parent)
     QMetaObject::invokeMethod(this, "createTerminalPart", Qt::QueuedConnection);
 }
 
+TerminalView::~TerminalView()
+{
+    if (mTerminalPart) {
+        disconnect(mTerminalPart, &QObject::destroyed,
+                   this, &TerminalView::onTerminalPartDestroyed);
+    }
+}
+
 void TerminalView::createTerminalPart()
 {
     mTerminalPart =
@@ -97,14 +105,6 @@ void TerminalView::onTerminalPartDestroyed()
     mTerminalInterface = nullptr;
 
     createTerminalPart();
-}
-
-TerminalView::~TerminalView()
-{
-    if (mTerminalPart) {
-        disconnect(mTerminalPart, &QObject::destroyed,
-                   this, &TerminalView::onTerminalPartDestroyed);
-    }
 }
 
 }

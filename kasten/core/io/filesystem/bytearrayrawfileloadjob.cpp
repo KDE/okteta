@@ -37,6 +37,8 @@ ByteArrayRawFileLoadJob::ByteArrayRawFileLoadJob(ByteArrayRawFileSynchronizer* s
     : AbstractFileSystemLoadJob(synchronizer, url)
 {}
 
+ByteArrayRawFileLoadJob::~ByteArrayRawFileLoadJob() = default;
+
 void ByteArrayRawFileLoadJob::startLoadFromFile()
 {
     ByteArrayRawFileLoadThread* loadThread = new ByteArrayRawFileLoadThread(this, file());
@@ -60,7 +62,5 @@ void ByteArrayRawFileLoadJob::startLoadFromFile()
 
     setDocument(document);
 }
-
-ByteArrayRawFileLoadJob::~ByteArrayRawFileLoadJob() {}
 
 }

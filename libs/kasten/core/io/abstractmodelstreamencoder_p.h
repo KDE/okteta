@@ -57,8 +57,7 @@ inline AbstractModelStreamEncoderPrivate::AbstractModelStreamEncoderPrivate(Abst
     , mRemoteClipboardMimeType(remoteClipboardMimeType.isEmpty() ? remoteMimeType : remoteClipboardMimeType)
 {}
 
-inline AbstractModelStreamEncoderPrivate::~AbstractModelStreamEncoderPrivate()
-{}
+inline AbstractModelStreamEncoderPrivate::~AbstractModelStreamEncoderPrivate() = default;
 
 inline const QString& AbstractModelStreamEncoderPrivate::remoteTypeName() const { return mRemoteTypeName; }
 inline const QString& AbstractModelStreamEncoderPrivate::remoteMimeType() const { return mRemoteMimeType; }

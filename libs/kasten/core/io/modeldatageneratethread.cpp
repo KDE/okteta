@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
+ModelDataGenerateThread::~ModelDataGenerateThread() = default;
+
 void ModelDataGenerateThread::run()
 {
     mMimeData = mGenerator->generateData();
 
     emit generated(mMimeData);
 }
-
-ModelDataGenerateThread::~ModelDataGenerateThread() {}
 
 }

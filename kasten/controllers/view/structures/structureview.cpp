@@ -135,6 +135,8 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     connect(mTool, &StructuresTool::cursorIndexChanged, this, &StructureView::onCursorIndexChange);
 }
 
+StructureView::~StructureView() = default;
+
 StructuresTool* StructureView::tool() const
 {
     return mTool;
@@ -240,10 +242,6 @@ void StructureView::onCurrentRowChanged(const QModelIndex& current, const QModel
     } else {
         mTool->unmark();
     }
-}
-
-StructureView::~StructureView()
-{
 }
 
 void StructureView::lockButtonToggled()

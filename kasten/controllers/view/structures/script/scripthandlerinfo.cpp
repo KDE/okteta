@@ -43,9 +43,7 @@ ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger
     Q_CHECK_PTR(mLogger);
 }
 
-ScriptHandlerInfo::~ScriptHandlerInfo()
-{
-}
+ScriptHandlerInfo::~ScriptHandlerInfo() = default;
 
 ScriptHandlerInfo::Mode ScriptHandlerInfo::mode() const
 {

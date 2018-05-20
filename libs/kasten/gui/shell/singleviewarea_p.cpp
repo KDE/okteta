@@ -34,7 +34,11 @@ SingleViewAreaPrivate::SingleViewAreaPrivate(SingleViewArea* parent)
     , mViewAreaBox(nullptr)
     , mCurrentView(nullptr)
 {
+}
 
+SingleViewAreaPrivate::~SingleViewAreaPrivate()
+{
+    delete mViewAreaBox;
 }
 
 void SingleViewAreaPrivate::init()
@@ -74,11 +78,6 @@ void SingleViewAreaPrivate::setView(AbstractView* view)
 {
     mCurrentView = view;
     mViewAreaBox->setCentralWidget(view ? view->widget() : nullptr);
-}
-
-SingleViewAreaPrivate::~SingleViewAreaPrivate()
-{
-    delete mViewAreaBox;
 }
 
 }

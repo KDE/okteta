@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
-BookmarksToolFactory::BookmarksToolFactory() {}
+BookmarksToolFactory::BookmarksToolFactory() = default;
+
+BookmarksToolFactory::~BookmarksToolFactory() = default;
 
 AbstractTool* BookmarksToolFactory::create()
 {
     return new BookmarksTool();
 }
-
-BookmarksToolFactory::~BookmarksToolFactory() {}
 
 }

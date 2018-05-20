@@ -41,7 +41,7 @@ public: // API to be implemented
     virtual Answer queryOverwrite(const QUrl& url, const QString& title) const = 0;
 };
 
-inline AbstractOverwriteDialog::~AbstractOverwriteDialog() {}
+inline AbstractOverwriteDialog::~AbstractOverwriteDialog() = default;
 
 }
 

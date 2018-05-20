@@ -54,7 +54,7 @@ private:
 };
 
 inline AbstractTypeCodec::AbstractTypeCodec(const QString& name) : mName(name) {}
-inline AbstractTypeCodec::~AbstractTypeCodec() {}
+inline AbstractTypeCodec::~AbstractTypeCodec() = default;
 
 inline const QString& AbstractTypeCodec::name() const { return mName; }
 

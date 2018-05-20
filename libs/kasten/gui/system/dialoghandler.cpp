@@ -32,7 +32,11 @@
 
 namespace Kasten {
 
-DialogHandler::DialogHandler(QWidget* widget) : mWidget(widget) {}
+DialogHandler::DialogHandler(QWidget* widget)
+    : mWidget(widget)
+{}
+
+DialogHandler::~DialogHandler() = default;
 
 void DialogHandler::setWidget(QWidget* widget) { mWidget = widget; }
 
@@ -89,7 +93,5 @@ Answer DialogHandler::queryDiscard(const AbstractDocument* document, const QStri
 
     return (answer == KMessageBox::Cancel) ? Cancel : Discard;
 }
-
-DialogHandler::~DialogHandler() {}
 
 }

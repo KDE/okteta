@@ -27,6 +27,8 @@ Octal8Editor::Octal8Editor(QWidget* parent)
 {
 }
 
+Octal8Editor::~Octal8Editor() = default;
+
 void Octal8Editor::setData(Octal8 data)
 {
     setValue(data.value);
@@ -36,5 +38,3 @@ Octal8 Octal8Editor::data() const
 {
     return value();
 }
-
-Octal8Editor::~Octal8Editor() {}

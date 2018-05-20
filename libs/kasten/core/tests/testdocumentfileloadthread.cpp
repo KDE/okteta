@@ -35,6 +35,8 @@
 
 namespace Kasten {
 
+TestDocumentFileLoadThread::~TestDocumentFileLoadThread() = default;
+
 void TestDocumentFileLoadThread::run()
 {
     QDataStream inStream(mFile);
@@ -66,7 +68,5 @@ void TestDocumentFileLoadThread::run()
 
     emit documentRead(mDocument);
 }
-
-TestDocumentFileLoadThread::~TestDocumentFileLoadThread() {}
 
 }

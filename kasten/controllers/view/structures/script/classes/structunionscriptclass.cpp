@@ -43,9 +43,7 @@ StructUnionScriptClass::StructUnionScriptClass(QScriptEngine* engine, ScriptHand
                                       engine->newFunction(StructUnion_proto_child));
 }
 
-StructUnionScriptClass::~StructUnionScriptClass()
-{
-}
+StructUnionScriptClass::~StructUnionScriptClass() = default;
 
 bool StructUnionScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {

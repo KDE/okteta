@@ -122,6 +122,8 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     addAlgorithms();
 }
 
+ChecksumView::~ChecksumView() = default;
+
 void ChecksumView::addAlgorithms()
 {
     //
@@ -196,7 +198,5 @@ void ChecksumView::onValidityChanged(bool isValid)
 {
     mCalculateButton->setEnabled(mTool->isApplyable() && isValid);
 }
-
-ChecksumView::~ChecksumView() {}
 
 }

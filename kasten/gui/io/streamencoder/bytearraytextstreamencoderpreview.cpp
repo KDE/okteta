@@ -49,6 +49,11 @@ ByteArrayTextStreamEncoderPreview::ByteArrayTextStreamEncoderPreview(AbstractByt
     connect(mEncoder, &AbstractByteArrayStreamEncoder::settingsChanged, this, &ByteArrayTextStreamEncoderPreview::update);
 }
 
+ByteArrayTextStreamEncoderPreview::~ByteArrayTextStreamEncoderPreview()
+{
+    delete mWidget;
+}
+
 QWidget* ByteArrayTextStreamEncoderPreview::widget() const { return mWidget; }
 
 void ByteArrayTextStreamEncoderPreview::setData(AbstractModel* model, const AbstractModelSelection* selection)
@@ -69,11 +74,6 @@ void ByteArrayTextStreamEncoderPreview::update()
 void ByteArrayTextStreamEncoderPreview::setFixedFontByGlobalSettings()
 {
     mWidget->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
-}
-
-ByteArrayTextStreamEncoderPreview::~ByteArrayTextStreamEncoderPreview()
-{
-    delete mWidget;
 }
 
 }

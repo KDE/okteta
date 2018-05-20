@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
-ByteTableToolFactory::ByteTableToolFactory() {}
+ByteTableToolFactory::ByteTableToolFactory() = default;
+
+ByteTableToolFactory::~ByteTableToolFactory() = default;
 
 AbstractTool* ByteTableToolFactory::create()
 {
     return new ByteTableTool();
 }
-
-ByteTableToolFactory::~ByteTableToolFactory() {}
 
 }

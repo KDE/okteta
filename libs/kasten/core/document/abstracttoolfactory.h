@@ -36,7 +36,7 @@ public: // API to be implemented
     virtual AbstractTool* create() = 0;
 };
 
-inline AbstractToolFactory::~AbstractToolFactory() {}
+inline AbstractToolFactory::~AbstractToolFactory() = default;
 
 }
 

@@ -31,14 +31,14 @@ AbstractToolWidget::AbstractToolWidget(QWidget* parent)
 {
 }
 
-void AbstractToolWidget::addButton(QPushButton* button, DefaultType defaultType)
-{
-    d->addButton(button, defaultType);
-}
-
 AbstractToolWidget::~AbstractToolWidget()
 {
     delete d;
+}
+
+void AbstractToolWidget::addButton(QPushButton* button, DefaultType defaultType)
+{
+    d->addButton(button, defaultType);
 }
 
 }

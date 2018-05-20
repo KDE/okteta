@@ -34,6 +34,8 @@ ModSum16ByteArrayChecksumAlgorithm::ModSum16ByteArrayChecksumAlgorithm()
         i18nc("name of the checksum algorithm", "Modular sum 16-bit"))
 {}
 
+ModSum16ByteArrayChecksumAlgorithm::~ModSum16ByteArrayChecksumAlgorithm() = default;
+
 AbstractByteArrayChecksumParameterSet* ModSum16ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }
 
 bool ModSum16ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
@@ -105,5 +107,3 @@ quint16 ModSum16ByteArrayChecksumAlgorithm::calculateModSumWithLittleEndian(cons
 
     return modSum;
 }
-
-ModSum16ByteArrayChecksumAlgorithm::~ModSum16ByteArrayChecksumAlgorithm() {}

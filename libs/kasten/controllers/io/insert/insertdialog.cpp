@@ -76,8 +76,6 @@ InsertDialog::InsertDialog(AbstractModelDataGeneratorConfigEditor* configEditor,
     setLayout(layout);
 }
 
-InsertDialog::~InsertDialog()
-{
-}
+InsertDialog::~InsertDialog() = default;
 
 }

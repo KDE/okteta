@@ -33,6 +33,8 @@ ReverseByteArrayFilter::ReverseByteArrayFilter()
               "REVERSE data"))
 {}
 
+ReverseByteArrayFilter::~ReverseByteArrayFilter() = default;
+
 AbstractByteArrayFilterParameterSet* ReverseByteArrayFilter::parameterSet() { return &mParameterSet; }
 
 bool ReverseByteArrayFilter::filter(Okteta::Byte* result,
@@ -63,8 +65,4 @@ bool ReverseByteArrayFilter::filter(Okteta::Byte* result,
     }
 
     return true;
-}
-
-ReverseByteArrayFilter::~ReverseByteArrayFilter()
-{
 }

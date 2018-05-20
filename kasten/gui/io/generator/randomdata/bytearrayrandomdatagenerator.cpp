@@ -50,6 +50,8 @@ ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
         DynamicGeneration)
 {}
 
+ByteArrayRandomDataGenerator::~ByteArrayRandomDataGenerator() = default;
+
 // TODO: use different RNG, with multiple characteristics and offer them in the config
 QMimeData* ByteArrayRandomDataGenerator::generateData()
 {
@@ -83,7 +85,5 @@ QMimeData* ByteArrayRandomDataGenerator::generateData()
 
     return mimeData;
 }
-
-ByteArrayRandomDataGenerator::~ByteArrayRandomDataGenerator() {}
 
 }

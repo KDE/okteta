@@ -113,6 +113,8 @@ ByteArrayIHexStreamEncoder::ByteArrayIHexStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Intel Hex"), QStringLiteral("text/x-ihex"))
 {}
 
+ByteArrayIHexStreamEncoder::~ByteArrayIHexStreamEncoder() = default;
+
 bool ByteArrayIHexStreamEncoder::encodeDataToStream(QIODevice* device,
                                                     const ByteArrayView* byteArrayView,
                                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
@@ -191,7 +193,5 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream(QIODevice* device,
 
     return success;
 }
-
-ByteArrayIHexStreamEncoder::~ByteArrayIHexStreamEncoder() {}
 
 }

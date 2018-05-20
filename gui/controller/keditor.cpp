@@ -41,6 +41,8 @@ KEditor::KEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* view, KCon
 {
 }
 
+KEditor::~KEditor() = default;
+
 bool KEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     const bool shiftPressed =   keyEvent->modifiers() & Qt::SHIFT;
@@ -147,7 +149,5 @@ void KEditor::doEditAction(KEditAction action)
     }
     }
 }
-
-KEditor::~KEditor() {}
 
 }

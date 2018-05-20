@@ -31,6 +31,8 @@
 
 namespace KPieceTable {
 
+ReplacePieceTableChange::~ReplacePieceTableChange() = default;
+
 int ReplacePieceTableChange::type() const { return ReplaceId; }
 
 QString ReplacePieceTableChange::description() const
@@ -94,7 +96,5 @@ ArrayChangeMetrics ReplacePieceTableChange::metrics() const
 }
 
 Size ReplacePieceTableChange::dataSize() const { return mInsertLength; }
-
-ReplacePieceTableChange::~ReplacePieceTableChange() {}
 
 }

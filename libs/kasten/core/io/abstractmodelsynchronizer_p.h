@@ -56,7 +56,7 @@ inline AbstractModelSynchronizerPrivate::AbstractModelSynchronizerPrivate(Abstra
 {
 }
 
-inline AbstractModelSynchronizerPrivate::~AbstractModelSynchronizerPrivate() {}
+inline AbstractModelSynchronizerPrivate::~AbstractModelSynchronizerPrivate() = default;
 
 inline const QUrl& AbstractModelSynchronizerPrivate::url() const { return mUrl; }
 

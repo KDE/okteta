@@ -46,6 +46,8 @@ PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate(PieceTableByteA
     mPieceTable.init(size);
 }
 
+PieceTableByteArrayModelPrivate::~PieceTableByteArrayModelPrivate() = default;
+
 // TODO: getStorageData needs some caching, optimize for successive access
 Byte PieceTableByteArrayModelPrivate::byte(Address offset) const
 {
@@ -454,10 +456,6 @@ void PieceTableByteArrayModelPrivate::doFillChange(Address offset, Size filledLe
 
     mChangeMetrics.append(metrics);
     mChanges.append(change);
-}
-
-PieceTableByteArrayModelPrivate::~PieceTableByteArrayModelPrivate()
-{
 }
 
 }

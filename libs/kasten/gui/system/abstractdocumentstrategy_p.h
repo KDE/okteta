@@ -43,7 +43,7 @@ inline AbstractDocumentStrategyPrivate::AbstractDocumentStrategyPrivate(Abstract
     : q_ptr(parent)
 {}
 
-inline AbstractDocumentStrategyPrivate::~AbstractDocumentStrategyPrivate() {}
+inline AbstractDocumentStrategyPrivate::~AbstractDocumentStrategyPrivate() = default;
 
 }
 

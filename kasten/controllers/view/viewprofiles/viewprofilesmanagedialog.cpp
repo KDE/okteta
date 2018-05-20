@@ -149,6 +149,8 @@ ViewProfilesManageDialog::ViewProfilesManageDialog(ByteArrayViewProfileManager* 
     onModelReset();
 }
 
+ViewProfilesManageDialog::~ViewProfilesManageDialog() = default;
+
 void
 ViewProfilesManageDialog::onViewProfileSelectionChanged()
 {
@@ -323,10 +325,6 @@ ViewProfilesManageDialog::onDefaultViewProfileChanged(const ByteArrayViewProfile
 {
     mSetDefaultButton->setEnabled((!mCurrentViewProfileId.isEmpty()) &&
                                   (mCurrentViewProfileId != viewProfileId));
-}
-
-ViewProfilesManageDialog::~ViewProfilesManageDialog()
-{
 }
 
 }

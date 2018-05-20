@@ -106,6 +106,8 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
     }
 }
 
+CreatorController::~CreatorController() = default;
+
 void CreatorController::setTargetModel(AbstractModel* model)
 {
     Q_UNUSED(model)
@@ -129,7 +131,5 @@ void CreatorController::onNewFromGeneratorActionTriggered()
 
     mDocumentStrategy->createNewWithGenerator(generator);
 }
-
-CreatorController::~CreatorController() {}
 
 }

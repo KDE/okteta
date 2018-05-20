@@ -160,6 +160,8 @@ OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
     addXmlGuiController(new ViewListMenuController(viewManager(), viewArea(), this));
 }
 
+OktetaMainWindow::~OktetaMainWindow() = default;
+
 void OktetaMainWindow::setupControllers()
 {
     MultiDocumentStrategy* const documentStrategy = mProgram->documentStrategy();
@@ -329,7 +331,5 @@ void OktetaMainWindow::onCloseRequest(const QList<Kasten::AbstractView*>& views)
         documentManager->closeDocuments(documentsWithoutViews);
     }
 }
-
-OktetaMainWindow::~OktetaMainWindow() {}
 
 }

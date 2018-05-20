@@ -79,9 +79,7 @@ inline BasicPrimitiveDataInformation<T, C>::BasicPrimitiveDataInformation(
 }
 
 template <typename T, typename C>
-inline BasicPrimitiveDataInformation<T, C>::~BasicPrimitiveDataInformation()
-{
-}
+inline BasicPrimitiveDataInformation<T, C>::~BasicPrimitiveDataInformation() = default;
 
 template <typename T, typename C>
 inline QString BasicPrimitiveDataInformation<T, C>::typeNameImpl() const

@@ -38,6 +38,8 @@ Char8Codec::Char8Codec(CharCodec* charCodec)
     , mCharCodec(charCodec)
 {}
 
+Char8Codec::~Char8Codec() = default;
+
 QVariant Char8Codec::value(const PODData& data, int* byteCount) const
 {
     const unsigned char* pointer = (unsigned char*)data.pointer(1);
@@ -71,7 +73,5 @@ bool Char8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<Char8>().character == otherValue.value<Char8>().character);
 }
-
-Char8Codec::~Char8Codec() {}
 
 }

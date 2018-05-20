@@ -60,9 +60,7 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QW
     setLayout(layout);
 }
 
-ScriptLoggerView::~ScriptLoggerView()
-{
-}
+ScriptLoggerView::~ScriptLoggerView() = default;
 
 void ScriptLoggerView::updateModel(int index)
 {

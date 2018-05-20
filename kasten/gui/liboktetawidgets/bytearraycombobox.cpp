@@ -34,6 +34,11 @@ ByteArrayComboBox::ByteArrayComboBox(QWidget* parent)
     d->init();
 }
 
+ByteArrayComboBox::~ByteArrayComboBox()
+{
+    delete d_ptr;
+}
+
 void ByteArrayComboBox::setByteArray(const QByteArray& byteArray)
 {
     Q_D(ByteArrayComboBox);
@@ -95,11 +100,6 @@ int ByteArrayComboBox::minLength() const
     Q_D(const ByteArrayComboBox);
 
     return d->minLength();
-}
-
-ByteArrayComboBox::~ByteArrayComboBox()
-{
-    delete d_ptr;
 }
 
 }

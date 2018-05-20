@@ -27,6 +27,8 @@ Hexadecimal8Editor::Hexadecimal8Editor(QWidget* parent)
 {
 }
 
+Hexadecimal8Editor::~Hexadecimal8Editor() = default;
+
 void Hexadecimal8Editor::setData(Hexadecimal8 data)
 {
     setValue(data.value);
@@ -36,5 +38,3 @@ Hexadecimal8 Hexadecimal8Editor::data() const
 {
     return value();
 }
-
-Hexadecimal8Editor::~Hexadecimal8Editor() {}

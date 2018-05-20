@@ -51,6 +51,8 @@ ViewProfileTableModel::ViewProfileTableModel(const ByteArrayViewProfileManager* 
             this, &ViewProfileTableModel::onViewProfileLocksChanged);
 }
 
+ViewProfileTableModel::~ViewProfileTableModel() = default;
+
 int ViewProfileTableModel::rowCount(const QModelIndex& parent) const
 {
     return (!parent.isValid()) ? mViewProfileManager->viewProfilesCount() : 0;
@@ -168,7 +170,5 @@ void ViewProfileTableModel::onViewProfileLocksChanged(const QList<ByteArrayViewP
         }
     }
 }
-
-ViewProfileTableModel::~ViewProfileTableModel() {}
 
 }

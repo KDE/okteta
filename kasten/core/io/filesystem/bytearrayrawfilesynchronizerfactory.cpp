@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-ByteArrayRawFileSynchronizerFactory::ByteArrayRawFileSynchronizerFactory() {}
+ByteArrayRawFileSynchronizerFactory::ByteArrayRawFileSynchronizerFactory() = default;
+
+ByteArrayRawFileSynchronizerFactory::~ByteArrayRawFileSynchronizerFactory() = default;
 
 // could be set to base class as value, is only one object per factory at runtime
 // and settable in desktop file
@@ -41,7 +43,5 @@ AbstractModelSynchronizer* ByteArrayRawFileSynchronizerFactory::createSynchroniz
 {
     return new ByteArrayRawFileSynchronizer();
 }
-
-ByteArrayRawFileSynchronizerFactory::~ByteArrayRawFileSynchronizerFactory() {}
 
 }

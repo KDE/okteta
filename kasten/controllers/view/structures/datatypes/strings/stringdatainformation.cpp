@@ -59,9 +59,7 @@ StringDataInformation::StringDataInformation(const StringDataInformation& d)
     mData->copyTerminationFrom(d.mData.data());
 }
 
-StringDataInformation::~StringDataInformation()
-{
-}
+StringDataInformation::~StringDataInformation() = default;
 
 DataInformation* StringDataInformation::childAt(unsigned int index) const
 {

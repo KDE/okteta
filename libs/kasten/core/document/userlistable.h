@@ -54,7 +54,7 @@ public: // signal
     virtual void usersRemoved(const QList<Person>& newUserList) = 0;
 };
 
-inline UserListable::~UserListable() {}
+inline UserListable::~UserListable() = default;
 
 }
 }

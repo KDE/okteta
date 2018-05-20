@@ -61,7 +61,7 @@ public: // signal
     virtual void viewAreaFocusChanged(Kasten::AbstractViewArea* viewArea) = 0;
 };
 
-inline ViewAreaSplitable::~ViewAreaSplitable() {}
+inline ViewAreaSplitable::~ViewAreaSplitable() = default;
 
 }
 }

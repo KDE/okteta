@@ -39,9 +39,7 @@ Utf32StringData::Utf32StringData(StringDataInformation* parent)
 {
 }
 
-Utf32StringData::~Utf32StringData()
-{
-}
+Utf32StringData::~Utf32StringData() = default;
 
 QString Utf32StringData::charType() const
 {

@@ -41,6 +41,8 @@ Float32Editor::Float32Editor(QWidget* parent)
     setClearButtonEnabled(true);
 }
 
+Float32Editor::~Float32Editor() = default;
+
 void Float32Editor::setData(Float32 data)
 {
     setText(data.toString());
@@ -51,5 +53,3 @@ Float32 Float32Editor::data() const
 //     interpretText();
     return text().toFloat();
 }
-
-Float32Editor::~Float32Editor() {}

@@ -41,6 +41,8 @@ ByteArrayJanusView::ByteArrayJanusView(QWidget* parent)
     setViewModus(ColumnViewId);
 }
 
+ByteArrayJanusView::~ByteArrayJanusView() = default;
+
 void ByteArrayJanusView::setByteArrayModel(AbstractByteArrayModel* byteArrayModel)
 {
     mView->setByteArrayModel(byteArrayModel);
@@ -372,10 +374,6 @@ void ByteArrayJanusView::propagateFont(const QFont& font)
 {
     setFont(font);
     mView->setFont(font);
-}
-
-ByteArrayJanusView::~ByteArrayJanusView()
-{
 }
 
 }

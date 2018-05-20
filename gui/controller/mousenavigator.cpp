@@ -55,6 +55,8 @@ MouseNavigator::MouseNavigator(AbstractByteArrayView* view, AbstractMouseControl
     mTrippleClickTimer->setSingleShot(true);
 }
 
+MouseNavigator::~MouseNavigator() = default;
+
 bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
 {
     bool eventUsed = false;
@@ -386,7 +388,5 @@ void MouseNavigator::startDrag()
         }
     }
 }
-
-MouseNavigator::~MouseNavigator() {}
 
 }

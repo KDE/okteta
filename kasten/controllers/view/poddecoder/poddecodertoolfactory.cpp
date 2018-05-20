@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
-PodDecoderToolFactory::PodDecoderToolFactory() {}
+PodDecoderToolFactory::PodDecoderToolFactory() = default;
+
+PodDecoderToolFactory::~PodDecoderToolFactory() = default;
 
 AbstractTool* PodDecoderToolFactory::create()
 {
     return new PODDecoderTool();
 }
-
-PodDecoderToolFactory::~PodDecoderToolFactory() {}
 
 }

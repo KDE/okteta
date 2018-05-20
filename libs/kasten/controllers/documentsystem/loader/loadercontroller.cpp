@@ -57,6 +57,12 @@ LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
     connect(mDocumentStrategy, &AbstractDocumentStrategy::urlUsed, this, &LoaderController::onUrlUsed);
 }
 
+LoaderController::~LoaderController()
+{
+    KConfigGroup configGroup(KSharedConfig::openConfig(), CreatorConfigGroupId);
+    mOpenRecentAction->saveEntries(configGroup);
+}
+
 void LoaderController::setTargetModel(AbstractModel* model)
 {
     Q_UNUSED(model)
@@ -83,12 +89,6 @@ void LoaderController::loadRecent(const QUrl& url)
 void LoaderController::onUrlUsed(const QUrl& url)
 {
     mOpenRecentAction->addUrl(url);
-}
-
-LoaderController::~LoaderController()
-{
-    KConfigGroup configGroup(KSharedConfig::openConfig(), CreatorConfigGroupId);
-    mOpenRecentAction->saveEntries(configGroup);
 }
 
 }

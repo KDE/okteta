@@ -55,6 +55,8 @@ ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit
     baseLayout->addRow(byteOrderLabelText, mByteOrderComboBox);
 }
 
+ModSumByteArrayChecksumParameterSetEdit::~ModSumByteArrayChecksumParameterSetEdit() = default;
+
 bool ModSumByteArrayChecksumParameterSetEdit::isValid() const { return true; }
 
 void ModSumByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
@@ -72,6 +74,3 @@ void ModSumByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayC
 
     modSumParameterSet->setEndianness(static_cast<Endianness>(mByteOrderComboBox->currentIndex()));
 }
-
-ModSumByteArrayChecksumParameterSetEdit::~ModSumByteArrayChecksumParameterSetEdit()
-{}

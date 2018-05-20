@@ -61,7 +61,7 @@ struct ParserInfo
         , parent(i.parent)
         , engine(i.engine)
     {}
-    inline ~ParserInfo() {}
+    inline ~ParserInfo() = default;
 
     QString name;
     ScriptLogger* logger;
@@ -83,7 +83,7 @@ public:
     virtual DataInformation* next() = 0;
     virtual bool hasNext() = 0;
     virtual void setParent(DataInformation* parent) = 0;
-    virtual ~ChildrenParser() {};
+    virtual ~ChildrenParser() = default;
 };
 
 /**

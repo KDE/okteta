@@ -24,6 +24,6 @@
 
 namespace Kasten {
 
-AbstractModelSynchronizerFactory::~AbstractModelSynchronizerFactory() {}
+AbstractModelSynchronizerFactory::~AbstractModelSynchronizerFactory() = default;
 
 }

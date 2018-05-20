@@ -37,6 +37,8 @@ Utf8Codec::Utf8Codec()
     , mUtf8Codec(QTextCodec::codecForName("UTF-8"))
 {}
 
+Utf8Codec::~Utf8Codec() = default;
+
 QVariant Utf8Codec::value(const PODData& data, int* byteCount) const
 {
     // UTF-8
@@ -72,7 +74,5 @@ bool Utf8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<Utf8>().value == otherValue.value<Utf8>().value);
 }
-
-Utf8Codec::~Utf8Codec() {}
 
 }

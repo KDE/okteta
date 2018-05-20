@@ -33,13 +33,13 @@ SelectRangeToolView::SelectRangeToolView(SelectRangeTool* tool)
 {
 }
 
-QWidget* SelectRangeToolView::widget()    const { return mWidget; }
-QString SelectRangeToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* SelectRangeToolView::tool() const { return mWidget->tool(); }
-
 SelectRangeToolView::~SelectRangeToolView()
 {
     delete mWidget;
 }
+
+QWidget* SelectRangeToolView::widget()    const { return mWidget; }
+QString SelectRangeToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* SelectRangeToolView::tool() const { return mWidget->tool(); }
 
 }

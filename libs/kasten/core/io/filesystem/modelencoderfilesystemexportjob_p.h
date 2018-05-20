@@ -62,7 +62,7 @@ inline ModelEncoderFileSystemExportJobPrivate::ModelEncoderFileSystemExportJobPr
     , mEncoder(encoder)
 {}
 
-inline ModelEncoderFileSystemExportJobPrivate::~ModelEncoderFileSystemExportJobPrivate() {}
+inline ModelEncoderFileSystemExportJobPrivate::~ModelEncoderFileSystemExportJobPrivate() = default;
 
 inline AbstractModelStreamEncoder* ModelEncoderFileSystemExportJobPrivate::encoder() const { return mEncoder; }
 

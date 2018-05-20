@@ -41,14 +41,14 @@ ToolViewDockWidget::ToolViewDockWidget(AbstractToolView* toolView, QWidget* pare
             this, &ToolViewDockWidget::onVisibilityChanged);
 }
 
-void ToolViewDockWidget::onVisibilityChanged(bool isVisible)
-{
-    mIsShown = isVisible;
-}
-
 ToolViewDockWidget::~ToolViewDockWidget()
 {
     delete mToolView;
+}
+
+void ToolViewDockWidget::onVisibilityChanged(bool isVisible)
+{
+    mIsShown = isVisible;
 }
 
 }

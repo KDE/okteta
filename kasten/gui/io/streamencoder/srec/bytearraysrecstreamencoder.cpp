@@ -133,6 +133,8 @@ ByteArraySRecStreamEncoder::ByteArraySRecStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "S-Record"), QStringLiteral("text/x-srecord"))
 {}
 
+ByteArraySRecStreamEncoder::~ByteArraySRecStreamEncoder() = default;
+
 bool ByteArraySRecStreamEncoder::encodeDataToStream(QIODevice* device,
                                                     const ByteArrayView* byteArrayView,
                                                     const Okteta::AbstractByteArrayModel* byteArrayModel,
@@ -199,7 +201,5 @@ bool ByteArraySRecStreamEncoder::encodeDataToStream(QIODevice* device,
 
     return success;
 }
-
-ByteArraySRecStreamEncoder::~ByteArraySRecStreamEncoder() {}
 
 }

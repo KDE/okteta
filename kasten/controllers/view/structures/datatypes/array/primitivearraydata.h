@@ -84,9 +84,7 @@ protected:
 };
 
 template <PrimitiveDataType type>
-inline PrimitiveArrayData<type>::~PrimitiveArrayData()
-{
-}
+inline PrimitiveArrayData<type>::~PrimitiveArrayData() = default;
 
 template <PrimitiveDataType type>
 inline BitCount64 PrimitiveArrayData<type>::offset(const DataInformation* data) const

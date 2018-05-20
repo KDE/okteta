@@ -47,9 +47,9 @@ AbstractByteArrayChecksumAlgorithm::AbstractByteArrayChecksumAlgorithm(const QSt
     : d(new Private(name))
 {}
 
-QString AbstractByteArrayChecksumAlgorithm::name() const { return d->name(); }
-
 AbstractByteArrayChecksumAlgorithm::~AbstractByteArrayChecksumAlgorithm()
 {
     delete d;
 }
+
+QString AbstractByteArrayChecksumAlgorithm::name() const { return d->name(); }

@@ -45,7 +45,7 @@ public: // get
 public: // signal
 };
 
-inline ToolInlineViewable::~ToolInlineViewable() {}
+inline ToolInlineViewable::~ToolInlineViewable() = default;
 
 }
 }

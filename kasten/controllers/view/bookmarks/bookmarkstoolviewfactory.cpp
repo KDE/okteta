@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-BookmarksToolViewFactory::BookmarksToolViewFactory() {}
+BookmarksToolViewFactory::BookmarksToolViewFactory() = default;
+
+BookmarksToolViewFactory::~BookmarksToolViewFactory() = default;
 
 QString BookmarksToolViewFactory::iconName() const { return QStringLiteral("bookmarks"); }
 QString BookmarksToolViewFactory::title()       const { return i18nc("@title:window", "Bookmarks"); }
@@ -41,7 +43,5 @@ AbstractToolView* BookmarksToolViewFactory::create(AbstractTool* tool)
 {
     return new BookmarksToolView(qobject_cast<BookmarksTool*>(tool));
 }
-
-BookmarksToolViewFactory::~BookmarksToolViewFactory() {}
 
 }

@@ -31,6 +31,8 @@
 
 namespace KPieceTable {
 
+RemovePieceTableChange::~RemovePieceTableChange() = default;
+
 int RemovePieceTableChange::type() const { return RemoveId; }
 
 QString RemovePieceTableChange::description() const
@@ -83,7 +85,5 @@ ArrayChangeMetrics RemovePieceTableChange::metrics() const
 {
     return ArrayChangeMetrics::asReplacement(mRemoveRange.start(), mRemoveRange.width(), 0);
 }
-
-RemovePieceTableChange::~RemovePieceTableChange() {}
 
 }

@@ -64,6 +64,8 @@ ByteArrayXxencodingStreamEncoder::ByteArrayXxencodingStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Xxencoding"), QStringLiteral("text/x-xxencode"))
 {}
 
+ByteArrayXxencodingStreamEncoder::~ByteArrayXxencodingStreamEncoder() = default;
+
 // TODO: make this algorithm shared with ByteArrayUuencodingStreamEncoder again
 bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
                                                           const ByteArrayView* byteArrayView,
@@ -141,7 +143,5 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
 
     return success;
 }
-
-ByteArrayXxencodingStreamEncoder::~ByteArrayXxencodingStreamEncoder() {}
 
 }

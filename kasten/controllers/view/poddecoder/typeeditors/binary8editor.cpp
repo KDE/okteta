@@ -27,6 +27,8 @@ Binary8Editor::Binary8Editor(QWidget* parent)
 {
 }
 
+Binary8Editor::~Binary8Editor() = default;
+
 void Binary8Editor::setData(Binary8 data)
 {
     setValue(data.value);
@@ -36,5 +38,3 @@ Binary8 Binary8Editor::data() const
 {
     return value();
 }
-
-Binary8Editor::~Binary8Editor() {}

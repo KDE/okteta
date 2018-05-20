@@ -93,7 +93,7 @@ public: // signal
     virtual void headVersionChanged(int newHeadVersionIndex) = 0;
 };
 
-inline Versionable::~Versionable() {}
+inline Versionable::~Versionable() = default;
 
 }
 }

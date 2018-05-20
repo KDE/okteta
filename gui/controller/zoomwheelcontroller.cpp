@@ -35,6 +35,8 @@ ZoomWheelController::ZoomWheelController(AbstractByteArrayView* view, AbstractWh
 {
 }
 
+ZoomWheelController::~ZoomWheelController() = default;
+
 bool ZoomWheelController::handleWheelEvent(QWheelEvent* wheelEvent)
 {
     bool eventUsed = false;
@@ -52,7 +54,5 @@ bool ZoomWheelController::handleWheelEvent(QWheelEvent* wheelEvent)
 
     return eventUsed ? true : AbstractWheelController::handleWheelEvent(wheelEvent);
 }
-
-ZoomWheelController::~ZoomWheelController() {}
 
 }

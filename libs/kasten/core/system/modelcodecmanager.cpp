@@ -47,6 +47,14 @@ ModelCodecManager::ModelCodecManager(DocumentManager* manager)
 {
 }
 
+ModelCodecManager::~ModelCodecManager()
+{
+    qDeleteAll(mExporterList);
+    qDeleteAll(mEncoderList);
+//     qDeleteAll( mDecoderList );
+    qDeleteAll(mGeneratorList);
+}
+
 QList<AbstractModelStreamEncoder*>
 ModelCodecManager::encoderList(AbstractModel* model, const AbstractModelSelection* selection) const
 {
@@ -159,14 +167,6 @@ void ModelCodecManager::exportDocument(AbstractModelExporter* exporter,
             break;
         }
     } while (!exportDone);
-}
-
-ModelCodecManager::~ModelCodecManager()
-{
-    qDeleteAll(mExporterList);
-    qDeleteAll(mEncoderList);
-//     qDeleteAll( mDecoderList );
-    qDeleteAll(mGeneratorList);
 }
 
 }

@@ -30,7 +30,7 @@ KCursor::KCursor()
 {
 }
 
-KCursor::~KCursor() {}
+KCursor::~KCursor() = default;
 
 void KCursor::setSize(PixelX Width, PixelY Height)
 {

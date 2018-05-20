@@ -59,6 +59,23 @@ ShellWindowPrivate::ShellWindowPrivate(ShellWindow* parent,
                      parent, [&](Kasten::AbstractView* view) { onViewFocusChanged(view); });
 }
 
+ShellWindowPrivate::~ShellWindowPrivate()
+{
+    // we have to explicitly reset any inline tool view before first deleting all tools
+    // and then the grouped views, because on destruction of the inline tool view it
+    // operates on the tool, which then has been no longer ->crash
+    // The other option would be to first delete the view, but for reasons if do not
+    // remember currently I prefer the destruction in this order
+    // TODO: make this call unneeded
+    mGroupedViews->setCurrentToolInlineView(nullptr);
+
+    qDeleteAll(mControllers);
+    qDeleteAll(mDockWidgets);
+    qDeleteAll(mTools);
+
+    delete mGroupedViews;
+}
+
 void ShellWindowPrivate::addTool(AbstractToolView* toolView)
 {
     Q_Q(ShellWindow);
@@ -226,23 +243,6 @@ void ShellWindowPrivate::onSynchronizerDeleted(QObject* synchronizer)
                      q, [&](ContentFlags contentFlags) { onContentFlagsChanged(contentFlags); });
 
     onContentFlagsChanged(mCurrentDocument->contentFlags());
-}
-
-ShellWindowPrivate::~ShellWindowPrivate()
-{
-    // we have to explicitly reset any inline tool view before first deleting all tools
-    // and then the grouped views, because on destruction of the inline tool view it
-    // operates on the tool, which then has been no longer ->crash
-    // The other option would be to first delete the view, but for reasons if do not
-    // remember currently I prefer the destruction in this order
-    // TODO: make this call unneeded
-    mGroupedViews->setCurrentToolInlineView(nullptr);
-
-    qDeleteAll(mControllers);
-    qDeleteAll(mDockWidgets);
-    qDeleteAll(mTools);
-
-    delete mGroupedViews;
 }
 
 }

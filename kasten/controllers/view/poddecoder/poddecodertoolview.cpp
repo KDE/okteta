@@ -33,13 +33,13 @@ PODDecoderToolView::PODDecoderToolView(PODDecoderTool* tool)
 {
 }
 
-QWidget* PODDecoderToolView::widget()    const { return mWidget; }
-QString PODDecoderToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* PODDecoderToolView::tool() const { return mWidget->tool(); }
-
 PODDecoderToolView::~PODDecoderToolView()
 {
     delete mWidget;
 }
+
+QWidget* PODDecoderToolView::widget()    const { return mWidget; }
+QString PODDecoderToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* PODDecoderToolView::tool() const { return mWidget->tool(); }
 
 }

@@ -49,6 +49,8 @@ inline AbstractExportJobPrivate::AbstractExportJobPrivate(AbstractExportJob* par
     , mDocument(nullptr)
 {}
 
+inline AbstractExportJobPrivate::~AbstractExportJobPrivate() = default;
+
 inline AbstractDocument* AbstractExportJobPrivate::document() const { return mDocument; }
 inline void AbstractExportJobPrivate::setDocument(AbstractDocument* document)
 {
@@ -57,8 +59,6 @@ inline void AbstractExportJobPrivate::setDocument(AbstractDocument* document)
     emit q_ptr->documentLoaded(document);
     q_ptr->emitResult();
 }
-
-inline AbstractExportJobPrivate::~AbstractExportJobPrivate() {}
 
 }
 

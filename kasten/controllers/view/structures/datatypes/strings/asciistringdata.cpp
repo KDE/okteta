@@ -30,13 +30,12 @@
 #include <KLocalizedString>
 #include <QVarLengthArray>
 
-AsciiStringData::AsciiStringData(StringDataInformation* parent) : StringData(parent)
+AsciiStringData::AsciiStringData(StringDataInformation* parent)
+    : StringData(parent)
 {
 }
 
-AsciiStringData::~AsciiStringData()
-{
-}
+AsciiStringData::~AsciiStringData() = default;
 
 qint64 AsciiStringData::read(Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining)
 {

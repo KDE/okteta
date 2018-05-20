@@ -73,6 +73,8 @@ ByteArrayPatternGeneratorConfigEditor::ByteArrayPatternGeneratorConfigEditor(Byt
     pageLayout->addRow(numberInputLabel, mNumberInput);
 }
 
+ByteArrayPatternGeneratorConfigEditor::~ByteArrayPatternGeneratorConfigEditor() = default;
+
 bool ByteArrayPatternGeneratorConfigEditor::isValid() const { return (!mSettings.pattern.isEmpty()); }
 
 QString ByteArrayPatternGeneratorConfigEditor::name() const
@@ -99,10 +101,6 @@ void ByteArrayPatternGeneratorConfigEditor::onSettingsChanged()
 void ByteArrayPatternGeneratorConfigEditor::onPatternChanged(const QByteArray& pattern)
 {
     emit validityChanged(!pattern.isEmpty());
-}
-
-ByteArrayPatternGeneratorConfigEditor::~ByteArrayPatternGeneratorConfigEditor()
-{
 }
 
 }

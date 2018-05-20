@@ -52,7 +52,7 @@ inline ArrayChangeMetricsList ArrayChangeMetricsList::oneSwapping(Address firstO
     return ArrayChangeMetricsList(ArrayChangeMetrics::asSwapping(firstOffset, secondOffset, secondLength));
 }
 
-inline ArrayChangeMetricsList::ArrayChangeMetricsList() {}
+inline ArrayChangeMetricsList::ArrayChangeMetricsList() = default;
 inline ArrayChangeMetricsList::ArrayChangeMetricsList(const ArrayChangeMetrics& metrics)
 {
     append(metrics);

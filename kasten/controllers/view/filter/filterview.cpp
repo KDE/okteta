@@ -113,6 +113,8 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     addFilters();
 }
 
+FilterView::~FilterView() = default;
+
 void FilterView::addFilters()
 {
     //
@@ -197,7 +199,5 @@ void FilterView::onValidityChanged(bool isValid)
 {
     mFilterButton->setEnabled(mTool->hasWriteable() && isValid);
 }
-
-FilterView::~FilterView() {}
 
 }

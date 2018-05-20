@@ -48,13 +48,13 @@ ToolInlineViewWidget::ToolInlineViewWidget(AbstractToolInlineView* view, QWidget
     layout->setAlignment(closeButton, (Qt::Alignment)(Qt::AlignLeft | Qt::AlignTop));
 }
 
-AbstractToolInlineView* ToolInlineViewWidget::view() const { return mView; }
-
 ToolInlineViewWidget::~ToolInlineViewWidget()
 {
     // TODO: crashes on close of the program if view is still open, because the view is already deleted
     layout()->removeWidget(mView->widget());
     mView->widget()->setParent(nullptr);
 }
+
+AbstractToolInlineView* ToolInlineViewWidget::view() const { return mView; }
 
 }

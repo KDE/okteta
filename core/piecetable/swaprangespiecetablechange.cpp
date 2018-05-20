@@ -31,6 +31,8 @@
 
 namespace KPieceTable {
 
+SwapRangesPieceTableChange::~SwapRangesPieceTableChange() = default;
+
 int SwapRangesPieceTableChange::type() const { return SwapRangesId; }
 
 QString SwapRangesPieceTableChange::description() const
@@ -56,7 +58,5 @@ ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const
 {
     return ArrayChangeMetrics::asSwapping(mFirstStart, mSecondRange.start(), mSecondRange.width());
 }
-
-SwapRangesPieceTableChange::~SwapRangesPieceTableChange() {}
 
 }

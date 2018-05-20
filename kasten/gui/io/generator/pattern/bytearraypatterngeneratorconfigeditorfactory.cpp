@@ -28,9 +28,9 @@
 
 namespace Kasten {
 
-ByteArrayPatternGeneratorConfigEditorFactory::ByteArrayPatternGeneratorConfigEditorFactory()
-{
-}
+ByteArrayPatternGeneratorConfigEditorFactory::ByteArrayPatternGeneratorConfigEditorFactory() = default;
+
+ByteArrayPatternGeneratorConfigEditorFactory::~ByteArrayPatternGeneratorConfigEditorFactory() = default;
 
 AbstractModelDataGeneratorConfigEditor* ByteArrayPatternGeneratorConfigEditorFactory::tryCreateConfigEditor(AbstractModelDataGenerator* generator) const
 {
@@ -45,7 +45,5 @@ AbstractModelDataGeneratorConfigEditor* ByteArrayPatternGeneratorConfigEditorFac
 
     return result;
 }
-
-ByteArrayPatternGeneratorConfigEditorFactory::~ByteArrayPatternGeneratorConfigEditorFactory() {}
 
 }

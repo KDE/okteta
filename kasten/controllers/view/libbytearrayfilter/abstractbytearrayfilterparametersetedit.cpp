@@ -31,11 +31,11 @@ AbstractByteArrayFilterParameterSetEdit::AbstractByteArrayFilterParameterSetEdit
     , d(new Private())
 {}
 
-void AbstractByteArrayFilterParameterSetEdit::setCharCodec(const QString& charCodecName) { Q_UNUSED(charCodecName) }
-bool AbstractByteArrayFilterParameterSetEdit::isValid() const { return true; }
-void AbstractByteArrayFilterParameterSetEdit::rememberCurrentSettings() {}
-
 AbstractByteArrayFilterParameterSetEdit::~AbstractByteArrayFilterParameterSetEdit()
 {
     delete d;
 }
+
+void AbstractByteArrayFilterParameterSetEdit::setCharCodec(const QString& charCodecName) { Q_UNUSED(charCodecName) }
+bool AbstractByteArrayFilterParameterSetEdit::isValid() const { return true; }
+void AbstractByteArrayFilterParameterSetEdit::rememberCurrentSettings() {}

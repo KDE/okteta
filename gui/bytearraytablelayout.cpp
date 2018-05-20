@@ -40,6 +40,8 @@ ByteArrayTableLayout::ByteArrayTableLayout(Size noOfBytesPerLine, Address firstL
     calcEnd();
 }
 
+ByteArrayTableLayout::~ByteArrayTableLayout() = default;
+
 bool ByteArrayTableLayout::setStartOffset(Address startOffset)
 {
     // rejecting <0
@@ -281,7 +283,5 @@ bool ByteArrayTableLayout::hasContent(Line line) const
 {
     return mCoordRange.includesLine(line);
 }
-
-ByteArrayTableLayout::~ByteArrayTableLayout() {}
 
 }

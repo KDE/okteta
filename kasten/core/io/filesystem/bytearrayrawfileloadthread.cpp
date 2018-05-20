@@ -39,6 +39,8 @@
 
 namespace Kasten {
 
+ByteArrayRawFileLoadThread::~ByteArrayRawFileLoadThread() = default;
+
 void ByteArrayRawFileLoadThread::run()
 {
     const qint64 fileSize = mFile->size();
@@ -85,7 +87,5 @@ void ByteArrayRawFileLoadThread::run()
 
     emit documentRead(mDocument);
 }
-
-ByteArrayRawFileLoadThread::~ByteArrayRawFileLoadThread() {}
 
 }

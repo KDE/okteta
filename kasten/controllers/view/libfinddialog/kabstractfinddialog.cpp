@@ -66,6 +66,8 @@ KAbstractFindDialog::KAbstractFindDialog(QWidget* parent)
     // which has no parameter for enabled and defaults to true
 }
 
+KAbstractFindDialog::~KAbstractFindDialog() = default;
+
 void KAbstractFindDialog::setFindButton(const QString& buttonText, const QString& buttonIconName,
                                         const QString& buttonToolTip, const QString& buttonWhatsThis)
 {
@@ -213,7 +215,5 @@ void KAbstractFindDialog::showEvent(QShowEvent* showEvent)
     QDialog::showEvent(showEvent);
     SearchDataEdit->setFocus();
 }
-
-KAbstractFindDialog::~KAbstractFindDialog() {}
 
 }

@@ -34,9 +34,7 @@ AbstractArrayData::AbstractArrayData(DataInformation* childType, ArrayDataInform
     mChildType->setParent(parent);
 }
 
-AbstractArrayData::~AbstractArrayData()
-{
-}
+AbstractArrayData::~AbstractArrayData() = default;
 
 void AbstractArrayData::setParent(ArrayDataInformation* parent)
 {

@@ -43,6 +43,8 @@ ExternalBookmarkStorage::ExternalBookmarkStorage()
     mBookmarkManager = KBookmarkManager::managerForFile(bookmarksFileName, QStringLiteral("okteta"));
 }
 
+ExternalBookmarkStorage::~ExternalBookmarkStorage() = default;
+
 void ExternalBookmarkStorage::readBookmarks(ByteArrayDocument* document, const QUrl& url)
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
@@ -122,7 +124,5 @@ void ExternalBookmarkStorage::writeBookmarks(ByteArrayDocument* document, const 
 
     mBookmarkManager->save(false);
 }
-
-ExternalBookmarkStorage::~ExternalBookmarkStorage() {}
 
 }

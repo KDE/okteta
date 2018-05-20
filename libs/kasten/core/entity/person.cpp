@@ -70,6 +70,9 @@ Person::Person(const Person& other)
     : d(other.d)
 {
 }
+
+Person::~Person() = default;
+
 bool Person::operator==(const Person& other) const
 {
     return (name() == other.name()) && !name().isEmpty();
@@ -83,7 +86,5 @@ Person& Person::operator=(const Person& other)
 
 QString Person::name()   const { return d->name(); }
 QIcon Person::faceIcon() const { return d->faceIcon(); }
-
-Person::~Person() {}
 
 }

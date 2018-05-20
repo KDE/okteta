@@ -98,6 +98,15 @@ ByteArrayFrameRenderer::ByteArrayFrameRenderer()
     setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 }
 
+ByteArrayFrameRenderer::~ByteArrayFrameRenderer()
+{
+    delete mStylist;
+    delete mTableRanges;
+    delete mLayout;
+    delete mValueCodec;
+    delete mCharCodec;
+}
+
 Okteta::AbstractByteArrayModel* ByteArrayFrameRenderer::byteArrayModel() const { return mByteArrayModel; }
 Okteta::Address ByteArrayFrameRenderer::offset()                         const { return mLayout->startOffset(); }
 Okteta::Size ByteArrayFrameRenderer::length()                            const { return mLayout->length(); }
@@ -509,13 +518,4 @@ void ByteArrayFrameRenderer::showByteArrayColumns(int newColumns)
     mSecondBorderColumnRenderer->setVisible(newColumns == (ValueCodingId | CharCodingId));
 
     adjustToWidth();
-}
-
-ByteArrayFrameRenderer::~ByteArrayFrameRenderer()
-{
-    delete mStylist;
-    delete mTableRanges;
-    delete mLayout;
-    delete mValueCodec;
-    delete mCharCodec;
 }

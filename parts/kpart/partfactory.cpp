@@ -66,6 +66,11 @@ OktetaPartFactory::OktetaPartFactory()
 //     mViewManager->codecViewManager()->setGeneratorConfigEditorFactories( generatorConfigEditorFactoryList );
 }
 
+OktetaPartFactory::~OktetaPartFactory()
+{
+    delete mByteArrayViewProfileManager;
+}
+
 QObject* OktetaPartFactory::create(const char* iface,
                                    QWidget* parentWidget,
                                    QObject* parent,
@@ -85,9 +90,4 @@ QObject* OktetaPartFactory::create(const char* iface,
     OktetaPart* part = new OktetaPart(parent, mAboutData, modus, mByteArrayViewProfileManager);
 
     return part;
-}
-
-OktetaPartFactory::~OktetaPartFactory()
-{
-    delete mByteArrayViewProfileManager;
 }

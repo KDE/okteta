@@ -30,6 +30,8 @@
 
 namespace KPieceTable {
 
+TestPieceTableChange::~TestPieceTableChange() = default;
+
 int TestPieceTableChange::type() const { return mTypeId; }
 
 QString TestPieceTableChange::description() const
@@ -69,7 +71,5 @@ ArrayChangeMetrics TestPieceTableChange::metrics() const
 }
 
 int TestPieceTableChange::dataSize() const { return 1; }
-
-TestPieceTableChange::~TestPieceTableChange() {}
 
 }

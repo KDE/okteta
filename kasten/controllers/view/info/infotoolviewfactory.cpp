@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-InfoToolViewFactory::InfoToolViewFactory() {}
+InfoToolViewFactory::InfoToolViewFactory() = default;
+
+InfoToolViewFactory::~InfoToolViewFactory() = default;
 
 QString InfoToolViewFactory::iconName() const { return QStringLiteral("okteta"); }
 QString InfoToolViewFactory::title()       const { return i18nc("@title:window", "Statistics"); }
@@ -41,7 +43,5 @@ AbstractToolView* InfoToolViewFactory::create(AbstractTool* tool)
 {
     return new InfoToolView(qobject_cast<InfoTool*>(tool));
 }
-
-InfoToolViewFactory::~InfoToolViewFactory() {}
 
 }

@@ -35,6 +35,11 @@ AbstractModelExporter::AbstractModelExporter(const QString& remoteTypeName, cons
 {
 }
 
+AbstractModelExporter::~AbstractModelExporter()
+{
+    delete d_ptr;
+}
+
 QString AbstractModelExporter::remoteTypeName() const
 {
     Q_D(const AbstractModelExporter);
@@ -47,11 +52,6 @@ QString AbstractModelExporter::remoteMimeType() const
     Q_D(const AbstractModelExporter);
 
     return d->remoteMimeType();
-}
-
-AbstractModelExporter::~AbstractModelExporter()
-{
-    delete d_ptr;
 }
 
 }

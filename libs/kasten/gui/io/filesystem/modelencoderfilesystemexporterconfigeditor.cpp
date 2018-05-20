@@ -37,6 +37,11 @@ ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfig
     layout->addWidget(mEncoderConfigEditor);
 }
 
+ModelEncoderFileSystemExporterConfigEditor::~ModelEncoderFileSystemExporterConfigEditor()
+{
+    delete mEncoderConfigEditor;
+}
+
 bool ModelEncoderFileSystemExporterConfigEditor::isValid() const
 {
     return mEncoderConfigEditor->isValid();
@@ -45,11 +50,6 @@ bool ModelEncoderFileSystemExporterConfigEditor::isValid() const
 AbstractSelectionView* ModelEncoderFileSystemExporterConfigEditor::createPreviewView() const
 {
     return mEncoderConfigEditor->createPreviewView();
-}
-
-ModelEncoderFileSystemExporterConfigEditor::~ModelEncoderFileSystemExporterConfigEditor()
-{
-    delete mEncoderConfigEditor;
 }
 
 }

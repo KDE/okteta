@@ -55,6 +55,11 @@ AbstractColumnFrameRendererPrivate::AbstractColumnFrameRendererPrivate()
     , mColumnsWidth(0)
 {}
 
+AbstractColumnFrameRendererPrivate::~AbstractColumnFrameRendererPrivate()
+{
+    qDeleteAll(mColumns);
+}
+
 void AbstractColumnFrameRendererPrivate::updateWidths()
 {
     mColumnsWidth = 0;
@@ -66,14 +71,14 @@ void AbstractColumnFrameRendererPrivate::updateWidths()
     }
 }
 
-AbstractColumnFrameRendererPrivate::~AbstractColumnFrameRendererPrivate()
-{
-    qDeleteAll(mColumns);
-}
-
 AbstractColumnFrameRenderer::AbstractColumnFrameRenderer()
     : d(new AbstractColumnFrameRendererPrivate())
 {
+}
+
+AbstractColumnFrameRenderer::~AbstractColumnFrameRenderer()
+{
+    delete d;
 }
 
 Okteta::LineSize AbstractColumnFrameRenderer::noOfLines()          const { return d->mNoOfLines; }
@@ -244,9 +249,4 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
 void AbstractColumnFrameRenderer::drawEmptyArea(QPainter* painter, int cx, int cy, int cw, int ch)
 {
     painter->fillRect(cx, cy, cw, ch, Qt::white);
-}
-
-AbstractColumnFrameRenderer::~AbstractColumnFrameRenderer()
-{
-    delete d;
 }

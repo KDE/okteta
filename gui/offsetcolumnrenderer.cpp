@@ -48,6 +48,8 @@ OffsetColumnRenderer::OffsetColumnRenderer(AbstractColumnStylist* stylist,
     recalcX();
 }
 
+OffsetColumnRenderer::~OffsetColumnRenderer() = default;
+
 void OffsetColumnRenderer::renderLine(QPainter* painter, Line lineIndex)
 {
     const PixelX offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * lineIndex;
@@ -139,7 +141,5 @@ void OffsetColumnRenderer::recalcX()
     // recalculate depend sizes
     setWidth(mOffsetTextWidth + leftOffsetMargin + rightOffsetMargin);
 }
-
-OffsetColumnRenderer::~OffsetColumnRenderer() {}
 
 }

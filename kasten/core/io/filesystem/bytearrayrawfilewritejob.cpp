@@ -36,6 +36,8 @@ ByteArrayRawFileWriteJob::ByteArrayRawFileWriteJob(ByteArrayRawFileSynchronizer*
     : AbstractFileSystemSyncToRemoteJob(synchronizer)
 {}
 
+ByteArrayRawFileWriteJob::~ByteArrayRawFileWriteJob() = default;
+
 void ByteArrayRawFileWriteJob::startWriteToFile()
 {
     ByteArrayDocument* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
@@ -53,7 +55,5 @@ void ByteArrayRawFileWriteJob::startWriteToFile()
 
     completeWrite(success);
 }
-
-ByteArrayRawFileWriteJob::~ByteArrayRawFileWriteJob() {}
 
 }

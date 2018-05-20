@@ -35,6 +35,8 @@ ByteArrayTableRanges::ByteArrayTableRanges(ByteArrayTableLayout* layout)
 {
 }
 
+ByteArrayTableRanges::~ByteArrayTableRanges() = default;
+
 void ByteArrayTableRanges::reset()
 {
     mSelection.cancel();
@@ -327,10 +329,6 @@ void ByteArrayTableRanges::adaptToChanges(const ArrayChangeMetricsList& changeLi
             ;
         }
     }
-}
-
-ByteArrayTableRanges::~ByteArrayTableRanges()
-{
 }
 
 }

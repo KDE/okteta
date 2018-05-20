@@ -24,7 +24,9 @@
 
 namespace Okteta {
 
-AddressRangeList::AddressRangeList() {}
+AddressRangeList::AddressRangeList() = default;
+
+AddressRangeList::~AddressRangeList() = default;
 
 void AddressRangeList::addAddressRange(const AddressRange& newAddressRange)
 {
@@ -82,7 +84,5 @@ void AddressRangeList::addAddressRangeList(const AddressRangeList& addressRangeL
         addAddressRange(addressRange);
     }
 }
-
-AddressRangeList::~AddressRangeList() {}
 
 }

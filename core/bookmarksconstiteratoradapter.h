@@ -57,8 +57,8 @@ public:
     virtual void toFront() = 0;
 };
 
-inline BookmarksConstIteratorAdapter::BookmarksConstIteratorAdapter() {}
-inline BookmarksConstIteratorAdapter::~BookmarksConstIteratorAdapter() {}
+inline BookmarksConstIteratorAdapter::BookmarksConstIteratorAdapter() = default;
+inline BookmarksConstIteratorAdapter::~BookmarksConstIteratorAdapter() = default;
 
 }
 

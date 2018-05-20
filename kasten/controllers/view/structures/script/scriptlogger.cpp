@@ -42,6 +42,13 @@ QIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)
     }
 }
 
+ScriptLogger::ScriptLogger()
+    : mLogToStdOut(false)
+{
+}
+
+ScriptLogger::~ScriptLogger() = default;
+
 QVariant ScriptLogger::data(const QModelIndex& index, int role) const
 {
     if (!index.isValid()) {
@@ -129,15 +136,6 @@ void ScriptLogger::clear()
     beginRemoveRows(QModelIndex(), 0, qMax(0, mData.size() - 1));
     mData.clear();
     endRemoveRows();
-}
-
-ScriptLogger::ScriptLogger()
-    : mLogToStdOut(false)
-{
-}
-
-ScriptLogger::~ScriptLogger()
-{
 }
 
 QStringList ScriptLogger::messages(LogLevel minLevel) const

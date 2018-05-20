@@ -38,6 +38,8 @@ ByteArrayRawFileReloadJob::ByteArrayRawFileReloadJob(ByteArrayRawFileSynchronize
     : AbstractFileSystemSyncFromRemoteJob(synchronizer)
 {}
 
+ByteArrayRawFileReloadJob::~ByteArrayRawFileReloadJob() = default;
+
 void ByteArrayRawFileReloadJob::startReadFromFile()
 {
     ByteArrayDocument* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
@@ -63,7 +65,5 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
 
     completeRead(success);
 }
-
-ByteArrayRawFileReloadJob::~ByteArrayRawFileReloadJob() {}
 
 }

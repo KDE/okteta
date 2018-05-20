@@ -24,9 +24,9 @@
 
 namespace Okteta {
 
-CoordRangeList::CoordRangeList()
-{
-}
+CoordRangeList::CoordRangeList() = default;
+
+CoordRangeList::~CoordRangeList() = default;
 
 void CoordRangeList::addCoordRange(const CoordRange& coordRange)
 {
@@ -77,10 +77,6 @@ void CoordRangeList::addCoordRange(const CoordRange& coordRange)
         // add it at the end
         append(coordRange);
     }
-}
-
-CoordRangeList::~CoordRangeList()
-{
 }
 
 }

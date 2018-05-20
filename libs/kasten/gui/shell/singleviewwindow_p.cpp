@@ -47,6 +47,23 @@ SingleViewWindowPrivate::SingleViewWindowPrivate(SingleViewWindow* parent,
     setView(view);
 }
 
+SingleViewWindowPrivate::~SingleViewWindowPrivate()
+{
+    // we have to explicitly reset any inline tool view before first deleting all tools
+    // and then the view area, because on destruction of the inline tool view it
+    // operates on the tool, which then has been no longer ->crash
+    // The other option would be to first delete the view, but for reasons if do not
+    // remember currently I prefer the destruction in this order
+    // TODO: make this call unneeded
+    mViewArea->setCurrentToolInlineView(nullptr);
+
+    qDeleteAll(mControllers);
+    qDeleteAll(mDockWidgets);
+    qDeleteAll(mTools);
+
+    delete mViewArea;
+}
+
 void SingleViewWindowPrivate::setView(AbstractView* view)
 {
     Q_Q(SingleViewWindow);
@@ -203,23 +220,6 @@ void SingleViewWindowPrivate::onToolVisibilityChanged(bool isVisible)
         AbstractView* view = isVisible ? mView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel(view);
     }
-}
-
-SingleViewWindowPrivate::~SingleViewWindowPrivate()
-{
-    // we have to explicitly reset any inline tool view before first deleting all tools
-    // and then the view area, because on destruction of the inline tool view it
-    // operates on the tool, which then has been no longer ->crash
-    // The other option would be to first delete the view, but for reasons if do not
-    // remember currently I prefer the destruction in this order
-    // TODO: make this call unneeded
-    mViewArea->setCurrentToolInlineView(nullptr);
-
-    qDeleteAll(mControllers);
-    qDeleteAll(mDockWidgets);
-    qDeleteAll(mTools);
-
-    delete mViewArea;
 }
 
 }

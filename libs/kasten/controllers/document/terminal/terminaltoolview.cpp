@@ -33,13 +33,13 @@ TerminalToolView::TerminalToolView(TerminalTool* tool)
 {
 }
 
-QWidget* TerminalToolView::widget()    const { return mWidget; }
-QString TerminalToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* TerminalToolView::tool() const { return mWidget->tool(); }
-
 TerminalToolView::~TerminalToolView()
 {
     delete mWidget;
 }
+
+QWidget* TerminalToolView::widget()    const { return mWidget; }
+QString TerminalToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* TerminalToolView::tool() const { return mWidget->tool(); }
 
 }

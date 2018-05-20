@@ -49,6 +49,8 @@ CharsetConversionTool::CharsetConversionTool()
     setObjectName(QStringLiteral("CharsetConversion"));
 }
 
+CharsetConversionTool::~CharsetConversionTool() = default;
+
 bool CharsetConversionTool::isApplyable() const
 {
     return (mByteArrayModel &&
@@ -186,10 +188,6 @@ void CharsetConversionTool::convertChars()
 void CharsetConversionTool::onViewChanged()
 {
     emit isApplyableChanged(isApplyable());
-}
-
-CharsetConversionTool::~CharsetConversionTool()
-{
 }
 
 }

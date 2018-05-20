@@ -52,6 +52,11 @@ DocumentSyncManager::DocumentSyncManager(DocumentManager* manager)
     , mOverwriteDialog(nullptr)
 {}
 
+DocumentSyncManager::~DocumentSyncManager()
+{
+    delete mSynchronizerFactory;
+}
+
 void DocumentSyncManager::setSaveDiscardDialog(AbstractSaveDiscardDialog* saveDiscardDialog)
 {
     mSaveDiscardDialog = saveDiscardDialog;
@@ -277,11 +282,6 @@ void DocumentSyncManager::onDocumentsAdded(const QList<Kasten::AbstractDocument*
 void DocumentSyncManager::onDocumentsClosing(const QList<Kasten::AbstractDocument*>& documents)
 {
     Q_UNUSED(documents)
-}
-
-DocumentSyncManager::~DocumentSyncManager()
-{
-    delete mSynchronizerFactory;
 }
 
 }

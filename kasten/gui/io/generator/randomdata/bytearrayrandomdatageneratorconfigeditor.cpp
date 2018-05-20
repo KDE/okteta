@@ -56,6 +56,8 @@ ByteArrayRandomDataGeneratorConfigEditor::ByteArrayRandomDataGeneratorConfigEdit
     pageLayout->addRow(numberInputLabel, mSizeInput);
 }
 
+ByteArrayRandomDataGeneratorConfigEditor::~ByteArrayRandomDataGeneratorConfigEditor() = default;
+
 QString ByteArrayRandomDataGeneratorConfigEditor::name() const
 {
     return i18nc("@item name of the generated data", "Random Data");
@@ -74,10 +76,6 @@ void ByteArrayRandomDataGeneratorConfigEditor::onSettingsChanged()
     mSettings.size = mSizeInput->value();
 
     mGenerator->setSettings(mSettings);
-}
-
-ByteArrayRandomDataGeneratorConfigEditor::~ByteArrayRandomDataGeneratorConfigEditor()
-{
 }
 
 }

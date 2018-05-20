@@ -22,8 +22,9 @@
 
 #include "operandbytearrayfilterparameterset.h"
 
-OperandByteArrayFilterParameterSet::OperandByteArrayFilterParameterSet()
-{}
+OperandByteArrayFilterParameterSet::OperandByteArrayFilterParameterSet() = default;
+
+OperandByteArrayFilterParameterSet::~OperandByteArrayFilterParameterSet() = default;
 
 const char* OperandByteArrayFilterParameterSet::id() const { return "Operand"; }
 
@@ -34,7 +35,3 @@ bool OperandByteArrayFilterParameterSet::alignAtEnd() const { return mAlignAtEnd
 void OperandByteArrayFilterParameterSet::setOperand(const QByteArray& operand) { mOperand = operand; }
 void OperandByteArrayFilterParameterSet::setOperandFormat(int operandFormat) { mOperandFormat = operandFormat; }
 void OperandByteArrayFilterParameterSet::setAlignAtEnd(bool alignAtEnd) { mAlignAtEnd = alignAtEnd; }
-
-OperandByteArrayFilterParameterSet::~OperandByteArrayFilterParameterSet()
-{
-}

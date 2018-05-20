@@ -48,16 +48,14 @@ PointerDataInformation::PointerDataInformation(const QString& name, DataInformat
     mPointerTarget->setParent(this);
 }
 
-PointerDataInformation::~PointerDataInformation()
-{
-}
-
 PointerDataInformation::PointerDataInformation(const PointerDataInformation& d)
     : PrimitiveDataInformationWrapper(d)
     , mPointerTarget(d.mPointerTarget->clone())
 {
     mPointerTarget->setParent(this);
 }
+
+PointerDataInformation::~PointerDataInformation() = default;
 
 qint64 PointerDataInformation::readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                                         BitCount64 bitsRemaining, quint8* bitOffset)

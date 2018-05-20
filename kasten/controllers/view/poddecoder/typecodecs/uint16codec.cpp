@@ -34,6 +34,8 @@ UInt16Codec::UInt16Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Unsigned 16-bit"))
 {}
 
+UInt16Codec::~UInt16Codec() = default;
+
 QVariant UInt16Codec::value(const PODData& data, int* byteCount) const
 {
     const quint16* pointer = (quint16*)data.pointer(2);
@@ -53,7 +55,5 @@ bool UInt16Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<UInt16>().value == otherValue.value<UInt16>().value);
 }
-
-UInt16Codec::~UInt16Codec() {}
 
 }

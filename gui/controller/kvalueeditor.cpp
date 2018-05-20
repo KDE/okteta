@@ -43,6 +43,8 @@ KValueEditor::KValueEditor(ByteArrayTableCursor* cursor, AbstractByteArrayView* 
 {
 }
 
+KValueEditor::~KValueEditor() = default;
+
 void KValueEditor::adaptToValueCodecChange()
 {
     const uint newCodingWidth = mView->valueCodec()->encodingWidth();
@@ -293,7 +295,5 @@ void KValueEditor::doValueEditAction(KValueEditAction Action, int input)
         }
     }
 }
-
-KValueEditor::~KValueEditor() {}
 
 }

@@ -35,6 +35,8 @@ TabBar::TabBar(QWidget* parent)
     setAcceptDrops(true);
 }
 
+TabBar::~TabBar() = default;
+
 void TabBar::mouseReleaseEvent(QMouseEvent* event)
 {
     if (tabsClosable()) {
@@ -85,10 +87,6 @@ void TabBar::dropEvent(QDropEvent* event)
     }
 
     QTabBar::dropEvent(event);
-}
-
-TabBar::~TabBar()
-{
 }
 
 }

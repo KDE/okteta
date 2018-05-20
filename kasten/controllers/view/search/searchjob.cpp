@@ -43,6 +43,11 @@ SearchJob::SearchJob(const Okteta::AbstractByteArrayModel* model,
 {
 }
 
+SearchJob::~SearchJob()
+{
+    delete mCharCodec;
+}
+
 Okteta::Address SearchJob::exec()
 {
     // TODO: what kind of signal could a filter send?
@@ -70,11 +75,6 @@ Okteta::Address SearchJob::exec()
 void SearchJob::onBytesSearched()
 {
     QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents | QEventLoop::ExcludeSocketNotifiers);
-}
-
-SearchJob::~SearchJob()
-{
-    delete mCharCodec;
 }
 
 }

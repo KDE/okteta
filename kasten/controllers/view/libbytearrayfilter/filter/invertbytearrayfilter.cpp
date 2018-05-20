@@ -33,6 +33,8 @@ InvertByteArrayFilter::InvertByteArrayFilter()
               "INVERT data"))
 {}
 
+InvertByteArrayFilter::~InvertByteArrayFilter() = default;
+
 AbstractByteArrayFilterParameterSet* InvertByteArrayFilter::parameterSet() { return &mNoParameterSet; }
 
 bool InvertByteArrayFilter::filter(Okteta::Byte* result,
@@ -52,5 +54,3 @@ bool InvertByteArrayFilter::filter(Okteta::Byte* result,
 
     return true;
 }
-
-InvertByteArrayFilter::~InvertByteArrayFilter() {}

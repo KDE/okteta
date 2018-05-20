@@ -51,9 +51,7 @@ StructureTreeModel::StructureTreeModel(StructuresTool* tool, QObject* parent)
 
 }
 
-StructureTreeModel::~StructureTreeModel()
-{
-}
+StructureTreeModel::~StructureTreeModel() = default;
 
 void StructureTreeModel::onChildrenRemoved(const DataInformation* sender, uint startIndex,
                                            uint endIndex)

@@ -45,6 +45,8 @@ ValueByteArrayColumnRenderer::ValueByteArrayColumnRenderer(AbstractColumnStylist
 {
 }
 
+ValueByteArrayColumnRenderer::~ValueByteArrayColumnRenderer() = default;
+
 void ValueByteArrayColumnRenderer::setValueCodec(ValueCoding valueCoding, const ValueCodec* valueCodec)
 {
     mValueCoding = valueCoding;
@@ -126,10 +128,6 @@ void ValueByteArrayColumnRenderer::renderCode(QPainter* painter, const QString& 
     } else {
         painter->drawText(0, mDigitBaseLine, code);
     }
-}
-
-ValueByteArrayColumnRenderer::~ValueByteArrayColumnRenderer()
-{
 }
 
 }

@@ -66,9 +66,7 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLo
     mScriptHandler.reset(new ScriptHandler(engine, this));
 }
 
-TopLevelDataInformation::~TopLevelDataInformation()
-{
-}
+TopLevelDataInformation::~TopLevelDataInformation() = default;
 
 void TopLevelDataInformation::validate()
 {

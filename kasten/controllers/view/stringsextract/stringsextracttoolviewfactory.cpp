@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-StringsExtractToolViewFactory::StringsExtractToolViewFactory() {}
+StringsExtractToolViewFactory::StringsExtractToolViewFactory() = default;
+
+StringsExtractToolViewFactory::~StringsExtractToolViewFactory() = default;
 
 QString StringsExtractToolViewFactory::iconName() const { return QStringLiteral("text-plain"); }
 QString StringsExtractToolViewFactory::title()       const { return i18nc("@title:window", "Strings"); }
@@ -41,7 +43,5 @@ AbstractToolView* StringsExtractToolViewFactory::create(AbstractTool* tool)
 {
     return new StringsExtractToolView(qobject_cast<StringsExtractTool*>(tool));
 }
-
-StringsExtractToolViewFactory::~StringsExtractToolViewFactory() {}
 
 }

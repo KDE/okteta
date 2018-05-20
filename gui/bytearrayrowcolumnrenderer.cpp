@@ -75,6 +75,12 @@ ByteArrayRowColumnRenderer::ByteArrayRowColumnRenderer(AbstractColumnStylist* st
 {
 }
 
+ByteArrayRowColumnRenderer::~ByteArrayRowColumnRenderer()
+{
+    delete [] mLinePosLeftPixelX;
+    delete [] mLinePosRightPixelX;
+}
+
 AbstractByteArrayView::CodingTypeId ByteArrayRowColumnRenderer::codingIdofY(PixelY y) const
 {
     return
@@ -928,12 +934,6 @@ bool ByteArrayRowColumnRenderer::getNextMarkedAddressRange(AddressRange* _marked
     *_markedSection = markedRange;
     *_flag = flag;
     return true;
-}
-
-ByteArrayRowColumnRenderer::~ByteArrayRowColumnRenderer()
-{
-    delete [] mLinePosLeftPixelX;
-    delete [] mLinePosRightPixelX;
 }
 
 }

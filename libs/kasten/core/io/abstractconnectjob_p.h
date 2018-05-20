@@ -42,8 +42,7 @@ inline AbstractConnectJobPrivate::AbstractConnectJobPrivate(AbstractConnectJob* 
     : q_ptr(parent)
 {}
 
-inline AbstractConnectJobPrivate::~AbstractConnectJobPrivate()
-{}
+inline AbstractConnectJobPrivate::~AbstractConnectJobPrivate() = default;
 
 }
 

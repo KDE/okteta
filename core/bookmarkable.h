@@ -61,7 +61,7 @@ public: // signal
     virtual void bookmarksModified(bool modified) = 0;
 };
 
-inline Bookmarkable::~Bookmarkable() {}
+inline Bookmarkable::~Bookmarkable() = default;
 
 }
 

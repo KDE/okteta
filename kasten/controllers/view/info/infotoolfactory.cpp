@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
-InfoToolFactory::InfoToolFactory() {}
+InfoToolFactory::InfoToolFactory() = default;
+
+InfoToolFactory::~InfoToolFactory() = default;
 
 AbstractTool* InfoToolFactory::create()
 {
     return new InfoTool();
 }
-
-InfoToolFactory::~InfoToolFactory() {}
 
 }

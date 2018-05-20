@@ -65,6 +65,13 @@ ColumnsViewPrivate::ColumnsViewPrivate(/*bool R,*/)
 //    Reversed( R )
 {}
 
+ColumnsViewPrivate::~ColumnsViewPrivate()
+{
+    while (!Columns.isEmpty()) {
+        delete Columns.takeFirst();
+    }
+}
+
 void ColumnsViewPrivate::updateWidths()
 {
     ColumnsWidth = 0;
@@ -73,13 +80,6 @@ void ColumnsViewPrivate::updateWidths()
         AbstractColumnRenderer* column = it.next();
         column->setX(ColumnsWidth);
         ColumnsWidth += column->visibleWidth();
-    }
-}
-
-ColumnsViewPrivate::~ColumnsViewPrivate()
-{
-    while (!Columns.isEmpty()) {
-        delete Columns.takeFirst();
     }
 }
 
@@ -94,6 +94,11 @@ ColumnsView::ColumnsView(/*bool R,*/ QWidget* parent)
 
     viewport()->setFocusProxy(this);
     viewport()->setFocusPolicy(Qt::WheelFocus);
+}
+
+ColumnsView::~ColumnsView()
+{
+    delete d;
 }
 
 LineSize ColumnsView::noOfLines()    const { return d->NoOfLines; }
@@ -393,11 +398,6 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
 void ColumnsView::renderEmptyArea(QPainter* painter, int cx, int cy, int cw, int ch)
 {
     painter->fillRect(cx, cy, cw, ch, viewport()->palette().brush(QPalette::Base)); // TODO: use stylist here, too
-}
-
-ColumnsView::~ColumnsView()
-{
-    delete d;
 }
 
 }

@@ -38,6 +38,8 @@ public: // QValidator API
     QValidator::State validate(QString& input, int& pos) const override;
 };
 
+Utf8CharValidator::~Utf8CharValidator() = default;
+
 inline Utf8CharValidator::Utf8CharValidator(QObject* parent) : QValidator(parent) {}
 
 QValidator::State Utf8CharValidator::validate(QString& input, int& pos) const
@@ -48,7 +50,6 @@ QValidator::State Utf8CharValidator::validate(QString& input, int& pos) const
     return (stringLength == 0) ? QValidator::Intermediate : QValidator::Acceptable;
 }
 
-Utf8CharValidator::~Utf8CharValidator() {}
 
 Utf8Editor::Utf8Editor(QWidget* parent)
     : QLineEdit(parent)
@@ -57,6 +58,8 @@ Utf8Editor::Utf8Editor(QWidget* parent)
     setMaxLength(1);
     setClearButtonEnabled(true);
 }
+
+Utf8Editor::~Utf8Editor() = default;
 
 void Utf8Editor::setData(Utf8 data)
 {
@@ -68,7 +71,5 @@ Utf8 Utf8Editor::data() const
     const QString t = text();
     return Utf8(t.isEmpty() ? QChar(0) : t[0]);
 }
-
-Utf8Editor::~Utf8Editor() {}
 
 #include "utf8editor.moc"

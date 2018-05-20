@@ -74,7 +74,7 @@ Widget::Widget(QWidget* parent)
     ui.mByteArrayRowView->setByteArrayModel(mByteArrayModel);
 }
 
-Widget::~Widget() {}
+Widget::~Widget() = default;
 
 int main(int argc, char* argv[])
 {

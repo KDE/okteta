@@ -45,7 +45,7 @@ public:
     static const QString& codecName();
 };
 
-inline USASCIICharCodec::USASCIICharCodec() {}
+inline USASCIICharCodec::USASCIICharCodec() = default;
 
 inline USASCIICharCodec* USASCIICharCodec::create() { return new USASCIICharCodec(); }
 

@@ -27,13 +27,13 @@
 
 namespace Kasten {
 
-StringsExtractToolFactory::StringsExtractToolFactory() {}
+StringsExtractToolFactory::StringsExtractToolFactory() = default;
+
+StringsExtractToolFactory::~StringsExtractToolFactory() = default;
 
 AbstractTool* StringsExtractToolFactory::create()
 {
     return new StringsExtractTool();
 }
-
-StringsExtractToolFactory::~StringsExtractToolFactory() {}
 
 }

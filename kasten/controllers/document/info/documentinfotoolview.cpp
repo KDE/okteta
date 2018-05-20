@@ -33,13 +33,13 @@ DocumentInfoToolView::DocumentInfoToolView(DocumentInfoTool* tool)
 {
 }
 
-QWidget* DocumentInfoToolView::widget()    const { return mWidget; }
-QString DocumentInfoToolView::title()      const { return mWidget->tool()->title(); }
-AbstractTool* DocumentInfoToolView::tool() const { return mWidget->tool(); }
-
 DocumentInfoToolView::~DocumentInfoToolView()
 {
     delete mWidget;
 }
+
+QWidget* DocumentInfoToolView::widget()    const { return mWidget; }
+QString DocumentInfoToolView::title()      const { return mWidget->tool()->title(); }
+AbstractTool* DocumentInfoToolView::tool() const { return mWidget->tool(); }
 
 }

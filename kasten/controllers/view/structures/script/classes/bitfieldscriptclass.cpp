@@ -31,9 +31,7 @@ BitfieldScriptClass::BitfieldScriptClass(QScriptEngine* engine, ScriptHandlerInf
     mIterableProperties.append(qMakePair(s_width, QScriptValue::PropertyFlags(QScriptValue::Undeletable)));
 }
 
-BitfieldScriptClass::~BitfieldScriptClass()
-{
-}
+BitfieldScriptClass::~BitfieldScriptClass() = default;
 
 QScriptValue BitfieldScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {

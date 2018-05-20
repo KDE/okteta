@@ -34,6 +34,8 @@ SInt64Codec::SInt64Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Signed 64-bit"))
 {}
 
+SInt64Codec::~SInt64Codec() = default;
+
 QVariant SInt64Codec::value(const PODData& data, int* byteCount) const
 {
     const qint64* pointer = (qint64*)data.pointer(8);
@@ -53,7 +55,5 @@ bool SInt64Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<SInt64>().value == otherValue.value<SInt64>().value);
 }
-
-SInt64Codec::~SInt64Codec() {}
 
 }

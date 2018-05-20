@@ -83,6 +83,8 @@ SingleDocumentStrategyPrivate::SingleDocumentStrategyPrivate(SingleDocumentStrat
 {
 }
 
+inline SingleDocumentStrategyPrivate::~SingleDocumentStrategyPrivate() = default;
+
 inline QList<AbstractDocument*> SingleDocumentStrategyPrivate::documents() const
 {
     return mDocumentManager->documents();
@@ -122,8 +124,6 @@ inline void SingleDocumentStrategyPrivate::closeDocument(AbstractDocument* docum
 {
     mDocumentManager->closeDocument(document);
 }
-
-inline SingleDocumentStrategyPrivate::~SingleDocumentStrategyPrivate() {}
 
 }
 

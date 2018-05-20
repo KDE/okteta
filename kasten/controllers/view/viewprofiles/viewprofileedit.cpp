@@ -188,6 +188,8 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     mTitleEdit->setFocus();
 }
 
+ViewProfileEdit::~ViewProfileEdit() = default;
+
 ByteArrayViewProfile ViewProfileEdit::viewProfile() const
 {
     ByteArrayViewProfile viewProfile;
@@ -242,10 +244,6 @@ void ViewProfileEdit::onLineBreakIndexChanged(int lineBreakIndex)
     const bool isLineBreakByByte = (lineBreakIndex == 0);
 
     mBytesPerLineEdit->setEnabled(isLineBreakByByte);
-}
-
-ViewProfileEdit::~ViewProfileEdit()
-{
 }
 
 }

@@ -35,6 +35,11 @@ AbstractColumnRenderer::AbstractColumnRenderer(AbstractColumnStylist* stylist)
 {
 }
 
+AbstractColumnRenderer::~AbstractColumnRenderer()
+{
+    delete d;
+}
+
 AbstractColumnStylist* AbstractColumnRenderer::stylist() const { return d->mStylist; }
 
 PixelX AbstractColumnRenderer::x()            const { return d->mXSpan.start(); }
@@ -80,11 +85,6 @@ void AbstractColumnRenderer::renderColumn(QPainter* painter, const PixelXRange& 
 void AbstractColumnRenderer::renderEmptyColumn(QPainter* painter, const PixelXRange& xSpan, const PixelYRange& ySpan)
 {
     d->renderEmptyColumn(painter, xSpan, ySpan);
-}
-
-AbstractColumnRenderer::~AbstractColumnRenderer()
-{
-    delete d;
 }
 
 }

@@ -58,6 +58,8 @@ DocumentInfoTool::DocumentInfoTool(DocumentSyncManager* syncManager)
     connect(mMimeTypeUpdateTimer, &QTimer::timeout, this, &DocumentInfoTool::updateMimeType);
 }
 
+DocumentInfoTool::~DocumentInfoTool() = default;
+
 // TODO: file or document or ...?
 QString DocumentInfoTool::title() const { return i18nc("@title:window", "File Info"); }
 QString DocumentInfoTool::documentTitle() const
@@ -181,7 +183,5 @@ void DocumentInfoTool::onUrlChanged(const QUrl& url)
 
     emit locationChanged(location());
 }
-
-DocumentInfoTool::~DocumentInfoTool() {}
 
 }

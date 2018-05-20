@@ -94,6 +94,8 @@ ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Base32"), QStringLiteral("text/x-base32"))
 {}
 
+ByteArrayBase32StreamEncoder::~ByteArrayBase32StreamEncoder() = default;
+
 bool ByteArrayBase32StreamEncoder::encodeDataToStream(QIODevice* device,
                                                       const ByteArrayView* byteArrayView,
                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
@@ -175,7 +177,5 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream(QIODevice* device,
 
     return success;
 }
-
-ByteArrayBase32StreamEncoder::~ByteArrayBase32StreamEncoder() {}
 
 }

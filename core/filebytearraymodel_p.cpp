@@ -41,6 +41,13 @@ FileByteArrayModelPrivate::FileByteArrayModelPrivate(int pageNumber, int pageSiz
 //     open(filename);
 }
 
+FileByteArrayModelPrivate::~FileByteArrayModelPrivate()
+{
+    if (mFile.isOpen()) {
+        close();
+    }
+}
+
 Byte FileByteArrayModelPrivate::byte(Address offset) const
 {
 //   std::cout << "reading datum " << offset << std::endl;
@@ -173,13 +180,6 @@ bool FileByteArrayModelPrivate::freePage(unsigned int pageIndex) const
     mData[pageIndex] = nullptr;
     ++mNoOfFreePages;
     return true;
-}
-
-FileByteArrayModelPrivate::~FileByteArrayModelPrivate()
-{
-    if (mFile.isOpen()) {
-        close();
-    }
 }
 
 }

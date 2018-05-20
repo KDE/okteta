@@ -34,6 +34,8 @@ UInt8Codec::UInt8Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "Unsigned 8-bit"))
 {}
 
+UInt8Codec::~UInt8Codec() = default;
+
 QVariant UInt8Codec::value(const PODData& data, int* byteCount) const
 {
     const quint8* pointer = (quint8*)data.pointer(1);
@@ -53,7 +55,5 @@ bool UInt8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<UInt8>().value == otherValue.value<UInt8>().value);
 }
-
-UInt8Codec::~UInt8Codec() {}
 
 }

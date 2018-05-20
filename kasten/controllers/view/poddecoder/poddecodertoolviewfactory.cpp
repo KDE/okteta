@@ -30,7 +30,9 @@
 
 namespace Kasten {
 
-PodDecoderToolViewFactory::PodDecoderToolViewFactory() {}
+PodDecoderToolViewFactory::PodDecoderToolViewFactory() = default;
+
+PodDecoderToolViewFactory::~PodDecoderToolViewFactory() = default;
 
 QString PodDecoderToolViewFactory::iconName() const { return QStringLiteral("okteta"); }
 QString PodDecoderToolViewFactory::title()       const { return i18nc("@title:window", "Decoding Table"); }
@@ -41,7 +43,5 @@ AbstractToolView* PodDecoderToolViewFactory::create(AbstractTool* tool)
 {
     return new PODDecoderToolView(qobject_cast<PODDecoderTool*>(tool));
 }
-
-PodDecoderToolViewFactory::~PodDecoderToolViewFactory() {}
 
 }

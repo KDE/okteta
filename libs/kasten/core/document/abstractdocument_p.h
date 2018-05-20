@@ -59,6 +59,11 @@ inline AbstractDocumentPrivate::AbstractDocumentPrivate(AbstractDocument* parent
     , mSynchronizer(nullptr)
 {}
 
+inline AbstractDocumentPrivate::~AbstractDocumentPrivate()
+{
+    delete mSynchronizer;
+}
+
 inline const QString& AbstractDocumentPrivate::id() const { return mId; }
 inline void AbstractDocumentPrivate::setId(const QString& id) { mId = id; }
 
@@ -76,11 +81,6 @@ inline void AbstractDocumentPrivate::setSynchronizer(AbstractModelSynchronizer* 
     mSynchronizer = synchronizer;
 
     emit q->synchronizerChanged(synchronizer);
-}
-
-inline AbstractDocumentPrivate::~AbstractDocumentPrivate()
-{
-    delete mSynchronizer;
 }
 
 }

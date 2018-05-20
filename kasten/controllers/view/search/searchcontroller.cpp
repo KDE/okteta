@@ -64,6 +64,12 @@ SearchController::SearchController(KXMLGUIClient* guiClient, QWidget* parentWidg
     mFindPrevAction->setEnabled(false);
 }
 
+SearchController::~SearchController()
+{
+    delete mSearchDialog;
+    delete mTool;
+}
+
 void SearchController::setTargetModel(AbstractModel* model)
 {
     mTool->setTargetModel(model);
@@ -124,12 +130,6 @@ bool SearchController::queryContinue(KFindDirection direction) const
     const bool result = (answer != KMessageBox::No);
 
     return result;
-}
-
-SearchController::~SearchController()
-{
-    delete mSearchDialog;
-    delete mTool;
 }
 
 }

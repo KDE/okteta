@@ -41,9 +41,7 @@ ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* han
     mArrayPrototype.setProperty(QStringLiteral("toString"), engine->newFunction(Array_proto_toString));
 }
 
-ArrayScriptClass::~ArrayScriptClass()
-{
-}
+ArrayScriptClass::~ArrayScriptClass() = default;
 
 bool ArrayScriptClass::queryAdditionalProperty(const DataInformation* data, const QScriptString& name, QScriptClass::QueryFlags* flags, uint* id)
 {

@@ -31,6 +31,11 @@ ShellWindow::ShellWindow(ViewManager* viewManager)
 {
 }
 
+ShellWindow::~ShellWindow()
+{
+    delete d_ptr;
+}
+
 ViewManager* ShellWindow::viewManager() const
 {
     Q_D(const ShellWindow);
@@ -78,11 +83,6 @@ void ShellWindow::updateControllers(AbstractView* view)
     Q_D(ShellWindow);
 
     d->updateControllers(view);
-}
-
-ShellWindow::~ShellWindow()
-{
-    delete d_ptr;
 }
 
 }

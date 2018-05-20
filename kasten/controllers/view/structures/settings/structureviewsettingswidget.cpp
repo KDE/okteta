@@ -53,9 +53,7 @@ StructureViewSettingsWidget::StructureViewSettingsWidget()
                     Kasten::StructureViewPreferences::charDisplayBase(), SLOT(setCharDisplay(int)));
 }
 
-StructureViewSettingsWidget::~StructureViewSettingsWidget()
-{
-}
+StructureViewSettingsWidget::~StructureViewSettingsWidget() = default;
 
 void StructureViewSettingsWidget::setupBasesCombo(QComboBox* box, KConfigSkeletonItem* configItem,
                                                   int currentValue, const char* slot)

@@ -76,7 +76,7 @@ public: // API to be implemented
     virtual Size dataSize() const;
 };
 
-inline AbstractPieceTableChange::~AbstractPieceTableChange() {}
+inline AbstractPieceTableChange::~AbstractPieceTableChange() = default;
 
 }
 

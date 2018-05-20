@@ -60,13 +60,13 @@ BytesPerLineDialog::BytesPerLineDialog(QWidget* parent)
     setWindowTitle(caption);
 }
 
+BytesPerLineDialog::~BytesPerLineDialog() = default;
+
 int BytesPerLineDialog::bytesPerLine()      const { return mBytesPerLineEdit->value(); }
 
 void BytesPerLineDialog::setBytesPerLine(int bytesPerLine)
 {
     mBytesPerLineEdit->setValue(bytesPerLine);
 }
-
-BytesPerLineDialog::~BytesPerLineDialog() {}
 
 }

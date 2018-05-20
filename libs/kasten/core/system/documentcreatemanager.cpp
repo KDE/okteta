@@ -35,6 +35,11 @@ DocumentCreateManager::DocumentCreateManager(DocumentManager* manager)
 {
 }
 
+DocumentCreateManager::~DocumentCreateManager()
+{
+    delete mFactory;
+}
+
 bool DocumentCreateManager::canCreateNewFromData(const QMimeData* mimeData) const
 {
     return mFactory->canCreateFromData(mimeData);
@@ -59,11 +64,6 @@ void DocumentCreateManager::createNewFromData(const QMimeData* mimeData, bool se
     if (document) {
         mManager->addDocument(document);
     }
-}
-
-DocumentCreateManager::~DocumentCreateManager()
-{
-    delete mFactory;
 }
 
 }

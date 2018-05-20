@@ -104,16 +104,16 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
     setLayout(layout);
 }
 
+ExportDialog::~ExportDialog()
+{
+    delete mPreviewView;
+}
+
 void ExportDialog::setData(AbstractModel* model, const AbstractModelSelection* selection)
 {
     if (mPreviewView) {
         mPreviewView->setData(model, selection);
     }
-}
-
-ExportDialog::~ExportDialog()
-{
-    delete mPreviewView;
 }
 
 }

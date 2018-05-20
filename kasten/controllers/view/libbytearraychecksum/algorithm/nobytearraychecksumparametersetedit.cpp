@@ -28,6 +28,8 @@ NoByteArrayChecksumParameterSetEdit::NoByteArrayChecksumParameterSetEdit(QWidget
     : AbstractByteArrayChecksumParameterSetEdit(parent)
 {}
 
+NoByteArrayChecksumParameterSetEdit::~NoByteArrayChecksumParameterSetEdit() = default;
+
 void NoByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
     Q_UNUSED(parameterSet);
@@ -37,6 +39,3 @@ void NoByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayCheck
 {
     Q_UNUSED(parameterSet);
 }
-
-NoByteArrayChecksumParameterSetEdit::~NoByteArrayChecksumParameterSetEdit()
-{}

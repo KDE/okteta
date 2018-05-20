@@ -47,9 +47,9 @@ AbstractByteArrayFilter::AbstractByteArrayFilter(const QString& name)
     : d(new Private(name))
 {}
 
-QString AbstractByteArrayFilter::name() const { return d->name(); }
-
 AbstractByteArrayFilter::~AbstractByteArrayFilter()
 {
     delete d;
 }
+
+QString AbstractByteArrayFilter::name() const { return d->name(); }

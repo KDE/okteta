@@ -25,8 +25,6 @@
 NoByteArrayFilterParameterSet::NoByteArrayFilterParameterSet()
 {}
 
-const char* NoByteArrayFilterParameterSet::id() const { return "None"; }
+NoByteArrayFilterParameterSet::~NoByteArrayFilterParameterSet() = default;
 
-NoByteArrayFilterParameterSet::~NoByteArrayFilterParameterSet()
-{
-}
+const char* NoByteArrayFilterParameterSet::id() const { return "None"; }

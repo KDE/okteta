@@ -42,9 +42,7 @@ ScriptHandler::ScriptHandler(QScriptEngine* engine, TopLevelDataInformation* top
 {
 }
 
-ScriptHandler::~ScriptHandler()
-{
-}
+ScriptHandler::~ScriptHandler() = default;
 
 QScriptEngine* ScriptHandler::engine() const
 {

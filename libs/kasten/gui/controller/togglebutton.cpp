@@ -42,6 +42,11 @@ ToggleButton::ToggleButton(const QString& text, const QString& toolTip, QWidget*
     setToolTip(toolTip);
 }
 
+ToggleButton::~ToggleButton()
+{
+    delete d;
+}
+
 void ToggleButton::setCheckedState(const QIcon& icon, const QString& text, const QString& toolTip)
 {
     d->setOtherState(icon, text, toolTip);
@@ -50,11 +55,6 @@ void ToggleButton::setCheckedState(const QIcon& icon, const QString& text, const
 void ToggleButton::setCheckedState(const QString& text, const QString& toolTip)
 {
     d->setOtherState(QIcon(), text, toolTip);
-}
-
-ToggleButton::~ToggleButton()
-{
-    delete d;
 }
 
 }

@@ -63,13 +63,13 @@ BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
     setWindowTitle(caption);
 }
 
+BytesPerGroupDialog::~BytesPerGroupDialog() = default;
+
 int BytesPerGroupDialog::groupedBytesCount() const { return mGroupedBytesCountEdit->value(); }
 
 void BytesPerGroupDialog::setGroupedBytesCount(int groupedBytesCount)
 {
     mGroupedBytesCountEdit->setValue(groupedBytesCount);
 }
-
-BytesPerGroupDialog::~BytesPerGroupDialog() {}
 
 }

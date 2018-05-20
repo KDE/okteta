@@ -60,6 +60,8 @@ ByteArrayBase85StreamEncoder::ByteArrayBase85StreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Ascii85"), QStringLiteral("text/x-ascii85"))
 {}
 
+ByteArrayBase85StreamEncoder::~ByteArrayBase85StreamEncoder() = default;
+
 bool ByteArrayBase85StreamEncoder::encodeDataToStream(QIODevice* device,
                                                       const ByteArrayView* byteArrayView,
                                                       const Okteta::AbstractByteArrayModel* byteArrayModel,
@@ -128,7 +130,5 @@ bool ByteArrayBase85StreamEncoder::encodeDataToStream(QIODevice* device,
 
     return success;
 }
-
-ByteArrayBase85StreamEncoder::~ByteArrayBase85StreamEncoder() {}
 
 }

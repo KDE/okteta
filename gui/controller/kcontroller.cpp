@@ -29,11 +29,11 @@ KController::KController(KController* parent)
 {
 }
 
+KController::~KController() = default;
+
 bool KController::handleKeyPress(QKeyEvent* keyEvent)
 {
     return mParent ? mParent->handleKeyPress(keyEvent) : false;
 }
-
-KController::~KController() {}
 
 }

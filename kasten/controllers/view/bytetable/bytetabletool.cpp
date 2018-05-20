@@ -45,6 +45,8 @@ ByteTableTool::ByteTableTool()
     setObjectName(QStringLiteral("ByteTable"));
 }
 
+ByteTableTool::~ByteTableTool() = default;
+
 QString ByteTableTool::title() const { return i18nc("@title:window", "Value/Char Table"); }
 ByteTableModel* ByteTableTool::byteTableModel() const { return mByteTableModel; }
 bool ByteTableTool::hasWriteable() const
@@ -117,7 +119,5 @@ void ByteTableTool::onReadOnlyChanged(bool isReadOnly)
 
     emit hasWriteableChanged(isWriteable);
 }
-
-ByteTableTool::~ByteTableTool() {}
 
 }

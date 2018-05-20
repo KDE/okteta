@@ -51,6 +51,11 @@ FilterTool::FilterTool()
     mFilterList = ByteArrayFilterFactory::createFilters();
 }
 
+FilterTool::~FilterTool()
+{
+    qDeleteAll(mFilterList);
+}
+
 QString FilterTool::title() const { return i18nc("@title:window", "Binary Filter"); }
 QList<AbstractByteArrayFilter*> FilterTool::filterList() const { return mFilterList; }
 QString FilterTool::charCodecName() const
@@ -135,11 +140,6 @@ void FilterTool::onApplyableChanged()
         mHasWritable = newHasWriteable;
         emit hasWriteableChanged(newHasWriteable);
     }
-}
-
-FilterTool::~FilterTool()
-{
-    qDeleteAll(mFilterList);
 }
 
 }

@@ -35,6 +35,11 @@ AbstractModelSynchronizer::AbstractModelSynchronizer()
 {
 }
 
+AbstractModelSynchronizer::~AbstractModelSynchronizer()
+{
+    delete d_ptr;
+}
+
 QUrl AbstractModelSynchronizer::url() const
 {
     Q_D(const AbstractModelSynchronizer);
@@ -47,11 +52,6 @@ void AbstractModelSynchronizer::setUrl(const QUrl& url)
     Q_D(AbstractModelSynchronizer);
 
     d->setUrl(url);
-}
-
-AbstractModelSynchronizer::~AbstractModelSynchronizer()
-{
-    delete d_ptr;
 }
 
 }

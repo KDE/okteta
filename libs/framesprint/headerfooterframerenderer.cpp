@@ -47,6 +47,8 @@ HeaderFooterFrameRenderer::HeaderFooterFrameRenderer(const PrintInfo* info)
     calculateHeight();
 }
 
+HeaderFooterFrameRenderer::~HeaderFooterFrameRenderer() = default;
+
 int HeaderFooterFrameRenderer::height() const { return mHeight; }
 int HeaderFooterFrameRenderer::width() const { return mWidth; }
 
@@ -167,5 +169,3 @@ void HeaderFooterFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
 //             paint.drawLine(0, headerHeight, headerWidth, headerHeight);
     }
 }
-
-HeaderFooterFrameRenderer::~HeaderFooterFrameRenderer() {}

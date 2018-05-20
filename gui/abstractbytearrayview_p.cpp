@@ -89,8 +89,8 @@ public: // modification API
     void setModified(bool modified) override;
 };
 
-NullModel::NullModel() {}
-NullModel::~NullModel() {}
+NullModel::NullModel() = default;
+NullModel::~NullModel() = default;
 
 Byte NullModel::byte(Address offset) const { Q_UNUSED(offset) return 0; }
 Size NullModel::size() const { return 0; }
@@ -138,6 +138,31 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mResizeStyle(DefaultResizeStyle)
     , q_ptr(parent)
 {
+}
+
+AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
+{
+    delete mDropper;
+
+    delete mZoomWheelController;
+
+    delete mMousePaster;
+    delete mMouseNavigator;
+
+    delete mCharEditor;
+    delete mValueEditor;
+    delete mNavigator;
+    delete mTabController;
+
+    delete mStylist;
+
+    delete mTableRanges;
+    delete mTableCursor;
+    delete mTableLayout;
+    delete mValueCodec;
+    delete mCharCodec;
+
+    delete mCursorPixmaps;
 }
 
 void AbstractByteArrayViewPrivate::init()
@@ -1256,31 +1281,6 @@ void AbstractByteArrayViewPrivate::onClipboardChanged()
     selectAll(false);
 }
 #endif
-
-AbstractByteArrayViewPrivate::~AbstractByteArrayViewPrivate()
-{
-    delete mDropper;
-
-    delete mZoomWheelController;
-
-    delete mMousePaster;
-    delete mMouseNavigator;
-
-    delete mCharEditor;
-    delete mValueEditor;
-    delete mNavigator;
-    delete mTabController;
-
-    delete mStylist;
-
-    delete mTableRanges;
-    delete mTableCursor;
-    delete mTableLayout;
-    delete mValueCodec;
-    delete mCharCodec;
-
-    delete mCursorPixmaps;
-}
 
 }
 

@@ -40,6 +40,8 @@ ByteArrayRawFileConnectJob::ByteArrayRawFileConnectJob(ByteArrayRawFileSynchroni
 {
 }
 
+ByteArrayRawFileConnectJob::~ByteArrayRawFileConnectJob() = default;
+
 void ByteArrayRawFileConnectJob::startConnectWithFile()
 {
     ByteArrayDocument* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document());
@@ -58,7 +60,5 @@ void ByteArrayRawFileConnectJob::startConnectWithFile()
 
     complete(success);
 }
-
-ByteArrayRawFileConnectJob::~ByteArrayRawFileConnectJob() {}
 
 }

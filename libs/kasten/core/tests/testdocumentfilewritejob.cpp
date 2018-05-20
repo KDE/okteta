@@ -35,6 +35,8 @@ TestDocumentFileWriteJob::TestDocumentFileWriteJob(TestDocumentFileSynchronizer*
     : AbstractFileSystemSyncToRemoteJob(synchronizer)
 {}
 
+TestDocumentFileWriteJob::~TestDocumentFileWriteJob() = default;
+
 void TestDocumentFileWriteJob::startWriteToFile()
 {
     TestDocumentFileSynchronizer* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
@@ -50,10 +52,6 @@ void TestDocumentFileWriteJob::startWriteToFile()
     delete writeThread;
 
     completeWrite(success);
-}
-
-TestDocumentFileWriteJob::~TestDocumentFileWriteJob()
-{
 }
 
 }

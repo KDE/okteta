@@ -57,6 +57,8 @@ DocumentsView::DocumentsView(DocumentsTool* tool, QWidget* parent)
     baseLayout->addWidget(mDocumentListView, 10);
 }
 
+DocumentsView::~DocumentsView() = default;
+
 void DocumentsView::onDocumentActivated(const QModelIndex& index)
 {
     const int documentIndex = index.row();
@@ -66,7 +68,5 @@ void DocumentsView::onDocumentActivated(const QModelIndex& index)
         mTool->setFocussedDocument(document);
     }
 }
-
-DocumentsView::~DocumentsView() {}
 
 }

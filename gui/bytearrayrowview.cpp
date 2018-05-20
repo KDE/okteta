@@ -32,6 +32,8 @@ ByteArrayRowView::ByteArrayRowView(QWidget* parent)
     d->init();
 }
 
+ByteArrayRowView::~ByteArrayRowView() = default;
+
 void ByteArrayRowView::setByteArrayModel(AbstractByteArrayModel* byteArrayModel)
 {
     Q_D(ByteArrayRowView);
@@ -169,10 +171,6 @@ void ByteArrayRowView::renderColumns(QPainter* painter, int cx, int cy, int cw, 
 {
     Q_D(ByteArrayRowView);
     d->renderColumns(painter, cx, cy, cw, ch);
-}
-
-ByteArrayRowView::~ByteArrayRowView()
-{
 }
 
 }

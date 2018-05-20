@@ -75,6 +75,8 @@ inline AbstractLinePopupPrivate::AbstractLinePopupPrivate(AbstractLinePopup* par
 {
 }
 
+inline AbstractLinePopupPrivate::~AbstractLinePopupPrivate() = default;
+
 inline void AbstractLinePopupPrivate::setResult(int result) { mResult = result; }
 
 inline bool AbstractLinePopupPrivate::isOrContainsObject(QObject* object) const
@@ -91,8 +93,6 @@ inline bool AbstractLinePopupPrivate::isOrContainsObject(QObject* object) const
 
     return result;
 }
-
-inline AbstractLinePopupPrivate::~AbstractLinePopupPrivate() {}
 
 }
 

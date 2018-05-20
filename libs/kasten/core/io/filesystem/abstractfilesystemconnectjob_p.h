@@ -79,7 +79,7 @@ inline AbstractFileSystemConnectJobPrivate::AbstractFileSystemConnectJobPrivate(
     , mFile(nullptr)
 {}
 
-inline AbstractFileSystemConnectJobPrivate::~AbstractFileSystemConnectJobPrivate() {}
+inline AbstractFileSystemConnectJobPrivate::~AbstractFileSystemConnectJobPrivate() = default;
 
 inline AbstractModelFileSystemSynchronizer* AbstractFileSystemConnectJobPrivate::synchronizer() const
 {

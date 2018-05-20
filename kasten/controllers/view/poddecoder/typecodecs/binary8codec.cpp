@@ -34,6 +34,8 @@ Binary8Codec::Binary8Codec()
     : AbstractTypeCodec(i18nc("@label:textbox encoding of one byte as value in the binary format", "Binary 8-bit"))
 {}
 
+Binary8Codec::~Binary8Codec() = default;
+
 QVariant Binary8Codec::value(const PODData& data, int* byteCount) const
 {
     const unsigned char* pointer = (unsigned char*)data.pointer(1);
@@ -53,7 +55,5 @@ bool Binary8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<Binary8>().value == otherValue.value<Binary8>().value);
 }
-
-Binary8Codec::~Binary8Codec() {}
 
 }

@@ -36,6 +36,11 @@ AbstractModelDataGenerator::AbstractModelDataGenerator(const QString& typeName,
 {
 }
 
+AbstractModelDataGenerator::~AbstractModelDataGenerator()
+{
+    delete d_ptr;
+}
+
 QString AbstractModelDataGenerator::typeName() const
 {
     Q_D(const AbstractModelDataGenerator);
@@ -55,11 +60,6 @@ AbstractModelDataGenerator::Flags AbstractModelDataGenerator::flags() const
     Q_D(const AbstractModelDataGenerator);
 
     return d->flags();
-}
-
-AbstractModelDataGenerator::~AbstractModelDataGenerator()
-{
-    delete d_ptr;
 }
 
 }

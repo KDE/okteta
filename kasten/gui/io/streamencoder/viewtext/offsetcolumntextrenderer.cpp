@@ -37,6 +37,11 @@ OffsetColumnTextRenderer::OffsetColumnTextRenderer(int offsetFormat, int firstLi
     mEncodedOffsetBuffer = new char[mCodingWidth + 1];
 }
 
+OffsetColumnTextRenderer::~OffsetColumnTextRenderer()
+{
+    delete [] mEncodedOffsetBuffer;
+}
+
 void OffsetColumnTextRenderer::renderFirstLine(QTextStream* stream, int lineIndex) const
 {
     mRenderLine = lineIndex;
@@ -59,11 +64,6 @@ void OffsetColumnTextRenderer::renderLine(QTextStream* stream, bool isSubline) c
 
         ++mRenderLine;
     }
-}
-
-OffsetColumnTextRenderer::~OffsetColumnTextRenderer()
-{
-    delete [] mEncodedOffsetBuffer;
 }
 
 }

@@ -40,7 +40,7 @@ public:
     virtual AbstractModelStreamEncoderConfigEditor* tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const = 0;
 };
 
-inline AbstractModelStreamEncoderConfigEditorFactory::~AbstractModelStreamEncoderConfigEditorFactory() {}
+inline AbstractModelStreamEncoderConfigEditorFactory::~AbstractModelStreamEncoderConfigEditorFactory() = default;
 
 }
 

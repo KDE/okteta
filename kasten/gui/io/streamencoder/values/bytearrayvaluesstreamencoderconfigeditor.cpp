@@ -75,6 +75,8 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
     pageLayout->setRowStretch(2, 10);
 }
 
+ByteArrayValuesStreamEncoderConfigEditor::~ByteArrayValuesStreamEncoderConfigEditor() = default;
+
 AbstractSelectionView* ByteArrayValuesStreamEncoderConfigEditor::createPreviewView() const
 {
     return new ByteArrayTextStreamEncoderPreview(mEncoder);
@@ -86,10 +88,6 @@ void ByteArrayValuesStreamEncoderConfigEditor::onSettingsChanged()
     mSettings.separation = mSeparationEdit->text();
 
     mEncoder->setSettings(mSettings);
-}
-
-ByteArrayValuesStreamEncoderConfigEditor::~ByteArrayValuesStreamEncoderConfigEditor()
-{
 }
 
 }

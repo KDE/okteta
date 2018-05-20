@@ -34,6 +34,8 @@ ContainedStringTableModel::ContainedStringTableModel(const QList<ContainedString
     mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
 }
 
+ContainedStringTableModel::~ContainedStringTableModel() = default;
+
 void ContainedStringTableModel::setOffsetCoding(int offsetCoding)
 {
     mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
@@ -109,5 +111,3 @@ QVariant ContainedStringTableModel::headerData(int section, Qt::Orientation orie
 
     return result;
 }
-
-ContainedStringTableModel::~ContainedStringTableModel() {}

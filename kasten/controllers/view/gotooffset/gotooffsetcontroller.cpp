@@ -56,6 +56,12 @@ GotoOffsetController::GotoOffsetController(If::ToolInlineViewable* toolInlineVie
     mView = new GotoOffsetToolView(mTool);
 }
 
+GotoOffsetController::~GotoOffsetController()
+{
+    delete mView;
+    delete mTool;
+}
+
 void GotoOffsetController::setTargetModel(AbstractModel* model)
 {
     mTool->setTargetModel(model);
@@ -64,12 +70,6 @@ void GotoOffsetController::setTargetModel(AbstractModel* model)
 void GotoOffsetController::gotoOffset()
 {
     mToolInlineViewable->setCurrentToolInlineView(mView);
-}
-
-GotoOffsetController::~GotoOffsetController()
-{
-    delete mView;
-    delete mTool;
 }
 
 }

@@ -55,6 +55,13 @@ ByteArrayRowsColumnTextRenderer::ByteArrayRowsColumnTextRenderer(const Okteta::A
     setWidths(encodingWidth, byteSpacingWidth, noOfGroupedBytes);
 }
 
+ByteArrayRowsColumnTextRenderer::~ByteArrayRowsColumnTextRenderer()
+{
+    delete [] mLinePositions;
+    delete mCharCodec;
+    delete mValueCodec;
+}
+
 int ByteArrayRowsColumnTextRenderer::noOfSublinesNeeded() const
 {
     return (mVisibleCodings > 2) ? 2 : 1;
@@ -165,13 +172,6 @@ void ByteArrayRowsColumnTextRenderer::renderLine(QTextStream* stream, bool isSub
     } else {
         mOffset = lineOffset;
     }
-}
-
-ByteArrayRowsColumnTextRenderer::~ByteArrayRowsColumnTextRenderer()
-{
-    delete [] mLinePositions;
-    delete mCharCodec;
-    delete mValueCodec;
 }
 
 }

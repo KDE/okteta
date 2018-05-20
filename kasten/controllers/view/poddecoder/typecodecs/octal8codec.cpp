@@ -34,6 +34,8 @@ Octal8Codec::Octal8Codec()
     : AbstractTypeCodec(i18nc("@label:textbox encoding of one byte as value in the octal format", "Octal 8-bit"))
 {}
 
+Octal8Codec::~Octal8Codec() = default;
+
 QVariant Octal8Codec::value(const PODData& data, int* byteCount) const
 {
     const unsigned char* pointer = (unsigned char*)data.pointer(1);
@@ -53,7 +55,5 @@ bool Octal8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
 {
     return (value.value<Octal8>().value == otherValue.value<Octal8>().value);
 }
-
-Octal8Codec::~Octal8Codec() {}
 
 }

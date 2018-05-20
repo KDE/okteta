@@ -31,6 +31,8 @@ AbstractFileSystemLoadJob::AbstractFileSystemLoadJob(AbstractModelFileSystemSync
 {
 }
 
+AbstractFileSystemLoadJob::~AbstractFileSystemLoadJob() = default;
+
 AbstractModelFileSystemSynchronizer* AbstractFileSystemLoadJob::synchronizer() const
 {
     Q_D(const AbstractFileSystemLoadJob);
@@ -64,10 +66,6 @@ void AbstractFileSystemLoadJob::setDocument(AbstractDocument* document)
     Q_D(AbstractFileSystemLoadJob);
 
     d->setDocument(document);
-}
-
-AbstractFileSystemLoadJob::~AbstractFileSystemLoadJob()
-{
 }
 
 }

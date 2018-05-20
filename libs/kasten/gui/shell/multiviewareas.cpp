@@ -33,6 +33,8 @@ MultiViewAreas::MultiViewAreas()
     d->init();
 }
 
+MultiViewAreas::~MultiViewAreas() = default;
+
 QList<AbstractView*> MultiViewAreas::viewList() const
 {
     Q_D(const MultiViewAreas);
@@ -144,10 +146,6 @@ void MultiViewAreas::closeViewArea(AbstractViewArea* viewArea)
     Q_D(MultiViewAreas);
 
     d->closeViewArea(viewArea);
-}
-
-MultiViewAreas::~MultiViewAreas()
-{
 }
 
 }

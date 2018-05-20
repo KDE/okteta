@@ -45,6 +45,11 @@ PrintController::PrintController(KXMLGUIClient* guiClient)
     setTargetModel(nullptr);
 }
 
+PrintController::~PrintController()
+{
+    delete mPrintTool;
+}
+
 void PrintController::setTargetModel(AbstractModel* model)
 {
     mPrintTool->setTargetModel(model);
@@ -53,11 +58,6 @@ void PrintController::setTargetModel(AbstractModel* model)
 void PrintController::print()
 {
     mPrintTool->print();
-}
-
-PrintController::~PrintController()
-{
-    delete mPrintTool;
 }
 
 }
