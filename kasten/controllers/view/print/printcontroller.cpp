@@ -38,7 +38,7 @@ PrintController::PrintController(KXMLGUIClient* guiClient)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mPrintAction = KStandardAction::print(mPrintTool, SLOT(print()), actionCollection);
+    mPrintAction = KStandardAction::print(mPrintTool, &PrintTool::print, actionCollection);
     connect(mPrintTool, &PrintTool::viewChanged,
             mPrintAction, &QAction::setEnabled);
 

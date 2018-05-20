@@ -45,7 +45,7 @@ ReplaceController::ReplaceController(KXMLGUIClient* guiClient, QWidget* parentWi
 {
     KActionCollection* ActionCollection = guiClient->actionCollection();
 
-    mReplaceAction = KStandardAction::replace(this, SLOT(replace()), ActionCollection);
+    mReplaceAction = KStandardAction::replace(this, &ReplaceController::replace, ActionCollection);
 
     mTool = new ReplaceTool();
     mTool->setUserQueryAgent(this);

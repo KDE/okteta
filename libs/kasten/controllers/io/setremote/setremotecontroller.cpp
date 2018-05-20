@@ -39,7 +39,7 @@ SetRemoteController::SetRemoteController(DocumentSyncManager* syncManager, KXMLG
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSaveAsAction = KStandardAction::saveAs(this, SLOT(saveAs()), actionCollection);
+    mSaveAsAction = KStandardAction::saveAs(this, &SetRemoteController::saveAs, actionCollection);
 
     setTargetModel(nullptr);
 }

@@ -42,8 +42,8 @@ ZoomController::ZoomController(KXMLGUIClient* guiClient)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mZoomInAction = KStandardAction::zoomIn(this, SLOT(zoomIn()),  actionCollection);
-    mZoomOutAction = KStandardAction::zoomOut(this, SLOT(zoomOut()), actionCollection);
+    mZoomInAction = KStandardAction::zoomIn(  this, &ZoomController::zoomIn,  actionCollection);
+    mZoomOutAction = KStandardAction::zoomOut(this, &ZoomController::zoomOut, actionCollection);
 
 #if 0
     ZoomToAction = new KSelectAction(i18n("Zoom"), "viewmag", 0, ActionCollection, "zoomTo");

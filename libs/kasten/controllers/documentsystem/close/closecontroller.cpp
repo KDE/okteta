@@ -46,7 +46,7 @@ CloseController::CloseController(AbstractDocumentStrategy* documentStrategy,
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     const QIcon documentCloseIcon = QIcon::fromTheme(QStringLiteral("document-close"));
-    mCloseAction  = KStandardAction::close(this, SLOT(close()),  actionCollection);
+    mCloseAction  = KStandardAction::close(this, &CloseController::close, actionCollection);
     mCloseAction->setEnabled(false);
 
     if (supportMultiple) {

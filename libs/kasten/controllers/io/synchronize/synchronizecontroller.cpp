@@ -44,7 +44,7 @@ SynchronizeController::SynchronizeController(DocumentSyncManager* syncManager, K
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSaveAction = KStandardAction::save(this, SLOT(save()), actionCollection);
+    mSaveAction = KStandardAction::save(this, &SynchronizeController::save, actionCollection);
 
     mReloadAction = actionCollection->addAction(QStringLiteral("file_reload"),
                                                 this, SLOT(reload()));

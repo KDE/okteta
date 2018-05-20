@@ -35,7 +35,7 @@ FullScreenController::FullScreenController(KXmlGuiWindow* window)
 {
     KActionCollection* actionCollection = mMainWindow->actionCollection();
 
-    KStandardAction::fullScreen(this, SLOT(switchFullScreen(bool)),
+    KStandardAction::fullScreen(this, &FullScreenController::switchFullScreen,
                                 window, actionCollection);
 }
 

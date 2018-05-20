@@ -38,7 +38,7 @@ CloseController::CloseController(ViewManager* viewManager, KXMLGUIClient* guiCli
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mCloseAction  = KStandardAction::close(this, SLOT(close()),  actionCollection);
+    mCloseAction  = KStandardAction::close(this, &CloseController::close, actionCollection);
     setTargetModel(0);
 }
 

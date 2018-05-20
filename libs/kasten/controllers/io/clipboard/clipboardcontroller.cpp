@@ -47,9 +47,9 @@ ClipboardController::ClipboardController(KXMLGUIClient* guiClient)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mCutAction =   KStandardAction::cut(this, SLOT(cut()),   actionCollection);
-    mCopyAction =  KStandardAction::copy(this, SLOT(copy()),  actionCollection);
-    mPasteAction = KStandardAction::paste(this, SLOT(paste()), actionCollection);
+    mCutAction =   KStandardAction::cut(  this, &ClipboardController::cut,   actionCollection);
+    mCopyAction =  KStandardAction::copy( this, &ClipboardController::copy,  actionCollection);
+    mPasteAction = KStandardAction::paste(this, &ClipboardController::paste, actionCollection);
 
     connect(QApplication::clipboard(), &QClipboard::dataChanged,
             this, &ClipboardController::onClipboardDataChanged);

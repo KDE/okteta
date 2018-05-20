@@ -47,9 +47,9 @@ LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
 {
     KActionCollection* const actionCollection = guiClient->actionCollection();
 
-    KStandardAction::open(this, SLOT(load()), actionCollection);
+    KStandardAction::open(this, &LoaderController::load, actionCollection);
     mOpenRecentAction =
-        KStandardAction::openRecent(this, SLOT(loadRecent(QUrl)), actionCollection);
+        KStandardAction::openRecent(this, &LoaderController::loadRecent, actionCollection);
 
     KConfigGroup configGroup(KSharedConfig::openConfig(), CreatorConfigGroupId);
     mOpenRecentAction->loadEntries(configGroup);

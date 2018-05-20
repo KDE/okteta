@@ -60,7 +60,7 @@ BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
 {
     KActionCollection* actionCollection = mGuiClient->actionCollection();
 
-    mCreateAction = KStandardAction::addBookmark(this, SLOT(createBookmark()), actionCollection);
+    mCreateAction = KStandardAction::addBookmark(this, &BookmarksController::createBookmark, actionCollection);
 
     mDeleteAction = actionCollection->addAction(QStringLiteral("bookmark_remove"),
                                                 this, SLOT(deleteBookmark()));

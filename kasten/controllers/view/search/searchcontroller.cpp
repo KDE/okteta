@@ -43,9 +43,9 @@ SearchController::SearchController(KXMLGUIClient* guiClient, QWidget* parentWidg
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mFindAction     = KStandardAction::find(    this, SLOT(find()),         actionCollection);
-    mFindNextAction = KStandardAction::findNext(this, SLOT(findNext()),     actionCollection);
-    mFindPrevAction = KStandardAction::findPrev(this, SLOT(findPrevious()), actionCollection);
+    mFindAction     = KStandardAction::find(    this, &SearchController::find,         actionCollection);
+    mFindNextAction = KStandardAction::findNext(this, &SearchController::findNext,     actionCollection);
+    mFindPrevAction = KStandardAction::findPrev(this, &SearchController::findPrevious, actionCollection);
 
     mTool = new SearchTool();
     mTool->setUserQueryAgent(this);
