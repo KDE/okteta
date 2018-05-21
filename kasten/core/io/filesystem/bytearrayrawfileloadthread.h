@@ -50,7 +50,7 @@ public:
     const QString& errorString() const;
 
 Q_SIGNALS:
-    void documentRead(ByteArrayDocument* document);
+    void documentRead(Kasten::ByteArrayDocument* document);
 
 protected:
     QFile* mFile;

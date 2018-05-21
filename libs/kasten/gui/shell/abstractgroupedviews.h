@@ -45,7 +45,7 @@ public:
 public Q_SLOTS: // set/action API to be implemented
     virtual void addViews(const QList<Kasten::AbstractView*>& views) = 0;
     virtual void removeViews(const QList<Kasten::AbstractView*>& views) = 0;
-    virtual void setViewFocus(AbstractView* view) = 0;
+    virtual void setViewFocus(Kasten::AbstractView* view) = 0;
 
 public: // get API to be implemented
     // returns the list in the order of display

@@ -95,8 +95,8 @@ Q_SIGNALS: // If::Versionable
     void headVersionChanged(int newHeadVersionIndex) override;
 
 Q_SIGNALS: // If::UserListable
-    void usersAdded(const QList<Person>& newUserList) override;
-    void usersRemoved(const QList<Person>& newUserList) override;
+    void usersAdded(const QList<Kasten::Person>& newUserList) override;
+    void usersRemoved(const QList<Kasten::Person>& newUserList) override;
 
 private Q_SLOTS:
     void onModelModified(bool newState);

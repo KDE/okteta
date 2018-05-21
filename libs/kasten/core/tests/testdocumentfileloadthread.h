@@ -48,7 +48,7 @@ public:
     TestDocument* document() const;
 
 Q_SIGNALS:
-    void documentRead(TestDocument* document);
+    void documentRead(Kasten::TestDocument* document);
 
 protected:
     QFile* mFile;
