@@ -153,7 +153,7 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
         } else if (name == s_uint16) {
             return quint32(value.value<quint16>());
         } else {
-            return QScriptValue();
+            return {};
         }
     }
 }

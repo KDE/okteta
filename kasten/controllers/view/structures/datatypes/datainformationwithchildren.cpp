@@ -79,7 +79,7 @@ QVariant DataInformationWithChildren::dataFromWidget(const QWidget* w) const
 {
     Q_UNUSED(w);
     Q_ASSERT(false);
-    return QVariant();
+    return {};
 }
 
 void DataInformationWithChildren::setWidgetData(QWidget* w) const

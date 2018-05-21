@@ -83,7 +83,7 @@ QString AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const 
     const ByteArrayDocument* byteArrayDocument =
         byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;
     if (!byteArrayDocument) {
-        return QString();
+        return {};
     }
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();

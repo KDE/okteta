@@ -116,7 +116,7 @@ bool EBCDIC1047CharCodec::encode(Byte* byte, const QChar& _char) const
 
 Character EBCDIC1047CharCodec::decode(Byte byte) const
 {
-    return QChar(UnicodeChars[byte]);
+    return {QChar{UnicodeChars[byte]}};
 }
 
 bool EBCDIC1047CharCodec::canEncode(const QChar& _char) const

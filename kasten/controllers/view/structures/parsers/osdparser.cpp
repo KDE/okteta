@@ -76,7 +76,7 @@ QDomDocument OsdParser::openDocFromString(ScriptLogger* logger) const
         logger->error() << errorOutput;
         logger->info() << "XML was:" << mXmlString;
 
-        return QDomDocument();
+        return {};
     }
     return doc;
 }
@@ -87,13 +87,13 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
     QFileInfo fileInfo(mAbsolutePath);
     if (!fileInfo.exists()) {
         logger->error() << "File" << mAbsolutePath << "does not exist!";
-        return QDomDocument();
+        return {};
     }
     QFile file(fileInfo.absoluteFilePath());
     if (!file.open(QIODevice::ReadOnly)) {
         const QString errorOutput = QLatin1String("Could not open file ") + mAbsolutePath;
         logger->error() << errorOutput;
-        return QDomDocument();
+        return {};
     }
     int errorLine, errorColumn;
     QString errorMsg;
@@ -116,11 +116,11 @@ QStringList OsdParser::parseStructureNames() const
     rootLogger->setLogToStdOut(true); // we cannot get our messages into the script console, so do this instead
     QDomDocument document = openDoc(rootLogger.data());
     if (document.isNull()) {
-        return QStringList();
+        return {};
     }
     QDomElement rootElem = document.firstChildElement(QStringLiteral("data"));
     if (rootElem.isNull()) {
-        return QStringList();
+        return {};
     }
     for (QDomElement childElement = rootElem.firstChildElement();
          !childElement.isNull(); childElement = childElement.nextSiblingElement()) {

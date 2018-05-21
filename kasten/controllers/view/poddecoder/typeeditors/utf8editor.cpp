@@ -69,7 +69,7 @@ void Utf8Editor::setData(Utf8 data)
 Utf8 Utf8Editor::data() const
 {
     const QString t = text();
-    return Utf8(t.isEmpty() ? QChar(0) : t[0]);
+    return {t.isEmpty() ? QChar(0) : t[0]};
 }
 
 #include "utf8editor.moc"

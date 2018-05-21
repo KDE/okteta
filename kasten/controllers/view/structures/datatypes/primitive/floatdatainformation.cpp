@@ -46,7 +46,7 @@ QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
     if (spin) {
         return ((float) spin->value());
     }
-    return QVariant();
+    return {};
 }
 
 void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
@@ -62,7 +62,7 @@ QScriptValue FloatDataInformationMethods::asScriptValue(float value, QScriptEngi
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
-    return QScriptValue(value);
+    return {value};
 }
 
 QString FloatDataInformationMethods::staticValueString(float value)

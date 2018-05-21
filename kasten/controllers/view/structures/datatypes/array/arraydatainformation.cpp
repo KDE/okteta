@@ -123,7 +123,7 @@ QWidget* ArrayDataInformation::createEditWidget(QWidget*) const
 QVariant ArrayDataInformation::dataFromWidget(const QWidget*) const
 {
     Q_ASSERT_X(false, "ArrayDataInformation::dataFromWidget", "this should never happen!");
-    return QVariant();
+    return {};
 }
 
 void ArrayDataInformation::setWidgetData(QWidget*) const

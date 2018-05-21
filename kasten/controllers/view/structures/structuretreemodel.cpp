@@ -112,7 +112,7 @@ int StructureTreeModel::columnCount(const QModelIndex& parent) const
 QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
 
     DataInformation* item = static_cast<DataInformation*> (index.internalPointer());
@@ -125,7 +125,7 @@ QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
             font.setBold(true);
             return font;
         } else {
-            return QVariant();
+            return {};
         }
     }
     if (item->parent()->isArray()) {
@@ -170,13 +170,13 @@ QVariant StructureTreeModel::headerData(int section, Qt::Orientation orientation
     if (orientation == Qt::Horizontal) {
         return mTool->headerData(section, role);
     }
-    return QVariant();
+    return {};
 }
 
 QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex& parent) const
 {
     if (!hasIndex(row, column, parent)) {
-        return QModelIndex();
+        return {};
     }
 
     DataInformation* childItem = nullptr;
@@ -185,7 +185,7 @@ QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex& pa
         childItem = mTool->childAt(row);
     } else {
         if (parent.column() != 0) {
-            return QModelIndex();
+            return {};
         }
         DataInformation* parentItem = static_cast<DataInformation*> (parent.internalPointer());
         childItem = parentItem->childAt(row);
@@ -193,14 +193,14 @@ QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex& pa
     if (childItem) {
         return createIndex(row, column, childItem);
     } else {
-        return QModelIndex();
+        return {};
     }
 }
 
 QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
 {
     if (!index.isValid()) {
-        return QModelIndex();
+        return {};
     }
 
     DataInformation* childItem = static_cast<DataInformation*> (index.internalPointer());
@@ -208,7 +208,7 @@ QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
     DataInformationBase* parentObj = childItem->parent();
 
     if (!parentObj || parentObj->isTopLevel()) {
-        return QModelIndex();
+        return {};
     }
 
     // not null, not topleveldatainformation-> must be datainformation
@@ -251,7 +251,7 @@ QModelIndex StructureTreeModel::findItemInModel(DataInformationBase* data) const
 {
     Q_CHECK_PTR(data);
     if (!data || data->isTopLevel()) {
-        return QModelIndex(); // invalid object
+        return {}; // invalid object
     }
     return createIndex(data->asDataInformation()->row(), 0, data);
 }

@@ -38,7 +38,7 @@ QIcon ScriptLogger::iconForLevel(ScriptLogger::LogLevel level)
         return QIcon::fromTheme(QStringLiteral("dialog-error"));
     default:
         Q_ASSERT_X(false, "ScriptLogger::iconForLevel", "Invalid log level passed");
-        return QIcon();
+        return {};
     }
 }
 
@@ -52,7 +52,7 @@ ScriptLogger::~ScriptLogger() = default;
 QVariant ScriptLogger::data(const QModelIndex& index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
     int row = index.row();
     Q_ASSERT(row < mData.size());
@@ -68,13 +68,13 @@ QVariant ScriptLogger::data(const QModelIndex& index, int role) const
         case ColumnMessage:
             return data.message;
         default:
-            return QVariant();
+            return {};
         }
     }
     if (role == Qt::DecorationRole && index.column() == ColumnTime) {
         return iconForLevel(mData.at(row).level);
     }
-    return QVariant();
+    return {};
 }
 
 int ScriptLogger::rowCount(const QModelIndex& parent) const
@@ -103,10 +103,10 @@ QVariant ScriptLogger::headerData(int section, Qt::Orientation orientation, int 
         case ColumnMessage:
             return i18nc("@title:column", "Message");
         default:
-            return QVariant();
+            return {};
         }
     }
-    return QVariant();
+    return {};
 }
 
 QDebug ScriptLogger::log(LogLevel level, const DataInformation* origin)

@@ -77,7 +77,7 @@ QString DataInformation::sizeString() const
 
 QString DataInformation::valueStringImpl() const
 {
-    return QString();
+    return {};
 }
 
 BitCount64 DataInformation::positionInFile(Okteta::Address start) const
@@ -192,7 +192,7 @@ QVariant DataInformation::data(int column, int role) const
     } else if (!mWasAbleToRead && column == ColumnValue) {
         return eofReachedData(role);
     }
-    return QVariant();
+    return {};
 }
 
 QVariant DataInformation::eofReachedData(int role)
@@ -205,7 +205,7 @@ QVariant DataInformation::eofReachedData(int role)
     } else if (role == Qt::ForegroundRole) {
         return scheme.foreground(KColorScheme::NegativeText);
     }
-    return QVariant();
+    return {};
 }
 
 QString DataInformation::tooltipString() const

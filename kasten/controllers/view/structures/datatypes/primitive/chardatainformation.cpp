@@ -81,7 +81,7 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
     if (edit) {
         QString text = edit->text();
         if (text.length() == 0) {
-            return QVariant();
+            return {};
         }
         if (text.length() == 1) {
             // TODO char codec
@@ -96,9 +96,8 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
                 quint8 val = valStr.toInt(&okay, 16);
                 if (okay) {
                     return val;
-                } else {
-                    return QVariant();
                 }
+                return {};
             } else if (text.at(1) == QLatin1Char('n')) {
                 return (quint8) '\n'; // newline
             } else if (text.at(1) == QLatin1Char('t')) {
@@ -112,13 +111,12 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
                 quint8 val = valStr.toInt(&okay, 8);
                 if (okay) {
                     return val;
-                } else {
-                    return QVariant();
                 }
+                return {};
             }
         }
     }
-    return QVariant();
+    return {};
 }
 
 void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)

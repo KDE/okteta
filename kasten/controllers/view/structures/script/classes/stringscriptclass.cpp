@@ -110,7 +110,7 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
     } else if (name == s_terminatedBy) {
         return sData->terminationCodePoint();
     }
-    return QScriptValue();
+    return {};
 }
 
 bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)

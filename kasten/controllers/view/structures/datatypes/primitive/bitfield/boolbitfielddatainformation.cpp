@@ -62,9 +62,8 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
     Q_CHECK_PTR(spin);
     if (spin) {
         return spin->value();
-    } else {
-        return QVariant();
     }
+    return {};
 }
 
 void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const

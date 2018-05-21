@@ -94,7 +94,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                QStringLiteral("Attempting to access an invalid object"));
-        return QScriptClass::QueryFlags();
+        return {};
     }
     if (name == s_valid || name == s_validationError) {
         return mode == ScriptHandlerInfo::Mode::Validating ? flags : flags& ~HandlesWriteAccess;
@@ -116,7 +116,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
         data->logError() << "could not find property with name" << name.toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                QLatin1String("Could not find property with name ") + name.toString());
-        return QScriptClass::QueryFlags();
+        return {};
     }
 }
 
@@ -306,7 +306,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                QStringLiteral("Attempting to access an invalid object"));
-        return QScriptValue::PropertyFlags();
+        return {};
     }
     if (name == s_valid || name == s_validationError) {
         if (mode != ScriptHandlerInfo::Mode::Validating) {
@@ -326,7 +326,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
         return result; // is a child element
     } else {
         data->logError() << "could not find flags for property with name" << name.toString();
-        return QScriptValue::PropertyFlags();
+        return {};
     }
 }
 
@@ -376,7 +376,7 @@ QScriptString DefaultscriptClassIterator::name() const
 {
     Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
     if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount()) {
-        return QScriptString();
+        return {};
     }
     if (mCurrent < mClass->mIterableProperties.size()) {
         return mClass->mIterableProperties.at(mCurrent).first;
@@ -391,7 +391,7 @@ QScriptValue::PropertyFlags DefaultscriptClassIterator::flags() const
 {
     Q_ASSERT(mCurrent >= 0 && (uint)mCurrent < mClass->mIterableProperties.size() + mData->childCount());
     if (mCurrent < 0 || (uint)mCurrent >= mClass->mIterableProperties.size() + mData->childCount()) {
-        return QScriptValue::PropertyFlags();
+        return {};
     }
     if (mCurrent < mClass->mIterableProperties.size()) {
         return mClass->propertyFlags(object(), mClass->mIterableProperties.at(mCurrent).first, id());

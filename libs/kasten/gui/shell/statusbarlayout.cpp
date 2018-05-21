@@ -93,7 +93,7 @@ QSize StatusBarLayout::minimumSize() const
 {
     updateLayoutStructs();
 
-    return QSize(0, mSizeHint.height());
+    return {0, mSizeHint.height()};
 }
 
 void StatusBarLayout::addItem(QLayoutItem* item)
@@ -123,7 +123,7 @@ void StatusBarLayout::invalidate()
     QLayout::invalidate();
 }
 
-Qt::Orientations StatusBarLayout::expandingDirections() const { return Qt::Orientations(); }
+Qt::Orientations StatusBarLayout::expandingDirections() const { return {}; }
 
 void StatusBarLayout::addWidget(QWidget* widget)
 {

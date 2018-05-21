@@ -118,7 +118,7 @@ QVariant StringDataInformation::dataFromWidget(const QWidget*) const
 {
     // TODO
     Q_ASSERT(false);
-    return QVariant();
+    return {};
 }
 
 QWidget* StringDataInformation::createEditWidget(QWidget*) const
@@ -158,7 +158,7 @@ QVariant StringDataInformation::childData(int row, int column, int role) const
         }
     }
     // TODO mark eof reached, don't add extra item. i.e. add icon or colour
-    return QVariant();
+    return {};
 }
 
 QString StringDataInformation::valueStringImpl() const
@@ -241,7 +241,7 @@ BitCount32 StringDataInformation::childSize(uint index) const
 QString StringDataInformation::childTypeName(uint index) const
 {
     Q_UNUSED(index)
-    return QString(); // XXX should there be something here?
+    return {}; // XXX should there be something here?
 }
 
 void StringDataInformation::setChildWidgetData(uint index, QWidget* w) const
@@ -258,7 +258,7 @@ QVariant StringDataInformation::dataFromChildWidget(uint index, const QWidget* w
     Q_ASSERT(false);
     Q_UNUSED(w)
     Q_UNUSED(index)
-    return QVariant();
+    return {};
 }
 
 QWidget* StringDataInformation::createChildEditWidget(uint index, QWidget* parent) const

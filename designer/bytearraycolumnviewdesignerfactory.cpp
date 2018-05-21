@@ -47,7 +47,7 @@ QString ByteArrayColumnViewDesignerFactory::group() const
 
 QIcon ByteArrayColumnViewDesignerFactory::icon() const
 {
-    return QIcon();
+    return {};
 }
 
 QString ByteArrayColumnViewDesignerFactory::includeFile() const

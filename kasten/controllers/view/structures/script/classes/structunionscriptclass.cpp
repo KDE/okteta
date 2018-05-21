@@ -144,7 +144,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
             }
         }
     }
-    return QScriptValue();
+    return {};
 }
 
 bool StructUnionScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)

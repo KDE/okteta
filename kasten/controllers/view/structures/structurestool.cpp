@@ -197,10 +197,10 @@ QVariant StructuresTool::headerData(int column, int role) const
         case DataInformation::ColumnValue:
             return i18nc("value of a data structure (primitive type)", "Value");
         default:
-            return QVariant();
+            return {};
         }
     }
-    return QVariant();
+    return {};
 }
 
 int StructuresTool::childCount() const

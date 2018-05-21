@@ -44,7 +44,7 @@ bool USASCIICharCodec::encode(Byte* byte, const QChar& _char) const
 
 Character USASCIICharCodec::decode(Byte byte) const
 {
-    return Character(QChar(ushort(byte)), (byte > 0x007F));
+    return {QChar(ushort(byte)), (byte > 0x007F)};
 }
 
 bool USASCIICharCodec::canEncode(const QChar& _char) const

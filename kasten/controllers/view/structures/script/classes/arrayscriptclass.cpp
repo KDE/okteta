@@ -99,7 +99,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
         aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         return aData->childType();
     }
-    return QScriptValue();
+    return {};
 }
 
 bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)

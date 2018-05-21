@@ -103,13 +103,13 @@ protected:
 
 inline ArrayChangeMetrics ArrayChangeMetrics::asReplacement(Address offset, Size removeLength, Size insertLength)
 {
-    return ArrayChangeMetrics(Replacement, offset, removeLength, insertLength);
+    return {Replacement, offset, removeLength, insertLength};
 }
 
 inline ArrayChangeMetrics ArrayChangeMetrics::asSwapping(Address firstOffset, Address secondOffset, Size secondLength)
 {
     Q_ASSERT(firstOffset < secondOffset);
-    return ArrayChangeMetrics(Swapping, firstOffset, secondOffset, secondLength);
+    return {Swapping, firstOffset, secondOffset, secondLength};
 }
 
 inline ArrayChangeMetrics::ArrayChangeMetrics(Type type, Address offset, qint32 secondArgument, qint32 thirdArgument)

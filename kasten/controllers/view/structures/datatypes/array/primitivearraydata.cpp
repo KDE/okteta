@@ -212,7 +212,7 @@ QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
     if (column == DataInformation::ColumnValue && uint(index) >= this->mNumReadValues) {
         return DataInformation::eofReachedData(role);
     }
-    return QVariant();
+    return {};
 }
 
 template <PrimitiveDataType type>

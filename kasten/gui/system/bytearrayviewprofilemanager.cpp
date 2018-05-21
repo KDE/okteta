@@ -46,7 +46,7 @@ static const int DefaultViewModus = 0;
 static const int DefaultVisibleByteArrayCodings = 3;
 static const int DefaultOffsetCoding = 0;
 static const int DefaultValueCoding = 0;
-QString DefaultCharCoding() { return QString(); }
+QString DefaultCharCoding() { return {}; }
 
 static QList<ByteArrayViewProfile::Id>
 lockedViewProfileIds(const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup)

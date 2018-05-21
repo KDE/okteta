@@ -469,7 +469,7 @@ void AbstractByteArrayView::changeEvent(QEvent* event)
 QSize AbstractByteArrayView::sizeHint() const
 {
     // TODO: calculate a sensible hint based on dynamic layout settings
-    return QSize(400, 120);  // QSize( columnsWidth(), columnsHeight() );
+    return {400, 120};  // {columnsWidth(), columnsHeight()};
 }
 
 Address AbstractByteArrayView::indexByPoint(const QPoint& point) const

@@ -70,7 +70,7 @@ void DocumentSyncManager::setOverwriteDialog(AbstractOverwriteDialog* overwriteD
 // TODO: make a difference between stream/storage formats and work/live formats?
 QStringList DocumentSyncManager::supportedRemoteTypes() const
 {
-    return QStringList(mSynchronizerFactory->supportedRemoteType());
+    return {mSynchronizerFactory->supportedRemoteType()};
 }
 
 bool DocumentSyncManager::hasSynchronizerForLocal(const QString& workDocumentType) const

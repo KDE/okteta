@@ -40,7 +40,7 @@ ScriptFileParser::~ScriptFileParser() = default;
 
 QStringList ScriptFileParser::parseStructureNames() const
 {
-    return QStringList() << mPluginName;
+    return {mPluginName};
 }
 
 QVector<TopLevelDataInformation*> ScriptFileParser::parseStructures() const
@@ -82,7 +82,7 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
     QFile scriptFile(mAbsolutePath);
     if (!scriptFile.open(QIODevice::ReadOnly)) {
         logger->error() << "Could not open file " << mAbsolutePath;
-        return QScriptValue();
+        return {};
     }
 
     QTextStream stream(&scriptFile);
@@ -103,13 +103,13 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
             logger->error() << "Line number: " << engine->uncaughtExceptionLineNumber();
             logger->error() << "Backtrace: " << engine->uncaughtExceptionBacktrace();
         }
-        return QScriptValue();
+        return {};
     }
     QScriptValue obj = engine->globalObject();
     QScriptValue initMethod = obj.property(QStringLiteral("init"));
     if (!initMethod.isFunction()) {
         logger->error() << "Script has no 'init' function! Cannot evaluate script!";
-        return QScriptValue();
+        return {};
     }
 
     QScriptValue thisObj = engine->newObject();
@@ -117,7 +117,7 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
     QScriptValue result = initMethod.call(thisObj, args);
     if (result.isError()) {
         logger->error() << "Exception occurred while calling init():" << result.toString();
-        return QScriptValue();
+        return {};
     }
     return result;
 }

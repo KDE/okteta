@@ -37,7 +37,7 @@ QScriptValue UIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine
 {
     Q_UNUSED(engine);
     Q_UNUSED(handlerInfo);
-    return QScriptValue(value);
+    return {value};
 }
 
 template <>
@@ -46,7 +46,7 @@ QScriptValue UIntDataInformationMethods<quint64>::asScriptValue(quint64 value, Q
 {
     Q_UNUSED(engine);
     Q_UNUSED(handlerInfo);
-    return QScriptValue(QString::number(value, 10));
+    return {QString::number(value, 10)};
 }
 
 template <typename T>
@@ -80,10 +80,10 @@ inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidge
     const UIntSpinBox* spin = qobject_cast<const UIntSpinBox*> (w);
     Q_CHECK_PTR(spin);
     if (spin) {
-        return QVariant(spin->value());
+        return {spin->value()};
     }
     qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast widget";
-    return QVariant();
+    return {};
 }
 
 template <typename T>

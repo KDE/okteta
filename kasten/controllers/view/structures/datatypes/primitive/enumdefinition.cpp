@@ -109,7 +109,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         break;
     default:
         logger.warn() << type << "is an invalid type for an enumeration, no values were parsed";
-        return QPair<AllPrimitiveTypes, QString>();
+        return {};
     }
 
     AllPrimitiveTypes intValue;
@@ -126,7 +126,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
                 " any smaller integer exactly, skipping it.\n"
                 "Write the value as a string so it can be converted"
                 "to an integer exactly.";
-            return QPair<AllPrimitiveTypes, QString>();
+            return {};
         }
     } else {
         const QString valueString = value.toString();
@@ -145,7 +145,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
                 QStringLiteral("Could not convert '%1' to an enum constant, name was: %2");
             QString errMessage = QString(msgTemplate).arg(valueString, name);
             logger.warn() << errMessage;
-            return QPair<AllPrimitiveTypes, QString>();
+            return {};
         }
     }
     quint64 asUnsigned = intValue.value<quint64>();
@@ -155,7 +155,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         errMessage = errMessage.arg(name, QString::number(asUnsigned),
                                     PrimitiveType::standardTypeName(type), QString::number(maxValue));
         logger.warn() << errMessage;
-        return QPair<AllPrimitiveTypes, QString>();
+        return {};
     }
     qint64 asSigned = intValue.value<qint64>();
     if (minValue != 0 && asSigned < minValue) {
@@ -164,8 +164,8 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         errMessage = errMessage.arg(name, QString::number(asSigned),
                                     PrimitiveType::standardTypeName(type), QString::number(minValue));
         logger.warn() << errMessage;
-        return QPair<AllPrimitiveTypes, QString>();
+        return {};
     }
-    return QPair<AllPrimitiveTypes, QString>(intValue, name);
+    return {intValue, name};
 
 }

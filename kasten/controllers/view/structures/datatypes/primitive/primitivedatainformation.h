@@ -123,13 +123,13 @@ inline PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInf
 inline QString PrimitiveDataInformation::basePrefix(int base)
 {
     switch (base) {
-    case 10: return QString();
+    case 10: return {};
     case 2: return QStringLiteral("0b");
     case 8: return QStringLiteral("0o");
     case 16: return QStringLiteral("0x");
     default:
         Q_ASSERT_X(false, "PrimitiveDataInformation::basePrefix()", "Invalid argument!");
-        return QString();
+        return {};
     }
 }
 

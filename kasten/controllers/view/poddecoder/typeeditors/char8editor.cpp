@@ -88,7 +88,7 @@ void Char8Editor::setData(Char8 data)
 Char8 Char8Editor::data() const
 {
     const QString t = text();
-    return Char8(t.isEmpty() ? QChar(0) : t[0]);
+    return {t.isEmpty() ? QChar(0) : t[0]};
 }
 
 #include "char8editor.moc"

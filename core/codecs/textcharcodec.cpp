@@ -244,7 +244,7 @@ Character TextCharCodec::decode(Byte byte) const
         mDecoder->toUnicode(reinterpret_cast<const char*>(&byte), 1);
     const QChar qchar = string.at(0);
     const bool isDecoded = (qchar != replacementChar);
-    return Character(qchar, !isDecoded);
+    return {qchar, !isDecoded};
 }
 
 const QString& TextCharCodec::name() const

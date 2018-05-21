@@ -65,7 +65,7 @@ Character JISX0201CharCodec::decode(Byte byte) const
             ? ushort(0xFF61 - 161 + byte) :
         /* else */ ushort(0);
 
-    return Character(QChar(unicode), unicode == 0);
+    return {QChar(unicode), (unicode == 0)};
 }
 
 bool JISX0201CharCodec::canEncode(const QChar& _char) const

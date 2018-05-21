@@ -68,7 +68,7 @@ inline QScriptValue BoolDataInformationMethods<T>::asScriptValue(T value, QScrip
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
-    return QScriptValue(value != 0);
+    return {(value != 0)};
 }
 
 template <typename T>

@@ -787,7 +787,7 @@ void AbstractByteArrayViewPrivate::setSelection(const AddressRange& _selection)
 QByteArray AbstractByteArrayViewPrivate::selectedData() const
 {
     if (!mTableRanges->hasSelection()) {
-        return QByteArray();
+        return {};
     }
 
     const AddressRange selection = mTableRanges->selection();

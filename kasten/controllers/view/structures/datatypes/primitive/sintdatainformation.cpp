@@ -66,7 +66,7 @@ QScriptValue SIntDataInformationMethods<T>::asScriptValue(T value, QScriptEngine
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
-    return QScriptValue(value);
+    return {value};
 }
 
 template <>
@@ -75,7 +75,7 @@ QScriptValue SIntDataInformationMethods<qint64>::asScriptValue(qint64 value, QSc
 {
     Q_UNUSED(engine);
     Q_UNUSED(handler);
-    return QScriptValue(QString::number(value, 10));
+    return {QString::number(value, 10)};
 }
 
 template <typename T>
@@ -96,7 +96,7 @@ inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidge
     }
 
     qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast widget";
-    return QVariant();
+    return {};
 }
 
 template <typename T>
