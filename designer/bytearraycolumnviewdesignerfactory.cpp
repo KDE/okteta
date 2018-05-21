@@ -42,7 +42,7 @@ QWidget* ByteArrayColumnViewDesignerFactory::createWidget(QWidget* parent)
 
 QString ByteArrayColumnViewDesignerFactory::group() const
 {
-    return QStringLiteral("Okteta (KDE)");
+    return QStringLiteral("Okteta");
 }
 
 QIcon ByteArrayColumnViewDesignerFactory::icon() const
