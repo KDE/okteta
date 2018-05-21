@@ -51,13 +51,13 @@ CloseController::CloseController(AbstractDocumentStrategy* documentStrategy,
 
     if (supportMultiple) {
         mCloseAllAction = actionCollection->addAction(QStringLiteral("file_close_all"),
-                                                      this, SLOT(closeAll()));
+                                                      this, &CloseController::closeAll);
         mCloseAllAction->setText(i18nc("@title:menu", "Close All"));
         mCloseAllAction->setIcon(documentCloseIcon);
         mCloseAllAction->setEnabled(false);
 
         mCloseAllOtherAction = actionCollection->addAction(QStringLiteral("file_close_all_other"),
-                                                           this, SLOT(closeAllOther()));
+                                                           this, &CloseController::closeAllOther);
         mCloseAllOtherAction->setText(i18nc("@title:menu", "Close All Other"));
         mCloseAllOtherAction->setIcon(documentCloseIcon);
         mCloseAllOtherAction->setEnabled(false);

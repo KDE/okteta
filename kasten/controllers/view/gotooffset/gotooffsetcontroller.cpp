@@ -43,7 +43,7 @@ GotoOffsetController::GotoOffsetController(If::ToolInlineViewable* toolInlineVie
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mGotoOffsetAction = actionCollection->addAction(QStringLiteral("goto_offset"),
-                                                    this, SLOT(gotoOffset()));
+                                                    this, &GotoOffsetController::gotoOffset);
     mGotoOffsetAction->setText(i18nc("@action:inmenu", "&Go to Offset..."));
     mGotoOffsetAction->setIcon(QIcon::fromTheme(QStringLiteral("go-jump")));
     actionCollection->setDefaultShortcut(mGotoOffsetAction, Qt::CTRL + Qt::Key_G);

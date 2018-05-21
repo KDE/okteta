@@ -54,7 +54,8 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    KActionMenu* newMenuAction = actionCollection->add<KActionMenu>(QStringLiteral("file_new"), this, SLOT(onNewActionTriggered()));
+    KActionMenu* newMenuAction = actionCollection->add<KActionMenu>(QStringLiteral("file_new"),
+                                                                    this, &CreatorController::onNewActionTriggered);
     newMenuAction->setText(i18nc("@title:menu create new byte arrays from different sources", "New"));
     newMenuAction->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
     newMenuAction->setStickyMenu(false);

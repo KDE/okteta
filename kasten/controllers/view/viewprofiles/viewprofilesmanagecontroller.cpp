@@ -44,7 +44,7 @@ ViewProfilesManageController::ViewProfilesManageController(KXMLGUIClient* guiCli
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     mManageAction = actionCollection->addAction(QStringLiteral("settings_viewprofiles_manage"),
-                                                this, SLOT(manageProfiles()));
+                                                this, &ViewProfilesManageController::manageProfiles);
     mManageAction->setText(i18nc("@action:inmenu",
                                  "Manage View Profiles..."));
 }

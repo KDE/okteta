@@ -47,7 +47,7 @@ SynchronizeController::SynchronizeController(DocumentSyncManager* syncManager, K
     mSaveAction = KStandardAction::save(this, &SynchronizeController::save, actionCollection);
 
     mReloadAction = actionCollection->addAction(QStringLiteral("file_reload"),
-                                                this, SLOT(reload()));
+                                                this, &SynchronizeController::reload);
     mReloadAction->setText(i18nc("@title:menu", "Reloa&d"));
     mReloadAction->setIcon(QIcon::fromTheme(QStringLiteral("view-refresh")));
     actionCollection->setDefaultShortcuts(mReloadAction, KStandardShortcut::reload());

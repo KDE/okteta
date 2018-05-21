@@ -85,12 +85,12 @@ ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
 
     // bytes per line
     mSetBytesPerLineAction = actionCollection->addAction(QStringLiteral("view_bytesperline"),
-                                                         this, SLOT(setBytesPerLine()));
+                                                         this, &ViewConfigController::setBytesPerLine);
     mSetBytesPerLineAction->setText(i18nc("@action:inmenu", "Set Bytes per Line..."));
 
     // byte groups size
     mSetBytesPerGroupAction = actionCollection->addAction(QStringLiteral("view_bytespergroup"),
-                                                          this, SLOT(setBytesPerGroup()));
+                                                          this, &ViewConfigController::setBytesPerGroup);
     mSetBytesPerGroupAction->setText(i18nc("@action:inmenu", "Set Bytes per Group..."));
 
     // resize style
