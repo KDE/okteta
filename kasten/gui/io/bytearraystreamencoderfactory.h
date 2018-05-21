@@ -34,7 +34,7 @@ class AbstractModelStreamEncoder;
 class OKTETAKASTENGUI_EXPORT ByteArrayStreamEncoderFactory
 {
 private:
-    ByteArrayStreamEncoderFactory();
+    ByteArrayStreamEncoderFactory() = delete;
 
 public:
     static QList<AbstractModelStreamEncoder*> createStreamEncoders();

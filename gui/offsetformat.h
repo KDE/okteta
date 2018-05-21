@@ -47,8 +47,8 @@ public:
     static const int MaxFormatWidth = 10;
 
 private:
-    OffsetFormat();
-    ~OffsetFormat();
+    OffsetFormat() = delete;
+    ~OffsetFormat() = delete;
 
 public:
     /** */
