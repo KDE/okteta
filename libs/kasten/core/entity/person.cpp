@@ -66,22 +66,15 @@ Person::Person()
     : d(new Private(QString(), QIcon()))
 {
 }
-Person::Person(const Person& other)
-    : d(other.d)
-{
-}
+Person::Person(const Person& other) = default;
 
 Person::~Person() = default;
+
+Person& Person::operator=(const Person& other) = default;
 
 bool Person::operator==(const Person& other) const
 {
     return (name() == other.name()) && !name().isEmpty();
-}
-
-Person& Person::operator=(const Person& other)
-{
-    d = other.d;
-    return *this;
 }
 
 QString Person::name()   const { return d->name(); }

@@ -197,14 +197,11 @@ inline Coord Coord::fromIndex(Address index, LinePositionSize lineWidth)
     return Coord(pos, line);
 }
 
-inline Coord::Coord(const Coord& other)
-    : mPos(other.mPos)
-    , mLine(other.mLine)
-{}
+inline Coord::Coord(const Coord& other) = default;
 
 inline Coord::~Coord() = default;
 
-inline Coord& Coord::operator=(const Coord& other) { mPos = other.mPos; mLine = other.mLine; return *this; }
+inline Coord& Coord::operator=(const Coord& other) = default;
 
 inline bool Coord::operator==(const Coord& other) const { return mPos == other.mPos && mLine == other.mLine; }
 inline bool Coord::operator!=(const Coord& other) const { return !(*this == other); }

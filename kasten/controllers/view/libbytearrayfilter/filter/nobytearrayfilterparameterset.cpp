@@ -22,8 +22,7 @@
 
 #include "nobytearrayfilterparameterset.h"
 
-NoByteArrayFilterParameterSet::NoByteArrayFilterParameterSet()
-{}
+NoByteArrayFilterParameterSet::NoByteArrayFilterParameterSet() = default;
 
 NoByteArrayFilterParameterSet::~NoByteArrayFilterParameterSet() = default;
 

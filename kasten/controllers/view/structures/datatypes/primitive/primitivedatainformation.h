@@ -81,7 +81,7 @@ public:
     /** takes ownership of @p valueType */
     PrimitiveDataInformationWrapper(const QString& name, PrimitiveDataInformation* valueType,
                                     DataInformation* parent = nullptr);
-    ~PrimitiveDataInformationWrapper() override {}
+    ~PrimitiveDataInformationWrapper() override = default;
 
     // delegate all these to the underlying object:
 
@@ -118,10 +118,7 @@ inline PrimitiveDataInformation::PrimitiveDataInformation(const QString& name,
 {
 }
 
-inline PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d)
-    : DataInformation(d)
-{
-}
+inline PrimitiveDataInformation::PrimitiveDataInformation(const PrimitiveDataInformation& d) = default;
 
 inline QString PrimitiveDataInformation::basePrefix(int base)
 {

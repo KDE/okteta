@@ -54,8 +54,7 @@ protected:
 //      mTime;
 };
 
-inline ByteArrayChange::ByteArrayChange()
-{}
+inline ByteArrayChange::ByteArrayChange() = default;
 
 inline ByteArrayChange::ByteArrayChange(const ArrayChangeMetrics& metrics, const QByteArray& data)
     : mMetrics(metrics)

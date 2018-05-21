@@ -32,7 +32,7 @@ public:
     BoolBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
         : AbstractBitfieldDataInformation(name, width, parent)
     {}
-    ~BoolBitfieldDataInformation() override {}
+    ~BoolBitfieldDataInformation() override = default;
 
     QScriptValue valueAsQScriptValue() const override;
     QWidget* createEditWidget(QWidget* parent) const override;

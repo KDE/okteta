@@ -48,10 +48,7 @@ struct OsdParserInfo : public ParserInfo
         : ParserInfo(name, logger, parent, engine)
         , enums(enums)
     {}
-    inline OsdParserInfo(const OsdParserInfo& i)
-        : ParserInfo(i)
-        , enums(i.enums)
-    {}
+    inline OsdParserInfo(const OsdParserInfo& i) = default;
     inline ~OsdParserInfo() = default;
     QVector<EnumDefinition::Ptr> enums;
 };

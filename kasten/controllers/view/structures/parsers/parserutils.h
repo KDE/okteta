@@ -55,12 +55,7 @@ struct ParserInfo
     {
         Q_CHECK_PTR(logger);
     }
-    inline ParserInfo(const ParserInfo& i)
-        : name(i.name)
-        , logger(i.logger)
-        , parent(i.parent)
-        , engine(i.engine)
-    {}
+    inline ParserInfo(const ParserInfo& i) = default;
     inline ~ParserInfo() = default;
 
     QString name;

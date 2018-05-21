@@ -32,7 +32,7 @@ public:
     SignedBitfieldDataInformation(const QString& name, BitCount32 width, DataInformation* parent = nullptr)
         : AbstractBitfieldDataInformation(name, width, parent)
     {}
-    ~SignedBitfieldDataInformation() override {}
+    ~SignedBitfieldDataInformation() override = default;
     AllPrimitiveTypes fromVariant(const QVariant& variant, bool* ok) const override;
 
     QScriptValue valueAsQScriptValue() const override;

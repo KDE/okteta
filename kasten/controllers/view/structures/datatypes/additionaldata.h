@@ -55,9 +55,7 @@ Q_DECLARE_METATYPE(QScriptValue)
 
 inline AdditionalData::AdditionalData() = default;
 
-inline AdditionalData::AdditionalData(const AdditionalData& data)
-    : mData(data.mData)
-{}
+inline AdditionalData::AdditionalData(const AdditionalData& data) = default;
 
 inline AdditionalData::~AdditionalData() = default;
 

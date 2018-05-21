@@ -31,7 +31,7 @@ namespace Kasten {
 class BorderColumnTextRenderer : public AbstractColumnTextRenderer
 {
 public:
-    ~BorderColumnTextRenderer() override {}
+    ~BorderColumnTextRenderer() override = default;
 
 public: // AbstractColumnTextRenderer API
     void renderFirstLine(QTextStream* stream, int lineIndex) const override;

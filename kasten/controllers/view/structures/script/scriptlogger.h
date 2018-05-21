@@ -64,12 +64,7 @@ public:
             , origin(o)
             , time(QTime::currentTime())
         {}
-        inline Data(const Data& d)
-            : level(d.level)
-            , message(d.message)
-            , origin(d.origin)
-            , time(d.time)
-        {}
+        inline Data(const Data& d) = default;
         inline ~Data() = default;
         ScriptLogger::LogLevel level;
         QString message;

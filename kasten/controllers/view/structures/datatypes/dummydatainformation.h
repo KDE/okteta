@@ -33,7 +33,7 @@ class DummyDataInformation : public DataInformation
 
 public:
     explicit DummyDataInformation(DataInformationBase* parent, const QString& name = QString());
-    ~DummyDataInformation() override {}
+    ~DummyDataInformation() override = default;
     QScriptValue toScriptValue(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) override;
 
     qint64 readData(Okteta::AbstractByteArrayModel* input, Okteta::Address address,
@@ -73,13 +73,13 @@ private:
 class DataInformationWithDummyChildren : public DataInformation
 {
 protected:
-    DataInformationWithDummyChildren(const DataInformationWithDummyChildren& d) : DataInformation(d) {}
+    DataInformationWithDummyChildren(const DataInformationWithDummyChildren& d) = default;
 
 public:
     explicit DataInformationWithDummyChildren(const QString& name, DataInformationBase* parent = nullptr)
         : DataInformation(name, parent)
     {}
-    ~DataInformationWithDummyChildren() override {}
+    ~DataInformationWithDummyChildren() override = default;
 
     /** the data of child at index @p row. Useful for arrays, or DataInformations with fake children*/
     virtual QVariant childData(int row, int column, int role) const = 0;

@@ -88,19 +88,11 @@ ByteArrayViewProfile::ByteArrayViewProfile()
     : d(new ByteArrayViewProfilePrivate)
 {
 }
-ByteArrayViewProfile::ByteArrayViewProfile(const ByteArrayViewProfile& other)
-    : d(other.d)
-{
-}
+ByteArrayViewProfile::ByteArrayViewProfile(const ByteArrayViewProfile& other) = default;
 
 ByteArrayViewProfile::~ByteArrayViewProfile() = default;
 
-ByteArrayViewProfile& ByteArrayViewProfile::operator=(const ByteArrayViewProfile& other)
-{
-    d = other.d;
-
-    return *this;
-}
+ByteArrayViewProfile& ByteArrayViewProfile::operator=(const ByteArrayViewProfile& other) = default;
 
 ByteArrayViewProfile::Id ByteArrayViewProfile::id() const { return d->mId; }
 QString ByteArrayViewProfile::viewProfileTitle()    const { return d->mViewProfileTitle; }

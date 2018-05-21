@@ -125,12 +125,7 @@ inline Selection::Selection(const Selection& other) = default;
 inline Selection::Selection(Address index) : mAnchor(index)  {}
 inline Selection::~Selection() = default;
 
-inline Selection& Selection::operator=(const Selection& other)
-{
-    mRange = other.mRange;
-    mAnchor = other.mAnchor;
-    return *this;
-}
+inline Selection& Selection::operator=(const Selection& other) = default;
 
 inline Selection& Selection::operator=(const AddressRange& range)
 {

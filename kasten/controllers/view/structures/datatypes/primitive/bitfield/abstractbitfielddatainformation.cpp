@@ -37,12 +37,7 @@ AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& 
     Q_ASSERT(width <= 64);
 }
 
-AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d)
-    : PrimitiveDataInformation(d)
-    , mValue(d.mValue)
-    , mWidth(d.mWidth)
-{
-}
+AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d) = default;
 
 AbstractBitfieldDataInformation::~AbstractBitfieldDataInformation() = default;
 

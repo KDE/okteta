@@ -32,7 +32,7 @@
 
 namespace KPieceTable {
 
-RevertablePieceTable::RevertablePieceTable() {}
+RevertablePieceTable::RevertablePieceTable() = default;
 
 void RevertablePieceTable::init(Size size)
 {
