@@ -358,6 +358,7 @@
       <li xml:lang="hu">Több fájl megnyitása egyszerre</li>
       <li xml:lang="it">Più file aperti</li>
       <li xml:lang="nl">Meerdere geopende bestanden</li>
+      <li xml:lang="nn">Fleire opne filer samtidig</li>
       <li xml:lang="pl">Otwieranie wielu plików</li>
       <li xml:lang="pt">Diversos ficheiros abertos</li>
       <li xml:lang="pt-BR">Diversos arquivos abertos</li>
@@ -390,6 +391,7 @@
       <li xml:lang="hu">Visszavonás/újra műveletek támogatása</li>
       <li xml:lang="it">Supporto per annulla/rifai</li>
       <li xml:lang="nl">Ondersteuning ongedaan maken/opnieuw</li>
+      <li xml:lang="nn">Støtte for angring/omgjering</li>
       <li xml:lang="pl">Obsługa cofnij/ponów</li>
       <li xml:lang="pt">Suporte para desfazer/refazer</li>
       <li xml:lang="pt-BR">Suporte para desfazer/refazer</li>
