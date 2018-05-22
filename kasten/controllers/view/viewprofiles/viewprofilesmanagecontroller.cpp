@@ -41,7 +41,8 @@ ViewProfilesManageController::ViewProfilesManageController(KXMLGUIClient* guiCli
     : mParentWidget(parentWidget)
     , mViewProfileManager(viewProfileManager)
 {
-    mManageAction = new QAction(i18nc("@action:inmenu", "Manage View Profiles..."), this);
+    mManageAction = new QAction(QIcon::fromTheme(QStringLiteral("configure")),
+                                i18nc("@action:inmenu", "Manage View Profiles..."), this);
     connect(mManageAction, &QAction::triggered,
             this, &ViewProfilesManageController::manageProfiles);
 

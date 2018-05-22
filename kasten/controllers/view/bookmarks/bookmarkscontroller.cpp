@@ -68,7 +68,8 @@ BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
     connect(mDeleteAction, &QAction::triggered, this, &BookmarksController::deleteBookmark);
     actionCollection->setDefaultShortcut(mDeleteAction, Qt::CTRL + Qt::SHIFT + Qt::Key_B);
 
-    mDeleteAllAction = new QAction(i18nc("@action:inmenu", "Remove All Bookmarks"), this);
+    mDeleteAllAction = new QAction(QIcon::fromTheme(QStringLiteral("bookmark-remove")),
+                                   i18nc("@action:inmenu", "Remove All Bookmarks"), this);
     mDeleteAllAction->setObjectName(QStringLiteral("bookmark_remove_all"));
     connect(mDeleteAllAction, &QAction::triggered, this, &BookmarksController::deleteAllBookmarks);
 //     actionCollection->setDefaultShortcut( mDeleteAllAction, Qt::CTRL + Qt::Key_G );
