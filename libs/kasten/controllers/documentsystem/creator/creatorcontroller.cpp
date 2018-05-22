@@ -66,7 +66,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
             this, &CreatorController::onNewActionTriggered);
 
     QAction* newEmptyDocumentAction =
-        new QAction(QIcon::fromTheme(QStringLiteral("document-new")), i18nc("@title:menu create a new empty document", "Empty"), this);
+        new QAction(QIcon::fromTheme(QStringLiteral("document-new")), i18nc("@item:inmenu create a new empty document", "Empty"), this);
 //     newEmptyDocumentAction->setToolTip( factory-toolTip() );
 //         i18nc( "@info:tooltip", "Create an empty document" ) );
 //     newEmptyDocumentAction->setHelpText( factory->helpText() );
@@ -77,7 +77,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
             this, &CreatorController::onNewActionTriggered);
 
     QAction* newFromClipboardDocumentAction =
-        new QAction(QIcon::fromTheme(QStringLiteral("edit-paste")), i18nc("@title:menu create a new document from data in the clipboard", "From Clipboard"), this);
+        new QAction(QIcon::fromTheme(QStringLiteral("edit-paste")), i18nc("@item:inmenu create a new document from data in the clipboard", "From Clipboard"), this);
     connect(newFromClipboardDocumentAction, &QAction::triggered,
             this, &CreatorController::onNewFromClipboardActionTriggered);
 
