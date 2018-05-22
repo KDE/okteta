@@ -57,14 +57,14 @@ CopyAsController::CopyAsController(ModelCodecViewManager* modelCodecViewManager,
     , mModelCodecManager(modelCodecManager)
     , mModel(nullptr)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
-
-    mCopyAsSelectAction = actionCollection->add<KSelectAction>(QStringLiteral("copy_as"));
-    mCopyAsSelectAction->setText(i18nc("@title:menu", "Copy As"));
-    mCopyAsSelectAction->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
+    mCopyAsSelectAction = new KSelectAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                            i18nc("@title:menu", "Copy As"),
+                                            this);
     mCopyAsSelectAction->setToolBarMode(KSelectAction::MenuMode);
     connect(mCopyAsSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
             this, &CopyAsController::onActionTriggered);
+
+    guiClient->actionCollection()->addAction(QStringLiteral("copy_as"), mCopyAsSelectAction);
 
     setTargetModel(nullptr);
 }

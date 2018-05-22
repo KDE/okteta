@@ -36,13 +36,13 @@ namespace Kasten {
 SwitchViewController::SwitchViewController(AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient)
     : mGroupedViews(groupedViews)
 {
+    mForwardAction = KStandardAction::forward(this, &SwitchViewController::forward, this);
+
+    mBackwardAction = KStandardAction::back(this, &SwitchViewController::backward, this);
+
     KActionCollection* actionCollection = guiClient->actionCollection();
-
-    mForwardAction = actionCollection->addAction(KStandardAction::Forward, QStringLiteral("window_next"));
-    connect(mForwardAction, &QAction::triggered, this, &SwitchViewController::forward);
-
-    mBackwardAction = actionCollection->addAction(KStandardAction::Back, QStringLiteral("window_previous"));
-    connect(mBackwardAction, &QAction::triggered, this, &SwitchViewController::backward);
+    actionCollection->addAction(QStringLiteral("window_next"), mForwardAction);
+    actionCollection->addAction(QStringLiteral("window_previous"), mBackwardAction);
 
     connect(groupedViews, &AbstractGroupedViews::added,
             this, &SwitchViewController::updateActions);

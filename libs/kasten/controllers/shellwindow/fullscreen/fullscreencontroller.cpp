@@ -33,10 +33,10 @@ namespace Kasten {
 FullScreenController::FullScreenController(KXmlGuiWindow* window)
     : mMainWindow(window)
 {
-    KActionCollection* actionCollection = mMainWindow->actionCollection();
+    auto* fullScreenAction = KStandardAction::fullScreen(this, &FullScreenController::switchFullScreen,
+                                                         window, this);
 
-    KStandardAction::fullScreen(this, &FullScreenController::switchFullScreen,
-                                window, actionCollection);
+    mMainWindow->actionCollection()->addAction(fullScreenAction->objectName(), fullScreenAction);
 }
 
 void FullScreenController::setTargetModel(AbstractModel* model)

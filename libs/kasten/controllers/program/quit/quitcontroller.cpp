@@ -34,8 +34,9 @@ QuitController::QuitController(KProgram* program, KXmlGuiWindow* window)
 {
     Q_UNUSED(program)
 
-    KActionCollection * actionCollection = mMainWindow->actionCollection();
-    KStandardAction::quit(this, &QuitController::quit, actionCollection);
+    auto* quitAction = KStandardAction::quit(this, &QuitController::quit, this);
+
+    mMainWindow->actionCollection()->addAction(quitAction->objectName(), quitAction);
 }
 
 void QuitController::setTargetModel(AbstractModel* model)

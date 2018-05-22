@@ -49,12 +49,11 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
     , mByteArrayView(nullptr)
     , mByteArrayViewProfileSynchronizer(nullptr)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
-
-    mViewProfileActionMenu = actionCollection->add<KActionMenu>(QStringLiteral("view_profile"));
+    mViewProfileActionMenu =
+        new KActionMenu(i18nc("@title:menu submenu to select the view profile or change it",
+                              "View Profile"),
+                        this);
     mViewProfileActionMenu->setDelayed(false);
-    mViewProfileActionMenu->setText(i18nc("@title:menu submenu to select the view profile or change it",
-                                          "View Profile"));
 
     mCreateNewAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-new")),
@@ -86,6 +85,8 @@ ViewProfileController::ViewProfileController(ByteArrayViewProfileManager* viewPr
     mViewProfilesActionGroup->setExclusive(true);
     connect(mViewProfilesActionGroup, &QActionGroup::triggered,
             this, &ViewProfileController::onViewProfileTriggered);
+
+    guiClient->actionCollection()->addAction(QStringLiteral("view_profile"), mViewProfileActionMenu);
 
     connect(mViewProfileManager, &ByteArrayViewProfileManager::viewProfilesChanged,
             this, &ViewProfileController::onViewProfilesChanged);

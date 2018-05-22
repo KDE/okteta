@@ -45,11 +45,12 @@ LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
     : AbstractXmlGuiController()
     , mDocumentStrategy(documentStrategy)
 {
-    KActionCollection* const actionCollection = guiClient->actionCollection();
+    auto* openAction = KStandardAction::open(this, &LoaderController::load, this);
+    mOpenRecentAction = KStandardAction::openRecent(this, &LoaderController::loadRecent, this);
 
-    KStandardAction::open(this, &LoaderController::load, actionCollection);
-    mOpenRecentAction =
-        KStandardAction::openRecent(this, &LoaderController::loadRecent, actionCollection);
+    KActionCollection* const actionCollection = guiClient->actionCollection();
+    actionCollection->addAction(openAction->objectName(), openAction);
+    actionCollection->addAction(mOpenRecentAction->objectName(), mOpenRecentAction);
 
     KConfigGroup configGroup(KSharedConfig::openConfig(), CreatorConfigGroupId);
     mOpenRecentAction->loadEntries(configGroup);

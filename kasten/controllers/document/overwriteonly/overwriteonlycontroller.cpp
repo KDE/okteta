@@ -35,11 +35,10 @@ namespace Kasten {
 OverwriteOnlyController::OverwriteOnlyController(KXMLGUIClient* guiClient)
     : mByteArrayModel(0)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
-
-    mSetOverwriteOnlyAction = actionCollection->add<KToggleAction>("isoverwriteonly");
-    mSetOverwriteOnlyAction->setText(i18nc("@option:check", "Overwrite only"));
+    mSetOverwriteOnlyAction = new KToggleAction(i18nc("@option:check", "Overwrite only"), this);
     connect(mSetOverwriteOnlyAction, &QAction::triggered, this, &OverwriteOnlyController::setOverwriteOnly);
+
+    guiClient->actionCollection()->addAction(QStringLiteral("isoverwriteonly"), mSetOverwriteOnlyAction);
 
     setTargetModel(0);
 }

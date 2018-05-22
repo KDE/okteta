@@ -44,13 +44,16 @@ SynchronizeController::SynchronizeController(DocumentSyncManager* syncManager, K
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSaveAction = KStandardAction::save(this, &SynchronizeController::save, actionCollection);
+    mSaveAction = KStandardAction::save(this, &SynchronizeController::save, this);
 
-    mReloadAction = actionCollection->addAction(QStringLiteral("file_reload"),
-                                                this, &SynchronizeController::reload);
-    mReloadAction->setText(i18nc("@title:menu", "Reloa&d"));
-    mReloadAction->setIcon(QIcon::fromTheme(QStringLiteral("view-refresh")));
+    mReloadAction = new QAction(QIcon::fromTheme(QStringLiteral("view-refresh")),
+                                i18nc("@action:inmenu", "Reloa&d"), this);
     actionCollection->setDefaultShortcuts(mReloadAction, KStandardShortcut::reload());
+    connect(mReloadAction, &QAction::triggered,
+            this, &SynchronizeController::reload);
+
+    actionCollection->addAction(mSaveAction->objectName(), mSaveAction);
+    actionCollection->addAction(QStringLiteral("file_reload"), mReloadAction);
 
     setTargetModel(nullptr);
 }

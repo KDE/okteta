@@ -46,21 +46,28 @@ CloseController::CloseController(AbstractDocumentStrategy* documentStrategy,
     KActionCollection* actionCollection = guiClient->actionCollection();
 
     const QIcon documentCloseIcon = QIcon::fromTheme(QStringLiteral("document-close"));
-    mCloseAction  = KStandardAction::close(this, &CloseController::close, actionCollection);
+    mCloseAction  = KStandardAction::close(this, &CloseController::close, this);
     mCloseAction->setEnabled(false);
 
+    actionCollection->addAction(mCloseAction->objectName(), mCloseAction);
+
     if (supportMultiple) {
-        mCloseAllAction = actionCollection->addAction(QStringLiteral("file_close_all"),
-                                                      this, &CloseController::closeAll);
-        mCloseAllAction->setText(i18nc("@title:menu", "Close All"));
-        mCloseAllAction->setIcon(documentCloseIcon);
+        mCloseAllAction = new QAction(documentCloseIcon,
+                                      i18nc("@action:inmenu", "Close All"), this);
+        mCloseAllAction->setObjectName(QStringLiteral("file_close_all"));
+        connect(mCloseAllAction, &QAction::triggered,
+                this, &CloseController::closeAll);
         mCloseAllAction->setEnabled(false);
 
-        mCloseAllOtherAction = actionCollection->addAction(QStringLiteral("file_close_all_other"),
-                                                           this, &CloseController::closeAllOther);
-        mCloseAllOtherAction->setText(i18nc("@title:menu", "Close All Other"));
-        mCloseAllOtherAction->setIcon(documentCloseIcon);
+        mCloseAllOtherAction = new QAction(documentCloseIcon,
+                                           i18nc("@action:inmenu", "Close All Other"), this);
+        mCloseAllOtherAction->setObjectName(QStringLiteral("file_close_all_other"));
+        connect(mCloseAllOtherAction, &QAction::triggered,
+                this, &CloseController::closeAllOther);
         mCloseAllOtherAction->setEnabled(false);
+
+        actionCollection->addAction(mCloseAllAction->objectName(), mCloseAllAction);
+        actionCollection->addAction(mCloseAllOtherAction->objectName(), mCloseAllOtherAction);
 
         connect(mDocumentStrategy, &Kasten::AbstractDocumentStrategy::added,
                 this, &CloseController::onDocumentsChanged);

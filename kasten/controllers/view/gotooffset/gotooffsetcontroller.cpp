@@ -42,11 +42,12 @@ GotoOffsetController::GotoOffsetController(If::ToolInlineViewable* toolInlineVie
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mGotoOffsetAction = actionCollection->addAction(QStringLiteral("goto_offset"),
-                                                    this, &GotoOffsetController::gotoOffset);
-    mGotoOffsetAction->setText(i18nc("@action:inmenu", "&Go to Offset..."));
-    mGotoOffsetAction->setIcon(QIcon::fromTheme(QStringLiteral("go-jump")));
+    mGotoOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
+                                    i18nc("@action:inmenu", "&Go to Offset..."), this);
+    connect(mGotoOffsetAction, &QAction::triggered,this, &GotoOffsetController::gotoOffset);
     actionCollection->setDefaultShortcut(mGotoOffsetAction, Qt::CTRL + Qt::Key_G);
+
+    actionCollection->addAction(QStringLiteral("goto_offset"), mGotoOffsetAction);
 
     mTool = new GotoOffsetTool();
     connect(mTool, &GotoOffsetTool::isUsableChanged,

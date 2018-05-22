@@ -36,9 +36,10 @@ namespace Kasten {
 CloseController::CloseController(ViewManager* viewManager, KXMLGUIClient* guiClient)
     : mViewManager(viewManager)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    mCloseAction = KStandardAction::close(this, &CloseController::close, this);
 
-    mCloseAction  = KStandardAction::close(this, &CloseController::close, actionCollection);
+    guiClient->actionCollection()->addAction(mCloseAction->objectName(), mCloseAction);
+
     setTargetModel(0);
 }
 

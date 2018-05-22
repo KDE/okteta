@@ -37,15 +37,16 @@ OverwriteModeController::OverwriteModeController(KXMLGUIClient* guiClient)
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    mSetOverWriteAction = actionCollection->add<KToggleAction>(QStringLiteral("set_overwrite"));
-    const QString text = i18nc("@option:check set the view into overwrite mode", "Overwr&ite Mode");
-    mSetOverWriteAction->setText(text);
+    mSetOverWriteAction = new KToggleAction(i18nc("@option:check set the view into overwrite mode",
+                                                  "Overwr&ite Mode"), this);
     mSetOverWriteAction->setWhatsThis(
         i18nc("@info:whatsthis",
               "Choose whether you want the input to be inserted or to overwrite existing data."));
     // TODO: or should we catch the signal from the view (needs to be added)
     actionCollection->setDefaultShortcut(mSetOverWriteAction, QKeySequence(Qt::Key_Insert));
     connect(mSetOverWriteAction, &KToggleAction::triggered, this, &OverwriteModeController::setOverWrite);
+
+    actionCollection->addAction(QStringLiteral("set_overwrite"), mSetOverWriteAction);
 
     setTargetModel(nullptr);
 }

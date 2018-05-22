@@ -37,9 +37,9 @@ namespace Kasten {
 SetRemoteController::SetRemoteController(DocumentSyncManager* syncManager, KXMLGUIClient* guiClient)
     : mSyncManager(syncManager)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    mSaveAsAction = KStandardAction::saveAs(this, &SetRemoteController::saveAs, this);
 
-    mSaveAsAction = KStandardAction::saveAs(this, &SetRemoteController::saveAs, actionCollection);
+    guiClient->actionCollection()->addAction(mSaveAsAction->objectName(), mSaveAsAction);
 
     setTargetModel(nullptr);
 }

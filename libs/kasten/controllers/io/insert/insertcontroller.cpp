@@ -58,14 +58,14 @@ InsertController::InsertController(ModelCodecViewManager* modelCodecViewManager,
     , mModelCodecManager(modelCodecManager)
     , mModel(nullptr)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
-
-    mInsertSelectAction = actionCollection->add<KSelectAction>(QStringLiteral("insert"));   // TODO: find better id
-    mInsertSelectAction->setText(i18nc("@title:menu", "Insert"));
+    mInsertSelectAction = new KSelectAction(i18nc("@title:menu", "Insert"), this);
 //     mInsertSelectAction->setIcon( QIcon::fromTheme( QStringLiteral("insert-text") ) );
     mInsertSelectAction->setToolBarMode(KSelectAction::MenuMode);
     connect(mInsertSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
             this, &InsertController::onActionTriggered);
+
+    // TODO: find better id
+    guiClient->actionCollection()->addAction(QStringLiteral("insert"), mInsertSelectAction);
 
     setTargetModel(nullptr);
 }

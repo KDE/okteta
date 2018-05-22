@@ -36,11 +36,12 @@ namespace Kasten {
 PrintController::PrintController(KXMLGUIClient* guiClient)
     : mPrintTool(new PrintTool())
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
-
-    mPrintAction = KStandardAction::print(mPrintTool, &PrintTool::print, actionCollection);
+    mPrintAction = KStandardAction::print(mPrintTool, &PrintTool::print, this);
     connect(mPrintTool, &PrintTool::viewChanged,
             mPrintAction, &QAction::setEnabled);
+
+    guiClient->actionCollection()->addAction(mPrintAction->objectName(), mPrintAction);
+
 
     setTargetModel(nullptr);
 }

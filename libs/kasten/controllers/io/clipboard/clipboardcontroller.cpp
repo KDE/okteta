@@ -45,11 +45,15 @@ ClipboardController::ClipboardController(KXMLGUIClient* guiClient)
     , mSelectionControl(nullptr)
     , mMimeDataControl(nullptr)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    mCutAction =   KStandardAction::cut(  this, &ClipboardController::cut,   this);
+    mCopyAction =  KStandardAction::copy( this, &ClipboardController::copy,  this);
+    mPasteAction = KStandardAction::paste(this, &ClipboardController::paste, this);
 
-    mCutAction =   KStandardAction::cut(  this, &ClipboardController::cut,   actionCollection);
-    mCopyAction =  KStandardAction::copy( this, &ClipboardController::copy,  actionCollection);
-    mPasteAction = KStandardAction::paste(this, &ClipboardController::paste, actionCollection);
+    guiClient->actionCollection()->addActions({
+        mCutAction,
+        mCopyAction,
+        mPasteAction,
+    });
 
     connect(QApplication::clipboard(), &QClipboard::dataChanged,
             this, &ClipboardController::onClipboardDataChanged);

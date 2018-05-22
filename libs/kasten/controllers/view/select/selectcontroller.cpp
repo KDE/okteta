@@ -39,10 +39,12 @@ SelectController::SelectController(KXMLGUIClient* guiClient)
     : mModel(nullptr)
     , mSelectControl(nullptr)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    mSelectAllAction = KStandardAction::selectAll(this, &SelectController::selectAll, this);
+    mDeselectAction =  KStandardAction::deselect( this, &SelectController::unselect,  this);
 
-    mSelectAllAction = KStandardAction::selectAll(this, &SelectController::selectAll, actionCollection);
-    mDeselectAction =  KStandardAction::deselect( this, &SelectController::unselect,  actionCollection);
+    KActionCollection* actionCollection = guiClient->actionCollection();
+    actionCollection->addAction(mSelectAllAction->objectName(), mSelectAllAction);
+    actionCollection->addAction(mDeselectAction->objectName(), mDeselectAction);
 
     setTargetModel(nullptr);
 }

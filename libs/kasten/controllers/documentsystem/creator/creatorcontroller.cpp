@@ -54,13 +54,16 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    KActionMenu* newMenuAction = actionCollection->add<KActionMenu>(QStringLiteral("file_new"),
-                                                                    this, &CreatorController::onNewActionTriggered);
-    newMenuAction->setText(i18nc("@title:menu create new byte arrays from different sources", "New"));
-    newMenuAction->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+    KActionMenu* newMenuAction =
+        new KActionMenu(QIcon::fromTheme(QStringLiteral("document-new")),
+                        i18nc("@title:menu create new byte arrays from different sources",
+                              "New"),
+                        this);
     newMenuAction->setStickyMenu(false);
     newMenuAction->setDelayed(false);
     actionCollection->setDefaultShortcuts(newMenuAction, KStandardShortcut::openNew());
+    connect(newMenuAction, &QAction::triggered,
+            this, &CreatorController::onNewActionTriggered);
 
     QAction* newEmptyDocumentAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-new")), i18nc("@title:menu create a new empty document", "Empty"), this);
@@ -105,6 +108,8 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
             newMenuAction->addAction(action);
         }
     }
+
+    actionCollection->addAction(QStringLiteral("file_new"), newMenuAction);
 }
 
 CreatorController::~CreatorController() = default;

@@ -41,12 +41,11 @@ ViewProfilesManageController::ViewProfilesManageController(KXMLGUIClient* guiCli
     : mParentWidget(parentWidget)
     , mViewProfileManager(viewProfileManager)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    mManageAction = new QAction(i18nc("@action:inmenu", "Manage View Profiles..."), this);
+    connect(mManageAction, &QAction::triggered,
+            this, &ViewProfilesManageController::manageProfiles);
 
-    mManageAction = actionCollection->addAction(QStringLiteral("settings_viewprofiles_manage"),
-                                                this, &ViewProfilesManageController::manageProfiles);
-    mManageAction->setText(i18nc("@action:inmenu",
-                                 "Manage View Profiles..."));
+    guiClient->actionCollection()->addAction(QStringLiteral("settings_viewprofiles_manage"), mManageAction);
 }
 
 void ViewProfilesManageController::setTargetModel(AbstractModel* model)

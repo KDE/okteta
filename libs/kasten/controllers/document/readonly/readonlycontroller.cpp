@@ -36,17 +36,16 @@ namespace Kasten {
 ReadOnlyController::ReadOnlyController(KXMLGUIClient* guiClient)
     : mDocument(nullptr)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
-
-    mSetReadOnlyAction = actionCollection->add<KToggleAction>(QStringLiteral("isreadonly"));
-    const QString text = i18nc("@option:check set the document to read-only", "Set Read-only");
-    mSetReadOnlyAction->setText(text);
-    mSetReadOnlyAction->setIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
+    mSetReadOnlyAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("object-unlocked")),
+                                           i18nc("@option:check set the document to read-only", "Set Read-only"),
+                                           this);
     const QString checkedText = i18nc("@option:check set the document to read-write", "Set Read-write");
     const KGuiItem checkedState(checkedText, QIcon::fromTheme(QStringLiteral("object-locked")));
     mSetReadOnlyAction->setCheckedState(checkedState);
     connect(mSetReadOnlyAction, &QAction::triggered,
             this, &ReadOnlyController::setReadOnly);
+
+    guiClient->actionCollection()->addAction(QStringLiteral("isreadonly"), mSetReadOnlyAction);
 
     setTargetModel(nullptr);
 }

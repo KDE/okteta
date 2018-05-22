@@ -51,14 +51,14 @@ ExportController::ExportController(ModelCodecViewManager* modelCodecViewManager,
     , mModelCodecManager(modelCodecManager)
     , mModel(nullptr)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
-
-    mExportSelectAction = actionCollection->add<KSelectAction>(QStringLiteral("export"));
-    mExportSelectAction->setText(i18nc("@title:menu", "Export"));
-    mExportSelectAction->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
+    mExportSelectAction = new KSelectAction(QIcon::fromTheme(QStringLiteral("document-export")),
+                                            i18nc("@title:menu", "Export"),
+                                            this);
     mExportSelectAction->setToolBarMode(KSelectAction::MenuMode);
     connect(mExportSelectAction, QOverload<QAction*>::of(&KSelectAction::triggered),
             this, &ExportController::onActionTriggered);
+
+    guiClient->actionCollection()->addAction(QStringLiteral("export"), mExportSelectAction);
 
     setTargetModel(nullptr);
 }

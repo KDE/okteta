@@ -35,18 +35,16 @@ namespace Kasten {
 ViewModeController::ViewModeController(KXMLGUIClient* guiClient)
     : mByteArrayView(nullptr)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
-
     // view style
-    mViewModeAction = actionCollection->add<KSelectAction>(QStringLiteral("viewmode"));
-    mViewModeAction->setText(i18nc("@title:menu", "&View Mode"));
-    const QStringList list {
+    mViewModeAction = new KSelectAction(i18nc("@title:menu", "&View Mode"), this);
+    mViewModeAction->setItems(QStringList {
         i18nc("@item:inmenu", "&Columns"),
         i18nc("@item:inmenu", "&Rows"),
-    };
-    mViewModeAction->setItems(list);
+    });
     connect(mViewModeAction, QOverload<int>::of(&KSelectAction::triggered),
             this, &ViewModeController::setViewMode);
+
+    guiClient->actionCollection()->addAction(QStringLiteral("viewmode"), mViewModeAction);
 
     setTargetModel(nullptr);
 }
